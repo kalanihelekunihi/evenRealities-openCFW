@@ -4,7 +4,9 @@
 #include <stdint.h>
 
 typedef void (*uart_timeout_dispatch)(uint32_t,void *,uint32_t,uint32_t);
-typedef void (*uart_user_listener)(uint16_t);
+/* Stock 0x44254e..0x44255a: r0=uxth(flags), r1=payload, r2=length kept
+ * from entry, then blx row+4 (Fix 55). */
+typedef void (*uart_user_listener)(uint16_t,const void *,uint32_t);
 extern void *codec_allocate(uint32_t); /* selected 0x474cd2 */
 extern void audio_file_heap_free(void *); /* selected 0x474d16 */
 extern void *audio_queue_copy_bytes(void *,const void *,uint32_t); /* selected 0x439be4 */
@@ -45,13 +47,12 @@ static void log1(uint8_t level,uint32_t line,uint32_t compact,
 /* Stock 0x442524 (find_ui_DataHandler_by_id) */
 void audio_uart_user_broadcast(uint32_t id,const void *payload,
                                 uint32_t length,uint32_t flags) {
-    (void)payload;(void)length;
     for(uint32_t i=0;i<audio_uart_user_registry_count;i++) {
         const uint8_t *row=audio_uart_user_registry_rows+i*16u;
         if(*(const uint32_t *)(const void *)row==id) {
             uint32_t callback_word=*(const uint32_t *)(const void *)(row+4u);
             if(callback_word!=0u) {
-                ((uart_user_listener)(uintptr_t)callback_word)((uint16_t)flags);
+                ((uart_user_listener)(uintptr_t)callback_word)((uint16_t)flags,payload,length);
                 return;
             }
         }

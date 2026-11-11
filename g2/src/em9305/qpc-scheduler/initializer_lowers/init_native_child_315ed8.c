@@ -1,40 +1,20 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_315ed8\n"
-".type opencfw_em9305_child_315ed8,@function\n"
-"opencfw_em9305_child_315ed8:\n"
-"L315ed8:\n"
-"push_s blink\n"
-"L315eda:\n"
-"mov_s r3,0x802810\n"
-"L315ee0:\n"
-"ld.as r2,[r0,159]\n"
-"L315ee4:\n"
-"ldb_s r1,[r3,0x8]\n"
-"L315ee6:\n"
-"st.as 0,[r0,160]\n"
-"L315eea:\n"
-"bclr_s r2,r2,0x11\n"
-"L315eec:\n"
-"breq.d.nt r1,0x7,L315f00\n"
-"L315ef0:\n"
-"st.as r2,[r0,159]\n"
-"L315ef4:\n"
-"breq.nt r1,0x11,L315efc\n"
-"L315ef8:\n"
-"brne.nt r1,0xd,L315f06\n"
-"L315efc:\n"
-"ldb_s r1,[r3,0xd]\n"
-"L315efe:\n"
-"b_s L315f02\n"
-"L315f00:\n"
-"mov_s r1,0x1a\n"
-"L315f02:\n"
-"bl opencfw_em9305_mode_event_322fdc\n"
-"L315f06:\n"
-"pop_s blink\n"
-"L315f08:\n"
-"j_s [blink]\n"
-".size opencfw_em9305_child_315ed8,.-opencfw_em9305_child_315ed8\n"
-);
+#include <stdint.h>
+
+/* Native 0x315ed8..0x315f0a: clear the record's pending word (+640) and bit
+ * 17 of its flag word (+636), then report the procedure end through
+ * 322fdc: reason 0x1a for opcode 7, the stored reason byte (0x80281d) for
+ * opcodes 0x11 and 0x0d, nothing for any other opcode (0x802818). */
+extern uint32_t opencfw_em9305_mode_event_322fdc(uintptr_t,uint32_t);
+
+void opencfw_em9305_child_315ed8(uintptr_t record)
+{
+    uint32_t flags=*(volatile uint32_t *)(record+636u);
+    uint32_t opcode=*(volatile uint8_t *)(uintptr_t)0x802818u;
+    *(volatile uint32_t *)(record+640u)=0u;
+    *(volatile uint32_t *)(record+636u)=flags&~(1u<<17);
+    if(opcode==7u)
+        (void)opencfw_em9305_mode_event_322fdc(record,0x1au);
+    else if(opcode==0x11u||opcode==0x0du)
+        (void)opencfw_em9305_mode_event_322fdc(record,
+            *(volatile uint8_t *)(uintptr_t)0x80281du);
+}

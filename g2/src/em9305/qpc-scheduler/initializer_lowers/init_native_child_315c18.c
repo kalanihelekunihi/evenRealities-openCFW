@@ -1,24 +1,17 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_315c18\n"
-".type opencfw_em9305_child_315c18,@function\n"
-"opencfw_em9305_child_315c18:\n"
-"L315c18:\n"
-"ld.as r1,[r0,159]\n"
-"L315c1c:\n"
-"btst_s r1,0x11\n"
-"L315c1e:\n"
-"jeq_s [blink]\n"
-"L315c20:\n"
-"bclr_s r1,r1,0x11\n"
-"L315c22:\n"
-"st.as r1,[r0,159]\n"
-"L315c26:\n"
-"mov_s r1,0\n"
-"L315c28:\n"
-"b.d opencfw_em9305_mode_event_322fdc\n"
-"L315c2c:\n"
-"st.as 0,[r0,160]\n"
-".size opencfw_em9305_child_315c18,.-opencfw_em9305_child_315c18\n"
-);
+/* Stock 0x315c18: w = word[a+636]; if bit 17 clear return a; clear it, word[a+640] = 0; return mode_event_322fdc(a, 0).
+ * Converted from the lowered ARC asm; compiled with the g2-em9305-1 profile (-Os) and the
+ * disassembly diffed against the stock lowering: identical, or differing only in delay-slot
+ * scheduling / a redundant zero-extension / absolute-address ld/st forms (reviewed by hand). */
+#include <stdint.h>
+#define B8(a)  (*(volatile uint8_t  *)(uintptr_t)(a))
+#define H16(a) (*(volatile uint16_t *)(uintptr_t)(a))
+#define W32(a) (*(volatile uint32_t *)(uintptr_t)(a))
+extern uint32_t opencfw_em9305_mode_event_322fdc(uint32_t,uint32_t);
+uint32_t opencfw_em9305_child_315c18(uint32_t a)
+{
+  uint32_t w = W32(a + 636u);
+  if((w & 0x20000u) == 0u) return a;
+  W32(a + 636u) = w & ~0x20000u;
+  W32(a + 640u) = 0u;
+  return opencfw_em9305_mode_event_322fdc(a, 0u);
+}

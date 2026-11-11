@@ -46,10 +46,14 @@ timestamp and flag intent, the one-plus-nine register layout, and null output.
 
 ## Safety and provider boundary
 
-No helper samples the ADC, operates the YHM2710 transport, reads time, writes
-`kv.bin`, signals a thread, formats text, registers an eAT command, or turns
-power off. In particular, `AT^PMIC_OFF` is represented only as an inert plan;
-there is no callable destructive route in the source-built firmware API.
+The plan helpers do not sample the ADC, operate the YHM2710 transport, read
+time, write `kv.bin`, signal a thread, format text, or turn power off. The
+later source-owned `AT^PMIC_OFF` callback in
+`r1/src/application/runtime/native_eat_pmic_off_command.c` now calls those
+real providers. Its provider order, two-word persistence record and worker
+flag matched 400 paired stock/C calls under
+`build/r1-eat-pmic-off-20261111/compare.py`; physical power-off behavior
+remains untested.
 
 ## Verification
 

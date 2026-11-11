@@ -1,118 +1,63 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_3230e0\n"
-".type opencfw_em9305_child_3230e0,@function\n"
-"opencfw_em9305_child_3230e0:\n"
-"L3230e0:\n"
-"enter_s [r13-r15,fp,blink]\n"
-"L3230e2:\n"
-"sub_s sp,sp,0x24\n"
-"L3230e4:\n"
-"mov_s r14,r1\n"
-"L3230e6:\n"
-"mov_s r13,r0\n"
-"L3230e8:\n"
-"add_s r0,sp,0x4\n"
-"L3230ea:\n"
-"mov_s r1,0\n"
-"L3230ec:\n"
-"bl.d opencfw_em9305_memset\n"
-"L3230f0:\n"
-"mov_s r2,0x20\n"
-"L3230f2:\n"
-"ldb_s r0,[r13,0x2]\n"
-"L3230f4:\n"
-"mov_s r1,0x29\n"
-"L3230f6:\n"
-"stb_s r14,[sp,0x4]\n"
-"L3230f8:\n"
-"stb r14,[sp,3]\n"
-"L3230fc:\n"
-"stb r1,[sp,2]\n"
-"L323100:\n"
-"stb r0,[sp,5]\n"
-"L323104:\n"
-"sth r0,[sp]\n"
-"L323108:\n"
-"brne_s r14,0,L323174\n"
-"L32310a:\n"
-"ldb_s r3,[r13,0x18]\n"
-"L32310c:\n"
-"ldb_s r2,[r13,0x1a]\n"
-"L32310e:\n"
-"ldh_s r0,[r13,0x4]\n"
-"L323110:\n"
-"ld r11,[r13,16]\n"
-"L323114:\n"
-"mov r9,292\n"
-"L323118:\n"
-"ldb_s r1,[r13,0x1b]\n"
-"L32311a:\n"
-"stb r3,[sp,18]\n"
-"L32311e:\n"
-"stb r2,[sp,19]\n"
-"L323122:\n"
-"sth r0,[sp,22]\n"
-"L323126:\n"
-"mpydu r2,r11,0x1a36e3\n"
-"L32312e:\n"
-"ldb r0,[r13,r9]\n"
-"L323132:\n"
-"ldb r8,[r13,52]\n"
-"L323136:\n"
-"ld_s r15,[r13,0x28]\n"
-"L323138:\n"
-"ld_s r14,[r13,0x2c]\n"
-"L32313a:\n"
-"ldb_s r12,[r13,0x19]\n"
-"L32313c:\n"
-"stb_s r1,[sp,0x14]\n"
-"L32313e:\n"
-"stb_s r0,[sp,0x10]\n"
-"L323140:\n"
-"asl_s r1,r3\n"
-"L323142:\n"
-"lsr r0,r2,0x1f\n"
-"L323146:\n"
-"sub.f lp_count,r8,0\n"
-"L32314a:\n"
-"or_s r0,r0,r1\n"
-"L32314c:\n"
-"st_s r15,[sp,0x8]\n"
-"L32314e:\n"
-"st_s r14,[sp,0xc]\n"
-"L323150:\n"
-"stb r12,[sp,17]\n"
-"L323154:\n"
-"stb r8,[sp,26]\n"
-"L323158:\n"
-"sth r0,[sp,24]\n"
-"L32315c:\n"
-"beq_s L323174\n"
-"L32315e:\n"
-"mov_s r1,0\n"
-"L323160:\n"
-"lp L323174\n"
-"L323164:\n"
-"add2 r0,r13,r1\n"
-"L323168:\n"
-"ld_s r0,[r0,0x38]\n"
-"L32316a:\n"
-"add_s r3,sp,0\n"
-"L32316c:\n"
-"add1_s r3,r3,r1\n"
-"L32316e:\n"
-"add_s r1,r1,1\n"
-"L323170:\n"
-"ldh_s r2,[r0,0x2]\n"
-"L323172:\n"
-"sth_s r2,[r3,0x1c]\n"
-"L323174:\n"
-"bl.d opencfw_em9305_ll_event_callback_30e79c\n"
-"L323178:\n"
-"add_s r0,sp,0\n"
-"L32317a:\n"
-"leave_s [r13-r15,fp,blink,pcl]\n"
-".size opencfw_em9305_child_3230e0,.-opencfw_em9305_child_3230e0\n"
-);
+#include <stdint.h>
+
+/* Native 0x3230e0..0x32317c: post LL event 0x29 (CIS established) for the
+ * record's id (+2) with the given status. On success (status 0) also fill
+ * the timing fields: the anchors (+0x28/+0x2c), PHY and count bytes, the
+ * ISO interval (+16 us converted to 1.25 ms units by the stock reciprocal
+ * multiply (x * 0x1a36e3) >> 31), the max PDU (+4) and one 16-bit handle
+ * per stream (count +52, stream pointers from +0x38). */
+extern void *opencfw_em9305_memset(void *,uint32_t,uint32_t);
+extern uint32_t opencfw_em9305_ll_event_callback_30e79c(uintptr_t);
+
+struct init_event_3230e0 {
+    uint16_t handle;
+    uint8_t event;
+    uint8_t status;
+    uint8_t status_copy;
+    uint8_t id;
+    uint8_t reserved0[2];
+    uint32_t anchor0;
+    uint32_t anchor1;
+    uint8_t value292;
+    uint8_t value19;
+    uint8_t value18;
+    uint8_t value1a;
+    uint8_t value1b;
+    uint8_t reserved1;
+    uint16_t max_pdu;
+    uint16_t interval;
+    uint8_t count;
+    uint8_t reserved2;
+    uint16_t handles[4];
+};
+
+uint32_t opencfw_em9305_child_3230e0(uintptr_t record,uint32_t status)
+{
+    struct init_event_3230e0 message;
+    (void)opencfw_em9305_memset((uint8_t *)&message+4u,0u,32u);
+    uint32_t id=*(volatile uint8_t *)(record+2u);
+    message.status_copy=(uint8_t)status;
+    message.status=(uint8_t)status;
+    message.event=0x29u;
+    message.id=(uint8_t)id;
+    message.handle=(uint16_t)id;
+    if(status==0u) {
+        message.value18=*(volatile uint8_t *)(record+0x18u);
+        message.value1a=*(volatile uint8_t *)(record+0x1au);
+        message.max_pdu=*(volatile uint16_t *)(record+4u);
+        uint64_t scaled=(uint64_t)*(volatile uint32_t *)(record+16u)*0x1a36e3u;
+        message.value1b=*(volatile uint8_t *)(record+0x1bu);
+        message.value292=*(volatile uint8_t *)(record+292u);
+        uint32_t count=*(volatile uint8_t *)(record+52u);
+        message.anchor0=*(volatile uint32_t *)(record+0x28u);
+        message.anchor1=*(volatile uint32_t *)(record+0x2cu);
+        message.value19=*(volatile uint8_t *)(record+0x19u);
+        message.count=(uint8_t)count;
+        message.interval=(uint16_t)(scaled>>31);
+        for(uint32_t i=0u;i<count;++i) {
+            uintptr_t stream=*(volatile uint32_t *)(record+0x38u+4u*i);
+            message.handles[i]=*(volatile uint16_t *)(stream+2u);
+        }
+    }
+    return opencfw_em9305_ll_event_callback_30e79c((uintptr_t)&message);
+}

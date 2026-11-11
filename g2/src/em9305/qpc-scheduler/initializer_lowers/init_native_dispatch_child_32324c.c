@@ -1,31 +1,22 @@
-/* Complete native helper; DSP accumulator and delay slot effects preserved. */
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_dispatch_child_32324c\n"
-".type opencfw_em9305_dispatch_child_32324c,@function\n"
-"opencfw_em9305_dispatch_child_32324c:\n"
-"L32324c:\n"
-"st.aw blink,[sp,-16]\n"
-"L323250:\n"
-"st_s r1,[sp,0xc]\n"
-"L323252:\n"
-"stb_s r0,[sp,0x8]\n"
-"L323254:\n"
-"mov_s r1,0x31\n"
-"L323256:\n"
-"mov_s r2,sp\n"
-"L323258:\n"
-"sth_s r0,[r2,0x4]\n"
-"L32325a:\n"
-"add_s r0,sp,0x4\n"
-"L32325c:\n"
-"bl.d opencfw_em9305_ll_event_callback_30e79c\n"
-"L323260:\n"
-"sth_s r1,[r2,0x6]\n"
-"L323262:\n"
-"ld.ab blink,[sp,16]\n"
-"L323266:\n"
-"j_s [blink]\n"
-".size opencfw_em9305_dispatch_child_32324c,.-opencfw_em9305_dispatch_child_32324c\n"
-);
+#include <stdint.h>
+
+/* Native 0x32324c..0x323268: report LL event 0x31 for a handle through
+ * the 30e79c callback, as {u16 handle, u16 0x31, u8 handle, u32 value}. */
+extern uint32_t opencfw_em9305_ll_event_callback_30e79c(uintptr_t event);
+
+struct opencfw_em9305_event_31 {
+    uint16_t handle;
+    uint16_t code;
+    uint8_t status;
+    uint32_t value;
+};
+
+uint32_t opencfw_em9305_dispatch_child_32324c(uint32_t handle, uint32_t value)
+{
+    struct opencfw_em9305_event_31 event;
+    event.value=value;
+    event.status=(uint8_t)handle;
+    event.handle=(uint16_t)handle;
+    event.code=0x31u;
+    return opencfw_em9305_ll_event_callback_30e79c((uintptr_t)&event);
+}

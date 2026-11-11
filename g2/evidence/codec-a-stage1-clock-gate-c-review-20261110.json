@@ -1,0 +1,67 @@
+{
+  "schema": 1,
+  "target": "GX8002 BINH A stage-1 clock-gate dispatcher at 0x100005a4",
+  "source": "g2/src/codec/image-a-stage1/main_stage1_clock_gate.c",
+  "stock_stage1_load_sha256": "65775a0feea148f5e1582693160c06204d5183fee717ba75706ce1cb4d40f605",
+  "upstream_policy": "third-party/upstream/nationalchip-lvp-kws/arch/soc/grus/include/clk_priv.h: _clk_set_high_gate then _clk_set_all_gate",
+  "direct_csky_compile": {
+    "passed": true,
+    "object_sha256": "2be0950201df41698d7260c19f99ff8040735ac2a16b005f673f54c9fef3295f",
+    "stock_function_bytes": 256,
+    "source_function_bytes": 256,
+    "stock_section_sha256": "67072a3913d54f83fd76a07d8bbfd306e2e5e99534a5b27dff344355ae63b4cc",
+    "source_section_sha256": "2a9f3e26f6e2394bfe11f5a9182a8146f6ad57bd136b6ec607d509a6e5c5e777",
+    "different_byte_offsets": [
+      24,
+      25,
+      27,
+      34,
+      35,
+      36,
+      37,
+      130,
+      131,
+      132,
+      133,
+      164,
+      165,
+      167
+    ],
+    "relocations": [
+      "0x18 R_CKCORE_ADDR32 .rodata",
+      "0x22 R_CKCORE_PCREL_IMM26BY2 __module_get_info",
+      "0x82 R_CKCORE_PCREL_IMM26BY2 __module_get_info",
+      "0xa4 R_CKCORE_ADDR32 .rodata+0x48"
+    ],
+    "module_lookup_helper_bytes": 164,
+    "module_lookup_stock_equivalent_bytes": 164,
+    "module_lookup_byte_identical": false
+  },
+  "source_composition": {
+    "units": [
+      "loader",
+      "NOR reader",
+      "SPI transactions",
+      "clock gate"
+    ],
+    "relocatable_link_passed": true,
+    "undefined_symbols": [],
+    "linked_into_final_codec_a": false
+  },
+  "full_g2_gate": {
+    "source_report": "build/g2-all-binh-a-clock-20261110/report.json",
+    "source_report_sha256": "1f91e5ebe81fe7acbe62bf8db42c4e423508bb336c9195ce8c2a78b885c83aac",
+    "built_units": 4872,
+    "failed_units": 0,
+    "duplicate_strong_symbols": 0,
+    "manifest_changed_during_build": false,
+    "link_report": "build/g2-all-binh-a-clock-link-20261110/link-report.json",
+    "link_report_sha256": "d89e480055d427abe1a8333652f52e85e0feef17f55843399a8a0a9f8c847a62",
+    "linked_payloads": 7,
+    "external_binary_archive_used": false,
+    "codec_a_linked_binary_unchanged": true
+  },
+  "qualification": "The clock-gate function body matches stock modulo four relocations, while the separately emitted module lookup helper differs in instruction scheduling. The C units form a closed candidate call graph; complete BINH A stage 1, byte identity, and hardware behavior are unverified.",
+  "later_source_link_review": "g2/evidence/codec-a-stage1-source-link-20261110.json",
+  "snapshot_scope": "This receipt records the source revision compiled at that point; the later source-link review covers the expanded current stage-1 units."
+}

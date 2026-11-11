@@ -23,9 +23,7 @@ uint32_t g2_codec_queue_is_full(void *storage)
     const uint32_t tail = (uint32_t)queue->tail;
     const int32_t size = queue->size;
     const uint32_t sum = tail + member;
-    int32_t quotient;
-    __asm__ volatile("divs %0, %1, %2" : "=r"(quotient)
-                     : "r"(sum), "r"(size) : "cc");
+    const int32_t quotient = (int32_t)sum / size;   /* divs */
     const uint32_t remainder = sum - (uint32_t)quotient * (uint32_t)size;
     return remainder == (uint32_t)queue->head;
 }

@@ -34,8 +34,10 @@ static const char new_low[] = "dominant_hand ring_mac changed, reconnect require
 static const char new_low_short[] = "[setting]dominant_hand ring_mac changed, reconnect required new[2-0]=%02X:%02X:%02X";
 static const char policy[] = "dominant_hand policy: cur=%u new=%u role=%s";
 static const char policy_short[] = "[setting]dominant_hand policy: cur=%u new=%u role=%s";
-static const char recovered[] = "dominant_hand: ring_mac recovered from factory placeholder, delay connect %ums";
-static const char recovered_short[] = "[setting]dominant_hand: ring_mac recovered from factory placeholder, delay connect %ums";
+/* Evidence: stock PTR_s_dominant_hand__ring_mac_recovere_00467f6c @ FUN_00467540
+ * (corpus apollo-main/ghidra/open-2026-09-29/decomp/00467540.c); short form matches. */
+static const char recovered[] = "dominant_hand: ring_mac recovered from factory default, delay connect %ums";
+static const char recovered_short[] = "[setting]dominant_hand: ring_mac recovered from factory default, delay connect %ums";
 static const char updated[] = "Updated ring_mac=%02X:%02X:%02X:%02X:%02X:%02X";
 static const char updated_short[] = "[setting]Updated ring_mac=%02X:%02X:%02X:%02X:%02X:%02X";
 static const char absent[] = "ring_mac not provided by APP, keep local value";

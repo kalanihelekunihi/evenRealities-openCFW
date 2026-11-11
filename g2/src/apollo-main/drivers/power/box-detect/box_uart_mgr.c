@@ -51,6 +51,10 @@ extern void audio_uart_buffer_zero(void *dst, uint32_t len, uint32_t fill);  /* 
 extern uint32_t audio_log_flags(void); /* 0x43d0ce */
 extern void audio_log_extended(uint8_t, const char *, const char *, const char *, uint32_t, const char *, ...); /* 0x43d574 */
 extern uint32_t compress_log_output(uint32_t, const char *, const char *, ...); /* 0x43ce9e */
+/* openCFW recovery experiment: a sent product-test response proves the temple
+ * is alive and talking to the case, so disarm the early MRAM wired-recovery arm
+ * (see system/self-recovery/self_recovery.c). Not stock. */
+extern void g2_recovery_disarm_healthy(void);
 
 static const char module_tag[] = "box_uart_mgr"; /* ROM 0x7856a0 */
 static const char source_file[] = "D:\\01_workspace\\s200_ap510b_iar_git\\platform\\device_mgr\\box_uart_mgr.c"; /* ROM 0x6f890c */
@@ -183,6 +187,7 @@ void DEV_BoxRevcMsgProcess_53a0b6(const g2_box_uart_msg_t *msg) {
                 (void)osDelay(2u);
                 err = box_uart_send_53a010(BOX_UART, rsp, rsp_len);
                 if (err == 0u) {
+                    g2_recovery_disarm_healthy(); /* answered the case: healthy */
                     err = hal_uart_tx_flush_55e956(BOX_UART);
                     if (err != 0u)
                         BOX_UART_ERR(fn_process, 0xb1u, s_flush, c_flush, err);

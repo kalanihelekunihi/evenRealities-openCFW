@@ -1,7 +1,7 @@
 /* SPDX-License-Identifier: MIT
- * Image-A SRAM 0x10025e48. Native entry consumes ambient r0 and r4 on
- * branches where a status bit is disabled. The small assembly bridge passes
- * both values to this C core; it does not synthesize initial flags.
+ * Image-A SRAM 0x10025e48. The stock body reuses r0 and r4 on branches
+ * where a status bit is disabled; both are 0 there by data flow, and the
+ * entry in resident_audio_irq_entry.c passes 0 for each.
  */
 #include <stdint.h>
 

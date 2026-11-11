@@ -1,126 +1,62 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_3177e8\n"
-".type opencfw_em9305_child_3177e8,@function\n"
-"opencfw_em9305_child_3177e8:\n"
-"L3177e8:\n"
-"enter_s [r13-r21,fp,blink]\n"
-"L3177ea:\n"
-"sub_s sp,sp,0x4\n"
-"L3177ec:\n"
-"mov_s r20,r2\n"
-"L3177ee:\n"
-"mov_s r14,r1\n"
-"L3177f0:\n"
-"mov_s r15,r0\n"
-"L3177f2:\n"
-"add r19,r0,0x8\n"
-"L3177f6:\n"
-"mov_s r17,0\n"
-"L3177f8:\n"
-"mov r18,0\n"
-"L3177fc:\n"
-"sub r16,r17,r18\n"
-"L317800:\n"
-"extb.f r21,r14\n"
-"L317804:\n"
-"beq_s L31788c\n"
-"L317806:\n"
-"extb r1,r16\n"
-"L31780a:\n"
-"add r2,sp,0x3\n"
-"L31780e:\n"
-"bl.d opencfw_em9305_wsf_event_at\n"
-"L317812:\n"
-"mov_s r0,r19\n"
-"L317814:\n"
-"mov_s r13,r0\n"
-"L317816:\n"
-"breq_s r0,0,L31788c\n"
-"L317818:\n"
-"ldb_s r1,[r13,0xa]\n"
-"L31781a:\n"
-"bl.d opencfw_em9305_radio_record_timing_30c40c\n"
-"L31781e:\n"
-"ldh_s r0,[r13,0x8]\n"
-"L317820:\n"
-"ldb_s r1,[r13,0xb]\n"
-"L317822:\n"
-"cmp_s r0,r21\n"
-"L317824:\n"
-"add.ls r1,r1,r0\n"
-"L317828:\n"
-"sub.ls r14,r14,r0\n"
-"L31782c:\n"
-"bls_s L317832\n"
-"L31782e:\n"
-"add_s r1,r1,r14\n"
-"L317830:\n"
-"mov_s r14,0\n"
-"L317832:\n"
-"ldb_s r0,[r13,0xa]\n"
-"L317834:\n"
-"stb_s r1,[r13,0xb]\n"
-"L317836:\n"
-"extb_s r1,r1\n"
-"L317838:\n"
-"ldh_s r2,[r13,0x8]\n"
-"L31783a:\n"
-"mpyuw_s r0,r0,r1\n"
-"L31783c:\n"
-"brlo.t r0,r2,L317800\n"
-"L317840:\n"
-"extb r0,r17\n"
-"L317844:\n"
-"brhs.d.nt r0,r20,L317874\n"
-"L317848:\n"
-"add r1,sp,0x3\n"
-"L31784c:\n"
-"bl.d opencfw_em9305_wsf_event_remove\n"
-"L317850:\n"
-"mov_s r0,r19\n"
-"L317852:\n"
-"bl.d opencfw_em9305_wsf_event_release\n"
-"L317856:\n"
-"ld r0,[r13,0]\n"
-"L317858:\n"
-"bl.d opencfw_em9305_radio_packet_complete_31ae74\n"
-"L31785c:\n"
-"mov_s r0,r13\n"
-"L31785e:\n"
-"bl opencfw_em9305_wsf_critical_enter\n"
-"L317862:\n"
-"mov_s r0,0x805adc\n"
-"L317868:\n"
-"ldb_s r1,[r0,0]\n"
-"L31786a:\n"
-"add_s r1,r1,1\n"
-"L31786c:\n"
-"bl.d opencfw_em9305_wsf_critical_exit\n"
-"L317870:\n"
-"stb_s r1,[r0,0]\n"
-"L317872:\n"
-"add_s r18,r18,1\n"
-"L317874:\n"
-"ldb r0,[r15,36]\n"
-"L317878:\n"
-"add_s r17,r17,1\n"
-"L31787a:\n"
-"brne_s r0,0,L3177fc\n"
-"L31787c:\n"
-"ldb r0,[r15,108]\n"
-"L317880:\n"
-"brne.t r0,0,L3177fc\n"
-"L317884:\n"
-"ldb_s r0,[r15,0x10]\n"
-"L317886:\n"
-"add_s r0,r0,1\n"
-"L317888:\n"
-"stb_s r0,[r15,0x10]\n"
-"L31788a:\n"
-"b_s L3177fc\n"
-"L31788c:\n"
-"leave_s [r13-r21,fp,blink,pcl]\n"
-".size opencfw_em9305_child_3177e8,.-opencfw_em9305_child_3177e8\n"
-);
+#include <stdint.h>
+
+/* Native 0x3177e8..0x31788e: spend a byte budget of radio time on the
+ * queued packets of a context (queue at +8). Each packet's progress byte +11
+ * advances by its record timing (native 0x30c40c over length +8 and rate
+ * +10) or by the remaining budget; a packet whose progress covers its length
+ * is removed, released and completed (up to max packets, counted under
+ * the critical section at 0x805adc). Without the busy flags +36/+108 every
+ * finished packet bumps the idle count +16. Stops when the budget or the
+ * queue runs out. */
+extern uintptr_t opencfw_em9305_wsf_event_at(uintptr_t,uint32_t,uintptr_t);
+extern uint32_t opencfw_em9305_radio_record_timing_30c40c(uint32_t,uint32_t);
+extern uintptr_t opencfw_em9305_wsf_event_remove(uintptr_t,uintptr_t);
+extern uint32_t opencfw_em9305_wsf_event_release(uintptr_t);
+extern void opencfw_em9305_radio_packet_complete_31ae74(uintptr_t);
+extern uint32_t opencfw_em9305_wsf_critical_enter(void);
+extern uint32_t opencfw_em9305_wsf_critical_exit(void);
+
+void opencfw_em9305_child_3177e8(uintptr_t context, uint32_t budget, uint32_t max)
+{
+    uint8_t handler;
+    uintptr_t queue = context + 8u;
+    uint32_t index = 0u, removed = 0u;
+    for (;;) {
+        uint32_t position = index - removed;
+        uintptr_t packet;
+        for (;;) {
+            uint32_t room = budget & 0xffu;
+            if (room == 0u) return;
+            packet = opencfw_em9305_wsf_event_at(queue, position & 0xffu, (uintptr_t)&handler);
+            if (packet == 0u) return;
+            uint32_t time = opencfw_em9305_radio_record_timing_30c40c(
+                *(volatile uint16_t *)(packet + 8u), *(volatile uint8_t *)(packet + 10u));
+            uint32_t progress = *(volatile uint8_t *)(packet + 11u);
+            if (time <= room) {
+                progress += time;
+                budget -= time;
+            } else {
+                progress += budget;
+                budget = 0u;
+            }
+            uint32_t rate = *(volatile uint8_t *)(packet + 10u);
+            *(volatile uint8_t *)(packet + 11u) = (uint8_t)progress;
+            if (rate * (progress & 0xffu) >= *(volatile uint16_t *)(packet + 8u)) break;
+        }
+        if ((index & 0xffu) < max) {
+            (void)opencfw_em9305_wsf_event_remove(queue, (uintptr_t)&handler);
+            (void)opencfw_em9305_wsf_event_release(*(volatile uint32_t *)packet);
+            opencfw_em9305_radio_packet_complete_31ae74(packet);
+            (void)opencfw_em9305_wsf_critical_enter();
+            volatile uint8_t *completed = (volatile uint8_t *)(uintptr_t)0x805adcu;
+            *completed = (uint8_t)(*completed + 1u);
+            (void)opencfw_em9305_wsf_critical_exit();
+            ++removed;
+        }
+        ++index;
+        if (*(volatile uint8_t *)(context + 36u) == 0u && *(volatile uint8_t *)(context + 108u) == 0u) {
+            volatile uint8_t *idle = (volatile uint8_t *)(context + 16u);
+            *idle = (uint8_t)(*idle + 1u);
+        }
+    }
+}

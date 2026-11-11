@@ -1,0 +1,65 @@
+{
+  "report": "build/sources-goal-r1-st25-mailbox-c/report.json",
+  "units": 813,
+  "application_imports": 71,
+  "removed_imports": [
+    "r1_st25_mailbox_mode_enable_native"
+  ],
+  "added_imports": [],
+  "verification": {
+    "direct_pairs": 27648,
+    "defined_fallback_cases": 54,
+    "stock_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "limitations": [
+      "I2C and delay leaves modeled; ordinary C ABI; success-without-data has deliberate initialized-zero fallback"
+    ]
+  },
+  "compiled_defects": [
+    {
+      "defect": "wrong-mask",
+      "rejected": true
+    },
+    {
+      "defect": "wrong-address",
+      "rejected": true
+    },
+    {
+      "defect": "write-after-read-failure",
+      "rejected": true
+    },
+    {
+      "defect": "missing-delay",
+      "rejected": true
+    },
+    {
+      "defect": "wrong-enable-bit",
+      "rejected": true
+    }
+  ],
+  "prior_objects_identical": 810,
+  "generated_object_hash_changes": [
+    "{gen}/r1_startup_vectors.S",
+    "{gen}/r1_uecc.c"
+  ],
+  "rea_evidence_id": "ev_94bcb773556f5e244fab6d96c6fc3b04153dcc5015aa25495d22d3c8d400ee32",
+  "evidence_files": {
+    "build/goal-r1-st25-mailbox-c/verify.py": "a4cd66ee0cd6fe43c63111b0e129b2a3a4abd94788f7cc32df4cc9c69cc3c4cb",
+    "build/goal-r1-st25-mailbox-c/verification.json": "641418ce8bc4ed9125ebd0c98e704d3c4c57e38cd8353f2244ecc03d0918aa37",
+    "build/goal-r1-st25-mailbox-c/verify-final.log": "9be29564b235629566244b4d2238ef9c036f57b23266af55210d807133cb4b39",
+    "build/goal-r1-st25-mailbox-c/defects.py": "5b655ceb83fe79065150c6f395153ad7231119c475cb4364c411b56384e60045",
+    "build/goal-r1-st25-mailbox-c/defects.json": "7b373b5157ccf49d32730c8f7f4c24fd7b6280755e035aedc1623b2ac1211b9d",
+    "build/goal-r1-st25-mailbox-c/integration.py": "3c9f46ae07f2bf306be22cf2a771c0598753c4908873ee6262d6ad4e794d1f5b",
+    "build/goal-r1-st25-mailbox-c/integration.log": "09360c702285f27f4ad1ee99c062b24df52596e62c80af0b192c0b06e21f4ffe",
+    "build/goal-r1-st25-mailbox-c/integration/verification.json": "9b10a73034996b4e0b3c3f0e1a81f0e44d8121e8e4bbef7b3e35632c25cddd05",
+    "build/goal-r1-st25-mailbox-c/rea.json": "8a4161ffd71b070dabab9a1af1aa07770fd0d70151a5cd2fd54511e1144f2d6f",
+    "build/sources-goal-r1-st25-mailbox-c/report.json": "fc85cf531c4ff57af0fe188d1fe4b5c28c284e7b727d0cf6a06174f428472f5e",
+    "r1/src/sources.json": "9c95e90c6c83b4d5852a9be0995113f9fcba14ff9524bb79d15f58a20df5dbf6",
+    "r1/src/application/st25/native_mailbox.c": "cfb8397c3dd882f6146e4004187fa7b9297c6d1b4e371fb152d9dec6e5525c17"
+  },
+  "limitations": [
+    "Normal successful reads supply the byte; success-without-data deliberately uses initialized zero rather than stock incoming R3 residue.",
+    "I2C/delay leaves modeled in direct checks; configuration integration executes actual C SDK providers with prepared objects.",
+    "Generated boot objects may differ due build paths; no boot source changes.",
+    "Final application link, physical timing and device boot remain unverified."
+  ]
+}

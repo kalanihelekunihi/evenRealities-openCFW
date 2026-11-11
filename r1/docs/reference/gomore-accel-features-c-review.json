@@ -1,0 +1,140 @@
+{
+  "schema_version": 1,
+  "normal_report": "build/sources-goal-r1-gomore-accel-features-c/report.json",
+  "classifier": {
+    "pairs": 2304,
+    "provider_counts": {
+      "0x722ec": 0,
+      "0x723b6": 0,
+      "0x568f0": 0,
+      "0x8f4b4": 0,
+      "0x3b00e": 4032,
+      "0x8f3c8": 806400,
+      "0x761f8": 23520,
+      "0x56cf4": 2016,
+      "0x56f94": 4032,
+      "0x582c4": 2304,
+      "0x56a0c": 2304,
+      "0x569bc": 4608,
+      "0x56ba8": 2304,
+      "0x58256": 2304,
+      "0x583c8": 2304,
+      "0x56980": 9216,
+      "0x7eaf6": 2016,
+      "0x56920": 1512,
+      "0x67e4c": 2304,
+      "0x4834a": 0,
+      "0x710d4": 0,
+      "0x58480": 0,
+      "0x484fc": 0,
+      "0x56d78": 2304
+    },
+    "digest": "a7f8a118564366f7225bad2fb04185fa2ae7d6917ecf91d8d8e1abc7bf80572b",
+    "limits": [
+      "Stock classifier versus the production C classifier and C lower providers.",
+      "External memory and ordered writes, raw return, preserved registers, SP, masks and lower 28 FPSCR bits compared. Comparison flags and nested helper traces excluded.",
+      "C classifier uses a different private frame; public caller memory is compared directly without pointer normalization. No invalid-pointer, full alias, device timing or stack-bound proof."
+    ]
+  },
+  "fold": {
+    "pairs": 384,
+    "native_halving_branches": {
+      "0x67f2a": 24,
+      "0x67f4e": 36
+    }
+  },
+  "asymmetric_ring": {
+    "pairs": 128
+  },
+  "aliases": {
+    "pairs": 144,
+    "alias_offsets": [
+      0,
+      516
+    ]
+  },
+  "stage": {
+    "pairs": 48,
+    "write_trace_differences": 0,
+    "provider_counts": {
+      "0x722ec": 96,
+      "0x723b6": 96,
+      "0x568f0": 24,
+      "0x8f4b4": 96,
+      "0x3b00e": 696,
+      "0x8f3c8": 0,
+      "0x761f8": 0,
+      "0x56cf4": 0,
+      "0x56f94": 0,
+      "0x582c4": 12,
+      "0x56a0c": 12,
+      "0x569bc": 24,
+      "0x56ba8": 12,
+      "0x58256": 12,
+      "0x583c8": 12,
+      "0x56980": 48,
+      "0x7eaf6": 0,
+      "0x56920": 0,
+      "0x67e4c": 12,
+      "0x4834a": 24,
+      "0x710d4": 0,
+      "0x58480": 36,
+      "0x484fc": 184,
+      "0x56d78": 12
+    }
+  },
+  "negative_controls": [
+    {
+      "control": "wrong-band",
+      "rejected": true,
+      "source_sha256": "4bbbab629598368e950edfb238b348ecefe82dcb21f7480f430f07abc1d187ba"
+    },
+    {
+      "control": "no-rate-halving",
+      "rejected": true,
+      "source_sha256": "ab34f80964c6e1e36574fff52493556223b1620dbd5f3a5445eb512e752dccb3"
+    },
+    {
+      "control": "fixed-cursor",
+      "rejected": true,
+      "source_sha256": "80c9be51cbefd4ef812d2f0cc2c5034b37606ca98ce08d7f2817a16ee2fa5e6a"
+    }
+  ],
+  "closure": {
+    "elf": "build/goal-r1-gomore-accel-features-c/classifier/source-39786.elf",
+    "sha256": "0844197c777ac766662b365db065f1af2daa255aee5f7952ad2abf1437edca68",
+    "undefined": [],
+    "required_text": [
+      "r1_gomore_accel_features_native",
+      "r1_gomore_accel_autocorrelation_native",
+      "r1_gomore_accel_autocorrelation_wrapper_native",
+      "r1_gomore_accel_crossing_period_native",
+      "r1_gomore_accel_iir4_native",
+      "r1_gomore_accel_transition_native",
+      "r1_gomore_stage_5ed14_native"
+    ],
+    "native_link_bindings": []
+  },
+  "removed_application_imports": [
+    "r1_gomore_accel_features_native"
+  ],
+  "full_fpscr_parity": false,
+  "full_firmware_source_link": false,
+  "sha256": {
+    "build/sources-goal-r1-gomore-accel-features-c/report.json": "bcd1b1ea3693add3dad01a801d75bbcb47c930c7e3b686c4e7015e613d022a79",
+    "r1/src/application/runtime/native_gomore_accel_features.c": "4141c6b789d182a39a31770ee5247be018facf7be8662593cb5e4d61926b1a89",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-accel-features-c/r1/r1-application/r1__src__application__runtime__native_gomore_accel_features.c.o": "d7d154360e7973074a76088525c9425156adf028e4375633417cc71987a41176",
+    "r1/src/application/runtime/native_gomore_accel_features.h": "033d69751219446818ef69c1a150724707f0433474187218972fdfbaa2fa9875",
+    "r1/src/sources.json": "b65461bbf09b0f4a25b7f8806a713bfec93128175a8e084e5447fbeef6b3b1b2",
+    "tools/build/source-plan.json": "43281e3850f6c7b83c5616e5968c4939993501810057ca3deaeea85eaae351ba",
+    "build/goal-r1-gomore-accel-features-c/verify.py": "96306de4a60602f052e07d2be75fe5621e62ce4da4bca43da6fa392ca1a89c8f",
+    "build/goal-r1-gomore-accel-features-c/fold.py": "395630a8687d57a68394143dd0021c387b7aeb282e414705b9bba074515acf32",
+    "build/goal-r1-gomore-accel-features-c/cursor.py": "d8239b9a2a122422142d5619579da8ff7d4d63ffa72d500ab10d4f0138c5e9a8",
+    "build/goal-r1-gomore-accel-features-c/aliases.py": "e70e961dd420b3add52dba13c1a6fffa65cf002c9dde9376ccff0a3a6cc18613",
+    "build/goal-r1-gomore-accel-features-c/stage.py": "051989010e38fe8423f67be0de429311f4e3f35539a533a263cb9f82f3f65678",
+    "build/goal-r1-gomore-accel-features-c/negative.py": "fef79b75324d01ca1d76b3c21ceaf6de596030efbd2d8999b7188e22774f6d8c",
+    "build/goal-r1-gomore-accel-features-c/rea-root.json": "42a2a025bdb142ed22966f48b10dbd8d28180d13b6c87d1efee4feafb5ea6da5",
+    "build/goal-r1-gomore-accel-features-c/closure.json": "509173f82bac4a8b90ba429173d73526383adf5e8ec0a2612c8eb1089847b0ef",
+    "build/goal-r1-gomore-accel-features-c/sources-check.log": "68bd5b24495ea6e77f19cd8135f9ec26986881653ba17c60e5f1c724ba415fa7"
+  }
+}

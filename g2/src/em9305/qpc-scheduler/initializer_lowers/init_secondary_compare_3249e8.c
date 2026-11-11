@@ -4,44 +4,21 @@ static uint32_t rd32(uintptr_t p){return *(volatile uint32_t *)p;}
 static uint32_t rd8(uintptr_t p){return *(volatile uint8_t *)p;}
 static uint32_t mpywhl_3249e8(uint32_t a,uint32_t b)
 {
-#ifdef __arc__
-    uint32_t out;
-    __asm__ volatile("mpywhl %0,%1,%2":"=r"(out):"r"(a),"r"(b):"r58","r59","memory");
-    return out;
-#else
-    return a*(uint32_t)(int32_t)(int16_t)b;
-#endif
+    return (uint32_t)a*(uint32_t)(int32_t)(int16_t)b;
 }
 
 struct scaled_pair_3249e8 {uint32_t first,second;};
+/* Native 0x324a20..0x324a4c: each value in 1.25 ms units, Cordio
+ * LL_MATH_DIV_1250. Stock: MPYDU acc = v*0x1a36e3, SETACC copies the sign of
+ * the high word into the guard bits (always 0: the product is below 2^53),
+ * ASLACC 0xe1 shifts the accumulator right by 31, MOV reads ACC0_LO. */
+static uint32_t div1250_3249e8(uint32_t value)
+{
+    return (uint32_t)(((uint64_t)value*0x1a36e3u)>>31);
+}
 static struct scaled_pair_3249e8 scaled_pair_3249e8(uint32_t a,uint32_t b)
 {
-#ifdef __arc__
-    uint32_t first,second;
-    /* Exact named native DSP sequence from 0x324a20..0x324a4c. The
-     * accumulator and guard state are architectural, so preserve SETACC
-     * and ASLACC rather than substituting guessed division arithmetic. */
-    __asm__ volatile(
-        "mov r3,0x1a36e3\n\t"
-        "mpydu 0,%2,r3\n\t"
-        "asr r2,r59,0x1f\n\t"
-        "setacc r2,r2,768\n\t"
-        "mov r2,0xe1\n\t"
-        "aslacc r2\n\t"
-        "mov %0,r58\n\t"
-        "mpydu 0,%3,r3\n\t"
-        "asr r3,r59,0x1f\n\t"
-        "setacc r3,r3,768\n\t"
-        "mov r2,0xe1\n\t"
-        "aslacc r2\n\t"
-        "mov %1,r58\n\t"
-        :"=&r"(first),"=&r"(second):"r"(a),"r"(b):
-        "r2","r3","r58","r59","memory","cc");
-    return (struct scaled_pair_3249e8){first,second};
-#else
-    /* Host fixture model only. Native numerical proof requires ARC DSP. */
-    return (struct scaled_pair_3249e8){a,b};
-#endif
+    return (struct scaled_pair_3249e8){div1250_3249e8(a),div1250_3249e8(b)};
 }
 
 /* Native 0x3249e8..0x324a5c: return one of the two original records.

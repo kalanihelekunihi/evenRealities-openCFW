@@ -3,6 +3,11 @@
  * and 24-bit configuration transfer are separate lower contracts.
  */
 #include <stdint.h>
+/* Stock-RAM literals rewritten to named objects (sim-test wave 2026-10-26,
+ * .waves/sim-fix/apply.py): g2ref_X is the linker symbol X. */
+#include <stdint.h>
+extern unsigned char g2ref_g2_norflash_quad_devcfg_20000808[] __asm__("g2_norflash_quad_devcfg_20000808");
+extern unsigned char g2ref_g2_norflash_serial_devcfg_200007f0[] __asm__("g2_norflash_serial_devcfg_200007f0");
 
 extern volatile uint32_t g2_norflash_controller_handle_20074544;
 extern uint32_t g2_norflash_set_serial_470d7c(const void *configuration);
@@ -45,7 +50,7 @@ static void report(uint32_t line, const char *function,
 
 void g2_norflash_enter_470f68(void)
 {
-    const void *const serial_configuration = (const void *)(uintptr_t)0x200007f0u;
+    const void *const serial_configuration = (const void *)(uintptr_t)((uint32_t)(uintptr_t)g2ref_g2_norflash_serial_devcfg_200007f0);
     if (g2_norflash_set_serial_470d7c(serial_configuration) != 0u) {
         report(1472u, serial_function, serial_reconfigure,
                serial_reconfigure_short);
@@ -64,7 +69,7 @@ void g2_norflash_exit_470e90(void)
 {
     uint8_t configuration[24];
     audio_uart_checksum_copy(configuration,
-                             (const void *)(uintptr_t)0x20000808u, 24u);
+                             (const void *)(uintptr_t)((uint32_t)(uintptr_t)g2ref_g2_norflash_quad_devcfg_20000808), 24u);
     configuration[8] = 16u;
     configuration[4] = 108u;
     configuration[5] = 0u;

@@ -1,0 +1,55 @@
+{
+  "passed": 2016,
+  "executions": 4032,
+  "actual_native_and_C_registry": true,
+  "existing_shared_handle_owners": true,
+  "post_open_close_reload": true,
+  "tail_methods_original_sp_lr": true,
+  "source_report": "build/sources-goal-r1-touch-device-ops/report.json",
+  "source_sizes": {
+    "r1_touch_record_op_0c_b": 14,
+    "r1_touch_record_op_08": 14,
+    "r1_touch_device_op_stop": 30,
+    "delayed_touch_release": 6,
+    "r1_touch_record_op_0c": 14,
+    "r1_touch_device_op_lock1": 30,
+    "r1_touch_device_op_unlock": 30
+  },
+  "limitations": [
+    "Device methods and shared-power release boundary modeled",
+    "Private frames/caller-clobbered registers/flags excluded",
+    "Concrete line semantics, initial placement, concurrency and electrical/timing behavior unverified",
+    "No byte qualification"
+  ],
+  "negative_control": {
+    "mutation": "Reuse output handle loaded before open",
+    "rejected": true,
+    "counterexample": "Open replaces A with B; stock applies slot18 to B, variant to A",
+    "stderr": "arm-none-eabi-ld: warning: (r1_shared_power_client_release): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-device-ops/bad.o\nTraceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-touch-device-ops/reject-handle-hoist.py\", line 62, in <module>\n    for c in cases:assert a(*c)==b(*c),c\n                                 ~^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-touch-device-ops/reject-handle-hoist.py\", line 58, in run\n    assert state['calls']==calls and state['reads']==reads\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+  },
+  "source_plan_changed": false,
+  "evidence": {
+    "build/goal-r1-touch-device-ops/stock.elf": "e3443d0b17a35dff868f42110194f26f50560498620978821b8672ddbca7e36f",
+    "build/goal-r1-touch-device-ops/REA.snapshot.json": "b098f66c7382e9090e32099a0d32fe0a44b8732c3cbcf543e8e6720925383b63",
+    "build/goal-r1-touch-device-ops/verify.py": "2487e2dbd3f3ca2920a8f73bc18e0c57b025b4150f99f68cfa0b6104314e675d",
+    "build/goal-r1-touch-device-ops/source.elf": "4fa12a599fa1e400b257faec2377089c9b46e1ae27a0296e850a0b72e465b1ca",
+    "build/goal-r1-touch-device-ops/results.json": "35d8c3044bf899987fb561c8157f21fe2edd69c3bc89247b393eb30050ed9e69",
+    "build/goal-r1-touch-device-ops/bad.c": "fd638840e685b826053ea9fd7655187b9ea6021015bb5e783b90d453b0ce5403",
+    "build/goal-r1-touch-device-ops/reject-handle-hoist.py": "ec21e944931f1d43ffb42d6615bfcc396c21744050615d19b4c7171085cc1100",
+    "build/goal-r1-touch-device-ops/negative-result.json": "a709388e73ec71bc6596bb5e9c2897a02d03311fdca3774f4ebb8981cc9c3e93",
+    "build/goal-r1-touch-device-ops/REA-0x46f54.json": "c1855e52c245e85e606afd370e620fe0721baf1f5fd473e2929eb6883de13316",
+    "build/goal-r1-touch-device-ops/REA-0x46f60.json": "742ad5f4b2b4b17917605f9560c8d9ca3d9a6e866f66acd5af1ba979f761db26",
+    "build/goal-r1-touch-device-ops/REA-0x46f6c.json": "7cf14beeb0c56132c5b813103cfeadf4219babd00eb383f164b9106467c2aa5b",
+    "build/goal-r1-touch-device-ops/REA-0x46f88.json": "599c65dc2478d6d2dca99d184cd805915939077c5db174ed1426016a9ee681be",
+    "build/goal-r1-touch-device-ops/REA-0x46f90.json": "15b264f6311b4a6be3e44a59c65b003c363e67e1dbedc6c89f50210f399d3688",
+    "build/goal-r1-touch-device-ops/REA-0x46f9c.json": "b4cd0f66fa97122c51ddcb5f7534d9de7d782b89d4af7284017d8f8daa6e3d09",
+    "build/goal-r1-touch-device-ops/REA-0x46fb8.json": "965d2ec42ebfc35b6bde7fbb94c167f06ff10658bd304aab9d4531ff81e785a6",
+    "r1/src/application/board/native_touch_device_ops.c": "febfdb8e88e3f936798985f21284cc909d9c00aec95e20da1d224175ff60e473",
+    "r1/src/application/board/native_peripheral_bindings.c": "c2b283e25857766ad1046bdd837e859bd9baad5cccca5de057d019cce813a1e6",
+    "r1/src/application/registry/stock_registry.c": "68c16fe9a2fcd328012b8613c9da9aa4cd31bd30df36a55e64e56e7b534246fa",
+    "build/sources-goal-r1-touch-device-ops/report.json": "96914a4be8700410f35ebad2f82c6801111350e50871e1a33d15635aedc76eef",
+    "r1/src/sources.json": "1d797a1799e6f0096106583eb050a5ffd9af171405d87a131b103e1327dab36f",
+    "r1/symbols/function-frontier.csv": "da3494d20176e7c48b45db7ad55fab1d0764188c92f0d85c3ac3aac2f5010a87",
+    "tools/build/source-plan.json": "c9466961ae2b5ca59e30580d7aaa1d9ac7cb1d7872e190d4ca2127cc1c07e98a"
+  }
+}

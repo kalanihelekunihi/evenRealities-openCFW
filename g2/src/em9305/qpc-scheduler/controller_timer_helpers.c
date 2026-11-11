@@ -22,14 +22,19 @@ static uint32_t timer_probe(uint32_t value,int alternate)
  uint32_t clock=*(volatile uint32_t *)(uintptr_t)0xf03800u;
  uint32_t offset=(clock & 1u)!=0u ? 24u : 26u;
  uint32_t count=*(volatile uint16_t *)(uintptr_t)(0x80fdd4u+offset);
+ /* Stock computes EXTH(count - 1) + 1 before LP: EXTH is unsigned, so
+  * every nonzero halfword reaches the ROM probe unchanged. A zero
+  * halfword skips LP and reaches the ROM probe as zero. */
  if (count!=0u) {
-  /* Stock uses LP_COUNT and two no-ops; retain the architectural loop. */
+  /* Calibrated busy-wait: stock zero-overhead LP loop of two no-ops (two
+   * cycles per count). GCC does not emit LP for a C loop here, and a C loop
+   * would change the delay the timer probe is calibrated against, so the
+   * LP_COUNT loop stays asm. */
   __asm__ volatile("mov lp_count,%0\n\tlp 1f\n\tnop\n\tnop_s\n1:"
                    :: "r"(count) : "lp_count", "memory");
  }
- uint32_t probe_argument=count!=0u ? count : UINT32_MAX;
- return alternate ? opencfw_em9305_timer_rom_probe_b(probe_argument) :
-                    opencfw_em9305_timer_rom_probe_a(probe_argument);
+ return alternate ? opencfw_em9305_timer_rom_probe_b(count) :
+                    opencfw_em9305_timer_rom_probe_a(count);
 }
 /* Native 0x313bc0/0x313bec search, including its final two decrements. */
 static uint32_t timer_calibrate(int alternate)
@@ -58,7 +63,7 @@ uint32_t opencfw_em9305_controller_timer_word(uint32_t a,uint32_t b,
 {
  uint32_t packed=a+(b<<8)+(c<<16)+(d<<24);
  uint32_t irq;
- __asm__ volatile("clri %0\n\tsync" : "=r"(irq) :: "memory");
+ irq=(uint32_t)__builtin_arc_clri(); __builtin_arc_sync();
  volatile uint32_t *word=(volatile uint32_t *)(uintptr_t)0xf00414u;
  uint32_t old=*word;
  if (old!=packed) {
@@ -68,7 +73,7 @@ uint32_t opencfw_em9305_controller_timer_word(uint32_t a,uint32_t b,
   *word=packed;
   *control=previous;
  }
- __asm__ volatile("seti %0" :: "r"(irq) : "memory");
+ __builtin_arc_seti((int)irq);
  return old!=packed;
 }
 /* Native 0x30f944..0x30f998. Product tables are actual root pointers,
@@ -196,11 +201,11 @@ uint32_t opencfw_em9305_timer_initialize(uint32_t incoming)
 uint32_t opencfw_em9305_timer_irq_enable(uint32_t enable)
 {
  uint32_t irq;
- __asm__ volatile("clri %0\n\tsync" : "=r"(irq) :: "memory");
+ irq=(uint32_t)__builtin_arc_clri(); __builtin_arc_sync();
  volatile uint8_t *control=(volatile uint8_t *)(uintptr_t)0xf00406u;
  uint32_t previous=*control;
  *control=(uint8_t)((previous & ~4u) | (enable != 0u ? 4u : 0u));
- __asm__ volatile("seti %0" :: "r"(irq) : "memory");
+ __builtin_arc_seti((int)irq);
  return (previous & 4u) >> 2;
 }
 uint32_t opencfw_em9305_timer_config_pair(uint32_t first,uint32_t second)
@@ -212,7 +217,7 @@ uint32_t opencfw_em9305_timer_config_pair(uint32_t first,uint32_t second)
 uint32_t opencfw_em9305_controller_prepare_timer(void)
 {
  *(volatile uint32_t *)(uintptr_t)0xf00964u=1;
- __asm__ volatile("sync" ::: "memory");
+ __builtin_arc_sync();
  *(volatile uint32_t *)(uintptr_t)0xf00954u=1;
  *(volatile uint32_t *)(uintptr_t)0xf00948u=1;
  uint32_t first=*(volatile uint32_t *)(uintptr_t)0x80fba0u;
@@ -230,7 +235,7 @@ uint32_t opencfw_em9305_controller_timer_reset(uint32_t incoming)
  (void)opencfw_em9305_timer_enable(1);
  (void)opencfw_em9305_timer_irq_enable(1);
  *(volatile uint32_t *)(uintptr_t)0xf009acu=1;
- __asm__ volatile("sync" ::: "memory");
+ __builtin_arc_sync();
  *(volatile uint32_t *)(uintptr_t)0xf00990u=1;
  *(volatile uint32_t *)(uintptr_t)0xf0099cu=1;
  return 0xf009acu;

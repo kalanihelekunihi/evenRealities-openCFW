@@ -12,7 +12,7 @@ extern void *audio_uart_lv_list_prepend_482b12(void *);
 extern void audio_uart_lv_anim_init_4503d6(void *);
 extern void audio_uart_lv_anim_values_4506ce(void *, int32_t, int32_t);
 extern void *audio_uart_lv_anim_start_450408(void *);
-extern void audio_uart_lvgl_log(uint32_t, const char *, uint32_t,
+extern void lv_log_add(uint32_t, const char *, uint32_t,
                                const char *, const char *, ...);
 
 /* Callback bodies are separate native spans and remain explicit providers. */

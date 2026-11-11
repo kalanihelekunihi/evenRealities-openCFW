@@ -1,6 +1,10 @@
 /* Native 0x52fcfc validates the on-flash EM9305 firmware header. Only its
  * first word is copied to the output; live file handle cell remains runtime. */
 #include <stdint.h>
+/* Stock-RAM literals rewritten to named objects (sim-test wave 2026-10-26,
+ * .waves/sim-fix/apply.py): g2ref_X is the linker symbol X. */
+#include <stdint.h>
+extern unsigned char g2ref_g2_stock_ram_20074948[] __asm__("g2_stock_ram_20074948");
 extern uint32_t audio_log_flags(void); /* 0x43d0ce */
 extern void audio_log_extended(uint8_t,const char *,const char *,const char *,
                                uint32_t,const char *,...); /* 0x43d574 */
@@ -28,7 +32,7 @@ static const char success_message[]=
     "Header read successfully: version=0x%08X, total_length=%d, record_count=%d, erase_pages_size=%d";
 static const char success_compact[]=
     "[srv.em9305]Header read successfully: version=0x%08X, total_length=%d, record_count=%d, erase_pages_size=%d";
-static volatile uint32_t *const handle_cell=(volatile uint32_t *)(uintptr_t)0x20074948u;
+static volatile uint32_t *const handle_cell=(volatile uint32_t *)(uintptr_t)((uint32_t)(uintptr_t)g2ref_g2_stock_ram_20074948);
 static void close_current(void) {
     void *file=(void *)(uintptr_t)*handle_cell;
     if(file!=0) {(void)audio_file_close(file);*handle_cell=0u;}

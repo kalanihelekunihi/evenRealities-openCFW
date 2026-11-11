@@ -77,8 +77,6 @@ uint32_t audio_tracepoint_file_write_474682(const void *buffer, uint32_t size,
     }
     if ((uint32_t)written < bytes)
         log_short(written, bytes);
-    uint32_t items;
-    __asm volatile("udiv %0, %1, %2" : "=r"(items)
-                   : "r"((uint32_t)written), "r"(size));
-    return items;
+    /* UDIV: a zero size gives 0 (DIV_0_TRP is never set). */
+    return size != 0u ? (uint32_t)written / size : 0u;
 }

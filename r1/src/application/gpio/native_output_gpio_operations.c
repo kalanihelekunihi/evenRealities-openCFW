@@ -16,7 +16,10 @@ _Static_assert(sizeof(r1_output_gpio_configuration)==340 && offsetof(r1_output_g
 static volatile r1_output_gpio_record *find_record(volatile generic_device_registry_device *device) {
  for(uint8_t i=0;i<5;++i){
   volatile r1_output_gpio_record *record=&r1_output_gpio.records[i];
-  if(strcmp(record->name,device->name)==0)return record;
+  /* Stock loads the device name before the selected record name. */
+  const char *device_name=device->name;
+  const char *record_name=record->name;
+  if(strcmp(record_name,device_name)==0)return record;
  }
  return 0;
 }
@@ -30,8 +33,8 @@ uint32_t r1_output_gpio_slot1c(volatile generic_device_registry_device *device,c
  record->reserved_14[2]=configuration[2];
  return 0;
 }
-/* Consume the attributable Nordic port decoder unchanged. Saved frame slots
- * retain native raw r3 results; helper stack history is still a separate gate. */
+/* Consume the attributable Nordic port decoder unchanged. The decoded pin
+ * is local scratch; the C operation does not promise caller-clobbered R3. */
 __attribute__((used,noinline)) static uintptr_t toggle_kernel(const volatile r1_output_gpio_record *record,uint32_t *saved_r3) {
  *saved_r3=record->pin;
  NRF_GPIO_Type *port=nrf_gpio_pin_port_decode(saved_r3);
@@ -39,8 +42,9 @@ __attribute__((used,noinline)) static uintptr_t toggle_kernel(const volatile r1_
  port->OUTSET=mask&~out;port->OUTCLR=mask&out;
  return (uintptr_t)port;
 }
-__attribute__((naked,noinline)) uintptr_t r1_output_gpio_driver14(const void *record __attribute__((unused))) {
- __asm__ volatile("push {r3,lr}\nmov r1,sp\nbl toggle_kernel\npop {r3,pc}");
+uintptr_t r1_output_gpio_driver14(const void *record) {
+ uint32_t pin=0;
+ return toggle_kernel(record,&pin);
 }
 __attribute__((used,noinline)) static uint32_t read_kernel(volatile generic_device_registry_device *device,uint32_t ignored,volatile uint8_t *output,uint32_t *saved_r3) {
  (void)ignored;
@@ -51,6 +55,7 @@ __attribute__((used,noinline)) static uint32_t read_kernel(volatile generic_devi
  *output=(uint8_t)((port->IN>>*saved_r3)&1u);
  return 0;
 }
-__attribute__((naked,noinline)) uint32_t r1_output_gpio_slot10(void *device __attribute__((unused)),uint32_t operation __attribute__((unused)),void *output __attribute__((unused))) {
- __asm__ volatile("push {r3,r4,r5,r6,r7,lr}\nmov r3,sp\nbl read_kernel\npop {r3,r4,r5,r6,r7,pc}");
+uint32_t r1_output_gpio_slot10(void *device,uint32_t operation,void *output) {
+ uint32_t pin=0;
+ return read_kernel(device,operation,output,&pin);
 }

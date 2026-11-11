@@ -12,7 +12,7 @@ extern void opencfw_provider_41ac5a(uint32_t);
 extern void opencfw_provider_41fa50(void);
 extern void opencfw_provider_41e1e8(void);
 extern void opencfw_provider_41e266(uint32_t);
-extern int32_t opencfw_provider_41ba80(uint32_t);
+extern uint32_t am_hal_pwrctrl_mcu_mode_select(uint32_t); /* 0x41ba80 */
 extern void opencfw_provider_415fae(const char *, uint32_t);
 extern void opencfw_provider_41fd70(void);
 extern void opencfw_provider_420476(void);
@@ -38,7 +38,6 @@ __attribute__((noreturn, noinline))
 void opencfw_boot_main_terminal_spin(void)
 {
     for (;;) {
-        __asm__ volatile("b ." ::: "memory");
     }
 }
 
@@ -54,7 +53,7 @@ void opencfw_boot_main_init(uint32_t entry_argument)
     opencfw_provider_41e1e8();
     opencfw_provider_41e266(1);
 
-    int32_t mode_status = opencfw_provider_41ba80(2);
+    int32_t mode_status = (int32_t)am_hal_pwrctrl_mcu_mode_select(2);
     if (mode_status != 0)
         opencfw_provider_415fae(mode_error, (uint32_t)mode_status);
 
@@ -69,3 +68,6 @@ void opencfw_boot_main_init(uint32_t entry_argument)
     runtime_callback();
     opencfw_boot_main_terminal_spin();
 }
+
+/* Stock entry names that branch straight to the provider above. */
+__typeof__(opencfw_boot_main_init) opencfw_boot_platform_system_init __attribute__((alias("opencfw_boot_main_init")));

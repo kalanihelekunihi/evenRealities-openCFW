@@ -1,0 +1,47 @@
+{
+  "schema": "opencfw.g2.case.flash-primask-source.v1",
+  "date": "2026-11-11",
+  "reference": {
+    "payload": "g2/blobs/official/g2-2.2.6.10/firmware_box.bin",
+    "header_bytes": 32,
+    "image_base": "0x08000000",
+    "stock_function": "0x08003f38 case_flash_copy_operation",
+    "stock_sequence": [
+      "0x08003f48 mrs r2, PRIMASK",
+      "0x08003f4c cpsid i",
+      "0x08003f4e..0x08003f58 copy 64 words",
+      "0x08003f5a..0x08003f60 wait for FLASH_SR busy flags to clear",
+      "0x08003f62 msr PRIMASK, r2"
+    ]
+  },
+  "change": {
+    "source": "g2/src/case/legacy-default/flash_copy_candidate.c",
+    "summary": "Preserve and restore the caller's PRIMASK across the RAM-to-flash copy; remove CONTROL-based conditional interrupt enable.",
+    "linked_source_function": "0x0800112c case_flash_copy_operation",
+    "linked_source_sequence": [
+      "0x0800113a mrs r3, PRIMASK",
+      "0x0800113e cpsid i",
+      "0x08001142..0x08001148 copy 64 words",
+      "0x0800114a..0x08001150 wait for FLASH_SR busy flags to clear",
+      "0x08001152 msr PRIMASK, r3"
+    ]
+  },
+  "verification": {
+    "manifest_check": "g2: 4890 units, 4551 source files, 1 not built",
+    "case_compile": "366/366; zero duplicate strong symbols and zero unresolved",
+    "all_compile": "4885/4885 enabled units; zero failures and zero duplicate strong symbols",
+    "all_strict_links": 7,
+    "case_link_bytes": 60172,
+    "case_link_sha256": "ec3c2b6f6eb06c07ca899cfd8d0b5daa9f62fb16ae5a2d1603696863822d47b4",
+    "source_bundle_bytes": 4638016,
+    "source_bundle_sha256": "26fe401230373641c1e280bc77a22ab37ab7551b7d652ff1f68ccd4432e361a9",
+    "source_bundle_matches_locked_target": false,
+    "source_completeness_proven": false,
+    "build_report": "build/case-flash-primask-20261111/all/report.json",
+    "link_report": "build/case-flash-primask-20261111/bundle/link-report.json"
+  },
+  "limits": [
+    "The linked sequence confirms interrupt-state preservation, not byte identity for the whole function.",
+    "Physical CASE flash persistence, timing, and boot remain unverified."
+  ]
+}

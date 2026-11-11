@@ -16,8 +16,11 @@ extern int32_t gx8002_resident_flash_dispatch_read_247b8(
     const volatile uint8_t *, uint32_t, uint32_t, uint32_t);
 extern void gx8002_resident_memcpy_25738(void *, const void *, uint32_t);
 extern uint32_t gx8002_xip_tws_publish_10206c24(const char *, ...);
-/* Stock leaves task words 0, 3, and 4 untouched in its 32-byte stack frame.
- * This target ISA binding preserves those exact incoming stack bytes.
+/* The task is GX_SNPU_TASK {module_id, ops, data, input, output, cmd,
+ * tmp_mem, weight} (NationalChip lvp_kws lvp/common/snpu_engine/lvp_kws.c).
+ * Deliberate change: stock leaves module_id, input and output (words 0, 3,
+ * 4) as uninitialised stack bytes; they are set before each SNPU run, so
+ * they are 0 here instead of stale stack contents.
  */
 
 static uint32_t native_signed_align4(int32_t size)
@@ -38,7 +41,9 @@ void gx8002_xip_kws_flash_load_10206cb0(void)
     int32_t command_size = gx8002_xip_model_cmd_size_10208bf4();
     int32_t weight_size = gx8002_xip_model_weight_size_10208bfc();
     uint32_t task[8];
-    __asm__ volatile ("" ::: "r9"); /* Native r4-r9/r15 save and 32-byte frame. */
+    task[0] = 0;   /* module_id */
+    task[3] = 0;   /* input */
+    task[4] = 0;   /* output */
     task[1] = UINT32_C(0x20000000);
     task[2] = task[1] + native_signed_align4(
         gx8002_xip_model_ops_size_10208c04());
@@ -68,16 +73,5 @@ void gx8002_xip_kws_flash_load_10206cb0(void)
         gx8002_xip_tws_publish_10206c24("[LVP_KWS ]Read Flash Failed\n");
         return;
     }
-    uint32_t ambient0, ambient3, ambient4;
-    __asm__ volatile (
-        "ld.w %0, (%3, 0)\n\t"
-        "ld.w %1, (%4, 0)\n\t"
-        "ld.w %2, (%5, 0)"
-        : "=&r"(ambient0), "=&r"(ambient3), "=&r"(ambient4)
-        : "r"(&task[0]), "r"(&task[3]), "r"(&task[4])
-        : "memory");
-    task[0] = ambient0;
-    task[3] = ambient3;
-    task[4] = ambient4;
     gx8002_xip_set_snpu_task_10208c14(task);
 }

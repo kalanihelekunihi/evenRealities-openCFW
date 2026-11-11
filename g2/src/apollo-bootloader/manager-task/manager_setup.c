@@ -14,7 +14,7 @@ void opencfw_provider_42e254(void) {
     WORD(0x20000510)=opencfw_provider_4164da(0);
     if (!WORD(0x20000510)) {
         (void)opencfw_bl_mask_interrupts();WORD(UINT32_MAX)=0;
-        for (;;)__asm__ volatile("b .":::"memory");
+        for (;;){ }
     }
 }
 /* Stock 0x42e284 (event_callback_dispatch_42e284) */

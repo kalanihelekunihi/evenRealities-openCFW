@@ -1,0 +1,131 @@
+{
+  "schema_version": 1,
+  "stock_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "entries": {
+    "0x4011c": "r1_hr_sync_flush",
+    "0x442f4": "r1_spo2_sync_flush",
+    "0x4101c": "r1_hrv_sync_flush",
+    "0x3c578": "r1_activity_day_packet_flush"
+  },
+  "unit": {
+    "source": "r1/src/application/runtime/native_health_packet_flush.c",
+    "source_sha256": "3dc9d3bfd097e495a5db80ca6de888709d3b311e782135e47d839f4a24d6ecb8",
+    "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-packet-flush-reviewed-c/r1/r1-application/r1__src__application__runtime__native_health_packet_flush.c.o",
+    "object_sha256": "70a8f32cd97d6891162236128b913441e83bdbf685d3fc8d9edac0ac6a928451"
+  },
+  "report": "build/sources-goal-r1-packet-flush-reviewed-c/report.json",
+  "report_sha256": "52a9284ed3dc28e88c1d9983b707bd9ff0ac56d0d56b22b5fc2d25cdff58e810",
+  "behavior": {
+    "pairs": 870,
+    "source_posts": 370,
+    "digest": "21161b6b5621529ebc823712a44d8de8866b396018d46b835adfa91be0f2e27c",
+    "actual_C": [
+      "four flush roots",
+      "four builder resets"
+    ],
+    "modeled_boundaries": [
+      "clock/logging",
+      "allocator/free",
+      "live cache getter",
+      "sync field and four event post providers"
+    ],
+    "limits": [
+      "Mapped valid builders; HRV/activity null inputs excluded as native has no guard",
+      "Consistent flags/allocation capacity; spare declared count and controlled provider mutations tested",
+      "Packet bytes/aux padding/ownership transfer compared; event post internals and physical transmission not proved"
+    ]
+  },
+  "merge_integration": {
+    "pairs": 612,
+    "digest": "0efed771eb9eef4bbee4abc9c8f137b7151aca9ab96d0dd77d77d0ccf62e084f",
+    "actual_flush_calls": 260,
+    "actual_C": [
+      "four merges through actual C flushes",
+      "empty checks and builder resets",
+      "existing enqueue/consume paths in sequences",
+      "shared queue owners"
+    ],
+    "modeled_boundaries": [
+      "clock, logging, allocator/free, sync field and four event-post providers"
+    ],
+    "limits": [
+      "Mapped distinct builders and well-formed queued slot indices; valid queue head",
+      "Byte counts through255 and provider-time queue mutation tested",
+      "Source and stock flush bodies execute; event-post internals, physical transmission and full firmware remain unproved"
+    ]
+  },
+  "negative_controls": {
+    "wrong-future-equality": {
+      "rejected": true,
+      "diagnostic": "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-packet-flush-c/verify.py\", line 70, in pair\n    a=run(False,**kw);b=run(True,**kw);assert a==b,(kw,[k for k in a if a[k]!=b[k]],a['trace'],b['trace']);digest.update(json.dumps([kw,a]).encode());pairs+=1;posts+=state['posts']\n                                              ^^^^\nAssertionError: ({'kind': 0, 'day': 999, 'stamp': 1000, 'modes': (7,)}, ['trace', 'packet', 'ack', 'posts'], [('now', []), ('malloc', [16, 537018368]), ('cache0', []), ('malloc', [8, 537022464]), ('block', []), ('post0', [16, 2309737967, 32768, 1, 537022464, '01d4fee70300000f203142fe05080b0e', '55696969e8030000']), ('mode', [7]), ('ring', [213909504, '[RING]hr_sync sent: day:%u count:%u max_ts:%u', 999, 1, 1000]), ('mode', [7]), ('log3', [1835011, 'hr_sync sent: day:%u count:%u max_ts:%u', 999, 1, 1000]), ('free', [537018368, '01d4fee70300000f203142fe05080b0e'])], [('now', []), ('mode', [7]), ('ring', [146800640, '[RING]hr_sync flush drop future packet day:%u max_ts:%u now:%u', 999, 1000, 1000]), ('mode', [7]), ('log3', [1835010, 'hr_sync flush drop future packet day:%u max_ts:%u now:%u', 999, 1000, 1000])])\n"
+    },
+    "wrong-activity-day-filter": {
+      "rejected": true,
+      "diagnostic": "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-packet-flush-c/verify.py\", line 70, in pair\n    a=run(False,**kw);b=run(True,**kw);assert a==b,(kw,[k for k in a if a[k]!=b[k]],a['trace'],b['trace']);digest.update(json.dumps([kw,a]).encode());pairs+=1;posts+=state['posts']\n                                              ^^^^\nAssertionError: ({'kind': 3, 'day': 1001, 'stamp': 999, 'modes': (7,)}, ['trace', 'packet', 'ack', 'posts'], [('now', []), ('malloc', [14, 537018368]), ('malloc', [8, 537022464]), ('block', []), ('post3', [14, 2309737967, 32768, 1, 537022464, '01d4fee903000005080b0e111417', '55696969e7030000']), ('mode', [7]), ('ring', [213909504, '[RING]activity_sync sent: day:%u count:%u max_ts:%u', 1001, 1, 999]), ('mode', [7]), ('log3', [1835011, 'activity_sync sent: day:%u count:%u max_ts:%u', 1001, 1, 999]), ('free', [537018368, '01d4fee903000005080b0e111417'])], [('now', []), ('mode', [7]), ('ring', [146800640, '[RING]activity_sync flush drop future packet day:%u max_ts:%u now:%u', 1001, 999, 1000]), ('mode', [7]), ('log3', [1835010, 'activity_sync flush drop future packet day:%u max_ts:%u now:%u', 1001, 999, 1000])])\n"
+    },
+    "clear-builder-on-allocation-failure": {
+      "rejected": true,
+      "diagnostic": "ack,context,post_result,modes in itertools.product(range(4),range(4),[False,True],[False,True],[0,1],[0,1],[(0,),(7,),(0,4,2,1,2)]):pair(kind=kind,layout=layout,allocate=allocate,allocate_ack=allocate_ack,context=context,post_result=post_result,modes=modes)\n                                                                                                                                                                          ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-packet-flush-c/verify.py\", line 70, in pair\n    a=run(False,**kw);b=run(True,**kw);assert a==b,(kw,[k for k in a if a[k]!=b[k]],a['trace'],b['trace']);digest.update(json.dumps([kw,a]).encode());pairs+=1;posts+=state['posts']\n                                              ^^^^\nAssertionError: ({'kind': 0, 'layout': 1, 'allocate': False, 'allocate_ack': False, 'context': 0, 'post_result': 0, 'modes': (0,)}, ['builder'], [('now', []), ('malloc', [16, 0]), ('mode', [0]), ('mode', [0]), ('mode', [0])], [('now', []), ('malloc', [16, 0]), ('mode', [0]), ('mode', [0]), ('mode', [0])])\n"
+    },
+    "wrong-hrv-packet-header": {
+      "rejected": true,
+      "diagnostic": "e_ack,context,post_result,modes in itertools.product(range(4),range(4),[False,True],[False,True],[0,1],[0,1],[(0,),(7,),(0,4,2,1,2)]):pair(kind=kind,layout=layout,allocate=allocate,allocate_ack=allocate_ack,context=context,post_result=post_result,modes=modes)\n                                                                                                                                                                          ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-packet-flush-c/verify.py\", line 70, in pair\n    a=run(False,**kw);b=run(True,**kw);assert a==b,(kw,[k for k in a if a[k]!=b[k]],a['trace'],b['trace']);digest.update(json.dumps([kw,a]).encode());pairs+=1;posts+=state['posts']\n                                              ^^^^\nAssertionError: ({'kind': 2, 'layout': 1, 'allocate': False, 'allocate_ack': False, 'context': 0, 'post_result': 0, 'modes': (0,)}, ['trace'], [('now', []), ('malloc', [20, 0]), ('mode', [0]), ('mode', [0]), ('mode', [0])], [('now', []), ('malloc', [19, 0]), ('mode', [0]), ('mode', [0]), ('mode', [0])])\n"
+    },
+    "lost-row-compaction": {
+      "rejected": true,
+      "diagnostic": "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-packet-flush-c/verify.py\", line 70, in pair\n    a=run(False,**kw);b=run(True,**kw);assert a==b,(kw,[k for k in a if a[k]!=b[k]],a['trace'],b['trace']);digest.update(json.dumps([kw,a]).encode());pairs+=1;posts+=state['posts']\n                                              ^^^^\nAssertionError: ({'kind': 0, 'layout': 2, 'allocate': True, 'allocate_ack': False, 'context': 0, 'post_result': 0, 'modes': (0,)}, ['trace', 'packet'], [('now', []), ('malloc', [24, 537018368]), ('cache0', []), ('block', []), ('post0', [24, 2309737967, 32768, 0, 0, '03d4fe640000000f203142fe05080b0e1316191ca6a9acaf', None]), ('mode', [0]), ('mode', [0]), ('mode', [0]), ('free', [537018368, '03d4fe640000000f203142fe05080b0e1316191ca6a9acaf'])], [('now', []), ('malloc', [24, 537018368]), ('cache0', []), ('block', []), ('post0', [24, 2309737967, 32768, 0, 0, '03d4fe640000000f203142fe05080b0ea5a5a5a51316191c', None]), ('mode', [0]), ('mode', [0]), ('mode', [0]), ('free', [537018368, '03d4fe640000000f203142fe05080b0ea5a5a5a51316191c'])])\n"
+    },
+    "wrong-ack-timestamp": {
+      "rejected": true,
+      "diagnostic": "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-packet-flush-c/verify.py\", line 70, in pair\n    a=run(False,**kw);b=run(True,**kw);assert a==b,(kw,[k for k in a if a[k]!=b[k]],a['trace'],b['trace']);digest.update(json.dumps([kw,a]).encode());pairs+=1;posts+=state['posts']\n                                              ^^^^\nAssertionError: ({'kind': 0, 'layout': 1, 'allocate': True, 'allocate_ack': True, 'context': 1, 'post_result': 0, 'modes': (0,)}, ['trace', 'ack'], [('now', []), ('malloc', [16, 537018368]), ('cache0', []), ('malloc', [8, 537022464]), ('block', []), ('post0', [16, 2309737967, 32768, 1, 537022464, '01d4fe640000000f203142fe05080b0e', '5569696958020000']), ('mode', [0]), ('mode', [0]), ('mode', [0]), ('free', [537018368, '01d4fe640000000f203142fe05080b0e'])], [('now', []), ('malloc', [16, 537018368]), ('cache0', []), ('malloc', [8, 537022464]), ('block', []), ('post0', [16, 2309737967, 32768, 1, 537022464, '01d4fe640000000f203142fe05080b0e', '5569696901000000']), ('mode', [0]), ('mode', [0]), ('mode', [0]), ('free', [537018368, '01d4fe640000000f203142fe05080b0e'])])\n"
+    },
+    "free-transferred-context": {
+      "rejected": true,
+      "diagnostic": "^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-packet-flush-c/verify.py\", line 64, in run\n    v.emu_start((syms[names[kind]] if candidate else roots[names[kind]])|1,STOP,count=300000)\n    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 769, in emu_start\n    raise self._hook_exception\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 363, in wrapper\n    return func(uc, *args, **kwargs)\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 1063, in __hook_code_cb\n    callback(uc, address, size, user_data)\n    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-packet-flush-c/verify.py\", line 43, in hook\n    elif n=='free':assert r0==PACKET;out=[r0,bytes(v.mem_read(PACKET,state['packet_length'])).hex()]\n                          ^^^^^^^^^^\nAssertionError\n"
+    },
+    "lost-final-reset": {
+      "rejected": true,
+      "diagnostic": "                                                                 ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-packet-flush-c/verify.py\", line 70, in pair\n    a=run(False,**kw);b=run(True,**kw);assert a==b,(kw,[k for k in a if a[k]!=b[k]],a['trace'],b['trace']);digest.update(json.dumps([kw,a]).encode());pairs+=1;posts+=state['posts']\n                                              ^^^^\nAssertionError: ({'kind': 0, 'layout': 1, 'allocate': True, 'allocate_ack': False, 'context': 0, 'post_result': 0, 'modes': (0,)}, ['builder'], [('now', []), ('malloc', [16, 537018368]), ('cache0', []), ('block', []), ('post0', [16, 2309737967, 32768, 0, 0, '01d4fe640000000f203142fe05080b0e', None]), ('mode', [0]), ('mode', [0]), ('mode', [0]), ('free', [537018368, '01d4fe640000000f203142fe05080b0e'])], [('now', []), ('malloc', [16, 537018368]), ('cache0', []), ('block', []), ('post0', [16, 2309737967, 32768, 0, 0, '01d4fe640000000f203142fe05080b0e', None]), ('mode', [0]), ('mode', [0]), ('mode', [0]), ('free', [537018368, '01d4fe640000000f203142fe05080b0e'])])\n"
+    }
+  },
+  "audit": {
+    "unchanged_prior_objects": 739,
+    "changed_objects": {
+      "r1/src/application/runtime/native_health_notification_stages.c": {
+        "allocated_bytes_unchanged": true,
+        "named_relocations_changed": 8
+      },
+      "r1/src/application/runtime/native_health_offline_merge.c": {
+        "allocated_bytes_unchanged": true,
+        "named_relocations_changed": 4
+      }
+    },
+    "only_named_relocation_changes": 12,
+    "renamed_relocations": {
+      "r1_health_sync_provider_0004011c": "r1_hr_sync_flush",
+      "r1_health_sync_provider_000442f4": "r1_spo2_sync_flush",
+      "r1_health_sync_provider_0004101c": "r1_hrv_sync_flush",
+      "r1_health_sync_provider_0003c578": "r1_activity_day_packet_flush"
+    },
+    "new_units": 1,
+    "added_application_imports": [
+      "r1_event_post_module1",
+      "r1_event_post_module2",
+      "r1_event_post_module4",
+      "r1_event_post_module5",
+      "r1_sync_block_field_get"
+    ],
+    "removed_application_imports": [
+      "r1_health_sync_provider_0003c578",
+      "r1_health_sync_provider_0004011c",
+      "r1_health_sync_provider_0004101c",
+      "r1_health_sync_provider_000442f4"
+    ],
+    "bootloader_imports_unchanged": true,
+    "initial_and_reviewed_flush_objects_identical": true
+  },
+  "source_check": "python3 tools/build/sources.py check\ng2: 5049 units, 4732 source files, 0 not built\nr1: 742 units, 546 source files, 0 not built",
+  "rea": "health-packet-flush-c-rea.json",
+  "instruction_identity_proven": false,
+  "image_integration_proven": false
+}

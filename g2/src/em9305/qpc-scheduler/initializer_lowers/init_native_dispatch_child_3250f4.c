@@ -1,185 +1,89 @@
-/* Full native unframed SDU reassembly preserving queue/store order. */
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_dispatch_child_3250f4\n"
-".type opencfw_em9305_dispatch_child_3250f4,@function\n"
-"opencfw_em9305_dispatch_child_3250f4:\n"
-"L3250f4:\n"
-"enter_s [r13-r18,fp,blink]\n"
-"L3250f6:\n"
-"sub_s sp,sp,0x34\n"
-"L3250f8:\n"
-"mov_s r16,r1\n"
-"L3250fa:\n"
-"mov_s r13,r0\n"
-"L3250fc:\n"
-"add r0,r0,0x10\n"
-"L3250fe:\n"
-"add r1,sp,0x33\n"
-"L325102:\n"
-"bl.d opencfw_em9305_wsf_event_peek\n"
-"L325106:\n"
-"mov_s r18,r0\n"
-"L325108:\n"
-"breq.d.nt r16,0,L325154\n"
-"L32510c:\n"
-"mov_s r17,r0\n"
-"L32510e:\n"
-"add_s r0,sp,0\n"
-"L325110:\n"
-"bl.d opencfw_em9305_ll_received_decode_31bc7c\n"
-"L325114:\n"
-"mov_s r1,r16\n"
-"L325116:\n"
-"ldb r0,[sp,2]\n"
-"L32511a:\n"
-"mov_s r14,0\n"
-"L32511c:\n"
-"mov_s r15,0\n"
-"L32511e:\n"
-"breq_s r0,0,L32512e\n"
-"L325120:\n"
-"breq.nt r0,0x1,L32516a\n"
-"L325124:\n"
-"breq.nt r0,0x3,L325168\n"
-"L325128:\n"
-"brne.nt r0,0x2,L325160\n"
-"L32512c:\n"
-"mov_s r15,1\n"
-"L32512e:\n"
-"breq.d.nt r17,0,L325140\n"
-"L325132:\n"
-"add r1,sp,0x33\n"
-"L325136:\n"
-"bl.d opencfw_em9305_wsf_event_remove\n"
-"L32513a:\n"
-"mov_s r0,r18\n"
-"L32513c:\n"
-"bl opencfw_em9305_wsf_event_release\n"
-"L325140:\n"
-"ldh r0,[sp,14]\n"
-"L325144:\n"
-"ldb_s r1,[sp,0]\n"
-"L325146:\n"
-"mov_s r2,r16\n"
-"L325148:\n"
-"sth_s r0,[r13,0x18]\n"
-"L32514a:\n"
-"mov_s r0,r18\n"
-"L32514c:\n"
-"bl.d opencfw_em9305_ll_event_enqueue\n"
-"L325150:\n"
-"stb_s r14,[r13,0x1a]\n"
-"L325152:\n"
-"b_s L3251ac\n"
-"L325154:\n"
-"breq.d.nt r17,0,L325164\n"
-"L325158:\n"
-"mov_s r15,0\n"
-"L32515a:\n"
-"mov_s r15,1\n"
-"L32515c:\n"
-"stb 1,[r13,26]\n"
-"L325160:\n"
-"mov_s r14,r17\n"
-"L325162:\n"
-"b_s L3251ac\n"
-"L325164:\n"
-"mov_s r14,0\n"
-"L325166:\n"
-"b_s L3251ac\n"
-"L325168:\n"
-"mov_s r15,1\n"
-"L32516a:\n"
-"breq.d.nt r17,0,L32519a\n"
-"L32516e:\n"
-"mov_s r2,r16\n"
-"L325170:\n"
-"add_s r0,sp,0x18\n"
-"L325172:\n"
-"bl.d opencfw_em9305_ll_received_decode_31bc7c\n"
-"L325176:\n"
-"mov_s r1,r17\n"
-"L325178:\n"
-"ldh_s r0,[r13,0x18]\n"
-"L32517a:\n"
-"ld_s r3,[sp,0x2c]\n"
-"L32517c:\n"
-"ld r1,[sp,0x14]\n"
-"L32517e:\n"
-"mov_s r14,sp\n"
-"L325180:\n"
-"ldh_s r2,[r14,0x4]\n"
-"L325182:\n"
-"bl.d opencfw_em9305_memcpy\n"
-"L325186:\n"
-"add_s r0,r0,r3\n"
-"L325188:\n"
-"bl.d opencfw_em9305_wsf_event_release\n"
-"L32518c:\n"
-"mov_s r0,r16\n"
-"L32518e:\n"
-"ldh_s r1,[r13,0x18]\n"
-"L325190:\n"
-"ldh_s r0,[r14,0x4]\n"
-"L325192:\n"
-"mov_s r14,r17\n"
-"L325194:\n"
-"add_s r0,r0,r1\n"
-"L325196:\n"
-"sth_s r0,[r13,0x18]\n"
-"L325198:\n"
-"b_s L3251ac\n"
-"L32519a:\n"
-"ldh r0,[sp,4]\n"
-"L32519e:\n"
-"ldb_s r1,[sp,0]\n"
-"L3251a0:\n"
-"sth_s r0,[r13,0x18]\n"
-"L3251a2:\n"
-"bl.d opencfw_em9305_ll_event_enqueue\n"
-"L3251a6:\n"
-"mov_s r0,r18\n"
-"L3251a8:\n"
-"stb 1,[r13,26]\n"
-"L3251ac:\n"
-"breq_s r15,0,L3251d8\n"
-"L3251ae:\n"
-"breq_s r14,0,L3251d8\n"
-"L3251b0:\n"
-"add_s r0,sp,0\n"
-"L3251b2:\n"
-"bl.d opencfw_em9305_ll_received_decode_31bc7c\n"
-"L3251b6:\n"
-"mov_s r1,r14\n"
-"L3251b8:\n"
-"ldh_s r0,[r13,0x18]\n"
-"L3251ba:\n"
-"ldb_s r1,[r13,0x1a]\n"
-"L3251bc:\n"
-"stb 2,[sp,2]\n"
-"L3251c0:\n"
-"mov_s r2,sp\n"
-"L3251c2:\n"
-"sth_s r0,[r2,0xe]\n"
-"L3251c4:\n"
-"sth_s r0,[r2,0x4]\n"
-"L3251c6:\n"
-"stb_s r1,[sp,0x10]\n"
-"L3251c8:\n"
-"add_s r1,sp,0\n"
-"L3251ca:\n"
-"bl.d opencfw_em9305_dispatch_child_31b9ac\n"
-"L3251ce:\n"
-"mov_s r0,r14\n"
-"L3251d0:\n"
-"stb 0,[r13,26]\n"
-"L3251d4:\n"
-"sth 0,[r13,24]\n"
-"L3251d8:\n"
-"mov_s r0,r15\n"
-"L3251da:\n"
-"leave_s [r13-r18,fp,blink,pcl]\n"
-".size opencfw_em9305_dispatch_child_3250f4,.-opencfw_em9305_dispatch_child_3250f4\n"
-);
+#include <stdint.h>
+
+/* Native 0x3250f4..0x3251dc: unframed ISO SDU reassembly on the context's
+ * queue (+0x10). With no new PDU, a held fragment is flushed. A PDU whose
+ * LLID (decoded byte 2) is 0 or 2 starts a new SDU: any held fragment is
+ * dropped and the PDU is queued with its length (+0x18). LLID 1 or 3
+ * continues: appended to the held fragment (data and length grow), or
+ * queued as the head if none is held. LLID 2/3 complete the SDU; a
+ * completed held fragment gets its ISO header rewritten (PB 2, total
+ * length, status +0x1a). Returns 1 when an SDU completed. */
+extern uintptr_t opencfw_em9305_wsf_event_peek(uintptr_t,uintptr_t);
+extern uint32_t opencfw_em9305_ll_received_decode_31bc7c(uintptr_t,uintptr_t);
+extern uintptr_t opencfw_em9305_wsf_event_remove(uintptr_t,uintptr_t);
+extern uint32_t opencfw_em9305_wsf_event_release(uintptr_t);
+extern uint32_t opencfw_em9305_ll_event_enqueue(uintptr_t,uint32_t,uintptr_t);
+extern void *opencfw_em9305_memcpy(void *,const void *,uint32_t);
+extern uint32_t opencfw_em9305_dispatch_child_31b9ac(uintptr_t,uintptr_t);
+
+struct init_iso_header_3250f4 {
+    uint8_t handle;
+    uint8_t reserved0;
+    uint8_t llid;
+    uint8_t reserved1;
+    uint16_t length;
+    uint8_t reserved2[8];
+    uint16_t sdu_length;
+    uint8_t status;
+    uint8_t reserved3[3];
+    uintptr_t data;
+};
+
+uint32_t opencfw_em9305_dispatch_child_3250f4(uintptr_t context,uintptr_t pdu)
+{
+    struct init_iso_header_3250f4 header,held_header;
+    uint8_t handler;
+    uintptr_t queue=context+0x10u;
+    volatile uint16_t *total=(volatile uint16_t *)(context+0x18u);
+    volatile uint8_t *status=(volatile uint8_t *)(context+0x1au);
+    uintptr_t held=opencfw_em9305_wsf_event_peek(queue,(uintptr_t)&handler);
+    uintptr_t complete=0u;
+    uint32_t done=0u;
+    if(pdu==0u) {
+        if(held!=0u) {
+            done=1u;
+            *status=1u;
+            complete=held;
+        }
+    } else {
+        (void)opencfw_em9305_ll_received_decode_31bc7c((uintptr_t)&header,pdu);
+        uint32_t llid=header.llid;
+        if(llid==0u||llid==2u) {
+            done=llid==2u;
+            if(held!=0u)
+                (void)opencfw_em9305_wsf_event_release(
+                    opencfw_em9305_wsf_event_remove(queue,(uintptr_t)&handler));
+            *total=header.sdu_length;
+            *status=0u;
+            (void)opencfw_em9305_ll_event_enqueue(queue,header.handle,pdu);
+        } else if(llid==1u||llid==3u) {
+            done=llid==3u;
+            if(held==0u) {
+                *total=header.length;
+                (void)opencfw_em9305_ll_event_enqueue(queue,header.handle,pdu);
+                *status=1u;
+            } else {
+                (void)opencfw_em9305_ll_received_decode_31bc7c((uintptr_t)&held_header,held);
+                (void)opencfw_em9305_memcpy((void *)(held_header.data+*total),
+                                            (const void *)header.data,header.length);
+                (void)opencfw_em9305_wsf_event_release(pdu);
+                *total=(uint16_t)(header.length+*total);
+                complete=held;
+            }
+        } else {
+            complete=held;
+        }
+    }
+    if(done==0u||complete==0u) return done;
+    (void)opencfw_em9305_ll_received_decode_31bc7c((uintptr_t)&header,complete);
+    uint32_t length=*total;
+    uint32_t flags=*status;
+    header.llid=2u;
+    header.sdu_length=(uint16_t)length;
+    header.length=(uint16_t)length;
+    header.status=(uint8_t)flags;
+    (void)opencfw_em9305_dispatch_child_31b9ac(complete,(uintptr_t)&header);
+    *status=0u;
+    *total=0u;
+    return done;
+}

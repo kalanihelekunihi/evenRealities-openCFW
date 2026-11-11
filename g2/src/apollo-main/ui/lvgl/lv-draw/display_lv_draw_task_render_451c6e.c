@@ -16,7 +16,7 @@ extern void audio_uart_lv_area_transform_451082(const void *parent, void *area,
     uint32_t scale, uint32_t x, uint32_t y);
 extern void audio_uart_lv_area_expand_450b98(void *area, int32_t x, int32_t y);
 extern void audio_uart_ambiq_area_move_450bb2(void *area, int32_t x, int32_t y);
-extern void audio_uart_lvgl_log(uint32_t level, const char *source, uint32_t line,
+extern void lv_log_add(uint32_t level, const char *source, uint32_t line,
     const char *function, ...);
 
 static uint32_t rd32(const uint8_t *p) {
@@ -47,7 +47,7 @@ static uint8_t *descriptor(uint8_t *task, uint32_t bytes, uint32_t line,
                             const char *message) {
     uint8_t *d = (uint8_t *)audio_uart_lv_malloc(bytes);
     if (d == (void *)0) {
-        audio_uart_lvgl_log(3u, draw_rect_source, line, draw_rect_function,
+        lv_log_add(3u, draw_rect_source, line, draw_rect_function,
                             draw_rect_assert, message, draw_rect_oom);
         for (;;) { }
     }

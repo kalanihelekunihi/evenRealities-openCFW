@@ -110,7 +110,7 @@ extern uint32_t audio_uart_page_44104c(uint32_t hex);                         /*
 extern void audio_uart_page_44127e(void *obj, uint32_t color, uint32_t sel);  /* bg_color */
 extern void audio_uart_page_44129e(void *obj, uint32_t opa, uint32_t sel);    /* bg_opa */
 extern void audio_uart_page_4412ec(void *obj, uint32_t color, uint32_t sel);  /* border_color */
-extern void audio_uart_page_44131c(void *obj, int32_t v, uint32_t sel);       /* border_width */
+extern void lv_obj_set_style_border_width(void *obj, int32_t v, uint32_t sel);       /* border_width */
 extern void audio_uart_page_4413ce(void *obj, uint32_t opa, uint32_t sel);    /* image_opa */
 extern void audio_uart_page_44140e(void *obj, uint32_t color, uint32_t sel);  /* text_color */
 extern void audio_uart_display_audio_reset_441488(void *obj, uint32_t opa, uint32_t sel); /* opa */
@@ -122,9 +122,9 @@ extern void audio_uart_lv_scroll_to_y_44ea04(void *obj, int32_t y, uint32_t anim
 extern void audio_uart_lv_anim_init_4503d6(g2_lv_anim_t *anim);
 extern void *audio_uart_lv_anim_start_450408(const g2_lv_anim_t *anim);
 extern uint32_t audio_uart_anim_delete_450500(void *var, void (*exec_cb)(void *, int32_t)); /* lv_anim_delete */
-extern int32_t audio_uart_lv_anim_default_path_450634(void *anim);           /* lv_anim_path_linear */
-extern int32_t audio_uart_lv_anim_path_450672(void *anim);                   /* lv_anim_path_ease_out */
-extern int32_t audio_uart_lv_anim_path_450688(void *anim);                   /* lv_anim_path_ease_in_out */
+extern int32_t lv_anim_path_linear(void *anim);           /* lv_anim_path_linear */
+extern int32_t lv_anim_path_ease_out(void *anim);                   /* lv_anim_path_ease_out */
+extern int32_t lv_anim_path_ease_in_out(void *anim);                   /* lv_anim_path_ease_in_out */
 extern void audio_uart_lv_anim_values_4506ce(g2_lv_anim_t *anim, int32_t start, int32_t end);
 /* Static inline LVGL helper emitted in this TU (segment a-47): transform_scale_x + _y. */
 extern void lv_obj_set_style_transform_scale_5455c6(void *obj, int32_t v, uint32_t sel);
@@ -436,7 +436,7 @@ static void start_bounce(void *var, void (*exec_cb)(void *, int32_t), int32_t fr
     audio_uart_lv_anim_values_4506ce(&a, from, to);
     a.duration = NAV_ANIM_MS;
     a.exec_cb = exec_cb;
-    a.path_cb = audio_uart_lv_anim_path_450672;
+    a.path_cb = lv_anim_path_ease_out;
     a.reverse_duration = NAV_ANIM_MS;
     a.reverse_delay = 0u;
     a.completed_cb = completed_cb;
@@ -517,7 +517,7 @@ void navigation_focus_change_anim_start_54cbaa(void)
     a.exec_cb = navigation_focus_change_anim_exec_cb_54cb56;
     audio_uart_lv_anim_values_4506ce(&a, 0, 0);
     a.duration = NAV_ANIM_MS;
-    a.path_cb = audio_uart_lv_anim_default_path_450634;
+    a.path_cb = lv_anim_path_linear;
     a.completed_cb = navigation_focus_change_anim_ready_cb_54cb58;
     g2_navigation_location_animating_20074fe8 = 1u;
     (void)audio_uart_lv_anim_start_450408(&a);
@@ -579,7 +579,7 @@ void navigation_scroll_anim_start_54cece(void *obj, int32_t target_y, int32_t du
     audio_uart_lv_anim_values_4506ce(&a, audio_uart_lv_obj_y_44e498(obj), target_y);
     a.duration = duration;
     a.exec_cb = navigation_scroll_anim_exec_cb_54cebc;
-    a.path_cb = audio_uart_lv_anim_path_450688;
+    a.path_cb = lv_anim_path_ease_in_out;
     a.completed_cb = navigation_scroll_anim_ready_cb_54cec6;
     g2_navigation_location_animating_20074fe8 = 1u;
     (void)audio_uart_lv_anim_start_450408(&a);
@@ -720,7 +720,7 @@ void navigation_clear_location_focus_border_54d948(void)
 
     if (index >= 0 && (uint32_t)index < g2_navigation_location_list_20376c38.count &&
         g2_navigation_location_items_20072c68[index] != NULL)
-        audio_uart_page_44131c(g2_navigation_location_items_20072c68[index], 0, 0u);
+        lv_obj_set_style_border_width(g2_navigation_location_items_20072c68[index], 0, 0u);
 }
 
 /* Focused row: 50 % black fill, 1 px white border, opaque icon, white name. Other
@@ -744,7 +744,7 @@ void navigation_update_location_item_styles_54d9a4(void)
         if (i == g2_navigation_location_selected_200747a4) {
             audio_uart_page_44129e(item, 0x32u, 0u);
             audio_uart_page_44127e(item, audio_uart_page_44104c(0u), 0u);
-            audio_uart_page_44131c(item, 1, 0u);
+            lv_obj_set_style_border_width(item, 1, 0u);
             audio_uart_page_4412ec(item, audio_uart_page_44104c(0xffffffu), 0u);
             if (icon != NULL)
                 audio_uart_page_4413ce(icon, 0xffu, 0u);
@@ -752,7 +752,7 @@ void navigation_update_location_item_styles_54d9a4(void)
                 audio_uart_page_44140e(label, audio_uart_page_44104c(0xffffffu), 0u);
         } else {
             audio_uart_page_44129e(item, 0u, 0u);
-            audio_uart_page_44131c(item, 0, 0u);
+            lv_obj_set_style_border_width(item, 0, 0u);
             if (icon != NULL)
                 audio_uart_page_4413ce(icon, 100u, 0u);
             if (label != NULL) {
@@ -781,7 +781,7 @@ void navigation_clear_mode_focus_border_54daf4(void)
     uint32_t index = (uint32_t)g2_navigation_mode_selected_200747b4;
 
     if (index < NAV_MODE_COUNT && g2_navigation_mode_items_20074160[index] != NULL)
-        audio_uart_page_44131c(g2_navigation_mode_items_20074160[index], 0, 0u);
+        lv_obj_set_style_border_width(g2_navigation_mode_items_20074160[index], 0, 0u);
 }
 
 void navigation_update_mode_item_styles_54db30(void)
@@ -798,13 +798,13 @@ void navigation_update_mode_item_styles_54db30(void)
         if (i == g2_navigation_mode_selected_200747b4) {
             audio_uart_page_44129e(item, 0x32u, 0u);
             audio_uart_page_44127e(item, audio_uart_page_44104c(0u), 0u);
-            audio_uart_page_44131c(item, 1, 0u);
+            lv_obj_set_style_border_width(item, 1, 0u);
             audio_uart_page_4412ec(item, audio_uart_page_44104c(0xffffffu), 0u);
             if (label != NULL)
                 audio_uart_page_44140e(label, audio_uart_page_44104c(0xffffffu), 0u);
         } else {
             audio_uart_page_44129e(item, 0u, 0u);
-            audio_uart_page_44131c(item, 0, 0u);
+            lv_obj_set_style_border_width(item, 0, 0u);
             if (label != NULL)
                 audio_uart_page_44140e(label, audio_uart_page_44104c(NAV_GREY), 0u);
         }

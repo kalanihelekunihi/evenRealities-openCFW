@@ -14,7 +14,7 @@ uint32_t opencfw_bl_context_guard(void) {
 }
 uint32_t opencfw_bl_mask_interrupts(void) {
     uint32_t old;
-    __asm__ volatile("mrs %0, basepri\nmov r1, #48\nmsr basepri, r1\ndsb sy\nisb sy":"=r"(old)::"r1","memory");
+    __asm__ volatile("mrs %0, basepri\nmsr basepri, %1\ndsb sy\nisb sy":"=&r"(old):"r"(48u):"memory");
     return old;
 }
 void opencfw_bl_restore_interrupts(uint32_t value) {
@@ -27,7 +27,7 @@ void opencfw_bl_kernel_enter(void) {
 void opencfw_bl_kernel_exit(void) {
     if (!WORD(0x200004c4)) {
         (void)opencfw_bl_mask_interrupts();WORD(UINT32_MAX)=0;
-        for (;;)__asm__ volatile("b .":::"memory");
+        for (;;){ }
     }
     WORD(0x200004c4)--;
     if (!WORD(0x200004c4))opencfw_bl_restore_interrupts(0);
@@ -45,3 +45,9 @@ void opencfw_bl_ready_lists_initialize(void) {
     for (uint32_t i=0;i<5;i++)opencfw_boot_list_initialize((uint32_t *)(uintptr_t)(0x20026f34+20*i));
     WORD(0x20027138)=0x20026f34;WORD(0x2002713c)=0x20026f48;
 }
+
+/* Stock entry names that branch straight to the provider above. */
+__typeof__(opencfw_bl_context_guard) opencfw_provider_41602a __attribute__((alias("opencfw_bl_context_guard")));
+__typeof__(opencfw_bl_mask_interrupts) opencfw_boot_dfu_panic __attribute__((alias("opencfw_bl_mask_interrupts")));
+__typeof__(opencfw_bl_mask_interrupts) opencfw_provider_41b2f8 __attribute__((alias("opencfw_bl_mask_interrupts")));
+__typeof__(opencfw_bl_kernel_reschedule) reschedule __attribute__((alias("opencfw_bl_kernel_reschedule")));

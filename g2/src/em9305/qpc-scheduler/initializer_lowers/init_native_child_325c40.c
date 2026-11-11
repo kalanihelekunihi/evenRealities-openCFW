@@ -1,90 +1,25 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_325c40\n"
-".type opencfw_em9305_child_325c40,@function\n"
-"opencfw_em9305_child_325c40:\n"
-"L325c40:\n"
-"enter_s [r13-r17,blink]\n"
-"L325c42:\n"
-"mov_s r17,r0\n"
-"L325c44:\n"
-"mov_s r0,0x18\n"
-"L325c46:\n"
-"mov_s r16,r3\n"
-"L325c48:\n"
-"mov_s r14,r2\n"
-"L325c4a:\n"
-"bl.d opencfw_em9305_phy_packet_alloc_32d2f0\n"
-"L325c4e:\n"
-"mov_s r15,r1\n"
-"L325c50:\n"
-"mov_s r13,r0\n"
-"L325c52:\n"
-"breq_s r0,0,L325c9a\n"
-"L325c54:\n"
-"stb_s r15,[r13,0]\n"
-"L325c56:\n"
-"ldb_s r0,[r14,0]\n"
-"L325c58:\n"
-"mov_s r1,r17\n"
-"L325c5a:\n"
-"add r1,r1,262\n"
-"L325c5e:\n"
-"stb_s r0,[r13,0x1]\n"
-"L325c60:\n"
-"ldb_s r0,[r14,0x1]\n"
-"L325c62:\n"
-"mov_s r2,0xc\n"
-"L325c64:\n"
-"stb_s r0,[r13,0x2]\n"
-"L325c66:\n"
-"ldb_s r0,[r14,0x2]\n"
-"L325c68:\n"
-"stb_s r0,[r13,0x3]\n"
-"L325c6a:\n"
-"ldb_s r0,[r14,0x3]\n"
-"L325c6c:\n"
-"stb_s r0,[r13,0x4]\n"
-"L325c6e:\n"
-"ldb_s r0,[r14,0x4]\n"
-"L325c70:\n"
-"stb_s r0,[r13,0x5]\n"
-"L325c72:\n"
-"ldb_s r0,[r14,0x5]\n"
-"L325c74:\n"
-"stb_s r0,[r13,0x6]\n"
-"L325c76:\n"
-"ldb_s r0,[r14,0x6]\n"
-"L325c78:\n"
-"stb_s r0,[r13,0x7]\n"
-"L325c7a:\n"
-"ldb_s r0,[r14,0x7]\n"
-"L325c7c:\n"
-"stb r16,[r13,9]\n"
-"L325c80:\n"
-"stb_s r0,[r13,0x8]\n"
-"L325c82:\n"
-"ldb_s r0,[r1,0]\n"
-"L325c84:\n"
-"stb_s r0,[r13,0xa]\n"
-"L325c86:\n"
-"ldb_s r0,[r1,0x1]\n"
-"L325c88:\n"
-"mov_s r1,0xff\n"
-"L325c8a:\n"
-"stb_s r0,[r13,0xb]\n"
-"L325c8c:\n"
-"bl.d opencfw_em9305_memset\n"
-"L325c90:\n"
-"add_s r0,r13,0xc\n"
-"L325c92:\n"
-"mov_s r0,r17\n"
-"L325c94:\n"
-"bl.d opencfw_em9305_phy_packet_send_32d32c\n"
-"L325c98:\n"
-"mov_s r1,r13\n"
-"L325c9a:\n"
-"leave_s [r13-r17,blink,pcl]\n"
-".size opencfw_em9305_child_325c40,.-opencfw_em9305_child_325c40\n"
-);
+#include <stdint.h>
+
+/* Native 0x325c40..0x325c9c: send a 24-byte control PDU: opcode, the
+ * 8-byte field from the source, one parameter byte, the record's two
+ * bytes at +262 and twelve 0xff bytes. Returns 0 when no packet could be
+ * allocated. */
+extern uint32_t opencfw_em9305_phy_packet_alloc_32d2f0(uint32_t);
+extern void *opencfw_em9305_memset(void *,uint32_t,uint32_t);
+extern uint32_t opencfw_em9305_phy_packet_send_32d32c(uintptr_t,uintptr_t);
+
+uint32_t opencfw_em9305_child_325c40(uintptr_t record,uint32_t opcode,uintptr_t source,
+                                     uint32_t parameter)
+{
+    uintptr_t packet=opencfw_em9305_phy_packet_alloc_32d2f0(0x18u);
+    if(packet==0u) return 0u;
+    volatile uint8_t *pdu=(volatile uint8_t *)packet;
+    volatile uint8_t *in=(volatile uint8_t *)source;
+    pdu[0]=(uint8_t)opcode;
+    for(uint32_t i=0u;i<8u;++i) pdu[1u+i]=in[i];
+    pdu[9]=(uint8_t)parameter;
+    pdu[10]=*(volatile uint8_t *)(record+262u);
+    pdu[11]=*(volatile uint8_t *)(record+263u);
+    (void)opencfw_em9305_memset((void *)(packet+12u),0xffu,12u);
+    return opencfw_em9305_phy_packet_send_32d32c(record,packet);
+}

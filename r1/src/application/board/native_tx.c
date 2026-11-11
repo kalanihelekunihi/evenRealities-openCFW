@@ -1,8 +1,8 @@
 #include <stdint.h>
 #include <stddef.h>
 #include <string.h>
+#include "native_task_contexts.h"
 
-struct r1_tx_context { void (*create)(void),(*stop)(void); void *thread,*queue; };
 extern void r1_thread_create_e(void),r1_task_stop_65bc(void);
 extern void r1_thread_create_b(void),r1_task_stop_65e0(void);
 struct r1_tx_context r1_tx_channel1
@@ -75,3 +75,9 @@ int32_t r1_ble_tx_queue_dispatch_type1(uint32_t id,const void *payload,uint32_t 
 { return dispatch(1,id,payload,length); }
 int32_t r1_ble_tx_queue_dispatch_type2(uint32_t id,const void *payload,uint32_t length)
 { return dispatch(2,id,payload,length); }
+/* Stock 0x3dff8: the registry's type-two BLE send callback. */
+int32_t r1_ble_tx_type2_send(const void *payload,uint32_t length)
+{
+    uint32_t handle=r1_glasses_connection_handle_get();
+    return r1_ble_tx_queue_dispatch_type2(handle,payload,(uint16_t)length);
+}

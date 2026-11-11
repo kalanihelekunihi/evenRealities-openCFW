@@ -20,29 +20,5 @@ int32_t g2_audio_dump_snprintf(char *destination,uint32_t capacity,
     va_end(args);
     return n;
 }
-void audio_uart_lvgl_log(uint32_t level,const char *file,uint32_t line,
-                          const char *function,const char *format,...) {
-    if(level<2u||level>=6u) return;
-    uint32_t i=0u;
-    const volatile char *count_file=(const volatile char *)file;
-    while(count_file[i]!=0) ++i;
-    while(i!=0u) {
-        if(file[i]=='/'||file[i]=='\\') {++i;break;}
-        --i;
-    }
-    uint32_t tick=audio_uart_lv_tick();
-    uint8_t *s=audio_uart_display_lv_state;
-    uint32_t callback=*(uint32_t *)(void *)(s+0x16cu);
-    if(callback!=0u) {
-        char body[256],output[512];
-        va_list args;
-        va_start(args,format);
-        (void)g2_log_vformat(body,sizeof(body),format,args);
-        va_end(args);
-        (void)g2_audio_dump_snprintf(output,sizeof(output),line_format,
-             audio_uart_lv_level_names[level],tick/1000u,tick%1000u,
-             tick-*(uint32_t *)(void *)(s+0x170u),function,body,file+i,line);
-        ((lv_sink)(uintptr_t)callback)(level,output);
-    }
-    *(uint32_t *)(void *)(s+0x170u)=tick;
-}
+/* 0x44d25c is upstream lv_log_add (lvgl/src/misc/lv_log.c, same lv_global
+ * offsets 0x16c/0x170 as stock); the hand copy was removed. */

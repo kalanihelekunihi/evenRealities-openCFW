@@ -1,0 +1,206 @@
+{
+  "schema_version": 1,
+  "report": "build/sources-goal-r1-boot-runtime-final-c/report.json",
+  "report_sha256": "382151e431df3e42e46a25ce96aaf59206c4eea0c66939abb70f5e803f8b380d",
+  "manifest_sha256": "25db080190567ed16f85a919711dd47f459c60860058713f836dd00581262e18",
+  "behavior": {
+    "cases": 3551,
+    "groups": {
+      "memcpy": 240,
+      "__aeabi_memcpy": 240,
+      "__aeabi_memcpy4": 15,
+      "memset": 624,
+      "__aeabi_memclr4": 26,
+      "__aeabi_memclr8": 13,
+      "__aeabi_memclr": 104,
+      "memcmp": 512,
+      "stock_memcmp": 512,
+      "r1_native_memcmp": 512,
+      "strlen": 32,
+      "__aeabi_llsl": 512,
+      "probe_decode": 209
+    },
+    "digest": "f6ded628f27a91025a4cb8bdb4ff5ef33c9cb092db08d246eb434c06fe1beb2f",
+    "nanopb_samples": 209,
+    "units": [
+      {
+        "source": "r1/src/application/runtime/memory_eabi.c",
+        "source_sha256": "e89f73174230a5111606f175a2429695c62f178ace0b44478ab93497a9ebacff",
+        "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-boot-runtime-final-c/r1/r1-bootloader/r1__src__application__runtime__memory_eabi.c.o",
+        "object_sha256": "e26f26d06a6113b53a70667703a46d09ccdd26875e58d267c6242504f683ecc6"
+      },
+      {
+        "source": "third-party/upstream/musl-memory-1.2.5/memcpy.c",
+        "source_sha256": "1664d565f968b053ac33c5ac615c057a255a5821c8fa510fba61d4f63dee08e9",
+        "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-boot-runtime-final-c/r1/r1-bootloader/third-party__upstream__musl-memory-1.2.5__memcpy.c.o",
+        "object_sha256": "a4b54c7315f7ca2f8097e3f9afb4a9bcd7860c75649fc9e185d951c3ea0696cf"
+      },
+      {
+        "source": "third-party/upstream/musl-memory-1.2.5/memset.c",
+        "source_sha256": "2a74d9e7f988945e0d691d480b78d77a228da0d2be401c1000637cc879b2c0be",
+        "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-boot-runtime-final-c/r1/r1-bootloader/third-party__upstream__musl-memory-1.2.5__memset.c.o",
+        "object_sha256": "6c2f1a8f480c27d5bc20f79ac535dac28fbbdcaec12e69bad96721f724ec9057"
+      },
+      {
+        "source": "third-party/upstream/musl-memory-1.2.5/strlen.c",
+        "source_sha256": "cf9359c1bcee96df1f3a7ef0fb969339b7ed87b202d80dc7e7fcd6d1239b7484",
+        "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-boot-runtime-final-c/r1/r1-bootloader/third-party__upstream__musl-memory-1.2.5__strlen.c.o",
+        "object_sha256": "fd0c61958f4449d882369ed956af9ceff180dd584774155d3c4bdceacc6bcc4a"
+      },
+      {
+        "source": "r1/src/application/runtime/native_memory_compare.c",
+        "source_sha256": "be5716143db40ad8eaeb24ff52f63cc99dfab2cbf8ea08eced56a236b84f785a",
+        "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-boot-runtime-final-c/r1/r1-bootloader/r1__src__application__runtime__native_memory_compare.c.o",
+        "object_sha256": "e64911d6936de29a29ab040a54ee5a0b3d0c9f33546317803800606dca217b85"
+      },
+      {
+        "source": "third-party/upstream/llvm-compiler-rt-format-20.1.8/ashldi3.c",
+        "source_sha256": "7982c05b8a139ab662ac1a88be061669d7ee838d2153b42e4b0f4ec410bdf5a5",
+        "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-boot-runtime-final-c/r1/r1-bootloader/third-party__upstream__llvm-compiler-rt-format-20.1.8__ashldi3.c.o",
+        "object_sha256": "67e24b465580189c19a028f9a21b0ab3c4ab0598815fac57917707b1b43041de"
+      },
+      {
+        "source": "vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/external/nano-pb/pb_decode.c",
+        "source_sha256": "5ca6f2c09d117299bd540e5d3796634450c2a29f059dc5927d6c55d5517d04f0",
+        "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-boot-runtime-final-c/r1/r1-bootloader/vendor-cache__r1__nRF5_SDK_17.1.0_ddde560__external__nano-pb__pb_decode.c.o",
+        "object_sha256": "d9758d1d0c1747e30d78929e7be0785fefbe0745a0859b5726fe8560ea28171b"
+      }
+    ],
+    "limits": [
+      "Expected C memory/ABI semantics and pinned nanopb loop modeled; 512 comparison cases also execute stock app memcmp; no boot instruction identity claimed",
+      "Compiler-rt shift tested only for legal count range 0..63; actual nanopb bounds check enforces that range",
+      "Normal C callee-saved VFP registers checked; EABI memory helpers preserve all VFP registers",
+      "Private stack, caller-clobbered registers and void helper returns excluded",
+      "No DFU signature verification, hardware flashing or boot execution proof"
+    ]
+  },
+  "negative_controls": {
+    "eabi-copy-overrun": {
+      "compiled": true,
+      "rejected": true,
+      "source": "r1/src/application/runtime/memory_eabi.c",
+      "diagnostic": "source=bytes((i*37+11)%251 for i in range(1024));v.mem_write(SRC,source);v.mem_write(DST,b'\\x7b'*1024);ret=call(name,[DST+da,SRC+sa,n]);assert bytes(v.mem_read(DST,1024))==b'\\x7b'*da+source[sa:sa+n]+b'\\x7b'*(1024-da-n);assert bytes(v.mem_read(SRC,1024))==source\n                                                                                                                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    "eabi-clear-not-zero": {
+      "compiled": true,
+      "rejected": true,
+      "source": "r1/src/application/runtime/memory_eabi.c",
+      "diagnostic": "File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-boot-runtime-c/verify.py\", line 44, in <module>\n    v.mem_write(DST,b'\\x7b'*1024);ret=call(name,[DST+da,value,n] if name=='memset' else [DST+da,n]);assert bytes(v.mem_read(DST,1024))==b'\\x7b'*da+bytes([value&255])*n+b'\\x7b'*(1024-da-n)\n                                                                                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    "comparison-reversed": {
+      "compiled": true,
+      "rejected": true,
+      "source": "r1/src/application/runtime/native_memory_compare.c",
+      "diagnostic": " for i in range(n) if a[sa+i]!=b[i]),0);ret=call('memcmp',[SRC+sa,DST+da,n])[0];assert ret==expected&0xffffffff;assert call('stock_memcmp',[SRC+sa,DST+da,n])[0]==ret;assert call('r1_native_memcmp',[SRC+sa,DST+da,n])[0]==ret;assert bytes(v.mem_read(SRC,1024))==bytes(a)\n                                                                                                                                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    "comparison-sign-lost": {
+      "compiled": true,
+      "rejected": true,
+      "source": "r1/src/application/runtime/native_memory_compare.c",
+      "diagnostic": " for i in range(n) if a[sa+i]!=b[i]),0);ret=call('memcmp',[SRC+sa,DST+da,n])[0];assert ret==expected&0xffffffff;assert call('stock_memcmp',[SRC+sa,DST+da,n])[0]==ret;assert call('r1_native_memcmp',[SRC+sa,DST+da,n])[0]==ret;assert bytes(v.mem_read(SRC,1024))==bytes(a)\n                                                                                                                                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    "copy-return-pointer": {
+      "compiled": true,
+      "rejected": true,
+      "source": "third-party/upstream/musl-memory-1.2.5/memcpy.c",
+      "diagnostic": "Traceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-boot-runtime-c/verify.py\", line 39, in <module>\n    if name=='memcpy':assert ret[0]==DST+da\n                             ^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    "wrong-fill-byte": {
+      "compiled": true,
+      "rejected": true,
+      "source": "third-party/upstream/musl-memory-1.2.5/memset.c",
+      "diagnostic": "File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-boot-runtime-c/verify.py\", line 44, in <module>\n    v.mem_write(DST,b'\\x7b'*1024);ret=call(name,[DST+da,value,n] if name=='memset' else [DST+da,n]);assert bytes(v.mem_read(DST,1024))==b'\\x7b'*da+bytes([value&255])*n+b'\\x7b'*(1024-da-n)\n                                                                                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    "string-length-off-by-one": {
+      "compiled": true,
+      "rejected": true,
+      "source": "third-party/upstream/musl-memory-1.2.5/strlen.c",
+      "diagnostic": "Traceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-boot-runtime-c/verify.py\", line 51, in <module>\n    data=b'\\x7b'*align+b'a'*n+b'\\0'+b'\\x7b'*(1023-align-n);v.mem_write(SRC,data);assert call('strlen',[SRC+align])[0]==n;assert bytes(v.mem_read(SRC,1024))==data\n                                                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    "shift-low-bit": {
+      "compiled": true,
+      "rejected": true,
+      "source": "third-party/upstream/llvm-compiler-rt-format-20.1.8/ashldi3.c",
+      "diagnostic": "Traceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-boot-runtime-c/verify.py\", line 53, in <module>\n    lo,hi=call('__aeabi_llsl',[value&0xffffffff,value>>32,count]);assert lo|(hi<<32)==(value<<count)&0xffffffffffffffff\n                                                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    }
+  },
+  "audit": {
+    "unchanged_prior_objects": 766,
+    "changed_application_objects": {
+      "r1/src/application/runtime/memory_eabi.c": "Existing allocated sections and normalized relocations unchanged apart from extracted functions; EABI file adds only generic memcpy entry.",
+      "r1/src/application/runtime/native_libc_sequences.c": "Existing allocated sections and normalized relocations unchanged apart from extracted functions; EABI file adds only generic memcpy entry.",
+      "r1/src/application/runtime/native_memory_api.c": "Existing allocated sections and normalized relocations unchanged apart from extracted functions; EABI file adds only generic memcpy entry."
+    },
+    "new_units": [
+      {
+        "payload": "r1-application",
+        "source": "r1/src/application/runtime/native_memory_compare.c"
+      },
+      {
+        "payload": "r1-bootloader",
+        "source": "r1/src/application/runtime/native_memory_compare.c"
+      },
+      {
+        "payload": "r1-bootloader",
+        "source": "third-party/upstream/musl-memory-1.2.5/memset.c"
+      },
+      {
+        "payload": "r1-bootloader",
+        "source": "third-party/upstream/musl-memory-1.2.5/memcpy.c"
+      },
+      {
+        "payload": "r1-bootloader",
+        "source": "third-party/upstream/llvm-compiler-rt-format-20.1.8/ashldi3.c"
+      },
+      {
+        "payload": "r1-bootloader",
+        "source": "third-party/upstream/musl-memory-1.2.5/strlen.c"
+      },
+      {
+        "payload": "r1-bootloader",
+        "source": "r1/src/application/runtime/memory_eabi.c"
+      }
+    ],
+    "imports": {
+      "r1-application": {
+        "added": [],
+        "removed": []
+      },
+      "r1-bootloader": {
+        "added": [],
+        "removed": [
+          "__aeabi_llsl",
+          "__aeabi_memclr4",
+          "__aeabi_memcpy",
+          "memcmp",
+          "memcpy",
+          "memset",
+          "strlen"
+        ]
+      }
+    },
+    "shared_objects_identical_across_payloads": true
+  },
+  "headers": [
+    {
+      "path": "third-party/upstream/llvm-compiler-rt-format-20.1.8/int_lib.h",
+      "sha256": "b31130f10484636895daa13b91b63d47ea82b45547f29e4dd136b48a67854d30"
+    },
+    {
+      "path": "third-party/upstream/llvm-compiler-rt-format-20.1.8/int_types.h",
+      "sha256": "b4b768e1b2251df4c0161b4c1f120417500ff4883b7008120104d042eeb2151f"
+    },
+    {
+      "path": "vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/external/nano-pb/pb_decode.h",
+      "sha256": "912a1d4a2129d70b29a91d3962c84b5c88f6c95f32d9724c7c56cad199cbd8d0"
+    },
+    {
+      "path": "vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/external/nano-pb/pb.h",
+      "sha256": "66c8d77a3ea0b5cd42a067feb0eb5f78848a56da8c5bc391250e12fcd053e581"
+    }
+  ],
+  "rea": "boot-runtime-compare-rea.json",
+  "source_check": "R1 passes: 776 units, 574 source files, zero not built. Global check retains existing G2 resident_rom_thumb_set.S omission.",
+  "instruction_identity_proven": false,
+  "image_integration_proven": false
+}

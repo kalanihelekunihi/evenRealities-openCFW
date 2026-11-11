@@ -1,0 +1,119 @@
+{
+  "schema_version": 1,
+  "report": "build/sources-goal-r1-gxt-temp-pair-pure-c/report.json",
+  "report_sha256": "791e14b944525d61fe05fbc5ea412e8d66e86c6a2ec9ec9848ef637457132619",
+  "manifest_sha256": "6f2bf125a3403bfd1f319afaaef021996d3de2fd86f5fdc9378ec87a61aaed66",
+  "verification": {
+    "cases": 64512,
+    "executions": 193536,
+    "pointer_layouts": [
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        0
+      ],
+      [
+        1,
+        1
+      ],
+      [
+        0,
+        2
+      ],
+      [
+        2,
+        0
+      ],
+      [
+        1,
+        3
+      ],
+      [
+        3,
+        1
+      ],
+      [
+        7,
+        9
+      ],
+      [
+        9,
+        7
+      ],
+      [
+        0,
+        16
+      ],
+      [
+        16,
+        0
+      ]
+    ],
+    "three_way_stock_previous_c_match": true,
+    "actual_normal_compiled_channel_wrappers": true,
+    "ordered_halfword_stores_aliases_cleanup_delay_and_mutations": true,
+    "public_void_return": true,
+    "caller_clobbered_and_callback_live_registers_private_stack_excluded": true,
+    "physical_sensor_unverified": true
+  },
+  "defects": {
+    "detected": [
+      "wrong-channel",
+      "wrong-delay",
+      "wrong-output",
+      "missing-release"
+    ]
+  },
+  "audit": {
+    "unchanged_prior_object_hashes": 782,
+    "changed_objects": [
+      [
+        "r1-bootloader",
+        "{gen}/r1_startup_vectors.S"
+      ],
+      [
+        "r1-application",
+        "r1/src/application/runtime/native_gxt310_temperature_pair.c"
+      ],
+      [
+        "r1-bootloader",
+        "{gen}/r1_uecc.c"
+      ]
+    ],
+    "temperature_implementations_and_other_objects_unchanged": true,
+    "generated_boot_allocated_bytes_and_relocations_unchanged": true,
+    "imports_unchanged": true
+  },
+  "rea": {
+    "evidence_id": "ev_01718115c00d27e0cc1604a86d87a36d622f5d1d7ec2570c89039200a3531513",
+    "address": "0x51260",
+    "length": 44,
+    "sha256": "5e9b5b48604f922826e4647a02303d5e5cb678c33a24acf99ece5a973508bf2f",
+    "matches_locked_application": true
+  },
+  "bootloader_link_report": "build/goal-r1-gxt-temp-pair-pure-c/boot-link/report.json",
+  "bootloader_link_report_sha256": "8ce3ebadc3cb74feac60aee11c5985381eb76d9604c45825260c7e731d0b45f4",
+  "evidence_files": {
+    "build/goal-r1-gxt-temp-pair-pure-c/verify.py": "f7adb244db2dd8d138c1a6ebdca5efa34affca7cd933fd97d794936dd9b4c027",
+    "build/goal-r1-gxt-temp-pair-pure-c/audit.py": "029ff05a76bde00bd4448b6278ce25bc912178ea5400add54e591f74b471b321",
+    "build/goal-r1-gxt-temp-pair-pure-c/defects.py": "c327412b97fa03ba394c9fac4b9c90e2b88cffcacc3336ee27ee250f1f294d7f",
+    "build/goal-r1-gxt-temp-pair-pure-c/verification.json": "11d449839e18991000de6cf75383551ee6f5ba45e4ba5ecdabeab235eead9cff",
+    "build/goal-r1-gxt-temp-pair-pure-c/defects.json": "f926f98fedb000379899c0f0caeb5c3422429e5f6afb7d97c09233ee03be7695",
+    "build/goal-r1-gxt-temp-pair-pure-c/rea.json": "abf93d4213569f3a1b6c6110ab250cb04ee99722e3b0761eabab4d4d81cfb3bf",
+    "build/goal-r1-gxt-temp-pair-pure-c/verify-final.log": "8ada8ad1c08bf6c6bfdb018dd17d0335e1cf003dac17d0a67cff585708c83546"
+  },
+  "limitations": [
+    "Modeled bus, enable/disable, temperature-read and delay callbacks; no physical sensor validation.",
+    "Caller-clobbered registers and private stack addresses/content excluded.",
+    "Public void return excludes incidental R0; callback live-register/private-frame identity unclaimed.",
+    "Full application remains unlinked."
+  ],
+  "raw_application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a"
+}

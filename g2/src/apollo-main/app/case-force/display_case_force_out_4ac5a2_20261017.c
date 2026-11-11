@@ -1,6 +1,6 @@
 /* Stock Main BoxDetect_SetForceOutBox 0x4ac5a2. */
 #include <stdint.h>
-extern volatile uint8_t audio_uart_case_status_disabled; /* same stock cell 0x20075012 */
+#include "../case-reconnect/case_reconnect_state.h"
 extern uint32_t audio_log_level(void);
 extern void audio_log_extended(uint8_t,const char *,const char *,const char *,uint32_t,const char *,...);
 extern uint32_t compressed_log_output(uint32_t,const char *,...);

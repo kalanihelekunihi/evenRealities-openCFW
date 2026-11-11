@@ -1,40 +1,20 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_32a5f4\n"
-".type opencfw_em9305_child_32a5f4,@function\n"
-"opencfw_em9305_child_32a5f4:\n"
-"L32a5f4:\n"
-"enter_s [r13-r14,blink]\n"
-"L32a5f6:\n"
-"mov_s r13,r0\n"
-"L32a5f8:\n"
-"add r13,r13,621\n"
-"L32a5fc:\n"
-"ldb_s r2,[r13,0]\n"
-"L32a5fe:\n"
-"mov_s r14,r1\n"
-"L32a600:\n"
-"mpyuw r3,r2,0x1c\n"
-"L32a604:\n"
-"add2_s r3,r3,r1\n"
-"L32a606:\n"
-"ld r1,[r3,opencfw_em9305_enc_actions_335564]\n"
-"L32a60e:\n"
-"breq_s r1,0,L32a614\n"
-"L32a610:\n"
-"jl_s [r1]\n"
-"L32a612:\n"
-"ldb_s r2,[r13,0]\n"
-"L32a614:\n"
-"mpyuw r0,r2,0x7\n"
-"L32a618:\n"
-"add_s r0,r0,r14\n"
-"L32a61a:\n"
-"ldb r0,[r0,opencfw_em9305_enc_transitions_335628]\n"
-"L32a622:\n"
-"stb_s r0,[r13,0]\n"
-"L32a624:\n"
-"leave_s [r13-r14,blink,pcl]\n"
-".size opencfw_em9305_child_32a5f4,.-opencfw_em9305_child_32a5f4\n"
-);
+#include <stdint.h>
+
+/* Native 0x32a5f4..0x32a626: encryption state machine step. The state
+ * byte at +621 and the event select a row of the 7x7 action/transition
+ * tables at 0x335564/0x335628; the action (if any) runs with the record,
+ * its own address and the state, then the next state is stored. */
+extern void (*const opencfw_em9305_enc_actions_335564[49])(void);
+extern const uint8_t opencfw_em9305_enc_transitions_335628[49];
+
+void opencfw_em9305_child_32a5f4(uintptr_t record, uint32_t event)
+{
+    volatile uint8_t *state=(volatile uint8_t *)(record+621u);
+    uint32_t current=*state;
+    uintptr_t action=(uintptr_t)opencfw_em9305_enc_actions_335564[current*7u+event];
+    if(action!=0u){
+        ((void (*)(uintptr_t,uintptr_t,uint32_t))action)(record,action,current);
+        current=*state;
+    }
+    *state=opencfw_em9305_enc_transitions_335628[current*7u+event];
+}

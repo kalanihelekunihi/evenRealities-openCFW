@@ -25,26 +25,21 @@ static const char function[] = "even_ai_common_timer_mgr_stop";
 static const char short_message[] = "[even_ai.timer]even_ai_common_timer_mgr_stop";
 #endif
 
-/* The stock return restores incoming R3, while updating the live timer row. */
+/* Stock 0x4E2E62 (even_ai_common_timer_mgr_start). Only the glasses role 1
+ * arms the row: start tick, duration, then the two active flags. The stock
+ * epilogue popped the caller's R3 into R0; every caller discards the result
+ * (even_ai_timer.c, ui_even_ai_stream.c and the wrapper below), so 0. */
 #ifndef OPENCFW_TIMER_STOP_ONLY
-__attribute__((naked)) uint32_t audio_even_ai_common_timer_start_4e2e62(
-    uint32_t duration __attribute__((unused))) {
-    __asm__ volatile(
-        "push {r3, r4, r5, lr}\n"
-        "mov r4, r0\n"
-        "bl audio_uart_device_role_get\n"
-        "uxtb r0, r0\n"
-        "cmp r0, #1\n"
-        "bne 1f\n"
-        "ldr r5, =audio_even_ai_common_timer_state_20074008\n"
-        "bl g2_kernel_candidate_os_get_tick\n"
-        "str r0, [r5]\n"
-        "str r4, [r5, #4]\n"
-        "movs r0, #1\n"
-        "strb r0, [r5, #8]\n"
-        "strb r0, [r5, #9]\n"
-        "1:\n"
-        "pop {r0, r4, r5, pc}\n");
+uint32_t audio_even_ai_common_timer_start_4e2e62(uint32_t duration) {
+    if (audio_uart_device_role_get() == 1u) {
+        uint8_t *const row = audio_even_ai_common_timer_state_20074008;
+        const uint32_t now = g2_kernel_candidate_os_get_tick();
+        __builtin_memcpy(row, &now, 4u);
+        __builtin_memcpy(row + 4u, &duration, 4u);
+        row[8] = 1u;
+        row[9] = 1u;
+    }
+    return 0u;
 }
 #endif
 
@@ -60,15 +55,13 @@ void audio_even_ai_common_timer_stop_4e2e86(void) {
 }
 #endif
 
-/* Stock passes incoming R0 to the common timer, then 10000 to heartbeat. */
+/* Stock 0x4E31A0 (even_ai_timer_start_all): the common timer with the
+ * caller's duration, then the 10 s heartbeat. The stock epilogue popped the
+ * caller's R7 into R0; every caller discards the result, so 0. */
 #ifndef OPENCFW_TIMER_STOP_ONLY
-__attribute__((naked)) uint32_t audio_even_ai_timer_start_all_4e31a0(
-    uint32_t duration __attribute__((unused))) {
-    __asm__ volatile(
-        "push {r7, lr}\n"
-        "bl audio_even_ai_common_timer_start_4e2e62\n"
-        "movw r0, #10000\n"
-        "bl audio_even_ai_heartbeat_timer_start_4e304c\n"
-        "pop {r0, pc}\n");
+uint32_t audio_even_ai_timer_start_all_4e31a0(uint32_t duration) {
+    (void)audio_even_ai_common_timer_start_4e2e62(duration);
+    audio_even_ai_heartbeat_timer_start_4e304c(10000u);
+    return 0u;
 }
 #endif

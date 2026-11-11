@@ -1,5 +1,6 @@
 /* Apollo S200 MSPI transfer-async wrapper at 0x4c2208. */
 #include <stdint.h>
+extern void mspi_dummy_callback(void *context, uint32_t status);
 
 extern uint32_t display_driver_uled_mspi_queue_prepare_4bfcc0(
     uint32_t, const void *, uint32_t, uint32_t, uint32_t);
@@ -32,7 +33,7 @@ uint32_t display_driver_uled_transfer_async_4c2208(
     if (selected_callback == 0 && read_word(h, 0x838) == 0 &&
         h[0x82c] == 0 &&
         (read_word(h, 0x858) >> 1) <= read_word(h, 0x85c))
-        selected_callback = 0x004c072du;
+        selected_callback = (uint32_t)(uintptr_t)mspi_dummy_callback; /* Fix 51: stock literal 0x4c072d = mspi_dummy_callback|1 (stock 0x4c072c, see mspi-transfer-descriptor.c) */
 
     uint32_t result = display_driver_uled_mspi_queue_prepare_4bfcc0(
         handle, transfer, priority & 0xffu, selected_callback,

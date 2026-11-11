@@ -15,6 +15,14 @@
  * The register and spot-manager global addresses are the stock ones below. */
 #include <stdint.h>
 #include <stdbool.h>
+extern unsigned char g2ref_g2_pwrctrl_trim_version[] __asm__("g2_pwrctrl_trim_version"); /* Fix 45: stock owner (owner.py) */
+/* SPOT-manager state shared with this sleep path: the upstream SDK 5.0.0 +
+ * 66185cb am_hal_spotmgr*.c globals (stock RAM 0x2005665c, 0x20074f64..6d),
+ * and g_bFrcBuckAct (am_hal_sysctrl.c, stock 0x20074f7b). */
+extern bool g_bFrcBuckAct, g_bIsPCM2p1, g_bIsPCM2p2OrNewer;
+extern bool g_bVddcaorVddcpuOverride, g_bHpToDeepSleep, g_bVddfLpMinusForLp, g_bSwitchingToHp;
+extern unsigned char g_sSpotMgrINFO1regs[];
+extern unsigned char g2ref_g2_stock_ram_20074f30[] __asm__("g2_stock_ram_20074f30"); /* Fix 45: stock owner (owner.py) */
 
 #define REG(a) (*(volatile uint32_t *)(uintptr_t)(a))
 #define FLAG(a) (*(volatile uint8_t *)(uintptr_t)(a))
@@ -37,16 +45,16 @@
 #define PWRMODCTL_CPDLPSTATE 0xe001e300u
 
 /* Spot-manager / PCM globals (RAM). */
-#define G_PCM_TRIM_VERSION         0x200001e8u /* uint32_t */
-#define G_SPOTMGR_INFO1            0x2005665cu /* g_sSpotMgrINFO1regs */
-#define G_IS_PCM2P1                0x20074f64u
-#define G_IS_PCM2P2_OR_NEWER       0x20074f68u
-#define G_VDDCAOR_VDDCPU_OVERRIDE  0x20074f6au
-#define G_HP_TO_DEEPSLEEP          0x20074f6bu
-#define G_VDDF_LP_MINUS_FOR_LP     0x20074f6cu
-#define G_SWITCHING_TO_HP          0x20074f6du
-#define G_FRC_BUCK_ACT             0x20074f7bu
-#define G_APP_FRC_BUCK_ACT         0x20074f7cu
+#define G_PCM_TRIM_VERSION         ((uint32_t)(uintptr_t)g2ref_g2_pwrctrl_trim_version+0x0u) /* uint32_t */
+#define G_SPOTMGR_INFO1            ((uint32_t)(uintptr_t)g_sSpotMgrINFO1regs)
+#define G_IS_PCM2P1                ((uint32_t)(uintptr_t)&g_bIsPCM2p1)
+#define G_IS_PCM2P2_OR_NEWER       ((uint32_t)(uintptr_t)&g_bIsPCM2p2OrNewer)
+#define G_VDDCAOR_VDDCPU_OVERRIDE  ((uint32_t)(uintptr_t)&g_bVddcaorVddcpuOverride)
+#define G_HP_TO_DEEPSLEEP          ((uint32_t)(uintptr_t)&g_bHpToDeepSleep)
+#define G_VDDF_LP_MINUS_FOR_LP     ((uint32_t)(uintptr_t)&g_bVddfLpMinusForLp)
+#define G_SWITCHING_TO_HP          ((uint32_t)(uintptr_t)&g_bSwitchingToHp)
+#define G_FRC_BUCK_ACT             ((uint32_t)(uintptr_t)&g_bFrcBuckAct)
+#define G_APP_FRC_BUCK_ACT         ((uint32_t)(uintptr_t)g2ref_g2_stock_ram_20074f30+0x4cu)
 
 #define INFO1_GLOBAL_VALID   0x1f01600du
 #define INFO1_GPUVDDCTON_OFF 0x54u /* GPULPCPUHPVDDCTON [9:5] */

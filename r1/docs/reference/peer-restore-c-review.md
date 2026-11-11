@@ -1,0 +1,15 @@
+# R1 persistent peer restoration in C
+
+`r1/src/application/board/native_peer_restore.c` implements configuration refresh `0x736b8`, restore-flag getter `0x73778`, address-pair getter `0x737c8`, address-header update `0x3d764`, and peer restore `0x4cb58`. It reuses the existing KV handle and both peer address records. No state owner is added. The shared header now describes peer byte zero neutrally as flags; recompiling both consumers after that comment change produces identical objects.
+
+Configuration refresh reads 52 bytes and checks marker `0x484d4143` at offset 20. An invalid marker replaces both six-byte addresses at offsets 8 and 14 with all-FF, sets the marker, clears only bit 2 of byte 24, reloads the live handle for writing and runs the existing persistence/idle scan. A valid marker skips writing and scanning.
+
+Restore then makes a fresh flag read. If bit 2 is set, it makes another record read, copies both addresses into their existing seven-byte records, and updates the phone header followed by the glasses header. An all-zero or all-FF address leaves only header bit zero; other addresses produce `(header & 1) + 0x14`. The header is read after comparisons. No further interpretation of those header bits is claimed. The pair getter always reads storage, even with two null outputs, and preserves optional/overlapping output order.
+
+All 2,230 direct comparisons pass: 162 restore cases, 276 getter cases, 1,536 address/header cases and 256 seeded cases with independently changing read data and live handles. Another 225 pairs execute actual cached KV reads/writes, dirty scanning and memory comparison with prepared seven-node caches. Tests cover marker repair, callback order, cached bytes and dirty flags, persistence/flush calls, null/overlapping outputs, short-circuit classification, live headers, stack guards, preserved registers and interrupt masks. Ten compiled defects are rejected, followed by an unmodified-source rerun.
+
+Forty separate C cases verify defined behavior for short or failed reads, including the full restore path. Private record buffers start at zero; equality to native uninitialized stack bytes is not claimed. Complete-read comparisons include ignored nonzero status codes.
+
+The normal build compiles all 831 units (749 application, 82 bootloader) without duplicate strong symbols. The peer-restore import closes, reducing application dependencies from 74 to 73 with no additions. All 828 prior non-generated objects are unchanged; two generated bootloader objects differ. R1 source validation passes for 831 units and 617 sources.
+
+The primary probe models storage calls; the deeper probe models critical-section, persistence and flush callbacks around actual software storage paths. Physical flash durability, radio behavior, final application linking and boot remain unverified. Byte identity is not required by the current user instruction. [Review receipt](peer-restore-c-review.json); experiments are under `build/goal-r1-peer-restore-c/`.

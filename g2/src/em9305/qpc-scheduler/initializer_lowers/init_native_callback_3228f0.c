@@ -1,27 +1,14 @@
-/* Native PAwR reset: initialize, clear 404 bytes, then configure. */
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_callback_3228f0\n"
-".type opencfw_em9305_callback_3228f0,@function\n"
-"opencfw_em9305_callback_3228f0:\n"
-"L3228f0:\n"
-"push_s blink\n"
-"L3228f2:\n"
-"bl opencfw_em9305_common_init_303d18\n"
-"L3228f6:\n"
-"mov_s r0,0x804fd8\n"
-"L3228fc:\n"
-"mov_s r1,0\n"
-"L3228fe:\n"
-"bl.d opencfw_em9305_memset\n"
-"L322902:\n"
-"mov r2,404\n"
-"L322906:\n"
-"bl opencfw_em9305_init_lower_30e564\n"
-"L32290a:\n"
-"pop_s blink\n"
-"L32290c:\n"
-"j_s [blink]\n"
-".size opencfw_em9305_callback_3228f0,.-opencfw_em9305_callback_3228f0\n"
-);
+#include <stdint.h>
+
+/* Native 0x3228f0..0x322908: common init, clear the 404-byte scan state
+ * block at 0x804fd8, then run native 0x30e564 on it. */
+extern uint32_t opencfw_em9305_common_init_303d18(uint32_t);
+extern void *opencfw_em9305_memset(void *,uint32_t,uint32_t);
+extern uint32_t opencfw_em9305_init_lower_30e564(uint32_t);
+
+uint32_t opencfw_em9305_callback_3228f0(uint32_t incoming)
+{
+    (void)opencfw_em9305_common_init_303d18(incoming);
+    void *state = opencfw_em9305_memset((void *)(uintptr_t)0x804fd8u, 0u, 404u);
+    return opencfw_em9305_init_lower_30e564((uint32_t)(uintptr_t)state);
+}

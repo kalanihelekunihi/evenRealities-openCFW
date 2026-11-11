@@ -1,0 +1,56 @@
+{
+  "schema": 1,
+  "scope": "Rejected direct-C YHM2710 status candidates; product source unchanged",
+  "native_entry": "0x3529a",
+  "results": {
+    "native": {
+      "readiness_entry_depth": 8,
+      "matches_stock": true
+    },
+    "normal": {
+      "readiness_entry_depth": 16,
+      "matches_stock": false
+    },
+    "omit": {
+      "readiness_entry_depth": 16,
+      "matches_stock": false
+    },
+    "oz": {
+      "readiness_entry_depth": 16,
+      "matches_stock": false
+    },
+    "oz-omit": {
+      "readiness_entry_depth": 16,
+      "matches_stock": false
+    }
+  },
+  "probe_hashes": {
+    "build/goal-r1-yhm-status-c/probe.c": "cb870e4533e5934c5fdd28fb9b6dca39a315473b70b8746f4ecd67f8aa960e87",
+    "build/goal-r1-yhm-status-c/verify-boundary.py": "b3c05c4f35f47633c1e82a9330fe6b1f8c9568542c9911603c349a937758912a",
+    "build/goal-r1-yhm-status-c/normal.o": "7339c9c20031219924d34ac71313cadbc4d1b4370d371bc9072895061de50a94",
+    "build/goal-r1-yhm-status-c/omit.o": "7339c9c20031219924d34ac71313cadbc4d1b4370d371bc9072895061de50a94",
+    "build/goal-r1-yhm-status-c/oz.o": "7393f7d47825616fac7884f1f4f47493daf7136799f05a88856a0b98784f5d2f",
+    "build/goal-r1-yhm-status-c/oz-omit.o": "7393f7d47825616fac7884f1f4f47493daf7136799f05a88856a0b98784f5d2f"
+  },
+  "limitation": "Execution stops at first readiness entry. This is a stack counterexample, not a full behavior test. No firmware source or profile is changed.",
+  "additional_stack_alignment_probe": {
+    "flags": [
+      "-mstack-alignment=4"
+    ],
+    "result": {
+      "native": {
+        "readiness_entry_depth": 8,
+        "matches_stock": true
+      },
+      "probe": {
+        "readiness_entry_depth": 16,
+        "matches_stock": false
+      }
+    },
+    "probe_sha256": "cb870e4533e5934c5fdd28fb9b6dca39a315473b70b8746f4ecd67f8aa960e87",
+    "object_sha256": "7339c9c20031219924d34ac71313cadbc4d1b4370d371bc9072895061de50a94",
+    "firmware_source_changed": false,
+    "probe": "build/goal-r1-yhm-status-frame-c/probe.py",
+    "verification": "build/goal-r1-yhm-status-frame-c/verify.py"
+  }
+}

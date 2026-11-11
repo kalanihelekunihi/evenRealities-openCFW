@@ -1,0 +1,219 @@
+{
+  "schema": 1,
+  "scope": "R1 sector reader 0x87c24, native 360-byte body; all dispatch/header/advance/diagnostic/result policy expressed in C",
+  "status": "bounded C control candidate with native stack/ABI adapter; not instruction qualified",
+  "stock_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "behavior": {
+    "paired_cases": 12302,
+    "executions": 24604,
+    "outcomes": {
+      "returned": 11856,
+      "assertion_halt": 206,
+      "bounded_read_prefix": 240
+    },
+    "source_report": "build/sources-goal-r1-sector-stepper-c/report.json",
+    "actual_C": [
+      "sector stepper, dispatch, diagnostics and result policy",
+      "sector preparation and advance",
+      "read adapter",
+      "status scanner",
+      "TSL control"
+    ],
+    "modeled": [
+      "partition read",
+      "printf diagnostics",
+      "database path getter"
+    ],
+    "checks": [
+      "header magic and all status combinations",
+      "header read, nested TSL, path and print calls at native outer SP",
+      "live changes from IO/path/diagnostic providers",
+      "native assertions and bounds diagnostics",
+      "header/TSL partial and non-writing failures",
+      "outer buffer caller SP-128 and nested raw view caller SP-176",
+      "live aliasing of sector/database/header fields",
+      "traversal unsigned alignment, overflow and bounds",
+      "ordered shared accesses, complete outer frame and nested raw bytes, ABI and masks"
+    ],
+    "limits": [
+      "Helper-private frames below nested raw view excluded",
+      "Partition read modeled, no physical flash/FAL scheduling",
+      "Caller-clobbered registers/flags and arbitrary corrupted pointers excluded",
+      "Long corrupted-size traversals compared through 16 reads only; termination not established for those fixtures"
+    ]
+  },
+  "negative_controls": [
+    {
+      "mutation": "lost-original-address",
+      "rejected": true
+    },
+    {
+      "mutation": "shifted-provider-SP",
+      "rejected": true
+    }
+  ],
+  "object_audit": {
+    "other_574_objects_unchanged": true,
+    "function_name_owner_bytes_flags_alignment_relocations_unchanged": true,
+    "manifest_unchanged": true,
+    "composed_import_sets_unchanged": true,
+    "prior_assembly_scaffold_span": 228,
+    "new_assembly_adapter_instruction_bytes": 88,
+    "adapter_relocation": [
+      [
+        34,
+        10,
+        "sector_step_body"
+      ]
+    ],
+    "unchanged_C_workers": [
+      "sector_prepare_body",
+      "sector_advance_body"
+    ],
+    "control_in_C": [
+      "read/TSL selection and loop decisions",
+      "diagnostic/path sequencing",
+      "assertion and return selection",
+      "header preparation and traversal update"
+    ],
+    "protected_views": {
+      "outer": "caller SP-128",
+      "nested": "caller SP-176"
+    },
+    "C_only_reservation_bytes": 96,
+    "native_plan": {
+      "size": 28,
+      "args_offset": 4,
+      "next_offset": 20,
+      "action_offset": 24,
+      "plan_from_C_call_SP": 16
+    }
+  },
+  "REA": {
+    "retained_REA_body_and_subject_hash_verified": true,
+    "analysis_ELF_text_equals_locked_application": true,
+    "body": {
+      "available": true,
+      "provenance": "ghidra-function-body-address-set",
+      "ranges": [
+        {
+          "start": "0x87c24",
+          "end": "0x87d8b"
+        }
+      ],
+      "total_bytes": 360,
+      "span_bytes": 360,
+      "non_contiguous": false,
+      "contains_entry": true
+    }
+  },
+  "normal_build": {
+    "units": 575,
+    "application_units": 501,
+    "bootloader_units": 74,
+    "application_imports": 175,
+    "bootloader_imports": 34,
+    "failures": 0,
+    "duplicate_strong_symbols": 0,
+    "import_delta": 0
+  },
+  "qualification": {
+    "compiled_candidates": 5,
+    "selected_regions": 0,
+    "canonical_plan_unchanged": true
+  },
+  "hybrid": {
+    "application_equals_stock": true,
+    "totals": {
+      "binary-pull-through": 642279,
+      "source-built": 3881,
+      "resource-file": 248
+    },
+    "source_completeness_proven": false
+  },
+  "adapter": {
+    "instruction_bytes": 88,
+    "prior_scaffold_bytes": 228,
+    "reason": "Preserve outer native SP, protected nested read bytes, provider argument registers and machine result feedback",
+    "native_outer_frame": 128,
+    "C_only_reservation": 96,
+    "call_plan_size": 28
+  },
+  "limits": [
+    "240 corrupt-size fixtures compare a 16-read prefix, not termination",
+    "Partition IO, printf and database path modeled; actual C adapter/status/TSL providers execute",
+    "C-private frames below nested raw view and temporary saved/unused words between raw view and outer scratch excluded",
+    "Full FAL/device/physical-flash execution, scheduling, arbitrary corruption and unused caller-clobbered registers/flags unproven",
+    "No complete source executable link or full source byte identity; G2 gates unchanged"
+  ],
+  "inputs": [
+    {
+      "path": "build/sources-goal-r1-sector-stepper-c/report.json",
+      "sha256": "6574f4e502fd9657a5a01030276e0d58460b42368d3b79f2c611e75a08b7b647"
+    },
+    {
+      "path": "build/hybrid-goal-r1-sector-stepper-c/build-report.json",
+      "sha256": "fd138039af59011658baa798cf9f25c47054e2176244cf7996204ea03101a06a"
+    },
+    {
+      "path": "tools/build/source-plan.json",
+      "sha256": "716cf17b8cf2bed8ad6a99a672b1856af4c5380842c95cb14b9a263a7bb42bc8"
+    },
+    {
+      "path": "r1/src/application/runtime/native_flashdb_sector_read.c",
+      "sha256": "cec9745781aad07ea5c89743f1b24a52ca365167c221702ae359411decea024b"
+    },
+    {
+      "path": "r1/src/sources.json",
+      "sha256": "4b6d47de0b0e1626f5df3ee73725bc221c9e05373e2a098596abdf560fd5a0ca"
+    },
+    {
+      "path": "r1/symbols/function-frontier.csv",
+      "sha256": "3e14336e1d9d664ba0f32a3944087a9c2061f625771bb72e79ee9699cfe1aafa"
+    },
+    {
+      "path": "build/goal-r1-sector-stepper-c/before.c",
+      "sha256": "6f26b0efb21f3e703fdc0f901232d1a096c2dc52acaaf646036aa8ab2a4a84c0"
+    },
+    {
+      "path": "build/goal-r1-sector-stepper-c/verify.py",
+      "sha256": "eee09a4920a06c3e073d2d5dfea9d33717c75b8d4b39642fafd8eb90281ed166"
+    },
+    {
+      "path": "build/goal-r1-sector-stepper-c/results.json",
+      "sha256": "db0505d0105f69745e336301908841f97e089b6d51270e9b7dab267f19e54f38"
+    },
+    {
+      "path": "build/goal-r1-sector-stepper-c/negative.py",
+      "sha256": "a62dcbd7391860f49820f4dce63cd403393368693aae03589d078d192653fdfd"
+    },
+    {
+      "path": "build/goal-r1-sector-stepper-c/negative-results.json",
+      "sha256": "f451e6b5e79dcaaa203847b6a877189c91041ce87458566365dd17c6df0e6ef1"
+    },
+    {
+      "path": "build/goal-r1-sector-stepper-c/audit.py",
+      "sha256": "7373d211df69e1d360f53400d1bccf4d5beff2a2c7a5ece65a1d9e15ee41f291"
+    },
+    {
+      "path": "build/goal-r1-sector-stepper-c/audit-results.json",
+      "sha256": "793fcd182bf567967d67c3442378e3fd1005dcbbfe8e15e0e8842a1e23c7f9a2"
+    },
+    {
+      "path": "build/goal-r1-sector-stepper-c/rea.json",
+      "sha256": "dc41ec5fee8c6d02b1c8e01c228ee35d79d3d9e57beb2d997e42eeba635ac080"
+    },
+    {
+      "path": "build/goal-r1-sector-stepper-c/rea-reuse-check.json",
+      "sha256": "353642cd37f8430de9fd5f1a05fe418d8b905fac13330d84a868011493c6fe09"
+    },
+    {
+      "path": "build/goal-r1-sector-stepper-c/qualified/qualification.json",
+      "sha256": "e2977c98f66c44d5fabcc17ed3788db8a234328460855edc9dbfa5f91ff78d98"
+    },
+    {
+      "path": "build/goal-r1-sector-stepper-c/qualified/source-plan.json",
+      "sha256": "3da40e3d766877c0b3059bee372f651c1f56681157782eba12ee3076f1834a0f"
+    }
+  ]
+}

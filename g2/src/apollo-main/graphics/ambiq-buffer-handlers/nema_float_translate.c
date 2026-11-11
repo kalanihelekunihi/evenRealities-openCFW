@@ -24,3 +24,8 @@ void display_driver_nema_float_translate_5228b0(float x, float y)
     if (neg_x < -2048.0f || neg_y < -2048.0f)
         audio_uart_nema_child_514846(0x118u, 0x80000000u);
 }
+
+/* Ambiq mask-path name of the same native 0x5228b0 entry (formerly a
+ * forwarding wrapper in graphics/ambiq-buffer-handlers/nema_float_position_alias.c). */
+__typeof__(display_driver_nema_float_translate_5228b0) audio_uart_nema_float_position_5228b0
+    __attribute__((alias("display_driver_nema_float_translate_5228b0")));

@@ -1,3 +1,62 @@
-/* Local diagnostic daily-cache fixture; symbolic instructions and typed literals only. */
-__attribute__((naked,section(".text.r1_record12_apply"))) void r1_record12_apply(void) { __asm__ volatile("NCF_6c53c:\npush\t{r4, lr}\nNCF_6c53e:\nmovs\tr2, #0\nNCF_6c540:\ncmp\tr0, #0\nNCF_6c542:\nbeq.n NCF_6c5c4\nNCF_6c544:\ncmp\tr1, #0\nNCF_6c546:\nbeq.n NCF_6c5c4\nNCF_6c548:\nldrb\tr3, [r1, #0]\nNCF_6c54a:\nldrb\tr4, [r0, #0]\nNCF_6c54c:\nsubs\tr3, r3, r4\nNCF_6c54e:\nadds\tr3, r3, #2\nNCF_6c550:\ncmp\tr3, #4\nNCF_6c552:\nbls.n NCF_6c556\nNCF_6c554:\nmovs\tr2, #1\nNCF_6c556:\nldrb\tr3, [r1, #1]\nNCF_6c558:\nldrb\tr4, [r0, #1]\nNCF_6c55a:\ncmp\tr3, r4\nNCF_6c55c:\nbeq.n NCF_6c560\nNCF_6c55e:\nmovs\tr2, #1\nNCF_6c560:\nldrb\tr3, [r1, #2]\nNCF_6c562:\nldrb\tr4, [r0, #2]\nNCF_6c564:\nsubs\tr3, r3, r4\nNCF_6c566:\nadds\tr3, #9\nNCF_6c568:\ncmp\tr3, #18\nNCF_6c56a:\nbls.n NCF_6c56e\nNCF_6c56c:\nmovs\tr2, #1\nNCF_6c56e:\nldrb\tr1, [r1, #3]\nNCF_6c570:\nldrb\tr0, [r0, #3]\nNCF_6c572:\nsubs\tr0, r1, r0\nNCF_6c574:\nadds\tr0, #9\nNCF_6c576:\ncmp\tr0, #18\nNCF_6c578:\nbls.n NCF_6c57c\nNCF_6c57a:\nmovs\tr2, #1\nNCF_6c57c:\nldr r0, NCF_6c5c8\nNCF_6c57e:\nldrb\tr0, [r0, #0]\nNCF_6c580:\ntst\tr2, r0\nNCF_6c582:\nbeq.n NCF_6c5c4\nNCF_6c584:\nbl r1_structured_log_mode_get\nNCF_6c588:\nlsls\tr0, r0, #31\nNCF_6c58a:\nbne.n NCF_6c594\nNCF_6c58c:\nbl r1_structured_log_mode_get\nNCF_6c590:\nlsls\tr0, r0, #29\nNCF_6c592:\nbpl.n NCF_6c5a0\nNCF_6c594:\nadr r2, NCF_6c5cc\nNCF_6c596:\nadr r1, NCF_6c5cc\nNCF_6c598:\nmov.w\tr0, #201326592\nNCF_6c59c:\nbl r1_structured_log_format\nNCF_6c5a0:\nbl r1_structured_log_mode_get\nNCF_6c5a4:\nlsls\tr0, r0, #30\nNCF_6c5a6:\nbpl.n NCF_6c5bc\nNCF_6c5a8:\nldr r0, NCF_6c604\nNCF_6c5aa:\nldr r1, NCF_6c608\nNCF_6c5ac:\nsubs\tr0, r0, r1\nNCF_6c5ae:\nlsrs\tr0, r0, #3\nNCF_6c5b0:\nmovs\tr1, #3\nNCF_6c5b2:\nadd.w\tr0, r1, r0, lsl #16\nNCF_6c5b6:\nadr r1, NCF_6c60c\nNCF_6c5b8:\nbl nrf_log_frontend_std_0\nNCF_6c5bc:\nldmia.w\tsp!, {r4, lr}\nNCF_6c5c0:\nb.w r1_record12_reinitialize\nNCF_6c5c4:\npop\t{r4, pc}\n.space 2,0\nNCF_6c5c8:\n.word r1_device_id_once_status\nNCF_6c5cc:\n.asciz \"[RING]gm user info significant change, reinit algorithm\"\nNCF_6c604:\n.word __start_log_const_data+224\nNCF_6c608:\n.word __start_log_const_data\nNCF_6c60c:\n.asciz \"gm user info significant change, reinit algorithm\"\n.space 2,0\n"); }
-__attribute__((naked,section(".text.r1_record12_persist"))) void r1_record12_persist(void) { __asm__ volatile("NCF_73604:\npush\t{r1, r2, r3, r4, r5, lr}\nNCF_73606:\nmovs\tr4, r0\nNCF_73608:\nbeq.n NCF_7362c\nNCF_7360a:\nldr r5, NCF_73630\nNCF_7360c:\nmovs\tr2, #12\nNCF_7360e:\nmov\tr1, sp\nNCF_73610:\nldr\tr0, [r5, #0]\nNCF_73612:\nbl r1_kv_class_read\nNCF_73616:\nldr\tr0, [r4, #0]\nNCF_73618:\nstr\tr0, [sp, #0]\nNCF_7361a:\nldr\tr0, [r4, #4]\nNCF_7361c:\nstr\tr0, [sp, #4]\nNCF_7361e:\nldr\tr0, [r4, #8]\nNCF_73620:\nstr\tr0, [sp, #8]\nNCF_73622:\nmovs\tr2, #12\nNCF_73624:\nmov\tr1, sp\nNCF_73626:\nldr\tr0, [r5, #0]\nNCF_73628:\nbl r1_kv_class_write\nNCF_7362c:\npop\t{r1, r2, r3, r4, r5, pc}\n.space 2,0\nNCF_73630:\n.word r1_health_settings_kv_handle\n"); }
+#include <stdint.h>
+/* Native health-settings change detection and cached persistence. */
+#include "native_gomore_authorization.h"
+extern uint32_t r1_structured_log_mode_get(void);
+extern uint32_t r1_structured_log_format(uint32_t,const char *,const char *,...);
+extern void nrf_log_frontend_std_0(uint32_t,const char *);
+extern void r1_record12_reinitialize(void);
+const char r1_health_change_ring_text[56]
+ __attribute__((section(".r1.health.change.ring")))=
+ "[RING]gm user info significant change, reinit algorithm";
+const char r1_health_change_sdk_text[50]
+ __attribute__((section(".r1.health.change.sdk")))=
+ "gm user info significant change, reinit algorithm";
+/* Native 0x6c53c: unsigned deltas preserve the inclusive +/-2 and +/-9
+ * windows. Read every updated byte before its corresponding previous byte,
+ * even once a change is known. Only bit zero of the status gates reinit. */
+void r1_record12_apply(const volatile uint8_t *previous,
+                       const volatile uint8_t *updated)
+{
+    if (!previous || !updated) return;
+    uint32_t next=updated[0];
+    uint32_t before=previous[0];
+    uint32_t changed=(next-before+2u)>4u;
+    next=updated[1];
+    before=previous[1];
+    if (next!=before) changed=1;
+    next=updated[2];
+    before=previous[2];
+    if ((next-before+9u)>18u) changed=1;
+    next=updated[3];
+    before=previous[3];
+    if ((next-before+9u)>18u) changed=1;
+    if (!(changed&r1_device_id_once_status)) return;
+    if ((r1_structured_log_mode_get()&1u)||
+        (r1_structured_log_mode_get()&4u))
+        (void)r1_structured_log_format(0x0c000000u,r1_health_change_ring_text,
+                                     r1_health_change_ring_text);
+    if (r1_structured_log_mode_get()&2u)
+        nrf_log_frontend_std_0(0x001c0003u,r1_health_change_sdk_text);
+    r1_record12_reinitialize();
+}
+extern void *volatile r1_health_settings_kv_handle;
+extern uint32_t r1_kv_class_read(void *,void *,uint32_t);
+extern uint32_t r1_kv_class_write(void *,const void *,uint32_t);
+struct __attribute__((packed,may_alias)) r1_health_unaligned_word { uint32_t value; };
+/* Stock 0x73604 uses a 12-byte local view. Refresh the live handle
+ * before writing and keep ordered unaligned load/store pairs. */
+__attribute__((noinline,used)) uint32_t
+r1_record12_persist_body(const volatile uint8_t *record,volatile uint32_t *frame)
+{
+    if (!record) return 0;
+    (void)r1_kv_class_read(r1_health_settings_kv_handle,(void *)frame,12);
+    for (uint32_t i=0;i<3;i++)
+        frame[i]=((const volatile struct r1_health_unaligned_word *)
+                  (const volatile void *)(record+4*i))->value;
+    return r1_kv_class_write(r1_health_settings_kv_handle,(const void *)frame,12);
+}
+void r1_record12_persist(const void *record)
+{
+    volatile uint32_t frame[3];
+    r1_record12_persist_body(record,frame);
+}

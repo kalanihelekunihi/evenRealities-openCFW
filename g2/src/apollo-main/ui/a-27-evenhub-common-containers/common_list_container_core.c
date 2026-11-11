@@ -171,7 +171,7 @@ void common_list_clear_focus_border_4dcd92(common_list_t *list)
 {
     if (list != NULL && list->current_index >= 0 && list->current_index < list->item_count &&
         list->items[list->current_index] != NULL)
-        audio_uart_page_44131c(list->items[list->current_index], 0, 0);
+        lv_obj_set_style_border_width(list->items[list->current_index], 0, 0);
 }
 
 /* Restyle every item: the focused one gets a dark fill, white text and (border_en) a white
@@ -192,16 +192,16 @@ void common_list_update_focus_style_4dcdbe(common_list_t *list)
             audio_uart_page_44129e(list->items[i], 50u, 0);
             audio_uart_page_44127e(list->items[i], audio_uart_page_44104c(0x000000u), 0);
             if (list->border_en == 0u) {
-                audio_uart_page_44131c(list->items[i], 0, 0);
+                lv_obj_set_style_border_width(list->items[i], 0, 0);
             } else {
-                audio_uart_page_44131c(list->items[i], 1, 0);
+                lv_obj_set_style_border_width(list->items[i], 1, 0);
                 audio_uart_page_4412ec(list->items[i], audio_uart_page_44104c(0xffffffu), 0);
             }
             if (label != NULL)
                 audio_uart_page_44140e(label, audio_uart_page_44104c(0xffffffu), 0);
         } else {
             audio_uart_page_44129e(list->items[i], 0u, 0);
-            audio_uart_page_44131c(list->items[i], 0, 0);
+            lv_obj_set_style_border_width(list->items[i], 0, 0);
             if (label != NULL)
                 audio_uart_page_44140e(label, audio_uart_page_44104c(0x444444u), 0);
         }
@@ -264,7 +264,7 @@ void common_list_start_scroll_anim_4dcfe6(common_list_t *list, int32_t target_y,
     audio_uart_lv_anim_values_4506ce(&a, audio_uart_lv_obj_y_44e498(list->scroll_container), target_y);
     a.duration = duration;
     a.exec_cb = common_list_scroll_anim_exec_cb_4dcec8;
-    a.path_cb = audio_uart_lv_anim_path_450688;
+    a.path_cb = lv_anim_path_ease_in_out;
     a.completed_cb = common_list_scroll_anim_complete_cb_4dced2;
     a.user_data = list;
     (void)audio_uart_lv_anim_start_450408(&a);
@@ -323,7 +323,7 @@ void common_list_trigger_rubber_band_4dd1c4(common_list_t *list, uint8_t is_top)
     audio_uart_lv_anim_values_4506ce(&a, normal_y, stretch_y);
     a.duration = 150;
     a.exec_cb = common_list_rubber_band_anim_exec_cb_4dd052;
-    a.path_cb = audio_uart_lv_anim_path_450672;
+    a.path_cb = lv_anim_path_ease_out;
     a.reverse_duration = 150u;
     a.reverse_delay = 0u;
     a.completed_cb = common_list_rubber_band_anim_cb_4dd05a;
@@ -474,19 +474,19 @@ common_list_t *common_list_container_create_4dd510(void *parent, const common_li
     audio_uart_page_44e368(list->scroll_container, LV_SCROLLBAR_MODE_OFF);
     audio_uart_page_44e3ca(list->scroll_container, LV_DIR_VER);
     audio_uart_page_44129e(list->scroll_container, 0u, 0);
-    audio_uart_page_44146a(list->scroll_container, (int32_t)cfg.border_radius, 0);
+    lv_obj_set_style_radius(list->scroll_container, (int32_t)cfg.border_radius, 0);
     if (cfg.border_width == 0u) {
-        audio_uart_page_44131c(list->scroll_container, 0, 0);
+        lv_obj_set_style_border_width(list->scroll_container, 0, 0);
     } else {
-        audio_uart_page_44131c(list->scroll_container, (int32_t)cfg.border_width, 0);
+        lv_obj_set_style_border_width(list->scroll_container, (int32_t)cfg.border_width, 0);
         color = get_color_from_index_4dcd32(cfg.border_color);
         audio_uart_page_4412ec(list->scroll_container, audio_uart_page_44104c(color), 0);
         CC_LOG(4, fn_create, 0x245u, 0x10800000u, cr_border, cr_border_s, cfg.border_width, color);
     }
-    audio_uart_page_44120e(list->scroll_container, (int32_t)cfg.padding, 0);
-    audio_uart_page_44121c(list->scroll_container, (int32_t)cfg.padding, 0);
-    audio_uart_page_44122a(list->scroll_container, (int32_t)cfg.padding, 0);
-    audio_uart_page_441238(list->scroll_container, (int32_t)cfg.padding, 0);
+    lv_obj_set_style_pad_top(list->scroll_container, (int32_t)cfg.padding, 0);
+    lv_obj_set_style_pad_bottom(list->scroll_container, (int32_t)cfg.padding, 0);
+    lv_obj_set_style_pad_left(list->scroll_container, (int32_t)cfg.padding, 0);
+    lv_obj_set_style_pad_right(list->scroll_container, (int32_t)cfg.padding, 0);
 
     total_items = (int32_t)cfg.item_count;
     actual_content = total_items * COMMON_LIST_ITEM_HEIGHT;
@@ -523,7 +523,7 @@ common_list_t *common_list_container_create_4dd510(void *parent, const common_li
     audio_uart_page_43f0e0(list->content_container, 0);
     audio_uart_page_43f142(list->content_container, 0);
     audio_uart_page_44129e(list->content_container, 0u, 0);
-    audio_uart_page_44131c(list->content_container, 0, 0);
+    lv_obj_set_style_border_width(list->content_container, 0, 0);
     list_obj_set_style_pad_all_4dccd8(list->content_container, 0, 0);
     audio_uart_page_43dfa4(list->content_container, LV_OBJ_FLAG_SCROLLABLE);
 
@@ -539,8 +539,8 @@ common_list_t *common_list_container_create_4dd510(void *parent, const common_li
             file_heap_free(list);
             return NULL;
         }
-        audio_uart_page_44122a(list->items[i], 12, 0);
-        audio_uart_page_441238(list->items[i], 12, 0);
+        lv_obj_set_style_pad_left(list->items[i], 12, 0);
+        lv_obj_set_style_pad_right(list->items[i], 12, 0);
         if (cfg.item_width == 0)
             audio_uart_page_43f4c0(list->items[i], LV_SIZE_CONTENT, COMMON_LIST_ITEM_HEIGHT);
         else
@@ -549,8 +549,8 @@ common_list_t *common_list_container_create_4dd510(void *parent, const common_li
         audio_uart_page_43f142(list->items[i], list_item_y_position_4dcd0a(list, i));
         audio_uart_page_44127e(list->items[i], audio_uart_page_44104c(0x000000u), 0);
         audio_uart_page_44129e(list->items[i], 0u, 0);
-        audio_uart_page_44146a(list->items[i], 10, 0);
-        audio_uart_page_44131c(list->items[i], 0, 0);
+        lv_obj_set_style_radius(list->items[i], 10, 0);
+        lv_obj_set_style_border_width(list->items[i], 0, 0);
         audio_uart_page_43dfa4(list->items[i], LV_OBJ_FLAG_SCROLLABLE);
 
         label = audio_uart_page_499416(list->items[i]);

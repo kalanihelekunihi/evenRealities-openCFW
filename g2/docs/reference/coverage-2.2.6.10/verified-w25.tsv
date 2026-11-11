@@ -1,0 +1,3 @@
+address	source	function	evidence
+0x5A326C	g2/src/apollo-main/audio/transition-snapshot/producers.c	pcm22_sequence_13	w25 side-by-side Ghidra decompile vs source: same table field extracts (&0x7f / >>0x15 / >>7 / >>0x11), finish_previous wait loop (<0x3c) + publish stores, 0.9f margin boost clamp 127 to 0x4002004c, doubled_boost(nc,oc) to 0x40020044, delay 50/5, load_core, switch_low/high bit sequence (0x40|8|~0x2000000) incl. 0x14-iteration poll loops
+0x5A2EEA	g2/src/apollo-main/audio/transition-snapshot/producers.c	pcm22_sequence_11	w25 side-by-side Ghidra decompile vs source: publish stores, switch_low (&~0x40,&~8,|0x2000000) and 0x14-iteration poll, switch_high, load_core, nc field write, doubled_boost(nf,of) with delay 50 then nf, ton_adjust

@@ -17,8 +17,9 @@ extern void r1_native_event_dispatch(const void *);
 extern uint32_t r1_event_publish(uint32_t,const void *,uint32_t);
 extern uint32_t r1_native_sensor_timer_poll(void);
 extern void r1_native_motion_interrupt(void);
-extern void r1_native_stream_initialize(void),r1_native_accelerometer_singleton(void);
-extern void r1_native_stream_register(void),r1_native_temperature_singleton(void),r1_native_health_initialize(void);
+extern uint32_t r1_native_stream_initialize(void),r1_native_stream_register(void);
+extern void *r1_native_accelerometer_singleton(void),*r1_native_temperature_singleton(void);
+extern void r1_native_health_initialize(void);
 extern void r1_native_service_hardware_initialize(void),r1_native_health_database_initialize(void);
 extern void r1_native_hr_cache_initialize(void),r1_native_spo2_cache_initialize(void);
 extern void r1_native_temperature_cache_initialize(void),r1_native_stress_cache_initialize(void);
@@ -32,7 +33,7 @@ WATCHDOG(gtx);WATCHDOG(msgtx);WATCHDOG(sensor);WATCHDOG(service);WATCHDOG(storag
 
 static _Noreturn void fail(void)
 {
-    __asm__ volatile ("msr basepri, %0" :: "r"(UINT32_C(64)) : "memory");
+    __builtin_arm_wsr("basepri",UINT32_C(64));
     *(volatile uint32_t *)(uintptr_t)UINT32_MAX=0;
     for (;;) {}
 }

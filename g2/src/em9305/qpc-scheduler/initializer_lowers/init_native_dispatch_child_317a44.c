@@ -1,55 +1,17 @@
-/* Complete native helper; DSP accumulator and delay slot effects preserved. */
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_dispatch_child_317a44\n"
-".type opencfw_em9305_dispatch_child_317a44,@function\n"
-"opencfw_em9305_dispatch_child_317a44:\n"
-"L317a44:\n"
-"push_s r13\n"
-"L317a46:\n"
-"ldb_s r3,[r2,0x7]\n"
-"L317a48:\n"
-"mov_s r12,r0\n"
-"L317a4a:\n"
-"ldb_s r13,[r2,0x6]\n"
-"L317a4c:\n"
-"ldb r58,[r2,1]\n"
-"L317a50:\n"
-"ldb_s r0,[r2,0x2]\n"
-"L317a52:\n"
-"asl_s r3,r3,0x8\n"
-"L317a54:\n"
-"mov r59,0\n"
-"L317a58:\n"
-"add_s r13,r13,r3\n"
-"L317a5a:\n"
-"ldb_s r3,[r2,0x3]\n"
-"L317a5c:\n"
-"macu r0,r0,256\n"
-"L317a60:\n"
-"ldb_s r0,[r2,0x4]\n"
-"L317a62:\n"
-"macdu 0,r3,0x10000\n"
-"L317a6a:\n"
-"ldb_s r2,[r2,0x5]\n"
-"L317a6c:\n"
-"asl_s r0,r0,0x18\n"
-"L317a6e:\n"
-"add.f r0,r0,r58\n"
-"L317a72:\n"
-"sth_s r13,[r1,0]\n"
-"L317a74:\n"
-"adc.f r1,r59,0\n"
-"L317a78:\n"
-"add_s r1,r1,r2\n"
-"L317a7a:\n"
-"st_s r0,[r12,0]\n"
-"L317a7c:\n"
-"mov_s r0,0x8\n"
-"L317a7e:\n"
-"st_s r1,[r12,0x4]\n"
-"L317a80:\n"
-"leave_s [r13,pcl]\n"
-".size opencfw_em9305_dispatch_child_317a44,.-opencfw_em9305_dispatch_child_317a44\n"
-);
+#include <stdint.h>
+
+/* Native 0x317a44..0x317a82: decode a little-endian field block: bytes
+ * 1..5 form a 40-bit value stored as a 64-bit word, bytes 6..7 a
+ * halfword. Returns the consumed length, 8. */
+uint32_t opencfw_em9305_dispatch_child_317a44(uintptr_t value_out, uintptr_t half_out,
+                                              uintptr_t in)
+{
+    volatile const uint8_t *i=(volatile const uint8_t *)in;
+    uint32_t half=i[6]+((uint32_t)i[7]<<8);
+    uint32_t low=i[1]+((uint32_t)i[2]<<8)+((uint32_t)i[3]<<16)+((uint32_t)i[4]<<24);
+    uint32_t high=i[5];
+    *(volatile uint16_t *)half_out=(uint16_t)half;
+    *(volatile uint32_t *)value_out=low;
+    *(volatile uint32_t *)(value_out+4u)=high;
+    return 8u;
+}

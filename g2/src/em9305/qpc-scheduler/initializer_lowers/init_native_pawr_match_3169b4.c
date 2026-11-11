@@ -1,123 +1,49 @@
-/* Native PAwR eight-slot matcher and compacting ring update. */
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_pawr_match_3169b4\n"
-".type opencfw_em9305_pawr_match_3169b4,@function\n"
-"opencfw_em9305_pawr_match_3169b4:\n"
-"L3169b4:\n"
-"enter_s [r13-r15]\n"
-"L3169b6:\n"
-"ldb r3,[r0,64]\n"
-"L3169ba:\n"
-"breq.d.nt r3,0,L316a50\n"
-"L3169be:\n"
-"mov_s r9,0\n"
-"L3169c0:\n"
-"ld_s r13,[r0,0x44]\n"
-"L3169c2:\n"
-"ldb r8,[r0,66]\n"
-"L3169c6:\n"
-"mov lp_count,0x8\n"
-"L3169ca:\n"
-"mov_s r3,r0\n"
-"L3169cc:\n"
-"mov_s r12,0\n"
-"L3169ce:\n"
-"mov_s r11,0\n"
-"L3169d0:\n"
-"lp L3169ec\n"
-"L3169d4:\n"
-"bbit0.nt r13,r11,L3169e6\n"
-"L3169d8:\n"
-"ld_s r15,[r3,0x4]\n"
-"L3169da:\n"
-"ld_s r14,[r3,0]\n"
-"L3169dc:\n"
-"xor_s r15,r15,r2\n"
-"L3169de:\n"
-"xor_s r14,r14,r1\n"
-"L3169e0:\n"
-"or.f 0,r14,r15\n"
-"L3169e4:\n"
-"beq_s L3169f2\n"
-"L3169e6:\n"
-"add_s r3,r3,0x8\n"
-"L3169e8:\n"
-"add_s r12,r12,1\n"
-"L3169ea:\n"
-"add_s r11,r11,1\n"
-"L3169ec:\n"
-"stb 1,[r0,65]\n"
-"L3169f0:\n"
-"b_s L316a50\n"
-"L3169f2:\n"
-"extb_s r3,r12\n"
-"L3169f4:\n"
-"breq.d.nt r3,r8,L316a50\n"
-"L3169f8:\n"
-"mov_s r9,1\n"
-"L3169fa:\n"
-"add r12,r11,0x1\n"
-"L3169fe:\n"
-"cmp_s r3,0x7\n"
-"L316a00:\n"
-"mov.eq r12,0\n"
-"L316a04:\n"
-"breq.nt r12,r8,L316a32\n"
-"L316a08:\n"
-"bbit0.d.nt r13,r12,L316a2e\n"
-"L316a0c:\n"
-"mov_s r3,r12\n"
-"L316a0e:\n"
-"add3 r14,r0,r3\n"
-"L316a12:\n"
-"add3 r15,r0,r11\n"
-"L316a16:\n"
-"cmp_s r3,0x7\n"
-"L316a18:\n"
-"add_s r12,r3,0x1\n"
-"L316a1a:\n"
-"mov_s r11,r3\n"
-"L316a1c:\n"
-"ld r3,[r14,0x4]\n"
-"L316a1e:\n"
-"ld_s r14,[r14,0]\n"
-"L316a20:\n"
-"mov.eq r12,0\n"
-"L316a24:\n"
-"st_s r3,[r15,0x4]\n"
-"L316a26:\n"
-"brne.d.t r12,r8,L316a08\n"
-"L316a2a:\n"
-"st_s r14,[r15,0]\n"
-"L316a2c:\n"
-"b_s L316a32\n"
-"L316a2e:\n"
-"bclr r13,r13,r11\n"
-"L316a32:\n"
-"cmp_s r8,0\n"
-"L316a34:\n"
-"sub r3,r8,0x1\n"
-"L316a38:\n"
-"mov.eq r3,0x7\n"
-"L316a3c:\n"
-"stb r3,[r0,66]\n"
-"L316a40:\n"
-"extb_s r3,r3\n"
-"L316a42:\n"
-"bset r12,r13,r3\n"
-"L316a46:\n"
-"add3 r3,r0,r3\n"
-"L316a4a:\n"
-"st_s r12,[r0,0x44]\n"
-"L316a4c:\n"
-"st_s r2,[r3,0x4]\n"
-"L316a4e:\n"
-"st_s r1,[r3,0]\n"
-"L316a50:\n"
-"mov_s r0,r9\n"
-"L316a52:\n"
-"leave_s [r13-r15,pcl]\n"
-".size opencfw_em9305_pawr_match_3169b4,.-opencfw_em9305_pawr_match_3169b4\n"
-);
+#include <stdint.h>
+
+/* Native 0x3169b4..0x316a54: PAwR eight-slot address ring (entries of two
+ * words at +0, enable byte +64, overflow flag +65, head byte +66, valid
+ * mask +68). Returns 0 when disabled or the address is new (setting the
+ * flag); returns 1 for a known address, which is moved to the slot before
+ * the head: later valid entries shift down one slot (an empty slot ends
+ * the shift and frees the vacated slot), the head steps back (7 after 0)
+ * and the address is stored there as valid. */
+static inline uint32_t r32(uintptr_t a){return *(volatile uint32_t *)a;}
+static inline void w32(uintptr_t a,uint32_t v){*(volatile uint32_t *)a=v;}
+
+uint32_t opencfw_em9305_pawr_match_3169b4(uintptr_t ring,uint32_t low,uint32_t high)
+{
+    if(*(volatile uint8_t *)(ring+64u)==0u)return 0u;
+    uint32_t valid=r32(ring+68u);
+    uint32_t head=*(volatile uint8_t *)(ring+66u);
+    uint32_t slot;
+    for(slot=0u;slot<8u;++slot){
+        if(((valid>>slot)&1u)==0u)continue;
+        if(r32(ring+slot*8u)==low&&r32(ring+slot*8u+4u)==high)break;
+    }
+    if(slot==8u){
+        *(volatile uint8_t *)(ring+65u)=1u;
+        return 0u;
+    }
+    if(slot==head)return 1u;
+    uint32_t to=slot;
+    uint32_t from=slot==7u?0u:slot+1u;
+    while(from!=head){
+        if(((valid>>from)&1u)==0u){
+            valid&=~(1u<<to);
+            break;
+        }
+        uint32_t moved_high=r32(ring+from*8u+4u);
+        uint32_t moved_low=r32(ring+from*8u);
+        w32(ring+to*8u+4u,moved_high);
+        w32(ring+to*8u,moved_low);
+        to=from;
+        from=from==7u?0u:from+1u;
+    }
+    uint32_t start=head==0u?7u:head-1u;
+    *(volatile uint8_t *)(ring+66u)=(uint8_t)start;
+    start&=0xffu;
+    w32(ring+68u,valid|(1u<<start));
+    w32(ring+start*8u+4u,high);
+    w32(ring+start*8u,low);
+    return 1u;
+}

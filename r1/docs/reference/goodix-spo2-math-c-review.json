@@ -1,0 +1,131 @@
+{
+  "schema_version": 1,
+  "scope": "Native SpO2 calibration polynomial in C",
+  "acceptance_target": "Hardware-first license-free C firmware; byte identity waived",
+  "report": "build/sources-goal-r1-goodix-spo2-math-c/report.json",
+  "comparison_report": "build/sources-goal-r1-goodix-spo2-execute-c/report.json",
+  "stock_entries": [
+    {
+      "symbol": "r1_goodix_spo2_quartic",
+      "entry": "0x7412c",
+      "instruction_bytes": 94
+    }
+  ],
+  "audit": {
+    "compiled_units": 900,
+    "application_imports": 78,
+    "bootloader_imports": 22,
+    "unchanged_prior_nongenerated_sources_and_objects": 889,
+    "tested_object_equals_normal_build": true,
+    "new_owned_state_bytes": 0,
+    "new_imports": [],
+    "source_plan_and_cache_layout_unchanged": true,
+    "new_native_instruction_bytes": 94,
+    "paired_cases": 4640,
+    "compiled_defects_rejected": 4,
+    "core_and_other_dependencies_unfinished": true
+  },
+  "direct": {
+    "paired_cases": 4640,
+    "native_instruction_bytes_executed": 94,
+    "all_four_active_rounding_modes": true,
+    "exceptional_and_subnormal_inputs": true,
+    "default_NaN_and_flush_to_zero_modes": true,
+    "output_and_full_FPSCR_match": true,
+    "saved_registers_and_all_RAM_unchanged": true,
+    "source_cannot_execute_stock": true,
+    "source_object_sha256": "265990bd7f6c22c801d820280faeccc977bbacff30e719a4ad3f08414b33dfc5"
+  },
+  "compiled_defects_rejected": [
+    {
+      "name": "scale",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "coefficient",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "degree",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "sign",
+      "compiled": true,
+      "rejected": true
+    }
+  ],
+  "contract": [
+    "Hard-float ABI takes scalar in S0 and coefficient descriptor in R0. Descriptor offsets8,12,16,20,24 hold signed32 coefficients. No null guard is added.",
+    "Preserve float32 conversion and polynomial multiplication/addition order, followed by float32 division by10000. Native VMLA is nonfused; separate multiply/add instructions are permitted by behavior proof.",
+    "Return float32 in S0; saved registers and all RAM remain unchanged. Compare full active FPSCR, including sticky exception flags, rounding, default-NaN and flush-to-zero settings."
+  ],
+  "limits": [
+    "This helper is available to the forthcoming native core; it does not implement goodix_spo2_calc or remove its import. Existing portable model API remains separately named. No byte identity, final startup/placement or physical FPU validation is claimed.",
+    "4640 native/C pairs exercise all94 native instruction bytes and broad finite, nonfinite, signaling/quiet NaN and subnormal inputs. This is sampled emulator evidence with enabled/primed FPU and masked traps, not exhaustive input coverage or cold-device proof.",
+    "14 other processing dependencies remain below the core. Existing portable names do not establish native ABI/layout correctness. REA pseudocode needs instruction-level correction for raw-bit comparisons and truncating float conversions.",
+    "900 units compile/compose with no failures or duplicate strong symbols;889 prior nongenerated source/object pairs are unchanged. Imports remain78 application/22 bootloader. Relocatable composition is not a bootable image."
+  ],
+  "evidence_files": {
+    "build/sources-goal-r1-goodix-spo2-math-c/report.json": "fe088cad35b3e2ccc1e1a4af70a55be961dfcc16061141381e68bd8cf96d9c1e",
+    "build/sources-goal-r1-goodix-spo2-execute-c/report.json": "652195282bcda6984924b9d716b430231968a7632ec238d2476f241d7b2b7eca",
+    "r1/src/application/goodix/native_spo2_math.c": "ffee2e1ee1d93a3c3d3b2b7ee68e52b572a9df88a5c5e1dc5058c3221be990b9",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-spo2-math-c/r1/r1-application/r1__src__application__goodix__native_spo2_math.c.o": "265990bd7f6c22c801d820280faeccc977bbacff30e719a4ad3f08414b33dfc5",
+    "r1/src/sources.json": "6cf85047f54a2a56387251078fa7e379701902765b6824e6eb4e47bd7b3cba80",
+    "tools/build/source-plan.json": "eeb516e31b3310fb0718f36908977f8125723f7c5e0e86cd6744395826259a4d",
+    "r1/src/config/runtime/native_health_cache.ld": "eb8f131c489cd818d4e36718718fa1989719ca0170f164541a1a5bf56dfc1ec3",
+    "r1/docs/reference/FUNCTION-OWNERSHIP.csv": "c2b445cad6ce4b967a5be66ea8ea43704dd06f3eff72f69e8c4b6445892577c9",
+    "r1/symbols/function-frontier.csv": "e0c53a3784916bee6dbf4606ad25fea1e2a289bf3dc0d9101c59ef85403d00c5",
+    "r1/docs/reference/goodix-spo2-execute-c-review.md": "105b981d800a5cc6ab6124efac0e6c8ed4e5789afbeccd5e65c438431a41bf5e",
+    "build/goal-r1-goodix-spo2-core-c/truncate-probe.o": "cd724b953b0cff7007a676fd78d1172c2453c2617ba03a7ba674bcb24f9120e0",
+    "build/goal-r1-goodix-spo2-core-c/negative-degree.log": "8da9eef5096f3e81197a7fa3237c3cc624666141461c808741fa566a69bd6f7e",
+    "build/goal-r1-goodix-spo2-core-c/fpscr-intrinsic-probe.o": "105d404e0115acb03cfdda3a41a35806962a1d27edf5dac7497afec3439dc4a4",
+    "build/goal-r1-goodix-spo2-core-c/negative-coefficient.o": "ba97de26b9a486c4b4310e83c0df73d33c53b14a1f58e628f40a14835e760d24",
+    "build/goal-r1-goodix-spo2-core-c/negative-scale.c": "5ddda82ccd92e56bb02a5d94b33d49630d23376f554f12ee762df8f92b61b461",
+    "build/goal-r1-goodix-spo2-core-c/truncate.log": "ad4539007d8cb2e16ba712ecdcffb00b3c4304a67781e48e58f275642a872335",
+    "build/goal-r1-goodix-spo2-core-c/verify-quartic.py": "e884c7fa4fd55fe3a56d73dce43f17df2839734a4aec2f5ef99355458a05c9f6",
+    "build/goal-r1-goodix-spo2-core-c/quartic-rea.json": "a2370c5af1a743b89e4a3efdf1faffec036f4c04907a4f2a3876997c2a60c368",
+    "build/goal-r1-goodix-spo2-core-c/verify-truncate.py": "bfa4d68dc9bf49bbe9b4100c5a6deae833753b815366d3088ee2aa1ea078bd83",
+    "build/goal-r1-goodix-spo2-core-c/checkpoint.json": "8c916d65a4ff465ffd70732a25dafe500947974309fc215cea315b817750a171",
+    "build/goal-r1-goodix-spo2-core-c/quartic.elf": "df394c9ca2cbf57297a6d301788c81c5cedae1a1ffbb07df3b453997b8e41f23",
+    "build/goal-r1-goodix-spo2-core-c/rea-small-stages.json": "81831db523c4c549cd5211bb84e8cd5d8751c70994784c5e699b1e93ca8cd6d3",
+    "build/goal-r1-goodix-spo2-core-c/truncate.ld": "5811a75239b6a6d4dd9a734399a56c6580eec5117ba0c714143c91c79fe6d9e8",
+    "build/goal-r1-goodix-spo2-core-c/pseudocode.json": "361cd0f91f815f7cf3c4f84c86b54ba120015cafe5b989728b6f9ebf23718daf",
+    "build/goal-r1-goodix-spo2-core-c/negative-sign.c": "2c3afaec9fd41ae43a46a68cc5c339cd704063cf1d4bfcba7e11d36bb4530f55",
+    "build/goal-r1-goodix-spo2-core-c/negative-degree.o": "dcf7af417ad66c5b4c9d6c069cc67dd18639e68429c63a365e5cdee862adab11",
+    "build/goal-r1-goodix-spo2-core-c/quartic.o": "265990bd7f6c22c801d820280faeccc977bbacff30e719a4ad3f08414b33dfc5",
+    "build/goal-r1-goodix-spo2-core-c/quartic.ld": "b2ff9ac27a31674636716d033098cceafafc2f782e6660e4dd431dc3e9dc449d",
+    "build/goal-r1-goodix-spo2-core-c/negative-sign.log": "ead5654a734e2471256045b8ce9c0752c6f59c2e314ddc335a1005a15352be01",
+    "build/goal-r1-goodix-spo2-core-c/negative-coefficient.log": "ba8f54ad3ee7d0fd8cfe37276251e34be6a01866fbdefb02b7f50b92eb497120",
+    "build/goal-r1-goodix-spo2-core-c/quartic.log": "6433db306976b6bcefb4c1af830afb03d2403b0a22d8f0e9e58b2b83336d7fe5",
+    "build/goal-r1-goodix-spo2-core-c/negative-scale.o": "a8110e70e463935e6508bdedf31f239cd06692e9f1dd31dae8f12bd3442aa18c",
+    "build/goal-r1-goodix-spo2-core-c/rea-analysis.json": "d26a6268b732e939a6b505b48821d43ccafd5858ca4ffa23966bbe717f76fc43",
+    "build/goal-r1-goodix-spo2-core-c/fpscr-intrinsic-probe.c": "e7b3c07f0e2f42b882581da240a6304c5a91fe95996fb653a7fc37d5c7920b8a",
+    "build/goal-r1-goodix-spo2-core-c/negative-coefficient.c": "c022c0ccc94d20543e2721c3b4911f126177b1ee4bf36ec811b84b95c6d940ec",
+    "build/goal-r1-goodix-spo2-core-c/truncate-probe.c": "0190afc132f605789084e7eded345b6ac2af5cd722b226fbf38fdd2912f90053",
+    "build/goal-r1-goodix-spo2-core-c/quartic-negative-results.json": "df1ed5818e0b36866792b2177e4900db9bd0539b2e861594996bce2433f55f68",
+    "build/goal-r1-goodix-spo2-core-c/quartic-production-compile-argv.json": "811c8f47fe9786755698855826053e4cfb9ea43a0944af9416d67267a5c61d1d",
+    "build/goal-r1-goodix-spo2-core-c/rea-bytes.json": "5c6c0d6c1deb9e5ff65ab9f03a68ed615c006629c3069b36e9769129f36f58a9",
+    "build/goal-r1-goodix-spo2-core-c/truncate-probe.elf": "703a7d682fbe130d2c2e7ceb9ac88319d7320ca1c130ad0c215108885318e8c7",
+    "build/goal-r1-goodix-spo2-core-c/manifest-before.json": "da7ad7c4b9eeaa4926fba9994403cc0fc6ebe8de5ee0e490105db1bc1d549474",
+    "build/goal-r1-goodix-spo2-core-c/negative-sign.o": "9fcb26578ec689928c04f593aac73f3873eeded558df2825bc3dba259466f1ad",
+    "build/goal-r1-goodix-spo2-core-c/negative-degree.c": "66fd4be82dd3f1487f9726baafd006602987dde2aecba351442066c5e236ee15",
+    "build/goal-r1-goodix-spo2-core-c/core-contract-notes.md": "7b6d9fd4905ea5398f594e2523da2cceafb96e406e50d46f0c9bb3bb413156b5",
+    "build/goal-r1-goodix-spo2-core-c/quartic-results.json": "63fa0e440cf4f55911ab4922f3c37b965bac0456e53c44163a7005ff80f1ef02",
+    "build/goal-r1-goodix-spo2-core-c/quartic-compile-argv.json": "8424325534852d58944a904084b712c6fa9aaffe15f72bd49a9e5f72b7d3f47c",
+    "build/goal-r1-goodix-spo2-core-c/truncate-results.json": "da66bee3bee48fdcece514e6af829fd77b29f982b202a613c0df7a44aa552223",
+    "build/goal-r1-goodix-spo2-core-c/audit-math.py": "bbdd81716afa27469395b4338e4deb862a06f50df0afc0ec08624fd3d0582c82",
+    "build/goal-r1-goodix-spo2-core-c/record-math.py": "5b4b894c0b2714d8f4037af07986876a1f662c5ceddcd0f6cf6b1c0fdf07c181",
+    "build/goal-r1-goodix-spo2-core-c/negative-quartic.py": "3f34c917df9dbd5951e848494108b76fe1a670b78edeb8ec4d1b2b66f3cc949c",
+    "build/goal-r1-goodix-spo2-core-c/negative-scale.log": "2b99d330ecfd7a6445a95d3694e9f078fcb8a499a0d71580033149ab247f8499",
+    "build/goal-r1-goodix-spo2-core-c/truncate-fixture.S": "c7aafe5f490c8b21cfc74bbfcf249a12bd88b95f63513db227e4640b319f0406",
+    "build/goal-r1-goodix-spo2-core-c/quartic.c": "6ba2b5959d792faf5fe6afb731509ae58760476950729c6f21a7850baa051eff",
+    "build/goal-r1-goodix-spo2-core-c/math-audit.json": "f7886d8fae5beac75ca02508ab4f0c3074ae91d71d4485ebdc28daa89d718a6a",
+    "build/goal-r1-goodix-spo2-core-c/truncate-fixture.o": "a96cbb77bdf35df15fdbc78774c7f3dd59aa47208e50b8a9c56d35c9ff0bc058",
+    "build/goal-r1-goodix-spo2-core-c/quartic.d": "a7954016f87879da15065af937cd6d6d4740ca834d768a3cb6f74c0945711bcf",
+    "build/goal-r1-goodix-spo2-core-c/build.log": "27a7437b8478a6c6638b0959471c65d02da44b3647f37eff295ce258295053ea"
+  }
+}

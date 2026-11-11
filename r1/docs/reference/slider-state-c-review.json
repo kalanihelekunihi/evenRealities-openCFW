@@ -1,0 +1,295 @@
+{
+  "schema_version": 1,
+  "sources": [
+    "r1/src/application/runtime/native_touch_slider.c",
+    "r1/src/application/runtime/native_touch_slider.h",
+    "r1/src/application/runtime/native_touch_io_worker.c"
+  ],
+  "native_roots": [
+    "0x92cbc"
+  ],
+  "report": "build/sources-goal-r1-slider-typed-c/report.json",
+  "compiled_units": 842,
+  "application_imports": 72,
+  "added_imports": [],
+  "removed_imports": [
+    "r1_touch_slider_state_machine"
+  ],
+  "verification": {
+    "stock_C_pairs": {
+      "transition_thresholds": 1728,
+      "movement_coordinate_bounds": 1110,
+      "calibration_nonfinite_logs": 80,
+      "fresh_press_pending_timer": 288,
+      "pressure_early_gate": 288,
+      "live_provider_mutations": 80,
+      "repeated_sample_sequences": 704,
+      "interior_bound_domains": 4096,
+      "pressure_nonfinite_bit_views": 60,
+      "seeded_contact_states": 2048
+    },
+    "total_pairs": 10482,
+    "actual_C_velocity_debounce": true,
+    "actual_standard_memory": true,
+    "REA_bytes_match": true,
+    "callee_saved_integer_FP_stack_guards_masks": true,
+    "ordinary_void_callback_ABI": true,
+    "device_execution": false
+  },
+  "actual_gesture_integration": {
+    "stock_C_pairs": {
+      "transition_thresholds": 1728,
+      "movement_coordinate_bounds": 1110,
+      "calibration_nonfinite_logs": 80,
+      "fresh_press_pending_timer": 288,
+      "pressure_early_gate": 288,
+      "live_provider_mutations": 80,
+      "repeated_sample_sequences": 704,
+      "interior_bound_domains": 4096,
+      "pressure_nonfinite_bit_views": 60,
+      "seeded_contact_states": 64
+    },
+    "total_pairs": 8498,
+    "actual_C_velocity_debounce": true,
+    "actual_C_gesture": true,
+    "actual_standard_memory": true,
+    "REA_bytes_match": true,
+    "callee_saved_integer_FP_stack_guards_masks": true,
+    "ordinary_void_callback_ABI": true,
+    "device_execution": false
+  },
+  "actual_IQS_event_callback_integration": {
+    "stock_C_pairs": {
+      "IRQ_frontend_slider_gesture": 756
+    },
+    "total_pairs": 756,
+    "actual_C_IQS_event_callback": true,
+    "actual_C_slider_velocity_debounce_gesture": true,
+    "actual_standard_memory": true,
+    "callee_saved_integer_FP_stack_guards_masks": true,
+    "device_execution": false
+  },
+  "mutants": [
+    {
+      "name": "peak_update",
+      "rejected": true
+    },
+    {
+      "name": "unordered_scale",
+      "rejected": true
+    },
+    {
+      "name": "coordinate_cap",
+      "rejected": true
+    },
+    {
+      "name": "previous_sample",
+      "rejected": true
+    },
+    {
+      "name": "held_empty_record",
+      "rejected": true
+    },
+    {
+      "name": "first_movement",
+      "rejected": true
+    },
+    {
+      "name": "tracking_movement",
+      "rejected": true
+    },
+    {
+      "name": "movement_tick_gap",
+      "rejected": true
+    },
+    {
+      "name": "long_threshold",
+      "rejected": true
+    },
+    {
+      "name": "pending_window",
+      "rejected": true
+    },
+    {
+      "name": "short_release",
+      "rejected": true
+    },
+    {
+      "name": "longer_release",
+      "rejected": true
+    },
+    {
+      "name": "synthetic_clear",
+      "rejected": true
+    },
+    {
+      "name": "timer_clear",
+      "rejected": true
+    },
+    {
+      "name": "pressure_fraction",
+      "rejected": true
+    },
+    {
+      "name": "release_reset_byte",
+      "rejected": true
+    }
+  ],
+  "prior_objects_unchanged": 831,
+  "changed_generated_objects": [
+    [
+      "r1-bootloader",
+      "{gen}/r1_startup_vectors.S"
+    ],
+    [
+      "r1-bootloader",
+      "{gen}/r1_uecc.c"
+    ]
+  ],
+  "unchanged_generated_objects": [
+    [
+      "r1-application",
+      "{gen}/r1_cmsis_os2_rtc.c"
+    ],
+    [
+      "r1-application",
+      "{gen}/fal_partition_r1_lookup.c"
+    ],
+    [
+      "r1-application",
+      "{gen}/fdb_utils_r1.c"
+    ],
+    [
+      "r1-application",
+      "{gen}/gh_demo_r1.c"
+    ],
+    [
+      "r1-application",
+      "{gen}/gh_demo_hook_r1.c"
+    ],
+    [
+      "r1-application",
+      "{gen}/gh_demo_user_r1.c"
+    ],
+    [
+      "r1-application",
+      "{gen}/app_error_handler_gcc_clang.c"
+    ],
+    [
+      "r1-application",
+      "{gen}/gh_ppg_timestamp_hooks_r1.c"
+    ]
+  ],
+  "changed_existing_allocated_sections": {},
+  "added_objects": [
+    "r1/src/application/runtime/native_touch_slider.c"
+  ],
+  "new_state_owners": [
+    {
+      "symbol": "r1_touch_long_press_threshold",
+      "native_address": "0x200067ca",
+      "size": 2,
+      "initializer": "e803"
+    },
+    {
+      "symbol": "r1_touch_coordinate_min",
+      "native_address": "0x200067ce",
+      "size": 2,
+      "initializer": "0a00"
+    },
+    {
+      "symbol": "r1_touch_coordinate_max",
+      "native_address": "0x200067d0",
+      "size": 2,
+      "initializer": "b400"
+    },
+    {
+      "symbol": "r1_touch_slider_record",
+      "native_address": "0x200067e8",
+      "size": 4,
+      "initializer": "00000000"
+    },
+    {
+      "symbol": "r1_touch_pressure_reference",
+      "native_address": "0x200067ec",
+      "size": 4,
+      "initializer": "00007043"
+    },
+    {
+      "symbol": "r1_touch_pressure_peak",
+      "native_address": "0x200067f0",
+      "size": 4,
+      "initializer": "0000c843"
+    },
+    {
+      "symbol": "r1_touch_slider_timeout_log_tick",
+      "native_address": "0x200067f4",
+      "size": 4,
+      "initializer": "00000000"
+    }
+  ],
+  "reused_owners": [
+    "r1_touch_contact_state",
+    "r1_touch_release_timer_pending",
+    "r1_touch_synthetic_flag",
+    "r1_touch_slider_origin",
+    "r1_touch_slider_step",
+    "r1_touch_client_bits",
+    "existing gesture direction/count/timestamp owners"
+  ],
+  "contract": [
+    "The callback ABI is four uint32 words inR0..R3 plus binary32 pressure inS0. The fourth word is not read by the native state machine. The worker registration now includes this typed declaration.",
+    "Preserve raw-positionffff fallback, separately rounded binary32 normalization, signed float-bit pressure gates, native unordered-scale path, coordinate clamp/min/max tracking, and the previous/current sample copy order. Floating contraction is disabled.",
+    "Preserve first-contact history reset and delayed-tap cancellation, pending contact phase, first50-unit movement gate, later15-unit gate,100-unit movement spacing and150-unit early pressure gate. The pressure comparison uses reference+(peak-reference)*0.3 with two separate rounding operations.",
+    "Preserve1000-unit long press,10000-unit held timeout with its separate log throttle,51..199 and200..399 release ranges, inclusive300-unit pending window, strict interior margins10/20, and caller-owned release sequence time. Time differences are uint32 wrap.",
+    "Held contacts below movement/long-press gates dispatch an empty record, not a new press event. Failed first-movement timing/pressure gates return without dispatch after committing the mode transition.",
+    "Synthetic long/slide releases use the existing synthetic flag, clear it after callbacks, and preserve the separate local release record after an optional slide record.",
+    "New narrow owners correspond only to the seven remaining context fields. Their object initializers match the authenticated expanded RW bytes; existing calibration, client, gesture, timer and contact owners are reused.",
+    "Logging uses the existing structured provider, SDK frontend void prototypes and binary32-to-binary64 bit provider. The structured logger declaration has its actual three fixed arguments."
+  ],
+  "limits": [
+    "REA read_bytes matches the pinned1732-byte span at0x92cbc, including the literal island. The active analysis inventory lacks this function, so unsuccessful pseudocode/instruction requests are not accepted as completed decompiler evidence. Behavior is decoded from the three authenticated Thumb instruction ranges and checked against native execution.",
+    "The IQS integration begins at the normalized-float event dispatcher0x6fc78, not an I2C transfer or the full IRQ worker. It executes actual C event frontend, registered callback, slider, velocity, release sequence, gesture kernel and memory routines. It does not prove live sensor timing.",
+    "Log sinks/mode selection, delayed cancellation/scheduling, model check, clock, connection/configuration getters, reset flags and BLE transport are prepared provider models. The gesture integration executes actual C gesture logic.",
+    "The C callback has an ordinary void AAPCS contract. Private native stack addresses and incidental caller-clobbered output registers are excluded. Callee-saved integer/FP registers, stack guards and interrupt masks are checked.",
+    "The velocity ring index must be0..2. Corrupt-index native memory faults are outside the supported state contract. The probes initialize private memory and do not prove arbitrary uninitialized SRAM behavior.",
+    "Relocatable composition is not a final firmware link, production runtime placement or physical device boot proof. Byte identity and a paid compiler are not requirements.",
+    "R1 sources-check passes. Global sources-check still reports the unrelated unlisted G2 resident_rom_thumb_set.S."
+  ],
+  "evidence_files": {
+    "build/sources-goal-r1-slider-typed-c/report.json": "9733b3abe776f2ab47fc8e7d8cc7c8dbd7b4601a1ffa7db9c287d20c693ae8d1",
+    "r1/src/sources.json": "3aa6d1f84b44c6c754e37c9853fced515460d5c98f381ff030b24be22adb05fe",
+    "r1/src/application/runtime/native_touch_slider.c": "0fc74128f0339d2eda75450c87bf18f19fdd3b893d1e443cb863348044178f1c",
+    "r1/src/application/runtime/native_touch_slider.h": "429ddb37cb88a4ada5c9303dea26999d96040f279215cbe7b5d11792d7e618b5",
+    "r1/src/application/runtime/native_touch_io_worker.c": "f78f24affacd0ec960a7911c4248a727ed4cfd0ba665bcbd6fc9d89f23d2af8d",
+    "r1/src/application/runtime/native_touch_slider_support.c": "1bff42411ff1e6899d4273f55592bc7d12f9abd174be9c7a7c576a54614eb855",
+    "r1/src/application/runtime/native_touch_gesture.c": "20d1798b59fb8586c7d8b8bac5e66e289d8bd4fc7c41557bcc3662e33a4c4edc",
+    "r1/src/application/runtime/native_iqs_irq.c": "8550cde44bc2e2bd3180c808b389f27b219d91660e5b0c5e0c9d28b439a2c21f",
+    "r1/src/application/board/structured_log.c": "e49f7bc55f529f02c91f5dde2f78330d439a7114fd86ffd87517d1b0aebc3166",
+    "vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/log/src/nrf_log_frontend.c": "2ff3b08586b574db42d24e3f6f9e586f64d2a42535b077b9f0d484b2e8e034d9",
+    "r1/docs/correlation/TOUCH-SLIDER-CORRELATION.md": "44417701633e0f1dcacf7db860c255eb5c38c100e8fafad62498c62f89caca64",
+    "r1/docs/reference/fstorage-registry-review.json": "3ee2a79fb2b3f866e118d86e0361b8dc1499a92460f5e6a49370418eac1dbb5c",
+    "build/goal-r1-fstorage-registry/expanded-rw.bin": "87fdee392022fdbe23dd0daf3e859fb14f3ce26ba3e8403aab56dc9d9a913317",
+    "build/goal-r1-slider-c/verify.py": "0ed73ccf2630f2a15cd663beaf6689ddbc53536011b1c59f27be43cdd18fbd94",
+    "build/goal-r1-slider-c/verification.json": "2572a0a53ff90a3465985cd432328425004fbf332a0d0ab7b0bfcf54015d77cd",
+    "build/goal-r1-slider-c/verification.log": "093a9ba815b5cfbb150d8ffd17207131626fd7beacdb759e2950c9bd83301365",
+    "build/goal-r1-slider-c/make-integration.py": "48013fe73018ac45bb76d5e589b10da6362c6f471f40a45ce978c047d75dd9b7",
+    "build/goal-r1-slider-c/integration.py": "efb008a78bc45daa2eabb39760600dee54a752aa88a4fb2b40a19d1d2770e1a6",
+    "build/goal-r1-slider-c/quick-integration.json": "955d8a27c9eac8a5007a24a309237b0dd3924a442a4cc146dcbe6ce325376d9e",
+    "build/goal-r1-slider-c/integration.log": "36c874924700c714fdf67d7556da5e93398e4bcf8d6faaa0b7f48e17d2f4f4cb",
+    "build/goal-r1-slider-c/make-irq.py": "1ce6f00066bfddb11a8cbac8dcfbba5246b44b424af2725cf7fe88e441bca9b2",
+    "build/goal-r1-slider-c/irq-integration.py": "713ef1d3ed486fd59644bb54d215afcc7fa0ad16f05fcba896a191abf30e319f",
+    "build/goal-r1-slider-c/irq-integration.json": "ef81ce237993689db12e734a8d102efba6a50e54d7dd704c8d61dc6e08793755",
+    "build/goal-r1-slider-c/irq-integration.log": "bc6ec31d195f695de8e70465a6809624d5f41f57c7f30f394538b1bce5227080",
+    "build/goal-r1-slider-c/rea.json": "c3d705b8aaca9baee36dcd57ad78b1761f639eb8c589166f3d07b82aed89e47d",
+    "build/goal-r1-slider-c/stock.asm": "6b30c1ce4b77a2556d6cb1141b6ce71a468efd75a5a0a519d42ab6b4715e4c88",
+    "build/goal-r1-slider-c/mutants.py": "dff56e102e313cf7c5f22c181da683880d12a1495dfcbc7c8c8a19121d977baa",
+    "build/goal-r1-slider-c/mutants.json": "1bd1a22b96d579de70e21ed28be62ceeb5aa9a95f98c2c9b04283a9558a4725c",
+    "build/goal-r1-slider-c/mutants.log": "4f02f56ca6a1b459f4a5d10edc8cb2ade5615ed2a25abc509a5f5cb4e4a000db",
+    "build/goal-r1-slider-c/audit.py": "04e5909affc0b9de8250b5d6ad57354e785a3c26dce1ef9c43c74dcba226b952",
+    "build/goal-r1-slider-c/object-audit.json": "8ff0a1a808f6841949519e2abe4253795905800c70968d6590073b825b2a0292",
+    "build/goal-r1-slider-c/r1-check.log": "41b5d5b7b1cf6bf059f38ba94bf0ebccdf942cc49b4ecd1e858cece70f75fe99",
+    "build/goal-r1-slider-c/sources-check.log": "d3b5f90032abc4e960077bae260270d96481839b80462cf9c93faf07b0c77d14",
+    "build/goal-r1-slider-c/typed-object-identity.json": "d30b4e2f7302ae1913b74c5d7307c606e7eb90937dc1efc07eda402a56376ddf"
+  }
+}

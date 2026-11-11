@@ -1,0 +1,80 @@
+{
+  "passed": 4950,
+  "executions": 9900,
+  "modeled_converter": true,
+  "native_frame_bytes": 40,
+  "epoch_offset": 36,
+  "bridge_size": 14,
+  "kernel_size": 74,
+  "report": "build/sources-goal-r1-calendar-utc-c-split/report.json",
+  "source_sha256": {
+    "r1/src/application/board/native_calendar_forward.c": "22c0b6b605fbde913d588c59cbdabee975310d36b75eaa9b0f68bf9bb51a37ac",
+    "r1/src/application/board/native_calendar_utc.c": "fadcc32383136d6f30bc3998fdef015c0d7ed38488a738b11f89a5d3e470d3d7",
+    "r1/src/application/runtime/native_calendar_frames.c": "142ead5317995636d6196adf66c914cc18028f89688e650e3f038c99c63fb73d"
+  },
+  "limitations": [
+    "Converter modeled to isolate adapter contracts; real converter checked separately",
+    "Private C kernel frames and caller-clobbered registers/flags excluded",
+    "Invalid pointers, overlapping saved-register words, concurrency and physical RTC behavior unproven",
+    "No byte qualification"
+  ],
+  "negative_control": {
+    "mutation": "Snapshot second before packed year write",
+    "rejected": true,
+    "counterexample": {
+      "returned_year": 124,
+      "returned_second": 7,
+      "output_alias": "returned buffer + 0",
+      "native_second": 232,
+      "hoisted_second": 7
+    },
+    "stderr": "Traceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-calendar-utc-c/reject-hoist.py\", line 43, in <module>\n    for c in [(0,0,2,0,'a0')]:assert a(*c)==b(*c),c\n                                     ^^^^^^^^^^^^\nAssertionError: (0, 0, 2, 0, 'a0')\n"
+  },
+  "integration": {
+    "passed": 2800,
+    "executions": 5600,
+    "actual_C_adapter_and_C_forward_converter": true,
+    "report": "build/sources-goal-r1-calendar-utc-c-split/report.json",
+    "limitations": [
+      "Private conversion stack frames and caller-clobbered registers/flags excluded",
+      "Bounded inputs and no concurrent/physical RTC execution"
+    ]
+  },
+  "forward_regression": {
+    "normal_cases": 24546,
+    "alias_cases": 1704,
+    "passed": 26250,
+    "executions": 52500,
+    "calendar_oracle": "Python datetime for nonoverlapping inputs",
+    "memory_trace_compared": true,
+    "report": "build/sources-goal-r1-calendar-utc-c-split/report.json",
+    "source_size": 386,
+    "source_sha256": {
+      "r1/src/application/board/native_calendar_forward.c": "22c0b6b605fbde913d588c59cbdabee975310d36b75eaa9b0f68bf9bb51a37ac"
+    },
+    "stock_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "limitations": [
+      "Bounded sampled full-word epochs and explicit overlap cases; not exhaustive uint32 domain",
+      "Private frames and caller-clobbered registers/flags excluded",
+      "Invalid pointers, ROM mutation, concurrency and physical RTC operation unproven",
+      "No byte qualification"
+    ]
+  },
+  "evidence": {
+    "build/goal-r1-calendar-utc-c/stock.elf": "1f3fbd300b77d7b788ef881d0dca4a4ecc4ca54e2ca77f669c2426f865bb2dd6",
+    "build/goal-r1-calendar-utc-c/REA.snapshot.json": "4a4bed29becaea4ebd5d54d654a3e08bfc6d612aa48b0d9d7b19bc47ece17036",
+    "build/goal-r1-calendar-utc-c/verify.py": "76e2ae83bd36891b6d04250b59914c033cb9b30950880b9ec15fbe099ece66c7",
+    "build/goal-r1-calendar-utc-c/source.elf": "c8e028647910a88da2bcc2702e3e8cc0940ff26726d5664cb59848148c20d127",
+    "build/goal-r1-calendar-utc-c/bad-hoist.c": "37da0994d4bf92a9581c116b20b9b03567a9ad81355ee4634700b2136def35d4",
+    "build/goal-r1-calendar-utc-c/reject-hoist.py": "2beb77735eeccc4fc3d488ccb1b85d426a7f46ea5914c04c7c1cd13205a5ec85",
+    "build/goal-r1-calendar-utc-c/integrated/verify.py": "f0c72c5837fad775e133ad9ec6ba2ebdc6666bd3cdfd79fadf787b905c24805a",
+    "build/goal-r1-calendar-utc-c/forward/verify.py": "f2e4e8b73e50074b0c281626625f46144b6641eedfb563a788378d2e8af5935f",
+    "build/sources-goal-r1-calendar-utc-c-split/report.json": "f1d6bef8a34fe8d5aa31adf5209f48bad42d5b2639919cb86516da87db09aee5",
+    "r1/src/sources.json": "4b930f0645e76438fbc2b4d474789bcb7d19c5308143ff68a2da26d01a7a157a",
+    "r1/symbols/function-frontier.csv": "64c5cae988f54d231cb2608659977bb03d816ab42d93c8f1940901efaea0b29f",
+    "tools/build/source-plan.json": "4d46e8c038db79a174a2d719086fd0be80503ca7cdbfc2c51e5ed3d30d293064",
+    "r1/src/vendor/time_calendar/time_calendar.c": "67b0f33661407581e5161f577adc108e480530ac54718d155f0ebef01efd9591",
+    "r1/src/application/board/clock-calendar/selected-calendar.c": "41607b21f6725ed24e697ecd439c42acf2672cfe8dd6f8bfd533be390f581ca1"
+  },
+  "source_plan_changed": false
+}

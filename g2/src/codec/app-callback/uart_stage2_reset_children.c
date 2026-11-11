@@ -27,5 +27,6 @@ __attribute__((noreturn)) void gx8002_uart_stage2_enter_application(void)
 {
     gx8002_uart_stage2_application_setup_547c();
     (void)gx8002_uart_stage2_application_run_54ec();
-    for (;;) __asm__ volatile("br ." ::: "memory");
+    for (;;) {
+    }
 }

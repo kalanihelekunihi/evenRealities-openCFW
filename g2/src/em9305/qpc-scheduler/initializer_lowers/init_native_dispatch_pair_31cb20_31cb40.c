@@ -1,84 +1,41 @@
-/* Complete native31cb20/31cb40 bodies; unresolved children remain imports. */
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_dispatch_callback_31cb20\n"
-".type opencfw_em9305_dispatch_callback_31cb20,@function\n"
-"opencfw_em9305_dispatch_callback_31cb20:\n"
-"L31cb20:\n"
-"enter_s [r13,blink]\n"
-"L31cb22:\n"
-"ldb_s r1,[r0,0x2]\n"
-"L31cb24:\n"
-"mov_s r13,r0\n"
-"L31cb26:\n"
-"bl.d opencfw_em9305_ll_record_error_322f08\n"
-"L31cb2a:\n"
-"mov_s r0,0\n"
-"L31cb2c:\n"
-"mov_s r1,0x44\n"
-"L31cb2e:\n"
-"bl.d opencfw_em9305_dispatch_child_322e80\n"
-"L31cb32:\n"
-"mov_s r0,r13\n"
-"L31cb34:\n"
-"bl.d opencfw_em9305_radio_record_release_31ac84\n"
-"L31cb38:\n"
-"mov_s r0,r13\n"
-"L31cb3a:\n"
-"bl opencfw_em9305_command_count_down_30e48c\n"
-"L31cb3e:\n"
-"leave_s [r13,blink,pcl]\n"
-".size opencfw_em9305_dispatch_callback_31cb20,.-opencfw_em9305_dispatch_callback_31cb20\n"
-".balign 4\n"
-".global opencfw_em9305_dispatch_callback_31cb40\n"
-".type opencfw_em9305_dispatch_callback_31cb40,@function\n"
-"opencfw_em9305_dispatch_callback_31cb40:\n"
-"L31cb40:\n"
-"enter_s [r13,blink]\n"
-"L31cb42:\n"
-"mov_s r13,r0\n"
-"L31cb44:\n"
-"bl.d opencfw_em9305_common_release_304588\n"
-"L31cb48:\n"
-"mov_s r0,1\n"
-"L31cb4a:\n"
-"ld r0,[r13,196]\n"
-"L31cb4e:\n"
-"breq_s r0,0,L31cb58\n"
-"L31cb50:\n"
-"add r0,r0,410\n"
-"L31cb54:\n"
-"stb 0,[r0]\n"
-"L31cb58:\n"
-"ldb_s r0,[r13,0x1]\n"
-"L31cb5a:\n"
-"brne.nt r0,0x3,L31cb76\n"
-"L31cb5e:\n"
-"ldb r2,[r13,200]\n"
-"L31cb62:\n"
-"ldb_s r1,[r13,0x2]\n"
-"L31cb64:\n"
-"breq_s r2,0,L31cb70\n"
-"L31cb66:\n"
-"mov_s r0,r1\n"
-"L31cb68:\n"
-"bl.d opencfw_em9305_dispatch_child_323574\n"
-"L31cb6c:\n"
-"mov_s r1,r2\n"
-"L31cb6e:\n"
-"b_s L31cb76\n"
-"L31cb70:\n"
-"bl.d opencfw_em9305_ll_record_error_322f08\n"
-"L31cb74:\n"
-"mov_s r0,0\n"
-"L31cb76:\n"
-"bl.d opencfw_em9305_radio_record_release_31ac84\n"
-"L31cb7a:\n"
-"mov_s r0,r13\n"
-"L31cb7c:\n"
-"bl opencfw_em9305_command_count_down_30e48c\n"
-"L31cb80:\n"
-"leave_s [r13,blink,pcl]\n"
-".size opencfw_em9305_dispatch_callback_31cb40,.-opencfw_em9305_dispatch_callback_31cb40\n"
-);
+#include <stdint.h>
+
+extern uint32_t opencfw_em9305_ll_record_error_322f08(uint32_t,uint32_t);
+extern uint32_t opencfw_em9305_dispatch_child_322e80(uintptr_t,uint32_t);
+extern void opencfw_em9305_radio_record_release_31ac84(uintptr_t);
+extern uint32_t opencfw_em9305_command_count_down_30e48c(void);
+extern uint32_t opencfw_em9305_common_release_304588(uint32_t);
+extern uint32_t opencfw_em9305_dispatch_child_323574(uint32_t,uint32_t);
+
+/* Native 0x31cb20..0x31cb40: connection failed to establish: report error
+ * 0 for the record's id (+2), post status 0x44, release the record and
+ * count down the command credit. */
+uint32_t opencfw_em9305_dispatch_callback_31cb20(uintptr_t record)
+{
+    (void)opencfw_em9305_ll_record_error_322f08(0u,*(volatile uint8_t *)(record+2u));
+    (void)opencfw_em9305_dispatch_child_322e80(record,0x44u);
+    opencfw_em9305_radio_record_release_31ac84(record);
+    return opencfw_em9305_command_count_down_30e48c();
+}
+
+/* Native 0x31cb40..0x31cb82: connection closed: release the common
+ * resource (mode 1), clear the linked object's active byte (+196 -> +410),
+ * report the end for a role-3 record (+1) (with the stored reason +200
+ * through 323574, else error 0), release the record and count down the
+ * command credit. */
+uint32_t opencfw_em9305_dispatch_callback_31cb40(uintptr_t record)
+{
+    (void)opencfw_em9305_common_release_304588(1u);
+    uintptr_t linked=*(volatile uint32_t *)(record+196u);
+    if(linked!=0u) *(volatile uint8_t *)(linked+410u)=0u;
+    if(*(volatile uint8_t *)(record+1u)==3u) {
+        uint32_t reason=*(volatile uint8_t *)(record+200u);
+        uint32_t id=*(volatile uint8_t *)(record+2u);
+        if(reason!=0u)
+            (void)opencfw_em9305_dispatch_child_323574(id,reason);
+        else
+            (void)opencfw_em9305_ll_record_error_322f08(0u,id);
+    }
+    opencfw_em9305_radio_record_release_31ac84(record);
+    return opencfw_em9305_command_count_down_30e48c();
+}

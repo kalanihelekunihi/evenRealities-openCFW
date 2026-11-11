@@ -11,6 +11,9 @@ void audio_ble_radio_context_setup_52e49a(uint32_t enabled) {
     (void)g2_codec_pin_function(0x75u,config);
 }
 
+/* Stock 0x4910f4 millisecond wait (single implementation). */
 void audio_ble_hci_radio_reset_4910f4(uint32_t milliseconds) {
     audio_ble_vendor_yield_4807a0(milliseconds*1000u);
 }
+__typeof__(audio_ble_hci_radio_reset_4910f4) audio_uart_wait_ms
+    __attribute__((alias("audio_ble_hci_radio_reset_4910f4")));

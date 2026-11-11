@@ -1,75 +1,27 @@
-/* Native periodic channel-class callback; indirect query ABI retained. */
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_callback_32bb40\n"
-".type opencfw_em9305_callback_32bb40,@function\n"
-"opencfw_em9305_callback_32bb40:\n"
-"L32bb40:\n"
-"enter_s [r13-r17,blink]\n"
-"L32bb42:\n"
-"mov_s r16,r1\n"
-"L32bb44:\n"
-"mov_s r17,r0\n"
-"L32bb46:\n"
-"mov_s r15,0\n"
-"L32bb48:\n"
-"mov_s r14,0\n"
-"L32bb4a:\n"
-"mov_s r13,0\n"
-"L32bb4c:\n"
-"mov_s r0,0x805cac\n"
-"L32bb52:\n"
-"ld r0,[r0,0]\n"
-"L32bb54:\n"
-"exth_s r1,r13\n"
-"L32bb56:\n"
-"ldb_s r0,[r0,0xc]\n"
-"L32bb58:\n"
-"brhs.nt r1,r0,L32bb96\n"
-"L32bb5c:\n"
-"mov_s r0,0x801310\n"
-"L32bb62:\n"
-"ld r1,[r0,0]\n"
-"L32bb64:\n"
-"jl_s.d [r1]\n"
-"L32bb66:\n"
-"extb_s r0,r14\n"
-"L32bb68:\n"
-"breq_s r0,0,L32bb8e\n"
-"L32bb6a:\n"
-"bl.d opencfw_em9305_wsf_event_allocate\n"
-"L32bb6e:\n"
-"mov_s r0,0xc\n"
-"L32bb70:\n"
-"mov_s r1,r0\n"
-"L32bb72:\n"
-"breq_s r0,0,L32bb94\n"
-"L32bb74:\n"
-"sth 14,[r1,2]\n"
-"L32bb78:\n"
-"mov_s r0,0x805b18\n"
-"L32bb7e:\n"
-"ldb_s r0,[r0,0]\n"
-"L32bb80:\n"
-"st r17,[r1,4]\n"
-"L32bb84:\n"
-"st r16,[r1,8]\n"
-"L32bb88:\n"
-"bl.d opencfw_em9305_wsf_task_message_send\n"
-"L32bb8c:\n"
-"sth_s r13,[r1,0]\n"
-"L32bb8e:\n"
-"add_s r14,r14,1\n"
-"L32bb90:\n"
-"add_s r13,r13,1\n"
-"L32bb92:\n"
-"b_s L32bb4c\n"
-"L32bb94:\n"
-"mov_s r15,0xc\n"
-"L32bb96:\n"
-"mov_s r0,r15\n"
-"L32bb98:\n"
-"leave_s [r13-r17,blink,pcl]\n"
-".size opencfw_em9305_callback_32bb40,.-opencfw_em9305_callback_32bb40\n"
-);
+#include <stdint.h>
+
+/* Native 0x32bb40..0x32bb9a: for each configured record (config byte 12)
+ * ask the query hook at *0x801310 whether it needs a channel-class update;
+ * if so send event 14 {record, a, b} to the task at 0x805b18. Returns 0x0c
+ * if a 12-byte message could not be allocated, else 0. The stock call
+ * leaves the hook address in r1. */
+extern uintptr_t opencfw_em9305_wsf_event_allocate(uint32_t);
+extern uint32_t opencfw_em9305_wsf_task_message_send(uint32_t,uintptr_t);
+
+uint32_t opencfw_em9305_callback_32bb40(uint32_t first,uint32_t second)
+{
+    for(uint32_t index=0u;;++index) {
+        uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+        if((uint16_t)index>=*(volatile uint8_t *)(config+0xcu)) return 0u;
+        uintptr_t query=*(volatile uint32_t *)(uintptr_t)0x801310u;
+        if(((uint32_t (*)(uint32_t,uintptr_t))query)((uint8_t)index,query)==0u) continue;
+        uintptr_t message=opencfw_em9305_wsf_event_allocate(12u);
+        if(message==0u) return 0x0cu;
+        *(volatile uint16_t *)(message+2u)=14u;
+        uint32_t task=*(volatile uint8_t *)(uintptr_t)0x805b18u;
+        *(volatile uint32_t *)(message+4u)=first;
+        *(volatile uint32_t *)(message+8u)=second;
+        *(volatile uint16_t *)message=(uint16_t)index;
+        (void)opencfw_em9305_wsf_task_message_send(task,message);
+    }
+}

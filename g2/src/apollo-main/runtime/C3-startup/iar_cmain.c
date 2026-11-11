@@ -46,15 +46,27 @@ extern void main_5ce01e(void);
 /* runtime/C3-startup/iar_exit.c (stock 0x5e42dc). */
 extern void iar_exit_5e42dc(int32_t status) __attribute__((noreturn));
 
+/* runtime/g2c-gnu/g2c_vectors.c: main vector table (stock ROM 0x438000). */
+extern const unsigned char g2ref_g2c_main_vectors[] __asm__("g2c_main_vectors");
+
 int32_t low_level_init_5e4228(void);
 void iar_data_init3_5e42b4(void);
 const uint32_t *iar_zero_init3_5fa01e(const uint32_t *record);
 void iar_cmain_5e4294(void) __attribute__((noreturn));
 
+/* openCFW recovery experiment (2026-11-01): arm MRAM wired-recovery here, the
+ * earliest C hook (runs before iar_data_init3 RAM-init and before board_init /
+ * the ADC hw-id poll), so even a boot that hangs early leaves the temple
+ * recoverable over the case pogo link. Touches only MMIO + a .noinit cell, so
+ * it is safe before RAM-init. Disarmed once the app answers the case
+ * (DEV_BoxRevcMsgProcess). See system/self-recovery/self_recovery.c. */
+extern void g2_recovery_arm_early(void);
+
 /* Stock 0x005e4228 (__low_level_init): VTOR = main vector table 0x438000. */
 int32_t low_level_init_5e4228(void)
 {
-    *(volatile uint32_t *)(uintptr_t)0xe000ed08u = 0x00438000u;
+    *(volatile uint32_t *)(uintptr_t)0xe000ed08u = (uint32_t)(uintptr_t)g2ref_g2c_main_vectors;
+    g2_recovery_arm_early();
     return 1;
 }
 

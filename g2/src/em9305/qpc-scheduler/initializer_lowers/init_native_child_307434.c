@@ -1,58 +1,18 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_307434\n"
-".type opencfw_em9305_child_307434,@function\n"
-"opencfw_em9305_child_307434:\n"
-"L307434:\n"
-"sub_s r1,r1,0x15\n"
-"L307436:\n"
-"mov_s r3,r0\n"
-"L307438:\n"
-"cmp_s r1,0xe\n"
-"L30743a:\n"
-"mov_s r0,0\n"
-"L30743c:\n"
-"jhi [blink]\n"
-"L307440:\n"
-"extb_s r2,r1\n"
-"L307442:\n"
-"lsr r2,0x7ccf,r2\n"
-"L30744a:\n"
-"btst_s r2,0\n"
-"L30744c:\n"
-"jeq_s [blink]\n"
-"L30744e:\n"
-"mov_s r2,0x805c70\n"
-"L307454:\n"
-"mpyuw r3,r3,912\n"
-"L307458:\n"
-"ld r2,[r2,0]\n"
-"L30745a:\n"
-"sexb_s r1,r1\n"
-"L30745c:\n"
-"mov r0,635\n"
-"L307460:\n"
-"add_s r2,r2,r3\n"
-"L307462:\n"
-"ldb r3,[r1,opencfw_em9305_proc_pending_334479]\n"
-"L30746a:\n"
-"ldb_s r0,[r2,r0]\n"
-"L30746c:\n"
-"cmp_s r0,r3\n"
-"L30746e:\n"
-"mov_s r0,1\n"
-"L307470:\n"
-"jeq_s [blink]\n"
-"L307472:\n"
-"ld.as r1,[r2,161]\n"
-"L307476:\n"
-"btst r1,r3\n"
-"L30747a:\n"
-"jne_s [blink]\n"
-"L30747c:\n"
-"j_s.d [blink]\n"
-"L30747e:\n"
-"mov_s r0,0\n"
-".size opencfw_em9305_child_307434,.-opencfw_em9305_child_307434\n"
-);
+#include <stdint.h>
+
+/* Native 0x307434..0x307478: is LL procedure (opcode 0x15..0x23, mask 0x7ccf)
+ * pending or active on the connection? Looks up the procedure's slot in the
+ * ROM table at 0x334479 and compares it with the active procedure byte +635
+ * and the pending bitmap +644 of the 912-byte connection entry. */
+extern const uint8_t opencfw_em9305_proc_pending_334479[15];
+
+uint32_t opencfw_em9305_child_307434(uint32_t handle, uint32_t opcode)
+{
+    uint32_t index = opcode - 0x15u;
+    if (index > 14u) return 0u;
+    if (((0x7ccfu >> index) & 1u) == 0u) return 0u;
+    uintptr_t entry = *(volatile uint32_t *)(uintptr_t)0x805c70u + (handle & 0xffffu) * 912u;
+    uint32_t slot = opencfw_em9305_proc_pending_334479[index];
+    if (*(volatile uint8_t *)(entry + 635u) == slot) return 1u;
+    return (*(volatile uint32_t *)(entry + 644u) >> (slot & 31u)) & 1u;
+}

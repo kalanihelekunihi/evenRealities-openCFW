@@ -33,10 +33,21 @@ int r1_native_fal_device_initialize(void)
 }
 int r1_native_fal_device_read(long offset,uint8_t *destination,size_t bytes)
 {
- r1_fal_read_request.first=(uint32_t)(uintptr_t)destination;
- r1_fal_read_request.offset=offset;r1_fal_read_request.bytes=bytes;
- (void)r1_stock_dispatch_10(r1_fal_device_handle,0,(uintptr_t)&r1_fal_read_request,0);
- return bytes;
+ /* The registered internal-flash transfer consumes a16-bit length. Split
+  * larger FAL reads instead of reporting bytes the provider never copied.
+  * FAL's signed return cannot represent counts above INT32_MAX. */
+ if(bytes>INT32_MAX)return -1;
+ size_t remaining=bytes;
+ do {
+  uint32_t chunk=remaining>UINT16_MAX?UINT16_MAX:(uint32_t)remaining;
+  r1_fal_read_request.first=(uint32_t)(uintptr_t)destination;
+  r1_fal_read_request.offset=(uint32_t)offset;r1_fal_read_request.bytes=chunk;
+  if(r1_stock_dispatch_10(r1_fal_device_handle,0,(uintptr_t)&r1_fal_read_request,0))return -1;
+  remaining-=chunk;
+  if(!remaining)break;
+  destination+=chunk;offset=(long)((uint32_t)offset+chunk);
+ }while(remaining);
+ return (int)bytes;
 }
 int r1_native_fal_device_write(long offset,const uint8_t *source,size_t bytes)
 {

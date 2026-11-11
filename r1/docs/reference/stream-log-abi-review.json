@@ -1,0 +1,161 @@
+{
+  "schema_version": 1,
+  "report": "build/sources-goal-r1-stream-log-abi/report.json",
+  "report_sha256": "dff94ee994c984443329ef672d1270fb94ac5f8cf880d0b648734997b9fe450a",
+  "manifest_sha256": "95440e3d32f0076e18f4163f1f0e144fdb2e773bc96fab0b82d5e95e598a6518",
+  "source_sha256": "f7af2abc90701c93458820bde20e84ce4d7250da02be0f3496b01a782bf4486a",
+  "verification": {
+    "paired_cases": 2367,
+    "source_object_sha256": "a331d5ea86eb1ed16badf977d9671d47b9c2c6191bc0a59af621528e76f5f17b",
+    "actual_period_provider": {
+      "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-stream-log-abi/r1/r1-application/r1__src__application__runtime__native_stream_register_object.c.o",
+      "sha256": "94fdfb51d2d3c3935bee9cda7c2bf21a325b89542a8bcec00054144eba713ee5"
+    },
+    "provider_frames": {
+      "native": {
+        "r1_native_list_head": [
+          32
+        ],
+        "r1_native_list_next": [
+          32
+        ],
+        "r1_structured_log_mode_get": [
+          32
+        ],
+        "r1_structured_log_format": [
+          32
+        ],
+        "r1_stream_rate_reduce_log_tail_result": [
+          0
+        ],
+        "pvPortMalloc": [
+          32
+        ],
+        "r1_bae8_rx_allocation_fault": [
+          32
+        ],
+        "r1_stream_sample_rate_copy": [
+          32
+        ],
+        "vPortFree": [
+          32
+        ]
+      },
+      "C": {
+        "r1_native_list_head": [
+          32
+        ],
+        "r1_native_list_next": [
+          32
+        ],
+        "r1_structured_log_mode_get": [
+          32
+        ],
+        "r1_structured_log_format": [
+          32
+        ],
+        "r1_stream_rate_reduce_log_tail_result": [
+          0
+        ],
+        "pvPortMalloc": [
+          32
+        ],
+        "r1_bae8_rx_allocation_fault": [
+          32,
+          40
+        ],
+        "r1_stream_sample_rate_copy": [
+          32
+        ],
+        "vPortFree": [
+          32
+        ],
+        "r1_stream_zero_divisor_result": [
+          32
+        ]
+      }
+    },
+    "ordered_watched_accesses_compared": true,
+    "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "limits": [
+      "List/allocator/sample-copy/free/logging and zero-divisor providers modeled",
+      "Fault comparisons stop before architectural gateway; zero divisor replay uses Unicorn DIV_0_TRP disabled",
+      "Caller-saved registers/private frames/APSR excluded",
+      "No physical or asynchronous hardware proof",
+      "Actual ABI tail executes; SDK logger is modeled at its entry"
+    ]
+  },
+  "direct_abi": {
+    "cases": 1024,
+    "gateway_bytes": 4,
+    "arguments_stack_lr_r0_saved_registers_masks": true
+  },
+  "defects": [
+    {
+      "defect": "zero-result",
+      "compiled": true,
+      "behavioral_assertion_rejected": true
+    },
+    {
+      "defect": "wrong-ticks",
+      "compiled": true,
+      "behavioral_assertion_rejected": true
+    },
+    {
+      "defect": "wrong-owner",
+      "compiled": true,
+      "behavioral_assertion_rejected": true
+    }
+  ],
+  "audit": {
+    "unchanged_prior_object_hashes": 798,
+    "changed_object_hashes": [
+      [
+        "r1-application",
+        "r1/src/application/runtime/native_stream_rate_reduce.c"
+      ],
+      [
+        "r1-bootloader",
+        "{gen}/r1_startup_vectors.S"
+      ],
+      [
+        "r1-bootloader",
+        "{gen}/r1_uecc.c"
+      ]
+    ],
+    "generated_boot_crypto_and_vectors_allocated_bytes_and_relocations_unchanged": true,
+    "removed_application_imports": [
+      "r1_stream_rate_reduce_log_tail_result"
+    ]
+  },
+  "reducer_function_bytes_unchanged": true,
+  "rea_evidence_id": "ev_c4ccaa25d4034933195f53bc352c9f74b087414162d6548da28ec4501b1dc228",
+  "rea_bytes_match_locked_raw": true,
+  "sdk_void_provider": {
+    "source": "vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/log/src/nrf_log_frontend.c",
+    "sha256": "2ff3b08586b574db42d24e3f6f9e586f64d2a42535b077b9f0d484b2e8e034d9"
+  },
+  "evidence_files": {
+    "build/goal-r1-stream-log-abi/verify.py": "509e948005711878b43217764d9f75014fdcc77b709f08bcebf24f460f673cc8",
+    "build/goal-r1-stream-log-abi/direct.py": "6521122226b6d90d5009ff970e0ea9d1f235c86a889dae00c97778db5f003615",
+    "build/goal-r1-stream-log-abi/defects.py": "136f3846170f54026a333663444e20f7bbe166891246392d262345a63d51d7d0",
+    "build/goal-r1-stream-log-abi/audit.py": "ff21f484b2eb8720a252964ccd078f16ec947833a25e2b4f64a1775a958c0f4d",
+    "build/goal-r1-stream-log-abi/document.py": "4644d2d323a52e948bce4034b1c2ee886c42e212ea2e1ff93622703f411894c8",
+    "build/goal-r1-stream-log-abi/results.json": "f228b393406b3925969c634f728855b31e857793a9f44b920463a0af1db844c7",
+    "build/goal-r1-stream-log-abi/direct.json": "fa2671a69ad0c7309e1ee91c7e464ac83fc2ef8cf13410bfe2209a85767e7538",
+    "build/goal-r1-stream-log-abi/defects.json": "fd754e293b453fadd2055bbb91fe788633b1cc346885f288e629149b722645a5",
+    "build/goal-r1-stream-log-abi/audit.json": "ce1739878adc680a5a2de15b66030e2d06f4ae14d6afb80c780e496a164770e6",
+    "build/goal-r1-stream-log-abi/source.elf": "a0553abccaa5a149855d90efca2e49e4e674315462d2d2700e9c6b927793f111",
+    "build/goal-r1-stream-log-abi/rea-tail.json": "51226b9dd4395924e54f4a07cf0e2819c841f01d4537a77c390dbf9fae1bf711",
+    "build/goal-r1-stream-log-abi/verify-final.log": "f2b12c4feec67d64ccc973ea6213398cc9ab3b7b8c12844963f23b5ee2517dfd",
+    "build/goal-r1-stream-log-abi/r1-sources-check.log": "08fdfdb89cf03574fa106d34b0566b47c35bb9ed5bda084e3ccadb0668f26477",
+    "build/goal-r1-stream-log-abi/sources-check.log": "f631cce80ab62163bd75c18877fd360880eecbdf2d26ea1436a7dbedd3bf9234",
+    "build/goal-r1-stream-log-abi/boot-link/report.json": "48f88969f67cdcba91a31a18ad62945be7cc57120bffb6fbaab69feb4b4a18c3"
+  },
+  "limitations": [
+    "Actual four-byte gateway executes; SDK logger is modeled at entry.",
+    "Source SDK void provider can leave a different incidental R0 from stock internals; gateway preserves the selected provider raw result.",
+    "No physical sensor timing, asynchronous logging or complete application final link proof.",
+    "Architectural/raw-register gateways remain assembly; no incompatible C return type introduced."
+  ]
+}

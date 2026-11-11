@@ -1,28 +1,16 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_315d50\n"
-".type opencfw_em9305_child_315d50,@function\n"
-"opencfw_em9305_child_315d50:\n"
-"L315d50:\n"
-"enter_s [r13,blink]\n"
-"L315d52:\n"
-"mov_s r13,r0\n"
-"L315d54:\n"
-"ldb_s r0,[r0,0xd]\n"
-"L315d56:\n"
-"bset_s r0,r0,0\n"
-"L315d58:\n"
-"stb_s r0,[r13,0xd]\n"
-"L315d5a:\n"
-"bl.d opencfw_em9305_child_32c980\n"
-"L315d5e:\n"
-"mov_s r0,r13\n"
-"L315d60:\n"
-"bl.d opencfw_em9305_child_322f2c\n"
-"L315d64:\n"
-"mov_s r0,r13\n"
-"L315d66:\n"
-"leave_s [r13,blink,pcl]\n"
-".size opencfw_em9305_child_315d50,.-opencfw_em9305_child_315d50\n"
-);
+/* Stock 0x315d50: set bit 0 of byte a[13]; child_32c980(a); return child_322f2c(a).
+ * Converted from the lowered ARC asm; compiled with the g2-em9305-1 profile (-Os) and the
+ * disassembly diffed against the stock lowering: identical, or differing only in delay-slot
+ * scheduling / a redundant zero-extension / absolute-address ld/st forms (reviewed by hand). */
+#include <stdint.h>
+#define B8(a)  (*(volatile uint8_t  *)(uintptr_t)(a))
+#define H16(a) (*(volatile uint16_t *)(uintptr_t)(a))
+#define W32(a) (*(volatile uint32_t *)(uintptr_t)(a))
+extern uint32_t opencfw_em9305_child_32c980(uint32_t);
+extern uint32_t opencfw_em9305_child_322f2c(uint32_t);
+uint32_t opencfw_em9305_child_315d50(uint32_t a)
+{
+  B8(a + 13u) = (uint8_t)(B8(a + 13u) | 1u);
+  (void)opencfw_em9305_child_32c980(a);
+  return opencfw_em9305_child_322f2c(a);
+}

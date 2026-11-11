@@ -1,0 +1,77 @@
+{
+  "cases": 1608,
+  "passed": 1608,
+  "failures": [],
+  "full_kernel_cases": 566,
+  "handoff_only_cases": 1042,
+  "executions": 4824,
+  "source_wrapper_bytes": 12,
+  "shared_kernel_bytes": 6,
+  "stock_kernel_targets": [
+    "0x9a640",
+    "0x9a650"
+  ],
+  "kernel_bytes": "0338fdd87047",
+  "wrapper_remains_excluded": true,
+  "volatile_r1_difference": "Native nonzero wrappers leave kernel address in R1; C wrapper retains incoming R1. No C ABI promise for R1.",
+  "integrated_sources": [
+    "r1/src/application/software-twi/sdk_delay_busy.c",
+    "r1/src/application/board/native_rtt_delay.c"
+  ],
+  "report": "build/sources-goal-r1-twi-busy-wrapper/report.json",
+  "report_sha256": "923c3c78c8481343c580ffc86e2dadcaa929de799eff5d642b02012bcc686397",
+  "source_sha256": "750e29762eacf000e4062c67f12c68d989beb7169de948e2466d1abf66659f60",
+  "manifest_sha256": "59fdbc1dac961b45d682cd2bb5bd1fbc417cd95e7082d50a778c69d6e24ee734",
+  "stock_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "rea": [
+    {
+      "completed": true,
+      "procedure": "0x7a6dc",
+      "native_span_sha256": "365d45f07ec7fae67922708c6a9ba072af22db02bb8419756150378123dcbf7d",
+      "path": "build/goal-r1-twi-busy-wrapper/REA-0x7a6dc.json",
+      "sha256": "ba2579574957add9f466e24cafee75c9eda0ee8addfd08daab325bcd54384f3e"
+    },
+    {
+      "completed": true,
+      "procedure": "0x7a6ec",
+      "native_span_sha256": "365d45f07ec7fae67922708c6a9ba072af22db02bb8419756150378123dcbf7d",
+      "path": "build/goal-r1-twi-busy-wrapper/REA-0x7a6ec.json",
+      "sha256": "47fe533b42ee91e4fb36ba5eef7d978d50a4df9c27a75d477e5a19c158f02b6d"
+    },
+    {
+      "completed": true,
+      "procedure": "0x9a640",
+      "native_span_sha256": "583d680532875ef2b855cbedbdfcdbdd74329d19ba88d3e52c36b6b634a75165",
+      "path": "build/goal-r1-twi-busy-wrapper/REA-0x9a640.json",
+      "sha256": "b21cd8d917a4670073838698e8cf851a114b3cf78be5e9612620a301d7b62f42"
+    },
+    {
+      "completed": true,
+      "procedure": "0x9a650",
+      "native_span_sha256": "583d680532875ef2b855cbedbdfcdbdd74329d19ba88d3e52c36b6b634a75165",
+      "path": "build/goal-r1-twi-busy-wrapper/REA-0x9a650.json",
+      "sha256": "26d6812f0ff8f6d11d42d5b620963abf6065606e3fb218731480a579c99d6c42"
+    }
+  ],
+  "probe_artifacts": {
+    "build/goal-r1-twi-busy-wrapper/verify.py": "1183fa52819483beab552e640e8f931231d3cc73ac96414b94f1d902674f48de",
+    "build/goal-r1-twi-busy-wrapper/before.c": "fcf1ffd0d1153db9479bb7e8d653cfe4487fea4ed68baea0758b09ddce5461f5",
+    "build/goal-r1-twi-busy-wrapper/source.elf": "2b7c842dde7ee65bb289736974679f9661305aa79c554c253e1f1adb11da0a26",
+    "build/goal-r1-twi-busy-wrapper/stock.elf": "407c4049d07a7f7e46049f7c34622f430c3c34ce757361c2d0d83f02848dfc9a",
+    "build/goal-r1-twi-busy-wrapper/rea-snapshot.json": "b5d97e793b24adfd8744dc5db479364f68403d74ee8f0978295ff6e423aa3bfa"
+  },
+  "integrated_source_sha256": {
+    "r1/src/application/software-twi/sdk_delay_busy.c": "750e29762eacf000e4062c67f12c68d989beb7169de948e2466d1abf66659f60",
+    "r1/src/application/board/native_rtt_delay.c": "e614166951aa96b4de91200ad9d67e71434f9bb759faab1fbf6f9225cb4576c7"
+  },
+  "composition_sha256": {
+    "r1-application": "b4b09cb4f19ad8f2cc815dd0ca3936e6dfbcdd190c650cf73b785c91dbe05f9b",
+    "r1-bootloader": "baeff8e95cd93bf2479ac51c1668e2dfffae85c4c2326cf2349a8a32a0508483"
+  },
+  "limits": [
+    "Busy wrapper remains excluded. Matching the shared six-byte primitive does not establish wrapper cycle or instruction identity.",
+    "Full-return comparisons execute actual primitive for bounded shifted arguments up to 65536 cycles; large arguments stop at primitive entry and prove only handoff.",
+    "Native wrappers load their kernel address into volatile R1 and read a literal; compiled C wrapper does neither. These differences are retained in evidence, not normalized into identity.",
+    "No physical SCL/SDA or ADC wait timing, interrupt-latency proof, complete fault-state equivalence, provider qualification or whole-image byte identity claim."
+  ]
+}

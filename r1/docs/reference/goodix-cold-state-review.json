@@ -1,0 +1,96 @@
+{
+  "stock_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "stock_loader_entry": "0x283a1",
+  "stop_before_product_runtime": "0x27208",
+  "native_base": "0x200076cc",
+  "cold_bytes": "000000000000000000000000000000002400000000000000010000000000000001000000",
+  "cold_extent_bytes": 36,
+  "request_bytes": "2400000000000000010000000000000001000000",
+  "compiled_initializer_matches": true,
+  "first_transfer_cases": 8,
+  "report": "build/sources-goal-r1-goodix-cold-state/report.json",
+  "source_sha256": {
+    "r1/src/application/board/native_peripheral_bindings.c": "c2b283e25857766ad1046bdd837e859bd9baad5cccca5de057d019cce813a1e6",
+    "r1/src/application/goodix/stock_i2c_transport.c": "9165f57921416a4cbbde5450170ea618db56470555bfc8882dcfeddbbf80e98b",
+    "r1/src/application/registry/stock_registry.c": "68c16fe9a2fcd328012b8613c9da9aa4cd31bd30df36a55e64e56e7b534246fa"
+  },
+  "limitations": [
+    "Stock loader and linked ELF initialization compared in emulation; final firmware source linker not established",
+    "First transfers use stock-cold null handles; no electrical operation",
+    "No exhaustive callback producer/write analysis or byte qualification"
+  ],
+  "negative_control": {
+    "mutation": "Restore incorrect zero initializer",
+    "rejected": true,
+    "stderr": "Traceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-goodix-cold-state/reject-zero-init.py\", line 21, in <module>\n    assert bytes(v.mem_read(0x200076cc,36))==cold\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+  },
+  "regressions": {
+    "cache": {
+      "passed": 1536,
+      "entry_executions": 21504,
+      "actual_registry_lookup_and_dispatch": true,
+      "report": "build/sources-goal-r1-goodix-cold-state/report.json",
+      "source_sha256": {
+        "r1/src/application/board/native_peripheral_bindings.c": "c2b283e25857766ad1046bdd837e859bd9baad5cccca5de057d019cce813a1e6",
+        "r1/src/application/goodix/stock_i2c_transport.c": "9165f57921416a4cbbde5450170ea618db56470555bfc8882dcfeddbbf80e98b",
+        "r1/src/application/registry/stock_registry.c": "68c16fe9a2fcd328012b8613c9da9aa4cd31bd30df36a55e64e56e7b534246fa"
+      },
+      "limitations": [
+        "strcmp equality and final device operations modeled",
+        "Serialized bounded cases; physical I2C/reset electrical effects and concurrency unverified",
+        "Void return residue and private stack bytes excluded",
+        "Not byte qualified; SDK gh3026 demo hooks remain unbound"
+      ]
+    },
+    "transport": {
+      "passed": 630,
+      "executions": 1260,
+      "actual_registry_dispatchers": true,
+      "report": "build/sources-goal-r1-goodix-cold-state/report.json",
+      "source_sha256": {
+        "r1/src/application/board/native_peripheral_bindings.c": "c2b283e25857766ad1046bdd837e859bd9baad5cccca5de057d019cce813a1e6",
+        "r1/src/application/goodix/stock_i2c_transport.c": "9165f57921416a4cbbde5450170ea618db56470555bfc8882dcfeddbbf80e98b",
+        "r1/src/application/registry/stock_registry.c": "68c16fe9a2fcd328012b8613c9da9aa4cd31bd30df36a55e64e56e7b534246fa"
+      },
+      "limitations": [
+        "Final operation callbacks modeled; no physical I2C execution",
+        "Void return residues, private stack bytes and caller-clobbered registers excluded",
+        "Bounded serialized executions; concurrency and all invalid pointers unproven",
+        "SDK demo gh3026 ports remain unbound; no byte qualification"
+      ]
+    },
+    "irq": {
+      "passed": 2592,
+      "executions": 5184,
+      "actual_registry_dispatchers": true,
+      "callback_mutation_cases": true,
+      "return_status_compared": true,
+      "report": "build/sources-goal-r1-goodix-cold-state/report.json",
+      "source_sha256": {
+        "r1/src/application/board/native_peripheral_bindings.c": "c2b283e25857766ad1046bdd837e859bd9baad5cccca5de057d019cce813a1e6",
+        "r1/src/application/goodix/stock_i2c_transport.c": "9165f57921416a4cbbde5450170ea618db56470555bfc8882dcfeddbbf80e98b",
+        "r1/src/application/registry/stock_registry.c": "68c16fe9a2fcd328012b8613c9da9aa4cd31bd30df36a55e64e56e7b534246fa"
+      },
+      "limitations": [
+        "Final device operations modeled; physical IRQ/GPIOTE behavior unverified",
+        "Callback producer and callback target signature not inferred",
+        "Bounded serialized cases; invalid device/table pointers and concurrent access unproven",
+        "Private stack bytes and caller-clobbered registers excluded",
+        "No byte qualification or final source placement proof"
+      ]
+    }
+  },
+  "evidence": {
+    "build/goal-r1-goodix-cold-state/verify.py": "6177d2ce8da141f0c95cb2b2f6e832d5391d4d8b558e0e7f9f57523c629228f1",
+    "build/goal-r1-goodix-cold-state/source.elf": "952535528a4e13e89ba96e6d0debf4e5864c79bec53a9f6a8882d233d55fad19",
+    "build/goal-r1-goodix-cold-state/bad-zero-init.c": "44cb54f4e15a5c8d816285e91de5bb47ced8c41c9fd44bfd760f3c6010d51423",
+    "build/goal-r1-goodix-cold-state/reject-zero-init.py": "d4b668eab26f83fe233c8ddb069e3ebcc68e54386934d39a5f1934c2ebdc3931",
+    "build/goal-r1-goodix-cold-state/cache/verify.py": "0ae19dce9bef773e3b7da88e5ec523450bf60fe090a433146139083c0dc41553",
+    "build/goal-r1-goodix-cold-state/transport/verify.py": "6b546784a681e8f7c2d9acb334dc86c6d2b94f03d84c3458a3dff34df296cf0b",
+    "build/goal-r1-goodix-cold-state/irq/verify.py": "714df2bc9fc0adbc16338b2f833b28d5d2cdf3e33826de0364bd8c1403c3e384",
+    "build/sources-goal-r1-goodix-cold-state/report.json": "ba1ae1fd5d60a89b1c1db729c420c6d5b558a77c342c6efdc214bb646af7e94c",
+    "r1/src/sources.json": "f860146befe6853fb7b6591e7fa28c6098739eed73d477c7d0cf87fdf3fc6b2f",
+    "tools/build/source-plan.json": "432d01e6a7b79c5c680b62143962870a021836bbe8905e6a41015a7970d5af63"
+  },
+  "source_plan_changed": false
+}

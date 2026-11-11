@@ -1,0 +1,198 @@
+{
+  "schema_version": 1,
+  "scope": "Native public Goodix allocation and faithful exhaustion/manager signaling in ordinary C",
+  "report": "build/sources-goal-r1-goodix-native-malloc-flags-c/report.json",
+  "comparison_report": "build/sources-goal-r1-goodix-native-bin-allocate-c/report.json",
+  "stock_entries": [
+    {
+      "entry": "0x2d54c",
+      "size": 116,
+      "symbol": "goodix_mem_malloc"
+    },
+    {
+      "entry": "0x6e004",
+      "size": 4,
+      "symbol": "goodix_mem_malloc"
+    },
+    {
+      "entry": "0x2e952",
+      "size": 18,
+      "symbol": "r1_goodix_native_heap_exhausted"
+    },
+    {
+      "entry": "0x92670",
+      "size": 58,
+      "symbol": "r1_goodix_sensor_memory_fatal"
+    },
+    {
+      "entry": "0x92390",
+      "size": 16,
+      "symbol": "r1_module_thread_flags_set"
+    }
+  ],
+  "audit": {
+    "compiled_units": 867,
+    "unchanged_prior_nongenerated_objects": 856,
+    "new_units": [
+      "r1/src/application/goodix/native_heap_malloc.c"
+    ],
+    "differing_existing_generated_objects": [
+      "{gen}/r1_startup_vectors.S",
+      "{gen}/r1_uecc.c"
+    ],
+    "application_imports": 62,
+    "bootloader_imports": 22,
+    "removed_imports": [],
+    "added_imports": [],
+    "new_writable_state_bytes": 0,
+    "source_plan_and_cache_layout_unchanged": true,
+    "tested_object_equals_normal_build": true,
+    "only_manifest_change_is_one_new_unit": true,
+    "portable_heap_and_existing_byte_fill_objects_unchanged": true
+  },
+  "comparisons": {
+    "public_malloc_comparisons": 5032,
+    "fatal_malloc_comparisons": 1204,
+    "terminal_policy_comparisons": 408,
+    "manager_flags_bridge_comparisons": 160,
+    "full_C_initializer_malloc_free_mixed_operations": 1000,
+    "metadata_and_payload_clear_write_width_order_values_match": true,
+    "full_pool_bytes_saved_ABI_masks_guards_checked": true,
+    "source_lifecycle_cannot_execute_stock": true,
+    "status_log_watchdog_RTOS_flags_delay_modeled": true,
+    "actual_manager_flags_bridge_and_shared_lifecycle_cell": true,
+    "fatal_policy_stopped_after_three_repeated_delays": true,
+    "native_ranges": [
+      {
+        "entry": "0x92390",
+        "size": 16,
+        "executed_bytes": 16,
+        "unexecuted_bytes": []
+      },
+      {
+        "entry": "0x6e004",
+        "size": 4,
+        "executed_bytes": 4,
+        "unexecuted_bytes": []
+      },
+      {
+        "entry": "0x2d54c",
+        "size": 116,
+        "executed_bytes": 112,
+        "unexecuted_bytes": [
+          "0x2d572",
+          "0x2d573",
+          "0x2d5b0",
+          "0x2d5b1"
+        ]
+      },
+      {
+        "entry": "0x2e952",
+        "size": 18,
+        "executed_bytes": 18,
+        "unexecuted_bytes": []
+      },
+      {
+        "entry": "0x92670",
+        "size": 58,
+        "executed_bytes": 58,
+        "unexecuted_bytes": []
+      }
+    ]
+  },
+  "compiled_defects_rejected": [
+    {
+      "defect": "minimum-clear",
+      "rejected": true
+    },
+    {
+      "defect": "rounding",
+      "rejected": true
+    },
+    {
+      "defect": "wilderness-flags",
+      "rejected": true
+    },
+    {
+      "defect": "wilderness-accounting",
+      "rejected": true
+    },
+    {
+      "defect": "payload-clear-length",
+      "rejected": true
+    },
+    {
+      "defect": "capacity-equality",
+      "rejected": true
+    },
+    {
+      "defect": "manager-event",
+      "rejected": true
+    },
+    {
+      "defect": "live-watchdog",
+      "rejected": true
+    },
+    {
+      "defect": "delay-period",
+      "rejected": true
+    },
+    {
+      "defect": "null-manager",
+      "rejected": true
+    }
+  ],
+  "contract": [
+    "Treat request bits as unsigned, clamp requests below8, round to four bytes plus8-byte header, check native capacity, use bins then wilderness, and clear the clamped requested payload length. Preserve native arithmetic rather than adding a signed-negative guard.",
+    "On exhaustion query free-space, publish status(0,1,0,0), log original info/free values, reload the sensor-task watchdog after logging, signal manager event0x200 and repeatedly delay1000 ticks. Do not return null or substitute a trap for that path.",
+    "Manager bridge reads existing volatile lifecycle.thread; null returns0, otherwise forwards thread/flags and the full32-bit RTOS result. Watchdog and lifecycle cells are existing owners."
+  ],
+  "limits": [
+    "212 native instruction bytes accounted;208 execute. Four bytes after non-returning fatal calls at0x2d572..573 and0x2d5b0..b1 cannot execute while the stock fatal routine remains non-returning.",
+    "5032 public allocation comparisons include1204 exhaustion cases.408 policy comparisons sample three repeated delays, callback results and live watchdog/manager changes.160 bridge comparisons check null and nonnull slots, flags, status returns and masks.",
+    "1000 mixed operations execute actual C initializer, malloc and release on the source side, with no stock-code fallback. Full pool images, metadata and payload-clear write width/order/value match. The existing C fill body/relocations equal its normal-build body and its unit object is unchanged.",
+    "Returning paths check saved integer/FP registers, SP, masks/FPSCR and guards. Terminal paths check guards, FP/masks and stable repeated-delay stack depth; private active saved-register values and absolute private frame depth are excluded. Caller scratch/APSR excluded throughout.",
+    "Status publication, typed logging, watchdog feed, RTOS flags and delay are modeled ports. Real manager event dispatch/reset, watchdog timing, scheduler concurrency, physical memory faults and boot remain unverified.",
+    "Selected bounded requests and selected high signed-bit cases are tested. Near-wrap huge requests that would clear outside mapped RAM are not claimed physically verified; no extra production guard is introduced.",
+    "One new C unit, no new state or final import changes. The first intermediate build exposed manager signaling; the final reviewed build includes its C bridge. Source plan/cache layout unchanged. Reallocation/deinitialization and complete source-linked firmware remain open."
+  ],
+  "evidence_files": {
+    "build/sources-goal-r1-goodix-native-malloc-flags-c/report.json": "1d8828dceda671567479b90ca301db723fa0f20ec3d7a94faf2623a2e9201259",
+    "build/sources-goal-r1-goodix-native-bin-allocate-c/report.json": "3b395a368f800ad50848c8b0b1658d687fcb6159c67b393235dba3e4179fc6e9",
+    "r1/src/application/goodix/native_heap_malloc.c": "1b827deb8981088d68fae260af0aa442a7315d4aaaa7f2ed8a248c859878a0c3",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-native-malloc-flags-c/r1/r1-application/r1__src__application__goodix__native_heap_malloc.c.o": "977cb669d0ca7b16102f67629d38c362cd2c47fba05cb890577e367a4f9d0138",
+    "r1/src/sources.json": "6040f94251fcb0985c63b0950a4c46953c8034631399a0238033020577646f0f",
+    "tools/build/source-plan.json": "eeb516e31b3310fb0718f36908977f8125723f7c5e0e86cd6744395826259a4d",
+    "r1/src/config/runtime/native_health_cache.ld": "eb8f131c489cd818d4e36718718fa1989719ca0170f164541a1a5bf56dfc1ec3",
+    "r1/src/application/board/native_tasks.c": "371c9837c447ebd3c9355a065db176308fa5551f78208a4dd5b367fa2605ecea",
+    "r1/src/application/runtime/native_application_launch.c": "16d9499b6d472360d7ede626bf63486fe01e9ff4c27265a01f1f343d213395ae",
+    "r1/src/application/runtime/native_application_launch.h": "9306b071370f3b437d6752861de082e527618b168c5120e51d24fe2a882d42bf",
+    "r1/src/application/runtime/native_manager_events.c": "ccd02437f0c23af9fd1cfb03f791a6449dd288eaf7c5940972dd326dbf527d57",
+    "r1/src/application/goodix/native_heap_init.c": "c3085064866b23d603697918b6dfdd29f66ab68c7e82cb1f3e10443c80e3f8b6",
+    "r1/src/application/goodix/native_heap_free.c": "175cf893ee4b475bee0a886d69522782ac879dd0b29c43285d957c03fb4dc7c4",
+    "r1/src/application/goodix/native_heap_allocate.c": "2806f3ca4f9074b157b390edf8bd03815a46b31f1661e1ed238a0938c666d8c9",
+    "r1/docs/reference/FUNCTION-OWNERSHIP.csv": "65b87eec9b9ae3bbb6583812b474012271727fabc78f3079740b3f435c89e39a",
+    "r1/symbols/function-frontier.csv": "fa915c3c80d8838af38d06f9a4e35da67f7a81da74c217f1df99bea4c5d87ff8",
+    "r1/docs/correlation/GOODIX-HEAP-REDUCTION-CORRELATION.md": "92627f2253f034f22894b75eb7d94c4d7e00a0d0c08095bd7c93fb86d849ec5b",
+    "build/goal-r1-goodix-native-heap-init-c/fill.o": "5b9881f48c6329da35510eb6b3f4be65d3c31bab24e2f6ab7d5713597d06c391",
+    "build/goal-r1-goodix-native-heap-init-c/fill-body.json": "9bf851f3f2cb56510504f22b5d435b9a6db08019815db0e446543e23e3a17c13",
+    "build/goal-r1-goodix-native-malloc-c/audit.json": "965017ac44a8bf34864c6c1ded1ae668457edb52626d3e6a888c9d4cd8e868bb",
+    "build/goal-r1-goodix-native-malloc-c/verify.log": "765f663ada97142973c603b871e35a783f07a2be9835f260ec907f3c90cecb15",
+    "build/goal-r1-goodix-native-malloc-c/negative.json": "44be3b9ef80d38a40edc623aed5acf72c19f8cfae75d2fd4204f16d5267e1ee5",
+    "build/goal-r1-goodix-native-malloc-c/test.ld": "90c7ba5a5321b14f2a1f14fde49f292cfb9835d44a3d924ff370794204650f13",
+    "build/goal-r1-goodix-native-malloc-c/audit.py": "eaf36e6d9e74c6b56982ab4060d4bdbeb20e6d8a05f793793fc902589250f1aa",
+    "build/goal-r1-goodix-native-malloc-c/source.elf": "81233ce221f09b789fba5c0aa407a1b0f7610c7494371d9e7e82f0288db0b474",
+    "build/goal-r1-goodix-native-malloc-c/negative.py": "d47fa566027920d73b5bb6db5d2d32daee50cf1fc44fe12c41a48c3c92b12904",
+    "build/goal-r1-goodix-native-malloc-c/negative.log": "2a875ea8455c0cf5ef079f7048700cf5bf8910f1a132183a31d33b62a16b8cd3",
+    "build/goal-r1-goodix-native-malloc-c/source.o": "977cb669d0ca7b16102f67629d38c362cd2c47fba05cb890577e367a4f9d0138",
+    "build/goal-r1-goodix-native-malloc-c/results.json": "d6cdbab8724aefdfb258a91975224e5d24839dd7cbacd799e1c4fee1a5f944ce",
+    "build/goal-r1-goodix-native-malloc-c/build-flags.log": "eec2a751ed5b2b76101c98e638c45f5bfe06cabfd0a6318323b51c5eeff5ddbf",
+    "build/goal-r1-goodix-native-malloc-c/sources-check.log": "51f48e5d8d485c9ea7b46805e69f3f3c9fd4653ad6c12263f348fac3b426eaa6",
+    "build/goal-r1-goodix-native-malloc-c/record.py": "8dcc65f8ed5c00f142e1a4b8dd9f3e70e08e3efeaf406c316100a798946ff733",
+    "build/goal-r1-goodix-native-malloc-c/rea-bytes.json": "afa0c2e71e75febe3ef9050f1a2b42c53b1020294826df7bbe55ec99165deab6",
+    "build/goal-r1-goodix-native-malloc-c/manifest-before.json": "44d61b1dde121f49bc3006965a23e6f83c8c815b2509352fa02f1ed6a41e4299",
+    "build/goal-r1-goodix-native-malloc-c/manager-flags-rea.json": "998b6d6379dc9b01cf79f886517b215bf829ac93b3d29ea6846c21b8d553ba00",
+    "build/goal-r1-goodix-native-malloc-c/verify.py": "4981e36236319c308821c4d6aeb28602c6dc0c4222c12fad8a7e844083847a0c",
+    "build/goal-r1-goodix-native-malloc-c/build.log": "6c5b3db17a4b5640a12ed40a14d751ead9f1337e446f9086f14e8f22c169a0f5"
+  }
+}

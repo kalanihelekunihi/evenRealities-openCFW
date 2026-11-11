@@ -1,22 +1,13 @@
 #include <stdint.h>
 
-/* Native 0x32c884..0x32c904. MPYWHL is retained as named ARC ISA;
- * the test-only host model qualifies branch/read/store composition only. */
+/* Native 0x32c884..0x32c904. Stock MPYWHL: low word of a 32 x 16 product,
+ * the 16-bit operand sign-extended. */
 extern uint32_t opencfw_em9305_phy_reject_32698c(uintptr_t,uint32_t,uint32_t);
 extern uint32_t opencfw_em9305_receive_terminate_325c08(uintptr_t,uint32_t);
 extern uint32_t opencfw_em9305_pal_current_time(void);
-#ifndef __arc__
-extern uint32_t opencfw_em9305_test_mpywhl(uint32_t,uint32_t);
-#endif
 static uint32_t multiply_whl(uint32_t factor,uint32_t value)
 {
-#ifdef __arc__
-    uint32_t result;
-    __asm__ volatile("mpywhl %0,%1,%2":"=r"(result):"r"(factor),"r"(value));
-    return result;
-#else
-    return opencfw_em9305_test_mpywhl(factor,value);
-#endif
+    return (uint32_t)factor*(uint32_t)(int32_t)(int16_t)value;
 }
 uint32_t opencfw_em9305_mode_callback_32c884(uintptr_t context,
                                                uintptr_t callback_identity)

@@ -1,6 +1,6 @@
 /* SPDX-License-Identifier: MIT
- * PMU descriptor lookup at 0x10000780. The 26-entry, 16-byte runtime table
- * at 0x20002018 is consumed here; its startup initializer remains unowned.
+ * PMU descriptor lookup at 0x10000780. The 26-entry, 16-byte table
+ * (stock 0x20002018) is g2_uart_stage1_pmu_table in uart_stage1_pmu_data.c.
  */
 #include <stdint.h>
 #include <stddef.h>
@@ -10,8 +10,7 @@ int32_t gx8002_uart_stage1_pmu_fill_desc(uint32_t selector,
                                            struct stage1_pmu_view *out)
 {
     if (selector >= 26u || out == NULL) return -1;
-    const volatile struct stage1_pmu_entry *const entries =
-        (const volatile struct stage1_pmu_entry *)(uintptr_t)UINT32_C(0x20002018);
+    const volatile struct stage1_pmu_entry *const entries = STAGE1_CLOCK_TABLE;
     out->entry = NULL;
     unsigned index = selector;
     if (entries[index].selector != selector) {

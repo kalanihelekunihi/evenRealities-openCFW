@@ -1,65 +1,30 @@
-/* Native callback body, including all out-of-line return paths. */
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_callback_324628\n"
-".type opencfw_em9305_callback_324628,@function\n"
-"opencfw_em9305_callback_324628:\n"
-"L324628:\n"
-"enter_s [r13-r14,blink]\n"
-"L32462a:\n"
-"mov_s r13,r0\n"
-"L32462c:\n"
-"add r13,r13,776\n"
-"L324630:\n"
-"mov_s r14,r0\n"
-"L324632:\n"
-"ldb_s r0,[r13,0x8]\n"
-"L324634:\n"
-"breq_s r0,0,L324638\n"
-"L324636:\n"
-"leave_s [r13-r14,blink,pcl]\n"
-"L324638:\n"
-"bl.d opencfw_em9305_command_derive_317ba8\n"
-"L32463c:\n"
-"mov_s r0,r14\n"
-"L32463e:\n"
-"ldb_s r1,[r13,0x6]\n"
-"L324640:\n"
-"breq.nt r0,r1,L32466a\n"
-"L324644:\n"
-"ldb_s r1,[r13,0x7]\n"
-"L324646:\n"
-"brne.d.nt r0,r1,L32466a\n"
-"L32464a:\n"
-"mov r1,780\n"
-"L32464e:\n"
-"ldb_s r2,[r13,0x5]\n"
-"L324650:\n"
-"ldb_s r3,[r14,r1]\n"
-"L324652:\n"
-"add_s r1,r2,0x1\n"
-"L324654:\n"
-"extb_s r2,r1\n"
-"L324656:\n"
-"brlo.d.t r2,r3,L324636\n"
-"L32465a:\n"
-"stb_s r1,[r13,0x5]\n"
-"L32465c:\n"
-"stb_s r0,[r13,0x6]\n"
-"L32465e:\n"
-"mov_s r0,r14\n"
-"L324660:\n"
-"bl.d opencfw_em9305_command_refresh_323268\n"
-"L324664:\n"
-"stb 0,[r13,5]\n"
-"L324668:\n"
-"leave_s [r13-r14,blink,pcl]\n"
-"L32466a:\n"
-"stb_s r0,[r13,0x7]\n"
-"L32466c:\n"
-"stb 0,[r13,5]\n"
-"L324670:\n"
-"leave_s [r13-r14,blink,pcl]\n"
-".size opencfw_em9305_callback_324628,.-opencfw_em9305_callback_324628\n"
-);
+#include <stdint.h>
+
+/* Native 0x324628..0x324672: command state debounce (fields at +776).
+ * Unless the update is locked (+784), derive the requested value; a value
+ * equal to the current one (+782) or different from the pending one (+783)
+ * becomes the new pending value and resets the counter (+781). A repeat of
+ * the pending value counts up; once the counter reaches the limit (+780)
+ * the value becomes current, the counter resets and 323268 refreshes the
+ * command state. */
+extern uint32_t opencfw_em9305_command_derive_317ba8(uintptr_t);
+extern uint32_t opencfw_em9305_command_refresh_323268(uintptr_t);
+
+void opencfw_em9305_callback_324628(uintptr_t row)
+{
+    volatile uint8_t *state=(volatile uint8_t *)(row+776u);
+    if(state[8]!=0u) return;
+    uint32_t value=opencfw_em9305_command_derive_317ba8(row);
+    if(value==state[6]||value!=state[7]) {
+        state[7]=(uint8_t)value;
+        state[5]=0u;
+        return;
+    }
+    uint32_t count=state[5]+1u;
+    uint32_t limit=state[4];
+    state[5]=(uint8_t)count;
+    if((uint8_t)count<limit) return;
+    state[6]=(uint8_t)value;
+    state[5]=0u;
+    (void)opencfw_em9305_command_refresh_323268(row);
+}

@@ -25,6 +25,9 @@ void display_driver_gpu_mode_lower_4b06c0(uint32_t unit, uint32_t mode,
     state[0x55u] = (uint8_t)b;
     state[0x56u] = (uint8_t)c;
 }
+/* Single implementation of stock lv_ambiq_blend_mode_change 0x4b06c0. */
+__typeof__(display_driver_gpu_mode_lower_4b06c0) audio_uart_ambiq_texture_setup_4b06c0
+    __attribute__((alias("display_driver_gpu_mode_lower_4b06c0")));
 
 void display_driver_gpu_mode_4b0730(uint32_t unit, uint32_t mode)
 {

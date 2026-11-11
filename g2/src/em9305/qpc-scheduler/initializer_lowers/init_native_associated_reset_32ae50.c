@@ -1,27 +1,12 @@
-/* Full native body; named genuine children. */
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_associated_reset_32ae50\n"
-".type opencfw_em9305_associated_reset_32ae50,@function\n"
-"opencfw_em9305_associated_reset_32ae50:\n"
-"L32ae50:\n"
-"mov_s r1,0\n"
-"L32ae52:\n"
-"mov_s r3,0x80568c\n"
-"L32ae58:\n"
-"mov_s r2,0x805690\n"
-"L32ae5e:\n"
-"st r1,[r0,224]\n"
-"L32ae62:\n"
-"stb r1,[r0,220]\n"
-"L32ae66:\n"
-"sth r1,[r0,218]\n"
-"L32ae6a:\n"
-"sth_s r1,[r3,0]\n"
-"L32ae6c:\n"
-"j_s.d [blink]\n"
-"L32ae6e:\n"
-"sth_s r1,[r2,0]\n"
-".size opencfw_em9305_associated_reset_32ae50,.-opencfw_em9305_associated_reset_32ae50\n"
-);
+#include <stdint.h>
+
+/* Native 0x32ae50..0x32ae6a: clear the associated record's fields at +224,
+ * +220 and +218 and the two global halfwords at 0x80568c and 0x805690. */
+void opencfw_em9305_associated_reset_32ae50(uintptr_t record)
+{
+    *(volatile uint32_t *)(record+224u)=0u;
+    *(volatile uint8_t *)(record+220u)=0u;
+    *(volatile uint16_t *)(record+218u)=0u;
+    *(volatile uint16_t *)(uintptr_t)0x80568cu=0u;
+    *(volatile uint16_t *)(uintptr_t)0x805690u=0u;
+}

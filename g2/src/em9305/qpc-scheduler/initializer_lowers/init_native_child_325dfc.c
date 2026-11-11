@@ -1,70 +1,23 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_325dfc\n"
-".type opencfw_em9305_child_325dfc,@function\n"
-"opencfw_em9305_child_325dfc:\n"
-"L325dfc:\n"
-"enter_s [r13-r15,blink]\n"
-"L325dfe:\n"
-"mov_s r15,r0\n"
-"L325e00:\n"
-"bl.d opencfw_em9305_phy_packet_alloc_32d2f0\n"
-"L325e04:\n"
-"mov_s r0,0x17\n"
-"L325e06:\n"
-"mov_s r13,r0\n"
-"L325e08:\n"
-"breq_s r0,0,L325e4a\n"
-"L325e0a:\n"
-"mov_s r14,r15\n"
-"L325e0c:\n"
-"add r14,r14,445\n"
-"L325e10:\n"
-"add_s r0,r13,0x1\n"
-"L325e12:\n"
-"mov_s r2,0x8\n"
-"L325e14:\n"
-"mov_s r1,r14\n"
-"L325e16:\n"
-"bl.d opencfw_em9305_memcpy\n"
-"L325e1a:\n"
-"stb 3,[r13]\n"
-"L325e1e:\n"
-"ldb_s r0,[r14,0x9]\n"
-"L325e20:\n"
-"mov_s r1,r15\n"
-"L325e22:\n"
-"add r1,r1,421\n"
-"L325e26:\n"
-"stb_s r0,[r13,0x9]\n"
-"L325e28:\n"
-"ldb_s r0,[r14,0xa]\n"
-"L325e2a:\n"
-"mov_s r2,0x8\n"
-"L325e2c:\n"
-"stb_s r0,[r13,0xa]\n"
-"L325e2e:\n"
-"bl.d opencfw_em9305_memcpy\n"
-"L325e32:\n"
-"add_s r0,r13,0xb\n"
-"L325e34:\n"
-"mov_s r1,r15\n"
-"L325e36:\n"
-"add r1,r1,437\n"
-"L325e3a:\n"
-"add_s r0,r13,0x13\n"
-"L325e3c:\n"
-"bl.d opencfw_em9305_memcpy\n"
-"L325e40:\n"
-"mov_s r2,4\n"
-"L325e42:\n"
-"mov_s r0,r15\n"
-"L325e44:\n"
-"bl.d opencfw_em9305_phy_packet_send_32d32c\n"
-"L325e48:\n"
-"mov_s r1,r13\n"
-"L325e4a:\n"
-"leave_s [r13-r15,blink,pcl]\n"
-".size opencfw_em9305_child_325dfc,.-opencfw_em9305_child_325dfc\n"
-);
+#include <stdint.h>
+
+/* Native 0x325dfc..0x325e4c: send a 23-byte PHY packet with opcode 3:
+ * the record's 8 bytes at +445, bytes +454/+455, 8 bytes at +421 and
+ * 4 bytes at +437. */
+extern uint32_t opencfw_em9305_phy_packet_alloc_32d2f0(uint32_t bytes);
+extern void *opencfw_em9305_memcpy(void *destination,const void *source,
+                                   uint32_t bytes);
+extern uint32_t opencfw_em9305_phy_packet_send_32d32c(uintptr_t record,
+                                                     uintptr_t payload);
+
+uint32_t opencfw_em9305_child_325dfc(uintptr_t record)
+{
+    uintptr_t packet=opencfw_em9305_phy_packet_alloc_32d2f0(23u);
+    if(packet==0u)return 0u;
+    *(volatile uint8_t *)packet=3u;
+    (void)opencfw_em9305_memcpy((void *)(packet+1u),(const void *)(record+445u),8u);
+    *(volatile uint8_t *)(packet+9u)=*(volatile uint8_t *)(record+454u);
+    *(volatile uint8_t *)(packet+10u)=*(volatile uint8_t *)(record+455u);
+    (void)opencfw_em9305_memcpy((void *)(packet+11u),(const void *)(record+421u),8u);
+    (void)opencfw_em9305_memcpy((void *)(packet+19u),(const void *)(record+437u),4u);
+    return opencfw_em9305_phy_packet_send_32d32c(record,packet);
+}

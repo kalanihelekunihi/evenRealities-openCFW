@@ -10,13 +10,13 @@ void case_unblock_waiter(case_item *event_item,uint32_t event_bits)
 {
     if(CASE_STATE[12]==0u){
         __asm volatile("cpsid i" ::: "memory");
-        for(;;)__asm volatile("");
+        for(;;){ }
     }
     event_item->value=event_bits|0x80000000u;
     case_tcb *task=(case_tcb *)event_item->owner;
     if(!task){
         __asm volatile("cpsid i" ::: "memory");
-        for(;;)__asm volatile("");
+        for(;;){ }
     }
     case_source_list_remove(event_item);
     case_source_list_remove(&task->state_item);

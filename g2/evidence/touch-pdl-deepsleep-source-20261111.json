@@ -1,0 +1,58 @@
+{
+  "schema": 1,
+  "target": "G2 touch deep sleep from pinned PDL C source",
+  "stock_component": "g2/blobs/official/g2-2.2.6.10/firmware_touch.bin",
+  "stock_component_sha256": "0d13d8bb1337bf22989dc16143e3d5eca29a31cc1ed753ff624668750ea9470d",
+  "stock_evidence": {
+    "main_decomp": "g2/research/corpus/touch/ghidra/open-2026-09-29/decomp/00003cb4.c",
+    "deep_sleep_function": "0x0000a58c",
+    "callback_executor": "0x0000a444",
+    "no_callback_sleep": "0x0000a388",
+    "stock_deep_sleep_function_bytes": 104
+  },
+  "implementation": "The application calls Cy_SysPm_CpuEnterDeepSleep from the pinned Infineon PDL C source. The hand-reconstructed execute/deep-sleep functions were removed; the reset-copy callback ABI remains checked in C. The PDL compiler inlines its helper functions in this candidate, so they are not separate linked symbols.",
+  "source_files": {
+    "g2/src/touch/application/app_main.c": "f4a8f5923aa2188168d309eb964f0c868dc37729c3b296fda69fc27d23f33051",
+    "g2/src/touch/pm-callbacks/callbacks.c": "83aeff3376b6c753d25e1e7d6b3a6e0dd23f6261cecc26991dec8fb713d4ece7",
+    "g2/src/touch/pm-callbacks/callbacks.h": "0bb07abb21096b04b5b98f56a2f7003b7fcb649393c57f3875c99b86dfbcbba6"
+  },
+  "upstream_source": "third-party/upstream/psoc4-touch-slice/mtb-pdl-cat2-35f1714623cfea682d5e285af80d50416b4c7bbc/drivers/source/cy_syspm.c",
+  "verification": {
+    "focused_source_report": "build/g2-touch-pdl-deepsleep-source-20261111/report.json",
+    "focused_source_report_sha256": "c522a1c4e86859ad7a9e4b3c4feb84036044ef1f4418d28f00926d2d3d30131a",
+    "compiled_units": 101,
+    "compile_failures": 0,
+    "duplicate_strong_symbols": 0,
+    "focused_link_report": "build/g2-touch-pdl-deepsleep-link-20261111/link-report.json",
+    "focused_link_report_sha256": "4af880600685347b1e1e5c288776a86e031267b68aa103a5dfc7662834ccddee",
+    "source_binary_bytes": 28732,
+    "source_binary_sha256": "f669680c94859dc0d3f0bf1fceffb415c350c9f73c4d818ab8a6dfc3656a22ee",
+    "source_deep_sleep_function_bytes": 300,
+    "stock_pm_root_ram": "0x20000f34",
+    "wfi_in_linked_function": true,
+    "custom_duplicate_symbols_absent": true,
+    "bounded_no_callback_sleep_mmio_sequence": "Stock and linked C both read the SFLASH halfword at 0x0ffff152, write SRSS 0x40030004, set SCB SCR bit 2 at 0xe000ed10, then execute WFI; compiler instruction sequence and function placement differ."
+  },
+  "qualification": "This replaces a duplicate hand reconstruction with the pinned C PDL path called by stock main. The Clang-linked function is larger than stock and neither whole-image byte identity nor hardware deep sleep is established.",
+  "full_g2_verification": {
+    "source_report": "build/g2-touch-pdl-deepsleep-full-source-20261111/report.json",
+    "source_report_sha256": "26c14fcc46fd99ae37c8405e8fae826778fb59172630c6134004566dde711b01",
+    "compiled_units": 4884,
+    "compile_failures": 0,
+    "duplicate_strong_symbols": 0,
+    "strict_link_report": "build/g2-touch-pdl-deepsleep-full-link-20261111/link-report.json",
+    "strict_link_report_sha256": "1baadb22f6e40989ceec4c1c6d94ac080f73ccce6a3c672ff3286b295d2419f3",
+    "linked_payloads": [
+      "g2-apollo-bootloader",
+      "g2-apollo-main",
+      "g2-case",
+      "g2-codec-a",
+      "g2-codec-b",
+      "g2-em9305",
+      "g2-touch"
+    ],
+    "strict_link_passed": true,
+    "source_completeness_proven": false,
+    "stock_pm_root_ram_preserved": true
+  }
+}

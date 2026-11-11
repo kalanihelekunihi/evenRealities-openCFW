@@ -1,0 +1,15 @@
+# Ordinary C power-control command
+
+`r1/src/application/runtime/native_power_command.c` replaces its naked entry and private frame/tail worker with one ordinary C implementation of stock `0x843c8`. It retains the existing public four-argument command API and return value; the scratch/seed arguments no longer control private saved words. One REA-backed frontier entry is added for this previously unlisted stock root.
+
+The implementation preserves invalid-command rejection, response command 18, delay 100, reset reason 1 and thread flags 2/1/256 for reset/shutdown/recovery. It rereads the command byte after delay and reloads the thread handle after reset, KV storage and logging callbacks. Live logging queries and short circuits remain. A command changed to another unsupported value during the delay returns that new value, as stock.
+
+Shutdown uses an initialized timestamp/voltage record with kind three and a 14-bit voltage. The discarded upper scratch bits have no storage meaning: the actual KV field setter preserves the stored record's own upper bits. Return values and complete resulting 52-byte records are compared. Private-frame aliases and incidental caller scratch-register residue are excluded.
+
+REA bytes match the official application. Direct execution passes **4,560 stock/C comparisons**: all command bytes, advertised lengths including the getter's wrapping cases, raw response/flag statuses, logging modes, input scratch patterns, voltage boundaries and provider changes to command, sequence and thread handle. An additional **4,560 comparisons** execute the actual C KV field setter and clearing routines. Both fixtures execute the actual C payload getter, use full readable packet fixtures, compare call sequences/results/context/records and verify caller stack, callee-saved integer/FP registers, SP and interrupt masks. Modeled callees overwrite caller-saved integer and FP registers.
+
+Five compiled defects are rejected: accepting command zero, losing the post-delay reload, truncating voltage to 13 bits, wrong shutdown flags and wrong recovery flags. These are algorithm/control-flow checks, not hardware proof.
+
+The open-toolchain report `build/sources-goal-r1-power-command-pure-c/report.json` compiles all **855 units** and completes both relocatable compositions. All **844 other nongenerated objects** remain identical to the preceding battery build. Imports remain **62 application / 22 bootloader**. R1 manifest validation passes and source-plan selections remain unchanged. This receipt does not establish upstream command-table reachability or a complete final application link.
+
+[Machine receipt](power-command-pure-c-review.json) binds source and ignored probes under `build/goal-r1-power-command-pure-c/`. Response sending, delays, reset, sampling, time, logs, KV backend and thread flags are modeled. Packet buffer-bound validation, real reset/shutdown effects, physical hardware, persistence, faults/concurrency and final linking/startup remain unverified. Byte identity is not claimed.

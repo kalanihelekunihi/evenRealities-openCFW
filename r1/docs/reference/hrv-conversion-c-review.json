@@ -1,0 +1,432 @@
+{
+  "source": {
+    "source": "r1/src/application/runtime/native_hrv_producer.c",
+    "payload": "r1-application",
+    "role": "candidate",
+    "toolchain": "gcc9",
+    "link": true,
+    "expect": "compile",
+    "returncode": 0,
+    "argv": [
+      "/opt/homebrew/bin/python3",
+      "/Users/kalani/Repo/evenRealities-openCFW/tools/build/linux_gcc.py",
+      "--compiler",
+      "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/bin/arm-none-eabi-gcc",
+      "--read-root",
+      "/Users/kalani/Repo/evenRealities-openCFW/r1",
+      "--read-root",
+      "/Users/kalani/Repo/evenRealities-openCFW/third-party/upstream",
+      "--read-root",
+      "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1",
+      "--read-root",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-hrv-conversion-c/generated/r1",
+      "--",
+      "-mcpu=cortex-m4",
+      "-mthumb",
+      "-munaligned-access",
+      "-mfpu=fpv4-sp-d16",
+      "-mfloat-abi=hard",
+      "-std=c11",
+      "-Os",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-fshort-enums",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-fno-delete-null-pointer-checks",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/r1/src/vendor",
+      "-isystem",
+      "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
+      "-fno-strict-aliasing",
+      "-ffp-contract=off",
+      "-fsignaling-nans",
+      "-frounding-math",
+      "-ftrapping-math",
+      "-MD",
+      "-MF",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-hrv-conversion-c/r1/r1-application/r1__src__application__runtime__native_hrv_producer.c.d",
+      "-c",
+      "/Users/kalani/Repo/evenRealities-openCFW/r1/src/application/runtime/native_hrv_producer.c",
+      "-o",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-hrv-conversion-c/r1/r1-application/r1__src__application__runtime__native_hrv_producer.c.o"
+    ],
+    "source_sha256": "bb470a1bcab1fba444c49c162626a6957c213429446b48024f15565d2c766d8f",
+    "object_sha256": "7e7b1e2a823da8b2f81199ac60d226366d46f3fd9c8ce2d47f401f89aec7b58b",
+    "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-hrv-conversion-c/r1/r1-application/r1__src__application__runtime__native_hrv_producer.c.o",
+    "strong": [
+      "r1_hrv_producer"
+    ],
+    "weak": [],
+    "undefined": [
+      "__aeabi_memclr",
+      "nrf_log_frontend_std_0",
+      "r1_event_publish",
+      "r1_health_mode_is_2",
+      "r1_hr_session_teardown",
+      "r1_hrv_rmssd",
+      "r1_hrv_session_buffer",
+      "r1_hrv_stream_release",
+      "r1_hrv_timing_state",
+      "r1_structured_log_format",
+      "r1_structured_log_mode_get",
+      "r1_time_backend_timestamp"
+    ]
+  },
+  "stock_REA": {
+    "evidence_id": "ev_af3db25092ce187eff308d1c94af2f8bf8081f906b8212aa604cbcf3a166b6d2",
+    "subject": {
+      "name": "stock.elf",
+      "digest": {
+        "sha256": "25b4a29af80ec8edab5bd861ba9b74a6e22eab29dc3d7a809a16869e8a140f04"
+      },
+      "local_path": "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-queue-reset-c/stock.elf",
+      "format": "elf",
+      "architecture": "arm"
+    },
+    "provider": {
+      "id": "ghidra",
+      "name": "Ghidra",
+      "version": "12.1.4"
+    },
+    "analysis_profile": {
+      "provider": {
+        "id": "ghidra",
+        "name": "Ghidra",
+        "version": "12.1.4"
+      },
+      "parameters": {
+        "target_kind": "executable",
+        "target_format": "elf",
+        "architecture": "arm",
+        "available_architectures": [
+          "arm"
+        ],
+        "import_mode": "ephemeral-source-immutable",
+        "annotation_policy": "atomic-function-entry-metadata-v1",
+        "load_image_observations": "source-mappings-entry-context-v2",
+        "function_body_evidence": "complete-inclusive-ranges-v1",
+        "function_references": "complete-body-and-entry-reference-manager-v2",
+        "call_relationship_coverage": "function-body-call-coverage-v5",
+        "function_dossier_coverage": "observed-facets-and-call-relationships-v1",
+        "string_inventory_evidence": "defined-data-coverage-v1",
+        "location_resolution": "explicit-address-exact-entry-symbol-first-v3",
+        "procedure_file_offset_resolution": "address-first-unique-target-source-mapping-v2",
+        "instruction_flow_evidence": "decoded-return-pcode-v1",
+        "instruction_references": "exact-address-incoming-v1",
+        "function_boundary_observations": "ghidra-function-boundary-limitations-v3",
+        "no_return_repair": "returning-imports-decoded-return-v2",
+        "process_launch": "inspected-jvm-launch-support-v1",
+        "jump_table_evidence": "typed-case-default-blocks-v1",
+        "decompiler_jump_loads": true,
+        "loader": "auto-from-header",
+        "language_id": "auto-from-header",
+        "compiler_spec_id": "auto-default",
+        "analyzer_preset": "ghidra-default"
+      },
+      "digest": "7e46711069eea041af1b9b99e34115c13332795e5cda76e584a722f529ec70de"
+    },
+    "predicate_type": "rea.analysis",
+    "operation": "read_bytes",
+    "parameters": {
+      "address": "0x4a24c",
+      "length": 336
+    },
+    "raw_result": {
+      "address": "0x4a24c",
+      "requested_bytes": 336,
+      "returned_bytes": 336,
+      "bytes_hex": "70b553482ded028b82b0b0f8ce20521c92b2a0f8ce200a2a69d3002264242be031f8123033b3b0f8ca50b0f8c830642d0fd330f8135025b1b0f8cc506d1ea0f8cc505d1cb5fbf4f604fb1655a0f8c85007e02b44b3fbf4f604fb16336d1ca0f8ca5031f8125020f81350b0f8cc305b1ca0f8cc30521cd2b24b7a934201d9042aced3b0f8ce103c2931d3b0f8cc1046292dd3b0f8ca102e480df078f92d4db0ee408a286908b1012400e00024b5eec08af1ee10fa1fdd02f097f9e0b100200090019040f049fdbceec80a0190082210ee100a6946adf80000072043f0e9fafff769fd002c03d0fff7dffd0120687002b0bdec028b70bd47f0d3f8c00703d147f0cff8400705d514a213a14ff0406047f06df947f0c5f8800709d517491748081ac108032000eb014015a12ff023fb44b102b0d021bdec028b0548bde87040ddf70eba02b0bdec028bbde87040fff732bd",
+      "complete": true
+    },
+    "normalized_result": {
+      "address": "0x4a24c",
+      "requested_bytes": 336,
+      "returned_bytes": 336,
+      "bytes_hex": "70b553482ded028b82b0b0f8ce20521c92b2a0f8ce200a2a69d3002264242be031f8123033b3b0f8ca50b0f8c830642d0fd330f8135025b1b0f8cc506d1ea0f8cc505d1cb5fbf4f604fb1655a0f8c85007e02b44b3fbf4f604fb16336d1ca0f8ca5031f8125020f81350b0f8cc305b1ca0f8cc30521cd2b24b7a934201d9042aced3b0f8ce103c2931d3b0f8cc1046292dd3b0f8ca102e480df078f92d4db0ee408a286908b1012400e00024b5eec08af1ee10fa1fdd02f097f9e0b100200090019040f049fdbceec80a0190082210ee100a6946adf80000072043f0e9fafff769fd002c03d0fff7dffd0120687002b0bdec028b70bd47f0d3f8c00703d147f0cff8400705d514a213a14ff0406047f06df947f0c5f8800709d517491748081ac108032000eb014015a12ff023fb44b102b0d021bdec028b0548bde87040ddf70eba02b0bdec028bbde87040fff732bd",
+      "complete": true
+    },
+    "confidence": "observed",
+    "authority": "shipped-artifact",
+    "environment": null,
+    "limitations": [
+      "The session serves operations only after Ghidra reports default auto-analysis complete; incomplete analysis does not expose partial results.",
+      "The imported Program and temporary project are ephemeral and deleted on close. Annotation operations edit session database metadata; original executable bytes are never written.",
+      "Cancelling an active Ghidra request terminates its ephemeral database and discards session annotations. The selected target remains open; the next provider query imports the original artifact again.",
+      "Default-space addresses use lowercase 0x-prefixed hexadecimal; other address spaces use <percent-encoded-space>:0x<hex>.",
+      "Bytes reflect Ghidra's initialized memory, including loader fixups. Reads stop at an unmapped or uninitialized byte and report completeness explicitly.",
+      "macOS sessions require a matching executable Ghidra native decompiler; REA checks for it but does not build native components or change Gatekeeper quarantine state."
+    ],
+    "relationship_coverage": null,
+    "locations": [],
+    "evidence_links": []
+  },
+  "replay": {
+    "paired_cases": 8944,
+    "source_object_sha256": "7e7b1e2a823da8b2f81199ac60d226366d46f3fd9c8ce2d47f401f89aec7b58b",
+    "dependency_objects": {
+      "r1/src/application/runtime/native_hrv_timing.c": "03556d02e015014c5eed5aa4bfa660cfd7ede041d1cb600fe3abad0cb2449f9a",
+      "r1/src/application/runtime/memory_eabi.c": "e7e21f3a870f58f3f737670140ae73fdcb6219d2abbef954d6ed8fe7644c817f",
+      "third-party/upstream/musl-memory-1.2.5/memset.c": "6c2f1a8f480c27d5bc20f79ac535dac28fbbdcaec12e69bad96721f724ec9057"
+    },
+    "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "stock_elf_sha256": "25b4a29af80ec8edab5bd861ba9b74a6e22eab29dc3d7a809a16869e8a140f04",
+    "probe_sha256": "3b2d1ea3295bb748442d45f3f4934d1437dd1c1e6b5d32d76e036a511f6c83aa",
+    "REA": {
+      "evidence_id": "ev_af2784ccafe6b0ba2c429a61b805517220bfa16f11827400b41c530d7b45ccef",
+      "subject": {
+        "name": "stock.elf",
+        "digest": {
+          "sha256": "25b4a29af80ec8edab5bd861ba9b74a6e22eab29dc3d7a809a16869e8a140f04"
+        },
+        "local_path": "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-queue-reset-c/stock.elf",
+        "format": "elf",
+        "architecture": "arm"
+      },
+      "provider": {
+        "id": "ghidra",
+        "name": "Ghidra",
+        "version": "12.1.4"
+      },
+      "analysis_profile": {
+        "provider": {
+          "id": "ghidra",
+          "name": "Ghidra",
+          "version": "12.1.4"
+        },
+        "parameters": {
+          "target_kind": "executable",
+          "target_format": "elf",
+          "architecture": "arm",
+          "available_architectures": [
+            "arm"
+          ],
+          "import_mode": "ephemeral-source-immutable",
+          "annotation_policy": "atomic-function-entry-metadata-v1",
+          "load_image_observations": "source-mappings-entry-context-v2",
+          "function_body_evidence": "complete-inclusive-ranges-v1",
+          "function_references": "complete-body-and-entry-reference-manager-v2",
+          "call_relationship_coverage": "function-body-call-coverage-v5",
+          "function_dossier_coverage": "observed-facets-and-call-relationships-v1",
+          "string_inventory_evidence": "defined-data-coverage-v1",
+          "location_resolution": "explicit-address-exact-entry-symbol-first-v3",
+          "procedure_file_offset_resolution": "address-first-unique-target-source-mapping-v2",
+          "instruction_flow_evidence": "decoded-return-pcode-v1",
+          "instruction_references": "exact-address-incoming-v1",
+          "function_boundary_observations": "ghidra-function-boundary-limitations-v3",
+          "no_return_repair": "returning-imports-decoded-return-v2",
+          "process_launch": "inspected-jvm-launch-support-v1",
+          "jump_table_evidence": "typed-case-default-blocks-v1",
+          "decompiler_jump_loads": true,
+          "loader": "auto-from-header",
+          "language_id": "auto-from-header",
+          "compiler_spec_id": "auto-default",
+          "analyzer_preset": "ghidra-default"
+        },
+        "digest": "7e46711069eea041af1b9b99e34115c13332795e5cda76e584a722f529ec70de"
+      },
+      "predicate_type": "rea.analysis",
+      "operation": "read_bytes",
+      "parameters": {
+        "address": "0x4a24c",
+        "length": 420
+      },
+      "raw_result": {
+        "address": "0x4a24c",
+        "requested_bytes": 420,
+        "returned_bytes": 420,
+        "bytes_hex": "70b553482ded028b82b0b0f8ce20521c92b2a0f8ce200a2a69d3002264242be031f8123033b3b0f8ca50b0f8c830642d0fd330f8135025b1b0f8cc506d1ea0f8cc505d1cb5fbf4f604fb1655a0f8c85007e02b44b3fbf4f604fb16336d1ca0f8ca5031f8125020f81350b0f8cc305b1ca0f8cc30521cd2b24b7a934201d9042aced3b0f8ce103c2931d3b0f8cc1046292dd3b0f8ca102e480df078f92d4db0ee408a286908b1012400e00024b5eec08af1ee10fa1fdd02f097f9e0b100200090019040f049fdbceec80a0190082210ee100a6946adf80000072043f0e9fafff769fd002c03d0fff7dffd0120687002b0bdec028b70bd47f0d3f8c00703d147f0cff8400705d514a213a14ff0406047f06df947f0c5f8800709d517491748081ac108032000eb014015a12ff023fb44b102b0d021bdec028b0548bde87040ddf70eba02b0bdec028bbde87040fff732bd00a30120846d00205b52494e475d524d5353442063616c63756c6174696f6e206661696c65640000fc440c001c440c00524d5353442063616c63756c6174696f6e206661696c65640000000010b5044602f068f9",
+        "complete": true
+      },
+      "normalized_result": {
+        "address": "0x4a24c",
+        "requested_bytes": 420,
+        "returned_bytes": 420,
+        "bytes_hex": "70b553482ded028b82b0b0f8ce20521c92b2a0f8ce200a2a69d3002264242be031f8123033b3b0f8ca50b0f8c830642d0fd330f8135025b1b0f8cc506d1ea0f8cc505d1cb5fbf4f604fb1655a0f8c85007e02b44b3fbf4f604fb16336d1ca0f8ca5031f8125020f81350b0f8cc305b1ca0f8cc30521cd2b24b7a934201d9042aced3b0f8ce103c2931d3b0f8cc1046292dd3b0f8ca102e480df078f92d4db0ee408a286908b1012400e00024b5eec08af1ee10fa1fdd02f097f9e0b100200090019040f049fdbceec80a0190082210ee100a6946adf80000072043f0e9fafff769fd002c03d0fff7dffd0120687002b0bdec028b70bd47f0d3f8c00703d147f0cff8400705d514a213a14ff0406047f06df947f0c5f8800709d517491748081ac108032000eb014015a12ff023fb44b102b0d021bdec028b0548bde87040ddf70eba02b0bdec028bbde87040fff732bd00a30120846d00205b52494e475d524d5353442063616c63756c6174696f6e206661696c65640000fc440c001c440c00524d5353442063616c63756c6174696f6e206661696c65640000000010b5044602f068f9",
+        "complete": true
+      },
+      "confidence": "observed",
+      "authority": "shipped-artifact",
+      "environment": null,
+      "limitations": [
+        "The session serves operations only after Ghidra reports default auto-analysis complete; incomplete analysis does not expose partial results.",
+        "The imported Program and temporary project are ephemeral and deleted on close. Annotation operations edit session database metadata; original executable bytes are never written.",
+        "Cancelling an active Ghidra request terminates its ephemeral database and discards session annotations. The selected target remains open; the next provider query imports the original artifact again.",
+        "Default-space addresses use lowercase 0x-prefixed hexadecimal; other address spaces use <percent-encoded-space>:0x<hex>.",
+        "Bytes reflect Ghidra's initialized memory, including loader fixups. Reads stop at an unmapped or uninitialized byte and report completeness explicitly.",
+        "macOS sessions require a matching executable Ghidra native decompiler; REA checks for it but does not build native components or change Gatekeeper quarantine state."
+      ],
+      "relationship_coverage": null,
+      "locations": [],
+      "evidence_links": []
+    },
+    "limits": [
+      "Paired compiled C/native producer; RMSSD, wear/time/event/log/unregister/release providers modeled",
+      "Independent live-memory ring oracle covers zero samples, metadata/payload aliases, live count, unchecked head and counter wrap",
+      "Active FP context initialized architecturally before FPSCR; result compare/conversion and flags execute natively",
+      "Actual C session cleanup/memory clear/timer release coordinator execute; lower release modeled; no source-only link, full RMSSD algorithm or physical device proof"
+    ]
+  },
+  "negative_controls": [
+    {
+      "name": "clamped-head",
+      "rejected": true
+    },
+    {
+      "name": "cached-sample",
+      "rejected": true
+    },
+    {
+      "name": "cached-count",
+      "rejected": true
+    },
+    {
+      "name": "lost-callback-wrap",
+      "rejected": true
+    },
+    {
+      "name": "fresh-instead-of-captured-timer",
+      "rejected": true
+    },
+    {
+      "name": "failure-always-teardown",
+      "rejected": true
+    },
+    {
+      "name": "wrong-completion-flag",
+      "rejected": true
+    },
+    {
+      "name": "short-event",
+      "rejected": true
+    },
+    {
+      "name": "wrong-log-tag",
+      "rejected": true
+    },
+    {
+      "name": "quiet-compare",
+      "rejected": true
+    },
+    {
+      "name": "missing-invalid",
+      "rejected": true
+    },
+    {
+      "name": "wrong-saturation",
+      "rejected": true
+    },
+    {
+      "name": "premature-overflow",
+      "rejected": true
+    }
+  ],
+  "qualification": {
+    "candidate_units": 1,
+    "compiled_units": 1,
+    "units": [
+      {
+        "source": "r1/src/application/runtime/native_hrv_producer.c",
+        "payload": "r1-application",
+        "evidence": "r1/symbols/function-frontier.csv",
+        "selected": [],
+        "compiled": true,
+        "rejections": {
+          "anchored_relocation_pattern_not_exact": 1
+        },
+        "source_implementation_completeness": "not established by compilation or byte matching",
+        "reason": "no exact anchored body under tested production bindings; integration remains unfinished"
+      }
+    ]
+  },
+  "composition": {
+    "report": "build/sources-goal-r1-hrv-conversion-c/report.json",
+    "sha256": "5e0057c688dc1ef6bf6c9a4385b0e417922dc19b5418a5fbbab216ce596c72da",
+    "units": 672,
+    "unchanged_other_objects": 671,
+    "application_imports": 163,
+    "bootloader_imports": 34,
+    "import_sets_unchanged": true
+  },
+  "hybrid": {
+    "report": "build/hybrid-goal-r1-hrv-conversion-c/build-report.json",
+    "sha256": "7c47773e36d0319b15d41c6d736032d1a7dcb0dc6d932778f803aa859cd68305",
+    "totals": {
+      "binary-pull-through": 641791,
+      "source-built": 4369,
+      "resource-file": 248
+    },
+    "canonical_plan_unchanged": true
+  },
+  "artifacts": {
+    "build/goal-r1-hrv-conversion-c/verify.py": "3b2d1ea3295bb748442d45f3f4934d1437dd1c1e6b5d32d76e036a511f6c83aa",
+    "build/goal-r1-hrv-conversion-c/negative.py": "72320ef4b40ed38bc87a6f39a8f5e1176371cf477fe66efe8e519ff4bbf21076",
+    "build/goal-r1-hrv-conversion-c/finalize.py": "29468a23b530bd9d011e1811d052a99c14a81688548ff74fc7d7aa1214cd63fe",
+    "build/goal-r1-hrv-conversion-c/qualify.py": "6e782f03e0009d9b1e27200d5d81395301c32cf4f1ba11c6000a4d809bdb261b",
+    "build/goal-r1-hrv-conversion-c/source.elf": "09ac54833f5ae56a26e632fddb7c8ec06a162bcf4f42c14844ee6f57371275c0",
+    "build/goal-r1-hrv-conversion-c/results.json": "bb8730642097d48931ed6260c68e8330b10c6bdaa9980063e9d4e7fc4ad4a9a1",
+    "build/goal-r1-hrv-conversion-c/negative-results.json": "166516e5e2977c9a9f67208a5a8efe1607b1801c9e09a045e796a593f51fa7b8",
+    "build/goal-r1-hrv-conversion-c/disassembly.txt": "c2d11980bbecd9c6b0190cc5f65e038f34adc3918f8a634390f824b1483fae4b",
+    "build/goal-r1-hrv-conversion-c/verify.log": "33d6587819adb9f9eeda6eb79216db5a0256a885b432687bf9703e493ed644e5",
+    "build/goal-r1-hrv-conversion-c/check.log": "0885b4d448591039b16064d4a5ed562411488f2710f3b7e6c0b495c8229029c9",
+    "build/goal-r1-hrv-conversion-c/clamped-head.c": "24e06728271d6cd56c74387a69609ab0af3188fa116229e9a0869c87a673247d",
+    "build/goal-r1-hrv-conversion-c/clamped-head.o": "9db351d36d694942840722ffab094ad0fcbc085eb77e798d1d8288afce3b4659",
+    "build/goal-r1-hrv-conversion-c/clamped-head.log": "922c97728badb20d098baaac23c54b7ce1602552d2eb8397253e7bbec77564b9",
+    "build/goal-r1-hrv-conversion-c/clamped-head.compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/goal-r1-hrv-conversion-c/cached-sample.c": "f9912b74be2e85aeb34403e3c5748e56acdfd3253b454408fe0e4bbfd55f5684",
+    "build/goal-r1-hrv-conversion-c/cached-sample.o": "ee6748dfc0ec1df41f4cc7894b8c2266dbca66c2a7951098712309d307ddc859",
+    "build/goal-r1-hrv-conversion-c/cached-sample.log": "e870a8da679d43f5aee16d38df26a588685ad777ce36118897fd14e1dad0af3e",
+    "build/goal-r1-hrv-conversion-c/cached-sample.compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/goal-r1-hrv-conversion-c/cached-count.c": "ab47e9e49b208590e6ba64e77bd30c0a3be0235c1735f1886789c7bbb1bc6cd0",
+    "build/goal-r1-hrv-conversion-c/cached-count.o": "59e40604292e6b555bc2b9f273c783bfab6fa6a2887be653bd1a1fe1ecfdc2ee",
+    "build/goal-r1-hrv-conversion-c/cached-count.log": "8173720b2be5435a66dab295662a4a382f8b80cbc18d60fea8cd50ddcc511061",
+    "build/goal-r1-hrv-conversion-c/cached-count.compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/goal-r1-hrv-conversion-c/lost-callback-wrap.c": "83fe223f57b6892ca3d2f206c42c53174bce21de7bffca37d26cb02c76e53a58",
+    "build/goal-r1-hrv-conversion-c/lost-callback-wrap.o": "1afda8520f05c5f62401b2d1acded141b4eabe6da04df2ed81e9f6046706e2e6",
+    "build/goal-r1-hrv-conversion-c/lost-callback-wrap.log": "b6bb33aac5891cbe0fb9176ad0d8651b53b4b2f46cda76d2fb3495abcf725794",
+    "build/goal-r1-hrv-conversion-c/lost-callback-wrap.compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/goal-r1-hrv-conversion-c/fresh-instead-of-captured-timer.c": "dd43fdf96454180ad501d5b8039e3f650bbd6ec994000ed19c75f84953016ee8",
+    "build/goal-r1-hrv-conversion-c/fresh-instead-of-captured-timer.o": "4f9556c14a84e44def69c770265bf1716d54ac666a478afdf93b5b36e34d89fb",
+    "build/goal-r1-hrv-conversion-c/fresh-instead-of-captured-timer.log": "892a2b61cdaadc172d1041ac39d48b20a959bc527ae3ded2705f92a29fc4868d",
+    "build/goal-r1-hrv-conversion-c/fresh-instead-of-captured-timer.compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/goal-r1-hrv-conversion-c/failure-always-teardown.c": "df7488b230800e65954d892d9992f2f2b1c3f5c93526cd661e523b4926be96f6",
+    "build/goal-r1-hrv-conversion-c/failure-always-teardown.o": "de2216a8870a6a99d96a6cdad524704b0c07a4e3b09af1f10cc731aa3d1b02d1",
+    "build/goal-r1-hrv-conversion-c/failure-always-teardown.log": "e079529d1042676e5dc63d323bbf5a99e51b6271c536b563b711c198c1f0a0a9",
+    "build/goal-r1-hrv-conversion-c/failure-always-teardown.compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/goal-r1-hrv-conversion-c/wrong-completion-flag.c": "0e60209c030fbf9fc3316b63eb9d789a794731bd74639350f88757147b52df15",
+    "build/goal-r1-hrv-conversion-c/wrong-completion-flag.o": "cb8385614a89da4e5b682613a238455cc7fcb5412c27397b4e6066eed6038835",
+    "build/goal-r1-hrv-conversion-c/wrong-completion-flag.log": "236aac7e9bcef1868e988c93aa4ec9afa4562575b3f451002dd077a06d73b111",
+    "build/goal-r1-hrv-conversion-c/wrong-completion-flag.compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/goal-r1-hrv-conversion-c/short-event.c": "8b5031e5c0bfb4eef27eb15c3d43979532f9c14a8070805acee085935a28c2c4",
+    "build/goal-r1-hrv-conversion-c/short-event.o": "95c244b18b36f07929d94bc6cbfcf199e18c0082563f5279d0a880322cfeb069",
+    "build/goal-r1-hrv-conversion-c/short-event.log": "41df2cfe0268d434019bc6d763098925f8f117908023632d8000686ed9382a7b",
+    "build/goal-r1-hrv-conversion-c/short-event.compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/goal-r1-hrv-conversion-c/wrong-log-tag.c": "e0447c4573f76f7020bf27a15c1b655e2b7105b8b382992f35cfd7165dc066c6",
+    "build/goal-r1-hrv-conversion-c/wrong-log-tag.o": "81a36ccfc885c63f5fee74a856b722613c65d122b7d3d269d11e39583390c164",
+    "build/goal-r1-hrv-conversion-c/wrong-log-tag.log": "5bf80349a175e785378f9cc94b77dc7855cf213a35e726bd7ad3bc0f851a9beb",
+    "build/goal-r1-hrv-conversion-c/wrong-log-tag.compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/goal-r1-hrv-conversion-c/quiet-compare.c": "819c26e076bb933b6041bc179701eb5b98409ea001d9a56abddd55b69f80dbac",
+    "build/goal-r1-hrv-conversion-c/quiet-compare.o": "817f99ad999650f7f8011dc1693566af1f2460bc3c351201150bb756e43916b2",
+    "build/goal-r1-hrv-conversion-c/quiet-compare.log": "56df193a4de1da7ca78c59310b81a302d1f88c71983ca46c09646049c300fc1f",
+    "build/goal-r1-hrv-conversion-c/quiet-compare.compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/goal-r1-hrv-conversion-c/missing-invalid.c": "092f9bdd421e52170649694ba5b105aef651b26227ae0dd101a623dae3de3fcd",
+    "build/goal-r1-hrv-conversion-c/missing-invalid.o": "aacb4ae94ce70eedb8a7174ab6a931b6a30e9ae883847e971342070171e914fd",
+    "build/goal-r1-hrv-conversion-c/missing-invalid.log": "dd84bf8796a109f4c276030e094a005c9679b47fd5e5e54c336a32242ce9e9d5",
+    "build/goal-r1-hrv-conversion-c/missing-invalid.compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/goal-r1-hrv-conversion-c/wrong-saturation.c": "4869d8384eec0792308adfc2201a13a8d19a3325e383b7b18b3cc3d06333b18a",
+    "build/goal-r1-hrv-conversion-c/wrong-saturation.o": "65ffc713ecda4177cb877950491c98cc5e0f6cd69848d4d633513f633e42eb07",
+    "build/goal-r1-hrv-conversion-c/wrong-saturation.log": "a09c137dcd4a89ca0d19cb73c4b3e292c8308ce48af75b4b38ccd392d3642873",
+    "build/goal-r1-hrv-conversion-c/wrong-saturation.compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/goal-r1-hrv-conversion-c/premature-overflow.c": "4cca2c35817579166a14abc713557f501f2e2ba0e3d9388bdb05c49b098ae5a8",
+    "build/goal-r1-hrv-conversion-c/premature-overflow.o": "81081920c74af5acb26d307bbe06e1308116fe3eb253fee12d33c58b70af1ae0",
+    "build/goal-r1-hrv-conversion-c/premature-overflow.log": "a6108abf518461de0f550dc884d9dda2837b0e11132e243bcb040bb8f528a634",
+    "build/goal-r1-hrv-conversion-c/premature-overflow.compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "limits": [
+    "Producer contains no inline assembly; positive non-NaN conversion domain guarded in C before unsigned cast; overflow invalid flag uses volatile floating division under the pinned GCC strict-FP target",
+    "Actual C timing cleanup executes; RMSSD, wear/time/event/log and lower release providers modeled",
+    "No first-use FP, physical device, final source-only link or instruction identity proof"
+  ]
+}

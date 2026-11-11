@@ -10,7 +10,7 @@ extern uint32_t audio_uart_lv_decoder_find_48925a(void *,void *);
 extern void audio_uart_lv_decoder_default_options_4d4ccc(void *,uint32_t);
 extern void *audio_queue_copy_bytes(void *,const void *,uint32_t);
 extern void audio_uart_lv_draw_flush_cache_48abb8(void *,const void *);
-extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,
+extern void lv_log_add(uint32_t,const char *,uint32_t,
                                 const char *,const char *,...);
 
 static const char decoder_open_path[] =
@@ -53,7 +53,7 @@ uint32_t audio_uart_lv_image_decoder_open_488f9c(
         const uint32_t decoded=*(uint32_t *)(void *)(out+44u);
         if (*(uint32_t *)(uintptr_t)(decoded+20u)==0u ||
             *(uint32_t *)(uintptr_t)(decoded+24u)==0u) {
-            audio_uart_lvgl_log(3u,decoder_open_path,132u,decoder_open_name,
+            lv_log_add(3u,decoder_open_path,132u,decoder_open_name,
                                 decoder_open_assert_message,
                                 decoder_open_assert_expression,
                                 decoder_open_assert_reason);

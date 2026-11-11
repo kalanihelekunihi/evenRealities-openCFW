@@ -1,97 +1,28 @@
-/* True 104-byte ECU request callback; adjacent function excluded; ordered ten-byte serialization. */
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_ecu_callback_315a84\n"
-".type opencfw_em9305_ecu_callback_315a84,@function\n"
-"opencfw_em9305_ecu_callback_315a84:\n"
-"L315a84:\n"
-"enter_s [r13,blink]\n"
-"L315a86:\n"
-"mov_s r13,r0\n"
-"L315a88:\n"
-"bl.d opencfw_em9305_phy_packet_alloc_32d2f0\n"
-"L315a8c:\n"
-"mov_s r0,0xb\n"
-"L315a8e:\n"
-"mov_s r1,r0\n"
-"L315a90:\n"
-"breq_s r0,0,L315acc\n"
-"L315a92:\n"
-"mov_s r0,0x26\n"
-"L315a94:\n"
-"mov_s r2,r13\n"
-"L315a96:\n"
-"stb_s r0,[r1,0]\n"
-"L315a98:\n"
-"add r2,r2,856\n"
-"L315a9c:\n"
-"ldb_s r0,[r2,0]\n"
-"L315a9e:\n"
-"stb_s r0,[r1,0x1]\n"
-"L315aa0:\n"
-"ldb_s r0,[r2,0x1]\n"
-"L315aa2:\n"
-"stb_s r0,[r1,0x2]\n"
-"L315aa4:\n"
-"ldb_s r0,[r2,0x2]\n"
-"L315aa6:\n"
-"stb_s r0,[r1,0x3]\n"
-"L315aa8:\n"
-"ldb_s r0,[r2,0x3]\n"
-"L315aaa:\n"
-"stb_s r0,[r1,0x4]\n"
-"L315aac:\n"
-"ldb_s r0,[r2,0x4]\n"
-"L315aae:\n"
-"stb_s r0,[r1,0x5]\n"
-"L315ab0:\n"
-"ldb_s r0,[r2,0x5]\n"
-"L315ab2:\n"
-"stb_s r0,[r1,0x6]\n"
-"L315ab4:\n"
-"ldb_s r0,[r2,0x6]\n"
-"L315ab6:\n"
-"stb_s r0,[r1,0x7]\n"
-"L315ab8:\n"
-"ldb_s r0,[r2,0x7]\n"
-"L315aba:\n"
-"stb_s r0,[r1,0x8]\n"
-"L315abc:\n"
-"ldb_s r0,[r2,0x8]\n"
-"L315abe:\n"
-"stb_s r0,[r1,0x9]\n"
-"L315ac0:\n"
-"ldb_s r0,[r2,0x9]\n"
-"L315ac2:\n"
-"stb_s r0,[r1,0xa]\n"
-"L315ac4:\n"
-"bl.d opencfw_em9305_phy_packet_send_32d32c\n"
-"L315ac8:\n"
-"mov_s r0,r13\n"
-"L315aca:\n"
-"leave_s [r13,blink,pcl]\n"
-"L315acc:\n"
-"mov_s r1,0x6f\n"
-"L315ace:\n"
-"bl.d opencfw_em9305_receive_terminate_325c08\n"
-"L315ad2:\n"
-"mov_s r0,r13\n"
-"L315ad4:\n"
-"mov_s r0,0x805c70\n"
-"L315ada:\n"
-"ld r0,[r0,0]\n"
-"L315adc:\n"
-"sub_s r1,r13,r0\n"
-"L315ade:\n"
-"div r1,r1,912\n"
-"L315ae2:\n"
-"extb_s r0,r1\n"
-"L315ae4:\n"
-"bl.d opencfw_em9305_dispatch_child_323498\n"
-"L315ae8:\n"
-"mov_s r1,0xd\n"
-"L315aea:\n"
-"leave_s [r13,blink,pcl]\n"
-".size opencfw_em9305_ecu_callback_315a84,.-opencfw_em9305_ecu_callback_315a84\n"
-);
+#include <stdint.h>
+
+/* Native 0x315a84..0x315aec: send the 11-byte PHY packet 0x26 carrying the
+ * record's 10 bytes at +856. When no packet is available, terminate
+ * reception (reason 0x6f) and report status 0x0d for the connection
+ * handle (record index in the 912-byte table at *0x805c70). */
+extern uint32_t opencfw_em9305_phy_packet_alloc_32d2f0(uint32_t bytes);
+extern uint32_t opencfw_em9305_phy_packet_send_32d32c(uintptr_t record,
+                                                     uintptr_t payload);
+extern uint32_t opencfw_em9305_receive_terminate_325c08(uintptr_t source,
+                                                        uint32_t reason);
+extern uint32_t opencfw_em9305_dispatch_child_323498(uint32_t handle,
+                                                     uint32_t status);
+
+uint32_t opencfw_em9305_ecu_callback_315a84(uintptr_t record)
+{
+    uintptr_t packet=opencfw_em9305_phy_packet_alloc_32d2f0(11u);
+    if(packet==0u){
+        (void)opencfw_em9305_receive_terminate_325c08(record,0x6fu);
+        uintptr_t base=*(volatile uint32_t *)0x805c70u;
+        int32_t index=(int32_t)(record-base)/912;
+        return opencfw_em9305_dispatch_child_323498((uint8_t)index,0x0du);
+    }
+    *(volatile uint8_t *)packet=0x26u;
+    for(uint32_t i=0u;i<10u;++i)
+        *(volatile uint8_t *)(packet+1u+i)=*(volatile uint8_t *)(record+856u+i);
+    return opencfw_em9305_phy_packet_send_32d32c(record,packet);
+}

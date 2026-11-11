@@ -35,15 +35,11 @@ void audio_ble_gatt_update_child_body(const uint8_t *event)
         audio_ble_service_discovery_restart_531f20((uint8_t)connection);
 }
 
-/* Native six-word push returns the inherited R3 in R0. */
-__attribute__((naked)) uint32_t audio_ble_gatt_update_child_533630(
-    const uint8_t *event __attribute__((unused)),...)
-{
-    __asm__ volatile(
-        "push {r3, r4, r5, r6, r7, lr}\n"
-        "bl audio_ble_gatt_update_child_body\n"
-        "pop {r0, r4, r5, r6, r7, pc}\n");
-}
+/* Stock 0x533630 (appDiscCfgCback, entered as AppDiscServiceChanged). The
+ * stock epilogue popped the caller's R3 into R0; the Cordio callers treat it
+ * as void, so the entry is an alias of the body. */
+__typeof__(audio_ble_gatt_update_child_body) audio_ble_gatt_update_child_533630
+    __attribute__((alias("audio_ble_gatt_update_child_body")));
 
 extern uint8_t audio_ble_gatt_value_update_4b5a1e(const uint8_t *subcontext, const uint8_t *event); /* opencfw U5: now provided by the Cordio unit */
 
@@ -53,12 +49,8 @@ void audio_ble_slave_adv_stop_body(const uint8_t *event)
         (void)audio_ble_gatt_value_update_4b5a1e(audio_ble_slave_subcontext,event);
 }
 
-/* Native push {r7,lr} / pop {r0,pc} returns inherited R7. */
-__attribute__((naked)) uint32_t dmSlaveAdvStopOnDisconnect(
-    const uint8_t *event __attribute__((unused)))
-{
-    __asm__ volatile(
-        "push {r7, lr}\n"
-        "bl audio_ble_slave_adv_stop_body\n"
-        "pop {r0, pc}\n");
-}
+/* Stock 0x46DFD0 (dmSlaveAdvStopOnDisconnect). The stock epilogue popped the
+ * caller's R7 into R0; the only caller (display_ble_slave_proc_msg.c) declares
+ * it void, so the entry is an alias of the body. */
+__typeof__(audio_ble_slave_adv_stop_body) dmSlaveAdvStopOnDisconnect
+    __attribute__((alias("audio_ble_slave_adv_stop_body")));

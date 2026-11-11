@@ -13,7 +13,7 @@ extern void audio_uart_ambiq_transform_area_488cda(void *, int32_t, int32_t,
                                                      const void *);
 extern void audio_uart_ambiq_area_move_450bb2(void *, int32_t, int32_t);
 extern uint32_t audio_uart_lv_render_task_queue_484476(void *, void *, uint32_t);
-extern void audio_uart_lvgl_log(uint32_t, const char *, uint32_t,
+extern void lv_log_add(uint32_t, const char *, uint32_t,
                                 const char *, const char *, ...);
 
 static const char source_path[] =
@@ -45,7 +45,7 @@ void audio_uart_lv_draw_layer_48895e(void *layer_arg, const void *dsc_arg,
         layer, coords);
     uint8_t *const image_dsc = (uint8_t *)audio_uart_lv_malloc(0x6cu);
     if (image_dsc == 0) {
-        audio_uart_lvgl_log(3u, source_path, 0x4fu, source_func,
+        lv_log_add(3u, source_path, 0x4fu, source_func,
                             assert_format, alloc_assert, alloc_failed);
         for (;;) *(volatile uint32_t *)(uintptr_t)0xffffffffu = 0u;
     }

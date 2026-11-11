@@ -1,0 +1,97 @@
+{
+  "report": "build/sources-goal-r1-dock-policy-final-c/report.json",
+  "units": 818,
+  "application_imports": 71,
+  "added_imports": [
+    "r1_st25dvxxkc_dock_advertisement_send"
+  ],
+  "removed_imports": [
+    "r1_st25dvxxkc_dock_frame_policy"
+  ],
+  "verification": {
+    "policy_pairs": 2880,
+    "threshold_mutation_pairs": 480,
+    "seeded_pairs": 256,
+    "adapter_pairs": 30,
+    "actual_ST25_control_and_mailbox_write_providers": true
+  },
+  "actual_formatter": {
+    "actual_formatter_pairs": 63
+  },
+  "compiled_defects": [
+    {
+      "defect": "early-heartbeat",
+      "rejected": true
+    },
+    {
+      "defect": "wrong-voltage-bound",
+      "rejected": true
+    },
+    {
+      "defect": "wrong-thermal-bound",
+      "rejected": true
+    },
+    {
+      "defect": "wrong-write-size",
+      "rejected": true
+    },
+    {
+      "defect": "wrong-version-endian",
+      "rejected": true
+    },
+    {
+      "defect": "missing-field-seen",
+      "rejected": true
+    },
+    {
+      "defect": "wrong-periodic-target",
+      "rejected": true
+    },
+    {
+      "defect": "wrong-periodic-delay",
+      "rejected": true
+    },
+    {
+      "defect": "ignore-control-error",
+      "rejected": true
+    },
+    {
+      "defect": "phase-before-advertisement",
+      "rejected": true
+    }
+  ],
+  "prior_objects_identical": 815,
+  "generated_object_hash_changes": [
+    "{gen}/r1_startup_vectors.S",
+    "{gen}/r1_uecc.c"
+  ],
+  "rea_evidence_ids": [
+    "ev_54b9f7f3aece2485aaf5ab996c3e5d098fe45c684b34a9ded33408a12db0c084",
+    "ev_8d10a05f84d653adee2968539a707193ca41f96f0e337b01669a72eed7e8e69e",
+    "ev_b414d8bd94846ab256ff4cabcbad6aa1e3fbceb4777cf1e112be4811f1f695bc"
+  ],
+  "evidence_files": {
+    "build/goal-r1-dock-policy-c/verify.py": "e1d8882d6168a2d18cd54b2d0d0da91447093b84a5a36a6b768d990ce898ffed",
+    "build/goal-r1-dock-policy-c/verification.json": "82869c29a9a20e2b7a577aa37dd6c848491800f4d5c0953dbc3a41626a5d907c",
+    "build/goal-r1-dock-policy-c/verify-final.log": "e2b88fba276102f0ae5b145ae5bb5d145f83ea9ecc939f325dc4482514749ae6",
+    "build/goal-r1-dock-policy-c/defects.py": "97dd928dddf4a68b389ae814347f3198f9907a29dcb3d8926783854f942e4e17",
+    "build/goal-r1-dock-policy-c/defects.json": "51270db93096274f3e95f8c81fcb884efcd7ce65d02e0b710afb2d8db9a2d3e1",
+    "build/goal-r1-dock-policy-c/formatter.py": "387dc6c075d0b846ebf22d6130653f96c0d6511ee508bc12eca22757b5e2ac9d",
+    "build/goal-r1-dock-policy-c/formatter.log": "9712a27cc7dfff4932e3b421e88919cb8f89b61d9b992c140786a7b667407aa0",
+    "build/goal-r1-dock-policy-c/formatter/verification.json": "f6e2c5c8417a0d098c785ba0d5449621c33c1881cb970c46d918e3ff8084cee9",
+    "build/goal-r1-dock-policy-c/rea.json": "7279dad06b1490e59e205676ae4edeec5e3c338f9949f5aed705642e630385f0",
+    "build/goal-r1-dock-policy-c/document.py": "0d4ef6ca26b5fe9c9cce09f06a13ac87656d0a88be3e594251ce38e209328d0b",
+    "build/sources-goal-r1-dock-policy-final-c/report.json": "725ff3d7d484246e231bc3ccdc01cc781b37214639fed8fa1fcbd77a2c1ad8e7",
+    "build/goal-r1-fstorage-registry/expanded-rw.bin": "87fdee392022fdbe23dd0daf3e859fb14f3ce26ba3e8403aab56dc9d9a913317",
+    "r1/src/sources.json": "bbd4368b4d3e061c7508e8bd085952c42bd10df14db3d2c9ca9ab6c512ceefd7",
+    "r1/src/application/st25/native_dock_policy.c": "fa3ede91760ce1461a1dc8e4f7b169ff42fecb13d9786393c479e043a0b755b1",
+    "r1/src/application/runtime/native_battery_periodic.c": "dddfc4f0921609813e89fdaf928c776923350a13ef66956bb861116217ecdf6a"
+  },
+  "limitations": [
+    "Dock advertisement sending remains an explicit unresolved boundary.",
+    "Input is readable through byte eight; heartbeat reply output has at least 24 readable/writable bytes. Length is unused in stock.",
+    "Actual SDK control/write providers execute with prepared device objects; register IO, timer/flag/logging and advertisement leaves modeled.",
+    "Formatter runs actual stock/C code in 63 cases; main policy cases model formatting while comparing ABI values.",
+    "No final application link, startup storage placement, electrical transaction or device boot proof."
+  ]
+}

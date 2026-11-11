@@ -5,10 +5,8 @@
  */
 #include "case_side_state_contract.h"
 extern void case_policy_task_cancel(uint32_t task); /* 0x0800aa00 */
-void case_policy_fake_standby_set(uint32_t side)
-{
-    case_boot_button_mode_reset(side);
-}
+/* Dedup (0x08003a00): case_policy_fake_standby_set is an alias of case_boot_button_mode_reset (startup/application_boot_irq_button_refresh_candidate.c). */
+extern void case_policy_fake_standby_set(uint32_t side);
 /* Stock 0x080013B8 (idle_mode_exit) */
 void case_policy_fake_standby_clear(void)
 {

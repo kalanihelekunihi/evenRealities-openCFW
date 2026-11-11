@@ -1,0 +1,68 @@
+{
+  "schema": 1,
+  "target": "Compile and strictly link G2 touch PDL with fingerprinted Arm GNU 14.2.Rel1 in the full all-C source build",
+  "source_manifest": "g2/src/sources.json",
+  "source_manifest_sha256": "5d411df79ff70b667828b01554e9737f1808a7c19f5b7f207acd3ebafb702aa3",
+  "compiler": "vendor-cache/g2/touch-gcc-14.2/14.2.Rel1/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi/bin/arm-none-eabi-gcc",
+  "compiler_sha256": "2e6d1fc0b7709d2fc08278a06bbcbfadb6fafcf5837e13cde01a1fbd07ad6db1",
+  "linker_script": "g2/src/touch/link/g2-touch-stockram.ld.inc",
+  "linker_script_sha256": "0e3610a7b13fd6a92ab14aeac2699843160ec12acc919c90feebb3ed4887e7ec",
+  "focused_source_report": "build/g2-touch-gcc14-source-20261111/report.json",
+  "focused_source_report_sha256": "514312c6b5faa0b7b8dd64d9a9a2e9cee25ab3783d8763f7651f08e51bcca062",
+  "full_source_report": "build/g2-gcc14-pdl-full-20261111/report.json",
+  "full_source_report_sha256": "9cdfe884eff5da8cf5ea8d29649e11861d6f0561f566b2cc1ebb711ed1bdebe8",
+  "source_build": {
+    "compiled": 4880,
+    "units": 4880,
+    "failed": 0,
+    "duplicate_strong_symbols": 0,
+    "payloads": {
+      "g2-apollo-bootloader": {
+        "compiled": 224,
+        "units": 224,
+        "composed_unresolved_symbols": 3
+      },
+      "g2-apollo-main": {
+        "compiled": 2717,
+        "units": 2717,
+        "composed_unresolved_symbols": 18
+      },
+      "g2-case": {
+        "compiled": 366,
+        "units": 366,
+        "composed_unresolved_symbols": 0
+      },
+      "g2-codec-a": {
+        "compiled": 367,
+        "units": 367,
+        "composed_unresolved_symbols": 0
+      },
+      "g2-codec-b": {
+        "compiled": 332,
+        "units": 332,
+        "composed_unresolved_symbols": 0
+      },
+      "g2-em9305": {
+        "compiled": 775,
+        "units": 775,
+        "composed_unresolved_symbols": 9
+      },
+      "g2-touch": {
+        "compiled": 99,
+        "units": 99,
+        "composed_unresolved_symbols": 14
+      }
+    }
+  },
+  "strict_link_report": "build/g2-gcc14-pdl-bundle-20261111/link-report.json",
+  "strict_link_report_sha256": "9f31f17f89b2c35d6d1dc9250731cae46cb7fd35539f924a3947eb6eb74af859",
+  "candidate_bundle": "build/g2-gcc14-pdl-bundle-20261111/g2-source-candidate.evenota.bin",
+  "candidate_bundle_bytes": 4638140,
+  "candidate_bundle_sha256": "032db1fa792793089a54e479e3de8ab4d11753de1450fe12c289fde36e5936d6",
+  "authenticated_comparison": "build/g2-gcc14-pdl-bundle-20261111/comparison.json",
+  "authenticated_comparison_sha256": "c82729244198c94da152e339ca2758154c187485a853bc29a3b0d61b2a6ae1ca",
+  "byte_identical_to_locked": false,
+  "stock_touch_raw_bytes": 34464,
+  "source_touch_raw_bytes": 29152,
+  "limits": "All enabled manifest units compile and seven source payloads link. This does not prove complete source coverage, matching behavior, hardware operation, or byte identity. Source build still depends on locally cached vendor PDL and pinned compiler."
+}

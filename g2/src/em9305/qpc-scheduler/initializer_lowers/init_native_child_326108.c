@@ -1,42 +1,19 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_326108\n"
-".type opencfw_em9305_child_326108,@function\n"
-"opencfw_em9305_child_326108:\n"
-"L326108:\n"
-"enter_s [r13-r14,blink]\n"
-"L32610a:\n"
-"mov_s r13,r0\n"
-"L32610c:\n"
-"mov_s r0,4\n"
-"L32610e:\n"
-"bl.d opencfw_em9305_wsf_event_allocate\n"
-"L326112:\n"
-"mov_s r14,r1\n"
-"L326114:\n"
-"mov_s r1,r0\n"
-"L326116:\n"
-"breq_s r0,0,L32613a\n"
-"L326118:\n"
-"sub r0,r13,0x803d78\n"
-"L326120:\n"
-"div r0,r0,784\n"
-"L326124:\n"
-"mov_s r2,0x805b18\n"
-"L32612a:\n"
-"stb_s r14,[r1,0x3]\n"
-"L32612c:\n"
-"stb 13,[r1,2]\n"
-"L326130:\n"
-"extb_s r3,r0\n"
-"L326132:\n"
-"ldb_s r0,[r2,0]\n"
-"L326134:\n"
-"bl.d opencfw_em9305_wsf_task_message_send\n"
-"L326138:\n"
-"sth_s r3,[r1,0]\n"
-"L32613a:\n"
-"leave_s [r13-r14,blink,pcl]\n"
-".size opencfw_em9305_child_326108,.-opencfw_em9305_child_326108\n"
-);
+#include <stdint.h>
+
+/* Native 0x326108..0x32613c: send a 4-byte WSF message {index, 13, value}
+ * for a 784-byte record in the table at 0x803d78 to the handler at
+ * 0x805b18. Returns 0 when no message buffer is available. */
+extern uintptr_t opencfw_em9305_wsf_event_allocate(uint32_t);
+extern uint32_t opencfw_em9305_wsf_task_message_send(uint32_t,uintptr_t);
+
+uint32_t opencfw_em9305_child_326108(uintptr_t record, uint32_t value)
+{
+    uintptr_t message = opencfw_em9305_wsf_event_allocate(4u);
+    if (message == 0u) return 0u;
+    uint8_t index = (uint8_t)((int32_t)(record - 0x803d78u) / 784);
+    *(volatile uint8_t *)(message + 3u) = (uint8_t)value;
+    *(volatile uint8_t *)(message + 2u) = 13u;
+    uint32_t handler = *(volatile uint8_t *)(uintptr_t)0x805b18u;
+    *(volatile uint16_t *)message = index;
+    return opencfw_em9305_wsf_task_message_send(handler, message);
+}

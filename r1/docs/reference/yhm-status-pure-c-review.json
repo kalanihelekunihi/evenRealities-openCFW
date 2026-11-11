@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "scope": "R1 YHM2710 status ordinary C entry",
+  "report": "build/sources-goal-r1-yhm-status-pure-c/report.json",
+  "comparison_report": "build/sources-goal-r1-yhm-ladder-pure-c/report.json",
+  "audit": {
+    "compiled_units": 855,
+    "application_imports": 62,
+    "bootloader_imports": 22,
+    "unchanged_prior_nongenerated_objects": 844,
+    "changed_nongenerated_objects": [
+      "r1/src/application/board/native_yhm_status.c"
+    ],
+    "import_sets_unchanged": true,
+    "no_new_persistent_state": true
+  },
+  "verification": {
+    "stock_C_comparisons": 27648,
+    "C_only_nonwriting_read_cases": 6912,
+    "actual_C_status_charge_and_public_getter": true,
+    "modeled": [
+      "readiness",
+      "one-byte register read"
+    ],
+    "stock_code_bytes_executed": 96,
+    "stock_table_bytes": 16,
+    "provider_overwrites_excluded": true
+  },
+  "integrated": {
+    "stock_C_actual_frontend_transport_comparisons": 27648,
+    "C_only_nonwriting_read_cases": 6912,
+    "actual_C_status_charge_and_public_getter": true,
+    "modeled": [
+      "readiness",
+      "registry device operations"
+    ],
+    "actual_C_frontend_and_transport": true,
+    "stock_code_bytes_executed": 96,
+    "stock_table_bytes": 16,
+    "provider_overwrites_excluded": true
+  },
+  "compiled_defects_rejected": [
+    {
+      "name": "wrong_nibble",
+      "rejected": true
+    },
+    {
+      "name": "lost_special_status",
+      "rejected": true
+    },
+    {
+      "name": "stale_fallback",
+      "rejected": true
+    }
+  ],
+  "intentional_C_policy": "A read provider which writes no byte yields status 12, as the stock not-ready path. Raw read status remains ignored. This is not evidence of a successful hardware read.",
+  "limits": [
+    "Register transport modeled; physical charger behavior and single-wire timing unverified.",
+    "Private frames, stack addresses, scratch registers and provider over-writes beyond the requested one-byte buffer excluded.",
+    "Readiness and registry device operations modeled; final application linking/startup unverified.",
+    "Byte identity is not claimed."
+  ],
+  "evidence_files": {
+    "build/sources-goal-r1-yhm-status-pure-c/report.json": "5ecf94646d031a17b96d273504710d8b9f1a43ef194c55ea7c48b2e88c1be483",
+    "build/sources-goal-r1-yhm-ladder-pure-c/report.json": "eb50f28eaf9d19502be545a642a789f25d68dea3f523f97ab47000ed03ce051d",
+    "r1/src/application/board/native_yhm_status.c": "0593b3f66b857cb7e8cb3e69c8b712a0803c8f34a1328698c06084dc0484a075",
+    "r1/src/application/board/native_charger_state.c": "57975ec8f459059359eb043cb0b59223a9bc455407bb2ce7f33dd73c978ff35d",
+    "r1/src/application/board/native_yhm_frontend.c": "30f84af6ab75c9dd6798e52bf29e21257a03ce7b996aa57bea1b0ee402b0a373",
+    "r1/src/application/board/native_yhm_transport.c": "7e686ec02f4709ee478e191a3c6da4c33998808dc3a899d5f02efd6ceda0eb17",
+    "r1/src/sources.json": "618e3f6056f74edee68027c82dddb1d2e8c53810e0c04e416f42841fc974e4ec",
+    "tools/build/source-plan.json": "eeb516e31b3310fb0718f36908977f8125723f7c5e0e86cd6744395826259a4d",
+    "build/goal-r1-yhm-status-pure-c/rea.json": "13e525ac889e48ad2fc1d883f4e1748725991355e87ba8fe071730b96a6bec41",
+    "build/goal-r1-yhm-status-pure-c/make-integrated.py": "b9857b88bebd5ce4401b0ab0a200e6ebb95043d19d7801bc97d6d25c5f3ee95d",
+    "build/goal-r1-yhm-status-pure-c/integrated/verify.py": "d5a1cfa83bd9ecb1d2f30b88590c3a50d2dc08e3bb9a16a33f3414dee68b5edf",
+    "build/goal-r1-yhm-status-pure-c/integrated/results.json": "2090288bd8620a19d29cd8630af510e85264bcf3d29ed3cf982d60a85a0f1710",
+    "build/goal-r1-yhm-status-pure-c/integrated/verification.log": "7ccda6fdaac7cee20063049cd49cf1c664bd996eda6e7c8a2cf863e8ea5d161a",
+    "build/goal-r1-yhm-status-pure-c/verify.py": "fe61ef39f6fc74074d23d40dba7e80892a87e03c9f8f9412878aefdc10da1803",
+    "build/goal-r1-yhm-status-pure-c/results.json": "f766353eb7e65aec003ad0546a87aac028c35ae4e45d5cc007e0178ce2c2ae0c",
+    "build/goal-r1-yhm-status-pure-c/verification.log": "e3dbb9893c283cc157dbea849f3a0f7d7fb432564125472fe9988c0064127883",
+    "build/goal-r1-yhm-status-pure-c/negative.py": "1e4ee626c8a7821e7da2b249294587d8d79125e398e3a7c15b643aff7f2c24fa",
+    "build/goal-r1-yhm-status-pure-c/negative.json": "605d671b0fcd2cc5775b2bd7d3759e35645c6834d17ba256e5a9dcafb66d9769",
+    "build/goal-r1-yhm-status-pure-c/negative.log": "6f0af41194dde217e7e5957cb131aa05fd1adc5650f57fd97f1f7d04f3d5969b",
+    "build/goal-r1-yhm-status-pure-c/build.log": "c2dd49240ea1f2293a1cde8bd42cc4885aa52899e401e177613f2c8b0ebfc25b",
+    "build/goal-r1-yhm-status-pure-c/sources-check.log": "f610d186f791ebf717d9fd6eed6c4f28612779fff34b885bcf8dc8a49c9ae80c"
+  }
+}

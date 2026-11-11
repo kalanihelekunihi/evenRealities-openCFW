@@ -9,8 +9,8 @@ extern uint32_t opencfw_em9305_sleep_enter_mode(uint32_t); /* 0x30f468 */
 extern uint32_t opencfw_em9305_native_clock_product(uint32_t,uint32_t);
 extern uint64_t opencfw_em9305_sleep_sync_divide(uint32_t,uint32_t,uint32_t,uint32_t);
 static uintptr_t context(void) { return *(volatile uint32_t *)(uintptr_t)0x80fb8cu; }
-static uint32_t save_irq(void) { uint32_t s; __asm__ volatile("clri %0\n\tsync" : "=r"(s) :: "memory"); return s; }
-static void restore_irq(uint32_t s) { __asm__ volatile("seti %0" :: "r"(s) : "memory"); }
+static uint32_t save_irq(void) { uint32_t s; s=(uint32_t)__builtin_arc_clri(); __builtin_arc_sync(); return s; }
+static void restore_irq(uint32_t s) { __builtin_arc_seti((int)s); }
 void opencfw_em9305_controller_sleep_mode(uint32_t mode)
 {
  uint32_t period=*(volatile uint32_t *)(context()+4u);
@@ -26,7 +26,7 @@ void opencfw_em9305_controller_sleep_mode(uint32_t mode)
     for(;;) {
      irq=save_irq();
      if((*(volatile uint32_t *)(uintptr_t)0xf01c08u&1u)==0) break;
-     uint32_t masked=irq&31u; __asm__ volatile("sleep %0" :: "r"(masked) : "memory");
+     uint32_t masked=irq&31u; __builtin_arc_sleep((int)masked);
     }
     restore_irq(irq);
     uint32_t ticks=*(volatile uint32_t *)(uintptr_t)0x8019bcu;
@@ -46,6 +46,7 @@ void opencfw_em9305_controller_sleep_mode(uint32_t mode)
   }
  }
  uint32_t irq=save_irq(),link;
+ /* ILINK (r29) is a core register with no C or builtin access; asm stays. */
  __asm__ volatile("mov %0,ilink" : "=r"(link) :: "memory");
  if(link==0 && opencfw_em9305_sleep_mode_ready(period,0)!=0) {
   (void)opencfw_em9305_sleep_enter_mode(mode);

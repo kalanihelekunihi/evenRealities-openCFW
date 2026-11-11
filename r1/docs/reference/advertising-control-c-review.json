@@ -1,0 +1,107 @@
+{
+  "schema_version": 1,
+  "source": "r1/src/application/board/native_advertising_control.c",
+  "native_roots": [
+    "0x4c81c",
+    "0x4c8f8"
+  ],
+  "report": "build/sources-goal-r1-advertising-control-c/report.json",
+  "compiled_units": 827,
+  "application_imports": 74,
+  "added_imports": [],
+  "removed_imports": [
+    "r1_advertising_restart",
+    "r1_advertising_stop_guard"
+  ],
+  "prior_objects_unchanged": 824,
+  "changed_generated_objects": [
+    [
+      "r1-bootloader",
+      "{gen}/r1_startup_vectors.S"
+    ],
+    [
+      "r1-bootloader",
+      "{gen}/r1_uecc.c"
+    ]
+  ],
+  "added_units": [
+    [
+      "r1-application",
+      "r1/src/application/board/native_advertising_control.c"
+    ]
+  ],
+  "verification": {
+    "restart_pairs": 1728,
+    "stop_pairs": 20,
+    "seeded_pairs": 256,
+    "actual_C_availability_and_status": false,
+    "mode_domain": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "actual_sdk_svc_stop": true
+  },
+  "actual_C_children_integration": {
+    "restart_pairs": 1728,
+    "stop_pairs": 20,
+    "seeded_pairs": 256,
+    "actual_C_availability_and_status": true,
+    "mode_domain": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "actual_sdk_svc_stop": true
+  },
+  "mutants": {
+    "rejected": [
+      "both_roles",
+      "stop_benign_eight",
+      "stop_error_continuation",
+      "start_mode",
+      "start_result",
+      "stop_publish",
+      "stop_probe",
+      "cached_handle"
+    ]
+  },
+  "rea_receipts": "r1/docs/reference/advertising-control-rea-bytes.json",
+  "rea_bytes_match_pinned_stock": true,
+  "contract": {
+    "mode_domain": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "skip_restart": "both connection handles differ from 0xffff",
+    "stop_error_8": "ignored as native benign condition",
+    "other_stop_errors": "log and continue",
+    "restart_result": "log nonzero through error helper, then gated result logging for all values",
+    "stop_publish": "(0,0) only after available advertising set stop attempt",
+    "live_advertising_handle": true
+  },
+  "limitations": [
+    "Advertising modes use the valid pinned SDK enum domain 0..4; arbitrary out-of-domain uint32 modes are not a contract claim.",
+    "ble_advertising_start, error logging and status-ring backend are modeled; actual C availability/status adapters execute in the deeper integration.",
+    "S140 supervisor calls are modeled, with actual pinned SDK gateway instructions executed.",
+    "No radio, timing, final application link or boot proof. Byte identity is not required by current user instruction."
+  ],
+  "evidence_files": {
+    "build/sources-goal-r1-advertising-control-c/report.json": "69bf43fc0522c79dee71711fea95e076642a565136caf5babe371173dfe75b29",
+    "r1/src/sources.json": "8f519fbd16cd578d9b6e34771c88c3f77683307d01b486ed0a2ef20942039070",
+    "r1/src/application/board/native_advertising_control.c": "9fcc76bb5a889df4ba5361f68cf610f6ef012d69cfac5007994eb3f7bbd5dde9",
+    "build/goal-r1-advertising-control-c/verify.py": "3fcf06cd7911dabe0086c04bbb67eed0f7ff4669aee7a86efe41f5ff6681b6e9",
+    "build/goal-r1-advertising-control-c/verification.json": "bf46a26a9244f627ec80e5ab6e63ffaca448741317a6b165db058f438bed0272",
+    "build/goal-r1-advertising-control-c/integration.json": "d465df136f789a898b255db66ef04b4df87893d27805e9e1b74ab52f8cd04461",
+    "build/goal-r1-advertising-control-c/mutants.py": "38cf00261347da263c6dc61251d83c6db941bcbd0956c3cc5bb9a9c286576a56",
+    "build/goal-r1-advertising-control-c/mutants.json": "066a51847e152c2e3ce6cd8c2b13ac29abdefa51c744d30841dc3aad76d07b8d",
+    "r1/docs/reference/advertising-control-rea-bytes.json": "e78adb4e015f88907215eca70f9b8bc15ca2abffff0de8208811f478fbb6e376"
+  }
+}

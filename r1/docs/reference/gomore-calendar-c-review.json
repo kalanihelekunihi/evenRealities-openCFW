@@ -1,0 +1,3289 @@
+{
+  "source": {
+    "source": "r1/src/application/runtime/native_gomore_calendar.c",
+    "payload": "r1-application",
+    "role": "candidate",
+    "toolchain": "clang",
+    "link": true,
+    "expect": "compile",
+    "returncode": 0,
+    "argv": [
+      "/usr/bin/clang",
+      "--target=arm-none-eabi",
+      "-mcpu=cortex-m4",
+      "-mthumb",
+      "-mfpu=fpv4-sp-d16",
+      "-mfloat-abi=hard",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-fno-strict-aliasing",
+      "-fshort-enums",
+      "-std=c11",
+      "-Os",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-DNRF52840_XXAA",
+      "-DFLOAT_ABI_HARD",
+      "-DNRF_SD_BLE_API_VERSION=7",
+      "-DNRF_DFU_SVCI_ENABLED",
+      "-DNRF_DFU_TRANSPORT_BLE=1",
+      "-DS140",
+      "-DSOFTDEVICE_PRESENT",
+      "-DFREERTOS",
+      "-DCONFIG_NFCT_PINS_AS_GPIOS",
+      "-DCONFIG_GPIO_AS_PINRESET",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/r1/src/config/sdk",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-calendar-c/generated/r1",
+      "-include",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-calendar-c/generated/r1/nrf_svci_clang.h",
+      "-isystem",
+      "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/external/freertos/portable/GCC/nrf52",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/external/freertos/portable/CMSIS/nrf52",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/external/segger_rtt",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/ble/common",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/ble/ble_advertising",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/ble/peer_manager",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/ble/nrf_ble_gatt",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/atomic",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/atomic_flags",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/atomic_fifo",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/delay",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/fds",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/fstorage",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/mutex",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/sortlist",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/timer",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/experimental_section_vars",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/log",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/log/src",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/strerror",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/util",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/softdevice/common",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/softdevice/s140/headers",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/softdevice/s140/headers/nrf52",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/toolchain/cmsis/include",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/integration/nrfx",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/integration/nrfx/legacy",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx/drivers/include",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx/hal",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx/soc",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx/mdk",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/ble/ble_link_ctx_manager",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/ble/ble_services/ble_dfu",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/ble/nrf_ble_qwr",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/balloc",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/bootloader/dfu",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/memobj",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/pwr_mgmt",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/ringbuf",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/external/fprintf",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx/drivers/src",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/bootloader",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/bootloader/ble_dfu",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/svc",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/stack_info",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/mem_manager",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/queue",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/scheduler",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/r1/src/config/rtos",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/third-party/upstream/freertos-kernel/include",
+      "-munaligned-access",
+      "-MD",
+      "-MF",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-calendar-c/r1/r1-application/r1__src__application__runtime__native_gomore_calendar.c.d",
+      "-c",
+      "/Users/kalani/Repo/evenRealities-openCFW/r1/src/application/runtime/native_gomore_calendar.c",
+      "-o",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-calendar-c/r1/r1-application/r1__src__application__runtime__native_gomore_calendar.c.o"
+    ],
+    "source_sha256": "42ec2c9753d1aa4cfc3b95b874063d08267793ea45cd46e7f0d3263187910b42",
+    "object_sha256": "fe3210b823f2623d1c3e3f7528e7728f43c974a569a4e9619737a92182e8ecb7",
+    "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-calendar-c/r1/r1-application/r1__src__application__runtime__native_gomore_calendar.c.o",
+    "strong": [
+      "r1_gomore_epoch_to_civil_native"
+    ],
+    "weak": [],
+    "undefined": []
+  },
+  "stock_REA": {
+    "evidence_id": "ev_800d8b8183ca67941314d31359c48ef66e9f307d4ce3201f483459ae2f208b2b",
+    "subject": {
+      "name": "stock.elf",
+      "digest": {
+        "sha256": "25b4a29af80ec8edab5bd861ba9b74a6e22eab29dc3d7a809a16869e8a140f04"
+      },
+      "local_path": "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-queue-reset-c/stock.elf",
+      "format": "elf",
+      "architecture": "arm"
+    },
+    "provider": {
+      "id": "ghidra",
+      "name": "Ghidra",
+      "version": "12.1.4"
+    },
+    "analysis_profile": {
+      "provider": {
+        "id": "ghidra",
+        "name": "Ghidra",
+        "version": "12.1.4"
+      },
+      "parameters": {
+        "target_kind": "executable",
+        "target_format": "elf",
+        "architecture": "arm",
+        "available_architectures": [
+          "arm"
+        ],
+        "import_mode": "ephemeral-source-immutable",
+        "annotation_policy": "atomic-function-entry-metadata-v1",
+        "load_image_observations": "source-mappings-entry-context-v2",
+        "function_body_evidence": "complete-inclusive-ranges-v1",
+        "function_references": "complete-body-and-entry-reference-manager-v2",
+        "call_relationship_coverage": "function-body-call-coverage-v5",
+        "function_dossier_coverage": "observed-facets-and-call-relationships-v1",
+        "string_inventory_evidence": "defined-data-coverage-v1",
+        "location_resolution": "explicit-address-exact-entry-symbol-first-v3",
+        "procedure_file_offset_resolution": "address-first-unique-target-source-mapping-v2",
+        "instruction_flow_evidence": "decoded-return-pcode-v1",
+        "instruction_references": "exact-address-incoming-v1",
+        "function_boundary_observations": "ghidra-function-boundary-limitations-v3",
+        "no_return_repair": "returning-imports-decoded-return-v2",
+        "process_launch": "inspected-jvm-launch-support-v1",
+        "jump_table_evidence": "typed-case-default-blocks-v1",
+        "decompiler_jump_loads": true,
+        "loader": "auto-from-header",
+        "language_id": "auto-from-header",
+        "compiler_spec_id": "auto-default",
+        "analyzer_preset": "ghidra-default"
+      },
+      "digest": "7e46711069eea041af1b9b99e34115c13332795e5cda76e584a722f529ec70de"
+    },
+    "predicate_type": "rea.analysis",
+    "operation": "read_bytes",
+    "parameters": {
+      "address": "0x59cb0",
+      "length": 192
+    },
+    "raw_result": {
+      "address": "0x59cb0",
+      "requested_bytes": 192,
+      "returned_bytes": 192,
+      "bytes_hex": "30b50022ca8008603c22b0fbf2f302fb13030b73b0fbf2f0b0fbf2f302fb1303cb72b0fbf2f01822b0fbf2f302fb13038b72b0fbf2f21e481e4b00eb8200b0fbf3f00f300244a2eb90001b4a10441b4b00eb800203eb820241f68943b2fbf3f26ff4b67302fb0300a0eb92034ff47a70584347f28974b0fbf4f040f2592444434ff47a75b4fbf5f4a0eb001503eb45031b1b0d2804d8a2f590526c3a401e03e0a2f590526b3a0d388a8008724b7230bd908e0100b13a02008143250076f6ffff",
+      "complete": true
+    },
+    "normalized_result": {
+      "address": "0x59cb0",
+      "requested_bytes": 192,
+      "returned_bytes": 192,
+      "bytes_hex": "30b50022ca8008603c22b0fbf2f302fb13030b73b0fbf2f0b0fbf2f302fb1303cb72b0fbf2f01822b0fbf2f302fb13038b72b0fbf2f21e481e4b00eb8200b0fbf3f00f300244a2eb90001b4a10441b4b00eb800203eb820241f68943b2fbf3f26ff4b67302fb0300a0eb92034ff47a70584347f28974b0fbf4f040f2592444434ff47a75b4fbf5f4a0eb001503eb45031b1b0d2804d8a2f590526c3a401e03e0a2f590526b3a0d388a8008724b7230bd908e0100b13a02008143250076f6ffff",
+      "complete": true
+    },
+    "confidence": "observed",
+    "authority": "shipped-artifact",
+    "environment": null,
+    "limitations": [
+      "The session serves operations only after Ghidra reports default auto-analysis complete; incomplete analysis does not expose partial results.",
+      "The imported Program and temporary project are ephemeral and deleted on close. Annotation operations edit session database metadata; original executable bytes are never written.",
+      "Cancelling an active Ghidra request terminates its ephemeral database and discards session annotations. The selected target remains open; the next provider query imports the original artifact again.",
+      "Default-space addresses use lowercase 0x-prefixed hexadecimal; other address spaces use <percent-encoded-space>:0x<hex>.",
+      "Bytes reflect Ghidra's initialized memory, including loader fixups. Reads stop at an unmapped or uninitialized byte and report completeness explicitly.",
+      "macOS sessions require a matching executable Ghidra native decompiler; REA checks for it but does not build native components or change Gatekeeper quarantine state."
+    ],
+    "relationship_coverage": null,
+    "locations": [],
+    "evidence_links": []
+  },
+  "direct_replay": {
+    "paired_cases": 186908,
+    "fault_cases": 32,
+    "source_object_sha256": "fe3210b823f2623d1c3e3f7528e7728f43c974a569a4e9619737a92182e8ecb7",
+    "all_unsigned_epoch_days": 49711,
+    "all_seconds_in_first_day": 86400,
+    "aggregate_observations_sha256": "d91c0dd35aa6b114d4a82117385a76dc6c345eb3ac3b3897efe1f13095f083be",
+    "examples": [
+      {
+        "timestamp": 0,
+        "output": 536879168,
+        "expected": "00000000b20700000101000000",
+        "writes": [
+          [
+            536879174,
+            2,
+            0
+          ],
+          [
+            536879168,
+            4,
+            0
+          ],
+          [
+            536879180,
+            1,
+            0
+          ],
+          [
+            536879179,
+            1,
+            0
+          ],
+          [
+            536879178,
+            1,
+            0
+          ],
+          [
+            536879172,
+            2,
+            1970
+          ],
+          [
+            536879176,
+            1,
+            1
+          ],
+          [
+            536879177,
+            1,
+            1
+          ]
+        ],
+        "faults": [],
+        "return_r0": 1,
+        "guards": [
+          "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a500000000b20700000101000000a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5",
+          "7373737373737373737373737373737373737373737373737373737373737373"
+        ]
+      },
+      {
+        "timestamp": 1,
+        "output": 536879168,
+        "expected": "01000000b20700000101000001",
+        "writes": [
+          [
+            536879174,
+            2,
+            0
+          ],
+          [
+            536879168,
+            4,
+            1
+          ],
+          [
+            536879180,
+            1,
+            1
+          ],
+          [
+            536879179,
+            1,
+            0
+          ],
+          [
+            536879178,
+            1,
+            0
+          ],
+          [
+            536879172,
+            2,
+            1970
+          ],
+          [
+            536879176,
+            1,
+            1
+          ],
+          [
+            536879177,
+            1,
+            1
+          ]
+        ],
+        "faults": [],
+        "return_r0": 1,
+        "guards": [
+          "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a501000000b20700000101000001a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5",
+          "7373737373737373737373737373737373737373737373737373737373737373"
+        ]
+      },
+      {
+        "timestamp": 2,
+        "output": 536879168,
+        "expected": "02000000b20700000101000002",
+        "writes": [
+          [
+            536879174,
+            2,
+            0
+          ],
+          [
+            536879168,
+            4,
+            2
+          ],
+          [
+            536879180,
+            1,
+            2
+          ],
+          [
+            536879179,
+            1,
+            0
+          ],
+          [
+            536879178,
+            1,
+            0
+          ],
+          [
+            536879172,
+            2,
+            1970
+          ],
+          [
+            536879176,
+            1,
+            1
+          ],
+          [
+            536879177,
+            1,
+            1
+          ]
+        ],
+        "faults": [],
+        "return_r0": 1,
+        "guards": [
+          "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a502000000b20700000101000002a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5",
+          "7373737373737373737373737373737373737373737373737373737373737373"
+        ]
+      },
+      {
+        "timestamp": 3,
+        "output": 536879168,
+        "expected": "03000000b20700000101000003",
+        "writes": [
+          [
+            536879174,
+            2,
+            0
+          ],
+          [
+            536879168,
+            4,
+            3
+          ],
+          [
+            536879180,
+            1,
+            3
+          ],
+          [
+            536879179,
+            1,
+            0
+          ],
+          [
+            536879178,
+            1,
+            0
+          ],
+          [
+            536879172,
+            2,
+            1970
+          ],
+          [
+            536879176,
+            1,
+            1
+          ],
+          [
+            536879177,
+            1,
+            1
+          ]
+        ],
+        "faults": [],
+        "return_r0": 1,
+        "guards": [
+          "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a503000000b20700000101000003a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5",
+          "7373737373737373737373737373737373737373737373737373737373737373"
+        ]
+      },
+      {
+        "timestamp": 951782400,
+        "output": 536879168,
+        "expected": "000cbb38d0070000021d000000",
+        "writes": [
+          [
+            536879174,
+            2,
+            0
+          ],
+          [
+            536879168,
+            4,
+            951782400
+          ],
+          [
+            536879180,
+            1,
+            0
+          ],
+          [
+            536879179,
+            1,
+            0
+          ],
+          [
+            536879178,
+            1,
+            0
+          ],
+          [
+            536879172,
+            2,
+            2000
+          ],
+          [
+            536879176,
+            1,
+            2
+          ],
+          [
+            536879177,
+            1,
+            29
+          ]
+        ],
+        "faults": [],
+        "return_r0": 2,
+        "guards": [
+          "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5000cbb38d0070000021d000000a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5",
+          "7373737373737373737373737373737373737373737373737373737373737373"
+        ]
+      },
+      {
+        "timestamp": 4107542400,
+        "output": 536879168,
+        "expected": "801fd4f4340800000301000000",
+        "writes": [
+          [
+            536879174,
+            2,
+            0
+          ],
+          [
+            536879168,
+            4,
+            4107542400
+          ],
+          [
+            536879180,
+            1,
+            0
+          ],
+          [
+            536879179,
+            1,
+            0
+          ],
+          [
+            536879178,
+            1,
+            0
+          ],
+          [
+            536879172,
+            2,
+            2100
+          ],
+          [
+            536879176,
+            1,
+            3
+          ],
+          [
+            536879177,
+            1,
+            1
+          ]
+        ],
+        "faults": [],
+        "return_r0": 3,
+        "guards": [
+          "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5801fd4f4340800000301000000a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5",
+          "7373737373737373737373737373737373737373737373737373737373737373"
+        ]
+      },
+      {
+        "timestamp": 4294967295,
+        "output": 536879168,
+        "expected": "ffffffff3a0800000207061c0f",
+        "writes": [
+          [
+            536879174,
+            2,
+            0
+          ],
+          [
+            536879168,
+            4,
+            4294967295
+          ],
+          [
+            536879180,
+            1,
+            15
+          ],
+          [
+            536879179,
+            1,
+            28
+          ],
+          [
+            536879178,
+            1,
+            6
+          ],
+          [
+            536879172,
+            2,
+            2106
+          ],
+          [
+            536879176,
+            1,
+            2
+          ],
+          [
+            536879177,
+            1,
+            7
+          ]
+        ],
+        "faults": [],
+        "return_r0": 2,
+        "guards": [
+          "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5ffffffff3a0800000207061c0fa5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5",
+          "7373737373737373737373737373737373737373737373737373737373737373"
+        ]
+      },
+      {
+        "timestamp": 0,
+        "output": 536879169,
+        "expected": "00000000b20700000101000000",
+        "writes": [
+          [
+            536879175,
+            2,
+            0
+          ],
+          [
+            536879169,
+            4,
+            0
+          ],
+          [
+            536879181,
+            1,
+            0
+          ],
+          [
+            536879180,
+            1,
+            0
+          ],
+          [
+            536879179,
+            1,
+            0
+          ],
+          [
+            536879173,
+            2,
+            1970
+          ],
+          [
+            536879177,
+            1,
+            1
+          ],
+          [
+            536879178,
+            1,
+            1
+          ]
+        ],
+        "faults": [],
+        "return_r0": 1,
+        "guards": [
+          "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a500000000b20700000101000000a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5",
+          "7373737373737373737373737373737373737373737373737373737373737373"
+        ]
+      },
+      {
+        "timestamp": 0,
+        "output": 536879170,
+        "expected": "00000000b20700000101000000",
+        "writes": [
+          [
+            536879176,
+            2,
+            0
+          ],
+          [
+            536879170,
+            4,
+            0
+          ],
+          [
+            536879182,
+            1,
+            0
+          ],
+          [
+            536879181,
+            1,
+            0
+          ],
+          [
+            536879180,
+            1,
+            0
+          ],
+          [
+            536879174,
+            2,
+            1970
+          ],
+          [
+            536879178,
+            1,
+            1
+          ],
+          [
+            536879179,
+            1,
+            1
+          ]
+        ],
+        "faults": [],
+        "return_r0": 1,
+        "guards": [
+          "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a500000000b20700000101000000a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5",
+          "7373737373737373737373737373737373737373737373737373737373737373"
+        ]
+      },
+      {
+        "timestamp": 0,
+        "output": 536879171,
+        "expected": "00000000b20700000101000000",
+        "writes": [
+          [
+            536879177,
+            2,
+            0
+          ],
+          [
+            536879171,
+            4,
+            0
+          ],
+          [
+            536879183,
+            1,
+            0
+          ],
+          [
+            536879182,
+            1,
+            0
+          ],
+          [
+            536879181,
+            1,
+            0
+          ],
+          [
+            536879175,
+            2,
+            1970
+          ],
+          [
+            536879179,
+            1,
+            1
+          ],
+          [
+            536879180,
+            1,
+            1
+          ]
+        ],
+        "faults": [],
+        "return_r0": 1,
+        "guards": [
+          "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a500000000b20700000101000000a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5",
+          "7373737373737373737373737373737373737373737373737373737373737373"
+        ]
+      },
+      {
+        "timestamp": 0,
+        "output": 537133043,
+        "expected": "00000000b20700000101000000",
+        "writes": [
+          [
+            537133049,
+            2,
+            0
+          ],
+          [
+            537133043,
+            4,
+            0
+          ],
+          [
+            537133055,
+            1,
+            0
+          ],
+          [
+            537133054,
+            1,
+            0
+          ],
+          [
+            537133053,
+            1,
+            0
+          ],
+          [
+            537133047,
+            2,
+            1970
+          ],
+          [
+            537133051,
+            1,
+            1
+          ],
+          [
+            537133052,
+            1,
+            1
+          ]
+        ],
+        "faults": [],
+        "return_r0": 1,
+        "guards": [
+          "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5",
+          "7373737373737373737373737373737373737300000000b20700000101000000"
+        ]
+      },
+      {
+        "timestamp": 0,
+        "output": 537133048,
+        "expected": "00000000b20700000101000000",
+        "writes": [
+          [
+            537133054,
+            2,
+            0
+          ],
+          [
+            537133048,
+            4,
+            0
+          ]
+        ],
+        "faults": [
+          [
+            20,
+            537133060,
+            1
+          ]
+        ],
+        "return_r0": null,
+        "guards": [
+          "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5",
+          "7373737373737373737373737373737373737373737373730000000073730000"
+        ]
+      },
+      {
+        "timestamp": 0,
+        "output": 537133044,
+        "expected": "00000000b20700000101000000",
+        "writes": [
+          [
+            537133050,
+            2,
+            0
+          ],
+          [
+            537133044,
+            4,
+            0
+          ]
+        ],
+        "faults": [
+          [
+            20,
+            537133056,
+            1
+          ]
+        ],
+        "return_r0": null,
+        "guards": [
+          "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5",
+          "7373737373737373737373737373737373737373000000007373000073737373"
+        ]
+      },
+      {
+        "timestamp": 0,
+        "output": 0,
+        "expected": "00000000b20700000101000000",
+        "writes": [],
+        "faults": [
+          [
+            20,
+            6,
+            2
+          ]
+        ],
+        "return_r0": null,
+        "guards": [
+          "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5",
+          "7373737373737373737373737373737373737373737373737373737373737373"
+        ]
+      },
+      {
+        "timestamp": 0,
+        "output": 4294967295,
+        "expected": "00000000b20700000101000000",
+        "writes": [],
+        "faults": [
+          [
+            20,
+            5,
+            2
+          ]
+        ],
+        "return_r0": null,
+        "guards": [
+          "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5",
+          "7373737373737373737373737373737373737373737373737373737373737373"
+        ]
+      },
+      {
+        "timestamp": 59,
+        "output": 536879169,
+        "expected": "3b000000b2070000010100003b",
+        "writes": [
+          [
+            536879175,
+            2,
+            0
+          ],
+          [
+            536879169,
+            4,
+            59
+          ],
+          [
+            536879181,
+            1,
+            59
+          ],
+          [
+            536879180,
+            1,
+            0
+          ],
+          [
+            536879179,
+            1,
+            0
+          ],
+          [
+            536879173,
+            2,
+            1970
+          ],
+          [
+            536879177,
+            1,
+            1
+          ],
+          [
+            536879178,
+            1,
+            1
+          ]
+        ],
+        "faults": [],
+        "return_r0": 1,
+        "guards": [
+          "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a53b000000b2070000010100003ba5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5",
+          "7373737373737373737373737373737373737373737373737373737373737373"
+        ]
+      },
+      {
+        "timestamp": 59,
+        "output": 536879170,
+        "expected": "3b000000b2070000010100003b",
+        "writes": [
+          [
+            536879176,
+            2,
+            0
+          ],
+          [
+            536879170,
+            4,
+            59
+          ],
+          [
+            536879182,
+            1,
+            59
+          ],
+          [
+            536879181,
+            1,
+            0
+          ],
+          [
+            536879180,
+            1,
+            0
+          ],
+          [
+            536879174,
+            2,
+            1970
+          ],
+          [
+            536879178,
+            1,
+            1
+          ],
+          [
+            536879179,
+            1,
+            1
+          ]
+        ],
+        "faults": [],
+        "return_r0": 1,
+        "guards": [
+          "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a53b000000b2070000010100003ba5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5",
+          "7373737373737373737373737373737373737373737373737373737373737373"
+        ]
+      },
+      {
+        "timestamp": 59,
+        "output": 536879171,
+        "expected": "3b000000b2070000010100003b",
+        "writes": [
+          [
+            536879177,
+            2,
+            0
+          ],
+          [
+            536879171,
+            4,
+            59
+          ],
+          [
+            536879183,
+            1,
+            59
+          ],
+          [
+            536879182,
+            1,
+            0
+          ],
+          [
+            536879181,
+            1,
+            0
+          ],
+          [
+            536879175,
+            2,
+            1970
+          ],
+          [
+            536879179,
+            1,
+            1
+          ],
+          [
+            536879180,
+            1,
+            1
+          ]
+        ],
+        "faults": [],
+        "return_r0": 1,
+        "guards": [
+          "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a53b000000b2070000010100003ba5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5",
+          "7373737373737373737373737373737373737373737373737373737373737373"
+        ]
+      },
+      {
+        "timestamp": 59,
+        "output": 537133043,
+        "expected": "3b000000b2070000010100003b",
+        "writes": [
+          [
+            537133049,
+            2,
+            0
+          ],
+          [
+            537133043,
+            4,
+            59
+          ],
+          [
+            537133055,
+            1,
+            59
+          ],
+          [
+            537133054,
+            1,
+            0
+          ],
+          [
+            537133053,
+            1,
+            0
+          ],
+          [
+            537133047,
+            2,
+            1970
+          ],
+          [
+            537133051,
+            1,
+            1
+          ],
+          [
+            537133052,
+            1,
+            1
+          ]
+        ],
+        "faults": [],
+        "return_r0": 1,
+        "guards": [
+          "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5",
+          "737373737373737373737373737373737373733b000000b2070000010100003b"
+        ]
+      },
+      {
+        "timestamp": 59,
+        "output": 537133048,
+        "expected": "3b000000b2070000010100003b",
+        "writes": [
+          [
+            537133054,
+            2,
+            0
+          ],
+          [
+            537133048,
+            4,
+            59
+          ]
+        ],
+        "faults": [
+          [
+            20,
+            537133060,
+            1
+          ]
+        ],
+        "return_r0": null,
+        "guards": [
+          "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5",
+          "7373737373737373737373737373737373737373737373733b00000073730000"
+        ]
+      },
+      {
+        "timestamp": 59,
+        "output": 537133044,
+        "expected": "3b000000b2070000010100003b",
+        "writes": [
+          [
+            537133050,
+            2,
+            0
+          ],
+          [
+            537133044,
+            4,
+            59
+          ]
+        ],
+        "faults": [
+          [
+            20,
+            537133056,
+            1
+          ]
+        ],
+        "return_r0": null,
+        "guards": [
+          "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5",
+          "73737373737373737373737373737373737373733b0000007373000073737373"
+        ]
+      },
+      {
+        "timestamp": 59,
+        "output": 0,
+        "expected": "3b000000b2070000010100003b",
+        "writes": [],
+        "faults": [
+          [
+            20,
+            6,
+            2
+          ]
+        ],
+        "return_r0": null,
+        "guards": [
+          "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5",
+          "7373737373737373737373737373737373737373737373737373737373737373"
+        ]
+      },
+      {
+        "timestamp": 59,
+        "output": 4294967295,
+        "expected": "3b000000b2070000010100003b",
+        "writes": [],
+        "faults": [
+          [
+            20,
+            5,
+            2
+          ]
+        ],
+        "return_r0": null,
+        "guards": [
+          "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5",
+          "7373737373737373737373737373737373737373737373737373737373737373"
+        ]
+      },
+      {
+        "timestamp": 60,
+        "output": 536879169,
+        "expected": "3c000000b20700000101000100",
+        "writes": [
+          [
+            536879175,
+            2,
+            0
+          ],
+          [
+            536879169,
+            4,
+            60
+          ],
+          [
+            536879181,
+            1,
+            0
+          ],
+          [
+            536879180,
+            1,
+            1
+          ],
+          [
+            536879179,
+            1,
+            0
+          ],
+          [
+            536879173,
+            2,
+            1970
+          ],
+          [
+            536879177,
+            1,
+            1
+          ],
+          [
+            536879178,
+            1,
+            1
+          ]
+        ],
+        "faults": [],
+        "return_r0": 1,
+        "guards": [
+          "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a53c000000b20700000101000100a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5",
+          "7373737373737373737373737373737373737373737373737373737373737373"
+        ]
+      },
+      {
+        "timestamp": 60,
+        "output": 536879170,
+        "expected": "3c000000b20700000101000100",
+        "writes": [
+          [
+            536879176,
+            2,
+            0
+          ],
+          [
+            536879170,
+            4,
+            60
+          ],
+          [
+            536879182,
+            1,
+            0
+          ],
+          [
+            536879181,
+            1,
+            1
+          ],
+          [
+            536879180,
+            1,
+            0
+          ],
+          [
+            536879174,
+            2,
+            1970
+          ],
+          [
+            536879178,
+            1,
+            1
+          ],
+          [
+            536879179,
+            1,
+            1
+          ]
+        ],
+        "faults": [],
+        "return_r0": 1,
+        "guards": [
+          "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a53c000000b20700000101000100a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5",
+          "7373737373737373737373737373737373737373737373737373737373737373"
+        ]
+      },
+      {
+        "timestamp": 60,
+        "output": 536879171,
+        "expected": "3c000000b20700000101000100",
+        "writes": [
+          [
+            536879177,
+            2,
+            0
+          ],
+          [
+            536879171,
+            4,
+            60
+          ],
+          [
+            536879183,
+            1,
+            0
+          ],
+          [
+            536879182,
+            1,
+            1
+          ],
+          [
+            536879181,
+            1,
+            0
+          ],
+          [
+            536879175,
+            2,
+            1970
+          ],
+          [
+            536879179,
+            1,
+            1
+          ],
+          [
+            536879180,
+            1,
+            1
+          ]
+        ],
+        "faults": [],
+        "return_r0": 1,
+        "guards": [
+          "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a53c000000b20700000101000100a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5",
+          "7373737373737373737373737373737373737373737373737373737373737373"
+        ]
+      },
+      {
+        "timestamp": 60,
+        "output": 537133043,
+        "expected": "3c000000b20700000101000100",
+        "writes": [
+          [
+            537133049,
+            2,
+            0
+          ],
+          [
+            537133043,
+            4,
+            60
+          ],
+          [
+            537133055,
+            1,
+            0
+          ],
+          [
+            537133054,
+            1,
+            1
+          ],
+          [
+            537133053,
+            1,
+            0
+          ],
+          [
+            537133047,
+            2,
+            1970
+          ],
+          [
+            537133051,
+            1,
+            1
+          ],
+          [
+            537133052,
+            1,
+            1
+          ]
+        ],
+        "faults": [],
+        "return_r0": 1,
+        "guards": [
+          "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5",
+          "737373737373737373737373737373737373733c000000b20700000101000100"
+        ]
+      },
+      {
+        "timestamp": 60,
+        "output": 537133048,
+        "expected": "3c000000b20700000101000100",
+        "writes": [
+          [
+            537133054,
+            2,
+            0
+          ],
+          [
+            537133048,
+            4,
+            60
+          ]
+        ],
+        "faults": [
+          [
+            20,
+            537133060,
+            1
+          ]
+        ],
+        "return_r0": null,
+        "guards": [
+          "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5",
+          "7373737373737373737373737373737373737373737373733c00000073730000"
+        ]
+      },
+      {
+        "timestamp": 60,
+        "output": 537133044,
+        "expected": "3c000000b20700000101000100",
+        "writes": [
+          [
+            537133050,
+            2,
+            0
+          ],
+          [
+            537133044,
+            4,
+            60
+          ]
+        ],
+        "faults": [
+          [
+            20,
+            537133056,
+            1
+          ]
+        ],
+        "return_r0": null,
+        "guards": [
+          "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5",
+          "73737373737373737373737373737373737373733c0000007373000073737373"
+        ]
+      },
+      {
+        "timestamp": 60,
+        "output": 0,
+        "expected": "3c000000b20700000101000100",
+        "writes": [],
+        "faults": [
+          [
+            20,
+            6,
+            2
+          ]
+        ],
+        "return_r0": null,
+        "guards": [
+          "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5",
+          "7373737373737373737373737373737373737373737373737373737373737373"
+        ]
+      },
+      {
+        "timestamp": 60,
+        "output": 4294967295,
+        "expected": "3c000000b20700000101000100",
+        "writes": [],
+        "faults": [
+          [
+            20,
+            5,
+            2
+          ]
+        ],
+        "return_r0": null,
+        "guards": [
+          "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5",
+          "7373737373737373737373737373737373737373737373737373737373737373"
+        ]
+      },
+      {
+        "timestamp": 86399,
+        "output": 536879169,
+        "expected": "7f510100b20700000101173b3b",
+        "writes": [
+          [
+            536879175,
+            2,
+            0
+          ],
+          [
+            536879169,
+            4,
+            86399
+          ],
+          [
+            536879181,
+            1,
+            59
+          ],
+          [
+            536879180,
+            1,
+            59
+          ],
+          [
+            536879179,
+            1,
+            23
+          ],
+          [
+            536879173,
+            2,
+            1970
+          ],
+          [
+            536879177,
+            1,
+            1
+          ],
+          [
+            536879178,
+            1,
+            1
+          ]
+        ],
+        "faults": [],
+        "return_r0": 1,
+        "guards": [
+          "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a57f510100b20700000101173b3ba5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5",
+          "7373737373737373737373737373737373737373737373737373737373737373"
+        ]
+      },
+      {
+        "timestamp": 86399,
+        "output": 536879170,
+        "expected": "7f510100b20700000101173b3b",
+        "writes": [
+          [
+            536879176,
+            2,
+            0
+          ],
+          [
+            536879170,
+            4,
+            86399
+          ],
+          [
+            536879182,
+            1,
+            59
+          ],
+          [
+            536879181,
+            1,
+            59
+          ],
+          [
+            536879180,
+            1,
+            23
+          ],
+          [
+            536879174,
+            2,
+            1970
+          ],
+          [
+            536879178,
+            1,
+            1
+          ],
+          [
+            536879179,
+            1,
+            1
+          ]
+        ],
+        "faults": [],
+        "return_r0": 1,
+        "guards": [
+          "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a57f510100b20700000101173b3ba5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5",
+          "7373737373737373737373737373737373737373737373737373737373737373"
+        ]
+      },
+      {
+        "timestamp": 86399,
+        "output": 536879171,
+        "expected": "7f510100b20700000101173b3b",
+        "writes": [
+          [
+            536879177,
+            2,
+            0
+          ],
+          [
+            536879171,
+            4,
+            86399
+          ],
+          [
+            536879183,
+            1,
+            59
+          ],
+          [
+            536879182,
+            1,
+            59
+          ],
+          [
+            536879181,
+            1,
+            23
+          ],
+          [
+            536879175,
+            2,
+            1970
+          ],
+          [
+            536879179,
+            1,
+            1
+          ],
+          [
+            536879180,
+            1,
+            1
+          ]
+        ],
+        "faults": [],
+        "return_r0": 1,
+        "guards": [
+          "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a57f510100b20700000101173b3ba5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5",
+          "7373737373737373737373737373737373737373737373737373737373737373"
+        ]
+      },
+      {
+        "timestamp": 86399,
+        "output": 537133043,
+        "expected": "7f510100b20700000101173b3b",
+        "writes": [
+          [
+            537133049,
+            2,
+            0
+          ],
+          [
+            537133043,
+            4,
+            86399
+          ],
+          [
+            537133055,
+            1,
+            59
+          ],
+          [
+            537133054,
+            1,
+            59
+          ],
+          [
+            537133053,
+            1,
+            23
+          ],
+          [
+            537133047,
+            2,
+            1970
+          ],
+          [
+            537133051,
+            1,
+            1
+          ],
+          [
+            537133052,
+            1,
+            1
+          ]
+        ],
+        "faults": [],
+        "return_r0": 1,
+        "guards": [
+          "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5",
+          "737373737373737373737373737373737373737f510100b20700000101173b3b"
+        ]
+      },
+      {
+        "timestamp": 86399,
+        "output": 537133048,
+        "expected": "7f510100b20700000101173b3b",
+        "writes": [
+          [
+            537133054,
+            2,
+            0
+          ],
+          [
+            537133048,
+            4,
+            86399
+          ]
+        ],
+        "faults": [
+          [
+            20,
+            537133060,
+            1
+          ]
+        ],
+        "return_r0": null,
+        "guards": [
+          "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5",
+          "7373737373737373737373737373737373737373737373737f51010073730000"
+        ]
+      },
+      {
+        "timestamp": 86399,
+        "output": 537133044,
+        "expected": "7f510100b20700000101173b3b",
+        "writes": [
+          [
+            537133050,
+            2,
+            0
+          ],
+          [
+            537133044,
+            4,
+            86399
+          ]
+        ],
+        "faults": [
+          [
+            20,
+            537133056,
+            1
+          ]
+        ],
+        "return_r0": null,
+        "guards": [
+          "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5",
+          "73737373737373737373737373737373737373737f5101007373000073737373"
+        ]
+      },
+      {
+        "timestamp": 86399,
+        "output": 0,
+        "expected": "7f510100b20700000101173b3b",
+        "writes": [],
+        "faults": [
+          [
+            20,
+            6,
+            2
+          ]
+        ],
+        "return_r0": null,
+        "guards": [
+          "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5",
+          "7373737373737373737373737373737373737373737373737373737373737373"
+        ]
+      },
+      {
+        "timestamp": 86399,
+        "output": 4294967295,
+        "expected": "7f510100b20700000101173b3b",
+        "writes": [],
+        "faults": [
+          [
+            20,
+            5,
+            2
+          ]
+        ],
+        "return_r0": null,
+        "guards": [
+          "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5",
+          "7373737373737373737373737373737373737373737373737373737373737373"
+        ]
+      },
+      {
+        "timestamp": 86400,
+        "output": 536879169,
+        "expected": "80510100b20700000102000000",
+        "writes": [
+          [
+            536879175,
+            2,
+            0
+          ],
+          [
+            536879169,
+            4,
+            86400
+          ],
+          [
+            536879181,
+            1,
+            0
+          ],
+          [
+            536879180,
+            1,
+            0
+          ],
+          [
+            536879179,
+            1,
+            0
+          ],
+          [
+            536879173,
+            2,
+            1970
+          ],
+          [
+            536879177,
+            1,
+            1
+          ],
+          [
+            536879178,
+            1,
+            2
+          ]
+        ],
+        "faults": [],
+        "return_r0": 1,
+        "guards": [
+          "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a580510100b20700000102000000a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5",
+          "7373737373737373737373737373737373737373737373737373737373737373"
+        ]
+      },
+      {
+        "timestamp": 86400,
+        "output": 536879170,
+        "expected": "80510100b20700000102000000",
+        "writes": [
+          [
+            536879176,
+            2,
+            0
+          ],
+          [
+            536879170,
+            4,
+            86400
+          ],
+          [
+            536879182,
+            1,
+            0
+          ],
+          [
+            536879181,
+            1,
+            0
+          ],
+          [
+            536879180,
+            1,
+            0
+          ],
+          [
+            536879174,
+            2,
+            1970
+          ],
+          [
+            536879178,
+            1,
+            1
+          ],
+          [
+            536879179,
+            1,
+            2
+          ]
+        ],
+        "faults": [],
+        "return_r0": 1,
+        "guards": [
+          "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a580510100b20700000102000000a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5",
+          "7373737373737373737373737373737373737373737373737373737373737373"
+        ]
+      },
+      {
+        "timestamp": 86400,
+        "output": 536879171,
+        "expected": "80510100b20700000102000000",
+        "writes": [
+          [
+            536879177,
+            2,
+            0
+          ],
+          [
+            536879171,
+            4,
+            86400
+          ],
+          [
+            536879183,
+            1,
+            0
+          ],
+          [
+            536879182,
+            1,
+            0
+          ],
+          [
+            536879181,
+            1,
+            0
+          ],
+          [
+            536879175,
+            2,
+            1970
+          ],
+          [
+            536879179,
+            1,
+            1
+          ],
+          [
+            536879180,
+            1,
+            2
+          ]
+        ],
+        "faults": [],
+        "return_r0": 1,
+        "guards": [
+          "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a580510100b20700000102000000a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5",
+          "7373737373737373737373737373737373737373737373737373737373737373"
+        ]
+      },
+      {
+        "timestamp": 86400,
+        "output": 537133043,
+        "expected": "80510100b20700000102000000",
+        "writes": [
+          [
+            537133049,
+            2,
+            0
+          ],
+          [
+            537133043,
+            4,
+            86400
+          ],
+          [
+            537133055,
+            1,
+            0
+          ],
+          [
+            537133054,
+            1,
+            0
+          ],
+          [
+            537133053,
+            1,
+            0
+          ],
+          [
+            537133047,
+            2,
+            1970
+          ],
+          [
+            537133051,
+            1,
+            1
+          ],
+          [
+            537133052,
+            1,
+            2
+          ]
+        ],
+        "faults": [],
+        "return_r0": 1,
+        "guards": [
+          "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5",
+          "7373737373737373737373737373737373737380510100b20700000102000000"
+        ]
+      },
+      {
+        "timestamp": 86400,
+        "output": 537133048,
+        "expected": "80510100b20700000102000000",
+        "writes": [
+          [
+            537133054,
+            2,
+            0
+          ],
+          [
+            537133048,
+            4,
+            86400
+          ]
+        ],
+        "faults": [
+          [
+            20,
+            537133060,
+            1
+          ]
+        ],
+        "return_r0": null,
+        "guards": [
+          "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5",
+          "7373737373737373737373737373737373737373737373738051010073730000"
+        ]
+      },
+      {
+        "timestamp": 86400,
+        "output": 537133044,
+        "expected": "80510100b20700000102000000",
+        "writes": [
+          [
+            537133050,
+            2,
+            0
+          ],
+          [
+            537133044,
+            4,
+            86400
+          ]
+        ],
+        "faults": [
+          [
+            20,
+            537133056,
+            1
+          ]
+        ],
+        "return_r0": null,
+        "guards": [
+          "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5",
+          "7373737373737373737373737373737373737373805101007373000073737373"
+        ]
+      },
+      {
+        "timestamp": 86400,
+        "output": 0,
+        "expected": "80510100b20700000102000000",
+        "writes": [],
+        "faults": [
+          [
+            20,
+            6,
+            2
+          ]
+        ],
+        "return_r0": null,
+        "guards": [
+          "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5",
+          "7373737373737373737373737373737373737373737373737373737373737373"
+        ]
+      },
+      {
+        "timestamp": 86400,
+        "output": 4294967295,
+        "expected": "80510100b20700000102000000",
+        "writes": [],
+        "faults": [
+          [
+            20,
+            5,
+            2
+          ]
+        ],
+        "return_r0": null,
+        "guards": [
+          "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5",
+          "7373737373737373737373737373737373737373737373737373737373737373"
+        ]
+      },
+      {
+        "timestamp": 951782400,
+        "output": 536879169,
+        "expected": "000cbb38d0070000021d000000",
+        "writes": [
+          [
+            536879175,
+            2,
+            0
+          ],
+          [
+            536879169,
+            4,
+            951782400
+          ],
+          [
+            536879181,
+            1,
+            0
+          ],
+          [
+            536879180,
+            1,
+            0
+          ],
+          [
+            536879179,
+            1,
+            0
+          ],
+          [
+            536879173,
+            2,
+            2000
+          ],
+          [
+            536879177,
+            1,
+            2
+          ],
+          [
+            536879178,
+            1,
+            29
+          ]
+        ],
+        "faults": [],
+        "return_r0": 2,
+        "guards": [
+          "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5000cbb38d0070000021d000000a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5",
+          "7373737373737373737373737373737373737373737373737373737373737373"
+        ]
+      },
+      {
+        "timestamp": 951782400,
+        "output": 536879170,
+        "expected": "000cbb38d0070000021d000000",
+        "writes": [
+          [
+            536879176,
+            2,
+            0
+          ],
+          [
+            536879170,
+            4,
+            951782400
+          ],
+          [
+            536879182,
+            1,
+            0
+          ],
+          [
+            536879181,
+            1,
+            0
+          ],
+          [
+            536879180,
+            1,
+            0
+          ],
+          [
+            536879174,
+            2,
+            2000
+          ],
+          [
+            536879178,
+            1,
+            2
+          ],
+          [
+            536879179,
+            1,
+            29
+          ]
+        ],
+        "faults": [],
+        "return_r0": 2,
+        "guards": [
+          "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5000cbb38d0070000021d000000a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5",
+          "7373737373737373737373737373737373737373737373737373737373737373"
+        ]
+      },
+      {
+        "timestamp": 951782400,
+        "output": 536879171,
+        "expected": "000cbb38d0070000021d000000",
+        "writes": [
+          [
+            536879177,
+            2,
+            0
+          ],
+          [
+            536879171,
+            4,
+            951782400
+          ],
+          [
+            536879183,
+            1,
+            0
+          ],
+          [
+            536879182,
+            1,
+            0
+          ],
+          [
+            536879181,
+            1,
+            0
+          ],
+          [
+            536879175,
+            2,
+            2000
+          ],
+          [
+            536879179,
+            1,
+            2
+          ],
+          [
+            536879180,
+            1,
+            29
+          ]
+        ],
+        "faults": [],
+        "return_r0": 2,
+        "guards": [
+          "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5000cbb38d0070000021d000000a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5",
+          "7373737373737373737373737373737373737373737373737373737373737373"
+        ]
+      },
+      {
+        "timestamp": 951782400,
+        "output": 537133043,
+        "expected": "000cbb38d0070000021d000000",
+        "writes": [
+          [
+            537133049,
+            2,
+            0
+          ],
+          [
+            537133043,
+            4,
+            951782400
+          ],
+          [
+            537133055,
+            1,
+            0
+          ],
+          [
+            537133054,
+            1,
+            0
+          ],
+          [
+            537133053,
+            1,
+            0
+          ],
+          [
+            537133047,
+            2,
+            2000
+          ],
+          [
+            537133051,
+            1,
+            2
+          ],
+          [
+            537133052,
+            1,
+            29
+          ]
+        ],
+        "faults": [],
+        "return_r0": 2,
+        "guards": [
+          "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5",
+          "73737373737373737373737373737373737373000cbb38d0070000021d000000"
+        ]
+      },
+      {
+        "timestamp": 951782400,
+        "output": 537133048,
+        "expected": "000cbb38d0070000021d000000",
+        "writes": [
+          [
+            537133054,
+            2,
+            0
+          ],
+          [
+            537133048,
+            4,
+            951782400
+          ]
+        ],
+        "faults": [
+          [
+            20,
+            537133060,
+            1
+          ]
+        ],
+        "return_r0": null,
+        "guards": [
+          "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5",
+          "737373737373737373737373737373737373737373737373000cbb3873730000"
+        ]
+      },
+      {
+        "timestamp": 951782400,
+        "output": 537133044,
+        "expected": "000cbb38d0070000021d000000",
+        "writes": [
+          [
+            537133050,
+            2,
+            0
+          ],
+          [
+            537133044,
+            4,
+            951782400
+          ]
+        ],
+        "faults": [
+          [
+            20,
+            537133056,
+            1
+          ]
+        ],
+        "return_r0": null,
+        "guards": [
+          "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5",
+          "7373737373737373737373737373737373737373000cbb387373000073737373"
+        ]
+      },
+      {
+        "timestamp": 951782400,
+        "output": 0,
+        "expected": "000cbb38d0070000021d000000",
+        "writes": [],
+        "faults": [
+          [
+            20,
+            6,
+            2
+          ]
+        ],
+        "return_r0": null,
+        "guards": [
+          "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5",
+          "7373737373737373737373737373737373737373737373737373737373737373"
+        ]
+      },
+      {
+        "timestamp": 951782400,
+        "output": 4294967295,
+        "expected": "000cbb38d0070000021d000000",
+        "writes": [],
+        "faults": [
+          [
+            20,
+            5,
+            2
+          ]
+        ],
+        "return_r0": null,
+        "guards": [
+          "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5",
+          "7373737373737373737373737373737373737373737373737373737373737373"
+        ]
+      },
+      {
+        "timestamp": 4107542400,
+        "output": 536879169,
+        "expected": "801fd4f4340800000301000000",
+        "writes": [
+          [
+            536879175,
+            2,
+            0
+          ],
+          [
+            536879169,
+            4,
+            4107542400
+          ],
+          [
+            536879181,
+            1,
+            0
+          ],
+          [
+            536879180,
+            1,
+            0
+          ],
+          [
+            536879179,
+            1,
+            0
+          ],
+          [
+            536879173,
+            2,
+            2100
+          ],
+          [
+            536879177,
+            1,
+            3
+          ],
+          [
+            536879178,
+            1,
+            1
+          ]
+        ],
+        "faults": [],
+        "return_r0": 3,
+        "guards": [
+          "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5801fd4f4340800000301000000a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5",
+          "7373737373737373737373737373737373737373737373737373737373737373"
+        ]
+      },
+      {
+        "timestamp": 4107542400,
+        "output": 536879170,
+        "expected": "801fd4f4340800000301000000",
+        "writes": [
+          [
+            536879176,
+            2,
+            0
+          ],
+          [
+            536879170,
+            4,
+            4107542400
+          ],
+          [
+            536879182,
+            1,
+            0
+          ],
+          [
+            536879181,
+            1,
+            0
+          ],
+          [
+            536879180,
+            1,
+            0
+          ],
+          [
+            536879174,
+            2,
+            2100
+          ],
+          [
+            536879178,
+            1,
+            3
+          ],
+          [
+            536879179,
+            1,
+            1
+          ]
+        ],
+        "faults": [],
+        "return_r0": 3,
+        "guards": [
+          "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5801fd4f4340800000301000000a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5",
+          "7373737373737373737373737373737373737373737373737373737373737373"
+        ]
+      },
+      {
+        "timestamp": 4107542400,
+        "output": 536879171,
+        "expected": "801fd4f4340800000301000000",
+        "writes": [
+          [
+            536879177,
+            2,
+            0
+          ],
+          [
+            536879171,
+            4,
+            4107542400
+          ],
+          [
+            536879183,
+            1,
+            0
+          ],
+          [
+            536879182,
+            1,
+            0
+          ],
+          [
+            536879181,
+            1,
+            0
+          ],
+          [
+            536879175,
+            2,
+            2100
+          ],
+          [
+            536879179,
+            1,
+            3
+          ],
+          [
+            536879180,
+            1,
+            1
+          ]
+        ],
+        "faults": [],
+        "return_r0": 3,
+        "guards": [
+          "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5801fd4f4340800000301000000a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5",
+          "7373737373737373737373737373737373737373737373737373737373737373"
+        ]
+      },
+      {
+        "timestamp": 4107542400,
+        "output": 537133043,
+        "expected": "801fd4f4340800000301000000",
+        "writes": [
+          [
+            537133049,
+            2,
+            0
+          ],
+          [
+            537133043,
+            4,
+            4107542400
+          ],
+          [
+            537133055,
+            1,
+            0
+          ],
+          [
+            537133054,
+            1,
+            0
+          ],
+          [
+            537133053,
+            1,
+            0
+          ],
+          [
+            537133047,
+            2,
+            2100
+          ],
+          [
+            537133051,
+            1,
+            3
+          ],
+          [
+            537133052,
+            1,
+            1
+          ]
+        ],
+        "faults": [],
+        "return_r0": 3,
+        "guards": [
+          "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5",
+          "73737373737373737373737373737373737373801fd4f4340800000301000000"
+        ]
+      },
+      {
+        "timestamp": 4107542400,
+        "output": 537133048,
+        "expected": "801fd4f4340800000301000000",
+        "writes": [
+          [
+            537133054,
+            2,
+            0
+          ],
+          [
+            537133048,
+            4,
+            4107542400
+          ]
+        ],
+        "faults": [
+          [
+            20,
+            537133060,
+            1
+          ]
+        ],
+        "return_r0": null,
+        "guards": [
+          "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5",
+          "737373737373737373737373737373737373737373737373801fd4f473730000"
+        ]
+      },
+      {
+        "timestamp": 4107542400,
+        "output": 537133044,
+        "expected": "801fd4f4340800000301000000",
+        "writes": [
+          [
+            537133050,
+            2,
+            0
+          ],
+          [
+            537133044,
+            4,
+            4107542400
+          ]
+        ],
+        "faults": [
+          [
+            20,
+            537133056,
+            1
+          ]
+        ],
+        "return_r0": null,
+        "guards": [
+          "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5",
+          "7373737373737373737373737373737373737373801fd4f47373000073737373"
+        ]
+      },
+      {
+        "timestamp": 4107542400,
+        "output": 0,
+        "expected": "801fd4f4340800000301000000",
+        "writes": [],
+        "faults": [
+          [
+            20,
+            6,
+            2
+          ]
+        ],
+        "return_r0": null,
+        "guards": [
+          "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5",
+          "7373737373737373737373737373737373737373737373737373737373737373"
+        ]
+      },
+      {
+        "timestamp": 4107542400,
+        "output": 4294967295,
+        "expected": "801fd4f4340800000301000000",
+        "writes": [],
+        "faults": [
+          [
+            20,
+            5,
+            2
+          ]
+        ],
+        "return_r0": null,
+        "guards": [
+          "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5",
+          "7373737373737373737373737373737373737373737373737373737373737373"
+        ]
+      },
+      {
+        "timestamp": 4294967295,
+        "output": 536879169,
+        "expected": "ffffffff3a0800000207061c0f",
+        "writes": [
+          [
+            536879175,
+            2,
+            0
+          ],
+          [
+            536879169,
+            4,
+            4294967295
+          ],
+          [
+            536879181,
+            1,
+            15
+          ],
+          [
+            536879180,
+            1,
+            28
+          ],
+          [
+            536879179,
+            1,
+            6
+          ],
+          [
+            536879173,
+            2,
+            2106
+          ],
+          [
+            536879177,
+            1,
+            2
+          ],
+          [
+            536879178,
+            1,
+            7
+          ]
+        ],
+        "faults": [],
+        "return_r0": 2,
+        "guards": [
+          "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5ffffffff3a0800000207061c0fa5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5",
+          "7373737373737373737373737373737373737373737373737373737373737373"
+        ]
+      },
+      {
+        "timestamp": 4294967295,
+        "output": 536879170,
+        "expected": "ffffffff3a0800000207061c0f",
+        "writes": [
+          [
+            536879176,
+            2,
+            0
+          ],
+          [
+            536879170,
+            4,
+            4294967295
+          ],
+          [
+            536879182,
+            1,
+            15
+          ],
+          [
+            536879181,
+            1,
+            28
+          ],
+          [
+            536879180,
+            1,
+            6
+          ],
+          [
+            536879174,
+            2,
+            2106
+          ],
+          [
+            536879178,
+            1,
+            2
+          ],
+          [
+            536879179,
+            1,
+            7
+          ]
+        ],
+        "faults": [],
+        "return_r0": 2,
+        "guards": [
+          "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5ffffffff3a0800000207061c0fa5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5",
+          "7373737373737373737373737373737373737373737373737373737373737373"
+        ]
+      },
+      {
+        "timestamp": 4294967295,
+        "output": 536879171,
+        "expected": "ffffffff3a0800000207061c0f",
+        "writes": [
+          [
+            536879177,
+            2,
+            0
+          ],
+          [
+            536879171,
+            4,
+            4294967295
+          ],
+          [
+            536879183,
+            1,
+            15
+          ],
+          [
+            536879182,
+            1,
+            28
+          ],
+          [
+            536879181,
+            1,
+            6
+          ],
+          [
+            536879175,
+            2,
+            2106
+          ],
+          [
+            536879179,
+            1,
+            2
+          ],
+          [
+            536879180,
+            1,
+            7
+          ]
+        ],
+        "faults": [],
+        "return_r0": 2,
+        "guards": [
+          "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5ffffffff3a0800000207061c0fa5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5",
+          "7373737373737373737373737373737373737373737373737373737373737373"
+        ]
+      },
+      {
+        "timestamp": 4294967295,
+        "output": 537133043,
+        "expected": "ffffffff3a0800000207061c0f",
+        "writes": [
+          [
+            537133049,
+            2,
+            0
+          ],
+          [
+            537133043,
+            4,
+            4294967295
+          ],
+          [
+            537133055,
+            1,
+            15
+          ],
+          [
+            537133054,
+            1,
+            28
+          ],
+          [
+            537133053,
+            1,
+            6
+          ],
+          [
+            537133047,
+            2,
+            2106
+          ],
+          [
+            537133051,
+            1,
+            2
+          ],
+          [
+            537133052,
+            1,
+            7
+          ]
+        ],
+        "faults": [],
+        "return_r0": 2,
+        "guards": [
+          "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5",
+          "73737373737373737373737373737373737373ffffffff3a0800000207061c0f"
+        ]
+      },
+      {
+        "timestamp": 4294967295,
+        "output": 537133048,
+        "expected": "ffffffff3a0800000207061c0f",
+        "writes": [
+          [
+            537133054,
+            2,
+            0
+          ],
+          [
+            537133048,
+            4,
+            4294967295
+          ]
+        ],
+        "faults": [
+          [
+            20,
+            537133060,
+            1
+          ]
+        ],
+        "return_r0": null,
+        "guards": [
+          "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5",
+          "737373737373737373737373737373737373737373737373ffffffff73730000"
+        ]
+      },
+      {
+        "timestamp": 4294967295,
+        "output": 537133044,
+        "expected": "ffffffff3a0800000207061c0f",
+        "writes": [
+          [
+            537133050,
+            2,
+            0
+          ],
+          [
+            537133044,
+            4,
+            4294967295
+          ]
+        ],
+        "faults": [
+          [
+            20,
+            537133056,
+            1
+          ]
+        ],
+        "return_r0": null,
+        "guards": [
+          "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5",
+          "7373737373737373737373737373737373737373ffffffff7373000073737373"
+        ]
+      },
+      {
+        "timestamp": 4294967295,
+        "output": 0,
+        "expected": "ffffffff3a0800000207061c0f",
+        "writes": [],
+        "faults": [
+          [
+            20,
+            6,
+            2
+          ]
+        ],
+        "return_r0": null,
+        "guards": [
+          "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5",
+          "7373737373737373737373737373737373737373737373737373737373737373"
+        ]
+      },
+      {
+        "timestamp": 4294967295,
+        "output": 4294967295,
+        "expected": "ffffffff3a0800000207061c0f",
+        "writes": [],
+        "faults": [
+          [
+            20,
+            5,
+            2
+          ]
+        ],
+        "return_r0": null,
+        "guards": [
+          "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5",
+          "7373737373737373737373737373737373737373737373737373737373737373"
+        ]
+      }
+    ],
+    "limits": [
+      "Independent UTC Gregorian datetime oracle plus native/C byte/store/return equality",
+      "Unaligned output tested in emulator normal access mode; no UNALIGN_TRP/physical/concurrent proof",
+      "Private stack/caller-clobbered state and interrupted-fault R0 excluded; no final link or instruction identity proof"
+    ]
+  },
+  "build_integration": {
+    "paired_cases": 4936,
+    "source_object_sha256": "34c7a98b1b90d53802ffa8eee9768864cd8fffd41d43a1cdf77df004fbaba6de",
+    "dependency_objects": {
+      "r1/src/application/runtime/memory_eabi.c": "e7e21f3a870f58f3f737670140ae73fdcb6219d2abbef954d6ed8fe7644c817f",
+      "third-party/upstream/musl-memory-1.2.5/memset.c": "6c2f1a8f480c27d5bc20f79ac535dac28fbbdcaec12e69bad96721f724ec9057",
+      "r1/src/application/runtime/native_memory_move.c": "6a3110da0b585640a02ef5168c86a8279f50e50c8f4695846cd8aa14425777ed",
+      "third-party/upstream/musl-memmove-1.2.5/memmove.c": "4a6ccefb180ef4af2cfe631f54df4d6f629d1b3a2d374911c00b25c107bcb723",
+      "third-party/upstream/musl-memory-1.2.5/memcpy.c": "a4b54c7315f7ca2f8097e3f9afb4a9bcd7860c75649fc9e185d951c3ea0696cf",
+      "r1/src/application/runtime/native_gomore_calendar.c": "fe3210b823f2623d1c3e3f7528e7728f43c974a569a4e9619737a92182e8ecb7"
+    },
+    "actual_C_calendar": true,
+    "actual_C_clear_and_movement": true,
+    "fault_cases": 8,
+    "history_cases": 968,
+    "history_comparisons": 10284,
+    "ratio_oracle_cases": 1126,
+    "calendar_mutation_cases": 216,
+    "statuses": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "limits": [
+      "Actual C interval build, calendar, clear and native movement versus stock; controlled mutations occur after actual calendar returns",
+      "Independent scalar record/history/FPSCR and rational ratio oracle; actual production C build compared with stock",
+      "No physical/concurrent/final-link or instruction-identity proof"
+    ]
+  },
+  "engine_integration": {
+    "paired_cases": 2152,
+    "source_object_sha256": "80b943fa31c97a04ffc010ad1967eaa2c2fe99e6406410b167143f92cc85a107",
+    "dependency_objects": {
+      "r1/src/application/runtime/native_gomore_stage.c": "fc6cdb18b78e1f14436f056344f771419efdb9a28e197f8c739825ac20c84d51",
+      "third-party/upstream/musl-memory-1.2.5/memcpy.c": "a4b54c7315f7ca2f8097e3f9afb4a9bcd7860c75649fc9e185d951c3ea0696cf",
+      "r1/src/application/runtime/native_gomore_descriptor_merge.c": "845a1f9850717fce5eab3884fa4d4e4d89815c4c6ce59e262f6e8af4bc7d3032",
+      "r1/src/application/runtime/memory_eabi.c": "e7e21f3a870f58f3f737670140ae73fdcb6219d2abbef954d6ed8fe7644c817f",
+      "third-party/upstream/musl-memory-1.2.5/memset.c": "6c2f1a8f480c27d5bc20f79ac535dac28fbbdcaec12e69bad96721f724ec9057",
+      "r1/src/application/runtime/native_gomore_interval_compose.c": "31e0d0534bb83a5d56aab968f3f92e4d7eabdd2f65cbc18637382846cc71e52f",
+      "r1/src/application/runtime/native_memory_move.c": "6a3110da0b585640a02ef5168c86a8279f50e50c8f4695846cd8aa14425777ed",
+      "third-party/upstream/musl-memmove-1.2.5/memmove.c": "4a6ccefb180ef4af2cfe631f54df4d6f629d1b3a2d374911c00b25c107bcb723",
+      "r1/src/application/runtime/native_gomore_interval_refine.c": "b7970ae46f2ef9fec63a898dfabc40c87b43d551497bf234a37e894ecd4f57bb",
+      "r1/src/application/runtime/native_gomore_interval_build.c": "34c7a98b1b90d53802ffa8eee9768864cd8fffd41d43a1cdf77df004fbaba6de",
+      "r1/src/application/runtime/native_gomore_calendar.c": "fe3210b823f2623d1c3e3f7528e7728f43c974a569a4e9619737a92182e8ecb7"
+    },
+    "actual_C_calendar": true,
+    "actual_C_interval_build": true,
+    "actual_C_refinement": true,
+    "actual_C_compose": true,
+    "actual_C_descriptor_merge": true,
+    "actual_C_setter_and_memcpy": true,
+    "fault_cases": 32,
+    "completed_returns": 2120,
+    "mutation_configurations": 72,
+    "activated_mutations": 60,
+    "clamped_cases": 0,
+    "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "limits": [
+      "Actual production C interval engine compared to stock",
+      "Actual C calendar, build, refinement, compose, engine, merge, setters and memory routines execute; no external provider models in this engine replay",
+      "Private-frame offsets recorded as observations, not a requirement for C unless lower reads depend on them",
+      "No physical/concurrent/final-link or byte-identity proof"
+    ]
+  },
+  "closed_engine_graph": {
+    "undefined_symbols": [],
+    "provider_replacements": false,
+    "controlled_boundary_mutations": true
+  },
+  "negative_controls": [
+    {
+      "name": "century-divisor",
+      "rejected": true,
+      "counterexample": [
+        4107587696,
+        536879168
+      ]
+    },
+    {
+      "name": "leap-quarter",
+      "rejected": true,
+      "counterexample": [
+        951827696,
+        536879168
+      ]
+    },
+    {
+      "name": "zero-based-month",
+      "rejected": true,
+      "counterexample": [
+        951827696,
+        536879168
+      ]
+    },
+    {
+      "name": "wide-seconds",
+      "rejected": true,
+      "counterexample": [
+        951827696,
+        536879168
+      ]
+    },
+    {
+      "name": "write-order",
+      "rejected": true,
+      "counterexample": [
+        951827696,
+        536879168
+      ]
+    },
+    {
+      "name": "signed-epoch",
+      "rejected": true,
+      "counterexample": [
+        4294967295,
+        536879168
+      ]
+    },
+    {
+      "name": "boolean-return",
+      "rejected": true,
+      "counterexample": [
+        951827696,
+        536879168
+      ]
+    },
+    {
+      "name": "wide-year",
+      "rejected": true,
+      "counterexample": [
+        951827696,
+        536879168
+      ]
+    },
+    {
+      "name": "month-pivot",
+      "rejected": true,
+      "counterexample": [
+        978266096,
+        536879168
+      ]
+    },
+    {
+      "name": "twelve-hour",
+      "rejected": true,
+      "counterexample": [
+        951827696,
+        536879168
+      ]
+    }
+  ],
+  "qualification": {
+    "candidate_units": 1,
+    "compiled_units": 1,
+    "units": [
+      {
+        "source": "r1/src/application/runtime/native_gomore_calendar.c",
+        "payload": "r1-application",
+        "evidence": "r1/symbols/function-frontier.csv",
+        "selected": [],
+        "compiled": true,
+        "rejections": {
+          "compiled_bytes_differ": 1
+        },
+        "source_implementation_completeness": "not established by compilation or byte matching",
+        "reason": "no exact anchored body under tested production bindings; integration remains unfinished"
+      }
+    ]
+  },
+  "composition": {
+    "report": "build/sources-goal-r1-calendar-c/report.json",
+    "sha256": "0c9b33ffcdbdee0ba734fb5cfbd7e0f4d480f132180972c13059b172ad47e18b",
+    "units": 672,
+    "unchanged_prior_objects": 671,
+    "application_imports": 163,
+    "bootloader_imports": 34,
+    "resolved_import": "r1_gomore_epoch_to_civil_native",
+    "new_native_imports": []
+  },
+  "hybrid": {
+    "report": "build/hybrid-goal-r1-calendar-c/build-report.json",
+    "sha256": "22854b1617322e404aea85e4fae84c73bc042bd6714314160ac455fad6d0a8d1",
+    "totals": {
+      "binary-pull-through": 641791,
+      "source-built": 4369,
+      "resource-file": 248
+    },
+    "canonical_plan_unchanged": true
+  },
+  "artifacts": {
+    "build/goal-r1-calendar-c/verify.py": "e5276110f65a362cdaae00f4e032efaad08f56f03dbcb84c8c2ce8dd1623b27a",
+    "build/goal-r1-calendar-c/build.py": "1d2edfc78bcf904ac6a808a61c972af497567af7ef1594f1373a3b5c2dd66aeb",
+    "build/goal-r1-calendar-c/make_build.py": "134ec190646fcdb05d9071081c90368ad5b80a3dd61a0b43359b20b3d07df5a8",
+    "build/goal-r1-calendar-c/engine.py": "a94c840b29117837ffaa0bd2bf6326e0de8615fa582cdb27a22cd49aae47801a",
+    "build/goal-r1-calendar-c/make_engine.py": "c30c97084d40e6df7ec0bca0baf22a62964afb774e8ecbfc8d1270bd7d3b6bb9",
+    "build/goal-r1-calendar-c/negative.py": "35747d1152b89853d7bd4fa20b7cf4dbf23e26ac8a7f0996c89ac2126a5c4890",
+    "build/goal-r1-calendar-c/qualify.py": "b36b63f78b89f58043052c71b40b19322c006e81db0d096f71cbeced24add7e5",
+    "build/goal-r1-calendar-c/finalize.py": "ce094d49c84b5c2003c78697735985c648cc3e7dbed45b23abd51e80e7a0d6fb",
+    "build/goal-r1-calendar-c/source.elf": "a168a71aef7b2781ef3c165bd891606c95448696f40f28192e7060417be68929",
+    "build/goal-r1-calendar-c/build.elf": "693744c9ed75b0fc3f6054ac134720fc166d11a44481d9e3cf5115d8e8cd2306",
+    "build/goal-r1-calendar-c/engine.elf": "9111eed4d01ab9de61fe5db47c0bbe8ce5dced60d1cd33929ef93008e83ab9fe",
+    "build/goal-r1-calendar-c/results.json": "02b97a2b2992571106c9d923106898b3678a01a8305985bdfc75f95603ed32f3",
+    "build/goal-r1-calendar-c/build-results.json": "f014fbb2ccd358e1d77234ce483bcf07899763a6b789a577edc871564c059e1f",
+    "build/goal-r1-calendar-c/engine-results.json": "ede0dab2eea84801887aea409e825fe1676406ec3e40fa6c7837b2d4c6770367",
+    "build/goal-r1-calendar-c/instructions.json": "5ca091f41e8c36a39c36042308b859c8490819ea0dfecc5c25ee03703cc041ed",
+    "build/goal-r1-calendar-c/disassembly.txt": "17dbc701e6d743cef8889bb69046fe9418e92143db490f89ad869078aa252a9b",
+    "build/goal-r1-calendar-c/verify.log": "b102d51e1dbc6ccf6a847577fa51a3119dc40955406a7768c978e516ed891ad2",
+    "build/goal-r1-calendar-c/century-divisor.c": "ba3ae16e628859b1a8480c10739ab2c67addf0aa7c79fac0f88389fc2ff69333",
+    "build/goal-r1-calendar-c/century-divisor.o": "cf328b2857dbcdc3072d8512c9a61b45d5b6ff48f8ad21aa6f5feb34752337e9",
+    "build/goal-r1-calendar-c/century-divisor.log": "7c03b7036e4866b92808a7ed036d27777b7014a37f709b27fdaf583fcea725b5",
+    "build/goal-r1-calendar-c/century-divisor.compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/goal-r1-calendar-c/leap-quarter.c": "a1d0feec94c592f6da419e027e58cabd10d7d73222da9a343c197cd3d5e55752",
+    "build/goal-r1-calendar-c/leap-quarter.o": "c7dd4dfbb54ccfcf1087868f99ef924d0db4b948eb7b680feb305091d53815de",
+    "build/goal-r1-calendar-c/leap-quarter.log": "95217104839c977146f04de529617399f936a8ec65ef2973738bd22a71838325",
+    "build/goal-r1-calendar-c/leap-quarter.compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/goal-r1-calendar-c/zero-based-month.c": "2e9d4c3413994bf40bb428c9a91f76e2f63469c2d10ea8bf9b5df31c7d5d9182",
+    "build/goal-r1-calendar-c/zero-based-month.o": "ed198f66d7bf771c187f9c48be024a654e9946662579e861b8edb2502b97d141",
+    "build/goal-r1-calendar-c/zero-based-month.log": "95217104839c977146f04de529617399f936a8ec65ef2973738bd22a71838325",
+    "build/goal-r1-calendar-c/zero-based-month.compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/goal-r1-calendar-c/wide-seconds.c": "7d34ad15af87320071a77fb6a2afabeef95d1b84e30359e728ed101ba0195a65",
+    "build/goal-r1-calendar-c/wide-seconds.o": "08efa490e610dc793f4468309c94c0eaffd62d8b4abfa9f68646c7d7ca94d1e9",
+    "build/goal-r1-calendar-c/wide-seconds.log": "28a3e8294c2a223c77c6ab34e2ca274dec2fb88422149574e2786039dd4e6d04",
+    "build/goal-r1-calendar-c/wide-seconds.compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/goal-r1-calendar-c/write-order.c": "9615f77c7b2abe79502c433a76e3a941c17772b2829c729c01045f28ca73a3ff",
+    "build/goal-r1-calendar-c/write-order.o": "1701ae53362fd843eeb61f4b11c8d8393ef92e6bad604967bda0fdfcafacf5c4",
+    "build/goal-r1-calendar-c/write-order.log": "28a3e8294c2a223c77c6ab34e2ca274dec2fb88422149574e2786039dd4e6d04",
+    "build/goal-r1-calendar-c/write-order.compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/goal-r1-calendar-c/signed-epoch.c": "4ff8a2482dd45a0646f4564b67f6d0526685b32b446278cdc15fea24cb70cfc9",
+    "build/goal-r1-calendar-c/signed-epoch.o": "ebfa57d3114636eb3b95203d3b5d217588e4ae01e0c5099779897c0ab2b10cb8",
+    "build/goal-r1-calendar-c/signed-epoch.log": "5288cd657721bc0f531258220fcf4dcd07799449204786b3470e015828bed3f1",
+    "build/goal-r1-calendar-c/signed-epoch.compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/goal-r1-calendar-c/boolean-return.c": "1e54aced66538282bafe368cd103a7550400ea18630b6ce0c66a467e6037d0b4",
+    "build/goal-r1-calendar-c/boolean-return.o": "938c4ee4425883c0fa1fde689bcb9829f0ab543724a77c6d53e7588671913cbc",
+    "build/goal-r1-calendar-c/boolean-return.log": "95217104839c977146f04de529617399f936a8ec65ef2973738bd22a71838325",
+    "build/goal-r1-calendar-c/boolean-return.compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/goal-r1-calendar-c/wide-year.c": "d2314152e17ab68ea4ca334544831a9f8a1fd454f97681ff790b81f542773cc4",
+    "build/goal-r1-calendar-c/wide-year.o": "ac38b62946d33d01e1cb630a2e00595ee17c066812bd0f1e8dc4a32c7a35b15a",
+    "build/goal-r1-calendar-c/wide-year.log": "28a3e8294c2a223c77c6ab34e2ca274dec2fb88422149574e2786039dd4e6d04",
+    "build/goal-r1-calendar-c/wide-year.compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/goal-r1-calendar-c/month-pivot.c": "503dfc2be5f6f9071dab288e339bcba128f6b1c007ba5dc5f8f912b8ccdec5d4",
+    "build/goal-r1-calendar-c/month-pivot.o": "c931183ba4bcfb001a04f31c1af35185785ffe62b47949c8abeb3601a2e41a4e",
+    "build/goal-r1-calendar-c/month-pivot.log": "6ebc2517e5953ae5d611c87d139d987a95a2a2d5164b88ebbe2b90762e6e0302",
+    "build/goal-r1-calendar-c/month-pivot.compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/goal-r1-calendar-c/twelve-hour.c": "ec90ad9d16a0cf9f024cb6fc38953a3ca81d4209eaf2c666fa21461521be1d87",
+    "build/goal-r1-calendar-c/twelve-hour.o": "3a81e6089d5a0bfbf8ffc998d7b536e20af81b25215370b3229c4d3153f5416e",
+    "build/goal-r1-calendar-c/twelve-hour.log": "95217104839c977146f04de529617399f936a8ec65ef2973738bd22a71838325",
+    "build/goal-r1-calendar-c/twelve-hour.compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "limits": [
+    "Calendar C has no new assembly, RAM or imports; zero halfword6 and one-based month/R0 preserved",
+    "Actual C calendar/build/refine/compose/engine/merge/setter/memory graph executes without provider replacements; controlled boundary mutations remain",
+    "Unaligned test scope is emulator normal access mode; no UNALIGN_TRP, physical/concurrent/final-firmware-link proof",
+    "No new instruction-qualified bytes"
+  ]
+}

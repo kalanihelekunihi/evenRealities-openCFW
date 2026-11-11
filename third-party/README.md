@@ -20,7 +20,7 @@ git submodule update --init --depth 1 --checkout third-party/reference/g2flash  
 ```
 
 Every submodule is `shallow = true`. Large and comparison-only trees are
-`update = none`. `cmsis-5-590`/`cmsis-core`, `ambiqhal-apollo510`/`ambiqhal-nema`
+`update = none`. `cmsis-5-590`/`cmsis-core`, `ambiqhal-apollo510`/`ambiqhal-apollo510-sdk5.0.0`/`ambiqhal-nema`
 and `flashdb`/`flashdb-2.0.0` are distinct commits of the same repository, and
 each commit is needed.
 
@@ -37,6 +37,7 @@ and patches recovered alongside the snapshots are in
 | --- | --- | --- | :-: | :-: |
 | `ambiqsuite-sdk` (SparkFun mirror; AMOTA, ANCC, Cordio app framework) | `de5c6ba3` (v2.5.1) | BSD-3-Clause / Apache-2.0 | • | |
 | `ambiqhal-apollo510` | `5efc0228` (AmbiqSuite 5.1.0 HAL import) | BSD-3-Clause | • | |
+| `ambiqhal-apollo510-sdk5.0.0` | `392042e3` (AmbiqSuite 5.0.0 RTM HAL import; the G2 bootloader's SDK, built for it) | BSD-3-Clause | • | |
 | `cmbacktrace` | `73714489` | MIT | • | • |
 | `cmsis-core` | `d23a6949` | Apache-2.0 | • | |
 | `cmsis-5-590` | `2b7495b8` (5.9.0) | Apache-2.0 | • | • |

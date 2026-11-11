@@ -5,3 +5,4 @@ uint32_t audio_uart_command_pending(void)
 {
     return g2_uart_product_mode_state[1];
 }
+__typeof__(audio_uart_command_pending) audio_role __attribute__((alias("audio_uart_command_pending")));

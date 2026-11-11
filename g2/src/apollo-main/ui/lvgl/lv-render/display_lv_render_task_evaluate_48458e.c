@@ -1,5 +1,9 @@
 /* Apollo LV render-task evaluation, native 0x48458e..0x484621. */
 #include <stdint.h>
+/* Stock-RAM literals rewritten to named objects (sim-test wave 2026-10-26,
+ * .waves/sim-fix/apply.py): g2ref_X is the linker symbol X. */
+#include <stdint.h>
+extern unsigned char g2ref_audio_uart_lv_tick_state[] __asm__("audio_uart_lv_tick_state");
 
 extern void audio_uart_lv_render_task_free_4848e8(void *task, void *display);
 extern void audio_uart_lv_draw_dispatch_request_48462e(void);
@@ -39,7 +43,7 @@ uint32_t audio_uart_lv_render_task_evaluate_48458e(void *display, void *layer) {
         return 0u;
     }
     uint32_t work_pending = 0u;
-    for (uint32_t backend = *(volatile uint32_t *)(uintptr_t)0x2006f684u;
+    for (uint32_t backend = *(volatile uint32_t *)(uintptr_t)((uint32_t)(uintptr_t)g2ref_audio_uart_lv_tick_state+0x84u);
          backend != 0u;
          backend = *(uint32_t *)(uintptr_t)backend) {
         uint32_t callback = *(uint32_t *)(uintptr_t)(backend + 0x0cu);

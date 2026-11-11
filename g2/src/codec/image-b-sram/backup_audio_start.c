@@ -1,6 +1,8 @@
 /* SPDX-License-Identifier: MIT
- * Native image-B 0x10005e9c..0x10005ec5. Ghidra ended at the MMIO
- * wait; the authenticated branch continues to the final two writes.
+ * Native image-B 0x10005e9c..0x10005ec5.
+ * Evidence: corpus codec/ghidra/open-2026-09-29/image_b_sram/functions-000.jsonl
+ * FUN_10005e9c @ 0x10005e9c (42 B sha 67f41e62…); headless decomp ended at
+ * MMIO wait — authenticated branch continues to final two writes (disasm).
  */
 #include <stdint.h>
 

@@ -15,7 +15,7 @@ extern uint32_t opencfw_bl_mask_interrupts(void);
 static void fail(void) {
  (void)opencfw_bl_mask_interrupts();
  W(UINT32_MAX)=0;
- for(;;)__asm__ volatile("b .":::"memory");
+ for(;;){ }
 }
 uint32_t opencfw_boot_thread_state(uint32_t *tcb) {
  if(!tcb)fail();
@@ -72,3 +72,7 @@ uint64_t opencfw_boot_runtime_action(uint32_t handle,uint32_t unused1,
  else {result=0;opencfw_boot_thread_delete((uint32_t *)(uintptr_t)handle);}
  return ((uint64_t)carry<<32)|result;
 }
+
+/* Stock entry names that branch straight to the provider above. */
+__typeof__(opencfw_boot_runtime_action) opencfw_provider_416200 __attribute__((alias("opencfw_boot_runtime_action")));
+__typeof__(opencfw_boot_runtime_action) opencfw_boot_dfu_thread_terminate __attribute__((alias("opencfw_boot_runtime_action")));

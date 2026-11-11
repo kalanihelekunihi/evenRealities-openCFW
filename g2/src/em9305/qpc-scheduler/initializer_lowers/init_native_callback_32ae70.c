@@ -1,320 +1,139 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_callback_32ae70\n"
-".type opencfw_em9305_callback_32ae70,@function\n"
-"opencfw_em9305_callback_32ae70:\n"
-"L32ae70:\n"
-"enter_s [r13-r17,blink]\n"
-"L32ae72:\n"
-"mov_s r14,r0\n"
-"L32ae74:\n"
-"mov_s r13,r0\n"
-"L32ae76:\n"
-"mov_s r16,0\n"
-"L32ae78:\n"
-"brge.d.nt r1,0x1e,L32ae92\n"
-"L32ae7c:\n"
-"add r14,r14,635\n"
-"L32ae80:\n"
-"breq.d.nt r1,0xc,L32aebe\n"
-"L32ae84:\n"
-"mov_s r15,0\n"
-"L32ae86:\n"
-"breq.nt r1,0x15,L32af12\n"
-"L32ae8a:\n"
-"brne.d.nt r1,0x1d,L32aee8\n"
-"L32ae8e:\n"
-"mov_s r15,2\n"
-"L32ae90:\n"
-"b_s L32af12\n"
-"L32ae92:\n"
-"breq.d.nt r1,0x1e,L32af12\n"
-"L32ae96:\n"
-"mov_s r15,3\n"
-"L32ae98:\n"
-"cmp_s r1,0x6e\n"
-"L32ae9a:\n"
-"beq_s L32aee0\n"
-"L32ae9c:\n"
-"cmp_s r1,0x70\n"
-"L32ae9e:\n"
-"bne_s L32aee8\n"
-"L32aea0:\n"
-"ld.as r0,[r13,161]\n"
-"L32aea4:\n"
-"ld.as r1,[r13,162]\n"
-"L32aea8:\n"
-"bxor r0,r0,0x11\n"
-"L32aeac:\n"
-"or.f 0,r0,r1\n"
-"L32aeb0:\n"
-"bne_s L32aee8\n"
-"L32aeb2:\n"
-"mov_s r15,0x7\n"
-"L32aeb4:\n"
-"st.as r16,[r13,162]\n"
-"L32aeb8:\n"
-"st.as r16,[r13,161]\n"
-"L32aebc:\n"
-"b_s L32af12\n"
-"L32aebe:\n"
-"mov_s r1,0x802810\n"
-"L32aec4:\n"
-"ldb_s r0,[r1,0x8]\n"
-"L32aec6:\n"
-"brlt.d.nt r0,0xd,L32aeec\n"
-"L32aeca:\n"
-"mov_s r15,4\n"
-"L32aecc:\n"
-"breq.d.nt r0,0xd,L32af06\n"
-"L32aed0:\n"
-"mov_s r15,5\n"
-"L32aed2:\n"
-"breq.d.nt r0,0x11,L32af0a\n"
-"L32aed6:\n"
-"mov_s r15,5\n"
-"L32aed8:\n"
-"brne.d.nt r0,0xf,L32aee8\n"
-"L32aedc:\n"
-"mov_s r15,1\n"
-"L32aede:\n"
-"b_s L32af12\n"
-"L32aee0:\n"
-"ldb_s r0,[r14,0]\n"
-"L32aee2:\n"
-"mov_s r15,6\n"
-"L32aee4:\n"
-"breq.nt r0,0x11,L32af12\n"
-"L32aee8:\n"
-"mov_s r17,0\n"
-"L32aeea:\n"
-"b_s L32b046\n"
-"L32aeec:\n"
-"breq_s r0,0,L32af12\n"
-"L32aeee:\n"
-"brne.t r0,0x7,L32aee8\n"
-"L32aef2:\n"
-"ldb_s r0,[r1,0xc]\n"
-"L32aef4:\n"
-"brne.d.t r0,0xf,L32aee8\n"
-"L32aef8:\n"
-"mov_s r15,5\n"
-"L32aefa:\n"
-"ld.as r0,[r13,136]\n"
-"L32aefe:\n"
-"bclr_s r0,r0,0x1\n"
-"L32af00:\n"
-"st.as r0,[r13,136]\n"
-"L32af04:\n"
-"b_s L32af12\n"
-"L32af06:\n"
-"ldb_s r0,[r14,0]\n"
-"L32af08:\n"
-"b_s L32aee4\n"
-"L32af0a:\n"
-"ldb_s r0,[r1,0xc]\n"
-"L32af0c:\n"
-"sub_s r0,r0,0xf\n"
-"L32af0e:\n"
-"brhs.t r0,0x2,L32aee8\n"
-"L32af12:\n"
-"ldb r0,[r14,-15]\n"
-"L32af16:\n"
-"breq.d.nt r0,0x1,L32af5e\n"
-"L32af1a:\n"
-"mov_s r17,1\n"
-"L32af1c:\n"
-"cmp_s r0,0\n"
-"L32af1e:\n"
-"bne_s L32b046\n"
-"L32af20:\n"
-"ldb r0,[r14,-12]\n"
-"L32af24:\n"
-"asl_s r1,r0,0x5\n"
-"L32af26:\n"
-"add2_s r1,r1,r15\n"
-"L32af28:\n"
-"ld r1,[r1,opencfw_em9305_slave_conn_upd_actions_3354c4]\n"
-"L32af30:\n"
-"breq_s r1,0,L32af3a\n"
-"L32af32:\n"
-"jl_s.d [r1]\n"
-"L32af34:\n"
-"mov_s r0,r13\n"
-"L32af36:\n"
-"ldb r0,[r14,-12]\n"
-"L32af3a:\n"
-"add3_s r15,r15,r0\n"
-"L32af3c:\n"
-"ldb r0,[r15,opencfw_em9305_slave_conn_upd_transitions_335544]\n"
-"L32af44:\n"
-"cmp_s r0,0\n"
-"L32af46:\n"
-"stb r0,[r14,-12]\n"
-"L32af4a:\n"
-"beq_s L32b046\n"
-"L32af4c:\n"
-"add r13,r13,635\n"
-"L32af50:\n"
-"stb r17,[r14,-15]\n"
-"L32af54:\n"
-"stb 17,[r13]\n"
-"L32af58:\n"
-"stb r16,[r13,-7]\n"
-"L32af5c:\n"
-"b_s L32b046\n"
-"L32af5e:\n"
-"breq.nt r15,0x1,L32af66\n"
-"L32af62:\n"
-"brne.nt r15,0x4,L32af92\n"
-"L32af66:\n"
-"ldb_s r0,[r14,0]\n"
-"L32af68:\n"
-"sub_s r1,r0,0x2\n"
-"L32af6a:\n"
-"brlo.nt r1,0x3,L32af7a\n"
-"L32af6e:\n"
-"breq.d.nt r0,0x15,L32af96\n"
-"L32af72:\n"
-"mov_s r1,0x11\n"
-"L32af74:\n"
-"brne.d.nt r0,0x7,L32afa2\n"
-"L32af78:\n"
-"mov_s r1,r0\n"
-"L32af7a:\n"
-"ld.as r2,[r13,161]\n"
-"L32af7e:\n"
-"mov_s r1,0x11\n"
-"L32af80:\n"
-"stb 17,[r14]\n"
-"L32af84:\n"
-"stb r17,[r14,-4]\n"
-"L32af88:\n"
-"bset r0,r2,r0\n"
-"L32af8c:\n"
-"st.as r0,[r13,161]\n"
-"L32af90:\n"
-"b_s L32afa2\n"
-"L32af92:\n"
-"ldb_s r1,[r14,0]\n"
-"L32af94:\n"
-"b_s L32afa2\n"
-"L32af96:\n"
-"ld.as r0,[r13,161]\n"
-"L32af9a:\n"
-"stb 17,[r14]\n"
-"L32af9e:\n"
-"bset_s r0,r0,0x15\n"
-"L32afa0:\n"
-"b_s L32af8c\n"
-"L32afa2:\n"
-"brne.nt r1,0x11,L32afee\n"
-"L32afa6:\n"
-"ldb r0,[r14,-12]\n"
-"L32afaa:\n"
-"asl_s r1,r0,0x5\n"
-"L32afac:\n"
-"add2_s r1,r1,r15\n"
-"L32afae:\n"
-"ld r1,[r1,opencfw_em9305_slave_conn_upd_actions_3354c4]\n"
-"L32afb6:\n"
-"breq_s r1,0,L32afc0\n"
-"L32afb8:\n"
-"jl_s.d [r1]\n"
-"L32afba:\n"
-"mov_s r0,r13\n"
-"L32afbc:\n"
-"ldb r0,[r14,-12]\n"
-"L32afc0:\n"
-"add3_s r15,r15,r0\n"
-"L32afc2:\n"
-"ldb r0,[r15,opencfw_em9305_slave_conn_upd_transitions_335544]\n"
-"L32afca:\n"
-"brne.d.nt r0,0,L32b046\n"
-"L32afce:\n"
-"stb r0,[r14,-12]\n"
-"L32afd2:\n"
-"bl.d opencfw_em9305_phy_complete_32c818\n"
-"L32afd6:\n"
-"mov_s r0,r13\n"
-"L32afd8:\n"
-"ldb_s r0,[r13,0xd]\n"
-"L32afda:\n"
-"stb r16,[r14,-15]\n"
-"L32afde:\n"
-"stb -1,[r14]\n"
-"L32afe2:\n"
-"bclr_s r0,r0,0\n"
-"L32afe4:\n"
-"stb_s r0,[r13,0xd]\n"
-"L32afe6:\n"
-"bl.d opencfw_em9305_phy_finish_32c810\n"
-"L32afea:\n"
-"mov_s r0,r13\n"
-"L32afec:\n"
-"b_s L32b046\n"
-"L32afee:\n"
-"breq_s r15,0,L32b004\n"
-"L32aff0:\n"
-"breq.d.nt r15,0x1,L32b016\n"
-"L32aff4:\n"
-"mov_s r1,0x2a\n"
-"L32aff6:\n"
-"breq.nt r15,0x5,L32b020\n"
-"L32affa:\n"
-"brne.d.nt r15,0x4,L32b046\n"
-"L32affe:\n"
-"mov_s r1,0x2a\n"
-"L32b000:\n"
-"mov_s r2,0\n"
-"L32b002:\n"
-"b_s L32b018\n"
-"L32b004:\n"
-"bl.d opencfw_em9305_child_32ca74\n"
-"L32b008:\n"
-"mov_s r0,r13\n"
-"L32b00a:\n"
-"ld.as r0,[r13,161]\n"
-"L32b00e:\n"
-"bset_s r0,r0,0x11\n"
-"L32b010:\n"
-"st.as r0,[r13,161]\n"
-"L32b014:\n"
-"b_s L32b046\n"
-"L32b016:\n"
-"mov_s r2,1\n"
-"L32b018:\n"
-"bl.d opencfw_em9305_phy_reject_32698c\n"
-"L32b01c:\n"
-"mov_s r0,r13\n"
-"L32b01e:\n"
-"b_s L32b046\n"
-"L32b020:\n"
-"ld.as r0,[r13,161]\n"
-"L32b024:\n"
-"ldb r1,[r14,-12]\n"
-"L32b028:\n"
-"st.as r16,[r13,162]\n"
-"L32b02c:\n"
-"bclr_s r0,r0,0x11\n"
-"L32b02e:\n"
-"st.as r0,[r13,161]\n"
-"L32b032:\n"
-"breq_s r1,0,L32b038\n"
-"L32b034:\n"
-"stb r16,[r14,-12]\n"
-"L32b038:\n"
-"mov_s r0,0x80281d\n"
-"L32b03e:\n"
-"ldb_s r1,[r0,0]\n"
-"L32b040:\n"
-"bl.d opencfw_em9305_mode_event_322fdc\n"
-"L32b044:\n"
-"mov_s r0,r13\n"
-"L32b046:\n"
-"mov_s r0,r17\n"
-"L32b048:\n"
-"leave_s [r13-r17,blink,pcl]\n"
-".size opencfw_em9305_callback_32ae70,.-opencfw_em9305_callback_32ae70\n"
-);
+#include <stdint.h>
+
+/* Native 0x32ae70..0x32b04a: connection-parameter / PHY update procedure
+ * hook on an LL control opcode. The opcode (and, for an unknown/reject
+ * response 0x0c, the rejected opcode at 0x802818 and error at 0x80281c)
+ * selects an event 0..7; unrelated opcodes return 0. Idle (+620 = 0):
+ * run the 4x8 action/transition tables at 0x3354c4/0x335544 on the
+ * state byte +623 and enter the procedure (timer code 17 at +635) on a
+ * non-zero next state. Running (+620 = 1): a pending expected opcode
+ * (+635 = 2..4, 7 or 0x15) is recorded in +644 for events 1/4; on the
+ * awaited response (0x11) step the tables and complete (32c818/32c810)
+ * when they reach state 0; otherwise reject (32698c), request again
+ * (32ca74, bit 17) or report the rejection (322fdc). Returns 1 when the
+ * opcode belonged to the procedure. */
+extern const uintptr_t opencfw_em9305_slave_conn_upd_actions_3354c4[32];
+extern const uint8_t opencfw_em9305_slave_conn_upd_transitions_335544[32];
+extern uint32_t opencfw_em9305_phy_complete_32c818(uintptr_t record);
+extern uint32_t opencfw_em9305_phy_finish_32c810(uintptr_t record);
+extern uint32_t opencfw_em9305_child_32ca74(uintptr_t record);
+extern uint32_t opencfw_em9305_phy_reject_32698c(uintptr_t record, uint32_t reason, uint32_t local);
+extern uint32_t opencfw_em9305_mode_event_322fdc(uintptr_t record, uint32_t status);
+
+static uint32_t opencfw_em9305_upd_step_32ae70(uintptr_t record, uint32_t event)
+{
+    volatile uint8_t *state=(volatile uint8_t *)(record+623u);
+    uintptr_t action=opencfw_em9305_slave_conn_upd_actions_3354c4[*state*8u+event];
+    if(action!=0u)((void (*)(uintptr_t,uintptr_t))action)(record,action);
+    return opencfw_em9305_slave_conn_upd_transitions_335544[*state*8u+event];
+}
+
+uint32_t opencfw_em9305_callback_32ae70(uintptr_t record, int32_t opcode)
+{
+    volatile uint8_t *r=(volatile uint8_t *)record;
+    volatile uint32_t *pending=(volatile uint32_t *)(record+644u);
+    uint32_t event;
+    if(opcode>=30){
+        if(opcode==30){
+            event=3u;
+        }else if(opcode==0x6e){
+            if(r[635]!=0x11u)return 0u;
+            event=6u;
+        }else if(opcode==0x70){
+            if(((*pending^(1u<<17))|*(volatile uint32_t *)(record+648u))!=0u)return 0u;
+            *(volatile uint32_t *)(record+648u)=0u;
+            *pending=0u;
+            event=7u;
+        }else{
+            return 0u;
+        }
+    }else if(opcode==12){
+        int32_t rejected=*(volatile uint8_t *)(uintptr_t)0x802818u;
+        if(rejected<13){
+            if(rejected==0){
+                event=4u;
+            }else{
+                if(rejected!=7)return 0u;
+                if(*(volatile uint8_t *)(uintptr_t)0x80281cu!=15u)return 0u;
+                *(volatile uint32_t *)(record+544u)&=~2u;
+                event=5u;
+            }
+        }else if(rejected==13){
+            if(r[635]!=0x11u)return 0u;
+            event=5u;
+        }else if(rejected==17){
+            if((uint32_t)(*(volatile uint8_t *)(uintptr_t)0x80281cu-15u)>=2u)return 0u;
+            event=5u;
+        }else if(rejected==15){
+            event=1u;
+        }else{
+            return 0u;
+        }
+    }else if(opcode==0x15){
+        event=0u;
+    }else if(opcode==0x1d){
+        event=2u;
+    }else{
+        return 0u;
+    }
+    uint32_t current=r[620];
+    if(current==0u){
+        uint32_t next=opencfw_em9305_upd_step_32ae70(record,event);
+        r[623]=(uint8_t)next;
+        if(next!=0u){
+            r[620]=1u;
+            r[635]=17u;
+            r[628]=0u;
+        }
+        return 1u;
+    }
+    if(current!=1u)return 1u;
+    uint32_t awaited;
+    if(event==1u||event==4u){
+        uint32_t expected=r[635];
+        if(expected-2u<3u||expected==7u){
+            uint32_t word=*pending;
+            r[635]=17u;
+            r[631]=1u;
+            *pending=word|(1u<<expected);
+            awaited=0x11u;
+        }else if(expected==0x15u){
+            uint32_t word=*pending;
+            r[635]=17u;
+            *pending=word|(1u<<21);
+            awaited=0x11u;
+        }else{
+            awaited=expected;
+        }
+    }else{
+        awaited=r[635];
+    }
+    if(awaited==0x11u){
+        uint32_t next=opencfw_em9305_upd_step_32ae70(record,event);
+        r[623]=(uint8_t)next;
+        if(next!=0u)return 1u;
+        (void)opencfw_em9305_phy_complete_32c818(record);
+        uint32_t flags=r[13];
+        r[620]=0u;
+        r[635]=0xffu;
+        r[13]=(uint8_t)(flags&~1u);
+        (void)opencfw_em9305_phy_finish_32c810(record);
+        return 1u;
+    }
+    if(event==0u){
+        (void)opencfw_em9305_child_32ca74(record);
+        *pending|=1u<<17;
+    }else if(event==1u){
+        (void)opencfw_em9305_phy_reject_32698c(record,0x2au,1u);
+    }else if(event==5u){
+        uint32_t word=*pending;
+        uint32_t state=r[623];
+        *(volatile uint32_t *)(record+648u)=0u;
+        *pending=word&~(1u<<17);
+        if(state!=0u)r[623]=0u;
+        (void)opencfw_em9305_mode_event_322fdc(record,*(volatile uint8_t *)(uintptr_t)0x80281du);
+    }else if(event==4u){
+        (void)opencfw_em9305_phy_reject_32698c(record,0x2au,0u);
+    }
+    return 1u;
+}

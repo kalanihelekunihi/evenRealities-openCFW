@@ -5,7 +5,8 @@
  *   0x4d4138 frexp (hard-float: x in d0, int * in r0)
  *   0x4d4150 frexp (soft-float: x in r0:r1, int * in r2)
  *   0x4d415c frexp core on the bit pattern
- *   0x4d41c0 __aeabi_cdcmple shape: compares a (r0:r1) with b (r2:r3) into APSR
+ *   (0x4d41c0, the IAR flag-returning __aeabi_cdcmple, is not built: nothing
+ *   in the rebuilt image calls it; libgcc's __aeabi_cdcmple covers any use.)
  *   0x4d41f4 ldexp (soft-float) -> 0x4d4208
  *   0x4d4208 ldexp/scalbn core (hard-float: x in d0, n in r0)
  *   0x4d42f8 d2iz, 0x4d4306 i2d, 0x4d4314 dsub, 0x4d4326 ddiv, 0x4d4338 d2uiz,
@@ -86,35 +87,6 @@ __attribute__((pcs("aapcs"))) double frexp_softfp_4d4150(double value, int32_t *
     return bits_double(iar_frexp_bits_4d415c(double_bits(value), exponent));
 }
 
-/* Result only in the condition flags (C clear: a < b, Z: equal, C=1 Z=0 for
- * a NaN with a nonzero upper mantissa), so the body is the stock instruction
- * sequence. For two non-negative operands only b is NaN-screened. */
-__attribute__((naked, noinline)) void iar_aeabi_cdcmple_4d41c0(void)
-{
-    __asm__ volatile(
-        "orr.w ip, r1, r3\n\t"
-        "orrs.w ip, r0, ip, lsl #1\n\t" /* C = sign(a)|sign(b) */
-        "orrs.w ip, r2, ip\n\t"         /* Z = both are +-0 */
-        "mov.w ip, #0x200000\n\t"
-        "bcc 1f\n\t"
-        "beq 0f\n\t"
-        "cmn.w ip, r1, lsl #1\n\t"      /* a NaN screen */
-        "itt ls\n\t"
-        "cmnls.w ip, r3, lsl #1\n\t"    /* b NaN screen */
-        "cmpls r3, r1\n\t"              /* negative: compare b with a */
-        "it eq\n\t"
-        "cmpeq r2, r0\n"
-        "0:\n\t"
-        "bx lr\n"
-        "1:\n\t"
-        "cmn.w ip, r3, lsl #1\n\t"
-        "bhi 0b\n\t"
-        "cmp r1, r3\n\t"
-        "it eq\n\t"
-        "cmpeq r0, r2\n\t"
-        "bx lr\n");
-}
-
 /* x * 2^-shift for shift < 55 with the cumulative exception flags and trap
  * enables cleared; ERANGE when the multiply underflows. The caller's FPSCR is
  * restored afterwards. */
@@ -126,9 +98,11 @@ static double scale_down(double value, uint32_t shift)
     double result;
 
     __asm__ volatile("vmrs %0, fpscr" : "=r"(saved));
-    __asm__ volatile("vmsr fpscr, %0" : : "r"(saved & ~0x1f1fu));
-    __asm__ volatile("vmul.f64 %P0, %P1, %P2" : "=w"(result) : "w"(value), "w"(factor));
-    __asm__ volatile("vmrs %0, fpscr" : "=r"(status));
+    /* "+w"/"w" operands order the C multiply between the flag clear and the
+     * UFC read (VMUL.F64 in stock). */
+    __asm__ volatile("vmsr fpscr, %1" : "+w"(value) : "r"(saved & ~0x1f1fu));
+    result = value * factor;
+    __asm__ volatile("vmrs %0, fpscr" : "=r"(status) : "w"(result));
     __asm__ volatile("vmsr fpscr, %0" : : "r"(saved));
     if ((status & 0x8u) != 0u) /* UFC */
         audio_uart_ring_errno_range_set_439cb2();

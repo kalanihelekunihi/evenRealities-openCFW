@@ -1,0 +1,342 @@
+{
+  "schema": 1,
+  "scope": "R1 sector/FAL integration; restore native R6 at first header-provider entry",
+  "status": "bounded ABI correction; full stock/source chain mismatch explicitly retained",
+  "stock_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "direct_behavior": {
+    "paired_cases": 12302,
+    "executions": 24604,
+    "outcomes": {
+      "returned": 11856,
+      "assertion_halt": 206,
+      "bounded_read_prefix": 240
+    },
+    "source_report": "build/sources-goal-r1-sector-fal-integration/report.json",
+    "actual_C": [
+      "sector stepper, dispatch, diagnostics and result policy",
+      "sector preparation and advance",
+      "read adapter",
+      "status scanner",
+      "TSL control"
+    ],
+    "modeled": [
+      "partition read",
+      "printf diagnostics",
+      "database path getter"
+    ],
+    "checks": [
+      "header magic and all status combinations",
+      "header read, nested TSL, path and print calls at native outer SP",
+      "live changes from IO/path/diagnostic providers",
+      "native assertions and bounds diagnostics",
+      "header/TSL partial and non-writing failures",
+      "outer buffer caller SP-128 and nested raw view caller SP-176",
+      "live aliasing of sector/database/header fields",
+      "traversal unsigned alignment, overflow and bounds",
+      "ordered shared accesses, complete outer frame and nested raw bytes, ABI and masks"
+    ],
+    "limits": [
+      "Helper-private frames below nested raw view excluded",
+      "Partition read modeled, no physical flash/FAL scheduling",
+      "Caller-clobbered registers/flags and arbitrary corrupted pointers excluded",
+      "Long corrupted-size traversals compared through 16 reads only; termination not established for those fixtures"
+    ]
+  },
+  "source_chain": {
+    "paired_source_chain_cases": 1920,
+    "executions": 3840,
+    "outcomes": {
+      "returned": 1920,
+      "assertion_halt": 0,
+      "bounded_read_prefix": 0
+    },
+    "baseline": "original reconstructed sector assembly linked to the same current C read/TSL/FAL providers",
+    "candidate": "C stepper with corrected header R6",
+    "source_report": "build/sources-goal-r1-sector-fal-integration/report.json",
+    "actual_C": [
+      "sector stepper",
+      "flash read adapter",
+      "TSL/status control",
+      "FAL partition read",
+      "partition/cache lookup"
+    ],
+    "modeled": [
+      "final flash driver",
+      "printf diagnostics",
+      "database path getter"
+    ],
+    "native_full_chain_match": false,
+    "previous_stepper_full_chain_match": false,
+    "checks": [
+      "fixed common helper addresses across source variants",
+      "real FAL wrapping bounds and missing-device paths",
+      "partial/non-writing driver outcomes",
+      "outer/nested views and shared access order",
+      "R6 stack residue at first header call",
+      "diagnostic and return behavior"
+    ],
+    "limits": [
+      "Source-chain comparison isolates this change; it is not full stock equality",
+      "Native counterexample retained rather than normalized",
+      "Seeded partition/cache, physical flash and startup unproven"
+    ]
+  },
+  "negative_controls": [
+    {
+      "mutation": "leaked-header-R6",
+      "rejected": true
+    },
+    {
+      "mutation": "shifted-provider-SP",
+      "rejected": true
+    }
+  ],
+  "object_audit": {
+    "other_574_objects_unchanged": true,
+    "function_name_owner_bytes_flags_alignment_relocations_unchanged": true,
+    "manifest_unchanged": true,
+    "composed_import_sets_unchanged": true,
+    "prior_assembly_adapter_instruction_bytes": 88,
+    "new_assembly_adapter_instruction_bytes": 100,
+    "adapter_relocation": [
+      [
+        34,
+        10,
+        "sector_step_body"
+      ]
+    ],
+    "unchanged_C_workers": [
+      "sector_prepare_body",
+      "sector_advance_body",
+      "sector_step_body"
+    ],
+    "control_in_C": [
+      "read/TSL selection and loop decisions",
+      "diagnostic/path sequencing",
+      "assertion and return selection",
+      "header preparation and traversal update"
+    ],
+    "protected_views": {
+      "outer": "caller SP-128",
+      "nested": "caller SP-176"
+    },
+    "C_only_reservation_bytes": 96,
+    "native_plan": {
+      "size": 28,
+      "args_offset": 4,
+      "next_offset": 20,
+      "action_offset": 24,
+      "plan_from_C_call_SP": 16
+    }
+  },
+  "stock_counterexample": {
+    "case": {
+      "header_written": 0,
+      "entry_written": 0,
+      "found": false,
+      "limit": 0,
+      "offset": 0,
+      "result": 0,
+      "mask": 0,
+      "size": 80
+    },
+    "stock": {
+      "return": 2,
+      "sector_words": {
+        "4": "0x1000",
+        "8": "0x304c5354",
+        "12": "0x11112222",
+        "16": "0x44444445",
+        "20": "0x1050",
+        "28": "0x0",
+        "32": "0x1070",
+        "36": "0xbbbbcc08"
+      },
+      "nested_raw_bytes": "0000000000000000000000000010000001000000454444444644444451f00300"
+    },
+    "candidate": {
+      "return": 2,
+      "sector_words": {
+        "4": "0x1000",
+        "8": "0x304c5354",
+        "12": "0x11112222",
+        "16": "0x2",
+        "20": "0x1050",
+        "28": "0x0",
+        "32": "0x1070",
+        "36": "0xe0000050"
+      },
+      "nested_raw_bytes": "ffa5a5a500a5a5a5ffa5a5a5ffa5a5a5ffa5a5a5020000000010002000000000"
+    },
+    "meaning": "Actual FAL execution exposes preexisting compiler/helper-frame differences in later partial-read bytes; not normalized or treated as equivalent"
+  },
+  "previous_stepper_counterexample": {
+    "case": {
+      "header_written": 0,
+      "entry_written": 0,
+      "found": false,
+      "limit": 0,
+      "offset": 0,
+      "result": 0,
+      "mask": 0,
+      "size": 80
+    },
+    "leaky": {
+      "return": 2,
+      "sector_words": {
+        "4": "0x1000",
+        "8": "0x304c5354",
+        "12": "0x11112222",
+        "16": "0x2",
+        "20": "0x1050",
+        "28": "0x0",
+        "32": "0x1070",
+        "36": "0xe0000050"
+      },
+      "nested_raw_bytes": "ffa5a5a500a5a5a5ffa5a5a5ffa5a5a5ffa5a5a5020000000010002001000080"
+    },
+    "candidate": {
+      "return": 2,
+      "sector_words": {
+        "4": "0x1000",
+        "8": "0x304c5354",
+        "12": "0x11112222",
+        "16": "0x2",
+        "20": "0x1050",
+        "28": "0x0",
+        "32": "0x1070",
+        "36": "0xe0000050"
+      },
+      "nested_raw_bytes": "ffa5a5a500a5a5a5ffa5a5a5ffa5a5a5ffa5a5a5020000000010002000000000"
+    },
+    "leaky_header_R6": 2147483649,
+    "native_and_corrected_header_R6": 0
+  },
+  "normal_build": {
+    "units": 575,
+    "application_imports": 175,
+    "bootloader_imports": 34,
+    "failures": 0,
+    "duplicate_strong_symbols": 0,
+    "import_delta": 0
+  },
+  "qualification": {
+    "compiled_candidates": 5,
+    "selected_regions": 0,
+    "canonical_plan_unchanged": true
+  },
+  "hybrid": {
+    "application_equals_stock": true,
+    "totals": {
+      "binary-pull-through": 642279,
+      "source-built": 3881,
+      "resource-file": 248
+    },
+    "source_completeness_proven": false
+  },
+  "limits": [
+    "1920 full source-chain cases compare against reconstructed assembly with identical C providers and helper placements, not full native firmware",
+    "Full stock counterexample is an outstanding fidelity gap in read-adapter/FAL frame and placement qualification",
+    "Final flash driver, printf and path getter modeled; actual C FAL partition/cache executes",
+    "240 direct corrupted-size fixtures compare only 16-read prefixes",
+    "Physical flash, initialization, concurrency, full source executable link and source byte identity unproven; G2 gates unchanged"
+  ],
+  "inputs": [
+    {
+      "path": "build/sources-goal-r1-sector-fal-integration/report.json",
+      "sha256": "f6360042d0b17880cf5b2775de2922408fbb21896a1e581e4c7b0cee90569f90"
+    },
+    {
+      "path": "build/hybrid-goal-r1-sector-fal-integration/build-report.json",
+      "sha256": "8a4788376e1914e71d80c4a2c0b0ea8cc84482f0f2600ef7f2231e52a4a9ab43"
+    },
+    {
+      "path": "tools/build/source-plan.json",
+      "sha256": "716cf17b8cf2bed8ad6a99a672b1856af4c5380842c95cb14b9a263a7bb42bc8"
+    },
+    {
+      "path": "r1/src/application/runtime/native_flashdb_sector_read.c",
+      "sha256": "4249b2c2e43534795d8ad2a764ab51b823500accb0092b23512270b63000e6c1"
+    },
+    {
+      "path": "r1/src/sources.json",
+      "sha256": "4b6d47de0b0e1626f5df3ee73725bc221c9e05373e2a098596abdf560fd5a0ca"
+    },
+    {
+      "path": "r1/symbols/function-frontier.csv",
+      "sha256": "261c5304f6babd547a60d0f8ea0e49870ae2d127bbecadc3872b1ca9fb6334ad"
+    },
+    {
+      "path": "build/goal-r1-sector-fal-integration/baseline-chain.elf",
+      "sha256": "0839bb3c7a559d8022b041f9853d336ed87b0797777c670132585c3dbfdb177d"
+    },
+    {
+      "path": "build/goal-r1-sector-fal-integration/candidate-chain.elf",
+      "sha256": "1e3cfc6fec710eed9efca8538305e2e0ffcf6b20cefc0aec7722403140268d44"
+    },
+    {
+      "path": "build/goal-r1-sector-fal-integration/leaky-chain.elf",
+      "sha256": "b31f957e181f7c86403648c90113072ac0e1364c48d36d0b76270aa5313a6e7c"
+    },
+    {
+      "path": "build/goal-r1-sector-fal-integration/chain.ld",
+      "sha256": "b4335ea0d01506273e58fc06c76cc5f98988f4dab368e6eb1851f946a6848570"
+    },
+    {
+      "path": "build/goal-r1-sector-fal-integration/before.c",
+      "sha256": "cec9745781aad07ea5c89743f1b24a52ca365167c221702ae359411decea024b"
+    },
+    {
+      "path": "build/goal-r1-sector-fal-integration/verify.py",
+      "sha256": "88c228bde02250f6440e2d48d63bc42e7a706e2a9c707513d2b8f1482c494e5c"
+    },
+    {
+      "path": "build/goal-r1-sector-fal-integration/results.json",
+      "sha256": "6e0545102000922acb9fe2fe5b899b4a3551a3bd74a35f727e2e58e8d5273d3a"
+    },
+    {
+      "path": "build/goal-r1-sector-fal-integration/chain.py",
+      "sha256": "ed0e2abbe5e89a53dd70e6c9eb4928c8a37c193ecbdf0240a27edd3960f1abf9"
+    },
+    {
+      "path": "build/goal-r1-sector-fal-integration/chain-results.json",
+      "sha256": "f0f5068a9c65645a1359777af172253950bc2410ad337ce14940fcc8db3fef3d"
+    },
+    {
+      "path": "build/goal-r1-sector-fal-integration/native-chain-counterexample.json",
+      "sha256": "7b734b2e14b3f04b3711e00d0993c20c679aad77f0361d000d035dff929f4473"
+    },
+    {
+      "path": "build/goal-r1-sector-fal-integration/leaky-chain-counterexample.json",
+      "sha256": "cc88566d6ce192a6e400d96eae0932f93dc03c34138d893859ec86693035048c"
+    },
+    {
+      "path": "build/goal-r1-sector-fal-integration/negative.py",
+      "sha256": "87b39e0aa90f4aab42a6dddc0b815459f4739d74268e893ae8f71dfeb9121dea"
+    },
+    {
+      "path": "build/goal-r1-sector-fal-integration/negative-results.json",
+      "sha256": "5d52b051c7da0cbda9dd7f33046e5a81ecc2d8c39e38d8cb7a787c7bc0cfd2b9"
+    },
+    {
+      "path": "build/goal-r1-sector-fal-integration/audit.py",
+      "sha256": "6a4f93be3e3bac03df021c1aabcae879b7813054bb81459e1c2b1e32ff4cf60a"
+    },
+    {
+      "path": "build/goal-r1-sector-fal-integration/audit-results.json",
+      "sha256": "37ea6e5e2f181f649a484366808f4706081ee3c8064699c259d6b2c8aa9cbd2e"
+    },
+    {
+      "path": "build/goal-r1-sector-fal-integration/rea.json",
+      "sha256": "a0a78bd29d9aa81251844f2ad33f9d99585a40faa637f3b15e9a1dba2ae60255"
+    },
+    {
+      "path": "build/goal-r1-sector-fal-integration/qualified/qualification.json",
+      "sha256": "e2977c98f66c44d5fabcc17ed3788db8a234328460855edc9dbfa5f91ff78d98"
+    },
+    {
+      "path": "build/goal-r1-sector-fal-integration/qualified/source-plan.json",
+      "sha256": "3da40e3d766877c0b3059bee372f651c1f56681157782eba12ee3076f1834a0f"
+    }
+  ]
+}

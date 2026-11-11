@@ -57,14 +57,6 @@
 
 #define NRF_LOG_CHAR_CODE_MAX      0x7E
 
-static const char * severity_names[] = {
-        NULL,
-        "error",
-        "warning",
-        "info",
-        "debug"
-};
-
 static const char * m_colors[] = {
         NRF_LOG_COLOR_CODE_DEFAULT,
         NRF_LOG_COLOR_CODE_BLACK,
@@ -80,31 +72,6 @@ static const char * m_colors[] = {
 static uint32_t m_freq;
 static uint32_t m_timestamp_div;
 
-static void timestamp_print(nrf_fprintf_ctx_t * p_ctx, uint32_t timestamp)
-{
-    if (NRF_LOG_USES_TIMESTAMP)
-    {
-        if (NRF_LOG_STR_FORMATTER_TIMESTAMP_FORMAT_ENABLED)
-        {
-            timestamp        /= m_timestamp_div;
-            uint32_t seconds  = timestamp/m_freq;
-            uint32_t hours    = seconds/3600;
-            seconds          -= hours * 3600;
-            uint32_t mins     = seconds/60;
-            seconds          -= mins * 60;
-
-            uint32_t reminder = timestamp % m_freq;
-            uint32_t ms       = (reminder * 1000)/m_freq;
-            uint32_t us       = (1000*(1000*reminder - (ms * m_freq)))/m_freq;
-
-            nrf_fprintf(p_ctx, "[%02d:%02d:%02d.%03d,%03d] ", hours, mins, seconds, ms, us);
-        }
-        else
-        {
-            nrf_fprintf(p_ctx, "[%08lu] ", timestamp);
-        }
-    }
-}
 extern void r1_log_prefix_process(nrf_log_str_formatter_entry_params_t *, nrf_fprintf_ctx_t *);
 #define prefix_process r1_log_prefix_process
 static void postfix_process(nrf_log_str_formatter_entry_params_t * p_params,

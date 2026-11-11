@@ -18,9 +18,7 @@ uint64_t audio_ble_hci_radio_stack_reset_body(uint32_t pointer,uint32_t unused,
     }
     return ((uint64_t)high<<32)|result;
 }
-__attribute__((naked)) uint64_t audio_ble_hci_radio_stack_reset_55c286(uint32_t pointer) {
-    __asm volatile("b audio_ble_hci_radio_stack_reset_body");
-}
+uint64_t audio_ble_hci_radio_stack_reset_55c286(uint32_t pointer) __attribute__((alias("audio_ble_hci_radio_stack_reset_body")));
 
 void audio_ble_hci_radio_mask_4c2e30(uint32_t index,uint32_t selector) {
     if(index>=8u)return;

@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "report": "build/sources-goal-r1-fstorage-registry-final/report.json",
+  "report_sha256": "e9d98b24cf26a5289478c69815c5020e6f32bd82440eb1babc23841c93519447",
+  "manifest_sha256": "988754e580cd6a5775555a93dca1a98f2dc3d57f5b1071a49f0626f7ced961b9",
+  "verification": {
+    "stock_c_busy_pairs": 640,
+    "source_init_busy_uninit_workflows": 64,
+    "registry_bytes": 40,
+    "registry_instances": 2,
+    "source_internal_flash_owner_first": true,
+    "internal_cold_bytes_match_stock": true,
+    "fds_cold_callback_stock_identity_unproven": true,
+    "api_callbacks_modeled": true,
+    "live_next_instance_reloads": true
+  },
+  "audit": {
+    "unchanged_prior_object_hashes": 800,
+    "generated_boot_allocated_bytes_and_relocations_unchanged": true,
+    "removed_application_imports": [
+      "__start_fs_data",
+      "__stop_fs_data"
+    ],
+    "two_existing_instances_merged_once": true,
+    "section_relative_bounds_and_owners_verified": true,
+    "fds_section_reference_rebases": [],
+    "all_other_composed_bytes_and_relocations_unchanged": true,
+    "only_manifest_change_fstorage_layout": true
+  },
+  "defects": [
+    {
+      "defect": "omit-device-flash",
+      "probe_links_succeeded": true,
+      "registry_assertion_rejected": true
+    },
+    {
+      "defect": "truncate-scan",
+      "probe_links_succeeded": true,
+      "registry_assertion_rejected": true
+    }
+  ],
+  "rea_evidence_id": "ev_a7c74d0bd5c46b78d9cbaa5d1b83cb35b95c6ca8f1a36755811b0442b1225482",
+  "rea_busy_and_bounds_match_raw": true,
+  "evidence_files": {
+    "build/goal-r1-fstorage-registry/verify.py": "2cee5d985989090d34cfcf11767e9e3c852453b5fd25178e22bcc6b70a6c742d",
+    "build/goal-r1-fstorage-registry/audit.py": "2a604bbf42f95fffcf0480a6553afb168cb9d6ab58d5b9700f1a41c7356e982f",
+    "build/goal-r1-fstorage-registry/defects.py": "ea31c6121d20c24854727b1e53e915492c54b114780212f947a5e4a6761f4ff3",
+    "build/goal-r1-fstorage-registry/document.py": "3f9d5a977647e139661468e017435be99f7329b03cc9a1ae2825dac7f4a2ac5f",
+    "build/goal-r1-fstorage-registry/initialization.py": "6f38cf29a7dcf31defa5d759532bbfae34486867bd4c2452c9da3c074264591c",
+    "build/goal-r1-fstorage-registry/initialization.json": "7ffc0804137031f5f6d5c0e5172d1f1ba1e98337a7045bc1c8ac75e18522fa67",
+    "build/goal-r1-fstorage-registry/initialization.log": "e34a669231db27f438de49bfc2238334d3c01d8230e6e5758e66b5712a0f04fd",
+    "build/goal-r1-fstorage-registry/expanded-rw.bin": "87fdee392022fdbe23dd0daf3e859fb14f3ce26ba3e8403aab56dc9d9a913317",
+    "build/goal-r1-fstorage-registry/verification.json": "fc822d2b172803b1ff6f282c66afabc802b6ae9f4b3bdb0763768e083a4bf818",
+    "build/goal-r1-fstorage-registry/audit.json": "903777e36d55cd7f88f61535d4c1f55020fd568e251a4803cda6e028823f6481",
+    "build/goal-r1-fstorage-registry/defects.json": "3dcc03ca8d3e20470ffb0a2d7de2c928303dfb8cac0df2ef90ce07ba4391bcb7",
+    "build/goal-r1-fstorage-registry/source.elf": "03fa5ce0813cd59d4c9084b90b79fed86ad2111efdae3a566794431924a05b2c",
+    "build/goal-r1-fstorage-registry/probe.o": "f5f2840e6786cabbc674a7ae8af13c7cd4a4e806d2eaf4a2faab946ad472e8c7",
+    "build/goal-r1-fstorage-registry/rea-busy-bounds.json": "f708098dd9c74ba291022b681bba97dba3a895a9f82080ea6a9ca609b61bb4d6",
+    "build/goal-r1-fstorage-registry/verify-final.log": "ce7e8626444d25a9f9574eccf384812be5fe13e09137105b8814811b1935a2a0",
+    "build/goal-r1-fstorage-registry/r1-sources-check.log": "5e11e4875b7438d11bbef8d4e6a9ea5b4081f51b98d07ce16e216ec5be46d46c",
+    "build/goal-r1-fstorage-registry/sources-check.log": "8c6106f31795d747b5656cd65fe1f38ce4ad1cf5ad16dd2acf1d77f1c9a667c3",
+    "build/goal-r1-fstorage-registry/boot-link/report.json": "6dd86cabd27c9009dd21669b5d823cfc13459b08cf909db2767bc24a547ec2e3"
+  },
+  "source_and_layout_inputs": {
+    "r1/src/config/runtime/native_fstorage.ld": "99ad1684c06afe5fe2632071e6bb70589ad4793b6fde1f023d7ff3eddd3c557f",
+    "r1/src/application/board/native_internal_flash.c": "3f295a29fdcc69dbf57bdb75cf448c7fd2ec9134b126ee1805f9add8846019fc",
+    "vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/fds/fds.c": "9be853b7933e9781306b8dd984a6b5f164570845bcb581e14af92e8b210f648a",
+    "vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/fstorage/nrf_fstorage.c": "81c9fd34f153a70c211168cbcd4886820b2d1f29535cf8321e27035fd18fd9fe",
+    "vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/fstorage/nrf_fstorage.h": "00aa497cec40c5b3fe2220ed37bc5605b3244cadf6888fefa50a25eed7fd8324"
+  },
+  "limitations": [
+    "Actual fstorage facade executes with modeled API callbacks.",
+    "Actual stock decompressor authenticates cold bytes; attribution of the second stock callback to the FDS owner is unproven.",
+    "Final startup copy placement, actual fstorage_sd operations, physical flash and asynchronous behavior unverified.",
+    "Complete application final linking remains unfinished; no source-plan selections change."
+  ]
+}

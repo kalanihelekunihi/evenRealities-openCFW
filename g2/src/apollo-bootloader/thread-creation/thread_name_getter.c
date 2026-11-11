@@ -16,7 +16,7 @@ const char *opencfw_boot_thread_name_get(const void *task)
         (void)opencfw_bl_mask_interrupts();
         *(volatile uint32_t *)(uintptr_t)UINT32_MAX = 0u;
         for (;;)
-            __asm__ volatile("b ." ::: "memory");
+            { }
     }
     return (const char *)task + 0x34;
 }

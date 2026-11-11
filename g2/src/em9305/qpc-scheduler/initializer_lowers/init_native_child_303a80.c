@@ -1,70 +1,27 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_303a80\n"
-".type opencfw_em9305_child_303a80,@function\n"
-"opencfw_em9305_child_303a80:\n"
-"L303a80:\n"
-"enter_s [r13-r15,blink]\n"
-"L303a82:\n"
-"mov_s r13,0\n"
-"L303a84:\n"
-"mov_s r0,0x801610\n"
-"L303a8a:\n"
-"ldb_s r0,[r0,0]\n"
-"L303a8c:\n"
-"brhs.d.nt r13,r0,L303ad6\n"
-"L303a90:\n"
-"mov_s r0,r13\n"
-"L303a92:\n"
-"mov_s r1,0x805c00\n"
-"L303a98:\n"
-"mpywhl r0,r0,72\n"
-"L303a9c:\n"
-"ld_s r14,[r1,0]\n"
-"L303a9e:\n"
-"add_s r15,r14,r0\n"
-"L303aa0:\n"
-"ldb r0,[r15,65]\n"
-"L303aa4:\n"
-"brne_s r0,0,L303ab0\n"
-"L303aa6:\n"
-"bl.d opencfw_em9305_radio_private_address_31467c\n"
-"L303aaa:\n"
-"add_s r0,r15,0x10\n"
-"L303aac:\n"
-"st_s r1,[r15,0x34]\n"
-"L303aae:\n"
-"st_s r0,[r15,0x30]\n"
-"L303ab0:\n"
-"ldb r0,[r15,64]\n"
-"L303ab4:\n"
-"brne_s r0,0,L303ac6\n"
-"L303ab6:\n"
-"ldb r0,[r15,66]\n"
-"L303aba:\n"
-"breq_s r0,0,L303ac6\n"
-"L303abc:\n"
-"bl.d opencfw_em9305_radio_private_address_31467c\n"
-"L303ac0:\n"
-"mov_s r0,r15\n"
-"L303ac2:\n"
-"st_s r1,[r15,0x2c]\n"
-"L303ac4:\n"
-"st_s r0,[r15,0x28]\n"
-"L303ac6:\n"
-"add_s r1,r13,0x1\n"
-"L303ac8:\n"
-"mpywhl r13,r13,72\n"
-"L303acc:\n"
-"add_s r0,r14,r13\n"
-"L303ace:\n"
-"mov_s r13,r1\n"
-"L303ad0:\n"
-"stb 1,[r0,68]\n"
-"L303ad4:\n"
-"b_s L303a84\n"
-"L303ad6:\n"
-"leave_s [r13-r15,blink,pcl]\n"
-".size opencfw_em9305_child_303a80,.-opencfw_em9305_child_303a80\n"
-);
+#include <stdint.h>
+
+/* Native 0x303a80..0x303ad8: for each of the resolving-list entries
+ * (count at 0x801610, 72-byte entries at *0x805c00), generate a fresh
+ * private address for the local IRK (+16 -> +48) when +65 is clear and
+ * for the peer IRK (+0 -> +40) when +64 is clear and +66 set, then mark
+ * the entry refreshed (+68). */
+extern uint64_t opencfw_em9305_radio_private_address_31467c(uintptr_t irk);
+
+void opencfw_em9305_child_303a80(void)
+{
+    for(uint32_t index=0u;index<*(volatile uint8_t *)(uintptr_t)0x801610u;++index){
+        uintptr_t base=*(volatile uint32_t *)(uintptr_t)0x805c00u;
+        uintptr_t entry=base+index*72u;
+        if(*(volatile uint8_t *)(entry+65u)==0u){
+            uint64_t address=opencfw_em9305_radio_private_address_31467c(entry+16u);
+            *(volatile uint32_t *)(entry+52u)=(uint32_t)(address>>32);
+            *(volatile uint32_t *)(entry+48u)=(uint32_t)address;
+        }
+        if(*(volatile uint8_t *)(entry+64u)==0u&&*(volatile uint8_t *)(entry+66u)!=0u){
+            uint64_t address=opencfw_em9305_radio_private_address_31467c(entry);
+            *(volatile uint32_t *)(entry+44u)=(uint32_t)(address>>32);
+            *(volatile uint32_t *)(entry+40u)=(uint32_t)address;
+        }
+        *(volatile uint8_t *)(base+index*72u+68u)=1u;
+    }
+}

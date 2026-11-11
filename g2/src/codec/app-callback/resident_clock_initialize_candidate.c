@@ -1,7 +1,8 @@
 /* SPDX-License-Identifier: MIT
- * Image-A SRAM clock initialization root 0x10025a88. Direct native call
- * order and product tables are retained. Unreduced clock/voltage lowers
- * remain real external imports, not success stubs.
+ * Image-A SRAM clock initialization root 0x10025a88.
+ * Evidence: corpus codec/ghidra/open-2026-09-29/image_a_sram/functions-000.jsonl
+ * gx8002_clock_init_pointer @ 0x10025a88, 530 B, sha 1cdbd4b0…; lowers stay
+ * real external imports bound to stock addresses, not invented success returns.
  */
 #include <stdint.h>
 

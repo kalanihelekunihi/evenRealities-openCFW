@@ -4,6 +4,7 @@
  * peak normalization, forward RFFT and initial complex energy loop.
  */
 #include <stdint.h>
+#include "../csky_ops.h"
 
 extern void *gx8002_image_b_move_10009968(void *, const void *, uint32_t);
 extern void gx8002_image_b_zero_100113c4(void *, uint32_t, uint32_t);
@@ -54,9 +55,7 @@ image_b_imcra_prefix_result gx8002_image_b_imcra_process_prefix_chunk(
     gx8002_image_b_rfft_1000ef64(
         (const void *)(uintptr_t)UINT32_C(0x20017020), work, fft_output);
 
-    uint32_t scale_word = 1u;
-    uint32_t shift_amount = (uint32_t)(shift + 9);
-    __asm__ volatile("lsl %0, %1" : "+r"(scale_word) : "r"(shift_amount));
+    const uint32_t scale_word = csky_lsl(1u, (uint32_t)(shift + 9));
     float scale = (float)(int32_t)scale_word;
     float *energy = (float *)(uintptr_t)field(state, 0x40u);
     int32_t bins = (int32_t)field(state, 0x1cu);

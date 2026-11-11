@@ -1,0 +1,30 @@
+{
+  "schema": 1,
+  "target": "s200_v2.2.6.10",
+  "stock_touch": {
+    "bytes": 34464,
+    "sha256": "0d13d8bb1337bf22989dc16143e3d5eca29a31cc1ed753ff624668750ea9470d",
+    "programmed_bytes": 34428,
+    "reset_vector": "0x4675"
+  },
+  "source_touch": {
+    "linked_bytes": 28784,
+    "linked_sha256": "061f82a285f7338d446d364438a0aa878770fd08b23cf956e3c8193e25254294",
+    "flash_base": "0x00003300",
+    "reset_vector": "0x9929",
+    "programmed_crc32c": "0xfe810fc8",
+    "package_bytes": 28820,
+    "package_sha256": "9a7877cfbd6ac087518c416f0f1c479175f57ab8d4ed6e2c36a1a8b67bc88571",
+    "outer_crc32c": "0x48674bc7",
+    "format_validation": "passed",
+    "stock_byte_identical": false
+  },
+  "all_payload_link_report": {
+    "path": "build/g2-all-packaging-link-20261110/link-report.json",
+    "sha256": "274ecbd8a69d6e91dcbd8af1f6d84d2cdbe4547ae4e3fa15a932f29475aff601"
+  },
+  "limitations": [
+    "Source touch candidate is shorter than stock by 5644 bytes; no byte identity or hardware boot qualification.",
+    "Codec A/B are source linked but no reconstructed FWPK/BINH/NPU package exists."
+  ]
+}

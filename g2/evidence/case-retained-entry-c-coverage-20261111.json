@@ -1,0 +1,45 @@
+{
+  "schema": 1,
+  "date": "2026-11-11",
+  "reference": {
+    "artifact": "g2/blobs/official/g2-2.2.6.10/firmware_box.raw.bin",
+    "sha256": "773b6d4cfdaf0a5a74a557e3babe8222a0ae813436b76a7437c1096d2c60d677",
+    "flash_base": "0x08000000"
+  },
+  "source": "g2/src/case/startup/startup_vector_candidate.c",
+  "linker": "g2/src/case/link/g2-case.ld",
+  "method": "Six distinct C functions compile to five Thumb self-branches and one BX LR. A dedicated retained section keeps them in the source-linked CASE image; the concatenated twelve linked bytes equal the six locked instruction encodings. The functions are not placed at their stock addresses.",
+  "promoted_spans": [
+    {
+      "start": "0x0800014C",
+      "end_exclusive": "0x08000156",
+      "bytes": 10,
+      "stock_sha256": "3a16164dbfef1632bb3755e7e12099a6f36b620a53b9d460eea90c3787ddb26f",
+      "source_linked_address": "0x0800EB04"
+    },
+    {
+      "start": "0x080091FE",
+      "end_exclusive": "0x08009200",
+      "bytes": 2,
+      "stock_sha256": "c7dfbb7d02759eacb64dbc916c1bb6f21eabaff1c1032ea5c9176abf7fd28df8",
+      "source_linked_address": "0x0800EB0E"
+    }
+  ],
+  "linked": {
+    "binary": "build/g2-case-retained-final-link-20261111/g2-case/g2-case.bin",
+    "bytes": 60184,
+    "sha256": "8b764c6315d429cf06051f87fa9c010ca3adba4e25c5350ec8904d95fe01846d",
+    "retained_range": "0x0800EB04..0x0800EB10",
+    "retained_bytes_hex": "fee7fee7fee7fee7fee77047",
+    "focused_link_receipt": "build/g2-case-retained-final-link-20261111/link-report.json"
+  },
+  "verification": {
+    "all_frontier_hashes_match": true,
+    "rows_nonoverlapping": true,
+    "unsupported_frontier_rows_after": 0
+  },
+  "limits": [
+    "The isolated BX LR has no proven incoming entry; C models its shipped return instruction without asserting reachability.",
+    "The six functions are not at stock addresses. Closing this preexisting gap frontier does not prove all CASE instruction/data coverage, whole-firmware source completeness, byte identity or device behavior."
+  ]
+}

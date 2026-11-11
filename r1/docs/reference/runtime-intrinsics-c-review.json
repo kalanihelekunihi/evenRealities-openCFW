@@ -1,0 +1,291 @@
+{
+  "normal_report": "build/sources-goal-r1-runtime-intrinsics-c/report.json",
+  "units": 607,
+  "all_607_prior_objects_identical": true,
+  "composition_objects_identical": true,
+  "manifest_unchanged": true,
+  "changed_sources": [
+    {
+      "source": "r1/src/application/runtime/native_stream_bootstrap.c",
+      "payload": "r1-application",
+      "role": "candidate",
+      "toolchain": "clang",
+      "link": true,
+      "expect": "compile",
+      "returncode": 0,
+      "argv": [
+        "/usr/bin/clang",
+        "--target=arm-none-eabi",
+        "-mcpu=cortex-m4",
+        "-mthumb",
+        "-munaligned-access",
+        "-mfpu=fpv4-sp-d16",
+        "-mfloat-abi=hard",
+        "-std=c11",
+        "-Os",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-fshort-enums",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-fno-delete-null-pointer-checks",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/r1/src/vendor",
+        "-isystem",
+        "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
+        "-MD",
+        "-MF",
+        "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-runtime-intrinsics-c/r1/r1-application/r1__src__application__runtime__native_stream_bootstrap.c.d",
+        "-c",
+        "/Users/kalani/Repo/evenRealities-openCFW/r1/src/application/runtime/native_stream_bootstrap.c",
+        "-o",
+        "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-runtime-intrinsics-c/r1/r1-application/r1__src__application__runtime__native_stream_bootstrap.c.o"
+      ],
+      "source_sha256": "cf6dd9e355fae8f356807c15b0b0a9ae9e2d5e0f7b93a140336e88da7aaf02a3",
+      "object_sha256": "b684065e7d3b56ff5955352440bdfadbc23f5586f0d7be40a3880eaac5de711e",
+      "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-runtime-intrinsics-c/r1/r1-application/r1__src__application__runtime__native_stream_bootstrap.c.o",
+      "strong": [
+        "r1_native_stream_initialize",
+        "r1_stream_enable",
+        "r1_stream_housekeeping",
+        "r1_stream_keepalive",
+        "r1_stream_tick_getter",
+        "r1_stream_tick_now",
+        "r1_stream_timer_create_front",
+        "r1_stream_wake"
+      ],
+      "weak": [],
+      "undefined": [
+        "osKernelGetTickCount",
+        "r1_native_list_initialize",
+        "r1_native_list_prepend"
+      ]
+    },
+    {
+      "source": "r1/src/application/runtime/native_stream_objects.c",
+      "payload": "r1-application",
+      "role": "candidate",
+      "toolchain": "clang",
+      "link": true,
+      "expect": "compile",
+      "returncode": 0,
+      "argv": [
+        "/usr/bin/clang",
+        "--target=arm-none-eabi",
+        "-mcpu=cortex-m4",
+        "-mthumb",
+        "-munaligned-access",
+        "-mfpu=fpv4-sp-d16",
+        "-mfloat-abi=hard",
+        "-std=c11",
+        "-Os",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-fshort-enums",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-fno-delete-null-pointer-checks",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/r1/src/vendor",
+        "-isystem",
+        "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
+        "-MD",
+        "-MF",
+        "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-runtime-intrinsics-c/r1/r1-application/r1__src__application__runtime__native_stream_objects.c.d",
+        "-c",
+        "/Users/kalani/Repo/evenRealities-openCFW/r1/src/application/runtime/native_stream_objects.c",
+        "-o",
+        "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-runtime-intrinsics-c/r1/r1-application/r1__src__application__runtime__native_stream_objects.c.o"
+      ],
+      "source_sha256": "2b8f403218dad162eb3a45621cfb1426b1a1130247e1451def80887b4f0a9f79",
+      "object_sha256": "e722939e24d0d1e007ac19b94477d2f96e5335699747a74a77e79789076922a1",
+      "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-runtime-intrinsics-c/r1/r1-application/r1__src__application__runtime__native_stream_objects.c.o",
+      "strong": [
+        "r1_stream_insert_ring",
+        "r1_stream_insert_sdk",
+        "r1_stream_object_create",
+        "r1_stream_object_flag_set",
+        "r1_stream_object_insert",
+        "r1_stream_object_lookup",
+        "r1_stream_object_registry",
+        "r1_stream_object_ring",
+        "r1_stream_object_sdk"
+      ],
+      "weak": [],
+      "undefined": [
+        "__aeabi_memclr",
+        "memcpy",
+        "nrf_log_frontend_std_0",
+        "pvPortMalloc",
+        "r1_native_list_append",
+        "r1_native_list_head",
+        "r1_native_list_initialize",
+        "r1_native_list_next",
+        "r1_structured_log_format",
+        "r1_structured_log_mode_get",
+        "strcmp",
+        "strlen"
+      ]
+    },
+    {
+      "source": "r1/src/application/runtime/native_stream_poll.c",
+      "payload": "r1-application",
+      "role": "candidate",
+      "toolchain": "clang",
+      "link": true,
+      "expect": "compile",
+      "returncode": 0,
+      "argv": [
+        "/usr/bin/clang",
+        "--target=arm-none-eabi",
+        "-mcpu=cortex-m4",
+        "-mthumb",
+        "-munaligned-access",
+        "-mfpu=fpv4-sp-d16",
+        "-mfloat-abi=hard",
+        "-std=c11",
+        "-Os",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-fshort-enums",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-fno-delete-null-pointer-checks",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/r1/src/vendor",
+        "-isystem",
+        "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
+        "-MD",
+        "-MF",
+        "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-runtime-intrinsics-c/r1/r1-application/r1__src__application__runtime__native_stream_poll.c.d",
+        "-c",
+        "/Users/kalani/Repo/evenRealities-openCFW/r1/src/application/runtime/native_stream_poll.c",
+        "-o",
+        "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-runtime-intrinsics-c/r1/r1-application/r1__src__application__runtime__native_stream_poll.c.o"
+      ],
+      "source_sha256": "d1329777cbd3244650c3a7b7e9a2d2f0c2c8141f86d52b41a1cc8aa58b25d8f5",
+      "object_sha256": "a55071d6ff10b2399d2ba2b38425e9d616bf64e0a080830a04ee49148b1e7d07",
+      "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-runtime-intrinsics-c/r1/r1-application/r1__src__application__runtime__native_stream_poll.c.o",
+      "strong": [
+        "r1_native_sensor_timer_poll",
+        "r1_stream_list_unlink",
+        "r1_stream_ticks_elapsed",
+        "r1_stream_timer_expire",
+        "r1_stream_timer_release",
+        "r1_stream_timer_remaining",
+        "r1_stream_timer_stop"
+      ],
+      "weak": [],
+      "undefined": [
+        "r1_native_list_head",
+        "r1_native_list_next",
+        "r1_native_list_set_next",
+        "r1_native_list_set_previous",
+        "r1_stream_housekeeping",
+        "r1_stream_tick_now",
+        "vPortFree"
+      ]
+    },
+    {
+      "source": "r1/src/application/runtime/native_subscriber_registration.c",
+      "payload": "r1-application",
+      "role": "candidate",
+      "toolchain": "clang",
+      "link": true,
+      "expect": "compile",
+      "returncode": 0,
+      "argv": [
+        "/usr/bin/clang",
+        "--target=arm-none-eabi",
+        "-mcpu=cortex-m4",
+        "-mthumb",
+        "-mfpu=fpv4-sp-d16",
+        "-mfloat-abi=hard",
+        "-Os",
+        "-ffreestanding",
+        "-fshort-enums",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-std=c11",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/third-party/upstream/cmsis-5-590/CMSIS/RTOS2/Include",
+        "-MD",
+        "-MF",
+        "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-runtime-intrinsics-c/r1/r1-application/r1__src__application__runtime__native_subscriber_registration.c.d",
+        "-c",
+        "/Users/kalani/Repo/evenRealities-openCFW/r1/src/application/runtime/native_subscriber_registration.c",
+        "-o",
+        "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-runtime-intrinsics-c/r1/r1-application/r1__src__application__runtime__native_subscriber_registration.c.o"
+      ],
+      "source_sha256": "a9bb5024123e1601d566de3feecd481a590eeceff7db46c9be91bbbd206b106c",
+      "object_sha256": "3c379493027d37872d9f1d16fd1264cdeb03dd09035478c23cbf0187487b3342",
+      "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-runtime-intrinsics-c/r1/r1-application/r1__src__application__runtime__native_subscriber_registration.c.o",
+      "strong": [
+        "r1_subscriber_register",
+        "r1_subscriber_roots",
+        "r1_subscriber_routes"
+      ],
+      "weak": [],
+      "undefined": [
+        "pvPortMalloc",
+        "r1_event_sensor",
+        "r1_event_system",
+        "r1_subscriber_lock",
+        "r1_subscriber_unlock"
+      ]
+    }
+  ],
+  "unresolved": {
+    "r1-application": 168,
+    "r1-bootloader": 34
+  },
+  "source_plan_unchanged": true,
+  "prior_hybrid_revalidated": "build/hybrid-goal-r1-factory-mode-c/build-report.json",
+  "hybrid_rebuild_repeated": false,
+  "stock_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "limitations": [
+    "Compiler-specific C intrinsic, verified with configured Clang only.",
+    "Object equality preserves prior behavior and its existing limitations; it does not prove stock byte identity or physical fault behavior."
+  ],
+  "probe_results": [
+    {
+      "source": "r1/src/application/runtime/native_rtt_write.c",
+      "object_identical": false
+    },
+    {
+      "source": "r1/src/application/runtime/native_stream_bootstrap.c",
+      "object_identical": true
+    },
+    {
+      "source": "r1/src/application/runtime/native_stream_poll.c",
+      "object_identical": true
+    },
+    {
+      "source": "r1/src/application/runtime/native_subscriber_registration.c",
+      "object_identical": true
+    },
+    {
+      "source": "r1/src/application/runtime/native_stream_objects.c",
+      "object_identical": true
+    }
+  ],
+  "rtt_probes": [
+    {
+      "variant": "writes-only",
+      "object_identical": false
+    },
+    {
+      "variant": "read-only",
+      "object_identical": false
+    }
+  ],
+  "rtt_writes_only_observation": "MOVS r0,#32 moved before MRS r7,BASEPRI; original RTT source restored."
+}

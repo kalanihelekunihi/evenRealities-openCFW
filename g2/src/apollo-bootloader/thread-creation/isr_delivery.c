@@ -19,7 +19,7 @@ extern void opencfw_bl_kernel_reschedule(void);
 extern void opencfw_boot_list_initialize(uint32_t *);
 static _Noreturn void fail(void) {
     (void)opencfw_bl_mask_interrupts();W(UINT32_MAX)=0;
-    for (;;) __asm__ volatile("b .":::"memory");
+    for (;;) { }
 }
 uint32_t opencfw_boot_queue_isr_task_count(void) {return W(0x20027144);}
 static void lock_increment(volatile int8_t *lock,int8_t previous) {

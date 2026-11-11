@@ -2,7 +2,7 @@
 #include "context_claim.h"
 extern uint64_t opencfw_boot_iom_clock_config(uint32_t hz, uint32_t phase);
 extern uint32_t opencfw_boot_iom_cq_initialize(void *, uint32_t, uint32_t);
-extern uint32_t opencfw_hal_status_poll(uint32_t, uintptr_t, uint32_t, uint32_t, uint32_t);
+extern uint32_t am_hal_delay_us_status_check(uint32_t, uintptr_t, uint32_t, uint32_t, uint32_t);
 #define WORD(h,o) (*(volatile uint32_t *)((uintptr_t)(h)+(o)))
 #define BYTE(h,o) (*(volatile uint8_t *)((uintptr_t)(h)+(o)))
 #define REG(h,o) (*(volatile uint32_t *)(0x40050000u+(h)->module*0x1000u+(o)))
@@ -74,8 +74,12 @@ uint32_t opencfw_boot_context_enable(struct opencfw_iom_context *h)
         REG(h,0x210u)=2u;
     }
     if (status!=0u) return status;
-    status=opencfw_hal_status_poll(1000u,0x40050248u+h->module*0x1000u,6u,4u,1u);
+    status=am_hal_delay_us_status_check(1000u,0x40050248u+h->module*0x1000u,6u,4u,1u);
     if (!status) h->flags|=0x02000000u;
     else {REG(h,0x11cu)&=~1u;REG(h,0x11cu)&=~0x10u;}
     return status;
 }
+
+/* Stock entry names that branch straight to the provider above. */
+__typeof__(opencfw_boot_context_configure) opencfw_bl_instance_configure __attribute__((alias("opencfw_boot_context_configure")));
+__typeof__(opencfw_boot_context_enable) opencfw_bl_context_enable __attribute__((alias("opencfw_boot_context_enable")));

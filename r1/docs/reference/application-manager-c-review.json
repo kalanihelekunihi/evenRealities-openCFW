@@ -1,0 +1,150 @@
+{
+  "schema_version": 1,
+  "scope": "R1 startup manager hardware/task coordinator and persistent event/watchdog loop",
+  "report": "build/sources-goal-r1-application-manager-final-reviewed-c/report.json",
+  "comparison_report": "build/sources-goal-r1-log-calendar-pure-reviewed-c/report.json",
+  "audit": {
+    "compiled_units": 856,
+    "application_imports": 65,
+    "bootloader_imports": 22,
+    "unchanged_prior_nongenerated_objects": 845,
+    "changed_prior_nongenerated_objects": [],
+    "new_nongenerated_sources": [
+      "r1/src/application/runtime/native_application_manager.c"
+    ],
+    "normal_object_equals_direct_and_pipeline_objects": true,
+    "manifest_change": "one manager unit with existing launch profile and CMSIS include",
+    "source_plan_unchanged": true,
+    "owned_new_initialized_bytes": 1,
+    "new_explicit_imports": [
+      "r1_eat_core_init",
+      "r1_manager_event_dispatch_46004",
+      "r1_manager_logging_start_91504",
+      "r1_storage_manager_initialize_731a0",
+      "r1_structured_log_typed"
+    ],
+    "closed_import": "r1_application_manager_thread"
+  },
+  "direct": {
+    "stock_C_cases": 720,
+    "native_instruction_bytes_executed": 152,
+    "startup_order_and_four_hardware_feeds": true,
+    "event_flag_publication_and_fault": true,
+    "manager_ready_publication_and_watchdog_token": true,
+    "event_admission_full_unsigned_boundaries": true,
+    "multicycle_loop_and_live_state_mutations": true,
+    "actual_fault_primitive_executes": true,
+    "helper_providers_modeled": true,
+    "nonreturning_private_frame_callee_scratch_APSR_excluded": true
+  },
+  "actual_suspend_handshake_chain": {
+    "stock_C_cases": 384,
+    "native_instruction_bytes_executed": 152,
+    "startup_order_and_four_hardware_feeds": true,
+    "event_flag_publication_and_fault": true,
+    "manager_ready_publication_and_watchdog_token": true,
+    "event_admission_full_unsigned_boundaries": true,
+    "multicycle_loop_and_live_state_mutations": true,
+    "actual_fault_primitive_executes": true,
+    "actual_barrier_and_worker_acknowledgment_handshakes": true,
+    "remaining_helper_providers_modeled": true,
+    "nonreturning_private_frame_callee_scratch_APSR_excluded": true
+  },
+  "initialization": {
+    "native_RW_and_ZI_handlers_executed": true,
+    "independent_RW_decoder_matches": true,
+    "region_guards_unchanged": true,
+    "owned_byte": {
+      "symbol": "r1_application_manager_ready",
+      "address": "0x2000653c",
+      "initial_value": 0,
+      "section": ".r1.application.manager.ready"
+    },
+    "source_object_sha256": "7bbcacd867a4244039ecc668498d5a507caa0cd75e3e9226b2cdb857977c90f4",
+    "final_RAM_placement_unverified": true
+  },
+  "compiled_defects_rejected": [
+    {
+      "defect": "wrong-event-mask",
+      "rejected": true,
+      "log": "build/goal-r1-application-manager-c/wrong-event-mask/test.log"
+    },
+    {
+      "defect": "lost-ready",
+      "rejected": true,
+      "log": "build/goal-r1-application-manager-c/lost-ready/test.log"
+    },
+    {
+      "defect": "wrong-event-admission",
+      "rejected": true,
+      "log": "build/goal-r1-application-manager-c/wrong-event-admission/test.log"
+    },
+    {
+      "defect": "wrong-watchdog-token",
+      "rejected": true,
+      "log": "build/goal-r1-application-manager-c/wrong-watchdog-token/test.log"
+    },
+    {
+      "defect": "wrong-watchdog-interval",
+      "rejected": true,
+      "log": "build/goal-r1-application-manager-c/wrong-watchdog-interval/test.log"
+    },
+    {
+      "defect": "missing-hardware-feed",
+      "rejected": true,
+      "log": "build/goal-r1-application-manager-c/missing-hardware-feed/test.log"
+    }
+  ],
+  "stock_entry": "0x45d7c",
+  "stock_body_bytes": 154,
+  "unexecuted_instruction_bytes": 2,
+  "unexecuted_detail": "Terminal self-branch after the failing 0xffffffff allocation-fault store; fault access is observed.",
+  "public_contract": [
+    "Ordered watchdog, SoftDevice, clock, EAT, storage, EP and task startup calls.",
+    "Publish created sync event object before failure test, suspend workers, register manager watchdog at 10000, publish ready then start logging.",
+    "Wait mask 0x00ffffff, options0, timeout500; dispatch only event results in 1..0x7fffffff, then console/feed/check for every completed wait.",
+    "Clock initialization receives NULL configuration and defined NULL incidental context: snapshot overwrites context for registered backend; concrete default init/update ignore it."
+  ],
+  "limits": [
+    "REA raw bytes authenticated; active Ghidra procedure inventory lacks this entry, so control flow reviewed directly from Thumb instructions and launch callback evidence.",
+    "Five real lower services remain imports, rather than hidden executable stock targets.",
+    "Helper providers modeled; integration executes actual barrier and worker acknowledgment handshakes, with modeled RTOS, logging and configuration.",
+    "Real shared allocation-fault primitive executes; exception access observed, physical fault handling unverified.",
+    "Noreturn coordinator stopped at next wait boundary after bounded loops; private frames, incidental registers, APSR, faults/concurrency beyond tested fault, physical scheduling/watchdog and final boot unverified.",
+    "Cold ready byte verified using native RW/ZI startup and independent decoder; final RAM placement unverified."
+  ],
+  "evidence_files": {
+    "build/sources-goal-r1-application-manager-final-reviewed-c/report.json": "864990e0dc9fa7c05cac047148221ac8e12e11d6ea131d304d5498d508299c61",
+    "build/sources-goal-r1-log-calendar-pure-reviewed-c/report.json": "c770a1d00275f4026694db3712eeb67ed0b586dc5bc26b86e6dd499111f283b7",
+    "r1/src/application/runtime/native_application_manager.c": "729c012d75fb16698f141a0705bcf31179a6c4546e2d586bb16a3d7b21876964",
+    "r1/src/application/runtime/native_application_manager.h": "9400a1aee5a9e93cfc8756b21d012ef2e94fd1d589710d66ec06c9b8f0d347bc",
+    "r1/src/application/runtime/native_application_launch.c": "16d9499b6d472360d7ede626bf63486fe01e9ff4c27265a01f1f343d213395ae",
+    "r1/src/application/runtime/native_task_barrier.c": "05f454528f087163b570f05b4ecdb99373c13e2f1019be3ea2140ed1497e251f",
+    "r1/src/application/runtime/native_task_suspend.c": "a32e3a8a420930ce0abcaeec1d525c3072cfd4da092a8fafa946d83a4d7f4ab5",
+    "r1/src/application/board/native_sync.c": "4d3dea4208f4b8a302f46571d5026a66d172452ecfd93191889d9f9789edb569",
+    "r1/src/application/board/native_clock_bootstrap.c": "ddf6cb0b7bdf28a7005bcbbb459550b928f824582ef1a5a193fcc1f4fc7d0513",
+    "r1/src/application/board/native_clock_binding.c": "1bfa7c44ac40681d5f4071f346958b22f00e1d9b7b74f79a502854c49b7fa234",
+    "r1/src/application/board/native_clock_port.c": "80c30ac02423b40e32795275381951c0d3978751724cc5fa9da92eb4c254a55e",
+    "r1/src/sources.json": "0aeefb1b6d31e4db0aa9d5915afea00b337aea06600f1eb3bfbc552a903309cc",
+    "tools/build/source-plan.json": "eeb516e31b3310fb0718f36908977f8125723f7c5e0e86cd6744395826259a4d",
+    "build/goal-r1-application-manager-c/manifest-before.json": "f74aa01d5bac1e3a8786b1052791cbd6344c1fd57ce26a11f1d65de93506ad72",
+    "build/goal-r1-application-manager-c/record.py": "3dfae6125fb63d5d03369db9d04c57c399a748b074d31a0d2aa1d65fadd0f20d",
+    "build/goal-r1-application-manager-c/rea.json": "19680cebad8b2c828fe287d75f29679753812e6ca63b9f2481555a3474998d92",
+    "build/goal-r1-application-manager-c/verify.py": "459a856fcbecc0b59f240be452b89648074e4ae548bd87ddbaa9ec3c43521ccc",
+    "build/goal-r1-application-manager-c/results.json": "bb934b0b3b9be77267d0395582e5fccd424b0f099949c08e386a881b0ad78b0a",
+    "build/goal-r1-application-manager-c/verification.log": "3d6762441ecf30a6052f32a4d563e67a51d6249a7661d007196f310b5cb68d73",
+    "build/goal-r1-application-manager-c/source.elf": "f589363af34ad0301e7d0a42f5e2a724aeb3b8fce938e06c17f9f8b0553407cb",
+    "build/goal-r1-application-manager-c/pipeline/verify.py": "259ceb4cc483736d862cf273e12305bd1e3f3855b2e396887b739866308a3e7c",
+    "build/goal-r1-application-manager-c/pipeline/results.json": "e56ca79864025ecf7da1ec20301293b2cc2a94c437c6f19784eb6ae55bd10c40",
+    "build/goal-r1-application-manager-c/pipeline/verification.log": "5ed7e6f86f7b311da659813eb8a1cfcdbfae13366220df89297840f4abf9013a",
+    "build/goal-r1-application-manager-c/pipeline/source.elf": "3b055d10cd21ff72b7ecd3845e92cbd01563ef491e440892e2a4b3be39a90b43",
+    "build/goal-r1-application-manager-c/initialization.py": "42a9116e1c846b1af9600f16989ed23663e31010b5c0cb4c219ca043a58b5896",
+    "build/goal-r1-application-manager-c/initialization-results.json": "bf49f7029641820091834de5473cda4cdc43e6917058a1f9e752e15b1ed174eb",
+    "build/goal-r1-application-manager-c/initialization.log": "3a2ff4afb3b4a47365ff63feda9cf0c079603b3b34a457e6f70c8c7a3f7407b5",
+    "build/goal-r1-application-manager-c/negative.py": "55a949d6304e1ac3e2c105b9cf826df9448ba8f09901c167153d223573c1e9e2",
+    "build/goal-r1-application-manager-c/negative.json": "10432faf34c2feba0397a99be4f25b2472b268df31dc5937f288fbd7962b9e64",
+    "build/goal-r1-application-manager-c/negative.log": "963a0c3957df7e7b744b16131cd391f2c0a5093f2cc32b5120e0944881b00df4",
+    "build/goal-r1-application-manager-c/build.log": "a1460862f766f383d353af194298e7fded5d993d6a2c612c89bf86c066ee62d9",
+    "build/goal-r1-application-manager-c/sources-check.log": "a70131d6dd4796a655372df05bd21231a86a567673d5a9b2666d806fb1ae6b0d"
+  }
+}

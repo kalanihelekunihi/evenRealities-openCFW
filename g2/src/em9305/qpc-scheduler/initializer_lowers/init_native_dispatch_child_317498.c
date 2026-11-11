@@ -1,43 +1,18 @@
-/* Complete authenticated native helper; no fabricated alias or provider. */
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_dispatch_child_317498\n"
-".type opencfw_em9305_dispatch_child_317498,@function\n"
-"opencfw_em9305_dispatch_child_317498:\n"
-"L317498:\n"
-"push_s blink\n"
-"L31749a:\n"
-"ld r1,[0x805cac]\n"
-"L3174a2:\n"
-"mov_s r0,0x805c40\n"
-"L3174a8:\n"
-"ld r0,[r0,0]\n"
-"L3174aa:\n"
-"ldb r2,[r1,58]\n"
-"L3174ae:\n"
-"mov_s r1,0\n"
-"L3174b0:\n"
-"bl.d opencfw_em9305_memset\n"
-"L3174b4:\n"
-"asl_s r2,r2,0x8\n"
-"L3174b6:\n"
-"ld r1,[0x805cac]\n"
-"L3174be:\n"
-"mov_s r0,0x805c3c\n"
-"L3174c4:\n"
-"ld r0,[r0,0]\n"
-"L3174c6:\n"
-"ldb r2,[r1,57]\n"
-"L3174ca:\n"
-"mov_s r1,0\n"
-"L3174cc:\n"
-"bl.d opencfw_em9305_memset\n"
-"L3174d0:\n"
-"asl_s r2,r2,0x9\n"
-"L3174d2:\n"
-"pop_s blink\n"
-"L3174d4:\n"
-"j_s [blink]\n"
-".size opencfw_em9305_dispatch_child_317498,.-opencfw_em9305_dispatch_child_317498\n"
-);
+#include <stdint.h>
+
+/* Native 0x317498..0x3174d6: clear the two configured buffers: *0x805c40
+ * for (config byte 58) * 256 bytes and *0x805c3c for (config byte 57) *
+ * 512 bytes; the config pointer (*0x805cac) is re-read for each. */
+extern void *opencfw_em9305_memset(void *,uint32_t,uint32_t);
+
+void opencfw_em9305_dispatch_child_317498(void)
+{
+    uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+    uintptr_t first=*(volatile uint32_t *)(uintptr_t)0x805c40u;
+    (void)opencfw_em9305_memset((void *)first,0u,
+        (uint32_t)*(volatile uint8_t *)(config+58u)<<8);
+    config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+    uintptr_t second=*(volatile uint32_t *)(uintptr_t)0x805c3cu;
+    (void)opencfw_em9305_memset((void *)second,0u,
+        (uint32_t)*(volatile uint8_t *)(config+57u)<<9);
+}

@@ -1,0 +1,86 @@
+{
+  "cases": 1292,
+  "passed": 1292,
+  "failures": [],
+  "stock_entry": "0x91184",
+  "stock_body_bytes": 182,
+  "bridge_bytes": 16,
+  "c_body_bytes": 196,
+  "callback_stack_depth_pairs": [
+    [
+      [
+        -48,
+        -48,
+        -48,
+        -48,
+        -48,
+        -48,
+        -48,
+        -48,
+        -48,
+        -48,
+        -48,
+        -48
+      ],
+      [
+        -80,
+        -80,
+        -80,
+        -80,
+        -80,
+        -80,
+        -80,
+        -80,
+        -80,
+        -80,
+        -80,
+        -80
+      ]
+    ]
+  ],
+  "other_source_units_unchanged": 561,
+  "report": "build/sources-goal-r1-battery-filter/report.json",
+  "report_sha256": "a74ed2d5ea3814ec87f75769db54c17ef165c85aaeeaa8ff6b626d87a442c7f8",
+  "source_sha256": "c6ac0cbb5b267e5280f29e7266ad28501163393e5b14809678e56f59f3bba3b8",
+  "manifest_sha256": "59fdbc1dac961b45d682cd2bb5bd1fbc417cd95e7082d50a778c69d6e24ee734",
+  "stock_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "native_span_sha256": "deaf339da23f60478f08800d1dbea8b56f969f18bdd2d145dd252308863ca80b",
+  "rea": {
+    "completed": true,
+    "procedure": "0x91184",
+    "path": "build/goal-r1-battery-filter/REA.json",
+    "sha256": "645fd1f51b51ec49144701c1c39d6309fc89d2f62c4b734da8d3bf4621af5583"
+  },
+  "probe_artifacts": {
+    "build/goal-r1-battery-filter/verify.py": "3fa113d6490440161192d955c550372f75a1db3f204ecfd9728146a27fabb64c",
+    "build/goal-r1-battery-filter/before.c": "13a74795c5f9ee9e1738cd3937ab055363553ecf8fea38f68c712fb6d0d76753",
+    "build/goal-r1-battery-filter/source.elf": "4891046c8c4cdc7cfea560b3c1883ec862b8deeb2d6f74293a791a4ab096c28b",
+    "build/goal-r1-battery-filter/stock.elf": "40dd76e8740ae93a32bf6aea99c920f983d9975609826fc2a04761a6872568c3",
+    "build/goal-r1-battery-filter/rea-snapshot.json": "ef60df6dc7018b80a1c919c811c79fc5dcb50278e74ca1b8589fd4d52377c836"
+  },
+  "runtime_context_native": "0x20006890",
+  "scratch_layout": {
+    "base": "entry SP-48",
+    "temporary_word_offset": 0,
+    "sample_halfword_offsets": [
+      4,
+      6,
+      8,
+      10,
+      12
+    ],
+    "unused_sixth_halfword_offset": 14
+  },
+  "limits": [
+    "Sixteen-byte frame bridge preserves the native incoming register-save span and its epilogue. This is a partial C extraction.",
+    "Device open/read/close and both delay API boundaries are modeled with caller-saved register/flag clobbers; actual registry, ADC, scheduler and delay providers do not execute.",
+    "C helper adds private callback stack depth below the preserved sixteen-byte scratch span.",
+    "Runtime context remains an unresolved dependency. No physical battery voltage/accuracy, delay timing, complete fault-state equivalence, final link, provider qualification or byte identity claim."
+  ],
+  "subsequent_direct_C_root": {
+    "review": "r1/docs/reference/battery-filter-root-c-review.json",
+    "assembly_bridge_replaced": true,
+    "separate_body_removed": true,
+    "native_provider_frame_preserved": 48
+  }
+}

@@ -35,3 +35,6 @@ uint32_t display_driver_case4_read(uint32_t brightness,uint32_t *current,uint32_
     }
     return 0u;
 }
+/* Single implementation of stock SVC_Settings_BrightnessLevelToLumAndCurrent 0x46c410 (returns 0 as stock). */
+__typeof__(display_driver_case4_read) display_driver_uled_type0_context_snapshot_46c410
+    __attribute__((alias("display_driver_case4_read")));

@@ -1,0 +1,102 @@
+{
+  "cases": 3584,
+  "passed": 3584,
+  "failures": [],
+  "stock_entry": "0x87250",
+  "stock_body_bytes": 144,
+  "source_body_bytes": 152,
+  "callback_stack_depth_pairs": [
+    [
+      [
+        -24,
+        -24,
+        -24
+      ],
+      [
+        -24,
+        -24,
+        -24
+      ]
+    ],
+    [
+      [
+        -24,
+        -24,
+        -24,
+        -24,
+        -24,
+        -24,
+        -24,
+        -24
+      ],
+      [
+        -24,
+        -24,
+        -24,
+        -24,
+        -24,
+        -24,
+        -24,
+        -24
+      ]
+    ],
+    [
+      [
+        -24,
+        -24,
+        -24,
+        -24,
+        -24,
+        -24,
+        -24,
+        -24,
+        -24
+      ],
+      [
+        -24,
+        -24,
+        -24,
+        -24,
+        -24,
+        -24,
+        -24,
+        -24,
+        -24
+      ]
+    ]
+  ],
+  "unchanged_functions": [
+    "r1_qma6100_configure_boundary",
+    "r1_qma_any_motion",
+    "r1_qma_range",
+    "r1_qma_reset",
+    "r1_qma_setup",
+    "r1_qma_tap"
+  ],
+  "report": "build/sources-goal-r1-qma-steps/report.json",
+  "report_sha256": "2bfeb80cb96f948aa93f0903d9dde6a41d80d5e1b149cd2e112e5c690a1c5eb8",
+  "source_sha256": "25468a4481a8fff3389376b67b4d91b7a3474e6d45da745e29c68284bcd4d8e3",
+  "manifest_sha256": "be76bf00509f1551b53a08edbc5515ed3a3dcb9b1721ff4481fdf60b77d82eb8",
+  "stock_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "native_span_sha256": "8394647f708e2560968e4fd1396ca08fa57411632c16a15d79dc0c38f363b39d",
+  "rea": {
+    "completed": true,
+    "procedure": "0x87250",
+    "path": "build/goal-r1-qma-steps/REA.json",
+    "sha256": "e70111f2a26f4b4271f34da25305594f04a45809729fff6fa51348d0f3996d35",
+    "limitation": "Decompiler infers void return; native instructions and execution establish write-result or final-ID-byte return paths."
+  },
+  "probe_artifacts": {
+    "build/goal-r1-qma-steps/verify.py": "50d06ded4af0798f50576b3ce73b08398fa910c35fd950f84ce5d24324871e4c",
+    "build/goal-r1-qma-steps/before.c": "9df0a48482a6cbcf4a6ecb603c5c88a4a26b728ee5cdb232989be715d444e478",
+    "build/goal-r1-qma-steps/source.elf": "f59aa9aa37a7dc62d79dbfe1bc676c9dddd14e7529241331b2d019e8cc6c2a3d",
+    "build/goal-r1-qma-steps/stock.elf": "d12251f54ec04c132c235460907bc99c2e9930bf3929fa0c3ea64d13fc0bb939",
+    "build/goal-r1-qma-steps/rea-snapshot.json": "574065051d706ef773463ba6013804d9a8ef4b14ba5170458ef5656ce23107bc"
+  },
+  "limits": [
+    "Read/write/delay wrappers are modeled and clobber caller-saved registers/flags.",
+    "Only the zero-initialized read byte and its retained pointer lifetime are owned, not surrounding native saved-register bytes.",
+    "Sensor-state placement at 0x2001e4b0 is controlled, not final layout proof.",
+    "No physical step-counter operation, delay timing, complete fault-state, final linking, source qualification or byte-identity claim."
+  ]
+}

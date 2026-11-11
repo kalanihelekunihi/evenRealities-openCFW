@@ -1,57 +1,23 @@
-/* Full native callback; no imports or opcode embedding. */
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_associated_callback_32a47c\n"
-".type opencfw_em9305_associated_callback_32a47c,@function\n"
-"opencfw_em9305_associated_callback_32a47c:\n"
-"L32a47c:\n"
-"breq.d.nt r1,0xa,L32a4b2\n"
-"L32a480:\n"
-"ld_s r2,[r0,0x24]\n"
-"L32a482:\n"
-"cmp_s r1,0\n"
-"L32a484:\n"
-"jne_s [blink]\n"
-"L32a486:\n"
-"mov_s r3,r2\n"
-"L32a488:\n"
-"mov r0,341\n"
-"L32a48c:\n"
-"add r3,r3,630\n"
-"L32a490:\n"
-"ldb_s r0,[r2,r0]\n"
-"L32a492:\n"
-"ldh.as r1,[r3,137]\n"
-"L32a496:\n"
-"stb 1,[r3]\n"
-"L32a49a:\n"
-"cmp_s r0,0\n"
-"L32a49c:\n"
-"add_s r0,r1,0x1\n"
-"L32a49e:\n"
-"sth.as r0,[r3,137]\n"
-"L32a4a2:\n"
-"jeq_s [blink]\n"
-"L32a4a4:\n"
-"mov_s r0,0x80568c\n"
-"L32a4aa:\n"
-"ldh_s r1,[r0,0]\n"
-"L32a4ac:\n"
-"add_s r1,r1,1\n"
-"L32a4ae:\n"
-"j_s.d [blink]\n"
-"L32a4b0:\n"
-"sth_s r1,[r0,0]\n"
-"L32a4b2:\n"
-"add r2,r2,910\n"
-"L32a4b6:\n"
-"ldh_s r0,[r2,0]\n"
-"L32a4b8:\n"
-"add_s r0,r0,1\n"
-"L32a4ba:\n"
-"j_s.d [blink]\n"
-"L32a4bc:\n"
-"sth_s r0,[r2,0]\n"
-".size opencfw_em9305_associated_callback_32a47c,.-opencfw_em9305_associated_callback_32a47c\n"
-);
+#include <stdint.h>
+
+/* Native 0x32a47c..0x32a4be: associated-mode event callback. Event 10
+ * counts in the context halfword +910; event 0 marks the context (+630 = 1),
+ * counts in +904 and, when byte +341 is set, in the global counter at
+ * 0x80568c. Other events are ignored. */
+void opencfw_em9305_associated_callback_32a47c(uintptr_t object,uint32_t event)
+{
+    uintptr_t context=*(volatile uint32_t *)(object+36u);
+    if(event==10u){
+        uint32_t count=*(volatile uint16_t *)(context+910u);
+        *(volatile uint16_t *)(context+910u)=(uint16_t)(count+1u);
+        return;
+    }
+    if(event!=0u)return;
+    uint32_t enabled=*(volatile uint8_t *)(context+341u);
+    uint32_t count=*(volatile uint16_t *)(context+904u);
+    *(volatile uint8_t *)(context+630u)=1u;
+    *(volatile uint16_t *)(context+904u)=(uint16_t)(count+1u);
+    if(enabled==0u)return;
+    uint32_t total=*(volatile uint16_t *)0x80568cu;
+    *(volatile uint16_t *)0x80568cu=(uint16_t)(total+1u);
+}

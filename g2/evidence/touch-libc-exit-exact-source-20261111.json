@@ -1,0 +1,100 @@
+{
+  "schema": 1,
+  "target": "Build the stock touch lite-exit path from C with native unresolved-weak linker behavior",
+  "source": "g2/src/touch/glue/touch_libc_exit.c",
+  "source_sha256": "c3cbe71d2ffd52d76b7de1542cd6184379e47c51fe0f78de925a0b6829d8b212",
+  "caller": "g2/src/touch/glue/touch_runtime_0164_reset_entry.c",
+  "caller_sha256": "bbed1c98e39a50aef8b650b169dd541a8c31efe16113d8ab5b76a31ba6b31842",
+  "linker": "g2/src/touch/link/g2-touch.ld",
+  "linker_sha256": "c9a5c80b7a3137529237fe2a58d0eb6c8e16d1358d8205c74eba86f2597f3cb9",
+  "qualification_tool": "tools/build/qualify_sources.py",
+  "qualification_tool_sha256": "1d981559927c70430d5a3d322556b0245826183a9203151bdf2eb16b6a3b53f4",
+  "relocation_reader": "tools/build/source_providers.py",
+  "relocation_reader_sha256": "7431b0f3fe34e8a988e2e8f77a05f816fcacc630e69e63b5262ba245fabef0cb",
+  "matcher": "tools/build/match_compiled.py",
+  "matcher_sha256": "456a30de14f1af892f481a79048b244e4c18cebba06e722157a500a46f501d66",
+  "stock_function_va": "0xa9ac",
+  "stock_function_end_exclusive": "0xa9d4",
+  "stock_function_bytes": 40,
+  "note_on_inventory": "g2/symbols/touch.tsv gives a 54-byte exit extent that overlaps the next 16-byte memset entry at 0xa9d4; the code-and-literal boundary is 40 bytes.",
+  "qualified_region": {
+    "payload": "g2-touch",
+    "symbol": "exit_wrapper",
+    "start": 30412,
+    "end": 30452,
+    "sha256": "ed73e3c05f24d72858b2cf85109b2726ed5242205d3864b1ea5f0ca03f172dec",
+    "evidence": "g2/symbols/touch.tsv",
+    "bindings": {
+      "__call_exitprocs": null,
+      "_exit_halt": 43585,
+      "__stdio_exit_handler": 536874836
+    },
+    "address": 43436,
+    "match_evidence": {
+      "method": "independently named native entry and all unrelocated bytes, followed by full linked equality",
+      "fixed_bytes": 24,
+      "compiled_pattern_sha256": "74674c087202da637c4120f402d523fcadd045e0bf94db6425d49e36930ade47",
+      "relocations": [
+        {
+          "symbol": "__call_exitprocs",
+          "offset": 12,
+          "relocation_type": 10,
+          "address": null,
+          "role": "undefined_weak_function"
+        },
+        {
+          "symbol": "_exit_halt",
+          "offset": 28,
+          "relocation_type": 10,
+          "address": 43585,
+          "role": "native_function"
+        },
+        {
+          "symbol": "__call_exitprocs",
+          "offset": 32,
+          "relocation_type": 2,
+          "address": null,
+          "role": "undefined_weak_literal"
+        },
+        {
+          "symbol": "__stdio_exit_handler",
+          "offset": 36,
+          "relocation_type": 2,
+          "address": 536874836,
+          "role": "native_literal_symbol"
+        }
+      ]
+    }
+  },
+  "qualification_report": "build/g2-touch-libc-exit-qualification-20261111/qualification.json",
+  "qualification_report_sha256": "c63f3bcd9e12698f81c34d6f4e6bd5f0008944ea54fcb209970968af668235f4",
+  "qualification_selection": "build/g2-touch-libc-exit-qualification-20261111/source-plan.json",
+  "qualification_selection_sha256": "4573855a5b7a624f21b97b0233b1880a477fca2db0362fa8c82698629299f5fa",
+  "source_manifest": "g2/src/sources.json",
+  "source_manifest_sha256": "3d846dbb10fac4b35fcff3165d3e7e0c9c5b92bc298fb01f1ed0145761fcf9c2",
+  "source_plan": "tools/build/source-plan.json",
+  "source_plan_sha256": "d825001e82bcfa285dd60154c8d44c85309d59dfcd7478d915bd671ed78f0029",
+  "g2_exact_regions": 62,
+  "g2_exact_bytes": 3606,
+  "touch_exact_regions": 44,
+  "touch_exact_bytes": 3488,
+  "r1_selections_unchanged_from_staged_plan": true,
+  "focused_source_report": "build/g2-touch-libc-exit-20261111/report.json",
+  "focused_source_report_sha256": "86b8e1910ad18ddc06485d357c795ae44e84a69cdafd3ab4cc66659841c4619c",
+  "full_source_report": "build/g2-touch-libc-exit-full-20261111/report.json",
+  "full_source_report_sha256": "5e7a46f527f3b168e63637cf86b6e8291e33189cdb6e8013b0b52729ef31d723",
+  "compiled_units": 4884,
+  "duplicate_strong_symbols": 0,
+  "strict_link_report": "build/g2-touch-libc-exit-bundle-20261111/link-report.json",
+  "strict_link_report_sha256": "0c1fac6c0cf658b6f3f70e50ad41c661554c9e91e5000fdf8b8323912ff25003",
+  "authenticated_comparison": "build/g2-touch-libc-exit-bundle-20261111/comparison.json",
+  "authenticated_comparison_sha256": "13802d04830d50624e26c36b2bcf91ff973d0629547c71f3d3dec4bd4cfd44c2",
+  "candidate_bundle_sha256": "61865b11ce063fa5b0437cb58aa31fdef8bbbfc3f1c6bb88d088b15fb00863e0",
+  "candidate_bundle_bytes": 4638188,
+  "candidate_byte_identical": false,
+  "hybrid_report": "build/g2-touch-libc-exit-hybrid-20261111/build-report.json",
+  "hybrid_report_sha256": "06444fb9cda7339552e6db9747e03c1cf44533a285612143e73398dcd30ac69a",
+  "hybrid_bundle_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "other_five_components_unchanged_vs_previous_source_candidate": true,
+  "limits": "The 40-byte exit body matches stock under native linker treatment of the undefined weak cleanup hook. The source-only bundle is still nonidentical and hardware behavior remains untested."
+}

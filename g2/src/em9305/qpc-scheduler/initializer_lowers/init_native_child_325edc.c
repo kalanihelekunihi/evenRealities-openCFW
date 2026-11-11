@@ -1,44 +1,19 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_325edc\n"
-".type opencfw_em9305_child_325edc,@function\n"
-"opencfw_em9305_child_325edc:\n"
-"L325edc:\n"
-"enter_s [r13-r14,blink]\n"
-"L325ede:\n"
-"mov_s r14,r0\n"
-"L325ee0:\n"
-"mov_s r0,4\n"
-"L325ee2:\n"
-"bl.d opencfw_em9305_wsf_event_allocate\n"
-"L325ee6:\n"
-"mov_s r13,r1\n"
-"L325ee8:\n"
-"mov_s r1,r0\n"
-"L325eea:\n"
-"breq_s r0,0,L325f08\n"
-"L325eec:\n"
-"breq_s r14,0,L325ef2\n"
-"L325eee:\n"
-"ldb_s r2,[r14,0x10]\n"
-"L325ef0:\n"
-"b_s L325ef4\n"
-"L325ef2:\n"
-"mov_s r2,0xff\n"
-"L325ef4:\n"
-"mov_s r0,0x805b18\n"
-"L325efa:\n"
-"ldb_s r0,[r0,0]\n"
-"L325efc:\n"
-"stb_s r13,[r1,0x3]\n"
-"L325efe:\n"
-"sth_s r2,[r1,0]\n"
-"L325f00:\n"
-"bl.d opencfw_em9305_wsf_task_message_send\n"
-"L325f04:\n"
-"stb 7,[r1,2]\n"
-"L325f08:\n"
-"leave_s [r13-r14,blink,pcl]\n"
-".size opencfw_em9305_child_325edc,.-opencfw_em9305_child_325edc\n"
-);
+#include <stdint.h>
+
+/* Native 0x325edc..0x325f0a: send a 4-byte WSF message {id, 7, value} to the
+ * handler at 0x805b18; id is byte +16 of the record, or 0xff without one.
+ * Returns 0 when no message buffer is available. */
+extern uintptr_t opencfw_em9305_wsf_event_allocate(uint32_t);
+extern uint32_t opencfw_em9305_wsf_task_message_send(uint32_t,uintptr_t);
+
+uint32_t opencfw_em9305_child_325edc(uintptr_t record, uint32_t value)
+{
+    uintptr_t message = opencfw_em9305_wsf_event_allocate(4u);
+    if (message == 0u) return 0u;
+    uint32_t id = record != 0u ? *(volatile uint8_t *)(record + 16u) : 0xffu;
+    uint32_t handler = *(volatile uint8_t *)(uintptr_t)0x805b18u;
+    *(volatile uint8_t *)(message + 3u) = (uint8_t)value;
+    *(volatile uint16_t *)message = (uint16_t)id;
+    *(volatile uint8_t *)(message + 2u) = 7u;
+    return opencfw_em9305_wsf_task_message_send(handler, message);
+}

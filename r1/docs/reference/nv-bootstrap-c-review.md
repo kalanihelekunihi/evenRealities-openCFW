@@ -1,0 +1,19 @@
+# C eight-slot NV store bootstrap
+
+`r1_nv_store_bootstrap_73220` now restores cached NV classes in C, closing the remaining lower import of the new NV initializer. REA authenticates the 712-byte code/literal/string window against the official application. The complete 440-byte native instruction body executes in the direct fixture.
+
+The routine logs restore startup, opens the live port in mode `r`, and returns six on open failure. It allocates 256 bytes; allocation failure logs and returns one without closing, matching stock. It reads eight slots at offsets `slot << 8`, skipping nonzero read statuses. Each successful read searches the seven existing live class handles for matching hash and key, checks payload CRC, copies the configured payload plus 24-byte header and replaces flag bits 2..15 with the slot index while preserving bits 0..1. Later slots may overwrite earlier cached values. Logging modes, handle owners, port callbacks and logged flag indices are read at the stock observation points. Normal completion closes, frees and returns zero.
+
+The payload CRC does not protect the stored size header. The C routine deliberately skips a matching record if its size differs from the configured class size or that configured size exceeds 231. This keeps corrupted headers from changing a cached class's extent and causing later CRC/copy overreads. These malformed-input cases are an intentional change, not a claim of stock equivalence. Rejected records leave the cache intact; scanning and cleanup continue.
+
+**10,080 stock/C comparisons** pass for compatible records. Cases include open/allocation errors, all logging modes and changing modes, read failures, hash collisions with different names, bad CRC, payload sizes zero through 231, duplicate-class updates, live port/handle replacements and logger changes to flags. They execute actual CRC, string comparison and memory movement. Return statuses, full service/log arguments, cached bytes and port/handle state agree. Stack restoration, saved integer/FP registers, masks and caller/record/class-buffer guards are checked.
+
+**756 additional comparisons** execute the complete C NV initializer and bootstrap chain: actual port binding, class hash registration, port record, open/control/close callbacks, restore matching and copy. Storage initialization and record reads remain modeled. The port's previously argumentless slot-eight callback now has the correct `const char *mode` type; its concrete implementation ignores that argument and its instruction bytes remain unchanged. The initializer explicitly ignores the bootstrap's typed status result.
+
+**22 separate malformed-header or invalid-class-size cases** verify rejection without cached-class changes or guard damage. Seven compiled defects are rejected: wrong open mode, omitted last slot, inverted CRC/key admission, wrong slot index, missing close and missing size-match guard. All model callbacks return through real Thumb instructions; C execution cannot enter stock code.
+
+The normal build compiles **858 units**, completes both relocatable compositions and reports no duplicate strong symbols. All **847 prior nongenerated objects** remain identical, including the corrected port and initializer interfaces. Both bootstrap probe objects match the normal build. The manifest adds one source unit, R1 source validation passes and source-plan selections remain unchanged. No mutable persistent state is added.
+
+Application imports fall from 65 to **64**, with no added imports; bootloader linker imports remain **22**. Private stack aliases, arbitrary provider overruns, incidental caller registers, APSR, concurrency/faults, physical flash operations, final application linking and boot remain unverified.
+
+[Machine receipt](nv-bootstrap-c-review.json) binds sources, runtime providers, REA evidence, normal build reports and ignored fixtures under `build/goal-r1-nv-bootstrap-c/`.

@@ -49,9 +49,8 @@ uint32_t audio_file_read(void *buffer,uint32_t size,uint32_t count,void *file) {
     int32_t n=audio_file_lfs_read(context(file),(uint8_t *)file+4u,buffer,bytes);
     (void)audio_file_mutex_release(audio_file_api_mutex);
     if(n<0) return 0u;
-    uint32_t result;
-    __asm volatile("udiv %0, %1, %2" : "=r"(result) : "r"((uint32_t)n),"r"(size));
-    return result;
+    /* UDIV: a zero size gives 0 (DIV_0_TRP is never set). */
+    return size!=0u ? (uint32_t)n/size : 0u;
 }
 /* Stock 0x474814 (file_seek) */
 int32_t audio_file_seek(void *file,int32_t offset,uint32_t whence) {
@@ -74,5 +73,9 @@ int32_t audio_file_tell(void *file) {
 #include <stdint.h>
 extern void *codec_allocate(uint32_t);
 extern void audio_file_heap_free(void *);
-void *file_heap_allocate(uint32_t bytes) { return codec_allocate(bytes); }
-void file_heap_free(void *buffer) { audio_file_heap_free(buffer); }
+/* file_heap_allocate / file_heap_free are aliases of codec_allocate
+ * (drivers/codec-host/codec-heap/codec-heap-allocate.c) and audio_file_heap_free
+ * (storage/file/file-heap-free.c). */
+/* Single implementation of stock file_open 0x474550. */
+__typeof__(audio_file_open) audio_tracepoint_file_open_474550
+    __attribute__((alias("audio_file_open")));

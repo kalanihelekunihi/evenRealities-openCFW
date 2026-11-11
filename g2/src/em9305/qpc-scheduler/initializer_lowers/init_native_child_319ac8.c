@@ -1,504 +1,177 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_319ac8\n"
-".type opencfw_em9305_child_319ac8,@function\n"
-"opencfw_em9305_child_319ac8:\n"
-"L319ac8:\n"
-"enter_s [r13-r18,fp,blink]\n"
-"L319aca:\n"
-"sub_s sp,sp,0x60\n"
-"L319acc:\n"
-"mov_s r15,r0\n"
-"L319ace:\n"
-"ldb r0,[r0,0x8d4]\n"
-"L319ad6:\n"
-"mov_s r18,r15\n"
-"L319ad8:\n"
-"add r18,r18,808\n"
-"L319adc:\n"
-"breq_s r0,0,L319b48\n"
-"L319ade:\n"
-"add r16,r15,0x908\n"
-"L319ae6:\n"
-"ld r17,[r16,104]\n"
-"L319aea:\n"
-"breq.d.nt r17,0,L319b72\n"
-"L319aee:\n"
-"add2 r14,r16,0x21\n"
-"L319af2:\n"
-"add_s r0,sp,0x18\n"
-"L319af4:\n"
-"bl.d opencfw_em9305_child_32db0c\n"
-"L319af8:\n"
-"mov_s r1,r17\n"
-"L319afa:\n"
-"add r1,r17,r0\n"
-"L319afe:\n"
-"bl.d opencfw_em9305_init_transition_packet_copy_32dd54\n"
-"L319b02:\n"
-"add_s r0,sp,0x2c\n"
-"L319b04:\n"
-"add r1,r15,0x954\n"
-"L319b0c:\n"
-"mov_s r2,1\n"
-"L319b0e:\n"
-"mov_s r0,r17\n"
-"L319b10:\n"
-"bl.d opencfw_em9305_radio_packet_check_303404\n"
-"L319b14:\n"
-"mov_s r3,r14\n"
-"L319b16:\n"
-"ldb r1,[sp,27]\n"
-"L319b1a:\n"
-"breq_s r1,0,L319b42\n"
-"L319b1c:\n"
-"ld_s r2,[sp,0x38]\n"
-"L319b1e:\n"
-"and r1,r2,0xc000\n"
-"L319b26:\n"
-"bxor.f 0,r1,0xe\n"
-"L319b2a:\n"
-"bne_s L319b42\n"
-"L319b2c:\n"
-"mov_s r1,0x805be4\n"
-"L319b32:\n"
-"ld r3,[r1,0x4]\n"
-"L319b34:\n"
-"ld_s r12,[r1,0]\n"
-"L319b36:\n"
-"or.f 0,r12,r3\n"
-"L319b3a:\n"
-"bne_s L319b42\n"
-"L319b3c:\n"
-"ld_s r3,[sp,0x34]\n"
-"L319b3e:\n"
-"st_s r2,[r1,0x4]\n"
-"L319b40:\n"
-"st_s r3,[r1,0]\n"
-"L319b42:\n"
-"cmp_s r0,0\n"
-"L319b44:\n"
-"bne_s L319c48\n"
-"L319b46:\n"
-"b_s L319cde\n"
-"L319b48:\n"
-"bl.d opencfw_em9305_wsf_timer_stop\n"
-"L319b4c:\n"
-"mov_s r0,r18\n"
-"L319b4e:\n"
-"bl.d opencfw_em9305_child_319ea0\n"
-"L319b52:\n"
-"mov_s r0,r15\n"
-"L319b54:\n"
-"bl.d opencfw_em9305_common_release_304588\n"
-"L319b58:\n"
-"mov_s r0,1\n"
-"L319b5a:\n"
-"ldb r0,[r18,16]\n"
-"L319b5e:\n"
-"breq.d.nt r0,0,L319bfe\n"
-"L319b62:\n"
-"ldb r3,[r18,17]\n"
-"L319b66:\n"
-"brlo.d.nt r3,r0,L319bfe\n"
-"L319b6a:\n"
-"mov_s r1,0x43\n"
-"L319b6c:\n"
-"stb r1,[r18,18]\n"
-"L319b70:\n"
-"b_s L319c02\n"
-"L319b72:\n"
-"ld r17,[r15,0xa48]\n"
-"L319b7a:\n"
-"breq.d.nt r17,0,L319c46\n"
-"L319b7e:\n"
-"add_s r0,sp,0x58\n"
-"L319b80:\n"
-"bl.d opencfw_em9305_child_32db0c\n"
-"L319b84:\n"
-"mov_s r1,r17\n"
-"L319b86:\n"
-"add r1,r17,r0\n"
-"L319b8a:\n"
-"bl.d opencfw_em9305_init_transition_packet_copy_32dd54\n"
-"L319b8e:\n"
-"add_s r0,sp,0x2c\n"
-"L319b90:\n"
-"ldb r0,[sp,91]\n"
-"L319b94:\n"
-"ld r8,[sp,48]\n"
-"L319b98:\n"
-"ld r11,[sp,44]\n"
-"L319b9c:\n"
-"ld_s r1,[sp,0x38]\n"
-"L319b9e:\n"
-"ld_s r12,[sp,0x34]\n"
-"L319ba0:\n"
-"ldb_s r3,[sp,0x58]\n"
-"L319ba2:\n"
-"ldb r2,[sp,90]\n"
-"L319ba6:\n"
-"stb 3,[sp,41]\n"
-"L319baa:\n"
-"st r8,[sp,28]\n"
-"L319bae:\n"
-"st r11,[sp,24]\n"
-"L319bb2:\n"
-"st_s r1,[sp,0x24]\n"
-"L319bb4:\n"
-"st_s r12,[sp,0x20]\n"
-"L319bb6:\n"
-"stb_s r3,[sp,0x28]\n"
-"L319bb8:\n"
-"stb r2,[sp,42]\n"
-"L319bbc:\n"
-"stb r0,[sp,43]\n"
-"L319bc0:\n"
-"breq_s r0,0,L319be4\n"
-"L319bc2:\n"
-"and r0,r1,0xc000\n"
-"L319bca:\n"
-"bxor.f 0,r0,0xe\n"
-"L319bce:\n"
-"bne_s L319be4\n"
-"L319bd0:\n"
-"mov_s r0,0x805be4\n"
-"L319bd6:\n"
-"ld r3,[r0,0x4]\n"
-"L319bd8:\n"
-"ld r2,[r0,0]\n"
-"L319bda:\n"
-"or.f 0,r2,r3\n"
-"L319bde:\n"
-"bne_s L319be4\n"
-"L319be0:\n"
-"st_s r12,[r0,0]\n"
-"L319be2:\n"
-"st_s r1,[r0,0x4]\n"
-"L319be4:\n"
-"add r1,r15,0x954\n"
-"L319bec:\n"
-"add r3,r15,0xa8c\n"
-"L319bf4:\n"
-"add_s r0,sp,0x18\n"
-"L319bf6:\n"
-"bl.d opencfw_em9305_child_30301c\n"
-"L319bfa:\n"
-"mov_s r2,1\n"
-"L319bfc:\n"
-"b_s L319c48\n"
-"L319bfe:\n"
-"ldb r1,[r18,18]\n"
-"L319c02:\n"
-"ldb_s r0,[r15,0x1]\n"
-"L319c04:\n"
-"bl.d opencfw_em9305_dispatch_child_30e774\n"
-"L319c08:\n"
-"mov_s r2,0\n"
-"L319c0a:\n"
-"ldh_s r0,[r15,0x20]\n"
-"L319c0c:\n"
-"and r0,r0,0x1d\n"
-"L319c10:\n"
-"brne.d.nt r0,0x1d,L319c44\n"
-"L319c14:\n"
-"mov_s r2,0\n"
-"L319c16:\n"
-"mov_s r1,0xffff\n"
-"L319c1c:\n"
-"ld r5,[r15,52]\n"
-"L319c20:\n"
-"ld r4,[r15,48]\n"
-"L319c24:\n"
-"ldb r3,[r15,58]\n"
-"L319c28:\n"
-"ldb_s r0,[r15,0x1]\n"
-"L319c2a:\n"
-"st_s r1,[sp,0x14]\n"
-"L319c2c:\n"
-"mov_s r1,0xff\n"
-"L319c2e:\n"
-"st_s r1,[sp,0x10]\n"
-"L319c30:\n"
-"mov_s r1,0x3c\n"
-"L319c32:\n"
-"st_s r1,[sp,0x8]\n"
-"L319c34:\n"
-"mov_s r1,1\n"
-"L319c36:\n"
-"mov_s r6,0\n"
-"L319c38:\n"
-"mov_s r7,0\n"
-"L319c3a:\n"
-"st_s r2,[sp,0xc]\n"
-"L319c3c:\n"
-"st_s r2,[sp,0x4]\n"
-"L319c3e:\n"
-"bl.d opencfw_em9305_mode_event_323028\n"
-"L319c42:\n"
-"st_s r2,[sp,0]\n"
-"L319c44:\n"
-"leave_s [r13-r18,fp,blink,pcl]\n"
-"L319c46:\n"
-"mov_s r17,0\n"
-"L319c48:\n"
-"bl.d opencfw_em9305_wsf_event_allocate\n"
-"L319c4c:\n"
-"mov_s r0,0x58\n"
-"L319c4e:\n"
-"breq.d.nt r0,0,L319cde\n"
-"L319c52:\n"
-"mov_s r13,r0\n"
-"L319c54:\n"
-"stb 0,[r13,2]\n"
-"L319c58:\n"
-"ldb_s r0,[r15,0x1]\n"
-"L319c5a:\n"
-"mov_s r1,r17\n"
-"L319c5c:\n"
-"sth_s r0,[r13,0]\n"
-"L319c5e:\n"
-"bl.d opencfw_em9305_child_32db0c\n"
-"L319c62:\n"
-"add_s r0,sp,0x2c\n"
-"L319c64:\n"
-"add r1,r17,r0\n"
-"L319c68:\n"
-"bl.d opencfw_em9305_init_transition_packet_copy_32dd54\n"
-"L319c6c:\n"
-"add_s r0,r13,0x4\n"
-"L319c6e:\n"
-"ld r0,[r16,104]\n"
-"L319c72:\n"
-"breq.nt r0,0,L319d02\n"
-"L319c76:\n"
-"ldb r11,[r16,151]\n"
-"L319c7a:\n"
-"stb r11,[r13,52]\n"
-"L319c7e:\n"
-"ldb r12,[r16,151]\n"
-"L319c82:\n"
-"ldb r0,[r16,150]\n"
-"L319c86:\n"
-"brne.nt r12,r0,L319c9e\n"
-"L319c8a:\n"
-"ld r3,[r14,0x4]\n"
-"L319c8c:\n"
-"ld r0,[r14,0xc]\n"
-"L319c8e:\n"
-"ld r2,[r14,0]\n"
-"L319c90:\n"
-"ld r1,[r14,0x8]\n"
-"L319c92:\n"
-"xor_s r3,r3,r0\n"
-"L319c94:\n"
-"xor_s r2,r2,r1\n"
-"L319c96:\n"
-"or.f 0,r2,r3\n"
-"L319c9a:\n"
-"mov_s r2,r12\n"
-"L319c9c:\n"
-"beq_s L319cb2\n"
-"L319c9e:\n"
-"bset r11,r11,0x1\n"
-"L319ca2:\n"
-"stb r11,[r13,52]\n"
-"L319ca6:\n"
-"ld r0,[r14,0xc]\n"
-"L319ca8:\n"
-"ld r1,[r14,0x8]\n"
-"L319caa:\n"
-"ldb r12,[r16,150]\n"
-"L319cae:\n"
-"ldb r2,[r16,151]\n"
-"L319cb2:\n"
-"st 0,[r13,72]\n"
-"L319cb6:\n"
-"st 0,[r13,68]\n"
-"L319cba:\n"
-"st_s r1,[r13,0x3c]\n"
-"L319cbc:\n"
-"st_s r0,[r13,0x40]\n"
-"L319cbe:\n"
-"ld r0,[r14,0x4]\n"
-"L319cc0:\n"
-"brne.d.nt r2,r12,L319cd4\n"
-"L319cc4:\n"
-"ld r1,[r14,0]\n"
-"L319cc6:\n"
-"ld r3,[r14,0xc]\n"
-"L319cc8:\n"
-"ld r2,[r14,0x8]\n"
-"L319cca:\n"
-"xor_s r3,r3,r0\n"
-"L319ccc:\n"
-"xor_s r2,r2,r1\n"
-"L319cce:\n"
-"or.f 0,r2,r3\n"
-"L319cd2:\n"
-"beq_s L319cd8\n"
-"L319cd4:\n"
-"st_s r1,[r13,0x44]\n"
-"L319cd6:\n"
-"st_s r0,[r13,0x48]\n"
-"L319cd8:\n"
-"stb 1,[r13,54]\n"
-"L319cdc:\n"
-"b_s L319d94\n"
-"L319cde:\n"
-"mov r0,776\n"
-"L319ce2:\n"
-"sth r0,[r17,-2]\n"
-"L319ce6:\n"
-"ldb_s r0,[r15,0x1]\n"
-"L319ce8:\n"
-"sth.aw r0,[r17,-4]\n"
-"L319cec:\n"
-"ldb r0,[0x805b18]\n"
-"L319cf4:\n"
-"bl.d opencfw_em9305_wsf_task_message_send\n"
-"L319cf8:\n"
-"mov_s r1,r17\n"
-"L319cfa:\n"
-"bl.d opencfw_em9305_common_release_304588\n"
-"L319cfe:\n"
-"mov_s r0,1\n"
-"L319d00:\n"
-"leave_s [r13-r18,fp,blink,pcl]\n"
-"L319d02:\n"
-"add r0,r15,0xa9f\n"
-"L319d0a:\n"
-"ldb_s r14,[r0,0]\n"
-"L319d0c:\n"
-"stb r14,[r13,52]\n"
-"L319d10:\n"
-"ldb_s r3,[r0,0]\n"
-"L319d12:\n"
-"ldb r0,[r0,-1]\n"
-"L319d16:\n"
-"cmp_s r3,r0\n"
-"L319d18:\n"
-"add r0,r15,0xa98\n"
-"L319d20:\n"
-"bne_s L319d3e\n"
-"L319d22:\n"
-"ld r1,[r0,0]\n"
-"L319d24:\n"
-"ld r12,[r0,-8]\n"
-"L319d28:\n"
-"ld r2,[r0,-4]\n"
-"L319d2c:\n"
-"ld r11,[r0,-12]\n"
-"L319d30:\n"
-"xor_s r12,r12,r1\n"
-"L319d32:\n"
-"xor r11,r11,r2\n"
-"L319d36:\n"
-"or.f 0,r11,r12\n"
-"L319d3a:\n"
-"mov_s r12,r3\n"
-"L319d3c:\n"
-"beq_s L319d4e\n"
-"L319d3e:\n"
-"bset_s r14,r14,0x1\n"
-"L319d40:\n"
-"stb r14,[r13,52]\n"
-"L319d44:\n"
-"ld r1,[r0,0]\n"
-"L319d46:\n"
-"ld r2,[r0,-4]\n"
-"L319d4a:\n"
-"ldb_s r3,[r0,0x6]\n"
-"L319d4c:\n"
-"ldb_s r12,[r0,0x7]\n"
-"L319d4e:\n"
-"st 0,[r13,72]\n"
-"L319d52:\n"
-"st 0,[r13,68]\n"
-"L319d56:\n"
-"st_s r2,[r13,0x3c]\n"
-"L319d58:\n"
-"brne.d.nt r12,r3,L319d78\n"
-"L319d5c:\n"
-"st_s r1,[r13,0x40]\n"
-"L319d5e:\n"
-"ld r3,[r0,0]\n"
-"L319d60:\n"
-"ld r2,[r0,-8]\n"
-"L319d64:\n"
-"ld r1,[r0,-4]\n"
-"L319d68:\n"
-"ld r0,[r0,-12]\n"
-"L319d6c:\n"
-"xor_s r3,r3,r2\n"
-"L319d6e:\n"
-"xor_s r1,r1,r0\n"
-"L319d70:\n"
-"or.f 0,r1,r3\n"
-"L319d74:\n"
-"bne_s L319d84\n"
-"L319d76:\n"
-"b_s L319d88\n"
-"L319d78:\n"
-"add r0,r15,0xa8c\n"
-"L319d80:\n"
-"ld r2,[r0,0x4]\n"
-"L319d82:\n"
-"ld r0,[r0,0]\n"
-"L319d84:\n"
-"st_s r0,[r13,0x44]\n"
-"L319d86:\n"
-"st_s r2,[r13,0x48]\n"
-"L319d88:\n"
-"ldb r0,[r15,0x9e1]\n"
-"L319d90:\n"
-"stb r0,[r13,54]\n"
-"L319d94:\n"
-"stb 1,[r13,55]\n"
-"L319d98:\n"
-"sth -1,[r13,86]\n"
-"L319d9c:\n"
-"stb -1,[r13,84]\n"
-"L319da0:\n"
-"mov_s r0,0x805be4\n"
-"L319da6:\n"
-"ld r1,[r0,0x4]\n"
-"L319da8:\n"
-"st_s r1,[r13,0x50]\n"
-"L319daa:\n"
-"ld r0,[r0,0]\n"
-"L319dac:\n"
-"add r1,r15,0x8d0\n"
-"L319db4:\n"
-"st_s r0,[r13,0x4c]\n"
-"L319db6:\n"
-"ld r0,[r1,0]\n"
-"L319db8:\n"
-"st_s r0,[r13,0x30]\n"
-"L319dba:\n"
-"ldb_s r0,[r1,0x5]\n"
-"L319dbc:\n"
-"stb r0,[r13,53]\n"
-"L319dc0:\n"
-"ldb r0,[r18,17]\n"
-"L319dc4:\n"
-"stb r0,[r13,56]\n"
-"L319dc8:\n"
-"ldb r1,[r1,-4]\n"
-"L319dcc:\n"
-"ldb r0,[0x805b18]\n"
-"L319dd4:\n"
-"stb r1,[r13,57]\n"
-"L319dd8:\n"
-"bl.d opencfw_em9305_wsf_task_message_send\n"
-"L319ddc:\n"
-"mov_s r1,r13\n"
-"L319dde:\n"
-"bl.d opencfw_em9305_child_319ea0\n"
-"L319de2:\n"
-"mov_s r0,r15\n"
-"L319de4:\n"
-"leave_s [r13-r18,fp,blink,pcl]\n"
-".size opencfw_em9305_child_319ac8,.-opencfw_em9305_child_319ac8\n"
-);
+#include <stdint.h>
+
+/* Native 0x319ac8..0x319de6: finish an extended-initiation connect attempt
+ * for connection record conn. When the initiator is no longer active
+ * (+0x8d4 == 0) the timer (+808) is stopped, the record released, the
+ * failure status (0x43 once the retry limit +825 reaches +824) reported
+ * through 30e774 and, with all of event mask bits 0x1d (+0x20), a
+ * connection-complete event (323028) sent. Otherwise the received
+ * AUX_CONNECT_RSP (+0x970) or, failing that, the stored AUX_CONNECT_REQ
+ * (+0xa48) is unpacked; a resolvable TargetA with RxAdd set seeds the
+ * local RPA (0x805be4) when it is still empty. A rejected response
+ * (303404) sends message 776 for the PDU and releases the record.
+ * Otherwise a 0x58-byte enhanced-connection-complete message is filled
+ * (PDU copy at +4, peer identity/type +52/+60/+68, PHYs +53/+54, local
+ * RPA +76, interval +48, latency +56, SCA +57) and sent to the LL task
+ * (0x805b18), and the record is closed (319ea0). */
+extern uint32_t opencfw_em9305_child_32db0c(uintptr_t out,uintptr_t in);
+extern uint32_t opencfw_em9305_init_transition_packet_copy_32dd54(uintptr_t out,
+                                                                 uintptr_t in);
+extern uint32_t opencfw_em9305_radio_packet_check_303404(uintptr_t pdu,
+    uintptr_t context,uint32_t flags,uintptr_t target);
+extern uint32_t opencfw_em9305_child_30301c(uintptr_t request,uintptr_t context,
+                                            uint32_t flags,uintptr_t target);
+extern uint32_t opencfw_em9305_wsf_timer_stop(uintptr_t timer);
+extern void opencfw_em9305_child_319ea0(uintptr_t record);
+extern uint32_t opencfw_em9305_common_release_304588(uint32_t resource);
+extern uint32_t opencfw_em9305_dispatch_child_30e774(uint32_t handle,
+    uint32_t status,uint32_t zero);
+extern uint32_t opencfw_em9305_mode_event_323028(uint32_t handle,uint32_t role,
+    uint32_t status,uint32_t type,uint32_t low,uint32_t high,uint32_t a6,
+    uint32_t a7,uint32_t a8,uint32_t a9,uint32_t a10,uint32_t a11,uint32_t a12,
+    uint32_t a13);
+extern uintptr_t opencfw_em9305_wsf_event_allocate(uint32_t length);
+extern uint32_t opencfw_em9305_wsf_task_message_send(uint32_t task,
+                                                     uintptr_t message);
+
+struct opencfw_em9305_request_319ac8 {
+    uint32_t adv_low,adv_high,target_low,target_high;
+    uint8_t kind,flags,adv_type,target_type;
+};
+
+static inline uint32_t r8(uintptr_t a){return *(volatile uint8_t *)a;}
+static inline uint32_t r16(uintptr_t a){return *(volatile uint16_t *)a;}
+static inline uint32_t r32(uintptr_t a){return *(volatile uint32_t *)a;}
+static inline void w8(uintptr_t a,uint32_t v){*(volatile uint8_t *)a=(uint8_t)v;}
+static inline void w16(uintptr_t a,uint32_t v){*(volatile uint16_t *)a=(uint16_t)v;}
+static inline void w32(uintptr_t a,uint32_t v){*(volatile uint32_t *)a=v;}
+
+/* Seed the local resolvable address (0x805be4/0x805be8) from a TargetA
+ * with RxAdd set when it is resolvable and none is stored yet. */
+static int rpa_empty(void)
+{
+    return (r32(0x805be8u)|r32(0x805be4u))==0u;
+}
+
+/* Peer identity from the address block at b (+0/+4 peer, +8/+12 identity,
+ * +18/+19 types): type +52 (bit 1 when the peer is not its identity),
+ * identity +60/+64, and the peer RPA +68/+72 (zero when not distinct). */
+static void peer_identity(uintptr_t message,uintptr_t b)
+{
+    uint32_t type=r8(b+19u);
+    w8(message+52u,type);
+    uint32_t distinct=r8(b+19u)!=r8(b+18u)||r32(b)!=r32(b+8u)||
+                      r32(b+4u)!=r32(b+12u);
+    if(distinct)w8(message+52u,type|2u);
+    w32(message+72u,0u);
+    w32(message+68u,0u);
+    w32(message+60u,r32(b+8u));
+    w32(message+64u,r32(b+12u));
+    if(r8(b+19u)!=r8(b+18u)||r32(b)!=r32(b+8u)||r32(b+4u)!=r32(b+12u)){
+        w32(message+68u,r32(b));
+        w32(message+72u,r32(b+4u));
+    }
+}
+
+void opencfw_em9305_child_319ac8(uintptr_t conn)
+{
+    uint8_t header[5];
+    uint32_t packet[11];
+    struct opencfw_em9305_request_319ac8 request;
+    uintptr_t timer=conn+808u;
+    uintptr_t aux=conn+0x908u;
+    uintptr_t peer=aux+132u;
+    uintptr_t pdu;
+    if(r8(conn+0x8d4u)==0u){
+        uint32_t status;
+        (void)opencfw_em9305_wsf_timer_stop(timer);
+        opencfw_em9305_child_319ea0(conn);
+        (void)opencfw_em9305_common_release_304588(1u);
+        uint32_t limit=r8(timer+16u);
+        if(limit!=0u&&r8(timer+17u)>=limit){
+            w8(timer+18u,0x43u);
+            status=0x43u;
+        }else{
+            status=r8(timer+18u);
+        }
+        (void)opencfw_em9305_dispatch_child_30e774(r8(conn+1u),status,0u);
+        if((r16(conn+0x20u)&0x1du)!=0x1du)return;
+        (void)opencfw_em9305_mode_event_323028(r8(conn+1u),1u,0u,r8(conn+58u),
+            r32(conn+48u),r32(conn+52u),0u,0u,0u,0u,0x3cu,0u,0xffu,0xffffu);
+        return;
+    }
+    pdu=r32(aux+104u);
+    if(pdu!=0u){
+        uint32_t used=opencfw_em9305_child_32db0c((uintptr_t)header,pdu);
+        (void)opencfw_em9305_init_transition_packet_copy_32dd54((uintptr_t)packet,
+                                                                pdu+used);
+        uint32_t accepted=opencfw_em9305_radio_packet_check_303404(pdu,
+            conn+0x954u,1u,peer);
+        if(header[3]!=0u){
+            uint32_t high=packet[3];
+            if((high&0xc000u)==0x4000u&&rpa_empty()){
+                w32(0x805be8u,high);
+                w32(0x805be4u,packet[2]);
+            }
+        }
+        if(accepted==0u)goto reject;
+    }else{
+        pdu=r32(conn+0xa48u);
+        if(pdu!=0u){
+            uint32_t used=opencfw_em9305_child_32db0c((uintptr_t)header,pdu);
+            (void)opencfw_em9305_init_transition_packet_copy_32dd54(
+                (uintptr_t)packet,pdu+used);
+            uint32_t target_type=header[3];
+            uint32_t high=packet[3];
+            uint32_t low=packet[2];
+            request.adv_low=packet[0];
+            request.adv_high=packet[1];
+            request.target_low=low;
+            request.target_high=high;
+            request.kind=header[0];
+            request.flags=3u;
+            request.adv_type=header[2];
+            request.target_type=(uint8_t)target_type;
+            if(target_type!=0u&&(high&0xc000u)==0x4000u&&rpa_empty()){
+                w32(0x805be4u,low);
+                w32(0x805be8u,high);
+            }
+            (void)opencfw_em9305_child_30301c((uintptr_t)&request,conn+0x954u,1u,
+                                              conn+0xa8cu);
+        }
+    }
+    {
+        uintptr_t message=opencfw_em9305_wsf_event_allocate(0x58u);
+        if(message==0u)goto reject;
+        w8(message+2u,0u);
+        w16(message,r8(conn+1u));
+        uint32_t used=opencfw_em9305_child_32db0c((uintptr_t)packet,pdu);
+        (void)opencfw_em9305_init_transition_packet_copy_32dd54(message+4u,
+                                                                pdu+used);
+        if(r32(aux+104u)!=0u){
+            peer_identity(message,peer);
+            w8(message+54u,1u);
+        }else{
+            peer_identity(message,conn+0xa8cu);
+            w8(message+54u,r8(conn+0x9e1u));
+        }
+        w8(message+55u,1u);
+        w16(message+86u,0xffffu);
+        w8(message+84u,0xffu);
+        w32(message+80u,r32(0x805be8u));
+        w32(message+76u,r32(0x805be4u));
+        uintptr_t params=conn+0x8d0u;
+        w32(message+48u,r32(params));
+        w8(message+53u,r8(params+5u));
+        w8(message+56u,r8(timer+17u));
+        w8(message+57u,r8(params-4u));
+        (void)opencfw_em9305_wsf_task_message_send(r8(0x805b18u),message);
+        opencfw_em9305_child_319ea0(conn);
+        return;
+    }
+reject:
+    w16(pdu-2u,776u);
+    w16(pdu-4u,r8(conn+1u));
+    (void)opencfw_em9305_wsf_task_message_send(r8(0x805b18u),pdu-4u);
+    (void)opencfw_em9305_common_release_304588(1u);
+}

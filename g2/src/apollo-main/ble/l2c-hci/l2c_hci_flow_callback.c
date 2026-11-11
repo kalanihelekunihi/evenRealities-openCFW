@@ -24,6 +24,4 @@ uint32_t audio_ble_l2c_hci_flow_impl(uint32_t handle,uint32_t count,
     }
     return event;
 }
-__attribute__((naked)) uint32_t audio_ble_l2c_hci_flow_530aa4(void) {
-    __asm__ volatile("b.w audio_ble_l2c_hci_flow_impl");
-}
+uint32_t audio_ble_l2c_hci_flow_530aa4(void) __attribute__((alias("audio_ble_l2c_hci_flow_impl")));

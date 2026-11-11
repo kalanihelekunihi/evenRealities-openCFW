@@ -74,7 +74,7 @@ static const char fn_buffer_valid[] = "is_stock_format_buffer_valid"; /* ROM 0x7
 static const char buffer_invalid[] = "Invalid parameters - buffer=%p, buffer_size=%zu"; /* ROM 0x73b144 */
 static const char buffer_invalid_short[] =
     "[dashboard.stock]Invalid parameters - buffer=%p, buffer_size=%zu"; /* ROM 0x70830c */
-static const char placeholder[] = "-";           /* ROM 0x4ed128 */
+static const char no_value_dash[] = "-"; /* stock "default" label */           /* ROM 0x4ed128 */
 static const char fmt_price[] = "%.2f";          /* ROM 0x78edac */
 static const char fmt_gain[] = "+%.2f%%";        /* ROM 0x78edb4 */
 static const char fmt_change[] = "%.2f%%";       /* ROM 0x78edbc */
@@ -91,9 +91,9 @@ int32_t is_stock_format_buffer_valid_4ece5c(char *buffer, size_t buffer_size)
 /* Returns sizeof("-"). */
 int32_t stock_format_placeholder_4ecec4(char *buffer, size_t buffer_size)
 {
-    (void)audio_settings_copy_text(buffer, placeholder, (uint32_t)buffer_size);
+    (void)audio_settings_copy_text(buffer, no_value_dash, (uint32_t)buffer_size);
     buffer[buffer_size - 1u] = '\0';
-    return (int32_t)sizeof placeholder;
+    return (int32_t)sizeof no_value_dash;
 }
 
 /* A price of exactly 0 means "no quote" and prints "-". */
@@ -182,12 +182,12 @@ static void *create_separator(void *frame, int32_t y)
     audio_lv_object_position_43f09a(line, 0, y);
     audio_uart_page_44127e(line, audio_lv_color_44104c(STOCK_GREY), 0u);
     audio_uart_page_44129e(line, LV_OPA_COVER, 0u);
-    audio_uart_page_44131c(line, 0, 0u);
+    lv_obj_set_style_border_width(line, 0, 0u);
     stock_obj_set_style_pad_all_4e9dd4(line, 0, 0u);
     return line;
 }
 
-/* "No stocks" placeholder: [icon][DEFAULT_1] centred, DEFAULT_2 below it. */
+/* "No stocks" empty-state: [icon][DEFAULT_1] centred, DEFAULT_2 below it. */
 static void create_no_data_view(void)
 {
     g2_lv_point_t line1_size;
@@ -231,7 +231,7 @@ static void create_no_data_view(void)
 }
 
 /* Builds the non-expanded stock widget (three stocks of the current
- * container, or the no-data placeholder) inside dashboard tile tile_index. */
+ * container, or the no-data empty-state) inside dashboard tile tile_index. */
 int32_t StockWidget_MainPage_init_4ec2dc(uint32_t tile_index)
 {
     g2_stock_widget_init_flag_20074e2c = 0u;
@@ -253,7 +253,7 @@ int32_t StockWidget_MainPage_init_4ec2dc(uint32_t tile_index)
     audio_lv_object_position_43f09a(g2_stock_container_frame_20074e3c, FRAME_X, FRAME_Y);
     audio_lv_object_size_call_43f4c0(g2_stock_container_frame_20074e3c, FRAME_W, FRAME_H);
     audio_uart_page_44129e(g2_stock_container_frame_20074e3c, 0u, 0u);
-    audio_uart_page_44131c(g2_stock_container_frame_20074e3c, 0, 0u);
+    lv_obj_set_style_border_width(g2_stock_container_frame_20074e3c, 0, 0u);
     stock_obj_set_style_pad_all_4e9dd4(g2_stock_container_frame_20074e3c, 0, 0u);
     audio_uart_page_44e368(g2_stock_container_frame_20074e3c, LV_SCROLLBAR_MODE_OFF);
 

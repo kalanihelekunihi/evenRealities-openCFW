@@ -1,153 +1,49 @@
-/* Native ECU callback; arithmetic ISA and all error/return paths retained. */
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_ecu_callback_315ff4\n"
-".type opencfw_em9305_ecu_callback_315ff4,@function\n"
-"opencfw_em9305_ecu_callback_315ff4:\n"
-"L315ff4:\n"
-"enter_s [r13-r15,blink]\n"
-"L315ff6:\n"
-"mov_s r12,0x802810\n"
-"L315ffc:\n"
-"ldh_s r15,[r12,0x12]\n"
-"L315ffe:\n"
-"ldh_s r14,[r12,0x10]\n"
-"L316000:\n"
-"ldh_s r13,[r12,0xc]\n"
-"L316002:\n"
-"ldh_s r3,[r12,0x14]\n"
-"L316004:\n"
-"cmp r15,500\n"
-"L316008:\n"
-"mov_s r9,r0\n"
-"L31600a:\n"
-"blo_s L316010\n"
-"L31600c:\n"
-"mov_s r0,0\n"
-"L31600e:\n"
-"b_s L316020\n"
-"L316010:\n"
-"sub_s r0,r13,0x1\n"
-"L316012:\n"
-"mov_s r1,r14\n"
-"L316014:\n"
-"exth_s r0,r0\n"
-"L316016:\n"
-"setlo r1,r1,500\n"
-"L31601a:\n"
-"setlo r0,r0,500\n"
-"L31601e:\n"
-"and_s r0,r0,r1\n"
-"L316020:\n"
-"add_s r1,r14,0x1\n"
-"L316022:\n"
-"mpywhul r11,r1,r13\n"
-"L316026:\n"
-"mpyuw r8,r3,0xa\n"
-"L31602a:\n"
-"cmp r11,501\n"
-"L31602e:\n"
-"blt_s L316034\n"
-"L316030:\n"
-"mov_s r0,0\n"
-"L316032:\n"
-"b_s L31604e\n"
-"L316034:\n"
-"add r1,r3,0xfffff37f\n"
-"L31603c:\n"
-"exth_s r1,r1\n"
-"L31603e:\n"
-"setlo r2,r15,r13\n"
-"L316042:\n"
-"setlo r1,0xf388,r1\n"
-"L31604a:\n"
-"and_s r1,r1,r2\n"
-"L31604c:\n"
-"and_s r0,r0,r1\n"
-"L31604e:\n"
-"ldh.as r1,[r9,133]\n"
-"L316052:\n"
-"lsr r2,r1,0x2\n"
-"L316056:\n"
-"bmsk.f 0,r1,0x1\n"
-"L31605a:\n"
-"add_s r1,r1,r2\n"
-"L31605c:\n"
-"add.ne r1,r1,0x1\n"
-"L316060:\n"
-"mpy r1,r11,r1\n"
-"L316064:\n"
-"asl_s r1,r1\n"
-"L316066:\n"
-"brlo.nt r8,r1,L3160bc\n"
-"L31606a:\n"
-"breq_s r0,0,L3160bc\n"
-"L31606c:\n"
-"mov_s r1,r9\n"
-"L31606e:\n"
-"add r1,r1,846\n"
-"L316072:\n"
-"ldh_s r2,[r1,0]\n"
-"L316074:\n"
-"mov_s r0,r9\n"
-"L316076:\n"
-"mov_s r11,1\n"
-"L316078:\n"
-"brne.d.nt r13,r2,L316098\n"
-"L31607c:\n"
-"add r0,r0,850\n"
-"L316080:\n"
-"ldh_s r2,[r0,0]\n"
-"L316082:\n"
-"brne.nt r15,r2,L316098\n"
-"L316086:\n"
-"ldh.as r2,[r9,130]\n"
-"L31608a:\n"
-"brne.nt r14,r2,L316098\n"
-"L31608e:\n"
-"ldh.as r2,[r9,191]\n"
-"L316092:\n"
-"brne.nt r8,r2,L316098\n"
-"L316096:\n"
-"mov_s r11,0\n"
-"L316098:\n"
-"ldh_s r2,[r12,0xe]\n"
-"L31609a:\n"
-"sth_s r13,[r1,0]\n"
-"L31609c:\n"
-"sth.as r14,[r9,130]\n"
-"L3160a0:\n"
-"sth.as r8,[r9,191]\n"
-"L3160a4:\n"
-"sth_s r15,[r0,0]\n"
-"L3160a6:\n"
-"sth_s r3,[r0,0x2]\n"
-"L3160a8:\n"
-"breq.d.nt r11,0,L3160ba\n"
-"L3160ac:\n"
-"sth r2,[r0,-2]\n"
-"L3160b0:\n"
-"ld.as r0,[r9,159]\n"
-"L3160b4:\n"
-"bset_s r0,r0,0x1d\n"
-"L3160b6:\n"
-"st.as r0,[r9,159]\n"
-"L3160ba:\n"
-"leave_s [r13-r15,blink,pcl]\n"
-"L3160bc:\n"
-"mov_s r0,0x805a86\n"
-"L3160c2:\n"
-"ldb_s r0,[r0,0]\n"
-"L3160c4:\n"
-"bbit0.d.t r0,0x5,L3160ba\n"
-"L3160c8:\n"
-"mov_s r1,0x73\n"
-"L3160ca:\n"
-"bl.d opencfw_em9305_receive_terminate_325c08\n"
-"L3160ce:\n"
-"mov_s r0,r9\n"
-"L3160d0:\n"
-"leave_s [r13-r15,blink,pcl]\n"
-".size opencfw_em9305_ecu_callback_315ff4,.-opencfw_em9305_ecu_callback_315ff4\n"
-);
+#include <stdint.h>
+
+/* Native 0x315ff4..0x3160d2: validate a connection update request held in
+ * the shared report (0x802810: interval +0xc, instant +0xe, latency +0x10,
+ * window +0x12, timeout +0x14). The interval must be 1..500 with latency
+ * below 500 and window below the interval, (latency+1)*interval must stay
+ * at or below 500, the timeout must be 10..3200 and at least twice the
+ * span scaled by the current interval (+266) * 1.25. Invalid requests end
+ * the link with reason 0x73 when bit 5 of 0x805a86 is set. Valid ones are
+ * stored (+846..+852, +260, +382) and flag bit 29 of +636 is set unless
+ * nothing changed. */
+extern uint32_t opencfw_em9305_receive_terminate_325c08(uintptr_t,uint32_t);
+
+void opencfw_em9305_ecu_callback_315ff4(uintptr_t record)
+{
+    volatile uint16_t *report=(volatile uint16_t *)(uintptr_t)0x802810u;
+    uint32_t window=report[9];
+    uint32_t latency=report[8];
+    uint32_t interval=report[6];
+    uint32_t timeout=report[10];
+    uint32_t valid=0u;
+    if(window<500u)
+        valid=((uint16_t)(interval-1u)<500u)&(latency<500u);
+    uint32_t span=(latency+1u)*interval;
+    uint32_t timeout_us=timeout*10u;
+    if((int32_t)span>=501) valid=0u;
+    else valid&=((uint16_t)(timeout-0xc81u)>0xf388u)&(window<interval);
+    uint32_t current=*(volatile uint16_t *)(record+266u);
+    uint32_t scaled=current+(current>>2)+((current&3u)!=0u);
+    if(timeout_us<((span*scaled)<<1)||valid==0u) {
+        if(*(volatile uint8_t *)(uintptr_t)0x805a86u&0x20u)
+            (void)opencfw_em9305_receive_terminate_325c08(record,0x73u);
+        return;
+    }
+    volatile uint16_t *stored=(volatile uint16_t *)(record+846u);
+    uint32_t changed=1u;
+    if(interval==stored[0]&&window==stored[2]&&
+       latency==*(volatile uint16_t *)(record+260u)&&
+       timeout_us==*(volatile uint16_t *)(record+382u))
+        changed=0u;
+    uint32_t instant=report[7];
+    stored[0]=(uint16_t)interval;
+    *(volatile uint16_t *)(record+260u)=(uint16_t)latency;
+    *(volatile uint16_t *)(record+382u)=(uint16_t)timeout_us;
+    stored[2]=(uint16_t)window;
+    stored[3]=(uint16_t)timeout;
+    stored[1]=(uint16_t)instant;
+    if(changed!=0u) *(volatile uint32_t *)(record+636u)|=1u<<29;
+}

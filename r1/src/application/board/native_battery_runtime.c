@@ -1,8 +1,8 @@
 #include <stdint.h>
+#include "native_battery_context.h"
 #include "native_battery_memory.h"
 /* Product0x31fd0. State roots and lower hardware/algorithm providers remain
  * explicit gates; unaligned SRAM fields use native-width packed views. */
-extern volatile uint8_t r1_battery_device_context[],r1_battery_runtime_context[];
 extern uint32_t r1_native_charger_state_get(void);
 extern uint32_t r1_native_charger_initialize(void);
 extern uint32_t r1_battery_task_flags_set(uint32_t);

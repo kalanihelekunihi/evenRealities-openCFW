@@ -15,11 +15,9 @@ __attribute__((noreturn)) void case_boot_task_return(void)
     /* Stock 0xb31c has distinct overflow and ordinary fatal PC loops.
      * Both disable interrupts; retain the branch for fault-site identity. */
     if((*depth+1u)==0u){
-        __asm__ volatile("cpsid i\n1: b 1b" ::: "memory");
-        __builtin_unreachable();
+        __asm__ volatile("cpsid i" ::: "memory");for(;;){}
     }
-    __asm__ volatile("cpsid i\n2: b 2b" ::: "memory");
-    __builtin_unreachable();
+    __asm__ volatile("cpsid i" ::: "memory");for(;;){}
 }
 /* Stock 0x0800B4C0 (pxPortInitialiseStack) */
 uint32_t case_boot_task_frame(uint32_t top,void (*entry)(void *),void *arg)

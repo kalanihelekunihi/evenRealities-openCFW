@@ -1,212 +1,72 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_31c530\n"
-".type opencfw_em9305_child_31c530,@function\n"
-"opencfw_em9305_child_31c530:\n"
-"L31c530:\n"
-"enter_s [r13-r25,blink]\n"
-"L31c532:\n"
-"mov_s r13,r0\n"
-"L31c534:\n"
-"mov r0,762\n"
-"L31c538:\n"
-"ldb_s r15,[r13,r0]\n"
-"L31c53a:\n"
-"cmp_s r15,0\n"
-"L31c53c:\n"
-"beq_s L31c692\n"
-"L31c53e:\n"
-"ld.as r14,[r13,191]\n"
-"L31c542:\n"
-"mov_s r16,r13\n"
-"L31c544:\n"
-"add3 r19,r13,0x27\n"
-"L31c548:\n"
-"add3 r22,r13,0x36\n"
-"L31c54c:\n"
-"add3 r23,r13,0x37\n"
-"L31c550:\n"
-"add3 r24,r13,0x3a\n"
-"L31c554:\n"
-"add3 r25,r13,0x35\n"
-"L31c558:\n"
-"add3 r18,r13,0x33\n"
-"L31c55c:\n"
-"add r16,r16,410\n"
-"L31c560:\n"
-"ldb_s r0,[r14,0x1]\n"
-"L31c562:\n"
-"breq.d.nt r0,0x32,L31c59a\n"
-"L31c566:\n"
-"ldb.ab r17,[r14,2]\n"
-"L31c56a:\n"
-"breq.nt r0,0x2c,L31c5b4\n"
-"L31c56e:\n"
-"brne.d.nt r0,0x28,L31c5fc\n"
-"L31c572:\n"
-"mov_s r1,0x28\n"
-"L31c574:\n"
-"ldb r0,[r19]\n"
-"L31c578:\n"
-"stb r17,[r16,-96]\n"
-"L31c57c:\n"
-"brne.d.nt r0,0,L31c5fc\n"
-"L31c580:\n"
-"stb r1,[r16,-97]\n"
-"L31c584:\n"
-"ldb_s r0,[r13,0x1]\n"
-"L31c586:\n"
-"brne.d.nt r0,0x1,L31c5fc\n"
-"L31c58a:\n"
-"mov_s r0,r19\n"
-"L31c58c:\n"
-"mov_s r1,r14\n"
-"L31c58e:\n"
-"bl.d opencfw_em9305_child_32da74\n"
-"L31c592:\n"
-"stb 1,[r19]\n"
-"L31c596:\n"
-"add_s r14,r14,r0\n"
-"L31c598:\n"
-"b_s L31c5fc\n"
-"L31c59a:\n"
-"ld r20,[0x805ca8]\n"
-"L31c5a2:\n"
-"breq.d.nt r20,0,L31c5fc\n"
-"L31c5a6:\n"
-"mov_s r2,0x32\n"
-"L31c5a8:\n"
-"mov_s r0,r13\n"
-"L31c5aa:\n"
-"mov_s r1,r17\n"
-"L31c5ac:\n"
-"jl.d [r20]\n"
-"L31c5b0:\n"
-"mov_s r3,r14\n"
-"L31c5b2:\n"
-"b_s L31c5fc\n"
-"L31c5b4:\n"
-"ldb r0,[r18]\n"
-"L31c5b8:\n"
-"brne_s r0,0,L31c5fc\n"
-"L31c5ba:\n"
-"ldb_s r0,[r13,0x1]\n"
-"L31c5bc:\n"
-"brne.d.nt r0,0x1,L31c5fc\n"
-"L31c5c0:\n"
-"mov_s r0,r18\n"
-"L31c5c2:\n"
-"mov_s r1,r14\n"
-"L31c5c4:\n"
-"bl.d opencfw_em9305_child_32d910\n"
-"L31c5c8:\n"
-"mov_s r2,r17\n"
-"L31c5ca:\n"
-"ldb r2,[0x805a86]\n"
-"L31c5d2:\n"
-"ldb r1,[r25]\n"
-"L31c5d6:\n"
-"mov_s r3,2\n"
-"L31c5d8:\n"
-"btst_s r2,0x7\n"
-"L31c5da:\n"
-"add_s r1,r1,-1\n"
-"L31c5dc:\n"
-"mov.eq r3,0x4\n"
-"L31c5e0:\n"
-"brhs.d.nt r1,0x1f,L31c5f8\n"
-"L31c5e4:\n"
-"add_s r14,r14,r0\n"
-"L31c5e6:\n"
-"ld.as r0,[r13,112]\n"
-"L31c5ea:\n"
-"add_s r0,r0,0xfff00000\n"
-"L31c5f0:\n"
-"brhs.nt r0,0xfff00100,L31c60a\n"
-"L31c5f8:\n"
-"stb 0,[r18]\n"
-"L31c5fc:\n"
-"not r0,r17\n"
-"L31c600:\n"
-"add_s r15,r15,r0\n"
-"L31c602:\n"
-"extb.f 0,r15\n"
-"L31c606:\n"
-"bne_s L31c560\n"
-"L31c608:\n"
-"b_s L31c692\n"
-"L31c60a:\n"
-"ldh.as r0,[r13,211]\n"
-"L31c60e:\n"
-"brlo.t r0,r3,L31c5f8\n"
-"L31c612:\n"
-"brhs.t r0,0xc81,L31c5f8\n"
-"L31c61a:\n"
-"ldb r0,[r16,15]\n"
-"L31c61e:\n"
-"add_s r0,r0,-1\n"
-"L31c620:\n"
-"brhs.t r0,0x1f,L31c5f8\n"
-"L31c624:\n"
-"ldh.as r0,[r13,226]\n"
-"L31c628:\n"
-"brhs.t r0,0x1000,L31c5f8\n"
-"L31c630:\n"
-"ldh.as r0,[r13,221]\n"
-"L31c634:\n"
-"add_s r0,r0,-1\n"
-"L31c636:\n"
-"cmp r0,250\n"
-"L31c63a:\n"
-"bhi L31c5f8\n"
-"L31c63e:\n"
-"ldb r1,[r24]\n"
-"L31c642:\n"
-"brhs.t r1,0x4,L31c5f8\n"
-"L31c646:\n"
-"mov_s r0,0x805b30\n"
-"L31c64c:\n"
-"ld r0,[r0,0]\n"
-"L31c64e:\n"
-"bbit1.nt r0,0x8,L31c656\n"
-"L31c652:\n"
-"breq.t r1,0x2,L31c5f8\n"
-"L31c656:\n"
-"bbit1.nt r0,0xb,L31c65e\n"
-"L31c65a:\n"
-"breq.t r1,0x3,L31c5f8\n"
-"L31c65e:\n"
-"ldb r0,[r16,66]\n"
-"L31c662:\n"
-"brhs.t r0,0x2,L31c5f8\n"
-"L31c666:\n"
-"ldb r0,[r16,16]\n"
-"L31c66a:\n"
-"add_s r0,r0,-1\n"
-"L31c66c:\n"
-"brhs.t r0,0x7,L31c5f8\n"
-"L31c670:\n"
-"ldb r0,[r23]\n"
-"L31c674:\n"
-"add_s r0,r0,-1\n"
-"L31c676:\n"
-"brhs.t r0,0xf,L31c5f8\n"
-"L31c67a:\n"
-"ldb r0,[r22]\n"
-"L31c67e:\n"
-"brhs.d.t r0,0x10,L31c5f8\n"
-"L31c682:\n"
-"mov_s r0,0x2c\n"
-"L31c684:\n"
-"stb r17,[r16]\n"
-"L31c688:\n"
-"stb 1,[r18]\n"
-"L31c68c:\n"
-"stb r0,[r16,-1]\n"
-"L31c690:\n"
-"b_s L31c5fc\n"
-"L31c692:\n"
-"leave_s [r13-r25,blink,pcl]\n"
-".size opencfw_em9305_child_31c530,.-opencfw_em9305_child_31c530\n"
-);
+#include <stdint.h>
+
+/* Native 0x31c530..0x31c694: walk the received AD structures (count at
+ * +762, cursor at +764). 0x32 entries go to the registered hook at
+ * 0x805ca8; for a role-1 record a 0x28 entry is decoded once into +312
+ * (32da74) and a 0x2c entry into +408 (32d910), whose parameters are then
+ * validated (accepted: +408 = 1, +409 = 0x2c, +410 = length; rejected:
+ * +408 = 0). The cursor advances by two plus what the decoders consume,
+ * the count by length + 1. */
+extern uint32_t opencfw_em9305_child_32da74(uintptr_t out, uintptr_t data);
+extern uint32_t opencfw_em9305_child_32d910(uintptr_t out, uintptr_t data, uint32_t length);
+
+static uint32_t opencfw_em9305_ad_2c_valid_31c530(uintptr_t record, uint32_t minimum)
+{
+    if((uint32_t)(*(volatile uint8_t *)(record+424u)-1u)>=31u)return 0u;
+    if(*(volatile uint32_t *)(record+448u)+0xfff00000u<0xfff00100u)return 0u;
+    uint32_t value=*(volatile uint16_t *)(record+422u);
+    if(value<minimum||value>=0xc81u)return 0u;
+    if((uint32_t)(*(volatile uint8_t *)(record+425u)-1u)>=31u)return 0u;
+    if(*(volatile uint16_t *)(record+452u)>=0x1000u)return 0u;
+    if((uint32_t)(*(volatile uint16_t *)(record+442u)-1u)>250u)return 0u;
+    uint32_t phy=*(volatile uint8_t *)(record+464u);
+    if(phy>=4u)return 0u;
+    uint32_t features=*(volatile uint32_t *)(uintptr_t)0x805b30u;
+    if((features&0x100u)==0u&&phy==2u)return 0u;
+    if((features&0x800u)==0u&&phy==3u)return 0u;
+    if(*(volatile uint8_t *)(record+476u)>=2u)return 0u;
+    if((uint32_t)(*(volatile uint8_t *)(record+426u)-1u)>=7u)return 0u;
+    if((uint32_t)(*(volatile uint8_t *)(record+440u)-1u)>=15u)return 0u;
+    if(*(volatile uint8_t *)(record+432u)>=16u)return 0u;
+    return 1u;
+}
+
+void opencfw_em9305_child_31c530(uintptr_t record)
+{
+    uint32_t count=*(volatile uint8_t *)(record+762u);
+    if(count==0u)return;
+    uintptr_t cursor=*(volatile uint32_t *)(record+764u);
+    volatile uint8_t *r=(volatile uint8_t *)record;
+    do{
+        uint32_t type=*(volatile uint8_t *)(cursor+1u);
+        uint32_t length=*(volatile uint8_t *)cursor;
+        cursor+=2u;
+        if(type==0x32u){
+            uintptr_t hook=*(volatile uint32_t *)(uintptr_t)0x805ca8u;
+            if(hook!=0u)
+                ((void (*)(uintptr_t,uint32_t,uint32_t,uintptr_t))hook)(record,length,0x32u,cursor);
+        }else if(type==0x2cu){
+            if(r[408]==0u&&r[1]==1u){
+                uint32_t used=opencfw_em9305_child_32d910(record+408u,cursor,length);
+                uint32_t minimum=(*(volatile uint8_t *)(uintptr_t)0x805a86u&0x80u)!=0u?2u:4u;
+                cursor+=used;
+                if(opencfw_em9305_ad_2c_valid_31c530(record,minimum)!=0u){
+                    r[410]=(uint8_t)length;
+                    r[408]=1u;
+                    r[409]=0x2cu;
+                }else{
+                    r[408]=0u;
+                }
+            }
+        }else if(type==0x28u){
+            uint32_t decoded=r[312];
+            r[314]=(uint8_t)length;
+            r[313]=0x28u;
+            if(decoded==0u&&r[1]==1u){
+                r[312]=1u;
+                cursor+=opencfw_em9305_child_32da74(record+312u,cursor);
+            }
+        }
+        count+=~length;
+    }while((uint8_t)count!=0u);
+}

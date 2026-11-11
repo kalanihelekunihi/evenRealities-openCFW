@@ -1,127 +1,40 @@
-/* Full native channel permutation, MPYWHUL and REMU effects. */
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_dispatch_child_30e6b0\n"
-".type opencfw_em9305_dispatch_child_30e6b0,@function\n"
-"opencfw_em9305_dispatch_child_30e6b0:\n"
-"L30e6b0:\n"
-"enter_s [r13-r15]\n"
-"L30e6b2:\n"
-"ldh_s r1,[r0,0x32]\n"
-"L30e6b4:\n"
-"mov_s r3,0xf0f0\n"
-"L30e6ba:\n"
-"asl_s r15,r3,0x4\n"
-"L30e6bc:\n"
-"and_s r3,r3,r1\n"
-"L30e6be:\n"
-"asl_s r1,r1,0x8\n"
-"L30e6c0:\n"
-"and_s r1,r1,r15\n"
-"L30e6c2:\n"
-"mov_s r2,0xcccc0\n"
-"L30e6c8:\n"
-"or_s r1,r1,r3\n"
-"L30e6ca:\n"
-"asl_s r14,r2,0x2\n"
-"L30e6cc:\n"
-"and_s r2,r2,r1\n"
-"L30e6ce:\n"
-"asl r1,r1,0x4\n"
-"L30e6d0:\n"
-"and_s r1,r1,r14\n"
-"L30e6d2:\n"
-"mov_s r12,0x2aaa80\n"
-"L30e6d8:\n"
-"or_s r2,r2,r1\n"
-"L30e6da:\n"
-"asl_s r13,r12\n"
-"L30e6dc:\n"
-"ldb r9,[r0,45]\n"
-"L30e6e0:\n"
-"asl_s r1,r2,0x2\n"
-"L30e6e2:\n"
-"and_s r12,r12,r2\n"
-"L30e6e4:\n"
-"and_s r13,r13,r1\n"
-"L30e6e6:\n"
-"or r1,r13,r12\n"
-"L30e6ea:\n"
-"sub r11,r9,0xa\n"
-"L30e6ee:\n"
-"lsr_s r1,r1,0x7\n"
-"L30e6f0:\n"
-"asr r8,r11\n"
-"L30e6f4:\n"
-"mpyuw r2,r1,0x11\n"
-"L30e6f8:\n"
-"ldh_s r1,[r0,0x30]\n"
-"L30e6fa:\n"
-"sub r6,r9,0x5\n"
-"L30e6fe:\n"
-"cmp r11,0x17\n"
-"L30e702:\n"
-"mov_s r3,r8\n"
-"L30e704:\n"
-"ldb r12,[r0,52]\n"
-"L30e708:\n"
-"min r15,r6,0x3\n"
-"L30e70c:\n"
-"mov.gt r3,0xb\n"
-"L30e710:\n"
-"add_s r2,r2,r1\n"
-"L30e712:\n"
-"brge.d.nt r3,r15,L30e728\n"
-"L30e716:\n"
-"sth_s r2,[r0,0x32]\n"
-"L30e718:\n"
-"brge.d.nt r6,0x4,L30e736\n"
-"L30e71c:\n"
-"mov_s r3,3\n"
-"L30e71e:\n"
-"brlt.d.nt r6,0x1,L30e736\n"
-"L30e722:\n"
-"mov_s r3,1\n"
-"L30e724:\n"
-"mov_s r3,r6\n"
-"L30e726:\n"
-"b_s L30e736\n"
-"L30e728:\n"
-"brge.d.nt r11,0x18,L30e736\n"
-"L30e72c:\n"
-"mov_s r3,0xb\n"
-"L30e72e:\n"
-"cmp_s r11,2\n"
-"L30e730:\n"
-"mov_s r3,1\n"
-"L30e732:\n"
-"mov.ge r3,r8\n"
-"L30e736:\n"
-"xor_s r2,r2,r1\n"
-"L30e738:\n"
-"sub1 r1,r9,r3\n"
-"L30e73c:\n"
-"add_s r1,r1,1\n"
-"L30e73e:\n"
-"mpywhul r1,r1,r2\n"
-"L30e742:\n"
-"add_s r2,r3,r12\n"
-"L30e744:\n"
-"lsr_s r1,r1,0x10\n"
-"L30e746:\n"
-"add_s r1,r1,r2\n"
-"L30e748:\n"
-"exth_s r1,r1\n"
-"L30e74a:\n"
-"remu r1,r1,r9\n"
-"L30e74e:\n"
-"stb r1,[r0,52]\n"
-"L30e752:\n"
-"add_s r0,r0,r1\n"
-"L30e754:\n"
-"ldb_s r0,[r0,0x8]\n"
-"L30e756:\n"
-"leave_s [r13-r15,pcl]\n"
-".size opencfw_em9305_dispatch_child_30e6b0,.-opencfw_em9305_dispatch_child_30e6b0\n"
-);
+#include <stdint.h>
+
+/* Native 0x30e6b0..0x30e758: channel selection algorithm #2 style hop.
+ * Permute the 16-bit counter (+0x32) with the stock mask/shift network,
+ * scale by 17, add the access-address half (+0x30) and store it back.
+ * Pick a step k from the used-channel count (+45), then the next index
+ * (+52) is ((n - 2k + 1) * (state ^ half) >> 16) + k + index, as a 16-bit
+ * value, modulo n; return the used channel at +8 + index. */
+uint32_t opencfw_em9305_dispatch_child_30e6b0(uintptr_t state)
+{
+    uint32_t counter=*(volatile uint16_t *)(state+0x32u);
+    uint32_t bits=(counter&0xf0f0u)|((counter<<8)&0xf0f00u);
+    bits=(bits&0xcccc0u)|((bits<<4)&0x333300u);
+    bits=((bits&0x2aaa80u)|((bits<<2)&0x555500u))>>7;
+    int32_t used=*(volatile uint8_t *)(state+45u);
+    int32_t above=used-10;
+    int32_t half=above>>1;
+    uint32_t access=*(volatile uint16_t *)(state+0x30u);
+    int32_t spare=used-5;
+    uint32_t index=*(volatile uint8_t *)(state+52u);
+    int32_t cap=spare<3?spare:3;
+    int32_t pick=above>0x17?0xb:half;
+    uint32_t mixed=(bits&0xffffu)*0x11u+access;
+    *(volatile uint16_t *)(state+0x32u)=(uint16_t)mixed;
+    int32_t step;
+    if(pick>=cap) {
+        if(above>=0x18) step=0xb;
+        else step=above>=2?half:1;
+    } else {
+        if(spare>=4) step=3;
+        else if(spare<1) step=1;
+        else step=spare;
+    }
+    mixed^=access;
+    uint32_t span=(uint32_t)used-((uint32_t)step<<1)+1u;
+    uint32_t next=((span*(mixed&0xffffu))>>16)+(uint32_t)step+index;
+    next=(uint16_t)next%(uint32_t)used;
+    *(volatile uint8_t *)(state+52u)=(uint8_t)next;
+    return *(volatile uint8_t *)(state+next+8u);
+}

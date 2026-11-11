@@ -1,0 +1,243 @@
+{
+  "normal_report": "build/sources-goal-r1-device-config-c/report.json",
+  "report_sha256": "19d7ccedd60bff46a2771b3f3a61c9e3b977d41259d2fced5b04e6071c8994a3",
+  "unit": {
+    "source": "r1/src/application/runtime/native_device_configuration.c",
+    "payload": "r1-application",
+    "role": "candidate",
+    "toolchain": "gcc9",
+    "link": true,
+    "expect": "compile",
+    "returncode": 0,
+    "argv": [
+      "/opt/homebrew/bin/python3",
+      "/Users/kalani/Repo/evenRealities-openCFW/tools/build/linux_gcc.py",
+      "--compiler",
+      "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/bin/arm-none-eabi-gcc",
+      "--read-root",
+      "/Users/kalani/Repo/evenRealities-openCFW/r1",
+      "--read-root",
+      "/Users/kalani/Repo/evenRealities-openCFW/third-party/upstream",
+      "--read-root",
+      "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1",
+      "--read-root",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-device-config-c/generated/r1",
+      "--",
+      "-mcpu=cortex-m4",
+      "-mthumb",
+      "-munaligned-access",
+      "-mfpu=fpv4-sp-d16",
+      "-mfloat-abi=hard",
+      "-std=c11",
+      "-Os",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-fshort-enums",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-fno-delete-null-pointer-checks",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/r1/src/vendor",
+      "-isystem",
+      "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
+      "-fno-strict-aliasing",
+      "-ffp-contract=off",
+      "-fsignaling-nans",
+      "-frounding-math",
+      "-ftrapping-math",
+      "-fno-if-conversion",
+      "-fno-if-conversion2",
+      "-MD",
+      "-MF",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-device-config-c/r1/r1-application/r1__src__application__runtime__native_device_configuration.c.d",
+      "-c",
+      "/Users/kalani/Repo/evenRealities-openCFW/r1/src/application/runtime/native_device_configuration.c",
+      "-o",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-device-config-c/r1/r1-application/r1__src__application__runtime__native_device_configuration.c.o"
+    ],
+    "source_sha256": "0cef7d53c4025fc12ca1445490e3138296f48ad31a38e8b36a0ab2002f4a2d96",
+    "object_sha256": "619cf33109abcd9bc94c95804339ed6b73de5d19b7c7298e6da5f68f12acd741",
+    "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-device-config-c/r1/r1-application/r1__src__application__runtime__native_device_configuration.c.o",
+    "strong": [
+      "r1_device_info_configuration_byte78_get",
+      "r1_device_info_configuration_word74_get",
+      "r1_kv_nv_r1_byte_set_a",
+      "r1_kv_nv_r1_word_set_a"
+    ],
+    "weak": [],
+    "undefined": [
+      "r1_device_info_kv_handle",
+      "r1_kv_class_read",
+      "r1_kv_class_write",
+      "r1_nv_modules_idle_check"
+    ]
+  },
+  "rea": [
+    {
+      "evidence_id": "ev_190d0109091044097691e4259ba31607aa9dc80365b5f459710b6b0fb9a7ca62",
+      "subject": {
+        "name": "stock.elf",
+        "digest": {
+          "sha256": "25b4a29af80ec8edab5bd861ba9b74a6e22eab29dc3d7a809a16869e8a140f04"
+        },
+        "local_path": "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-queue-reset-c/stock.elf",
+        "format": "elf",
+        "architecture": "arm"
+      },
+      "pseudocode": "\n/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */\n\nundefined1 FUN_0007b9ec(void)\n\n{\n  undefined1 auStack_80 [120];\n  undefined1 local_8;\n  \n  FUN_00073930(_DAT_20007dfc,auStack_80,0x7c);\n  return local_8;\n}\n\n",
+      "assembly": [
+        "0x7b9ec: push {lr}",
+        "0x7b9ee: ldr r0, [0x0007ba04]",
+        "0x7b9f0: sub sp, #0x7c",
+        "0x7b9f2: movs r2, #0x7c",
+        "0x7b9f4: mov r1, sp",
+        "0x7b9f6: ldr r0, [r0,#0x4]",
+        "0x7b9f8: bl 0x00073930",
+        "0x7b9fc: ldrb.w r0, [sp,#0x78]",
+        "0x7ba00: add sp, #0x7c",
+        "0x7ba02: pop {pc}"
+      ]
+    },
+    {
+      "evidence_id": "ev_56a9c862dd025430e14ccdc4ea60bf260011405b181c8e2601207ccabc2cd4ce",
+      "subject": {
+        "name": "stock.elf",
+        "digest": {
+          "sha256": "25b4a29af80ec8edab5bd861ba9b74a6e22eab29dc3d7a809a16869e8a140f04"
+        },
+        "local_path": "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-queue-reset-c/stock.elf",
+        "format": "elf",
+        "architecture": "arm"
+      },
+      "pseudocode": "\n/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */\n\nundefined4 FUN_0007ba08(void)\n\n{\n  undefined1 auStack_80 [116];\n  undefined4 local_c;\n  \n  FUN_00073930(_DAT_20007dfc,auStack_80,0x7c);\n  return local_c;\n}\n\n",
+      "assembly": [
+        "0x7ba08: push {lr}",
+        "0x7ba0a: ldr r0, [0x0007ba20]",
+        "0x7ba0c: sub sp, #0x7c",
+        "0x7ba0e: movs r2, #0x7c",
+        "0x7ba10: mov r1, sp",
+        "0x7ba12: ldr r0, [r0,#0x4]",
+        "0x7ba14: bl 0x00073930",
+        "0x7ba18: ldr r0, [sp,#0x74]",
+        "0x7ba1a: add sp, #0x7c",
+        "0x7ba1c: pop {pc}"
+      ]
+    },
+    {
+      "evidence_id": "ev_6e310a92f4c91bbbb4028310f4230be07a59edd71e0ae325c0cf34cbbfaa01ef",
+      "subject": {
+        "name": "stock.elf",
+        "digest": {
+          "sha256": "25b4a29af80ec8edab5bd861ba9b74a6e22eab29dc3d7a809a16869e8a140f04"
+        },
+        "local_path": "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-queue-reset-c/stock.elf",
+        "format": "elf",
+        "architecture": "arm"
+      },
+      "pseudocode": "\n/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */\n\nvoid FUN_0007c8e4(undefined1 param_1)\n\n{\n  undefined1 auStack_88 [120];\n  undefined1 local_10;\n  \n  FUN_00073930(_DAT_20007dfc,auStack_88,0x7c);\n  local_10 = param_1;\n  FUN_00073968(_DAT_20007dfc,auStack_88,0x7c);\n  FUN_00073688();\n  return;\n}\n\n",
+      "assembly": [
+        "0x7c8e4: push {r4,r5,lr}",
+        "0x7c8e6: ldr r5, [0x0007c90c]",
+        "0x7c8e8: sub sp, #0x7c",
+        "0x7c8ea: mov r4, r0",
+        "0x7c8ec: movs r2, #0x7c",
+        "0x7c8ee: mov r1, sp",
+        "0x7c8f0: ldr r0, [r5,#0x4]",
+        "0x7c8f2: bl 0x00073930",
+        "0x7c8f6: strb.w r4, [sp,#0x78]",
+        "0x7c8fa: movs r2, #0x7c",
+        "0x7c8fc: mov r1, sp",
+        "0x7c8fe: ldr r0, [r5,#0x4]",
+        "0x7c900: bl 0x00073968",
+        "0x7c904: bl 0x00073688",
+        "0x7c908: add sp, #0x7c",
+        "0x7c90a: pop {r4,r5,pc}"
+      ]
+    },
+    {
+      "evidence_id": "ev_02035bd6b14e0f1df18435566b7a9131516c6c2ea16bb026fa0f969d17bbac3e",
+      "subject": {
+        "name": "stock.elf",
+        "digest": {
+          "sha256": "25b4a29af80ec8edab5bd861ba9b74a6e22eab29dc3d7a809a16869e8a140f04"
+        },
+        "local_path": "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-queue-reset-c/stock.elf",
+        "format": "elf",
+        "architecture": "arm"
+      },
+      "pseudocode": "\n/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */\n\nvoid FUN_0007c910(undefined4 param_1)\n\n{\n  undefined1 auStack_88 [116];\n  undefined4 local_14;\n  \n  FUN_00073930(_DAT_20007dfc,auStack_88,0x7c);\n  local_14 = param_1;\n  FUN_00073968(_DAT_20007dfc,auStack_88,0x7c);\n  FUN_00073688();\n  return;\n}\n\n",
+      "assembly": [
+        "0x7c910: push {r4,r5,lr}",
+        "0x7c912: ldr r5, [0x0007c938]",
+        "0x7c914: sub sp, #0x7c",
+        "0x7c916: mov r4, r0",
+        "0x7c918: movs r2, #0x7c",
+        "0x7c91a: mov r1, sp",
+        "0x7c91c: ldr r0, [r5,#0x4]",
+        "0x7c91e: bl 0x00073930",
+        "0x7c922: str r4, [sp,#0x74]",
+        "0x7c924: movs r2, #0x7c",
+        "0x7c926: mov r1, sp",
+        "0x7c928: ldr r0, [r5,#0x4]",
+        "0x7c92a: bl 0x00073968",
+        "0x7c92e: bl 0x00073688",
+        "0x7c932: add sp, #0x7c",
+        "0x7c934: pop {r4,r5,pc}"
+      ]
+    }
+  ],
+  "direct": {
+    "cases": 2304,
+    "executions": 6912,
+    "counts": {
+      "byte_get": 576,
+      "word_get": 576,
+      "byte_set": 576,
+      "word_set": 576
+    },
+    "digest": "e6e6e25b8f3d9fe853e062ea3da7886ac3ae5d559d56dae8385b2377bcdf579f",
+    "actual_C_cache_and_memcpy": true,
+    "limits": [
+      "Valid 124-byte class and fully populated read; failed/partial reads excluded",
+      "Port callbacks and post-write idle checker modeled; no flash persistence or physical factory/sensor proof"
+    ]
+  },
+  "negative": {
+    "wrong-byte-offset": {
+      "rejected": true,
+      "diagnostic": "3a5f84a9cef3183d6287acd1f61b40658aafd4f91e43688db2d7fc21466b90b5daff24496e93b8dd02274c7196bbe0052a4f7499bee3082d52779cc1e60b30557a9fc4e90e33587da2c7696969696969696969696969', '69696969696969696969696969696969696942a07c006969355a7fa4c9ee13385d82a7ccf1163b6085aacff4193e6388add2f71c41668bb0d5fa1f44698eb3d8fd22476c91b6db00254a6f94b9de03284d7297bce1062b50759abfe4092e53789dc2e70c31567ba0c5ea0f34597ea3c8ed12375c81a6cbf0153a5f84a9cef3183d6287acd1f61b40658aafd4f91e43688db2d7fc696969696969696969696969'), (51, [('read', 536875008, 124, None)], 536875008, '69696969696969696969696969696969696940a07c00696900254a6f94b9de03284d7297bce1062b50759abfe4092e53789dc2e70c31567ba0c5ea0f34597ea3c8ed12375c81a6cbf0153a5f84a9cef3183d6287acd1f61b40658aafd4f91e43688db2d7fc21466b90b5daff24496e93b8dd02274c7196bbe0052a4f7499bee3082d52779cc1e60b30557a9fc4e90e33587da2c7696969696969696969696969', '69696969696969696969696969696969696942a07c006969355a7fa4c9ee13385d82a7ccf1163b6085aacff4193e6388add2f71c41668bb0d5fa1f44698eb3d8fd22476c91b6db00254a6f94b9de03284d7297bce1062b50759abfe4092e53789dc2e70c31567ba0c5ea0f34597ea3c8ed12375c81a6cbf0153a5f84a9cef3183d6287acd1f61b40658aafd4f91e43688db2d7fc696969696969696969696969')])\n"
+    },
+    "truncated-word-write": {
+      "rejected": true,
+      "diagnostic": "1f44698eb3d8fd22476c91b6db00254a6f94b9de03284d7297bce1062b50759abfe4092e53789dc2e70c31567ba0c5ea0f34597ea3c8ed12375c81a6cbf0153a5f84a9cef3183d6287acd1f61b40658aafd4f91e43688db2d7fc696969696969696969696969'), (None, [('read', 536875008, 124, None), ('write', 536875008, 124, '00254a6f94b9de03284d7297bce1062b50759abfe4092e53789dc2e70c31567ba0c5ea0f34597ea3c8ed12375c81a6cbf0153a5f84a9cef3183d6287acd1f61b40658aafd4f91e43688db2d7fc21466b90b5daff24496e93b8dd02274c7196bbe0052a4f7499bee3082d52779cc1e60b30557a9f00000e33587da2c7'), ('idle',)], 536875008, '69696969696969696969696969696969696941a07c00696900254a6f94b9de03284d7297bce1062b50759abfe4092e53789dc2e70c31567ba0c5ea0f34597ea3c8ed12375c81a6cbf0153a5f84a9cef3183d6287acd1f61b40658aafd4f91e43688db2d7fc21466b90b5daff24496e93b8dd02274c7196bbe0052a4f7499bee3082d52779cc1e60b30557a9f00000e33587da2c7696969696969696969696969', '69696969696969696969696969696969696942a07c006969355a7fa4c9ee13385d82a7ccf1163b6085aacff4193e6388add2f71c41668bb0d5fa1f44698eb3d8fd22476c91b6db00254a6f94b9de03284d7297bce1062b50759abfe4092e53789dc2e70c31567ba0c5ea0f34597ea3c8ed12375c81a6cbf0153a5f84a9cef3183d6287acd1f61b40658aafd4f91e43688db2d7fc696969696969696969696969')])\n"
+    },
+    "lost-idle-check": {
+      "rejected": true,
+      "diagnostic": "1668bb0d5fa1f44698eb3d8fd22476c91b6db00254a6f94b9de03284d7297bce1062b50759abfe4092e53789dc2e70c31567ba0c5ea0f34597ea3c8ed12375c81a6cbf0153a5f84a9cef3183d6287acd1f61b40658aafd4f91e43688db2d7fc696969696969696969696969'), (None, [('read', 536875008, 124, None), ('write', 536875008, 124, '00254a6f94b9de03284d7297bce1062b50759abfe4092e53789dc2e70c31567ba0c5ea0f34597ea3c8ed12375c81a6cbf0153a5f84a9cef3183d6287acd1f61b40658aafd4f91e43688db2d7fc21466b90b5daff24496e93b8dd02274c7196bbe0052a4f7499bee3082d52779cc1e60b30557a9fc4e90e33007da2c7')], 536875008, '69696969696969696969696969696969696941a07c00696900254a6f94b9de03284d7297bce1062b50759abfe4092e53789dc2e70c31567ba0c5ea0f34597ea3c8ed12375c81a6cbf0153a5f84a9cef3183d6287acd1f61b40658aafd4f91e43688db2d7fc21466b90b5daff24496e93b8dd02274c7196bbe0052a4f7499bee3082d52779cc1e60b30557a9fc4e90e33007da2c7696969696969696969696969', '69696969696969696969696969696969696942a07c006969355a7fa4c9ee13385d82a7ccf1163b6085aacff4193e6388add2f71c41668bb0d5fa1f44698eb3d8fd22476c91b6db00254a6f94b9de03284d7297bce1062b50759abfe4092e53789dc2e70c31567ba0c5ea0f34597ea3c8ed12375c81a6cbf0153a5f84a9cef3183d6287acd1f61b40658aafd4f91e43688db2d7fc696969696969696969696969')])\n"
+    },
+    "stale-write-handle": {
+      "rejected": true,
+      "diagnostic": "1f44698eb3d8fd22476c91b6db00254a6f94b9de03284d7297bce1062b50759abfe4092e53789dc2e70c31567ba0c5ea0f34597ea3c8ed12375c81a6cbf0153a5f84a9cef3183d6287acd1f61b40658aafd4f91e43688db2d7fc696969696969696969696969'), (None, [('read', 536875008, 124, None), ('write', 536875008, 124, '00254a6f94b9de03284d7297bce1062b50759abfe4092e53789dc2e70c31567ba0c5ea0f34597ea3c8ed12375c81a6cbf0153a5f84a9cef3183d6287acd1f61b40658aafd4f91e43688db2d7fc21466b90b5daff24496e93b8dd02274c7196bbe0052a4f7499bee3082d52779cc1e60b30557a9fc4e90e33007da2c7'), ('idle',)], 536879104, '69696969696969696969696969696969696941a07c00696900254a6f94b9de03284d7297bce1062b50759abfe4092e53789dc2e70c31567ba0c5ea0f34597ea3c8ed12375c81a6cbf0153a5f84a9cef3183d6287acd1f61b40658aafd4f91e43688db2d7fc21466b90b5daff24496e93b8dd02274c7196bbe0052a4f7499bee3082d52779cc1e60b30557a9fc4e90e33007da2c7696969696969696969696969', '69696969696969696969696969696969696942a07c006969355a7fa4c9ee13385d82a7ccf1163b6085aacff4193e6388add2f71c41668bb0d5fa1f44698eb3d8fd22476c91b6db00254a6f94b9de03284d7297bce1062b50759abfe4092e53789dc2e70c31567ba0c5ea0f34597ea3c8ed12375c81a6cbf0153a5f84a9cef3183d6287acd1f61b40658aafd4f91e43688db2d7fc696969696969696969696969')])\n"
+    }
+  },
+  "audit": {
+    "added": [
+      "r1/src/application/runtime/native_device_configuration.c"
+    ],
+    "unchanged_objects": 730,
+    "prior_owners_unchanged": true
+  },
+  "resolved_imports": [
+    "r1_device_info_configuration_byte78_get",
+    "r1_device_info_configuration_word74_get",
+    "r1_kv_nv_r1_byte_set_a",
+    "r1_kv_nv_r1_word_set_a"
+  ],
+  "limits": [
+    "Valid 124-byte nv_r1 class and fully populated read required; failed/partial read behavior not reconstructed",
+    "Actual C cache and memcpy; port callbacks and idle check modeled",
+    "No flash persistence, complete factory/sensor execution or complete firmware link proof"
+  ]
+}

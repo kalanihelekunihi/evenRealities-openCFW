@@ -1,0 +1,158 @@
+{
+  "schema_version": 1,
+  "sources": [
+    "r1/src/application/runtime/native_touch_switch.c",
+    "r1/src/application/board/native_protocol_modules.c"
+  ],
+  "native_entry": "0x84874",
+  "native_instruction_bytes": 184,
+  "report": "build/sources-goal-r1-touch-switch-pure-c/report.json",
+  "compiled_units": 849,
+  "verification": {
+    "pairs": 6378,
+    "groups": {
+      "selector_seeds": 4,
+      "all_selectors_dispatch": 3072,
+      "state_byte_and_client_ownership": 2560,
+      "getter_guards_handles_scalar_results": 450,
+      "live_backend_mutations": 288,
+      "masks_and_route": 4
+    },
+    "native_instruction_bytes_covered": 184,
+    "native_instruction_bytes_expected": 184,
+    "native_uncovered_byte_addresses": [],
+    "actual_C": [
+      "touch switch with canonical/legacy alias",
+      "module lookup/dispatcher and actual20-command table",
+      "packed payload getter",
+      "checked-send and header wrappers",
+      "touch services and client owner"
+    ],
+    "modeled": [
+      "logging",
+      "final protocol response backend",
+      "RTOS flags",
+      "synthetic release"
+    ],
+    "other_handlers": "unexecuted assertion stubs"
+  },
+  "mutants": [
+    {
+      "name": "null_result",
+      "rejected": true
+    },
+    {
+      "name": "ack_byte",
+      "rejected": true
+    },
+    {
+      "name": "ack_command",
+      "rejected": true
+    },
+    {
+      "name": "selector_capture",
+      "rejected": true
+    },
+    {
+      "name": "selector_guard",
+      "rejected": true
+    },
+    {
+      "name": "phone_control",
+      "rejected": true
+    },
+    {
+      "name": "SDK_gate",
+      "rejected": true
+    },
+    {
+      "name": "state_freshness",
+      "rejected": true
+    },
+    {
+      "name": "open_source",
+      "rejected": true
+    },
+    {
+      "name": "close_source",
+      "rejected": true
+    },
+    {
+      "name": "phone_result",
+      "rejected": true
+    }
+  ],
+  "audit": {
+    "unchanged_prior_nongenerated_objects": 838,
+    "changed_prior_nongenerated_objects": [
+      "r1/src/application/runtime/native_touch_switch.c"
+    ],
+    "changed_generated_objects": [
+      "{gen}/r1_startup_vectors.S",
+      "{gen}/r1_uecc.c"
+    ],
+    "removed_imports": [
+      "r1_touch_switch_handler_plan_decode"
+    ],
+    "added_imports": [],
+    "application_imports": 69,
+    "new_mutable_state": false,
+    "assembly_bridge_removed": true,
+    "canonical_and_legacy_names_share_one_body": true,
+    "module_object_unchanged_after_typed_declaration": true
+  },
+  "caller_audit": {
+    "files": {
+      "r1/src/application/board/native_protocol_modules.c": "0b1fc0ed53afcd6b36206b33d186747fa5cf7d5e4118d78cd0fb2e133d99384b",
+      "r1/src/application/board/native_protocol_ingress.c": "196d91295a0adf2d6c8729ede9c2f115c54c3a094d3538b75b2ab4f0dda2de3f",
+      "r1/src/application/board/native_protocol_receive.c": "49ae5ab83f6e751b159f1a5d4b3a166da0b79191b0d3ccdc36a6fa42c500ab2f",
+      "r1/src/application/runtime/native_bae8_consumer.c": "3fe83f112a7ae8a70276b314108f61c6d720d2e581c03a03f0792890c0d40267"
+    },
+    "reason": [
+      "System module dispatcher casts its table target to the four-argument scalar callback type and tail-returns its R0 result.",
+      "Ingress restores its own saved frame before a tail handoff to the module dispatcher; it performs no post-callback scratch inspection.",
+      "Receive validator tail-returns the scalar callback result; the BAE8 consumer explicitly discards it.",
+      "Legacy callback name aliases the canonical table symbol at the same address. Arbitrary external consumers of restored scratch registers are outside this audit."
+    ]
+  },
+  "contract": [
+    "The actual20-command system table resolves command0007 to r1_touch_switch_handler_plan_decode. The previous r1_native_touch_switch_handler name aliases the same function address and code body; no duplicate implementation or shadow table is added. Its dispatcher declaration now matches the four-argument C callback type.",
+    "The handler is ordinary C with one initialized private response word, replacing the assembly saved-register frame and separate kernel. Scratch and seed are unused in the C contract. The actual packed payload getter runs; exact advertised length12 produces a null payload and returns0. Other advertised values preserve the native unsigned getter behavior on a readable backing buffer.",
+    "For a nonnull payload the handler first sends a zero byte using command7, flags0, sequence0 and the original full handle through the existing checked-send/header helpers. The checked helper retains its exactffff guard. Only after this call does the handler read the live selector. Unknown selectors return the observed byte after acknowledgement without touch changes.",
+    "Selector1 logs the live switch byte and returns the native scalar logging-mode shift or SDK seam result; it does not change touch ownership. Selector2 logs, freshly rereads the live switch byte, and opens touch source0 for nonzero or closes source0 for zero. Repeated logging-mode reads preserve short-circuit order and scalar results.",
+    "The actual source module lookup/dispatcher/table, payload getter, checked-send/header wrappers and touch open/close/client owner execute in the replay. All existing touch clients and thread owners are reused."
+  ],
+  "limits": [
+    "Logging, final protocol response service, RTOS flags and synthetic release are modeled. The response backend captures actual eight-byte headers and one-byte payloads, mutates the private acknowledgement byte and can mutate the incoming payload/client state at explicit backend boundaries. Physical transport, sensor state, RTOS concurrency and final firmware boot are not exercised.",
+    "All184 native instruction bytes in the handler execute across6378 direct/actual-dispatch comparisons. Cases cover all256 selectors, all256 switch bytes, all logging branches, handle/advertised-length guards, live callback mutations and ownership masks. Backend scalar return conventions are controlled replay inputs, not proof of actual SDK logging return-register contents.",
+    "The normal C contract compares scalar results, emitted response headers/data, provider traces, public packet/client state, callee-saved integer/FP registers, masks, SP and stack/input guards. Native restored r1/r2/r3, private acknowledgement addresses and arbitrary external scratch-register consumers are excluded. Current source caller audit supports this boundary; no byte-identity or hybrid private-ABI guarantee is made.",
+    "Other command-table targets in the fixture are unexecuted assertion stubs. The full ingress, BAE8 queue consumer, response encoder/FIFO and real IQS task are not executed by this fixture. They retain their own separate source receipts. Source execution into stock executable addresses is rejected.",
+    "The typed module declaration leaves its object identical; all838 other prior nongenerated objects are unchanged. This source adds no mutable state and removes one assembly bridge. Pre-existing ingress/module/response bridges remain visible and unchanged.",
+    "The normal R1 build compiles849 units and resolves the touch-switch table import without new imports, leaving69 application imports and22 bootloader linker imports. R1 manifest check passes. Global sources-check retains the unrelated unlisted G2 resident_rom_thumb_set.S failure. Final source layout, image linking and device boot remain open. Paid compilers and byte identity are not requirements."
+  ],
+  "evidence_files": {
+    "r1/src/application/runtime/native_touch_switch.c": "43c3d4521a23ad5865970627064ed15c7286b41de98325bdd66dd5fa60439451",
+    "r1/src/application/board/native_protocol_modules.c": "0b1fc0ed53afcd6b36206b33d186747fa5cf7d5e4118d78cd0fb2e133d99384b",
+    "build/sources-goal-r1-touch-switch-pure-c/report.json": "5000d8448eb76c896adf3339ffe752ab68c587f12ec041b65b83a6826c22a32b",
+    "build/sources-goal-r1-glasses-status-c/report.json": "a0a2b02cc0c9996ad1ef43810fb1d74e2d062f5058bdc6a639383e10c32b0225",
+    "r1/src/sources.json": "72fcd8e2539d77536cee773e6f04c572f6e6e06ad60a308dbc1c908565cd3c4a",
+    "r1/src/application/board/native_protocol_ingress.c": "196d91295a0adf2d6c8729ede9c2f115c54c3a094d3538b75b2ab4f0dda2de3f",
+    "r1/src/application/board/native_protocol_receive.c": "49ae5ab83f6e751b159f1a5d4b3a166da0b79191b0d3ccdc36a6fa42c500ab2f",
+    "r1/src/application/runtime/native_bae8_consumer.c": "3fe83f112a7ae8a70276b314108f61c6d720d2e581c03a03f0792890c0d40267",
+    "r1/src/application/runtime/native_protocol_ack.c": "d03b6416838d3dd10e07c5cd005d732408b432d3447000f2cb94492af2c6247c",
+    "r1/src/application/runtime/native_protocol_serial.c": "47fe0057719ba267ad88d5ec38f734c55ba2327ff6ba697870dc0570c24a04a7",
+    "r1/src/application/runtime/native_touch_services.c": "838ff73a88388d0d4b079204b2df6acea4dbf7f9a894e226a4cb17da5135bcd8",
+    "build/goal-r1-touch-switch-c/rea.json": "4263632476d31a69fd6b40a75b1e23f4be0de9a75dddb6499c3c9d39b72b18f1",
+    "build/goal-r1-touch-switch-c/verify.py": "2dc93dc946086ce0b3830564faba8a29eb8a81b760e4ab0cd361aa7b84238d80",
+    "build/goal-r1-touch-switch-c/verification.json": "5002c1af79942223968d4203fe111b1ef43ff84e3f591ee1ec9563ea84a726c6",
+    "build/goal-r1-touch-switch-c/verification.log": "1b2ad825d7836d0a7c12bbc0e3b792a1f857a6219b0c24fe063ea2ed96185ea3",
+    "build/goal-r1-touch-switch-c/mutants.py": "d2e67dd5a963beb4656c3256236417dbda56b066c9aca556722d1fe3a5a72af0",
+    "build/goal-r1-touch-switch-c/mutants.json": "0865fbef48f44ddd917e8a16a9b82d7ddb0c04057c329c1ef80c065c095a87e7",
+    "build/goal-r1-touch-switch-c/mutants.log": "9a2160c4391acb7adf9b281ad6d0218c4604603eb282637b80bac0fa606c112d",
+    "build/goal-r1-touch-switch-c/audit.py": "6d50ecc0da0eaddcc24710200ad1ca91a1ca4b08f9fed4932f2553f10b8dfd75",
+    "build/goal-r1-touch-switch-c/object-audit.json": "eabe9450bda00f8d615dcf69f05419ca3d70ae1e491a8db41f329eeacf92c429",
+    "build/goal-r1-touch-switch-c/caller-audit.json": "17ce4d11907b905c343e26176a213dc30de9b51a5d7aea50acc706da4c6f05d6",
+    "build/goal-r1-touch-switch-c/r1-check.log": "8cd5dde4f2d8bb3dc19881eacd27d2f514ea2b0bf3533ebdcea53a40d23467a6",
+    "build/goal-r1-touch-switch-c/sources-check.log": "cff39a872a24be05eba76f0805d9b30b126d1f44c40a30d9175024f99a3c9f7c"
+  }
+}

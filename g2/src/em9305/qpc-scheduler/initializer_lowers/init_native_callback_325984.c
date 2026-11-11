@@ -1,88 +1,31 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_callback_325984\n"
-".type opencfw_em9305_callback_325984,@function\n"
-"opencfw_em9305_callback_325984:\n"
-"L325984:\n"
-"enter_s [r13-r15,blink]\n"
-"L325986:\n"
-"mov_s r3,r0\n"
-"L325988:\n"
-"add r3,r3,271\n"
-"L32598c:\n"
-"ldb_s r2,[r3,0]\n"
-"L32598e:\n"
-"mov_s r13,r0\n"
-"L325990:\n"
-"add_s r0,r1,0x1\n"
-"L325992:\n"
-"mpywhl r0,r0,r2\n"
-"L325996:\n"
-"ldb r14,[r3,-1]\n"
-"L32599a:\n"
-"mov_s r1,r13\n"
-"L32599c:\n"
-"add_s r14,r14,r0\n"
-"L32599e:\n"
-"exth_s r0,r14\n"
-"L3259a0:\n"
-"brlo.d.nt r0,0x25,L3259b8\n"
-"L3259a4:\n"
-"add r1,r1,270\n"
-"L3259a8:\n"
-"mpyuw r0,r0,0xdd68\n"
-"L3259b0:\n"
-"lsr_s r0,r0,0x15\n"
-"L3259b2:\n"
-"mpyw r0,r0,-37\n"
-"L3259b6:\n"
-"add_s r14,r14,r0\n"
-"L3259b8:\n"
-"stb_s r14,[r1,0]\n"
-"L3259ba:\n"
-"ld.as r0,[r13,69]\n"
-"L3259be:\n"
-"ld.as r1,[r13,70]\n"
-"L3259c2:\n"
-"exth_s r15,r14\n"
-"L3259c4:\n"
-"bl.d opencfw_em9305_radio_shift_3027f4\n"
-"L3259c8:\n"
-"mov_s r2,r15\n"
-"L3259ca:\n"
-"bbit1.d.nt r0,0,L3259f6\n"
-"L3259ce:\n"
-"add3 r0,r13,0x22\n"
-"L3259d2:\n"
-"ldb_s r0,[r0,0]\n"
-"L3259d4:\n"
-"brlo.d.nt r15,r0,L3259ec\n"
-"L3259d8:\n"
-"cmp_s r0,0x12\n"
-"L3259da:\n"
-"sub.hi r14,r14,r0\n"
-"L3259de:\n"
-"bhi_s L3259ec\n"
-"L3259e0:\n"
-"add r14,r14,r0\n"
-"L3259e4:\n"
-"sub_s r14,r14,r0\n"
-"L3259e6:\n"
-"extb_s r1,r14\n"
-"L3259e8:\n"
-"brhs.t r1,r0,L3259e4\n"
-"L3259ec:\n"
-"extb_s r0,r14\n"
-"L3259ee:\n"
-"add_s r13,r13,r0\n"
-"L3259f0:\n"
-"add r13,r13,284\n"
-"L3259f4:\n"
-"ldb_s r14,[r13,0]\n"
-"L3259f6:\n"
-"extb_s r0,r14\n"
-"L3259f8:\n"
-"leave_s [r13-r15,blink,pcl]\n"
-".size opencfw_em9305_callback_325984,.-opencfw_em9305_callback_325984\n"
-);
+#include <stdint.h>
+
+/* Native 0x325984..0x3259fa: channel selection algorithm #1. Advance the
+ * unmapped channel (+270) by (events + 1) * hop (+271) modulo 37 (stock
+ * reciprocal form for values of 37 and up); if it is not set in the
+ * channel map (+276/+280), remap it through the used-channel table (+284)
+ * by its remainder modulo the used-channel count (+272). */
+extern uint64_t opencfw_em9305_radio_shift_3027f4(uint32_t,uint32_t,uint32_t);
+
+uint32_t opencfw_em9305_callback_325984(uintptr_t record,uint32_t events)
+{
+    uint32_t hop=*(volatile uint8_t *)(record+271u);
+    uint32_t channel=*(volatile uint8_t *)(record+270u)+(events+1u)*hop;
+    if((uint16_t)channel>=37u) {
+        uint32_t quotient=((uint16_t)channel*0xdd68u)>>21;
+        channel+=(uint32_t)((int32_t)(int16_t)quotient*-37);
+    }
+    *(volatile uint8_t *)(record+270u)=(uint8_t)channel;
+    uint32_t unmapped=(uint16_t)channel;
+    uint32_t used=(uint32_t)opencfw_em9305_radio_shift_3027f4(
+        *(volatile uint32_t *)(record+276u),*(volatile uint32_t *)(record+280u),unmapped);
+    if(used&1u) return (uint8_t)channel;
+    uint32_t count=*(volatile uint8_t *)(record+272u);
+    if(unmapped>=count) {
+        if(count>0x12u)
+            channel-=count;
+        else
+            while((uint8_t)channel>=count) channel-=count;
+    }
+    return *(volatile uint8_t *)(record+(uint8_t)channel+284u);
+}

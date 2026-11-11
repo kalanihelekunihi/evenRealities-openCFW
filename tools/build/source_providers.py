@@ -59,13 +59,20 @@ def functions(path, include_objects=False):
                         address = struct.unpack_from('<I', data, off)[0]
                         if lo <= address < lo+size:
                             relocations.append(address)
-                            info = struct.unpack_from('<I', data, off+4)[0]
+                            rel_info = struct.unpack_from('<I', data, off+4)[0]
                             symbol_table = sections[rel[6]]
-                            symbol_offset = symbol_table[4] + (info >> 8)*symbol_table[9]
-                            symbol_name = struct.unpack_from('<I', data, symbol_offset)[0]
+                            symbol_offset = symbol_table[4] + (rel_info >> 8)*symbol_table[9]
+                            symbol_name, _, _, symbol_info, _, symbol_index = struct.unpack_from(
+                                '<IIIBBH', data, symbol_offset)
                             label=string(content(sections[symbol_table[6]]),symbol_name)
+                            if not label and symbol_info & 15 == 3 and symbol_index < len(sections):
+                                # Local STT_SECTION relocations have no symbol name.
+                                # Keep the section identity for an explicit native
+                                # scalar binding instead of dropping the relocation.
+                                label=string(names, sections[symbol_index][0])
                             relocation_symbols.append(label)
-                            relocation_records.append(dict(offset=address-lo,type=info & 255,symbol=label))
+                            relocation_records.append(dict(offset=address-lo,type=rel_info & 255,symbol=label,
+                                                           weak_undefined=(symbol_info >> 4 == 2 and symbol_index == 0)))
             markers=sorted(set(mappings.get(index,[])))
             points=sorted({lo,lo+size}|{a for a,k in markers if lo<a<lo+size})
             parts=[]
@@ -162,10 +169,38 @@ def link_function(obj, function, start_address, bindings, directory):
         raise ValueError('function has no isolated text section')
     directory.mkdir(parents=True, exist_ok=True)
     script = directory/'layout.ld'
-    script.write_text(f"SECTIONS {{ .provider 0x{start_address:x} : {{ *({function['section']}) }} /DISCARD/ : {{ *(*) }} }}\n")
+    # A relocation can target a local function or STT_SECTION symbol defined
+    # in this same object. --defsym cannot replace either when its owning
+    # section is discarded. Retain just those sections at independently
+    # recovered stock addresses; all other sections remain discarded.
+    # Legacy plans intentionally bind callable symbols with --defsym. Section
+    # symbols mark a recipe that also needs same-object local placement.
+    retain_locals = any(name.startswith('.') for name in bindings)
+    local_functions = {f['symbol']: f['section'] for f in functions(obj)} if retain_locals else {}
+    bound_sections = {}
+    defsyms = {}
+    for name, address in bindings.items():
+        if address is None:
+            continue
+        section = name if retain_locals and name.startswith('.') else local_functions.get(name)
+        if section and section != function['section']:
+            placement = address & ~1 if section.startswith('.text.') else address
+            if section in bound_sections and bound_sections[section] != placement:
+                raise ValueError('conflicting local section bindings')
+            bound_sections[section] = placement
+        else:
+            defsyms[name] = address
+    lines = [f"SECTIONS {{ .provider 0x{start_address:x} : {{ *({function['section']}) }}"]
+    lines += [f".bound{i} 0x{address:x} : {{ *({section}) }}"
+              for i, (section, address) in enumerate(sorted(bound_sections.items()))]
+    lines += ['/DISCARD/ : { *(*) } }']
+    script.write_text('\n'.join(lines) + '\n')
     elf = directory/'provider.elf'
     command = ['arm-none-eabi-ld','-T',str(script),'-o',str(elf),str(obj)]
-    command += [f'--defsym={name}=0x{address:x}' for name,address in sorted(bindings.items())]
+    # A None binding deliberately leaves a weak undefined symbol unresolved.
+    # GNU ld then performs its native weak-call relaxation, which differs from
+    # forcing the symbol to the absolute value zero with --defsym.
+    command += [f'--defsym={name}=0x{address:x}' for name,address in sorted(defsyms.items())]
     process = subprocess.run(command, capture_output=True, text=True)
     (directory/'link.log').write_text(process.stdout+process.stderr)
     if process.returncode: raise ValueError('production bindings do not close isolated function link')

@@ -21,7 +21,7 @@ const struct mutex_attr r1_kv_mutex_attributes __attribute__((section(".r1.kv.mu
 struct partition_view { uint8_t reserved[28];char device_name[24];volatile uint32_t offset,length; };
 _Static_assert(offsetof(struct partition_view,offset)==52 && offsetof(struct partition_view,length)==56,"FAL partition layout");
 extern void *osMutexNew(const void *);
-extern uint32_t r1_fal_is_initialized(void);
+extern int fal_init_check(void);
 extern int fal_init(void);
 extern const void *fal_partition_find(const char *);
 extern const void *fal_flash_device_find(const char *);
@@ -35,7 +35,7 @@ extern void nrf_log_frontend_std_4(uint32_t,const char *,uint32_t,uint32_t,uint3
 uint32_t r1_kv_port_initialize(void)
 {
  if (!r1_kv_mutex) r1_kv_mutex=osMutexNew(&r1_kv_mutex_attributes);
- if (!r1_fal_is_initialized()) (void)fal_init();
+ if (!fal_init_check()) (void)fal_init();
  r1_kv_storage_context=(void *)fal_partition_find(r1_kv_init_partition_name);
  if (!r1_kv_storage_context) {
   if ((r1_structured_log_mode_get()&1u)||(r1_structured_log_mode_get()&4u)) r1_structured_log_format(0x04000000,r1_kv_init_part_ring,r1_kv_init_part_ring);

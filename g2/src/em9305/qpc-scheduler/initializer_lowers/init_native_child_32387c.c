@@ -1,218 +1,63 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_32387c\n"
-".type opencfw_em9305_child_32387c,@function\n"
-"opencfw_em9305_child_32387c:\n"
-"L32387c:\n"
-"enter_s [r13-r18,fp,blink]\n"
-"L32387e:\n"
-"sub_s sp,sp,0xc\n"
-"L323880:\n"
-"mov_s r15,r0\n"
-"L323882:\n"
-"ldh_s r0,[r0,0x20]\n"
-"L323884:\n"
-"mov_s r17,r2\n"
-"L323886:\n"
-"mov_s r18,r1\n"
-"L323888:\n"
-"bmsk_s r0,r0,0x2\n"
-"L32388a:\n"
-"mov_s r13,0\n"
-"L32388c:\n"
-"mov_s r14,0\n"
-"L32388e:\n"
-"stb 7,[sp,4]\n"
-"L323892:\n"
-"stb_s r13,[sp,0x8]\n"
-"L323894:\n"
-"stb r13,[sp,7]\n"
-"L323898:\n"
-"stb r13,[sp,6]\n"
-"L32389c:\n"
-"brhs.d.nt r0,0x7,L3238c2\n"
-"L3238a0:\n"
-"stb r13,[sp,5]\n"
-"L3238a4:\n"
-"bih [r0]\n"
-"L3238a8:\n"
-"b_s L323910\n"
-"L3238aa:\n"
-"b_s L3238b6\n"
-"L3238ac:\n"
-"b_s L3238b6\n"
-"L3238ae:\n"
-"b_s L3238c2\n"
-"L3238b0:\n"
-"b_s L323950\n"
-"L3238b2:\n"
-"b_s L3238b6\n"
-"L3238b4:\n"
-"b_s L3238b6\n"
-"L3238b6:\n"
-"ldb r0,[r15,61]\n"
-"L3238ba:\n"
-"mov_s r14,0x18\n"
-"L3238bc:\n"
-"seteq r0,r0,0x1\n"
-"L3238c0:\n"
-"asl_s r13,r0,0x6\n"
-"L3238c2:\n"
-"add r16,r15,0x908\n"
-"L3238ca:\n"
-"bbit0.nt r14,0x4,L3238d2\n"
-"L3238ce:\n"
-"and r13,r13,191\n"
-"L3238d2:\n"
-"add_s r0,sp,0x4\n"
-"L3238d4:\n"
-"mov_s r1,r16\n"
-"L3238d6:\n"
-"bl.d opencfw_em9305_child_318440\n"
-"L3238da:\n"
-"mov_s r2,r15\n"
-"L3238dc:\n"
-"add_s r0,sp,0x4\n"
-"L3238de:\n"
-"mov_s r1,r16\n"
-"L3238e0:\n"
-"bl.d opencfw_em9305_child_3184f4\n"
-"L3238e4:\n"
-"mov_s r2,r15\n"
-"L3238e6:\n"
-"ldh_s r3,[r15,0x20]\n"
-"L3238e8:\n"
-"mov_s r0,r15\n"
-"L3238ea:\n"
-"add r0,r0,827\n"
-"L3238ee:\n"
-"stb 0,[r0]\n"
-"L3238f2:\n"
-"extb_s r2,r13\n"
-"L3238f4:\n"
-"bmsk_s r3,r3,0x1\n"
-"L3238f6:\n"
-"add r4,sp,0x4\n"
-"L3238fa:\n"
-"mov_s r5,0\n"
-"L3238fc:\n"
-"mov_s r7,0\n"
-"L3238fe:\n"
-"mov r6,r18\n"
-"L323902:\n"
-"mov_s r0,r15\n"
-"L323904:\n"
-"mov_s r1,r14\n"
-"L323906:\n"
-"bl.d opencfw_em9305_radio_compose_323dc0\n"
-"L32390a:\n"
-"st r17,[sp]\n"
-"L32390e:\n"
-"leave_s [r13-r18,fp,blink,pcl]\n"
-"L323910:\n"
-"ldh r0,[r15,0x8ca]\n"
-"L323918:\n"
-"ldb r1,[r15,61]\n"
-"L32391c:\n"
-"mov r2,369\n"
-"L323920:\n"
-"cmp_s r0,0\n"
-"L323922:\n"
-"seteq r3,r0,0\n"
-"L323926:\n"
-"seteq r0,r1,0x1\n"
-"L32392a:\n"
-"ldb_s r1,[r15,r2]\n"
-"L32392c:\n"
-"mov_s r14,0x18\n"
-"L32392e:\n"
-"asl_s r13,r3,0x6\n"
-"L323930:\n"
-"mov.eq r14,0\n"
-"L323934:\n"
-"asl_s r2,r0,0x6\n"
-"L323936:\n"
-"or_s r13,r13,r0\n"
-"L323938:\n"
-"breq_s r1,0,L323946\n"
-"L32393a:\n"
-"ldb r0,[r15,0xae2]\n"
-"L323942:\n"
-"brne_s r0,0,L323946\n"
-"L323944:\n"
-"mov_s r14,0x18\n"
-"L323946:\n"
-"bbit1.d.nt r14,0x4,L323996\n"
-"L32394a:\n"
-"or_s r13,r13,r2\n"
-"L32394c:\n"
-"bset_s r14,r14,0\n"
-"L32394e:\n"
-"b_s L3238c2\n"
-"L323950:\n"
-"ldh r0,[r15,0x8ca]\n"
-"L323958:\n"
-"ldb r1,[r15,61]\n"
-"L32395c:\n"
-"mov r2,369\n"
-"L323960:\n"
-"cmp_s r0,0\n"
-"L323962:\n"
-"seteq r0,r0,0\n"
-"L323966:\n"
-"asl_s r3,r0,0x6\n"
-"L323968:\n"
-"ldb_s r0,[r15,r2]\n"
-"L32396a:\n"
-"seteq r13,r1,0x1\n"
-"L32396e:\n"
-"mov_s r14,0x18\n"
-"L323970:\n"
-"asl_s r2,r13\n"
-"L323972:\n"
-"asl_s r1,r13,0x6\n"
-"L323974:\n"
-"or_s r13,r13,r3\n"
-"L323976:\n"
-"mov.eq r14,0\n"
-"L32397a:\n"
-"or_s r13,r13,r2\n"
-"L32397c:\n"
-"breq_s r0,0,L32398a\n"
-"L32397e:\n"
-"ldb r0,[r15,0xae2]\n"
-"L323986:\n"
-"brne_s r0,0,L32398a\n"
-"L323988:\n"
-"mov_s r14,0x18\n"
-"L32398a:\n"
-"bbit1.d.nt r14,0x4,L3239a6\n"
-"L32398e:\n"
-"or_s r13,r13,r1\n"
-"L323990:\n"
-"or r14,r14,0x3\n"
-"L323994:\n"
-"b_s L3238c2\n"
-"L323996:\n"
-"mov_s r0,0x805a85\n"
-"L32399c:\n"
-"ldb_s r0,[r0,0]\n"
-"L32399e:\n"
-"btst_s r0,0x5\n"
-"L3239a0:\n"
-"bmskn.ne r13,r13,0x5\n"
-"L3239a4:\n"
-"b_s L3238c2\n"
-"L3239a6:\n"
-"mov_s r0,0x805a85\n"
-"L3239ac:\n"
-"ldb_s r0,[r0,0]\n"
-"L3239ae:\n"
-"btst_s r0,0x5\n"
-"L3239b0:\n"
-"bic.ne r13,r13,0x3d\n"
-"L3239b4:\n"
-"b_s L3238c2\n"
-".size opencfw_em9305_child_32387c,.-opencfw_em9305_child_32387c\n"
-);
+#include <stdint.h>
+
+/* Native 0x32387c..0x3239b6: compose the advertising PDU for the record's
+ * event type (+32, low three bits). Connectable/scannable legacy types
+ * (1, 2, 5, 6) allow the TxAdd bit 0x40 for a random own address (+61);
+ * type 0 (and 4, extended) derive the header flags from the advertising
+ * data length (+2250), own address type and directed mode (+369 with
+ * +2786), forcing the extended header when the payload is empty or
+ * directed, otherwise limiting it to the plain (|1) or extended (|3)
+ * forms; with privacy (bit 5 of 0x805a85) the address flags are masked.
+ * A 5-byte header (7, then zeros) is filled by children 318440 and
+ * 3184f4 from the request block (+2312), the reject byte +827 is cleared
+ * and the PDU is composed into output with count. */
+extern uint32_t opencfw_em9305_child_318440(uintptr_t link,uintptr_t params,
+                                            uintptr_t request);
+extern void opencfw_em9305_child_3184f4(uintptr_t out,uintptr_t link,
+                                        uintptr_t request);
+extern uint32_t opencfw_em9305_radio_compose_323dc0(uintptr_t record,
+    uint32_t forced,uint32_t allowed,uint32_t prefix,uintptr_t header,
+    uintptr_t source,uintptr_t output,uint32_t type,uint32_t count);
+
+static inline uint32_t r8(uintptr_t a){return *(volatile uint8_t *)a;}
+static inline uint32_t r16(uintptr_t a){return *(volatile uint16_t *)a;}
+
+uint32_t opencfw_em9305_child_32387c(uintptr_t record,uintptr_t output,
+                                     uint32_t count)
+{
+    _Alignas(4) uint8_t header[8];
+    uint32_t kind=r16(record+32u)&7u;
+    uint32_t allowed=0u,forced=0u;
+    header[0]=7u;
+    header[4]=0u;
+    header[3]=0u;
+    header[2]=0u;
+    header[1]=0u;
+    if(kind==1u||kind==2u||kind==5u||kind==6u){
+        forced=0x18u;
+        allowed=(uint32_t)(r8(record+61u)==1u)<<6;
+    }else if(kind==0u||kind==4u){
+        uint32_t length=r16(record+2250u);
+        uint32_t random=r8(record+61u)==1u;
+        uint32_t empty=length==0u;
+        uint32_t directed=r8(record+369u);
+        forced=empty?0u:0x18u;
+        if(kind==0u)allowed=(empty<<6)|random|(random<<6);
+        else allowed=random|(empty<<6)|(random<<1)|(random<<6);
+        if(directed!=0u&&r8(record+2786u)==0u)forced=0x18u;
+        if((forced&0x10u)!=0u){
+            if((r8(0x805a85u)&0x20u)!=0u)
+                allowed&=kind==0u?~0x3fu:~0x3du;
+        }else{
+            forced|=kind==0u?1u:3u;
+        }
+    }
+    uintptr_t request=record+0x908u;
+    if((forced&0x10u)!=0u)allowed&=0xbfu;
+    (void)opencfw_em9305_child_318440((uintptr_t)header,request,record);
+    opencfw_em9305_child_3184f4((uintptr_t)header,request,record);
+    uint32_t prefix=r16(record+32u)&3u;
+    *(volatile uint8_t *)(record+827u)=0u;
+    return opencfw_em9305_radio_compose_323dc0(record,forced,(uint8_t)allowed,
+        prefix,(uintptr_t)header,0u,output,0u,count);
+}

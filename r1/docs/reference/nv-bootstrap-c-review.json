@@ -1,0 +1,136 @@
+{
+  "schema_version": 1,
+  "scope": "R1 eight-slot NV cached-class restoration and full NV initialization chain",
+  "report": "build/sources-goal-r1-nv-bootstrap-c/report.json",
+  "comparison_report": "build/sources-goal-r1-nv-startup-c/report.json",
+  "audit": {
+    "compiled_units": 858,
+    "application_imports": 64,
+    "bootloader_imports": 22,
+    "unchanged_prior_nongenerated_objects": 847,
+    "changed_prior_nongenerated_objects": [],
+    "new_nongenerated_sources": [
+      "r1/src/application/runtime/native_nv_bootstrap.c"
+    ],
+    "normal_object_equals_direct_and_pipeline_objects": true,
+    "manifest_change": "one NV bootstrap unit using existing NV startup profile",
+    "source_plan_unchanged": true,
+    "new_mutable_persistent_bytes": 0,
+    "closed_import": "r1_nv_store_bootstrap_73220",
+    "new_imports": []
+  },
+  "direct": {
+    "stock_C_comparisons": 10080,
+    "native_instruction_bytes_executed": 440,
+    "malformed_header_fail_closed_cases": 22,
+    "actual_crc_strcmp_and_memmove": true,
+    "all_eight_slots_and_duplicate_class_updates": true,
+    "open_allocation_cleanup_and_return_status": true,
+    "live_port_handle_and_log_flag_mutations": true,
+    "payload_copy_and_guards": true,
+    "physical_flash_and_concurrency_unverified": true
+  },
+  "actual_full_startup_chain": {
+    "stock_C_comparisons": 756,
+    "native_instruction_bytes_executed": 394,
+    "malformed_header_fail_closed_cases": 0,
+    "actual_full_nv_startup_binder_port_open_control_close_hash_crc_and_copy": true,
+    "storage_initializer_and_read_modeled": true,
+    "all_eight_slots_and_duplicate_class_updates": true,
+    "open_allocation_cleanup_and_return_status": true,
+    "live_port_handle_and_log_flag_mutations": true,
+    "payload_copy_and_guards": true,
+    "physical_flash_and_concurrency_unverified": true
+  },
+  "compiled_defects_rejected": [
+    {
+      "defect": "wrong-open-mode",
+      "rejected": true,
+      "log": "build/goal-r1-nv-bootstrap-c/wrong-open-mode/test.log"
+    },
+    {
+      "defect": "omit-last-slot",
+      "rejected": true,
+      "log": "build/goal-r1-nv-bootstrap-c/omit-last-slot/test.log"
+    },
+    {
+      "defect": "inverted-crc",
+      "rejected": true,
+      "log": "build/goal-r1-nv-bootstrap-c/inverted-crc/test.log"
+    },
+    {
+      "defect": "inverted-key-match",
+      "rejected": true,
+      "log": "build/goal-r1-nv-bootstrap-c/inverted-key-match/test.log"
+    },
+    {
+      "defect": "wrong-slot-index",
+      "rejected": true,
+      "log": "build/goal-r1-nv-bootstrap-c/wrong-slot-index/test.log"
+    },
+    {
+      "defect": "missing-close",
+      "rejected": true,
+      "log": "build/goal-r1-nv-bootstrap-c/missing-close/test.log"
+    },
+    {
+      "defect": "missing-header-size-guard",
+      "rejected": true,
+      "log": "build/goal-r1-nv-bootstrap-c/missing-header-size-guard/test.log"
+    }
+  ],
+  "stock_entry": "0x73220",
+  "stock_body_bytes": 440,
+  "all_native_instruction_bytes_executed": true,
+  "public_contract": [
+    "Live port open r; nonzero open returns6. Allocate256; failure returns1 without close as in stock.",
+    "Read eight 256-byte slots with offsets slot<<8; read errors skip processing. Match live classes by hash and terminated key.",
+    "Validate actual payload CRC against stored CRC; copy configured size+24 bytes, preserve flag low2 and replace upper14 bits with slot index; later slots can overwrite earlier values.",
+    "Reload logging modes/flags and live port/handles; close then free on normal completion; return0.",
+    "Slot8 open callback now has typed const char * argument; all prior compiled objects remain identical."
+  ],
+  "intentional_hardening": [
+    "A matching record is skipped if configured payload exceeds231 or stored payload size differs from the configured size.",
+    "The payload CRC does not authenticate the size header. Rejection prevents extent corruption and subsequent CRC/copy overreads; skipped records leave cached classes intact.",
+    "22 separate source-only malformed cases verify rejection and guards. They are not claimed stock-equivalent."
+  ],
+  "limits": [
+    "Allocation, open/read/close and logging modeled directly; pipeline executes actual NV initializer, hash registration, binder, port record/open/control/close, CRC, key comparison and memory copy.",
+    "Storage initializer and record read provider remain modeled in the full chain; physical flash reads/writes and failure recovery on hardware unverified.",
+    "Models use real Thumb returns; normal SP, saved registers/FP registers, masks and buffer/caller-stack guards checked.",
+    "Private frame aliases, arbitrary provider overruns, incidental caller registers, APSR, concurrency/faults, final application linking and boot unverified."
+  ],
+  "evidence_files": {
+    "build/sources-goal-r1-nv-bootstrap-c/report.json": "f180eca92989c88fb611096997f7dee33dad984d1f86938787d415e4f9463a68",
+    "build/sources-goal-r1-nv-startup-c/report.json": "74d4fb5704ab0c5a39622808e3139ec00e24fdff14c08ae1eb3f06b8a1d626bb",
+    "r1/src/application/runtime/native_nv_bootstrap.c": "1926ac40f34d13189970d1870de2e4e52b5b828e018813feb6be72cd03d144a6",
+    "r1/src/application/runtime/native_nv_startup.c": "5570229d32511ee52f448fa9c1bb1e0a5f3becc5593fde074769e2bc32fbc8fd",
+    "r1/src/application/runtime/native_nv_update.c": "8c29236368109101018ddfccd3c171bd2ed5aef22b6ac75140d71915ac34bf34",
+    "r1/src/application/board/native_kv_class.h": "c00e97191b11d35d85e85a85368844cd67052908d733b963213537b79809d62f",
+    "r1/src/application/board/native_kv_port.c": "3029e78783064b7bffe490917bce32560493d44d01c84a86e5a21cfcc2eecc60",
+    "r1/src/application/checksums/stock_checksums.c": "63f78e208048b5bd4b91c00f97e1260a5a53f5bee50dc51aa5ce4aaa1cdfe898",
+    "r1/src/include/r1_stock_checksums.h": "af730ecb8d2e2cc5656016b269678e7f1ac6c7e48fe32401fdfb9b7206886ef9",
+    "r1/src/sources.json": "55d7e73f1c7c8fa71fe7987d6cf9ba547c2c608b78f4c319ff56dabbac08c4ba",
+    "tools/build/source-plan.json": "eeb516e31b3310fb0718f36908977f8125723f7c5e0e86cd6744395826259a4d",
+    "build/goal-r1-nv-bootstrap-c/manifest-before.json": "f0d2287957bb44ebac0ae61e973261e825cf2a61aec35c2cb0db9fd126d38e0c",
+    "build/goal-r1-nv-bootstrap-c/port-before.c": "45a4394808e7a03115ef07440f2444b740e75c6e08d3e78d129afaaa3066c5d8",
+    "build/goal-r1-nv-bootstrap-c/record.py": "9644a24f4efaa5729e9a520aa429567bf80844aecaad3c1f8282fdc593fde925",
+    "build/goal-r1-nv-bootstrap-c/rea.json": "a1011e2cc1fd9ec65edd3d8c4c40d0dff1f4e680e9e12dbad89ee18387b533db",
+    "build/goal-r1-nv-bootstrap-c/verify.py": "23e3a2b1217d5ef555840429294e77917fb7b60d55e6b5912d993d25074c1dbd",
+    "build/goal-r1-nv-bootstrap-c/results.json": "534f791a352eece41a68391dcd83ed78ceaebba0256cc9f6837915ffaf69a0a8",
+    "build/goal-r1-nv-bootstrap-c/verification.log": "0dc7c7820fe238d6274155c6c06d8919dec95d3f1ee8492169fce954bde80e9e",
+    "build/goal-r1-nv-bootstrap-c/source.elf": "21708fe5dcafb0a0ca6dc3f6058462b9faf50869f4d9ed970363e5fbab3917f0",
+    "build/goal-r1-nv-bootstrap-c/pipeline/verify.py": "99729eda889188084792c1eeb25e1e5ae448435d157bed647a5edf3ce158ab8b",
+    "build/goal-r1-nv-bootstrap-c/pipeline/results.json": "c83b2d32745ab89941229b8ceb63a622866f627c088612be7a6c20bf01195c5a",
+    "build/goal-r1-nv-bootstrap-c/pipeline/verification.log": "bff2e15ecbde3031211caa7dd9cc53242686bc85583d50d6ffb7fbbed3078835",
+    "build/goal-r1-nv-bootstrap-c/pipeline/source.elf": "b98a0a933eb9af92cb3750b1a8e6859cd5af307dcafe97dc74ba678480e8f5e1",
+    "build/goal-r1-nv-bootstrap-c/negative.py": "6dd2b602b43aeef561375688e16dc08f9da26d1759248ad61e2b077f8d8253b6",
+    "build/goal-r1-nv-bootstrap-c/negative.json": "4ee887d90280ca0031d4df0ac5ae86fcd87b4842970a87dd1f2b47f976e06e08",
+    "build/goal-r1-nv-bootstrap-c/negative.log": "cab6607153fd0dd73c2160d36a9f392d643c2158c207e9de38b10d6bb74df376",
+    "build/goal-r1-nv-bootstrap-c/build.log": "77cb3b34c1e72266d0c3057f64f45cfcb3fcd115021265313c98ccdad694b069",
+    "build/goal-r1-nv-bootstrap-c/sources-check.log": "0dd3579b72cd2c8f4c16c0bd85d5b25efc6ffc359baa56870ffd51fe3a86ce74",
+    "third-party/upstream/musl-memmove-1.2.5/memmove.c": "1304f9ddfc18594f5d9a84691892b9fdaf3be8ecc6d7f365c691abb138eaf74e",
+    "third-party/upstream/musl-memory-1.2.5/memcpy.c": "1664d565f968b053ac33c5ac615c057a255a5821c8fa510fba61d4f63dee08e9",
+    "third-party/upstream/musl-memory-1.2.5/strcmp.c": "3e1793ea2dd358e5c884c4dd232083605d0f6775f7ebe19d03d64fe97068a78f"
+  }
+}

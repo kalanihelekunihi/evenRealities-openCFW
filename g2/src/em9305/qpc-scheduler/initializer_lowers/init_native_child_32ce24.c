@@ -1,76 +1,28 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_32ce24\n"
-".type opencfw_em9305_child_32ce24,@function\n"
-"opencfw_em9305_child_32ce24:\n"
-"L32ce24:\n"
-"push_s r13\n"
-"L32ce26:\n"
-"mov_s r1,0x805c6c\n"
-"L32ce2c:\n"
-"ld r1,[r1,0]\n"
-"L32ce2e:\n"
-"mov_s r2,r0\n"
-"L32ce30:\n"
-"add r2,r2,764\n"
-"L32ce34:\n"
-"ldb_s r3,[r1,0x4]\n"
-"L32ce36:\n"
-"stb_s r3,[r2,0]\n"
-"L32ce38:\n"
-"ldb_s r12,[r1,0x5]\n"
-"L32ce3a:\n"
-"add_s r13,r12,r0\n"
-"L32ce3c:\n"
-"add r13,r13,331\n"
-"L32ce40:\n"
-"ldb_s r1,[r13,0]\n"
-"L32ce42:\n"
-"stb_s r12,[r2,0x2]\n"
-"L32ce44:\n"
-"cmp_s r1,0x7e\n"
-"L32ce46:\n"
-"bne_s L32ce6e\n"
-"L32ce48:\n"
-"mov_s r1,0x805cac\n"
-"L32ce4e:\n"
-"ld r2,[r1,0]\n"
-"L32ce50:\n"
-"cmp_s r12,3\n"
-"L32ce52:\n"
-"ldb r2,[r2,40]\n"
-"L32ce56:\n"
-"stb_s r2,[r13,0]\n"
-"L32ce58:\n"
-"blo_s L32ce6e\n"
-"L32ce5a:\n"
-"ld r2,[r1,0]\n"
-"L32ce5c:\n"
-"mov_s r1,2\n"
-"L32ce5e:\n"
-"mov.eq r1,0x3\n"
-"L32ce62:\n"
-"add_s r1,r1,r0\n"
-"L32ce64:\n"
-"ldb r2,[r2,40]\n"
-"L32ce68:\n"
-"add r1,r1,332\n"
-"L32ce6c:\n"
-"stb_s r2,[r1,0]\n"
-"L32ce6e:\n"
-"mov r1,771\n"
-"L32ce72:\n"
-"ldb_s r1,[r0,r1]\n"
-"L32ce74:\n"
-"or.f 0,r1,r3\n"
-"L32ce78:\n"
-"bne_s L32ce82\n"
-"L32ce7a:\n"
-"add r0,r0,745\n"
-"L32ce7e:\n"
-"stb 1,[r0]\n"
-"L32ce82:\n"
-"leave_s [r13,pcl]\n"
-".size opencfw_em9305_child_32ce24,.-opencfw_em9305_child_32ce24\n"
-);
+#include <stdint.h>
+
+/* Native 0x32ce24..0x32ce84: latch the current command's PHY bytes (+4,
+ * +5 of 0x805c6c) into the record at +764/+766. A 0x7e placeholder in
+ * the per-PHY slot (+331+phy) is replaced by the configured default
+ * (+40 of 0x805cac), which for coded PHYs (>=3) is also stored in slot
+ * +335 (phy 3) or +334. With no PHY change pending (+771) and a zero
+ * first byte, set the report byte at +745. */
+void opencfw_em9305_child_32ce24(uintptr_t record)
+{
+    uintptr_t command=*(volatile uint32_t *)(uintptr_t)0x805c6cu;
+    uint32_t first=*(volatile uint8_t *)(command+4u);
+    *(volatile uint8_t *)(record+764u)=(uint8_t)first;
+    uint32_t phy=*(volatile uint8_t *)(command+5u);
+    volatile uint8_t *slot=(volatile uint8_t *)(record+phy+331u);
+    uint32_t current=*slot;
+    *(volatile uint8_t *)(record+766u)=(uint8_t)phy;
+    if(current==0x7eu){
+        *slot=*(volatile uint8_t *)(*(volatile uint32_t *)(uintptr_t)0x805cacu+40u);
+        if(phy>=3u){
+            uint32_t index=(phy==3u)?3u:2u;
+            *(volatile uint8_t *)(record+index+332u)=
+                *(volatile uint8_t *)(*(volatile uint32_t *)(uintptr_t)0x805cacu+40u);
+        }
+    }
+    if((*(volatile uint8_t *)(record+771u)|first)==0u)
+        *(volatile uint8_t *)(record+745u)=1u;
+}

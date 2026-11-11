@@ -1,0 +1,181 @@
+{
+  "schema_version": 1,
+  "scope": "R1 STACMD void GPIO/transmit/recovery interfaces and C callback dispatcher",
+  "report": "build/sources-goal-r1-stacmd-void-reviewed-c/report.json",
+  "comparison_report": "build/sources-goal-r1-device-status-pure-c/report.json",
+  "audit": {
+    "compiled_units": 855,
+    "application_imports": 61,
+    "bootloader_imports": 22,
+    "unchanged_prior_nongenerated_objects": 844,
+    "changed_nongenerated_objects": [
+      "r1/src/application/board/native_stacmd_transmit.c"
+    ],
+    "import_sets_unchanged": true,
+    "C_gateway_bytes": "0847",
+    "gateway_matches_old_assembly": true,
+    "all_transmit_functions_except_write_bits_identical": true,
+    "recovery_object_identical": true,
+    "write_bits_only_byte_delta": [
+      [
+        26,
+        105,
+        104
+      ]
+    ],
+    "write_bits_relocations_alignment_and_size_unchanged": true,
+    "no_new_persistent_state": true,
+    "manifest_unchanged": true
+  },
+  "frames": {
+    "cases": 479,
+    "executions": 1437,
+    "stock_previous_c_match": true,
+    "gpio_only_C_models": true,
+    "actual_read_write_recovery_and_bit_drivers": true,
+    "nop_counts_and_GPIO_traces_match": true,
+    "success_parity_failure_bit_timeouts_and_partial_outputs": true,
+    "private_frames_caller_clobbered_registers_excluded": true,
+    "physical_timing_and_GPIO_unverified": true
+  },
+  "direct_call_scan": {
+    "target": "0x5cc68",
+    "direct_sites": [
+      {
+        "address": "0x28bd4",
+        "following": [
+          {
+            "address": "0x28bd8",
+            "mnemonic": "movs",
+            "operands": "r0, #1"
+          },
+          {
+            "address": "0x28bda",
+            "mnemonic": "bl",
+            "operands": "#0x5cbe4"
+          },
+          {
+            "address": "0x28bde",
+            "mnemonic": "mov",
+            "operands": "r0, sp"
+          },
+          {
+            "address": "0x28be0",
+            "mnemonic": "bl",
+            "operands": "#0x969ec"
+          }
+        ]
+      },
+      {
+        "address": "0x28c88",
+        "following": [
+          {
+            "address": "0x28c8c",
+            "mnemonic": "movs",
+            "operands": "r0, #0"
+          },
+          {
+            "address": "0x28c8e",
+            "mnemonic": "bl",
+            "operands": "#0x5cbe4"
+          },
+          {
+            "address": "0x28c92",
+            "mnemonic": "mov",
+            "operands": "r0, sp"
+          },
+          {
+            "address": "0x28c94",
+            "mnemonic": "bl",
+            "operands": "#0x969ec"
+          }
+        ]
+      },
+      {
+        "address": "0x28cb0",
+        "following": [
+          {
+            "address": "0x28cb4",
+            "mnemonic": "mov",
+            "operands": "r0, sp"
+          },
+          {
+            "address": "0x28cb6",
+            "mnemonic": "bl",
+            "operands": "#0x969ec"
+          },
+          {
+            "address": "0x28cba",
+            "mnemonic": "cbz",
+            "operands": "r0, #0x28cc8"
+          },
+          {
+            "address": "0x28cbc",
+            "mnemonic": "ldrb",
+            "operands": "r0, [r5, r4]"
+          }
+        ]
+      }
+    ],
+    "all_three_direct_callers_overwrite_R0": true,
+    "thumb_pointer_literal_occurrences": 0,
+    "indirect_references_not_proven": true
+  },
+  "compiled_defects_rejected": [
+    {
+      "name": "skipped_GPIO",
+      "rejected": true
+    },
+    {
+      "name": "repeated_GPIO",
+      "rejected": true
+    },
+    {
+      "name": "wrong_pin",
+      "rejected": true
+    },
+    {
+      "name": "short_one_pulse",
+      "rejected": true
+    }
+  ],
+  "public_contract": [
+    "Transmit, idle and recovery callers consume effects rather than raw void-callback return residue.",
+    "C gateway retains the historical symbol name and compiles to the same BX R1 instruction.",
+    "Pulse NOP blocks and recovery delay primitive remain assembly and unchanged."
+  ],
+  "limits": [
+    "GPIO-only C models execute, not physical GPIO; timing/electrical behavior and final linking/startup unverified.",
+    "No cycle-accurate timing proof is inferred from NOP counts.",
+    "Write-bits ADD destination changes from R1 to R0 after a child call; its result is outside the void C API. All three decoded direct stock callers overwrite R0.",
+    "Indirect stock references, private frames, caller-clobbered residues, faults/concurrency and byte identity excluded."
+  ],
+  "evidence_files": {
+    "build/sources-goal-r1-stacmd-void-reviewed-c/report.json": "3dfcfb8d359ce365eab9368cd6cf79b31c9d89b0013961c973c933210f91176d",
+    "build/sources-goal-r1-device-status-pure-c/report.json": "1f10e11afeb8bf0811fdfb210bd77324d781ec1427f987334e6ea2aaa843414d",
+    "r1/src/application/board/native_stacmd_transmit.c": "81e4c15bd7ae0d933638abbeb333c8bc902601bb50600cf328f258d0a7ae5b4f",
+    "r1/src/application/board/native_stacmd_recovery.c": "4607d7f62bbec253f503a983445a401b6414d2dfc435047b4cd7f3eff0b2f61e",
+    "r1/src/application/board/native_stacmd.h": "85ec303b5d12b82caf30429ccc5f1f9854aea4f7e8f7902321552596d382e106",
+    "r1/src/application/board/native_stacmd_frames.c": "4987a1e45db89c4646a80fcd44851fbd8e86e8b39a9be0d5b0dc582eea1da2dd",
+    "r1/src/application/board/native_stacmd_receive.c": "c5078016f8956729e210f50afd1051133ee239f29a8765b0d8eb28741b2174b0",
+    "r1/src/application/board/native_stacmd_delay.c": "a32a752c54def86d2abf1da657712875dd62c9feb2baf6badedbbe77742947c5",
+    "r1/src/application/board/native_stacmd_operations.c": "150d9de3d20842da7beead615f22d8863149495fcb446b8ed8ca5f4e0b5488e6",
+    "r1/src/application/board/native_stacmd_write_retry.c": "79077b73503dacbebbdbc7d6ee8199444ee2be296bd0cf70bd70fb25d047722d",
+    "r1/src/sources.json": "f74aa01d5bac1e3a8786b1052791cbd6344c1fd57ce26a11f1d65de93506ad72",
+    "tools/build/source-plan.json": "eeb516e31b3310fb0718f36908977f8125723f7c5e0e86cd6744395826259a4d",
+    "build/goal-r1-stacmd-void-c/rea.json": "25929a876851aaaccd9181c31f1f60262c8d1f230636d210fd6d3ad73515e8cd",
+    "build/goal-r1-stacmd-void-c/verify.py": "22514593bffe807f75a6b46756d818f0694e8daa908b7370cd10c9a5049767d6",
+    "build/goal-r1-stacmd-void-c/verification.json": "96dfc7f5c519ac2ee642a2716a5cb1124e5a07979af2299f4346927686759ff8",
+    "build/goal-r1-stacmd-void-c/verification.log": "77ad021950d299d0f3964b9ab3a14453d9f69c3e9c58ee5a95d488929dda1091",
+    "build/goal-r1-stacmd-void-c/gpio.c": "d07bfa27cd9468bf6fa749f1d2a9e8d8a9e798e65ec58e8ca1383813a5c09b55",
+    "build/goal-r1-stacmd-void-c/source.elf": "f7cf495dc554ac1bad1e346619c31d909f33dd078567d48f8e430328d5cb2bb6",
+    "build/goal-r1-stacmd-void-c/previous.elf": "21722706e2920362c678ef3eac903850347faf558aad47c1ed9a0daa788678d2",
+    "build/goal-r1-stacmd-void-c/scan-calls.py": "11f0ceb28ef3f6d6ef0bf17f58f935b46a19d415df9b601537496bf477faac79",
+    "build/goal-r1-stacmd-void-c/direct-call-sites.json": "bc763d5b07b292b0d03d49b22ffa3246cac8663db06d0fe73474a089e5d6ac87",
+    "build/goal-r1-stacmd-void-c/negative.py": "e64e40d23f3fc085d9d27d50e3b4ec45485f9f07d7bd82753ee9e1be61166449",
+    "build/goal-r1-stacmd-void-c/negative.json": "19473e64fec736538116e1bdbd817be43bb95dec7da4834e91a8759fe72941a9",
+    "build/goal-r1-stacmd-void-c/negative.log": "0d524089f1a8976a72e14580d7ceb228f08550308122a5014d5c6873d3509e58",
+    "build/goal-r1-stacmd-void-c/reviewed-build.log": "543dcaed463e4a378a5a6cac8acd555d0f73a9837edfbbbc36598becd0e653e0",
+    "build/goal-r1-stacmd-void-c/sources-check.log": "f610d186f791ebf717d9fd6eed6c4f28612779fff34b885bcf8dc8a49c9ae80c"
+  }
+}

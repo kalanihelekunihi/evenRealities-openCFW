@@ -1,0 +1,52 @@
+{
+  "artifact": "g2/blobs/official/g2-2.2.6.10/firmware_ble_em9305.bin",
+  "artifact_sha256": "91a38f7fc05555f86181ecb22b363e3239bfcaaa2ff6171e98524ae64821eca9",
+  "source_link": {
+    "binary": "build/g2-source-images-with-nordic-20261110/g2-em9305/g2-em9305.bin",
+    "binary_sha256": "c6fd8a929bb27af6292cdab6a87d753010c5975410b8d05174cad160b0017d71",
+    "linker_script": "g2/src/em9305/link/g2-em9305.ld",
+    "linked_origin": "0x00302400",
+    "scope": "application only; the source-linked binary is not a complete four-record EM9305 firmware package"
+  },
+  "records": [
+    {
+      "index": 0,
+      "target": "0x00300000",
+      "bytes": 224,
+      "sha256": "137944c2c57f7114638d16c3be1c95a54afb9a4be600bc42a2b543add11571ee",
+      "source_status": "missing",
+      "classification": "within the documented NVM bootloader region; code/data split not established"
+    },
+    {
+      "index": 1,
+      "target": "0x00300400",
+      "bytes": 656,
+      "sha256": "e3fdf1874d05d7687aeda3b60061dd0f3814fdc0b246d7bfbe2291fa457d645b",
+      "source_status": "missing",
+      "classification": "within the documented NVM bootloader region; code/data split not established"
+    },
+    {
+      "index": 2,
+      "target": "0x00302000",
+      "bytes": 56,
+      "sha256": "fd94baffbf73433a951033ca0c44a5c60c3771af503eeb455a1b4941519d4f6f",
+      "source_status": "missing",
+      "classification": "FHDR descriptor with a 0x00302028 entry-address field; executable content at that address not yet proven"
+    },
+    {
+      "index": 3,
+      "target": "0x00302400",
+      "bytes": 210888,
+      "sha256": "0de6e945a56ec886a92e44d4eaefe02fbca6db11f8747876e30bffb45cffce03",
+      "source_status": "source-linked candidate exists; stock byte identity and completeness unproven",
+      "classification": "EM9305 application"
+    }
+  ],
+  "evidence": [
+    "g2/docs/reference/firmware-formats.md",
+    "g2/docs/reference/memory-map.md",
+    "g2/research/corpus/em9305/vendor-documents/EM9305-DS.pdf pages 83-87, 89-91",
+    "g2/tools/analyze_em9305_record_package.py stock round-trip"
+  ],
+  "qualification": "The EM9305 datasheet locates the NVM bootloader before the optional EM-Core/application. It does not document the stock record-level instruction boundaries or prove that record 2 contains executable code. No retained record bytes were added to source."
+}

@@ -1,0 +1,165 @@
+{
+  "schema_version": 1,
+  "scope": "Native Goodix processing-workspace teardown in ordinary C",
+  "report": "build/sources-goal-r1-goodix-native-workspace-teardown-c/report.json",
+  "comparison_report": "build/sources-goal-r1-goodix-native-hrv-teardown-c/report.json",
+  "stock_entries": [
+    {
+      "entry": "0x29bbc",
+      "size": 184,
+      "symbol": "r1_goodix_native_workspace_destroy",
+      "provider": "r1/src/application/goodix/native_workspace_teardown.c"
+    },
+    {
+      "entry": "0x667c0",
+      "size": 6,
+      "symbol": "r1_goodix_native_release_record",
+      "provider": "r1/src/application/goodix/native_workspace_teardown.c"
+    },
+    {
+      "entry": "0x6628a",
+      "size": 20,
+      "symbol": "r1_goodix_native_release_cell",
+      "provider": "r1/src/application/goodix/native_hrv_teardown.c"
+    },
+    {
+      "entry": "0x662c6",
+      "size": 20,
+      "symbol": "r1_goodix_native_release_cell",
+      "provider": "r1/src/application/goodix/native_hrv_teardown.c"
+    }
+  ],
+  "audit": {
+    "compiled_units": 870,
+    "unchanged_prior_nongenerated_objects": 859,
+    "new_units": [
+      "r1/src/application/goodix/native_workspace_teardown.c"
+    ],
+    "differing_existing_generated_objects": [
+      "{gen}/r1_startup_vectors.S",
+      "{gen}/r1_uecc.c"
+    ],
+    "application_imports": 62,
+    "bootloader_imports": 22,
+    "removed_imports": [],
+    "added_imports": [],
+    "new_writable_state_bytes": 0,
+    "source_plan_and_cache_layout_unchanged": true,
+    "tested_object_equals_normal_build": true,
+    "only_manifest_change_is_one_new_unit": true,
+    "portable_heap_and_existing_byte_fill_objects_unchanged": true
+  },
+  "direct": {
+    "all16_clear_mask_comparisons": 65536,
+    "all9_record_mask_comparisons": 1024,
+    "live_slot_mutation_comparisons": 20,
+    "direct_helper_comparisons": 48,
+    "initial_null_access_cases": 4,
+    "native_instruction_bytes_executed": [
+      184,
+      6,
+      20,
+      20
+    ],
+    "release_arguments_call_time_snapshots_and_write_width_order_values_match": true,
+    "independent_unconditional_record_and_nullable_cell_sequence_oracle": true,
+    "shared_existing_release_cell_provider": true,
+    "allocator_release_modeled": true
+  },
+  "actual_heap": {
+    "actual_C_heap_workspace_comparisons": 640,
+    "actual_initializer_malloc_free_and_workspace_destroy_execute": true,
+    "typed_workspace_preparation_not_algorithm_initialization": true,
+    "root_before_or_after_children_optional_live_guard": true,
+    "root_remains_allocated_until_caller_frees_it": true,
+    "entire_heap_and_write_width_order_values_match": true,
+    "source_pipeline_cannot_execute_stock": true,
+    "native_workspace_instruction_bytes": [
+      184
+    ]
+  },
+  "compiled_defects_rejected": [
+    {
+      "defect": "record-pointer-offset",
+      "rejected": true
+    },
+    {
+      "defect": "null-record-release",
+      "rejected": true
+    },
+    {
+      "defect": "clear-record-cell",
+      "rejected": true
+    },
+    {
+      "defect": "record-order",
+      "rejected": true
+    },
+    {
+      "defect": "missing-last-cell",
+      "rejected": true
+    },
+    {
+      "defect": "wrong-clear-offset",
+      "rejected": true
+    },
+    {
+      "defect": "free-workspace",
+      "rejected": true
+    },
+    {
+      "defect": "wrong-cell-address",
+      "rejected": true
+    },
+    {
+      "defect": "return-status",
+      "rejected": true
+    },
+    {
+      "defect": "null-workspace-guard",
+      "rejected": true
+    }
+  ],
+  "contract": [
+    "Release nine record-owned pointers at record offsets04,14,24,34,44,54,64,84,74, loading each allocation at record+4. Call free even for null and leave record cells unchanged.",
+    "Release then clear sixteen nullable cells at94,9c,a4,ac,b4,bc,c4,cc,d4,dc,ec,fc,10c,11c,12c,13c. Read each cell live when visited. Reuse the existing canonical release-cell implementation.",
+    "Return zero without releasing the workspace itself. Its caller owns that allocation."
+  ],
+  "limits": [
+    "All230 native instruction bytes execute. Direct calls model free and callback scratch clobbers; actual-heap comparisons execute the C allocator and prohibit entering stock code.",
+    "Initial null accesses at8 for workspace,4 for record,0 for cells are checked only as unmapped emulator reads, not physical MCU fault behavior. Workspace and cell validity are required.",
+    "Saved integer/FP registers, SP, masks, FPSCR and caller guards checked. Caller scratch, APSR and private frames excluded.",
+    "Workspace fields are test fixture preparation, not recovered algorithm initialization. No new writable state or imports.",
+    "Processing parent teardown and its typed destructor dispatch, remaining algorithms, concurrency, final linking/startup, physical memory and boot remain open. Relocatable composition is not an executable firmware build."
+  ],
+  "evidence_files": {
+    "build/sources-goal-r1-goodix-native-workspace-teardown-c/report.json": "845dc9107e22ad1899b0599935be89afafb5a869a541965adf7d09f039566d2d",
+    "build/sources-goal-r1-goodix-native-hrv-teardown-c/report.json": "cac05e79d02186826ef4c7cc48e9a07a1b0d3e04e0f9ed5f79fbf917188e38a5",
+    "r1/src/application/goodix/native_workspace_teardown.c": "518d7d7a9a9b5fe931622a9111dbeee24f66bee47bdb46220d460c02ae39c5dc",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-native-workspace-teardown-c/r1/r1-application/r1__src__application__goodix__native_workspace_teardown.c.o": "6d8fc89dcbc992288e6f9440279aaedad452d0ae358696930327689d8ef13c04",
+    "r1/src/sources.json": "98b43320f969e7a8f573c75bdf7b381f5b8c4fbfaa39bc186fa52ff264857f18",
+    "tools/build/source-plan.json": "eeb516e31b3310fb0718f36908977f8125723f7c5e0e86cd6744395826259a4d",
+    "r1/src/config/runtime/native_health_cache.ld": "eb8f131c489cd818d4e36718718fa1989719ca0170f164541a1a5bf56dfc1ec3",
+    "r1/src/application/goodix/native_hrv_teardown.c": "74c35c824e0ba0c9f9c782fb1a42ec140d569c509b18a9552733dbead271048c",
+    "r1/docs/reference/FUNCTION-OWNERSHIP.csv": "f6f3b2bc7201ce6ca5b8d43fb136ae31923c2371dd6d49dd5dfb27f503543593",
+    "r1/symbols/function-frontier.csv": "23a86e89ce14686b0fdb8c85f946533eb884263b174a991276d45337bf28b986",
+    "build/goal-r1-goodix-native-workspace-teardown-c/audit.json": "0738626e93ce781f91eddeb67673254851734da96dfa4d3f1bd75adf4d1e3cfa",
+    "build/goal-r1-goodix-native-workspace-teardown-c/verify.log": "1d7b89ea671c3a52665fce37b1de877eba324ca737c5170499801c6e2273e939",
+    "build/goal-r1-goodix-native-workspace-teardown-c/negative.json": "d863d7fd00a78ff27396347aa5a1b1be65a3d87fd0340e9fc1545b208aa91e8f",
+    "build/goal-r1-goodix-native-workspace-teardown-c/audit.py": "307355e59f91a364a16624402162599323cab442e6963122500f53973d9d4bb6",
+    "build/goal-r1-goodix-native-workspace-teardown-c/source.elf": "31d2eb039784639ba17c81a35f733a9aa793a0fdd08009c5b9a78f24ff830e22",
+    "build/goal-r1-goodix-native-workspace-teardown-c/negative.py": "00dbef5ca9e22957412bab9427ce2ccf9d247202426a9fd79beef1c87b1e0afe",
+    "build/goal-r1-goodix-native-workspace-teardown-c/source.o": "6d8fc89dcbc992288e6f9440279aaedad452d0ae358696930327689d8ef13c04",
+    "build/goal-r1-goodix-native-workspace-teardown-c/results.json": "5624b6ad50ba68fada863ed1ca40e0cec7dfd609d674723bb0808d836ffd1b57",
+    "build/goal-r1-goodix-native-workspace-teardown-c/pipeline.log": "91becfa774ea327900a2c7f1889be46e8ee30dafd9cadfc55ce108c42ee1d7ae",
+    "build/goal-r1-goodix-native-workspace-teardown-c/pipeline.py": "2fd775b2f45302e37c59a6a596ab889123e5a6f03f962a6952e9ba0b51ef8f4c",
+    "build/goal-r1-goodix-native-workspace-teardown-c/sources-check.log": "45fd49aec2f159cae6e9cbc8c0f36f3abae8f26a2e81a325c2b3553929ec3221",
+    "build/goal-r1-goodix-native-workspace-teardown-c/rea-bytes.json": "32a964612460986a264a359274e2a41b6f776dae897149f66a09344e45bd6645",
+    "build/goal-r1-goodix-native-workspace-teardown-c/manifest-before.json": "33ea1b3c8bd98c7d8b1e747d972a2cff8f2c09e5207eed67839f06a37a9bc0f3",
+    "build/goal-r1-goodix-native-workspace-teardown-c/verify.py": "bddbe4b69d32a738f299f50e967e105489f608cd428dba279a0f6f5c89bed01c",
+    "build/goal-r1-goodix-native-workspace-teardown-c/build.log": "db75fa0af38692db5f2fac462b37e2abd2e5cfa73e99190edcbde2ac0739ef93",
+    "build/goal-r1-goodix-native-workspace-teardown-c/pipeline/test.ld": "006166e723e913b6917e1d48557f5023f0960d09b0f04f46bca7d7aeb9f88815",
+    "build/goal-r1-goodix-native-workspace-teardown-c/pipeline/source.elf": "37a431af8cf426d1a3cbdb37aac5b2c008b47c354854b41d361994141db2af5e",
+    "build/goal-r1-goodix-native-workspace-teardown-c/pipeline/results.json": "bf96e05bc6a35f3d3a58404ba6b68363f2dfae85d7296223aa72eb83b6348eed"
+  }
+}

@@ -1,30 +1,14 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_317304\n"
-".type opencfw_em9305_child_317304,@function\n"
-"opencfw_em9305_child_317304:\n"
-"L317304:\n"
-"push_s blink\n"
-"L317306:\n"
-"ld r2,[r0,184]\n"
-"L31730a:\n"
-"breq_s r2,0,L31731c\n"
-"L31730c:\n"
-"ldb_s r1,[r2,0x4]\n"
-"L31730e:\n"
-"bmsk_s r1,r1,0x6\n"
-"L317310:\n"
-"sub.f r1,r1,0x1\n"
-"L317314:\n"
-"stb_s r1,[r2,0x4]\n"
-"L317316:\n"
-"bne_s L31731c\n"
-"L317318:\n"
-"bl opencfw_em9305_child_317320\n"
-"L31731c:\n"
-"pop_s blink\n"
-"L31731e:\n"
-"j_s [blink]\n"
-".size opencfw_em9305_child_317304,.-opencfw_em9305_child_317304\n"
-);
+#include <stdint.h>
+
+/* Native 0x317304..0x317320: decrement the 7-bit reference count of the
+ * record's attached object (+184) and release it when it reaches zero. */
+extern void opencfw_em9305_child_317320(uintptr_t record);
+
+void opencfw_em9305_child_317304(uintptr_t record)
+{
+    uintptr_t object=*(volatile uint32_t *)(record+184u);
+    if(object==0u)return;
+    uint32_t count=(*(volatile uint8_t *)(object+4u)&0x7fu)-1u;
+    *(volatile uint8_t *)(object+4u)=(uint8_t)count;
+    if(count==0u)opencfw_em9305_child_317320(record);
+}

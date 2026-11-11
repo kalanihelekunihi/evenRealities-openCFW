@@ -9,10 +9,10 @@ extern void audio_uart_lv_image_get_pivot_498b82(void *, void *);
 extern void audio_uart_ambiq_transform_area_488cda(void *, int32_t, int32_t,
     int32_t, int32_t, int32_t, const void *);
 extern void audio_uart_lv_invalidate_area_4405d4(void *, const void *);
-extern void *audio_uart_lv_display_for_object(void *);
+extern void *lv_obj_get_display(void *);
 extern void audio_uart_lv_display_invalidation_44fe8e(void *, uint32_t);
 extern void audio_uart_lv_refresh_draw_452d42(void *);
-extern void audio_uart_lvgl_log(uint32_t, const char *, uint32_t,
+extern void lv_log_add(uint32_t, const char *, uint32_t,
     const char *, const char *, ...);
 
 static const char path[] =
@@ -27,7 +27,7 @@ static void put32(uint8_t *p, uint32_t value) {
 }
 static void require_object(void *object, uint32_t line, const char *function) {
     if (object != 0) return;
-    audio_uart_lvgl_log(3u, path, line, function,
+    lv_log_add(3u, path, line, function,
         "Asserted at expression: %s (%s)", "obj != NULL", "NULL pointer");
     for (;;) *(volatile uint32_t *)(uintptr_t)UINT32_MAX = 0u;
 }
@@ -48,7 +48,7 @@ static void invalidated_transformed(void *object, int32_t width, int32_t height,
     audio_uart_lv_invalidate_area_4405d4(object, area);
 }
 static void refresh_without_invalidation(void *object) {
-    void *display = audio_uart_lv_display_for_object(object);
+    void *display = lv_obj_get_display(object);
     audio_uart_lv_display_invalidation_44fe8e(display, 0u);
     audio_uart_lv_refresh_draw_452d42(object);
     audio_uart_lv_display_invalidation_44fe8e(display, 1u);

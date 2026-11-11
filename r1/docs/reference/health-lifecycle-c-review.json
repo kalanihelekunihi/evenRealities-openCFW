@@ -1,0 +1,103 @@
+{
+  "schema_version": 1,
+  "normal_report": "build/sources-goal-r1-health-lifecycle-final-c/report.json",
+  "replay": {
+    "pairs": 376,
+    "digest": "e2fa46a096c09f12ca3861fb9f22a75d194bd05b37b00a032a153cea73862e8e",
+    "native_branch_hits": {
+      "0x4bee2": 88,
+      "0x4bef8": 87,
+      "0x4bf00": 3,
+      "0x4bf84": 72,
+      "0x4bfde": 96
+    },
+    "lower_bindings": {
+      "gomore_primitives_size_736": 427808,
+      "gomore_primitives_size_14816": 427034,
+      "r1_health_lifecycle_authorize_native": 438908,
+      "r1_health_lifecycle_restore_native": 438192,
+      "r1_health_lifecycle_profile_native": 437240,
+      "r1_health_lifecycle_engine_initialize_native": 458400,
+      "r1_health_lifecycle_profile_apply_native": 595656,
+      "r1_health_lifecycle_mode_native": 584828,
+      "r1_gomore_time_transition_adapter": 384008,
+      "r1_time_backend_timestamp": 568740,
+      "r1_subscriber_register": 569228,
+      "r1_structured_log_mode_get": 595180,
+      "r1_structured_log_format": 595512,
+      "nrf_log_frontend_std_0": 498112,
+      "nrf_log_frontend_std_1": 498120,
+      "nrf_log_frontend_std_2": 498134,
+      "r1_native_memory_move": 161628
+    },
+    "elf": "build/goal-r1-health-lifecycle-c/source-54241.elf",
+    "elf_sha256": "7e7a0ab60219979f8bfb3779c22a77f72817d1d6b3bc46bb135b6cf0be190672",
+    "void_return": true
+  },
+  "negative_controls": [
+    {
+      "control": "wrong-recovery-admission",
+      "compiled": true,
+      "rejected": true,
+      "source_sha256": "d64847c7102259824e8d3e15b753682e82c96506ddf7f131ba895dd77dca0119"
+    },
+    {
+      "control": "wrong-retry-status",
+      "compiled": true,
+      "rejected": true,
+      "source_sha256": "d3c5469c7086ef6720675cc1c8cfc4038a1a4437aeebb99d815e366f8ee57ffe"
+    },
+    {
+      "control": "wrong-mode-clear",
+      "compiled": true,
+      "rejected": true,
+      "source_sha256": "0426f5067ef390376b6a36c042bf8f7f5265e7d6d3d2964df5058dda33a3314d"
+    }
+  ],
+  "audit": {
+    "new_payload_sources": [
+      [
+        "r1-application",
+        "r1/src/application/runtime/native_health_lifecycle.c"
+      ]
+    ],
+    "existing_changed_objects": [],
+    "existing_changed_sources": [
+      [
+        "r1-application",
+        "r1/src/application/runtime/native_health_startup.c"
+      ]
+    ],
+    "default_profile_bytes": "0000e0410000803f00002f4300009642000080bf000080bf000080bf",
+    "default_profile_matches_locked_stock": true
+  },
+  "void_return": true,
+  "source_only_coordinator_link": false,
+  "hardware_tested": false,
+  "added_application_imports": [
+    "r1_gomore_time_transition_adapter",
+    "r1_health_lifecycle_authorize_native",
+    "r1_health_lifecycle_engine_initialize_native",
+    "r1_health_lifecycle_mode_native",
+    "r1_health_lifecycle_profile_apply_native",
+    "r1_health_lifecycle_profile_native",
+    "r1_health_lifecycle_restore_native"
+  ],
+  "removed_application_imports": [
+    "r1_native_gomore_lifecycle_initialize"
+  ],
+  "sha256": {
+    "build/sources-goal-r1-health-lifecycle-final-c/report.json": "f3be1b5f2bffb71946758c1a4ff6506703c3ff2d2bd9c627e9fc698ed48f4b33",
+    "r1/src/application/runtime/native_health_lifecycle.c": "3ba3f1fefbae93b662f169386a3cbdf1e462b2333c31bc247e11b18d6bb86aa1",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-health-lifecycle-final-c/r1/r1-application/r1__src__application__runtime__native_health_lifecycle.c.o": "f9e0e802b81434aa7ce6c410fbb07108d3d4b157f49f192635f8a7958d0b54b9",
+    "r1/src/application/runtime/native_health_lifecycle.h": "3f81a886b88ca88868bca15122d3e3a1c66c36d7ae8930d37cca7089bf0e4026",
+    "r1/src/application/runtime/native_health_startup.c": "4566e31815ae0abb5f3513a2e68edee99c6177d3e69981a3c3aed1438f1645c2",
+    "r1/src/sources.json": "c39682d5c30f6d04fb8e5cf5197e6c2c1541037e39e52406f9ab81cb073adeb0",
+    "tools/build/source-plan.json": "43281e3850f6c7b83c5616e5968c4939993501810057ca3deaeea85eaae351ba",
+    "build/goal-r1-touch-request-pure-c/rea-lifecycle-next.json": "9160d812bc02b3ed88c2260315c6e833d9a442d8b08389daf50fe5b84bd42621",
+    "build/goal-r1-health-lifecycle-c/verify.py": "4f485b390e69ee8b58b84d43274b838419af54ed1f0ca75dd59af11b75346aee",
+    "build/goal-r1-health-lifecycle-c/negative.py": "dd796a667bb760057b3b393caff0ccd86066bd04ac100750ad9f82ddcc73af12",
+    "build/goal-r1-health-lifecycle-c/audit.json": "c7b1e0c4cc94c25f4d0f9d4b0cdb05469e2371887331ae7fbc15a046d26b2bbd",
+    "build/goal-r1-health-lifecycle-c/sources-check.log": "935eacc596911ae66aee12864fb33a2272c0bb18dc00b42801dfa4573072c3af"
+  }
+}

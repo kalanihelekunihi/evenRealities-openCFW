@@ -1,5 +1,6 @@
 /* Native 0x4bf6c4 ANCC reset and 0x4486bc OTA export reset. */
 #include <stdint.h>
+extern unsigned char g2ref_g2_ota_cache_buffer[] __asm__("g2_ota_cache_buffer"); /* Fix 45: stock owner (owner.py) */
 extern uint8_t audio_ble_ancc_state[]; /* live RAM 0x200695c8 */
 extern uint8_t audio_ble_ota_export_state[]; /* live RAM 0x20072730 */
 extern void audio_uart_buffer_zero(void *,uint32_t,uint32_t); /* selected 0x43c0e4 */
@@ -31,6 +32,6 @@ void audio_ble_ancc_reset_state_machine(void) {
 void audio_ble_ota_reset_export_state(void) {
     audio_uart_buffer_zero(audio_ble_ota_export_state,0x60u,0u);
     audio_ble_ota_export_state[0]=0u;
-    *(uint32_t *)(void *)(audio_ble_ota_export_state+0x34u)=0x2034bc10u; /* authenticated literal */
+    *(uint32_t *)(void *)(audio_ble_ota_export_state+0x34u)=((uint32_t)(uintptr_t)g2ref_g2_ota_cache_buffer+0x0u); /* authenticated literal */
     audio_ble_ota_export_mode_set(UINT32_MAX);
 }

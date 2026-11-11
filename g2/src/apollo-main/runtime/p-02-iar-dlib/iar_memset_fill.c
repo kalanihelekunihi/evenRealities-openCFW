@@ -2,7 +2,7 @@
  *
  * __aeabi_memset (0x43c0e4, defined as audio_uart_buffer_zero in
  * drivers/peripherals/ring-init/ring_init.c) copies the fill byte into all four
- * bytes of r2 and falls through to this entry. __aeabi_memclr-style stubs (for
+ * bytes of r2 and falls through to this entry. __aeabi_memclr-style leaves (for
  * example 0x4d4ccc: movs r2,#0; b.w 0x43c0ec) branch here directly with an
  * already-replicated pattern.
  *

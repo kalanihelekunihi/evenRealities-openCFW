@@ -2,11 +2,13 @@
  * fallthrough groups are instruction-backed; 0x78ee48 is ROM pin data.
  */
 #include <stdint.h>
+/* Fix 48: stock flash 0x78ee48 (stock image word). */
+static const uint32_t g2_uled_flash_pin_config_78ee48=0x00000003u;
 
 extern uint32_t g2_codec_pin_function(uint32_t,uint32_t);
 
 static uint32_t prepare_pin(uint32_t pin_id) {
-    uint32_t configuration=*(volatile const uint32_t *)(uintptr_t)0x78ee48u;
+    uint32_t configuration=g2_uled_flash_pin_config_78ee48;
     return g2_codec_pin_function(pin_id,configuration);
 }
 

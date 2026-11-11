@@ -1,0 +1,197 @@
+{
+  "source": {
+    "source": "r1/src/application/runtime/native_gomore_linear.c",
+    "payload": "r1-application",
+    "role": "candidate",
+    "toolchain": "gcc9",
+    "link": true,
+    "expect": "compile",
+    "returncode": 0,
+    "argv": [
+      "/opt/homebrew/bin/python3",
+      "/Users/kalani/Repo/evenRealities-openCFW/tools/build/linux_gcc.py",
+      "--compiler",
+      "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/bin/arm-none-eabi-gcc",
+      "--read-root",
+      "/Users/kalani/Repo/evenRealities-openCFW/r1",
+      "--read-root",
+      "/Users/kalani/Repo/evenRealities-openCFW/third-party/upstream",
+      "--read-root",
+      "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1",
+      "--read-root",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-linear-c/generated/r1",
+      "--",
+      "-mcpu=cortex-m4",
+      "-mthumb",
+      "-munaligned-access",
+      "-mfpu=fpv4-sp-d16",
+      "-mfloat-abi=hard",
+      "-std=c11",
+      "-Os",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-fshort-enums",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-fno-delete-null-pointer-checks",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/r1/src/vendor",
+      "-isystem",
+      "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
+      "-fno-strict-aliasing",
+      "-ffp-contract=off",
+      "-fsignaling-nans",
+      "-frounding-math",
+      "-ftrapping-math",
+      "-MD",
+      "-MF",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-linear-c/r1/r1-application/r1__src__application__runtime__native_gomore_linear.c.d",
+      "-c",
+      "/Users/kalani/Repo/evenRealities-openCFW/r1/src/application/runtime/native_gomore_linear.c",
+      "-o",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-linear-c/r1/r1-application/r1__src__application__runtime__native_gomore_linear.c.o"
+    ],
+    "source_sha256": "789b5cf7f0aae55fed7a4aa3843ae84e95379a09aab32c80d27bdbbfc54811d3",
+    "object_sha256": "8009d12f8969234e8b86e6e874de5ed44de2c775219ea1f9f8f6a140e0166679",
+    "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-linear-c/r1/r1-application/r1__src__application__runtime__native_gomore_linear.c.o",
+    "strong": [
+      "r1_gomore_linear_native"
+    ],
+    "weak": [],
+    "undefined": [
+      "r1_native_memory_move"
+    ]
+  },
+  "direct_replay": {
+    "pairs": 4723,
+    "independent_copy_cases": 747,
+    "faults": 14,
+    "digest": "4dfaf36e02eccad445d85f075f0f3e6fadc45e22fee60037f4861a2b2e534f86",
+    "limitations": [
+      "Native/C interpolation and stock memory move; native conversions/floor execute on stock path only",
+      "Independent oracle covers equal-rate overlap copy only",
+      "No arbitrary huge-loop termination or physical alignment proof; not yet production-integrated"
+    ]
+  },
+  "host_integration": {
+    "paired_cases": 334,
+    "fault_cases": 9,
+    "provider_calls": 984,
+    "observations_sha256": "d8f320e078797be72744d9ec66c0fa48d66eff1b1acdfa0e0b00b298d76152c7",
+    "limits": [
+      "Actual native/C host, resamplers and kernel wrappers; stock memory-clear executes on both paths",
+      "Only logger and final algorithm modeled; actual interpolation/filter execute; stock clear and move execute on both paths",
+      "ACC provider SP excluded; PPG scratch numeric addresses compared without normalization",
+      "No outer sensor-update caller or physical device proof"
+    ]
+  },
+  "conversion": {
+    "conversion_pairs": 16536,
+    "integer_roundtrips": 4101,
+    "digest": "8da9082bfc9a27a9ef1e1e824e5bf38aa78d5218901047d54fb5d6cffd98b699"
+  },
+  "negative_controls": [
+    {
+      "name": "half-copy-length",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "inverse-ratio",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "negated-fraction",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "guard-negative-counts",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "swapped-difference",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "wrong-produced-return",
+      "compiled": true,
+      "rejected": true
+    }
+  ],
+  "qualification": {
+    "candidate_units": 1,
+    "compiled_units": 1,
+    "units": [
+      {
+        "source": "r1/src/application/runtime/native_gomore_linear.c",
+        "payload": "r1-application",
+        "evidence": "r1/symbols/function-frontier.csv",
+        "selected": [],
+        "compiled": true,
+        "rejections": {
+          "anchored_relocation_pattern_not_exact": 1
+        },
+        "source_implementation_completeness": "not established by compilation or byte matching",
+        "reason": "no exact anchored body under tested production bindings; integration remains unfinished"
+      }
+    ]
+  },
+  "composition": {
+    "report": "build/sources-goal-r1-gomore-linear-c/report.json",
+    "sha256": "bcea10424b5da5b0b38101831b03f2209a79900c859ee9f099b497d40ca14da3",
+    "units": 683,
+    "unchanged_prior_source_object_pairs": 681,
+    "changed_prior_units": [
+      "r1/src/vendor/gomore_primitives/gomore_primitives.c"
+    ],
+    "application_imports": 165,
+    "bootloader_imports": 34
+  },
+  "consolidation": {
+    "removed_generic_export": "gomore_primitives_linear_resample",
+    "motion_caller_uses_native_provider": true,
+    "vendor_sha256": "bf622c7e8f7f84259647d6fd351a4861ab3f7038370d695dbb7c68d30c104de7",
+    "header_sha256": "c62919ca4b76bd1ada9c8b4ba5335afa92ff634c99f1e538be62c97950c87336"
+  },
+  "hybrid": {
+    "report": "build/hybrid-goal-r1-gomore-linear-c/build-report.json",
+    "sha256": "ed0bda2c65057d9bfc9e783347b144612f2f219919897c05158d16720709eb64",
+    "totals": {
+      "binary-pull-through": 641791,
+      "source-built": 4369,
+      "resource-file": 248
+    },
+    "canonical_plan_unchanged": true
+  },
+  "artifacts": {
+    "build/goal-r1-gomore-linear-c/candidate.c": "2c1cabbf0a106afa8a01b8a27f86c4bf3990086923ac4f3aac26c75dd0b69b86",
+    "build/goal-r1-gomore-linear-c/candidate.o": "364f7122b6c79e4a002e2c7554aa8f33ab2502bbb26956e00999da0cb3eee740",
+    "build/goal-r1-gomore-linear-c/verify.py": "10ae7020e98e02d6c634b91e038d659af1560b239e20daeb2c24b637396fdbfe",
+    "build/goal-r1-gomore-linear-c/results.json": "0e5b20f19bab161e1406ed8c5d8f13d84f285f56b032015b1ed152e2d0ec20a9",
+    "build/goal-r1-gomore-linear-c/integration.py": "2c29df1d23c04f69ab7257c8d914351132ff54d95930dd0baf22b8acbd5599e5",
+    "build/goal-r1-gomore-linear-c/integration-results.json": "c3e7bc499ea61d54e66f20b449e97d14e253de09afcfdb26ac8b07a3c53204ad",
+    "build/goal-r1-gomore-linear-c/negative.py": "2521afebee3b9cb43bc43417ce6cb603015a95829126b09986d420961015ffaf",
+    "build/goal-r1-gomore-linear-c/negative-results.json": "fb5197ff73185c6f6379e21be8ab4d9a8d34485a8985fbdd89943b24fc670e43",
+    "build/goal-r1-gomore-linear-c/conversion.py": "ba91dccffd6a10c1c4eae26a5b5485e01a181e8210fe1c6c45c6bcb15ca4a9cc",
+    "build/goal-r1-gomore-linear-c/conversion.c": "16aa5665fc748731cfe370ad180d68d99ea83271903d4fa08bfa480903705890",
+    "build/goal-r1-gomore-linear-c/conversion.o": "d1ba067d2a52997c4e225b9f8aaecbcda8d9e272a95a20addda17bc8b45d48ff",
+    "build/goal-r1-gomore-linear-c/conversion-results.json": "7ea2e25148c39fed552e25e6a86dbb53d6b75ebd7d95648c1b7299185a5e4bd8",
+    "build/goal-r1-gomore-linear-c/rea.json": "ff20ec3c05c2bf2d747e8cf7b640bc1c9bfde34f14f2b0c1ebdbfc674edc48b2",
+    "build/goal-r1-gomore-linear-c/finalize.py": "e47c67b0b55c09e3cb1042528beb293b482d56119edbafb5d988e2691484c150",
+    "build/goal-r1-gomore-linear-c/qualify.py": "7ab1588a6fd6203e29f501c9b2e963d135467cb31936295f0cd2a68a25c52fb4",
+    "build/goal-r1-gomore-linear-c/qualified/qualification.json": "25769501e3117fc332bdd5e075e900305daa64168abfe99da206bf52c8c1d5be",
+    "build/goal-r1-gomore-linear-c/production-verify.log": "f21f45d307c58725b2f6b7e90d1ed3114d93f0a3640da0af871cc9f24fd93663",
+    "build/goal-r1-gomore-linear-c/production-integration.log": "41b23869a4d9b1f605b7c1e146b6fbd8eb7f998640614a7b16111aef04facf99"
+  },
+  "limits": [
+    "Actual native/C interpolation and filter through host chain; logger/final algorithm modeled; stock clear and move execute",
+    "Wrapper and outer sensor-update stack differences remain; no physical/source-only final link/byte identity proof",
+    "No arbitrary huge-loop termination proof; conversion/roundtrip matrices not exhaustive 32-bit enumeration"
+  ]
+}

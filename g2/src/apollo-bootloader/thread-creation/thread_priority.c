@@ -20,7 +20,7 @@ static void remove_item(uint32_t *item) {
 void opencfw_bl_thread_priority_set(uintptr_t handle,uint32_t priority) {
     if (priority>=56) {
         (void)opencfw_bl_mask_interrupts();WORD(UINT32_MAX)=0;
-        for (;;)__asm__ volatile("b .":::"memory");
+        for (;;){ }
     }
     opencfw_bl_kernel_enter();
     uint32_t *tcb=(uint32_t *)(handle?handle:WORD(0x20027134));

@@ -1,0 +1,107 @@
+{
+  "schema_version": 1,
+  "source": "r1/src/application/runtime/native_touch_io_worker.c",
+  "native_roots": [
+    "0x927c8",
+    "0x8e7b0",
+    "0x67460",
+    "0x93388"
+  ],
+  "report": "build/sources-goal-r1-touch-worker-c/report.json",
+  "compiled_units": 832,
+  "application_imports": 74,
+  "added_imports": [
+    "r1_iqs7211e_touch_task_dispatcher",
+    "r1_touch_slider_state_machine"
+  ],
+  "removed_imports": [
+    "r1_touch_io_worker"
+  ],
+  "prior_objects_unchanged": 829,
+  "changed_generated_objects": [
+    [
+      "r1-bootloader",
+      "{gen}/r1_startup_vectors.S"
+    ],
+    [
+      "r1-bootloader",
+      "{gen}/r1_uecc.c"
+    ]
+  ],
+  "added_units": [
+    [
+      "r1-application",
+      "r1/src/application/runtime/native_touch_io_worker.c"
+    ]
+  ],
+  "verification": {
+    "worker_flag_watchdog_pairs": 576,
+    "seeded_multi_wait_pairs": 256,
+    "registration_setter_IRQ_pairs": 21,
+    "allocation_fault_pairs": 6,
+    "actual_ready_callback_setter_and_power_step": true,
+    "actual_event_post_wrapper": true,
+    "actual_C_allocation_fault": true
+  },
+  "mutants": {
+    "rejected": [
+      "sync_group",
+      "queue_depth",
+      "queue_size",
+      "queue_publication",
+      "watchdog_timeout",
+      "cached_watchdog",
+      "flag_boundary",
+      "ready_registration",
+      "slider_null",
+      "slider_registration"
+    ]
+  },
+  "rea_receipts": "r1/docs/reference/touch-worker-rea-bytes.json",
+  "rea_bytes_match_pinned_stock": true,
+  "new_state_owners": [
+    {
+      "symbol": "r1_touch_io_watchdog",
+      "stock_address": "0x20006658",
+      "size": 4,
+      "cold_rw_value": 0
+    },
+    {
+      "symbol": "r1_touch_slider_callback_word",
+      "stock_address": "0x20007734",
+      "size": 4,
+      "cold_rw_value": 0
+    }
+  ],
+  "reused_owners": [
+    "r1_touch_task_message_queue",
+    "r1_touch_task_thread_handle",
+    "r1_touch_ready_storage"
+  ],
+  "contract": {
+    "startup": "sync wait 9; queue 50 x 44; publish before allocation check; callback registration; sync signal 9; watchdog touch/10000",
+    "callbacks": "existing ready IRQ callback, unresolved slider state-machine address; ready then slider registration, then existing power step",
+    "setter": "null returns 0 without store; nonzero stores full word and returns 1",
+    "loop": "live arm; wait 0xffffff/0/UINT32_MAX; live disarm; dispatch iff unsigned flags-1 < 0x7fffffff; live feed",
+    "fault": "existing C allocation primitive executes BASEPRI=64 and zero write to 0xffffffff"
+  },
+  "limitations": [
+    "RTOS queue/wait/watchdog/sync providers, lower power providers and touch dispatcher are modeled. Existing C callback setter, power step, ready IRQ/event-post wrapper and allocation-fault primitive execute.",
+    "The slider state-machine address is registered but its ABI/body is not implemented or exercised here.",
+    "Worker tests bound execution at a subsequent wait or modeled dispatcher stop. They do not prove dispatcher-specific suspend or touch behavior.",
+    "C private frames and nonreturning worker scratch registers are excluded; stack guards and interrupt masks are checked.",
+    "No physical touch, timing, final application link or device boot proof; byte identity is not required by current user instruction."
+  ],
+  "evidence_files": {
+    "build/sources-goal-r1-touch-worker-c/report.json": "ab75326fbbd2c4561c9a0af9f42eca0e30ad4113e7b9bea7049c453aa6ae41cb",
+    "r1/src/sources.json": "b629adde926e2fca985419dbd72eea530ba6f03268894255558842e25f233adc",
+    "r1/src/application/runtime/native_touch_io_worker.c": "179b5931c384905019d7e246f7cd730684beef03284b63f96c4dcd3a9900697f",
+    "build/goal-r1-fstorage-registry/expanded-rw.bin": "87fdee392022fdbe23dd0daf3e859fb14f3ce26ba3e8403aab56dc9d9a913317",
+    "build/goal-r1-touch-worker-c/verify.py": "8bf74a57e763ff1451f6151a2df140f7e8a8fd47cd94300a6805871f0d59394c",
+    "build/goal-r1-touch-worker-c/verification.json": "fbfb6f019d5ca8ab1774f48def2d0dbbe98406f5c06916a167b9a8ca02280be7",
+    "build/goal-r1-touch-worker-c/mutants.py": "dd8eecf1764307889eb67bfb394d82601d9a53227aa68a5defee8f8596997199",
+    "build/goal-r1-touch-worker-c/mutants.json": "3c83b5a4aceea718958e6f722ea2f348b8297fcd4e7e2c8fe9d7c4dbedbd6c55",
+    "build/goal-r1-touch-worker-c/sources-check.log": "35fbc5050fc7e1fd9948f2a8e41d5bf1f8805e0c106e7f948df9a169c8a37797",
+    "r1/docs/reference/touch-worker-rea-bytes.json": "c1c230ae88cc4acd118a3133221ddc85a825fa6c86dafff37ce7e3bacebc5bf8"
+  }
+}

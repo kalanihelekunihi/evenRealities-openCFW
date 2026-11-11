@@ -1,5 +1,9 @@
 /* Apollo display case-3 frame prelude 0x46ca14..0x46ca6d. Candidate. */
 #include <stdint.h>
+/* Stock-RAM literals rewritten to named objects (sim-test wave 2026-10-26,
+ * .waves/sim-fix/apply.py): g2ref_X is the linker symbol X. */
+#include <stdint.h>
+extern unsigned char g2ref_g2_stock_ram_20080000[] __asm__("g2_stock_ram_20080000");
 
 extern uint32_t audio_settings_display_profile_cell; /* selected 0x20000648 */
 extern uint32_t audio_settings_display_brightness_cell; /* selected 0x2000064c */
@@ -18,6 +22,6 @@ uint32_t display_driver_case3_prelude(void) {
     if(y>=0xc1u) y=0xc0u;
     y &= ~1u;
     display_driver_frame_prepare_46c73c(display_driver_uled_context,
-        (void *)(uintptr_t)0x20080000u,0x280u,0x1e0u,0x240u,0x120u,x,y);
+        (void *)(uintptr_t)((uint32_t)(uintptr_t)g2ref_g2_stock_ram_20080000),0x280u,0x1e0u,0x240u,0x120u,x,y);
     return 0u;
 }

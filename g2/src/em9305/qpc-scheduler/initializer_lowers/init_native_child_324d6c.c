@@ -1,78 +1,41 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_324d6c\n"
-".type opencfw_em9305_child_324d6c,@function\n"
-"opencfw_em9305_child_324d6c:\n"
-"L324d6c:\n"
-"enter_s [r13-r14,blink]\n"
-"L324d6e:\n"
-"mov_s r14,r0\n"
-"L324d70:\n"
-"add r14,r14,622\n"
-"L324d74:\n"
-"mov_s r13,r0\n"
-"L324d76:\n"
-"ldb_s r0,[r14,0]\n"
-"L324d78:\n"
-"breq.nt r0,0x1,L324da0\n"
-"L324d7c:\n"
-"brne_s r0,0,L324d9e\n"
-"L324d7e:\n"
-"breq_s r1,0,L324d8e\n"
-"L324d80:\n"
-"breq.nt r1,0x1,L324dba\n"
-"L324d84:\n"
-"breq.d.nt r1,0x4,L324dc8\n"
-"L324d88:\n"
-"mov_s r0,r13\n"
-"L324d8a:\n"
-"brne.nt r1,0x3,L324d9e\n"
-"L324d8e:\n"
-"bl.d opencfw_em9305_child_3268cc\n"
-"L324d92:\n"
-"mov_s r0,r13\n"
-"L324d94:\n"
-"bl.d opencfw_em9305_phy_timer_start_32c7e4\n"
-"L324d98:\n"
-"mov_s r0,r13\n"
-"L324d9a:\n"
-"stb 1,[r14]\n"
-"L324d9e:\n"
-"leave_s [r13-r14,blink,pcl]\n"
-"L324da0:\n"
-"breq.nt r1,0x1,L324dba\n"
-"L324da4:\n"
-"breq.d.nt r1,0x4,L324dc2\n"
-"L324da8:\n"
-"mov_s r0,r13\n"
-"L324daa:\n"
-"brne.d.t r1,0x2,L324d9e\n"
-"L324dae:\n"
-"mov_s r0,r13\n"
-"L324db0:\n"
-"bl opencfw_em9305_phy_complete_32c818\n"
-"L324db4:\n"
-"stb 0,[r14]\n"
-"L324db8:\n"
-"leave_s [r13-r14,blink,pcl]\n"
-"L324dba:\n"
-"bl.d opencfw_em9305_child_3268e8\n"
-"L324dbe:\n"
-"mov_s r0,r13\n"
-"L324dc0:\n"
-"leave_s [r13-r14,blink,pcl]\n"
-"L324dc2:\n"
-"bl opencfw_em9305_child_322dac\n"
-"L324dc6:\n"
-"leave_s [r13-r14,blink,pcl]\n"
-"L324dc8:\n"
-"bl opencfw_em9305_child_322dac\n"
-"L324dcc:\n"
-"bl.d opencfw_em9305_child_32525c\n"
-"L324dd0:\n"
-"mov_s r0,r13\n"
-"L324dd2:\n"
-"leave_s [r13-r14,blink,pcl]\n"
-".size opencfw_em9305_child_324d6c,.-opencfw_em9305_child_324d6c\n"
-);
+#include <stdint.h>
+
+/* Native 0x324d6c..0x324dd2: connection-update procedure step keyed by the
+ * procedure state +622 and an event. Idle (0): events 0/3 start the
+ * procedure (native 0x3268cc, PHY timer, state 1), 1 runs native 0x3268e8,
+ * 4 reports LL event 17 and runs native 0x32525c. Active (1): event 1 runs
+ * native 0x3268e8, 4 reports LL event 17, 2 completes the PHY and returns to
+ * idle. Other states and events are ignored. */
+extern uint32_t opencfw_em9305_child_3268cc(uintptr_t);
+extern uint32_t opencfw_em9305_phy_timer_start_32c7e4(uintptr_t);
+extern uint32_t opencfw_em9305_phy_complete_32c818(uintptr_t);
+extern uint32_t opencfw_em9305_child_3268e8(uintptr_t);
+extern uint32_t opencfw_em9305_child_322dac(uintptr_t);
+extern uint32_t opencfw_em9305_child_32525c(uintptr_t);
+
+void opencfw_em9305_child_324d6c(uintptr_t record, uint32_t event)
+{
+    volatile uint8_t *state = (volatile uint8_t *)(record + 622u);
+    if (*state == 1u) {
+        if (event == 1u) {
+            (void)opencfw_em9305_child_3268e8(record);
+        } else if (event == 4u) {
+            (void)opencfw_em9305_child_322dac(record);
+        } else if (event == 2u) {
+            (void)opencfw_em9305_phy_complete_32c818(record);
+            *state = 0u;
+        }
+        return;
+    }
+    if (*state != 0u) return;
+    if (event == 0u || event == 3u) {
+        (void)opencfw_em9305_child_3268cc(record);
+        (void)opencfw_em9305_phy_timer_start_32c7e4(record);
+        *state = 1u;
+    } else if (event == 1u) {
+        (void)opencfw_em9305_child_3268e8(record);
+    } else if (event == 4u) {
+        (void)opencfw_em9305_child_322dac(record);
+        (void)opencfw_em9305_child_32525c(record);
+    }
+}

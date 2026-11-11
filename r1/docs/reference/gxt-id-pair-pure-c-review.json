@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "report": "build/sources-goal-r1-gxt-id-pair-pure-final-c/report.json",
+  "report_sha256": "b3449593e1fcae8e4c5770b90b03fc2ed29fb9838dfa1721c17ce81c12613ac9",
+  "manifest_sha256": "07d1d673a3a503de947c5a2336275e5281b759cb112b0562bb60cd07f9eb6853",
+  "verification": {
+    "cases": 36864,
+    "executions": 110592,
+    "three_way_stock_previous_c_match": true,
+    "actual_normal_compiled_channel_wrappers": true,
+    "ordered_byte_stores_cleanup_delay_and_mutations": true,
+    "public_void_return": true,
+    "caller_clobbered_and_callback_live_registers_private_stack_excluded": true,
+    "physical_sensor_unverified": true
+  },
+  "defects": {
+    "detected": [
+      "wrong-count",
+      "wrong-delay",
+      "wrong-channel-order",
+      "missing-release"
+    ]
+  },
+  "audit": {
+    "unchanged_prior_object_hashes": 782,
+    "changed_objects": [
+      [
+        "r1-bootloader",
+        "{gen}/r1_startup_vectors.S"
+      ],
+      [
+        "r1-bootloader",
+        "{gen}/r1_uecc.c"
+      ]
+    ],
+    "chip_id_implementations_and_other_objects_unchanged": true,
+    "changed_root_C_produces_identical_object": true,
+    "generated_boot_allocated_bytes_and_relocations_unchanged": true,
+    "imports_unchanged": true
+  },
+  "rea": {
+    "evidence_id": "ev_715b057abad9859475ef234e3f1eb4203a6c74e02a118890fa2cfcb3563c3607",
+    "address": "0x510d8",
+    "length": 46,
+    "sha256": "6d7d51dae7516a12f1208598056bde8d3743d0471bb891d23ffd035a251f0dba",
+    "matches_locked_application": true
+  },
+  "bootloader_link_report": "build/goal-r1-gxt-id-pair-pure-c/boot-final-link/report.json",
+  "bootloader_link_report_sha256": "0eb6b1b1f4a1137a859240bbb1c0562ae9f7d6824b8350f5fe6bc6f07bcfe0a1",
+  "evidence_files": {
+    "build/goal-r1-gxt-id-pair-pure-c/verify.py": "946d543c191c9f499dee5532e8a3f9917534c647341d37ca97b9583417eb4d72",
+    "build/goal-r1-gxt-id-pair-pure-c/audit.py": "8c7ada8abb5573efaacdd77d47c86987188e1d725fb15ddb1abdba538c1feb0d",
+    "build/goal-r1-gxt-id-pair-pure-c/defects.py": "946e5dad5f28dd3d4f6ff490b54336ed48c97d74fa0e305257b99d6879b64762",
+    "build/goal-r1-gxt-id-pair-pure-c/verification.json": "e2c3d8bc0a1db80c26b3d4bcc47752d692fc461b77f79fc7ed44ecab47f6de19",
+    "build/goal-r1-gxt-id-pair-pure-c/defects.json": "2900b49feab27759f5e4253dec3029fbbc53cb8998aefe418bd24383b3a2a8c2",
+    "build/goal-r1-gxt-id-pair-pure-c/rea.json": "4b356b3f1dac482909d1ba4f511d0402e9ffd0c608f615944051cf56a173932f",
+    "build/goal-r1-gxt-id-pair-pure-c/verify-final.log": "84608538d6345deaa471fd412c6d40a0e3d8251cde23ad443447720bf4c44fcf"
+  },
+  "limitations": [
+    "Modeled bus, enable/disable, chip-ID and delay callbacks; no physical sensor validation.",
+    "Caller-clobbered registers and private stack addresses/content excluded.",
+    "Public void return excludes incidental R0; callback live-register/private-frame identity unclaimed.",
+    "Full application remains unlinked."
+  ],
+  "raw_application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a"
+}

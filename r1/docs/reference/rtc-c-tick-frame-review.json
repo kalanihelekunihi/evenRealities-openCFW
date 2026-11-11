@@ -1,0 +1,65 @@
+{
+  "integrated_actual_calendar_cases": 720,
+  "cases": 8400,
+  "passed": 8400,
+  "source_sha256": "5b8e98e429de4b05d226bc5aa6a64558aecee4ebfa2809895a08c88aa32e3ff1",
+  "report": "build/sources-goal-r1-rtc-tick-frame/report.json",
+  "old_regression": {
+    "native_conversion": [
+      "convert",
+      1061
+    ],
+    "old_conversion": [
+      "convert",
+      1001
+    ],
+    "reason": "Native loads UTC offset after the epoch store; old C hoists it before that store."
+  },
+  "other_units_unchanged": 561,
+  "application_imports": 211,
+  "bootloader_imports": 34,
+  "limitations": [
+    "Calendar converter modeled in 8400 cases and executes in 720 additional integrated cases; alarm callback modeled.",
+    "Controlled epoch mutation does not establish production race frequency",
+    "No physical RTC/IRQ, fault equivalence or native byte qualification"
+  ],
+  "unchanged_functions": [
+    "r1_native_rtc_epoch_initialize",
+    "r1_native_rtc_epoch_to_calendar",
+    "r1_native_rtc_gmtime",
+    "r1_native_rtc_open",
+    "r1_native_rtc_register",
+    "rtc_open_body"
+  ],
+  "bridge_bytes": 14,
+  "evidence": [
+    {
+      "path": "build/goal-r1-rtc-tick-frame/before.c",
+      "sha256": "5b163caafa29bd350dcc46cc0e355d27f62afb63e8733c5725aec6f2b1fc8b65"
+    },
+    {
+      "path": "build/goal-r1-rtc-tick-frame/verify.py",
+      "sha256": "57e567236bf94da80fe127338e45af18ec61f2c983c2acf51a73fc45b553e5bf"
+    },
+    {
+      "path": "build/sources-goal-r1-rtc-tick-frame/report.json",
+      "sha256": "198807387acea0c9b170273123f31d81228a3a97ae09ce0d99087861360ce217"
+    },
+    {
+      "path": "build/goal-r1-twi-packet-c/stock.elf",
+      "sha256": "0a73bd084a4ccf8cdd579852b46deda970b701b2c22e9aecf423166f949350e4"
+    },
+    {
+      "path": "r1/src/application/board/native_rtc_lifecycle.c",
+      "sha256": "5b8e98e429de4b05d226bc5aa6a64558aecee4ebfa2809895a08c88aa32e3ff1"
+    },
+    {
+      "path": "r1/src/sources.json",
+      "sha256": "9c5b7ae5c0e7493eb22e1fb4df9f0c928c2a9aa70530254aff89b55213bef2e2"
+    },
+    {
+      "path": "tools/build/source-plan.json",
+      "sha256": "964cbd3af9f4ea7ed207bb4b480d18a9529060dc3801663d296389472982aa7c"
+    }
+  ]
+}

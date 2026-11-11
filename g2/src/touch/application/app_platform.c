@@ -8,6 +8,7 @@
 #include <stdint.h>
 #include <stddef.h>
 #include "cy_scb_i2c.h"
+#include "cy_syspm.h"
 #include "application.h"
 #include "../calibration/calibration.h"
 #include "../pm-callbacks/callbacks.h"
@@ -88,7 +89,7 @@ void i2c_slave_init(void)
  * DeepSleep descriptor (RAM 0x200004CC, callback 0x3620, order 2). */
 void touch_platform_09a4_start(void)
 {
-    (void)touch_pm_register(&touch_reset_app_pm_descriptor);
+    (void)Cy_SysPm_RegisterCallback((cy_stc_syspm_callback_t *)(void *)&touch_reset_app_pm_descriptor);
 }
 
 /* Stock 0x00003EE8 (timeout_default_1000_if_zero) */

@@ -1,32 +1,18 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_325284\n"
-".type opencfw_em9305_child_325284,@function\n"
-"opencfw_em9305_child_325284:\n"
-"L325284:\n"
-"ldb_s r2,[r0,0x4]\n"
-"L325286:\n"
-"add_s r2,r2,r0\n"
-"L325288:\n"
-"stb_s r1,[r2,0]\n"
-"L32528a:\n"
-"ldb_s r1,[r0,0x5]\n"
-"L32528c:\n"
-"ldb_s r2,[r0,0x4]\n"
-"L32528e:\n"
-"add_s r3,r1,0x1\n"
-"L325290:\n"
-"add_s r1,r2,0x1\n"
-"L325292:\n"
-"cmp_s r1,4\n"
-"L325294:\n"
-"mov.eq r1,0\n"
-"L325298:\n"
-"stb_s r3,[r0,0x5]\n"
-"L32529a:\n"
-"j_s.d [blink]\n"
-"L32529c:\n"
-"stb_s r1,[r0,0x4]\n"
-".size opencfw_em9305_child_325284,.-opencfw_em9305_child_325284\n"
-);
+/* Stock 0x325284: 4-entry byte ring: a[a[4]] = v; a[5]++; a[4] = (a[4]+1)==4 ? 0 : a[4]+1.
+ * Converted from the lowered ARC asm; compiled with the g2-em9305-1 profile (-Os) and the
+ * disassembly diffed against the stock lowering: identical, or differing only in delay-slot
+ * scheduling / a redundant zero-extension / absolute-address ld/st forms (reviewed by hand). */
+#include <stdint.h>
+#define B8(a)  (*(volatile uint8_t  *)(uintptr_t)(a))
+#define H16(a) (*(volatile uint16_t *)(uintptr_t)(a))
+#define W32(a) (*(volatile uint32_t *)(uintptr_t)(a))
+void opencfw_em9305_child_325284(uint32_t a, uint32_t v)
+{
+  uint32_t i = B8(a + 4u);
+  B8(a + i) = (uint8_t)v;
+  uint32_t n = B8(a + 5u);
+  uint32_t m = B8(a + 4u) + 1u;
+  if(m == 4u) m = 0u;
+  B8(a + 5u) = (uint8_t)(n + 1u);
+  B8(a + 4u) = (uint8_t)m;
+}

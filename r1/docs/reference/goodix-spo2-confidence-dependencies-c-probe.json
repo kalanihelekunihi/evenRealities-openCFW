@@ -1,0 +1,177 @@
+{
+  "status": "gaussian_probe_only_not_admitted",
+  "native_entry": "0x3e6c8",
+  "native_instruction_bytes": 216,
+  "native_literal_bytes": 8,
+  "stock_c_pairs": 6656,
+  "exact_stock_c_pairs": 6656,
+  "numeric_oracle_pairs": 256,
+  "coverage": {
+    "native_coverage_calls": 5,
+    "instruction_bytes": 216,
+    "instruction_starts": 57,
+    "entry": "0x3e6c8"
+  },
+  "compiled_defects": [
+    {
+      "defect": "first-endpoint",
+      "detected": true,
+      "detection_case": "0",
+      "diagnostic": ""
+    },
+    {
+      "defect": "upper-endpoint",
+      "detected": true,
+      "detection_case": "0",
+      "diagnostic": ""
+    },
+    {
+      "defect": "zero-sigma-division",
+      "detected": true,
+      "detection_case": "1",
+      "diagnostic": ""
+    },
+    {
+      "defect": "sqrt-normalization",
+      "detected": true,
+      "detection_case": "0",
+      "diagnostic": ""
+    },
+    {
+      "defect": "sigma-square",
+      "detected": true,
+      "detection_case": "2",
+      "diagnostic": ""
+    },
+    {
+      "defect": "step-direction",
+      "detected": true,
+      "detection_case": "0",
+      "diagnostic": ""
+    },
+    {
+      "defect": "quiet-nan-status",
+      "detected": true,
+      "detection_case": "4",
+      "diagnostic": ""
+    },
+    {
+      "defect": "float-exp",
+      "detected": true,
+      "detection_case": "100",
+      "diagnostic": ""
+    }
+  ],
+  "confidence_dependencies": {
+    "29144": {
+      "stock_bytes": 520,
+      "native_c_status": "not_admitted_by_this_probe",
+      "callees": [
+        "0x28de0",
+        "0x28dec",
+        "0x2d460",
+        "0x2d54c",
+        "0x36734",
+        "0x37a84",
+        "0x42bd0",
+        "0x666a4",
+        "0x928e0"
+      ]
+    },
+    "3e6c8": {
+      "stock_bytes": 216,
+      "native_c_status": "candidate_verified_not_admitted",
+      "callees": [
+        "0x27afc",
+        "0x27c4a",
+        "0x27ee4",
+        "0x27f6c",
+        "0x38bb0",
+        "0x3b00e"
+      ]
+    },
+    "61f94": {
+      "stock_bytes": 30,
+      "native_c_status": "not_admitted_by_this_probe",
+      "callees": [
+        "0x61fb4"
+      ]
+    },
+    "61fd4": {
+      "stock_bytes": 22,
+      "native_c_status": "not_admitted_by_this_probe",
+      "callees": [
+        "0x3b00e",
+        "0x7dcd8"
+      ]
+    },
+    "66394": {
+      "stock_bytes": 28,
+      "native_c_status": "not_admitted_by_this_probe",
+      "callees": []
+    },
+    "66430": {
+      "stock_bytes": 34,
+      "native_c_status": "not_admitted_by_this_probe",
+      "callees": [
+        "0x61f04"
+      ]
+    },
+    "66490": {
+      "stock_bytes": 4,
+      "native_c_status": "not_admitted_by_this_probe",
+      "callees": []
+    }
+  },
+  "limitations": [
+    "Confidence95828 is not implemented/admitted by this probe. Its dual-window extractor29144 and statistics dependencies need native ABI C implementations; portable guessed APIs are not substitutes.",
+    "Gaussian ABI is five hard-float arguments lower,upper,mean,sigma,step returning float inS0. Decompiled three-argument/core-return presentation is not authoritative.",
+    "Positive advancing steps or explicit safe early exits are tested. Stock can fail to terminate for nonadvancing steps,including negative infinity with an eligible upper bound. An initial native run hit its instruction budget for that input; it was excluded rather than adding an invented loop cap.",
+    "Full public RAM excluding8192 private stack bytes, S0, FPSCR, saved registers/SP/masks are checked; caller scratch/APSR are excluded. Source maps no stock executable code.",
+    "Independent numeric oracle uses RNE f32-rounded Python exp/sqrt rectangle integration with tolerance2e-6; exact stock/C comparisons remain separate proof.",
+    "No normal source unit or confidence-caller integration yet. Physical hardware,timing,interrupts/concurrency and traps unverified."
+  ],
+  "evidence_sha256": {
+    "build/goal-r1-spo2-confidence-dependencies-c/candidate.c": "5ae84c0e8e610aca9b0fc053bb6402d952356f279eab7f8eaba534b26065182e",
+    "build/goal-r1-spo2-confidence-dependencies-c/candidate.elf": "04adbeb1dba0658c64cb6028bff51430b677a40cfac3743c7ebfd9f483652475",
+    "build/goal-r1-spo2-confidence-dependencies-c/candidate.o": "1b02c1aeb5aa9f4f59b895fb97ee6e4d6427e3e309a4c45fb1927af2dda02162",
+    "build/goal-r1-spo2-confidence-dependencies-c/compile-argv.json": "6c0a62de039e788943dc76c4039bbbb97212d967c0b6fb36e08ff7d80c09255d",
+    "build/goal-r1-spo2-confidence-dependencies-c/controls-results.json": "5bd09452b63a63873f928412c80c98098ce8993357821a0ae609afcff1e2a8d5",
+    "build/goal-r1-spo2-confidence-dependencies-c/controls.log": "08912dd1f73bc46c136fb0da57eb30db3072045511741eac97be57fb5246feed",
+    "build/goal-r1-spo2-confidence-dependencies-c/controls.py": "63d12f0085f054570ab9abe2f621c522cb42a7af77e7a6b7efdbda5151d22a89",
+    "build/goal-r1-spo2-confidence-dependencies-c/coverage-results.json": "c4fe67f04098809c9c7aefed195cecec76340ca539b843f144ba40c9fa02ca40",
+    "build/goal-r1-spo2-confidence-dependencies-c/coverage.py": "0b59dc59dfa417da9e1302e2840dc77c7c07877f92e34ca404d0f9c8010c3202",
+    "build/goal-r1-spo2-confidence-dependencies-c/defect.c": "4a30fc102e527d786e53958a505d343f7f6a64ec6c1286349e6fd71d3834be18",
+    "build/goal-r1-spo2-confidence-dependencies-c/defect.elf": "d341826d2d872921df07cb0aa20bf2515f9c974ab434c20e2e6157d106b42070",
+    "build/goal-r1-spo2-confidence-dependencies-c/defect.o": "dafbbf4985a503971084fe8f6eeb7f3e0d686834b2262495f7811b3b470212fb",
+    "build/goal-r1-spo2-confidence-dependencies-c/defect_fixture.py": "f814212ca02a1bbed9f5cbb257b638cf0ed1005de46cb53214b27424f2d7497a",
+    "build/goal-r1-spo2-confidence-dependencies-c/defect_verify.py": "57c7015efaa8341d226592749923dd7fa5365e067d2958549ad452a0d9a8fd78",
+    "build/goal-r1-spo2-confidence-dependencies-c/fixture.py": "34f1a5175a62361269bffbfb2f71ba1f4c66f5cf3364251323a10dc4c6f3ce2a",
+    "build/goal-r1-spo2-confidence-dependencies-c/gaussian-bytes.json": "818e1165616dbb03dfc2d27f49addbbc8324dc33bede7afe880e93afa8b7a7b7",
+    "build/goal-r1-spo2-confidence-dependencies-c/gaussian-literals.json": "f3d6061cef142cd33badd44de0f5a8377cc94b06b038a869291773702920b3c5",
+    "build/goal-r1-spo2-confidence-dependencies-c/link-argv.json": "7df167dafb967e3b79621b7e16cf6fb37daddc62491be6f6003bcb63bb97560f",
+    "build/goal-r1-spo2-confidence-dependencies-c/link.log": "2587340c8b7a8d897dccae4d8a427e1d24b7273f7b83ae1ad07211d32747ca0b",
+    "build/goal-r1-spo2-confidence-dependencies-c/oracle-results.json": "75add158af5d316345a53bfd2188b4453d2051b49ac4ad90866374c62ac8b554",
+    "build/goal-r1-spo2-confidence-dependencies-c/oracles.py": "f08e3b5d674f360c3c3fb8548d05f17b84de3556003c052cada40b1f7e229050",
+    "build/goal-r1-spo2-confidence-dependencies-c/rea-29144.json": "0d9732ac07c05eff8479faf6df8cfab42459394de007071acb15638fd12ff3e0",
+    "build/goal-r1-spo2-confidence-dependencies-c/rea-3e6c8.json": "e973a9e4c7a76184442cb904b0c63ed2dabd5f94cbd728560dd9eea09081eca9",
+    "build/goal-r1-spo2-confidence-dependencies-c/rea-61f94.json": "7f5530955607115f3f1216e974178eb3007cc0f11dd72f6e14d3445e9d9fac01",
+    "build/goal-r1-spo2-confidence-dependencies-c/rea-61fd4.json": "813cae1b9e544bcf742a1a3afcadc6a7360df51b5132e3d9885bd5140215d241",
+    "build/goal-r1-spo2-confidence-dependencies-c/rea-66394.json": "18d36f8c98d8540c67af0b4fd962d330af308cf51d171767fa2857ba5a554a0f",
+    "build/goal-r1-spo2-confidence-dependencies-c/rea-66430.json": "266e1a145b3ed9962a54cfc24df313506c06ff1f1cac83e16f3c93d9a6701704",
+    "build/goal-r1-spo2-confidence-dependencies-c/rea-66490.json": "3d9fc5da0ec2a1769eaa6e51e1b39e0ae24cd76eec632b2b6909485b475f66de",
+    "build/goal-r1-spo2-confidence-dependencies-c/results.json": "39173837f9e26b3ae134f18b7e287054cac7662b7352d74f408d9114a336346a",
+    "build/goal-r1-spo2-confidence-dependencies-c/verify.log": "d2b7c99b25d231a38efd076f9fd17d5eefbe5990e5c6e0ec0658ae53dfcc87e8",
+    "build/goal-r1-spo2-confidence-dependencies-c/verify.py": "5c7e368fbd6b91b9205049b2f9607cb3de5cd29f8f7edc546da30aed52600044",
+    "build/goal-r1-spo2-infer-support-c/normal-dependencies.a": "7e62b43a34fcf2b0ae34045a276bf4d564be5dde2ddb636dd0f69169c8843637",
+    "build/goal-r1-spo2-ratio-c/normal-stream-test.ld": "808ff9c64adde68933158791e9d115c75817ae1840e2bdcbcfa42c7a39314cc6",
+    "build/sources-goal-r1-spo2-select-c/r1/r1-application/r1__src__application__runtime__native_exp.c.o": "a508a628d43ce1d8c0831a9e0abf7918efc1ad15faba4449f10839a8b2205443",
+    "build/sources-goal-r1-spo2-select-c/r1/r1-application/r1__src__application__runtime__native_float_bits.c.o": "cc448df0a2076c6dd5ee05a700f3221fb9d253ae9ae0cb7b591a0ea3a474c154",
+    "build/sources-goal-r1-spo2-select-c/r1/r1-application/r1__src__application__runtime__native_math_sqrt.c.o": "53639c4995bff2445646d84c928a0d3905d0309752af7ac9cda89b2c54364165",
+    "r1/blobs/official/r1-2.2.6.0009/application.bin": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "r1/src/application/runtime/native_exp.c": "83119ef78dcc8897bb39953b87ea2dc0c86f29a22bce83f3f7ac7b8c663d2bdc",
+    "r1/src/application/runtime/native_float_bits.c": "aa36e420af30a285705c406ccf990a88fa9aa69042514a112b337a22697197c0",
+    "r1/src/application/runtime/native_math_sqrt.c": "adf2fe6c10b35b43ddd3c3e7645c7bd88cc7a4234b26c64c1b501d2b7e07c118",
+    "r1/src/sources.json": "2ce1623cc2702be5515572fe5bdebeb756e815af797abeb6ded461e2586c435b"
+  }
+}

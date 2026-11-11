@@ -1,8 +1,7 @@
 /* Stock Main _BoxDetect_TryReconnectRing, 0x4ac19c. */
 #include <stdint.h>
 
-extern volatile uint8_t audio_box_reconnect_pending_20075011;
-extern volatile uint8_t audio_box_reconnect_suppressed_20075010;
+#include "case_reconnect_state.h"
 extern void *audio_box_reconnect_timer; /* stock RAM 0x20074924 */
 extern int32_t audio_uart_box_reconnect_attempt_4a316c(uint32_t scene);
 extern int32_t audio_timer_start(void *timer, uint32_t delay);

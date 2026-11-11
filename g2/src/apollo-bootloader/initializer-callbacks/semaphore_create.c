@@ -10,7 +10,7 @@ extern uint32_t opencfw_bl_mask_interrupts(void);
 static _Noreturn void fatal(void) {
     (void)opencfw_bl_mask_interrupts();
     *(volatile uint32_t *)(uintptr_t)UINT32_MAX=0;
-    for (;;) __asm__ volatile("b ." ::: "memory");
+    for (;;) { }
 }
 void opencfw_boot_semaphore_queue_destroy(uintptr_t queue) {
     if (!queue) fatal();
@@ -49,3 +49,6 @@ uintptr_t opencfw_boot_semaphore_create(uint32_t maximum,uint32_t initial,
     }
     return queue;
 }
+
+/* Stock entry names that branch straight to the provider above. */
+__typeof__(opencfw_boot_semaphore_create) opencfw_bl_semaphore_create __attribute__((alias("opencfw_boot_semaphore_create")));

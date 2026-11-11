@@ -1,0 +1,195 @@
+{
+  "schema": 1,
+  "date": "2026-11-11",
+  "reference": {
+    "artifact": "g2/blobs/official/g2-2.2.6.10/firmware_box.raw.bin",
+    "sha256": "773b6d4cfdaf0a5a74a557e3babe8222a0ae813436b76a7437c1096d2c60d677",
+    "flash_base": "0x08000000"
+  },
+  "method": "Manual Thumb control-flow and literal-load review against locked bytes and GNU disassembly, with existing C owner and source-linked CASE symbol checked for each executable segment. Literal words are classified only where the listed LDR instruction points to them.",
+  "transitions": [
+    {
+      "original": {
+        "start": "0x0800ADE6",
+        "end_exclusive": "0x0800AE0C",
+        "bytes": 38,
+        "sha256": "77fdecbf06a390d40edbf7512a101709fad9fd8d40d50c7b200198ae2381e0f8"
+      },
+      "children": [
+        {
+          "start": "0x0800ADE6",
+          "end_exclusive": "0x0800ADE8",
+          "bytes": 2,
+          "sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+          "classification": "typed_zero_alignment_or_data",
+          "reason": "zero alignment after task reclaim return"
+        },
+        {
+          "start": "0x0800ADE8",
+          "end_exclusive": "0x0800AE08",
+          "bytes": 32,
+          "sha256": "2d983adbc42c69cdf41167fde7e6b9a2b45cbe4cf8c3dddaa22e5903253bbd9c",
+          "classification": "typed_executable_source_candidate",
+          "reason": "timer-list wait helper; source case_boot_timer_wait_next"
+        },
+        {
+          "start": "0x0800AE08",
+          "end_exclusive": "0x0800AE0C",
+          "bytes": 4,
+          "sha256": "c6730dbb271b36104d70b4a4fe27f9285bb078e01ff2c3f52a1052da05bdcff6",
+          "classification": "typed_pc_relative_literal_data",
+          "reason": "RAM scheduler pointer 0x20000164 loaded at 0x0800ADE8"
+        }
+      ]
+    },
+    {
+      "original": {
+        "start": "0x0800AE5C",
+        "end_exclusive": "0x0800AE74",
+        "bytes": 24,
+        "sha256": "38c4939d4a5b9e35f7bbd184d46a0705c9d702ea8d1c20554873b581ec1a4aff"
+      },
+      "children": [
+        {
+          "start": "0x0800AE5C",
+          "end_exclusive": "0x0800AE6E",
+          "bytes": 18,
+          "sha256": "ccc0f9d866609428d8168d62c40f47c87e237948d257b32f071fc1004bb419ac",
+          "classification": "typed_executable_source_candidate",
+          "reason": "idle-task infinite loop; source case_boot_idle_task_entry"
+        },
+        {
+          "start": "0x0800AE6E",
+          "end_exclusive": "0x0800AE70",
+          "bytes": 2,
+          "sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+          "classification": "typed_zero_alignment_or_data",
+          "reason": "zero alignment after branch loop"
+        },
+        {
+          "start": "0x0800AE70",
+          "end_exclusive": "0x0800AE74",
+          "bytes": 4,
+          "sha256": "bef6c48c3176d64e8cbf7476f1066d80b5d2576c0c42adbd2e7cd13e5e3a7cd8",
+          "classification": "typed_pc_relative_literal_data",
+          "reason": "RAM ready-list pointer 0x20000FF4 loaded at 0x0800AE5C"
+        }
+      ]
+    },
+    {
+      "original": {
+        "start": "0x0800B1FC",
+        "end_exclusive": "0x0800B260",
+        "bytes": 100,
+        "sha256": "9d39e77c71b38234aa520cea151d2d5158b802f673231f79c7141e61061e22bb"
+      },
+      "children": [
+        {
+          "start": "0x0800B1FC",
+          "end_exclusive": "0x0800B25C",
+          "bytes": 96,
+          "sha256": "13ae0c9f827b6928ba572d9bcf5f5a7a7d8f033c100d95418b9b89061c59b7b2",
+          "classification": "typed_executable_source_candidate",
+          "reason": "timer service wait/process decision; source case_boot_timer_process"
+        },
+        {
+          "start": "0x0800B25C",
+          "end_exclusive": "0x0800B260",
+          "bytes": 4,
+          "sha256": "c6730dbb271b36104d70b4a4fe27f9285bb078e01ff2c3f52a1052da05bdcff6",
+          "classification": "typed_pc_relative_literal_data",
+          "reason": "RAM scheduler pointer 0x20000164 loaded at 0x0800B230"
+        }
+      ]
+    },
+    {
+      "original": {
+        "start": "0x0800B31C",
+        "end_exclusive": "0x0800B330",
+        "bytes": 20,
+        "sha256": "ba9360820afda1fc78a03db20a47ef48a70be3ec10a2ea51d01b0cfb66659d83"
+      },
+      "children": [
+        {
+          "start": "0x0800B31C",
+          "end_exclusive": "0x0800B32C",
+          "bytes": 16,
+          "sha256": "c6f2dc43f5859a55a680ef35cbef5e78e1e0fbfb82ea33566912ba6ee7680cea",
+          "classification": "typed_executable_source_candidate",
+          "reason": "task-return fault policy; source case_boot_task_return"
+        },
+        {
+          "start": "0x0800B32C",
+          "end_exclusive": "0x0800B330",
+          "bytes": 4,
+          "sha256": "5af7c6458c3d06b527e5e5b330147185fd784409dc49d38a8bc1cfba48ce38e5",
+          "classification": "typed_pc_relative_literal_data",
+          "reason": "RAM critical nesting pointer 0x2000019C loaded at 0x0800B31C"
+        }
+      ]
+    },
+    {
+      "original": {
+        "start": "0x0800B360",
+        "end_exclusive": "0x0800B374",
+        "bytes": 20,
+        "sha256": "4b209db84783edeedfede4f42f3d2b9410d7eac3db8d4dc766cae9cebc44f131"
+      },
+      "children": [
+        {
+          "start": "0x0800B360",
+          "end_exclusive": "0x0800B374",
+          "bytes": 20,
+          "sha256": "4b209db84783edeedfede4f42f3d2b9410d7eac3db8d4dc766cae9cebc44f131",
+          "classification": "typed_executable_source_candidate",
+          "reason": "timer-service task loop; source case_boot_service_task_entry"
+        }
+      ]
+    },
+    {
+      "original": {
+        "start": "0x0800BF84",
+        "end_exclusive": "0x0800BF94",
+        "bytes": 16,
+        "sha256": "4b99c773b048184c46aa60cc336e3891398309babadd4c614b6e216171d84477"
+      },
+      "children": [
+        {
+          "start": "0x0800BF84",
+          "end_exclusive": "0x0800BF8C",
+          "bytes": 8,
+          "sha256": "38baa74ce2a5a44e6bc4a7a27965487b6688f357aa20c988a1478ead5081d511",
+          "classification": "typed_executable_source_candidate",
+          "reason": "event-group clear callback; source vEventGroupClearBitsCallback"
+        },
+        {
+          "start": "0x0800BF8C",
+          "end_exclusive": "0x0800BF94",
+          "bytes": 8,
+          "sha256": "06aa7c9d61770d1d5178b852307a42d0779e30cb82c2cbc8dea77581ffe72dea",
+          "classification": "typed_executable_source_candidate",
+          "reason": "event-group set callback; source vEventGroupSetBitsCallback"
+        }
+      ]
+    }
+  ],
+  "source_owners": {
+    "0x0800ADE8": "g2/src/case/startup/application_boot_timer_wait_next_candidate.c:case_boot_timer_wait_next",
+    "0x0800AE5C": "g2/src/case/startup/application_boot_idle_task_candidate.c:case_boot_idle_task_entry",
+    "0x0800B1FC": "g2/src/case/startup/application_boot_timer_process_candidate.c:case_boot_timer_process",
+    "0x0800B31C": "g2/src/case/startup/application_boot_task_frame_candidate.c:case_boot_task_return",
+    "0x0800B360": "g2/src/case/startup/application_boot_service_task_entry_candidate.c:case_boot_service_task_entry",
+    "0x0800BF84": "g2/src/case/glue/event_clear_callback.c:vEventGroupClearBitsCallback",
+    "0x0800BF8C": "g2/src/case/startup/event_set_callback_candidate.c:vEventGroupSetBitsCallback"
+  },
+  "verification": {
+    "frontier_hashes_match": true,
+    "rows_nonoverlapping": true,
+    "source_link_symbols_present": true,
+    "unsupported_bytes_after": 240
+  },
+  "limits": [
+    "Existing C owner and successful source link do not establish exact stock behavior or byte equality.",
+    "Residual unknown spans and whole-firmware source completeness remain open."
+  ]
+}

@@ -2,7 +2,7 @@
  * The first returns an input device; its inherited import name says "reset". */
 #include <stdint.h>
 
-extern void audio_uart_lvgl_log(uint32_t level, const char *source,
+extern void lv_log_add(uint32_t level, const char *source,
                                uint32_t line, const char *function,
                                const char *message);
 

@@ -1,0 +1,87 @@
+{
+  "cases": 2300,
+  "passed": 2300,
+  "source_sha256": "e860790452cfba93854986cceb8841cd07eb5687071d8912057214d92213e19c",
+  "report": "build/sources-goal-r1-battery-recovery-frame/report.json",
+  "old_baseline": {
+    "native_saved_words": [
+      536969216,
+      305419896,
+      2271560481
+    ],
+    "old_saved_words": [
+      536969216,
+      305419896,
+      2271560481
+    ],
+    "equal": true,
+    "native_alias_saved_words": [
+      3100,
+      3000,
+      537067480
+    ],
+    "old_alias_saved_words": [
+      3100,
+      1515870810,
+      1515870810
+    ],
+    "alias_differs": true
+  },
+  "other_units_unchanged": 561,
+  "application_imports": 211,
+  "bootloader_imports": 34,
+  "limitations": [
+    "Tick/frequency/curve/log providers modeled",
+    "Provider-private stack placement differs; arbitrary logger vararg-stack mutation not covered",
+    "No physical charging, complete fault equivalence, byte qualification or final firmware proof"
+  ],
+  "bridge_bytes": 14,
+  "evidence": [
+    {
+      "path": "build/goal-r1-battery-recovery-frame/before.c",
+      "sha256": "30e10825a351116158b4108616ad31c31db9e6a2a8d204c6ce5a30d715c6187d"
+    },
+    {
+      "path": "build/goal-r1-battery-recovery-frame/verify.py",
+      "sha256": "cc94be408a72b0279c5784a34538f00df6cf59e7f02003a77d541fc34280ecf1"
+    },
+    {
+      "path": "build/goal-r1-battery-recovery-frame/REA.json",
+      "sha256": "49e228b48d6bf8c030b0374451008d80aa0cbdb86a7a2fc8b0728d5bb90cb1dc"
+    },
+    {
+      "path": "build/goal-r1-battery-recovery-frame/rea-snapshot.json",
+      "sha256": "7b0f6ba69f74ab8927eb80c722412fbdb597604b04d7d8b21e1a279419c1b285"
+    },
+    {
+      "path": "build/goal-r1-battery-recovery-frame/stock.elf",
+      "sha256": "98c776dd7733090a1c411181f6798addcf98a7bc33dec9cce338a828801b8fc2"
+    },
+    {
+      "path": "build/sources-goal-r1-battery-recovery-frame/report.json",
+      "sha256": "1ec20c71bce3296726143bb08b1b662b035bcc2aa83d7edae5df4e419b22b52d"
+    },
+    {
+      "path": "r1/src/application/board/native_battery_recovery.c",
+      "sha256": "e860790452cfba93854986cceb8841cd07eb5687071d8912057214d92213e19c"
+    },
+    {
+      "path": "r1/src/application/board/native_battery_context.h",
+      "sha256": "6b338ba13d97fd1f2dc1823a2efb3fd4d903864e3521eb7b0bcab12bb2995282"
+    },
+    {
+      "path": "r1/src/sources.json",
+      "sha256": "9c5b7ae5c0e7493eb22e1fb4df9f0c928c2a9aa70530254aff89b55213bef2e2"
+    },
+    {
+      "path": "tools/build/source-plan.json",
+      "sha256": "964cbd3af9f4ea7ed207bb4b480d18a9529060dc3801663d296389472982aa7c"
+    }
+  ],
+  "subsequent_direct_C_root": {
+    "review": "r1/docs/reference/battery-recovery-root-c-review.json",
+    "assembly_bridge_replaced": true,
+    "separate_kernel_removed": true,
+    "native_provider_frame": 40
+  }
+}

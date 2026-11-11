@@ -1,128 +1,43 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_32ccdc\n"
-".type opencfw_em9305_child_32ccdc,@function\n"
-"opencfw_em9305_child_32ccdc:\n"
-"L32ccdc:\n"
-"enter_s [r13-r18,blink]\n"
-"L32ccde:\n"
-"mov_s r15,r0\n"
-"L32cce0:\n"
-"mov_s r18,r15\n"
-"L32cce2:\n"
-"add r15,r15,768\n"
-"L32cce6:\n"
-"mov_s r0,0x80281c\n"
-"L32ccec:\n"
-"ldb_s r1,[r15,0]\n"
-"L32ccee:\n"
-"ldb r16,[r0,3]\n"
-"L32ccf2:\n"
-"ldb_s r14,[r0,0x2]\n"
-"L32ccf4:\n"
-"ldb r17,[r0,1]\n"
-"L32ccf8:\n"
-"ldb_s r13,[r0,0]\n"
-"L32ccfa:\n"
-"breq_s r1,0,L32cd24\n"
-"L32ccfc:\n"
-"ldb r3,[r15,-2]\n"
-"L32cd00:\n"
-"add r0,r18,r3\n"
-"L32cd04:\n"
-"add r0,r0,553\n"
-"L32cd08:\n"
-"ldb_s r0,[r0,0]\n"
-"L32cd0a:\n"
-"breq.d.nt r14,r0,L32cd24\n"
-"L32cd0e:\n"
-"sub_s r0,r14,r0\n"
-"L32cd10:\n"
-"sexb r6,r0\n"
-"L32cd14:\n"
-"sexb r4,r14\n"
-"L32cd18:\n"
-"mov_s r1,0\n"
-"L32cd1a:\n"
-"mov_s r2,1\n"
-"L32cd1c:\n"
-"mov_s r0,r18\n"
-"L32cd1e:\n"
-"bl.d opencfw_em9305_callback_323620\n"
-"L32cd22:\n"
-"mov_s r5,r13\n"
-"L32cd24:\n"
-"ldb r0,[r15,-2]\n"
-"L32cd28:\n"
-"add_s r0,r0,r18\n"
-"L32cd2a:\n"
-"add r0,r0,553\n"
-"L32cd2e:\n"
-"stb_s r14,[r0,0]\n"
-"L32cd30:\n"
-"ldb r0,[r15,-2]\n"
-"L32cd34:\n"
-"add_s r0,r0,r18\n"
-"L32cd36:\n"
-"add r0,r0,557\n"
-"L32cd3a:\n"
-"stb_s r13,[r0,0]\n"
-"L32cd3c:\n"
-"ldb r0,[r15,-2]\n"
-"L32cd40:\n"
-"add_s r0,r0,r18\n"
-"L32cd42:\n"
-"add r0,r0,561\n"
-"L32cd46:\n"
-"stb r16,[r0]\n"
-"L32cd4a:\n"
-"ldb r0,[r15,-2]\n"
-"L32cd4e:\n"
-"add_s r0,r0,r18\n"
-"L32cd50:\n"
-"add r0,r0,553\n"
-"L32cd54:\n"
-"ldb.x r0,[r0]\n"
-"L32cd58:\n"
-"cmp_s r0,0x7f\n"
-"L32cd5a:\n"
-"beq_s L32cd84\n"
-"L32cd5c:\n"
-"cmp_s r0,0x7e\n"
-"L32cd5e:\n"
-"beq_s L32cd84\n"
-"L32cd60:\n"
-"ldb_s r0,[r15,0x3]\n"
-"L32cd62:\n"
-"breq_s r0,0,L32cd68\n"
-"L32cd64:\n"
-"stb 0,[r15,3]\n"
-"L32cd68:\n"
-"ldb_s r0,[r15,0x1]\n"
-"L32cd6a:\n"
-"brne.nt r0,0x1,L32cd84\n"
-"L32cd6e:\n"
-"ldb_s r0,[r15,0x10]\n"
-"L32cd70:\n"
-"breq_s r0,0,L32cd84\n"
-"L32cd72:\n"
-"mov_s r0,r18\n"
-"L32cd74:\n"
-"bl.d opencfw_em9305_command_derive_317ba8\n"
-"L32cd78:\n"
-"stb 0,[r15,16]\n"
-"L32cd7c:\n"
-"stb_s r0,[r15,0xe]\n"
-"L32cd7e:\n"
-"bl.d opencfw_em9305_command_refresh_323268\n"
-"L32cd82:\n"
-"mov_s r0,r18\n"
-"L32cd84:\n"
-"add r18,r18,764\n"
-"L32cd88:\n"
-"stb r17,[r18]\n"
-"L32cd8c:\n"
-"leave_s [r13-r18,blink,pcl]\n"
-".size opencfw_em9305_child_32ccdc,.-opencfw_em9305_child_32ccdc\n"
-);
+#include <stdint.h>
+
+/* Native 0x32ccdc..0x32cd8c: apply a power-control sample (bytes 0..3 at
+ * 0x80281c) to the record's current PHY slot (+766). When reporting is on
+ * (+768) and the level changed, report LL event 0x2f (native 0x323620) with
+ * the new level and the delta. Store level/limit/flags in the slot tables
+ * (+553/+557/+561); unless the level is a sentinel (0x7e/0x7f), clear the
+ * pending byte +771 and, for an active request (+769 == 1, +784 set),
+ * re-derive (+782) and refresh the command. Byte +764 takes sample byte 1. */
+extern uint32_t opencfw_em9305_callback_323620(uintptr_t entry, uint32_t status, uint32_t p0,
+                                               uint32_t p1, uint32_t p2, uint32_t p3, uint32_t p4);
+extern uint32_t opencfw_em9305_command_derive_317ba8(uintptr_t);
+extern uint32_t opencfw_em9305_command_refresh_323268(uintptr_t);
+
+void opencfw_em9305_child_32ccdc(uintptr_t record)
+{
+    const volatile uint8_t *sample = (const volatile uint8_t *)(uintptr_t)0x80281cu;
+    volatile uint8_t *control = (volatile uint8_t *)(record + 768u);
+    uint32_t flags = sample[3];
+    uint32_t level = sample[2];
+    uint32_t status = sample[1];
+    uint32_t limit = sample[0];
+    if (control[0] != 0u) {
+        uint32_t phy = control[-2];
+        uint32_t previous = *(volatile uint8_t *)(record + phy + 553u);
+        if (level != previous)
+            (void)opencfw_em9305_callback_323620(record, 0u, 1u, phy, (uint32_t)(int8_t)level,
+                                                 limit, (uint32_t)(int8_t)(level - previous));
+    }
+    *(volatile uint8_t *)(record + control[-2] + 553u) = (uint8_t)level;
+    *(volatile uint8_t *)(record + control[-2] + 557u) = (uint8_t)limit;
+    *(volatile uint8_t *)(record + control[-2] + 561u) = (uint8_t)flags;
+    uint32_t stored = *(volatile uint8_t *)(record + control[-2] + 553u);
+    if (stored != 0x7fu && stored != 0x7eu) {
+        if (control[3] != 0u) control[3] = 0u;
+        if (control[1] == 1u && control[16] != 0u) {
+            control[16] = 0u;
+            control[14] = (uint8_t)opencfw_em9305_command_derive_317ba8(record);
+            (void)opencfw_em9305_command_refresh_323268(record);
+        }
+    }
+    *(volatile uint8_t *)(record + 764u) = (uint8_t)status;
+}

@@ -8,7 +8,7 @@ extern void case_boot_heap_insert(uint32_t block); /* 0xafcc */
 static uint32_t rd(uint32_t a){return *(volatile uint32_t *)(uintptr_t)a;}
 static void wr(uint32_t a,uint32_t v){*(volatile uint32_t *)(uintptr_t)a=v;}
 static __attribute__((noreturn)) void native_fault(void)
-{__asm__ volatile("cpsid i\n1: b 1b" ::: "memory");__builtin_unreachable();}
+{__asm__ volatile("cpsid i" ::: "memory");for(;;){}}
 
 /* Stock 0x0800AE0C (case_boot_heap_initialize) */
 void case_boot_heap_initialize(void)

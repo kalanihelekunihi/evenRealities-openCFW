@@ -15,18 +15,22 @@ Other values remain candidates, including heap size, task-name width,
 queue registry, trace options and timer priority/queue length. Passing a
 compile check does not admit those values as recovered stock configuration.
 
-The first compile audit disproved the assumption that these candidate settings
-produce a 112-byte `StaticTask_t`: they produce 92 bytes. The stock callback
-instructions establish a 112-byte control reservation before each 256-word
-stack, and the two allocations are 0x470 bytes apart. They do not establish
-which fields or padding occupy the reservation. R1's source-owned callbacks
-therefore retain a transparent 112-byte reservation containing the candidate
-upstream type, with an assertion that the type fits. They neither change
-kernel options to force a size nor claim the stock type is 92 bytes.
+The generic upstream settings produce a 92-byte TCB candidate. The recovered
+native constructor allocates 112 bytes, and the stock callbacks reserve 112
+bytes before each 256-word stack. `FreeRTOS.h` now retains that generic type as
+`R1UpstreamStaticTask_t` and exposes word-aligned 112-byte opaque `StaticTask_t`
+storage for native consumers. `configSTACK_DEPTH_TYPE` is 32 bits, matching the
+native constructor's argument width. This does not assign upstream field
+semantics to the native stack-depth extension or infer extra kernel options.
+The source-owned callback reservations remain byte unchanged; their public
+extent assertion is now equality. See
+[the public task ABI review](../../../docs/reference/task-public-abi-review.md).
 
-Exact stock TCB configuration, fields and dynamic allocation extent remain
-unresolved. A compiler-generated layout probe records the candidate type size
-in the build report on every run.
+The generic upstream tasks.c candidate remains excluded. Native task field
+layouts and constructors have separate evidence; unknown padding and complete
+startup/scheduler integration remain open. Earlier provider notes below refer
+to their original scopes; public allocation declarations are governed by the
+current wrapper and ABI review.
 
 ## Native port critical assertion contract
 
@@ -111,7 +115,8 @@ shares only its extern declaration. `startup_timer_contract.h` scopes timer
 priority53 and registry0, uses original pinned timer message typedefs, and
 owns native timer handles/lists/pointers. Static queue/storage and two1136-byte
 TCB/stack reservations are placed at authenticated addresses by the verifier.
-The baseline `StaticTask_t` remains92 bytes. Port startup and timer runtime are
+The retained generic `R1UpstreamStaticTask_t` remains 92 bytes; the public
+opaque `StaticTask_t` now reserves 112 bytes. Port startup and timer runtime are
 still separate source providers; creation receipts do not establish execution.
 
 `port_start_contract.h` binds private startup state to the existing words at
@@ -126,11 +131,12 @@ before that body and does not establish physical scheduler execution.
 switcher and upstream stack macros, reusing existing current-task, ready-list,
 yield and suspend storage. The SDK GCC C port compiles unchanged with the
 baseline raw priorities2/15 and three priority bits, yielding PendSV mask64 and
-first-task mask480 (BASEPRI lowbytee0). `native_context_vectors.c` owns only
-initial-SP, SVC and PendSV records; the SDK's uint32 `__isr_vector` declaration
-is preserved and placed in flash. It does not define missing vector slots.
-Kernel stack-overflow callback implementation and actual exception return stay
-separate providers/evidence gates.
+first-task mask480 (BASEPRI lowbytee0). `native_context_vectors.c` now owns the
+full 128-word application vector table in C. The SDK's single-word
+`__isr_vector` declaration is bound to that table by the application linker
+script. The five fault adapters now have C source with an architectural
+LR/SP handoff; physical exception entry stays a separate evidence gate. Kernel stack-overflow callback
+implementation remains a separate gate.
 
 
 The scoped `message_queue_contract.h` admits native80-byte `StaticQueue_t`,

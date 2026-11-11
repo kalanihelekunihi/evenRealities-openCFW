@@ -11,6 +11,10 @@
  * values. Profile g2-apollo-main-2. */
 #include <stdint.h>
 #include <stddef.h>
+/* Stock-RAM literals rewritten to named objects (sim-test wave 2026-10-26,
+ * .waves/sim-fix/apply.py): g2ref_X is the linker symbol X. */
+#include <stdint.h>
+extern unsigned char g2ref_g2_stock_ram_20074f08[] __asm__("g2_stock_ram_20074f08");
 
 extern uint32_t g2_strspn(const uint8_t *s, const uint8_t *set);  /* 0x541b52 strspn */
 extern uint32_t g2_strcspn(const uint8_t *s, const uint8_t *set); /* 0x541b30 strcspn */
@@ -20,7 +24,7 @@ char *g2_strtok_594884(char *s, const char *delim);
 int32_t strncasecmp_595f0c(const char *a, const char *b, uint32_t len);
 
 /* RAM 0x20074f0c: strtok continuation pointer (no named object in g2/src). */
-#define G2_STRTOK_SAVE (*(char *volatile *)(uintptr_t)0x20074f0cu)
+#define G2_STRTOK_SAVE (*(char *volatile *)(uintptr_t)((uint32_t)(uintptr_t)g2ref_g2_stock_ram_20074f08+0x4u))
 
 /* Stock 0x00594884 (strtok) */
 char *g2_strtok_594884(char *s, const char *delim)

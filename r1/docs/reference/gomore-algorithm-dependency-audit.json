@@ -1,0 +1,145 @@
+{
+  "status": "pseudocode_dependency_audit_not_implementation",
+  "stock_entry": "0x5ff94",
+  "stock_size": 1606,
+  "REA_evidence_id": "ev_9421a0612708477750f49111a4b9681ee3c436058a35cb52cc2b46c824330987",
+  "REA_subject": {
+    "name": "stock.elf",
+    "digest": {
+      "sha256": "25b4a29af80ec8edab5bd861ba9b74a6e22eab29dc3d7a809a16869e8a140f04"
+    },
+    "local_path": "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-queue-reset-c/stock.elf",
+    "format": "elf",
+    "architecture": "arm"
+  },
+  "providers": [
+    {
+      "entry": "0x00060680",
+      "size": "734",
+      "candidate_symbol": "gomore_primitives_respiratory_rate_update",
+      "status": "compiled_symbol_hint",
+      "candidate_sources": "r1/src/vendor/gomore_primitives/gomore_primitives.c"
+    },
+    {
+      "entry": "0x000578c8",
+      "size": "2",
+      "candidate_symbol": "gomore_primitives_noop_578c8",
+      "status": "compiled_symbol_hint",
+      "candidate_sources": "r1/src/vendor/gomore_primitives/gomore_primitives.c"
+    },
+    {
+      "entry": "0x0005ed14",
+      "size": "518",
+      "candidate_symbol": "gomore_primitives_locomotion_window_preprocess",
+      "status": "compiled_symbol_hint",
+      "candidate_sources": "r1/src/vendor/gomore_primitives/gomore_primitives.c"
+    },
+    {
+      "entry": "0x0005f4b6",
+      "size": "180",
+      "candidate_symbol": "gomore_primitives_motion_classifier_update",
+      "status": "compiled_symbol_hint",
+      "candidate_sources": "r1/src/vendor/gomore_primitives/gomore_primitives.c"
+    },
+    {
+      "entry": "0x0005ef1c",
+      "size": "780",
+      "candidate_symbol": "gomore_primitives_sps_accelerometer_candidate_update",
+      "status": "compiled_symbol_hint",
+      "candidate_sources": "r1/src/vendor/gomore_primitives/gomore_primitives.c"
+    },
+    {
+      "entry": "0x000610c8",
+      "size": "168",
+      "candidate_symbol": "gomore_primitives_sps_select_available",
+      "status": "compiled_symbol_hint",
+      "candidate_sources": "r1/src/vendor/gomore_primitives/gomore_primitives.c"
+    },
+    {
+      "entry": "0x0005f3d8",
+      "size": "222",
+      "candidate_symbol": "gomore_primitives_sleep_motion_feature",
+      "status": "compiled_symbol_hint",
+      "candidate_sources": "r1/src/vendor/gomore_primitives/gomore_primitives.c"
+    },
+    {
+      "entry": "0x000605dc",
+      "size": "132",
+      "candidate_symbol": "gomore_primitives_select_heart_rate",
+      "status": "compiled_symbol_hint",
+      "candidate_sources": "r1/src/vendor/gomore_primitives/gomore_primitives.c"
+    },
+    {
+      "entry": "0x0005f56c",
+      "size": "2102",
+      "candidate_symbol": "gomore_primitives_energy_update",
+      "status": "compiled_symbol_hint",
+      "candidate_sources": "r1/src/vendor/gomore_primitives/gomore_primitives.c"
+    },
+    {
+      "entry": "0x0005feb8",
+      "size": "216",
+      "candidate_symbol": "gomore_primitives_dormant_estimator_update",
+      "status": "compiled_symbol_hint",
+      "candidate_sources": "r1/src/vendor/gomore_primitives/gomore_primitives.c"
+    },
+    {
+      "entry": "0x0005f264",
+      "size": "352",
+      "candidate_symbol": "gomore_primitives_motion_gate_accumulate",
+      "status": "compiled_symbol_hint",
+      "candidate_sources": "r1/src/vendor/gomore_primitives/gomore_primitives.c"
+    },
+    {
+      "entry": "0x00060b80",
+      "size": "578",
+      "candidate_symbol": "gomore_primitives_sleep_cycle_update",
+      "status": "compiled_symbol_hint",
+      "candidate_sources": "r1/src/vendor/gomore_primitives/gomore_primitives.c"
+    },
+    {
+      "entry": "0x00060af4",
+      "size": "140",
+      "candidate_symbol": "gomore_primitives_sleep_optical_peak_update",
+      "status": "compiled_symbol_hint",
+      "candidate_sources": "r1/src/vendor/gomore_primitives/gomore_primitives.c"
+    },
+    {
+      "entry": "0x00060dc4",
+      "size": "762",
+      "candidate_symbol": "gomore_primitives_sleep_stage_stream_update",
+      "status": "compiled_symbol_hint",
+      "candidate_sources": "r1/src/vendor/gomore_primitives/gomore_primitives.c"
+    },
+    {
+      "entry": "0x0006138c",
+      "size": "834",
+      "candidate_symbol": "gomore_primitives_activity_window_update",
+      "status": "compiled_symbol_hint",
+      "candidate_sources": "r1/src/vendor/gomore_primitives/gomore_primitives.c"
+    },
+    {
+      "entry": "0x00061198",
+      "size": "198",
+      "candidate_symbol": "gomore_primitives_step_accumulate",
+      "status": "compiled_symbol_hint",
+      "candidate_sources": "r1/src/vendor/gomore_primitives/gomore_primitives.c"
+    },
+    {
+      "entry": "0x00061274",
+      "size": "272",
+      "candidate_symbol": "gomore_primitives_activity_accumulate",
+      "status": "compiled_symbol_hint",
+      "candidate_sources": "r1/src/vendor/gomore_primitives/gomore_primitives.c"
+    }
+  ],
+  "artifacts": {
+    "build/goal-r1-gomore-algorithm-c/rea.json": "4b743ac1f0b8cb02b24aec266b17dbe88a8083b2f4fc2f197ee8e5cee7780751",
+    "build/goal-r1-gomore-algorithm-c/pseudocode.c": "7c7f3399860df03184abd00a398c77627ea1bc80dfb1d760f1b36494a421b0fd"
+  },
+  "limitations": [
+    "Provider argument types, stack slots and state effects require instruction/replay verification",
+    "Compiled symbol hints are not native-ABI equivalence or link-ready evidence",
+    "No production source/manifest or canonical source-plan change for algorithm coordinator"
+  ]
+}

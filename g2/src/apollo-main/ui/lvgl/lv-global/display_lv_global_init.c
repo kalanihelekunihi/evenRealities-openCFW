@@ -4,7 +4,7 @@
 #include <stddef.h>
 extern uint8_t audio_uart_display_lv_root[]; /* selected RAM0x2006f548 */
 extern void *memset(void *,int,size_t);
-extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,...);
+extern void lv_log_add(uint32_t,const char *,uint32_t,const char *,...);
 static const char source[]="D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\lvgl_v9.3\\LVGL\\src\\lv_init.c";
 static const char function[]="lv_global_init";
 static const char format[]="Asserted at expression: %s (%s)";
@@ -17,7 +17,7 @@ void audio_uart_lv_array_init_482b00(uint8_t *array,uint32_t bytes);
 void audio_uart_lv_init_global_4734cc(volatile uint8_t *global)
 {
     if (global==0) {
-        audio_uart_lvgl_log(3u,source,0x7cu,function,format,expression,message);
+        lv_log_add(3u,source,0x7cu,function,format,expression,message);
         for (;;) *(volatile uint32_t *)(uintptr_t)UINT32_MAX=0u;
     }
     uint8_t *root=(uint8_t *)(void *)global;

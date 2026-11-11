@@ -1,67 +1,21 @@
-/* Native PAwR callback: preserve result routing and out-of-line return path. */
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_callback_322754\n"
-".type opencfw_em9305_callback_322754,@function\n"
-"opencfw_em9305_callback_322754:\n"
-"L322754:\n"
-"enter_s [r13,blink]\n"
-"L322756:\n"
-"mov_s r13,r0\n"
-"L322758:\n"
-"ldb_s r0,[r0,0]\n"
-"L32275a:\n"
-"breq_s r0,0,L322786\n"
-"L32275c:\n"
-"mov_s r0,0x802810\n"
-"L322762:\n"
-"bl.d opencfw_em9305_child_3191dc\n"
-"L322766:\n"
-"ldb_s r2,[r13,0x2]\n"
-"L322768:\n"
-"breq.d.nt r0,0x1e,L322776\n"
-"L32276c:\n"
-"ldb_s r1,[r13,0x2]\n"
-"L32276e:\n"
-"brne_s r0,0,L32277c\n"
-"L322770:\n"
-"breq_s r1,0,L322788\n"
-"L322772:\n"
-"mov_s r1,0xc\n"
-"L322774:\n"
-"b_s L322780\n"
-"L322776:\n"
-"breq_s r1,0,L32278c\n"
-"L322778:\n"
-"mov_s r1,0xe\n"
-"L32277a:\n"
-"b_s L322780\n"
-"L32277c:\n"
-"breq_s r1,0,L322790\n"
-"L32277e:\n"
-"mov_s r1,0xd\n"
-"L322780:\n"
-"bl.d opencfw_em9305_child_32a000\n"
-"L322784:\n"
-"mov_s r0,r13\n"
-"L322786:\n"
-"leave_s [r13,blink,pcl]\n"
-"L322788:\n"
-"mov_s r1,0xc\n"
-"L32278a:\n"
-"b_s L322792\n"
-"L32278c:\n"
-"mov_s r1,0xe\n"
-"L32278e:\n"
-"b_s L322792\n"
-"L322790:\n"
-"mov_s r1,0xd\n"
-"L322792:\n"
-"bl.d opencfw_em9305_child_31e4a0\n"
-"L322796:\n"
-"mov_s r0,r13\n"
-"L322798:\n"
-"leave_s [r13,blink,pcl]\n"
-".size opencfw_em9305_callback_322754,.-opencfw_em9305_callback_322754\n"
-);
+#include <stdint.h>
+
+/* Native 0x322754..0x32279a: PAwR receive callback. For an active entry
+ * (+0) decode the packet against the shared report (0x802810) in the
+ * entry's mode (+2), then map the decode status to a report code (0x1e:
+ * 0x0e, other nonzero: 0x0d, 0: 0x0c) and report it through 32a000, or
+ * through 31e4a0 when the mode byte is 0. Returns 0 for an idle entry. */
+extern uint32_t opencfw_em9305_child_3191dc(uint32_t,uint32_t,uint32_t);
+extern uint32_t opencfw_em9305_child_32a000(uint32_t,uint32_t);
+extern uint32_t opencfw_em9305_child_31e4a0(uint32_t,uint32_t);
+
+uint32_t opencfw_em9305_callback_322754(uintptr_t entry,uint32_t packet)
+{
+    if(*(volatile uint8_t *)entry==0u) return 0u;
+    uint32_t status=opencfw_em9305_child_3191dc((uint32_t)0x802810u,packet,
+                                                *(volatile uint8_t *)(entry+2u));
+    uint32_t mode=*(volatile uint8_t *)(entry+2u);
+    uint32_t code=(status==0x1eu)?0x0eu:((status!=0u)?0x0du:0x0cu);
+    if(mode==0u) return opencfw_em9305_child_31e4a0(entry,code);
+    return opencfw_em9305_child_32a000(entry,code);
+}

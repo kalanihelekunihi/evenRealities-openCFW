@@ -1,0 +1,156 @@
+{
+  "schema_version": 1,
+  "scope": "R1 ordinary C cached local calendar logger and registered clock backend chain",
+  "report": "build/sources-goal-r1-log-calendar-pure-reviewed-c/report.json",
+  "comparison_report": "build/sources-goal-r1-connection-gates-pure-c/report.json",
+  "audit": {
+    "compiled_units": 855,
+    "application_imports": 61,
+    "bootloader_imports": 22,
+    "unchanged_prior_nongenerated_objects": 844,
+    "changed_nongenerated_objects": [
+      "r1/src/application/board/native_log_calendar.c"
+    ],
+    "import_sets_unchanged": true,
+    "normal_object_equals_direct_and_pipeline_objects": true,
+    "manifest_and_source_plan_unchanged": true,
+    "no_new_persistent_state": true,
+    "assembly_frame_removed": true,
+    "prefix_prototype_corrected_without_object_change": true
+  },
+  "direct": {
+    "paired_cases": 2896,
+    "source_object_sha256": "fc20abdf4cc6d2cd72f7ec828abb8de26bbc6cd2c81394bcb5a4bd87c046506b",
+    "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "actual_converter_cases": 2824,
+    "modeled_converter_cases": 72,
+    "provider_frames": {
+      "native": {
+        "backend": [
+          104
+        ],
+        "converter": [
+          104
+        ]
+      },
+      "C": {
+        "backend": [
+          72
+        ],
+        "converter": [
+          72
+        ]
+      }
+    },
+    "raw_converter_scratch_compared": false,
+    "limits": [
+      "Timestamp modeled; actual C converter and signed64 division executed, with fully-written/alternate/null converter controls; private scratch aliases and partially written converter outputs excluded",
+      "R0 and public memory/provider traces compared; callee-saved integer/FP registers, SP, masks and FPSCR checked",
+      "Caller-clobbered registers/APSR and private worker stack excluded",
+      "No physical or concurrent behavior established"
+    ]
+  },
+  "registered_backend_chain": {
+    "paired_cases": 2824,
+    "source_object_sha256": "fc20abdf4cc6d2cd72f7ec828abb8de26bbc6cd2c81394bcb5a4bd87c046506b",
+    "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "actual_converter_cases": 2824,
+    "modeled_converter_cases": 0,
+    "provider_frames": {
+      "native": {
+        "backend": [
+          104
+        ],
+        "converter": [
+          104
+        ]
+      },
+      "C": {
+        "backend": [
+          72
+        ],
+        "converter": [
+          72
+        ]
+      }
+    },
+    "raw_converter_scratch_compared": false,
+    "limits": [
+      "Registered backend getter modeled through actual C timestamp thunk; actual C converter and signed64 division executed, with fully-written/alternate/null converter controls; private scratch aliases and partially written converter outputs excluded",
+      "R0 and public memory/provider traces compared; callee-saved integer/FP registers, SP, masks and FPSCR checked",
+      "Caller-clobbered registers/APSR and private worker stack excluded",
+      "No physical or concurrent behavior established"
+    ]
+  },
+  "compiled_defects_rejected": [
+    {
+      "defect": "lost-cache-valid",
+      "rejected": true,
+      "log": "build/goal-r1-log-calendar-pure-c/lost-cache-valid/test.log"
+    },
+    {
+      "defect": "lost-timezone",
+      "rejected": true,
+      "log": "build/goal-r1-log-calendar-pure-c/lost-timezone/test.log"
+    },
+    {
+      "defect": "inverted-day-match",
+      "rejected": true,
+      "log": "build/goal-r1-log-calendar-pure-c/inverted-day-match/test.log"
+    },
+    {
+      "defect": "wrong-time-word",
+      "rejected": true,
+      "log": "build/goal-r1-log-calendar-pure-c/wrong-time-word/test.log"
+    },
+    {
+      "defect": "lost-return",
+      "rejected": true,
+      "log": "build/goal-r1-log-calendar-pure-c/lost-return/test.log"
+    }
+  ],
+  "public_contract": [
+    "Null output and unregistered clock return zero without writing output.",
+    "Timestamp is sampled before signed timezone; cache admission, date/year narrowing, packed sequential stores and signed local-day quotient/remainder retained.",
+    "Concrete converter fills all nine words. Local epoch and initialized conversion object replace private fixed-address scratch.",
+    "Returned low-level seconds value retained; prefix declaration corrected from void to uint32_t."
+  ],
+  "limits": [
+    "Timestamp modeled directly; pipeline executes actual C registered-backend thunk with modeled getter accepting NULL.",
+    "Actual C converter, signed 64-bit division and C memory clearing execute. Supplemental converter controls return fully written, null or alternate/aliased output.",
+    "Fixed private stack locations, provider writes outside output extent, partially filled converter outputs, incidental caller registers and APSR excluded.",
+    "Physical RTC, concurrency/faults, final application linking and boot unverified.",
+    "The ordinary C frame is 72 bytes at providers versus native 104; private frame identity and byte identity are not claimed."
+  ],
+  "evidence_files": {
+    "build/sources-goal-r1-log-calendar-pure-reviewed-c/report.json": "c770a1d00275f4026694db3712eeb67ed0b586dc5bc26b86e6dd499111f283b7",
+    "build/sources-goal-r1-connection-gates-pure-c/report.json": "695894807f4bc585ad5fddf6569d9dadd122e8d8a8a40c4044498ad5dbada6fd",
+    "r1/src/application/board/native_log_calendar.c": "974c370e9bbde63bd4cc36ebaa57bec4006b53bd5eaa4a41783768832a304890",
+    "r1/src/application/board/native_log_prefix.c": "0f334fac62f2e24608c5c87548f12ea181d8ec5813fdc9363d21f4d7cbfc84ac",
+    "r1/src/application/board/native_calendar_forward.c": "22c0b6b605fbde913d588c59cbdabee975310d36b75eaa9b0f68bf9bb51a37ac",
+    "r1/src/application/board/structured_time.c": "819e05dd9f2b535ecf7fc9d595e8d35ee4751ead5025b104693d461a0fad3058",
+    "r1/src/vendor/time_calendar/time_calendar.h": "6682b586810e47e41053163bb03f0a5acd8005721ab7bcbb70442ce4da78c59f",
+    "r1/src/application/runtime/memory_eabi.c": "e89f73174230a5111606f175a2429695c62f178ace0b44478ab93497a9ebacff",
+    "r1/src/application/runtime/integer_eabi.c": "fdb5e89a036f5733fbd4cc12b6bb970dd9ba9d2823c8b87d9d71af2d681dc656",
+    "third-party/upstream/llvm-compiler-rt-format-20.1.8/udivmoddi4.c": "e963fd1418909bb0f43603a7846edf568d4c8bae0670bd3b13a3e754a104e2fe",
+    "third-party/upstream/musl-memory-1.2.5/memset.c": "2a74d9e7f988945e0d691d480b78d77a228da0d2be401c1000637cc879b2c0be",
+    "r1/src/sources.json": "f74aa01d5bac1e3a8786b1052791cbd6344c1fd57ce26a11f1d65de93506ad72",
+    "tools/build/source-plan.json": "eeb516e31b3310fb0718f36908977f8125723f7c5e0e86cd6744395826259a4d",
+    "build/goal-r1-log-calendar-pure-c/before.c": "253ad7021f711ccadc5e65ee8469ef4ab8dc14b1b2033fea7c47e107494f7fc3",
+    "build/goal-r1-log-calendar-pure-c/record.py": "2d2d7a366af25d05848a095d6110e899b79a7a14798fa42128ee7ff8d1461126",
+    "build/goal-r1-log-calendar-pure-c/rea.json": "0123bff08f110c1c6e8b3b418925261341964300a88fc37e74ae998ea919eff6",
+    "build/goal-r1-log-calendar-pure-c/verify.py": "139a52561d6c063724d1fcf213a9162943420681fe0ecc5c680f2abc0bc1859e",
+    "build/goal-r1-log-calendar-pure-c/results.json": "23f081adc49a56ca81d99b25d42a42ae43828b06c2767fde77764e2ed8ed7f21",
+    "build/goal-r1-log-calendar-pure-c/verification.log": "53c4f86da3e8fd1f9c3979281c12c5809be1d0af2da9c39f93343e262a4a1f25",
+    "build/goal-r1-log-calendar-pure-c/source.elf": "c7498619153220433fc928c72256ee550b33407c687d5128170821c5c2167f46",
+    "build/goal-r1-log-calendar-pure-c/pipeline/verify.py": "883acdf9851e09bf21ad3bc87d49ce0a7f507c29e55baf4e60572537f06f381b",
+    "build/goal-r1-log-calendar-pure-c/pipeline/results.json": "0f8391ded4aac7dfd8ea9489a135f0709cb1107deaf27bd6fa79760d165f107c",
+    "build/goal-r1-log-calendar-pure-c/pipeline/verification.log": "15ebbb228334d97d4a2f85362d79f9fc2e095ffaeb6194f15bedb3565cbe8018",
+    "build/goal-r1-log-calendar-pure-c/pipeline/source.elf": "0805542b026b45fc49c69e3d4360e0ecefb945812374023f027ffdb436ed0a1b",
+    "build/goal-r1-log-calendar-pure-c/negative.py": "ed9c9666728fbc5273ccc66a6527d4516dcfe2b5be0ebac6db483ffaa83aca64",
+    "build/goal-r1-log-calendar-pure-c/negative.json": "0b438a83fa65c71be7546869178122a68033325e9dc366ece4f12c6e1d77af44",
+    "build/goal-r1-log-calendar-pure-c/negative.log": "264080734810857984e52a0ecd52ed4515f328ac59761e2cc16391a9642b841b",
+    "build/goal-r1-log-calendar-pure-c/build.log": "44e8b405683362a29c67f7899b5a156d3c177eb8b2e1bf85a0b8acac0af25c2c",
+    "build/goal-r1-log-calendar-pure-c/sources-check.log": "f610d186f791ebf717d9fd6eed6c4f28612779fff34b885bcf8dc8a49c9ae80c"
+  }
+}

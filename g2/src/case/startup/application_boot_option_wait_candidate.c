@@ -23,3 +23,5 @@ uint32_t case_boot_option_wait(uint32_t ticks)
     }
     return 0u;
 }
+/* Dedup (0x08003f6c): case_flash_status_wait (was legacy-default/flash_operations_candidate.c). */
+__typeof__(case_boot_option_wait) case_flash_status_wait __attribute__((alias("case_boot_option_wait")));

@@ -1,0 +1,83 @@
+{
+  "ready_handoff": {
+    "passed": 3456,
+    "executions": 6912,
+    "source_report": "build/sources-goal-r1-task-create-api-c-native/report.json",
+    "actual_ready_and_list_initialization": true,
+    "pendsv_sev_dsb_isb_checked": true,
+    "source_bytes": 358,
+    "limits": [
+      "Critical entry/exit modeled, including injected post-critical scheduler-cell mutation",
+      "Fixed native RAM placement only in fixture; production placement unverified",
+      "Seeded accessed state, not full scheduler invariants or asynchronous concurrency; private frames and caller-clobbered words/flags excluded",
+      "No byte qualification"
+    ]
+  },
+  "constructors_to_actual_ready_handoff": {
+    "passed": 350,
+    "executions": 700,
+    "source_report": "build/sources-goal-r1-task-create-api-c-native/report.json",
+    "public_aliases_share_native_entry": true,
+    "actual_native_initialize_list_item_stack_frame_and_scheduler_ready_handoff": true,
+    "limits": [
+      "Allocation/free, memory fills and critical boundaries modeled; constructor/initializer/list-item/stack/ready/list-initialization routines execute",
+      "Only the task-return LR word normalized after checking its source-specific function address",
+      "Stable name bytes; asynchronous name mutation, malformed pointers/depths, allocator integration, context switching and physical scheduling unverified",
+      "Private frames and caller-clobbered words/flags excluded; logical fault address/width/value/mask checked without complete exception state",
+      "No byte qualification"
+    ]
+  },
+  "negative_controls": {
+    "equal-priority": true,
+    "omit-first-init": true,
+    "omit-yield": true
+  },
+  "ownership_repair": {
+    "native_entry": "0x84d68",
+    "candidate_symbol": "r1_native_task_add_ready",
+    "candidate_source": "r1/src/application/rtos/task-construction/ready.c",
+    "removed_reference": "pre-consolidation:r1/research/source-build/native-task-construction/ready.c"
+  },
+  "firmware_sources_and_manifest_unchanged": true,
+  "normal_report_reused": true,
+  "normal_build": {
+    "compiled": 573,
+    "application_imports": 179,
+    "bootloader_imports": 34,
+    "failures": 0,
+    "duplicate_strong_symbols": 0
+  },
+  "qualification": {
+    "compiled_profiles": 5,
+    "selected_regions": 0,
+    "new_function_byte_identity": false
+  },
+  "source_plan_unchanged": true,
+  "source_built_bytes": 3857,
+  "binary_pull_through_bytes": 642303,
+  "hybrid_equals_locked_application": true,
+  "source_completeness_proven": false,
+  "evidence": {
+    "build/sources-goal-r1-task-create-api-c-native/report.json": "c7ac9c6b8818330fc56891d2f91eb3c4f3c3ef25f8a8d99e7815a95e0066fb8e",
+    "tools/build/source-plan.json": "969af3130987be89dcdc8777d86b4c891d596b4ecef5cccfd763861f05a12d31",
+    "r1/src/application/rtos/task-construction/ready.c": "74cf8d26001e2506733ef75b93f0382a07046d2646947f929b3b435026cf5176",
+    "r1/src/config/rtos/task_construction_contract.h": "d789373a4f9d7d4a76494f0b4667d60249a783fc573bfe14dff87ec2a5d9e2a7",
+    "r1/src/application/board/native_task_construction.c": "c7ae411d43ba0750b07afc52aceb7ca2ec18b3d6ce57ccaa163b37c8dbd4231b",
+    "r1/src/application/rtos/task-construction/stack.c": "253ebae1aa7f586a30b898e33adc7a6c337840e63c8784a8f2bdbe62f9037474",
+    "third-party/upstream/freertos-kernel/list.c": "db5c169cf3efd68da1c6a923ac84eebc724d602c940bde0b9b5f01f05028fde4",
+    "r1/src/sources.json": "e4c2161f5a94ed8f60f515c71ed7f323fa68daecf30f6a35feb8327e77cfec3e",
+    "r1/symbols/function-frontier.csv": "2f938267207f5ef41f34b141055a65c9ee5bfb46741ba87212d7959ced222acf",
+    "build/hybrid-goal-r1-ready-handoff-c/build-report.json": "804221523af504048f8048d7042f397d708fe81725a03b156c44a2018a74482f",
+    "build/goal-r1-ready-handoff-c/REA.json": "154cfba3f22b2ffa47df76d280b024878d9cdc719584d2da5ed9a0d5d89595b9",
+    "build/goal-r1-ready-handoff-c/layout.ld": "a76cdbc8b82412419fd8c4632cdd09dc74481703bb20e818ce3e6ab244469b10",
+    "build/goal-r1-ready-handoff-c/verify.py": "40d3273990d95ca0ef8f57dc3798c26e4498029506419824500cc96f8993d24a",
+    "build/goal-r1-ready-handoff-c/results.json": "6024b0ced07a27a26292e26d225da0272e2b3cbe0f44518010cd57987e111eb1",
+    "build/goal-r1-ready-handoff-c/make-integration.py": "c4840e10629f1bc391dfab89141ee58a2b7338aaca5f2c40b80189ecbfb7169a",
+    "build/goal-r1-ready-handoff-c/verify-integration.py": "fc01d6e187730913b26d0511fe612954deb1e0e221498091ea503ce6c951a413",
+    "build/goal-r1-ready-handoff-c/integration-results.json": "87eff43992a63de2f1baf52abc92509a0e1887e001ac830a3b5744dd397af92c",
+    "build/goal-r1-ready-handoff-c/negative.py": "ac39019ecf54a807590de9dd35f7656cb84f41ff09b30c6ce0286fa0b975cd25",
+    "build/goal-r1-ready-handoff-c/negative-results.json": "3597c3f65b813b0707340dc5858bca4ba25a0ed793b0bd8d1303ceaa39a1dd1e",
+    "build/goal-r1-ready-handoff-c/qualify.py": "a180b6c81f18ba7f58eef563f591bc9626cc609f146bfd959d95228ec136f4dc",
+    "build/goal-r1-ready-handoff-c/qualified/qualification.json": "d3105269117c966e3bbc6f62143e65d7066564991d62c475a4fce66c6c2caae9"
+  }
+}

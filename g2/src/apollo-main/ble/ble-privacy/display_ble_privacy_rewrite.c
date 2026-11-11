@@ -122,3 +122,6 @@ uint32_t audio_ble_privacy_rewrite_record(uint8_t *record) {
     }
     return 1u;
 }
+/* Single implementation of stock _AppDbUpdateNVM 0x479b74. */
+__typeof__(audio_ble_privacy_rewrite_record) audio_ble_master_close_child_479b74
+    __attribute__((alias("audio_ble_privacy_rewrite_record")));

@@ -1,0 +1,39 @@
+{
+  "passed": 1536,
+  "entry_executions": 21504,
+  "actual_registry_lookup_and_dispatch": true,
+  "report": "build/sources-goal-r1-goodix-cache-final/report.json",
+  "source_sha256": {
+    "r1/src/application/board/native_peripheral_bindings.c": "c2b283e25857766ad1046bdd837e859bd9baad5cccca5de057d019cce813a1e6",
+    "r1/src/application/goodix/stock_i2c_transport.c": "935ac5a4a1f8e8535e14eed1f5d36dbb462e4a3599f858931125eb42dcb81386",
+    "r1/src/application/registry/stock_registry.c": "68c16fe9a2fcd328012b8613c9da9aa4cd31bd30df36a55e64e56e7b534246fa"
+  },
+  "limitations": [
+    "strcmp equality and final device operations modeled",
+    "Serialized bounded cases; physical I2C/reset electrical effects and concurrency unverified",
+    "Void return residue and private stack bytes excluded",
+    "Not byte qualified; SDK gh3026 demo hooks remain unbound"
+  ],
+  "evidence": {
+    "build/goal-r1-goodix-cache/stock.elf": "56cc70d26fa88cf0f5bc1a81f441b2a0f6a5400af99cde2505888fd7ca4eaf23",
+    "build/goal-r1-goodix-cache/REA.snapshot.json": "81bfb4f1cfc37225ad29c1a420af6c065ee60fab18308c114241430adf9b632f",
+    "build/goal-r1-goodix-cache/verify.py": "1ea4ded3b2518f49f5beee9c1cac9bb26d8ce396eddb05f0e0cdbcd8e2ff1d6e",
+    "build/sources-goal-r1-goodix-cache-final/report.json": "498852f28338f454239d900082cf539b5699a06824635f0910dff94b45fcb971",
+    "r1/src/sources.json": "8ca7e8a45918ab77a67725cd45e19c21d250b9acd7d14b2a9215d5c832442c1c",
+    "r1/symbols/function-frontier.csv": "afcf3fafd338abd50c5bbb2187132e90e26471c960bee5a4d3e3d4340b04b0f8",
+    "tools/build/source-plan.json": "432d01e6a7b79c5c680b62143962870a021836bbe8905e6a41015a7970d5af63"
+  },
+  "removed_duplicate_owner": "r1_goodix_i2c_device",
+  "canonical_owners": {
+    "0x200076cc": "r1_ppg_bus_device",
+    "0x200076d0": "r1_ppg_irq_device",
+    "0x200076d8": "r1_ppg_reset_device",
+    "0x200076dc": "r1_goodix_i2c_request_storage"
+  },
+  "native_entries": {
+    "0x50944": "r1_ppg_device_bind",
+    "0x509a4": "r1_goodix_i2c_close",
+    "0x50ae0": "r1_goodix_power_enable",
+    "0x50af0": "r1_goodix_power_disable"
+  }
+}

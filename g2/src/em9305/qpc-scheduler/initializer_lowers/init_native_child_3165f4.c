@@ -1,28 +1,16 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_3165f4\n"
-".type opencfw_em9305_child_3165f4,@function\n"
-"opencfw_em9305_child_3165f4:\n"
-"L3165f4:\n"
-"enter_s [r13,blink]\n"
-"L3165f6:\n"
-"bl.d opencfw_em9305_enc_action_3197d0\n"
-"L3165fa:\n"
-"mov_s r13,r0\n"
-"L3165fc:\n"
-"bl.d opencfw_em9305_child_3197c8\n"
-"L316600:\n"
-"mov_s r0,r13\n"
-"L316602:\n"
-"bl.d opencfw_em9305_child_325dfc\n"
-"L316606:\n"
-"mov_s r0,r13\n"
-"L316608:\n"
-"bl.d opencfw_em9305_phy_timer_start_32c7e4\n"
-"L31660c:\n"
-"mov_s r0,r13\n"
-"L31660e:\n"
-"leave_s [r13,blink,pcl]\n"
-".size opencfw_em9305_child_3165f4,.-opencfw_em9305_child_3165f4\n"
-);
+#include <stdint.h>
+
+/* Native 0x3165f4..0x316610: run the encryption action, the 3197c8 and
+ * 325dfc children, then start the PHY timer for the record. */
+extern uint32_t opencfw_em9305_enc_action_3197d0(uintptr_t record);
+extern uint32_t opencfw_em9305_child_3197c8(uintptr_t record);
+extern uint32_t opencfw_em9305_child_325dfc(uintptr_t record);
+extern uint32_t opencfw_em9305_phy_timer_start_32c7e4(uintptr_t record);
+
+uint32_t opencfw_em9305_child_3165f4(uintptr_t record)
+{
+    (void)opencfw_em9305_enc_action_3197d0(record);
+    (void)opencfw_em9305_child_3197c8(record);
+    (void)opencfw_em9305_child_325dfc(record);
+    return opencfw_em9305_phy_timer_start_32c7e4(record);
+}

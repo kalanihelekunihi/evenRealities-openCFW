@@ -1,0 +1,30 @@
+{
+  "schema": 1,
+  "target": "s200_v2.2.6.10 codec FWPK UART stage 2",
+  "source_reset_symbol": "gx8002_uart_stage1_second_entry",
+  "stock_reset_address": "0x10002900",
+  "previous_source_address": "0x100012e0",
+  "current_source_address": "0x10002900",
+  "source_build": {
+    "compiled": 348,
+    "duplicate_strong_symbols": 0,
+    "undefined_symbols": 0
+  },
+  "link_report": {
+    "path": "build/g2-codec-stage2-reset-link-20261110/link-report.json",
+    "sha256": "919e7ca9870177a5f76417f4bef1e454fc7117375443faf8c739dae6b441b1a6"
+  },
+  "limitations": [
+    "UART stage-2 source load still starts at 0x10002900 rather than stock vector base 0x10002800.",
+    "The stock stage-2 exception and IRQ entry paths have not been established from linked source.",
+    "No source FWPK/BINH/NPU package or hardware boot proof exists."
+  ],
+  "full_manifest_validation": {
+    "source_report": "build/g2-all-codec-uart-entries-20261110/report.json",
+    "source_report_sha256": "513e2ad55b35f3b09459825069c8af5d15eec9820a3bd3d3ade23a973a4424aa",
+    "link_report": "build/g2-all-codec-uart-entries-link-20261110/link-report.json",
+    "link_report_sha256": "968526b0457ba0fb8790c12432c2e495b2ab7af556ee972a28648e7b06f1563a",
+    "all_seven_final_links": "passed",
+    "external_binary_archive_used": false
+  }
+}

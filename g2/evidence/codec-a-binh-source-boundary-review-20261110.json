@@ -1,0 +1,57 @@
+{
+  "schema": 1,
+  "target": "s200_v2.2.6.10 codec BINH A and FWPK",
+  "stock": {
+    "binh_a_bytes": 193456,
+    "stage1_block_bytes": 12288,
+    "xip_bytes": 36484,
+    "sram_bytes": 14716,
+    "npu_command_bytes": 9164,
+    "npu_weight_bytes": 120800,
+    "sram_vectors": {
+      "reset": "0x10023500",
+      "exception": "0x10023640",
+      "irq": "0x10025574"
+    },
+    "fwpk_bytes": 326092
+  },
+  "source": {
+    "xip_linked_bytes": 46764,
+    "xip_excess_bytes": 10280,
+    "xip_sha256": "dd755a3f37de76241f32fa6a677d1628a1ff42f43d8ee906f23c6e307b11b1ae",
+    "sram_linked_bytes": 14940,
+    "sram_excess_bytes": 224,
+    "sram_sha256": "0a29f9f1bf77bf5707f6fca1ce2ca3a7e2a9b1b492abbfa1b3a23c33e5a6ffcc",
+    "sram_vectors": {
+      "reset": "0x10023500",
+      "exception": "0x1002351e",
+      "irq": "0x1002575c"
+    },
+    "stage1_c_units": 0,
+    "npu_command_source": false,
+    "npu_weight_source": false,
+    "fits_stock_stage2": false
+  },
+  "build_receipts": {
+    "source_report": "build/g2-all-codec-b-stage1-20261110/report.json",
+    "source_report_sha256": "4ed83c4bf951f7876cbe7a2466b29ea3727e77ad538f511d153725140064dc62",
+    "link_report": "build/g2-all-codec-a-regions-link-20261110/link-report.json",
+    "link_report_sha256": "457ca72e90bfc7ac4b4312d6376b8ce6ffc16fa7be1e60e3d057f9b4355edc4d",
+    "strict_payload_links": 7,
+    "external_binary_archive_used": false
+  },
+  "format_checks": {
+    "stock_binh_a_roundtrip": true,
+    "stock_fwpk_roundtrip": true,
+    "source_a_rejected_by_xip_limit": true,
+    "test_command": "PYTHONPATH=g2 python3 -m unittest tests.test_open_cfw",
+    "tests_passed": 11
+  },
+  "gc_probe": {
+    "xip_bytes_after_gc": 31376,
+    "named_stock_xip_functions_discarded": 54,
+    "adopted": false,
+    "reason": "The smaller size omits named stock functions and does not establish complete source coverage."
+  },
+  "qualification": "BINH A and full codec FWPK builders are format-proven on stock inputs, but source BINH A cannot be produced within the locked spans and stage-1/NPU source regions remain missing."
+}

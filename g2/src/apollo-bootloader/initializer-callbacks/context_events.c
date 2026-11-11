@@ -8,7 +8,7 @@ _Static_assert(sizeof(struct opencfw_iom_cq_status)==16,"status ABI");
 #define W(p,o) (*(volatile uint32_t *)((uintptr_t)(p)+(o)))
 #define B(p,o) (*(volatile uint8_t *)((uintptr_t)(p)+(o)))
 #define NI __attribute__((noinline))
-extern uint32_t opencfw_bl_critical_save(void);
+extern uint32_t am_hal_interrupt_master_disable(void);
 extern void opencfw_boot_delay_us_math(uint32_t);
 static uint32_t ring_index(uint32_t n,uint32_t size) {
     return size?n%size:n; /* UDIV0 when DIV_0_TRP is clear. */
@@ -65,7 +65,7 @@ idle:       while((W(iom,0x248)&6u)!=4u){}
     W(iom,0x208)=UINT32_MAX;W(iom,0x200)=enabled;
 }
 NI void opencfw_boot_iom_cq_refresh_indices(void *queue) {
-    uint32_t saved=opencfw_bl_critical_save();
+    uint32_t saved=am_hal_interrupt_master_disable();
     uint32_t current=(W(W(W(queue,0x24),8),0)&255u)|(W(queue,0x20)&0xffffff00u);
     W(queue,0x1c)=current;
     if((int32_t)(W(queue,0x20)-W(queue,0x1c))<0) W(queue,0x1c)=W(queue,0x1c)-256u;

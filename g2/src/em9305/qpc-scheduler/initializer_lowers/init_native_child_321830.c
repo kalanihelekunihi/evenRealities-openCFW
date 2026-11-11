@@ -1,202 +1,97 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_321830\n"
-".type opencfw_em9305_child_321830,@function\n"
-"opencfw_em9305_child_321830:\n"
-"L321830:\n"
-"enter_s [r13-r18,fp,blink]\n"
-"L321832:\n"
-"sub_s sp,sp,0x8\n"
-"L321834:\n"
-"ld_s r3,[r0,0x24]\n"
-"L321836:\n"
-"mov r2,777\n"
-"L32183a:\n"
-"ld_s r15,[r0,0x2c]\n"
-"L32183c:\n"
-"mov_s r16,r3\n"
-"L32183e:\n"
-"ldb_s r2,[r3,r2]\n"
-"L321840:\n"
-"mov_s r17,r1\n"
-"L321842:\n"
-"breq.d.nt r2,0,L3218ee\n"
-"L321846:\n"
-"stb 0,[r15,150]\n"
-"L32184a:\n"
-"ld.as r2,[r16,195]\n"
-"L32184e:\n"
-"ld r0,[r2,0x8]\n"
-"L321850:\n"
-"ld r1,[r2,0xc]\n"
-"L321852:\n"
-"bl.d opencfw_em9305_child_3027f4\n"
-"L321856:\n"
-"ldb_s r2,[r2,0x12]\n"
-"L321858:\n"
-"bbit0.d.nt r0,0,L3218ee\n"
-"L32185c:\n"
-"mov_s r0,0x58\n"
-"L32185e:\n"
-"bl opencfw_em9305_wsf_event_allocate\n"
-"L321862:\n"
-"breq.d.nt r0,0,L3218ee\n"
-"L321866:\n"
-"mov_s r13,r0\n"
-"L321868:\n"
-"sub r0,r16,0x803d78\n"
-"L321870:\n"
-"div r0,r0,784\n"
-"L321874:\n"
-"mov_s r14,0\n"
-"L321876:\n"
-"mov_s r1,r17\n"
-"L321878:\n"
-"stb_s r14,[r13,0x2]\n"
-"L32187a:\n"
-"extb r18,r0\n"
-"L32187e:\n"
-"add_s r0,sp,0\n"
-"L321880:\n"
-"bl.d opencfw_em9305_child_32db0c\n"
-"L321884:\n"
-"sth r18,[r13]\n"
-"L321888:\n"
-"add r1,r17,r0\n"
-"L32188c:\n"
-"bl.d opencfw_em9305_init_transition_packet_copy_32dd54\n"
-"L321890:\n"
-"add_s r0,r13,0x4\n"
-"L321892:\n"
-"mov_s r17,0x805b0c\n"
-"L321898:\n"
-"ld_s r12,[r13,0x10]\n"
-"L32189a:\n"
-"ld r3,[r13,0xc]\n"
-"L32189c:\n"
-"ld r0,[r17,56]\n"
-"L3218a0:\n"
-"ld r1,[r17,52]\n"
-"L3218a4:\n"
-"xor_s r0,r0,r12\n"
-"L3218a6:\n"
-"xor_s r1,r1,r3\n"
-"L3218a8:\n"
-"or.f 0,r1,r0\n"
-"L3218ac:\n"
-"bne_s L3218e8\n"
-"L3218ae:\n"
-"ldb r0,[sp,3]\n"
-"L3218b2:\n"
-"ldb r11,[sp,2]\n"
-"L3218b6:\n"
-"ld r2,[r13,0x8]\n"
-"L3218b8:\n"
-"ld r1,[r13,0x4]\n"
-"L3218ba:\n"
-"asl_s r0,r0,0x10\n"
-"L3218bc:\n"
-"st.as r3,[r16,185]\n"
-"L3218c0:\n"
-"asl r3,r11,0x10\n"
-"L3218c4:\n"
-"or_s r0,r0,r12\n"
-"L3218c6:\n"
-"or_s r3,r3,r2\n"
-"L3218c8:\n"
-"st.as r0,[r16,186]\n"
-"L3218cc:\n"
-"mov_s r0,r11\n"
-"L3218ce:\n"
-"st_s r14,[r13,0x48]\n"
-"L3218d0:\n"
-"st_s r14,[r13,0x44]\n"
-"L3218d2:\n"
-"stb r11,[r13,52]\n"
-"L3218d6:\n"
-"st.as r1,[r16,187]\n"
-"L3218da:\n"
-"st_s r2,[r13,0x40]\n"
-"L3218dc:\n"
-"st_s r1,[r13,0x3c]\n"
-"L3218de:\n"
-"bl.d opencfw_em9305_ll_stream_address_busy_318200\n"
-"L3218e2:\n"
-"st.as r3,[r16,188]\n"
-"L3218e6:\n"
-"breq_s r0,0,L3218f0\n"
-"L3218e8:\n"
-"bl.d opencfw_em9305_wsf_event_release\n"
-"L3218ec:\n"
-"mov_s r0,r13\n"
-"L3218ee:\n"
-"leave_s [r13-r18,fp,blink,pcl]\n"
-"L3218f0:\n"
-"ld.as r0,[r16,195]\n"
-"L3218f4:\n"
-"ldb r1,[r15,139]\n"
-"L3218f8:\n"
-"ld r14,[r15,144]\n"
-"L3218fc:\n"
-"ldb_s r2,[r0,0x15]\n"
-"L3218fe:\n"
-"ldb_s r0,[r15,0xd]\n"
-"L321900:\n"
-"stb r2,[r13,54]\n"
-"L321904:\n"
-"bl.d opencfw_em9305_radio_duration_piece_312b88\n"
-"L321908:\n"
-"mov_s r2,0x24\n"
-"L32190a:\n"
-"mov_s r1,0x805b04\n"
-"L321910:\n"
-"add_s r14,r14,r0\n"
-"L321912:\n"
-"ld r0,[r1,0]\n"
-"L321914:\n"
-"mov r2,256\n"
-"L321918:\n"
-"sth_s r2,[r13,0x38]\n"
-"L32191a:\n"
-"ld r2,[r1,0x4]\n"
-"L32191c:\n"
-"st_s r0,[r13,0x4c]\n"
-"L32191e:\n"
-"ldb r0,[r17,12]\n"
-"L321922:\n"
-"mov_s r1,r13\n"
-"L321924:\n"
-"sth r18,[r13,86]\n"
-"L321928:\n"
-"stb -1,[r13,84]\n"
-"L32192c:\n"
-"st_s r14,[r13,0x30]\n"
-"L32192e:\n"
-"st_s r2,[r13,0x50]\n"
-"L321930:\n"
-"stb 0,[r13,55]\n"
-"L321934:\n"
-"bl.d opencfw_em9305_wsf_task_message_send\n"
-"L321938:\n"
-"stb 1,[r13,53]\n"
-"L32193c:\n"
-"ld.as r1,[r16,195]\n"
-"L321940:\n"
-"mov_s r0,0\n"
-"L321942:\n"
-"mov_s r2,0\n"
-"L321944:\n"
-"add r1,r1,0x16\n"
-"L321946:\n"
-"stb 1,[r15,136]\n"
-"L32194a:\n"
-"bl.d opencfw_em9305_child_323b10\n"
-"L32194e:\n"
-"st_s r1,[r15,0x7c]\n"
-"L321950:\n"
-"sth r0,[r15,120]\n"
-"L321954:\n"
-"leave_s [r13-r18,fp,blink,pcl]\n"
-".size opencfw_em9305_child_321830,.-opencfw_em9305_child_321830\n"
-);
+#include <stdint.h>
+
+/* Native 0x321830..0x32195a: handle a periodic-sync AUX_SYNC/legacy report
+ * for a sync record (+0x24, session +0x2c). Clears session +150; needs the
+ * sync to be listening (+777) on a channel enabled in its map (native
+ * 0x3027f4 over the map at *(+780)). Builds an 88-byte sync-established
+ * message: record index (784-byte records from 0x803d78), parsed header
+ * (native 0x32db0c) and copied advertiser data (native 0x32dd54). Only a
+ * report from the expected advertiser (0x805b40/0x805b44) whose address is
+ * not already synced (native 0x318200) is kept: the addresses are stored in
+ * the record (+740..+752) and message, timing/PHY fields are filled from the
+ * session and 0x805b04, the message goes to the handler at 0x805b18 and the
+ * session's receive window is armed (native 0x323b10). */
+extern uint64_t opencfw_em9305_child_3027f4(uint32_t,uint32_t,uint32_t);
+extern uintptr_t opencfw_em9305_wsf_event_allocate(uint32_t);
+extern uint32_t opencfw_em9305_child_32db0c(uintptr_t,uintptr_t);
+extern uint32_t opencfw_em9305_init_transition_packet_copy_32dd54(uintptr_t,uintptr_t);
+extern uint32_t opencfw_em9305_ll_stream_address_busy_318200(uint32_t,uint32_t,uint32_t);
+extern uint32_t opencfw_em9305_wsf_event_release(uintptr_t);
+extern uint32_t opencfw_em9305_radio_duration_piece_312b88(uint32_t,uint32_t,uint32_t);
+extern uint32_t opencfw_em9305_wsf_task_message_send(uint32_t,uintptr_t);
+extern uint32_t opencfw_em9305_child_323b10(uintptr_t,uintptr_t,uint32_t);
+
+struct sync_header {
+    uint8_t type;
+    uint8_t reserved;
+    uint8_t address_type;
+    uint8_t random_type;
+} __attribute__((aligned(4)));
+
+void opencfw_em9305_child_321830(uintptr_t context, uintptr_t pdu)
+{
+    struct sync_header header;
+    uintptr_t record = *(volatile uint32_t *)(context + 0x24u);
+    uintptr_t session = *(volatile uint32_t *)(context + 0x2cu);
+    uint32_t listening = *(volatile uint8_t *)(record + 777u);
+    *(volatile uint8_t *)(session + 150u) = 0u;
+    if (listening == 0u) return;
+    uintptr_t map = *(volatile uint32_t *)(record + 780u);
+    uint64_t used = opencfw_em9305_child_3027f4(*(volatile uint32_t *)(map + 8u),
+                                                *(volatile uint32_t *)(map + 12u),
+                                                *(volatile uint8_t *)(map + 0x12u));
+    if (((uint32_t)used & 1u) == 0u) return;
+    uintptr_t message = opencfw_em9305_wsf_event_allocate(0x58u);
+    if (message == 0u) return;
+    uint8_t index = (uint8_t)((int32_t)(record - 0x803d78u) / 784);
+    *(volatile uint8_t *)(message + 2u) = 0u;
+    *(volatile uint16_t *)message = index;
+    uint32_t used_bytes = opencfw_em9305_child_32db0c((uintptr_t)&header, pdu);
+    (void)opencfw_em9305_init_transition_packet_copy_32dd54(message + 4u, pdu + used_bytes);
+    uint32_t high = *(volatile uint32_t *)(message + 0x10u);
+    uint32_t low = *(volatile uint32_t *)(message + 0xcu);
+    if (*(volatile uint32_t *)(uintptr_t)0x805b44u != high ||
+        *(volatile uint32_t *)(uintptr_t)0x805b40u != low) {
+        (void)opencfw_em9305_wsf_event_release(message);
+        return;
+    }
+    uint32_t address_type = header.random_type;
+    uint32_t random_type = header.address_type;
+    uint32_t random_high = *(volatile uint32_t *)(message + 8u);
+    uint32_t random_low = *(volatile uint32_t *)(message + 4u);
+    *(volatile uint32_t *)(record + 740u) = low;
+    *(volatile uint32_t *)(record + 744u) = (address_type << 16) | high;
+    *(volatile uint32_t *)(message + 0x48u) = 0u;
+    *(volatile uint32_t *)(message + 0x44u) = 0u;
+    *(volatile uint8_t *)(message + 52u) = (uint8_t)random_type;
+    *(volatile uint32_t *)(record + 748u) = random_low;
+    *(volatile uint32_t *)(message + 0x40u) = random_high;
+    *(volatile uint32_t *)(message + 0x3cu) = random_low;
+    *(volatile uint32_t *)(record + 752u) = (random_type << 16) | random_high;
+    if (opencfw_em9305_ll_stream_address_busy_318200(random_type, random_low, random_high) != 0u) {
+        (void)opencfw_em9305_wsf_event_release(message);
+        return;
+    }
+    uintptr_t channel_map = *(volatile uint32_t *)(record + 780u);
+    uint32_t phy_options = *(volatile uint8_t *)(session + 139u);
+    uint32_t offset = *(volatile uint32_t *)(session + 144u);
+    *(volatile uint8_t *)(message + 54u) = *(volatile uint8_t *)(channel_map + 0x15u);
+    offset += opencfw_em9305_radio_duration_piece_312b88(*(volatile uint8_t *)(session + 13u),
+                                                         phy_options, 0x24u);
+    uint32_t interval_low = *(volatile uint32_t *)(uintptr_t)0x805b04u;
+    *(volatile uint16_t *)(message + 0x38u) = 256u;
+    uint32_t interval_high = *(volatile uint32_t *)(uintptr_t)0x805b08u;
+    *(volatile uint32_t *)(message + 0x4cu) = interval_low;
+    uint32_t handler = *(volatile uint8_t *)(uintptr_t)0x805b18u;
+    *(volatile uint16_t *)(message + 86u) = index;
+    *(volatile uint8_t *)(message + 84u) = 0xffu;
+    *(volatile uint32_t *)(message + 0x30u) = offset;
+    *(volatile uint32_t *)(message + 0x50u) = interval_high;
+    *(volatile uint8_t *)(message + 55u) = 0u;
+    *(volatile uint8_t *)(message + 53u) = 1u;
+    (void)opencfw_em9305_wsf_task_message_send(handler, message);
+    uintptr_t window = *(volatile uint32_t *)(record + 780u) + 0x16u;
+    *(volatile uint8_t *)(session + 136u) = 1u;
+    *(volatile uint32_t *)(session + 0x7cu) = (uint32_t)window;
+    *(volatile uint16_t *)(session + 120u) = (uint16_t)opencfw_em9305_child_323b10(0u, window, 0u);
+}

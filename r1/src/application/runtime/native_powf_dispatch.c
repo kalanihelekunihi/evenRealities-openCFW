@@ -9,10 +9,18 @@ const uint32_t r1_powf_dispatch_data[4]={0x003fffff,0xff800000,0x7f800000,0x8000
 typedef union{uint32_t bits;float value;} encoded_float;
 static uint32_t bits(float value){encoded_float x={.value=value};return x.bits;}
 static float value(uint32_t bits){encoded_float x={.bits=bits};return x.value;}
-static float absolute(float x){__asm__ volatile("vabs.f32 %0,%0":"+t"(x));return x;}
-static float negate(float x){__asm__ volatile("vneg.f32 %0,%0":"+t"(x));return x;}
-static float multiply(float a,float b){float r;__asm__ volatile("vmul.f32 %0,%1,%2":"=t"(r):"t"(a),"t"(b));return r;}
-static uint32_t zero_flags(float x){uint32_t status;__asm__ volatile("vcmpe.f32 %1,#0.0\n\tvmrs %0,fpscr":"=r"(status):"t"(x));return status;}
+static float absolute(float x){return value(bits(x)&0x7fffffffu);}
+static float negate(float x){return value(bits(x)^0x80000000u);}
+__attribute__((noinline)) static float multiply(float a,float b){volatile float r=a*b;return r;}
+static uint32_t zero_flags(float x)
+{
+ uint32_t raw=bits(x),fp=__builtin_arm_get_fpscr(),magnitude=raw&0x7fffffffu,flags;
+ if((fp&(1u<<24))&&magnitude&&magnitude<0x800000u){raw&=0x80000000u;magnitude=0;fp|=128u;}
+ if(magnitude>0x7f800000u){flags=0x30000000u;fp|=1u;}
+ else if(!magnitude)flags=0x60000000u;
+ else flags=(raw>>31)?0x80000000u:0x20000000u;
+ uint32_t result=(fp&0x0fffffffu)|flags;__builtin_arm_set_fpscr(result);return result;
+}
 /* Native integer words and live FP slots are deliberately separate. */
 float r1_native_powf(float base,float exponent)
 {

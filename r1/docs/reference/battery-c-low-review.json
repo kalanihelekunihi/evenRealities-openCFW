@@ -1,0 +1,203 @@
+{
+  "cases": 1850,
+  "passed": 1850,
+  "failures": [],
+  "stock_entry": "0x3d88c",
+  "stock_body_bytes": 176,
+  "bridge_bytes": 32,
+  "c_body_bytes": 188,
+  "callback_stack_depth_pairs": [
+    [
+      [],
+      []
+    ],
+    [
+      [
+        -16,
+        -16,
+        -16
+      ],
+      [
+        -40,
+        -40,
+        -40
+      ]
+    ],
+    [
+      [
+        -16,
+        -16,
+        -16,
+        -16
+      ],
+      [
+        -40,
+        -40,
+        -40,
+        -40
+      ]
+    ],
+    [
+      [
+        -16,
+        -16,
+        -16,
+        -16,
+        -16
+      ],
+      [
+        -40,
+        -40,
+        -40,
+        -40,
+        -40
+      ]
+    ],
+    [
+      [
+        -16,
+        -16,
+        -16,
+        -16,
+        -16,
+        -16,
+        -16
+      ],
+      [
+        -40,
+        -40,
+        -40,
+        -40,
+        -40,
+        -40,
+        -40
+      ]
+    ],
+    [
+      [
+        -16,
+        -16,
+        -16,
+        -16,
+        -16,
+        -16,
+        -16,
+        -16
+      ],
+      [
+        -40,
+        -40,
+        -40,
+        -40,
+        -40,
+        -40,
+        -40,
+        -40
+      ]
+    ],
+    [
+      [
+        -16,
+        -16,
+        -16,
+        -16,
+        -16,
+        -16,
+        -16,
+        -16,
+        -16
+      ],
+      [
+        -40,
+        -40,
+        -40,
+        -40,
+        -40,
+        -40,
+        -40,
+        -40,
+        -40
+      ]
+    ],
+    [
+      [
+        -16,
+        -16,
+        -16,
+        -16,
+        -16,
+        0
+      ],
+      [
+        -40,
+        -40,
+        -40,
+        -40,
+        -40,
+        0
+      ]
+    ],
+    [
+      [
+        -16,
+        -16,
+        -16,
+        -16,
+        0
+      ],
+      [
+        -40,
+        -40,
+        -40,
+        -40,
+        0
+      ]
+    ],
+    [
+      [
+        -16,
+        -16,
+        -16,
+        0
+      ],
+      [
+        -40,
+        -40,
+        -40,
+        0
+      ]
+    ]
+  ],
+  "other_source_units_unchanged": 561,
+  "report": "build/sources-goal-r1-battery-low/report.json",
+  "report_sha256": "a6a8544a47a6edc7fd42bf4e13ecf7f501737f6b332fb3b42338f1c6f76940fe",
+  "source_sha256": "d39f357ec882c02b332324810ee7fdb53970f3326118209bae77eb55ae0e43a5",
+  "manifest_sha256": "59fdbc1dac961b45d682cd2bb5bd1fbc417cd95e7082d50a778c69d6e24ee734",
+  "stock_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "native_span_sha256": "47da08214c49bac1655559c2f7f199b7ea4c0ef4a90e5cecf02ef719652478bf",
+  "rea": {
+    "completed": true,
+    "procedure": "0x3d88c",
+    "path": "build/goal-r1-battery-low/REA.json",
+    "sha256": "cb91ca3168ef17d5160d09dfe37d206feb0e36aa3e4b95bf739fed199ee1000a"
+  },
+  "probe_artifacts": {
+    "build/goal-r1-battery-low/verify.py": "de9f1cf3ee96c420112ab15ee7b759b016a157e3a634878cb65c4d962bb0a68a",
+    "build/goal-r1-battery-low/before.c": "f19c05285843a040e0f14bb4a945a32174420d9d3c19febba52713584e991dda",
+    "build/goal-r1-battery-low/source.elf": "2fd566f0587d9317146b0099d4ef0d6c01b2a41dd0460baab051eea67e71efe9",
+    "build/goal-r1-battery-low/stock.elf": "a6146a4b00632f0f90c1eedc964e2761027cd927535ce049eaeb16736c5d139d",
+    "build/goal-r1-battery-low/rea-snapshot.json": "04c1098fe58f173a9059d871f6b07889185f8704cfd3902e9015b5d45280c874"
+  },
+  "native_cells": {
+    "device_context": "0x20016b84",
+    "thread_handle": "0x20006548",
+    "record": "entry SP-16"
+  },
+  "limits": [
+    "A 32-byte entry bridge captures native R2/R3 words and implements their distinct normal-pop versus count-nine discard/tail paths. This is a partial C extraction.",
+    "Logging, voltage, time, KV update, thread flags and event APIs are modeled with caller-saved register/flag clobbers.",
+    "Ring fifth argument is checked by scalar value at provider entry. Its physical argument-stack alias with the native saved record is not established under the additional C frame.",
+    "C helper adds private callback stack depth, while count-nine event entry matches original caller SP/LR.",
+    "Device context and thread handle remain unresolved dependencies. No physical low-battery response, timing, complete fault-state equivalence, final link, provider qualification or byte identity claim."
+  ]
+}

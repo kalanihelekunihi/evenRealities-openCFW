@@ -16,7 +16,7 @@ extern void opencfw_boot_next_unblock_refresh(void);
 extern uint32_t opencfw_bl_event_flags_set_isr(uint32_t *,uint32_t,uint32_t *);
 static void fail(void) {
     (void)opencfw_bl_mask_interrupts();WORD(UINT32_MAX)=0;
-    for (;;) __asm__ volatile("b .":::"memory");
+    for (;;) { }
 }
 uintptr_t opencfw_provider_4164da(const uint32_t *attributes) {
     if (opencfw_bl_context_guard())return 0;

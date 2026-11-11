@@ -17,3 +17,7 @@ uint32_t case_policy_irq_event_dispatch(uint32_t descriptor,uint32_t event,uint3
     uint32_t scheduler=*(volatile uint32_t *)(uintptr_t)0x20000164u;
     return case_policy_task_message_special(scheduler,args,option,0u,0xfffffffeu);
 }
+/* Dedup (0x0800ca4c): case_kernel_mode (was legacy-default/kernel_small_leaves_candidate.c). */
+uint32_t case_kernel_mode(void) __attribute__((alias("case_policy_task_lookup")));
+/* Dedup (0x0800ca4c): case_policy_scheduler_mode (was startup/application_policy_queue_wait_helpers_candidate.c). */
+uint32_t case_policy_scheduler_mode(void) __attribute__((alias("case_policy_task_lookup")));

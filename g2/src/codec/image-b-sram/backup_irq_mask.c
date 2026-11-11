@@ -1,6 +1,8 @@
 /* SPDX-License-Identifier: MIT
  * Image-B architectural IRQ mask primitives at 0x1000486c/0x10004878.
- * Native MFCR/PSRCLR/MTCR semantics are preserved; Ghidra lost the return ABI.
+ * Evidence: corpus image_b_sram/functions-000.jsonl gx8002_irq_save
+ * @ 0x1000486c (10 B sha 9c1f817c…), gx8002_irq_restore @ 0x10004878
+ * (6 B sha 75936780…); native MFCR/PSRCLR/MTCR (headless lost return ABI).
  */
 #include <stdint.h>
 

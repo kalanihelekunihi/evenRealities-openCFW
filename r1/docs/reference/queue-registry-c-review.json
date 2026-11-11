@@ -1,0 +1,131 @@
+{
+  "normal_report": "build/sources-goal-r1-queue-registry-final/report.json",
+  "report_sha256": "5b7df6c2b4145a848797f723d212f00383320b6f4ec6042a56d0035c02fcca26",
+  "unit": {
+    "source": "r1/src/application/rtos/queue-registry/queue-registry.c",
+    "payload": "r1-application",
+    "role": "candidate",
+    "toolchain": "clang",
+    "link": true,
+    "expect": "compile",
+    "returncode": 0,
+    "argv": [
+      "/usr/bin/clang",
+      "--target=arm-none-eabi",
+      "-mcpu=cortex-m4",
+      "-mthumb",
+      "-mfpu=fpv4-sp-d16",
+      "-mfloat-abi=hard",
+      "-ffreestanding",
+      "-fno-strict-aliasing",
+      "-std=c11",
+      "-Os",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-DNRF52840_XXAA",
+      "-DSOFTDEVICE_PRESENT",
+      "-DNRF_SD_BLE_API_VERSION=7",
+      "-DS140",
+      "-DFREERTOS",
+      "-DFLOAT_ABI_HARD",
+      "-isystem",
+      "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/r1/src/config/rtos",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/r1/config-recovered",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/third-party/upstream/freertos-kernel/include",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/external/freertos/portable/GCC/nrf52",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/external/freertos/portable/CMSIS/nrf52",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/third-party/upstream/cmsis-freertos/CMSIS/RTOS2/FreeRTOS/Include",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/toolchain/cmsis/include",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/softdevice/common",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/experimental_section_vars",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/util",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/delay",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/atomic",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx/mdk",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx/hal",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx/drivers/include",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/integration/nrfx",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/integration/nrfx/legacy",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/softdevice/s140/headers",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/softdevice/s140/headers/nrf52",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/third-party/upstream/cmsis-5-590/CMSIS/RTOS2/Include",
+      "-fshort-enums",
+      "-fwrapv",
+      "-O0",
+      "-fno-inline",
+      "-I",
+      "/Users/kalani/Repo/evenRealities-openCFW/r1/src/config/rtos",
+      "-include",
+      "/Users/kalani/Repo/evenRealities-openCFW/r1/src/config/rtos/native_port_assert.h",
+      "-MD",
+      "-MF",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-queue-registry-final/r1/r1-application/r1__src__application__rtos__queue-registry__queue-registry.c.d",
+      "-c",
+      "/Users/kalani/Repo/evenRealities-openCFW/r1/src/application/rtos/queue-registry/queue-registry.c",
+      "-o",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-queue-registry-final/r1/r1-application/r1__src__application__rtos__queue-registry__queue-registry.c.o"
+    ],
+    "source_sha256": "86c3acba7e9c37ab8c49fbbd6da4387ff94e3946d4a1ba9bc25e3d5c3c7f3cfc",
+    "object_sha256": "393b46f46f9c2133dda3fb4c23014d666414fbfa2cea17e45c00044ad4b72dc0",
+    "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-queue-registry-final/r1/r1-application/r1__src__application__rtos__queue-registry__queue-registry.c.o",
+    "strong": [
+      "pcQueueGetName",
+      "vQueueAddToRegistry",
+      "vQueueUnregisterQueue",
+      "xQueueRegistry"
+    ],
+    "weak": [],
+    "undefined": []
+  },
+  "upstream": {
+    "source": "third-party/upstream/freertos-kernel/queue.c",
+    "sha256": "5cdf4fa35fe059446effff5bf20deaf83ddffb08921bc198fda106b1d17dd894"
+  },
+  "direct": {
+    "sequences": 7203,
+    "mutations": 28812,
+    "queries": 86436,
+    "digest": "5b6c7b96e24b3b9bad25364f36dcb26e5839631b8f4ce0d281596d035a1855a7",
+    "no_bindings": true,
+    "limits": [
+      "Configured two-slot registry; valid nonnull handles, sequential execution",
+      "No debugger concurrency or full CMSIS/scheduler/device proof"
+    ]
+  },
+  "negative": {
+    "ignore-null-name": {
+      "rejected": true,
+      "diagnostic": "Traceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-queue-registry-c/verify.py\", line 32, in <module>\n    expected=b''.join(struct.pack('<II',*x) for x in model);assert bytes(v.mem_read(REG,16))==expected,(initial,seq,action,model,bytes(v.mem_read(REG,16)).hex());assert bytes(v.mem_read(REG-16,16))==b'Z'*16 and bytes(v.mem_read(REG+16,16))==b'Z'*16\n                                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: ([(0, 0), (0, 0)], (('add', 536875008, 536903680), ('add', 536875008, 536903680), ('add', 536875008, 536903680), ('add', 536875008, 0)), 'add', [(536903680, 536875008), (0, 0)], '00000000001000200000000000000000')\n"
+    },
+    "lose-existing-update": {
+      "rejected": true,
+      "diagnostic": "Traceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-queue-registry-c/verify.py\", line 32, in <module>\n    expected=b''.join(struct.pack('<II',*x) for x in model);assert bytes(v.mem_read(REG,16))==expected,(initial,seq,action,model,bytes(v.mem_read(REG,16)).hex());assert bytes(v.mem_read(REG-16,16))==b'Z'*16 and bytes(v.mem_read(REG+16,16))==b'Z'*16\n                                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: ([(0, 0), (0, 0)], (('add', 536875008, 536903680), ('add', 536875008, 536903680), ('add', 536875008, 536903680), ('add', 536875008, 536903680)), 'add', [(536903680, 536875008), (0, 0)], '00800020001000200080002000100020')\n"
+    },
+    "stale-handle-after-remove": {
+      "rejected": true,
+      "diagnostic": "Traceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-queue-registry-c/verify.py\", line 32, in <module>\n    expected=b''.join(struct.pack('<II',*x) for x in model);assert bytes(v.mem_read(REG,16))==expected,(initial,seq,action,model,bytes(v.mem_read(REG,16)).hex());assert bytes(v.mem_read(REG-16,16))==b'Z'*16 and bytes(v.mem_read(REG+16,16))==b'Z'*16\n                                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: ([(0, 0), (0, 0)], (('add', 536875008, 536903680), ('add', 536875008, 536903680), ('add', 536875008, 536903680), ('del', 536875008, 0)), 'del', [(0, 0), (0, 0)], '00000000001000200000000000000000')\n"
+    },
+    "wrong-name-result": {
+      "rejected": true,
+      "diagnostic": "Traceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-queue-registry-c/verify.py\", line 34, in <module>\n    expected_name=next((n for n,h in model if h==handle),0);assert call('pcQueueGetName',handle)==expected_name;queries+=1\n                                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    }
+  },
+  "audit": {
+    "added": [
+      "r1/src/application/rtos/queue-registry/queue-registry.c"
+    ],
+    "unchanged_objects": 729,
+    "native_queue_owner_unchanged": true
+  },
+  "resolved_imports": [
+    "vQueueAddToRegistry",
+    "vQueueUnregisterQueue"
+  ],
+  "limits": [
+    "Pinned kernel registry semantics; no mapped stock API identity claim",
+    "Native delete keeps its verified no-registry contract; CMSIS explicitly unregisters before deletion",
+    "Sequential valid-handle tests; no debugger concurrency, complete scheduler or physical device proof"
+  ]
+}

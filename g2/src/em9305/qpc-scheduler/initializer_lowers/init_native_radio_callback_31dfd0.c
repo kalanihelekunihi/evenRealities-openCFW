@@ -1,720 +1,265 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_radio_cb_31dfd0\n"
-".type opencfw_em9305_radio_cb_31dfd0,@function\n"
-"opencfw_em9305_radio_cb_31dfd0:\n"
-"L31dfd0:\n"
-"enter_s [r13-r24,blink]\n"
-"L31dfd2:\n"
-"ld_s r13,[r0,0x24]\n"
-"L31dfd4:\n"
-"mov_s r15,r0\n"
-"L31dfd6:\n"
-"mov_s r19,0x802a38\n"
-"L31dfdc:\n"
-"add3 r18,r13,0x32\n"
-"L31dfe0:\n"
-"ldb r0,[r18]\n"
-"L31dfe4:\n"
-"ld r16,[r15,44]\n"
-"L31dfe8:\n"
-"ldb r1,[r19]\n"
-"L31dfec:\n"
-"mov_s r14,r13\n"
-"L31dfee:\n"
-"add r14,r14,628\n"
-"L31dff2:\n"
-"breq_s r0,0,L31e00c\n"
-"L31dff4:\n"
-"breq_s r1,0,L31e062\n"
-"L31dff6:\n"
-"ldh.as r1,[r13,191]\n"
-"L31dffa:\n"
-"bl.d opencfw_em9305_wsf_timer_start_ms\n"
-"L31dffe:\n"
-"add3 r0,r13,0x30\n"
-"L31e002:\n"
-"ldh.as r0,[r13,131]\n"
-"L31e006:\n"
-"sth.as r0,[r13,132]\n"
-"L31e00a:\n"
-"b_s L31e062\n"
-"L31e00c:\n"
-"mov_s r0,0x802a34\n"
-"L31e012:\n"
-"ldb_s r0,[r0,0]\n"
-"L31e014:\n"
-"or.f 0,r1,r0\n"
-"L31e018:\n"
-"beq_s L31e062\n"
-"L31e01a:\n"
-"ldb_s r0,[r13,0xc]\n"
-"L31e01c:\n"
-"brne.nt r0,0x3e,L31e024\n"
-"L31e020:\n"
-"stb 8,[r13,12]\n"
-"L31e024:\n"
-"ldh.as r1,[r13,191]\n"
-"L31e028:\n"
-"bl.d opencfw_em9305_wsf_timer_start_ms\n"
-"L31e02c:\n"
-"add3 r0,r13,0x30\n"
-"L31e030:\n"
-"ld r0,[0x805a84]\n"
-"L31e038:\n"
-"bbit1.nt r0,0x8,L31e05e\n"
-"L31e03c:\n"
-"ldb r1,[r14,142]\n"
-"L31e040:\n"
-"brne.nt r1,0x1,L31e05e\n"
-"L31e044:\n"
-"ldb r1,[r14,141]\n"
-"L31e048:\n"
-"brne_s r1,0,L31e05e\n"
-"L31e04a:\n"
-"bbit0.d.nt r0,0xf,L31e05e\n"
-"L31e04e:\n"
-"mov r0,800\n"
-"L31e052:\n"
-"bl.d opencfw_em9305_radio_record_timing_30c40c\n"
-"L31e056:\n"
-"ldh.as r1,[r13,133]\n"
-"L31e05a:\n"
-"stb r0,[r14,144]\n"
-"L31e05e:\n"
-"stb 1,[r18]\n"
-"L31e062:\n"
-"ldb r2,[r14,142]\n"
-"L31e066:\n"
-"ldb r1,[r16,124]\n"
-"L31e06a:\n"
-"mov_s r0,r13\n"
-"L31e06c:\n"
-"add r0,r0,268\n"
-"L31e070:\n"
-"brne.d.nt r2,0x1,L31e0b4\n"
-"L31e074:\n"
-"stb_s r1,[r0,0]\n"
-"L31e076:\n"
-"mov r2,269\n"
-"L31e07a:\n"
-"ldb_s r2,[r13,r2]\n"
-"L31e07c:\n"
-"breq_s r2,0,L31e082\n"
-"L31e07e:\n"
-"mov_s r1,0x7f\n"
-"L31e080:\n"
-"stb_s r1,[r0,0]\n"
-"L31e082:\n"
-"ldb r0,[r14,141]\n"
-"L31e086:\n"
-"breq.nt r0,0x1,L31e0a8\n"
-"L31e08a:\n"
-"brne_s r0,0,L31e0b4\n"
-"L31e08c:\n"
-"cmp_s r1,0x7f\n"
-"L31e08e:\n"
-"beq_s L31e0b4\n"
-"L31e090:\n"
-"ld.as r0,[r13,196]\n"
-"L31e094:\n"
-"ldh r2,[r14,152]\n"
-"L31e098:\n"
-"sexb_s r1,r1\n"
-"L31e09a:\n"
-"add_s r1,r1,r0\n"
-"L31e09c:\n"
-"add_s r0,r2,0x1\n"
-"L31e09e:\n"
-"st.as r1,[r13,196]\n"
-"L31e0a2:\n"
-"sth r0,[r14,152]\n"
-"L31e0a6:\n"
-"b_s L31e0b4\n"
-"L31e0a8:\n"
-"ld r1,[0x805178]\n"
-"L31e0b0:\n"
-"jl_s.d [r1]\n"
-"L31e0b2:\n"
-"mov_s r0,r13\n"
-"L31e0b4:\n"
-"ld.as r2,[r13,203]\n"
-"L31e0b8:\n"
-"mov_s r17,0x805c70\n"
-"L31e0be:\n"
-"breq_s r2,0,L31e0cc\n"
-"L31e0c0:\n"
-"ld_s r0,[r17,0]\n"
-"L31e0c2:\n"
-"sub_s r1,r13,r0\n"
-"L31e0c4:\n"
-"div r1,r1,912\n"
-"L31e0c8:\n"
-"jl_s.d [r2]\n"
-"L31e0ca:\n"
-"extb_s r0,r1\n"
-"L31e0cc:\n"
-"ldb r1,[r19]\n"
-"L31e0d0:\n"
-"ldb r0,[r18]\n"
-"L31e0d4:\n"
-"or.f 0,r0,r1\n"
-"L31e0d8:\n"
-"bne_s L31e114\n"
-"L31e0da:\n"
-"ldb r0,[r14,-226]\n"
-"L31e0de:\n"
-"add_s r0,r0,-1\n"
-"L31e0e0:\n"
-"extb.f 0,r0\n"
-"L31e0e4:\n"
-"stb r0,[r14,-226]\n"
-"L31e0e8:\n"
-"bne_s L31e114\n"
-"L31e0ea:\n"
-"bl.d opencfw_em9305_wsf_event_allocate\n"
-"L31e0ee:\n"
-"mov_s r0,4\n"
-"L31e0f0:\n"
-"mov_s r1,r0\n"
-"L31e0f2:\n"
-"breq_s r0,0,L31e114\n"
-"L31e0f4:\n"
-"mov_s r0,0x4701\n"
-"L31e0fa:\n"
-"sth_s r0,[r1,0x2]\n"
-"L31e0fc:\n"
-"ld_s r0,[r17,0]\n"
-"L31e0fe:\n"
-"sub_s r2,r13,r0\n"
-"L31e100:\n"
-"div r2,r2,912\n"
-"L31e104:\n"
-"ldb r0,[0x805b18]\n"
-"L31e10c:\n"
-"extb_s r2,r2\n"
-"L31e10e:\n"
-"bl.d opencfw_em9305_wsf_task_message_send\n"
-"L31e112:\n"
-"sth_s r2,[r1,0]\n"
-"L31e114:\n"
-"ldb_s r0,[r13,0x1]\n"
-"L31e116:\n"
-"brne.nt r0,0x3,L31e136\n"
-"L31e11a:\n"
-"ldb_s r0,[r14,0x1]\n"
-"L31e11c:\n"
-"breq_s r0,0,L31e126\n"
-"L31e11e:\n"
-"ldb_s r0,[r14,0x2]\n"
-"L31e120:\n"
-"cmp_s r0,0\n"
-"L31e122:\n"
-"bne_s L31e228\n"
-"L31e124:\n"
-"b_s L31e136\n"
-"L31e126:\n"
-"ldb r0,[r14,-8]\n"
-"L31e12a:\n"
-"cmp_s r0,0\n"
-"L31e12c:\n"
-"beq_s L31e228\n"
-"L31e12e:\n"
-"ld.as r0,[r13,90]\n"
-"L31e132:\n"
-"breq.nt r0,0,L31e228\n"
-"L31e136:\n"
-"ld r18,[0x801a18]\n"
-"L31e13e:\n"
-"breq.d.nt r18,0,L31e194\n"
-"L31e142:\n"
-"mov_s r23,1\n"
-"L31e144:\n"
-"mov_s r0,0x802a40\n"
-"L31e14a:\n"
-"mov_s r1,0x802a44\n"
-"L31e150:\n"
-"ldh_s r0,[r0,0]\n"
-"L31e152:\n"
-"ldh_s r1,[r1,0]\n"
-"L31e154:\n"
-"mov_s r2,0x802a3c\n"
-"L31e15a:\n"
-"ldh_s r2,[r2,0]\n"
-"L31e15c:\n"
-"add_s r0,r0,r1\n"
-"L31e15e:\n"
-"exth_s r1,r0\n"
-"L31e160:\n"
-"setne r2,r2,0\n"
-"L31e164:\n"
-"jl.d [r18]\n"
-"L31e168:\n"
-"mov_s r0,r13\n"
-"L31e16a:\n"
-"mov_s r18,r0\n"
-"L31e16c:\n"
-"breq_s r0,0,L31e194\n"
-"L31e16e:\n"
-"mov r0,321\n"
-"L31e172:\n"
-"ldb_s r1,[r13,r0]\n"
-"L31e174:\n"
-"ldh.as r0,[r13,131]\n"
-"L31e178:\n"
-"ld.as r2,[0x8027e0,r1]\n"
-"L31e180:\n"
-"add_s r0,r0,r18\n"
-"L31e182:\n"
-"sth.as r0,[r13,131]\n"
-"L31e186:\n"
-"sub r0,r18,0x1\n"
-"L31e18a:\n"
-"exth_s r1,r0\n"
-"L31e18c:\n"
-"jl_s.d [r2]\n"
-"L31e18e:\n"
-"mov_s r0,r13\n"
-"L31e190:\n"
-"add r23,r18,0x1\n"
-"L31e194:\n"
-"ldb r0,[r13,192]\n"
-"L31e198:\n"
-"breq_s r0,0,L31e20e\n"
-"L31e19a:\n"
-"bl.d opencfw_em9305_phy_packet_alloc_32d2f0\n"
-"L31e19e:\n"
-"mov_s r0,0xc\n"
-"L31e1a0:\n"
-"mov_s r18,r0\n"
-"L31e1a2:\n"
-"breq_s r0,0,L31e20e\n"
-"L31e1a4:\n"
-"mov_s r0,r13\n"
-"L31e1a6:\n"
-"bl.d opencfw_em9305_child_32d64c\n"
-"L31e1aa:\n"
-"stb 0,[r13,192]\n"
-"L31e1ae:\n"
-"cmp_s r0,6\n"
-"L31e1b0:\n"
-"mov_s r0,6\n"
-"L31e1b2:\n"
-"blo_s L31e1ba\n"
-"L31e1b4:\n"
-"bl.d opencfw_em9305_child_32d64c\n"
-"L31e1b8:\n"
-"mov_s r0,r13\n"
-"L31e1ba:\n"
-"ldh.as r2,[r13,130]\n"
-"L31e1be:\n"
-"ld_s r1,[r17,0]\n"
-"L31e1c0:\n"
-"ldh r11,[r14,218]\n"
-"L31e1c4:\n"
-"add_s r2,r2,1\n"
-"L31e1c6:\n"
-"mpy_s r0,r0,r2\n"
-"L31e1c8:\n"
-"sub_s r3,r13,r1\n"
-"L31e1ca:\n"
-"div r3,r3,912\n"
-"L31e1ce:\n"
-"ldh.as r12,[r13,131]\n"
-"L31e1d2:\n"
-"mpyw r0,r0,r11\n"
-"L31e1d6:\n"
-"ld r2,[r15,0x8]\n"
-"L31e1d8:\n"
-"mov_s r4,0\n"
-"L31e1da:\n"
-"add_s r0,r0,r12\n"
-"L31e1dc:\n"
-"extb_s r1,r3\n"
-"L31e1de:\n"
-"sth_s r0,[r14,0x36]\n"
-"L31e1e0:\n"
-"mov_s r0,0\n"
-"L31e1e2:\n"
-"bl.d opencfw_em9305_radio_schedule_313424\n"
-"L31e1e6:\n"
-"mov_s r3,0\n"
-"L31e1e8:\n"
-"mpydu r2,r0,0x1a36e3\n"
-"L31e1f0:\n"
-"mov_s r1,r13\n"
-"L31e1f2:\n"
-"add r1,r1,672\n"
-"L31e1f6:\n"
-"asl_s r12,r3\n"
-"L31e1f8:\n"
-"lsr r0,r2,0x1f\n"
-"L31e1fc:\n"
-"or_s r0,r0,r12\n"
-"L31e1fe:\n"
-"sth_s r0,[r14,0x2e]\n"
-"L31e200:\n"
-"bl.d opencfw_em9305_child_323d38\n"
-"L31e204:\n"
-"mov_s r0,r18\n"
-"L31e206:\n"
-"mov_s r0,r13\n"
-"L31e208:\n"
-"bl.d opencfw_em9305_phy_packet_send_32d32c\n"
-"L31e20c:\n"
-"mov_s r1,r18\n"
-"L31e20e:\n"
-"ldb r0,[r14,-20]\n"
-"L31e212:\n"
-"breq_s r0,0,L31e248\n"
-"L31e214:\n"
-"ldb r0,[r14,-19]\n"
-"L31e218:\n"
-"stb 0,[r14,-20]\n"
-"L31e21c:\n"
-"breq_s r0,0,L31e23a\n"
-"L31e21e:\n"
-"ld r1,[0x8052bc]\n"
-"L31e226:\n"
-"b_s L31e242\n"
-"L31e228:\n"
-"mov_s r1,0x4c\n"
-"L31e22a:\n"
-"bl.d opencfw_em9305_receive_terminate_325c08\n"
-"L31e22e:\n"
-"mov_s r0,r13\n"
-"L31e230:\n"
-"bl.d opencfw_em9305_wsf_timer_stop\n"
-"L31e234:\n"
-"add3 r0,r13,0x30\n"
-"L31e238:\n"
-"leave_s [r13-r24,blink,pcl]\n"
-"L31e23a:\n"
-"ld r1,[0x8052c0]\n"
-"L31e242:\n"
-"breq_s r1,0,L31e248\n"
-"L31e244:\n"
-"jl_s.d [r1]\n"
-"L31e246:\n"
-"mov_s r0,r13\n"
-"L31e248:\n"
-"ldb r0,[r16,15]\n"
-"L31e24c:\n"
-"brne_s r0,0,L31e252\n"
-"L31e24e:\n"
-"ldb r0,[r16,125]\n"
-"L31e252:\n"
-"ldb r1,[r16,12]\n"
-"L31e256:\n"
-"ld r22,[r15,8]\n"
-"L31e25a:\n"
-"brne.d.nt r1,0x3,L31e274\n"
-"L31e25e:\n"
-"stb r0,[r16,14]\n"
-"L31e262:\n"
-"seteq r0,r0,0x1\n"
-"L31e266:\n"
-"add_s r0,r0,2\n"
-"L31e268:\n"
-"add_s r0,r0,r13\n"
-"L31e26a:\n"
-"add r0,r0,332\n"
-"L31e26e:\n"
-"ldb_s r0,[r0,0]\n"
-"L31e270:\n"
-"stb r0,[r16,2]\n"
-"L31e274:\n"
-"mov r21,321\n"
-"L31e278:\n"
-"add3 r24,r13,0x30\n"
-"L31e27c:\n"
-"ldh.as r0,[r13,131]\n"
-"L31e280:\n"
-"ldb_s r1,[r14,0x7]\n"
-"L31e282:\n"
-"ldh.as r2,[r13,133]\n"
-"L31e286:\n"
-"add_s r3,r0,0x1\n"
-"L31e288:\n"
-"setne r0,r1,0x11\n"
-"L31e28c:\n"
-"mpyuw r1,r23,r2\n"
-"L31e290:\n"
-"sth.as r3,[r13,131]\n"
-"L31e294:\n"
-"stb_s r0,[r15,0x18]\n"
-"L31e296:\n"
-"ldb_s r0,[r14,0x7]\n"
-"L31e298:\n"
-"mpywhl r1,r1,1250\n"
-"L31e29c:\n"
-"st_s r1,[r15,0x14]\n"
-"L31e29e:\n"
-"add_s r1,r1,r22\n"
-"L31e2a0:\n"
-"breq.d.nt r0,0x1,L31e32c\n"
-"L31e2a4:\n"
-"st_s r1,[r15,0x8]\n"
-"L31e2a6:\n"
-"breq.nt r0,0xe,L31e350\n"
-"L31e2aa:\n"
-"breq.nt r0,0x15,L31e362\n"
-"L31e2ae:\n"
-"brne.nt r0,0x11,L31e374\n"
-"L31e2b2:\n"
-"ldh_s r1,[r14,0x36]\n"
-"L31e2b4:\n"
-"ldh.as r0,[r13,131]\n"
-"L31e2b8:\n"
-"brne.nt r0,r1,L31e374\n"
-"L31e2bc:\n"
-"ldh_s r0,[r14,0x30]\n"
-"L31e2be:\n"
-"ldh_s r12,[r14,0x32]\n"
-"L31e2c0:\n"
-"ldh_s r2,[r14,0x34]\n"
-"L31e2c2:\n"
-"ldh_s r1,[r14,0x2e]\n"
-"L31e2c4:\n"
-"ldh.as r18,[r13,133]\n"
-"L31e2c8:\n"
-"ldh.as r19,[r13,130]\n"
-"L31e2cc:\n"
-"ld r3,[r13,0x18]\n"
-"L31e2ce:\n"
-"sth.as r0,[r13,133]\n"
-"L31e2d2:\n"
-"sth.as r12,[r13,130]\n"
-"L31e2d6:\n"
-"mpyuw r12,r2,0xa\n"
-"L31e2da:\n"
-"mpyuw r0,r0,1250\n"
-"L31e2de:\n"
-"mpyuw r1,r1,1250\n"
-"L31e2e2:\n"
-"lsr r2,r18,0x2\n"
-"L31e2e6:\n"
-"bmsk.f 0,r18,0x1\n"
-"L31e2ea:\n"
-"add_s r2,r2,r18\n"
-"L31e2ec:\n"
-"ldh.as r20,[r13,191]\n"
-"L31e2f0:\n"
-"st_s r0,[r13,0x20]\n"
-"L31e2f2:\n"
-"add_s r1,r1,r3\n"
-"L31e2f4:\n"
-"add.ne r2,r2,0x1\n"
-"L31e2f8:\n"
-"exth_s r0,r12\n"
-"L31e2fa:\n"
-"st_s r1,[r13,0x18]\n"
-"L31e2fc:\n"
-"add_s r1,r2,r0\n"
-"L31e2fe:\n"
-"mov_s r0,r24\n"
-"L31e300:\n"
-"bl.d opencfw_em9305_wsf_timer_start_ms\n"
-"L31e304:\n"
-"sth.as r12,[r13,191]\n"
-"L31e308:\n"
-"ldh.as r0,[r13,133]\n"
-"L31e30c:\n"
-"brne.nt r18,r0,L31e320\n"
-"L31e310:\n"
-"ldh.as r0,[r13,130]\n"
-"L31e314:\n"
-"brne.nt r19,r0,L31e320\n"
-"L31e318:\n"
-"ldh.as r0,[r13,191]\n"
-"L31e31c:\n"
-"breq.nt r20,r0,L31e35c\n"
-"L31e320:\n"
-"ld.as r0,[r13,159]\n"
-"L31e324:\n"
-"bset_s r0,r0,0x11\n"
-"L31e326:\n"
-"st.as r0,[r13,159]\n"
-"L31e32a:\n"
-"b_s L31e35c\n"
-"L31e32c:\n"
-"ldh r1,[r14,88]\n"
-"L31e330:\n"
-"ldh.as r0,[r13,131]\n"
-"L31e334:\n"
-"brne.nt r0,r1,L31e374\n"
-"L31e338:\n"
-"ld.as r0,[r13,177]\n"
-"L31e33c:\n"
-"ld.as r1,[r13,178]\n"
-"L31e340:\n"
-"st.as r0,[r13,69]\n"
-"L31e344:\n"
-"mov_s r0,r13\n"
-"L31e346:\n"
-"bl.d opencfw_em9305_radio_channels_317ac0\n"
-"L31e34a:\n"
-"st.as r1,[r13,70]\n"
-"L31e34e:\n"
-"b_s L31e35c\n"
-"L31e350:\n"
-"ldh r1,[r14,98]\n"
-"L31e354:\n"
-"ldh.as r0,[r13,131]\n"
-"L31e358:\n"
-"brlo.nt r0,r1,L31e374\n"
-"L31e35c:\n"
-"stb 1,[r14]\n"
-"L31e360:\n"
-"b_s L31e374\n"
-"L31e362:\n"
-"ldh r1,[r14,96]\n"
-"L31e366:\n"
-"ldh.as r0,[r13,131]\n"
-"L31e36a:\n"
-"brne.d.nt r0,r1,L31e374\n"
-"L31e36e:\n"
-"mov_s r0,r13\n"
-"L31e370:\n"
-"bl opencfw_em9305_child_322630\n"
-"L31e374:\n"
-"ldb r0,[r14,142]\n"
-"L31e378:\n"
-"brne.nt r0,0x1,L31e3c8\n"
-"L31e37c:\n"
-"ldb r0,[r14,141]\n"
-"L31e380:\n"
-"brne_s r0,0,L31e3c8\n"
-"L31e382:\n"
-"ldb r0,[0x805a85]\n"
-"L31e38a:\n"
-"bbit0.nt r0,0x7,L31e3c8\n"
-"L31e38e:\n"
-"ldb r0,[r14,144]\n"
-"L31e392:\n"
-"add_s r0,r0,-1\n"
-"L31e394:\n"
-"extb.f 0,r0\n"
-"L31e398:\n"
-"stb r0,[r14,144]\n"
-"L31e39c:\n"
-"bne_s L31e3c8\n"
-"L31e39e:\n"
-"bl.d opencfw_em9305_wsf_event_allocate\n"
-"L31e3a2:\n"
-"mov_s r0,0x8\n"
-"L31e3a4:\n"
-"mov_s r1,r0\n"
-"L31e3a6:\n"
-"breq_s r0,0,L31e3c8\n"
-"L31e3a8:\n"
-"mov_s r0,0x6901\n"
-"L31e3ae:\n"
-"sth_s r0,[r1,0x2]\n"
-"L31e3b0:\n"
-"ld_s r0,[r17,0]\n"
-"L31e3b2:\n"
-"sub_s r2,r13,r0\n"
-"L31e3b4:\n"
-"div r2,r2,912\n"
-"L31e3b8:\n"
-"ldb r0,[0x805b18]\n"
-"L31e3c0:\n"
-"extb_s r2,r2\n"
-"L31e3c2:\n"
-"bl.d opencfw_em9305_wsf_task_message_send\n"
-"L31e3c6:\n"
-"sth_s r2,[r1,0]\n"
-"L31e3c8:\n"
-"ldb r0,[r13,r21]\n"
-"L31e3cc:\n"
-"mov_s r1,0\n"
-"L31e3ce:\n"
-"ld.as r2,[0x8027e0,r0]\n"
-"L31e3d6:\n"
-"jl_s.d [r2]\n"
-"L31e3d8:\n"
-"mov_s r0,r13\n"
-"L31e3da:\n"
-"stb r0,[r16,1]\n"
-"L31e3de:\n"
-"mov_s r1,opencfw_em9305_init_schedule_compare_318b78\n"
-"L31e3e4:\n"
-"bl.d opencfw_em9305_associated_schedule_insert_312da4\n"
-"L31e3e8:\n"
-"mov_s r0,r15\n"
-"L31e3ea:\n"
-"cmp_s r0,0\n"
-"L31e3ec:\n"
-"add_s r23,r23,1\n"
-"L31e3ee:\n"
-"beq_s L31e27c\n"
-"L31e3f0:\n"
-"ldb r0,[r14,120]\n"
-"L31e3f4:\n"
-"cmp_s r0,0\n"
-"L31e3f6:\n"
-"beq_s L31e238\n"
-"L31e3f8:\n"
-"ldh r1,[r14,126]\n"
-"L31e3fc:\n"
-"ldh.as r0,[r13,131]\n"
-"L31e400:\n"
-"cmp_s r0,r1\n"
-"L31e402:\n"
-"bc L31e238\n"
-"L31e406:\n"
-"ldb r0,[r14,-8]\n"
-"L31e40a:\n"
-"cmp_s r0,0\n"
-"L31e40c:\n"
-"bne_s L31e238\n"
-"L31e40e:\n"
-"ldb r0,[r13,77]\n"
-"L31e412:\n"
-"brhs.d.nt r0,0x3,L31e452\n"
-"L31e416:\n"
-"mov_s r0,4\n"
-"L31e418:\n"
-"bl opencfw_em9305_wsf_event_allocate\n"
-"L31e41c:\n"
-"mov_s r1,r0\n"
-"L31e41e:\n"
-"breq_s r0,0,L31e440\n"
-"L31e420:\n"
-"mov_s r0,0x6d01\n"
-"L31e426:\n"
-"sth_s r0,[r1,0x2]\n"
-"L31e428:\n"
-"ld_s r0,[r17,0]\n"
-"L31e42a:\n"
-"sub_s r2,r13,r0\n"
-"L31e42c:\n"
-"div r2,r2,912\n"
-"L31e430:\n"
-"ldb r0,[0x805b18]\n"
-"L31e438:\n"
-"extb_s r2,r2\n"
-"L31e43a:\n"
-"bl.d opencfw_em9305_wsf_task_message_send\n"
-"L31e43e:\n"
-"sth_s r2,[r1,0]\n"
-"L31e440:\n"
-"ldh r1,[r14,122]\n"
-"L31e444:\n"
-"breq_s r1,0,L31e452\n"
-"L31e446:\n"
-"ldh.as r0,[r13,131]\n"
-"L31e44a:\n"
-"add_s r0,r0,r1\n"
-"L31e44c:\n"
-"sth r0,[r14,126]\n"
-"L31e450:\n"
-"leave_s [r13-r24,blink,pcl]\n"
-"L31e452:\n"
-"stb 0,[r14,120]\n"
-"L31e456:\n"
-"leave_s [r13-r24,blink,pcl]\n"
-".size opencfw_em9305_radio_cb_31dfd0,.-opencfw_em9305_radio_cb_31dfd0\n"
-);
+#include <stdint.h>
+
+/* Native 0x31dfd0..0x31e458: connection-event-closed handler for the
+ * object (+0x24 connection, +44 event state, +8 anchor). It (re)starts the
+ * supervision timer (+384, +382 ms) once a packet was seen (+400, flags
+ * 0x802a38/0x802a34), samples the RSSI (+268/+269, +784/+780 or the
+ * 0x805178 hook) and runs the event-end hook (+812). Without traffic the
+ * missed-event counter (+402) posts message 0x4701; a peripheral that
+ * must terminate (+629/+630, +620, +360) is closed with reason 0x4c. The
+ * latency hook 0x801a18 may skip events (role table 0x8027e0). A pending
+ * control PDU (+192) is built (32d64c/323d38) with its instant and
+ * queued; a pending data-length/PHY update (+608/+609) runs 0x8052bc or
+ * 0x8052c0. Then, for each event until the scheduler (312da4) accepts the
+ * next anchor, the event counter (+262) and anchor (+8) advance and a
+ * procedure instant (+635: 1 channel map, 0xe, 0x11 connection update,
+ * 0x15) is applied; the authenticated-payload counter (+772) may post
+ * message 0x6901. Finally the ping timer (+748..+754, +77) may post
+ * message 0x6d01. Returns the stock r0 at each exit. */
+extern uint32_t opencfw_em9305_wsf_timer_start_ms(uintptr_t timer,
+                                                  uint32_t milliseconds);
+extern uint32_t opencfw_em9305_wsf_timer_stop(uintptr_t timer);
+extern uint32_t opencfw_em9305_radio_record_timing_30c40c(uint32_t,uint32_t);
+extern uintptr_t opencfw_em9305_wsf_event_allocate(uint32_t length);
+extern uint32_t opencfw_em9305_wsf_task_message_send(uint32_t task,
+                                                     uintptr_t message);
+extern uint32_t opencfw_em9305_receive_terminate_325c08(uintptr_t record,
+                                                        uint32_t reason);
+extern uint32_t opencfw_em9305_phy_packet_alloc_32d2f0(uint32_t bytes);
+extern uint32_t opencfw_em9305_child_32d64c(uintptr_t record);
+extern uint32_t opencfw_em9305_radio_schedule_313424(uint32_t incoming,
+    uint32_t index,uint32_t timestamp,uint32_t existing,uint32_t action);
+extern uint32_t opencfw_em9305_child_323d38(uintptr_t output,uintptr_t input);
+extern uint32_t opencfw_em9305_phy_packet_send_32d32c(uintptr_t record,
+                                                      uintptr_t packet);
+extern uint32_t opencfw_em9305_radio_channels_317ac0(uintptr_t record);
+extern void opencfw_em9305_child_322630(uintptr_t record);
+extern uint32_t opencfw_em9305_associated_schedule_insert_312da4(uintptr_t,
+                                                                 uintptr_t);
+extern uint32_t opencfw_em9305_init_schedule_compare_318b78(uintptr_t,
+                                                            uintptr_t);
+
+typedef uint32_t (*opencfw_em9305_hook1_31dfd0)(uintptr_t);
+typedef uint32_t (*opencfw_em9305_hook2_31dfd0)(uintptr_t,uint32_t);
+typedef uint32_t (*opencfw_em9305_end_hook_31dfd0)(uint32_t,uint32_t);
+typedef uint32_t (*opencfw_em9305_hook3_31dfd0)(uintptr_t,uint32_t,uint32_t);
+
+static inline uint32_t r8(uintptr_t a){return *(volatile uint8_t *)a;}
+static inline uint32_t r16(uintptr_t a){return *(volatile uint16_t *)a;}
+static inline uint32_t r32(uintptr_t a){return *(volatile uint32_t *)a;}
+static inline void w8(uintptr_t a,uint32_t v){*(volatile uint8_t *)a=(uint8_t)v;}
+static inline void w16(uintptr_t a,uint32_t v){*(volatile uint16_t *)a=(uint16_t)v;}
+static inline void w32(uintptr_t a,uint32_t v){*(volatile uint32_t *)a=v;}
+
+/* Connection index of conn in the 912-byte table at *0x805c70. */
+static uint32_t conn_index(uintptr_t conn)
+{
+    return (uint32_t)((int32_t)(conn-r32(0x805c70u))/912);
+}
+
+/* Post a 4/8-byte LL message {index, code} to the LL task (0x805b18);
+ * returns the allocator result when it fails, else the send result. */
+static uint32_t post(uintptr_t conn,uint32_t length,uint32_t code)
+{
+    uintptr_t message=opencfw_em9305_wsf_event_allocate(length);
+    if(message==0u)return 0u;
+    w16(message+2u,code);
+    uint32_t index=(uint8_t)conn_index(conn);
+    w16(message,index);
+    return opencfw_em9305_wsf_task_message_send(r8(0x805b18u),message);
+}
+
+static uint32_t role_hook(uintptr_t conn,uint32_t value)
+{
+    opencfw_em9305_hook2_31dfd0 hook=(opencfw_em9305_hook2_31dfd0)(uintptr_t)
+        r32(0x8027e0u+r8(conn+321u)*4u);
+    return hook(conn,value);
+}
+
+/* Apply the procedure instant (+635) at the current event counter. */
+static void apply_instant(uintptr_t conn)
+{
+    uintptr_t timer=conn+384u;
+    uint32_t procedure=r8(conn+635u);
+    if(procedure==1u){
+        if(r16(conn+262u)!=r16(conn+716u))return;
+        uint32_t high=r32(conn+712u);
+        w32(conn+276u,r32(conn+708u));
+        w32(conn+280u,high);
+        (void)opencfw_em9305_radio_channels_317ac0(conn);
+    }else if(procedure==0xeu){
+        if(r16(conn+262u)<r16(conn+726u))return;
+    }else if(procedure==0x15u){
+        if(r16(conn+262u)==r16(conn+724u))opencfw_em9305_child_322630(conn);
+        return;
+    }else if(procedure==0x11u){
+        if(r16(conn+262u)!=r16(conn+682u))return;
+        uint32_t interval=r16(conn+676u);
+        uint32_t latency=r16(conn+678u);
+        uint32_t timeout=r16(conn+680u);
+        uint32_t window=r16(conn+674u);
+        uint32_t old_interval=r16(conn+266u);
+        uint32_t old_latency=r16(conn+260u);
+        uint32_t anchor=r32(conn+24u);
+        w16(conn+266u,interval);
+        w16(conn+260u,latency);
+        uint32_t timeout_ms=(uint16_t)(timeout*10u);
+        uint32_t old_timeout=r16(conn+382u);
+        w32(conn+32u,interval*1250u);
+        w32(conn+24u,window*1250u+anchor);
+        w16(conn+382u,timeout_ms);
+        uint32_t interval_ms=old_interval+(old_interval>>2)+
+                             ((old_interval&3u)!=0u);
+        (void)opencfw_em9305_wsf_timer_start_ms(timer,interval_ms+timeout_ms);
+        if(old_interval!=r16(conn+266u)||old_latency!=r16(conn+260u)||
+           old_timeout!=r16(conn+382u))
+            w32(conn+636u,r32(conn+636u)|0x20000u);
+    }else{
+        return;
+    }
+    w8(conn+628u,1u);
+}
+
+uint32_t opencfw_em9305_radio_cb_31dfd0(uintptr_t object)
+{
+    uintptr_t conn=r32(object+0x24u);
+    uintptr_t seen=conn+400u;
+    uintptr_t state=r32(object+44u);
+    uintptr_t timer=conn+384u;
+    uint32_t received=r8(0x802a38u);
+    if(r8(seen)!=0u){
+        if(received!=0u){
+            (void)opencfw_em9305_wsf_timer_start_ms(timer,r16(conn+382u));
+            w16(conn+264u,r16(conn+262u));
+        }
+    }else if((received|r8(0x802a34u))!=0u){
+        if(r8(conn+12u)==0x3eu)w8(conn+12u,8u);
+        (void)opencfw_em9305_wsf_timer_start_ms(timer,r16(conn+382u));
+        uint32_t features=r32(0x805a84u);
+        if((features&0x100u)==0u&&r8(conn+770u)==1u&&r8(conn+769u)==0u&&
+           (features&0x8000u)!=0u)
+            w8(conn+772u,opencfw_em9305_radio_record_timing_30c40c(800u,
+                                                               r16(conn+266u)));
+        w8(seen,1u);
+    }
+    uint32_t rssi=r8(state+124u);
+    w8(conn+268u,rssi);
+    if(r8(conn+770u)==1u){
+        if(r8(conn+269u)!=0u){
+            rssi=0x7fu;
+            w8(conn+268u,0x7fu);
+        }
+        uint32_t mode=r8(conn+769u);
+        if(mode==1u){
+            ((opencfw_em9305_hook1_31dfd0)(uintptr_t)r32(0x805178u))(conn);
+        }else if(mode==0u&&rssi!=0x7fu){
+            uint32_t count=r16(conn+780u);
+            w32(conn+784u,r32(conn+784u)+(uint32_t)(int32_t)(int8_t)rssi);
+            w16(conn+780u,count+1u);
+        }
+    }
+    uintptr_t end_hook=r32(conn+812u);
+    if(end_hook!=0u){
+        uint32_t index=conn_index(conn);
+        /* Stock passes the byte index in r0 and the full quotient in r1. */
+        ((opencfw_em9305_end_hook_31dfd0)end_hook)((uint8_t)index,index);
+    }
+    if((r8(0x802a38u)|r8(seen))==0u){
+        uint32_t missed=(uint8_t)(r8(conn+402u)-1u);
+        w8(conn+402u,missed);
+        if(missed==0u)(void)post(conn,4u,0x4701u);
+    }
+    if(r8(conn+1u)==3u){
+        int terminate;
+        if(r8(conn+629u)!=0u)terminate=r8(conn+630u)!=0u;
+        else terminate=r8(conn+620u)==0u||r32(conn+360u)==0u;
+        if(terminate){
+            (void)opencfw_em9305_receive_terminate_325c08(conn,0x4cu);
+            return opencfw_em9305_wsf_timer_stop(timer);
+        }
+    }
+    uint32_t events=1u;
+    uintptr_t latency_hook=r32(0x801a18u);
+    if(latency_hook!=0u){
+        uint32_t pending=(uint16_t)(r16(0x802a40u)+r16(0x802a44u));
+        uint32_t skipped=((opencfw_em9305_hook3_31dfd0)latency_hook)(conn,pending,
+            r16(0x802a3cu)!=0u);
+        if(skipped!=0u){
+            uint32_t counter=r16(conn+262u);
+            opencfw_em9305_hook2_31dfd0 hook=(opencfw_em9305_hook2_31dfd0)(uintptr_t)
+                r32(0x8027e0u+r8(conn+321u)*4u);
+            w16(conn+262u,counter+skipped);
+            (void)hook(conn,(uint16_t)(skipped-1u));
+            events=skipped+1u;
+        }
+    }
+    if(r8(conn+192u)!=0u){
+        uint32_t packet=opencfw_em9305_phy_packet_alloc_32d2f0(0xcu);
+        if(packet!=0u){
+            w8(conn+192u,0u);
+            uint32_t offset=opencfw_em9305_child_32d64c(conn);
+            if(offset<6u)offset=6u;
+            else offset=opencfw_em9305_child_32d64c(conn);
+            uint32_t latency=r16(conn+260u);
+            uint32_t index=conn_index(conn);
+            int32_t step=(int16_t)(offset*(latency+1u));
+            uint32_t instant=(uint32_t)(step*(int16_t)r16(conn+846u))+r16(conn+262u);
+            w16(conn+682u,instant);
+            uint32_t ticks=opencfw_em9305_radio_schedule_313424(0u,(uint8_t)index,
+                r32(object+8u),0u,0u);
+            uint64_t scaled=(uint64_t)ticks*0x1a36e3u;
+            w16(conn+674u,(uint32_t)(scaled>>31));
+            (void)opencfw_em9305_child_323d38(packet,conn+672u);
+            (void)opencfw_em9305_phy_packet_send_32d32c(conn,packet);
+        }
+    }
+    if(r8(conn+608u)!=0u){
+        uint32_t phy=r8(conn+609u);
+        w8(conn+608u,0u);
+        uintptr_t hook=phy!=0u?r32(0x8052bcu):r32(0x8052c0u);
+        if(hook!=0u)((opencfw_em9305_hook1_31dfd0)hook)(conn);
+    }
+    uint32_t tx_phy=r8(state+15u);
+    if(tx_phy==0u)tx_phy=r8(state+125u);
+    uint32_t role=r8(state+12u);
+    uint32_t anchor=r32(object+8u);
+    w8(state+14u,tx_phy);
+    if(role==3u)w8(state+2u,r8(conn+334u+(tx_phy==1u)));
+    do{
+        uint32_t counter=r16(conn+262u)+1u;
+        uint32_t procedure=r8(conn+635u);
+        uint32_t interval=r16(conn+266u);
+        w16(conn+262u,counter);
+        w8(object+0x18u,procedure!=0x11u);
+        uint32_t advance=(uint32_t)(uint16_t)events*interval*1250u;
+        w32(object+0x14u,advance);
+        w32(object+8u,advance+anchor);
+        apply_instant(conn);
+        if(r8(conn+770u)==1u&&r8(conn+769u)==0u&&(r8(0x805a85u)&0x80u)!=0u){
+            uint32_t count=(uint8_t)(r8(conn+772u)-1u);
+            w8(conn+772u,count);
+            if(count==0u)(void)post(conn,8u,0x6901u);
+        }
+        w8(state+1u,role_hook(conn,0u));
+        events++;
+    }while(opencfw_em9305_associated_schedule_insert_312da4(object,
+               (uintptr_t)opencfw_em9305_init_schedule_compare_318b78)==0u);
+    if(r8(conn+748u)==0u)return 0u;
+    uint32_t counter=r16(conn+262u);
+    if(counter<r16(conn+754u))return counter;
+    uint32_t paused=r8(conn+620u);
+    if(paused!=0u)return paused;
+    if(r8(conn+77u)>=3u){
+        w8(conn+748u,0u);
+        return 4u;
+    }
+    uint32_t result=post(conn,4u,0x6d01u);
+    uint32_t period=r16(conn+750u);
+    if(period==0u){
+        w8(conn+748u,0u);
+        return result;
+    }
+    result=r16(conn+262u)+period;
+    w16(conn+754u,result);
+    return result;
+}

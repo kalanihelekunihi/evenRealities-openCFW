@@ -6,7 +6,7 @@ extern void case_policy_task_unlink(uint32_t link);
 extern void case_policy_task_list_insert(uint32_t list,uint32_t link);
 extern void case_policy_task_wake_cleanup(void);
 static __attribute__((noreturn)) void native_fault(void)
-{__asm__ volatile("cpsid i\n1: b 1b");__builtin_unreachable();}
+{__asm__ volatile("cpsid i");for(;;){}}
 static uint32_t rd(uint32_t a){return *(volatile uint32_t *)(uintptr_t)a;}
 static void wr(uint32_t a,uint32_t v){*(volatile uint32_t *)(uintptr_t)a=v;}
 /* Stock 0x0800CA78 (xTaskIncrementTick) */
@@ -42,3 +42,7 @@ uint32_t case_policy_task_pended(void)
     if(rd(scheduler+28u)!=0u)changed=1u;
     return changed;
 }
+/* Dedup (0x0800ca78): case_kernel_tick_increment (was legacy-default/kernel_tick_candidate.c). */
+__typeof__(case_policy_task_pended) case_kernel_tick_increment __attribute__((alias("case_policy_task_pended")));
+/* Dedup (0x0800ca78): case_increment_tick (was scheduler-list/tick.c). */
+int32_t case_increment_tick(void) __attribute__((alias("case_policy_task_pended")));

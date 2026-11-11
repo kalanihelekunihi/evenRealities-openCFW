@@ -8,16 +8,20 @@ extern uint32_t r1_touch_task_message_boundary(const void *);
 volatile uint8_t r1_touch_contact_state[100] __attribute__((section(".r1.touch.contact"),aligned(4)))={0};
 volatile uint8_t r1_touch_release_timer_pending __attribute__((section(".r1.touch.timer_pending")))=0;
 volatile uint8_t r1_touch_synthetic_flag __attribute__((section(".r1.touch.synthetic_flag")))=0;
-__attribute__((used,noinline)) static uint32_t release_timer_kernel(volatile uint8_t *frame)
+/* Stock 0x934e4 clears every byte of this 44-byte message before enqueueing.
+ * The message provider consumes it synchronously under the queue-copy API. */
+void r1_touch_release_timer_callback(uint32_t argument)
 {
- __aeabi_memclr((void *)(uintptr_t)frame,44);
- write32(frame+4,5);write32(frame+8,0);
- return r1_touch_task_message_boundary((const void *)(uintptr_t)frame);
+ (void)argument;
+ uint32_t message[11];
+ __aeabi_memclr(message,sizeof message);
+ message[1]=5;
+ message[2]=0;
+ (void)r1_touch_task_message_boundary(message);
 }
-__attribute__((naked,noinline,section(".r1.touch.release.timer_code"))) void r1_touch_release_timer_callback(uint32_t argument __attribute__((unused)))
-{__asm__ volatile("push {lr}\nsub sp,sp,#44\nmov r0,sp\nbl release_timer_kernel\nadd sp,sp,#44\npop {pc}");}
-/* 64-bit return is an internal bridge signal: high word requests clear after
- * restoring the external frame; low word is the native inactive return byte. */
+/* Internal result: the high word requests contact clearing; the low word
+ * carries the native inactive return byte. Each emitted four-byte record is
+ * assigned in full before the gesture consumer reads it. */
 __attribute__((used,noinline)) static uint64_t synthetic_release_kernel(volatile uint32_t *frame)
 {
  uint32_t active=r1_touch_contact_state[36];if(active!=1)return active;
@@ -50,5 +54,23 @@ __attribute__((used,noinline)) static uint32_t contact_clear_result(void)
   * without changing the existing attributable memory provider's void API. */
  return (uintptr_t)r1_touch_contact_state+100u;
 }
-__attribute__((naked,noinline)) uint32_t r1_touch_synthetic_release_boundary(void)
-{__asm__ volatile("push {r2,r3,r4,r5,r6,r7,r8,lr}\nmov r0,sp\nbl synthetic_release_kernel\ncmp r1,#0\nbeq 1f\npop {r2,r3,r4,r5,r6,r7,r8,lr}\nb contact_clear_result\n1: pop {r2,r3,r4,r5,r6,r7,r8,pc}");}
+/* Ordinary C ABI: private stack addresses and caller-clobbered register
+ * restoration are not part of the message/gesture contract. */
+uint32_t r1_touch_synthetic_release_boundary(void)
+{
+ uint32_t records[2];
+ uint64_t result=synthetic_release_kernel(records);
+ return result>>32 ? contact_clear_result() : (uint32_t)result;
+}
+
+/* Stock 0x8e9d0 shares contact storage with release and gesture consumers. */
+void r1_touch_pending_tap_timeout(void)
+{
+ if(r1_touch_contact_state[48]) {
+  r1_touch_contact_state[48]=0;
+  r1_touch_contact_state[0]=0;
+  uint8_t record[4]={4,0,r1_touch_contact_state[95],0};
+  (void)r1_touch_gesture_dispatch_boundary(record);
+ }
+ r1_touch_release_timer_pending=0;
+}

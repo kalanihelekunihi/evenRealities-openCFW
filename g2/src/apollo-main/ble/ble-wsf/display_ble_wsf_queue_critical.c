@@ -11,3 +11,7 @@ void WsfCsExit(void) {
     if(audio_wsf_cs_depth==0u)
         __asm volatile("cpsie i" ::: "memory");
 }
+
+/* Former duplicate bodies (ble/wsf-cs/display_wsf_cs.c) now bind here. */
+__typeof__(WsfCsEnter) audio_wsf_cs_enter __attribute__((alias("WsfCsEnter")));
+__typeof__(WsfCsExit) audio_wsf_cs_exit __attribute__((alias("WsfCsExit")));

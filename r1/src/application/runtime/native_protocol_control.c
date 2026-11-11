@@ -52,6 +52,10 @@ uint32_t r1_pair_role_handler(uint32_t handle,const void *packet,uintptr_t scrat
  * a reset/reboot meaning to flag4 beyond the authenticated call path. */
 __attribute__((noinline)) uint32_t r1_protocol_service_thread_flags_set(uint32_t flags)
 {void *thread=r1_protocol_service_thread;return thread?osThreadFlagsSet(thread,flags):0;}
+/* Stock SWI2 at 0x32730 reads the service thread at 0x20006570 and sets
+ * flag 1 only when a thread exists. Reuse the same source-owned state. */
+void r1_task_flag_set_1(void)
+{(void)r1_protocol_service_thread_flags_set(1u);}
 uint32_t r1_protocol_command_00083e2c(uint32_t handle,const void *packet,uintptr_t scratch,uint32_t seed)
 {
  (void)scratch;(void)seed;

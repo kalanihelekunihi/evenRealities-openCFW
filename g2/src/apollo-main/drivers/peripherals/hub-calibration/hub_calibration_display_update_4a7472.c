@@ -17,8 +17,8 @@ extern void audio_uart_page_43dfa4(uint32_t, uint32_t);
 extern uint32_t audio_uart_page_44104c(uint32_t);
 extern void audio_uart_page_44127e(uint32_t, uint32_t, uint32_t);
 extern void audio_uart_page_44129e(uint32_t, uint32_t, uint32_t);
-extern void audio_uart_page_44131c(uint32_t, uint32_t, uint32_t);
-extern void audio_uart_page_44146a(uint32_t, uint32_t, uint32_t);
+extern void lv_obj_set_style_border_width(uint32_t, uint32_t, uint32_t);
+extern void lv_obj_set_style_radius(uint32_t, uint32_t, uint32_t);
 extern void audio_uart_hub_calibration_labels_update_4a7440(uint32_t, uint32_t,
                                                                uint32_t);
 extern void audio_uart_page_44145a(uint32_t, uint32_t, uint32_t);
@@ -45,8 +45,8 @@ void audio_uart_hub_calibration_display_update_4a7472(uint32_t parent) {
     audio_uart_page_43dfa4(root, 0x10u);
     audio_uart_page_44127e(root, audio_uart_page_44104c(0u), 0u);
     audio_uart_page_44129e(root, 0xffu, 0u);
-    audio_uart_page_44131c(root, 0u, 0u);
-    audio_uart_page_44146a(root, 0u, 0u);
+    lv_obj_set_style_border_width(root, 0u, 0u);
+    lv_obj_set_style_radius(root, 0u, 0u);
     audio_uart_hub_calibration_labels_update_4a7440(root, 0u, 0u);
 
     uint32_t first = audio_uart_page_499416(root);
@@ -57,7 +57,7 @@ void audio_uart_hub_calibration_display_update_4a7472(uint32_t parent) {
     audio_uart_page_44140e(first, audio_uart_page_44104c(0xffffffu), 0u);
     audio_uart_page_44143e(first, audio_uart_ring_secondary_head_cell, 0u);
     audio_uart_page_44129e(first, 0u, 0u);
-    audio_uart_page_44131c(first, 0u, 0u);
+    lv_obj_set_style_border_width(first, 0u, 0u);
     audio_uart_page_49942e(first, audio_uart_page_45fffe(
         first_id, audio_uart_page_460084(first_id)));
 
@@ -68,7 +68,7 @@ void audio_uart_hub_calibration_display_update_4a7472(uint32_t parent) {
     audio_uart_page_44140e(second, audio_uart_page_44104c(0xffffffu), 0u);
     audio_uart_page_44143e(second, audio_uart_ring_secondary_head_cell, 0u);
     audio_uart_page_44129e(second, 0u, 0u);
-    audio_uart_page_44131c(second, 0u, 0u);
+    lv_obj_set_style_border_width(second, 0u, 0u);
     audio_uart_page_49942e(second, audio_uart_page_45fffe(
         second_id, audio_uart_page_460084(second_id)));
     audio_uart_page_43f506(second, 0x3fffffffu);
@@ -84,7 +84,7 @@ void audio_uart_hub_calibration_display_update_4a7472(uint32_t parent) {
     audio_uart_page_43f142(left, 0x8f);
     audio_uart_page_44127e(left, audio_uart_page_44104c(0xffffffu), 0u);
     audio_uart_page_44129e(left, 0xffu, 0u);
-    audio_uart_page_44131c(left, 0u, 0u);
+    lv_obj_set_style_border_width(left, 0u, 0u);
     audio_uart_hub_calibration_labels_update_4a7440(left, 0u, 0u);
 
     uint32_t right = audio_uart_page_43de82(root);
@@ -95,16 +95,16 @@ void audio_uart_hub_calibration_display_update_4a7472(uint32_t parent) {
     audio_uart_page_43f142(right, 0x8f);
     audio_uart_page_44127e(right, audio_uart_page_44104c(0xffffffu), 0u);
     audio_uart_page_44129e(right, 0xffu, 0u);
-    audio_uart_page_44131c(right, 0u, 0u);
+    lv_obj_set_style_border_width(right, 0u, 0u);
     audio_uart_hub_calibration_labels_update_4a7440(right, 0u, 0u);
 
     uint32_t mark = audio_uart_page_43de82(root);
     audio_uart_calibration_panel_mark_200749bc = mark;
     audio_uart_page_43f4c0(mark, 2u, 2u);
     audio_uart_page_43f09a(mark, 0x11f, 0x8f);
-    audio_uart_page_44146a(mark, 1u, 0u);
+    lv_obj_set_style_radius(mark, 1u, 0u);
     audio_uart_page_44127e(mark, audio_uart_page_44104c(0xffffffu), 0u);
     audio_uart_page_44129e(mark, 0xffu, 0u);
-    audio_uart_page_44131c(mark, 0u, 0u);
+    lv_obj_set_style_border_width(mark, 0u, 0u);
     audio_uart_page_43dfa4(mark, 0x12u);
 }

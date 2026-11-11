@@ -1,0 +1,70 @@
+{
+  "cases": 2224,
+  "passed": 2224,
+  "failures": [],
+  "actual_void_callback_cases": 1111,
+  "gateway_bytes": "0847",
+  "gateway_size": 2,
+  "callback_depths": [
+    [
+      [
+        -24,
+        -16
+      ],
+      [
+        -32,
+        -24,
+        -16
+      ]
+    ],
+    [
+      [
+        -8,
+        0
+      ],
+      [
+        -16,
+        -8,
+        0
+      ]
+    ]
+  ],
+  "parity_body_unchanged": true,
+  "other_source_units_unchanged": 561,
+  "imports_unchanged": true,
+  "application_imports": 211,
+  "bootloader_imports": 34,
+  "report": "build/sources-goal-r1-stacmd-callback/report.json",
+  "report_sha256": "2a600e15479062affc9a5ff9d47d8541469183d1d9d89d4a0f98a7e50c8359d8",
+  "manifest_sha256": "9c5b7ae5c0e7493eb22e1fb4df9f0c928c2a9aa70530254aff89b55213bef2e2",
+  "stock_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "rea": {
+    "path": "build/goal-r1-stacmd-callback/REA.json",
+    "sha256": "d0f208827701652b1c90308fc138cd47f32d25a5fc8d15113292abf11224dcc7",
+    "procedure": "0x5cbf0"
+  },
+  "source_sha256": {
+    "r1/src/application/board/native_stacmd_transmit.c": "08d500162404d60c89631c3df358e4e681a52ac1ed1bea5d6df63a473b7d768a"
+  },
+  "probe_artifacts": {
+    "build/goal-r1-stacmd-callback/before.c": "a3ec3d909df17a75e600b5959dfd3f3bb3ca2b84c3a39c86bedfb65f5b55831a",
+    "build/goal-r1-stacmd-callback/stock.s": "46aaf54d1fc2721b684fee99ff6a7f4c022587ce889c6a2e703df2bd21ffc119",
+    "build/goal-r1-stacmd-callback/stock.elf": "cea3342dc912bf115aa6e1bd09a5683428b8775f5e2d054b6ec51404b52265c4",
+    "build/goal-r1-stacmd-callback/REA.json": "d0f208827701652b1c90308fc138cd47f32d25a5fc8d15113292abf11224dcc7",
+    "build/goal-r1-stacmd-callback/rea-snapshot.json": "855f1888b9da3710cd6b3db9be04cec23a95be9efa915fa1807c586505fbf86d",
+    "build/goal-r1-stacmd-callback/verify.py": "18f9642ee5db976cf7c7a7513ad0df8ad9c4359927082695ff4efb440f736730",
+    "build/goal-r1-stacmd-callback/results.json": "29c32557707e26ee1a00d7dc2843819621529442e46c2c9ebb4e03ee27575e79",
+    "build/goal-r1-stacmd-callback/source.elf": "a7384d66abfb3339c87d330d1aae9b58bc6067c1229175c7767730a393678101",
+    "build/goal-r1-stacmd-callback/void_gpio.c": "e1c380f9ecdb4b99edfaca598f75b9166be4e958e4bdd6be324eb54c39b03b3e",
+    "build/goal-r1-stacmd-callback/void_gpio.o": "6ea59da1a51d90cdf1e1f2cf686bbc2219c7940178070581e0534dbe8426be46",
+    "build/goal-r1-stacmd-callback/compile_void.py": "3fba221e3bb86e88719ad1619ff8ff62f2604cb34bb6107b0728b42145e37d0b",
+    "build/goal-r1-stacmd-callback/void-build.json": "82586e48cb21b8478cfcb72ced7514fb326a1e8f59d4af68df9e295af6e08092"
+  },
+  "limits": [
+    "Two-byte BX R1 gateway captures machine R0 from correctly void-typed GPIO callbacks. It is an explicit ARM ABI adapter, not a portable C return from a void function.",
+    "1111 cases execute probe-only compiled void callbacks writing ordinary RAM; other cases model GPIO returns/clobbers. Actual Nordic GPIO, recovery delay and physical wire operation are not established.",
+    "NOP counts match (52 for zero, 208 for nonzero bits) but gateway/call overhead and private stack differ. NOP equality does not establish cycle or pulse-width identity.",
+    "Parity code is unchanged; transmit helpers are not byte-qualified. Private frames, arbitrary faults, exceptions/concurrency, timing, final boot/linking and whole-image byte identity remain unproven.",
+    "All source eligibility/import sets are unchanged. No G2 gate or source-plan selection change."
+  ]
+}

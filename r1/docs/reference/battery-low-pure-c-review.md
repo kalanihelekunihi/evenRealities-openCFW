@@ -1,0 +1,15 @@
+# Ordinary C low-battery escalation
+
+`r1/src/application/board/native_battery_low.c` now uses ordinary C for stock entry `0x3d88c`. Fixed-register variables, empty assembly constraints, direct SP observation and the compiler-frame layout requirement are removed. One canonical function retains the existing battery storage owner. This supersedes the private-frame contract in [the earlier review](battery-low-c-review.md).
+
+The function retains the 3350 mV threshold, byte-counter increment/wraparound, live logging queries, count-nine event `0x100c`, and count-ten-or-higher timestamp/voltage record followed by thread flag 1. It reloads the counter after logging and the thread handle after KV storage, preserving provider changes. The 14-bit voltage mask and record kind zero remain.
+
+The temporary record is initialized C storage. Its unused upper second-word bits no longer reflect incoming caller R3. The actual KV field setter consumes timestamp, kind and the low 14 voltage bits, preserving the stored record's own upper bits. Tests compare the full resulting 52-byte KV record, rather than requiring unused private scratch bits to match. Private frame aliases, saved-register residue and incidental return values of the public void function are excluded.
+
+REA bytes match the locked official application. Direct tests pass **7,360 stock/C comparisons** using the actual battery storage owner. Coverage includes every counter value, threshold/zero/max voltages, logging short circuits and mode changes, sample-width limits, incoming scratch patterns, and provider changes to count, voltage and thread handle. The event/log/storage/wake call sequence, resulting context/handle, and complete modeled KV record agree.
+
+Another **7,360 comparisons** run the actual C KV field setter and memory clearing routines, with full reads/writes modeled at the class API. They verify preserved unrelated bytes and upper record bits, exact timestamp/voltage storage and post-KV handle reload. Both fixtures clobber caller-saved integer and FP registers in callees and verify caller stack, callee-saved integer/FP registers, SP and interrupt masks. Five compiled defects are rejected: threshold, event count, 13-bit voltage truncation, logging gate and record kind.
+
+The open-toolchain report `build/sources-goal-r1-battery-low-pure-c/report.json` compiles all **855 units** and completes both relocatable compositions. All **844 other nongenerated objects** remain identical to the preceding status build. Imports remain **62 application / 22 bootloader**. R1 manifest validation passes. Source-plan selections remain unchanged; byte identity is not claimed.
+
+[Machine receipt](battery-low-pure-c-review.json) binds source and ignored probe evidence under `build/goal-r1-battery-low-pure-c/`. Voltage sampling, time, logging, KV backend, events and RTOS flags are modeled. Physical voltage behavior, persistence, thread wakes and event effects remain unverified, as do final application linking/startup, faults and concurrency.

@@ -1,149 +1,74 @@
-/* Full native decoder; sparse writes and dual-register child returns retained. */
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_dispatch_child_32df24\n"
-".type opencfw_em9305_dispatch_child_32df24,@function\n"
-"opencfw_em9305_dispatch_child_32df24:\n"
-"L32df24:\n"
-"enter_s [r13-r17,blink]\n"
-"L32df26:\n"
-"mov_s r15,0\n"
-"L32df28:\n"
-"stb_s r15,[r1,0]\n"
-"L32df2a:\n"
-"mov_s r16,r2\n"
-"L32df2c:\n"
-"ldb_s r2,[r2,0]\n"
-"L32df2e:\n"
-"mov_s r14,r0\n"
-"L32df30:\n"
-"lsr r3,r2,0x6\n"
-"L32df34:\n"
-"bmsk.f r0,r2,0x5\n"
-"L32df38:\n"
-"stb_s r3,[r14,0x1]\n"
-"L32df3a:\n"
-"stb_s r0,[r14,0]\n"
-"L32df3c:\n"
-"beq_s L32dfc2\n"
-"L32df3e:\n"
-"ldb r17,[r16,1]\n"
-"L32df42:\n"
-"add r13,r16,0x2\n"
-"L32df46:\n"
-"stb r17,[r1]\n"
-"L32df4a:\n"
-"ldb_s r0,[r14,0x2]\n"
-"L32df4c:\n"
-"or r0,r0,r17\n"
-"L32df50:\n"
-"bbit0.d.nt r17,0,L32df64\n"
-"L32df54:\n"
-"stb_s r0,[r14,0x2]\n"
-"L32df56:\n"
-"bl.d opencfw_em9305_controller_pack_address\n"
-"L32df5a:\n"
-"mov_s r0,r13\n"
-"L32df5c:\n"
-"add r13,r16,0x8\n"
-"L32df60:\n"
-"st_s r1,[r14,0x8]\n"
-"L32df62:\n"
-"st_s r0,[r14,0x4]\n"
-"L32df64:\n"
-"bbit0.d.nt r17,0x1,L32df74\n"
-"L32df68:\n"
-"mov_s r0,r13\n"
-"L32df6a:\n"
-"bl opencfw_em9305_controller_pack_address\n"
-"L32df6e:\n"
-"add_s r13,r13,6\n"
-"L32df70:\n"
-"st_s r1,[r14,0x10]\n"
-"L32df72:\n"
-"st_s r0,[r14,0xc]\n"
-"L32df74:\n"
-"bbit0.nt r17,0x2,L32df86\n"
-"L32df78:\n"
-"ldb.ab r0,[r13,1]\n"
-"L32df7c:\n"
-"lsr r1,r0,0x6\n"
-"L32df80:\n"
-"bmsk_s r0,r0,0x4\n"
-"L32df82:\n"
-"stb_s r1,[r14,0x15]\n"
-"L32df84:\n"
-"stb_s r0,[r14,0x14]\n"
-"L32df86:\n"
-"bbit0.nt r17,0x3,L32dfa6\n"
-"L32df8a:\n"
-"ldb_s r0,[r13,0x1]\n"
-"L32df8c:\n"
-"ldb.ab r1,[r13,2]\n"
-"L32df90:\n"
-"asl_s r0,r0,0x8\n"
-"L32df92:\n"
-"add_s r0,r0,r1\n"
-"L32df94:\n"
-"bmsk r1,r0,0xb\n"
-"L32df98:\n"
-"and r0,r0,0xf000\n"
-"L32dfa0:\n"
-"lsr_s r0,r0,0xc\n"
-"L32dfa2:\n"
-"sth_s r1,[r14,0x16]\n"
-"L32dfa4:\n"
-"stb_s r0,[r14,0x18]\n"
-"L32dfa6:\n"
-"bbit0.nt r17,0x4,L32dfae\n"
-"L32dfaa:\n"
-"st_s r13,[r14,0x20]\n"
-"L32dfac:\n"
-"add_s r13,r13,3\n"
-"L32dfae:\n"
-"bbit0.nt r17,0x5,L32dfb6\n"
-"L32dfb2:\n"
-"st_s r13,[r14,0x24]\n"
-"L32dfb4:\n"
-"add_s r13,r13,0x12\n"
-"L32dfb6:\n"
-"bbit0.nt r17,0x6,L32dfc6\n"
-"L32dfba:\n"
-"ldb.ab r0,[r13,1]\n"
-"L32dfbe:\n"
-"stb_s r0,[r14,0x19]\n"
-"L32dfc0:\n"
-"b_s L32dfc6\n"
-"L32dfc2:\n"
-"add r13,r16,0x1\n"
-"L32dfc6:\n"
-"ldb_s r0,[r14,0]\n"
-"L32dfc8:\n"
-"sub r1,r13,r16\n"
-"L32dfcc:\n"
-"extb_s r2,r1\n"
-"L32dfce:\n"
-"brhs.d.nt r0,r2,L32dfd8\n"
-"L32dfd2:\n"
-"sub_s r0,r0,r1\n"
-"L32dfd4:\n"
-"st_s r15,[r14,0x1c]\n"
-"L32dfd6:\n"
-"b_s L32dfe2\n"
-"L32dfd8:\n"
-"add_s r15,r0,0x1\n"
-"L32dfda:\n"
-"st_s r13,[r14,0x1c]\n"
-"L32dfdc:\n"
-"add_s r13,r13,r15\n"
-"L32dfde:\n"
-"sub r1,r13,r16\n"
-"L32dfe2:\n"
-"extb_s r0,r1\n"
-"L32dfe4:\n"
-"stb_s r15,[r14,0x1a]\n"
-"L32dfe6:\n"
-"leave_s [r13-r17,blink,pcl]\n"
-".size opencfw_em9305_dispatch_child_32df24,.-opencfw_em9305_dispatch_child_32df24\n"
-);
+#include <stdint.h>
+
+/* Native 0x32df24..0x32dfe8: parse an extended advertising header.
+ * in[0] gives the header length (bits 0..5) and AdvMode (bits 6..7); a
+ * non-empty header has the flags byte in[1] (copied to *flags_out and
+ * OR-ed into out[2]) followed by AdvA, TargetA, CTEInfo, ADI, AuxPtr,
+ * SyncInfo and TxPower as flagged. AdvA/TargetA go to out+4/+12, CTEInfo
+ * to out[20..21], ADI to out+22/24, AuxPtr/SyncInfo pointers to
+ * out+32/+36, TxPower to out[25]. Any remaining ACAD is recorded at
+ * out+28 with its length+1 at out[26]. Returns the bytes consumed. */
+extern uint64_t opencfw_em9305_controller_pack_address(uintptr_t address);
+
+uint32_t opencfw_em9305_dispatch_child_32df24(uintptr_t out, uintptr_t flags_out, uintptr_t in)
+{
+    volatile uint8_t *o=(volatile uint8_t *)out;
+    volatile uint8_t *cursor;
+    uint32_t extra=0u;
+    *(volatile uint8_t *)flags_out=0u;
+    uint32_t first=*(volatile uint8_t *)in;
+    o[1]=(uint8_t)(first>>6);
+    o[0]=(uint8_t)(first&63u);
+    if((first&63u)==0u){
+        cursor=(volatile uint8_t *)(in+1u);
+    }else{
+        uint32_t flags=*(volatile uint8_t *)(in+1u);
+        cursor=(volatile uint8_t *)(in+2u);
+        *(volatile uint8_t *)flags_out=(uint8_t)flags;
+        o[2]=(uint8_t)(o[2]|flags);
+        if((flags&1u)!=0u){
+            uint64_t address=opencfw_em9305_controller_pack_address((uintptr_t)cursor);
+            cursor=(volatile uint8_t *)(in+8u);
+            *(volatile uint32_t *)(out+8u)=(uint32_t)(address>>32);
+            *(volatile uint32_t *)(out+4u)=(uint32_t)address;
+        }
+        if((flags&2u)!=0u){
+            uint64_t address=opencfw_em9305_controller_pack_address((uintptr_t)cursor);
+            cursor+=6;
+            *(volatile uint32_t *)(out+16u)=(uint32_t)(address>>32);
+            *(volatile uint32_t *)(out+12u)=(uint32_t)address;
+        }
+        if((flags&4u)!=0u){
+            uint32_t cte=*cursor++;
+            o[21]=(uint8_t)(cte>>6);
+            o[20]=(uint8_t)(cte&31u);
+        }
+        if((flags&8u)!=0u){
+            uint32_t adi=((uint32_t)cursor[1]<<8)+cursor[0];
+            cursor+=2;
+            *(volatile uint16_t *)(out+22u)=(uint16_t)(adi&0xfffu);
+            o[24]=(uint8_t)((adi&0xf000u)>>12);
+        }
+        if((flags&16u)!=0u){
+            *(volatile uint32_t *)(out+32u)=(uint32_t)(uintptr_t)cursor;
+            cursor+=3;
+        }
+        if((flags&32u)!=0u){
+            *(volatile uint32_t *)(out+36u)=(uint32_t)(uintptr_t)cursor;
+            cursor+=18;
+        }
+        if((flags&64u)!=0u)o[25]=*cursor++;
+    }
+    uint32_t length=o[0];
+    uint32_t used=(uint32_t)((uintptr_t)cursor-in);
+    if(length>=(uint8_t)used){
+        extra=length-used+1u;
+        *(volatile uint32_t *)(out+28u)=(uint32_t)(uintptr_t)cursor;
+        cursor+=extra;
+        used=(uint32_t)((uintptr_t)cursor-in);
+    }else{
+        *(volatile uint32_t *)(out+28u)=0u;
+    }
+    o[26]=(uint8_t)extra;
+    return (uint8_t)used;
+}

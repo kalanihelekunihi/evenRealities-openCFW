@@ -1,123 +1,41 @@
-/* Whole native ISO header packer; field widths and ordered stores preserved. */
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_dispatch_child_31b9ac\n"
-".type opencfw_em9305_dispatch_child_31b9ac,@function\n"
-"opencfw_em9305_dispatch_child_31b9ac:\n"
-"L31b9ac:\n"
-"enter_s [r13-r14]\n"
-"L31b9ae:\n"
-"mov_s r2,r0\n"
-"L31b9b0:\n"
-"ldb_s r0,[r1,0x2]\n"
-"L31b9b2:\n"
-"ldh_s r13,[r1,0]\n"
-"L31b9b4:\n"
-"mov_s r12,0xf\n"
-"L31b9b6:\n"
-"ldb_s r14,[r1,0x3]\n"
-"L31b9b8:\n"
-"asl_s r12,r12,0x8\n"
-"L31b9ba:\n"
-"bmsk_s r0,r0,0x1\n"
-"L31b9bc:\n"
-"stb_s r13,[r2,0]\n"
-"L31b9be:\n"
-"and_s r13,r13,r12\n"
-"L31b9c0:\n"
-"asl_s r0,r0,0xc\n"
-"L31b9c2:\n"
-"asl_s r14,r14,0xe\n"
-"L31b9c4:\n"
-"add_s r0,r0,r13\n"
-"L31b9c6:\n"
-"add_s r0,r0,r14\n"
-"L31b9c8:\n"
-"lsr_s r0,r0,0x8\n"
-"L31b9ca:\n"
-"stb_s r0,[r2,0x1]\n"
-"L31b9cc:\n"
-"ldb_s r0,[r1,0x2]\n"
-"L31b9ce:\n"
-"bset_s r0,r0,0x1\n"
-"L31b9d0:\n"
-"brne.d.nt r0,0x2,L31ba10\n"
-"L31b9d4:\n"
-"mov_s r3,0\n"
-"L31b9d6:\n"
-"ldb_s r0,[r1,0x3]\n"
-"L31b9d8:\n"
-"breq_s r0,0,L31b9f4\n"
-"L31b9da:\n"
-"ld r0,[r1,0x8]\n"
-"L31b9dc:\n"
-"add r13,r2,0x8\n"
-"L31b9e0:\n"
-"mov_s r3,0x8\n"
-"L31b9e2:\n"
-"stb_s r0,[r2,0x4]\n"
-"L31b9e4:\n"
-"ld r0,[r1,0x8]\n"
-"L31b9e6:\n"
-"lsr_s r0,r0,0x8\n"
-"L31b9e8:\n"
-"stb_s r0,[r2,0x5]\n"
-"L31b9ea:\n"
-"ldh_s r0,[r1,0xa]\n"
-"L31b9ec:\n"
-"stb_s r0,[r2,0x6]\n"
-"L31b9ee:\n"
-"ldb_s r0,[r1,0xb]\n"
-"L31b9f0:\n"
-"stb_s r0,[r2,0x7]\n"
-"L31b9f2:\n"
-"b_s L31b9f8\n"
-"L31b9f4:\n"
-"add_s r13,r2,0x4\n"
-"L31b9f6:\n"
-"mov_s r3,4\n"
-"L31b9f8:\n"
-"ldb_s r0,[r1,0xc]\n"
-"L31b9fa:\n"
-"stb_s r0,[r13,0]\n"
-"L31b9fc:\n"
-"ldb_s r0,[r1,0xd]\n"
-"L31b9fe:\n"
-"stb_s r0,[r13,0x1]\n"
-"L31ba00:\n"
-"ldh_s r0,[r1,0xe]\n"
-"L31ba02:\n"
-"ldb_s r14,[r1,0x10]\n"
-"L31ba04:\n"
-"and_s r12,r12,r0\n"
-"L31ba06:\n"
-"asl_s r14,r14,0xe\n"
-"L31ba08:\n"
-"stb_s r0,[r13,0x2]\n"
-"L31ba0a:\n"
-"add_s r0,r14,r12\n"
-"L31ba0c:\n"
-"lsr_s r0,r0,0x8\n"
-"L31ba0e:\n"
-"stb_s r0,[r13,0x3]\n"
-"L31ba10:\n"
-"ldb_s r0,[r1,0x4]\n"
-"L31ba12:\n"
-"add_s r0,r0,r3\n"
-"L31ba14:\n"
-"stb_s r0,[r2,0x2]\n"
-"L31ba16:\n"
-"ldh_s r0,[r1,0x4]\n"
-"L31ba18:\n"
-"add_s r1,r0,r3\n"
-"L31ba1a:\n"
-"lsr_s r1,r1,0x8\n"
-"L31ba1c:\n"
-"add_s r0,r3,0x4\n"
-"L31ba1e:\n"
-"stb_s r1,[r2,0x3]\n"
-"L31ba20:\n"
-"leave_s [r13-r14,pcl]\n"
-".size opencfw_em9305_dispatch_child_31b9ac,.-opencfw_em9305_dispatch_child_31b9ac\n"
-);
+#include <stdint.h>
+
+/* Native 0x31b9ac..0x31ba22: pack an ISO data header. Bytes 0..1: the
+ * 12-bit handle (+0) with PB flags (+2, 2 bits) and TS flag (+3); for PB
+ * 0 or 2 (first fragment) append the optional 4-byte timestamp (+8, when
+ * TS is set), then the sequence number (+0xc) and the 14-bit SDU length
+ * (+0xe) with packet status (+0x10). Bytes 2..3: the data length (+4)
+ * plus the header bytes added. Returns the header length. */
+uint32_t opencfw_em9305_dispatch_child_31b9ac(uintptr_t out,uintptr_t in)
+{
+    volatile uint8_t *o=(volatile uint8_t *)out;
+    uint32_t flags=*(volatile uint8_t *)(in+2u);
+    uint32_t handle=*(volatile uint16_t *)in;
+    uint32_t stamp=*(volatile uint8_t *)(in+3u);
+    o[0]=(uint8_t)handle;
+    o[1]=(uint8_t)((((flags&3u)<<12)+(handle&0xf00u)+(stamp<<14))>>8);
+    uint32_t added=0u;
+    if((*(volatile uint8_t *)(in+2u)|2u)==2u) {
+        volatile uint8_t *field;
+        if(*(volatile uint8_t *)(in+3u)!=0u) {
+            o[4]=(uint8_t)*(volatile uint32_t *)(in+8u);
+            o[5]=(uint8_t)(*(volatile uint32_t *)(in+8u)>>8);
+            o[6]=(uint8_t)*(volatile uint16_t *)(in+0xau);
+            o[7]=*(volatile uint8_t *)(in+0xbu);
+            field=o+8;
+            added=8u;
+        } else {
+            field=o+4;
+            added=4u;
+        }
+        field[0]=*(volatile uint8_t *)(in+0xcu);
+        field[1]=*(volatile uint8_t *)(in+0xdu);
+        uint32_t length=*(volatile uint16_t *)(in+0xeu);
+        uint32_t status=*(volatile uint8_t *)(in+0x10u);
+        field[2]=(uint8_t)length;
+        field[3]=(uint8_t)(((status<<14)+(length&0xf00u))>>8);
+    }
+    o[2]=(uint8_t)(*(volatile uint8_t *)(in+4u)+added);
+    o[3]=(uint8_t)((*(volatile uint16_t *)(in+4u)+added)>>8);
+    return added+4u;
+}

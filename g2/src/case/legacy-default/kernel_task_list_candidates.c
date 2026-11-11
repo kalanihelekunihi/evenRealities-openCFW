@@ -23,44 +23,10 @@ void case_queue_wait(uint32_t list,uint32_t ticks)
     case_kernel_task_delay(ticks,1u);
 }
 
-/* Stock 0x0800CBA0 (case_queue_wake) */
-uint32_t case_queue_wake(uint32_t *list)
-{
-    uint32_t address=(uint32_t)(uintptr_t)list;
-    uint32_t task=words(words(address)[3])[3];
-    if(task==0u)case_kernel_invariant_failure(10u);
-    case_kernel_list_remove(task+0x18u);
-    volatile uint32_t *state=words(SCHED),*target=words(task);
-    if(state[0x30u/4u]==0u){
-        case_kernel_list_remove(task+4u);
-        uint32_t priority=target[0x2cu/4u];
-        if(state[0x10u/4u]<priority)state[0x10u/4u]=priority;
-        case_kernel_list_insert_tail(READY+priority*0x14u,task+4u);
-    }else case_kernel_list_insert_tail(PENDING,task+0x18u);
-    if(words(state[0])[0x2cu/4u]<target[0x2cu/4u]){
-        state[0x1cu/4u]=1u;
-        return 1u;
-    }
-    return 0u;
-}
+/* Dedup (0x0800cba0): case_queue_wake is an alias of case_boot_pool_wake_waiter (startup/application_boot_pool_wake_waiter_candidate.c). */
+extern uint32_t case_queue_wake(uint32_t *list);
 
-/* Stock 0x0800CB38 (case_kernel_mutex_release) */
-uint32_t case_kernel_mutex_release(uint32_t task)
-{
-    if(task==0u)return 0u;
-    volatile uint32_t *state=words(SCHED),*target=words(task);
-    if(task!=state[0] || target[0x50u/4u]==0u)
-        case_kernel_invariant_failure(11u);
-    uint32_t depth=target[0x50u/4u]-1u;
-    target[0x50u/4u]=depth;
-    if(target[0x2cu/4u]!=target[0x4cu/4u] && depth==0u){
-        case_kernel_list_remove(task+4u);
-        uint32_t priority=target[0x4cu/4u];
-        target[0x2cu/4u]=priority;
-        target[0x18u/4u]=0x38u-priority;
-        if(state[0x10u/4u]<priority)state[0x10u/4u]=priority;
-        case_kernel_list_insert_tail(READY+priority*0x14u,task+4u);
-        return 1u;
-    }
-    return 0u;
-}
+/* Dedup (0x0800cb38): case_kernel_mutex_release is an alias of case_policy_task_notify_resume (startup/application_policy_task_notify_resume_candidate.c). */
+extern uint32_t case_kernel_mutex_release(uint32_t task);
+/* Dedup (0x0800c178): case_policy_queue_wait_register (was startup/application_policy_queue_wait_helpers_candidate.c). */
+__typeof__(case_queue_wait) case_policy_queue_wait_register __attribute__((alias("case_queue_wait")));

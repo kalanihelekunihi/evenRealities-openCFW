@@ -1,0 +1,41 @@
+{
+  "schema": 1,
+  "target": "GX8002 image-A SRAM reset entry and exception bridge",
+  "change": {
+    "removed_assembly_unit": "g2/src/codec/app-callback/resident_reset_entry_candidate.S",
+    "c_unit": "g2/src/codec/app-callback/resident_reset_entry_candidate.c",
+    "manifest": "g2/src/sources.json",
+    "architecture_instructions": "PSR, CR31, stack setup, calls and bridge remain inline assembly in a naked C function."
+  },
+  "verification": {
+    "old_and_new_reset_section_bytes": 44,
+    "reset_section_sha256": "bd3c00345a0cc4fa96ea6d1d860e7e74d9af2f7fd6905665d88e8f7fd71357a3",
+    "reset_section_exact_match": true,
+    "focused_compiled_units": 351,
+    "focused_compile_failures": 0,
+    "duplicate_strong_symbols": 0,
+    "focused_source_report": "build/g2-codec-a-reset-c-final-20261110/report.json",
+    "focused_source_report_sha256": "539c81915fb3afb34d93ca70f2198994a5dd478bda5e36fe342b53fd12fc1f94",
+    "focused_link_report": "build/g2-codec-a-reset-c-final-link-20261110/link-report.json",
+    "focused_link_report_sha256": "6ac8e88fdd0d95393055a8d6df56bd57728b322aed4a9e4a7b75a1110889397f",
+    "linked_flat_binary_sha256": "6f45b29e810c381da74847fee98196fd17f57112ac492a990f5ad9b1d46d6434",
+    "linked_flat_binary_unchanged": true,
+    "linked_uart_stages_unchanged": true,
+    "linked_image_a_regions_unchanged": true,
+    "uart_source_candidate_unchanged": true
+  },
+  "full_g2_gate": {
+    "source_report": "build/g2-all-codec-a-reset-c-20261110/report.json",
+    "source_report_sha256": "d481bb92cc3738d07c21f2fcd3bb00d263b4d5b55fd700c131921b01960533f5",
+    "built_units": 4868,
+    "failed_units": 0,
+    "duplicate_strong_symbols": 0,
+    "manifest_changed_during_build": false,
+    "link_report": "build/g2-all-codec-a-reset-c-link-20261110/link-report.json",
+    "link_report_sha256": "ca8108783bbf8dd54f9b318187f638fc847cabf14dc95ede0eda1c65eac6a7df",
+    "linked_payloads": 7,
+    "external_binary_archive_used": false
+  },
+  "build_path_variance": "The Apollo-main flat binary differs between the two full build directories although its source hashes are unchanged: six generated LVGL object hashes differ, and an object contains its build-directory source path. Codec A and the other five payload binaries are unchanged. This variance is unrelated to the reset conversion and remains a reproducibility gap.",
+  "qualification": "This replaces an assembler translation unit with compilable C without changing its linked code; it does not make image A byte-identical to stock or fix the BINH A size and vector gaps."
+}

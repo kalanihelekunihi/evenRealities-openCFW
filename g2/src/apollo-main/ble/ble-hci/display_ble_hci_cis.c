@@ -23,10 +23,14 @@ uint8_t *audio_ble_hci_cis_by_handle(uint16_t handle) {
     return 0;
 }
 /* Stock 0x52AE24 (hciCoreCisOpen) */
-__attribute__((naked)) uint32_t audio_ble_hci_cis_open(uint16_t handle) {
-    __asm volatile("push {r7, lr}\n\tbl audio_ble_hci_cis_alloc\n\tpop {r7, lr}\n\tmov r0, r7\n\tbx lr");
+/* Stock returns a stale register here (its body is void upstream); no caller reads it. */
+uint32_t audio_ble_hci_cis_open(uint16_t handle) {
+    audio_ble_hci_cis_alloc(handle);
+    return 0u;
 }
 /* Stock 0x52AE2E (hciCoreCisClose) */
-__attribute__((naked)) uint32_t audio_ble_hci_cis_close(uint16_t handle) {
-    __asm volatile("push {r7, lr}\n\tbl audio_ble_hci_cis_free\n\tpop {r7, lr}\n\tmov r0, r7\n\tbx lr");
+/* Stock returns a stale register here (its body is void upstream); no caller reads it. */
+uint32_t audio_ble_hci_cis_close(uint16_t handle) {
+    audio_ble_hci_cis_free(handle);
+    return 0u;
 }

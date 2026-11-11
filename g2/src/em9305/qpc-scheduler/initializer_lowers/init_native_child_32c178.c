@@ -1,64 +1,30 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_32c178\n"
-".type opencfw_em9305_child_32c178,@function\n"
-"opencfw_em9305_child_32c178:\n"
-"L32c178:\n"
-"enter_s [r13-r15,blink]\n"
-"L32c17a:\n"
-"ld_s r3,[r0,0x2c]\n"
-"L32c17c:\n"
-"ldb r2,[r3,148]\n"
-"L32c180:\n"
-"breq.d.nt r2,0x5,L32c19c\n"
-"L32c184:\n"
-"mov_s r13,0\n"
-"L32c186:\n"
-"brne.nt r2,0x3,L32c1d0\n"
-"L32c18a:\n"
-"ldb r1,[r3,152]\n"
-"L32c18e:\n"
-"breq_s r1,0,L32c1d0\n"
-"L32c190:\n"
-"bl.d opencfw_em9305_child_3257e4\n"
-"L32c194:\n"
-"ldb r1,[r3,149]\n"
-"L32c198:\n"
-"mov_s r13,r0\n"
-"L32c19a:\n"
-"b_s L32c1d0\n"
-"L32c19c:\n"
-"ld_s r14,[r0,0x24]\n"
-"L32c19e:\n"
-"mov_s r15,0x8019fc\n"
-"L32c1a4:\n"
-"bl.d opencfw_em9305_child_32db0c\n"
-"L32c1a8:\n"
-"mov_s r0,r15\n"
-"L32c1aa:\n"
-"ldb_s r0,[r15,0x4]\n"
-"L32c1ac:\n"
-"brne.nt r0,0x22,L32c1d0\n"
-"L32c1b0:\n"
-"ldb_s r0,[r15,0]\n"
-"L32c1b2:\n"
-"brne.nt r0,0x5,L32c1d0\n"
-"L32c1b6:\n"
-"ld r0,[0x802954]\n"
-"L32c1be:\n"
-"breq_s r0,0,L32c1d0\n"
-"L32c1c0:\n"
-"add2 r14,r14,563\n"
-"L32c1c4:\n"
-"stb 0,[r14]\n"
-"L32c1c8:\n"
-"bl.d opencfw_em9305_auxiliary_signal_304394\n"
-"L32c1cc:\n"
-"stb 1,[r14,8]\n"
-"L32c1d0:\n"
-"mov_s r0,r13\n"
-"L32c1d2:\n"
-"leave_s [r13-r15,blink,pcl]\n"
-".size opencfw_em9305_child_32c178,.-opencfw_em9305_child_32c178\n"
-);
+#include <stdint.h>
+
+/* Native 0x32c178..0x32c1d4: per-state completion check on the context
+ * at +44. State 5: decode the received header into 0x8019fc and, for an
+ * LL control opcode 0x22 on LLID 5 with the auxiliary hook (0x802954)
+ * armed, clear +2252 / set +2260 of the link (+36) and signal it. State 3
+ * with +152 set: return 3257e4(record, +149). Otherwise returns 0. */
+extern uint32_t opencfw_em9305_child_32db0c(uintptr_t out, uintptr_t in);
+extern uint32_t opencfw_em9305_child_3257e4(uintptr_t record, uint32_t value);
+extern uint32_t opencfw_em9305_auxiliary_signal_304394(void);
+
+uint32_t opencfw_em9305_child_32c178(uintptr_t record, uintptr_t pdu)
+{
+    uintptr_t context=*(volatile uint32_t *)(record+44u);
+    uint32_t state=*(volatile uint8_t *)(context+148u);
+    if(state==5u){
+        uintptr_t link=*(volatile uint32_t *)(record+36u);
+        (void)opencfw_em9305_child_32db0c(0x8019fcu,pdu);
+        if(*(volatile uint8_t *)(uintptr_t)0x801a00u!=0x22u)return 0u;
+        if(*(volatile uint8_t *)(uintptr_t)0x8019fcu!=5u)return 0u;
+        if(*(volatile uint32_t *)(uintptr_t)0x802954u==0u)return 0u;
+        *(volatile uint8_t *)(link+2252u)=0u;
+        *(volatile uint8_t *)(link+2260u)=1u;
+        (void)opencfw_em9305_auxiliary_signal_304394();
+        return 0u;
+    }
+    if(state==3u&&*(volatile uint8_t *)(context+152u)!=0u)
+        return opencfw_em9305_child_3257e4(record,*(volatile uint8_t *)(context+149u));
+    return 0u;
+}

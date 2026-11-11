@@ -6,13 +6,53 @@ _Static_assert(offsetof(struct bma4_dev,intf_ptr)==4 && offsetof(struct bma4_dev
 /* Layout matches the pinned API; full native allocation extent remains gated. */
 struct bma4_dev r1_bma_context __attribute__((section(".bss.r1.bma.context"),aligned(4)));
 uint32_t r1_bma_bus_address __attribute__((section(".r1.bma.bus_address"),aligned(4)))=0x18;
-__attribute__((naked)) uint32_t r1_bma_default_read(void)
-{ __asm__ volatile("push {r4,lr}\nmov r4,r0\nldrb r0,[r3]\nuxth r3,r2\nmov r2,r1\nmov r1,r4\nbl r1_motion_bus_read_request\ncbz r0,1f\nmovs r0,#0\npop {r4,pc}\n1: mvn r0,#1\npop {r4,pc}\n"); }
-__attribute__((naked)) uint32_t r1_bma_default_write(void)
-{ __asm__ volatile("push {r4,lr}\nmov r4,r0\nldrb r0,[r3]\nuxth r3,r2\nmov r2,r1\nmov r1,r4\nbl r1_motion_bus_write_request\ncbz r0,1f\nmovs r0,#0\npop {r4,pc}\n1: mvn r0,#1\npop {r4,pc}\n"); }
-__attribute__((naked)) uint32_t r1_bma_delay_us(void)
-{ __asm__ volatile("cmp r0,#0\nbeq 1f\nldr r1,=r1_rtt_delay_cycles\nlsls r0,r0,#6\nbx r1\n1: bx lr\n"); }
-__attribute__((naked)) uint32_t r1_bma_interface_initialize(void)
+extern uint32_t r1_motion_bus_read_request(uint32_t, uint32_t, uint8_t *, uint32_t);
+extern uint32_t r1_motion_bus_write_request(uint32_t, uint32_t, const uint8_t *, uint32_t);
+/* Native adapters keep full register/error words, truncate transfer length to
+ * 16 bits and load only the address byte from the opaque interface handle. */
+uint32_t r1_bma_default_read(uint32_t reg, uint8_t *data, uint32_t length,
+                             const void *handle)
 {
- __asm__ volatile("movs r1,#0\ncbz r0,1f\nmovs r2,#1\nstrb r2,[r0,#8]\nldr r2,=r1_bma_default_read\nstr r2,[r0,#36]\nldr r2,=r1_bma_default_write\nstr r2,[r0,#40]\nldr r2,=r1_bma_bus_address\nstr r2,[r0,#4]\nldr r2,=r1_bma_delay_us\nstr r2,[r0,#44]\nmovs r2,#64\nstrh r2,[r0,#20]\nmovs r2,#3\nstrb r2,[r0,#13]\nmovs r2,#0\nstrb r2,[r0,#50]\nb 2f\n1: mov.w r1,#0xffffffff\n2: mov r0,r1\nbx lr\n");
+ uint8_t address = *(const volatile uint8_t *)handle;
+ return r1_motion_bus_read_request(address, reg, data, (uint16_t)length)
+        ? 0 : UINT32_MAX - 1;
+}
+uint32_t r1_bma_default_write(uint32_t reg, const uint8_t *data, uint32_t length,
+                              const void *handle)
+{
+ uint8_t address = *(const volatile uint8_t *)handle;
+ return r1_motion_bus_write_request(address, reg, data, (uint16_t)length)
+        ? 0 : UINT32_MAX - 1;
+}
+/* SDK callbacks use their declared C types; native ports retain their
+ * full-word API. The shared delay has one argument and ignores no hidden word. */
+extern void r1_bma_delay_us(uint32_t);
+static int8_t r1_bma_registered_read(uint8_t reg,uint8_t *data,uint32_t length,void *handle)
+{
+ return r1_bma_default_read(reg,data,length,handle)?-2:0;
+}
+static int8_t r1_bma_registered_write(uint8_t reg,const uint8_t *data,uint32_t length,void *handle)
+{
+ return r1_bma_default_write(reg,data,length,handle)?-2:0;
+}
+static void r1_bma_registered_delay(uint32_t us,void *handle)
+{
+ (void)handle;
+ r1_bma_delay_us(us);
+}
+/* Volatile field stores preserve the native registration order and widths. */
+uint32_t r1_bma_interface_initialize(struct bma4_dev *dev)
+{
+ if (dev == 0)
+  return UINT32_MAX;
+ volatile struct bma4_dev *live = dev;
+ live->intf = BMA4_I2C_INTF;
+ live->bus_read = r1_bma_registered_read;
+ live->bus_write = r1_bma_registered_write;
+ live->intf_ptr = &r1_bma_bus_address;
+ live->delay_us = r1_bma_registered_delay;
+ live->read_write_len = 64;
+ live->variant = 3;
+ live->perf_mode_status = 0;
+ return 0;
 }

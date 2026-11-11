@@ -1,0 +1,220 @@
+{
+  "cases": 1584,
+  "passed": 1584,
+  "failures": [],
+  "actual_parity_executes": true,
+  "old_live_reload_regression": {
+    "native_parity_calls": [
+      [
+        "parity",
+        129
+      ],
+      [
+        "parity",
+        1
+      ]
+    ],
+    "old_parity_calls": [
+      [
+        "parity",
+        129
+      ],
+      [
+        "parity",
+        0
+      ]
+    ],
+    "native_pointers": [
+      [
+        "r1_stacmd_read_bit_adapter_native",
+        537067472
+      ],
+      [
+        "r1_stacmd_read_bit_native",
+        537067476
+      ],
+      [
+        "r1_stacmd_read_bit_native",
+        537067476
+      ],
+      [
+        "r1_stacmd_read_bit_native",
+        537067476
+      ],
+      [
+        "r1_stacmd_read_bit_native",
+        537067476
+      ],
+      [
+        "r1_stacmd_read_bit_native",
+        537067476
+      ],
+      [
+        "r1_stacmd_read_bit_native",
+        537067476
+      ],
+      [
+        "r1_stacmd_read_bit_native",
+        537067476
+      ],
+      [
+        "r1_stacmd_read_bit_native",
+        537067476
+      ],
+      [
+        "r1_stacmd_read_bit_native",
+        537067476
+      ],
+      [
+        "r1_stacmd_read_bit_native",
+        537067476
+      ],
+      [
+        "r1_stacmd_read_bit_native",
+        537067476
+      ],
+      [
+        "r1_stacmd_read_bit_native",
+        537067476
+      ],
+      [
+        "r1_stacmd_read_bit_native",
+        537067476
+      ],
+      [
+        "r1_stacmd_read_bit_native",
+        537067476
+      ],
+      [
+        "r1_stacmd_read_bit_native",
+        537067476
+      ],
+      [
+        "r1_stacmd_read_bit_native",
+        537067476
+      ]
+    ],
+    "old_pointers": [
+      [
+        "r1_stacmd_read_bit_adapter_native",
+        537067484
+      ],
+      [
+        "r1_stacmd_read_bit_native",
+        537067484
+      ],
+      [
+        "r1_stacmd_read_bit_native",
+        537067484
+      ],
+      [
+        "r1_stacmd_read_bit_native",
+        537067484
+      ],
+      [
+        "r1_stacmd_read_bit_native",
+        537067484
+      ],
+      [
+        "r1_stacmd_read_bit_native",
+        537067484
+      ],
+      [
+        "r1_stacmd_read_bit_native",
+        537067484
+      ],
+      [
+        "r1_stacmd_read_bit_native",
+        537067484
+      ],
+      [
+        "r1_stacmd_read_bit_native",
+        537067484
+      ],
+      [
+        "r1_stacmd_read_bit_native",
+        537067484
+      ],
+      [
+        "r1_stacmd_read_bit_native",
+        537067484
+      ],
+      [
+        "r1_stacmd_read_bit_native",
+        537067484
+      ],
+      [
+        "r1_stacmd_read_bit_native",
+        537067484
+      ],
+      [
+        "r1_stacmd_read_bit_native",
+        537067484
+      ],
+      [
+        "r1_stacmd_read_bit_native",
+        537067484
+      ],
+      [
+        "r1_stacmd_read_bit_native",
+        537067484
+      ],
+      [
+        "r1_stacmd_read_bit_native",
+        537067484
+      ]
+    ],
+    "native_r2": "0x0",
+    "native_r3": "0x0",
+    "old_r2": "0xabc00002",
+    "old_r3": "0xabc00003"
+  },
+  "source_bridge_size": 18,
+  "source_body_size": 186,
+  "write_body_unchanged": true,
+  "callback_depths": [
+    [
+      [
+        -48
+      ],
+      [
+        -88
+      ]
+    ]
+  ],
+  "other_source_units_unchanged": 561,
+  "imports_unchanged": true,
+  "application_imports": 211,
+  "bootloader_imports": 34,
+  "report": "build/sources-goal-r1-stacmd-read-frame/report.json",
+  "report_sha256": "b646a172b18f5281a29b9f1a6637ea08e64a0ad8fb4fa359d64ecf48b6ca61e8",
+  "manifest_sha256": "9c5b7ae5c0e7493eb22e1fb4df9f0c928c2a9aa70530254aff89b55213bef2e2",
+  "stock_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "rea": {
+    "path": "build/goal-r1-stacmd-read-frame/REA.json",
+    "sha256": "86bd88521ffdf6f06e1e5301557cd1904c26a3f9d7bcf747eca5544ff52a8c49",
+    "procedure": "0x28bb0"
+  },
+  "source_sha256": {
+    "r1/src/application/board/native_stacmd_frames.c": "a2f51225cb8a7bc5669f61f1d9378c66b28de0318689cf730eb01218ade7c946",
+    "r1/src/application/board/native_stacmd_transmit.c": "08d500162404d60c89631c3df358e4e681a52ac1ed1bea5d6df63a473b7d768a"
+  },
+  "probe_artifacts": {
+    "build/goal-r1-stacmd-read-frame/before.c": "bb1ab30e328f21d8d2f189e7327156dfd9cafeb220183acc8ef87fef274f6baf",
+    "build/goal-r1-stacmd-read-frame/stock.s": "da99449313d5480d803143a7e9656b9017477007d5d83bbc698d820642d8e78a",
+    "build/goal-r1-stacmd-read-frame/stock.elf": "c823014faac5acac3679d09fc6646c31950d753ff5fb08e53b0e344a0704b8a4",
+    "build/goal-r1-stacmd-read-frame/REA.json": "86bd88521ffdf6f06e1e5301557cd1904c26a3f9d7bcf747eca5544ff52a8c49",
+    "build/goal-r1-stacmd-read-frame/rea-snapshot.json": "e5d6f4185a614fb014026442c33cf98d1424f0b778b8d632a9235a2ed55904a2",
+    "build/goal-r1-stacmd-read-frame/verify.py": "997f7cd21a7da1502f460b8f19e784e27ee172f982b839244649ca633f06ba22",
+    "build/goal-r1-stacmd-read-frame/results.json": "2441cded32bbed6656070c33a41e8c7f100ddd84fcb3b8098aa83984f53bea0f",
+    "build/goal-r1-stacmd-read-frame/source.elf": "72af8c7ca8f262a01fe86517319c0768c3f739b573759fff7fda0725eeeb04b6",
+    "build/goal-r1-stacmd-read-frame/old.elf": "3c2f42be95475fac8b0d3d234cec83ee1d8fa1b350c73c984a4af8229812bcba"
+  },
+  "limits": [
+    "Read parser C body is 186 bytes plus eighteen-byte native-frame bridge versus 184 native instruction bytes. No byte identity or provider qualification.",
+    "Actual parity executes. Idle, drive/write bits, lower bit readers and line release are modeled. Physical STACMD GPIO, wire and timing remain unproven.",
+    "Native ACK/data words remain at caller SP-48/SP-44 and R2/R3/R12 restore accordingly. Modeled boundary SP is SP-48 native and SP-88 C; private frames, arbitrary faults, exceptions and timing identity are unproven.",
+    "Post-store output mutation reproduces old stale parity behavior in a controlled replay; it is not evidence of an observed field failure or general concurrent-access safety.",
+    "Write-frame code/relocations are unchanged and not repaired by this read-path review. Eligibility/import sets and G2/source-plan gates remain unchanged; final source/boot/link and whole-image byte gates remain open."
+  ]
+}

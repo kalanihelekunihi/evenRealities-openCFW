@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "normal_report": "build/sources-goal-r1-crash-recovery-c/report.json",
+  "direct": {
+    "pairs": 1740,
+    "fault_pairs": 6,
+    "digest": "901333bfef8faeba525ce3a2f06ffeead5e333ed7cc52778c3dc5f3e501c149d",
+    "elf": "build/goal-r1-crash-recovery-c/source-49748.elf",
+    "elf_sha256": "a3f82664a2cdb4759dcf8af8d04cfdb56667bd7ac249b03072b20f409126367b",
+    "undefined": [],
+    "native_link_bindings": []
+  },
+  "lifecycle": {
+    "pairs": 192,
+    "recovery_calls": {
+      "0x58a24": 32,
+      "0x58980": 16
+    },
+    "digest": "6188775a9d53128a313ea754be0f9af2ef501b7f88837221d51a0d66d1d0e110",
+    "limits": [
+      "Stock lifecycle root with actual C recovery/CRC/clear subset; authorization, profile, previous-state, timestamp, initialization, logging flags and activation/subscription providers modeled.",
+      "Logging flags held at zero; no complete lifecycle C implementation, actual hardware initialization or recovery-copy path proof."
+    ]
+  },
+  "negative_controls": [
+    {
+      "control": "short-clear",
+      "rejected": true,
+      "compiled": true
+    },
+    {
+      "control": "producer-size-confusion",
+      "rejected": true,
+      "compiled": true
+    },
+    {
+      "control": "wrong-crc-extent",
+      "rejected": true,
+      "compiled": true
+    }
+  ],
+  "source_only_subset_link": true,
+  "hardware_tested": false,
+  "complete_lifecycle_C": false,
+  "sha256": {
+    "build/sources-goal-r1-crash-recovery-c/report.json": "8e056f7fb9ad32a7898f9ba17f83bdc7372c486f35941e704627247aaf22c864",
+    "r1/src/application/runtime/native_crash_recovery.c": "d3dd4ac3a9bce891db248caa491df9a2ff8ccfe08dcb8b11a7f6e071b2647b46",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-crash-recovery-c/r1/r1-application/r1__src__application__runtime__native_crash_recovery.c.o": "30df27eaee2977f2446675b11a67eaecf7f107cf0818b3bde53b45b58fc09dee",
+    "r1/src/application/runtime/native_crash_recovery.h": "11d836f9fe6761d90580b3b51973493e0e00146715a053f6d0359621b7c3f836",
+    "r1/src/sources.json": "9b1a78afa50635e2e9a49c2b8f95fa24aab25ab28a228fa3060d66c4054f5ce5",
+    "tools/build/source-plan.json": "43281e3850f6c7b83c5616e5968c4939993501810057ca3deaeea85eaae351ba",
+    "build/goal-r1-crash-recovery-c/source-49748.elf": "a3f82664a2cdb4759dcf8af8d04cfdb56667bd7ac249b03072b20f409126367b",
+    "build/goal-r1-crash-recovery-c/verify.py": "493133cf9f20f987c956bd6d4be89dcf1e2340e190bc9456e22a39555293659b",
+    "build/goal-r1-crash-recovery-c/lifecycle.py": "0aba14949e8ba78462634e21b3d83205213d3da0eaebd570ce1fc22db7c6be93",
+    "build/goal-r1-crash-recovery-c/negative.py": "526c86672e9ddddabdeb21f6d424db28c69d0a41e6c385ab600ec7b4be89d7d3",
+    "build/goal-r1-crash-recovery-c/rea-clear.json": "50f542ebd2ae95836373c8a16cd4c34de213fab0939279a4745bf76c71479ce1",
+    "build/goal-r1-crash-recovery-c/rea-accessor.json": "43db258bc71ae1752de7d2f8a8061b3d24f3d21e1656fb9e4325434709109aaa",
+    "build/goal-r1-crash-recovery-c/rea-probe.json": "0d5ad1b0a75026e75506d304860c538bfa03858be0b72c5b0a497ba45681f427",
+    "build/goal-r1-crash-recovery-c/rea-validator.json": "b79fc0f123282e09f3f29a7d22bfe9c7dbcfe0b1a76244990d30adb90cb1f2dc",
+    "build/goal-r1-crash-recovery-c/sources-check.log": "c913c2ff9e5a8f07e46e6984fbdeb3b2d2ba0ea53da78ecbfc3adec299205460"
+  }
+}

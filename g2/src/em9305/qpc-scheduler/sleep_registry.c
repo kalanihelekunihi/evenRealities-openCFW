@@ -8,11 +8,11 @@ uint32_t opencfw_em9305_sleep_register(uintptr_t callback)
 { *(volatile uint32_t *)(uintptr_t)0x805c2cu=(uint32_t)callback; return (uint32_t)callback; }
 static uint32_t latch(void)
 {
- uint32_t irq; __asm__ volatile("clri %0\n\tsync" : "=r"(irq) :: "memory");
+ uint32_t irq; irq=(uint32_t)__builtin_arc_clri(); __builtin_arc_sync();
  *(volatile uint32_t *)(uintptr_t)0xf01c00u=1;
- __asm__ volatile("nop" ::: "memory");
+ __builtin_arc_nop();
  uint32_t status=*(volatile uint32_t *)(uintptr_t)0xf01c08u;
- __asm__ volatile("seti %0" :: "r"(irq) : "memory");
+ __builtin_arc_seti((int)irq);
  return status&1u;
 }
 uint32_t opencfw_em9305_sleep_finalize(uint32_t incoming)

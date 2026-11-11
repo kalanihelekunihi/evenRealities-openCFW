@@ -1,0 +1,499 @@
+{
+  "schema_version": 1,
+  "report": "build/sources-goal-r1-lis-c/report.json",
+  "report_sha256": "b8c06b7c53b86cd76e6574ae6c65e26e4b3f25bd2300812e9a7cf9c0130aaec0",
+  "manifest_sha256": "1bfc7e1953e53e71f43dd1b68507571528b0733cbdade6203e5210d14ceb5389",
+  "stock_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "inline_assembly_functions_replaced": 2,
+  "sources": [
+    {
+      "source": "r1/src/application/runtime/native_lis_fifo.c",
+      "source_sha256": "6825c202ca4ea180c3d5de59b5a35f0eddf97239cb7ab362635366ae0040c675",
+      "object_sha256": "6c566e256b7270303fc4edbed586bf4a9311ceda443d07a4203537f04eaed49c",
+      "link": true
+    },
+    {
+      "source": "r1/src/application/runtime/native_lis_registers.c",
+      "source_sha256": "630862b4a317e123795a77ff2b8a8b92a02877fa0f7c62e9fd89d658790a0a78",
+      "object_sha256": "ba47d55bba527d5eaa38d62e5669562242223209ec0c9ca8dd42b18a3ce5abfc",
+      "link": true
+    }
+  ],
+  "execution": {
+    "cases": 1023,
+    "passed": 1023,
+    "failures": [],
+    "counts": {
+      "read": 18,
+      "write": 18,
+      "level": 96,
+      "burst": 27,
+      "fifo": 864
+    }
+  },
+  "order_and_fault_observations": [
+    {
+      "name": "read",
+      "mode": "normal",
+      "observations": {
+        "events": [
+          [
+            "context-read",
+            12,
+            4
+          ],
+          [
+            "context-read",
+            4,
+            4
+          ],
+          [
+            "callback",
+            17826048,
+            [
+              305419896,
+              47,
+              536875008,
+              1
+            ],
+            537067520
+          ]
+        ],
+        "error": null,
+        "result": 4294967289
+      }
+    },
+    {
+      "name": "read",
+      "mode": "mutate",
+      "observations": {
+        "events": [
+          [
+            "context-read",
+            12,
+            4
+          ],
+          [
+            "context-read",
+            4,
+            4
+          ],
+          [
+            "callback",
+            17826304,
+            [
+              305419896,
+              47,
+              536875008,
+              1
+            ],
+            537067520
+          ]
+        ],
+        "error": null,
+        "result": 4294967289
+      }
+    },
+    {
+      "name": "read",
+      "mode": "null-context",
+      "observations": {
+        "events": [
+          [
+            "fault",
+            19,
+            12,
+            4
+          ]
+        ],
+        "error": 6
+      }
+    },
+    {
+      "name": "read",
+      "mode": "truncated-context",
+      "observations": {
+        "events": [
+          [
+            "fault",
+            19,
+            537133060,
+            4
+          ]
+        ],
+        "error": 6
+      }
+    },
+    {
+      "name": "read",
+      "mode": "bad-callback",
+      "observations": {
+        "events": [
+          [
+            "context-read",
+            12,
+            4
+          ],
+          [
+            "context-read",
+            4,
+            4
+          ],
+          [
+            "fault",
+            21,
+            805306368,
+            2
+          ]
+        ],
+        "error": 8
+      }
+    },
+    {
+      "name": "write",
+      "mode": "normal",
+      "observations": {
+        "events": [
+          [
+            "context-read",
+            12,
+            4
+          ],
+          [
+            "context-read",
+            0,
+            4
+          ],
+          [
+            "callback",
+            17826048,
+            [
+              305419896,
+              47,
+              536875008,
+              1
+            ],
+            537067520
+          ]
+        ],
+        "error": null,
+        "result": 4294967289
+      }
+    },
+    {
+      "name": "write",
+      "mode": "mutate",
+      "observations": {
+        "events": [
+          [
+            "context-read",
+            12,
+            4
+          ],
+          [
+            "context-read",
+            0,
+            4
+          ],
+          [
+            "callback",
+            17826304,
+            [
+              305419896,
+              47,
+              536875008,
+              1
+            ],
+            537067520
+          ]
+        ],
+        "error": null,
+        "result": 4294967289
+      }
+    },
+    {
+      "name": "write",
+      "mode": "null-context",
+      "observations": {
+        "events": [
+          [
+            "fault",
+            19,
+            12,
+            4
+          ]
+        ],
+        "error": 6
+      }
+    },
+    {
+      "name": "write",
+      "mode": "truncated-context",
+      "observations": {
+        "events": [
+          [
+            "fault",
+            19,
+            537133060,
+            4
+          ]
+        ],
+        "error": 6
+      }
+    },
+    {
+      "name": "write",
+      "mode": "bad-callback",
+      "observations": {
+        "events": [
+          [
+            "context-read",
+            12,
+            4
+          ],
+          [
+            "context-read",
+            0,
+            4
+          ],
+          [
+            "fault",
+            21,
+            805306368,
+            2
+          ]
+        ],
+        "error": 8
+      }
+    }
+  ],
+  "bodies": [
+    {
+      "function": "lis2dw12_read_reg",
+      "stock_entry": "0x757c4",
+      "stock_bytes": "30b4c46845682046ac4630bc6047",
+      "source_bytes": "80b5d0f80cc0d0f804e06046f446bde880406047",
+      "stock_size": 14,
+      "source_size": 20,
+      "byte_identical": false
+    },
+    {
+      "function": "lis2dw12_write_reg",
+      "stock_entry": "0x759e6",
+      "stock_bytes": "30b4c46805682046ac4630bc6047",
+      "source_bytes": "80b5d0f80cc0d0f800e06046f446bde880406047",
+      "stock_size": 14,
+      "source_size": 20,
+      "byte_identical": false
+    }
+  ],
+  "rea": [
+    {
+      "name": "read_transport",
+      "evidence_id": "ev_d771eafbe546c1a09ee72b21df50a82c7289d97f114f912cdb2af2acbc5074cf",
+      "analysis_profile": {
+        "provider": {
+          "id": "ghidra",
+          "name": "Ghidra",
+          "version": "12.1.4"
+        },
+        "parameters": {
+          "target_kind": "executable",
+          "target_format": "elf",
+          "architecture": "arm",
+          "available_architectures": [
+            "arm"
+          ],
+          "import_mode": "ephemeral-source-immutable",
+          "annotation_policy": "atomic-function-entry-metadata-v1",
+          "load_image_observations": "source-mappings-entry-context-v2",
+          "function_body_evidence": "complete-inclusive-ranges-v1",
+          "function_references": "complete-body-and-entry-reference-manager-v2",
+          "call_relationship_coverage": "function-body-call-coverage-v5",
+          "function_dossier_coverage": "observed-facets-and-call-relationships-v1",
+          "string_inventory_evidence": "defined-data-coverage-v1",
+          "location_resolution": "explicit-address-exact-entry-symbol-first-v3",
+          "procedure_file_offset_resolution": "address-first-unique-target-source-mapping-v2",
+          "instruction_flow_evidence": "decoded-return-pcode-v1",
+          "instruction_references": "exact-address-incoming-v1",
+          "function_boundary_observations": "ghidra-function-boundary-limitations-v3",
+          "no_return_repair": "returning-imports-decoded-return-v2",
+          "process_launch": "inspected-jvm-launch-support-v1",
+          "jump_table_evidence": "typed-case-default-blocks-v1",
+          "decompiler_jump_loads": true,
+          "loader": "auto-from-header",
+          "language_id": "auto-from-header",
+          "compiler_spec_id": "auto-default",
+          "analyzer_preset": "ghidra-default"
+        },
+        "digest": "7e46711069eea041af1b9b99e34115c13332795e5cda76e584a722f529ec70de"
+      },
+      "limitations": [
+        "The session serves operations only after Ghidra reports default auto-analysis complete; incomplete analysis does not expose partial results.",
+        "The imported Program and temporary project are ephemeral and deleted on close. Annotation operations edit session database metadata; original executable bytes are never written.",
+        "Cancelling an active Ghidra request terminates its ephemeral database and discards session annotations. The selected target remains open; the next provider query imports the original artifact again.",
+        "Default-space addresses use lowercase 0x-prefixed hexadecimal; other address spaces use <percent-encoded-space>:0x<hex>.",
+        "References cover the complete Ghidra function-body AddressSet and exact entry. Dossier incoming edges omit sources owned by that function; procedure_references also retains those internal edges.",
+        "The dossier combines Ghidra FunctionManager, Listing, ReferenceManager, BasicBlockModel, and decompiler observations; provider-specific pseudocode and assembly are not cross-provider text invariants.",
+        "Resolved reference metadata identifies computed, indirect, external, call, jump, and data edges; unresolved targetless flows remain unknown, and function classifications distinguish thunks and externals.",
+        "Synthetic Ghidra entry-point references without actionable memory sources are omitted.",
+        "The Java bridge serializes one function request per Program and lets each decompilation run until it completes or the caller cancels.",
+        "macOS sessions require a matching executable Ghidra native decompiler; REA checks for it but does not build native components or change Gatekeeper quarantine state."
+      ],
+      "procedure": {
+        "address": "0x757c4",
+        "name": "read_transport",
+        "classification": {
+          "external": false,
+          "thunk": false,
+          "thunk_target": null,
+          "provenance": "ghidra-function-manager"
+        },
+        "body": {
+          "available": true,
+          "provenance": "ghidra-function-body-address-set",
+          "ranges": [
+            {
+              "start": "0x757c4",
+              "end": "0x757d1"
+            }
+          ],
+          "total_bytes": 14,
+          "span_bytes": 14,
+          "non_contiguous": false,
+          "contains_entry": true
+        },
+        "signature": "undefined read_transport()",
+        "locals": []
+      },
+      "assembly": [
+        "0x757c4: push {r4,r5}",
+        "0x757c6: ldr r4, [r0,#0xc]",
+        "0x757c8: ldr r5, [r0,#0x4]",
+        "0x757ca: mov r0, r4",
+        "0x757cc: mov r12, r5",
+        "0x757ce: pop {r4,r5}",
+        "0x757d0: bx r12"
+      ],
+      "pseudocode": "\nvoid read_transport(int param_1)\n\n{\n                    /* WARNING: Could not recover jumptable at 0x000757d0. Too many branches */\n                    /* WARNING: Treating indirect jump as call */\n  (**(code **)(param_1 + 4))(*(undefined4 *)(param_1 + 0xc));\n  return;\n}\n\n"
+    },
+    {
+      "name": "write_transport",
+      "evidence_id": "ev_2830dbd00e6f4b677c3eee3cd414945236eaf05f6d60c414cafd9a78862c97bf",
+      "analysis_profile": {
+        "provider": {
+          "id": "ghidra",
+          "name": "Ghidra",
+          "version": "12.1.4"
+        },
+        "parameters": {
+          "target_kind": "executable",
+          "target_format": "elf",
+          "architecture": "arm",
+          "available_architectures": [
+            "arm"
+          ],
+          "import_mode": "ephemeral-source-immutable",
+          "annotation_policy": "atomic-function-entry-metadata-v1",
+          "load_image_observations": "source-mappings-entry-context-v2",
+          "function_body_evidence": "complete-inclusive-ranges-v1",
+          "function_references": "complete-body-and-entry-reference-manager-v2",
+          "call_relationship_coverage": "function-body-call-coverage-v5",
+          "function_dossier_coverage": "observed-facets-and-call-relationships-v1",
+          "string_inventory_evidence": "defined-data-coverage-v1",
+          "location_resolution": "explicit-address-exact-entry-symbol-first-v3",
+          "procedure_file_offset_resolution": "address-first-unique-target-source-mapping-v2",
+          "instruction_flow_evidence": "decoded-return-pcode-v1",
+          "instruction_references": "exact-address-incoming-v1",
+          "function_boundary_observations": "ghidra-function-boundary-limitations-v3",
+          "no_return_repair": "returning-imports-decoded-return-v2",
+          "process_launch": "inspected-jvm-launch-support-v1",
+          "jump_table_evidence": "typed-case-default-blocks-v1",
+          "decompiler_jump_loads": true,
+          "loader": "auto-from-header",
+          "language_id": "auto-from-header",
+          "compiler_spec_id": "auto-default",
+          "analyzer_preset": "ghidra-default"
+        },
+        "digest": "7e46711069eea041af1b9b99e34115c13332795e5cda76e584a722f529ec70de"
+      },
+      "limitations": [
+        "The session serves operations only after Ghidra reports default auto-analysis complete; incomplete analysis does not expose partial results.",
+        "The imported Program and temporary project are ephemeral and deleted on close. Annotation operations edit session database metadata; original executable bytes are never written.",
+        "Cancelling an active Ghidra request terminates its ephemeral database and discards session annotations. The selected target remains open; the next provider query imports the original artifact again.",
+        "Default-space addresses use lowercase 0x-prefixed hexadecimal; other address spaces use <percent-encoded-space>:0x<hex>.",
+        "References cover the complete Ghidra function-body AddressSet and exact entry. Dossier incoming edges omit sources owned by that function; procedure_references also retains those internal edges.",
+        "The dossier combines Ghidra FunctionManager, Listing, ReferenceManager, BasicBlockModel, and decompiler observations; provider-specific pseudocode and assembly are not cross-provider text invariants.",
+        "Resolved reference metadata identifies computed, indirect, external, call, jump, and data edges; unresolved targetless flows remain unknown, and function classifications distinguish thunks and externals.",
+        "Synthetic Ghidra entry-point references without actionable memory sources are omitted.",
+        "The Java bridge serializes one function request per Program and lets each decompilation run until it completes or the caller cancels.",
+        "macOS sessions require a matching executable Ghidra native decompiler; REA checks for it but does not build native components or change Gatekeeper quarantine state."
+      ],
+      "procedure": {
+        "address": "0x759e6",
+        "name": "write_transport",
+        "classification": {
+          "external": false,
+          "thunk": false,
+          "thunk_target": null,
+          "provenance": "ghidra-function-manager"
+        },
+        "body": {
+          "available": true,
+          "provenance": "ghidra-function-body-address-set",
+          "ranges": [
+            {
+              "start": "0x759e6",
+              "end": "0x759f3"
+            }
+          ],
+          "total_bytes": 14,
+          "span_bytes": 14,
+          "non_contiguous": false,
+          "contains_entry": true
+        },
+        "signature": "undefined write_transport()",
+        "locals": []
+      },
+      "assembly": [
+        "0x759e6: push {r4,r5}",
+        "0x759e8: ldr r4, [r0,#0xc]",
+        "0x759ea: ldr r5, [r0,#0x0]",
+        "0x759ec: mov r0, r4",
+        "0x759ee: mov r12, r5",
+        "0x759f0: pop {r4,r5}",
+        "0x759f2: bx r12"
+      ],
+      "pseudocode": "\nvoid write_transport(undefined4 *param_1)\n\n{\n                    /* WARNING: Could not recover jumptable at 0x000759f2. Too many branches */\n                    /* WARNING: Treating indirect jump as call */\n  (*(code *)*param_1)(param_1[3]);\n  return;\n}\n\n"
+    }
+  ],
+  "composition": {
+    "compiled_units": 561,
+    "application_unresolved": 241,
+    "bootloader_unresolved": 34,
+    "undefined_sets_unchanged": true
+  },
+  "hashes": {
+    "build/goal-r1-lis-c/compare.py": "03ab5a68a4422f74de4165ef3109af1e3e9830a84fb18d7b7c10b5978eca0898",
+    "build/goal-r1-lis-c/order_faults.py": "9fb4d63f6ff1cdbfb9936cc151e48d5bcf39b0781111a088a0746923a4dee066",
+    "build/goal-r1-lis-c/comparison.json": "0c29469830f481f6740ee371c3466759d28a5d31191fdbd75c32a4888a541cbe",
+    "build/goal-r1-lis-c/order-fault-results.json": "898f210a916a727c9cde3e974a529e92bfeec479cc01df1209f94ecccbebc0e3",
+    "build/goal-r1-lis-c/source.elf": "13fd06206f2c0342a55722a376070a099349b83ce17ee93e718955312a991e43",
+    "build/goal-r1-lis-c/rea-snapshot.json": "1f76c622a485511ff9339e34c5a6004d787b98c3792c34cf92135e5c905984c2"
+  },
+  "limitations": [
+    "Current Clang functions are 20 bytes versus stock 14; not byte-identical or source-qualified.",
+    "Transient stack saves r7/LR versus stock r4/r5. Private spill contents and fault-time register contents are not preserved or claimed equivalent.",
+    "Fault tests compare access kind/address/size, not a complete architectural fault snapshot.",
+    "Controlled callback tests are not physical accelerometer or I2C validation.",
+    "Out-of-type-range incoming-register probes describe this compiled object only, not a portable C calling contract.",
+    "No complete source build, final firmware link, timing identity or accepted pseudocode gate claim."
+  ],
+  "subsequent_clang_matrix": {
+    "path": "build/goal-r1-lis-c/compiler-matrix.json",
+    "sha256": "e96572488fcecd5eaddec8f033cdb18e63fd7bd381cb25e90cce08547138bf76",
+    "variants": 9,
+    "instruction_identical_variants": 0,
+    "flags_adopted": false
+  }
+}

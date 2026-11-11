@@ -1,0 +1,46 @@
+{
+  "status": "ABI_candidate_not_integrated",
+  "replay": {
+    "pairs": 320,
+    "independent_call_oracle_cases": 320,
+    "provider_depths": {
+      "acc": {
+        "stock": [
+          16,
+          16
+        ],
+        "C": [
+          24,
+          24
+        ]
+      },
+      "ppg": {
+        "stock": [
+          16,
+          0
+        ],
+        "C": [
+          24,
+          0
+        ]
+      }
+    },
+    "digest": "a6fdcaddb094b94cb04e8eb135935ea698e4148ad27b116b1dcaf0d8277a3d02",
+    "limits": [
+      "Interpolation/filter modeled; invalid pointer tests prove dispatch only, not dereference behavior",
+      "ABI caller-clobbered registers excluded; no physical device or byte identity proof"
+    ]
+  },
+  "production_changes": false,
+  "existing_generic_owner": "r1/src/vendor/gomore_primitives/gomore_primitives.c",
+  "consolidation_required": true,
+  "artifacts": {
+    "build/goal-r1-gomore-kernels-c/candidate.c": "b701bcb7053398738cae88900aecc1fb8ddca470e55197e7407d1fdc6702424e",
+    "build/goal-r1-gomore-kernels-c/candidate.o": "727371a1dfa0271a85808461ee20bc9440d29b8344be49bbbbceaf33e23d8766",
+    "build/goal-r1-gomore-kernels-c/verify.py": "b7ffa261e51e3bc786651745d53ca8377d9ed28ed96df1f8c553ca12d9bc3e1b",
+    "build/goal-r1-gomore-kernels-c/results.json": "9fa7c1b4ba66431d71454cb407773ce73a7b04c2ff340d2c40553d880f185a06",
+    "build/goal-r1-gomore-kernels-c/rea.json": "58a7676ce3cd05325250bd1ba34712b35b9e92cf086535c3c6d66e2ecc5bbfa2",
+    "build/goal-r1-gomore-kernels-c/providers-rea.json": "27d130ce219a67a4b6e588fced791ca94d4e5058365c3789775d5cdd243530f0",
+    "build/goal-r1-gomore-kernels-c/compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}

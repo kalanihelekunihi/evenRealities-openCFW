@@ -5,7 +5,7 @@ extern uint32_t audio_uart_lv_image_decoder_open_488f9c(
     void *,const void *,const void *,uint32_t);
 extern void audio_uart_lv_image_decoder_close_48908c(void *);
 extern int32_t audio_uart_ambiq_color_format_src_4b05a4(uint32_t);
-extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,
+extern void lv_log_add(uint32_t,const char *,uint32_t,
                                 const char *,const char *,...);
 
 static const char decode_path[] =
@@ -26,7 +26,7 @@ uint32_t audio_uart_ambiq_decode_image_4b0f50(
     const uint32_t opened=audio_uart_lv_image_decoder_open_488f9c(
         decode_result,image,options,mask);
     if ((opened&0xffu)!=1u) {
-        audio_uart_lvgl_log(3u,decode_path,0x2c4u,decode_name,
+        lv_log_add(3u,decode_path,0x2c4u,decode_name,
                             decode_open_error);
         return opened&0xffu;
     }
@@ -34,7 +34,7 @@ uint32_t audio_uart_ambiq_decode_image_4b0f50(
         ((const uint8_t *)decode_result+0x2cu);
     if (header==0u) {
         audio_uart_lv_image_decoder_close_48908c(decode_result);
-        audio_uart_lvgl_log(2u,decode_path,0x2cbu,decode_name,
+        lv_log_add(2u,decode_path,0x2cbu,decode_name,
                             decode_ram_error);
         return 0u;
     }
@@ -42,12 +42,12 @@ uint32_t audio_uart_ambiq_decode_image_4b0f50(
         (*(const uint32_t *)(uintptr_t)header>>8)&0xffu;
     if (audio_uart_ambiq_color_format_src_4b05a4(color_format)==-1) {
         audio_uart_lv_image_decoder_close_48908c(decode_result);
-        audio_uart_lvgl_log(2u,decode_path,0x2d5u,decode_name,
+        lv_log_add(2u,decode_path,0x2d5u,decode_name,
                             decode_format_error);
         return 0u;
     }
     if (((uint8_t)mask)!=0u && color_format!=14u && color_format!=6u) {
-        audio_uart_lvgl_log(2u,decode_path,0x2dbu,decode_name,
+        lv_log_add(2u,decode_path,0x2dbu,decode_name,
                             decode_mask_error);
         audio_uart_lv_image_decoder_close_48908c(decode_result);
         return 0u;

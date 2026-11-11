@@ -49,7 +49,22 @@ def match(function,stock,entries,runtime_base,anchored_entry=None):
     entry=candidates[0];bindings={};receipts=[]
     for relocation in records:
         offset=relocation['offset'];symbol=relocation['symbol'];kind=relocation['type']
-        if kind in (10,30):
+        if relocation.get('weak_undefined'):
+            if kind in (10,30):
+                # An unresolved weak Thumb call can relax to a branch over a
+                # NOP. Require that exact native form and the standard -4
+                # source addend; do not turn a zero-valued --defsym into code.
+                try:
+                    if branch_displacement(data,offset)!=-4:return None
+                except (ValueError,struct.error):return None
+                if stock[entry+offset:entry+offset+4]!=b'\x00\xe0\x00\xbf':return None
+                role='undefined_weak_function'
+            else:
+                if not any(p['kind']=='data' and p['start']<=offset and offset+4<=p['end'] for p in function['content_ranges']):return None
+                if struct.unpack_from('<I',stock,entry+offset)[0]!=0 or struct.unpack_from('<I',data,offset)[0]!=0:return None
+                role='undefined_weak_literal'
+            address=None
+        elif kind in (10,30):
             # Plain source calls use the ELF Thumb branch addend -4. More
             # complex branch expressions require a separate qualified recipe.
             try:

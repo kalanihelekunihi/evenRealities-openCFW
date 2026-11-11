@@ -1,79 +1,30 @@
-/* Complete native31ce50..31ceb3 instruction body; genuine child imports. */
-__asm__(
-    ".text\n"
-    ".balign 4\n"
-    ".global opencfw_em9305_callback_31ce50\n"
-    ".type opencfw_em9305_callback_31ce50,@function\n"
-    "opencfw_em9305_callback_31ce50:\n"
-    "L31ce50:\n"
-    "enter_s [r13-r16,blink]\n"
-    "L31ce52:\n"
-    "mov_s r13,r0\n"
-    "L31ce54:\n"
-    "ldb_s r0,[r0,0x2]\n"
-    "L31ce56:\n"
-    "mov_s r1,0x805c7c\n"
-    "L31ce5c:\n"
-    "st_s r13,[r1,0]\n"
-    "L31ce5e:\n"
-    "cmp r0,255\n"
-    "L31ce62:\n"
-    "beq_s L31ce6a\n"
-    "L31ce64:\n"
-    "ldb_s r0,[r13,0x3]\n"
-    "L31ce66:\n"
-    "brne.nt r0,0x3,L31cea4\n"
-    "L31ce6a:\n"
-    "mov_s r14,0x805cac\n"
-    "L31ce70:\n"
-    "ld r2,[r14,0]\n"
-    "L31ce72:\n"
-    "mov_s r16,0\n"
-    "L31ce74:\n"
-    "mov r15,0x805c3c\n"
-    "L31ce7c:\n"
-    "ldb r0,[r2,57]\n"
-    "L31ce80:\n"
-    "brhs.d.nt r16,r0,L31ceb2\n"
-    "L31ce84:\n"
-    "asl r0,r16,0x9\n"
-    "L31ce88:\n"
-    "ld r1,[r15,0]\n"
-    "L31ce8a:\n"
-    "add_s r0,r0,r1\n"
-    "L31ce8c:\n"
-    "ldb_s r1,[r0,0]\n"
-    "L31ce8e:\n"
-    "breq_s r1,0,L31cea0\n"
-    "L31ce90:\n"
-    "ldb_s r1,[r0,0x3]\n"
-    "L31ce92:\n"
-    "brne_s r1,0,L31cea0\n"
-    "L31ce94:\n"
-    "ldb_s r2,[r0,0x2]\n"
-    "L31ce96:\n"
-    "ldb_s r1,[r13,0x3]\n"
-    "L31ce98:\n"
-    "bl.d opencfw_em9305_callback_child_31d0fc\n"
-    "L31ce9c:\n"
-    "sth_s r2,[r13,0]\n"
-    "L31ce9e:\n"
-    "ld r2,[r14,0]\n"
-    "L31cea0:\n"
-    "add_s r16,r16,1\n"
-    "L31cea2:\n"
-    "b_s L31ce7c\n"
-    "L31cea4:\n"
-    "bl.d opencfw_em9305_ll_record_find_31aa98\n"
-    "L31cea8:\n"
-    "ldb_s r0,[r13,0]\n"
-    "L31ceaa:\n"
-    "breq_s r0,0,L31ceb2\n"
-    "L31ceac:\n"
-    "bl.d opencfw_em9305_callback_child_31d0fc\n"
-    "L31ceb0:\n"
-    "ldb_s r1,[r13,0x3]\n"
-    "L31ceb2:\n"
-    "leave_s [r13-r16,blink,pcl]\n"
-    ".size opencfw_em9305_callback_31ce50,.-opencfw_em9305_callback_31ce50\n"
-);
+#include <stdint.h>
+
+/* Native 0x31ce50..0x31ceb4: deliver an LL event message (remembered in
+ * 0x805c7c). Broadcast messages (record id 255 or event 3) go to every
+ * active idle entry (512-byte stride from *0x805c3c, count at config +57),
+ * stamping the message with the entry's handle byte +2; others go to the
+ * record found by id. */
+extern uintptr_t opencfw_em9305_ll_record_find_31aa98(uint32_t);
+extern uint32_t opencfw_em9305_callback_child_31d0fc(uintptr_t object,uint32_t event);
+
+void opencfw_em9305_callback_31ce50(uintptr_t message)
+{
+    *(volatile uint32_t *)(uintptr_t)0x805c7cu = (uint32_t)message;
+    if (*(volatile uint8_t *)(message + 2u) != 255u && *(volatile uint8_t *)(message + 3u) != 3u) {
+        uintptr_t record = opencfw_em9305_ll_record_find_31aa98(*(volatile uint8_t *)message);
+        if (record != 0u)
+            (void)opencfw_em9305_callback_child_31d0fc(record, *(volatile uint8_t *)(message + 3u));
+        return;
+    }
+    for (uint32_t index = 0u;; ++index) {
+        uintptr_t config = *(volatile uint32_t *)(uintptr_t)0x805cacu;
+        if (index >= *(volatile uint8_t *)(config + 57u)) return;
+        uintptr_t entry = index * 512u + *(volatile uint32_t *)(uintptr_t)0x805c3cu;
+        if (*(volatile uint8_t *)entry == 0u || *(volatile uint8_t *)(entry + 3u) != 0u) continue;
+        uint32_t handle = *(volatile uint8_t *)(entry + 2u);
+        uint32_t event = *(volatile uint8_t *)(message + 3u);
+        *(volatile uint16_t *)message = (uint16_t)handle;
+        (void)opencfw_em9305_callback_child_31d0fc(entry, event);
+    }
+}

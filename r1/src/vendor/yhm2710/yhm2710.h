@@ -155,7 +155,8 @@ bool yhm2710_set_shared_power_enabled(yhm2710_device *device,
 bool yhm2710_set_high_temperature(yhm2710_device *device);      /* 0x35684 */
 bool yhm2710_set_system_track(yhm2710_device *device);          /* 0x355BC */
 bool yhm2710_clear_system_track(yhm2710_device *device);        /* 0x3543C */
-bool yhm2710_set_charging_event(yhm2710_device *device);        /* 0x350E0/0x50614 */
+/* 0x350E0/0x50614 uses the native fixed-resource status ABI, supplied by
+ * r1_yhm_charging_event_set_native in application/runtime/native_nfc_charge_dispatch.c. */
 void yhm2710_delay_209(void);                                  /* 0x5C0FA */
 void yhm2710_dispatch_completion(yhm2710_device *device,
                                  uint32_t value);               /* 0x507AC */

@@ -1,0 +1,138 @@
+{
+  "schema_version": 1,
+  "scope": "Three latest-sample entry wrappers in ordinary C",
+  "report": "build/sources-goal-r1-latest-entry-pure-c/report.json",
+  "comparison_report": "build/sources-goal-r1-hrv-store-reviewed-c/report.json",
+  "stock_ranges": [
+    {
+      "entry": "0x8d6ac",
+      "size": 42,
+      "symbol": "r1_hr_latest_sample"
+    },
+    {
+      "entry": "0x8d858",
+      "size": 44,
+      "symbol": "r1_hrv_latest_sample"
+    },
+    {
+      "entry": "0x8e524",
+      "size": 42,
+      "symbol": "r1_spo2_latest_sample"
+    }
+  ],
+  "audit": {
+    "compiled_units": 862,
+    "unchanged_prior_nongenerated_objects": 851,
+    "changed_prior_nongenerated_objects": [
+      "r1/src/application/runtime/native_health_latest_samples.c"
+    ],
+    "application_imports": 63,
+    "bootloader_imports": 22,
+    "manifest_unchanged": true,
+    "source_plan_and_cache_layout_unchanged": true,
+    "new_state_definitions": 0,
+    "shared_latest_body_source_unchanged": true,
+    "whole_latest_sample_unit_has_no_inline_assembly": true,
+    "final_object_equals_tested_object": true
+  },
+  "direct": {
+    "actual_packed_provider_comparisons": 300,
+    "controlled_partial_provider_comparisons": 20520,
+    "native_instruction_bytes_executed": [
+      42,
+      44,
+      42
+    ],
+    "scalar_return_public_output_cache_and_memory_accesses_match": true,
+    "initialized_eight_byte_private_scratch_and_partial_outputs": true,
+    "caller_scratch_private_frames_APSR_and_physical_behavior_excluded": true
+  },
+  "writer_to_public_latest_reset_pipeline": {
+    "activity_reset_comparisons": 12,
+    "stock_C_writer_accessor_latest_reset_comparisons": 864,
+    "linked_normal_objects_and_production_layout_used": true,
+    "shared_prefix_and_timestamp_addresses_match": true,
+    "writer_and_latest_and_reset_execute": true,
+    "hour_average_and_disabled_logging_modeled": true,
+    "private_frames_caller_scratch_APSR_and_physical_behavior_excluded": true
+  },
+  "compiled_defects_rejected": [
+    {
+      "defect": "scratch",
+      "rejected": true
+    },
+    {
+      "defect": "spo2-clear",
+      "rejected": true
+    },
+    {
+      "defect": "timestamp",
+      "rejected": true
+    },
+    {
+      "defect": "hrv-offset",
+      "rejected": true
+    },
+    {
+      "defect": "nonzero",
+      "rejected": true
+    },
+    {
+      "defect": "scalar-return",
+      "rejected": true
+    },
+    {
+      "defect": "selector",
+      "rejected": true
+    }
+  ],
+  "contract": [
+    "Replace naked saved-register wrappers with C-owned two-word provider scratch. Keep the existing shared C body unchanged.",
+    "Preserve null output, per-kind output clear widths/padding, initialized scratch8, partial-provider behavior, unaligned timestamp extraction, public writes and full32-bit scalar return.",
+    "Three identified direct call sites in get dispatch consume scalar/output data; functional paths do not require latest-entry-restored R2/R3 values. Preserve standard C callee-saved state."
+  ],
+  "limits": [
+    "REA128 bytes match locked raw, all128 instruction bytes execute.300 actual packed-provider and20520 controlled-provider comparisons cover null, unaligned outputs, cache aliases, caller-owned stack outputs, partial0..8 writes, arbitrary result bits and output mutations.",
+    "Private frame addresses and caller-scratch R2/R3 restoration are excluded from the new C API. Indirect or nonstandard external ABI consumers are not exhaustively proven. Outputs into a callee private stack frame are outside the supported C interface.",
+    "Observed public cache/output memory widths/order/values, scalar return, saved integer/FP registers, SP, masks, FPSCR and caller guards checked. API stubs execute BX LR. APSR and other caller scratch excluded.",
+    "864 writer/public-latest/reset and12 activity-reset comparisons execute actual C writers, packed providers, new entries, cache/reset owners and memory clear. Hour/average and disabled logging are modeled.",
+    "No manifest, shared body or persistent state changes. Final application linking, physical scheduling/concurrency, SRAM faults, startup/scatter integration, physical sensors and boot remain unverified."
+  ],
+  "evidence_files": {
+    "build/sources-goal-r1-latest-entry-pure-c/report.json": "048065dcf26ec26a7606b09f56fb3de60abfc1ff773ee114115b59daa445a77b",
+    "build/sources-goal-r1-hrv-store-reviewed-c/report.json": "a8fdbff4a23fc39171a322b364f048918f68d6ca14340ad4ec779c7558e30475",
+    "r1/src/application/runtime/native_health_latest_samples.c": "1ed02ed10c78045520d92fa8f4c699f274853ea2915cdd4f1bbaf415ca433e72",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-latest-entry-pure-c/r1/r1-application/r1__src__application__runtime__native_health_latest_samples.c.o": "1d26411adbd2cf06b4fa06924b7433a31ab135d025f929bd6804993e03b77281",
+    "r1/src/sources.json": "c641a01569c9d39f05bc4bce48d9b5ca6ba6bf8f501b0eabae9dbbbd61b01efb",
+    "tools/build/source-plan.json": "eeb516e31b3310fb0718f36908977f8125723f7c5e0e86cd6744395826259a4d",
+    "r1/src/config/runtime/native_health_cache.ld": "eb8f131c489cd818d4e36718718fa1989719ca0170f164541a1a5bf56dfc1ec3",
+    "r1/src/application/runtime/native_health_latest_packed.c": "59dd8c700a695afe73d30a76cdf889e6f0b82e4e48b2413b6a38acf544d05520",
+    "r1/src/application/runtime/native_health_get_dispatch.c": "6664515d7c7ef35cfe2cf2a3306bef8a7f29f1a1868b745273e6fe1b7fb41592",
+    "r1/src/application/runtime/native_health_get_encoders.c": "ed9047eaad16973741959e5a891e1ec8a6375c053c53190c62a6ea8e535bd164",
+    "build/goal-r1-latest-entry-pure-c/actual.elf": "f2df52e5ceb43ba7f504e1c7e108583bd56f53877cd95fc418338ebddb821986",
+    "build/goal-r1-latest-entry-pure-c/audit.json": "5b25129e9687c09fd2a7e6f1cb7de24a48bdcbfa0e4ab96191bc8d113eb01d7e",
+    "build/goal-r1-latest-entry-pure-c/negative.json": "964288a9e3b138340cb116c8e4a1ad13448c09c20ec831495fbee0795b2eb018",
+    "build/goal-r1-latest-entry-pure-c/test.ld": "fb0189cf85ac0e7eda378887b832d424d977e929724d6a0295a8f11a369c5db2",
+    "build/goal-r1-latest-entry-pure-c/audit.py": "297ed6b4a9f55ffe7eff8516bffce544f5cded715c9dddc1f0428d886aa241ca",
+    "build/goal-r1-latest-entry-pure-c/negative.py": "0aaf8772584f4da239090f8736c5d42a03b734a51d0f56a229bcc1a42948d84e",
+    "build/goal-r1-latest-entry-pure-c/callers.py": "d3cd55f85e4ef5da562927836cbc406394175d501345e031d6fe3c2d6562bebb",
+    "build/goal-r1-latest-entry-pure-c/negative.log": "c27053ee5da55eeffd769e44009090b765a3dc7579d2e4d7e0a55d1ccdb51042",
+    "build/goal-r1-latest-entry-pure-c/source.o": "1d26411adbd2cf06b4fa06924b7433a31ab135d025f929bd6804993e03b77281",
+    "build/goal-r1-latest-entry-pure-c/results.json": "ef924c0ae6ff93149f074809a511fb732a7db2236c7e48aab0aa19fb0e31ce95",
+    "build/goal-r1-latest-entry-pure-c/pipeline.log": "76a06890d4e0ef49c69ef9ee449804383be676e7edc8e6f49e0cc0c0da380e59",
+    "build/goal-r1-latest-entry-pure-c/rea.json": "dddd79b32bcde061cf020d3b9a7473ec08a3769b2b914b013fcc91d9b9e320f9",
+    "build/goal-r1-latest-entry-pure-c/pipeline.py": "4ce5ac06a2cb398a3e71485f5796cba5d89b944381802dd775ceb7dd9b641c26",
+    "build/goal-r1-latest-entry-pure-c/sources-check.log": "b6ab468f43815a75634eab2762e209dbee8ab94c4cc3d601fded4210b6833f2a",
+    "build/goal-r1-latest-entry-pure-c/callers.json": "501f9af263b2dba69fb155af43348bba7b310df7bb02dfb07c57a9eaad4b047f",
+    "build/goal-r1-latest-entry-pure-c/record.py": "8740e779989a48d6564a4f121c69c0296ad41d7024d1053da03259534fb5e656",
+    "build/goal-r1-latest-entry-pure-c/verify.py": "313f0605cdcbf54b6619f1c3841d1625d74be881f852c4c5c0f8323f0e39f0af",
+    "build/goal-r1-latest-entry-pure-c/verification.log": "366ef14d4a26005ee1291ab93ddfdaa7cd22c2dcae740ff7505a01e3ae5ae5f5",
+    "build/goal-r1-latest-entry-pure-c/model.elf": "9899f7e5768745014892c49a26a0f7a06b329278fa343c29a8863b3512b75abb",
+    "build/goal-r1-latest-entry-pure-c/source-before.c": "85b8c83cb4f22888611efd154a23af42341b87df38e72405ea452763d0f91789",
+    "build/goal-r1-latest-entry-pure-c/build.log": "7a904863b57955da0fe3a1b2f9c2292fdd836e67ec5ed9a4f0389bd73270acc6",
+    "build/goal-r1-latest-entry-pure-c/pipeline/test.ld": "29933c3898097d3ce0072508af97b3e4a4cd8d48a41618e216f33f3bf66d3458",
+    "build/goal-r1-latest-entry-pure-c/pipeline/cache.ld": "3cc131364b839c5f2be3f73838f4ce405560cd6fad3b2c7ee0d97b546b8889a4",
+    "build/goal-r1-latest-entry-pure-c/pipeline/source.elf": "c2f180444935a0fe597ef078f77424bb054a8a9a90862e0bb71d96c41e1b6344",
+    "build/goal-r1-latest-entry-pure-c/pipeline/results.json": "33c4396f4d2ba8b12e59446d62c6d6a4895f0937f77c221c1c96039703c86ed6"
+  }
+}

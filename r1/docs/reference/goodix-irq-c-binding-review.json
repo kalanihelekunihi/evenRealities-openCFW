@@ -1,0 +1,90 @@
+{
+  "passed": 2592,
+  "executions": 5184,
+  "actual_registry_dispatchers": true,
+  "callback_mutation_cases": true,
+  "return_status_compared": true,
+  "report": "build/sources-goal-r1-goodix-irq/report.json",
+  "source_sha256": {
+    "r1/src/application/board/native_peripheral_bindings.c": "c2b283e25857766ad1046bdd837e859bd9baad5cccca5de057d019cce813a1e6",
+    "r1/src/application/goodix/stock_i2c_transport.c": "f59c08bc857f6801e974e82002a90cac8ca622953717ecef4bad7ed4b0789d1d",
+    "r1/src/application/registry/stock_registry.c": "68c16fe9a2fcd328012b8613c9da9aa4cd31bd30df36a55e64e56e7b534246fa"
+  },
+  "limitations": [
+    "Final device operations modeled; physical IRQ/GPIOTE behavior unverified",
+    "Callback producer and callback target signature not inferred",
+    "Bounded serialized cases; invalid device/table pointers and concurrent access unproven",
+    "Private stack bytes and caller-clobbered registers excluded",
+    "No byte qualification or final source placement proof"
+  ],
+  "native_entries": {
+    "0x50ab0": "r1_goodix_irq_close",
+    "0x50abc": "r1_goodix_irq_prepare"
+  },
+  "negative_control": {
+    "mutation": "Read callback before opening the IRQ device",
+    "rejected": true,
+    "counterexample": [
+      1,
+      1,
+      5,
+      0,
+      0,
+      1,
+      0
+    ],
+    "stderr": "Traceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-goodix-irq/reject-early-callback.py\", line 56, in <module>\n    for c in [(1,1,5,0,0,1,0)]:assert a(*c)==b(*c),c\n                                      ^^^^^^^^^^^^\nAssertionError: (1, 1, 5, 0, 0, 1, 0)\n"
+  },
+  "regressions": {
+    "cache-regression": {
+      "passed": 1536,
+      "entry_executions": 21504,
+      "actual_registry_lookup_and_dispatch": true,
+      "report": "build/sources-goal-r1-goodix-irq/report.json",
+      "source_sha256": {
+        "r1/src/application/board/native_peripheral_bindings.c": "c2b283e25857766ad1046bdd837e859bd9baad5cccca5de057d019cce813a1e6",
+        "r1/src/application/goodix/stock_i2c_transport.c": "f59c08bc857f6801e974e82002a90cac8ca622953717ecef4bad7ed4b0789d1d",
+        "r1/src/application/registry/stock_registry.c": "68c16fe9a2fcd328012b8613c9da9aa4cd31bd30df36a55e64e56e7b534246fa"
+      },
+      "limitations": [
+        "strcmp equality and final device operations modeled",
+        "Serialized bounded cases; physical I2C/reset electrical effects and concurrency unverified",
+        "Void return residue and private stack bytes excluded",
+        "Not byte qualified; SDK gh3026 demo hooks remain unbound"
+      ]
+    },
+    "transport-regression": {
+      "passed": 630,
+      "executions": 1260,
+      "actual_registry_dispatchers": true,
+      "report": "build/sources-goal-r1-goodix-irq/report.json",
+      "source_sha256": {
+        "r1/src/application/board/native_peripheral_bindings.c": "c2b283e25857766ad1046bdd837e859bd9baad5cccca5de057d019cce813a1e6",
+        "r1/src/application/goodix/stock_i2c_transport.c": "f59c08bc857f6801e974e82002a90cac8ca622953717ecef4bad7ed4b0789d1d",
+        "r1/src/application/registry/stock_registry.c": "68c16fe9a2fcd328012b8613c9da9aa4cd31bd30df36a55e64e56e7b534246fa"
+      },
+      "limitations": [
+        "Final operation callbacks modeled; no physical I2C execution",
+        "Void return residues, private stack bytes and caller-clobbered registers excluded",
+        "Bounded serialized executions; concurrency and all invalid pointers unproven",
+        "SDK demo gh3026 ports remain unbound; no byte qualification"
+      ]
+    }
+  },
+  "evidence": {
+    "build/goal-r1-goodix-irq/stock.elf": "8906a0a0fdfab94355f6bd6033ddc2cf8d74230538ec8c9542efcc776f4cf5e8",
+    "build/goal-r1-goodix-irq/REA.snapshot.json": "52935ba594d3d98019283bc2bf056bbfb54442d6bf4a9730f5a8515fb3b11eca",
+    "build/goal-r1-goodix-irq/verify.py": "c5d9095c192ebee556c7eea49ffe24268795d12700a78b8f67860ca90bc0e9c0",
+    "build/goal-r1-goodix-irq/source.elf": "e5a8945af96be73abb200cb194fd2cc981579280fbf07a71fded6068e7c1656e",
+    "build/goal-r1-goodix-irq/bad-early-callback.c": "6f01f7819d510943caa827b79b0ff04dc948a8f72c92b271bda2f52a541e6f00",
+    "build/goal-r1-goodix-irq/reject-early-callback.py": "35097adba5b00a7ed1148c14600dc4adfcf5576779f92c14b6edd4a4a7c524eb",
+    "build/goal-r1-goodix-irq/cache-regression/verify.py": "d6419a776ced38f95051ebec5d613c5b04e845da9a6513000507c87992ed0886",
+    "build/goal-r1-goodix-irq/transport-regression/verify.py": "9535c4dbb73e5fa1cdf544f7cb9d7ba486de1bf99d95029c8527b9048db971f5",
+    "build/sources-goal-r1-goodix-irq/report.json": "5996b03aaa8bb482d78af13041b798be0648dfd84fc1d3fe7f25b67ca5390743",
+    "r1/src/sources.json": "f860146befe6853fb7b6591e7fa28c6098739eed73d477c7d0cf87fdf3fc6b2f",
+    "r1/symbols/function-frontier.csv": "c3d24fcf550b9bea2ff2e01b437491d7d03019b91a723d7d4164bf460d191f04",
+    "tools/build/source-plan.json": "432d01e6a7b79c5c680b62143962870a021836bbe8905e6a41015a7970d5af63"
+  },
+  "instruction_identity_proven": false,
+  "image_integration_proven": false
+}

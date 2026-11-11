@@ -153,10 +153,10 @@ extern int32_t audio_uart_lv_obj_x_43fc70(void *obj);                /* lv_obj_g
 extern int32_t audio_uart_lv_obj_y_43fce0(void *obj);                /* lv_obj_get_y */
 extern int32_t audio_uart_lv_obj_width_43fd9e(void *obj);            /* lv_obj_get_width */
 extern uint32_t audio_uart_page_44104c(uint32_t rgb);                /* lv_color_hex */
-extern void audio_uart_page_44120e(void *obj, int32_t value, uint32_t selector); /* pad_top */
-extern void audio_uart_page_44121c(void *obj, int32_t value, uint32_t selector); /* pad_bottom */
-extern void audio_uart_page_44122a(void *obj, int32_t value, uint32_t selector); /* pad_left */
-extern void audio_uart_page_441238(void *obj, int32_t value, uint32_t selector); /* pad_right */
+extern void lv_obj_set_style_pad_top(void *obj, int32_t value, uint32_t selector); /* pad_top */
+extern void lv_obj_set_style_pad_bottom(void *obj, int32_t value, uint32_t selector); /* pad_bottom */
+extern void lv_obj_set_style_pad_left(void *obj, int32_t value, uint32_t selector); /* pad_left */
+extern void lv_obj_set_style_pad_right(void *obj, int32_t value, uint32_t selector); /* pad_right */
 extern void audio_uart_page_44127e(void *obj, uint32_t color, uint32_t selector); /* bg_color */
 extern void audio_uart_display_audio_reset_441488(void *obj, uint32_t opa, uint32_t selector); /* opa */
 extern uint32_t audio_uart_lv_style_property_44bdea(void *obj, uint32_t selector,
@@ -167,9 +167,9 @@ extern void audio_uart_lv_scroll_to_y_44ea04(void *obj, int32_t y, uint32_t anim
 extern void audio_uart_lv_anim_init_4503d6(void *anim);
 extern void audio_uart_lv_anim_values_4506ce(void *anim, int32_t start, int32_t end);
 extern void *audio_uart_lv_anim_start_450408(void *anim);
-extern int32_t audio_uart_lv_anim_path_45065a(void *anim);           /* lv_anim_path_ease_in */
-extern int32_t audio_uart_lv_anim_path_450672(void *anim);           /* lv_anim_path_ease_out */
-extern int32_t audio_uart_lv_anim_path_450688(void *anim);           /* lv_anim_path_ease_in_out */
+extern int32_t lv_anim_path_ease_in(void *anim);           /* lv_anim_path_ease_in */
+extern int32_t lv_anim_path_ease_out(void *anim);           /* lv_anim_path_ease_out */
+extern int32_t lv_anim_path_ease_in_out(void *anim);           /* lv_anim_path_ease_in_out */
 extern const char *audio_uart_page_49942e(void *label, const char *text); /* lv_label_set_text */
 extern void lv_roller_set_selected_50ebe2(void *roller, uint32_t index, uint32_t anim);
 extern uint16_t lv_roller_get_selected_50ec94(void *roller);
@@ -454,7 +454,7 @@ void ui_onboarding_main_sub_004A88AA(void)
     audio_uart_lv_anim_values_4506ce(&a, start, 0);
     a.duration = ONB_ANIM_MS;
     a.exec_cb = ui_onboarding_main_sub_004A87D0;
-    a.path_cb = audio_uart_lv_anim_path_450672;
+    a.path_cb = lv_anim_path_ease_out;
     a.completed_cb = ui_onboarding_main_sub_004A87D8;
     g2_onboarding_anim_busy = 1;
     (void)audio_uart_lv_anim_start_450408(&a);
@@ -476,7 +476,7 @@ void ui_onboarding_main_sub_004A8968(void)
     audio_uart_lv_anim_values_4506ce(&a, x, end);
     a.duration = ONB_ANIM_MS;
     a.exec_cb = ui_onboarding_main_sub_004A87D0;
-    a.path_cb = audio_uart_lv_anim_path_45065a;
+    a.path_cb = lv_anim_path_ease_in;
     a.completed_cb = ui_onboarding_main_sub_004A8826;
     g2_onboarding_anim_busy = 1;
     (void)audio_uart_lv_anim_start_450408(&a);
@@ -493,7 +493,7 @@ void ui_onboarding_main_sub_004A8A24(void *anim)
                                      g2_onboarding_list_saved_y);
     a.duration = g2_onboarding_bounce_duration;
     a.exec_cb = ui_onboarding_main_sub_004A8668;
-    a.path_cb = audio_uart_lv_anim_path_45065a;
+    a.path_cb = lv_anim_path_ease_in;
     a.completed_cb = ui_onboarding_main_sub_004A8670;
     (void)audio_uart_lv_anim_start_450408(&a);
 }
@@ -517,7 +517,7 @@ void ui_onboarding_main_sub_004A8A82(int32_t direction)
     audio_uart_lv_anim_values_4506ce(&a, g2_onboarding_list_saved_y, target);
     a.duration = g2_onboarding_bounce_duration;
     a.exec_cb = ui_onboarding_main_sub_004A8668;
-    a.path_cb = audio_uart_lv_anim_path_450672;
+    a.path_cb = lv_anim_path_ease_out;
     a.completed_cb = ui_onboarding_main_sub_004A8A24;
     g2_onboarding_anim_busy = 1;
     (void)audio_uart_lv_anim_start_450408(&a);
@@ -532,7 +532,7 @@ void ui_onboarding_main_sub_004A8B30(void *obj, int32_t target, int32_t duration
     audio_uart_lv_anim_values_4506ce(&a, audio_uart_lv_obj_y_44e498(obj), target);
     a.duration = duration;
     a.exec_cb = ui_onboarding_main_sub_004A865E;
-    a.path_cb = audio_uart_lv_anim_path_450688;
+    a.path_cb = lv_anim_path_ease_in_out;
     a.completed_cb = ui_onboarding_main_sub_004A8610;
     g2_onboarding_anim_busy = 1;
     (void)audio_uart_lv_anim_start_450408(&a);
@@ -851,7 +851,7 @@ void ui_onboarding_main_sub_004A95E8(void *obj)
     audio_uart_lv_anim_values_4506ce(&a, ui_onboarding_main_sub_004A8560(obj, 0u), 0xff);
     a.duration = ONB_ANIM_MS;
     a.exec_cb = ui_onboarding_main_sub_004A86C6;
-    a.path_cb = audio_uart_lv_anim_path_45065a;
+    a.path_cb = lv_anim_path_ease_in;
     a.completed_cb = ui_onboarding_main_sub_004A86D2;
     (void)audio_uart_lv_anim_start_450408(&a);
 }
@@ -866,7 +866,7 @@ void ui_onboarding_main_sub_004A9648(void *obj, uint8_t target, uint8_t mode)
     audio_uart_lv_anim_values_4506ce(&a, ui_onboarding_main_sub_004A8560(obj, 0u), target);
     a.duration = ONB_ANIM_MS;
     a.exec_cb = ui_onboarding_main_sub_004A8720;
-    a.path_cb = audio_uart_lv_anim_path_450672;
+    a.path_cb = lv_anim_path_ease_out;
     if (mode == 1u)
         a.completed_cb = ui_onboarding_main_sub_004A872C;
     else
@@ -895,7 +895,7 @@ void ui_onboarding_main_sub_004A96DC(uint8_t mode)
     audio_uart_lv_anim_values_4506ce(&a, 0xff, 0);
     a.duration = ONB_ANIM_MS;
     a.exec_cb = ui_onboarding_main_sub_004A8720;
-    a.path_cb = audio_uart_lv_anim_path_450672;
+    a.path_cb = lv_anim_path_ease_out;
     if (mode == 1u)
         a.completed_cb = ui_onboarding_main_sub_004A872C;
     else
@@ -962,7 +962,7 @@ uint32_t ui_onboarding_main_sub_004A97EA(const g2_onboarding_key_msg_t *msg)
                     audio_uart_lv_anim_values_4506ce(&a, ONB_PAGE_NARROW, ONB_PAGE_WIDE);
                     a.duration = ONB_ANIM_MS;
                     a.exec_cb = ui_onboarding_main_sub_004A908C;
-                    a.path_cb = audio_uart_lv_anim_path_450672;
+                    a.path_cb = lv_anim_path_ease_out;
                     a.completed_cb = ui_onboarding_main_sub_004A9118;
                     g2_onboarding_anim_busy = 1;
                     g2_onboarding_opened_page = g2_onboarding_tile_index;
@@ -1183,7 +1183,7 @@ void ui_onboarding_main_sub_004A9DE8(void)
     audio_uart_lv_anim_values_4506ce(&a, ONB_PAGE_WIDE, ONB_PAGE_NARROW);
     a.duration = ONB_ANIM_MS;
     a.exec_cb = ui_onboarding_main_sub_004A90CC;
-    a.path_cb = audio_uart_lv_anim_path_450672;
+    a.path_cb = lv_anim_path_ease_out;
     a.completed_cb = ui_onboarding_main_sub_004A915C;
     g2_onboarding_anim_busy = 1;
     (void)audio_uart_lv_anim_start_450408(&a);

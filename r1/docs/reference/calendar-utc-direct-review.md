@@ -1,0 +1,23 @@
+# Direct C UTC calendar adapter
+
+The UTC adapter at stock entry `0x8af40` is now one direct C function in `r1/src/application/board/native_calendar_utc.c`. The fourteen-byte naked wrapper in `runtime/native_calendar_frames.c` and private `r1_time_utc_to_calendar_body` are retired. The wrapper file and its manifest unit are removed; two duplicate-provider notes now name the direct C owner. No inline assembly or fixed-register constraints are used in this adapter.
+
+Its C scratch structure contains the nine-word broken-down calendar followed by the wrapping epoch word at offset 36. Recorded Clang and GCC9 use forty local bytes plus eight saved bytes, reaching native provider depth 48. Converter arguments are the epoch word at caller SP minus 12 and the scratch base at caller SP minus 48. At converter entry R4 holds the output pointer and R5-R11 retain incoming values. Clang may return immediately for null output without creating the native private frame; that private null-path layout is excluded.
+
+The converter call remains explicit. A null result returns zero. Otherwise, the adapter reads the halfword year at offset 20, then bytes at offsets 16, 12, 8, 4, 0 and 24, writing each packed output field after its corresponding read. Volatile source and destination accesses preserve those widths and ordering when output overlaps the returned calendar or native scratch. Year/month arithmetic truncates at native field widths.
+
+Recorded Clang and GCC9 adapters each pass **4,950 paired modeled-converter cases / 9,900 executions**. Cases cover wrapping epoch and timezone values, null/frame/alternate converter results, arbitrary returned words, null/ordinary output and aliases into returned/native scratch. Checks include converter pointers, provider SP and active saved registers, ordered access addresses/widths/stored values, final memory, status, final saved registers, SP and interrupt masks.
+
+Each also passes **770 paired cases / 1,540 executions** with the actual stock/C forward converter. The GCC run replaces the adapter; the forward converter remains the normal Clang object. Converter-internal accesses are normalized by their final result, while outer adapter accesses are directly compared. These cases cover full-width epochs and timezone wrapping, packed fields, null output and output/frame aliases.
+
+The oracle now masks Unicorn write-hook values to the access width. Unicorn reports the full register operand even when STRH/STRB discard its high bits. For example, native's STRH operand 67435 and GCC's operand 1899 both store the same two-byte value, 1899. Addresses, widths, access order and final memory remain checked. The original raw observation is retained under the ignored probe directory; this correction adds no production workaround.
+
+Negative controls reject incorrect timezone scaling, year-field offset, epoch-pointer address and the retired wrapper/helper's deeper provider call. Private saved-register aliases, raw caller-clobbered registers/flags, arbitrary invalid pointers, exception delivery, concurrency and physical RTC behavior remain excluded.
+
+All **575** R1 units compile and compose without new failures or duplicate strong symbols. The count decreases from 576 because the retired wrapper unit is removed. All 574 other objects are unchanged, as are normal imports: 164 application / 34 bootloader. Ten generic and eight GCC9 variants compile, but no exact regions are selected. The direct Clang body is 78 bytes versus stock's 74 instruction bytes and two padding bytes; byte identity is not established.
+
+The source plan remains unchanged. The canonical hybrid still matches locked application SHA-256 `0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a`: 4,023 source-built bytes (including assembly and data), 642,137 fallback bytes and 248 resource bytes. Source completeness remains false. Calendar callback candidates remain excluded from normal composition pending their own validation.
+
+REA read the complete 76-byte stock envelope. Evidence: [calendar-utc-direct-review.json](calendar-utc-direct-review.json). Probes, rejected variants and backups of both retired source forms and the prior manifest are under ignored `build/goal-r1-calendar-utc-direct/`. Normal report: `build/sources-goal-r1-calendar-utc-direct/report.json`; hybrid report: `build/hybrid-goal-r1-calendar-utc-direct/build-report.json`. This supersedes the [earlier wrapper review](calendar-utc-c-frame-review.md).
+
+The subsequent [calendar provider composition review](clock-calendar-composition-review.md) validates and enables the calendar ports, selected inverse converter and RTC request unit in normal composition. Bootstrap initialization remains compile-only.

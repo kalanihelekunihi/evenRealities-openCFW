@@ -14,10 +14,10 @@ static void put_word(uint8_t *p,uint32_t value)
     for (unsigned i=0;i<4u;i++) p[i]=(uint8_t)(value>>(i*8u));
 }
 
-/* Native 0x308664..0x308706 uses an exact 32-byte frame. The ARC entry
- * below allocates that frame before calling this source body, retaining
- * ambient bytes 5, 21 and 29..31 without a C automatic-array initialization. */
-uint32_t opencfw_em9305_init_transition_event_308664_body(
+/* Native 0x308664..0x308706: report transition event 0x13 for the record
+ * in a 32-byte event frame. Bytes 5, 21 and 29..31 are not written, as in
+ * stock. */
+static uint32_t transition_event_308664_body(
     uint32_t kind,uintptr_t record,uint32_t include_first,uint8_t *event)
 {
     event[4]=(uint8_t)kind;
@@ -58,21 +58,9 @@ uint32_t opencfw_em9305_init_transition_event_308664_body(
     return opencfw_em9305_ll_event_callback_30e79c((uintptr_t)event);
 }
 
-#ifdef __arc__
-__asm__(
-".text\n.balign 4\n.global opencfw_em9305_init_transition_event_308664\n"
-".type opencfw_em9305_init_transition_event_308664,@function\n"
-"opencfw_em9305_init_transition_event_308664:\n"
-"enter_s [r13-r15,fp,blink]\nsub_s sp,sp,0x20\n"
-"mov r3,sp\nbl opencfw_em9305_init_transition_event_308664_body\n"
-"leave_s [r13-r15,fp,blink,pcl]\n"
-".size opencfw_em9305_init_transition_event_308664,. - opencfw_em9305_init_transition_event_308664\n");
-#else
 uint32_t opencfw_em9305_init_transition_event_308664(
     uint32_t kind,uintptr_t record,uint32_t include_first)
 {
-    uint8_t event[32] __attribute__((aligned(4)));
-    return opencfw_em9305_init_transition_event_308664_body(
-        kind,record,include_first,event);
+    _Alignas(4) uint8_t event[32];
+    return transition_event_308664_body(kind,record,include_first,event);
 }
-#endif

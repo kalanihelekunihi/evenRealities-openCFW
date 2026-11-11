@@ -1,0 +1,378 @@
+{
+  "schema_version": 1,
+  "acceptance_target": "License-free C firmware; byte identity waived",
+  "entries": {
+    "0x00028dd4": "r1_goodix_native_pack_5_10",
+    "0x00028dda": "r1_goodix_native_pack_6_9",
+    "0x00028de0": "r1_goodix_native_unpack_5_10",
+    "0x00028de6": "r1_goodix_native_unpack_6_9",
+    "0x00028dec": "r1_goodix_native_pack_array"
+  },
+  "total_stock_c_pairs": 521664,
+  "verification": {
+    "build/goal-r1-packed-array-c/results": {
+      "pairs": 421888,
+      "exhaustive_unpack_values": 65536,
+      "unpack_fp_modes": [
+        0,
+        31
+      ],
+      "pack_values": 13312,
+      "pack_fp_modes": [
+        0,
+        1,
+        2,
+        3,
+        15,
+        31
+      ],
+      "elapsed_seconds": 75.44599237502553,
+      "scope": "Native typed S0/R0 ABI wrappers using actual portable bit backends; exact scalar result,FPSCR and saved core/FP ABI. All packed encodings and binary32 exponent/sign/rounding boundaries."
+    },
+    "build/goal-r1-packed-array-c/array-results": {
+      "pairs": 13312,
+      "fpscr_modes": 32,
+      "elapsed_seconds": 111.17712054215372,
+      "scope": "Actual C5/10 and6/9 callback providers,negative/zero signed counts with null callbacks,live overlapping u16/float buffers;public RAM,FPSCR,saved ABI and interrupt masks."
+    },
+    "build/goal-r1-packed-conversion-integration-c/results": {
+      "pairs": 83968,
+      "unpack_values": 4096,
+      "unpack_fp_modes": [
+        0,
+        31
+      ],
+      "pack_values": 5632,
+      "pack_fp_modes": [
+        0,
+        1,
+        2,
+        3,
+        15,
+        31
+      ],
+      "elapsed_seconds": 14.86348137515597,
+      "scope": "Native typed S0/R0 ABI wrappers using actual portable bit backends; exact scalar result,FPSCR and saved core/FP ABI. First4096 packed encodings plus all binary32 exponent/sign/rounding boundary cases."
+    },
+    "build/goal-r1-packed-conversion-integration-c/array-results": {
+      "pairs": 2496,
+      "fpscr_modes": 6,
+      "elapsed_seconds": 21.29946695896797,
+      "scope": "Actual C5/10 and6/9 callback providers,negative/zero signed counts with null callbacks,live overlapping u16/float buffers;public RAM,FPSCR,saved ABI and interrupt masks."
+    }
+  },
+  "compiled_defect_controls": [
+    {
+      "defect": "unpack5-width",
+      "detected": true,
+      "expected": [
+        1065353216,
+        2684354560
+      ],
+      "actual": [
+        1056964608,
+        2684354560
+      ]
+    },
+    {
+      "defect": "unpack6-width",
+      "detected": true,
+      "expected": [
+        1056964608,
+        2684354560
+      ],
+      "actual": [
+        1065353216,
+        2684354560
+      ]
+    },
+    {
+      "defect": "pack5-width",
+      "detected": true,
+      "expected": [
+        15360,
+        2684354560
+      ],
+      "actual": [
+        15872,
+        2684354560
+      ]
+    },
+    {
+      "defect": "pack6-width",
+      "detected": true,
+      "expected": [
+        15872,
+        2684354560
+      ],
+      "actual": [
+        15360,
+        2684354560
+      ]
+    },
+    {
+      "defect": "unpack-return-ABI",
+      "detected": true,
+      "expected": [
+        1065353216,
+        2684354560
+      ],
+      "actual": [
+        305419896,
+        2684354560
+      ]
+    },
+    {
+      "defect": "pack-input-ABI",
+      "detected": true,
+      "expected": [
+        15360,
+        2684354560
+      ],
+      "actual": [
+        0,
+        2684354560
+      ]
+    },
+    {
+      "defect": "signed-count",
+      "detected": true,
+      "error": "UcError:Invalid memory fetch (UC_ERR_FETCH_UNMAPPED)"
+    },
+    {
+      "defect": "input-stride",
+      "detected": true,
+      "error": null
+    },
+    {
+      "defect": "output-stride",
+      "detected": true,
+      "error": null
+    },
+    {
+      "defect": "callback-choice",
+      "detected": true,
+      "error": null
+    },
+    {
+      "defect": "skip-first",
+      "detected": true,
+      "error": null
+    }
+  ],
+  "coverage": {
+    "instruction_bytes": 322,
+    "instruction_starts": 113,
+    "entries": 5
+  },
+  "normal_build": {
+    "normal_report": "build/sources-goal-r1-packed-conversion-c/report.json",
+    "units": 943,
+    "unchanged_source_object_pairs": 932,
+    "generated_sources_excluded": [
+      "{gen}/r1_cmsis_os2_rtc.c",
+      "{gen}/fal_partition_r1_lookup.c",
+      "{gen}/fdb_utils_r1.c",
+      "{gen}/gh_demo_r1.c",
+      "{gen}/gh_demo_hook_r1.c",
+      "{gen}/gh_demo_user_r1.c",
+      "{gen}/app_error_handler_gcc_clang.c",
+      "{gen}/r1_startup_vectors.S",
+      "{gen}/gh_ppg_timestamp_hooks_r1.c",
+      "{gen}/r1_uecc.c"
+    ],
+    "new_sources": [
+      "r1/src/application/goodix/native_packed_conversion.c"
+    ],
+    "normal_provider_matches_tested_sections_and_decoded_symbols": true,
+    "no_new_assembly_or_writable_sections": true,
+    "imports": {
+      "r1-application": [
+        "GH3X2X_GetVersion",
+        "GH3X2X_UprotocolPacketFormat",
+        "Gh3x2xDemoSendProtocolData",
+        "__data_start__",
+        "gh3x2x_print_fmt",
+        "goodix_hba_calc",
+        "goodix_hba_essential_info_print",
+        "goodix_hrv_calc",
+        "goodix_nadt_calc",
+        "r1_cmb_code_end",
+        "r1_cmb_code_start",
+        "r1_cmb_stack_end",
+        "r1_cmb_stack_start",
+        "r1_eat_command_dispatch",
+        "r1_eat_core_init",
+        "r1_export_plan_command",
+        "r1_factory_input_record_plan_dispatch",
+        "r1_glasses_role_conflict_fault",
+        "r1_gomore_final_sleep_record_publish_native",
+        "r1_gomore_interval_statistics_native",
+        "r1_gomore_sleep_interval_select_native",
+        "r1_gomore_sleep_score_native",
+        "r1_gomore_sleep_stage_refine_native",
+        "r1_gomore_stage_5ef1c_native",
+        "r1_gomore_stage_5f264_native",
+        "r1_gomore_stage_5f3d8_native",
+        "r1_gomore_stage_5f4b6_native",
+        "r1_gomore_stage_5f56c_native",
+        "r1_gomore_stage_5feb8_native",
+        "r1_gomore_stage_605dc_native",
+        "r1_gomore_stage_60af4_native",
+        "r1_gomore_stage_60b80_native",
+        "r1_gomore_stage_60dc4_native",
+        "r1_gomore_stage_610c8_native",
+        "r1_gomore_stage_61198_native",
+        "r1_gomore_stage_61274_native",
+        "r1_gomore_stage_6138c_native",
+        "r1_gomore_stage_statistics_native",
+        "r1_gomore_table_record11_native",
+        "r1_goodix_spo2_confidence",
+        "r1_health_auth_parameters_set",
+        "r1_health_lifecycle_engine_initialize_native",
+        "r1_health_settings_plan_command",
+        "r1_health_sync_provider_0003c0d8",
+        "r1_health_sync_provider_0003c304",
+        "r1_health_sync_provider_0003c958",
+        "r1_health_sync_provider_0003fcec",
+        "r1_health_sync_provider_0003fef4",
+        "r1_health_sync_provider_00040508",
+        "r1_health_sync_provider_00040bd4",
+        "r1_health_sync_provider_00040de0",
+        "r1_health_sync_provider_00041438",
+        "r1_health_sync_provider_00043eb0",
+        "r1_health_sync_provider_000440c4",
+        "r1_health_sync_provider_000446b4",
+        "r1_health_sync_provider_0005b39c",
+        "r1_health_sync_provider_0008f954",
+        "r1_legacy_command_route_frame",
+        "r1_manager_assertion_stack_transfer",
+        "r1_manager_logging_start_91504",
+        "r1_phone_role_assertion_stack_transfer",
+        "r1_structured_log_typed",
+        "r1_user_profile_handler"
+      ],
+      "r1-bootloader": [
+        "__bss_end__",
+        "__bss_start__",
+        "__data_start__",
+        "__etext",
+        "__start_crypto_data",
+        "__start_dfu_trans",
+        "__start_fs_data",
+        "__start_sdh_ble_observers",
+        "__start_sdh_req_observers",
+        "__start_sdh_soc_observers",
+        "__start_sdh_stack_observers",
+        "__start_sdh_state_observers",
+        "__start_svc_data",
+        "__stop_crypto_data",
+        "__stop_dfu_trans",
+        "__stop_fs_data",
+        "__stop_sdh_ble_observers",
+        "__stop_sdh_req_observers",
+        "__stop_sdh_soc_observers",
+        "__stop_sdh_stack_observers",
+        "__stop_sdh_state_observers",
+        "__stop_svc_data"
+      ]
+    }
+  },
+  "semantics": [
+    "Typed scalar wrappers preserve native binary32 S0 input/return and packed core-register return. Actual existing C5/10 and6/9 bit backends provide the numerical operation. The maximum packed exponent retains the stock finite binary32 construction rather than an IEEE-half conversion.",
+    "Native28dec caches bases,count and callback. Signed nonpositive counts perform no accesses and permit a null callback. Each positive iteration reads a live binary32 input,calls the S0/core callback,and stores only the low halfword before reading the next sample. Overlapping buffers preserve stock mutation order.",
+    "REA requests for362f4/4fdf8 resolve to width6 thunks with disjoint generic kernel bodies. Assembly establishes the ABI;specialized pseudocode is not used as width5 proof. The missing width5 pack thunk28dd4 is authenticated directly from six locked bytes. Generic variable-width kernel entry points are not exposed by this unit."
+  ],
+  "limitations": [
+    "Scalar comparisons verify result,FPSCR,saved core/FP registers and SP. Array comparisons additionally verify public RAM excluding8192 private stack bytes,and interrupt masks. Caller scratch/APSR,timing,physical hardware and interrupt/concurrency behavior remain unverified.",
+    "All943 units compile without new imports or duplicate strong symbols;932 previous source/object pairs are unchanged. The normal provider matches tested sections and decoded symbols after source-file symbol normalization. This is relocatable composition,with63 application and22 boot imports,not a complete bootable image. Peak selection,rate extraction,confidence and hardware/startup dependencies remain open."
+  ],
+  "evidence_sha256": {
+    "build/goal-r1-model-i8-convolution-c/stock-entry.elf": "8faf5ed5a7e99752b781c1118086f6ada13458b084bd14e8fbb9a2eb58a05e76",
+    "build/goal-r1-packed-array-c/admit.py": "0d30f9e6f7f9249f900669927fffe1bc41cd067df7f92e9a996b988ab45788c9",
+    "build/goal-r1-packed-array-c/array-controls-results.json": "ed50e5ef3005e46f6754f8f62afc251d93389cbbae84c2030f778d16674edc6b",
+    "build/goal-r1-packed-array-c/array-controls.log": "afa3a8df455b25f35d65f1b99af2469f8757aeeb103e6f9a4b385e94223e0282",
+    "build/goal-r1-packed-array-c/array-results.json": "0672c49eb30a5414d5051e0483f234528561599069c37b821adc3b4b10da4243",
+    "build/goal-r1-packed-array-c/array_controls.py": "dc6e202d03e7dfba1688232c149db0fb442b0ee285632f9744f682d71a574dbe",
+    "build/goal-r1-packed-array-c/array_defect.c": "2b34e0cb0df00f8dffb1ebd623bb2236b2799bba86db105a7ca0550f17121d26",
+    "build/goal-r1-packed-array-c/array_defect.elf": "502ec3b5414c1690027a9f5eb6cedb45f25eacbf066faad7ecbb7d19031291bb",
+    "build/goal-r1-packed-array-c/array_defect.o": "53db89898af8c3cb708f620ac814a1aed2308c071334d3be667545b960600228",
+    "build/goal-r1-packed-array-c/arraylib.py": "0e3c9431c9cf8c17574ce6722b2d9533bc4842226d2f10284df2f23056851c83",
+    "build/goal-r1-packed-array-c/arrays.log": "c181c3858f9e8c01965403053a40179dc7257b3376f054ec03f5f32a110af2d4",
+    "build/goal-r1-packed-array-c/arrays.py": "878cbc04c29782c055f4d7481f94106fe42353cd6d2f994fde6c06fb306133ea",
+    "build/goal-r1-packed-array-c/candidate.c": "d572d6c24bc523a83402ae0ea442ff7d7cbcd7f4608c1380ce28c63a3d799bc2",
+    "build/goal-r1-packed-array-c/candidate.elf": "9a584bcbfb135a5dd04fec4b2ce85ca220ca209966960fd7e5b8070f84a1abf0",
+    "build/goal-r1-packed-array-c/candidate.o": "2f096b500398fd3cb4a8662d025495d319cfc2a27308be94a8681eed5f8ce4d2",
+    "build/goal-r1-packed-array-c/compile-argv.json": "f679e55eaf1a1f4f570dbed5b46c18806e800965cc7d6b3c0874774dc197e209",
+    "build/goal-r1-packed-array-c/controls.log": "dffca6bff2ef2a73f559d530a47493132699deefba6618de5a6ae417ddec441a",
+    "build/goal-r1-packed-array-c/controls.py": "d3c22752c965b08a7651a23fe97397045fbe93ec772a7c6612059a90714a7f56",
+    "build/goal-r1-packed-array-c/coverage-results.json": "695071e07f1ef5b8e348a967d010d01049c38fb692bed79d0fa178f8a56484a3",
+    "build/goal-r1-packed-array-c/coverage.py": "22fb1569641a5a43979cb2c6648c56dc4f280eb61c3bf6aec71994fc180a7c35",
+    "build/goal-r1-packed-array-c/defect.c": "36102b526bdb1da5d47798dfbc8092667cb1358d2fb816f2626a3f08473b9a1f",
+    "build/goal-r1-packed-array-c/defect.elf": "6d7eaeb3c0231b5d681c959f21a571f9af2950cc93aff2178ccf01cf3b466d2f",
+    "build/goal-r1-packed-array-c/defect.o": "26888f12a9ada322d47b72370385ac555b60e56708d3412d62e24dbead5df016",
+    "build/goal-r1-packed-array-c/defect_fixture.py": "d1f4a7713b20d3ad13d0817ef72e9cdb3cd10616eca4522de7e290c24f350c80",
+    "build/goal-r1-packed-array-c/fix-control-proof.py": "564371c5f4a5402323008d7bdacbfbb9a6da1eb8dd2595782421c7ea6ea2c315",
+    "build/goal-r1-packed-array-c/fixture.py": "b8fd8962f9ffd1ff14953238b2529869e68faa98353c2730c78cd9248f51f55b",
+    "build/goal-r1-packed-array-c/link-argv.json": "bb6868195d3e56a65957ed4b78701805f5c3e692f53fae881c08bd6704d56edc",
+    "build/goal-r1-packed-array-c/link.log": "a92fdce44188a37293847482f7261b3d76598970dc5c3dad3d657267d588a3c2",
+    "build/goal-r1-packed-array-c/normal-build.log": "b66c5bf74b8e3ae8089e944b63b8202a81c5d32eb3c6603d0c39f70b24f4c204",
+    "build/goal-r1-packed-array-c/prepare.py": "0c71c08c18826a513936f26870fbd144ad1e5f321738ce905a0743f635b7b0d2",
+    "build/goal-r1-packed-array-c/rea-bytes.json": "c04088705b32de494c4e2e73e143e6cf83a25cc9ec44ed4984c85e50a7458cd9",
+    "build/goal-r1-packed-array-c/results.json": "25adc2a3add0344b5c85d4a0969153238031010ec0ef19739705df8248c4313f",
+    "build/goal-r1-packed-array-c/scalar-controls-results.json": "8316b3bc1f65e7482894f4daff692b943959cb551605682c3ea41c2a32e0c7e0",
+    "build/goal-r1-packed-array-c/verify.log": "9c44a4fcd0f77410631832f7655582158551ab026e7c26622140134f8ab25b70",
+    "build/goal-r1-packed-array-c/verify.py": "6b14deb0a10ac617ef017d3788f0d056fc7c26706baab853a06a0bb0c502736d",
+    "build/goal-r1-packed-conversion-c/candidate.c": "751fa36581a1c05b58ba405e17885b10d5eb1ed9b14173df2d216d5b426508e8",
+    "build/goal-r1-packed-conversion-c/candidate.elf": "502b15fc48d897c9f20e2aaba471db9118333fd144b2b1fa718c57bbf09c0b08",
+    "build/goal-r1-packed-conversion-c/candidate.o": "160da6673220733cf43100829ff756553bdfacec1854ec9c539b41790488af10",
+    "build/goal-r1-packed-conversion-c/compile-argv.json": "2cea15f3bfdf42612894a064a765138c26f536a44e79b31eb885386e0242a251",
+    "build/goal-r1-packed-conversion-c/controls-results.json": "8316b3bc1f65e7482894f4daff692b943959cb551605682c3ea41c2a32e0c7e0",
+    "build/goal-r1-packed-conversion-c/controls.log": "dffca6bff2ef2a73f559d530a47493132699deefba6618de5a6ae417ddec441a",
+    "build/goal-r1-packed-conversion-c/controls.py": "c6b958ce22589a6ab5da58668fa002a456a71d85d328ebc8101273ef4b47d538",
+    "build/goal-r1-packed-conversion-c/coverage-results.json": "524791d5d406235e8bd1a18aa429beaaf5c9eed3322730706589b82778fab45e",
+    "build/goal-r1-packed-conversion-c/coverage.py": "52ef4b326c191dea1ed15130b048ba7bd2329f2361abb9219a91f76c3a46c362",
+    "build/goal-r1-packed-conversion-c/defect.c": "445ecd33499f455de40b788974fa21a107688097a93e6bb20be3ec8b99a72c98",
+    "build/goal-r1-packed-conversion-c/defect.elf": "39ed0ac0a211fbb47b2b32c8a7a667cf9bb2ee1199cf945b48399c38f767f4d0",
+    "build/goal-r1-packed-conversion-c/defect.o": "3283aab7f267d6516ec2fc2614827af08bc40f70d874b3a47a7fb90ef1b90b00",
+    "build/goal-r1-packed-conversion-c/defect_fixture.py": "768198a58191726c674bfc720e0dee8c3ea0a7447bc89eae1d9be74ec0cd2dbb",
+    "build/goal-r1-packed-conversion-c/document.py": "95946137911fc12efb5ed0427f97b9a026add367f72886960827ea6a943c70cd",
+    "build/goal-r1-packed-conversion-c/fixture.py": "45c6b6c79e8cb865bece8df4031cde3314cb5b967f3099237228d6099726767f",
+    "build/goal-r1-packed-conversion-c/link-argv.json": "d1861758917cacaadf8124f843e3863eb13a9ec133a0a0f4f1f302cf4955ee0b",
+    "build/goal-r1-packed-conversion-c/link.log": "a92fdce44188a37293847482f7261b3d76598970dc5c3dad3d657267d588a3c2",
+    "build/goal-r1-packed-conversion-c/rea-28dec.json": "58e0d7ee072270583c15d40c373756a601bb4f9be14f08425a18ae90584b9849",
+    "build/goal-r1-packed-conversion-c/rea-362f4.json": "6d625be0656b4613088d350ed986acb8b3d6f3fb8672601b4aa61ba89f447932",
+    "build/goal-r1-packed-conversion-c/rea-4fdf8.json": "a20796eb5cec47b360a2611a25e9598f21b0bed64143f224a49878a5d789ba9a",
+    "build/goal-r1-packed-conversion-c/rea-bytes.json": "9bb8991d402bcfa6a78b3ec4a38762e36731109d15879947b8be6d0c8129b2ba",
+    "build/goal-r1-packed-conversion-c/results.json": "16dd82b083413793838f50f323746e49ff6cf7c1697862bff6983fca4809ffee",
+    "build/goal-r1-packed-conversion-c/verify.log": "23772b4c2cec51f70f62e600b8a92a16061850b98219c6c66e2ca0abc98579d8",
+    "build/goal-r1-packed-conversion-c/verify.py": "bdeb38ad6b9a393f34e981d2be7a6eed663775e119414c0840e8ce391dc06ec4",
+    "build/goal-r1-packed-conversion-integration-c/array-results.json": "21a1b08e092b35bb74e650c95eb7f6b7869fb42d8ae96602c34984f95e6dc07f",
+    "build/goal-r1-packed-conversion-integration-c/arrays.log": "42c44744ae6352e3dc96b0f4b4416b22687644a2db5b4045eca2c7c8cdb8b80c",
+    "build/goal-r1-packed-conversion-integration-c/arrays.py": "3b3a8e799eca41e3f66e5ca9b3a8e8aa4fc99e93d992cf1425e256ace4a26fe6",
+    "build/goal-r1-packed-conversion-integration-c/audit.json": "e5fda9349239e440fef0225f5a1251d6a15f4bf23504cc70fe898ca7dda57df6",
+    "build/goal-r1-packed-conversion-integration-c/audit.py": "5b622cd5416da35ebda598d9bd844ad06d689e1697090fa24198f0086b167bcd",
+    "build/goal-r1-packed-conversion-integration-c/document.py": "56ecff7e6783c3d0633df42a428ed3b8eb0f88ed6a5b1e286305567c8d014644",
+    "build/goal-r1-packed-conversion-integration-c/fixture.py": "560e079494b39b52ff8dec5ba984c19588703065b2c83117f4010baec63ceadf",
+    "build/goal-r1-packed-conversion-integration-c/link-argv.json": "7cbdc2e98bea5ec6f734c8e478ec357e11a28d820b51c0fa73724808c9e821f7",
+    "build/goal-r1-packed-conversion-integration-c/link.log": "a92fdce44188a37293847482f7261b3d76598970dc5c3dad3d657267d588a3c2",
+    "build/goal-r1-packed-conversion-integration-c/normal.elf": "3868df56116fd08629dcd54170b9edd6bd69caa9a56f3bd5d1fa86575625fe0f",
+    "build/goal-r1-packed-conversion-integration-c/prepare.py": "3daceb09e60dee61267b2cb45b88df570ac1ee033ba95bbdcf499414995a5873",
+    "build/goal-r1-packed-conversion-integration-c/results.json": "eff073944a4652b3248f8e37fb367010f502ad2f90a3bfc55ee26123f58edc67",
+    "build/goal-r1-packed-conversion-integration-c/verify.log": "683a5ebb5e3428dba009cfc35c4fbe35e21bd57b7ca7dae954ebb74dc7442faf",
+    "build/goal-r1-packed-conversion-integration-c/verify.py": "5715ef8a794f5c820bf73951f3907a70bc1a3c700d239adfa0b50ed766d0d0f0",
+    "build/goal-r1-spo2-infer-support-c/normal-dependencies.a": "7e62b43a34fcf2b0ae34045a276bf4d564be5dde2ddb636dd0f69169c8843637",
+    "build/goal-r1-spo2-ratio-c/normal-stream-test.ld": "808ff9c64adde68933158791e9d115c75817ae1840e2bdcbcfa42c7a39314cc6",
+    "build/sources-goal-r1-autocorrelation-integration-c/report.json": "c649660eaca65971a4c3928b695308cc28af2fa5e7bd87d0cc36c30fd6fbdf3e",
+    "build/sources-goal-r1-packed-conversion-c/r1/r1-application/r1__src__application__goodix__native_packed_conversion.c.o": "5a016b4688f63f0cd12fe295cb8eb2b626eb82de68fdba11ffb590a223b03cbb",
+    "build/sources-goal-r1-packed-conversion-c/report.json": "7d9fd93ede5f9d7d49728683408847be6de0d6b6e2f6355d6817f86691fcfb0f",
+    "r1/blobs/official/r1-2.2.6.0009/application.bin": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "r1/docs/reference/FUNCTION-OWNERSHIP.csv": "df59df625baef8e85adcc03b15913df00fc1d6099230541ab872408f3ece9cdd",
+    "r1/src/application/goodix/native_packed_conversion.c": "b56238b4596cb2ac6a6ec4261b82a86230cd4d283543dd93272a577fd79bd39a",
+    "r1/src/application/goodix/native_packed_conversion.h": "bf505d79c9e73261fcd3073ebb2f087c2a8844a7534bbceedb947da4bc4e4269",
+    "r1/src/config/runtime/native_health_cache.ld": "eb8f131c489cd818d4e36718718fa1989719ca0170f164541a1a5bf56dfc1ec3",
+    "r1/src/sources.json": "2b9fb6bf4258687ccd8fbdbb83d51259d214b2aa28e253775e5b15c091268774",
+    "r1/src/vendor/goodix_primitives/goodix_primitives.c": "6ba3fff7701c90db05c8700e5b27d9cdbca327887deb92a9cef2bda03c5bf75b",
+    "tools/build/source-plan.json": "eeb516e31b3310fb0718f36908977f8125723f7c5e0e86cd6744395826259a4d"
+  }
+}

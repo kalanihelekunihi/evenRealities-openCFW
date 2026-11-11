@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "entries": {
+    "0x42514": [
+      "r1_event_callback_00042514",
+      86
+    ]
+  },
+  "report": "build/sources-goal-r1-temperature-event-c/report.json",
+  "report_sha256": "ead36b90929dbde60730ec7ea4b5e0b18166da1cd63a65548c2eeacddc50e4ac",
+  "unit": {
+    "source": "r1/src/application/board/native_event_callbacks.c",
+    "source_sha256": "1605014bad702bb334fff8caddb98e847441da817c22c487dd4dc9090c3da379",
+    "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-temperature-event-c/r1/r1-application/r1__src__application__board__native_event_callbacks.c.o",
+    "object_sha256": "35a713e3eb6c88e9d7664c571e5aaf5d5a0588fcd858ad86435482641ee39b03"
+  },
+  "behavior": {
+    "pairs": 1240,
+    "digest": "f8ff508ae6d0c893acd61a095410846136a3e3e0614e832ba70bdabaa25c3d9f",
+    "actual_C": "temperature once control",
+    "actual_adapter": "C event gate and C one-shot controller",
+    "modeled_boundaries": [
+      "__aeabi_memclr",
+      "r1_sensor_stream_register_by_name",
+      "r1_sensor_stream_unregister_by_name",
+      "r1_structured_log_mode_get",
+      "r1_structured_log_format",
+      "nrf_log_frontend_std_1"
+    ],
+    "limits": [
+      "Registration callback identity checked, callback and sensor delivery not executed",
+      "Stream allocation/release, memory clear and logs modeled",
+      "Private stack, caller-clobbered registers and void return excluded"
+    ]
+  },
+  "negative_controls": {
+    "wrong-length-gate": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "000001415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f'}, {'trace': [('mode', [0], '000000001415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f'), ('mode', [0], '000000001415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f'), ('mode', [0], '000000001415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f')], 'state': '000102030405060708090a0b0c0d0e0f000000001415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f'})\n"
+    },
+    "byte-truncated-enable": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "000001415161718191a1b1c1d1e1f00000000000000000000000001002e2f303132333435363738393a3b3c3d3e3f'}, {'trace': [('mode', [0], '000000001415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f'), ('mode', [0], '000000001415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f'), ('mode', [0], '000000001415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f')], 'state': '000102030405060708090a0b0c0d0e0f000000001415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f'})\n"
+    },
+    "raw-enable": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "2a2b2c2d2e2f'), ('log1', [1835011, 'temp measure control: %d', 2], '000000001415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f'), ('clear', [536994780, 14], '000000001415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f'), ('register', ['temp', 'once', 'sample callback', 1, 1], '000000001415161718191a1b1c1d1e1f00000000000000000000000001002e2f')], 'state': '000102030405060708090a0b0c0d0e0f000000001415161718191a1b1c1d1e1f00000000000000000000000001002e2f303132333435363738393a3b3c3d3e3f'})\n"
+    },
+    "wrong-ring-bit": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "000001415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f'}, {'trace': [('mode', [1], '000000001415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f'), ('mode', [1], '000000001415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f'), ('mode', [1], '000000001415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f')], 'state': '000102030405060708090a0b0c0d0e0f000000001415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f'})\n"
+    },
+    "wrong-ring-id": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "25262728292a2b2c2d2e2f'), ('ring', [201326592, '[RING]temp measure control: %d', 0], '000000001415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f'), ('mode', [7], '000000001415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f'), ('log1', [1835011, 'temp measure control: %d', 0], '000000001415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f')], 'state': '000102030405060708090a0b0c0d0e0f000000001415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f'})\n"
+    },
+    "wrong-sdk-id": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "25262728292a2b2c2d2e2f'), ('ring', [205520896, '[RING]temp measure control: %d', 0], '000000001415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f'), ('mode', [7], '000000001415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f'), ('log1', [1769475, 'temp measure control: %d', 0], '000000001415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f')], 'state': '000102030405060708090a0b0c0d0e0f000000001415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f'})\n"
+    },
+    "wrong-sdk-gate": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "0001415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f'), ('mode', [4], '000000001415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f'), ('ring', [205520896, '[RING]temp measure control: %d', 0], '000000001415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f'), ('mode', [2], '000000001415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f')], 'state': '000102030405060708090a0b0c0d0e0f000000001415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f'})\n"
+    },
+    "wrong-service-value": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f'), ('mode', [0], '000000001415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f'), ('clear', [536994780, 14], '000000001415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f'), ('register', ['temp', 'once', 'sample callback', 1, 1], '000000001415161718191a1b1c1d1e1f00000000000000000000000001002e2f')], 'state': '000102030405060708090a0b0c0d0e0f000000001415161718191a1b1c1d1e1f00000000000000000000000001002e2f303132333435363738393a3b3c3d3e3f'})\n"
+    }
+  },
+  "audit": {
+    "unchanged_prior_objects": 759,
+    "changed_objects": [
+      [
+        "r1-application",
+        "r1/src/application/board/native_event_callbacks.c"
+      ]
+    ],
+    "changed_allocated_sections": [
+      ".text.r1_event_callback_00042514"
+    ],
+    "changed_relocation_sections": [
+      ".text.r1_event_callback_00042514"
+    ],
+    "imports_unchanged": true,
+    "new_state": false
+  },
+  "source_check": "R1 passes: 760 units, 564 source files, 0 not built. Global check flags existing G2 resident_rom_thumb_set.S absent from manifest.",
+  "rea": "temperature-event-c-rea.json",
+  "instruction_identity_proven": false,
+  "image_integration_proven": false
+}

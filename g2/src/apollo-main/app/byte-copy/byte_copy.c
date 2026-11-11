@@ -1,12 +1,17 @@
-/* Authenticated forward copy439be4..439c88, aligned fast entry439c04.
+/* Authenticated forward copy439be4..439c88, aligned fast entry439c04
+ * (IAR __aeabi_memcpy / __aeabi_memcpy4).
  * Preserve native staged reads and access widths; this is not memmove.
- * Callers ignore the native alignment-dependent r0 result. */
+ * Stock leaves an alignment-dependent r0 that callers ignore; this copy
+ * returns the destination so it also serves the C memcpy contract.
+ * Single implementation of stock 0x439be4: memcpy, __aeabi_memcpy and the
+ * former hand copies below are aliases of this body. */
+#include <stddef.h>
 #include <stdint.h>
-void audio_uart_checksum_copy(void *destination,const void *source,uint32_t length) {
+void *audio_uart_checksum_copy(void *destination,const void *source,uint32_t length) {
     volatile uint8_t *d=destination;
     const volatile uint8_t *s=source;
     while(length && ((uintptr_t)s&3u)) { *d++=*s++; --length; }
-    if(!length) return;
+    if(!length) return destination;
     if(((uintptr_t)d&3u)==0u) {
         while(length>=16u) {
             uint32_t a=*(const volatile uint32_t *)(s+0);
@@ -44,4 +49,12 @@ void audio_uart_checksum_copy(void *destination,const void *source,uint32_t leng
         }
         while(length--) *d++=*s++;
     }
+    return destination;
 }
+
+__typeof__(audio_uart_checksum_copy) memcpy __attribute__((alias("audio_uart_checksum_copy")));
+__typeof__(audio_uart_checksum_copy) __aeabi_memcpy __attribute__((alias("audio_uart_checksum_copy")));
+__typeof__(audio_uart_checksum_copy) audio_queue_copy_bytes __attribute__((alias("audio_uart_checksum_copy")));
+__typeof__(audio_uart_checksum_copy) g2_lfs_memcpy __attribute__((alias("audio_uart_checksum_copy")));
+__typeof__(audio_uart_checksum_copy) offline_copy __attribute__((alias("audio_uart_checksum_copy")));
+__typeof__(audio_uart_checksum_copy) audio_uart_display_area_copy_439c04 __attribute__((alias("audio_uart_checksum_copy")));

@@ -1,35 +1,20 @@
-/* Native sparse stack event; untouched bytes remain untouched and callback synchronous. */
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_dispatch_child_30e774\n"
-".type opencfw_em9305_dispatch_child_30e774,@function\n"
-"opencfw_em9305_dispatch_child_30e774:\n"
-"L30e774:\n"
-"st.aw blink,[sp,-16]\n"
-"L30e778:\n"
-"stb r0,[sp,9]\n"
-"L30e77c:\n"
-"mov_s r12,sp\n"
-"L30e77e:\n"
-"sth_s r0,[r12,0x4]\n"
-"L30e780:\n"
-"add_s r0,sp,0x4\n"
-"L30e782:\n"
-"stb_s r3,[sp,0xc]\n"
-"L30e784:\n"
-"sth_s r2,[r12,0xa]\n"
-"L30e786:\n"
-"stb_s r1,[sp,0x8]\n"
-"L30e788:\n"
-"stb r1,[sp,7]\n"
-"L30e78c:\n"
-"bl.d opencfw_em9305_ll_event_callback_30e79c\n"
-"L30e790:\n"
-"stb 28,[sp,6]\n"
-"L30e794:\n"
-"ld.ab blink,[sp,16]\n"
-"L30e798:\n"
-"j_s [blink]\n"
-".size opencfw_em9305_dispatch_child_30e774,.-opencfw_em9305_dispatch_child_30e774\n"
-);
+#include <stdint.h>
+
+/* Native 0x30e774..0x30e79a: report LL event 0x1c through the 30e79c
+ * callback as the packed 9-byte record {u16 handle, u8 0x1c, u8 status,
+ * u8 status, u8 handle, u16 value, u8 extra}. */
+extern uint32_t opencfw_em9305_ll_event_callback_30e79c(uintptr_t event);
+
+uint32_t opencfw_em9305_dispatch_child_30e774(uint32_t handle, uint32_t status,
+                                              uint32_t value, uint32_t extra)
+{
+    uint8_t event[12];
+    event[5]=(uint8_t)handle;
+    *(uint16_t *)&event[0]=(uint16_t)handle;
+    event[8]=(uint8_t)extra;
+    *(uint16_t *)&event[6]=(uint16_t)value;
+    event[4]=(uint8_t)status;
+    event[3]=(uint8_t)status;
+    event[2]=28u;
+    return opencfw_em9305_ll_event_callback_30e79c((uintptr_t)event);
+}

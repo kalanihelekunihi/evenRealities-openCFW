@@ -1,0 +1,15 @@
+# R1 integrated cache-to-flash logging verification
+
+This probe executes the reconstructed periodic controller, cache extraction, musl `memcpy`, export-state accessor, log initializer, sector-count accessor and flash writer together from their normal build objects. It also executes the existing event adapter at `0x42bb0`, whose assembly body remains unchanged. A code-execution guard rejects any attempt by the reconstructed path to execute stock instruction addresses.
+
+The integrated path passes 920 comparisons against stock execution. Cache cases include insufficient/exact/excess available data, aligned and unaligned wraparound, the capacity boundary and an invalid cursor. Timing cases include the strict threshold and unsigned counter wrap. Storage cases include missing partition/device, zero/single/multiple sectors, occupied or erased storage and successful or failed flash callbacks. Repeated sequences refill the cache and exercise initialization, rotation, erase, payload write and subsequent event dispatch while retaining shared state.
+
+The flash callback model retains a 12 KiB byte array. Successful reads copy actual bytes, successful writes copy the payload and successful erases fill with `0xff`; modeled failures leave data unchanged. Provider traces and final comparisons include flash hashes, snapshot hashes, guarded cache/owner state, descriptor contents, call ordering/arguments, preserved registers, stack pointer and interrupt masks. This checks interactions that the separate component probes could only model.
+
+Eight precompiled defects from the component probes are also rejected here: wrong cache peek mode and delay, wrong writer rotation boundary, missing offset advance, inverted pre-erase gate, wrong initializer sector, missing initialized flag and missing failure-path partition clearing. The normal implementation was rerun afterward. All eight participating object/source hashes, the shared header, normal report and manifest are recorded in the [structured receipt](log-chain-review.json). The probe scripts and linker fixture remain under ignored `build/goal-r1-log-chain/`.
+
+REA returned the complete cache-copy instruction span; it matches the official raw image. See [REA receipt](log-chain-rea.json). The component receipts remain [controller](log-persist-c-review.md), [writer](log-writer-c-review.md) and [initializer](log-init-c-review.md).
+
+This verification adds no firmware source or state owner. The current normal report remains 765 compiled R1 units, 126 application imports and 34 bootloader imports. R1 source coverage passes. Global coverage still reports the existing G2 `resident_rom_thumb_set.S` manifest omission.
+
+FAL finders, clock, delay, critical-section entry/exit, logging sinks, the subsequent export-guard service and hardware flash callbacks are modeled. Execution is in thread mode; physical NOR programming constraints/timing, asynchronous IRQ/concurrency and complete image linking remain unverified. Private scratch, caller-clobbered registers and void returns are excluded. Byte identity is not required for this build route.

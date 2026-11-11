@@ -7,4 +7,5 @@ extern uint8_t audio_td_state[0xa1dc]; /* native RAM 0x2010fd20 */
 const uint8_t *audio_td_state_ptr(void) {return audio_td_state;}
 /* Stock 0x59731E (td_session_struct_ptr) */
 uint8_t *audio_td_session_struct_ptr(void) {return audio_td_state+0x808u;}
-uint8_t *audio_td_ring_ptr(void) {return audio_td_state+0x1054u;}
+/* Stock 0x597324 (td ring pointer): audio_td_ring_ptr is an alias of
+ * audio_terminal_resource_597324 in app/terminal-resource/terminal_resource_items_597324.c. */

@@ -18,8 +18,7 @@ extern void audio_uart_ambiq_image_options_init_488918(void *);
 extern void audio_uart_lv_obj_init_draw_image_452a34(void *, uint32_t, void *);
 extern void *audio_uart_display_area_copy_439c04(void *, const void *, uint32_t);
 extern uint32_t audio_uart_lv_image_style_radius_49865e(void *, uint32_t);
-extern void audio_uart_lv_area_set_450b5c(void *, int32_t, int32_t, int32_t,
-                                           int32_t);
+extern void lv_area_set(void *, int32_t, int32_t, int32_t, int32_t); /* stock 0x450b5c, upstream lv_area.c */
 extern void audio_uart_lv_area_transform_451082(const void *, void *, uint32_t,
                                                  uint32_t, uint32_t);
 extern uint32_t audio_uart_lv_area_intersect_450bcc(void *, const void *,
@@ -29,7 +28,7 @@ extern void audio_uart_lv_draw_image_488a38(void *, const void *, const void *);
 extern void audio_uart_lv_image_descriptor_init_489f5e(void *);
 extern void audio_uart_lv_draw_label_dsc_init_452988(void *, uint32_t, void *);
 extern void audio_uart_lv_draw_label_489fe0(void *, const void *, const void *);
-extern void audio_uart_lvgl_log(uint32_t, const char *, uint32_t,
+extern void lv_log_add(uint32_t, const char *, uint32_t,
                                 const char *, const char *, ...);
 
 static const char path[] =
@@ -124,8 +123,7 @@ static void draw_main(uint8_t *event, uint8_t *image) {
         put(frame, 0x60u, word(image, 0x2cu));
         const int32_t x = (int32_t)word(image, 0x14u);
         const int32_t y = (int32_t)word(image, 0x18u);
-        audio_uart_lv_area_set_450b5c(image_area, x, y, x + width - 1,
-                                       y + height - 1);
+        lv_area_set(image_area, x, y, x + width - 1, y + height - 1);
         put(frame, 0x70u, audio_uart_lv_image_style_radius_49865e(image, 0u));
         const uint32_t align = (flags >> 8u) & 0xfu;
         if (align < 10u) {
@@ -160,9 +158,9 @@ static void draw_main(uint8_t *event, uint8_t *image) {
         put(frame, 0xccu, word(image, 0x2cu));
         audio_uart_lv_draw_label_489fe0(layer, descriptor, image + 0x14u);
     } else if (word(image, 0x2cu) == 0u) {
-        audio_uart_lvgl_log(2u, path, 0x339u, function, null_source);
+        lv_log_add(2u, path, 0x339u, function, null_source);
     } else {
-        audio_uart_lvgl_log(2u, path, 0x33du, function, invalid_source);
+        lv_log_add(2u, path, 0x33du, function, invalid_source);
     }
 }
 

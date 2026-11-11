@@ -73,3 +73,10 @@ on statuses, ordered peripheral/core writes and normalized control state.
 The test uses Cortex-M execution mode so stock IPSR/BASEPRI instructions in
 logging paths execute, rather than intercepting provider functions. It does
 not establish asynchronous IRQ delivery or hardware timing.
+
+The shared section iterator uses the recovered multi-range ABI. Normal
+application builds force `section_users_contract.h` into the SoftDevice,
+SoC and power-management users so their descriptors and cursor offsets agree
+with that implementation. The source composer applies section-relative BLE
+and SDK registry layouts; it does not yet produce a complete firmware final
+link. See [the ABI repair review](../../../docs/reference/sdk-registry-abi-review.md).

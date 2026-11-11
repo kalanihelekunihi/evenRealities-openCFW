@@ -8,6 +8,7 @@ extern void gx8002_uart_stage1_startup_dispatch(void);
 extern void gx8002_uart_stage1_second_entry(void);
 
 /* Stock 0x10000100 (gx8002_uart_boot_stage1_reset) */
+/* Must stay assembly: reset entry that sets PSR/VBR and the stack pointer. */
 __attribute__((naked, noreturn)) void gx8002_uart_stage1_reset(void)
 {
     __asm__ volatile(

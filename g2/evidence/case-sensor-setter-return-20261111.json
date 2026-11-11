@@ -1,0 +1,41 @@
+{
+  "schema": "opencfw.g2.case.sensor-setter-return.v1",
+  "date": "2026-11-11",
+  "reference": {
+    "payload": "g2/blobs/official/g2-2.2.6.10/firmware_box.bin",
+    "header_bytes": 32,
+    "stock_setter": "0x080099e8",
+    "stock_enable_wrapper": "0x0800d154",
+    "observed_return_paths": {
+      "cache_hit": "return the cached byte loaded into R0",
+      "bus_write_failure": "return the lower call's zero result",
+      "bus_write_success": "reload the possibly mutated stack byte, store it in cache, and return it",
+      "enable_wrapper": "return the last setter call's R0"
+    }
+  },
+  "change": {
+    "source": "g2/src/case/startup/application_policy_idle_clear_candidate.c",
+    "summary": "Give the linked output setter the stock uint32_t return behavior and make its alias and caller declarations type compatible.",
+    "linked_setter": "0x08009844",
+    "linked_branch_evidence": "Linked disassembly returns the equal byte, zero after a failed write, or the byte reloaded after a successful write."
+  },
+  "verification": {
+    "manifest_check": "g2: 4890 units, 4551 source files, 1 not built",
+    "case_compile": "366/366; zero duplicate strong symbols and zero unresolved",
+    "host_branch_harness": "passed cache-hit, failed-write, and successful-write-with-byte-mutation cases",
+    "all_compile": "4885/4885 enabled units; zero failures and zero duplicate strong symbols",
+    "all_strict_links": 7,
+    "case_link_bytes": 60180,
+    "case_link_sha256": "36515eb18baa64a722b5bd09efc272c039007e84ae107177bded36aad0b28d22",
+    "source_bundle_bytes": 4638024,
+    "source_bundle_sha256": "c1187eee3fa765619ad3f99a10bf2011300fc43ecb9d49a1d1399f74ee971f54",
+    "source_bundle_matches_locked_target": false,
+    "source_completeness_proven": false,
+    "build_report": "build/case-sensor-return-20261111/all/report.json",
+    "link_report": "build/case-sensor-return-20261111/bundle/link-report.json"
+  },
+  "limits": [
+    "The host harness substitutes an in-memory cache for the target RAM address and a controlled bus lower.",
+    "Physical output-bus behavior, boot, and overall firmware completeness remain unverified."
+  ]
+}

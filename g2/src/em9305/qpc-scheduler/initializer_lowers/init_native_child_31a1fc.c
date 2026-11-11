@@ -1,68 +1,29 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_31a1fc\n"
-".type opencfw_em9305_child_31a1fc,@function\n"
-"opencfw_em9305_child_31a1fc:\n"
-"L31a1fc:\n"
-"enter_s [r13-r16,fp,blink]\n"
-"L31a1fe:\n"
-"sub_s sp,sp,0x8\n"
-"L31a200:\n"
-"mov_s r13,r2\n"
-"L31a202:\n"
-"ldb_s r2,[r2,0]\n"
-"L31a204:\n"
-"mov_s r14,r1\n"
-"L31a206:\n"
-"brne.d.nt r2,0x1,L31a256\n"
-"L31a20a:\n"
-"mov_s r15,r0\n"
-"L31a20c:\n"
-"ldb_s r0,[r14,0x4]\n"
-"L31a20e:\n"
-"bbit1.d.nt r0,0x6,L31a242\n"
-"L31a212:\n"
-"add_s r0,r14,0x7\n"
-"L31a214:\n"
-"bl.d opencfw_em9305_controller_pack_address\n"
-"L31a218:\n"
-"ldb r16,[r14,6]\n"
-"L31a21c:\n"
-"ldh r6,[r15,174]\n"
-"L31a220:\n"
-"ldb r5,[r14,15]\n"
-"L31a224:\n"
-"ldb r4,[r14,4]\n"
-"L31a228:\n"
-"mov_s r2,r0\n"
-"L31a22a:\n"
-"mov_s r3,r1\n"
-"L31a22c:\n"
-"add_s r0,sp,0\n"
-"L31a22e:\n"
-"bl.d opencfw_em9305_child_316a68\n"
-"L31a232:\n"
-"mov_s r1,r16\n"
-"L31a234:\n"
-"ld r2,[sp,0x4]\n"
-"L31a236:\n"
-"mov_s r0,0x80356c\n"
-"L31a23c:\n"
-"bl.d opencfw_em9305_pawr_match_commit_316984\n"
-"L31a240:\n"
-"ld r1,[sp,0]\n"
-"L31a242:\n"
-"stb 2,[r13]\n"
-"L31a246:\n"
-"mov_s r0,0x805b18\n"
-"L31a24c:\n"
-"ldb_s r0,[r0,0]\n"
-"L31a24e:\n"
-"bl.d opencfw_em9305_wsf_event_post\n"
-"L31a252:\n"
-"mov r1,256\n"
-"L31a256:\n"
-"leave_s [r13-r16,fp,blink,pcl]\n"
-".size opencfw_em9305_child_31a1fc,.-opencfw_em9305_child_31a1fc\n"
-);
+#include <stdint.h>
+
+/* Native 0x31a1fc..0x31a258: PAwR response report. Only in state 1: for a
+ * report without the bit-6 flag (+4), pack the six-byte address (+7),
+ * build the match key with 316a68 (byte +6, address, flags +4, byte +15,
+ * the object's halfword +174) and commit it to the match table at
+ * 0x80356c. Then mark the state 2 and post event 0x100 to the task at
+ * 0x805b18. */
+extern uint64_t opencfw_em9305_controller_pack_address(uintptr_t);
+extern uint32_t opencfw_em9305_child_316a68(uintptr_t,uint32_t,uint32_t,uint32_t,
+                                            uint32_t,uint32_t,uint32_t);
+extern uint32_t opencfw_em9305_pawr_match_commit_316984(uintptr_t,uint32_t,uint32_t);
+extern uint32_t opencfw_em9305_wsf_event_post(uint32_t,uint32_t);
+
+void opencfw_em9305_child_31a1fc(uintptr_t object,uintptr_t report,uintptr_t state)
+{
+    if(*(volatile uint8_t *)state!=1u) return;
+    if((*(volatile uint8_t *)(report+4u)&0x40u)==0u) {
+        uint32_t key[2];
+        uint32_t kind=*(volatile uint8_t *)(report+6u);
+        uint64_t address=opencfw_em9305_controller_pack_address(report+7u);
+        (void)opencfw_em9305_child_316a68((uintptr_t)key,kind,(uint32_t)address,
+            (uint32_t)(address>>32),*(volatile uint8_t *)(report+4u),
+            *(volatile uint8_t *)(report+15u),*(volatile uint16_t *)(object+174u));
+        (void)opencfw_em9305_pawr_match_commit_316984((uintptr_t)0x80356cu,key[0],key[1]);
+    }
+    *(volatile uint8_t *)state=2u;
+    (void)opencfw_em9305_wsf_event_post(*(volatile uint8_t *)(uintptr_t)0x805b18u,256u);
+}

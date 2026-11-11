@@ -1,37 +1,19 @@
-/* Native PAwR response build; clear148 bytes and ordered descriptor publication. */
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_callback_322580\n"
-".type opencfw_em9305_callback_322580,@function\n"
-"opencfw_em9305_callback_322580:\n"
-"L322580:\n"
-"enter_s [r13-r14,blink]\n"
-"L322582:\n"
-"ld.as r13,[r0,195]\n"
-"L322586:\n"
-"mov_s r14,r0\n"
-"L322588:\n"
-"mov_s r1,0\n"
-"L32258a:\n"
-"add3 r0,r13,0x30\n"
-"L32258e:\n"
-"bl.d opencfw_em9305_memset\n"
-"L322592:\n"
-"mov_s r2,0x94\n"
-"L322594:\n"
-"add3 r0,r13,0x36\n"
-"L322598:\n"
-"st.as r14,[r13,105]\n"
-"L32259c:\n"
-"st.as r0,[r13,107]\n"
-"L3225a0:\n"
-"add r13,r13,410\n"
-"L3225a4:\n"
-"stb 15,[r0]\n"
-"L3225a8:\n"
-"stb 1,[r13]\n"
-"L3225ac:\n"
-"leave_s [r13-r14,blink,pcl]\n"
-".size opencfw_em9305_callback_322580,.-opencfw_em9305_callback_322580\n"
-);
+#include <stdint.h>
+
+/* Native 0x322580..0x3225ae: reset the 148-byte block at +384 of the
+ * record's context (+780), link it back to the record, point +428 at the
+ * entry at +432 and seed that entry's kind (15) and the active byte at
+ * +410. Returns the entry address. */
+extern void *opencfw_em9305_memset(void *destination, uint32_t value, uint32_t bytes);
+
+uintptr_t opencfw_em9305_callback_322580(uintptr_t record)
+{
+    uintptr_t context=*(volatile uint32_t *)(record+780u);
+    (void)opencfw_em9305_memset((void *)(context+384u),0u,148u);
+    uintptr_t entry=context+432u;
+    *(volatile uint32_t *)(context+420u)=(uint32_t)record;
+    *(volatile uint32_t *)(context+428u)=(uint32_t)entry;
+    *(volatile uint8_t *)entry=15u;
+    *(volatile uint8_t *)(context+410u)=1u;
+    return entry;
+}

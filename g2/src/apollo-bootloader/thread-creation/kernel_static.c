@@ -9,7 +9,7 @@ extern void opencfw_bl_task_return(void);
 static void fail(void) {
     (void)opencfw_bl_mask_interrupts();
     *(volatile uint32_t *)(uintptr_t)UINT32_MAX=0;
-    for (;;) __asm__ volatile("b ." ::: "memory");
+    for (;;) { }
 }
 uintptr_t opencfw_boot_thread_frame(uintptr_t top,uintptr_t base,
                                   uintptr_t entry,uintptr_t arg) {

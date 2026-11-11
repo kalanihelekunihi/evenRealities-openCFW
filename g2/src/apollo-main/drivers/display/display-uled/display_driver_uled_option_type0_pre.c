@@ -1,5 +1,10 @@
 /* Apollo S200 type-0 uLED pre-enable sequence at 0x593200. */
 #include <stdint.h>
+/* Stock-RAM literals rewritten to named objects (sim-test wave 2026-10-26,
+ * .waves/sim-fix/apply.py): g2ref_X is the linker symbol X. */
+#include <stdint.h>
+extern unsigned char g2ref_g2_jbd4010_mspi_handle[] __asm__("g2_jbd4010_mspi_handle");
+extern unsigned char g2ref_g2_stock_ram_200007a0[] __asm__("g2_stock_ram_200007a0");
 
 extern const uint8_t *audio_ble_hci_radio_mode_state_50938e(uint32_t);
 extern void display_driver_uled_type0_pin_prepare_592c78(void);
@@ -24,11 +29,11 @@ uint32_t display_driver_uled_type0_pre_593200(void) {
     *(volatile uint32_t *)(uintptr_t)0x4001044cu = 0x4000u;
     (void)audio_delay(10u);
     g2_norflash_clock_select_4c32b4(0u,0u);
-    uint32_t handle = *(volatile const uint32_t *)(uintptr_t)0x20074524u;
+    uint32_t handle = *(volatile const uint32_t *)(uintptr_t)((uint32_t)(uintptr_t)g2ref_g2_jbd4010_mspi_handle);
     (void)audio_uart_font_flash_power((void *)(uintptr_t)handle,0u,1u);
     (void)g2_norflash_disable_mspi_4c0ea8(handle);
     (void)g2_norflash_configure_mspi_4c099c(handle,
-                                              (const void *)(uintptr_t)0x200007a0u);
+                                              (const void *)(uintptr_t)((uint32_t)(uintptr_t)g2ref_g2_stock_ram_200007a0));
     (void)g2_norflash_enable_mspi_4c0e1e(handle);
     *(volatile uint32_t *)(uintptr_t)0x40010444u = 0x10u;
     return 0u;

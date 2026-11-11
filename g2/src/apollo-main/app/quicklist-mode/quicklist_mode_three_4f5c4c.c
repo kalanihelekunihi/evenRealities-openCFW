@@ -1,5 +1,12 @@
 /* Apollo QuickList modify path 0x4f5c4c..0x4f5e11. */
 #include <stdint.h>
+/* Stock-RAM literals rewritten to named objects (sim-test wave 2026-10-26,
+ * .waves/sim-fix/apply.py): g2ref_X is the linker symbol X. */
+#include <stdint.h>
+extern unsigned char g2ref_g2_quicklist_flag_20075041[] __asm__("g2_quicklist_flag_20075041");
+extern unsigned char g2ref_g2_quicklist_ui_data_2012a72c[] __asm__("g2_quicklist_ui_data_2012a72c");
+extern unsigned char g2ref_g2_quicklist_word_20074e28[] __asm__("g2_quicklist_word_20074e28");
+extern unsigned char g2ref_g2_stock_ram_20101a18[] __asm__("g2_stock_ram_20101a18");
 
 extern void audio_quicklist_copy_record_4f55e0(const void *, void *);
 extern int32_t audio_quicklist_find_record_4f5636(uint32_t);
@@ -16,10 +23,10 @@ static const char compact[] = "[quicklist.page]Modify: total: %d";
 
 uint32_t audio_quicklist_mode_three_4f5c4c(uint32_t detail) {
     (void)detail;
-    const uint8_t *const input = (const uint8_t *)(uintptr_t)0x20101a1cu;
-    uint8_t *const rows = (uint8_t *)(uintptr_t)0x2012a72cu;
-    volatile uint8_t *const state = (volatile uint8_t *)(uintptr_t)0x20075041u;
-    volatile uint32_t *const count_word = (volatile uint32_t *)(uintptr_t)0x20074e28u;
+    const uint8_t *const input = (const uint8_t *)(uintptr_t)((uint32_t)(uintptr_t)g2ref_g2_stock_ram_20101a18+0x4u);
+    uint8_t *const rows = (uint8_t *)(uintptr_t)((uint32_t)(uintptr_t)g2ref_g2_quicklist_ui_data_2012a72c);
+    volatile uint8_t *const state = (volatile uint8_t *)(uintptr_t)((uint32_t)(uintptr_t)g2ref_g2_quicklist_flag_20075041);
+    volatile uint32_t *const count_word = (volatile uint32_t *)(uintptr_t)((uint32_t)(uintptr_t)g2ref_g2_quicklist_word_20074e28);
     *state = 4u;
     *count_word = 0u;
     if (*(const volatile uint8_t *)(const void *)(input + 0x1220u) == 0u)

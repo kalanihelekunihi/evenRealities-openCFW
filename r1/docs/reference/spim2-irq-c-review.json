@@ -1,0 +1,410 @@
+{
+  "source": {
+    "source": "vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx/drivers/src/nrfx_spim.c",
+    "payload": "r1-application",
+    "role": "upstream",
+    "toolchain": "clang",
+    "link": true,
+    "expect": "compile",
+    "returncode": 0,
+    "argv": [
+      "/usr/bin/clang",
+      "--target=arm-none-eabi",
+      "-mcpu=cortex-m4",
+      "-mthumb",
+      "-mfpu=fpv4-sp-d16",
+      "-mfloat-abi=hard",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-fno-strict-aliasing",
+      "-fshort-enums",
+      "-std=c11",
+      "-Os",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-DNRF52840_XXAA",
+      "-DFLOAT_ABI_HARD",
+      "-DNRF_SD_BLE_API_VERSION=7",
+      "-DNRF_DFU_SVCI_ENABLED",
+      "-DNRF_DFU_TRANSPORT_BLE=1",
+      "-DS140",
+      "-DSOFTDEVICE_PRESENT",
+      "-DFREERTOS",
+      "-DCONFIG_NFCT_PINS_AS_GPIOS",
+      "-DCONFIG_GPIO_AS_PINRESET",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/r1/src/config/sdk",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-twi-open-c-final/generated/r1",
+      "-include",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-twi-open-c-final/generated/r1/nrf_svci_clang.h",
+      "-isystem",
+      "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/external/freertos/portable/GCC/nrf52",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/external/freertos/portable/CMSIS/nrf52",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/external/segger_rtt",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/ble/common",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/ble/ble_advertising",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/ble/peer_manager",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/ble/nrf_ble_gatt",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/atomic",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/atomic_flags",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/atomic_fifo",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/delay",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/fds",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/fstorage",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/mutex",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/sortlist",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/timer",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/experimental_section_vars",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/log",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/log/src",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/strerror",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/util",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/softdevice/common",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/softdevice/s140/headers",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/softdevice/s140/headers/nrf52",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/toolchain/cmsis/include",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/integration/nrfx",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/integration/nrfx/legacy",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx/drivers/include",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx/hal",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx/soc",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx/mdk",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/ble/ble_link_ctx_manager",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/ble/ble_services/ble_dfu",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/ble/nrf_ble_qwr",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/balloc",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/bootloader/dfu",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/memobj",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/pwr_mgmt",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/ringbuf",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/external/fprintf",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx/drivers/src",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/bootloader",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/bootloader/ble_dfu",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/svc",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/stack_info",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/mem_manager",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/queue",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/scheduler",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/r1/src/config/rtos",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/third-party/upstream/freertos-kernel/include",
+      "-MD",
+      "-MF",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-twi-open-c-final/r1/r1-application/vendor-cache__r1__nRF5_SDK_17.1.0_ddde560__modules__nrfx__drivers__src__nrfx_spim.c.d",
+      "-c",
+      "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx/drivers/src/nrfx_spim.c",
+      "-o",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-twi-open-c-final/r1/r1-application/vendor-cache__r1__nRF5_SDK_17.1.0_ddde560__modules__nrfx__drivers__src__nrfx_spim.c.o"
+    ],
+    "source_sha256": "ff939b6ef8b4c06fc7f7b664e14dc92b721b61f3f89f062c3de5e756c194ffb7",
+    "object_sha256": "fd3d38fa95cb91d62a3f649d4b9b200ddef156e01312c9313d9ae22df1bff245",
+    "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-twi-open-c-final/r1/r1-application/vendor-cache__r1__nRF5_SDK_17.1.0_ddde560__modules__nrfx__drivers__src__nrfx_spim.c.o",
+    "strong": [
+      "SPIM2_SPIS2_SPI2_IRQHandler",
+      "m_nrf_log_SPIM_logs_data_const",
+      "nrfx_spim_abort",
+      "nrfx_spim_end_event_get",
+      "nrfx_spim_init",
+      "nrfx_spim_start_task_get",
+      "nrfx_spim_uninit",
+      "nrfx_spim_xfer"
+    ],
+    "weak": [],
+    "undefined": []
+  },
+  "normal_report": "build/sources-goal-r1-twi-open-c-final/report.json",
+  "normal_sources_objects_and_manifest_revalidated": true,
+  "firmware_sources_changed": false,
+  "native": {
+    "SPIM2_entry": "0x31a94",
+    "SPIM2_code_bytes": 76,
+    "vector_index": 51,
+    "vector_word": "0x31a95",
+    "TWIM1_boundary_correction": {
+      "entry": "0x31a84",
+      "old_span": 410,
+      "observed_code_bytes": 10,
+      "padding": 2,
+      "literal": 4,
+      "shared_dispatch": "0x939a0",
+      "dispatcher_execution_not_validated": true,
+      "authenticated_inventory_unchanged": true
+    }
+  },
+  "source_symbol": "SPIM2_SPIS2_SPI2_IRQHandler",
+  "REA": [
+    {
+      "evidence_id": "ev_06982ff253ef735ea1e513e71bd61e01fa718e03df822228480f6b921c33ed5c",
+      "subject": {
+        "name": "stock.elf",
+        "digest": {
+          "sha256": "25b4a29af80ec8edab5bd861ba9b74a6e22eab29dc3d7a809a16869e8a140f04"
+        },
+        "local_path": "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-queue-reset-c/stock.elf",
+        "format": "elf",
+        "architecture": "arm"
+      },
+      "provider": {
+        "id": "ghidra",
+        "name": "Ghidra",
+        "version": "12.1.4"
+      },
+      "analysis_profile": {
+        "provider": {
+          "id": "ghidra",
+          "name": "Ghidra",
+          "version": "12.1.4"
+        },
+        "parameters": {
+          "target_kind": "executable",
+          "target_format": "elf",
+          "architecture": "arm",
+          "available_architectures": [
+            "arm"
+          ],
+          "import_mode": "ephemeral-source-immutable",
+          "annotation_policy": "atomic-function-entry-metadata-v1",
+          "load_image_observations": "source-mappings-entry-context-v2",
+          "function_body_evidence": "complete-inclusive-ranges-v1",
+          "function_references": "complete-body-and-entry-reference-manager-v2",
+          "call_relationship_coverage": "function-body-call-coverage-v5",
+          "function_dossier_coverage": "observed-facets-and-call-relationships-v1",
+          "string_inventory_evidence": "defined-data-coverage-v1",
+          "location_resolution": "explicit-address-exact-entry-symbol-first-v3",
+          "procedure_file_offset_resolution": "address-first-unique-target-source-mapping-v2",
+          "instruction_flow_evidence": "decoded-return-pcode-v1",
+          "instruction_references": "exact-address-incoming-v1",
+          "function_boundary_observations": "ghidra-function-boundary-limitations-v3",
+          "no_return_repair": "returning-imports-decoded-return-v2",
+          "process_launch": "inspected-jvm-launch-support-v1",
+          "jump_table_evidence": "typed-case-default-blocks-v1",
+          "decompiler_jump_loads": true,
+          "loader": "auto-from-header",
+          "language_id": "auto-from-header",
+          "compiler_spec_id": "auto-default",
+          "analyzer_preset": "ghidra-default"
+        },
+        "digest": "7e46711069eea041af1b9b99e34115c13332795e5cda76e584a722f529ec70de"
+      },
+      "predicate_type": "rea.analysis",
+      "operation": "read_bytes",
+      "parameters": {
+        "address": "0x31a74",
+        "length": 32
+      },
+      "raw_result": {
+        "address": "0x31a74",
+        "requested_bytes": 32,
+        "returned_bytes": 32,
+        "bytes_hex": "0149024861f092bfe8c102200030004002494ff0402061f089bf00001cc20220",
+        "complete": true
+      },
+      "normalized_result": {
+        "address": "0x31a74",
+        "requested_bytes": 32,
+        "returned_bytes": 32,
+        "bytes_hex": "0149024861f092bfe8c102200030004002494ff0402061f089bf00001cc20220",
+        "complete": true
+      },
+      "confidence": "observed",
+      "authority": "shipped-artifact",
+      "environment": null,
+      "limitations": [
+        "The session serves operations only after Ghidra reports default auto-analysis complete; incomplete analysis does not expose partial results.",
+        "The imported Program and temporary project are ephemeral and deleted on close. Annotation operations edit session database metadata; original executable bytes are never written.",
+        "Cancelling an active Ghidra request terminates its ephemeral database and discards session annotations. The selected target remains open; the next provider query imports the original artifact again.",
+        "Default-space addresses use lowercase 0x-prefixed hexadecimal; other address spaces use <percent-encoded-space>:0x<hex>.",
+        "Bytes reflect Ghidra's initialized memory, including loader fixups. Reads stop at an unmapped or uninitialized byte and report completeness explicitly.",
+        "macOS sessions require a matching executable Ghidra native decompiler; REA checks for it but does not build native components or change Gatekeeper quarantine state."
+      ],
+      "relationship_coverage": null,
+      "locations": [],
+      "evidence_links": []
+    },
+    {
+      "evidence_id": "ev_02206d246455313c326a668a167a34928c33d5bd52c160285d8de1e85c1e7840",
+      "subject": {
+        "name": "stock.elf",
+        "digest": {
+          "sha256": "25b4a29af80ec8edab5bd861ba9b74a6e22eab29dc3d7a809a16869e8a140f04"
+        },
+        "local_path": "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-queue-reset-c/stock.elf",
+        "format": "elf",
+        "architecture": "arm"
+      },
+      "provider": {
+        "id": "ghidra",
+        "name": "Ghidra",
+        "version": "12.1.4"
+      },
+      "analysis_profile": {
+        "provider": {
+          "id": "ghidra",
+          "name": "Ghidra",
+          "version": "12.1.4"
+        },
+        "parameters": {
+          "target_kind": "executable",
+          "target_format": "elf",
+          "architecture": "arm",
+          "available_architectures": [
+            "arm"
+          ],
+          "import_mode": "ephemeral-source-immutable",
+          "annotation_policy": "atomic-function-entry-metadata-v1",
+          "load_image_observations": "source-mappings-entry-context-v2",
+          "function_body_evidence": "complete-inclusive-ranges-v1",
+          "function_references": "complete-body-and-entry-reference-manager-v2",
+          "call_relationship_coverage": "function-body-call-coverage-v5",
+          "function_dossier_coverage": "observed-facets-and-call-relationships-v1",
+          "string_inventory_evidence": "defined-data-coverage-v1",
+          "location_resolution": "explicit-address-exact-entry-symbol-first-v3",
+          "procedure_file_offset_resolution": "address-first-unique-target-source-mapping-v2",
+          "instruction_flow_evidence": "decoded-return-pcode-v1",
+          "instruction_references": "exact-address-incoming-v1",
+          "function_boundary_observations": "ghidra-function-boundary-limitations-v3",
+          "no_return_repair": "returning-imports-decoded-return-v2",
+          "process_launch": "inspected-jvm-launch-support-v1",
+          "jump_table_evidence": "typed-case-default-blocks-v1",
+          "decompiler_jump_loads": true,
+          "loader": "auto-from-header",
+          "language_id": "auto-from-header",
+          "compiler_spec_id": "auto-default",
+          "analyzer_preset": "ghidra-default"
+        },
+        "digest": "7e46711069eea041af1b9b99e34115c13332795e5cda76e584a722f529ec70de"
+      },
+      "predicate_type": "rea.analysis",
+      "operation": "read_bytes",
+      "parameters": {
+        "address": "0x31a94",
+        "length": 84
+      },
+      "raw_result": {
+        "address": "0x31a94",
+        "requested_bytes": 84,
+        "returned_bytes": 84,
+        "bytes_hex": "f8b51248124e04464ff48c7148f073fd00281ad00025c4f81851d4f818010090f07f3446ff2806d0a17f11b147f0a4fb01e047f005fd65772572d4e9002101b004f10800bde8f0401047f8bd0030024080c20220",
+        "complete": true
+      },
+      "normalized_result": {
+        "address": "0x31a94",
+        "requested_bytes": 84,
+        "returned_bytes": 84,
+        "bytes_hex": "f8b51248124e04464ff48c7148f073fd00281ad00025c4f81851d4f818010090f07f3446ff2806d0a17f11b147f0a4fb01e047f005fd65772572d4e9002101b004f10800bde8f0401047f8bd0030024080c20220",
+        "complete": true
+      },
+      "confidence": "observed",
+      "authority": "shipped-artifact",
+      "environment": null,
+      "limitations": [
+        "The session serves operations only after Ghidra reports default auto-analysis complete; incomplete analysis does not expose partial results.",
+        "The imported Program and temporary project are ephemeral and deleted on close. Annotation operations edit session database metadata; original executable bytes are never written.",
+        "Cancelling an active Ghidra request terminates its ephemeral database and discards session annotations. The selected target remains open; the next provider query imports the original artifact again.",
+        "Default-space addresses use lowercase 0x-prefixed hexadecimal; other address spaces use <percent-encoded-space>:0x<hex>.",
+        "Bytes reflect Ghidra's initialized memory, including loader fixups. Reads stop at an unmapped or uninitialized byte and report completeness explicitly.",
+        "macOS sessions require a matching executable Ghidra native decompiler; REA checks for it but does not build native components or change Gatekeeper quarantine state."
+      ],
+      "relationship_coverage": null,
+      "locations": [],
+      "evidence_links": []
+    }
+  ],
+  "layout": {
+    "control_size": 36,
+    "event_size": 20,
+    "fields": {
+      "handler": 0,
+      "p_context": 4,
+      "evt": 8,
+      "state": 28,
+      "transfer_in_progress": 29,
+      "ss_active_high": 30,
+      "ss_pin": 31,
+      "miso_pin": 32,
+      "orc": 33
+    },
+    "SPIM_instances": 1,
+    "SPIM2_index": 0
+  },
+  "validation": {
+    "paired_sequences": 2880,
+    "IRQ_invocations_per_sequence": 2,
+    "paired_IRQ_invocations": 5760,
+    "native_MMIO_depths": [
+      24,
+      32
+    ],
+    "C_MMIO_depths": [
+      0,
+      12
+    ],
+    "callback_tail_depth": 0,
+    "control_address": "0x2002c280",
+    "control_bytes": 36,
+    "actual_native_and_C_MMIO": true,
+    "ordered_MMIO_reads_writes": true,
+    "callback_callee_registers_R4_R11": true,
+    "limits": [
+      "OUTSET/OUTCLR aliases modeled; real SPI/EasyDMA traffic, chip-select electrical timing and IRQ delivery unproven.",
+      "Nonzero END values, valid pins/unused sentinel and bool configurations tested; null handlers, corrupt states, arbitrary aliases/faults/concurrency excluded.",
+      "Callback tail forwarding uses ordinary LR; actual exception return unproven."
+    ]
+  },
+  "negative_controls": {
+    "inverted-SS": {
+      "rejected": true,
+      "stderr": "Traceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-spim2-irq-c/reject-inverted-SS.py\", line 58, in <module>\n    x,dx=a(*c);y,dy=b(*c);assert x==y,c\n                                 ^^^^\nAssertionError: (1, 0, 0, 1, 536973312, 165, 0)\n"
+    },
+    "use-unused-SS": {
+      "rejected": true,
+      "stderr": "Traceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-spim2-irq-c/reject-use-unused-SS.py\", line 58, in <module>\n    x,dx=a(*c);y,dy=b(*c);assert x==y,c\n                                 ^^^^\nAssertionError: (1, 255, 0, 1, 536973312, 165, 0)\n"
+    },
+    "retain-busy": {
+      "rejected": true,
+      "stderr": "Traceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-spim2-irq-c/reject-retain-busy.py\", line 58, in <module>\n    x,dx=a(*c);y,dy=b(*c);assert x==y,c\n                    ~^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-spim2-irq-c/reject-retain-busy.py\", line 50, in run\n    u.emu_start((0x31a94 if stock else syms['SPIM2_SPIS2_SPI2_IRQHandler'])|1,STOP,count=1000)\n    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 769, in emu_start\n    raise self._hook_exception\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 363, in wrapper\n    return func(uc, *args, **kwargs)\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 1063, in __hook_code_cb\n    callback(uc, address, size, user_data)\n    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-spim2-irq-c/reject-retain-busy.py\", line 34, in code\n    assert bytes(u.mem_read(CB+8,1))==b'\\0' and bytes(u.mem_read(CB+29,1))==b'\\0'\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    "lost-context": {
+      "rejected": true,
+      "stderr": "Traceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-spim2-irq-c/reject-lost-context.py\", line 58, in <module>\n    x,dx=a(*c);y,dy=b(*c);assert x==y,c\n                    ~^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-spim2-irq-c/reject-lost-context.py\", line 50, in run\n    u.emu_start((0x31a94 if stock else syms['SPIM2_SPIS2_SPI2_IRQHandler'])|1,STOP,count=1000)\n    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 769, in emu_start\n    raise self._hook_exception\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 363, in wrapper\n    return func(uc, *args, **kwargs)\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 1063, in __hook_code_cb\n    callback(uc, address, size, user_data)\n    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-spim2-irq-c/reject-lost-context.py\", line 33, in code\n    assert u.reg_read(UC_ARM_REG_R0)==CB+8 and u.reg_read(UC_ARM_REG_R1)==val(u,CB+4)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    "retain-event-type": {
+      "rejected": true,
+      "stderr": "Traceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-spim2-irq-c/reject-retain-event-type.py\", line 58, in <module>\n    x,dx=a(*c);y,dy=b(*c);assert x==y,c\n                    ~^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-spim2-irq-c/reject-retain-event-type.py\", line 50, in run\n    u.emu_start((0x31a94 if stock else syms['SPIM2_SPIS2_SPI2_IRQHandler'])|1,STOP,count=1000)\n    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 769, in emu_start\n    raise self._hook_exception\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 363, in wrapper\n    return func(uc, *args, **kwargs)\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 1063, in __hook_code_cb\n    callback(uc, address, size, user_data)\n    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-spim2-irq-c/reject-retain-event-type.py\", line 34, in code\n    assert bytes(u.mem_read(CB+8,1))==b'\\0' and bytes(u.mem_read(CB+29,1))==b'\\0'\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    "retain-END": {
+      "rejected": true,
+      "stderr": "Traceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-spim2-irq-c/reject-retain-END.py\", line 58, in <module>\n    x,dx=a(*c);y,dy=b(*c);assert x==y,c\n                                 ^^^^\nAssertionError: (1, 0, 0, 1, 536973312, 165, 0)\n"
+    }
+  },
+  "qualification": "build/goal-r1-spim2-irq-c/qualified-product/qualification.json",
+  "new_exact_bytes": 0,
+  "retained_hybrid": {
+    "report": "build/hybrid-goal-r1-twi-open-c-final/build-report.json",
+    "sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "totals": {
+      "binary-pull-through": 641915,
+      "source-built": 4245,
+      "resource-file": 248
+    },
+    "source_plan_hash_revalidated": true,
+    "source_completeness_proven": false
+  },
+  "probe_hashes": {
+    "build/goal-r1-spim2-irq-c/verify.py": "72cc71466dbd8d252fbc9f7aa9711f384711e261ba89283110813e6275c81a81",
+    "build/goal-r1-spim2-irq-c/negative.py": "3a78db6978ff0d4a66446ab7fde4bfb29b4514356f19a75fc26b4c045af3b803",
+    "build/goal-r1-spim2-irq-c/layout.py": "62c9e4f74d1e8d02de002e437f029737a5cf42b1dfa7ed5cfea97a09ae2917dd",
+    "build/goal-r1-spim2-irq-c/source.elf": "61be43448cd060e80c05c728aaa60f4bf467503ed9d28e33f8d19db711ca39ec",
+    "build/goal-r1-spim2-irq-c/rea.json": "bf431f77e4f465efa78f789147a1446744c64665738ab814eed02bb1a437c43e"
+  },
+  "subsequent_bounded_observer_replay": {
+    "review": "r1/docs/reference/irq-observer-review.json",
+    "full_matrix_identical": true
+  },
+  "subsequent_TWIM_validation": {
+    "review": "r1/docs/reference/twim-irq-c-review.json",
+    "shared_dispatch_now_tested": true
+  }
+}

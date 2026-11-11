@@ -12,7 +12,9 @@ static uint32_t rd32(uint32_t a){return *(volatile uint32_t *)(uintptr_t)a;}
 static void wr32(uint32_t a,uint32_t v){*(volatile uint32_t *)(uintptr_t)a=v;}
 static uint16_t rd16(uint32_t a){return *(volatile uint16_t *)(uintptr_t)a;}
 static uint32_t rem(uint32_t value,uint32_t divisor){return value-case_policy_sensor_divide(value,divisor)*divisor;}
-static void logline(uint32_t a){(void)case_policy_log(a);(void)case_policy_log(CASE_STRING_ADDR(08001b08));}
+/* Boot-test fix: stock 0x08001a56/0x08001ab2 pass the incremented failure
+ * count (r1) for the "cnt:%d" field; the reduction dropped it. */
+static void logline(uint32_t a,uint32_t count){(void)case_policy_log(a,count);(void)case_policy_log(CASE_STRING_ADDR(08001b08));}
 /* Stock 0x080018E4 (glasses_status_poll_dispatch) */
 void case_policy_service_maintenance(void)
 {
@@ -62,7 +64,7 @@ void case_policy_service_maintenance(void)
             wr32(base+0x3cu,rd32(base+0x3cu)+1u);
         }else{
             wr32(base+0x3cu,0u);wr32(base+0x40u,rd32(base+0x40u)+1u);
-            if(*quiet==0u)logline(CASE_STRING_ADDR(08001bd4));
+            if(*quiet==0u)logline(CASE_STRING_ADDR(08001bd4),rd32(base+0x40u));
         }
     }
     if(right_present!=0u && right_allowed!=0u && rem(rd32(base+0x60u),15u)==0u){
@@ -75,7 +77,7 @@ void case_policy_service_maintenance(void)
             wr32(base+0x58u,rd32(base+0x58u)+1u);
         }else{
             wr32(base+0x5cu,rd32(base+0x5cu)+1u);wr32(base+0x58u,0u);
-            if(*quiet==0u)logline(CASE_STRING_ADDR(08001bf8));
+            if(*quiet==0u)logline(CASE_STRING_ADDR(08001bf8),rd32(base+0x5cu));
         }
     }
 }

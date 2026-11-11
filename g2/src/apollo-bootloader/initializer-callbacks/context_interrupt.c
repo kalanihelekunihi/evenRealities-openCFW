@@ -19,3 +19,6 @@ uint32_t opencfw_boot_context_interrupt_enable(const uint32_t *handle,
     *enable |= mask;
     return 0u;
 }
+
+/* Stock entry names that branch straight to the provider above. */
+__typeof__(opencfw_boot_context_interrupt_enable) opencfw_bl_context_interrupt_enable __attribute__((alias("opencfw_boot_context_interrupt_enable")));

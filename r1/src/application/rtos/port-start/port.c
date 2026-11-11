@@ -26,6 +26,28 @@
  * 1 tab == 4 spaces!
  */
 #include "port_start_contract.h"
+/* Nordic port_cmsis.c critical-section pair, using the shared recovered
+ * nesting word. Capture each state transition once, as stock does, rather
+ * than rereading the volatile contract cell for the following comparison. */
+void vPortEnterCritical(void)
+{
+    portDISABLE_INTERRUPTS();
+    UBaseType_t nesting = uxCriticalNesting + 1u;
+    uxCriticalNesting = nesting;
+    if (nesting == 1u)
+        configASSERT((SCB->ICSR & SCB_ICSR_VECTACTIVE_Msk) == 0);
+}
+
+void vPortExitCritical(void)
+{
+    UBaseType_t nesting = uxCriticalNesting;
+    configASSERT(nesting);
+    nesting--;
+    uxCriticalNesting = nesting;
+    if (nesting == 0)
+        portENABLE_INTERRUPTS();
+}
+
 #define portTOP_BIT_OF_BYTE                 ( ( uint8_t ) 0x80 )
 
 #define portMAX_8_BIT_VALUE                 ( ( uint8_t ) 0xff )

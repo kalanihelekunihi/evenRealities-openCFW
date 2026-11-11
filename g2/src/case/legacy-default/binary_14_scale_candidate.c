@@ -4,7 +4,7 @@
 #include <stdint.h>
 
 /* Stock 0x0800018C (case_binary_14_divpair) */
-static __attribute__((used)) void case_binary_14_divpair(uint32_t dividend_word,
+static void case_binary_14_divpair(uint32_t dividend_word,
                             uint32_t divisor_word, uint32_t *quotient_out,
                             uint32_t *remainder_out)
 {
@@ -29,17 +29,12 @@ static __attribute__((used)) void case_binary_14_divpair(uint32_t dividend_word,
     *remainder_out = dividend;
 }
 
-__attribute__((naked)) uint32_t case_binary_14_scale(uint32_t dividend_word,
-                                                       uint32_t divisor_word)
+/* Stock returns the quotient in R0 and the remainder in R1; every caller
+ * (binary_14_candidate.c, binary_14_read_b_candidate.c) declares a uint32_t
+ * result and uses only the quotient. */
+uint32_t case_binary_14_scale(uint32_t dividend_word, uint32_t divisor_word)
 {
-    __asm__ volatile(
-        "push {r4, lr}\n"
-        "sub sp, #8\n"
-        "mov r2, sp\n"
-        "add r3, sp, #4\n"
-        "bl case_binary_14_divpair\n"
-        "ldr r0, [sp, #0]\n"
-        "ldr r1, [sp, #4]\n"
-        "add sp, #8\n"
-        "pop {r4, pc}\n");
+    uint32_t quotient, remainder;
+    case_binary_14_divpair(dividend_word, divisor_word, &quotient, &remainder);
+    return quotient;
 }

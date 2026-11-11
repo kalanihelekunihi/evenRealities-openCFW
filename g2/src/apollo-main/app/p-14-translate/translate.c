@@ -70,7 +70,6 @@ extern void audio_uart_display_audio_reset_441488(uint32_t, uint32_t, uint32_t);
 extern void audio_tracepoint_reset_pull_478110(uint8_t);                     /* ble_state_skip_manual_start */
 extern void audio_ble_param_reset_delayed_event(uint32_t);                   /* 0x478252 */
 extern uint32_t audio_terminal_reset_mode_notice_54f50e(uint32_t);           /* AUDM_appRelease */
-extern uint64_t audio_uart_ring_u64_div_47cc60(uint32_t, uint32_t, uint32_t, uint32_t);
 extern int32_t translate_machine_handler_596b0c(uint32_t event, const void *data, uint32_t length);
 extern void translate_ui_0059d8f0(uint32_t);                                 /* translate_ui_init */
 extern void translate_ui_0059d9d4(void);                                     /* translate_ui_deinit */
@@ -435,9 +434,7 @@ uint32_t audio_uart_registry_callback_59f236(uint32_t event, const void *data, u
         audio_uart_buffer_zero(g2_translate_session, sizeof g2_translate_session, 0u);
         /* Display time in ms: ticks * 1000 / configTICK_RATE_HZ (1000). */
         uint64_t scaled = (uint64_t)(osKernelGetTickCount() - g2_translate_display_start_tick) * 1000u;
-        uint32_t duration = (uint32_t)audio_uart_ring_u64_div_47cc60((uint32_t)scaled,
-                                                                    (uint32_t)(scaled >> 32),
-                                                                    1000u, 0u);
+        uint32_t duration = (uint32_t)(scaled / 1000u);
         if (audio_uart_device_role_get() == 1u) {
             uint32_t report[2];
             report[0] = duration_report_head;

@@ -1,0 +1,90 @@
+{
+  "passed": 9216,
+  "executions": 18432,
+  "lookup_and_driver_modeled": true,
+  "diagnostics_compared": true,
+  "ordered_fields_compared": true,
+  "wrapping_bounds": true,
+  "source_report": "build/sources-goal-r1-fal-c-read/report.json",
+  "source_size": 258,
+  "shared_alias_body": true,
+  "source_sha256": {
+    "{gen}/fal_partition_r1_lookup.c": "2b44b1943bc44dc5bf7330f93b8a27c613cf13d1b8044588268912ea043e33ac"
+  },
+  "limitations": [
+    "Lookup/driver/printf modeled; real lookup checked separately",
+    "Private frames and caller-clobbered registers/flags excluded",
+    "Invalid driver pointers, arbitrary aliasing, concurrency and electrical flash behavior unverified",
+    "No byte qualification"
+  ],
+  "negative_control": {
+    "mutation": "Read partition offset before lookup",
+    "rejected": true,
+    "counterexample": {
+      "offset_before": 0,
+      "offset_after_lookup": "0x87654321",
+      "addr": 0,
+      "native_driver_address": "0x87654321",
+      "hoisted_driver_address": 0
+    },
+    "stderr": "arm-none-eabi-ld: warning: (strlen): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-fal-c-read/bad.o\narm-none-eabi-ld: warning: (strlen): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-fal-c-read/bad.o\narm-none-eabi-ld: warning: (strlen): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-fal-c-read/bad.o\narm-none-eabi-ld: warning: (strlen): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-fal-c-read/bad.o\narm-none-eabi-ld: warning: (strlen): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-fal-c-read/bad.o\narm-none-eabi-ld: warning: (strlen): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-fal-c-read/bad.o\narm-none-eabi-ld: warning: (fal_flash_device_find): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-fal-c-read/bad.o\narm-none-eabi-ld: warning: (strcmp): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-fal-c-read/bad.o\narm-none-eabi-ld: warning: (r1_native_printf): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-fal-c-read/bad.o\narm-none-eabi-ld: warning: (r1_native_printf): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-fal-c-read/bad.o\narm-none-eabi-ld: warning: (r1_native_printf): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-fal-c-read/bad.o\narm-none-eabi-ld: warning: (r1_native_printf): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-fal-c-read/bad.o\narm-none-eabi-ld: warning: (r1_native_printf): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-fal-c-read/bad.o\narm-none-eabi-ld: warning: (r1_native_printf): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-fal-c-read/bad.o\narm-none-eabi-ld: warning: (r1_native_printf): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-fal-c-read/bad.o\narm-none-eabi-ld: warning: (r1_native_printf): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-fal-c-read/bad.o\narm-none-eabi-ld: warning: (r1_native_printf): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-fal-c-read/bad.o\narm-none-eabi-ld: warning: (r1_native_printf): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-fal-c-read/bad.o\narm-none-eabi-ld: warning: (r1_native_printf): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-fal-c-read/bad.o\nTraceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-fal-c-read/reject-offset-hoist.py\", line 65, in <module>\n    for c in [(False,False,16,0,0,1,True,0,1)]:assert a(*c)==b(*c),c\n                                                             ~^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-fal-c-read/reject-offset-hoist.py\", line 59, in run\n    live=0x87654321 if mutation==1 else offset;assert state['calls']==[('lookup',PART),('driverB' if mutation==1 else 'driverA',(live+addr)&0xffffffff,BUF,length)]\n                                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+  },
+  "integrated": {
+    "passed": 6144,
+    "executions": 12288,
+    "actual_C_lookup": true,
+    "driver_and_printf_modeled": true,
+    "diagnostics_compared": true,
+    "ordered_fields_compared": true,
+    "wrapping_bounds": true,
+    "source_report": "build/sources-goal-r1-fal-c-read/report.json",
+    "source_size": 258,
+    "shared_alias_body": true,
+    "source_sha256": {
+      "{gen}/fal_partition_r1_lookup.c": "2b44b1943bc44dc5bf7330f93b8a27c613cf13d1b8044588268912ea043e33ac"
+    },
+    "limitations": [
+      "Driver and printf modeled; native/C read and cache lookup execute",
+      "Private frames and caller-clobbered registers/flags excluded",
+      "Invalid driver pointers, arbitrary aliasing, concurrency and electrical flash behavior unverified",
+      "No byte qualification"
+    ]
+  },
+  "lookup_regression": {
+    "passed": 2765,
+    "executions": 5530,
+    "ordered_state_reads": true,
+    "assertion_text_and_nonreturn_checked": true,
+    "unaligned_interior_partition_values": true,
+    "source_report": "build/sources-goal-r1-fal-c-read/report.json",
+    "source_size": 118,
+    "shared_private_table_and_cache": true,
+    "source_sha256": {
+      "{gen}/fal_partition_r1_lookup.c": "2b44b1943bc44dc5bf7330f93b8a27c613cf13d1b8044588268912ea043e33ac"
+    },
+    "limitations": [
+      "Private state is seeded directly; full partition initialization and physical flash behavior unverified",
+      "Valid cache-index ranges sampled, including zero-state underflow cases; arbitrary corrupted table spans excluded",
+      "Diagnostic output modeled; private stack bytes and caller-clobbered registers/flags excluded",
+      "No byte qualification"
+    ]
+  },
+  "evidence": {
+    "build/goal-r1-fal-c-read/stock.elf": "346826558197a185b9a9e710b6b4fbfd01b2fe501404002896faac25592d3e7d",
+    "build/goal-r1-fal-c-read/REA.snapshot.json": "755e349b911e5d54673376aa439e1a8f1463dbfa098137e9100dc20296c5e23a",
+    "build/goal-r1-fal-c-read/verify.py": "3a588e1f588a5e23c7e49014bf2405822381b5e29b7a89f5a369645c9d566140",
+    "build/goal-r1-fal-c-read/source.elf": "ab6bf15f453716c56697ffc7d77b62977d5192d2d82badc65b818a6fe1a17ff7",
+    "build/goal-r1-fal-c-read/bad-header/native_partition_read.h": "7ca45132ebcf8d575e064d44f04f17bf7f23063425884ab5331f0bc34153a80e",
+    "build/goal-r1-fal-c-read/reject-offset-hoist.py": "45f8ece11689a50c05ea67ad0f238d79d052b686a5099dc05ba3fa4c8af78334",
+    "build/goal-r1-fal-c-read/integrated/verify.py": "8aba416cb1022d23809b7904789bc53377206b820e383d04766035db65f57342",
+    "build/goal-r1-fal-c-read/lookup/verify.py": "4013a7635a34c50535aa84d968cc94aa820d2051874428769a778fea9fd9c61e",
+    "r1/src/application/board/fal-native/native_lookup.h": "39deac9f49d488cba11c9e59b4509f4dc27483fedbd310ac2f206ef1e901cb8e",
+    "r1/src/application/board/fal-native/native_partition_read.h": "dd3891e749194f6c1c18584a295aa91966e4f859f1a07616401c4ae011176305",
+    "build/sources-goal-r1-fal-c-read/generated/r1/fal_partition_r1_lookup.c": "2b44b1943bc44dc5bf7330f93b8a27c613cf13d1b8044588268912ea043e33ac",
+    "build/sources-goal-r1-fal-c-read/report.json": "510a2489a4f63c7d07ad8b7a26b557601b6cf06e41957e75ea3f3aa9de5dd0a7",
+    "r1/src/sources.json": "43feae70d13b068d8367196ebd71ae7eda1c15cae4b5d70300b1c7d8765a36de",
+    "r1/symbols/function-frontier.csv": "b7eb61f2a295b6c09d81b1c5c28e454e7bd45b07fd83c4b982c7f3d9f8a22d94",
+    "tools/build/source-plan.json": "4d46e8c038db79a174a2d719086fd0be80503ca7cdbfc2c51e5ed3d30d293064"
+  },
+  "source_plan_changed": false
+}

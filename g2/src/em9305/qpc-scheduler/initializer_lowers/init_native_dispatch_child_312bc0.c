@@ -1,23 +1,11 @@
-/* Complete native 312bc0 parameter selector and all branch delay slots. */
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_dispatch_child_312bc0\n"
-".type opencfw_em9305_dispatch_child_312bc0,@function\n"
-"opencfw_em9305_dispatch_child_312bc0:\n"
-"L312bc0: breq.nt r0,0x3,L312bd6\n"
-"L312bc4: breq.d.nt r0,0x2,L312bde\n"
-"L312bc8: cmp_s r0,1\n"
-"L312bca: mov_s r0,0x96\n"
-"L312bcc: jne_s [blink]\n"
-"L312bce: mov r0,262\n"
-"L312bd2: j_s.d [blink]\n"
-"L312bd4: add3_s r0,r0,r1\n"
-"L312bd6: asl_s r0,r1,0x6\n"
-"L312bd8: j_s.d [blink]\n"
-"L312bda: add r0,r0,1126\n"
-"L312bde: mov_s r0,0xd2\n"
-"L312be0: j_s.d [blink]\n"
-"L312be2: add2_s r0,r0,r1\n"
-".size opencfw_em9305_dispatch_child_312bc0,.-opencfw_em9305_dispatch_child_312bc0\n"
-);
+#include <stdint.h>
+
+/* Native 0x312bc0..0x312be4: per-PHY packet duration term; 1M uses
+ * 262+8n, 2M uses 210+4n, coded uses 1126+64n, unknown PHYs give 150. */
+uint32_t opencfw_em9305_dispatch_child_312bc0(uint32_t phy, uint32_t length)
+{
+    if(phy==3u)return (length<<6)+1126u;
+    if(phy==2u)return 210u+(length<<2);
+    if(phy==1u)return 262u+(length<<3);
+    return 150u;
+}

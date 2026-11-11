@@ -1,0 +1,161 @@
+{
+  "cases": 1341,
+  "passed": 1341,
+  "failures": [],
+  "categories": {
+    "r1_batcfg_byte0_get": 264,
+    "r1_batcfg_flag1_get": 264,
+    "r1_batcfg_word1_signed_get": 264,
+    "r1_kv_dev_info_fields_set": 549
+  },
+  "imports_removed": [
+    "r1_batcfg_record_kv_handle",
+    "r1_device_info_record_kv_handle"
+  ],
+  "imports_added": [],
+  "application_imports": 218,
+  "bootloader_imports": 34,
+  "actual_cached_read_write_and_memcpy_execute": true,
+  "callback_stack_depth_pairs": [
+    [
+      [],
+      []
+    ],
+    [
+      [
+        -88,
+        -88
+      ],
+      [
+        -104,
+        -104
+      ]
+    ],
+    [
+      [
+        -88,
+        -88,
+        -88,
+        -88
+      ],
+      [
+        -104,
+        -104,
+        -88,
+        -88
+      ]
+    ],
+    [
+      [
+        -32,
+        -32
+      ],
+      [
+        -40,
+        -40
+      ]
+    ]
+  ],
+  "integrated_sources": [
+    "r1/src/application/board/native_battery_configuration.c",
+    "r1/src/application/board/native_kv_class.c",
+    "r1/src/application/board/native_kv_device_fields.c",
+    "r1/src/application/runtime/native_battery_kv_config.c",
+    "third-party/upstream/musl-memory-1.2.5/memcpy.c"
+  ],
+  "report": "build/sources-goal-r1-battery-kv/report.json",
+  "report_sha256": "7644de8747e07e01eee9b5141983d2f752ad2887384b8fc34459064c6bb0249c",
+  "manifest_sha256": "349f3183c3c6f98b05dbca56a6181fe52334d943eb463ba036d066333d887870",
+  "stock_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "initialization": {
+    "stock_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "native_decoder_executed": true,
+    "guards_unchanged": true,
+    "expanded_sha256": "87fdee392022fdbe23dd0daf3e859fb14f3ce26ba3e8403aab56dc9d9a913317",
+    "cells": {
+      "r1_power_kv_class": {
+        "address": "0x20006abc",
+        "size": 28,
+        "section": ".r1.battery.kv.power",
+        "alignment": 4,
+        "bytes": "00000000706f77657200000000000000010002000400000000000000",
+        "sha256": "73542fb7d589edda183ce35d48b6751b49f73715741924dcaa4884134d36282b",
+        "relocation": null
+      },
+      "r1_dev_info_kv_class": {
+        "address": "0x200069a8",
+        "size": 76,
+        "section": ".r1.battery.kv.devinfo",
+        "alignment": 4,
+        "bytes": "000000006465765f696e666f0000000001000000340000000000000000000000ffffffffffffffffffffffff43414d4801000000000000000000000000000000000000001900000000000000",
+        "sha256": "d40a9cfa4320df4464614e46ba16d07bed0f77bc55954e9e20f85e9dff17b631",
+        "relocation": null
+      },
+      "r1_batcfg_record_kv_handle": {
+        "address": "0x20007df8",
+        "size": 4,
+        "section": ".r1.battery.kv.power.handle",
+        "alignment": 4,
+        "bytes": "bc6a0020",
+        "sha256": "d0a46b0732ae3565b9655b9d1965a54dc33eeaa4631709a29beddf20ed0011c5",
+        "relocation": {
+          "type": "R_ARM_ABS32",
+          "target": "r1_power_kv_class"
+        }
+      },
+      "r1_device_info_record_kv_handle": {
+        "address": "0x20007de8",
+        "size": 4,
+        "section": ".r1.battery.kv.devinfo.handle",
+        "alignment": 4,
+        "bytes": "a8690020",
+        "sha256": "54b6502398187350dc0c4a5fabfa383e869d2835396f2b73caf251a9d68b3ee1",
+        "relocation": {
+          "type": "R_ARM_ABS32",
+          "target": "r1_dev_info_kv_class"
+        }
+      }
+    },
+    "owned_bytes": 112
+  },
+  "rea": [
+    {
+      "completed": true,
+      "procedure": "0x73930",
+      "path": "build/goal-r1-battery-kv/REA-current-0x73930.json",
+      "sha256": "e43ef72aa506f3bc486d2ca52a27ee301c58062496ba8ae4a118c105210c6fd9"
+    },
+    {
+      "completed": true,
+      "procedure": "0x73968",
+      "path": "build/goal-r1-battery-kv/REA-current-0x73968.json",
+      "sha256": "43ce5b584ffb3f4b694376d81ffd3ed3d3c9fda5c4f6fa91c9d5b2111e463fe1"
+    }
+  ],
+  "source_sha256": {
+    "r1/src/application/board/native_battery_configuration.c": "3a46eaa46ac6d51a97aae1830dad4a82bcd78288e8ebfeb5b249a6b33d97661e",
+    "r1/src/application/board/native_kv_class.c": "e9791d39b7a9b5380b1dbce3c7422be921131abbd0e09c3387ea3d4b9930bf6e",
+    "r1/src/application/board/native_kv_device_fields.c": "a0167526020280b75427469cc987ff61c91dae0ba923fe7e94ad8afd4c8c8ec0",
+    "r1/src/application/runtime/native_battery_kv_config.c": "16b0aa9ca3cc92340178e94ef332241e38a6ae2393c230f6e4bf950039396ebb",
+    "third-party/upstream/musl-memory-1.2.5/memcpy.c": "1664d565f968b053ac33c5ac615c057a255a5821c8fa510fba61d4f63dee08e9"
+  },
+  "probe_artifacts": {
+    "build/goal-r1-battery-kv/verify.py": "61148fc4c2cf96a358536235c902228688898bc6f4121331edf9fddbcebc578a",
+    "build/goal-r1-battery-kv/initialization.py": "6e9716c0b9cc6fc0392d2f1d412e7401967e917d7dee359c0f1bd915be8375a9",
+    "build/goal-r1-battery-kv/initialization.json": "2cfcc3545d96fdfd84162c992a220ec76d792c7d557e57e9b7dcc90285a30245",
+    "build/goal-r1-battery-kv/expanded-rw.bin": "87fdee392022fdbe23dd0daf3e859fb14f3ce26ba3e8403aab56dc9d9a913317",
+    "build/goal-r1-battery-kv/before.c": "19774cb2feda0b4d47c79f6bfa2656dafa5672b48bffe381c1f27b0d261ff239",
+    "build/goal-r1-battery-kv/manifest-before.json": "49803fdc777c016138b497b60d424c7a2b7530cd606ce1180b1f339566793c57",
+    "build/goal-r1-battery-kv/source.elf": "fd6038a5a9b135ad314465ffb693ef33c98278cc18546edb5b93d100083f6304",
+    "build/goal-r1-battery-kv/stock.elf": "fbc8f64c71db0835b29a62ed4c2afaaf550df4696474f0bfe1a362403af5b9b8",
+    "build/goal-r1-battery-kv/rea-current-snapshot.json": "8904aa562e12a0abe2e81f8318dccefd11837974dfdc75751b1b6cd8c3fa32fd"
+  },
+  "other_source_units_unchanged": 561,
+  "limits": [
+    "Only two classes and their handles are owned: 112 bytes, not the whole KV arena or startup image.",
+    "Probe layout pins the classes/handles to native addresses; final firmware placement and boot initialization remain separate gates.",
+    "Cached-class reader/writer, getters, device-field setter and pinned musl memcpy execute; critical-section callbacks are modeled.",
+    "No flash storage, commit/recovery service, concurrent-access, physical battery behavior, complete private-frame/fault identity, provider qualification or whole-image byte identity claim.",
+    "The distinct r1_device_info_kv_handle used for the 124-byte read retains its existing C owner in native_protocol_serial.c; it is not aliased to this 52-byte record handle."
+  ]
+}

@@ -52,3 +52,10 @@ uint32_t audio_ble_master_success_delayed(uint32_t notification) {
     audio_wsf_msg_send(controller[0x56u],message);
     return 0u;
 }
+/* Stock 0x4BC418 is also entered as audio_ble_comm_notify_ring_delayed and
+ * PB_TxEncodeNotifyRingConnectInfo. Aliases keep one address, so delayed-event
+ * removal by any of the three names matches a push by another, as in stock. */
+__typeof__(audio_ble_master_success_delayed) audio_ble_comm_notify_ring_delayed
+    __attribute__((alias("audio_ble_master_success_delayed")));
+__typeof__(audio_ble_master_success_delayed) PB_TxEncodeNotifyRingConnectInfo
+    __attribute__((alias("audio_ble_master_success_delayed")));

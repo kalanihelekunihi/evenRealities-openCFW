@@ -1,20 +1,15 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_31a85c\n"
-".type opencfw_em9305_child_31a85c,@function\n"
-"opencfw_em9305_child_31a85c:\n"
-"L31a85c:\n"
-"mov_s r0,0x803561\n"
-"L31a862:\n"
-"ldb_s r0,[r0,0]\n"
-"L31a864:\n"
-"cmp_s r0,0\n"
-"L31a866:\n"
-"jeq_s [blink]\n"
-"L31a868:\n"
-"b.d opencfw_em9305_scan_error_30e7f8\n"
-"L31a86c:\n"
-"mov_s r0,0xc\n"
-".size opencfw_em9305_child_31a85c,.-opencfw_em9305_child_31a85c\n"
-);
+/* Stock 0x31a85c: returns 0 when byte SRAM 0x803561 is 0, else tail-calls scan_error_30e7f8(0xc).
+ * Converted from the lowered ARC asm; compiled with the g2-em9305-1 profile (-Os) and the
+ * disassembly diffed against the stock lowering: identical, or differing only in delay-slot
+ * scheduling / a redundant zero-extension / absolute-address ld/st forms (reviewed by hand). */
+#include <stdint.h>
+#define B8(a)  (*(volatile uint8_t  *)(uintptr_t)(a))
+#define H16(a) (*(volatile uint16_t *)(uintptr_t)(a))
+#define W32(a) (*(volatile uint32_t *)(uintptr_t)(a))
+extern uint32_t opencfw_em9305_scan_error_30e7f8(uint32_t);
+uint32_t opencfw_em9305_child_31a85c(void)
+{
+  uint32_t v = B8(0x803561u);
+  if(v == 0u) return v;
+  return opencfw_em9305_scan_error_30e7f8(0xcu);
+}

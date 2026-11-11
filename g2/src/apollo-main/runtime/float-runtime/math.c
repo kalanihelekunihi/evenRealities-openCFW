@@ -1,5 +1,9 @@
 #include "math.h"
 #include <stdint.h>
+/* Stock-RAM literals rewritten to named objects (sim-test wave 2026-10-26,
+ * .waves/sim-fix/apply.py): g2ref_X is the linker symbol X. */
+#include <stdint.h>
+extern unsigned char g2ref_audio_uart_float_math_error_cell_20074f14[] __asm__("audio_uart_float_math_error_cell_20074f14");
 static uint32_t bits(float x) {
     union { float f; uint32_t u; } value = { .f = x };
     return value.u;
@@ -63,7 +67,7 @@ float audio_fmodf(float numerator, float denominator) {
             if (ex != 255 && ey == 255 && y_double == 0xff000000u)
                 return numerator;
             if (ex != 255 && ey != 255)
-                *(volatile uint32_t *)0x20074f14 = 33;
+                *(volatile uint32_t *)((uint32_t)(uintptr_t)g2ref_audio_uart_float_math_error_cell_20074f14) = 33;
             return value(0x7fffffffu);
         }
         if (y_double >= (x << 1))

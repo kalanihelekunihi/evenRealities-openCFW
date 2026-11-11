@@ -14,7 +14,7 @@ extern uint8_t audio_uart_display_lv_root[];
 extern void *audio_uart_lv_list_prepend_482b12(uint32_t *);
 extern uint32_t audio_uart_lv_tick(void);
 extern void audio_uart_lv_timer_update_464696(void);
-extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,const char *,...);
+extern void lv_log_add(uint32_t,const char *,uint32_t,const char *,const char *,...);
 static const char timer_path[]="D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\lvgl_v9.3\\LVGL\\src\\misc\\lv_timer.c";
 static const char timer_function[]="lv_timer_create";
 static const char timer_format[]="Asserted at expression: %s (%s)";

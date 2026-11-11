@@ -1,0 +1,11 @@
+# Ship-mode GPIO chain uses ordinary C
+
+`native_ship_mode.c` now uses ordinary C local variables for GPIO configuration and the ship-mode pulse. Fixed-register declarations, empty assembly and stack-word helpers are removed. The port decoder is unchanged. Raw configuration fields retain their unsigned shifts and combination without extra masks. The pulse still returns five.
+
+The [receipt](ship-pure-c-review.json) records 262 stock/C port-decoder pairs, 3,310 raw GPIO configuration pairs and ten complete pulse pairs. The complete chain executes the actual stock/C port decoder and configuration functions. Comparisons include MMIO write addresses, sizes, values and order; final peripheral memory; returned pulse status; balanced stack; preserved registers and masks. Five delay statuses and delay-time register mutation exercise the final reconfiguration. Three deliberate defects—wrong OUTSET address, delay argument or final pin direction—are rejected.
+
+The pulse writes configuration word three to P0.5, bit five to OUTSET, calls `osDelay(200)`, then writes configuration word two. Delay failure does not skip the last write. REA raw-byte observations identify the stock decode/configuration/pulse entries. The fixture uses code and write hooks, without memory-read hooks.
+
+This migration retires the incidental R0–R3 scratch restoration and private-frame contracts described in the [historical frame review](ship-frame-c-review.md). The void GPIO C API has no register result; the pulse exposes its declared status. Hardware MMIO effects are preserved. Arbitrary replacement-decoder stack mutation, private saved-register contents and scratch-register returns are outside this proof. Delay timing, scheduling and physical GPIO/power response remain unverified. No byte identity is required or claimed.
+
+The normal report is `build/sources-goal-r1-ship-pure-c/report.json`: 727 compiled units, no failures or duplicate strong symbols, 178 application imports and 34 bootloader imports. Only the ship-mode object changed; 726 objects remain unchanged from the watchdog checkpoint. Both manifests pass `make sources-check`. The full source-only firmware and hardware-startup goal remains unfinished.

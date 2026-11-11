@@ -4,6 +4,12 @@
  * Absolute placement and complete native structure ownership remain gates. */
 #include <stdint.h>
 
-_Alignas(4) uint8_t audio_uart_thread_manager_state[36u] = {
-    0x49u, 0x9bu, 0x4cu, 0x00u, 0x71u, 0x9bu, 0x4cu, 0x00u,
+/* Sim-test fix (2026-10-26): the stock RAM-init words 0x004c9b49/0x004c9b71 are
+ * stock-flash Thumb pointers; copying them as bytes made our image jump
+ * into unrelated code (Renode boot hang in main_5ce01e). Evidence: main_5ce01e stock 0x5ce130 loads *0x200040d8 and blx; stock symbols thread_manager_kernel_start_4c9b48/thread_manager_deinit_4c9b70 (g2/symbols/apollo_main.tsv, thread_manager.c:28-29).
+ * Now relocated to our own symbols thread_manager_kernel_start_4c9b48/thread_manager_deinit_4c9b70. Layout and size unchanged. */
+void thread_manager_kernel_start_4c9b48(void);
+void thread_manager_deinit_4c9b70(void);
+_Alignas(4) struct { void (*init)(void); void (*deinit)(void); uint8_t rest[28u]; } audio_uart_thread_manager_state = {
+    thread_manager_kernel_start_4c9b48, thread_manager_deinit_4c9b70, {0}
 };

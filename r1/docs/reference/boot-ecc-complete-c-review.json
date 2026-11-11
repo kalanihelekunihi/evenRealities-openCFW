@@ -1,0 +1,86 @@
+{
+  "schema": 1,
+  "report": "build/sources-goal-r1-boot-ecc-complete-c/report.json",
+  "report_sha256": "549ce51ee45870db2cdde228ee21b25c8280c269b5d6813a64bd77d3c540d74a",
+  "manifest_sha256": "3f6ee52ac3e4f451142c833e9e6ed542b5be8c149610a0a8de9106f84d8c08f6",
+  "behavior": {
+    "checks": 213,
+    "calls": 247,
+    "application_objects_unchanged": 696,
+    "flash_used": 23024,
+    "elf_sha256": "c384cd8fb8f97c261829d90e9a59e90496d18ccf578989ba367213929eee40e7",
+    "case_types": [
+      "hash-flip",
+      "infinity-result",
+      "invalid-public-point",
+      "known-nonce-1-hash-0",
+      "known-nonce-1-hash-1",
+      "known-nonce-115792089210356248762697446949407573529996955224135760342422259061068512044368-hash-0",
+      "known-nonce-115792089210356248762697446949407573529996955224135760342422259061068512044368-hash-1",
+      "known-nonce-2-hash-0",
+      "known-nonce-2-hash-1",
+      "known-nonce-3-hash-0",
+      "known-nonce-3-hash-1",
+      "little-endian",
+      "product-key-rejects-foreign-signature",
+      "r-equals-order",
+      "s-equals-order",
+      "short-signature",
+      "sig-flip",
+      "valid",
+      "valid-other-s",
+      "wrong-key",
+      "zero-r",
+      "zero-s"
+    ]
+  },
+  "group_law": {
+    "cases": 224,
+    "operand_scalars": [
+      "0x0",
+      "0x1",
+      "0x2",
+      "0x3",
+      "0xffffffff00000000ffffffffffffffffbce6faada7179e84f3b9cac2fc632550",
+      "0xffffffff00000000ffffffffffffffffbce6faada7179e84f3b9cac2fc63254f",
+      "0x123456789abcdef",
+      "0xfedcba987654321"
+    ],
+    "projective_scales": [
+      1,
+      2,
+      4886718345,
+      "0xffffffff00000001000000000000000000000000fffffffffffffffffffffffe"
+    ]
+  },
+  "defects": [
+    "no-equal-point-case",
+    "no-infinity-recovery",
+    "opposite-not-infinity",
+    "accept-invalid",
+    "unmodified-upstream"
+  ],
+  "audit": {
+    "unchanged_prior_objects": 776,
+    "removed_units": [
+      "third-party/upstream/micro-ecc-541b3a78026420a3e369c4c9281c396b5e531113/uECC.c"
+    ],
+    "added_units": [
+      "{gen}/r1_uecc.c"
+    ],
+    "portable_c_preprocessing": true,
+    "header_sha256": "a30f587f619f751cedb00954f3dbf1ee0d4b7c9013fa0d4229681cb4fbbd633b"
+  },
+  "strict_link_report": "build/goal-r1-boot-ecc-complete-c/strict/report.json",
+  "physical_boot_verified": false,
+  "positive_vendor_signed_dfu_verified": false,
+  "evidence_sha256": {
+    "build/goal-r1-boot-ecc-complete-c/verify.py": "98366fbd2154ed12cb4988dbc9e33f35a18c5e80554b1bd83b993cb34812058b",
+    "build/goal-r1-boot-ecc-complete-c/group-law.py": "fcc798b9d51dd3cce1ae0cd42881b41f6f39986abf66dea82e1bfaef375664da",
+    "build/goal-r1-boot-ecc-complete-c/defects.py": "38643baf8f422a98ee5208c150870675d09fde33a411ab1644858d6d153b5652",
+    "build/goal-r1-boot-ecc-complete-c/verification.json": "826c94c52940974de8a1abb52b0d3c3bf759c9eacd7f39b6e9133f003eb47c33",
+    "build/goal-r1-boot-ecc-complete-c/group-law.json": "5bcdd6a9321f0435a7fd6d055aff71c9c1b65df75d42db3919cd7b38bf7fbe2f",
+    "build/goal-r1-boot-ecc-complete-c/defects.json": "3f57099bb0c68ce2da9affeeab8f351e1f9ed387063b1452312ef9a551508fab",
+    "build/goal-r1-boot-ecc-complete-c/strict/report.json": "14423eae98485d2f9d5fd848164f22230aee7065dbaddcb4b51cfbb59a8a0690"
+  }
+}

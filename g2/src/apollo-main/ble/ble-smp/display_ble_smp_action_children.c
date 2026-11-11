@@ -23,3 +23,5 @@ uint8_t *SmpScAlloc(uint8_t size, void *ccb, uint8_t *message) {
 void WsfTimerStartSec(void *timer, uint32_t seconds) {
     audio_ble_wsf_timer_insert(timer, seconds * 100u);
 }
+/* Former duplicate body in ble/ble-hci/display_ble_hci_cmd_transport.c. */
+__typeof__(WsfTimerStartSec) audio_ble_hci_timer_start_sec __attribute__((alias("WsfTimerStartSec")));

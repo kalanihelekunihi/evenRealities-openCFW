@@ -1,0 +1,127 @@
+{
+  "schema": 1,
+  "date": "2026-11-11",
+  "reference": {
+    "artifact": "g2/blobs/official/g2-2.2.6.10/firmware_box.raw.bin",
+    "sha256": "773b6d4cfdaf0a5a74a557e3babe8222a0ae813436b76a7437c1096d2c60d677",
+    "flash_base": "0x08000000"
+  },
+  "method": "Manual Thumb instruction review against the locked raw image and GNU disassembly. Existing C owners were confirmed in the source-linked CASE ELF; the CRT copy and zero helpers were newly wired into linked startup. Literal words have direct PC-relative LDR sites. An isolated BX LR with no proven entry remains unsupported.",
+  "transitions": [
+    {
+      "original": {
+        "start": "0x08008558",
+        "end_exclusive": "0x0800856C",
+        "bytes": 20,
+        "sha256": "dd0885282ed03a1bc6aeda377fb159c7a9747127315963f671d9a43ed62eac6a"
+      },
+      "children": [
+        {
+          "start": "0x08008558",
+          "end_exclusive": "0x0800856C",
+          "bytes": 20,
+          "sha256": "dd0885282ed03a1bc6aeda377fb159c7a9747127315963f671d9a43ed62eac6a",
+          "classification": "typed_executable_source_candidate",
+          "reason": "20-byte Thumb callback trampoline: direct BL to 0x0800B4A4, conditional BLX through context pair; C case_boot_transport_entry_8558"
+        }
+      ]
+    },
+    {
+      "original": {
+        "start": "0x080091F0",
+        "end_exclusive": "0x08009210",
+        "bytes": 32,
+        "sha256": "34d01cdc66a277e83ae218ee22f6b8edd342d4fe4daf7fec62f403b193dab161"
+      },
+      "children": [
+        {
+          "start": "0x080091F0",
+          "end_exclusive": "0x080091FE",
+          "bytes": 14,
+          "sha256": "b318a23712bf74768cd27986ed3ac176c3f00019804a8b1015a9506c5c9e5b3d",
+          "classification": "typed_executable_source_candidate",
+          "reason": "14-byte word-copy loop and BX LR; C case_crt_copy_91f0"
+        },
+        {
+          "start": "0x080091FE",
+          "end_exclusive": "0x08009200",
+          "bytes": 2,
+          "sha256": "c7dfbb7d02759eacb64dbc916c1bb6f21eabaff1c1032ea5c9176abf7fd28df8",
+          "classification": "typed_unsupported_interfunction_code_or_data_boundary",
+          "reason": "separate BX LR halfword; no proven entry or owner"
+        },
+        {
+          "start": "0x08009200",
+          "end_exclusive": "0x0800920E",
+          "bytes": 14,
+          "sha256": "baea69e4316891e894db4e11467b58813f6b8b2faba57c3f56b707c9a7461698",
+          "classification": "typed_executable_source_candidate",
+          "reason": "14-byte zero-word loop and BX LR; C case_crt_zero_9200"
+        },
+        {
+          "start": "0x0800920E",
+          "end_exclusive": "0x08009210",
+          "bytes": 2,
+          "sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+          "classification": "typed_zero_alignment_or_data",
+          "reason": "zero halfword after BX LR before the next function"
+        }
+      ]
+    },
+    {
+      "original": {
+        "start": "0x0800A380",
+        "end_exclusive": "0x0800A39C",
+        "bytes": 28,
+        "sha256": "f541b0b08d78fa785a6348bb99943f9991736feba9f6ff477156e6ed86415f45"
+      },
+      "children": [
+        {
+          "start": "0x0800A380",
+          "end_exclusive": "0x0800A392",
+          "bytes": 18,
+          "sha256": "0c76734c017dc3fc940ee6766a27ee396321f04291b7a647c2e4f0d83966533a",
+          "classification": "typed_executable_source_candidate",
+          "reason": "18-byte output callback; stock 0x08009188 holds Thumb pointer 0x0800A381; C case_log_output_char"
+        },
+        {
+          "start": "0x0800A392",
+          "end_exclusive": "0x0800A394",
+          "bytes": 2,
+          "sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+          "classification": "typed_zero_alignment_or_data",
+          "reason": "zero halfword after return aligns literal pool"
+        },
+        {
+          "start": "0x0800A394",
+          "end_exclusive": "0x0800A39C",
+          "bytes": 8,
+          "sha256": "ecdae7a8f5273c1fbfb63fd147620ace94402ba54b9efcec5956ce963fb077eb",
+          "classification": "typed_pc_relative_literal_data",
+          "reason": "two words loaded by Thumb LDR at 0x0800A382 and 0x0800A388: timeout 0x0000FFFF and UART handle 0x20000E24"
+        }
+      ]
+    }
+  ],
+  "source_owners": {
+    "0x08008558": "g2/src/case/startup/application_boot_transport_trampoline_candidate.c:case_boot_transport_entry_8558",
+    "0x080091F0": "g2/src/case/startup/startup_vector_candidate.c:case_crt_copy_91f0",
+    "0x08009200": "g2/src/case/startup/startup_vector_candidate.c:case_crt_zero_9200",
+    "0x0800A380": "g2/src/case/glue/log_wrapper_provider.c:case_log_output_char"
+  },
+  "focused_source_link": {
+    "receipt": "build/g2-case-crt-final-link-20261111/link-report.json",
+    "case_binary_bytes": 60172,
+    "case_binary_sha256": "81857f9dc9fa011833d8465a25f3eaa37863509188aac259ee3ea593cf29c0cb",
+    "linked_copy_address": "0x0800C336",
+    "linked_zero_address": "0x0800C344"
+  },
+  "verification": {
+    "all_340_frontier_hashes_match": true,
+    "rows_nonoverlapping": true
+  },
+  "limits": [
+    "The residual 0x080091FE BX LR halfword still lacks a proven entry and C owner.",
+    "Source candidate classification does not prove byte identity or hardware behavior; full pseudocode review remains open."
+  ]
+}

@@ -2,7 +2,7 @@
  * Native CASE 0xbe90/0xbede OTA side power command sequences.
  */
 #include <stdint.h>
-extern void case_policy_sensor_command(uint32_t channel,uint32_t value); /* 0x99e8 */
+extern uint32_t case_policy_sensor_command(uint32_t channel,uint32_t value); /* 0x99e8 */
 extern void case_policy_sensor_delay(uint32_t amount); /* 0xa7b0 */
 /* Stock 0x0800BE90 (left_indicator_sequence) */
 void case_policy_ota_left_prepare(void)

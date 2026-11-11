@@ -1,0 +1,109 @@
+{
+  "schema_version": 1,
+  "entries": {
+    "0x4c4b8": [
+      "r1_wear_charge_set",
+      170
+    ]
+  },
+  "report": "build/sources-goal-r1-wear-charge-c/report.json",
+  "report_sha256": "b3be6bc270111cc4fc7a394ed9c10379deba8e4146a26f12a048583fe1da77a4",
+  "unit": {
+    "source": "r1/src/application/runtime/native_wear_charge.c",
+    "source_sha256": "a50466eb04e4be9d0afd2d672261f772834a55f94c926e77eef6eb2a28256e4c",
+    "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-wear-charge-c/r1/r1-application/r1__src__application__runtime__native_wear_charge.c.o",
+    "object_sha256": "1ab53b6f7e1c5290e2413311bed6dfb256451e66aad20e3ced29d6edfbc13e71"
+  },
+  "behavior": {
+    "pairs": 4048,
+    "digest": "40faed2fc220145950b1a9d6723a9acfd4ade97c04bac0ff8f1f96805e6eac2e",
+    "actual_C": [
+      "wear charge setter",
+      "existing event adapter and nonzero-state helper"
+    ],
+    "modeled_boundaries": [
+      "r1_wear_probe_teardown",
+      "r1_wear_raw_hr_probe_start",
+      "r1_event_service_0008b028",
+      "r1_stream_timer_release",
+      "r1_stream_timer_create_front",
+      "r1_structured_log_mode_get",
+      "r1_structured_log_format",
+      "nrf_log_frontend_std_1"
+    ],
+    "limits": [
+      "Timer callback checked by identity, not invoked",
+      "Wear probe, timers, event transport and logs modeled",
+      "Private stack, caller-clobbered registers and void returns excluded",
+      "No physical charge sensing or asynchronous scheduling proof"
+    ]
+  },
+  "negative_controls": {
+    "unsigned-old-status": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "ish', [4, '01', 1], ['7b7b7b7b7b7b7b7b7b7b7b7b7b7b027b807b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b', '696969696969696969696969696969690000000069696969696969696969696969696969'])], 'state': ['7b7b7b7b7b7b7b7b7b7b7b7b7b7b027b807b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b', '696969696969696969696969696969690000000069696969696969696969696969696969']}, {'trace': [], 'state': ['7b7b7b7b7b7b7b7b7b7b7b7b7b7b027b807b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b', '696969696969696969696969696969690000000069696969696969696969696969696969']})\n"
+    },
+    "late-status-store": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "1], ['7b7b7b7b7b7b7b7b7b7b7b7b7b7b027b027b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b', '696969696969696969696969696969690000000069696969696969696969696969696969']), ('create', ['charge timer', 60000, 0], ['7b7b7b7b7b7b7b7b7b7b7b7b7b7b027b027b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b', '696969696969696969696969696969690000000069696969696969696969696969696969'])], 'state': ['7b7b7b7b7b7b7b7b7b7b7b7b7b7b027b027b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b', '696969696969696969696969696969695505000069696969696969696969696969696969']})\n"
+    },
+    "wrong-probe-gate": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "1], ['7b7b7b7b7b7b7b7b7b7b7b7b7b7b027b027b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b', '696969696969696969696969696969690000000069696969696969696969696969696969']), ('create', ['charge timer', 60000, 0], ['7b7b7b7b7b7b7b7b7b7b7b7b7b7b027b027b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b', '696969696969696969696969696969690000000069696969696969696969696969696969'])], 'state': ['7b7b7b7b7b7b7b7b7b7b7b7b7b7b027b027b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b', '696969696969696969696969696969695505000069696969696969696969696969696969']})\n"
+    },
+    "wrong-period": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "ython3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 1063, in __hook_code_cb\n    callback(uc, address, size, user_data)\n    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-wear-charge-c/verify.py\", line 37, in hook\n    elif n=='create':assert r0 in [0x4c3d1,0x1030081] and r1==60000 and r2==0;out=['charge timer',r1,r2];result=state['created']\n                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    "early-timer-clear": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "elease', [1365], ['7b7b7b7b7b7b7b7b7b7b7b7b7b7b027b027b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b', '696969696969696969696969696969690000000069696969696969696969696969696969']), ('publish', [4, '01', 1], ['7b7b7b7b7b7b7b7b7b7b7b7b7b7b027b027b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b', '696969696969696969696969696969690000000069696969696969696969696969696969'])], 'state': ['7b7b7b7b7b7b7b7b7b7b7b7b7b7b027b027b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b', '696969696969696969696969696969690000000069696969696969696969696969696969']})\n"
+    },
+    "lost-timer-gate": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "1], ['7b7b7b7b7b7b7b7b7b7b7b7b7b7b027b017b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b', '696969696969696969696969696969695505000069696969696969696969696969696969']), ('create', ['charge timer', 60000, 0], ['7b7b7b7b7b7b7b7b7b7b7b7b7b7b027b017b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b', '696969696969696969696969696969695505000069696969696969696969696969696969'])], 'state': ['7b7b7b7b7b7b7b7b7b7b7b7b7b7b027b017b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b', '696969696969696969696969696969695505000069696969696969696969696969696969']})\n"
+    },
+    "wrong-health-value": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "), ('mode', [0], ['7b7b7b7b7b7b7b7b7b7b7b7b7b7b027b027b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b', '696969696969696969696969696969690000000069696969696969696969696969696969']), ('publish', [4, '00', 1], ['7b7b7b7b7b7b7b7b7b7b7b7b7b7b027b027b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b', '696969696969696969696969696969690000000069696969696969696969696969696969'])], 'state': ['7b7b7b7b7b7b7b7b7b7b7b7b7b7b027b027b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b', '696969696969696969696969696969690000000069696969696969696969696969696969']})\n"
+    },
+    "wrong-charge-event": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "1], ['7b7b7b7b7b7b7b7b7b7b7b7b7b7b027b017b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b', '696969696969696969696969696969690000000069696969696969696969696969696969']), ('create', ['charge timer', 60000, 0], ['7b7b7b7b7b7b7b7b7b7b7b7b7b7b027b017b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b', '696969696969696969696969696969690000000069696969696969696969696969696969'])], 'state': ['7b7b7b7b7b7b7b7b7b7b7b7b7b7b027b017b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b', '696969696969696969696969696969695505000069696969696969696969696969696969']})\n"
+    }
+  },
+  "audit": {
+    "unchanged_prior_objects": 760,
+    "new_units": 1,
+    "imports": {
+      "r1-application": {
+        "added": [
+          "r1_wear_charge_timer_callback"
+        ],
+        "removed": [
+          "r1_event_service_0004c4b8"
+        ]
+      },
+      "r1-bootloader": {
+        "added": [],
+        "removed": []
+      }
+    },
+    "reused_owners": [
+      "new authenticated status byte and timer word"
+    ]
+  },
+  "source_check": "R1 passes: 761 units, 565 source files, 0 not built. Global check flags existing G2 resident_rom_thumb_set.S absent from manifest.",
+  "initialization": "wear-charge-initialization.json",
+  "rea": "wear-charge-c-rea.json",
+  "instruction_identity_proven": false,
+  "image_integration_proven": false
+}

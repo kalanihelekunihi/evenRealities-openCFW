@@ -81,3 +81,7 @@ uint64_t opencfw_provider_4162c4(uint32_t mask, uint32_t options,
     } while (woke != 0u);
     return (uint64_t)remaining << 32 | result;
 }
+
+/* Stock entry names that branch straight to the provider above. */
+__typeof__(opencfw_provider_41623a) opencfw_boot_dfu_flags_set __attribute__((alias("opencfw_provider_41623a")));
+__typeof__(opencfw_provider_4162c4) opencfw_boot_dfu_flags_wait __attribute__((alias("opencfw_provider_4162c4")));

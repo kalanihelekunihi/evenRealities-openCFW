@@ -1,0 +1,50 @@
+{
+  "schema": 1,
+  "target": "locked G2 2.2.6.10 GX8002 KWS NPU batch-normalization command source",
+  "stock": {
+    "firmware": "g2/blobs/official/g2-2.2.6.10/firmware_codec.bin",
+    "command_file_window": ["0x18d90", "0x1b15c"],
+    "command_bytes": 9164,
+    "command_sha256": "c38ed6d22c7c0b6178288678364acd10bd5730aa382c1e19a32f6cf2bd1430b9",
+    "command_count": 212
+  },
+  "semantic_basis": {
+    "archive": "third-party/upstream/nationalchip-gxdnn/grus/lib/libcmodel.a",
+    "parse_function": "cmd_parse.o:parse_op_bn_cmd reads four addresses, extents and strides",
+    "execution_function": "calc.o:calc_op_bn multiplies input by scale then adds bias with half_float16 helpers",
+    "header_flags": "Bits 8 and 9 retain observed values; full precision semantics remain unresolved"
+  },
+  "source": {
+    "c_file": "g2/src/codec/npu/kws_batch_norm_commands.c",
+    "c_sha256": "422093f81f36c18e16831490cfe0a50d89f172e99ceabb2f21c67d64058b0e98",
+    "c_object_sha256": "bf2b434eaa321d9222836abf4626970a5d0f4e0075c072a20de8fb189b9c99d3",
+    "manifest_link": false,
+    "commands_matched": 18,
+    "command_bytes_matched": 792,
+    "concatenated_sha256": "4a17c28dc40e9a824be1c49e44c97efbe75f919d99ffc793bcd65841c37529a2"
+  },
+  "combined_kws_progress": {
+    "activation_commands": 12,
+    "copy_tensor_commands": 152,
+    "batch_norm_commands": 18,
+    "sourced_commands": 182,
+    "sourced_command_bytes": 8012,
+    "total_commands": 212,
+    "total_command_bytes": 9164,
+    "remaining_opaque_commands": 30,
+    "remaining_opaque_bytes": 1152,
+    "weights_source_available": false
+  },
+  "verification": {
+    "c_oracle_test": "g2/tests/test_gxdnn_c_source.py: all 182 records and 8012 bytes compared directly with authenticated stock bytes",
+    "emitter_tests": "g2/tests/test_gxdnn_command_emitter.py: 20 passed; combined focused suite: 21 passed",
+    "sources_check": "make -C g2 sources-check: 4885 units, 4546 source files, 1 not built",
+    "full_source_report": "build/g2-all-c-npu-bn-20261110/report.json",
+    "full_source_report_sha256": "a0e596dbe75d78e0148f1668e0db850739fb6efc22d8902496e481f7c73e8cbe",
+    "strict_link_report": "build/g2-all-c-npu-bn-link-20261110/link-report.json",
+    "strict_link_report_sha256": "5981cbaa635a9a305d384a1cf9295da5c323fd26ab654812848e9a2958691e9d",
+    "payloads_compiled_and_linked": 7,
+    "payload_binaries_unchanged_from_prior_link": true
+  },
+  "qualification": "The C unit encodes decoded batch-normalization descriptors and compiles with the pinned C-SKY compiler. It remains compile-only pending the complete NPU graph. Thirty command records, proprietary weights, complete header-flag semantics, bundle byte identity and hardware behavior remain unresolved."
+}

@@ -83,7 +83,7 @@ All driver control/config/dump/interface entry points (`GH3X2X_Init`, `GH3X2X_Co
 soft-ADT modules, the `hal_*` template wrappers in `gh_demo_user.c`, all driver state globals, and
 the SPO2 config table (`goodix_spo2_config_get_instance/_get_size/_get_version`, `external_cfg`).
 
-### (b) Supplied by the R1 port (`r1/port/goodix_gh3x2x/`)
+### (b) Historical R1 port (`r1/port/goodix_gh3x2x/` before consolidation)
 
 | Symbol | Role |
 | --- | --- |
@@ -91,7 +91,7 @@ the SPO2 config table (`goodix_spo2_config_get_instance/_get_size/_get_version`,
 | `gh3026_int_pin_init` / `gh3026_reset_pin_init` / `gh3026_reset_pin_ctrl` | INT/reset pin board hooks |
 | `gh3026_gsensor_data_get` | accelerometer feed for the FIFO alignment path |
 | `delay_us` | microsecond delay used by driver timing |
-| `gh3x2x_print_fmt` | log sink; the port forwards the format text only and never formats varargs (no C library on the freestanding target) |
+| `gh3x2x_print_fmt` | historical port forwarded only the format text; current consolidated C source formats varargs with `r1_native_vsnprintf` and writes the bounded result through R1 RTT |
 | `gh3x2x_rawdata_notify` / `gh3x2x_wear_evt_notify` | raw-frame and wear-state notification sinks |
 | `Gh3x2xPoolIsNotEnough` | `goodix_mem` integrator surface declared by `goodix_mem.h`; bridges to the existing `r1_goodix_pool_not_enough` glue (the `void(void)` seam carries no `info1`, so 0 is recorded) |
 
@@ -182,6 +182,12 @@ masks request them. HSM forwards the checked first raw frame word and never fabr
 | `GH3X2X_TimestampSyncGetFrameDataFlag` | returns 1 | exact matched public-democode and recovered `0x0002AE00` behavior |
 | `GH3X2X_UprotocolPacketFormat` | returns 0 (zero-length packet) | PC-tool upload protocol excluded — no external command surface |
 | `Gh2x2xUploadDataToMaster` / `Gh3x2xDemoSendProtocolData` | drop payloads | same |
+
+The current locked-stock reconstruction selects five pinned timestamp definitions,
+with native call-path identities and complete-body byte checks. See
+[the timestamp closure review](../reference/goodix-timestamp-closure-review.md).
+No timestamp algorithm is inferred for the stock no-work hooks; the older
+normalized-provider description above is a separate integration layer.
 
 ### Toolchain residue
 

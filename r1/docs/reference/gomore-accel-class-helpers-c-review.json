@@ -1,0 +1,360 @@
+{
+  "stock_entries": {
+    "0x56980": "r1_gomore_accel_nonzero_mean8_native",
+    "0x7eaf6": "r1_gomore_accel_hysteresis_count_native",
+    "0x56920": "r1_gomore_accel_linear_classify_native"
+  },
+  "stock_application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "production_unit": {
+    "source": "r1/src/application/runtime/native_gomore_accel_class_helpers.c",
+    "payload": "r1-application",
+    "role": "candidate",
+    "toolchain": "gcc9",
+    "link": true,
+    "expect": "compile",
+    "returncode": 0,
+    "argv": [
+      "/opt/homebrew/bin/python3",
+      "/Users/kalani/Repo/evenRealities-openCFW/tools/build/linux_gcc.py",
+      "--compiler",
+      "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/bin/arm-none-eabi-gcc",
+      "--read-root",
+      "/Users/kalani/Repo/evenRealities-openCFW/r1",
+      "--read-root",
+      "/Users/kalani/Repo/evenRealities-openCFW/third-party/upstream",
+      "--read-root",
+      "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1",
+      "--read-root",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-accel-class-helpers-final-c/generated/r1",
+      "--",
+      "-mcpu=cortex-m4",
+      "-mthumb",
+      "-munaligned-access",
+      "-mfpu=fpv4-sp-d16",
+      "-mfloat-abi=hard",
+      "-std=c11",
+      "-Os",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-fshort-enums",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-fno-delete-null-pointer-checks",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/r1/src/vendor",
+      "-isystem",
+      "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
+      "-fno-strict-aliasing",
+      "-ffp-contract=off",
+      "-fsignaling-nans",
+      "-frounding-math",
+      "-ftrapping-math",
+      "-fno-if-conversion",
+      "-fno-if-conversion2",
+      "-MD",
+      "-MF",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-accel-class-helpers-final-c/r1/r1-application/r1__src__application__runtime__native_gomore_accel_class_helpers.c.d",
+      "-c",
+      "/Users/kalani/Repo/evenRealities-openCFW/r1/src/application/runtime/native_gomore_accel_class_helpers.c",
+      "-o",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-accel-class-helpers-final-c/r1/r1-application/r1__src__application__runtime__native_gomore_accel_class_helpers.c.o"
+    ],
+    "source_sha256": "d922bcdceb53ad60e82c2b98a048c0704d8d09849d1e8d4550922b92ce920f33",
+    "object_sha256": "8f6056a51723c76d2a7be03fd581a81bce0c346e74cb172b2b3567a8644f8494",
+    "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-accel-class-helpers-final-c/r1/r1-application/r1__src__application__runtime__native_gomore_accel_class_helpers.c.o",
+    "strong": [
+      "r1_gomore_accel_hysteresis_count_native",
+      "r1_gomore_accel_linear_classify_native",
+      "r1_gomore_accel_nonzero_mean8_native"
+    ],
+    "weak": [],
+    "undefined": []
+  },
+  "normal_report": "build/sources-goal-r1-gomore-accel-class-helpers-final-c/report.json",
+  "direct": {
+    "pairs": 43808,
+    "by_helper": {
+      "mean": 2096,
+      "hysteresis": 1168,
+      "linear": 40544
+    },
+    "fault_pairs": 39,
+    "digest": "4a8b2f57835c92b72566c57e4f5314117cac9c6fec26c7bb617a594ca198b863",
+    "production_unit": {
+      "source": "r1/src/application/runtime/native_gomore_accel_class_helpers.c",
+      "payload": "r1-application",
+      "role": "candidate",
+      "toolchain": "gcc9",
+      "link": true,
+      "expect": "compile",
+      "returncode": 0,
+      "argv": [
+        "/opt/homebrew/bin/python3",
+        "/Users/kalani/Repo/evenRealities-openCFW/tools/build/linux_gcc.py",
+        "--compiler",
+        "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/bin/arm-none-eabi-gcc",
+        "--read-root",
+        "/Users/kalani/Repo/evenRealities-openCFW/r1",
+        "--read-root",
+        "/Users/kalani/Repo/evenRealities-openCFW/third-party/upstream",
+        "--read-root",
+        "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1",
+        "--read-root",
+        "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-accel-class-helpers-final-c/generated/r1",
+        "--",
+        "-mcpu=cortex-m4",
+        "-mthumb",
+        "-munaligned-access",
+        "-mfpu=fpv4-sp-d16",
+        "-mfloat-abi=hard",
+        "-std=c11",
+        "-Os",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-fshort-enums",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-fno-delete-null-pointer-checks",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/r1/src/vendor",
+        "-isystem",
+        "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
+        "-fno-strict-aliasing",
+        "-ffp-contract=off",
+        "-fsignaling-nans",
+        "-frounding-math",
+        "-ftrapping-math",
+        "-fno-if-conversion",
+        "-fno-if-conversion2",
+        "-MD",
+        "-MF",
+        "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-accel-class-helpers-final-c/r1/r1-application/r1__src__application__runtime__native_gomore_accel_class_helpers.c.d",
+        "-c",
+        "/Users/kalani/Repo/evenRealities-openCFW/r1/src/application/runtime/native_gomore_accel_class_helpers.c",
+        "-o",
+        "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-accel-class-helpers-final-c/r1/r1-application/r1__src__application__runtime__native_gomore_accel_class_helpers.c.o"
+      ],
+      "source_sha256": "d922bcdceb53ad60e82c2b98a048c0704d8d09849d1e8d4550922b92ce920f33",
+      "object_sha256": "8f6056a51723c76d2a7be03fd581a81bce0c346e74cb172b2b3567a8644f8494",
+      "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-accel-class-helpers-final-c/r1/r1-application/r1__src__application__runtime__native_gomore_accel_class_helpers.c.o",
+      "strong": [
+        "r1_gomore_accel_hysteresis_count_native",
+        "r1_gomore_accel_linear_classify_native",
+        "r1_gomore_accel_nonzero_mean8_native"
+      ],
+      "weak": [],
+      "undefined": []
+    },
+    "coefficients": {
+      "address": "0xbd26c",
+      "words": [
+        "0xbe445123",
+        "0x3f697fe1",
+        "0xbc00b405",
+        "0x3f7237e0"
+      ],
+      "bias": "0xbf4485ee"
+    },
+    "limits": [
+      "Raw float S0 or integer result, input hash/public writes, FPSCR, preserved registers, SP and masks compared.",
+      "APSR, caller-clobbered registers and private frame bytes excluded.",
+      "Logical fault access/width compared; no exception-frame, physical device, complete source or byte identity proof."
+    ]
+  },
+  "stage": {
+    "pairs": 5816,
+    "fault_pairs": 66,
+    "provider_counts": {
+      "0x722ec": 14868,
+      "0x723b6": 14868,
+      "0x568f0": 3717,
+      "0x8f4b4": 14868,
+      "0x3b00e": 107793,
+      "0x56980": 8859,
+      "0x7eaf6": 0,
+      "0x56920": 0,
+      "0x67e4c": 2217,
+      "0x4834a": 3717,
+      "0x710d4": 156,
+      "0x58480": 3543,
+      "0x484fc": 12659,
+      "0x277aa": 15204
+    },
+    "digest": "c1b1d5429535e3ea088de24dad43764f0ecaa0fb1322c9efb16ff20bfba96587",
+    "limits": [
+      "C accelerometer root executes with C collector, statistics, history/reset, conversion and sqrt providers.",
+      "Classifier remains stock with C nonzero mean, hysteresis and linear-sign helpers; other spectral dependencies and EABI clear remain stock.",
+      "Private stack bytes excluded except explicit output span; logical faults compare access/width and preceding public writes. No physical device or full-source proof."
+    ]
+  },
+  "focused_classifier": {
+    "pairs": 216,
+    "provider_counts": {
+      "0x722ec": 0,
+      "0x723b6": 0,
+      "0x568f0": 0,
+      "0x8f4b4": 0,
+      "0x3b00e": 432,
+      "0x56980": 864,
+      "0x7eaf6": 216,
+      "0x56920": 162,
+      "0x67e4c": 216,
+      "0x4834a": 0,
+      "0x710d4": 0,
+      "0x58480": 0,
+      "0x484fc": 0,
+      "0x277aa": 1080
+    },
+    "digest": "beaaecbf60a746803851302859c1e0d96b7efeeafffdba0150fb35b04da9590a",
+    "limits": [
+      "Actual native classifier with three C mean/hysteresis/linear helpers and existing C lower math/statistics where called.",
+      "Other spectral functions remain stock; memory/writes, helper arguments, FPSCR, return, preserved registers, SP and masks compared.",
+      "Parent/helper entry depths and caller-visible buffer addresses compared; unexposed internal C frames and private save bytes excluded."
+    ]
+  },
+  "checked_wrappers": {
+    "pairs": 864,
+    "guard_cases": 5,
+    "limits": [
+      "Actual monolithic checked utility object delegates to the new C mean and hysteresis providers.",
+      "Other undefined utility imports bind to stop sentinel and are not exercised; SP/preserved-register checks detect early stop.",
+      "General linear checked API retains caller-supplied coefficients/bias and is not the fixed native classifier."
+    ]
+  },
+  "negative_controls": [
+    {
+      "control": "divide-by-eight",
+      "rejected": true,
+      "source_sha256": "ecd97ffbbef285df48760395b8bf265552cee0fa27973e0718471785dd24d2e7",
+      "object_sha256": "42e3831f2441cd5065f7814192cabd1459055c6d4dff522c5266e583a36ef57c"
+    },
+    {
+      "control": "seven-slots",
+      "rejected": true,
+      "source_sha256": "3c8b140de7d011d88448b17b769068220bd657d27bdc2af9bd2188fc954f167f",
+      "object_sha256": "b0168c5f2ea3ae326d2c1f31865bea9a50db17299b9eb1ebb09bf70b335cf851"
+    },
+    {
+      "control": "inclusive-high",
+      "rejected": true,
+      "source_sha256": "def75a64a1c1b1dbf3a4808d7c0b62d9c072eb8bfd110cb3fb2e496cbedac0fe",
+      "object_sha256": "cd8d0d993b062fabe236745d74227e97f93c04bc43c570e519e13189d0e0ece7"
+    },
+    {
+      "control": "inclusive-low",
+      "rejected": true,
+      "source_sha256": "9f3d3629a06bd0c4c2d155e3f0ff43b39866102dd578b1c7e727d3b070278bcf",
+      "object_sha256": "8c94d456c91438a42cdc084c1a3c28d8c1abbf3b2c324833af1707ec7f6cd5e0"
+    },
+    {
+      "control": "unwrapped-count",
+      "rejected": true,
+      "source_sha256": "b5b062013e8fab1d59b4d7b96aedf42ef5c41f40c62c13428e5b288bafbd87aa",
+      "object_sha256": "30b5dfc026e912b0a522a679ebcbad4ed0a0c940fa5825352f97aba955b8b985"
+    },
+    {
+      "control": "unsigned-length",
+      "rejected": true,
+      "source_sha256": "4f47f4a8b25358e0322422ab2eff7d34790afc3a8425ba0e4bcf4158d1e8e86a",
+      "object_sha256": "69764fbdb954ed92533722a9d93061d8dcaffcb06c41611f6ed5a03751ac54cb"
+    },
+    {
+      "control": "ordered-nan-result",
+      "rejected": true,
+      "source_sha256": "2cb94e839e6bc00fc55e9710b84fc5134f40a6e5093c59c1b547ca212d2bc323",
+      "object_sha256": "f8112f8b0279e003d65742a585c1db29f038b46993eb0731536797a5801bea73"
+    },
+    {
+      "control": "bias-one-ulp",
+      "rejected": true,
+      "source_sha256": "6ab400adbfaecf82787cc832ab9de1476994b9489d9715a3fd847c220ff06fdd",
+      "object_sha256": "c103a6d65bd3bd63efd73dee05342d7480c10050c33e6720b7a6b45c936d9de0"
+    },
+    {
+      "control": "fused-multiply-add",
+      "rejected": true,
+      "source_sha256": "cd2b52c7f706d3a7b006602d6a9ef0453351eec39e45283a1cf8a846b3a2748c",
+      "object_sha256": "90c9120b2c14d76c90591fd9997bdc810b8290f33bd5e106291acc733695bba9"
+    },
+    {
+      "control": "unsigned-convert",
+      "rejected": true,
+      "source_sha256": "30a35c9e69f56cb9c981eb8d11989003a9ae91f631f192473c6b0374bdbd569c",
+      "object_sha256": "b08e91d96eb97789fddb2a02899dd374556d5d18920d1edb0e4304770b1f32d2"
+    },
+    {
+      "control": "positive-second-weight",
+      "rejected": true,
+      "source_sha256": "f3490c1a280c5b53c4cbcf761f8b44742a0061f9d18a0ca72d34bf62b38793eb",
+      "object_sha256": "60132f271d81fa7d7a0aba592cec5ccbaa3bea7210b38aaffa279c4b3953d0c4"
+    },
+    {
+      "control": "missing-extra-term",
+      "rejected": true,
+      "source_sha256": "ecaad66f216317982d667a45232a77843ad65da5489fbfbdcbc3aa1e983a06b9",
+      "object_sha256": "b54cd180196b92a2e46416ae8dca138ce5f75a989ea1511e8f33c47c126c7ee1"
+    }
+  ],
+  "qualification": {
+    "candidate_units": 1,
+    "compiled_units": 1,
+    "units": [
+      {
+        "source": "r1/src/application/runtime/native_gomore_accel_class_helpers.c",
+        "payload": "r1-application",
+        "evidence": "r1/symbols/function-frontier.csv",
+        "selected": [],
+        "compiled": true,
+        "rejections": {
+          "anchored_relocation_pattern_not_exact": 2,
+          "compiled_bytes_differ": 1
+        },
+        "source_implementation_completeness": "not established by compilation or byte matching",
+        "reason": "no exact anchored body under tested production bindings; integration remains unfinished"
+      }
+    ]
+  },
+  "hybrid": "build/hybrid-goal-r1-gomore-accel-class-helpers-c",
+  "canonical_plan": {
+    "source_built_executable": 4381,
+    "stock_executable": 641779,
+    "resource": 248
+  },
+  "limits": [
+    "Recorded GCC9 strict non-fused/signal-NaN/rounding profile is part of the tested FP contract.",
+    "Stage matrix exercises the nonzero mean but not crossings or linear decision; focused classifier replay separately exercises all three.",
+    "Classifier/spectral bodies remain stock in integration; these three helpers and existing lower math/statistics execute in C.",
+    "REA lists classifier 0x67e4c as the observed direct caller for all three; unresolved indirect uses are not excluded by the inventory.",
+    "Caller-clobbered register residues, APSR, private save bytes and unexposed internal C frames excluded; helper entry depths and public buffers compared.",
+    "Logical fault access/width and previous public writes compared, not full exception frames or precise fault PCs.",
+    "No physical/concurrent sensor validation, complete all-source link or C instruction/byte identity."
+  ],
+  "sha256": {
+    "r1/src/application/runtime/native_gomore_accel_class_helpers.c": "d922bcdceb53ad60e82c2b98a048c0704d8d09849d1e8d4550922b92ce920f33",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-accel-class-helpers-final-c/r1/r1-application/r1__src__application__runtime__native_gomore_accel_class_helpers.c.o": "8f6056a51723c76d2a7be03fd581a81bce0c346e74cb172b2b3567a8644f8494",
+    "r1/src/application/runtime/native_gomore_accel_class_helpers.h": "3c137cc7bc1a6961946d58364487131614807564e9a8c346770213b36ef9a07b",
+    "r1/src/vendor/gomore_primitives/gomore_primitives.c": "2bb9f8cc2b9163866052d39c4e0c259c56659c9e7ef1dafbc1d159cc8eb1eb7d",
+    "r1/src/vendor/gomore_primitives/gomore_primitives.h": "9a2ddd7bb7b1e2805050a599659becf31404426e3646e6017c1cb83656a5b2e3",
+    "r1/src/sources.json": "a80887febfb062dc74509c53dd6766e4dfebb4990aeeb6bfbb7c82aa76bee93a",
+    "build/sources-goal-r1-gomore-accel-class-helpers-final-c/report.json": "58cec953a70842b72649adf3c0674ad788693926b99202d38948c910181083d7",
+    "build/goal-r1-gomore-accel-class-helpers-c/rea-0.json": "26f720d86e387402d075afbd0e611561f7e5a4919b3fdcf81f8bf3067cc52fa4",
+    "build/goal-r1-gomore-accel-class-helpers-c/rea-1.json": "b7c51d10191feae21c8b5979a4d2a73faca9fa4fbe86a0fbd875bb07c2270ae9",
+    "build/goal-r1-gomore-accel-class-helpers-c/rea-2.json": "b99e37916bf21856641d02bc3c019a3603be9a63ac101de8e5c270e999102fca",
+    "build/goal-r1-gomore-accel-class-helpers-c/final.dis": "72a1f8a00f34fa2013efbf373c2454c7f61431e816eee7f133f354ebf9fed9c7",
+    "build/goal-r1-gomore-accel-class-helpers-c/verify.py": "269a2f871d3bbe2d22dbb73eeea87b91eaadcd0cf60d1a221b0cd62b0f2c88d2",
+    "build/goal-r1-gomore-accel-class-helpers-c/results.json": "a880b8868e0996e059a50a538a2cafb4c6bb2e5e0f8659e74706c5b146b9f2ab",
+    "build/goal-r1-gomore-accel-class-helpers-c/integration.py": "78e4f20123f1f8e02b0706ab2596bcd907f5ef525443ff9389d749aa21b9f37e",
+    "build/goal-r1-gomore-accel-class-helpers-c/integration/integration-results.json": "0b321f5cbb797589585a4d058c667d0568747b043e38aa6da2ef60cd76fa0f8d",
+    "build/goal-r1-gomore-accel-class-helpers-c/classifier.py": "a2d92b9c0957490989b0b1eb376d1898a290abd8f84f0961ae52ffb9c03e0edf",
+    "build/goal-r1-gomore-accel-class-helpers-c/classifier/results.json": "83ffe12cfa90504f88e39e77e725ea21eb837e049687db271e8bbcd59f5ecb0c",
+    "build/goal-r1-gomore-accel-class-helpers-c/checked.py": "7e492221bc5e20d22b93b59c596babd88582168e5819377f0d35e79ba472ba5d",
+    "build/goal-r1-gomore-accel-class-helpers-c/checked-results.json": "f13f7f792dc47d89fb9ff35182aa20885ea9b8cb0051d4e717adb01b652f3801",
+    "build/goal-r1-gomore-accel-class-helpers-c/negative.py": "51a963c7d6ec71bdb4f781410cc4a3bb203c2084322059a13aac444a9fba2b0b",
+    "build/goal-r1-gomore-accel-class-helpers-c/negative.json": "877e040bfaf18a1a9410258fc1527cdfd2c1cc621de3077b306daaafe7ddd6a8",
+    "build/goal-r1-gomore-accel-class-helpers-c/qualified/qualification.json": "1edd2511322acd07bfcf5c9bca81c51660d3eb5e51c06209cf8886780a58cbd0"
+  }
+}

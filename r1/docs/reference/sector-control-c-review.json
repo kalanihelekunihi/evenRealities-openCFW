@@ -1,0 +1,172 @@
+{
+  "schema": 1,
+  "scope": "R1 sector reader 0x87c24; native 360-byte body; partial C control extraction with native provider-call scaffold",
+  "status": "bounded C header/decode/advance candidate; not full C sector entry or instruction qualified",
+  "stock_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "behavior": {
+    "paired_cases": 12230,
+    "executions": 24460,
+    "outcomes": {
+      "returned": 11820,
+      "assertion_halt": 170,
+      "bounded_read_prefix": 240
+    },
+    "source_report": "build/sources-goal-r1-sector-control-c-final2/report.json",
+    "actual_C": [
+      "sector preparation and advance",
+      "read adapter",
+      "status scanner",
+      "TSL control"
+    ],
+    "modeled": [
+      "partition read",
+      "printf diagnostics",
+      "database path getter"
+    ],
+    "checks": [
+      "header magic and all status combinations",
+      "native assertions and bounds diagnostics",
+      "header/TSL partial and non-writing failures",
+      "outer buffer caller SP-128 and nested raw view caller SP-176",
+      "live aliasing of sector/database/header fields",
+      "traversal unsigned alignment, overflow and bounds",
+      "ordered shared accesses, complete outer frame and nested raw bytes, ABI and masks"
+    ],
+    "limits": [
+      "Helper-private frames below nested raw view excluded",
+      "Partition read modeled, no physical flash/FAL scheduling",
+      "Caller-clobbered registers/flags and arbitrary corrupted pointers excluded",
+      "Long corrupted-size traversals compared through 16 reads only; termination not established for those fixtures"
+    ]
+  },
+  "negative_controls": [
+    {
+      "mutation": "unprotected-nested-view",
+      "rejected": true
+    },
+    {
+      "mutation": "late-length-read",
+      "rejected": true
+    }
+  ],
+  "object_audit": {
+    "other_574_objects_unchanged": true,
+    "function_name_owner_bytes_flags_alignment_relocations_unchanged": true,
+    "manifest_unchanged": true,
+    "composed_import_sets_unchanged": true,
+    "original_assembly_code_span": 360,
+    "remaining_assembly_scaffold_span_including_alignment": 228,
+    "C_control_workers": [
+      "sector_prepare_body",
+      "sector_advance_body"
+    ],
+    "protected_views": {
+      "sector_header": "caller SP-128, 104 local bytes",
+      "nested_TSL_read": "caller SP-176, 32 bytes"
+    },
+    "protection_reservation_bytes_during_C_only": 48
+  },
+  "normal_build": {
+    "units": 575,
+    "application_units": 501,
+    "bootloader_units": 74,
+    "application_imports": 175,
+    "bootloader_imports": 34,
+    "failures": 0,
+    "duplicate_strong_symbols": 0,
+    "import_delta": 0
+  },
+  "qualification": {
+    "compiled_candidates": 5,
+    "selected_regions": 0,
+    "canonical_plan_unchanged": true
+  },
+  "hybrid": {
+    "application_equals_stock": true,
+    "totals": {
+      "binary-pull-through": 642279,
+      "source-built": 3881,
+      "resource-file": 248
+    },
+    "source_completeness_proven": false
+  },
+  "assembly": {
+    "old_code_span": 360,
+    "remaining_scaffold_including_alignment": 228,
+    "reason": "Keep original header and nested TSL call stack positions, loops, diagnostics/assertions; C calls protect future nested read view with 48-byte reservation"
+  },
+  "limits": [
+    "240 corrupt-size cases compare only a bounded 16-read prefix, not termination",
+    "Partition IO, printf and database path modeled; actual C read adapter/status/TSL providers execute",
+    "C-private frames below nested raw view and temporary unused/saved words between that view and outer scratch excluded",
+    "Full FAL/device/physical-flash execution and scheduling not established in this receipt",
+    "Caller-clobbered registers/flags and arbitrary corruption excluded",
+    "No complete source executable link or byte-identical full-source build; G2 gates unchanged"
+  ],
+  "inputs": [
+    {
+      "path": "build/sources-goal-r1-sector-control-c-final2/report.json",
+      "sha256": "295a90a1b4614a48d4facfc6290aaf78e8f1db466fd9f49f250285bcf85b36da"
+    },
+    {
+      "path": "build/hybrid-goal-r1-sector-control-c/build-report.json",
+      "sha256": "8466a305fc4a2378fecac396ac4051bf54872a94c11fdb5153f7d8e92f104541"
+    },
+    {
+      "path": "tools/build/source-plan.json",
+      "sha256": "716cf17b8cf2bed8ad6a99a672b1856af4c5380842c95cb14b9a263a7bb42bc8"
+    },
+    {
+      "path": "r1/src/application/runtime/native_flashdb_sector_read.c",
+      "sha256": "6f26b0efb21f3e703fdc0f901232d1a096c2dc52acaaf646036aa8ab2a4a84c0"
+    },
+    {
+      "path": "r1/src/sources.json",
+      "sha256": "4b6d47de0b0e1626f5df3ee73725bc221c9e05373e2a098596abdf560fd5a0ca"
+    },
+    {
+      "path": "r1/symbols/function-frontier.csv",
+      "sha256": "f1867d1d71a0ceff5c1232917293a062a1ae70984f18bd694bf2adb78b33ba6f"
+    },
+    {
+      "path": "build/goal-r1-sector-control-c/before.c",
+      "sha256": "9c21e61be878ea01df1e02dd0b68c8f820a68b17acc534a6a7bd34fec7577815"
+    },
+    {
+      "path": "build/goal-r1-sector-control-c/verify.py",
+      "sha256": "0da013a69c6b006e63d0004873572bbec2938ef209ee4716bc511af8d7df7801"
+    },
+    {
+      "path": "build/goal-r1-sector-control-c/results.json",
+      "sha256": "ecc02492dbd478cf4a5f827eb01f220ed6cb06425cd0c8d4d043ebadd8c4e9dd"
+    },
+    {
+      "path": "build/goal-r1-sector-control-c/negative.py",
+      "sha256": "7df2677eaf4db53dca05324a82167cbe1635a7a158fe2a1d087adc6d0bfaa753"
+    },
+    {
+      "path": "build/goal-r1-sector-control-c/negative-results.json",
+      "sha256": "661366294f7c7f78da1fd54724323e938fc042bd3abaa7e3b76866e4d050e035"
+    },
+    {
+      "path": "build/goal-r1-sector-control-c/audit.py",
+      "sha256": "2c21721ca7fbd813112fee7d6d7ba8cc30a5ea18d7e393644d6e5f1cacda58ac"
+    },
+    {
+      "path": "build/goal-r1-sector-control-c/audit-results.json",
+      "sha256": "b5172d738c06d956cfa466ee83ab2f571d5c8203f4a93d00f21a4b509d486338"
+    },
+    {
+      "path": "build/goal-r1-sector-control-c/rea.json",
+      "sha256": "dc41ec5fee8c6d02b1c8e01c228ee35d79d3d9e57beb2d997e42eeba635ac080"
+    },
+    {
+      "path": "build/goal-r1-sector-control-c/qualified/qualification.json",
+      "sha256": "ea0122e9289c5b9211c7e81bf7054c374d0202d7ac6933d0c4485970bd6c8ec7"
+    },
+    {
+      "path": "build/goal-r1-sector-control-c/qualified/source-plan.json",
+      "sha256": "3da40e3d766877c0b3059bee372f651c1f56681157782eba12ee3076f1834a0f"
+    }
+  ]
+}

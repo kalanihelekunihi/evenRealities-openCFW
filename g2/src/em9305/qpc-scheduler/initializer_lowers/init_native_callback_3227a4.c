@@ -1,49 +1,36 @@
-/* Native PAwR queue body; unresolved children remain genuine imports. */
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_callback_3227a4\n"
-".type opencfw_em9305_callback_3227a4,@function\n"
-"opencfw_em9305_callback_3227a4:\n"
-"L3227a4:\n"
-"enter_s [r13,fp,blink]\n"
-"L3227a6:\n"
-"sub_s sp,sp,0x20\n"
-"L3227a8:\n"
-"mov_s r0,0x805000\n"
-"L3227ae:\n"
-"bl.d opencfw_em9305_wsf_event_remove\n"
-"L3227b2:\n"
-"add r1,sp,0x1f\n"
-"L3227b6:\n"
-"mov_s r13,r0\n"
-"L3227b8:\n"
-"breq_s r0,0,L3227de\n"
-"L3227ba:\n"
-"add_s r1,sp,0\n"
-"L3227bc:\n"
-"add r2,sp,0x1e\n"
-"L3227c0:\n"
-"bl.d opencfw_em9305_pawr_decode_31e84c\n"
-"L3227c4:\n"
-"mov_s r0,r13\n"
-"L3227c6:\n"
-"breq_s r0,0,L3227d2\n"
-"L3227c8:\n"
-"add_s r0,sp,0\n"
-"L3227ca:\n"
-"bl.d opencfw_em9305_pawr_response_dispatch_322834\n"
-"L3227ce:\n"
-"stb -1,[sp,18]\n"
-"L3227d2:\n"
-"bl.d opencfw_em9305_wsf_event_release\n"
-"L3227d6:\n"
-"mov_s r0,r13\n"
-"L3227d8:\n"
-"bl opencfw_em9305_pawr_queue_resume_31694c\n"
-"L3227dc:\n"
-"b_s L3227a8\n"
-"L3227de:\n"
-"leave_s [r13,fp,blink,pcl]\n"
-".size opencfw_em9305_callback_3227a4,.-opencfw_em9305_callback_3227a4\n"
-);
+#include <stdint.h>
+
+/* Native 0x3227a4..0x3227e0: drain the PAwR queue at 0x805000. Each event
+ * is decoded; a decoded response gets status -1 and is dispatched. Every
+ * event is released and the queue resumed. */
+extern uintptr_t opencfw_em9305_wsf_event_remove(uintptr_t queue,uintptr_t out_u8);
+extern uint32_t opencfw_em9305_pawr_decode_31e84c(uintptr_t,uintptr_t,uintptr_t);
+extern uint32_t opencfw_em9305_pawr_response_dispatch_322834(uintptr_t);
+extern uint32_t opencfw_em9305_wsf_event_release(uintptr_t event);
+extern uint32_t opencfw_em9305_pawr_queue_resume_31694c(void);
+
+struct pawr_response {
+    uint8_t decoded[18];
+    int8_t status;
+    uint8_t address[6];
+    uint8_t reserved[5];
+    uint8_t flagged;
+    uint8_t handler;
+} __attribute__((aligned(4)));
+
+void opencfw_em9305_callback_3227a4(void)
+{
+    struct pawr_response response;
+    for(;;){
+        uintptr_t event=opencfw_em9305_wsf_event_remove(0x805000u,
+                                                        (uintptr_t)&response.handler);
+        if(event==0u)return;
+        if(opencfw_em9305_pawr_decode_31e84c(event,(uintptr_t)&response,
+                                             (uintptr_t)&response.flagged)!=0u){
+            response.status=-1;
+            (void)opencfw_em9305_pawr_response_dispatch_322834((uintptr_t)&response);
+        }
+        (void)opencfw_em9305_wsf_event_release(event);
+        (void)opencfw_em9305_pawr_queue_resume_31694c();
+    }
+}

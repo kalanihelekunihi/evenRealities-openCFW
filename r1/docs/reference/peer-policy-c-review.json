@@ -1,0 +1,223 @@
+{
+  "schema_version": 1,
+  "source": "r1/src/application/board/native_peer_manager_policy.c",
+  "native_roots": {
+    "r1_peer_manager_event_policy": {
+      "entry": "0x7f2b0",
+      "instruction_bytes": 1052,
+      "instruction_ranges": [
+        [
+          "0x7f2b0",
+          "0x7f6aa"
+        ],
+        [
+          "0x7f9ec",
+          "0x7fa0e"
+        ]
+      ]
+    },
+    "r1_peer_bond_diagnostic_plan": {
+      "entry": "0x8216c",
+      "instruction_bytes": 352
+    }
+  },
+  "report": "build/sources-goal-r1-peer-policy-final-c/report.json",
+  "compiled_units": 850,
+  "verification": {
+    "pairs": 4775,
+    "groups": {
+      "event_seeds": 8,
+      "count_narrowing_seeds": 2,
+      "exact_diagnostic_mode_seed": 1,
+      "diagnostic_seeds": 2,
+      "all_event_ids_modes": 2560,
+      "secured_state_retry_order": 324,
+      "security_failure_capture": 144,
+      "bond_update_gate": 1024,
+      "diagnostic_guard_status_modes": 162,
+      "live_policy_backend_mutations": 378,
+      "live_diagnostic_buffer_mutations": 20,
+      "seeded_mixed_state": 150
+    },
+    "native_instruction_bytes_covered": 1404,
+    "native_instruction_bytes_expected": 1404,
+    "native_uncovered_byte_addresses": [],
+    "actual_C": [
+      "peer-manager event policy",
+      "bond diagnostic",
+      "existing connection getters/owners",
+      "existing control byte owner",
+      "new authenticated last-secured-peer owner"
+    ],
+    "modeled": [
+      "SDK event/flash handlers",
+      "SDK bonding load80 bytes",
+      "SDK repairing reply",
+      "logging/hexdump",
+      "scheduler",
+      "count and record flag queries",
+      "advertising stop/restart",
+      "slow-mode policy"
+    ]
+  },
+  "registration": {
+    "pairs": 56,
+    "groups": {
+      "registration_and_delivery": 56
+    },
+    "actual_registration_body": true,
+    "registered_callback_invoked": true,
+    "security_parameter_bytes": "3107100303",
+    "SDK_init_params_register_error_and_services_modeled": true
+  },
+  "mutants": [
+    {
+      "name": "SDK_prelude_order",
+      "rejected": true
+    },
+    {
+      "name": "secured_event",
+      "rejected": true
+    },
+    {
+      "name": "peer_source",
+      "rejected": true
+    },
+    {
+      "name": "count_narrowing",
+      "rejected": true
+    },
+    {
+      "name": "notification_delay",
+      "rejected": true
+    },
+    {
+      "name": "control_store",
+      "rejected": true
+    },
+    {
+      "name": "control_gate",
+      "rejected": true
+    },
+    {
+      "name": "count_threshold",
+      "rejected": true
+    },
+    {
+      "name": "both_handles",
+      "rejected": true
+    },
+    {
+      "name": "error_capture",
+      "rejected": true
+    },
+    {
+      "name": "failure_retry_argument",
+      "rejected": true
+    },
+    {
+      "name": "update_bit",
+      "rejected": true
+    },
+    {
+      "name": "repairing_reply",
+      "rejected": true
+    },
+    {
+      "name": "diagnostic_invalid_guard",
+      "rejected": true
+    },
+    {
+      "name": "diagnostic_MAC_offset",
+      "rejected": true
+    },
+    {
+      "name": "diagnostic_exact_mode",
+      "rejected": true
+    },
+    {
+      "name": "diagnostic_second_half",
+      "rejected": true
+    },
+    {
+      "name": "advertising_mode",
+      "rejected": true
+    }
+  ],
+  "audit": {
+    "unchanged_prior_nongenerated_objects": 839,
+    "changed_prior_nongenerated_objects": [],
+    "changed_generated_objects": [
+      "{gen}/r1_startup_vectors.S",
+      "{gen}/r1_uecc.c"
+    ],
+    "added_objects": [
+      "r1/src/application/board/native_peer_manager_policy.c"
+    ],
+    "removed_imports": [
+      "r1_peer_manager_event_policy"
+    ],
+    "added_imports": [],
+    "application_imports": 68,
+    "new_state": {
+      "symbol": "r1_ble_last_secured_peer_id",
+      "native_address": "0x200064fa",
+      "size": 2,
+      "cold_initializer": "0000"
+    },
+    "existing_control_and_connection_owners_reused": true,
+    "bonding_record_bytes": 80,
+    "assembly_added": false
+  },
+  "contract": [
+    "Always pass the event to SDK pm_handler_on_pm_evt then pm_handler_flash_clean before freshly reading its one-byte event ID. The short-enum SDK event layout is asserted at conn_handle2,peer_id4,params8.",
+    "Security success saves the current peer ID, captures the peripheral count narrowed to8 bits, cancels the legacy pair timeout and rearms time notifications at raw delays0x66/0x400/0x800. If that count is below3 and glasses are absent, it reports the current record flag separately for each active log channel and schedules role sync at0x2800. If phone and glasses are both present, it cancels role sync and stops advertising.",
+    "Success then loads the currently saved peer bond, freshly queries the phone handle and requests its existing slow-mode policy. A successful first load reports reconnection and invokes the actual diagnostic, which independently reloads the bond. A failed load reports a new connection. The late live control flag either schedules notifications again or is set to1 before waiting diagnostics.",
+    "Security failure captures procedure,error and source before logging, while connection/peer identifiers are freshly read per log channel. It cancels time notifications and schedules the same callback with argument1 at0x800. Error0x1101 adds the SMP timeout report without an extra disconnect call.",
+    "Security configuration requests report current identifiers and send allow_repairing=true using the typed SDK configuration. Successful peer-data updates invoke the diagnostic only when changed bit0 is set and data ID is7; they use the shared last-secured peer ID. Peers-deleted completion restarts advertising mode3. Storage-full and garbage-collection events retain distinct diagnostic severities after the SDK prelude.",
+    "The bond diagnostic rejects exact full-wordffff, otherwise calls the typed uint16 peer-key load. The stock helper requests80 bytes, matching the pinned SDK structure. Failure reports the original full peer argument and status. Success dumps MAC bytes18..23, identity bytes1..16 and local LTK bytes52..67, preserving provider order. Unless a fresh full logging-mode value equals exactly2, it directly formats both eight-byte key halves with live bytes; this is not a bit2 test."
+  ],
+  "limits": [
+    "The actual C policy, diagnostic, existing connection getters and shared connection/control owners execute. SDK default event/flash handlers, bonding storage load, repairing reply, scheduler, count/record-flag queries, advertising controls, slow-mode policy and logs are modeled. No bond database, real flash, radio encryption or physical pairing is exercised.",
+    "The registration fixture executes the actual unchanged peer-manager configuration body, checks the five-byte security parameters3107100303 and captures/invokes the actual C policy pointer passed to modeled pm_register. SDK initialization, parameter acceptance and registration storage are modeled. Error-boundary cases permit the handler to return as stock code does; they do not prove device recovery after a fatal SDK error.",
+    "All1404 native instruction bytes in both routines execute across4775 controlled comparisons, with56 additional registration/delivery comparisons. Callee-saved integer/FP registers, masks, SP, stack/input/state guards, public state and provider traces are checked. Void-callback incidental scratch registers and private stack/padding locations are excluded. Source execution into stock executable addresses is rejected.",
+    "The bond backend supplies all80 bytes. A first policy load and a second diagnostic load retain independent statuses and buffers. Diagnostic-buffer mutations are limited to live diagnostic calls. Malformed/partial records, asynchronous concurrency, real flash persistence and regulator/radio timing remain outside the fixture. Diagnostic disclosure behavior follows stock rather than inventing another logging policy.",
+    "One new two-byte owner at native0x200064fa matches the authenticated cold RW initializer0000. Existing0x200064f8 control and phone/glasses fields are reused. Controlled fixed-address fixtures validate aliases only; final source placement, full firmware linking and boot remain open.",
+    "The normal build compiles850 units, closes the peer-manager policy import and introduces no new imports. It leaves68 application imports and22 bootloader linker imports. All839 prior nongenerated objects remain unchanged. R1 manifest checking passes; global sources-check retains the unrelated unlisted G2 resident_rom_thumb_set.S issue. No assembly is added. Byte identity and paid compiler availability are not requirements."
+  ],
+  "evidence_files": {
+    "r1/src/application/board/native_peer_manager_policy.c": "f33f5b03b8c64008eb1eb44f875d07ce99aaa150714ebf54ae17506344fd3245",
+    "build/sources-goal-r1-peer-policy-final-c/report.json": "4517e1805d107ad074200b08dd6feae1efa474eace1eb09cd88668eaf9cc12d7",
+    "build/sources-goal-r1-touch-switch-pure-c/report.json": "5000d8448eb76c896adf3339ffe752ab68c587f12ec041b65b83a6826c22a32b",
+    "r1/src/sources.json": "7f2ae8059bac23937ab217ac2ce6c978a7fb3809035de16744368f3c89429b20",
+    "r1/src/application/board/native_ble_initialize.c": "f60833454dac9c56614ee77237ed18237dd28bc55efb7e2134d0230db7f208bf",
+    "r1/src/application/board/connection_handle.c": "a4039c569b5178850ba3b05990521ea21d966debd447fd50487c62859ae0122b",
+    "r1/src/application/board/native_connection_parameters.c": "8a58564e5dbdcaad3be5eb3d10e2bcc55f6b1be61aa0ecf17a4e080fdf8e13a6",
+    "r1/src/application/runtime/native_peer_observer.c": "9dab82e27adf530c197e83d96b8669b4d131cca613319447475761bced283543",
+    "vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/ble/peer_manager/peer_manager_types.h": "61578b08d9d56724026d803a5118a286e7c45b890205df14cc10a0e7d440b020",
+    "vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/ble/peer_manager/peer_manager.h": "45c3b0d8f7b57721d9733be25d067fdc5bf813b2c3aecda067b1453dfe820b4d",
+    "vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/ble/peer_manager/peer_manager.c": "91d11e1ce1b03db0afb14c7f44d4f3b7b4e4411ee2dddd922b959455e534856a",
+    "build/goal-r1-peer-policy-c/rea.json": "3278a23a8c5e447a521905e9fd1a1e3a04b3c8e5e0ae59376e1cd140f23b8388",
+    "build/goal-r1-peer-policy-c/tail-rea.json": "2b4f9e1db501df01d2cf7d6a1539a2317f854294a6c8b7d466f2f6d1be546e6a",
+    "build/goal-r1-peer-policy-c/diag-rea.json": "a304749d4f8c9e8db76b425443ca6200db4531cfd55a58a1af253e0b97ef1003",
+    "build/goal-r1-peer-policy-c/stock.asm": "3732ad3ffe65d646ecdd3b6b78c4fb9e7d2df86b937640ebe0c7448cf0ee5b5c",
+    "build/goal-r1-peer-policy-c/strings.py": "326e57c1163a1bf1d8d38d43628266d60c978f332b21dd5bb7f6e95ac3509d72",
+    "build/goal-r1-peer-policy-c/strings.json": "e835ab637f39395ee961c178400f4610a1d50ef47d0b38698190aa36b268d028",
+    "build/goal-r1-peer-policy-c/verify.py": "1bcffab0e651341ad80e3e76cb431b4b519600e6050bbb29a52180569aab5556",
+    "build/goal-r1-peer-policy-c/verification.json": "8e6eef72071c3d31904d8468d3187bbd0891428a496cbe51ed6f85c37e56d6e8",
+    "build/goal-r1-peer-policy-c/verification.log": "c832fb52132ae9d0f03770a20c59b92901fd851f05acf5d47085a19cc0ccc319",
+    "build/goal-r1-peer-policy-c/mutants.py": "35ae819578077234c2db7efcfa554d7b84be28261887fe0bcc614da601b82ac4",
+    "build/goal-r1-peer-policy-c/mutants.json": "3fb0b1e16dea01dec328a2d0dd0d63acffbe7d31cdc7fdb6f0a06f9dc38d7b6f",
+    "build/goal-r1-peer-policy-c/mutants.log": "9a1a37f003a0fb35e6d90904f08aa6ce9a92ecec0a38a89f33d2ac88daf7c741",
+    "build/goal-r1-peer-policy-c/audit.py": "3f91c2dbd9ec040b5ee8a4e99e3e94a4388fbd2b47e9087dd40e97172634839a",
+    "build/goal-r1-peer-policy-c/object-audit.json": "4899638b36de72491b2910ffd9e70550b3ff32839b9c618d4c58c78c0192139b",
+    "build/goal-r1-peer-policy-c/r1-check.log": "fcab082f14a5f23fe3210a5f2e44f0707a94eec02f9bed5c93d60bcc48cb8ab5",
+    "build/goal-r1-peer-policy-c/sources-check.log": "573b6f1a62656a04605fd301fdf1cc3083522d7a7782decae34a612fc8013b26",
+    "build/goal-r1-peer-policy-c/registration/verify.py": "bcd4758131d8c991d3e0912a9fd4a62452a66e2e7e4d6036b04e2e3c0fa8fbee",
+    "build/goal-r1-peer-policy-c/registration/rea.json": "591f38b8fe2fc70824233b6c4a051bdd4a29efa92c44cbbfc48af2ae3e426c00",
+    "build/goal-r1-peer-policy-c/registration/verification.json": "ce8f3ba2de01a956317d83b142587f03282d04246425c8e9e0048af1bc144ff5",
+    "build/goal-r1-peer-policy-c/registration/verification.log": "ee2a1abca51191f6c732802ce72a49dacb9d3fd79987e9d4d0936fe063f16e08",
+    "build/goal-r1-fstorage-registry/expanded-rw.bin": "87fdee392022fdbe23dd0daf3e859fb14f3ce26ba3e8403aab56dc9d9a913317",
+    "r1/docs/reference/fstorage-registry-review.json": "3ee2a79fb2b3f866e118d86e0361b8dc1499a92460f5e6a49370418eac1dbb5c"
+  }
+}

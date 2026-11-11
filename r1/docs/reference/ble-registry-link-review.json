@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "report": "build/sources-goal-r1-ble-registry-link/report.json",
+  "report_sha256": "b175d099b39de10e8a0e5a6f3db0e2a7617b97678bc7ba75dae76d0a127e5033",
+  "manifest_sha256": "08dbc32c50c51d4e9a7b4561c8510b1843b1dacde1c521f368a0d89071252231",
+  "verification": {
+    "poll_scenarios": 48,
+    "empty_range_masks": 16,
+    "observer_counts": [
+      1,
+      5,
+      5,
+      1
+    ],
+    "actual_sdk_iterator_and_poller": true,
+    "range_bases": [
+      "0x1010000",
+      "0x1010100",
+      "0x1010200",
+      "0x1010300"
+    ],
+    "svc_numbers": [
+      97
+    ],
+    "stock_tables_match_with_priority0_code_address_normalized": true,
+    "callbacks_and_event_get_modeled": true
+  },
+  "audit": {
+    "unchanged_prior_object_hashes": 800,
+    "generated_boot_allocated_bytes_and_relocations_unchanged": true,
+    "all_composed_allocated_bytes_and_relocations_unchanged": true,
+    "section_relative_boundaries_verified": true,
+    "removed_application_imports": [
+      "__start_sdh_ble_observers0",
+      "__start_sdh_ble_observers1",
+      "__start_sdh_ble_observers2",
+      "__start_sdh_ble_observers3",
+      "__stop_sdh_ble_observers0",
+      "__stop_sdh_ble_observers1",
+      "__stop_sdh_ble_observers2",
+      "__stop_sdh_ble_observers3"
+    ],
+    "only_manifest_change_ble_linker_layout": true
+  },
+  "defects": [
+    {
+      "defect": "skip-first-priority1",
+      "relocatable_and_final_probe_links_succeeded": true,
+      "boundary_assertion_rejected": true
+    },
+    {
+      "defect": "drop-last-priority2",
+      "relocatable_and_final_probe_links_succeeded": true,
+      "boundary_assertion_rejected": true
+    }
+  ],
+  "rea_evidence_id": "ev_cd1e36246a8a296982ec6a42fabaf66b89d93fffff207a191a0abdbc2af2101f",
+  "rea_complete_stock_tables_match_raw": true,
+  "evidence_files": {
+    "build/goal-r1-ble-registry-link/verify.py": "c981df6a36159acfe96d7f5716be2029835a71f44626da7d66a7a74327f60ba2",
+    "build/goal-r1-ble-registry-link/audit.py": "7e774fe673bf1c40fe92d51395d7a1b3b79ef9530329fa93507f99fe0dd099ad",
+    "build/goal-r1-ble-registry-link/defects.py": "5eb4ecc5d6fab7251878bcdfe6c20e318f8edce94a580b9e3c6ee886071f6908",
+    "build/goal-r1-ble-registry-link/document.py": "487422fda379ce86160a078c02bbb8d909de8bedf5dc158002665720b13707a2",
+    "build/goal-r1-ble-registry-link/verification.json": "a14e59e12732c20876f4ce3f83f2b564f0896917550d3c627f9f7f0964793b3e",
+    "build/goal-r1-ble-registry-link/audit.json": "2f2787f5160a4f8c3300868bfbd297a23275663467c487b024fd61a64ea230a7",
+    "build/goal-r1-ble-registry-link/defects.json": "fb8b0b75bcda6c0c5c899c42f34bc94b157052399be693cf04fc08700f3f8e5e",
+    "build/goal-r1-ble-registry-link/probe.o": "0de3905b552fb7dc33a99642fa3e76c003d1fbc372992af5d01034bd8c6b01eb",
+    "build/goal-r1-ble-registry-link/source.elf": "89b7295f55470153bd17556d336fcd56e6ed71153a1d20a56af1705ebbd2b3b6",
+    "build/goal-r1-ble-registry-link/rea.json": "e28da8b8dc3cd7596a7bf35a8bb9b6fed054034d591dc3184310f1cf48570107",
+    "build/goal-r1-ble-registry-link/verify-final.log": "7a1c1d82b1c258d7cd6ea5181d0caa6d376e2d2d7520557f4bf1c11f1a46c53f",
+    "build/goal-r1-ble-registry-link/r1-sources-check.log": "5e11e4875b7438d11bbef8d4e6a9ea5b4081f51b98d07ce16e216ec5be46d46c",
+    "build/goal-r1-ble-registry-link/sources-check.log": "8c6106f31795d747b5656cd65fe1f38ce4ad1cf5ad16dd2acf1d77f1c9a667c3",
+    "build/goal-r1-ble-registry-link/boot-link/report.json": "3ae043beb7014bea40bba1b53ae3ec8959a1858211793fd851be543ded1aadfb"
+  },
+  "layout_and_sdk_inputs": {
+    "r1/src/config/runtime/native_ble_observers.ld": "96cec5cd8f6181a1a118d582ff5b81f1630becb241294d1b6c0c3544812d297d",
+    "r1/src/config/sdk/section_legacy_abi.h": "b33ebd4283f130372cf2d1386fbd65922d15746ce9fcd2fe5540ed74c8583c02",
+    "vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/experimental_section_vars/nrf_section_iter.h": "f87f59a63386ac37d36a0d1a7da856879a992edf792db73e913c9d8f384e1440",
+    "vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/experimental_section_vars/nrf_section_iter.c": "a744c775d67f5d98ede1bd2a7663c0ed1075dc002e92a38f758072ea95ed9ec1",
+    "vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/softdevice/common/nrf_sdh_ble.c": "cf2aec65411af6cb56cc37990dcb1b0d02d92daa0bd613019bc2bf4ede33e48a"
+  },
+  "limitations": [
+    "Actual SDK poller and legacy iterator execute with modeled SVC97 event retrieval and observer callbacks.",
+    "Stack-enabled state seeded; SoftDevice initialization, physical radio, asynchronous behavior and callback internals unverified.",
+    "Other SDK registry boundaries and complete application final link remain unresolved.",
+    "No source-plan selection changes or firmware flashing."
+  ]
+}

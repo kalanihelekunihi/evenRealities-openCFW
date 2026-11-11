@@ -8,12 +8,11 @@ const uint32_t r1_trig_reduce_coeff[5]={0x36000000,0x2c800000,0x29fdaa22,0x2fc90
 typedef union {uint32_t bits;float value;} word_float;
 static float fbits(uint32_t bits){word_float x={.bits=bits};return x.value;}
 static uint32_t bits(float value){word_float x={.value=value};return x.bits;}
-#define BINARY(name,instruction) static float name(float a,float b){float r;__asm__ volatile(instruction " %0,%1,%2":"=t"(r):"t"(a),"t"(b));return r;}
-BINARY(add,"vadd.f32")
-BINARY(sub,"vsub.f32")
-BINARY(mul,"vmul.f32")
-static float madd(float accumulator,float a,float b){__asm__ volatile("vmla.f32 %0,%1,%2":"+t"(accumulator):"t"(a),"t"(b));return accumulator;}
-static float convert(uint32_t x,int is_signed){float r=fbits(x);if(is_signed)__asm__ volatile("vcvt.f32.s32 %0,%0":"+t"(r));else __asm__ volatile("vcvt.f32.u32 %0,%0":"+t"(r));return r;}
+static float add(float a,float b){return a+b;}
+static float sub(float a,float b){return a-b;}
+static float mul(float a,float b){return a*b;}
+static float madd(float accumulator,float a,float b){return accumulator+a*b;}
+static float convert(uint32_t x,int is_signed){return is_signed ? (float)(int32_t)x : (float)x;}
 /* Raw ABI: R0 output pointer, R1 input encoding, S0 incoming/result slot. */
 float r1_native_trig_reduce32(uint32_t *quadrant,uint32_t input,float incoming_s0)
 {
@@ -39,6 +38,6 @@ float r1_native_trig_reduce32(uint32_t *quadrant,uint32_t input,float incoming_s
     float result=mul(rounded,fbits(r1_trig_reduce_coeff[2]));
     result=madd(result,correction,fbits(r1_trig_reduce_coeff[3]));
     result=madd(result,rounded,fbits(r1_trig_reduce_coeff[4]));
-    if(input>>31){*quadrant=0x10000000u-q;__asm__ volatile("vneg.f32 %0,%0":"+t"(result));}
+    if(input>>31){*quadrant=0x10000000u-q;result=-result;}
     return result;
 }

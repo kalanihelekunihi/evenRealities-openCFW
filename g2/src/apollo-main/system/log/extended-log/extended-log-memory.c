@@ -7,12 +7,10 @@ uint32_t g2_log_candidate_module_length(const uint8_t *module)
     while (*p != 0u) p++;
     return (uint32_t)(p - module);
 }
+__typeof__(g2_log_candidate_module_length) g2_log_module_length
+    __attribute__((alias("g2_log_candidate_module_length")));
+__typeof__(g2_log_candidate_module_length) audio_string_length
+    __attribute__((alias("g2_log_candidate_module_length")));
 
-/* Memory side-effect contract of stock fill at 0x43c0e4..0x43c14a.
- * Its r0 return is not consumed by the logger, so the API is void. */
-void g2_log_candidate_stack_fill(uint8_t *destination, uint32_t count,
-                                 uint32_t value)
-{
-    uint8_t byte = (uint8_t)value;
-    for (uint32_t i = 0; i < count; i++) destination[i] = byte;
-}
+/* g2_log_candidate_stack_fill (stock fill 0x43c0e4) is an alias of
+ * audio_uart_buffer_zero in drivers/peripherals/ring-init/ring_init.c. */

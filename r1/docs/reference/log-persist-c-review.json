@@ -1,0 +1,107 @@
+{
+  "schema_version": 1,
+  "entries": {
+    "0x914a0": [
+      "r1_structured_log_periodic_persist",
+      66
+    ]
+  },
+  "report": "build/sources-goal-r1-log-persist-c/report.json",
+  "report_sha256": "a25247df8e1f420e0248bbb8e3afd7928c59ef2d4abbc74e5f9c8c5b0f9984ba",
+  "unit": {
+    "source": "r1/src/application/runtime/native_log_persist.c",
+    "source_sha256": "c805d9f8417857fb8994ef21c40b7f73f38e1856c29a2786ea2bb2b06936b0ae",
+    "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-log-persist-c/r1/r1-application/r1__src__application__runtime__native_log_persist.c.o",
+    "object_sha256": "aa67e831a60f1bb8b3c327284dab579203b6d89bc4f568cc95c26e7630994dc8"
+  },
+  "behavior": {
+    "pairs": 1998,
+    "digest": "66bc750bf6f89ad71b301e5d9e552ba73aea3f76a24472870230b4ce6a31d7f7",
+    "actual_C": "periodic log persistence with actual event adapter",
+    "modeled_boundaries": [
+      "r1_structured_log_export_active",
+      "r1_structured_log_cache_copy",
+      "osKernelGetTickCount",
+      "r1_log_bin_write",
+      "osDelay",
+      "r1_event_service_0005e0de"
+    ],
+    "limits": [
+      "Cache extraction, clock, flash writer and delay modeled",
+      "Unwritten snapshot bytes compared; provider may write partially or return failure",
+      "No physical flash writes or RTOS scheduling proof",
+      "Private stack, caller-clobbered registers and void returns excluded"
+    ]
+  },
+  "negative_controls": {
+    "wrong-export-gate": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "2b1c9e5'])], 'state': ['7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b000000007b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b', '81eb4f08be441f9a072fbe917dfaedaf7dca48d8023478544336d1f442b1c9e5']}, {'trace': [('export', [0], ['7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b000000007b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b', '81eb4f08be441f9a072fbe917dfaedaf7dca48d8023478544336d1f442b1c9e5'])], 'state': ['7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b000000007b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b', '81eb4f08be441f9a072fbe917dfaedaf7dca48d8023478544336d1f442b1c9e5']})\n"
+    },
+    "wrong-peek": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "orn.py\", line 1063, in __hook_code_cb\n    callback(uc, address, size, user_data)\n    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-log-persist-c/verify.py\", line 31, in hook\n    elif n=='copy':assert (r0,r1,r2)==(0,BUFFER,4096);out=[r0,r1,r2];result=state['copy'];v.mem_write(BUFFER,bytes((i*37+state['copy_index'])&255 for i in range(state['fill'])));state['copy_index']+=1\n                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    "wrong-copy-length": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "orn.py\", line 1063, in __hook_code_cb\n    callback(uc, address, size, user_data)\n    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-log-persist-c/verify.py\", line 31, in hook\n    elif n=='copy':assert (r0,r1,r2)==(0,BUFFER,4096);out=[r0,r1,r2];result=state['copy'];v.mem_write(BUFFER,bytes((i*37+state['copy_index'])&255 for i in range(state['fill'])));state['copy_index']+=1\n                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    "wrong-strict-boundary": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "45972ccf75f024a5880107bb604e9'], ['7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b102700007b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b', '81eb4f08be441f9a072fbe917dfaedaf7dca48d8023478544336d1f442b1c9e5']), ('delay', [80], ['7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b102700007b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b', '81eb4f08be441f9a072fbe917dfaedaf7dca48d8023478544336d1f442b1c9e5'])], 'state': ['7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b102700007b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b', '81eb4f08be441f9a072fbe917dfaedaf7dca48d8023478544336d1f442b1c9e5']})\n"
+    },
+    "wrong-interval": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "45972ccf75f024a5880107bb604e9'], ['7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b102700007b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b', '81eb4f08be441f9a072fbe917dfaedaf7dca48d8023478544336d1f442b1c9e5']), ('delay', [80], ['7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b102700007b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b', '81eb4f08be441f9a072fbe917dfaedaf7dca48d8023478544336d1f442b1c9e5'])], 'state': ['7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b102700007b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b', '81eb4f08be441f9a072fbe917dfaedaf7dca48d8023478544336d1f442b1c9e5']})\n"
+    },
+    "missing-timestamp-store": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "45972ccf75f024a5880107bb604e9'], ['7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b000000007b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b', '81eb4f08be441f9a072fbe917dfaedaf7dca48d8023478544336d1f442b1c9e5']), ('delay', [80], ['7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b000000007b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b', '81eb4f08be441f9a072fbe917dfaedaf7dca48d8023478544336d1f442b1c9e5'])], 'state': ['7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b000000007b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b', '81eb4f08be441f9a072fbe917dfaedaf7dca48d8023478544336d1f442b1c9e5']})\n"
+    },
+    "write-failure-short-circuit": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "7b7b7b7b7b7b7b7b7b7b7b7b7b', '2c7ec300b69c6edcff493b9ac9f7f8d8f3eda0c9c08070d99a2f0f262029e30e']), ('write', [536972232, 4096, 'c1c10a74a227a912f6ebfb36273ee6c678349f9fb9535bc60a9f2467f6e5753d'], ['7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b307500007b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b', '2c7ec300b69c6edcff493b9ac9f7f8d8f3eda0c9c08070d99a2f0f262029e30e'])], 'state': ['7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b307500007b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b', '2c7ec300b69c6edcff493b9ac9f7f8d8f3eda0c9c08070d99a2f0f262029e30e']})\n"
+    },
+    "wrong-delay": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "kwargs)\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 1063, in __hook_code_cb\n    callback(uc, address, size, user_data)\n    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-log-persist-c/verify.py\", line 34, in hook\n    elif n=='delay':assert r0==80;out=[r0];result=state['write_result']^0xffffffff\n                           ^^^^^^\nAssertionError\n"
+    }
+  },
+  "audit": {
+    "unchanged_prior_objects": 762,
+    "new_units": 1,
+    "imports": {
+      "r1-application": {
+        "added": [
+          "r1_log_bin_write"
+        ],
+        "removed": [
+          "r1_event_service_000914a0"
+        ]
+      },
+      "r1-bootloader": {
+        "added": [],
+        "removed": []
+      }
+    },
+    "reused_owners": [
+      "new authenticated last-tick word and 4096-byte snapshot"
+    ]
+  },
+  "source_check": "R1 passes: 763 units, 567 source files, 0 not built. Global check flags existing G2 resident_rom_thumb_set.S absent from manifest.",
+  "initialization": "log-persist-initialization.json",
+  "rea": "log-persist-c-rea.json",
+  "instruction_identity_proven": false,
+  "image_integration_proven": false,
+  "integration_receipts": [
+    "r1/docs/reference/log-chain-review.json"
+  ]
+}

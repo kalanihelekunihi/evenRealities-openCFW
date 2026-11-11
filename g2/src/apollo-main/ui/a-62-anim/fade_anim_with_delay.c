@@ -24,7 +24,7 @@ extern void audio_uart_lv_anim_init_4503d6(void *);
 extern void audio_uart_lv_anim_values_4506ce(void *, int32_t, int32_t);
 extern void *audio_uart_lv_anim_start_450408(void *);
 extern void audio_legal_regulatory_fade_callback_58c12c(void);       /* opacity exec callback */
-extern void audio_uart_lv_anim_path_45065a(void);                    /* lv_anim path callback (fade-in curve) */
+extern void lv_anim_path_ease_in(void);                    /* lv_anim path callback (fade-in curve) */
 extern uint32_t audio_log_flags(void); /* 0x43d0ce */
 extern void audio_log_extended(uint8_t, const char *, const char *, const char *, uint32_t, const char *, ...); /* 0x43d574 */
 extern uint32_t compress_log_output(uint32_t, const char *, const char *, ...); /* 0x43ce9e */
@@ -62,7 +62,7 @@ void common_fade_in_animation_with_delay_58c328(void *obj, uint32_t duration, ui
     anim_word(anim, ANIM_DURATION, duration);
     anim_word(anim, ANIM_ACT_TIME, (uint32_t)-(int32_t)delay);
     anim_word(anim, ANIM_EXEC_CB, (uint32_t)(uintptr_t)audio_legal_regulatory_fade_callback_58c12c);
-    anim_word(anim, ANIM_PATH_CB, (uint32_t)(uintptr_t)audio_uart_lv_anim_path_45065a);
+    anim_word(anim, ANIM_PATH_CB, (uint32_t)(uintptr_t)lv_anim_path_ease_in);
     if (ready_cb != 0)
         anim_word(anim, ANIM_COMPLETED_CB, (uint32_t)(uintptr_t)ready_cb);
     (void)audio_uart_lv_anim_start_450408(anim);

@@ -1,210 +1,83 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_318d80\n"
-".type opencfw_em9305_child_318d80,@function\n"
-"opencfw_em9305_child_318d80:\n"
-"L318d80:\n"
-"enter_s [r13-r19,blink]\n"
-"L318d82:\n"
-"mov_s r18,r0\n"
-"L318d84:\n"
-"add r18,r18,788\n"
-"L318d88:\n"
-"mov_s r19,r0\n"
-"L318d8a:\n"
-"ldb r0,[r18,-240]\n"
-"L318d8e:\n"
-"bbit0.nt r0,0x1,L318da0\n"
-"L318d92:\n"
-"ldb r0,[0x805a85]\n"
-"L318d9a:\n"
-"bbit1.d.nt r0,0x7,L318daa\n"
-"L318d9e:\n"
-"mov_s r15,0\n"
-"L318da0:\n"
-"add r19,r19,770\n"
-"L318da4:\n"
-"stb 0,[r19]\n"
-"L318da8:\n"
-"leave_s [r13-r19,blink,pcl]\n"
-"L318daa:\n"
-"ldb r13,[r19,77]\n"
-"L318dae:\n"
-"brne.nt r13,0x3,L318dba\n"
-"L318db2:\n"
-"ldb r0,[r19,78]\n"
-"L318db6:\n"
-"seteq r15,r0,0x1\n"
-"L318dba:\n"
-"ldh r0,[r18,-8]\n"
-"L318dbe:\n"
-"breq_s r0,0,L318dd8\n"
-"L318dc0:\n"
-"ld.as r1,[r19,196]\n"
-"L318dc4:\n"
-"div r0,r1,r0\n"
-"L318dc8:\n"
-"sexb_s r1,r0\n"
-"L318dca:\n"
-"bl.d opencfw_em9305_child_325284\n"
-"L318dce:\n"
-"mov_s r0,r18\n"
-"L318dd0:\n"
-"sth 0,[r18,-8]\n"
-"L318dd4:\n"
-"st.as 0,[r19,196]\n"
-"L318dd8:\n"
-"ldb r0,[r18,5]\n"
-"L318ddc:\n"
-"brlo.d.t r0,0x4,L318da8\n"
-"L318de0:\n"
-"mov_s r0,r19\n"
-"L318de2:\n"
-"bl.d opencfw_em9305_child_3252a0\n"
-"L318de6:\n"
-"add r0,r0,788\n"
-"L318dea:\n"
-"ldb r1,[r18,-12]\n"
-"L318dee:\n"
-"mov_s r14,r0\n"
-"L318df0:\n"
-"brne_s r1,0,L318e06\n"
-"L318df2:\n"
-"ldb.x r0,[r18,-10]\n"
-"L318df6:\n"
-"brlt.nt r0,r14,L318e02\n"
-"L318dfa:\n"
-"ldb.x r0,[r18,-9]\n"
-"L318dfe:\n"
-"brge.t r14,r0,L318da8\n"
-"L318e02:\n"
-"stb 1,[r18,-12]\n"
-"L318e06:\n"
-"add_s r15,r15,r13\n"
-"L318e08:\n"
-"extb_s r13,r15\n"
-"L318e0a:\n"
-"add_s r13,r13,r19\n"
-"L318e0c:\n"
-"add r13,r13,557\n"
-"L318e10:\n"
-"ldb r16,[r13]\n"
-"L318e14:\n"
-"mov_s r0,r19\n"
-"L318e16:\n"
-"add r0,r0,776\n"
-"L318e1a:\n"
-"and r1,r16,0x2\n"
-"L318e1e:\n"
-"and r3,r16,0x1\n"
-"L318e22:\n"
-"seteq r2,r1,0\n"
-"L318e26:\n"
-"seteq r3,r3,0\n"
-"L318e2a:\n"
-"bl.d opencfw_em9305_child_31b32c\n"
-"L318e2e:\n"
-"mov_s r1,r14\n"
-"L318e30:\n"
-"ldb_s r1,[r13,0x4]\n"
-"L318e32:\n"
-"mov_s r17,r0\n"
-"L318e34:\n"
-"cmp r1,255\n"
-"L318e38:\n"
-"beq_s L318e46\n"
-"L318e3a:\n"
-"neg_s r0,r0\n"
-"L318e3c:\n"
-"cmp_s r0,r1\n"
-"L318e3e:\n"
-"mov.gt r17,r1\n"
-"L318e42:\n"
-"neg.gt r17,r17\n"
-"L318e46:\n"
-"ldb.x r1,[r18,-10]\n"
-"L318e4a:\n"
-"brlt.nt r1,r14,L318e56\n"
-"L318e4e:\n"
-"ldb.x r0,[r18,-9]\n"
-"L318e52:\n"
-"brge.nt r14,r0,L318e60\n"
-"L318e56:\n"
-"ldb r0,[r18,-11]\n"
-"L318e5a:\n"
-"add_s r0,r0,1\n"
-"L318e5c:\n"
-"stb r0,[r18,-11]\n"
-"L318e60:\n"
-"bmsk r16,r16,0x1\n"
-"L318e64:\n"
-"breq.d.nt r16,0x3,L318e6e\n"
-"L318e68:\n"
-"extb.f 0,r17\n"
-"L318e6c:\n"
-"beq_s L318e82\n"
-"L318e6e:\n"
-"ldb.x r0,[r18,-9]\n"
-"L318e72:\n"
-"sub_s r0,r1,r0\n"
-"L318e74:\n"
-"div r0,r0,0x4\n"
-"L318e78:\n"
-"ldb r1,[r18,-11]\n"
-"L318e7c:\n"
-"extb_s r0,r0\n"
-"L318e7e:\n"
-"brlo.nt r1,r0,L318e86\n"
-"L318e82:\n"
-"sth 0,[r18,-12]\n"
-"L318e86:\n"
-"extb.f 0,r17\n"
-"L318e8a:\n"
-"beq_s L318da8\n"
-"L318e8c:\n"
-"ldb r0,[r18,-153]\n"
-"L318e90:\n"
-"breq.t r0,0x1c,L318da8\n"
-"L318e94:\n"
-"ldb r0,[r18,-141]\n"
-"L318e98:\n"
-"bbit1.d.t r0,0x4,L318da8\n"
-"L318e9c:\n"
-"mov_s r0,6\n"
-"L318e9e:\n"
-"bl opencfw_em9305_wsf_event_allocate\n"
-"L318ea2:\n"
-"mov_s r1,r0\n"
-"L318ea4:\n"
-"breq_s r0,0,L318ed4\n"
-"L318ea6:\n"
-"mov_s r2,0x2801\n"
-"L318eac:\n"
-"mov_s r0,0x805c70\n"
-"L318eb2:\n"
-"sth_s r2,[r1,0x2]\n"
-"L318eb4:\n"
-"ld r0,[r0,0]\n"
-"L318eb6:\n"
-"stb_s r15,[r1,0x5]\n"
-"L318eb8:\n"
-"stb r17,[r1,4]\n"
-"L318ebc:\n"
-"rsub r0,r0,r19\n"
-"L318ec0:\n"
-"div r0,r0,912\n"
-"L318ec4:\n"
-"extb_s r2,r0\n"
-"L318ec6:\n"
-"ldb r0,[0x805b18]\n"
-"L318ece:\n"
-"bl.d opencfw_em9305_wsf_task_message_send\n"
-"L318ed2:\n"
-"sth_s r2,[r1,0]\n"
-"L318ed4:\n"
-"stb 0,[r18,5]\n"
-"L318ed8:\n"
-"leave_s [r13-r19,blink,pcl]\n"
-".size opencfw_em9305_child_318d80,.-opencfw_em9305_child_318d80\n"
-);
+#include <stdint.h>
+
+/* Native 0x318d80..0x318eda: path-loss / power-control monitor for the
+ * connection record. Runs only when monitoring is enabled for the link
+ * (bit 1 of +548) and globally (bit 7 of 0x805a85); otherwise the zone
+ * byte +770 is cleared. Pending averages (+780 samples summing to +784)
+ * are flushed into the sample filter (325284 on +788). After at least
+ * four samples (+793) the filtered RSSI (3252a0) is checked against the
+ * window +778..+779 (state +776, hits +777); the power step proposed by
+ * 31b32c for the current PHY entry (+557 + PHY index, adjusted for coded
+ * S2) is limited to the entry's maximum (+561), and a non-zero step is
+ * reported to the LL task (message 0x2801 with handle, step and PHY)
+ * unless a procedure (state 0x1c at +635 or bit 4 of +647) is running.
+ * The sample count is then reset. */
+extern void opencfw_em9305_child_325284(uintptr_t filter,uint32_t value);
+extern int32_t opencfw_em9305_child_3252a0(uintptr_t samples);
+extern int32_t opencfw_em9305_child_31b32c(uintptr_t range,int32_t target,
+                                           uint32_t allow_up,uint32_t force);
+extern uintptr_t opencfw_em9305_wsf_event_allocate(uint32_t length);
+extern uint32_t opencfw_em9305_wsf_task_message_send(uint32_t task,
+                                                     uintptr_t message);
+
+static inline uint32_t r8(uintptr_t a){return *(volatile uint8_t *)a;}
+static inline int32_t s8(uintptr_t a){return *(volatile int8_t *)a;}
+static inline void w8(uintptr_t a,uint32_t v){*(volatile uint8_t *)a=(uint8_t)v;}
+
+void opencfw_em9305_child_318d80(uintptr_t record)
+{
+    uintptr_t filter=record+788u;
+    if((r8(record+548u)&2u)==0u||(r8(0x805a85u)&0x80u)==0u){
+        w8(record+770u,0u);
+        return;
+    }
+    uint32_t phy=r8(record+77u);
+    uint32_t coded=0u;
+    if(phy==3u)coded=r8(record+78u)==1u;
+    uint32_t samples=*(volatile uint16_t *)(record+780u);
+    if(samples!=0u){
+        int32_t average=*(volatile int32_t *)(record+784u)/(int32_t)samples;
+        opencfw_em9305_child_325284(filter,(uint32_t)(int32_t)(int8_t)average);
+        *(volatile uint16_t *)(record+780u)=0u;
+        *(volatile uint32_t *)(record+784u)=0u;
+    }
+    if(r8(record+793u)<4u)return;
+    int32_t rssi=opencfw_em9305_child_3252a0(record+788u);
+    if(r8(record+776u)==0u){
+        if(!(s8(record+778u)<rssi)&&rssi>=s8(record+779u))return;
+        w8(record+776u,1u);
+    }
+    uint32_t entry_index=coded+phy;
+    uintptr_t entry=record+(uint8_t)entry_index+557u;
+    uint32_t caps=r8(entry);
+    int32_t step=opencfw_em9305_child_31b32c(record+776u,rssi,(caps&2u)==0u,
+                                             (caps&1u)==0u);
+    uint32_t limit=r8(entry+4u);
+    if(limit!=255u&&-step>(int32_t)limit)step=-(int32_t)limit;
+    int32_t low=s8(record+778u);
+    if(low<rssi||rssi<s8(record+779u)){
+        uint32_t hits=r8(record+777u);
+        w8(record+777u,hits+1u);
+    }
+    uint32_t clear=1u;
+    if((caps&3u)==3u||(uint8_t)step!=0u){
+        int32_t span=(low-s8(record+779u))/4;
+        if(r8(record+777u)<(uint8_t)span)clear=0u;
+    }
+    if(clear)*(volatile uint16_t *)(record+776u)=0u;
+    if((uint8_t)step==0u)return;
+    if(r8(record+635u)==0x1cu)return;
+    if((r8(record+647u)&0x10u)!=0u)return;
+    uintptr_t message=opencfw_em9305_wsf_event_allocate(6u);
+    if(message!=0u){
+        *(volatile uint16_t *)(message+2u)=0x2801u;
+        uintptr_t base=*(volatile uint32_t *)0x805c70u;
+        w8(message+5u,entry_index);
+        w8(message+4u,(uint32_t)step);
+        int32_t handle=(int32_t)(record-base)/912;
+        uint32_t task=r8(0x805b18u);
+        *(volatile uint16_t *)message=(uint8_t)handle;
+        (void)opencfw_em9305_wsf_task_message_send(task,message);
+    }
+    w8(record+793u,0u);
+}

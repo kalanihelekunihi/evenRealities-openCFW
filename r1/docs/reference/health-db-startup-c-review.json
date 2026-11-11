@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "stock_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "entries": {
+    "0x70030": "r1_native_health_database_initialize",
+    "0x75ccc": "r1_health_database_lock",
+    "0x93ee4": "r1_health_database_unlock",
+    "0x6a230": "r1_health_database_get_time"
+  },
+  "source": "r1/src/application/runtime/native_health_database_initialize.c",
+  "source_sha256": "c6f360ae6dc4d52d95aa0a9427200206c164877bb233a9ac68a3dc107d577d70",
+  "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-health-db-startup-c/r1/r1-application/r1__src__application__runtime__native_health_database_initialize.c.o",
+  "object_sha256": "352bb499cc4cc48026fb9bbf74e7a0d62f8ce259442ab4f5f8c7ce318ff90cb3",
+  "report": "build/sources-goal-r1-health-db-startup-c/report.json",
+  "report_sha256": "ede1bcafa292f00261519bc7da88bb0f35b01d6094284234b6c0b17e74ad7ad5",
+  "behavior": {
+    "pairs": 465,
+    "digest": "ea91225d3ab7fabf45a3c2a3c206f025ffc0b2b2ee0cd42a90b66500c90b03af",
+    "limits": [
+      "All external startup/time/calendar/RTOS/FlashDB/log/memory/query/snapshot calls modeled explicitly",
+      "Crash marker/accessor/clear and CRC execute actual C; stock route executes locked bytes",
+      "Event context thread address is a linker binding; metadata uses actual C owner",
+      "Valid mapped storage; no physical flash, scheduler, concurrent IRQ or whole-firmware proof"
+    ]
+  },
+  "negative_controls": {
+    "wrong-size-boundary": {
+      "rejected": true,
+      "diagnostic": "c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5cde565c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c', '000000000000012000000120000000000000000000000000', '000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000', 0, '6969696969696969696969696969696969696969696969696969696969696969696969696969696969696969696969696969696969696969696969696969696969696969696969696969696969696969696969696969696969696969696969696969696969696969696969696969696969696969696969696969696969696969', None))\n"
+    },
+    "signed-restored-offset": {
+      "rejected": true,
+      "diagnostic": "c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c18185c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c', '000000000000012000000120000000000000012000000000', '00000000000000000000000000000000000000000000000000000000cd5c0700e53e0900000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000', 536956928, '6969696969696969696969696969696969696969696969696969696969696969696969696969696969696969696969696969696969696969696969696969696969696969696969696969696969696969696969696969696969696969696969696969696969696969696969696969696969696969696969696969696969696969', None))\n"
+    },
+    "lost-midnight-hour-clear": {
+      "rejected": true,
+      "diagnostic": "P,count=400000)\n                                                                                                                     ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 769, in emu_start\n    raise self._hook_exception\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 363, in wrapper\n    return func(uc, *args, **kwargs)\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 1063, in __hook_code_cb\n    callback(uc, address, size, user_data)\n    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-health-db-startup-c/verify.py\", line 62, in hook\n    elif n=='midnight':assert bytes(v.mem_read(r0,8))==struct.pack('<H6B',2026,10,27,0,0,0,2) and r1==state['offset'];result=state['midnight']\n                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    "wrong-replay-buffer-size": {
+      "rejected": true,
+      "diagnostic": "85, in run\n    a=syms[entry] if candidate else (0x70030 if entry=='r1_native_health_database_initialize' else callbacks[entry]);v.emu_start(a|1,STOP,count=400000)\n                                                                                                                     ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 769, in emu_start\n    raise self._hook_exception\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 363, in wrapper\n    return func(uc, *args, **kwargs)\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 1063, in __hook_code_cb\n    callback(uc, address, size, user_data)\n    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-health-db-startup-c/verify.py\", line 63, in hook\n    elif n=='malloc':assert r0==128;result=BUFFER if state['allocate'] else 0\n                            ^^^^^^^\nAssertionError\n"
+    }
+  },
+  "audit": {
+    "unchanged_prior_objects": 732,
+    "new_units": 1,
+    "iterator_signature_only": true,
+    "added_application_imports": [
+      "r1_health_crash_snapshot_restore",
+      "r1_health_daily_record_replay",
+      "r1_health_hour_boundary_storage_orchestrator",
+      "r1_health_time_transition_storage_orchestrator"
+    ],
+    "removed_application_imports": [
+      "r1_native_health_database_initialize"
+    ],
+    "bootloader_imports_unchanged": true
+  },
+  "source_check": "python3 tools/build/sources.py check\ng2: 5029 units, 4726 source files, 0 not built\nr1: 733 units, 537 source files, 0 not built",
+  "rea": "health-db-startup-c-rea.json",
+  "instruction_identity_proven": false,
+  "image_integration_proven": false
+}

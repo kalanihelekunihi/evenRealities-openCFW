@@ -1,0 +1,51 @@
+{
+  "schema": 1,
+  "target": "locked G2 2.2.6.10 GX8002 KWS NPU transpose command source",
+  "stock": {
+    "firmware": "g2/blobs/official/g2-2.2.6.10/firmware_codec.bin",
+    "command_file_window": ["0x18d90", "0x1b15c"],
+    "command_bytes": 9164,
+    "command_sha256": "c38ed6d22c7c0b6178288678364acd10bd5730aa382c1e19a32f6cf2bd1430b9",
+    "command_count": 212
+  },
+  "semantic_basis": {
+    "archive": "third-party/upstream/nationalchip-gxdnn/grus/lib/libcmodel.a",
+    "dispatch": "cmd_process.o maps opcode 0x43 to parse_transpose_cmd",
+    "parser": "cmd_parse.o:parse_transpose_cmd reads source and destination addresses, mode, four dimension bytes and two 16-bit pitch fields",
+    "axis_convention": "not independently established; descriptor order follows parser field offsets"
+  },
+  "source": {
+    "c_file": "g2/src/codec/npu/kws_transpose_commands.c",
+    "c_sha256": "99d2960fd5923b2709469f89ce18b8d780106076bae1ec9ff8c55293e10e2e9e",
+    "c_object_sha256": "e73336ef85fd42095d841a23567694ef0eb2a327a9a64c966f991f297e0bc00f",
+    "manifest_link": false,
+    "commands_matched": 14,
+    "command_bytes_matched": 336,
+    "concatenated_sha256": "8dc3bc4262b770b8a9919bef98d2776fab7dc5b3cc25d5c3ea5f423e7fe83c46"
+  },
+  "combined_kws_progress": {
+    "activation_commands": 12,
+    "copy_tensor_commands": 152,
+    "batch_norm_commands": 18,
+    "transpose_commands": 14,
+    "sourced_commands": 196,
+    "sourced_command_bytes": 8348,
+    "total_commands": 212,
+    "total_command_bytes": 9164,
+    "remaining_opaque_commands": 16,
+    "remaining_opaque_bytes": 816,
+    "weights_source_available": false
+  },
+  "verification": {
+    "c_oracle_test": "g2/tests/test_gxdnn_c_source.py: all 196 records and 8348 bytes compared directly with authenticated stock bytes",
+    "emitter_tests": "g2/tests/test_gxdnn_command_emitter.py: 22 passed; combined focused suite: 23 passed",
+    "sources_check": "make -C g2 sources-check: 4886 units, 4547 source files, 1 not built",
+    "full_source_report": "build/g2-all-c-npu-transpose-20261110/report.json",
+    "full_source_report_sha256": "39b6c167cbb4da59f0313ddea55b490e12a24069523fecfcedbd43648bdc94aa",
+    "strict_link_report": "build/g2-all-c-npu-transpose-link-20261110/link-report.json",
+    "strict_link_report_sha256": "06970619355b6a794d989064cb75f804a00dff94b4e36c6968ef8f1626913605",
+    "payloads_compiled_and_linked": 7,
+    "payload_binaries_unchanged_from_prior_link": true
+  },
+  "qualification": "The C unit encodes decoded transpose descriptors and compiles with the pinned C-SKY compiler. It remains compile-only pending the complete NPU graph. Sixteen command records, proprietary weights, exact transpose axis convention, complete header-flag semantics, bundle byte identity and hardware behavior remain unresolved."
+}

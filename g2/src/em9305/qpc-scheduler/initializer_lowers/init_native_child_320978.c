@@ -1,268 +1,115 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_320978\n"
-".type opencfw_em9305_child_320978,@function\n"
-"opencfw_em9305_child_320978:\n"
-"L320978:\n"
-"enter_s [r13-r25,fp,blink]\n"
-"L32097a:\n"
-"sub_s sp,sp,0x8\n"
-"L32097c:\n"
-"ld_s r15,[r0,0x2c]\n"
-"L32097e:\n"
-"ld_s r14,[r0,0x24]\n"
-"L320980:\n"
-"mov_s r19,r1\n"
-"L320982:\n"
-"mov_s r17,0x805c70\n"
-"L320988:\n"
-"ldb r2,[r15,185]\n"
-"L32098c:\n"
-"add2 r13,r15,0x28\n"
-"L320990:\n"
-"ldb r1,[r15,153]\n"
-"L320994:\n"
-"ldb_s r0,[r15,0xd]\n"
-"L320996:\n"
-"ld r24,[r17]\n"
-"L32099a:\n"
-"ld r23,[r13]\n"
-"L32099e:\n"
-"ldh r18,[r14,88]\n"
-"L3209a2:\n"
-"bl.d opencfw_em9305_radio_duration_piece_312b88\n"
-"L3209a6:\n"
-"add_s r2,r2,2\n"
-"L3209a8:\n"
-"ldb_s r1,[r13,0x1c]\n"
-"L3209aa:\n"
-"mov_s r22,r0\n"
-"L3209ac:\n"
-"mov_s r16,0\n"
-"L3209ae:\n"
-"cmp_s r1,0\n"
-"L3209b0:\n"
-"beq_s L320b04\n"
-"L3209b2:\n"
-"ld_s r3,[r15,0x68]\n"
-"L3209b4:\n"
-"cmp_s r3,0\n"
-"L3209b6:\n"
-"beq_s L320b04\n"
-"L3209b8:\n"
-"mov_s r0,r18\n"
-"L3209ba:\n"
-"mpyuw r0,r0,912\n"
-"L3209be:\n"
-"ld r2,[r13,0xc]\n"
-"L3209c0:\n"
-"ld r1,[r13,0x8]\n"
-"L3209c2:\n"
-"add r21,r24,r0\n"
-"L3209c6:\n"
-"bl.d opencfw_em9305_radio_address_write_3045e8\n"
-"L3209ca:\n"
-"add_s r0,r3,0x8\n"
-"L3209cc:\n"
-"ldb r0,[r14,99]\n"
-"L3209d0:\n"
-"ldb r1,[r15,186]\n"
-"L3209d4:\n"
-"add2 r25,r14,0x30\n"
-"L3209d8:\n"
-"bbit1.d.nt r0,0x1,L3209ea\n"
-"L3209dc:\n"
-"stb r1,[r14,195]\n"
-"L3209e0:\n"
-"st r16,[r14,84]\n"
-"L3209e4:\n"
-"st r16,[r14,80]\n"
-"L3209e8:\n"
-"b_s L320a6e\n"
-"L3209ea:\n"
-"ldb_s r0,[r13,0x18]\n"
-"L3209ec:\n"
-"brne.d.nt r0,0x1,L320a26\n"
-"L3209f0:\n"
-"add r0,r19,0x8\n"
-"L3209f4:\n"
-"bl.d opencfw_em9305_controller_pack_address\n"
-"L3209f8:\n"
-"ldb r20,[r19]\n"
-"L3209fc:\n"
-"st_s r0,[r14,0x50]\n"
-"L3209fe:\n"
-"st_s r0,[sp,0]\n"
-"L320a00:\n"
-"and r0,r1,0xc000\n"
-"L320a08:\n"
-"bxor.f 0,r0,0xe\n"
-"L320a0c:\n"
-"lsr r20,r20,0x7\n"
-"L320a10:\n"
-"st_s r1,[r14,0x54]\n"
-"L320a12:\n"
-"st_s r1,[sp,0x4]\n"
-"L320a14:\n"
-"bne_s L320a5e\n"
-"L320a16:\n"
-"ld r2,[r13,0x14]\n"
-"L320a18:\n"
-"ld r1,[r13,0x10]\n"
-"L320a1a:\n"
-"ldb r0,[r15,187]\n"
-"L320a1e:\n"
-"bl.d opencfw_em9305_radio_peer_set_303cc0\n"
-"L320a22:\n"
-"add_s r3,sp,0\n"
-"L320a24:\n"
-"b_s L320a5e\n"
-"L320a26:\n"
-"ld_s r3,[r15,0x54]\n"
-"L320a28:\n"
-"ld_s r12,[r15,0x58]\n"
-"L320a2a:\n"
-"ld r2,[r13,0x14]\n"
-"L320a2c:\n"
-"ld r1,[r13,0x10]\n"
-"L320a2e:\n"
-"ldb r0,[r15,187]\n"
-"L320a32:\n"
-"ld r20,[r15,80]\n"
-"L320a36:\n"
-"st_s r3,[sp,0]\n"
-"L320a38:\n"
-"add_s r3,sp,0\n"
-"L320a3a:\n"
-"bl.d opencfw_em9305_radio_peer_pair_303a40\n"
-"L320a3e:\n"
-"st_s r12,[sp,0x4]\n"
-"L320a40:\n"
-"breq_s r0,0,L320a4e\n"
-"L320a42:\n"
-"ld r1,[sp,0x4]\n"
-"L320a44:\n"
-"ld r0,[sp,0]\n"
-"L320a46:\n"
-"mov_s r20,1\n"
-"L320a48:\n"
-"st_s r1,[r14,0x54]\n"
-"L320a4a:\n"
-"st_s r0,[r14,0x50]\n"
-"L320a4c:\n"
-"b_s L320a5e\n"
-"L320a4e:\n"
-"lsr r0,r20\n"
-"L320a52:\n"
-"and r20,r0,0x1\n"
-"L320a56:\n"
-"st r16,[r14,84]\n"
-"L320a5a:\n"
-"st r16,[r14,80]\n"
-"L320a5e:\n"
-"ld_s r0,[r15,0x68]\n"
-"L320a60:\n"
-"ld r2,[sp,0x4]\n"
-"L320a62:\n"
-"ld r1,[sp,0]\n"
-"L320a64:\n"
-"bl.d opencfw_em9305_radio_address_write_3045e8\n"
-"L320a68:\n"
-"add_s r0,r0,2\n"
-"L320a6a:\n"
-"stb r20,[r14,194]\n"
-"L320a6e:\n"
-"ld r1,[0x805a94]\n"
-"L320a76:\n"
-"ld_s r0,[r15,0x68]\n"
-"L320a78:\n"
-"xbfu r1,r1,0xe\n"
-"L320a7c:\n"
-"stb r1,[r14,193]\n"
-"L320a80:\n"
-"bl.d opencfw_em9305_radio_encode_3239d4\n"
-"L320a84:\n"
-"mov_s r1,r25\n"
-"L320a86:\n"
-"ld_s r1,[r17,0]\n"
-"L320a88:\n"
-"ldh r0,[r14,90]\n"
-"L320a8c:\n"
-"add r13,r23,r22\n"
-"L320a90:\n"
-"sub r3,r21,r1\n"
-"L320a94:\n"
-"div r3,r3,912\n"
-"L320a98:\n"
-"mpyuw r0,r0,1250\n"
-"L320a9c:\n"
-"mov_s r2,r13\n"
-"L320a9e:\n"
-"add r2,r2,1752\n"
-"L320aa2:\n"
-"mov_s r4,0\n"
-"L320aa4:\n"
-"extb_s r1,r3\n"
-"L320aa6:\n"
-"bl.d opencfw_em9305_radio_schedule_313424\n"
-"L320aaa:\n"
-"mov_s r3,0\n"
-"L320aac:\n"
-"mpydu r4,r0,0x1a36e3\n"
-"L320ab4:\n"
-"ld_s r1,[r15,0x68]\n"
-"L320ab6:\n"
-"add_s r2,r0,r13\n"
-"L320ab8:\n"
-"asl r3,r5\n"
-"L320abc:\n"
-"lsr r0,r4,0x1f\n"
-"L320ac0:\n"
-"or_s r3,r3,r0\n"
-"L320ac2:\n"
-"stb_s r3,[r1,0x16]\n"
-"L320ac4:\n"
-"lsr r0,r5,0x7\n"
-"L320ac8:\n"
-"ld_s r1,[r15,0x68]\n"
-"L320aca:\n"
-"mpyuw r18,r18,912\n"
-"L320ace:\n"
-"add r2,r2,1752\n"
-"L320ad2:\n"
-"stb_s r0,[r1,0x17]\n"
-"L320ad4:\n"
-"ldb r0,[r14,193]\n"
-"L320ad8:\n"
-"add r1,r24,r18\n"
-"L320adc:\n"
-"sth r3,[r14,76]\n"
-"L320ae0:\n"
-"brne.d.nt r0,0x1,L320aee\n"
-"L320ae4:\n"
-"st_s r2,[r1,0x18]\n"
-"L320ae6:\n"
-"ldb r0,[r19]\n"
-"L320aea:\n"
-"bbit1.nt r0,0x5,L320af4\n"
-"L320aee:\n"
-"stb r16,[r14,97]\n"
-"L320af2:\n"
-"b_s L320af8\n"
-"L320af4:\n"
-"stb 1,[r14,97]\n"
-"L320af8:\n"
-"ldb_s r0,[r15,0xc]\n"
-"L320afa:\n"
-"mov_s r16,1\n"
-"L320afc:\n"
-"stb 1,[r14,96]\n"
-"L320b00:\n"
-"stb r0,[r14,100]\n"
-"L320b04:\n"
-"mov_s r0,r16\n"
-"L320b06:\n"
-"leave_s [r13-r25,fp,blink,pcl]\n"
-".size opencfw_em9305_child_320978,.-opencfw_em9305_child_320978\n"
-);
+#include <stdint.h>
+
+/* Native 0x320978..0x320b08: complete a connection request sent by the
+ * initiator (object +44) for the link (object +36). Requires an address
+ * type (+188) and a request PDU buffer (+104). The peer address goes into
+ * the PDU, the own address type into the link (+195); with address
+ * resolution on the link (bit 1 of +99) the peer's resolvable address is
+ * taken from the received PDU (registering a resolvable private address
+ * through 303cc0) or resolved from the peer pair (303a40), and written to
+ * the PDU with its type (+194); otherwise the resolved pair (+80/+84) is
+ * cleared. The PDU is encoded with the channel-selection bit (bit 14 of
+ * 0x805a94, +193), the first anchor is scheduled from the transmit window
+ * (+90 * 1250 us after the request end) and stored in the PDU (window
+ * offset bytes 22/23), the link (+76) and the connection (+24); the CSA
+ * flag (+97), started flag (+96) and PHY (+100) are set. Returns 1 when
+ * the connection was set up. */
+extern uint32_t opencfw_em9305_radio_duration_piece_312b88(uint32_t phy,
+    uint32_t coded,uint32_t length);
+extern uintptr_t opencfw_em9305_radio_address_write_3045e8(uintptr_t output,
+    uint32_t low,uint32_t high);
+extern uint64_t opencfw_em9305_controller_pack_address(uintptr_t address);
+extern uint32_t opencfw_em9305_radio_peer_set_303cc0(uint32_t kind,uint32_t low,
+    uint32_t high,uintptr_t source);
+extern uint32_t opencfw_em9305_radio_peer_pair_303a40(uint32_t kind,uint32_t low,
+    uint32_t high,uintptr_t output);
+extern uint32_t opencfw_em9305_radio_encode_3239d4(uintptr_t output,
+                                                   uintptr_t input);
+extern uint32_t opencfw_em9305_radio_schedule_313424(uint32_t incoming,
+    uint32_t index,uint32_t timestamp,uint32_t existing,uint32_t action);
+
+static inline uint32_t r8(uintptr_t a){return *(volatile uint8_t *)a;}
+static inline uint32_t r16(uintptr_t a){return *(volatile uint16_t *)a;}
+static inline uint32_t r32(uintptr_t a){return *(volatile uint32_t *)a;}
+static inline void w8(uintptr_t a,uint32_t v){*(volatile uint8_t *)a=(uint8_t)v;}
+static inline void w32(uintptr_t a,uint32_t v){*(volatile uint32_t *)a=v;}
+
+uint32_t opencfw_em9305_child_320978(uintptr_t object,uintptr_t pdu)
+{
+    uintptr_t initiator=r32(object+44u);
+    uintptr_t link=r32(object+36u);
+    uint32_t length=r8(initiator+185u);
+    uint32_t coded=r8(initiator+153u);
+    uint32_t phy=r8(initiator+13u);
+    uintptr_t base=r32(0x805c70u);
+    uint32_t end=r32(initiator+160u);
+    uint32_t handle=r16(link+88u);
+    uint32_t duration=opencfw_em9305_radio_duration_piece_312b88(phy,coded,length+2u);
+    if(r8(initiator+188u)==0u)return 0u;
+    uintptr_t request=r32(initiator+104u);
+    if(request==0u)return 0u;
+    uintptr_t connection=base+handle*912u;
+    (void)opencfw_em9305_radio_address_write_3045e8(request+8u,r32(initiator+168u),
+                                                   r32(initiator+172u));
+    uint32_t options=r8(link+99u);
+    w8(link+195u,r8(initiator+186u));
+    if((options&2u)==0u){
+        w32(link+84u,0u);
+        w32(link+80u,0u);
+    }else{
+        uint32_t pair[2];
+        uint32_t type;
+        if(r8(initiator+184u)==1u){
+            type=r8(pdu);
+            uint64_t address=opencfw_em9305_controller_pack_address(pdu+8u);
+            uint32_t low=(uint32_t)address,high=(uint32_t)(address>>32);
+            w32(link+80u,low);
+            pair[0]=low;
+            type>>=7;
+            w32(link+84u,high);
+            pair[1]=high;
+            if((high&0xc000u)==0x4000u)
+                (void)opencfw_em9305_radio_peer_set_303cc0(r8(initiator+187u),
+                    r32(initiator+176u),r32(initiator+180u),(uintptr_t)pair);
+        }else{
+            uint32_t own=r32(initiator+80u);
+            pair[0]=r32(initiator+84u);
+            pair[1]=r32(initiator+88u);
+            if(opencfw_em9305_radio_peer_pair_303a40(r8(initiator+187u),
+                   r32(initiator+176u),r32(initiator+180u),(uintptr_t)pair)!=0u){
+                type=1u;
+                w32(link+84u,pair[1]);
+                w32(link+80u,pair[0]);
+            }else{
+                type=(own>>1)&1u;
+                w32(link+84u,0u);
+                w32(link+80u,0u);
+            }
+        }
+        (void)opencfw_em9305_radio_address_write_3045e8(r32(initiator+104u)+2u,
+                                                       pair[0],pair[1]);
+        w8(link+194u,type);
+    }
+    uint32_t csa=(r32(0x805a94u)>>14)&1u;
+    w8(link+193u,csa);
+    (void)opencfw_em9305_radio_encode_3239d4(r32(initiator+104u),link+192u);
+    uintptr_t current=r32(0x805c70u);
+    uint32_t window=r16(link+90u);
+    uint32_t start=end+duration;
+    int32_t index=(int32_t)(connection-current)/912;
+    uint32_t offset=opencfw_em9305_radio_schedule_313424(window*1250u,(uint8_t)index,
+                                                         start+1752u,0u,0u);
+    uint64_t scaled=(uint64_t)offset*0x1a36e3u;
+    uint32_t units=(uint32_t)(scaled>>31);
+    w8(r32(initiator+104u)+22u,units);
+    w8(r32(initiator+104u)+23u,(uint32_t)(scaled>>32)>>7);
+    uint32_t enabled=r8(link+193u);
+    *(volatile uint16_t *)(link+76u)=(uint16_t)units;
+    w32(base+handle*912u+24u,offset+start+1752u);
+    if(enabled==1u&&(r8(pdu)&0x20u)!=0u)w8(link+97u,1u);
+    else w8(link+97u,0u);
+    uint32_t mode=r8(initiator+12u);
+    w8(link+96u,1u);
+    w8(link+100u,mode);
+    return 1u;
+}

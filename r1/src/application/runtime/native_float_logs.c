@@ -14,17 +14,16 @@ __attribute__((section(".r1.math.float_log_tables"),used)) const uint32_t r1_flo
 typedef union {uint32_t bits;float value;} word_float;
 static float fbits(uint32_t bits) {word_float x={.bits=bits};return x.value;}
 static uint32_t bits(float value) {word_float x={.value=value};return x.bits;}
-#define BINARY(name,instruction) static float name(float a,float b) {float r;__asm__ volatile(instruction " %0,%1,%2":"=t"(r):"t"(a),"t"(b));return r;}
-BINARY(add,"vadd.f32")
-BINARY(sub,"vsub.f32")
-BINARY(mul,"vmul.f32")
-BINARY(divide,"vdiv.f32")
+static float add(float a,float b) { return a+b; }
+static float sub(float a,float b) { return a-b; }
+static float mul(float a,float b) { return a*b; }
+static float divide(float a,float b) { return a/b; }
 static float madd(float accumulator,float a,float b)
-{__asm__ volatile("vmla.f32 %0,%1,%2":"+t"(accumulator):"t"(a),"t"(b));return accumulator;}
+{ return accumulator+a*b; }
 static float from_signed(uint32_t value)
-{float r;__asm__ volatile("vcvt.f32.s32 %0,%1":"=t"(r):"t"(fbits(value)));return r;}
+{return (float)(int32_t)value;}
 static uint32_t compare_zero(float value)
-{uint32_t status;__asm__ volatile("vcmpe.f32 %1,#0.0\n\tvmrs %0,fpscr":"=r"(status):"t"(value):"cc");return status;}
+{volatile int same=(value==0.0f);(void)same;return __builtin_arm_get_fpscr();}
 static float kernel(float value,uint32_t base10)
 {
     uint32_t input=bits(value);int32_t correction=0;
@@ -34,7 +33,7 @@ static float kernel(float value,uint32_t base10)
         if (!(compare_zero(value)&0x20000000u)) {r1_native_errno_set(1);return r1_math_invalid32();}
         if (compare_zero(value)&0x40000000u) {
             r1_native_errno_set(2);float result=r1_math_divzero32();
-            __asm__ volatile("vneg.f32 %0,%0":"+t"(result));return result;
+            return -result;
         }
         value=mul(value,fbits(0x4b000000u));input=bits(value);correction=-23;
     }

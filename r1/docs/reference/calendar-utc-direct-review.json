@@ -1,0 +1,314 @@
+{
+  "schema": 1,
+  "scope": "UTC calendar adapter bridge and C helper replaced by one direct C function",
+  "native_entry": "0x8af40",
+  "native_code_bytes": 74,
+  "padding_bytes": 2,
+  "normal_build": {
+    "report": "build/sources-goal-r1-calendar-utc-direct/report.json",
+    "units": 575,
+    "unit": {
+      "source": "r1/src/application/board/native_calendar_utc.c",
+      "payload": "r1-application",
+      "role": "candidate",
+      "toolchain": "clang",
+      "link": true,
+      "expect": "compile",
+      "returncode": 0,
+      "argv": [
+        "/usr/bin/clang",
+        "--target=arm-none-eabi",
+        "-mcpu=cortex-m4",
+        "-mthumb",
+        "-mfpu=fpv4-sp-d16",
+        "-mfloat-abi=hard",
+        "-std=c11",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-fno-strict-aliasing",
+        "-fshort-enums",
+        "-Os",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-fno-delete-null-pointer-checks",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/r1/src/vendor",
+        "-MD",
+        "-MF",
+        "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-calendar-utc-direct/r1/r1-application/r1__src__application__board__native_calendar_utc.c.d",
+        "-c",
+        "/Users/kalani/Repo/evenRealities-openCFW/r1/src/application/board/native_calendar_utc.c",
+        "-o",
+        "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-calendar-utc-direct/r1/r1-application/r1__src__application__board__native_calendar_utc.c.o"
+      ],
+      "source_sha256": "1f65478314f4801344e237e4997001cd947f6410e7d8041da3efb3f2bf73666e",
+      "object_sha256": "e0f2f5ffb23a8bb59c67c3def094e3589f936c5a84af8c74d26f7bfcee635b4d",
+      "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-calendar-utc-direct/r1/r1-application/r1__src__application__board__native_calendar_utc.c.o",
+      "strong": [
+        "time_calendar_utc_to_calendar"
+      ],
+      "weak": [],
+      "undefined": [
+        "time_calendar_unix_to_broken_down"
+      ]
+    }
+  },
+  "audit": {
+    "other_objects_unchanged": 574,
+    "normal_units_before": 576,
+    "normal_units_after": 575,
+    "retired_unit": "r1/src/application/runtime/native_calendar_frames.c",
+    "retired_bridge_bytes": 14,
+    "retired_helper": "r1_time_utc_to_calendar_body",
+    "new_C_adapter_bytes": 78,
+    "inline_assembly_in_adapter": false,
+    "manifest_changes": "remove retired bridge and update two duplicate-owner notes",
+    "application_imports": 164,
+    "bootloader_imports": 34,
+    "import_sets_unchanged": true
+  },
+  "validation": {
+    "clang": {
+      "paired_cases": 4950,
+      "executions": 9900,
+      "modeled_converter": true,
+      "scratch_bytes": 40,
+      "provider_depth": 48,
+      "epoch_offset": 36,
+      "checks": [
+        "converter epoch/frame pointers and native 48-byte stack depth",
+        "active R4 output pointer and R5-R11 preserved",
+        "ordered adapter memory access widths and values including output/frame/returned-data aliases",
+        "wrapping epoch+offset*60, null output, null/alternate converter returns",
+        "final memory, status, saved registers, SP and interrupt masks"
+      ],
+      "limitations": [
+        "Converter modeled in this fixture",
+        "Private save words, caller-clobbered registers/flags, arbitrary faults and exceptions excluded",
+        "Null-output C path can return without building native private frame",
+        "No exact qualification or physical RTC proof"
+      ]
+    },
+    "gcc9_adapter": {
+      "paired_cases": 4950,
+      "executions": 9900,
+      "modeled_converter": true,
+      "scratch_bytes": 40,
+      "provider_depth": 48,
+      "epoch_offset": 36,
+      "checks": [
+        "converter epoch/frame pointers and native 48-byte stack depth",
+        "active R4 output pointer and R5-R11 preserved",
+        "ordered adapter memory access widths and values including output/frame/returned-data aliases",
+        "wrapping epoch+offset*60, null output, null/alternate converter returns",
+        "final memory, status, saved registers, SP and interrupt masks"
+      ],
+      "limitations": [
+        "Converter modeled in this fixture",
+        "Private save words, caller-clobbered registers/flags, arbitrary faults and exceptions excluded",
+        "Null-output C path can return without building native private frame",
+        "No exact qualification or physical RTC proof"
+      ]
+    },
+    "clang_actual_forward": {
+      "paired_cases": 770,
+      "executions": 1540,
+      "actual_forward_converter": true,
+      "checks": [
+        "actual stock/C forward converter with native adapter provider depth and pointers",
+        "outer adapter memory access order and widths",
+        "wrapping timezone arithmetic, packed fields and output/frame aliases",
+        "status, final memory, saved registers, SP and masks"
+      ],
+      "limitations": [
+        "Internal converter accesses normalized by final converter result; outer adapter accesses compared directly",
+        "Private save aliases, caller-clobbered registers/flags, faults, concurrency and physical RTC excluded"
+      ]
+    },
+    "gcc9_adapter_actual_forward": {
+      "paired_cases": 770,
+      "executions": 1540,
+      "actual_forward_converter": true,
+      "checks": [
+        "actual stock/C forward converter with native adapter provider depth and pointers",
+        "outer adapter memory access order and widths",
+        "wrapping timezone arithmetic, packed fields and output/frame aliases",
+        "status, final memory, saved registers, SP and masks"
+      ],
+      "limitations": [
+        "Internal converter accesses normalized by final converter result; outer adapter accesses compared directly",
+        "Private save aliases, caller-clobbered registers/flags, faults, concurrency and physical RTC excluded"
+      ]
+    }
+  },
+  "negative_controls": [
+    {
+      "mutation": "wrong-offset-scale",
+      "rejected": true
+    },
+    {
+      "mutation": "wrong-year-offset",
+      "rejected": true
+    },
+    {
+      "mutation": "wrong-epoch-address",
+      "rejected": true
+    },
+    {
+      "mutation": "retired bridge plus C helper provider depth",
+      "rejected": true
+    }
+  ],
+  "oracle_correction": {
+    "detail": "Unicorn raw write-hook operands include discarded high bits; trace values normalized to access width, with addresses, widths, order and final memory still compared.",
+    "example": "native STRH operand 67435 and GCC operand 1899 both store 1899 through a two-byte access",
+    "raw_observation": "build/goal-r1-calendar-utc-direct/raw-store-hook-counterexample.json"
+  },
+  "frame": {
+    "native_provider_depth": 48,
+    "scratch_bytes": 40,
+    "epoch_offset": 36,
+    "Clang_local_bytes": 40,
+    "Clang_saved_bytes": 8,
+    "GCC9_local_bytes": 40,
+    "GCC9_saved_bytes": 8,
+    "active_R4_output_pointer_R5_R11_incoming": true,
+    "null_output_path_can_omit_private_frame": true
+  },
+  "REA": {
+    "evidence_id": "ev_063e8fa1bd32711c9cf746872dd6ed035bcc1f86bccd685f1765f41d05899d45",
+    "subject": {
+      "name": "stock.elf",
+      "digest": {
+        "sha256": "25b4a29af80ec8edab5bd861ba9b74a6e22eab29dc3d7a809a16869e8a140f04"
+      },
+      "local_path": "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-queue-reset-c/stock.elf",
+      "format": "elf",
+      "architecture": "arm"
+    },
+    "provider": {
+      "id": "ghidra",
+      "name": "Ghidra",
+      "version": "12.1.4"
+    },
+    "analysis_profile": {
+      "provider": {
+        "id": "ghidra",
+        "name": "Ghidra",
+        "version": "12.1.4"
+      },
+      "parameters": {
+        "target_kind": "executable",
+        "target_format": "elf",
+        "architecture": "arm",
+        "available_architectures": [
+          "arm"
+        ],
+        "import_mode": "ephemeral-source-immutable",
+        "annotation_policy": "atomic-function-entry-metadata-v1",
+        "load_image_observations": "source-mappings-entry-context-v2",
+        "function_body_evidence": "complete-inclusive-ranges-v1",
+        "function_references": "complete-body-and-entry-reference-manager-v2",
+        "call_relationship_coverage": "function-body-call-coverage-v5",
+        "function_dossier_coverage": "observed-facets-and-call-relationships-v1",
+        "string_inventory_evidence": "defined-data-coverage-v1",
+        "location_resolution": "explicit-address-exact-entry-symbol-first-v3",
+        "procedure_file_offset_resolution": "address-first-unique-target-source-mapping-v2",
+        "instruction_flow_evidence": "decoded-return-pcode-v1",
+        "instruction_references": "exact-address-incoming-v1",
+        "function_boundary_observations": "ghidra-function-boundary-limitations-v3",
+        "no_return_repair": "returning-imports-decoded-return-v2",
+        "process_launch": "inspected-jvm-launch-support-v1",
+        "jump_table_evidence": "typed-case-default-blocks-v1",
+        "decompiler_jump_loads": true,
+        "loader": "auto-from-header",
+        "language_id": "auto-from-header",
+        "compiler_spec_id": "auto-default",
+        "analyzer_preset": "ghidra-default"
+      },
+      "digest": "7e46711069eea041af1b9b99e34115c13332795e5cda76e584a722f529ec70de"
+    },
+    "predicate_type": "rea.analysis",
+    "operation": "read_bytes",
+    "parameters": {
+      "address": "0x8af40",
+      "length": 76
+    },
+    "raw_result": {
+      "address": "0x8af40",
+      "requested_bytes": 76,
+      "returned_bytes": 76,
+      "bytes_hex": "10b58ab014001ed0c1eb011100eb81000990694609a8cff731fc002811d0818a01f26c712180017c491ca170017be170017a2171017961710178a171007ee07101200ab010bd0020fbe70000",
+      "complete": true
+    },
+    "normalized_result": {
+      "address": "0x8af40",
+      "requested_bytes": 76,
+      "returned_bytes": 76,
+      "bytes_hex": "10b58ab014001ed0c1eb011100eb81000990694609a8cff731fc002811d0818a01f26c712180017c491ca170017be170017a2171017961710178a171007ee07101200ab010bd0020fbe70000",
+      "complete": true
+    },
+    "confidence": "observed",
+    "authority": "shipped-artifact",
+    "environment": null,
+    "limitations": [
+      "The session serves operations only after Ghidra reports default auto-analysis complete; incomplete analysis does not expose partial results.",
+      "The imported Program and temporary project are ephemeral and deleted on close. Annotation operations edit session database metadata; original executable bytes are never written.",
+      "Cancelling an active Ghidra request terminates its ephemeral database and discards session annotations. The selected target remains open; the next provider query imports the original artifact again.",
+      "Default-space addresses use lowercase 0x-prefixed hexadecimal; other address spaces use <percent-encoded-space>:0x<hex>.",
+      "Bytes reflect Ghidra's initialized memory, including loader fixups. Reads stop at an unmapped or uninitialized byte and report completeness explicitly.",
+      "macOS sessions require a matching executable Ghidra native decompiler; REA checks for it but does not build native components or change Gatekeeper quarantine state."
+    ],
+    "relationship_coverage": null,
+    "locations": [],
+    "evidence_links": []
+  },
+  "qualification": {
+    "generic": {
+      "report": "build/goal-r1-calendar-utc-direct/qualified-generic/qualification.json",
+      "compiled_units": 10,
+      "selected_regions": 0
+    },
+    "gcc": {
+      "report": "build/goal-r1-calendar-utc-direct/qualified-gcc/qualification.json",
+      "compiled_units": 8,
+      "selected_regions": 0
+    }
+  },
+  "canonical_hybrid": {
+    "report": "build/hybrid-goal-r1-calendar-utc-direct/build-report.json",
+    "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "source_completeness_proven": false,
+    "source_plan_unchanged": true,
+    "source_built_bytes_including_assembly_and_data": 4023,
+    "binary_fallback_bytes": 642137,
+    "resource_bytes": 248
+  },
+  "probe_hashes": {
+    "build/goal-r1-calendar-utc-direct/verify.py": "87b192457efcd574499487a768a187b8889f98efa3e7ed5322d21e229bdd4f4a",
+    "build/goal-r1-calendar-utc-direct/integration.py": "ba62860e6456fec1df712eb8163f00ed8a0c1368ffeddf37a4d15e486f466bff",
+    "build/goal-r1-calendar-utc-direct/audit.py": "53511113a113fca3f28d073d351929cfbcd24fb6b86777b5a5319cf9ad24156b",
+    "build/goal-r1-calendar-utc-direct/negative.py": "e7e895c5618d5162e3f36e41df252fa3f0600d791a1ccd8f1bd48899e30006dc",
+    "build/goal-r1-calendar-utc-direct/rea.json": "3813b65854ce820dab6bb0aab884e0648cdc3fb6b9ed45d0aefab2e084ba33f6"
+  },
+  "limitations": [
+    "Adapter scratch and ordered packed-field memory accesses compared at actual access widths; raw caller-clobbered registers and flags excluded.",
+    "Integration executes actual stock/C forward converter; converter internal accesses normalized by final result while outer adapter accesses remain directly compared.",
+    "GCC integration replaces adapter only; forward converter remains normal Clang object.",
+    "Private saved-register aliases, arbitrary faults, physical exceptions, concurrency and RTC hardware excluded.",
+    "Calendar callback candidates remain excluded from normal composition; this does not claim their provider closure.",
+    "No exact adapter qualification or complete source-only firmware."
+  ],
+  "retired_source_backups": {
+    "build/goal-r1-calendar-utc-direct/before.c": "fadcc32383136d6f30bc3998fdef015c0d7ed38488a738b11f89a5d3e470d3d7",
+    "build/goal-r1-calendar-utc-direct/bridge-before.c": "142ead5317995636d6196adf66c914cc18028f89688e650e3f038c99c63fb73d",
+    "build/goal-r1-calendar-utc-direct/sources-before.json": "d95865ffb28be68fde0f78dc85afa2ee5ab5c9819becd4be66bbfa68dd79f2bf"
+  },
+  "subsequent_calendar_provider_composition": {
+    "enabled": true,
+    "evidence": "r1/docs/reference/clock-calendar-composition-review.json",
+    "bootstrap_still_compile_only": true
+  }
+}

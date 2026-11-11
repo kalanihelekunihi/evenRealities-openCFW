@@ -5,6 +5,7 @@
 #include <stdint.h>
 extern void case_policy_task_wake_dispatch(void); /* 0xc390 */
 /* Stock 0x08000102 (xPortPendSVHandler) */
+/* Kept as asm: PendSV context switch saves/restores R4-R11 on the PSP. */
 __attribute__((naked)) void case_vector_pendsv_0102(void)
 {
     __asm__ volatile(

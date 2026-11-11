@@ -1,0 +1,48 @@
+{
+  "schema": 1,
+  "target": "locked G2 2.2.6.10 GX8002 BINH A image-A SRAM vectors",
+  "change": {
+    "linker": "g2/src/codec/link/g2-codec-a.ld",
+    "extractor": "tools/build/link_g2_sources.py",
+    "details": "Group named pre-IRQ resident functions and their three pre-IRQ rodata sections before a pinned compact IRQ entry at 0x10025574. Extract both new SRAM output sections and assert the IRQ symbol address."
+  },
+  "stock": {
+    "firmware": "g2/blobs/official/g2-2.2.6.10/firmware_codec.bin",
+    "sram_base": "0x10023400",
+    "sram_bytes": 14716,
+    "vector_bytes": 256,
+    "vector_sha256": "d0d1997111e51a07aa63535beffd7d3a0de741c39cd9915aed1ac87b6b978f1a",
+    "reset": "0x10023500",
+    "exception": "0x10023640",
+    "irq": "0x10025574"
+  },
+  "source": {
+    "sram_bytes": 14716,
+    "sram_sha256": "dce875fefb0880d9b458394c6f065e94241bf25a56943ac01571a3348a862f8d",
+    "old_equal_bytes": 2655,
+    "new_equal_bytes": 2857,
+    "whole_sram_bytes": 14716,
+    "vector_exact_match": true,
+    "vector_sha256": "d0d1997111e51a07aa63535beffd7d3a0de741c39cd9915aed1ac87b6b978f1a",
+    "reset": "0x10023500",
+    "exception": "0x10023640",
+    "irq": "0x10025574",
+    "pre_irq_section_bytes": 7842,
+    "irq_section_bytes": 76,
+    "post_irq_section_bytes": 3824,
+    "xip_bytes": 46764,
+    "xip_stock_limit": 36484
+  },
+  "verification": {
+    "sources_check": "make -C g2 sources-check",
+    "unchanged_source_report": "build/g2-all-c-entry-final-20261110/report.json",
+    "unchanged_source_report_sha256": "6fd4a576e10b21c01ce0bcb9f8bba45e1708b0d8715d1ab99391d12cdbde8f4d",
+    "strict_link_report": "build/g2-all-irq-vector-gated-link-20261110/link-report.json",
+    "strict_link_report_sha256": "aeb7a3869c5ea47d8126eb834627dc89fc6e201690999ba148927e82bcb25648",
+    "payloads_linked": 7,
+    "external_binary_archive_used": false,
+    "sram_size_and_vector_hash_enforced_by_linker": true,
+    "probe_sram_exact_match": true
+  },
+  "qualification": "All 64 image-A SRAM vector words and the three vector target addresses match the locked firmware. Most SRAM code/data bytes, the oversized XIP region, NPU source, complete BINH A package, byte identity, and hardware behavior remain unresolved."
+}

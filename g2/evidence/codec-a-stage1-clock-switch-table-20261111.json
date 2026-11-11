@@ -1,0 +1,45 @@
+{
+  "schema": "opencfw.g2.codec-a.stage1-clock-switch-table.v1",
+  "date": "2026-11-11",
+  "locked_component": {
+    "path": "g2/blobs/official/g2-2.2.6.10/firmware_codec.bin",
+    "sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+    "binh_a_stage1_load_offset": "0x95a4",
+    "table_address": "0x10000f48",
+    "table_bytes": 224,
+    "table_sha256": "602f0b8d59ef20ef49612aebf98bd30739e4eea6269beb66d08357bac2f768b4"
+  },
+  "source": {
+    "file": "g2/src/codec/image-a-stage1/main_stage1_clock_gate.c",
+    "linked_stage1_sha256": "62f4cb42b6ddc76dde24270995c6e81ec73c66e88a02363243448260d2c98b9f",
+    "table_sha256": "e1782afd566db53a53126e6c9fe382768c4bb7065b2b58e0f8fe0bec325f9dfb",
+    "same_offset_equal_bytes": 203,
+    "different_target_words": 19,
+    "other_table_bytes_match": true
+  },
+  "target_mapping": [
+    {"source": "0x10000840", "locked": "0x1000083c", "action": "zero result"},
+    {"source": "0x100006bc", "locked": "0x100006be", "action": "common module lookup"},
+    {"source": "0x100007d6", "locked": "0x100006bc", "action": "select module 16"},
+    {"source": "0x100007da", "locked": "0x100007d6", "action": "select module 22"},
+    {"source": "0x100007de", "locked": "0x100007da", "action": "select module 10"},
+    {"source": "0x100007e2", "locked": "0x100007de", "action": "select module 19"}
+  ],
+  "verification": {
+    "method": "Compared the locked stage-1 load with the linked C stage-1 ELF and disassembled the clock-frequency function in both. Replaced only source jump targets with their locked addresses after checking the same branch action, then SHA-256 compared all 224 table bytes.",
+    "normalized_source_table_sha256": "602f0b8d59ef20ef49612aebf98bd30739e4eea6269beb66d08357bac2f768b4",
+    "linker_gate": "tools/build/link_g2_sources.py:link_codec_a_binh_stage1",
+    "focused_link_report": "build/codec-a-stage1-clock-table-20261111/link/link-report.json",
+    "seven_payload_link_report": "build/codec-a-stage1-clock-table-20261111/bundle/link-report.json",
+    "seven_strict_links_passed": true,
+    "seven_payload_hashes_unchanged": true,
+    "source_bundle_sha256_unchanged": "4ded84cd623fd0dafd0633e71481cab92ac2845f8a64dbb3bde7eea8ddf29990",
+    "source_completeness_proven": false,
+    "source_uart_image_unchanged": true,
+    "source_stage1_image_unchanged": true
+  },
+  "limits": [
+    "This checks jump-table contents and branch actions, not every path through the 448-byte clock-frequency function.",
+    "The complete stage-1 image still differs from stock and has not been booted on hardware."
+  ]
+}

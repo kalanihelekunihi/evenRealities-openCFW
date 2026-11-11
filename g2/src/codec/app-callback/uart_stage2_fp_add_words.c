@@ -1,6 +1,9 @@
 /* SPDX-License-Identifier: MIT
  * Stock stage2 0x100076c4 and 0x100076f4 binary64 add/sub entries.
- * Their Ghidra void signatures omit the r0/r1 64-bit return from pack.
+ * Evidence: corpus codec/ghidra/open-2026-09-29/uart_boot_stage2/functions-000.jsonl
+ * FUN_100076c4 (48 B sha 29be947f…), FUN_100076f4 (56 B sha 6d209f04…);
+ * headless void signatures omit the r0/r1 64-bit return from pack — restored
+ * from native register flow.
  */
 #include <stdint.h>
 

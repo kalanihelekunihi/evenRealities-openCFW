@@ -1,7 +1,7 @@
 /* Apollo Ambiq raw glyph bitmap draw at native 0x53fb18..0x53fcc1. */
 #include <stdint.h>
 #include <stddef.h>
-extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,
+extern void lv_log_add(uint32_t,const char *,uint32_t,
                                 const char *,const char *,...);
 extern void display_driver_gpu_enable_4b0748(uint32_t,uint32_t);
 extern void audio_uart_ambiq_image_alpha_513e2e(uint32_t);
@@ -31,7 +31,7 @@ void audio_uart_ambiq_label_glyph_blit_53fb18(uint32_t unit,void *bitmap,
     case 4u:case 20u:nema_format=52u;break;
     case 8u:case 24u:nema_format=8u;break;
     default:
-        audio_uart_lvgl_log(3u,glyph_path,0x70u,glyph_function,
+        lv_log_add(3u,glyph_path,0x70u,glyph_function,
                             glyph_bad_format);
         return;
     }
@@ -45,7 +45,7 @@ void audio_uart_ambiq_label_glyph_blit_53fb18(uint32_t unit,void *bitmap,
     float matrix[9];
     audio_uart_nema_matrix_identity_561810(matrix);
     if(bitmap==NULL) {
-        audio_uart_lvgl_log(3u,glyph_path,0x82u,glyph_function,
+        lv_log_add(3u,glyph_path,0x82u,glyph_function,
                             glyph_assert,glyph_null_expr,glyph_null);
         for(;;) *(volatile uint32_t *)(uintptr_t)0xffffffffu=0u;
     }

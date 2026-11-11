@@ -1,0 +1,184 @@
+{
+  "source": {
+    "source": "r1/src/application/runtime/native_gomore_filter.c",
+    "payload": "r1-application",
+    "role": "candidate",
+    "toolchain": "gcc9",
+    "link": true,
+    "expect": "compile",
+    "returncode": 0,
+    "argv": [
+      "/opt/homebrew/bin/python3",
+      "/Users/kalani/Repo/evenRealities-openCFW/tools/build/linux_gcc.py",
+      "--compiler",
+      "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/bin/arm-none-eabi-gcc",
+      "--read-root",
+      "/Users/kalani/Repo/evenRealities-openCFW/r1",
+      "--read-root",
+      "/Users/kalani/Repo/evenRealities-openCFW/third-party/upstream",
+      "--read-root",
+      "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1",
+      "--read-root",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-filter-c/generated/r1",
+      "--",
+      "-mcpu=cortex-m4",
+      "-mthumb",
+      "-munaligned-access",
+      "-mfpu=fpv4-sp-d16",
+      "-mfloat-abi=hard",
+      "-std=c11",
+      "-Os",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-fshort-enums",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-fno-delete-null-pointer-checks",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/r1/src/vendor",
+      "-isystem",
+      "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
+      "-fno-strict-aliasing",
+      "-ffp-contract=off",
+      "-fsignaling-nans",
+      "-frounding-math",
+      "-ftrapping-math",
+      "-MD",
+      "-MF",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-filter-c/r1/r1-application/r1__src__application__runtime__native_gomore_filter.c.d",
+      "-c",
+      "/Users/kalani/Repo/evenRealities-openCFW/r1/src/application/runtime/native_gomore_filter.c",
+      "-o",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-filter-c/r1/r1-application/r1__src__application__runtime__native_gomore_filter.c.o"
+    ],
+    "source_sha256": "f0649e8a7cc383d91ad5df4f8511d1748905e63cec67757828c75795162c656e",
+    "object_sha256": "3d5b8f5f5b22563927d978d7b2dd4227d34b5734201d529df74690d42210bde2",
+    "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-filter-c/r1/r1-application/r1__src__application__runtime__native_gomore_filter.c.o",
+    "strong": [
+      "r1_gomore_filter_native"
+    ],
+    "weak": [],
+    "undefined": []
+  },
+  "direct_replay": {
+    "pairs": 5180,
+    "independent_expected_cases": 15,
+    "faults": 25,
+    "observations_sha256": "bddc31bf18b185b87283629691c46c18d42d4fd186f811ebc0387e026ced4aa7",
+    "source_object_sha256": "3d5b8f5f5b22563927d978d7b2dd4227d34b5734201d529df74690d42210bde2"
+  },
+  "host_integration": {
+    "paired_cases": 442,
+    "fault_cases": 0,
+    "provider_calls": 2700,
+    "observations_sha256": "65a4800b744fde676478941e1553bbf5802b206aa4b194ee0b8e5704d3528aea",
+    "limits": [
+      "Actual native/C host, resamplers and kernel wrappers; stock memory-clear executes on both paths",
+      "Only interpolation, logger and final algorithm modeled; actual native/C filter executes",
+      "ACC provider SP excluded; PPG scratch numeric addresses compared without normalization",
+      "No outer sensor-update caller or physical device proof"
+    ]
+  },
+  "negative_controls": [
+    {
+      "name": "forward-history",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "clamped-order",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "omit-ready",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "swapped-mul",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "wrong-history-offset",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "fused-add",
+      "compiled": true,
+      "rejected": true
+    }
+  ],
+  "qualification": {
+    "candidate_units": 1,
+    "compiled_units": 1,
+    "units": [
+      {
+        "source": "r1/src/application/runtime/native_gomore_filter.c",
+        "payload": "r1-application",
+        "evidence": "r1/symbols/function-frontier.csv",
+        "selected": [],
+        "compiled": true,
+        "rejections": {
+          "anchored_relocation_pattern_not_exact": 1
+        },
+        "source_implementation_completeness": "not established by compilation or byte matching",
+        "reason": "no exact anchored body under tested production bindings; integration remains unfinished"
+      }
+    ]
+  },
+  "composition": {
+    "report": "build/sources-goal-r1-gomore-filter-c/report.json",
+    "sha256": "ed12c1e0184cbe21a31c1c20e0cf1d464c5499eaed7b4261386dc63187886550",
+    "units": 682,
+    "unchanged_prior_source_object_pairs": 680,
+    "changed_prior_units": [
+      "r1/src/vendor/gomore_primitives/gomore_primitives.c"
+    ],
+    "application_imports": 166,
+    "bootloader_imports": 34
+  },
+  "consolidation": {
+    "removed_generic_export": "gomore_primitives_iir_filter_apply",
+    "vendor_sha256": "d3da6530139de107bef5f7a7e4bab55f964d74b18643803968372dacf52eec9e",
+    "header_sha256": "bfde8bae5dbc61167368ed37715eaf9c2d04b3daf78494e197d559841090c2f7"
+  },
+  "hybrid": {
+    "report": "build/hybrid-goal-r1-gomore-filter-c/build-report.json",
+    "sha256": "1742f4fc7c57786101a2729f4da156dd41f940483a4ca1cddea16c39dde0ba48",
+    "totals": {
+      "binary-pull-through": 641791,
+      "source-built": 4369,
+      "resource-file": 248
+    },
+    "canonical_plan_unchanged": true
+  },
+  "artifacts": {
+    "build/goal-r1-gomore-filter-c/candidate.c": "8b2670e71b696230cc8c7c7c19822e9e69fcd32e4145e6c0ccbea9806e345fdf",
+    "build/goal-r1-gomore-filter-c/candidate.o": "5160819cf33ac55ca328e2593a11085825e7e3a9da883236f43e33d3c2cbb5c4",
+    "build/goal-r1-gomore-filter-c/verify.py": "6172914a5c926d831f815cfecd33bd6a7ce3f27b6a9a381b7f9131a7df0655aa",
+    "build/goal-r1-gomore-filter-c/results.json": "e7886a8a0ebe417f6d2d08fae5a9cb8c30ab06ed3b9ddb49b36c8b3b77afe377",
+    "build/goal-r1-gomore-filter-c/integration.py": "b96b4e4ae754430b17c5c128819de2a2185517267b20a9bb82a86ea08a3a75a9",
+    "build/goal-r1-gomore-filter-c/integration-results.json": "a42026967bea3b3a568b38933ecfebfb65883ea0dc1afe78cd38acdc8251a748",
+    "build/goal-r1-gomore-filter-c/negative.py": "3098ea00ae5f7aa17d6a941bbbcb94d496126568b8a5b8c6d25e5e9212e94267",
+    "build/goal-r1-gomore-filter-c/negative-results.json": "78b41011b3db9bb4175f8001f0ee274c1bb7461bd7d73299c56ae1d002863420",
+    "build/goal-r1-gomore-filter-c/rea.json": "6df5d75142c1f4103ee395f8cbe77c5920ca1b8b77216ae26d7a54f582d49ed1",
+    "build/goal-r1-gomore-filter-c/finalize.py": "6c6d15c90e9787e4132c9e44f8975469c0eb63f9b7eca4f87fffa2d923055d7c",
+    "build/goal-r1-gomore-filter-c/qualify.py": "978e37b13d8274a05e45370ed3d1f9fa3d85e5747f04c0707d1c4c2629678715",
+    "build/goal-r1-gomore-filter-c/qualified/qualification.json": "d02919e2911d2f8f53a5c721e8c717f8ce6c79055eee37d2e40992ccf1cb74d9",
+    "build/goal-r1-gomore-filter-c/production-verify.log": "d10fb4847ef196836c380bea92cb9dac776bfd5efb8a9812f08395059759f39d",
+    "build/goal-r1-gomore-filter-c/production-integration.log": "e27c84f21db09efeb7bbcd21931c4a92ce326a40a139176f955ecca2648aeb32",
+    "build/goal-r1-gomore-filter-c/ops.c": "4df457908ce4e900dae527d8e78cec5ba1b83d59870b0d576d2040a7a7901f86",
+    "build/goal-r1-gomore-filter-c/off.o": "4c3e3327dc24d0328a05aaf071b1580ce662020d9f62a1bf191ca971e92bb72e",
+    "build/goal-r1-gomore-filter-c/fast.o": "30a60316d4ec677305ea186ccb45f3bd7e2e33d31aaca55e058c65f5e65cdc5b"
+  },
+  "limits": [
+    "Actual native/C filter through host chain; interpolation/logger/final algorithm modeled; stock clear executes",
+    "Wrapper and outer sensor-update SP differences remain; no physical, complete source-only link or byte identity proof",
+    "No arbitrary huge-order termination proof; normal emulator alignment mode"
+  ]
+}

@@ -1,67 +1,35 @@
-/* Native scan action: exact sparse configuration and ordered calls. */
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_scan_action_325548\n"
-".type opencfw_em9305_scan_action_325548,@function\n"
-"opencfw_em9305_scan_action_325548:\n"
-"L325548:\n"
-"enter_s [r13-r14,blink]\n"
-"L32554a:\n"
-"mov_s r0,0x805af8\n"
-"L325550:\n"
-"mov_s r1,0x805c78\n"
-"L325556:\n"
-"ld r3,[r0,0x4]\n"
-"L325558:\n"
-"ld r2,[r0,0]\n"
-"L32555a:\n"
-"ld r0,[r1,0]\n"
-"L32555c:\n"
-"mov_s r13,0x805014\n"
-"L325562:\n"
-"st_s r3,[r13,0x4]\n"
-"L325564:\n"
-"st_s r2,[r13,0]\n"
-"L325566:\n"
-"ldb_s r1,[r0,0x4]\n"
-"L325568:\n"
-"bl.d opencfw_em9305_scan_ring_init_316a54\n"
-"L32556c:\n"
-"add_s r0,r13,0x8\n"
-"L32556e:\n"
-"bl.d opencfw_em9305_common_request_30455c\n"
-"L325572:\n"
-"mov_s r0,1\n"
-"L325574:\n"
-"bl opencfw_em9305_command_count_30e4bc\n"
-"L325578:\n"
-"ldb_s r0,[r13,0x6]\n"
-"L32557a:\n"
-"mov_s r14,0x805a70\n"
-"L325580:\n"
-"mov_s r13,1\n"
-"L325582:\n"
-"bbit0.d.nt r0,0,L32558c\n"
-"L325586:\n"
-"stb_s r13,[r14,0x3]\n"
-"L325588:\n"
-"bl opencfw_em9305_init_secondary_count_up_30e4cc\n"
-"L32558c:\n"
-"bl opencfw_em9305_scan_start_31eac8\n"
-"L325590:\n"
-"mov_s r0,0x805166\n"
-"L325596:\n"
-"stb_s r13,[r0,0x2]\n"
-"L325598:\n"
-"sth_s r13,[r0,0]\n"
-"L32559a:\n"
-"mov_s r0,0\n"
-"L32559c:\n"
-"bl.d opencfw_em9305_command_status_30e8c0\n"
-"L3255a0:\n"
-"stb 0,[r14,5]\n"
-"L3255a4:\n"
-"leave_s [r13-r14,blink,pcl]\n"
-".size opencfw_em9305_scan_action_325548,.-opencfw_em9305_scan_action_325548\n"
-);
+#include <stdint.h>
+
+/* Native 0x325548..0x3255a6: start scanning. Copy the two scan
+ * configuration words (0x805af8) to 0x805014, initialise the scan ring
+ * at 0x80501c for the configured size, issue common request 1, count the
+ * command, mark scanning active (0x805a73) and count the secondary when
+ * bit 0 of 0x80501a is set, start the scan, set the start flags at
+ * 0x805166/0x805168, clear 0x805a75 and report command status 0. */
+extern uint32_t opencfw_em9305_scan_ring_init_316a54(uint32_t a,uint32_t b);
+extern uint32_t opencfw_em9305_common_request_30455c(uint32_t index);
+extern uint32_t opencfw_em9305_command_count_30e4bc(void);
+extern uint32_t opencfw_em9305_init_secondary_count_up_30e4cc(void);
+extern uint32_t opencfw_em9305_scan_start_31eac8(void);
+extern uint32_t opencfw_em9305_command_status_30e8c0(uint32_t status);
+
+uint32_t opencfw_em9305_scan_action_325548(void)
+{
+    uint32_t second=*(volatile uint32_t *)0x805afcu;
+    uint32_t first=*(volatile uint32_t *)0x805af8u;
+    uintptr_t config=*(volatile uint32_t *)0x805c78u;
+    *(volatile uint32_t *)0x805018u=second;
+    *(volatile uint32_t *)0x805014u=first;
+    (void)opencfw_em9305_scan_ring_init_316a54(0x80501cu,
+                                               *(volatile uint8_t *)(config+4u));
+    (void)opencfw_em9305_common_request_30455c(1u);
+    (void)opencfw_em9305_command_count_30e4bc();
+    uint32_t options=*(volatile uint8_t *)0x80501au;
+    *(volatile uint8_t *)0x805a73u=1u;
+    if((options&1u)!=0u)(void)opencfw_em9305_init_secondary_count_up_30e4cc();
+    (void)opencfw_em9305_scan_start_31eac8();
+    *(volatile uint8_t *)0x805168u=1u;
+    *(volatile uint16_t *)0x805166u=1u;
+    *(volatile uint8_t *)0x805a75u=0u;
+    return opencfw_em9305_command_status_30e8c0(0u);
+}

@@ -1,0 +1,195 @@
+{
+  "normal_report": "build/sources-goal-r1-clock-port-pure-c/report.json",
+  "report_sha256": "b496f1fb83ae516216c69bea3d0dc4c1811779a206c0bf3c84cb49c5d008462c",
+  "unit": {
+    "source": "r1/src/application/board/native_clock_port.c",
+    "payload": "r1-application",
+    "role": "candidate",
+    "toolchain": "clang",
+    "link": true,
+    "expect": "compile",
+    "returncode": 0,
+    "argv": [
+      "/usr/bin/clang",
+      "--target=arm-none-eabi",
+      "-mcpu=cortex-m4",
+      "-mthumb",
+      "-munaligned-access",
+      "-mfpu=fpv4-sp-d16",
+      "-mfloat-abi=hard",
+      "-std=c11",
+      "-Os",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-fshort-enums",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-fno-delete-null-pointer-checks",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/r1/src/vendor",
+      "-isystem",
+      "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
+      "-MD",
+      "-MF",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-clock-port-pure-c/r1/r1-application/r1__src__application__board__native_clock_port.c.d",
+      "-c",
+      "/Users/kalani/Repo/evenRealities-openCFW/r1/src/application/board/native_clock_port.c",
+      "-o",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-clock-port-pure-c/r1/r1-application/r1__src__application__board__native_clock_port.c.o"
+    ],
+    "source_sha256": "80c30ac02423b40e32795275381951c0d3978751724cc5fa9da92eb4c254a55e",
+    "object_sha256": "a2b9c3a228688ba19839db4e7f434415ccc21b7505f77c30945a3810ebbb3fd8",
+    "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-clock-port-pure-c/r1/r1-application/r1__src__application__board__native_clock_port.c.o",
+    "strong": [
+      "r1_clock_backend_bind_tick",
+      "r1_clock_backend_slot12",
+      "r1_clock_backend_update",
+      "r1_clock_rtc_bind",
+      "r1_clock_rtc_write"
+    ],
+    "weak": [],
+    "undefined": [
+      "memset",
+      "r1_stock_dispatch_10",
+      "r1_stock_dispatch_14",
+      "r1_stock_dispatch_20",
+      "r1_structured_rtc_device"
+    ]
+  },
+  "rea": {
+    "evidence_id": "ev_722223c5355829393fe437a3f559459b699bece3a7898663ed87f7a33a447c05",
+    "subject": {
+      "name": "stock.elf",
+      "digest": {
+        "sha256": "25b4a29af80ec8edab5bd861ba9b74a6e22eab29dc3d7a809a16869e8a140f04"
+      },
+      "local_path": "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-queue-reset-c/stock.elf",
+      "format": "elf",
+      "architecture": "arm"
+    },
+    "assembly": [
+      "0x50daa: push {r4,lr}",
+      "0x50dac: mov r0, r3",
+      "0x50dae: bl 0x00050de0",
+      "0x50db2: movs r0, #0x1",
+      "0x50db4: pop {r4,pc}"
+    ],
+    "pseudocode": "\nundefined4 FUN_00050daa(void)\n\n{\n  undefined4 in_r3;\n  \n  FUN_00050de0(in_r3);\n  return 1;\n}\n\n"
+  },
+  "direct": {
+    "paired_cases": 256,
+    "executions": 512,
+    "checks": [
+      "forwarded epoch/offset and R3 callback",
+      "unconditional result1 despite request statuses",
+      "final callee-saved registers, SP and interrupt masks"
+    ],
+    "limits": [
+      "Requests modeled; incidental scratch registers and private frame layouts excluded",
+      "No physical RTC or complete firmware proof"
+    ]
+  },
+  "negative": {
+    "wrong-success": {
+      "rejected": true,
+      "diagnostic": "bi-ld: warning: cannot find entry symbol _start; defaulting to 01000000\nTraceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-clock-port-pure-c/verify.py\", line 29, in <module>\n    words=[rng.getrandbits(32) for _ in regs];assert run(False,kind,words,status)==run(True,kind,words,status);count+=1\n                                                                                   ~~~^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-clock-port-pure-c/verify.py\", line 25, in run\n    m.hook_add(UC_HOOK_CODE,hook);m.emu_start((symbols[roots[kind][0]] if source else roots[kind][1])|1,STOP,count=1000);assert m.reg_read(UC_ARM_REG_PC)==STOP and m.reg_read(UC_ARM_REG_SP)==SP;assert m.reg_read(UC_ARM_REG_PRIMASK)==1 and m.reg_read(UC_ARM_REG_BASEPRI)==0x40;assert m.reg_read(UC_ARM_REG_R0)==1\n                                                                                                                                                                                                                                                                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    "shifted-epoch": {
+      "rejected": true,
+      "diagnostic": "arm-none-eabi-ld: warning: cannot find entry symbol _start; defaulting to 01000000\nTraceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-clock-port-pure-c/verify.py\", line 29, in <module>\n    words=[rng.getrandbits(32) for _ in regs];assert run(False,kind,words,status)==run(True,kind,words,status);count+=1\n                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    "lost-callback": {
+      "rejected": true,
+      "diagnostic": "arm-none-eabi-ld: warning: cannot find entry symbol _start; defaulting to 01000000\nTraceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-clock-port-pure-c/verify.py\", line 29, in <module>\n    words=[rng.getrandbits(32) for _ in regs];assert run(False,kind,words,status)==run(True,kind,words,status);count+=1\n                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    "propagated-update-status": {
+      "rejected": true,
+      "diagnostic": "C_ARM_REG_BASEPRI)==0x40;assert m.reg_read(UC_ARM_REG_R0)==1\n                                  ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 769, in emu_start\n    raise self._hook_exception\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 363, in wrapper\n    return func(uc, *args, **kwargs)\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 1063, in __hook_code_cb\n    callback(uc, address, size, user_data)\n    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-clock-port-pure-c/verify.py\", line 21, in hook\n    assert a==(0x50df0 if kind=='update' else 0x50de0);assert uc.reg_read(UC_ARM_REG_SP)==SP-8;assert [uc.reg_read(rr) for rr in regs[4:12]]==words[4:12]\n                                                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    }
+  },
+  "audit": {
+    "changed": [
+      "r1/src/application/board/native_clock_port.c"
+    ],
+    "changed_functions": [
+      ".text.r1_clock_backend_bind_tick",
+      ".text.r1_clock_backend_update"
+    ],
+    "unchanged_objects": 729,
+    "exports_imports_unchanged": true,
+    "request_functions_unchanged": true,
+    "retired_exact_bytes": 22,
+    "other_plan_units_unchanged": true
+  },
+  "qualification": {
+    "candidate_units": 1,
+    "compiled_units": 1,
+    "units": [
+      {
+        "source": "r1/src/application/board/native_clock_port.c",
+        "payload": "r1-application",
+        "evidence": "r1/symbols/function-frontier.csv",
+        "selected": [],
+        "compiled": true,
+        "rejections": {
+          "anchored_relocation_pattern_not_exact": 3,
+          "compiled_bytes_differ": 2
+        },
+        "source_implementation_completeness": "not established by compilation or byte matching",
+        "reason": "no exact anchored body under tested production bindings; integration remains unfinished"
+      }
+    ]
+  },
+  "retired_selections": [
+    {
+      "payload": "r1-application",
+      "symbol": "r1_clock_backend_update",
+      "start": 171446,
+      "end": 171456,
+      "sha256": "2e064ca1f0afdb9a53e8f599f8291b42f4e037b3df4152747b7ac292f84250d4",
+      "evidence": "r1/symbols/function-frontier.csv",
+      "bindings": {
+        "r1_clock_rtc_write": 331249
+      },
+      "address": 331190,
+      "binding_evidence": "r1/symbols/function-frontier.csv"
+    },
+    {
+      "payload": "r1-application",
+      "symbol": "r1_clock_backend_bind_tick",
+      "start": 171434,
+      "end": 171446,
+      "sha256": "7ed3839cbc121b8ce45a995ed1503c99126e28acc33936b2262f1671fb12d09a",
+      "evidence": "r1/symbols/function-frontier.csv",
+      "bindings": {
+        "r1_clock_rtc_bind": 331233
+      },
+      "address": 331178,
+      "binding_evidence": "r1/symbols/function-frontier.csv"
+    }
+  ],
+  "hybrid": {
+    "report": "build/hybrid-goal-r1-clock-port-pure-c/build-report.json",
+    "sha256": "daf07b2e5147d4bc5794a0387cae95debb3d9e2e70207eee0366325fe45f950e",
+    "source_plan_sha256": "1571f0ebea295e6467ec76ac352002468750cb74ad2d7a8192645132aa298833",
+    "payloads": [
+      {
+        "payload": "r1-application",
+        "sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+        "totals": {
+          "binary-pull-through": 641801,
+          "source-built": 4359,
+          "resource-file": 248
+        }
+      }
+    ],
+    "source_completeness_proven": false
+  },
+  "limits": [
+    "Requests modeled; incidental scratch registers, APSR and private provider frames excluded",
+    "Optional hybrid comparison retains binary fallback and does not use the new wrapper bodies",
+    "No complete firmware link or physical RTC proof"
+  ]
+}

@@ -7,16 +7,21 @@
 
 extern uint32_t gx8002_image_b_exception_scratch_20017390[];
 
-__attribute__((naked, noreturn, used, section(".text.image_b_exception_report")))
+/* Fatal report: the vector number is PSR[23:16]; native keeps it in r3 for a
+ * debugger and spins. */
+__attribute__((noreturn, used, section(".text.image_b_exception_report")))
 void gx8002_image_b_exception_report_100031f0(void)
 {
-    __asm__ volatile (
-        "mfcr r3, cr<0, 0>\n\t"
-        "lsri r3, r3, 16\n\t"
-        "sextb r3, r3\n"
-        "1: br 1b");
+    uint32_t psr;
+    __asm__ volatile("mfcr %0, cr<0, 0>" : "=r"(psr));
+    volatile int8_t vector = (int8_t)(psr >> 16);
+    (void)vector;
+    for (;;) {
+    }
 }
 
+/* Must stay assembly: exception entry that captures r0-r15, EPSR and EPC
+ * into the scratch frame before any C frame exists. */
 __attribute__((naked, noreturn, used, section(".text.image_b_exception_capture")))
 void gx8002_image_b_exception_capture_100031fc(void)
 {
@@ -46,8 +51,7 @@ void gx8002_image_b_exception_capture_100031fc(void)
         "br gx8002_image_b_exception_capture_100031fc");
 }
 
-__attribute__((naked, noreturn, used, section(".text.image_b_default_exception")))
-void gx8002_image_b_default_exception_10003240(void)
-{
-    __asm__ volatile ("br gx8002_image_b_exception_capture_100031fc");
-}
+/* Stock 0x10003240 is a single branch to the capture entry. */
+__typeof__(gx8002_image_b_exception_capture_100031fc)
+    gx8002_image_b_default_exception_10003240
+    __attribute__((alias("gx8002_image_b_exception_capture_100031fc")));

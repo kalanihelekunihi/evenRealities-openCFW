@@ -1,0 +1,29 @@
+{
+  "evidence_id": "ev_9f5a7e73c6f86de65fd92b37ad364541a9f1051244c51c1b5642d93aa643609d",
+  "subject": {
+    "name": "stock.elf",
+    "digest": {
+      "sha256": "25b4a29af80ec8edab5bd861ba9b74a6e22eab29dc3d7a809a16869e8a140f04"
+    },
+    "local_path": "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-queue-reset-c/stock.elf",
+    "format": "elf",
+    "architecture": "arm"
+  },
+  "normalized_result": {
+    "address": "0x41c5c",
+    "requested_bytes": 166,
+    "returned_bytes": 166,
+    "bytes_hex": "2de9f05fdff8a09083464846d9f80840d0e9007516468a46d9f80c00ac4209d8a84207d8a04201d3001b01e0201a281a864202d90020bde8f09feff3058028b1eff31188402181f3118801e054f024f82d1bb54207eb040102d33246504607e02a465046e5f74cfd721b0aeb05003946e5f746fdbbf1000f09d1ae4203d300bfa6eb050001e004eb0600c9f80800eff3058020b108f0ff0080f3118801e054f013f80120c7e7",
+    "complete": true
+  },
+  "limitations": [
+    "The session serves operations only after Ghidra reports default auto-analysis complete; incomplete analysis does not expose partial results.",
+    "The imported Program and temporary project are ephemeral and deleted on close. Annotation operations edit session database metadata; original executable bytes are never written.",
+    "Cancelling an active Ghidra request terminates its ephemeral database and discards session annotations. The selected target remains open; the next provider query imports the original artifact again.",
+    "Default-space addresses use lowercase 0x-prefixed hexadecimal; other address spaces use <percent-encoded-space>:0x<hex>.",
+    "Bytes reflect Ghidra's initialized memory, including loader fixups. Reads stop at an unmapped or uninitialized byte and report completeness explicitly.",
+    "macOS sessions require a matching executable Ghidra native decompiler; REA checks for it but does not build native components or change Gatekeeper quarantine state."
+  ],
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "raw_artifact_match": true
+}

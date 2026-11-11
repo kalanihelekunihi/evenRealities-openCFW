@@ -4,7 +4,7 @@
  * Log format at 0x0800d1ac remains linker-owned product data.
  */
 #include <stdint.h>
-extern void case_policy_sensor_command(uint32_t channel,uint32_t value); /* 0x99e8 */
+extern uint32_t case_policy_sensor_command(uint32_t channel,uint32_t value); /* 0x99e8 */
 extern uint32_t case_legacy_logger(const char *format,...); /* 0x9170 */
 /* Stock 0x0800D178 (case_init_service_start) */
 void case_init_service_start(void)

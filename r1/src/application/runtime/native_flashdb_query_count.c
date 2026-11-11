@@ -1,28 +1,53 @@
 #include <stdint.h>
-/* Native FlashDB adapter: preserves saved argument words, logging and native
- * uninitialized return 0 (upstream 2.0.0 instead returns FDB_INIT_FAILED).
- * Provider bodies remain explicit imports. No opcode arrays. */
-__attribute__((naked,section(".text.r1_fdb_native_query_count")))
-void r1_health_sync_provider_00063cb4(void) {
- __asm__ volatile(
- "push {r1,r2,r3,r4,r5,lr}\n"
- "mov r4,r0\nmovs r0,#0\nstr r0,[sp,#4]\nstr r0,[sp,#8]\nstrb.w r3,[sp,#4]\n"
- "ldrb r0,[r4,#24]\ncbz r0,1f\nadd r0,sp,#4\nstr r0,[sp]\nldr r3,3f\nmov r0,r4\n"
- "bl r1_health_sync_provider_00063ad8\nldr r0,[sp,#8]\npop {r1,r2,r3,r4,r5,pc}\n"
- "1: adr r0,4f\nbl r1_native_printf\nmov r0,r4\nbl r1_fdb_native_db_path\nmov r2,r0\n"
- "adr r0,5f\nldr r1,[r4]\nbl r1_native_printf\nadr r0,6f\nldr r1,[r4]\nbl r1_native_printf\n"
- "movs r0,#0\npop {r1,r2,r3,r4,r5,pc}\n"
- "3: .word r1_fdb_native_query_count_cb\n"
- "4: .asciz \"[FlashDB][tsl]\"\n.space 1,0\n"
- "5: .asciz \"[%s][%s] \"\n.space 2,0\n"
- "6: .asciz \"Error: TSL (%s) isn't initialize OK.\\n\"\n.space 1,0\n");
+#include <stdbool.h>
+struct fdb_tsdb;struct fdb_tsl;
+extern void r1_health_sync_provider_00063ad8(struct fdb_tsdb *,int32_t,int32_t,
+                                           bool (*)(struct fdb_tsl *,void *),void *);
+extern int r1_native_printf(const char *,...);
+bool r1_fdb_native_query_count_cb(struct fdb_tsl *,void *);
+void *r1_fdb_native_db_path(const volatile uint8_t *);
+typedef struct __attribute__((packed,may_alias)) {uint32_t value;} query_word;
+static uint32_t query_word_at(const volatile uint8_t *p)
+{return ((const volatile query_word *)p)->value;}
+/* Stock 0x63cb4 fully initializes the eight-byte callback context. Private
+ * saved argument restoration is not an input/output of this C interface. */
+__attribute__((section(".text.r1_fdb_native_query_count")))
+uint32_t r1_health_sync_provider_00063cb4(const volatile uint8_t *db,
+                                        int32_t from,int32_t to,uint32_t status)
+{
+ volatile uint32_t context[2]={(uint8_t)status,0};
+ if (db[24]) {
+  r1_health_sync_provider_00063ad8((struct fdb_tsdb *)(uintptr_t)db,from,to,
+                   r1_fdb_native_query_count_cb,(void *)(uintptr_t)context);
+  return context[1];
+ }
+ (void)r1_native_printf("[FlashDB][tsl]");
+ void *path=r1_fdb_native_db_path(db);
+ (void)r1_native_printf("[%s][%s] ",(const char *)(uintptr_t)query_word_at(db),path);
+ (void)r1_native_printf("Error: TSL (%s) isn't initialize OK.\n",
+                       (const char *)(uintptr_t)query_word_at(db));
+ return 0;
 }
-__attribute__((naked,section(".text.r1_fdb_native_query_count_cb")))
-void r1_fdb_native_query_count_cb(void) {
- __asm__ volatile("ldrb r0,[r0]\nldrb r2,[r1]\ncmp r0,r2\nbne 1f\nldr r0,[r1,#4]\nadds r0,r0,#1\nstr r0,[r1,#4]\n1: movs r0,#0\nbx lr\n");
+/* Native 0x87428 reads both status bytes before touching the count word.
+ * Packed volatile views preserve unaligned reads and aliased callback state. */
+typedef struct __attribute__((packed,may_alias)) { uint32_t value; } r1_fdb_query_word;
+bool r1_fdb_native_query_count_cb(struct fdb_tsl *entry,void *argument)
+{
+    const volatile uint8_t *record=(const volatile uint8_t *)entry;
+    volatile uint8_t *context=(volatile uint8_t *)argument;
+    uint32_t status = record[0];
+    uint32_t requested = context[0];
+    if (status == requested) {
+        volatile r1_fdb_query_word *count = (volatile r1_fdb_query_word *)(context+4);
+        count->value = count->value + 1u;
+    }
+    return 0;
 }
-/* Native FILE_MODE-off path behavior, including low-byte flag semantics. */
-__attribute__((naked,section(".text.r1_fdb_native_db_path")))
-void r1_fdb_native_db_path(void) {
- __asm__ volatile("ldrb r1,[r0,#25]\ncbz r1,1f\nmovs r0,#0\nbx lr\n1: ldr r0,[r0,#8]\nadds r0,r0,#4\nbx lr\n");
+/* Native 0x3f014 returns partition +4 without dereferencing that name.
+ * FILE_MODE is a whole byte, not only bit zero. */
+void *r1_fdb_native_db_path(const volatile uint8_t *db)
+{
+    if (db[25]) return 0;
+    uint32_t partition = ((const volatile r1_fdb_query_word *)(db+8))->value;
+    return (void *)((uintptr_t)partition + 4u);
 }

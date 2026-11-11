@@ -1,0 +1,156 @@
+{
+  "schema": 1,
+  "scope": "R1 Goodix compile-time polling configuration; initialized mode and bounded IRQ entry",
+  "startup": {
+    "ram_base": "0x20007aec",
+    "mode_address": "0x20007af1",
+    "initial_mode": 1,
+    "decoded_bytes": 6492,
+    "compressed_start": "0xc4610",
+    "compressed_end": "0xc4d05",
+    "decoded_sha256": "87fdee392022fdbe23dd0daf3e859fb14f3ce26ba3e8403aab56dc9d9a913317",
+    "native_decompressor_crosscheck": {
+      "entry": "0x286f4",
+      "returned": true,
+      "decoded_full_region_equal": true,
+      "mode": 1
+    }
+  },
+  "execution": {
+    "paired_cases": 240,
+    "stock_candidate_executions": 480,
+    "old_candidate_negative_executions": 240,
+    "old_mode_gate_counterexamples": 48,
+    "first_counterexample": {
+      "case": [
+        0,
+        1,
+        0,
+        0,
+        0
+      ],
+      "stock": "GH3X2X_GetIrqStatus",
+      "previous_C": "GH3X2X_GetSoftEvent"
+    },
+    "checks": [
+      "first external call is GetIrqStatus for initialized non-engineering mode",
+      "five runtime mode bytes, three nonzero initialized flags, two work modes, four interrupt masks, two callback flags",
+      "C never executes stock instructions"
+    ],
+    "limits": [
+      "Prefix stops at first external call; not full ISR execution",
+      "No physical IRQ timing/concurrency",
+      "Stock logging disabled; C print_fmt modeled as returning zero; initialized non-engineering path only"
+    ]
+  },
+  "audit": {
+    "unchanged_other_objects": 573,
+    "macro_differences": {
+      "__INTERRUPT_PROCESS_MODE__": [
+        "(__NORMAL_INT_PROCESS_MODE__)",
+        "(__POLLING_INT_PROCESS_MODE__)"
+      ]
+    },
+    "unit_changes": {
+      "{gen}/gh_demo_r1.c": {
+        "changed_functions": [
+          "GH3x2xDemoSearchCfgListByFunc",
+          "GH3x2xMaserControlFunctionLog",
+          "GH3x2xSlotTimeInfo",
+          "Gh3x2xDemoArrayCfgSwitch",
+          "Gh3x2xDemoInit",
+          "Gh3x2xDemoInterruptProcess",
+          "Gh3x2xDemoMoveDetectTimerHandler",
+          "Gh3x2xDemoSamplingControl",
+          "Gh3x2xDemoSetFuncionFrequency",
+          "Gh3x2xDemoSetFuncionLedCurrent",
+          "Gh3x2xDemoStartSamplingInner",
+          "Gh3x2xDemoStartSamplingWithCfgSwitch",
+          "Gh3x2xDemoStopSampling",
+          "Gh3x2xDemoStopSamplingForEngineeringMode",
+          "Gh3x2xDemoStopSamplingInner",
+          "Gh3x2xIntPinTriggerModePro",
+          "Gh3x2xSampleRateUpdate",
+          "Gh3x2xSetCurrentSlotEnReg"
+        ],
+        "changed_beyond_local_string_names": [
+          "Gh3x2xDemoInit",
+          "Gh3x2xDemoInterruptProcess",
+          "Gh3x2xIntPinTriggerModePro"
+        ],
+        "instruction_bytes_changed": [
+          "Gh3x2xDemoInit",
+          "Gh3x2xDemoInterruptProcess",
+          "Gh3x2xIntPinTriggerModePro"
+        ],
+        "removed_functions": [],
+        "added_functions": [],
+        "unchanged_functions": 26
+      },
+      "{gen}/gh_demo_user_r1.c": {
+        "changed_functions": [],
+        "changed_beyond_local_string_names": [],
+        "instruction_bytes_changed": [],
+        "removed_functions": [
+          "hal_gh3x2x_int_handler_call_back"
+        ],
+        "added_functions": [],
+        "unchanged_functions": 21
+      }
+    },
+    "unresolved_import_sets_unchanged": true,
+    "application_unresolved": 173,
+    "bootloader_unresolved": 34
+  },
+  "global_data_checks": {
+    "only_changed_common_exported_data": "g_uchGh3x2xIntMode:00->01",
+    "only_removed_exported_data": "g_uchGh3x2xIntCallBackIsCalled"
+  },
+  "manifest_unchanged": true,
+  "source_build": {
+    "compiled_units": 575,
+    "failed": 0,
+    "duplicate_strong_symbols": 0,
+    "application_unresolved": 173,
+    "bootloader_unresolved": 34
+  },
+  "qualification": {
+    "compiled_candidates": 5,
+    "selected_regions": 0,
+    "canonical_plan_unchanged": true
+  },
+  "hybrid": {
+    "report": "build/hybrid-goal-r1-goodix-polling/build-report.json",
+    "sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "totals": {
+      "binary-pull-through": 642255,
+      "source-built": 3905,
+      "resource-file": 248
+    },
+    "source_completeness_proven": false
+  },
+  "files": {
+    "r1/src/config/goodix/native_demo_reset_config.h": "0ee9a6c2d5ab7a7afe3049b49201ea0c030cec28e851aafa0a958ea284f10923",
+    "r1/src/sources.json": "80545d54b3a9f10716645cb75311a6f34478925e2598e1b5b18913a30e0ee59a",
+    "r1/symbols/function-frontier.csv": "5db72c8d4b850754f44d445f64786f4e2e9010329b075ffaa8840bf9d725e991",
+    "tools/build/source-plan.json": "b75a13f8cb2608f77f02582570ec5a031de8790cd1af50130f4b9f644ddb6931",
+    "build/sources-goal-r1-goodix-polling/report.json": "5dfc60dfbc01f8ef22a2080466a3bad1db8f02fb2006d26585ddbe1022e4a21a",
+    "build/hybrid-goal-r1-goodix-polling/build-report.json": "001106f8df015bcaf559eadde274a62b55060aca11471948bc842e75d9297741",
+    "build/goal-r1-goodix-polling/before.h": "ad09460cefc8e42261d37cf16fc7f581ff60bc85a1b52a7ff451b63772e0a011",
+    "build/goal-r1-goodix-polling/verify.py": "bc07e7375b7f8d444542419d7bbbda1d6959f269e20164aadcedc30034735ac7",
+    "build/goal-r1-goodix-polling/results.json": "952d6c704b8a93bf1aeaf8f4abd2056f15ba45339e4db856b9a1fa03b5130417",
+    "build/goal-r1-goodix-polling/startup.py": "145875f26c316e5bf7ce7f133f4cdc2a2fe844f29a33778c7b4212568c8867d7",
+    "build/goal-r1-goodix-polling/startup_native.py": "123cb14e78d85caf2970ef351f92d73e696a2d7741cd270d885c2267afe99489",
+    "build/goal-r1-goodix-polling/startup.json": "27e858630edff9a83f181376b4079da7c541d5a7f69e9e95cb55b521c5d9e302",
+    "build/goal-r1-goodix-polling/audit.py": "40ed1effd4bae357677f02ab56992df69e605ec0d3e7240fc8d2139944dd802b",
+    "build/goal-r1-goodix-polling/audit-results.json": "5e10d970b694390daf23b51cdaca28dcb3ec33e2cd9ede77db2a5f6a3c9907c7",
+    "build/goal-r1-goodix-polling/qualified/qualification.json": "58a1ded22d7fa74e63cd432f279230a6bdf43495e4d04667c3aae4e147f00f92"
+  },
+  "limits": [
+    "Only IRQ entry prefix executed; full ISR unverified",
+    "No physical timing/concurrency proof",
+    "Unmapped trigger helper inherits the configuration without native coverage credit",
+    "Unconditional int-pin template import remains unresolved",
+    "No G2 gate advances"
+  ]
+}

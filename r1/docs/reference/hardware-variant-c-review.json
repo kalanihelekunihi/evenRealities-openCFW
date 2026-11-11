@@ -1,0 +1,116 @@
+{
+  "schema_version": 1,
+  "source": "r1/src/application/board/native_hardware_variant.c",
+  "native_roots": [
+    "0x6a244"
+  ],
+  "report": "build/sources-goal-r1-variant-bsn-c/report.json",
+  "compiled_units": 835,
+  "application_imports": 77,
+  "added_imports": [
+    "r1_product_bsn_get"
+  ],
+  "removed_imports": [
+    "r1_hardware_variant_bsn_detect"
+  ],
+  "prior_objects_unchanged": 832,
+  "changed_generated_objects": [
+    [
+      "r1-bootloader",
+      "{gen}/r1_startup_vectors.S"
+    ],
+    [
+      "r1-bootloader",
+      "{gen}/r1_uecc.c"
+    ]
+  ],
+  "verification": {
+    "stock_C_pairs": 2421,
+    "entries_per_pair": 2,
+    "REA_bytes_match": true,
+    "cache_hit_values": "all 256 cached bytes x checked 0/1/2/255",
+    "BSN_single_byte_checks": "all 256 values at each of five checked positions",
+    "short_writes": "all lengths 0..30",
+    "external_mutation": "cache and checked bytes changed during accessor; complete and mismatch BSN",
+    "device_execution": false
+  },
+  "actual_IRQ_port_transport_registry_integration": {
+    "worker_policy_pairs": 384,
+    "raw_selection_pairs": 32,
+    "float_callback_pairs": 104,
+    "adapter_pairs": 40,
+    "seeded_live_pairs": 16,
+    "actual_C_average_and_event_dispatch": true,
+    "average_oracle_pairs": 4,
+    "retained_or_cleared_partial_read_pairs": 32,
+    "defined_private_buffer_fallback_cases": 12,
+    "callee_saved_integer_and_FP_registers_checked": true,
+    "actual_C_ports_transport_registry": true
+  },
+  "mutants": [
+    {
+      "name": "prefix",
+      "rejected": true
+    },
+    {
+      "name": "suffix",
+      "rejected": true
+    },
+    {
+      "name": "cache_guard",
+      "rejected": true
+    },
+    {
+      "name": "checked_publish",
+      "rejected": true
+    },
+    {
+      "name": "preserve_cache",
+      "rejected": true
+    },
+    {
+      "name": "initial_byte",
+      "rejected": true
+    }
+  ],
+  "new_owners": [
+    {
+      "symbol": "r1_hardware_variant_cached",
+      "stock_address": "0x2000775c",
+      "cold_rw": "00"
+    },
+    {
+      "symbol": "r1_hardware_variant_checked",
+      "stock_address": "0x2000775d",
+      "cold_rw": "00"
+    }
+  ],
+  "C_initializers_match_authenticated_RW": true,
+  "contract": [
+    "Any nonzero checked byte skips the BSN accessor and returns the cached byte unchanged.",
+    "Unchecked input is 30 initialized bytes: ff followed by 29 zero bytes.",
+    "Checks bytes 0..3 for B210 and byte 9 for A, ignoring intervening and later bytes.",
+    "Only a match stores cached=1; mismatch preserves the current cache, including accessor mutations.",
+    "Stores checked=1 after the accessor and comparisons, then returns the live cached byte."
+  ],
+  "limits": [
+    "The product BSN accessor at 0x7ba40 remains unresolved; direct tests model it with writes of 0..30 bytes.",
+    "The native accessor uses a persisted length and has no caller capacity argument; malformed oversized lengths require separate evidence before reconstruction.",
+    "Integration executes the C IRQ/model/count/average, IQS ports, transport and registry; device operations and storage accessor are modeled.",
+    "Cold initialized RW does not prove final runtime placement or reset initialization.",
+    "No final application link, physical bus timing or boot proof; byte identity is not required."
+  ],
+  "evidence_files": {
+    "build/sources-goal-r1-variant-bsn-c/report.json": "b8f97635dba103aa70ef5cf06ce5f3cae7b27fe5281b2f2cd7758d2c16ed8371",
+    "r1/src/sources.json": "137b737934eaff20dff17b26430e3e16087408fe6f8f572f524f408b72b7b160",
+    "r1/src/application/board/native_hardware_variant.c": "d2afaa14cdf6efa9dad5520decb68ccc27ba54239eed2e5dd2caa6fc6ff9959b",
+    "build/goal-r1-fstorage-registry/expanded-rw.bin": "87fdee392022fdbe23dd0daf3e859fb14f3ce26ba3e8403aab56dc9d9a913317",
+    "build/goal-r1-variant-bsn-c/verify.py": "362187740c140d458533593a2d6e0a84ef5be6b5df15a9bea397870bec4d96fc",
+    "build/goal-r1-variant-bsn-c/verification.json": "1c2e3a706ce6bef3501524acdf3005a03453fb5b116b9f4dde4a5f950f51db7e",
+    "build/goal-r1-variant-bsn-c/mutants.py": "8416b4d9bc4b8a3f1741c9dd95a08340d7f94ec85fd6946545bc870496688142",
+    "build/goal-r1-variant-bsn-c/mutants.json": "010c0590f44d4e20d662ab207186ceb8781f377a2229d51a0dfac75e7c0fa22e",
+    "build/goal-r1-variant-bsn-c/integration.py": "85cefca9e6c574e3f8ae76a1bb4a7bd7d6d916390b8b5ffa1bd908f9aed4e377",
+    "build/goal-r1-variant-bsn-c/port-integration.json": "211ea084515c86f0c692bdd4baa6973cf62671358f55d6914638d64e8edfc3f4",
+    "r1/docs/reference/hardware-variant-rea-bytes.json": "9349cfbd702465429f972861d75833d4881296b245671d079f4ded3e3cac9f66"
+  }
+}

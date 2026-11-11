@@ -86,7 +86,9 @@ const g2_ota_flash_backend_t *g2_ota_flash_ops = &g2_ota_mram_flash_ops;
 
 /* RAM 0x2034ac00 (SSRAM, stride 0x1010): page write-back buffer, one
  * write_size (0x1000) page. */
-__attribute__((aligned(4))) static uint8_t g2_ota_page_buffer_2034ac00[0x1000];
+/* R2: external linkage so the stock .data shadow word in system/stock-ram can
+ * relocate against it. */
+__attribute__((aligned(4))) uint8_t g2_ota_page_buffer_2034ac00[0x1000];
 /* RAM 0x20003020 (.data): {0x2034ac00, 0}. */
 g2_ota_page_cache_t g2_ota_write_cache = {g2_ota_page_buffer_2034ac00, 0u};
 

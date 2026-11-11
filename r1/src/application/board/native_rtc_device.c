@@ -14,18 +14,29 @@ _Static_assert(offsetof(r1_rtc_native_record,rtc)==52 && offsetof(r1_rtc_native_
 uint32_t r1_native_rtc_snapshot(uintptr_t device,uintptr_t argument,rtc_device_time_block *out,uintptr_t unused) {
     (void)device;(void)argument;(void)unused;
     if (!out) return 4;
-    out->epoch_seconds=r1_rtc_counter.epoch;
-    out->millisecond_value=(uint32_t)(r1_rtc_counter.epoch*1000u+r1_rtc_counter.divider);
+    /* Native publishes the captured epoch before sampling the live divider. */
+    const volatile r1_rtc_counter_state *counter=&r1_rtc_counter;
+    volatile rtc_device_time_block *snapshot=out;
+    uint32_t epoch=counter->epoch;
+    snapshot->epoch_seconds=epoch;
+    uint32_t milliseconds=epoch*1000u+counter->divider;
+    snapshot->millisecond_value=milliseconds;
     return 0;
 }
+/* Stock alarm configuration reads the caller name before the record name. */
+static int rtc_name_compare(const char *const *name) {
+    const char *device_name=*(const char *const volatile *)name;
+    const char *record_name=((volatile r1_rtc_native_record *)&r1_rtc_record)->name;
+    return strcmp(record_name,device_name);
+}
 uint32_t r1_native_rtc_calendar_write(const char *const *name,const void *calendar) {
-    if (strcmp(r1_rtc_record.name,*name)) return 2;
+    if (rtc_name_compare(name)) return 2;
     (void)r1_native_memory_move(&r1_rtc_record.calendar,calendar,44);
     return 0;
 }
 uint32_t r1_native_rtc_callback_bind(const char *const *name,uintptr_t argument,rtc_device_alarm_callback callback) {
     (void)argument;
-    if (strcmp(r1_rtc_record.name,*name)) return 2;
-    r1_rtc_record.callback=callback;
+    if (rtc_name_compare(name)) return 2;
+    ((volatile r1_rtc_native_record *)&r1_rtc_record)->callback=callback;
     return 0;
 }

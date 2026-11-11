@@ -1,0 +1,42 @@
+{
+  "schema": 1,
+  "target": "Compile the bootloader's resident-ROM Thumb aliases from a C translation unit",
+  "change": "Replaced the final first-party G2 .S source with resident_rom_thumb_set.c. Its file-scope assembler declarations retain the three absolute STT_FUNC Thumb aliases; they contain no executable firmware body. The final-link tool now invokes the ARM C compiler on that translation unit.",
+  "external_dependencies": {
+    "opencfw_boot_rom48": "0x00000049",
+    "opencfw_boot_rom_delay_cycles": "0x00000041",
+    "opencfw_boot_rom_mram_program": "0x0200ff21"
+  },
+  "source_files_sha256": {
+    "g2/src/apollo-bootloader/link/resident_rom_thumb_set.c": "9f10c515d67657fd29be60ea631343afede63d5b0709ccaa8161a8f5000a89fc",
+    "g2/src/apollo-bootloader/link/g2-apollo-bootloader.ld": "f722e211bbff9c0b6bc26269bda179ee495976da1e2fdd2c7789a80b0baf306a",
+    "g2/src/sources.json": "9c77702b204cd83a7892866e48a5beed0554139f72bb284bc07434e5d2ab7e47",
+    "tools/build/link_g2_sources.py": "2a5388b7a107580748f4f4edc04c3e8ac8d92cdab080e35b0fbb46ef6395a287"
+  },
+  "verification": {
+    "compiler_command": "arm-none-eabi-gcc -mcpu=cortex-m55 -mthumb -std=c11 -Wall -Wextra -Werror -c g2/src/apollo-bootloader/link/resident_rom_thumb_set.c -o build/resident-rom-thumb-set-c-20261111.o",
+    "compiled_object_sha256": "f5fc5edd894e67310a772c66858e5c2e8e6e98e7b0825afdaa0836e12444a148",
+    "compiled_object_text_data_bss_bytes": [0, 0, 0],
+    "all_three_symbols_absolute_stt_func": true,
+    "sources_check": "make -C g2 sources-check passed: 4885 manifest units, 4546 source files, 1 final-link-only C helper",
+    "focused_bootloader_link_image": "build/g2-boot-rom-c-helper-link-20261111/g2-apollo-bootloader.bin",
+    "focused_bootloader_link_image_sha256": "90094f1c7b9b1986c9576146f4b2aa866ab668011938a00048c7b031ff5cf5c1",
+    "focused_bootloader_byte_identical_to_previous_source_candidate": true,
+    "full_source_report": "build/g2-rom-helper-c-full-20261111/report.json",
+    "full_source_report_sha256": "861b769336e6327877fd6e61e06b9c46bcae7197ffe1d96165597c9a0b8ecaa7",
+    "compiled_units": 4880,
+    "compile_failures": 0,
+    "duplicate_strong_symbols": 0,
+    "source_bundle_link_report": "build/g2-rom-helper-c-bundle-20261111/link-report.json",
+    "source_bundle_link_report_sha256": "cc9098076c2a64529bf5ce8fa718f6726a4ef5724cf58f966d9e2b5a6f7ffde5",
+    "linked_payloads": 7,
+    "authenticated_comparison": "build/g2-rom-helper-c-bundle-20261111/comparison.json",
+    "authenticated_comparison_sha256": "73ce3a3b4a3942ba8643b6e60dc6b7e91cb82d8deaa961eec9555cf9dafca617",
+    "source_candidate_bundle_bytes": 4637792,
+    "source_candidate_bundle_sha256": "b3a80ac258d9725433753ab8dfb75d13e85bbd0a6534e416ecf6433e3cc891c1",
+    "whole_candidate_byte_identical_to_previous_source_candidate": true,
+    "byte_identical_to_locked_bundle": false,
+    "source_completeness_proven": false
+  },
+  "qualification": "This converts the link helper input to a C-compilable source file without changing the source candidate. The resident-ROM implementations are external to the OTA; firmware completeness, stock byte identity and hardware behavior remain unverified."
+}

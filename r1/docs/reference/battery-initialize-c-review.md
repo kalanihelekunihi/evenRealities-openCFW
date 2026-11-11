@@ -1,0 +1,15 @@
+# R1 battery initialization and ship-mode diagnostic getter in C
+
+`board/native_battery_initialize.c` supplies startup `0x912a8` and getter `0x73694`. It uses the existing device/runtime storage and cached device-info handle, without adding state owners. Startup clears exactly 51 device bytes, samples initial charger state once, then calls the battery runtime update eight times, each followed by delay argument ten. Only initial state one seeds charging history: the curve receives the final voltage halfword, its low byte is stored at offset 48, progress is reset, that byte is reloaded, and zero is promoted to one for level and all eight history slots. Runtime byte one is then published as one.
+
+The getter accepts a null output without touching persistence; otherwise it reads the existing 52-byte cached record and copies words at offsets 36 and 40. Record bytes start at zero so a failed or short provider output is deterministic. Stock uses uninitialized private stack bytes on such paths; those fallbacks are an explicit behavior improvement, not claimed as equivalence. Ordinary complete reads match stock even when the provider returns a nonzero status after supplying data. The initializer logs the first word, low two type bits and bits 2–15 of the second word through separately reloaded log gates. Its public API is void, matching the worker's discarded result.
+
+REA byte receipts bind both stock entries, strings and literal cells to the locked firmware. The sampling delay entry `0x78550` uses the same 64000 subtract-three primitive contract as the existing delay provider; physical timing remains unverified.
+
+Verification passes 800 stock/C startup pairs and 96 getter pairs, with ten short-read fallback cases. Tests vary charger states, full-word curve outputs, zero/overflow levels, logging and changing gates, persistence status, poisoned contexts/stacks and null output. Six compiled defects are rejected: seven samples, clearing 52 bytes, accepting the wrong charger state, retaining zero history level, wrong persisted word and wrong delay. The normal probe passes after mutation testing.
+
+An additional 64 comparisons execute the actual C and stock cached-class reader with prepared valid record/port objects; critical-section callbacks and memory copying are modeled. Four size-mismatch cases verify the C zero fallback without any copy. This is cached RAM access, not a flash-read or persistence-initialization claim. Direct startup tests model hardware children; their physical operation is outside this receipt.
+
+The open-toolchain build compiles 814 units (732 application, 82 bootloader), with 70 application imports and no new failures or duplicate strong symbols. The battery initializer import closes and none are added. All 813 prior source inputs remain unchanged; 811 object hashes match and two generated boot objects differ with build paths. No G2 source or qualification selection changes. Final application linking, startup placement and device boot remain open.
+
+Reproduction inputs and hashes: [battery-initialize-c-review.json](battery-initialize-c-review.json).

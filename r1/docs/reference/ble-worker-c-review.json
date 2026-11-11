@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "source": "r1/src/application/runtime/native_ble_io_worker.c",
+  "native_roots": [
+    "0x91f54",
+    "0x4e008",
+    "0x4d2e8"
+  ],
+  "report": "build/sources-goal-r1-ble-worker-c/report.json",
+  "compiled_units": 825,
+  "application_imports": 77,
+  "added_imports": [
+    "r1_advertising_restart",
+    "r1_advertising_stop_guard",
+    "r1_ble_connection_control_event_consumer",
+    "r1_nordic_ble_bootstrap_configuration",
+    "r1_peer_record_commit",
+    "r1_peripheral_watchdog_plan_step",
+    "r1_tx_power_plan"
+  ],
+  "removed_imports": [
+    "r1_ble_io_worker"
+  ],
+  "prior_objects_unchanged": 822,
+  "changed_generated_objects": [
+    [
+      "r1-bootloader",
+      "{gen}/r1_startup_vectors.S"
+    ],
+    [
+      "r1-bootloader",
+      "{gen}/r1_uecc.c"
+    ]
+  ],
+  "added_units": [
+    [
+      "r1-application",
+      "r1/src/application/runtime/native_ble_io_worker.c"
+    ]
+  ],
+  "verification": {
+    "stock_C_pairs": 4102,
+    "actual_C_park_and_fault": true,
+    "flag_masks": 512,
+    "role_mode_sequences": 512
+  },
+  "mutants": {
+    "rejected": [
+      "queue_depth",
+      "advertising_priority",
+      "restart_mode",
+      "tx_power_independent",
+      "live_watchdog",
+      "role_flag",
+      "role_handle_order",
+      "timer_delay"
+    ]
+  },
+  "rea_receipts": "r1/docs/reference/ble-worker-rea-bytes.json",
+  "rea_bytes_match_pinned_stock": true,
+  "watchdog_stock_address": "0x20006564",
+  "watchdog_cold_rw_zero_verified": true,
+  "limitations": [
+    "External BLE policies, queue, scheduler, logger, watchdog and SDK polling are modeled in the differential harness.",
+    "Existing C worker park and allocation-fault helpers execute in the source image.",
+    "No final source-only application link, physical timing, BLE radio or device boot proof.",
+    "Ordinary C callbacks do not promise incidental scratch-register return values.",
+    "Byte identity is not an acceptance requirement under the current user instruction."
+  ],
+  "evidence_files": {
+    "build/sources-goal-r1-ble-worker-c/report.json": "42d43916aca3ef0c63f821abd24da01a3751bab21afccfc1548d0957b11faf0e",
+    "r1/src/sources.json": "ca0f9cd70701816af15e2fba82ebcf81838982f0cf4761131e8067ebdbeb823b",
+    "r1/src/application/runtime/native_ble_io_worker.c": "b4d3f1c2fb63e699db2240222491f380cfd101038313302a61c29ed59ee922bc",
+    "build/goal-r1-ble-worker-c/verify.py": "1c40fd42cba5bfb58f19dc606a36f33b50d345002ed2d440925462f10dfdb5d1",
+    "build/goal-r1-ble-worker-c/verification.json": "862fca68dba1dd402e937d47af0187b80b7f228d7728b80e946869579b49fef6",
+    "build/goal-r1-ble-worker-c/mutants.py": "2bc7415d2b7e2b3f169dee0f83040600589fd6394dc8cfb936f012f51101dbfd",
+    "build/goal-r1-ble-worker-c/mutants.json": "25d47c303a582333b91d4a7ff7c0b2289f7e8c90ed71d039d56c957794f17e62",
+    "r1/docs/reference/ble-worker-rea-bytes.json": "299d0ca467a9f6acb476af0117c2b5fae172233161744926f51dd050783e5cc1"
+  }
+}

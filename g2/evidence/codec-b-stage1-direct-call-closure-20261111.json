@@ -1,0 +1,58 @@
+{
+  "schema": 1,
+  "target": "GX8002 BINH B stage-1 direct-call C ownership",
+  "locked_source": {
+    "component": "g2/blobs/official/g2-2.2.6.10/firmware_codec.bin",
+    "component_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+    "binh_b_offset": 231740,
+    "stage1_load_offset": 231764,
+    "stage1_load_bytes": 12288,
+    "stage1_load_sha256": "c1a638a297922dcc86c084bdfd73d288785010f7ac7280031195dba747ff9b29",
+    "disassembler": "pinned csky-abiv2-elf-objdump -D -b binary -m csky -EL --adjust-vma=0x10000000",
+    "direct_bsr_sites": 61,
+    "distinct_direct_targets": 22,
+    "targets": [
+      "0x10000134", "0x10000138", "0x100001f8", "0x10000300",
+      "0x100004f4", "0x100007d8", "0x10000d24", "0x10000d4c",
+      "0x10000df0", "0x10000e20", "0x10000e64", "0x10000ea0",
+      "0x10000eb8", "0x10000ed0", "0x10000edc", "0x10000f5c",
+      "0x10000fdc", "0x10001234", "0x10001260", "0x100012e0",
+      "0x100012f0", "0x10001310"
+    ],
+    "indirect_jsr_sites": ["0x10000d92", "0x10000dc8"],
+    "indirect_targets": ["0x10003100 stage-2 reset", "0x10000100 stage-1 reset"]
+  },
+  "source_ownership": {
+    "stage1_units": 11,
+    "address_named_targets": 21,
+    "upstream_local_target": "0x10000138 is __module_get_info in pinned third-party/upstream/nationalchip-lvp-kws/arch/soc/grus/include/clk_priv.h; linked source ELF emits __module_get_info at 0x10000240.",
+    "restored_function": "0x10001310 is the trim-success 32 kHz oscillator enable wrapper; it was fused into clock_init and is now gx8002_image_b_stage1_clock_trim_enable_10001310 in g2/src/codec/image-b-stage1/backup_stage1_clock_gate.c.",
+    "stock_wrapper": "0x10001310..0x10001322 calls trim 0x100004f4, returns on nonzero, otherwise calls osc_32k_state(1) at 0x10000ea0.",
+    "linked_wrapper": "0x100007fc..0x1000080c is a separate 20-byte C function with the same call, branch and enable sequence; clock_init calls it.",
+    "source_file_sha256": "e45ed2f984859e2e9481e04d038dc6219db6785cee13b25cc19e514ac2601e6c"
+  },
+  "verification": {
+    "focused_report": "build/codec-b-stage1-call-closure-20261111/sources/report.json",
+    "focused_compiled": 332,
+    "focused_failed": 0,
+    "focused_duplicate_strong_symbols": 0,
+    "focused_link_report": "build/codec-b-stage1-call-closure-20261111/link/link-report.json",
+    "stage1_linked_bytes": 6764,
+    "stage1_linked_sha256": "73391fdd480038d1c5e702fc73bb0640c585f27950226b93ae0b3d4be8919cd6",
+    "binh_b_package_sha256": "86bb3065c4bec5ca1fc60ed6bfaa9e5a1db673668737ba2b373b66a864e85294",
+    "full_source_report": "build/codec-b-stage1-call-closure-20261111/all/report.json",
+    "full_compiled_enabled_c_units": 4878,
+    "full_failed_units": 0,
+    "full_duplicate_strong_symbols": 0,
+    "full_strict_link_report": "build/codec-b-stage1-call-closure-20261111/bundle/link-report.json",
+    "full_strict_link_report_sha256": "a2fd8df36251e5f64e03b4763a424d76083449e7bf789b12528ff5677a60f739",
+    "linked_payloads": 7,
+    "unchanged_payload_binaries": 6,
+    "changed_payload_binary": "g2-codec-b",
+    "source_only_ota_bytes": 4638028,
+    "source_only_ota_sha256": "ecddb449ef72ce49927a078fb88f886acf0ca124333f952e947c3509e39c74d1",
+    "source_completeness_proven": false,
+    "matches_locked_target": false
+  },
+  "limits": "Direct call-target ownership is not instruction coverage or full behavioral equivalence. The two computed loader targets are statically decoded but not hardware executed here; physical boot and whole-artifact source completeness remain unverified."
+}

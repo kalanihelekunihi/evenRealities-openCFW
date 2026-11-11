@@ -1,108 +1,43 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_callback_326904\n"
-".type opencfw_em9305_callback_326904,@function\n"
-"opencfw_em9305_callback_326904:\n"
-"L326904:\n"
-"enter_s [r13-r19,blink]\n"
-"L326906:\n"
-"mov_s r17,r0\n"
-"L326908:\n"
-"mov r0,765\n"
-"L32690c:\n"
-"ldb r0,[r17,r0]\n"
-"L326910:\n"
-"mov r19,r4\n"
-"L326914:\n"
-"mov_s r16,r3\n"
-"L326916:\n"
-"mov_s r15,r2\n"
-"L326918:\n"
-"mov_s r18,r1\n"
-"L32691a:\n"
-"breq_s r0,0,L32698a\n"
-"L32691c:\n"
-"bl.d opencfw_em9305_phy_packet_alloc_32d2f0\n"
-"L326920:\n"
-"mov_s r0,5\n"
-"L326922:\n"
-"mov_s r13,r0\n"
-"L326924:\n"
-"breq_s r0,0,L32698a\n"
-"L326926:\n"
-"sub r1,r18,0x1\n"
-"L32692a:\n"
-"mov_s r2,1\n"
-"L32692c:\n"
-"asl_s r2,r2,r1\n"
-"L32692e:\n"
-"mov_s r14,r17\n"
-"L326930:\n"
-"extb_s r0,r2\n"
-"L326932:\n"
-"mov_s r18,0\n"
-"L326934:\n"
-"brne.d.nt r0,0x4,L32694e\n"
-"L326938:\n"
-"add r14,r14,334\n"
-"L32693c:\n"
-"breq.nt r19,0,L32694e\n"
-"L326940:\n"
-"ldb_s r1,[r14,0]\n"
-"L326942:\n"
-"ldb_s r0,[r14,0x1]\n"
-"L326944:\n"
-"cmp_s r0,r1\n"
-"L326946:\n"
-"setne r18,r0,r1\n"
-"L32694a:\n"
-"mov.eq r2,0xc\n"
-"L32694e:\n"
-"mov_s r0,0x25\n"
-"L326950:\n"
-"stb_s r0,[r13,0]\n"
-"L326952:\n"
-"mov_s r0,r16\n"
-"L326954:\n"
-"bl.d opencfw_em9305_ll_signed_classify_31b374\n"
-"L326958:\n"
-"stb_s r2,[r13,0x1]\n"
-"L32695a:\n"
-"stb_s r0,[r13,0x2]\n"
-"L32695c:\n"
-"mov_s r0,r17\n"
-"L32695e:\n"
-"mov_s r1,r13\n"
-"L326960:\n"
-"stb r16,[r13,4]\n"
-"L326964:\n"
-"bl.d opencfw_em9305_phy_packet_send_32d32c\n"
-"L326968:\n"
-"stb_s r15,[r13,0x3]\n"
-"L32696a:\n"
-"breq.nt r18,0,L32698a\n"
-"L32696e:\n"
-"ldb.x r14,[r14,1]\n"
-"L326972:\n"
-"stb 8,[r13,1]\n"
-"L326976:\n"
-"bl.d opencfw_em9305_ll_signed_classify_31b374\n"
-"L32697a:\n"
-"mov_s r0,r14\n"
-"L32697c:\n"
-"stb_s r0,[r13,0x2]\n"
-"L32697e:\n"
-"mov_s r0,r17\n"
-"L326980:\n"
-"mov_s r1,r13\n"
-"L326982:\n"
-"stb_s r14,[r13,0x4]\n"
-"L326984:\n"
-"bl.d opencfw_em9305_phy_packet_send_32d32c\n"
-"L326988:\n"
-"stb_s r15,[r13,0x3]\n"
-"L32698a:\n"
-"leave_s [r13-r19,blink,pcl]\n"
-".size opencfw_em9305_callback_326904,.-opencfw_em9305_callback_326904\n"
-);
+#include <stdint.h>
+
+/* Native 0x326904..0x32698c: send the 5-byte 0x25 power-change PDU for a
+ * PHY (1-based bit index) once the record's response is out (+765): PHY
+ * mask, classified and raw signed level, and the delta byte. For the
+ * coded PHY (mask 4) with a pending update, the flags become 0x0c when the
+ * stored levels (+334/+335) agree; when they differ a second PDU is sent
+ * with flags 8 and the stored level (+335). Returns 0 if nothing was
+ * sent. */
+extern uint32_t opencfw_em9305_phy_packet_alloc_32d2f0(uint32_t);
+extern uint32_t opencfw_em9305_ll_signed_classify_31b374(uint32_t);
+extern uint32_t opencfw_em9305_phy_packet_send_32d32c(uintptr_t,uintptr_t);
+
+uint32_t opencfw_em9305_callback_326904(uintptr_t record,uint32_t phy,uint32_t delta,
+                                        uint32_t level,uint32_t pending)
+{
+    if(*(volatile uint8_t *)(record+765u)==0u) return 0u;
+    uintptr_t packet=opencfw_em9305_phy_packet_alloc_32d2f0(5u);
+    if(packet==0u) return 0u;
+    volatile uint8_t *pdu=(volatile uint8_t *)packet;
+    volatile uint8_t *stored=(volatile uint8_t *)(record+334u);
+    uint32_t flags=1u<<((phy-1u)&31u);
+    uint32_t differ=0u;
+    if((uint8_t)flags==4u&&pending!=0u) {
+        uint32_t first=stored[0];
+        uint32_t second=stored[1];
+        differ=second!=first;
+        if(!differ) flags=0x0cu;
+    }
+    pdu[0]=0x25u;
+    pdu[1]=(uint8_t)flags;
+    pdu[2]=(uint8_t)opencfw_em9305_ll_signed_classify_31b374(level);
+    pdu[4]=(uint8_t)level;
+    pdu[3]=(uint8_t)delta;
+    uint32_t status=opencfw_em9305_phy_packet_send_32d32c(record,packet);
+    if(differ==0u) return status;
+    int32_t current=*(volatile int8_t *)(record+335u);
+    pdu[1]=8u;
+    pdu[2]=(uint8_t)opencfw_em9305_ll_signed_classify_31b374((uint32_t)current);
+    pdu[4]=(uint8_t)current;
+    pdu[3]=(uint8_t)delta;
+    return opencfw_em9305_phy_packet_send_32d32c(record,packet);
+}

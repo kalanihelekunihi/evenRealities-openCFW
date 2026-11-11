@@ -1,92 +1,37 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_325ccc\n"
-".type opencfw_em9305_child_325ccc,@function\n"
-"opencfw_em9305_child_325ccc:\n"
-"L325ccc:\n"
-"enter_s [r13-r16,fp,blink]\n"
-"L325cce:\n"
-"sub_s sp,sp,0x4\n"
-"L325cd0:\n"
-"mov_s r1,r0\n"
-"L325cd2:\n"
-"add r1,r1,672\n"
-"L325cd6:\n"
-"mov_s r13,r0\n"
-"L325cd8:\n"
-"ldb_s r0,[r1,0x14]\n"
-"L325cda:\n"
-"ldh r3,[r1,-8]\n"
-"L325cde:\n"
-"ldh r2,[r1,-6]\n"
-"L325ce2:\n"
-"mpyuw r0,r0,1250\n"
-"L325ce6:\n"
-"ldh r14,[r1,-80]\n"
-"L325cea:\n"
-"ldh r16,[r1,-10]\n"
-"L325cee:\n"
-"ldh r15,[r1,-12]\n"
-"L325cf2:\n"
-"stb 1,[r1]\n"
-"L325cf6:\n"
-"sth_s r3,[r1,0x6]\n"
-"L325cf8:\n"
-"bl.d opencfw_em9305_child_31340c\n"
-"L325cfc:\n"
-"sth_s r2,[r1,0x8]\n"
-"L325cfe:\n"
-"ld r1,[0x805c70]\n"
-"L325d06:\n"
-"mpyuw r15,r15,1250\n"
-"L325d0a:\n"
-"mpyuw r16,r16,1250\n"
-"L325d0e:\n"
-"sub_s r1,r13,r1\n"
-"L325d10:\n"
-"div r1,r1,912\n"
-"L325d14:\n"
-"mov_s r3,r0\n"
-"L325d16:\n"
-"add r5,sp,0\n"
-"L325d1a:\n"
-"mov_s r2,r16\n"
-"L325d1c:\n"
-"mov_s r4,r14\n"
-"L325d1e:\n"
-"extb_s r0,r1\n"
-"L325d20:\n"
-"bl.d opencfw_em9305_child_3136fc\n"
-"L325d24:\n"
-"mov_s r1,r15\n"
-"L325d26:\n"
-"breq_s r0,0,L325d46\n"
-"L325d28:\n"
-"ld r0,[sp,0]\n"
-"L325d2a:\n"
-"stb 1,[r13,192]\n"
-"L325d2e:\n"
-"add r13,r13,676\n"
-"L325d32:\n"
-"mpydu r2,r0,0x1a36e3\n"
-"L325d3a:\n"
-"asl_s r1,r3\n"
-"L325d3c:\n"
-"lsr r0,r2,0x1f\n"
-"L325d40:\n"
-"or_s r0,r0,r1\n"
-"L325d42:\n"
-"sth_s r0,[r13,0]\n"
-"L325d44:\n"
-"leave_s [r13-r16,fp,blink,pcl]\n"
-"L325d46:\n"
-"mov_s r1,0x72\n"
-"L325d48:\n"
-"bl.d opencfw_em9305_receive_terminate_325c08\n"
-"L325d4c:\n"
-"mov_s r0,r13\n"
-"L325d4e:\n"
-"leave_s [r13-r16,fp,blink,pcl]\n"
-".size opencfw_em9305_child_325ccc,.-opencfw_em9305_child_325ccc\n"
-);
+#include <stdint.h>
+
+/* Native 0x325ccc..0x325d50: start the connection-update receive window.
+ * Marks +672, copies +664/+666 to +678/+680, aligns the window offset
+ * (+692 x 1250 us) through 31340c and asks 3136fc for an anchor with the
+ * interval bounds (+660/+662 x 1250) and latency (+592). On success sets
+ * +192 and stores the anchor scaled by 0x1a36e3 / 2^31 at +676; on failure
+ * terminates the receive with reason 0x72. */
+extern uint32_t opencfw_em9305_child_31340c(uint32_t offset);
+extern uint32_t opencfw_em9305_child_3136fc(uint32_t handle, uint32_t minimum,
+                                            uint32_t maximum, uint32_t offset,
+                                            uint32_t latency, uintptr_t anchor_out);
+extern uint32_t opencfw_em9305_receive_terminate_325c08(uintptr_t record, uint32_t reason);
+
+uint32_t opencfw_em9305_child_325ccc(uintptr_t record)
+{
+    uint32_t anchor;
+    uint32_t window=*(volatile uint8_t *)(record+692u);
+    uint32_t first=*(volatile uint16_t *)(record+664u);
+    uint32_t second=*(volatile uint16_t *)(record+666u);
+    uint32_t latency=*(volatile uint16_t *)(record+592u);
+    uint32_t maximum=*(volatile uint16_t *)(record+662u);
+    uint32_t minimum=*(volatile uint16_t *)(record+660u);
+    *(volatile uint8_t *)(record+672u)=1u;
+    *(volatile uint16_t *)(record+678u)=(uint16_t)first;
+    *(volatile uint16_t *)(record+680u)=(uint16_t)second;
+    uint32_t offset=opencfw_em9305_child_31340c(window*1250u);
+    uintptr_t base=*(volatile uint32_t *)(uintptr_t)0x805c70u;
+    uint32_t handle=(uint8_t)((int32_t)(record-base)/912);
+    if(opencfw_em9305_child_3136fc(handle,minimum*1250u,maximum*1250u,offset,latency,
+                                   (uintptr_t)&anchor)==0u)
+        return opencfw_em9305_receive_terminate_325c08(record,0x72u);
+    *(volatile uint8_t *)(record+192u)=1u;
+    uint32_t scaled=(uint32_t)(((uint64_t)anchor*0x1a36e3u)>>31);
+    *(volatile uint16_t *)(record+676u)=(uint16_t)scaled;
+    return scaled;
+}

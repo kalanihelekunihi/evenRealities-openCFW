@@ -10,7 +10,7 @@ extern void audio_uart_lv_anim_init_4503d6(void *);
 extern void audio_uart_lv_anim_values_4506ce(void *, int32_t, int32_t);
 extern void *audio_uart_lv_anim_start_450408(void *);
 extern void audio_legal_regulatory_fade_callback_58c12c(void);
-extern void audio_uart_lv_anim_path_450672(void);
+extern void lv_anim_path_ease_out(void);
 
 static const char module[] = "fade.anim";
 static const char path[] =
@@ -53,7 +53,7 @@ void audio_terminal_fade_out_58c426(uint32_t object, uint32_t duration,
     write_word(animation, 4u,
                (uintptr_t)audio_legal_regulatory_fade_callback_58c12c);
     write_word(animation, 0x20u,
-               (uintptr_t)audio_uart_lv_anim_path_450672);
+               (uintptr_t)lv_anim_path_ease_out);
     if (complete != 0)
         write_word(animation, 0x10u, (uintptr_t)complete);
     write_word(animation, 0x30u, duration);

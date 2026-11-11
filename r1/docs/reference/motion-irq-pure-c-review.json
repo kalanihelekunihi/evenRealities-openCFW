@@ -1,0 +1,288 @@
+{
+  "normal_report": "build/sources-goal-r1-motion-irq-pure-c/report.json",
+  "report_sha256": "cb60e8467b9b5a11b92bbcfffa0caa34294413b6c51263f13a75594ee6084cf3",
+  "units": [
+    {
+      "source": "r1/src/application/runtime/native_motion_selection.c",
+      "payload": "r1-application",
+      "role": "candidate",
+      "toolchain": "clang",
+      "link": true,
+      "expect": "compile",
+      "returncode": 0,
+      "argv": [
+        "/usr/bin/clang",
+        "--target=arm-none-eabi",
+        "-mcpu=cortex-m4",
+        "-mthumb",
+        "-munaligned-access",
+        "-mfpu=fpv4-sp-d16",
+        "-mfloat-abi=hard",
+        "-std=c11",
+        "-Os",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-fshort-enums",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-fno-delete-null-pointer-checks",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/r1/src/vendor",
+        "-isystem",
+        "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
+        "-MD",
+        "-MF",
+        "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-motion-irq-pure-c/r1/r1-application/r1__src__application__runtime__native_motion_selection.c.d",
+        "-c",
+        "/Users/kalani/Repo/evenRealities-openCFW/r1/src/application/runtime/native_motion_selection.c",
+        "-o",
+        "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-motion-irq-pure-c/r1/r1-application/r1__src__application__runtime__native_motion_selection.c.o"
+      ],
+      "source_sha256": "a899832c87b0f314705ab1e85ac88a1be26b591976e39323e7e1ba685978a06d",
+      "object_sha256": "97705de3fe54c83942494f8821b0aca72ad21b08abfdd07f9669e9190877aadc",
+      "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-motion-irq-pure-c/r1/r1-application/r1__src__application__runtime__native_motion_selection.c.o",
+      "strong": [
+        "r1_bma456w_configuration_wrapper",
+        "r1_bma456w_interrupt_noop",
+        "r1_bma456w_probe_wrapper",
+        "r1_lis2dw12_configuration_wrapper",
+        "r1_lis2dw12_interrupt_noop",
+        "r1_lis2dw12_probe_wrapper",
+        "r1_motion_bma_table",
+        "r1_motion_bus_acquire",
+        "r1_motion_bus_release",
+        "r1_motion_lis_table",
+        "r1_motion_probe_and_select_provider",
+        "r1_motion_qma_table",
+        "r1_motion_refresh_selection",
+        "r1_qma6100_configuration_wrapper",
+        "r1_qma6100_interrupt_wrapper",
+        "r1_qma6100_probe_wrapper"
+      ],
+      "weak": [],
+      "undefined": [
+        "r1_bma456w_configure_boundary",
+        "r1_bma456w_fifo_normalized",
+        "r1_bma456w_identity_probe",
+        "r1_lis2dw12_aux16_boundary",
+        "r1_lis2dw12_aux20_boundary",
+        "r1_lis2dw12_configure_boundary",
+        "r1_lis2dw12_fifo_normalized",
+        "r1_lis2dw12_identity_probe",
+        "r1_motion_bus_device",
+        "r1_motion_selected_provider",
+        "r1_qma6100_chip_id",
+        "r1_qma6100_configure_boundary",
+        "r1_qma6100_fifo_normalized",
+        "r1_qma6100_irq_boundary",
+        "r1_stock_dispatch_08",
+        "r1_stock_dispatch_0c"
+      ]
+    },
+    {
+      "source": "r1/src/application/runtime/native_motion_stream.c",
+      "payload": "r1-application",
+      "role": "candidate",
+      "toolchain": "clang",
+      "link": true,
+      "expect": "compile",
+      "returncode": 0,
+      "argv": [
+        "/usr/bin/clang",
+        "--target=arm-none-eabi",
+        "-mcpu=cortex-m4",
+        "-mthumb",
+        "-munaligned-access",
+        "-mfpu=fpv4-sp-d16",
+        "-mfloat-abi=hard",
+        "-std=c11",
+        "-Os",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-fshort-enums",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-fno-delete-null-pointer-checks",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/r1/src/vendor",
+        "-isystem",
+        "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
+        "-MD",
+        "-MF",
+        "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-motion-irq-pure-c/r1/r1-application/r1__src__application__runtime__native_motion_stream.c.d",
+        "-c",
+        "/Users/kalani/Repo/evenRealities-openCFW/r1/src/application/runtime/native_motion_stream.c",
+        "-o",
+        "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-motion-irq-pure-c/r1/r1-application/r1__src__application__runtime__native_motion_stream.c.o"
+      ],
+      "source_sha256": "6e6af35f4b6a11ab325ca2d24d517825417abc70bba46180ca916602cca189af",
+      "object_sha256": "99ed1954303de3c4b9075bf8e2e02544d96801d5a22e6266aeb6d69149ccb34c",
+      "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-motion-irq-pure-c/r1/r1-application/r1__src__application__runtime__native_motion_stream.c.o",
+      "strong": [
+        "r1_motion_adjust_samples",
+        "r1_motion_calibration_body",
+        "r1_motion_calibration_bypass",
+        "r1_motion_calibration_bypassed",
+        "r1_motion_calibration_read",
+        "r1_motion_initialize_entry",
+        "r1_motion_selected_fifo_read",
+        "r1_motion_selected_provider",
+        "r1_motion_selected_provider_initialize",
+        "r1_motion_stream_close_boundary",
+        "r1_motion_thirty_sample_batch_producer",
+        "r1_native_motion_interrupt"
+      ],
+      "weak": [],
+      "undefined": [
+        "r1_device_info_kv_handle",
+        "r1_kv_class_read",
+        "r1_motion_probe_and_select_provider",
+        "r1_stream_tick_now"
+      ]
+    }
+  ],
+  "rea": {
+    "evidence_id": "ev_bf6e9c7e9aa22dcd0c55ba98b221c5ad476db0c0ab1f8e23d34844700cf1168e",
+    "subject": {
+      "name": "stock.elf",
+      "digest": {
+        "sha256": "25b4a29af80ec8edab5bd861ba9b74a6e22eab29dc3d7a809a16869e8a140f04"
+      },
+      "local_path": "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-queue-reset-c/stock.elf",
+      "format": "elf",
+      "architecture": "arm"
+    },
+    "provider": {
+      "id": "ghidra",
+      "name": "Ghidra",
+      "version": "12.1.4"
+    },
+    "analysis_profile": {
+      "provider": {
+        "id": "ghidra",
+        "name": "Ghidra",
+        "version": "12.1.4"
+      },
+      "parameters": {
+        "target_kind": "executable",
+        "target_format": "elf",
+        "architecture": "arm",
+        "available_architectures": [
+          "arm"
+        ],
+        "import_mode": "ephemeral-source-immutable",
+        "annotation_policy": "atomic-function-entry-metadata-v1",
+        "load_image_observations": "source-mappings-entry-context-v2",
+        "function_body_evidence": "complete-inclusive-ranges-v1",
+        "function_references": "complete-body-and-entry-reference-manager-v2",
+        "call_relationship_coverage": "function-body-call-coverage-v5",
+        "function_dossier_coverage": "observed-facets-and-call-relationships-v1",
+        "string_inventory_evidence": "defined-data-coverage-v1",
+        "location_resolution": "explicit-address-exact-entry-symbol-first-v3",
+        "procedure_file_offset_resolution": "address-first-unique-target-source-mapping-v2",
+        "instruction_flow_evidence": "decoded-return-pcode-v1",
+        "instruction_references": "exact-address-incoming-v1",
+        "function_boundary_observations": "ghidra-function-boundary-limitations-v3",
+        "no_return_repair": "returning-imports-decoded-return-v2",
+        "process_launch": "inspected-jvm-launch-support-v1",
+        "jump_table_evidence": "typed-case-default-blocks-v1",
+        "decompiler_jump_loads": true,
+        "loader": "auto-from-header",
+        "language_id": "auto-from-header",
+        "compiler_spec_id": "auto-default",
+        "analyzer_preset": "ghidra-default"
+      },
+      "digest": "7e46711069eea041af1b9b99e34115c13332795e5cda76e584a722f529ec70de"
+    },
+    "predicate_type": "rea.analysis",
+    "operation": "read_bytes",
+    "parameters": {
+      "address": "0x50294",
+      "length": 18
+    },
+    "raw_result": {
+      "address": "0x50294",
+      "requested_bytes": 18,
+      "returned_bytes": 18,
+      "bytes_hex": "04484068002803d0c068002800d000477047",
+      "complete": true
+    },
+    "normalized_result": {
+      "address": "0x50294",
+      "requested_bytes": 18,
+      "returned_bytes": 18,
+      "bytes_hex": "04484068002803d0c068002800d000477047",
+      "complete": true
+    },
+    "confidence": "observed",
+    "authority": "shipped-artifact",
+    "environment": null,
+    "limitations": [
+      "The session serves operations only after Ghidra reports default auto-analysis complete; incomplete analysis does not expose partial results.",
+      "The imported Program and temporary project are ephemeral and deleted on close. Annotation operations edit session database metadata; original executable bytes are never written.",
+      "Cancelling an active Ghidra request terminates its ephemeral database and discards session annotations. The selected target remains open; the next provider query imports the original artifact again.",
+      "Default-space addresses use lowercase 0x-prefixed hexadecimal; other address spaces use <percent-encoded-space>:0x<hex>.",
+      "Bytes reflect Ghidra's initialized memory, including loader fixups. Reads stop at an unmapped or uninitialized byte and report completeness explicitly.",
+      "macOS sessions require a matching executable Ghidra native decompiler; REA checks for it but does not build native components or change Gatekeeper quarantine state."
+    ],
+    "relationship_coverage": null,
+    "locations": [],
+    "evidence_links": []
+  },
+  "direct": {
+    "cases": 1216,
+    "digest": "96038dd870de3ba6d38354544a04fb5db494b3e41db87cacb1d665c8b7f51f0d",
+    "actual_C_product_tables_and_callbacks": true,
+    "limits": [
+      "Interrupt notification is void; incidental callback/dispatcher R0 excluded",
+      "Bus/IRQ boundary providers modeled; no asynchronous interrupt interleavings",
+      "No physical sensor or complete firmware proof"
+    ]
+  },
+  "negative": {
+    "lost-notification": {
+      "rejected": true,
+      "diagnostic": "Traceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-motion-irq-pure-c/verify.py\", line 60, in <module>\n    case=(kind,selected,target,result,acquire,irq,release,mutation,mask,product);left=a(*case);right=b(*case);assert left==right;digest.update(json.dumps([case,left]).encode());count+=1\n                                                                                                     ~^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-motion-irq-pure-c/verify.py\", line 55, in run\n    active=bool(selected and target);expected=(['callback']+(['acquire','irq','release'] if kind=='qma' else [])) if active else [];assert state['trace']==expected;assert word(COUNT)==(11 if kind=='qma' else 1) if active else word(COUNT)==0;assert word(CELL)==(TABLE2 if mutation and active else chosen);return state['trace'][:],word(COUNT)\n                                                                                                                                           ^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    "wrong-operation-slot": {
+      "rejected": true,
+      "diagnostic": "e(0x44444440,0x44444448));assert v.reg_read(UC_ARM_REG_BASEPRI)==mask and v.reg_read(UC_ARM_REG_PRIMASK)==1\n    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 769, in emu_start\n    raise self._hook_exception\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 363, in wrapper\n    return func(uc, *args, **kwargs)\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 1063, in __hook_code_cb\n    callback(uc, address, size, user_data)\n    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-motion-irq-pure-c/verify.py\", line 29, in code\n    assert a not in [STOP+0x9000,STOP+0xa000,STOP+0xb000,STOP+0xc000,STOP+0xd000],\"non-IRQ table callback invoked\"\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: non-IRQ table callback invoked\n"
+    },
+    "lost-qma-irq": {
+      "rejected": true,
+      "diagnostic": "Traceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-motion-irq-pure-c/verify.py\", line 60, in <module>\n    case=(kind,selected,target,result,acquire,irq,release,mutation,mask,product);left=a(*case);right=b(*case);assert left==right;digest.update(json.dumps([case,left]).encode());count+=1\n                                                                                                     ~^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-motion-irq-pure-c/verify.py\", line 55, in run\n    active=bool(selected and target);expected=(['callback']+(['acquire','irq','release'] if kind=='qma' else [])) if active else [];assert state['trace']==expected;assert word(COUNT)==(11 if kind=='qma' else 1) if active else word(COUNT)==0;assert word(CELL)==(TABLE2 if mutation and active else chosen);return state['trace'][:],word(COUNT)\n                                                                                                                                           ^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    "lost-qma-release": {
+      "rejected": true,
+      "diagnostic": "Traceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-motion-irq-pure-c/verify.py\", line 60, in <module>\n    case=(kind,selected,target,result,acquire,irq,release,mutation,mask,product);left=a(*case);right=b(*case);assert left==right;digest.update(json.dumps([case,left]).encode());count+=1\n                                                                                                     ~^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-motion-irq-pure-c/verify.py\", line 55, in run\n    active=bool(selected and target);expected=(['callback']+(['acquire','irq','release'] if kind=='qma' else [])) if active else [];assert state['trace']==expected;assert word(COUNT)==(11 if kind=='qma' else 1) if active else word(COUNT)==0;assert word(CELL)==(TABLE2 if mutation and active else chosen);return state['trace'][:],word(COUNT)\n                                                                                                                                           ^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    }
+  },
+  "audit": {
+    "changed_objects": [
+      "r1/src/application/runtime/native_motion_stream.c"
+    ],
+    "unchanged_objects": 730,
+    "modules": {
+      "r1/src/application/runtime/native_motion_stream.c": {
+        "removed_sections": [
+          ".text.r1_motion_interrupt_result"
+        ],
+        "changed_sections": [
+          ".text.r1_native_motion_interrupt"
+        ]
+      }
+    },
+    "removed_export": "r1_motion_interrupt_result",
+    "imports_unchanged": true
+  },
+  "harness_sha256": "5af63bfb6d117c1d08594c024cf6e4f768d1a6e17d7a5cce3e93918b2d1bef6d",
+  "limits": [
+    "Notification-only C ABI retires incidental dispatcher/callback R0; all repository consumers updated",
+    "Actual C product tables/callbacks, modeled bus/IRQ boundaries",
+    "No asynchronous interleavings, physical sensor or complete firmware proof"
+  ]
+}

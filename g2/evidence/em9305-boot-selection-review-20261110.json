@@ -1,0 +1,84 @@
+{
+  "date": "2026-11-10",
+  "scope": "EM9305 NVM bootloader selection and CRC-gate C revision",
+  "supersedes": "g2/evidence/em9305-bootloader-source-review-20261110.json",
+  "reference": {
+    "stock_package": "g2/blobs/official/g2-2.2.6.10/firmware_ble_em9305.bin",
+    "stock_package_sha256": "91a38f7fc05555f86181ecb22b363e3239bfcaaa2ff6171e98524ae64821eca9",
+    "stock_bootloader_record_addresses": ["0x00300000", "0x00300400"],
+    "vendor_sdk_elf_sha256": "59ac217d668251da0cc2d8d2e8597630c18122c4b9900eddb00851fbbffbad24",
+    "decoded_routines": [
+      "nvm_bootloader at 0x300000",
+      "checkCRC at 0x300458",
+      "getAllHeaderEntries at 0x3004a4",
+      "getMainFunction at 0x3004d8",
+      "getNextPageIfHeaderAddress at 0x300504",
+      "jumpToFunction at 0x300534",
+      "loadBootLoaderFunction at 0x30053c",
+      "loadCustomerApplication at 0x300570",
+      "loadCustomerBootLoader at 0x3005b4",
+      "loadEmCoreApplication at 0x3005f0",
+      "loadEmCoreFunction at 0x300620",
+      "runChecksum at 0x30064c"
+    ]
+  },
+  "source": {
+    "c_unit": "g2/src/em9305/bootloader/nvm_bootloader.c",
+    "c_unit_sha256": "0228a290dc185354f249886440e327b24c867d91804cb53d57a23aba8b8c84f1",
+    "bootloader_entry": "0x00300000",
+    "bootloader_end": "0x00300488",
+    "bootloader_bytes": 1160,
+    "bootloader_sha256": "56459067ff028a4603e800b89d152388c5cab0e9262732a4b331746aa70dba97",
+    "header_address": "0x00302000",
+    "nvm_entry_address": "0x00302028",
+    "application_address": "0x00302400",
+    "application_sha256": "c6fd8a929bb27af6292cdab6a87d753010c5975410b8d05174cad160b0017d71",
+    "source_package_records": 3,
+    "source_package_bytes": 248696,
+    "source_package_sha256": "ad2b11e3a099269a4ec038df7bf5343a7775d85363af8b6069a165e872b878f1"
+  },
+  "verification": {
+    "all_payload_source_report": "build/g2-all-selection-final-20261110/report.json",
+    "all_payload_source_report_sha256": "40d1c2b71cf380829abf49e484b31b7f9fb74262e286a4222df97ae328225b80",
+    "compiled_units": 4864,
+    "compile_failures": 0,
+    "duplicate_strong_symbols": 0,
+    "all_payload_link_report": "build/g2-all-selection-final-link-20261110/link-report.json",
+    "all_payload_link_report_sha256": "450ef4664598f050ec83ab8ea9e26d26f161e710df7a3c288793ccef67dd1711",
+    "final_payloads_linked": 7,
+    "undefined_elf_symbols": 0,
+    "external_binary_archive_used": false,
+    "host_check_inputs": ["authenticated stock four-record package", "source-produced three-record candidate package"],
+    "host_check_results": [
+      "NVM header search found 0x302000",
+      "firmware CRC passed and separate header/payload mutations were rejected",
+      "firmware option bit 8 set skipped payload verification; option zero performed it",
+      "customer application selected for PML modes 0, 0x10000, 0x20000 and 0x30000 with expected mode updates",
+      "updater, customer bootloader and EM-Core fallbacks selected with expected mode updates",
+      "reset-flag and PML CRC-state gates caused expected CRC-check execution or skip"
+    ],
+    "qemu_stock_code_differential": {
+      "stock_output": "build/g2-em9305-record-analysis/stock_select.out",
+      "source_output": "build/g2-em9305-record-analysis/source_select.out",
+      "identical_output_sha256": "b8b72724bce8fd3850048e8590c210f3bacf25ebe0eace513ff73d462a1379b2",
+      "cases": 155,
+      "selection_cases": 128,
+      "crc_gate_cases": 16,
+      "next_page_cases": 5,
+      "save_header_cases": 6,
+      "firmware_option_bit8_set_in_harness": true,
+      "reason": "QEMU ARC cannot decode the stock hardware CRC instruction; this differential covers selection and CRC gating"
+    },
+    "qemu_source_crc": {
+      "output": "build/g2-em9305-record-analysis/source_crc.out",
+      "output_sha256": "1e923fc0fd1e512022c6daa699ff60d2d719f75eb4870311277d4645f393f0a4",
+      "cases": 2,
+      "valid_package_result": "entry 0x00302000 retained; PML CRC flag cleared",
+      "one_byte_app_mutation_result": "entry rejected to 0xffffffff"
+    },
+    "stock_code_differential_run": true,
+    "hardware_boot_verified": false,
+    "bundle_byte_identical": false
+  },
+  "qualification": "The revised source bootloader compiles and links. Stock-code QEMU comparisons cover selection and CRC gating; host and QEMU runs cover source CRC data. Whole-bootloader equivalence, physical boot and byte identity remain unverified. The source package is not a release."
+}

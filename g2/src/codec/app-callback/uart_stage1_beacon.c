@@ -3,6 +3,7 @@
  * UART base against 0xa0100000, correcting the decompiler's null check.
  */
 #include <stdint.h>
+#include "uart_stage1_state.h"
 
 extern int32_t gx8002_uart_stage1_pmu_clock_rate(uint32_t selector);
 extern uint32_t gx8002_uart_stage1_udiv(uint32_t numerator, uint32_t denominator);
@@ -10,8 +11,7 @@ extern uint32_t gx8002_uart_stage1_umod(uint32_t numerator, uint32_t denominator
 
 void gx8002_uart_stage1_beacon(uint32_t baud, uint32_t configured)
 {
-    const volatile uint32_t *const base_word =
-        (const volatile uint32_t *)(uintptr_t)UINT32_C(0x20002014);
+    const volatile uint32_t *const base_word = &gx8002_uart_stage1_state.uart_base;
     volatile uint32_t *uart = (volatile uint32_t *)(uintptr_t)*base_word;
     uart[0x04 / 4] = 0;
     uart[0x10 / 4] = 3;

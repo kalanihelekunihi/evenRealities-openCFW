@@ -1,0 +1,52 @@
+{
+  "schema": 1,
+  "target": "locked GX8002 BINH A stage-1 C SPI helper placement",
+  "stock_codec_component": "g2/blobs/official/g2-2.2.6.10/firmware_codec.bin",
+  "stock_codec_component_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+  "stock_stage1_file_offset": "0x95a4",
+  "changed_source": [
+    "g2/src/codec/image-a-stage1/main_stage1_flash_reader.c",
+    "g2/src/codec/link/g2-codec-a-binh-stage1.ld",
+    "tools/build/link_g2_sources.py"
+  ],
+  "stock_identical_c_functions": [
+    {"name": "gx8002_image_a_stage1_clock_status_10000b40", "address": "0x10000b40", "bytes": 12},
+    {"name": "gx8002_image_a_stage1_wait_bus_10000b4c", "address": "0x10000b4c", "bytes": 16},
+    {"name": "gx8002_image_a_stage1_flash_write_10000b5c", "address": "0x10000b5c", "bytes": 96},
+    {"name": "gx8002_image_a_stage1_flash_transaction_10000bbc", "address": "0x10000bbc", "bytes": 96},
+    {"name": "gx8002_image_a_stage1_wait_ready_10000c1c", "address": "0x10000c1c", "bytes": 34}
+  ],
+  "stock_identical_contiguous_c_range": {
+    "address": "0x10000b40",
+    "bytes": 254,
+    "sha256": "031cbefa0922339d31cd872fffdc24737c3ce0083a7f8356ec03a647cf46c3bd"
+  },
+  "source_stage1": {
+    "bytes": 4756,
+    "sha256": "e171ad61ef3ee1cb508662b67290232f29ac1e105e31b96d864d44ca72e69518",
+    "vectors_match_stock": true,
+    "initialized_data_match_stock": true,
+    "same_offset_equal_bytes_before": 1156,
+    "same_offset_equal_bytes_after": 1470
+  },
+  "verification": {
+    "focused_source_report": "build/g2-codec-a-bus-placement-source-20261111/report.json",
+    "focused_source_report_sha256": "ad1620e567c206e9a148395126b33a387800e5075d8cd550ac08c37a573d9edf",
+    "focused_compile_units": 367,
+    "focused_compile_failures": 0,
+    "focused_duplicate_strong_symbols": 0,
+    "focused_unresolved_symbols": 0,
+    "focused_link_report": "build/g2-codec-a-ready-guard-link-20261111/link-report.json",
+    "focused_link_report_sha256": "f36a953c7deeb72fbcb0cafd4a7720521aea8eb0b1de10152837b20948385c62",
+    "full_source_report": "build/sources-r1-eat-response-pmic-all-20261111/report.json",
+    "full_source_report_sha256": "e9ff22fc8b311c42a6218e7188f27eeabf1f23ccb9ca700d4a1e89c6a868ca9a",
+    "full_g2_compiled_units": 4884,
+    "full_g2_compile_failures": 0,
+    "full_g2_duplicate_strong_symbols": 0,
+    "full_link_report": "build/g2-full-spi-placement-link-20261111/link-report.json",
+    "full_link_report_sha256": "f6b169f35de088c4eaf332bc943233813e50658173988e0e6014234f7d762d40",
+    "full_link_payloads": 7,
+    "sources_check": "4889 units, 4550 source files, 1 not built"
+  },
+  "qualification": "Five existing C-compiled stage-1 functions now occupy their stock addresses and match exact function bytes. The remaining stage-1 code, complete BINH A and FWPK, model behavior, bundle identity, and hardware startup remain unverified."
+}

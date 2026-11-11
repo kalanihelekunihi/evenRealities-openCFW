@@ -51,7 +51,7 @@ enum {
 #define OPENCFW_TRANSFER_TIMEOUT_USEC UINT32_C(1000000)
 #define OPENCFW_ERROR_LOG_MODULE UINT32_C(0x00431420)
 
-extern uint32_t opencfw_bl_mspi_blocking_transfer(uint32_t handle,
+extern uint32_t am_hal_mspi_blocking_transfer(uint32_t handle,
     const opencfw_mspi_pio_transfer_t *transfer,
     uint32_t timeout_usec);                                  /* 0x004262E0 */
 extern void opencfw_bl_status_transfer_error(uint32_t module,
@@ -89,7 +89,7 @@ uint32_t opencfw_bl_mspi_status_transfer(uint32_t instruction,
         .buffer = (uint32_t *)destination
     };
 
-    const uint32_t status = opencfw_bl_mspi_blocking_transfer(
+    const uint32_t status = am_hal_mspi_blocking_transfer(
         handle, &transfer, OPENCFW_TRANSFER_TIMEOUT_USEC);
     if (status != 0u)
         opencfw_bl_status_transfer_error(OPENCFW_ERROR_LOG_MODULE,

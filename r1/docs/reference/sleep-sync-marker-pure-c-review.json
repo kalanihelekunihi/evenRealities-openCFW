@@ -1,0 +1,141 @@
+{
+  "schema_version": 1,
+  "scope": "R1 acknowledged sleep-record header matching and synchronization marker programming in ordinary C",
+  "report": "build/sources-goal-r1-sleep-sync-c/report.json",
+  "comparison_report": "build/sources-goal-r1-sleep-record-c/report.json",
+  "audit": {
+    "compiled_units": 863,
+    "application_imports": 63,
+    "bootloader_imports": 22,
+    "unchanged_prior_nongenerated_objects": 852,
+    "changed_prior_nongenerated_objects": [
+      "r1/src/application/runtime/native_sleep_sync_status.c"
+    ],
+    "normal_object_equals_direct_and_parent_probes": true,
+    "manifest_and_source_plan_unchanged": true,
+    "new_mutable_persistent_bytes": 0,
+    "assembly_entries_replaced_with_C": 1,
+    "canonical_12_byte_context_preserved_and_executed": true,
+    "object_audit": {
+      "strong_symbol_set_unchanged": true,
+      "canonical_12_byte_context_section_flags_alignment_cold_bytes_identical": true,
+      "no_new_writable_data": true,
+      "state_owner_source_text_unchanged": true,
+      "assembly_entries_replaced_with_C": 1,
+      "no_legacy_log_const_data_dependency": true,
+      "actual_context_owner_linked_at_authenticated_address": true,
+      "manifest_unchanged": true
+    }
+  },
+  "direct": {
+    "stock_C_comparisons": 24080,
+    "native_instruction_bytes_executed": 228,
+    "actual_source_owned_context_and_memclear_execute": true,
+    "byte_row_count_wrap_and_both_live_match_fields": true,
+    "partial_read_carry_and_captured_address_write_marker": true,
+    "live_device_rows_and_error_diagnostic_reloads": true,
+    "private_frame_void_returns_APSR_and_physical_NOR_unverified": true
+  },
+  "record_event_then_sync_flash_model": {
+    "stock_C_record_event_then_sync_flash_model_comparisons": 6912,
+    "actual_C_storage_graph_and_sync_marker_owner_execute": true,
+    "flash_bytes_and_all_modeled_calls_logs_match": true,
+    "only_FAL_logging_and_notification_modeled": true
+  },
+  "compiled_defects_rejected": [
+    {
+      "defect": "wide-row-count",
+      "rejected": true,
+      "log": "build/goal-r1-sleep-sync-c/wide-row-count/test.log"
+    },
+    {
+      "defect": "wrong-row-stride",
+      "rejected": true,
+      "log": "build/goal-r1-sleep-sync-c/wrong-row-stride/test.log"
+    },
+    {
+      "defect": "loose-match-test",
+      "rejected": true,
+      "log": "build/goal-r1-sleep-sync-c/loose-match-test/test.log"
+    },
+    {
+      "defect": "live-instead-of-captured-address",
+      "rejected": true,
+      "log": "build/goal-r1-sleep-sync-c/live-instead-of-captured-address/test.log"
+    },
+    {
+      "defect": "wrong-marker",
+      "rejected": true,
+      "log": "build/goal-r1-sleep-sync-c/wrong-marker/test.log"
+    },
+    {
+      "defect": "wrong-write-width",
+      "rejected": true,
+      "log": "build/goal-r1-sleep-sync-c/wrong-write-width/test.log"
+    },
+    {
+      "defect": "stop-on-write-failure",
+      "rejected": true,
+      "log": "build/goal-r1-sleep-sync-c/stop-on-write-failure/test.log"
+    },
+    {
+      "defect": "stale-error-row-address",
+      "rejected": true,
+      "log": "build/goal-r1-sleep-sync-c/stale-error-row-address/test.log"
+    },
+    {
+      "defect": "stale-write-device",
+      "rejected": true,
+      "log": "build/goal-r1-sleep-sync-c/stale-write-device/test.log"
+    }
+  ],
+  "contract": [
+    "Null rows or zero length logs the native buffer error. Otherwise count=(length/12)&255, including quotient wrap; nonzero sub-row lengths produce no rows without that error.",
+    "Initialize24-byte header once. Capture each row address before read, reload device/read callback, and compare header words8/12 against live row words4/8 after read. Read status is ignored and partial-read header bytes carry forward.",
+    "For matches reload device/write callback and program four-byte11223344 at captured address+20, with unsigned wrap. Only a nonzero write status logs an error; continue later rows regardless.",
+    "Each error diagnostic reloads the live row address independently after logging-mode callbacks. Preserve the sole existing12-byte sleep context owner, its section flags/alignment and cold bytes."
+  ],
+  "limits": [
+    "Direct FAL/logging modeled; actual C memory clear and context owner execute. All228 native instruction bytes execute.",
+    "Full-chain fixture executes C record/event, selection/fallback, write/finalize/count/erase, CRC, memory clear and sync marker programming with the actual context owner. Only FAL/logging/notification modeled; all final flash-model bytes and ordered calls/logs match.",
+    "The bytearray flash model abstracts programming physics and does not prove NOR bit transitions, persistence or power-loss behavior.",
+    "Saved integer/FP registers, masks and caller-stack guards checked; private frames, incidental void returns, APSR, concurrency/faults excluded.",
+    "Physical flash, final application linking and boot remain unverified. Other firmware assembly remains separate work."
+  ],
+  "evidence_files": {
+    "build/sources-goal-r1-sleep-sync-c/report.json": "f298f67062c78ce49ca63d877ca786ec7b0f3a2cf4f694b868bd7fe2b0143c31",
+    "build/sources-goal-r1-sleep-record-c/report.json": "5e890426acaae4c62d29e0cb7b4cfbe7a60ac5d16f6171c7e3e70ed4cc9fd4c4",
+    "r1/src/application/runtime/native_sleep_sync_status.c": "b30f09b12954e06d3a98412ffab0431225c3f22dfb3b6c1ce2c0eba027d67b3a",
+    "r1/src/application/board/native_battery_memory.h": "e646c981681787c87d8088f663239c9006beb4e4c1827e95854093f0628528b6",
+    "r1/src/application/runtime/native_sleep_record.c": "d8e3ae935e3a080a72c7040a6a962909a2fe923d9003ee176e3c8f99c9e6c4b2",
+    "r1/src/application/runtime/native_sleep_sector_select.c": "94b40df8a13800bf317ebe50ecba6a1ed2f97526866c7ea9398f058e33542299",
+    "r1/src/application/runtime/native_sleep_sector_write.c": "0a3a17161b5d27255ede805eecb81ab3fe668e495d69fa960f6232e94852a021",
+    "r1/src/application/runtime/native_sleep_sector_finalize.c": "04cf449316a0c0e1cf233d4da7af9ccfffa67bc08c72093b120f47e4ba69e547",
+    "r1/src/sources.json": "6ea6ab6f16e97b34b73ee1fb683c7c49eb7228bf29fdbdb21f5aded6d4d13380",
+    "tools/build/source-plan.json": "eeb516e31b3310fb0718f36908977f8125723f7c5e0e86cd6744395826259a4d",
+    "build/goal-r1-sleep-sync-c/manifest-before.json": "6ea6ab6f16e97b34b73ee1fb683c7c49eb7228bf29fdbdb21f5aded6d4d13380",
+    "build/goal-r1-sleep-sync-c/source-before.c": "5427846d56721c1cb50f1360aab35a4d81e658e5cf5158433d3fb7b2ed21aef8",
+    "build/goal-r1-sleep-sync-c/state-tail.c": "564c2bedbd9eeaaf6bd67bb86ece1f575f0c6b496ff8f83357daf3c3591c326c",
+    "build/goal-r1-sleep-sync-c/audit.py": "b85d9441253a9e5d2e17f755a47422f787099a728db5fdf12aaa7780accdfeb5",
+    "build/goal-r1-sleep-sync-c/object-audit.json": "ca89ea4a57183d6c0276f44b14ffe6b2827a37056f07e83f00d9b1cfdb89b226",
+    "build/goal-r1-sleep-sync-c/record.py": "0db1afa2bdedfa81ddc241d339dcbf4f70fe88c9bd48c42223d3040e925ee393",
+    "build/goal-r1-sleep-sync-c/rea.json": "ae5c73b524dc4a7ddcc6dbfec2f2b4c593174c2a2ed1a457f4350824573a7f05",
+    "build/goal-r1-sleep-sync-c/verify.py": "7df9ee88158b8ba7df9f2df712f87e2e65e04833b0cdbfd9337b918fc068812b",
+    "build/goal-r1-sleep-sync-c/results.json": "96134f82d4d97b4fc241cc47456987a2e4db102e9cc3396011d73363acdf55c1",
+    "build/goal-r1-sleep-sync-c/verification.log": "f59388d71039ab3857ac75996c82f15058b9210d4aa13ad72e360c22de635d16",
+    "build/goal-r1-sleep-sync-c/source.o": "f490b6e234bbda1e28456c96715efda573a2e29b1d647ead14c2c32cbfdf180d",
+    "build/goal-r1-sleep-sync-c/source.elf": "90d061e94eeca141100a73e5da4568a619a0d3542f134d5949f77ed62d955e22",
+    "build/goal-r1-sleep-sync-c/make_pipeline.py": "157932f02ee0b7df99592c69308714359664008fa6a3150b3b2df8ac3525b6a5",
+    "build/goal-r1-sleep-sync-c/pipeline.py": "68562c9a1793f4f8c2a8c256138e3ce076ca0cc8df221da5c892f9e1270a12d7",
+    "build/goal-r1-sleep-sync-c/pipeline/results.json": "58a4fbfad0859c00d2e73d3fff38a1447d9a153c8195fe545264bb59dff298b1",
+    "build/goal-r1-sleep-sync-c/pipeline.log": "3988804e13bc9642608daeafa638a0a411b78d2aec000f7a6d607786318aaa78",
+    "build/goal-r1-sleep-sync-c/pipeline/sync.o": "f490b6e234bbda1e28456c96715efda573a2e29b1d647ead14c2c32cbfdf180d",
+    "build/goal-r1-sleep-sync-c/pipeline/source.elf": "989bba8060cffafa1ae685a5da970003c599a2750e45308ad3770d8039229cf2",
+    "build/goal-r1-sleep-sync-c/negative.py": "38414cc86d26b09c778cea33a78eeefed5831923e5243dbb2f5fd8c1e394a733",
+    "build/goal-r1-sleep-sync-c/negative-verify.py": "dbb17722066413b5b6a371558859ab2b2de90afb513feaeda8b8fd46bdfc6f26",
+    "build/goal-r1-sleep-sync-c/negative.json": "7554a5b7030e4cad3e752310e779e17a49bb7faf361a169e77df5cc46b718c0b",
+    "build/goal-r1-sleep-sync-c/negative.log": "596db3a73f352eb2a0171e383b6ae1e2b7271d0e821542d0649ca8596390bf3c",
+    "build/goal-r1-sleep-sync-c/build.log": "80731642f84e973432814624b074754673e59553180bc01e28c054c04695441f",
+    "build/goal-r1-sleep-sync-c/sources-check.log": "c56719af1d0b2d08393a257d3e2022d40896a70239925ecc83fc942850eca238"
+  }
+}

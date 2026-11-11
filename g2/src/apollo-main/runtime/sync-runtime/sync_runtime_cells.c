@@ -7,8 +7,8 @@ void (*g2_uart_sync_callback_cell)(void)
 void *g2_uart_sync_semaphore_handle
     __attribute__((section(".g2_ram_2007461c"), aligned(4)));
 void *g2_uart_sync_mutex __attribute__((section(".g2_ram_20074620"), aligned(4)));
-void *g2_uart_sync_module __attribute__((section(".g2_ram_200749c4"), aligned(4)));
-void *g2_uart_sync_semaphore __attribute__((section(".g2_ram_200749d4"), aligned(4)));
+/* g2_uart_sync_module: same stock cell as another object; now an alias there (see sim-test-report Fix 31). */
+/* g2_uart_sync_semaphore: same stock cell as another object; now an alias there (see sim-test-report Fix 31). */
 volatile uint8_t g2_uart_sync_started
     __attribute__((section(".g2_ram_20074fc9")));
 volatile uint8_t g2_uart_sync_write_error

@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "report": "build/sources-goal-r1-send-registration-c/report.json",
+  "verification": {
+    "stock_C_comparisons": 1620,
+    "native_instruction_bytes_covered": 16,
+    "callback_slot": "0x20006c20",
+    "caller_saved_registers_excluded": true,
+    "source_does_not_execute_stock": true
+  },
+  "audit": {
+    "unchanged_nongenerated_objects": 841,
+    "changed_nongenerated_objects": [
+      "r1/src/application/board/native_protocol_send_registration.c"
+    ],
+    "changed_generated_objects": [
+      "{gen}/r1_startup_vectors.S",
+      "{gen}/r1_uecc.c"
+    ],
+    "compiled_units": 852,
+    "application_imports": 66,
+    "bootloader_imports": 22,
+    "import_sets_unchanged": true
+  },
+  "contract": "Null callback returns ffffffff and leaves old slot untouched; any nonzero full-word callback is stored exactly and returns0. Single existing volatile slot reused; no new state.",
+  "assembly_removed": "Fixed r0/r1/r2/r3 bindings and empty constraints removed. Existing C port initializer ignores return, reads no scratch registers. Standard C ABI does not promise caller-saved register values.",
+  "limits": [
+    "Stock read and replay establish bounded registration behavior, not callback validity, radio delivery or final boot.",
+    "Every16 native instruction bytes execute; source execution into stock code is rejected. Slot guards, return, callee-saved registers, SP and interrupt masks checked. Incidental caller-saved values/private stack layout excluded.",
+    "Flash read/write bindings are retained because partial-read consumers can observe stale stack bytes; their coupled ownership must be resolved before removal.",
+    "852 translation units compile/compose;66 application and22 bootloader imports remain."
+  ],
+  "evidence_files": {
+    "build/sources-goal-r1-send-registration-c/report.json": "575d31f63cdc3cd6f97c45c8260c2c0ea8e43db3c259f806cb622da4e76c5580",
+    "build/sources-goal-r1-eus-range-c/report.json": "41c95be91c6a00fc9ca3750338ebfea6db15d995d9eb17ec17b8d81ff5c602f3",
+    "r1/src/application/board/native_protocol_send_registration.c": "eede5ccc2223f47972a3e9af9119e8e986ea0e0a4df5793d991539b18e204cb1",
+    "r1/src/application/board/native_protocol_port.c": "936925efa8bb6af9ecbeb0075dffbbd13d5990ccb95a283ffcac167197fa0712",
+    "build/goal-r1-send-registration-c/rea.json": "591486a51094c9b80de6a8e8bcfe88c644026852faf34786f0aa61c1251f09a4",
+    "build/goal-r1-send-registration-c/verify.py": "e12966888bd03f5328f77c018064aa7672f12e9938e1a715f1b5aa6b9471c191",
+    "build/goal-r1-send-registration-c/verification.json": "fcc808eec52e309b4521e77abaf935f81a30da0c4dec2d3d75240f19be1ebc05",
+    "build/goal-r1-send-registration-c/verification.log": "d7190a1dd57895f0ea45403330ec1be6d436e3d09757f9ccdadd7640e9a87a24",
+    "build/goal-r1-send-registration-c/r1-check.log": "ff00837ff85e19cf04a893c77e51ce602c362675651960cf956f13903b124dc6"
+  }
+}

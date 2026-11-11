@@ -1,6 +1,17 @@
+/* Stock-RAM literals rewritten to named objects (sim-test wave 2026-10-26,
+ * .waves/sim-fix/apply.py): g2ref_X is the linker symbol X. */
+#include <stdint.h>
+extern unsigned char g2ref_g2_stock_ram_20000338[] __asm__("g2_stock_ram_20000338");
+extern unsigned char g2ref_g2_stock_ram_20000630[] __asm__("g2_stock_ram_20000630");
+extern unsigned char g2ref_g2_stock_ram_200007a0[] __asm__("g2_stock_ram_200007a0");
+extern unsigned char g2ref_g2_stock_ram_20000c20[] __asm__("g2_stock_ram_20000c20");
+extern unsigned char g2ref_g2_stock_ram_2013be70[] __asm__("g2_stock_ram_2013be70");
+extern unsigned char g2ref_g2_stock_ram_20279670[] __asm__("g2_stock_ram_20279670");
+extern unsigned char g2ref_g2_stock_ram_20378d98[] __asm__("g2_stock_ram_20378d98");
 /* Native LV heap wrappers and pool accounting; no executable data retained. */
 #include <stdint.h>
-extern uint8_t audio_uart_lv_heap_pool[],audio_uart_lv_static_slot[];
+extern uint8_t audio_uart_lv_heap_pool[] __asm__("g2_stock_ram_20000338"); /* sim15: pool = g2_stock_ram_20000338 */
+extern uint8_t audio_uart_lv_static_slot[];
 extern int32_t xQueueSemaphoreTake(void *,uint32_t);
 extern int32_t audio_uart_queue_send(void *,const void *,uint32_t,uint32_t);
 extern void *g2_file_pool_allocate(void *,uint32_t);
@@ -50,23 +61,23 @@ void audio_uart_lv_pool_initialize_48413c(void *cell,void *memory,uint32_t bytes
     volatile uint32_t *pool=cell;
     pool[1]=(uint32_t)(uintptr_t)g2_tlsf_create_with_pool_4d06ec(memory,bytes);
     if(pool[1]==0u) {
-        g2_file_heap_error_log((const char *)(uintptr_t)0x75165cu);
-        for(;;)__asm__ volatile("" ::: "memory");
+        g2_file_heap_error_log("TLSF memory pool creation failed!\n" /* stock 0x75165c */);
+        for(;;){ }
     }
     pool[0]=(uint32_t)(uintptr_t)audio_uart_mutex_dynamic_create(1u);
     if(pool[0]==0u) {
-        g2_file_heap_error_log((const char *)(uintptr_t)0x75d650u);
-        for(;;)__asm__ volatile("" ::: "memory");
+        g2_file_heap_error_log("TLSF mutex creation failed!\n" /* stock 0x75d650 */);
+        for(;;){ }
     }
     pool[2]=0u;pool[3]=0u;pool[4]=bytes;pool[5]=(uint32_t)(uintptr_t)memory;
 }
 void audio_uart_heap_initialize_4842e6(void) {
-    audio_uart_lv_pool_initialize_48413c((void *)(uintptr_t)0x20000338u,(void *)(uintptr_t)0x20279670u,0x2d000u);
-    audio_uart_lv_pool_initialize_48413c((void *)(uintptr_t)0x20000354u,(void *)(uintptr_t)0x2013be70u,0xcd000u);
-    audio_uart_lv_pool_initialize_48413c((void *)(uintptr_t)0x20000370u,(void *)(uintptr_t)0x20378d9cu,0x400u);
+    audio_uart_lv_pool_initialize_48413c((void *)(uintptr_t)((uint32_t)(uintptr_t)g2ref_g2_stock_ram_20000338),(void *)(uintptr_t)((uint32_t)(uintptr_t)g2ref_g2_stock_ram_20279670),0x2d000u);
+    audio_uart_lv_pool_initialize_48413c((void *)(uintptr_t)((uint32_t)(uintptr_t)g2ref_g2_stock_ram_20000338+0x1cu),(void *)(uintptr_t)((uint32_t)(uintptr_t)g2ref_g2_stock_ram_2013be70),0xcd000u);
+    audio_uart_lv_pool_initialize_48413c((void *)(uintptr_t)((uint32_t)(uintptr_t)g2ref_g2_stock_ram_20000338+0x38u),(void *)(uintptr_t)((uint32_t)(uintptr_t)g2ref_g2_stock_ram_20378d98+0x4u),0x400u);
     audio_uart_heap_memory_configure_4840c8();
-    *(volatile uint8_t *)(uintptr_t)0x2000036cu=0u;
-    *(volatile uint8_t *)(uintptr_t)0x20000388u=0u;
+    *(volatile uint8_t *)(uintptr_t)((uint32_t)(uintptr_t)g2ref_g2_stock_ram_20000338+0x34u)=0u;
+    *(volatile uint8_t *)(uintptr_t)((uint32_t)(uintptr_t)g2ref_g2_stock_ram_20000338+0x50u)=0u;
 }
 
 /* TLSF control_construct 0x4D0524, tlsf_create 0x4D06B4, block_set_free
@@ -82,8 +93,9 @@ extern uint32_t audio_uart_mpu_enable_4d44ec(uint32_t,uint32_t);
 extern void audio_uart_checksum_copy(void *,const void *,uint32_t);
 extern void audio_ble_privacy_cache_maintenance(const void *,uint8_t);
 /* Authenticated non-executable descriptor words at789fec/774bc4/774bdc. */
-static const uint32_t secondary[6]={6u,0x2013be70u,0x10100u,0x20208e6fu,0u,1u};
-static const uint32_t small[6]={7u,0x20378d9cu,0x10100u,0x2037919bu,0u,1u};
+/* Fix 43: raw stock bases -> owning objects (limit = base + size - 1). */
+static const uint32_t secondary[6]={6u,(uint32_t)(uintptr_t)(g2ref_g2_stock_ram_2013be70+0x0u),0x10100u,(uint32_t)(uintptr_t)(g2ref_g2_stock_ram_2013be70+0xccfffu),0u,1u};
+static const uint32_t small[6]={7u,(uint32_t)(uintptr_t)(g2ref_g2_stock_ram_20378d98+0x4u),0x10100u,(uint32_t)(uintptr_t)(g2ref_g2_stock_ram_20378d98+0x403u),0u,1u};
 void audio_uart_heap_memory_configure_4840c8(void) {
     uint32_t attributes[3];
     uint32_t secondary_copy[6],small_copy[6];
@@ -94,10 +106,10 @@ void audio_uart_heap_memory_configure_4840c8(void) {
     (void)audio_uart_mpu_region_4d4596(secondary_copy,1u);
     audio_uart_checksum_copy(small_copy,small,24u);
     (void)audio_uart_mpu_region_4d4596(small_copy,1u);
-    (void)audio_uart_mpu_region_4d4596((const void *)(uintptr_t)0x200007bcu,1u);
-    (void)audio_uart_mpu_region_4d4596((const void *)(uintptr_t)0x200007d4u,1u);
-    (void)audio_uart_mpu_region_4d4596((const void *)(uintptr_t)0x20000630u,1u);
-    (void)audio_uart_mpu_region_4d4596((const void *)(uintptr_t)0x20000c20u,1u);
+    (void)audio_uart_mpu_region_4d4596((const void *)(uintptr_t)((uint32_t)(uintptr_t)g2ref_g2_stock_ram_200007a0+0x1cu),1u);
+    (void)audio_uart_mpu_region_4d4596((const void *)(uintptr_t)((uint32_t)(uintptr_t)g2ref_g2_stock_ram_200007a0+0x34u),1u);
+    (void)audio_uart_mpu_region_4d4596((const void *)(uintptr_t)((uint32_t)(uintptr_t)g2ref_g2_stock_ram_20000630),1u);
+    (void)audio_uart_mpu_region_4d4596((const void *)(uintptr_t)((uint32_t)(uintptr_t)g2ref_g2_stock_ram_20000c20),1u);
     audio_ble_privacy_cache_maintenance(0,1u);
     (void)audio_uart_mpu_enable_4d44ec(1u,1u);
 }

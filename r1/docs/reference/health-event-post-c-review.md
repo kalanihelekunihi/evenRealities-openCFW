@@ -1,0 +1,13 @@
+# R1 health event-post C review
+
+Nine stock entry points now have C implementations: four module event wrappers, typed acknowledgement registration/removal adapters, payload copying, response-header sending and the sync-field getter. The existing header-sender assembly was replaced in place. The field at 0x20006824 has one four-byte owner; stock decompression confirms its zero initializer.
+
+The wrappers register acknowledgement state before sending. Registration failure frees the context; send failure removes the record and frees the context. Successful sends transfer context ownership. Empty payloads take the flag-response path. Copying preserves overlap behavior, the original copy length and the stock 16-bit allocation-length conversion. The response header preserves opcode/sequence truncation and the backend's inverted success convention.
+
+The normal Clang build compiles 743 units with no compile failures or duplicate strong symbols. Relocatable composition has 141 application and 34 bootloader imports. Compared with the previous packet-flush report, 741 prior objects are identical; only the encoder object changes, and its other three assembly function sections retain their bytes.
+
+The stock/C replay passes 956 cases covering null/empty payloads, registration/send/allocation failures, context ownership, overlapping buffers, header fields, invalid handles and sync values. Six compiled defect controls fail the comparisons. The actual phone-handle accessor and flag helper execute; acknowledgement registry, transport backend and allocation remain modeled boundaries. REA independently confirms the eight-byte acknowledgement template at 0x9a444.
+
+See [machine-readable evidence](health-event-post-c-review.json), [REA bytes](health-event-post-rea-review.json) and [stock initialization](health-sync-field-initialization.json). These results establish the tested contracts, not a complete firmware link or physical delivery. Registry core functions at 0x83b20 and 0x83a00 were modeled in this initial review; the subsequent [registry C review](ack-registry-c-review.md) implements them and executes both caller integrations. An additional 870 stock/C integration cases execute all four packet flushes through the C wrappers, typed adapters, copy helper and header sender (350 sends reach the modeled backend). They compare packet/copy bytes, context ownership, registry and transport calls, builder reset, allocation failures and preserved CPU state. The registry core remains modeled.
+
+The R1-specific manifest check passes (743 units, 547 source files). The repository-wide check currently flags concurrent G2 files absent from its manifest; those files were preserved.

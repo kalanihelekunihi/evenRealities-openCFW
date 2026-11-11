@@ -20,14 +20,9 @@ static uint32_t r8(uintptr_t a){return *(volatile uint8_t *)a;}
 static void w32(uintptr_t a,uint32_t v){*(volatile uint32_t *)a=v;}
 static void w16(uintptr_t a,uint32_t v){*(volatile uint16_t *)a=(uint16_t)v;}
 static void w8(uintptr_t a,uint32_t v){*(volatile uint8_t *)a=(uint8_t)v;}
-#if defined(OPENCFW_EM9305_HOST_FIXTURE)
-/* Test-only small-positive branch model, not an ARC DSP equivalence claim. */
+/* Stock MPYWHL: low word of a 32 x 16 product, b[15:0] sign-extended. */
 static uint32_t native_mpywhl(uint32_t a,uint32_t b)
-{return (uint32_t)(a*(uint16_t)b);}
-#else
-static uint32_t native_mpywhl(uint32_t a,uint32_t b)
-{uint32_t out;__asm__ volatile("mpywhl %0,%1,%2":"=r"(out):"r"(a),"r"(b):"r58","r59","memory");return out;}
-#endif
+{return a*(uint32_t)(int32_t)(int16_t)b;}
 
 uint32_t opencfw_em9305_associated_cycle_callback_32b9a4(uintptr_t object)
 {

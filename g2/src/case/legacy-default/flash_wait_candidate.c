@@ -16,3 +16,5 @@ uint32_t case_binary_5e_wait(uint32_t timeout)
     do {elapsed=case_tick_word2()-start;} while(elapsed<timeout);
     return elapsed;
 }
+/* Dedup (0x08004958): case_init_wait (was startup/owned_lower_aliases_candidate.c). */
+void case_init_wait(uint32_t ticks) __attribute__((alias("case_binary_5e_wait")));

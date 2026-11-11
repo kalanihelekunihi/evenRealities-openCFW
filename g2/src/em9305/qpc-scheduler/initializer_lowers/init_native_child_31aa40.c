@@ -1,32 +1,13 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_31aa40\n"
-".type opencfw_em9305_child_31aa40,@function\n"
-"opencfw_em9305_child_31aa40:\n"
-"L31aa40:\n"
-"mov_s r1,0x805a98\n"
-"L31aa46:\n"
-"breq.d.nt r0,0x1c,L31aa58\n"
-"L31aa4a:\n"
-"mov_s r2,1\n"
-"L31aa4c:\n"
-"brne.nt r0,0x1b,L31aa60\n"
-"L31aa50:\n"
-"ldb_s r0,[r1,0]\n"
-"L31aa52:\n"
-"bbit0.nt r0,0x2,L31aa5e\n"
-"L31aa56:\n"
-"b_s L31aa60\n"
-"L31aa58:\n"
-"ldb_s r0,[r1,0]\n"
-"L31aa5a:\n"
-"bbit1.nt r0,0x1,L31aa60\n"
-"L31aa5e:\n"
-"mov_s r2,0\n"
-"L31aa60:\n"
-"j_s.d [blink]\n"
-"L31aa62:\n"
-"mov_s r0,r2\n"
-".size opencfw_em9305_child_31aa40,.-opencfw_em9305_child_31aa40\n"
-);
+#include <stdint.h>
+
+/* Native 0x31aa40..0x31aa64: feature gate for opcodes 0x1b/0x1c; they are
+ * allowed only when flag bit 2 (0x1b) or bit 1 (0x1c) of 0x805a98 is set,
+ * every other opcode is allowed. */
+uint32_t opencfw_em9305_child_31aa40(uint32_t opcode)
+{
+    if (opcode == 0x1cu)
+        return (*(volatile uint8_t *)(uintptr_t)0x805a98u >> 1) & 1u;
+    if (opcode == 0x1bu)
+        return (*(volatile uint8_t *)(uintptr_t)0x805a98u >> 2) & 1u;
+    return 1u;
+}

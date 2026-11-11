@@ -1,0 +1,154 @@
+{
+  "schema_version": 1,
+  "scope": "R1 retained crash-record initialization in ordinary C with duplicate bridge consolidation",
+  "report": "build/sources-goal-r1-crash-initialize-reviewed-c/report.json",
+  "comparison_report": "build/sources-goal-r1-hour-index-reviewed-c/report.json",
+  "audit": {
+    "compiled_units": 862,
+    "application_imports": 63,
+    "bootloader_imports": 22,
+    "unchanged_prior_nongenerated_objects": 851,
+    "changed_prior_nongenerated_objects": [
+      "r1/src/application/runtime/native_crash_initialize.c"
+    ],
+    "removed_unlinked_source": "r1/src/application/runtime/native_crash_initialize_bridge.c",
+    "normal_object_equals_direct_and_pipeline_probes": true,
+    "manifest_change": "remove only the superseded unlinked duplicate bridge unit",
+    "source_plan_unchanged": true,
+    "new_mutable_persistent_bytes": 0,
+    "existing_participating_object_count_unchanged": true,
+    "canonical_initializer_is_C": true,
+    "object_audit": {
+      "caller_return_declaration_corrected_with_identical_object": true,
+      "canonical_initializer_is_C": true,
+      "private_initialize_body_retired": true,
+      "unlinked_duplicate_bridge_and_exact_manifest_unit_removed": true,
+      "status_getter_section_bytes_and_normalized_relocations_identical": true,
+      "canonical_time_state_and_CRC_signatures_used": true,
+      "no_new_writable_state": true,
+      "existing_linked_object_count_unchanged": true,
+      "retained_record_966_bytes_and_distinct_736_896_contracts_preserved": true
+    }
+  },
+  "direct": {
+    "stock_C_comparisons": 6048,
+    "native_instruction_bytes_executed": 104,
+    "actual_CRC_memcpy_retained_context_and_time_state_execute": true,
+    "exact_966_byte_record_and_live_snapshot_arguments_match": true,
+    "partial_length_writes_payload_admission_and_context_capture": true,
+    "private_frame_APSR_and_physical_retention_unverified": true
+  },
+  "actual_initializer_snapshot_chain": {
+    "stock_C_full_initializer_snapshot_CRC_comparisons": 216,
+    "actual_payload_getter_736_snapshot_builder_caches_hourly_query_CRC_and_state_owners": true,
+    "retained_payload_copy_region_unchanged_for_actual_736_getter": true,
+    "only_backend_timestamp_and_unreached_logging_modeled": true
+  },
+  "compiled_defects_rejected": [
+    {
+      "defect": "wrong-magic",
+      "rejected": true,
+      "log": "build/goal-r1-crash-initialize-c/wrong-magic/test.log"
+    },
+    {
+      "defect": "wide-status-mask",
+      "rejected": true,
+      "log": "build/goal-r1-crash-initialize-c/wide-status-mask/test.log"
+    },
+    {
+      "defect": "wrong-payload-admission",
+      "rejected": true,
+      "log": "build/goal-r1-crash-initialize-c/wrong-payload-admission/test.log"
+    },
+    {
+      "defect": "short-payload-copy",
+      "rejected": true,
+      "log": "build/goal-r1-crash-initialize-c/short-payload-copy/test.log"
+    },
+    {
+      "defect": "wrong-tail-marker-offset",
+      "rejected": true,
+      "log": "build/goal-r1-crash-initialize-c/wrong-tail-marker-offset/test.log"
+    },
+    {
+      "defect": "changed-snapshot-timestamp",
+      "rejected": true,
+      "log": "build/goal-r1-crash-initialize-c/changed-snapshot-timestamp/test.log"
+    },
+    {
+      "defect": "signed-snapshot-offset",
+      "rejected": true,
+      "log": "build/goal-r1-crash-initialize-c/signed-snapshot-offset/test.log"
+    },
+    {
+      "defect": "wide-CRC-span",
+      "rejected": true,
+      "log": "build/goal-r1-crash-initialize-c/wide-CRC-span/test.log"
+    },
+    {
+      "defect": "wrong-CRC-store",
+      "rejected": true,
+      "log": "build/goal-r1-crash-initialize-c/wrong-CRC-store/test.log"
+    },
+    {
+      "defect": "reload-captured-record-base",
+      "rejected": true,
+      "log": "build/goal-r1-crash-initialize-c/reload-captured-record-base/test.log"
+    }
+  ],
+  "contract": [
+    "Capture retained record base once from existing reset context. Write magic, current offset halfword and timestamp; update only status bit0 using the cached time-state byte.",
+    "Initialize a private halfword length0 and query payload. Copy896 bytes plus tail magic only for nonnull payload and full reported length896. Preserve partial halfword output behavior.",
+    "Reload snapshot timestamp/offset from the captured record after getter/copy; invoke existing snapshot builder at record+912, then compute Modbus CRC over964 bytes and store/return the checksum at964.",
+    "Canonical cached-time and CRC prototypes are used. The known retained-log caller has the correct uint32 result declaration and explicitly ignores it; its object remains identical.",
+    "Retire the private initialize-body helper and remove the explicitly unlinked duplicate bridge/file/manifest unit. No linked provider is removed."
+  ],
+  "limits": [
+    "Direct clock/getter/snapshot boundaries modeled; actual copy, CRC, reset-context and cached-time-state owners execute. All104 native instruction bytes execute.",
+    "Full-chain fixture executes actual offset/status access, payload getter/owner, snapshot builder, cache accessors, hourly query, copy/CRC and context owners. Backend timestamp and unreached logging are modeled.",
+    "The actual getter reports736 bytes and does not enter the distinct896-byte copy branch. Its producer lifecycle remains unresolved; no896-byte payload is invented or imported.",
+    "The snapshot builder still has its separate assembly frame adapter; this stage removes the initializer adapter only.",
+    "Saved integer/FP registers, masks and caller/record/blob guards checked; private query-frame addresses, caller-clobbered registers, APSR and concurrency/faults excluded.",
+    "Physical retention across reset, final application linking and boot remain unverified. Relocatable composition does not establish a bootable image."
+  ],
+  "evidence_files": {
+    "build/sources-goal-r1-crash-initialize-reviewed-c/report.json": "b5fc472ba1ec22d5f7eeff036f2f2dc61d3e775e9ceaa403e6669818231464c2",
+    "build/sources-goal-r1-hour-index-reviewed-c/report.json": "5de823c68188d75f26023854f4a55e6518b8ebd8a05aef215757813879b8fd83",
+    "r1/src/application/runtime/native_crash_initialize.c": "52cfd7b1e17b43544879cf2a1029bcb15fc7c928d5ebc3b78076080baad369e8",
+    "r1/src/application/runtime/native_retained_log.c": "4bdc422115ad416ea92fd814f696638d1762940f75fd276d1aa4eb56db542110",
+    "r1/src/application/board/native_battery_memory.h": "e646c981681787c87d8088f663239c9006beb4e4c1827e95854093f0628528b6",
+    "r1/src/include/r1_stock_checksums.h": "af730ecb8d2e2cc5656016b269678e7f1ac6c7e48fe32401fdfb9b7206886ef9",
+    "r1/src/vendor/time_calendar/time_calendar.h": "6682b586810e47e41053163bb03f0a5acd8005721ab7bcbb70442ce4da78c59f",
+    "r1/src/application/runtime/native_crash_snapshot.c": "eb24387edcb2780c61104a74ec7ab3873af9a1624516ed19ae4eb45eef6f4194",
+    "r1/src/application/runtime/native_crash_payload.c": "7ab0879f97c375157f34233caee9f97ad7ee89430289728112e1d50e954e2dec",
+    "r1/src/application/runtime/native_reset_retained.c": "7ff1c3dbb15479c5cab1681cd9601788a0dddf457ba70e7ee730a52189227ae5",
+    "r1/src/sources.json": "f28c024dc0cd0a3b3a18849dae57615da4716e182026d3a75c1591023b0cf445",
+    "tools/build/source-plan.json": "eeb516e31b3310fb0718f36908977f8125723f7c5e0e86cd6744395826259a4d",
+    "build/goal-r1-crash-initialize-c/manifest-before.json": "6ea6ab6f16e97b34b73ee1fb683c7c49eb7228bf29fdbdb21f5aded6d4d13380",
+    "build/goal-r1-crash-initialize-c/source-before.c": "4fce8da76104901b0df8ef533a4035afeef9282974dfa45366212328f29966d7",
+    "build/goal-r1-crash-initialize-c/bridge-before.c": "39ab702da0b7399687017fdb0b6f5b8eb997320ec03cc26e0d480c1b98e4c8ae",
+    "build/goal-r1-crash-initialize-c/caller-before.c": "b9fd54945ad16e6e04743c2753f1c14b1019c63201241428d88e3c1e613562ed",
+    "build/goal-r1-crash-initialize-c/audit.py": "861e9342a89a872c516d1d6626e5f054b57d3f468e066a7014c6e699a28909e0",
+    "build/goal-r1-crash-initialize-c/object-audit.json": "b9f9922897af840e7b36cf7ed940e8204ee58f4a2d2387c7f442b7e05e2f7d5d",
+    "build/goal-r1-crash-initialize-c/record.py": "07c8c0af90d7240dba50cb86cc18655707144977ef40df3d11af7ae98af13bfa",
+    "build/goal-r1-crash-initialize-c/rea.json": "59e3c70ceacad9f73696c18e5d73cf6a693b095b5d270fbfe9deb13f0f44e449",
+    "build/goal-r1-crash-initialize-c/verify.py": "d58c35a05b88e8a19dff1ad6ffb3aaf84aeeeadc7f4a6a58d365a23cff674a0b",
+    "build/goal-r1-crash-initialize-c/results.json": "17c369698a3cb2a6d43237a5d82b096141f933b259deb7576b1bedf3bb54ee00",
+    "build/goal-r1-crash-initialize-c/verification.log": "0194576d4d352ae2b1e8c5cf9fb4730932f0472b6d4c59461c7b99603b15ae0c",
+    "build/goal-r1-crash-initialize-c/source.o": "f07f53f2270e03fca4b97fb1808f5c19cfffdf356f280e9b7bfe3e6a5c496bcd",
+    "build/goal-r1-crash-initialize-c/source.elf": "cce93eaabf4ac1b2970a9b902fbe2fc815104ae4aff4aebbedb6bfcee999f353",
+    "build/goal-r1-crash-initialize-c/make_pipeline.py": "39af2846f2859e77a8e13989c1a144836c6a9403bc4e52bc16c42aaf2bdf46cd",
+    "build/goal-r1-crash-initialize-c/pipeline.py": "fd6766fb774cd19b3ae56dbc05d1c0323a777aabd9be1e6686ab857f267964a1",
+    "build/goal-r1-crash-initialize-c/pipeline/link.ld": "df4b8423bb4b99737f8e563e5f7a136141032526d9bd9974a10be94d4239c0fc",
+    "build/goal-r1-crash-initialize-c/pipeline/results.json": "fd75a2f1833c34d5620a57caa689077076ab6d2776f0554fc65c974d07171798",
+    "build/goal-r1-crash-initialize-c/pipeline.log": "a8bfc4f8cf19133df7d260ee6e16cec2485966f3721487a1da433ab2267b8bb7",
+    "build/goal-r1-crash-initialize-c/pipeline/source.o": "f07f53f2270e03fca4b97fb1808f5c19cfffdf356f280e9b7bfe3e6a5c496bcd",
+    "build/goal-r1-crash-initialize-c/pipeline/source.elf": "fdb0bd81504c5f51fd4ac7006cd1ae1d768de3ee344d27fa7f5ce407ed29d778",
+    "build/goal-r1-crash-initialize-c/negative.py": "3c2002696b67da2e9fb5e13468cb7a9d94f7a711dfda9dec2aa67cc890a5ea55",
+    "build/goal-r1-crash-initialize-c/negative-verify.py": "813a1d9b3c46895739a515ddde9c629f436c9ba59641e6cc15cdac7aba863efc",
+    "build/goal-r1-crash-initialize-c/negative.json": "96d79c8b1f85507dd729918f3071b1630148b8ae38855ab4039e64b6813775fa",
+    "build/goal-r1-crash-initialize-c/negative.log": "491bc31be0c627596d75ea957544758daa44488a3dc2d0bd4007f1716a533445",
+    "build/goal-r1-crash-initialize-c/build.log": "e1d82475f2f238452309080724ba811d73e7b3d9976c5f4116001350799570b7",
+    "build/goal-r1-crash-initialize-c/sources-check.log": "b6ab468f43815a75634eab2762e209dbee8ab94c4cc3d601fded4210b6833f2a"
+  }
+}

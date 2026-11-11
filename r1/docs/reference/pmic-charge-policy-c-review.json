@@ -1,0 +1,86 @@
+{
+  "report": "build/sources-goal-r1-pmic-charge-policy-final-c/report.json",
+  "units": 816,
+  "application_imports": 71,
+  "added_imports": [
+    "r1_st25dvxxkc_bounded_mailbox_receive"
+  ],
+  "removed_imports": [],
+  "verification": {
+    "policy_pairs": 1000,
+    "temperature_mutation_pairs": 528,
+    "seeded_pairs": 512,
+    "timer_adapter_pairs": 18
+  },
+  "actual_cancellation": {
+    "actual_cancellation_pairs": 36
+  },
+  "compiled_defects": [
+    {
+      "defect": "wrong-cancel-exception",
+      "rejected": true
+    },
+    {
+      "defect": "reject-state-two",
+      "rejected": true
+    },
+    {
+      "defect": "wrong-thermal-threshold",
+      "rejected": true
+    },
+    {
+      "defect": "wrong-low-threshold",
+      "rejected": true
+    },
+    {
+      "defect": "wrong-temperature-scale",
+      "rejected": true
+    },
+    {
+      "defect": "cache-mailbox-temperature",
+      "rejected": true
+    },
+    {
+      "defect": "missing-cache-publication",
+      "rejected": true
+    },
+    {
+      "defect": "wrong-timer-flag",
+      "rejected": true
+    },
+    {
+      "defect": "publish-after-ladder",
+      "rejected": true
+    }
+  ],
+  "prior_objects_identical": 813,
+  "generated_object_hash_changes": [
+    "{gen}/r1_startup_vectors.S",
+    "{gen}/r1_uecc.c"
+  ],
+  "rea_evidence_id": "ev_ed511d86d86903046cbfddf0c7467ff77f4a040c4734771bc96fbbcb4ce7a41b",
+  "evidence_files": {
+    "build/goal-r1-pmic-charge-policy-c/verify.py": "3d7e49a97987b1377ed4895d0ed6654724e72b0194ad8ca85a1411f89d165982",
+    "build/goal-r1-pmic-charge-policy-c/verification.json": "b528661bd882653f08a28a2df4c15b76834db9d8de2a5af1aba2553558693014",
+    "build/goal-r1-pmic-charge-policy-c/verify-final.log": "224cf0221a8edbc1182100146ae0657af31a439a7f24b7c20bb69ae9b8e30694",
+    "build/goal-r1-pmic-charge-policy-c/defects.py": "7f01d50d44a26e41b55350ce95fe422c89ed19ab91305e43063f317b6586b48f",
+    "build/goal-r1-pmic-charge-policy-c/defects.json": "ccda16b852b9757f186a4f67e95976e14640debed6f0cbd49d292d687f3b993a",
+    "build/goal-r1-pmic-charge-policy-c/cancellation.py": "c51fefa4341a04eb0d1814190862a0aeb72c4a4c56fcd428da972fdcc416dbf2",
+    "build/goal-r1-pmic-charge-policy-c/cancellation.log": "33b3748f298400ed0aee162f9faf9ae4e247419c409a8e601e508cd991ef6c03",
+    "build/goal-r1-pmic-charge-policy-c/cancellation/verification.json": "132462f233c0b49b871f6185dbd85548380e3e220e0c10020ced2a3d2e973b5a",
+    "build/goal-r1-pmic-charge-policy-c/rea.json": "7ad13d05e9e2c3c6d62b5f2a8b25ae5d2a67ea316ff676d6d1f02a5ea7734a35",
+    "build/goal-r1-pmic-charge-policy-c/document.py": "287e0dd0df038ae31a36176a1b0b7e28d256dd020b319f9215456e9dbd69a481",
+    "build/sources-goal-r1-pmic-charge-policy-final-c/report.json": "57762555199366220820bbbfdd0746b2630472b2ea5dee7cf7941bd0440d8026",
+    "build/goal-r1-fstorage-registry/expanded-rw.bin": "87fdee392022fdbe23dd0daf3e859fb14f3ce26ba3e8403aab56dc9d9a913317",
+    "r1/src/sources.json": "75dbf92358ea620e9386c12f21318dee03706659169bc0ba842421877ef31813",
+    "r1/src/application/runtime/native_pmic_charge_policy.c": "c7768d0092aad0661196a1907b269c55b17854aa1460b6c3f609d7a6a704e0b9",
+    "r1/src/application/runtime/native_nfc_late_setup.c": "52b993822a06c82e6f67b62545cd15b0002a0465422fcfe48b30e48d4469c63a",
+    "r1/src/application/board/native_delayed_cancel.c": "ea9f1f09a0e90f7c6f8e94ad25f6b7296ac9670c1d3a724268841d1798db50a2"
+  },
+  "limitations": [
+    "Mailbox handler 0x77be0 is an explicit unresolved import, not a no-op.",
+    "Hardware readings, transport, mailbox processing and RTOS leaves modeled in direct comparisons.",
+    "Actual cancellation executes the class timer table; mutex/time/timer/reschedule leaves modeled.",
+    "No final application link, startup RAM placement, electrical timing or device boot proof."
+  ]
+}

@@ -1,0 +1,112 @@
+{
+  "schema_version": 1,
+  "scope": "R1 retained diagnostic sink in ordinary variadic C",
+  "report": "build/sources-goal-r1-retained-sink-c/report.json",
+  "comparison_report": "build/sources-goal-r1-crash-builder-c/report.json",
+  "stock_entry": "0x7f030",
+  "stock_size": 146,
+  "audit": {
+    "compiled_units": 862,
+    "application_imports": 63,
+    "bootloader_imports": 22,
+    "unchanged_prior_nongenerated_objects": 851,
+    "changed_prior_nongenerated_objects": [
+      "r1/src/application/runtime/native_retained_log.c"
+    ],
+    "manifest_unchanged": true,
+    "source_plan_unchanged": true,
+    "new_mutable_persistent_bytes": 0,
+    "public_strong_symbols": [
+      "r1_retained_log_printf_sink"
+    ],
+    "assembly_and_exported_frame_worker_removed": true
+  },
+  "actual_formatter": {
+    "stock_C_pairs": 308,
+    "actual_C_retained_body_and_formatter": true,
+    "standard_copy_fill_and_crash_stdout_callbacks_modeled": true,
+    "ordinary_AAPCS_outputs_only": true,
+    "device_execution": false,
+    "native_instruction_bytes_executed": 146
+  },
+  "controlled_callbacks": {
+    "stock_C_callback_comparisons": 180,
+    "partial_format_writes_negative_zero_positive_and_uint16_cursor_wrap": true,
+    "live_cursor_and_log_buffer_reloads": true,
+    "formatter_memory_clear_crash_and_stdout_modeled": true
+  },
+  "compiled_defects_rejected": [
+    {
+      "defect": "null-format",
+      "rejected": true
+    },
+    {
+      "defect": "clear-log",
+      "rejected": true
+    },
+    {
+      "defect": "cursor",
+      "rejected": true
+    },
+    {
+      "defect": "capacity",
+      "rejected": true
+    },
+    {
+      "defect": "newline",
+      "rejected": true
+    },
+    {
+      "defect": "stdout-count",
+      "rejected": true
+    },
+    {
+      "defect": "arguments",
+      "rejected": true
+    },
+    {
+      "defect": "marker",
+      "rejected": true
+    }
+  ],
+  "contract": [
+    "Use va_start/va_end with the existing typed vsnprintf provider; preserve mixed32/64-bit AAPCS alignment across register/stack boundary.",
+    "Preserve null-format early return, first-use two-buffer clearing, marker/context binding and crash initialization.",
+    "Preserve signed capacity calculation, live cursor and buffer reloads after formatting, uint16 cursor wrapping/clamping, newline and stdout span/return."
+  ],
+  "limits": [
+    "REA146 bytes match locked stock; all146 instruction bytes execute. Actual C formatter runs in308 comparisons; standard copy/fill, crash initialization and stdout are modeled.",
+    "180 controlled callback cases cover negative/zero/positive results, partial writes, cursor wrap and live cursor/buffer mutation. Formatter and other boundaries are modeled for these cases.",
+    "Stock oversized-return stdout spans may reach outside the retained buffer. Address/length remain compared, but bytes outside that buffer are excluded because they can include unrelated fixture context placement. No memory-safety hardening is claimed.",
+    "Callee-saved integer/FP state, masks, SP and caller argument guards checked. Private frame locations, caller scratch, APSR and exhaustive formatter behavior excluded.",
+    "Final linking, physical retention, RTT transport and device boot remain unverified. Relocatable composition is not a bootable image."
+  ],
+  "evidence_files": {
+    "build/sources-goal-r1-retained-sink-c/report.json": "b02ee94c29c1b4564a1b01c737dcc28a10bce1512677faf2db68f5d08fca66d6",
+    "build/sources-goal-r1-crash-builder-c/report.json": "c2780e9b738294aa886962aa712b1143450d3ba5c8face4b9556cf8de2d02366",
+    "r1/src/application/runtime/native_retained_log.c": "67941a9c62650e9af88d3020abdf32b96e5f304cca21037934f760f4020b04d8",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-retained-sink-c/r1/r1-application/r1__src__application__runtime__native_retained_log.c.o": "74b71094e2368e2d32b8353557948916e300a9ef115988025988a8cd87325b60",
+    "r1/src/sources.json": "f28c024dc0cd0a3b3a18849dae57615da4716e182026d3a75c1591023b0cf445",
+    "tools/build/source-plan.json": "eeb516e31b3310fb0718f36908977f8125723f7c5e0e86cd6744395826259a4d",
+    "build/goal-r1-retained-sink-c/make_callbacks.py": "ac8410fda85492959a944ef385e41be6a7764e00bcc0875d492a3eeef389ef88",
+    "build/goal-r1-retained-sink-c/support.py": "377087a2a5bdbc10a85159c0af2d4ef397ce375dda10d77555f79308f70207a5",
+    "build/goal-r1-retained-sink-c/negative.json": "58fa36ca1fcec2d0aef809ba1a327345435aad1b8c26f7b910c12e67298f3ee4",
+    "build/goal-r1-retained-sink-c/test.ld": "e8570112a7501ce15a615b43a01b3cc446b28c21c343c011ad81236441ebb23a",
+    "build/goal-r1-retained-sink-c/source.elf": "39eb44c4473bf62d1046f4f15d52c2c4fc7a7f3291cb7e713c8fd765d91b9e7f",
+    "build/goal-r1-retained-sink-c/negative.py": "36f3f0d8b4f91d34da8d3b17440903e9f6ef40a97aa9ed89f07487776525798e",
+    "build/goal-r1-retained-sink-c/negative.log": "731be3fe0ebe3dbeab16aca70c8f7ec2528948bf5f6b61d4782492a17f86a1fb",
+    "build/goal-r1-retained-sink-c/rea.json": "40e910de3d8d0c5561fcd706df48bb9255f5560f221429bfe46b38ea82731941",
+    "build/goal-r1-retained-sink-c/sources-check.log": "b6ab468f43815a75634eab2762e209dbee8ab94c4cc3d601fded4210b6833f2a",
+    "build/goal-r1-retained-sink-c/callbacks.py": "e4bd66eb71293d779e1006efc1c9fa4d285a4c955e7457c75159ec16b0561815",
+    "build/goal-r1-retained-sink-c/record.py": "5c576d4c320bd1baabbd261c7fb6bd9d6087080299bbc1f1b67ce8a721bf2de5",
+    "build/goal-r1-retained-sink-c/callbacks.log": "79060230e7c20de21a1d0e1f11456ff7dca2c663345a023310376a4306827c09",
+    "build/goal-r1-retained-sink-c/verification.json": "7ec7c2080f89ba6a587dfcf4d250e0c87d415dbca70d11acc72f012eb08af12d",
+    "build/goal-r1-retained-sink-c/verify.py": "2f7244232f2b5fbb9a2faf34bdb5f0fa7d192138e34d413671b8a3055119e117",
+    "build/goal-r1-retained-sink-c/verification.log": "139bfb429fe5da01c3ae3743b5aca8208e9cf0e8e063cf3bf6740d95ff1e20af",
+    "build/goal-r1-retained-sink-c/source-before.c": "4bdc422115ad416ea92fd814f696638d1762940f75fd276d1aa4eb56db542110",
+    "build/goal-r1-retained-sink-c/build.log": "cfd890da6cc46a20ca85f0e094bf8b3c72d9de9390db04cbd6c7d30ec3dd1489",
+    "build/goal-r1-retained-sink-c/callbacks/test.ld": "e8570112a7501ce15a615b43a01b3cc446b28c21c343c011ad81236441ebb23a",
+    "build/goal-r1-retained-sink-c/callbacks/source.elf": "c0db169db51256ae4e9785f69405f3b6430343f15398e3f77ccee29932d00f6b",
+    "build/goal-r1-retained-sink-c/callbacks/verification.json": "84ae585a01ef7a58b539fb385020560d91ac0d7919187312f732f8fa54c9e7df"
+  }
+}

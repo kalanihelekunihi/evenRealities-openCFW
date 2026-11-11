@@ -3,7 +3,7 @@
 
 extern volatile uint32_t audio_tracepoint_session_generation_20074ad4;
 extern volatile uint32_t audio_tracepoint_next_sequence_20004188;
-extern uint32_t audio_tracepoint_crc32_48ecae(const uint8_t *,uint32_t);
+extern uint32_t tracepoint_state_crc_47ddfe(const void *);
 extern void *audio_file_open(const char *,const char *);
 extern uint32_t audio_file_read(void *,uint32_t,uint32_t,void *);
 extern int32_t audio_file_close(void *);
@@ -19,7 +19,7 @@ void audio_tracepoint_read_state_47df8a(void) {
     uint32_t read=audio_file_read(record,1u,16u,handle);
     (void)audio_file_close(handle);
     if(read!=16u || word(record)!=0x31535054u ||
-       word(record+12u)!=audio_tracepoint_crc32_48ecae(record,12u)) return;
+       word(record+12u)!=tracepoint_state_crc_47ddfe(record)) return;
     audio_tracepoint_session_generation_20074ad4=word(record+4u);
     uint32_t next=word(record+8u);
     audio_tracepoint_next_sequence_20004188=next<2u ? 1u : next;

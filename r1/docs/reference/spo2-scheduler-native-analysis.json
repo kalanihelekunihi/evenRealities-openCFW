@@ -1,0 +1,1533 @@
+{
+  "native_cases": 3424,
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "REA": {
+    "evidence_id": "ev_693b8945dd112c6b8292d1de79bff863a44a2578637797df3162f128fb7fec1d",
+    "subject": {
+      "name": "stock.elf",
+      "digest": {
+        "sha256": "25b4a29af80ec8edab5bd861ba9b74a6e22eab29dc3d7a809a16869e8a140f04"
+      },
+      "local_path": "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-queue-reset-c/stock.elf",
+      "format": "elf",
+      "architecture": "arm"
+    },
+    "provider": {
+      "id": "ghidra",
+      "name": "Ghidra",
+      "version": "12.1.4"
+    },
+    "analysis_profile": {
+      "provider": {
+        "id": "ghidra",
+        "name": "Ghidra",
+        "version": "12.1.4"
+      },
+      "parameters": {
+        "target_kind": "executable",
+        "target_format": "elf",
+        "architecture": "arm",
+        "available_architectures": [
+          "arm"
+        ],
+        "import_mode": "ephemeral-source-immutable",
+        "annotation_policy": "atomic-function-entry-metadata-v1",
+        "load_image_observations": "source-mappings-entry-context-v2",
+        "function_body_evidence": "complete-inclusive-ranges-v1",
+        "function_references": "complete-body-and-entry-reference-manager-v2",
+        "call_relationship_coverage": "function-body-call-coverage-v5",
+        "function_dossier_coverage": "observed-facets-and-call-relationships-v1",
+        "string_inventory_evidence": "defined-data-coverage-v1",
+        "location_resolution": "explicit-address-exact-entry-symbol-first-v3",
+        "procedure_file_offset_resolution": "address-first-unique-target-source-mapping-v2",
+        "instruction_flow_evidence": "decoded-return-pcode-v1",
+        "instruction_references": "exact-address-incoming-v1",
+        "function_boundary_observations": "ghidra-function-boundary-limitations-v3",
+        "no_return_repair": "returning-imports-decoded-return-v2",
+        "process_launch": "inspected-jvm-launch-support-v1",
+        "jump_table_evidence": "typed-case-default-blocks-v1",
+        "decompiler_jump_loads": true,
+        "loader": "auto-from-header",
+        "language_id": "auto-from-header",
+        "compiler_spec_id": "auto-default",
+        "analyzer_preset": "ghidra-default"
+      },
+      "digest": "7e46711069eea041af1b9b99e34115c13332795e5cda76e584a722f529ec70de"
+    },
+    "predicate_type": "rea.analysis",
+    "operation": "read_bytes",
+    "parameters": {
+      "address": "0x4af10",
+      "length": 824
+    },
+    "raw_result": {
+      "address": "0x4af10",
+      "requested_bytes": 824,
+      "returned_bytes": 824,
+      "bytes_hex": "2de9f84f5e4e07467078b178084373d13078012870d1fef767fa010059485a4a4ff0406aa0eb02004fead0004ff0030202eb00450ed001f037fb00287fd0dff84c81d8f80400002879d178248146002f25d113e046f0c2fac00703d146f0befa400704d54aa24aa1504646f05dfb46f0b5fa800763d5284651a13fe03ff0d8fe4ff46161b0fbf1f201fb1200c0f56160962854d91e38782801d204004fd0012003460090504a51a152a03ef015fcc8f8040070b14ff47a7004fb00f100224f483ff09ef97060e8b146f088fac0073cd137e046f083fac00703d146f07ffa400704d547a246a1504646f01efb46f076fa800724d5284600e021e04ba1bde8f84f2ef0d6bc46f06afac00703d146f066fa400704d54da24da1504646f005fb46f05dfa800703d5284656a12ef0c1fc444630a0d8f804103ef05ffdc4f80490bde8f88f46f04bfa40070ad500940fb159a300e05aa35ba25ba14ff0486046f0e4fa46f03cfa8007ead50fb152a200e053a201b028462346bde8f04f5fa12ef0a3bc986d0020fc440c001c440c00d0a301205b52494e475d6865616c74682064697361626c65642c20736b69702073706f322074696d696e67206d6f6465000000006865616c74682064697361626c65642c20736b69702073706f322074696d696e67206d6f64650000a1ad040074696d696e67000073706f320000000035b204005b52494e475d616c676f2073706f322074696d696e67207265676973746572206661696c65640000616c676f2073706f322074696d696e67207265676973746572206661696c6564000000005b52494e475d616c676f2073706f322074696d696e672074696d656f75742068616e646c657220637265617465206661696c656400000000616c676f2073706f322074696d696e672074696d656f75742068616e646c657220637265617465206661696c65640000686f75726c79000063617463687570005b52494e475d616c676f2073706f322074696d696e672073746172742c2025732c2074696d656f75743a25642073656300000000616c676f2073706f322074696d696e672073746172742c2025732c2074696d656f75743a256420736563000070b5064646f058f9c00703d146f054f9400705d5",
+      "complete": true
+    },
+    "normalized_result": {
+      "address": "0x4af10",
+      "requested_bytes": 824,
+      "returned_bytes": 824,
+      "bytes_hex": "2de9f84f5e4e07467078b178084373d13078012870d1fef767fa010059485a4a4ff0406aa0eb02004fead0004ff0030202eb00450ed001f037fb00287fd0dff84c81d8f80400002879d178248146002f25d113e046f0c2fac00703d146f0befa400704d54aa24aa1504646f05dfb46f0b5fa800763d5284651a13fe03ff0d8fe4ff46161b0fbf1f201fb1200c0f56160962854d91e38782801d204004fd0012003460090504a51a152a03ef015fcc8f8040070b14ff47a7004fb00f100224f483ff09ef97060e8b146f088fac0073cd137e046f083fac00703d146f07ffa400704d547a246a1504646f01efb46f076fa800724d5284600e021e04ba1bde8f84f2ef0d6bc46f06afac00703d146f066fa400704d54da24da1504646f005fb46f05dfa800703d5284656a12ef0c1fc444630a0d8f804103ef05ffdc4f80490bde8f88f46f04bfa40070ad500940fb159a300e05aa35ba25ba14ff0486046f0e4fa46f03cfa8007ead50fb152a200e053a201b028462346bde8f04f5fa12ef0a3bc986d0020fc440c001c440c00d0a301205b52494e475d6865616c74682064697361626c65642c20736b69702073706f322074696d696e67206d6f6465000000006865616c74682064697361626c65642c20736b69702073706f322074696d696e67206d6f64650000a1ad040074696d696e67000073706f320000000035b204005b52494e475d616c676f2073706f322074696d696e67207265676973746572206661696c65640000616c676f2073706f322074696d696e67207265676973746572206661696c6564000000005b52494e475d616c676f2073706f322074696d696e672074696d656f75742068616e646c657220637265617465206661696c656400000000616c676f2073706f322074696d696e672074696d656f75742068616e646c657220637265617465206661696c65640000686f75726c79000063617463687570005b52494e475d616c676f2073706f322074696d696e672073746172742c2025732c2074696d656f75743a25642073656300000000616c676f2073706f322074696d696e672073746172742c2025732c2074696d656f75743a256420736563000070b5064646f058f9c00703d146f054f9400705d5",
+      "complete": true
+    },
+    "confidence": "observed",
+    "authority": "shipped-artifact",
+    "environment": null,
+    "limitations": [
+      "The session serves operations only after Ghidra reports default auto-analysis complete; incomplete analysis does not expose partial results.",
+      "The imported Program and temporary project are ephemeral and deleted on close. Annotation operations edit session database metadata; original executable bytes are never written.",
+      "Cancelling an active Ghidra request terminates its ephemeral database and discards session annotations. The selected target remains open; the next provider query imports the original artifact again.",
+      "Default-space addresses use lowercase 0x-prefixed hexadecimal; other address spaces use <percent-encoded-space>:0x<hex>.",
+      "Bytes reflect Ghidra's initialized memory, including loader fixups. Reads stop at an unmapped or uninitialized byte and report completeness explicitly.",
+      "macOS sessions require a matching executable Ghidra native decompiler; REA checks for it but does not build native components or change Gatekeeper quarantine state."
+    ],
+    "relationship_coverage": null,
+    "locations": [],
+    "evidence_links": []
+  },
+  "probe_sha256": "6648b169a3966a963a3e2d4c1c426a326d974fa7e2cf09c201a79f5d5ac3f8a6",
+  "limits": [
+    "Native contract analysis, not C equivalence or implementation",
+    "Actual native getter/record reader in640 cases; lower NV-read/stream/timer/wear/time/logging providers modeled",
+    "40byte caller frame plus8byte getter plus64byte reader gives112byte record offset; raw failed/partial NV behavior must survive C conversion",
+    "No physical allocation, full callbacks, concurrent or final source-only firmware proof"
+  ],
+  "completed_cases": 3424,
+  "actual_NV_reader_cases": 640,
+  "record_offset": 112,
+  "caller_frame": 40,
+  "absent_write_flags_by_seed": {
+    "0": 0,
+    "1": 1,
+    "2": 1,
+    "3": 0,
+    "4": 1,
+    "5": 1,
+    "6": 1,
+    "7": 1,
+    "8": 1,
+    "9": 1,
+    "10": 0,
+    "11": 0,
+    "12": 1,
+    "13": 0,
+    "14": 1,
+    "15": 0
+  },
+  "unregister_zero_samples": [
+    {
+      "case": {
+        "arg": 0,
+        "register_result": 536875008,
+        "create_result": 0,
+        "mutation": "log-stream",
+        "logstream": 0,
+        "modes": [
+          7
+        ]
+      },
+      "depths": {
+        "flag": [
+          40
+        ],
+        "wear": [
+          40
+        ],
+        "time": [
+          40
+        ],
+        "register": [
+          40
+        ],
+        "create": [
+          40
+        ],
+        "log-mode": [
+          40
+        ],
+        "ring": [
+          40
+        ],
+        "sdk0": [
+          40
+        ],
+        "unregister": [
+          40
+        ]
+      },
+      "record": null,
+      "health": 1,
+      "trace": [
+        [
+          "flag",
+          [],
+          [
+            "a7a7a7a7a7a7a7a70100005500000000a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000000000b9b9b9b9b9b9b9b9"
+          ],
+          [
+            "a7a7a7a7a7a7a7a70100005500000000a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000000000b9b9b9b9b9b9b9b9"
+          ]
+        ],
+        [
+          "wear",
+          [],
+          [
+            "a7a7a7a7a7a7a7a70100005500000000a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000000000b9b9b9b9b9b9b9b9"
+          ],
+          [
+            "a7a7a7a7a7a7a7a70100005500000000a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000000000b9b9b9b9b9b9b9b9"
+          ]
+        ],
+        [
+          "time",
+          [],
+          [
+            "a7a7a7a7a7a7a7a70100005500000000a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000000000b9b9b9b9b9b9b9b9"
+          ],
+          [
+            "a7a7a7a7a7a7a7a70100005500000000a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000000000b9b9b9b9b9b9b9b9"
+          ]
+        ],
+        [
+          "register",
+          [
+            "spo2",
+            "timing",
+            306593,
+            1,
+            1
+          ],
+          [
+            "a7a7a7a7a7a7a7a70100005500000000a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000000000b9b9b9b9b9b9b9b9"
+          ],
+          [
+            "a7a7a7a7a7a7a7a70100005500000000a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000000000b9b9b9b9b9b9b9b9"
+          ]
+        ],
+        [
+          "create",
+          [
+            307765,
+            120000,
+            0
+          ],
+          [
+            "a7a7a7a7a7a7a7a70100005500000000a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000100020b9b9b9b9b9b9b9b9"
+          ],
+          [
+            "a7a7a7a7a7a7a7a70100005500000000a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000100020b9b9b9b9b9b9b9b9"
+          ]
+        ],
+        [
+          "log-mode",
+          [],
+          [
+            "a7a7a7a7a7a7a7a70100005500000000a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000100020b9b9b9b9b9b9b9b9"
+          ],
+          [
+            "a7a7a7a7a7a7a7a70100005500000000a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000000000b9b9b9b9b9b9b9b9"
+          ]
+        ],
+        [
+          "ring",
+          [
+            201326592,
+            "[RING]algo spo2 timing timeout handler create failed",
+            "[RING]algo spo2 timing timeout handler create failed"
+          ],
+          [
+            "a7a7a7a7a7a7a7a70100005500000000a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000000000b9b9b9b9b9b9b9b9"
+          ],
+          [
+            "a7a7a7a7a7a7a7a70100005500000000a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000000000b9b9b9b9b9b9b9b9"
+          ]
+        ],
+        [
+          "log-mode",
+          [],
+          [
+            "a7a7a7a7a7a7a7a70100005500000000a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000000000b9b9b9b9b9b9b9b9"
+          ],
+          [
+            "a7a7a7a7a7a7a7a70100005500000000a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000000000b9b9b9b9b9b9b9b9"
+          ]
+        ],
+        [
+          "sdk0",
+          [
+            1835011,
+            "algo spo2 timing timeout handler create failed"
+          ],
+          [
+            "a7a7a7a7a7a7a7a70100005500000000a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000000000b9b9b9b9b9b9b9b9"
+          ],
+          [
+            "a7a7a7a7a7a7a7a70100005500000000a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000000000b9b9b9b9b9b9b9b9"
+          ]
+        ],
+        [
+          "unregister",
+          [
+            "spo2",
+            0
+          ],
+          [
+            "a7a7a7a7a7a7a7a70100005500000000a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000000000b9b9b9b9b9b9b9b9"
+          ],
+          [
+            "a7a7a7a7a7a7a7a70100005500000000a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000000000b9b9b9b9b9b9b9b9"
+          ]
+        ]
+      ],
+      "final": [
+        "a7a7a7a7a7a7a7a70100005500000000a7a7a7a7a7a7a7a7",
+        "b9b9b9b9b9b9b9b900a0002000000000b9b9b9b9b9b9b9b9"
+      ]
+    },
+    {
+      "case": {
+        "arg": 0,
+        "register_result": 536875008,
+        "create_result": 0,
+        "mutation": "log-stream",
+        "logstream": 0,
+        "modes": [
+          0,
+          4,
+          2
+        ]
+      },
+      "depths": {
+        "flag": [
+          40
+        ],
+        "wear": [
+          40
+        ],
+        "time": [
+          40
+        ],
+        "register": [
+          40
+        ],
+        "create": [
+          40
+        ],
+        "log-mode": [
+          40
+        ],
+        "ring": [
+          40
+        ],
+        "sdk0": [
+          40
+        ],
+        "unregister": [
+          40
+        ]
+      },
+      "record": null,
+      "health": 1,
+      "trace": [
+        [
+          "flag",
+          [],
+          [
+            "a7a7a7a7a7a7a7a70100005500000000a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000000000b9b9b9b9b9b9b9b9"
+          ],
+          [
+            "a7a7a7a7a7a7a7a70100005500000000a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000000000b9b9b9b9b9b9b9b9"
+          ]
+        ],
+        [
+          "wear",
+          [],
+          [
+            "a7a7a7a7a7a7a7a70100005500000000a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000000000b9b9b9b9b9b9b9b9"
+          ],
+          [
+            "a7a7a7a7a7a7a7a70100005500000000a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000000000b9b9b9b9b9b9b9b9"
+          ]
+        ],
+        [
+          "time",
+          [],
+          [
+            "a7a7a7a7a7a7a7a70100005500000000a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000000000b9b9b9b9b9b9b9b9"
+          ],
+          [
+            "a7a7a7a7a7a7a7a70100005500000000a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000000000b9b9b9b9b9b9b9b9"
+          ]
+        ],
+        [
+          "register",
+          [
+            "spo2",
+            "timing",
+            306593,
+            1,
+            1
+          ],
+          [
+            "a7a7a7a7a7a7a7a70100005500000000a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000000000b9b9b9b9b9b9b9b9"
+          ],
+          [
+            "a7a7a7a7a7a7a7a70100005500000000a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000000000b9b9b9b9b9b9b9b9"
+          ]
+        ],
+        [
+          "create",
+          [
+            307765,
+            120000,
+            0
+          ],
+          [
+            "a7a7a7a7a7a7a7a70100005500000000a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000100020b9b9b9b9b9b9b9b9"
+          ],
+          [
+            "a7a7a7a7a7a7a7a70100005500000000a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000100020b9b9b9b9b9b9b9b9"
+          ]
+        ],
+        [
+          "log-mode",
+          [],
+          [
+            "a7a7a7a7a7a7a7a70100005500000000a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000100020b9b9b9b9b9b9b9b9"
+          ],
+          [
+            "a7a7a7a7a7a7a7a70100005500000000a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000000000b9b9b9b9b9b9b9b9"
+          ]
+        ],
+        [
+          "log-mode",
+          [],
+          [
+            "a7a7a7a7a7a7a7a70100005500000000a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000000000b9b9b9b9b9b9b9b9"
+          ],
+          [
+            "a7a7a7a7a7a7a7a70100005500000000a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000000000b9b9b9b9b9b9b9b9"
+          ]
+        ],
+        [
+          "ring",
+          [
+            201326592,
+            "[RING]algo spo2 timing timeout handler create failed",
+            "[RING]algo spo2 timing timeout handler create failed"
+          ],
+          [
+            "a7a7a7a7a7a7a7a70100005500000000a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000000000b9b9b9b9b9b9b9b9"
+          ],
+          [
+            "a7a7a7a7a7a7a7a70100005500000000a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000000000b9b9b9b9b9b9b9b9"
+          ]
+        ],
+        [
+          "log-mode",
+          [],
+          [
+            "a7a7a7a7a7a7a7a70100005500000000a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000000000b9b9b9b9b9b9b9b9"
+          ],
+          [
+            "a7a7a7a7a7a7a7a70100005500000000a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000000000b9b9b9b9b9b9b9b9"
+          ]
+        ],
+        [
+          "sdk0",
+          [
+            1835011,
+            "algo spo2 timing timeout handler create failed"
+          ],
+          [
+            "a7a7a7a7a7a7a7a70100005500000000a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000000000b9b9b9b9b9b9b9b9"
+          ],
+          [
+            "a7a7a7a7a7a7a7a70100005500000000a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000000000b9b9b9b9b9b9b9b9"
+          ]
+        ],
+        [
+          "unregister",
+          [
+            "spo2",
+            0
+          ],
+          [
+            "a7a7a7a7a7a7a7a70100005500000000a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000000000b9b9b9b9b9b9b9b9"
+          ],
+          [
+            "a7a7a7a7a7a7a7a70100005500000000a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000000000b9b9b9b9b9b9b9b9"
+          ]
+        ]
+      ],
+      "final": [
+        "a7a7a7a7a7a7a7a70100005500000000a7a7a7a7a7a7a7a7",
+        "b9b9b9b9b9b9b9b900a0002000000000b9b9b9b9b9b9b9b9"
+      ]
+    },
+    {
+      "case": {
+        "arg": 1,
+        "register_result": 536875008,
+        "create_result": 0,
+        "mutation": "log-stream",
+        "logstream": 0,
+        "modes": [
+          7
+        ]
+      },
+      "depths": {
+        "flag": [
+          40
+        ],
+        "wear": [
+          40
+        ],
+        "register": [
+          40
+        ],
+        "create": [
+          40
+        ],
+        "log-mode": [
+          40
+        ],
+        "ring": [
+          40
+        ],
+        "sdk0": [
+          40
+        ],
+        "unregister": [
+          40
+        ]
+      },
+      "record": null,
+      "health": 1,
+      "trace": [
+        [
+          "flag",
+          [],
+          [
+            "a7a7a7a7a7a7a7a70100005500000000a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000000000b9b9b9b9b9b9b9b9"
+          ],
+          [
+            "a7a7a7a7a7a7a7a70100005500000000a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000000000b9b9b9b9b9b9b9b9"
+          ]
+        ],
+        [
+          "wear",
+          [],
+          [
+            "a7a7a7a7a7a7a7a70100005500000000a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000000000b9b9b9b9b9b9b9b9"
+          ],
+          [
+            "a7a7a7a7a7a7a7a70100005500000000a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000000000b9b9b9b9b9b9b9b9"
+          ]
+        ],
+        [
+          "register",
+          [
+            "spo2",
+            "timing",
+            306593,
+            1,
+            1
+          ],
+          [
+            "a7a7a7a7a7a7a7a70100005500000000a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000000000b9b9b9b9b9b9b9b9"
+          ],
+          [
+            "a7a7a7a7a7a7a7a70100005500000000a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000000000b9b9b9b9b9b9b9b9"
+          ]
+        ],
+        [
+          "create",
+          [
+            307765,
+            120000,
+            0
+          ],
+          [
+            "a7a7a7a7a7a7a7a70100005500000000a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000100020b9b9b9b9b9b9b9b9"
+          ],
+          [
+            "a7a7a7a7a7a7a7a70100005500000000a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000100020b9b9b9b9b9b9b9b9"
+          ]
+        ],
+        [
+          "log-mode",
+          [],
+          [
+            "a7a7a7a7a7a7a7a70100005500000000a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000100020b9b9b9b9b9b9b9b9"
+          ],
+          [
+            "a7a7a7a7a7a7a7a70100005500000000a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000000000b9b9b9b9b9b9b9b9"
+          ]
+        ],
+        [
+          "ring",
+          [
+            201326592,
+            "[RING]algo spo2 timing timeout handler create failed",
+            "[RING]algo spo2 timing timeout handler create failed"
+          ],
+          [
+            "a7a7a7a7a7a7a7a70100005500000000a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000000000b9b9b9b9b9b9b9b9"
+          ],
+          [
+            "a7a7a7a7a7a7a7a70100005500000000a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000000000b9b9b9b9b9b9b9b9"
+          ]
+        ],
+        [
+          "log-mode",
+          [],
+          [
+            "a7a7a7a7a7a7a7a70100005500000000a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000000000b9b9b9b9b9b9b9b9"
+          ],
+          [
+            "a7a7a7a7a7a7a7a70100005500000000a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000000000b9b9b9b9b9b9b9b9"
+          ]
+        ],
+        [
+          "sdk0",
+          [
+            1835011,
+            "algo spo2 timing timeout handler create failed"
+          ],
+          [
+            "a7a7a7a7a7a7a7a70100005500000000a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000000000b9b9b9b9b9b9b9b9"
+          ],
+          [
+            "a7a7a7a7a7a7a7a70100005500000000a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000000000b9b9b9b9b9b9b9b9"
+          ]
+        ],
+        [
+          "unregister",
+          [
+            "spo2",
+            0
+          ],
+          [
+            "a7a7a7a7a7a7a7a70100005500000000a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000000000b9b9b9b9b9b9b9b9"
+          ],
+          [
+            "a7a7a7a7a7a7a7a70100005500000000a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000000000b9b9b9b9b9b9b9b9"
+          ]
+        ]
+      ],
+      "final": [
+        "a7a7a7a7a7a7a7a70100005500000000a7a7a7a7a7a7a7a7",
+        "b9b9b9b9b9b9b9b900a0002000000000b9b9b9b9b9b9b9b9"
+      ]
+    },
+    {
+      "case": {
+        "arg": 1,
+        "register_result": 536875008,
+        "create_result": 0,
+        "mutation": "log-stream",
+        "logstream": 0,
+        "modes": [
+          0,
+          4,
+          2
+        ]
+      },
+      "depths": {
+        "flag": [
+          40
+        ],
+        "wear": [
+          40
+        ],
+        "register": [
+          40
+        ],
+        "create": [
+          40
+        ],
+        "log-mode": [
+          40
+        ],
+        "ring": [
+          40
+        ],
+        "sdk0": [
+          40
+        ],
+        "unregister": [
+          40
+        ]
+      },
+      "record": null,
+      "health": 1,
+      "trace": [
+        [
+          "flag",
+          [],
+          [
+            "a7a7a7a7a7a7a7a70100005500000000a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000000000b9b9b9b9b9b9b9b9"
+          ],
+          [
+            "a7a7a7a7a7a7a7a70100005500000000a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000000000b9b9b9b9b9b9b9b9"
+          ]
+        ],
+        [
+          "wear",
+          [],
+          [
+            "a7a7a7a7a7a7a7a70100005500000000a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000000000b9b9b9b9b9b9b9b9"
+          ],
+          [
+            "a7a7a7a7a7a7a7a70100005500000000a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000000000b9b9b9b9b9b9b9b9"
+          ]
+        ],
+        [
+          "register",
+          [
+            "spo2",
+            "timing",
+            306593,
+            1,
+            1
+          ],
+          [
+            "a7a7a7a7a7a7a7a70100005500000000a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000000000b9b9b9b9b9b9b9b9"
+          ],
+          [
+            "a7a7a7a7a7a7a7a70100005500000000a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000000000b9b9b9b9b9b9b9b9"
+          ]
+        ],
+        [
+          "create",
+          [
+            307765,
+            120000,
+            0
+          ],
+          [
+            "a7a7a7a7a7a7a7a70100005500000000a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000100020b9b9b9b9b9b9b9b9"
+          ],
+          [
+            "a7a7a7a7a7a7a7a70100005500000000a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000100020b9b9b9b9b9b9b9b9"
+          ]
+        ],
+        [
+          "log-mode",
+          [],
+          [
+            "a7a7a7a7a7a7a7a70100005500000000a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000100020b9b9b9b9b9b9b9b9"
+          ],
+          [
+            "a7a7a7a7a7a7a7a70100005500000000a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000000000b9b9b9b9b9b9b9b9"
+          ]
+        ],
+        [
+          "log-mode",
+          [],
+          [
+            "a7a7a7a7a7a7a7a70100005500000000a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000000000b9b9b9b9b9b9b9b9"
+          ],
+          [
+            "a7a7a7a7a7a7a7a70100005500000000a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000000000b9b9b9b9b9b9b9b9"
+          ]
+        ],
+        [
+          "ring",
+          [
+            201326592,
+            "[RING]algo spo2 timing timeout handler create failed",
+            "[RING]algo spo2 timing timeout handler create failed"
+          ],
+          [
+            "a7a7a7a7a7a7a7a70100005500000000a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000000000b9b9b9b9b9b9b9b9"
+          ],
+          [
+            "a7a7a7a7a7a7a7a70100005500000000a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000000000b9b9b9b9b9b9b9b9"
+          ]
+        ],
+        [
+          "log-mode",
+          [],
+          [
+            "a7a7a7a7a7a7a7a70100005500000000a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000000000b9b9b9b9b9b9b9b9"
+          ],
+          [
+            "a7a7a7a7a7a7a7a70100005500000000a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000000000b9b9b9b9b9b9b9b9"
+          ]
+        ],
+        [
+          "sdk0",
+          [
+            1835011,
+            "algo spo2 timing timeout handler create failed"
+          ],
+          [
+            "a7a7a7a7a7a7a7a70100005500000000a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000000000b9b9b9b9b9b9b9b9"
+          ],
+          [
+            "a7a7a7a7a7a7a7a70100005500000000a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000000000b9b9b9b9b9b9b9b9"
+          ]
+        ],
+        [
+          "unregister",
+          [
+            "spo2",
+            0
+          ],
+          [
+            "a7a7a7a7a7a7a7a70100005500000000a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000000000b9b9b9b9b9b9b9b9"
+          ],
+          [
+            "a7a7a7a7a7a7a7a70100005500000000a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000000000b9b9b9b9b9b9b9b9"
+          ]
+        ]
+      ],
+      "final": [
+        "a7a7a7a7a7a7a7a70100005500000000a7a7a7a7a7a7a7a7",
+        "b9b9b9b9b9b9b9b900a0002000000000b9b9b9b9b9b9b9b9"
+      ]
+    }
+  ],
+  "replaced_existing_timer_samples": [
+    {
+      "case": {
+        "arg": 0,
+        "time": 0,
+        "register_result": 536875008,
+        "create_result": 536879104,
+        "timer": 536883200,
+        "health": 1,
+        "logmode": 0,
+        "mutation": "none"
+      },
+      "depths": {
+        "flag": [
+          40
+        ],
+        "wear": [
+          40
+        ],
+        "time": [
+          40
+        ],
+        "register": [
+          40
+        ],
+        "create": [
+          40
+        ],
+        "log-mode": [
+          40
+        ]
+      },
+      "record": null,
+      "health": 1,
+      "trace": [
+        [
+          "flag",
+          [],
+          [
+            "a7a7a7a7a7a7a7a70100005500300020a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000000000b9b9b9b9b9b9b9b9"
+          ],
+          [
+            "a7a7a7a7a7a7a7a70100005500300020a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000000000b9b9b9b9b9b9b9b9"
+          ]
+        ],
+        [
+          "wear",
+          [],
+          [
+            "a7a7a7a7a7a7a7a70100005500300020a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000000000b9b9b9b9b9b9b9b9"
+          ],
+          [
+            "a7a7a7a7a7a7a7a70100005500300020a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000000000b9b9b9b9b9b9b9b9"
+          ]
+        ],
+        [
+          "time",
+          [],
+          [
+            "a7a7a7a7a7a7a7a70100005500300020a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000000000b9b9b9b9b9b9b9b9"
+          ],
+          [
+            "a7a7a7a7a7a7a7a70100005500300020a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000000000b9b9b9b9b9b9b9b9"
+          ]
+        ],
+        [
+          "register",
+          [
+            "spo2",
+            "timing",
+            306593,
+            1,
+            1
+          ],
+          [
+            "a7a7a7a7a7a7a7a70100005500300020a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000000000b9b9b9b9b9b9b9b9"
+          ],
+          [
+            "a7a7a7a7a7a7a7a70100005500300020a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000000000b9b9b9b9b9b9b9b9"
+          ]
+        ],
+        [
+          "create",
+          [
+            307765,
+            120000,
+            0
+          ],
+          [
+            "a7a7a7a7a7a7a7a70100005500300020a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000100020b9b9b9b9b9b9b9b9"
+          ],
+          [
+            "a7a7a7a7a7a7a7a70100005500300020a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000100020b9b9b9b9b9b9b9b9"
+          ]
+        ],
+        [
+          "log-mode",
+          [],
+          [
+            "a7a7a7a7a7a7a7a70100005500200020a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000100020b9b9b9b9b9b9b9b9"
+          ],
+          [
+            "a7a7a7a7a7a7a7a70100005500200020a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000100020b9b9b9b9b9b9b9b9"
+          ]
+        ],
+        [
+          "log-mode",
+          [],
+          [
+            "a7a7a7a7a7a7a7a70100005500200020a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000100020b9b9b9b9b9b9b9b9"
+          ],
+          [
+            "a7a7a7a7a7a7a7a70100005500200020a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000100020b9b9b9b9b9b9b9b9"
+          ]
+        ],
+        [
+          "log-mode",
+          [],
+          [
+            "a7a7a7a7a7a7a7a70100005500200020a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000100020b9b9b9b9b9b9b9b9"
+          ],
+          [
+            "a7a7a7a7a7a7a7a70100005500200020a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000100020b9b9b9b9b9b9b9b9"
+          ]
+        ]
+      ],
+      "final": [
+        "a7a7a7a7a7a7a7a70100005500200020a7a7a7a7a7a7a7a7",
+        "b9b9b9b9b9b9b9b900a0002000100020b9b9b9b9b9b9b9b9"
+      ]
+    },
+    {
+      "case": {
+        "arg": 0,
+        "time": 0,
+        "register_result": 536875008,
+        "create_result": 536879104,
+        "timer": 536883200,
+        "health": 1,
+        "logmode": 0,
+        "mutation": "register"
+      },
+      "depths": {
+        "flag": [
+          40
+        ],
+        "wear": [
+          40
+        ],
+        "time": [
+          40
+        ],
+        "register": [
+          40
+        ],
+        "create": [
+          40
+        ],
+        "log-mode": [
+          40
+        ]
+      },
+      "record": null,
+      "health": 1,
+      "trace": [
+        [
+          "flag",
+          [],
+          [
+            "a7a7a7a7a7a7a7a70100005500300020a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000000000b9b9b9b9b9b9b9b9"
+          ],
+          [
+            "a7a7a7a7a7a7a7a70100005500300020a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000000000b9b9b9b9b9b9b9b9"
+          ]
+        ],
+        [
+          "wear",
+          [],
+          [
+            "a7a7a7a7a7a7a7a70100005500300020a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000000000b9b9b9b9b9b9b9b9"
+          ],
+          [
+            "a7a7a7a7a7a7a7a70100005500300020a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000000000b9b9b9b9b9b9b9b9"
+          ]
+        ],
+        [
+          "time",
+          [],
+          [
+            "a7a7a7a7a7a7a7a70100005500300020a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000000000b9b9b9b9b9b9b9b9"
+          ],
+          [
+            "a7a7a7a7a7a7a7a70100005500300020a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000000000b9b9b9b9b9b9b9b9"
+          ]
+        ],
+        [
+          "register",
+          [
+            "spo2",
+            "timing",
+            306593,
+            1,
+            1
+          ],
+          [
+            "a7a7a7a7a7a7a7a70100005500300020a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000000000b9b9b9b9b9b9b9b9"
+          ],
+          [
+            "a7a7a7a7a7a7a7a70100005500800020a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000900020b9b9b9b9b9b9b9b9"
+          ]
+        ],
+        [
+          "create",
+          [
+            307765,
+            120000,
+            0
+          ],
+          [
+            "a7a7a7a7a7a7a7a70100005500800020a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000100020b9b9b9b9b9b9b9b9"
+          ],
+          [
+            "a7a7a7a7a7a7a7a70100005500800020a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000100020b9b9b9b9b9b9b9b9"
+          ]
+        ],
+        [
+          "log-mode",
+          [],
+          [
+            "a7a7a7a7a7a7a7a70100005500200020a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000100020b9b9b9b9b9b9b9b9"
+          ],
+          [
+            "a7a7a7a7a7a7a7a70100005500200020a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000100020b9b9b9b9b9b9b9b9"
+          ]
+        ],
+        [
+          "log-mode",
+          [],
+          [
+            "a7a7a7a7a7a7a7a70100005500200020a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000100020b9b9b9b9b9b9b9b9"
+          ],
+          [
+            "a7a7a7a7a7a7a7a70100005500200020a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000100020b9b9b9b9b9b9b9b9"
+          ]
+        ],
+        [
+          "log-mode",
+          [],
+          [
+            "a7a7a7a7a7a7a7a70100005500200020a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000100020b9b9b9b9b9b9b9b9"
+          ],
+          [
+            "a7a7a7a7a7a7a7a70100005500200020a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000100020b9b9b9b9b9b9b9b9"
+          ]
+        ]
+      ],
+      "final": [
+        "a7a7a7a7a7a7a7a70100005500200020a7a7a7a7a7a7a7a7",
+        "b9b9b9b9b9b9b9b900a0002000100020b9b9b9b9b9b9b9b9"
+      ]
+    },
+    {
+      "case": {
+        "arg": 0,
+        "time": 0,
+        "register_result": 536875008,
+        "create_result": 536879104,
+        "timer": 536883200,
+        "health": 1,
+        "logmode": 0,
+        "mutation": "create"
+      },
+      "depths": {
+        "flag": [
+          40
+        ],
+        "wear": [
+          40
+        ],
+        "time": [
+          40
+        ],
+        "register": [
+          40
+        ],
+        "create": [
+          40
+        ],
+        "log-mode": [
+          40
+        ]
+      },
+      "record": null,
+      "health": 1,
+      "trace": [
+        [
+          "flag",
+          [],
+          [
+            "a7a7a7a7a7a7a7a70100005500300020a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000000000b9b9b9b9b9b9b9b9"
+          ],
+          [
+            "a7a7a7a7a7a7a7a70100005500300020a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000000000b9b9b9b9b9b9b9b9"
+          ]
+        ],
+        [
+          "wear",
+          [],
+          [
+            "a7a7a7a7a7a7a7a70100005500300020a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000000000b9b9b9b9b9b9b9b9"
+          ],
+          [
+            "a7a7a7a7a7a7a7a70100005500300020a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000000000b9b9b9b9b9b9b9b9"
+          ]
+        ],
+        [
+          "time",
+          [],
+          [
+            "a7a7a7a7a7a7a7a70100005500300020a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000000000b9b9b9b9b9b9b9b9"
+          ],
+          [
+            "a7a7a7a7a7a7a7a70100005500300020a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000000000b9b9b9b9b9b9b9b9"
+          ]
+        ],
+        [
+          "register",
+          [
+            "spo2",
+            "timing",
+            306593,
+            1,
+            1
+          ],
+          [
+            "a7a7a7a7a7a7a7a70100005500300020a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000000000b9b9b9b9b9b9b9b9"
+          ],
+          [
+            "a7a7a7a7a7a7a7a70100005500300020a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000000000b9b9b9b9b9b9b9b9"
+          ]
+        ],
+        [
+          "create",
+          [
+            307765,
+            120000,
+            0
+          ],
+          [
+            "a7a7a7a7a7a7a7a70100005500300020a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000100020b9b9b9b9b9b9b9b9"
+          ],
+          [
+            "a7a7a7a7a7a7a7a70100005500800020a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000900020b9b9b9b9b9b9b9b9"
+          ]
+        ],
+        [
+          "log-mode",
+          [],
+          [
+            "a7a7a7a7a7a7a7a70100005500200020a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000900020b9b9b9b9b9b9b9b9"
+          ],
+          [
+            "a7a7a7a7a7a7a7a70100005500200020a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000900020b9b9b9b9b9b9b9b9"
+          ]
+        ],
+        [
+          "log-mode",
+          [],
+          [
+            "a7a7a7a7a7a7a7a70100005500200020a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000900020b9b9b9b9b9b9b9b9"
+          ],
+          [
+            "a7a7a7a7a7a7a7a70100005500200020a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000900020b9b9b9b9b9b9b9b9"
+          ]
+        ],
+        [
+          "log-mode",
+          [],
+          [
+            "a7a7a7a7a7a7a7a70100005500200020a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000900020b9b9b9b9b9b9b9b9"
+          ],
+          [
+            "a7a7a7a7a7a7a7a70100005500200020a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000900020b9b9b9b9b9b9b9b9"
+          ]
+        ]
+      ],
+      "final": [
+        "a7a7a7a7a7a7a7a70100005500200020a7a7a7a7a7a7a7a7",
+        "b9b9b9b9b9b9b9b900a0002000900020b9b9b9b9b9b9b9b9"
+      ]
+    },
+    {
+      "case": {
+        "arg": 0,
+        "time": 0,
+        "register_result": 536875008,
+        "create_result": 536879104,
+        "timer": 536883200,
+        "health": 1,
+        "logmode": 7,
+        "mutation": "none"
+      },
+      "depths": {
+        "flag": [
+          40
+        ],
+        "wear": [
+          40
+        ],
+        "time": [
+          40
+        ],
+        "register": [
+          40
+        ],
+        "create": [
+          40
+        ],
+        "log-mode": [
+          40
+        ],
+        "ring": [
+          40
+        ],
+        "sdk2": [
+          0
+        ]
+      },
+      "record": null,
+      "health": 1,
+      "trace": [
+        [
+          "flag",
+          [],
+          [
+            "a7a7a7a7a7a7a7a70100005500300020a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000000000b9b9b9b9b9b9b9b9"
+          ],
+          [
+            "a7a7a7a7a7a7a7a70100005500300020a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000000000b9b9b9b9b9b9b9b9"
+          ]
+        ],
+        [
+          "wear",
+          [],
+          [
+            "a7a7a7a7a7a7a7a70100005500300020a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000000000b9b9b9b9b9b9b9b9"
+          ],
+          [
+            "a7a7a7a7a7a7a7a70100005500300020a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000000000b9b9b9b9b9b9b9b9"
+          ]
+        ],
+        [
+          "time",
+          [],
+          [
+            "a7a7a7a7a7a7a7a70100005500300020a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000000000b9b9b9b9b9b9b9b9"
+          ],
+          [
+            "a7a7a7a7a7a7a7a70100005500300020a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000000000b9b9b9b9b9b9b9b9"
+          ]
+        ],
+        [
+          "register",
+          [
+            "spo2",
+            "timing",
+            306593,
+            1,
+            1
+          ],
+          [
+            "a7a7a7a7a7a7a7a70100005500300020a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000000000b9b9b9b9b9b9b9b9"
+          ],
+          [
+            "a7a7a7a7a7a7a7a70100005500300020a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000000000b9b9b9b9b9b9b9b9"
+          ]
+        ],
+        [
+          "create",
+          [
+            307765,
+            120000,
+            0
+          ],
+          [
+            "a7a7a7a7a7a7a7a70100005500300020a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000100020b9b9b9b9b9b9b9b9"
+          ],
+          [
+            "a7a7a7a7a7a7a7a70100005500300020a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000100020b9b9b9b9b9b9b9b9"
+          ]
+        ],
+        [
+          "log-mode",
+          [],
+          [
+            "a7a7a7a7a7a7a7a70100005500200020a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000100020b9b9b9b9b9b9b9b9"
+          ],
+          [
+            "a7a7a7a7a7a7a7a70100005500200020a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000100020b9b9b9b9b9b9b9b9"
+          ]
+        ],
+        [
+          "ring",
+          [
+            209715200,
+            "[RING]algo spo2 timing start, %s, timeout:%d sec",
+            "[RING]algo spo2 timing start, %s, timeout:%d sec",
+            "catchup",
+            120
+          ],
+          [
+            "a7a7a7a7a7a7a7a70100005500200020a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000100020b9b9b9b9b9b9b9b9"
+          ],
+          [
+            "a7a7a7a7a7a7a7a70100005500200020a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000100020b9b9b9b9b9b9b9b9"
+          ]
+        ],
+        [
+          "log-mode",
+          [],
+          [
+            "a7a7a7a7a7a7a7a70100005500200020a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000100020b9b9b9b9b9b9b9b9"
+          ],
+          [
+            "a7a7a7a7a7a7a7a70100005500200020a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000100020b9b9b9b9b9b9b9b9"
+          ]
+        ],
+        [
+          "sdk2",
+          [
+            1835011,
+            "algo spo2 timing start, %s, timeout:%d sec",
+            "catchup",
+            120
+          ],
+          [
+            "a7a7a7a7a7a7a7a70100005500200020a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000100020b9b9b9b9b9b9b9b9"
+          ],
+          [
+            "a7a7a7a7a7a7a7a70100005500200020a7a7a7a7a7a7a7a7",
+            "b9b9b9b9b9b9b9b900a0002000100020b9b9b9b9b9b9b9b9"
+          ]
+        ]
+      ],
+      "final": [
+        "a7a7a7a7a7a7a7a70100005500200020a7a7a7a7a7a7a7a7",
+        "b9b9b9b9b9b9b9b900a0002000100020b9b9b9b9b9b9b9b9"
+      ]
+    }
+  ],
+  "frontier_addition": {
+    "row": {
+      "image": "application",
+      "inventory_source": "stock_tail_branch",
+      "entry": "0x0004af10",
+      "size": "384",
+      "provider_family": "r1_product_specific",
+      "source_symbol": "r1_spo2_timing_start_plan",
+      "candidate_symbol": "r1_spo2_timing_start_plan",
+      "status": "unresolved_source_route",
+      "candidate_sources": "",
+      "candidate_objects": "",
+      "candidate_reports": "",
+      "behavior_receipt": "r1/docs/reference/spo2-scheduler-native-analysis.json",
+      "instruction_identity_proven": "false",
+      "image_integration_proven": "false"
+    },
+    "before_sha256": "0aaf19907091a85a1ef2c6dd77985a847324f92994a8824f422d0cc4fc21fb3f",
+    "after_sha256": "9afa80a25beca2fc5d377c653bb1906abaf2bf4ef88e3ad45769dfcdee3b301f"
+  },
+  "unchanged_source_build": {
+    "report": "build/sources-goal-r1-spo2-lifecycle-c/report.json",
+    "sha256": "8c79bab11f594e39bd1b8031ce1d04cbf0a9f2e51a07919e661317b077a899e9",
+    "units": 661,
+    "manifest_sha256": "96bfda2940b875491c81f8f08cd2c6063d113a53713fbc588fe700d980a2cd01",
+    "source_plan_sha256": "4d61f56c26344db0e19570dcbbd709c7a9aae0edf4a2097ad1f6352500592495"
+  },
+  "artifacts": {
+    "build/goal-r1-spo2-scheduler-analysis/probe.py": "6648b169a3966a963a3e2d4c1c426a326d974fa7e2cf09c201a79f5d5ac3f8a6",
+    "build/goal-r1-spo2-scheduler-analysis/results.json": "966313ab205ed540171341f60ebed5173fe980f2f61645ef4273df0c776ccece",
+    "build/goal-r1-spo2-scheduler-analysis/rea.json": "56060c1f94fc5b91637aba287309ea16955438344d5c27d44db008fe41c84ebd"
+  },
+  "findings": [
+    "Distinct384byte scheduler body4af10..4b08f added as unresolved frontier entry",
+    "Initial flag bytes1/2 mustzero, mode1, health enabled and wear truthy; only timing stream slot1 is checked, existing timer and slot0 do not block registration",
+    "Nonzero input skips clock and uses hourly label; zero uses catchup, unsigned3600-timestamp%3600>150 gate; duration120 seconds",
+    "Register spo2/timing callback4ada1 args1,1 first; late publishslot1; zero result logs return without touching existing timer except modeled providers",
+    "Successful stream then creates timer callback4b235,120000,0 and late-publishes timer, overwriting existing handle without release",
+    "Failed create logs then unconditionally unregisters fresh slot1 includingzero, then late clears; no timer-release or session-buffer clear",
+    "Actual getter8 and reader64 under caller40 put raw record112 below entry; failed/partial NV read status ignored; absent bytes vary across16poisonseeds"
+  ]
+}

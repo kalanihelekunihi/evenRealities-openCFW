@@ -1,0 +1,129 @@
+{
+  "schema": 1,
+  "scope": "Goodix interrupt trigger register setup at existing stock entry 0x2e8cc..0x2e8e7",
+  "native_ABI": "void(void), direct register-provider calls",
+  "qualified_region": {
+    "payload": "r1-application",
+    "symbol": "Gh3x2xIntPinTriggerModePro",
+    "start": 30924,
+    "end": 30952,
+    "sha256": "46c1b426575a0c4f14804f1b6ee0363a78491b0beec5cef3b1c2efca619fcab6",
+    "evidence": "r1/symbols/function-frontier.csv",
+    "bindings": {
+      "GH3X2X_WriteReg": 176313,
+      "GH3X2X_WriteRegBitField": 176349
+    },
+    "address": 190668,
+    "match_evidence": {
+      "method": "independently named native entry and all unrelocated bytes, followed by full linked equality",
+      "fixed_bytes": 20,
+      "compiled_pattern_sha256": "011ea141e4bba1f2f80b0835867759ec76f16ed5774fbc731f24fc7a56b4de08",
+      "relocations": [
+        {
+          "symbol": "GH3X2X_WriteReg",
+          "offset": 8,
+          "relocation_type": 10,
+          "address": 176313,
+          "role": "native_function"
+        },
+        {
+          "symbol": "GH3X2X_WriteRegBitField",
+          "offset": 24,
+          "relocation_type": 30,
+          "address": 176349,
+          "role": "native_function"
+        }
+      ]
+    }
+  },
+  "new_C_executable_bytes": 28,
+  "execution": {
+    "paired_cases": 384,
+    "executions": 768,
+    "checks": [
+      "two ordered writes: WriteReg(0x502,0), WriteRegBitField(0,10,10,0)",
+      "first provider SP=caller-8, terminal provider SP=caller",
+      "arbitrary full-word provider return bits and caller-clobber effects",
+      "saved registers, return SP, interrupt masks; actual compiler R0 tail propagation",
+      "C never executes stock instructions"
+    ],
+    "limits": [
+      "Register providers modeled; no physical register transaction",
+      "Provider-private saved stack words and caller-clobbered flags/registers excluded",
+      "R0 propagation describes this emitted void C function, not an ISO C return-value contract"
+    ]
+  },
+  "negative": {
+    "old_normal_interrupt_helper_rejected": true,
+    "reason": "Only the bit-field write executes; required 0x0502 write is missing",
+    "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-soft-reset-final/r1/r1-application/generated__gh_demo_r1.c.o"
+  },
+  "audit": {
+    "unchanged_other_objects": 574,
+    "removed_superseded_callback_context_function": "goodix_primitives_reset_register_fields",
+    "unchanged_other_primitive_functions": 320,
+    "internal_BL_retargeting": {
+      "function": "goodix_primitives_hr_extrema_tracker_update",
+      "offsets": [
+        510,
+        594
+      ],
+      "same_target": "goodix_primitives_hr_extrema_refine",
+      "reason": "Removed 56-byte preceding function changes internal branch displacement; all other bytes/relocations unchanged"
+    },
+    "unresolved_import_sets_unchanged": true,
+    "application_unresolved": 173,
+    "bootloader_unresolved": 34,
+    "one_existing_stock_entry_rebound_to_native_ABI": true
+  },
+  "qualification": {
+    "clang_candidates": 5,
+    "clang_compiled": 5,
+    "clang_selected_regions": 0,
+    "gcc_candidates": 4,
+    "gcc_compiled": 4,
+    "gcc_selected_regions": 1
+  },
+  "canonical_hybrid": {
+    "report": "build/hybrid-goal-r1-goodix-trigger-canonical/build-report.json",
+    "payload_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "totals": {
+      "binary-pull-through": 642227,
+      "source-built": 3933,
+      "resource-file": 248
+    },
+    "source_completeness_proven": false
+  },
+  "files": {
+    "r1/src/vendor/goodix_primitives/goodix_primitives.c": "dc11eb96eb1e12eb1a6393d5e535857f984df3db731e1260831ebbed2301d7f7",
+    "r1/src/vendor/goodix_primitives/goodix_primitives.h": "b7190e7b30f15f812fc7c865a6c0503935917d84dcb6d21d72047651670122d8",
+    "r1/src/config/goodix/native_demo_reset_config.h": "0ee9a6c2d5ab7a7afe3049b49201ea0c030cec28e851aafa0a958ea284f10923",
+    "r1/src/sources.json": "80545d54b3a9f10716645cb75311a6f34478925e2598e1b5b18913a30e0ee59a",
+    "r1/symbols/function-frontier.csv": "064133a867949701fc0d0e13b28b21f686aef76d9842c5883acc6140286a8a32",
+    "r1/docs/reference/FUNCTION-OWNERSHIP.csv": "608e4d845e3e7d457bfcb01c5dd8612f794833eff3905391b27512c490056ac5",
+    "tools/build/source-plan.json": "8044d671b4d8215bc590392c6368476cc6bc20ea0252f4e8395216ca9431b218",
+    "build/sources-goal-r1-goodix-trigger/report.json": "f137e6f25f60170a3bd0c91d1cd25dd73e92da7a48213bcb33d9f4e617444f80",
+    "build/hybrid-goal-r1-goodix-trigger-canonical/build-report.json": "07b25dd6cc8cfbb5dceffa6b522ad83f61a980094542d04cbbfd8696a8f9bdad",
+    "build/goal-r1-goodix-trigger/rea.json": "429a53a26f0982f31c4c419784fa5c57b6a27c3ba78bb992b914cb327e6b2a46",
+    "build/goal-r1-goodix-trigger/frontier-before.json": "6ca3f3dbd512a23ac330c076a25d5b988d625b4bbc9d2d192c5a918877034f9a",
+    "build/goal-r1-goodix-trigger/ownership-before.json": "d6fb887564f71e8a5a70e33e451ae719aa05177428e25dc96dbe484da3d619f1",
+    "build/goal-r1-goodix-trigger/primitives-before.c": "c60cc6e9be027b52490d99b87f2cf8c1a8db12dd96291ffc0126cc603b427986",
+    "build/goal-r1-goodix-trigger/primitives-before.h": "7d660881df66a68afa2fdd918f46a59361700370e3f3904467e84d1430b0c659",
+    "build/goal-r1-goodix-trigger/source-plan-before.json": "b75a13f8cb2608f77f02582570ec5a031de8790cd1af50130f4b9f644ddb6931",
+    "build/goal-r1-goodix-trigger/verify.py": "1e7453b427152ae098a51c55275e65798d1afb13d8774a2d758e267b2c73464c",
+    "build/goal-r1-goodix-trigger/results.json": "7ceb84836237c5ca58b1b06f10c4d552112fed21961cd79846769b7c709268a5",
+    "build/goal-r1-goodix-trigger/negative.py": "17c4c17f1b59958ff833829ee43cf5b6815eb3c6c551a4e0fbd475a1d7608b99",
+    "build/goal-r1-goodix-trigger/negative-results.json": "1c42520ae3d45bb3a73bb9ed6d7d071491c426e27adcab581611eefb0c1a7e89",
+    "build/goal-r1-goodix-trigger/audit.py": "6ea7c4834bb4730e020090e9a39e241b1b992e4fd84fa487e7e9d7827d3e7a81",
+    "build/goal-r1-goodix-trigger/audit-results.json": "0cb23a28b82cf641a17e17334f67447a019bdb43aed17928faf443504f1c2e42",
+    "build/goal-r1-goodix-trigger/qualified/qualification.json": "54cd9d8937e6ca440b481e2fb1d0af4ae8eee636ea46920a7d86cd08a0779ae7",
+    "build/goal-r1-goodix-trigger/qualified-gcc/qualification.json": "b9c2bf161b67df5b116197ea135f0c0befa8926f8e48bf45ea306aeecef5e63a",
+    "build/goal-r1-goodix-trigger/qualified-gcc/source-plan.json": "9caa5db141e2407295284e166176100bd97cd172ba3758f3b1ba729b31934733"
+  },
+  "limits": [
+    "Only this complete 28-byte body receives new byte credit",
+    "Register providers modeled in behavioral probes; no physical bus or sensor validation",
+    "574 other objects unchanged; two internal BL encodings in the primitive object retarget the same shifted function",
+    "Global pseudocode/source completeness unproven; G2 gates unchanged"
+  ]
+}

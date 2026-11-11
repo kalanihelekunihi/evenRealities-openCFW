@@ -1,214 +1,85 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_31a5bc\n"
-".type opencfw_em9305_child_31a5bc,@function\n"
-"opencfw_em9305_child_31a5bc:\n"
-"L31a5bc:\n"
-"enter_s [r13-r21,fp,blink]\n"
-"L31a5be:\n"
-"sub_s sp,sp,0x4\n"
-"L31a5c0:\n"
-"mov r20,r5\n"
-"L31a5c4:\n"
-"mov r21,r4\n"
-"L31a5c8:\n"
-"mov_s r18,r3\n"
-"L31a5ca:\n"
-"mov_s r19,r2\n"
-"L31a5cc:\n"
-"mov_s r16,r1\n"
-"L31a5ce:\n"
-"bl.d opencfw_em9305_child_316c58\n"
-"L31a5d2:\n"
-"mov_s r13,r0\n"
-"L31a5d4:\n"
-"breq.d.nt r0,0,L31a6b6\n"
-"L31a5d8:\n"
-"mov_s r14,r0\n"
-"L31a5da:\n"
-"ld r1,[0x805c70]\n"
-"L31a5e2:\n"
-"add r17,r13,0x18\n"
-"L31a5e6:\n"
-"ldh r2,[r17]\n"
-"L31a5ea:\n"
-"sub_s r1,r14,r1\n"
-"L31a5ec:\n"
-"ldh r3,[r17,2]\n"
-"L31a5f0:\n"
-"div r1,r1,912\n"
-"L31a5f4:\n"
-"mov r0,592\n"
-"L31a5f8:\n"
-"mpyuw r2,r2,1250\n"
-"L31a5fc:\n"
-"mpyuw r3,r3,1250\n"
-"L31a600:\n"
-"ldh r4,[r14,r0]\n"
-"L31a604:\n"
-"extb_s r0,r1\n"
-"L31a606:\n"
-"add r5,sp,0\n"
-"L31a60a:\n"
-"mov_s r6,opencfw_em9305_init_connection_query_31b21c\n"
-"L31a610:\n"
-"bl.d opencfw_em9305_associated_slot_allocate_3133b4\n"
-"L31a614:\n"
-"mov_s r1,0\n"
-"L31a616:\n"
-"breq.d.nt r0,0,L31a6ba\n"
-"L31a61a:\n"
-"mov_s r0,0\n"
-"L31a61c:\n"
-"ld r2,[0x805c70]\n"
-"L31a624:\n"
-"ld r1,[sp,0]\n"
-"L31a626:\n"
-"sub_s r3,r14,r2\n"
-"L31a628:\n"
-"div r3,r3,912\n"
-"L31a62c:\n"
-"stb r0,[r13,242]\n"
-"L31a630:\n"
-"stb r0,[r13,241]\n"
-"L31a634:\n"
-"mpydu r4,r1,0x1a36e3\n"
-"L31a63c:\n"
-"stb_s r0,[r13,0x2]\n"
-"L31a63e:\n"
-"stb_s r0,[r13,0x1]\n"
-"L31a640:\n"
-"extb_s r0,r3\n"
-"L31a642:\n"
-"sth r0,[r13,88]\n"
-"L31a646:\n"
-"mpyuw r0,r0,912\n"
-"L31a64a:\n"
-"asl r12,r5\n"
-"L31a64e:\n"
-"lsr r1,r4,0x1f\n"
-"L31a652:\n"
-"or_s r1,r1,r12\n"
-"L31a654:\n"
-"add_s r0,r0,r2\n"
-"L31a656:\n"
-"stb r20,[r13,99]\n"
-"L31a65a:\n"
-"stb r21,[r13,98]\n"
-"L31a65e:\n"
-"sth r1,[r13,90]\n"
-"L31a662:\n"
-"st.as r18,[r0,130]\n"
-"L31a666:\n"
-"st.as r19,[r0,129]\n"
-"L31a66a:\n"
-"mov_s r1,r0\n"
-"L31a66c:\n"
-"add r0,r0,524\n"
-"L31a670:\n"
-"add r1,r1,890\n"
-"L31a674:\n"
-"stb r16,[r0]\n"
-"L31a678:\n"
-"mov_s r0,1\n"
-"L31a67a:\n"
-"stb -1,[r1]\n"
-"L31a67e:\n"
-"bl.d opencfw_em9305_common_request_30455c\n"
-"L31a682:\n"
-"sth -1,[r1,2]\n"
-"L31a686:\n"
-"mov_s r0,r13\n"
-"L31a688:\n"
-"mov_s r1,r17\n"
-"L31a68a:\n"
-"mov_s r2,r19\n"
-"L31a68c:\n"
-"mov_s r3,r18\n"
-"L31a68e:\n"
-"bl.d opencfw_em9305_child_320088\n"
-"L31a692:\n"
-"mov r4,r16\n"
-"L31a696:\n"
-"mov_s r14,r0\n"
-"L31a698:\n"
-"brne_s r0,0,L31a6ae\n"
-"L31a69a:\n"
-"mov_s r0,r13\n"
-"L31a69c:\n"
-"mov_s r1,r17\n"
-"L31a69e:\n"
-"mov_s r2,r19\n"
-"L31a6a0:\n"
-"mov_s r3,r18\n"
-"L31a6a2:\n"
-"bl.d opencfw_em9305_child_31c88c\n"
-"L31a6a6:\n"
-"mov r4,r16\n"
-"L31a6aa:\n"
-"mov_s r14,r0\n"
-"L31a6ac:\n"
-"breq_s r0,0,L31a6da\n"
-"L31a6ae:\n"
-"bl.d opencfw_em9305_common_release_304588\n"
-"L31a6b2:\n"
-"mov_s r0,1\n"
-"L31a6b4:\n"
-"b_s L31a6c2\n"
-"L31a6b6:\n"
-"mov_s r14,0x9\n"
-"L31a6b8:\n"
-"b_s L31a6c2\n"
-"L31a6ba:\n"
-"bl.d opencfw_em9305_init_connection_release_31ad90\n"
-"L31a6be:\n"
-"mov_s r0,r14\n"
-"L31a6c0:\n"
-"mov_s r14,0xd\n"
-"L31a6c2:\n"
-"mov_s r0,r14\n"
-"L31a6c4:\n"
-"mov_s r1,r16\n"
-"L31a6c6:\n"
-"mov_s r2,r19\n"
-"L31a6c8:\n"
-"bl.d opencfw_em9305_init_state_status_send_3257a4\n"
-"L31a6cc:\n"
-"mov_s r3,r18\n"
-"L31a6ce:\n"
-"mov_s r1,2\n"
-"L31a6d0:\n"
-"bl.d opencfw_em9305_child_325e84\n"
-"L31a6d4:\n"
-"mov_s r0,r13\n"
-"L31a6d6:\n"
-"mov_s r0,r14\n"
-"L31a6d8:\n"
-"leave_s [r13-r21,fp,blink,pcl]\n"
-"L31a6da:\n"
-"ldb r1,[r13,98]\n"
-"L31a6de:\n"
-"brhs.d.nt r1,0x5,L31a6ec\n"
-"L31a6e2:\n"
-"mov_s r0,0x1a\n"
-"L31a6e4:\n"
-"bbit0.nt r0,r1,L31a6ec\n"
-"L31a6e8:\n"
-"bl opencfw_em9305_init_secondary_count_up_30e4cc\n"
-"L31a6ec:\n"
-"mov_s r0,0x805a74\n"
-"L31a6f2:\n"
-"ldb_s r1,[r0,0]\n"
-"L31a6f4:\n"
-"add_s r1,r1,1\n"
-"L31a6f6:\n"
-"bl.d opencfw_em9305_command_count_30e4bc\n"
-"L31a6fa:\n"
-"stb_s r1,[r0,0]\n"
-"L31a6fc:\n"
-"mov_s r14,0\n"
-"L31a6fe:\n"
-"b_s L31a6d6\n"
-".size opencfw_em9305_child_31a5bc,.-opencfw_em9305_child_31a5bc\n"
-);
+#include <stdint.h>
+
+/* Native 0x31a5bc..0x31a6f8: create a connection for an initiator/advertiser
+ * link. Take a free connection entry (native 0x316c58, status 9 when none)
+ * and reserve its anchor slot (native 0x3133b4 between the link's minimum
+ * and maximum interval +24/+26, units of 1250 us, with CE length +592 of the
+ * entry; status 13 and release on failure). Bind the link to the entry
+ * index (+88), store the slot anchor in 625 us units (+90), role/PHY bytes
+ * (+98/+99) and the peer address/type in the 912-byte entry, then start the
+ * connection (natives 0x320088, 0x31c88c). On success count the role up
+ * (PHY 1, 3 or 4 also counts the secondary init state) and return 0;
+ * otherwise report the status (native 0x3257a4), post event 2 and return
+ * the status. */
+extern uintptr_t opencfw_em9305_child_316c58(void);
+extern uint32_t opencfw_em9305_associated_slot_allocate_3133b4(uint32_t id, uint32_t direction,
+                                                               uint32_t minimum, uint32_t maximum,
+                                                               uint32_t extent, uintptr_t output,
+                                                               uintptr_t query);
+extern uint32_t opencfw_em9305_init_connection_query_31b21c(uint32_t,uintptr_t);
+extern uint32_t opencfw_em9305_init_connection_release_31ad90(uintptr_t);
+extern uint32_t opencfw_em9305_common_request_30455c(uint32_t);
+extern uint32_t opencfw_em9305_common_release_304588(uint32_t);
+extern uint32_t opencfw_em9305_child_320088(uintptr_t,uintptr_t,uint32_t,uint32_t,uint32_t);
+extern uint32_t opencfw_em9305_child_31c88c(uintptr_t,uintptr_t,uint32_t,uint32_t,uint32_t);
+extern uint32_t opencfw_em9305_init_state_status_send_3257a4(uint32_t,uint32_t,uint32_t,uint32_t);
+extern uint32_t opencfw_em9305_child_325e84(uintptr_t,uint32_t);
+extern uint32_t opencfw_em9305_init_secondary_count_up_30e4cc(void);
+extern uint32_t opencfw_em9305_command_count_30e4bc(void);
+
+uint32_t opencfw_em9305_child_31a5bc(uintptr_t link, uint32_t peer_type, uint32_t peer_low,
+                                     uint32_t peer_high, uint32_t role, uint32_t phy)
+{
+    uint32_t status;
+    uint32_t anchor;
+    uintptr_t entry = opencfw_em9305_child_316c58();
+    if (entry == 0u) {
+        status = 9u;
+    } else {
+        uintptr_t interval = link + 0x18u;
+        uint32_t index = (uint8_t)((int32_t)(entry - *(volatile uint32_t *)(uintptr_t)0x805c70u) / 912);
+        uint32_t minimum = *(volatile uint16_t *)interval * 1250u;
+        uint32_t maximum = *(volatile uint16_t *)(interval + 2u) * 1250u;
+        if (opencfw_em9305_associated_slot_allocate_3133b4(
+                index, 0u, minimum, maximum, *(volatile uint16_t *)(entry + 592u), (uintptr_t)&anchor,
+                (uintptr_t)opencfw_em9305_init_connection_query_31b21c) == 0u) {
+            (void)opencfw_em9305_init_connection_release_31ad90(entry);
+            status = 13u;
+        } else {
+            uintptr_t base = *(volatile uint32_t *)(uintptr_t)0x805c70u;
+            index = (uint8_t)((int32_t)(entry - base) / 912);
+            *(volatile uint8_t *)(link + 242u) = 0u;
+            *(volatile uint8_t *)(link + 241u) = 0u;
+            uint64_t scaled = (uint64_t)anchor * 0x1a36e3u;
+            *(volatile uint8_t *)(link + 2u) = 0u;
+            *(volatile uint8_t *)(link + 1u) = 0u;
+            *(volatile uint16_t *)(link + 88u) = (uint16_t)index;
+            uintptr_t connection = index * 912u + base;
+            *(volatile uint8_t *)(link + 99u) = (uint8_t)phy;
+            *(volatile uint8_t *)(link + 98u) = (uint8_t)role;
+            *(volatile uint16_t *)(link + 90u) = (uint16_t)(scaled >> 31);
+            *(volatile uint32_t *)(connection + 520u) = peer_high;
+            *(volatile uint32_t *)(connection + 516u) = peer_low;
+            *(volatile uint8_t *)(connection + 524u) = (uint8_t)peer_type;
+            *(volatile uint8_t *)(connection + 890u) = 0xffu;
+            *(volatile uint16_t *)(connection + 892u) = 0xffffu;
+            (void)opencfw_em9305_common_request_30455c(1u);
+            status = opencfw_em9305_child_320088(link, interval, peer_low, peer_high, peer_type);
+            if (status == 0u)
+                status = opencfw_em9305_child_31c88c(link, interval, peer_low, peer_high, peer_type);
+            if (status == 0u) {
+                uint32_t kind = *(volatile uint8_t *)(link + 98u);
+                if (kind < 5u && ((0x1au >> kind) & 1u) != 0u)
+                    (void)opencfw_em9305_init_secondary_count_up_30e4cc();
+                volatile uint8_t *links = (volatile uint8_t *)(uintptr_t)0x805a74u;
+                *links = (uint8_t)(*links + 1u);
+                (void)opencfw_em9305_command_count_30e4bc();
+                return 0u;
+            }
+            (void)opencfw_em9305_common_release_304588(1u);
+        }
+    }
+    (void)opencfw_em9305_init_state_status_send_3257a4(status, peer_type, peer_low, peer_high);
+    (void)opencfw_em9305_child_325e84(link, 2u);
+    return status;
+}

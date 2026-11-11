@@ -19,7 +19,7 @@ static void log_failure(const char *ring,const char *sdk)
  if(r1_structured_log_mode_get()&2)nrf_log_frontend_std_0(0x001c0001,sdk);
 }
 static __attribute__((noreturn,noinline)) void bad_object(void)
-{uint32_t mask=64;__asm__ volatile("msr BASEPRI,%0"::"r"(mask):"memory");*(volatile uint32_t *)(uintptr_t)UINT32_MAX=0;for(;;){}}
+{uint32_t mask=64;__builtin_arm_wsr("basepri",mask);*(volatile uint32_t *)(uintptr_t)UINT32_MAX=0;for(;;){}}
 uint32_t r1_stream_object_insert(void *object)
 {
  if(!r1_stream_object_registry.payload_bytes)r1_native_list_initialize(&r1_stream_object_registry,8);

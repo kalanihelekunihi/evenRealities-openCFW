@@ -1,0 +1,160 @@
+{
+  "schema_version": 1,
+  "scope": "SpO2 enable/PPG packet byte-view correction",
+  "acceptance_target": "Hardware-first license-free C firmware; byte identity waived",
+  "report": "build/sources-goal-r1-goodix-spo2-packet-layout-c/report.json",
+  "comparison_report": "build/sources-goal-r1-goodix-spo2-calculate-c/report.json",
+  "audit": {
+    "compiled_units": 901,
+    "application_imports": 91,
+    "bootloader_imports": 22,
+    "unchanged_prior_nongenerated_sources_and_objects": 890,
+    "tested_object_equals_normal_build": true,
+    "new_owned_state_bytes": 0,
+    "new_native_functions_admitted": 0,
+    "paired_cases": 4433,
+    "old_compiled_separate_array_layout_rejected": true,
+    "explicit_enable_PPG_object_layout": true,
+    "live_PPG_writes_visible_in_enable_scan": true,
+    "imports_unchanged": true,
+    "source_plan_and_cache_layout_unchanged": true
+  },
+  "direct": {
+    "paired_cases": 1044,
+    "matched_faults": 81,
+    "native_instruction_bytes_executed": [
+      378,
+      2,
+      74
+    ],
+    "actual_C_and_native_clear_sleep_popcount_and_finite_round": true,
+    "calculation_core_modeled": true,
+    "typed_pointer_normalization": true,
+    "enable_prefix_includes_live_PPG_words": true,
+    "independent_packet_and_exact_Fraction_FP_oracles": true,
+    "all_four_FPSCR_rounding_modes_and_status_checked": true,
+    "full_nonstack_RAM_and_boundary_snapshots_match": true,
+    "source_cannot_execute_stock": true,
+    "source_object_sha256": "84b4dcfe37930f518f0fac2e831761a54abdb458f3057ded4fc994435dd6444a"
+  },
+  "dispatcher_integration": {
+    "spo_source_object_sha256": "84b4dcfe37930f518f0fac2e831761a54abdb458f3057ded4fc994435dd6444a",
+    "spo_native_instruction_bytes_executed": [
+      378,
+      2,
+      74
+    ],
+    "soft_source_object_sha256": "52197b2a33d395847a6639dc15e76ca965d2663873e506973d300192c9de4aec",
+    "soft_native_instruction_bytes_executed": [
+      462,
+      58,
+      58
+    ],
+    "HR_source_object_sha256": "4f030813f31d6879207215b0e591acd27484ce2980a022965fec84aeceedf347",
+    "HR_native_instruction_bytes_executed": [
+      342,
+      2
+    ],
+    "HRV_source_object_sha256": "7a8e23895e10217462ac71aa88d70986c82c2ea1239681e691fb440842960f09",
+    "HRV_native_instruction_bytes_executed": [
+      376,
+      2
+    ],
+    "ADT_source_object_sha256": "07a2bd82f33a700387d3c876906de3a224609b4697109133032997e8de1b6b2a",
+    "ADT_native_instruction_bytes_executed": [
+      298,
+      94,
+      36
+    ],
+    "paired_cases": 3389,
+    "matched_faults": 10,
+    "native_instruction_bytes_executed": 190,
+    "actual_C_and_native_sleep_popcount_and_memory_helpers": true,
+    "logging_ports_modeled": true,
+    "actual_ADT_filter_report_and_soft_events": true,
+    "calculation_cores_diagnostics_and_logging_modeled": true,
+    "all_five_sensor_frame_adapters_actual": true,
+    "active_FPSCR_and_saved_FP_registers_checked": true,
+    "actual_soft_ADT_adapter_and_reporters": true,
+    "actual_HR_adapter": true,
+    "actual_HRV_adapter": true,
+    "full_nonstack_RAM_and_boundary_snapshots_match": true,
+    "source_cannot_execute_stock": true,
+    "source_object_sha256": "7e4344bae1eb7809e1c9e85939abf2545e030c93b83cbce39431ee1a8c3872d1",
+    "signed_8_bit_executor_ABI": true
+  },
+  "compiled_defects_rejected": [
+    {
+      "name": "original-separate-arrays",
+      "compiled": true,
+      "rejected": true
+    }
+  ],
+  "contract": [
+    "Native frame places enable bytes at stack+0x90 and PPG words at stack+0x94. Native assembler0x61da4 scans channel_count*3 bytes from the enable pointer, not only the mask-bit extent. With four channels this spans4 mask bytes plus8 live PPG bytes.",
+    "A single52-byte C struct holds enabled[4] then ppg[12], with compile-time offset/size assertions. enable_flg points to the complete object byte view, not a standalone four-byte array.",
+    "Keep PPG and mask in the same live object: integrity writes into the first PPG words must immediately affect the later enable-prefix reads. Copying a12-byte prefix would not preserve this relationship.",
+    "Existing packing, status gates, publication and finite rounding remain unchanged. Direct cases compare prefix content and enforce aliasing after a temporary PPG write/restoration. Dispatcher cases enforce adjacency/prefix content while running all five real frame adapters."
+  ],
+  "limits": [
+    "The original separate arrays put gain bytes after the mask in the tested Clang object; previous four-byte pointer-extent checks missed this consumer dependency. The old compiled object is retained and rejected by the new independent layout oracle.",
+    "4433 native/C pairs comprise1044 direct and3389 dispatcher cases. All380 existing adapter/report instruction bytes and74 reused round bytes execute;81 direct and10 integrated selected faults match. No additional stock function is admitted.",
+    "The assembler, decoder and other calculation stages remain unimplemented/modelled in these fixtures. This establishes the packet layout and alias contract, not complete computation, hardware concurrency, actual sampling or final startup/placement.",
+    "All901 units compile/compose without failures or duplicate strong symbols.890 other nongenerated source/object pairs are unchanged; imports remain91 application/22 boot. Source-plan/cache files remain unchanged. Relocatable composition is not a bootable image."
+  ],
+  "evidence_files": {
+    "build/sources-goal-r1-goodix-spo2-packet-layout-c/report.json": "074755ef7157c7c5625031f3586b1589f1d3746bef42b443d0c1594eee03b74e",
+    "build/sources-goal-r1-goodix-spo2-calculate-c/report.json": "1cc27cafc51cbc6dcdb87768a02af2b19d87b71037f84d639bb39917f3d427ef",
+    "r1/src/application/goodix/native_spo2_execute.c": "d96cdeacee0d801f5b71c7e9624a37aa7d1b9df7013679dd5237e2a650f5e26b",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-spo2-packet-layout-c/r1/r1-application/r1__src__application__goodix__native_spo2_execute.c.o": "84b4dcfe37930f518f0fac2e831761a54abdb458f3057ded4fc994435dd6444a",
+    "r1/src/sources.json": "230f81002e95cafdd38a6eac0b38b5f2f9bd3c41dde75e20cd8ecd4a81ad289a",
+    "tools/build/source-plan.json": "eeb516e31b3310fb0718f36908977f8125723f7c5e0e86cd6744395826259a4d",
+    "r1/src/config/runtime/native_health_cache.ld": "eb8f131c489cd818d4e36718718fa1989719ca0170f164541a1a5bf56dfc1ec3",
+    "r1/docs/reference/FUNCTION-OWNERSHIP.csv": "fe2da15838b5929421dbb9affc521f01b4dea187f5119c2b8b744fc9f6a01af6",
+    "r1/symbols/function-frontier.csv": "45f6bf815e2174ee8fa3ad5c82519cf056eae959365abb35d203f44bba27b26d",
+    "r1/docs/reference/goodix-spo2-execute-c-review.md": "36c916612e05484f51055ffc8dc48a71db55c74e6a8bff0f067473333ac6c129",
+    "r1/docs/reference/goodix-spo2-calculate-c-review.md": "1f73fefe49bed19cbdc31d6d0eb5a0ba13efdd499d66321076d45c6fc6a80551",
+    "build/goal-r1-goodix-spo2-execute-c/source.o": "4b2baae57639741841995142b72fc543fb8bc81022a17f4d08606a363146c635",
+    "build/goal-r1-goodix-spo2-execute-c/rea.json": "08229933831899d009d5bb24c2c18f79db9eee886654b03bc9adf8a85cb2da0b",
+    "build/goal-r1-goodix-spo2-execute-c/executor-disassembly.txt": "cda9d9184246ed7a079a02991d430b08010237705548635ed3a997fdff0749e2",
+    "r1/src/application/runtime/memory_eabi.c": "e89f73174230a5111606f175a2429695c62f178ace0b44478ab93497a9ebacff",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-spo2-packet-layout-c/r1/r1-application/r1__src__application__runtime__memory_eabi.c.o": "e26f26d06a6113b53a70667703a46d09ccdd26875e58d267c6242504f683ecc6",
+    "third-party/upstream/goodix-gh3x2x/gh3x2x/demo_code/demo_algo_code/goodix_algo_application/src/gh3x2x_demo_algo_config.c": "65345b49ac1d9818fcc6f5dff3a33dbdd89c4e2182e6fe35480543b0a803a861",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-spo2-packet-layout-c/r1/r1-application/third-party__upstream__goodix-gh3x2x__gh3x2x__demo_code__demo_algo_code__goodix_algo_application__src__gh3x2x_demo_algo_config.c.o": "6a65ddb671429ddab29014c4e028d634b5e4159d720ecc05d1f7f53e8c0f3789",
+    "third-party/upstream/musl-memory-1.2.5/memset.c": "2a74d9e7f988945e0d691d480b78d77a228da0d2be401c1000637cc879b2c0be",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-spo2-packet-layout-c/r1/r1-application/third-party__upstream__musl-memory-1.2.5__memset.c.o": "6c2f1a8f480c27d5bc20f79ac535dac28fbbdcaec12e69bad96721f724ec9057",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-spo2-packet-layout-c/r1/r1-bootloader/r1__src__application__runtime__memory_eabi.c.o": "e26f26d06a6113b53a70667703a46d09ccdd26875e58d267c6242504f683ecc6",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-spo2-packet-layout-c/r1/r1-bootloader/third-party__upstream__musl-memory-1.2.5__memset.c.o": "6c2f1a8f480c27d5bc20f79ac535dac28fbbdcaec12e69bad96721f724ec9057",
+    "r1/src/application/goodix/native_spo2_math.c": "ffee2e1ee1d93a3c3d3b2b7ee68e52b572a9df88a5c5e1dc5058c3221be990b9",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-spo2-packet-layout-c/r1/r1-application/r1__src__application__goodix__native_spo2_math.c.o": "265990bd7f6c22c801d820280faeccc977bbacff30e719a4ad3f08414b33dfc5",
+    "r1/src/application/goodix/native_spo2_calculate.c": "91c85a7620b5a78a5954247ff0af4df5f4e82ceb472a6d81402951cadb8977e0",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-spo2-packet-layout-c/r1/r1-application/r1__src__application__goodix__native_spo2_calculate.c.o": "0d1e2ddeeefd0ad393d0933a15bf7185e395422378e50e2c584b449fa1cff367",
+    "build/goal-r1-goodix-spo2-packet-layout-c/audit.json": "2a11da03030d935ac7fe5955849260872d3548de5c7e6358e9409dfe0dcee3db",
+    "build/goal-r1-goodix-spo2-packet-layout-c/candidate.d": "8275d495ed2d43f6fad3505e4c387d3a44e71f1421e47cc02065fa99327b8b81",
+    "build/goal-r1-goodix-spo2-packet-layout-c/rea-assembler-analysis.json": "c08b10be34ed517c4241bc74ad2ae3c5ba92c0ec027a583ac486e62c63b831a3",
+    "build/goal-r1-goodix-spo2-packet-layout-c/candidate.c": "d96cdeacee0d801f5b71c7e9624a37aa7d1b9df7013679dd5237e2a650f5e26b",
+    "build/goal-r1-goodix-spo2-packet-layout-c/verify.log": "fec7055fa15e51e81eacabfe3631d8aa63558dfb291e54284756bef95b1b6027",
+    "build/goal-r1-goodix-spo2-packet-layout-c/checkpoint.json": "9410d5bb87592f353c187a3c84349e954d132a369fc47385a3fbdf351d90323f",
+    "build/goal-r1-goodix-spo2-packet-layout-c/original-layout-rejected.log": "4f9a7a953904759e41b1a34e0d4d7eed34240f1db9c87fcccafe002ba2f37b8f",
+    "build/goal-r1-goodix-spo2-packet-layout-c/test.ld": "53f2b24a4da8bf596c06d3f6b67387cd05582b74012de89307959fc26198910d",
+    "build/goal-r1-goodix-spo2-packet-layout-c/audit.py": "7f0a405c2094d4ae5f46658db58afce4aa7eaf69c036508b355e055fdf20e6dc",
+    "build/goal-r1-goodix-spo2-packet-layout-c/integration.elf": "dbae42c386febf61ba10fe6c87cec338e126f5bafaad2ef934a128c8566c6fa1",
+    "build/goal-r1-goodix-spo2-packet-layout-c/source.elf": "c1fa0643f323ed893b8c063c332719589af9d3fe48b8e6f790968b8949a5ef67",
+    "build/goal-r1-goodix-spo2-packet-layout-c/production-compile-argv.json": "4b03c8a7db525fb9e2ee05ecc78c4ce6ea635bb53a7cae534870a85b8843a022",
+    "build/goal-r1-goodix-spo2-packet-layout-c/integration-results.json": "3564581866329e9b826cf0419e9066bb91968d4ab9aa8856954dc791b099fc2d",
+    "build/goal-r1-goodix-spo2-packet-layout-c/rea-assembler-dependencies.json": "96b94b486f453e6b539faf2126400cc0b04f8eb4a6a78b9537421d85e0bc4aaa",
+    "build/goal-r1-goodix-spo2-packet-layout-c/negative-results.json": "4968c60a099f569579776cfdff4b34cc45090634eb37260d0635a9c0ca657189",
+    "build/goal-r1-goodix-spo2-packet-layout-c/source.o": "84b4dcfe37930f518f0fac2e831761a54abdb458f3057ded4fc994435dd6444a",
+    "build/goal-r1-goodix-spo2-packet-layout-c/results.json": "7881aa192ce73b36fa8824d6a71133f8e18e306380835b922639135437a12b9c",
+    "build/goal-r1-goodix-spo2-packet-layout-c/integration.log": "ba8aac3083f687787162382a8ff9fb230c0c9c957292654a53868b2f353de4c5",
+    "build/goal-r1-goodix-spo2-packet-layout-c/integration.py": "b25d9aff64f777764623a77f63b454b81f6856ea04202849d5277e8af4aa4b53",
+    "build/goal-r1-goodix-spo2-packet-layout-c/rea-assembler-bytes.json": "21418bdec2bc3613d0659bef606b306f94a8dc69e5a58f97ab37c5957291af6c",
+    "build/goal-r1-goodix-spo2-packet-layout-c/record.py": "80519a17d52bd117734f7f4e7c57bdbd21c81779d2869d5a59a698efe9da97f3",
+    "build/goal-r1-goodix-spo2-packet-layout-c/compile-argv.json": "a4002145d244d9d1eaec7078432d49efdd853624d894d736123f99729ebdb0e5",
+    "build/goal-r1-goodix-spo2-packet-layout-c/manifest-before.json": "2791038c22e7c883c4f9e5ab1583c762e7ec5910aac51509ed002ede088be229",
+    "build/goal-r1-goodix-spo2-packet-layout-c/verify.py": "9a078a9de7b873538a747dca5e38dec3097ef95c4861b1eef1677421b94b7fdd",
+    "build/goal-r1-goodix-spo2-packet-layout-c/integration.ld": "e94187a8ae70dd55d9a9666f84d0db5043e14d3b0dafb5f5029b3c6c38421149",
+    "build/goal-r1-goodix-spo2-packet-layout-c/source-before.c": "f9f048d7331c73f8efd2f2eebb00a9dff7c81825bb0140f91074cb253fcd2e9f",
+    "build/goal-r1-goodix-spo2-packet-layout-c/build.log": "8bf7d1e60dcefd854252fefc2582dd69cf45c7d7c3b2176bbeaa03abe254dd80"
+  }
+}

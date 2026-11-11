@@ -1,0 +1,105 @@
+{
+  "schema_version": 1,
+  "source": "r1/src/application/board/native_peer_restore.c",
+  "native_roots": [
+    "0x736b8",
+    "0x73778",
+    "0x737c8",
+    "0x3d764",
+    "0x4cb58"
+  ],
+  "report": "build/sources-goal-r1-peer-restore-c/report.json",
+  "compiled_units": 831,
+  "application_imports": 73,
+  "added_imports": [],
+  "removed_imports": [
+    "r1_peer_record_commit"
+  ],
+  "prior_objects_unchanged": 828,
+  "changed_generated_objects": [
+    [
+      "r1-bootloader",
+      "{gen}/r1_startup_vectors.S"
+    ],
+    [
+      "r1-bootloader",
+      "{gen}/r1_uecc.c"
+    ]
+  ],
+  "added_units": [
+    [
+      "r1-application",
+      "r1/src/application/board/native_peer_restore.c"
+    ]
+  ],
+  "verification": {
+    "restore_pairs": 162,
+    "getter_pairs": 276,
+    "address_flag_pairs": 1536,
+    "seeded_live_pairs": 256,
+    "defined_short_read_cases": 40,
+    "actual_cached_KV_and_dirty_scan": false
+  },
+  "actual_cached_KV_dirty_scan_integration": {
+    "restore_pairs": 162,
+    "getter_pairs": 23,
+    "address_flag_pairs": 24,
+    "seeded_live_pairs": 16,
+    "defined_short_read_cases": 0,
+    "actual_cached_KV_and_dirty_scan": true
+  },
+  "mutants": {
+    "rejected": [
+      "marker",
+      "repair_flag",
+      "refresh_write_handle",
+      "restore_gate",
+      "pair_second",
+      "phone_copy",
+      "address_flag",
+      "zero_sentinel",
+      "header_low_bit",
+      "idle_check"
+    ]
+  },
+  "rea_receipts": "r1/docs/reference/peer-restore-rea-bytes.json",
+  "rea_bytes_match_pinned_stock": true,
+  "new_state_owners": [],
+  "reused_owners": [
+    "r1_device_info_record_kv_handle",
+    "r1_ble_phone_peer_address",
+    "r1_ble_glasses_peer_address"
+  ],
+  "contract": {
+    "record_size": 52,
+    "marker_offset": 20,
+    "marker": "0x484d4143",
+    "invalid_marker": "set both six-byte addresses FF, set marker, clear only bit 2 of byte 24; reload handle for write; run idle check",
+    "flag_get": "fresh read; return byte 24 bit 2",
+    "pair_get": "fresh read even for two null outputs; optional six-byte copies from 8 and 14 in order",
+    "commit": "refresh; fresh flag read; if set, fresh address pair read, copy both records, then classify phone and glasses",
+    "address_classification": "all FF or all zero -> header bit 0 only; otherwise header bit 0 plus 0x14",
+    "live_header_reload": true,
+    "defined_failure_fallback": "all 52-byte private read buffers start at zero"
+  },
+  "limitations": [
+    "Full-read stock/C comparisons include ignored nonzero read/write statuses and modeled handle/data changes.",
+    "Short reads validate the defined C zero fallback separately; native uninitialized private stack is not reproduced.",
+    "Deeper integration executes actual cached KV read/write, dirty scan and memcmp. Prepared seven-node cache and modeled critical/persist/flush callbacks do not prove physical flash behavior.",
+    "RAM store width and private frames/arguments, incidental void scratch return registers and exact header-bit semantics beyond the observed byte operation are outside the claim.",
+    "No physical radio, final application link or boot proof; byte identity is not required by current user instruction."
+  ],
+  "evidence_files": {
+    "build/sources-goal-r1-peer-restore-c/report.json": "f4df5160ac71a85a7fad4ee5010f2fd88de109203d7a2cefdcb2e6c4cb9b2208",
+    "r1/src/sources.json": "6a6b18f93a3899873c3ed0b5af986601de6d736f512503755230d4fbc93f946b",
+    "r1/src/application/board/native_peer_restore.c": "e981700863390b9cfb8a7078078438f683f7bfc849960ff3da60b4a42e742974",
+    "r1/src/application/board/native_ble_identity.h": "9bc19f7e730a13d94f684ef0adbf2d01367740d5984320f2b48741560b32f58a",
+    "build/goal-r1-peer-restore-c/verify.py": "93a36833026faf82d74ae400ee72fa431ba6daca542b84bb5c707122ba8994cf",
+    "build/goal-r1-peer-restore-c/verification.json": "a402fd9f21667f9f596988b0e945c7530c9ef2afc5afca5b2cb14ea134fc5eef",
+    "build/goal-r1-peer-restore-c/integration.json": "04e05cce030313b3e5387d647f12e70c78b4df84a25740184b52e63e0a31b412",
+    "build/goal-r1-peer-restore-c/mutants.py": "7c430b9da4ee3095662eade26c1ec28ebb40acb25b7452e38bc97d7d90595736",
+    "build/goal-r1-peer-restore-c/mutants.json": "d36bc1ef46d83b634c5969fadf2b6f2792b9299f756cdc879b0c816bac38e46d",
+    "build/goal-r1-peer-restore-c/header-check.json": "e18572d3152c07c86635c4c20943611ca6d3fcf070b67f7923dd973b136e757c",
+    "r1/docs/reference/peer-restore-rea-bytes.json": "648e836e2e9b081111d0b29f68e60f350455ea79744821e839d3409c6584f8c9"
+  }
+}

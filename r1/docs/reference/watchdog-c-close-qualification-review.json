@@ -1,0 +1,678 @@
+{
+  "cases": 120,
+  "passed": 120,
+  "actual_registry_dispatchers": true,
+  "private_stack_memory_compared": false,
+  "source_sha256": "31516fcbc9c2dd7d1509c860bc31fee7322fc7fcbef304f53e47d6a8f728ce8a",
+  "report": "build/sources-goal-r1-twi-delay-tail/report.json",
+  "new_source_bytes": 12,
+  "existing_feed_thunk_reconfirmed": true,
+  "application_imports": 210,
+  "bootloader_imports": 34,
+  "limitations": [
+    "Operation callback boundary modeled; actual native/C wrapper, feed and registry dispatch code executes",
+    "Physical watchdog peripheral and reset unverified",
+    "Not a complete source-only firmware build"
+  ],
+  "scope": {
+    "requested": [
+      "r1/src/application/board/native_hw_twi_completion.c",
+      "r1/src/application/board/native_hw_twi_wait.c",
+      "r1/src/application/board/native_named_wdt.c",
+      "r1/src/application/board/native_rtc_driver.c",
+      "r1/src/application/board/native_watchdog_device.c",
+      "r1/src/application/board/native_watchdog_port.c"
+    ],
+    "selected": [
+      "r1/src/application/board/native_hw_twi_completion.c",
+      "r1/src/application/board/native_hw_twi_wait.c",
+      "r1/src/application/board/native_named_wdt.c",
+      "r1/src/application/board/native_watchdog_device.c",
+      "r1/src/application/board/native_watchdog_port.c"
+    ],
+    "missing": [
+      "r1/src/application/board/native_rtc_driver.c"
+    ],
+    "all_candidates": 4054
+  },
+  "qualification": {
+    "candidate_units": 25,
+    "compiled_units": 25,
+    "units": [
+      {
+        "source": "r1/src/application/board/native_hw_twi_completion.c",
+        "payload": "r1-application",
+        "evidence": "r1/symbols/function-frontier.csv",
+        "selected": [],
+        "compiled": true,
+        "rejections": {
+          "native_symbol_anchor_missing": 2,
+          "anchored_relocation_pattern_not_exact": 1
+        },
+        "source_implementation_completeness": "not established by compilation or byte matching",
+        "reason": "no exact anchored body under tested production bindings; integration remains unfinished"
+      },
+      {
+        "source": "r1/src/application/board/native_hw_twi_completion.c",
+        "payload": "r1-application",
+        "evidence": "r1/symbols/function-frontier.csv",
+        "selected": [],
+        "compiled": true,
+        "rejections": {
+          "anchored_relocation_pattern_not_exact": 1,
+          "native_symbol_anchor_missing": 1
+        },
+        "source_implementation_completeness": "not established by compilation or byte matching",
+        "reason": "no exact anchored body under tested production bindings; integration remains unfinished"
+      },
+      {
+        "source": "r1/src/application/board/native_hw_twi_completion.c",
+        "payload": "r1-application",
+        "evidence": "r1/symbols/function-frontier.csv",
+        "selected": [],
+        "compiled": true,
+        "rejections": {
+          "native_symbol_anchor_missing": 2,
+          "anchored_relocation_pattern_not_exact": 1
+        },
+        "source_implementation_completeness": "not established by compilation or byte matching",
+        "reason": "no exact anchored body under tested production bindings; integration remains unfinished"
+      },
+      {
+        "source": "r1/src/application/board/native_hw_twi_completion.c",
+        "payload": "r1-application",
+        "evidence": "r1/symbols/function-frontier.csv",
+        "selected": [],
+        "compiled": true,
+        "rejections": {
+          "native_symbol_anchor_missing": 2,
+          "anchored_relocation_pattern_not_exact": 1
+        },
+        "source_implementation_completeness": "not established by compilation or byte matching",
+        "reason": "no exact anchored body under tested production bindings; integration remains unfinished"
+      },
+      {
+        "source": "r1/src/application/board/native_hw_twi_completion.c",
+        "payload": "r1-application",
+        "evidence": "r1/symbols/function-frontier.csv",
+        "selected": [],
+        "compiled": true,
+        "rejections": {
+          "anchored_relocation_pattern_not_exact": 1,
+          "native_symbol_anchor_missing": 1
+        },
+        "source_implementation_completeness": "not established by compilation or byte matching",
+        "reason": "no exact anchored body under tested production bindings; integration remains unfinished"
+      },
+      {
+        "source": "r1/src/application/board/native_hw_twi_wait.c",
+        "payload": "r1-application",
+        "evidence": "r1/symbols/function-frontier.csv",
+        "selected": [],
+        "compiled": true,
+        "rejections": {
+          "native_symbol_anchor_missing": 1,
+          "anchored_relocation_pattern_not_exact": 2
+        },
+        "source_implementation_completeness": "not established by compilation or byte matching",
+        "reason": "no exact anchored body under tested production bindings; integration remains unfinished"
+      },
+      {
+        "source": "r1/src/application/board/native_hw_twi_wait.c",
+        "payload": "r1-application",
+        "evidence": "r1/symbols/function-frontier.csv",
+        "selected": [],
+        "compiled": true,
+        "rejections": {
+          "native_symbol_anchor_missing": 1,
+          "anchored_relocation_pattern_not_exact": 2
+        },
+        "source_implementation_completeness": "not established by compilation or byte matching",
+        "reason": "no exact anchored body under tested production bindings; integration remains unfinished"
+      },
+      {
+        "source": "r1/src/application/board/native_hw_twi_wait.c",
+        "payload": "r1-application",
+        "evidence": "r1/symbols/function-frontier.csv",
+        "selected": [],
+        "compiled": true,
+        "rejections": {
+          "native_symbol_anchor_missing": 1,
+          "anchored_relocation_pattern_not_exact": 2
+        },
+        "source_implementation_completeness": "not established by compilation or byte matching",
+        "reason": "no exact anchored body under tested production bindings; integration remains unfinished"
+      },
+      {
+        "source": "r1/src/application/board/native_hw_twi_wait.c",
+        "payload": "r1-application",
+        "evidence": "r1/symbols/function-frontier.csv",
+        "selected": [],
+        "compiled": true,
+        "rejections": {
+          "native_symbol_anchor_missing": 1,
+          "anchored_relocation_pattern_not_exact": 2
+        },
+        "source_implementation_completeness": "not established by compilation or byte matching",
+        "reason": "no exact anchored body under tested production bindings; integration remains unfinished"
+      },
+      {
+        "source": "r1/src/application/board/native_hw_twi_wait.c",
+        "payload": "r1-application",
+        "evidence": "r1/symbols/function-frontier.csv",
+        "selected": [],
+        "compiled": true,
+        "rejections": {
+          "native_symbol_anchor_missing": 1,
+          "anchored_relocation_pattern_not_exact": 2
+        },
+        "source_implementation_completeness": "not established by compilation or byte matching",
+        "reason": "no exact anchored body under tested production bindings; integration remains unfinished"
+      },
+      {
+        "source": "r1/src/application/board/native_named_wdt.c",
+        "payload": "r1-application",
+        "evidence": "r1/symbols/function-frontier.csv",
+        "selected": [],
+        "compiled": true,
+        "rejections": {
+          "native_symbol_anchor_missing": 1,
+          "anchored_relocation_pattern_not_exact": 3
+        },
+        "source_implementation_completeness": "not established by compilation or byte matching",
+        "reason": "no exact anchored body under tested production bindings; integration remains unfinished"
+      },
+      {
+        "source": "r1/src/application/board/native_named_wdt.c",
+        "payload": "r1-application",
+        "evidence": "r1/symbols/function-frontier.csv",
+        "selected": [],
+        "compiled": true,
+        "rejections": {
+          "native_symbol_anchor_missing": 1,
+          "anchored_relocation_pattern_not_exact": 3
+        },
+        "source_implementation_completeness": "not established by compilation or byte matching",
+        "reason": "no exact anchored body under tested production bindings; integration remains unfinished"
+      },
+      {
+        "source": "r1/src/application/board/native_named_wdt.c",
+        "payload": "r1-application",
+        "evidence": "r1/symbols/function-frontier.csv",
+        "selected": [],
+        "compiled": true,
+        "rejections": {
+          "native_symbol_anchor_missing": 1,
+          "anchored_relocation_pattern_not_exact": 3
+        },
+        "source_implementation_completeness": "not established by compilation or byte matching",
+        "reason": "no exact anchored body under tested production bindings; integration remains unfinished"
+      },
+      {
+        "source": "r1/src/application/board/native_named_wdt.c",
+        "payload": "r1-application",
+        "evidence": "r1/symbols/function-frontier.csv",
+        "selected": [],
+        "compiled": true,
+        "rejections": {
+          "native_symbol_anchor_missing": 1,
+          "anchored_relocation_pattern_not_exact": 3
+        },
+        "source_implementation_completeness": "not established by compilation or byte matching",
+        "reason": "no exact anchored body under tested production bindings; integration remains unfinished"
+      },
+      {
+        "source": "r1/src/application/board/native_named_wdt.c",
+        "payload": "r1-application",
+        "evidence": "r1/symbols/function-frontier.csv",
+        "selected": [],
+        "compiled": true,
+        "rejections": {
+          "native_symbol_anchor_missing": 1,
+          "anchored_relocation_pattern_not_exact": 3
+        },
+        "source_implementation_completeness": "not established by compilation or byte matching",
+        "reason": "no exact anchored body under tested production bindings; integration remains unfinished"
+      },
+      {
+        "source": "r1/src/application/board/native_watchdog_device.c",
+        "payload": "r1-application",
+        "evidence": "r1/symbols/function-frontier.csv",
+        "selected": [
+          {
+            "payload": "r1-application",
+            "symbol": "r1_native_watchdog_hw_close",
+            "start": 168136,
+            "end": 168148,
+            "sha256": "710b2af46f13fa6b722856c5c8bd4ff46cd8b983e158f82744871e9e501b0441",
+            "evidence": "r1/symbols/function-frontier.csv",
+            "bindings": {
+              "r1_stock_dispatch_0c": 548027,
+              "r1_native_watchdog_device": 536901268
+            },
+            "address": 327880,
+            "match_evidence": {
+              "method": "independently named native entry and all unrelocated bytes, followed by full linked equality",
+              "fixed_bytes": 4,
+              "compiled_pattern_sha256": "18cf2ecabc30b1b2881abcbf34d3d48d3db265cec04c49763fb84c1b4494a09d",
+              "relocations": [
+                {
+                  "symbol": "r1_stock_dispatch_0c",
+                  "offset": 4,
+                  "relocation_type": 30,
+                  "address": 548027,
+                  "role": "native_function"
+                },
+                {
+                  "symbol": "r1_native_watchdog_device",
+                  "offset": 8,
+                  "relocation_type": 2,
+                  "address": 536901268,
+                  "role": "native_literal_symbol"
+                }
+              ]
+            }
+          },
+          {
+            "payload": "r1-application",
+            "symbol": "r1_native_watchdog_hw_feed_thunk",
+            "start": 453608,
+            "end": 453612,
+            "sha256": "07983508cd241588ec24ee42f080e1abe7f59dfb06a3522f4fb2f0cf9f28213e",
+            "evidence": "r1/symbols/function-frontier.csv",
+            "bindings": {
+              "r1_native_watchdog_hw_feed": 327933
+            },
+            "address": 613352,
+            "binding_evidence": "r1/symbols/function-frontier.csv"
+          }
+        ],
+        "compiled": true,
+        "rejections": {
+          "anchored_relocation_pattern_not_exact": 3
+        },
+        "source_implementation_completeness": "not established by compilation or byte matching",
+        "reason": "exact selected bodies"
+      },
+      {
+        "source": "r1/src/application/board/native_watchdog_device.c",
+        "payload": "r1-application",
+        "evidence": "r1/symbols/function-frontier.csv",
+        "selected": [],
+        "compiled": true,
+        "rejections": {
+          "anchored_relocation_pattern_not_exact": 5
+        },
+        "source_implementation_completeness": "not established by compilation or byte matching",
+        "reason": "no exact anchored body under tested production bindings; integration remains unfinished"
+      },
+      {
+        "source": "r1/src/application/board/native_watchdog_device.c",
+        "payload": "r1-application",
+        "evidence": "r1/symbols/function-frontier.csv",
+        "selected": [],
+        "compiled": true,
+        "rejections": {
+          "anchored_relocation_pattern_not_exact": 5
+        },
+        "source_implementation_completeness": "not established by compilation or byte matching",
+        "reason": "no exact anchored body under tested production bindings; integration remains unfinished"
+      },
+      {
+        "source": "r1/src/application/board/native_watchdog_device.c",
+        "payload": "r1-application",
+        "evidence": "r1/symbols/function-frontier.csv",
+        "selected": [
+          {
+            "payload": "r1-application",
+            "symbol": "r1_native_watchdog_hw_close",
+            "start": 168136,
+            "end": 168148,
+            "sha256": "710b2af46f13fa6b722856c5c8bd4ff46cd8b983e158f82744871e9e501b0441",
+            "evidence": "r1/symbols/function-frontier.csv",
+            "bindings": {
+              "r1_stock_dispatch_0c": 548027,
+              "r1_native_watchdog_device": 536901268
+            },
+            "address": 327880,
+            "match_evidence": {
+              "method": "independently named native entry and all unrelocated bytes, followed by full linked equality",
+              "fixed_bytes": 4,
+              "compiled_pattern_sha256": "18cf2ecabc30b1b2881abcbf34d3d48d3db265cec04c49763fb84c1b4494a09d",
+              "relocations": [
+                {
+                  "symbol": "r1_stock_dispatch_0c",
+                  "offset": 4,
+                  "relocation_type": 30,
+                  "address": 548027,
+                  "role": "native_function"
+                },
+                {
+                  "symbol": "r1_native_watchdog_device",
+                  "offset": 8,
+                  "relocation_type": 2,
+                  "address": 536901268,
+                  "role": "native_literal_symbol"
+                }
+              ]
+            }
+          },
+          {
+            "payload": "r1-application",
+            "symbol": "r1_native_watchdog_hw_feed_thunk",
+            "start": 453608,
+            "end": 453612,
+            "sha256": "07983508cd241588ec24ee42f080e1abe7f59dfb06a3522f4fb2f0cf9f28213e",
+            "evidence": "r1/symbols/function-frontier.csv",
+            "bindings": {
+              "r1_native_watchdog_hw_feed": 327933
+            },
+            "address": 613352,
+            "binding_evidence": "r1/symbols/function-frontier.csv"
+          }
+        ],
+        "compiled": true,
+        "rejections": {
+          "anchored_relocation_pattern_not_exact": 3
+        },
+        "source_implementation_completeness": "not established by compilation or byte matching",
+        "reason": "exact selected bodies"
+      },
+      {
+        "source": "r1/src/application/board/native_watchdog_device.c",
+        "payload": "r1-application",
+        "evidence": "r1/symbols/function-frontier.csv",
+        "selected": [],
+        "compiled": true,
+        "rejections": {
+          "anchored_relocation_pattern_not_exact": 5
+        },
+        "source_implementation_completeness": "not established by compilation or byte matching",
+        "reason": "no exact anchored body under tested production bindings; integration remains unfinished"
+      },
+      {
+        "source": "r1/src/application/board/native_watchdog_port.c",
+        "payload": "r1-application",
+        "evidence": "r1/symbols/function-frontier.csv",
+        "selected": [],
+        "compiled": true,
+        "rejections": {
+          "native_symbol_anchor_missing": 3,
+          "anchored_relocation_pattern_not_exact": 1
+        },
+        "source_implementation_completeness": "not established by compilation or byte matching",
+        "reason": "no exact anchored body under tested production bindings; integration remains unfinished"
+      },
+      {
+        "source": "r1/src/application/board/native_watchdog_port.c",
+        "payload": "r1-application",
+        "evidence": "r1/symbols/function-frontier.csv",
+        "selected": [],
+        "compiled": true,
+        "rejections": {
+          "native_symbol_anchor_missing": 3,
+          "anchored_relocation_pattern_not_exact": 1
+        },
+        "source_implementation_completeness": "not established by compilation or byte matching",
+        "reason": "no exact anchored body under tested production bindings; integration remains unfinished"
+      },
+      {
+        "source": "r1/src/application/board/native_watchdog_port.c",
+        "payload": "r1-application",
+        "evidence": "r1/symbols/function-frontier.csv",
+        "selected": [],
+        "compiled": true,
+        "rejections": {
+          "native_symbol_anchor_missing": 3,
+          "anchored_relocation_pattern_not_exact": 1
+        },
+        "source_implementation_completeness": "not established by compilation or byte matching",
+        "reason": "no exact anchored body under tested production bindings; integration remains unfinished"
+      },
+      {
+        "source": "r1/src/application/board/native_watchdog_port.c",
+        "payload": "r1-application",
+        "evidence": "r1/symbols/function-frontier.csv",
+        "selected": [],
+        "compiled": true,
+        "rejections": {
+          "native_symbol_anchor_missing": 3,
+          "anchored_relocation_pattern_not_exact": 1
+        },
+        "source_implementation_completeness": "not established by compilation or byte matching",
+        "reason": "no exact anchored body under tested production bindings; integration remains unfinished"
+      },
+      {
+        "source": "r1/src/application/board/native_watchdog_port.c",
+        "payload": "r1-application",
+        "evidence": "r1/symbols/function-frontier.csv",
+        "selected": [],
+        "compiled": true,
+        "rejections": {
+          "native_symbol_anchor_missing": 3,
+          "anchored_relocation_pattern_not_exact": 1
+        },
+        "source_implementation_completeness": "not established by compilation or byte matching",
+        "reason": "no exact anchored body under tested production bindings; integration remains unfinished"
+      }
+    ]
+  },
+  "selection": {
+    "new_units": [
+      {
+        "source": "r1/src/application/board/native_watchdog_device.c",
+        "argv": [
+          "clang",
+          "--target=arm-none-eabi",
+          "-mcpu=cortex-m4",
+          "-mthumb",
+          "-mfpu=fpv4-sp-d16",
+          "-mfloat-abi=hard",
+          "-ffreestanding",
+          "-fno-builtin",
+          "-fno-strict-aliasing",
+          "-fshort-enums",
+          "-std=c11",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-DNRF52840_XXAA",
+          "-DFLOAT_ABI_HARD",
+          "-DNRF_SD_BLE_API_VERSION=7",
+          "-DNRF_DFU_SVCI_ENABLED",
+          "-DNRF_DFU_TRANSPORT_BLE=1",
+          "-DS140",
+          "-DSOFTDEVICE_PRESENT",
+          "-DFREERTOS",
+          "-DCONFIG_NFCT_PINS_AS_GPIOS",
+          "-DCONFIG_GPIO_AS_PINRESET",
+          "-I{root}/r1/src/config/sdk",
+          "-I/Users/kalani/Repo/evenRealities-openCFW/build/generated/r1",
+          "-include",
+          "/Users/kalani/Repo/evenRealities-openCFW/build/generated/r1/nrf_svci_clang.h",
+          "-isystem",
+          "{root}/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
+          "-I{root}/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/external/freertos/portable/GCC/nrf52",
+          "-I{root}/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/external/freertos/portable/CMSIS/nrf52",
+          "-I{root}/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/external/segger_rtt",
+          "-I{root}/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components",
+          "-I{root}/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/ble/common",
+          "-I{root}/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/ble/ble_advertising",
+          "-I{root}/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/ble/peer_manager",
+          "-I{root}/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/ble/nrf_ble_gatt",
+          "-I{root}/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/atomic",
+          "-I{root}/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/atomic_flags",
+          "-I{root}/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/atomic_fifo",
+          "-I{root}/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/delay",
+          "-I{root}/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/fds",
+          "-I{root}/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/fstorage",
+          "-I{root}/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/mutex",
+          "-I{root}/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/sortlist",
+          "-I{root}/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/timer",
+          "-I{root}/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/experimental_section_vars",
+          "-I{root}/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/log",
+          "-I{root}/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/log/src",
+          "-I{root}/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/strerror",
+          "-I{root}/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/util",
+          "-I{root}/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/softdevice/common",
+          "-I{root}/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/softdevice/s140/headers",
+          "-I{root}/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/softdevice/s140/headers/nrf52",
+          "-I{root}/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/toolchain/cmsis/include",
+          "-I{root}/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/integration/nrfx",
+          "-I{root}/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/integration/nrfx/legacy",
+          "-I{root}/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx",
+          "-I{root}/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx/drivers/include",
+          "-I{root}/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx/hal",
+          "-I{root}/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx/soc",
+          "-I{root}/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx/mdk",
+          "-I{root}/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/ble/ble_link_ctx_manager",
+          "-I{root}/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/ble/ble_services/ble_dfu",
+          "-I{root}/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/ble/nrf_ble_qwr",
+          "-I{root}/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/balloc",
+          "-I{root}/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/bootloader/dfu",
+          "-I{root}/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/memobj",
+          "-I{root}/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/pwr_mgmt",
+          "-I{root}/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/ringbuf",
+          "-I{root}/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/external/fprintf",
+          "-I{root}/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx/drivers/src",
+          "-I{root}/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/bootloader",
+          "-I{root}/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/bootloader/ble_dfu",
+          "-I{root}/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/svc",
+          "-I{root}/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/stack_info",
+          "-I{root}/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/mem_manager",
+          "-I{root}/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/queue",
+          "-I{root}/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/scheduler",
+          "-I{root}/third-party/upstream/freertos-kernel/include",
+          "-I{root}/r1/src/config/rtos",
+          "-fno-delete-null-pointer-checks",
+          "-I{root}/r1/src/vendor",
+          "-I{root}/r1/src/application/registry",
+          "-I{root}/third-party/upstream/cmsis-5-590/CMSIS/RTOS2/Include",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-Oz"
+        ],
+        "regions": [
+          {
+            "payload": "r1-application",
+            "symbol": "r1_native_watchdog_hw_close",
+            "start": 168136,
+            "end": 168148,
+            "sha256": "710b2af46f13fa6b722856c5c8bd4ff46cd8b983e158f82744871e9e501b0441",
+            "evidence": "r1/symbols/function-frontier.csv",
+            "bindings": {
+              "r1_stock_dispatch_0c": 548027,
+              "r1_native_watchdog_device": 536901268
+            },
+            "address": 327880,
+            "match_evidence": {
+              "method": "independently named native entry and all unrelocated bytes, followed by full linked equality",
+              "fixed_bytes": 4,
+              "compiled_pattern_sha256": "18cf2ecabc30b1b2881abcbf34d3d48d3db265cec04c49763fb84c1b4494a09d",
+              "relocations": [
+                {
+                  "symbol": "r1_stock_dispatch_0c",
+                  "offset": 4,
+                  "relocation_type": 30,
+                  "address": 548027,
+                  "role": "native_function"
+                },
+                {
+                  "symbol": "r1_native_watchdog_device",
+                  "offset": 8,
+                  "relocation_type": 2,
+                  "address": 536901268,
+                  "role": "native_literal_symbol"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "already_selected": [
+      {
+        "payload": "r1-application",
+        "symbol": "r1_native_watchdog_hw_feed_thunk",
+        "start": 453608,
+        "end": 453612,
+        "sha256": "07983508cd241588ec24ee42f080e1abe7f59dfb06a3522f4fb2f0cf9f28213e",
+        "evidence": "r1/symbols/function-frontier.csv",
+        "bindings": {
+          "r1_native_watchdog_hw_feed": 327933
+        },
+        "address": 613352,
+        "binding_evidence": "r1/symbols/function-frontier.csv"
+      }
+    ]
+  },
+  "evidence": [
+    {
+      "path": "build/goal-r1-hardware-anchor-pass/verify.py",
+      "sha256": "9a76f00d56c02e7f59922a491a9b70418252a42738b9ffd4eec3736b7aa0251e"
+    },
+    {
+      "path": "build/goal-r1-hardware-anchor-pass/qualify.py",
+      "sha256": "9332ed8a3877104bdc33de84898f86f9ff4078a489e9264813eb2a97d579e3ad"
+    },
+    {
+      "path": "build/goal-r1-hardware-anchor-pass/scope.json",
+      "sha256": "01f7c12318a9c193d88749206ecca90e2a1bb64f0bfd3242a70d0dd547b0f36e"
+    },
+    {
+      "path": "build/goal-r1-hardware-anchor-pass/selection.json",
+      "sha256": "5dc055aa7d161d27242700f6286a14255ede6b24cef876679978473e57dd92a7"
+    },
+    {
+      "path": "build/goal-r1-hardware-anchor-pass/qualified/source-plan.json",
+      "sha256": "f8c9dbcdda46aefe6a1f6ed5f062c8e53b72ec1c160fc9f9fbb6f2edec42cb40"
+    },
+    {
+      "path": "build/goal-r1-hardware-anchor-pass/qualified/qualification.json",
+      "sha256": "47a5f628dae79a98861b55a3689459e59323452e5a2b7eb97837d2197028dc81"
+    },
+    {
+      "path": "build/goal-r1-hardware-anchor-pass/source-plan-before.json",
+      "sha256": "cd45c1480a7aedf32dd3c2afdfb461458c4f4163bd3e3d12ffb1963ad234a3a8"
+    },
+    {
+      "path": "tools/build/source-plan.json",
+      "sha256": "49258fe24065f518dfdbaafee469624bd9c8bcbb2d9f1d0544fcf72da4b8f4c2"
+    },
+    {
+      "path": "tools/build/qualify_sources.py",
+      "sha256": "e8a2a8fffcc9e363bddc6ad4472b8186ebba6a0f3d015cd114120edd40a3a168"
+    },
+    {
+      "path": "r1/src/application/board/native_watchdog_device.c",
+      "sha256": "31516fcbc9c2dd7d1509c860bc31fee7322fc7fcbef304f53e47d6a8f728ce8a"
+    },
+    {
+      "path": "r1/src/application/registry/stock_registry.c",
+      "sha256": "68c16fe9a2fcd328012b8613c9da9aa4cd31bd30df36a55e64e56e7b534246fa"
+    },
+    {
+      "path": "r1/src/sources.json",
+      "sha256": "27eec6d55b26d2f40111f0bb41704d9fd54e0057497660d71a3eac19cd1f7f1a"
+    },
+    {
+      "path": "build/sources-goal-r1-twi-delay-tail/report.json",
+      "sha256": "6a178f516b118b6b8eefe6805f8f72038e5de6249c708bcfa1be5794d7796e12"
+    },
+    {
+      "path": "build/hybrid-goal-r1-hardware-anchor-pass/build-report.json",
+      "sha256": "3755d5cd8ef79799f8756cf705b53099271260b7e698be450c8611be55f0d5c4"
+    }
+  ],
+  "hybrid": {
+    "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "source_built_bytes": 3661,
+    "retained_bytes": 642499,
+    "resource_bytes": 248,
+    "source_completeness_proven": false
+  },
+  "firmware_sources_changed": false,
+  "manifest_changed": false,
+  "existing_plan_units_unchanged": true,
+  "g2_workflow": "P2_INTERRUPTED; no gate advanced"
+}

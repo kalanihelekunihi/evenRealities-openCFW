@@ -1,0 +1,181 @@
+{
+  "schema_version": 1,
+  "entries": {
+    "0x4e1e4": [
+      "r1_boot_ctor_run",
+      40
+    ],
+    "0x5cb6c": [
+      "r1_module_init_table_run",
+      58
+    ]
+  },
+  "report": "build/sources-goal-r1-device-initcalls-c/report.json",
+  "report_sha256": "cde2ea6c46b7719f9bccdcc290d80cec76ef26703b19e497fc4eb24f3472a923",
+  "unit": {
+    "source": "r1/src/application/board/native_initcalls.c",
+    "source_sha256": "aa9504172b112a8f4b9f79f030c240ca89efac6083db1243f4e85c6f67e5c0a9",
+    "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-device-initcalls-c/r1/r1-application/r1__src__application__board__native_initcalls.c.o",
+    "object_sha256": "660a7124d12e83af03c2fdc0dba9c6f32fa1fa3b5bd13c28477a2cbc0543e71d"
+  },
+  "behavior": {
+    "pairs": 174,
+    "digest": "5282d7806f787b31edb55a3db70f0b249cd42449cf3ad41477b296a6ff016499",
+    "callbacks": [
+      {
+        "symbol": "r1_named_adc_register_all",
+        "stock_entry": "0x5493c"
+      },
+      {
+        "symbol": "r1_internal_flash_device_registration",
+        "stock_entry": "0x54a8c"
+      },
+      {
+        "symbol": "r1_twi_primary_device_binding_configuration",
+        "stock_entry": "0x54f90"
+      },
+      {
+        "symbol": "r1_twi_secondary_device_binding_configuration",
+        "stock_entry": "0x54fc4"
+      },
+      {
+        "symbol": "r1_named_gpio_register_all",
+        "stock_entry": "0x54c24"
+      },
+      {
+        "symbol": "r1_native_output_gpio_registration",
+        "stock_entry": "0x54e78"
+      },
+      {
+        "symbol": "r1_native_rtc_register",
+        "stock_entry": "0x563c4"
+      },
+      {
+        "symbol": "r1_stock_i2c2_register",
+        "stock_entry": "0x56508"
+      },
+      {
+        "symbol": "r1_stock_i2c3_register",
+        "stock_entry": "0x56520"
+      },
+      {
+        "symbol": "r1_stock_i2c4_register",
+        "stock_entry": "0x56538"
+      },
+      {
+        "symbol": "r1_stock_i2c5_register",
+        "stock_entry": "0x56550"
+      },
+      {
+        "symbol": "r1_yhm2710_stacmd_binding_configuration",
+        "stock_entry": "0x565f4"
+      },
+      {
+        "symbol": "r1_native_named_wdt_register",
+        "stock_entry": "0x56694"
+      }
+    ],
+    "actual_C": "boot dispatcher, device-table walker, empty post walker, symbolic thirteen-entry device table",
+    "modeled_boundaries": [
+      "r1_named_adc_register_all",
+      "r1_internal_flash_device_registration",
+      "r1_twi_primary_device_binding_configuration",
+      "r1_twi_secondary_device_binding_configuration",
+      "r1_named_gpio_register_all",
+      "r1_native_output_gpio_registration",
+      "r1_native_rtc_register",
+      "r1_stock_i2c2_register",
+      "r1_stock_i2c3_register",
+      "r1_stock_i2c4_register",
+      "r1_stock_i2c5_register",
+      "r1_yhm2710_stacmd_binding_configuration",
+      "r1_native_named_wdt_register"
+    ],
+    "limits": [
+      "Registration callbacks modeled; no physical peripheral initialization proof",
+      "CMSIS IRQ intrinsics execute; PRIMASK and BASEPRI observed at every callback and final state",
+      "Private stack, caller-clobbered registers, APSR and void returns excluded",
+      "Early/board/post ranges fixed to the observed empty ranges; no dynamic constructor-table extension claimed"
+    ]
+  },
+  "negative_controls": {
+    "missing-disable": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "7b7b7b7b7b7b7b'], ['r1_stock_i2c2_register', 0, 0, '010203040506077b7b7b7b7b7b7b7b7b'], ['r1_stock_i2c3_register', 0, 0, '01020304050607087b7b7b7b7b7b7b7b'], ['r1_stock_i2c4_register', 0, 0, '0102030405060708097b7b7b7b7b7b7b'], ['r1_stock_i2c5_register', 0, 0, '0102030405060708090a7b7b7b7b7b7b'], ['r1_yhm2710_stacmd_binding_configuration', 0, 0, '0102030405060708090a0b7b7b7b7b7b'], ['r1_native_named_wdt_register', 0, 0, '0102030405060708090a0b0c7b7b7b7b']], 'state': '7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b0102030405060708090a0b0c0d7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b', 'primask': 0, 'basepri': 0})\n"
+    },
+    "missing-enable": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "                         ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-device-initcalls-c/verify.py\", line 48, in pair\n    a=run(False,**kw);b=run(True,**kw);assert a==b,(kw,a,b);digest.update(json.dumps([kw,a]).encode());pairs+=1\n                        ~~~^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-device-initcalls-c/verify.py\", line 43, in run\n    if action=='boot':assert v.reg_read(UC_ARM_REG_PRIMASK)==0\n                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    "early-enable": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "7b7b7b7b7b7b7b'], ['r1_stock_i2c2_register', 0, 0, '010203040506077b7b7b7b7b7b7b7b7b'], ['r1_stock_i2c3_register', 0, 0, '01020304050607087b7b7b7b7b7b7b7b'], ['r1_stock_i2c4_register', 0, 0, '0102030405060708097b7b7b7b7b7b7b'], ['r1_stock_i2c5_register', 0, 0, '0102030405060708090a7b7b7b7b7b7b'], ['r1_yhm2710_stacmd_binding_configuration', 0, 0, '0102030405060708090a0b7b7b7b7b7b'], ['r1_native_named_wdt_register', 0, 0, '0102030405060708090a0b0c7b7b7b7b']], 'state': '7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b0102030405060708090a0b0c0d7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b', 'primask': 0, 'basepri': 0})\n"
+    },
+    "wrong-adc-flash-order": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "7b7b7b7b7b7b7b'], ['r1_stock_i2c2_register', 1, 0, '010203040506077b7b7b7b7b7b7b7b7b'], ['r1_stock_i2c3_register', 1, 0, '01020304050607087b7b7b7b7b7b7b7b'], ['r1_stock_i2c4_register', 1, 0, '0102030405060708097b7b7b7b7b7b7b'], ['r1_stock_i2c5_register', 1, 0, '0102030405060708090a7b7b7b7b7b7b'], ['r1_yhm2710_stacmd_binding_configuration', 1, 0, '0102030405060708090a0b7b7b7b7b7b'], ['r1_native_named_wdt_register', 1, 0, '0102030405060708090a0b0c7b7b7b7b']], 'state': '7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b0102030405060708090a0b0c0d7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b', 'primask': 0, 'basepri': 0})\n"
+    },
+    "wrong-twi-order": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "7b7b7b7b7b7b7b'], ['r1_stock_i2c2_register', 1, 0, '010203040506077b7b7b7b7b7b7b7b7b'], ['r1_stock_i2c3_register', 1, 0, '01020304050607087b7b7b7b7b7b7b7b'], ['r1_stock_i2c4_register', 1, 0, '0102030405060708097b7b7b7b7b7b7b'], ['r1_stock_i2c5_register', 1, 0, '0102030405060708090a7b7b7b7b7b7b'], ['r1_yhm2710_stacmd_binding_configuration', 1, 0, '0102030405060708090a0b7b7b7b7b7b'], ['r1_native_named_wdt_register', 1, 0, '0102030405060708090a0b0c7b7b7b7b']], 'state': '7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b0102030405060708090a0b0c0d7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b', 'primask': 0, 'basepri': 0})\n"
+    },
+    "missing-watchdog": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "7b7b7b7b7b7b7b7b7b7b'], ['r1_native_rtc_register', 1, 0, '0102030405067b7b7b7b7b7b7b7b7b7b'], ['r1_stock_i2c2_register', 1, 0, '010203040506077b7b7b7b7b7b7b7b7b'], ['r1_stock_i2c3_register', 1, 0, '01020304050607087b7b7b7b7b7b7b7b'], ['r1_stock_i2c4_register', 1, 0, '0102030405060708097b7b7b7b7b7b7b'], ['r1_stock_i2c5_register', 1, 0, '0102030405060708090a7b7b7b7b7b7b'], ['r1_yhm2710_stacmd_binding_configuration', 1, 0, '0102030405060708090a0b7b7b7b7b7b']], 'state': '7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b0102030405060708090a0b0c7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b', 'primask': 0, 'basepri': 0})\n"
+    },
+    "double-registration": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "0a0b0c0d7b7b7b'], ['r1_stock_i2c2_register', 1, 0, '0102030405060708090a0b0c0d7b7b7b'], ['r1_stock_i2c3_register', 1, 0, '0102030405060708090a0b0c0d7b7b7b'], ['r1_stock_i2c4_register', 1, 0, '0102030405060708090a0b0c0d7b7b7b'], ['r1_stock_i2c5_register', 1, 0, '0102030405060708090a0b0c0d7b7b7b'], ['r1_yhm2710_stacmd_binding_configuration', 1, 0, '0102030405060708090a0b0c0d7b7b7b'], ['r1_native_named_wdt_register', 1, 0, '0102030405060708090a0b0c0d7b7b7b']], 'state': '7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b0102030405060708090a0b0c0d7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b', 'primask': 0, 'basepri': 0})\n"
+    },
+    "callback-return-short-circuit": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "b'], ['r1_stock_i2c5_register', 1, 0, '0102030405060708090a7b7b7b7b7b7b'], ['r1_yhm2710_stacmd_binding_configuration', 1, 0, '0102030405060708090a0b7b7b7b7b7b'], ['r1_native_named_wdt_register', 1, 0, '0102030405060708090a0b0c7b7b7b7b']], 'state': '7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b0102030405060708090a0b0c0d7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b', 'primask': 0, 'basepri': 0}, {'trace': [['r1_named_adc_register_all', 1, 0, '7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b']], 'state': '7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b017b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b', 'primask': 0, 'basepri': 0})\n"
+    }
+  },
+  "audit": {
+    "unchanged_objects": 768,
+    "changed_unit": "r1/src/application/board/native_initcalls.c",
+    "newly_participating_unit": "r1/src/application/board/native_initcalls.c",
+    "closed_import": "r1_boot_ctor_run",
+    "new_imports": [],
+    "registration_providers": {
+      "r1_internal_flash_device_registration": "r1/src/application/board/native_internal_flash.c",
+      "r1_named_adc_register_all": "r1/src/application/adc/stock_named_adc.c",
+      "r1_named_gpio_register_all": "r1/src/application/gpio/stock_named_gpio.c",
+      "r1_native_named_wdt_register": "r1/src/application/board/native_named_wdt.c",
+      "r1_native_output_gpio_registration": "r1/src/application/board/native_output_gpio_registration.c",
+      "r1_native_rtc_register": "r1/src/application/board/native_rtc_lifecycle.c",
+      "r1_stock_i2c2_register": "r1/src/application/software-twi/stock_records.c",
+      "r1_stock_i2c3_register": "r1/src/application/software-twi/stock_records.c",
+      "r1_stock_i2c4_register": "r1/src/application/software-twi/stock_records.c",
+      "r1_stock_i2c5_register": "r1/src/application/software-twi/stock_records.c",
+      "r1_twi_primary_device_binding_configuration": "r1/src/application/board/native_hw_twi_registration.c",
+      "r1_twi_secondary_device_binding_configuration": "r1/src/application/board/native_hw_twi_registration.c",
+      "r1_yhm2710_stacmd_binding_configuration": "r1/src/application/board/native_stacmd_registration.c"
+    }
+  },
+  "source_check": "R1 passes: 769 units, 573 source files, 0 not built. Global check flags existing G2 resident_rom_thumb_set.S absent from manifest.",
+  "headers": [
+    {
+      "path": "vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/toolchain/cmsis/include/cmsis_gcc.h",
+      "sha256": "0837f98e834d6a529854c8c86336e9d99eb8e379bf1deb964858d7863950f862"
+    }
+  ],
+  "rea": "device-initcalls-c-rea.json",
+  "instruction_identity_proven": false,
+  "image_integration_proven": false,
+  "tested_shared_tail": {
+    "entry": "0x5cb4c",
+    "symbol": "r1_module_post_init_run",
+    "instruction_bytes": 22,
+    "accounted_in_boot_inventory_size": true
+  }
+}

@@ -16,3 +16,5 @@ int32_t case_boot_sensor_finish_signal(uint32_t task,uint32_t bits)
         *(volatile uint32_t *)(uintptr_t)0xe000ed04u=1u<<28;
     return (int32_t)bits;
 }
+/* Dedup (0x0800a888): case_event_flags_set (was event-flags/events.c). */
+uint32_t case_event_flags_set(void *id,uint32_t flags) __attribute__((alias("case_boot_sensor_finish_signal")));

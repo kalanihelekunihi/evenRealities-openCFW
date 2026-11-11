@@ -1,8 +1,10 @@
+#include <stdint.h>
 /* Experimental Main 0x481836 floating branch from the retained IAR
  * operations and the Bootloader's independently reconstructed IAR model.
  * The Main decimal separator resolves through its own locale slot. */
 #include "../../../../../apollo-bootloader/initializer-callbacks/iar_format_native/record.h"
 #include <stddef.h>
+extern unsigned char g2ref_g2_iar_lconv_20004488[] __asm__("g2_iar_lconv_20004488"); /* Fix 45: stock owner (owner.py) */
 extern uint64_t g2_main_fp_mul(uint64_t,uint64_t),g2_main_fp_sub(uint64_t,uint64_t),g2_main_fp_div(uint64_t,uint64_t),g2_main_fp_frexp(uint64_t,int *),g2_main_fp_pow10(uint64_t,unsigned),g2_main_fp_from_i32(int32_t),g2_main_fp_from_u32(uint32_t);
 extern int32_t g2_main_fp_i32(uint64_t);extern uint32_t g2_main_fp_u32(uint64_t);
 static void copy(uint8_t *dst,const uint8_t *src,int n){while(n-->0)*dst++=*src++;}
@@ -48,7 +50,7 @@ int g2_main_float_render_internal(format_record *r,unsigned c,uint32_t **cursor,
   while(*digits=='0'){digits++;count--;exponent--;}
   int keep=(int32_t)((uint32_t)r->precision+(uint32_t)(lower=='f'?exponent+1:lower=='e'?1:0));if(count<keep)keep=count-1;count=round_digits(&digits,keep,count,'5','0','9',&exponent,1);
  }
- unsigned decimal=**(volatile uint8_t **)(uintptr_t)(0x20004488u+0x24u);int precision=r->precision;
+ unsigned decimal=**(volatile uint8_t **)(uintptr_t)(((uint32_t)(uintptr_t)g2ref_g2_iar_lconv_20004488+0x0u)+0x24u);int precision=r->precision;
  if((int16_t)count<=0){digits=(uint8_t *)"0";count=1;}
  int fixed=lower=='f';if(fixed)exponent++;
  else if(lower=='g'){

@@ -1,0 +1,34 @@
+{
+  "schema": 1,
+  "target": "locked G2 s200_v2.2.6.10 six-component EVENOTA",
+  "source_link_tool": "tools/build/link_g2_sources.py",
+  "source_report": "build/g2-all-c-kws-generator-20261110/report.json",
+  "candidate": {
+    "path": "build/g2-all-source-bundle-synthetic-final-20261111/g2-source-candidate.evenota.bin",
+    "bytes": 4638044,
+    "sha256": "b8d9ef27532f9a1091acd5ed5ab3a654eadf2fa6242b51fcf667172b1483228d",
+    "components": 6,
+    "codec_weight_input": "synthetic all-zero 120800-byte fixture in ignored build/; not a trained model",
+    "official_component_bytes_used_for_assembly": false
+  },
+  "locked": {
+    "bytes": 4301227,
+    "sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa"
+  },
+  "verification": {
+    "link_report": "build/g2-all-source-bundle-synthetic-final-20261111/link-report.json",
+    "link_report_sha256": "ab5d406f396af0bfb14d8adeb9e3b9729304ac6fe440d180bdc5188a60200531",
+    "seven_payload_source_link": true,
+    "evenota_structural_validation": true,
+    "all_six_component_hashes_reported": true,
+    "missing_weight_input_rejected_before_link": true,
+    "matches_locked_target": false
+  },
+  "remaining": {
+    "trained_codec_weight_source": false,
+    "whole_artifact_c_coverage_proven": false,
+    "byte_identity": false,
+    "device_boot": false
+  },
+  "qualification": "The complete container path is source-candidate assembly with a synthetic codec weight fixture. It verifies packaging structure only, not model behavior, complete C coverage, stock identity, or hardware operation."
+}

@@ -1,0 +1,23 @@
+{
+  "name": "@opencfw/evenhub",
+  "version": "0.1.0",
+  "description": "Direct-to-glasses EvenHub SDK for Even Realities G2, derived from the stock firmware's nanopb schema",
+  "type": "module",
+  "license": "MIT",
+  "main": "src/index.ts",
+  "engines": {
+    "node": ">=23.6"
+  },
+  "scripts": {
+    "test": "node --test test/",
+    "typecheck": "npx -y -p typescript@5 tsc --noEmit -p ."
+  },
+  "peerDependencies": {
+    "@abandonware/noble": "^1.9.2-25"
+  },
+  "peerDependenciesMeta": {
+    "@abandonware/noble": {
+      "optional": true
+    }
+  }
+}

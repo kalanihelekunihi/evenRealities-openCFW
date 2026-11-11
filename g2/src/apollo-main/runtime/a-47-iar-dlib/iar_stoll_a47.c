@@ -18,8 +18,6 @@ extern int32_t audio_uart_ring_locale_space_4d58ae(uint32_t ch);  /* isspace */
 extern int32_t audio_uart_ring_locale_lower_4d58c2(uint32_t ch);  /* tolower */
 extern void *memchr_4d40e0(const void *s, int32_t c, uint32_t n);
 extern void audio_uart_ring_errno_range_set_439cb2(void);         /* errno = ERANGE */
-extern uint64_t audio_uart_ring_u64_div_47cc60(uint32_t low, uint32_t high,
-                                               uint32_t dlow, uint32_t dhigh); /* __aeabi_uldivmod */
 
 /* xstoull.c tables: maximum significant digits per base (64-bit), then the digit set. */
 static const uint8_t ndigs64[37] = {
@@ -97,8 +95,7 @@ uint64_t stoull_541bd8(const char *s, char **endptr, int32_t base, int32_t *perr
     if (n >= 0) {
         uint64_t prev = x - dig;
         if (n > 0 || x < prev ||
-            audio_uart_ring_u64_div_47cc60((uint32_t)prev, (uint32_t)(prev >> 32), (uint32_t)base,
-                                           (uint32_t)((int64_t)base >> 32)) != y) {
+            (prev / (uint64_t)(int64_t)base) != y) {
             audio_uart_ring_errno_range_set_439cb2();
             if (perr != NULL)
                 *perr = 1;

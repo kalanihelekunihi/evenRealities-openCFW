@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "report": "build/sources-goal-r1-newlib-heap-adapter-c/report.json",
+  "report_sha256": "3c816044932cc7212d0dcd0737349ac9d6708ed395b32d8fd0dbeb6465fee2fe",
+  "manifest_sha256": "456dfe0d9ec5079d09f58955bc03c2c36f4cbdbafe2bbdf37ae2fb2be3ca0972",
+  "verification": {
+    "calls": 648,
+    "scenarios": 22,
+    "seeded_mixed_operations": 512,
+    "actual_native_heap_and_memcpy_memset": true,
+    "scheduler_boundaries_modeled": true,
+    "independent_payload_and_heap_recovery_checks": true,
+    "exact_memcpy_and_memset_lengths_checked": true,
+    "alignment_zeroing_grow_shrink_overflow_and_null_cases": true,
+    "realloc_preflight_failure_preserves_old_block": true,
+    "nullable_backend_failure_separate_from_native_fatal_exhaustion": true,
+    "native_exhaustion_fatal_fault_observed": true,
+    "physical_concurrency_and_production_placement_unverified": true
+  },
+  "defects": {
+    "detected": [
+      "wrong-size-metadata",
+      "wrong-calloc-fill",
+      "realloc-overcopy",
+      "free-on-failed-realloc",
+      "skip-overflow-preflight",
+      "allocate-zero"
+    ]
+  },
+  "audit": {
+    "unchanged_prior_object_hashes": 786,
+    "changed_object_hashes": [
+      [
+        "r1-bootloader",
+        "{gen}/r1_startup_vectors.S"
+      ],
+      [
+        "r1-bootloader",
+        "{gen}/r1_uecc.c"
+      ]
+    ],
+    "generated_boot_crypto_and_vectors_allocated_bytes_and_relocations_unchanged": true,
+    "removed_application_imports": [
+      "_free_r",
+      "_malloc_r"
+    ]
+  },
+  "provider": {
+    "source": "r1/src/application/runtime/newlib_heap_adapter.c",
+    "source_sha256": "d0ab7b326c2a5163c8bc85353c46c59e77e4e77bd4afcc3b1c5ba9549cc969f3",
+    "object_sha256": "27f1968928370b3ac9c922eae550f37122d30088f5e5e29bf112855c3373daf4"
+  },
+  "canonical_heap": {
+    "source": "r1/src/application/board/native_heap.c",
+    "source_sha256": "eae855cba73475eadf160b8664a87c9eedcc867098903b25baf1208b7da15bab",
+    "object_sha256": "ec2660b0dd93a023de3f5aecb7589af7a355c31659f6ddc01a0042be0a7084c1",
+    "ordinary_exhaustion_is_fatal": true
+  },
+  "strict_bootloader_link_report": "build/goal-r1-newlib-heap-adapter-c/boot-link/report.json",
+  "strict_bootloader_link_report_sha256": "f314c910f610bfa8c860d2f01a5526e2f9b78c33cffcb7ea82672771802fdd74",
+  "evidence_files": {
+    "build/goal-r1-newlib-heap-adapter-c/verify.py": "c82f7e44c6c1c1c1a71c8fc4cd855b879ae513310572d3c66fb48b1089e2a4e1",
+    "build/goal-r1-newlib-heap-adapter-c/defects.py": "f717458ad5075b32ceb489808399c5f2d5e1ee5985b5dac76e3a1198bb93dd6a",
+    "build/goal-r1-newlib-heap-adapter-c/audit.py": "9346fbdb522d0a08879721b0198edf1489f7fe59c7c386ed247448d021561b7a",
+    "build/goal-r1-newlib-heap-adapter-c/probe.elf": "7cdea9239c53bb8b16176d5ec7448b850ef354adada954c6d3a209725f2f9129",
+    "build/goal-r1-newlib-heap-adapter-c/verify-final.log": "41050315b1cd75696aab08e07c6b62393dcc9f407766c98eeaedcc2f2a026687",
+    "build/goal-r1-newlib-heap-adapter-c/verification.json": "f17081bf895868dde3941d9a732ee2c5847e90e2a12862c5a24ca015566702ea",
+    "build/goal-r1-newlib-heap-adapter-c/defects.json": "c95e68773c15d728f20309aeefc3539d40d69b7e002507591f6212685b1c1820"
+  },
+  "limitations": [
+    "Additional aligned header per newlib allocation; only adapter-owned live pointers accepted.",
+    "Ordinary native heap exhaustion remains fatal; no recoverable-OOM claim.",
+    "Actual heap and memcpy/memset execute; scheduler suspension/resumption modeled.",
+    "No physical concurrency, whole-program heap placement, complete formatter or application link validation.",
+    "Global source check retains unrelated G2 manifest failure."
+  ]
+}

@@ -200,3 +200,7 @@ cleanup:
     opencfw_bl_nor_read_after();
     return status;
 }
+
+/* Stock entry names that branch straight to the provider above. */
+__typeof__(opencfw_provider_420b0c) opencfw_boot_nor_prog __attribute__((alias("opencfw_provider_420b0c")));
+__typeof__(opencfw_provider_420a08) opencfw_boot_nor_erase __attribute__((alias("opencfw_provider_420a08")));

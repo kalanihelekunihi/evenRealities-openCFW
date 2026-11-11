@@ -24,9 +24,7 @@ uint32_t audio_ble_radio_platform_init_body(uint32_t a,uint32_t b,
     (void)g2_gpio_hal_write(0x88u,0u);
     return high;
 }
-__attribute__((naked)) uint32_t audio_ble_radio_platform_init_52dc40(void) {
-    __asm volatile("b audio_ble_radio_platform_init_body");
-}
+uint32_t audio_ble_radio_platform_init_52dc40(void) __attribute__((alias("audio_ble_radio_platform_init_body")));
 
 uint32_t audio_ble_radio_context_init_52e0a2(void *record) {
     uint8_t *r=(uint8_t *)record;

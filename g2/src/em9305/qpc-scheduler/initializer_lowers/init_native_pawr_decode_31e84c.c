@@ -1,141 +1,64 @@
-/* Native PAwR packet decoder, seven-slot BIH routing and sparse output stores. */
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_pawr_decode_31e84c\n"
-".type opencfw_em9305_pawr_decode_31e84c,@function\n"
-"opencfw_em9305_pawr_decode_31e84c:\n"
-"L31e84c:\n"
-"enter_s [r13-r16,fp,blink]\n"
-"L31e84e:\n"
-"sub_s sp,sp,0x20\n"
-"L31e850:\n"
-"mov_s r15,r1\n"
-"L31e852:\n"
-"mov_s r1,r0\n"
-"L31e854:\n"
-"add_s r0,sp,0x18\n"
-"L31e856:\n"
-"mov_s r13,r2\n"
-"L31e858:\n"
-"bl.d opencfw_em9305_dispatch_child_32db0c\n"
-"L31e85c:\n"
-"mov_s r16,r1\n"
-"L31e85e:\n"
-"ldb_s r1,[sp,0x1c]\n"
-"L31e860:\n"
-"sub r0,r1,0x26\n"
-"L31e864:\n"
-"extb_s r0,r0\n"
-"L31e866:\n"
-"cmp r0,224\n"
-"L31e86a:\n"
-"bc.d L31e8f6\n"
-"L31e86e:\n"
-"mov_s r14,0\n"
-"L31e870:\n"
-"ldb_s r0,[sp,0x18]\n"
-"L31e872:\n"
-"brhs.d.nt r0,0x7,L31e8f6\n"
-"L31e876:\n"
-"sub r1,r1,0x6\n"
-"L31e878:\n"
-"bih [r0]\n"
-"L31e87c:\n"
-"b_s L31e88a\n"
-"L31e87e:\n"
-"b_s L31e88e\n"
-"L31e880:\n"
-"b_s L31e896\n"
-"L31e882:\n"
-"b_s L31e8f6\n"
-"L31e884:\n"
-"b_s L31e89c\n"
-"L31e886:\n"
-"b_s L31e8f6\n"
-"L31e888:\n"
-"b_s L31e8a2\n"
-"L31e88a:\n"
-"stb_s r14,[r15,0xa]\n"
-"L31e88c:\n"
-"b_s L31e8a6\n"
-"L31e88e:\n"
-"stb 1,[r15,10]\n"
-"L31e892:\n"
-"mov_s r1,0\n"
-"L31e894:\n"
-"b_s L31e8a6\n"
-"L31e896:\n"
-"stb 3,[r15,10]\n"
-"L31e89a:\n"
-"b_s L31e8a6\n"
-"L31e89c:\n"
-"stb 4,[r15,10]\n"
-"L31e8a0:\n"
-"b_s L31e8a6\n"
-"L31e8a2:\n"
-"stb 2,[r15,10]\n"
-"L31e8a6:\n"
-"add r0,r16,0x8\n"
-"L31e8aa:\n"
-"stb_s r1,[r15,0x8]\n"
-"L31e8ac:\n"
-"st_s r0,[r15,0x4]\n"
-"L31e8ae:\n"
-"ldb r0,[r16,39]\n"
-"L31e8b2:\n"
-"add_s r3,sp,0\n"
-"L31e8b4:\n"
-"mov_s r1,0x8050ec\n"
-"L31e8ba:\n"
-"stb_s r0,[r15,0x9]\n"
-"L31e8bc:\n"
-"mov_s r2,1\n"
-"L31e8be:\n"
-"bl.d opencfw_em9305_radio_packet_check_303404\n"
-"L31e8c2:\n"
-"mov_s r0,r16\n"
-"L31e8c4:\n"
-"mov_s r14,r0\n"
-"L31e8c6:\n"
-"breq_s r0,0,L31e8f6\n"
-"L31e8c8:\n"
-"ldb r3,[sp,19]\n"
-"L31e8cc:\n"
-"ldb r0,[sp,18]\n"
-"L31e8d0:\n"
-"ld r2,[sp,0xc]\n"
-"L31e8d2:\n"
-"brne.d.nt r3,r0,L31e8e6\n"
-"L31e8d6:\n"
-"ld r1,[sp,0x8]\n"
-"L31e8d8:\n"
-"ld_s r12,[sp,0]\n"
-"L31e8da:\n"
-"ld r0,[sp,0x4]\n"
-"L31e8dc:\n"
-"xor_s r12,r12,r1\n"
-"L31e8de:\n"
-"xor_s r0,r0,r2\n"
-"L31e8e0:\n"
-"or.f 0,r12,r0\n"
-"L31e8e4:\n"
-"beq_s L31e8e8\n"
-"L31e8e6:\n"
-"bset_s r3,r3,0x1\n"
-"L31e8e8:\n"
-"add_s r0,r15,0xc\n"
-"L31e8ea:\n"
-"bl.d opencfw_em9305_radio_address_write_3045e8\n"
-"L31e8ee:\n"
-"stb_s r3,[r15,0xb]\n"
-"L31e8f0:\n"
-"ldb r0,[sp,21]\n"
-"L31e8f4:\n"
-"stb_s r0,[r13,0]\n"
-"L31e8f6:\n"
-"mov_s r0,r14\n"
-"L31e8f8:\n"
-"leave_s [r13-r16,fp,blink,pcl]\n"
-".size opencfw_em9305_pawr_decode_31e84c,.-opencfw_em9305_pawr_decode_31e84c\n"
-);
+#include <stdint.h>
+
+/* Native 0x31e84c..0x31e8fa: decode a received PAwR response PDU. The
+ * header (native 0x32db0c) must have length 6..37 and an accepted PDU type
+ * (0, 1, 2, 4, 6 -> kinds 0, 1, 3, 4, 2); the report gets kind (+10), data
+ * length (+8, 0 for type 1), data pointer (+4 = event +8) and channel (+9 =
+ * event +39). After the address check (native 0x303404 with policy
+ * 0x8050ec) the report gets the address type (+11, bit 1 when resolved) and
+ * address (+12), and *flag the check's flag byte. Returns the check result,
+ * or 0 when rejected. */
+extern uint32_t opencfw_em9305_dispatch_child_32db0c(uintptr_t,uintptr_t);
+extern uint32_t opencfw_em9305_radio_packet_check_303404(uintptr_t,uintptr_t,uint32_t,uintptr_t);
+extern uintptr_t opencfw_em9305_radio_address_write_3045e8(uintptr_t,uint32_t,uint32_t);
+
+struct pawr_header {
+    uint8_t type;
+    uint8_t reserved;
+    uint16_t value;
+    uint8_t length;
+} __attribute__((aligned(4)));
+
+struct pawr_check {
+    uint32_t resolved[2];
+    uint32_t address[2];
+    uint8_t reserved[2];
+    uint8_t type;
+    uint8_t resolved_type;
+    uint8_t reserved2;
+    uint8_t flag;
+} __attribute__((aligned(4)));
+
+uint32_t opencfw_em9305_pawr_decode_31e84c(uintptr_t event, uintptr_t report, uintptr_t flag)
+{
+    struct pawr_check check;
+    struct pawr_header header;
+    uint32_t kind, data_length;
+    (void)opencfw_em9305_dispatch_child_32db0c((uintptr_t)&header, event);
+    uint32_t length = header.length;
+    if ((uint8_t)(length - 0x26u) < 224u) return 0u;
+    data_length = length - 6u;
+    switch (header.type) {
+    case 0u: kind = 0u; break;
+    case 1u: kind = 1u; data_length = 0u; break;
+    case 2u: kind = 3u; break;
+    case 4u: kind = 4u; break;
+    case 6u: kind = 2u; break;
+    default: return 0u;
+    }
+    volatile uint8_t *out = (volatile uint8_t *)report;
+    out[10] = (uint8_t)kind;
+    out[8] = (uint8_t)data_length;
+    *(volatile uint32_t *)(report + 4u) = (uint32_t)(event + 8u);
+    out[9] = *(volatile uint8_t *)(event + 39u);
+    uint32_t result = opencfw_em9305_radio_packet_check_303404(event, 0x8050ecu, 1u, (uintptr_t)&check);
+    if (result == 0u) return 0u;
+    uint32_t address_type = check.resolved_type;
+    if (address_type != check.type ||
+        ((check.resolved[0] ^ check.address[0]) | (check.resolved[1] ^ check.address[1])) != 0u)
+        address_type |= 2u;
+    out[11] = (uint8_t)address_type;
+    (void)opencfw_em9305_radio_address_write_3045e8(report + 12u, check.address[0], check.address[1]);
+    *(volatile uint8_t *)flag = check.flag;
+    return result;
+}

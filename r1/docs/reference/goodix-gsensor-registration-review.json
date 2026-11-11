@@ -1,0 +1,28 @@
+{
+  "passed": 1029,
+  "executions": 2058,
+  "ordered_word_stores": true,
+  "rejected_table_unchanged": true,
+  "source_size": 38,
+  "source_report": "build/sources-goal-r1-goodix-gsensor-register/report.json",
+  "limitations": [
+    "Seeded callback state; startup placement not proven",
+    "Interrupt interleavings, callback invocation ABI and physical accelerometer unverified",
+    "Caller-clobbered registers and flags excluded; no byte qualification"
+  ],
+  "evidence": {
+    "build/goal-r1-goodix-gsensor-register/stock.elf": "932a9ff63e24df073ba5802310456501a19c0f93e841d178ed007d3fb7aedc5d",
+    "build/goal-r1-goodix-gsensor-register/REA.json": "e04f0717299caa6fdc6abe2337028295b3036319430de45651037b16f2d46c20",
+    "build/goal-r1-goodix-gsensor-register/REA.snapshot.json": "4dca0ce7048bcdcdec264d49cb92bcf67cd2f89e81a80e2923994865ec6c0290",
+    "build/goal-r1-goodix-gsensor-register/verify.py": "d160c60ea3b468918cd308c646a4a0c334e79b970a9f6434adb4c320452458e9",
+    "build/goal-r1-goodix-gsensor-register/results.json": "650bd32013fefd97a89842a549851cf1f331cc156194e36c37ad377816dd61cc",
+    "build/goal-r1-goodix-gsensor-register/source.elf": "c546824420e8b8b0d6c3b40b6a71b94292051c8dfcd94b1fe8d656ba262435a6",
+    "r1/src/application/goodix/stock_gsensor_callbacks.c": "091fa71d0f902dfc269718d81f7249426f37a34d1064591f79fa98f29cfa10a9",
+    "r1/src/application/goodix/stock_gsensor_callbacks.h": "917a0b86c6af3c18dbe1edb654e88c98bdcbc070ca30497ae106f5bc00ce72a7",
+    "build/sources-goal-r1-goodix-gsensor-register/report.json": "574a78840ea33676a445fd0ce4fd4b2955027eb21d24b8230e0b5ed4fa10d69f",
+    "r1/src/sources.json": "209e4c6075b5f5eb494505a54f32ca5e2ea7ffa2d08408775e9176e434161c9e",
+    "r1/symbols/function-frontier.csv": "df1846d4eed25d81e2545ba47cf8a6302ac5c3c8d510098dc7318c3921d4d390",
+    "tools/build/source-plan.json": "4d46e8c038db79a174a2d719086fd0be80503ca7cdbfc2c51e5ed3d30d293064"
+  },
+  "source_plan_changed": false
+}

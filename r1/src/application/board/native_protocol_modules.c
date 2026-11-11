@@ -1,6 +1,5 @@
-/* Authenticated R1 module wrappers and shared command lookup. Native unsigned
- * index wrapping is preserved, including the below-minimum underflow path.
- * Symbolic command references are not implementations of their leaf handlers. */
+/* Authenticated module tables with bounded C lookup. Explicit callback seed
+ * preserves the native lower-search word without caller-saved register bindings. */
 #include <stdint.h>
 #include "native_battery_memory.h"
 struct r1_protocol_command { uint16_t key,reserved;uintptr_t callback; };
@@ -14,25 +13,25 @@ extern void r1_hrv_daily_handler(void);
 extern void r1_hrv_point_handler(void);
 extern void r1_health_history_noop_handler(void);
 extern void r1_activity_daily_handler(void);
-extern void r1_activity_refresh_handler(void);
+extern uint32_t r1_activity_refresh_handler(uint32_t,const void *,uintptr_t,uint32_t);
 extern void r1_sleep_daily_handler(void);
 extern void r1_sleep_detail_plan(void);
 extern void r1_health_report_setting_plan(void);
-extern void r1_device_status_handler(void);
+extern uint32_t r1_device_status_handler(uint32_t,const void *,uintptr_t,uint32_t);
 extern void r1_device_info_handler(void);
 extern void r1_protocol_command_00084b24(void);
-extern void r1_user_profile_handler(void);
+extern uint32_t r1_user_profile_handler(uint32_t,const void *);
 extern void r1_protocol_command_000846dc(void);
-extern void r1_touch_switch_handler_plan_decode(void);
+extern uint32_t r1_touch_switch_handler_plan_decode(uint32_t,const void *,uintptr_t,uint32_t);
 extern void r1_pair_role_handler(void);
 extern void r1_protocol_command_00083e2c(void);
 extern void r1_connection_control_adv_start_handler_plan_decode(void);
 extern void r1_protocol_command_00083e50(void);
 extern void r1_protocol_command_000844ec(void);
-extern void r1_health_settings_plan_command(void);
-extern void r1_system_settings_plan_command(void);
+extern uint32_t r1_health_settings_plan_command(uint32_t,const void *);
+extern uint32_t r1_system_settings_plan_command(uint32_t,const void *,uintptr_t,uint32_t);
 extern void r1_device_serial_handler(void);
-extern void r1_nv_recovery_command_handler_plan_decode(void);
+extern uint32_t r1_native_nv_recovery_envelope_handler(uint32_t,const void *,uintptr_t,uint32_t);
 extern void r1_protocol_command_000843c8(void);
 extern void r1_packet_ack_handler(void);
 extern void r1_delayed_event_restart(void);
@@ -70,7 +69,7 @@ const struct r1_protocol_command r1_protocol_system_commands[20] __attribute__((
     {0x000e,0,(uintptr_t)&r1_health_settings_plan_command},
     {0x000f,0,(uintptr_t)&r1_system_settings_plan_command},
     {0x0010,0,(uintptr_t)&r1_device_serial_handler},
-    {0x0011,0,(uintptr_t)&r1_nv_recovery_command_handler_plan_decode},
+    {0x0011,0,(uintptr_t)&r1_native_nv_recovery_envelope_handler},
     {0x0012,0,(uintptr_t)&r1_protocol_command_000843c8},
     {0x007e,0,(uintptr_t)&r1_packet_ack_handler},
     {0x007f,0,(uintptr_t)&r1_delayed_event_restart},
@@ -80,46 +79,34 @@ const struct r1_protocol_command r1_protocol_system_commands[20] __attribute__((
 const struct r1_protocol_command r1_protocol_special_commands[1] __attribute__((section(".r1.protocol_commands.special")))={
     {0x0001,0,(uintptr_t)&r1_protocol_command_00084cc0},
 };
-uint32_t r1_health_registration_binary_search(uintptr_t table,uint32_t count,uint32_t command,uint32_t subcommand)
+struct command_lookup {uint32_t callback,lower;};
+static struct command_lookup find_command(uintptr_t table,uint32_t count,uint32_t command,uint32_t subcommand)
 {
-    uint32_t result=0,upper=count,index=command,lower=subcommand;
-    if(table && count) {
-        uint32_t key=(command<<8)|subcommand;
-        upper=count-1u;lower=0;
-        while(lower<=upper) {
-            index=lower+((upper-lower)>>1);
-            uint32_t address=(uint32_t)table+(index<<3);
-            uint32_t observed=read16((const volatile uint8_t *)(uintptr_t)address);
-            if(observed==key) { result=read32((const volatile uint8_t *)(uintptr_t)(address+4u));break; }
-            if(observed<key) lower=index+1u;
-            else upper=index-1u;
-        }
-    }
-    register uint32_t out0 __asm__("r0")=result,out1 __asm__("r1")=upper;
-    register uint32_t out2 __asm__("r2")=index,out3 __asm__("r3")=lower;
-    __asm__ volatile("" : "+r"(out0), "+r"(out1), "+r"(out2), "+r"(out3));
-    return out0;
+ struct command_lookup found={0,subcommand};
+ if(table && count){
+  uint32_t key=(command<<8)|subcommand,upper=count-1u,lower=0;
+  while(lower<=upper){
+   uint32_t index=lower+((upper-lower)>>1);
+   uint32_t address=(uint32_t)table+(index<<3);
+   uint32_t observed=read16((const volatile uint8_t *)(uintptr_t)address);
+   if(observed==key){found.callback=read32((const volatile uint8_t *)(uintptr_t)(address+4u));break;}
+   if(observed<key)lower=index+1u;
+   else {if(index==0)break;upper=index-1u;}
+  }
+  found.lower=lower;
+ }
+ return found;
 }
+uint32_t r1_health_registration_binary_search(uintptr_t table,uint32_t count,uint32_t command,uint32_t subcommand)
+{return find_command(table,count,command,subcommand).callback;}
 typedef uint32_t (*command_callback)(uint32_t,const void *,uintptr_t,uint32_t);
 #define MODULE_DISPATCH(name,table,count) \
 uint32_t name(uint32_t handle,const void *packet) { \
-    register uint32_t incoming2 __asm__("r2"),incoming3 __asm__("r3"); \
-    __asm__ volatile("" : "+r"(incoming2), "+r"(incoming3) : : "memory"); \
-    uint32_t result=handle,word2=incoming2,word3=incoming3;uintptr_t word1=(uintptr_t)packet; \
-    if(packet) { \
-        const volatile uint8_t *bytes=packet; \
-        uint32_t command=bytes[6],subcommand=bytes[7]; \
-        uintptr_t callback=r1_health_registration_binary_search((uintptr_t)table,count,command,subcommand); \
-        register uint32_t native1 __asm__("r1"),native3 __asm__("r3"); \
-        __asm__ volatile("" : "=r"(native1), "=r"(native3) : : "memory"); \
-        word1=native1;word3=native3; \
-        if(callback) return ((command_callback)callback)(handle,packet,callback,word3); \
-        result=0;word2=0; \
-    } \
-    register uint32_t out0 __asm__("r0")=result,out2 __asm__("r2")=word2,out3 __asm__("r3")=word3; \
-    register uintptr_t out1 __asm__("r1")=word1; \
-    __asm__ volatile("" : "+r"(out0), "+r"(out1), "+r"(out2), "+r"(out3)); \
-    return out0; \
+ if(!packet)return handle; \
+ const volatile uint8_t *bytes=packet; \
+ struct command_lookup found=find_command((uintptr_t)table,count,bytes[6],bytes[7]); \
+ if(!found.callback)return 0; \
+ return ((command_callback)(uintptr_t)found.callback)(handle,packet,found.callback,found.lower); \
 }
 MODULE_DISPATCH(r1_health_registration_dispatcher,r1_protocol_health_commands,14u)
 MODULE_DISPATCH(r1_eus_system_dispatch_plan_build,r1_protocol_system_commands,20u)

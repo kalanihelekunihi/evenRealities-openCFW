@@ -1,0 +1,29 @@
+{
+  "evidence_id": "ev_415e973c1901514c9d4ecc10af9f08ccf04a4cea9f8630b622b1bc789d838c63",
+  "subject": {
+    "name": "stock.elf",
+    "digest": {
+      "sha256": "25b4a29af80ec8edab5bd861ba9b74a6e22eab29dc3d7a809a16869e8a140f04"
+    },
+    "local_path": "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-queue-reset-c/stock.elf",
+    "format": "elf",
+    "architecture": "arm"
+  },
+  "normalized_result": {
+    "address": "0x4c4b8",
+    "requested_bytes": 170,
+    "returned_bytes": 170,
+    "bytes_hex": "f8b52a4d044695f92600a04233d085f8264045f00ff8c00703d145f00bf8400706d5234622a222a14ff0446045f0a8f845f000f880070ad5264827492246401ac008032101eb004024a12df061fa2a4e012c11d0706918b13df056ff0020706195f824004af090fa8df800000122694604203ef07dfdf8bdf0f7c6fdf0f7e2fd00204af081fa8df800000122694604203ef06efd70690028edd100224ef6602116483df0d9fe7061f8bd",
+    "complete": true
+  },
+  "limitations": [
+    "The session serves operations only after Ghidra reports default auto-analysis complete; incomplete analysis does not expose partial results.",
+    "The imported Program and temporary project are ephemeral and deleted on close. Annotation operations edit session database metadata; original executable bytes are never written.",
+    "Cancelling an active Ghidra request terminates its ephemeral database and discards session annotations. The selected target remains open; the next provider query imports the original artifact again.",
+    "Default-space addresses use lowercase 0x-prefixed hexadecimal; other address spaces use <percent-encoded-space>:0x<hex>.",
+    "Bytes reflect Ghidra's initialized memory, including loader fixups. Reads stop at an unmapped or uninitialized byte and report completeness explicitly.",
+    "macOS sessions require a matching executable Ghidra native decompiler; REA checks for it but does not build native components or change Gatekeeper quarantine state."
+  ],
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "raw_artifact_match": true
+}

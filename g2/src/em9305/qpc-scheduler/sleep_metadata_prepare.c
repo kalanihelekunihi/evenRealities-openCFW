@@ -1,6 +1,5 @@
 /* Native metadata preparation 0x3125a8..0x312674. Volatile views retain
- * native widths and repeated reads. XB FU is retained as the actual ARC EM
- * instruction rather than assigning unverified arithmetic semantics. */
+ * native widths and repeated reads. Stock XBFU 0x11 extracts bit 17. */
 #include <stdint.h>
 extern uint32_t opencfw_em9305_sleep_metadata_rom(uint32_t,uintptr_t,uintptr_t); /* 0x103b0c */
 extern uint32_t opencfw_em9305_sleep_register(uintptr_t); /* 0x311848 */
@@ -32,12 +31,12 @@ uint32_t opencfw_em9305_sleep_metadata_prepare(uint32_t *deadline,uint32_t *dist
  put(context()+44u,0); put(context()+45u,0);
  if(*(volatile uint32_t *)(uintptr_t)0x80199cu==0 && byte(0x80fbbfu)!=0) {
   uint32_t irq;
-  __asm__ volatile("clri %0\n\tsync" : "=r"(irq) :: "memory");
+  irq=(uint32_t)__builtin_arc_clri(); __builtin_arc_sync();
   volatile uint32_t *control=(volatile uint32_t *)(uintptr_t)0xf00404u;
   uint32_t old=*control; *control=old|(1u<<17);
-  __asm__ volatile("seti %0" :: "r"(irq) : "memory");
+  __builtin_arc_seti((int)irq);
   uint32_t field;
-  __asm__ volatile("xbfu %0,%1,0x11" : "=r"(field) : "r"(old));
+  field=((uint32_t)old>>17u)&0x1u;
   put(context()+44u,(uint8_t)field); put(context()+45u,1);
  }
  put(context()+42u,0);

@@ -32,3 +32,20 @@ int32_t g2_log_printf(const char *format,...)
     va_end(arguments);
     return count;
 }
+
+/* Stock call targets that are the same 0x08009170 formatter entry. */
+#define CASE_LOG_ALIAS(name) \
+    __typeof__(g2_log_printf) name __attribute__((alias("g2_log_printf")));
+CASE_LOG_ALIAS(case_legacy_logger)
+CASE_LOG_ALIAS(case_binary_3d_logger)
+CASE_LOG_ALIAS(case_binary_3e_logger)
+CASE_LOG_ALIAS(case_binary_3f_logger)
+CASE_LOG_ALIAS(case_binary_3f_program_log)
+CASE_LOG_ALIAS(case_binary_56_logger)
+CASE_LOG_ALIAS(case_binary_56_exit_log)
+CASE_LOG_ALIAS(case_binary_5e_logger)
+CASE_LOG_ALIAS(case_binary_5e_failure_log)
+CASE_LOG_ALIAS(case_binary_logger)
+CASE_LOG_ALIAS(case_policy_log)
+/* Dedup (0x08009170): case_boot_log (was startup/application_boot_log_alias_candidate.c). */
+void case_boot_log(uint32_t format,uint32_t a,uint32_t b) __attribute__((alias("g2_log_printf")));

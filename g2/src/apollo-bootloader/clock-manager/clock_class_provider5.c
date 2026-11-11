@@ -1,6 +1,10 @@
 /* Recovered class-5 generator ownership, config leaves, and callback path.
- * Register and poll behavior is validated only in synthetic memory. */
+ * Register and poll behavior is validated only in synthetic memory. The
+ * CLKGEN HF2ADJ/HFRC2 leaves are upstream am_hal_clkgen.c. */
 #include "clock_class_provider5.h"
+#include <stdbool.h>
+#include "am_mcu_apollo.h"
+#include "am_hal_clkgen_private.h" /* AmbiqSuite 5.1.0; stock 0x426c24..0x426d2c */
 
 #include "clock_class_provider2.h"
 #include "clock_class_provider4.h"
@@ -15,13 +19,7 @@ enum {
     CLOCK5_FEATURE_ENABLED = 0x20000551u,
     CLOCK5_CALLBACK_ACTIVE = 0x2002719du,
     CLOCK5_CALLBACK_POINTER = 0x20027048u,
-    CLOCK5_INITIALIZE_FLAG = 0x2002719fu,
-    DUAL_SWITCH_REGISTER = 0x40004044u,
-    DUAL_SWITCH_STATUS = 0x40004030u,
-    CLKGEN_CONFIG_ENABLE = 0x4000404cu,
-    CLKGEN_CONFIG_DIVIDER = 0x40004048u,
-    CLKGEN_CONFIG_VALUE = 0x40004050u,
-    CLKGEN_READY_MASK = 0x01000000u
+    CLOCK5_INITIALIZE_FLAG = 0x2002719fu
 };
 
 static volatile uint32_t *user_word(uint8_t user_id)
@@ -67,65 +65,6 @@ static uint32_t critical_save(void)
 static void critical_restore(uint32_t previous)
 {
     __asm volatile("msr primask, %0" :: "r"(previous) : "memory");
-}
-
-static uint32_t delay_until(uint32_t timeout, volatile uint32_t *address,
-                            uint32_t mask, uint32_t expected,
-                            uint32_t invert)
-{
-    for (;;) {
-        const uint32_t matched = (*address & mask) == expected;
-        if ((invert == 0u && matched) || (invert != 0u && !matched))
-            return 0u;
-        if (timeout == 0u)
-            return 4u;
-        opencfw_bl_delay_us(1u);
-        --timeout;
-    }
-}
-
-/* Stock 0x426C8C (dual_switch_426c8c; am_hal_clkgen_private_hfrc2_force_on) */
-static uint32_t dual_switch(uint32_t enabled)
-{
-    volatile uint32_t *const reg =
-        (volatile uint32_t *)(uintptr_t)DUAL_SWITCH_REGISTER;
-    if (enabled == 0u) {
-        *reg &= ~0x20u;
-        return 0u;
-    }
-    if (((*reg << 26) & 0x80000000u) == 0u) {
-        *reg |= 0x20u;
-        return delay_until(100u,
-                           (volatile uint32_t *)(uintptr_t)DUAL_SWITCH_STATUS,
-                           CLKGEN_READY_MASK, CLKGEN_READY_MASK, 0u);
-    }
-    return 0u;
-}
-
-/* Stock 0x426CCC (clkgen_config_426ccc; am_hal_clkgen_private_hf2adj_apply) */
-static uint32_t clkgen_config(const uint8_t *config)
-{
-    if (config == 0)
-        return 6u;
-
-    *(volatile uint32_t *)(uintptr_t)CLKGEN_CONFIG_ENABLE |= 7u;
-    volatile uint32_t *const divider =
-        (volatile uint32_t *)(uintptr_t)CLKGEN_CONFIG_DIVIDER;
-    *divider = (*divider & 0xdfffffffu) |
-               (((uint32_t)config[0] & 1u) << 29);
-    volatile uint32_t *const value =
-        (volatile uint32_t *)(uintptr_t)CLKGEN_CONFIG_VALUE;
-    *value = ((uint32_t)config[1] & 3u) | (*value & 0xfffffffcu);
-    *value = (*value & 0x80000003u) |
-             ((*(const uint32_t *)(const void *)(config + 4) & 0x1fffffffu) << 2);
-    *divider |= 1u;
-    return 0u;
-}
-
-/* Stock 0x426D1E (clkgen_disable_426d1e; am_hal_clkgen_private_hf2adj_disable; stock returns 0) */
-static void clkgen_disable(void)
-{
-    *(volatile uint32_t *)(uintptr_t)CLKGEN_CONFIG_DIVIDER &= ~1u;
 }
 
 static void callback_finish(uint32_t *timeout)
@@ -193,15 +132,14 @@ uint32_t opencfw_bl_clock_request_id5(uint8_t user_id)
         if (status == 0u &&
             *(volatile uint8_t *)(uintptr_t)CLOCK5_INITIALIZE_FLAG != 0u) {
             *(volatile uint8_t *)(uintptr_t)CLOCK5_INITIALIZE_FLAG = 0u;
-            (void)dual_switch(1u);
+            (void)am_hal_clkgen_private_hfrc2_force_on(true);
             if (*(volatile uint32_t *)(uintptr_t)CLOCK5_CONFIG_PRESENT != 0u) {
-                status = clkgen_config(
-                    (const uint8_t *)(uintptr_t)CLOCK5_CONFIG);
+                status = am_hal_clkgen_private_hf2adj_apply((am_hal_clkgen_hfrc2adj_t *)(const uint8_t *)(uintptr_t)CLOCK5_CONFIG);
                 if (status == 0u) {
                     if (*active == 0u)
                         *active = 1u;
                 } else {
-                    (void)dual_switch(0u);
+                    (void)am_hal_clkgen_private_hfrc2_force_on(false);
                 }
             }
         }
@@ -236,13 +174,13 @@ uint32_t opencfw_bl_clock_release_id5(uint8_t user_id)
     if (user_count() == 0u) {
         if (*(volatile uint32_t *)(uintptr_t)CLOCK5_CONFIG_PRESENT != 0u) {
             *(volatile uint8_t *)(uintptr_t)CLOCK5_INITIALIZE_FLAG = 0u;
-            clkgen_disable();
+            (void)am_hal_clkgen_private_hf2adj_disable();
             (void)opencfw_bl_clock_release_id2(0x36u);
             (void)opencfw_bl_clock_release_id3(0x36u);
             *(volatile uint8_t *)(uintptr_t)CLOCK5_CALLBACK_ACTIVE = 0u;
             *(volatile uint32_t *)(uintptr_t)CLOCK5_CALLBACK_POINTER = 0u;
         }
-        (void)dual_switch(0u);
+        (void)am_hal_clkgen_private_hfrc2_force_on(false);
     }
     critical_restore(previous);
     return 0u;

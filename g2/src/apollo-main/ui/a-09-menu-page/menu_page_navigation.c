@@ -46,7 +46,7 @@ extern void audio_uart_lv_scroll_to_y_44ea04(void *obj, int32_t y, uint32_t anim
 extern void audio_uart_lv_anim_init_4503d6(void *anim);
 extern void *audio_uart_lv_anim_start_450408(void *anim);
 extern void audio_uart_lv_anim_values_4506ce(void *anim, int32_t start, int32_t end);
-extern int32_t audio_uart_lv_anim_path_450688(void *anim);
+extern int32_t lv_anim_path_ease_in_out(void *anim);
 extern uint32_t display_driver_uled_mode_45a568(void);                            /* device role */
 extern uint32_t audio_system_alert_command_45a8ee(uint32_t app, const void *payload, uint32_t len,
                                                   uint32_t timeout_ms);           /* start app */
@@ -288,7 +288,7 @@ static void menu_select_current(void)
     anim.exec_cb = (void *)menu_obj_set_style_transform_scale_46015a;
     audio_uart_lv_anim_values_4506ce(&anim, 0x140, 0x168);
     anim.duration = 150;
-    anim.path_cb = (void *)audio_uart_lv_anim_path_450688;
+    anim.path_cb = (void *)lv_anim_path_ease_in_out;
     anim.playback_duration = 150u;
     (void)audio_uart_lv_anim_start_450408(&anim);
 

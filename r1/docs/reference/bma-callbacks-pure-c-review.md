@@ -1,0 +1,17 @@
+# Typed C BMA callback boundary
+
+`r1/src/application/runtime/native_bma_interface.c` replaces three assembly-name declarations with real C callback adapters matching the pinned Bosch SDK: byte register/int8 result for read/write and a two-argument void delay. Native full-word read/write functions remain canonical and retain exact bytes/relocations. The SDK adapters delegate to them and map their zero/negative-two result into the declared signed-byte API. The delay adapter ignores the SDK handle and calls the actual one-argument shared delay.
+
+`native_bma_fifo.c` now declares and calls that same one-argument delay API. Its delay remains 450 microseconds in the control sequence. The shared architecture-specific delay implementation is unchanged. Registration order, field widths, 64-byte configured transfer capacity, interface/variant/performance fields and cold context/address data remain unchanged. Callback pointer targets now name typed adapters; comparisons normalize those targets by role rather than claiming pointer-byte identity.
+
+REA bytes match the official interface and FIFO entries. **19,168 stock/C comparisons** check all seeded context bytes/null initialization, native full-word register calls and SDK byte-register calls, transfer-length wrapping, raw bus results and delay shift/zero boundaries. Actual C callers compiled against `bma4.h` invoke the callbacks through the SDK's function-pointer fields, including signed promotion of the int8 result. The actual shared delay boundary executes with its cycle primitive modeled. Ordered registration writes, untouched fields, pointer roles, bus arguments, buffer guards, caller stack, callee-saved integer/FP registers, SP and interrupt masks are verified.
+
+A further **2,168 FIFO control comparisons** retain power-disable → delay → read → power-restore ordering, raw error paths, sample/request wrapping and live logging gates. This fixture uses natural Thumb returns and models its lower power/read/log/delay services. The delay's unused incoming R1 and void return residue are excluded from the public one-argument API.
+
+Five compiled defects are rejected using a reduced matrix: wrong SDK error mapping, wrong delay argument, invalid write-callback registration, wrong capacity and wrong interface handle. Bus reads in the callback fixture deliver at most sixteen bytes; these tests establish adapter forwarding and ABI behavior, not complete physical transfers.
+
+The open-toolchain report `build/sources-goal-r1-bma-callbacks-pure-c/report.json` compiles all **855 units** and completes both relocatable compositions. All **843 other nongenerated objects** are unchanged. The normal interface object equals the executed probe object. Imports remain **61 application / 22 bootloader**. R1 manifest validation passes and manifest/source-plan selections remain unchanged. No new persistent state is introduced.
+
+All six `native_bma*.c` runtime units now contain no inline assembly, naked functions or assembly-name aliases. This is a source-family result; architectural delay/driver code elsewhere remains. Native allocation extent beyond the pinned 52-byte context, physical sensor/bus behavior, timing, faults/concurrency, provider overruns and final application linking/startup remain unverified. Byte identity is not claimed.
+
+[Machine receipt](bma-callbacks-pure-c-review.json) binds sources, REA, reports and ignored probe evidence under `build/goal-r1-bma-callbacks-pure-c/`.

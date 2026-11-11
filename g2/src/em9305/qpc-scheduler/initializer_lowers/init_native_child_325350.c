@@ -1,34 +1,15 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_325350\n"
-".type opencfw_em9305_child_325350,@function\n"
-"opencfw_em9305_child_325350:\n"
-"L325350:\n"
-"enter_s [r13,fp,blink]\n"
-"L325352:\n"
-"sub_s sp,sp,0x4\n"
-"L325354:\n"
-"mov_s r13,r0\n"
-"L325356:\n"
-"mov_s r0,0x805abc\n"
-"L32535c:\n"
-"bl.d opencfw_em9305_wsf_event_remove\n"
-"L325360:\n"
-"add r1,sp,0x3\n"
-"L325364:\n"
-"breq_s r0,0,L325370\n"
-"L325366:\n"
-"ldb r1,[sp,3]\n"
-"L32536a:\n"
-"add_s r0,r0,2\n"
-"L32536c:\n"
-"sth_s r1,[r13,0]\n"
-"L32536e:\n"
-"leave_s [r13,fp,blink,pcl]\n"
-"L325370:\n"
-"mov_s r0,0\n"
-"L325372:\n"
-"leave_s [r13,fp,blink,pcl]\n"
-".size opencfw_em9305_child_325350,.-opencfw_em9305_child_325350\n"
-);
+#include <stdint.h>
+
+/* Native 0x325350..0x325374: remove one event from the queue at 0x805abc;
+ * on success store its one-byte tag as a halfword at the output and
+ * return the event payload (event + 2), otherwise 0. */
+extern uintptr_t opencfw_em9305_wsf_event_remove(uintptr_t queue,uintptr_t out_u8);
+
+uintptr_t opencfw_em9305_child_325350(uintptr_t out)
+{
+    uint8_t tag;
+    uintptr_t event=opencfw_em9305_wsf_event_remove(0x805abcu,(uintptr_t)&tag);
+    if(event==0u)return 0u;
+    *(volatile uint16_t *)out=tag;
+    return event+2u;
+}

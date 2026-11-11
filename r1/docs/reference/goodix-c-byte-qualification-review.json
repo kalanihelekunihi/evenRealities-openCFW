@@ -1,0 +1,387 @@
+{
+  "candidate_units": 20,
+  "compiled_units": 20,
+  "selected_regions": [
+    {
+      "payload": "r1-application",
+      "symbol": "r1_goodix_i2c_open",
+      "start": 170416,
+      "end": 170428,
+      "sha256": "1966676497935d19b816261f09e508102abccf1687f2c85ac52629c687cbceef",
+      "evidence": "r1/symbols/function-frontier.csv",
+      "bindings": {
+        "r1_stock_dispatch_08": 548123,
+        "r1_ppg_bus_device": 536901324
+      },
+      "address": 330160,
+      "match_evidence": {
+        "method": "independently named native entry and all unrelocated bytes, followed by full linked equality",
+        "fixed_bytes": 4,
+        "compiled_pattern_sha256": "18cf2ecabc30b1b2881abcbf34d3d48d3db265cec04c49763fb84c1b4494a09d",
+        "relocations": [
+          {
+            "symbol": "r1_stock_dispatch_08",
+            "offset": 4,
+            "relocation_type": 30,
+            "address": 548123,
+            "role": "native_function"
+          },
+          {
+            "symbol": "r1_ppg_bus_device",
+            "offset": 8,
+            "relocation_type": 2,
+            "address": 536901324,
+            "role": "native_literal_symbol"
+          }
+        ]
+      }
+    },
+    {
+      "payload": "r1-application",
+      "symbol": "r1_goodix_i2c_close",
+      "start": 170404,
+      "end": 170416,
+      "sha256": "b4febe390d4ee553085792553e312764b19e9367af15df50c3122938b1a9b386",
+      "evidence": "r1/symbols/function-frontier.csv",
+      "bindings": {
+        "r1_stock_dispatch_0c": 548027,
+        "r1_ppg_bus_device": 536901324
+      },
+      "address": 330148,
+      "match_evidence": {
+        "method": "independently named native entry and all unrelocated bytes, followed by full linked equality",
+        "fixed_bytes": 4,
+        "compiled_pattern_sha256": "18cf2ecabc30b1b2881abcbf34d3d48d3db265cec04c49763fb84c1b4494a09d",
+        "relocations": [
+          {
+            "symbol": "r1_stock_dispatch_0c",
+            "offset": 4,
+            "relocation_type": 30,
+            "address": 548027,
+            "role": "native_function"
+          },
+          {
+            "symbol": "r1_ppg_bus_device",
+            "offset": 8,
+            "relocation_type": 2,
+            "address": 536901324,
+            "role": "native_literal_symbol"
+          }
+        ]
+      }
+    },
+    {
+      "payload": "r1-application",
+      "symbol": "r1_gsensor_sample_sink_nop",
+      "start": 15868,
+      "end": 15870,
+      "sha256": "c7dfbb7d02759eacb64dbc916c1bb6f21eabaff1c1032ea5c9176abf7fd28df8",
+      "evidence": "r1/symbols/function-frontier.csv"
+    }
+  ],
+  "source_bytes_added": 26,
+  "added_C_instruction_bytes": 18,
+  "added_literal_bytes": 8,
+  "canonical_source_plan_promoted": true,
+  "hybrid_complete_source": false,
+  "hybrid_totals": {
+    "binary-pull-through": 642399,
+    "source-built": 3761,
+    "resource-file": 248
+  },
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "application_equals_official": true,
+  "qualification_method": "Official qualify_sources.py with input-only source filter; unchanged anchored matching, scalar binding and full linked equality",
+  "candidate_results": [
+    {
+      "source": "r1/src/application/goodix/stock_i2c_transport.c",
+      "compiled": true,
+      "selected": [],
+      "rejections": {
+        "anchored_relocation_pattern_not_exact": 11,
+        "native_symbol_anchor_missing": 2
+      }
+    },
+    {
+      "source": "r1/src/application/goodix/stock_i2c_transport.c",
+      "compiled": true,
+      "selected": [],
+      "rejections": {
+        "anchored_relocation_pattern_not_exact": 11,
+        "native_symbol_anchor_missing": 2
+      }
+    },
+    {
+      "source": "r1/src/application/goodix/stock_i2c_transport.c",
+      "compiled": true,
+      "selected": [],
+      "rejections": {
+        "anchored_relocation_pattern_not_exact": 11,
+        "native_symbol_anchor_missing": 2
+      }
+    },
+    {
+      "source": "r1/src/application/goodix/stock_i2c_transport.c",
+      "compiled": true,
+      "selected": [
+        {
+          "payload": "r1-application",
+          "symbol": "r1_goodix_i2c_open",
+          "start": 170416,
+          "end": 170428,
+          "sha256": "1966676497935d19b816261f09e508102abccf1687f2c85ac52629c687cbceef",
+          "evidence": "r1/symbols/function-frontier.csv",
+          "bindings": {
+            "r1_stock_dispatch_08": 548123,
+            "r1_ppg_bus_device": 536901324
+          },
+          "address": 330160,
+          "match_evidence": {
+            "method": "independently named native entry and all unrelocated bytes, followed by full linked equality",
+            "fixed_bytes": 4,
+            "compiled_pattern_sha256": "18cf2ecabc30b1b2881abcbf34d3d48d3db265cec04c49763fb84c1b4494a09d",
+            "relocations": [
+              {
+                "symbol": "r1_stock_dispatch_08",
+                "offset": 4,
+                "relocation_type": 30,
+                "address": 548123,
+                "role": "native_function"
+              },
+              {
+                "symbol": "r1_ppg_bus_device",
+                "offset": 8,
+                "relocation_type": 2,
+                "address": 536901324,
+                "role": "native_literal_symbol"
+              }
+            ]
+          }
+        },
+        {
+          "payload": "r1-application",
+          "symbol": "r1_goodix_i2c_close",
+          "start": 170404,
+          "end": 170416,
+          "sha256": "b4febe390d4ee553085792553e312764b19e9367af15df50c3122938b1a9b386",
+          "evidence": "r1/symbols/function-frontier.csv",
+          "bindings": {
+            "r1_stock_dispatch_0c": 548027,
+            "r1_ppg_bus_device": 536901324
+          },
+          "address": 330148,
+          "match_evidence": {
+            "method": "independently named native entry and all unrelocated bytes, followed by full linked equality",
+            "fixed_bytes": 4,
+            "compiled_pattern_sha256": "18cf2ecabc30b1b2881abcbf34d3d48d3db265cec04c49763fb84c1b4494a09d",
+            "relocations": [
+              {
+                "symbol": "r1_stock_dispatch_0c",
+                "offset": 4,
+                "relocation_type": 30,
+                "address": 548027,
+                "role": "native_function"
+              },
+              {
+                "symbol": "r1_ppg_bus_device",
+                "offset": 8,
+                "relocation_type": 2,
+                "address": 536901324,
+                "role": "native_literal_symbol"
+              }
+            ]
+          }
+        }
+      ],
+      "rejections": {
+        "anchored_relocation_pattern_not_exact": 7,
+        "compiled_bytes_differ": 2,
+        "native_symbol_anchor_missing": 2
+      }
+    },
+    {
+      "source": "r1/src/application/goodix/stock_i2c_transport.c",
+      "compiled": true,
+      "selected": [],
+      "rejections": {
+        "anchored_relocation_pattern_not_exact": 11,
+        "native_symbol_anchor_missing": 2
+      }
+    },
+    {
+      "source": "r1/src/application/goodix/stock_gsensor_callbacks.c",
+      "compiled": true,
+      "selected": [],
+      "rejections": {
+        "anchored_relocation_pattern_not_exact": 3
+      }
+    },
+    {
+      "source": "r1/src/application/goodix/stock_gsensor_callbacks.c",
+      "compiled": true,
+      "selected": [],
+      "rejections": {
+        "anchored_relocation_pattern_not_exact": 3
+      }
+    },
+    {
+      "source": "r1/src/application/goodix/stock_gsensor_callbacks.c",
+      "compiled": true,
+      "selected": [],
+      "rejections": {
+        "anchored_relocation_pattern_not_exact": 3
+      }
+    },
+    {
+      "source": "r1/src/application/goodix/stock_gsensor_callbacks.c",
+      "compiled": true,
+      "selected": [],
+      "rejections": {
+        "anchored_relocation_pattern_not_exact": 3
+      }
+    },
+    {
+      "source": "r1/src/application/goodix/stock_gsensor_callbacks.c",
+      "compiled": true,
+      "selected": [],
+      "rejections": {
+        "anchored_relocation_pattern_not_exact": 3
+      }
+    },
+    {
+      "source": "r1/src/application/goodix/stock_gsensor_sink.c",
+      "compiled": true,
+      "selected": [
+        {
+          "payload": "r1-application",
+          "symbol": "r1_gsensor_sample_sink_nop",
+          "start": 15868,
+          "end": 15870,
+          "sha256": "c7dfbb7d02759eacb64dbc916c1bb6f21eabaff1c1032ea5c9176abf7fd28df8",
+          "evidence": "r1/symbols/function-frontier.csv"
+        }
+      ],
+      "rejections": {}
+    },
+    {
+      "source": "r1/src/application/goodix/stock_gsensor_sink.c",
+      "compiled": true,
+      "selected": [
+        {
+          "payload": "r1-application",
+          "symbol": "r1_gsensor_sample_sink_nop",
+          "start": 15868,
+          "end": 15870,
+          "sha256": "c7dfbb7d02759eacb64dbc916c1bb6f21eabaff1c1032ea5c9176abf7fd28df8",
+          "evidence": "r1/symbols/function-frontier.csv"
+        }
+      ],
+      "rejections": {}
+    },
+    {
+      "source": "r1/src/application/goodix/stock_gsensor_sink.c",
+      "compiled": true,
+      "selected": [
+        {
+          "payload": "r1-application",
+          "symbol": "r1_gsensor_sample_sink_nop",
+          "start": 15868,
+          "end": 15870,
+          "sha256": "c7dfbb7d02759eacb64dbc916c1bb6f21eabaff1c1032ea5c9176abf7fd28df8",
+          "evidence": "r1/symbols/function-frontier.csv"
+        }
+      ],
+      "rejections": {}
+    },
+    {
+      "source": "r1/src/application/goodix/stock_gsensor_sink.c",
+      "compiled": true,
+      "selected": [
+        {
+          "payload": "r1-application",
+          "symbol": "r1_gsensor_sample_sink_nop",
+          "start": 15868,
+          "end": 15870,
+          "sha256": "c7dfbb7d02759eacb64dbc916c1bb6f21eabaff1c1032ea5c9176abf7fd28df8",
+          "evidence": "r1/symbols/function-frontier.csv"
+        }
+      ],
+      "rejections": {}
+    },
+    {
+      "source": "r1/src/application/goodix/stock_gsensor_sink.c",
+      "compiled": true,
+      "selected": [
+        {
+          "payload": "r1-application",
+          "symbol": "r1_gsensor_sample_sink_nop",
+          "start": 15868,
+          "end": 15870,
+          "sha256": "c7dfbb7d02759eacb64dbc916c1bb6f21eabaff1c1032ea5c9176abf7fd28df8",
+          "evidence": "r1/symbols/function-frontier.csv"
+        }
+      ],
+      "rejections": {}
+    },
+    {
+      "source": "r1/src/application/goodix/stock_client_release.c",
+      "compiled": true,
+      "selected": [],
+      "rejections": {
+        "anchored_relocation_pattern_not_exact": 4
+      }
+    },
+    {
+      "source": "r1/src/application/goodix/stock_client_release.c",
+      "compiled": true,
+      "selected": [],
+      "rejections": {
+        "anchored_relocation_pattern_not_exact": 4
+      }
+    },
+    {
+      "source": "r1/src/application/goodix/stock_client_release.c",
+      "compiled": true,
+      "selected": [],
+      "rejections": {
+        "anchored_relocation_pattern_not_exact": 4
+      }
+    },
+    {
+      "source": "r1/src/application/goodix/stock_client_release.c",
+      "compiled": true,
+      "selected": [],
+      "rejections": {
+        "native_symbol_anchor_missing": 1,
+        "anchored_relocation_pattern_not_exact": 4
+      }
+    },
+    {
+      "source": "r1/src/application/goodix/stock_client_release.c",
+      "compiled": true,
+      "selected": [],
+      "rejections": {
+        "anchored_relocation_pattern_not_exact": 4
+      }
+    }
+  ],
+  "evidence": {
+    "build/goal-r1-goodix-qualification/qualify.py": "8b7d46f885ffff2e7523aeb4a697fb624422cb32b0d8a73893cbb0bd9b7d9c02",
+    "build/goal-r1-goodix-qualification/scope.json": "1e219f46e3b0c25aea02c153fb91663d17f49b84950720973fe037c0facf3a86",
+    "build/goal-r1-goodix-qualification/qualified/qualification.json": "96b02f60ff0f5b9f99208cba912f89db4b704f8cf85216d340ba420b68ec03d3",
+    "build/goal-r1-goodix-qualification/qualified/source-plan.json": "9d26dae9a6adbdcaf389fab49c8b1775d9f90c71af76b3311f38d11541ba8765",
+    "build/goal-r1-goodix-qualification/source-plan-before.json": "4d46e8c038db79a174a2d719086fd0be80503ca7cdbfc2c51e5ed3d30d293064",
+    "build/goal-r1-goodix-qualification/merged-source-plan.json": "b056107b9773e0eaac8d64015682a68020b1b3e145310f7d399aaa078bd96e91",
+    "build/goal-r1-goodix-qualification/merge-audit.json": "a4c6b6761ab8de39fb2a32c4e6fc77b7bf0f58b44f38372bda6c521e6fa90281",
+    "build/hybrid-goal-r1-goodix-qualification/build-report.json": "af54b62869d1192031f4803f236e336d06ce7d20a95ae66e532e9acff3fec662",
+    "build/hybrid-goal-r1-goodix-qualification/coverage.json": "401b4a6b25f2bd24e5de34f69685ceaf176d5e8275ae21afbcdc0cd8eb649bf1",
+    "build/hybrid-goal-r1-goodix-qualification/payloads/application.bin": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "r1/src/application/goodix/stock_client_release.c": "1ba607e1a5daa0d0488ff896d46e053e5b8eb754c47a7c1a2941b39952775ffc",
+    "r1/src/application/goodix/stock_gsensor_callbacks.c": "7368b0f580539ab70a51be71ba001a02f299f938c0d6598719c87fcdade6e165",
+    "r1/src/application/goodix/stock_gsensor_sink.c": "29e396cd05387d5f10c9b2d7aa60f0f68c123f0de48a2aedf51c8cec72c4fab5",
+    "r1/src/application/goodix/stock_i2c_transport.c": "4b72a739c261e9da6ef5f2feb9efbaafe18c87ce406a39b0643bbc982c9d96e7",
+    "r1/src/sources.json": "1aafa12d094d12d32de7c12874bee69bb8e3a987233cbd4cd9740fc27895a66b",
+    "r1/symbols/function-frontier.csv": "d413d33e49405c78d785cb2bc9de27d5dcf4ecb3c47e58c57deda60aff231536",
+    "tools/build/source-plan.json": "b056107b9773e0eaac8d64015682a68020b1b3e145310f7d399aaa078bd96e91"
+  }
+}

@@ -16,3 +16,5 @@ int32_t string_compare_46cacc(const char *a, const char *b)
     } while (ca != 0u && ca == cb);
     return (int32_t)(ca - cb);
 }
+__typeof__(string_compare_46cacc) audio_uart_font_path_compare
+    __attribute__((alias("string_compare_46cacc")));

@@ -34,8 +34,8 @@ static const char simple_suspend_failed[] =
 /* Stock 0x58FB52 (uart_init) */
 int32_t audio_uart_session_open(void) {
     if (g2_audio_uart_initialized == 0u) {
-        codec_ring_initialize(&g2_audio_uart_ring_state,
-                              g2_audio_uart_storage, 64u);
+        ring_buffer_init(&g2_audio_uart_ring_state,
+                         (char *)g2_audio_uart_storage, 64u);
         codec_channel_callback(3u,
                                (uint32_t)(uintptr_t)codec_rx_callback);
         g2_audio_uart_initialized = 1u;

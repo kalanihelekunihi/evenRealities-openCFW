@@ -21,7 +21,7 @@ THIRD_PARTY_DIR := third-party
 .PHONY: all help \
         build open-build test verify clean sources sources-check sources-qualify \
         g2 g2-build g2-test g2-verify g2-clean \
-        r1 r1-test r1-verify r1-clean \
+        r1 r1-test r1-verify r1-clean r1-source-link r1-source-regions \
         third-party third-party-submodules third-party-fetched tools \
         cut-verify blockers
 
@@ -52,6 +52,8 @@ help:
 	@echo 'R1 (nRF52840 ring firmware):'
 	@echo '  r1-test          structural check of the tracked decompilation corpus'
 	@echo '  r1-verify        corpus + exact-byte image oracle (needs official images)'
+	@echo '  r1-source-link   compile R1 sources and strictly link application and bootloader regions'
+	@echo '  r1-source-regions export a sparse HEX of the checked C-linked regions and UICR'
 	@echo
 	@echo 'R1 vendor archives: third-party/fetched/README.md; images: r1/blobs/official/*/PROVENANCE.md.'
 	@echo 'G2 targets need the official OTA blobs; see g2/blobs/official/*/PROVENANCE.md.'
@@ -120,6 +122,18 @@ r1-test:
 
 r1-verify:
 	$(MAKE) -C $(R1_DIR) verify
+
+R1_SOURCE_OUT ?= build/sources-r1-final
+R1_LINK_OUT ?= build/r1-source-link
+R1_BOOT_LINK_OUT ?= build/r1-bootloader-source-link
+R1_REGIONS_OUT ?= build/r1-source-regions
+r1-source-link:
+	$(PYTHON) tools/build/sources.py build --device r1 --out "$(R1_SOURCE_OUT)"
+	$(PYTHON) tools/build/r1_application_link.py --report "$(R1_SOURCE_OUT)/report.json" --out "$(R1_LINK_OUT)"
+	$(PYTHON) tools/build/r1_bootloader_link.py --report "$(R1_SOURCE_OUT)/report.json" --out "$(R1_BOOT_LINK_OUT)"
+
+r1-source-regions: r1-source-link
+	$(PYTHON) tools/build/r1_source_regions.py --application-report "$(R1_LINK_OUT)/report.json" --bootloader-report "$(R1_BOOT_LINK_OUT)/report.json" --out "$(R1_REGIONS_OUT)"
 
 r1-clean:
 	$(MAKE) -C $(R1_DIR) clean

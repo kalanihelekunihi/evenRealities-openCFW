@@ -1,0 +1,119 @@
+{
+  "schema": 1,
+  "scope": "Pinned public PPG timestamp no-work hooks at two existing named stock entries",
+  "audit": {
+    "other_575_objects_unchanged": true,
+    "one_pinned_source_subset_unit_added": true,
+    "profiles_unchanged": true,
+    "generated_functions": [
+      "GH3X2X_TimestampSyncPpgInit",
+      "GH3X2X_TimestampSyncSetPpgIntFlag"
+    ],
+    "each_function_exact_BX_LR": true,
+    "removed_imports": [
+      "GH3X2X_TimestampSyncPpgInit",
+      "GH3X2X_TimestampSyncSetPpgIntFlag"
+    ],
+    "added_imports": [],
+    "application_unresolved": 171,
+    "bootloader_unresolved": 34
+  },
+  "execution": {
+    "paired_cases": 384,
+    "executions": 768,
+    "checks": [
+      "each exact one-instruction body returns through caller LR",
+      "all R0-R12, SP/LR, masks, CONTROL and XPSR unchanged",
+      "no data reads or writes; exactly one two-byte instruction executed"
+    ],
+    "limits": [
+      "No physical timing or sensor sampling validation",
+      "No algorithm inferred; stock and pinned source both perform no work"
+    ]
+  },
+  "negative": {
+    "state_writing_hook_rejected": true,
+    "mutation": "PpgInit writes function ID to modeled RAM instead of returning directly"
+  },
+  "source_build": {
+    "units": 576,
+    "compiled": 576,
+    "failed": 0,
+    "duplicate_strong_symbols": 0,
+    "application_unresolved": 171,
+    "bootloader_unresolved": 34
+  },
+  "qualification": {
+    "candidates": 5,
+    "compiled": 5,
+    "selected_regions": [
+      {
+        "payload": "r1-application",
+        "symbol": "GH3X2X_TimestampSyncSetPpgIntFlag",
+        "start": 15878,
+        "end": 15880,
+        "sha256": "c7dfbb7d02759eacb64dbc916c1bb6f21eabaff1c1032ea5c9176abf7fd28df8",
+        "evidence": "r1/symbols/function-frontier.csv"
+      },
+      {
+        "payload": "r1-application",
+        "symbol": "GH3X2X_TimestampSyncPpgInit",
+        "start": 15876,
+        "end": 15878,
+        "sha256": "c7dfbb7d02759eacb64dbc916c1bb6f21eabaff1c1032ea5c9176abf7fd28df8",
+        "evidence": "r1/symbols/function-frontier.csv"
+      }
+    ],
+    "new_C_bytes": 4
+  },
+  "related_driver_sweeps": {
+    "generic": {
+      "candidates": 12,
+      "compiled": 12,
+      "new_regions": 0
+    },
+    "r1-gcc": {
+      "candidates": 12,
+      "compiled": 12,
+      "new_regions": 0
+    }
+  },
+  "canonical_hybrid": {
+    "report": "build/hybrid-goal-r1-goodix-ppg-hooks-canonical/build-report.json",
+    "payload_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "totals": {
+      "binary-pull-through": 642223,
+      "source-built": 3937,
+      "resource-file": 248
+    },
+    "source_completeness_proven": false
+  },
+  "files": {
+    "r1/src/sources.json": "9f885538f479656f27fa7f8213f2c1bf210e97fa5f1f68cec8ea61a37c167ad9",
+    "r1/symbols/function-frontier.csv": "a35b99821fb7736dfc3d0171642ddbd7c7206ee2e3e273e06e692746caeb52d4",
+    "tools/build/source-plan.json": "245cfc4a25f591d78d7e69a7dda25bbdbad6bd737c15e9db532a230eee256e99",
+    "build/sources-goal-r1-goodix-ppg-hooks/report.json": "ef2aa774f2258c6ba74e17fdc531033acc40b71dabfb349dc48369eb0175454f",
+    "build/hybrid-goal-r1-goodix-ppg-hooks-canonical/build-report.json": "de7a0fb9e3977e3e2c7468aa98a2283fcc307f6f872cf6542c8ec1e7850401f3",
+    "third-party/upstream/goodix-gh3x2x/gh3x2x/demo_code/demo_algo_code/goodix_algo_application/src/gh3x2x_demo_accppg_sync.c": "7b8d1561374d33f76d25b36aa3ee946a654f273bbadf9a55aa1b0733f74e719f",
+    "build/goal-r1-goodix-ppg-hooks/prepare.py": "929aeeea42d7d0227e4ae4fe1b6b57abe171d2b1d7be35f1738263ff2d1f4b7e",
+    "build/goal-r1-goodix-ppg-hooks/sources-before.json": "80545d54b3a9f10716645cb75311a6f34478925e2598e1b5b18913a30e0ee59a",
+    "build/goal-r1-goodix-ppg-hooks/source-plan-before.json": "8044d671b4d8215bc590392c6368476cc6bc20ea0252f4e8395216ca9431b218",
+    "build/goal-r1-goodix-ppg-hooks/audit.py": "3b5213bf424e96ffb1298c113106957d59535e5fe3140f43b44243e6a6292fd3",
+    "build/goal-r1-goodix-ppg-hooks/audit-results.json": "279ca04e94d77af8ecaabce4e98de1331cd1e96fe1d4d22b3e375479f0806703",
+    "build/goal-r1-goodix-ppg-hooks/verify.py": "2d343df5b667352644d3c79c2deac1ab3b842089db9ac237cbeccbecbdacfcfd",
+    "build/goal-r1-goodix-ppg-hooks/results.json": "4503fbdd70bcd8c6b6bb3d4f4e767806b0cc4098457128d109d77743eb38e17b",
+    "build/goal-r1-goodix-ppg-hooks/negative.py": "d349e2c6afc694810529579c488b761f73e92c7b7524941472b8ea2e2f2efde2",
+    "build/goal-r1-goodix-ppg-hooks/negative-results.json": "cf973c548d50c89512a8ac73dc4f98275a1c2c87cc2918ed0a54b56fd96fff86",
+    "build/goal-r1-goodix-ppg-hooks/qualified/qualification.json": "93a7fce55905e032677783a588a671ae2bd65c05015e5f1b7ccd4e511769ae70",
+    "build/goal-r1-goodix-ppg-hooks/qualified/source-plan.json": "022af2868cdbe413ba646234fe0f4de86960d72bda0d94e4b4ab2f026d7521a4",
+    "build/goal-r1-goodix-driver-qualification/qualified-generic/qualification.json": "7314d9836556d7f1532c847379ded287c368edbd35d391a0b9b7124db128e35d",
+    "build/goal-r1-goodix-driver-qualification/qualified-generic/source-plan.json": "219a35c40a109bfe490a7c5f1ac935525826b83affac7efa2b4cfef0ef08d0e9",
+    "build/goal-r1-goodix-driver-qualification/qualified-r1-gcc/qualification.json": "15dea379351ea6886341d5da24f0b5a559c6d6451e39d9328c833fefe648dc97",
+    "build/goal-r1-goodix-driver-qualification/qualified-r1-gcc/source-plan.json": "84695c9380fa8b66d14140cb6964d91fd91ce4097d7fcd503ebc447006f5a68b"
+  },
+  "limits": [
+    "Only two named hooks selected; other timestamp identities remain separate work",
+    "No physical timing/sampling proof or global source completeness",
+    "G2 gates unchanged"
+  ]
+}

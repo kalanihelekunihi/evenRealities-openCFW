@@ -1,0 +1,300 @@
+{
+  "source": {
+    "source": "r1/src/application/st25/native_identity.c",
+    "payload": "r1-application",
+    "role": "candidate",
+    "toolchain": "clang",
+    "link": true,
+    "expect": "compile",
+    "returncode": 0,
+    "argv": [
+      "/usr/bin/clang",
+      "--target=arm-none-eabi",
+      "-mcpu=cortex-m4",
+      "-mthumb",
+      "-mfpu=fpv4-sp-d16",
+      "-mfloat-abi=hard",
+      "-std=c11",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-fno-strict-aliasing",
+      "-fshort-enums",
+      "-Os",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-isystem",
+      "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/third-party/upstream/st-fp-sns-stbox1/Drivers/BSP/Components/st25dvxxkc",
+      "-MD",
+      "-MF",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-nfc-identity-c-product/r1/r1-application/r1__src__application__st25__native_identity.c.d",
+      "-c",
+      "/Users/kalani/Repo/evenRealities-openCFW/r1/src/application/st25/native_identity.c",
+      "-o",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-nfc-identity-c-product/r1/r1-application/r1__src__application__st25__native_identity.c.o"
+    ],
+    "source_sha256": "3ab709febe5c2aab4b5e1a59bdb04ce4dc22aac596bb7074779af88091d40ea4",
+    "object_sha256": "7f4dae61db5d74c10f7f4182fa7c07e76867a4e1f97a785b2e51c861cd5307c6",
+    "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-nfc-identity-c-product/r1/r1-application/r1__src__application__st25__native_identity.c.o",
+    "strong": [
+      "r1_nfc_chip_id_probe",
+      "r1_nfc_identity_ring",
+      "r1_nfc_identity_sdk",
+      "r1_nfc_probe_ring",
+      "r1_nfc_probe_sdk",
+      "r1_st25dvxxkc_identity_log_adapter"
+    ],
+    "weak": [],
+    "undefined": [
+      "ST25DVxxKC_ReadID",
+      "nrf_delay_ms",
+      "nrf_log_frontend_std_1",
+      "r1_i2c5_nfc_resource_acquire",
+      "r1_i2c5_nfc_resource_release",
+      "r1_st25_device",
+      "r1_st25dvxxkc_register_provider",
+      "r1_structured_log_format",
+      "r1_structured_log_mode_get"
+    ]
+  },
+  "normal_report": "build/sources-goal-r1-nfc-identity-c-product/report.json",
+  "validation": {
+    "paired_cases": 15872,
+    "all_ID_bytes": true,
+    "changing_log_modes_and_callback_buffer_mutations": true,
+    "actual_C_inner_outer_chain": true,
+    "limitations": [
+      "Provider boundaries modeled; native 8-byte inner frame differs from C16; buffer location normalized.",
+      "Inner high word and logging arguments compared; private return words and flags/caller-clobbered registers except R0 and inner R3 excluded.",
+      "Electrical response, actual delay, arbitrary aliases/faults and concurrency unproven."
+    ]
+  },
+  "negative_controls": {
+    "wrong-delay": {
+      "rejected": true,
+      "stderr": "arm-none-eabi-ld: warning: (r1_st25dvxxkc_register_provider): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-nfc-identity-c/wrong-delay.o\narm-none-eabi-ld: warning: (ST25DVxxKC_ReadID): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-nfc-identity-c/wrong-delay.o\narm-none-eabi-ld: warning: (r1_structured_log_mode_get): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-nfc-identity-c/wrong-delay.o\narm-none-eabi-ld: warning: (r1_structured_log_mode_get): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-nfc-identity-c/wrong-delay.o\narm-none-eabi-ld: warning: (r1_structured_log_format): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-nfc-identity-c/wrong-delay.o\narm-none-eabi-ld: warning: (r1_structured_log_mode_get): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-nfc-identity-c/wrong-delay.o\narm-none-eabi-ld: warning: (nrf_log_frontend_std_1): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-nfc-identity-c/wrong-delay.o\narm-none-eabi-ld: warning: (r1_i2c5_nfc_resource_acquire): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-nfc-identity-c/wrong-delay.o\narm-none-eabi-ld: warning: (nrf_delay_ms): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-nfc-identity-c/wrong-delay.o\narm-none-eabi-ld: warning: (r1_i2c5_nfc_resource_release): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-nfc-identity-c/wrong-delay.o\narm-none-eabi-ld: warning: (r1_structured_log_mode_get): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-nfc-identity-c/wrong-delay.o\narm-none-eabi-ld: warning: (r1_structured_log_mode_get): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-nfc-identity-c/wrong-delay.o\narm-none-eabi-ld: warning: (r1_structured_log_format): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-nfc-identity-c/wrong-delay.o\narm-none-eabi-ld: warning: (r1_structured_log_mode_get): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-nfc-identity-c/wrong-delay.o\narm-none-eabi-ld: warning: (nrf_log_frontend_std_1): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-nfc-identity-c/wrong-delay.o\nTraceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-nfc-identity-c/reject-wrong-delay.py\", line 70, in <module>\n    c=(outer,0xa5,style,status,pattern,mutate,0x12345678);assert a(*c)==b(*c),c;n+=1\n                                                                        ~^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-nfc-identity-c/reject-wrong-delay.py\", line 59, in run\n    entry=(0x503b4 if outer else 0x77c50) if stock else syms['r1_nfc_chip_id_probe' if outer else 'r1_st25dvxxkc_identity_log_adapter'];u.emu_start(entry|1,STOP,count=1000)\n                                                                                                                                        ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 769, in emu_start\n    raise self._hook_exception\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 363, in wrapper\n    return func(uc, *args, **kwargs)\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 1063, in __hook_code_cb\n    callback(uc, address, size, user_data)\n    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-nfc-identity-c/reject-wrong-delay.py\", line 38, in code\n    elif name==names[2]:assert r0==50;state['calls'].append(['delay',r0])\n                               ^^^^^^\nAssertionError\n"
+    },
+    "wide-clear": {
+      "rejected": true,
+      "stderr": "arm-none-eabi-ld: warning: (r1_st25dvxxkc_register_provider): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-nfc-identity-c/wide-clear.o\narm-none-eabi-ld: warning: (ST25DVxxKC_ReadID): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-nfc-identity-c/wide-clear.o\narm-none-eabi-ld: warning: (r1_structured_log_mode_get): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-nfc-identity-c/wide-clear.o\narm-none-eabi-ld: warning: (r1_structured_log_mode_get): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-nfc-identity-c/wide-clear.o\narm-none-eabi-ld: warning: (r1_structured_log_format): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-nfc-identity-c/wide-clear.o\narm-none-eabi-ld: warning: (r1_structured_log_mode_get): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-nfc-identity-c/wide-clear.o\narm-none-eabi-ld: warning: (nrf_log_frontend_std_1): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-nfc-identity-c/wide-clear.o\narm-none-eabi-ld: warning: (r1_i2c5_nfc_resource_acquire): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-nfc-identity-c/wide-clear.o\narm-none-eabi-ld: warning: (nrf_delay_ms): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-nfc-identity-c/wide-clear.o\narm-none-eabi-ld: warning: (r1_i2c5_nfc_resource_release): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-nfc-identity-c/wide-clear.o\narm-none-eabi-ld: warning: (r1_structured_log_mode_get): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-nfc-identity-c/wide-clear.o\narm-none-eabi-ld: warning: (r1_structured_log_mode_get): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-nfc-identity-c/wide-clear.o\narm-none-eabi-ld: warning: (r1_structured_log_format): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-nfc-identity-c/wide-clear.o\narm-none-eabi-ld: warning: (r1_structured_log_mode_get): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-nfc-identity-c/wide-clear.o\narm-none-eabi-ld: warning: (nrf_log_frontend_std_1): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-nfc-identity-c/wide-clear.o\nTraceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-nfc-identity-c/reject-wide-clear.py\", line 70, in <module>\n    c=(outer,0xa5,style,status,pattern,mutate,0x12345678);assert a(*c)==b(*c),c;n+=1\n                                                                 ^^^^^^^^^^^^\nAssertionError: (False, 165, 0, 0, (0, 0, 0, 0, 0, 0), False, 305419896)\n"
+    },
+    "boolean-ID": {
+      "rejected": true,
+      "stderr": "arm-none-eabi-ld: warning: (r1_st25dvxxkc_register_provider): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-nfc-identity-c/boolean-ID.o\narm-none-eabi-ld: warning: (ST25DVxxKC_ReadID): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-nfc-identity-c/boolean-ID.o\narm-none-eabi-ld: warning: (r1_structured_log_mode_get): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-nfc-identity-c/boolean-ID.o\narm-none-eabi-ld: warning: (r1_structured_log_mode_get): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-nfc-identity-c/boolean-ID.o\narm-none-eabi-ld: warning: (r1_structured_log_format): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-nfc-identity-c/boolean-ID.o\narm-none-eabi-ld: warning: (r1_structured_log_mode_get): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-nfc-identity-c/boolean-ID.o\narm-none-eabi-ld: warning: (nrf_log_frontend_std_1): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-nfc-identity-c/boolean-ID.o\narm-none-eabi-ld: warning: (r1_i2c5_nfc_resource_acquire): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-nfc-identity-c/boolean-ID.o\narm-none-eabi-ld: warning: (nrf_delay_ms): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-nfc-identity-c/boolean-ID.o\narm-none-eabi-ld: warning: (r1_i2c5_nfc_resource_release): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-nfc-identity-c/boolean-ID.o\narm-none-eabi-ld: warning: (r1_structured_log_mode_get): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-nfc-identity-c/boolean-ID.o\narm-none-eabi-ld: warning: (r1_structured_log_mode_get): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-nfc-identity-c/boolean-ID.o\narm-none-eabi-ld: warning: (r1_structured_log_format): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-nfc-identity-c/boolean-ID.o\narm-none-eabi-ld: warning: (r1_structured_log_mode_get): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-nfc-identity-c/boolean-ID.o\narm-none-eabi-ld: warning: (nrf_log_frontend_std_1): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-nfc-identity-c/boolean-ID.o\nTraceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-nfc-identity-c/reject-boolean-ID.py\", line 70, in <module>\n    c=(outer,0xa5,style,status,pattern,mutate,0x12345678);assert a(*c)==b(*c),c;n+=1\n                                                                        ~^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-nfc-identity-c/reject-boolean-ID.py\", line 63, in run\n    value=state['latched'] if outer else int.from_bytes(u.mem_read(state['ptr'],1),'little');assert u.reg_read(UC_ARM_REG_R0)==value\n                                                                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    "cached-mode": {
+      "rejected": true,
+      "stderr": "arm-none-eabi-ld: warning: (r1_st25dvxxkc_register_provider): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-nfc-identity-c/cached-mode.o\narm-none-eabi-ld: warning: (ST25DVxxKC_ReadID): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-nfc-identity-c/cached-mode.o\narm-none-eabi-ld: warning: (r1_structured_log_mode_get): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-nfc-identity-c/cached-mode.o\narm-none-eabi-ld: warning: (r1_structured_log_format): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-nfc-identity-c/cached-mode.o\narm-none-eabi-ld: warning: (r1_structured_log_mode_get): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-nfc-identity-c/cached-mode.o\narm-none-eabi-ld: warning: (nrf_log_frontend_std_1): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-nfc-identity-c/cached-mode.o\narm-none-eabi-ld: warning: (r1_i2c5_nfc_resource_acquire): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-nfc-identity-c/cached-mode.o\narm-none-eabi-ld: warning: (nrf_delay_ms): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-nfc-identity-c/cached-mode.o\narm-none-eabi-ld: warning: (r1_i2c5_nfc_resource_release): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-nfc-identity-c/cached-mode.o\narm-none-eabi-ld: warning: (r1_structured_log_mode_get): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-nfc-identity-c/cached-mode.o\narm-none-eabi-ld: warning: (r1_structured_log_format): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-nfc-identity-c/cached-mode.o\narm-none-eabi-ld: warning: (r1_structured_log_mode_get): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-nfc-identity-c/cached-mode.o\narm-none-eabi-ld: warning: (nrf_log_frontend_std_1): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-nfc-identity-c/cached-mode.o\nTraceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-nfc-identity-c/reject-cached-mode.py\", line 70, in <module>\n    c=(outer,0xa5,style,status,pattern,mutate,0x12345678);assert a(*c)==b(*c),c;n+=1\n                                                                 ^^^^^^^^^^^^\nAssertionError: (False, 165, 0, 0, (0, 0, 0, 0, 0, 0), False, 305419896)\n"
+    }
+  },
+  "REA": [
+    {
+      "evidence_id": "ev_658db70d2cb7b68868f02d75aab6ad3d5d9fc8adb112b3c22985481259684725",
+      "subject": {
+        "name": "stock.elf",
+        "digest": {
+          "sha256": "25b4a29af80ec8edab5bd861ba9b74a6e22eab29dc3d7a809a16869e8a140f04"
+        },
+        "local_path": "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-queue-reset-c/stock.elf",
+        "format": "elf",
+        "architecture": "arm"
+      },
+      "provider": {
+        "id": "ghidra",
+        "name": "Ghidra",
+        "version": "12.1.4"
+      },
+      "analysis_profile": {
+        "provider": {
+          "id": "ghidra",
+          "name": "Ghidra",
+          "version": "12.1.4"
+        },
+        "parameters": {
+          "target_kind": "executable",
+          "target_format": "elf",
+          "architecture": "arm",
+          "available_architectures": [
+            "arm"
+          ],
+          "import_mode": "ephemeral-source-immutable",
+          "annotation_policy": "atomic-function-entry-metadata-v1",
+          "load_image_observations": "source-mappings-entry-context-v2",
+          "function_body_evidence": "complete-inclusive-ranges-v1",
+          "function_references": "complete-body-and-entry-reference-manager-v2",
+          "call_relationship_coverage": "function-body-call-coverage-v5",
+          "function_dossier_coverage": "observed-facets-and-call-relationships-v1",
+          "string_inventory_evidence": "defined-data-coverage-v1",
+          "location_resolution": "explicit-address-exact-entry-symbol-first-v3",
+          "procedure_file_offset_resolution": "address-first-unique-target-source-mapping-v2",
+          "instruction_flow_evidence": "decoded-return-pcode-v1",
+          "instruction_references": "exact-address-incoming-v1",
+          "function_boundary_observations": "ghidra-function-boundary-limitations-v3",
+          "no_return_repair": "returning-imports-decoded-return-v2",
+          "process_launch": "inspected-jvm-launch-support-v1",
+          "jump_table_evidence": "typed-case-default-blocks-v1",
+          "decompiler_jump_loads": true,
+          "loader": "auto-from-header",
+          "language_id": "auto-from-header",
+          "compiler_spec_id": "auto-default",
+          "analyzer_preset": "ghidra-default"
+        },
+        "digest": "7e46711069eea041af1b9b99e34115c13332795e5cda76e584a722f529ec70de"
+      },
+      "predicate_type": "rea.analysis",
+      "operation": "read_bytes",
+      "parameters": {
+        "address": "0x503b4",
+        "length": 172
+      },
+      "raw_result": {
+        "address": "0x503b4",
+        "requested_bytes": 172,
+        "returned_bytes": 172,
+        "bytes_hex": "10b500f08ff8322028f0b8f827f046fc044600f07bf841f08ff8c00703d141f08bf8400706d523460ba20ba14ff0446041f028f941f080f880070ad5114812492246401ac008032101eb00400fa129f0e1fa204610bd00005b52494e475d62635f6e66635f7374323564765f6465766963655f636869705f69643a25303278200d000000fc440c001c440c0062635f6e66635f7374323564765f6465766963655f636869705f69643a253032",
+        "complete": true
+      },
+      "normalized_result": {
+        "address": "0x503b4",
+        "requested_bytes": 172,
+        "returned_bytes": 172,
+        "bytes_hex": "10b500f08ff8322028f0b8f827f046fc044600f07bf841f08ff8c00703d141f08bf8400706d523460ba20ba14ff0446041f028f941f080f880070ad5114812492246401ac008032101eb00400fa129f0e1fa204610bd00005b52494e475d62635f6e66635f7374323564765f6465766963655f636869705f69643a25303278200d000000fc440c001c440c0062635f6e66635f7374323564765f6465766963655f636869705f69643a253032",
+        "complete": true
+      },
+      "confidence": "observed",
+      "authority": "shipped-artifact",
+      "environment": null,
+      "limitations": [
+        "The session serves operations only after Ghidra reports default auto-analysis complete; incomplete analysis does not expose partial results.",
+        "The imported Program and temporary project are ephemeral and deleted on close. Annotation operations edit session database metadata; original executable bytes are never written.",
+        "Cancelling an active Ghidra request terminates its ephemeral database and discards session annotations. The selected target remains open; the next provider query imports the original artifact again.",
+        "Default-space addresses use lowercase 0x-prefixed hexadecimal; other address spaces use <percent-encoded-space>:0x<hex>.",
+        "Bytes reflect Ghidra's initialized memory, including loader fixups. Reads stop at an unmapped or uninitialized byte and report completeness explicitly.",
+        "macOS sessions require a matching executable Ghidra native decompiler; REA checks for it but does not build native components or change Gatekeeper quarantine state."
+      ],
+      "relationship_coverage": null,
+      "locations": [],
+      "evidence_links": []
+    },
+    {
+      "evidence_id": "ev_8985b0e86daba5bc1f7745a878ab4a5c397b1b1961bcda9f9debda2cd1499097",
+      "subject": {
+        "name": "stock.elf",
+        "digest": {
+          "sha256": "25b4a29af80ec8edab5bd861ba9b74a6e22eab29dc3d7a809a16869e8a140f04"
+        },
+        "local_path": "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-queue-reset-c/stock.elf",
+        "format": "elf",
+        "architecture": "arm"
+      },
+      "provider": {
+        "id": "ghidra",
+        "name": "Ghidra",
+        "version": "12.1.4"
+      },
+      "analysis_profile": {
+        "provider": {
+          "id": "ghidra",
+          "name": "Ghidra",
+          "version": "12.1.4"
+        },
+        "parameters": {
+          "target_kind": "executable",
+          "target_format": "elf",
+          "architecture": "arm",
+          "available_architectures": [
+            "arm"
+          ],
+          "import_mode": "ephemeral-source-immutable",
+          "annotation_policy": "atomic-function-entry-metadata-v1",
+          "load_image_observations": "source-mappings-entry-context-v2",
+          "function_body_evidence": "complete-inclusive-ranges-v1",
+          "function_references": "complete-body-and-entry-reference-manager-v2",
+          "call_relationship_coverage": "function-body-call-coverage-v5",
+          "function_dossier_coverage": "observed-facets-and-call-relationships-v1",
+          "string_inventory_evidence": "defined-data-coverage-v1",
+          "location_resolution": "explicit-address-exact-entry-symbol-first-v3",
+          "procedure_file_offset_resolution": "address-first-unique-target-source-mapping-v2",
+          "instruction_flow_evidence": "decoded-return-pcode-v1",
+          "instruction_references": "exact-address-incoming-v1",
+          "function_boundary_observations": "ghidra-function-boundary-limitations-v3",
+          "no_return_repair": "returning-imports-decoded-return-v2",
+          "process_launch": "inspected-jvm-launch-support-v1",
+          "jump_table_evidence": "typed-case-default-blocks-v1",
+          "decompiler_jump_loads": true,
+          "loader": "auto-from-header",
+          "language_id": "auto-from-header",
+          "compiler_spec_id": "auto-default",
+          "analyzer_preset": "ghidra-default"
+        },
+        "digest": "7e46711069eea041af1b9b99e34115c13332795e5cda76e584a722f529ec70de"
+      },
+      "predicate_type": "rea.analysis",
+      "operation": "read_bytes",
+      "parameters": {
+        "address": "0x77c50",
+        "length": 148
+      },
+      "raw_result": {
+        "address": "0x77c50",
+        "requested_bytes": 148,
+        "returned_bytes": 148,
+        "bytes_hex": "08b500208df80000ccf7c8ff69461348baf737f819f042fcc00703d119f03efc400707d59df800300da20da14ff0446019f0dafc19f032fc80070bd50e480f499df80020401ac008032101eb00400ca101f092fe9df8000008bd0000086b01205b52494e475d6e66637461675f6964203d20307825782000fc440c001c440c006e66637461675f6964203d203078257820000000",
+        "complete": true
+      },
+      "normalized_result": {
+        "address": "0x77c50",
+        "requested_bytes": 148,
+        "returned_bytes": 148,
+        "bytes_hex": "08b500208df80000ccf7c8ff69461348baf737f819f042fcc00703d119f03efc400707d59df800300da20da14ff0446019f0dafc19f032fc80070bd50e480f499df80020401ac008032101eb00400ca101f092fe9df8000008bd0000086b01205b52494e475d6e66637461675f6964203d20307825782000fc440c001c440c006e66637461675f6964203d203078257820000000",
+        "complete": true
+      },
+      "confidence": "observed",
+      "authority": "shipped-artifact",
+      "environment": null,
+      "limitations": [
+        "The session serves operations only after Ghidra reports default auto-analysis complete; incomplete analysis does not expose partial results.",
+        "The imported Program and temporary project are ephemeral and deleted on close. Annotation operations edit session database metadata; original executable bytes are never written.",
+        "Cancelling an active Ghidra request terminates its ephemeral database and discards session annotations. The selected target remains open; the next provider query imports the original artifact again.",
+        "Default-space addresses use lowercase 0x-prefixed hexadecimal; other address spaces use <percent-encoded-space>:0x<hex>.",
+        "Bytes reflect Ghidra's initialized memory, including loader fixups. Reads stop at an unmapped or uninitialized byte and report completeness explicitly.",
+        "macOS sessions require a matching executable Ghidra native decompiler; REA checks for it but does not build native components or change Gatekeeper quarantine state."
+      ],
+      "relationship_coverage": null,
+      "locations": [],
+      "evidence_links": []
+    }
+  ],
+  "unrelated_objects_identical": 582,
+  "imports_unchanged": {
+    "application": 164,
+    "bootloader": 34
+  },
+  "qualification": "build/goal-r1-nfc-identity-c/qualified-final/qualification.json",
+  "new_exact_bytes": 0,
+  "provider_frames": {
+    "outer_native_and_C": 8,
+    "inner_native": 8,
+    "inner_C": 16
+  },
+  "hybrid": {
+    "report": "build/hybrid-goal-r1-nfc-identity-c/build-report.json",
+    "sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "totals": {
+      "binary-pull-through": 642005,
+      "source-built": 4155,
+      "resource-file": 248
+    },
+    "source_plan_unchanged": true,
+    "source_completeness_proven": false
+  },
+  "limitations": [
+    "Inner provider buffer/frame differs and is normalized in comparison.",
+    "Resource/delay/registration/ReadID/logging boundaries modeled; electrical response and real timing unproven.",
+    "Private return words, APSR and caller-clobbered registers except final R0 and standalone inner R3 excluded.",
+    "Arbitrary aliases, faults, concurrency and complete source-only rebuilding remain unproven."
+  ]
+}

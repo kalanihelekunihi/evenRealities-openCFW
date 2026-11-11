@@ -1,0 +1,252 @@
+{
+  "full_cases": 112,
+  "prefix_cases": 69,
+  "passed": 181,
+  "executions": 362,
+  "source_size": 26,
+  "actual_countdown": true,
+  "report": "build/sources-goal-r1-qma-c-delay-final/report.json",
+  "source_sha256": {
+    "r1/src/application/board/native_rtt_delay.c": "e614166951aa96b4de91200ad9d67e71434f9bb759faab1fbf6f9225cb4576c7",
+    "r1/src/application/runtime/native_qma_transport.c": "f6afdc7a04a3f40a9d9a753bbb0cc005a3aeb7a7e8b013db876b83177d9deca1"
+  },
+  "limitations": [
+    "Large unit counts checked only to first primitive call",
+    "Private stack bytes/frame size and intermediate non-ABI register allocation excluded",
+    "Physical timing and complete sensor/device operation unverified",
+    "No byte qualification"
+  ],
+  "negative_control": {
+    "mutation": "Replace MOVS with CMP zero test",
+    "rejected": true,
+    "counterexample": "units=0 incoming C=0 V=0; native preserves C=0 while CMP produces C=1",
+    "stderr": "arm-none-eabi-ld: warning: cannot find entry symbol _start; defaulting to 01000000\nTraceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-qma-c-delay/reject-cmp.py\", line 42, in <module>\n    for c in cases:assert a(*c,False)==b(*c,False),c\n                                       ~^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-qma-c-delay/reject-cmp.py\", line 37, in run\n    assert u.reg_read(UC_ARM_REG_APSR)&0xf8000000==flags,(native,arg,hex(u.reg_read(UC_ARM_REG_APSR)),hex(flags))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: (False, 0, '0x60000000', '0x40000000')\n"
+  },
+  "retry": {
+    "cases": 1536,
+    "passed": 1536,
+    "failures": [],
+    "outcome_sequences": 32,
+    "functions": [
+      {
+        "name": "r1_qma_read_retry",
+        "stock_entry": "0x8714c",
+        "stock_bytes": 56,
+        "source_bytes": 66
+      },
+      {
+        "name": "r1_qma_write_retry",
+        "stock_entry": "0x873f4",
+        "stock_bytes": 46,
+        "source_bytes": 52
+      }
+    ],
+    "callback_stack_depth_pairs": [
+      [
+        false,
+        [
+          -32
+        ],
+        [
+          -32
+        ]
+      ],
+      [
+        false,
+        [
+          -32,
+          -32,
+          -32
+        ],
+        [
+          -32,
+          -32,
+          -32
+        ]
+      ],
+      [
+        false,
+        [
+          -32,
+          -32,
+          -32,
+          -32,
+          -32
+        ],
+        [
+          -32,
+          -32,
+          -32,
+          -32,
+          -32
+        ]
+      ],
+      [
+        false,
+        [
+          -32,
+          -32,
+          -32,
+          -32,
+          -32,
+          -32,
+          -32
+        ],
+        [
+          -32,
+          -32,
+          -32,
+          -32,
+          -32,
+          -32,
+          -32
+        ]
+      ],
+      [
+        false,
+        [
+          -32,
+          -32,
+          -32,
+          -32,
+          -32,
+          -32,
+          -32,
+          -32,
+          -32
+        ],
+        [
+          -32,
+          -32,
+          -32,
+          -32,
+          -32,
+          -32,
+          -32,
+          -32,
+          -32
+        ]
+      ],
+      [
+        false,
+        [
+          -32,
+          -32,
+          -32,
+          -32,
+          -32,
+          -32,
+          -32,
+          -32,
+          -32,
+          -32
+        ],
+        [
+          -32,
+          -32,
+          -32,
+          -32,
+          -32,
+          -32,
+          -32,
+          -32,
+          -32,
+          -32
+        ]
+      ],
+      [
+        true,
+        [
+          -32
+        ],
+        [
+          -24
+        ]
+      ],
+      [
+        true,
+        [
+          -32,
+          -32
+        ],
+        [
+          -24,
+          -24
+        ]
+      ],
+      [
+        true,
+        [
+          -32,
+          -32,
+          -32
+        ],
+        [
+          -24,
+          -24,
+          -24
+        ]
+      ],
+      [
+        true,
+        [
+          -32,
+          -32,
+          -32,
+          -32
+        ],
+        [
+          -24,
+          -24,
+          -24,
+          -24
+        ]
+      ],
+      [
+        true,
+        [
+          -32,
+          -32,
+          -32,
+          -32,
+          -32
+        ],
+        [
+          -24,
+          -24,
+          -24,
+          -24,
+          -24
+        ]
+      ]
+    ],
+    "unchanged_functions": [
+      "r1_qma6100_bounded_fifo_read",
+      "r1_qma6100_chip_id",
+      "r1_qma6100_irq_boundary",
+      "r1_qma_chip_id_byte",
+      "r1_qma_event_result",
+      "r1_qma_fifo_body",
+      "r1_qma_irq_body"
+    ],
+    "report": "build/sources-goal-r1-qma-c-delay-final/report.json",
+    "report_sha256": "9ec8e9481595a0a731a44d22df9ced582a7983c960a97cc04048e6ea0d4053cd",
+    "source_sha256": "f6afdc7a04a3f40a9d9a753bbb0cc005a3aeb7a7e8b013db876b83177d9deca1",
+    "manifest_sha256": "b385be47638f661f89bdef1d4306c414d128f7739c6326e7460e813bb78526bc",
+    "stock_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a"
+  },
+  "evidence": {
+    "build/goal-r1-qma-c-delay/stock.elf": "dfe638090be0ba30806ac7a840783e5d6d8accc27827e286b76961de2a3fea1e",
+    "build/goal-r1-qma-c-delay/REA.snapshot.json": "0c0abca76ee561d68c27911ce0882002d4f9e60043ccb86bc34ba798719f0433",
+    "build/goal-r1-qma-c-delay/verify.py": "29ddcd7bfce482aec7f2b3ae7a2fad541fc85ddeed7ab2820f9d0c6e806a0ee2",
+    "build/goal-r1-qma-c-delay/source.elf": "c97538e104d585292e7e4bd6a6d917195abfd1cba8f16531f7fb44e96472d174",
+    "build/goal-r1-qma-c-delay/bad-cmp.c": "b864751fae42b2bf7153750afd0347b5fb3ddee78842e58692f0c706f6d92bb1",
+    "build/goal-r1-qma-c-delay/reject-cmp.py": "0ae222f5f735f75e6fdc3c5b3e812ba19cd94bdfe0bbdcbf1a5a41f29bb841ee",
+    "build/goal-r1-qma-c-delay/retry/verify.py": "534f6cc7502a22049f7643946cb57838b18868029e7b46776e402eb312fb4575",
+    "build/sources-goal-r1-qma-c-delay-final/report.json": "9ec8e9481595a0a731a44d22df9ced582a7983c960a97cc04048e6ea0d4053cd",
+    "r1/src/sources.json": "b385be47638f661f89bdef1d4306c414d128f7739c6326e7460e813bb78526bc",
+    "r1/symbols/function-frontier.csv": "6566ef8dcc775703ee14bb06612bec586cf6e23ad28e609d25c438a1b379e701",
+    "tools/build/source-plan.json": "cb498f25da9dfefbb181b3b90f6e321e7e5c690a37201bb91bd1c5ccf3eac6ea"
+  },
+  "source_plan_changed": false
+}

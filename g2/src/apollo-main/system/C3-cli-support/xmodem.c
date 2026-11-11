@@ -23,6 +23,10 @@
  * Profile g2-apollo-main-2. */
 #include <stdint.h>
 #include <stddef.h>
+/* Stock-RAM literals rewritten to named objects (sim-test wave 2026-10-26,
+ * .waves/sim-fix/apply.py): g2ref_X is the linker symbol X. */
+#include <stdint.h>
+extern unsigned char g2ref_g2_stock_ram_2006b528[] __asm__("g2_stock_ram_2006b528");
 
 #define SOH   0x01
 #define STX   0x02
@@ -54,7 +58,7 @@ int32_t xmodem_receive_file_595af2(const char *path, int32_t size);
 int32_t xmodem_transmit_file_595cda(const char *path, int32_t size);
 
 /* RAM 0x2006b528: xbuff, 1024 data + 3 header + 2 CRC + NUL (no named object in g2/src). */
-#define XBUFF ((uint8_t *)(uintptr_t)0x2006b528u)
+#define XBUFF ((uint8_t *)(uintptr_t)((uint32_t)(uintptr_t)g2ref_g2_stock_ram_2006b528))
 
 static const char s_mode_write[] = "w";                              /* ROM 0x595ef4 */
 static const char s_mode_read[] = "r";                               /* ROM 0x595ef8 */

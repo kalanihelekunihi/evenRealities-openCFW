@@ -1,0 +1,61 @@
+{
+  "schema": 1,
+  "target": "G2 touch ILO measurement and deep-sleep callback from pinned PDL C",
+  "stock_component": "g2/blobs/official/g2-2.2.6.10/firmware_touch.bin",
+  "stock_component_sha256": "0d13d8bb1337bf22989dc16143e3d5eca29a31cc1ed753ff624668750ea9470d",
+  "stock_evidence": {
+    "compensation_wrapper_decomp": "g2/research/corpus/touch/ghidra/open-2026-09-29/decomp/00005dd8.c",
+    "compensation_wrapper_address": "0x00005dd8",
+    "measurement_calls": [
+      "Cy_SysClk_IloStartMeasurement",
+      "Cy_SysClk_IloCompensate",
+      "Cy_SysClk_IloStopMeasurement"
+    ],
+    "state_ram_addresses": {
+      "compensation_running": "0x20000f1c",
+      "prevent_measurement": "0x20000f1d",
+      "measuring": "0x20000f1e",
+      "external_clock_frequency": "0x20000f20"
+    },
+    "state_address_reference": "g2/docs/reference/findings-touch-case.md"
+  },
+  "implementation": "The 0x5dd8 wrapper calls the pinned Infineon PDL ILO APIs directly. The reset-copied clock PM descriptor names the PDL Cy_SysClk_DeepSleepCallback. The hand-reconstructed measurement helpers and callback were removed, and the PDL state sections are placed at the stock RAM addresses with linker size assertions.",
+  "upstream_source": "third-party/upstream/psoc4-touch-slice/mtb-pdl-cat2-35f1714623cfea682d5e285af80d50416b4c7bbc/drivers/source/cy_sysclk.c",
+  "source_files_sha256": {
+    "g2/src/touch/ilo-compensation/ilo.c": "2ee8eca78a217964ee8c04174de655f84904c1df49ec26a481e680be944e2cb8",
+    "g2/src/touch/ilo-compensation/ilo.h": "eab2bed6abaf393805b076c433d2d1bf32fa5cd6f9d17ed553b0d5f687c286a3",
+    "g2/src/touch/reset-layout/reset_pm_descriptor.c": "75b4fc1b46a8e8fbc1af1bd6fbe6ec8503b12ca82298c3e3d8325de1cc99e77b",
+    "g2/src/touch/link/g2-touch-stockram.ld.inc": "cf02e6d6f5db5a11a54cbc574fc7dfba77cf0dbe4b7a3ade1b6baaef6e333829",
+    "g2/src/sources.json": "630365fe50ca73907dcf8e68ad429dfa2c6cd8a628ef051c4d91c11fd8530d8b"
+  },
+  "verification": {
+    "sources_check": "make -C g2 sources-check passed; 4888 manifest units, 4549 source files, 1 existing source not built",
+    "focused_source_report": "build/g2-touch-pdl-ilo-callback-source-20261111/report.json",
+    "focused_source_report_sha256": "2ed4b05d5110890b777c34c653a8274b362439d2d10e48b8f7fb8264b6c17e68",
+    "focused_compiled_units": 100,
+    "focused_compile_failures": 0,
+    "focused_duplicate_strong_symbols": 0,
+    "focused_link_report": "build/g2-touch-pdl-ilo-callback-link-20261111/link-report.json",
+    "focused_link_report_sha256": "c0e986ab7c9ccbbf83e1265506dc1df2626dd01df5d89de95774ce5cac1c2570",
+    "source_binary_bytes": 28804,
+    "source_binary_sha256": "dc6214393914cf5ce5e75aebb459a83d6f8b82ae3470d53abc2c1c30a308272a",
+    "linked_measurement_function_addresses": ["0x000072c8", "0x0000730c", "0x00007340"],
+    "linked_deep_sleep_callback_address": "0x0000768c",
+    "descriptor_callback_thumb_value": "0x0000768d",
+    "linked_pdl_state_ram_addresses": ["0x20000f1c", "0x20000f1d", "0x20000f1e", "0x20000f20"],
+    "duplicate_local_measurement_and_callback_symbols_absent": true
+  },
+  "full_g2_verification": {
+    "source_report": "build/g2-touch-pdl-ilo-callback-full-source-20261111/report.json",
+    "source_report_sha256": "66d8d9aa70521fd9f551844a4e3838c0171848dbd9173d6e68dcc77a1ac9d118",
+    "compiled_units": 4883,
+    "compile_failures": 0,
+    "duplicate_strong_symbols": 0,
+    "strict_link_report": "build/g2-touch-pdl-ilo-callback-full-link-20261111/link-report.json",
+    "strict_link_report_sha256": "0c09c8d7b48c00ec0ea054e624ed06dddaba1ad3c3976005dbb1526ea49db574",
+    "linked_payloads": ["g2-apollo-bootloader", "g2-apollo-main", "g2-case", "g2-codec-a", "g2-codec-b", "g2-em9305", "g2-touch"],
+    "strict_link_passed": true,
+    "source_completeness_proven": false
+  },
+  "qualification": "The stock wrapper's call chain is now represented by pinned C PDL calls with shared state. The 28,804-byte touch candidate is smaller than the 34,464-byte locked component. Whole-image C completeness, stock equivalence, and hardware behavior remain unverified."
+}

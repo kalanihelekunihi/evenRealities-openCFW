@@ -1,0 +1,100 @@
+{
+  "schema": 1,
+  "target": "Build the touch newlib init-array loop from C with stock-exact 72-byte function and literal pool",
+  "source": "g2/src/touch/glue/touch_libc_init_array.c",
+  "source_sha256": "0088b85762350fb12048badee91c2c2ed11a627bf5f539938e88ba64625c4a83",
+  "caller": "g2/src/touch/glue/touch_runtime_0164_reset_entry.c",
+  "caller_sha256": "85da8f7b0615abb2c51b0e95b20ee9b807ed7a5b8cca8cd8f1f723f4cd099faf",
+  "linker": "g2/src/touch/link/g2-touch-stockram.ld.inc",
+  "linker_sha256": "12a0ebdf720e46b2774ba7b616d888faea1ce8d40807668f79e42c8981855169",
+  "upstream_pin": "newlib 7923059bff6c120c6fb74b63c7553ea345c0a8f3 newlib/libc/misc/init.c",
+  "qualified_region": {
+    "payload": "g2-touch",
+    "symbol": "__libc_init_array",
+    "start": 30468,
+    "end": 30540,
+    "sha256": "658aa248574049c50b246ca9a858759a02660b57667b39bede014d5e978df7e7",
+    "evidence": "g2/symbols/touch.tsv",
+    "bindings": {
+      "_init": 43589,
+      "__preinit_array_end": 536873084,
+      "__preinit_array_start": 536873084,
+      "__init_array_end": 536873088,
+      "__init_array_start": 536873084
+    },
+    "address": 43492,
+    "match_evidence": {
+      "method": "independently named native entry and all unrelocated bytes, followed by full linked equality",
+      "fixed_bytes": 52,
+      "compiled_pattern_sha256": "f472cf438a5a3307899ebbae5969ececc44ddb97ac78c6c955960db562a21de9",
+      "relocations": [
+        {
+          "symbol": "_init",
+          "offset": 18,
+          "relocation_type": 10,
+          "address": 43589,
+          "role": "native_function"
+        },
+        {
+          "symbol": "__preinit_array_end",
+          "offset": 56,
+          "relocation_type": 2,
+          "address": 536873084,
+          "role": "native_literal_symbol"
+        },
+        {
+          "symbol": "__preinit_array_start",
+          "offset": 60,
+          "relocation_type": 2,
+          "address": 536873084,
+          "role": "native_literal_symbol"
+        },
+        {
+          "symbol": "__init_array_end",
+          "offset": 64,
+          "relocation_type": 2,
+          "address": 536873088,
+          "role": "native_literal_symbol"
+        },
+        {
+          "symbol": "__init_array_start",
+          "offset": 68,
+          "relocation_type": 2,
+          "address": 536873084,
+          "role": "native_literal_symbol"
+        }
+      ]
+    }
+  },
+  "qualification_report": "build/g2-touch-init-array-c-qualification-20261111/qualification.json",
+  "qualification_report_sha256": "b168c8f5a1df263c7833af542c78099b0950e804ae1b187a3b22f8fb518ac564",
+  "qualification_selection": "build/g2-touch-init-array-c-qualification-20261111/source-plan.json",
+  "qualification_selection_sha256": "341a5aaa96e7829ede19f471d7a9efda4ce59447fe680d0dec35509576f6a7f3",
+  "source_manifest": "g2/src/sources.json",
+  "source_manifest_sha256": "3f137311f81d8f228f533442c333a84f1cf941b06327081798c2f4adab577fb8",
+  "source_plan": "tools/build/source-plan.json",
+  "source_plan_sha256": "134ab4a7cef9492aa382833c1049814fa70b98f6a60e8cbce9b0f2744ab9ce51",
+  "g2_exact_regions": 61,
+  "g2_exact_bytes": 3566,
+  "touch_exact_regions": 43,
+  "touch_exact_bytes": 3448,
+  "r1_selections_unchanged_from_staged_plan": true,
+  "focused_source_report": "build/g2-touch-init-array-c-20261111/report.json",
+  "focused_source_report_sha256": "36c5e1218be63268f48d4614058d1bb64c4237561be27bc95057d98691ecd7cf",
+  "full_source_report": "build/g2-touch-init-array-c-full-20261111/report.json",
+  "full_source_report_sha256": "3efed062d207ae8e3526deef192185cdae0c072e447ff3e3f59a4d4aaf16e6c7",
+  "compiled_units": 4883,
+  "duplicate_strong_symbols": 0,
+  "strict_link_report": "build/g2-touch-init-array-c-bundle-20261111/link-report.json",
+  "strict_link_report_sha256": "be279bcf76888daf587603d2fab087edc68db57e997322a3d670d467f343a1b7",
+  "authenticated_comparison": "build/g2-touch-init-array-c-bundle-20261111/comparison.json",
+  "authenticated_comparison_sha256": "8e2497ca1d86455c5e433e8e2b2fc30747a8c08c1e81aa2ba4991eed18e8505f",
+  "candidate_bundle_sha256": "2111a21773c966e162b7fda8f8933bba93854fb33b1021ed94f60e51ee0b3262",
+  "candidate_bundle_bytes": 4638168,
+  "candidate_byte_identical": false,
+  "hybrid_report": "build/g2-touch-init-array-c-hybrid-20261111/build-report.json",
+  "hybrid_report_sha256": "61b4f5826eeb36ec7188e0663304176c2bd58b65a95497ae4428ccf844cb3e4f",
+  "hybrid_bundle_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "other_five_components_unchanged_vs_previous_source_candidate": true,
+  "limits": "The 72-byte init-array body matches stock under the qualified native relocations, and is linked from C in the source image. The source-only bundle is still nonidentical and hardware behavior remains untested."
+}

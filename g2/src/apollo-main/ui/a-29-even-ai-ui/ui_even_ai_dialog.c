@@ -35,7 +35,7 @@ extern void audio_lv_object_clear_flag_43dfa4(void *obj, uint32_t flag);  /* lv_
 extern void audio_lv_object_flag_43ded4(void *obj, uint32_t flag);        /* lv_obj_add_flag */
 extern void audio_lv_delete_44d7b8(void *obj);                            /* lv_obj_del */
 extern void *audio_lv_label_create_499416(void *parent);                  /* lv_label_create */
-extern void audio_uart_page_44131c(void *obj, int32_t v, uint32_t sel);   /* border_width */
+extern void lv_obj_set_style_border_width(void *obj, int32_t v, uint32_t sel);   /* border_width */
 extern uint32_t audio_lv_color_44104c(uint32_t rgb);                      /* lv_color_hex */
 extern void audio_lv_style_color_44140e(void *obj, uint32_t color, uint32_t sel); /* text_color */
 extern void audio_lv_style_font_44143e(void *obj, uint32_t font, uint32_t sel);   /* text_font */
@@ -389,7 +389,7 @@ uint32_t even_ai_add_question(const char *text, uint8_t new_dialog) {
     }
 
     void *label = audio_lv_label_create_499416(d->dialog_cont);
-    audio_uart_page_44131c(label, 0, 0u);
+    lv_obj_set_style_border_width(label, 0, 0u);
     even_ai_style_apply(label, 0, 0u);
     audio_lv_style_color_44140e(label, audio_lv_color_44104c(QUESTION_COLOR), 0u);
     audio_lv_style_font_44143e(label, audio_system_alert_font_200746e0, 0u);

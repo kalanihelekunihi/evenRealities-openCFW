@@ -1,20 +1,14 @@
 #include <stdint.h>
+#include "native_float_bits.h"
 extern uint64_t r1_format_double_add_bits(uint64_t,uint64_t);
 extern uint64_t r1_binary64_reverse_subtract_bits(uint64_t,uint64_t);
 __attribute__((section(".r1.math.ceil_data"),used))
 const uint32_t r1_native_ceil_data[6]={0x8800759cu,0x7e37e43cu,0,0,0x3ff00000u,0x000fffffu};
 __attribute__((section(".r1.math.floor_data"),used))
 const uint32_t r1_native_floor_data[6]={0x8800759cu,0x7e37e43cu,0,0,0xbff00000u,0x000fffffu};
-/* Capture the private comparison flag result in the same asm statement as
- * its call; a C call followed by a separate flag read permits intervening
- * compiler arithmetic to destroy the flags. The provider preserves R12. */
 static uint32_t compare_carry(uint64_t a,uint64_t b)
 {
-    register uint32_t r0 __asm__("r0")=(uint32_t)a,r1 __asm__("r1")=(uint32_t)(a>>32);
-    register uint32_t r2 __asm__("r2")=(uint32_t)b,r3 __asm__("r3")=(uint32_t)(b>>32);
-    uint32_t status;
-    __asm__ volatile("bl r1_binary64_compare_flags\n\tmrs %[status],APSR" : [status]"=r"(status),"+r"(r0),"+r"(r1),"+r"(r2),"+r"(r3) : : "lr","cc","memory");
-    return (status>>29)&1u;
+    return (r1_binary64_comparison_cz(a,b)>>29)&1u;
 }
 static uint64_t directed_bits(uint64_t bits,uint32_t down)
 {

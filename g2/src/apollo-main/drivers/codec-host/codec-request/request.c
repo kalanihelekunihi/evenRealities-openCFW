@@ -1,5 +1,12 @@
 #include "request.h"
+extern unsigned char g2ref_g2_stock_ram_20073998[] __asm__("g2_stock_ram_20073998"); /* Fix 44: stock owner of blob+offset access */
+extern unsigned char g2ref_g2_uart_channels[] __asm__("g2_uart_channels"); /* stock 0x20000d2c, 4x28 B (uart_channel.c) */
 #include "../codec-response/response.h"
+/* Stock-RAM literals rewritten to named objects (sim-test wave 2026-10-26,
+ * .waves/sim-fix/apply.py): g2ref_X is the linker symbol X. */
+#include <stdint.h>
+extern unsigned char g2ref_g2_stock_ram_200738b8[] __asm__("g2_stock_ram_200738b8");
+extern unsigned char g2ref_g2_stock_ram_20075010[] __asm__("g2_stock_ram_20075010");
 extern uint32_t codec_channel_tx(uint32_t,const uint8_t *,uint32_t);
 static void copy(uint8_t *d,const uint8_t *s,uint32_t n){while(n--)*d++=*s++;}
 static void put16(uint8_t *p,uint16_t v){p[0]=v;p[1]=v>>8;}
@@ -10,7 +17,7 @@ int32_t codec_pack(uint16_t low,uint16_t high,const uint8_t *payload,uint16_t le
  if(declared>16)return -2;
  wire[0]='B';wire[1]='U';wire[2]='X';wire[3]='X';
  put16(wire+4,(low&0xff)|(high&0xff00));
- volatile uint8_t *sequence=(volatile uint8_t *)(uintptr_t)0x20075013;
+ volatile uint8_t *sequence=(volatile uint8_t *)(uintptr_t)((uint32_t)(uintptr_t)g2ref_g2_stock_ram_20075010+0x3u);
  uint8_t current=*sequence;wire[6]=current;*sequence=(uint8_t)(current+1);
  wire[7]=crcflag!=0;put16(wire+8,declared);
  if(payload&&length){copy(wire+14,payload,length);if(crcflag)put32(wire+14+length,codec_crc32(payload,length,0));}
@@ -18,8 +25,11 @@ int32_t codec_pack(uint16_t low,uint16_t high,const uint8_t *payload,uint16_t le
 }
 /* Stock 0x58FB38 (codec UART3 send) */
 int32_t codec_uart_tx(const uint8_t *wire,uint32_t total){return codec_channel_tx(3,wire,total)==0?0:-1;}
+/* Other callers name the same native 0x58FB38 entry (formerly a forwarding
+ * wrapper in hal/uart/uart-send/alias.c). */
+__typeof__(codec_uart_tx) audio_uart_send_bytes __attribute__((alias("codec_uart_tx")));
 int32_t codec_send(uint16_t low,uint16_t high,const uint8_t *payload,uint16_t length,uint8_t flag){
- uint8_t *wire=(uint8_t *)(uintptr_t)0x2007399c;uint16_t total=0;
+ uint8_t *wire=(uint8_t *)(uintptr_t)((uint32_t)(uintptr_t)g2ref_g2_stock_ram_20073998+0x4u);uint16_t total=0;
  int32_t r=codec_pack(low,high,payload,length,flag,wire,&total);
  return r?r:codec_uart_tx(wire,total);
 }
@@ -30,7 +40,7 @@ extern void codec_wrapper_delay(uint32_t);
 uint32_t codec_channel_tx(uint32_t input,const uint8_t *payload,uint32_t count){
  uint8_t channel=(uint8_t)input;
  if(channel>=4)return 1;
- volatile uint8_t *descriptor=(volatile uint8_t *)(uintptr_t)(0x20000d2c+28u*channel);
+ volatile uint8_t *descriptor=(volatile uint8_t *)(uintptr_t)((uint32_t)(uintptr_t)g2ref_g2_uart_channels+28u*channel);
  if(descriptor[24]!=1)return 1;
  uint32_t transfer[14];for(unsigned i=0;i<14;i++)((volatile uint32_t *)transfer)[i]=0;transfer[0]=(uint32_t)(uintptr_t)payload;transfer[1]=count;
  descriptor[25]=0;

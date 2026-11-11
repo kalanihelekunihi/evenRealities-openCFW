@@ -1,0 +1,368 @@
+{
+  "schema_version": 1,
+  "scope": "R1 typed BMA SDK callbacks and consistent delay prototype",
+  "report": "build/sources-goal-r1-bma-callbacks-pure-c/report.json",
+  "comparison_report": "build/sources-goal-r1-qma-tap-pure-c/report.json",
+  "audit": {
+    "compiled_units": 855,
+    "application_imports": 61,
+    "bootloader_imports": 22,
+    "unchanged_prior_nongenerated_objects": 843,
+    "changed_nongenerated_objects": [
+      "r1/src/application/runtime/native_bma_fifo.c",
+      "r1/src/application/runtime/native_bma_interface.c"
+    ],
+    "import_sets_unchanged": true,
+    "normal_interface_object_equals_probe_object": true,
+    "native_fullword_port_bytes_and_relocations_unchanged": true,
+    "cold_context_and_bus_address_unchanged": true,
+    "no_new_persistent_state": true,
+    "manifest_unchanged": true,
+    "six_native_BMA_runtime_units_have_no_inline_assembly": true
+  },
+  "direct": {
+    "stock_C_comparisons": 19168,
+    "actual_typed_SDK_callback_callers": true,
+    "registration_order_and_untouched_bytes": true,
+    "read_write_native_fullword_and_SDK_byte_ABIs": true,
+    "actual_shared_delay_boundary": true,
+    "modeled_bus_and_cycle_primitive": true,
+    "callback_pointer_relocation_normalized": true,
+    "delay_void_return_and_APSR_excluded": true
+  },
+  "fifo_regression": {
+    "cases": 2168,
+    "passed": 2168,
+    "failures": [],
+    "stock_entry": "0x541a8",
+    "stock_body_bytes": 256,
+    "source_body_bytes": 186,
+    "helper_body_bytes": 66,
+    "callback_stack_depth_pairs": [
+      [
+        [],
+        []
+      ],
+      [
+        [
+          -32,
+          -32,
+          -32,
+          -32
+        ],
+        [
+          -24,
+          -40,
+          -40,
+          -40
+        ]
+      ],
+      [
+        [
+          -32,
+          -32,
+          -32,
+          -32
+        ],
+        [
+          -24,
+          -24,
+          -24,
+          -24
+        ]
+      ],
+      [
+        [
+          -32,
+          -32,
+          -32,
+          -32,
+          -32
+        ],
+        [
+          -24,
+          -40,
+          -40,
+          -40,
+          -40
+        ]
+      ],
+      [
+        [
+          -32,
+          -32,
+          -32,
+          -32,
+          -32
+        ],
+        [
+          -24,
+          -40,
+          -40,
+          -40,
+          -24
+        ]
+      ],
+      [
+        [
+          -32,
+          -32,
+          -32,
+          -32,
+          -32,
+          -32
+        ],
+        [
+          -24,
+          -40,
+          -40,
+          -40,
+          -40,
+          -24
+        ]
+      ],
+      [
+        [
+          -32,
+          -32,
+          -32,
+          -32,
+          -32,
+          -32
+        ],
+        [
+          -24,
+          -24,
+          -24,
+          -40,
+          -40,
+          -40
+        ]
+      ],
+      [
+        [
+          -32,
+          -32,
+          -32,
+          -32,
+          -32,
+          -32,
+          -32
+        ],
+        [
+          -24,
+          -24,
+          -24,
+          -40,
+          -40,
+          -40,
+          -40
+        ]
+      ],
+      [
+        [
+          -32,
+          -32,
+          -32,
+          -32,
+          -32,
+          -32,
+          -32
+        ],
+        [
+          -24,
+          -24,
+          -24,
+          -40,
+          -40,
+          -40,
+          -24
+        ]
+      ],
+      [
+        [
+          -32,
+          -32,
+          -32,
+          -32,
+          -32,
+          -32,
+          -32
+        ],
+        [
+          -24,
+          -24,
+          -24,
+          -24,
+          -40,
+          -40,
+          -40
+        ]
+      ],
+      [
+        [
+          -32,
+          -32,
+          -32,
+          -32,
+          -32,
+          -32,
+          -32,
+          -32
+        ],
+        [
+          -24,
+          -24,
+          -24,
+          -40,
+          -40,
+          -40,
+          -40,
+          -24
+        ]
+      ],
+      [
+        [
+          -32,
+          -32,
+          -32,
+          -32,
+          -32,
+          -32,
+          -32,
+          -32
+        ],
+        [
+          -24,
+          -24,
+          -24,
+          -24,
+          -40,
+          -40,
+          -40,
+          -40
+        ]
+      ],
+      [
+        [
+          -32,
+          -32,
+          -32,
+          -32,
+          -32,
+          -32,
+          -32,
+          -32
+        ],
+        [
+          -24,
+          -24,
+          -24,
+          -24,
+          -40,
+          -40,
+          -40,
+          -24
+        ]
+      ],
+      [
+        [
+          -32,
+          -32,
+          -32,
+          -32,
+          -32,
+          -32,
+          -32,
+          -32,
+          -32
+        ],
+        [
+          -24,
+          -24,
+          -24,
+          -24,
+          -40,
+          -40,
+          -40,
+          -40,
+          -24
+        ]
+      ]
+    ],
+    "unchanged_functions": [
+      "r1_bma_fifo_read_bytes",
+      "r1_bma4_get_fifo_length"
+    ],
+    "report": "build/sources-goal-r1-bma-callbacks-pure-c/report.json",
+    "report_sha256": "b285c4f68d98f558bec11687d19337a119b20cbb0b2ebc954f1eeb2bb9932ef6",
+    "source_sha256": "24cdead40113d495df1a9bf1fe5d1c67c7ad80fbfb2b03983c366d007d41a964",
+    "manifest_sha256": "f74aa01d5bac1e3a8786b1052791cbd6344c1fd57ce26a11f1d65de93506ad72",
+    "stock_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a"
+  },
+  "compiled_defects_rejected": [
+    {
+      "name": "SDK_error_mapping",
+      "rejected": true
+    },
+    {
+      "name": "delay_argument",
+      "rejected": true
+    },
+    {
+      "name": "write_registration",
+      "rejected": true
+    },
+    {
+      "name": "transfer_capacity",
+      "rejected": true
+    },
+    {
+      "name": "interface_handle",
+      "rejected": true
+    }
+  ],
+  "public_contract": [
+    "Native full-word register/return APIs are preserved.",
+    "SDK callback adapters implement the pinned uint8-register/int8-return signatures and two-argument void delay type.",
+    "Delay adapter ignores the SDK interface pointer and calls the one-argument native delay; FIFO now declares and calls the same signature.",
+    "Callback pointer targets differ from the old alias registration and are normalized by semantic role in stock comparisons."
+  ],
+  "limits": [
+    "Physical sensor/bus behavior, timing and final application linking/startup unverified.",
+    "Bus results and cycle primitive modeled; modeled reads deliver at most sixteen bytes to test adapter forwarding.",
+    "FIFO regression models its lower power/read/log/delay services.",
+    "Native full allocation extent remains a separate gate; only the pinned 52-byte C context is checked.",
+    "Incidental R1/void-delay return/APSR, faults/concurrency, provider overruns and byte identity excluded.",
+    "Architecture-specific shared delay implementation remains unchanged outside native BMA runtime units."
+  ],
+  "evidence_files": {
+    "build/sources-goal-r1-bma-callbacks-pure-c/report.json": "b285c4f68d98f558bec11687d19337a119b20cbb0b2ebc954f1eeb2bb9932ef6",
+    "build/sources-goal-r1-qma-tap-pure-c/report.json": "d8b4ad9864522e2d19b034b9bfe7ab8686b77cebd9d6e29b40a71df863a40c86",
+    "r1/src/application/runtime/native_bma_feature_io.c": "dba7a669670e751f0030928e803b18663fa9a1ba4aa480ca63476b3324ba1784",
+    "r1/src/application/runtime/native_bma_fifo.c": "24cdead40113d495df1a9bf1fe5d1c67c7ad80fbfb2b03983c366d007d41a964",
+    "r1/src/application/runtime/native_bma_initialize.c": "b7a12b91948df60932e38fec3db3650a90d76965091d38c56c3bf3b052e54e2f",
+    "r1/src/application/runtime/native_bma_interface.c": "4fd96ef3c356d0f1f6c4b7bb141750527bb9cb4153da41ef137052b36e620936",
+    "r1/src/application/runtime/native_bma_reads.c": "a4ce04043700c64115a3b44f77cfd304d6a4634a4633c5a81777193c41f0f4b7",
+    "r1/src/application/runtime/native_bma_setup.c": "a09cd9a3bccbe45fc510687f44728f292407112dcd0f97213669a8b5eda65d70",
+    "r1/src/application/software-twi/sdk_delay_busy.c": "aa2d27907efb8e1f1c0366d28a8db2c3d83eff4ec555b626272dc54e0381c471",
+    "third-party/upstream/bosch-bma456/bma4.h": "79a5f967938d50acfeaa096f65759c2d9156a38f153f85800bf3b4dae25e1ef4",
+    "r1/src/sources.json": "f74aa01d5bac1e3a8786b1052791cbd6344c1fd57ce26a11f1d65de93506ad72",
+    "tools/build/source-plan.json": "eeb516e31b3310fb0718f36908977f8125723f7c5e0e86cd6744395826259a4d",
+    "build/goal-r1-bma-callbacks-pure-c/rea.json": "ab8aae898c2691a385d7209fe2233c210b4ee1486f109db31e3c49f99ff79061",
+    "build/goal-r1-bma-callbacks-pure-c/fifo-rea.json": "448f8f6886bc3c074af11b0524c87253dc559bc2edf49d0c9e2651fdb1704b5d",
+    "build/goal-r1-bma-callbacks-pure-c/verify.py": "df00abf77008c8f834c946a0b16de116d966bf5788139c8e65d45611a6abc091",
+    "build/goal-r1-bma-callbacks-pure-c/caller.c": "432f98be5eef1cef80e9d50e8bc409b503964e5d177e63c1008eb40ba2272cea",
+    "build/goal-r1-bma-callbacks-pure-c/results.json": "18505c70cfb4e981e878beda0c0b7027f3f67c0984e42fad908565db32930e84",
+    "build/goal-r1-bma-callbacks-pure-c/verification.log": "3c39326743567cf9d9dcc7739499f1b63da7e9be8bf77593230cf43486b20898",
+    "build/goal-r1-bma-callbacks-pure-c/source.elf": "8831c99b9b1004cacccee649c0ccb76be9459426d6033b644ba8f59f0b82c2c5",
+    "build/goal-r1-bma-callbacks-pure-c/fifo/verify.py": "a012c2b3813599fec9debf071c5e8880fed341ddd166794404d76ce9bd61671f",
+    "build/goal-r1-bma-callbacks-pure-c/fifo/results.json": "6ec0ee97a1fa5d4fbf95a8db6748b04440f04ec4ee004f098e978bb84c6185a5",
+    "build/goal-r1-bma-callbacks-pure-c/fifo/verification.log": "74416dbe5202097b7c58970779a288127b18c0ec991226c6c2e00c6b6fe6b867",
+    "build/goal-r1-bma-callbacks-pure-c/negative.py": "113054348fd496dd941008ae76c4f5359fdfe4a919cc2def1be8c0b5d81d7b82",
+    "build/goal-r1-bma-callbacks-pure-c/negative.json": "0c131db4df0f7a1eb7ef2939f0b4bcff5f649332f2c00080a6adc48c5a001e00",
+    "build/goal-r1-bma-callbacks-pure-c/negative.log": "e8c3bcfcaf2e25002f59ff6dd2060faa65238eba25dd30ad6d6b04c71dc2a646",
+    "build/goal-r1-bma-callbacks-pure-c/build.log": "f5d8220014ce492ba0973dd1806276bc6cecc4c3d71d3a30344cf3bac66cbf24",
+    "build/goal-r1-bma-callbacks-pure-c/sources-check.log": "f610d186f791ebf717d9fd6eed6c4f28612779fff34b885bcf8dc8a49c9ae80c"
+  }
+}

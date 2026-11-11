@@ -1,0 +1,103 @@
+{
+  "schema_version": 1,
+  "stock_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "entries": {
+    "0x5dce8": "r1_health_hour_boundary_storage_orchestrator",
+    "0x70648": "r1_heart_rate_daily_cache_read",
+    "0x90df0": "r1_spo2_daily_cache_read",
+    "0x91918": "r1_temperature_daily_cache_read",
+    "0x9113e": "r1_stress_daily_cache_read",
+    "0x482a8": "r1_activity_daily_cache_read",
+    "0x706d8": "r1_hrv_daily_cache_read",
+    "0x91124": "r1_stress_daily_cache_reset",
+    "0x918de": "r1_temperature_daily_cache_reset"
+  },
+  "unit": {
+    "source": "r1/src/application/runtime/native_health_hour_storage.c",
+    "source_sha256": "fd854577dc7b6d70c5eee7f35267cefcb373f82dce69baa75e9a6a2a3724c641",
+    "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-hour-storage-c/r1/r1-application/r1__src__application__runtime__native_health_hour_storage.c.o",
+    "object_sha256": "3f37fcafb2e0615f85e61cf081fca964d2a08341103ce9f63cf0a5d8e36c6b2d"
+  },
+  "report": "build/sources-goal-r1-hour-storage-c/report.json",
+  "report_sha256": "f6df6792af83a8d7be38ceec781b7b7d06fd2dad076efd5a4c6f1aabe69628cb",
+  "behavior": {
+    "pairs": 794,
+    "digest": "b8515dab0ea03eab5d30ec46592dba2a3c1add1efeee2b6f5784f067123f3f08",
+    "actual_C": [
+      "hourly orchestration",
+      "six cache readers",
+      "six resets",
+      "cache accessors and owners, shared hourly/stress owner",
+      "canonical stress/temperature timestamps"
+    ],
+    "modeled_boundaries": [
+      "Clock providers, allocation, clear, logging, FlashDB blob/append/clean",
+      "Four unresolved future-record guard/dispatch providers"
+    ],
+    "limits": [
+      "Mapped SRAM and canonical nonnull cache accessors",
+      "Synthetic callback masks and size mutations exercise descriptor control flow",
+      "No physical persistence, asynchronous IRQ or complete firmware link"
+    ]
+  },
+  "startup_integration": {
+    "pairs": 447,
+    "actual_C_execution": {
+      "C_replay": 153,
+      "C_cache_writes": 918,
+      "C_snapshot_calls": 153,
+      "C_hour_appends": 152
+    },
+    "digest": "c344e009ab343d7f0bb8892e361410ad5a6493882d694928cee3e08049f676ef",
+    "limits": [
+      "Query iterator boundary dispatches actual stock/C replay; blob/time providers modeled explicitly",
+      "Registered hourly callback dispatch uses actual C hourly storage/readers/resets after actual C startup/replay/snapshot recovery; stock route executes locked bytes",
+      "Event context thread address is a linker binding; metadata uses actual C owner",
+      "Valid mapped storage; no physical flash, scheduler, concurrent IRQ or whole-firmware proof"
+    ]
+  },
+  "negative_controls": {
+    "wrong-retry-error": {
+      "rejected": true,
+      "diagnostic": "563412a4b5c638495accddee08192aafc0d1e2f30415263748596a7b8c9daebfd0e1f203142536edfe0f203142000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000']), ('mode', [0]), ('mode', [0]), ('mode', [0]), ('clean', []), ('blob', []), ('append', ['d4fe000078563412a4b5c638495accddee08192aafc0d1e2f30415263748596a7b8c9daebfd0e1f203142536edfe0f203142000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000']), ('mode', [0]), ('mode', [0]), ('mode', [0]), ('free', ['d4fe000078563412a4b5c638495accddee08192aafc0d1e2f30415263748596a7b8c9daebfd0e1f203142536edfe0f203142000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000']), ('midnight', []), ('offset', []), ('mode', [0]), ('mode', [0]), ('mode', [0]), ('reset', [0, 305418240, 65236]), ('reset', [1, 305418240, 65236]), ('reset', [2, 305418240, 65236]), ('reset', [3, 305418240, 65236]), ('reset', [4, 305418240, 65236]), ('reset', [5, 305418240, 65236])])\n"
+    },
+    "lost-midnight-reset": {
+      "rejected": true,
+      "diagnostic": "fset', []), ('mode', [0]), ('mode', [0]), ('mode', [0]), ('reset', [0, 305418240, 65236]), ('reset', [1, 305418240, 65236]), ('reset', [2, 305418240, 65236]), ('reset', [3, 305418240, 65236]), ('reset', [4, 305418240, 65236]), ('reset', [5, 305418240, 65236])], [('mode', [0]), ('mode', [0]), ('mode', [0]), ('malloc', []), ('offset', []), ('now', []), ('reader', [0, 23, 537001992, 3]), ('valid', []), ('reader', [1, 23, 537001995, 3]), ('valid', []), ('reader', [2, 23, 537001998, 3]), ('valid', []), ('reader', [3, 23, 537002001, 3]), ('reader', [4, 23, 537002004, 24]), ('valid', []), ('reader', [5, 23, 537002028, 6]), ('valid', []), ('blob', []), ('append', ['d4fe000078563412a4b5c638495accddee08192aafc0d1e2f30415263748596a7b8c9daebfd0e1f203142536edfe0f203142000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000']), ('free', ['d4fe000078563412a4b5c638495accddee08192aafc0d1e2f30415263748596a7b8c9daebfd0e1f203142536edfe0f203142000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000'])])\n"
+    },
+    "wrong-hour-truncation": {
+      "rejected": true,
+      "diagnostic": "Traceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-storage-events-c/verify.py\", line 81, in <module>\n    for hour,allocate,statuses,modes in itertools.product([0,1,23,24,255,256,0xffffffff],[False,True],[(0,),(1,),(3,0),(3,3),(3,7)],[(0,),(7,),(0,4,2,1,2,0,4)]):pair(hour=hour,allocate=allocate,statuses=statuses,modes=modes)\n                                                                                                                                                                 ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-storage-events-c/verify.py\", line 80, in pair\n    a=run(False,**kw);b=run(True,**kw);assert a==b,(kw,[k for k in a if a[k]!=b[k]],a['trace'],b['trace']);digest.update(json.dumps([kw,a]).encode());pairs+=1\n                                              ^^^^\nAssertionError: ({'hour': 256, 'allocate': False, 'statuses': (0,), 'modes': (0,)}, ['trace'], [('mode', [0]), ('mode', [0]), ('mode', [0]), ('malloc', [])], [('mode', [0]), ('mode', [0]), ('mode', [0])])\n"
+    },
+    "lost-null-reader-advance": {
+      "rejected": true,
+      "diagnostic": "00000000000000000000000000000000000000000000000000000000000000000000000000000']), ('mode', [7]), ('ring', [205520896, '[RING]db_storage append failed, error:%d', 3]), ('mode', [7]), ('log1', [1835011, 'db_storage append failed, error:%d', 3]), ('clean', []), ('blob', []), ('append', ['d4fe000078563412a4b5c6ccddeeafc0d1e2f30415263748596a7b8c9daebfd0e1f203142536000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000']), ('mode', [7]), ('ring', [205520896, '[RING]retry append result:%d', 0]), ('mode', [7]), ('log1', [1835011, 'retry append result:%d', 0]), ('free', ['d4fe000078563412a4b5c6ccddeeafc0d1e2f30415263748596a7b8c9daebfd0e1f203142536000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000']), ('midnight', []), ('offset', []), ('mode', [7]), ('ring', [209715200, '[RING]db_storage clean cache data, zero_ts:%d,%d', 305418240, 65236]), ('mode', [7]), ('log2', [1835011, 'db_storage clean cache data, zero_ts:%d,%d', 305418240, 65236])])\n"
+    },
+    "wrong-guard-offset-sign": {
+      "rejected": true,
+      "diagnostic": "Traceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-storage-events-c/verify.py\", line 83, in <module>\n    for entry,hour,valid,now,pattern in itertools.product(readers,[0,1,23],[0,1],[0,0x38640900,0x38640901,0xffffffff],range(3)):pair(entry=entry,hour=hour,valid=valid,now=now,pattern=pattern)\n                                                                                                                                ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-storage-events-c/verify.py\", line 80, in pair\n    a=run(False,**kw);b=run(True,**kw);assert a==b,(kw,[k for k in a if a[k]!=b[k]],a['trace'],b['trace']);digest.update(json.dumps([kw,a]).encode());pairs+=1\n                                              ^^^^\nAssertionError: ({'entry': 'r1_heart_rate_daily_cache_read', 'hour': 0, 'valid': 0, 'now': 0, 'pattern': 1}, ['trace'], [('reader', [0, 0, 537006080, 123]), ('valid', []), ('now', [])], [('reader', [0, 0, 537006080, 123]), ('valid', []), ('now', []), ('guard_hr', [0, 0, 0, 537006080, 0, 'ffffff'])])\n"
+    },
+    "lost-read-clear": {
+      "rejected": true,
+      "diagnostic": "Traceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-storage-events-c/verify.py\", line 83, in <module>\n    for entry,hour,valid,now,pattern in itertools.product(readers,[0,1,23],[0,1],[0,0x38640900,0x38640901,0xffffffff],range(3)):pair(entry=entry,hour=hour,valid=valid,now=now,pattern=pattern)\n                                                                                                                                ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-storage-events-c/verify.py\", line 80, in pair\n    a=run(False,**kw);b=run(True,**kw);assert a==b,(kw,[k for k in a if a[k]!=b[k]],a['trace'],b['trace']);digest.update(json.dumps([kw,a]).encode());pairs+=1\n                                              ^^^^\nAssertionError: ({'entry': 'r1_heart_rate_daily_cache_read', 'hour': 0, 'valid': 0, 'now': 0, 'pattern': 1}, ['out'], [('reader', [0, 0, 537006080, 123]), ('valid', []), ('now', [])], [('reader', [0, 0, 537006080, 123]), ('valid', []), ('now', [])])\n"
+    }
+  },
+  "audit": {
+    "unchanged_prior_objects": 736,
+    "new_units": 1,
+    "added_application_imports": [
+      "r1_activity_flash_record_enqueue_plan",
+      "r1_hr_cache_future_record_guard",
+      "r1_hrv_cache_future_record_guard",
+      "r1_spo2_cache_future_record_guard"
+    ],
+    "removed_application_imports": [
+      "r1_health_hour_boundary_storage_orchestrator"
+    ],
+    "bootloader_imports_unchanged": true
+  },
+  "source_check": "python3 tools/build/sources.py check\ng2: 5030 units, 4727 source files, 0 not built\nr1: 737 units, 541 source files, 0 not built",
+  "rea": "health-hour-storage-c-rea.json",
+  "instruction_identity_proven": false,
+  "image_integration_proven": false
+}

@@ -78,3 +78,7 @@ uint32_t audio_ble_hci_driver_radio_boot(uint8_t with_identifier) {
     audio_ble_hci_radio_mux_request_4b4768(0x3bu);
     return context;
 }
+
+/* Public Cordio name of the same native 0x4b48a6 entry. */
+__typeof__(audio_ble_hci_driver_radio_boot) HciDrvRadioBoot
+    __attribute__((alias("audio_ble_hci_driver_radio_boot")));

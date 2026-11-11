@@ -1,0 +1,96 @@
+{
+  "schema_version": 1,
+  "report": "build/sources-goal-r1-record-reinit-binding-c/report.json",
+  "report_sha256": "cae9f75ca663100a0a9ad54fa14e78c50bea1d38eb4ee35c5ec23fb49aa29deb",
+  "manifest_sha256": "3956090d745ff9ddb1dd03b19e421dbcb3ed8d0fe84499587f58e822638fd1d2",
+  "verification": {
+    "cases": {
+      "force": 8,
+      "apply": 800,
+      "failure": 2160
+    },
+    "stock_c_match": true,
+    "alias_same_entry_as_canonical_force": true,
+    "actual_profile_and_failure_callers_execute_force_and_memclr": true,
+    "authorization_noop_and_lifecycle_init_modeled": true,
+    "logs_and_failure_counter_mutations": true,
+    "full_reinitialization_and_physical_sensor_behavior_unverified": true
+  },
+  "defects": {
+    "detected": [
+      "wrong-alias",
+      "short-clear",
+      "wrong-mode",
+      "wrong-auth-gate"
+    ]
+  },
+  "audit": {
+    "unchanged_prior_object_hashes": 783,
+    "changed_objects": [
+      [
+        "r1-bootloader",
+        "{gen}/r1_startup_vectors.S"
+      ],
+      [
+        "r1-application",
+        "r1/src/application/runtime/native_health_lifecycle.c"
+      ],
+      [
+        "r1-bootloader",
+        "{gen}/r1_uecc.c"
+      ]
+    ],
+    "canonical_lifecycle_allocated_bytes_and_relocations_unchanged": true,
+    "generated_boot_allocated_bytes_and_relocations_unchanged": true,
+    "removed_imports": [
+      "r1_record12_reinitialize"
+    ],
+    "no_added_imports": true
+  },
+  "rea_bytes": [
+    {
+      "name": "force",
+      "evidence_id": "ev_3715d234c66752389d6ef07cb5c5592f46f72e65dffebf6afdc5f371aa8ef023",
+      "address": "0x4c37c",
+      "length": 46,
+      "bytes_sha256": "6a636e767ac2bced11dbcb1175620afb463ca43e5f652ea749b677abf3215835",
+      "matches_locked_raw": true
+    },
+    {
+      "name": "profile",
+      "evidence_id": "ev_2bcb9674a95fa8013cb8f04ef798e52788740c8dfdbd7b042ab10330c47851cd",
+      "address": "0x6c53c",
+      "length": 138,
+      "bytes_sha256": "28a6f2fbea8e2894cb8f1d2b9d6471c4c0b1faf263eb8c30d82c8f47a83aaec0",
+      "matches_locked_raw": true
+    },
+    {
+      "name": "failure",
+      "evidence_id": "ev_867379aa65dd307e861fe04b737cce33cb28bf09881eaa03aeb438398670021a",
+      "address": "0x6c1c0",
+      "length": 212,
+      "bytes_sha256": "cc6125208014941b18ce265a1e06ee77deba5e4624e0d7af2eac3c2913c6d24e",
+      "matches_locked_raw": true
+    }
+  ],
+  "raw_application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "strict_bootloader_link_report": "build/goal-r1-record-reinit-binding-c/boot-link/report.json",
+  "strict_bootloader_link_report_sha256": "d54576cd367800c64f709a62d41fb0c50eefc15c19e73974885cb3464f806832",
+  "evidence_files": {
+    "build/goal-r1-record-reinit-binding-c/verify.py": "26003f79ceeecb62861d33d12ceab429233cb4052ab098e443ca1c7bae72f664",
+    "build/goal-r1-record-reinit-binding-c/defects.py": "13b508694c882cbe9d74d3dd2935dca5df637ae3d788f8a0eb2884c3f458d4b5",
+    "build/goal-r1-record-reinit-binding-c/audit.py": "c973f9f39b81950ecdb0ddd97890172bf9ff80802a7274aabe93470415bef390",
+    "build/goal-r1-record-reinit-binding-c/verify-final.log": "36ca0c3960d86814348e4570377fb6bc3d52e149ae239d125c875b4b35b0ce5a",
+    "build/goal-r1-record-reinit-binding-c/verification.json": "4d878156d3b7e2ea8d5bd20172999e0e9af505f57908f7c0f081eb366acbf83b",
+    "build/goal-r1-record-reinit-binding-c/defects.json": "5fc2cd6b147fc8a5961824359eef32202e9394ee5304645af90559b9d842fab3",
+    "build/goal-r1-record-reinit-binding-c/rea-force.json": "ef6df5b776ba74a73e3a9745c099a1afe3918170d7cf9691523bf5fb8286deba",
+    "build/goal-r1-record-reinit-binding-c/rea-profile.json": "b93c2d56197bdb94f74284b2c61ee877c627862d2fde00ed1815e51ab765ed86",
+    "build/goal-r1-record-reinit-binding-c/rea-failure.json": "f50e3a5b76cf0aed22a5a841f658ac513c15e59200be8795bf24f1ea149928fa"
+  },
+  "limitations": [
+    "REA groups 0x6c53c into 0x6c66c; instruction bytes and executed path used for local call target.",
+    "Authorization, noop and lifecycle initializer modeled; actual force and memclr/memset execute.",
+    "No full engine reinitialization, application link or physical sensor validation.",
+    "Global source check retains unrelated G2 manifest failure."
+  ]
+}

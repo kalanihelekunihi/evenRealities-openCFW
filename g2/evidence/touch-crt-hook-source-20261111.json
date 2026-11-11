@@ -1,0 +1,78 @@
+{
+  "schema": 1,
+  "target": "G2 touch reset-copy CRT hook reconstruction",
+  "stock_evidence": {
+    "source": "g2/docs/reference/findings-touch-case.md",
+    "reset_copy_ram_range": "0x200004c0..0x20000884",
+    "init_entry_ram": "0x2000087c",
+    "fini_entry_ram": "0x20000880",
+    "stock_init_function": "0x0000a9e4",
+    "exit_wrapper": "0x0000a9ac",
+    "exit_halt": "0x0000aa40",
+    "cleanup_pointer_ram": "0x20000f54"
+  },
+  "source_files": {
+    "g2/src/touch/glue/touch_runtime_0164_reset_entry.c": "ad8ba2facf7cacc602a89e234ee2258ae7e11d07f82eb7fe08f3e91fe268b053",
+    "g2/src/touch/reset-data/touch_stock_reset_gaps.c": "0f0c3fd0dfa0550058c9b66523727198c1aede625b7d9b950cbcecd49d589df5",
+    "g2/src/touch/link/g2-touch-stockram.ld.inc": "8e89c0ff59eb0f72bc6898d0db4531fb11875fd835980f1b7ab955a8514a48fe"
+  },
+  "implementation": "Replaced the zero placeholder with source-linked function pointers. The reset entry calls the one-element init array after data and BSS initialization. If the application returns, C exit_wrapper calls the optional reset-zeroed cleanup pointer at 0x20000f54, then _exit_halt loops forever.",
+  "verified_link": {
+    "source_report": "build/g2-touch-crt-exit-final-source-20261111/report.json",
+    "source_report_sha256": "3aeb833437f6a95aebca5221329dd6c22b6e65df845b3b5894c59ed2452446bd",
+    "units": 101,
+    "compiled": 101,
+    "failed": 0,
+    "duplicate_strong_symbols": 0,
+    "link_report": "build/g2-touch-crt-exit-final-link-20261111/link-report.json",
+    "link_report_sha256": "5ad8f08649780036011794127fd0887ac8bfd253124586d1f086233916278a0d",
+    "elf_sha256": "7e717d8446d519b19eaad078589e82ecdf5cd612f741f30d50b7fc0dc2cf59b1",
+    "binary_sha256": "802148f0cd99218d5d66387e1fc6cdf844229aef4170006373679cb1c7e47b63",
+    "binary_bytes": 28844,
+    "init_pointer": "0x914b",
+    "fini_pointer": "0x914d",
+    "source_init_function": "0x914a",
+    "source_fini_function": "0x914c",
+    "init_array_start": "0x2000087c",
+    "init_array_end": "0x20000880",
+    "source_binary_has_real_init_call": true,
+    "zero_placeholder_removed": true,
+    "source_init_array_function": "0x9150",
+    "source_exit_wrapper_function": "0x9170",
+    "source_exit_halt_function": "0x916c",
+    "reset_entry_calls_exit_wrapper": true,
+    "exit_wrapper_reads_zeroed_cleanup_pointer": true
+  },
+  "qualification": "The touch payload compiles and links with live source CRT pointers, an init-array traversal, and a C terminal exit path. The linked touch image remains shorter and nonidentical to stock; hook placement and overall boot behavior are not hardware-validated.",
+  "stock_comparison": {
+    "stock_application_bytes": 34432,
+    "stock_application_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+    "source_application_bytes": 28844,
+    "source_application_sha256": "802148f0cd99218d5d66387e1fc6cdf844229aef4170006373679cb1c7e47b63",
+    "same_offset_equal_bytes": 965,
+    "byte_identical": false,
+    "stock_component_sha256": "0d13d8bb1337bf22989dc16143e3d5eca29a31cc1ed753ff624668750ea9470d",
+    "stock_component_bytes": 34464
+  },
+  "full_g2_verification": {
+    "source_report": "build/g2-touch-crt-exit-full-source-20261111/report.json",
+    "source_report_sha256": "8730f98741eeb1ab291ffcbe0ca357c0e8d76c0ca51573953b063591337e31c1",
+    "payload_count": 7,
+    "compiled_units": 4884,
+    "compile_failures": 0,
+    "duplicate_strong_symbols": 0,
+    "strict_link_report": "build/g2-touch-crt-exit-full-link-20261111/link-report.json",
+    "strict_link_report_sha256": "76e8b0d38d5047135aab6f0530dc39d72c7df0ebfd1cc8308926a48c0e44f672",
+    "linked_payloads": [
+      "g2-apollo-bootloader",
+      "g2-apollo-main",
+      "g2-case",
+      "g2-codec-a",
+      "g2-codec-b",
+      "g2-em9305",
+      "g2-touch"
+    ],
+    "strict_link_passed": true,
+    "source_completeness_proven": false
+  }
+}

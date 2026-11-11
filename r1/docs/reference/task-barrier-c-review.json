@@ -1,0 +1,73 @@
+{
+  "report": "build/sources-goal-r1-task-barrier-c/report.json",
+  "units": 822,
+  "application_imports": 69,
+  "import_set_unchanged": true,
+  "verification": {
+    "ordered_live_handle_pairs": 240,
+    "actual_handshake_pairs": 54
+  },
+  "compiled_defects": [
+    {
+      "defect": "wrong-transmit-ordinal",
+      "rejected": true
+    },
+    {
+      "defect": "truncate-configuration",
+      "rejected": true
+    },
+    {
+      "defect": "wrong-factory-worker",
+      "rejected": true
+    },
+    {
+      "defect": "omit-last-worker",
+      "rejected": true
+    },
+    {
+      "defect": "wrong-touch-ordinal",
+      "rejected": true
+    },
+    {
+      "defect": "cached-touch-handle",
+      "rejected": true
+    }
+  ],
+  "prior_objects_identical": 819,
+  "shared_prefix_consumers_object_identical": true,
+  "changed_prior_sources": [
+    "r1/src/application/board/native_events.c",
+    "r1/src/application/board/native_task_lifecycle.c",
+    "r1/src/application/board/native_tx.c"
+  ],
+  "rea_evidence_id": "ev_b630f823f829c0003fdb6755c2d1ec5673ec79cdeb64f6881fe9f784d3251953",
+  "evidence_files": {
+    "build/goal-r1-task-barrier-c/verify.py": "a2950e032ede6ca966a0360dd808101756d68b051f9d3f5d197561fb435bc03f",
+    "build/goal-r1-task-barrier-c/verification.json": "926f754698c5a585e4decd02a2691144170bb572fcc6296d7651c8692c9eeb63",
+    "build/goal-r1-task-barrier-c/verify-final.log": "b35e16a2c91afb85eba3555987cd503e10acb2f37cd010d0dacf8e267d06c937",
+    "build/goal-r1-task-barrier-c/defects.py": "dbfb592f9c6db33d9b93831f4ba864b282ba859d92c84f9a537ad3040dcd5cb4",
+    "build/goal-r1-task-barrier-c/defects.json": "a20482ba0e3fe312f6fa4906068abd68e308d3e950a3913f432e973ed5fdd10e",
+    "build/goal-r1-task-barrier-c/rea.json": "ea28c4ace78885be0ffe40d06ab53faa12564f4fc4d3fbeab8acbab2c7392855",
+    "build/goal-r1-task-barrier-c/events-before.c": "d5a450ea01982b60c752edda13e9999bc6de882475dc631a6d8dde0ecbb7d404",
+    "build/goal-r1-task-barrier-c/tx-before.c": "5f41903f2e8258060c39916122e392c80972727dbfee8158c2f39a53c24bfe35",
+    "build/goal-r1-task-barrier-c/lifecycle-before.c": "9a19716cc0d648e9031c0a9d517fa482852965aed93e43c3080f325150d01a10",
+    "build/goal-r1-task-barrier-c/native_events.c.diff": "f4e9d43c2516a38a6bf426b14f058413a87e4bfdb8025b2c8d9eb88344b2a8ab",
+    "build/goal-r1-task-barrier-c/native_tx.c.diff": "1848bd087093a6b7fa231f884d67c0ad1247edd6b49b2816bf69121a6af25651",
+    "build/goal-r1-task-barrier-c/native_task_lifecycle.c.diff": "17987174bca3a6fe816d2f9099b44afa8fba8dc65276163beab3a63d49018a01",
+    "build/goal-r1-task-barrier-c/document.py": "6fd9ffcfbd0c4e50fabd3a9359c54bb237110dd8e8796dc1ea0c6a825d71de91",
+    "build/sources-goal-r1-task-barrier-c/report.json": "038dda91a10bea2ef5b1fc91101e6a9fd9312a890824a8d3da3dba944a1827fc",
+    "r1/src/sources.json": "f20c8662e957370a888bf3a7c7d05f79760b2ddda656877b3a6964f9c2fb1b97",
+    "r1/src/application/runtime/native_task_barrier.c": "05f454528f087163b570f05b4ecdb99373c13e2f1019be3ea2140ed1497e251f",
+    "r1/src/application/board/native_task_contexts.h": "d1739035dd9b5f9c4890cf1907eaf105b3e3f973b506cf5853235b291258688b",
+    "r1/src/application/board/native_events.c": "98fa08d643192d38c204416a1edc17c55286d631029458e0895b4bfc142e1c2b",
+    "r1/src/application/board/native_tx.c": "478eb6105ad8c72241b6a5c75722a9534ee958d96dfe18f749738cedd14dc72b",
+    "r1/src/application/board/native_task_lifecycle.c": "f4462adc5702f7004cb235bcadeb889917fb41aac1b8bd712f85cce0c4dfa37f",
+    "r1/src/application/runtime/native_task_suspend.c": "a32e3a8a420930ce0abcaeec1d525c3072cfd4da092a8fafa946d83a4d7f4ab5"
+  },
+  "limitations": [
+    "Direct comparisons model handshake; integration executes its actual C body with OS notification/wait and logging leaves modeled.",
+    "Existing context and scalar handle owners are reused; prepared owner values do not prove thread construction or valid kernel objects.",
+    "Null/full-word handle forwarding and failure outcomes tested without a live RTOS kernel.",
+    "Application-manager wiring, final application linking, startup placement and device boot remain open."
+  ]
+}

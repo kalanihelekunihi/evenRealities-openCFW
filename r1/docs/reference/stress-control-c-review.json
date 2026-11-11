@@ -1,0 +1,119 @@
+{
+  "schema_version": 1,
+  "entries": {
+    "0x4b33e": [
+      "r1_stress_enable",
+      8
+    ],
+    "0x4b348": [
+      "r1_stress_mode_timer_plan",
+      168
+    ],
+    "0x4b48c": [
+      "r1_stress_mode_set",
+      22
+    ],
+    "0x4b4a8": [
+      "r1_stress_periodic_timer_callback",
+      6
+    ]
+  },
+  "report": "build/sources-goal-r1-stress-control-c/report.json",
+  "report_sha256": "b2a9f8452290884f13dec1198bd2bb42f2b36e11821496119017b43b8110241b",
+  "unit": {
+    "source": "r1/src/application/runtime/native_stress_control.c",
+    "source_sha256": "d3dbd833f1b1542fc140ffd8ffc7749ad9d98913b60c61338d1e24d41530aad2",
+    "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-stress-control-c/r1/r1-application/r1__src__application__runtime__native_stress_control.c.o",
+    "object_sha256": "f52847f85bb2ae4a478544fc6306d350f6f2d96f2593ccd942ae011f79c19ec9"
+  },
+  "behavior": {
+    "pairs": 1458,
+    "digest": "1bacc1a7ab48541e435d98273dd8dc9c6bda4c1a9c21593d40ff283b01002e25",
+    "actual_C": [
+      "stress enable/transition/setter/timer callback",
+      "authenticated eight-byte mode owner"
+    ],
+    "actual_adapters": "Existing assembly event gates execute unchanged",
+    "modeled_boundaries": [
+      "r1_gomore_authorization_dispatch_native",
+      "r1_stream_timer_release",
+      "r1_stream_timer_create_front",
+      "r1_structured_log_mode_get",
+      "r1_structured_log_format",
+      "nrf_log_frontend_std_0",
+      "nrf_log_frontend_std_1"
+    ],
+    "limits": [
+      "Timer checked by callback identity and executed as a direct/mixed root, not asynchronously",
+      "Authorization, timers and logs modeled; no physical sensing or scheduling proof",
+      "Private stack and caller-clobbered registers excluded"
+    ]
+  },
+  "negative_controls": {
+    "normalized-raw-enable": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "evenRealities-openCFW/build/goal-r1-stress-control-c/verify.py\", line 61, in pair\n    a=run(False,**kw);b=run(True,**kw);assert a==b,(kw,[k for k in a if a[k]!=b[k]],a['trace'],b['trace']);digest.update(json.dumps([kw,a]).encode());pairs+=1\n                                              ^^^^\nAssertionError: ({'entry': 'enable', 'value': 2, 'length': 0, 'auth_result': 0, 'modes': (7,)}, ['trace', 'returns'], [('authorize', [1, 2], '0212345600000000')], [('authorize', [1, 1], '0212345600000000')])\n"
+    },
+    "wrong-auth-slot": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "*kwargs)\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 1063, in __hook_code_cb\n    callback(uc, address, size, user_data)\n    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-stress-control-c/verify.py\", line 34, in hook\n    if n=='authorize':assert r0==1;out=[r0,r1];result=state['auth_result']^r1\n                             ^^^^^\nAssertionError\n"
+    },
+    "wrong-mode-bound": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-stress-control-c/verify.py\", line 61, in pair\n    a=run(False,**kw);b=run(True,**kw);assert a==b,(kw,[k for k in a if a[k]!=b[k]],a['trace'],b['trace']);digest.update(json.dumps([kw,a]).encode());pairs+=1\n                                              ^^^^\nAssertionError: ({'entry': 'set', 'old': 0, 'new': 2, 'timer': 0, 'created': 0, 'modes': (0,)}, ['state'], [], [])\n"
+    },
+    "wrong-period": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "__hook_code_cb\n    callback(uc, address, size, user_data)\n    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-stress-control-c/verify.py\", line 36, in hook\n    elif n=='create':assert r0 in [0x4b4a9,syms['r1_stress_periodic_timer_callback']] and r1==3600000 and r2==0;out=['stress timer',r1,r2];result=state['created']\n                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    "early-timer-clear": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "Repo/evenRealities-openCFW/build/goal-r1-stress-control-c/verify.py\", line 61, in pair\n    a=run(False,**kw);b=run(True,**kw);assert a==b,(kw,[k for k in a if a[k]!=b[k]],a['trace'],b['trace']);digest.update(json.dumps([kw,a]).encode());pairs+=1\n                                              ^^^^\nAssertionError: ({'entry': 'transition', 'old': 1, 'new': 0, 'timer': 1365, 'created': 0, 'modes': (0,)}, ['trace'], [('release', [1365], '0112345655050000')], [('release', [1365], '0112345600000000')])\n"
+    },
+    "missing-timer-clear": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "Repo/evenRealities-openCFW/build/goal-r1-stress-control-c/verify.py\", line 61, in pair\n    a=run(False,**kw);b=run(True,**kw);assert a==b,(kw,[k for k in a if a[k]!=b[k]],a['trace'],b['trace']);digest.update(json.dumps([kw,a]).encode());pairs+=1\n                                              ^^^^\nAssertionError: ({'entry': 'transition', 'old': 1, 'new': 0, 'timer': 1365, 'created': 0, 'modes': (0,)}, ['state'], [('release', [1365], '0112345655050000')], [('release', [1365], '0112345655050000')])\n"
+    },
+    "early-mode-store": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "],b['trace']);digest.update(json.dumps([kw,a]).encode());pairs+=1\n                                              ^^^^\nAssertionError: ({'entry': 'set', 'old': 0, 'new': 1, 'timer': 0, 'created': 0, 'modes': (0,)}, ['trace'], [('create', ['stress timer', 3600000, 0], '0012345600000000'), ('mode', [0], '0012345600000000'), ('mode', [0], '0012345600000000'), ('mode', [0], '0012345600000000')], [('mode', [0], '0112345600000000'), ('mode', [0], '0112345600000000'), ('mode', [0], '0112345600000000')])\n"
+    },
+    "wrong-callback-enable": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": " mode is same'], '0012345600000000'), ('mode', [7], '0012345600000000'), ('ring', [205520896, '[RING]set stress mode: %d', 0], '0012345600000000'), ('mode', [7], '0012345600000000'), ('log1', [1835011, 'set stress mode: %d', 0], '0012345600000000'), ('mode', [7], '0012345600000000'), ('ring', [201326592, '[RING]stress mode is same'], '0012345600000000'), ('mode', [7], '0012345600000000'), ('log0', [1835011, 'stress mode is same'], '0012345600000000'), ('authorize', [1, 0], '0012345600000000')])\n"
+    }
+  },
+  "audit": {
+    "unchanged_prior_objects": 758,
+    "new_units": 1,
+    "imports": {
+      "r1-application": {
+        "added": [],
+        "removed": [
+          "r1_event_service_0004b33e",
+          "r1_event_service_0004b48c"
+        ]
+      },
+      "r1-bootloader": {
+        "added": [],
+        "removed": []
+      }
+    },
+    "reused_owners": [
+      "new authenticated eight-byte stress mode owner at 0x20006eb4"
+    ]
+  },
+  "initialization": "stress-control-initialization.json",
+  "source_check": "R1 passes: 759 units, 563 source files, 0 not built. Global check flags existing G2 resident_rom_thumb_set.S absent from manifest.",
+  "rea": "stress-control-c-rea.json",
+  "instruction_identity_proven": false,
+  "image_integration_proven": false
+}

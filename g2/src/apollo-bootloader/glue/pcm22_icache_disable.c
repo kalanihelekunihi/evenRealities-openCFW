@@ -15,3 +15,6 @@ uint32_t opencfw_pcm22_icache_disable(void)
     __asm__ volatile("dsb sy\n\tisb sy" ::: "memory");
     return 0u;
 }
+
+/* AmbiqSuite am_hal_cachectrl.c name, called by upstream am_hal_spotmgr_pcm2_1/2_2.c. */
+uint32_t am_hal_cachectrl_icache_disable(void) __attribute__((alias("opencfw_pcm22_icache_disable")));

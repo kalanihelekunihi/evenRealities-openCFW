@@ -1,7 +1,7 @@
 /* LVGL lv_obj_set_pos at Apollo 0x43f09a. */
 #include <stdint.h>
 
-extern void audio_uart_lvgl_log(uint32_t, const char *, uint32_t,
+extern void lv_log_add(uint32_t, const char *, uint32_t,
                                 const char *, ...);
 extern void audio_uart_page_43f0e0(uint32_t, uint32_t);
 extern void audio_uart_page_43f142(uint32_t, uint32_t);

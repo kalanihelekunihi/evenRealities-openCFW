@@ -24,3 +24,5 @@ int32_t case_boot_current_sample(uint32_t *out)
     *out=negative?(0u-quotient):quotient;
     return 0;
 }
+/* Dedup (0x08009f18): case_binary_14_read_b (was legacy-default/binary_14_read_b_candidate.c). */
+uint32_t case_binary_14_read_b(uint32_t *out) __attribute__((alias("case_boot_current_sample")));

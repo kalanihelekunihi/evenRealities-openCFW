@@ -1,106 +1,51 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_31aeb4\n"
-".type opencfw_em9305_child_31aeb4,@function\n"
-"opencfw_em9305_child_31aeb4:\n"
-"L31aeb4:\n"
-"enter_s [r13-r18,fp,blink]\n"
-"L31aeb6:\n"
-"sub_s sp,sp,0x18\n"
-"L31aeb8:\n"
-"mov_s r14,r3\n"
-"L31aeba:\n"
-"mov_s r18,r2\n"
-"L31aebc:\n"
-"mov_s r13,r1\n"
-"L31aebe:\n"
-"bl.d opencfw_em9305_child_32d598\n"
-"L31aec2:\n"
-"mov_s r16,r0\n"
-"L31aec4:\n"
-"mov_s r17,r0\n"
-"L31aec6:\n"
-"breq_s r0,0,L31af32\n"
-"L31aec8:\n"
-"breq.d.nt r13,0x2,L31aee2\n"
-"L31aecc:\n"
-"mov_s r15,0\n"
-"L31aece:\n"
-"cmp_s r13,1\n"
-"L31aed0:\n"
-"mov_s r13,0\n"
-"L31aed2:\n"
-"bne_s L31aeea\n"
-"L31aed4:\n"
-"bl opencfw_em9305_scan_random_30c478\n"
-"L31aed8:\n"
-"remu r0,r0,r18\n"
-"L31aedc:\n"
-"max r13,r0,0x4\n"
-"L31aee0:\n"
-"b_s L31aeea\n"
-"L31aee2:\n"
-"cmp_s r18,5\n"
-"L31aee4:\n"
-"mov_s r13,4\n"
-"L31aee6:\n"
-"mov.nc r13,r18\n"
-"L31aeea:\n"
-"add_s r1,sp,0\n"
-"L31aeec:\n"
-"mov_s r0,r17\n"
-"L31aeee:\n"
-"stb_s r15,[sp,0x10]\n"
-"L31aef0:\n"
-"mov_s r2,sp\n"
-"L31aef2:\n"
-"sth_s r13,[r2,0xe]\n"
-"L31aef4:\n"
-"sth_s r15,[r2,0xc]\n"
-"L31aef6:\n"
-"sth_s r13,[r2,0x4]\n"
-"L31aef8:\n"
-"sth 2,[sp,2]\n"
-"L31aefc:\n"
-"bl.d opencfw_em9305_dispatch_child_31b9ac\n"
-"L31af00:\n"
-"sth r16,[sp]\n"
-"L31af04:\n"
-"breq_s r13,0,L31af32\n"
-"L31af06:\n"
-"add_s r0,r0,r17\n"
-"L31af08:\n"
-"lsr r3,r14,0x18\n"
-"L31af0c:\n"
-"lsr r2,r14,0x10\n"
-"L31af10:\n"
-"lsr r1,r14,0x8\n"
-"L31af14:\n"
-"stb_s r14,[r0,0]\n"
-"L31af16:\n"
-"stb_s r3,[r0,0x3]\n"
-"L31af18:\n"
-"stb_s r2,[r0,0x2]\n"
-"L31af1a:\n"
-"brlo.d.nt r13,0x5,L31af32\n"
-"L31af1e:\n"
-"stb_s r1,[r0,0x1]\n"
-"L31af20:\n"
-"sub_s r2,r13,0x4\n"
-"L31af22:\n"
-"add_s r1,r0,0x4\n"
-"L31af24:\n"
-"mov r0,0x4\n"
-"L31af28:\n"
-"stb.ab r0,[r1,1]\n"
-"L31af2c:\n"
-"dbnz.d r2,L31af28\n"
-"L31af30:\n"
-"add_s r0,r0,1\n"
-"L31af32:\n"
-"mov_s r0,r17\n"
-"L31af34:\n"
-"leave_s [r13-r18,fp,blink,pcl]\n"
-".size opencfw_em9305_child_31aeb4,.-opencfw_em9305_child_31aeb4\n"
-);
+#include <stdint.h>
+
+/* Native 0x31aeb4..0x31af36: build an LL test/vendor event message. The
+ * payload length is 0 (mode 0), at least 4 (mode 2, range below 5 gives 4)
+ * or a random value modulo range raised to 4 (mode 1). The header {handle,
+ * 2, length, 0, length, 0} is encoded by native 0x31b9ac; a non-empty payload
+ * starts with the 32-bit value (little endian) followed by bytes 4, 5, ...
+ * Returns the message, or 0 without one. */
+extern uintptr_t opencfw_em9305_child_32d598(void);
+extern uint32_t opencfw_em9305_scan_random_30c478(void);
+extern uint32_t opencfw_em9305_dispatch_child_31b9ac(uintptr_t out,uintptr_t in);
+
+struct test_event_header {
+    uint16_t handle;
+    uint16_t type;
+    uint16_t length;
+    uint8_t reserved[6];
+    uint16_t zero;
+    uint16_t length_again;
+    uint8_t status;
+} __attribute__((aligned(4)));
+
+uintptr_t opencfw_em9305_child_31aeb4(uint32_t handle, uint32_t mode, uint32_t range, uint32_t value)
+{
+    struct test_event_header header;
+    uintptr_t message = opencfw_em9305_child_32d598();
+    if (message == 0u) return 0u;
+    uint32_t length = 0u;
+    if (mode == 2u) {
+        length = range < 5u ? 4u : range;
+    } else if (mode == 1u) {
+        int32_t random = (int32_t)(opencfw_em9305_scan_random_30c478() % range);
+        length = (uint32_t)(random > 4 ? random : 4);
+    }
+    header.status = 0u;
+    header.length_again = (uint16_t)length;
+    header.zero = 0u;
+    header.length = (uint16_t)length;
+    header.type = 2u;
+    header.handle = (uint16_t)handle;
+    uint32_t offset = opencfw_em9305_dispatch_child_31b9ac(message, (uintptr_t)&header);
+    if (length == 0u) return message;
+    volatile uint8_t *payload = (volatile uint8_t *)(message + offset);
+    payload[0] = (uint8_t)value;
+    payload[3] = (uint8_t)(value >> 24);
+    payload[2] = (uint8_t)(value >> 16);
+    payload[1] = (uint8_t)(value >> 8);
+    for (uint32_t index = 4u; index < length; ++index)
+        payload[index] = (uint8_t)index;
+    return message;
+}

@@ -1,0 +1,420 @@
+{
+  "source": {
+    "source": "r1/src/application/board/native_yhm_frontend.c",
+    "payload": "r1-application",
+    "role": "selected",
+    "toolchain": "gcc9",
+    "link": true,
+    "expect": "compile",
+    "returncode": 0,
+    "argv": [
+      "/opt/homebrew/bin/python3",
+      "/Users/kalani/Repo/evenRealities-openCFW/tools/build/linux_gcc.py",
+      "--compiler",
+      "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/bin/arm-none-eabi-gcc",
+      "--read-root",
+      "/Users/kalani/Repo/evenRealities-openCFW/r1",
+      "--read-root",
+      "/Users/kalani/Repo/evenRealities-openCFW/third-party/upstream",
+      "--read-root",
+      "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1",
+      "--read-root",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-yhm-block-read-c-final/generated/r1",
+      "--",
+      "-mcpu=cortex-m4",
+      "-mthumb",
+      "-munaligned-access",
+      "-mfpu=fpv4-sp-d16",
+      "-mfloat-abi=hard",
+      "-std=c11",
+      "-Os",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-fshort-enums",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-fno-delete-null-pointer-checks",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/r1/src/vendor",
+      "-isystem",
+      "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
+      "-MD",
+      "-MF",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-yhm-block-read-c-final/r1/r1-application/r1__src__application__board__native_yhm_frontend.c.d",
+      "-c",
+      "/Users/kalani/Repo/evenRealities-openCFW/r1/src/application/board/native_yhm_frontend.c",
+      "-o",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-yhm-block-read-c-final/r1/r1-application/r1__src__application__board__native_yhm_frontend.c.o"
+    ],
+    "source_sha256": "30f84af6ab75c9dd6798e52bf29e21257a03ce7b996aa57bea1b0ee402b0a373",
+    "object_sha256": "c5fd9e70a5662a99b1d70baed3833d9c738f0c705c057af8a5d2364a610b99b2",
+    "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-yhm-block-read-c-final/r1/r1-application/r1__src__application__board__native_yhm_frontend.c.o",
+    "strong": [
+      "r1_native_charger_register_block_read",
+      "r1_yhm_ready_native",
+      "r1_yhm_register_block_read_native",
+      "r1_yhm_register_read_byte_native",
+      "r1_yhm_register_read_native"
+    ],
+    "weak": [],
+    "undefined": [
+      "r1_stacmd",
+      "r1_yhm_register_read_record"
+    ]
+  },
+  "normal_report": "build/sources-goal-r1-yhm-block-read-c-final/report.json",
+  "validation": {
+    "paired_cases": {
+      "block": 448,
+      "thunk": 448,
+      "byte": 2688
+    },
+    "null_pointer_boundary_pairs": 21,
+    "actual_native_and_C_read_wrapper_chains": true,
+    "stack_depth": 0,
+    "raw_provider_status_preserved": true,
+    "limitations": [
+      "Final record provider modeled; actual I2C/STACMD traffic and electrical behavior unproven.",
+      "Null pointers only passed through modeled boundary; no arbitrary transport fault/alias proof."
+    ]
+  },
+  "negative_controls": {
+    "register9-byte": {
+      "rejected": true,
+      "stderr": "arm-none-eabi-ld: warning: (r1_yhm_register_read_record): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-yhm-block-read-c/register9-byte.o\nTraceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-yhm-block-read-c/reject-register9-byte.py\", line 43, in <module>\n    for c in itertools.product([0,1,9,255,0xffffffff,0x12345678] if kind=='byte' else [0],range(8),statuses,[0,1,4,9],[0,0xa5]):assert a(kind,*c)==b(kind,*c);n+=1\n                                                                                                                                                   ~^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-yhm-block-read-c/reject-register9-byte.py\", line 31, in run\n    root={'block':0x35268,'thunk':0x50748,'byte':0x35412}[kind] if stock else syms[{'block':'r1_yhm_register_block_read_native','thunk':'r1_native_charger_register_block_read','byte':'r1_yhm_register_read_byte_native'}[kind]];u.emu_start(root|1,STOP,count=100)\n                                                                                                                                                                                                                                  ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 769, in emu_start\n    raise self._hook_exception\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 363, in wrapper\n    return func(uc, *args, **kwargs)\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 1063, in __hook_code_cb\n    callback(uc, address, size, user_data)\n    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-yhm-block-read-c/reject-register9-byte.py\", line 21, in code\n    args=[u.reg_read(rr) for rr in [UC_ARM_REG_R0,UC_ARM_REG_R1,UC_ARM_REG_R2]];assert args==[state['reg'],state['length'],state['ptr']],args\n                                                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: [9, 1, 536969216]\n"
+    },
+    "wrong-count": {
+      "rejected": true,
+      "stderr": "arm-none-eabi-ld: warning: (r1_yhm_register_read_record): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-yhm-block-read-c/wrong-count.o\nTraceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-yhm-block-read-c/reject-wrong-count.py\", line 43, in <module>\n    for c in itertools.product([0,1,9,255,0xffffffff,0x12345678] if kind=='byte' else [0],range(8),statuses,[0,1,4,9],[0,0xa5]):assert a(kind,*c)==b(kind,*c);n+=1\n                                                                                                                                                   ~^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-yhm-block-read-c/reject-wrong-count.py\", line 31, in run\n    root={'block':0x35268,'thunk':0x50748,'byte':0x35412}[kind] if stock else syms[{'block':'r1_yhm_register_block_read_native','thunk':'r1_native_charger_register_block_read','byte':'r1_yhm_register_read_byte_native'}[kind]];u.emu_start(root|1,STOP,count=100)\n                                                                                                                                                                                                                                  ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 769, in emu_start\n    raise self._hook_exception\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 363, in wrapper\n    return func(uc, *args, **kwargs)\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 1063, in __hook_code_cb\n    callback(uc, address, size, user_data)\n    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-yhm-block-read-c/reject-wrong-count.py\", line 21, in code\n    args=[u.reg_read(rr) for rr in [UC_ARM_REG_R0,UC_ARM_REG_R1,UC_ARM_REG_R2]];assert args==[state['reg'],state['length'],state['ptr']],args\n                                                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: [0, 8, 536969216]\n"
+    },
+    "wrong-pointer": {
+      "rejected": true,
+      "stderr": "arm-none-eabi-ld: warning: (r1_yhm_register_read_record): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-yhm-block-read-c/wrong-pointer.o\nTraceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-yhm-block-read-c/reject-wrong-pointer.py\", line 43, in <module>\n    for c in itertools.product([0,1,9,255,0xffffffff,0x12345678] if kind=='byte' else [0],range(8),statuses,[0,1,4,9],[0,0xa5]):assert a(kind,*c)==b(kind,*c);n+=1\n                                                                                                                                                   ~^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-yhm-block-read-c/reject-wrong-pointer.py\", line 31, in run\n    root={'block':0x35268,'thunk':0x50748,'byte':0x35412}[kind] if stock else syms[{'block':'r1_yhm_register_block_read_native','thunk':'r1_native_charger_register_block_read','byte':'r1_yhm_register_read_byte_native'}[kind]];u.emu_start(root|1,STOP,count=100)\n                                                                                                                                                                                                                                  ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 769, in emu_start\n    raise self._hook_exception\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 363, in wrapper\n    return func(uc, *args, **kwargs)\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 1063, in __hook_code_cb\n    callback(uc, address, size, user_data)\n    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-yhm-block-read-c/reject-wrong-pointer.py\", line 21, in code\n    args=[u.reg_read(rr) for rr in [UC_ARM_REG_R0,UC_ARM_REG_R1,UC_ARM_REG_R2]];assert args==[state['reg'],state['length'],state['ptr']],args\n                                                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: [0, 9, 536969217]\n"
+    },
+    "boolean-status": {
+      "rejected": true,
+      "stderr": "arm-none-eabi-ld: warning: (r1_yhm_register_read_record): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-yhm-block-read-c/boolean-status.o\nTraceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-yhm-block-read-c/reject-boolean-status.py\", line 43, in <module>\n    for c in itertools.product([0,1,9,255,0xffffffff,0x12345678] if kind=='byte' else [0],range(8),statuses,[0,1,4,9],[0,0xa5]):assert a(kind,*c)==b(kind,*c);n+=1\n                                                                                                                                                   ~^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-yhm-block-read-c/reject-boolean-status.py\", line 31, in run\n    root={'block':0x35268,'thunk':0x50748,'byte':0x35412}[kind] if stock else syms[{'block':'r1_yhm_register_block_read_native','thunk':'r1_native_charger_register_block_read','byte':'r1_yhm_register_read_byte_native'}[kind]];u.emu_start(root|1,STOP,count=100)\n                                                                                                                                                                                                                                  ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 769, in emu_start\n    raise self._hook_exception\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 363, in wrapper\n    return func(uc, *args, **kwargs)\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 1063, in __hook_code_cb\n    callback(uc, address, size, user_data)\n    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-yhm-block-read-c/reject-boolean-status.py\", line 20, in code\n    assert u.reg_read(UC_ARM_REG_SP)==SP and u.reg_read(UC_ARM_REG_LR)==STOP|1\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    }
+  },
+  "REA": [
+    {
+      "evidence_id": "ev_d82777b6da4107f44b18b923bba170fc155b938ec8e3aa71a8381b81c026372e",
+      "subject": {
+        "name": "stock.elf",
+        "digest": {
+          "sha256": "25b4a29af80ec8edab5bd861ba9b74a6e22eab29dc3d7a809a16869e8a140f04"
+        },
+        "local_path": "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-queue-reset-c/stock.elf",
+        "format": "elf",
+        "architecture": "arm"
+      },
+      "provider": {
+        "id": "ghidra",
+        "name": "Ghidra",
+        "version": "12.1.4"
+      },
+      "analysis_profile": {
+        "provider": {
+          "id": "ghidra",
+          "name": "Ghidra",
+          "version": "12.1.4"
+        },
+        "parameters": {
+          "target_kind": "executable",
+          "target_format": "elf",
+          "architecture": "arm",
+          "available_architectures": [
+            "arm"
+          ],
+          "import_mode": "ephemeral-source-immutable",
+          "annotation_policy": "atomic-function-entry-metadata-v1",
+          "load_image_observations": "source-mappings-entry-context-v2",
+          "function_body_evidence": "complete-inclusive-ranges-v1",
+          "function_references": "complete-body-and-entry-reference-manager-v2",
+          "call_relationship_coverage": "function-body-call-coverage-v5",
+          "function_dossier_coverage": "observed-facets-and-call-relationships-v1",
+          "string_inventory_evidence": "defined-data-coverage-v1",
+          "location_resolution": "explicit-address-exact-entry-symbol-first-v3",
+          "procedure_file_offset_resolution": "address-first-unique-target-source-mapping-v2",
+          "instruction_flow_evidence": "decoded-return-pcode-v1",
+          "instruction_references": "exact-address-incoming-v1",
+          "function_boundary_observations": "ghidra-function-boundary-limitations-v3",
+          "no_return_repair": "returning-imports-decoded-return-v2",
+          "process_launch": "inspected-jvm-launch-support-v1",
+          "jump_table_evidence": "typed-case-default-blocks-v1",
+          "decompiler_jump_loads": true,
+          "loader": "auto-from-header",
+          "language_id": "auto-from-header",
+          "compiler_spec_id": "auto-default",
+          "analyzer_preset": "ghidra-default"
+        },
+        "digest": "7e46711069eea041af1b9b99e34115c13332795e5cda76e584a722f529ec70de"
+      },
+      "predicate_type": "rea.analysis",
+      "operation": "read_bytes",
+      "parameters": {
+        "address": "0x35268",
+        "length": 10
+      },
+      "raw_result": {
+        "address": "0x35268",
+        "requested_bytes": 10,
+        "returned_bytes": 10,
+        "bytes_hex": "02460921002000f0cdb8",
+        "complete": true
+      },
+      "normalized_result": {
+        "address": "0x35268",
+        "requested_bytes": 10,
+        "returned_bytes": 10,
+        "bytes_hex": "02460921002000f0cdb8",
+        "complete": true
+      },
+      "confidence": "observed",
+      "authority": "shipped-artifact",
+      "environment": null,
+      "limitations": [
+        "The session serves operations only after Ghidra reports default auto-analysis complete; incomplete analysis does not expose partial results.",
+        "The imported Program and temporary project are ephemeral and deleted on close. Annotation operations edit session database metadata; original executable bytes are never written.",
+        "Cancelling an active Ghidra request terminates its ephemeral database and discards session annotations. The selected target remains open; the next provider query imports the original artifact again.",
+        "Default-space addresses use lowercase 0x-prefixed hexadecimal; other address spaces use <percent-encoded-space>:0x<hex>.",
+        "Bytes reflect Ghidra's initialized memory, including loader fixups. Reads stop at an unmapped or uninitialized byte and report completeness explicitly.",
+        "macOS sessions require a matching executable Ghidra native decompiler; REA checks for it but does not build native components or change Gatekeeper quarantine state."
+      ],
+      "relationship_coverage": null,
+      "locations": [],
+      "evidence_links": []
+    },
+    {
+      "evidence_id": "ev_3625bf9879d1581948e5fb252ea10834056540f7bdf5d8bfc575b731cf473d5c",
+      "subject": {
+        "name": "stock.elf",
+        "digest": {
+          "sha256": "25b4a29af80ec8edab5bd861ba9b74a6e22eab29dc3d7a809a16869e8a140f04"
+        },
+        "local_path": "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-queue-reset-c/stock.elf",
+        "format": "elf",
+        "architecture": "arm"
+      },
+      "provider": {
+        "id": "ghidra",
+        "name": "Ghidra",
+        "version": "12.1.4"
+      },
+      "analysis_profile": {
+        "provider": {
+          "id": "ghidra",
+          "name": "Ghidra",
+          "version": "12.1.4"
+        },
+        "parameters": {
+          "target_kind": "executable",
+          "target_format": "elf",
+          "architecture": "arm",
+          "available_architectures": [
+            "arm"
+          ],
+          "import_mode": "ephemeral-source-immutable",
+          "annotation_policy": "atomic-function-entry-metadata-v1",
+          "load_image_observations": "source-mappings-entry-context-v2",
+          "function_body_evidence": "complete-inclusive-ranges-v1",
+          "function_references": "complete-body-and-entry-reference-manager-v2",
+          "call_relationship_coverage": "function-body-call-coverage-v5",
+          "function_dossier_coverage": "observed-facets-and-call-relationships-v1",
+          "string_inventory_evidence": "defined-data-coverage-v1",
+          "location_resolution": "explicit-address-exact-entry-symbol-first-v3",
+          "procedure_file_offset_resolution": "address-first-unique-target-source-mapping-v2",
+          "instruction_flow_evidence": "decoded-return-pcode-v1",
+          "instruction_references": "exact-address-incoming-v1",
+          "function_boundary_observations": "ghidra-function-boundary-limitations-v3",
+          "no_return_repair": "returning-imports-decoded-return-v2",
+          "process_launch": "inspected-jvm-launch-support-v1",
+          "jump_table_evidence": "typed-case-default-blocks-v1",
+          "decompiler_jump_loads": true,
+          "loader": "auto-from-header",
+          "language_id": "auto-from-header",
+          "compiler_spec_id": "auto-default",
+          "analyzer_preset": "ghidra-default"
+        },
+        "digest": "7e46711069eea041af1b9b99e34115c13332795e5cda76e584a722f529ec70de"
+      },
+      "predicate_type": "rea.analysis",
+      "operation": "read_bytes",
+      "parameters": {
+        "address": "0x50748",
+        "length": 4
+      },
+      "raw_result": {
+        "address": "0x50748",
+        "requested_bytes": 4,
+        "returned_bytes": 4,
+        "bytes_hex": "e4f78ebd",
+        "complete": true
+      },
+      "normalized_result": {
+        "address": "0x50748",
+        "requested_bytes": 4,
+        "returned_bytes": 4,
+        "bytes_hex": "e4f78ebd",
+        "complete": true
+      },
+      "confidence": "observed",
+      "authority": "shipped-artifact",
+      "environment": null,
+      "limitations": [
+        "The session serves operations only after Ghidra reports default auto-analysis complete; incomplete analysis does not expose partial results.",
+        "The imported Program and temporary project are ephemeral and deleted on close. Annotation operations edit session database metadata; original executable bytes are never written.",
+        "Cancelling an active Ghidra request terminates its ephemeral database and discards session annotations. The selected target remains open; the next provider query imports the original artifact again.",
+        "Default-space addresses use lowercase 0x-prefixed hexadecimal; other address spaces use <percent-encoded-space>:0x<hex>.",
+        "Bytes reflect Ghidra's initialized memory, including loader fixups. Reads stop at an unmapped or uninitialized byte and report completeness explicitly.",
+        "macOS sessions require a matching executable Ghidra native decompiler; REA checks for it but does not build native components or change Gatekeeper quarantine state."
+      ],
+      "relationship_coverage": null,
+      "locations": [],
+      "evidence_links": []
+    },
+    {
+      "evidence_id": "ev_c50e0cd1aa4f068d448244d04fdf89232855a3beb9dcba384792c3f2103041fd",
+      "subject": {
+        "name": "stock.elf",
+        "digest": {
+          "sha256": "25b4a29af80ec8edab5bd861ba9b74a6e22eab29dc3d7a809a16869e8a140f04"
+        },
+        "local_path": "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-queue-reset-c/stock.elf",
+        "format": "elf",
+        "architecture": "arm"
+      },
+      "provider": {
+        "id": "ghidra",
+        "name": "Ghidra",
+        "version": "12.1.4"
+      },
+      "analysis_profile": {
+        "provider": {
+          "id": "ghidra",
+          "name": "Ghidra",
+          "version": "12.1.4"
+        },
+        "parameters": {
+          "target_kind": "executable",
+          "target_format": "elf",
+          "architecture": "arm",
+          "available_architectures": [
+            "arm"
+          ],
+          "import_mode": "ephemeral-source-immutable",
+          "annotation_policy": "atomic-function-entry-metadata-v1",
+          "load_image_observations": "source-mappings-entry-context-v2",
+          "function_body_evidence": "complete-inclusive-ranges-v1",
+          "function_references": "complete-body-and-entry-reference-manager-v2",
+          "call_relationship_coverage": "function-body-call-coverage-v5",
+          "function_dossier_coverage": "observed-facets-and-call-relationships-v1",
+          "string_inventory_evidence": "defined-data-coverage-v1",
+          "location_resolution": "explicit-address-exact-entry-symbol-first-v3",
+          "procedure_file_offset_resolution": "address-first-unique-target-source-mapping-v2",
+          "instruction_flow_evidence": "decoded-return-pcode-v1",
+          "instruction_references": "exact-address-incoming-v1",
+          "function_boundary_observations": "ghidra-function-boundary-limitations-v3",
+          "no_return_repair": "returning-imports-decoded-return-v2",
+          "process_launch": "inspected-jvm-launch-support-v1",
+          "jump_table_evidence": "typed-case-default-blocks-v1",
+          "decompiler_jump_loads": true,
+          "loader": "auto-from-header",
+          "language_id": "auto-from-header",
+          "compiler_spec_id": "auto-default",
+          "analyzer_preset": "ghidra-default"
+        },
+        "digest": "7e46711069eea041af1b9b99e34115c13332795e5cda76e584a722f529ec70de"
+      },
+      "predicate_type": "rea.analysis",
+      "operation": "read_bytes",
+      "parameters": {
+        "address": "0x3540c",
+        "length": 6
+      },
+      "raw_result": {
+        "address": "0x3540c",
+        "requested_bytes": 6,
+        "returned_bytes": 6,
+        "bytes_hex": "c9b21bf0ddb9",
+        "complete": true
+      },
+      "normalized_result": {
+        "address": "0x3540c",
+        "requested_bytes": 6,
+        "returned_bytes": 6,
+        "bytes_hex": "c9b21bf0ddb9",
+        "complete": true
+      },
+      "confidence": "observed",
+      "authority": "shipped-artifact",
+      "environment": null,
+      "limitations": [
+        "The session serves operations only after Ghidra reports default auto-analysis complete; incomplete analysis does not expose partial results.",
+        "The imported Program and temporary project are ephemeral and deleted on close. Annotation operations edit session database metadata; original executable bytes are never written.",
+        "Cancelling an active Ghidra request terminates its ephemeral database and discards session annotations. The selected target remains open; the next provider query imports the original artifact again.",
+        "Default-space addresses use lowercase 0x-prefixed hexadecimal; other address spaces use <percent-encoded-space>:0x<hex>.",
+        "Bytes reflect Ghidra's initialized memory, including loader fixups. Reads stop at an unmapped or uninitialized byte and report completeness explicitly.",
+        "macOS sessions require a matching executable Ghidra native decompiler; REA checks for it but does not build native components or change Gatekeeper quarantine state."
+      ],
+      "relationship_coverage": null,
+      "locations": [],
+      "evidence_links": []
+    }
+  ],
+  "unrelated_objects_identical": 580,
+  "existing_frontend_section_bytes_unchanged": true,
+  "existing_byte_read_binding_correction": {
+    "old": "r1_yhm_register_read_record bound to 0x3540d",
+    "new": "r1_yhm_register_read_native bound to 0x3540d",
+    "linked_bytes_unchanged": true
+  },
+  "manifest_imports_unchanged": true,
+  "qualification": "build/goal-r1-yhm-block-read-c/qualified-final/qualification.json",
+  "new_exact_bytes": 14,
+  "regions": [
+    {
+      "payload": "r1-application",
+      "symbol": "r1_yhm_register_block_read_native",
+      "start": 57960,
+      "end": 57970,
+      "sha256": "a642dcfe0dd3a0884d462a09171a1b5ca23c92bc8a304dbae98b2241aef81b7f",
+      "evidence": "r1/symbols/function-frontier.csv",
+      "bindings": {
+        "r1_yhm_register_read_native": 218125
+      },
+      "address": 217704,
+      "binding_evidence": "r1/symbols/function-frontier.csv"
+    },
+    {
+      "payload": "r1-application",
+      "symbol": "r1_native_charger_register_block_read",
+      "start": 169800,
+      "end": 169804,
+      "sha256": "f84e786095a70e3d5a0a9663f8aaee5f065bbae0dea2a0de2de68f171b3d67ee",
+      "evidence": "r1/symbols/function-frontier.csv",
+      "bindings": {
+        "r1_yhm_register_block_read_native": 217705
+      },
+      "address": 329544,
+      "binding_evidence": "r1/symbols/function-frontier.csv"
+    }
+  ],
+  "hybrid": {
+    "report": "build/hybrid-goal-r1-yhm-block-read-c/build-report.json",
+    "sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "totals": {
+      "binary-pull-through": 642077,
+      "source-built": 4083,
+      "resource-file": 248
+    },
+    "source_completeness_proven": false
+  },
+  "limitations": [
+    "Actual record transport provider modeled; wire/electrical behavior unproven.",
+    "The earlier vendor read-register-9 helper remains a separate contextual API and no longer owns these native entries.",
+    "Complete source-only rebuilding, arbitrary transport faults/aliases/concurrency unproven."
+  ]
+}

@@ -1,118 +1,56 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_32841c\n"
-".type opencfw_em9305_child_32841c,@function\n"
-"opencfw_em9305_child_32841c:\n"
-"L32841c:\n"
-"enter_s [r13-r15,blink]\n"
-"L32841e:\n"
-"add r13,r0,0x9a4\n"
-"L328426:\n"
-"mov_s r14,r0\n"
-"L328428:\n"
-"mov_s r1,0\n"
-"L32842a:\n"
-"mov r2,312\n"
-"L32842e:\n"
-"bl.d opencfw_em9305_memset\n"
-"L328432:\n"
-"mov_s r0,r13\n"
-"L328434:\n"
-"ldb.x r12,[r14,60]\n"
-"L328438:\n"
-"ldb r1,[r14,0xae0]\n"
-"L328440:\n"
-"add r3,r14,0x9d4\n"
-"L328448:\n"
-"add r2,r14,0x8ca\n"
-"L328450:\n"
-"mov_s r0,opencfw_em9305_child_3280e8\n"
-"L328456:\n"
-"cmp_s r12,0x7f\n"
-"L328458:\n"
-"stb 1,[r13,26]\n"
-"L32845c:\n"
-"stb 1,[r13,24]\n"
-"L328460:\n"
-"stb 7,[r13,48]\n"
-"L328464:\n"
-"st_s r14,[r13,0x24]\n"
-"L328466:\n"
-"st_s r3,[r13,0x2c]\n"
-"L328468:\n"
-"st_s r2,[r13,0x28]\n"
-"L32846a:\n"
-"st_s r0,[r13,0x20]\n"
-"L32846c:\n"
-"st_s r0,[r13,0x1c]\n"
-"L32846e:\n"
-"stb r1,[r13,49]\n"
-"L328472:\n"
-"bne_s L32847c\n"
-"L328474:\n"
-"mov_s r0,0x805a9c\n"
-"L32847a:\n"
-"ldb_s r12,[r0,0]\n"
-"L32847c:\n"
-"ldb r8,[r14,69]\n"
-"L328480:\n"
-"mov_s r0,r14\n"
-"L328482:\n"
-"add r2,r14,0x9dc\n"
-"L32848a:\n"
-"mov_s r1,r14\n"
-"L32848c:\n"
-"add r0,r0,945\n"
-"L328490:\n"
-"add r1,r1,1430\n"
-"L328494:\n"
-"st r0,[r2,132]\n"
-"L328498:\n"
-"st_s r0,[r2,0x60]\n"
-"L32849a:\n"
-"sub r0,r8,0x1\n"
-"L32849e:\n"
-"sth 0,[r1]\n"
-"L3284a2:\n"
-"extb_s r1,r0\n"
-"L3284a4:\n"
-"cmp_s r0,4\n"
-"L3284a6:\n"
-"asl_s r0,r1,0x3\n"
-"L3284a8:\n"
-"ldb r15,[r14,63]\n"
-"L3284ac:\n"
-"lsr r0,0x2010201,r0\n"
-"L3284b4:\n"
-"mov.nc r0,0\n"
-"L3284b8:\n"
-"st opencfw_em9305_child_32c4fc,[r3,160]\n"
-"L3284c0:\n"
-"mov_s r11,0x555555\n"
-"L3284c6:\n"
-"mov_s r3,0x8e89bed6\n"
-"L3284cc:\n"
-"stb_s r0,[r2,0x7]\n"
-"L3284ce:\n"
-"stb_s r0,[r2,0x6]\n"
-"L3284d0:\n"
-"mov_s r0,r14\n"
-"L3284d2:\n"
-"mov_s r1,r13\n"
-"L3284d4:\n"
-"st r11,[r2]\n"
-"L3284d8:\n"
-"st r3,[r2,-4]\n"
-"L3284dc:\n"
-"stb r12,[r2,-6]\n"
-"L3284e0:\n"
-"stb_s r15,[r2,0x5]\n"
-"L3284e2:\n"
-"bl.d opencfw_em9305_child_328270\n"
-"L3284e6:\n"
-"stb_s r15,[r2,0x4]\n"
-"L3284e8:\n"
-"leave_s [r13-r15,blink,pcl]\n"
-".size opencfw_em9305_child_32841c,.-opencfw_em9305_child_32841c\n"
-);
+#include <stdint.h>
+
+/* Native 0x32841c..0x3284ea: initialise the record's 312-byte connection
+ * setup block (+2468) for an initiator start: owner, request (+2516) and
+ * parameter (+2250) pointers, both completion callbacks (3280e8), flags
+ * and the PHY byte (+2784); then the connection request block (+2524):
+ * access address 0x8e89bed6, CRC init 0x555555, the clock-accuracy byte
+ * (+60, or 0x805a9c when it is 0x7f), the channel-map byte (+63, twice),
+ * the PHY code for the PHY index (+69: 1,2,1,2 for 1..4, else 0, twice),
+ * the 945 data pointers at +96/+132 and the 32c4fc callback at +2676; clear
+ * +1430 and hand the block to 328270. */
+extern void *opencfw_em9305_memset(void *dst,uint32_t value,uint32_t count);
+extern void opencfw_em9305_child_3280e8(uintptr_t object);
+extern uint32_t opencfw_em9305_child_32c4fc(uintptr_t context,uint32_t more);
+extern uint32_t opencfw_em9305_child_328270(uintptr_t record,uintptr_t object);
+
+static inline void w8(uintptr_t a,uint32_t v){*(volatile uint8_t *)a=(uint8_t)v;}
+static inline void w32(uintptr_t a,uint32_t v){*(volatile uint32_t *)a=v;}
+
+uint32_t opencfw_em9305_child_32841c(uintptr_t record)
+{
+    uintptr_t setup=record+0x9a4u;
+    (void)opencfw_em9305_memset((void *)setup,0u,312u);
+    int32_t accuracy=*(volatile int8_t *)(record+60u);
+    uint32_t phy=*(volatile uint8_t *)(record+0xae0u);
+    uintptr_t request=record+0x9d4u;
+    uintptr_t params=record+0x8cau;
+    uint32_t done=(uint32_t)(uintptr_t)opencfw_em9305_child_3280e8;
+    w8(setup+26u,1u);
+    w8(setup+24u,1u);
+    w8(setup+48u,7u);
+    w32(setup+36u,record);
+    w32(setup+44u,request);
+    w32(setup+40u,params);
+    w32(setup+32u,done);
+    w32(setup+28u,done);
+    w8(setup+49u,phy);
+    uint32_t sca=(uint32_t)accuracy;
+    if(accuracy==0x7f)sca=*(volatile uint8_t *)0x805a9cu;
+    uint32_t index=*(volatile uint8_t *)(record+69u)-1u;
+    uintptr_t connect=record+0x9dcu;
+    w32(connect+132u,record+945u);
+    w32(connect+96u,record+945u);
+    *(volatile uint16_t *)(record+1430u)=0u;
+    uint32_t channel=*(volatile uint8_t *)(record+63u);
+    uint32_t code=index<4u?(0x2010201u>>((index&0xffu)*8u&31u)):0u;
+    w32(request+160u,(uint32_t)(uintptr_t)opencfw_em9305_child_32c4fc);
+    w8(connect+7u,code);
+    w8(connect+6u,code);
+    w32(connect,0x555555u);
+    w32(connect-4u,0x8e89bed6u);
+    w8(connect-6u,sca);
+    w8(connect+5u,channel);
+    w8(connect+4u,channel);
+    return opencfw_em9305_child_328270(record,setup);
+}

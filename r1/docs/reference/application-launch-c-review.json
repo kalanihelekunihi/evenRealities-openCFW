@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "report": "build/sources-goal-r1-application-launch-c/report.json",
+  "report_sha256": "bc9f26d4422cfbde8757995d0045b48f5fcf7c7f1f8ffb1adbe0046c58d6fe75",
+  "manifest_sha256": "2c000899aa10ccc8c33816d5aecd6f952873e3f39bee795606cf3515a9a163ba",
+  "verification": {
+    "stock_c_pairs": {
+      "launch": 72,
+      "startup": 108,
+      "stop": 36
+    },
+    "total_pairs": 216,
+    "source_entry_integration_cases": 16,
+    "actual_shared_fault_primitive": true,
+    "lifecycle_cell_relocated": true,
+    "attributes_normalized_to_stock": true,
+    "cmsis_services_and_manager_worker_modeled": true,
+    "private_fault_frames_excluded": true
+  },
+  "audit": {
+    "unchanged_prior_object_hashes": 799,
+    "entry_change_only_callback_address_materialization_and_descriptor": true,
+    "entry_other_bytes_and_relocations_unchanged": true,
+    "generated_boot_allocated_bytes_and_relocations_unchanged": true,
+    "new_source_unit": "r1/src/application/runtime/native_application_launch.c",
+    "new_explicit_dependency": "r1_application_manager_thread",
+    "only_manifest_change_new_unit": true
+  },
+  "defects": [
+    {
+      "defect": "gate-initialize-error",
+      "compiled": true,
+      "behavioral_assertion_rejected": true
+    },
+    {
+      "defect": "missing-manager-attributes",
+      "compiled": true,
+      "behavioral_assertion_rejected": true
+    },
+    {
+      "defect": "terminate-manager-instead-of-self",
+      "compiled": true,
+      "behavioral_assertion_rejected": true
+    },
+    {
+      "defect": "clear-handle-too-early",
+      "compiled": true,
+      "behavioral_assertion_rejected": true
+    }
+  ],
+  "rea_evidence_id": "ev_31711801593a9c5ff07306ca09f2873495bfe87bdb5aaa21881112e7c951901c",
+  "rea_complete_launch_window_matches_raw": true,
+  "stock_lifecycle_cold_bytes": "655e04004d5e040000000000",
+  "authenticated_expanded_data": {
+    "path": "build/goal-r1-fstorage-registry/expanded-rw.bin",
+    "sha256": "87fdee392022fdbe23dd0daf3e859fb14f3ce26ba3e8403aab56dc9d9a913317"
+  },
+  "evidence_files": {
+    "build/goal-r1-application-launch-c/verify.py": "8f3d86e56dfda648c7ca08bdd8736ed526cdc51ca05be03cf6093af62b960eb6",
+    "build/goal-r1-application-launch-c/audit.py": "2b02ad2f2ebd8f973ae8d2538189136c286d7bf64e3d74273ce8968ce144afe7",
+    "build/goal-r1-application-launch-c/defects.py": "ee4adac811985f0197d08fc37888b952d13acb159e3bec7a2074943589b6caa3",
+    "build/goal-r1-application-launch-c/document.py": "aa12387ff34f63e261980bb47691186c58f7f716dafa118398c8370db5c3f6ac",
+    "build/goal-r1-application-launch-c/verification.json": "fd0c6ea6924a78b0adaf9887d60740d9bea8d92016c0f5763be630dcfd0471e4",
+    "build/goal-r1-application-launch-c/audit.json": "b0da2165633a9a70e148706177c02232156a20678fd525a70d5cd65ae0814b6c",
+    "build/goal-r1-application-launch-c/defects.json": "27602cfe9fffc3ef0276d29bd1551539ea3f610e08a88ea2001daad4b0fd202a",
+    "build/goal-r1-application-launch-c/source.elf": "c376d6fab9bc3efe69253291e5f16c2d31ca81b825d4c61b45493979a5f8f5e0",
+    "build/goal-r1-application-launch-c/rea-launch.json": "61192c29623be2ec7d65d1de974873a4d4b0a54ff167d6ac8aa7ce93b67da30b",
+    "build/goal-r1-application-launch-c/verify-final.log": "a4c823c8596bc0d5ca02faf49cd414ce9326c467f1f93216f04b68b26e164e88",
+    "build/goal-r1-application-launch-c/r1-sources-check.log": "6d283d66909cf175a4fc74dc87325857f9b068509f875eadf9e6e3f2e75c3f08",
+    "build/goal-r1-application-launch-c/sources-check.log": "f01c96afde688afb305d1140ee25c4bfe7c390a54aa8456a4b69860b5b65a651",
+    "build/goal-r1-application-launch-c/boot-link/report.json": "61ade77d0e0adafab542c6428a26739a394fbe5a34126cd38b0885a141b4d862"
+  },
+  "source_and_header_inputs": {
+    "r1/src/application/runtime/native_application_launch.c": "0bf36774690811103b95df1455e5a42f47be0cf3be946334f82510dbd2f80080",
+    "r1/src/application/runtime/native_application_launch.h": "9306b071370f3b437d6752861de082e527618b168c5120e51d24fe2a882d42bf",
+    "r1/src/application/runtime/native_application_entry.c": "705191ad28cc7dfd399d9425228f63091f7232a5800861282a9cf030eeca1639",
+    "r1/src/application/board/native_cortex_fault.c": "ab5723bbe87054d1f4ec147fed067184ee1558fcedcdba24885f2128e9c3a6d1",
+    "third-party/upstream/cmsis-5-590/CMSIS/RTOS2/Include/cmsis_os2.h": "784bdeeff0c7ba179215e205834a3226506458717c092dea58b99cec4fda7a1b"
+  },
+  "limitations": [
+    "CMSIS services modeled; actual kernel scheduling and task creation are not exercised.",
+    "Manager worker at 0x45d7c remains an explicit unresolved source dependency.",
+    "Actual shared fault primitive executes; private fault frames and device exception delivery excluded.",
+    "Reset/vector completion, data/BSS initialization, physical boot and full application final linking remain open.",
+    "No source-plan selections change."
+  ]
+}

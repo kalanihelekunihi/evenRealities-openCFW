@@ -89,9 +89,21 @@ Exact (byte-identical) library sections at stock VAs (all GCC 14.2 unless noted;
 | 0xA9D4 | memset (nano) | 16 | 0xA9E4 | __libc_init_array (+16 B literals) | 72 |
 | 0xAA2C | memcpy (nano, byte loop) | 18 | 0xAA40 / 0xAA44 / 0xAA50 | _exit halt `fee7c046` / _init / _fini | 4/12/12 |
 
-EEPROM 2.60 exact (32 functions/2,864 B), incl. ReadSimpleMode, WriteRow 100, CalculateRowChecksum, CheckRowChecksum, DefineLastWrittenRow 180, CheckLastWrittenRowIntegrity 180, GetNextRowPointer, CopyHistoricData 180, ReadExtendedMode 628, Cy_Em_EEPROM_Read 52, GetPhysicalSize 30, CheckRanges 108, ComputeEEPROMProgramSize 84, Init_BD 172, Init 64, EraseRow 100, WriteSimpleMode 172, Write dispatcher 52, Erase API 276. Not exact: CalcChecksum (60 B), CopyHeadersData (392), extended write (252), two 124-B row wrappers [touch-read-closure-2026-10-08], [touch-init-closure-2026-10-08]. Public `Cy_CapSense_ConfigureMsclpTimer` (0x5D90, 70 B) differs in 5 bytes under 13.3 (not retried with 14.2) [touch-active-timer-closure-2026-10-08]; `Cy_SysPm_CpuEnterDeepSleepNoCallbacks` public 36 B vs stock 40 B [touch-lp-application-closure-2026-10-08].
+EEPROM 2.60 exact (32 functions/2,864 B), incl. ReadSimpleMode, WriteRow 100, CalculateRowChecksum, CheckRowChecksum, DefineLastWrittenRow 180, CheckLastWrittenRowIntegrity 180, GetNextRowPointer, CopyHistoricData 180, ReadExtendedMode 628, Cy_Em_EEPROM_Read 52, GetPhysicalSize 30, CheckRanges 108, ComputeEEPROMProgramSize 84, Init_BD 172, Init 64, EraseRow 100, WriteSimpleMode 172, Write dispatcher 52, Erase API 276. Not exact: CalcChecksum (60 B), CopyHeadersData (392), extended write (252), two 124-B row wrappers [touch-read-closure-2026-10-08], [touch-init-closure-2026-10-08]. Public `Cy_CapSense_ConfigureMsclpTimer` (0x5D90, 70 B) differed in 5 bytes under 13.3 [touch-active-timer-closure-2026-10-08]; the pinned 14.2 build now matches all 70 bytes after relocation, along with 15 other bodies from its unit [touch-capsense-gcc14-exact-source-20261111] and 16 bodies from seven additional CAPSENSE units [touch-capsense-seven-gcc14-units-20261111]. `Cy_SysPm_CpuEnterDeepSleepNoCallbacks` was 36 B in an earlier public build versus 40 B stock [touch-lp-application-closure-2026-10-08], but the current pinned 14.2 source plan matches the full 40-byte body.
 
 **Historical symbol corrections** (`g2/symbols/touch.tsv` was not edited): 0x9F34/0x9F44 are ClkHfGet/SetSource, not divider functions; 0xA188 is ClkPumpSetSource; 0x8AAC is `Cy_Em_EEPROM_Write` dispatcher (true read dispatcher 0x8A78); 0x85D4/0x8808 are WriteSimpleMode/WriteExtendedMode; 0x3A38 (`touch_config_load_from_eeprom`) and 0x3568 (`touch_config_read_adapter`) are on the **write** path; 0x7EA4 ("CheckRanges") is the program gate; 0x7D36 returns sensor status byte +6, not raw count; ProcessStatusCode is 128 B (old row 58 B); uidivmod is 8 B at 0xA7CC; idivmod 8 B at 0xA9A0; SetHSIOM/Pin_Init extents include literal pools [touch-pdl14-inline-emission-2026-10-09], [touch-clkpump14-attribution-2026-10-09], [touch-eeprom-dispatch-2026-10-08], [touch-calibration-closure-2026-10-08], [touch-libgcc14-division-2026-10-09], [touch-gpio14-linkage-2026-10-09].
+
+The `exit_wrapper` row in `g2/symbols/touch.tsv` overstates its extent as
+54 bytes. Its code and literals end at `0xA9D4` (40 bytes from `0xA9AC`),
+where the separate 16-byte `memset` begins. The exact linked-C qualification
+is recorded in
+[`touch-libc-exit-exact-source-20261111.json`](../../evidence/touch-libc-exit-exact-source-20261111.json).
+
+The 2026-10-10 generated-config gap below records the historical frontier.
+The current source-linked image owns the complete 964-byte reset-copy span:
+946 bytes match stock at the same data offset, and the other 18 bytes are nine
+relocated flash pointers. See
+[`touch-reset-copy-source-ownership-20261111.json`](../../evidence/touch-reset-copy-source-ownership-20261111.json).
 
 ### 1.3 Reset, startup and RAM layout
 
@@ -151,7 +163,7 @@ Key RAM/ROM objects:
   - Literals 7773/31211 at 0x3EC0/0x3ECC.
 - Active timer setter **0x5D90** (`ConfigureMsclpTimer`): stores µs at internal+28, cycles at +32; updates live AOS_CTL+0x70 low16 only if common status has 0x10 (active scanning). Converter **0x5D70**: `c = (us*factor mod 2^32) >> 14; if c: c-1; min(c, 65535)`; factor internal+44 initial 655 (= 40 kHz·2^14/10^6). 7773 → 309, 31211 → 1246. LP/WOT interval +36, cache +40 [touch-active-timer-closure-2026-10-08], [touch-clock-selection-closure-2026-10-08].
 - Gesture timebase: SysTick on `clk_lf` reload 40. **Inferred**: with nominal 40 kHz ILO this is ≈1 kHz, so hold default 1000 ≈ 1 s and tap window 300 ≈ 0.3 s (unmeasured).
-- Software delay `Cy_SysLib_Delay(ms)`: loops of `cy_delay32kMs` for >32768 ms, else `ms*cy_delayFreqKhz` cycles; `DelayUs(us) = us*cy_delayFreqMhz`; DelayCycles: `(n+2)>>2` iterations [touch-syslib14-delay-linkage-2026-10-09], [touch-syslib14-assembly-2026-10-09]. EEPROM default write uses delay arg 10 (×24000 scale).
+- Software delay `Cy_SysLib_Delay(ms)`: loops of `cy_delay32kMs` for >32768 ms, else `ms*cy_delayFreqKhz` cycles; `DelayUs(us) = us*cy_delayFreqMhz`; DelayCycles: `(n+2)>>2` iterations [touch-syslib14-delay-linkage-2026-10-09], [touch-syslib14-assembly-2026-10-09]. The current source build shares one C delay body across application and PDL callers; its loop follows stock control flow with one extra post-loop instruction, and physical timing is unmeasured [touch-syslib-delay-unified-20261111]. EEPROM default write uses delay arg 10 (×24000 scale).
 
 ### 1.6 Gesture engine (0x4070, 874 B; speed helper 0x3EFC, 324 B)
 
@@ -380,6 +392,35 @@ Event flags on group 0x200000F0: 0x01/0x200/0x1000 USB, 0x02 hall, 0x08 frame re
 8. Source-level only (not stock bugs): callback function-pointer type mismatches fixed in the reconstruction (timer callbacks take `uint32_t`; event callbacks `void(*)(void*,uint32_t)`; DMA +0x38 cb takes `uint8_t*`; sensor cancel slot p+56 returns `uint32_t`) [component-goal-20261013/case-wave061..069 reviews].
 
 ### 2.8 Case open blockers
+
+The current source-only CASE link uses the startup UART receive graph from
+vector slot 43 through the parser at stock `0x08006544` and the blocking
+receive helper at `0x080063EC`. Five disconnected duplicate UART source
+units were removed on 2026-11-11; all seven linked payload binaries stayed
+unchanged. This is link provenance, not physical UART validation
+[case-uart-live-source-consolidation-20261111].
+
+The source callback now rejects `0xCF` declared lengths above 1,194 before
+blocking receive, because its 1,200-byte frame buffer must also hold the
+five-byte header and trailing byte. Controlled stock/source comparisons match
+bounded valid inputs. Stock accepts 1,195 bytes without room for the trailing
+frame byte, and larger lengths can overwrite the adjacent UART handle; the
+source rejects both [case-uart-frame-capacity-20261111].
+
+The live receive worker calls the startup frame dispatcher corresponding to
+stock `0x0800085C`. Controlled stock/source runs matched 1,036 dispatch
+cases; a disconnected offline dispatcher copy was removed while the linked
+CASE image stayed unchanged [case-frame-dispatch-live-20261111].
+
+The live command graph matched 708 no-action legacy cases, 72 state-changing
+legacy cases (`0xAF`, `0xD1`, `0xDD`, `0xDF`), 288 nonlocal binary
+forwarding cases, 240 local binary cases (`0x50`, `0x5C`, `0x5D`, `0x68`),
+144 `0x3E` aging-state cases, 523 `0x14` sensor-reply cases, 192 `0x3D`
+aging-exit forwarding cases and 144 `0x56` OTA-state cases in controlled
+stock/source emulation. A discarded, narrower forwarding
+copy was removed without changing the CASE image. Other active commands and
+physical effects still need separate validation
+[case-command-routing-live-20261111].
 
 Exact armclang/armlink release and project/scatter recipe; standby chain 0x0800292C; physical reset/standby; flash-apply success path 0x0800373C; bit-bang transaction/output-bus physical timing; runtime contents of 0x0803F000/0x0803F800; formatter source; unresolved computed callback roots/ambient stack; hardware validation of clocks/IRQ/FIFO/flash persistence [component-goal-20261013/case-current-frontier-020/REPORT.md].
 

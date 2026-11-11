@@ -1,0 +1,131 @@
+{
+  "schema_version": 1,
+  "scope": "Native Goodix resize ABI in ordinary C",
+  "report": "build/sources-goal-r1-goodix-native-reallocate-c/report.json",
+  "comparison_report": "build/sources-goal-r1-goodix-native-malloc-flags-c/report.json",
+  "stock_entry": "0x2d5c0",
+  "stock_instruction_bytes": 152,
+  "audit": {
+    "compiled_units": 868,
+    "unchanged_prior_nongenerated_objects": 857,
+    "new_units": [
+      "r1/src/application/goodix/native_heap_reallocate.c"
+    ],
+    "differing_existing_generated_objects": [
+      "{gen}/r1_startup_vectors.S",
+      "{gen}/r1_uecc.c"
+    ],
+    "application_imports": 62,
+    "bootloader_imports": 22,
+    "removed_imports": [],
+    "added_imports": [],
+    "new_writable_state_bytes": 0,
+    "source_plan_and_cache_layout_unchanged": true,
+    "tested_object_equals_normal_build": true,
+    "only_manifest_change_is_one_new_unit": true,
+    "portable_heap_and_existing_byte_fill_objects_unchanged": true
+  },
+  "comparisons": {
+    "stock_C_resize_comparisons": 20928,
+    "fatal_growth_cases": 3072,
+    "null_pool_pointer_boundary_cases": 36,
+    "full_C_allocator_mixed_operations": 1000,
+    "mixed_resize_calls": 295,
+    "metadata_payload_copy_write_width_order_values_and_pool_match": true,
+    "zero_size_and_minimum_malloc_distinction_preserved": true,
+    "source_lifecycle_cannot_execute_stock": true,
+    "native_instruction_bytes_executed": 152,
+    "unexecuted_bytes": [],
+    "status_log_watchdog_RTOS_delay_modeled": true
+  },
+  "compiled_defects_rejected": [
+    {
+      "defect": "null-allocation-route",
+      "rejected": true
+    },
+    {
+      "defect": "zero-shrink-clamp",
+      "rejected": true
+    },
+    {
+      "defect": "split-threshold",
+      "rejected": true
+    },
+    {
+      "defect": "retained-previous-flag",
+      "rejected": true
+    },
+    {
+      "defect": "growth-copy-count",
+      "rejected": true
+    },
+    {
+      "defect": "growth-old-release",
+      "rejected": true
+    },
+    {
+      "defect": "growth-copy-padding",
+      "rejected": true
+    },
+    {
+      "defect": "null-pool-policy",
+      "rejected": true
+    },
+    {
+      "defect": "tail-allocated-flag",
+      "rejected": true
+    },
+    {
+      "defect": "equal-size-move",
+      "rejected": true
+    }
+  ],
+  "contract": [
+    "Null allocation delegates to the native public allocator. Nonnull allocation with null pool or failing range check returns null without invoking allocator failure policy.",
+    "Existing allocations use native unsigned rounding without the public malloc minimum clamp. A16-byte-or-larger remainder is split with retained low flag bits, and the tail is released through native free.",
+    "Growth allocates, reloads the original header, copies the full old block payload capacity byte by byte in increasing order, then frees the original. It inherits the public non-returning exhaustion policy.",
+    "This private firmware resize entry is not an alias for libc realloc or the portable heap model."
+  ],
+  "limits": [
+    "All152 native instruction bytes execute in20,928 comparisons, including3,072 terminal growth failures.36 additional pointer/null-pool cases are checked. Seeded nonzero full payload capacities expose padding-copy behavior.",
+    "1000 mixed operations execute only C initializer/malloc/free/resize on the source side, including295 resizes. No stock allocation fallback. Pool images and write width/order/value match. The mixed sequence uses resize sizes at least8; zero-size metadata behavior is tested in isolated comparisons.",
+    "Returning paths check saved integer/FP registers, SP, masks/FPSCR and guards. Terminal paths check guards, FP/masks and stable delay-loop depth while status/log/watchdog/RTOS/delay ports are modeled and stopped after three delays.",
+    "Ten compiled defects are rejected. Caller scratch, private frames, APSR, malformed headers, arbitrary interior pointers, near-wrap huge physical copies, concurrent mutation, real manager reset, physical memory behavior, final linking/startup and boot remain unverified.",
+    "One new C unit with no state or import changes. Existing native heap providers and portable model objects are unchanged. Source plan/cache layout unchanged. Deinitialization and complete source-linked firmware remain open."
+  ],
+  "evidence_files": {
+    "build/sources-goal-r1-goodix-native-reallocate-c/report.json": "c556c55af2b659aae8e77a5cec602dca136c4630c16951303557b72d83357919",
+    "build/sources-goal-r1-goodix-native-malloc-flags-c/report.json": "1d8828dceda671567479b90ca301db723fa0f20ec3d7a94faf2623a2e9201259",
+    "r1/src/application/goodix/native_heap_reallocate.c": "078156cbb3d160046b3c181313a362885f3d41884692698469ad86543458832c",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-native-reallocate-c/r1/r1-application/r1__src__application__goodix__native_heap_reallocate.c.o": "c3d17d3ed20d125190f1f64675f13c50395568ac749375e85f56bf2e61a1663b",
+    "r1/src/sources.json": "df24d61b0122f93ecfecd9757ba1282059ec1d51109b8a48f88c36ae6ff09f5f",
+    "tools/build/source-plan.json": "eeb516e31b3310fb0718f36908977f8125723f7c5e0e86cd6744395826259a4d",
+    "r1/src/config/runtime/native_health_cache.ld": "eb8f131c489cd818d4e36718718fa1989719ca0170f164541a1a5bf56dfc1ec3",
+    "r1/src/application/goodix/native_heap_init.c": "c3085064866b23d603697918b6dfdd29f66ab68c7e82cb1f3e10443c80e3f8b6",
+    "r1/src/application/goodix/native_heap_free.c": "175cf893ee4b475bee0a886d69522782ac879dd0b29c43285d957c03fb4dc7c4",
+    "r1/src/application/goodix/native_heap_allocate.c": "2806f3ca4f9074b157b390edf8bd03815a46b31f1661e1ed238a0938c666d8c9",
+    "r1/src/application/goodix/native_heap_malloc.c": "1b827deb8981088d68fae260af0aa442a7315d4aaaa7f2ed8a248c859878a0c3",
+    "r1/docs/reference/FUNCTION-OWNERSHIP.csv": "6ea253918e482cb76b70f8c061a812b2689c7be7ce04858b042a51b00736f08c",
+    "r1/symbols/function-frontier.csv": "2269cbf1039f547bef18e455e989628890d7494fd50de8eaff536b18dc4a0ede",
+    "r1/docs/correlation/GOODIX-HEAP-REDUCTION-CORRELATION.md": "0ae675d9040682159775c45bf493f1e3341e679a4950e2b6c4b28080edb4216b",
+    "build/goal-r1-goodix-native-malloc-c/manager-flags-rea.json": "998b6d6379dc9b01cf79f886517b215bf829ac93b3d29ea6846c21b8d553ba00",
+    "build/goal-r1-goodix-native-heap-init-c/fill.o": "5b9881f48c6329da35510eb6b3f4be65d3c31bab24e2f6ab7d5713597d06c391",
+    "build/goal-r1-goodix-native-heap-init-c/fill-body.json": "9bf851f3f2cb56510504f22b5d435b9a6db08019815db0e446543e23e3a17c13",
+    "build/goal-r1-goodix-native-reallocate-c/audit.json": "644553fb9213e9736d31edb1444ffbf448cc74ce3be3d2409baca907cb9aa0c5",
+    "build/goal-r1-goodix-native-reallocate-c/verify.log": "d2599600bc70f87129883c37c274b44a0e627a3aa03a5f75271db85b53a8a096",
+    "build/goal-r1-goodix-native-reallocate-c/negative.json": "68cdf1bc55130ffdaf5b0cfce2310c86d3c84cc55d8c71f2c8fb4085fdab1f90",
+    "build/goal-r1-goodix-native-reallocate-c/test.ld": "90c7ba5a5321b14f2a1f14fde49f292cfb9835d44a3d924ff370794204650f13",
+    "build/goal-r1-goodix-native-reallocate-c/audit.py": "fa1dc1dccc99e641f8d5d34bece18cca8fbf98208d4b9cd3958b35a462b2b8c4",
+    "build/goal-r1-goodix-native-reallocate-c/source.elf": "4c15d6eb5b31ab7dec81dc22053324a4ab86e031523e94cbe47ec0917dc855de",
+    "build/goal-r1-goodix-native-reallocate-c/negative.py": "4a8cf6fd33eb418ee7c0be70d9c79e70ef0c3c19a8ed2d483dc6f325dc335234",
+    "build/goal-r1-goodix-native-reallocate-c/negative.log": "6c79bc5f8a06c8f3a8f950457c858d5b4ce52d7c9a1929f252cf8be82643a97c",
+    "build/goal-r1-goodix-native-reallocate-c/source.o": "c3d17d3ed20d125190f1f64675f13c50395568ac749375e85f56bf2e61a1663b",
+    "build/goal-r1-goodix-native-reallocate-c/results.json": "ded0888dbb94c8a802c0cc58c75ef1ddf4c3a2c2056304be3dd40f915fefc538",
+    "build/goal-r1-goodix-native-reallocate-c/sources-check.log": "2613b30a1e9ae5fa00b547a11884d454ebcd404738137412ab09a69e45c6ae8d",
+    "build/goal-r1-goodix-native-reallocate-c/record.py": "6c31b30cde04bc8363bb2ff8e3334549aa2c278c3bd37c02c53030ee2cc25247",
+    "build/goal-r1-goodix-native-reallocate-c/rea-bytes.json": "aa3dbc0c612bb2fce8a46628493b43ba6aaa331e6b1232aa181511e1e60b9fd4",
+    "build/goal-r1-goodix-native-reallocate-c/manifest-before.json": "6040f94251fcb0985c63b0950a4c46953c8034631399a0238033020577646f0f",
+    "build/goal-r1-goodix-native-reallocate-c/verify.py": "9e0608fa028486ebb9584f8bc8fcd299854aa03db68a43e3b5bb388b376caf37",
+    "build/goal-r1-goodix-native-reallocate-c/build.log": "dcfa4caebd6860f52f6ae9eefa6655119f4e75002f1a96f480101fb6be3220f7"
+  }
+}

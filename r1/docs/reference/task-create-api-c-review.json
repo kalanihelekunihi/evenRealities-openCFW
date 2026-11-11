@@ -1,0 +1,92 @@
+{
+  "stock_constructor_probe": {
+    "passed": 350,
+    "executions": 700,
+    "source_report": "build/sources-goal-r1-task-create-api-c-native/report.json",
+    "public_aliases_share_native_entry": true,
+    "actual_native_initialize_list_item_stack_frame": true,
+    "limits": [
+      "Allocation/free, memory fills and scheduler-ready handoff modeled; constructor/initializer/list-item/stack routines execute",
+      "Only the task-return LR word normalized after checking its source-specific function address",
+      "Stable name bytes; asynchronous name mutation, malformed pointers/depths, allocator integration and scheduler execution unverified",
+      "Private frames and caller-clobbered words/flags excluded; logical fault address/width/value/mask checked without complete exception state",
+      "No byte qualification"
+    ]
+  },
+  "cmsis_integration": {
+    "passed": 160,
+    "actual_cmsis_to_native_constructor": true,
+    "public_aliases_share_native_entry": true,
+    "limits": [
+      "Source-only integration; stock constructor comparison is separate",
+      "Actual CMSIS, constructors, initialization, list-item and stack-frame code execute; allocator, memory fills, scheduler state and ready handoff modeled",
+      "Stable name bytes; no scheduler startup, allocator integration or physical execution proof"
+    ]
+  },
+  "audit": {
+    "unchanged_existing_function_bodies": [
+      "r1_native_task_create",
+      "r1_native_task_create_static",
+      "r1_native_task_initialize"
+    ],
+    "other_object_bytes_unchanged": true,
+    "new_strong_aliases": [
+      "xTaskCreate",
+      "xTaskCreateStatic"
+    ],
+    "removed_imports": [
+      "xTaskCreate",
+      "xTaskCreateStatic"
+    ],
+    "added_imports": []
+  },
+  "negative_controls": {
+    "static-flag": true,
+    "short-control": true,
+    "omit-cleanup": true
+  },
+  "normal_build": {
+    "compiled": 573,
+    "application_imports": 179,
+    "bootloader_imports": 34,
+    "failures": 0,
+    "duplicate_strong_symbols": 0
+  },
+  "qualification": {
+    "compiled_profiles": 5,
+    "selected_regions": 0,
+    "new_function_byte_identity": false
+  },
+  "source_plan_unchanged": true,
+  "source_built_bytes": 3857,
+  "binary_pull_through_bytes": 642303,
+  "hybrid_equals_locked_application": true,
+  "source_completeness_proven": false,
+  "evidence": {
+    "build/sources-goal-r1-task-create-api-c-native/report.json": "c7ac9c6b8818330fc56891d2f91eb3c4f3c3ef25f8a8d99e7815a95e0066fb8e",
+    "tools/build/source-plan.json": "969af3130987be89dcdc8777d86b4c891d596b4ecef5cccfd763861f05a12d31",
+    "r1/src/application/board/native_task_construction.c": "c7ae411d43ba0750b07afc52aceb7ca2ec18b3d6ce57ccaa163b37c8dbd4231b",
+    "r1/src/application/board/native_task_construction.h": "5b3c5564a841a375f285e45314809710258efe11f2f4162f97663fa59deb4484",
+    "r1/src/application/rtos/task-construction/stack.c": "253ebae1aa7f586a30b898e33adc7a6c337840e63c8784a8f2bdbe62f9037474",
+    "r1/src/config/rtos/task_stack_contract.h": "e1493530b76de1fbd7f10f4e7aa1e70627610aa6765468c860baad2f1757b530",
+    "r1/src/config/rtos/FreeRTOS.h": "0b54436703c1eb1141708e9d8a2c56c7ad6437b55f596852cc843437971d0137",
+    "r1/src/config/rtos/FreeRTOSConfig.h": "bebe1124e0c274853580f8589a9f3f104164acd1a28a6bdc67e47e531be0f0d4",
+    "r1/src/sources.json": "e4c2161f5a94ed8f60f515c71ed7f323fa68daecf30f6a35feb8327e77cfec3e",
+    "r1/symbols/function-frontier.csv": "ea33454dd35fb1e507a94f69efd4df6051171ca30fb2d26bfac5012cb0477849",
+    "build/hybrid-goal-r1-task-create-api-c/build-report.json": "5742d49e6979bbd8281e803b910d967dfa971e1cb1717e2d75708eb0e1fd12ed",
+    "build/goal-r1-task-api-abi/REA.json": "d190fe00c405af0cf4ee4ed545e304e6fab2dd53e5519ee3c23282c3d5c44d26",
+    "build/goal-r1-task-create-api-c/REA-static.json": "a3c041f4a6dd8d74754ce869ccfbf2a010ea1cb47e54679af2c3ac8a3b15a809",
+    "build/goal-r1-task-create-api-c/before.c": "05ac9d402123e61dc035a10f756296014c62485d1f75d3ca9e4133f46944cfa9",
+    "build/goal-r1-task-create-api-c/before.h": "db9c7feb09e608a9944d8cb3450cde18a3f22fe09ffa97deba214311d4368e2d",
+    "build/goal-r1-task-create-api-c/verify.py": "c75c4dbd731fff452cc2ee85c2ae6ad89d56c5f910cbec3e1ad2d2d50492a5e1",
+    "build/goal-r1-task-create-api-c/results.json": "0c500acf4cef1b4980765d1682b187f986b98fae6aa9e13720fb11f5cb274268",
+    "build/goal-r1-task-create-api-c/verify-cmsis.py": "3ed832288c1acdd8ae8de5924cea9c9e5a62150193d1759d1997f3bdc3ac65b9",
+    "build/goal-r1-task-create-api-c/cmsis-results.json": "9cdf01d888882d559d188d81e62a0f0766ef4ec537a760dae809b9f420a1c039",
+    "build/goal-r1-task-create-api-c/negative.py": "8f512a6763b92ec970de073353ac08f563fd4e2c12558099fe230aba8c7389e0",
+    "build/goal-r1-task-create-api-c/negative-results.json": "4143490509bc16a16a4e09eddf7c3e2d4bd71ecf7789354b4df3451de814c132",
+    "build/goal-r1-task-create-api-c/audit.py": "db423b92c8f1d328ee040e037c7cf6471409736dd191fdc82a631ebae69dc710",
+    "build/goal-r1-task-create-api-c/audit-results.json": "5dd365c6d428a76c1c5ad4ad85392803d1ad2e387039f15a9dfc57f8269bec6b",
+    "build/goal-r1-task-create-api-c/qualify.py": "0a06501860888815a57ac448605df3b8ba3f9c7ece8c7ee84531a95ce7756eca",
+    "build/goal-r1-task-create-api-c/qualified/qualification.json": "99d972e61491ae0dbe8a7008b956287688de9c696e92e2dd2d7781afce4bc314"
+  }
+}

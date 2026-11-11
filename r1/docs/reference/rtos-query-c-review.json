@@ -1,0 +1,240 @@
+{
+  "normal_report": "build/sources-goal-r1-rtos-query-c/report.json",
+  "report_sha256": "cdd7d28ac99d9cd465f107c4cdfc186124685029af879bc792ab740e8e69c6e0",
+  "units": [
+    {
+      "source": "r1/src/application/rtos/timer-id/timer-id.c",
+      "payload": "r1-application",
+      "role": "candidate",
+      "toolchain": "clang",
+      "link": true,
+      "expect": "compile",
+      "returncode": 0,
+      "argv": [
+        "/usr/bin/clang",
+        "--target=arm-none-eabi",
+        "-mcpu=cortex-m4",
+        "-mthumb",
+        "-mfpu=fpv4-sp-d16",
+        "-mfloat-abi=hard",
+        "-ffreestanding",
+        "-fno-strict-aliasing",
+        "-std=c11",
+        "-Os",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-DNRF52840_XXAA",
+        "-DSOFTDEVICE_PRESENT",
+        "-DNRF_SD_BLE_API_VERSION=7",
+        "-DS140",
+        "-DFREERTOS",
+        "-DFLOAT_ABI_HARD",
+        "-isystem",
+        "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/r1/src/config/rtos",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/r1/config-recovered",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/third-party/upstream/freertos-kernel/include",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/external/freertos/portable/GCC/nrf52",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/external/freertos/portable/CMSIS/nrf52",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/third-party/upstream/cmsis-freertos/CMSIS/RTOS2/FreeRTOS/Include",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/toolchain/cmsis/include",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/softdevice/common",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/experimental_section_vars",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/util",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/delay",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/atomic",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx/mdk",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx/hal",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx/drivers/include",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/integration/nrfx",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/integration/nrfx/legacy",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/softdevice/s140/headers",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/softdevice/s140/headers/nrf52",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/third-party/upstream/cmsis-5-590/CMSIS/RTOS2/Include",
+        "-O0",
+        "-fshort-enums",
+        "-fno-inline",
+        "-include",
+        "/Users/kalani/Repo/evenRealities-openCFW/r1/src/config/rtos/native_port_assert.h",
+        "-MD",
+        "-MF",
+        "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-rtos-query-c/r1/r1-application/r1__src__application__rtos__timer-id__timer-id.c.d",
+        "-c",
+        "/Users/kalani/Repo/evenRealities-openCFW/r1/src/application/rtos/timer-id/timer-id.c",
+        "-o",
+        "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-rtos-query-c/r1/r1-application/r1__src__application__rtos__timer-id__timer-id.c.o"
+      ],
+      "source_sha256": "449848560a0eaf14e3258e5a6f1a087c87aa73c017b0ed63bc0dea318d9b46f6",
+      "object_sha256": "013baedaa484920fba00ea6733a81701d4841f078dd6fe33a57fca9ebdd85948",
+      "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-rtos-query-c/r1/r1-application/r1__src__application__rtos__timer-id__timer-id.c.o",
+      "strong": [
+        "pcTimerGetName",
+        "pvTimerGetTimerID"
+      ],
+      "weak": [],
+      "undefined": [
+        "vPortEnterCritical",
+        "vPortExitCritical"
+      ]
+    },
+    {
+      "source": "r1/src/application/rtos/task-query/task-query.c",
+      "payload": "r1-application",
+      "role": "candidate",
+      "toolchain": "clang",
+      "link": true,
+      "expect": "compile",
+      "returncode": 0,
+      "argv": [
+        "/usr/bin/clang",
+        "--target=arm-none-eabi",
+        "-mcpu=cortex-m4",
+        "-mthumb",
+        "-mfpu=fpv4-sp-d16",
+        "-mfloat-abi=hard",
+        "-ffreestanding",
+        "-fno-strict-aliasing",
+        "-std=c11",
+        "-Os",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-DNRF52840_XXAA",
+        "-DSOFTDEVICE_PRESENT",
+        "-DNRF_SD_BLE_API_VERSION=7",
+        "-DS140",
+        "-DFREERTOS",
+        "-DFLOAT_ABI_HARD",
+        "-isystem",
+        "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/r1/src/config/rtos",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/r1/config-recovered",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/third-party/upstream/freertos-kernel/include",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/external/freertos/portable/GCC/nrf52",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/external/freertos/portable/CMSIS/nrf52",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/third-party/upstream/cmsis-freertos/CMSIS/RTOS2/FreeRTOS/Include",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/toolchain/cmsis/include",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/softdevice/common",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/experimental_section_vars",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/util",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/delay",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/atomic",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx/mdk",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx/hal",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx/drivers/include",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/integration/nrfx",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/integration/nrfx/legacy",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/softdevice/s140/headers",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/softdevice/s140/headers/nrf52",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/third-party/upstream/cmsis-5-590/CMSIS/RTOS2/Include",
+        "-fshort-enums",
+        "-fwrapv",
+        "-O0",
+        "-fno-inline",
+        "-I",
+        "/Users/kalani/Repo/evenRealities-openCFW/r1/src/config/rtos",
+        "-include",
+        "/Users/kalani/Repo/evenRealities-openCFW/r1/src/config/rtos/native_port_assert.h",
+        "-MD",
+        "-MF",
+        "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-rtos-query-c/r1/r1-application/r1__src__application__rtos__task-query__task-query.c.d",
+        "-c",
+        "/Users/kalani/Repo/evenRealities-openCFW/r1/src/application/rtos/task-query/task-query.c",
+        "-o",
+        "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-rtos-query-c/r1/r1-application/r1__src__application__rtos__task-query__task-query.c.o"
+      ],
+      "source_sha256": "6a30f78ef1084e7c7f4c57c977905c8aa42f10b96e0e9f5fff505218f5e1d596",
+      "object_sha256": "17a8588d89af42e3e8d77756a4411b5519b17b514fcf0af75af8362e95b6a37d",
+      "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-rtos-query-c/r1/r1-application/r1__src__application__rtos__task-query__task-query.c.o",
+      "strong": [
+        "pcTaskGetName",
+        "uxTaskPriorityGet"
+      ],
+      "weak": [],
+      "undefined": [
+        "pxCurrentTCB",
+        "vPortEnterCritical",
+        "vPortExitCritical"
+      ]
+    }
+  ],
+  "upstream": {
+    "third-party/upstream/freertos-kernel/tasks.c": "14020d617b96dd2814e1211f6e3b645bcf5e2bd3179c23fe7dd16bc666fe9463",
+    "third-party/upstream/freertos-kernel/timers.c": "24962ef361f396aaa5e6e33776eeeddaf2fb251c87b6fe50602acc56c537b093",
+    "r1/src/config/rtos/mutex_tasks_contract.h": "65a2b7e2df91987b1421da303f885bd40d402560c5996659f5aec01d1249a7a7",
+    "r1/src/config/rtos/timer_id_contract.h": "f853849bade58c39128501f1df1e4bc883bd8044f7eb02e90977d7bf27535aac"
+  },
+  "direct": {
+    "counts": {
+      "pcTaskGetName": 432,
+      "uxTaskPriorityGet": 432,
+      "pcTimerGetName": 144
+    },
+    "total": 1008,
+    "digest": "5e6089b33edc541e82bed5c897acfdf50651a9e449e75bb72ce73d4e89f60c35",
+    "bindings": {
+      "vPortEnterCritical": "0x1100100",
+      "vPortExitCritical": "0x1100200",
+      "pxCurrentTCB": "0x20000000"
+    },
+    "limits": [
+      "Critical callbacks modeled with controlled current-task/priority mutation",
+      "No stock routine identity, full scheduler or device proof",
+      "Invalid handles retain pinned upstream preconditions"
+    ]
+  },
+  "negative": {
+    "wrong-task-name-offset": {
+      "rejected": true,
+      "diagnostic": "Traceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-rtos-query-c/verify.py\", line 46, in <module>\n    result=run(root,arg,current,priorities,retarget,change_enter,change_exit,timer_name);counts[root]=counts.get(root,0)+1;digest.update(json.dumps(result).encode())\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-rtos-query-c/verify.py\", line 40, in run\n    result=v.reg_read(UC_ARM_REG_R0);assert result==expected,(root,arg,cfg,result,expected)\n                                            ^^^^^^^^^^^^^^^^\nAssertionError: ('pcTaskGetName', 0, {'root': 'pcTaskGetName', 'arg': 0, 'current': 0, 'priorities': (0, 55), 'retarget': False, 'change_enter': False, 'change_exit': False, 'timer_name': 0}, 536875061, 536875060)\n"
+    },
+    "wrong-priority-field": {
+      "rejected": true,
+      "diagnostic": "Traceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-rtos-query-c/verify.py\", line 46, in <module>\n    result=run(root,arg,current,priorities,retarget,change_enter,change_exit,timer_name);counts[root]=counts.get(root,0)+1;digest.update(json.dumps(result).encode())\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-rtos-query-c/verify.py\", line 40, in run\n    result=v.reg_read(UC_ARM_REG_R0);assert result==expected,(root,arg,cfg,result,expected)\n                                            ^^^^^^^^^^^^^^^^\nAssertionError: ('uxTaskPriorityGet', 0, {'root': 'uxTaskPriorityGet', 'arg': 0, 'current': 0, 'priorities': (0, 55), 'retarget': False, 'change_enter': False, 'change_exit': False, 'timer_name': 0}, 2779096485, 0)\n"
+    },
+    "missing-critical-exit": {
+      "rejected": true,
+      "diagnostic": "Traceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-rtos-query-c/verify.py\", line 46, in <module>\n    result=run(root,arg,current,priorities,retarget,change_enter,change_exit,timer_name);counts[root]=counts.get(root,0)+1;digest.update(json.dumps(result).encode())\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-rtos-query-c/verify.py\", line 39, in run\n    assert calls==['enter','exit'];task=arg or TASKS[1 if retarget else current];expected=priorities[TASKS.index(task)]^(0x100 if change_enter else 0)\n           ^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    "wrong-timer-name": {
+      "rejected": true,
+      "diagnostic": "Traceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-rtos-query-c/verify.py\", line 46, in <module>\n    result=run(root,arg,current,priorities,retarget,change_enter,change_exit,timer_name);counts[root]=counts.get(root,0)+1;digest.update(json.dumps(result).encode())\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-rtos-query-c/verify.py\", line 40, in run\n    result=v.reg_read(UC_ARM_REG_R0);assert result==expected,(root,arg,cfg,result,expected)\n                                            ^^^^^^^^^^^^^^^^\nAssertionError: ('pcTimerGetName', 536876032, {'root': 'pcTimerGetName', 'arg': 536876032, 'current': 0, 'priorities': (0, 55), 'retarget': False, 'change_enter': False, 'change_exit': False, 'timer_name': 0}, 536876032, 0)\n"
+    }
+  },
+  "audit": {
+    "changed": [
+      "r1/src/application/rtos/timer-id/timer-id.c"
+    ],
+    "added": [
+      "r1/src/application/rtos/task-query/task-query.c"
+    ],
+    "unchanged_objects": 727,
+    "timer_id_unchanged": {
+      "bytes": "80b584b0029002980190ffe7029858b9ffe740200390039880f311884ff0ff3100200860ffe7fee7ffe7fff7feff0198c0690090fff7feff009804b080bd",
+      "relocations": [
+        [
+          42,
+          10,
+          "vPortEnterCritical"
+        ],
+        [
+          52,
+          10,
+          "vPortExitCritical"
+        ]
+      ]
+    }
+  },
+  "resolved_imports": [
+    "pcTaskGetName",
+    "pcTimerGetName",
+    "uxTaskPriorityGet"
+  ],
+  "limits": [
+    "Pinned FreeRTOS semantics and existing verified native layout contracts; no stock query-function identity claim",
+    "Critical callbacks modeled, including task/priority mutation",
+    "Invalid handles retain upstream preconditions; current profile assert policy unchanged",
+    "No full scheduler, physical device or complete firmware image proof"
+  ]
+}

@@ -1,0 +1,128 @@
+{
+  "schema_version": 1,
+  "scope": "Health initialization service and status publisher in ordinary C",
+  "report": "build/sources-goal-r1-health-init-entry-pure-c/report.json",
+  "comparison_report": "build/sources-goal-r1-activity-store-pure-c/report.json",
+  "stock_ranges": [
+    {
+      "entry": "0x8a866",
+      "size": 24,
+      "symbol": "r1_health_init_publish"
+    },
+    {
+      "entry": "0x8d380",
+      "size": 68,
+      "symbol": "r1_event_service_0008d380"
+    }
+  ],
+  "audit": {
+    "compiled_units": 862,
+    "unchanged_prior_nongenerated_objects": 851,
+    "changed_prior_nongenerated_objects": [
+      "r1/src/application/runtime/native_health_init.c"
+    ],
+    "application_imports": 63,
+    "bootloader_imports": 22,
+    "manifest_unchanged": true,
+    "source_plan_and_cache_layout_unchanged": true,
+    "new_state_definitions": 0,
+    "whole_health_init_unit_has_no_inline_assembly": true,
+    "final_object_equals_tested_object": true
+  },
+  "direct": {
+    "publisher_stock_C_comparisons": 2560,
+    "service_stock_C_comparisons": 2880,
+    "native_instruction_bytes_executed": [
+      24,
+      68
+    ],
+    "full_backing_word_low_byte_gate_live_modes_and_publication_order_match": true,
+    "void_return_caller_scratch_private_frames_APSR_and_physical_init_excluded": true
+  },
+  "service_publisher_enqueue_pipeline": {
+    "stock_C_init_service_publisher_enqueue_comparisons": 3456,
+    "actual_state_publishers_services_event_publisher_enqueue_memory_move_execute": true,
+    "event_publisher_retains_its_frame_bridge": true,
+    "prepared_contexts_queue_flags_and_delivery_modeled": true,
+    "leading_uninitialized_queue_word_private_frames_and_caller_scratch_excluded": true
+  },
+  "compiled_defects_rejected": [
+    {
+      "defect": "drop-three",
+      "rejected": true
+    },
+    {
+      "defect": "accept-four",
+      "rejected": true
+    },
+    {
+      "defect": "event-id",
+      "rejected": true
+    },
+    {
+      "defect": "backing-word",
+      "rejected": true
+    },
+    {
+      "defect": "length",
+      "rejected": true
+    },
+    {
+      "defect": "service-status",
+      "rejected": true
+    },
+    {
+      "defect": "live-mode4",
+      "rejected": true
+    },
+    {
+      "defect": "sdk-metadata",
+      "rejected": true
+    }
+  ],
+  "contract": [
+    "Publisher initializes a full volatile status word, admits low bytes 0 through 3, and synchronously publishes event 0x1001 with length 1. Full backing-word bytes and callback mutations are preserved during the call.",
+    "Service preserves live log-mode queries and diagnostic order, then publishes constant status 1 regardless of diagnostic return values.",
+    "Callback 0x42840 calls the service and immediately calls another service without consuming its return. No external direct publisher transfer was identified beyond the converted service. Public entries have void return types."
+  ],
+  "limits": [
+    "REA matches all 92 stock instruction bytes; all execute across 5440 direct comparisons.",
+    "3456 comparisons execute the initialization entries, existing event publisher frame bridge, enqueue and memory movement; prepared contexts and queue/flags delivery are modeled.",
+    "Defined queue id, length and payload, failed-send wakeup, live thread reload, guards, saved integer and floating point registers, SP, masks and FPSCR are checked. The leading uninitialized queue word is excluded.",
+    "Caller scratch including former R3 restoration, private stack frame addresses, APSR and void returns are excluded. Indirect ABI consumers are not exhaustively proven.",
+    "No new persistent state, manifest or source-plan changes. Physical sensors, concurrency, scheduler delivery, final application linking, startup and boot remain unverified."
+  ],
+  "evidence_files": {
+    "build/sources-goal-r1-health-init-entry-pure-c/report.json": "809e96c3f32feb994a1534e7e0de14c3645fc25ba3ab2f03cdd5811242c2cc8f",
+    "build/sources-goal-r1-activity-store-pure-c/report.json": "fe2c408d7486d3d3a3b68d345aa9e95e8f7349db4f7b5d4a7d8156efbcb58c01",
+    "r1/src/application/runtime/native_health_init.c": "a44774aa1190dfade2cb5023d3ef2fd82fcc984e8924705a1342943a8fb62db0",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-health-init-entry-pure-c/r1/r1-application/r1__src__application__runtime__native_health_init.c.o": "7e07f11b15c5898ff18b3310cca9083c8ee62ec165c5bb577a988ea913ee14eb",
+    "r1/src/sources.json": "ac403598295564e9a4af5013cd797a60793cf6c47dfac150c902be6d400a7093",
+    "tools/build/source-plan.json": "eeb516e31b3310fb0718f36908977f8125723f7c5e0e86cd6744395826259a4d",
+    "r1/src/config/runtime/native_health_cache.ld": "eb8f131c489cd818d4e36718718fa1989719ca0170f164541a1a5bf56dfc1ec3",
+    "r1/src/application/board/native_events.c": "98fa08d643192d38c204416a1edc17c55286d631029458e0895b4bfc142e1c2b",
+    "r1/src/application/board/native_event_callbacks.c": "5f24f7494fd2de78b934052a8b03291f4019cdeb52642ed8ef5f2ef04d6dd56b",
+    "build/goal-r1-health-init-entry-pure-c/audit.json": "93519bc74d467041e246b13abd691feffa41440f70251d3c2c2d324375d11c90",
+    "build/goal-r1-health-init-entry-pure-c/negative.json": "5c0815e30546e6b941e3f8e6d6f1e4c141655e7296f9e5dd228de596d9a1a8d2",
+    "build/goal-r1-health-init-entry-pure-c/audit.py": "2bb6e4c58353e7e4e8520542ab5952469b6d6314de37e4cb25916aca0e2efb3d",
+    "build/goal-r1-health-init-entry-pure-c/source.elf": "b4d08363875ae0a656a79ebce9097fb580e91539428ef78c1f1e3c373a253e88",
+    "build/goal-r1-health-init-entry-pure-c/negative.py": "b5bfdb0b419c9d7f2562b3bd3afdbae628c87a70704cbe3b07757cd5f153cc02",
+    "build/goal-r1-health-init-entry-pure-c/callers.py": "ac61ac7b45f4a99da3d9843a7f7bc3160cb08b480f16885fec3cf76b1aa55722",
+    "build/goal-r1-health-init-entry-pure-c/negative.log": "cff326da24e5cd44b6bb969337aa5628ba32a3546aa1c54b88bc872a8beda296",
+    "build/goal-r1-health-init-entry-pure-c/source.o": "7e07f11b15c5898ff18b3310cca9083c8ee62ec165c5bb577a988ea913ee14eb",
+    "build/goal-r1-health-init-entry-pure-c/results.json": "8b348615de448b7ba7cb3e817cba0a7558584083c206da74cd166a2968e8f97f",
+    "build/goal-r1-health-init-entry-pure-c/pipeline.log": "355d23da873dd2fee35a435ee064efadbfa4e86582b437f09d75f47327c9e5fb",
+    "build/goal-r1-health-init-entry-pure-c/rea.json": "5e6b68381fa2e7d9589bda22c178de17cb8a2e37523ca917179b09d161bab738",
+    "build/goal-r1-health-init-entry-pure-c/pipeline.py": "495c27c9268a68becfd4739dbccd57a227999b4a298895a576439d7beff057b8",
+    "build/goal-r1-health-init-entry-pure-c/sources-check.log": "b6ab468f43815a75634eab2762e209dbee8ab94c4cc3d601fded4210b6833f2a",
+    "build/goal-r1-health-init-entry-pure-c/callers.json": "e6ff898492c3834962d6f189aa46ccc58865fed171693e9073731e0e2389f303",
+    "build/goal-r1-health-init-entry-pure-c/record.py": "078ebbdb73565f6dcafec0c7037ca134b76a5010c37b517227cda05d732724c6",
+    "build/goal-r1-health-init-entry-pure-c/verify.py": "1b30ecf14817498f4df62c358187d4b772330811806ecb07c625f97e0fbfb592",
+    "build/goal-r1-health-init-entry-pure-c/verification.log": "4b3d01e7064aeab99c31332e1b33242d62a9606c12e7c5a4bc8ee36f63126ec1",
+    "build/goal-r1-health-init-entry-pure-c/source-before.c": "ad49868663b18fd8832b13974f29851d3deff393c19e8407d94351b45f0fbee2",
+    "build/goal-r1-health-init-entry-pure-c/build.log": "814b63496fa93a68d9e6540830a78155710e883cf70e40fe9b0e09966a94830d",
+    "build/goal-r1-health-init-entry-pure-c/pipeline/test.ld": "95bb82b2b534fa687658f283c933f8375145c37a816c8450e17adfa2a2e2faac",
+    "build/goal-r1-health-init-entry-pure-c/pipeline/source.elf": "3d2674659e21575be0c5bdf4876c584248afddcde0cafac7ff84eabbf9b7d657",
+    "build/goal-r1-health-init-entry-pure-c/pipeline/results.json": "cfa4d11fe50003c05e0ee4156b7d57989b9265dbf44c7a38c262343d4b93faa9"
+  }
+}

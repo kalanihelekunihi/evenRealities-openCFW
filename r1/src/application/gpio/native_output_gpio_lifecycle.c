@@ -39,7 +39,12 @@ r1_output_lifecycle_fn r1_output_gpio_lifecycle[4] __attribute__((section(".r1.o
  r1_output_gpio_task_initialize,r1_output_gpio_direct_initialize,r1_output_gpio_task_release,r1_output_gpio_direct_release
 };
 static volatile r1_output_gpio_record *find_record(volatile generic_device_registry_device *device) {
- for(uint8_t i=0;i<5;++i){volatile r1_output_gpio_record *record=&r1_output_gpio.records[i];if(strcmp(record->name,device->name)==0)return record;}
+ for(uint8_t i=0;i<5;++i){
+  volatile r1_output_gpio_record *record=&r1_output_gpio.records[i];
+  const char *device_name=device->name;
+  const char *record_name=record->name;
+  if(strcmp(record_name,device_name)==0)return record;
+ }
  return 0;
 }
 static void dispatch(volatile r1_output_gpio_record *record,uint32_t release) {

@@ -1,0 +1,13 @@
+# Health database startup in C
+
+The service-task import `r1_native_health_database_initialize` now resolves to ordinary C at the native `0x70030` boundary. The new unit also implements the lock (`0x75ccc`), unlock (`0x93ee4`) and signed 32-bit timestamp (`0x6a230`) callbacks. No paid compiler or byte equality requirement applies to this implementation.
+
+The source reuses the six existing kind/size descriptors and system event context. It owns the recovered 100-byte short-enum FlashDB object followed by an 80-byte static mutex buffer, with a separate mutex handle. Compile-time assertions check the object and callback ABI. REA's [attribute read](health-db-startup-c-rea.json) confirms name pointer, zero flags, buffer `0x20016970` and size 80. The iterator's naked implementation only receives a compatible five-argument C declaration; its compiled object is unchanged.
+
+Startup preserves the size guard, control/init/mutex/subscription order, zero-extended retained timezone, optional pending flag, retained metadata clear and CRC, local midnight conversion, allocation failure return, query/free/snapshot order and live logging-mode reads. The existing retained helpers and CRC execute as actual C in the test subset.
+
+The [machine-readable review](health-db-startup-c-review.json) records 465 stock/C pairs: startup success and failures, missing/existing/failed mutex creation, invalid/valid retained records, empty timestamps, pending flags, high-bit timezone offsets, logging modes, size limits and direct lock/unlock/time callbacks. Four separately compiled defects fail runtime assertions: a wrong size boundary, signed restored offset, uncleared midnight hour and wrong allocation size. All 732 prior compiled objects remain identical. `make sources-check` passes; 659 application and 74 bootloader units compile and compose without failures or duplicate strong symbols.
+
+The application import count changes from 156 to 159: the initializer resolves while hour-boundary orchestration (`0x5dce8`), time-transition orchestration (`0x5e698`), daily-record replay (`0x88170`) and crash-snapshot restore (`0x59ee4`) become explicit unresolved dependencies. Bootloader imports remain 34. These bodies are not supplied by stubs in the normal build.
+
+The replay explicitly models external FlashDB, RTOS, time/calendar, allocator, logging and remaining callbacks. It binds the existing event context's thread address for the isolated subset. It does not establish flash persistence, scheduler/interrupt behavior, physical startup or a complete firmware link. No source-plan selection or image-integration claim is added.

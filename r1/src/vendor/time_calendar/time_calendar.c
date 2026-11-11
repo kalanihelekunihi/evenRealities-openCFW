@@ -45,6 +45,7 @@
  */
 
 #include "time_calendar/time_calendar.h"
+#include "../../application/runtime/integer_eabi.h"
 
 /* The recovered field offsets are a property of the 32-bit target ABI; on
  * wider host pointer ABIs the C layout legitimately differs, so the exact
@@ -119,10 +120,6 @@ static void cache_invalidate(time_calendar_state *state) {
  * 24-byte dual month-length tables (non-leap row then leap row), one per
  * converter translation unit, at 0x00099C5C (forward converter) and
  * 0x00099C74 (inverse converter).  Bytes read from the rebuilt image. */
-static const uint8_t month_days_forward[24] = {
-    31u, 28u, 31u, 30u, 31u, 30u, 31u, 31u, 30u, 31u, 30u, 31u,
-    31u, 29u, 31u, 30u, 31u, 30u, 31u, 31u, 30u, 31u, 30u, 31u
-};
 static const uint8_t month_days_inverse[24] = {
     31u, 28u, 31u, 30u, 31u, 30u, 31u, 31u, 30u, 31u, 30u, 31u,
     31u, 29u, 31u, 30u, 31u, 30u, 31u, 31u, 30u, 31u, 30u, 31u
@@ -130,7 +127,7 @@ static const uint8_t month_days_inverse[24] = {
 
 /* Stock NULL-output fallback for the forward converter (0x20016AE4): one
  * shared static buffer, returned to the caller. */
-static time_calendar_broken_down unix_to_broken_down_fallback;
+/* Shared fallback and forward conversion are owned by native_calendar_forward.c. */
 
 /* Recovered Gregorian leap rule: divisible by 4 and not by 100, or by 400.
  * (The stock mod-4 miss path still tests mod 400; the rule is identical.) */
@@ -160,52 +157,6 @@ void time_calendar_bind_backend(time_calendar *clock,
     clock->registration.context = context;
     clock->registration.backend_registered = (backend != NULL) ? 1u : 0u;
     clock->state.registered = (backend != NULL) ? 1u : 0u;
-}
-
-time_calendar_broken_down *time_calendar_unix_to_broken_down(
-        uint32_t epoch_seconds, time_calendar_broken_down *out) {
-    if (out == NULL) {
-        out = &unix_to_broken_down_fallback;
-    }
-    uint32_t days = epoch_seconds / TIME_CALENDAR_SECONDS_PER_DAY;
-    const uint32_t day_seconds = epoch_seconds % TIME_CALENDAR_SECONDS_PER_DAY;
-    out->hour = day_seconds / TIME_CALENDAR_SECONDS_PER_HOUR;
-    out->minute =
-        (day_seconds % TIME_CALENDAR_SECONDS_PER_HOUR) /
-        TIME_CALENDAR_SECONDS_PER_MINUTE;
-    out->second = day_seconds % TIME_CALENDAR_SECONDS_PER_MINUTE;
-    /* Iterative year walk from the 1970 epoch; in a leap year a remaining
-     * day count of 365 stays in that year (recovered early break). */
-    uint32_t year = TIME_CALENDAR_EPOCH_YEAR;
-    while (days > 364u) {
-        if (is_leap_year(year)) {
-            if (days < 366u) {
-                break;
-            }
-            ++year;
-            days -= 366u;
-        } else {
-            ++year;
-            days -= 365u;
-        }
-    }
-    out->year = year - 1900u;
-    const uint8_t *table =
-        is_leap_year(year) ? month_days_forward + 12 : month_days_forward;
-    const uint32_t day_of_year = days;
-    /* Month-subtraction walk; the counter wraps at 256 in stock (uxtb). */
-    uint8_t month = 0u;
-    while (table[month] <= days) {
-        days -= table[month];
-        month = (uint8_t)(month + 1u);
-    }
-    out->year_day = day_of_year;
-    out->day = days + 1u;
-    out->month = month;
-    out->weekday =
-        (epoch_seconds / TIME_CALENDAR_SECONDS_PER_DAY + 4u) % 7u;
-    out->zero_tail = 0u;
-    return out;
 }
 
 int32_t time_calendar_broken_down_to_unix(
@@ -262,32 +213,7 @@ uint32_t time_calendar_backend_snapshot(
     return 1u;
 }
 
-uint32_t time_calendar_utc_to_calendar(int32_t epoch_seconds,
-                                       int32_t utc_offset_minutes,
-                                       time_calendar_datetime *out) {
-    if (out == NULL) {
-        return 0u;
-    }
-    /* Recovered 32-bit wrap arithmetic (stock: rsb/lsl scale, add.w). */
-    const uint32_t local = (uint32_t)epoch_seconds +
-        (uint32_t)utc_offset_minutes * TIME_CALENDAR_SECONDS_PER_MINUTE;
-    time_calendar_broken_down broken_down;
-    const time_calendar_broken_down *filled =
-        time_calendar_unix_to_broken_down(local, &broken_down);
-    if (filled == NULL) {
-        /* Unreachable with a valid buffer; stock keeps the same check. */
-        return 0u;
-    }
-    out->year = (uint16_t)(filled->year + 1900u);
-    out->month = (uint8_t)(filled->month + 1u);
-    out->day = (uint8_t)filled->day;
-    out->hour = (uint8_t)filled->hour;
-    out->minute = (uint8_t)filled->minute;
-    out->second = (uint8_t)filled->second;
-    out->weekday = (uint8_t)filled->weekday;
-    return 1u;
-}
-
+/* UTC adapter is owned by the native C kernel and ABI-frame bridge. */
 int32_t time_calendar_to_utc(const time_calendar_datetime *datetime,
                              int32_t utc_offset_minutes) {
     if (datetime == NULL) {
@@ -365,10 +291,11 @@ uint64_t time_calendar_local_day_start(const time_calendar *clock) {
     const uint32_t epoch = time_calendar_backend_timestamp(clock);
     const int32_t offset_seconds =
         (int32_t)clock->state.utc_offset_minutes * 60;
-    /* Recovered: signed 64-bit truncating division (stock __aeabi_ldivmod)
-     * of the zero-extended timestamp plus the sign-extended offset. */
+    /* Recovered signed 64-bit truncating division of the zero-extended
+     * timestamp plus the sign-extended offset. */
     const int64_t local = (int64_t)epoch + (int64_t)offset_seconds;
-    const int64_t quotient = local / (int64_t)TIME_CALENDAR_SECONDS_PER_DAY;
+    const uint64_t quotient = r1_runtime_sdivmod(
+        (uint64_t)local, TIME_CALENDAR_SECONDS_PER_DAY, NULL);
     const uint64_t product =
         (uint64_t)(uint32_t)quotient * TIME_CALENDAR_SECONDS_PER_DAY;
     /* Recovered borrow-free subtract: only the low word loses offset*60. */
@@ -414,8 +341,9 @@ void time_calendar_local_datetime_fill(time_calendar *clock,
     const uint32_t epoch = time_calendar_backend_timestamp(clock);
     const int32_t offset_seconds = (int32_t)state->utc_offset_minutes * 60;
     const int64_t local = (int64_t)epoch + (int64_t)offset_seconds;
-    const int64_t quotient = local / (int64_t)TIME_CALENDAR_SECONDS_PER_DAY;
-    const int64_t remainder = local % (int64_t)TIME_CALENDAR_SECONDS_PER_DAY;
+    uint64_t remainder;
+    const uint64_t quotient = r1_runtime_sdivmod(
+        (uint64_t)local, TIME_CALENDAR_SECONDS_PER_DAY, &remainder);
     const uint32_t day_start =
         (uint32_t)((uint64_t)(uint32_t)quotient *
                    TIME_CALENDAR_SECONDS_PER_DAY) -
@@ -425,7 +353,7 @@ void time_calendar_local_datetime_fill(time_calendar *clock,
         const uint32_t local_low = epoch + (uint32_t)offset_seconds;
         time_calendar_broken_down broken_down;
         const time_calendar_broken_down *filled =
-            time_calendar_unix_to_broken_down(local_low, &broken_down);
+            time_calendar_unix_to_broken_down(&local_low, &broken_down);
         if (filled != NULL) {
             state->cached_year = (uint16_t)(filled->year + 1900u);
             state->cached_month = (uint8_t)(filled->month + 1u);

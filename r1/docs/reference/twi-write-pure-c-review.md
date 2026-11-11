@@ -1,0 +1,11 @@
+# Hardware TWI packet writes use ordinary C
+
+Both packet-write operations in `native_hw_twi_operations.c` now use ordinary C locals and declared arguments. The complete packet-operations unit has no fixed-register declarations, empty assembly or stack helpers. Scratch R2/R3 returns and private frame overlays from the [historical review](twi-packet-write-c-review.md) are retired for the C status API.
+
+NULL requests still return four and closed buses ten. Bulk writes preserve primary 16-bit register/length fields and secondary byte narrowing, pass the declared controller instance, and map any full-width nonzero adapter status to eleven. The length-one fast path reads the input byte before clearing controller state, constructs exactly two outgoing bytes, and waits only when the full TX result is zero. Its final result maps the status low byte to zero/eleven. Primary and secondary short-path waits remain 500 and 100.
+
+The [receipt](twi-write-pure-c-review.json) records 12,480 stock/C cases with modeled legacy TX and 12,480 with the actual stock/C short-write legacy wrappers. Each suite has 7,680 guard/bulk/status cases and 4,800 short-write cases. Coverage includes unaligned requests, length/register boundaries, raw statuses, incoming scratch seeds, live control mutation and ordinary/request/control-memory input aliases. Transfer arguments, transmitted bytes, call order, controller/request/input memory, status, balanced stack, saved registers and masks agree. Four controls with wrong NULL status, widened secondary bulk length, truncated bulk status or full-width short status are rejected.
+
+Bulk register-write adapters, SDK TX and waits remain modeled. The register writer's length-80 saved-register overlap is separate unfinished work; this review does not validate it. Private stack aliases, active provider saved-register contents, arbitrary faults, concurrency, electrical bus response and IRQ timing remain unverified. No byte identity is claimed.
+
+The normal report is `build/sources-goal-r1-twi-write-pure-c/report.json`: 727 units compile without failures or duplicate strong symbols. Imports remain 178 application and 34 bootloader. Only the packet-operations object changed; 726 objects remain unchanged. Both read-wrapper instruction sections are byte unchanged. Both manifests pass `make sources-check`.

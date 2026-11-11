@@ -1,8 +1,7 @@
 #include <stdint.h>
 #include "../board/native_battery_memory.h"
 extern int32_t r1_native_delayed_cancel(void (*)(uint32_t),uint32_t);
-/* Native 84c82 callback is deliberately unresolved; no numeric function pointer
- * substitutes for its missing source body or final-image placement. */
+/* The timeout provider queues the low argument byte through the BLE encoder. */
 extern void r1_protocol_time_timeout_callback(uint32_t);
 extern uintptr_t r1_packet_field12_get(const volatile uint8_t *);
 extern int32_t r1_time_utc_offset_get(void);
@@ -10,8 +9,7 @@ extern uint32_t r1_time_backend_timestamp(void);
 extern uint32_t r1_event_publish(uint32_t,const void *,uint32_t);
 extern uint32_t r1_protocol_send_flag_set_c(uint32_t,uint32_t,uint32_t,uint32_t,uint32_t);
 extern uint32_t r1_protocol_ack_header_send(uint32_t,uint32_t,uint32_t,uint32_t,uint32_t,const void *,uint32_t);
-/* 7bb20 ignores its cached-read status and can consume private-frame history.
- * Keep that provider gate explicit rather than inventing a default record. */
+/* Unavailable cached ring size requests recovery through the C provider. */
 extern uint32_t r1_nv_recovery_needed_query_boundary(void);
 extern uint32_t r1_phone_link_ready_query(void);
 extern uint32_t r1_native_nv_recovery_report_boundary(void);

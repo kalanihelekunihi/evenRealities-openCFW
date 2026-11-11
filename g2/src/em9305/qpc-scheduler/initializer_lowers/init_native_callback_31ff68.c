@@ -1,154 +1,65 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_callback_31ff68\n"
-".type opencfw_em9305_callback_31ff68,@function\n"
-"opencfw_em9305_callback_31ff68:\n"
-"L31ff68:\n"
-"enter_s [r13-r18,blink]\n"
-"L31ff6a:\n"
-"mov_s r14,0x802a54\n"
-"L31ff70:\n"
-"ldh_s r1,[r0,0]\n"
-"L31ff72:\n"
-"ldb r17,[r0,3]\n"
-"L31ff76:\n"
-"ldb_s r2,[r14,0xa]\n"
-"L31ff78:\n"
-"mov_s r13,r0\n"
-"L31ff7a:\n"
-"cmp r1,255\n"
-"L31ff7e:\n"
-"mov_s r15,opencfw_em9305_ext_init_records_3357a8\n"
-"L31ff84:\n"
-"beq_s L31ffa4\n"
-"L31ff86:\n"
-"sub r0,r17,0x1\n"
-"L31ff8a:\n"
-"brlo.nt r0,0x2,L31ffa4\n"
-"L31ff8e:\n"
-"ldb_s r0,[r13,0x2]\n"
-"L31ff90:\n"
-"cmp r0,255\n"
-"L31ff94:\n"
-"beq_s L31ffa4\n"
-"L31ff96:\n"
-"bbit0.nt r2,r1,L31ffbe\n"
-"L31ff9a:\n"
-"ld_s.as r0,[r15,r1]\n"
-"L31ff9c:\n"
-"bl.d opencfw_em9305_child_32003c\n"
-"L31ffa0:\n"
-"mov_s r1,r17\n"
-"L31ffa2:\n"
-"b_s L31ffbe\n"
-"L31ffa4:\n"
-"mov_s r18,0\n"
-"L31ffa6:\n"
-"mov_s r16,r15\n"
-"L31ffa8:\n"
-"bbit0.d.nt r2,r18,L31ffb6\n"
-"L31ffac:\n"
-"mov_s r1,r17\n"
-"L31ffae:\n"
-"bl.d opencfw_em9305_child_32003c\n"
-"L31ffb2:\n"
-"ld_s r0,[r16,0]\n"
-"L31ffb4:\n"
-"ldb_s r2,[r14,0xa]\n"
-"L31ffb6:\n"
-"add_s r18,r18,1\n"
-"L31ffb8:\n"
-"brlo.d.t r18,0x3,L31ffa8\n"
-"L31ffbc:\n"
-"add_s r16,r16,4\n"
-"L31ffbe:\n"
-"ldb_s r0,[r13,0x3]\n"
-"L31ffc0:\n"
-"brne.d.nt r0,0x1,L320038\n"
-"L31ffc4:\n"
-"mov_s r17,0\n"
-"L31ffc6:\n"
-"mov_s r0,0x805c78\n"
-"L31ffcc:\n"
-"ldb_s r1,[r14,0xa]\n"
-"L31ffce:\n"
-"ld_s r13,[r0,0]\n"
-"L31ffd0:\n"
-"mov_s r16,r15\n"
-"L31ffd2:\n"
-"mov_s r18,0\n"
-"L31ffd4:\n"
-"bbit0.nt r1,r18,L31fff0\n"
-"L31ffd8:\n"
-"ld r3,[r13,0xc]\n"
-"L31ffda:\n"
-"ld r2,[r13,0x8]\n"
-"L31ffdc:\n"
-"ldb r5,[r13,5]\n"
-"L31ffe0:\n"
-"ldb r4,[r13,4]\n"
-"L31ffe4:\n"
-"ldb_s r1,[r13,0x6]\n"
-"L31ffe6:\n"
-"bl.d opencfw_em9305_child_31a5bc\n"
-"L31ffea:\n"
-"ld_s r0,[r16,0]\n"
-"L31ffec:\n"
-"brne_s r0,0,L320038\n"
-"L31ffee:\n"
-"ldb_s r1,[r14,0xa]\n"
-"L31fff0:\n"
-"add_s r18,r18,1\n"
-"L31fff2:\n"
-"brlo.d.t r18,0x3,L31ffd4\n"
-"L31fff6:\n"
-"add_s r16,r16,4\n"
-"L31fff8:\n"
-"ld r3,[r13,0xc]\n"
-"L31fffa:\n"
-"ld r2,[r13,0x8]\n"
-"L31fffc:\n"
-"ldb_s r0,[r13,0x6]\n"
-"L31fffe:\n"
-"stb r17,[r14,9]\n"
-"L320002:\n"
-"st_s r3,[r14,0x4]\n"
-"L320004:\n"
-"st_s r2,[r14,0]\n"
-"L320006:\n"
-"stb_s r0,[r14,0x8]\n"
-"L320008:\n"
-"bbit0.d.nt r1,r17,L320030\n"
-"L32000c:\n"
-"mov_s r2,0\n"
-"L32000e:\n"
-"ld_s r13,[r15,0]\n"
-"L320010:\n"
-"ld r0,[0x805c70]\n"
-"L320018:\n"
-"ldh r1,[r13,88]\n"
-"L32001c:\n"
-"mpyuw r1,r1,912\n"
-"L320020:\n"
-"add_s r0,r0,r1\n"
-"L320022:\n"
-"bl.d opencfw_em9305_radio_transfer_31dd88\n"
-"L320026:\n"
-"add_s r1,r13,0x24\n"
-"L320028:\n"
-"bl.d opencfw_em9305_child_3202e0\n"
-"L32002c:\n"
-"mov_s r0,r13\n"
-"L32002e:\n"
-"ldb_s r1,[r14,0xa]\n"
-"L320030:\n"
-"add_s r17,r17,1\n"
-"L320032:\n"
-"brlo.d.t r17,0x3,L320008\n"
-"L320036:\n"
-"add_s r15,r15,4\n"
-"L320038:\n"
-"leave_s [r13-r18,blink,pcl]\n"
-".size opencfw_em9305_callback_31ff68,.-opencfw_em9305_callback_31ff68\n"
-);
+#include <stdint.h>
+
+/* Native 0x31ff68..0x32003a: extended-initiator message handler. The
+ * event (+3) goes to the initiator state machine (32003c) of the record
+ * addressed by the handle (+0) if it is pending in 0x802a5e, or to every
+ * pending record when the handle is 255, the event is 1 or 2, or byte +2
+ * is 255. For event 1 (create), each pending record creates its
+ * connection (31a5bc) from the create parameters (*0x805c78: peer type +6,
+ * address +8/+12, role +4, PHY +5), stopping at the first failure; when
+ * all succeed the peer is stored at 0x802a54..0x802a5c, the done mask
+ * 0x802a5d is cleared and each pending record transfers its connection
+ * (31dd88 into its +88 connection) and starts (3202e0). */
+extern uint8_t *const opencfw_em9305_ext_init_records_3357a8[3];
+extern uint32_t opencfw_em9305_child_32003c(uintptr_t machine,uint32_t event);
+extern uint32_t opencfw_em9305_child_31a5bc(uintptr_t link,uint32_t peer_type,
+    uint32_t peer_low,uint32_t peer_high,uint32_t role,uint32_t phy);
+extern uint32_t opencfw_em9305_radio_transfer_31dd88(uintptr_t slot,
+    uintptr_t input,uintptr_t source);
+extern uint32_t opencfw_em9305_child_3202e0(uintptr_t record);
+
+static inline uint32_t r8(uintptr_t a){return *(volatile uint8_t *)a;}
+static inline uint32_t r32(uintptr_t a){return *(volatile uint32_t *)a;}
+#define RECORD(i) ((uintptr_t)opencfw_em9305_ext_init_records_3357a8[(i)])
+
+void opencfw_em9305_callback_31ff68(uintptr_t message)
+{
+    uint32_t handle=*(volatile uint16_t *)message;
+    uint32_t event=r8(message+3u);
+    uint32_t pending=r8(0x802a5eu);
+    if(handle!=255u&&event-1u>=2u&&r8(message+2u)!=255u){
+        if(((pending>>(handle&31u))&1u)!=0u)
+            (void)opencfw_em9305_child_32003c(RECORD(handle),event);
+    }else{
+        for(uint32_t index=0u;index<3u;++index){
+            if(((pending>>index)&1u)==0u)continue;
+            (void)opencfw_em9305_child_32003c(RECORD(index),event);
+            pending=r8(0x802a5eu);
+        }
+    }
+    if(r8(message+3u)!=1u)return;
+    pending=r8(0x802a5eu);
+    uintptr_t create=r32(0x805c78u);
+    for(uint32_t index=0u;index<3u;++index){
+        if(((pending>>index)&1u)==0u)continue;
+        if(opencfw_em9305_child_31a5bc(RECORD(index),r8(create+6u),r32(create+8u),
+                                       r32(create+12u),r8(create+4u),
+                                       r8(create+5u))!=0u)return;
+        pending=r8(0x802a5eu);
+    }
+    uint32_t high=r32(create+12u),low=r32(create+8u);
+    uint32_t type=r8(create+6u);
+    *(volatile uint8_t *)0x802a5du=0u;
+    *(volatile uint32_t *)0x802a58u=high;
+    *(volatile uint32_t *)0x802a54u=low;
+    *(volatile uint8_t *)0x802a5cu=(uint8_t)type;
+    for(uint32_t index=0u;index<3u;++index){
+        if(((pending>>index)&1u)==0u)continue;
+        uintptr_t record=RECORD(index);
+        uintptr_t connection=r32(0x805c70u)
+                             +*(volatile uint16_t *)(record+88u)*912u;
+        (void)opencfw_em9305_radio_transfer_31dd88(connection,record+36u,0u);
+        (void)opencfw_em9305_child_3202e0(record);
+        pending=r8(0x802a5eu);
+    }
+}

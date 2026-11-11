@@ -1,39 +1,23 @@
-/* Full native dispatcher; table objects remain genuine imports. */
-__asm__(
-    ".text\n"
-    ".balign 4\n"
-    ".global opencfw_em9305_callback_child_31d0fc\n"
-    ".type opencfw_em9305_callback_child_31d0fc,@function\n"
-    "opencfw_em9305_callback_child_31d0fc:\n"
-    "L31d0fc:\n"
-    "enter_s [r13-r14,blink]\n"
-    "L31d0fe:\n"
-    "ldb_s r2,[r0,0x1]\n"
-    "L31d100:\n"
-    "mov_s r13,r0\n"
-    "L31d102:\n"
-    "mov_s r14,r1\n"
-    "L31d104:\n"
-    "asl_s r0,r2,0x5\n"
-    "L31d106:\n"
-    "add2_s r0,r0,r1\n"
-    "L31d108:\n"
-    "ld r1,[r0,opencfw_em9305_dispatch_callbacks_334f70]\n"
-    "L31d110:\n"
-    "breq_s r1,0,L31d118\n"
-    "L31d112:\n"
-    "jl_s.d [r1]\n"
-    "L31d114:\n"
-    "mov_s r0,r13\n"
-    "L31d116:\n"
-    "ldb_s r2,[r13,0x1]\n"
-    "L31d118:\n"
-    "add3_s r14,r14,r2\n"
-    "L31d11a:\n"
-    "ldb r0,[r14,opencfw_em9305_dispatch_transitions_335010]\n"
-    "L31d122:\n"
-    "stb_s r0,[r13,0x1]\n"
-    "L31d124:\n"
-    "leave_s [r13-r14,blink,pcl]\n"
-    ".size opencfw_em9305_callback_child_31d0fc,.-opencfw_em9305_callback_child_31d0fc\n"
-);
+#include <stdint.h>
+
+/* Native 0x31d0fc..0x31d126: dispatcher state machine step. The state byte
+ * lives at object+1; each state row has eight events. Run the row's
+ * callback (if any) on the object, then store and return the next state
+ * from the transition table, indexed by the state re-read after the
+ * callback. The stock call leaves the callback address in r1. */
+extern const uintptr_t opencfw_em9305_dispatch_callbacks_334f70[];
+extern const uint8_t opencfw_em9305_dispatch_transitions_335010[];
+
+uint32_t opencfw_em9305_callback_child_31d0fc(uintptr_t object,uint32_t event)
+{
+    volatile uint8_t *state_slot=(volatile uint8_t *)(object+1u);
+    uint32_t state = *state_slot;
+    uintptr_t callback=opencfw_em9305_dispatch_callbacks_334f70[state*8u+event];
+    if(callback!=0u) {
+        ((void (*)(uintptr_t,uintptr_t))callback)(object,callback);
+        state=*state_slot;
+    }
+    uint32_t next=opencfw_em9305_dispatch_transitions_335010[state*8u+event];
+    *state_slot=(uint8_t)next;
+    return next;
+}

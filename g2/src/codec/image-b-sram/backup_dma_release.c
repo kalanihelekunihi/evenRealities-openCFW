@@ -1,6 +1,8 @@
 /* SPDX-License-Identifier: MIT
  * Image-B DMA channel release 0x10004bc0 and forwarding entry 0x10004c7c.
- * Native 0x10004c7c forwards its live r0, despite Ghidra's void signature.
+ * Evidence: corpus image_b_sram/functions-000.jsonl gx8002_backup_dma_pair
+ * @ 0x10004bc0 (64 B sha 463614c9…), gx8002_dma_release @ 0x10004c7c
+ * (8 B sha ca74de03…); native forwards live r0 (headless void sig wrong).
  */
 #include <stdint.h>
 

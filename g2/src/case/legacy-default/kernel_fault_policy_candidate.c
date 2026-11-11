@@ -8,12 +8,10 @@
 _Noreturn void case_kernel_invariant_failure(uint32_t condition)
 {
     (void)condition;
-    __asm__ volatile("cpsid i\n1: b 1b" ::: "memory");
-    __builtin_unreachable();
+    __asm__ volatile("cpsid i" ::: "memory");for(;;){}
 }
 
 _Noreturn void case_kernel_nesting_underflow(void)
 {
-    __asm__ volatile("cpsid i\n1: b 1b" ::: "memory");
-    __builtin_unreachable();
+    __asm__ volatile("cpsid i" ::: "memory");for(;;){}
 }

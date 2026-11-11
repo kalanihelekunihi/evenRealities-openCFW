@@ -1,0 +1,284 @@
+{
+  "candidate_units": 5,
+  "compiled_units": 5,
+  "selected_regions": [
+    {
+      "payload": "r1-application",
+      "symbol": "r1_yhm_transport_acquire",
+      "start": 169480,
+      "end": 169492,
+      "sha256": "f3948df604db3fb1ac1c46c5c19ec67d56f6615db6c677aecc60da5ff53bd464",
+      "evidence": "r1/symbols/function-frontier.csv",
+      "bindings": {
+        "r1_stock_dispatch_08": 548123,
+        "r1_yhm_transport_context": 536897660
+      },
+      "address": 329224,
+      "match_evidence": {
+        "method": "independently named native entry and all unrelocated bytes, followed by full linked equality",
+        "fixed_bytes": 4,
+        "compiled_pattern_sha256": "f1df0baab9e0634a773e767bbe603d7a040f16f4277512be3bd123a1d5b1977b",
+        "relocations": [
+          {
+            "symbol": "r1_stock_dispatch_08",
+            "offset": 4,
+            "relocation_type": 30,
+            "address": 548123,
+            "role": "native_function"
+          },
+          {
+            "symbol": "r1_yhm_transport_context",
+            "offset": 8,
+            "relocation_type": 2,
+            "address": 536897660,
+            "role": "native_literal_symbol"
+          }
+        ]
+      }
+    },
+    {
+      "payload": "r1-application",
+      "symbol": "r1_yhm_transport_release",
+      "start": 169888,
+      "end": 169900,
+      "sha256": "d3aabf28dfbfd7785a6d4e9668b0fb68beb55e813e40f56e0e0a5a0b871aea2a",
+      "evidence": "r1/symbols/function-frontier.csv",
+      "bindings": {
+        "r1_stock_dispatch_0c": 548027,
+        "r1_yhm_transport_context": 536897660
+      },
+      "address": 329632,
+      "match_evidence": {
+        "method": "independently named native entry and all unrelocated bytes, followed by full linked equality",
+        "fixed_bytes": 4,
+        "compiled_pattern_sha256": "fdad0744d7bed7f49b0611a026af19cba082d56fe5178ab31b0ff21c24d85213",
+        "relocations": [
+          {
+            "symbol": "r1_stock_dispatch_0c",
+            "offset": 4,
+            "relocation_type": 30,
+            "address": 548027,
+            "role": "native_function"
+          },
+          {
+            "symbol": "r1_yhm_transport_context",
+            "offset": 8,
+            "relocation_type": 2,
+            "address": 536897660,
+            "role": "native_literal_symbol"
+          }
+        ]
+      }
+    },
+    {
+      "payload": "r1-application",
+      "symbol": "r1_yhm_block_word_set",
+      "start": 170044,
+      "end": 170056,
+      "sha256": "3c80e36447d74d5ed1ef636cd764aa54ee87eed787de5d3e1397041de8d2c627",
+      "evidence": "r1/symbols/function-frontier.csv",
+      "bindings": {
+        "r1_yhm_transport_context": 536897660
+      },
+      "address": 329788,
+      "match_evidence": {
+        "method": "independently named native entry and all unrelocated bytes, followed by full linked equality",
+        "fixed_bytes": 8,
+        "compiled_pattern_sha256": "73617e4af0bfc66fdecaf24c94c7f1cb620d777dfc491b80c8924311a99ad772",
+        "relocations": [
+          {
+            "symbol": "r1_yhm_transport_context",
+            "offset": 8,
+            "relocation_type": 2,
+            "address": 536897660,
+            "role": "native_literal_symbol"
+          }
+        ]
+      }
+    }
+  ],
+  "source_bytes_added": 36,
+  "added_C_instruction_bytes": 24,
+  "added_literal_bytes": 12,
+  "canonical_source_plan_promoted": true,
+  "hybrid_complete_source": false,
+  "hybrid_totals": {
+    "binary-pull-through": 642345,
+    "source-built": 3815,
+    "resource-file": 248
+  },
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "application_equals_official": true,
+  "qualification_method": "Official qualify_sources.py with input-only source filter; unchanged anchored matching, scalar binding and full linked equality",
+  "candidate_results": [
+    {
+      "source": "r1/src/application/board/native_yhm_transport.c",
+      "compiled": true,
+      "selected": [],
+      "rejections": {
+        "anchored_relocation_pattern_not_exact": 6,
+        "native_symbol_anchor_missing": 2
+      }
+    },
+    {
+      "source": "r1/src/application/board/native_yhm_transport.c",
+      "compiled": true,
+      "selected": [],
+      "rejections": {
+        "anchored_relocation_pattern_not_exact": 6,
+        "native_symbol_anchor_missing": 2
+      }
+    },
+    {
+      "source": "r1/src/application/board/native_yhm_transport.c",
+      "compiled": true,
+      "selected": [],
+      "rejections": {
+        "anchored_relocation_pattern_not_exact": 6,
+        "native_symbol_anchor_missing": 2
+      }
+    },
+    {
+      "source": "r1/src/application/board/native_yhm_transport.c",
+      "compiled": true,
+      "selected": [
+        {
+          "payload": "r1-application",
+          "symbol": "r1_yhm_transport_acquire",
+          "start": 169480,
+          "end": 169492,
+          "sha256": "f3948df604db3fb1ac1c46c5c19ec67d56f6615db6c677aecc60da5ff53bd464",
+          "evidence": "r1/symbols/function-frontier.csv",
+          "bindings": {
+            "r1_stock_dispatch_08": 548123,
+            "r1_yhm_transport_context": 536897660
+          },
+          "address": 329224,
+          "match_evidence": {
+            "method": "independently named native entry and all unrelocated bytes, followed by full linked equality",
+            "fixed_bytes": 4,
+            "compiled_pattern_sha256": "f1df0baab9e0634a773e767bbe603d7a040f16f4277512be3bd123a1d5b1977b",
+            "relocations": [
+              {
+                "symbol": "r1_stock_dispatch_08",
+                "offset": 4,
+                "relocation_type": 30,
+                "address": 548123,
+                "role": "native_function"
+              },
+              {
+                "symbol": "r1_yhm_transport_context",
+                "offset": 8,
+                "relocation_type": 2,
+                "address": 536897660,
+                "role": "native_literal_symbol"
+              }
+            ]
+          }
+        },
+        {
+          "payload": "r1-application",
+          "symbol": "r1_yhm_transport_release",
+          "start": 169888,
+          "end": 169900,
+          "sha256": "d3aabf28dfbfd7785a6d4e9668b0fb68beb55e813e40f56e0e0a5a0b871aea2a",
+          "evidence": "r1/symbols/function-frontier.csv",
+          "bindings": {
+            "r1_stock_dispatch_0c": 548027,
+            "r1_yhm_transport_context": 536897660
+          },
+          "address": 329632,
+          "match_evidence": {
+            "method": "independently named native entry and all unrelocated bytes, followed by full linked equality",
+            "fixed_bytes": 4,
+            "compiled_pattern_sha256": "fdad0744d7bed7f49b0611a026af19cba082d56fe5178ab31b0ff21c24d85213",
+            "relocations": [
+              {
+                "symbol": "r1_stock_dispatch_0c",
+                "offset": 4,
+                "relocation_type": 30,
+                "address": 548027,
+                "role": "native_function"
+              },
+              {
+                "symbol": "r1_yhm_transport_context",
+                "offset": 8,
+                "relocation_type": 2,
+                "address": 536897660,
+                "role": "native_literal_symbol"
+              }
+            ]
+          }
+        },
+        {
+          "payload": "r1-application",
+          "symbol": "r1_yhm_block_word_set",
+          "start": 170044,
+          "end": 170056,
+          "sha256": "3c80e36447d74d5ed1ef636cd764aa54ee87eed787de5d3e1397041de8d2c627",
+          "evidence": "r1/symbols/function-frontier.csv",
+          "bindings": {
+            "r1_yhm_transport_context": 536897660
+          },
+          "address": 329788,
+          "match_evidence": {
+            "method": "independently named native entry and all unrelocated bytes, followed by full linked equality",
+            "fixed_bytes": 8,
+            "compiled_pattern_sha256": "73617e4af0bfc66fdecaf24c94c7f1cb620d777dfc491b80c8924311a99ad772",
+            "relocations": [
+              {
+                "symbol": "r1_yhm_transport_context",
+                "offset": 8,
+                "relocation_type": 2,
+                "address": 536897660,
+                "role": "native_literal_symbol"
+              }
+            ]
+          }
+        }
+      ],
+      "rejections": {
+        "native_symbol_anchor_missing": 2,
+        "anchored_relocation_pattern_not_exact": 3
+      }
+    },
+    {
+      "source": "r1/src/application/board/native_yhm_transport.c",
+      "compiled": true,
+      "selected": [],
+      "rejections": {
+        "anchored_relocation_pattern_not_exact": 6,
+        "native_symbol_anchor_missing": 2
+      }
+    }
+  ],
+  "gcc_check": {
+    "candidate_units": 5,
+    "compiled_units": 4,
+    "selected_regions": 0,
+    "failures": [
+      "dependency discovery failed: cc1: error: argument to '-O' should be a non-negative integer, 'g', 's' or 'fast'\n"
+    ]
+  },
+  "evidence": {
+    "build/goal-r1-yhm-qualification/qualify.py": "91f92587e439ede4cc0b824baadd7a25d72f89f8b97e3e7b8f11c4fe77b693b3",
+    "build/goal-r1-yhm-qualification/qualify-gcc.py": "759338326b619f369983266ba01586596c7e1fc9b143450f998a50454a2465c8",
+    "build/goal-r1-yhm-qualification/gcc-qualified/qualification.json": "cf833fba1a313e9e47909b30bda89dd03c75a455c59b5ae12c36260e6fa49fcc",
+    "build/goal-r1-yhm-qualification/gcc-qualified/source-plan.json": "3da40e3d766877c0b3059bee372f651c1f56681157782eba12ee3076f1834a0f",
+    "build/goal-r1-yhm-qualification/scope.json": "52bce0cce3c4aa04f30f46129931399023151bcd1b7327b255d52c2e88b5f0d5",
+    "build/goal-r1-yhm-qualification/qualified/qualification.json": "da381deb17018904987e52fb3a59443fc4686b97d4e05f7fdce7cd1db0eda394",
+    "build/goal-r1-yhm-qualification/qualified/source-plan.json": "5119557d74a0f2ef7ce84a56677edfdcef745d4ac7ff95bbbe5292a273dad0e6",
+    "build/goal-r1-yhm-qualification/source-plan-before.json": "5fb8ec6a98698030b2c083e4f1eb882337124272718a723b1bf9e7c54339067a",
+    "build/goal-r1-yhm-qualification/merged-source-plan.json": "06994e8e9bd0e33b4d4c96d07f040ecc5e09d2159c7bbbfe20a512fd84c25ced",
+    "build/goal-r1-yhm-qualification/merge-audit.json": "961133ebc5ec0e66126d5d46bfad0e1ebda0822f49af852b3dccbe7e9e103efa",
+    "build/hybrid-goal-r1-yhm-qualification/build-report.json": "f53fb9f9c79747e42101b9fe9aa89e0359371bf21d6e248a901857272e956aac",
+    "build/hybrid-goal-r1-yhm-qualification/coverage.json": "c45535b1e81efc3562b4ad1c87b14fa9f3293e6ff47d926506f7e60bc1d41d86",
+    "build/hybrid-goal-r1-yhm-qualification/payloads/application.bin": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "r1/src/application/board/native_yhm_transport.c": "e1f4650f8b44dbcf91a91e90c2396a6eeccd8a9562322f7d1d0179756867b50f",
+    "r1/src/application/board/native_yhm_state.c": "e9529abd5e4fe3407c99d67a2d69edfdeb0b35da7e55a6cdde5cfc94df5658b2",
+    "r1/src/application/registry/stock_registry.c": "68c16fe9a2fcd328012b8613c9da9aa4cd31bd30df36a55e64e56e7b534246fa",
+    "r1/src/sources.json": "e32450af0ad855a39e15e9c4029af6bc1b267b6f8d10085ad7714c4130b94bcc",
+    "r1/symbols/function-frontier.csv": "52408b80f6826c9aeddd8222b0fc8ad678079d04888a451db10ca5746007fa38",
+    "tools/build/source-plan.json": "06994e8e9bd0e33b4d4c96d07f040ecc5e09d2159c7bbbfe20a512fd84c25ced"
+  }
+}

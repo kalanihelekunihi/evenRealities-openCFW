@@ -1,172 +1,79 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_31fe38\n"
-".type opencfw_em9305_child_31fe38,@function\n"
-"opencfw_em9305_child_31fe38:\n"
-"L31fe38:\n"
-"enter_s [r13-r17,blink]\n"
-"L31fe3a:\n"
-"mov_s r14,r0\n"
-"L31fe3c:\n"
-"add2 r13,r0,0x3f\n"
-"L31fe40:\n"
-"ld r0,[r0,0x4]\n"
-"L31fe42:\n"
-"ldb_s r15,[r14,0x10]\n"
-"L31fe44:\n"
-"ld r17,[r13,36]\n"
-"L31fe48:\n"
-"bl.d opencfw_em9305_scan_current_303f80\n"
-"L31fe4c:\n"
-"st_s r0,[r13,0]\n"
-"L31fe4e:\n"
-"ldh_s r2,[r14,0xa]\n"
-"L31fe50:\n"
-"ldh_s r1,[r14,0x8]\n"
-"L31fe52:\n"
-"add2 r16,r14,0x3d\n"
-"L31fe56:\n"
-"add r0,r0,1228\n"
-"L31fe5a:\n"
-"breq.d.nt r1,r2,L31fe84\n"
-"L31fe5e:\n"
-"st_s r0,[r13,0x4]\n"
-"L31fe60:\n"
-"ld r1,[r17,164]\n"
-"L31fe64:\n"
-"mpyuw r2,r2,625\n"
-"L31fe68:\n"
-"add_s r0,r0,r1\n"
-"L31fe6a:\n"
-"brhs.d.nt r0,r2,L31fe84\n"
-"L31fe6e:\n"
-"mov_s r0,r16\n"
-"L31fe70:\n"
-"bl opencfw_em9305_init_schedule_adjust_312f88\n"
-"L31fe74:\n"
-"breq_s r0,0,L31fe84\n"
-"L31fe76:\n"
-"ld r1,[r14,0x4]\n"
-"L31fe78:\n"
-"bl.d opencfw_em9305_auxiliary_elapsed_303f8c\n"
-"L31fe7c:\n"
-"ld r0,[r13,0]\n"
-"L31fe7e:\n"
-"st r0,[r17,164]\n"
-"L31fe82:\n"
-"leave_s [r13-r17,blink,pcl]\n"
-"L31fe84:\n"
-"ldb_s r1,[r14,0x3]\n"
-"L31fe86:\n"
-"seteq r0,r15,0x2\n"
-"L31fe8a:\n"
-"mov_s r15,0x8019f8\n"
-"L31fe90:\n"
-"asl_s r13,r0\n"
-"L31fe92:\n"
-"brne_s r1,0,L31fed6\n"
-"L31fe94:\n"
-"ldb r1,[r15]\n"
-"L31fe98:\n"
-"mov lp_count,0x3\n"
-"L31fe9c:\n"
-"lp L31feb2\n"
-"L31fea0:\n"
-"add_s r13,r13,1\n"
-"L31fea2:\n"
-"extb_s r0,r13\n"
-"L31fea4:\n"
-"cmp_s r0,2\n"
-"L31fea6:\n"
-"mov.hi r13,0\n"
-"L31feaa:\n"
-"extb_s r0,r13\n"
-"L31feac:\n"
-"bbit1.nt r1,r0,L31feb4\n"
-"L31feb0:\n"
-"nop_s\n"
-"L31feb2:\n"
-"b_s L31fec6\n"
-"L31feb4:\n"
-"ld.as r14,[opencfw_em9305_stream_objects_3357b4,r0]\n"
-"L31febc:\n"
-"stb_s r13,[r15,0x1]\n"
-"L31febe:\n"
-"add2 r16,r14,0x3d\n"
-"L31fec2:\n"
-"ld.as r17,[r14,72]\n"
-"L31fec6:\n"
-"ldb r1,[r17,151]\n"
-"L31feca:\n"
-"bl.d opencfw_em9305_init_channel_next_325720\n"
-"L31fece:\n"
-"ldb r0,[r17,1]\n"
-"L31fed2:\n"
-"stb r0,[r17,1]\n"
-"L31fed6:\n"
-"ldh_s r0,[r14,0x8]\n"
-"L31fed8:\n"
-"ldh_s r1,[r14,0xa]\n"
-"L31feda:\n"
-"brne.d.nt r0,r1,L31feee\n"
-"L31fede:\n"
-"st 0,[r17,164]\n"
-"L31fee2:\n"
-"bl.d opencfw_em9305_auxiliary_insert_313220\n"
-"L31fee6:\n"
-"mov_s r0,r16\n"
-"L31fee8:\n"
-"ld_s r0,[r16,0x8]\n"
-"L31feea:\n"
-"st_s r0,[r14,0x4]\n"
-"L31feec:\n"
-"b_s L31ff24\n"
-"L31feee:\n"
-"ld_s r1,[r16,0x8]\n"
-"L31fef0:\n"
-"mpyuw r0,r0,625\n"
-"L31fef4:\n"
-"ror r2,0x1\n"
-"L31fef8:\n"
-"add_s r0,r0,r1\n"
-"L31fefa:\n"
-"st_s r0,[r14,0x4]\n"
-"L31fefc:\n"
-"st r0,[r16,8]\n"
-"L31ff00:\n"
-"mov_s r1,0\n"
-"L31ff02:\n"
-"bl.d opencfw_em9305_init_schedule_adjust_312f88\n"
-"L31ff06:\n"
-"mov_s r0,r16\n"
-"L31ff08:\n"
-"ldb_s r2,[r15,0x2]\n"
-"L31ff0a:\n"
-"extb_s r1,r13\n"
-"L31ff0c:\n"
-"bbit0.d.nt r2,r1,L31ff1e\n"
-"L31ff10:\n"
-"mov_s r0,1\n"
-"L31ff12:\n"
-"ld r1,[r14,0x4]\n"
-"L31ff14:\n"
-"ld_s r0,[r16,0x8]\n"
-"L31ff16:\n"
-"sub_s r0,r0,r1\n"
-"L31ff18:\n"
-"st r0,[r17,164]\n"
-"L31ff1c:\n"
-"b_s L31ff24\n"
-"L31ff1e:\n"
-"asl_s r0,r0,r1\n"
-"L31ff20:\n"
-"or_s r0,r0,r2\n"
-"L31ff22:\n"
-"stb_s r0,[r15,0x2]\n"
-"L31ff24:\n"
-"stb 0,[r14,3]\n"
-"L31ff28:\n"
-"leave_s [r13-r17,blink,pcl]\n"
-".size opencfw_em9305_child_31fe38,.-opencfw_em9305_child_31fe38\n"
-);
+#include <stdint.h>
+
+/* Native 0x31fe38..0x31ff2a: schedule the next event of a stream link.
+ * Remember the anchor (+4 -> +252) and the deadline (now + 1228 -> +256);
+ * while a latency window is open (+8 != +10) and the accumulated delay of
+ * the session (+288, +164) fits in it, keep the slot. Otherwise, unless the
+ * link is paused (+3), rotate to the next stream enabled in the mask at
+ * 0x8019f8 (starting after slot 0 or 2 by link type +16, current slot in
+ * 0x8019f9, objects from the ROM table 0x3357b4) and hop its channel. Then
+ * either re-insert the node (+244) or step the anchor by +8 * 625 us; the
+ * first run of each stream slot is recorded in 0x8019fa, later runs store
+ * the anchor slip as the session delay. Clears +3. */
+extern uint32_t opencfw_em9305_scan_current_303f80(void);
+extern uint32_t opencfw_em9305_init_schedule_adjust_312f88(uintptr_t,uint32_t,uint32_t);
+extern uint32_t opencfw_em9305_auxiliary_elapsed_303f8c(uint32_t,uint32_t);
+extern uint32_t opencfw_em9305_init_channel_next_325720(uint32_t,uint32_t);
+extern uint32_t opencfw_em9305_auxiliary_insert_313220(uintptr_t);
+extern const uintptr_t opencfw_em9305_stream_objects_3357b4[3];
+
+void opencfw_em9305_child_31fe38(uintptr_t link)
+{
+    volatile uint8_t *streams = (volatile uint8_t *)(uintptr_t)0x8019f8u;
+    uint32_t type = *(volatile uint8_t *)(link + 16u);
+    uintptr_t session = *(volatile uint32_t *)(link + 288u);
+    *(volatile uint32_t *)(link + 252u) = *(volatile uint32_t *)(link + 4u);
+    uint32_t now = opencfw_em9305_scan_current_303f80();
+    uint32_t window = *(volatile uint16_t *)(link + 10u);
+    uint32_t interval = *(volatile uint16_t *)(link + 8u);
+    uintptr_t node = link + 244u;
+    *(volatile uint32_t *)(link + 256u) = now + 1228u;
+    if (interval != window) {
+        uint32_t delay = *(volatile uint32_t *)(session + 164u);
+        uint32_t limit = window * 625u;
+        if (now + 1228u + delay < limit &&
+            opencfw_em9305_init_schedule_adjust_312f88(node, delay, limit) != 0u) {
+            *(volatile uint32_t *)(session + 164u) = opencfw_em9305_auxiliary_elapsed_303f8c(
+                *(volatile uint32_t *)(link + 252u), *(volatile uint32_t *)(link + 4u));
+            return;
+        }
+    }
+    uint32_t slot = type == 2u ? 2u : 0u;
+    if (*(volatile uint8_t *)(link + 3u) == 0u) {
+        uint32_t enabled = streams[0];
+        for (uint32_t tries = 0u; tries < 3u; ++tries) {
+            slot = slot + 1u;
+            if ((slot & 0xffu) > 2u) slot = 0u;
+            if (((enabled >> (slot & 0xffu)) & 1u) != 0u) {
+                link = opencfw_em9305_stream_objects_3357b4[slot & 0xffu];
+                streams[1] = (uint8_t)slot;
+                node = link + 244u;
+                session = *(volatile uint32_t *)(link + 288u);
+                break;
+            }
+        }
+        uint32_t mask = *(volatile uint8_t *)(session + 151u);
+        *(volatile uint8_t *)(session + 1u) =
+            (uint8_t)opencfw_em9305_init_channel_next_325720(*(volatile uint8_t *)(session + 1u), mask);
+    }
+    interval = *(volatile uint16_t *)(link + 8u);
+    window = *(volatile uint16_t *)(link + 10u);
+    *(volatile uint32_t *)(session + 164u) = 0u;
+    if (interval == window) {
+        (void)opencfw_em9305_auxiliary_insert_313220(node);
+        *(volatile uint32_t *)(link + 4u) = *(volatile uint32_t *)(node + 8u);
+    } else {
+        uint32_t anchor = interval * 625u + *(volatile uint32_t *)(node + 8u);
+        *(volatile uint32_t *)(link + 4u) = anchor;
+        *(volatile uint32_t *)(node + 8u) = anchor;
+        (void)opencfw_em9305_init_schedule_adjust_312f88(node, 0u, 0x80000000u);
+        uint32_t seen = streams[2];
+        uint32_t bit = slot & 0xffu;
+        if (((seen >> bit) & 1u) != 0u)
+            *(volatile uint32_t *)(session + 164u) =
+                *(volatile uint32_t *)(node + 8u) - *(volatile uint32_t *)(link + 4u);
+        else
+            streams[2] = (uint8_t)((1u << bit) | seen);
+    }
+    *(volatile uint8_t *)(link + 3u) = 0u;
+}

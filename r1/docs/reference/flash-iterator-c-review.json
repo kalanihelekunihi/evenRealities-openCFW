@@ -1,0 +1,120 @@
+{
+  "schema_version": 1,
+  "report": "build/sources-goal-r1-flash-iterator-reviewed-c/report.json",
+  "native_entry": "0x63ad8",
+  "verification": {
+    "native_main_instruction_bytes_covered": 392,
+    "native_main_uncovered_bytes": [],
+    "stock_C_comparisons": 9903,
+    "C_only_error_cases": 211,
+    "native_TSL_call_return_sites": [
+      "0x63be4",
+      "0x63c0c",
+      "0x63c1e"
+    ],
+    "all_three_native_TSL_sites_observed": true,
+    "actual_C_traversal_and_memory_copy": true,
+    "read_and_lock_callbacks_modeled": true
+  },
+  "leaf_regression": {
+    "paired_cases": 13944,
+    "executions": 27888,
+    "groups": {
+      "last_sector": 3568,
+      "last_tsl": 3404,
+      "next_sector": 3568,
+      "next_tsl": 3404
+    },
+    "source_report": "build/sources-goal-r1-flash-iterator-reviewed-c/report.json",
+    "function_stubs": false,
+    "checks": [
+      "unsigned traversal budget and 32-bit wrap",
+      "forward sector wrap and reverse end-of-device wrap",
+      "entry status byte exact equality to one",
+      "112-byte first-entry boundary, 32-byte entry stride and inclusive forward end",
+      "ordered conditional byte/word reads, unaligned records and null-pointer short circuits/faults",
+      "read-only guards, R0, return SP, saved registers, masks and fresh XPSR"
+    ],
+    "limits": [
+      "Seeded records, not complete iterator or physical flash execution",
+      "Private stack traffic, caller-clobbered registers and flags excluded",
+      "Arbitrary corrupted pointers and asynchronous memory changes unverified"
+    ]
+  },
+  "negative_controls": [
+    {
+      "name": "extra_reverse_probe",
+      "rejected": true
+    },
+    {
+      "name": "ignored_TSL_error",
+      "rejected": true
+    },
+    {
+      "name": "cached_unlock",
+      "rejected": true
+    },
+    {
+      "name": "unsigned_direction",
+      "rejected": true
+    }
+  ],
+  "audit": {
+    "unchanged_nongenerated_objects": 841,
+    "changed_nongenerated_objects": [
+      "r1/src/application/runtime/native_flashdb_iterator.c"
+    ],
+    "changed_generated_objects": [
+      "{gen}/r1_startup_vectors.S",
+      "{gen}/r1_uecc.c"
+    ],
+    "compiled_units": 852,
+    "application_imports": 66,
+    "bootloader_imports": 22,
+    "import_sets_unchanged": true,
+    "assembly_removed": true,
+    "new_persistent_state": false
+  },
+  "contract": [
+    "Preserve initial diagnostics without an early return when init flag is zero. Select direction/start before null callback admission; null callback causes no lock or traversal.",
+    "Lock through live db+28, increment traversal budget with live sector size, preserve cached-sector copy, inclusion tests and one global started-search latch.",
+    "Binary search retains signed time/address comparisons, native32-byte midpoint rounding, exact-match bypass of the extra reverse probe, and reverse correction when a search misses.",
+    "Entries retain signed inclusive range tests, empty-status skipping, borrowed record/argument callback and early termination. Actual C next/last helpers retain their original conditional loads and unsigned arithmetic.",
+    "TSL read failure exits before decoding and reloads the live unlock callback at db+32. Record-address callback mutation affects the subsequent traversal."
+  ],
+  "intentional_C_changes": [
+    "Define three local record buffers rather than exposing native private stack bytes. Seed sector+4 with the current address before a possibly non-writing sector read so error traversal has a defined cursor.",
+    "Preserve the preceding review error exits in ordinary C; no interior-entry labels or fixed register/frame behavior are promised."
+  ],
+  "limits": [
+    "All392 main native instruction bytes execute in9903 normal-entry stock/C comparisons. Read/lock/user callbacks and diagnostics are modeled; real C traversal, memory copy and memory-clear bodies execute.",
+    "211 C-only error cases cover failure at every observed TSL read of four forward/reverse queries, different stack poison and non-writing sector failures. These are not asserted equivalent to stock ignored-error behavior.",
+    "13944 helper comparisons verify original traversal leaves. Callback results obey their declared C bool ABI; arbitrary invalid return encodings, corrupt pointers, callback lifetime abuse and private-stack aliasing are excluded.",
+    "No persistent state or imports added.852 units compile/compose;66 application and22 bootloader imports remain. Physical flash, final linking, startup and boot remain unverified."
+  ],
+  "evidence_files": {
+    "build/sources-goal-r1-flash-iterator-reviewed-c/report.json": "c6a68e4aa5466f89316c9009021479b30c9e6316b3711606ab187745ef7efae5",
+    "build/sources-goal-r1-flash-defined-c/report.json": "ea5cd938699defb0fb0b1bae671a8da334354105d59b303283dafd0a796b2888",
+    "r1/src/application/runtime/native_flashdb_iterator.c": "f9a9dc3bbdc4337ff663260eca20bb84f1746eb76c8139b27a848939d4dc809b",
+    "build/goal-r1-flash-iterator-c/baseline.c": "9a7d4e5629ecf9f90f3cb8947302c88410c16c658e279f3f7dca2ade1c8c1473",
+    "build/goal-r1-flash-iterator-c/rea.json": "59415948991e381752c9ea386b2ca368160645fa249270a39ffa3f5f2fa5f0f4",
+    "build/goal-r1-flash-iterator-c/verify.py": "a3caf180e4828e1209a1d19eb09b84dc283a873a08414310c29f59539701c73a",
+    "build/goal-r1-flash-iterator-c/verification.json": "fae663be8b5db39b87def58ee601989972b2028b3fcd9bea2c682254277713c7",
+    "build/goal-r1-flash-iterator-c/verification.log": "b0801d03437ea9a57b77d0bbe0c3340677cb444b2e7f16e8612652851f88e2f2",
+    "build/goal-r1-flash-iterator-c/negative.py": "f4e2c95c915aafa4b12728f29f2010cd50877455e53725d9fc77c0b42a8b2b58",
+    "build/goal-r1-flash-iterator-c/negative.json": "11709c2487c9caa135e60a2ff07b7ebd3c0ad24ede14903b315b72af527807f5",
+    "build/goal-r1-flash-iterator-c/negative.log": "746f6ab1255b04e907f561b9413a07db0bc2089a55e61c35db84da7c2f3d4faa",
+    "build/goal-r1-flash-iterator-c/leaves/verify.py": "1a8fa75a66c13a2332c320c619304bb5a987b309d68d12d0e1faacd8ebe74839",
+    "build/goal-r1-flash-iterator-c/leaves/results.json": "35e7d679f620293a09ddb21bf812e1b3dfc5aa5cc21be6263366edcf77dca73d",
+    "build/goal-r1-flash-iterator-c/leaves/verification.log": "37b465c6f85198980b154f210d04ddac70ebee93e833be6e52a3cd3492f63230",
+    "build/goal-r1-flash-iterator-c/r1-check.log": "ff00837ff85e19cf04a893c77e51ce602c362675651960cf956f13903b124dc6",
+    "build/goal-r1-flash-iterator-c/extra_reverse_probe/mutant.c": "1f97986715d6a2fd53e27aa7411cd326f573a1ac2f00ad5f8412ff654f130b91",
+    "build/goal-r1-flash-iterator-c/extra_reverse_probe/result.log": "5d284b1f691189270e4b6af31085bf4247cdd4c18199bc177ff57af886b139d6",
+    "build/goal-r1-flash-iterator-c/ignored_TSL_error/mutant.c": "f54c9b7f9bf2d7f55731e8d17f85acd706d765d80191c3ee90a0e078be98dffe",
+    "build/goal-r1-flash-iterator-c/ignored_TSL_error/result.log": "f2ee7a6cbbc2c429bfc43b592873362902ef14f51b13f6c92ad820db851e9dd8",
+    "build/goal-r1-flash-iterator-c/cached_unlock/mutant.c": "c997628d3d04684b29cb6cbe9e7e2147894a65af32b74793e05819ee0fa4fe81",
+    "build/goal-r1-flash-iterator-c/cached_unlock/result.log": "f7209b026f16f367c0c1f4274cddbe5308225a3c102a8592533c011b4dffb39a",
+    "build/goal-r1-flash-iterator-c/unsigned_direction/mutant.c": "5adc4e82a5fcb56ad73509c5bdeb478231748b05ab9e8bd9258c7f314197d22d",
+    "build/goal-r1-flash-iterator-c/unsigned_direction/result.log": "de9f49ac2c0fe4f4395c271614aaa2b6c9a24a846fdf997f44553505bd1a0f15"
+  }
+}

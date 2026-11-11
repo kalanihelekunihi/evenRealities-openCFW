@@ -1,59 +1,46 @@
 #include <stdint.h>
-/* Full native312be4..312c5a; named ISA retains EXTH sign extension,
- * ambient DIVU destinationR11, native R2/R3/R4..R12 exit contract and delay
- * effects. Calls genuine source-owned piece provider by symbol. */
-extern uint32_t opencfw_em9305_radio_duration_312be4(uint32_t,uint32_t,uint32_t,uint32_t,uint32_t,uint32_t,uint32_t,uint32_t);
+
+/* Native 0x312be4..0x312c5a: air time of a payload split into fragments.
+ * Fragment overhead/limit come from the fixed-size flag (66/66) or the
+ * chunk size (chunk/chunk, or 10/5 when 0); a zero fragment size means
+ * 257 minus overhead. A payload within one fragment costs one piece;
+ * otherwise full fragments (count from the quotient, one fewer when the
+ * remainder's low halfword is 0) each cost piece + gap + 300 us, plus a
+ * piece for the remainder. The stock multiplies are 16-bit (signed for
+ * the remainder, unsigned for the fragment count). Callers keep the
+ * divisor nonzero (chunk is never 257). */
 extern uint32_t opencfw_em9305_radio_duration_piece_312b88(uint32_t,uint32_t,uint32_t);
-__asm__(
-".text\n"
-".align 2\n"
-".global opencfw_em9305_radio_duration_312be4\n"
-".type opencfw_em9305_radio_duration_312be4,@function\n"
-"opencfw_em9305_radio_duration_312be4:\n"
-"enter_s [r13-r15,blink]\n"
-"mov_s r12,r2\n"
-"mov_s r9,r0\n"
-"mov_s r2,66\n"
-"brne.d r5,0,1f\n"
-"mov_s r13,66\n"
-"mov_s r2,r7\n"
-"brne.d r7,0,1f\n"
-"mov_s r13,r7\n"
-"mov_s r13,5\n"
-"mov_s r2,10\n"
-"1: mov_s r14,r1\n"
-"brne_s r1,0,2f\n"
-"mov r0,257\n"
-"sub_s r14,r0,r2\n"
-"sub_s r1,r0,r13\n"
-"2: brhs.d r1,r4,3f\n"
-"add_s r2,r2,r14\n"
-"divu r11,r4,r14\n"
-"mov_s r1,r6\n"
-"mpyw r0,r11,r14\n"
-"sub r15,r4,r0\n"
-"exth.f r8,r15\n"
-"mov_s r0,r9\n"
-"bl.d opencfw_em9305_radio_duration_piece_312b88\n"
-"sub.eq r11,r11,1\n"
-"add_s r0,r0,r3\n"
-"add r0,r0,300\n"
-"breq.d r8,0,4f\n"
-"mpywhul r3,r0,r11\n"
-"add_s r0,r15,r13\n"
-"exth_s r2,r0\n"
-"mov_s r0,r9\n"
-"bl.d opencfw_em9305_radio_duration_piece_312b88\n"
-"mov_s r1,r6\n"
-"add_s r3,r3,r0\n"
-"b_s 4f\n"
-"3: add_s r13,r13,r4\n"
-"exth_s r2,r13\n"
-"mov_s r0,r9\n"
-"bl.d opencfw_em9305_radio_duration_piece_312b88\n"
-"mov_s r1,r6\n"
-"mov_s r3,r0\n"
-"4: add_s r0,r3,r12\n"
-"leave_s [r13-r15,blink,pcl]\n"
-".size opencfw_em9305_radio_duration_312be4,.-opencfw_em9305_radio_duration_312be4\n"
-);
+
+uint32_t opencfw_em9305_radio_duration_312be4(uint32_t phy,uint32_t fragment,uint32_t base,
+                                              uint32_t gap,uint32_t length,uint32_t fixed,
+                                              uint32_t mode,uint32_t chunk)
+{
+    uint32_t overhead=66u,tail=66u;
+    if(fixed==0u) {
+        if(chunk!=0u) {
+            overhead=chunk;
+            tail=chunk;
+        } else {
+            overhead=10u;
+            tail=5u;
+        }
+    }
+    uint32_t step=fragment,limit=fragment;
+    if(fragment==0u) {
+        step=257u-overhead;
+        limit=257u-tail;
+    }
+    uint32_t total;
+    if(limit>=length) {
+        total=opencfw_em9305_radio_duration_piece_312b88(phy,mode,(uint16_t)(tail+length));
+    } else {
+        uint32_t count=length/step;
+        uint32_t rest=length-(uint32_t)((int32_t)(int16_t)count*(int16_t)step);
+        if((uint16_t)rest==0u) count-=1u;
+        uint32_t piece=opencfw_em9305_radio_duration_piece_312b88(phy,mode,overhead+step);
+        total=(piece+gap+300u)*(count&0xffffu);
+        if((uint16_t)rest!=0u)
+            total+=opencfw_em9305_radio_duration_piece_312b88(phy,mode,(uint16_t)(rest+tail));
+    }
+    return total+base;
+}

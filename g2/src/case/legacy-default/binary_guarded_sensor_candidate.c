@@ -18,3 +18,7 @@ uint32_t case_binary_guarded_sensor_read(uint32_t selector, void *destination,
     *guard = 0u;
     return 0u;
 }
+/* Dedup (0x080035b8): case_init_selfcheck_read (was startup/application_boot_pmic_read_candidate.c). */
+uint32_t case_init_selfcheck_read(uint32_t selector,uint8_t *out,uint32_t count) __attribute__((alias("case_binary_guarded_sensor_read")));
+/* Dedup (0x080035b8): case_policy_timer_bus_read (was startup/application_policy_timer_query_candidate.c). */
+int32_t case_policy_timer_bus_read(uint32_t reg,uint8_t *out,uint32_t count) __attribute__((alias("case_binary_guarded_sensor_read")));

@@ -1,0 +1,105 @@
+{
+  "normal_report": "build/sources-goal-r1-ship-pure-c/report.json",
+  "report_sha256": "725ef6d2ff44f1d6ad1a00563e0435dc7b59460a1f45ccd5a5c45dcb697dec06",
+  "unit": {
+    "source": "r1/src/application/board/native_ship_mode.c",
+    "payload": "r1-application",
+    "role": "candidate",
+    "toolchain": "clang",
+    "link": true,
+    "expect": "compile",
+    "returncode": 0,
+    "argv": [
+      "/usr/bin/clang",
+      "--target=arm-none-eabi",
+      "-mcpu=cortex-m4",
+      "-mthumb",
+      "-mfpu=fpv4-sp-d16",
+      "-mfloat-abi=hard",
+      "-std=c11",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-fno-strict-aliasing",
+      "-fshort-enums",
+      "-Os",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-fno-delete-null-pointer-checks",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/r1/src/vendor",
+      "-MD",
+      "-MF",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-ship-pure-c/r1/r1-application/r1__src__application__board__native_ship_mode.c.d",
+      "-c",
+      "/Users/kalani/Repo/evenRealities-openCFW/r1/src/application/board/native_ship_mode.c",
+      "-o",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-ship-pure-c/r1/r1-application/r1__src__application__board__native_ship_mode.c.o"
+    ],
+    "source_sha256": "dd5998cdec2003b89ec9ef2fe94553b4232b8d37af70281caf886509ebb31eca",
+    "object_sha256": "75d198e2748de3de85ca7368ed80cd5c62bb992c2f1d392677a9bcb9e1877d97",
+    "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-ship-pure-c/r1/r1-application/r1__src__application__board__native_ship_mode.c.o",
+    "strong": [
+      "nrf_gpio_cfg",
+      "nrf_gpio_pin_port_decode",
+      "r1_ship_mode_pin_pulse"
+    ],
+    "weak": [],
+    "undefined": [
+      "osDelay"
+    ]
+  },
+  "direct": {
+    "decode_pairs": 262,
+    "configuration_pairs": 3310,
+    "whole_pulse_pairs": 10,
+    "real_C_chain": true,
+    "provider_frames_and_live_callee_registers": false,
+    "scratch_register_returns_preserved": false,
+    "limitations": [
+      "osDelay timing/provider modeled",
+      "C caller-clobbered scratch registers and private frames excluded",
+      "No physical GPIO response or scheduling proof"
+    ]
+  },
+  "negative": {
+    "wrong-outset": {
+      "rejected": true,
+      "diagnostic": "arm-none-eabi-ld: warning: (osDelay): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-ship-pure-c/wrong-outset.o\nTraceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-ship-pure-c/verify.py\", line 60, in <module>\n    for mutate in [False,True]:assert a('pulse',[],status,mutate)==b('pulse',[],status,mutate)\n                                                                   ~^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-ship-pure-c/verify.py\", line 49, in run\n    assert state['events']==[['write',0x50000714,4,3],['write',0x50000508,4,32],['delay',200],['write',0x50000714,4,2]],state['events'];assert u.reg_read(UC_ARM_REG_R0)==5\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: [['write', 1342179092, 4, 3], ['write', 1342178572, 4, 32], ['delay', 200], ['write', 1342179092, 4, 2]]\n"
+    },
+    "wrong-delay": {
+      "rejected": true,
+      "diagnostic": "te)\n                                                                   ~^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-ship-pure-c/verify.py\", line 39, in run\n    u.emu_start(root|1,STOP,count=500);assert u.reg_read(UC_ARM_REG_PC)==STOP and u.reg_read(UC_ARM_REG_SP)==SP\n    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 769, in emu_start\n    raise self._hook_exception\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 363, in wrapper\n    return func(uc, *args, **kwargs)\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 1063, in __hook_code_cb\n    callback(uc, address, size, user_data)\n    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-ship-pure-c/verify.py\", line 24, in code\n    assert u.reg_read(UC_ARM_REG_R0)==200\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    "wrong-final-direction": {
+      "rejected": true,
+      "diagnostic": "arm-none-eabi-ld: warning: (osDelay): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-ship-pure-c/wrong-final-direction.o\nTraceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-ship-pure-c/verify.py\", line 60, in <module>\n    for mutate in [False,True]:assert a('pulse',[],status,mutate)==b('pulse',[],status,mutate)\n                                                                   ~^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-ship-pure-c/verify.py\", line 49, in run\n    assert state['events']==[['write',0x50000714,4,3],['write',0x50000508,4,32],['delay',200],['write',0x50000714,4,2]],state['events'];assert u.reg_read(UC_ARM_REG_R0)==5\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: [['write', 1342179092, 4, 3], ['write', 1342178568, 4, 32], ['delay', 200], ['write', 1342179092, 4, 3]]\n"
+    }
+  },
+  "audit": {
+    "changed": [
+      "r1/src/application/board/native_ship_mode.c"
+    ],
+    "unchanged_objects": 726
+  },
+  "rea": [
+    {
+      "path": "build/goal-r1-ship-pure-c/rea-0x50708.json",
+      "sha256": "fd9499938031aa0919106b38aa34258c52928721298c153cddaf96c85aa5ad0f"
+    },
+    {
+      "path": "build/goal-r1-ship-pure-c/rea-0x78dea.json",
+      "sha256": "dbe3d500e8b80567ef7c775a7322570457cc381d776c1da3323119900304bf84"
+    },
+    {
+      "path": "build/goal-r1-ship-pure-c/rea-0x79250.json",
+      "sha256": "a13fd4b1fddd5197428005f63d500d51fd462a0bb0b07a170d80b9d63960cf6e"
+    }
+  ],
+  "limits": [
+    "Delay timing and scheduler modeled",
+    "C ABI consumes status only, scratch-register returns and private frames excluded",
+    "No physical GPIO or ship-mode power measurement"
+  ]
+}

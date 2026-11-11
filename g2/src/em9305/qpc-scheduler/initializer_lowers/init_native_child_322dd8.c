@@ -1,46 +1,32 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_322dd8\n"
-".type opencfw_em9305_child_322dd8,@function\n"
-"opencfw_em9305_child_322dd8:\n"
-"L322dd8:\n"
-"st.aw blink,[sp,-16]\n"
-"L322ddc:\n"
-"mov_s r2,0x805c70\n"
-"L322de2:\n"
-"ld r2,[r2,0]\n"
-"L322de4:\n"
-"stb_s r1,[sp,0x8]\n"
-"L322de6:\n"
-"stb r1,[sp,7]\n"
-"L322dea:\n"
-"sub_s r1,r0,r2\n"
-"L322dec:\n"
-"div r1,r1,912\n"
-"L322df0:\n"
-"ldb r0,[r0,109]\n"
-"L322df4:\n"
-"stb 11,[sp,6]\n"
-"L322df8:\n"
-"stb 0,[sp,13]\n"
-"L322dfc:\n"
-"stb_s r0,[sp,0xc]\n"
-"L322dfe:\n"
-"extb_s r0,r1\n"
-"L322e00:\n"
-"mov_s r1,sp\n"
-"L322e02:\n"
-"sth_s r0,[r1,0xa]\n"
-"L322e04:\n"
-"sth_s r0,[r1,0x4]\n"
-"L322e06:\n"
-"bl.d opencfw_em9305_ll_event_callback_30e79c\n"
-"L322e0a:\n"
-"add_s r0,sp,0x4\n"
-"L322e0c:\n"
-"ld.ab blink,[sp,16]\n"
-"L322e10:\n"
-"j_s [blink]\n"
-".size opencfw_em9305_child_322dd8,.-opencfw_em9305_child_322dd8\n"
-);
+#include <stdint.h>
+
+/* Native 0x322dd8..0x322e12: report LL event 11 for a 912-byte connection
+ * entry (index in the table at *0x805c70) with the status twice and the
+ * entry byte +109. */
+extern uint32_t opencfw_em9305_ll_event_callback_30e79c(uintptr_t);
+
+struct ll_event_11 {
+    uint16_t handle;
+    uint8_t code;
+    uint8_t status;
+    uint8_t status_again;
+    uint8_t reserved;
+    uint16_t handle_again;
+    uint8_t value;
+    uint8_t zero;
+};
+
+uint32_t opencfw_em9305_child_322dd8(uintptr_t entry, uint32_t status)
+{
+    uintptr_t base = *(volatile uint32_t *)(uintptr_t)0x805c70u;
+    struct ll_event_11 event;
+    event.status_again = (uint8_t)status;
+    event.status = (uint8_t)status;
+    uint8_t index = (uint8_t)((int32_t)(entry - base) / 912);
+    event.code = 11u;
+    event.zero = 0u;
+    event.value = *(volatile uint8_t *)(entry + 109u);
+    event.handle_again = index;
+    event.handle = index;
+    return opencfw_em9305_ll_event_callback_30e79c((uintptr_t)&event);
+}

@@ -91,11 +91,11 @@ extern int32_t audio_uart_lv_obj_height_43fdda(void *obj);               /* lv_o
 extern uint32_t audio_uart_page_44104c(uint32_t rgb);                    /* lv_color_hex */
 extern void audio_uart_page_44127e(void *obj, uint32_t color, uint32_t sel); /* bg_color */
 extern void audio_uart_page_44129e(void *obj, uint32_t v, uint32_t sel); /* bg_opa */
-extern void audio_uart_page_44131c(void *obj, uint32_t v, uint32_t sel); /* border_width */
-extern void audio_uart_page_44133a(void *obj, uint32_t v, uint32_t sel); /* outline_width */
-extern void audio_uart_page_441378(void *obj, uint32_t v, uint32_t sel); /* outline_pad */
-extern void audio_uart_page_441386(void *obj, uint32_t v, uint32_t sel); /* shadow_width */
-extern void audio_uart_page_44146a(void *obj, uint32_t v, uint32_t sel); /* radius */
+extern void lv_obj_set_style_border_width(void *obj, uint32_t v, uint32_t sel); /* border_width */
+extern void lv_obj_set_style_outline_width(void *obj, uint32_t v, uint32_t sel); /* outline_width */
+extern void lv_obj_set_style_outline_pad(void *obj, uint32_t v, uint32_t sel); /* outline_pad */
+extern void lv_obj_set_style_shadow_width(void *obj, uint32_t v, uint32_t sel); /* shadow_width */
+extern void lv_obj_set_style_radius(void *obj, uint32_t v, uint32_t sel); /* radius */
 extern void audio_uart_page_44140e(void *obj, uint32_t color, uint32_t sel); /* text_color */
 extern void audio_uart_page_44142e(void *obj, uint32_t v, uint32_t sel); /* text_opa */
 extern void audio_uart_page_44143e(void *obj, const void *font, uint32_t sel); /* text_font */
@@ -171,11 +171,11 @@ static uint32_t obj_ok(void *obj)
 static void plain_style(void *obj)
 {
     audio_uart_page_44129e(obj, 0u, 0u);
-    audio_uart_page_44131c(obj, 0u, 0u);
-    audio_uart_page_44133a(obj, 0u, 0u);
-    audio_uart_page_441386(obj, 0u, 0u);
+    lv_obj_set_style_border_width(obj, 0u, 0u);
+    lv_obj_set_style_outline_width(obj, 0u, 0u);
+    lv_obj_set_style_shadow_width(obj, 0u, 0u);
     lv_obj_set_style_pad_all_5bab2c(obj, 0u, 0u);
-    audio_uart_page_44146a(obj, 0u, 0u);
+    lv_obj_set_style_radius(obj, 0u, 0u);
 }
 
 /* Shows the BLE-off icon when the phone link is down. */
@@ -253,12 +253,12 @@ int32_t layout4_create_5bb36c(void *parent, int32_t x, const g2_layout4_cfg_t *c
     audio_uart_page_43f09a(g2_layout4_root, x, 0);
     audio_uart_page_44127e(g2_layout4_root, audio_uart_page_44104c(0x000000u), 0u);
     audio_uart_page_44129e(g2_layout4_root, 0u, 0u);
-    audio_uart_page_44131c(g2_layout4_root, 0u, 0u);
-    audio_uart_page_44133a(g2_layout4_root, 0u, 0u);
-    audio_uart_page_441378(g2_layout4_root, 0u, 0u);
-    audio_uart_page_441386(g2_layout4_root, 0u, 0u);
+    lv_obj_set_style_border_width(g2_layout4_root, 0u, 0u);
+    lv_obj_set_style_outline_width(g2_layout4_root, 0u, 0u);
+    lv_obj_set_style_outline_pad(g2_layout4_root, 0u, 0u);
+    lv_obj_set_style_shadow_width(g2_layout4_root, 0u, 0u);
     lv_obj_set_style_pad_all_5bab2c(g2_layout4_root, 0u, 0u);
-    audio_uart_page_44146a(g2_layout4_root, 0u, 0u);
+    lv_obj_set_style_radius(g2_layout4_root, 0u, 0u);
     audio_uart_page_44140e(g2_layout4_root, audio_uart_page_44104c(0xffffffu), 0u);
     audio_uart_page_44142e(g2_layout4_root, 0xffu, 0u);
     audio_uart_page_43dfa4(g2_layout4_root, LV_OBJ_FLAG_SCROLLABLE);

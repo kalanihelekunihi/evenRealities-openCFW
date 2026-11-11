@@ -24,7 +24,110 @@ const char r1_bma_config_string_540f4[44] __attribute__((section(".r1.bma.config
 const char r1_bma_config_string_54120[40] __attribute__((section(".r1.bma.config.s54120")))="BMA456 disable fifo header failed: %d";
 const char r1_bma_config_string_54148[52] __attribute__((section(".r1.bma.config.s54148")))="[RING]BMA456 enable advance power save failed: %d";
 const char r1_bma_config_string_5417c[44] __attribute__((section(".r1.bma.config.s5417c")))="BMA456 enable advance power save failed: %d";
-__attribute__((naked)) uint32_t r1_bma4_initialize(void) { __asm__ volatile("push {r2,r3,r4,r5,r6,lr}\nmovs r5,#0\nmov r4,r0\nstrb r5,[sp]\nstrb r5,[sp,#4]\nbl r1_bma4_null_pointer_check\ncmp r0,#0\nbne 2f\nldrb r0,[r4,#8]\ncbz r0,1f\nstrb r5,[r4,#11]\n3: mov r3,r4\nmovs r2,#1\nmov r1,sp\nmovs r0,#0\nbl r1_bma4_read_regs_boundary\ncmp r0,#0\nbne 2f\nldrb r1,[sp]\nstrb r1,[r4]\n2: pop {r2,r3,r4,r5,r6,pc}\n1: movs r0,#1\nstrb r0,[r4,#11]\nmov r2,r0\nmov r3,r4\nadd r1,sp,#4\nmovs r0,#0\nbl r1_bma4_read_regs_boundary\ncmp r0,#0\nbeq 3b\npop {r2,r3,r4,r5,r6,pc}\n"); }
-__attribute__((naked)) uint32_t r1_bma456w_initialize(void) { __asm__ volatile("push {r2,r3,r4,lr}\nldr r1,=r1_bma_default_remap_span\nmov r4,r0\nldrd r0,r1,[r1]\nstrd r0,r1,[sp]\nmov r0,r4\nbl r1_bma4_initialize\ncmp r0,#0\nbne 1f\nldrb r1,[r4]\ncmp r1,#22\nbeq 2f\nsubs r0,r0,#4\n1: pop {r2,r3,r4,pc}\n2: movs r1,#16\nstrb r1,[r4,#12]\nmovs r1,#76\nstrb r1,[r4,#22]\nmovw r1,#5016\nstrh r1,[r4,#48]\nldr r1,[sp]\nstr r1,[r4,#29]\nldrh r1,[sp,#4]\nstrh r1,[r4,#33]\npop {r2,r3,r4,pc}\n"); }
-/* Symbolic native sequence retains the32-byte configuration frame. */
-__attribute__((naked)) uint32_t r1_bma456w_configure_boundary(void) { __asm__ volatile("L_53c6c:\npush {r3,r4,r5,r6,r7,r8,r9,lr}\nL_53c70:\nmov r7, r0\nL_53c72:\nmovs r6, #0x0\nL_53c74:\nldr r0,=r1_bma_context\nL_53c76:\nstr r6, [sp,#0x0]\nL_53c78:\nbl r1_bma_interface_initialize\nL_53c7c:\nmovs r5, r0\nL_53c7e:\nldr r0,=0xc44fc\nL_53c80:\nldr r1,=0xc441c\nL_53c82:\nmov.w r8, #0x4400000\nL_53c86:\nsub.w r0, r0, r1\nL_53c8a:\nlsr.w r0, r0, #0x3\nL_53c8e:\nmov.w r1, #0x1\nL_53c92:\nadd.w r4, r1, r0, lsl #0x10\nL_53c96:\nbeq L_53cc4\nL_53c98:\nbl r1_structured_log_mode_get\nL_53c9c:\nlsls r0, r0, #0x1f\nL_53c9e:\nbne L_53ca8\nL_53ca0:\nbl r1_structured_log_mode_get\nL_53ca4:\nlsls r0, r0, #0x1d\nL_53ca6:\nbpl L_53cb4\nL_53ca8:\nmov r3, r5\nL_53caa:\nldr r2,=r1_bma_config_string_53ed4\nL_53cac:\nldr r1,=r1_bma_config_string_53ed4\nL_53cae:\nmov r0, r8\nL_53cb0:\nbl r1_structured_log_format\nL_53cb4:\nbl r1_structured_log_mode_get\nL_53cb8:\nlsls r0, r0, #0x1e\nL_53cba:\nbpl L_53cfc\nL_53cbc:\nmov r0, r4\nL_53cbe:\nmov r2, r5\nL_53cc0:\nldr r1,=r1_bma_config_string_53efc\nL_53cc2:\nb L_53cf8\nL_53cc4:\nldr r0,=r1_bma_context\nL_53cc6:\nbl r1_bma456w_initialize\nL_53cca:\nmovs r5, r0\nL_53ccc:\nbeq L_53cfe\nL_53cce:\nbl r1_structured_log_mode_get\nL_53cd2:\nlsls r0, r0, #0x1f\nL_53cd4:\nbne L_53cde\nL_53cd6:\nbl r1_structured_log_mode_get\nL_53cda:\nlsls r0, r0, #0x1d\nL_53cdc:\nbpl L_53cea\nL_53cde:\nmov r3, r5\nL_53ce0:\nldr r2,=r1_bma_config_string_53f20\nL_53ce2:\nldr r1,=r1_bma_config_string_53f20\nL_53ce4:\nmov r0, r8\nL_53ce6:\nbl r1_structured_log_format\nL_53cea:\nbl r1_structured_log_mode_get\nL_53cee:\nlsls r0, r0, #0x1e\nL_53cf0:\nbpl L_53cba\nL_53cf2:\nmov r0, r4\nL_53cf4:\nmov r2, r5\nL_53cf6:\nldr r1,=r1_bma_config_string_53f40\nL_53cf8:\nbl nrf_log_frontend_std_1\nL_53cfc:\nb L_53ebe\nL_53cfe:\ncmp r7, #0x19\nL_53d00:\nbeq L_53d0e\nL_53d02:\ncmp r7, #0x32\nL_53d04:\nbeq L_53d38\nL_53d06:\ncmp r7, #0x64\nL_53d08:\nbeq L_53d3c\nL_53d0a:\ncmp r7, #0xc8\nL_53d0c:\nbeq L_53d40\nL_53d0e:\nmovs r0, #0x6\nL_53d10:\nstrb.w r0, [sp,#0x0]\nL_53d14:\nstrb.w r6, [sp,#0x1]\nL_53d18:\nmovs r0, #0x2\nL_53d1a:\nstrb.w r0, [sp,#0x3]\nL_53d1e:\nstrb.w r6, [sp,#0x2]\nL_53d22:\nldr r1,=r1_bma_context\nL_53d24:\nmov r0, sp\nL_53d26:\nbl r1_bma4_set_accel_config\nL_53d2a:\nmovs r5, r0\nL_53d2c:\nbeq L_53d68\nL_53d2e:\nbl r1_structured_log_mode_get\nL_53d32:\nlsls r0, r0, #0x1f\nL_53d34:\nbne L_53d4c\nL_53d36:\nb L_53d44\nL_53d38:\nmovs r0, #0x7\nL_53d3a:\nb L_53d10\nL_53d3c:\nmovs r0, #0x8\nL_53d3e:\nb L_53d10\nL_53d40:\nmovs r0, #0x9\nL_53d42:\nb L_53d10\nL_53d44:\nbl r1_structured_log_mode_get\nL_53d48:\nlsls r0, r0, #0x1d\nL_53d4a:\nbpl L_53d58\nL_53d4c:\nmov r3, r5\nL_53d4e:\nldr r2,=r1_bma_config_string_53f58\nL_53d50:\nldr r1,=r1_bma_config_string_53f58\nL_53d52:\nmov r0, r8\nL_53d54:\nbl r1_structured_log_format\nL_53d58:\nbl r1_structured_log_mode_get\nL_53d5c:\nlsls r0, r0, #0x1e\nL_53d5e:\nbpl L_53cfc\nL_53d60:\nmov r0, r4\nL_53d62:\nmov r2, r5\nL_53d64:\nldr r1,=r1_bma_config_string_53f84\nL_53d66:\nb L_53cf8\nL_53d68:\nldr r1,=r1_bma_context\nL_53d6a:\nmovs r0, #0x1\nL_53d6c:\nbl r1_bma4_set_accel_enable\nL_53d70:\nmovs r5, r0\nL_53d72:\nbeq L_53da0\nL_53d74:\nbl r1_structured_log_mode_get\nL_53d78:\nlsls r0, r0, #0x1f\nL_53d7a:\nbne L_53d84\nL_53d7c:\nbl r1_structured_log_mode_get\nL_53d80:\nlsls r0, r0, #0x1d\nL_53d82:\nbpl L_53d90\nL_53d84:\nmov r3, r5\nL_53d86:\nldr r2,=r1_bma_config_string_53fa8\nL_53d88:\nldr r1,=r1_bma_config_string_53fa8\nL_53d8a:\nmov r0, r8\nL_53d8c:\nbl r1_structured_log_format\nL_53d90:\nbl r1_structured_log_mode_get\nL_53d94:\nlsls r0, r0, #0x1e\nL_53d96:\nbpl L_53cfc\nL_53d98:\nmov r0, r4\nL_53d9a:\nmov r2, r5\nL_53d9c:\nldr r1,=r1_bma_config_string_53fd0\nL_53d9e:\nb L_53cf8\nL_53da0:\nldr r1,=r1_bma_context\nL_53da2:\nmovs r0, #0x0\nL_53da4:\nbl r1_bma4_set_advance_power_save_boundary\nL_53da8:\nmovs r5, r0\nL_53daa:\nbeq L_53dd8\nL_53dac:\nbl r1_structured_log_mode_get\nL_53db0:\nlsls r0, r0, #0x1f\nL_53db2:\nbne L_53dbc\nL_53db4:\nbl r1_structured_log_mode_get\nL_53db8:\nlsls r0, r0, #0x1d\nL_53dba:\nbpl L_53dc8\nL_53dbc:\nmov r3, r5\nL_53dbe:\nldr r2,=r1_bma_config_string_53ff0\nL_53dc0:\nldr r1,=r1_bma_config_string_53ff0\nL_53dc2:\nmov r0, r8\nL_53dc4:\nbl r1_structured_log_format\nL_53dc8:\nbl r1_structured_log_mode_get\nL_53dcc:\nlsls r0, r0, #0x1e\nL_53dce:\nbpl L_53ebe\nL_53dd0:\nmov r0, r4\nL_53dd2:\nmov r2, r5\nL_53dd4:\nldr r1,=r1_bma_config_string_54024\nL_53dd6:\nb L_53cf8\nL_53dd8:\nldr r2,=r1_bma_context\nL_53dda:\nmovs r1, #0x0\nL_53ddc:\nmovs r0, #0x7f\nL_53dde:\nbl r1_bma4_set_fifo_config\nL_53de2:\nmovs r5, r0\nL_53de4:\nbeq L_53e12\nL_53de6:\nbl r1_structured_log_mode_get\nL_53dea:\nlsls r0, r0, #0x1f\nL_53dec:\nbne L_53df6\nL_53dee:\nbl r1_structured_log_mode_get\nL_53df2:\nlsls r0, r0, #0x1d\nL_53df4:\nbpl L_53e02\nL_53df6:\nmov r3, r5\nL_53df8:\nldr r2,=r1_bma_config_string_54054\nL_53dfa:\nldr r1,=r1_bma_config_string_54054\nL_53dfc:\nmov r0, r8\nL_53dfe:\nbl r1_structured_log_format\nL_53e02:\nbl r1_structured_log_mode_get\nL_53e06:\nlsls r0, r0, #0x1e\nL_53e08:\nbpl L_53ebe\nL_53e0a:\nmov r0, r4\nL_53e0c:\nmov r2, r5\nL_53e0e:\nldr r1,=r1_bma_config_string_54080\nL_53e10:\nb L_53cf8\nL_53e12:\nldr r2,=r1_bma_context\nL_53e14:\nmovs r1, #0x1\nL_53e16:\nmovs r0, #0x40\nL_53e18:\nbl r1_bma4_set_fifo_config\nL_53e1c:\nmovs r5, r0\nL_53e1e:\nbeq L_53e4c\nL_53e20:\nbl r1_structured_log_mode_get\nL_53e24:\nlsls r0, r0, #0x1f\nL_53e26:\nbne L_53e30\nL_53e28:\nbl r1_structured_log_mode_get\nL_53e2c:\nlsls r0, r0, #0x1d\nL_53e2e:\nbpl L_53e3c\nL_53e30:\nmov r3, r5\nL_53e32:\nldr r2,=r1_bma_config_string_540a4\nL_53e34:\nldr r1,=r1_bma_config_string_540a4\nL_53e36:\nmov r0, r8\nL_53e38:\nbl r1_structured_log_format\nL_53e3c:\nbl r1_structured_log_mode_get\nL_53e40:\nlsls r0, r0, #0x1e\nL_53e42:\nbpl L_53ebe\nL_53e44:\nmov r0, r4\nL_53e46:\nmov r2, r5\nL_53e48:\nldr r1,=r1_bma_config_string_540d0\nL_53e4a:\nb L_53cf8\nL_53e4c:\nldr r2,=r1_bma_context\nL_53e4e:\nmovs r1, #0x0\nL_53e50:\nmovs r0, #0x10\nL_53e52:\nbl r1_bma4_set_fifo_config\nL_53e56:\nmovs r5, r0\nL_53e58:\nbeq L_53e86\nL_53e5a:\nbl r1_structured_log_mode_get\nL_53e5e:\nlsls r0, r0, #0x1f\nL_53e60:\nbne L_53e6a\nL_53e62:\nbl r1_structured_log_mode_get\nL_53e66:\nlsls r0, r0, #0x1d\nL_53e68:\nbpl L_53e76\nL_53e6a:\nmov r3, r5\nL_53e6c:\nldr r2,=r1_bma_config_string_540f4\nL_53e6e:\nldr r1,=r1_bma_config_string_540f4\nL_53e70:\nmov r0, r8\nL_53e72:\nbl r1_structured_log_format\nL_53e76:\nbl r1_structured_log_mode_get\nL_53e7a:\nlsls r0, r0, #0x1e\nL_53e7c:\nbpl L_53ebe\nL_53e7e:\nmov r0, r4\nL_53e80:\nmov r2, r5\nL_53e82:\nldr r1,=r1_bma_config_string_54120\nL_53e84:\nb L_53cf8\nL_53e86:\nldr r1,=r1_bma_context\nL_53e88:\nmovs r0, #0x1\nL_53e8a:\nbl r1_bma4_set_advance_power_save_boundary\nL_53e8e:\nmovs r5, r0\nL_53e90:\nbeq L_53ec4\nL_53e92:\nbl r1_structured_log_mode_get\nL_53e96:\nlsls r0, r0, #0x1f\nL_53e98:\nbne L_53ea2\nL_53e9a:\nbl r1_structured_log_mode_get\nL_53e9e:\nlsls r0, r0, #0x1d\nL_53ea0:\nbpl L_53eae\nL_53ea2:\nmov r3, r5\nL_53ea4:\nldr r2,=r1_bma_config_string_54148\nL_53ea6:\nldr r1,=r1_bma_config_string_54148\nL_53ea8:\nmov r0, r8\nL_53eaa:\nbl r1_structured_log_format\nL_53eae:\nbl r1_structured_log_mode_get\nL_53eb2:\nlsls r0, r0, #0x1e\nL_53eb4:\nbpl L_53ebe\nL_53eb6:\nmov r0, r4\nL_53eb8:\nmov r2, r5\nL_53eba:\nldr r1,=r1_bma_config_string_5417c\nL_53ebc:\nb L_53cf8\nL_53ebe:\nmovs r0, #0x0\nL_53ec0:\npop.w {r3,r4,r5,r6,r7,r8,r9,pc}\nL_53ec4:\nmovs r0, #0x1\nL_53ec6:\nb L_53ec0\n"); }
+extern int8_t r1_bma4_null_pointer_check(const struct bma4_dev *dev);
+extern uint32_t r1_bma4_read_regs_boundary(uint32_t, uint8_t *, uint32_t,
+                                         struct bma4_dev *);
+uint32_t r1_bma4_initialize(struct bma4_dev *dev)
+{
+ uint8_t chip = 0;
+ uint8_t dummy = 0;
+ uint32_t status = (uint32_t)(int32_t)r1_bma4_null_pointer_check(dev);
+ if (status != 0)
+  return status;
+ volatile struct bma4_dev *live = dev;
+ if (live->intf == 0) {
+  live->dummy_byte = 1;
+  status = r1_bma4_read_regs_boundary(0, &dummy, 1, dev);
+  if (status != 0)
+   return status;
+ } else {
+  live->dummy_byte = 0;
+ }
+ status = r1_bma4_read_regs_boundary(0, &chip, 1, dev);
+ if (status == 0)
+  live->chip_id = chip;
+ return status;
+}
+/* Native remap stores are unaligned word/halfword accesses. May-alias packed
+ * views describe those accesses without assuming natural alignment. */
+struct __attribute__((packed, may_alias)) r1_bma_native_word { uint32_t value; };
+struct __attribute__((packed, may_alias)) r1_bma_native_half { uint16_t value; };
+_Static_assert(offsetof(struct bma4_dev, resolution)==12 &&
+               offsetof(struct bma4_dev, feature_len)==22 &&
+               offsetof(struct bma4_dev, config_size)==48 &&
+               offsetof(struct bma4_dev, remap)==29,
+               "native Bosch device initialization fields");
+uint32_t r1_bma456w_initialize(struct bma4_dev *dev)
+{
+ const uint8_t *span = (const uint8_t *)&r1_bma_default_remap_span;
+ uint32_t low = ((const volatile struct r1_bma_native_word *)span)->value;
+ uint32_t high = ((const volatile struct r1_bma_native_word *)(span+4))->value;
+ uint32_t status = r1_bma4_initialize(dev);
+ if (status != 0)
+  return status;
+ volatile struct bma4_dev *live = dev;
+ if (live->chip_id != 0x16)
+  return UINT32_MAX - 3;
+ live->resolution = 16;
+ live->feature_len = 76;
+ live->config_size = 5016;
+ ((volatile struct r1_bma_native_word *)((uint8_t *)dev+29))->value = low;
+ ((volatile struct r1_bma_native_half *)((uint8_t *)dev+33))->value = (uint16_t)high;
+ return 0;
+}
+
+extern struct bma4_dev r1_bma_context;
+extern uint32_t r1_bma_interface_initialize(struct bma4_dev *);
+extern uint32_t r1_bma4_set_accel_config(struct bma4_accel_config *, struct bma4_dev *);
+extern uint32_t r1_bma4_set_accel_enable(uint32_t, struct bma4_dev *);
+extern uint32_t r1_bma4_set_advance_power_save_boundary(uint32_t, struct bma4_dev *);
+extern uint32_t r1_bma4_set_fifo_config(uint32_t, uint32_t, struct bma4_dev *);
+extern uint32_t r1_structured_log_mode_get(void);
+extern uint32_t r1_structured_log_format(uint32_t, const char *, const char *, ...);
+extern void nrf_log_frontend_std_1(uint32_t, const char *, uint32_t);
+_Static_assert(sizeof(struct bma4_accel_config)==4 &&
+               offsetof(struct bma4_accel_config,odr)==0 &&
+               offsetof(struct bma4_accel_config,bandwidth)==1 &&
+               offsetof(struct bma4_accel_config,perf_mode)==2 &&
+               offsetof(struct bma4_accel_config,range)==3,
+               "native accelerometer configuration bytes");
+static void r1_bma_config_log_failure(const char *ring, const char *sdk, uint32_t status)
+{
+ if ((r1_structured_log_mode_get() & 1u) ||
+     (r1_structured_log_mode_get() & 4u))
+  r1_structured_log_format(UINT32_C(0x04400000), ring, ring, status);
+ if (r1_structured_log_mode_get() & 2u)
+  nrf_log_frontend_std_1(UINT32_C(0x001c0001), sdk, status);
+}
+#define R1_BMA_CONFIG_TRY(call, ring, sdk) do { \
+ uint32_t status = (call); \
+ if (status != 0) { r1_bma_config_log_failure((ring), (sdk), status); return 0; } \
+} while (0)
+uint32_t r1_bma456w_configure_boundary(uint32_t rate)
+{
+ struct bma4_accel_config config = {0};
+ R1_BMA_CONFIG_TRY(r1_bma_interface_initialize(&r1_bma_context),
+                   r1_bma_config_string_53ed4, r1_bma_config_string_53efc);
+ R1_BMA_CONFIG_TRY(r1_bma456w_initialize(&r1_bma_context),
+                   r1_bma_config_string_53f20, r1_bma_config_string_53f40);
+ config.odr = rate == 50 ? 7 : rate == 100 ? 8 : rate == 200 ? 9 : 6;
+ config.bandwidth = 0;
+ config.perf_mode = 0;
+ config.range = 2;
+ R1_BMA_CONFIG_TRY(r1_bma4_set_accel_config(&config, &r1_bma_context),
+                   r1_bma_config_string_53f58, r1_bma_config_string_53f84);
+ R1_BMA_CONFIG_TRY(r1_bma4_set_accel_enable(1, &r1_bma_context),
+                   r1_bma_config_string_53fa8, r1_bma_config_string_53fd0);
+ R1_BMA_CONFIG_TRY(r1_bma4_set_advance_power_save_boundary(0, &r1_bma_context),
+                   r1_bma_config_string_53ff0, r1_bma_config_string_54024);
+ R1_BMA_CONFIG_TRY(r1_bma4_set_fifo_config(0x7f, 0, &r1_bma_context),
+                   r1_bma_config_string_54054, r1_bma_config_string_54080);
+ R1_BMA_CONFIG_TRY(r1_bma4_set_fifo_config(0x40, 1, &r1_bma_context),
+                   r1_bma_config_string_540a4, r1_bma_config_string_540d0);
+ R1_BMA_CONFIG_TRY(r1_bma4_set_fifo_config(0x10, 0, &r1_bma_context),
+                   r1_bma_config_string_540f4, r1_bma_config_string_54120);
+ R1_BMA_CONFIG_TRY(r1_bma4_set_advance_power_save_boundary(1, &r1_bma_context),
+                   r1_bma_config_string_54148, r1_bma_config_string_5417c);
+ return 1;
+}
+#undef R1_BMA_CONFIG_TRY

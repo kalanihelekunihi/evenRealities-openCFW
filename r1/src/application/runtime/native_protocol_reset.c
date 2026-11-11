@@ -5,7 +5,7 @@ extern void __aeabi_memclr(void *,uint32_t);
 extern void r1_native_delayed_schedule(void (*)(uint32_t),uint32_t,uint32_t);
 extern uint32_t r1_event_publish(uint32_t,const void *,uint32_t);
 volatile uint8_t r1_protocol_reset_workspace[640]
- __attribute__((section(".r1.protocol.reset.workspace"),aligned(4)))={0};
+ __attribute__((section(".bss.r1.protocol.reset.workspace"),aligned(4)))={0};
 /* Supplemental callback recovered from native instructions, absent from the
  * locked function ledger. Only its one-byte payload has a public contract. */
 __attribute__((noinline,section(".r1.protocol.reset.callback")))

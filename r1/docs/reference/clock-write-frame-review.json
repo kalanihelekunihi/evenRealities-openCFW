@@ -1,0 +1,416 @@
+{
+  "schema": 1,
+  "scope": "RTC write request uses returned memset buffer to preserve native active R6 in normal Clang profile",
+  "native_entry": "0x50df0",
+  "native_code_bytes": 40,
+  "literal_bytes": 4,
+  "normal_build": {
+    "report": "build/sources-goal-r1-clock-write-frame/report.json",
+    "units": 576,
+    "unit": {
+      "source": "r1/src/application/board/native_clock_port.c",
+      "payload": "r1-application",
+      "role": "candidate",
+      "toolchain": "clang",
+      "link": false,
+      "expect": "compile",
+      "returncode": 0,
+      "argv": [
+        "/usr/bin/clang",
+        "--target=arm-none-eabi",
+        "-mcpu=cortex-m4",
+        "-mthumb",
+        "-munaligned-access",
+        "-mfpu=fpv4-sp-d16",
+        "-mfloat-abi=hard",
+        "-std=c11",
+        "-Os",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-fshort-enums",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-fno-delete-null-pointer-checks",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/r1/src/vendor",
+        "-isystem",
+        "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
+        "-MD",
+        "-MF",
+        "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-clock-write-frame/r1/r1-application/r1__src__application__board__native_clock_port.c.d",
+        "-c",
+        "/Users/kalani/Repo/evenRealities-openCFW/r1/src/application/board/native_clock_port.c",
+        "-o",
+        "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-clock-write-frame/r1/r1-application/r1__src__application__board__native_clock_port.c.o"
+      ],
+      "source_sha256": "1250cf24374db234e9b8206bda5d7b0df26a02cee71716146219cb3eccdf2e4e",
+      "object_sha256": "2c3c16396680705021aa5ccc0eab6ed8e8c2d5c62890f95e405eed1fc376f73c",
+      "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-clock-write-frame/r1/r1-application/r1__src__application__board__native_clock_port.c.o",
+      "strong": [
+        "r1_clock_backend_bind_tick",
+        "r1_clock_backend_slot12",
+        "r1_clock_backend_update",
+        "r1_clock_rtc_bind",
+        "r1_clock_rtc_write"
+      ],
+      "weak": [],
+      "undefined": [
+        "__aeabi_memclr4",
+        "memcpy",
+        "memset",
+        "r1_stock_dispatch_10",
+        "r1_stock_dispatch_14",
+        "r1_stock_dispatch_20",
+        "r1_structured_rtc_device"
+      ]
+    },
+    "executed_provider_units": [
+      {
+        "source": "r1/src/application/registry/stock_registry.c",
+        "payload": "r1-application",
+        "role": "candidate",
+        "toolchain": "clang",
+        "link": true,
+        "expect": "compile",
+        "returncode": 0,
+        "argv": [
+          "/usr/bin/clang",
+          "--target=arm-none-eabi",
+          "-mcpu=cortex-m4",
+          "-mthumb",
+          "-mfpu=fpv4-sp-d16",
+          "-mfloat-abi=hard",
+          "-std=c11",
+          "-ffreestanding",
+          "-fno-builtin",
+          "-fno-strict-aliasing",
+          "-fshort-enums",
+          "-Os",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-fno-delete-null-pointer-checks",
+          "-I/Users/kalani/Repo/evenRealities-openCFW/r1/src/vendor",
+          "-MD",
+          "-MF",
+          "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-clock-write-frame/r1/r1-application/r1__src__application__registry__stock_registry.c.d",
+          "-c",
+          "/Users/kalani/Repo/evenRealities-openCFW/r1/src/application/registry/stock_registry.c",
+          "-o",
+          "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-clock-write-frame/r1/r1-application/r1__src__application__registry__stock_registry.c.o"
+        ],
+        "source_sha256": "68c16fe9a2fcd328012b8613c9da9aa4cd31bd30df36a55e64e56e7b534246fa",
+        "object_sha256": "175d6466bae4ab8e9b27119821c03fa48218b94898bfe062722fc2b14315a025",
+        "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-clock-write-frame/r1/r1-application/r1__src__application__registry__stock_registry.c.o",
+        "strong": [
+          "r1_stock_dispatch_00",
+          "r1_stock_dispatch_08",
+          "r1_stock_dispatch_0c",
+          "r1_stock_dispatch_10",
+          "r1_stock_dispatch_14",
+          "r1_stock_dispatch_18",
+          "r1_stock_dispatch_20",
+          "r1_stock_registry_find",
+          "r1_stock_registry_head",
+          "r1_stock_registry_register"
+        ],
+        "weak": [],
+        "undefined": [
+          "strcmp"
+        ]
+      },
+      {
+        "source": "r1/src/application/runtime/memory_eabi.c",
+        "payload": "r1-application",
+        "role": "candidate",
+        "toolchain": "clang",
+        "link": true,
+        "expect": "compile",
+        "returncode": 0,
+        "argv": [
+          "/usr/bin/clang",
+          "--target=arm-none-eabi",
+          "-mcpu=cortex-m4",
+          "-mthumb",
+          "-mfpu=fpv4-sp-d16",
+          "-mfloat-abi=hard",
+          "-std=c11",
+          "-Os",
+          "-ffreestanding",
+          "-fno-builtin",
+          "-fno-strict-aliasing",
+          "-fshort-enums",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-I/Users/kalani/Repo/evenRealities-openCFW/r1/src/config/runtime",
+          "-isystem",
+          "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
+          "-MD",
+          "-MF",
+          "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-clock-write-frame/r1/r1-application/r1__src__application__runtime__memory_eabi.c.d",
+          "-c",
+          "/Users/kalani/Repo/evenRealities-openCFW/r1/src/application/runtime/memory_eabi.c",
+          "-o",
+          "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-clock-write-frame/r1/r1-application/r1__src__application__runtime__memory_eabi.c.o"
+        ],
+        "source_sha256": "c765c32169b5f2242d4d8623780f36ca75247a09db0ca628679b47ada95e4c0d",
+        "object_sha256": "e7e21f3a870f58f3f737670140ae73fdcb6219d2abbef954d6ed8fe7644c817f",
+        "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-clock-write-frame/r1/r1-application/r1__src__application__runtime__memory_eabi.c.o",
+        "strong": [
+          "__aeabi_memclr",
+          "__aeabi_memclr4",
+          "__aeabi_memclr8",
+          "__aeabi_memcpy4"
+        ],
+        "weak": [],
+        "undefined": [
+          "memcpy",
+          "memset"
+        ]
+      },
+      {
+        "source": "third-party/upstream/musl-memory-1.2.5/memset.c",
+        "payload": "r1-application",
+        "role": "upstream",
+        "toolchain": "clang",
+        "link": true,
+        "expect": "compile",
+        "returncode": 0,
+        "argv": [
+          "/usr/bin/clang",
+          "--target=arm-none-eabi",
+          "-mcpu=cortex-m4",
+          "-mthumb",
+          "-mfpu=fpv4-sp-d16",
+          "-mfloat-abi=hard",
+          "-std=c11",
+          "-Os",
+          "-ffreestanding",
+          "-fno-builtin",
+          "-fno-strict-aliasing",
+          "-fshort-enums",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-I/Users/kalani/Repo/evenRealities-openCFW/r1/src/config/runtime",
+          "-isystem",
+          "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
+          "-MD",
+          "-MF",
+          "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-clock-write-frame/r1/r1-application/third-party__upstream__musl-memory-1.2.5__memset.c.d",
+          "-c",
+          "/Users/kalani/Repo/evenRealities-openCFW/third-party/upstream/musl-memory-1.2.5/memset.c",
+          "-o",
+          "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-clock-write-frame/r1/r1-application/third-party__upstream__musl-memory-1.2.5__memset.c.o"
+        ],
+        "source_sha256": "2a74d9e7f988945e0d691d480b78d77a228da0d2be401c1000637cc879b2c0be",
+        "object_sha256": "6c2f1a8f480c27d5bc20f79ac535dac28fbbdcaec12e69bad96721f724ec9057",
+        "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-clock-write-frame/r1/r1-application/third-party__upstream__musl-memory-1.2.5__memset.c.o",
+        "strong": [
+          "memset"
+        ],
+        "weak": [],
+        "undefined": []
+      }
+    ]
+  },
+  "audit": {
+    "other_objects_unchanged": 575,
+    "other_four_clock_functions_bytes_and_relocations_unchanged": true,
+    "changed_function": "r1_clock_rtc_write",
+    "new_instructions_bytes": 46,
+    "old_instructions_bytes": 48,
+    "new_inline_assembly": false,
+    "application_imports": 164,
+    "bootloader_imports": 34,
+    "import_sets_unchanged": true
+  },
+  "validation": {
+    "paired_cases": 480,
+    "executions": 960,
+    "actual_C": [
+      "RTC write request",
+      "pinned musl memset",
+      "existing registry dispatch"
+    ],
+    "checks": [
+      "80-byte provider depth and 64-byte request",
+      "active R4=offset R5=epoch and R6-R11 preserved at clear/dispatch/handler",
+      "epoch word +44 and truncated offset halfword +48",
+      "status propagation, null device, missing operation, null table fault, request mutation and cached-device replacement",
+      "final callee-saved registers and interrupt masks"
+    ],
+    "limits": [
+      "Clear normalized by zeroing contract; internal write widths/order excluded",
+      "Private save/padding slots and their aliases excluded",
+      "Null-table dispatch scratch registers and physical exception delivery excluded",
+      "No RTC hardware or exact write-request instruction identity"
+    ]
+  },
+  "negative_controls": [
+    {
+      "mutation": "wrong-offset",
+      "rejected": true
+    },
+    {
+      "mutation": "short-clear",
+      "rejected": true
+    },
+    {
+      "mutation": "old R6 buffer carrier",
+      "rejected": true
+    }
+  ],
+  "frame": {
+    "native_total_bytes": 80,
+    "native_local_and_padding_bytes": 68,
+    "native_saved_bytes": 12,
+    "Clang_local_bytes": 64,
+    "Clang_saved_bytes": 16,
+    "request_pointer_offset": -80,
+    "active_R4_offset_R5_epoch_R6_R11_incoming": true,
+    "private_save_layout_equal": false
+  },
+  "REA": {
+    "evidence_id": "ev_0ba0c52fdcc913ff5126f98e15c955a1f25de83ee057e846116e8e39a27f4b67",
+    "subject": {
+      "name": "stock.elf",
+      "digest": {
+        "sha256": "25b4a29af80ec8edab5bd861ba9b74a6e22eab29dc3d7a809a16869e8a140f04"
+      },
+      "local_path": "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-queue-reset-c/stock.elf",
+      "format": "elf",
+      "architecture": "arm"
+    },
+    "provider": {
+      "id": "ghidra",
+      "name": "Ghidra",
+      "version": "12.1.4"
+    },
+    "analysis_profile": {
+      "provider": {
+        "id": "ghidra",
+        "name": "Ghidra",
+        "version": "12.1.4"
+      },
+      "parameters": {
+        "target_kind": "executable",
+        "target_format": "elf",
+        "architecture": "arm",
+        "available_architectures": [
+          "arm"
+        ],
+        "import_mode": "ephemeral-source-immutable",
+        "annotation_policy": "atomic-function-entry-metadata-v1",
+        "load_image_observations": "source-mappings-entry-context-v2",
+        "function_body_evidence": "complete-inclusive-ranges-v1",
+        "function_references": "complete-body-and-entry-reference-manager-v2",
+        "call_relationship_coverage": "function-body-call-coverage-v5",
+        "function_dossier_coverage": "observed-facets-and-call-relationships-v1",
+        "string_inventory_evidence": "defined-data-coverage-v1",
+        "location_resolution": "explicit-address-exact-entry-symbol-first-v3",
+        "procedure_file_offset_resolution": "address-first-unique-target-source-mapping-v2",
+        "instruction_flow_evidence": "decoded-return-pcode-v1",
+        "instruction_references": "exact-address-incoming-v1",
+        "function_boundary_observations": "ghidra-function-boundary-limitations-v3",
+        "no_return_repair": "returning-imports-decoded-return-v2",
+        "process_launch": "inspected-jvm-launch-support-v1",
+        "jump_table_evidence": "typed-case-default-blocks-v1",
+        "decompiler_jump_loads": true,
+        "loader": "auto-from-header",
+        "language_id": "auto-from-header",
+        "compiler_spec_id": "auto-default",
+        "analyzer_preset": "ghidra-default"
+      },
+      "digest": "7e46711069eea041af1b9b99e34115c13332795e5cda76e584a722f529ec70de"
+    },
+    "predicate_type": "rea.analysis",
+    "operation": "read_bytes",
+    "parameters": {
+      "address": "0x50df0",
+      "length": 44
+    },
+    "raw_result": {
+      "address": "0x50df0",
+      "requested_bytes": 44,
+      "returned_bytes": 44,
+      "bytes_hex": "30b591b00c46054640216846d6f7d5fc05480b95adf8304000236a461946006834f0caff11b030bd90760020",
+      "complete": true
+    },
+    "normalized_result": {
+      "address": "0x50df0",
+      "requested_bytes": 44,
+      "returned_bytes": 44,
+      "bytes_hex": "30b591b00c46054640216846d6f7d5fc05480b95adf8304000236a461946006834f0caff11b030bd90760020",
+      "complete": true
+    },
+    "confidence": "observed",
+    "authority": "shipped-artifact",
+    "environment": null,
+    "limitations": [
+      "The session serves operations only after Ghidra reports default auto-analysis complete; incomplete analysis does not expose partial results.",
+      "The imported Program and temporary project are ephemeral and deleted on close. Annotation operations edit session database metadata; original executable bytes are never written.",
+      "Cancelling an active Ghidra request terminates its ephemeral database and discards session annotations. The selected target remains open; the next provider query imports the original artifact again.",
+      "Default-space addresses use lowercase 0x-prefixed hexadecimal; other address spaces use <percent-encoded-space>:0x<hex>.",
+      "Bytes reflect Ghidra's initialized memory, including loader fixups. Reads stop at an unmapped or uninitialized byte and report completeness explicitly.",
+      "macOS sessions require a matching executable Ghidra native decompiler; REA checks for it but does not build native components or change Gatekeeper quarantine state."
+    ],
+    "relationship_coverage": null,
+    "locations": [],
+    "evidence_links": []
+  },
+  "qualification": {
+    "generic": {
+      "report": "build/goal-r1-clock-write-frame/qualified-generic/qualification.json",
+      "compiled_units": 5,
+      "selected_symbols": [
+        "r1_clock_backend_bind_tick",
+        "r1_clock_backend_update",
+        "r1_clock_rtc_bind"
+      ],
+      "new_write_regions": 0
+    },
+    "gcc": {
+      "report": "build/goal-r1-clock-write-frame/qualified-gcc/qualification.json",
+      "compiled_units": 4,
+      "selected_symbols": [
+        "r1_clock_backend_bind_tick",
+        "r1_clock_backend_update"
+      ],
+      "new_write_regions": 0
+    }
+  },
+  "canonical_hybrid": {
+    "report": "build/hybrid-goal-r1-clock-write-frame/build-report.json",
+    "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "source_completeness_proven": false,
+    "source_plan_unchanged": true,
+    "source_built_bytes_including_assembly_and_data": 3999,
+    "binary_fallback_bytes": 642161,
+    "resource_bytes": 248
+  },
+  "probe_hashes": {
+    "build/goal-r1-clock-write-frame/verify.py": "41565575a96854523c4bc3bfcee7bde7c2b65a4014ca9e8347ecfdc01efd6e6c",
+    "build/goal-r1-clock-write-frame/audit.py": "0070ff9a82554f7ec8754cbd19a8b1da6e2e149b6163512767b3e39e63c2fe86",
+    "build/goal-r1-clock-write-frame/negative.py": "1b8dc32bfcdd361b4f17377f0cbc1921121de12c8c658213ee27850891426292",
+    "build/goal-r1-clock-write-frame/rea.json": "35cbc5d5d5227ca6978c7c8523278b80e261d8f60f37a19dfe66c4a9edc82dc7"
+  },
+  "limitations": [
+    "Active register boundary proof applies to recorded normal Clang profile, not GCC9 behavior.",
+    "Clear normalized by zeroing contract; internal store widths/order and raw clear return differ.",
+    "Private save/padding slots and their aliases excluded.",
+    "Null-table dispatch scratch registers and physical exception delivery excluded.",
+    "Registered RTC write operation modeled; actual pinned memset and C registry dispatch execute.",
+    "No hardware RTC execution, exact write-region qualification or complete source-only firmware.",
+    "Intermediate request-store/cached-load order, asynchronous observers and concurrency are outside provider-boundary proof."
+  ]
+}

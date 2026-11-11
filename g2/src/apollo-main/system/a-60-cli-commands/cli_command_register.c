@@ -1,10 +1,9 @@
-/* FreeRTOS-Plus-CLI command registration stubs for the product shell commands.
- * Stock source paths not proven by strings; each stub follows its command interpreter in a
- * prvCommand_*.c file under D:\01_workspace\s200_ap510b_iar_git\kernel\FreeRTOS-Plus-CLI\prvCommand\
- * (compare prvCommand_filesystem.c). They are collected here until those interpreters are
- * reconstructed; move each stub into its interpreter's unit then.
- * The shell task shell_task_541600 calls them in this order at 0x541640..0x541658, right after
- * cli_register_terminal_command_5836b8 (cli_terminal_command.c).
+/* FreeRTOS-Plus-CLI command registration for product shell commands.
+ * Evidence: shell_task_541600 call sites 0x541640..0x541658 after
+ * cli_register_terminal_command_5836b8; CLI_Command_Definition_t records at
+ * listed RAM addresses (decoded from 0x20000000 init stream). Collected here
+ * until each moves into its prvCommand_*.c interpreter unit
+ * (D:\01_workspace\s200_ap510b_iar_git\kernel\FreeRTOS-Plus-CLI\prvCommand\).
  *
  * The CLI_Command_Definition_t records live in initialised RAM (decoded from the 0x20000000
  * init stream); the fourth word is cExpectedNumberOfParameters (-1 = variable):

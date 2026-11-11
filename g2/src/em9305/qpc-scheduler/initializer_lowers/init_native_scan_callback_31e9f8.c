@@ -1,143 +1,57 @@
-/* Full native scan enqueue callback; sparse packet writes and ownership order retained. */
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_scan_callback_31e9f8\n"
-".type opencfw_em9305_scan_callback_31e9f8,@function\n"
-"opencfw_em9305_scan_callback_31e9f8:\n"
-"L31e9f8:\n"
-"enter_s [r13-r15,blink]\n"
-"L31e9fa:\n"
-"ld_s r13,[r0,0x2c]\n"
-"L31e9fc:\n"
-"add2 r14,r13,0x26\n"
-"L31ea00:\n"
-"ldb r0,[r14,32]\n"
-"L31ea04:\n"
-"brhs.d.nt r0,0x7,L31eac4\n"
-"L31ea08:\n"
-"mov_s r1,0x47\n"
-"L31ea0a:\n"
-"bbit0.nt r1,r0,L31eac4\n"
-"L31ea0e:\n"
-"mov_s r0,0x805cac\n"
-"L31ea14:\n"
-"ld r0,[r0,0]\n"
-"L31ea16:\n"
-"ldb r1,[0x805b01]\n"
-"L31ea1e:\n"
-"ldb_s r0,[r0,0xe]\n"
-"L31ea20:\n"
-"brhs.nt r1,r0,L31eac4\n"
-"L31ea24:\n"
-"bl.d opencfw_em9305_wsf_event_allocate\n"
-"L31ea28:\n"
-"ldb r0,[r13,150]\n"
-"L31ea2c:\n"
-"breq.d.nt r0,0,L31eac4\n"
-"L31ea30:\n"
-"mov_s r15,r0\n"
-"L31ea32:\n"
-"ld_s r1,[r13,0x64]\n"
-"L31ea34:\n"
-"ldb_s r0,[r14,0]\n"
-"L31ea36:\n"
-"stb r0,[r1,39]\n"
-"L31ea3a:\n"
-"ldb r0,[r13,187]\n"
-"L31ea3e:\n"
-"ldb r1,[r13,186]\n"
-"L31ea42:\n"
-"cmp_s r0,r1\n"
-"L31ea44:\n"
-"mov_s r0,1\n"
-"L31ea46:\n"
-"bne_s L31ea5c\n"
-"L31ea48:\n"
-"ld r0,[r14,0x14]\n"
-"L31ea4a:\n"
-"ld r1,[r14,0x1c]\n"
-"L31ea4c:\n"
-"ld r3,[r14,0x10]\n"
-"L31ea4e:\n"
-"ld r2,[r14,0x18]\n"
-"L31ea50:\n"
-"xor_s r1,r1,r0\n"
-"L31ea52:\n"
-"xor r0,r2,r3\n"
-"L31ea56:\n"
-"or_s r0,r0,r1\n"
-"L31ea58:\n"
-"setne r0,r0,0\n"
-"L31ea5c:\n"
-"ld_s r1,[r13,0x64]\n"
-"L31ea5e:\n"
-"stb r0,[r1,40]\n"
-"L31ea62:\n"
-"ld r0,[r14,0x4]\n"
-"L31ea64:\n"
-"ld_s r1,[r13,0x64]\n"
-"L31ea66:\n"
-"stb r0,[r1,41]\n"
-"L31ea6a:\n"
-"ld r0,[r14,0x4]\n"
-"L31ea6c:\n"
-"ld_s r1,[r13,0x64]\n"
-"L31ea6e:\n"
-"mov_s r14,0x805b0c\n"
-"L31ea74:\n"
-"lsr_s r0,r0,0x8\n"
-"L31ea76:\n"
-"stb r0,[r1,42]\n"
-"L31ea7a:\n"
-"ldh r0,[r13,158]\n"
-"L31ea7e:\n"
-"ld_s r1,[r13,0x64]\n"
-"L31ea80:\n"
-"stb r0,[r1,43]\n"
-"L31ea84:\n"
-"ldb r0,[r13,159]\n"
-"L31ea88:\n"
-"ld_s r1,[r13,0x64]\n"
-"L31ea8a:\n"
-"stb r0,[r1,44]\n"
-"L31ea8e:\n"
-"ldb r0,[r13,189]\n"
-"L31ea92:\n"
-"ld_s r2,[r13,0x64]\n"
-"L31ea94:\n"
-"cmp_s r0,0\n"
-"L31ea96:\n"
-"mov_s r0,0x805000\n"
-"L31ea9c:\n"
-"beq_s L31eaac\n"
-"L31ea9e:\n"
-"bl.d opencfw_em9305_ll_event_enqueue\n"
-"L31eaa2:\n"
-"mov_s r1,0\n"
-"L31eaa4:\n"
-"ldb_s r0,[r14,0xc]\n"
-"L31eaa6:\n"
-"mov r1,256\n"
-"L31eaaa:\n"
-"b_s L31eaba\n"
-"L31eaac:\n"
-"add r0,r0,0x8\n"
-"L31eaae:\n"
-"bl.d opencfw_em9305_ll_event_enqueue\n"
-"L31eab2:\n"
-"mov_s r1,0\n"
-"L31eab4:\n"
-"ldb_s r0,[r14,0xc]\n"
-"L31eab6:\n"
-"mov r1,512\n"
-"L31eaba:\n"
-"bl opencfw_em9305_wsf_event_post\n"
-"L31eabe:\n"
-"bl opencfw_em9305_scan_counter_up_316968\n"
-"L31eac2:\n"
-"st_s r15,[r13,0x64]\n"
-"L31eac4:\n"
-"leave_s [r13-r15,blink,pcl]\n"
-".size opencfw_em9305_scan_callback_31e9f8,.-opencfw_em9305_scan_callback_31e9f8\n"
-);
+#include <stdint.h>
+
+/* Native 0x31e9f8..0x31eac6: hand the scanner's current report (scanner =
+ * object +44, report = scanner +100) to the host. Only in scanner states
+ * 0, 1, 2 or 6 (+184) and while the queued-report count (0x805b01) is below
+ * the configured limit ((*0x805cac)+14), and only if a replacement report
+ * of the scanner's size (+150) can be allocated. The report gets the event
+ * type (+152), a changed-address flag (address type +186/+187 or the
+ * address pairs +168/+172 and +176/+180 differ), the 16-bit data id (+156),
+ * and bytes +158/+159; it is queued on the direct (0x805000, post 0x100)
+ * or the extended (0x805008, post 0x200) queue as selected by +189 and the
+ * task at 0x805b18 is signalled. The new report replaces the old one. */
+extern uintptr_t opencfw_em9305_wsf_event_allocate(uint32_t length);
+extern uint32_t opencfw_em9305_ll_event_enqueue(uintptr_t queue,uint32_t handler,
+                                                uintptr_t event);
+extern uint32_t opencfw_em9305_wsf_event_post(uint32_t task,uint32_t event);
+extern void opencfw_em9305_scan_counter_up_316968(void);
+
+static inline uint32_t r8(uintptr_t a){return *(volatile uint8_t *)a;}
+static inline uint32_t r32(uintptr_t a){return *(volatile uint32_t *)a;}
+static inline void w8(uintptr_t a,uint32_t v){*(volatile uint8_t *)a=(uint8_t)v;}
+
+void opencfw_em9305_scan_callback_31e9f8(uintptr_t object)
+{
+    uintptr_t scanner=r32(object+44u);
+    uint32_t state=r8(scanner+184u);
+    if(state>=7u||((0x47u>>state)&1u)==0u)return;
+    uintptr_t config=r32(0x805cacu);
+    if(r8(0x805b01u)>=r8(config+14u))return;
+    uintptr_t replacement=opencfw_em9305_wsf_event_allocate(r8(scanner+150u));
+    if(replacement==0u)return;
+    w8(r32(scanner+100u)+39u,r8(scanner+152u));
+    uint32_t changed=1u;
+    if(r8(scanner+187u)==r8(scanner+186u)){
+        uint32_t a=r32(scanner+172u),b=r32(scanner+180u);
+        uint32_t c=r32(scanner+168u),d=r32(scanner+176u);
+        changed=((b^a)|(d^c))!=0u;
+    }
+    w8(r32(scanner+100u)+40u,changed);
+    w8(r32(scanner+100u)+41u,r32(scanner+156u));
+    w8(r32(scanner+100u)+42u,r32(scanner+156u)>>8);
+    w8(r32(scanner+100u)+43u,*(volatile uint16_t *)(scanner+158u));
+    w8(r32(scanner+100u)+44u,r8(scanner+159u));
+    uint32_t extended=r8(scanner+189u);
+    uintptr_t report=r32(scanner+100u);
+    uint32_t signal;
+    if(extended!=0u){
+        (void)opencfw_em9305_ll_event_enqueue(0x805000u,0u,report);
+        signal=0x100u;
+    }else{
+        (void)opencfw_em9305_ll_event_enqueue(0x805008u,0u,report);
+        signal=0x200u;
+    }
+    (void)opencfw_em9305_wsf_event_post(r8(0x805b18u),signal);
+    opencfw_em9305_scan_counter_up_316968();
+    *(volatile uint32_t *)(scanner+100u)=replacement;
+}

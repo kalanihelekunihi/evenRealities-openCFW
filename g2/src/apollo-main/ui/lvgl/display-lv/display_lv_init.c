@@ -21,7 +21,7 @@ extern void audio_uart_lv_bin_decoder_init_4c794c(void);
 extern void audio_uart_lv_init_misc_4c8f0a(void);
 extern void audio_uart_lv_init_global_bind_4c8efc(void *);
 extern void audio_uart_lv_init_assert_4c91a8(void);
-extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,...);
+extern void lv_log_add(uint32_t,const char *,uint32_t,const char *,...);
 
 static const char source[]="D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\lvgl_v9.3\\LVGL\\src\\lv_init.c";
 static const char function[]="lv_init";
@@ -37,7 +37,7 @@ static const uint8_t version_bytes[3]={0xc3u,0x81u,0x00u};
 void audio_uart_display_clock_prepare(void)
 {
     if (audio_uart_display_lv_root[0]!=0u) {
-        audio_uart_lvgl_log(2u,source,0xb9u,function,already);
+        lv_log_add(2u,source,0xb9u,function,already);
         return;
     }
     audio_uart_lv_init_global_4734cc(audio_uart_display_lv_root);
@@ -56,10 +56,10 @@ void audio_uart_display_clock_prepare(void)
     audio_uart_lv_image_decoder_init_488f4c(0u,0u);
     audio_uart_lv_bin_decoder_init_4c794c();
     if (version_bytes[0]!=0xc3u || version_bytes[1]!=0x81u || version_bytes[2]!=0u)
-        audio_uart_lvgl_log(2u,source,0x12cu,function,bad_encoding);
+        lv_log_add(2u,source,0x12cu,function,bad_encoding);
     const uint32_t endian_probe=0x11223344u;
     if (*(const uint8_t *)(const void *)&endian_probe==0x11u) {
-        audio_uart_lvgl_log(3u,source,0x135u,function,
+        lv_log_add(3u,source,0x135u,function,
                             assert_format,endian_expression,endian_text);
         for (;;) *(volatile uint32_t *)(uintptr_t)UINT32_MAX=0u;
     }

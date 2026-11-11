@@ -1,74 +1,34 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_callback_324e3c\n"
-".type opencfw_em9305_callback_324e3c,@function\n"
-"opencfw_em9305_callback_324e3c:\n"
-"L324e3c:\n"
-"enter_s [r13-r20,blink]\n"
-"L324e3e:\n"
-"mov r19,r5\n"
-"L324e42:\n"
-"mov_s r15,r4\n"
-"L324e44:\n"
-"mov_s r17,r3\n"
-"L324e46:\n"
-"mov_s r18,r2\n"
-"L324e48:\n"
-"mov_s r20,r1\n"
-"L324e4a:\n"
-"bl.d opencfw_em9305_wsf_critical_enter\n"
-"L324e4e:\n"
-"mov_s r16,r0\n"
-"L324e50:\n"
-"mov_s r13,0x805b5c\n"
-"L324e56:\n"
-"bl.d opencfw_em9305_wsf_critical_exit\n"
-"L324e5a:\n"
-"ldb_s r14,[r13,0]\n"
-"L324e5c:\n"
-"brhs.d.nt r14,0x4,L324ea0\n"
-"L324e60:\n"
-"mov_s r0,0x18\n"
-"L324e62:\n"
-"bl opencfw_em9305_wsf_event_allocate\n"
-"L324e66:\n"
-"mov_s r1,r0\n"
-"L324e68:\n"
-"breq_s r0,0,L324ea0\n"
-"L324e6a:\n"
-"mov r2,518\n"
-"L324e6e:\n"
-"mov_s r0,0x805b18\n"
-"L324e74:\n"
-"sth_s r2,[r1,0x2]\n"
-"L324e76:\n"
-"ldb_s r0,[r0,0]\n"
-"L324e78:\n"
-"st r16,[r1,16]\n"
-"L324e7c:\n"
-"st_s r15,[r1,0x8]\n"
-"L324e7e:\n"
-"stb r17,[r1,5]\n"
-"L324e82:\n"
-"stb r18,[r1,4]\n"
-"L324e86:\n"
-"st r20,[r1,20]\n"
-"L324e8a:\n"
-"bl.d opencfw_em9305_wsf_task_message_send\n"
-"L324e8e:\n"
-"st r19,[r1,12]\n"
-"L324e92:\n"
-"bl opencfw_em9305_wsf_critical_enter\n"
-"L324e96:\n"
-"ldb_s r0,[r13,0]\n"
-"L324e98:\n"
-"add_s r0,r0,1\n"
-"L324e9a:\n"
-"bl.d opencfw_em9305_wsf_critical_exit\n"
-"L324e9e:\n"
-"stb_s r0,[r13,0]\n"
-"L324ea0:\n"
-"leave_s [r13-r20,blink,pcl]\n"
-".size opencfw_em9305_callback_324e3c,.-opencfw_em9305_callback_324e3c\n"
-);
+#include <stdint.h>
+
+/* Native 0x324e3c..0x324ea2: queue a 24-byte message 0x206 {u8 a, u8 b,
+ * u32 c, u32 d, u32 context, u32 value} to the task at 0x805b18 while
+ * fewer than four are outstanding (count at 0x805b5c, read and bumped
+ * inside critical sections). */
+extern void opencfw_em9305_wsf_critical_enter(void);
+extern void opencfw_em9305_wsf_critical_exit(void);
+extern uintptr_t opencfw_em9305_wsf_event_allocate(uint32_t length);
+extern uint32_t opencfw_em9305_wsf_task_message_send(uint32_t task, uintptr_t message);
+
+void opencfw_em9305_callback_324e3c(uint32_t context, uint32_t value, uint32_t a,
+                                    uint32_t b, uint32_t c, uint32_t d)
+{
+    volatile uint8_t *outstanding=(volatile uint8_t *)(uintptr_t)0x805b5cu;
+    opencfw_em9305_wsf_critical_enter();
+    uint32_t count=*outstanding;
+    opencfw_em9305_wsf_critical_exit();
+    if(count>=4u)return;
+    uintptr_t message=opencfw_em9305_wsf_event_allocate(24u);
+    if(message==0u)return;
+    uint32_t task=*(volatile uint8_t *)(uintptr_t)0x805b18u;
+    *(volatile uint16_t *)(message+2u)=0x206u;
+    *(volatile uint32_t *)(message+16u)=context;
+    *(volatile uint32_t *)(message+8u)=c;
+    *(volatile uint8_t *)(message+5u)=(uint8_t)b;
+    *(volatile uint8_t *)(message+4u)=(uint8_t)a;
+    *(volatile uint32_t *)(message+20u)=value;
+    *(volatile uint32_t *)(message+12u)=d;
+    (void)opencfw_em9305_wsf_task_message_send(task,message);
+    opencfw_em9305_wsf_critical_enter();
+    *outstanding=(uint8_t)(*outstanding+1u);
+    opencfw_em9305_wsf_critical_exit();
+}

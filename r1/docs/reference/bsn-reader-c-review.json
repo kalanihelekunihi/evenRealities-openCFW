@@ -1,0 +1,194 @@
+{
+  "schema_version": 1,
+  "sources": [
+    "r1/src/application/board/native_product_bsn.c",
+    "r1/src/application/board/native_hardware_variant.c"
+  ],
+  "native_roots": [
+    "0x7ba40",
+    "0x6a244"
+  ],
+  "report": "build/sources-goal-r1-bsn-reader-final-c/report.json",
+  "compiled_units": 840,
+  "application_imports": 74,
+  "added_imports": [],
+  "removed_imports": [
+    "r1_product_bsn_get"
+  ],
+  "prior_objects_unchanged": 836,
+  "changed_generated_objects": [
+    [
+      "r1-bootloader",
+      "{gen}/r1_startup_vectors.S"
+    ],
+    [
+      "r1-bootloader",
+      "{gen}/r1_uecc.c"
+    ]
+  ],
+  "changed_existing_allocated_sections": {
+    "r1/src/application/board/native_hardware_variant.c": [
+      ".text.r1_hardware_variant_bsn_detect"
+    ]
+  },
+  "verification": {
+    "stock_C_pairs": {
+      "valid_and_erased_lengths": 192,
+      "detector_BSN_patterns": 5120,
+      "detector_cache_hits": 768,
+      "detector_live_cache_mutations": 24,
+      "defined_partial_records": 24
+    },
+    "total_pairs": 6128,
+    "C_only_capacity_malformed_short_failure_checks": 11501,
+    "actual_C_cached_class": false,
+    "standard_copy_fill_modeled": true,
+    "known_good_length_span": "0..30 and erased ff",
+    "malformed_lengths": "31..254 map to capacity-bounded ff21 fallback",
+    "callee_saved_stack_guards_masks": true,
+    "REA_bytes_match": true,
+    "device_execution": false
+  },
+  "actual_cached_class_integration": {
+    "stock_C_pairs": {
+      "valid_and_erased_lengths": 192,
+      "detector_BSN_patterns": 100,
+      "detector_cache_hits": 768,
+      "detector_live_cache_mutations": 24
+    },
+    "total_pairs": 1084,
+    "C_only_capacity_malformed_short_failure_checks": 2312,
+    "actual_C_cached_class": true,
+    "standard_copy_fill_modeled": true,
+    "known_good_length_span": "0..30 and erased ff",
+    "malformed_lengths": "31..254 map to capacity-bounded ff21 fallback",
+    "callee_saved_stack_guards_masks": true,
+    "REA_bytes_match": true,
+    "device_execution": false
+  },
+  "actual_BSN_detector_model_configuration_ports_registry_integration": {
+    "stock_C_pairs": {
+      "table_selector": 60,
+      "stock_configuration_tables": 320,
+      "configuration_byte_domain": 10,
+      "live_provider_mutations": 72,
+      "live_log_modes": 256,
+      "seeded_live_configuration": 16
+    },
+    "total_pairs": 734,
+    "actual_C_ports_transport_registry": true,
+    "standard_copy_fill_modeled": false,
+    "REA_bytes_match": true,
+    "stock_model_pointer_entries": 20,
+    "nonnull_model_records": 20,
+    "null_model_entries": 0,
+    "transfers_per_successful_configuration": 10,
+    "callee_saves_stack_guards_masks": true,
+    "device_execution": false
+  },
+  "mutants": [
+    {
+      "name": "field_max",
+      "source": "r1/src/application/board/native_product_bsn.c",
+      "rejected": true
+    },
+    {
+      "name": "erased_size",
+      "source": "r1/src/application/board/native_product_bsn.c",
+      "rejected": true
+    },
+    {
+      "name": "capacity_bound",
+      "source": "r1/src/application/board/native_product_bsn.c",
+      "rejected": true
+    },
+    {
+      "name": "length_offset",
+      "source": "r1/src/application/board/native_product_bsn.c",
+      "rejected": true
+    },
+    {
+      "name": "short_default",
+      "source": "r1/src/application/board/native_product_bsn.c",
+      "rejected": true
+    },
+    {
+      "name": "zero_capacity",
+      "source": "r1/src/application/board/native_product_bsn.c",
+      "rejected": true
+    },
+    {
+      "name": "cached_size",
+      "source": "r1/src/application/board/native_product_bsn.c",
+      "rejected": true
+    },
+    {
+      "name": "returned_count",
+      "source": "r1/src/application/board/native_product_bsn.c",
+      "rejected": true
+    },
+    {
+      "name": "compatibility_size",
+      "source": "r1/src/application/board/native_product_bsn.c",
+      "rejected": true
+    },
+    {
+      "name": "detector_capacity",
+      "source": "r1/src/application/board/native_hardware_variant.c",
+      "rejected": true
+    },
+    {
+      "name": "detector_publish",
+      "source": "r1/src/application/board/native_hardware_variant.c",
+      "rejected": true
+    }
+  ],
+  "new_state_owners": [],
+  "reused_owners": [
+    "r1_device_info_kv_handle",
+    "r1_hardware_variant_cached",
+    "r1_hardware_variant_checked"
+  ],
+  "contract": [
+    "Read the existing 124-byte nv_r1 class, with an ff-initialized private snapshot.",
+    "Capacity-aware read returns the bytes actually written and appends no terminator; null destination or zero capacity returns0 without storage access.",
+    "Stored lengths0..30 copy that many BSN bytes, clipped to capacity; lengthff fills up to21 ff bytes as stock does.",
+    "Malformed lengths31..254 intentionally use the same capacity-bounded ff21 fallback instead of native unchecked copies.",
+    "The native compatibility entry assumes a30-byte caller buffer. The hardware detector now calls the explicit capacity API with sizeof its30-byte buffer.",
+    "Hardware cache matching, late cache changes and one-time checked publication remain unchanged for supported records."
+  ],
+  "limits": [
+    "The new bounded API and malformed/short/failure outputs are deliberate C behavior. They are not equivalence to native overflow, overread, null-pointer faults or private uninitialized bytes.",
+    "The native compatibility entry still requires a30-byte destination; future legacy callers with smaller buffers must use the capacity-aware API. Resolved static REA callers do not prove all indirect callers.",
+    "Direct and cached-class probes model standard copy/fill; cached-class probes execute actual size checks and critical-section control against prepared callbacks. No physical flash is exercised.",
+    "The setup probe executes actual C BSN, cached hardware detection, model selection, calibration, configuration, IQS ports, registry and standard copy/fill. KV/device callbacks are modeled.",
+    "An early loop-based object fell through a return under a global Unicorn memory-read observer. Restricting the observer to mutable configuration addresses lets the same original objects pass734 setup comparisons. The final bulk-copy implementation also passes with real standard memory routines; no physical fault claim is made.",
+    "No final application link, physical timing, final runtime placement or device boot proof; byte identity is not required.",
+    "Global sources-check still fails for pre-existing unlisted G2 resident_rom_thumb_set.S; the R1 check passes."
+  ],
+  "evidence_files": {
+    "build/sources-goal-r1-bsn-reader-final-c/report.json": "6734c291b9b8b52d504d86be48cb55c14472a777d98dad94d7dbc399a6cfd73a",
+    "r1/src/sources.json": "f746e00d53114276e3e58bb8a80029a08235b7401c15678d81fbab3246965110",
+    "r1/src/application/board/native_product_bsn.c": "92bc6c26e92cba06afc529c035a0c1292f0995ddcdecd3b208322e1255011807",
+    "r1/src/application/board/native_hardware_variant.c": "f01b790f953bff0294ceafa7c496deaac2f0aeb3bca575e14bd22f708b7ac222",
+    "r1/src/application/board/native_product_bsn.h": "c8b5fa2f9063f90b418bb267225b98829188ef0da2b6d384278e3776f9fbf547",
+    "r1/docs/correlation/NV-RECOVERY-CORRELATION.md": "fb9a09c3c23a2cfb6aa9951f07e7a0243e9526762cb2d20d020838d206c1503d",
+    "r1/docs/correlation/FRONTIER-230-248-CORRELATION.md": "05e439160b8b4f75f60056ac8df896b814680b9512175dc36843562d61887602",
+    "build/goal-r1-bsn-reader-c/verify.py": "d067a4dc50d810a8061076446d917833b700228326090123a4768987e7d2c227",
+    "build/goal-r1-bsn-reader-c/verification.json": "77b5ff881453c0527be3aaf4cd92df56ac1e622b51a74b0aac37cbe8fe80a8f5",
+    "build/goal-r1-bsn-reader-c/integration.json": "6bc3177409250fbe9bb0502a6faa9e66b6e3558f07231540a1c35926298ea5ff",
+    "build/goal-r1-bsn-reader-c/configuration.py": "be29863408b00d50105d605588404cd488618993369215a6489956bf961a77e7",
+    "build/goal-r1-bsn-reader-c/configuration/configuration-integration.json": "55aa627ebf632a65b4b1e29d895c858ef520262c06e465393e77b7c8966118a1",
+    "build/goal-r1-bsn-reader-c/mutants.py": "c3955f7c3c54617b82e3381541d85d58ec9b1d4610be4702ec3adc30b8aa515d",
+    "build/goal-r1-bsn-reader-c/mutant-verify.py": "64bc4745c74d7588657cc04c7151d70fe7fcf13d69ecb138b62ffc744c4e6303",
+    "build/goal-r1-bsn-reader-c/mutants.json": "26296338b54f87882317f81226275b56d7b0dd3724c535be8253ebf47118530f",
+    "build/goal-r1-bsn-reader-c/sources-check.log": "8ce23e9a175a8eca14d5996d3ef74e32e078d6d68c25bf4400ab6543315a854f",
+    "build/goal-r1-bsn-reader-c/debug.py": "bb4efcfb920778d059e660cc3056c4e9bd1ef57a1dabfe8ef852b512ea859685",
+    "build/goal-r1-bsn-reader-c/debug-pop.py": "eb48cf2978eee391327ade68895fafcef3c593df47c71085326c705f1b6a2d2f",
+    "build/goal-r1-bsn-reader-c/debug-pop.log": "921cb3346ea36d7096891578359ea66f76677949e1c98b417df9390d3e540386",
+    "build/goal-r1-bsn-reader-c/diagnostic-filtered.py": "746fdeac2d7ded2e8375513e4e657052c73c7f3dfb60714a3853a95c7fe5553a",
+    "build/goal-r1-bsn-reader-c/diagnostic-filtered.log": "0247d0d257241df95ed535a4ec115f9e1c45b090b67715e17b09e862d51465de",
+    "build/sources-goal-r1-bsn-reader-c/report.json": "18702f574a228ead576dcd864086ffeee437b7db69fca33d0210af50b13c5ac5",
+    "r1/docs/reference/bsn-reader-rea-review.json": "d3200571d49d3793dae9f1801d62e85a432633310b63835b9f8a8440d614584f"
+  }
+}

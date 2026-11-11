@@ -3,6 +3,7 @@
  * chooses a0a00010/30/50; the invalid selector writes addresses 8/c/10.
  */
 #include <stdint.h>
+#include "../csky_ops.h"
 
 static void store_triplet(uintptr_t base, uint32_t first,
                           uint32_t second, uint32_t third)
@@ -28,14 +29,11 @@ uint32_t gx8002_image_b_audio_triplet_10005a5c(
         volatile uint32_t *control = (volatile uint32_t *)base;
         *control = *control & ~(1u << 28);
     } else {
-        /* C null dereference is undefined; native deliberately stores to
-         * 0x8/0xc/0x10. Emit those three authenticated stores directly. */
-        __asm__ volatile (
-            "movi r3, 0\n"
-            "st.w %0, (r3, 0x8)\n"
-            "st.w %1, (r3, 0xc)\n"
-            "st.w %2, (r3, 0x10)\n"
-            : : "r"(first), "r"(second), "r"(third) : "r3", "memory");
+        /* Stock stores to 0x8/0xc/0x10 for an invalid channel (base 0). */
+        volatile uint32_t *const null_page = csky_word_ptr(0u);
+        null_page[0x8 / 4] = first;
+        null_page[0xc / 4] = second;
+        null_page[0x10 / 4] = third;
         return 0u;
     }
     store_triplet(base, first, second, third);

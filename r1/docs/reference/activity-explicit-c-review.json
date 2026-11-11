@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "entries": {
+    "0x49068": "r1_activity_explicit_refresh_accumulator"
+  },
+  "report": "build/sources-goal-r1-activity-explicit-c/report.json",
+  "report_sha256": "53dd58332cb73e02f554306cf452a9aefd0b1d21e3bda9a9ea1c71dcaa8575c9",
+  "unit": {
+    "source": "r1/src/application/runtime/native_activity_explicit.c",
+    "source_sha256": "a9ed8522823238a8778b5ae4c24e6c8e3900fa896c068244fd9f5c96241764e9",
+    "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-activity-explicit-c/r1/r1-application/r1__src__application__runtime__native_activity_explicit.c.o",
+    "object_sha256": "51c67212e6d7043e464ad34db07e9c62fb377857205d81c0f831ba899c8905d7"
+  },
+  "behavior": {
+    "pairs": 894,
+    "digest": "e3e9c42de112971b7728146d50b65cb1fbbe8b8891dcd1e7d801d3c975ad7172",
+    "actual_C": [
+      "explicit activity refresh plus periodic accumulator and shared state owner"
+    ],
+    "modeled_boundaries": [
+      "r1_time_backend_timestamp",
+      "r1_time_local_day_start",
+      "r1_activity_mode_byte_get",
+      "r1_health_mode_get",
+      "r1_health_mode_is_2",
+      "r1_event_publish",
+      "r1_structured_log_mode_get",
+      "r1_structured_log_format",
+      "nrf_log_frontend_std_0"
+    ],
+    "limits": [
+      "Synchronous mapped SRAM and aligned samples; no asynchronous mutation",
+      "Private event address normalized by contents; no retention beyond call",
+      "No physical accelerometer or persistence/transport delivery"
+    ]
+  },
+  "negative_controls": {
+    "wrong-periodic-sent-guard": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "s2', [], '0100456700000000905f01000a001400a086010014001e00'), ('day', [], '0100456700000000905f01000a001400a086010014001e00'), ('event', [11, '0a000a001027000000000000', 12], '0100456700000000905f01000a001400a086010014001e00')], [('time', [], '0100456700000000905f01000a001400a086010014001e00'), ('activity', [], '0100456700000000905f01000a001400a086010014001e00'), ('health', [], '0100456700000000905f01000a001400a086010014001e00'), ('is2', [], '0100456700000000905f01000a001400a086010014001e00')])\n"
+    },
+    "wrong-bucket-gate": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "ay', [], '0000456700000000905f01000a001400a086010014001e00'), ('event', [11, '0a000a001027000000000000', 12], '0000456700000000905f01000a001400a086010014001e00')], [('time', [], '0000456700000000905f01000a001400a086010014001e00'), ('activity', [], '0000456700000000905f01000a001400a086010014001e00'), ('health', [], '0000456700000000905f01000a001400a086010014001e00'), ('is2', [], '0000456700000000905f01000a001400a086010014001e00'), ('day', [], '0000456700000000905f01000a001400a086010014001e00')])\n"
+    },
+    "wrong-pause-timeout": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "01400a086010014001e00'), ('activity', [], '00014567ffffffff905f01000a001400a086010014001e00'), ('health', [], '00014567ffffffff905f01000a001400a086010014001e00'), ('is2', [], '00014567ffffffff905f01000a001400a086010014001e00')], [('time', [], '00014567ffffffff905f01000a001400a086010014001e00'), ('activity', [], '00014567ffffffff905f01000a001400a086010014001e00'), ('health', [], '00014567ffffffff905f01000a001400a086010014001e00'), ('is2', [], '00014567ffffffff905f01000a001400a086010014001e00')])\n"
+    },
+    "lost-day-provider": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "001400a086010014001e00'), ('event', [11, '0a000a001027000000000000', 12], '0000456700000000905f01000a001400a086010014001e00')], [('time', [], '0000456700000000905f01000a001400a086010014001e00'), ('activity', [], '0000456700000000905f01000a001400a086010014001e00'), ('health', [], '0000456700000000905f01000a001400a086010014001e00'), ('is2', [], '0000456700000000905f01000a001400a086010014001e00'), ('event', [11, '0a000a001027000000000000', 12], '0000456700000000905f01000a001400a086010014001e00')])\n"
+    },
+    "lost-post-rebase": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "0', 12], '0000456700000000905f01000a001400a086010014001e00')], [('time', [], '0000456700000000905f01000a001400a086010014001e00'), ('activity', [], '0000456700000000905f01000a001400a086010014001e00'), ('health', [], '0000456700000000905f01000a001400a086010014001e00'), ('is2', [], '0000456700000000905f01000a001400a086010014001e00'), ('day', [], '0000456700000000905f01000a001400a086010014001e00'), ('event', [11, '0a000a001027000000000000', 12], '0000456700000000905f01000a001400a086010014001e00')])\n"
+    },
+    "wrong-rollback-equality": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "00a001400'), ('is2', [], '0000456700000000905f01000a001400905f01000a001400'), ('day', [], '0000456700000000905f01000a001400905f01000a001400'), ('mode', [7], '0000456700000000905f01000a001400905f01000a001400'), ('ring', [201326592, '[RING]algo activity rollback, rebase'], '6677456700000000905f01000a0014007856341245236745'), ('mode', [7], '6677456700000000905f01000a0014007856341245236745'), ('log0', [1835011, 'algo activity rollback, rebase'], '6677456700000000905f01000a0014007856341245236745')])\n"
+    },
+    "wrong-event-topic": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "enRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 1063, in __hook_code_cb\n    callback(uc, address, size, user_data)\n    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-activity-event-c/verify.py\", line 38, in hook\n    elif n=='event':assert r0==11 and r2==12;out=[r0,bytes(v.mem_read(r1,r2)).hex(),r2];result=0xfffffffe\n                           ^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    "wrong-sent-flag-write": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "0', 12], '0000456700000000905f01000a001400a086010014001e00')], [('time', [], '0000456700000000905f01000a001400a086010014001e00'), ('activity', [], '0000456700000000905f01000a001400a086010014001e00'), ('health', [], '0000456700000000905f01000a001400a086010014001e00'), ('is2', [], '0000456700000000905f01000a001400a086010014001e00'), ('day', [], '0000456700000000905f01000a001400a086010014001e00'), ('event', [11, '0a000a001027000000000000', 12], '0000456700000000905f01000a001400a086010014001e00')])\n"
+    }
+  },
+  "audit": {
+    "unchanged_prior_objects": 748,
+    "new_units": 1,
+    "imports": {
+      "r1-application": {
+        "added": [],
+        "removed": [
+          "r1_event_service_00049068"
+        ]
+      },
+      "r1-bootloader": {
+        "added": [],
+        "removed": []
+      }
+    },
+    "reused_owners": [
+      "r1_activity_accumulator_state"
+    ]
+  },
+  "source_check": "R1 check passes: 749 units, 553 source files, 0 not built. Global check flagged concurrent G2 resident_rom_thumb_set.S absent from manifest.",
+  "rea": "activity-explicit-c-rea.json",
+  "instruction_identity_proven": false,
+  "image_integration_proven": false
+}

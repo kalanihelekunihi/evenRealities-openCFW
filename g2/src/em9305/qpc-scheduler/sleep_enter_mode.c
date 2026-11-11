@@ -29,10 +29,10 @@ uint32_t opencfw_em9305_sleep_aggregate_locks(void)
 }
 static void set_state(uint32_t bit)
 {
- uint32_t irq; __asm__ volatile("clri %0\n\tsync" : "=r"(irq) :: "memory");
+ uint32_t irq; irq=(uint32_t)__builtin_arc_clri(); __builtin_arc_sync();
  volatile uint8_t *state=(volatile uint8_t *)(uintptr_t)0xf00405u;
  *state=(uint8_t)(*state|bit);
- __asm__ volatile("seti %0" :: "r"(irq) : "memory");
+ __builtin_arc_seti((int)irq);
 }
 uint32_t opencfw_em9305_sleep_enter_mode(uint32_t mode)
 {

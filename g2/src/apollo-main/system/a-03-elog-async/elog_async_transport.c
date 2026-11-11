@@ -100,10 +100,10 @@ uint8_t elog_atomic_cas_4488fc(volatile uint32_t *object, uint32_t *expected, ui
     uint32_t seen;
     uint32_t failed;
     do {
-        __asm__ volatile("ldrex %0, [%1]" : "=&r"(seen) : "r"(object) : "memory");
+        seen = __builtin_arm_ldrex(object);
         if (seen != want)
             break;
-        __asm__ volatile("strex %0, %2, [%1]" : "=&r"(failed) : "r"(object), "r"(desired) : "memory");
+        failed = (uint32_t)__builtin_arm_strex(desired, object);
     } while (failed != 0u);
     __asm__ volatile("dmb sy" ::: "memory");
     uint8_t ok = seen == *expected;

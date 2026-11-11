@@ -1,0 +1,98 @@
+{
+  "cases": 1508,
+  "passed": 1508,
+  "failures": [],
+  "stock_entry": "0x548f0",
+  "stock_body_bytes": 76,
+  "bridge_bytes": 10,
+  "c_body_bytes": 76,
+  "callback_stack_depth_pairs": [
+    [
+      [
+        -24
+      ],
+      [
+        -48
+      ]
+    ],
+    [
+      [
+        -24,
+        -24
+      ],
+      [
+        -48,
+        -48
+      ]
+    ],
+    [
+      [
+        -24,
+        -24,
+        -24
+      ],
+      [
+        -48,
+        -48,
+        -48
+      ]
+    ],
+    [
+      [
+        -24,
+        -24,
+        -24,
+        -24
+      ],
+      [
+        -48,
+        -48,
+        -48,
+        -48
+      ]
+    ]
+  ],
+  "before_nonwriting_mismatch": {
+    "seed": "0xaabb1234",
+    "old_read_pointer_delta": -22,
+    "stock_and_new_delta": -24,
+    "old_nonwriting_output": 23130,
+    "stock_and_new_output": 4660
+  },
+  "unchanged_functions": [
+    "r1_named_adc_close",
+    "r1_named_adc_open",
+    "r1_named_adc_register_all"
+  ],
+  "unchanged_adc_data": [
+    ".r1.adc.ops",
+    ".r1.adc.state"
+  ],
+  "report": "build/sources-goal-r1-adc-sample/report.json",
+  "report_sha256": "448c94e37988d736dd1b5d4255d377dce0888e8e66ca97f86a42da0e962995aa",
+  "source_sha256": "f64e253409d6a22c3947906f7c775ae57d114682b9f39974bfbe9f545a02ad93",
+  "manifest_sha256": "59fdbc1dac961b45d682cd2bb5bd1fbc417cd95e7082d50a778c69d6e24ee734",
+  "stock_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "native_span_sha256": "cc37f1a092c14c62a440e0b354cc109c5a1a47bbbda76763695e3cedddc6b2b6",
+  "rea": {
+    "completed": true,
+    "procedure": "0x548f0",
+    "path": "build/goal-r1-adc-sample/REA.json",
+    "sha256": "01816cd0b4dbbd02832dd2aade3994c1bafe700b09a3e5a056042f8b01b47704"
+  },
+  "probe_artifacts": {
+    "build/goal-r1-adc-sample/verify.py": "34d4a2f03299e2802b86c830f41336cbbe68dad7f186924a3927d43752e527e1",
+    "build/goal-r1-adc-sample/before.c": "22aa86c10a9bc32d6f57eb0b775a8a92240d4c5050c27d17f2d36692c994fc90",
+    "build/goal-r1-adc-sample/before.elf": "18e1270c8f6742b73bfdc63ae125b777f515149b2a947cb2d14dd0ca2a7f7e74",
+    "build/goal-r1-adc-sample/source.elf": "e084a4848c252f1d56a28bba1dd5a18bdcd25c80b2fa52304c87bca345b39dd9",
+    "build/goal-r1-adc-sample/stock.elf": "af31541dd965ee754cb713323e9e56c1b5548b5f02277d1e0e7e8ddfc910bda5",
+    "build/goal-r1-adc-sample/rea-snapshot.json": "8d5544914da9fbc01df82f0153b66aac18829b6f107e434c00f0de4c47f887f7"
+  },
+  "limits": [
+    "Ten-byte entry bridge captures the native saved-R3 word at entry SP-24. This is a partial C extraction.",
+    "String comparison and Nordic conversion API boundaries are modeled with caller-saved register/flag clobbers; the SAADC peripheral driver does not execute.",
+    "The probe reproduces the previous compiled SP-22/non-writing mismatch under a deterministic stack fill; no particular field-device stack contents are asserted.",
+    "C helper adds private callback stack depth; complete flag/fault-state identity is not claimed.",
+    "No physical SAADC measurement, analog accuracy, converter timing, final link, provider qualification or byte identity claim."
+  ]
+}

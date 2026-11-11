@@ -1,0 +1,32 @@
+{
+  "stock_entry": "0x87600",
+  "candidate": "r1_gomore_sort_float_subrange_native",
+  "validation": {
+    "pairs": 1205,
+    "native_qsort_pairs": 1200,
+    "modeled_wrapped_bounds": 5,
+    "object_sha256": "ac3cae1a119d506dc48d9f99700588ac2eaadaf90967a14aa01061faea0a160f",
+    "source_sha256": "077d08e30b2102d1e9578b2096ad43c006f1b9e60dca9dd2f0711467754cbbc3"
+  },
+  "qualification": {
+    "candidate_units": 1,
+    "selected_regions": 0
+  },
+  "limitations": [
+    "direct replay uses stock qsort and stock comparator; C providers independently reviewed",
+    "native wrapper has no private frame; C has four temporary bytes restored before qsort",
+    "no full source link or hardware validation"
+  ],
+  "artifacts": {
+    "r1/src/application/runtime/native_gomore_sort_subrange.c": "077d08e30b2102d1e9578b2096ad43c006f1b9e60dca9dd2f0711467754cbbc3",
+    "r1/src/sources.json": "fab65b9b6d3711558083f3904d3ec6d8ae81259904e90827ace6be77a10d1497",
+    "build/sources-goal-r1-gomore-sort-dependency-final-c/report.json": "3289f760228473b53769eee7cef58baaafc04689a90246f70ae57e0653ecfa17",
+    "build/sources-goal-r1-gomore-sort-dependency-final-c/r1/r1-application/r1__src__application__runtime__native_gomore_sort_subrange.c.o": "ac3cae1a119d506dc48d9f99700588ac2eaadaf90967a14aa01061faea0a160f",
+    "build/goal-r1-gomore-sort-dependency-c/rea.json": "79d6b715613155a7ea0ae021b6378b1c619e1f70556ce852fbf960f6dc1c3405",
+    "build/goal-r1-gomore-sort-dependency-c/verify.py": "fbb38d04271d695ca42d7a35c446b9556a3890dbdb3324ace5dfe854d540e960",
+    "build/goal-r1-gomore-sort-dependency-c/results.json": "504d0f1f3df432fee1c8df8587d84b26d0b8d8f791e59feff1ecdcb71cfb933c",
+    "build/goal-r1-gomore-sort-dependency-c/negative.py": "34b0c58bf0d976fa546a1f2dfa8636f705bb033d03b458854d611ec4b864ad64",
+    "build/goal-r1-gomore-sort-dependency-c/negative.json": "ed0fefceb8b5eacede4f47505896d3800730f31870e6d81d4b95089dae86a4a1",
+    "build/goal-r1-gomore-sort-dependency-c/qualify.py": "131bf8101478e4e570daf2b6149cbb38ac28427fb27ed87abc15e5cb60c08b2a"
+  }
+}

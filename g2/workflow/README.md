@@ -1,7 +1,9 @@
 # G2: whole-firmware pseudocode, then source reconstruction
 
-Status: **G1 passed; P2 pseudocode recovery executing** in campaign
-`20260930T190500Z`. The target-and-inventory gate has primary and independent
+Status: **Previous P2 campaign interrupted; stale assignments cleared on
+2026-10-22 at the user's request. No work is currently dispatched.** Campaign
+`20260930T190500Z` ended prematurely; its assignment history and evidence are
+preserved. G1 passed; G2–G6 remain unrun. The target-and-inventory gate has primary and independent
 validator receipts in `g2/build/pseudocode-first/20260930T190500Z/receipts/G1-target-and-inventory-107/receipt.json`.
 All six payloads, 33 images, 70 initial coverage rows and 125 reviews are bound
 to authenticated inputs. Code/data and behavioral completeness remain P2 work.
@@ -21,10 +23,11 @@ The sequence is fixed:
 5. Rebuild every payload and the outer bundle from source, and prove exact
    equality to the original artifact.
 
-P1 inventory and independent-review tasks have been dispatched using bounded
-contracts and hash-pinned evidence. P2 is authorized by the passed G1 receipt; no C implementation
-task may start before G3/G4. The prepared prompt pack is guidance, not a general
-job launcher.
+The old P1/P2 dispatch records are retained in `state.json` under
+`assignment_history`; the active assignment lists are empty. Do not resume those
+dispatches. A new campaign requires user authorization and validation of any
+reused evidence. No C implementation task may start before G3/G4. The prepared
+prompt pack is guidance, not a general job launcher.
 
 | Start here | Purpose |
 | --- | --- |

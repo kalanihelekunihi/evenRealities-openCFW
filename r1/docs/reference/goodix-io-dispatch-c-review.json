@@ -1,0 +1,183 @@
+{
+  "schema": 1,
+  "scope": "R1 Goodix I/O dispatcher C policy and native-frame transfer adapter",
+  "native_entry": "0x6a320",
+  "implementation": {
+    "native_frame_bytes": 216,
+    "private_plan_area_bytes": 80,
+    "adapter_instruction_bytes": 188,
+    "C_preparer_instruction_bytes": 596,
+    "assembly_retained_for_frame_transfers": true
+  },
+  "unit": {
+    "source_report": "build/sources-goal-r1-goodix-io-stepper/report.json",
+    "source_object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-io-stepper/r1/r1-application/generated__gh_demo_hook_r1.c.o",
+    "source_object_sha256": "0ac4b66a21144d06f8a721317bfef95afa0b3d675e6849159bffc4168b49deab",
+    "paired_cases": 492,
+    "executions": 984,
+    "full_recorded_tuple_equal": true,
+    "provider_private_80_byte_clobber": true,
+    "limits": [
+      "Providers modeled; paired RAM accesses normalized to ordered four-byte words",
+      "C-private preparation area below native frame excluded",
+      "Invalid pointers/fault contexts and physical concurrency not covered"
+    ]
+  },
+  "integrated": {
+    "source_dispatch_object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-io-stepper/r1/r1-application/generated__gh_demo_hook_r1.c.o",
+    "paired_cases": 432,
+    "executions": 864,
+    "actual_C": [
+      "dispatcher policy/adapter",
+      "seven existing stream-cache callbacks"
+    ],
+    "checks": [
+      "real callback arguments/SP and final cache/extrema output",
+      "append saturation bounds, signed clamping, six-word stack arguments",
+      "saved registers, interrupt masks and return SP"
+    ],
+    "modeled": [
+      "algorithm provider"
+    ],
+    "limits": [
+      "Loggers disabled; formatter/print covered in separate unit fixture",
+      "No physical sampling or real algorithm execution",
+      "Callback code addresses differ; comparison uses slot identities, arguments and output data"
+    ]
+  },
+  "GCC9_unit": {
+    "source_report": "build/sources-goal-r1-goodix-io-stepper/report.json",
+    "source_object": "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-goodix-io-stepper/qualified-r1-gcc/compilation/0000/unit.o",
+    "source_object_sha256": "829b86783ead18eb566b6d5eb89d846b8b14168c08064ebf36e7371b0e838ca9",
+    "paired_cases": 492,
+    "executions": 984,
+    "full_recorded_tuple_equal": true,
+    "provider_private_80_byte_clobber": true,
+    "limits": [
+      "Providers modeled; paired RAM accesses normalized to ordered four-byte words",
+      "C-private preparation area below native frame excluded",
+      "Invalid pointers/fault contexts and physical concurrency not covered"
+    ]
+  },
+  "GCC9_integrated": {
+    "source_dispatch_object": "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-goodix-io-stepper/qualified-r1-gcc/compilation/0000/unit.o",
+    "paired_cases": 432,
+    "executions": 864,
+    "actual_C": [
+      "dispatcher policy/adapter",
+      "seven existing stream-cache callbacks"
+    ],
+    "checks": [
+      "real callback arguments/SP and final cache/extrema output",
+      "append saturation bounds, signed clamping, six-word stack arguments",
+      "saved registers, interrupt masks and return SP"
+    ],
+    "modeled": [
+      "algorithm provider"
+    ],
+    "limits": [
+      "Loggers disabled; formatter/print covered in separate unit fixture",
+      "No physical sampling or real algorithm execution",
+      "Callback code addresses differ; comparison uses slot identities, arguments and output data"
+    ]
+  },
+  "negative_controls": [
+    {
+      "mutation": "wrong-max",
+      "rejected": true
+    },
+    {
+      "mutation": "wrong-format-order",
+      "rejected": true
+    },
+    {
+      "mutation": "wrong-tail",
+      "rejected": true
+    }
+  ],
+  "analysis_correction": {
+    "raw_pair_4_5": "unsigned minimum, not maximum",
+    "preserved_wrong_max_counterexample": "build/goal-r1-goodix-io-stepper/wrong-max-counterexample.json"
+  },
+  "audit": {
+    "other_575_objects_unchanged": true,
+    "other_15_hook_functions_unchanged": 15,
+    "changed_function": [
+      "gh3x2x_algorithm_get_io_data_hook_func"
+    ],
+    "one_private_C_preparer_added": true,
+    "new_zero_initialized_state": {
+      "symbol": "r1_goodix_frame_extrema",
+      "bytes": 12,
+      "section": ".bss.r1.goodix.frame.extrema",
+      "native_address": "0x2002fd1c",
+      "native_ZI_interval": [
+        "0x20007e04",
+        "0x2003beb8"
+      ]
+    },
+    "unresolved_import_sets_unchanged": true,
+    "application_unresolved": 167,
+    "bootloader_unresolved": 34,
+    "profiles_unchanged": true
+  },
+  "qualification": {
+    "candidates": 8,
+    "compiled": 8,
+    "selected_regions": 0,
+    "canonical_plan_unchanged": true
+  },
+  "source_build": {
+    "units": 576,
+    "compiled": 576,
+    "failed": 0,
+    "duplicate_strong_symbols": 0,
+    "application_unresolved": 167,
+    "bootloader_unresolved": 34
+  },
+  "hybrid": {
+    "report": "build/hybrid-goal-r1-goodix-io-stepper/build-report.json",
+    "payload_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "totals": {
+      "binary-pull-through": 642215,
+      "source-built": 3945,
+      "resource-file": 248
+    },
+    "source_completeness_proven": false
+  },
+  "files": {
+    "r1/src/application/goodix/native_io_dispatch.h": "00811639948b1abfc8bfca9e8a71bca6a5c7e602b1ab8a27f423eea2d0885c7b",
+    "r1/src/sources.json": "17e6c963f1a5a0f69735c9c60adea3f29a49ce50aadc401dcf157ebb14ab7a14",
+    "r1/symbols/function-frontier.csv": "57b924fc3b14979f144327f8c623c4b49ac60462fc6fa9138b69e20d2574fdd4",
+    "r1/docs/reference/FUNCTION-OWNERSHIP.csv": "a7bb1ccab6fa78ad1628a57f7d277779a555a7a464761a7f160cd090ab09c729",
+    "tools/build/source-plan.json": "883e978279baf64f99dca97ebdba10d30a192b022d392bc282832ed5982bb491",
+    "build/sources-goal-r1-goodix-io-stepper/report.json": "0641e6db940a6f0b87978af32978bb0527f065643777bd161ce19f947c58d53e",
+    "build/hybrid-goal-r1-goodix-io-stepper/build-report.json": "3b5fa6828b9a6ca1c3c7747789e48471ebcaa027f8c5d8250129f54e4738c2c0",
+    "build/goal-r1-goodix-timestamp-closure/rea.json": "7d0b722814aa35c2438b6bc319bac891787e42cd602b834569baae24aaf36ede",
+    "build/goal-r1-goodix-io-stepper/sources-before.json": "0b87782f44f29772556826d641f74549d56ba2dd8a0e7437e970c249edea6a8b",
+    "build/goal-r1-goodix-io-stepper/before-function-frontier.csv": "8a87c4bed58ecf61792f16368cfe59bad93d085eae0be5e0f34fafaea9d32063",
+    "build/goal-r1-goodix-io-stepper/before-FUNCTION-OWNERSHIP.csv": "966d9df76fba459bed6e4e9fada912da092d5efe5055e8c2551ffee2ce354381",
+    "build/goal-r1-goodix-io-stepper/frame-prefix.json": "de03a8e13bece76d113afa5676eff440495ef78a2720e39c2cbd2adf9e4c62a5",
+    "build/goal-r1-goodix-io-stepper/verify.py": "23347273f9d59418738ed7bd6bae80ca1ccec20b3b0bbe9f200dc91c3531b390",
+    "build/goal-r1-goodix-io-stepper/results.json": "ace9513f02f29053a7214e99b1f1c0bc4538bf785d3f8d95316c2b1c018baff3",
+    "build/goal-r1-goodix-io-stepper/integrated.py": "1d653afc86f2862a1c400f21c5cb3f6ff7ef363d988f83a4a91e622a4123bb85",
+    "build/goal-r1-goodix-io-stepper/integrated-results.json": "d1b3d295e98b8d0cd36d9f767f341efa667aa0ce0e2c967da424731300f90f2f",
+    "build/goal-r1-goodix-io-stepper/negative.py": "ca880e7302e5a54fd88e3b1b25ba763872236ba94dffda8ff2e846e8bf5c26a1",
+    "build/goal-r1-goodix-io-stepper/negative-results.json": "1aa30b60f2062677d338f67fb8b1ec0e6e2e86fb5150dc7c2b2323209190bcee",
+    "build/goal-r1-goodix-io-stepper/wrong-max-counterexample.json": "5cca3a2e522bf1d57b8b7d6e9c816751ba476d93c122f4378a3781ac81944385",
+    "build/goal-r1-goodix-io-stepper/audit.py": "99c570f561a574a96b40f60be9756e47cadfecb197c2976bf2b54fa628429d71",
+    "build/goal-r1-goodix-io-stepper/audit-results.json": "02a64352c45026c29727c3508318a17eb1aa920d10ee2ff998d918de2b2878ed",
+    "build/goal-r1-goodix-io-stepper/qualified-generic/qualification.json": "6b74b93bead380660d92859a3b9a824188939631cb990e040ebd276a0161c362",
+    "build/goal-r1-goodix-io-stepper/qualified-r1-gcc/qualification.json": "9e044c6e5e85ef6cfcaa9f1d5e189ef1759c8bf211b4b5d96d1a85aaef379fe7",
+    "build/goal-r1-goodix-io-stepper/qualified-r1-gcc/compilation/0000/unit.o": "829b86783ead18eb566b6d5eb89d846b8b14168c08064ebf36e7371b0e838ca9",
+    "build/goal-r1-goodix-io-stepper/gcc-results.json": "51ea62b02ec12becd17f78c8f795a7ec264ac6a3bf0fe39917c40669fd31a224",
+    "build/goal-r1-goodix-io-stepper/gcc-integrated-results.json": "6b05d77f656168ff8591a077621a9a7f9b2842efef338c08d1db18825a2d9638"
+  },
+  "limits": [
+    "Preparation memory below the native frame and invalid-pointer exception state excluded",
+    "Unit RAM accesses compared as ordered four-byte words; concurrency unproven",
+    "Real callbacks integrated, but algorithm/log providers and physical sampling unproven",
+    "Twelve-byte BSS owner requires final native placement; selector owner remains opaque",
+    "No byte qualification or G2/global source-completeness credit"
+  ]
+}

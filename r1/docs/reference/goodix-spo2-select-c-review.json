@@ -1,0 +1,551 @@
+{
+  "schema_version": 1,
+  "acceptance_target": "License-free C firmware; byte identity waived",
+  "entries": {
+    "0x00036f88": "r1_goodix_spo2_select"
+  },
+  "total_stock_c_pairs": 369694,
+  "independent_integer_oracle_pairs": 4864,
+  "calculate_caller_pairs": 456,
+  "verification": {
+    "results": {
+      "pairs": 204800,
+      "fpscr_modes": 32,
+      "elapsed_seconds": 90.36026616604067,
+      "scope": "Actual C software float/double helpers and RTZ/FPSCR conversion helper; full public RAM/FPSCR, SP and saved registers/masks. Known/unknown modes, flags, warmups, parity, clamps and special floats."
+    },
+    "alias-results": {
+      "pairs": 61440,
+      "fpscr_modes": 6,
+      "aliases": [
+        {
+          "output_alias": "state-flags"
+        },
+        {
+          "output_alias": "state-aux"
+        },
+        {
+          "output_alias": "state-parity"
+        },
+        {
+          "output_alias": "config"
+        },
+        {
+          "valid_alias": "state-mode"
+        },
+        {
+          "valid_alias": "state-cache"
+        },
+        {
+          "valid_alias": "config-policy"
+        },
+        {
+          "valid_alias": "output"
+        }
+      ],
+      "elapsed_seconds": 28.74691754207015,
+      "scope": "Live output/status aliases with state bytes, auxiliary/parity fields and configuration. No invalid pointer/count aliases."
+    },
+    "edge-results": {
+      "pairs": 32768,
+      "fpscr_modes": 32,
+      "elapsed_seconds": 16.834573416039348,
+      "scope": "Independent state/policy/iteration/flag Cartesian product, including UINT32_MAX iteration and exact threshold/warm-up boundaries."
+    },
+    "oracle-results": {
+      "pairs": 4096,
+      "independent_oracles": 4096,
+      "fpscr_modes": 32,
+      "elapsed_seconds": 2.945452291984111,
+      "scope": "Independent finite-integer state/action, hysteresis/parity, cache-before-fallback and unsigned warm-up oracles; both stock and C checked."
+    },
+    "caller-results": {
+      "pairs": 384,
+      "fpscr_modes": 32,
+      "reset_bytes": [
+        0,
+        1,
+        2,
+        255
+      ],
+      "scope": "Actual native calculate C caller, quartic, heap, inference parent, constructors, model graph, output quality and selection stages. Earlier processing plus confidence/output are explicit controlled test boundaries. Full public RAM and saved ABI compared, only45 guarded callback fields normalized. Source has no stock code mapping.",
+      "elapsed_seconds": 58.111716208048165
+    },
+    "normal-results": {
+      "pairs": 38400,
+      "fpscr_modes": 6,
+      "elapsed_seconds": 16.155983499949798,
+      "scope": "Actual C software float/double helpers and RTZ/FPSCR conversion helper; full public RAM/FPSCR, SP and saved registers/masks. Known/unknown modes, flags, warmups, parity, clamps and special floats."
+    },
+    "normal-alias-results": {
+      "pairs": 20480,
+      "fpscr_modes": 2,
+      "aliases": [
+        {
+          "output_alias": "state-flags"
+        },
+        {
+          "output_alias": "state-aux"
+        },
+        {
+          "output_alias": "state-parity"
+        },
+        {
+          "output_alias": "config"
+        },
+        {
+          "valid_alias": "state-mode"
+        },
+        {
+          "valid_alias": "state-cache"
+        },
+        {
+          "valid_alias": "config-policy"
+        },
+        {
+          "valid_alias": "output"
+        }
+      ],
+      "elapsed_seconds": 9.157409833045676,
+      "scope": "Live output/status aliases with state bytes, auxiliary/parity fields and configuration. No invalid pointer/count aliases."
+    },
+    "normal-edge-results": {
+      "pairs": 6144,
+      "fpscr_modes": 6,
+      "elapsed_seconds": 2.944152166135609,
+      "scope": "Independent state/policy/iteration/flag Cartesian product, including UINT32_MAX iteration and exact threshold/warm-up boundaries."
+    },
+    "normal-oracle-results": {
+      "pairs": 768,
+      "independent_oracles": 768,
+      "fpscr_modes": 32,
+      "elapsed_seconds": 0.424958375049755,
+      "scope": "Independent finite-integer state/action, hysteresis/parity, cache-before-fallback and unsigned warm-up oracles; both stock and C checked."
+    },
+    "normal-caller-results": {
+      "pairs": 72,
+      "fpscr_modes": 6,
+      "reset_bytes": [
+        0,
+        1,
+        2,
+        255
+      ],
+      "scope": "Actual native calculate C caller, quartic, heap, inference parent, constructors, model graph, output quality and selection stages. Earlier processing plus confidence/output are explicit controlled test boundaries. Full public RAM and saved ABI compared, only45 guarded callback fields normalized. Source has no stock code mapping.",
+      "elapsed_seconds": 10.70764858298935
+    },
+    "coverage-results": {
+      "native_coverage_calls": 7712,
+      "additional_pairs": 288,
+      "instruction_bytes": 734,
+      "instruction_starts": 276,
+      "span_bytes": 744,
+      "missing": [
+        {
+          "address": "0x37236",
+          "size": 2,
+          "mnemonic": "b",
+          "operands": "#0x3723c"
+        },
+        {
+          "address": "0x37238",
+          "size": 2,
+          "mnemonic": "movs",
+          "operands": "r0, #0x64"
+        },
+        {
+          "address": "0x3723a",
+          "size": 2,
+          "mnemonic": "b",
+          "operands": "#0x37242"
+        },
+        {
+          "address": "0x37240",
+          "size": 2,
+          "mnemonic": "movs",
+          "operands": "r0, #0x41"
+        },
+        {
+          "address": "0x3726e",
+          "size": 2,
+          "mnemonic": "b",
+          "operands": "#0x37238"
+        }
+      ],
+      "unreachable_proof": "The signed remainder value%4 lies in[-3,3], so adding97 lies in[94,100]. Thus lower65/upper100 fallback-clamp blocks at37236/37238/3723a/37240/3726e cannot execute. C retains the clamp; no trap or code blob. All other734 instruction bytes execute."
+    },
+    "normal-coverage-results": {
+      "native_coverage_calls": 7478,
+      "additional_pairs": 54,
+      "instruction_bytes": 734,
+      "instruction_starts": 276,
+      "span_bytes": 744,
+      "missing": [
+        {
+          "address": "0x37236",
+          "size": 2,
+          "mnemonic": "b",
+          "operands": "#0x3723c"
+        },
+        {
+          "address": "0x37238",
+          "size": 2,
+          "mnemonic": "movs",
+          "operands": "r0, #0x64"
+        },
+        {
+          "address": "0x3723a",
+          "size": 2,
+          "mnemonic": "b",
+          "operands": "#0x37242"
+        },
+        {
+          "address": "0x37240",
+          "size": 2,
+          "mnemonic": "movs",
+          "operands": "r0, #0x41"
+        },
+        {
+          "address": "0x3726e",
+          "size": 2,
+          "mnemonic": "b",
+          "operands": "#0x37238"
+        }
+      ],
+      "unreachable_proof": "The signed remainder value%4 lies in[-3,3], so adding97 lies in[94,100]. Thus lower65/upper100 fallback-clamp blocks at37236/37238/3723a/37240/3726e cannot execute. C retains the clamp; no trap or code blob. All other734 instruction bytes execute."
+    }
+  },
+  "compiled_defect_controls": [
+    {
+      "defect": "aux-conversion",
+      "detected": true,
+      "detection_case": "1",
+      "diagnostic": ""
+    },
+    {
+      "defect": "parity-scale",
+      "detected": true,
+      "detection_case": "67",
+      "diagnostic": ""
+    },
+    {
+      "defect": "remainder",
+      "detected": true,
+      "detection_case": "28",
+      "diagnostic": ""
+    },
+    {
+      "defect": "decrement",
+      "detected": true,
+      "detection_case": "348",
+      "diagnostic": ""
+    },
+    {
+      "defect": "wrong-flags",
+      "detected": true,
+      "detection_case": "8",
+      "diagnostic": ""
+    },
+    {
+      "defect": "warmup-equality",
+      "detected": true,
+      "detection_case": "0",
+      "diagnostic": ""
+    },
+    {
+      "defect": "signed-iteration",
+      "detected": true,
+      "detection_case": "6400",
+      "diagnostic": ""
+    },
+    {
+      "defect": "missing-cache-update",
+      "detected": true,
+      "detection_case": "0",
+      "diagnostic": ""
+    },
+    {
+      "defect": "fallback-offset",
+      "detected": true,
+      "detection_case": "112",
+      "diagnostic": ""
+    },
+    {
+      "defect": "unknown-mode",
+      "detected": true,
+      "detection_case": "5",
+      "diagnostic": ""
+    }
+  ],
+  "normal_build": {
+    "normal_report": "build/sources-goal-r1-spo2-select-c/report.json",
+    "units": 937,
+    "unchanged_source_object_pairs": 925,
+    "generated_sources_excluded": [
+      "{gen}/r1_cmsis_os2_rtc.c",
+      "{gen}/fal_partition_r1_lookup.c",
+      "{gen}/fdb_utils_r1.c",
+      "{gen}/gh_demo_r1.c",
+      "{gen}/gh_demo_hook_r1.c",
+      "{gen}/gh_demo_user_r1.c",
+      "{gen}/app_error_handler_gcc_clang.c",
+      "{gen}/r1_startup_vectors.S",
+      "{gen}/gh_ppg_timestamp_hooks_r1.c",
+      "{gen}/r1_uecc.c"
+    ],
+    "new_sources": [
+      "r1/src/application/goodix/native_spo2_select.c"
+    ],
+    "normal_provider_matches_tested_sections_and_decoded_symbols": true,
+    "no_new_assembly_or_writable_sections": true,
+    "coverage_instruction_bytes": 734,
+    "coverage_instruction_starts": 276,
+    "calculate_header_change_preserves_entire_object": true,
+    "removed_imports": [
+      "r1_goodix_spo2_select"
+    ],
+    "imports": {
+      "r1-application": [
+        "GH3X2X_GetVersion",
+        "GH3X2X_UprotocolPacketFormat",
+        "Gh3x2xDemoSendProtocolData",
+        "__data_start__",
+        "gh3x2x_print_fmt",
+        "goodix_hba_calc",
+        "goodix_hba_essential_info_print",
+        "goodix_hrv_calc",
+        "goodix_nadt_calc",
+        "r1_cmb_code_end",
+        "r1_cmb_code_start",
+        "r1_cmb_stack_end",
+        "r1_cmb_stack_start",
+        "r1_eat_command_dispatch",
+        "r1_eat_core_init",
+        "r1_export_plan_command",
+        "r1_factory_input_record_plan_dispatch",
+        "r1_glasses_role_conflict_fault",
+        "r1_gomore_final_sleep_record_publish_native",
+        "r1_gomore_interval_statistics_native",
+        "r1_gomore_sleep_interval_select_native",
+        "r1_gomore_sleep_score_native",
+        "r1_gomore_sleep_stage_refine_native",
+        "r1_gomore_stage_5ef1c_native",
+        "r1_gomore_stage_5f264_native",
+        "r1_gomore_stage_5f3d8_native",
+        "r1_gomore_stage_5f4b6_native",
+        "r1_gomore_stage_5f56c_native",
+        "r1_gomore_stage_5feb8_native",
+        "r1_gomore_stage_605dc_native",
+        "r1_gomore_stage_60af4_native",
+        "r1_gomore_stage_60b80_native",
+        "r1_gomore_stage_60dc4_native",
+        "r1_gomore_stage_610c8_native",
+        "r1_gomore_stage_61198_native",
+        "r1_gomore_stage_61274_native",
+        "r1_gomore_stage_6138c_native",
+        "r1_gomore_stage_statistics_native",
+        "r1_gomore_table_record11_native",
+        "r1_goodix_spo2_confidence",
+        "r1_goodix_spo2_output",
+        "r1_health_auth_parameters_set",
+        "r1_health_lifecycle_engine_initialize_native",
+        "r1_health_settings_plan_command",
+        "r1_health_sync_provider_0003c0d8",
+        "r1_health_sync_provider_0003c304",
+        "r1_health_sync_provider_0003c958",
+        "r1_health_sync_provider_0003fcec",
+        "r1_health_sync_provider_0003fef4",
+        "r1_health_sync_provider_00040508",
+        "r1_health_sync_provider_00040bd4",
+        "r1_health_sync_provider_00040de0",
+        "r1_health_sync_provider_00041438",
+        "r1_health_sync_provider_00043eb0",
+        "r1_health_sync_provider_000440c4",
+        "r1_health_sync_provider_000446b4",
+        "r1_health_sync_provider_0005b39c",
+        "r1_health_sync_provider_0008f954",
+        "r1_legacy_command_route_frame",
+        "r1_manager_assertion_stack_transfer",
+        "r1_manager_logging_start_91504",
+        "r1_phone_role_assertion_stack_transfer",
+        "r1_structured_log_typed",
+        "r1_user_profile_handler"
+      ],
+      "r1-bootloader": [
+        "__bss_end__",
+        "__bss_start__",
+        "__data_start__",
+        "__etext",
+        "__start_crypto_data",
+        "__start_dfu_trans",
+        "__start_fs_data",
+        "__start_sdh_ble_observers",
+        "__start_sdh_req_observers",
+        "__start_sdh_soc_observers",
+        "__start_sdh_stack_observers",
+        "__start_sdh_state_observers",
+        "__start_svc_data",
+        "__stop_crypto_data",
+        "__stop_dfu_trans",
+        "__stop_fs_data",
+        "__stop_sdh_ble_observers",
+        "__stop_sdh_req_observers",
+        "__stop_sdh_soc_observers",
+        "__stop_sdh_stack_observers",
+        "__stop_sdh_state_observers",
+        "__stop_svc_data"
+      ]
+    }
+  },
+  "semantics": [
+    "The native five-argument selector uses software double promote/add-half/truncate on the newest window sample. Auxiliary state+24 is converted with native signed RTZ/FPSCR semantics; state+64 is multiplied by single-precision10000 before software rounding. Even parity enables signed-remainder6 adjustments to the cached byte, clamped to65..100. Both native VCVT sites use the proven pure C bit/status helper; no undefined C float-to-integer casts are introduced.",
+    "Modes0/1/2/12/21 retain their native transitions and policy-bit hysteresis. Unknown modes preserve selected/status values. Warm-up and fallback counters compare against the full unsigned iteration argument. Status5 refreshes the cached byte through UNSIGNED RTZ conversion before the late mode0 fallback; the fallback does not refresh the cache again. Output/status aliases retain live access order and cached versus reread fields.",
+    "Independent finite-integer oracles check transitions, hysteresis/parity, cache ordering and unsigned thresholds. Cartesian state/policy/iteration/flag tests separate dimensions that were correlated in an earlier fixture. An explicit UINT32_MAX iteration case detects the signed-comparison defect. Other direct tests include NaNs, infinities, subnormals and all32 FP configurations. Selected mapped output/status aliases cover state/configuration/auxiliary/parity fields.",
+    "Caller tests execute actual C calculate/quartic, heap, inference parent, model graph, output quality and selection. Earlier processing and the unfinished confidence/output stages are explicit boundaries. Source maps no stock executable code. Only45 guarded typed model callback fields are normalized after exact native-address/C-symbol checks.",
+    "734 native instruction bytes/276 starts execute within the744-byte body. The remaining10 bytes at37236/37238/3723a/37240/3726e are unreachable final-clamp blocks: signed remainder4 is in[-3,3], so adding97 is in[94,100]. C retains the clamp. REA authenticates the complete744-byte span and12 literal bytes (binary64 half and binary32 ten thousand)."
+  ],
+  "limitations": [
+    "Valid mapped owner/window descriptors and nonempty history are assumed. The tested public aliases do not establish recovery for invalid owner-pointer/count aliases. No new fallback is invented for invalid inputs. The stock incidental R0/R1 argument restoration is outside the void C consumer contract.",
+    "Comparisons check public RAM excluding8192 private stack bytes below incoming SP, full FPSCR, savedR4-R11/S16-S31, SP and interrupt masks. Caller scratch/APSR, hardware timing, interrupts and concurrency remain unverified. Candidate broad/edge/oracle/caller suites use32 FP settings; aliases use six. Normal broad/edge/caller samples use six, aliases two, and768 oracle cases cycle all32.",
+    "The normal937-unit build remains relocatable composition with64 application and22 boot imports, not a complete bootable firmware. Confidence and output packing remain open source-tree stages, alongside other hardware/startup dependencies. The output-packing candidate is an ignored probe outside this acceptance. Source plan and health-cache layout are unchanged."
+  ],
+  "evidence_sha256": {
+    "build/goal-r1-model-i8-convolution-c/stock-entry.elf": "8faf5ed5a7e99752b781c1118086f6ada13458b084bd14e8fbb9a2eb58a05e76",
+    "build/goal-r1-spo2-infer-support-c/normal-dependencies.a": "7e62b43a34fcf2b0ae34045a276bf4d564be5dde2ddb636dd0f69169c8843637",
+    "build/goal-r1-spo2-ratio-c/normal-stream-test.ld": "808ff9c64adde68933158791e9d115c75817ae1840e2bdcbcfa42c7a39314cc6",
+    "build/goal-r1-spo2-select-integration-c/alias-results.json": "572ae666bd86cf07b065896863a3b73753d63d963b8bdf3f5b5bf7bd5127a70a",
+    "build/goal-r1-spo2-select-integration-c/aliases.log": "c785966850ab3317cf229094f376a60b08666b380c426b108e4bcb68a5faf441",
+    "build/goal-r1-spo2-select-integration-c/aliases.py": "5e623d17e900f522cda8df060d106cc14dc1b2c6351694959374eeafb849ddee",
+    "build/goal-r1-spo2-select-integration-c/audit.json": "6295abc37b08e4153d0ee43478db8cceee9651d88f04ef617e8fc660aa13c6a2",
+    "build/goal-r1-spo2-select-integration-c/audit.py": "388271668f13f6c7b6e0575228ef7b3728bd1bb6c7d35b55e7f39c125de0fb14",
+    "build/goal-r1-spo2-select-integration-c/caller-link.json": "69d00f81e35e064f32335c74d130d326be42b0cc1e4a3b4410f2ca06221df32a",
+    "build/goal-r1-spo2-select-integration-c/caller-link.log": "ac9f08248cddd2e89de46acb3387830a6e32aec6c745cb9780160c9d7143ff6d",
+    "build/goal-r1-spo2-select-integration-c/caller-results.json": "9f3bdbfa4c2210c7c4d7152da7862ec3660d060bee05d76736e5a61575c547ed",
+    "build/goal-r1-spo2-select-integration-c/caller.elf": "3ae9a3a32ac2dd2759131a91a7c1c8cde55a4b443590cfebc6aa09969cbf433a",
+    "build/goal-r1-spo2-select-integration-c/caller.log": "b34948bb7029ab738ed3e9efedb58580e1559f4104275acafde21cb9037f4169",
+    "build/goal-r1-spo2-select-integration-c/caller.py": "71f38f9a2017b0472e05078f811e2402fbbf9baf4ea9094fc645f2099e707e26",
+    "build/goal-r1-spo2-select-integration-c/caller_fixture.py": "ae249b734687b2c57bd6daed77b27aae755b2b823d3b3f842f4cd600445c96b7",
+    "build/goal-r1-spo2-select-integration-c/caller_matrix.py": "7c5297bd03582d5b3d8df339c90d34c5750e0cecf0b3069ed8599f85edcdb5f6",
+    "build/goal-r1-spo2-select-integration-c/candidate.c": "5ac290447ab7f43ddbfaaef2ba78b83796b697a6f5f7d4be30daf5551a68c9e1",
+    "build/goal-r1-spo2-select-integration-c/candidate.elf": "7f9a4a106f1e2ce681af0b3319d8124751c7b96c62237f9202d27677de5c380d",
+    "build/goal-r1-spo2-select-integration-c/candidate.o": "bb6a3aa8acee8ed4114375515b5e105f78a0e2e0d5a2154f67303ab1ab05e1e2",
+    "build/goal-r1-spo2-select-integration-c/compile-argv.json": "e07b7b4154e3624c5cf2fbf6ef344c080aff2651ade676fc6b8e40b1fd1fb8d0",
+    "build/goal-r1-spo2-select-integration-c/controls-results.json": "007e2d4bfa4b4e63d4d782d262b654a080f065251d204aa449036f160f039974",
+    "build/goal-r1-spo2-select-integration-c/controls.log": "9b4df8a63e0a6dc34cc0961bcb1cfc5c9f27933c3162ee8d8487461d2d07ce7a",
+    "build/goal-r1-spo2-select-integration-c/controls.py": "7f6d58746be196fb121134c275c5d9c58589da8be5f17c807c11b1d3240cbdef",
+    "build/goal-r1-spo2-select-integration-c/coverage-results.json": "f06483d561e22bd11a9997ff837411376edf548eb6934a63c7c8cf3216b73e6c",
+    "build/goal-r1-spo2-select-integration-c/coverage.log": "3db5b27b5590ee57a9a4dfa6811d40b87c88812f84026637d3070727ec98a31e",
+    "build/goal-r1-spo2-select-integration-c/coverage.py": "f86054ed7731040d0ea8a51fb43b2ce0dce3f481146e8b778aaa4bb83e2779c6",
+    "build/goal-r1-spo2-select-integration-c/defect.c": "19e4c2ef979b6123a2295d2dc6bd4a549472359a3e572d9ead04a74140c51d50",
+    "build/goal-r1-spo2-select-integration-c/defect.elf": "f2610847d6224330165a961a6eabae16d5ddcd717a76e01567e42ce10f2237bd",
+    "build/goal-r1-spo2-select-integration-c/defect.o": "7df27e2d9b34d90bacf122aa8a9b3715e1d9cfd92d37f0fd069c4fb0b4bd4c81",
+    "build/goal-r1-spo2-select-integration-c/defect_fixture.py": "f982866e608424b85f40b907f6002030bdef93a89a5f3d591ef523b5806fb640",
+    "build/goal-r1-spo2-select-integration-c/defect_verify.py": "4fc46e8c460c39d2fd596e00fc03954a1f1dbe3875aef46e798b1abf46352c6a",
+    "build/goal-r1-spo2-select-integration-c/document.py": "3ce8ac5aa8c8bd247090e398a3651d92f6b9569601cc9ad11bf7f8b6ac38388d",
+    "build/goal-r1-spo2-select-integration-c/edge-results.json": "3e61f5930d84a9b3dae89036404e00471c7fe7135f895f01fc36670569568398",
+    "build/goal-r1-spo2-select-integration-c/edges.log": "91c43997c493fa622f662cc3c6df08a65974284e992addb6e58e9d4c542c841e",
+    "build/goal-r1-spo2-select-integration-c/edges.py": "7d1c8814a6ce3021ccde70128f601f993d8463dbcb7d149bd6dce2a8cf910e08",
+    "build/goal-r1-spo2-select-integration-c/fixture.py": "503652439bd72ab02e8894672e4399c09578228af9562f6108be294b49fee429",
+    "build/goal-r1-spo2-select-integration-c/link-argv.json": "7349d155c2d2cdf7568401dc1145fa34d22cc2c61954dd8ae52979e31bfd53c7",
+    "build/goal-r1-spo2-select-integration-c/link-argv.log": "5fa0cf745e969217a57fa6fdc3f14741d644ff6be14f36dc28cecf661813ac0a",
+    "build/goal-r1-spo2-select-integration-c/normal-alias-results.json": "4cab052992d2a6d50b90ecf62de1cfb87287882d07ea085b38a77ceb6346a6a2",
+    "build/goal-r1-spo2-select-integration-c/normal-aliases.log": "6d31e94af2711017bc6fa97b8942e4ccb080c759a9836aa1d830d48df073cbb2",
+    "build/goal-r1-spo2-select-integration-c/normal-build.log": "472b741964f6f7907dd6a487f52bb33d15f5bfd68b5880b0ff301b878d56153e",
+    "build/goal-r1-spo2-select-integration-c/normal-caller-link.json": "6a226ebfa15592f7973ab12248c9d85b45b3877085c2138b0464fdd425280d90",
+    "build/goal-r1-spo2-select-integration-c/normal-caller-link.log": "b31b1b6bca99fe2c0c11056dc5e3f63a2dc5f2103e627eae08651eafeb32d29f",
+    "build/goal-r1-spo2-select-integration-c/normal-caller-results.json": "93c555f2fe202ad462547daad05eaffa663a3544c3a287040bfac3a9f2ad4cae",
+    "build/goal-r1-spo2-select-integration-c/normal-caller.elf": "cdf55271ad3b8db76810f61f8e39b6e13119822e4e60a0e8861a71c41c6a9b0f",
+    "build/goal-r1-spo2-select-integration-c/normal-caller.log": "68f44f1b378113d2f2b3f2f503e9be240dc3be9d3932fb5af98b5c7ca84d3165",
+    "build/goal-r1-spo2-select-integration-c/normal-coverage-results.json": "a6b59021d7df1ba785ba18d984464259787598b22e8c1a0dc30a4779103786da",
+    "build/goal-r1-spo2-select-integration-c/normal-coverage.log": "ea25479dc34e554d40ebb06a5c324973f8769b1de44e360329e4df9491403380",
+    "build/goal-r1-spo2-select-integration-c/normal-direct-link.json": "434f312a7a8de79efcde66d84951921ffe482c4e4b7fe01f5ead42e5353df083",
+    "build/goal-r1-spo2-select-integration-c/normal-direct-link.log": "a875a7aae7a31724e52852700af76c904d845c8f9180c1d483cf220472a5c5dd",
+    "build/goal-r1-spo2-select-integration-c/normal-edge-results.json": "8a51b30e312b2f0b844b7cb3c02fb84bda0149c5de7865e47a8fb3e574291022",
+    "build/goal-r1-spo2-select-integration-c/normal-edges.log": "4c47e03ab3b3f4e61061874eb5a5ba23ab666e1ba4af030bf02f972c8fbf6fc2",
+    "build/goal-r1-spo2-select-integration-c/normal-oracle-results.json": "cc658239428c11da01202d15d7f669034767ac2b6d147dfac2ed30ae4709f05f",
+    "build/goal-r1-spo2-select-integration-c/normal-oracles.log": "677cd0c20c4f7e24f4c36c51e81cebbff0ef2240ee7fd3de89d5ddd599b03dca",
+    "build/goal-r1-spo2-select-integration-c/normal-results.json": "0af96deee624ced3c55a96f29b303d63a76b171579308a7165f7c05436dcc53a",
+    "build/goal-r1-spo2-select-integration-c/normal-verify.log": "6c7a38e781948a2b1aa3fdac2b94b8339c813e4e4a028a967aef2001e3f203d0",
+    "build/goal-r1-spo2-select-integration-c/normal.elf": "018d7d4524f74f033f08ea11ec55c1cc69db7eb4c85fa91699a39df491683fe1",
+    "build/goal-r1-spo2-select-integration-c/normal_aliases.py": "2f0b2f36bfe973d233ea4586d769e8095a20ea5bd5a75d29b1dcb225381c9c5c",
+    "build/goal-r1-spo2-select-integration-c/normal_caller.py": "14364f80cad960d5725a0f8ba7ab510cdd2a1edca32a9cd9d6243f0d2b01c75a",
+    "build/goal-r1-spo2-select-integration-c/normal_caller_fixture.py": "63c14b7c247c5cb52a844eeec6931919825e857d76e3a50f5240c9c844c101de",
+    "build/goal-r1-spo2-select-integration-c/normal_caller_matrix.py": "81d3953fd4edd239a6e852df445ceaa47725d6f810deb96c22782f3d9928d5d7",
+    "build/goal-r1-spo2-select-integration-c/normal_coverage.py": "fd51c3eb44acd7387686a324da7d712a1547abac0f51dc4d85437e3a9b4353c6",
+    "build/goal-r1-spo2-select-integration-c/normal_edges.py": "067ca4274a98a0771e7acf74835a8ef93e5cf434e48e09568c127063c7ed6911",
+    "build/goal-r1-spo2-select-integration-c/normal_fixture.py": "6fea8da96c92068a26039303f24d9d73d88e051aa39cff9733a4086df9e1d123",
+    "build/goal-r1-spo2-select-integration-c/normal_oracles.py": "96840c5c2625164cc29e7f4fe843266ceb150aa660d74608bb847f9f03cff299",
+    "build/goal-r1-spo2-select-integration-c/normal_prepare.py": "5879f83838d525f96073d28da9a474b753cfcce16676fde93c3b425a8b230dc1",
+    "build/goal-r1-spo2-select-integration-c/normal_verify.py": "d49634b8a30a12c96ea2d71c39800ac9e293645c7b71759049c6d22b869eb66a",
+    "build/goal-r1-spo2-select-integration-c/oracle-results.json": "6bfd1f0bb3fd9c5129c242b4ce9a8cf0ba313d1de1f137d339dbf47538f3be5c",
+    "build/goal-r1-spo2-select-integration-c/oracles.log": "62ff862dcffb1fc7611331ee234626c34055531a9e6eec9dd9031b47c62674de",
+    "build/goal-r1-spo2-select-integration-c/oracles.py": "ab3f4af9d16c962c9a54fe38b034287244da68fc31f187ca297e35ba63fe979d",
+    "build/goal-r1-spo2-select-integration-c/rea-bytes.json": "207c978b2e85c941f01081b904ec564cd3e51d55cbbfb9886dbd753612837fe5",
+    "build/goal-r1-spo2-select-integration-c/rea-dossier.json": "70c76058bb401f810375154a795ed18f60b394dcf46582fc148011c89458e297",
+    "build/goal-r1-spo2-select-integration-c/rea-literals.json": "5a45975e3568b4a4b8a66ee453378a2f5743a4010a2344fe1e3a1b3ed6320cac",
+    "build/goal-r1-spo2-select-integration-c/results.json": "81d35c3a2ea0361b692505906e1ff139809998fb3f67f3d14e5669febf5d667e",
+    "build/goal-r1-spo2-select-integration-c/sources-check.log": "0d6933694c12214c341707c30797d9922009bc1ab7cff8fd867120545eda1bcd",
+    "build/goal-r1-spo2-select-integration-c/verify.log": "0a2034a5918048608912f78259a4aad195c88783b7df46a3f6eac5bb5eca30f7",
+    "build/goal-r1-spo2-select-integration-c/verify.py": "ca987031a3df31bca50119955d5d3ae798786ac04312d63a965aca213ead6068",
+    "build/sources-goal-r1-spo2-output-quality-c/r1/r1-application/r1__src__application__goodix__native_model_concatenate.c.o": "6f80a63fefdad83c8cf73df17d40caf691c382ed676a0aae82f28bed9f636689",
+    "build/sources-goal-r1-spo2-output-quality-c/r1/r1-application/r1__src__application__goodix__native_model_convolution.c.o": "5c211d9e5cf520e4fef7121843440b89fd956ede5526e2b8db0e48f500747f02",
+    "build/sources-goal-r1-spo2-output-quality-c/r1/r1-application/r1__src__application__goodix__native_model_dense.c.o": "a5baaa994ed42a49be6aaf395a00671963a6c1b6b5d8583777c6305ee05bd1bd",
+    "build/sources-goal-r1-spo2-output-quality-c/r1/r1-application/r1__src__application__goodix__native_model_float_pool.c.o": "17c92a4b130dda0281e7a897dc114fb0450d44b91b380e1dd49f5a2090c2e7ec",
+    "build/sources-goal-r1-spo2-output-quality-c/r1/r1-application/r1__src__application__goodix__native_model_graph_execute.c.o": "4c0c63c859caf0fd22f1320b45136d908f8abbb84d4b0a2e3e2e20a8edc5dd7a",
+    "build/sources-goal-r1-spo2-output-quality-c/r1/r1-application/r1__src__application__goodix__native_model_i8_convolution.c.o": "2657a7199915d67c47531fc0fc9ffbfbe865f4b95534abd1dbdafa390e0ba767",
+    "build/sources-goal-r1-spo2-output-quality-c/r1/r1-application/r1__src__application__goodix__native_model_merge.c.o": "33a43b8fe5af49f578e7ebaf13ebcca37e457e06c19432fbb93762fa6c1024e4",
+    "build/sources-goal-r1-spo2-output-quality-c/r1/r1-application/r1__src__application__goodix__native_model_pool_add.c.o": "73969bf6f08d01ca962bc9a8d85d5696ef178591ae9b5530e89af713b96b8474",
+    "build/sources-goal-r1-spo2-output-quality-c/r1/r1-application/r1__src__application__goodix__native_model_quantization.c.o": "e317ed0e53906a7020f44905fb697f421b021e1d221f9da3f6e78435bcfef649",
+    "build/sources-goal-r1-spo2-output-quality-c/r1/r1-application/r1__src__application__goodix__native_model_recurrent.c.o": "a9f03474c4391045cceb74e33a1aa0031387d459054add0966cbcd300bc9b513",
+    "build/sources-goal-r1-spo2-output-quality-c/r1/r1-application/r1__src__application__goodix__native_model_recurrent_support.c.o": "d9da585a816de8b36c1a8a255860a168d8ba685233e4baf53ed695609bf9b129",
+    "build/sources-goal-r1-spo2-output-quality-c/r1/r1-application/r1__src__application__goodix__native_model_scale.c.o": "70c03a7ad29fde9d634eaae50e201f9b9648d9ce173e72e04289113dedefb7f3",
+    "build/sources-goal-r1-spo2-output-quality-c/r1/r1-application/r1__src__application__goodix__native_model_softmax.c.o": "9e00e9077ae03eb4c80bf06e81f6356747499337da700fd8ba7b3cd79b645fc2",
+    "build/sources-goal-r1-spo2-output-quality-c/r1/r1-application/r1__src__application__goodix__native_model_transform.c.o": "c9d2e209373e9696eee3f03cd6b5dc0a5d47503d7d8b769a368158e5fcd3fad0",
+    "build/sources-goal-r1-spo2-output-quality-c/r1/r1-application/r1__src__application__goodix__native_spo2_calculate.c.o": "0d1e2ddeeefd0ad393d0933a15bf7185e395422378e50e2c584b449fa1cff367",
+    "build/sources-goal-r1-spo2-output-quality-c/r1/r1-application/r1__src__application__goodix__native_spo2_generated_model.c.o": "14f0da4eff0d75d6014f40d928a6bd58dcc44b79b1a4c6ed695c9dbdf87ee210",
+    "build/sources-goal-r1-spo2-output-quality-c/r1/r1-application/r1__src__application__goodix__native_spo2_infer.c.o": "0b447e494745412c299b3839c8bef24cffc7960b638a3d189bb553045d5ed7ab",
+    "build/sources-goal-r1-spo2-output-quality-c/r1/r1-application/r1__src__application__goodix__native_spo2_infer_support.c.o": "ebea499ddab2b91f3bf531f7301ac0cdf5bd5eb051c923a0cbae29e0ac3bdb5c",
+    "build/sources-goal-r1-spo2-output-quality-c/r1/r1-application/r1__src__application__goodix__native_spo2_math.c.o": "265990bd7f6c22c801d820280faeccc977bbacff30e719a4ad3f08414b33dfc5",
+    "build/sources-goal-r1-spo2-output-quality-c/r1/r1-application/r1__src__application__goodix__native_spo2_model_graph.c.o": "ede8398723a208a4ee7336b6004b9189576cd36520f3222c84be227cc166473b",
+    "build/sources-goal-r1-spo2-output-quality-c/r1/r1-application/r1__src__application__goodix__native_spo2_output_quality.c.o": "45f124497678c47d01f0b15a4af23575b2be8cdd9921cf8254f73cfb73067d8f",
+    "build/sources-goal-r1-spo2-output-quality-c/r1/r1-application/r1__src__application__runtime__native_expf_tanhf.c.o": "1b2a1142fd859ed7e67a172be060968c238a5a942afbee379d2318896b946b45",
+    "build/sources-goal-r1-spo2-output-quality-c/r1/r1-application/r1__src__application__runtime__native_float_bits.c.o": "cc448df0a2076c6dd5ee05a700f3221fb9d253ae9ae0cb7b591a0ea3a474c154",
+    "build/sources-goal-r1-spo2-output-quality-c/r1/r1-application/r1__src__application__runtime__native_math_selection.c.o": "8af75876c6bb312a8daeeed99f72214e4afa4afb080649df66a4cbd5a05f2afc",
+    "build/sources-goal-r1-spo2-output-quality-c/report.json": "e3e9bbdd546aec761660964adba9416ecfc911f24c0c990ed1d0f3c2a850c154",
+    "build/sources-goal-r1-spo2-select-c/r1/r1-application/r1__src__application__goodix__native_model_concatenate.c.o": "6f80a63fefdad83c8cf73df17d40caf691c382ed676a0aae82f28bed9f636689",
+    "build/sources-goal-r1-spo2-select-c/r1/r1-application/r1__src__application__goodix__native_model_convolution.c.o": "5c211d9e5cf520e4fef7121843440b89fd956ede5526e2b8db0e48f500747f02",
+    "build/sources-goal-r1-spo2-select-c/r1/r1-application/r1__src__application__goodix__native_model_dense.c.o": "a5baaa994ed42a49be6aaf395a00671963a6c1b6b5d8583777c6305ee05bd1bd",
+    "build/sources-goal-r1-spo2-select-c/r1/r1-application/r1__src__application__goodix__native_model_float_pool.c.o": "17c92a4b130dda0281e7a897dc114fb0450d44b91b380e1dd49f5a2090c2e7ec",
+    "build/sources-goal-r1-spo2-select-c/r1/r1-application/r1__src__application__goodix__native_model_graph_execute.c.o": "4c0c63c859caf0fd22f1320b45136d908f8abbb84d4b0a2e3e2e20a8edc5dd7a",
+    "build/sources-goal-r1-spo2-select-c/r1/r1-application/r1__src__application__goodix__native_model_i8_convolution.c.o": "2657a7199915d67c47531fc0fc9ffbfbe865f4b95534abd1dbdafa390e0ba767",
+    "build/sources-goal-r1-spo2-select-c/r1/r1-application/r1__src__application__goodix__native_model_merge.c.o": "33a43b8fe5af49f578e7ebaf13ebcca37e457e06c19432fbb93762fa6c1024e4",
+    "build/sources-goal-r1-spo2-select-c/r1/r1-application/r1__src__application__goodix__native_model_pool_add.c.o": "73969bf6f08d01ca962bc9a8d85d5696ef178591ae9b5530e89af713b96b8474",
+    "build/sources-goal-r1-spo2-select-c/r1/r1-application/r1__src__application__goodix__native_model_quantization.c.o": "e317ed0e53906a7020f44905fb697f421b021e1d221f9da3f6e78435bcfef649",
+    "build/sources-goal-r1-spo2-select-c/r1/r1-application/r1__src__application__goodix__native_model_recurrent.c.o": "a9f03474c4391045cceb74e33a1aa0031387d459054add0966cbcd300bc9b513",
+    "build/sources-goal-r1-spo2-select-c/r1/r1-application/r1__src__application__goodix__native_model_recurrent_support.c.o": "d9da585a816de8b36c1a8a255860a168d8ba685233e4baf53ed695609bf9b129",
+    "build/sources-goal-r1-spo2-select-c/r1/r1-application/r1__src__application__goodix__native_model_scale.c.o": "70c03a7ad29fde9d634eaae50e201f9b9648d9ce173e72e04289113dedefb7f3",
+    "build/sources-goal-r1-spo2-select-c/r1/r1-application/r1__src__application__goodix__native_model_softmax.c.o": "9e00e9077ae03eb4c80bf06e81f6356747499337da700fd8ba7b3cd79b645fc2",
+    "build/sources-goal-r1-spo2-select-c/r1/r1-application/r1__src__application__goodix__native_model_transform.c.o": "c9d2e209373e9696eee3f03cd6b5dc0a5d47503d7d8b769a368158e5fcd3fad0",
+    "build/sources-goal-r1-spo2-select-c/r1/r1-application/r1__src__application__goodix__native_spo2_calculate.c.o": "0d1e2ddeeefd0ad393d0933a15bf7185e395422378e50e2c584b449fa1cff367",
+    "build/sources-goal-r1-spo2-select-c/r1/r1-application/r1__src__application__goodix__native_spo2_generated_model.c.o": "14f0da4eff0d75d6014f40d928a6bd58dcc44b79b1a4c6ed695c9dbdf87ee210",
+    "build/sources-goal-r1-spo2-select-c/r1/r1-application/r1__src__application__goodix__native_spo2_infer.c.o": "0b447e494745412c299b3839c8bef24cffc7960b638a3d189bb553045d5ed7ab",
+    "build/sources-goal-r1-spo2-select-c/r1/r1-application/r1__src__application__goodix__native_spo2_infer_support.c.o": "ebea499ddab2b91f3bf531f7301ac0cdf5bd5eb051c923a0cbae29e0ac3bdb5c",
+    "build/sources-goal-r1-spo2-select-c/r1/r1-application/r1__src__application__goodix__native_spo2_math.c.o": "265990bd7f6c22c801d820280faeccc977bbacff30e719a4ad3f08414b33dfc5",
+    "build/sources-goal-r1-spo2-select-c/r1/r1-application/r1__src__application__goodix__native_spo2_model_graph.c.o": "ede8398723a208a4ee7336b6004b9189576cd36520f3222c84be227cc166473b",
+    "build/sources-goal-r1-spo2-select-c/r1/r1-application/r1__src__application__goodix__native_spo2_output_quality.c.o": "45f124497678c47d01f0b15a4af23575b2be8cdd9921cf8254f73cfb73067d8f",
+    "build/sources-goal-r1-spo2-select-c/r1/r1-application/r1__src__application__goodix__native_spo2_select.c.o": "f5d1dacbf728a653e0326d68ef1e28d556cba595700b2f10675ee19b089fc135",
+    "build/sources-goal-r1-spo2-select-c/r1/r1-application/r1__src__application__runtime__native_expf_tanhf.c.o": "1b2a1142fd859ed7e67a172be060968c238a5a942afbee379d2318896b946b45",
+    "build/sources-goal-r1-spo2-select-c/r1/r1-application/r1__src__application__runtime__native_float_bits.c.o": "cc448df0a2076c6dd5ee05a700f3221fb9d253ae9ae0cb7b591a0ea3a474c154",
+    "build/sources-goal-r1-spo2-select-c/r1/r1-application/r1__src__application__runtime__native_math_selection.c.o": "8af75876c6bb312a8daeeed99f72214e4afa4afb080649df66a4cbd5a05f2afc",
+    "build/sources-goal-r1-spo2-select-c/report.json": "3d9111c325bb13e2738f25d3f8a1d9f41e9ef19bbc098aadb4ed85c0e845df4f",
+    "r1/blobs/official/r1-2.2.6.0009/application.bin": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "r1/docs/reference/FUNCTION-OWNERSHIP.csv": "60eca7ddbae2fa86e0662351241e5d9913f0bd3509e75c8685811067bdc6c0f5",
+    "r1/src/application/goodix/native_spo2_calculate.c": "c2def9b6edcfe97256b6058670f296e0b7b99838a8476e59a6a72cac0ac398a6",
+    "r1/src/application/goodix/native_spo2_select.c": "fa1882c4b38746234a381f1f8b4bfccc524a10f0ac3bb689d67051f6fdd03741",
+    "r1/src/application/goodix/native_spo2_select.h": "a0f66c428faafe20df50096dd306b3fda0157892f7addc69755a55650ffef821",
+    "r1/src/application/runtime/native_f32_integer.h": "239b6c7dc2bd398d8abf541979a85039a7a5391d4ea37e4bd9dad0503420c741",
+    "r1/src/config/runtime/native_health_cache.ld": "eb8f131c489cd818d4e36718718fa1989719ca0170f164541a1a5bf56dfc1ec3",
+    "r1/src/sources.json": "60769464537bc49fb826ed725b0494291173a59f659441236cd73de834a268b5",
+    "tools/build/source-plan.json": "eeb516e31b3310fb0718f36908977f8125723f7c5e0e86cd6744395826259a4d"
+  }
+}

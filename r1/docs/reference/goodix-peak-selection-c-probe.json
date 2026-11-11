@@ -1,0 +1,114 @@
+{
+  "schema_version": 1,
+  "status": "stock-validated C candidate; source admission pending",
+  "entries": {
+    "0x668dc": "native_minimum_row",
+    "0x66900": "native_peak_mask",
+    "0x36734": "native_peak_indices"
+  },
+  "total_stock_c_pairs": 4194,
+  "independent_oracle_pairs": 306,
+  "verification": {
+    "results": {
+      "pairs": 3720,
+      "elapsed_seconds": 52.93740233290009,
+      "scope": "Actual C heap/memset,row minimum,packed mask matrix and selected indices. All32 FP modes for helpers;4 parent modes,37-row descriptor,capacities/begin offsets,NaN/denormal/tie data;public RAM,FPSCR,saved ABI,SP/masks."
+    },
+    "alias-results": {
+      "pairs": 168,
+      "elapsed_seconds": 2.2872462500818074,
+      "scope": "Ordered output/input aliases and minimum-index output/descriptor aliases;6 FP modes,actual C heap/public RAM and saved ABI."
+    },
+    "oracle-results": {
+      "pairs": 306,
+      "elapsed_seconds": 5.495983792003244,
+      "scope": "Independent signed argmin and mathematical finite-sample multiscale maxima/earliest-row/plateau selection oracles;2 FP modes;actual heap and public-RAM stock/C comparisons."
+    }
+  },
+  "coverage": {
+    "instruction_bytes": 610,
+    "instruction_starts": 214,
+    "entries": 3
+  },
+  "compiled_defect_controls": [
+    {
+      "defect": "signed-row-minimum",
+      "detected": true
+    },
+    {
+      "defect": "minimum-output-zero",
+      "detected": true
+    },
+    {
+      "defect": "unordered-mask",
+      "detected": true
+    },
+    {
+      "defect": "inclusive-best-row",
+      "detected": true
+    },
+    {
+      "defect": "fixed-row-descriptor",
+      "detected": true
+    },
+    {
+      "defect": "capacity-bound",
+      "detected": true
+    },
+    {
+      "defect": "equal-plateau",
+      "detected": true
+    }
+  ],
+  "semantics": [
+    "Minimum-row668dc loads signed16 input0 before zeroing the output index,then keeps the earliest strict minimum with a16-bit wrapped loop index. Count0 still reads input0 and writes output0.",
+    "Mask66900 caches u16 length/row count,allocates and zeros a packed bit matrix,marks triangular boundaries,and checks left then right neighbors using signaling comparisons. Native unsigned BHI conditions accept unordered NaNs;the C comparison flags preserve this behavior and short-circuit order. Actual zero-filling C heap row sums feed signed16 earliest-row selection. Output u16 counts accumulate existing values through the selected row inclusively.",
+    "Indices36734 allocates its zeroed mask,uses the locked descriptor row count37,and scans from index1. Zero-mask candidates and equal adjacent plateau samples with neighboring mask counts1 can qualify. Preserve signed begin+1/capacity comparisons,signed16 selected-counter increments,live aliases,halfword index stores,and final count store before freeing the mask."
+  ],
+  "limitations": [
+    "Probe only;not admitted to sources.json. Valid aligned/mapped buffers are assumed. Direct mask cases have1<=rows<=length<=125;parent lengths37/75/125 use37 rows. Minimum helper tests count0..125;counts above65535 would wrap indefinitely in stock and are not assigned invented recovery. Negative matrix indices or invalid descriptors/allocations remain outside the tested domain.",
+    "Public RAM excludes8192 private stack bytes below SP;void caller scratch/APSR are excluded. FPSCR,saved core/FP registers,SP and interrupt masks are checked. Helpers use32 FP configurations;parent uses4 and aliases6. Timing,physical hardware and interrupts/concurrency remain unverified.",
+    "Independent finite-sample oracles cover signed argmin,mathematical multiscale maxima,earliest-row ties,existing output-count accumulation,and plateau/capacity/begin selection. Full dual-window extraction and confidence parent remain open."
+  ],
+  "evidence_sha256": {
+    "build/goal-r1-dual-window-support-c/rea-36734.json": "3fd58f98946722a01a2bdc59f14eb9ebc42f4cb53b6c27e7409ed698d8ad4971",
+    "build/goal-r1-model-i8-convolution-c/stock-entry.elf": "8faf5ed5a7e99752b781c1118086f6ada13458b084bd14e8fbb9a2eb58a05e76",
+    "build/goal-r1-peak-selection-c/alias-results.json": "dea23d376561f69c914f8dd5d2fcc692bd44ca0bf72a0a72735dd69b618f0666",
+    "build/goal-r1-peak-selection-c/aliases.log": "c02efad74c4db35b2450beec922eb590d202b34c5b436bff0b6acc15059f5d21",
+    "build/goal-r1-peak-selection-c/aliases.py": "943f745996f563605b1a2a529cdd15ac152151e09be44bafe134fb99a07415a9",
+    "build/goal-r1-peak-selection-c/candidate.c": "4af6735ee402701e04f4f79c928abf84d5546fc35aaa0c0eea0c8f8cceac84da",
+    "build/goal-r1-peak-selection-c/candidate.elf": "3a2d118b20e52b85156756803be0f65e6bad2aa96531d3dd36e72ddcb85d38a0",
+    "build/goal-r1-peak-selection-c/candidate.o": "741935df6f9b84386e83d4e21161d11940a83405e798ee42aa667582a9a28575",
+    "build/goal-r1-peak-selection-c/compile-argv.json": "8c034af83622730ffc142ba85711028bf36b1d80cc9dcf6f590f52198164171d",
+    "build/goal-r1-peak-selection-c/controls-results.json": "42425fb952dbff570b880b2caebac41e73592b87a7b4e566d2be3032a6f71553",
+    "build/goal-r1-peak-selection-c/controls.log": "03542a9f1f05a0e53c2adaf81a290c9b5ff6737ec456f7ac5cdbfcf80543665d",
+    "build/goal-r1-peak-selection-c/controls.py": "56be7378ea5bffccda5dfa3c5a013971cbbb1182ccf9bf7107575f82b332de68",
+    "build/goal-r1-peak-selection-c/coverage-results.json": "19e2747c76e731755dbcca34122ffcb273f60189eb11684edec16d02c81383ea",
+    "build/goal-r1-peak-selection-c/coverage.log": "11958283667ecd9cc934021ce71a42dd845585b38df4bfa38da1ad69af05c7a5",
+    "build/goal-r1-peak-selection-c/coverage.py": "2ce257b7c61ebf657d40bab4b78d5c0cb7786241a360b7697edbb03c210047fd",
+    "build/goal-r1-peak-selection-c/defect.c": "420662ccc8520c6c87a4a1d559a3919813f7714867ce9470a5264de370f240da",
+    "build/goal-r1-peak-selection-c/defect.elf": "177b9303117f27c8375da97c8883d0d6875df29ef5d179deb9f35d1034c62a7b",
+    "build/goal-r1-peak-selection-c/defect.o": "c8320cad3bb38f29843e9cead46752c174b5a309c7100de40dacbe9935a67d75",
+    "build/goal-r1-peak-selection-c/document.py": "acc120693e037172d5e5d44569079648fc756b73586d2995c7cc1c053b2eb245",
+    "build/goal-r1-peak-selection-c/fixture.py": "0981d175d12685504b8e7da3f4b2b5b06a74d7d28d68e63097e97bf423415bcb",
+    "build/goal-r1-peak-selection-c/link-argv.json": "e3da9b9463a1f392202393880ec664b8574dcb5e882ad9eee5530a5f370c1378",
+    "build/goal-r1-peak-selection-c/link.log": "3cd152c811cdfcc70bd005c9b734f5d2c47e0921956d6b7953eb00e37dfbedb1",
+    "build/goal-r1-peak-selection-c/oracle-results.json": "c58e34874d8fa20e74db843d8ecec72a2de93d8c5270e00c7e261e6f4659b837",
+    "build/goal-r1-peak-selection-c/oracles.log": "fc53fb23e4ae1df02b05ea4cbe66145dfbeca9037cb56cb7b3e900eb0ee11b5a",
+    "build/goal-r1-peak-selection-c/oracles.py": "25e4111cbab61d78f93a8a439d9bb53bdb9ed8859ff8ea4034fd5d66b8ca4937",
+    "build/goal-r1-peak-selection-c/peaklib.py": "33fa5dd8f22312e11bd8284f499f85fd6d7d33591a4d280d20da2e7720a46980",
+    "build/goal-r1-peak-selection-c/prepare.py": "9cba7280a87eec7d791c2be2d3ef3030544a3982c10482656ebdc7935675549d",
+    "build/goal-r1-peak-selection-c/rea-668dc.json": "fe4350e9e76bcc5fc3063fb00a3c03da9c7a903650a1f6e6356a8c3aa91c654a",
+    "build/goal-r1-peak-selection-c/rea-66900.json": "cc87f3210871c75ffd381938af2f0ee49f2c73778626cc7e763968ca5e32a77c",
+    "build/goal-r1-peak-selection-c/rea-bytes.json": "26e7ec5eca507df2c95314fd943fa8198895cf4ffe8e663d4bbcefcee4be5a94",
+    "build/goal-r1-peak-selection-c/results.json": "156e4740c5633b6c5cdf687eb6499bcf859641a5e5febe6d872b1e6d6f4cf410",
+    "build/goal-r1-peak-selection-c/verify.log": "9f2272eec277b80c3572eed194eda779c8955766f7f67e1196e2514a88f15c66",
+    "build/goal-r1-peak-selection-c/verify.py": "6e8e9c40fe197162a978e813b1a49d9d64c72631731564f1b606c14b2e15790f",
+    "build/goal-r1-spo2-infer-support-c/normal-dependencies.a": "7e62b43a34fcf2b0ae34045a276bf4d564be5dde2ddb636dd0f69169c8843637",
+    "build/goal-r1-spo2-ratio-c/normal-stream-test.ld": "808ff9c64adde68933158791e9d115c75817ae1840e2bdcbcfa42c7a39314cc6",
+    "build/sources-goal-r1-spo2-statistics-c/r1/r1-application/r1__src__application__goodix__native_spectral_peaks.c.o": "9b99c7c3b40c8e0c3a3ba34e7736b37f710d063c760ef0898482243c361e1ec0",
+    "build/sources-goal-r1-spo2-statistics-c/r1/r1-application/r1__src__application__runtime__native_float_bits.c.o": "cc448df0a2076c6dd5ee05a700f3221fb9d253ae9ae0cb7b591a0ea3a474c154",
+    "r1/blobs/official/r1-2.2.6.0009/application.bin": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "r1/src/sources.json": "1a8f981f880971158d495770a30bf9b701c7f1ac8586db0ee665f651c279c401"
+  }
+}

@@ -1,3 +1,4 @@
+#include "native_float_bits.h"
 #include <stdint.h>
 extern uint64_t r1_format_double_add_bits(uint64_t,uint64_t);
 extern uint64_t r1_format_double_multiply_bits(uint64_t,uint64_t);
@@ -5,7 +6,6 @@ extern uint64_t r1_format_double_divide_bits(uint64_t,uint64_t);
 extern uint64_t r1_binary64_subtract_bits(uint64_t,uint64_t);
 extern uint64_t r1_binary64_reverse_subtract_bits(uint64_t,uint64_t);
 extern uint64_t r1_native_fabs_core_bits(uint64_t);
-extern uint32_t r1_binary64_classify_bits(uint64_t,uint32_t,uint32_t);
 extern double r1_math_low_square64(void);
 extern double r1_math_self_add64(double);
 extern double r1_native_polynomial(double,const uint64_t *,uint32_t);
@@ -38,7 +38,7 @@ double r1_native_atan(double input)
     int reduction;
     if(magnitude<r1_atan_local[6]) {
         if(magnitude<r1_atan_local[7]) {
-            if(r1_binary64_classify_bits(x,0,0)==4)(void)r1_math_low_square64();
+            if(r1_binary64_classify_bits(x,0,0)[0]==4)(void)r1_math_low_square64();
             return input;
         }
         reduction=-1;

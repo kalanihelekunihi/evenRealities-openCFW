@@ -1,0 +1,75 @@
+{
+  "cases": 32768,
+  "passed": 32768,
+  "failures": [],
+  "actual_ready_and_register_read_frontends_execute": true,
+  "callback_depths": [
+    [
+      [
+        -16,
+        -16
+      ],
+      [
+        -24,
+        -24
+      ]
+    ],
+    [
+      [
+        -16,
+        -16,
+        -8
+      ],
+      [
+        -24,
+        -24,
+        -16
+      ]
+    ]
+  ],
+  "old_frame_regression": {
+    "native_destination": "0x2002fff8",
+    "old_destination": "0x2002fff4",
+    "same_r0_r3": true
+  },
+  "source_bridge_size": 10,
+  "source_body_size": 36,
+  "other_source_units_unchanged": 561,
+  "imports_unchanged": true,
+  "application_imports": 211,
+  "bootloader_imports": 34,
+  "integrated_sources": [
+    "r1/src/application/board/native_yhm_status.c",
+    "r1/src/application/board/native_yhm_frontend.c"
+  ],
+  "report": "build/sources-goal-r1-yhm-status/report.json",
+  "report_sha256": "b410b51baed67ede27c2a282e32055474740ef3c04eda7ecca247c72cec4ac28",
+  "manifest_sha256": "9c5b7ae5c0e7493eb22e1fb4df9f0c928c2a9aa70530254aff89b55213bef2e2",
+  "stock_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "rea": {
+    "path": "build/goal-r1-yhm-status/REA.json",
+    "sha256": "7335511f070b44a5c50f54f476319f2f56c8912013b5195e5374ca73f8b9ce24",
+    "procedure": "0x3529a"
+  },
+  "source_sha256": {
+    "r1/src/application/board/native_yhm_status.c": "f18c49ff5add4844ceb53df75b8830601546e9c646cbdcf8e55aba1bf80dcb9a",
+    "r1/src/application/board/native_yhm_frontend.c": "1a185bd812b5dd53e1a486af2fc8f5a60d006b5b9fd0a19fd85ae68885756d39"
+  },
+  "probe_artifacts": {
+    "build/goal-r1-yhm-status/before.c": "469ebfc33697d0f92515d50c54a503dd94b1a1a8a13dc4517aba999434068356",
+    "build/goal-r1-yhm-status/stock.s": "76dcf648dd74e686cbe6f15dea6493872eab9d6e2f4ea3fe1c6a25b41009e95b",
+    "build/goal-r1-yhm-status/stock.elf": "7bc016f41643d2c89085d0866ee3d05b0ce0fc7ed3ac4e6057c19a20c26a49ca",
+    "build/goal-r1-yhm-status/REA.json": "7335511f070b44a5c50f54f476319f2f56c8912013b5195e5374ca73f8b9ce24",
+    "build/goal-r1-yhm-status/rea-snapshot.json": "b9e7007f994ef2ff151d14d256c20dcf52e3a3bf049882eb7b6de1bfd5b1105b",
+    "build/goal-r1-yhm-status/verify.py": "ffca6b9044d132cfd0cc6b249c6fb18a2257dc84f6a1cc64c0ce2bf4e25a9dac",
+    "build/goal-r1-yhm-status/results.json": "8a535218d73e8ba7931b9763b1b1bf0d4cc6a7def91392cca35674f0431ee1f8",
+    "build/goal-r1-yhm-status/source.elf": "8bff3ae631f39c4f040c1885438adde1e71f078e771d4e54983525e435fc2f36",
+    "build/goal-r1-yhm-status/old.elf": "c2e5dc2a1607f0733ff91b3ad782dae8f867d3b8503c138bb6ed2d6a53b88bfb"
+  },
+  "limits": [
+    "The existing C status logic is retained; fragile register moves are replaced by a ten-byte frame bridge and 36-byte C body, versus 112 native bytes. No byte identity or provider qualification.",
+    "Actual ready and register-read frontends execute with a native-address configuration view; GPIO input/probe and lower register transport are modeled. Actual GPIO, wire timing and PMIC hardware are unproven.",
+    "The native scratch remains at caller SP-8 and full R3 is restored. Ready callbacks deepen from SP-16 to SP-24, and transport from SP-8 to SP-16. Private C frames, faults, exceptions and timing identity are not established.",
+    "Manifest eligibility and import sets are unchanged. Final firmware linking, boot integration, source completeness and whole-image byte identity remain open; no G2 gate or source-plan change."
+  ]
+}

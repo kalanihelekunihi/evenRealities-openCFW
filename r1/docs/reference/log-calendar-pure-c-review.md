@@ -1,0 +1,13 @@
+# Ordinary C cached local-calendar logger
+
+`r1_log_local_datetime_fill` now runs directly in C. Its fixed 104-byte assembly frame and separate worker are replaced with a local epoch and initialized nine-word conversion object. The concrete `time_calendar_unix_to_broken_down` implementation writes every result field before returning. Sequential packed output stores and volatile cache loads/stores remain. The prefix consumer declaration now correctly returns `uint32_t`; its compiled object is unchanged.
+
+REA authenticates the stock entry at `0x8ac28`. **2,896 stock/C comparisons** pass: 2,824 execute the actual calendar converter and 72 use fully written, null, alternate or state-aliased converter results. Cases cover signed timezone limits, timestamp wrapping, negative local times, cache hits/misses, late timezone changes, registered-state changes, unaligned/state-aliased outputs, null output and 1,024 seeded random timestamps. Public output/state, provider arguments and order, and the incidental seconds return agree. Stack restoration and caller-stack guards, saved integer/FP registers, interrupt masks and FPSCR are checked.
+
+**2,824 additional stock/C comparisons** execute the actual registered-backend timestamp thunk and its callback lookup. The getter receives NULL, as in stock. Conversion, signed 64-bit division and memory clearing use their actual source implementations. The timestamp getter remains modeled; these checks do not establish physical RTC behavior.
+
+Five compiled defects are rejected: missing cache-valid publication, lost timezone, inverted cached-day admission, wrong packed time word and lost seconds return. The normal build compiles all **855 units** and completes both relocatable compositions with unchanged **61 application / 22 bootloader imports**. All **844 other nongenerated objects** are identical. Both probe objects match the normal calendar object. R1 source validation passes, manifest/source-plan selections are unchanged and no persistent state is added.
+
+The C frame is 72 bytes at timestamp/converter boundaries versus native 104 bytes. Private stack addresses and partially written converter output are outside this typed contract; the linked concrete converter fills all nine words. This supersedes the older fixed-scratch review for the production implementation. Provider overruns/private frame aliases, incidental caller registers, APSR, concurrent execution and faults are excluded. Physical RTC operation, final application linking and boot remain unverified. Byte identity is not required.
+
+[Machine receipt](log-calendar-pure-c-review.json) binds the source, providers, REA evidence, normal build and ignored probes under `build/goal-r1-log-calendar-pure-c/`.

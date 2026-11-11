@@ -85,3 +85,12 @@ Round 39: Seven sensor-transaction children and six output-bus helpers inventori
 Round 40: six historical child names audited. Source-owned signed scale (`0x0800018c`), shared dispatch copy (`0x080001b4`, two exact-address aliases), `0x56` exit (`0x080012e4`) and `0x14` B reader (`0x08009f18`) pass direct and linked stock/source oracles. Only original `case_binary_5e_apply` remains unowned; physical flash effects block admission. Test graph 28 providers, 31 lower names (26 selected-source aliases, one original child, four nested lowers). Selected CASE archive unchanged.
 
 Round 41: isolated `binary_5e_retry_failure_candidate.c` matches stock `0x0800373c` on 18 controlled three-read-failure cases, including configuration state, wait/error logging, finalization call and R0. It is intentionally outside the linked test graph and selected archive. The success path writes at external flash `0x0803f000`/`0x0803f008`; source data and flash initialization/read/write/finalization effects remain unproved. This completes the present local CASE source audit, not the public binary provider. Test graph stays 28 providers/31 lower names; selected archive stays 43 objects/70 providers/three imports (10/12 direct). See analysis REPORT Round 41 for exact remaining contracts.
+
+## Deduplication (2026-10-30)
+
+Several files listed above were merged into a single implementation per stock
+function; the superseded copies were removed and their names are now typed
+aliases (`__attribute__((alias))`) of the kept body. Each kept file notes the
+alias with a `Dedup (0x0800xxxx)` comment. The removed files and the decision
+log (stock-address groups, differential test results) are under
+`build/case-link/dedup/` in the working tree that did the merge.

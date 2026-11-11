@@ -1,138 +1,47 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_callback_3189f4\n"
-".type opencfw_em9305_callback_3189f4,@function\n"
-"opencfw_em9305_callback_3189f4:\n"
-"L3189f4:\n"
-"enter_s [r13-r17,blink]\n"
-"L3189f6:\n"
-"mov_s r14,r1\n"
-"L3189f8:\n"
-"mov_s r15,r0\n"
-"L3189fa:\n"
-"mov_s r17,0\n"
-"L3189fc:\n"
-"mov_s r0,0x805cac\n"
-"L318a02:\n"
-"ld r0,[r0,0]\n"
-"L318a04:\n"
-"ldb r0,[r0,34]\n"
-"L318a08:\n"
-"brhs.d.nt r17,r0,L318ab2\n"
-"L318a0c:\n"
-"mov_s r1,r17\n"
-"L318a0e:\n"
-"mov_s r0,0x805c70\n"
-"L318a14:\n"
-"mpywhl r1,r1,912\n"
-"L318a18:\n"
-"ld r2,[r0,0]\n"
-"L318a1a:\n"
-"add_s r1,r1,r2\n"
-"L318a1c:\n"
-"ldb_s r0,[r1,0]\n"
-"L318a1e:\n"
-"breq.d.nt r0,0,L318aae\n"
-"L318a22:\n"
-"mov_s r16,r2\n"
-"L318a24:\n"
-"ldb_s r0,[r1,0x2]\n"
-"L318a26:\n"
-"breq_s r0,0,L318a6a\n"
-"L318a28:\n"
-"mov_s r13,0x8012d8\n"
-"L318a2e:\n"
-"ld r2,[r13,0x4]\n"
-"L318a30:\n"
-"ld r0,[r13,0]\n"
-"L318a32:\n"
-"xor_s r2,r2,r14\n"
-"L318a34:\n"
-"xor_s r0,r0,r15\n"
-"L318a36:\n"
-"or.f 0,r0,r2\n"
-"L318a3a:\n"
-"beq_s L318aae\n"
-"L318a3c:\n"
-"add r1,r1,548\n"
-"L318a40:\n"
-"ldb_s r0,[r1,0]\n"
-"L318a42:\n"
-"bbit0.d.nt r0,0x7,L318a64\n"
-"L318a46:\n"
-"mov r0,565\n"
-"L318a4a:\n"
-"mpywhl r1,r17,0x390\n"
-"L318a52:\n"
-"add r16,r16,r1\n"
-"L318a56:\n"
-"ldb r0,[r16,r0]\n"
-"L318a5a:\n"
-"breq_s r0,0,L318a64\n"
-"L318a5c:\n"
-"bl opencfw_em9305_associated_time_alias_30fd34\n"
-"L318a60:\n"
-"st r0,[r16,240]\n"
-"L318a64:\n"
-"st_s r15,[r13,0]\n"
-"L318a66:\n"
-"st_s r14,[r13,0x4]\n"
-"L318a68:\n"
-"b_s L318aae\n"
-"L318a6a:\n"
-"ld r1,[0x801314]\n"
-"L318a72:\n"
-"exth r13,r17\n"
-"L318a76:\n"
-"breq_s r1,0,L318a7c\n"
-"L318a78:\n"
-"jl_s.d [r1]\n"
-"L318a7a:\n"
-"mov_s r0,r13\n"
-"L318a7c:\n"
-"mov_s r1,0x16\n"
-"L318a7e:\n"
-"bl.d opencfw_em9305_child_307434\n"
-"L318a82:\n"
-"mov_s r0,r13\n"
-"L318a84:\n"
-"mov_s r13,0xc\n"
-"L318a86:\n"
-"brne_s r0,0,L318ab4\n"
-"L318a88:\n"
-"bl.d opencfw_em9305_wsf_event_allocate\n"
-"L318a8c:\n"
-"mov_s r0,0xc\n"
-"L318a8e:\n"
-"mov_s r1,r0\n"
-"L318a90:\n"
-"breq_s r0,0,L318ab4\n"
-"L318a92:\n"
-"mov_s r2,0x1601\n"
-"L318a98:\n"
-"mov_s r0,0x805b18\n"
-"L318a9e:\n"
-"sth_s r2,[r1,0x2]\n"
-"L318aa0:\n"
-"ldb_s r0,[r0,0]\n"
-"L318aa2:\n"
-"st_s r15,[r1,0x4]\n"
-"L318aa4:\n"
-"st_s r14,[r1,0x8]\n"
-"L318aa6:\n"
-"bl.d opencfw_em9305_wsf_task_message_send\n"
-"L318aaa:\n"
-"sth r17,[r1]\n"
-"L318aae:\n"
-"add_s r17,r17,1\n"
-"L318ab0:\n"
-"b_s L3189fc\n"
-"L318ab2:\n"
-"mov_s r13,0\n"
-"L318ab4:\n"
-"mov_s r0,r13\n"
-"L318ab6:\n"
-"leave_s [r13-r17,blink,pcl]\n"
-".size opencfw_em9305_callback_3189f4,.-opencfw_em9305_callback_3189f4\n"
-);
+#include <stdint.h>
+
+/* Native 0x3189f4..0x318ab8: a new local address {low, high}. For every
+ * active 912-byte record (config byte 34 records from *0x805c70): records
+ * with an address already set (+2) update the cached address at 0x8012d8
+ * when it changed, restamping the record's anchor (+240) first when its
+ * flags (+548 bit 7) and timer (+565) say so. Records without one notify
+ * the hook at *0x801314, run 307434 and send event 0x1601 {record, low,
+ * high} to the task at 0x805b18. Returns 0x0c if 307434 fails or no
+ * 12-byte message is available, else 0. The stock hook call leaves the
+ * hook address in r1. */
+extern uint32_t opencfw_em9305_associated_time_alias_30fd34(void);
+extern uint32_t opencfw_em9305_child_307434(uint32_t,uint32_t);
+extern uintptr_t opencfw_em9305_wsf_event_allocate(uint32_t);
+extern uint32_t opencfw_em9305_wsf_task_message_send(uint32_t,uintptr_t);
+
+uint32_t opencfw_em9305_callback_3189f4(uint32_t low,uint32_t high)
+{
+    volatile uint32_t *cached=(volatile uint32_t *)(uintptr_t)0x8012d8u;
+    for(uint32_t index=0u;;++index) {
+        uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+        if(index>=*(volatile uint8_t *)(config+34u)) return 0u;
+        uintptr_t base=*(volatile uint32_t *)(uintptr_t)0x805c70u;
+        uintptr_t record=base+index*912u;
+        if(*(volatile uint8_t *)record==0u) continue;
+        if(*(volatile uint8_t *)(record+2u)!=0u) {
+            if(((cached[0]^low)|(cached[1]^high))==0u) continue;
+            if((*(volatile uint8_t *)(record+548u)&0x80u)!=0u&&
+               *(volatile uint8_t *)(record+565u)!=0u)
+                *(volatile uint32_t *)(record+240u)=opencfw_em9305_associated_time_alias_30fd34();
+            cached[0]=low;
+            cached[1]=high;
+            continue;
+        }
+        uintptr_t hook=*(volatile uint32_t *)(uintptr_t)0x801314u;
+        if(hook!=0u) ((void (*)(uint32_t,uintptr_t))hook)((uint16_t)index,hook);
+        if(opencfw_em9305_child_307434((uint16_t)index,0x16u)!=0u) return 0x0cu;
+        uintptr_t message=opencfw_em9305_wsf_event_allocate(12u);
+        if(message==0u) return 0x0cu;
+        *(volatile uint16_t *)(message+2u)=0x1601u;
+        uint32_t task=*(volatile uint8_t *)(uintptr_t)0x805b18u;
+        *(volatile uint32_t *)(message+4u)=low;
+        *(volatile uint32_t *)(message+8u)=high;
+        *(volatile uint16_t *)message=(uint16_t)index;
+        (void)opencfw_em9305_wsf_task_message_send(task,message);
+    }
+}

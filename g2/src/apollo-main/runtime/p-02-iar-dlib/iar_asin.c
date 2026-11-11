@@ -64,12 +64,11 @@ static double table_value(unsigned index)
     return from_bits(iar_atan_table[index]);
 }
 
-/* Stock uses VSQRT.F64 directly (no errno path); __builtin_sqrt would call sqrt. */
+/* Stock uses VSQRT.F64 directly (no errno path); __builtin_sqrt would call
+ * sqrt, __builtin_elementwise_sqrt is the bare instruction. */
 static double vfp_sqrt(double value)
 {
-    double result;
-    __asm__("vsqrt.f64 %P0, %P1" : "=w"(result) : "w"(value));
-    return result;
+    return __builtin_elementwise_sqrt(value);
 }
 
 /* Arctangent kernel at 0x43c2e8. flags bit0 = negate result, bit2 = return

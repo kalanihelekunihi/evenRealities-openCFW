@@ -1,0 +1,122 @@
+{
+  "cases": 1192,
+  "passed": 1192,
+  "failures": [],
+  "stock_entry": "0x872e4",
+  "stock_body_bytes": 268,
+  "bridge_bytes": 14,
+  "c_body_bytes": 214,
+  "callback_stack_depth_pairs": [
+    [
+      [
+        -40,
+        -40,
+        -40,
+        -40,
+        -40,
+        -40,
+        -40,
+        -40,
+        -40
+      ],
+      [
+        -64,
+        -64,
+        -64,
+        -64,
+        -64,
+        -64,
+        -64,
+        -64,
+        -64
+      ]
+    ],
+    [
+      [
+        -40,
+        -40,
+        -40,
+        -40,
+        -40,
+        -40,
+        -40,
+        -40,
+        -40,
+        -40
+      ],
+      [
+        -64,
+        -64,
+        -64,
+        -64,
+        -64,
+        -64,
+        -64,
+        -64,
+        -64,
+        -40
+      ]
+    ],
+    [
+      [
+        -40,
+        -40,
+        -40,
+        -40,
+        -40,
+        -40,
+        -40,
+        -40,
+        -40,
+        -40,
+        -40
+      ],
+      [
+        -64,
+        -64,
+        -64,
+        -64,
+        -64,
+        -64,
+        -64,
+        -64,
+        -64,
+        -64,
+        -40
+      ]
+    ]
+  ],
+  "unchanged_functions": [
+    "r1_qma6100_configure_boundary",
+    "r1_qma_any_motion",
+    "r1_qma_range",
+    "r1_qma_reset",
+    "r1_qma_setup",
+    "r1_qma_steps"
+  ],
+  "report": "build/sources-goal-r1-qma-tap/report.json",
+  "report_sha256": "a33c7c6b02fd80bd1dd8637df1cd885da8622c350035d6eb994d35b29f62a3b9",
+  "source_sha256": "8522c6b25069d0ed0009676300c1427e839bc96412965ec0221d83dc0cddaa90",
+  "manifest_sha256": "be76bf00509f1551b53a08edbc5515ed3a3dcb9b1721ff4481fdf60b77d82eb8",
+  "stock_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "native_span_sha256": "617fe1f9d6ef12a232744a1ca8f4941b031c4246af62a6664349aa9fae49dc1b",
+  "rea": {
+    "completed": true,
+    "procedure": "0x872e4",
+    "path": "build/goal-r1-qma-tap/REA.json",
+    "sha256": "c44b187cecf6c0debfe068ed3048165e2b3dfabc48a194c27155bddc6e880dff"
+  },
+  "probe_artifacts": {
+    "build/goal-r1-qma-tap/verify.py": "1ac21aa33111f853bb7554ef14aea26782d5e909218b655e8780085dd17600a9",
+    "build/goal-r1-qma-tap/before.c": "55bae914cd4b0ba237b04615caf603d6315d451448093d01814b5adbadbe01f6",
+    "build/goal-r1-qma-tap/source.elf": "7057e02f0a110312dddc419860e199630255a5f3129f42a92bad0cea780673ca",
+    "build/goal-r1-qma-tap/stock.elf": "8d7f35b5591eef1ad25c6afb61083cc51f1b412c795c280a85e6cfed8f995bbc",
+    "build/goal-r1-qma-tap/rea-snapshot.json": "12578a79862af015f7d29a944001d8dff95f2527cb8eae9f87d887f550f8335c"
+  },
+  "limits": [
+    "Fourteen bytes of assembly preserve native scratch addresses and prior RAM; this is a partial C extraction.",
+    "Read/write retry API callbacks are modeled and clobber caller-saved registers and flags; this probe does not execute their transport internals.",
+    "C helper has a deeper callback frame; eight-byte callback alignment and native scratch span are checked.",
+    "No physical tap interrupt, sensor register behavior, timing, complete fault-state, final link, source qualification or byte identity claim."
+  ]
+}

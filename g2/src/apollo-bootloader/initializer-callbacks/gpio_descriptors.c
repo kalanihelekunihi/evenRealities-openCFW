@@ -3,7 +3,7 @@
 #include "gpio_descriptors.h"
 #define NI __attribute__((noinline))
 #define R(a) (*(volatile uint32_t *)(uintptr_t)(a))
-extern uint32_t opencfw_bl_critical_save(void);
+extern uint32_t am_hal_interrupt_master_disable(void);
 extern uint32_t opencfw_bl_power_register_update(uint32_t,uint32_t);
 extern uint32_t opencfw_bl_mode_register_update(uint32_t,uint32_t,uint32_t);
 extern void opencfw_boot_context_nvic_enable(uint32_t);
@@ -18,7 +18,7 @@ _Static_assert(sizeof(opencfw_boot_gpio_mode_bases) == 12u, "GPIO base size");
 static void restore(uint32_t token) { __asm__ volatile("msr primask, %0" :: "r"(token) : "memory"); }
 NI uint32_t opencfw_boot_gpio_mask_status(uint32_t channel,uint32_t enabled,uint32_t *mask) {
     uint32_t ch=(uint8_t)channel,en=(uint8_t)enabled;
-    uint32_t token=opencfw_bl_critical_save();
+    uint32_t token=am_hal_interrupt_master_disable();
     if(ch>1) { restore(token);return 6; }
     uint32_t enabled_mask[7];
     for(uint32_t i=0;i<7;i++) enabled_mask[i]=en ? R(0x40010530u+ch*0x70u+i*16u):0xffffffffu;
@@ -29,7 +29,7 @@ NI uint32_t opencfw_boot_gpio_mask_clear(uint32_t channel,const uint32_t *mask) 
     if(!mask) return 6;
     uint32_t ch=(uint8_t)channel;
     if(ch<=2) {
-        uint32_t token=opencfw_bl_critical_save();
+        uint32_t token=am_hal_interrupt_master_disable();
         if(ch!=1) for(uint32_t i=0;i<7;i++) R(0x40010538u+i*16u)=mask[i];
         if(ch!=0) for(uint32_t i=0;i<7;i++) R(0x400105a8u+i*16u)=mask[i];
         restore(token);
@@ -51,7 +51,7 @@ NI uint32_t opencfw_boot_gpio_interrupt_control(uint32_t channel,uint32_t contro
         uint32_t pin=*input;if(pin>=224)return 5;
         address=0x40010530u+(pin>>5)*16u+(ch==1?0x70u:0);bit=1u<<(pin&31u);
     }
-    uint32_t token=opencfw_bl_critical_save();
+    uint32_t token=am_hal_interrupt_master_disable();
     if(op<2) {
         if(op==0) R(address)&=~bit;else R(address)|=bit;
         if(ch==2) {address+=0x70u;if(op==0)R(address)&=~bit;else R(address)|=bit;}

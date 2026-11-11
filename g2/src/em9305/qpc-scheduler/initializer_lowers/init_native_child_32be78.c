@@ -1,50 +1,20 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_32be78\n"
-".type opencfw_em9305_child_32be78,@function\n"
-"opencfw_em9305_child_32be78:\n"
-"L32be78:\n"
-"enter_s [r13-r14,blink]\n"
-"L32be7a:\n"
-"ld_s r13,[r0,0x24]\n"
-"L32be7c:\n"
-"ldb r1,[r13,67]\n"
-"L32be80:\n"
-"breq_s r1,0,L32beae\n"
-"L32be82:\n"
-"ld_s r0,[r0,0x2c]\n"
-"L32be84:\n"
-"add2 r12,r0,0x2e\n"
-"L32be88:\n"
-"ldb r1,[r0,203]\n"
-"L32be8c:\n"
-"ldb r0,[r0,202]\n"
-"L32be90:\n"
-"ld r3,[r12,0xc]\n"
-"L32be92:\n"
-"brne.d.nt r1,r0,L32bea6\n"
-"L32be96:\n"
-"ld r2,[r12,0x8]\n"
-"L32be98:\n"
-"ld_s r14,[r12,0x4]\n"
-"L32be9a:\n"
-"ld r0,[r12,0]\n"
-"L32be9c:\n"
-"xor_s r14,r14,r3\n"
-"L32be9e:\n"
-"xor_s r0,r0,r2\n"
-"L32bea0:\n"
-"or.f 0,r0,r14\n"
-"L32bea4:\n"
-"beq_s L32bea8\n"
-"L32bea6:\n"
-"bset_s r1,r1,0x1\n"
-"L32bea8:\n"
-"bl.d opencfw_em9305_child_30e8dc\n"
-"L32beac:\n"
-"ldb_s r0,[r13,0x1]\n"
-"L32beae:\n"
-"leave_s [r13-r14,blink,pcl]\n"
-".size opencfw_em9305_child_32be78,.-opencfw_em9305_child_32be78\n"
-);
+#include <stdint.h>
+
+/* Native 0x32be78..0x32beb0: when the link at +36 has its report byte
+ * (+67) set, notify 30e8dc with the link handle and the key-state byte
+ * (+203 of the context at +44), with bit 1 added when that byte differs
+ * from +202 or the two 64-bit values at +184 and +192 differ. Returns the
+ * record pointer unchanged when no report is due. */
+extern uint32_t opencfw_em9305_child_30e8dc(uint32_t handle, uint32_t state);
+
+uint32_t opencfw_em9305_child_32be78(uintptr_t record)
+{
+    uintptr_t link=*(volatile uint32_t *)(record+36u);
+    if(*(volatile uint8_t *)(link+67u)==0u)return (uint32_t)record;
+    uintptr_t context=*(volatile uint32_t *)(record+44u);
+    volatile uint32_t *values=(volatile uint32_t *)(context+184u);
+    uint32_t state=*(volatile uint8_t *)(context+203u);
+    uint32_t previous=*(volatile uint8_t *)(context+202u);
+    if(state!=previous||values[0]!=values[2]||values[1]!=values[3])state|=2u;
+    return opencfw_em9305_child_30e8dc(*(volatile uint8_t *)(link+1u),state);
+}

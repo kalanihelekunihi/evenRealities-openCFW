@@ -43,7 +43,6 @@
 #include <stdint.h>
 #include <stddef.h>
 #include <string.h>
-#define SVCALL_AS_NORMAL_FUNCTION
 #include "ble_gatts.h"
 extern uint32_t r1_structured_log_mode_get(void);
 extern uint32_t r1_structured_log_format(uint32_t,const char *,const char *,...);
@@ -63,12 +62,11 @@ _Static_assert(sizeof(ble_gatts_hvx_params_t)==16,"stock HVX record size");
 _Static_assert(offsetof(ble_gatts_hvx_params_t,p_len)==8,"stock HVX length pointer");
 _Static_assert(offsetof(ble_gatts_hvx_params_t,p_data)==12,"stock HVX data pointer");
 _Static_assert(SD_BLE_GATTS_HVX==174,"stock SoftDevice call number");
-/* Preserve the stock full r0 value at SVC, including words wider than the
- * public uint16_t API's valid input range. Only the ABI glue is assembly. */
-__attribute__((naked)) uint32_t r1_native_sd_ble_gatts_hvx(
-    uint32_t connection __attribute__((unused)),
-    const ble_gatts_hvx_params_t *parameters __attribute__((unused)))
-{ __asm__ volatile ("svc %0\nbx lr" :: "I"(SD_BLE_GATTS_HVX) : "r0","memory"); }
+/* The caller's full-word context lookup rejects handles >=20 before SVC.
+ * Use the pinned SDK's uint16_t connection API after that existing gate. */
+__attribute__((noinline)) uint32_t r1_native_sd_ble_gatts_hvx(
+    uint32_t connection,const ble_gatts_hvx_params_t *parameters)
+{ return sd_ble_gatts_hvx((uint16_t)connection,parameters); }
 
 #define TEXT(name,value) const char r1_bae8_##name[] __attribute__((section(".r1.bae8.log." #name),aligned(1)))=value
 TEXT(invalid_ring,"[RING]conn_handle == BLE_CONN_HANDLE_INVALID");

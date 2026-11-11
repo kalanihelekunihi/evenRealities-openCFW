@@ -1,0 +1,100 @@
+{
+  "schema_version": 1,
+  "report": "build/sources-goal-r1-stacmd-frame-pure-c/report.json",
+  "report_sha256": "8b9739cf4a89ffe73f793ca9a099725fb7809d766f3f41580537a483c73f471f",
+  "manifest_sha256": "d8dcfc89dfe3cb8c669f92ec5b193e38988960a270c3b7b402dcac78ef3b2c67",
+  "verification": {
+    "cases": 479,
+    "executions": 1437,
+    "stock_previous_c_match": true,
+    "gpio_only_C_models": true,
+    "actual_read_write_recovery_and_bit_drivers": true,
+    "nop_counts_and_GPIO_traces_match": true,
+    "success_parity_failure_bit_timeouts_and_partial_outputs": true,
+    "private_frames_caller_clobbered_registers_excluded": true,
+    "physical_timing_and_GPIO_unverified": true
+  },
+  "defects": {
+    "detected": [
+      "wrong-header",
+      "wrong-read-byte",
+      "missing-read-release",
+      "ignored-timeout"
+    ]
+  },
+  "audit": {
+    "unchanged_prior_object_hashes": 795,
+    "changed_objects": [
+      [
+        "r1-application",
+        "r1/src/application/board/native_stacmd_frames.c"
+      ],
+      [
+        "r1-application",
+        "r1/src/application/board/native_stacmd_receive.c"
+      ],
+      [
+        "r1-bootloader",
+        "{gen}/r1_startup_vectors.S"
+      ],
+      [
+        "r1-bootloader",
+        "{gen}/r1_uecc.c"
+      ]
+    ],
+    "transmit_delay_recovery_objects_unchanged": true,
+    "receive_bit_driver_bytes_and_relocations_unchanged": true,
+    "generated_boot_allocated_bytes_and_relocations_unchanged": true,
+    "imports_unchanged": true
+  },
+  "rea_bytes": [
+    {
+      "name": "read",
+      "evidence_id": "ev_4a2bb61cf5d175f2340002260b50cbf3e5d7aa2a0752dfb6fe9bcec11903eab9",
+      "address": "0x28bb0",
+      "length": 188,
+      "bytes_sha256": "d4c7bfd4e877389bbc39945f9d9f810424b2ae925e53e118a98be3fd30017e8e",
+      "matches_locked_raw": true
+    },
+    {
+      "name": "write",
+      "evidence_id": "ev_8fe4d74cd1ab5b84307aed07666b1bb750cf922b8cabe237d57c4a036c578a3b",
+      "address": "0x28c6c",
+      "length": 160,
+      "bytes_sha256": "227481e4e61f3b7f8e303e09c0d17ddc002bbafc30f906c9e34cbfde25b3eb61",
+      "matches_locked_raw": true
+    },
+    {
+      "name": "adapter",
+      "evidence_id": "ev_c741c9753f0907d91a9c903ddaa1cf80cc8599899e3a0caefc9bc8b10dbca1d0",
+      "address": "0x969ec",
+      "length": 32,
+      "bytes_sha256": "d4ac69e0ecbf544d9242fa33d7065eff935b479bda6e68c45fee6fee43f2505a",
+      "matches_locked_raw": true
+    }
+  ],
+  "raw_application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "strict_bootloader_link_report": "build/goal-r1-stacmd-frame-pure-c/boot-link/report.json",
+  "strict_bootloader_link_report_sha256": "12a69eaafb00e4307e39b7bf5c0ba6bcf8d0461b7aa3854ab235fbf2004ad5cd",
+  "evidence_files": {
+    "build/goal-r1-stacmd-frame-pure-c/verify.py": "58a432835d086cc3d959ea17119e36315f446a44c8b0536f47d19301824eb084",
+    "build/goal-r1-stacmd-frame-pure-c/defects.py": "ff9eeb48819feab6b433e0d42b48642a4e3570cdcf19cec51fc3e0758ac5cdc7",
+    "build/goal-r1-stacmd-frame-pure-c/audit.py": "eefbacf3e3617eb60b0981abf30257982c00cb30773f8abf943ce80c8d0ad1bc",
+    "build/goal-r1-stacmd-frame-pure-c/gpio.c": "d07bfa27cd9468bf6fa749f1d2a9e8d8a9e798e65ec58e8ca1383813a5c09b55",
+    "build/goal-r1-stacmd-frame-pure-c/source.elf": "21722706e2920362c678ef3eac903850347faf558aad47c1ed9a0daa788678d2",
+    "build/goal-r1-stacmd-frame-pure-c/previous.elf": "95fdde563ece35dcfcdbf3e2ef0bbcb4c56693b0ebad4385a4a49ccc3553f91a",
+    "build/goal-r1-stacmd-frame-pure-c/verify-final.log": "77ad021950d299d0f3964b9ab3a14453d9f69c3e9c58ee5a95d488929dda1091",
+    "build/goal-r1-stacmd-frame-pure-c/verification.json": "96dfc7f5c519ac2ee642a2716a5cb1124e5a07979af2299f4346927686759ff8",
+    "build/goal-r1-stacmd-frame-pure-c/defects.json": "4d4cc1b0f2b3004cd62e2e3bc93a903c3a8ad941c335ef1ae1ab68bf5ab86548",
+    "build/goal-r1-stacmd-frame-pure-c/rea-read.json": "ff06c7b332aebb1f9cb5aef1578cf0d3c88a636ce5b662267ad1ef8f3d63e3df",
+    "build/goal-r1-stacmd-frame-pure-c/rea-write.json": "e6e97f2a85a966b60039e0d77f90227a6cb45b2da1023ce8ebd2aa23e7899e0f",
+    "build/goal-r1-stacmd-frame-pure-c/rea-adapter.json": "2c6285976cc53b380e7c74165f1012679e01617fa0d198c6ed0d70f08a6f4133"
+  },
+  "limitations": [
+    "Concrete bit reader always writes output; arbitrary nonwriting substitute readers excluded.",
+    "GPIO callbacks modeled; no physical electrical or cycle-timing proof.",
+    "Private frames, incidental caller-clobbered outputs, aliases/faults/concurrency excluded.",
+    "No full application link or new source-plan qualification.",
+    "Global source check retains unrelated G2 manifest failure."
+  ]
+}

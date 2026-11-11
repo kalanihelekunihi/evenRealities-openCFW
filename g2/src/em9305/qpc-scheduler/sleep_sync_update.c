@@ -10,9 +10,9 @@ uint32_t opencfw_em9305_sleep_sync_update(uint32_t incoming)
  uint32_t state=*(volatile uint32_t *)(context()+76u);
  if(state!=1) return state;
  *(volatile uint32_t *)(uintptr_t)0xf00820u=512;
- __asm__ volatile("sync" ::: "memory");
+ __builtin_arc_sync();
  *(volatile uint32_t *)(uintptr_t)0xf00814u=512;
- __asm__ volatile("sync" ::: "memory");
+ __builtin_arc_sync();
  *(volatile uint32_t *)(uintptr_t)0xf00808u=512;
  uint32_t captured=*(volatile uint32_t *)(context()+72u);
  uint32_t previous=*(volatile uint32_t *)(context()+68u);

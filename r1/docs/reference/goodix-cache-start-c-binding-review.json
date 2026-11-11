@@ -1,0 +1,117 @@
+{
+  "schema": 1,
+  "scope": "R1 native accelerometer start/cache policy and HAL start/stop aliases",
+  "native_start_entry": "0x6f964",
+  "native_stop_entry": "0x6f9d4",
+  "start_behavior": {
+    "paired_cases": 384,
+    "executions": 768,
+    "source_report": "build/sources-goal-r1-goodix-cache-start-final/report.json",
+    "checks": [
+      "native 192-byte frame, 180-byte clear and retained padding/save words",
+      "formatter/print live pointer reads and callback-driven replacement/removal",
+      "timestamp init executes actual stock/C no-work bodies before live start-slot read",
+      "board start tail-call at caller SP, saved registers, masks, final memory",
+      "scratch/callback-table alias cases"
+    ],
+    "modeled": [
+      "native memclr / C memset normalized to same zero operation",
+      "format/print and board-start callbacks"
+    ],
+    "limits": [
+      "No physical sampling, real formatting, or concurrency",
+      "Clear provider ABI differs (memclr versus memset); observable zero result compared",
+      "Message pointers differ; exact string bytes compared",
+      "R0 return bits describe these emitted void functions; caller-clobbered state excluded"
+    ]
+  },
+  "stop_behavior": {
+    "paired_cases": 32,
+    "executions": 64,
+    "checks": [
+      "HAL stop alias executes checked native stop body",
+      "live stop-slot read, no scratch frame, null or direct callback tail transfer",
+      "saved registers, masks, callback mutation and actual R0 bits"
+    ],
+    "limits": [
+      "Stop callback modeled; no physical sensor execution"
+    ]
+  },
+  "negative_controls": [
+    {
+      "mutation": "clear-padding",
+      "rejected": true
+    },
+    {
+      "mutation": "wrong-slot",
+      "rejected": true
+    }
+  ],
+  "audit": {
+    "other_574_objects_unchanged": true,
+    "existing_callback_functions_unchanged": [
+      "r1_goodix_gsensor_register",
+      "r1_goodix_gsensor_sample",
+      "r1_goodix_gsensor_stop"
+    ],
+    "other_demo_user_functions_unchanged": 19,
+    "two_old_template_definitions_removed": true,
+    "HAL_start_stop_alias_native_C_bodies": true,
+    "native_message_bytes_equal": true,
+    "profiles_and_units_unchanged": true,
+    "unresolved_import_sets_unchanged": true,
+    "application_unresolved": 168,
+    "bootloader_unresolved": 34
+  },
+  "source_build": {
+    "compiled_units": 576,
+    "failed": 0,
+    "duplicate_strong_symbols": 0,
+    "application_unresolved": 168,
+    "bootloader_unresolved": 34
+  },
+  "qualification": {
+    "candidates": 5,
+    "compiled": 5,
+    "selected_regions": 0,
+    "canonical_plan_unchanged": true
+  },
+  "hybrid": {
+    "report": "build/hybrid-goal-r1-goodix-cache-start/build-report.json",
+    "payload_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "totals": {
+      "binary-pull-through": 642215,
+      "source-built": 3945,
+      "resource-file": 248
+    },
+    "source_completeness_proven": false
+  },
+  "files": {
+    "r1/src/application/goodix/stock_gsensor_callbacks.c": "0aedc6e6b699095c2b0bb082616d6b2eb7a7e91227efafd7bf6827e37d16c822",
+    "r1/src/sources.json": "40cba91583e443e9c705570ef3127d63327626f35f772df697c25320ad836609",
+    "r1/symbols/function-frontier.csv": "6beffed28c91123d1fd2e26e07e1a3951b5ea47e2ed491b61958ffbed365be20",
+    "r1/docs/reference/FUNCTION-OWNERSHIP.csv": "9b697ccc7142b7ee62a20178d2e619cb9143b7beaf7e5c7526a2c6945b104298",
+    "tools/build/source-plan.json": "883e978279baf64f99dca97ebdba10d30a192b022d392bc282832ed5982bb491",
+    "build/sources-goal-r1-goodix-cache-start-final/report.json": "afa5d44d7e3884d20cb224ea552ea83016c049aa1b9bf9d01605e1a50b41e32c",
+    "build/hybrid-goal-r1-goodix-cache-start/build-report.json": "0bef18d878ce88f3b2d4ac687325523a79cc713676aad6166607b3b07a8b23cd",
+    "build/goal-r1-goodix-cache-start/rea.json": "b4e1e16ba1cdfdb2242abceb24e432bc39859ae590e8b3b819c1dfedb272843a",
+    "build/goal-r1-goodix-cache-start/sources-before.json": "ea830958d5cbf23d12f10ec99bbeb049dbd07f657ed77102ed519990ab86771a",
+    "build/goal-r1-goodix-cache-start/callbacks-before.c": "7368b0f580539ab70a51be71ba001a02f299f938c0d6598719c87fcdade6e165",
+    "build/goal-r1-goodix-cache-start/verify.py": "dfdecb8fc3477b093f0eb9c5d3f5787a0120b34c002908edf4ada159e6af8104",
+    "build/goal-r1-goodix-cache-start/results.json": "000522df3b21e1afc90922b6eff08dadb76ef7f0a7d369c9ae922de63f02134d",
+    "build/goal-r1-goodix-cache-start/stop_verify.py": "522bc6c85c974246ee638531a93967882beab3145bb2773577ae132eda2d09ff",
+    "build/goal-r1-goodix-cache-start/stop-results.json": "77ab05c3160d0097cf71541871ab058fa24345724a2bfc02f175b74896e3e62d",
+    "build/goal-r1-goodix-cache-start/negative.py": "fe522398e5b0f49a2c36ed61ff2ee094082413d294a244c49ac6cdb05712ded9",
+    "build/goal-r1-goodix-cache-start/negative-results.json": "135e71ec75f53158506a02346b9c05ee8b4a2353f397dbedb1bd4a5be484f555",
+    "build/goal-r1-goodix-cache-start/audit.py": "bc84c24ae36991e3fa8f84c5acf9d7186b3a10c41ce0a34d52c2c1bdea7b782e",
+    "build/goal-r1-goodix-cache-start/audit-results.json": "253d4268f164384e439f1945a527c9a1bd8eab4378938c78dc55d9d1138a530e",
+    "build/goal-r1-goodix-cache-start/qualified/qualification.json": "9fcf44fbfddbf244ac4d623ad1b55f61c9074074fa5c4a0d18eb3b16eb595d5d"
+  },
+  "limits": [
+    "Modeled clear/log/board providers; physical sampling/concurrency unproven",
+    "192-byte C frame is specific to recorded compiler/profile",
+    "Native memclr and source memset have different ABIs; zero effects normalized",
+    "New adapter not byte-qualified; full source completeness remains false",
+    "No G2 gates advanced"
+  ]
+}

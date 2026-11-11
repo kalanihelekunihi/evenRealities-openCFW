@@ -1,88 +1,43 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_32874c\n"
-".type opencfw_em9305_child_32874c,@function\n"
-"opencfw_em9305_child_32874c:\n"
-"L32874c:\n"
-"enter_s [r13-r17,fp,blink]\n"
-"L32874e:\n"
-"sub_s sp,sp,0x4\n"
-"L328750:\n"
-"mov_s r16,r0\n"
-"L328752:\n"
-"bl.d opencfw_em9305_child_3172c8\n"
-"L328756:\n"
-"mov_s r0,0x7\n"
-"L328758:\n"
-"mov_s r17,r0\n"
-"L32875a:\n"
-"breq_s r0,0,L3287b6\n"
-"L32875c:\n"
-"ldh r15,[r16,32]\n"
-"L328760:\n"
-"add_s r0,sp,0\n"
-"L328762:\n"
-"mov_s r1,0x33446c\n"
-"L328768:\n"
-"mov_s r2,4\n"
-"L32876a:\n"
-"bl.d opencfw_em9305_memcpy\n"
-"L32876e:\n"
-"add2 r14,r16,0x2d\n"
-"L328772:\n"
-"add_s r1,sp,0\n"
-"L328774:\n"
-"bl.d opencfw_em9305_ll_stream_header_3175d0\n"
-"L328778:\n"
-"mov_s r0,r17\n"
-"L32877a:\n"
-"mov_s r13,0x805aa0\n"
-"L328780:\n"
-"ld r2,[r13,0x4]\n"
-"L328782:\n"
-"ld r1,[r13,0]\n"
-"L328784:\n"
-"add_s r15,r15,6\n"
-"L328786:\n"
-"add_s r0,r0,r17\n"
-"L328788:\n"
-"bl.d opencfw_em9305_child_317594\n"
-"L32878c:\n"
-"exth_s r3,r15\n"
-"L32878e:\n"
-"mov_s r2,6\n"
-"L328790:\n"
-"mov_s r1,r17\n"
-"L328792:\n"
-"bl.d opencfw_em9305_child_3172dc\n"
-"L328796:\n"
-"mov_s r0,r16\n"
-"L328798:\n"
-"ld r0,[r13,0x4]\n"
-"L32879a:\n"
-"add3 r1,r16,0x22\n"
-"L32879e:\n"
-"ld r2,[r14,0]\n"
-"L3287a0:\n"
-"st_s r0,[r14,0x68]\n"
-"L3287a2:\n"
-"ldb_s r0,[r1,0]\n"
-"L3287a4:\n"
-"ld r3,[r13,0]\n"
-"L3287a6:\n"
-"bset_s r0,r0,0\n"
-"L3287a8:\n"
-"sth r15,[r14,96]\n"
-"L3287ac:\n"
-"st_s r3,[r14,0x64]\n"
-"L3287ae:\n"
-"stb_s r0,[r1,0]\n"
-"L3287b0:\n"
-"breq_s r2,0,L3287b6\n"
-"L3287b2:\n"
-"stb 0,[r2,176]\n"
-"L3287b6:\n"
-"leave_s [r13-r17,fp,blink,pcl]\n"
-".size opencfw_em9305_child_32874c,.-opencfw_em9305_child_32874c\n"
-);
+#include <stdint.h>
+
+/* Native 0x32874c..0x3287b8: build a type-7 stream PDU for the record:
+ * write the fixed stream header (0x33446c) and the 8-byte record built
+ * from the global words 0x805aa0/0x805aa4 with length +32 plus 6, queue
+ * it, mirror the two words and the length into the record's stream block
+ * (+180: +100/+104 and +96), set bit 0 of flags byte +272 and clear the
+ * pending byte +176 of the attached object. */
+extern const uint8_t opencfw_em9305_stream_header_33446c[4];
+extern uint32_t opencfw_em9305_child_3172c8(uint32_t kind);
+extern void *opencfw_em9305_memcpy(void *destination,const void *source,
+                                   uint32_t bytes);
+extern uint32_t opencfw_em9305_ll_stream_header_3175d0(uintptr_t output,
+                                                       uintptr_t fields);
+extern uint32_t opencfw_em9305_child_317594(uintptr_t out,uint32_t word,
+                                            uint32_t type,uint32_t half);
+extern uint32_t opencfw_em9305_child_3172dc(uintptr_t record,uintptr_t payload,
+                                            uint32_t flags);
+
+void opencfw_em9305_child_32874c(uintptr_t record)
+{
+    uintptr_t buffer=opencfw_em9305_child_3172c8(7u);
+    if(buffer==0u)return;
+    _Alignas(4) uint8_t fields[4];
+    uint32_t length=*(volatile uint16_t *)(record+32u);
+    (void)opencfw_em9305_memcpy(fields,opencfw_em9305_stream_header_33446c,4u);
+    uintptr_t block=record+180u;
+    uint32_t used=opencfw_em9305_ll_stream_header_3175d0(buffer,(uintptr_t)fields);
+    uint32_t second=*(volatile uint32_t *)0x805aa4u;
+    uint32_t first=*(volatile uint32_t *)0x805aa0u;
+    length+=6u;
+    (void)opencfw_em9305_child_317594(used+buffer,first,second,(uint16_t)length);
+    (void)opencfw_em9305_child_3172dc(record,buffer,6u);
+    second=*(volatile uint32_t *)0x805aa4u;
+    uintptr_t object=*(volatile uint32_t *)block;
+    *(volatile uint32_t *)(block+104u)=second;
+    uint32_t flags=*(volatile uint8_t *)(record+272u);
+    first=*(volatile uint32_t *)0x805aa0u;
+    *(volatile uint16_t *)(block+96u)=(uint16_t)length;
+    *(volatile uint32_t *)(block+100u)=first;
+    *(volatile uint8_t *)(record+272u)=(uint8_t)(flags|1u);
+    if(object!=0u)*(volatile uint8_t *)(object+176u)=0u;
+}

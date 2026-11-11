@@ -1,0 +1,64 @@
+{
+  "cases": 1536,
+  "passed": 1536,
+  "failures": [],
+  "actual_reader_cases": 256,
+  "mocked_reader_cases": 1280,
+  "old_frame_regression": {
+    "native_frame": "0x2002fff0",
+    "old_frame": "0x2002fff4",
+    "native_r3": "0x12345678",
+    "old_r3": "0xabc00003"
+  },
+  "source_bridge_size": 10,
+  "source_body_size": 18,
+  "reader_body_unchanged": true,
+  "callback_depths": [
+    [
+      [],
+      []
+    ],
+    [
+      [
+        -48
+      ],
+      [
+        -56
+      ]
+    ]
+  ],
+  "other_source_units_unchanged": 561,
+  "imports_unchanged": true,
+  "application_imports": 211,
+  "bootloader_imports": 34,
+  "report": "build/sources-goal-r1-stacmd-receive-frame/report.json",
+  "report_sha256": "509d1e2886989a3278a9bdcdc9a88dbc6e7ac83823c09ea8604531b0354467c6",
+  "manifest_sha256": "9c5b7ae5c0e7493eb22e1fb4df9f0c928c2a9aa70530254aff89b55213bef2e2",
+  "stock_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "rea": {
+    "path": "build/goal-r1-stacmd-receive-frame/REA.json",
+    "sha256": "bd0156763a9450ec0fd13dcd529c59a4726115e4dcaba27dee09f23b5f8ac12d",
+    "procedure": "0x969ec"
+  },
+  "source_sha256": {
+    "r1/src/application/board/native_stacmd_receive.c": "1a59bf5971995646b05779f9371bafc680cfaa2e5f1ba7d6a07001d02112de8c"
+  },
+  "probe_artifacts": {
+    "build/goal-r1-stacmd-receive-frame/before.c": "fdd577a3720f1208ddc7d9c4a24fda4d4e0afbfa5a024d80c8b243d4dd08d184",
+    "build/goal-r1-stacmd-receive-frame/stock.s": "e758701b5598ac143d0af1558cfefae4f1b5beeefaf90311793542934ecd2521",
+    "build/goal-r1-stacmd-receive-frame/stock.elf": "ef6834093bcc9aa95e07a41a9bdf5e0a0cc22eef3f7b60710e4ab13e530b9967",
+    "build/goal-r1-stacmd-receive-frame/REA.json": "bd0156763a9450ec0fd13dcd529c59a4726115e4dcaba27dee09f23b5f8ac12d",
+    "build/goal-r1-stacmd-receive-frame/rea-snapshot.json": "b1b15872f990a83602c1ebbdd2d0bdb500dd02156f2bbd59b532629b37e88c1c",
+    "build/goal-r1-stacmd-receive-frame/verify.py": "da0ee4ce44c4479350add4eca409b5cdf0aa15312407b4c9d0ad1884ada15cdc",
+    "build/goal-r1-stacmd-receive-frame/results.json": "a274b2a7d54628f8a311e32f86116390c1e79db05989abde238f2f99b210d73b",
+    "build/goal-r1-stacmd-receive-frame/source.elf": "b82220465bc509ca74f9c81758e4148d2917207906f640e0078fc90acd8ea148",
+    "build/goal-r1-stacmd-receive-frame/old.elf": "ee967cc52c946fabc04f6a8c516f05fe7a1bdc2034336d5c997aa974c0fb4d74"
+  },
+  "limits": [
+    "Adapter C body is 18 bytes plus ten-byte frame bridge versus sixteen native adapter bytes. No byte identity or provider qualification.",
+    "256 cases execute actual reader code with modeled GPIO; 1280 cases model the lower reader to cover absent/partial writes and arbitrary status words. Physical GPIO, wire and elapsed timing are unproven.",
+    "Native adapter buffer remains at caller SP-16 and R0/R1/R3 match. Aggregate GPIO callback depth is SP-48 native and SP-56 C. Private frames, arbitrary faults, exceptions and concurrency identity are unproven.",
+    "Existing reader code and relocations are unchanged; 104 NOPs execute in each actual-reader case. NOP counts do not prove physical sampling timing.",
+    "Source eligibility/import sets remain unchanged. Final boot/linking, source completeness and whole-image byte identity remain open; no G2 gate/source-plan change."
+  ]
+}

@@ -1,11 +1,16 @@
 /* SPDX-License-Identifier: MIT
- * Bounded reconstruction of locked 0x41acb2..0x41b04b.
+ * Bounded reconstruction of locked 0x41acb2..0x41b04b, the bootloader's
+ * am_hal_sysctrl_clkmuxrst_low_power_init (called by upstream
+ * am_hal_pwrctrl_low_power_init).
  *
- * This models the stock caller's register carries explicitly. It is not a
- * drop-in implementation of the public HAL prototype: the stock caller enters
- * with R1/R2/R3 ambient and R5 callee-saved. In particular, r5_gpio_carry is
- * deliberately supplied by the caller and must never be silently initialized.
+ * Stock entered with ambient R1/R2/R5 as the initial GPIO-state bytes, pin
+ * configuration and GPIO 15 configuration base. Those carries are zero here:
+ * the GPIO-state byte passed to the 32 MHz kick is cleared before use, the pin
+ * configuration is read back before it is restored, and the GPIO 15 REFCLK
+ * configuration is built from zero with only its function select set (as the
+ * upstream sExtRefClkCfg, whose other fields upstream leaves uninitialized).
  */
+#include "../platform-control/am_hal_pwrctrl_api.h"
 #include <stdbool.h>
 #include <stddef.h>
 #include <stdint.h>
@@ -34,50 +39,33 @@ _Static_assert(offsetof(MCUCTRL_Type, PLLMUXCTL) == 0x4e8,
 /* Existing native providers / explicit child boundaries. Their bodies are
  * outside this bounded routine and are not claimed as newly reconstructed. */
 extern void opencfw_hal_delay_us(uint32_t usec);                         /* 41d1c0 */
-extern uint32_t opencfw_hal_status_poll(uint32_t count, uintptr_t address,
+extern uint32_t am_hal_delay_us_status_check(uint32_t count, uintptr_t address,
                                         uint32_t mask, uint32_t expected,
                                         uint32_t delay);                  /* 41d246 */
 extern uint64_t opencfw_legacy_gpio_mode(uint32_t mode, uint8_t *state);   /* 41d3e4 */
 extern uint32_t opencfw_power_register_read(uint32_t id, uint32_t *value); /* 41d90e */
 extern uint32_t opencfw_bl_power_register_update(uint32_t id,
                                                   uint32_t value);       /* 41d92c */
-extern uint32_t opencfw_bl_mspi_mode_enter(uint32_t selector);            /* 41bf84 */
-extern uint32_t opencfw_bl_mspi_mode_leave(uint32_t selector);            /* 41c17a */
 extern uint64_t opencfw_low_power_prepare(void);                          /* 41ca5c */
 extern uint64_t opencfw_low_power_finish(void);                           /* 41caa2 */
 extern uint32_t opencfw_cache_invalidate(const volatile void *range,
                                          uint32_t clean_too);             /* 41e348 */
 
 #include "startup_clockmux.h"
-_Static_assert(sizeof(startup_entry_register_carry_t)==12,"assembly carry size");
-_Static_assert(offsetof(startup_entry_register_carry_t,r1_carry)==0,"GPIO slot");
-_Static_assert(offsetof(startup_entry_register_carry_t,r2_carry)==4,"pin slot");
-_Static_assert(offsetof(startup_entry_register_carry_t,r5_gpio_carry)==8,"R5 slot");
 
 static inline bool flag(uint32_t halstates, unsigned bit)
 {
     return (halstates & (UINT32_C(1) << bit)) != 0u;
 }
 
-/* Name follows the public Apollo510 HAL family. The stock body is a bounded
- * implementation candidate for its low-power/clock-mux initialization path,
- * not a claim that this file reproduces the private producing source. */
-void am_hal_pwrctrl_low_power_init_clockmux_fragment(
-    startup_entry_register_carry_t *entry)
+void am_hal_sysctrl_clkmuxrst_low_power_init(void)
 {
-    uint8_t gpio_state[4];
-    uint32_t pin_config;
+    uint8_t gpio_state[4] = {0u, 0u, 0u, 0u};
+    uint32_t pin_config = 0u;
     uint32_t saved_state;
     uint32_t r5_config;
     unsigned selector;
 
-    /* Stock stack bytes mirror the low 24 bits of incoming R1. This is an
-     * observed register carry, not a C ABI parameter or an implicit zero. */
-    gpio_state[0] = (uint8_t)entry->r1_carry;
-    gpio_state[1] = (uint8_t)(entry->r1_carry >> 8);
-    gpio_state[2] = (uint8_t)(entry->r1_carry >> 16);
-    gpio_state[3] = (uint8_t)(entry->r1_carry >> 24);
-    pin_config = entry->r2_carry;
     saved_state = MMIO32(STIMER_BASE + offsetof(STIMER_Type, HALSTATES));
 
     /* The second word is read by stock at 0x4000885c, which the public header
@@ -109,7 +97,7 @@ void am_hal_pwrctrl_low_power_init_clockmux_fragment(
                 gpio_state[1] = 0u;
                 gpio_state[2] = 0u;
                 gpio_state[3] = 0u;
-                (void)opencfw_hal_status_poll(200u,
+                (void)am_hal_delay_us_status_check(200u,
                     (uintptr_t)(CLKGEN_BASE + offsetof(CLKGEN_Type, CLOCKENSTAT)),
                     0x01000000u, 0x01000000u, 1u);
                 opencfw_hal_delay_us(5u);
@@ -122,9 +110,8 @@ void am_hal_pwrctrl_low_power_init_clockmux_fragment(
             }
 
             if (extref_needed || (pll_needed && pll_frefsel)) {
-                /* R5 is carried from the caller's earlier local-state pointer
-                 * and BFI overwrites only its low nibble with pin value 10. */
-                r5_config = (entry->r5_gpio_carry & ~0x0fu) | 10u;
+                /* GPIO 15 function select 10 (REFCLK_EXT). */
+                r5_config = 10u;
                 (void)opencfw_power_register_read(15u, &pin_config);
                 (void)opencfw_bl_power_register_update(15u, r5_config);
             }
@@ -141,9 +128,9 @@ void am_hal_pwrctrl_low_power_init_clockmux_fragment(
             }
 
             for (selector = 30u; selector <= 33u; ++selector)
-                (void)opencfw_bl_mspi_mode_enter(selector);
-            (void)opencfw_bl_mspi_mode_enter(26u);
-            (void)opencfw_bl_mspi_mode_enter(27u);
+                (void)am_hal_pwrctrl_periph_enable(selector);
+            (void)am_hal_pwrctrl_periph_enable(26u);
+            (void)am_hal_pwrctrl_periph_enable(27u);
             opencfw_hal_delay_us(5u);
 
             MMIO32(0x40201000u) |= 1u;
@@ -165,9 +152,9 @@ void am_hal_pwrctrl_low_power_init_clockmux_fragment(
             MMIO32(0x40209100u) |= 1u;
             MMIO32(0x400b2000u) &= ~1u;
             for (selector = 30u; selector <= 33u; ++selector)
-                (void)opencfw_bl_mspi_mode_leave(selector);
-            (void)opencfw_bl_mspi_mode_leave(26u);
-            (void)opencfw_bl_mspi_mode_leave(27u);
+                (void)am_hal_pwrctrl_periph_disable(selector);
+            (void)am_hal_pwrctrl_periph_disable(26u);
+            (void)am_hal_pwrctrl_periph_disable(27u);
 
             if (pll_needed) {
                 pllctl0_store(MCUCTRL->PLLCTL0 & ~(1u << 29));
@@ -198,8 +185,4 @@ void am_hal_pwrctrl_low_power_init_clockmux_fragment(
     MMIO32(STIMER_BASE + offsetof(STIMER_Type, HALSTATES)) =
         (MMIO32(STIMER_BASE + offsetof(STIMER_Type, HALSTATES)) & 0xffffu) |
         0x5af00000u;
-    /* Original saved R1/R2 stack slots are also live GPIO/pin locals. */
-    entry->r1_carry = (uint32_t)gpio_state[0] | ((uint32_t)gpio_state[1] << 8) |
-        ((uint32_t)gpio_state[2] << 16) | ((uint32_t)gpio_state[3] << 24);
-    entry->r2_carry = pin_config;
 }

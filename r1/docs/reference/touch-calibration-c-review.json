@@ -1,0 +1,248 @@
+{
+  "schema_version": 1,
+  "sources": [
+    "r1/src/application/board/native_touch_model.c",
+    "r1/src/application/board/native_battery_configuration.c",
+    "r1/src/application/board/native_advertising_configuration.c"
+  ],
+  "native_roots": [
+    "0x6a1cc",
+    "0x7bac4",
+    "0x7bb04",
+    "0x8e758",
+    "0x7bb44",
+    "0x7bb5c",
+    "0x7bb7c",
+    "0x7ba78"
+  ],
+  "report": "build/sources-goal-r1-touch-calibration-final-c/report.json",
+  "compiled_units": 838,
+  "application_imports": 76,
+  "added_imports": [],
+  "removed_imports": [
+    "r1_batcfg_word_4c_get",
+    "r1_product_sn_letter_decode",
+    "r1_touch_slider_calibration"
+  ],
+  "prior_objects_unchanged": 833,
+  "changed_generated_objects": [
+    [
+      "r1-bootloader",
+      "{gen}/r1_startup_vectors.S"
+    ],
+    [
+      "r1-bootloader",
+      "{gen}/r1_uecc.c"
+    ]
+  ],
+  "changed_existing_allocated_sections": {
+    "r1/src/application/board/native_battery_configuration.c": [
+      ".text.r1_batcfg_byte0_get",
+      ".text.r1_batcfg_flag1_get",
+      ".text.r1_batcfg_word1_signed_get"
+    ],
+    "r1/src/application/board/native_advertising_configuration.c": [
+      ".text.r1_advertising_product_sn_read"
+    ]
+  },
+  "verification": {
+    "stock_C_pairs": {
+      "size_override_domain": 256,
+      "serial_letter_domain": 1024,
+      "serial_first_byte_domain": 1024,
+      "binary32_calibration_domain": 65536,
+      "scalar_getter_boundaries": 42,
+      "serial_marker_optional_alias_length": 30,
+      "live_handle_and_table_mutations": 70,
+      "seeded_cached_inputs": 256
+    },
+    "total_pairs": 68238,
+    "C_only_short_or_failed_read_fallbacks": 84,
+    "actual_C_cached_class": false,
+    "source_standard_copy_and_fill_modeled": true,
+    "exact_binary32_scale": "0x43555555",
+    "calibration_float_oracle": true,
+    "callee_saved_integer_FP_stack_guards_masks": true,
+    "REA_bytes_match": true,
+    "device_execution": false
+  },
+  "actual_cached_class_integration": {
+    "stock_C_pairs": {
+      "size_override_domain": 256,
+      "serial_letter_domain": 1024,
+      "serial_first_byte_domain": 1024,
+      "binary32_calibration_domain": 64,
+      "scalar_getter_boundaries": 42,
+      "serial_marker_optional_alias_length": 30,
+      "live_handle_and_table_mutations": 70,
+      "seeded_cached_inputs": 32
+    },
+    "total_pairs": 2542,
+    "C_only_short_or_failed_read_fallbacks": 6,
+    "actual_C_cached_class": true,
+    "source_standard_copy_and_fill_modeled": true,
+    "exact_binary32_scale": "0x43555555",
+    "calibration_float_oracle": true,
+    "callee_saved_integer_FP_stack_guards_masks": true,
+    "REA_bytes_match": true,
+    "device_execution": false
+  },
+  "actual_configuration_calibration_ports_registry_integration": {
+    "stock_C_pairs": {
+      "table_selector": 60,
+      "stock_configuration_tables": 320,
+      "configuration_byte_domain": 10,
+      "live_provider_mutations": 90,
+      "live_log_modes": 256,
+      "seeded_live_configuration": 16
+    },
+    "total_pairs": 752,
+    "actual_C_ports_transport_registry": true,
+    "REA_bytes_match": true,
+    "stock_model_pointer_entries": 20,
+    "nonnull_model_records": 20,
+    "null_model_entries": 0,
+    "transfers_per_successful_configuration": 10,
+    "callee_saves_stack_guards_masks": true,
+    "device_execution": false
+  },
+  "actual_IRQ_reset_configuration_calibration_ports_registry_integration": {
+    "worker_policy_pairs": 384,
+    "raw_selection_pairs": 32,
+    "float_callback_pairs": 104,
+    "adapter_pairs": 40,
+    "seeded_live_pairs": 16,
+    "actual_C_average_and_event_dispatch": true,
+    "average_oracle_pairs": 4,
+    "retained_or_cleared_partial_read_pairs": 32,
+    "defined_private_buffer_fallback_cases": 12,
+    "callee_saved_integer_and_FP_registers_checked": true,
+    "actual_C_ports_transport_registry": true
+  },
+  "mutants": [
+    {
+      "name": "size_upper",
+      "source": "r1/src/application/board/native_touch_model.c",
+      "rejected": true
+    },
+    {
+      "name": "serial_position",
+      "source": "r1/src/application/board/native_touch_model.c",
+      "rejected": true
+    },
+    {
+      "name": "lowercase",
+      "source": "r1/src/application/board/native_touch_model.c",
+      "rejected": true
+    },
+    {
+      "name": "default_model",
+      "source": "r1/src/application/board/native_touch_model.c",
+      "rejected": true
+    },
+    {
+      "name": "scale_bits",
+      "source": "r1/src/application/board/native_touch_model.c",
+      "rejected": true
+    },
+    {
+      "name": "signed_delta",
+      "source": "r1/src/application/board/native_touch_model.c",
+      "rejected": true
+    },
+    {
+      "name": "divisor",
+      "source": "r1/src/application/board/native_touch_model.c",
+      "rejected": true
+    },
+    {
+      "name": "origin_round",
+      "source": "r1/src/application/board/native_touch_model.c",
+      "rejected": true
+    },
+    {
+      "name": "size_handle",
+      "source": "r1/src/application/board/native_touch_model.c",
+      "rejected": true
+    },
+    {
+      "name": "word_offset",
+      "source": "r1/src/application/board/native_touch_model.c",
+      "rejected": true
+    },
+    {
+      "name": "battery_fallback",
+      "source": "r1/src/application/board/native_battery_configuration.c",
+      "rejected": true
+    },
+    {
+      "name": "battery_signed",
+      "source": "r1/src/application/board/native_battery_configuration.c",
+      "rejected": true
+    },
+    {
+      "name": "serial_marker",
+      "source": "r1/src/application/board/native_advertising_configuration.c",
+      "rejected": true
+    }
+  ],
+  "new_owners": [
+    {
+      "symbol": "r1_touch_slider_origin",
+      "stock_address": "0x200067c8",
+      "cold_rw": "0000"
+    },
+    {
+      "symbol": "r1_touch_slider_step",
+      "stock_address": "0x200067d4",
+      "cold_rw": "00000000"
+    }
+  ],
+  "reused_owners": [
+    "r1_r_size_kv_handle",
+    "r1_device_info_kv_handle",
+    "r1_batcfg_record_kv_handle"
+  ],
+  "assembly_entry_bridges_removed": 3,
+  "contract": [
+    "Read r_size one-byte class; 6..15 bypass SN. Otherwise read existing product SN and map A..J/a..j at byte5 to 6..15, default13, rejecting leading ff.",
+    "Compensation getter reads nv_r1 124-byte class and returns word at offset76; historical batcfg names do not denote the four-byte power class.",
+    "Calibration decodes a fresh model/table; reads bytes3 and4; signed upper-lower times exact binary32 43555555; origin truncates lower*scale to uint32 then uint16; step divides the separately rounded span by binary32 200.",
+    "Three power getters use ordinary C frames and the same fully populated four-byte cached-class reads.",
+    "Private getter frames initialize unwritten bytes to zero; the SN reader initializes its private 124-byte record before preserving native marker/copy/length behavior."
+  ],
+  "limits": [
+    "Direct probes model KV reads and the model-table provider; all changed C bodies execute.",
+    "Deeper probes execute actual C cached-class size checks and critical-section control against prepared callbacks; standard copy/fill operations are modeled. No physical flash is exercised.",
+    "Configuration and IRQ probes execute actual C SN/model/calibration/getters and IQS/registry paths; storage, BSN, lower audit and device/kernel callbacks are modeled.",
+    "The 65536 calibration cases cover all lower/upper byte pairs starting with FPSCR zero and validate binary32 results against stock and a separate rounded arithmetic oracle; other FP control modes are not claimed.",
+    "New C short/failure outputs are deliberate initialized fallbacks, not equivalence to native private saved-register/stack garbage.",
+    "A diagnostic reproduces a skipped caller comparison after the compiled memory copy under Unicorn, including with explicit CPU/initial flags. Passing probes model standard copy/fill, use real Thumb provider returns and flush translation caches between reused calls; firmware memory code is unchanged. This is not a physical fault claim.",
+    "Cold RW checks do not establish final runtime placement. Global sources-check still fails for pre-existing unlisted G2 resident_rom_thumb_set.S; R1 passes.",
+    "No final application link, physical timing or device boot proof; byte identity is not required."
+  ],
+  "evidence_files": {
+    "build/sources-goal-r1-touch-calibration-final-c/report.json": "ce0919e45c0e07f3b2de55d0458ebb8cb29108193f59af6fb8609dd8edfda731",
+    "r1/src/sources.json": "3d63600b7964eed00c9e50f3b97b23cf91609bd6ca8d8f2c84fe1dd1a3218e9c",
+    "r1/src/application/board/native_touch_model.c": "966298420d641ea79be9a81b3d153b49d30f6d492c69b91996938e7f426c2d17",
+    "r1/src/application/board/native_battery_configuration.c": "0f50934ceeaf79232453fbc466e22cd50c25949b39c4882227225cc918c29c44",
+    "r1/src/application/board/native_advertising_configuration.c": "926b26008f57832ac0914a4e47083b237bde82574a1923589c89c7de43202a12",
+    "r1/src/application/board/native_touch_calibration.h": "52f9be092070626858e5948a0fb7a08273c2dedaa7afcb6ff43ff9619d1831f6",
+    "build/goal-r1-fstorage-registry/expanded-rw.bin": "87fdee392022fdbe23dd0daf3e859fb14f3ce26ba3e8403aab56dc9d9a913317",
+    "build/goal-r1-touch-calibration-c/verify.py": "a569be1db3035e66b6eb4d53ac4ce2b75083ea03f08edc9f836fda358c66bdd6",
+    "build/goal-r1-touch-calibration-c/verification.json": "520e78071559d8a7b9f458942b3ec10ce7df0a48d988bcae0268041ff458340b",
+    "build/goal-r1-touch-calibration-c/integration.json": "c7c45eb85feb274f484922633dd4d02bd90b33c222be32a5b4108931d1f8c8b7",
+    "build/goal-r1-touch-calibration-c/configuration.py": "3c5085fcf5889a4b02d81e26e4b176e6baa8d75e42fbfada05dfc9db1bca5bfb",
+    "build/goal-r1-touch-calibration-c/configuration/configuration-integration.json": "a13c4bf6e288236339b8859425d8475d3d6092fe88f528d82d32e98c2dd5095c",
+    "build/goal-r1-touch-calibration-c/irq.py": "aae2602800e255622e2644c0fe8233733cb20e341a48bab3d0481b806aef7f46",
+    "build/goal-r1-touch-calibration-c/irq/irq-integration.json": "211ea084515c86f0c692bdd4baa6973cf62671358f55d6914638d64e8edfc3f4",
+    "build/goal-r1-touch-calibration-c/mutants.py": "4cad813a18672272f6e08d22cdaaeb7dee129ace71cc50f0b9ff1f3431154205",
+    "build/goal-r1-touch-calibration-c/mutant-verify.py": "27824bc6514c53383d0c72de16848413664e77bb64dc6e69ba4f367d7d843f3d",
+    "build/goal-r1-touch-calibration-c/mutants.json": "375236fcabf74b4b75c712baa26e8b201e5b208904e3ff3ce0ad2bb18166d034",
+    "build/goal-r1-touch-calibration-c/debug.py": "8ed0639c28095f075a265317946e3ac14a4557582077d963f49bb2439ffc7a5d",
+    "build/goal-r1-touch-calibration-c/debug.log": "a5edf37a2405dbd80cfc5405116100b3d72d5976c00714c4232266b3a1c73f2d",
+    "build/goal-r1-touch-calibration-c/real-memory.log": "c2763cbaf38975e3d7fe5c34850178a424323b7e3d380336172f575927380a72",
+    "build/goal-r1-touch-calibration-c/sources-check.log": "35e7f3c448a1279ea12886afa41305dae6c41690db0434944c99f60005186fdd",
+    "r1/docs/reference/touch-calibration-rea-review.json": "c07ab14c4fc1b5382a933b3c99f42bc3748ebb7723f8d01250cc490ee83896a2"
+  }
+}

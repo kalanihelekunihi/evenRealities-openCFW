@@ -1,7 +1,7 @@
 /* Native normal-copy region 0x10016f74..0x10016f97 / runtime
  * 0x20016f74..0x20016f97, matching pinned NationalChip LVP_APP layout.
- * The callback addresses were authenticated from the eight native words;
- * this record is not selected until all callbacks have source bodies. */
+ * The callback addresses were authenticated from the eight native words.
+ * Wave 5: linked now that sample_app_* callbacks have source bodies. */
 #include <stdint.h>
 
 typedef struct {

@@ -7,9 +7,10 @@
 #include "task.h"
 #include "timers.h"
 
-/* The callback literals prove a 112-byte reservation, not sizeof the stock
- * provider type. This candidate uses 92 bytes; exact kernel config is open. */
-_Static_assert(sizeof(StaticTask_t) <= 112, "candidate TCB must fit stock reservation");
+/* Callback literals and the recovered native TCB agree on 112 bytes.
+ * The public type is opaque storage; generic upstream field semantics stay
+ * separate from the native backend. */
+_Static_assert(sizeof(StaticTask_t) == 112, "public TCB must equal native reservation");
 union r1_task_control_reservation {
     StaticTask_t control;
     uint8_t reserved[112];
@@ -25,9 +26,9 @@ struct r1_static_task_memory {
 _Static_assert(sizeof(struct r1_static_task_memory) == 0x470, "stock task allocation extent");
 
 static struct r1_static_task_memory idle_memory
-    __attribute__((section(".r1.idle_task_memory"), aligned(4)));
+    __attribute__((section(".bss.r1.idle_task_memory"), aligned(4)));
 static struct r1_static_task_memory timer_memory
-    __attribute__((section(".r1.timer_task_memory"), aligned(4)));
+    __attribute__((section(".bss.r1.timer_task_memory"), aligned(4)));
 
 void vApplicationGetIdleTaskMemory(StaticTask_t **control, StackType_t **stack,
                                  uint32_t *depth) {

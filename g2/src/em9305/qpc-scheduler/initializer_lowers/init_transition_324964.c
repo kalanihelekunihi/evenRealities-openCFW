@@ -25,19 +25,9 @@ uint32_t opencfw_em9305_init_transition_324964_body(
         0u,id,response,feature);
 }
 
-#ifdef __arc__
-__asm__(
-".text\n.balign 4\n.global opencfw_em9305_init_transition_324964\n"
-".type opencfw_em9305_init_transition_324964,@function\n"
-"opencfw_em9305_init_transition_324964:\n"
-"enter_s [r13,fp,blink]\nsub_s sp,sp,0x14\n"
-"mov r1,sp\nbl opencfw_em9305_init_transition_324964_body\n"
-"leave_s [r13,fp,blink,pcl]\n"
-".size opencfw_em9305_init_transition_324964,. - opencfw_em9305_init_transition_324964\n");
-#else
+/* Entry: reserve the 20-byte response frame and run the transition body. */
 uint32_t opencfw_em9305_init_transition_324964(uintptr_t record)
 {
     uint8_t response[20] __attribute__((aligned(4)));
     return opencfw_em9305_init_transition_324964_body(record,response);
 }
-#endif

@@ -75,21 +75,21 @@ extern uint32_t audio_uart_page_event_code_450286(const void *event);       /* l
 extern void *audio_uart_page_451740(void *object, void (*callback)(const void *), uint32_t filter,
                                     void *user_data);                       /* lv_obj_add_event_cb */
 extern uint32_t audio_uart_page_44104c(uint32_t rgb);                       /* lv_color_hex */
-extern void audio_uart_page_44120e(void *obj, int32_t v, uint32_t sel);     /* style pad_top */
-extern void audio_uart_page_44121c(void *obj, int32_t v, uint32_t sel);     /* style pad_bottom */
-extern void audio_uart_page_44122a(void *obj, int32_t v, uint32_t sel);     /* style pad_left */
-extern void audio_uart_page_441238(void *obj, int32_t v, uint32_t sel);     /* style pad_right */
+extern void lv_obj_set_style_pad_top(void *obj, int32_t v, uint32_t sel);     /* style pad_top */
+extern void lv_obj_set_style_pad_bottom(void *obj, int32_t v, uint32_t sel);     /* style pad_bottom */
+extern void lv_obj_set_style_pad_left(void *obj, int32_t v, uint32_t sel);     /* style pad_left */
+extern void lv_obj_set_style_pad_right(void *obj, int32_t v, uint32_t sel);     /* style pad_right */
 extern void audio_uart_page_44127e(void *obj, uint32_t color, uint32_t sel); /* style bg_color */
 extern void audio_uart_page_44129e(void *obj, uint32_t v, uint32_t sel);    /* style bg_opa */
 extern void audio_uart_page_4412ec(void *obj, uint32_t color, uint32_t sel); /* style border_color */
 extern void audio_uart_page_44130c(void *obj, uint32_t v, uint32_t sel);    /* style border_opa */
-extern void audio_uart_page_44131c(void *obj, uint32_t v, uint32_t sel);    /* style border_width */
+extern void lv_obj_set_style_border_width(void *obj, uint32_t v, uint32_t sel);    /* style border_width */
 extern void audio_uart_page_4413be(void *obj, uint32_t v, uint32_t sel);    /* style opa (scrollbar) */
 extern void audio_uart_page_4413ce(void *obj, uint32_t v, uint32_t sel);    /* style image_opa */
 extern void audio_uart_page_44140e(void *obj, uint32_t color, uint32_t sel); /* style text_color */
 extern void audio_uart_page_44143e(void *obj, uint32_t font, uint32_t sel); /* style text_font */
 extern void audio_uart_page_44145a(void *obj, uint32_t v, uint32_t sel);    /* style text_align */
-extern void audio_uart_page_44146a(void *obj, int32_t v, uint32_t sel);     /* style radius */
+extern void lv_obj_set_style_radius(void *obj, int32_t v, uint32_t sel);     /* style radius */
 extern void *audio_uart_page_498668(void *parent);                          /* lv_image_create */
 extern void audio_uart_page_498680(void *object, const void *source);       /* lv_image_set_src */
 extern void *audio_uart_page_499416(void *parent);                          /* lv_label_create */
@@ -213,14 +213,14 @@ uint32_t audio_conversate_ui_route_5b7138(uint32_t action, uint32_t value)
     void *const root = ui->overlay_root;
     audio_uart_page_43f09a(root, 0, 0);
     audio_uart_page_44129e(root, 0u, 0u);
-    audio_uart_page_44131c(root, 1u, 0u);
+    lv_obj_set_style_border_width(root, 1u, 0u);
     audio_uart_page_44130c(root, 0xffu, 0u);
     audio_uart_page_4412ec(root, audio_uart_page_44104c(0xffffffu), 0u);
-    audio_uart_page_44146a(root, 6, 0u);
-    audio_uart_page_44122a(root, 12, 0u);
-    audio_uart_page_441238(root, 0, 0u);
-    audio_uart_page_44120e(root, 0, 0u);
-    audio_uart_page_44121c(root, 6, 0u);
+    lv_obj_set_style_radius(root, 6, 0u);
+    lv_obj_set_style_pad_left(root, 12, 0u);
+    lv_obj_set_style_pad_right(root, 0, 0u);
+    lv_obj_set_style_pad_top(root, 0, 0u);
+    lv_obj_set_style_pad_bottom(root, 6, 0u);
     audio_uart_page_43dfa4(root, LV_OBJ_FLAG_SCROLLABLE);
 
     /* Title row: prep-note icon and localized title. */
@@ -228,8 +228,8 @@ uint32_t audio_conversate_ui_route_5b7138(uint32_t action, uint32_t value)
     audio_uart_page_43f4c0(header, 0x228u, 0x28u);
     audio_uart_page_43f09a(header, 0, 0);
     audio_uart_page_44129e(header, 0u, 0u);
-    audio_uart_page_44131c(header, 0u, 0u);
-    audio_uart_page_44146a(header, 0, 0u);
+    lv_obj_set_style_border_width(header, 0u, 0u);
+    lv_obj_set_style_radius(header, 0, 0u);
     audio_conversate_prep_note_style_5b69d4(header, 0u, 0u);
     audio_uart_page_43dfa4(header, LV_OBJ_FLAG_SCROLLABLE);
 
@@ -255,9 +255,9 @@ uint32_t audio_conversate_ui_route_5b7138(uint32_t action, uint32_t value)
     audio_uart_page_43f6d6(content, header, LV_ALIGN_OUT_BOTTOM_LEFT, 0, 10);
     audio_uart_page_43f4c0(content, 0x220u, 0xe0u);
     audio_uart_page_44129e(content, 0u, 0u);
-    audio_uart_page_44131c(content, 0u, 0u);
+    lv_obj_set_style_border_width(content, 0u, 0u);
     audio_uart_page_44130c(content, 0u, 0u);
-    audio_uart_page_44146a(content, 0, 0u);
+    lv_obj_set_style_radius(content, 0, 0u);
     audio_conversate_prep_note_style_5b69d4(content, 0u, 0u);
     audio_uart_page_44e3ca(content, 0x0cu);
     audio_uart_page_43dfa4(content, LV_OBJ_FLAG_SCROLL_MASK);
@@ -279,8 +279,8 @@ uint32_t audio_conversate_ui_route_5b7138(uint32_t action, uint32_t value)
     audio_uart_page_43f0e0(bar, audio_uart_lv_obj_content_width_43fe16(root) - 10);
     audio_uart_page_44127e(bar, audio_uart_page_44104c(0xffffffu), 0u);
     audio_uart_page_44129e(bar, 0xffu, 0u);
-    audio_uart_page_44131c(bar, 0u, 0u);
-    audio_uart_page_44146a(bar, 0, 0u);
+    lv_obj_set_style_border_width(bar, 0u, 0u);
+    lv_obj_set_style_radius(bar, 0, 0u);
     audio_conversate_prep_note_style_5b69d4(bar, 0u, 0u);
     audio_uart_page_43dfa4(bar, LV_OBJ_FLAG_SCROLLABLE);
 

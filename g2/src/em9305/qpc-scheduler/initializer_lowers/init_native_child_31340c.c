@@ -1,22 +1,13 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_31340c\n"
-".type opencfw_em9305_child_31340c,@function\n"
-"opencfw_em9305_child_31340c:\n"
-"L31340c:\n"
-"cmp r0,626\n"
-"L313410:\n"
-"blo_s L31341c\n"
-"L313412:\n"
-"mov r1,625\n"
-"L313416:\n"
-"remu.f 0,r0,r1\n"
-"L31341a:\n"
-"jeq_s [blink]\n"
-"L31341c:\n"
-"j_s.d [blink]\n"
-"L31341e:\n"
-"mov r0,625\n"
-".size opencfw_em9305_child_31340c,.-opencfw_em9305_child_31340c\n"
-);
+/* Stock 0x31340c: returns a when a >= 626 and a % 625 == 0; otherwise 625.
+ * Converted from the lowered ARC asm; compiled with the g2-em9305-1 profile (-Os) and the
+ * disassembly diffed against the stock lowering: identical, or differing only in delay-slot
+ * scheduling / a redundant zero-extension / absolute-address ld/st forms (reviewed by hand). */
+#include <stdint.h>
+#define B8(a)  (*(volatile uint8_t  *)(uintptr_t)(a))
+#define H16(a) (*(volatile uint16_t *)(uintptr_t)(a))
+#define W32(a) (*(volatile uint32_t *)(uintptr_t)(a))
+uint32_t opencfw_em9305_child_31340c(uint32_t a)
+{
+  if(a >= 626u && a % 625u == 0u) return a;
+  return 625u;
+}

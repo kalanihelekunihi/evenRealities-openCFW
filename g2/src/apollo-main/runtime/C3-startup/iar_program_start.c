@@ -12,7 +12,8 @@
  * (apollo-bootloader/startup/reset.S, stock 0x43293c).
  *
  * Written as a naked function so the stack is not touched before the seal is
- * pushed. Profile g2-apollo-main-2. */
+ * pushed. Profile g2-apollo-main-2.
+ * Must stay assembly: it sets PSP and pushes the stack seal before any C frame. */
 #include <stdint.h>
 
 /* No definition in g2/src yet: stock 0x5e4270..0x5e4293 (__iar_init_vfp). */

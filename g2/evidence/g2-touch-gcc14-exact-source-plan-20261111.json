@@ -1,0 +1,49 @@
+{
+  "schema": 1,
+  "target": "Fresh exact touch PDL source qualification with Arm GNU Toolchain 14.2.Rel1",
+  "reference": {
+    "component": "g2/blobs/official/g2-2.2.6.10/firmware_touch.bin",
+    "component_sha256": "0d13d8bb1337bf22989dc16143e3d5eca29a31cc1ed753ff624668750ea9470d"
+  },
+  "compiler": {
+    "path": "vendor-cache/g2/touch-gcc-14.2/14.2.Rel1/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi/bin/arm-none-eabi-gcc",
+    "sha256": "2e6d1fc0b7709d2fc08278a06bbcbfadb6fafcf5837e13cde01a1fbd07ad6db1",
+    "local_release_archive": "vendor-cache/g2/touch-gcc-14.2/14.2.Rel1/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi.tar.xz",
+    "local_release_archive_sha256": "62a63b981fe391a9cbad7ef51b17e49aeaa3e7b0d029b36ca1e9c3b2a9b78823",
+    "profile": "Cortex-M0+, Thumb, -Og, freestanding, pinned PDL inputs; exact complete function bodies after isolated relocation linking"
+  },
+  "qualification": {
+    "selection_tool": "tools/build/qualify_sources.py",
+    "selection_method": "The touch-gcc candidate set was retargeted to the local fingerprinted 14.2.Rel1 compiler and its PDL input cache; the tool performed the normal anchored full-byte comparison and emitted its source-plan and qualification report.",
+    "report": "build/g2-touch-gcc14-qualification-20261111/qualification.json",
+    "report_sha256": "14b4c8b9935d02429e6256d1a3559b35abceaae8fdc21de54c3c09d491ebe358",
+    "selection_plan": "build/g2-touch-gcc14-qualification-20261111/source-plan.json",
+    "selection_plan_sha256": "3dc21648d9e1eb39f76a81a37e9bd2aac5b6863d408e2f91f4052293357b5e13",
+    "candidate_units": 63,
+    "selected_units": 11,
+    "selected_regions": 40,
+    "prior_12_2_regions_preserved": 36,
+    "additional_regions": [
+      {"symbol": "Cy_MSCLP_Configure", "stock_file_range": [23792, 24216], "bytes": 424},
+      {"symbol": "Cy_SCB_I2C_Init", "stock_file_range": [26132, 26616], "bytes": 484},
+      {"symbol": "Cy_SysClk_ClkHfGetFrequency", "stock_file_range": [27836, 27892], "bytes": 56},
+      {"symbol": "Cy_SysLib_SetWaitStates", "stock_file_range": [28764, 28820], "bytes": 56}
+    ],
+    "additional_exact_bytes": 1020
+  },
+  "updated_source_plan": "tools/build/source-plan.json",
+  "updated_source_plan_sha256": "f6024fdcb64a6dce9c9d8130fca9b046b75079de3040bc8f96ea80562da21e86",
+  "verification": {
+    "command": "python3 tools/build/build_firmware.py --device g2 --out build/g2-gcc14-touch-default-hybrid-20261111",
+    "hybrid_report": "build/g2-gcc14-touch-default-hybrid-20261111/build-report.json",
+    "hybrid_report_sha256": "b266bd5ded2f0203821e589483193037d39f25737262d021442819dcb10f1f3d",
+    "g2_exact_regions": 58,
+    "g2_exact_bytes": 3460,
+    "touch_exact_regions": 40,
+    "touch_exact_bytes": 3342,
+    "hybrid_bundle_bytes": 4301227,
+    "hybrid_bundle_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+    "source_completeness_proven": false
+  },
+  "limits": "The hybrid output is byte-identical because it pulls through all unselected locked bytes. The all-C source candidate is separately linked but still differs from the locked OTA. This selection proves only the listed complete function bodies, not whole-payload source ownership or hardware behavior."
+}

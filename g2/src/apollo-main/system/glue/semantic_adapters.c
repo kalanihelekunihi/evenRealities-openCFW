@@ -7,15 +7,13 @@
  * aliases instead (callback_select, stock_ext_request/release,
  * stock_clock_request/release, stock_oscillator); the ones below remain
  * because their targets are not yet defined by any unit. */
-extern void audio_spot_timer_initialize(void);
 extern uint32_t audio_wait5(uint32_t, uint32_t, uint32_t, uint32_t, uint32_t);
 extern uint32_t audio_hfrc2_apply(const void *);
 extern uint32_t audio_hfrc2_disable(void);
 extern uint32_t audio_hfrc_apply(uint32_t);
 
-void platform_finish_init(void) {
-    audio_spot_timer_initialize();
-}
+/* platform_finish_init (the PCM2.2 init's timer setup) went with the hand
+ * SPOTMGR; upstream am_hal_spotmgr_pcm2_2_init calls am_hal_spotmgr_timer_init. */
 uint32_t stock_wait5(uint32_t budget, uint32_t address, uint32_t mask,
                      uint32_t expected, uint32_t equal) {
     return audio_wait5(budget, address, mask, expected, equal);

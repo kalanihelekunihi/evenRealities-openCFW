@@ -15,3 +15,5 @@ void *audio_settings_copy_text(void *destination,const void *source,uint32_t cou
     for(;i<count;i++) out[i]=0u;
     return destination;
 }
+__typeof__(audio_settings_copy_text) audio_dashboard_copy_limited
+    __attribute__((alias("audio_settings_copy_text")));

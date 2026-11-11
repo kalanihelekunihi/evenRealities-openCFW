@@ -22,9 +22,12 @@ __attribute__((used,noinline)) static uint32_t profile_command_kernel(uint32_t h
  (void)r1_protocol_send_flag_set_c(handle,4,1,read16(packet+3),0);
  frame[12]=payload[1];frame[13]=payload[0]?2:1;frame[14]=payload[2];frame[15]=payload[4];
  write16(frame+16,0xffff);write16(frame+18,0xffff);write16(frame+20,0xffff);
- /* Native publishes12 bytes but only initializes10. Retain the external
-  * frame's last two bytes; this is not a default profile or admission policy. */
+ /* Native publishes 12 bytes but initializes only 10. The C entry clears
+  * its scratch frame so the last two bytes are defined. */
  return r1_event_publish(0x100a,(const void *)(uintptr_t)(frame+12),12);
 }
-__attribute__((naked,noinline)) uint32_t r1_native_user_profile_handler(uint32_t handle __attribute__((unused)),const void *packet __attribute__((unused)))
-{__asm__ volatile("push {r4,r5,r6,lr}\nsub sp,sp,#24\nmov r2,sp\nbl profile_command_kernel\nadd sp,sp,#24\npop {r4,r5,r6,pc}");}
+uint32_t r1_user_profile_handler(uint32_t handle,const void *packet)
+{
+ uint8_t frame[24]={0};
+ return profile_command_kernel(handle,packet,frame);
+}

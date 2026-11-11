@@ -1,124 +1,53 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_3284ec\n"
-".type opencfw_em9305_child_3284ec,@function\n"
-"opencfw_em9305_child_3284ec:\n"
-"L3284ec:\n"
-"enter_s [r13-r16,blink]\n"
-"L3284ee:\n"
-"ld r16,[r0,0x8e4]\n"
-"L3284f6:\n"
-"mov_s r13,r0\n"
-"L3284f8:\n"
-"bl.d opencfw_em9305_scan_current_303f80\n"
-"L3284fc:\n"
-"mov_s r14,r1\n"
-"L3284fe:\n"
-"cmp r0,301\n"
-"L328502:\n"
-"mov r0,300\n"
-"L328506:\n"
-"blo_s L32850c\n"
-"L328508:\n"
-"bl opencfw_em9305_scan_current_303f80\n"
-"L32850c:\n"
-"mov_s r15,0x805cac\n"
-"L328512:\n"
-"ld r1,[r15,0]\n"
-"L328514:\n"
-"ld_s r2,[r13,0x48]\n"
-"L328516:\n"
-"add r16,r16,r0\n"
-"L32851a:\n"
-"mov_s r0,0x257ed4\n"
-"L328520:\n"
-"ldh_s r1,[r1,0x14]\n"
-"L328522:\n"
-"cmp_s r2,r1\n"
-"L328524:\n"
-"mov.hi r1,r2\n"
-"L328528:\n"
-"add_s r1,r1,r16\n"
-"L32852a:\n"
-"cmp_s r1,r0\n"
-"L32852c:\n"
-"bl.d opencfw_em9305_channel_timing_adjust_312c5c\n"
-"L328530:\n"
-"mov.c r0,r1\n"
-"L328534:\n"
-"mov r1,1432\n"
-"L328538:\n"
-"ldb_s r1,[r13,r1]\n"
-"L32853a:\n"
-"mov_s r16,r0\n"
-"L32853c:\n"
-"cmp_s r1,0\n"
-"L32853e:\n"
-"mov_s r1,0\n"
-"L328540:\n"
-"bne_s L328546\n"
-"L328542:\n"
-"ldb r1,[r13,76]\n"
-"L328546:\n"
-"bl.d opencfw_em9305_associated_object_init_312918\n"
-"L32854a:\n"
-"mov_s r0,r14\n"
-"L32854c:\n"
-"ld.as r2,[r13,209]\n"
-"L328550:\n"
-"ld r0,[r13,0x8e0]\n"
-"L328558:\n"
-"st_s r0,[r14,0x8]\n"
-"L32855a:\n"
-"breq_s r2,0,L328576\n"
-"L32855c:\n"
-"ld r0,[r15,0]\n"
-"L32855e:\n"
-"ldh_s r1,[r0,0x16]\n"
-"L328560:\n"
-"mov_s r0,r14\n"
-"L328562:\n"
-"bl.d opencfw_em9305_init_schedule_latest_3130d4\n"
-"L328566:\n"
-"add_s r1,r1,r16\n"
-"L328568:\n"
-"brne_s r0,0,L328590\n"
-"L32856a:\n"
-"ld.as r2,[r13,209]\n"
-"L32856e:\n"
-"ld r0,[r14,0x8]\n"
-"L328570:\n"
-"add_s r0,r0,r2\n"
-"L328572:\n"
-"st_s r0,[r14,0x8]\n"
-"L328574:\n"
-"b_s L32855c\n"
-"L328576:\n"
-"ld_s r2,[r13,0x28]\n"
-"L328578:\n"
-"ld r0,[r15,0]\n"
-"L32857a:\n"
-"ldh_s r1,[r0,0x16]\n"
-"L32857c:\n"
-"mov_s r0,r14\n"
-"L32857e:\n"
-"bl.d opencfw_em9305_init_schedule_adjust_312f88\n"
-"L328582:\n"
-"add_s r1,r1,r16\n"
-"L328584:\n"
-"brne_s r0,0,L328590\n"
-"L328586:\n"
-"ld_s r2,[r13,0x28]\n"
-"L328588:\n"
-"ld r0,[r14,0x8]\n"
-"L32858a:\n"
-"add_s r0,r0,r2\n"
-"L32858c:\n"
-"st_s r0,[r14,0x8]\n"
-"L32858e:\n"
-"b_s L328578\n"
-"L328590:\n"
-"leave_s [r13-r16,blink,pcl]\n"
-".size opencfw_em9305_child_3284ec,.-opencfw_em9305_child_3284ec\n"
-);
+#include <stdint.h>
+
+/* Native 0x3284ec..0x328592: schedule the associated object. The window
+ * is the floor at +2276 plus the scan window (at least 300) plus the
+ * larger of +72 and the configured minimum (+20 of 0x805cac), capped at
+ * 0x257ed4 and aligned by 312c5c. After initialising the object (seed
+ * +76 unless +1432) at time +2272, it is inserted either at the latest
+ * slot (step +836, 3130d4) or by adjustment (step +40, 312f88), moving
+ * the time by one step after each refused attempt. */
+extern uint32_t opencfw_em9305_scan_current_303f80(void);
+extern uint32_t opencfw_em9305_channel_timing_adjust_312c5c(uint32_t window);
+extern uint32_t opencfw_em9305_associated_object_init_312918(uintptr_t object, uint32_t seed);
+extern uint32_t opencfw_em9305_init_schedule_latest_3130d4(uintptr_t object, uint32_t minimum,
+                                                           uint32_t maximum);
+extern uint32_t opencfw_em9305_init_schedule_adjust_312f88(uintptr_t object, uint32_t minimum,
+                                                           uint32_t step);
+
+uint32_t opencfw_em9305_child_3284ec(uintptr_t record, uintptr_t object)
+{
+    uint32_t floor=*(volatile uint32_t *)(record+2276u);
+    uint32_t scan=opencfw_em9305_scan_current_303f80();
+    scan=scan<301u?300u:opencfw_em9305_scan_current_303f80();
+    volatile uintptr_t *config=(volatile uintptr_t *)(uintptr_t)0x805cacu;
+    uint32_t minimum=*(volatile uint16_t *)(*config+20u);
+    uint32_t requested=*(volatile uint32_t *)(record+72u);
+    if(requested>minimum)minimum=requested;
+    uint32_t window=minimum+floor+scan;
+    window=opencfw_em9305_channel_timing_adjust_312c5c(window<0x257ed4u?window:0x257ed4u);
+    uint32_t seed=0u;
+    if(*(volatile uint8_t *)(record+1432u)==0u)seed=*(volatile uint8_t *)(record+76u);
+    (void)opencfw_em9305_associated_object_init_312918(object,seed);
+    volatile uint32_t *time=(volatile uint32_t *)(object+8u);
+    uint32_t step=*(volatile uint32_t *)(record+836u);
+    *time=*(volatile uint32_t *)(record+2272u);
+    uint32_t status;
+    if(step!=0u){
+        while((status=opencfw_em9305_init_schedule_latest_3130d4(object,
+                  *(volatile uint16_t *)(*config+22u)+window,step))==0u){
+            step=*(volatile uint32_t *)(record+836u);
+            *time+=step;
+        }
+    }else{
+        step=*(volatile uint32_t *)(record+40u);
+        for(;;){
+            status=opencfw_em9305_init_schedule_adjust_312f88(object,
+                       *(volatile uint16_t *)(*config+22u)+window,step);
+            if(status!=0u)break;
+            step=*(volatile uint32_t *)(record+40u);
+            *time+=step;
+        }
+    }
+    return status;
+}

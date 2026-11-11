@@ -40,7 +40,10 @@ void audio_ble_attc_mtu_request_body(uint32_t connection,uint32_t mtu,uint32_t *
 
 extern uint32_t audio_ble_attc_mtu_request( uint8_t connection ,uint16_t mtu , uint32_t unused ,uint32_t inherited ); /* opencfw U5: now provided by the Cordio unit */
 
-void audio_ble_slave_request_mtu_body(const uint8_t *event,uint32_t *saved)
+/* Stock 0x46DEDC (_bleSlaveRequestMtuExchange). The stock epilogue popped
+ * spilled argument words (or their log-argument overwrites) into R0:R1; the
+ * only caller (display_ble_slave_proc_msg.c) declares it void. */
+void audio_ble_slave_request_mtu(const uint8_t *event)
 {
     uint16_t connection=(uint16_t)event[0] | ((uint16_t)event[1]<<8);
     uint16_t mtu=(uint16_t)audio_ble_att_get_mtu((uint8_t)connection);
@@ -48,27 +51,14 @@ void audio_ble_slave_request_mtu_body(const uint8_t *event,uint32_t *saved)
     row[0x22u]=(uint8_t)mtu;
     row[0x23u]=(uint8_t)(mtu>>8);
     if (audio_log_level()&2u) {
-        saved[0]=0x130u;saved[1]=(uint32_t)(uintptr_t)have;
         audio_log_extended(4u,module,source,function,0x130u,have,mtu);
     }
     if ((audio_log_level()&1u)||(audio_log_level()&4u))
         (void)compressed_log_output(0x10400000u,have_short,have_short,mtu);
     if (audio_log_level()&2u) {
-        saved[0]=0x131u;saved[1]=(uint32_t)(uintptr_t)want;
         audio_log_extended(4u,module,source,function,0x131u,want,0xf7u);
     }
     if ((audio_log_level()&1u)||(audio_log_level()&4u))
         (void)compressed_log_output(0x10400000u,want_short,want_short,0xf7u);
     (void)audio_ble_attc_mtu_request((uint8_t)connection,0xf7u,0u,0u);
-}
-
-/* Stock 0x46DEDC (_bleSlaveRequestMtuExchange) */
-__attribute__((naked)) uint64_t audio_ble_slave_request_mtu(
-    const uint8_t *event __attribute__((unused)),...)
-{
-    __asm__ volatile(
-        "push {r1, r2, r3, r4, r5, lr}\n"
-        "mov r1, sp\n"
-        "bl audio_ble_slave_request_mtu_body\n"
-        "pop {r0, r1, r2, r4, r5, pc}\n");
 }

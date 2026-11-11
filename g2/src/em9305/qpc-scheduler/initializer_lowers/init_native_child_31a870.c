@@ -1,76 +1,39 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_31a870\n"
-".type opencfw_em9305_child_31a870,@function\n"
-"opencfw_em9305_child_31a870:\n"
-"L31a870:\n"
-"enter_s [r13,blink]\n"
-"L31a872:\n"
-"mov_s r13,r0\n"
-"L31a874:\n"
-"bl.d opencfw_em9305_common_request_30455c\n"
-"L31a878:\n"
-"mov_s r0,1\n"
-"L31a87a:\n"
-"ldb_s r0,[r13,0xe]\n"
-"L31a87c:\n"
-"bbit0.nt r0,0,L31a884\n"
-"L31a880:\n"
-"bl opencfw_em9305_init_secondary_count_up_30e4cc\n"
-"L31a884:\n"
-"mov_s r0,0\n"
-"L31a886:\n"
-"stb r0,[r13,242]\n"
-"L31a88a:\n"
-"stb r0,[r13,241]\n"
-"L31a88e:\n"
-"stb_s r0,[r13,0x2]\n"
-"L31a890:\n"
-"stb_s r0,[r13,0x1]\n"
-"L31a892:\n"
-"stb r0,[r13,56]\n"
-"L31a896:\n"
-"bl.d opencfw_em9305_child_31fbb8\n"
-"L31a89a:\n"
-"mov_s r0,r13\n"
-"L31a89c:\n"
-"brne_s r0,0,L31a8a6\n"
-"L31a89e:\n"
-"bl.d opencfw_em9305_child_31c694\n"
-"L31a8a2:\n"
-"mov_s r0,r13\n"
-"L31a8a4:\n"
-"breq_s r0,0,L31a8b4\n"
-"L31a8a6:\n"
-"bl opencfw_em9305_scan_error_30e7f8\n"
-"L31a8aa:\n"
-"mov_s r1,3\n"
-"L31a8ac:\n"
-"bl.d opencfw_em9305_child_325edc\n"
-"L31a8b0:\n"
-"mov_s r0,r13\n"
-"L31a8b2:\n"
-"leave_s [r13,blink,pcl]\n"
-"L31a8b4:\n"
-"mov_s r1,0x805a73\n"
-"L31a8ba:\n"
-"ldb_s r0,[r1,0]\n"
-"L31a8bc:\n"
-"add_s r0,r0,1\n"
-"L31a8be:\n"
-"bl.d opencfw_em9305_command_count_30e4bc\n"
-"L31a8c2:\n"
-"stb_s r0,[r1,0]\n"
-"L31a8c4:\n"
-"mov_s r0,0\n"
-"L31a8c6:\n"
-"sth 1,[r13,98]\n"
-"L31a8ca:\n"
-"bl.d opencfw_em9305_scan_error_30e7f8\n"
-"L31a8ce:\n"
-"stb 1,[r13,100]\n"
-"L31a8d2:\n"
-"leave_s [r13,blink,pcl]\n"
-".size opencfw_em9305_child_31a870,.-opencfw_em9305_child_31a870\n"
-);
+#include <stdint.h>
+
+/* Native 0x31a870..0x31a8ce: start a scan record. Request common resource 1,
+ * count up the secondary init state when flag +14 bit 0 is set, clear the
+ * request/retry bytes (+1, +2, +56, +241, +242) and run the two start checks
+ * (natives 0x31fbb8, 0x31c694). A failing check reports its status as a scan
+ * error and sends message 3; otherwise the link count at 0x805a73 grows, the
+ * backoff (+98) and count (+100) are reset to 1 and success is reported. */
+extern uint32_t opencfw_em9305_common_request_30455c(uint32_t);
+extern uint32_t opencfw_em9305_init_secondary_count_up_30e4cc(void);
+extern uint32_t opencfw_em9305_child_31fbb8(uintptr_t);
+extern uint32_t opencfw_em9305_child_31c694(uintptr_t);
+extern uint32_t opencfw_em9305_scan_error_30e7f8(uint32_t);
+extern uint32_t opencfw_em9305_child_325edc(uintptr_t,uint32_t);
+extern uint32_t opencfw_em9305_command_count_30e4bc(void);
+
+uint32_t opencfw_em9305_child_31a870(uintptr_t record)
+{
+    (void)opencfw_em9305_common_request_30455c(1u);
+    if ((*(volatile uint8_t *)(record + 14u) & 1u) != 0u)
+        (void)opencfw_em9305_init_secondary_count_up_30e4cc();
+    *(volatile uint8_t *)(record + 242u) = 0u;
+    *(volatile uint8_t *)(record + 241u) = 0u;
+    *(volatile uint8_t *)(record + 2u) = 0u;
+    *(volatile uint8_t *)(record + 1u) = 0u;
+    *(volatile uint8_t *)(record + 56u) = 0u;
+    uint32_t status = opencfw_em9305_child_31fbb8(record);
+    if (status == 0u) status = opencfw_em9305_child_31c694(record);
+    if (status != 0u) {
+        (void)opencfw_em9305_scan_error_30e7f8(status);
+        return opencfw_em9305_child_325edc(record, 3u);
+    }
+    volatile uint8_t *links = (volatile uint8_t *)(uintptr_t)0x805a73u;
+    *links = (uint8_t)(*links + 1u);
+    (void)opencfw_em9305_command_count_30e4bc();
+    *(volatile uint16_t *)(record + 98u) = 1u;
+    *(volatile uint8_t *)(record + 100u) = 1u;
+    return opencfw_em9305_scan_error_30e7f8(0u);
+}

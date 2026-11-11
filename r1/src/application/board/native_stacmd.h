@@ -20,6 +20,8 @@ _Static_assert(sizeof(r1_stacmd_configuration)==108 && offsetof(r1_stacmd_config
 _Static_assert(offsetof(r1_stacmd_operations,open)==8 && offsetof(r1_stacmd_operations,close)==12 && offsetof(r1_stacmd_operations,read)==16 && offsetof(r1_stacmd_operations,write)==20,"native operation offsets");
 extern r1_stacmd_configuration r1_stacmd;
 extern volatile uint32_t r1_stacmd_failed_transactions;
+/* Void GPIO dispatcher; only callback effects are consumed. */
+void r1_stacmd_gpio_result(uint32_t pin,void (*callback)(uint32_t));
 uint32_t r1_stacmd_open(generic_device_registry_device *);
 uint32_t r1_stacmd_close(generic_device_registry_device *);
 uint32_t r1_stacmd_read(generic_device_registry_device *,uintptr_t,uintptr_t,uintptr_t);
@@ -27,11 +29,11 @@ uint32_t r1_stacmd_write(generic_device_registry_device *,uintptr_t,uintptr_t,ui
 uint32_t r1_stacmd_read_frame_native(uint32_t,uint32_t,uint32_t,uint8_t *);
 uint32_t r1_stacmd_write_frame_native(uint32_t,uint32_t,uint32_t,const uint8_t *);
 uint32_t r1_stacmd_write_retry_native(uint32_t,uint32_t,const uint8_t *);
-uint32_t r1_stacmd_bus_recovery_native(void);
+void r1_stacmd_bus_recovery_native(void);
 uint32_t r1_stacmd_recovery_delay_native(void);
-uint32_t r1_stacmd_drive_bit_native(uint32_t);
-uint32_t r1_stacmd_write_bits_native(uint32_t,uint32_t);
-uint32_t r1_stacmd_idle_native(void);
+void r1_stacmd_drive_bit_native(uint32_t);
+void r1_stacmd_write_bits_native(uint32_t,uint32_t);
+void r1_stacmd_idle_native(void);
 uint32_t r1_stacmd_parity_native(uint32_t);
 uint32_t r1_stacmd_read_bit_native(uint32_t *);
 uint32_t r1_stacmd_read_bit_adapter_native(uint32_t *);

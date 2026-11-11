@@ -30,3 +30,12 @@ checks. The caller owns the mutex and live TCB/list state.
 Both builds pass 576 coherent stock/source states; unsuspended and null-owner
 guards are bounded fatal checks. The caller supplies a linked event item and
 live owning TCB.
+
+## Deduplication (2026-10-30)
+
+Several files listed above were merged into a single implementation per stock
+function; the superseded copies were removed and their names are now typed
+aliases (`__attribute__((alias))`) of the kept body. Each kept file notes the
+alias with a `Dedup (0x0800xxxx)` comment. The removed files and the decision
+log (stock-address groups, differential test results) are under
+`build/case-link/dedup/` in the working tree that did the merge.

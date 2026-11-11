@@ -1,0 +1,229 @@
+{
+  "schema_version": 1,
+  "scope": "Native shared sensor rolling features in C",
+  "acceptance_target": "Hardware-first license-free C firmware; byte identity waived",
+  "report": "build/sources-goal-r1-goodix-rolling-feature-c/report.json",
+  "comparison_report": "build/sources-goal-r1-goodix-spo2-result-encode-c/report.json",
+  "stock_entries": [
+    {
+      "symbol": "r1_goodix_native_float_window_push",
+      "entry": "0x66608",
+      "instruction_bytes": 154
+    },
+    {
+      "symbol": "r1_goodix_native_reverse_weighted_sum",
+      "entry": "0x9775c",
+      "instruction_bytes": 58
+    },
+    {
+      "symbol": "r1_goodix_native_rolling_feature",
+      "entry": "0x36dd4",
+      "instruction_bytes": 216
+    },
+    {
+      "symbol": "r1_goodix_native_rolling_pair",
+      "entry": "0x2fee2",
+      "instruction_bytes": 114
+    }
+  ],
+  "shared_tail": {
+    "start": "0x2f2ac",
+    "end": "0x2f2f1",
+    "owner_entry": "0x2fee2",
+    "included_in_114_byte_owner": true
+  },
+  "audit": {
+    "compiled_units": 906,
+    "application_imports": 88,
+    "bootloader_imports": 22,
+    "unchanged_prior_nongenerated_sources_and_objects": 895,
+    "tested_object_equals_normal_build": true,
+    "new_owned_state_bytes": 0,
+    "new_native_instruction_bytes": 542,
+    "paired_invocations": 27208,
+    "direct_cases": 22464,
+    "independent_finite_weighted_oracle_cases": 384,
+    "lifecycle_scenarios": 26,
+    "lifecycle_calls": 4360,
+    "compiled_defects_rejected": 9,
+    "removed_imports": [],
+    "added_imports": [],
+    "remaining_core_processing_stages": 11,
+    "source_plan_and_cache_layout_unchanged": true
+  },
+  "direct": {
+    "paired_cases": 22464,
+    "finite_Fraction_oracle_cases": 384,
+    "lifecycle_scenarios": 24,
+    "lifecycle_calls": 3840,
+    "native_instruction_bytes_executed": [
+      154,
+      58,
+      216,
+      44,
+      70
+    ],
+    "actual_C_memmove": true,
+    "filter_coefficients_match_stock": true,
+    "no_algorithm_or_math_mocks": true,
+    "full_public_RAM_FPSCR_saved_registers_SP_masks_match": true,
+    "source_cannot_execute_stock": true,
+    "source_object_sha256": "bf2d1c1fd4590b84e4b47532be3ebda19f59d4218818f367f32bd2fd512962bf"
+  },
+  "constructor_integration": {
+    "paired_calls": 520,
+    "lifecycle_scenarios": 2,
+    "actual_C_and_native_session_constructor": true,
+    "modeled_allocator": true,
+    "allocation_sizes": [
+      100,
+      68,
+      100,
+      4,
+      100,
+      20
+    ],
+    "actual_C_memmove": true,
+    "no_algorithm_or_math_mocks": true,
+    "full_public_RAM_FPSCR_saved_registers_SP_masks_match": true,
+    "source_cannot_execute_stock": true,
+    "native_instruction_bytes_executed": [
+      154,
+      58,
+      216,
+      44,
+      70
+    ]
+  },
+  "compiled_defects_rejected": [
+    {
+      "name": "append-count",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "phase-boundary",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "oldest-sample",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "cursor-boundary",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "weighted-delay",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "residual-sign",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "average-period",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "pair-sample",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "period-signedness",
+      "compiled": true,
+      "rejected": true
+    }
+  ],
+  "contract": [
+    "The16-byte float-window record holds pointer, count/capacity halfwords, decimation period/phase bytes, cursor halfword and running float sum. Preserve live reloads and ordered stores around actual C memmove, including aliased records, phase wrap and zero-divisor default semantics.",
+    "Reverse weighted accumulation uses a16-bit loop index, signed wrapped available-i-1 clamping and ordered nonfused float32 multiply/add. Two25-tap filter tables match all200 stock coefficient bytes.",
+    "Rolling features push the input, smooth it, subtract the delayed input, filter the residual and publish a signed-period average. Feature+80 and pair+84 descriptor periods remain distinct. Native pair reloads input1 after the feature update and preserves the70-byte shared tail behavior.",
+    "No new writable owner or inline assembly. Native providers retain separate names from the portable model APIs. The existing algorithm root still imports its unfinished optical/motion accumulation parent; these helpers are dependencies, not a complete sensor engine."
+  ],
+  "limits": [
+    "22464 direct cases plus384 independent finite Fraction weighted-sum cases and4360 lifecycle calls total27208 paired invocations. The26 lifecycle scenarios include24 manual-record sessions of160 samples and2 actual-constructor sessions of260 samples.",
+    "All542 unique native instruction bytes execute, including44 entry bytes and70 shared-tail bytes for0x2fee2. Actual C memory helpers execute with no algorithm/math mocks. Constructor scenarios use actual C/native session constructors; only allocation is modeled and six allocation sizes are checked.",
+    "Public RAM, full active FPSCR, saved R4-R11/S16-S31, stack and masks agree. Nine compiled defects are rejected. Source execution cannot enter stock code.",
+    "Default DIV_0_TRP-disabled arithmetic, positive mapped capacities and selected aliases are the tested contract. Arbitrary malformed capacities, memory-fault atomicity, private-stack aliases, real allocator lifecycle, cold FPU, interrupts/concurrency, timing, final startup/layout and physical sensor behavior remain unverified. Weighted counts beyond65535 retain the native16-bit wrapping loop and are not treated as a supported terminating workload.",
+    "906 units compile and compose;895 prior nongenerated source/object pairs unchanged. Tested object equals normal build. Imports remain88 application/22 boot. Eleven higher-level SpO2 core processing stages remain incomplete. Relocatable composition is not a bootable image."
+  ],
+  "evidence_files": {
+    "build/sources-goal-r1-goodix-rolling-feature-c/report.json": "acd39ff0817126cfc13c8f46ca1ddd627cdfb5f8b9d81f4e6840728eaa92c30b",
+    "build/sources-goal-r1-goodix-spo2-result-encode-c/report.json": "b57473b6a73c9c99bbd92930a3cd3ac5fe44de3b1982f0b0bb837cf1c07dfe54",
+    "r1/src/application/goodix/native_rolling_feature.c": "54e10de824916b7976cd36bf25689b8f2926ccaa9ad85843d1dba37420b7c9af",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-rolling-feature-c/r1/r1-application/r1__src__application__goodix__native_rolling_feature.c.o": "bf2d1c1fd4590b84e4b47532be3ebda19f59d4218818f367f32bd2fd512962bf",
+    "r1/src/sources.json": "4ab3d486d34be13463021f3078dd7353f51153f02cc2b17783917f50c94fbe99",
+    "tools/build/source-plan.json": "eeb516e31b3310fb0718f36908977f8125723f7c5e0e86cd6744395826259a4d",
+    "r1/src/config/runtime/native_health_cache.ld": "eb8f131c489cd818d4e36718718fa1989719ca0170f164541a1a5bf56dfc1ec3",
+    "r1/docs/reference/FUNCTION-OWNERSHIP.csv": "8be9ee2880b73a27675217a2862ec9394202c0bd41aa7e11c356a7d74cfba6f1",
+    "r1/symbols/function-frontier.csv": "2e5dc14b9b4491525f396d40f4f46cd3a077ba175077bab2e83e9a7bcf86c04e",
+    "third-party/upstream/musl-memmove-1.2.5/memmove.c": "1304f9ddfc18594f5d9a84691892b9fdaf3be8ecc6d7f365c691abb138eaf74e",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-rolling-feature-c/r1/r1-application/third-party__upstream__musl-memmove-1.2.5__memmove.c.o": "4a6ccefb180ef4af2cfe631f54df4d6f629d1b3a2d374911c00b25c107bcb723",
+    "third-party/upstream/musl-memory-1.2.5/memcpy.c": "1664d565f968b053ac33c5ac615c057a255a5821c8fa510fba61d4f63dee08e9",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-rolling-feature-c/r1/r1-application/third-party__upstream__musl-memory-1.2.5__memcpy.c.o": "a4b54c7315f7ca2f8097e3f9afb4a9bcd7860c75649fc9e185d951c3ea0696cf",
+    "r1/src/application/goodix/native_spo2_initialize.c": "41e6290e411795ade2bb7b0c9b3aa3b30678483bfb7b3b2c86e3e25d79908c82",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-rolling-feature-c/r1/r1-application/r1__src__application__goodix__native_spo2_initialize.c.o": "416f2e823ae3edd838065709e40b06eaa5b9648ad2462237656ffdf5b212b129",
+    "r1/src/application/goodix/native_spo2_session_initialize.c": "30127da0d135b26a6459f6af4a85a96b1d08a55d6bec6ff09fdfbdf8522dfeae",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-rolling-feature-c/r1/r1-application/r1__src__application__goodix__native_spo2_session_initialize.c.o": "507f8e0db602ee67008460fc2f485d84fa340bef6bbf23a09bd035d1f9b629d5",
+    "build/goal-r1-goodix-rolling-feature-c/negative-phase-boundary.log": "b4db8c0b5eb5072392b5ae8d90d45751667d6dcadb65dfe1479e864bcfa5065d",
+    "build/goal-r1-goodix-rolling-feature-c/negative-period-signedness.log": "69083a4c55ac408f0fefc610389919154fe0b277042e06655366770411f32765",
+    "build/goal-r1-goodix-rolling-feature-c/negative-weighted-delay.log": "e4b1cdd4c7f57ae3fe6b6291fc1cb7b2338f8dd7f1eda8ff148a7d1d7b10e227",
+    "build/goal-r1-goodix-rolling-feature-c/audit.json": "e7e5e1ffdab3a5e2f4b56043e10e85a469f60f84992570cf3e064b33b9a17696",
+    "build/goal-r1-goodix-rolling-feature-c/candidate.d": "ef17781acada85a60a99879b87a6e8369b36f1b685e6ed33f854cc3398e787a0",
+    "build/goal-r1-goodix-rolling-feature-c/candidate.c": "df5f217bfca515a8ef1e8f5d0484ca0d8f3c6538e20adf7dce774343a03f1033",
+    "build/goal-r1-goodix-rolling-feature-c/lifecycle-boundaries.json": "d43fc1246e90fa7e95ae8f101ebd0bca02cc2bd5225d3a2c903f18c1f84ed12a",
+    "build/goal-r1-goodix-rolling-feature-c/verify.log": "351b937202374bcd47dc00e85291402c01d2d41c6fefb975f1aa447d571153ce",
+    "build/goal-r1-goodix-rolling-feature-c/checkpoint.json": "470ce9a807a1b67b7de8d867e52c70c70239ed17d91061130cf6eff956249e1b",
+    "build/goal-r1-goodix-rolling-feature-c/test.ld": "b2ff9ac27a31674636716d033098cceafafc2f782e6660e4dd431dc3e9dc449d",
+    "build/goal-r1-goodix-rolling-feature-c/audit.py": "c6a4196af3e8c6dea460ebd4c029a4370c71e4e8faaba051469790aebf417090",
+    "build/goal-r1-goodix-rolling-feature-c/negative-pair-sample.log": "b30b3689d2211142b74612911e768c50e329c896b2ce1e785b204b08690ac88c",
+    "build/goal-r1-goodix-rolling-feature-c/negative-average-period.c": "c61a7453fdfb0cc29150490ccb6385100e4d2b3e6c39a220e4e65456bde00ef0",
+    "build/goal-r1-goodix-rolling-feature-c/constructor.elf": "54170bc69a3302c5c5d7cde1987a1057edd04084da3236b78b8741e97932939b",
+    "build/goal-r1-goodix-rolling-feature-c/constructor.py": "40f359df352b7797616d262e3c798b81ffeee968be0442b56cf57345fbe53563",
+    "build/goal-r1-goodix-rolling-feature-c/source.elf": "18d74996845f3cfcae82f85aac9dc73d4d7f1fde5927d8ae9e518259cb2de170",
+    "build/goal-r1-goodix-rolling-feature-c/negative.py": "8ebc77b4397c9b190910df2718230fd4019a2af0b948d54970f10c91e72c4dc4",
+    "build/goal-r1-goodix-rolling-feature-c/production-compile-argv.json": "f7898f40cc7312c42084fc8aa26de1a52c7fac1ef5ee8f0f820a7f0f7803777f",
+    "build/goal-r1-goodix-rolling-feature-c/negative-residual-sign.c": "efc0249448005251d747d2e24674a2d85775d2f615733f020cdf129b671312a3",
+    "build/goal-r1-goodix-rolling-feature-c/negative.log": "1726400b12f04f8b9105ce7501b1e94cd41ce560d433a9b6a4702ee095f092ce",
+    "build/goal-r1-goodix-rolling-feature-c/negative-results.json": "79c22e68c17e162aea3c96b3415da9efe09b6107b2f2a01658571976467b5587",
+    "build/goal-r1-goodix-rolling-feature-c/negative-average-period.log": "f57acf4d750cec99d7a0664c9ee86297155f6fff7272a18ccb3910807f2a0006",
+    "build/goal-r1-goodix-rolling-feature-c/source.o": "bf2d1c1fd4590b84e4b47532be3ebda19f59d4218818f367f32bd2fd512962bf",
+    "build/goal-r1-goodix-rolling-feature-c/results.json": "72d6fd59158b5c73a7899d55ca6b1300762f11f7ff07479d1b5843b7f9f96807",
+    "build/goal-r1-goodix-rolling-feature-c/negative-phase-boundary.c": "d135e046661d3656cc9b5f0efaa2593fbb61ef573e1fee57767d2f937d0115a7",
+    "build/goal-r1-goodix-rolling-feature-c/rea-rolling-helper.json": "79518783332d32a9dda9a18d23e0ee26d81d0c710a77b41a2ca1e7419a6b3401",
+    "build/goal-r1-goodix-rolling-feature-c/constructor.log": "3a9605128fa946d1a318d1648b2ee19cade51e987a6383bdc30b547082d63d59",
+    "build/goal-r1-goodix-rolling-feature-c/rea-shared-tail-identity.json": "ca5aad1f277da4c8df23aa577ca34ac46d999f51d535ac368320ee7a061259df",
+    "build/goal-r1-goodix-rolling-feature-c/negative-oldest-sample.log": "f7784b097e54f11c4953075691c3032c4705b8e0aee49a4197de128e7e2d7703",
+    "build/goal-r1-goodix-rolling-feature-c/rea-optical-pipeline.json": "cdcb4e34470ad41fb5c76bc4c348e62b36bfeb98125850c5498ad8667041da87",
+    "build/goal-r1-goodix-rolling-feature-c/rea-kernels.json": "03e7ad372149a6a8f07068e76b16fca70669acb8c88733774b7ca7ce5653123a",
+    "build/goal-r1-goodix-rolling-feature-c/negative-cursor-boundary.c": "df24f3d16f73b2608080807c2a37748806ef3e5794545a13c89709dd5f41897d",
+    "build/goal-r1-goodix-rolling-feature-c/negative-pair-sample.c": "1b30cb37645f77ebc653bde6a9c8c731cae6a51945592f9218c0f0a9d7abe44a",
+    "build/goal-r1-goodix-rolling-feature-c/record.py": "d87ac1302ff81266a0a5e0e7120ccbd3050d511e1f87e8c4eeb0fc20dfe9de9c",
+    "build/goal-r1-goodix-rolling-feature-c/negative-cursor-boundary.log": "a519a0d180e537ffb954b6a82ce6976b52c172d54a64037ac513aeece321b8a0",
+    "build/goal-r1-goodix-rolling-feature-c/compile-argv.json": "37d8907645f4addca39b94e6b00b61ae678f106c8a9c01a2751c93eacc2c915e",
+    "build/goal-r1-goodix-rolling-feature-c/negative-weighted-delay.c": "4380589686a914007342cdd8a4cbedb3153cf088da608bbacd6be6fac8452ade",
+    "build/goal-r1-goodix-rolling-feature-c/manifest-before.json": "5b3d3cd0bffbd0eeed20230c6efe5f6a4c174c7a1146a26d41d4f97097823caf",
+    "build/goal-r1-goodix-rolling-feature-c/oracle.py": "7f9376f12bcb07acf8f786533c8a30b0d525096d9280bce4c401f57c1a18df92",
+    "build/goal-r1-goodix-rolling-feature-c/negative-append-count.log": "e4de5905ccaaa9439c87f36c5e3b52763cc67cca9e881b39d258751e594dd892",
+    "build/goal-r1-goodix-rolling-feature-c/verify.py": "10af52e710ace479f531df3738c863aeba2a4a985434fadc7b5487445b9b1389",
+    "build/goal-r1-goodix-rolling-feature-c/make-constructor.py": "79d30bea69873c2f3c1d4934f191d3dccd96b7a6e4f564b354ed6b9a90dd8002",
+    "build/goal-r1-goodix-rolling-feature-c/negative-period-signedness.c": "a1f242fb0b17b6fdcb10a8cc80830e7660e04bc9954a8ad6602596a68efe10ae",
+    "build/goal-r1-goodix-rolling-feature-c/negative-residual-sign.log": "9be258db49daefaf8ea0a9eb217467cd21272bcb20436b1fa0173c2d1ed14689",
+    "build/goal-r1-goodix-rolling-feature-c/constructor-boundaries.json": "f547f5d9ff85c28a1802f681d1004b02736729731d6b5530bf2930492f40a9ed",
+    "build/goal-r1-goodix-rolling-feature-c/negative-append-count.c": "b8e3bce99a2ea4ce44fb82de55fbd8f20884e81f74e19d630fd7076c2bddab5e",
+    "build/goal-r1-goodix-rolling-feature-c/negative-oldest-sample.c": "16f6e45120444d8c3ef09598b7c716c4989807955cdef98e94bc8c998909043a",
+    "build/goal-r1-goodix-rolling-feature-c/rea-9775c.json": "02bdb13da45dad4a9e7c76ad1961f0313de90674162692b0bacb2d4981d3edd9",
+    "build/goal-r1-goodix-rolling-feature-c/rea-66608.json": "ebbcff4079892c5840600d2ecbb3b80aa67660140682573e507f571a53f5cb70",
+    "build/goal-r1-goodix-rolling-feature-c/kernels.c": "94395188f88b4ef5b14703cc6ec1616a068992b1cc0e255635894ee3227671c7",
+    "build/goal-r1-goodix-rolling-feature-c/build.log": "7f251804815e12a0c284324463ca2b55fd0f1d2689c9415bb5e028ac35e50834",
+    "build/goal-r1-goodix-rolling-feature-c/constructor-results.json": "8e365a2610cfc608d660ee8d13540d1db4420eb4df67d31abb627265b272e5ce"
+  }
+}

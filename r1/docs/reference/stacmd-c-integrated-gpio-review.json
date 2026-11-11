@@ -1,0 +1,141 @@
+{
+  "cases": 219,
+  "passed": 219,
+  "gpio_only_model": true,
+  "actual_units": [
+    "r1/src/application/board/native_stacmd_delay.c",
+    "r1/src/application/board/native_stacmd_frames.c",
+    "r1/src/application/board/native_stacmd_receive.c",
+    "r1/src/application/board/native_stacmd_recovery.c",
+    "r1/src/application/board/native_stacmd_transmit.c"
+  ],
+  "source_sha256": {
+    "r1/src/application/board/native_stacmd_delay.c": "a32a752c54def86d2abf1da657712875dd62c9feb2baf6badedbbe77742947c5",
+    "r1/src/application/board/native_stacmd_frames.c": "e674fafeb32e9effe615a18f51c22f7ca4d7e0f1281fade48416addc8ac392ca",
+    "r1/src/application/board/native_stacmd_receive.c": "1a59bf5971995646b05779f9371bafc680cfaa2e5f1ba7d6a07001d02112de8c",
+    "r1/src/application/board/native_stacmd_recovery.c": "bcb2f8feff97748f9f67bf3e558ae64b3fc7767d41365a65037d71a694f0f25f",
+    "r1/src/application/board/native_stacmd_transmit.c": "26da88091528558fdf193f0a1e8ced7206e5e9967fd93f450830f1d10049a73c"
+  },
+  "report": "build/sources-goal-r1-stacmd-integration-final/report.json",
+  "fixture_compile_argv": [
+    "clang",
+    "--target=arm-none-eabi",
+    "-mcpu=cortex-m4",
+    "-mthumb",
+    "-mfpu=fpv4-sp-d16",
+    "-mfloat-abi=hard",
+    "-Os",
+    "-fshort-enums",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-c",
+    "build/goal-r1-stacmd-integration/gpio.c",
+    "-o",
+    "build/goal-r1-stacmd-integration/gpio.o"
+  ],
+  "source_elf_sha256": "7b07b2965b3b47f6c3e35b227d07db5131e6a7769657328ec2520b68420d413d",
+  "limitations": [
+    "GPIO callbacks are probe C models; no physical timing or peripheral validation",
+    "Private stack depth differs; ABI preservation and GPIO traces checked"
+  ],
+  "evidence": [
+    {
+      "path": "build/goal-r1-stacmd-integration/REA.json",
+      "sha256": "8dcf3ad757eff757f49ac9e920fb35c0aa6edc2878d95908457c4a596e9f30b4"
+    },
+    {
+      "path": "build/goal-r1-stacmd-integration/rea-snapshot.json",
+      "sha256": "2bf4ed3ac9435217369cfdee143a643618820015e5f0b8aa528ed284e1efb745"
+    },
+    {
+      "path": "build/goal-r1-stacmd-integration/verify.py",
+      "sha256": "507372028c50fff1e8c41bb8efa9dbf916cbb1155c8628a4689f198a59f743a3"
+    },
+    {
+      "path": "build/goal-r1-stacmd-integration/gpio.c",
+      "sha256": "d07bfa27cd9468bf6fa749f1d2a9e8d8a9e798e65ec58e8ca1383813a5c09b55"
+    },
+    {
+      "path": "build/goal-r1-stacmd-integration/qualified-delay/qualification.json",
+      "sha256": "63a9fe962d6597d4ff07033d93bcc1965d019ac49a803f19610bc559028af692"
+    },
+    {
+      "path": "build/goal-r1-stacmd-integration/qualified-delay/source-plan.json",
+      "sha256": "657bf06fd471957af93c4219e4f33188a1fcdf4cd070659e93547b75795b0dce"
+    },
+    {
+      "path": "build/goal-r1-stacmd-integration/qualification-scope.json",
+      "sha256": "02578cd8306aa1aed78944208a14700c1d6132441bbaba2658287755d0d33a7a"
+    },
+    {
+      "path": "tools/build/source-plan.json",
+      "sha256": "964cbd3af9f4ea7ed207bb4b480d18a9529060dc3801663d296389472982aa7c"
+    },
+    {
+      "path": "build/hybrid-goal-r1-stacmd-integration/build-report.json",
+      "sha256": "4e968a482b2e63e3fb7f5271d310a68cf4bf355d9d60e7823ab74f9c620d645e"
+    },
+    {
+      "path": "r1/src/application/board/native_stacmd.h",
+      "sha256": "154a2ccb935dfd930e87e6debac53170227ef162fe1318dd0d458af838418545"
+    }
+  ],
+  "plan_change": {
+    "before_sha256": "71a911169e6c49ab458a742847d91d0140eacf8f4ef8c821d221fe7f837c3536",
+    "after_sha256": "964cbd3af9f4ea7ed207bb4b480d18a9529060dc3801663d296389472982aa7c",
+    "official_qualifier_selection": [
+      {
+        "source": "r1/src/application/board/native_stacmd_delay.c",
+        "argv": [
+          "clang",
+          "--target=arm-none-eabi",
+          "-mcpu=cortex-m4",
+          "-mthumb",
+          "-munaligned-access",
+          "-mfpu=fpv4-sp-d16",
+          "-mfloat-abi=hard",
+          "-std=c11",
+          "-Os",
+          "-falign-loops=1",
+          "-ffreestanding",
+          "-fno-builtin",
+          "-fshort-enums",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-fno-delete-null-pointer-checks",
+          "-I{root}/r1/src/vendor",
+          "-isystem",
+          "{root}/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include"
+        ],
+        "regions": [
+          {
+            "payload": "r1-application",
+            "symbol": "r1_stacmd_recovery_delay_native",
+            "start": 217338,
+            "end": 217358,
+            "sha256": "5847783ae5f4aff2d959dbac785f58d651b06c1a17558bd25d000a53cf169411",
+            "evidence": "r1/symbols/function-frontier.csv"
+          }
+        ]
+      }
+    ],
+    "existing_units_preserved": true
+  },
+  "hybrid": {
+    "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "source_built_bytes": 3617,
+    "retained_bytes": 642543,
+    "resource_bytes": 248,
+    "source_completeness_proven": false
+  },
+  "checks": {
+    "r1_units": 562,
+    "compile_failures": 0,
+    "duplicate_strong_symbols": 0,
+    "application_imports": 211,
+    "bootloader_imports": 34
+  }
+}

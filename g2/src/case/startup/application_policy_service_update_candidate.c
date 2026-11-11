@@ -5,7 +5,7 @@
  * The ADC/time/IRQ descendants remain typed platform contracts.
  */
 #include <stdint.h>
-extern void case_policy_sensor_command(uint32_t channel,uint32_t value); /* 0x99e8 */
+extern uint32_t case_policy_sensor_command(uint32_t channel,uint32_t value); /* 0x99e8 */
 extern void case_policy_sensor_delay(uint32_t amount); /* 0xa7b0 */
 extern uint32_t case_policy_sensor_sample(void); /* 0x2edc */
 extern uint32_t case_policy_sensor_divide(uint32_t value,uint32_t divisor); /* 0x0160 */

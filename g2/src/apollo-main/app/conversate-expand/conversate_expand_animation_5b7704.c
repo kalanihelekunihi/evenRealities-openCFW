@@ -12,7 +12,7 @@ extern void audio_uart_page_43f4c0(uint32_t, uint32_t, uint32_t);
 extern void audio_uart_lv_anim_init_4503d6(void *);
 extern void audio_uart_lv_anim_values_4506ce(void *, int32_t, int32_t);
 extern void *audio_uart_lv_anim_start_450408(void *);
-extern void audio_uart_lv_anim_path_450672(void);
+extern void lv_anim_path_ease_out(void);
 extern uint32_t audio_log_flags(void);
 extern void audio_log_extended(uint8_t, const char *, const char *, const char *,
                                uint32_t, const char *, ...);
@@ -121,7 +121,7 @@ void audio_conversate_expand_animation_5b7704(
         animation[1] = (uint32_t)(uintptr_t)updates[i == 0u ? 2u :
                                                        i == 1u ? 3u :
                                                        i == 2u ? 0u : 1u];
-        animation[8] = (uint32_t)(uintptr_t)audio_uart_lv_anim_path_450672;
+        animation[8] = (uint32_t)(uintptr_t)lv_anim_path_ease_out;
         animation[13] = 0u - (uint32_t)half(cfg, 2u);
         if (i == 3u && complete != 0)
             animation[4] = (uint32_t)(uintptr_t)complete;

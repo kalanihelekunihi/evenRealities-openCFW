@@ -2,8 +2,8 @@
  * root+0x24 and ordered layout, layer, geometry, and child effects. */
 #include <stdint.h>
 extern uint8_t audio_uart_display_lv_root[];
-extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,const char *,...);
-extern void audio_uart_display_size_changed(void *); /* selected 0x440656 */
+extern void lv_log_add(uint32_t,const char *,uint32_t,const char *,const char *,...);
+extern void lv_obj_invalidate(void *); /* selected 0x440656 */
 extern uint32_t audio_uart_page_style_selector_44b860(uint32_t);
 extern uint32_t audio_uart_page_style_needs_invalidate_44b844(uint32_t,uint32_t);
 extern uint32_t audio_uart_lv_style_position_a_44b870(void *,uint32_t);

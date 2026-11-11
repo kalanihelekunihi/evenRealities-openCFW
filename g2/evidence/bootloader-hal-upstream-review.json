@@ -1,0 +1,285 @@
+{
+ "schema_version": 2,
+ "scope": "Bounded differential review of the Even bootloader's AmbiqSuite HAL modules (PRIMASK helpers, queue, CMDQ, CLKGEN leaves, MSPI, UART, status polls, PWRCTRL) against the pinned AmbiqSuite SDK 5.0.0 sources now built for the bootloader. Not workflow coverage, not hardware proof. SYSPLL is recorded in bootloader-syspll-upstream-review.json.",
+ "date": "2026-10-30",
+ "stock": {
+  "path": "g2/blobs/official/g2-2.2.6.10/ota_s200_bootloader.bin",
+  "sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "load_address": "0x410000"
+ },
+ "sdk_identification": {
+  "result": "The bootloader HAL is AmbiqSuite SDK 5.0.0 RTM (release_sdk5p0p0-5f68a8286b), ambiqhal_ambiq commit 392042e33b0db6c0241e5e49b2efa47bbb1fe871, not the 5.1.0 tree apollo-main pins.",
+  "evidence": [
+   "Stock am_hal_mspi_device_configure 0x424be4 reads a bool at am_hal_mspi_dev_config_t+17 and, when set, accepts only eClockFreq 20..23 and maps them to IOCLKSEL 7/9/8/10: the 5.0.0 bNewDDR branch (5.0.0 adds bNewDDR before eCeLatency; 5.0.0-post-RTM 9df2220 and 5.1.0 drop it).",
+   "Stock am_hal_mspi_control 0x4251c0 uses the 5.0.0 request enum (NEW_DDR_DIS/EN at 10/11, PIOMIXED_CONFIG 24, DEVICE_CONFIG 25, CLOCK_CONFIG 26, CQ_RAW 34, 40 requests). The former hand split described it as a 'stock variant'.",
+   "The bootloader image does not contain the mspi_ap_sizes table (64 KiB..512 MiB) that 9df2220 added for mspi_xip_config_check; RTM 392042e has no such table.",
+   "Stock am_hal_pwrctrl periph enum has IOSFD0/IOSFD1 after IOS0 (MSPI0 = 16+2): native in 5.0.0 am_hal_pwrctrl.h. The submodule-local G2_STOCK_PWRCTRL_ORDER switch in the 5.1.0 tree reproduces the same order.",
+   "am_hal_queue.c, am_hal_interrupt.c, am_hal_cmdq.c, am_hal_clkgen.c and am_hal_syspll.c differ between 5.0.0 and 5.1.0 only in comments and declaration line breaks, so the 5.1.0-based results recorded earlier on 2026-10-29 carry over; they were re-run on the 5.0.0 build below.",
+   "am_hal_uart.c is the 5.1.0 file, not RTM: stock keeps sTxQueue/sRxQueue at state +0x34/+0x4c and sActiveWrite at +0xa0 (5.1.0 order; RTM: +0xac/+0xc4/+0x70), same 0x11c size and bDMABusy at +0x11b. The bootloader HAL is therefore a snapshot between the two public releases; the revision is chosen per file by differential test."
+  ],
+  "pin": "third-party/upstream/ambiqhal-apollo510-sdk5.0.0 (new shallow submodule at 392042e; the 5.1.0 pin third-party/upstream/ambiqhal-apollo510 is unchanged)"
+ },
+ "upstream": {
+  "repository": "https://github.com/AmbiqMicro/ambiqhal_ambiq",
+  "commit": "392042e33b0db6c0241e5e49b2efa47bbb1fe871",
+  "release": "release_sdk5p0p0-5f68a8286b",
+  "files": {
+   "mcu/apollo510/hal/am_hal_queue.c": {
+    "git_blob": "347bc966dd6e7c0d7387228db8f8b0670372b970",
+    "sha256": "39323bfbd6e699016ce73bbede28b8709d69f1d158ca355a21e7e8518fed9fe3",
+    "built_as": "verbatim"
+   },
+   "mcu/apollo510/hal/mcu/am_hal_interrupt.c": {
+    "git_blob": "2f3b49301e5835cd90984037c5dbc5c0f533d07f",
+    "sha256": "e54be34d6f77f7df2006ae240327ec4d88711c5e03e2d802810bfe33ca753f71",
+    "built_as": "verbatim"
+   },
+   "mcu/apollo510/hal/mcu/am_hal_mspi.c": {
+    "git_blob": "bf63046f07838414a25e874a0ccdd663d59187f0",
+    "sha256": "46a84febaa2493f7daf2c6c88edda509272bf0ee554a0d93321c9d106547adcb",
+    "built_as": "verbatim (including am_hal_mspi_control)"
+   },
+   "mcu/apollo510/hal/mcu/am_hal_cmdq.c": {
+    "git_blob": "881400551140d7e15293a0f8c3414012a667239f",
+    "sha256": "18bbbc8ff921197d2472bafccd25957bd393a831b9510c8c2904f11f9c748655",
+    "built_as": "{gen}/ambiqhal-apollo510-boot/am_hal_cmdq.c",
+    "generated_sha256": "6378fddf1a9b78e43a6659f04cc06088ec113c3f0b7eb7841315b171e3b3389f",
+    "change": "am_hal_cmdq_pause compiled out (#if 0): the stock CMDQ block 0x427754..0x427c72 has no pause, and it needs am_hal_delay_us_status_change"
+   },
+   "mcu/apollo510/hal/mcu/am_hal_clkgen.c": {
+    "git_blob": "c1d4c8cc73b7b3093906c72ff1ce88f9759c05ca",
+    "sha256": "9dbfd77a556fa42b8d92eb253bc4472b5f6555a9e4e08cea81ad8fed6b650e6c",
+    "built_as": "{gen}/ambiqhal-apollo510-boot/am_hal_clkgen.c",
+    "generated_sha256": "904d9ce771abb6aff5f2afaae49aacf686555d8d2575ee1a397efed0656eb9cc",
+    "change": "g_ui32HFRC2ReqCnt, am_hal_clkgen_control, status_get, clksrc_get and clkout_enable compiled out (#if 0): stock links only the eight private leaves 0x426c24..0x426d2c"
+   },
+   "mcu/apollo510/hal/mcu/am_hal_syspll.c": {
+    "git_blob": "fb951c49cfdf82f5e16b605c7f848f9d659a8bf6",
+    "sha256": "d7fd4ac25e57da9d6baa7845c2b44fa10bba4a4175960eb0cf2ad44ae7d0b110",
+    "built_as": "{gen}/ambiqhal-apollo510-boot/am_hal_syspll.c",
+    "generated_sha256": "44958c029f9919ba5fd494d6b99f64ca08b97c95b04bb1d0a99a0b6b0c53d660",
+    "change": "am_hal_syspll_mux_select compiled out (#if 0)"
+   },
+   "mcu/apollo510/hal/mcu/am_hal_utils.c": {
+    "git_blob": "872cfe851a851006955306a8ff192bf76d8480cf",
+    "built_as": "{gen}/ambiqhal-apollo510-boot/am_hal_utils.c",
+    "change": "only am_hal_delay_us_status_change / am_hal_delay_us_status_check kept: stock am_hal_delay_us (0x41d1c0) calls the boot-ROM cycle loop at 0x41 instead of the 5.0.0 ITCM br_util_delay_cycles, so it stays hand code (glue/hal_delay_us_entry.c); the ITCM word readers are not linked in stock"
+   },
+   "5.1.0:mcu/apollo510/hal/mcu/am_hal_uart.c": {
+    "repository_commit": "5efc0228528a8adce5eae0d226fac85d2551eb3b (pinned third-party/upstream/ambiqhal-apollo510; file unmodified there)",
+    "git_blob": "73217fbcb8b244d3b277f22c96021694800a6ac7",
+    "sha256": "db0807cbd0ff5df110afde4a8e8561857e2e669529da290289919516ec12799a",
+    "built_as": "verbatim, against the 5.0.0 headers of profile -6 (am_hal_uart.h differs only by one extra prototype)"
+   },
+   "mcu/apollo510/hal/am_hal_pwrctrl.c": {
+    "git_blob": "7b57fa590c1960aba50de20541ffdf80375bfd05",
+    "sha256": "4d353b82551111d3d17cb32718fd44d4fd3e67806ee26b7a989ec4a45bc8ac6a",
+    "built_as": "verbatim",
+    "note": "all 25 stock functions 0x41b8f8..0x41cae8; stock order is the SDK source order with unlinked functions dropped"
+   },
+   "mcu/apollo510/hal/am_hal_pwrctrl.h": {
+    "git_blob": "507bfa50b35e5373e2c3b7331c9b1a4c3bd59898",
+    "sha256": "989ba80d735b73f77f12056a8029b804941c6393c40739cc9d94f8c01bae6563",
+    "built_as": "{gen}/ambiqhal-apollo510-boot-vfp/hal/am_hal_pwrctrl.h, reached through {gen}/ambiqhal-apollo510-boot-vfp/am_mcu_apollo.h (verbatim copy) first on the g2-apollo-bootloader-6 include path",
+    "change": "am_hal_pwrctrl_temp_update declared __attribute__((pcs(\"aapcs-vfp\"))): the stock HAL is hard-float (0x41ca2c stores fCurTemp from s0) while the bootloader builds softfp; the definition and every caller inherit the convention"
+   }
+  },
+  "profile": "g2-apollo-bootloader-6: the 5.0.0 include paths, -fno-vectorize -fno-slp-vectorize (clang otherwise emits MVE tail-predicated loops in mspi_fifo_read; the stock IAR build has no MVE)"
+ },
+ "bindings": {
+  "am_hal_clkmgr_clock_request / clock_release": "aliases of the hand clock_request / clock_release (stock 0x4222f0 / 0x422364) in clock-manager/clock_manager.c",
+  "am_hal_clkmgr_clock_release_all": "alias of opencfw_bl_clock_release_all (stock 0x4223d8)",
+  "am_hal_delay_us / am_hal_delay_us_status_check": "aliases added with the SYSPLL change (stock 0x41d1c0 / 0x41d246)",
+  "am_hal_spotmgr_* (14 wrappers) / am_hal_spotmgr_init": "aliases of the hand SPOT dispatcher wrappers 0x41cd1a..0x41ce3c and init 0x41ce52 (spot_sleep_wrappers.c, startup_initialize_leaves.c, startup_power_config.c, runtime.c, startup_runtime.c) until am_hal_spotmgr.c is built here",
+  "am_hal_info1_read": "alias of opencfw_boot_device_mode_wait (stock 0x421548), application-storage/device_mode_wait.c",
+  "am_hal_debug_trace_disable / g_ui8TRCENAcount": "alias of opencfw_boot_shutdown_debug_release (stock 0x42252e); the count is a variable in startup_shutdown.c pinned at stock 0x200271a3",
+  "am_hal_sysctrl_clkmuxrst_low_power_init": ".thumb_set alias of opencfw_boot_clockmux_entry (stock 0x41acb2)"
+ },
+ "attribution": {
+  "am_hal_interrupt_master_enable / disable": "0x41b8e0 / 0x41b8ec; master_set inlined by IAR as msr PRIMASK",
+  "am_hal_queue_init / item_add / item_get": "0x4275ea / 0x427602 / 0x427660",
+  "am_hal_cmdq update_indices / init / enable / disable / alloc_block / release_block / post_block / get_status / term / error_resume / reset / post_loop_block": "0x427754 / 0x427794 / 0x427878 / 0x4278c8 / 0x42790a / 0x4279be / 0x4279f0 / 0x427a56 / 0x427ad6 / 0x427b38 / 0x427baa / 0x427c12",
+  "gAmHalCmdq": "0x200262f0 (literal 0x427c80), pinned by the link script",
+  "am_hal_clkgen private leaves": "0x426c24..0x426d1e in upstream source order",
+  "am_hal_mspi": "get_pause_val 0x423e14, mspi_fifo_write 0x423e40, mspi_fifo_read 0x423e8a, mspi_cq_init 0x423f28, mspi_cq_term 0x423f54, mspi_cq_enable 0x423f8e, mspi_cq_disable 0x423fac, mspi_cq_pause 0x423fb8, program_dma 0x42403e, sched_hiprio 0x4240aa, mspi_device_configure 0x424120, mspi_piomixed_configure 0x42488e, mspi_dummy_callback 0x424976, mspi_seq_loopback 0x424978, mspi_clkgen_ctrl 0x4249a0, mspi_get_xip_off_min_delay 0x424a18, am_hal_mspi_initialize 0x424a5a, configure 0x424af0, device_configure 0x424be4, enable 0x425066, disable 0x4250f0, deinitialize 0x42516c, control 0x4251c0, blocking_transfer 0x4262e0, interrupt_enable 0x426450, interrupt_disable 0x426484, interrupt_status_get 0x4264ba, interrupt_clear 0x426506, interrupt_service 0x426536, power_control 0x426808",
+  "g_MSPIState": "0x2001caa0, 4 x 0x8d0 (literal 0x424aec), pinned by the link script",
+  "am_hal_delay_us_status_change / status_check": "0x41d21c / 0x41d246",
+  "am_hal_uart": "initialize 0x422ad4, power_control 0x422ba8, buffer_configure 0x422dc6, configure 0x42308e, fifo_read 0x4232c8, transfer 0x4233e8, interrupt_enable 0x4236ce, interrupt_clear 0x423700, interrupt_status_get 0x42372a, interrupt_service 0x42377c",
+  "g_am_hal_uart_states": "0x20024400, 4 x 0x11c (literal 0x4233e4), pinned by the link script",
+  "am_hal_pwrctrl": "0x41b8f8 am_get_pwrctrl, 0x41b918 TrimVersionGet, 0x41b954 mcu_hp_lp_switch_sequence, 0x41ba80 mcu_mode_select, 0x41bae8 gpu_mode_select, 0x41bbd0 mcu_memory_config, 0x41bd92/0x41bde4 rom_enable/disable, 0x41be36 sram_config, 0x41bf3a crypto_quiesce, 0x41bf84 periph_enable, 0x41c0be pwrctrl_periph_disable_msk_check, 0x41c17a periph_disable, 0x41c2d8 periph_enabled, 0x41c320 pwrctrl_INFO1_populate, 0x41c4b4 low_power_init, 0x41c7de buck_ldo_override_init, 0x41c838 buck_ldo_update_override, 0x41c86c control, 0x41c990 settings_restore, 0x41c9ca/0x41ca0c pwrmodctl_cpdlp_config/get, 0x41ca2c temp_update, 0x41ca5c/0x41caa2 syspll_enable/disable. Function sizes equal the apollo-main copy at 0x47ef18.. (same SDK build).",
+  "am_hal_pwrctrl state": "g_ui32TrimVer 0x20000098, g_DefaultMcuMemCfg 0x2000009c, g_eCurMcuPwrMode 0x20000552 (initialized record; the recovered image holds the SDK initializers), g_sINFO1regs 0x200267f8, g_orig_TVRGCVREFTRIM..g_orig_CORELDOACTIVETRIM 0x2002704c..0x2002705c, g_eCurGpuPwrMode/g_ePreGpuPwrMode/g_eCurROMPwrMode/g_bOrigTrimsStored 0x200271a5..0x200271a8"
+ },
+ "replaced_hand_copies": [
+  "platform-control/critical_save.S, nor-mspi-init/irq_guard.S, glue/critical_save_adapter.c",
+  "uart_context.c / elog_uart_tx.c ring functions",
+  "nor-mspi-queue/ (nor_mspi_queue.c/.h, queue_descriptors.c/.h, resources.c, mspi_pause_dma.c/.h, README.md, module.ld)",
+  "initializer-callbacks/clock_generators.c/.h and the CLKGEN statics in clock_class_provider4/5.c and startup_clock_config.c",
+  "nor-mspi-init/control_read.c, control_remaining.c/.h, control_request34.c/.h, control_request_clock.c/.h, control_request_extension.c/.h, control_request_helpers.c/.h, control_request_state.c/.h, control_request_transactions.c/.h (the hand split of am_hal_mspi_control)",
+  "nor-mspi-init/fifo_transfer.c, blocking_transfer.c; the MSPI leaves of hal_leaves.c (only the out-of-line CMSIS NVIC helpers remain); am_hal_mspi_initialize in nor_mspi_init.c",
+  "nor-mspi-power/device_configure.c/.h, mspi_clockgen_control.c, power_control.c/.h, power_control_adapter.c/.h",
+  "glue/mspi_stage_two_mode_flags.c, mspi_interrupt_clear.c, mspi_interrupt_disable.c, mspi_interrupt_status.c, mspi_interrupt_service_candidate.c, hal_power_control_alias.c; mspi/interrupt.c; the 0x424976 empty leaf in runtime-memory/native_empty_leaves.S",
+  "nor-mspi-init/status_poll.c, platform-control/runtime_wait_adapter.c (17 callers renamed to am_hal_delay_us_status_change/check)",
+  "initializer-callbacks/uart_rx.c/.h, uart_irq_dispatch.c, uart_irq_status.c, uart_context.h, the UART HAL in uart_context.c (only out-of-line CMSIS NVIC helpers remain) and elog_uart_tx.c (only Even's log send / elog output remain), glue/post_configure_alias.c, and the power-control guard in platform-control/runtime.c; callers in post_bringup.c, platform_startup.c, runtime.c, uart_irq_rx.c and uart_rx_drain32_abi.S use the am_hal_uart_* names",
+  "PWRCTRL: platform-control/runtime_query.c/.h, runtime_transition.c/.h, runtime_transition_entry.S, power_guards.c, power_special_mode.c/.h, power_domains.c/.h; initializer-callbacks/startup_mcu_memory_entry.S, startup_memory_config.c/.h, startup_ton_gate.c; glue/startup_power_void_adapter.c/.h, startup_power_root_candidate.c, startup_power_root_integrated.c, startup_root_entry.S, power_callback_alias.c, buck_override_entry.c, control_delay_us_alias.c; pcm22_deferred21_native/runtime_transition.h; and the PWRCTRL functions in runtime.c (mode_two, cleanup), startup_runtime.c (trim_version, info_cache), startup_power_config.c (register_setup, resource_ready, power_configure, temperature), startup_initialize_leaves.c (sleep fields), syspll_hal_bindings.c (syspll enable/disable/enabled), power_mode_aliases.c (0x41ba80) and two orphaned constants in startup_product_config.c",
+  "thread-creation/idle_sleep/sleep_helpers.c: second copies of stock 0x41c9ca/0x41ca0c (am_hal_pwrctrl_pwrmodctl_cpdlp_config/get) and of the SPOT autoswitch wrappers 0x41ce26/0x41ce3c"
+ ],
+ "method": {
+  "emulator": "Unicorn 2.1.4 (A-class Thumb core). M-profile PRIMASK MRS/MSR/CPSID/CPSIE and Armv8.1-M CSEL/CSINC/CSINV/CSNEG are emulated by an instruction hook; PRIMASK transitions are part of the compared state.",
+  "candidate": "The final linked bootloader image (OBJ_OVERRIDE link of the g2-apollo-bootloader payload, cortex-m55 code as shipped), not a recompile. Stock runs from the official image at 0x410000; each side runs in its own emulator.",
+  "harnesses": "build/boot-hal-diff/diff_queue.py (seed 0x5151), diff_cmdq.py (0x5152), diff_clkgen.py (0x5153), diff_mspi.py (0x5154); ignored build/; diff_utils.py (0x5155), diff_uart.py (0x5156), diff_pwrctrl.py (0x5057)",
+  "mspi_compared": "Per operation: return value, every MMIO write (address, size, value) in 0x40000000..0x401fffff, the call log of the stubbed callees (clock request/release/release_all, periph enable/disable, delay, status poll with its arguments), g_MSPIState (all 4 modules), the gAmHalCmdq table, both TCB buffers, the transfer buffer, the status output word and the module's MSPI register block. Code and register-table pointers stored in RAM are compared by name. Sequences: initialize, power_control(WAKE), configure, device_configure, enable, then up to 15 random operations among interrupt enable/clear/status/service, blocking PIO transfers, device_configure, power_control (wake/sleep/deep-sleep/invalid, retain or not), disable/enable, deinitialize, all control requests except INIT_HIPRIO (31) and CQ_RAW (34) whose configs carry code/data pointers, and a hardware step that randomises MSPI status registers. Callee stubs return nonzero in 8% of cases. Device configs use the 5.0.0 layout with bools 0/1; control configs have every byte 0/1 except typed scalars and DEVICE_CONFIG/CLOCK_CONFIG.",
+  "budget": "40,000,000 instructions per call (EMU_BUDGET); with the default 2,000,000, 12 PAUSE/END_BLOCK calls exhausted the budget on the stock side only, in the 100,000-iteration pause wait",
+  "it_state_fix": "Harness defect found and fixed 2026-10-29: a Unicorn UC_HOOK_MEM_WRITE that fires inside a Thumb IT block (here a strmi to MMIO) leaves IT state set, so the following instructions run as if still conditional (a bl after an ittt block was skipped). MMIO is now mapped with mmio_map callbacks (diff_queue.Cpu.map_mmio) and the PRIMASK/CSEL emulation hooks only the addresses holding those instructions. Every module was re-run on the new image with the fixed harness; results below are those re-runs. Later the same day the harness also gained VFP enable (CPACR/FPEXC), VSEL, BASEPRI MRS/MSR, WFI/WFE and Armv8.1-M DLS/WLS/LE emulation. Before VFP was on, both sides faulted identically on their first VFP instruction and the PWRCTRL harness counted that as agreement, so am_hal_pwrctrl_temp_update was not really exercised in the first PWRCTRL run; the final run executes it and counts faults separately."
+ },
+ "results": {
+  "queue": {
+   "cases": 500,
+   "mismatches": 0
+  },
+  "primask_helpers": {
+   "cases": 4,
+   "mismatches": 0
+  },
+  "cmdq": {
+   "cases": 800,
+   "mismatches": 0
+  },
+  "clkgen": {
+   "cases": 4000,
+   "mismatches": 0
+  },
+  "mspi": {
+   "cases": 1500,
+   "mismatches": 0,
+   "return_classes": "initialize 0/5/6; configure 0/fault(NULL handle, both sides); device_configure 0/1/2/4/5/6; enable 0/2; disable 0/2; deinitialize 0/2; blocking_transfer 2/4/7; interrupt_enable/clear/service 0/2; interrupt_status_get 0/2/fault(NULL output, both sides); power_control 0/1/2/4/6/7; control 0/1/2/4/5/6/7/fault"
+  },
+  "note": "2026-10-29 final image (154,652 B; hand profiles without auto-vectorization) with the IT-safe harness: queue 500/0, PRIMASK helpers 4/0, CMDQ 800/0, CLKGEN 4000/0, MSPI 1500/0 (EMU_BUDGET 10,000,000; at 2,000,000 twelve control-request 27/33 cases exhausted the stock side's budget in a delay-poll loop the clang code finishes), status polls 3000/0, UART 400/0, PWRCTRL 1500/0. SYSPLL (ported to the same harness as build/boot-hal-diff/diff_syspll.py, final image cortex-m55 code with VSEL emulated): 3,036 cases, 0 mismatches, 0 faults; see bootloader-syspll-upstream-review.json.",
+  "utils": {
+   "cases": 3000,
+   "mismatches": 0,
+   "compared": "return value and delay-call count; harness build/boot-hal-diff/diff_utils.py (seed 0x5155)",
+   "return_classes": "change 0/4, check 0/4, with and without delay iterations"
+  },
+  "uart": {
+   "cases": 400,
+   "mismatches": 0,
+   "harness": "build/boot-hal-diff/diff_uart.py (seed 0x5156, EMU_BUDGET=10000000)",
+   "compared": "per operation: return value, UART MMIO writes, stubbed clock/power/delay calls, user callback calls, g_am_hal_uart_states (all 4), TX/RX queue buffers, data buffer, output word, UART register block",
+   "return_classes": "initialize 0/5/6; power_control 0/2/6/7; configure 0/2/6/0x08000003; buffer_configure 0/2; fifo_read 0/0x08000000; transfer 0/1/4/0x08000004/0x08000005 and blocking waits that exhaust the budget on both sides; interrupt_enable/clear/status/service",
+   "note": "baud rate 0 excluded: upstream divides by 16*baud, which is undefined in C; stock IAR code (UDIV by zero = 0) returns BAUDRATE_NOT_POSSIBLE, the clang build does not. 9 of 120 early cases differed only there."
+  },
+  "pwrctrl": {
+   "cases": 1500,
+   "mismatches": 0,
+   "harness": "build/boot-hal-diff/diff_pwrctrl.py (seed 0x5057)",
+   "compared": "per call: return value, every MMIO write (address, size, value), the call log of the stubbed callees (14 SPOT wrappers and spotmgr_init, clkmgr request/release/release_all, delay_us, status_change/check with arguments and computed result, info1_read with arguments, debug_trace_disable, clkmuxrst_low_power_init), PRIMASK value and transitions, the output buffer, and RAM 0x20000098..0x200000a4, 0x20000550..0x20000554, g_sINFO1regs, 0x2002704c..0x20027060, 0x200271a0..0x200271ac",
+   "called_directly": "mcu_mode_select, gpu_mode_select, mcu_memory_config, rom_enable/disable, sram_config, periph_enable/disable/enabled, low_power_init, buck_ldo_update_override, control (all 4 controls and invalid), settings_restore, pwrmodctl_cpdlp_config/get, temp_update (s0 in -60..130 C), syspll_enable/disable",
+   "through_callers": "am_get_pwrctrl, TrimVersionGet, mcu_hp_lp_switch_sequence, crypto_quiesce, pwrctrl_periph_disable_msk_check, pwrctrl_INFO1_populate and buck_ldo_override_init are inlined by clang (no out-of-line copy)",
+   "environment": "random MMIO for RSTGEN, CLKGEN, STIMER, MCUCTRL, PWRCTRL and two 0x400c0000 blocks; 70% of cases mirror DEVPWREN/AUDSSPWREN/MEMPWREN/SSRAMPWREN into their status registers and acknowledge MCUPERFREQ; CHIPREV 0x20..0x24; SIMOBUCK state random; stub status codes random",
+   "elided_cells": "0x20027060..0x2002708c (eleven write-only static trim snapshots) excluded: clang removes those stores; contents differed in 94 of 1500 cases, nothing reads them",
+   "faults": "152 of 1500 cases include a NULL-argument call (8% of calls) that faults at address 0 identically on both sides: neither stock nor the SDK checks those pointers. Faults are counted, not hidden."
+  }
+ },
+ "mutant_checks": {
+  "queue_item_get_bcc_to_bls": {
+   "cases": 500,
+   "caught": 134,
+   "image": "5.1.0-based build"
+  },
+  "cmdq_alloc_block_full_threshold_off_by_one": {
+   "cases": 800,
+   "caught": 3,
+   "note": "needs 254 outstanding blocks; rarely reached",
+   "image": "5.1.0-based build"
+  },
+  "cmdq_alloc_block_entry_size": {
+   "cases": 800,
+   "caught": 278,
+   "image": "5.1.0-based build"
+  },
+  "clkgen_ratio_scale_one_ulp": {
+   "cases": 4000,
+   "caught": 190,
+   "image": "5.1.0-based build"
+  },
+  "mspi_configure_tcm_condition_inverted": {
+   "site": "0x4306c8 (cset cc -> cs)",
+   "cases": 400,
+   "caught": 244
+  },
+  "mspi_configure_xip_register_offset": {
+   "site": "0x430684 (str 0x9c -> 0x98)",
+   "cases": 400,
+   "caught": 381
+  },
+  "uart_baud_clock_multiplier": {
+   "site": "am_hal_uart_configure lsls #4 -> #3 (BAUDCLK 16 -> 8)",
+   "cases": 150,
+   "caught": 102
+  },
+  "pwrctrl_mcu_mode_select_hp_compare": {
+   "site": "0x430864 cmp r4,#2 -> #1 (final image)",
+   "cases": 400,
+   "caught": 39
+  },
+  "pwrctrl_rom_enable_mode_check": {
+   "site": "0x430e6a cmp r0,#1 -> #0 (final image)",
+   "cases": 400,
+   "caught": 58
+  },
+  "pwrctrl_rom_enable_mempwr_bit": {
+   "site": "0x430e84 orr #0x80 -> #0x40 (final image)",
+   "cases": 400,
+   "caught": 20
+  }
+ },
+ "build": {
+  "payload": "g2-apollo-bootloader: 299/299 compiled, 0 duplicate strong symbols; 3 names unresolved at compose (__boot_spotmgr_seq_start/_end/_load, linker-script symbols the final link defines); final link OK; no MVE instructions",
+  "image_bytes": 155064,
+  "image_sha256": "a06589d4ad5f5ead59d1c2547acca9bbcb21c0fff81ceead0ae32a2355fc153c",
+  "previous_image_bytes": 154652,
+  "profiles": "g2-apollo-bootloader-1/-3/-4 add -fno-vectorize -fno-slp-vectorize (stock has no Helium/MVE code; clang had emitted 475 MVE instructions)"
+ },
+ "limitations": [
+  "Synthetic MMIO and RAM only; no hardware run.",
+  "MSPI callees outside the HAL (clock manager, power domains, delay, status poll) are stubbed identically on both sides; their own hand reconstructions are not covered here.",
+  "INIT_HIPRIO and CQ_RAW control requests, DMA (nonblocking/high-priority) transfers and interrupt-driven CQ completion with real callbacks are not exercised.",
+  "Invalid bool encodings (values other than 0/1) are outside the tested domain: they are undefined in C and the two compilers legitimately differ there.",
+  "am_hal_uart_configure with baud rate 0 diverges (undefined behaviour in the upstream C; stock returns 0x08000003). No bootloader caller passes 0.",
+  "UART DMA transfers and full-duplex paths are not exercised.",
+  "PWRCTRL: SPOT manager, clock manager, INFO1, debug and clock-mux callees are stubbed; their hand reconstructions are not covered here. Register mirroring is a model, not Apollo510 behaviour.",
+  "PWRCTRL: clang drops the eleven write-only static trim snapshots that stock stores at 0x20027060..0x2002708c; nothing reads those cells."
+ ],
+ "spotmgr": {
+  "result": "The bootloader builds SPOTMGR from upstream: am_hal_spotmgr.c, _pcm0_7, _pcm2_0, _pcm2_1 and _pcm2_2 from SDK 5.0.0 + AmbiqSuite patch 66185cb, with the 5.1.0 hunks the stock image also carries. The 78 hand files of the former reconstruction are removed (build/snap-stage2/stage2_removed.json).",
+  "policy": "Project goal (user, 2026-10-30): a working firmware, not stock identity; newer upstream text is preferred where it does not change how the hardware is driven. Each 5.1.0 hunk below is one that stock also has, so the build follows both the newer SDK and the stock behaviour there.",
+  "hunks_from_5_1_0": [
+   "PCM2.0: tempco range stored unconditionally, g_bFrcBuckAct writes guarded by g_bIsPCM2p0, spotmgr_buck_deepsleep_state_determine (three hunks, from the earlier attempt)",
+   "PCM2.2 SWITCH_TO_HP: force HFRC2 on (CLKGEN MISC.FRCHFRC2), wait up to AM_HAL_CLKGEN_HFRC2_DELAY for CLOCKENSTAT.HFRC2READY, request HP only when ready, release the force; kept inside the void 5.0.0 sequences as stock does (stock skips the HP request and still releases the force when HFRC2 is not ready)",
+   "PCM2.1 STIM_CPU_STATE deep-sleep path: g_bVddcaorVddcpuOverride no longer depends on TIMER A running (66185cb added that test; 5.1.0 and stock do not have it)"
+  ],
+  "kept_older": "Transition sequences stay void and keep the 5.0.0 VDDF double boost (stock behaviour; 5.1.0 returns status from them). No STIM_INIT_STATE.",
+  "earlier_attempt": {
+   "result": "swapped, tested and reverted; the hand SPOTMGR stays",
+   "finding": "stock SPOTMGR is an unpublished Ambiq revision between ambiqhal_ambiq 66185cb (5.0.0 known-defect patches) and e8baebd (5.1.0): 66185cb six trim flags and PCM1.0/1.1 ACRG power-up; 5.1.0 PCM2.0 tempco range store, g_bIsPCM2p0 buck guards and spotmgr_buck_deepsleep_state_determine, but no STIM_INIT_STATE; PCM2.2 SWITCH_TO_HP with the 5.1.0 HFRC2 force inside void 5.0.0 sequences that keep the VDDF double boost",
+   "evidence": "build/boot-hal-diff/diff_spotmgr.py: 300/300 end-to-end sequences matched the swapped build (stock init records run on each side, the PCM2.2 transition table copied from its load image), but direct calls of the 27 PCM2.2 transition sequences diverged (transition_sequence_11: stock forces HFRC2 and polls CLOCKENSTAT before the HP switch)",
+   "kept_for_follow_up": "build/snap-stage2/ (swapped tree, linker pins, manifest)"
+  },
+  "harness_fix": "diff_spotmgr.py compared r0 after the void transition sequences; after ignoring it, only sequences 5, 11 and 13 (the three SWITCH_TO_HP callers) differed.",
+  "standalone": "build/spot-sa/diff_sa_spotmgr.py: the five objects linked as an overlay (text 0x460000, all globals at their stock cells, callees at stock addresses) inside the stock image: per-sequence 27 x 30 direct calls, 0 mismatches; 1500 cases, 0 mismatches; mutants spotmgr_init cmp #1 -> #2 (0x460276) caught 53/400, transition_sequence_11 movs #60 -> #61 (0x4633b8) caught 12/400.",
+  "in_image": "build/boot-hal-diff/diff_spotmgr.py on the linked image (own init records and transition-table copy): 1500 cases, 0 mismatches."
+ },
+ "final_image_rerun_2026_10_30": {
+  "image": "build/boot-spot5/link/g2-apollo-bootloader.elf",
+  "queue": "500/0",
+  "primask": "4/0",
+  "cmdq": "800/0",
+  "clkgen": "4000/0",
+  "mspi": "1500/0 (10M budget)",
+  "status_polls": "3000/0",
+  "uart": "400/0",
+  "pwrctrl": "1500/0 (per-step PRIMASK trace, peripheral bias)",
+  "syspll": "all functions 0 mismatches, 0 faults",
+  "spotmgr": "1500/0"
+ }
+}

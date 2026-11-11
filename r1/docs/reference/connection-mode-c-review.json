@@ -1,0 +1,190 @@
+{
+  "schema_version": 1,
+  "sources": [
+    "r1/src/application/board/native_connection_parameters.c",
+    "r1/src/application/board/native_connection_parameters.h"
+  ],
+  "native_roots": [
+    "0x4d4ac",
+    "0x4dd78",
+    "0x4de44",
+    "0x4e9d0",
+    "0x4e9dc"
+  ],
+  "modified_observer": "0x51aa0",
+  "report": "build/sources-goal-r1-connection-mode-c/report.json",
+  "compiled_units": 842,
+  "application_imports": 72,
+  "added_imports": [],
+  "removed_imports": [],
+  "verification": {
+    "stock_C_pairs": {
+      "mode_status_handle_domain": 720,
+      "live_flag_domain": 3072,
+      "independent_role_flags": 192,
+      "live_provider_mutations": 176,
+      "delayed_wrappers_callback": 280,
+      "observer_GAP_mode_shared_profile": 768,
+      "control_byte_round_trip": 256,
+      "seeded_mixed_paths": 768
+    },
+    "total_pairs": 6232,
+    "actual_SDK_SVC_gateway": true,
+    "actual_C_handle_getters": true,
+    "actual_C_observer_GAP_profile_mode_callback": true,
+    "shared_profile_owner": true,
+    "private_SVC_connection_upper_bits_excluded": true,
+    "callee_saves_integer_FP_stack_guards_masks": true,
+    "device_execution": false
+  },
+  "mutants": [
+    {
+      "name": "connection_sentinel",
+      "rejected": true
+    },
+    {
+      "name": "phone_shortcut",
+      "rejected": true
+    },
+    {
+      "name": "glasses_shortcut",
+      "rejected": true
+    },
+    {
+      "name": "busy_setup_mode1",
+      "rejected": true
+    },
+    {
+      "name": "busy_update",
+      "rejected": true
+    },
+    {
+      "name": "abort_setup",
+      "rejected": true
+    },
+    {
+      "name": "slow_fast_flag",
+      "rejected": true
+    },
+    {
+      "name": "fresh_profile_read",
+      "rejected": true
+    },
+    {
+      "name": "packed_handle",
+      "rejected": true
+    },
+    {
+      "name": "slow_delay",
+      "rejected": true
+    },
+    {
+      "name": "again_delay",
+      "rejected": true
+    },
+    {
+      "name": "shared_observer_profile",
+      "rejected": true
+    },
+    {
+      "name": "control_byte",
+      "rejected": true
+    }
+  ],
+  "prior_nongenerated_objects_unchanged": 831,
+  "changed_existing_allocated_sections": {
+    "r1/src/application/board/native_connection_parameters.c": [
+      ".ARM.exidx.text.r1_app_ble_set_slow_mode",
+      ".ARM.exidx.text.r1_app_ble_set_slow_mode_again",
+      ".ARM.exidx.text.r1_ble_control_flag_get",
+      ".ARM.exidx.text.r1_ble_control_flag_set",
+      ".ARM.exidx.text.r1_connection_parameter_mode_adapter",
+      ".ARM.exidx.text.sd_ble_gap_conn_param_update",
+      ".ARM.exidx.text.sd_ble_gap_ppcp_set",
+      ".r1.ble.control_flag",
+      ".r1.connection.parameter.flags",
+      ".rodata.again_ring",
+      ".rodata.again_sdk",
+      ".rodata.r1_connection_glasses_parameters",
+      ".rodata.r1_connection_slow_parameters",
+      ".rodata.slow_ring",
+      ".rodata.slow_sdk",
+      ".text.r1_app_ble_set_slow_mode",
+      ".text.r1_app_ble_set_slow_mode_again",
+      ".text.r1_ble_control_flag_get",
+      ".text.r1_ble_control_flag_set",
+      ".text.r1_connection_parameter_ble_observer",
+      ".text.r1_connection_parameter_mode_adapter",
+      ".text.sd_ble_gap_conn_param_update",
+      ".text.sd_ble_gap_ppcp_set"
+    ]
+  },
+  "changed_generated_objects": [
+    "{gen}/r1_startup_vectors.S",
+    "{gen}/r1_uecc.c"
+  ],
+  "unchanged_generated_objects": [
+    "{gen}/r1_cmsis_os2_rtc.c",
+    "{gen}/fal_partition_r1_lookup.c",
+    "{gen}/fdb_utils_r1.c",
+    "{gen}/gh_demo_r1.c",
+    "{gen}/gh_demo_hook_r1.c",
+    "{gen}/gh_demo_user_r1.c",
+    "{gen}/app_error_handler_gcc_clang.c",
+    "{gen}/gh_ppg_timestamp_hooks_r1.c"
+  ],
+  "new_state_owner": {
+    "symbol": "r1_ble_control_flag",
+    "native_address": "0x200064f8",
+    "size": 1,
+    "initializer": "00"
+  },
+  "removed_duplicate_profile_owner": true,
+  "flags_size_before": 3,
+  "flags_size_after": 2,
+  "canonical_profile": "r1_connection_parameter_profile",
+  "reused_preferred_parameter_array": true,
+  "contract": [
+    "Reuse the existing GAP profile owner at0x200064c0. Shrink the old observer flags from3 to2 bytes at0x200064be..bf; observer ff-to1 repair and both parameter-selection reads use the canonical profile.",
+    "Reuse the existing two preferred parameter records at0x99182 and0x9918a. Add only the slow record72/84/4/600 and glasses record16/16/2/600, matching the other two stock records.",
+    "Handleffff is a no-effect path. Matching phone flags skip before mode selection; matching glasses handle with flag1 skips mode2. Other modes select slow; mode1 selects by live profile; mode2 uses the glasses record.",
+    "The SDK owns SVC7a preferred-parameter setup and SVC75 connection update. Mode1 tolerates setup busy17; modes0/other and2 log it. Setupffff is logged then aborts. Mode1/2 tolerate update busy17; slow updates log every nonzero status. Error logging can return.",
+    "The fast byte is written only after setup continuation, before the connection update. Mode1 reloads the profile after setup/error callbacks, even though the two records currently have equal bytes.",
+    "The slow wrappers cancel the existing delayed callback with connection<<16, then schedule the same argument at0 or0x2800 depending on any nonzero immediate word; the again wrapper uses0x2c00. These are raw delay units.",
+    "The flag getter returns one byte at0x200064f8; the adjacent setter stores the low byte and preserves its full uint32 return word."
+  ],
+  "limits": [
+    "This supplies hardware connection-control leaves. The BLE queue consumer at0x45184 remains an explicit import; no complete queued consumer or link-security lifecycle is claimed.",
+    "The native SDK gateway instructions and real C handle getters, observer, GAP checked setter and delayed event callback execute in the probe. Supervisor service results, log sinks, role query, schedule/cancel backend and queue encoder are prepared models. There is no radio, scheduler or flash operation.",
+    "The Nordic uint16 connection key is compared at SVC75. Native incidental upper bits in its input register are not API inputs. Ordinary void adapter/wrapper results are excluded; typed flag/getter and GAP checked return words are compared.",
+    "Callee-saved integer/FP registers, stack guards and interrupt masks are checked. Arbitrary aliases, private uninitialized memory, asynchronous concurrency, faults and physical timing are outside this replay.",
+    "All831 other prior nongenerated objects and the GAP owner/table object remain identical. The observer and its two-byte flag storage are the only changed pre-existing allocated sections in this unit; added helpers/constants/gateways are separate new sections.",
+    "R1 sources-check passes; global sources-check retains the unrelated unlisted G2 resident_rom_thumb_set.S failure. Final firmware linking, runtime placement and device boot remain unverified. Byte identity and a paid compiler are not requirements."
+  ],
+  "evidence_files": {
+    "build/sources-goal-r1-connection-mode-c/report.json": "ad13cf502400206b0a446a1de6e972678b5369cca83d67778ae5e42817f1c844",
+    "r1/src/sources.json": "3aa6d1f84b44c6c754e37c9853fced515460d5c98f381ff030b24be22adb05fe",
+    "r1/src/application/board/native_connection_parameters.c": "8a58564e5dbdcaad3be5eb3d10e2bcc55f6b1be61aa0ecf17a4e080fdf8e13a6",
+    "r1/src/application/board/native_connection_parameters.h": "bd1ef12aae4b01259944fe530cf9629ba2cd1314e64b7664ba10ac9940753234",
+    "r1/src/application/board/native_gap_identity.c": "c0d9fbcd06d975c6d64cc68ad1ce89217cb9266dfc644179985aed198db0aa01",
+    "r1/src/application/board/native_ble_identity.h": "9bc19f7e730a13d94f684ef0adbf2d01367740d5984320f2b48741560b32f58a",
+    "r1/src/application/board/connection_handle.c": "a4039c569b5178850ba3b05990521ea21d966debd447fd50487c62859ae0122b",
+    "r1/src/application/board/stock_seams.c": "1e24d23cc31d26ee47d51b06cfd3983c1bf2a96e2b1a275be9cc0d252dc51234",
+    "vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/softdevice/s140/headers/ble_gap.h": "73f3bf6bdbb94b05ab1f4be0df5e97d384dd95abeb32f81b09ced58e441dde19",
+    "r1/docs/reference/gap-identity-c-review.json": "25836e69339d49ee2d22a41e6531b1d899516873fd79636ace26fac7d12c644d",
+    "r1/docs/reference/connection-parameters-c-review.json": "de5bcce370cd7b4ac44eae1eaa739e6aa721d511432e15f11d879d049664c1e4",
+    "r1/docs/reference/fstorage-registry-review.json": "3ee2a79fb2b3f866e118d86e0361b8dc1499a92460f5e6a49370418eac1dbb5c",
+    "build/goal-r1-fstorage-registry/expanded-rw.bin": "87fdee392022fdbe23dd0daf3e859fb14f3ce26ba3e8403aab56dc9d9a913317",
+    "build/goal-r1-connection-mode-c/verify.py": "67563b41cd5648d28324851b412e8eb333d80379b97ad3b9d474f4251949c18d",
+    "build/goal-r1-connection-mode-c/verification.json": "2a2711de3f50af6262332c325da1b6f3434353343c588bc288279f94de8b5eff",
+    "build/goal-r1-connection-mode-c/verification.log": "d7a95ab5329abc7c06c71d2e37fa0085ab4be0d1be2d3c5dba1012ccf6f8acf4",
+    "build/goal-r1-connection-mode-c/rea.json": "fede1b8905d900c40503a5f5a3fc75531e3a0f523d487546b76584d81be30821",
+    "build/goal-r1-connection-mode-c/mutants.py": "bd5d15a975c5ff835bb64c8a5d9b56d106f2ac956828c13186da2d123c029cf3",
+    "build/goal-r1-connection-mode-c/mutants.json": "ac3266716dbd69c289761ad3e4d4fe71a1e32bdd2fd47df9f70afbe7b6e1ce63",
+    "build/goal-r1-connection-mode-c/mutants.log": "860ede3d6ff615b7817ef2b997530a18d635c938dcf669d03347bf618b07b3f5",
+    "build/goal-r1-connection-mode-c/audit.py": "6143d0b98aeb3f69628a247af5eed5c2ec86a40cf196feb8489be0e9195f870a",
+    "build/goal-r1-connection-mode-c/object-audit.json": "47697d696d3250e3c504f292a103dbd25491d9a8b14fff0fb7d37e456a22a745",
+    "build/goal-r1-connection-mode-c/r1-check.log": "41b5d5b7b1cf6bf059f38ba94bf0ebccdf942cc49b4ecd1e858cece70f75fe99",
+    "build/goal-r1-connection-mode-c/sources-check.log": "d3b5f90032abc4e960077bae260270d96481839b80462cf9c93faf07b0c77d14"
+  }
+}

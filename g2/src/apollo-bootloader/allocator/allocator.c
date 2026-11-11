@@ -32,3 +32,6 @@ void opencfw_boot_fs_free(void *pointer) {
         opencfw_boot_fs_mutex_release(MUTEX);
     }
 }
+
+/* Stock entry names that branch straight to the provider above. */
+__typeof__(opencfw_boot_allocator_init) opencfw_provider_41fd70 __attribute__((alias("opencfw_boot_allocator_init")));

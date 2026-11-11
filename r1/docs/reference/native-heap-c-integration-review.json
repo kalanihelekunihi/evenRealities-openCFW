@@ -1,0 +1,81 @@
+{
+  "normal_build": {
+    "r1-application": {
+      "compiled": 499,
+      "imports": 186,
+      "removed": [
+        "r1_malloc_failed_hook"
+      ],
+      "added": []
+    },
+    "r1-bootloader": {
+      "compiled": 74,
+      "imports": 34,
+      "removed": [],
+      "added": []
+    }
+  },
+  "allocator": {
+    "passed": 236,
+    "paired_operations": 2113,
+    "executions": 4226,
+    "exact_full_heap_and_state_snapshots": true,
+    "caller_tracking_root_lr_equal": true,
+    "source_report": "build/sources-goal-r1-native-heap/report.json",
+    "limitations": [
+      "Scheduler suspend/resume modeled; actual allocation, initialization, insertion and free execute",
+      "Fixed native pool/state/start addresses used only in probe; production placement unverified",
+      "Valid allocation/free traces and logical allocation-failure faults tested; malformed heap and physical concurrency unverified",
+      "Caller-clobbered words/flags and full processor exception state excluded"
+    ]
+  },
+  "queue_lifecycle_actual_allocator": {
+    "passed": 64,
+    "paired_operations": 400,
+    "actual_queue_create_delete_and_native_allocator": true,
+    "caller_header_verified_then_normalized": true,
+    "source_report": "build/sources-goal-r1-native-heap/report.json",
+    "limitations": [
+      "Scheduler suspend/resume and critical boundaries modeled; actual queue creation/deletion, reset/list and allocator algorithms execute",
+      "Only active-block caller words normalized after checking each against its actual allocation-call LR",
+      "Fixed native pool/state/start used only in probe; production placement unverified",
+      "Physical scheduling, heap corruption and concurrency unverified"
+    ]
+  },
+  "negative_controls": {
+    "header-rounding": true,
+    "split-boundary": true,
+    "caller-tracking": true
+  },
+  "qualification": {
+    "compiled_profiles": 5,
+    "selected_regions": 0,
+    "byte_identity_proven": false
+  },
+  "normal_allocator_selected": true,
+  "canonical_source_plan_unchanged": true,
+  "source_built_bytes": 3833,
+  "binary_pull_through_bytes": 642327,
+  "hybrid_equals_locked_application": true,
+  "source_completeness_proven": false,
+  "evidence": {
+    "build/sources-goal-r1-native-heap/report.json": "86af8ded25791afe198a86e98600a79b7b6f33e575f1f90c16507c594530a1a3",
+    "tools/build/source-plan.json": "0c889650bf8ea03def83ea1ea29730b3ccfe84bb70609c1972a500f02ba4ea2d",
+    "r1/src/sources.json": "73c3fb03932b37db089ff50fdae47f8b7e73914b6b1fb99ddf99467302ff84ad",
+    "r1/src/application/board/native_heap.c": "83cbdb53b836d594cd67c51b97b38c04a1e062e95a04df4af51d6d0e0713c719",
+    "third-party/upstream/freertos-kernel/portable/MemMang/heap_4.c": "d48a51e34caed771e6650d95f6c2527e52fde2a6ebc6f83b49d003aef0135e05",
+    "r1/symbols/function-frontier.csv": "10bd6047925f14791dc35ea3dd0c1795ce58144c36750a7f5cdc4576b6b21d21",
+    "build/hybrid-goal-r1-native-heap/build-report.json": "df61e5b41f0e0fe668e7c414eb5fff5696ef5476d9787dfb18f0ac7f4c9406dc",
+    "build/goal-r1-native-heap-validation/before-sources.json": "6fa37d8afe1e50453bc47962bcfe463cd5163fb4f1b3d2a8033b02adbb77c9d3",
+    "build/goal-r1-native-heap-validation/REA-malloc.json": "632b4f9f192b966f13444d940c19afdef3df6e39441356f3c957552e761894a7",
+    "build/goal-r1-native-heap-validation/REA.snapshot.json": "a238cd3119ce55675117ec0330929ae29fa3e3b1de37261865a694caf239b5d7",
+    "build/goal-r1-native-heap-validation/verify.py": "472278a3427c93796558fef843fe4e34dee8f64889a9fb7506f79660a969b283",
+    "build/goal-r1-native-heap-validation/results.json": "2377a26925c8fade69314bf26a4ba33154182fc2a20107d10458a0d6ed8d3fb8",
+    "build/goal-r1-native-heap-validation/negative.py": "7c4be160d5628c21e866c48ed6475fe68731dc49be6be8ee737fe1fd1aed86cd",
+    "build/goal-r1-native-heap-validation/negative-results.json": "6f588bfb261a4e9aee82fc00fd08e64faf1c474692a7e1326c984553c8f80e60",
+    "build/goal-r1-native-heap-validation/queue/verify.py": "f7b44da263cbd2473e740fb319da97bc9325f047e12467ae7b2134573629da08",
+    "build/goal-r1-native-heap-validation/queue/results.json": "14ab99d350ed9327c135fa81eaacf0d90fd3c796119125e57ece0dfb84adeaed",
+    "build/goal-r1-native-heap-validation/qualify.py": "09f6585fc339c471ae24e95e9ff94d2dfbe040291d5b1f2e39cbb99cb7a80217",
+    "build/goal-r1-native-heap-validation/qualified/qualification.json": "3ecf9e93f81d90e901ace965f92d1f0bf2e1553b548e07186e66efe7f4ba23c5"
+  }
+}

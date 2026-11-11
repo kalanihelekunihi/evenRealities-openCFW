@@ -22,3 +22,5 @@ uint32_t case_legacy_aa_read(uint32_t index,uint32_t count,void *output)
         (void)case_legacy_logger("read failed--retry number=%d,error_location_2510 is %d,read_bit_2510_error1==%d, read_bit_2510_error2==%d\r\n",10u,diagnostics[2],diagnostics[3],diagnostics[4]);
     return 0u;
 }
+/* Dedup (0x08009040): case_init_secondary_read (was startup/application_init_bus_aliases_candidate.c). */
+uint32_t case_init_secondary_read(uint32_t reg,uint32_t count,uint8_t *out) __attribute__((alias("case_legacy_aa_read")));

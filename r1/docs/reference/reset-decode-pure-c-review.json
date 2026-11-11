@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "scope": "R1 ordinary C reset reason decoder and actual reset startup/retained record chain",
+  "report": "build/sources-goal-r1-reset-decode-pure-c/report.json",
+  "comparison_report": "build/sources-goal-r1-stacmd-void-reviewed-c/report.json",
+  "audit": {
+    "compiled_units": 855,
+    "application_imports": 61,
+    "bootloader_imports": 22,
+    "unchanged_prior_nongenerated_objects": 844,
+    "changed_nongenerated_objects": [
+      "r1/src/application/runtime/native_reset_decoder.c"
+    ],
+    "import_sets_unchanged": true,
+    "normal_object_equals_direct_probe_object": true,
+    "constant_data_and_relocations_unchanged": true,
+    "manifest_and_source_plan_unchanged": true,
+    "no_new_persistent_state": true,
+    "assembly_entry_removed": true
+  },
+  "direct": {
+    "stock_C_comparisons": 23426,
+    "all_supported_reason_flag_combinations": true,
+    "masked_tags_and_scratch_seed_independence": true,
+    "live_mode_and_explicit_output_mutations": true,
+    "full_log_arguments_and_result_verified": true,
+    "reader_and_logging_providers_modeled": true,
+    "private_frame_aliases_and_APSR_excluded": true
+  },
+  "actual_startup_chain": {
+    "actual_startup_retained_reader_crc_stock_C_cases": 2160,
+    "full_log_sequence_and_decoded_cache": true,
+    "retained_record_unchanged": true,
+    "reset_register_acknowledgment_value_verified": true,
+    "reset_register_is_plain_memory_not_electrical_W1C_model": true
+  },
+  "compiled_defects_rejected": [
+    {
+      "defect": "wrong-result-mask",
+      "rejected": true,
+      "log": "build/goal-r1-reset-decode-pure-c/wrong-result-mask/test.log"
+    },
+    {
+      "defect": "wrong-pin-flag",
+      "rejected": true,
+      "log": "build/goal-r1-reset-decode-pure-c/wrong-pin-flag/test.log"
+    },
+    {
+      "defect": "wrong-caller-admission",
+      "rejected": true,
+      "log": "build/goal-r1-reset-decode-pure-c/wrong-caller-admission/test.log"
+    },
+    {
+      "defect": "wrong-caller-index",
+      "rejected": true,
+      "log": "build/goal-r1-reset-decode-pure-c/wrong-caller-index/test.log"
+    },
+    {
+      "defect": "wrong-pc-reader",
+      "rejected": true,
+      "log": "build/goal-r1-reset-decode-pure-c/wrong-pc-reader/test.log"
+    }
+  ],
+  "public_contract": [
+    "One uint32_t reset reason input and masked reset reason result.",
+    "Logging order, full PC/LR values, masked tag/caller bytes, failed retained reads and live logging mode remain.",
+    "Incoming scratch words only seeded unused upper bytes and are removed."
+  ],
+  "limits": [
+    "Physical reset register W1C effects, reset retention, electrical behavior, final linking and boot unverified.",
+    "Logging providers modeled. Integration executes actual startup adapter, decoder, retained readers and CRC implementations.",
+    "Private frame aliases, incidental caller scratch values, APSR, faults/concurrency and byte identity excluded.",
+    "Architectural precise-PC capture primitive and hardware timing assembly remain unchanged."
+  ],
+  "evidence_files": {
+    "build/sources-goal-r1-reset-decode-pure-c/report.json": "5afdcf9eb9b8f8d5d0afb6987ef96272b8f5da9928cd2110ba1391185ffbcb5c",
+    "build/sources-goal-r1-stacmd-void-reviewed-c/report.json": "3dfcfb8d359ce365eab9368cd6cf79b31c9d89b0013961c973c933210f91176d",
+    "r1/src/application/runtime/native_reset_decoder.c": "cbe348b3d02448d675482a56f579035267b57cc945aaa819195ad1923b288118",
+    "r1/src/application/runtime/native_reset_retained.c": "7ff1c3dbb15479c5cab1681cd9601788a0dddf457ba70e7ee730a52189227ae5",
+    "r1/src/application/runtime/native_device_reset_startup.c": "11f829aff84f95dd9f178740070d9acf668224b81f31794e36975bb0cb00f01a",
+    "r1/src/application/runtime/native_reset_writer.c": "c1a8e1fe24632919937aaf6fd7a101dba1b777e248cef53546014cb977543179",
+    "r1/src/sources.json": "f74aa01d5bac1e3a8786b1052791cbd6344c1fd57ce26a11f1d65de93506ad72",
+    "tools/build/source-plan.json": "eeb516e31b3310fb0718f36908977f8125723f7c5e0e86cd6744395826259a4d",
+    "build/goal-r1-reset-decode-pure-c/rea.json": "74a46d425946339c3f67c474951e0c741a150e52810caa826b30502e253a88cd",
+    "build/goal-r1-reset-decode-pure-c/verify.py": "b2fbca20a67eb09e9288abfad22d58893dc334103e9880e1157508019333a6e3",
+    "build/goal-r1-reset-decode-pure-c/results.json": "5de0efd71296c826d1a85c25ddb10b3b77bf609778247ad3ef91f37253da6c50",
+    "build/goal-r1-reset-decode-pure-c/verification.log": "fdceedcd9301756f75d47aa86a5d3378b038530aaeaca370e0f1193309c24b1d",
+    "build/goal-r1-reset-decode-pure-c/source.elf": "df5c7ee781b5f1e4f0545992d0cab44775973f8c272826bc7594fc50156f1d7d",
+    "build/goal-r1-reset-decode-pure-c/pipeline/verify.py": "a925430fe27c68d12fef26c18c60dc8474ec9f9d6ee8231001d24a4122530035",
+    "build/goal-r1-reset-decode-pure-c/pipeline/results.json": "d0f330a03f43a32b720be780054ab01080bcf683efaf0098876655d959595cab",
+    "build/goal-r1-reset-decode-pure-c/pipeline/verification.log": "f6de373b86b3b46e6634f3c53d511317ee8fbb47457ed2a318c711c207834c92",
+    "build/goal-r1-reset-decode-pure-c/pipeline/source.elf": "752d10983e9d6bf465c5c8b888537690f63071e46bd12d2327504cad755e1c1b",
+    "build/goal-r1-reset-decode-pure-c/negative.py": "9261b4eb58ca8d404a1f739ae9da97e8e34fea9dc74454475515d1e8eef433eb",
+    "build/goal-r1-reset-decode-pure-c/negative.json": "0b8a401d843cb8c0aa6f21c997f750c61dbe3fc722ea6372b791918ea03c0901",
+    "build/goal-r1-reset-decode-pure-c/build.log": "7f2caef6ba58f67e00a9dfeb56510955fb5a51864c78033166b1604342d3ad03",
+    "build/goal-r1-reset-decode-pure-c/sources-check.log": "f610d186f791ebf717d9fd6eed6c4f28612779fff34b885bcf8dc8a49c9ae80c",
+    "r1/src/application/checksums/stock_checksums.c": "63f78e208048b5bd4b91c00f97e1260a5a53f5bee50dc51aa5ce4aaa1cdfe898"
+  }
+}

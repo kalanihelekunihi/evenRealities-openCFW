@@ -10,13 +10,7 @@ static void wr(uintptr_t p,uint32_t v){*(volatile uint32_t *)p=v;}
 static void wb(uintptr_t p,uint8_t v){*(volatile uint8_t *)p=v;}
 static uint32_t multiply(uint32_t a,uint32_t b)
 {
-#ifdef __arc__
- uint32_t r;
- __asm__ volatile("mpywhl %0,%1,%2":"=r"(r):"r"(a),"r"(b):"r58","r59","memory");
- return r;
-#else
- return a*(uint32_t)(int32_t)(int16_t)b;
-#endif
+ return (uint32_t)a*(uint32_t)(int32_t)(int16_t)b;
 }
 /* Authenticated3043ac..30442e; next-count store is unconditional delay. */
 uint32_t opencfw_em9305_init_callback_3043ac(uint32_t incoming,

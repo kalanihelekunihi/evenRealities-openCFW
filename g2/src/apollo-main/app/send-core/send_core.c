@@ -125,3 +125,6 @@ uint32_t audio_uart_handshake_send(uint32_t app,const void *bytes,uint32_t lengt
                                     uint32_t id,uint32_t event) {
     return send_core((uint16_t)app,bytes,length,id,(uint16_t)event,1u);
 }
+/* Single implementation of stock SendDataToPeerExt 0x465480 (log lines 292/300/306/325/328 as stock). */
+__typeof__(audio_uart_handshake_send) audio_settings_send_peer_packet
+    __attribute__((alias("audio_uart_handshake_send")));

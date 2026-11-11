@@ -1,44 +1,22 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_32ca3c\n"
-".type opencfw_em9305_child_32ca3c,@function\n"
-"opencfw_em9305_child_32ca3c:\n"
-"L32ca3c:\n"
-"enter_s [r13-r14,blink]\n"
-"L32ca3e:\n"
-"mov_s r13,0x802810\n"
-"L32ca44:\n"
-"mov_s r14,r0\n"
-"L32ca46:\n"
-"ldh.as r1,[r0,131]\n"
-"L32ca4a:\n"
-"ldh_s r0,[r13,0x16]\n"
-"L32ca4c:\n"
-"sub_s r0,r0,r1\n"
-"L32ca4e:\n"
-"exth_s r0,r0\n"
-"L32ca50:\n"
-"brlo.nt r0,0x7fff,L32ca60\n"
-"L32ca58:\n"
-"mov_s r1,0x49\n"
-"L32ca5a:\n"
-"bl.d opencfw_em9305_receive_terminate_325c08\n"
-"L32ca5e:\n"
-"mov_s r0,r14\n"
-"L32ca60:\n"
-"ld r2,[r13,0xc]\n"
-"L32ca62:\n"
-"ld r1,[r13,0x10]\n"
-"L32ca64:\n"
-"ld r0,[r13,0x14]\n"
-"L32ca66:\n"
-"st.as r2,[r14,168]\n"
-"L32ca6a:\n"
-"st.as r1,[r14,169]\n"
-"L32ca6e:\n"
-"st.as r0,[r14,170]\n"
-"L32ca72:\n"
-"leave_s [r13-r14,blink,pcl]\n"
-".size opencfw_em9305_child_32ca3c,.-opencfw_em9305_child_32ca3c\n"
-);
+#include <stdint.h>
+
+/* Native 0x32ca3c..0x32ca74: terminate reception (reason 0x49) when the
+ * global event counter at 0x802826 is 0x7fff or more ahead of the
+ * record's counter (+262), then copy the three global words at
+ * 0x80281c..0x802824 into record words 168..170. */
+extern uint32_t opencfw_em9305_receive_terminate_325c08(uintptr_t source,
+                                                        uint32_t reason);
+
+void opencfw_em9305_child_32ca3c(uintptr_t record)
+{
+    uint32_t local=*(volatile uint16_t *)(record+262u);
+    uint32_t global=*(volatile uint16_t *)0x802826u;
+    if((uint16_t)(global-local)>=0x7fffu)
+        (void)opencfw_em9305_receive_terminate_325c08(record,0x49u);
+    uint32_t first=*(volatile uint32_t *)0x80281cu;
+    uint32_t second=*(volatile uint32_t *)0x802820u;
+    uint32_t third=*(volatile uint32_t *)0x802824u;
+    *(volatile uint32_t *)(record+672u)=first;
+    *(volatile uint32_t *)(record+676u)=second;
+    *(volatile uint32_t *)(record+680u)=third;
+}

@@ -3,6 +3,7 @@
 #include "bootstrap.h"
 #include "eeprom.h"
 #include "init.h"
+#include "cy_syslib.h"
 #define READY (*(volatile uint8_t *)0x200008c4u)
 #define CONTEXT ((uint8_t *)0x200008c8u)
 #define RECORD ((touch_saved_record *)0x200009d0u)
@@ -30,15 +31,10 @@ uint32_t touch_application_erase(void) {
 __attribute__((noinline,noipa)) uint32_t touch_bootstrap_log(uint32_t format,uint32_t a,uint32_t b,uint32_t c) {
  (void)format;(void)a;(void)b;(void)c;return 0;
 }
-/* Stock 0x00004480 (Cy_SysLib_DelayCycles) */
-__attribute__((noinline)) void touch_bootstrap_cycles(uint32_t cycles) {
- volatile uint32_t n=(cycles+2u)>>2;
- if(n){n++; do {n-=2u;if(n)n++;}while(n);}
-}
 /* Stock 0x0000A2F0 (Cy_SysLib_Delay) */
 void touch_bootstrap_delay(uint32_t argument) {
- while(argument>32768u){touch_bootstrap_cycles(*(volatile uint32_t *)0x2000086cu);argument-=32768u;}
- touch_bootstrap_cycles(*(volatile uint32_t *)0x20000874u * argument);
+ while(argument>32768u){Cy_SysLib_DelayCycles(*(volatile uint32_t *)0x2000086cu);argument-=32768u;}
+ Cy_SysLib_DelayCycles(*(volatile uint32_t *)0x20000874u * argument);
 }
 /* Stock 0x0000395C (touch_config_065c_bootstrap) */
 void touch_config_bootstrap(void) {

@@ -1,6 +1,6 @@
 #include <stdint.h>
+#include "native_battery_context.h"
 extern uint32_t r1_batcfg_byte0_get(void);
-extern volatile uint8_t r1_battery_device_context[];
 /* Native immutable records0x99d16..0x99ef5: product voltage calibration,
  * structured as lower/upper millivolts and interval weight, not code. */
 typedef struct { uint16_t lower,upper; uint8_t weight,reserved; } r1_discharge_interval;

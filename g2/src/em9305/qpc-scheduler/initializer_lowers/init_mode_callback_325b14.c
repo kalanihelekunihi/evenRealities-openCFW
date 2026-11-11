@@ -1,15 +1,11 @@
 #include <stdint.h>
 
-/* Full native 0x325b14..0x325b96. The DSP MPYWHL is retained as a named
- * ARC ISA operation because host integer multiplication does not state its
- * halfword/sign contract. Host fixture supplies only a test-only model. */
+/* Full native 0x325b14..0x325b96. Stock MPYWHL: low word of a 32 x 16
+ * product, the 16-bit operand sign-extended. */
 extern uint32_t opencfw_em9305_phy_packet_alloc_32d2f0(uint32_t);
 extern uint32_t opencfw_em9305_phy_packet_send_32d32c(uintptr_t,uintptr_t);
 extern uint32_t opencfw_em9305_receive_terminate_325c08(uintptr_t,uint32_t);
 extern uint32_t opencfw_em9305_pal_current_time(void);
-#ifndef __arc__
-extern uint32_t opencfw_em9305_test_mpywhl(uint32_t,uint32_t);
-#endif
 uint32_t opencfw_em9305_mode_callback_325b14(uintptr_t context,
                                                uintptr_t callback_identity)
 {
@@ -37,11 +33,7 @@ uint32_t opencfw_em9305_mode_callback_325b14(uintptr_t context,
     *(volatile uint8_t *)(context+565u)=(uint8_t)(enabled!=0u);
     uint32_t period=*(volatile uint8_t *)(root+5u);
     uint32_t product;
-#ifdef __arc__
-    __asm__ volatile("mpywhl %0,%1,%2":"=r"(product):"r"(0x30d40u),"r"(period));
-#else
-    product=opencfw_em9305_test_mpywhl(0x30d40u,period);
-#endif
+    product=(uint32_t)0x30d40u*(uint32_t)(int32_t)(int16_t)period;
     *(volatile uint32_t *)(context+236u)=product;
     uint32_t now=opencfw_em9305_pal_current_time();
     uint32_t state=*(volatile uint32_t *)(context+636u);

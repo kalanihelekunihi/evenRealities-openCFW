@@ -2,7 +2,7 @@
 #include <stdint.h>
 
 extern void *audio_uart_lv_heap_alloc(uint32_t bytes);
-extern void audio_uart_lvgl_log(uint32_t level, const char *source, uint32_t line,
+extern void lv_log_add(uint32_t level, const char *source, uint32_t line,
                                 const char *format, ...);
 
 void *audio_uart_lv_render_task_alloc_4843ee(void *layer, const void *area) {

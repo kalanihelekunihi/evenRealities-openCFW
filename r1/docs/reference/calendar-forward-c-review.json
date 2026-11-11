@@ -1,0 +1,73 @@
+{
+  "normal_cases": 24546,
+  "alias_cases": 1704,
+  "passed": 26250,
+  "executions": 52500,
+  "calendar_oracle": "Python datetime for nonoverlapping inputs",
+  "memory_trace_compared": true,
+  "report": "build/sources-goal-r1-calendar-forward-c/report.json",
+  "source_size": 386,
+  "source_sha256": {
+    "r1/src/application/board/native_calendar_forward.c": "0f3ccca387c0d23776f22164667eca328383f193eb45f7ed88c42713b18e1e88"
+  },
+  "stock_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "limitations": [
+    "Bounded sampled full-word epochs and explicit overlap cases; not exhaustive uint32 domain",
+    "Private frames and caller-clobbered registers/flags excluded",
+    "Invalid pointers, ROM mutation, concurrency and physical RTC operation unproven",
+    "No byte qualification"
+  ],
+  "negative_control": {
+    "mutation": "Reuse initial epoch for weekday instead of late reread",
+    "rejected": true,
+    "counterexample": {
+      "epoch": "0x12345678",
+      "input_alias": "output + 0",
+      "native_weekday": 4,
+      "snapshot_weekday": 3
+    },
+    "stderr": "Traceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-calendar-forward-c/reject-snapshot.py\", line 48, in <module>\n    for offset in [0]:assert a(epoch,null,offset)==b(epoch,null,offset),(epoch,null,offset);alias_cases+=1\n                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: (305419896, False, 0)\n"
+  },
+  "utc_integration": {
+    "passed": 1120,
+    "executions": 2240,
+    "actual_native_adapter_and_C_forward_converter": true,
+    "report": "build/sources-goal-r1-calendar-forward-c/report.json",
+    "limitations": [
+      "Private conversion stack frames and caller-clobbered registers/flags excluded",
+      "Bounded inputs and no concurrent/physical RTC execution"
+    ]
+  },
+  "evidence": {
+    "build/goal-r1-calendar-forward-c/stock.elf": "567a9ed48da87580341bd9decbdc186b5294b72213729be4075384d2bae9bd2a",
+    "build/goal-r1-calendar-forward-c/REA.snapshot.json": "163e914bf008f42154fb811008523f2dd128374ab669e063c5646f43b2d39371",
+    "build/goal-r1-calendar-forward-c/verify.py": "284fa559be710925c326c6fdb98f635a4938ccbb3226a8bc1cca7ff8a95d4570",
+    "build/goal-r1-calendar-forward-c/verify_utc.py": "17182d31f49f507ec839a4c4f4e80f63f68aaf8e03f6e3abba31a3cbd0e26f22",
+    "build/goal-r1-calendar-forward-c/bad-snapshot.c": "7c383089b9b3243fa0454cfdd9c15c34a9c0a7f1586dd5d189acac8184e5187a",
+    "build/goal-r1-calendar-forward-c/reject-snapshot.py": "7842b6aa36f280109f42470f0a0984c20ad9c3c0a2ae80208e69757f926dd950",
+    "build/goal-r1-calendar-forward-c/source.elf": "6060fde5b814f7b0f1abe943107e9da1bd6c4274af5b459953d487dad85671d9",
+    "build/goal-r1-calendar-forward-c/utc.elf": "ff51c751271e061318778d08362b3b3518d9701e4446021e35db5e460af8d176",
+    "r1/src/application/board/native_calendar_forward.c": "0f3ccca387c0d23776f22164667eca328383f193eb45f7ed88c42713b18e1e88",
+    "r1/src/application/runtime/native_calendar_frames.c": "5ce4e3ec2f8c13b4ae43f96e1fb304df80598c83168db4a583f56b48a335889d",
+    "r1/src/vendor/time_calendar/time_calendar.c": "ad65d5582ed8dc07b39b149a54d7c6994db533a823dde15e4df7a9f640d7203e",
+    "r1/src/vendor/time_calendar/time_calendar.h": "6682b586810e47e41053163bb03f0a5acd8005721ab7bcbb70442ce4da78c59f",
+    "r1/src/application/board/native_log_calendar.c": "7fdc8f041a9d940ca073ea76d331b3dccfb3ca55dfb014c869be3d301959ff80",
+    "r1/src/application/board/clock-calendar/selected-calendar.c": "74955bff74a708aee099da60308deaf1f9d480fa42988230201046ea5e7d48ad",
+    "build/sources-goal-r1-calendar-forward-c/report.json": "b7035d77de696f7e7b5361a64ea93cf32e2efa268d8e7325c63357dfc0d46347",
+    "r1/src/sources.json": "371728613db5f1a2baa12f29fd144d63de161bfadbc1a500e8416c580d2d7392",
+    "r1/symbols/function-frontier.csv": "9678dc6f2e3965efa8b4d9f3cbd4e3f13ddda050817fea5a062580b7bb71a9f2",
+    "tools/build/source-plan.json": "4d46e8c038db79a174a2d719086fd0be80503ca7cdbfc2c51e5ed3d30d293064",
+    "build/hybrid-goal-r1-calendar-forward-c/build-report.json": "f5206caa0bb1461dcfa93248cdac353267e6a4792e89871bfd85aad2dedbab38"
+  },
+  "source_plan_changed": false,
+  "hybrid_revalidation": {
+    "report": "build/hybrid-goal-r1-calendar-forward-c/build-report.json",
+    "sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "totals": {
+      "binary-pull-through": 642425,
+      "source-built": 3735,
+      "resource-file": 248
+    },
+    "source_completeness_proven": false
+  }
+}

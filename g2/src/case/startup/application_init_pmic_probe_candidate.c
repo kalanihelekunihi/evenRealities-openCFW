@@ -91,3 +91,5 @@ int32_t case_init_pmic_probe_once(void)
     }
     return 0;
 }
+/* Dedup (0x0800a124): case_binary_read_byte_lower (was legacy-default/binary_sensor_read_lower_candidate.c). */
+uint32_t case_binary_read_byte_lower(uint32_t selector, uint8_t *destination) __attribute__((alias("case_init_pmic_read_register")));

@@ -1,63 +1,37 @@
-/* Full native child; canonical existing children and explicit native no-op. */
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_dispatch_child_302f00\n"
-".type opencfw_em9305_dispatch_child_302f00,@function\n"
-"opencfw_em9305_dispatch_child_302f00:\n"
-"L302f00:\n"
-"enter_s [r13-r16,fp,blink]\n"
-"L302f02:\n"
-"sub_s sp,sp,0x14\n"
-"L302f04:\n"
-"mov_s r15,0x8015c4\n"
-"L302f0a:\n"
-"mov_s r13,r0\n"
-"L302f0c:\n"
-"st_s r0,[r15,0x1c]\n"
-"L302f0e:\n"
-"add_s r0,sp,0\n"
-"L302f10:\n"
-"mov r16,r4\n"
-"L302f14:\n"
-"mov_s r14,r1\n"
-"L302f16:\n"
-"st 0,[sp,16]\n"
-"L302f1a:\n"
-"st 0,[sp,12]\n"
-"L302f1e:\n"
-"st_s r3,[sp,0x8]\n"
-"L302f20:\n"
-"st_s r2,[sp,0x4]\n"
-"L302f22:\n"
-"stb 2,[sp]\n"
-"L302f26:\n"
-"bl.d opencfw_em9305_radio_record_30fc28\n"
-"L302f2a:\n"
-"sth_s r1,[r15,0x18]\n"
-"L302f2c:\n"
-"ldb_s r0,[r15,0]\n"
-"L302f2e:\n"
-"breq_s r0,0,L302f3e\n"
-"L302f30:\n"
-"brne.d.nt r16,0,L302f3e\n"
-"L302f34:\n"
-"mov_s r0,r13\n"
-"L302f36:\n"
-"bl.d opencfw_em9305_radio_followup_30fb3c\n"
-"L302f3a:\n"
-"mov_s r1,r14\n"
-"L302f3c:\n"
-"leave_s [r13-r16,fp,blink,pcl]\n"
-"L302f3e:\n"
-"bl opencfw_em9305_dispatch_noop_30fd30\n"
-"L302f42:\n"
-"mov_s r0,r13\n"
-"L302f44:\n"
-"bl.d opencfw_em9305_radio_request_30faec\n"
-"L302f48:\n"
-"mov_s r1,r14\n"
-"L302f4a:\n"
-"leave_s [r13-r16,fp,blink,pcl]\n"
-".size opencfw_em9305_dispatch_child_302f00,.-opencfw_em9305_dispatch_child_302f00\n"
-);
+#include <stdint.h>
+
+/* Native 0x302f00..0x302f4c: record a radio request in the state block at
+ * 0x8015c4 (+28 owner, +24 handle), submit the record {2, -, a, b, 0, 0}
+ * through 30fc28, then either run the follow-up (busy flag at +0 set and
+ * no override) or the no-op hook and a fresh request. */
+extern uint32_t opencfw_em9305_radio_record_30fc28(uintptr_t record);
+extern uint32_t opencfw_em9305_radio_followup_30fb3c(uint32_t owner, uint32_t handle);
+extern void opencfw_em9305_dispatch_noop_30fd30(void);
+extern uint32_t opencfw_em9305_radio_request_30faec(uintptr_t owner, uint32_t handle);
+
+struct opencfw_em9305_radio_record {
+    uint8_t kind;
+    uint32_t first;
+    uint32_t second;
+    uint32_t third;
+    uint32_t fourth;
+};
+
+uint32_t opencfw_em9305_dispatch_child_302f00(uintptr_t owner, uint32_t handle,
+                                              uint32_t first, uint32_t second,
+                                              uint32_t override)
+{
+    struct opencfw_em9305_radio_record record;
+    *(volatile uint32_t *)(uintptr_t)0x8015e0u=(uint32_t)owner;
+    record.fourth=0u;
+    record.third=0u;
+    record.second=second;
+    record.first=first;
+    record.kind=2u;
+    *(volatile uint16_t *)(uintptr_t)0x8015dcu=(uint16_t)handle;
+    (void)opencfw_em9305_radio_record_30fc28((uintptr_t)&record);
+    if(*(volatile uint8_t *)(uintptr_t)0x8015c4u!=0u&&override==0u)
+        return opencfw_em9305_radio_followup_30fb3c((uint32_t)owner,handle);
+    opencfw_em9305_dispatch_noop_30fd30();
+    return opencfw_em9305_radio_request_30faec(owner,handle);
+}

@@ -2,7 +2,7 @@
  * Product callback slots and controller root retain authenticated identities.
  */
 #include <stdint.h>
-extern void opencfw_em9305_idle(void);
+extern void QK_onIdle(void);
 void opencfw_em9305_resume_hook(void)
 {
     volatile uint32_t *const registers = (volatile uint32_t *)(uintptr_t)UINT32_C(0xf00a74);
@@ -17,16 +17,16 @@ void opencfw_em9305_resume_hook(void)
         if (handler != 0) ((void (*)(uint32_t))handler)(0);
     }
     uint32_t irq;
-    __asm__ volatile("clri %0\n\tsync" : "=r"(irq) :: "memory");
+    irq=(uint32_t)__builtin_arc_clri(); __builtin_arc_sync();
     volatile uint8_t *const nesting = (volatile uint8_t *)(uintptr_t)UINT32_C(0x801398);
     if (*nesting != 0) { const uint8_t old = *nesting; *nesting = (uint8_t)(old - 1u); }
     registers[3] = 1;
-    __asm__ volatile("seti %0" :: "r"(irq) : "memory");
+    __builtin_arc_seti((int)irq);
 }
 _Noreturn void opencfw_em9305_framework_resume(void)
 {
-    __asm__ volatile("clri 0\n\tsync" ::: "memory");
+    (void)__builtin_arc_clri(); __builtin_arc_sync();
     opencfw_em9305_resume_hook();
-    __asm__ volatile("seti 0" ::: "memory");
-    for (;;) opencfw_em9305_idle();
+    __builtin_arc_seti(0);
+    for (;;) QK_onIdle();
 }

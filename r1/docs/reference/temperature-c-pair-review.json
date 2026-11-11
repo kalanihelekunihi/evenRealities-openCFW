@@ -1,0 +1,71 @@
+{
+  "cases": 3904,
+  "passed": 3904,
+  "pair_cases": 2880,
+  "wrapper_cases": 1024,
+  "failures": [],
+  "converted_functions": {
+    "r1_temperature_pair_read_calibrated": {
+      "native_address": "0x50e4c",
+      "source_size": 134
+    },
+    "r1_gxt310_temperature_channel0": {
+      "native_address": "0x6f80c",
+      "source_size": 6
+    },
+    "r1_gxt310_temperature_channel2": {
+      "native_address": "0x6f826",
+      "source_size": 6
+    },
+    "r1_gxt310_one_shot_channel0": {
+      "native_address": "0x6f818",
+      "source_size": 6
+    },
+    "r1_gxt310_one_shot_channel2": {
+      "native_address": "0x6f832",
+      "source_size": 6
+    }
+  },
+  "other_function_and_data_sections_unchanged": [
+    ".r1.temp.calibration",
+    ".r1.temp.s6f798",
+    ".r1.temp.s6f7d4",
+    ".text.r1_gxt310_one_shot",
+    ".text.r1_gxt310_temperature_read",
+    ".text.r1_temperature_calibration_read"
+  ],
+  "other_source_units_unchanged": 561,
+  "application_imports": 214,
+  "bootloader_imports": 34,
+  "imports_unchanged": true,
+  "report": "build/sources-goal-r1-temp-pair-verified/report.json",
+  "report_sha256": "a92260e0a2066ce3d453f319e101a239d0777a89bf7040de4d1d862015ffe5b6",
+  "manifest_sha256": "853798d70673de8cb97ab199ed0346162136e023b446e79a90de6af63a1b5be8",
+  "rea": {
+    "path": "build/goal-r1-temp-pair/REA.json",
+    "sha256": "e6680b6c9e1294756fb06943a83b2f20a3a03d845da11d413ee2a4fb8ce6123b",
+    "procedure": "0x50e4c"
+  },
+  "source_sha256": {
+    "r1/src/application/runtime/native_temperature.c": "18ab83a20b4ff6e73c6bbfb4aec284d68cd7a19017140028371343eed47ba272"
+  },
+  "probe_artifacts": {
+    "build/goal-r1-temp-pair/before.c": "927c0311486691073edd842e33a79753addf881f981a97cc601731e88b3915c7",
+    "build/goal-r1-temp-pair/manifest-before.json": "853798d70673de8cb97ab199ed0346162136e023b446e79a90de6af63a1b5be8",
+    "build/goal-r1-temp-pair/stock.s": "8ce05b41d3614e335c4afc85d16ed44d021ec6be45ac8e33cbe2808647456a17",
+    "build/goal-r1-temp-pair/stock.elf": "cddf0d0f0fe9a5c32b584582281f248ee54c98f28467e72242856d627f8afaf4",
+    "build/goal-r1-temp-pair/REA.json": "e6680b6c9e1294756fb06943a83b2f20a3a03d845da11d413ee2a4fb8ce6123b",
+    "build/goal-r1-temp-pair/rea-snapshot.json": "dc934e6563d606d691c375c882a74ad23f5c6e1bf739b65537874786b4d48c73",
+    "build/goal-r1-temp-pair/verify.py": "46f3c2d2f0defc0ce623ebe04ab761c183ef270229f0ac9160258ee57673bb2f",
+    "build/goal-r1-temp-pair/results.json": "21f967c79f193722409eb3ea82233a7c2fe16f8edeb6d46b162afcf48e4bc79f",
+    "build/goal-r1-temp-pair/source.elf": "a26a70e794c917c18906c1005b59411151abbe92baefe7831c91e45a2d0f324e"
+  },
+  "stock_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "limits": [
+    "Five functions now use C without frame bridges. Existing GXT310 transport, mode, trigger, floating-point conversion and cached calibration-frame implementations remain separate providers.",
+    "Probe executes the pair routine and channel wrappers; bus/mode/trigger/sample/delay/calibration-read callbacks are modeled and clobber caller-saved registers. No physical sensor transfer or conversion proof.",
+    "Calibration load addresses, widths, values and order match stock, including changes during reads; no general concurrency, MMIO timing, complete private-stack or fault identity claim.",
+    "C pair body is 134 bytes versus native 124 bytes. The four C wrappers are six bytes each; no source provider qualification, final placement/link, boot integration or whole-image byte identity claim.",
+    "Other 561 source units, manifest eligibility, application and bootloader import sets are unchanged. G2 pseudocode/freeze gates and source-plan selections are unchanged."
+  ]
+}

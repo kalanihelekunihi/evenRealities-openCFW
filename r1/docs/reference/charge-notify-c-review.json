@@ -1,0 +1,124 @@
+{
+  "schema_version": 1,
+  "report": "build/sources-goal-r1-charge-notify-c/report.json",
+  "report_sha256": "a5848ac2174d4c26adb8a5360b4d10d6732123bf17b76e9fe780bcab71b3cad0",
+  "manifest_sha256": "95440e3d32f0076e18f4163f1f0e144fdb2e773bc96fab0b82d5e95e598a6518",
+  "verification": {
+    "three_way_cases": {
+      "False": 570,
+      "True": 1960
+    },
+    "executions": 7590,
+    "stock_previous_new_match": true,
+    "independent_packet_and_header_oracles": true,
+    "actual_event_adapter_common_header_charger_predicates_state_decoder_and_saved_word_status_execute": true,
+    "all_incoming_status_low_bytes_nonwriting_reads_and_live_two_query_states_checked": true,
+    "register_ready_read_charge_byte_handle_gate_and_final_response_providers_modeled": true,
+    "private_frames_and_void_register_outputs_excluded": true,
+    "physical_charge_GPIO_and_BLE_delivery_unverified": true
+  },
+  "defects": {
+    "wrong-priority": {
+      "compiled": true,
+      "behavior_rejected": true
+    },
+    "reordered-queries": {
+      "compiled": true,
+      "behavior_rejected": true
+    },
+    "corrupt-tail": {
+      "compiled": true,
+      "behavior_rejected": true
+    },
+    "wrong-operation": {
+      "compiled": true,
+      "behavior_rejected": true
+    },
+    "wrong-length": {
+      "compiled": true,
+      "behavior_rejected": true
+    }
+  },
+  "audit": {
+    "unchanged_prior_object_hashes": 798,
+    "changed_object_hashes": [
+      [
+        "r1-application",
+        "r1/src/application/runtime/native_charge_notification.c"
+      ],
+      [
+        "r1-bootloader",
+        "{gen}/r1_startup_vectors.S"
+      ],
+      [
+        "r1-bootloader",
+        "{gen}/r1_uecc.c"
+      ]
+    ],
+    "generated_boot_crypto_and_vectors_allocated_bytes_and_relocations_unchanged": true,
+    "removed_application_imports": [],
+    "notification_template_bytes_unchanged": true
+  },
+  "rea_bytes": [
+    {
+      "name": "notification",
+      "evidence_id": "ev_bccf28832e2aec6a20f677c176aa828310d2e21b045a438be5a8b200f8c21dc3",
+      "address": "0x838e0",
+      "length": 80,
+      "matches_locked_raw": true,
+      "sha256": "682314af3f26e42ed3430229e2c6c571d207cd4a86f3ef0f901863b3c720832f"
+    },
+    {
+      "name": "template",
+      "evidence_id": "ev_d4fa235d30ffc5bbefdf2f3adbafbd418878034183f51ffae9111a9fd74dbaa4",
+      "address": "0x9a44c",
+      "length": 8,
+      "matches_locked_raw": true,
+      "sha256": "dbbe5d6e52fac8a7699e9331ff4962379c095603956f40334cf15c86fe8e0b10"
+    },
+    {
+      "name": "gate",
+      "evidence_id": "ev_72e468b592d8fb2dd234b0dcee2777152943f0f2acb02435a98e45d332e4ece8",
+      "address": "0x4287c",
+      "length": 26,
+      "matches_locked_raw": true,
+      "sha256": "acde1cb880c28a2b34f9a3595249de3acf470c0e54fce7c2d627ec4dbf67d744"
+    },
+    {
+      "name": "status",
+      "evidence_id": "ev_c73466076d801acfe11cff668ee910c70d98359b97859e397c68a411bae42aec",
+      "address": "0x3529a",
+      "length": 34,
+      "matches_locked_raw": true,
+      "sha256": "7b3e0f9397cfd5b29cbbe5bc72a057a2a220efe39afff7415d414e78d0672ece"
+    }
+  ],
+  "raw_application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "strict_bootloader_link_report_sha256": "8a99f1ddb47a3b11ac58ac39e1a0d12c7dde78c2ba92f8226eefe6b2af9b37bc",
+  "evidence_files": {
+    "build/goal-r1-charge-notify-c/verify.py": "b654f838004e2e03c6c0880eae8c26ab0ac291d87d4366e170e63d1337190fbf",
+    "build/goal-r1-charge-notify-c/defects.py": "b81195384e80a26209866fa3f717c26079a5c5c69bf7cd4fe5c82659076e00c0",
+    "build/goal-r1-charge-notify-c/audit.py": "e64f56f76fb45005d2c4e0ec7eb2a5a99ab6ec656dfe8d185ac0d17c8a3e207f",
+    "build/goal-r1-charge-notify-c/verification.json": "75bd2696d887bc98f7e6c22ce7ec5d03014a40e7b14ee336560e733afe01ff79",
+    "build/goal-r1-charge-notify-c/verify-final.log": "32882e0537a170b07d584c5a5f3db276e72d5ebaf0200292d9459b15f92752b7",
+    "build/goal-r1-charge-notify-c/defects.json": "9c32ed33499e7c3f868964f007cf8156fa5fb5f3f3e4918b0c048f01da11d129",
+    "build/goal-r1-charge-notify-c/defects.log": "23b42ea6bf4e238b69e58feda6ccdf6079add9f7f9cb90a930f04a8076ee5d2b",
+    "build/goal-r1-charge-notify-c/unit.dis": "2cd455507787331dfef56d4f7c1576cd856dae61d367bb7099313bd3c94f9dd2",
+    "build/goal-r1-charge-notify-c/sources-check.log": "f631cce80ab62163bd75c18877fd360880eecbdf2d26ea1436a7dbedd3bf9234",
+    "build/goal-r1-charge-notify-c/hardware0-1.elf": "273f7b5ed6da3867d226f23d192db79e897325ffeda8c8d1b3136fe44041afc1",
+    "build/goal-r1-charge-notify-c/hardware0-2.elf": "e82cf1212d09ea7981e999bd61950e655532cd44f39ba2bff025785471a6952a",
+    "build/goal-r1-charge-notify-c/hardware1-1.elf": "31e8626c34cd2a2194b66f91cfc4ca3ce87f6b3432a28302d666c99f83d0a259",
+    "build/goal-r1-charge-notify-c/hardware1-2.elf": "b66e20661b13c811936189ab6465f7947adea2f9ec0fbc813f97b7820afa0db4",
+    "build/goal-r1-charge-notify-c/rea-notification.json": "6fbaa345106ee00d169d0b6a1f355b00b0fa30c3bd8b7e535bbffd177f18978a",
+    "build/goal-r1-charge-notify-c/rea-template.json": "d845e88ee3610c3fceec41769df9ab0b85088d5e757332b049e559cbdbd22aa9",
+    "build/goal-r1-charge-notify-c/rea-gate.json": "9486454c4be5cbf25190459e8ce973da2eb0eb9989b4e3dd475c001e771d7e17",
+    "build/goal-r1-charge-notify-c/rea-status.json": "65838234d8161ce4005288fdc392bfd6ac7b6c6216dd32c31d1835ef7d1cddc9"
+  },
+  "source_plan_modified": false,
+  "limitations": [
+    "Actual event adapter, header and PMIC state/status code execute with explicit service models.",
+    "Private frames/live temporaries and incidental void outputs excluded; saved-word fallback checked for the current compiled profile.",
+    "Physical charger/GPIO timing, async effects, BLE transport and full application final link unverified.",
+    "Unrelated G2 manifest failure remains."
+  ]
+}

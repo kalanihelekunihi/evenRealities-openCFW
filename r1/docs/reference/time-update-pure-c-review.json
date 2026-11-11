@@ -1,0 +1,212 @@
+{
+  "schema_version": 1,
+  "scope": "Clock update and pending setter without inline assembly or register constraints",
+  "acceptance_target": "Hardware-first license-free C firmware; byte identity waived",
+  "report": "build/sources-goal-r1-time-update-pure-c/report.json",
+  "comparison_report": "build/sources-goal-r1-goodix-nadt-initialize-c/report.json",
+  "stock_entries": [
+    {
+      "symbol": "r1_event_service_0008aea4",
+      "entry": "0x8aea4",
+      "instruction_bytes": 8
+    },
+    {
+      "symbol": "r1_event_service_0008aeb0",
+      "entry": "0x8aeb0",
+      "instruction_bytes": 136
+    }
+  ],
+  "audit": {
+    "compiled_units": 893,
+    "application_imports": 74,
+    "bootloader_imports": 22,
+    "unchanged_prior_nongenerated_sources_and_objects": 882,
+    "manifest_and_strong_symbol_sets_unchanged": true,
+    "normal_object_equals_tested_Clang_object": true,
+    "source_plan_and_cache_layout_unchanged": true,
+    "persistent_state_added": 0,
+    "inline_assembly_and_register_constraints_remaining": 0,
+    "paired_cases": 41184,
+    "native_instruction_bytes_executed": 144,
+    "compiled_defects_rejected": 7
+  },
+  "Clang": {
+    "native_instruction_bytes_executed": 136,
+    "source_object_sha256": "71d803b766a7d508cd0853cb268671b5e86c81cfa57c47f40fb9ed3718c80aae",
+    "paired_cases": 16496,
+    "executions": 32992,
+    "base_cases": 9216,
+    "additional_boundary_and_mutation_cases": 7280,
+    "matched_faults": 32,
+    "checks": [
+      "actual stock parent versus C parent with actual C snapshot helper",
+      "backend get/update arguments, callback order, cache clears and raw pending flags",
+      "shared registration and clock state, status, final saved registers, SP and masks",
+      "AAPCS callee-saved registers and aligned stack, without fixing private frames or caller scratch",
+      "get callback replaces/nulls exposed ops or context, mutates pending/cache; update mutates sync state",
+      "native null-ops fault address/width after get callback mutation"
+    ],
+    "limits": [
+      "Backend callbacks modeled; actual native/C memclr execute; caller-clobbered registers/flags and private saved-register aliases excluded",
+      "Only exposed context/ops slots are callback-mutated; no arbitrary private stack alias, concurrency or physical hardware proof"
+    ]
+  },
+  "GCC": {
+    "native_instruction_bytes_executed": 136,
+    "source_object_sha256": "86e950d8081eb4052a9655e65f73ce568b05bdb23c7b4a6e83c877704929ff03",
+    "paired_cases": 16496,
+    "executions": 32992,
+    "base_cases": 9216,
+    "additional_boundary_and_mutation_cases": 7280,
+    "matched_faults": 32,
+    "checks": [
+      "actual stock parent versus C parent with actual C snapshot helper",
+      "backend get/update arguments, callback order, cache clears and raw pending flags",
+      "shared registration and clock state, status, final saved registers, SP and masks",
+      "AAPCS callee-saved registers and aligned stack, without fixing private frames or caller scratch",
+      "get callback replaces/nulls exposed ops or context, mutates pending/cache; update mutates sync state",
+      "native null-ops fault address/width after get callback mutation"
+    ],
+    "limits": [
+      "Backend callbacks modeled; actual native/C memclr execute; caller-clobbered registers/flags and private saved-register aliases excluded",
+      "Only exposed context/ops slots are callback-mutated; no arbitrary private stack alias, concurrency or physical hardware proof"
+    ]
+  },
+  "setter": [
+    {
+      "compiler": "source",
+      "paired_cases": 4096,
+      "object_sha256": "71d803b766a7d508cd0853cb268671b5e86c81cfa57c47f40fb9ed3718c80aae",
+      "independent_byte_store_oracle": true
+    },
+    {
+      "compiler": "gcc",
+      "paired_cases": 4096,
+      "object_sha256": "86e950d8081eb4052a9655e65f73ce568b05bdb23c7b4a6e83c877704929ff03",
+      "independent_byte_store_oracle": true
+    }
+  ],
+  "compiled_defects_rejected": [
+    {
+      "name": "boolean-pending",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "truncated-offset",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "stale-backend",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "short-clear",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "reload-pending",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "lost-old-time",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "wrong-setter",
+      "compiled": true,
+      "rejected": true
+    }
+  ],
+  "contract": [
+    "Setter stores byte1 at canonical time state+11 and returns1. No new state owner or ABI argument is introduced.",
+    "Adapter checks initialized state and actual backend snapshot, requires a nonnull initial update slot, and compares full incoming signed32 offset against sign-extended stored16. A changed offset stores low16 and clears20 calendar bytes before callbacks.",
+    "Raw pending byte XOR1 is cached in a volatile local before get; it is not Boolean-normalized or recomputed after callbacks. Initial backend supplies get. Exposed ops/context outputs remain live: update is reloaded through the potentially replaced slot after get. A null replacement retains the native fault.",
+    "A successful update clears the20-byte cache again and conditionally publishes the saved timestamp and pending byte from the cached decision. Error/success is tested as full32 bits.",
+    "Both compiled parents use actual source snapshot/EABI/musl-clear providers; stock uses actual native helpers. Only backend callbacks are modeled with real BX LR return stubs. Source cannot execute stock instructions. AAPCS saved registers, aligned/restored stack and interrupt masks are checked.",
+    "The41184 comparisons cover all256 pending-byte values, signed16/32 boundaries, live backend/context replacement, cache/sync changes, saved timestamps,64 matched null-backend faults across compilers, and independent setter-store oracles."
+  ],
+  "limits": [
+    "Private stack frame geometry, incidental caller-clobbered registers/flags and exact instruction identity are no longer requirements. Backend callback effects are modeled; physical RTC interrupts, concurrency and hardware delivery remain unverified.",
+    "Stock snapshots expose only context/ops output slots. Fixtures mutate those actual tracked pointers, not a hard-coded compiler frame offset. Arbitrary private-stack aliases are outside the contract.",
+    "This remains an893-unit relocatable composition with74 application and22 boot imports, not a final executable or boot proof. No source-plan selection, firmware flash or paid compiler is required or claimed.",
+    "The separate DFU frame wrappers were inspected but not changed: unwritten stack history remains observed behavior on some paths."
+  ],
+  "evidence_files": {
+    "build/sources-goal-r1-time-update-pure-c/report.json": "d70efe56568d434165997fd0f8de4e4a47095e6bde0b1541ee2df2792ff86f35",
+    "build/sources-goal-r1-goodix-nadt-initialize-c/report.json": "33618ef2f3805215e8b8bae68996b7cd37da12f3827c581760a6239bb82cd996",
+    "r1/src/application/runtime/native_time_update.c": "cd9e9de3eb928a20c6a04d045ad4bc96012c356d99f51ab1b695fe16d8271385",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-time-update-pure-c/r1/r1-application/r1__src__application__runtime__native_time_update.c.o": "71d803b766a7d508cd0853cb268671b5e86c81cfa57c47f40fb9ed3718c80aae",
+    "r1/src/sources.json": "e807f5d1469b9c135db8eae3ab908228922fdc8c37c6a7f4be247dffc0eb622c",
+    "tools/build/source-plan.json": "eeb516e31b3310fb0718f36908977f8125723f7c5e0e86cd6744395826259a4d",
+    "r1/src/config/runtime/native_health_cache.ld": "eb8f131c489cd818d4e36718718fa1989719ca0170f164541a1a5bf56dfc1ec3",
+    "r1/docs/reference/FUNCTION-OWNERSHIP.csv": "c7c220d5ad7b3fe3aa3c4e1340bae86329e78f7cf84fb106994a19ae9d7feae5",
+    "r1/symbols/function-frontier.csv": "ff18909a366b439749814810e0484c7c999a4049a915f3438efd2e813a4950a7",
+    "r1/docs/reference/time-update-c-review.md": "fdf5042f434ddf4fba7537b8ecf8d83588fed52c70dfb1ab22d7d276e9fb5d72",
+    "r1/docs/reference/time-pending-c-review.md": "2cae85bd2858d84cd62b03b8c4acaad6f084fa229da148d658154573b14bb6ca",
+    "r1/src/application/board/native_clock_binding.c": "1bfa7c44ac40681d5f4071f346958b22f00e1d9b7b74f79a502854c49b7fa234",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-time-update-pure-c/r1/r1-application/r1__src__application__board__native_clock_binding.c.o": "57ccd8529db850f30a0a9890246be53250923552aab38e0d9bd32882fa6ea701",
+    "r1/src/application/runtime/memory_eabi.c": "e89f73174230a5111606f175a2429695c62f178ace0b44478ab93497a9ebacff",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-time-update-pure-c/r1/r1-application/r1__src__application__runtime__memory_eabi.c.o": "e26f26d06a6113b53a70667703a46d09ccdd26875e58d267c6242504f683ecc6",
+    "third-party/upstream/musl-memory-1.2.5/memset.c": "2a74d9e7f988945e0d691d480b78d77a228da0d2be401c1000637cc879b2c0be",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-time-update-pure-c/r1/r1-application/third-party__upstream__musl-memory-1.2.5__memset.c.o": "6c2f1a8f480c27d5bc20f79ac535dac28fbbdcaec12e69bad96721f724ec9057",
+    "build/goal-r1-time-update-pure-c/negative-short-clear.c": "b7c30fb24460f4ace26686aca7b17e2b8554cb4c1448e3244b409d9e92d9f4c4",
+    "build/goal-r1-time-update-pure-c/negative-short-clear.d": "d674bf05eaebe98e8cbf12c0a35eb78900876dabee47470538409ef8389a1448",
+    "build/goal-r1-time-update-pure-c/negative-boolean-pending.c": "e7d8e544baec1d8602dbb27138d03918113d001f8f0e27563c6e56f69d31d673",
+    "build/goal-r1-time-update-pure-c/negative-truncated-offset.o": "9e316e8de05af413e362e8e3ce586299dbc70e5cec7fad9c0525870845babb14",
+    "build/goal-r1-time-update-pure-c/negative-boolean-pending.d": "3d199861f397a67be46a6e48bab283eec1d1e68e3dac86eb6fe6392a7c978a44",
+    "build/goal-r1-time-update-pure-c/audit.json": "299c5f428000b756403a90b4d5928f0a5cac9d5585168ffcef83cfc32b9b75e5",
+    "build/goal-r1-time-update-pure-c/setter-results.json": "bd5fe4c1a28b84fd8ca772a0041bc54c70bf34c337c5feed6417855ca7c0f577",
+    "build/goal-r1-time-update-pure-c/gcc-results.json": "039a79c942bdc7d6dcc30ea2333075e1393084b14f45407294e404e7f9cbc174",
+    "build/goal-r1-time-update-pure-c/audit.py": "f6e848c94f27b672a6740d907c087dcedf114e3e63b56bcc0f35da3babcbcfb1",
+    "build/goal-r1-time-update-pure-c/gcc-argv.json": "afccf20945f6fb6fcd31f6b888ec71c958fdd63163592b6156887207eaf7cbde",
+    "build/goal-r1-time-update-pure-c/negative-reload-pending.log": "a7b8cf4b0f2ee766f0ef2f0a513b32ca497b19b71f8c04aafd8611a9e5b86456",
+    "build/goal-r1-time-update-pure-c/integration.elf": "2fdc12ad21a3b1d791933d8d8cccfd78dd69cf81bbfce96f0b908f884f97072d",
+    "build/goal-r1-time-update-pure-c/negative-short-clear.log": "df6ae49e5add11c6bdcd0547fe4bdbf7bd7650ea4d6bbffdbe9e09a28cd250ec",
+    "build/goal-r1-time-update-pure-c/gcc.d": "c74ac32505b9dd4696413713d5817289e09084cd78bf33177bcb93a344b20da5",
+    "build/goal-r1-time-update-pure-c/negative.py": "4f35c43fb93df81f937b22590531a6a1efcc46ffac22951cf830abc07edffef9",
+    "build/goal-r1-time-update-pure-c/negative-lost-old-time.log": "cb89e18dcf78505676515857616615287f9fd824a7ef7141606fd8c64543e6fc",
+    "build/goal-r1-time-update-pure-c/negative-results.json": "09b498724a08ed72e22c236f32b33bcd52b09e5630c84110a2ab9796361475d1",
+    "build/goal-r1-time-update-pure-c/negative-wrong-setter.c": "6cbed0fa2e184139b2e53652f29335afacf269e1877b5b241d2e24790e89020d",
+    "build/goal-r1-time-update-pure-c/source.o": "71d803b766a7d508cd0853cb268671b5e86c81cfa57c47f40fb9ed3718c80aae",
+    "build/goal-r1-time-update-pure-c/results.json": "274eeaec62574745acea3fb87dd851579bed7ba87fe04f97c914d1db748d95d8",
+    "build/goal-r1-time-update-pure-c/negative-wrong-setter.d": "4254dfaf0b26a042fc39e7816d8bbe78c1acfd3ffe637e64741228982f612323",
+    "build/goal-r1-time-update-pure-c/negative-stale-backend.o": "fa4266a6d82080e979d40e174a1b7bc9636f81ba7b8b5b9a9d15d4bf00915dfc",
+    "build/goal-r1-time-update-pure-c/negative-reload-pending.c": "7b1e2dd9885d5522b986cae21a8909c82bad14080b3615275a422e9f6035fa8c",
+    "build/goal-r1-time-update-pure-c/gcc-integration.elf": "cf40680a859b8a25ad49b7777c0ae71d5bb2ae01c6fc7cb149811161fcb9d1c8",
+    "build/goal-r1-time-update-pure-c/negative-reload-pending.d": "78603aff634511557fd4d40e385e21046f0f6c7cc79a5c5abfd9db3bc50078e8",
+    "build/goal-r1-time-update-pure-c/negative-lost-old-time.o": "1109aca2ebf0479468b26f21dcd75242d0b5ce91bd03f8570b75a7806380f3df",
+    "build/goal-r1-time-update-pure-c/gcc-compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/goal-r1-time-update-pure-c/gcc-setter.elf": "2236c2358dff240c4a503fbee5703535272c029820b315ee5feb8c4bc211292c",
+    "build/goal-r1-time-update-pure-c/negative-truncated-offset.c": "e8ceaf2fe4d4725d0f42a0a618d6d80aed8d792ead0e059cf9766bf680c2d62f",
+    "build/goal-r1-time-update-pure-c/negative-boolean-pending.o": "8aba02a82c8597a8d660e4906b9068d75eee19b98c2b1f1c002427cacef2f365",
+    "build/goal-r1-time-update-pure-c/negative-truncated-offset.d": "924c729b13a12c91151592946d3bcbba9d9d8615dd083049340b41b1e5687398",
+    "build/goal-r1-time-update-pure-c/rea.json": "1cd283370879758916d862c9ed58a46a30784bbf305a6c8e084dc2e4a71fcecb",
+    "build/goal-r1-time-update-pure-c/negative-short-clear.o": "1f02629f2ed00c7033e4943480a3dc6fb865282d1058acead58d47bfcbd6cc58",
+    "build/goal-r1-time-update-pure-c/record.py": "d3cefa1287bfc962b5fe944f626d4acd0b611501c40cb8e008357569716cdd31",
+    "build/goal-r1-time-update-pure-c/negative-boolean-pending.log": "fffecec86ea1e335c6f7153b11d6bfba6e9b645c3d2d30773711e4eec3066df4",
+    "build/goal-r1-time-update-pure-c/adapt.py": "950f824f5a5f5909233ad60ed62d97ab109820a787c08da6ad57d810b66bfb16",
+    "build/goal-r1-time-update-pure-c/compile-argv.json": "e28fb116eec62d47a9117c8acef93a60b84a8e3958cc905eeb3e44f7599b2c65",
+    "build/goal-r1-time-update-pure-c/negative-wrong-setter.o": "fc0bdc6e5a61634aaa2c76bc529d2b19c49c1744d627d285e486a9afe6101479",
+    "build/goal-r1-time-update-pure-c/source.d": "c130594cbf403a8889f32018326db59060608ed547e618bccd03f7178e9f75db",
+    "build/goal-r1-time-update-pure-c/before.c": "4cf861baf635f1ab70cd7f1880207b039cc9ffee9c274b234dc018c2aceafaca",
+    "build/goal-r1-time-update-pure-c/negative-wrong-setter.log": "ec3568dd5f75a1a10b752b0ba597aac7b8f3b152bbd6d633b7a5550a4277ffb3",
+    "build/goal-r1-time-update-pure-c/verify.py": "577fffbc98d4d1ba26555bea7e6c45a80647e937b52161f0249f838ea4aa0fd0",
+    "build/goal-r1-time-update-pure-c/source-setter.elf": "dae64aac34822e5859e1256fa00958b00f8aeb8ce1c892c21f7bd13ae6b4d960",
+    "build/goal-r1-time-update-pure-c/gcc.o": "86e950d8081eb4052a9655e65f73ce568b05bdb23c7b4a6e83c877704929ff03",
+    "build/goal-r1-time-update-pure-c/negative-stale-backend.log": "aacaa3483eb3c0c4be2d8fd499fd56e6155f5edb5891b711bf7e724680a97124",
+    "build/goal-r1-time-update-pure-c/negative-lost-old-time.c": "11054c3a17520ed36a336e960fe5b786de1fab4c5c7365eb47dacafaf58d1237",
+    "build/goal-r1-time-update-pure-c/negative-lost-old-time.d": "acf03bfda4ed13474449ee003f0a375cd841b4e668cafe0ad33518ae813d052f",
+    "build/goal-r1-time-update-pure-c/setter.py": "bf0206484523874ad85094a0470e80b3c801dd4e28fa71d2834197e84af099df",
+    "build/goal-r1-time-update-pure-c/negative-truncated-offset.log": "073b5c0cf5851537ba034090aab27f82c5fbf5e0f306681c8ce873ea0829cb0f",
+    "build/goal-r1-time-update-pure-c/negative-reload-pending.o": "15cad66aea377a2f6d689fd0fc5483b451c7697b958a43246604e1d26e954a3b",
+    "build/goal-r1-time-update-pure-c/negative-stale-backend.c": "76464c723c6bb9b34b68955b0eef38fb1d3fcc839599165589435358509a8923",
+    "build/goal-r1-time-update-pure-c/build.log": "126c0bd5ba8c0b54a1766828c4acfdf1582a4396335e2bc1022da402968cd14f",
+    "build/goal-r1-time-update-pure-c/negative-stale-backend.d": "013df6c96e5a642545f06218f85ae7bc27a250f78998156faf4ffac6258f42b9"
+  }
+}

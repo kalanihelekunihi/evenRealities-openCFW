@@ -3,7 +3,7 @@
 #include <stdint.h>
 
 extern const unsigned char audio_uart_display_page_style[];
-extern void audio_uart_lvgl_log(uint32_t level, const char *source, uint32_t line,
+extern void lv_log_add(uint32_t level, const char *source, uint32_t line,
                                 const char *function, ...);
 
 /* Authenticated Main ROM 0x716330..0x716368, nineteen RGB triples. */

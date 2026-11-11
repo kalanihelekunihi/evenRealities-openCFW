@@ -1,0 +1,152 @@
+{
+  "cases": 2960,
+  "passed": 2960,
+  "source_sha256": "07e265b5de0956aee199b199adb93233d8516248225343ad37181427881f95a1",
+  "report": "build/sources-goal-r1-named-gpio-open/report.json",
+  "old_regression": {
+    "native_return_registers": [
+      1,
+      2,
+      2882400001
+    ],
+    "old_return_registers": [
+      2881486849,
+      2881486850,
+      2881486851
+    ]
+  },
+  "old_frame_regression": {
+    "native_return_registers": [
+      1,
+      2,
+      2882400001
+    ],
+    "old_return_registers": [
+      2881486849,
+      2881486850,
+      2881486851
+    ]
+  },
+  "other_units_unchanged": 561,
+  "application_imports": 211,
+  "bootloader_imports": 34,
+  "limitations": [
+    "strcmp and GPIOTE SDK calls modeled; Nordic port decoder and GPIO register accesses execute",
+    "GPIO registers ordinary emulator memory, not physical peripherals",
+    "Mutation is a controlled counterexample, not a claim of production race frequency",
+    "Not byte-qualified or final firmware proof"
+  ],
+  "regression_tests": {
+    "cases": 375,
+    "passed": 375,
+    "source_sha256": "07e265b5de0956aee199b199adb93233d8516248225343ad37181427881f95a1",
+    "report": "build/sources-goal-r1-named-gpio-open/report.json",
+    "old_regression": {
+      "native_comparisons": [
+        [
+          "strcmp",
+          536973312,
+          536973312
+        ]
+      ],
+      "old_comparisons": [
+        [
+          "strcmp",
+          536973312,
+          536973328
+        ],
+        [
+          "strcmp",
+          536973328,
+          536973328
+        ]
+      ],
+      "native_reads": [
+        [
+          536969216,
+          4
+        ],
+        [
+          536899776,
+          4
+        ]
+      ],
+      "old_reads": [
+        [
+          536899776,
+          4
+        ],
+        [
+          536969216,
+          4
+        ],
+        [
+          536899820,
+          4
+        ],
+        [
+          536969216,
+          4
+        ]
+      ]
+    },
+    "old_frame_regression": {
+      "native_r3": 1,
+      "old_r3": 2881486851
+    },
+    "other_units_unchanged": 561,
+    "application_imports": 211,
+    "bootloader_imports": 34,
+    "limitations": [
+      "strcmp and GPIOTE close providers modeled; Nordic port decoder and GPIO register accesses execute",
+      "GPIO registers ordinary emulator memory, not physical peripherals",
+      "Mutation is a controlled counterexample, not a claim of production race frequency",
+      "Not byte-qualified or final firmware proof"
+    ]
+  },
+  "evidence": [
+    {
+      "path": "build/goal-r1-named-gpio-open/before.c",
+      "sha256": "b7b17cf3852e39974035d175a8059fe640f493f6a08cdc793b27d42b1966e1a5"
+    },
+    {
+      "path": "build/goal-r1-named-gpio-open/verify.py",
+      "sha256": "5f1ea4db1ffa87e6e8c2e65d26b865ff60ab10016f0642b6e5ac1a2681f7f85a"
+    },
+    {
+      "path": "build/goal-r1-named-gpio-open/read-regression/verify.py",
+      "sha256": "64ec1f9b40f88788fcffa7dd26e9a0ab2b1e19691d491d1de41a41981af48f71"
+    },
+    {
+      "path": "build/sources-goal-r1-named-gpio-open/report.json",
+      "sha256": "924ebd74d6aea3292f96ffa792fa152ee789904e71737093c1a9ca3d0b045f2c"
+    },
+    {
+      "path": "build/goal-r1-twi-packet-c/stock.elf",
+      "sha256": "0a73bd084a4ccf8cdd579852b46deda970b701b2c22e9aecf423166f949350e4"
+    },
+    {
+      "path": "r1/src/application/gpio/stock_named_gpio.c",
+      "sha256": "07e265b5de0956aee199b199adb93233d8516248225343ad37181427881f95a1"
+    },
+    {
+      "path": "r1/src/application/gpio/stock_named_gpio.h",
+      "sha256": "029c77954b8cf3074b5501a4808af515f061505f20c27a0e7ad19553964e3e44"
+    },
+    {
+      "path": "r1/src/sources.json",
+      "sha256": "9c5b7ae5c0e7493eb22e1fb4df9f0c928c2a9aa70530254aff89b55213bef2e2"
+    },
+    {
+      "path": "tools/build/source-plan.json",
+      "sha256": "964cbd3af9f4ea7ed207bb4b480d18a9529060dc3801663d296389472982aa7c"
+    }
+  ],
+  "bridge_bytes": 10,
+  "native_open": "0x54b90",
+  "saved_words": {
+    "r1": "entry SP -32; decoded pin",
+    "r2": "entry SP -28; full configuration word",
+    "r3": "entry SP -24; incoming raw word"
+  }
+}

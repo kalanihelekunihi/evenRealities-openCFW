@@ -1,0 +1,56 @@
+{
+  "schema": 1,
+  "target": "locked G2 2.2.6.10 GX8002 BINH A image-A SRAM early startup and vectors",
+  "change": {
+    "source_reset": "g2/src/codec/app-callback/resident_reset_entry_candidate.c",
+    "source_trap": "g2/src/codec/app-callback/resident_exception_entry.S",
+    "linker": "g2/src/codec/link/g2-codec-a.ld",
+    "extractor": "tools/build/link_g2_sources.py",
+    "details": "Place reset, BSS clear, system initialize, trap_c, and trap at stock addresses. Export the exception vector target from the trap branch at 0x10023640, which branches back to the trap entry as stock does. Extract every new SRAM output section."
+  },
+  "stock": {
+    "firmware": "g2/blobs/official/g2-2.2.6.10/firmware_codec.bin",
+    "sram_base": "0x10023400",
+    "sram_bytes": 14716,
+    "exception_vectors_sha256": "d6b006523db1bcfa606a9a9e8376400f0b89847975724bf7330b8cac6932f2d2",
+    "reset": "0x10023500",
+    "clear_bss": "0x10023528",
+    "system_initialize": "0x1002354c",
+    "trap_c": "0x100235f0",
+    "trap": "0x100235fc",
+    "exception_vector_target": "0x10023640",
+    "irq_vector_target": "0x10025574"
+  },
+  "source": {
+    "sram_bytes": 14716,
+    "sram_sha256": "f63c3f95978c6451bfec8f7197a1304b350ef9549f51948cd758c52f6583c7bf",
+    "whole_sram_equal_bytes": 2655,
+    "exception_vectors_equal_bytes": 128,
+    "exception_vectors_bytes": 128,
+    "exception_vectors_sha256": "d6b006523db1bcfa606a9a9e8376400f0b89847975724bf7330b8cac6932f2d2",
+    "reset_equal_bytes": 38,
+    "reset_bytes": 40,
+    "reset_difference": "The call to source-linked main still targets 0x100258c8 rather than stock 0x10026314.",
+    "trap_equal_bytes": 75,
+    "trap_bytes": 80,
+    "trap_difference": "The source assembler reuses one 0x20027310 literal where stock emits two, changing a literal reference and leaving the second literal word absent; the branch at 0x10023640 now has the stock target.",
+    "exception_vector_target": "0x10023640",
+    "irq_vector_target": "0x10025810",
+    "xip_bytes": 46764,
+    "xip_stock_limit": 36484
+  },
+  "verification": {
+    "sources_check": "make -C g2 sources-check",
+    "source_report": "build/g2-all-vector-final-20261110/report.json",
+    "source_report_sha256": "f04ecabb5e847b38a83bfccc277a3dcb51607a3d15e940c9c41b4339fbe182f6",
+    "enabled_units_compiled": 4877,
+    "compile_failures": 0,
+    "duplicate_strong_symbols": 0,
+    "strict_link_report": "build/g2-all-vector-final-link-20261110/link-report.json",
+    "strict_link_report_sha256": "53a627819b8268e4608f96eed2ce83a74c6f0f2c1780823f60ba1ab2142f0905",
+    "payloads_linked": 7,
+    "external_binary_archive_used": false,
+    "undefined_symbols_in_final_links": 0
+  },
+  "qualification": "The first 32 image-A SRAM vectors and their reset and exception destinations match stock. The IRQ vector, remaining code and data, XIP span, NPU source, BINH A package, byte identity, and hardware behavior remain unresolved."
+}

@@ -13,7 +13,7 @@ extern void *audio_uart_lv_display_top_layer_44fcbe(void *);
 extern void *audio_uart_lv_display_system_layer_44fcfc(void *);
 extern void *audio_uart_lv_render_find_cover_453f2e(const void *, void *);
 extern void audio_uart_lv_render_object_chain_453fce(void *, void *);
-extern void audio_uart_lvgl_log(uint32_t, const char *, uint32_t,
+extern void lv_log_add(uint32_t, const char *, uint32_t,
                                 const char *, const char *, ...);
 
 static const char source[] =
@@ -28,7 +28,7 @@ static void write32(uint8_t *bytes, uint32_t offset, uint32_t value)
 void audio_uart_lv_render_layer_reset_48471a(void *layer)
 {
     if (layer == 0) {
-        audio_uart_lvgl_log(3u, source, 0x183u, "lv_layer_reset",
+        lv_log_add(3u, source, 0x183u, "lv_layer_reset",
                             "Asserted at expression: %s (%s)",
                             "layer != NULL", "NULL pointer");
         for (;;) *(volatile uint32_t *)(uintptr_t)UINT32_MAX = 0u;

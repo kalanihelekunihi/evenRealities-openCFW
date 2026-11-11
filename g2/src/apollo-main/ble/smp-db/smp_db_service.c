@@ -31,10 +31,8 @@ void audio_ble_smp_db_service_body(void){
     }
 }
 
-__attribute__((naked))
+/* Stock returns a stale register here (its body is void upstream); no caller reads it. */
 uint32_t SmpDbService(void){
-    __asm__ volatile(
-        "push {r3, r4, r5, lr}\n"
-        "bl audio_ble_smp_db_service_body\n"
-        "pop {r0, r4, r5, pc}\n");
+    audio_ble_smp_db_service_body();
+    return 0u;
 }

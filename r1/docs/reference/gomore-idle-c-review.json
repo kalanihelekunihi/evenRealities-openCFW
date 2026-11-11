@@ -1,0 +1,850 @@
+{
+  "source": {
+    "source": "r1/src/application/runtime/native_gomore_sensor_idle.c",
+    "payload": "r1-application",
+    "role": "candidate",
+    "toolchain": "clang",
+    "link": true,
+    "expect": "compile",
+    "returncode": 0,
+    "argv": [
+      "/usr/bin/clang",
+      "--target=arm-none-eabi",
+      "-mcpu=cortex-m4",
+      "-mthumb",
+      "-mfpu=fpv4-sp-d16",
+      "-mfloat-abi=hard",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-fno-strict-aliasing",
+      "-fshort-enums",
+      "-std=c11",
+      "-Os",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-DNRF52840_XXAA",
+      "-DFLOAT_ABI_HARD",
+      "-DNRF_SD_BLE_API_VERSION=7",
+      "-DNRF_DFU_SVCI_ENABLED",
+      "-DNRF_DFU_TRANSPORT_BLE=1",
+      "-DS140",
+      "-DSOFTDEVICE_PRESENT",
+      "-DFREERTOS",
+      "-DCONFIG_NFCT_PINS_AS_GPIOS",
+      "-DCONFIG_GPIO_AS_PINRESET",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/r1/src/config/sdk",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-idle-c/generated/r1",
+      "-include",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-idle-c/generated/r1/nrf_svci_clang.h",
+      "-isystem",
+      "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/external/freertos/portable/GCC/nrf52",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/external/freertos/portable/CMSIS/nrf52",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/external/segger_rtt",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/ble/common",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/ble/ble_advertising",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/ble/peer_manager",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/ble/nrf_ble_gatt",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/atomic",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/atomic_flags",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/atomic_fifo",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/delay",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/fds",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/fstorage",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/mutex",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/sortlist",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/timer",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/experimental_section_vars",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/log",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/log/src",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/strerror",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/util",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/softdevice/common",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/softdevice/s140/headers",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/softdevice/s140/headers/nrf52",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/toolchain/cmsis/include",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/integration/nrfx",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/integration/nrfx/legacy",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx/drivers/include",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx/hal",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx/soc",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx/mdk",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/ble/ble_link_ctx_manager",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/ble/ble_services/ble_dfu",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/ble/nrf_ble_qwr",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/balloc",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/bootloader/dfu",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/memobj",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/pwr_mgmt",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/ringbuf",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/external/fprintf",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx/drivers/src",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/bootloader",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/bootloader/ble_dfu",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/svc",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/stack_info",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/mem_manager",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/queue",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/scheduler",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/r1/src/config/rtos",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/third-party/upstream/freertos-kernel/include",
+      "-MD",
+      "-MF",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-idle-c/r1/r1-application/r1__src__application__runtime__native_gomore_sensor_idle.c.d",
+      "-c",
+      "/Users/kalani/Repo/evenRealities-openCFW/r1/src/application/runtime/native_gomore_sensor_idle.c",
+      "-o",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-idle-c/r1/r1-application/r1__src__application__runtime__native_gomore_sensor_idle.c.o"
+    ],
+    "source_sha256": "f19848a89e0d75f4ffde09ce19301ec165f1dea28fc37c4b95b15906ec95f424",
+    "object_sha256": "67cd47c8a9eb6e57b8476d68339e313817e94c83dba5fd2b55ed6d88a687680b",
+    "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-idle-c/r1/r1-application/r1__src__application__runtime__native_gomore_sensor_idle.c.o",
+    "strong": [
+      "r1_gomore_idle_timer_callback",
+      "r1_gomore_sensor_failure_update",
+      "r1_gomore_sensor_stamp_time",
+      "r1_gomore_sensor_state",
+      "r1_gomore_sensor_update_complete"
+    ],
+    "weak": [],
+    "undefined": [
+      "nrf_log_frontend_std_2",
+      "r1_gomore_authorization_state",
+      "r1_gomore_sensor_update_native",
+      "r1_health_mode_get",
+      "r1_record12_reinitialize",
+      "r1_structured_log_format",
+      "r1_structured_log_mode_get",
+      "r1_time_backend_timestamp",
+      "r1_time_utc_offset_get"
+    ]
+  },
+  "shared_owner_source": {
+    "source": "r1/src/application/runtime/native_gomore_authorization.c",
+    "payload": "r1-application",
+    "role": "candidate",
+    "toolchain": "clang",
+    "link": true,
+    "expect": "compile",
+    "returncode": 0,
+    "argv": [
+      "/usr/bin/clang",
+      "--target=arm-none-eabi",
+      "-mcpu=cortex-m4",
+      "-mthumb",
+      "-mfpu=fpv4-sp-d16",
+      "-mfloat-abi=hard",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-fno-strict-aliasing",
+      "-fshort-enums",
+      "-std=c11",
+      "-Os",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-DNRF52840_XXAA",
+      "-DFLOAT_ABI_HARD",
+      "-DNRF_SD_BLE_API_VERSION=7",
+      "-DNRF_DFU_SVCI_ENABLED",
+      "-DNRF_DFU_TRANSPORT_BLE=1",
+      "-DS140",
+      "-DSOFTDEVICE_PRESENT",
+      "-DFREERTOS",
+      "-DCONFIG_NFCT_PINS_AS_GPIOS",
+      "-DCONFIG_GPIO_AS_PINRESET",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/r1/src/config/sdk",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-idle-c/generated/r1",
+      "-include",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-idle-c/generated/r1/nrf_svci_clang.h",
+      "-isystem",
+      "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/external/freertos/portable/GCC/nrf52",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/external/freertos/portable/CMSIS/nrf52",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/external/segger_rtt",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/ble/common",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/ble/ble_advertising",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/ble/peer_manager",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/ble/nrf_ble_gatt",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/atomic",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/atomic_flags",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/atomic_fifo",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/delay",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/fds",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/fstorage",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/mutex",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/sortlist",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/timer",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/experimental_section_vars",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/log",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/log/src",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/strerror",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/util",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/softdevice/common",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/softdevice/s140/headers",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/softdevice/s140/headers/nrf52",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/toolchain/cmsis/include",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/integration/nrfx",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/integration/nrfx/legacy",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx/drivers/include",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx/hal",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx/soc",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx/mdk",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/ble/ble_link_ctx_manager",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/ble/ble_services/ble_dfu",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/ble/nrf_ble_qwr",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/balloc",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/bootloader/dfu",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/memobj",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/pwr_mgmt",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/ringbuf",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/external/fprintf",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx/drivers/src",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/bootloader",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/bootloader/ble_dfu",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/svc",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/stack_info",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/mem_manager",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/queue",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/scheduler",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/r1/src/config/rtos",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/third-party/upstream/freertos-kernel/include",
+      "-MD",
+      "-MF",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-idle-c/r1/r1-application/r1__src__application__runtime__native_gomore_authorization.c.d",
+      "-c",
+      "/Users/kalani/Repo/evenRealities-openCFW/r1/src/application/runtime/native_gomore_authorization.c",
+      "-o",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-idle-c/r1/r1-application/r1__src__application__runtime__native_gomore_authorization.c.o"
+    ],
+    "source_sha256": "b060e074303595e19f7c2b8dc4909a9373f3a47b2ee47d93e299007a41117d97",
+    "object_sha256": "2ac04b04ea9f08d61707ef2923cb0fc9ddc9b8e6d9fc4c2de5c1f8b6e5fbb364",
+    "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-idle-c/r1/r1-application/r1__src__application__runtime__native_gomore_authorization.c.o",
+    "strong": [
+      "r1_gomore_authorization_dispatch_native",
+      "r1_gomore_authorization_state"
+    ],
+    "weak": [],
+    "undefined": [
+      "nrf_log_frontend_std_0",
+      "r1_gomore_acc_topic_adapter",
+      "r1_gomore_hr_topic_adapter",
+      "r1_gomore_hrv_topic_adapter",
+      "r1_gomore_idle_timer_callback",
+      "r1_gomore_raw_hr_topic_adapter",
+      "r1_gomore_sensor_state",
+      "r1_sensor_stream_register_by_name",
+      "r1_sensor_stream_unregister_by_name",
+      "r1_stream_timer_create_back",
+      "r1_stream_timer_release",
+      "r1_structured_log_format",
+      "r1_structured_log_mode_get"
+    ]
+  },
+  "relocated_adapter_source": {
+    "source": "r1/src/application/runtime/native_gomore_hr_adapters.c",
+    "payload": "r1-application",
+    "role": "candidate",
+    "toolchain": "clang",
+    "link": true,
+    "expect": "compile",
+    "returncode": 0,
+    "argv": [
+      "/usr/bin/clang",
+      "--target=arm-none-eabi",
+      "-mcpu=cortex-m4",
+      "-mthumb",
+      "-mfpu=fpv4-sp-d16",
+      "-mfloat-abi=hard",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-fno-strict-aliasing",
+      "-fshort-enums",
+      "-std=c11",
+      "-Os",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-DNRF52840_XXAA",
+      "-DFLOAT_ABI_HARD",
+      "-DNRF_SD_BLE_API_VERSION=7",
+      "-DNRF_DFU_SVCI_ENABLED",
+      "-DNRF_DFU_TRANSPORT_BLE=1",
+      "-DS140",
+      "-DSOFTDEVICE_PRESENT",
+      "-DFREERTOS",
+      "-DCONFIG_NFCT_PINS_AS_GPIOS",
+      "-DCONFIG_GPIO_AS_PINRESET",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/r1/src/config/sdk",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-idle-c/generated/r1",
+      "-include",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-idle-c/generated/r1/nrf_svci_clang.h",
+      "-isystem",
+      "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/external/freertos/portable/GCC/nrf52",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/external/freertos/portable/CMSIS/nrf52",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/external/segger_rtt",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/ble/common",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/ble/ble_advertising",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/ble/peer_manager",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/ble/nrf_ble_gatt",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/atomic",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/atomic_flags",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/atomic_fifo",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/delay",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/fds",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/fstorage",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/mutex",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/sortlist",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/timer",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/experimental_section_vars",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/log",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/log/src",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/strerror",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/util",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/softdevice/common",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/softdevice/s140/headers",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/softdevice/s140/headers/nrf52",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/toolchain/cmsis/include",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/integration/nrfx",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/integration/nrfx/legacy",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx/drivers/include",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx/hal",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx/soc",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx/mdk",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/ble/ble_link_ctx_manager",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/ble/ble_services/ble_dfu",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/ble/nrf_ble_qwr",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/balloc",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/bootloader/dfu",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/memobj",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/pwr_mgmt",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/ringbuf",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/external/fprintf",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx/drivers/src",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/bootloader",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/bootloader/ble_dfu",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/svc",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/stack_info",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/mem_manager",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/queue",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/scheduler",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/r1/src/config/rtos",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/third-party/upstream/freertos-kernel/include",
+      "-MD",
+      "-MF",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-idle-c/r1/r1-application/r1__src__application__runtime__native_gomore_hr_adapters.c.d",
+      "-c",
+      "/Users/kalani/Repo/evenRealities-openCFW/r1/src/application/runtime/native_gomore_hr_adapters.c",
+      "-o",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-idle-c/r1/r1-application/r1__src__application__runtime__native_gomore_hr_adapters.c.o"
+    ],
+    "source_sha256": "f053607d5cd9d2eb5db2dc7a1c2dde394c42a61d44d0dc7d9e4d8649947eb135",
+    "object_sha256": "e947337eb5dd7ddf62284ede8bd4928227702e9c7cfd05a363638d6b52d76da1",
+    "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-idle-c/r1/r1-application/r1__src__application__runtime__native_gomore_hr_adapters.c.o",
+    "strong": [
+      "r1_gomore_hr_topic_adapter",
+      "r1_gomore_hrv_topic_adapter"
+    ],
+    "weak": [],
+    "undefined": [
+      "r1_gomore_authorization_dispatch_native",
+      "r1_gomore_authorization_state",
+      "r1_gomore_sensor_state",
+      "r1_native_memory_move"
+    ]
+  },
+  "REA": [
+    {
+      "evidence_id": "ev_deb454d91b06c3fbd60a9af69c26e63765109f8f866e8dc1f8e355ac69b66a3e",
+      "subject": {
+        "name": "stock.elf",
+        "digest": {
+          "sha256": "25b4a29af80ec8edab5bd861ba9b74a6e22eab29dc3d7a809a16869e8a140f04"
+        },
+        "local_path": "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-queue-reset-c/stock.elf",
+        "format": "elf",
+        "architecture": "arm"
+      },
+      "provider": {
+        "id": "ghidra",
+        "name": "Ghidra",
+        "version": "12.1.4"
+      },
+      "analysis_profile": {
+        "provider": {
+          "id": "ghidra",
+          "name": "Ghidra",
+          "version": "12.1.4"
+        },
+        "parameters": {
+          "target_kind": "executable",
+          "target_format": "elf",
+          "architecture": "arm",
+          "available_architectures": [
+            "arm"
+          ],
+          "import_mode": "ephemeral-source-immutable",
+          "annotation_policy": "atomic-function-entry-metadata-v1",
+          "load_image_observations": "source-mappings-entry-context-v2",
+          "function_body_evidence": "complete-inclusive-ranges-v1",
+          "function_references": "complete-body-and-entry-reference-manager-v2",
+          "call_relationship_coverage": "function-body-call-coverage-v5",
+          "function_dossier_coverage": "observed-facets-and-call-relationships-v1",
+          "string_inventory_evidence": "defined-data-coverage-v1",
+          "location_resolution": "explicit-address-exact-entry-symbol-first-v3",
+          "procedure_file_offset_resolution": "address-first-unique-target-source-mapping-v2",
+          "instruction_flow_evidence": "decoded-return-pcode-v1",
+          "instruction_references": "exact-address-incoming-v1",
+          "function_boundary_observations": "ghidra-function-boundary-limitations-v3",
+          "no_return_repair": "returning-imports-decoded-return-v2",
+          "process_launch": "inspected-jvm-launch-support-v1",
+          "jump_table_evidence": "typed-case-default-blocks-v1",
+          "decompiler_jump_loads": true,
+          "loader": "auto-from-header",
+          "language_id": "auto-from-header",
+          "compiler_spec_id": "auto-default",
+          "analyzer_preset": "ghidra-default"
+        },
+        "digest": "7e46711069eea041af1b9b99e34115c13332795e5cda76e584a722f529ec70de"
+      },
+      "predicate_type": "rea.analysis",
+      "operation": "read_bytes",
+      "parameters": {
+        "address": "0x6aca4",
+        "length": 96
+      },
+      "raw_result": {
+        "address": "0x6aca4",
+        "requested_bytes": 96,
+        "returned_bytes": 96,
+        "bytes_hex": "10b5074c00f016f8204629f069fb01f085fa002803d0bde8104000f003b810bd6ca501200248002101770175704700006ca5012010b520f063f8084c206020f067f8a08001206077e1f764fc00b1012080f0010084f8300010bd00006ca50120",
+        "complete": true
+      },
+      "normalized_result": {
+        "address": "0x6aca4",
+        "requested_bytes": 96,
+        "returned_bytes": 96,
+        "bytes_hex": "10b5074c00f016f8204629f069fb01f085fa002803d0bde8104000f003b810bd6ca501200248002101770175704700006ca5012010b520f063f8084c206020f067f8a08001206077e1f764fc00b1012080f0010084f8300010bd00006ca50120",
+        "complete": true
+      },
+      "confidence": "observed",
+      "authority": "shipped-artifact",
+      "environment": null,
+      "limitations": [
+        "The session serves operations only after Ghidra reports default auto-analysis complete; incomplete analysis does not expose partial results.",
+        "The imported Program and temporary project are ephemeral and deleted on close. Annotation operations edit session database metadata; original executable bytes are never written.",
+        "Cancelling an active Ghidra request terminates its ephemeral database and discards session annotations. The selected target remains open; the next provider query imports the original artifact again.",
+        "Default-space addresses use lowercase 0x-prefixed hexadecimal; other address spaces use <percent-encoded-space>:0x<hex>.",
+        "Bytes reflect Ghidra's initialized memory, including loader fixups. Reads stop at an unmapped or uninitialized byte and report completeness explicitly.",
+        "macOS sessions require a matching executable Ghidra native decompiler; REA checks for it but does not build native components or change Gatekeeper quarantine state."
+      ],
+      "relationship_coverage": null,
+      "locations": [],
+      "evidence_links": []
+    },
+    {
+      "evidence_id": "ev_867379aa65dd307e861fe04b737cce33cb28bf09881eaa03aeb438398670021a",
+      "subject": {
+        "name": "stock.elf",
+        "digest": {
+          "sha256": "25b4a29af80ec8edab5bd861ba9b74a6e22eab29dc3d7a809a16869e8a140f04"
+        },
+        "local_path": "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-queue-reset-c/stock.elf",
+        "format": "elf",
+        "architecture": "arm"
+      },
+      "provider": {
+        "id": "ghidra",
+        "name": "Ghidra",
+        "version": "12.1.4"
+      },
+      "analysis_profile": {
+        "provider": {
+          "id": "ghidra",
+          "name": "Ghidra",
+          "version": "12.1.4"
+        },
+        "parameters": {
+          "target_kind": "executable",
+          "target_format": "elf",
+          "architecture": "arm",
+          "available_architectures": [
+            "arm"
+          ],
+          "import_mode": "ephemeral-source-immutable",
+          "annotation_policy": "atomic-function-entry-metadata-v1",
+          "load_image_observations": "source-mappings-entry-context-v2",
+          "function_body_evidence": "complete-inclusive-ranges-v1",
+          "function_references": "complete-body-and-entry-reference-manager-v2",
+          "call_relationship_coverage": "function-body-call-coverage-v5",
+          "function_dossier_coverage": "observed-facets-and-call-relationships-v1",
+          "string_inventory_evidence": "defined-data-coverage-v1",
+          "location_resolution": "explicit-address-exact-entry-symbol-first-v3",
+          "procedure_file_offset_resolution": "address-first-unique-target-source-mapping-v2",
+          "instruction_flow_evidence": "decoded-return-pcode-v1",
+          "instruction_references": "exact-address-incoming-v1",
+          "function_boundary_observations": "ghidra-function-boundary-limitations-v3",
+          "no_return_repair": "returning-imports-decoded-return-v2",
+          "process_launch": "inspected-jvm-launch-support-v1",
+          "jump_table_evidence": "typed-case-default-blocks-v1",
+          "decompiler_jump_loads": true,
+          "loader": "auto-from-header",
+          "language_id": "auto-from-header",
+          "compiler_spec_id": "auto-default",
+          "analyzer_preset": "ghidra-default"
+        },
+        "digest": "7e46711069eea041af1b9b99e34115c13332795e5cda76e584a722f529ec70de"
+      },
+      "predicate_type": "rea.analysis",
+      "operation": "read_bytes",
+      "parameters": {
+        "address": "0x6c1c0",
+        "length": 212
+      },
+      "raw_result": {
+        "address": "0x6c1c0",
+        "requested_bytes": 212,
+        "returned_bytes": 212,
+        "bytes_hex": "f8b51c4c05004ff000062fd0e078032821d225f08bf9184fc00703d125f086f9400708d5386800902b4614a213a14ff0906025f021fa25f079f980070bd51a481a492a46401ac008012101eb004018a13b680df0e0fbe078401cc0b2e0703c2802d3e670e0f7aaf80020f8bde6700120f8bd0000a06d00206ca501205b52494e475d676f6d6f726520757064617465496e646578206661696c65643a25642c2074733a2564000000fc440c001c440c00676f6d6f726520757064617465496e646578206661696c65643a25642c2074733a256400",
+        "complete": true
+      },
+      "normalized_result": {
+        "address": "0x6c1c0",
+        "requested_bytes": 212,
+        "returned_bytes": 212,
+        "bytes_hex": "f8b51c4c05004ff000062fd0e078032821d225f08bf9184fc00703d125f086f9400708d5386800902b4614a213a14ff0906025f021fa25f079f980070bd51a481a492a46401ac008012101eb004018a13b680df0e0fbe078401cc0b2e0703c2802d3e670e0f7aaf80020f8bde6700120f8bd0000a06d00206ca501205b52494e475d676f6d6f726520757064617465496e646578206661696c65643a25642c2074733a2564000000fc440c001c440c00676f6d6f726520757064617465496e646578206661696c65643a25642c2074733a256400",
+        "complete": true
+      },
+      "confidence": "observed",
+      "authority": "shipped-artifact",
+      "environment": null,
+      "limitations": [
+        "The session serves operations only after Ghidra reports default auto-analysis complete; incomplete analysis does not expose partial results.",
+        "The imported Program and temporary project are ephemeral and deleted on close. Annotation operations edit session database metadata; original executable bytes are never written.",
+        "Cancelling an active Ghidra request terminates its ephemeral database and discards session annotations. The selected target remains open; the next provider query imports the original artifact again.",
+        "Default-space addresses use lowercase 0x-prefixed hexadecimal; other address spaces use <percent-encoded-space>:0x<hex>.",
+        "Bytes reflect Ghidra's initialized memory, including loader fixups. Reads stop at an unmapped or uninitialized byte and report completeness explicitly.",
+        "macOS sessions require a matching executable Ghidra native decompiler; REA checks for it but does not build native components or change Gatekeeper quarantine state."
+      ],
+      "relationship_coverage": null,
+      "locations": [],
+      "evidence_links": []
+    }
+  ],
+  "idle_replay": {
+    "paired_cases": 11088,
+    "roots": {
+      "idle": 7632,
+      "failure": 1152,
+      "stamp": 1152,
+      "clear": 1152
+    },
+    "source_object_sha256": "67cd47c8a9eb6e57b8476d68339e313817e94c83dba5fd2b55ed6d88a687680b",
+    "authorization_object_sha256": "2ac04b04ea9f08d61707ef2923cb0fc9ddc9b8e6d9fc4c2de5c1f8b6e5fbb364",
+    "observations_sha256": "03cc83f9b11cf00ca617c459cd5c51cf4e3f358ab48802fbb71b079212ab5b25",
+    "probe_sha256": "4b4b2fdeb5bda7d2dd7ac85dedd5d58dbb49fc92fe255ba491c1cb220251b8f6",
+    "limits": [
+      "Native/C idle/stamp/clear/failure roots plus independent state/call oracle",
+      "Time/offset/health/sensor update/log/reinit providers modeled with caller-clobber poisoning and live state mutations",
+      "Warm FP; no physical/concurrent/full-source firmware link proof"
+    ]
+  },
+  "hr_replay": {
+    "paired_cases": 10323,
+    "fault_cases": 1200,
+    "chain_cases": 720,
+    "source_object_sha256": "e947337eb5dd7ddf62284ede8bd4928227702e9c7cfd05a363638d6b52d76da1",
+    "dependency_objects": {
+      "r1/src/application/runtime/native_gomore_authorization.c": "2ac04b04ea9f08d61707ef2923cb0fc9ddc9b8e6d9fc4c2de5c1f8b6e5fbb364",
+      "r1/src/application/runtime/native_memory_move.c": "6a3110da0b585640a02ef5168c86a8279f50e50c8f4695846cd8aa14425777ed",
+      "third-party/upstream/musl-memmove-1.2.5/memmove.c": "4a6ccefb180ef4af2cfe631f54df4d6f629d1b3a2d374911c00b25c107bcb723",
+      "third-party/upstream/musl-memory-1.2.5/memcpy.c": "a4b54c7315f7ca2f8097e3f9afb4a9bcd7860c75649fc9e185d951c3ea0696cf"
+    },
+    "observations_sha256": "62c7f991e2e598313834a01f386905dd0e8ac4cdd6a99d0f1a8be01018a4dba9",
+    "probe_sha256": "efaa70da3d9ec7271290bd3d6b459e6c3766a7d797349df34c3383bde7bbb6d0",
+    "limits": [
+      "Native/C adapters and actual C memory move; direct independent state/result oracle",
+      "Actual native/C authorization chain in chain cases; lower stream/timer/log/callback providers modeled",
+      "Normal-memory emulator faults; warm FPU; no concurrent/physical/final-source-link proof"
+    ]
+  },
+  "authorization_replay": {
+    "source_object_sha256": "2ac04b04ea9f08d61707ef2923cb0fc9ddc9b8e6d9fc4c2de5c1f8b6e5fbb364",
+    "cases": 2026,
+    "events": {
+      "disable-callback": 212,
+      "predicate": 5279,
+      "timer-create": 177,
+      "mode": 1548,
+      "ring": 532,
+      "sdk": 529,
+      "unregister": 385,
+      "enable-callback": 708,
+      "timer-release": 462,
+      "register": 855
+    },
+    "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "probe_sha256": "ffc8a489fd455aeffab2170039acdb54f091ea0cc365706520a884e19f8d2af6",
+    "observations_sha256": "552b8149348f047627da6d030abe04b1a0acc8cebadc76150017a1f5f5e10c49",
+    "examples": [
+      {
+        "case": {
+          "ready": 1,
+          "index": 0,
+          "enable": 0,
+          "flags": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "handles": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "timer": 0,
+          "callbacks": true,
+          "modes": [
+            7
+          ],
+          "register_result": 536875008,
+          "timer_result": 536891392
+        },
+        "return_value": 0,
+        "trace": []
+      },
+      {
+        "case": {
+          "ready": 1,
+          "index": 0,
+          "enable": 0,
+          "flags": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "handles": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "timer": 536891392,
+          "callbacks": true,
+          "modes": [
+            7
+          ],
+          "register_result": 536875008,
+          "timer_result": 536891392
+        },
+        "return_value": 0,
+        "trace": []
+      },
+      {
+        "case": {
+          "ready": 1,
+          "index": 0,
+          "enable": 0,
+          "flags": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "handles": [
+            536875008,
+            536875008,
+            536875008,
+            536875008
+          ],
+          "timer": 0,
+          "callbacks": true,
+          "modes": [
+            7
+          ],
+          "register_result": 536875008,
+          "timer_result": 536891392
+        },
+        "return_value": 0,
+        "trace": []
+      }
+    ],
+    "limits": [
+      "Native dispatcher/five native predicates and compiled C dispatcher/helpers execute; independent Python state/call oracle",
+      "Stream registration/unregistration, timer, logging and user callbacks modeled; caller-clobbered registers poisoned",
+      "Warm FPU; no physical/concurrent proof or reconstructed C authorization implementation"
+    ]
+  },
+  "initialization": {
+    "cells": {
+      "r1_gomore_authorization_state": {
+        "address": "0x20006da0",
+        "size": 148,
+        "section": ".r1.gomore.authorization.state",
+        "sha256": "462b02ebf3ab177c6bad5e4a315ed6ce37b47ea8fa7b12218a7ad759fd30aee8",
+        "object_sha256": "2ac04b04ea9f08d61707ef2923cb0fc9ddc9b8e6d9fc4c2de5c1f8b6e5fbb364"
+      },
+      "r1_gomore_sensor_state": {
+        "address": "0x2001a56c",
+        "size": 52,
+        "section": ".bss.r1.gomore.sensor.state",
+        "sha256": "7955cb2de90dd9efc6df9fdbf5f5d10c114f4135a9a6b52db1003be749e32f7a",
+        "object_sha256": "67cd47c8a9eb6e57b8476d68339e313817e94c83dba5fd2b55ed6d88a687680b"
+      }
+    },
+    "owned_bytes": 200,
+    "net_added_bytes": 44,
+    "native_RW_ZI_handlers_executed": true,
+    "independent_RW_decoder_matches": true,
+    "region_guards_unchanged": true
+  },
+  "negative_controls": [
+    {
+      "name": "invalid-time-flag",
+      "rejected": true
+    },
+    {
+      "name": "wide-offset",
+      "rejected": true
+    },
+    {
+      "name": "inverted-activity",
+      "rejected": true
+    },
+    {
+      "name": "wide-count-clear",
+      "rejected": true
+    },
+    {
+      "name": "early-threshold",
+      "rejected": true
+    },
+    {
+      "name": "lost-counter-wrap",
+      "rejected": true
+    },
+    {
+      "name": "cached-counter",
+      "rejected": true
+    },
+    {
+      "name": "clear-on-failure",
+      "rejected": true
+    }
+  ],
+  "qualification": {
+    "candidate_units": 1,
+    "compiled_units": 1,
+    "units": [
+      {
+        "source": "r1/src/application/runtime/native_gomore_sensor_idle.c",
+        "payload": "r1-application",
+        "evidence": "r1/symbols/function-frontier.csv",
+        "selected": [],
+        "compiled": true,
+        "rejections": {
+          "anchored_relocation_pattern_not_exact": 4
+        },
+        "source_implementation_completeness": "not established by compilation or byte matching",
+        "reason": "no exact anchored body under tested production bindings; integration remains unfinished"
+      }
+    ]
+  },
+  "composition": {
+    "report": "build/sources-goal-r1-gomore-idle-c/report.json",
+    "sha256": "b9cc5156785c9797ca2e90a743a20df4178060928c5983dac4043e03ca936d1c",
+    "units": 675,
+    "unchanged_prior_source_object_pairs": 672,
+    "application_imports": 165,
+    "bootloader_imports": 34,
+    "resolved_import": "r1_gomore_idle_timer_callback",
+    "new_native_imports": [
+      "r1_gomore_sensor_update_native"
+    ]
+  },
+  "hybrid": {
+    "report": "build/hybrid-goal-r1-gomore-idle-c/build-report.json",
+    "sha256": "a9f8f6541673c89afa4d3229bd5824814456cfb2d05b33ab558f95800129d6c8",
+    "totals": {
+      "binary-pull-through": 641791,
+      "source-built": 4369,
+      "resource-file": 248
+    },
+    "canonical_plan_unchanged": true
+  },
+  "artifacts": {
+    "build/goal-r1-gomore-idle-c/verify.py": "4b4b2fdeb5bda7d2dd7ac85dedd5d58dbb49fc92fe255ba491c1cb220251b8f6",
+    "build/goal-r1-gomore-idle-c/results.json": "62b8ab513a2c16ab5a54e4c50a5fbafa095af997ffc516314ec4291de6735f58",
+    "build/goal-r1-gomore-idle-c/source.elf": "f496e3ad1a1c0bf0c92e74fc4fa6435c75edace2a6cdd38eb37ea57b34af0c65",
+    "build/goal-r1-gomore-idle-c/hr-adapters.py": "efaa70da3d9ec7271290bd3d6b459e6c3766a7d797349df34c3383bde7bbb6d0",
+    "build/goal-r1-gomore-idle-c/hr-adapters/results.json": "564bc39b13b9279507f9a1977871c1aef87d82021d50688e69565c7e1f244580",
+    "build/goal-r1-gomore-idle-c/hr-adapters/source.elf": "ba107b5cbb7d8c6f310340e843212d9b7c9ae69558451bd4487999baa18e9dbe",
+    "build/goal-r1-gomore-idle-c/authorization.py": "ffc8a489fd455aeffab2170039acdb54f091ea0cc365706520a884e19f8d2af6",
+    "build/goal-r1-gomore-idle-c/authorization/results.json": "f0e4032de67e64cf222646bf9be45ea958adb2e432057907aeb9aeca994ef3c9",
+    "build/goal-r1-gomore-idle-c/authorization/source.elf": "4d6f6db7575b204770faeaffd832785a93a9724bd6c7b0fea9879c1744c18314",
+    "build/goal-r1-gomore-idle-c/initialization.py": "9cb0b9eb6f6cf72b01c4331ff3602af79cc4df1799cd8e055aba64e76b6ea391",
+    "build/goal-r1-gomore-idle-c/initialization-results.json": "5683e53f524125f7074791482ba8cf15e74c1ce19d3ffd1c77f1ba715c575141",
+    "build/goal-r1-gomore-idle-c/finalize.py": "6ba9752fc11c5756bd35978e2540b69b71f16e02fd2418a7063d4449824ba83f",
+    "build/goal-r1-gomore-idle-c/qualify.py": "25a7f65b01acefa5630ec58656c80f3d8beb873bb355fd912e3a710680901432",
+    "build/goal-r1-gomore-idle-c/negative.py": "a2a4510c259c2d060e9a64e67ba3adb8c2c0a682f23e295963f3a625f4e97dcd",
+    "build/goal-r1-gomore-idle-c/negative-results.json": "772def1c545c1f67cd9868b8068b0b0db598e824865c00018fb6fa6b220ee2f4",
+    "build/goal-r1-gomore-idle-c/rea-0.json": "7d0c09b0c01fe33673919e1ea945cbb786fd89a019fde45d82f8526e376157d6",
+    "build/goal-r1-gomore-idle-c/rea-1.json": "f50e3a5b76cf0aed22a5a841f658ac513c15e59200be8795bf24f1ea149928fa",
+    "r1/src/application/runtime/native_gomore_authorization.h": "131840f5f822a5b0e3140ce81eb86f427424a181f88b39d10a72f5b4f1660754",
+    "build/goal-r1-gomore-idle-c/invalid-time-flag.c": "4f16293c6d083f2895eb08a6f45bab7dd88aaeca49a81af04b1d4ab7dcb32ee3",
+    "build/goal-r1-gomore-idle-c/invalid-time-flag.o": "b5f7eec47dcd679fd9fa672ea38919ac6d5a8533400156d4889b7f7ecb6284db",
+    "build/goal-r1-gomore-idle-c/invalid-time-flag.log": "f3872f698173ce54ccfcb4d8afa2f84e3f703c7e697d2e862d2143079a6578f7",
+    "build/goal-r1-gomore-idle-c/invalid-time-flag.compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/goal-r1-gomore-idle-c/wide-offset.c": "5b339b2b67a9a9a462d96cf704d1600145bac4cb5265d91a73ef9cfa02a05373",
+    "build/goal-r1-gomore-idle-c/wide-offset.o": "5126480872b436da79633042e56822acae59eb0bcafa4e6e12d803ed0b4c95e3",
+    "build/goal-r1-gomore-idle-c/wide-offset.log": "037142cf6c6b7ee3cbf75b36971876d5bfd4864ac45cb0e93086269045fe7eef",
+    "build/goal-r1-gomore-idle-c/wide-offset.compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/goal-r1-gomore-idle-c/inverted-activity.c": "d61ce608681bf62e714b12f8d4d1ccbc529950ba9bb0bb081c73b333f52dd5d9",
+    "build/goal-r1-gomore-idle-c/inverted-activity.o": "1555579e03c4c2687ef09694b4d725377e9d392a38beb5f76a8f83173fa22aff",
+    "build/goal-r1-gomore-idle-c/inverted-activity.log": "78e7aed4cdff958eb0d5e546d1a61d2b534e998655f3934fcf9e9293b67db7d7",
+    "build/goal-r1-gomore-idle-c/inverted-activity.compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/goal-r1-gomore-idle-c/wide-count-clear.c": "f9a7c5470610701d813a8c2c7ec166f3c0018752341340076342759bafe457d4",
+    "build/goal-r1-gomore-idle-c/wide-count-clear.o": "5383c5e81b1bbd9cc50913e9b270909e6dd468ce6dd640e0259868e358d02bf0",
+    "build/goal-r1-gomore-idle-c/wide-count-clear.log": "7155c3709f84b9b8dcd097c935cf3d95bf4cdef6163c57275c517e174f345f57",
+    "build/goal-r1-gomore-idle-c/wide-count-clear.compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/goal-r1-gomore-idle-c/early-threshold.c": "83d9d6ac9f02ebad9fbbfda7589b79e464296dd734ff90f7f0ea9144adee68b6",
+    "build/goal-r1-gomore-idle-c/early-threshold.o": "0f0e4adb6cba98d0709a93ccea2155a74d1438e082f4a49121aa9b61310e6f1a",
+    "build/goal-r1-gomore-idle-c/early-threshold.log": "ef5865953207aeb3b70362acc5b31f938fb3c4b07814bb02d345ce0fa0ac69b4",
+    "build/goal-r1-gomore-idle-c/early-threshold.compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/goal-r1-gomore-idle-c/lost-counter-wrap.c": "1f86f6ca517f146cc1f0c7108829036ae513b554b84610bc5318921071aee211",
+    "build/goal-r1-gomore-idle-c/lost-counter-wrap.o": "8c5cf0841b5f44bfd269684df3d038e292793c083c6fe1b1975acc8e09a8a582",
+    "build/goal-r1-gomore-idle-c/lost-counter-wrap.log": "52dc9f93b4bf85b82967a0b384af409ffc282bb625ee0bedf8d2d31657925e6e",
+    "build/goal-r1-gomore-idle-c/lost-counter-wrap.compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/goal-r1-gomore-idle-c/cached-counter.c": "0411c54f2c5448293e14e065602bf6a132e5dbaec08dde70a5439a5787465c51",
+    "build/goal-r1-gomore-idle-c/cached-counter.o": "9492d9e3d279d24c5675b2ea93a0882fe96981c2a5a59dc6f3bdfc6d20c1b746",
+    "build/goal-r1-gomore-idle-c/cached-counter.log": "6261940781c763ef2e9f436281ce45374e91dcbfd8f07aa5f3f2800e129ae0f5",
+    "build/goal-r1-gomore-idle-c/cached-counter.compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/goal-r1-gomore-idle-c/clear-on-failure.c": "0ac89ad22d41a61080851692096eda833320f7942b99efd8c68429ba75f9aa15",
+    "build/goal-r1-gomore-idle-c/clear-on-failure.o": "fbfc39a7a53bf377b9493f6612d2271cd431adfaa7bb3385def9a4d0a28b7a49",
+    "build/goal-r1-gomore-idle-c/clear-on-failure.log": "2b169e2f3dee70bb34b45beaa8459ad61db431fda29b07f512715a9f9a5ca0a6",
+    "build/goal-r1-gomore-idle-c/clear-on-failure.compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "limits": [
+    "One 52-byte sensor workspace replaces former8-byte sample owner; native HR/HRV fields remain at+36/+40; net44 bytes added",
+    "Idle and helper roots execute with modeled time/health/update/log/reinit providers; independent state/call oracle",
+    "Authorization and HR replay bind expanded workspace address; no complete linked sensor update algorithm",
+    "No physical/concurrent/first-use FP/final firmware link or instruction identity proof"
+  ]
+}

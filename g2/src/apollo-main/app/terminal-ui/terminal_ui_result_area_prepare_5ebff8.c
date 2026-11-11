@@ -4,9 +4,9 @@
 extern uint8_t audio_terminal_ui_state_base[0x2a0];
 extern uint32_t audio_uart_ring_secondary_head_cell;
 extern const uint8_t audio_terminal_result_icon_773258;
-extern void audio_uart_page_44122a(void *,uint32_t,uint32_t);
-extern void audio_uart_page_441238(void *,uint32_t,uint32_t);
-extern void audio_uart_page_44120e(void *,uint32_t,uint32_t);
+extern void lv_obj_set_style_pad_left(void *,uint32_t,uint32_t);
+extern void lv_obj_set_style_pad_right(void *,uint32_t,uint32_t);
+extern void lv_obj_set_style_pad_top(void *,uint32_t,uint32_t);
 extern void audio_uart_page_441246(void *,uint32_t,uint32_t);
 extern void audio_uart_page_43f506(void *,uint32_t);
 extern void audio_uart_page_44d878(void *);
@@ -46,9 +46,9 @@ void audio_terminal_ui_result_area_prepare_5ebff8(void) {
     if (root==0u || title==0u || footer==0u)return;
     void *r=(void *)(uintptr_t)root;
     void *f=(void *)(uintptr_t)footer;
-    audio_uart_page_44122a(r,8u,0u);
-    audio_uart_page_441238(r,8u,0u);
-    audio_uart_page_44120e(r,8u,0u);
+    lv_obj_set_style_pad_left(r,8u,0u);
+    lv_obj_set_style_pad_right(r,8u,0u);
+    lv_obj_set_style_pad_top(r,8u,0u);
     audio_uart_page_441246(r,4u,0u);
     audio_uart_page_43f506((void *)(uintptr_t)title,0x208u);
     audio_uart_page_44d878(f);

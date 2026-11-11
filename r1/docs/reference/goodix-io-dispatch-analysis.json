@@ -1,0 +1,152 @@
+{
+  "schema": 1,
+  "scope": "Remaining native Goodix I/O dispatch policy; strict first-provider frame counterexample",
+  "native_code": {
+    "entry": "0x6a320",
+    "end_exclusive": "0x6a470",
+    "bytes": 336,
+    "sha256": "b286561f283087656a45550f9703efcf7d242c3366ac2f18442190a042b65df1"
+  },
+  "adjacent_literal_data": {
+    "start": "0x6a470",
+    "end_exclusive": "0x6a4b0",
+    "bytes": 64,
+    "sha256": "a8e24ca3afaf041f0c5e93ceebdff6fee0e07e9e38b453dbd12866eaf1ba91dc"
+  },
+  "strict_frame_counterexample": {
+    "native": {
+      "provider": "GH3X2X_AlgoCalculate",
+      "function": 2,
+      "sp": 537067304,
+      "frame_bytes": 216,
+      "frame_reads": [
+        [
+          536875008,
+          4
+        ]
+      ]
+    },
+    "current_template": {
+      "provider": "GH3X2X_AlgoCalculate",
+      "function": 2,
+      "sp": 537067520,
+      "frame_bytes": 0,
+      "frame_reads": [
+        [
+          536875008,
+          4
+        ]
+      ]
+    },
+    "C_policy_probe": {
+      "provider": "GH3X2X_AlgoCalculate",
+      "function": 2,
+      "sp": 537067288,
+      "frame_bytes": 232,
+      "frame_reads": [
+        [
+          536875008,
+          4
+        ]
+      ]
+    },
+    "C_policy_probe_O2": {
+      "provider": "GH3X2X_AlgoCalculate",
+      "function": 2,
+      "sp": 537067288,
+      "frame_bytes": 232,
+      "frame_reads": [
+        [
+          536875008,
+          4
+        ]
+      ]
+    },
+    "C_policy_probe_Oz": {
+      "provider": "GH3X2X_AlgoCalculate",
+      "function": 2,
+      "sp": 537067288,
+      "frame_bytes": 232,
+      "frame_reads": [
+        [
+          536875008,
+          4
+        ]
+      ]
+    },
+    "C_policy_probe_Og": {
+      "provider": "GH3X2X_AlgoCalculate",
+      "function": 2,
+      "sp": 537067256,
+      "frame_bytes": 264,
+      "frame_reads": [
+        [
+          536875008,
+          4
+        ]
+      ]
+    },
+    "C_policy_probe_GCC9_Os": {
+      "provider": "GH3X2X_AlgoCalculate",
+      "function": 2,
+      "sp": 537067288,
+      "frame_bytes": 232,
+      "frame_reads": [
+        [
+          536875008,
+          4
+        ]
+      ]
+    },
+    "decision": "Do not integrate this C policy probe: first provider stack contract differs from stock. Current template also fails this contract.",
+    "limits": [
+      "Execution stops at first algorithm-provider entry",
+      "C probe route/logging behavior not validated by this prefix",
+      "No hardware or full dispatcher equivalence claim"
+    ]
+  },
+  "policy_probe_integrated": false,
+  "firmware_changes": {
+    "all_576_current_compiled_source_inputs_match_latest_report": true,
+    "manifest_frontier_ownership_and_source_plan_match_prior_receipt": true,
+    "new_qualified_bytes": 0
+  },
+  "required_native_frame": {
+    "total": 216,
+    "saved_register_bytes": 16,
+    "scratch_bytes": 200,
+    "outgoing_arguments_offset": 0,
+    "format_buffer_offset": 20,
+    "format_buffer_bytes": 180
+  },
+  "files": {
+    "build/sources-goal-r1-goodix-frame-hook-final/report.json": "2770e6e953d0017e9d53416b37c399deb03dc8fe20f8528cab52f1d0d8bfc7c0",
+    "r1/src/sources.json": "0b87782f44f29772556826d641f74549d56ba2dd8a0e7437e970c249edea6a8b",
+    "r1/symbols/function-frontier.csv": "8a87c4bed58ecf61792f16368cfe59bad93d085eae0be5e0f34fafaea9d32063",
+    "r1/docs/reference/FUNCTION-OWNERSHIP.csv": "966d9df76fba459bed6e4e9fada912da092d5efe5055e8c2551ffee2ce354381",
+    "tools/build/source-plan.json": "883e978279baf64f99dca97ebdba10d30a192b022d392bc282832ed5982bb491",
+    "build/goal-r1-goodix-frame-hook/io-assembly.txt": "e746aa29511cec9963876c37a38dc7d6c721ec771925fcff3cbb9b61562355a0",
+    "build/goal-r1-goodix-timestamp-closure/rea.json": "7d0b722814aa35c2438b6bc319bac891787e42cd602b834569baae24aaf36ede",
+    "build/goal-r1-goodix-io-dispatch/body.h": "7f104a0c53a236bb153a98e483b032652ab0405ef7f8b482889b4fc924a6e481",
+    "build/goal-r1-goodix-io-dispatch/probe.c": "d7891c5a30d4f4ff45e2b28f8aef876e2dcb7fa5494eb7bc7867a312c0b09bce",
+    "build/goal-r1-goodix-io-dispatch/probe/unit.o": "a9b69159a2d6ae9a9009c1f645ca602bce58bef27e6bb8f96fec48841b150372",
+    "build/goal-r1-goodix-io-dispatch/probe/receipt.json": "28c75b6580f3ed03d78a112141e9ebb340511ebc4825bbe64157b12640940faf",
+    "build/goal-r1-goodix-io-dispatch/frame_counterexample.py": "44775ba87697855def943a2bcd2cb5aebe89b84d634f64e0270a9e4babfff23e",
+    "build/goal-r1-goodix-io-dispatch/frame-counterexample.json": "fd2d93f0136652f0109fa0f7e7ff22eb3560af1d9e3907096ee9fee2cdf59254",
+    "build/goal-r1-goodix-io-dispatch/layouts.py": "895f87396c3747b1810dad4cad84daf161ea0012db3a0a4b1ec395bd24dcc269",
+    "build/goal-r1-goodix-io-dispatch/layout-probes.json": "33b331d45a7d0248bb58674d0c439b4f0b4b7a753125873379510e20a1f0a7c1",
+    "build/goal-r1-goodix-io-dispatch/gcc_probe.py": "fc77000f2e44dc794f0cbe30c7684cd0c19570fc4fb1f1ad031f47122714b853",
+    "build/goal-r1-goodix-io-dispatch/gcc-layout.json": "f7e78c942b5c468a6abdf70b3284b26bee07aae07f73a399ac031960dbfe31ab",
+    "build/goal-r1-goodix-io-dispatch/O2/unit.o": "029dee9c48e15e05f86784bf13db0edf55ab94e0fd48d2517dfc81291c4d50b3",
+    "build/goal-r1-goodix-io-dispatch/Oz/unit.o": "bd6f0d1fc70136b61cc79fad00296b2e8f2cdd4440a4b511f7cac7d664f5406e",
+    "build/goal-r1-goodix-io-dispatch/Og/unit.o": "768d47f02987acfff01093ce821a9d7ee5eedec44888153512c39c46a5b1161a",
+    "build/goal-r1-goodix-io-dispatch/gcc-probe/unit.o": "9412ecfe4bc57e863787294a79cb686292a1b9a4428a02e2fc300dc0def49161",
+    "build/goal-r1-goodix-io-dispatch/gcc-probe/receipt.json": "42aa587ba85fbbebe057de91789e1fbaab9d2a30366c079095f087b4c0e3fb40"
+  },
+  "limits": [
+    "Only prefix to algorithm provider executes in these probes",
+    "C candidate routing/logging remains unvalidated and is not firmware",
+    "Policy observations do not establish global inventory coverage or physical behavior",
+    "Goal remains incomplete; native frame preservation must precede integration"
+  ]
+}

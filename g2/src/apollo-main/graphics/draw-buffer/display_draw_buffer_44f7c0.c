@@ -17,7 +17,7 @@ extern void audio_uart_page_43dfa4(void *, uint32_t);
 extern void audio_uart_page_44e368(void *, uint32_t);
 extern void audio_uart_page_invalidate_440656(void *);
 extern void audio_uart_lv_event_add_4500e4(void *, void (*)(void), uint32_t, void *);
-extern void audio_uart_lvgl_log(uint32_t, const char *, uint32_t,
+extern void lv_log_add(uint32_t, const char *, uint32_t,
                                 const char *, const char *, ...);
 extern void audio_uart_display_tick_45360c(void *);
 extern const uint8_t audio_uart_display_page_style[]; /* stock 0x755610 */

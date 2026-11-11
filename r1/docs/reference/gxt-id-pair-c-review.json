@@ -1,0 +1,269 @@
+{
+  "source": {
+    "source": "r1/src/application/runtime/native_gxt310_id_pair.c",
+    "payload": "r1-application",
+    "role": "candidate",
+    "toolchain": "clang",
+    "link": true,
+    "expect": "compile",
+    "returncode": 0,
+    "argv": [
+      "/usr/bin/clang",
+      "--target=arm-none-eabi",
+      "-mcpu=cortex-m4",
+      "-mthumb",
+      "-munaligned-access",
+      "-mfloat-abi=hard",
+      "-mfpu=fpv4-sp-d16",
+      "-std=c11",
+      "-Os",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-fshort-enums",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-MD",
+      "-MF",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gxt-id-pair-c/r1/r1-application/r1__src__application__runtime__native_gxt310_id_pair.c.d",
+      "-c",
+      "/Users/kalani/Repo/evenRealities-openCFW/r1/src/application/runtime/native_gxt310_id_pair.c",
+      "-o",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gxt-id-pair-c/r1/r1-application/r1__src__application__runtime__native_gxt310_id_pair.c.o"
+    ],
+    "source_sha256": "28172a79abcd5c2c438a1b814ebd90c045a8ebacfd09571441494de8533142c8",
+    "object_sha256": "86b4a24617cc39076e8d5020d4ba75596e12eba216d81310f66a93024eb7ff67",
+    "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gxt-id-pair-c/r1/r1-application/r1__src__application__runtime__native_gxt310_id_pair.c.o",
+    "strong": [
+      "r1_gxt310_id_pair_read"
+    ],
+    "weak": [],
+    "undefined": [
+      "osDelay",
+      "r1_gxt310_bus_acquire",
+      "r1_gxt310_bus_release",
+      "r1_gxt310_chip_id_channel0",
+      "r1_gxt310_chip_id_channel2",
+      "r1_gxt310_disable_pair_native",
+      "r1_gxt310_enable_pair_native"
+    ]
+  },
+  "normal_report": "build/sources-goal-r1-gxt-id-pair-c/report.json",
+  "validation": {
+    "paired_cases": 36864,
+    "provider_frame": 8,
+    "release_tail_provider_frame": 0,
+    "actual_qualified_C_chip_id_wrappers": true,
+    "ordered_byte_writes_and_saved_frame_accesses": true,
+    "all_provider_R4_R11": true,
+    "all_ID_bytes_and_raw_words": true,
+    "limitations": [
+      "Bus/mode/delay and final chip-ID read providers modeled.",
+      "Caller-clobbered registers/flags except final R0 excluded; electrical response, actual timing, arbitrary aliases/faults/concurrency unproven."
+    ]
+  },
+  "negative_controls": {
+    "wrong-count": {
+      "rejected": true,
+      "stderr": "arm-none-eabi-ld: warning: (r1_gxt310_bus_acquire): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-gxt-id-pair-c/wrong-count.o\narm-none-eabi-ld: warning: (r1_gxt310_enable_pair_native): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-gxt-id-pair-c/wrong-count.o\narm-none-eabi-ld: warning: (osDelay): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-gxt-id-pair-c/wrong-count.o\narm-none-eabi-ld: warning: (r1_gxt310_chip_id_channel0): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-gxt-id-pair-c/wrong-count.o\narm-none-eabi-ld: warning: (r1_gxt310_chip_id_channel2): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-gxt-id-pair-c/wrong-count.o\narm-none-eabi-ld: warning: (r1_gxt310_disable_pair_native): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-gxt-id-pair-c/wrong-count.o\narm-none-eabi-ld: warning: (r1_gxt310_bus_release): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-gxt-id-pair-c/wrong-count.o\nTraceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-gxt-id-pair-c/reject-wrong-count.py\", line 69, in <module>\n    c=(first,second,offset,status,mutation,mask);assert a(*c)==b(*c),c;n+=1\n                                                               ~^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-gxt-id-pair-c/reject-wrong-count.py\", line 60, in run\n    u.emu_start((0x510d8 if stock else root)|1,STOP,count=500)\n    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 769, in emu_start\n    raise self._hook_exception\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 363, in wrapper\n    return func(uc, *args, **kwargs)\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 1077, in __hook_mem_access_cb\n    callback(uc, access, address, size, value, user_data)\n    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-gxt-id-pair-c/reject-wrong-count.py\", line 29, in mem\n    assert access==UC_MEM_WRITE and n==1;v &= 255;idx=state['writes'];assert a==state['ptr']+idx and v==[2,state['first']&255,state['second']&255][idx];state['shadow'][a-OUT]=v;state['writes']+=1;state['events'].append(['store',idx,v])\n                                                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    "wrong-ID-order": {
+      "rejected": true,
+      "stderr": "arm-none-eabi-ld: warning: (r1_gxt310_bus_acquire): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-gxt-id-pair-c/wrong-ID-order.o\narm-none-eabi-ld: warning: (r1_gxt310_enable_pair_native): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-gxt-id-pair-c/wrong-ID-order.o\narm-none-eabi-ld: warning: (osDelay): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-gxt-id-pair-c/wrong-ID-order.o\narm-none-eabi-ld: warning: (r1_gxt310_chip_id_channel2): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-gxt-id-pair-c/wrong-ID-order.o\narm-none-eabi-ld: warning: (r1_gxt310_chip_id_channel2): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-gxt-id-pair-c/wrong-ID-order.o\narm-none-eabi-ld: warning: (r1_gxt310_disable_pair_native): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-gxt-id-pair-c/wrong-ID-order.o\narm-none-eabi-ld: warning: (r1_gxt310_bus_release): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-gxt-id-pair-c/wrong-ID-order.o\nTraceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-gxt-id-pair-c/reject-wrong-ID-order.py\", line 69, in <module>\n    c=(first,second,offset,status,mutation,mask);assert a(*c)==b(*c),c;n+=1\n                                                               ~^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-gxt-id-pair-c/reject-wrong-ID-order.py\", line 60, in run\n    u.emu_start((0x510d8 if stock else root)|1,STOP,count=500)\n    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 769, in emu_start\n    raise self._hook_exception\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 363, in wrapper\n    return func(uc, *args, **kwargs)\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 1063, in __hook_code_cb\n    callback(uc, address, size, user_data)\n    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-gxt-id-pair-c/reject-wrong-ID-order.py\", line 40, in code\n    if i in [3,4]:assert r0==(0x90 if i==3 else 0x94)\n                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    "wrong-delay": {
+      "rejected": true,
+      "stderr": "arm-none-eabi-ld: warning: (r1_gxt310_bus_acquire): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-gxt-id-pair-c/wrong-delay.o\narm-none-eabi-ld: warning: (r1_gxt310_enable_pair_native): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-gxt-id-pair-c/wrong-delay.o\narm-none-eabi-ld: warning: (osDelay): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-gxt-id-pair-c/wrong-delay.o\narm-none-eabi-ld: warning: (r1_gxt310_chip_id_channel0): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-gxt-id-pair-c/wrong-delay.o\narm-none-eabi-ld: warning: (r1_gxt310_chip_id_channel2): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-gxt-id-pair-c/wrong-delay.o\narm-none-eabi-ld: warning: (r1_gxt310_disable_pair_native): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-gxt-id-pair-c/wrong-delay.o\narm-none-eabi-ld: warning: (r1_gxt310_bus_release): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-gxt-id-pair-c/wrong-delay.o\nTraceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-gxt-id-pair-c/reject-wrong-delay.py\", line 69, in <module>\n    c=(first,second,offset,status,mutation,mask);assert a(*c)==b(*c),c;n+=1\n                                                               ~^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-gxt-id-pair-c/reject-wrong-delay.py\", line 60, in run\n    u.emu_start((0x510d8 if stock else root)|1,STOP,count=500)\n    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 769, in emu_start\n    raise self._hook_exception\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 363, in wrapper\n    return func(uc, *args, **kwargs)\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 1063, in __hook_code_cb\n    callback(uc, address, size, user_data)\n    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-gxt-id-pair-c/reject-wrong-delay.py\", line 39, in code\n    if i==2:assert r0==80\n                   ^^^^^^\nAssertionError\n"
+    },
+    "missing-release": {
+      "rejected": true,
+      "stderr": "arm-none-eabi-ld: warning: (r1_gxt310_bus_acquire): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-gxt-id-pair-c/missing-release.o\narm-none-eabi-ld: warning: (r1_gxt310_enable_pair_native): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-gxt-id-pair-c/missing-release.o\narm-none-eabi-ld: warning: (osDelay): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-gxt-id-pair-c/missing-release.o\narm-none-eabi-ld: warning: (r1_gxt310_chip_id_channel0): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-gxt-id-pair-c/missing-release.o\narm-none-eabi-ld: warning: (r1_gxt310_chip_id_channel2): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-gxt-id-pair-c/missing-release.o\narm-none-eabi-ld: warning: (r1_gxt310_disable_pair_native): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-gxt-id-pair-c/missing-release.o\nTraceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-gxt-id-pair-c/reject-missing-release.py\", line 69, in <module>\n    c=(first,second,offset,status,mutation,mask);assert a(*c)==b(*c),c;n+=1\n                                                               ~^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-gxt-id-pair-c/reject-missing-release.py\", line 61, in run\n    assert u.reg_read(UC_ARM_REG_PC)==STOP and u.reg_read(UC_ARM_REG_SP)==SP and state['calls']==7 and state['writes']==3\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    }
+  },
+  "REA": {
+    "evidence_id": "ev_715b057abad9859475ef234e3f1eb4203a6c74e02a118890fa2cfcb3563c3607",
+    "subject": {
+      "name": "stock.elf",
+      "digest": {
+        "sha256": "25b4a29af80ec8edab5bd861ba9b74a6e22eab29dc3d7a809a16869e8a140f04"
+      },
+      "local_path": "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-queue-reset-c/stock.elf",
+      "format": "elf",
+      "architecture": "arm"
+    },
+    "provider": {
+      "id": "ghidra",
+      "name": "Ghidra",
+      "version": "12.1.4"
+    },
+    "analysis_profile": {
+      "provider": {
+        "id": "ghidra",
+        "name": "Ghidra",
+        "version": "12.1.4"
+      },
+      "parameters": {
+        "target_kind": "executable",
+        "target_format": "elf",
+        "architecture": "arm",
+        "available_architectures": [
+          "arm"
+        ],
+        "import_mode": "ephemeral-source-immutable",
+        "annotation_policy": "atomic-function-entry-metadata-v1",
+        "load_image_observations": "source-mappings-entry-context-v2",
+        "function_body_evidence": "complete-inclusive-ranges-v1",
+        "function_references": "complete-body-and-entry-reference-manager-v2",
+        "call_relationship_coverage": "function-body-call-coverage-v5",
+        "function_dossier_coverage": "observed-facets-and-call-relationships-v1",
+        "string_inventory_evidence": "defined-data-coverage-v1",
+        "location_resolution": "explicit-address-exact-entry-symbol-first-v3",
+        "procedure_file_offset_resolution": "address-first-unique-target-source-mapping-v2",
+        "instruction_flow_evidence": "decoded-return-pcode-v1",
+        "instruction_references": "exact-address-incoming-v1",
+        "function_boundary_observations": "ghidra-function-boundary-limitations-v3",
+        "no_return_repair": "returning-imports-decoded-return-v2",
+        "process_launch": "inspected-jvm-launch-support-v1",
+        "jump_table_evidence": "typed-case-default-blocks-v1",
+        "decompiler_jump_loads": true,
+        "loader": "auto-from-header",
+        "language_id": "auto-from-header",
+        "compiler_spec_id": "auto-default",
+        "analyzer_preset": "ghidra-default"
+      },
+      "digest": "7e46711069eea041af1b9b99e34115c13332795e5cda76e584a722f529ec70de"
+    },
+    "predicate_type": "rea.analysis",
+    "operation": "read_bytes",
+    "parameters": {
+      "address": "0x510d8",
+      "length": 46
+    },
+    "raw_result": {
+      "address": "0x510d8",
+      "requested_bytes": 46,
+      "returned_bytes": 46,
+      "bytes_hex": "10b50446fff724fffff75cff50202cf035f8022020701ef090fb60701ef09afba070fff745ffbde81040fff7fbbe",
+      "complete": true
+    },
+    "normalized_result": {
+      "address": "0x510d8",
+      "requested_bytes": 46,
+      "returned_bytes": 46,
+      "bytes_hex": "10b50446fff724fffff75cff50202cf035f8022020701ef090fb60701ef09afba070fff745ffbde81040fff7fbbe",
+      "complete": true
+    },
+    "confidence": "observed",
+    "authority": "shipped-artifact",
+    "environment": null,
+    "limitations": [
+      "The session serves operations only after Ghidra reports default auto-analysis complete; incomplete analysis does not expose partial results.",
+      "The imported Program and temporary project are ephemeral and deleted on close. Annotation operations edit session database metadata; original executable bytes are never written.",
+      "Cancelling an active Ghidra request terminates its ephemeral database and discards session annotations. The selected target remains open; the next provider query imports the original artifact again.",
+      "Default-space addresses use lowercase 0x-prefixed hexadecimal; other address spaces use <percent-encoded-space>:0x<hex>.",
+      "Bytes reflect Ghidra's initialized memory, including loader fixups. Reads stop at an unmapped or uninitialized byte and report completeness explicitly.",
+      "macOS sessions require a matching executable Ghidra native decompiler; REA checks for it but does not build native components or change Gatekeeper quarantine state."
+    ],
+    "relationship_coverage": null,
+    "locations": [],
+    "evidence_links": []
+  },
+  "unrelated_objects_identical": 583,
+  "imports_unchanged": {
+    "application": 164,
+    "bootloader": 34
+  },
+  "qualification": "build/goal-r1-gxt-id-pair-c/qualified/qualification.json",
+  "new_exact_bytes": 46,
+  "region": {
+    "payload": "r1-application",
+    "symbol": "r1_gxt310_id_pair_read",
+    "start": 172248,
+    "end": 172294,
+    "sha256": "6d7d51dae7516a12f1208598056bde8d3743d0471bb891d23ffd035a251f0dba",
+    "evidence": "r1/symbols/function-frontier.csv",
+    "bindings": {
+      "r1_gxt310_bus_acquire": 331561,
+      "r1_gxt310_enable_pair_native": 331677,
+      "osDelay": 512341,
+      "r1_gxt310_chip_id_channel0": 456723,
+      "r1_gxt310_chip_id_channel2": 456749,
+      "r1_gxt310_disable_pair_native": 331657,
+      "r1_gxt310_bus_release": 331517
+    },
+    "address": 331992,
+    "match_evidence": {
+      "method": "independently named native entry and all unrelocated bytes, followed by full linked equality",
+      "fixed_bytes": 18,
+      "compiled_pattern_sha256": "367bfb971724ecc65dc5948c9ceba59568c5885a2929eb45df8aa002d12afae8",
+      "relocations": [
+        {
+          "symbol": "r1_gxt310_bus_acquire",
+          "offset": 4,
+          "relocation_type": 10,
+          "address": 331561,
+          "role": "native_function"
+        },
+        {
+          "symbol": "r1_gxt310_enable_pair_native",
+          "offset": 8,
+          "relocation_type": 10,
+          "address": 331677,
+          "role": "native_function"
+        },
+        {
+          "symbol": "osDelay",
+          "offset": 14,
+          "relocation_type": 10,
+          "address": 512341,
+          "role": "native_function"
+        },
+        {
+          "symbol": "r1_gxt310_chip_id_channel0",
+          "offset": 22,
+          "relocation_type": 10,
+          "address": 456723,
+          "role": "native_function"
+        },
+        {
+          "symbol": "r1_gxt310_chip_id_channel2",
+          "offset": 28,
+          "relocation_type": 10,
+          "address": 456749,
+          "role": "native_function"
+        },
+        {
+          "symbol": "r1_gxt310_disable_pair_native",
+          "offset": 34,
+          "relocation_type": 10,
+          "address": 331657,
+          "role": "native_function"
+        },
+        {
+          "symbol": "r1_gxt310_bus_release",
+          "offset": 42,
+          "relocation_type": 30,
+          "address": 331517,
+          "role": "native_function"
+        }
+      ]
+    }
+  },
+  "hybrid": {
+    "report": "build/hybrid-goal-r1-gxt-id-pair-c/build-report.json",
+    "sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "totals": {
+      "binary-pull-through": 641959,
+      "source-built": 4201,
+      "resource-file": 248
+    },
+    "source_completeness_proven": false
+  },
+  "limitations": [
+    "Bus/mode/delay and final chip-ID read providers modeled; actual C qualified channel wrappers executed.",
+    "Caller-clobbered registers/flags except observed final R0 excluded.",
+    "Electrical response, actual timing, arbitrary aliases/faults/concurrency and complete source-only rebuilding remain unproven."
+  ]
+}

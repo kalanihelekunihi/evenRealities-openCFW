@@ -2,14 +2,19 @@
  * Formatter 0x473036 remains a typed source body contract. */
 #include <stdint.h>
 #include <stdarg.h>
+/* Stock-RAM literals rewritten to named objects (sim-test wave 2026-10-26,
+ * .waves/sim-fix/apply.py): g2ref_X is the linker symbol X. */
+#include <stdint.h>
+extern unsigned char g2ref_audio_uart_stdio_print_char_cell_200742f0[] __asm__("audio_uart_stdio_print_char_cell_200742f0");
+extern unsigned char g2ref_g2_flashdb_print_buffer[] __asm__("g2_flashdb_print_buffer");
 
 const char g2_log_transport_queue_failure_message[] =
     "error!!!!!!elog_async_ext_output: enqueue_log failed\n";
 
 typedef void (*transport_emit_fn)(const char *);
 static transport_emit_fn volatile *const emit_cell=
-    (transport_emit_fn volatile *)(uintptr_t)0x200742f0u;
-static char *const error_buffer=(char *)(uintptr_t)0x2006b930u;
+    (transport_emit_fn volatile *)(uintptr_t)((uint32_t)(uintptr_t)g2ref_audio_uart_stdio_print_char_cell_200742f0);
+static char *const error_buffer=(char *)(uintptr_t)((uint32_t)(uintptr_t)g2ref_g2_flashdb_print_buffer);
 extern int32_t g2_log_transport_vformat_unbounded(char *buffer,
                                                     const char *format,
                                                     va_list arguments);

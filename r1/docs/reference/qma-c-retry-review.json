@@ -1,0 +1,236 @@
+{
+  "cases": 1536,
+  "passed": 1536,
+  "failures": [],
+  "outcome_sequences": 32,
+  "functions": [
+    {
+      "name": "r1_qma_read_retry",
+      "stock_entry": "0x8714c",
+      "stock_bytes": 56,
+      "source_bytes": 66,
+      "native_span_sha256": "70bb77aa7bae95986e45eba2299c6176125dcdaef31b31f8490c2c8a9d90cf56"
+    },
+    {
+      "name": "r1_qma_write_retry",
+      "stock_entry": "0x873f4",
+      "stock_bytes": 46,
+      "source_bytes": 52,
+      "native_span_sha256": "581ff53e52acf319d5f51d4c011e5f2fdb57fd6b68322f66ca6bb055855003a9"
+    }
+  ],
+  "callback_stack_depth_pairs": [
+    [
+      false,
+      [
+        -32
+      ],
+      [
+        -32
+      ]
+    ],
+    [
+      false,
+      [
+        -32,
+        -32,
+        -32
+      ],
+      [
+        -32,
+        -32,
+        -32
+      ]
+    ],
+    [
+      false,
+      [
+        -32,
+        -32,
+        -32,
+        -32,
+        -32
+      ],
+      [
+        -32,
+        -32,
+        -32,
+        -32,
+        -32
+      ]
+    ],
+    [
+      false,
+      [
+        -32,
+        -32,
+        -32,
+        -32,
+        -32,
+        -32,
+        -32
+      ],
+      [
+        -32,
+        -32,
+        -32,
+        -32,
+        -32,
+        -32,
+        -32
+      ]
+    ],
+    [
+      false,
+      [
+        -32,
+        -32,
+        -32,
+        -32,
+        -32,
+        -32,
+        -32,
+        -32,
+        -32
+      ],
+      [
+        -32,
+        -32,
+        -32,
+        -32,
+        -32,
+        -32,
+        -32,
+        -32,
+        -32
+      ]
+    ],
+    [
+      false,
+      [
+        -32,
+        -32,
+        -32,
+        -32,
+        -32,
+        -32,
+        -32,
+        -32,
+        -32,
+        -32
+      ],
+      [
+        -32,
+        -32,
+        -32,
+        -32,
+        -32,
+        -32,
+        -32,
+        -32,
+        -32,
+        -32
+      ]
+    ],
+    [
+      true,
+      [
+        -32
+      ],
+      [
+        -24
+      ]
+    ],
+    [
+      true,
+      [
+        -32,
+        -32
+      ],
+      [
+        -24,
+        -24
+      ]
+    ],
+    [
+      true,
+      [
+        -32,
+        -32,
+        -32
+      ],
+      [
+        -24,
+        -24,
+        -24
+      ]
+    ],
+    [
+      true,
+      [
+        -32,
+        -32,
+        -32,
+        -32
+      ],
+      [
+        -24,
+        -24,
+        -24,
+        -24
+      ]
+    ],
+    [
+      true,
+      [
+        -32,
+        -32,
+        -32,
+        -32,
+        -32
+      ],
+      [
+        -24,
+        -24,
+        -24,
+        -24,
+        -24
+      ]
+    ]
+  ],
+  "unchanged_functions": [
+    "r1_qma6100_bounded_fifo_read",
+    "r1_qma6100_chip_id",
+    "r1_qma6100_irq_boundary",
+    "r1_qma_delay_units"
+  ],
+  "report": "build/sources-goal-r1-qma-retry/report.json",
+  "report_sha256": "c094149c328d722c10c1678e8165ba461ace117717110ae833dba83961a4ae5d",
+  "source_sha256": "c49b9347e0c61252122b04b6af3459c1e553cfb5002442d36ca3d2ce324d14fc",
+  "manifest_sha256": "be76bf00509f1551b53a08edbc5515ed3a3dcb9b1721ff4481fdf60b77d82eb8",
+  "stock_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "rea": {
+    "completed": true,
+    "procedures": [
+      "0x8714c",
+      "0x873f4"
+    ],
+    "path": "build/goal-r1-qma-retry/REA.json",
+    "sha256": "3508b8bf95a4f4881e86debc351f3a97bb132d2bb05b5fb472d7bc235509c51e",
+    "limitation": "Write pseudocode emits a fifth stack-derived argument; instructions and the established motion-bus ABI use four arguments."
+  },
+  "probe_artifacts": {
+    "build/goal-r1-qma-retry/verify.py": "0b4f62edc5f865dd9917a77c4e261d3a7008d1eeb530ae30460e957eefc8bf97",
+    "build/goal-r1-qma-retry/before.c": "8ec3819f1532b3e70a3d8a51e85ca100fa43f6e495ff10977cf2f5603cc3b4c7",
+    "build/goal-r1-qma-retry/source.elf": "9ec9af2427d9f7dc4a565901c8a6c29b551ed93ab157fccee1efc4f39fd52ccc",
+    "build/goal-r1-qma-retry/stock.elf": "65a33329d932f35cc5a1fa3259d11d091d4685138c05aafcca000179114a47a3",
+    "build/goal-r1-qma-retry/rea-snapshot.json": "2387b679cc76b1fb3de7414b7e34e822069a813f105515d3165f18fe1386784c",
+    "build/goal-r1-qma-retry/entries.json": "62f4134d09d32a08d13d7417aef198b2929a601709629dece45b71cd30360752"
+  },
+  "limits": [
+    "Bus read/write and delay are modeled and clobber caller-saved registers/flags.",
+    "Write parameter word is owned and initialized, but surrounding private frame bytes are not reproduced.",
+    "Runtime placement at 0x20007698 is controlled, not final layout proof.",
+    "No physical bus operation, delay timing, complete fault-state, final linking, source qualification or byte-identity claim."
+  ]
+}

@@ -1,26 +1,14 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_32ca20\n"
-".type opencfw_em9305_child_32ca20,@function\n"
-"opencfw_em9305_child_32ca20:\n"
-"L32ca20:\n"
-"mov_s r1,0x805c6c\n"
-"L32ca26:\n"
-"ld r1,[r1,0]\n"
-"L32ca28:\n"
-"ld r2,[r1,0x4]\n"
-"L32ca2a:\n"
-"ld r3,[r1,0x8]\n"
-"L32ca2c:\n"
-"st.as r2,[r0,165]\n"
-"L32ca30:\n"
-"ld r1,[r1,0xc]\n"
-"L32ca32:\n"
-"st.as r3,[r0,166]\n"
-"L32ca36:\n"
-"j_s.d [blink]\n"
-"L32ca38:\n"
-"st.as r1,[r0,167]\n"
-".size opencfw_em9305_child_32ca20,.-opencfw_em9305_child_32ca20\n"
-);
+#include <stdint.h>
+
+/* Native 0x32ca20..0x32ca3c: copy the three configuration words at
+ * +4/+8/+12 of the object at 0x805c6c into record words 165..167. */
+void opencfw_em9305_child_32ca20(uintptr_t record)
+{
+    uintptr_t config=*(volatile uint32_t *)0x805c6cu;
+    uint32_t first=*(volatile uint32_t *)(config+4u);
+    uint32_t second=*(volatile uint32_t *)(config+8u);
+    *(volatile uint32_t *)(record+660u)=first;
+    uint32_t third=*(volatile uint32_t *)(config+12u);
+    *(volatile uint32_t *)(record+664u)=second;
+    *(volatile uint32_t *)(record+668u)=third;
+}

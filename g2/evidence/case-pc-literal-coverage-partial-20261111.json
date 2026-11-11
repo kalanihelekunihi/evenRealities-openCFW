@@ -1,0 +1,259 @@
+{
+  "schema": 1,
+  "date": "2026-11-11",
+  "reference": {
+    "artifact": "g2/blobs/official/g2-2.2.6.10/firmware_box.raw.bin",
+    "sha256": "773b6d4cfdaf0a5a74a557e3babe8222a0ae813436b76a7437c1096d2c60d677",
+    "flash_base": "0x08000000"
+  },
+  "method": "Split five partially referenced frontier rows on 4-byte word boundaries. Each literal child consists only of words loaded by a raw Thumb PC-relative LDR opcode inside an authenticated Ghidra function body, also confirmed in GNU disassembly. Unreferenced children remain explicitly unsupported.",
+  "splits": [
+    {
+      "original": {
+        "start": "0x0800622C",
+        "end_exclusive": "0x08006240",
+        "bytes": 20,
+        "sha256": "fa062183ca87a7da6a0021ecc717fec7826698aaf766aaabd7bb3dc909151b79"
+      },
+      "children": [
+        {
+          "start": "0x0800622C",
+          "end_exclusive": "0x08006230",
+          "bytes": 4,
+          "sha256": "c4f0bd70b866526c085c4485b87c1867fa83ab571239f65bb5c1ae98353506b1",
+          "classification": "typed_unsupported_interfunction_code_or_data_boundary"
+        },
+        {
+          "start": "0x08006230",
+          "end_exclusive": "0x08006240",
+          "bytes": 16,
+          "sha256": "b960726781db353475016333be80a16a9603c34f1506193201125e5b0cfa3fd2",
+          "classification": "typed_pc_relative_literal_data",
+          "words": [
+            {
+              "address": "0x08006230",
+              "value": "0x0000080F",
+              "load_sites": [
+                "0x08005F5C"
+              ]
+            },
+            {
+              "address": "0x08006234",
+              "value": "0x10000001",
+              "load_sites": [
+                "0x08005F6A",
+                "0x08006172"
+              ]
+            },
+            {
+              "address": "0x08006238",
+              "value": "0x04000120",
+              "load_sites": [
+                "0x08005F6C"
+              ]
+            },
+            {
+              "address": "0x0800623C",
+              "value": "0x080086E1",
+              "load_sites": [
+                "0x0800603E"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "original": {
+        "start": "0x080091E8",
+        "end_exclusive": "0x08009210",
+        "bytes": 40,
+        "sha256": "12f39e4f794bcee9e1be8f495fca5c63aa541d97c0904b32298d618b0b7d965d"
+      },
+      "children": [
+        {
+          "start": "0x080091E8",
+          "end_exclusive": "0x080091F0",
+          "bytes": 8,
+          "sha256": "52d112d1a0b3fb709cf927fbb976558ad54af60c01c78fcda8119bc4493f14ed",
+          "classification": "typed_pc_relative_literal_data",
+          "words": [
+            {
+              "address": "0x080091E8",
+              "value": "0xE000E400",
+              "load_sites": [
+                "0x080091C0"
+              ]
+            },
+            {
+              "address": "0x080091EC",
+              "value": "0xE000ED00",
+              "load_sites": [
+                "0x080091D8"
+              ]
+            }
+          ]
+        },
+        {
+          "start": "0x080091F0",
+          "end_exclusive": "0x08009210",
+          "bytes": 32,
+          "sha256": "34d01cdc66a277e83ae218ee22f6b8edd342d4fe4daf7fec62f403b193dab161",
+          "classification": "typed_unsupported_interfunction_code_or_data_boundary"
+        }
+      ]
+    },
+    {
+      "original": {
+        "start": "0x0800ACC8",
+        "end_exclusive": "0x0800ACE4",
+        "bytes": 28,
+        "sha256": "ea673430066a31f741a474c4480d063482a901a5fc6f3c3bcf19c651a74df66d"
+      },
+      "children": [
+        {
+          "start": "0x0800ACC8",
+          "end_exclusive": "0x0800ACDC",
+          "bytes": 20,
+          "sha256": "f55d8df1c03917329e6e27f1ce318dcbab80e6df11fc76acd3fe13ee8417c1d6",
+          "classification": "typed_pc_relative_literal_data",
+          "words": [
+            {
+              "address": "0x0800ACC8",
+              "value": "0x20000164",
+              "load_sites": [
+                "0x0800AC8A"
+              ]
+            },
+            {
+              "address": "0x0800ACCC",
+              "value": "0x200015A8",
+              "load_sites": [
+                "0x0800AC92",
+                "0x0800AC9E"
+              ]
+            },
+            {
+              "address": "0x0800ACD0",
+              "value": "0x200015BC",
+              "load_sites": [
+                "0x0800AC98"
+              ]
+            },
+            {
+              "address": "0x0800ACD4",
+              "value": "0x200014B8",
+              "load_sites": [
+                "0x0800ACAA"
+              ]
+            },
+            {
+              "address": "0x0800ACD8",
+              "value": "0x20001508",
+              "load_sites": [
+                "0x0800ACAC"
+              ]
+            }
+          ]
+        },
+        {
+          "start": "0x0800ACDC",
+          "end_exclusive": "0x0800ACE4",
+          "bytes": 8,
+          "sha256": "4149b1cfe7a7921d4c38a7ce73ceb211e72266331ce00b280f26f0c550899ac4",
+          "classification": "typed_unsupported_interfunction_code_or_data_boundary"
+        }
+      ]
+    },
+    {
+      "original": {
+        "start": "0x0800B318",
+        "end_exclusive": "0x0800B330",
+        "bytes": 24,
+        "sha256": "185b32f5e1e2f7af41c1337284cf2fabeb8cb1b18b36f0cb7b68f8409ac9e09c"
+      },
+      "children": [
+        {
+          "start": "0x0800B318",
+          "end_exclusive": "0x0800B31C",
+          "bytes": 4,
+          "sha256": "c6730dbb271b36104d70b4a4fe27f9285bb078e01ff2c3f52a1052da05bdcff6",
+          "classification": "typed_pc_relative_literal_data",
+          "words": [
+            {
+              "address": "0x0800B318",
+              "value": "0x20000164",
+              "load_sites": [
+                "0x0800B2B2"
+              ]
+            }
+          ]
+        },
+        {
+          "start": "0x0800B31C",
+          "end_exclusive": "0x0800B330",
+          "bytes": 20,
+          "sha256": "ba9360820afda1fc78a03db20a47ef48a70be3ec10a2ea51d01b0cfb66659d83",
+          "classification": "typed_unsupported_interfunction_code_or_data_boundary"
+        }
+      ]
+    },
+    {
+      "original": {
+        "start": "0x0800BF7C",
+        "end_exclusive": "0x0800BF94",
+        "bytes": 24,
+        "sha256": "7712bdc74f4d4b93264e9f18d88f4cc0311c11cf430a9be9518f2681ec2db66c"
+      },
+      "children": [
+        {
+          "start": "0x0800BF7C",
+          "end_exclusive": "0x0800BF84",
+          "bytes": 8,
+          "sha256": "79b17bba8685d7fa81aa2f5c4af954de545b84a8d77d40254c1b6869b339a2fb",
+          "classification": "typed_pc_relative_literal_data",
+          "words": [
+            {
+              "address": "0x0800BF7C",
+              "value": "0x2000182C",
+              "load_sites": [
+                "0x0800BF6C"
+              ]
+            },
+            {
+              "address": "0x0800BF80",
+              "value": "0x20001888",
+              "load_sites": [
+                "0x0800BF70"
+              ]
+            }
+          ]
+        },
+        {
+          "start": "0x0800BF84",
+          "end_exclusive": "0x0800BF94",
+          "bytes": 16,
+          "sha256": "4b99c773b048184c46aa60cc336e3891398309babadd4c614b6e216171d84477",
+          "classification": "typed_unsupported_interfunction_code_or_data_boundary"
+        }
+      ]
+    }
+  ],
+  "coverage_delta": {
+    "frontier": "g2/tools/manifests/g2-case-final-gap-frontier.tsv",
+    "original_rows": 230,
+    "new_rows": 235,
+    "new_literal_bytes": 56,
+    "total_literal_bytes": 720,
+    "unsupported_rows": 102,
+    "unsupported_bytes_in_split_rows": 80
+  },
+  "verification": {
+    "all_235_frontier_hashes_match": true,
+    "rows_nonoverlapping": true
+  },
+  "limits": [
+    "Remaining 80 bytes of these five original rows still need code/data classification.",
+    "Literal references do not prove C source completeness, bundle byte equality, or physical behavior."
+  ]
+}

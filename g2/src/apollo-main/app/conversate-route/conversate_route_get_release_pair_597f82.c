@@ -1,7 +1,7 @@
 /* Native release-pair getter at 0x597f82. */
 #include <stdint.h>
 
-extern void audio_uart_lvgl_log(uint32_t level, const char *module,
+extern void lv_log_add(uint32_t level, const char *module,
                                 uint32_t line, const char *format, ...);
 
 static const char source_path[] =
@@ -13,7 +13,7 @@ static const char null_pointer[] = "NULL pointer";
 
 uint32_t audio_conversate_route_get_release_pair_597f82(uint32_t handle) {
     if (handle == 0u) {
-        audio_uart_lvgl_log(3u, source_path, 0xafu, getter_name,
+        lv_log_add(3u, source_path, 0xafu, getter_name,
                             assertion, object_not_null, null_pointer);
         for (;;) *(volatile uint32_t *)(uintptr_t)UINT32_MAX = 0u;
     }

@@ -1,0 +1,23 @@
+{
+  "schema": 1,
+  "report": "build/sources-goal-r1-boot-sha256-c/report.json",
+  "report_sha256": "c012b44731789a1b575073f29833c5c383ee6fada0e2c9de6b357de868aa284f",
+  "manifest_sha256": "da6bdf4b83498886995398e306ae97087057c4e2ae863bc8fcfeeaedaaed81ba",
+  "verification": {
+    "vectors": 154,
+    "calls": 27100,
+    "application_objects_unchanged": 696,
+    "strict_crypto_imports": [
+      "nrf_cc310_bl_ecdsa_verify_secp256r1",
+      "nrf_cc310_bl_init"
+    ],
+    "probe_elf_sha256": "acb7bcabe0ba2cfd3ca05d32fe7d323ad6910adfe009e2285ae582d5e32af19f"
+  },
+  "defect_controls": [
+    "wrong-round-constant detected",
+    "little-endian-digest detected"
+  ],
+  "strict_link_report": "build/goal-r1-boot-sha256-c/strict/report.json",
+  "physical_dfu_verified": false,
+  "complete_firmware_link": false
+}

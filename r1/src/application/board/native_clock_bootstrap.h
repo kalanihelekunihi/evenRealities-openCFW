@@ -1,6 +1,6 @@
 #ifndef R1_NATIVE_CLOCK_BOOTSTRAP_H
 #define R1_NATIVE_CLOCK_BOOTSTRAP_H
-#include "time_calendar/time_calendar.h"
+#include "../../vendor/time_calendar/time_calendar.h"
 typedef void (*r1_clock_tick_fn)(uint32_t);
 typedef struct {
     time_calendar_backend_ops prefix;

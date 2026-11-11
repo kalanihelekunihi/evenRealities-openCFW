@@ -1,0 +1,160 @@
+{
+  "schema_version": 1,
+  "source": "r1/src/application/runtime/native_touch_dispatch.c",
+  "native_roots": [
+    "0x46650",
+    "0x45ec8",
+    "0x51368",
+    "0x8e7ac",
+    "0x46eac",
+    "0x72888",
+    "0x7287c",
+    "0x2f866",
+    "0x4fa8c",
+    "0x4faa8",
+    "0x4fac4",
+    "0x4fae4",
+    "0x4fb04",
+    "0x4fb24"
+  ],
+  "report": "build/sources-goal-r1-touch-dispatch-final-c/report.json",
+  "compiled_units": 833,
+  "application_imports": 76,
+  "added_imports": [
+    "r1_iqs7211e_irq_worker",
+    "r1_iqs7211e_register_write_port",
+    "r1_touch_pending_tap_timeout"
+  ],
+  "removed_imports": [
+    "r1_iqs7211e_touch_task_dispatcher"
+  ],
+  "prior_objects_unchanged": 830,
+  "changed_generated_objects": [
+    [
+      "r1-bootloader",
+      "{gen}/r1_startup_vectors.S"
+    ],
+    [
+      "r1-bootloader",
+      "{gen}/r1_uecc.c"
+    ]
+  ],
+  "added_units": [
+    [
+      "r1-application",
+      "r1/src/application/runtime/native_touch_dispatch.c"
+    ]
+  ],
+  "verification": {
+    "flag_combination_pairs": 4096,
+    "park_order_pairs": 4,
+    "seeded_live_pairs": 512,
+    "adapter_pairs": 60,
+    "queue_retention_pairs": 144,
+    "actual_C_worker_park": true,
+    "log_mode_pairs": 512,
+    "actual_C_bus_ops_and_registry": false,
+    "bus_fixture_pairs": 0
+  },
+  "actual_bus_registry_integration": {
+    "flag_combination_pairs": 13,
+    "park_order_pairs": 4,
+    "seeded_live_pairs": 16,
+    "adapter_pairs": 60,
+    "queue_retention_pairs": 144,
+    "actual_C_worker_park": true,
+    "log_mode_pairs": 3,
+    "actual_C_bus_ops_and_registry": true,
+    "bus_fixture_pairs": 24
+  },
+  "mutants": {
+    "rejected": [
+      "park_group",
+      "open_delay",
+      "recovery_delay",
+      "queue_type_width",
+      "queue_half_length",
+      "factory_precedence",
+      "factory_half",
+      "irq_ready_level",
+      "clear_slider",
+      "port_register",
+      "recovery_post",
+      "close_active"
+    ]
+  },
+  "rea_receipts": "r1/docs/reference/touch-dispatch-rea-bytes.json",
+  "rea_bytes_match_pinned_stock": true,
+  "new_owners": [
+    {
+      "symbol": "r1_touch_task_active",
+      "stock_address": "0x20006654",
+      "size": 1,
+      "cold_rw": "00"
+    },
+    {
+      "symbol": "r1_touch_parameters",
+      "stock_address": "0x2000665c",
+      "size": 6,
+      "cold_rw": "0800f0001a01"
+    },
+    {
+      "symbol": "r1_touch_slider_flag",
+      "stock_address": "0x20007730",
+      "size": 1,
+      "cold_rw": "00"
+    },
+    {
+      "symbol": "r1_touch_factory_state",
+      "stock_address": "0x20007750",
+      "size": 12,
+      "cold_rw": "000400040000f00001000000"
+    }
+  ],
+  "C_initializers_match_authenticated_RW": true,
+  "callback_signature_correction": {
+    "source": "r1/src/application/board/native_touch_device_ops.c",
+    "function": "delayed_touch_release",
+    "argument": "uint32_t ignored",
+    "object_unchanged": true
+  },
+  "contract": {
+    "dispatch_order": [
+      "queue bit22",
+      "IRQ bit0",
+      "park bit23",
+      "open bit1",
+      "close bit2/recovery",
+      "error logs bits4 and5",
+      "first factory bit among6..11"
+    ],
+    "park": "actual C helper group9 with live watchdog, then permanent UINT32_MAX delay",
+    "open": "preserve nonzero active byte; acquire client2; delayed release(0,0x800); delay1; board open",
+    "close": "log; clear task active; consume board pending; if live slider flag nonzero cancel+schedule recovery(0,0x66)",
+    "queue": "clear44 once; reload queue per nonblocking get; low-byte types1..4 update fields only for required lengths; type5 tap timeout",
+    "factory": "publish marker; bus open; register 0xff zero-byte write via command0x56, args length1/option1; bus close; then value store for markers3..6",
+    "recovery_callback": "clear slider flag, live logs, postevent2"
+  },
+  "limitations": [
+    "Primary probes model RTOS, queue/IRQ/port, delayed scheduler, board power/open/close and logging providers. Actual new adapters and C park helper execute.",
+    "Deeper probe also executes existing C bus adapters and registry dispatch, using prepared device/vtable fixtures with modeled callbacks, missing methods and changing live bus handles.",
+    "Source callback signature now matches delayed scheduler; its compiled object is unchanged.",
+    "RTOS delay values are compared as raw units; text saying 100ms is not a physical timing proof.",
+    "No physical I2C/touch, final application link or boot proof; byte identity is not required by current user instruction."
+  ],
+  "evidence_files": {
+    "build/sources-goal-r1-touch-dispatch-final-c/report.json": "92ca27bb0b92e443906a266403940491bf45386ffe5d06968e6f9e1ced099ea3",
+    "r1/src/sources.json": "1c1238d4f29cf9d5c7bd3a09a121d75aa2a3e45589e30c7778113b4a3dcba218",
+    "r1/src/application/runtime/native_touch_dispatch.c": "3688920fad82e232963b5b8ce0615409c8e1cefb78c0a27c93ef52b52ef19a5f",
+    "r1/src/application/board/native_touch_task_control.h": "f49e92d9fd8eb65712359a4ece4de89697bfe867ca3094aaf95ea606e97ed752",
+    "r1/src/application/board/native_touch_device_ops.c": "139ad4a1f5da22c8e574a8a98a8a43ea5d10cdfc04c18524229ef484ed651d4a",
+    "build/goal-r1-fstorage-registry/expanded-rw.bin": "87fdee392022fdbe23dd0daf3e859fb14f3ce26ba3e8403aab56dc9d9a913317",
+    "build/goal-r1-touch-dispatch-c/verify.py": "f36ac4185c5f41b8c6da71559502f52aee2170892b9fcc28b95e3d7b9e2c5732",
+    "build/goal-r1-touch-dispatch-c/verification.json": "7d10a7df90de4719f5d9d4543497e8ee9bed421c8a450ad305de5f4c7c50e4d1",
+    "build/goal-r1-touch-dispatch-c/integration.json": "2ade5598b8f23e4f13d16ec0e902126df01762823f5cb7eddd8564c19cc9d4fb",
+    "build/goal-r1-touch-dispatch-c/mutants.py": "43960d0212e397e76eb763f3e45835ea53574d62efa422beae0be2f014cab42f",
+    "build/goal-r1-touch-dispatch-c/mutants.json": "4702e2fa050290e2838d364607279b13e0a62fe3ad81aae091c5453f17f095a6",
+    "r1/docs/reference/touch-dispatch-rea-bytes.json": "bd830e54c26e83330ca6e0f8471c6f51078ece9681021b79f49b4fefd9f565c5",
+    "build/goal-r1-touch-dispatch-c/sources-check.log": "a5cc254cf03002e0f576721c5db862dc5aa54852d8aa8857e8764ded0f2ac3bc"
+  }
+}

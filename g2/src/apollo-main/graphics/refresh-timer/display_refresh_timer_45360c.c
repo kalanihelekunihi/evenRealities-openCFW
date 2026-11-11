@@ -6,7 +6,7 @@ extern void *audio_uart_display_current_44fa1a(void);
 extern void audio_uart_lv_timer_pause(void *);
 extern uint32_t audio_uart_lv_display_event_44fdbe(void *, uint32_t, void *);
 extern void audio_uart_page_43f66c(void *);
-extern void audio_uart_lvgl_log(uint32_t, const char *, uint32_t,
+extern void lv_log_add(uint32_t, const char *, uint32_t,
                                 const char *, const char *, ...);
 extern void audio_uart_lv_refresh_collect_45377a(void);
 extern void audio_uart_lv_refresh_layout_45383c(void);

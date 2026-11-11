@@ -1,0 +1,161 @@
+{
+  "schema_version": 1,
+  "sources": [
+    "r1/src/application/runtime/native_touch_release.c",
+    "r1/src/application/runtime/native_touch_gesture.c"
+  ],
+  "native_roots": [
+    "0x8e9d0",
+    "0x3e938"
+  ],
+  "report": "build/sources-goal-r1-touch-pending-final-c/report.json",
+  "compiled_units": 840,
+  "application_imports": 73,
+  "added_imports": [],
+  "removed_imports": [
+    "r1_touch_pending_tap_timeout"
+  ],
+  "verification": {
+    "stock_C_pairs": {
+      "timeout_pending_bytes": 2304,
+      "gesture_flag_domain": 1024,
+      "gesture_direction_time_wrap": 144,
+      "wire_size_live_handles": 72,
+      "live_provider_mutations": 78,
+      "gesture_live_provider_mutations": 78,
+      "seeded_touch_inputs": 256
+    },
+    "total_pairs": 3956,
+    "actual_C_gesture_for_timeout": false,
+    "actual_C_timer_queue_pipeline": false,
+    "standard_memory_routines_execute": true,
+    "shared_timer_owner_reused": true,
+    "ordinary_AAPCS_outputs_only": true,
+    "callee_saved_integer_FP_stack_guards_masks": true,
+    "device_execution": false
+  },
+  "actual_timer_queue_gesture_integration": {
+    "stock_C_pairs": {
+      "timeout_pending_bytes": 36,
+      "gesture_flag_domain": 1024,
+      "gesture_direction_time_wrap": 144,
+      "wire_size_live_handles": 72,
+      "live_provider_mutations": 78,
+      "gesture_live_provider_mutations": 78,
+      "seeded_touch_inputs": 16,
+      "timer_queue_timeout_gesture_pipeline": 48
+    },
+    "total_pairs": 1496,
+    "actual_C_gesture_for_timeout": true,
+    "actual_C_timer_queue_pipeline": true,
+    "standard_memory_routines_execute": true,
+    "shared_timer_owner_reused": true,
+    "ordinary_AAPCS_outputs_only": true,
+    "callee_saved_integer_FP_stack_guards_masks": true,
+    "device_execution": false
+  },
+  "mutants": [
+    {
+      "name": "pending_guard",
+      "source": "r1/src/application/runtime/native_touch_release.c",
+      "rejected": true
+    },
+    {
+      "name": "contact_clear",
+      "source": "r1/src/application/runtime/native_touch_release.c",
+      "rejected": true
+    },
+    {
+      "name": "tap_flag",
+      "source": "r1/src/application/runtime/native_touch_release.c",
+      "rejected": true
+    },
+    {
+      "name": "velocity_offset",
+      "source": "r1/src/application/runtime/native_touch_release.c",
+      "rejected": true
+    },
+    {
+      "name": "reset_flag",
+      "source": "r1/src/application/runtime/native_touch_release.c",
+      "rejected": true
+    },
+    {
+      "name": "pending_clear",
+      "source": "r1/src/application/runtime/native_touch_release.c",
+      "rejected": true
+    },
+    {
+      "name": "timer_clear",
+      "source": "r1/src/application/runtime/native_touch_release.c",
+      "rejected": true
+    },
+    {
+      "name": "packet_kind",
+      "source": "r1/src/application/runtime/native_touch_gesture.c",
+      "rejected": true
+    }
+  ],
+  "prior_objects_unchanged": 836,
+  "changed_generated_objects": [
+    [
+      "r1-bootloader",
+      "{gen}/r1_startup_vectors.S"
+    ],
+    [
+      "r1-bootloader",
+      "{gen}/r1_uecc.c"
+    ]
+  ],
+  "changed_existing_allocated_sections": {
+    "r1/src/application/runtime/native_touch_gesture.c": [
+      ".text.r1_touch_gesture_dispatch_boundary"
+    ],
+    "r1/src/application/runtime/native_touch_release.c": [
+      ".ARM.exidx.text.r1_touch_pending_tap_timeout",
+      ".text.r1_touch_pending_tap_timeout"
+    ]
+  },
+  "new_state_owners": [],
+  "shared_timer_pending_stock_initializer": 0,
+  "reused_owners": [
+    "r1_touch_contact_state",
+    "r1_touch_release_timer_pending",
+    "r1_touch_synthetic_flag",
+    "existing gesture direction/count/timestamps"
+  ],
+  "contract": [
+    "When contact byte48 is nonzero, clear byte48 and byte0 before dispatching the fully assigned record {4,0,live contact byte95,0}.",
+    "Clear the existing timer-pending byte after the callback, including the inactive path and live callback mutations.",
+    "Replace the gesture entry assembly bridge with an aligned twelve-byte C frame. The existing gesture kernel and all other allocated code/state sections remain unchanged.",
+    "Reuse the existing timer-pending owner at native0x200067c4, whose authenticated initialized byte is zero. No new phase owner is introduced."
+  ],
+  "limits": [
+    "REA read_bytes results are matched against the pinned raw stock image; this alone is not decompilation or function equivalence. The attempted slider pseudocode operation failed and is not evidence of a completed slider reconstruction.",
+    "Ordinary AAPCS outputs, callee saves, stack guards and interrupt masks are tested. Private frame addresses and incidental saved caller-clobbered registers are excluded.",
+    "The integrated probe executes C timer callback, queue consumer, timeout, gesture body and standard memory routines; FIFO, scheduler, logging, connection, configuration and transport services are modeled. It does not execute the kernel queue backend or a physical device.",
+    "Relocatable composition is not a final firmware link, runtime placement, physical timing or boot proof. Byte identity is not required.",
+    "R1 manifest check passes. Global sources-check still fails for the pre-existing unlisted G2 resident_rom_thumb_set.S."
+  ],
+  "evidence_files": {
+    "build/sources-goal-r1-touch-pending-final-c/report.json": "0d1e59c473cea07b641fdf7392fbab535a898dcc891ba0d9f657369f3e67bf97",
+    "r1/src/sources.json": "f746e00d53114276e3e58bb8a80029a08235b7401c15678d81fbab3246965110",
+    "r1/src/application/runtime/native_touch_release.c": "957cf12375f49ca599e2a1f5f682532b04d9dd0d8dd16c828e3863fedf6cbbfc",
+    "r1/src/application/runtime/native_touch_gesture.c": "20d1798b59fb8586c7d8b8bac5e66e289d8bd4fc7c41557bcc3662e33a4c4edc",
+    "build/goal-r1-fstorage-registry/expanded-rw.bin": "87fdee392022fdbe23dd0daf3e859fb14f3ce26ba3e8403aab56dc9d9a913317",
+    "build/goal-r1-touch-pending-c/verify.py": "5e0e1e59c108aa97224ca64498b1a507f7ddeb0ebf4d0fc12914b5dfa3e60ae8",
+    "build/goal-r1-touch-pending-c/verification.json": "9b31ab69143203f386d5787fe45918b03c9ce313334c935ceb28fc8a80a56cbd",
+    "build/goal-r1-touch-pending-c/verification.log": "db95f72ba8b208ea7150b29eb6b6faa14d7508c0f5b92ed4a4bd812b62e86ec3",
+    "build/goal-r1-touch-pending-c/integration.json": "64e3c6cef7446b06e5951e3a5901732b49cc12ea3055b5b7979c1878d443d13b",
+    "build/goal-r1-touch-pending-c/actual.log": "c0cf3066ad240fa516c539087e2e6b1fb066f5f69d88886910663f695a329d3c",
+    "build/goal-r1-touch-pending-c/unmodified-rerun.log": "c0cf3066ad240fa516c539087e2e6b1fb066f5f69d88886910663f695a329d3c",
+    "build/goal-r1-touch-pending-c/rea.json": "650703306e241805bb0c8d1310313e2525612f148ab75c7d50b096528b0b36da",
+    "build/goal-r1-touch-pending-c/mutants.py": "1ba3b42ec779d04b19281184913a1d3788759e78960d57f056755fff797fe7d9",
+    "build/goal-r1-touch-pending-c/mutant-verify.py": "a9b1525bee8707263d5ed1c47c5ea43ebf4661a09cc8cdd24d391ddeca17b4bd",
+    "build/goal-r1-touch-pending-c/mutants.json": "faababaae01e889339b35f7a17710ca9c5aa776a99578b593b9f10aae4089a18",
+    "build/goal-r1-touch-pending-c/mutants.log": "f01f57257e4368ace09cc8cfd34d1e848e47dcf10872a46fec692ed246db4edd",
+    "build/goal-r1-touch-pending-c/audit.py": "bf932493f8964bf73a81821689cca45569603724361d3a257dc03e776b4e0492",
+    "build/goal-r1-touch-pending-c/object-audit.json": "4e119bbec9c1eb341c2397188d4b8c468f69938ae9d607f535d572f2467c9ae1",
+    "build/goal-r1-touch-pending-c/sources-check.log": "8ce23e9a175a8eca14d5996d3ef74e32e078d6d68c25bf4400ab6543315a854f"
+  }
+}

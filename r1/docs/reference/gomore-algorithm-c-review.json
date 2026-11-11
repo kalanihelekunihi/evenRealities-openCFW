@@ -1,0 +1,569 @@
+{
+  "source": {
+    "source": "r1/src/application/runtime/native_gomore_algorithm.c",
+    "payload": "r1-application",
+    "role": "candidate",
+    "toolchain": "gcc9",
+    "link": true,
+    "expect": "compile",
+    "returncode": 0,
+    "argv": [
+      "/opt/homebrew/bin/python3",
+      "/Users/kalani/Repo/evenRealities-openCFW/tools/build/linux_gcc.py",
+      "--compiler",
+      "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/bin/arm-none-eabi-gcc",
+      "--read-root",
+      "/Users/kalani/Repo/evenRealities-openCFW/r1",
+      "--read-root",
+      "/Users/kalani/Repo/evenRealities-openCFW/third-party/upstream",
+      "--read-root",
+      "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1",
+      "--read-root",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-algorithm-c/generated/r1",
+      "--",
+      "-mcpu=cortex-m4",
+      "-mthumb",
+      "-munaligned-access",
+      "-mfpu=fpv4-sp-d16",
+      "-mfloat-abi=hard",
+      "-std=c11",
+      "-Os",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-fshort-enums",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-fno-delete-null-pointer-checks",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/r1/src/vendor",
+      "-isystem",
+      "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
+      "-fno-strict-aliasing",
+      "-ffp-contract=off",
+      "-fsignaling-nans",
+      "-frounding-math",
+      "-ftrapping-math",
+      "-MD",
+      "-MF",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-algorithm-c/r1/r1-application/r1__src__application__runtime__native_gomore_algorithm.c.d",
+      "-c",
+      "/Users/kalani/Repo/evenRealities-openCFW/r1/src/application/runtime/native_gomore_algorithm.c",
+      "-o",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-algorithm-c/r1/r1-application/r1__src__application__runtime__native_gomore_algorithm.c.o"
+    ],
+    "source_sha256": "a9c7243803c34732d8a023caedd9726e314785e523aeeda5a270357749d338c6",
+    "object_sha256": "3f59bff19652dae107c749995a03d2ee6b694d5b3a31fabb71d43098a10c9ea3",
+    "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-algorithm-c/r1/r1-application/r1__src__application__runtime__native_gomore_algorithm.c.o",
+    "strong": [
+      "r1_gomore_algorithm_output_native"
+    ],
+    "weak": [],
+    "undefined": [
+      "gomore_primitives_noop_578c8",
+      "r1_gomore_stage_5ed14_native",
+      "r1_gomore_stage_5ef1c_native",
+      "r1_gomore_stage_5f264_native",
+      "r1_gomore_stage_5f3d8_native",
+      "r1_gomore_stage_5f4b6_native",
+      "r1_gomore_stage_5f56c_native",
+      "r1_gomore_stage_5feb8_native",
+      "r1_gomore_stage_605dc_native",
+      "r1_gomore_stage_60680_native",
+      "r1_gomore_stage_60af4_native",
+      "r1_gomore_stage_60b80_native",
+      "r1_gomore_stage_60dc4_native",
+      "r1_gomore_stage_610c8_native",
+      "r1_gomore_stage_61198_native",
+      "r1_gomore_stage_61274_native",
+      "r1_gomore_stage_6138c_native"
+    ]
+  },
+  "shared_header": {
+    "path": "r1/src/application/runtime/native_gomore_stages.h",
+    "sha256": "0de6f25a08e20f825dd26d9783bfd7b3b1c0c43f8e66c2e793e01eb3e7929ad8"
+  },
+  "direct_replay": {
+    "source_object_sha256": "3f59bff19652dae107c749995a03d2ee6b694d5b3a31fabb71d43098a10c9ea3",
+    "pairs": 4512,
+    "independent_ordered_call_and_state_cases": 4512,
+    "digest": "17329f922f039c23e141cf09f309d501ee9ae6988ef044c38fc90d8d430569e2",
+    "limits": [
+      "All sixteen stage providers modeled; stock no-op marker executes",
+      "Caller-clobbered marker arguments excluded because exact leaf has no effects",
+      "No fault/private stack/provider-SP/physical/byte identity proof"
+    ]
+  },
+  "boundary_replay": {
+    "pairs": 9,
+    "faults": 8,
+    "observations": [
+      {
+        "context": "0x0",
+        "observation": {
+          "error": 6,
+          "invalids": [
+            [
+              19,
+              14408,
+              1
+            ]
+          ],
+          "writes": [],
+          "result": null
+        }
+      },
+      {
+        "context": "0xffffffff",
+        "observation": {
+          "error": 6,
+          "invalids": [
+            [
+              19,
+              14407,
+              1
+            ]
+          ],
+          "writes": [],
+          "result": null
+        }
+      },
+      {
+        "context": "0xffffc7b8",
+        "observation": {
+          "error": 6,
+          "invalids": [
+            [
+              19,
+              0,
+              1
+            ]
+          ],
+          "writes": [],
+          "result": null
+        }
+      },
+      {
+        "context": "0x2003c7b7",
+        "observation": {
+          "error": 6,
+          "invalids": [
+            [
+              19,
+              537133059,
+              1
+            ]
+          ],
+          "writes": [
+            [
+              537132983,
+              1,
+              0
+            ]
+          ],
+          "result": null
+        }
+      },
+      {
+        "context": "0x2003c7b3",
+        "observation": {
+          "error": 6,
+          "invalids": [
+            [
+              19,
+              537133056,
+              1
+            ]
+          ],
+          "writes": [
+            [
+              537132979,
+              1,
+              0
+            ],
+            [
+              537132983,
+              1,
+              0
+            ]
+          ],
+          "result": null
+        }
+      },
+      {
+        "context": "0x2003c7ad",
+        "observation": {
+          "error": 6,
+          "invalids": [
+            [
+              19,
+              537133060,
+              1
+            ]
+          ],
+          "writes": [
+            [
+              537132973,
+              1,
+              0
+            ],
+            [
+              537132977,
+              1,
+              0
+            ],
+            [
+              537132978,
+              1,
+              0
+            ],
+            [
+              537132979,
+              1,
+              0
+            ],
+            [
+              537132980,
+              1,
+              0
+            ],
+            [
+              537132981,
+              1,
+              0
+            ]
+          ],
+          "result": null
+        }
+      },
+      {
+        "context": "0x2003c77e",
+        "observation": {
+          "error": 6,
+          "invalids": [
+            [
+              19,
+              537133060,
+              1
+            ]
+          ],
+          "writes": [
+            [
+              537132926,
+              1,
+              0
+            ],
+            [
+              537132930,
+              1,
+              0
+            ],
+            [
+              537132931,
+              1,
+              0
+            ],
+            [
+              537132932,
+              1,
+              0
+            ],
+            [
+              537132933,
+              1,
+              0
+            ],
+            [
+              537132934,
+              1,
+              0
+            ],
+            [
+              537132941,
+              1,
+              0
+            ],
+            [
+              537132943,
+              1,
+              0
+            ],
+            [
+              537132946,
+              1,
+              0
+            ],
+            [
+              537132958,
+              1,
+              0
+            ],
+            [
+              537132951,
+              1,
+              0
+            ],
+            [
+              537132953,
+              1,
+              0
+            ],
+            [
+              537132955,
+              1,
+              0
+            ],
+            [
+              537132973,
+              1,
+              0
+            ],
+            [
+              537132983,
+              1,
+              0
+            ]
+          ],
+          "result": null
+        }
+      },
+      {
+        "context": "0x2003c779",
+        "observation": {
+          "error": null,
+          "invalids": [],
+          "writes": [
+            [
+              537132921,
+              1,
+              0
+            ],
+            [
+              537132925,
+              1,
+              0
+            ],
+            [
+              537132926,
+              1,
+              0
+            ],
+            [
+              537132927,
+              1,
+              0
+            ],
+            [
+              537132928,
+              1,
+              0
+            ],
+            [
+              537132929,
+              1,
+              0
+            ],
+            [
+              537132936,
+              1,
+              0
+            ],
+            [
+              537132938,
+              1,
+              0
+            ],
+            [
+              537132941,
+              1,
+              0
+            ],
+            [
+              537132953,
+              1,
+              0
+            ],
+            [
+              537132946,
+              1,
+              0
+            ],
+            [
+              537132948,
+              1,
+              0
+            ],
+            [
+              537132950,
+              1,
+              0
+            ],
+            [
+              537132968,
+              1,
+              0
+            ],
+            [
+              537132978,
+              1,
+              0
+            ],
+            [
+              537132983,
+              1,
+              0
+            ]
+          ],
+          "result": 537132918
+        }
+      },
+      {
+        "context": "0x2003c7b8",
+        "observation": {
+          "error": 6,
+          "invalids": [
+            [
+              19,
+              537133056,
+              1
+            ]
+          ],
+          "writes": [],
+          "result": null
+        }
+      }
+    ],
+    "limits": [
+      "Unmapped control reads and earlier status writes; stage work providers not reached",
+      "Private frame writes excluded; emulator access behavior only"
+    ]
+  },
+  "host_integration": {
+    "paired_cases": 334,
+    "fault_cases": 9,
+    "provider_calls": 3259,
+    "observations_sha256": "ef17df542be2b634ad6e096fb3f2fa9eaf4d8a9ff1ba2be4355122d577f89b42",
+    "limits": [
+      "Actual native/C host, resamplers and kernel wrappers; stock memory-clear executes on both paths",
+      "Only logger and sixteen stage providers modeled; actual coordinator/interpolation/filter execute; stock clear/move/marker execute on both paths",
+      "ACC provider SP excluded; PPG scratch numeric addresses compared without normalization",
+      "No outer sensor-update caller or physical device proof"
+    ]
+  },
+  "negative_controls": [
+    {
+      "name": "wrong-activity-input",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "force-all-deltas-one",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "dispatch-state-two",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "preserve-state-two",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "reread-current-control",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "wrong-status-byte",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "signed-activity-delta",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "wrong-return",
+      "compiled": true,
+      "rejected": true
+    }
+  ],
+  "qualification": {
+    "candidate_units": 1,
+    "compiled_units": 1,
+    "units": [
+      {
+        "source": "r1/src/application/runtime/native_gomore_algorithm.c",
+        "payload": "r1-application",
+        "evidence": "r1/symbols/function-frontier.csv",
+        "selected": [],
+        "compiled": true,
+        "rejections": {
+          "anchored_relocation_pattern_not_exact": 1
+        },
+        "source_implementation_completeness": "not established by compilation or byte matching",
+        "reason": "no exact anchored body under tested production bindings; integration remains unfinished"
+      }
+    ]
+  },
+  "composition": {
+    "report": "build/sources-goal-r1-gomore-algorithm-c/report.json",
+    "sha256": "764e2323b2d276fb254b6b480d7fa6c74efba7a156dcbbeca78461ac4cad1514",
+    "units": 685,
+    "unchanged_prior_source_object_pairs": 683,
+    "changed_prior_units": [
+      "r1/src/vendor/gomore_primitives/gomore_primitives.c"
+    ],
+    "application_imports": 179,
+    "bootloader_imports": 34
+  },
+  "consolidation": {
+    "removed_generic_export": "gomore_primitives_output_orchestrate",
+    "removed_incorrect_generic_stage_table": true,
+    "existing_marker_compiled_body": "7047",
+    "vendor_sha256": "15ebbb6eee7444024ebe4b2c27106e7561cfd7576e6ea77daf0e034f864cc1c0",
+    "header_sha256": "7ad53bbf793b19cf3bb8c029e9d54eaf7e58f10d8df6782688dccaeb1b5f60e8"
+  },
+  "hybrid": {
+    "report": "build/hybrid-goal-r1-gomore-algorithm-c/build-report.json",
+    "sha256": "639b533703c080b6f9bdae744a4e5be76e3dfa00a47684b600f81f198a57f76d",
+    "totals": {
+      "binary-pull-through": 641791,
+      "source-built": 4369,
+      "resource-file": 248
+    },
+    "canonical_plan_unchanged": true
+  },
+  "artifacts": {
+    "build/goal-r1-gomore-algorithm-c/candidate.c": "1c458479dfd6eb2271ddab943e307b98efe31fc91816d91c1834d5ffda93992e",
+    "build/goal-r1-gomore-algorithm-c/candidate.o": "f38b0cbb382d82d40afb7fb4f244d41d116dd149c536956e883974be23ef597a",
+    "build/goal-r1-gomore-algorithm-c/verify.py": "b1a953a7dcd6f10b09305da5b5b0bb00bb52fbc8f900c9234933e8dbe4d0fc75",
+    "build/goal-r1-gomore-algorithm-c/results.json": "1a721e3b776aea70f20016b28cfe399c8c44d40353c2981ec0610c813db14b26",
+    "build/goal-r1-gomore-algorithm-c/faults.py": "c42fe14cea1ca9978caad4353fa75c49f59a689ee27f5a34c631db3152a3f14e",
+    "build/goal-r1-gomore-algorithm-c/fault-results.json": "b65ce31083afda395d1e401178a3624124db830a4f05aac52bd19d4250d1948b",
+    "build/goal-r1-gomore-algorithm-c/integration.py": "1d9bc5fd290e2045b12dc743c19a82b79ea7df0f777fe1c2d6c8c7edde546070",
+    "build/goal-r1-gomore-algorithm-c/integration-results.json": "739b4739f13c2bcfd05a14c2a42150529882c25293a59a6ce425a1922602a5e4",
+    "build/goal-r1-gomore-algorithm-c/negative.py": "e632897cba143b7c9ea5b6dd76f550f370b5563011be6a21a3db2f5ca3eef145",
+    "build/goal-r1-gomore-algorithm-c/negative-results.json": "42170132517954f0b90fc3f56afe936a7d103e49d37af6a8d7179377e80fd036",
+    "build/goal-r1-gomore-algorithm-c/rea.json": "4b743ac1f0b8cb02b24aec266b17dbe88a8083b2f4fc2f197ee8e5cee7780751",
+    "build/goal-r1-gomore-algorithm-c/bytes-rea.json": "3354af9cd0db3dad6be946ff950a2f536923d955bdba822820cdced01dc2aaf8",
+    "build/goal-r1-gomore-algorithm-c/stages.json": "e6f0f4d2d414e405a343b38122c0444cbd87e17508aee84ea0157a442b8eb423",
+    "build/goal-r1-gomore-algorithm-c/instructions.txt": "e3ab99b9597f6ca2a8259dab269a20c32e307d8fa552d717cd4781703999910b",
+    "build/goal-r1-gomore-algorithm-c/finalize.py": "a21b55acf98bbeaf3a0465b4d83ede31f477a11259051a4bf9b50c459de95a2f",
+    "build/goal-r1-gomore-algorithm-c/qualify.py": "8f811640d36c85e75c2470b13a619f1f4469fe0076d41ea9afe4e6fc6ab58e3d",
+    "build/goal-r1-gomore-algorithm-c/qualified/qualification.json": "5d4303a94d183a7a9eeb251dee1b8aea081bc8c7c7c9d552d15ce47f89bedf3f",
+    "build/goal-r1-gomore-algorithm-c/production-verify.log": "f72f4c73a2eaecd7a95ce770ae77ff94aeed362024647472cc96c422f4728813",
+    "build/goal-r1-gomore-algorithm-c/production-faults.log": "d9a865f16c4537cef6f84e05a46be5534a0f9461901de7f1b4d6a84f6efe3098",
+    "build/goal-r1-gomore-algorithm-c/production-integration.log": "f03b353a111228c37749964d5bc9b2f78a29b9a9a520581cbf76e86b268266ab"
+  },
+  "limits": [
+    "Sixteen work providers modeled; stock marker executes and existing C marker body verified identical",
+    "Host replay models logger/stage providers; stock clear/move execute",
+    "Private stack/provider-SP/physical/full source-only link and byte identity remain unproven"
+  ]
+}

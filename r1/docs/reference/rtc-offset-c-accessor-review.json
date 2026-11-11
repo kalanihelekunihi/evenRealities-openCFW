@@ -1,0 +1,100 @@
+{
+  "passed": 131072,
+  "executions": 262144,
+  "all_16_bit_values": true,
+  "report": "build/sources-goal-r1-rtc-offset-c-final/report.json",
+  "source_size": 12,
+  "source_sha256": {
+    "r1/src/application/board/native_time_utc_offset.c": "71cfe0055cff4ddf0164da21283127c4f7c0c16b469569ed29db5e602c86fc85"
+  },
+  "limitations": [
+    "Fixed recovered state placement in test linker; final source placement unproven",
+    "Concurrent mutation and physical RTC operation unverified",
+    "No whole-image byte qualification"
+  ],
+  "negative_control": {
+    "mutation": "Zero extend instead of sign extend offset",
+    "rejected": true,
+    "input_word": 32768,
+    "native_result": "0xffff8000",
+    "incorrect_result": "0x00008000",
+    "stderr": "Traceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-rtc-offset-c/reject-unsigned.py\", line 35, in <module>\n    for flags in [0,0xf8000000]:assert a(value,flags)==b(value,flags);cases+=1\n                                                       ~^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-rtc-offset-c/reject-unsigned.py\", line 27, in run\n    assert u.reg_read(UC_ARM_REG_PC)==STOP and u.reg_read(UC_ARM_REG_R0)==result and u.reg_read(UC_ARM_REG_SP)==SP\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+  },
+  "audit": {
+    "remaining_calendar_executable_sections_unchanged": [
+      ".text.time_calendar_unix_to_broken_down",
+      ".text.time_calendar_utc_to_calendar"
+    ],
+    "excluded_backend_source_unchanged": true,
+    "import_sets_unchanged": true
+  },
+  "qualification": {
+    "candidate_units": 1,
+    "compiled_units": 1,
+    "units": [
+      {
+        "source": "r1/src/application/board/native_time_utc_offset.c",
+        "payload": "r1-application",
+        "evidence": "r1/symbols/function-frontier.csv",
+        "selected": [
+          {
+            "payload": "r1-application",
+            "symbol": "r1_time_utc_offset_get",
+            "start": 409012,
+            "end": 409024,
+            "sha256": "1a4b646abd6beac7eda33fe13c66432704ed01689d6b1e34d729a2cab57eb8ab",
+            "evidence": "r1/symbols/function-frontier.csv",
+            "bindings": {
+              "r1_time_state": 536963780
+            },
+            "address": 568756,
+            "match_evidence": {
+              "method": "independently named native entry and all unrelocated bytes, followed by full linked equality",
+              "fixed_bytes": 8,
+              "compiled_pattern_sha256": "d97f4edd851a2994dd7fef3c019718ac3527676a1213ba4e60fd52d6208aa680",
+              "relocations": [
+                {
+                  "symbol": "r1_time_state",
+                  "offset": 8,
+                  "relocation_type": 2,
+                  "address": 536963780,
+                  "role": "native_literal_symbol"
+                }
+              ]
+            }
+          }
+        ],
+        "compiled": true,
+        "rejections": {},
+        "source_implementation_completeness": "not established by compilation or byte matching",
+        "reason": "exact selected bodies"
+      }
+    ]
+  },
+  "hybrid": {
+    "sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "size": 646408,
+    "totals": {
+      "binary-pull-through": 642425,
+      "source-built": 3735,
+      "resource-file": 248
+    },
+    "source_completeness_proven": false
+  },
+  "evidence": {
+    "build/goal-r1-rtc-offset-c/verify.py": "6a1b94427504956d1598dc0f4408e792443bc8e42b0894d0d9c4b3c4f5d7b58c",
+    "build/goal-r1-rtc-offset-c/source.elf": "8bcbb257f303f83325b0d4f87705f013d6d51d4c24874da530e16b18aa35efa3",
+    "build/goal-r1-rtc-offset-c/bad-unsigned.c": "d28ba1b1013a7b831cbdfc183b22d5d425c9ef3670d0bb4c616b85afa6b2b2bf",
+    "build/goal-r1-rtc-offset-c/reject-unsigned.py": "6767b37b67ffaed64827ecaf6f8f72d1a5a6c6b1c309215de326eb711d040533",
+    "build/goal-r1-rtc-offset-c/audit.py": "606e6d864e8ef9b6c5b13e19e93892727b7ea6e586aa70b32aa06bb54f1ac9c4",
+    "build/goal-r1-rtc-offset-c/source-plan-before.json": "cb498f25da9dfefbb181b3b90f6e321e7e5c690a37201bb91bd1c5ccf3eac6ea",
+    "build/goal-r1-rtc-offset-c/qualified-final/source-plan.json": "38f15cd4ebb0b2bf1ffb716e51bf60d3c593e6a07c24047b084e68a95707141f",
+    "tools/build/source-plan.json": "4d46e8c038db79a174a2d719086fd0be80503ca7cdbfc2c51e5ed3d30d293064",
+    "r1/src/sources.json": "eef95fc2087f6dafe735ed7f693a14a10d352ffff8417e37f7f0221e09bc3ff6",
+    "r1/symbols/function-frontier.csv": "47df9fe1668b4803710e82523ed9b3d19e2a712a39a0f829440bfb0fa67a0d40",
+    "r1/src/application/runtime/native_calendar_frames.c": "7dbba9e30665d214969191aa46067391a3564fd154517c4d1421e3ef1c74c6aa",
+    "r1/src/application/board/native_time_utc_offset.c": "71cfe0055cff4ddf0164da21283127c4f7c0c16b469569ed29db5e602c86fc85",
+    "build/sources-goal-r1-rtc-offset-c-final/report.json": "b25400ac16e28421587d7e225bf4df9979c969bbf2da18dbc0f124257e7c6b93",
+    "build/hybrid-goal-r1-rtc-offset-c/build-report.json": "be6268581ad48d10d0b5839b82bda7c14c58f8a0b7b484dcd9f7b1d13742a3aa"
+  }
+}

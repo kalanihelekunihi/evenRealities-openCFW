@@ -2,6 +2,13 @@
  * address slots and the 12-byte per-record table.  These cells are runtime
  * storage; their initial values are supplied by the product image/runtime. */
 #include <stdint.h>
+/* Stock-RAM literals rewritten to named objects (sim-test wave 2026-10-26,
+ * .waves/sim-fix/apply.py): g2ref_X is the linker symbol X. */
+#include <stdint.h>
+extern unsigned char g2ref_g2_stock_ram_20074948[] __asm__("g2_stock_ram_20074948"); /* Fix 45: stock owner (owner.py) */
+extern unsigned char g2ref_g2_stock_ram_200036d8[] __asm__("g2_stock_ram_200036d8");
+extern unsigned char g2ref_g2_stock_ram_200731f0[] __asm__("g2_stock_ram_200731f0");
+extern unsigned char g2ref_g2_stock_ram_20073488[] __asm__("g2_stock_ram_20073488");
 extern uint32_t audio_log_flags(void);
 extern void audio_log_extended(uint8_t,const char *,const char *,const char *,
                                uint32_t,const char *,...);
@@ -23,18 +30,18 @@ static void write32(volatile uint8_t *p,uint32_t v) {
     for(uint32_t i=0;i<4u;i++)p[i]=(uint8_t)(v>>(i*8u));
 }
 uint32_t audio_ble_radio_record_data_52f99e(const void *image,uint32_t count) {
-    volatile uint8_t *const records=(volatile uint8_t *)(uintptr_t)0x200731f0u;
-    volatile uint8_t *const image_data=(volatile uint8_t *)(uintptr_t)0x2007348cu;
+    volatile uint8_t *const records=(volatile uint8_t *)(uintptr_t)((uint32_t)(uintptr_t)g2ref_g2_stock_ram_200731f0);
+    volatile uint8_t *const image_data=(volatile uint8_t *)(uintptr_t)((uint32_t)(uintptr_t)g2ref_g2_stock_ram_20073488+0x4u);
     for(uint32_t i=0;i<count;i++) {
         volatile uint8_t *row=records+i*16u;
         uint32_t address=read32(row+8u);
         if(address==0u)continue;
         uintptr_t slot;
         switch(address) {
-        case 0x00300000u:slot=0x20074958u;break;
-        case 0x00300400u:slot=0x2007495cu;break;
-        case 0x00302000u:slot=0x20074960u;break;
-        case 0x00302400u:slot=0x20074964u;break;
+        case 0x00300000u:slot=((uint32_t)(uintptr_t)g2ref_g2_stock_ram_20074948+0x10u);break;
+        case 0x00300400u:slot=((uint32_t)(uintptr_t)g2ref_g2_stock_ram_20074948+0x14u);break;
+        case 0x00302000u:slot=((uint32_t)(uintptr_t)g2ref_g2_stock_ram_20074948+0x18u);break;
+        case 0x00302400u:slot=((uint32_t)(uintptr_t)g2ref_g2_stock_ram_20074948+0x1cu);break;
         default:
             if(audio_log_flags()&2u)
                 audio_log_extended(1u,module,source_path,function,0x132u,bad,address,i);
@@ -50,17 +57,17 @@ uint32_t audio_ble_radio_record_data_52f99e(const void *image,uint32_t count) {
         write32(entry+4u,read32(row+4u));
         write32(entry+8u,address);
         if(audio_log_flags()&2u)
-            audio_log_extended(4u,module,source_path,function,0x13eu,records_message,0x200036dcu);
+            audio_log_extended(4u,module,source_path,function,0x13eu,records_message,((uint32_t)(uintptr_t)g2ref_g2_stock_ram_200036d8+0x4u));
         if((audio_log_flags()&1u)||(audio_log_flags()&4u))
-            (void)compressed_log_output(0x10400000u,records_compact,records_compact,0x200036dcu);
+            (void)compressed_log_output(0x10400000u,records_compact,records_compact,((uint32_t)(uintptr_t)g2ref_g2_stock_ram_200036d8+0x4u));
         if(audio_log_flags()&2u) {
-            uint32_t entry_pointer=W(0x200036dcu+i*4u);
+            uint32_t entry_pointer=W(((uint32_t)(uintptr_t)g2ref_g2_stock_ram_200036d8+0x4u)+i*4u);
             const volatile uint8_t *log_entry=(const volatile uint8_t *)(uintptr_t)entry_pointer;
             uint32_t x=read32(log_entry),y=read32(log_entry+4u),z=read32(log_entry+8u);
             audio_log_extended(4u,module,source_path,function,0x13fu,entry_message,i,x,y,z);
         }
         if((audio_log_flags()&1u)||(audio_log_flags()&4u)) {
-            uint32_t entry_pointer=W(0x200036dcu+i*4u);
+            uint32_t entry_pointer=W(((uint32_t)(uintptr_t)g2ref_g2_stock_ram_200036d8+0x4u)+i*4u);
             const volatile uint8_t *log_entry=(const volatile uint8_t *)(uintptr_t)entry_pointer;
             uint32_t x=read32(log_entry),y=read32(log_entry+4u),z=read32(log_entry+8u);
             (void)compressed_log_output(0x11000000u,entry_compact,entry_compact,i,x,y,z);

@@ -1,0 +1,13 @@
+# FreeRTOS task resume in C
+
+`vTaskResume` and its private suspended-state predicate now use the pinned FreeRTOS `tasks.c` bodies in the existing `rtos/task-wait/task-wait.c` owner. They share the established TCB prefix, suspended list, pending-ready list and priority ready lists. No alternate scheduler or list owner is introduced.
+
+The API ignores the current task and resumes another task only when its state item belongs to the suspended list, its event item is not pending an ISR wakeup and the event item has no event-list owner. Thus an indefinite event wait is not mistaken for an explicit suspension. The move into the priority ready list happens under the critical section; it records a new top ready priority and requests PendSV for equal or higher priority than the current task.
+
+The normal object and actual pinned C list routines pass 1,080 ARM-emulated cases: 60 eligible resumes and 1,020 guarded no-ops. Fixtures vary suspended/ready/delayed membership, absent/pending/other event-list membership, five target priorities, three prior top priorities, occupied/empty ready lists, cursor positions and current/other-task handles. Tests check list topology/ownership, insertion relative to the cursor, top-priority updates, exact critical callback order, PendSV value and critical placement, unchanged no-op storage, preserved R4-R11, SP and interrupt masks. Critical callbacks clobber caller-saved registers. Valid nonnull task handles and list storage are test preconditions.
+
+Four compiled defects fail runtime assertions: reversing the event-wait guard, losing equal-priority yield, missing critical entry and missing critical exit. The original source prefix and all pre-existing task-wait instruction sections and named relocations remain unchanged. The other 729 R1 object hashes are unchanged.
+
+`build/sources-goal-r1-task-resume-c/report.json` compiles all 730 R1 units and composes both payloads without failures or duplicate strong symbols. The CMSIS resume import resolves, reducing application imports from 163 to 162; bootloader imports remain 34. `make sources-check` passes. [Machine-readable evidence](task-resume-c-review.json) records pinned provenance, build hashes, results, defects and audit. Probes and the positive subset ELF live under ignored `build/goal-r1-task-resume-c/`.
+
+The list implementation executes as C; critical callbacks are modeled. This verifies sequential pinned semantics and native layout use, not mapped stock API identity, ISR interleavings, complete scheduler/device execution or a complete firmware link. The separate `vTaskSuspend` dependency remains unresolved.

@@ -15,7 +15,7 @@ static void owner_fatal(void)
     (void)opencfw_bl_mask_interrupts();
     WORD(UINT32_MAX) = 0u;
     for (;;)
-        __asm volatile("b ." ::: "memory");
+        { }
 }
 
 static void insert_before_index(uint32_t *list, uint32_t *item)

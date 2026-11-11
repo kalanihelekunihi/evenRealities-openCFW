@@ -1,0 +1,51 @@
+{
+  "schema": 1,
+  "target": "GX8002 codec BINH B stage-1 NOR initializer at stock 0x100010e2",
+  "stock": {
+    "authenticated_component": "g2/blobs/official/g2-2.2.6.10/firmware_codec.bin",
+    "component_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+    "binh_b_component_offset": 231740,
+    "stage1_load_offset_after_binh_header": 24,
+    "stage1_load_bytes": 12288,
+    "stage1_load_sha256": "c1a638a297922dcc86c084bdfd73d288785010f7ac7280031195dba747ff9b29",
+    "disassembly": "csky-abiv2-elf-objdump of the extracted BINH B stage-1 block, VMA 0x10000000: 0x1000113e..0x10001144 tests id + 0xffe3c7ee < 2 and branches to 0x10000ffe for ESMT IDs; 0x100011ac..0x100011b4 selects PUYA 0x856013/14 and 0x854012 for the two-byte status path; remaining IDs take the status-2-only path at 0x10001146.",
+    "pinned_upstream": "third-party/upstream/nationalchip-lvp-kws/arch/soc/grus/spl/spl_spinor.c:sflash_init also skips QE writes for ESMT 0x1c3812/13"
+  },
+  "source_change": {
+    "file": "g2/src/codec/image-b-stage1/backup_stage1_flash_initialize.c",
+    "file_sha256": "a13e2a76386b46e5ff7c67199b481b9ea341c49f9ad747c2d98db4016133f594",
+    "correction": "Return after caching ESMT 0x1c3812/13, before any status transactions; keep PUYA 0x854012 and 0x856013/14 on combined status-1/status-2 write, other IDs on status-2-only write.",
+    "linked_disassembly": "At source VMA 0x10000bda..0x10000be0, id + 0xffe3c7ee < 2 branches to function exit 0x10000c30. PUYA selects combined path 0x10000c34; default uses status-2 path 0x10000bf0."
+  },
+  "focused_verification": {
+    "source_report": "build/codec-b-stage1-jedec-20261111/sources/report.json",
+    "compiled_units": 332,
+    "failed_units": 0,
+    "duplicate_strong_symbols": 0,
+    "strict_link_report": "build/codec-b-stage1-jedec-20261111/link/link-report.json",
+    "previous_stage1_sha256": "ce82f314539d854b1895fe66047d232dd8137e626a4ed8c417dc72f1d4271d34",
+    "new_stage1_bytes": 6764,
+    "new_stage1_sha256": "fdf5e79bffa36af01191565bd4339a8534bbfe4b6dfc3d8dac2375ecd4ec7c98",
+    "previous_binh_b_package_sha256": "8cd3cb7ce492b974c2fa1e86903b367fbc6f94f1c9c8efd29b0cb678669e676e",
+    "new_binh_b_package_sha256": "627448a29243bfa93fdf84a93bf32716a7826cd7bafdb5e8ca225836dece99ee"
+  },
+  "full_g2_gate": {
+    "sources_check": "passed: 4883 units, 4544 source files, 1 not built",
+    "source_report": "build/codec-b-stage1-jedec-20261111/all/report.json",
+    "compiled_enabled_c_units": 4878,
+    "failed_units": 0,
+    "duplicate_strong_symbols": 0,
+    "strict_link_report": "build/codec-b-stage1-jedec-20261111/bundle/link-report.json",
+    "strict_link_report_sha256": "980b800eaef3907d4a818b682049ac920fe64bc464ba5b899130a80878054791",
+    "linked_payloads": 7,
+    "external_binary_archive_used": false,
+    "unchanged_payload_binaries": 6,
+    "changed_payload_binary": "g2-codec-b",
+    "changed_ota_component": "firmware/codec.bin",
+    "source_only_ota_bytes": 4638028,
+    "source_only_ota_sha256": "063cb1a33bb2e439a6031ae12607fe53016210d6e3e170c49fd6e5ff3bf9226d",
+    "source_completeness_proven": false,
+    "matches_locked_target": false
+  },
+  "limits": "The observed dispatch and source compile/link do not establish full initializer equivalence, physical flash transactions, hardware boot or whole-artifact source completeness."
+}

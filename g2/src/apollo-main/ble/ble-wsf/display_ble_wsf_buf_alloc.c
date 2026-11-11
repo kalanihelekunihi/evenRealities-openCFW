@@ -34,3 +34,6 @@ void *WsfBufAlloc(uint16_t length) {
             "[wsf.buf]WsfBufAlloc failed len:%u",length);
     return 0;
 }
+
+/* Former duplicate body (ble/wsf-buf/display_wsf_buf_queue.c) now binds here. */
+__typeof__(WsfBufAlloc) audio_wsf_buffer_alloc __attribute__((alias("WsfBufAlloc")));

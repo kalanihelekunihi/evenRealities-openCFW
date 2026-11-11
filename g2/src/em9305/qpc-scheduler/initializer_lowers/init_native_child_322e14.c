@@ -1,38 +1,25 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_322e14\n"
-".type opencfw_em9305_child_322e14,@function\n"
-"opencfw_em9305_child_322e14:\n"
-"L322e14:\n"
-"st.aw blink,[sp,-12]\n"
-"L322e18:\n"
-"mov_s r1,0x805c70\n"
-"L322e1e:\n"
-"ld r1,[r1,0]\n"
-"L322e20:\n"
-"stb 0,[sp,8]\n"
-"L322e24:\n"
-"sth 12,[sp,6]\n"
-"L322e28:\n"
-"sub_s r0,r0,r1\n"
-"L322e2a:\n"
-"div r0,r0,912\n"
-"L322e2e:\n"
-"extb_s r0,r0\n"
-"L322e30:\n"
-"mov_s r1,sp\n"
-"L322e32:\n"
-"sth_s r0,[r1,0xa]\n"
-"L322e34:\n"
-"sth_s r0,[r1,0x4]\n"
-"L322e36:\n"
-"bl.d opencfw_em9305_ll_event_callback_30e79c\n"
-"L322e3a:\n"
-"add_s r0,sp,0x4\n"
-"L322e3c:\n"
-"ld.ab blink,[sp,12]\n"
-"L322e40:\n"
-"j_s [blink]\n"
-".size opencfw_em9305_child_322e14,.-opencfw_em9305_child_322e14\n"
-);
+#include <stdint.h>
+
+/* Native 0x322e14..0x322e42: report LL event 12 with status 0 for a 912-byte
+ * connection entry, identified by its index in the table at *0x805c70. */
+extern uint32_t opencfw_em9305_ll_event_callback_30e79c(uintptr_t);
+
+struct ll_event_12 {
+    uint16_t handle;
+    uint16_t code;
+    uint8_t status;
+    uint8_t reserved;
+    uint16_t handle_again;
+};
+
+uint32_t opencfw_em9305_child_322e14(uintptr_t entry)
+{
+    uintptr_t base = *(volatile uint32_t *)(uintptr_t)0x805c70u;
+    struct ll_event_12 event;
+    event.status = 0u;
+    event.code = 12u;
+    uint8_t index = (uint8_t)((int32_t)(entry - base) / 912);
+    event.handle_again = index;
+    event.handle = index;
+    return opencfw_em9305_ll_event_callback_30e79c((uintptr_t)&event);
+}

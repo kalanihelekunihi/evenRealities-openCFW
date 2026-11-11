@@ -7,7 +7,7 @@ extern uint32_t opencfw_boot_fs_mutex_acquire(uint32_t,uint32_t);
 extern uint32_t opencfw_boot_fs_mutex_release(uint32_t);
 extern void opencfw_provider_41fe28(void),opencfw_provider_41fe48(void);
 extern uint32_t opencfw_provider_420e08(const void *);
-extern uint32_t opencfw_hal_mspi_control(uint32_t,uint32_t,void *);
+extern uint32_t am_hal_mspi_control(uint32_t,uint32_t,void *);
 extern uint32_t opencfw_bl_mspi_status_transfer(uint32_t,uint32_t,uint32_t,void *,uint32_t);
 extern void opencfw_bl_delay_raw(uint32_t);
 extern uint32_t opencfw_bl_kernel_state(void),opencfw_bl_task_delay(uint32_t);
@@ -33,7 +33,7 @@ void opencfw_bl_nor_read_after(void) {
 }
 void opencfw_hal_mspi_control_latency(uint32_t enabled) {
  U8(0x2000023cu+5u)=(uint8_t)enabled==1u?8u:0u;
- (void)opencfw_hal_mspi_control(U32(0x200270dcu),0x10u,(void *)(uintptr_t)0x2000023cu);
+ (void)am_hal_mspi_control(U32(0x200270dcu),0x10u,(void *)(uintptr_t)0x2000023cu);
 }
 void opencfw_bl_nor_read_configure(void) {
  uint32_t config[6];
@@ -42,7 +42,7 @@ void opencfw_bl_nor_read_configure(void) {
  if(opencfw_provider_420e08(config)!=0u) {LOG(2,"mx25u25643g_set_serail_mode",0x5ae,"Failed to reconfigure serail mode");return;}
  opencfw_hal_mspi_control_latency(1u);
  uint8_t value=0x10u;
- if(opencfw_hal_mspi_control(U32(0x200270dcu),0x18u,&value)!=0u)
+ if(am_hal_mspi_control(U32(0x200270dcu),0x18u,&value)!=0u)
   LOG(2,"mx25u25643g_set_serail_mode",0x5b5,"Failed to control serail mode");
 }
 uint32_t opencfw_bl_nor_busy(void) {

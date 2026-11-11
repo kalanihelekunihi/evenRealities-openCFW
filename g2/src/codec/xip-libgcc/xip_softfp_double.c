@@ -285,3 +285,20 @@ uint32_t gx8002_fixunsdfsi(uint32_t low, uint32_t high)
                                     (uint32_t)(reduced >> 32)) +
            UINT32_C(0x80000000);
 }
+
+/* The stock compiler entry points use the same r0:r3 word ABI as the
+ * recovered functions above. Keep one body for each entry point. */
+uint64_t __adddf3(uint32_t, uint32_t, uint32_t, uint32_t)
+    __attribute__((alias("gx8002_adddf3")));
+uint64_t __subdf3(uint32_t, uint32_t, uint32_t, uint32_t)
+    __attribute__((alias("gx8002_subdf3")));
+uint64_t __muldf3(uint32_t, uint32_t, uint32_t, uint32_t)
+    __attribute__((alias("gx8002_muldf3_fixed")));
+uint64_t __divdf3(uint32_t, uint32_t, uint32_t, uint32_t)
+    __attribute__((alias("gx8002_divdf3_fixed")));
+int32_t __fixdfsi(uint32_t, uint32_t)
+    __attribute__((alias("gx8002_fixdfsi")));
+uint32_t __fixunsdfsi(uint32_t, uint32_t)
+    __attribute__((alias("gx8002_fixunsdfsi")));
+uint64_t __floatunsidf(uint32_t)
+    __attribute__((alias("gx8002_floatunsidf")));

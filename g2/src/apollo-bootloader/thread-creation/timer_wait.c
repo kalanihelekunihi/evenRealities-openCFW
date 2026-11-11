@@ -18,7 +18,7 @@ extern void opencfw_bl_timer_rollover(void);
 extern void opencfw_bl_timer_process_commands(void);
 static void fail(void) {
     (void)opencfw_bl_mask_interrupts();WORD(UINT32_MAX)=0;
-    for (;;) __asm__ volatile("b .":::"memory");
+    for (;;) { }
 }
 void opencfw_boot_list_insert_sorted(uint32_t *list,uint32_t *item) {
     uint32_t *before;

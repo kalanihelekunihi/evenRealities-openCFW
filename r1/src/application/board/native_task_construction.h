@@ -14,6 +14,6 @@ typedef struct tskTaskControlBlock {
 _Static_assert(sizeof(r1_native_tcb)==112 && offsetof(r1_native_tcb,uxNativeStackDepth)==84 && offsetof(r1_native_tcb,uxTCBNumber)==88 && offsetof(r1_native_tcb,uxBasePriority)==96 && offsetof(r1_native_tcb,uxMutexesHeld)==100 && offsetof(r1_native_tcb,ulNotifiedValue)==104 && offsetof(r1_native_tcb,ucNotifyState)==108 && offsetof(r1_native_tcb,ucStaticallyAllocated)==109,"native task construction ABI");
 void r1_native_task_initialize(TaskFunction_t,const char *,uint32_t,void *,uint32_t,r1_native_tcb **,r1_native_tcb *,const void *);
 void r1_native_task_add_ready(r1_native_tcb *);
-int32_t r1_native_task_create(TaskFunction_t,const char *,uint32_t,void *,uint32_t,r1_native_tcb **);
+BaseType_t r1_native_task_create(TaskFunction_t,const char *,uint32_t,void *,uint32_t,r1_native_tcb **);
 r1_native_tcb *r1_native_task_create_static(TaskFunction_t,const char *,uint32_t,void *,uint32_t,uint32_t *,r1_native_tcb *);
 #endif

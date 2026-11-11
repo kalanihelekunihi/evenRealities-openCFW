@@ -1,298 +1,107 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_callback_322184\n"
-".type opencfw_em9305_callback_322184,@function\n"
-"opencfw_em9305_callback_322184:\n"
-"L322184:\n"
-"enter_s [r13-r22,blink]\n"
-"L322186:\n"
-"mov_s r20,0x8051a4\n"
-"L32218c:\n"
-"ld r14,[r20,20]\n"
-"L322190:\n"
-"mov_s r19,r0\n"
-"L322192:\n"
-"ld r0,[r2,0x8]\n"
-"L322194:\n"
-"mov_s r16,r1\n"
-"L322196:\n"
-"ld r1,[r2,0xc]\n"
-"L322198:\n"
-"mov_s r21,r14\n"
-"L32219a:\n"
-"add2 r15,r14,0x2a\n"
-"L32219e:\n"
-"mov_s r17,r14\n"
-"L3221a0:\n"
-"add r21,r21,644\n"
-"L3221a4:\n"
-"st.as r0,[r15,119]\n"
-"L3221a8:\n"
-"add r17,r17,690\n"
-"L3221ac:\n"
-"mov_s r0,r21\n"
-"L3221ae:\n"
-"mov_s r18,r3\n"
-"L3221b0:\n"
-"mov_s r13,r2\n"
-"L3221b2:\n"
-"st.as r1,[r15,120]\n"
-"L3221b6:\n"
-"bl.d opencfw_em9305_radio_channel_transform_30e3fc\n"
-"L3221ba:\n"
-"stb 1,[r17]\n"
-"L3221be:\n"
-"ld.as r2,[r15,153]\n"
-"L3221c2:\n"
-"ld r0,[r13,0x14]\n"
-"L3221c4:\n"
-"ldh r3,[r15,80]\n"
-"L3221c8:\n"
-"ldb_s r1,[r2,0x12]\n"
-"L3221ca:\n"
-"lsr r12,r0,0x10\n"
-"L3221ce:\n"
-"xor_s r0,r0,r12\n"
-"L3221d0:\n"
-"sth r0,[r17,2]\n"
-"L3221d4:\n"
-"xor_s r1,r1,r3\n"
-"L3221d6:\n"
-"bl.d opencfw_em9305_associated_channel_seed_324c98\n"
-"L3221da:\n"
-"mov_s r0,r21\n"
-"L3221dc:\n"
-"ldb r1,[r19,154]\n"
-"L3221e0:\n"
-"bbit0.d.nt r1,0x6,L3221f0\n"
-"L3221e4:\n"
-"stb r0,[r14,97]\n"
-"L3221e8:\n"
-"ldb r0,[r19,177]\n"
-"L3221ec:\n"
-"stb r0,[r14,98]\n"
-"L3221f0:\n"
-"ldb r0,[r16,6]\n"
-"L3221f4:\n"
-"ldb_s r1,[r13,0x2]\n"
-"L3221f6:\n"
-"ldb_s r2,[r13,0x3]\n"
-"L3221f8:\n"
-"seteq r6,r0,0x1\n"
-"L3221fc:\n"
-"ldh r11,[r13]\n"
-"L322200:\n"
-"cmp_s r0,2\n"
-"L322202:\n"
-"add_s r6,r6,1\n"
-"L322204:\n"
-"mov r9,300\n"
-"L322208:\n"
-"mov.eq r6,0x3\n"
-"L32220c:\n"
-"cmp_s r1,0\n"
-"L32220e:\n"
-"mov.eq r9,0x1e\n"
-"L322212:\n"
-"mpyd 0,r2,0x258000\n"
-"L32221a:\n"
-"mac r16,r9,r11\n"
-"L32221e:\n"
-"ld.as r1,[r14,195]\n"
-"L322222:\n"
-"ld r3,[r13,0x14]\n"
-"L322224:\n"
-"add r2,r16,r18\n"
-"L322228:\n"
-"ld.as r8,[r15,85]\n"
-"L32222c:\n"
-"ld_s r12,[r13,0x18]\n"
-"L32222e:\n"
-"ldh r7,[r15,80]\n"
-"L322232:\n"
-"ldb_s r0,[r13,0x10]\n"
-"L322234:\n"
-"st_s r2,[r15,0x68]\n"
-"L322236:\n"
-"ldb_s r2,[r1,0x12]\n"
-"L322238:\n"
-"mov r17,300\n"
-"L32223c:\n"
-"st_s r3,[r14,0x64]\n"
-"L32223e:\n"
-"st r8,[r15]\n"
-"L322242:\n"
-"st_s r12,[r14,0x68]\n"
-"L322244:\n"
-"sth r7,[r15,108]\n"
-"L322248:\n"
-"stb r6,[r14,109]\n"
-"L32224c:\n"
-"stb r6,[r14,108]\n"
-"L322250:\n"
-"bl.d opencfw_em9305_mode_callback_child_317ea4\n"
-"L322254:\n"
-"sth.as r2,[r1,182]\n"
-"L322258:\n"
-"ldb_s r2,[r13,0x2]\n"
-"L32225a:\n"
-"mov_s r1,r17\n"
-"L32225c:\n"
-"mov_s r22,r0\n"
-"L32225e:\n"
-"cmp_s r2,0\n"
-"L322260:\n"
-"mov.eq r1,0x1e\n"
-"L322264:\n"
-"add r0,r1,r16\n"
-"L322268:\n"
-"bl.d opencfw_em9305_init_secondary_time_317ebc\n"
-"L32226c:\n"
-"mov_s r1,r22\n"
-"L32226e:\n"
-"mov_s r1,r0\n"
-"L322270:\n"
-"mov_s r0,r16\n"
-"L322272:\n"
-"bl.d opencfw_em9305_pal_elapsed_raw\n"
-"L322276:\n"
-"mov_s r19,r1\n"
-"L322278:\n"
-"ldb_s r2,[r13,0x2]\n"
-"L32227a:\n"
-"mov_s r1,r0\n"
-"L32227c:\n"
-"cmp_s r2,0\n"
-"L32227e:\n"
-"mov.eq r17,0x1e\n"
-"L322282:\n"
-"cmp r0,300\n"
-"L322286:\n"
-"add1 r0,r17,r19\n"
-"L32228a:\n"
-"st_s r0,[r15,0x64]\n"
-"L32228c:\n"
-"bc.d L32233a\n"
-"L322290:\n"
-"st_s r0,[r15,0x24]\n"
-"L322292:\n"
-"ldb r0,[r14,109]\n"
-"L322296:\n"
-"add_s r1,r1,r18\n"
-"L322298:\n"
-"st_s r1,[r14,0x38]\n"
-"L32229a:\n"
-"mov_s r1,0\n"
-"L32229c:\n"
-"bl.d opencfw_em9305_radio_duration_piece_312b88\n"
-"L3222a0:\n"
-"mov_s r2,1\n"
-"L3222a2:\n"
-"ld_s r1,[r15,0x54]\n"
-"L3222a4:\n"
-"mov r13,512\n"
-"L3222a8:\n"
-"add3 r16,r14,0x3f\n"
-"L3222ac:\n"
-"add r18,r14,0x30\n"
-"L3222b0:\n"
-"st_s r0,[r15,0x60]\n"
-"L3222b2:\n"
-"st_s r0,[r14,0x3c]\n"
-"L3222b4:\n"
-"st r1,[r14,68]\n"
-"L3222b8:\n"
-"mov_s r1,opencfw_em9305_init_secondary_compare_3249e8\n"
-"L3222be:\n"
-"bl.d opencfw_em9305_associated_schedule_insert_312da4\n"
-"L3222c2:\n"
-"mov_s r0,r18\n"
-"L3222c4:\n"
-"brne_s r0,0,L322336\n"
-"L3222c6:\n"
-"ld.as r2,[r14,195]\n"
-"L3222ca:\n"
-"ldb_s r0,[r2,0x12]\n"
-"L3222cc:\n"
-"add_s r0,r0,1\n"
-"L3222ce:\n"
-"stb_s r0,[r2,0x12]\n"
-"L3222d0:\n"
-"ldb_s r3,[r14,r13]\n"
-"L3222d2:\n"
-"bmsk r12,r0,0x6\n"
-"L3222d6:\n"
-"brne.d.nt r12,r3,L3222ea\n"
-"L3222da:\n"
-"ldh r1,[r15,80]\n"
-"L3222de:\n"
-"mov_s r0,0\n"
-"L3222e0:\n"
-"add_s r1,r1,1\n"
-"L3222e2:\n"
-"stb 0,[r2,18]\n"
-"L3222e6:\n"
-"sth r1,[r15,80]\n"
-"L3222ea:\n"
-"extb_s r0,r0\n"
-"L3222ec:\n"
-"xor_s r1,r1,r0\n"
-"L3222ee:\n"
-"exth_s r1,r1\n"
-"L3222f0:\n"
-"bl.d opencfw_em9305_associated_channel_seed_324c98\n"
-"L3222f4:\n"
-"mov_s r0,r21\n"
-"L3222f6:\n"
-"ld.as r1,[r14,195]\n"
-"L3222fa:\n"
-"ldb r3,[r16,9]\n"
-"L3222fe:\n"
-"ldh r12,[r15,80]\n"
-"L322302:\n"
-"ld_s r2,[r15,0x54]\n"
-"L322304:\n"
-"ldb_s r1,[r1,0x12]\n"
-"L322306:\n"
-"stb r0,[r14,97]\n"
-"L32230a:\n"
-"mpyd 0,r2,r12\n"
-"L32230e:\n"
-"mpyuw r17,r3,r1\n"
-"L322312:\n"
-"mov_s r1,r22\n"
-"L322314:\n"
-"mac r17,r17,1250\n"
-"L322318:\n"
-"bl.d opencfw_em9305_init_secondary_time_317ebc\n"
-"L32231c:\n"
-"mov_s r0,r17\n"
-"L32231e:\n"
-"ld_s r2,[r15,0x68]\n"
-"L322320:\n"
-"ld_s r3,[r15,0x60]\n"
-"L322322:\n"
-"ld_s r12,[r15,0x64]\n"
-"L322324:\n"
-"sub r1,r17,r0\n"
-"L322328:\n"
-"add_s r1,r1,r2\n"
-"L32232a:\n"
-"add_s r3,r3,r0\n"
-"L32232c:\n"
-"add1_s r12,r12,r0\n"
-"L32232e:\n"
-"st_s r1,[r14,0x38]\n"
-"L322330:\n"
-"st_s r3,[r14,0x3c]\n"
-"L322332:\n"
-"st_s r12,[r15,0x24]\n"
-"L322334:\n"
-"b_s L3222b8\n"
-"L322336:\n"
-"stb 1,[r20,1]\n"
-"L32233a:\n"
-"leave_s [r13-r22,blink,pcl]\n"
-".size opencfw_em9305_callback_322184,.-opencfw_em9305_callback_322184\n"
-);
+#include <stdint.h>
+
+/* Native 0x322184..0x32233c: start PAwR sync (subevent-aware variant of
+ * 321490) on the sync context (*0x8051b8) from a SyncInfo: load and
+ * transform the channel map (+644), CRC seed (+692), first channel seeded
+ * by event counter (+248) xor the subevent counter of the PAwR block
+ * (+780 -> byte +18), PHY, anchor and receive window (+168 from +508).
+ * When the anchor is at least 300 us away, schedule it, stepping one
+ * subevent at a time (wrapping to the next event after +512 subevents;
+ * offset = interval +252 * event + subevent * spacing +513 * 1.25 ms)
+ * until the scheduler accepts, and mark the sync pending (0x8051a5). */
+extern uint32_t opencfw_em9305_radio_channel_transform_30e3fc(uintptr_t);
+extern uint32_t opencfw_em9305_associated_channel_seed_324c98(uintptr_t,uint32_t);
+extern uint32_t opencfw_em9305_mode_callback_child_317ea4(uint32_t);
+extern uint32_t opencfw_em9305_init_secondary_time_317ebc(uint32_t,uint32_t);
+extern uint32_t opencfw_em9305_pal_elapsed_raw(uint32_t,uint32_t);
+extern uint32_t opencfw_em9305_radio_duration_piece_312b88(uint32_t,uint32_t,uint32_t);
+extern uint32_t opencfw_em9305_associated_schedule_insert_312da4(uintptr_t,uintptr_t);
+extern uintptr_t opencfw_em9305_init_secondary_compare_3249e8(uintptr_t,uintptr_t);
+
+static uint32_t r32(uintptr_t a){return *(volatile uint32_t *)a;}
+static uint32_t r16(uintptr_t a){return *(volatile uint16_t *)a;}
+static uint32_t r8(uintptr_t a){return *(volatile uint8_t *)a;}
+static void w32(uintptr_t a,uint32_t v){*(volatile uint32_t *)a=v;}
+static void w16(uintptr_t a,uint32_t v){*(volatile uint16_t *)a=(uint16_t)v;}
+static void w8(uintptr_t a,uint32_t v){*(volatile uint8_t *)a=(uint8_t)v;}
+
+void opencfw_em9305_callback_322184(uintptr_t receiver,uintptr_t request,uintptr_t info,
+                                    uint32_t reference)
+{
+    uintptr_t sync=r32(0x8051b8u);
+    w32(sync+644u,r32(info+8u));
+    w32(sync+648u,r32(info+0xcu));
+    w8(sync+690u,1u);
+    (void)opencfw_em9305_radio_channel_transform_30e3fc(sync+644u);
+    uintptr_t pawr=r32(sync+780u);
+    uint32_t access=r32(info+0x14u);
+    uint32_t counter=r16(sync+248u);
+    uint32_t subevent=r8(pawr+0x12u);
+    w16(sync+692u,access^(access>>16));
+    uint32_t channel=opencfw_em9305_associated_channel_seed_324c98(sync+644u,subevent^counter);
+    uint32_t flags=r8(receiver+154u);
+    w8(sync+97u,channel);
+    if(flags&0x40u) w8(sync+98u,r8(receiver+177u));
+    uint32_t phy_code=r8(request+6u);
+    uint32_t large=r8(info+2u);
+    uint32_t wraps=r8(info+3u);
+    uint32_t offset=r16(info);
+    uint32_t phy=(phy_code==2u)?3u:(phy_code==1u)+1u;
+    uint32_t unit=(large==0u)?30u:300u;
+    offset=wraps*0x258000u+unit*offset;
+    pawr=r32(sync+780u);
+    w32(sync+272u,offset+reference);
+    w32(sync+0x64u,r32(info+0x14u));
+    w32(sync+168u,r32(sync+508u));
+    w32(sync+0x68u,r32(info+0x18u));
+    w16(sync+276u,r16(sync+248u));
+    w8(sync+109u,phy);
+    w8(sync+108u,phy);
+    w16(pawr+364u,r8(pawr+0x12u));
+    uint32_t accuracy=opencfw_em9305_mode_callback_child_317ea4(r8(info+0x10u));
+    unit=(r8(info+2u)==0u)?30u:300u;
+    uint32_t widening=opencfw_em9305_init_secondary_time_317ebc(unit+offset,accuracy);
+    uint32_t elapsed=opencfw_em9305_pal_elapsed_raw(offset,widening);
+    unit=(r8(info+2u)==0u)?30u:300u;
+    uint32_t window=unit+(widening<<1);
+    w32(sync+268u,window);
+    w32(sync+204u,window);
+    if(elapsed<300u) return;
+    w32(sync+0x38u,elapsed+reference);
+    uint32_t piece=opencfw_em9305_radio_duration_piece_312b88(r8(sync+109u),0u,1u);
+    uint32_t interval=r32(sync+252u);
+    w32(sync+264u,piece);
+    w32(sync+0x3cu,piece);
+    w32(sync+68u,interval);
+    uintptr_t compare=(uintptr_t)opencfw_em9305_init_secondary_compare_3249e8;
+    while(opencfw_em9305_associated_schedule_insert_312da4(sync+0x30u,compare)==0u) {
+        pawr=r32(sync+780u);
+        uint32_t next=r8(pawr+0x12u)+1u;
+        w8(pawr+0x12u,next);
+        uint32_t limit=r8(sync+512u);
+        counter=r16(sync+248u);
+        if((next&0x7fu)==limit) {
+            next=0u;
+            counter+=1u;
+            w8(pawr+18u,0u);
+            w16(sync+248u,counter);
+        }
+        channel=opencfw_em9305_associated_channel_seed_324c98(sync+644u,
+            (uint16_t)(counter^(uint8_t)next));
+        pawr=r32(sync+780u);
+        uint32_t spacing=r8(sync+513u);
+        uint32_t event=r16(sync+248u);
+        interval=r32(sync+252u);
+        subevent=r8(pawr+0x12u);
+        w8(sync+97u,channel);
+        uint32_t advance=interval*event+(uint16_t)spacing*(uint16_t)subevent*1250u;
+        uint32_t drift=opencfw_em9305_init_secondary_time_317ebc(advance,accuracy);
+        uint32_t anchor=advance-drift+r32(sync+272u);
+        uint32_t duration=r32(sync+264u)+drift;
+        window=r32(sync+268u)+(drift<<1);
+        w32(sync+0x38u,anchor);
+        w32(sync+0x3cu,duration);
+        w32(sync+204u,window);
+    }
+    w8(0x8051a5u,1u);
+}

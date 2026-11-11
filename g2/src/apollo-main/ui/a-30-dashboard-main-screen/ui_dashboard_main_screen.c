@@ -201,9 +201,9 @@ extern void audio_lv_style_opa_441488(void *obj, uint32_t opa, uint32_t sel); /*
 extern void audio_uart_lv_anim_init_4503d6(void *anim);
 extern void audio_uart_lv_anim_values_4506ce(void *anim, int32_t start, int32_t end);
 extern void *audio_uart_lv_anim_start_450408(void *anim);
-extern int32_t audio_uart_lv_anim_path_45065a(void *anim);              /* ease_in */
-extern int32_t audio_uart_lv_anim_path_450672(void *anim);              /* ease_out */
-extern int32_t audio_uart_lv_anim_path_450688(void *anim);              /* ease_in_out */
+extern int32_t lv_anim_path_ease_in(void *anim);              /* ease_in */
+extern int32_t lv_anim_path_ease_out(void *anim);              /* ease_out */
+extern int32_t lv_anim_path_ease_in_out(void *anim);              /* ease_in_out */
 
 /* Defined in this file. */
 void update_tile_indicators_4e772c(int32_t tile);
@@ -490,7 +490,7 @@ void bounce_transform_anim_ready_cb_4e7a74(void *anim)
                                      g2_dashboard_bounce_origin_y_20074bbc);
     a.duration = g2_dashboard_bounce_ms_20004234;
     a.exec_cb = bounce_transform_anim_exec_cb_4e78aa;
-    a.path_cb = audio_uart_lv_anim_path_45065a;
+    a.path_cb = lv_anim_path_ease_in;
     a.completed_cb = bounce_restore_anim_ready_cb_4e7902;
     (void)audio_uart_lv_anim_start_450408(&a);
 }
@@ -524,7 +524,7 @@ void execute_bounce_effect_4e7b16(int32_t direction)
     audio_uart_lv_anim_values_4506ce(&a, g2_dashboard_bounce_origin_y_20074bbc, target);
     a.duration = g2_dashboard_bounce_ms_20004234;
     a.exec_cb = bounce_transform_anim_exec_cb_4e78aa;
-    a.path_cb = audio_uart_lv_anim_path_450672;
+    a.path_cb = lv_anim_path_ease_out;
     a.completed_cb = bounce_transform_anim_ready_cb_4e7a74;
     g2_dashboard_animating_20074bc0 = 1u;
     (void)audio_uart_lv_anim_start_450408(&a);
@@ -539,7 +539,7 @@ void tileview_scroll_anim_start_4e7cc0(void *obj, int32_t target_y, int32_t dura
     a.var = obj;
     audio_uart_lv_anim_values_4506ce(&a, audio_uart_lv_obj_y_44e498(obj), target_y);
     a.exec_cb = scroll_anim_exec_cb_4e78a0;
-    a.path_cb = audio_uart_lv_anim_path_450688;
+    a.path_cb = lv_anim_path_ease_in_out;
     a.completed_cb = scroll_anim_ready_cb_4e7802;
     g2_dashboard_animating_20074bc0 = 1u;
     a.duration = duration;
@@ -913,7 +913,7 @@ void Dashboard_Fadeout_Anim_Start_4e8a90(void)
     audio_uart_lv_anim_values_4506ce(&a, 0xff, 0);
     a.duration = 250;
     a.exec_cb = page_fade_out_anim_exec_cb_4e7a04;
-    a.path_cb = audio_uart_lv_anim_path_450672;
+    a.path_cb = lv_anim_path_ease_out;
     a.completed_cb = page_fade_out_anim_ready_cb_4e7a10;
     g2_dashboard_animating_20074bc0 = 1u;
     (void)audio_uart_lv_anim_start_450408(&a);
@@ -937,7 +937,7 @@ void Dashboard_InputEventWarp_4e8bcc(uint8_t code, uint32_t value)
         audio_uart_lv_anim_values_4506ce(&a, DASH_EXT_WIDTH_FOLDED, DASH_EXT_WIDTH_EXPANDED);
         a.duration = 250;
         a.exec_cb = ext_expand_anim_exec_cb_4e82a6;
-        a.path_cb = audio_uart_lv_anim_path_450672;
+        a.path_cb = lv_anim_path_ease_out;
         a.completed_cb = ext_expand_anim_ready_cb_4e832a;
         g2_dashboard_animating_20074bc0 = 1u;
         g2_dashboard_ext_index_20074bb0 = (uint32_t)g2_dashboard_tile_index_20074bac;

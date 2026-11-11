@@ -1,70 +1,35 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_324904\n"
-".type opencfw_em9305_child_324904,@function\n"
-"opencfw_em9305_child_324904:\n"
-"L324904:\n"
-"enter_s [r13-r14,blink]\n"
-"L324906:\n"
-"ldb_s r1,[r0,0x4]\n"
-"L324908:\n"
-"mov_s r12,0x803f70\n"
-"L32490e:\n"
-"breq.d.nt r1,0x2,L32494c\n"
-"L324912:\n"
-"ldh_s r2,[r0,0x6]\n"
-"L324914:\n"
-"breq.nt r1,0x1,L324958\n"
-"L324918:\n"
-"brne_s r1,0,L32494a\n"
-"L32491a:\n"
-"mpyuw r2,r2,784\n"
-"L32491e:\n"
-"ldh_s r3,[r0,0]\n"
-"L324920:\n"
-"ldh_s r1,[r0,0x2]\n"
-"L324922:\n"
-"add_s r13,r12,r2\n"
-"L324924:\n"
-"ldh r14,[r13,-180]\n"
-"L324928:\n"
-"sub_s r0,r14,r3\n"
-"L32492a:\n"
-"brlt.d.nt r1,r0,L32494a\n"
-"L32492e:\n"
-"add2 r0,r12,0x23\n"
-"L324932:\n"
-"ld r3,[r13,-184]\n"
-"L324936:\n"
-"ld r1,[r13,-188]\n"
-"L32493a:\n"
-"add_s r0,r0,r2\n"
-"L32493c:\n"
-"st r3,[r13,144]\n"
-"L324940:\n"
-"bl.d opencfw_em9305_radio_channel_transform_30e3fc\n"
-"L324944:\n"
-"st_s r1,[r0,0]\n"
-"L324946:\n"
-"stb 0,[r13,-192]\n"
-"L32494a:\n"
-"leave_s [r13-r14,blink,pcl]\n"
-"L32494c:\n"
-"mpyuw r2,r2,784\n"
-"L324950:\n"
-"add_s r2,r2,r12\n"
-"L324952:\n"
-"stb 0,[r2]\n"
-"L324956:\n"
-"leave_s [r13-r14,blink,pcl]\n"
-"L324958:\n"
-"mpyuw r2,r2,784\n"
-"L32495c:\n"
-"add_s r2,r2,r12\n"
-"L32495e:\n"
-"stb 0,[r2,-96]\n"
-"L324962:\n"
-"leave_s [r13-r14,blink,pcl]\n"
-".size opencfw_em9305_child_324904,.-opencfw_em9305_child_324904\n"
-);
+#include <stdint.h>
+
+/* Native 0x324904..0x324964: periodic-advertising slot event for the
+ * 784-byte slot (event +6) of the table at 0x803f70. Kind 2 clears the
+ * slot's first byte, kind 1 the byte at -96. Kind 0 commits a pending
+ * channel map when the event's window (+2) reaches the slot's due count
+ * (-180) minus the event count (+0, signed): copy the staged map words
+ * (-188, -184) to +140/+144, transform them and clear the staged flag
+ * (-192). */
+extern uint32_t opencfw_em9305_radio_channel_transform_30e3fc(uintptr_t);
+
+void opencfw_em9305_child_324904(uintptr_t event)
+{
+    uint32_t kind=*(volatile uint8_t *)(event+4u);
+    uintptr_t slot=(uintptr_t)0x803f70u+*(volatile uint16_t *)(event+6u)*784u;
+    if(kind==2u) {
+        *(volatile uint8_t *)slot=0u;
+        return;
+    }
+    if(kind==1u) {
+        *(volatile uint8_t *)(slot-96u)=0u;
+        return;
+    }
+    if(kind!=0u) return;
+    uint32_t count=*(volatile uint16_t *)event;
+    uint32_t window=*(volatile uint16_t *)(event+2u);
+    uint32_t due=*(volatile uint16_t *)(slot-180u);
+    if((int32_t)window<(int32_t)(due-count)) return;
+    uint32_t high=*(volatile uint32_t *)(slot-184u);
+    uint32_t low=*(volatile uint32_t *)(slot-188u);
+    *(volatile uint32_t *)(slot+144u)=high;
+    *(volatile uint32_t *)(slot+140u)=low;
+    (void)opencfw_em9305_radio_channel_transform_30e3fc(slot+140u);
+    *(volatile uint8_t *)(slot-192u)=0u;
+}

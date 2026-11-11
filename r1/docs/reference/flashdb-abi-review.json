@@ -1,0 +1,2017 @@
+{
+  "schema_version": 1,
+  "status": "Bounded instruction-backed ABI review; not independent review, source qualification or a workflow receipt.",
+  "input": {
+    "path": "r1/blobs/official/r1-2.2.6.0009/application.bin",
+    "sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "file_offset_to_va": "0x27000"
+  },
+  "analysis_wrapper": {
+    "path": "build/goal-r1-flashdb-abi/full.elf",
+    "note": "Unchanged full application bytes with analyst-supplied Thumb symbol seeds in an analysis-only ELF; no original debug symbols or runtime execution implied."
+  },
+  "upstream": {
+    "path": "third-party/upstream/flashdb-2.0.0",
+    "commit": "4e5677408256f82d47cd56a6b04605dcee35ed9a"
+  },
+  "records": [
+    {
+      "evidence_id": "ev_76a4ec8201a16edf49e512a41c31db9f8acfb4f20da54a69806b055aa83ee11e",
+      "subject": {
+        "name": "full.elf",
+        "digest": {
+          "sha256": "b7fa6dca0c150597df4aa25211d405e2bc723ea5c986092011a0b0177a354776"
+        },
+        "local_path": "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-flashdb-abi/full.elf",
+        "format": "elf",
+        "architecture": "arm"
+      },
+      "provider": {
+        "id": "ghidra",
+        "name": "Ghidra",
+        "version": "12.1.4"
+      },
+      "analysis_profile": {
+        "provider": {
+          "id": "ghidra",
+          "name": "Ghidra",
+          "version": "12.1.4"
+        },
+        "parameters": {
+          "target_kind": "executable",
+          "target_format": "elf",
+          "architecture": "arm",
+          "available_architectures": [
+            "arm"
+          ],
+          "import_mode": "ephemeral-source-immutable",
+          "annotation_policy": "atomic-function-entry-metadata-v1",
+          "load_image_observations": "source-mappings-entry-context-v2",
+          "function_body_evidence": "complete-inclusive-ranges-v1",
+          "function_references": "complete-body-and-entry-reference-manager-v2",
+          "call_relationship_coverage": "function-body-call-coverage-v5",
+          "function_dossier_coverage": "observed-facets-and-call-relationships-v1",
+          "string_inventory_evidence": "defined-data-coverage-v1",
+          "location_resolution": "explicit-address-exact-entry-symbol-first-v3",
+          "procedure_file_offset_resolution": "address-first-unique-target-source-mapping-v2",
+          "instruction_flow_evidence": "decoded-return-pcode-v1",
+          "instruction_references": "exact-address-incoming-v1",
+          "function_boundary_observations": "ghidra-function-boundary-limitations-v3",
+          "no_return_repair": "returning-imports-decoded-return-v2",
+          "process_launch": "inspected-jvm-launch-support-v1",
+          "jump_table_evidence": "typed-case-default-blocks-v1",
+          "decompiler_jump_loads": true,
+          "loader": "auto-from-header",
+          "language_id": "auto-from-header",
+          "compiler_spec_id": "auto-default",
+          "analyzer_preset": "ghidra-default"
+        },
+        "digest": "7e46711069eea041af1b9b99e34115c13332795e5cda76e584a722f529ec70de"
+      },
+      "relationship_coverage": {
+        "status": "complete",
+        "diagnostics": [
+          "Only resolved Ghidra call references are returned; unresolved computed or indirect calls remain unknown, while function classifications distinguish thunks and externals."
+        ]
+      },
+      "limitations": [
+        "The session serves operations only after Ghidra reports default auto-analysis complete; incomplete analysis does not expose partial results.",
+        "The imported Program and temporary project are ephemeral and deleted on close. Annotation operations edit session database metadata; original executable bytes are never written.",
+        "Cancelling an active Ghidra request terminates its ephemeral database and discards session annotations. The selected target remains open; the next provider query imports the original artifact again.",
+        "Default-space addresses use lowercase 0x-prefixed hexadecimal; other address spaces use <percent-encoded-space>:0x<hex>.",
+        "References cover the complete Ghidra function-body AddressSet and exact entry. Dossier incoming edges omit sources owned by that function; procedure_references also retains those internal edges.",
+        "The dossier combines Ghidra FunctionManager, Listing, ReferenceManager, BasicBlockModel, and decompiler observations; provider-specific pseudocode and assembly are not cross-provider text invariants.",
+        "Resolved reference metadata identifies computed, indirect, external, call, jump, and data edges; unresolved targetless flows remain unknown, and function classifications distinguish thunks and externals.",
+        "Synthetic Ghidra entry-point references without actionable memory sources are omitted.",
+        "The Java bridge serializes one function request per Program and lets each decompilation run until it completes or the caller cancels.",
+        "Ghidra Listing reports a terminal call at 0x63762 to 0x38060 FUN_00038060 (external=false, thunk=false, hasNoReturn=false); fallthrough is excluded by Ghidra's flow model. The reason for the terminal flow is not established by this observation.",
+        "macOS sessions require a matching executable Ghidra native decompiler; REA checks for it but does not build native components or change Gatekeeper quarantine state."
+      ],
+      "observation": {
+        "procedure": {
+          "address": "0x63694",
+          "name": "stock_control",
+          "classification": {
+            "external": false,
+            "thunk": false,
+            "thunk_target": null,
+            "provenance": "ghidra-function-manager"
+          },
+          "body": {
+            "available": true,
+            "provenance": "ghidra-function-body-address-set",
+            "ranges": [
+              {
+                "start": "0x63694",
+                "end": "0x636a1"
+              },
+              {
+                "start": "0x636ae",
+                "end": "0x63791"
+              }
+            ],
+            "total_bytes": 242,
+            "span_bytes": 254,
+            "non_contiguous": true,
+            "contains_entry": true
+          },
+          "signature": "undefined stock_control()",
+          "locals": []
+        },
+        "assembly": [
+          "0x63694: push {r4,lr}",
+          "0x63696: movs r4, r0",
+          "0x63698: beq 0x000636ae",
+          "0x6369a: cmp r1, #0xc",
+          "0x6369c: bcs 0x000636fa",
+          "0x6369e: tbb [pc,r1]",
+          "0x636ae: adr r0, [0x63794]",
+          "0x636b0: bl 0x00038060",
+          "0x636b4: mov r0, r4",
+          "0x636b6: bl 0x0003f014",
+          "0x636ba: mov r2, r0",
+          "0x636bc: adr r0, [0x637a4]",
+          "0x636be: ldr r1, [r4,#0x0]",
+          "0x636c0: bl 0x00038060",
+          "0x636c4: ldr r2, [0x000637b0]",
+          "0x636c6: adr r1, [0x637b4]",
+          "0x636c8: adr r0, [0x637b8]",
+          "0x636ca: bl 0x00038060",
+          "0x636ce: b 0x000636ce",
+          "0x636d0: ldrb r0, [r4,#0x18]",
+          "0x636d2: cbz r0, 0x000636f6",
+          "0x636d4: adr r0, [0x63794]",
+          "0x636d6: bl 0x00038060",
+          "0x636da: mov r0, r4",
+          "0x636dc: bl 0x0003f014",
+          "0x636e0: mov r2, r0",
+          "0x636e2: adr r0, [0x637a4]",
+          "0x636e4: ldr r1, [r4,#0x0]",
+          "0x636e6: bl 0x00038060",
+          "0x636ea: ldr r2, [0x000637b0]",
+          "0x636ec: adr r1, [0x637d8]",
+          "0x636ee: adr r0, [0x637b8]",
+          "0x636f0: bl 0x00038060",
+          "0x636f4: b 0x000636f4",
+          "0x636f6: ldr r0, [r2,#0x0]",
+          "0x636f8: str r0, [r4,#0xc]",
+          "0x636fa: pop {r4,pc}",
+          "0x636fc: ldr r0, [r4,#0xc]",
+          "0x636fe: b 0x00063742",
+          "0x63700: str r2, [r4,#0x1c]",
+          "0x63702: pop {r4,pc}",
+          "0x63704: str r2, [r4,#0x20]",
+          "0x63706: pop {r4,pc}",
+          "0x63708: ldrb r0, [r4,#0x18]",
+          "0x6370a: cmp r0, #0x1",
+          "0x6370c: beq 0x00063730",
+          "0x6370e: adr r0, [0x63794]",
+          "0x63710: bl 0x00038060",
+          "0x63714: mov r0, r4",
+          "0x63716: bl 0x0003f014",
+          "0x6371a: mov r2, r0",
+          "0x6371c: adr r0, [0x637a4]",
+          "0x6371e: ldr r1, [r4,#0x0]",
+          "0x63720: bl 0x00038060",
+          "0x63724: ldr r2, [0x000637b0]",
+          "0x63726: adr r1, [0x637f4]",
+          "0x63728: adr r0, [0x637b8]",
+          "0x6372a: bl 0x00038060",
+          "0x6372e: b 0x0006372e",
+          "0x63730: ldrb r0, [r2,#0x0]",
+          "0x63732: strb.w r0, [r4,#0x5c]",
+          "0x63736: pop {r4,pc}",
+          "0x63738: ldrb.w r0, [r4,#0x5c]",
+          "0x6373c: strb r0, [r2,#0x0]",
+          "0x6373e: pop {r4,pc}",
+          "0x63740: ldr r0, [r4,#0x50]",
+          "0x63742: str r0, [r2,#0x0]",
+          "0x63744: pop {r4,pc}",
+          "0x63746: adr r0, [0x63794]",
+          "0x63748: bl 0x00038060",
+          "0x6374c: mov r0, r4",
+          "0x6374e: bl 0x0003f014",
+          "0x63752: mov r2, r0",
+          "0x63754: adr r0, [0x637a4]",
+          "0x63756: ldr r1, [r4,#0x0]",
+          "0x63758: bl 0x00038060",
+          "0x6375c: pop.w {r4,lr}",
+          "0x63760: ldr r0, [0x00063810]",
+          "0x63762: b.w 0x00038060",
+          "0x63766: ldrb r0, [r4,#0x18]",
+          "0x63768: cbz r0, 0x0006378c",
+          "0x6376a: adr r0, [0x63794]",
+          "0x6376c: bl 0x00038060",
+          "0x63770: mov r0, r4",
+          "0x63772: bl 0x0003f014",
+          "0x63776: mov r2, r0",
+          "0x63778: adr r0, [0x637a4]",
+          "0x6377a: ldr r1, [r4,#0x0]",
+          "0x6377c: bl 0x00038060",
+          "0x63780: ldr r2, [0x000637b0]",
+          "0x63782: adr r1, [0x637d8]",
+          "0x63784: adr r0, [0x637b8]",
+          "0x63786: bl 0x00038060",
+          "0x6378a: b 0x0006378a",
+          "0x6378c: ldrb r0, [r2,#0x0]",
+          "0x6378e: strb r0, [r4,#0x1a]",
+          "0x63790: pop {r4,pc}"
+        ],
+        "pseudocode": "\nvoid stock_control(undefined4 *param_1,undefined4 param_2,undefined4 *param_3)\n\n{\n  undefined4 uVar1;\n  \n  if (param_1 == (undefined4 *)0x0) {\n    FUN_00038060(\"[FlashDB][tsl]\");\n    uVar1 = FUN_0003f014(0);\n    FUN_00038060(\"[%s][%s] \",uRam00000000,uVar1);\n    FUN_00038060(\"(%s) has assert failed at %s.\\n\",&DAT_000637b4,\"fdb_tsdb_control\");\n    do {\n                    /* WARNING: Do nothing block with infinite loop */\n    } while( true );\n  }\n  switch(param_2) {\n  case 0:\n    if (*(char *)(param_1 + 6) == '\\0') {\n      param_1[3] = *param_3;\n      return;\n    }\n    FUN_00038060(\"[FlashDB][tsl]\");\n    uVar1 = FUN_0003f014(param_1);\n    FUN_00038060(\"[%s][%s] \",*param_1,uVar1);\n    FUN_00038060(\"(%s) has assert failed at %s.\\n\",\"db->parent.init_ok == false\",\"fdb_tsdb_control\")\n    ;\n    do {\n                    /* WARNING: Do nothing block with infinite loop */\n    } while( true );\n  case 1:\n    uVar1 = param_1[3];\n    break;\n  case 2:\n    param_1[7] = param_3;\n    return;\n  case 3:\n    param_1[8] = param_3;\n    return;\n  case 4:\n    if (*(char *)(param_1 + 6) == '\\x01') {\n      *(undefined1 *)(param_1 + 0x17) = *(undefined1 *)param_3;\n      return;\n    }\n    FUN_00038060(\"[FlashDB][tsl]\");\n    uVar1 = FUN_0003f014(param_1);\n    FUN_00038060(\"[%s][%s] \",*param_1,uVar1);\n    FUN_00038060(\"(%s) has assert failed at %s.\\n\",\"db->parent.init_ok == true\",\"fdb_tsdb_control\");\n    do {\n                    /* WARNING: Do nothing block with infinite loop */\n    } while( true );\n  case 5:\n    *(undefined1 *)param_3 = *(undefined1 *)(param_1 + 0x17);\n    return;\n  case 6:\n    uVar1 = param_1[0x14];\n    break;\n  default:\n    return;\n  case 9:\n    FUN_00038060(\"[FlashDB][tsl]\");\n    uVar1 = FUN_0003f014(param_1);\n    FUN_00038060(\"[%s][%s] \",*param_1,uVar1);\n    FUN_00038060(\"Error: set file mode Failed. Please defined the FDB_USING_FILE_MODE macro.\");\n    return;\n  case 0xb:\n    if (*(char *)(param_1 + 6) == '\\0') {\n      *(undefined1 *)((int)param_1 + 0x1a) = *(undefined1 *)param_3;\n      return;\n    }\n    FUN_00038060(\"[FlashDB][tsl]\");\n    uVar1 = FUN_0003f014(param_1);\n    FUN_00038060(\"[%s][%s] \",*param_1,uVar1);\n    FUN_00038060(\"(%s) has assert failed at %s.\\n\",\"db->parent.init_ok == false\",\"fdb_tsdb_control\")\n    ;\n    do {\n                    /* WARNING: Do nothing block with infinite loop */\n    } while( true );\n  }\n  *param_3 = uVar1;\n  return;\n}\n\n",
+        "unresolved_calls": []
+      }
+    },
+    {
+      "evidence_id": "ev_595a1c98e43830df16383f57fccceadce62280b72e53df0abd9d8c83c4356d7d",
+      "subject": {
+        "name": "full.elf",
+        "digest": {
+          "sha256": "b7fa6dca0c150597df4aa25211d405e2bc723ea5c986092011a0b0177a354776"
+        },
+        "local_path": "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-flashdb-abi/full.elf",
+        "format": "elf",
+        "architecture": "arm"
+      },
+      "provider": {
+        "id": "ghidra",
+        "name": "Ghidra",
+        "version": "12.1.4"
+      },
+      "analysis_profile": {
+        "provider": {
+          "id": "ghidra",
+          "name": "Ghidra",
+          "version": "12.1.4"
+        },
+        "parameters": {
+          "target_kind": "executable",
+          "target_format": "elf",
+          "architecture": "arm",
+          "available_architectures": [
+            "arm"
+          ],
+          "import_mode": "ephemeral-source-immutable",
+          "annotation_policy": "atomic-function-entry-metadata-v1",
+          "load_image_observations": "source-mappings-entry-context-v2",
+          "function_body_evidence": "complete-inclusive-ranges-v1",
+          "function_references": "complete-body-and-entry-reference-manager-v2",
+          "call_relationship_coverage": "function-body-call-coverage-v5",
+          "function_dossier_coverage": "observed-facets-and-call-relationships-v1",
+          "string_inventory_evidence": "defined-data-coverage-v1",
+          "location_resolution": "explicit-address-exact-entry-symbol-first-v3",
+          "procedure_file_offset_resolution": "address-first-unique-target-source-mapping-v2",
+          "instruction_flow_evidence": "decoded-return-pcode-v1",
+          "instruction_references": "exact-address-incoming-v1",
+          "function_boundary_observations": "ghidra-function-boundary-limitations-v3",
+          "no_return_repair": "returning-imports-decoded-return-v2",
+          "process_launch": "inspected-jvm-launch-support-v1",
+          "jump_table_evidence": "typed-case-default-blocks-v1",
+          "decompiler_jump_loads": true,
+          "loader": "auto-from-header",
+          "language_id": "auto-from-header",
+          "compiler_spec_id": "auto-default",
+          "analyzer_preset": "ghidra-default"
+        },
+        "digest": "7e46711069eea041af1b9b99e34115c13332795e5cda76e584a722f529ec70de"
+      },
+      "relationship_coverage": {
+        "status": "complete",
+        "diagnostics": [
+          "Only resolved Ghidra call references are returned; unresolved computed or indirect calls remain unknown, while function classifications distinguish thunks and externals."
+        ]
+      },
+      "limitations": [
+        "The session serves operations only after Ghidra reports default auto-analysis complete; incomplete analysis does not expose partial results.",
+        "The imported Program and temporary project are ephemeral and deleted on close. Annotation operations edit session database metadata; original executable bytes are never written.",
+        "Cancelling an active Ghidra request terminates its ephemeral database and discards session annotations. The selected target remains open; the next provider query imports the original artifact again.",
+        "Default-space addresses use lowercase 0x-prefixed hexadecimal; other address spaces use <percent-encoded-space>:0x<hex>.",
+        "References cover the complete Ghidra function-body AddressSet and exact entry. Dossier incoming edges omit sources owned by that function; procedure_references also retains those internal edges.",
+        "The dossier combines Ghidra FunctionManager, Listing, ReferenceManager, BasicBlockModel, and decompiler observations; provider-specific pseudocode and assembly are not cross-provider text invariants.",
+        "Resolved reference metadata identifies computed, indirect, external, call, jump, and data edges; unresolved targetless flows remain unknown, and function classifications distinguish thunks and externals.",
+        "Synthetic Ghidra entry-point references without actionable memory sources are omitted.",
+        "The Java bridge serializes one function request per Program and lets each decompilation run until it completes or the caller cancels.",
+        "macOS sessions require a matching executable Ghidra native decompiler; REA checks for it but does not build native components or change Gatekeeper quarantine state."
+      ],
+      "observation": {
+        "procedure": {
+          "address": "0x63814",
+          "name": "stock_init",
+          "classification": {
+            "external": false,
+            "thunk": false,
+            "thunk_target": null,
+            "provenance": "ghidra-function-manager"
+          },
+          "body": {
+            "available": true,
+            "provenance": "ghidra-function-body-address-set",
+            "ranges": [
+              {
+                "start": "0x63814",
+                "end": "0x6397b"
+              }
+            ],
+            "total_bytes": 360,
+            "span_bytes": 360,
+            "non_contiguous": false,
+            "contains_entry": true
+          },
+          "signature": "undefined stock_init()",
+          "locals": [
+            {
+              "description": "undefined4 local_34 @ Stack[-0x34]:4",
+              "provenance": "ghidra-function-database"
+            },
+            {
+              "description": "undefined4 local_48 @ Stack[-0x48]:4",
+              "provenance": "ghidra-function-database"
+            },
+            {
+              "description": "undefined4 local_4c @ Stack[-0x4c]:4",
+              "provenance": "ghidra-function-database"
+            },
+            {
+              "description": "undefined4 local_50 @ Stack[-0x50]:4",
+              "provenance": "ghidra-function-database"
+            },
+            {
+              "description": "undefined4 local_54 @ Stack[-0x54]:4",
+              "provenance": "ghidra-function-database"
+            },
+            {
+              "description": "undefined4 local_78 @ Stack[-0x78]:4",
+              "provenance": "ghidra-function-database"
+            },
+            {
+              "description": "undefined4 local_84 @ Stack[-0x84]:4",
+              "provenance": "ghidra-function-database"
+            },
+            {
+              "description": "undefined4 local_88 @ Stack[-0x88]:4",
+              "provenance": "ghidra-function-database"
+            }
+          ]
+        },
+        "assembly": [
+          "0x63814: push {r4,r5,r6,r7,r8,lr}",
+          "0x63818: sub sp, #0x70",
+          "0x6381a: mov r4, r0",
+          "0x6381c: ldrd r7, r0, [sp,#0x88]",
+          "0x63820: mov.w r8, #0x0",
+          "0x63824: movs r6, r3",
+          "0x63826: str.w r8, [sp,#0x38]",
+          "0x6382a: str.w r8, [sp,#0x3c]",
+          "0x6382e: str.w r8, [sp,#0x40]",
+          "0x63832: str r4, [sp,#0x34]",
+          "0x63834: beq 0x00063846",
+          "0x63836: str r0, [sp,#0x0]",
+          "0x63838: movs r3, #0x1",
+          "0x6383a: mov r0, r4",
+          "0x6383c: bl 0x0003f094",
+          "0x63840: movs r5, r0",
+          "0x63842: bne 0x000638c8",
+          "0x63844: b 0x00063868",
+          "0x63846: adr r0, [0x6397c]",
+          "0x63848: bl 0x00038060",
+          "0x6384c: mov r0, r4",
+          "0x6384e: bl 0x0003f014",
+          "0x63852: mov r2, r0",
+          "0x63854: adr r0, [0x6398c]",
+          "0x63856: ldr r1, [r4,#0x0]",
+          "0x63858: bl 0x00038060",
+          "0x6385c: ldr r2, [0x00063998]",
+          "0x6385e: adr r1, [0x6399c]",
+          "0x63860: adr r0, [0x639a8]",
+          "0x63862: bl 0x00038060",
+          "0x63866: b 0x00063866",
+          "0x63868: movs r0, #0x1",
+          "0x6386a: strd r6, r7, [r4,#0x54]",
+          "0x6386e: strb.w r0, [r4,#0x5c]",
+          "0x63872: subs r1, r0, #0x2",
+          "0x63874: str r1, [r4,#0x14]",
+          "0x63876: str r1, [r4,#0x2c]",
+          "0x63878: ldr r1, [r4,#0xc]",
+          "0x6387a: cmp r1, r7",
+          "0x6387c: bhi 0x000638a0",
+          "0x6387e: adr r0, [0x6397c]",
+          "0x63880: bl 0x00038060",
+          "0x63884: mov r0, r4",
+          "0x63886: bl 0x0003f014",
+          "0x6388a: mov r2, r0",
+          "0x6388c: adr r0, [0x6398c]",
+          "0x6388e: ldr r1, [r4,#0x0]",
+          "0x63890: bl 0x00038060",
+          "0x63894: ldr r2, [0x00063998]",
+          "0x63896: adr r1, [0x639c8]",
+          "0x63898: adr r0, [0x639a8]",
+          "0x6389a: bl 0x00038060",
+          "0x6389e: b 0x0006389e",
+          "0x638a0: ldr r1, [0x000639e4]",
+          "0x638a2: str.w r8, [sp,#0x10]",
+          "0x638a6: str.w r8, [sp,#0x0]",
+          "0x638aa: strd r1, r0, [sp,#0x4]",
+          "0x638ae: mov r6, r8",
+          "0x638b0: add r3, sp,#0x34",
+          "0x638b2: movs r2, #0x0",
+          "0x638b4: add r1, sp,#0xc",
+          "0x638b6: mov r0, r4",
+          "0x638b8: bl 0x000895f4",
+          "0x638bc: ldrb.w r0, [sp,#0x38]",
+          "0x638c0: cbz r0, 0x000638d2",
+          "0x638c2: ldrb r0, [r4,#0x1a]",
+          "0x638c4: cbz r0, 0x000638ca",
+          "0x638c6: movs r5, #0x2",
+          "0x638c8: b 0x00063966",
+          "0x638ca: mov r0, r4",
+          "0x638cc: bl 0x00093828",
+          "0x638d0: b 0x000638fc",
+          "0x638d2: ldr r0, [sp,#0x3c]",
+          "0x638d4: cbz r0, 0x000638da",
+          "0x638d6: ldr r0, [sp,#0x40]",
+          "0x638d8: b 0x000638ec",
+          "0x638da: ldrb.w r0, [r4,#0x5c]",
+          "0x638de: cbz r0, 0x000638e4",
+          "0x638e0: ldr r0, [r4,#0x2c]",
+          "0x638e2: b 0x000638ec",
+          "0x638e4: ldrd r1, r0, [r4,#0xc]",
+          "0x638e8: subs r0, r0, r1",
+          "0x638ea: str r0, [r4,#0x2c]",
+          "0x638ec: ldr r1, [r4,#0xc]",
+          "0x638ee: add r0, r1",
+          "0x638f0: ldr r1, [r4,#0x10]",
+          "0x638f2: cmp r0, r1",
+          "0x638f4: bcc 0x000638fa",
+          "0x638f6: str r6, [r4,#0x14]",
+          "0x638f8: b 0x000638fc",
+          "0x638fa: str r0, [r4,#0x14]",
+          "0x638fc: adr r0, [0x6397c]",
+          "0x638fe: bl 0x00038060",
+          "0x63902: mov r0, r4",
+          "0x63904: bl 0x0003f014",
+          "0x63908: mov r2, r0",
+          "0x6390a: adr r0, [0x6398c]",
+          "0x6390c: ldr r1, [r4,#0x0]",
+          "0x6390e: bl 0x00038060",
+          "0x63912: movw r2, #0x3b6",
+          "0x63916: adr r1, [0x639e8]",
+          "0x63918: adr r0, [0x63a18]",
+          "0x6391a: bl 0x00038060",
+          "0x6391e: ldr r0, [0x00063a24]",
+          "0x63920: ldr r3, [r4,#0x2c]",
+          "0x63922: ldr r2, [r4,#0x14]",
+          "0x63924: ldr r1, [r4,#0x0]",
+          "0x63926: bl 0x00038060",
+          "0x6392a: movs r3, #0x1",
+          "0x6392c: add.w r2, r4, #0x28",
+          "0x63930: mov r0, r4",
+          "0x63932: ldr r1, [r4,#0x2c]",
+          "0x63934: bl 0x00087c24",
+          "0x63938: ldrb.w r0, [r4,#0x29]",
+          "0x6393c: cmp r0, #0x2",
+          "0x6393e: beq 0x00063946",
+          "0x63940: cmp r0, #0x1",
+          "0x63942: beq 0x0006394a",
+          "0x63944: b 0x00063966",
+          "0x63946: ldr r0, [r4,#0x38]",
+          "0x63948: b 0x00063964",
+          "0x6394a: ldr r1, [r4,#0x14]",
+          "0x6394c: ldr r0, [r4,#0x2c]",
+          "0x6394e: cmp r1, r0",
+          "0x63950: beq 0x00063966",
+          "0x63952: cbz r0, 0x00063976",
+          "0x63954: ldr r1, [r4,#0xc]",
+          "0x63956: movs r3, #0x0",
+          "0x63958: subs r1, r0, r1",
+          "0x6395a: add r2, sp,#0x44",
+          "0x6395c: mov r0, r4",
+          "0x6395e: bl 0x00087c24",
+          "0x63962: ldr r0, [sp,#0x54]",
+          "0x63964: str r0, [r4,#0x50]",
+          "0x63966: mov r1, r5",
+          "0x63968: mov r0, r4",
+          "0x6396a: bl 0x0003f2ec",
+          "0x6396e: add sp, #0x70",
+          "0x63970: mov r0, r5",
+          "0x63972: pop.w {r4,r5,r6,r7,r8,pc}",
+          "0x63976: ldrd r1, r0, [r4,#0xc]",
+          "0x6397a: b 0x00063956"
+        ],
+        "pseudocode": "\nint stock_init(undefined4 *param_1,undefined4 param_2,undefined4 param_3,int param_4,uint param_5,\n              undefined4 param_6)\n\n{\n  int iVar1;\n  undefined4 uVar2;\n  int iVar3;\n  int iVar4;\n  undefined1 auStack_7c [4];\n  undefined4 local_78;\n  undefined4 *local_54;\n  undefined4 local_50;\n  int local_4c;\n  int local_48;\n  undefined1 auStack_44 [16];\n  undefined4 local_34;\n  \n  local_50 = 0;\n  local_4c = 0;\n  local_48 = 0;\n  local_54 = param_1;\n  if (param_4 == 0) {\n    FUN_00038060(\"[FlashDB][tsl]\");\n    uVar2 = FUN_0003f014(param_1);\n    FUN_00038060(\"[%s][%s] \",*param_1,uVar2);\n    FUN_00038060(\"(%s) has assert failed at %s.\\n\",\"get_time\",\"fdb_tsdb_init\");\n    do {\n                    /* WARNING: Do nothing block with infinite loop */\n    } while( true );\n  }\n  iVar1 = FUN_0003f094(param_1,param_2,param_3,1,param_6);\n  if (iVar1 == 0) {\n    param_1[0x15] = param_4;\n    param_1[0x16] = param_5;\n    *(undefined1 *)(param_1 + 0x17) = 1;\n    param_1[5] = 0xffffffff;\n    param_1[0xb] = 0xffffffff;\n    if ((uint)param_1[3] <= param_5) {\n      FUN_00038060(\"[FlashDB][tsl]\");\n      uVar2 = FUN_0003f014(param_1);\n      FUN_00038060(\"[%s][%s] \",*param_1,uVar2);\n      FUN_00038060(\"(%s) has assert failed at %s.\\n\",\"max_len < db_sec_size(db)\",\"fdb_tsdb_init\");\n      do {\n                    /* WARNING: Do nothing block with infinite loop */\n      } while( true );\n    }\n    local_78 = 0;\n    FUN_000895f4(param_1,auStack_7c,0,&local_54,0,0x57eb5,1);\n    if ((char)local_50 == '\\0') {\n      iVar3 = local_48;\n      if (local_4c == 0) {\n        if (*(char *)(param_1 + 0x17) == '\\0') {\n          param_1[0xb] = param_1[4] - param_1[3];\n          iVar3 = param_1[4] - param_1[3];\n        }\n        else {\n          iVar3 = param_1[0xb];\n        }\n      }\n      if ((uint)(iVar3 + param_1[3]) < (uint)param_1[4]) {\n        param_1[5] = iVar3 + param_1[3];\n      }\n      else {\n        param_1[5] = 0;\n      }\n    }\n    else {\n      if (*(char *)((int)param_1 + 0x1a) != '\\0') {\n        iVar1 = 2;\n        goto LAB_00063966;\n      }\n      FUN_00093828(param_1);\n    }\n    FUN_00038060(\"[FlashDB][tsl]\");\n    uVar2 = FUN_0003f014(param_1);\n    FUN_00038060(\"[%s][%s] \",*param_1,uVar2);\n    FUN_00038060(\"(%s:%d) \",\"..\\\\..\\\\..\\\\third_party\\\\DB\\\\FlashDB\\\\src\\\\fdb_tsdb.c\",0x3b6);\n    FUN_00038060(\"TSDB (%s) oldest sectors is 0x%08X, current using sector is 0x%08X.\\n\",*param_1,\n                 param_1[5],param_1[0xb]);\n    stock_read_sector(param_1,param_1[0xb],param_1 + 10,1);\n    if (*(char *)((int)param_1 + 0x29) == '\\x02') {\n      local_34 = param_1[0xe];\n    }\n    else {\n      if ((*(char *)((int)param_1 + 0x29) != '\\x01') || (iVar3 = param_1[0xb], param_1[5] == iVar3))\n      goto LAB_00063966;\n      if (iVar3 == 0) {\n        iVar4 = param_1[3];\n        iVar3 = param_1[4];\n      }\n      else {\n        iVar4 = param_1[3];\n      }\n      stock_read_sector(param_1,iVar3 - iVar4,auStack_44,0);\n    }\n    param_1[0x14] = local_34;\n  }\nLAB_00063966:\n  FUN_0003f2ec(param_1,iVar1);\n  return iVar1;\n}\n\n",
+        "unresolved_calls": []
+      }
+    },
+    {
+      "evidence_id": "ev_15ee0a0cbf547147cb69eb88d6d8984bcbfff5eaf827e62b1c90293bd7735309",
+      "subject": {
+        "name": "full.elf",
+        "digest": {
+          "sha256": "b7fa6dca0c150597df4aa25211d405e2bc723ea5c986092011a0b0177a354776"
+        },
+        "local_path": "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-flashdb-abi/full.elf",
+        "format": "elf",
+        "architecture": "arm"
+      },
+      "provider": {
+        "id": "ghidra",
+        "name": "Ghidra",
+        "version": "12.1.4"
+      },
+      "analysis_profile": {
+        "provider": {
+          "id": "ghidra",
+          "name": "Ghidra",
+          "version": "12.1.4"
+        },
+        "parameters": {
+          "target_kind": "executable",
+          "target_format": "elf",
+          "architecture": "arm",
+          "available_architectures": [
+            "arm"
+          ],
+          "import_mode": "ephemeral-source-immutable",
+          "annotation_policy": "atomic-function-entry-metadata-v1",
+          "load_image_observations": "source-mappings-entry-context-v2",
+          "function_body_evidence": "complete-inclusive-ranges-v1",
+          "function_references": "complete-body-and-entry-reference-manager-v2",
+          "call_relationship_coverage": "function-body-call-coverage-v5",
+          "function_dossier_coverage": "observed-facets-and-call-relationships-v1",
+          "string_inventory_evidence": "defined-data-coverage-v1",
+          "location_resolution": "explicit-address-exact-entry-symbol-first-v3",
+          "procedure_file_offset_resolution": "address-first-unique-target-source-mapping-v2",
+          "instruction_flow_evidence": "decoded-return-pcode-v1",
+          "instruction_references": "exact-address-incoming-v1",
+          "function_boundary_observations": "ghidra-function-boundary-limitations-v3",
+          "no_return_repair": "returning-imports-decoded-return-v2",
+          "process_launch": "inspected-jvm-launch-support-v1",
+          "jump_table_evidence": "typed-case-default-blocks-v1",
+          "decompiler_jump_loads": true,
+          "loader": "auto-from-header",
+          "language_id": "auto-from-header",
+          "compiler_spec_id": "auto-default",
+          "analyzer_preset": "ghidra-default"
+        },
+        "digest": "7e46711069eea041af1b9b99e34115c13332795e5cda76e584a722f529ec70de"
+      },
+      "relationship_coverage": {
+        "status": "complete",
+        "diagnostics": [
+          "Only resolved Ghidra call references are returned; unresolved computed or indirect calls remain unknown, while function classifications distinguish thunks and externals."
+        ]
+      },
+      "limitations": [
+        "The session serves operations only after Ghidra reports default auto-analysis complete; incomplete analysis does not expose partial results.",
+        "The imported Program and temporary project are ephemeral and deleted on close. Annotation operations edit session database metadata; original executable bytes are never written.",
+        "Cancelling an active Ghidra request terminates its ephemeral database and discards session annotations. The selected target remains open; the next provider query imports the original artifact again.",
+        "Default-space addresses use lowercase 0x-prefixed hexadecimal; other address spaces use <percent-encoded-space>:0x<hex>.",
+        "References cover the complete Ghidra function-body AddressSet and exact entry. Dossier incoming edges omit sources owned by that function; procedure_references also retains those internal edges.",
+        "The dossier combines Ghidra FunctionManager, Listing, ReferenceManager, BasicBlockModel, and decompiler observations; provider-specific pseudocode and assembly are not cross-provider text invariants.",
+        "Resolved reference metadata identifies computed, indirect, external, call, jump, and data edges; unresolved targetless flows remain unknown, and function classifications distinguish thunks and externals.",
+        "Synthetic Ghidra entry-point references without actionable memory sources are omitted.",
+        "The Java bridge serializes one function request per Program and lets each decompilation run until it completes or the caller cancels.",
+        "macOS sessions require a matching executable Ghidra native decompiler; REA checks for it but does not build native components or change Gatekeeper quarantine state."
+      ],
+      "observation": {
+        "procedure": {
+          "address": "0x87c24",
+          "name": "stock_read_sector",
+          "classification": {
+            "external": false,
+            "thunk": false,
+            "thunk_target": null,
+            "provenance": "ghidra-function-manager"
+          },
+          "body": {
+            "available": true,
+            "provenance": "ghidra-function-body-address-set",
+            "ranges": [
+              {
+                "start": "0x87c24",
+                "end": "0x87d8b"
+              }
+            ],
+            "total_bytes": 360,
+            "span_bytes": 360,
+            "non_contiguous": false,
+            "contains_entry": true
+          },
+          "signature": "undefined stock_read_sector()",
+          "locals": [
+            {
+              "description": "undefined4 local_24 @ Stack[-0x24]:4",
+              "provenance": "ghidra-function-database"
+            },
+            {
+              "description": "undefined4 local_28 @ Stack[-0x28]:4",
+              "provenance": "ghidra-function-database"
+            },
+            {
+              "description": "undefined4 local_2c @ Stack[-0x2c]:4",
+              "provenance": "ghidra-function-database"
+            },
+            {
+              "description": "undefined1 local_30 @ Stack[-0x30]:1",
+              "provenance": "ghidra-function-database"
+            },
+            {
+              "description": "undefined4 local_4c @ Stack[-0x4c]:4",
+              "provenance": "ghidra-function-database"
+            },
+            {
+              "description": "undefined4 local_50 @ Stack[-0x50]:4",
+              "provenance": "ghidra-function-database"
+            },
+            {
+              "description": "undefined4 local_68 @ Stack[-0x68]:4",
+              "provenance": "ghidra-function-database"
+            },
+            {
+              "description": "undefined4 local_6c @ Stack[-0x6c]:4",
+              "provenance": "ghidra-function-database"
+            },
+            {
+              "description": "undefined4 local_70 @ Stack[-0x70]:4",
+              "provenance": "ghidra-function-database"
+            },
+            {
+              "description": "undefined4 local_74 @ Stack[-0x74]:4",
+              "provenance": "ghidra-function-database"
+            }
+          ]
+        },
+        "assembly": [
+          "0x87c24: push {r4,r5,r6,r7,r8,lr}",
+          "0x87c28: sub sp, #0x68",
+          "0x87c2a: mov r8, r3",
+          "0x87c2c: movs r4, r2",
+          "0x87c2e: mov r7, r1",
+          "0x87c30: mov r5, r0",
+          "0x87c32: mov.w r6, #0x0",
+          "0x87c36: beq 0x00087c58",
+          "0x87c38: movs r3, #0x50",
+          "0x87c3a: mov r2, sp",
+          "0x87c3c: bl 0x0003f03e",
+          "0x87c40: str r7, [r4,#0x4]",
+          "0x87c42: ldr r0, [sp,#0xc]",
+          "0x87c44: ldr r1, [0x00087d8c]",
+          "0x87c46: movs r7, #0x0",
+          "0x87c48: str r0, [r4,#0x8]",
+          "0x87c4a: cmp r0, r1",
+          "0x87c4c: beq 0x00087c7a",
+          "0x87c4e: strb r7, [r4,#0x0]",
+          "0x87c50: movs r0, #0x8",
+          "0x87c52: add sp, #0x68",
+          "0x87c54: pop.w {r4,r5,r6,r7,r8,pc}",
+          "0x87c58: adr r0, [0x87d90]",
+          "0x87c5a: bl 0x00038060",
+          "0x87c5e: mov r0, r5",
+          "0x87c60: bl 0x0003f014",
+          "0x87c64: mov r2, r0",
+          "0x87c66: adr r0, [0x87da0]",
+          "0x87c68: ldr r1, [r5,#0x0]",
+          "0x87c6a: bl 0x00038060",
+          "0x87c6e: ldr r2, [0x00087dac]",
+          "0x87c70: adr r1, [0x87db0]",
+          "0x87c72: adr r0, [0x87db8]",
+          "0x87c74: bl 0x00038060",
+          "0x87c78: b 0x00087c78",
+          "0x87c7a: movs r0, #0x1",
+          "0x87c7c: strb r0, [r4,#0x0]",
+          "0x87c7e: movs r1, #0x4",
+          "0x87c80: mov r0, sp",
+          "0x87c82: bl 0x0003f076",
+          "0x87c86: strb r0, [r4,#0x1]",
+          "0x87c88: ldr r0, [sp,#0x10]",
+          "0x87c8a: str r0, [r4,#0xc]",
+          "0x87c8c: movs r1, #0x6",
+          "0x87c8e: add r0, sp,#0x1c",
+          "0x87c90: bl 0x0003f076",
+          "0x87c94: strb r0, [r4,#0x18]",
+          "0x87c96: movs r1, #0x6",
+          "0x87c98: add r0, sp,#0x38",
+          "0x87c9a: bl 0x0003f076",
+          "0x87c9e: uxtb r0, r0",
+          "0x87ca0: strb r0, [r4,#0x19]",
+          "0x87ca2: ldrb r1, [r4,#0x18]",
+          "0x87ca4: cmp r1, #0x2",
+          "0x87ca6: beq 0x00087cb2",
+          "0x87ca8: cmp r0, #0x2",
+          "0x87caa: beq 0x00087cba",
+          "0x87cac: cmp r1, #0x1",
+          "0x87cae: beq 0x00087cc4",
+          "0x87cb0: b 0x00087cc8",
+          "0x87cb2: ldr r0, [sp,#0x14]",
+          "0x87cb4: str r0, [r4,#0x10]",
+          "0x87cb6: ldr r0, [sp,#0x18]",
+          "0x87cb8: b 0x00087cc0",
+          "0x87cba: ldr r0, [sp,#0x30]",
+          "0x87cbc: str r0, [r4,#0x10]",
+          "0x87cbe: ldr r0, [sp,#0x34]",
+          "0x87cc0: str r0, [r4,#0x14]",
+          "0x87cc2: b 0x00087cc8",
+          "0x87cc4: cmp r0, #0x1",
+          "0x87cc6: beq 0x00087ce2",
+          "0x87cc8: ldr r0, [r4,#0x4]",
+          "0x87cca: mov r1, r0",
+          "0x87ccc: adds r0, #0x50",
+          "0x87cce: str r0, [r4,#0x20]",
+          "0x87cd0: ldr r2, [r5,#0xc]",
+          "0x87cd2: add r1, r2",
+          "0x87cd4: subs r0, r1, r0",
+          "0x87cd6: str r1, [r4,#0x24]",
+          "0x87cd8: str r0, [r4,#0x1c]",
+          "0x87cda: ldrb r0, [r4,#0x1]",
+          "0x87cdc: cmp r0, #0x2",
+          "0x87cde: beq 0x00087d04",
+          "0x87ce0: b 0x00087d62",
+          "0x87ce2: adr r0, [0x87d90]",
+          "0x87ce4: bl 0x00038060",
+          "0x87ce8: mov r0, r5",
+          "0x87cea: bl 0x0003f014",
+          "0x87cee: mov r2, r0",
+          "0x87cf0: adr r0, [0x87da0]",
+          "0x87cf2: ldr r1, [r5,#0x0]",
+          "0x87cf4: bl 0x00038060",
+          "0x87cf8: ldr r2, [0x00087dac]",
+          "0x87cfa: adr r1, [0x87dd8]",
+          "0x87cfc: adr r0, [0x87db8]",
+          "0x87cfe: bl 0x00038060",
+          "0x87d02: b 0x00087d02",
+          "0x87d04: cmp.w r8, #0x0",
+          "0x87d08: beq 0x00087d62",
+          "0x87d0a: ldr r0, [r4,#0x20]",
+          "0x87d0c: str r0, [sp,#0x5c]",
+          "0x87d0e: b 0x00087d56",
+          "0x87d10: ldrb.w r0, [sp,#0x50]",
+          "0x87d14: cbz r0, 0x00087d62",
+          "0x87d16: ldr r0, [sp,#0x54]",
+          "0x87d18: str r0, [r4,#0x10]",
+          "0x87d1a: ldr r0, [sp,#0x5c]",
+          "0x87d1c: str r0, [r4,#0x14]",
+          "0x87d1e: ldr r0, [r4,#0x20]",
+          "0x87d20: adds r0, #0x20",
+          "0x87d22: str r0, [r4,#0x20]",
+          "0x87d24: ldr r1, [sp,#0x58]",
+          "0x87d26: adds r0, r1, #0x3",
+          "0x87d28: and r0, r0, #0x3",
+          "0x87d2c: subs r0, r1, r0",
+          "0x87d2e: ldr r1, [r4,#0x24]",
+          "0x87d30: subs r0, r1, r0",
+          "0x87d32: subs r0, r0, #0x3",
+          "0x87d34: str r0, [r4,#0x24]",
+          "0x87d36: ldr r0, [sp,#0x5c]",
+          "0x87d38: ldr r1, [sp,#0x58]",
+          "0x87d3a: adds r0, #0x20",
+          "0x87d3c: str r0, [sp,#0x5c]",
+          "0x87d3e: adds r0, r1, #0x3",
+          "0x87d40: and r0, r0, #0x3",
+          "0x87d44: subs r0, r1, r0",
+          "0x87d46: ldr r1, [r4,#0x1c]",
+          "0x87d48: add.w r2, r0, #0x23",
+          "0x87d4c: cmp r2, r1",
+          "0x87d4e: bcs 0x00087d66",
+          "0x87d50: subs r0, r1, r0",
+          "0x87d52: subs r0, #0x23",
+          "0x87d54: str r0, [r4,#0x1c]",
+          "0x87d56: add r1, sp,#0x50",
+          "0x87d58: mov r0, r5",
+          "0x87d5a: bl 0x00087e14",
+          "0x87d5e: cmp r0, #0x0",
+          "0x87d60: beq 0x00087d10",
+          "0x87d62: mov r0, r6",
+          "0x87d64: b 0x00087c52",
+          "0x87d66: adr r0, [0x87d90]",
+          "0x87d68: bl 0x00038060",
+          "0x87d6c: mov r0, r5",
+          "0x87d6e: bl 0x0003f014",
+          "0x87d72: mov r2, r0",
+          "0x87d74: adr r0, [0x87da0]",
+          "0x87d76: ldr r1, [r5,#0x0]",
+          "0x87d78: bl 0x00038060",
+          "0x87d7c: ldrd r2, r1, [sp,#0x58]",
+          "0x87d80: adr r0, [0x87ddc]",
+          "0x87d82: bl 0x00038060",
+          "0x87d86: movs r6, #0x2",
+          "0x87d88: str r7, [r4,#0x1c]",
+          "0x87d8a: b 0x00087d62"
+        ],
+        "pseudocode": "\nundefined4 stock_read_sector(undefined4 *param_1,undefined4 param_2,undefined1 *param_3,int param_4)\n\n{\n  undefined1 uVar1;\n  char cVar2;\n  int iVar3;\n  int iVar4;\n  undefined4 uVar5;\n  undefined1 auStack_80 [12];\n  int local_74;\n  undefined4 local_70;\n  undefined4 local_6c;\n  undefined4 local_68;\n  undefined1 auStack_64 [20];\n  undefined4 local_50;\n  undefined4 local_4c;\n  undefined1 auStack_48 [24];\n  char local_30 [4];\n  undefined4 local_2c;\n  int local_28;\n  int local_24;\n  \n  uVar5 = 0;\n  if (param_3 == (undefined1 *)0x0) {\n    FUN_00038060(\"[FlashDB][tsl]\");\n    uVar5 = FUN_0003f014(param_1);\n    FUN_00038060(\"[%s][%s] \",*param_1,uVar5);\n    FUN_00038060(\"(%s) has assert failed at %s.\\n\",\"sector\",\"read_sector_info\");\n    do {\n                    /* WARNING: Do nothing block with infinite loop */\n    } while( true );\n  }\n  FUN_0003f03e(param_1,param_2,auStack_80,0x50);\n  *(undefined4 *)(param_3 + 4) = param_2;\n  *(int *)(param_3 + 8) = local_74;\n  if (local_74 != 0x304c5354) {\n    *param_3 = 0;\n    return 8;\n  }\n  *param_3 = 1;\n  uVar1 = FUN_0003f076(auStack_80,4);\n  param_3[1] = uVar1;\n  *(undefined4 *)(param_3 + 0xc) = local_70;\n  uVar1 = FUN_0003f076(auStack_64,6);\n  param_3[0x18] = uVar1;\n  cVar2 = FUN_0003f076(auStack_48,6);\n  param_3[0x19] = cVar2;\n  if (param_3[0x18] == '\\x02') {\n    *(undefined4 *)(param_3 + 0x10) = local_6c;\n    local_4c = local_68;\n  }\n  else {\n    if (cVar2 != '\\x02') {\n      if ((param_3[0x18] == '\\x01') && (cVar2 == '\\x01')) {\n        FUN_00038060(\"[FlashDB][tsl]\");\n        uVar5 = FUN_0003f014(param_1);\n        FUN_00038060(\"[%s][%s] \",*param_1,uVar5);\n        FUN_00038060(\"(%s) has assert failed at %s.\\n\",&DAT_00087dd8,\"read_sector_info\");\n        do {\n                    /* WARNING: Do nothing block with infinite loop */\n        } while( true );\n      }\n      goto LAB_00087cc8;\n    }\n    *(undefined4 *)(param_3 + 0x10) = local_50;\n  }\n  *(undefined4 *)(param_3 + 0x14) = local_4c;\nLAB_00087cc8:\n  iVar3 = *(int *)(param_3 + 4) + 0x50;\n  *(int *)(param_3 + 0x20) = iVar3;\n  iVar4 = *(int *)(param_3 + 4) + param_1[3];\n  *(int *)(param_3 + 0x24) = iVar4;\n  *(int *)(param_3 + 0x1c) = iVar4 - iVar3;\n  if ((param_3[1] == '\\x02') && (param_4 != 0)) {\n    local_24 = *(int *)(param_3 + 0x20);\n    while( true ) {\n      iVar3 = FUN_00087e14(param_1,local_30);\n      if (iVar3 != 0) {\n        return 0;\n      }\n      if (local_30[0] == '\\0') {\n        return 0;\n      }\n      *(undefined4 *)(param_3 + 0x10) = local_2c;\n      *(int *)(param_3 + 0x14) = local_24;\n      *(int *)(param_3 + 0x20) = *(int *)(param_3 + 0x20) + 0x20;\n      *(uint *)(param_3 + 0x24) = (*(int *)(param_3 + 0x24) - (local_28 - (local_28 + 3U & 3))) + -3\n      ;\n      local_24 = local_24 + 0x20;\n      iVar3 = local_28 - (local_28 + 3U & 3);\n      if (*(uint *)(param_3 + 0x1c) <= iVar3 + 0x23U) break;\n      *(uint *)(param_3 + 0x1c) = (*(uint *)(param_3 + 0x1c) - iVar3) + -0x23;\n    }\n    FUN_00038060(\"[FlashDB][tsl]\");\n    uVar5 = FUN_0003f014(param_1);\n    FUN_00038060(\"[%s][%s] \",*param_1,uVar5);\n    FUN_00038060(\"Error: this TSL (0x%08X) size (%u) is out of bound.\\n\",local_24,local_28);\n    uVar5 = 2;\n    *(undefined4 *)(param_3 + 0x1c) = 0;\n  }\n  return uVar5;\n}\n\n",
+        "unresolved_calls": []
+      }
+    }
+  ],
+  "layout_probes": [
+    {
+      "profile": "r1-application-16",
+      "variant": "before",
+      "layout": {
+        "store_enum_size": 4,
+        "tsl_enum_size": 4,
+        "db_size": 40,
+        "sector_size": 48,
+        "sector_status": 4,
+        "sector_end_status": 28,
+        "tsdb_size": 108,
+        "last_time": 88,
+        "get_time": 92,
+        "max_len": 96,
+        "rollover": 100,
+        "user_data": 104,
+        "tsl_size": 20,
+        "tsl_time": 4,
+        "sector_header_bytes": 80,
+        "log_index_bytes": 32,
+        "sector_header_time": 16,
+        "log_index_time": 20,
+        "sector_raw_bytes": 80,
+        "sector_status_bytes": 12,
+        "sector_magic": 12,
+        "sector_end0_time": 20,
+        "sector_end0_index": 24,
+        "sector_end0_status": 28,
+        "sector_end1_time": 48,
+        "sector_end1_index": 52,
+        "sector_end1_status": 56,
+        "sector_reserved": 76,
+        "log_raw_bytes": 32,
+        "log_status_bytes": 20,
+        "log_length": 24,
+        "log_address": 28
+      },
+      "object": "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-flashdb-abi/r1-application-16-before/generated__flashdb_layout.c.o",
+      "argv": [
+        "/usr/bin/clang",
+        "--target=arm-none-eabi",
+        "-mcpu=cortex-m4",
+        "-mthumb",
+        "-mfpu=fpv4-sp-d16",
+        "-mfloat-abi=hard",
+        "-Os",
+        "-std=c11",
+        "-ffreestanding",
+        "-isystem",
+        "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/r1/config-recovered",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/third-party/upstream/flashdb-2.0.0/inc",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/third-party/upstream/flashdb-2.0.0/port/fal/inc",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-MD",
+        "-MF",
+        "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-flashdb-abi/r1-application-16-before/generated__flashdb_layout.c.d",
+        "-c",
+        "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-flashdb-abi/generated/flashdb_layout.c",
+        "-o",
+        "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-flashdb-abi/r1-application-16-before/generated__flashdb_layout.c.o"
+      ]
+    },
+    {
+      "profile": "r1-application-16",
+      "variant": "short",
+      "layout": {
+        "store_enum_size": 1,
+        "tsl_enum_size": 1,
+        "db_size": 40,
+        "sector_size": 40,
+        "sector_status": 1,
+        "sector_end_status": 24,
+        "tsdb_size": 100,
+        "last_time": 80,
+        "get_time": 84,
+        "max_len": 88,
+        "rollover": 92,
+        "user_data": 96,
+        "tsl_size": 20,
+        "tsl_time": 4,
+        "sector_header_bytes": 80,
+        "log_index_bytes": 32,
+        "sector_header_time": 16,
+        "log_index_time": 20,
+        "sector_raw_bytes": 80,
+        "sector_status_bytes": 12,
+        "sector_magic": 12,
+        "sector_end0_time": 20,
+        "sector_end0_index": 24,
+        "sector_end0_status": 28,
+        "sector_end1_time": 48,
+        "sector_end1_index": 52,
+        "sector_end1_status": 56,
+        "sector_reserved": 76,
+        "log_raw_bytes": 32,
+        "log_status_bytes": 20,
+        "log_length": 24,
+        "log_address": 28
+      },
+      "object": "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-flashdb-abi/r1-application-16-short/generated__flashdb_layout.c.o",
+      "argv": [
+        "/usr/bin/clang",
+        "--target=arm-none-eabi",
+        "-mcpu=cortex-m4",
+        "-mthumb",
+        "-mfpu=fpv4-sp-d16",
+        "-mfloat-abi=hard",
+        "-Os",
+        "-std=c11",
+        "-ffreestanding",
+        "-isystem",
+        "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/r1/config-recovered",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/third-party/upstream/flashdb-2.0.0/inc",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/third-party/upstream/flashdb-2.0.0/port/fal/inc",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-fshort-enums",
+        "-MD",
+        "-MF",
+        "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-flashdb-abi/r1-application-16-short/generated__flashdb_layout.c.d",
+        "-c",
+        "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-flashdb-abi/generated/flashdb_layout.c",
+        "-o",
+        "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-flashdb-abi/r1-application-16-short/generated__flashdb_layout.c.o"
+      ]
+    },
+    {
+      "profile": "r1-application-49",
+      "variant": "before",
+      "layout": {
+        "store_enum_size": 1,
+        "tsl_enum_size": 1,
+        "db_size": 40,
+        "sector_size": 40,
+        "sector_status": 1,
+        "sector_end_status": 24,
+        "tsdb_size": 100,
+        "last_time": 80,
+        "get_time": 84,
+        "max_len": 88,
+        "rollover": 92,
+        "user_data": 96,
+        "tsl_size": 20,
+        "tsl_time": 4,
+        "sector_header_bytes": 80,
+        "log_index_bytes": 32,
+        "sector_header_time": 16,
+        "log_index_time": 20,
+        "sector_raw_bytes": 80,
+        "sector_status_bytes": 12,
+        "sector_magic": 12,
+        "sector_end0_time": 20,
+        "sector_end0_index": 24,
+        "sector_end0_status": 28,
+        "sector_end1_time": 48,
+        "sector_end1_index": 52,
+        "sector_end1_status": 56,
+        "sector_reserved": 76,
+        "log_raw_bytes": 32,
+        "log_status_bytes": 20,
+        "log_length": 24,
+        "log_address": 28
+      },
+      "object": "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-flashdb-abi/r1-application-49-before/generated__flashdb_layout.c.o",
+      "argv": [
+        "/opt/homebrew/bin/python3",
+        "/Users/kalani/Repo/evenRealities-openCFW/tools/build/linux_gcc.py",
+        "--compiler",
+        "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/bin/arm-none-eabi-gcc",
+        "--read-root",
+        "/Users/kalani/Repo/evenRealities-openCFW/r1",
+        "--read-root",
+        "/Users/kalani/Repo/evenRealities-openCFW/third-party/upstream",
+        "--read-root",
+        "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1",
+        "--read-root",
+        "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-flashdb-abi/generated",
+        "--",
+        "-mcpu=cortex-m4",
+        "-mthumb",
+        "-mfpu=fpv4-sp-d16",
+        "-mfloat-abi=hard",
+        "-Os",
+        "-std=c11",
+        "-ffreestanding",
+        "-isystem",
+        "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/r1/config-recovered",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/third-party/upstream/flashdb-2.0.0/inc",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/third-party/upstream/flashdb-2.0.0/port/fal/inc",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-MD",
+        "-MF",
+        "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-flashdb-abi/r1-application-49-before/generated__flashdb_layout.c.d",
+        "-c",
+        "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-flashdb-abi/generated/flashdb_layout.c",
+        "-o",
+        "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-flashdb-abi/r1-application-49-before/generated__flashdb_layout.c.o"
+      ]
+    },
+    {
+      "profile": "r1-application-49",
+      "variant": "short",
+      "layout": {
+        "store_enum_size": 1,
+        "tsl_enum_size": 1,
+        "db_size": 40,
+        "sector_size": 40,
+        "sector_status": 1,
+        "sector_end_status": 24,
+        "tsdb_size": 100,
+        "last_time": 80,
+        "get_time": 84,
+        "max_len": 88,
+        "rollover": 92,
+        "user_data": 96,
+        "tsl_size": 20,
+        "tsl_time": 4,
+        "sector_header_bytes": 80,
+        "log_index_bytes": 32,
+        "sector_header_time": 16,
+        "log_index_time": 20,
+        "sector_raw_bytes": 80,
+        "sector_status_bytes": 12,
+        "sector_magic": 12,
+        "sector_end0_time": 20,
+        "sector_end0_index": 24,
+        "sector_end0_status": 28,
+        "sector_end1_time": 48,
+        "sector_end1_index": 52,
+        "sector_end1_status": 56,
+        "sector_reserved": 76,
+        "log_raw_bytes": 32,
+        "log_status_bytes": 20,
+        "log_length": 24,
+        "log_address": 28
+      },
+      "object": "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-flashdb-abi/r1-application-49-short/generated__flashdb_layout.c.o",
+      "argv": [
+        "/opt/homebrew/bin/python3",
+        "/Users/kalani/Repo/evenRealities-openCFW/tools/build/linux_gcc.py",
+        "--compiler",
+        "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/bin/arm-none-eabi-gcc",
+        "--read-root",
+        "/Users/kalani/Repo/evenRealities-openCFW/r1",
+        "--read-root",
+        "/Users/kalani/Repo/evenRealities-openCFW/third-party/upstream",
+        "--read-root",
+        "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1",
+        "--read-root",
+        "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-flashdb-abi/generated",
+        "--",
+        "-mcpu=cortex-m4",
+        "-mthumb",
+        "-mfpu=fpv4-sp-d16",
+        "-mfloat-abi=hard",
+        "-Os",
+        "-std=c11",
+        "-ffreestanding",
+        "-isystem",
+        "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/r1/config-recovered",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/third-party/upstream/flashdb-2.0.0/inc",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/third-party/upstream/flashdb-2.0.0/port/fal/inc",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-fshort-enums",
+        "-MD",
+        "-MF",
+        "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-flashdb-abi/r1-application-49-short/generated__flashdb_layout.c.d",
+        "-c",
+        "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-flashdb-abi/generated/flashdb_layout.c",
+        "-o",
+        "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-flashdb-abi/r1-application-49-short/generated__flashdb_layout.c.o"
+      ]
+    }
+  ],
+  "configured_layout_probes": [
+    {
+      "profile": "r1-application-16",
+      "layout": {
+        "store_enum_size": 1,
+        "tsl_enum_size": 1,
+        "db_size": 40,
+        "sector_size": 40,
+        "sector_status": 1,
+        "sector_end_status": 24,
+        "tsdb_size": 100,
+        "last_time": 80,
+        "get_time": 84,
+        "max_len": 88,
+        "rollover": 92,
+        "user_data": 96,
+        "tsl_size": 20,
+        "tsl_time": 4,
+        "sector_header_bytes": 80,
+        "log_index_bytes": 32,
+        "sector_header_time": 16,
+        "log_index_time": 20,
+        "sector_raw_bytes": 80,
+        "sector_status_bytes": 12,
+        "sector_magic": 12,
+        "sector_end0_time": 20,
+        "sector_end0_index": 24,
+        "sector_end0_status": 28,
+        "sector_end1_time": 48,
+        "sector_end1_index": 52,
+        "sector_end1_status": 56,
+        "sector_reserved": 76,
+        "log_raw_bytes": 32,
+        "log_status_bytes": 20,
+        "log_length": 24,
+        "log_address": 28
+      },
+      "object": "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-flashdb-abi/r1-application-16-configured/generated__flashdb_layout.c.o",
+      "argv": [
+        "/usr/bin/clang",
+        "--target=arm-none-eabi",
+        "-mcpu=cortex-m4",
+        "-mthumb",
+        "-mfpu=fpv4-sp-d16",
+        "-mfloat-abi=hard",
+        "-Os",
+        "-std=c11",
+        "-ffreestanding",
+        "-isystem",
+        "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/r1/config-recovered",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/third-party/upstream/flashdb-2.0.0/inc",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/third-party/upstream/flashdb-2.0.0/port/fal/inc",
+        "-fshort-enums",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-MD",
+        "-MF",
+        "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-flashdb-abi/r1-application-16-configured/generated__flashdb_layout.c.d",
+        "-c",
+        "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-flashdb-abi/generated/flashdb_layout.c",
+        "-o",
+        "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-flashdb-abi/r1-application-16-configured/generated__flashdb_layout.c.o"
+      ]
+    },
+    {
+      "profile": "r1-application-49",
+      "layout": {
+        "store_enum_size": 1,
+        "tsl_enum_size": 1,
+        "db_size": 40,
+        "sector_size": 40,
+        "sector_status": 1,
+        "sector_end_status": 24,
+        "tsdb_size": 100,
+        "last_time": 80,
+        "get_time": 84,
+        "max_len": 88,
+        "rollover": 92,
+        "user_data": 96,
+        "tsl_size": 20,
+        "tsl_time": 4,
+        "sector_header_bytes": 80,
+        "log_index_bytes": 32,
+        "sector_header_time": 16,
+        "log_index_time": 20,
+        "sector_raw_bytes": 80,
+        "sector_status_bytes": 12,
+        "sector_magic": 12,
+        "sector_end0_time": 20,
+        "sector_end0_index": 24,
+        "sector_end0_status": 28,
+        "sector_end1_time": 48,
+        "sector_end1_index": 52,
+        "sector_end1_status": 56,
+        "sector_reserved": 76,
+        "log_raw_bytes": 32,
+        "log_status_bytes": 20,
+        "log_length": 24,
+        "log_address": 28
+      },
+      "object": "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-flashdb-abi/r1-application-49-configured/generated__flashdb_layout.c.o",
+      "argv": [
+        "/opt/homebrew/bin/python3",
+        "/Users/kalani/Repo/evenRealities-openCFW/tools/build/linux_gcc.py",
+        "--compiler",
+        "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/bin/arm-none-eabi-gcc",
+        "--read-root",
+        "/Users/kalani/Repo/evenRealities-openCFW/r1",
+        "--read-root",
+        "/Users/kalani/Repo/evenRealities-openCFW/third-party/upstream",
+        "--read-root",
+        "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1",
+        "--read-root",
+        "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-flashdb-abi/generated",
+        "--",
+        "-mcpu=cortex-m4",
+        "-mthumb",
+        "-mfpu=fpv4-sp-d16",
+        "-mfloat-abi=hard",
+        "-Os",
+        "-std=c11",
+        "-ffreestanding",
+        "-isystem",
+        "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/r1/config-recovered",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/third-party/upstream/flashdb-2.0.0/inc",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/third-party/upstream/flashdb-2.0.0/port/fal/inc",
+        "-fshort-enums",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-MD",
+        "-MF",
+        "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-flashdb-abi/r1-application-49-configured/generated__flashdb_layout.c.d",
+        "-c",
+        "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-flashdb-abi/generated/flashdb_layout.c",
+        "-o",
+        "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-flashdb-abi/r1-application-49-configured/generated__flashdb_layout.c.o"
+      ]
+    }
+  ],
+  "execution": {
+    "scope": "Unicorn 2.1.4; existing upstream fdb_tsdb_control compiled for Cortex-M4 hard float. Native and source runs compare the 128-byte backing area, argument bytes and ordered writes. Valid preconditions only; assertion, NULL DB and file-mode logging paths excluded. FDB_PRINT remains a preexisting no-op configuration, so complete logging equivalence is not claimed.",
+    "results": [
+      {
+        "profile": "r1-application-16",
+        "variant": "before",
+        "passed": 40,
+        "total": 52,
+        "counterexamples": [
+          {
+            "command": 4,
+            "value": 0,
+            "match": false,
+            "stock": {
+              "db": "030a11181f262d343b424950575e656c737a81888f969da4010000c0c7ced5dce3eaf1f8ff060d141b222930373e454c535a61686f767d848b9299a0a7aeb5bcc3cad1d8dfe6edf4fb020910171e252c333a41484f565d646b727980008e959ca3aab1b801c6cdd4dbe2e9f0f7fe050c131a21282f363d444b525960676e757c",
+              "arg": "00000000",
+              "events": [
+                [
+                  "db",
+                  92,
+                  1,
+                  0
+                ]
+              ]
+            },
+            "candidate": {
+              "db": "030a11181f262d343b424950575e656c737a81888f969da4010000c0c7ced5dce3eaf1f8ff060d141b222930373e454c535a61686f767d848b9299a0a7aeb5bcc3cad1d8dfe6edf4fb020910171e252c333a41484f565d646b727980008e959ca3aab1b800c6cdd4dbe2e9f0f7fe050c131a21282f363d444b525960676e757c",
+              "arg": "00000000",
+              "events": [
+                [
+                  "db",
+                  100,
+                  1,
+                  0
+                ]
+              ]
+            }
+          },
+          {
+            "command": 4,
+            "value": 1,
+            "match": false,
+            "stock": {
+              "db": "030a11181f262d343b424950575e656c737a81888f969da4010000c0c7ced5dce3eaf1f8ff060d141b222930373e454c535a61686f767d848b9299a0a7aeb5bcc3cad1d8dfe6edf4fb020910171e252c333a41484f565d646b727980018e959ca3aab1b801c6cdd4dbe2e9f0f7fe050c131a21282f363d444b525960676e757c",
+              "arg": "01000000",
+              "events": [
+                [
+                  "db",
+                  92,
+                  1,
+                  1
+                ]
+              ]
+            },
+            "candidate": {
+              "db": "030a11181f262d343b424950575e656c737a81888f969da4010000c0c7ced5dce3eaf1f8ff060d141b222930373e454c535a61686f767d848b9299a0a7aeb5bcc3cad1d8dfe6edf4fb020910171e252c333a41484f565d646b727980008e959ca3aab1b801c6cdd4dbe2e9f0f7fe050c131a21282f363d444b525960676e757c",
+              "arg": "01000000",
+              "events": [
+                [
+                  "db",
+                  100,
+                  1,
+                  1
+                ]
+              ]
+            }
+          },
+          {
+            "command": 4,
+            "value": 305419896,
+            "match": false,
+            "stock": {
+              "db": "030a11181f262d343b424950575e656c737a81888f969da4010000c0c7ced5dce3eaf1f8ff060d141b222930373e454c535a61686f767d848b9299a0a7aeb5bcc3cad1d8dfe6edf4fb020910171e252c333a41484f565d646b727980008e959ca3aab1b801c6cdd4dbe2e9f0f7fe050c131a21282f363d444b525960676e757c",
+              "arg": "00000000",
+              "events": [
+                [
+                  "db",
+                  92,
+                  1,
+                  0
+                ]
+              ]
+            },
+            "candidate": {
+              "db": "030a11181f262d343b424950575e656c737a81888f969da4010000c0c7ced5dce3eaf1f8ff060d141b222930373e454c535a61686f767d848b9299a0a7aeb5bcc3cad1d8dfe6edf4fb020910171e252c333a41484f565d646b727980008e959ca3aab1b800c6cdd4dbe2e9f0f7fe050c131a21282f363d444b525960676e757c",
+              "arg": "00000000",
+              "events": [
+                [
+                  "db",
+                  100,
+                  1,
+                  0
+                ]
+              ]
+            }
+          },
+          {
+            "command": 4,
+            "value": 4294967295,
+            "match": false,
+            "stock": {
+              "db": "030a11181f262d343b424950575e656c737a81888f969da4010000c0c7ced5dce3eaf1f8ff060d141b222930373e454c535a61686f767d848b9299a0a7aeb5bcc3cad1d8dfe6edf4fb020910171e252c333a41484f565d646b727980018e959ca3aab1b801c6cdd4dbe2e9f0f7fe050c131a21282f363d444b525960676e757c",
+              "arg": "01000000",
+              "events": [
+                [
+                  "db",
+                  92,
+                  1,
+                  1
+                ]
+              ]
+            },
+            "candidate": {
+              "db": "030a11181f262d343b424950575e656c737a81888f969da4010000c0c7ced5dce3eaf1f8ff060d141b222930373e454c535a61686f767d848b9299a0a7aeb5bcc3cad1d8dfe6edf4fb020910171e252c333a41484f565d646b727980008e959ca3aab1b801c6cdd4dbe2e9f0f7fe050c131a21282f363d444b525960676e757c",
+              "arg": "01000000",
+              "events": [
+                [
+                  "db",
+                  100,
+                  1,
+                  1
+                ]
+              ]
+            }
+          },
+          {
+            "command": 5,
+            "value": 0,
+            "match": false,
+            "stock": {
+              "db": "030a11181f262d343b424950575e656c737a81888f969da4000000c0c7ced5dce3eaf1f8ff060d141b222930373e454c535a61686f767d848b9299a0a7aeb5bcc3cad1d8dfe6edf4fb020910171e252c333a41484f565d646b727980008e959ca3aab1b801c6cdd4dbe2e9f0f7fe050c131a21282f363d444b525960676e757c",
+              "arg": "00000000",
+              "events": [
+                [
+                  "arg",
+                  0,
+                  1,
+                  0
+                ]
+              ]
+            },
+            "candidate": {
+              "db": "030a11181f262d343b424950575e656c737a81888f969da4000000c0c7ced5dce3eaf1f8ff060d141b222930373e454c535a61686f767d848b9299a0a7aeb5bcc3cad1d8dfe6edf4fb020910171e252c333a41484f565d646b727980008e959ca3aab1b801c6cdd4dbe2e9f0f7fe050c131a21282f363d444b525960676e757c",
+              "arg": "01000000",
+              "events": [
+                [
+                  "arg",
+                  0,
+                  1,
+                  1
+                ]
+              ]
+            }
+          },
+          {
+            "command": 5,
+            "value": 1,
+            "match": false,
+            "stock": {
+              "db": "030a11181f262d343b424950575e656c737a81888f969da4000000c0c7ced5dce3eaf1f8ff060d141b222930373e454c535a61686f767d848b9299a0a7aeb5bcc3cad1d8dfe6edf4fb020910171e252c333a41484f565d646b727980008e959ca3aab1b801c6cdd4dbe2e9f0f7fe050c131a21282f363d444b525960676e757c",
+              "arg": "00000000",
+              "events": [
+                [
+                  "arg",
+                  0,
+                  1,
+                  0
+                ]
+              ]
+            },
+            "candidate": {
+              "db": "030a11181f262d343b424950575e656c737a81888f969da4000000c0c7ced5dce3eaf1f8ff060d141b222930373e454c535a61686f767d848b9299a0a7aeb5bcc3cad1d8dfe6edf4fb020910171e252c333a41484f565d646b727980008e959ca3aab1b801c6cdd4dbe2e9f0f7fe050c131a21282f363d444b525960676e757c",
+              "arg": "01000000",
+              "events": [
+                [
+                  "arg",
+                  0,
+                  1,
+                  1
+                ]
+              ]
+            }
+          },
+          {
+            "command": 5,
+            "value": 305419896,
+            "match": false,
+            "stock": {
+              "db": "030a11181f262d343b424950575e656c737a81888f969da4000000c0c7ced5dce3eaf1f8ff060d141b222930373e454c535a61686f767d848b9299a0a7aeb5bcc3cad1d8dfe6edf4fb020910171e252c333a41484f565d646b727980008e959ca3aab1b801c6cdd4dbe2e9f0f7fe050c131a21282f363d444b525960676e757c",
+              "arg": "00563412",
+              "events": [
+                [
+                  "arg",
+                  0,
+                  1,
+                  0
+                ]
+              ]
+            },
+            "candidate": {
+              "db": "030a11181f262d343b424950575e656c737a81888f969da4000000c0c7ced5dce3eaf1f8ff060d141b222930373e454c535a61686f767d848b9299a0a7aeb5bcc3cad1d8dfe6edf4fb020910171e252c333a41484f565d646b727980008e959ca3aab1b801c6cdd4dbe2e9f0f7fe050c131a21282f363d444b525960676e757c",
+              "arg": "01563412",
+              "events": [
+                [
+                  "arg",
+                  0,
+                  1,
+                  1
+                ]
+              ]
+            }
+          },
+          {
+            "command": 5,
+            "value": 4294967295,
+            "match": false,
+            "stock": {
+              "db": "030a11181f262d343b424950575e656c737a81888f969da4000000c0c7ced5dce3eaf1f8ff060d141b222930373e454c535a61686f767d848b9299a0a7aeb5bcc3cad1d8dfe6edf4fb020910171e252c333a41484f565d646b727980008e959ca3aab1b801c6cdd4dbe2e9f0f7fe050c131a21282f363d444b525960676e757c",
+              "arg": "00ffffff",
+              "events": [
+                [
+                  "arg",
+                  0,
+                  1,
+                  0
+                ]
+              ]
+            },
+            "candidate": {
+              "db": "030a11181f262d343b424950575e656c737a81888f969da4000000c0c7ced5dce3eaf1f8ff060d141b222930373e454c535a61686f767d848b9299a0a7aeb5bcc3cad1d8dfe6edf4fb020910171e252c333a41484f565d646b727980008e959ca3aab1b801c6cdd4dbe2e9f0f7fe050c131a21282f363d444b525960676e757c",
+              "arg": "01ffffff",
+              "events": [
+                [
+                  "arg",
+                  0,
+                  1,
+                  1
+                ]
+              ]
+            }
+          },
+          {
+            "command": 6,
+            "value": 0,
+            "match": false,
+            "stock": {
+              "db": "030a11181f262d343b424950575e656c737a81888f969da4000000c0c7ced5dce3eaf1f8ff060d141b222930373e454c535a61686f767d848b9299a0a7aeb5bcc3cad1d8dfe6edf4fb020910171e252c333a41484f565d646b727980008e959ca3aab1b801c6cdd4dbe2e9f0f7fe050c131a21282f363d444b525960676e757c",
+              "arg": "333a4148",
+              "events": [
+                [
+                  "arg",
+                  0,
+                  4,
+                  1212234291
+                ]
+              ]
+            },
+            "candidate": {
+              "db": "030a11181f262d343b424950575e656c737a81888f969da4000000c0c7ced5dce3eaf1f8ff060d141b222930373e454c535a61686f767d848b9299a0a7aeb5bcc3cad1d8dfe6edf4fb020910171e252c333a41484f565d646b727980008e959ca3aab1b801c6cdd4dbe2e9f0f7fe050c131a21282f363d444b525960676e757c",
+              "arg": "6b727980",
+              "events": [
+                [
+                  "arg",
+                  0,
+                  4,
+                  2155442795
+                ]
+              ]
+            }
+          },
+          {
+            "command": 6,
+            "value": 1,
+            "match": false,
+            "stock": {
+              "db": "030a11181f262d343b424950575e656c737a81888f969da4000000c0c7ced5dce3eaf1f8ff060d141b222930373e454c535a61686f767d848b9299a0a7aeb5bcc3cad1d8dfe6edf4fb020910171e252c333a41484f565d646b727980008e959ca3aab1b801c6cdd4dbe2e9f0f7fe050c131a21282f363d444b525960676e757c",
+              "arg": "333a4148",
+              "events": [
+                [
+                  "arg",
+                  0,
+                  4,
+                  1212234291
+                ]
+              ]
+            },
+            "candidate": {
+              "db": "030a11181f262d343b424950575e656c737a81888f969da4000000c0c7ced5dce3eaf1f8ff060d141b222930373e454c535a61686f767d848b9299a0a7aeb5bcc3cad1d8dfe6edf4fb020910171e252c333a41484f565d646b727980008e959ca3aab1b801c6cdd4dbe2e9f0f7fe050c131a21282f363d444b525960676e757c",
+              "arg": "6b727980",
+              "events": [
+                [
+                  "arg",
+                  0,
+                  4,
+                  2155442795
+                ]
+              ]
+            }
+          },
+          {
+            "command": 6,
+            "value": 305419896,
+            "match": false,
+            "stock": {
+              "db": "030a11181f262d343b424950575e656c737a81888f969da4000000c0c7ced5dce3eaf1f8ff060d141b222930373e454c535a61686f767d848b9299a0a7aeb5bcc3cad1d8dfe6edf4fb020910171e252c333a41484f565d646b727980008e959ca3aab1b801c6cdd4dbe2e9f0f7fe050c131a21282f363d444b525960676e757c",
+              "arg": "333a4148",
+              "events": [
+                [
+                  "arg",
+                  0,
+                  4,
+                  1212234291
+                ]
+              ]
+            },
+            "candidate": {
+              "db": "030a11181f262d343b424950575e656c737a81888f969da4000000c0c7ced5dce3eaf1f8ff060d141b222930373e454c535a61686f767d848b9299a0a7aeb5bcc3cad1d8dfe6edf4fb020910171e252c333a41484f565d646b727980008e959ca3aab1b801c6cdd4dbe2e9f0f7fe050c131a21282f363d444b525960676e757c",
+              "arg": "6b727980",
+              "events": [
+                [
+                  "arg",
+                  0,
+                  4,
+                  2155442795
+                ]
+              ]
+            }
+          },
+          {
+            "command": 6,
+            "value": 4294967295,
+            "match": false,
+            "stock": {
+              "db": "030a11181f262d343b424950575e656c737a81888f969da4000000c0c7ced5dce3eaf1f8ff060d141b222930373e454c535a61686f767d848b9299a0a7aeb5bcc3cad1d8dfe6edf4fb020910171e252c333a41484f565d646b727980008e959ca3aab1b801c6cdd4dbe2e9f0f7fe050c131a21282f363d444b525960676e757c",
+              "arg": "333a4148",
+              "events": [
+                [
+                  "arg",
+                  0,
+                  4,
+                  1212234291
+                ]
+              ]
+            },
+            "candidate": {
+              "db": "030a11181f262d343b424950575e656c737a81888f969da4000000c0c7ced5dce3eaf1f8ff060d141b222930373e454c535a61686f767d848b9299a0a7aeb5bcc3cad1d8dfe6edf4fb020910171e252c333a41484f565d646b727980008e959ca3aab1b801c6cdd4dbe2e9f0f7fe050c131a21282f363d444b525960676e757c",
+              "arg": "6b727980",
+              "events": [
+                [
+                  "arg",
+                  0,
+                  4,
+                  2155442795
+                ]
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "profile": "r1-application-16",
+        "variant": "short",
+        "passed": 52,
+        "total": 52,
+        "counterexamples": []
+      },
+      {
+        "profile": "r1-application-49",
+        "variant": "before",
+        "passed": 52,
+        "total": 52,
+        "counterexamples": []
+      },
+      {
+        "profile": "r1-application-49",
+        "variant": "short",
+        "passed": 52,
+        "total": 52,
+        "counterexamples": []
+      }
+    ]
+  },
+  "switch_table": {
+    "base": "0x636a2",
+    "entry_width": 1,
+    "scale": 2,
+    "entries": [
+      {
+        "command": 0,
+        "target": "0x636d0"
+      },
+      {
+        "command": 1,
+        "target": "0x636fc"
+      },
+      {
+        "command": 2,
+        "target": "0x63700"
+      },
+      {
+        "command": 3,
+        "target": "0x63704"
+      },
+      {
+        "command": 4,
+        "target": "0x63708"
+      },
+      {
+        "command": 5,
+        "target": "0x63738"
+      },
+      {
+        "command": 6,
+        "target": "0x63740"
+      },
+      {
+        "command": 7,
+        "target": "0x636fa"
+      },
+      {
+        "command": 8,
+        "target": "0x636fa"
+      },
+      {
+        "command": 9,
+        "target": "0x63746"
+      },
+      {
+        "command": 10,
+        "target": "0x636fa"
+      },
+      {
+        "command": 11,
+        "target": "0x63766"
+      }
+    ]
+  },
+  "enum_attributes": {
+    "before": {
+      "int": 40,
+      "small": 396
+    },
+    "after": {
+      "int": 34,
+      "small": 402
+    }
+  },
+  "diagnostic_compositions": [
+    {
+      "payload": "r1-application",
+      "linked_units": 436,
+      "returncode": 0,
+      "undefined_symbols": [
+        "GH3X2X_AlgoCalculate",
+        "GH3X2X_AlgoCallConfigInit",
+        "GH3X2X_AlgoDeinit",
+        "GH3X2X_AlgoInit",
+        "GH3X2X_AlgoVersion",
+        "GH3X2X_GetVersion",
+        "GH3X2X_TimestampSyncAccInit",
+        "GH3X2X_TimestampSyncFillAccSyncBuffer",
+        "GH3X2X_TimestampSyncFillPpgSyncBuffer",
+        "GH3X2X_TimestampSyncGetFrameDataFlag",
+        "GH3X2X_TimestampSyncPpgInit",
+        "GH3X2X_TimestampSyncSetPpgIntFlag",
+        "GH3X2X_UprotocolPacketFormat",
+        "Gh2x2xUploadDataToMaster",
+        "Gh3x2xDemoSendProtocolData",
+        "OS_Tick_GetCount",
+        "OS_Tick_GetInterval",
+        "RTC1_IRQHandler",
+        "SEGGER_RTT_WriteNoLock",
+        "_SEGGER_RTT",
+        "__aeabi_d2f",
+        "__aeabi_d2uiz",
+        "__aeabi_dcmpge",
+        "__aeabi_f2d",
+        "__aeabi_l2f",
+        "__aeabi_ul2d",
+        "__aeabi_ul2f",
+        "__data_start__",
+        "__fpclassifyd",
+        "__ssprint_r",
+        "__start_fs_data",
+        "__start_log_const_data",
+        "__start_log_dynamic_data",
+        "__start_pwr_mgmt_data",
+        "__start_sdh_ble_observers0",
+        "__start_sdh_ble_observers1",
+        "__start_sdh_ble_observers2",
+        "__start_sdh_ble_observers3",
+        "__start_sdh_req_observers",
+        "__start_sdh_soc_observers",
+        "__start_sdh_stack_observers",
+        "__start_sdh_state_observers",
+        "__stop_fs_data",
+        "__stop_log_const_data",
+        "__stop_pwr_mgmt_data",
+        "__stop_sdh_ble_observers0",
+        "__stop_sdh_ble_observers1",
+        "__stop_sdh_ble_observers2",
+        "__stop_sdh_ble_observers3",
+        "__stop_sdh_req_observers",
+        "__stop_sdh_soc_observers",
+        "__stop_sdh_stack_observers",
+        "__stop_sdh_state_observers",
+        "_ctype_",
+        "_dtoa_r",
+        "_free_r",
+        "_localeconv_r",
+        "_malloc_r",
+        "app_timer_cnt_diff_compute",
+        "app_timer_cnt_get",
+        "atan",
+        "delay_us",
+        "expf",
+        "floorf",
+        "fmaxf",
+        "frexp",
+        "gh3026_gsensor_data_get",
+        "gh3026_i2c_init",
+        "gh3026_i2c_read",
+        "gh3026_i2c_write",
+        "gh3026_int_pin_init",
+        "gh3026_reset_pin_ctrl",
+        "gh3026_reset_pin_init",
+        "gh3x2x_print_fmt",
+        "gh3x2x_rawdata_notify",
+        "gh3x2x_wear_evt_notify",
+        "lis2dw12_read_reg",
+        "lis2dw12_write_reg",
+        "memchr",
+        "memcmp",
+        "month_days_forward",
+        "nrf_dfu_set_adv_name_svci_async_def",
+        "nrf_dfu_svci_vector_table_set",
+        "nrf_log_backend_uart_api",
+        "nrf_log_backend_uart_init",
+        "pcTaskGetName",
+        "pcTimerGetName",
+        "pxCurrentTCB",
+        "r1_bae8_raw_observer",
+        "r1_batcfg_record_kv_handle",
+        "r1_battery_device_context",
+        "r1_battery_runtime_context",
+        "r1_battery_thread_handle",
+        "r1_boot_ctor_run",
+        "r1_cmb_code_end",
+        "r1_cmb_code_start",
+        "r1_cmb_stack_end",
+        "r1_cmb_stack_start",
+        "r1_connection_parameter_ble_observer",
+        "r1_device_info_record_kv_handle",
+        "r1_device_state_byte_2c",
+        "r1_device_state_byte_2d",
+        "r1_event_service_00049068",
+        "r1_event_service_000496fc",
+        "r1_event_service_000497cc",
+        "r1_event_service_000499c4",
+        "r1_event_service_0004a4b4",
+        "r1_event_service_0004a5bc",
+        "r1_event_service_0004aaf8",
+        "r1_event_service_0004ad7c",
+        "r1_event_service_0004b33e",
+        "r1_event_service_0004b48c",
+        "r1_event_service_0004b6c0",
+        "r1_event_service_0004bab4",
+        "r1_event_service_0004c4b8",
+        "r1_event_service_0005e0de",
+        "r1_event_service_0006b724",
+        "r1_event_service_000735e0",
+        "r1_event_service_0007c52c",
+        "r1_event_service_000914a0",
+        "r1_fal_is_initialized",
+        "r1_fal_partition_cache",
+        "r1_fal_partition_table",
+        "r1_gap_event_plan_build",
+        "r1_health_record_kv_handle",
+        "r1_health_settings_kv_handle",
+        "r1_health_settings_plan_command",
+        "r1_health_sync_provider_0003bdac",
+        "r1_health_sync_provider_0003bed0",
+        "r1_health_sync_provider_0003c0d8",
+        "r1_health_sync_provider_0003c304",
+        "r1_health_sync_provider_0003c578",
+        "r1_health_sync_provider_0003c958",
+        "r1_health_sync_provider_0003cb80",
+        "r1_health_sync_provider_0003fa84",
+        "r1_health_sync_provider_0003fb90",
+        "r1_health_sync_provider_0003fcec",
+        "r1_health_sync_provider_0003fef4",
+        "r1_health_sync_provider_0004011c",
+        "r1_health_sync_provider_00040508",
+        "r1_health_sync_provider_00040700",
+        "r1_health_sync_provider_00040964",
+        "r1_health_sync_provider_00040a74",
+        "r1_health_sync_provider_00040bd4",
+        "r1_health_sync_provider_00040de0",
+        "r1_health_sync_provider_0004101c",
+        "r1_health_sync_provider_00041438",
+        "r1_health_sync_provider_00041638",
+        "r1_health_sync_provider_00043c80",
+        "r1_health_sync_provider_00043d90",
+        "r1_health_sync_provider_00043eb0",
+        "r1_health_sync_provider_000440c4",
+        "r1_health_sync_provider_000442f4",
+        "r1_health_sync_provider_000446b4",
+        "r1_health_sync_provider_000448b0",
+        "r1_health_sync_provider_0005b39c",
+        "r1_health_sync_provider_00070028",
+        "r1_health_sync_provider_0008f954",
+        "r1_hw_twi0",
+        "r1_hw_twi1",
+        "r1_lis2dw12_fifo_read",
+        "r1_lis_context",
+        "r1_log_local_datetime_fill",
+        "r1_low_battery_thread_handle",
+        "r1_malloc_failed_hook",
+        "r1_native_activity_cache_initialize",
+        "r1_native_bae8_context_get",
+        "r1_native_bae8_service",
+        "r1_native_health_database_initialize",
+        "r1_native_health_initialize",
+        "r1_native_hr_cache_initialize",
+        "r1_native_hrv_cache_initialize",
+        "r1_native_memory_move",
+        "r1_native_nv_recovery_merge_boundary",
+        "r1_native_nv_recovery_report_boundary",
+        "r1_native_rtc_cached_device",
+        "r1_native_sleep_database_initialize",
+        "r1_native_spo2_cache_initialize",
+        "r1_native_stream_register",
+        "r1_native_stress_cache_initialize",
+        "r1_native_temperature_cache_initialize",
+        "r1_nv_handles_begin",
+        "r1_nv_handles_end",
+        "r1_nv_recovery_command_handler_plan_decode",
+        "r1_output_gpio",
+        "r1_phone_role_assertion_stack_transfer",
+        "r1_r_size_kv_handle",
+        "r1_record12_reinitialize",
+        "r1_sdk_gatt_link_init",
+        "r1_sdk_peer_manager_event",
+        "r1_shared_power_clients",
+        "r1_stacmd",
+        "r1_status_dropped",
+        "r1_status_read_index",
+        "r1_status_records",
+        "r1_status_write_index",
+        "r1_system_settings_plan_command",
+        "r1_time_local_day_start",
+        "r1_touch_switch_handler_plan_decode",
+        "r1_twi_delay_busy",
+        "r1_twi_delay_noop",
+        "r1_twi_gpio_high",
+        "r1_twi_gpio_input",
+        "r1_twi_gpio_low",
+        "r1_twi_gpio_output",
+        "r1_twi_gpio_read",
+        "r1_twi_gpio_release",
+        "r1_user_profile_handler",
+        "sqrt",
+        "sqrtf",
+        "strncpy",
+        "tanhf",
+        "time_backend_timestamp_thunk",
+        "unix_to_broken_down_fallback",
+        "uxQueueMessagesWaiting",
+        "uxQueueMessagesWaitingFromISR",
+        "uxQueueSpacesAvailable",
+        "uxTaskGetStackHighWaterMark",
+        "uxTaskPriorityGet",
+        "uxTaskResetEventItemValue",
+        "vPortEnterCritical",
+        "vPortExitCritical",
+        "vPortSuppressTicksAndSleep",
+        "vQueueAddToRegistry",
+        "vQueueDelete",
+        "vQueueUnregisterQueue",
+        "vQueueWaitForMessageRestricted",
+        "vTaskName",
+        "vTaskPlaceOnUnorderedEventList",
+        "vTaskPrioritySet",
+        "vTaskResume",
+        "vTaskSetTimeOutState",
+        "vTaskStackAddr",
+        "vTaskStackSize",
+        "vTaskSuspend",
+        "xQueueCreateCountingSemaphore",
+        "xQueueCreateCountingSemaphoreStatic",
+        "xQueueGenericCreate",
+        "xQueueGenericCreateStatic",
+        "xQueueGenericReset",
+        "xQueueGenericSend",
+        "xQueueGenericSendFromISR",
+        "xQueueGetMutexHolder",
+        "xQueueReceive",
+        "xQueueReceiveFromISR",
+        "xTaskCreate",
+        "xTaskCreateStatic",
+        "xTaskDelayUntil",
+        "xTaskGenericNotifyStateClear",
+        "xTaskGetCurrentTaskHandle",
+        "xTaskGetSchedulerState",
+        "xTaskGetTickCount",
+        "xTaskGetTickCountFromISR"
+      ],
+      "new_undefined_symbols": [],
+      "resolved_symbols": [],
+      "warning_lines": 403,
+      "output": "build/goal-r1-flashdb-abi/r1-application.o",
+      "log": "build/goal-r1-flashdb-abi/r1-application-link.log"
+    },
+    {
+      "payload": "r1-bootloader",
+      "linked_units": 74,
+      "returncode": 0,
+      "undefined_symbols": [
+        "__aeabi_llsl",
+        "__aeabi_memclr4",
+        "__aeabi_memcpy",
+        "__bss_start__",
+        "__data_start__",
+        "__etext",
+        "__start_crypto_data",
+        "__start_dfu_trans",
+        "__start_fs_data",
+        "__start_sdh_ble_observers",
+        "__start_sdh_req_observers",
+        "__start_sdh_soc_observers",
+        "__start_sdh_stack_observers",
+        "__start_sdh_state_observers",
+        "__start_svc_data",
+        "__stop_crypto_data",
+        "__stop_dfu_trans",
+        "__stop_fs_data",
+        "__stop_sdh_ble_observers",
+        "__stop_sdh_req_observers",
+        "__stop_sdh_soc_observers",
+        "__stop_sdh_stack_observers",
+        "__stop_sdh_state_observers",
+        "__stop_svc_data",
+        "_start",
+        "memcmp",
+        "memcpy",
+        "memset",
+        "nrf_cc310_bl_ecdsa_verify_secp256r1",
+        "nrf_cc310_bl_hash_sha256_finalize",
+        "nrf_cc310_bl_hash_sha256_init",
+        "nrf_cc310_bl_hash_sha256_update",
+        "nrf_cc310_bl_init",
+        "strlen"
+      ],
+      "new_undefined_symbols": [],
+      "resolved_symbols": [],
+      "warning_lines": 1,
+      "output": "build/goal-r1-flashdb-abi/r1-bootloader.o",
+      "log": "build/goal-r1-flashdb-abi/r1-bootloader-link.log"
+    }
+  ],
+  "r1_source_build": {
+    "report": "build/sources-goal-r1-flashdb/report.json",
+    "report_sha256": "b82592088b178a92d47b03837c4f6532c767f0322ac1ad951583229114a119d7",
+    "compiled_units": 560,
+    "known_failures": 0,
+    "duplicate_strong_symbols": 0,
+    "normal_manifest_composition_at_flashdb_review": "not configured"
+  },
+  "hashes": {
+    "build/goal-r1-flashdb-abi/layout_probe.py": "a01ce77eb20ce9f502862d3bde28e3913077d625dbafc90c0ce473a37e1345fe",
+    "build/goal-r1-flashdb-abi/compare_control.py": "911e4c5734fdb00d26967de4764e2d702fc257c404225c40074655d6cccd68a0",
+    "build/goal-r1-flashdb-abi/control-comparison.json": "396bcbea8190228f80f212beee493dd7431f7e3d92a1ffb60de32bb964fe6cd7",
+    "build/goal-r1-flashdb-abi/configured-layout-results.json": "c014201ae8535f7899ceea7cd71858969fcab63590f79921a27dca4e47d92c14",
+    "r1/config-recovered/fdb_cfg.h": "6cb06d95d79cd4f84b3fc236698489be349e70d0711889e23ca7d9e2adbd91c7",
+    "third-party/upstream/flashdb-2.0.0/inc/fdb_def.h": "32165431cd4c03b07ef92bd0556152b8f8717a2d49cbee4bb2beb8208d49cb99",
+    "third-party/upstream/flashdb-2.0.0/src/fdb_tsdb.c": "cc75d8553fb5b4d5aba3533ca245ced57e98a154adb10270648cca1382adedcb"
+  },
+  "source_manifest": {
+    "before_sha256": "e66b60fb561e2e13b567da96878b862b224d4741abd0efc004a9f2254e9a2d86",
+    "after_sha256": "c3d2752dac093f738d946ffe1b637ea0230193fca8077adebe9fab44b46a383f"
+  },
+  "analysis_snapshot": {
+    "path": "build/goal-r1-flashdb-abi/rea-snapshot.json",
+    "sha256": "d5ec6b3e24c81831140d1fd22e051f276f901c88e96b4c9f85f7c8a81b850fcc"
+  },
+  "subsequent_normal_composition": {
+    "configured": true,
+    "evidence": "r1/docs/reference/source-composition-review.json",
+    "initial_undefined_sets_unchanged": true,
+    "subsequent_twi_callback_import": "r1_twi_i2c5_delay_noop"
+  }
+}

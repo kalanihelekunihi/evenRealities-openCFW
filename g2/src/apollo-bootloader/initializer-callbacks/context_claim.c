@@ -18,3 +18,6 @@ uint32_t opencfw_boot_context_claim(uint32_t module, uint32_t *output)
     *output = (uint32_t)(uintptr_t)slot;
     return 0u;
 }
+
+/* Stock entry names that branch straight to the provider above. */
+__typeof__(opencfw_boot_context_claim) opencfw_bl_context_claim __attribute__((alias("opencfw_boot_context_claim")));

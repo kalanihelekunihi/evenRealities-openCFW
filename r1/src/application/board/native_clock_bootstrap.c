@@ -1,8 +1,9 @@
-/* Supplemental native contracts at5a988/5a990/5a9b4/5a9d0/8adc0.
- * Snapshot binding is distinct from the timestamp fast-path binding.
- * Unimplemented default-port callbacks remain explicit providers. */
+/* Default backend, second-change callback and native clock constructor.
+ * Snapshot/bind have a separate C owner in native_clock_binding.c.
+ * The normal source composition uses the verified C constructor/callback ABI. */
 #include <string.h>
 #include "native_clock_bootstrap.h"
+#include "native_battery_memory.h"
 extern time_calendar_registration r1_time_registration;
 extern time_calendar_state r1_time_state;
 extern uint32_t r1_time_backend_timestamp(void);
@@ -16,8 +17,10 @@ extern uint32_t r1_clock_backend_bind_tick(uint32_t,uint32_t,uint32_t,r1_clock_t
 static int32_t default_init(void *context){(void)context;return 1;}
 static int32_t default_deinit(void *context){(void)context;return 1;}
 static uint32_t default_get(void *context){(void)context;return r1_structured_log_timestamp_adapter();}
+/* Native backend slot +12 goes through the branch veneer at 0x50d82. */
+static uint64_t default_read64(void){return r1_clock_backend_slot12();}
 const r1_native_clock_ops r1_clock_default_backend __attribute__((section(".r1.clock.backend")))={
-    {{(uintptr_t)default_init,(uintptr_t)default_deinit},default_get,(uintptr_t)r1_clock_backend_slot12,r1_clock_backend_update},
+    {{(uintptr_t)default_init,(uintptr_t)default_deinit},default_get,(uintptr_t)default_read64,r1_clock_backend_update},
     (uintptr_t)r1_clock_backend_slot20,(uintptr_t)r1_clock_backend_slot24,r1_clock_backend_bind_tick
 };
 const r1_clock_boot_config r1_clock_boot_defaults __attribute__((section(".r1.clock.defaults")))={480,0,0};
@@ -26,21 +29,6 @@ _Static_assert(sizeof(r1_clock_boot_config)==8,"native boot configuration");
 _Static_assert(offsetof(time_calendar_registration,snapshot_backend)==16,"snapshot binding");
 _Static_assert(offsetof(time_calendar_registration,context)==20,"snapshot context");
 const r1_native_clock_ops *r1_clock_default_backend_get(void){return &r1_clock_default_backend;}
-uint32_t r1_clock_backend_snapshot(const r1_native_clock_ops **out,void **context)
-{
-    if (((0u-(uint32_t)r1_time_registration.backend_registered)&(uintptr_t)r1_time_registration.snapshot_backend)==0) return 0;
-    if (out) *out=(const r1_native_clock_ops *)r1_time_registration.snapshot_backend;
-    if (context) *context=r1_time_registration.context;
-    return 1;
-}
-uint32_t r1_clock_backend_bind(const r1_native_clock_ops *ops,void *context)
-{
-    if (!ops || !ops->prefix.get) return 0;
-    r1_time_registration.snapshot_backend=&ops->prefix;
-    r1_time_registration.context=context;
-    r1_time_registration.backend_registered=1;
-    return 1;
-}
 void r1_clock_second_changed(uint32_t incoming_payload)
 {
     uint32_t now=r1_time_backend_timestamp();
@@ -48,25 +36,36 @@ void r1_clock_second_changed(uint32_t incoming_payload)
 }
 uint32_t r1_clock_initialize(const r1_clock_boot_config *config,void *incoming_r1)
 {
-    if (r1_time_state.registered) return 1;
-    if (!config) config=&r1_clock_boot_defaults;
-    memcpy(r1_time_state.reserved_00,config,8);
-    r1_time_state.utc_offset_minutes=(int16_t)config->offset;
-    const r1_native_clock_ops *ops=0;
-    void *context=incoming_r1; /* Native saved incoming R1 survives failed snapshot. */
-    if (!r1_clock_backend_snapshot(&ops,&context)) {
-        ops=r1_clock_default_backend_get();
-        if (!ops) return 0;
-        (void)r1_clock_backend_bind(ops,0);
+    volatile uint8_t *state=(volatile uint8_t *)&r1_time_state;
+    if (state[10]) return 1;
+    const volatile uint8_t *input=(const volatile uint8_t *)(config?config:&r1_clock_boot_defaults);
+    uint32_t offset_word=read32(input),epoch=read32(input+4);
+    write32(state,offset_word);
+    write32(state+4,epoch);
+    write16(state+8,read16(state));
+    /* Normal Clang reserves the native 24-byte frame with context/ops at +0/+4.
+     * Volatile reloads preserve callbacks that change these exposed slots. */
+    union { struct { void *context; const r1_native_clock_ops *ops; }; uint64_t padding[2]; } volatile saved;
+    saved.context=incoming_r1;
+    if (!r1_clock_backend_snapshot((const r1_native_clock_ops **)&saved.ops,(void **)&saved.context)) {
+        saved.ops=r1_clock_default_backend_get();
+        if (!saved.ops) return 0;
+        (void)r1_clock_backend_bind(saved.ops,0);
     }
-    if (ops) {
-        int32_t (*init)(void *);memcpy(&init,&ops->prefix.reserved_00[0],sizeof(init));
-        if (init && !init(context)) return 0;
-        if (ops->prefix.update) (void)ops->prefix.update(r1_time_state.reserved_00[1],(uint16_t)r1_time_state.reserved_00[0],context);
-        if (ops->bind_tick) (void)ops->bind_tick(0,0,0,r1_clock_second_changed);
+    if (saved.ops) {
+        int32_t (*init)(void *)=(int32_t (*)(void *))(uintptr_t)read32((const volatile uint8_t *)saved.ops);
+        if (init && !init(saved.context)) return 0;
+        if (saved.ops) {
+            int32_t (*update)(uint32_t,int32_t,void *)=saved.ops->prefix.update;
+            if (update) (void)update(read32(state+4),read16(state),saved.context);
+            if (saved.ops) {
+                uint32_t (*bind_tick)(uint32_t,uint32_t,uint32_t,r1_clock_tick_fn)=saved.ops->bind_tick;
+                if (bind_tick) (void)bind_tick(0,0,0,r1_clock_second_changed);
+            }
+        }
     }
-    r1_time_registration.backend=ops?&ops->prefix:0;
-    memset((uint8_t *)&r1_time_state+12,0,20);
-    r1_time_state.registered=1;
+    write32((volatile uint8_t *)&r1_time_registration+8,(uint32_t)(uintptr_t)saved.ops);
+    memset((void *)(state+12),0,20);
+    state[10]=1;
     return 1;
 }

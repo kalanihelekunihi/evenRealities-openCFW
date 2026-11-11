@@ -1,168 +1,67 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_subrate_action_315aec\n"
-".type opencfw_em9305_subrate_action_315aec,@function\n"
-"opencfw_em9305_subrate_action_315aec:\n"
-"L315aec:\n"
-"enter_s [r13-r15,blink]\n"
-"L315aee:\n"
-"ld.as r1,[r0,137]\n"
-"L315af2:\n"
-"mov_s r14,0x805c70\n"
-"L315af8:\n"
-"bbit0.d.nt r1,0x5,L315b0a\n"
-"L315afc:\n"
-"mov_s r13,r0\n"
-"L315afe:\n"
-"mov_s r0,0x805a98\n"
-"L315b04:\n"
-"ldb_s r0,[r0,0]\n"
-"L315b06:\n"
-"bbit1.nt r0,0x6,L315b1c\n"
-"L315b0a:\n"
-"ld r0,[r14,0]\n"
-"L315b0c:\n"
-"sub_s r1,r13,r0\n"
-"L315b0e:\n"
-"div r1,r1,912\n"
-"L315b12:\n"
-"extb_s r0,r1\n"
-"L315b14:\n"
-"mov_s r1,0xc\n"
-"L315b16:\n"
-"bl opencfw_em9305_dispatch_child_323498\n"
-"L315b1a:\n"
-"leave_s [r13-r15,blink,pcl]\n"
-"L315b1c:\n"
-"bbit1.d.nt r1,0x6,L315b30\n"
-"L315b20:\n"
-"mov_s r0,r13\n"
-"L315b22:\n"
-"ld r0,[r14,0]\n"
-"L315b24:\n"
-"sub_s r1,r13,r0\n"
-"L315b26:\n"
-"div r1,r1,912\n"
-"L315b2a:\n"
-"extb_s r0,r1\n"
-"L315b2c:\n"
-"mov_s r1,0x1a\n"
-"L315b2e:\n"
-"b_s L315b16\n"
-"L315b30:\n"
-"add r0,r0,888\n"
-"L315b34:\n"
-"stb 1,[r0]\n"
-"L315b38:\n"
-"bl.d opencfw_em9305_phy_packet_alloc_32d2f0\n"
-"L315b3c:\n"
-"mov_s r0,0xb\n"
-"L315b3e:\n"
-"mov_s r1,r0\n"
-"L315b40:\n"
-"breq_s r0,0,L315bb0\n"
-"L315b42:\n"
-"ldh.as r0,[r13,131]\n"
-"L315b46:\n"
-"mov_s r2,r13\n"
-"L315b48:\n"
-"add r2,r2,878\n"
-"L315b4c:\n"
-"ldh r3,[r2,-22]\n"
-"L315b50:\n"
-"sth_s r0,[r2,0]\n"
-"L315b52:\n"
-"ldh r0,[r2,-18]\n"
-"L315b56:\n"
-"ldh r12,[r2,-16]\n"
-"L315b5a:\n"
-"ldh r14,[r2,-14]\n"
-"L315b5e:\n"
-"sth_s r0,[r2,0x6]\n"
-"L315b60:\n"
-"sub_s r0,r3,0x1\n"
-"L315b62:\n"
-"mov_s r15,0x27\n"
-"L315b64:\n"
-"min r0,r12,r0\n"
-"L315b68:\n"
-"sth r3,[r2,-2]\n"
-"L315b6c:\n"
-"sth_s r14,[r2,0x8]\n"
-"L315b6e:\n"
-"sth_s r0,[r2,0x2]\n"
-"L315b70:\n"
-"stb_s r15,[r1,0]\n"
-"L315b72:\n"
-"ldb r0,[r2,-2]\n"
-"L315b76:\n"
-"stb_s r0,[r1,0x1]\n"
-"L315b78:\n"
-"ldb r0,[r2,-1]\n"
-"L315b7c:\n"
-"stb_s r0,[r1,0x2]\n"
-"L315b7e:\n"
-"ldb_s r0,[r2,0]\n"
-"L315b80:\n"
-"stb_s r0,[r1,0x3]\n"
-"L315b82:\n"
-"ldb_s r0,[r2,0x1]\n"
-"L315b84:\n"
-"stb_s r0,[r1,0x4]\n"
-"L315b86:\n"
-"ldb_s r0,[r2,0x6]\n"
-"L315b88:\n"
-"stb_s r0,[r1,0x5]\n"
-"L315b8a:\n"
-"ldb_s r0,[r2,0x7]\n"
-"L315b8c:\n"
-"stb_s r0,[r1,0x6]\n"
-"L315b8e:\n"
-"ldb_s r0,[r2,0x2]\n"
-"L315b90:\n"
-"stb_s r0,[r1,0x7]\n"
-"L315b92:\n"
-"ldb_s r0,[r2,0x3]\n"
-"L315b94:\n"
-"stb_s r0,[r1,0x8]\n"
-"L315b96:\n"
-"ldb_s r0,[r2,0x8]\n"
-"L315b98:\n"
-"stb_s r0,[r1,0x9]\n"
-"L315b9a:\n"
-"ldb_s r0,[r2,0x9]\n"
-"L315b9c:\n"
-"stb_s r0,[r1,0xa]\n"
-"L315b9e:\n"
-"bl.d opencfw_em9305_phy_packet_send_32d32c\n"
-"L315ba2:\n"
-"mov_s r0,r13\n"
-"L315ba4:\n"
-"ld.as r0,[r13,159]\n"
-"L315ba8:\n"
-"bset_s r0,r0,0x1d\n"
-"L315baa:\n"
-"st.as r0,[r13,159]\n"
-"L315bae:\n"
-"leave_s [r13-r15,blink,pcl]\n"
-"L315bb0:\n"
-"mov_s r1,0x6f\n"
-"L315bb2:\n"
-"bl.d opencfw_em9305_receive_terminate_325c08\n"
-"L315bb6:\n"
-"mov_s r0,r13\n"
-"L315bb8:\n"
-"ld r0,[r14,0]\n"
-"L315bba:\n"
-"sub_s r1,r13,r0\n"
-"L315bbc:\n"
-"div r1,r1,912\n"
-"L315bc0:\n"
-"extb_s r0,r1\n"
-"L315bc2:\n"
-"mov_s r1,0xd\n"
-"L315bc4:\n"
-"b_s L315b16\n"
-".size opencfw_em9305_subrate_action_315aec,.-opencfw_em9305_subrate_action_315aec\n"
-);
+#include <stdint.h>
+
+/* Native 0x315aec..0x315bc6: start a connection subrate request. Without
+ * local support (bit 5 of +548) or the host feature (bit 6 of 0x805a98)
+ * report status 0xc; without the peer feature (bit 6 of +548) report
+ * 0x1a. Otherwise mark +888, latch the requested parameters (+856..+864
+ * and the handle +262, with the continuation number clamped below the
+ * maximum) into +876..+887 and send LL_SUBRATE_REQ (0x27) with them,
+ * setting bit 29 of +636; no PDU buffer terminates with 0x6f and reports
+ * 0xd. Reports go through 323498 with the connection index. */
+extern uint32_t opencfw_em9305_dispatch_child_323498(uint32_t handle, uint32_t status);
+extern uint32_t opencfw_em9305_phy_packet_alloc_32d2f0(uint32_t bytes);
+extern uint32_t opencfw_em9305_phy_packet_send_32d32c(uintptr_t record, uintptr_t packet);
+extern uint32_t opencfw_em9305_receive_terminate_325c08(uintptr_t record, uint32_t reason);
+
+static uint32_t opencfw_em9305_subrate_index_315aec(uintptr_t record)
+{
+    uintptr_t base=*(volatile uint32_t *)(uintptr_t)0x805c70u;
+    return (uint8_t)((int32_t)(record-base)/912);
+}
+
+void opencfw_em9305_subrate_action_315aec(uintptr_t record)
+{
+    uint32_t features=*(volatile uint32_t *)(record+548u);
+    if((features&0x20u)==0u||(*(volatile uint8_t *)(uintptr_t)0x805a98u&0x40u)==0u){
+        (void)opencfw_em9305_dispatch_child_323498(opencfw_em9305_subrate_index_315aec(record),0xcu);
+        return;
+    }
+    if((features&0x40u)==0u){
+        (void)opencfw_em9305_dispatch_child_323498(opencfw_em9305_subrate_index_315aec(record),0x1au);
+        return;
+    }
+    *(volatile uint8_t *)(record+888u)=1u;
+    uintptr_t packet=opencfw_em9305_phy_packet_alloc_32d2f0(0xbu);
+    if(packet==0u){
+        (void)opencfw_em9305_receive_terminate_325c08(record,0x6fu);
+        (void)opencfw_em9305_dispatch_child_323498(opencfw_em9305_subrate_index_315aec(record),0xdu);
+        return;
+    }
+    volatile uint8_t *p=(volatile uint8_t *)packet;
+    volatile uint8_t *latched=(volatile uint8_t *)(record+876u);
+    uint32_t handle=*(volatile uint16_t *)(record+262u);
+    uint32_t factor_max=*(volatile uint16_t *)(record+856u);
+    *(volatile uint16_t *)(record+878u)=(uint16_t)handle;
+    uint32_t latency=*(volatile uint16_t *)(record+860u);
+    uint32_t continuation=*(volatile uint16_t *)(record+862u);
+    uint32_t timeout=*(volatile uint16_t *)(record+864u);
+    *(volatile uint16_t *)(record+884u)=(uint16_t)latency;
+    int32_t limit=(int32_t)factor_max-1;
+    int32_t clamped=(int32_t)continuation<limit?(int32_t)continuation:limit;
+    *(volatile uint16_t *)(record+876u)=(uint16_t)factor_max;
+    *(volatile uint16_t *)(record+886u)=(uint16_t)timeout;
+    *(volatile uint16_t *)(record+880u)=(uint16_t)clamped;
+    p[0]=0x27u;
+    p[1]=latched[0];
+    p[2]=latched[1];
+    p[3]=latched[2];
+    p[4]=latched[3];
+    p[5]=latched[8];
+    p[6]=latched[9];
+    p[7]=latched[4];
+    p[8]=latched[5];
+    p[9]=latched[10];
+    p[10]=latched[11];
+    (void)opencfw_em9305_phy_packet_send_32d32c(record,packet);
+    *(volatile uint32_t *)(record+636u)|=1u<<29;
+}

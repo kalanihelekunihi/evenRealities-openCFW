@@ -17,7 +17,10 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'tools'))
 from gxdnn_command_emitter import (
-    Command, CopyCommand, TensorOpCommand, RawCommand, CommandFormatError,
+    Command, CopyCommand, ActivationCommand, TensorOpCommand, BatchNormCommand,
+    TransposeCommand, ReduceCommand, ActivationMode4Command, FormatCommand,
+    FullyConnectedCommand, ConvolutionCommand, DepthwiseConvolutionCommand,
+    RawCommand, CommandFormatError,
     OPCODE_SIZES, TERMINAL_SELF_LINK,
     encode_address, decode_address, encode_extents, decode_extents,
     encode_command, decode_command, emit_program, decode_program,
@@ -132,6 +135,117 @@ class TensorOpCommandTests(unittest.TestCase):
         self.assertEqual(decoded.body, body)
 
 
+class ActivationCommandTests(unittest.TestCase):
+    def test_shipped_relu_and_sigmoid_fields(self):
+        image = (Path(__file__).resolve().parents[1] /
+                 'blobs/official/g2-2.2.6.10/firmware_codec.bin').read_bytes()
+        commands = decode_program(image[0x18d90:0x18d90 + 9164])
+        self.assertEqual(commands[7].body, ActivationCommand(
+            kind='relu', source=(1, 0), destination=(1, 960),
+            extents=(1, 7, 64), source_strides=(448, 64),
+            destination_strides=(448, 64)))
+        self.assertEqual(commands[149].body, ActivationCommand(
+            kind='sigmoid', source=(1, 5380), destination=(1, 5376),
+            extents=(1, 1, 2), source_strides=(2, 2),
+            destination_strides=(2, 2)))
+
+    def test_mode4_activation_parameters(self):
+        image = (Path(__file__).resolve().parents[1] /
+                 'blobs/official/g2-2.2.6.10/firmware_codec.bin').read_bytes()
+        commands = decode_program(image[0x18d90:0x18d90 + 9164])
+        self.assertEqual(commands[146].body, ActivationMode4Command(
+            source=(1, 5376), destination=(1, 7124), extents=(1, 2, 64),
+            source_strides=(128, 64), destination_strides=(128, 64),
+            parameter0_half=0x3c34, parameter1_half=0xbf08,
+            parameter2_half=0x3f08))
+
+    def test_shipped_reduce_and_format(self):
+        image = (Path(__file__).resolve().parents[1] /
+                 'blobs/official/g2-2.2.6.10/firmware_codec.bin').read_bytes()
+        commands = decode_program(image[0x18d90:0x18d90 + 9164])
+        self.assertEqual(commands[142].body, ReduceCommand(
+            source=(1, 0), destination=(1, 5376), extents=(1, 11, 64),
+            source_strides=(704, 64), destination_strides=(64, 64),
+            axis=1, divisor_half=0x3c00))
+        self.assertEqual(commands[150].body, FormatCommand(
+            source=(1, 5376), destination=(4, 7424), extents=(1, 1, 2),
+            source_strides=(2, 2), destination_strides=(2, 2),
+            to_float32=True))
+
+
+class BatchNormCommandTests(unittest.TestCase):
+    def test_shipped_batch_norm_fields_and_round_trip(self):
+        image = (Path(__file__).resolve().parents[1] /
+                 'blobs/official/g2-2.2.6.10/firmware_codec.bin').read_bytes()
+        commands = decode_program(image[0x18d90:0x18d90 + 9164])
+        self.assertEqual(commands[5].body, BatchNormCommand(
+            source=(1, 960), scale=(6, 98194), bias=(6, 98002),
+            destination=(1, 0), extents=(1, 5, 64),
+            source_strides=(480, 96), destination_strides=(480, 96)))
+        record_offset = sum(len(encode_command(command)) for command in commands[:5])
+        self.assertEqual(encode_command(commands[5]),
+                         image[0x18d90 + record_offset:0x18d90 + record_offset + 44])
+
+    def test_rejects_nonzero_unclassified_tail(self):
+        body = BatchNormCommand(source=(1, 0), scale=(6, 0), bias=(6, 2),
+                                destination=(1, 4), extents=(1, 1, 1),
+                                source_strides=(2, 2), destination_strides=(2, 2))
+        encoded = bytearray(encode_command(Command(body=body)))
+        encoded[-1] = 1
+        with self.assertRaises(CommandFormatError):
+            decode_command(bytes(encoded))
+
+
+class TransposeCommandTests(unittest.TestCase):
+    def test_shipped_transpose_fields_and_round_trip(self):
+        image = (Path(__file__).resolve().parents[1] /
+                 'blobs/official/g2-2.2.6.10/firmware_codec.bin').read_bytes()
+        commands = decode_program(image[0x18d90:0x18d90 + 9164])
+        self.assertEqual(commands[9].body, TransposeCommand(
+            source=(1, 960), destination=(1, 0), mode=1,
+            dimensions=(32, 5, 3, 1), first_pitch=96, second_pitch=5))
+        record_offset = sum(len(encode_command(command)) for command in commands[:9])
+        self.assertEqual(encode_command(commands[9]),
+                         image[0x18d90 + record_offset:0x18d90 + record_offset + 24])
+
+    def test_rejects_unclassified_reserved_byte(self):
+        body = TransposeCommand(source=(1, 0), destination=(1, 128), mode=1,
+                                dimensions=(4, 8, 1, 1), first_pitch=16,
+                                second_pitch=8)
+        encoded = bytearray(encode_command(Command(body=body)))
+        encoded[4 + 9] = 1
+        with self.assertRaises(CommandFormatError):
+            decode_command(bytes(encoded))
+
+
+class MatrixCommandTests(unittest.TestCase):
+    def test_shipped_matrix_families_are_typed(self):
+        image = (Path(__file__).resolve().parents[1] /
+                 'blobs/official/g2-2.2.6.10/firmware_codec.bin').read_bytes()
+        commands = decode_program(image[0x18d90:0x18d90 + 9164])
+        self.assertEqual(commands[126].body, FullyConnectedCommand(
+            source=(1, 256), weights=(6, 15622), destination=(1, 0),
+            bias=(6, 14598), dimensions=(42, 128), tile=(10, 32, 2, 4),
+            coefficients=(0xb00b, 0x1413), final_control_low16=0x2000))
+        self.assertEqual(commands[2].body, ConvolutionCommand(
+            source=(1, 1408), weights=(6, 102226), destination=(1, 0),
+            bias=(6, 98386), dimensions=(96, 40), tile=(32, 8, 3, 2),
+            pitches=(13, 1), geometry_control0=0x15,
+            geometry_control1=0x12, kernel_control=5,
+            coefficients=(0xb25d, 0x162c), final_control_low16=0x7800))
+        self.assertEqual(commands[10].body, DepthwiseConvolutionCommand(
+            source=(1, 0), weights=(6, 97042), destination=(1, 1920),
+            geometry0=(5, 1, 1, 1), geometry1=(1, 1, 14, 32),
+            geometry2=(14, 32, 28, 32), pitches=(5, 1),
+            geometry_control=0x60, kernel_control0=0x12,
+            kernel_control1=0x15))
+
+    def test_unclassified_matrix_variant_stays_raw(self):
+        command = Command(body=RawCommand(opcode=0x40, payload=bytes(44)))
+        decoded, _ = decode_command(encode_command(command))
+        self.assertEqual(decoded, command)
+
+
 class HeaderFramingTests(unittest.TestCase):
     def test_header_reserved_round_trip(self):
         body = RawCommand(opcode=0x40, payload=bytes(OPCODE_SIZES[0x40] - 4))
@@ -199,14 +313,16 @@ class ShippedCommandBlockOracleTests(unittest.TestCase):
         reencoded = emit_program(commands)
         self.assertEqual(reencoded, self.data)
 
-    def test_shipped_block_uses_only_understood_or_raw_bodies(self):
+    def test_shipped_block_uses_typed_bodies(self):
         commands = decode_program(self.data)
         kinds = {type(c.body).__name__ for c in commands}
-        self.assertEqual(kinds, {'CopyCommand', 'TensorOpCommand', 'RawCommand'})
+        self.assertEqual(kinds, {'CopyCommand', 'TensorOpCommand', 'ActivationCommand',
+                                 'BatchNormCommand', 'TransposeCommand', 'ReduceCommand',
+                                 'ActivationMode4Command', 'FormatCommand',
+                                 'FullyConnectedCommand', 'ConvolutionCommand',
+                                 'DepthwiseConvolutionCommand'})
         typed = sum(1 for c in commands if not isinstance(c.body, RawCommand))
-        # copy (123) + tensor_vector (20) + tensor_tensor (9), per
-        # gx8002-model-command-chain.json opcode/operator counts.
-        self.assertEqual(typed, 152)
+        self.assertEqual(typed, 212)
 
 
 def _encode(body):

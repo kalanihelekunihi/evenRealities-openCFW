@@ -1,296 +1,98 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_subrate_action_3160d4\n"
-".type opencfw_em9305_subrate_action_3160d4,@function\n"
-"opencfw_em9305_subrate_action_3160d4:\n"
-"L3160d4:\n"
-"enter_s [r13-r16,blink]\n"
-"L3160d6:\n"
-"mov_s r1,0x805a98\n"
-"L3160dc:\n"
-"ldb_s r1,[r1,0]\n"
-"L3160de:\n"
-"bbit1.d.nt r1,0x6,L3160e8\n"
-"L3160e2:\n"
-"mov_s r16,r0\n"
-"L3160e4:\n"
-"mov_s r1,0x1a\n"
-"L3160e6:\n"
-"b_s L316262\n"
-"L3160e8:\n"
-"mov_s r13,0x802810\n"
-"L3160ee:\n"
-"ldh_s r0,[r13,0x10]\n"
-"L3160f0:\n"
-"ldh_s r2,[r13,0xc]\n"
-"L3160f2:\n"
-"ldh_s r12,[r13,0xe]\n"
-"L3160f4:\n"
-"mov_s r14,r16\n"
-"L3160f6:\n"
-"cmp r0,500\n"
-"L3160fa:\n"
-"mov_s r11,r0\n"
-"L3160fc:\n"
-"add r14,r14,886\n"
-"L316100:\n"
-"blo_s L316106\n"
-"L316102:\n"
-"mov_s r1,0\n"
-"L316104:\n"
-"b_s L31611e\n"
-"L316106:\n"
-"sub_s r1,r12,0x1\n"
-"L316108:\n"
-"sub_s r0,r2,0x1\n"
-"L31610a:\n"
-"exth_s r1,r1\n"
-"L31610c:\n"
-"seths r3,r12,r2\n"
-"L316110:\n"
-"exth_s r0,r0\n"
-"L316112:\n"
-"setlo r1,r1,500\n"
-"L316116:\n"
-"setlo r0,r0,500\n"
-"L31611a:\n"
-"and_s r1,r1,r3\n"
-"L31611c:\n"
-"and_s r1,r1,r0\n"
-"L31611e:\n"
-"ldh r0,[r14,-48]\n"
-"L316122:\n"
-"brlo.d.nt r0,r2,L316132\n"
-"L316126:\n"
-"ldh_s r3,[r13,0x14]\n"
-"L316128:\n"
-"ldh r0,[r14,-50]\n"
-"L31612c:\n"
-"brhs.d.nt r12,r0,L316136\n"
-"L316130:\n"
-"not_s r12,r1\n"
-"L316132:\n"
-"mov_s r0,1\n"
-"L316134:\n"
-"b_s L316156\n"
-"L316136:\n"
-"ldh_s r0,[r13,0x12]\n"
-"L316138:\n"
-"add r1,r3,0xfffff37f\n"
-"L316140:\n"
-"exth_s r1,r1\n"
-"L316142:\n"
-"seths r0,r0,500\n"
-"L316146:\n"
-"setlo r1,r1,0xf389\n"
-"L31614e:\n"
-"or_s r0,r0,r12\n"
-"L316150:\n"
-"or_s r1,r1,r0\n"
-"L316152:\n"
-"and r0,r1,0x1\n"
-"L316156:\n"
-"cmp_s r0,0\n"
-"L316158:\n"
-"bne_s L316260\n"
-"L31615a:\n"
-"ldh r0,[r14,-46]\n"
-"L31615e:\n"
-"cmp r11,r0\n"
-"L316162:\n"
-"bhi.d L316260\n"
-"L316166:\n"
-"add r0,r11,0x1\n"
-"L31616a:\n"
-"ldh.as r1,[r16,133]\n"
-"L31616e:\n"
-"mpywhul r2,r0,r2\n"
-"L316172:\n"
-"lsr r0,r1,0x2\n"
-"L316176:\n"
-"bmsk.f 0,r1,0x1\n"
-"L31617a:\n"
-"add_s r0,r0,r1\n"
-"L31617c:\n"
-"add.ne r0,r0,0x1\n"
-"L316180:\n"
-"mpy_s r0,r0,r2\n"
-"L316182:\n"
-"mpyuw r1,r3,0xa\n"
-"L316186:\n"
-"asl_s r0,r0\n"
-"L316188:\n"
-"brlo.nt r1,r0,L316260\n"
-"L31618c:\n"
-"ldh r0,[r14,-42]\n"
-"L316190:\n"
-"brlo.d.nt r0,r3,L316260\n"
-"L316194:\n"
-"mov_s r0,0xb\n"
-"L316196:\n"
-"bl opencfw_em9305_phy_packet_alloc_32d2f0\n"
-"L31619a:\n"
-"breq.d.nt r0,0,L316274\n"
-"L31619e:\n"
-"mov_s r1,r0\n"
-"L3161a0:\n"
-"ldh r9,[r14,-48]\n"
-"L3161a4:\n"
-"ldh_s r0,[r13,0xe]\n"
-"L3161a6:\n"
-"ldh r6,[r14,-50]\n"
-"L3161aa:\n"
-"ldh_s r2,[r13,0xc]\n"
-"L3161ac:\n"
-"ldh r7,[r14,-44]\n"
-"L3161b0:\n"
-"ldh_s r3,[r13,0x12]\n"
-"L3161b2:\n"
-"ldh r4,[r14,-42]\n"
-"L3161b6:\n"
-"ldh_s r12,[r13,0x14]\n"
-"L3161b8:\n"
-"ldh r5,[r14,-46]\n"
-"L3161bc:\n"
-"ldh r11,[r13,16]\n"
-"L3161c0:\n"
-"ldh r30,[r14,-40]\n"
-"L3161c4:\n"
-"min r9,r0,r9\n"
-"L3161c8:\n"
-"max r0,r2,r6\n"
-"L3161cc:\n"
-"ldh.as r8,[r16,131]\n"
-"L3161d0:\n"
-"max r2,r3,r7\n"
-"L3161d4:\n"
-"min r3,r0,r9\n"
-"L3161d8:\n"
-"sub_s r0,r3,0x1\n"
-"L3161da:\n"
-"mov_s r13,1\n"
-"L3161dc:\n"
-"min r12,r12,r4\n"
-"L3161e0:\n"
-"min r15,r11,r5\n"
-"L3161e4:\n"
-"min r0,r2,r0\n"
-"L3161e8:\n"
-"brne.d.nt r3,r30,L31620a\n"
-"L3161ec:\n"
-"stb_s r13,[r14,0x2]\n"
-"L3161ee:\n"
-"ldh r11,[r14,-36]\n"
-"L3161f2:\n"
-"exth_s r2,r0\n"
-"L3161f4:\n"
-"brne.nt r11,r2,L31620a\n"
-"L3161f8:\n"
-"ldh.as r2,[r16,130]\n"
-"L3161fc:\n"
-"brne.nt r15,r2,L31620a\n"
-"L316200:\n"
-"ldh r2,[r14,-34]\n"
-"L316204:\n"
-"brne.nt r12,r2,L31620a\n"
-"L316208:\n"
-"mov_s r13,0\n"
-"L31620a:\n"
-"sth_s r12,[r14,0]\n"
-"L31620c:\n"
-"sth r15,[r14,-2]\n"
-"L316210:\n"
-"sth r0,[r14,-6]\n"
-"L316214:\n"
-"sth r8,[r14,-8]\n"
-"L316218:\n"
-"sth r3,[r14,-10]\n"
-"L31621c:\n"
-"lsr r2,r0,0x8\n"
-"L316220:\n"
-"stb_s r0,[r1,0x7]\n"
-"L316222:\n"
-"lsr r0,r15,0x8\n"
-"L316226:\n"
-"lsr r11,r12,0x8\n"
-"L31622a:\n"
-"stb_s r12,[r1,0x9]\n"
-"L31622c:\n"
-"lsr r12,r8,0x8\n"
-"L316230:\n"
-"lsr r14,r3,0x8\n"
-"L316234:\n"
-"stb_s r3,[r1,0x1]\n"
-"L316236:\n"
-"mov_s r3,0x27\n"
-"L316238:\n"
-"stb_s r0,[r1,0x6]\n"
-"L31623a:\n"
-"mov_s r0,r16\n"
-"L31623c:\n"
-"stb_s r15,[r1,0x5]\n"
-"L31623e:\n"
-"stb r8,[r1,3]\n"
-"L316242:\n"
-"stb r11,[r1,10]\n"
-"L316246:\n"
-"stb_s r2,[r1,0x8]\n"
-"L316248:\n"
-"stb_s r12,[r1,0x4]\n"
-"L31624a:\n"
-"stb_s r14,[r1,0x2]\n"
-"L31624c:\n"
-"bl.d opencfw_em9305_phy_packet_send_32d32c\n"
-"L316250:\n"
-"stb_s r3,[r1,0]\n"
-"L316252:\n"
-"breq_s r13,0,L31625e\n"
-"L316254:\n"
-"ld.as r0,[r16,159]\n"
-"L316258:\n"
-"bset_s r0,r0,0x1d\n"
-"L31625a:\n"
-"st.as r0,[r16,159]\n"
-"L31625e:\n"
-"leave_s [r13-r16,blink,pcl]\n"
-"L316260:\n"
-"mov_s r1,0x11\n"
-"L316262:\n"
-"mov_s r2,1\n"
-"L316264:\n"
-"bl.d opencfw_em9305_phy_reject_32698c\n"
-"L316268:\n"
-"mov_s r0,r16\n"
-"L31626a:\n"
-"mov_s r1,0x6f\n"
-"L31626c:\n"
-"bl.d opencfw_em9305_receive_terminate_325c08\n"
-"L316270:\n"
-"mov_s r0,r16\n"
-"L316272:\n"
-"leave_s [r13-r16,blink,pcl]\n"
-"L316274:\n"
-"mov_s r1,0x6f\n"
-"L316276:\n"
-"bl.d opencfw_em9305_receive_terminate_325c08\n"
-"L31627a:\n"
-"mov_s r0,r16\n"
-"L31627c:\n"
-"mov_s r0,0x805c70\n"
-"L316282:\n"
-"ld r0,[r0,0]\n"
-"L316284:\n"
-"sub r1,r16,r0\n"
-"L316288:\n"
-"div r1,r1,912\n"
-"L31628c:\n"
-"extb_s r0,r1\n"
-"L31628e:\n"
-"bl.d opencfw_em9305_dispatch_child_323498\n"
-"L316292:\n"
-"mov_s r1,0xd\n"
-"L316294:\n"
-"leave_s [r13-r16,blink,pcl]\n"
-".size opencfw_em9305_subrate_action_3160d4,.-opencfw_em9305_subrate_action_3160d4\n"
-);
+#include <stdint.h>
+
+/* Native 0x3160d4..0x31628e: answer an LL_SUBRATE_REQ (parameters at
+ * 0x802810: min +0xc, max +0xe, latency +0x10, continuation +0x12, timeout
+ * +0x14). Without the subrating feature (0x805a98 bit 6) reject with 0x1a.
+ * Reject with 0x11 when the request is malformed (factor 1..500, max >= min,
+ * latency < 500, continuation < 500, timeout 10..3200), outside the host
+ * limits at +836..+844, or when the timeout does not cover the subrated
+ * interval; a rejection also terminates with 0x6f. Otherwise send
+ * LL_SUBRATE_IND (0x27) with the negotiated factor, base event (+262),
+ * latency, continuation and timeout, remember them at +876..+886 and flag
+ * a parameter change (+636 bit 29) when they differ from the current ones.
+ * Without a packet buffer terminate (0x6f) and report status 13. */
+extern uint32_t opencfw_em9305_phy_reject_32698c(uintptr_t,uint32_t,uint32_t);
+extern uint32_t opencfw_em9305_receive_terminate_325c08(uintptr_t,uint32_t);
+extern uint32_t opencfw_em9305_phy_packet_alloc_32d2f0(uint32_t);
+extern uint32_t opencfw_em9305_phy_packet_send_32d32c(uintptr_t,uintptr_t);
+extern uint32_t opencfw_em9305_dispatch_child_323498(uint32_t,uint32_t);
+
+#define SUB_U16(a) (*(volatile uint16_t *)(uintptr_t)(a))
+
+static int32_t subrate_min(int32_t a, int32_t b) { return a < b ? a : b; }
+static int32_t subrate_max(int32_t a, int32_t b) { return a > b ? a : b; }
+
+void opencfw_em9305_subrate_action_3160d4(uintptr_t record)
+{
+    const uintptr_t request = 0x802810u;
+    uint32_t reason = 0x1au;
+    if ((*(volatile uint8_t *)(uintptr_t)0x805a98u & 0x40u) != 0u) {
+        uint32_t latency = SUB_U16(request + 0x10u);
+        uint32_t factor_min = SUB_U16(request + 0xcu);
+        uint32_t factor_max = SUB_U16(request + 0xeu);
+        uint32_t valid = 0u;
+        if (latency < 500u)
+            valid = (uint16_t)(factor_max - 1u) < 500u && (int32_t)factor_max >= (int32_t)factor_min &&
+                    (uint16_t)(factor_min - 1u) < 500u;
+        uint32_t timeout = SUB_U16(request + 0x14u);
+        uint32_t invalid = 1u;
+        if (SUB_U16(record + 838u) >= factor_min && factor_max >= SUB_U16(record + 836u)) {
+            uint32_t continuation = SUB_U16(request + 0x12u);
+            invalid = ((uint16_t)(timeout - 3201u) < 0xf389u) | ((int32_t)continuation >= 500) | (valid ^ 1u);
+        }
+        reason = 0x11u;
+        if (invalid == 0u && latency <= SUB_U16(record + 840u)) {
+            uint32_t interval = SUB_U16(record + 266u);
+            uint32_t span = (latency + 1u) * factor_min;
+            uint32_t units = (interval >> 2) + interval + ((interval & 3u) != 0u ? 1u : 0u);
+            if (timeout * 10u >= units * span * 2u && SUB_U16(record + 844u) >= timeout) {
+                uintptr_t packet = opencfw_em9305_phy_packet_alloc_32d2f0(0xbu);
+                if (packet == 0u) {
+                    (void)opencfw_em9305_receive_terminate_325c08(record, 0x6fu);
+                    uintptr_t base = *(volatile uint32_t *)(uintptr_t)0x805c70u;
+                    (void)opencfw_em9305_dispatch_child_323498((uint8_t)((int32_t)(record - base) / 912), 0xdu);
+                    return;
+                }
+                int32_t factor = subrate_min(subrate_max((int32_t)SUB_U16(request + 0xcu), (int32_t)SUB_U16(record + 836u)),
+                                             subrate_min((int32_t)SUB_U16(request + 0xeu), (int32_t)SUB_U16(record + 838u)));
+                int32_t continuation = subrate_min(subrate_max((int32_t)SUB_U16(request + 0x12u), (int32_t)SUB_U16(record + 842u)),
+                                                   factor - 1);
+                int32_t new_timeout = subrate_min((int32_t)SUB_U16(request + 0x14u), (int32_t)SUB_U16(record + 844u));
+                int32_t new_latency = subrate_min((int32_t)SUB_U16(request + 0x10u), (int32_t)SUB_U16(record + 840u));
+                uint32_t base_event = SUB_U16(record + 262u);
+                uint32_t changed = 1u;
+                *(volatile uint8_t *)(record + 888u) = 1u;
+                if ((uint32_t)factor == SUB_U16(record + 846u) &&
+                    SUB_U16(record + 850u) == (uint16_t)continuation &&
+                    (uint32_t)new_latency == SUB_U16(record + 260u) &&
+                    (uint32_t)new_timeout == SUB_U16(record + 852u))
+                    changed = 0u;
+                SUB_U16(record + 886u) = (uint16_t)new_timeout;
+                SUB_U16(record + 884u) = (uint16_t)new_latency;
+                SUB_U16(record + 880u) = (uint16_t)continuation;
+                SUB_U16(record + 878u) = (uint16_t)base_event;
+                SUB_U16(record + 876u) = (uint16_t)factor;
+                volatile uint8_t *pdu = (volatile uint8_t *)packet;
+                pdu[7] = (uint8_t)continuation;
+                pdu[9] = (uint8_t)new_timeout;
+                pdu[1] = (uint8_t)factor;
+                pdu[6] = (uint8_t)((uint32_t)new_latency >> 8);
+                pdu[5] = (uint8_t)new_latency;
+                pdu[3] = (uint8_t)base_event;
+                pdu[10] = (uint8_t)((uint32_t)new_timeout >> 8);
+                pdu[8] = (uint8_t)((uint32_t)continuation >> 8);
+                pdu[4] = (uint8_t)(base_event >> 8);
+                pdu[2] = (uint8_t)((uint32_t)factor >> 8);
+                pdu[0] = 0x27u;
+                (void)opencfw_em9305_phy_packet_send_32d32c(record, packet);
+                if (changed != 0u) {
+                    volatile uint32_t *flags = (volatile uint32_t *)(record + 636u);
+                    *flags = *flags | (1u << 29);
+                }
+                return;
+            }
+        }
+    }
+    (void)opencfw_em9305_phy_reject_32698c(record, reason, 1u);
+    (void)opencfw_em9305_receive_terminate_325c08(record, 0x6fu);
+}

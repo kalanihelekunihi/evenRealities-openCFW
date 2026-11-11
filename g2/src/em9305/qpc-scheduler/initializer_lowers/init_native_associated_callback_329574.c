@@ -1,115 +1,51 @@
-/* Full native body; named genuine children. */
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_associated_callback_329574\n"
-".type opencfw_em9305_associated_callback_329574,@function\n"
-"opencfw_em9305_associated_callback_329574:\n"
-"L329574:\n"
-"enter_s [r13-r15,blink]\n"
-"L329576:\n"
-"ld_s r13,[r0,0x24]\n"
-"L329578:\n"
-"mov_s r14,r13\n"
-"L32957a:\n"
-"ldb_s r0,[r13,0x1]\n"
-"L32957c:\n"
-"brne.d.nt r0,0x3,L32959e\n"
-"L329580:\n"
-"add r14,r14,566\n"
-"L329584:\n"
-"ldb r0,[r14,63]\n"
-"L329588:\n"
-"breq_s r0,0,L329592\n"
-"L32958a:\n"
-"ldb r0,[r14,64]\n"
-"L32958e:\n"
-"brne_s r0,0,L3295f4\n"
-"L329590:\n"
-"b_s L32959e\n"
-"L329592:\n"
-"ldb r0,[r14,54]\n"
-"L329596:\n"
-"breq_s r0,0,L3295f4\n"
-"L329598:\n"
-"ld.as r0,[r13,90]\n"
-"L32959c:\n"
-"breq_s r0,0,L3295f4\n"
-"L32959e:\n"
-"mov_s r0,0x805cd8\n"
-"L3295a4:\n"
-"ld r0,[r0,0]\n"
-"L3295a6:\n"
-"breq_s r0,0,L3295be\n"
-"L3295a8:\n"
-"ld r2,[r0,0x18]\n"
-"L3295aa:\n"
-"breq_s r2,0,L3295be\n"
-"L3295ac:\n"
-"mov_s r0,0x805c70\n"
-"L3295b2:\n"
-"ld r0,[r0,0]\n"
-"L3295b4:\n"
-"sub_s r1,r13,r0\n"
-"L3295b6:\n"
-"div r1,r1,912\n"
-"L3295ba:\n"
-"jl_s.d [r2]\n"
-"L3295bc:\n"
-"extb_s r0,r1\n"
-"L3295be:\n"
-"bl.d opencfw_em9305_associated_reset_32ae50\n"
-"L3295c2:\n"
-"mov_s r0,r13\n"
-"L3295c4:\n"
-"bl.d opencfw_em9305_radio_query_3253a4\n"
-"L3295c8:\n"
-"ldh_s r0,[r14,0]\n"
-"L3295ca:\n"
-"mov_s r15,r0\n"
-"L3295cc:\n"
-"breq_s r0,0,L3295f4\n"
-"L3295ce:\n"
-"ld r2,[0x8052cc]\n"
-"L3295d6:\n"
-"breq_s r2,0,L329600\n"
-"L3295d8:\n"
-"ldb r0,[r13,109]\n"
-"L3295dc:\n"
-"breq_s r0,0,L329600\n"
-"L3295de:\n"
-"ldb r0,[r13,111]\n"
-"L3295e2:\n"
-"breq.d.nt r0,0x1,L3295fa\n"
-"L3295e6:\n"
-"mov_s r1,0\n"
-"L3295e8:\n"
-"brne_s r0,0,L329600\n"
-"L3295ea:\n"
-"ld.as r1,[r13,117]\n"
-"L3295ee:\n"
-"ld.as r0,[r13,116]\n"
-"L3295f2:\n"
-"b_s L3295fe\n"
-"L3295f4:\n"
-"bl opencfw_em9305_auxiliary_signal_304394\n"
-"L3295f8:\n"
-"leave_s [r13-r15,blink,pcl]\n"
-"L3295fa:\n"
-"ldh.as r0,[r13,131]\n"
-"L3295fe:\n"
-"jl_s [r2]\n"
-"L329600:\n"
-"ldh_s r0,[r14,0]\n"
-"L329602:\n"
-"add_s r0,r0,6\n"
-"L329604:\n"
-"exth_s r1,r0\n"
-"L329606:\n"
-"bl.d opencfw_em9305_radio_request_start_303cd8\n"
-"L32960a:\n"
-"mov_s r0,r15\n"
-"L32960c:\n"
-"leave_s [r13-r15,blink,pcl]\n"
-".size opencfw_em9305_associated_callback_329574,.-opencfw_em9305_associated_callback_329574\n"
-);
+#include <stdint.h>
+
+/* Native 0x329574..0x32960e: associated link completion. A role-3 link
+ * still waiting (+629/+630, +620, +360) only signals the auxiliary hook.
+ * Otherwise: notify the registered close hook (+24 of 0x805cd8) with the
+ * link index, reset the associated state and query the radio for the
+ * handle at +566 (no answer: signal). When the report hook (0x8052cc) and
+ * +109 are set, report either the 1-byte status (+262, mode 1) or the
+ * 64-bit value at +464 (mode 0). Finally restart the radio request with
+ * the handle + 6. */
+extern uint32_t opencfw_em9305_associated_reset_32ae50(uintptr_t link);
+extern uint32_t opencfw_em9305_radio_query_3253a4(uint32_t handle);
+extern uint32_t opencfw_em9305_auxiliary_signal_304394(void);
+extern uint32_t opencfw_em9305_radio_request_start_303cd8(uint32_t request, uint32_t handle);
+
+uint32_t opencfw_em9305_associated_callback_329574(uintptr_t owner)
+{
+    uintptr_t link=*(volatile uint32_t *)(owner+36u);
+    if(*(volatile uint8_t *)(link+1u)==3u){
+        if(*(volatile uint8_t *)(link+629u)!=0u){
+            if(*(volatile uint8_t *)(link+630u)!=0u)
+                return opencfw_em9305_auxiliary_signal_304394();
+        }else if(*(volatile uint8_t *)(link+620u)==0u||
+                 *(volatile uint32_t *)(link+360u)==0u){
+            return opencfw_em9305_auxiliary_signal_304394();
+        }
+    }
+    uintptr_t hooks=*(volatile uint32_t *)(uintptr_t)0x805cd8u;
+    if(hooks!=0u){
+        uintptr_t close=*(volatile uint32_t *)(hooks+24u);
+        if(close!=0u){
+            uintptr_t base=*(volatile uint32_t *)(uintptr_t)0x805c70u;
+            int32_t index=(int32_t)(link-base)/912;
+            ((void (*)(uint32_t,int32_t,uintptr_t))close)((uint8_t)index,index,close);
+        }
+    }
+    (void)opencfw_em9305_associated_reset_32ae50(link);
+    uint32_t request=opencfw_em9305_radio_query_3253a4(*(volatile uint16_t *)(link+566u));
+    if(request==0u)return opencfw_em9305_auxiliary_signal_304394();
+    uintptr_t report=*(volatile uint32_t *)(uintptr_t)0x8052ccu;
+    if(report!=0u&&*(volatile uint8_t *)(link+109u)!=0u){
+        uint32_t mode=*(volatile uint8_t *)(link+111u);
+        if(mode==1u)
+            ((void (*)(uint32_t,uint32_t,uintptr_t))report)(*(volatile uint16_t *)(link+262u),0u,report);
+        else if(mode==0u)
+            ((void (*)(uint32_t,uint32_t,uintptr_t))report)(*(volatile uint32_t *)(link+464u),
+                                                           *(volatile uint32_t *)(link+468u),report);
+    }
+    return opencfw_em9305_radio_request_start_303cd8(request,
+        (uint16_t)(*(volatile uint16_t *)(link+566u)+6u));
+}

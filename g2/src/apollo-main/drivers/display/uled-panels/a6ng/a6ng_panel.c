@@ -94,9 +94,12 @@ static void log1(uint8_t level, const char *fn, uint32_t line, uint32_t compact,
         (void)compress_log_output(compact, text_short, text_short, arg);
 }
 
-/* The blocking variant is a stub in this build: it clips and walks the rows
- * and touches the two bytes past each span like the JBD4010 driver, but the
- * QSPI write itself is compiled out. */
+/* Evidence (wave11 recheck): stock am_devices_hongshi_QSPI_PartialReflash @0x5bcc18..0x5bcd43
+ * (corpus decomp 005bcc18.c). The null check reads *0x20074510 (handle) and logs line 0x30b with
+ * strings 0x74977c/0x75f7d0. It clamps x1<=0x27f and y1<=0x1df. The row base is *0x20074514 (fb) +
+ * y*0x280/2 + x0/2, and the address mask is 0x7fc00 (literal 0x5bd31c). It saves, zeroes and restores
+ * 2 bytes past the span. The only call in the body is bl 0x4910f4(1) at 0x5bcd20, so stock has no QSPI
+ * payload write either; the computed address is dead in stock too. */
 uint32_t am_devices_hongshi_QSPI_PartialReflash(int32_t x_off, int32_t y_off, int32_t x0,
                                                 int32_t y0, int32_t x1, int32_t y1)
 {

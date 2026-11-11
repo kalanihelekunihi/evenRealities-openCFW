@@ -1,27 +1,14 @@
-/* Native scan counter increment: critical section and byte wrap preserved. */
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_scan_counter_up_316968\n"
-".type opencfw_em9305_scan_counter_up_316968,@function\n"
-"opencfw_em9305_scan_counter_up_316968:\n"
-"L316968:\n"
-"push_s blink\n"
-"L31696a:\n"
-"bl opencfw_em9305_wsf_critical_enter\n"
-"L31696e:\n"
-"mov_s r0,0x805b01\n"
-"L316974:\n"
-"ldb_s r1,[r0,0]\n"
-"L316976:\n"
-"add_s r1,r1,1\n"
-"L316978:\n"
-"bl.d opencfw_em9305_wsf_critical_exit\n"
-"L31697c:\n"
-"stb_s r1,[r0,0]\n"
-"L31697e:\n"
-"pop_s blink\n"
-"L316980:\n"
-"j_s [blink]\n"
-".size opencfw_em9305_scan_counter_up_316968,.-opencfw_em9305_scan_counter_up_316968\n"
-);
+#include <stdint.h>
+
+/* Native 0x316968..0x316982: increment the scan counter byte at 0x805b01
+ * inside a critical section. */
+extern uint32_t opencfw_em9305_wsf_critical_enter(void);
+extern uint32_t opencfw_em9305_wsf_critical_exit(void);
+
+void opencfw_em9305_scan_counter_up_316968(void)
+{
+    (void)opencfw_em9305_wsf_critical_enter();
+    uint32_t count=*(volatile uint8_t *)0x805b01u;
+    *(volatile uint8_t *)0x805b01u=(uint8_t)(count+1u);
+    (void)opencfw_em9305_wsf_critical_exit();
+}

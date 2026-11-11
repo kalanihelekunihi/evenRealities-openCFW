@@ -19,7 +19,7 @@ const uint32_t opencfw_boot_platform_config_table[12] = {
     73u, 69u, 5u, 5u,
 };
 
-extern uint32_t opencfw_boot_control_power_apply(uint32_t *object,
+extern uint32_t am_hal_uart_power_control(uint32_t *object,
                                                  uint32_t operation,
                                                  uint32_t enable);
 extern uint32_t opencfw_bl_power_register_update(uint32_t register_id,
@@ -33,7 +33,7 @@ uint32_t opencfw_boot_platform_configure(uint32_t selector)
 
     volatile uint8_t *const row =
         PLATFORM_ROWS + (uint32_t)row_index * PLATFORM_ROW_SIZE;
-    uint32_t power_status = opencfw_boot_control_power_apply(
+    uint32_t power_status = am_hal_uart_power_control(
         (uint32_t *)(uintptr_t)*(volatile uint32_t *)(void *)(row + 4u),
         0u, 1u);
 
@@ -45,3 +45,6 @@ uint32_t opencfw_boot_platform_configure(uint32_t selector)
     row[0x18] = 1u;
     return power_status;
 }
+
+/* Stock entry names that branch straight to the provider above. */
+__typeof__(opencfw_boot_platform_configure) opencfw_provider_41f846 __attribute__((alias("opencfw_boot_platform_configure")));

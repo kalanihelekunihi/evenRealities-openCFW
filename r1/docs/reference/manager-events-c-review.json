@@ -1,0 +1,147 @@
+{
+  "schema_version": 1,
+  "scope": "R1 manager hardware reset/worker-exit event dispatch, checked peer deletion and CMSIS reset primitive",
+  "report": "build/sources-goal-r1-manager-events-reviewed-c/report.json",
+  "comparison_report": "build/sources-goal-r1-nv-bootstrap-c/report.json",
+  "audit": {
+    "compiled_units": 860,
+    "application_imports": 66,
+    "bootloader_imports": 22,
+    "unchanged_prior_nongenerated_objects": 848,
+    "changed_prior_nongenerated_objects": [],
+    "new_nongenerated_sources": [
+      "r1/src/application/board/native_manager_reset.c",
+      "r1/src/application/runtime/native_manager_events.c"
+    ],
+    "normal_objects_equal_direct_and_pipeline_objects": true,
+    "manifest_change": "two participating C units using existing manager and nRF profiles; old exclusions unchanged",
+    "source_plan_unchanged": true,
+    "new_mutable_persistent_bytes": 0,
+    "closed_import": "r1_manager_event_dispatch_46004",
+    "new_imports": [
+      "r1_health_clear_all_caches",
+      "r1_manager_assertion_stack_transfer",
+      "r1_manager_workers_exit_46bac"
+    ]
+  },
+  "direct": {
+    "stock_C_dispatch_cases": 10530,
+    "checked_peer_cases": 3,
+    "native_dispatch_instruction_bytes_executed": 256,
+    "actual_CMSIS_reset_AIRCR_write_and_barriers": true,
+    "all_relevant_event_combinations_and_priority": true,
+    "ordered_status_worker_exit_reset_tags_delays_and_cleanup": true,
+    "retained_assertion_logs_and_architecture_gate_observed": true,
+    "lower_helpers_modeled": true,
+    "private_reset_PC_LR_and_stack_register_residue_excluded": true
+  },
+  "actual_status_ring_chain": {
+    "stock_C_dispatch_cases": 1404,
+    "checked_peer_cases": 0,
+    "native_dispatch_instruction_bytes_executed": 256,
+    "actual_CMSIS_reset_AIRCR_write_and_barriers": true,
+    "all_relevant_event_combinations_and_priority": true,
+    "ordered_status_worker_exit_reset_tags_delays_and_cleanup": true,
+    "retained_assertion_logs_and_architecture_gate_observed": true,
+    "actual_status_publisher_device_peer_charge_helpers_and_ring_storage": true,
+    "remaining_helpers_modeled": true,
+    "private_reset_PC_LR_and_stack_register_residue_excluded": true
+  },
+  "compiled_defects_rejected": [
+    {
+      "defect": "wrong-primary-event",
+      "rejected": true,
+      "log": "build/goal-r1-manager-events-c/wrong-primary-event/test.log"
+    },
+    {
+      "defect": "wrong-reset-tag",
+      "rejected": true,
+      "log": "build/goal-r1-manager-events-c/wrong-reset-tag/test.log"
+    },
+    {
+      "defect": "wrong-reset-delay",
+      "rejected": true,
+      "log": "build/goal-r1-manager-events-c/wrong-reset-delay/test.log"
+    },
+    {
+      "defect": "wrong-erased-address",
+      "rejected": true,
+      "log": "build/goal-r1-manager-events-c/wrong-erased-address/test.log"
+    },
+    {
+      "defect": "inverted-peer-error",
+      "rejected": true,
+      "log": "build/goal-r1-manager-events-c/inverted-peer-error/test.log"
+    },
+    {
+      "defect": "omitted-sysctl",
+      "rejected": true,
+      "log": "build/goal-r1-manager-events-c/omitted-sysctl/test.log"
+    },
+    {
+      "defect": "wrong-suspend-state",
+      "rejected": true,
+      "log": "build/goal-r1-manager-events-c/wrong-suspend-state/test.log"
+    },
+    {
+      "defect": "reset-clears-basepri",
+      "rejected": true,
+      "log": "build/goal-r1-manager-events-c/reset-clears-basepri/test.log"
+    },
+    {
+      "defect": "reset-loses-priority-group",
+      "rejected": true,
+      "log": "build/goal-r1-manager-events-c/reset-loses-priority-group/test.log"
+    }
+  ],
+  "stock_dispatch_entry": "0x46004",
+  "stock_dispatch_body_bytes": 258,
+  "unexecuted_dispatch_bytes": 2,
+  "unexecuted_detail": "BLX to even stack address holding 0xe7f00000 is observed before execution; its source architecture transfer remains unresolved.",
+  "public_contract": [
+    "Event priority and ordered status/worker-exit/sysctl/tag/capture/delay/reset sequences retained.",
+    "Factory reset deletes peers with checked error logging, clears health caches and NV flag, and writes the same six erased address bytes through aliased pointers.",
+    "CMSIS reset preserves AIRCR PRIGROUP, writes VECTKEY/SYSRESETREQ, executes DSB before/after store and reaches the nonreturning NOP loop.",
+    "Assertion event retains all diagnostic text and tag9 before the explicit architecture gate.",
+    "Flags0x8/0x10 each invoke worker-exit helper as observed; combinations may call it twice on normal-return paths."
+  ],
+  "limits": [
+    "Most lower helpers modeled; integration executes actual status publisher, device/peer/charge helpers and source ring storage with external lookup/update/time/critical/event services modeled.",
+    "AIRCR is a virtual register: request value and barriers are proved, physical chip reset is not.",
+    "Assertion source gate has no implementation; observing its boundary does not prove physical exception behavior.",
+    "Concrete reset-site capture and underlying retained PC/LR values are modeled; private frames, register residues, APSR, concurrency/faults, physical peripherals and final application linking/boot unverified."
+  ],
+  "evidence_files": {
+    "build/sources-goal-r1-manager-events-reviewed-c/report.json": "f4fcb3f8d13e484a0d260ff88f5b5fe3559428de7fcd0f78902b3d11f985ea48",
+    "build/sources-goal-r1-nv-bootstrap-c/report.json": "f180eca92989c88fb611096997f7dee33dad984d1f86938787d415e4f9463a68",
+    "r1/src/application/runtime/native_manager_events.c": "ccd02437f0c23af9fd1cfb03f791a6449dd288eaf7c5940972dd326dbf527d57",
+    "r1/src/application/board/native_manager_reset.c": "9d7a6c9ae87cd61cd7772932da71f144e9f180795396164b367f652d899168a1",
+    "r1/src/application/runtime/native_application_manager.c": "729c012d75fb16698f141a0705bcf31179a6c4546e2d586bb16a3d7b21876964",
+    "r1/src/application/board/native_status_record.c": "169a6968defe650809b4502faf27e36b8ec67f063059c18829c7d752c02758a5",
+    "r1/src/application/runtime/native_status_ring.c": "5ad9da6da3d7289e158b47b07220cfa4299a8ccfa83da20be1a282187a7355cf",
+    "r1/src/application/board/native_battery_context.h": "6b338ba13d97fd1f2dc1823a2efb3fd4d903864e3521eb7b0bcab12bb2995282",
+    "r1/src/application/board/native_yhm_initialize.c": "543627e078e446ffc4bcc5373040cd58ac90bb31a509a308c48180bb5294ff73",
+    "vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/toolchain/cmsis/include/core_cm4.h": "cdc0c5ab9ba0f24c065e891d26c3e686ed04106700ce6a572cc7e83e71965b59",
+    "r1/src/sources.json": "e9b26ee4fcaa17b4b8645a6990a549dc13cb5e5117cee4564dc57e0cb2cc79c2",
+    "tools/build/source-plan.json": "eeb516e31b3310fb0718f36908977f8125723f7c5e0e86cd6744395826259a4d",
+    "build/goal-r1-manager-events-c/manifest-before.json": "55d7e73f1c7c8fa71fe7987d6cf9ba547c2c608b78f4c319ff56dabbac08c4ba",
+    "build/goal-r1-manager-events-c/power-before.c": "22ab95af622e47e89c5e401f371833218d33df32899f30348aec20a6a85f9527",
+    "build/goal-r1-manager-events-c/record.py": "909be6e40f9bb96be8053828d27a528e657379873280e663124ea7e63fad16f5",
+    "build/goal-r1-manager-events-c/rea.json": "474c6efc094815fa27731ff17b0da83637a036eac9ea0cb7252bee71f6a48c66",
+    "build/goal-r1-manager-events-c/rea-peer.json": "6964ac542219747b1d419d477916a624d3fcc3e8822483c52831c913e0fe4f08",
+    "build/goal-r1-manager-events-c/rea-reset.json": "56b65553de92417f5730e0596a1a27ad7ed48469e6b2213fcf8a38088fde32a4",
+    "build/goal-r1-manager-events-c/verify.py": "6f6b23925a05693f992f983a3ddd7263ee6d7e401e6403b58608996879e11d8b",
+    "build/goal-r1-manager-events-c/results.json": "ab3a8af593b8599fdf0b3cd31ae61b84d8dd3bdf444979c454f5bb2d3a9c6960",
+    "build/goal-r1-manager-events-c/verification.log": "7062ccd8e040ea06d755a744ba5cbf68e108ae58bf157cd810c5ebf45e9ebdb5",
+    "build/goal-r1-manager-events-c/source.elf": "c98a735227a998ceea9403cc5cf5df0564dfa1a788238fd152cf5f65d9e0695d",
+    "build/goal-r1-manager-events-c/pipeline/verify.py": "b16082423b92d72de4299dc2e31cc7064fcf7be324656600f5ac2ebbfb6b1c2b",
+    "build/goal-r1-manager-events-c/pipeline/results.json": "0b12c99546bfc743de6283bcd16f45e02e8aeaee064ed2d05506180ca4f60d3c",
+    "build/goal-r1-manager-events-c/pipeline/verification.log": "56d130051fbf702dde8eb55cf5d0948b309971875894ed3b137f3beb352cc9c7",
+    "build/goal-r1-manager-events-c/pipeline/source.elf": "402c738134dcad944e91bbd81a89706795e3fa71651c1fc852a18ee3b0d0ec06",
+    "build/goal-r1-manager-events-c/negative.py": "84d4f1773f3cd96c4c19c1b3e3f63dd6b520f41f159b7d50a8d09c6fec94492f",
+    "build/goal-r1-manager-events-c/negative.json": "2d61b3e7953713ffe25edffd09fb69a1774d384c8d431f3490a74fa95d39a1dd",
+    "build/goal-r1-manager-events-c/negative.log": "1a30c11177795a14f49d7457617e3bd3a4e238ff2d780abecedcc466b685b803",
+    "build/goal-r1-manager-events-c/build.log": "4ebc9875a23ebadc27e04cf046278b6bdc1daa8bd92de73e2c4f06b4e01d4f15",
+    "build/goal-r1-manager-events-c/sources-check.log": "bb9503658a261dc4202b89802e7443ce9e8e991b505e12db83f6d9ee8aa12a0c"
+  }
+}

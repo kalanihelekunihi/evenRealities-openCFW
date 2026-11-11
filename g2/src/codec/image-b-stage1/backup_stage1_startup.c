@@ -5,8 +5,9 @@
 #include <stdint.h>
 
 extern void gx8002_image_b_stage1_boot_setup_10000df0(void);
-extern void gx8002_image_b_stage2_reset_10003100(void);
+extern void gx8002_image_b_reset_10003100(void);
 
+/* Must stay assembly: reset entry that sets PSR, VBR and the stack pointer. */
 __attribute__((naked, used, section(".spl.reset")))
 void gx8002_image_b_stage1_reset_10000100(void)
 {
@@ -21,15 +22,16 @@ void gx8002_image_b_stage1_reset_10000100(void)
         "lrw r0, 0x20002ffc\n\t"
         "mov r14, r0\n\t"
         "jbsr gx8002_image_b_stage1_boot_setup_10000df0\n\t"
-        "jbsr gx8002_image_b_stage2_reset_10003100\n\t"
+        "jbsr gx8002_image_b_reset_10003100\n\t"
         "bkpt\n\t"
     );
 }
 
-__attribute__((naked, used, section(".spl.default")))
+__attribute__((noreturn, used, section(".spl.default")))
 void gx8002_image_b_stage1_default_10000130(void)
 {
-    __asm__ volatile ("1: br 1b");
+    for (;;) {
+    }
 }
 
 typedef void (*stage1_vector)(void);

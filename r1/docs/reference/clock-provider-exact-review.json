@@ -1,0 +1,284 @@
+{
+  "schema": 1,
+  "scope": "Exact RTC callback-binding request and backend wrappers admitted to canonical source plan",
+  "normal_build": {
+    "report": "build/sources-goal-r1-clock-provider-exact/report.json",
+    "units": 576,
+    "unit": {
+      "source": "r1/src/application/board/native_clock_port.c",
+      "payload": "r1-application",
+      "role": "candidate",
+      "toolchain": "clang",
+      "link": false,
+      "expect": "compile",
+      "returncode": 0,
+      "argv": [
+        "/usr/bin/clang",
+        "--target=arm-none-eabi",
+        "-mcpu=cortex-m4",
+        "-mthumb",
+        "-munaligned-access",
+        "-mfpu=fpv4-sp-d16",
+        "-mfloat-abi=hard",
+        "-std=c11",
+        "-Os",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-fshort-enums",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-fno-delete-null-pointer-checks",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/r1/src/vendor",
+        "-isystem",
+        "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
+        "-MD",
+        "-MF",
+        "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-clock-provider-exact/r1/r1-application/r1__src__application__board__native_clock_port.c.d",
+        "-c",
+        "/Users/kalani/Repo/evenRealities-openCFW/r1/src/application/board/native_clock_port.c",
+        "-o",
+        "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-clock-provider-exact/r1/r1-application/r1__src__application__board__native_clock_port.c.o"
+      ],
+      "source_sha256": "d86ad9f1a862ea0f250789918e53a765eeb6f5fe927b9d5a949a6577b96e420a",
+      "object_sha256": "face2e33595c6098f90ace062b2742d3a8c6339981af78077ad671352a64456c",
+      "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-clock-provider-exact/r1/r1-application/r1__src__application__board__native_clock_port.c.o",
+      "strong": [
+        "r1_clock_backend_bind_tick",
+        "r1_clock_backend_slot12",
+        "r1_clock_backend_update",
+        "r1_clock_rtc_bind",
+        "r1_clock_rtc_write"
+      ],
+      "weak": [],
+      "undefined": [
+        "__aeabi_memclr4",
+        "memcpy",
+        "r1_stock_dispatch_10",
+        "r1_stock_dispatch_14",
+        "r1_stock_dispatch_20",
+        "r1_structured_rtc_device"
+      ]
+    }
+  },
+  "audit": {
+    "other_objects_unchanged": 575,
+    "other_three_clock_functions_bytes_and_relocations_unchanged": true,
+    "changed_functions": [
+      ".text.r1_clock_backend_update",
+      ".text.r1_clock_backend_bind_tick"
+    ],
+    "new_empty_constraints": 2,
+    "new_assembly_instructions": 0,
+    "application_imports": 164,
+    "bootloader_imports": 34,
+    "import_sets_unchanged": true,
+    "existing_source_plan_units_unchanged": true,
+    "new_source_plan_units": 2,
+    "new_regions": 3,
+    "new_exact_bytes": 38
+  },
+  "wrapper_validation": {
+    "paired_cases": 256,
+    "executions": 512,
+    "checks": [
+      "raw arguments and ignored provider statuses",
+      "all R0-R12 values and APSR at return",
+      "native SP-8 and active R4-R11 at provider entry",
+      "final SP and interrupt masks"
+    ],
+    "limits": [
+      "RTC request providers modeled in wrapper fixture",
+      "Callback binding request itself qualified by full linked-byte equality, including literal",
+      "LR return-address bits and physical hardware excluded"
+    ]
+  },
+  "REA": {
+    "evidence_id": "ev_0fef05ee94cd5f5198d753a38995fa58d1204ea2e03bb806773b487d4906d9e9",
+    "subject": {
+      "name": "stock.elf",
+      "digest": {
+        "sha256": "25b4a29af80ec8edab5bd861ba9b74a6e22eab29dc3d7a809a16869e8a140f04"
+      },
+      "local_path": "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-queue-reset-c/stock.elf",
+      "format": "elf",
+      "architecture": "arm"
+    },
+    "provider": {
+      "id": "ghidra",
+      "name": "Ghidra",
+      "version": "12.1.4"
+    },
+    "analysis_profile": {
+      "provider": {
+        "id": "ghidra",
+        "name": "Ghidra",
+        "version": "12.1.4"
+      },
+      "parameters": {
+        "target_kind": "executable",
+        "target_format": "elf",
+        "architecture": "arm",
+        "available_architectures": [
+          "arm"
+        ],
+        "import_mode": "ephemeral-source-immutable",
+        "annotation_policy": "atomic-function-entry-metadata-v1",
+        "load_image_observations": "source-mappings-entry-context-v2",
+        "function_body_evidence": "complete-inclusive-ranges-v1",
+        "function_references": "complete-body-and-entry-reference-manager-v2",
+        "call_relationship_coverage": "function-body-call-coverage-v5",
+        "function_dossier_coverage": "observed-facets-and-call-relationships-v1",
+        "string_inventory_evidence": "defined-data-coverage-v1",
+        "location_resolution": "explicit-address-exact-entry-symbol-first-v3",
+        "procedure_file_offset_resolution": "address-first-unique-target-source-mapping-v2",
+        "instruction_flow_evidence": "decoded-return-pcode-v1",
+        "instruction_references": "exact-address-incoming-v1",
+        "function_boundary_observations": "ghidra-function-boundary-limitations-v3",
+        "no_return_repair": "returning-imports-decoded-return-v2",
+        "process_launch": "inspected-jvm-launch-support-v1",
+        "jump_table_evidence": "typed-case-default-blocks-v1",
+        "decompiler_jump_loads": true,
+        "loader": "auto-from-header",
+        "language_id": "auto-from-header",
+        "compiler_spec_id": "auto-default",
+        "analyzer_preset": "ghidra-default"
+      },
+      "digest": "7e46711069eea041af1b9b99e34115c13332795e5cda76e584a722f529ec70de"
+    },
+    "predicate_type": "rea.analysis",
+    "operation": "read_bytes",
+    "parameters": {
+      "address": "0x50daa",
+      "length": 70
+    },
+    "raw_result": {
+      "address": "0x50daa",
+      "requested_bytes": 70,
+      "returned_bytes": 70,
+      "bytes_hex": "10b5184600f017f8012010bd10b500f01af8012010bd10b5044c2068002803d103a034f088ff206010bd907600207379732072746300024602480021006834f0adbf90760020",
+      "complete": true
+    },
+    "normalized_result": {
+      "address": "0x50daa",
+      "requested_bytes": 70,
+      "returned_bytes": 70,
+      "bytes_hex": "10b5184600f017f8012010bd10b500f01af8012010bd10b5044c2068002803d103a034f088ff206010bd907600207379732072746300024602480021006834f0adbf90760020",
+      "complete": true
+    },
+    "confidence": "observed",
+    "authority": "shipped-artifact",
+    "environment": null,
+    "limitations": [
+      "The session serves operations only after Ghidra reports default auto-analysis complete; incomplete analysis does not expose partial results.",
+      "The imported Program and temporary project are ephemeral and deleted on close. Annotation operations edit session database metadata; original executable bytes are never written.",
+      "Cancelling an active Ghidra request terminates its ephemeral database and discards session annotations. The selected target remains open; the next provider query imports the original artifact again.",
+      "Default-space addresses use lowercase 0x-prefixed hexadecimal; other address spaces use <percent-encoded-space>:0x<hex>.",
+      "Bytes reflect Ghidra's initialized memory, including loader fixups. Reads stop at an unmapped or uninitialized byte and report completeness explicitly.",
+      "macOS sessions require a matching executable Ghidra native decompiler; REA checks for it but does not build native components or change Gatekeeper quarantine state."
+    ],
+    "relationship_coverage": null,
+    "locations": [],
+    "evidence_links": []
+  },
+  "qualification": {
+    "generic": "build/goal-r1-hardware-provider-qualification/final-generic/qualification.json",
+    "gcc9": "build/goal-r1-hardware-provider-qualification/final-gcc/qualification.json",
+    "selected_regions": [
+      {
+        "payload": "r1-application",
+        "symbol": "r1_clock_backend_update",
+        "start": 171446,
+        "end": 171456,
+        "sha256": "2e064ca1f0afdb9a53e8f599f8291b42f4e037b3df4152747b7ac292f84250d4",
+        "evidence": "r1/symbols/function-frontier.csv",
+        "bindings": {
+          "r1_clock_rtc_write": 331249
+        },
+        "address": 331190,
+        "binding_evidence": "r1/symbols/function-frontier.csv"
+      },
+      {
+        "payload": "r1-application",
+        "symbol": "r1_clock_backend_bind_tick",
+        "start": 171434,
+        "end": 171446,
+        "sha256": "7ed3839cbc121b8ce45a995ed1503c99126e28acc33936b2262f1671fb12d09a",
+        "evidence": "r1/symbols/function-frontier.csv",
+        "bindings": {
+          "r1_clock_rtc_bind": 331233
+        },
+        "address": 331178,
+        "binding_evidence": "r1/symbols/function-frontier.csv"
+      },
+      {
+        "payload": "r1-application",
+        "symbol": "r1_clock_rtc_bind",
+        "start": 171488,
+        "end": 171504,
+        "sha256": "fe66e84764d9ee7ad3dbc8a4766617fd0c10a579d9e334369b122aa6dbe4efde",
+        "evidence": "r1/symbols/function-frontier.csv",
+        "bindings": {
+          "r1_stock_dispatch_20": 548167,
+          "r1_structured_rtc_device": 536901264
+        },
+        "address": 331232,
+        "match_evidence": {
+          "method": "independently named native entry and all unrelocated bytes, followed by full linked equality",
+          "fixed_bytes": 8,
+          "compiled_pattern_sha256": "7efb1e3f7f3c5ca80d9eab61e2dae94ba86ac08dd0d47d943731b21dce53b29d",
+          "relocations": [
+            {
+              "symbol": "r1_stock_dispatch_20",
+              "offset": 8,
+              "relocation_type": 30,
+              "address": 548167,
+              "role": "native_function"
+            },
+            {
+              "symbol": "r1_structured_rtc_device",
+              "offset": 12,
+              "relocation_type": 2,
+              "address": 536901264,
+              "role": "native_literal_symbol"
+            }
+          ]
+        }
+      }
+    ],
+    "new_bytes": 38,
+    "normal_flags_unchanged": true,
+    "new_regions_from_official_generic_qualification": true,
+    "charger_thunk_rediscovery_not_counted_as_new": true
+  },
+  "source_plan_sha256": "0bd3ce7c6f8c5226d865fcc6cc9419301209e589b941d3dc17a63cae49b3b5a3",
+  "canonical_hybrid": {
+    "report": "build/hybrid-goal-r1-clock-provider-exact/build-report.json",
+    "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "source_completeness_proven": false,
+    "source_built_bytes_including_assembly_and_data": 3999,
+    "binary_fallback_bytes": 642161,
+    "resource_bytes": 248,
+    "new_source_built_bytes": 38
+  },
+  "battery_recovery_review": {
+    "entry": "0x3db70",
+    "unchanged": true,
+    "constraint": "Native saved R1/R2/R3 at SP-40 are also outgoing ring/SDK log arguments; a direct C replacement must retain their overlap and timestamp aliasing. No candidate admitted or evidence scope weakened."
+  },
+  "probe_hashes": {
+    "build/goal-r1-hardware-provider-qualification/verify.py": "c6d0fd8166b7c67e342d9ddd42ebb1b438cbc1f13d10e95df0db5966a8b3ff96",
+    "build/goal-r1-hardware-provider-qualification/audit.py": "58625e7aa39f2a8eff7f583a6bd7e6d102acb2132cc1c95f0d2c61cccf029532",
+    "build/goal-r1-hardware-provider-qualification/admit.py": "0121eb3381eabb0846e08f540dd628d1d3229db2d5e3bdb008f2ae9521839169",
+    "build/goal-r1-hardware-provider-qualification/rea.json": "4f1d71d11d0f0fb92b0285a9cbcc9d312d9385876622c4abb386222296836d29"
+  },
+  "limitations": [
+    "Two empty fixed-R4 compiler constraints remain; no new assembly instructions.",
+    "Exact selected fragments use recovered native addresses for cached RTC storage and request/registry providers; these are not a complete final source link.",
+    "Wrapper fixture models RTC request calls; LR return-address bits and physical devices excluded.",
+    "Source-built totals include data and assembly; not all are C instructions.",
+    "Whole-firmware source completeness and hardware operation remain unproved."
+  ]
+}

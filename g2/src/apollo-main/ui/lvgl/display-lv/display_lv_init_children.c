@@ -1,14 +1,26 @@
+/* Evidence (wave16): the ambient FPSCR token is gone. Every former ambient-FPSCR
+ * flag test in audio_uart_nema_vg_path_process_561c68 was rewritten as a direct
+ * float compare, citing its stock vcmp/vmrs+cond (ota_s200 2.2.6.10, base 0x438000,
+ * objdump --start 0x561c68). The FPSCR low 28 bits were never read, so the masks were dead. */
 /* Native LV startup children from pinned LVGL v9.3 root layout. Every
  * address below is an authenticated offset within RAM0x2006f548. */
 #include <stdint.h>
+/* Stock-RAM literals rewritten to named objects (sim-test wave 2026-10-26,
+ * .waves/sim-fix/apply.py): g2ref_X is the linker symbol X. */
+#include <stdint.h>
+extern unsigned char g2ref_audio_uart_nema_context_cell[] __asm__("audio_uart_nema_context_cell");
+extern unsigned char g2ref_g2_nema_irq_semaphore[] __asm__("g2_nema_irq_semaphore");
+extern unsigned char g2ref_g2_stock_ram_20000338[] __asm__("g2_stock_ram_20000338");
 extern uint8_t audio_uart_display_lv_root[];
 extern void audio_uart_lv_array_init_482b00(uint8_t *,uint32_t);
 extern void audio_uart_lv_draw_handlers_default_48aa80(void *);
 extern void audio_uart_lv_async_init_4d465c(void *);
 extern void audio_uart_lv_display_init_4645d8(uint32_t);
 extern void audio_uart_lv_anim_init_4d46de(void *);
-extern uint32_t audio_uart_lv_image_cache_init_4d4ad4(uint32_t);
-extern uint32_t audio_uart_lv_image_header_cache_init_4d4bdc(uint32_t);
+/* Stock 0x4d4ad4/0x4d4bdc are upstream lv_image_cache_init/lv_image_header_cache_init
+ * (lvgl/src/misc/cache/lv_image_cache.c, lv_image_header_cache.c); lv_result_t is one byte. */
+extern uint8_t lv_image_cache_init(uint32_t size);
+extern uint8_t lv_image_header_cache_init(uint32_t count);
 
 void audio_uart_lv_init_async_49acb0(void)
 {
@@ -30,8 +42,8 @@ void audio_uart_lv_init_anim_48438c(void)
 void audio_uart_lv_image_decoder_init_488f4c(uint32_t primary,uint32_t secondary)
 {
     audio_uart_lv_array_init_482b00(audio_uart_display_lv_root+0x128u,0x1cu);
-    audio_uart_lv_image_cache_init_4d4ad4(primary);
-    audio_uart_lv_image_header_cache_init_4d4bdc(secondary);
+    (void)lv_image_cache_init(primary);
+    (void)lv_image_header_cache_init(secondary);
 }
 
 /* Full native4c6d04..4c6d62: lv_span_stack_init, not timer init.
@@ -39,7 +51,7 @@ void audio_uart_lv_image_decoder_init_488f4c(uint32_t primary,uint32_t secondary
  * The configured native assert logs and faults atUINT32_MAX forever.
  * Its following allocation-error log is unreachable after that assert. */
 extern void *audio_uart_lv_malloc(uint32_t);
-extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,const char *,...);
+extern void lv_log_add(uint32_t,const char *,uint32_t,const char *,const char *,...);
 void audio_uart_lv_span_stack_init_4c6d04(void)
 {
     static const char source[] = "D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\lvgl_v9.3\\LVGL\\src\\widgets\\span\\lv_span.c";
@@ -47,11 +59,11 @@ void audio_uart_lv_span_stack_init_4c6d04(void)
     void *stack = audio_uart_lv_malloc(1796u);
     *(volatile uint32_t *)(void *)(audio_uart_display_lv_root+452u) = (uint32_t)(uintptr_t)stack;
     if(stack == 0) {
-        audio_uart_lvgl_log(3u,source,100u,function,
+        lv_log_add(3u,source,100u,function,
                            "Asserted at expression: %s (%s)","stack != NULL","Out of memory");
         for(;;) *(volatile uint32_t *)(uintptr_t)UINT32_MAX = 0u;
     }
-    if(stack == 0) audio_uart_lvgl_log(3u,source,102u,function,"malloc failed for snippet_stack");
+    if(stack == 0) lv_log_add(3u,source,102u,function,"malloc failed for snippet_stack");
 }
 
 /* Full native488f40..488f4c: zeroing wrapper; native scratch R0 is void. */
@@ -68,7 +80,7 @@ void *audio_uart_lv_image_decoder_create_4890c8(void)
     void *decoder = audio_uart_lv_list_prepend_482b12(
         (uint32_t *)(void *)(audio_uart_display_lv_root+0x128u));
     if(decoder == 0) {
-        audio_uart_lvgl_log(3u,source,179u,"lv_image_decoder_create",
+        lv_log_add(3u,source,179u,"lv_image_decoder_create",
                            "Asserted at expression: %s (%s)","decoder != NULL","Out of memory");
         for(;;) *(volatile uint32_t *)(uintptr_t)UINT32_MAX = 0u;
     }
@@ -89,12 +101,12 @@ void audio_uart_lv_bin_decoder_init_4c794c(void)
     static const char name[] = "BIN";
     uint8_t *decoder = audio_uart_lv_image_decoder_create_4890c8();
     if(decoder == 0) {
-        audio_uart_lvgl_log(3u,source,100u,function,
+        lv_log_add(3u,source,100u,function,
                            "Asserted at expression: %s (%s)","decoder != NULL","Out of memory");
         for(;;) *(volatile uint32_t *)(uintptr_t)UINT32_MAX = 0u;
     }
     if(decoder == 0) {
-        audio_uart_lvgl_log(2u,source,102u,function,"Out of memory");
+        lv_log_add(2u,source,102u,function,"Out of memory");
         return;
     }
     *(volatile uint32_t *)(void *)(decoder+0u) = (uint32_t)(uintptr_t)audio_uart_lv_bin_decoder_info_4c79d0;
@@ -149,10 +161,10 @@ uint32_t audio_uart_lv_fs_file_close_4c6ee0(void *file);
  * header. Descriptor src12/src_type16/file20. Header12 bytes.
  * Qualified by528 compiled ARM/native comparisons. */
 extern void *audio_uart_lv_grid_copy_454738(void *,const void *,uint32_t);
-extern const char *audio_uart_lv_fs_extension_4c70e4(const char *);
+extern const char *lv_fs_get_ext(const char *);
 extern int32_t audio_uart_lv_string_compare_4547be(const char *,const char *);
 extern uint32_t audio_uart_lv_fs_file_read_4c6f46(void *,void *,uint32_t,uint32_t *);
-extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,const char *,...);
+extern void lv_log_add(uint32_t,const char *,uint32_t,const char *,const char *,...);
 uint32_t audio_uart_lv_bin_decoder_info_4c79d0(void *decoder,void *descriptor,void *header)
 {
     (void)decoder;
@@ -165,15 +177,15 @@ uint32_t audio_uart_lv_bin_decoder_info_4c79d0(void *decoder,void *descriptor,vo
     if(type==0u) {
         audio_uart_lv_grid_copy_454738(header,src,12u);
     } else if(type==1u) {
-        if(audio_uart_lv_string_compare_4547be(audio_uart_lv_fs_extension_4c70e4(src),"bin") != 0) return 0u;
+        if(audio_uart_lv_string_compare_4547be(lv_fs_get_ext(src),"bin") != 0) return 0u;
         uint32_t rn;
         uint32_t res=audio_uart_lv_fs_file_read_4c6f46((void *)(dsc+20u),header,12u,&rn);
         if((uint8_t)res != 0u || rn != 12u) {
-            audio_uart_lvgl_log(2u,source,134u,function,"Read file header failed: %d with len: %u, expected: %zu",(uint8_t)res,rn,12u);
+            lv_log_add(2u,source,134u,function,"Read file header failed: %d with len: %u, expected: %zu",(uint8_t)res,rn,12u);
             return 0u;
         }
         if(*(volatile uint8_t *)header != 25u) {
-            audio_uart_lvgl_log(2u,source,144u,function,"Legacy bin image detected: %s",src);
+            lv_log_add(2u,source,144u,function,"Legacy bin image detected: %s",src);
             uint32_t magic=*(volatile uint8_t *)header;
             h[0]=(h[0]&0xffff00ffu)|(magic<<8);
             h[0]=(h[0]&0xffffff00u)|25u;
@@ -185,11 +197,11 @@ uint32_t audio_uart_lv_bin_decoder_info_4c79d0(void *decoder,void *descriptor,vo
         h[1]=(h[1]&0xffffu)|0x10000u;
         h[0]=(h[0]&0xffff00ffu)|(14u<<8);
     } else {
-        audio_uart_lvgl_log(2u,source,162u,function,"Image get info found unknown src type");
+        lv_log_add(2u,source,162u,function,"Image get info found unknown src type");
         return 0u;
     }
     if(((h[0]>>8)&255u)==0u) {
-        audio_uart_lvgl_log(2u,source,167u,function,"Image color format is unknown");
+        lv_log_add(2u,source,167u,function,"Image color format is unknown");
         return 0u;
     }
     if(*(volatile uint8_t *)header != 25u) {
@@ -205,18 +217,7 @@ extern int32_t audio_uart_font_path_compare(const char *,const char *); /* selec
 uint32_t audio_uart_lv_string_length_454768(const char *source);
 /* Retired: stock 0x4547be is upstream lv_strcmp (lvgl/src/stdlib/clib/lv_string_clib.c); this name is a link alias. */
 int32_t audio_uart_lv_string_compare_4547be(const char *a,const char *b);
-/* Full native4c70e4..4c7116. Index0 deliberately excluded by native loop. */
-const char *audio_uart_lv_fs_extension_4c70e4(const char *source)
-{
-    static const char empty[]="";
-    uint32_t i=audio_uart_lv_string_length_454768(source);
-    while(i != 0u) {
-        if((uint8_t)source[i]==46u) return source+i+1u;
-        if((uint8_t)source[i]==47u || (uint8_t)source[i]==92u) return empty;
-        --i;
-    }
-    return empty;
-}
+/* 0x4c70e4 is upstream lv_fs_get_ext (lvgl/src/misc/lv_fs.c). */
 
 /* Full native4c6f46..4c6fba. Driver offsets cache_size4/read20/seek28.
  * Cached read is a genuine child provider, not an uncached substitute. */
@@ -229,7 +230,7 @@ uint32_t audio_uart_lv_fs_file_read_4c6f46(void *file,void *buffer,uint32_t size
  * Qualified by2880 bounded compiled ARM/native comparisons. */
 extern void *audio_uart_lv_grid_copy_454738(void *,const void *,uint32_t);
 extern void *audio_uart_lv_malloc(uint32_t);
-extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,const char *,...);
+extern void lv_log_add(uint32_t,const char *,uint32_t,const char *,const char *,...);
 #define CACHE ((volatile uint32_t *)(uintptr_t)f[2])
 #define DRIVER ((volatile uint32_t *)(uintptr_t)f[1])
 #define SEEK(pos) ((uint32_t (*)(void *,void *,uint32_t,uint32_t))(uintptr_t)DRIVER[7])((void *)(uintptr_t)f[1],(void *)(uintptr_t)f[0],(pos),0u)
@@ -242,7 +243,7 @@ extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,cons
 /* Full native4c81a2..4c8204, literal pool excluded. get_decoder_data.
  * Qualified by16 bounded compiled ARM/native comparisons. */
 extern void *audio_uart_lv_heap_alloc(uint32_t); /* selected zeroed44f730 */
-extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,const char *,...);
+extern void lv_log_add(uint32_t,const char *,uint32_t,const char *,const char *,...);
 void *audio_uart_lv_bin_decoder_data_get_4c81a2(void *descriptor)
 {
     volatile uint32_t *dsc=descriptor;
@@ -251,11 +252,11 @@ void *audio_uart_lv_bin_decoder_data_get_4c81a2(void *descriptor)
     if(data==0) {
         data=audio_uart_lv_heap_alloc(68u);
         if(data==0) {
-            audio_uart_lvgl_log(3u,source,536u,"get_decoder_data","Asserted at expression: %s (%s)","data != NULL","Out of memory");
+            lv_log_add(3u,source,536u,"get_decoder_data","Asserted at expression: %s (%s)","data != NULL","Out of memory");
             for(;;) *(volatile uint32_t *)(uintptr_t)UINT32_MAX=0u;
         }
         if(data==0) {
-            audio_uart_lvgl_log(3u,source,538u,"get_decoder_data","Out of memory");
+            lv_log_add(3u,source,538u,"get_decoder_data","Out of memory");
             return 0;
         }
         dsc[18]=(uint32_t)(uintptr_t)data;
@@ -265,7 +266,7 @@ void *audio_uart_lv_bin_decoder_data_get_4c81a2(void *descriptor)
 
 /* Complete native4c7b24..4c7e22. Qualified by bounded compiled ARM/native comparisons.
  * Native literal/string4c7e24..4c7e28 is not executable code. */
-extern const char *audio_uart_lv_fs_extension_4c70e4(const char *);
+extern const char *lv_fs_get_ext(const char *);
 extern int32_t audio_uart_lv_string_compare_4547be(const char *,const char *);
 extern void *audio_uart_lv_bin_decoder_data_get_4c81a2(void *);
 extern void audio_uart_lv_bin_decoder_data_free_4c8210(void *);
@@ -284,7 +285,7 @@ extern void audio_uart_lv_draw_buf_set_flag_48b750(void *,uint32_t);
 extern void *audio_uart_lv_decoder_postprocess_489168(void *,void *);
 extern uint32_t audio_uart_lv_image_cache_enabled_4d4b24(void);
 extern void *audio_uart_lv_decoder_add_cache_48911a(void *,const void *,void *,void *);
-extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,const char *,...);
+extern void lv_log_add(uint32_t,const char *,uint32_t,const char *,const char *,...);
 uint32_t audio_uart_lv_bin_decoder_open_4c7b24(void *decoder,void *descriptor)
 {
     volatile uint32_t *d=descriptor;
@@ -292,7 +293,7 @@ uint32_t audio_uart_lv_bin_decoder_open_4c7b24(void *decoder,void *descriptor)
     uint32_t result=0u,use_direct=0u;
     if(db[16]==1u) {
         const char *src=(void *)(uintptr_t)d[3];
-        if(audio_uart_lv_string_compare_4547be(audio_uart_lv_fs_extension_4c70e4(src),"bin")!=0) return 0u;
+        if(audio_uart_lv_string_compare_4547be(lv_fs_get_ext(src),"bin")!=0) return 0u;
         volatile uint32_t *data=audio_uart_lv_bin_decoder_data_get_4c81a2(descriptor);
         if(data==0) return 0u;
         d[18]=(uint32_t)(uintptr_t)data;
@@ -300,7 +301,7 @@ uint32_t audio_uart_lv_bin_decoder_open_4c7b24(void *decoder,void *descriptor)
         if(file==0) {audio_uart_lv_bin_decoder_data_free_4c8210(descriptor);return 0u;}
         uint32_t fs=audio_uart_lv_fs_file_open_4c6d9a(file,(void *)(uintptr_t)d[3],2u);
         if((uint8_t)fs!=0u) {
-            audio_uart_lvgl_log(2u,"D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\lvgl_v9.3\\LVGL\\src\\libs\\bin_decoder\\lv_bin_decoder.c",213u,"lv_bin_decoder_open","Open file failed: %d",(uint8_t)fs);
+            lv_log_add(2u,"D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\lvgl_v9.3\\LVGL\\src\\libs\\bin_decoder\\lv_bin_decoder.c",213u,"lv_bin_decoder_open","Open file failed: %d",(uint8_t)fs);
             audio_uart_lv_heap_free(file);audio_uart_lv_bin_decoder_data_free_4c8210(descriptor);return 0u;
         }
         data[0]=(uint32_t)(uintptr_t)file;
@@ -379,7 +380,7 @@ extern void *audio_uart_lv_malloc(uint32_t);
 extern void audio_uart_lv_heap_free(void *);
 extern uint32_t audio_uart_lv_fs_read_at_4c8d3c(void *,uint32_t,void *,uint32_t,uint32_t *);
 extern uint32_t audio_uart_lv_bin_decode_indexed_line_4c8c94(uint32_t,void *,uint32_t,uint32_t,const void *,void *);
-extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,const char *,...);
+extern void lv_log_add(uint32_t,const char *,uint32_t,const char *,const char *,...);
 uint32_t audio_uart_lv_bin_decoder_get_area_4c7e4c(void *decoder,void *descriptor,const void *full_area,void *decoded_area)
 {
     (void)decoder;
@@ -389,10 +390,10 @@ uint32_t audio_uart_lv_bin_decoder_get_area_4c7e4c(void *decoder,void *descripto
     uint32_t cf=(uint8_t)(d[8]>>8);
     static const char source[]="D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\lvgl_v9.3\\LVGL\\src\\libs\\bin_decoder\\lv_bin_decoder.c";
     if(!(cf-7u<4u||cf==16u||cf==17u||cf==15u||cf==18u||cf==19u||cf==20u)) {
-        audio_uart_lvgl_log(2u,source,405u,"lv_bin_decoder_get_area","CF: %d is not supported",cf);return 0u;
+        lv_log_add(2u,source,405u,"lv_bin_decoder_get_area","CF: %d is not supported",cf);return 0u;
     }
     volatile uint32_t *data=(void *)(uintptr_t)d[18];
-    if(data==0) {audio_uart_lvgl_log(3u,source,412u,"lv_bin_decoder_get_area","Unexpected null decoder data");return 0u;}
+    if(data==0) {lv_log_add(3u,source,412u,"lv_bin_decoder_get_area","Unexpected null decoder data");return 0u;}
     void *file=(void *)(uintptr_t)data[0];
     uint32_t bpp=audio_uart_lv_color_bpp_440f44(cf);
     uint32_t width=audio_uart_lv_area_width_451598(full_area);
@@ -423,7 +424,7 @@ uint32_t audio_uart_lv_bin_decoder_get_area_4c7e4c(void *decoder,void *descripto
         if(db[16]==1u) {
             buffer=audio_uart_lv_malloc(length);
             if(buffer==0) {
-                audio_uart_lvgl_log(3u,source,463u,"lv_bin_decoder_get_area","Asserted at expression: %s (%s)","buf != NULL","NULL pointer");
+                lv_log_add(3u,source,463u,"lv_bin_decoder_get_area","Asserted at expression: %s (%s)","buf != NULL","NULL pointer");
                 for(;;) *(volatile uint32_t *)(uintptr_t)UINT32_MAX=0u;
             }
             if(buffer==0) return 0u;
@@ -455,7 +456,7 @@ uint32_t audio_uart_lv_bin_decoder_get_area_4c7e4c(void *decoder,void *descripto
 
 
 extern uint8_t audio_uart_display_lv_root[];
-extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,const char *,...);
+extern void lv_log_add(uint32_t,const char *,uint32_t,const char *,const char *,...);
 
 extern uint8_t audio_uart_display_lv_root[];
 extern void audio_uart_lv_basic_box_clear_454746(void *,uint32_t,uint32_t);
@@ -546,7 +547,7 @@ extern uint8_t audio_uart_display_lv_root[];
 extern void *audio_uart_lv_draw_buf_create_ex_48b010(void *,uint32_t,uint32_t,uint32_t,uint32_t);
 extern uint32_t audio_uart_lv_fs_read_at_4c8d3c(void *,uint32_t,void *,uint32_t,uint32_t *);
 extern void audio_uart_font_bitmap_release(void *);
-extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,const char *,...);
+extern void lv_log_add(uint32_t,const char *,uint32_t,const char *,const char *,...);
 /* Full native4c8780..4c884a. Saved decoder data/file ownership survives children. */
 uint32_t audio_uart_lv_bin_decode_rgb_4c8780(void *decoder,void *descriptor)
 {
@@ -562,14 +563,14 @@ uint32_t audio_uart_lv_bin_decode_rgb_4c8780(void *decoder,void *descriptor)
         (uint16_t)d[9],d[9]>>16u,(uint8_t)cf,stride);
     static const char source[]="D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\lvgl_v9.3\\LVGL\\src\\libs\\bin_decoder\\lv_bin_decoder.c";
     if(decoded==0) {
-        audio_uart_lvgl_log(3u,source,800u,"decode_rgb","No memory for rgb file read");
+        lv_log_add(3u,source,800u,"decode_rgb","No memory for rgb file read");
         return 0u;
     }
     void *pixels=(void *)(uintptr_t)((volatile uint32_t *)decoded)[4];
     uint32_t count;
     uint32_t result=audio_uart_lv_fs_read_at_4c8d3c(file,12u,pixels,len,&count);
     if((uint8_t)result!=0u || count!=len) {
-        audio_uart_lvgl_log(2u,source,809u,"decode_rgb",
+        lv_log_add(2u,source,809u,"decode_rgb",
             "Read rgb file failed: %d, with len: %u, expected: %u",(uint32_t)(uint8_t)result,count,len);
         audio_uart_font_bitmap_release(decoded);
         return 0u;
@@ -585,7 +586,7 @@ extern void *audio_uart_lv_draw_buf_create_ex_48b010(void *,uint32_t,uint32_t,ui
 extern uint32_t audio_uart_lv_fs_read_at_4c8d3c(void *,uint32_t,void *,uint32_t,uint32_t *);
 extern void *audio_uart_lv_grid_copy_454738(void *,const void *,uint32_t);
 extern void audio_uart_font_bitmap_release(void *);
-extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,const char *,...);
+extern void lv_log_add(uint32_t,const char *,uint32_t,const char *,const char *,...);
 static uint32_t alpha_lsl(uint32_t value,uint32_t shift)
 {
     uint32_t amount=(uint8_t)shift;
@@ -611,7 +612,7 @@ uint32_t audio_uart_lv_bin_decode_alpha_4c887c(void *decoder,void *descriptor)
     uint32_t bits=audio_uart_lv_color_bpp_440f44((uint8_t)(d[8]>>8u));
     static const char source[]="D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\lvgl_v9.3\\LVGL\\src\\libs\\bin_decoder\\lv_bin_decoder.c";
     if((uint8_t)bits==0u) {
-        audio_uart_lvgl_log(3u,source,846u,"decode_alpha_only","Error color format: %d",(uint32_t)(uint8_t)(d[8]>>8u));
+        lv_log_add(3u,source,846u,"decode_alpha_only","Error color format: %d",(uint32_t)(uint8_t)(d[8]>>8u));
         return 0u;
     }
     uint32_t row=((uint32_t)(uint16_t)d[10]*8u)/(uint8_t)bits;
@@ -621,7 +622,7 @@ uint32_t audio_uart_lv_bin_decode_alpha_4c887c(void *decoder,void *descriptor)
     void *decoded=audio_uart_lv_draw_buf_create_ex_48b010(audio_uart_display_lv_root+0x108u,
         (uint16_t)d[9],d[9]>>16u,14u,out_stride);
     if(decoded==0) {
-        audio_uart_lvgl_log(3u,source,859u,"decode_alpha_only","Out of memory");
+        lv_log_add(3u,source,859u,"decode_alpha_only","Out of memory");
         return 0u;
     }
     uintptr_t pixels=((volatile uint32_t *)decoded)[4];
@@ -632,7 +633,7 @@ uint32_t audio_uart_lv_bin_decode_alpha_4c887c(void *decoder,void *descriptor)
         uint32_t count;
         uint32_t result=audio_uart_lv_fs_read_at_4c8d3c((void *)(uintptr_t)data[0],12u,(void *)pixels,file_len,&count);
         if((uint8_t)result!=0u || count!=file_len) {
-            audio_uart_lvgl_log(2u,source,872u,"decode_alpha_only",
+            lv_log_add(2u,source,872u,"decode_alpha_only",
                 "Read header failed: %d, with len: %u, expected: %u",(uint32_t)(uint8_t)result,count,file_len);
             audio_uart_font_bitmap_release(decoded);
             return 0u;
@@ -670,7 +671,7 @@ extern uint32_t audio_uart_lv_fs_read_at_4c8d3c(void *,uint32_t,void *,uint32_t,
 extern uint32_t audio_uart_lv_fs_file_seek_4c6fba(void *,uint32_t,uint32_t);
 extern uint32_t audio_uart_lv_fs_file_tell_4c7018(void *,uint32_t *);
 extern void audio_uart_font_bitmap_release(void *);
-extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,const char *,...);
+extern void lv_log_add(uint32_t,const char *,uint32_t,const char *,const char *,...);
 /* Full native4c8570..4c8778; saved data/file and fresh header loads retained. */
 uint32_t audio_uart_lv_bin_load_indexed_4c8570(void *decoder,void *descriptor)
 {
@@ -701,7 +702,7 @@ uint32_t audio_uart_lv_bin_load_indexed_4c8570(void *decoder,void *descriptor)
         void *decoded=audio_uart_lv_draw_buf_create_ex_48b010(audio_uart_display_lv_root+0x108u,
             (uint16_t)d[9],d[9]>>16u,(uint8_t)cf,stride);
         if(decoded==0) {
-            audio_uart_lvgl_log(3u,source,742u,"load_indexed","Draw buffer alloc failed");return 0u;
+            lv_log_add(3u,source,742u,"load_indexed","Draw buffer alloc failed");return 0u;
         }
         uintptr_t pixels=((volatile uint32_t *)decoded)[4];
         uint32_t palette;
@@ -709,26 +710,26 @@ uint32_t audio_uart_lv_bin_load_indexed_4c8570(void *decoder,void *descriptor)
         uint32_t count;
         uint32_t result=audio_uart_lv_fs_read_at_4c8d3c(file,12u,(void *)pixels,palette,&count);
         if((uint8_t)result!=0u || count!=palette) {
-            audio_uart_lvgl_log(2u,source,750u,"load_indexed","Read palette failed: %d, with len: %u, expected: %u",
+            lv_log_add(2u,source,750u,"load_indexed","Read palette failed: %d, with len: %u, expected: %u",
                 (uint32_t)(uint8_t)result,count,palette);
             audio_uart_font_bitmap_release(decoded);return 0u;
         }
         uint32_t length=0u;
         if(audio_uart_lv_fs_file_seek_4c6fba(file,0u,2u)!=0u || audio_uart_lv_fs_file_tell_4c7018(file,&length)!=0u) {
-            audio_uart_lvgl_log(2u,source,758u,"load_indexed","Failed to get file to size");
+            lv_log_add(2u,source,758u,"load_indexed","Failed to get file to size");
             audio_uart_font_bitmap_release(decoded);return 0u;
         }
         uint32_t offset=palette+12u;
         length-=offset;
         result=audio_uart_lv_fs_read_at_4c8d3c(file,offset,(void *)(pixels+palette),length,&count);
         if((uint8_t)result!=0u || count!=length) {
-            audio_uart_lvgl_log(2u,source,768u,"load_indexed","Read indexed image failed: %d, with len: %u, expected: %u",
+            lv_log_add(2u,source,768u,"load_indexed","Read indexed image failed: %d, with len: %u, expected: %u",
                 (uint32_t)(uint8_t)result,count,length);
             audio_uart_font_bitmap_release(decoded);return 0u;
         }
         data[7]=(uint32_t)(uintptr_t)decoded;d[11]=(uint32_t)(uintptr_t)decoded;return 1u;
     }
-    audio_uart_lvgl_log(3u,source,778u,"load_indexed","Unknown src type: %d",(uint32_t)((volatile uint8_t *)descriptor)[16]);
+    lv_log_add(3u,source,778u,"load_indexed","Unknown src type: %d",(uint32_t)((volatile uint8_t *)descriptor)[16]);
     return 0u;
 }
 
@@ -741,7 +742,7 @@ extern uint32_t audio_uart_lv_fs_file_seek_4c6fba(void *,uint32_t,uint32_t);
 extern uint32_t audio_uart_lv_fs_file_tell_4c7018(void *,uint32_t *);
 extern uint32_t audio_uart_lv_bin_decode_indexed_line_4c8c94(uint32_t,void *,uint32_t,uint32_t,const void *,void *);
 extern void audio_uart_font_bitmap_release(void *);
-extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,const char *,...);
+extern void lv_log_add(uint32_t,const char *,uint32_t,const char *,const char *,...);
 /* Full native4c8256..4c8554; literal pool excluded. */
 uint32_t audio_uart_lv_bin_decode_indexed_4c8256(void *decoder,void *descriptor)
 {
@@ -765,29 +766,29 @@ uint32_t audio_uart_lv_bin_decode_indexed_4c8256(void *decoder,void *descriptor)
     } else if(((volatile uint8_t *)descriptor)[16]==1u) {
         palette=audio_uart_lv_malloc(palette_len);
         if(palette==0) {
-            audio_uart_lvgl_log(3u,source,588u,function,"Asserted at expression: %s (%s)","palette != NULL","Out of memory");
+            lv_log_add(3u,source,588u,function,"Asserted at expression: %s (%s)","palette != NULL","Out of memory");
             for(;;) *(volatile uint32_t *)(uintptr_t)UINT32_MAX=0u;
         }
-        if(palette==0) {audio_uart_lvgl_log(3u,source,590u,function,"Out of memory");return 0u;}
+        if(palette==0) {lv_log_add(3u,source,590u,function,"Out of memory");return 0u;}
         uint32_t count;
         uint32_t result=audio_uart_lv_fs_read_at_4c8d3c(file,12u,palette,palette_len,&count);
         if((uint8_t)result!=0u || count!=palette_len) {
-            audio_uart_lvgl_log(2u,source,596u,function,"Read palette failed: %d, with len: %u, expected: %u",(uint32_t)(uint8_t)result,count,palette_len);
+            lv_log_add(2u,source,596u,function,"Read palette failed: %d, with len: %u, expected: %u",(uint32_t)(uint8_t)result,count,palette_len);
             audio_uart_lv_heap_free(palette);return 0u;
         }
         data[1]=(uint32_t)(uintptr_t)palette;
         uint32_t stride=(uint16_t)d[10];
         indexed=audio_uart_lv_draw_buf_create_ex_48b010(audio_uart_display_lv_root+0x108u,(uint16_t)d[9],d[9]>>16u,cf,stride);
-        if(indexed==0) {audio_uart_lvgl_log(3u,source,607u,function,"Draw buffer alloc failed");goto cleanup;}
+        if(indexed==0) {lv_log_add(3u,source,607u,function,"Draw buffer alloc failed");goto cleanup;}
         input=((volatile uint32_t *)indexed)[4];
         uint32_t length=0u;
         if(audio_uart_lv_fs_file_seek_4c6fba(file,0u,2u)!=0u || audio_uart_lv_fs_file_tell_4c7018(file,&length)!=0u) {
-            audio_uart_lvgl_log(2u,source,616u,function,"Failed to get file to size");goto cleanup;
+            lv_log_add(2u,source,616u,function,"Failed to get file to size");goto cleanup;
         }
         uint32_t offset=palette_len+12u;length-=offset;
         result=audio_uart_lv_fs_read_at_4c8d3c(file,offset,(void *)input,length,&count);
         if((uint8_t)result!=0u || count!=length) {
-            audio_uart_lvgl_log(2u,source,624u,function,"Read indexed image failed: %d, with len: %u, expected: %u",(uint32_t)(uint8_t)result,count,length);goto cleanup;
+            lv_log_add(2u,source,624u,function,"Read indexed image failed: %d, with len: %u, expected: %u",(uint32_t)(uint8_t)result,count,length);goto cleanup;
         }
     } else if(((volatile uint8_t *)descriptor)[16]==0u) {
         volatile uint32_t *image=(volatile uint32_t *)(uintptr_t)d[3];
@@ -795,7 +796,7 @@ uint32_t audio_uart_lv_bin_decode_indexed_4c8256(void *decoder,void *descriptor)
     } else return 0u;
     d[12]=(uint32_t)(uintptr_t)palette;d[13]=entries;
     void *decoded=audio_uart_lv_draw_buf_create_ex_48b010(audio_uart_display_lv_root+0x108u,(uint16_t)d[9],d[9]>>16u,16u,0u);
-    if(decoded==0) {audio_uart_lvgl_log(3u,source,647u,function,"No memory for indexed image");goto cleanup;}
+    if(decoded==0) {lv_log_add(3u,source,647u,function,"No memory for indexed image");goto cleanup;}
     uint32_t out_stride=(uint16_t)((volatile uint32_t *)decoded)[2];
     uintptr_t output=((volatile uint32_t *)decoded)[4];
     for(uint32_t y=0u;y<(d[9]>>16u);++y) {
@@ -819,9 +820,9 @@ extern uint8_t audio_uart_display_lv_root[];
 extern void *audio_uart_lv_bin_decoder_data_get_4c81a2(void *);
 extern void *audio_uart_lv_draw_buf_create_ex_48b010(void *,uint32_t,uint32_t,uint32_t,uint32_t);
 extern void audio_uart_font_bitmap_release(void *);
-extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,const char *,...);
+extern void lv_log_add(uint32_t,const char *,uint32_t,const char *,const char *,...);
 /* Full native4c8d8c..4c8e78. RLE/LZ4 are disabled in the locked native build;
- * these are native diagnostic/cleanup branches, not substitute codec stubs. */
+ * these are native diagnostic/cleanup branches, not substitute codec leaves. */
 uint32_t audio_uart_lv_bin_decompress_image_4c8d8c(void *descriptor,void *compressed)
 {
     volatile uint32_t *d=descriptor,*c=compressed;
@@ -832,18 +833,18 @@ uint32_t audio_uart_lv_bin_decompress_image_4c8d8c(void *descriptor,void *compre
     static const char source[]="D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\lvgl_v9.3\\LVGL\\src\\libs\\bin_decoder\\lv_bin_decoder.c";
     static const char function[]="decompress_image";
     if(decoded==0) {
-        audio_uart_lvgl_log(2u,source,1117u,function,"No memory for decompressed image, input: %u, output: %u",input_len,out_len);return 0u;
+        lv_log_add(2u,source,1117u,function,"No memory for decompressed image, input: %u, output: %u",input_len,out_len);return 0u;
     }
     if(((volatile uint32_t *)decoded)[3]<out_len) {
-        audio_uart_lvgl_log(3u,source,1122u,function,"Decompressed size mismatch: %u > %u",out_len,((volatile uint32_t *)decoded)[3]);
+        lv_log_add(3u,source,1122u,function,"Decompressed size mismatch: %u > %u",out_len,((volatile uint32_t *)decoded)[3]);
         audio_uart_font_bitmap_release(decoded);return 0u;
     }
     (void)((volatile uint32_t *)decoded)[4];
     if((((volatile uint8_t *)compressed)[0]&15u)==1u)
-        audio_uart_lvgl_log(2u,source,1147u,function,"RLE decompress is not enabled");
+        lv_log_add(2u,source,1147u,function,"RLE decompress is not enabled");
     else if((((volatile uint8_t *)compressed)[0]&15u)==2u)
-        audio_uart_lvgl_log(2u,source,1164u,function,"LZ4 decompress is not enabled");
-    else audio_uart_lvgl_log(2u,source,1171u,function,"Unknown compression method: %d",(uint32_t)(((volatile uint8_t *)compressed)[0]&15u));
+        lv_log_add(2u,source,1164u,function,"LZ4 decompress is not enabled");
+    else lv_log_add(2u,source,1171u,function,"Unknown compression method: %d",(uint32_t)(((volatile uint8_t *)compressed)[0]&15u));
     audio_uart_font_bitmap_release(decoded);return 0u;
 }
 
@@ -860,7 +861,7 @@ extern uint32_t audio_uart_lv_bin_decompress_image_4c8d8c(void *,void *);
 extern uint32_t audio_uart_lv_bin_load_indexed_4c8570(void *,void *);
 extern uint32_t audio_uart_lv_bin_decode_indexed_4c8256(void *,void *);
 extern uint32_t audio_uart_lv_bin_decode_alpha_4c887c(void *,void *);
-extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,const char *,...);
+extern void lv_log_add(uint32_t,const char *,uint32_t,const char *,const char *,...);
 /* Full native4c7940..4c794c; R0 scratch is not a return contract. */
 void audio_uart_lv_bin_memzero_4c7940(void *object,uint32_t size)
 {
@@ -881,22 +882,22 @@ uint32_t audio_uart_lv_bin_decode_compressed_4c8a2c(void *decoder,void *descript
         void *file=(void *)(uintptr_t)data[0];
         uint32_t length;
         if(audio_uart_lv_fs_file_seek_4c6fba(file,0u,2u)!=0u || audio_uart_lv_fs_file_tell_4c7018(file,&length)!=0u) {
-            audio_uart_lvgl_log(2u,source,933u,function,"Failed to get compressed file len");return 0u;
+            lv_log_add(2u,source,933u,function,"Failed to get compressed file len");return 0u;
         }
         length-=12u;length-=12u;
         uint32_t count;
         uint32_t result=audio_uart_lv_fs_read_at_4c8d3c(file,12u,(void *)compressed,12u,&count);
         if((uint8_t)result!=0u || count!=12u) {
-            audio_uart_lvgl_log(2u,source,944u,function,"Read compressed header failed: %d, with len: %u, expected: %u",(uint32_t)(uint8_t)result,count,12u);return 0u;
+            lv_log_add(2u,source,944u,function,"Read compressed header failed: %d, with len: %u, expected: %u",(uint32_t)(uint8_t)result,count,12u);return 0u;
         }
         if(compressed[1]!=length) {
-            audio_uart_lvgl_log(2u,source,949u,function,"Compressed size mismatch: %u != %u",compressed[1],length);return 0u;
+            lv_log_add(2u,source,949u,function,"Compressed size mismatch: %u != %u",compressed[1],length);return 0u;
         }
         file_buffer=audio_uart_lv_malloc(length);
-        if(file_buffer==0) {audio_uart_lvgl_log(2u,source,955u,function,"No memory for compressed file");return 0u;}
+        if(file_buffer==0) {lv_log_add(2u,source,955u,function,"No memory for compressed file");return 0u;}
         result=audio_uart_lv_fs_file_read_4c6f46(file,file_buffer,length,&count);
         if((uint8_t)result!=0u || count!=length) {
-            audio_uart_lvgl_log(2u,source,964u,function,"Read compressed file failed: %d, with len: %u, expected: %u",(uint32_t)(uint8_t)result,count,length);
+            lv_log_add(2u,source,964u,function,"Read compressed file failed: %d, with len: %u, expected: %u",(uint32_t)(uint8_t)result,count,length);
             audio_uart_lv_heap_free(file_buffer);return 0u;
         }
         compressed[3]=(uint32_t)(uintptr_t)file_buffer;
@@ -906,13 +907,13 @@ uint32_t audio_uart_lv_bin_decode_compressed_4c8a2c(void *decoder,void *descript
         audio_uart_lv_grid_copy_454738((void *)compressed,(void *)(uintptr_t)image[4],12u);
         compressed[3]=image[4]+12u;
         if(compressed[1]!=length) {
-            audio_uart_lvgl_log(2u,source,982u,function,"Compressed size mismatch: %u != %u",compressed[1],length);return 0u;
+            lv_log_add(2u,source,982u,function,"Compressed size mismatch: %u != %u",compressed[1],length);return 0u;
         }
-    } else {audio_uart_lvgl_log(2u,source,987u,function,"Compressed image only support file or variable");return 0u;}
+    } else {lv_log_add(2u,source,987u,function,"Compressed image only support file or variable");return 0u;}
     uint32_t result=audio_uart_lv_bin_decompress_image_4c8d8c(descriptor,(void *)compressed);
     compressed[3]=0u;
     audio_uart_lv_heap_free(file_buffer);
-    if((uint8_t)result!=1u) {audio_uart_lvgl_log(2u,source,995u,function,"Decompress failed");return 0u;}
+    if((uint8_t)result!=1u) {lv_log_add(2u,source,995u,function,"Decompress failed");return 0u;}
     volatile uint32_t *image=(volatile uint32_t *)(uintptr_t)d[3];
     if(((volatile uint8_t *)descriptor)[16]==0u && image[4]==0u) return 0u;
     uint8_t cf=(uint8_t)(d[8]>>8u);
@@ -926,7 +927,7 @@ uint32_t audio_uart_lv_bin_decode_compressed_4c8a2c(void *decoder,void *descript
 
 extern uint8_t audio_uart_display_lv_root[];
 extern void *audio_uart_lv_cache_add_4d4eea(void *,const void *,void *);
-extern void *audio_uart_font_cache_info(void *);
+extern void *lv_cache_entry_get_data(void *);
 extern char *audio_uart_font_path_duplicate(const char *);
 /* Full native48911a..489168; key source type is a byte at offset8. */
 void *audio_uart_lv_decoder_add_cache_48911a(void *decoder,const void *key,void *decoded,void *user_data)
@@ -934,7 +935,7 @@ void *audio_uart_lv_decoder_add_cache_48911a(void *decoder,const void *key,void 
     void *cache=(void *)(uintptr_t)*(volatile uint32_t *)(void *)(audio_uart_display_lv_root+0x134u);
     void *entry=audio_uart_lv_cache_add_4d4eea(cache,key,0);
     if(entry==0) return 0;
-    volatile uint32_t *data=audio_uart_font_cache_info(entry);
+    volatile uint32_t *data=lv_cache_entry_get_data(entry);
     data[3]=(uint32_t)(uintptr_t)decoded;
     if(((volatile uint8_t *)data)[8]==1u)
         data[1]=(uint32_t)(uintptr_t)audio_uart_font_path_duplicate((const char *)(uintptr_t)data[1]);
@@ -957,7 +958,7 @@ extern uint32_t audio_uart_lv_color_has_alpha_440fc4(uint32_t);
 extern uint32_t audio_uart_lv_draw_buf_has_flag_48b73c(const void *,uint32_t);
 extern uint32_t audio_uart_lv_draw_buf_premultiply_48b540(void *);
 extern void *audio_uart_lv_draw_buf_duplicate_ex_48b134(void *,const void *);
-extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,const char *,...);
+extern void lv_log_add(uint32_t,const char *,uint32_t,const char *,const char *,...);
 /* Full native489168..48925a; fresh header loads preserve child-call mutations. */
 void *audio_uart_lv_decoder_postprocess_489168(void *descriptor,void *decoded)
 {
@@ -970,14 +971,14 @@ void *audio_uart_lv_decoder_postprocess_489168(void *descriptor,void *decoded)
         uint32_t expected=audio_uart_font_bitmap_stride((uint16_t)buf[1],(uint8_t)(buf[0]>>8u));
         if((uint16_t)buf[2]!=expected && (uint8_t)audio_uart_lv_draw_buf_adjust_stride_48b34e((void *)buf,expected)!=1u) {
             void *aligned=audio_uart_lv_draw_buf_create_ex_48b010(audio_uart_display_lv_root+0x108u,(uint16_t)buf[1],buf[1]>>16u,(uint8_t)(buf[0]>>8u),expected);
-            if(aligned==0) {audio_uart_lvgl_log(3u,source,258u,function,"No memory for Stride adjust.");return 0;}
+            if(aligned==0) {lv_log_add(3u,source,258u,function,"No memory for Stride adjust.");return 0;}
             audio_uart_lv_draw_buf_copy_48ad42(aligned,0,(void *)buf,0);buf=aligned;
         }
     }
     if(args[1]!=0u && (uint32_t)((uint8_t)(buf[0]>>8u))-11u>=4u && audio_uart_lv_color_has_alpha_440fc4((uint8_t)(buf[0]>>8u))!=0u && audio_uart_lv_draw_buf_has_flag_48b73c((void *)buf,1u)==0u) {
         if(audio_uart_lv_draw_buf_has_flag_48b73c((void *)buf,32u)==0u) {
             buf=audio_uart_lv_draw_buf_duplicate_ex_48b134(audio_uart_display_lv_root+0x108u,(void *)buf);
-            if(buf==0) {audio_uart_lvgl_log(3u,source,282u,function,"No memory for premultiplying.");return 0;}
+            if(buf==0) {lv_log_add(3u,source,282u,function,"No memory for premultiplying.");return 0;}
         }
         audio_uart_lv_draw_buf_premultiply_48b540((void *)buf);
     }
@@ -994,7 +995,7 @@ extern uint32_t audio_uart_font_bitmap_stride(uint32_t,uint8_t);
 extern uint32_t audio_uart_lv_color_bpp_440f44(uint32_t);
 extern uint32_t audio_uart_lv_draw_buf_size_48b86c(uint32_t,uint32_t,uint32_t,uint32_t);
 extern void *audio_uart_lv_grid_move_45475a(void *,const void *,uint32_t);
-extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,const char *,...);
+extern void lv_log_add(uint32_t,const char *,uint32_t,const char *,const char *,...);
 
 #include <stdint.h>
 extern void *audio_queue_copy_bytes(void *,const void *,uint32_t);
@@ -1047,7 +1048,7 @@ void audio_uart_compiler_move_439710(void *destination,const void *source,uint32
 
 #include <stdint.h>
 extern void audio_uart_lv_basic_box_clear_454746(void *,uint32_t,uint32_t);
-extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,const char *,...);
+extern void lv_log_add(uint32_t,const char *,uint32_t,const char *,const char *,...);
 /* Full native440f38..440f44; return scratch is not a void API contract. */
 void audio_uart_lv_color_zero_440f38(void *color,uint32_t size)
 {
@@ -1083,115 +1084,28 @@ extern int32_t audio_uart_lv_area_width_451598(const int32_t *);
 extern void *audio_uart_lv_draw_buf_goto_xy_48b2aa(const void *,uint32_t,uint32_t);
 extern uint32_t audio_uart_lv_color_bpp_440f44(uint32_t);
 extern void *audio_uart_lv_grid_copy_454738(void *,const void *,uint32_t);
-extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,const char *,...);
+extern void lv_log_add(uint32_t,const char *,uint32_t,const char *,const char *,...);
 
 #include <stdint.h>
 extern uint32_t audio_uart_lv_color_bpp_440f44(uint32_t);
-extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,const char *,...);
+extern void lv_log_add(uint32_t,const char *,uint32_t,const char *,const char *,...);
 
 #include <stdint.h>
-extern uint32_t audio_uart_lv_lock_core(void *);
-extern uint32_t audio_uart_lv_unlock_core(void *);
+extern uint32_t lv_mutex_lock(void *);
+extern uint32_t lv_mutex_unlock(void *);
 extern void *audio_uart_lv_cache_add_internal_4d51c0(void *,const void *,uint32_t);
 extern void *audio_uart_font_cache_acquire_data(void *);
-extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,const char *,...);
+extern void lv_log_add(uint32_t,const char *,uint32_t,const char *,const char *,...);
 /* Retired: stock 0x4d4eea is upstream lv_cache_add (lvgl/src/misc/cache/lv_cache.c); this name is a link alias. */
 void *audio_uart_lv_cache_add_4d4eea(void *cache,const void *key,void *user_data);
 
-#include <stdint.h>
-extern int32_t audio_uart_lv_string_compare_4547be(const char *,const char *);
-extern uint32_t audio_uart_lv_draw_buf_has_flag_48b73c(const void *,uint32_t);
-extern void audio_uart_font_bitmap_release(void *);
-extern void audio_uart_lv_heap_free(void *);
-/* Full native4d4b32..4d4b94 and duplicated4d4c3a..4d4c9c. */
-static int32_t source_order(uint32_t a,uint32_t ak,uint32_t b,uint32_t bk)
-{
-    ak=(uint8_t)ak; bk=(uint8_t)bk;
-    if(ak!=bk) return ak>bk ? 1 : -1;
-    if(ak==1u) {
-        int32_t cmp=audio_uart_lv_string_compare_4547be(
-            (const char *)(uintptr_t)a,(const char *)(uintptr_t)b);
-        return cmp==0 ? 0 : cmp>0 ? 1 : -1;
-    }
-    if(ak==0u) return a==b ? 0 : a>b ? 1 : -1;
-    return 0;
-}
-int32_t audio_uart_lv_image_source_compare_4d4b32(uint32_t a,uint32_t ak,uint32_t b,uint32_t bk)
-{ return source_order(a,ak,b,bk); }
-int32_t audio_uart_lv_image_header_source_compare_4d4c3a(uint32_t a,uint32_t ak,uint32_t b,uint32_t bk)
-{ return source_order(a,ak,b,bk); }
-/* Full native4d4b94..4d4ba4: image node kind at8,source at4. */
-int32_t audio_uart_lv_image_cache_compare_4d4b94(const void *a,const void *b)
-{
-    const volatile uint8_t *x=a,*y=b;
-    return audio_uart_lv_image_source_compare_4d4b32(
-        *(const volatile uint32_t *)(const void *)(x+4),x[8],
-        *(const volatile uint32_t *)(const void *)(y+4),y[8]);
-}
-/* Full native4d4c9c..4d4cac: header node kind at4,source at0. */
-int32_t audio_uart_lv_image_header_cache_compare_4d4c9c(const void *a,const void *b)
-{
-    const volatile uint8_t *x=a,*y=b;
-    return audio_uart_lv_image_header_source_compare_4d4c3a(
-        *(const volatile uint32_t *)(const void *)x,x[4],
-        *(const volatile uint32_t *)(const void *)y,y[4]);
-}
-/* Full native4d4ba4..4d4bca. Saved draw owner and fresh key after child. */
-void audio_uart_lv_image_cache_free_4d4ba4(void *entry)
-{
-    volatile uint8_t *p=entry;
-    void *draw=(void *)(uintptr_t)*(volatile uint32_t *)(void *)(p+12);
-    if(audio_uart_lv_draw_buf_has_flag_48b73c(draw,16u)!=0u)
-        audio_uart_font_bitmap_release(draw);
-    if(p[8]==1u) audio_uart_lv_heap_free(
-        (void *)(uintptr_t)*(volatile uint32_t *)(void *)(p+4));
-}
-/* Full native4d4cac..4d4cbc. */
-void audio_uart_lv_image_header_cache_free_4d4cac(void *entry)
-{
-    volatile uint8_t *p=entry;
-    if(p[4]==1u) audio_uart_lv_heap_free(
-        (void *)(uintptr_t)*(volatile uint32_t *)(void *)p);
-}
-
-/* Native image and header cache startup bindings: round104. */
-#include <stdint.h>
-extern uint8_t audio_uart_display_lv_root[];
-extern const uintptr_t audio_uart_font_cache_backend_vtable[10];
-extern const uintptr_t audio_uart_lv_cache_size_backend_vtable[10];
-extern void *audio_uart_lv_cache_create_4d4cd4(const uint32_t *,uint32_t,uint32_t,uint32_t,uint32_t,uint32_t);
-extern int32_t audio_uart_lv_image_cache_compare_4d4b94(const void *,const void *);
-extern int32_t audio_uart_lv_image_header_cache_compare_4d4c9c(const void *,const void *);
-extern void audio_uart_lv_image_cache_free_4d4ba4(void *);
-extern void audio_uart_lv_image_header_cache_free_4d4cac(void *);
-/* Retired: stock 0x4d5114 is upstream lv_cache_set_name (lvgl/src/misc/cache/lv_cache.c); this name is a link alias. */
-void audio_uart_lv_cache_set_name_4d5114(void *cache,const char *name);
-/* Native4d4ad4..4d4b24: image-cache startup, not font init. */
-uint32_t audio_uart_lv_image_cache_init_4d4ad4(uint32_t size)
-{
-    volatile uint32_t *slot=(void *)(audio_uart_display_lv_root+0x134u);
-    if(*slot!=0u) return 1u;
-    void *cache=audio_uart_lv_cache_create_4d4cd4(
-        (const uint32_t *)audio_uart_lv_cache_size_backend_vtable,24u,size,
-        (uint32_t)(uintptr_t)audio_uart_lv_image_cache_compare_4d4b94,0u,
-        (uint32_t)(uintptr_t)audio_uart_lv_image_cache_free_4d4ba4);
-    *slot=(uint32_t)(uintptr_t)cache;
-    audio_uart_lv_cache_set_name_4d5114((void *)(uintptr_t)*slot,"IMAGE");
-    return *slot!=0u ? 1u : 0u;
-}
-/* Native4d4bdc..4d4c2c: header-cache startup, not font deinit. */
-uint32_t audio_uart_lv_image_header_cache_init_4d4bdc(uint32_t count)
-{
-    volatile uint32_t *slot=(void *)(audio_uart_display_lv_root+0x138u);
-    if(*slot!=0u) return 1u;
-    void *cache=audio_uart_lv_cache_create_4d4cd4(
-        (const uint32_t *)audio_uart_font_cache_backend_vtable,24u,count,
-        (uint32_t)(uintptr_t)audio_uart_lv_image_header_cache_compare_4d4c9c,0u,
-        (uint32_t)(uintptr_t)audio_uart_lv_image_header_cache_free_4d4cac);
-    *slot=(uint32_t)(uintptr_t)cache;
-    audio_uart_lv_cache_set_name_4d5114((void *)(uintptr_t)*slot,"IMAGE_HEADER");
-    return *slot!=0u ? 1u : 0u;
-}
+/* Retired 2026-10-30: the hand image and image-header caches (stock 0x4d4ad4..0x4d4cbc:
+ * init, compare, free and the shared source compare) were copies of upstream
+ * lv_image_cache.c and lv_image_header_cache.c, and the backend vtables they used
+ * (ui/freetype/font-lru/) were a 10-entry copy of upstream lv_cache_lru_rb.c's
+ * lv_cache_class_lru_rb_size/_count, which stock 0x73f4a4/0x73f478 are (11 entries,
+ * iter_create_cb included). lv_image_decoder_init above calls the upstream inits
+ * (differential test build/dedup2/B/imgcache.py). */
 
 #include <stdint.h>
 extern void *audio_uart_lv_image_decoder_create_4890c8(void);
@@ -1221,7 +1135,7 @@ void audio_uart_lv_init_assert_4c91a8(void) {
 }
 
 #include <stdint.h>
-extern const char *audio_uart_lv_fs_extension_4c70e4(const char *);
+extern const char *lv_fs_get_ext(const char *);
 extern int32_t audio_uart_lv_string_compare_4547be(const char *,const char *);
 extern uint32_t audio_uart_lv_fs_file_read_4c6f46(void *,void *,uint32_t,uint32_t *);
 extern void *audio_uart_lv_grid_copy_454738(void *,const void *,uint32_t);
@@ -1235,7 +1149,7 @@ uint32_t audio_uart_lv_bmp_info_4c91e0(void *decoder,void *descriptor,void *head
     const char *src=(const char *)(uintptr_t)*(volatile uint32_t *)(d+12u);
     uint8_t type=d[16];
     if(type!=1u)return 0u;
-    if(audio_uart_lv_string_compare_4547be(audio_uart_lv_fs_extension_4c70e4(src),"bmp")!=0)return 0u;
+    if(audio_uart_lv_string_compare_4547be(lv_fs_get_ext(src),"bmp")!=0)return 0u;
     uint8_t bytes[54];uint32_t width,height;uint16_t bpp;
     (void)audio_uart_lv_fs_file_read_4c6f46((void *)(d+20u),bytes,54u,0);
     audio_uart_lv_grid_copy_454738(&width,bytes+18u,4u);
@@ -1249,14 +1163,14 @@ uint32_t audio_uart_lv_bmp_info_4c91e0(void *decoder,void *descriptor,void *head
     case 16:cf=18u;break;
     case 24:cf=15u;break;
     case 32:cf=16u;break;
-    default:audio_uart_lvgl_log(2u,bmp_path,126u,bmp_function,bmp_format,(uint32_t)bpp);return 1u;
+    default:lv_log_add(2u,bmp_path,126u,bmp_function,bmp_format,(uint32_t)bpp);return 1u;
     }
     h[0]=(h[0]&0xffff00ffu)|(cf<<8);
     return 1u;
 }
 
 #include <stdint.h>
-extern const char *audio_uart_lv_fs_extension_4c70e4(const char *);
+extern const char *lv_fs_get_ext(const char *);
 extern int32_t audio_uart_lv_string_compare_4547be(const char *,const char *);
 extern void audio_uart_lv_basic_box_clear_454746(void *,uint32_t,uint32_t);
 extern uint32_t audio_uart_lv_fs_file_open_4c6d9a(void *,const char *,uint32_t);
@@ -1264,7 +1178,7 @@ extern uint32_t audio_uart_lv_fs_file_read_4c6f46(void *,void *,uint32_t,uint32_
 extern uint32_t audio_uart_lv_fs_file_close_4c6ee0(void *);
 extern void *audio_uart_lv_grid_copy_454738(void *,const void *,uint32_t);
 extern void *audio_uart_lv_malloc(uint32_t);
-extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,const char *,...);
+extern void lv_log_add(uint32_t,const char *,uint32_t,const char *,const char *,...);
 static const char bmp_open_reason[]="Out of memory";
 static const char bmp_open_expression[]="dsc->user_data != NULL";
 static const char bmp_open_format[]="Asserted at expression: %s (%s)";
@@ -1275,7 +1189,7 @@ uint32_t audio_uart_lv_bmp_open_4c92a8(void *decoder,void *descriptor) {
     (void)decoder;volatile uint8_t *d=descriptor;
     if(d[16]!=1u)return 0u;
     const char *src=(const char *)(uintptr_t)*(volatile uint32_t *)(d+12u);
-    if(audio_uart_lv_string_compare_4547be(audio_uart_lv_fs_extension_4c70e4(src),"bmp")!=0)return 0u;
+    if(audio_uart_lv_string_compare_4547be(lv_fs_get_ext(src),"bmp")!=0)return 0u;
     uint32_t state[8];uint8_t bytes[54];
     audio_uart_lv_basic_box_clear_454746(state,0u,32u);
     src=(const char *)(uintptr_t)*(volatile uint32_t *)(d+12u);
@@ -1291,7 +1205,7 @@ uint32_t audio_uart_lv_bmp_open_4c92a8(void *decoder,void *descriptor) {
     state[7]=((state[6]*state[4]+31u)>>5)<<2;
     *(volatile uint32_t *)(d+72u)=(uint32_t)(uintptr_t)audio_uart_lv_malloc(32u);
     if(*(volatile uint32_t *)(d+72u)==0u) {
-        audio_uart_lvgl_log(3u,bmp_open_path,180u,bmp_open_function,bmp_open_format,bmp_open_expression,bmp_open_reason);
+        lv_log_add(3u,bmp_open_path,180u,bmp_open_function,bmp_open_format,bmp_open_expression,bmp_open_reason);
         for(;;)*(volatile uint32_t *)(uintptr_t)UINT32_MAX=0u;
     }
     if(*(volatile uint32_t *)(d+72u)==0u)return 0u;
@@ -1348,7 +1262,7 @@ uint32_t audio_uart_lv_bmp_get_area_4c93a0(void *decoder,void *descriptor,const 
 #include <stdint.h>
 extern void *audio_uart_lv_fs_driver_find_4c70b4(uint32_t);
 extern void *audio_uart_lv_heap_alloc(uint32_t);
-extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,const char *,...);
+extern void lv_log_add(uint32_t,const char *,uint32_t,const char *,const char *,...);
 static const char fs_open_null[]="Can't open file: path is NULL";
 static const char fs_open_function[]="lv_fs_open";
 static const char fs_open_path[]="D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\lvgl_v9.3\\LVGL\\src\\misc\\lv_fs.c";
@@ -1377,7 +1291,7 @@ extern void audio_uart_lv_basic_box_clear_454746(void *,uint32_t,uint32_t);
 /* Native hidden structure-return ABI: caller supplies60-byte result inR0. */
 extern void audio_uart_nema_cl_create_sized_514278(void *,uint32_t);
 extern void audio_uart_checksum_copy(void *,const void *,uint32_t);
-extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,const char *,...);
+extern void lv_log_add(uint32_t,const char *,uint32_t,const char *,const char *,...);
 extern void audio_uart_ambiq_vector_font_init_53d6da(void *);
 extern uint32_t audio_uart_lv_thread_init_4d4610(void *,const char *,uint32_t,void (*)(void),uint32_t,void *);
 static const char ambiq_name[]="AMBIQ";
@@ -1414,7 +1328,7 @@ void audio_uart_lv_init_group_4c73d6(void) {
     audio_uart_nema_cl_create_sized_514278(command_list,102400u);
     audio_uart_checksum_copy((uint8_t *)ambiq_unit()+144u,command_list,60u);
     if(ambiq_unit()[38]==0u) {
-        audio_uart_lvgl_log(3u,ambiq_path,87u,ambiq_function,ambiq_format,ambiq_expression,ambiq_reason);
+        lv_log_add(3u,ambiq_path,87u,ambiq_function,ambiq_format,ambiq_expression,ambiq_reason);
         for(;;)*(volatile uint32_t *)(uintptr_t)UINT32_MAX=0u;
     }
     ambiq_unit()[35]=0u;
@@ -1427,7 +1341,7 @@ void audio_uart_lv_init_group_4c73d6(void) {
 #include <stdint.h>
 extern int32_t g2_thread_create_dynamic(void (*)(void *),const char *,uint16_t,void *,uint32_t,void **);
 extern void audio_task_delete(void *);
-extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,const char *,...);
+extern void lv_log_add(uint32_t,const char *,uint32_t,const char *,const char *,...);
 static const char lv_thread_message[]="xTaskCreate failed!";
 static const char lv_thread_function[]="lv_thread_init";
 static const char lv_thread_path[]="D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\lvgl_v9.3\\LVGL\\src\\osal\\lv_freertos.c";
@@ -1463,9 +1377,9 @@ uint32_t audio_uart_lv_thread_sync_signal_4d4724(void *cell);
 
 #include <stdint.h>
 extern volatile uint32_t audio_uart_nema_context_cell[]; /* RAM20074efc */
-extern void audio_uart_nema_error_set_4b127c(uint32_t);
+extern int audio_uart_nema_error_set_4b127c(uint32_t);
 extern void audio_uart_nema_cl_buffer_destroy_5140c6(void *);
-extern void audio_uart_nema_cl_node_release_514178(void *);
+extern int audio_uart_nema_cl_node_release_514178(void *);
 /* Native5142f0..514382; command words are data for the GPU command buffer. */
 void audio_uart_nema_cl_destroy_5142f0(void *command_list) {
     volatile uint32_t *cl=command_list;
@@ -1501,9 +1415,9 @@ extern volatile uint32_t audio_uart_nema_context_cell[];
 extern void audio_uart_lv_pool_free_48429e(void *,void *);
 /* Native514050..514070, source-owned pool selector literal addresses. */
 void *audio_uart_nema_pool_select_514050(uint32_t pool_id) {
-    if(pool_id==2u)return (void *)(uintptr_t)0x20000370u;
-    if(pool_id==3u)return (void *)(uintptr_t)0x20000338u;
-    return (void *)(uintptr_t)0x20000354u;
+    if(pool_id==2u)return (void *)(uintptr_t)((uint32_t)(uintptr_t)g2ref_g2_stock_ram_20000338+0x38u);
+    if(pool_id==3u)return (void *)(uintptr_t)((uint32_t)(uintptr_t)g2ref_g2_stock_ram_20000338);
+    return (void *)(uintptr_t)((uint32_t)(uintptr_t)g2ref_g2_stock_ram_20000338+0x1cu);
 }
 /* Native5140c6..5140ea; poolfree can mutate the owner. */
 void audio_uart_nema_cl_buffer_destroy_5140c6(void *buffer) {
@@ -1513,14 +1427,16 @@ void audio_uart_nema_cl_buffer_destroy_5140c6(void *buffer) {
     audio_uart_lv_pool_free_48429e(pool,data);
     b[2]=0u;b[3]=0u;b[0]=0u;b[1]=UINT32_MAX;
 }
-/* Native514178..514184. */
-void audio_uart_nema_cl_node_release_514178(void *node) {
-    audio_uart_lv_pool_free_48429e((void *)(uintptr_t)0x20000338u,node);
+/* Evidence: stock 0x514178..0x514184 — return 0 after pool_free (r0); ambient r7 unused. */
+int audio_uart_nema_cl_node_release_514178(void *node) {
+    audio_uart_lv_pool_free_48429e((void *)(uintptr_t)((uint32_t)(uintptr_t)g2ref_g2_stock_ram_20000338),node);
+    return 0;
 }
 /* Native4b127c..4b128a; native scratch return ignored by void API. */
-void audio_uart_nema_error_set_4b127c(uint32_t error) {
+int audio_uart_nema_error_set_4b127c(uint32_t error) {
     volatile uint32_t *context=(void *)(uintptr_t)audio_uart_nema_context_cell[0];
     context[8]=context[8]|error;
+  return 0;
 }
 
 #include <stdint.h>
@@ -1556,32 +1472,8 @@ int32_t audio_uart_ambiq_evaluate_4c7548(void *unit,void *task) {
 }
 
 #include <stdint.h>
-/* Native4b05a4..4b064e; format input truncated tobyte. */
-int32_t audio_uart_ambiq_color_format_src_4b05a4(uint32_t format) {
-    switch((uint8_t)format) {
-    case 6u:return 9;
-    case 7u:return 11;
-    case 8u:return 49;
-    case 9u:return 53;
-    case 10u:return 9;
-    case 11u:return 12;
-    case 12u:return 48;
-    case 13u:return 52;
-    case 14u:return 8;
-    case 15u:return 57;
-    case 16u:return 16;
-    case 17u:return 17;
-    case 18u:return 4;
-    case 20u:return 4;
-    case 21u:return 68;
-    case 48u:return 18;
-    case 49u:return 22;
-    case 50u:return 23;
-    case 52u:return 76;
-    case 53u:return 77;
-    default:return -1;
-    }
-}
+/* Native 0x4b05a4 LVGL->Nema colour format: audio_uart_ambiq_color_format_src_4b05a4
+ * is an alias of audio_uart_ambiq_nema_cf_4b05a4 (graphics/ambiq-buffer-handlers/nema_cf.c). */
 
 #include <stdint.h>
 extern void *audio_uart_lv_draw_get_available_task_48463a(void *,void *,uint32_t);
@@ -1736,16 +1628,11 @@ void audio_uart_ambiq_area_copy_4c73c4(uint32_t *destination,const void *source)
 void audio_uart_ambiq_area_move_450bb2(uint32_t *area,uint32_t x,uint32_t y);
 
 #include <stdint.h>
-extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,const char *,...);
+extern void lv_log_add(uint32_t,const char *,uint32_t,const char *,const char *,...);
 extern void audio_uart_lv_draw_full_area_48b8d8(void *,void *);
-extern void audio_uart_lv_area_set_450b5c(void *,uint32_t,uint32_t,uint32_t,uint32_t);
 
-#include <stdint.h>
-/* Native450b5c..450b6c; four words written in coordinate order. */
-void audio_uart_lv_area_set_450b5c(void *area,uint32_t x1,uint32_t y1,uint32_t x2,uint32_t y2) {
-    volatile uint32_t *a=area;
-    a[0]=x1;a[1]=y1;a[2]=x2;a[3]=y2;
-}
+/* Native450b5c..450b6c is upstream lv_area_set (third-party/upstream/lvgl/src/misc/lv_area.c);
+ * the hand copy audio_uart_lv_area_set_450b5c was removed and its caller uses lv_area_set. */
 
 #include <stdint.h>
 extern volatile uint32_t audio_uart_ambiq_unit_cell[];
@@ -1758,7 +1645,7 @@ extern uint32_t audio_uart_nema_get_error_4b128a(void);
 extern uint32_t audio_uart_nema_vg_get_error_51564c(void);
 extern const char *audio_uart_nema_error_interpret_4b0594(uint32_t);
 extern const char *audio_uart_nema_vg_error_interpret_4b0584(uint32_t);
-extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,const char *,...);
+extern void lv_log_add(uint32_t,const char *,uint32_t,const char *,const char *,...);
 /* Native4c791a..4c7920; mutable default unit cell read once per invocation. */
 void *audio_uart_ambiq_default_unit_4c791a(void) {
     return (void *)(uintptr_t)audio_uart_ambiq_unit_cell[0];
@@ -1774,7 +1661,7 @@ uint32_t audio_uart_ambiq_submit_4b0c8a(uint32_t sync) {
         audio_uart_nema_cl_unbind_5144ba();
         int32_t power=audio_uart_nema_power_control_51419a(2u,1u);
         if(power) {
-            audio_uart_lvgl_log(3u,source,538u,name,"Power control failed: %d\r\n",power);
+            lv_log_add(3u,source,538u,name,"Power control failed: %d\r\n",power);
             return 0u;
         }
     }
@@ -1782,12 +1669,12 @@ uint32_t audio_uart_ambiq_submit_4b0c8a(uint32_t sync) {
     uint32_t error=audio_uart_nema_get_error_4b128a();
     if(error) {
         const char *text=audio_uart_nema_error_interpret_4b0594(error);
-        audio_uart_lvgl_log(3u,source,555u,name,"NemaGFX error 0x%lx, %s\r\n",error,text);
+        lv_log_add(3u,source,555u,name,"NemaGFX error 0x%lx, %s\r\n",error,text);
     }
     error=audio_uart_nema_vg_get_error_51564c();
     if(error) {
         const char *text=audio_uart_nema_vg_error_interpret_4b0584(error);
-        audio_uart_lvgl_log(3u,source,559u,name,"NemaVG error: 0x%lx, %s\r\n",error,text);
+        lv_log_add(3u,source,559u,name,"NemaVG error: 0x%lx, %s\r\n",error,text);
     }
     return 1u;
 }
@@ -1803,25 +1690,25 @@ uint32_t audio_uart_nema_get_error_4b128a(void) {
 }
 
 #include <stdint.h>
-extern uint32_t audio_uart_lv_unlock_core(void *); /* native4d4696 selected */
-extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,const char *,...);
+extern uint32_t lv_mutex_unlock(void *); /* native4d4696 selected */
+extern void lv_log_add(uint32_t,const char *,uint32_t,const char *,const char *,...);
 /* Native4b0886..4b092a. Decrement/assert BEFORE unlocking, unlike provider. */
 uint32_t audio_uart_ambiq_context_unlock_4b0886(void *unit) {
     static const char source[]="D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\lvgl_v9.3\\LVGL\\src\\draw\\ambiq\\lv_draw_ambiq_private.c";
     static const char name[]="lv_draw_ambiq_nema_context_unlock";
     if(!unit) {
-        audio_uart_lvgl_log(3u,source,295u,name,"Asserted at expression: %s (%s)","unit != NULL","Ambiq GPU draw unit is not initialized!");
+        lv_log_add(3u,source,295u,name,"Asserted at expression: %s (%s)","unit != NULL","Ambiq GPU draw unit is not initialized!");
         for(;;)*(volatile uint32_t *)(uintptr_t)UINT32_MAX=0u;
     }
     volatile uint32_t *count=(void *)((uint8_t *)unit+140u);
     *count=*count-1u;
     if(*count) {
-        audio_uart_lvgl_log(3u,source,297u,name,"Asserted at expression: %s (%s)","unit->nema_context_lock_count == 0","Ambiq GPU mutex lock count error!");
+        lv_log_add(3u,source,297u,name,"Asserted at expression: %s (%s)","unit->nema_context_lock_count == 0","Ambiq GPU mutex lock count error!");
         for(;;)*(volatile uint32_t *)(uintptr_t)UINT32_MAX=0u;
     }
-    uint32_t result=audio_uart_lv_unlock_core((uint8_t *)unit+132u);
+    uint32_t result=lv_mutex_unlock((uint8_t *)unit+132u);
     if((uint8_t)result!=1u)
-        audio_uart_lvgl_log(3u,source,301u,name,"Ambiq GPU mutex unlock failed!");
+        lv_log_add(3u,source,301u,name,"Ambiq GPU mutex unlock failed!");
     return (uint8_t)result;
 }
 
@@ -1835,7 +1722,7 @@ extern int32_t audio_uart_nema_power_control_51419a(uint32_t,uint32_t);
 extern void *audio_uart_nema_cl_get_bound_5144fa(void);
 extern void audio_uart_nema_cl_rewind_514384(void *);
 extern void audio_uart_nema_cl_bind_sectored_5143d4(void *,uint32_t);
-extern int32_t audio_uart_nema_last_cl_id_51418e(void);
+extern uint32_t audio_uart_nema_last_submission_51418e(void); /* nema_cl_get_last_id; defined below */
 extern uint32_t audio_uart_nema_last_submission_id_514194(void);
 extern void audio_uart_lv_basic_box_clear_454746(void *,uint32_t,uint32_t);
 extern void audio_uart_ambiq_blend_clear_4b075e(void *);
@@ -1843,7 +1730,7 @@ extern uint32_t audio_uart_ambiq_context_unlock_4b0886(void *);
 extern void audio_uart_nema_bind_tex_4b1298(uint32_t,uint32_t,uint32_t,uint32_t,int32_t,uint32_t,uint32_t);
 extern void audio_uart_checksum_copy(void *,const void *,uint32_t);
 extern void audio_uart_ambiq_clip_change_4b077e(void *,const void *,uint32_t);
-extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,const char *,...);
+extern void lv_log_add(uint32_t,const char *,uint32_t,const char *,const char *,...);
 /* Native4b092a..4b0b5a; unit cached once, all source/header reads volatile.
  * Null buffer is dereferenced before the later validation, as in native. */
 uint32_t audio_uart_ambiq_bind_buffer_4b092a(void *buffer,const void *raw_clip,uint32_t extend) {
@@ -1859,7 +1746,7 @@ uint32_t audio_uart_ambiq_bind_buffer_4b092a(void *buffer,const void *raw_clip,u
     if(!audio_uart_lv_area_intersect_450bcc((int32_t *)clip,raw_clip,(const int32_t *)bounds))return 0u;
     if((int32_t)(clip[2]-clip[0])<1||(int32_t)(clip[3]-clip[1])<1)return 0u;
     if(!buffer||!b[4]||(int32_t)(uint16_t)b[1]<1||(int32_t)(b[1]>>16)<1) {
-        audio_uart_lvgl_log(3u,source,332u,name,"Invalid buffer setting!");return 0u;
+        lv_log_add(3u,source,332u,name,"Invalid buffer setting!");return 0u;
     }
     int32_t format=audio_uart_ambiq_color_format_dst_4b064e((uint8_t)(b[0]>>8));
     uint32_t data=b[4];
@@ -1877,12 +1764,12 @@ uint32_t audio_uart_ambiq_bind_buffer_4b092a(void *buffer,const void *raw_clip,u
         }
     }
     if(format==-1) {
-        audio_uart_lvgl_log(3u,source,377u,name,"Unsupported layer color format!");return 0u;
+        lv_log_add(3u,source,377u,name,"Unsupported layer color format!");return 0u;
     }
     audio_uart_ambiq_context_lock_4b07de(unit);
     int32_t power=audio_uart_nema_power_control_51419a(0u,1u);
     if(power) {
-        audio_uart_lvgl_log(3u,source,385u,name,"Power control failed: %d\r\n",power);return 0u;
+        lv_log_add(3u,source,385u,name,"Power control failed: %d\r\n",power);return 0u;
     }
     void *bound=audio_uart_nema_cl_get_bound_5144fa();
     if(!bound) {
@@ -1890,9 +1777,9 @@ uint32_t audio_uart_ambiq_bind_buffer_4b092a(void *buffer,const void *raw_clip,u
         audio_uart_nema_cl_bind_sectored_5143d4(unit+144u,100u);
     } else if(bound!=unit+144u) {
         audio_uart_ambiq_context_unlock_4b0886(unit);
-        audio_uart_lvgl_log(3u,source,399u,name,"Unexpected command list in the context!\r\n");return 0u;
+        lv_log_add(3u,source,399u,name,"Unexpected command list in the context!\r\n");return 0u;
     }
-    if(audio_uart_nema_last_cl_id_51418e()<0&&audio_uart_nema_last_submission_id_514194()==0u) {
+    if((int32_t)audio_uart_nema_last_submission_51418e()<0&&audio_uart_nema_last_submission_id_514194()==0u) {
         audio_uart_lv_basic_box_clear_454746(unit+88u,0u,28u);
         audio_uart_lv_basic_box_clear_454746(unit+116u,0u,16u);
         audio_uart_ambiq_blend_clear_4b075e(unit);
@@ -1964,24 +1851,24 @@ void audio_uart_lv_memzero_48949c(void *destination,uint32_t size) {
 }
 
 #include <stdint.h>
-extern uint32_t audio_uart_lv_lock_core(void *);
-extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,const char *,...);
+extern uint32_t lv_mutex_lock(void *);
+extern void lv_log_add(uint32_t,const char *,uint32_t,const char *,const char *,...);
 /* Native4b07de..4b0886. Only lowbyte success1 increments the lock count. */
 uint32_t audio_uart_ambiq_context_lock_4b07de(void *unit) {
     static const char source[]="D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\lvgl_v9.3\\LVGL\\src\\draw\\ambiq\\lv_draw_ambiq_private.c";
     static const char name[]="lv_draw_ambiq_nema_context_lock";
     if(!unit) {
-        audio_uart_lvgl_log(3u,source,273u,name,"Asserted at expression: %s (%s)","unit != NULL","Ambiq GPU draw unit is not initialized!");
+        lv_log_add(3u,source,273u,name,"Asserted at expression: %s (%s)","unit != NULL","Ambiq GPU draw unit is not initialized!");
         for(;;)*(volatile uint32_t *)(uintptr_t)UINT32_MAX=0u;
     }
-    uint32_t result=audio_uart_lv_lock_core((uint8_t *)unit+132u);
+    uint32_t result=lv_mutex_lock((uint8_t *)unit+132u);
     if((uint8_t)result!=1u) {
-        audio_uart_lvgl_log(3u,source,277u,name,"Ambiq GPU mutex lock failed!");
+        lv_log_add(3u,source,277u,name,"Ambiq GPU mutex lock failed!");
     } else {
         volatile uint32_t *count=(void *)((uint8_t *)unit+140u);
         *count=*count+1u;
         if(*count!=1u) {
-            audio_uart_lvgl_log(3u,source,282u,name,"Asserted at expression: %s (%s)","unit->nema_context_lock_count == 1","Ambiq GPU mutex lock count error!");
+            lv_log_add(3u,source,282u,name,"Asserted at expression: %s (%s)","unit->nema_context_lock_count == 1","Ambiq GPU mutex lock count error!");
             for(;;)*(volatile uint32_t *)(uintptr_t)UINT32_MAX=0u;
         }
     }
@@ -2084,7 +1971,7 @@ void audio_uart_nema_cl_unbind_5144ba(void) {
 }
 
 #include <stdint.h>
-extern uint32_t audio_uart_nema_power_status_47f90c(uint32_t,uint8_t *);
+extern uint32_t am_hal_pwrctrl_periph_enabled(uint32_t,uint8_t *); /* upstream HAL, stock 0x47f90c */
 extern uint32_t audio_power_peripheral_on(uint32_t);
 extern uint32_t audio_power_peripheral_off(uint32_t);
 extern uint32_t audio_uart_nema_get_error_4b128a(void);
@@ -2097,7 +1984,7 @@ extern volatile uint32_t audio_uart_nema_vg_context_cell;
 /* Native51419a..514238. Preserve low-byte policy and ordered error consumption. */
 int32_t audio_uart_nema_power_control_51419a(uint32_t state,uint32_t reinit) {
     uint8_t powered;
-    uint32_t result=audio_uart_nema_power_status_47f90c(20u,&powered);
+    uint32_t result=am_hal_pwrctrl_periph_enabled(20u,&powered);
     if(result) return result;
     state=(uint8_t)state;
     if(state==0u) {
@@ -2137,65 +2024,9 @@ void audio_uart_nema_reg_write_514046(uint32_t offset,uint32_t value) {
     *(volatile uint32_t *)(uintptr_t)(audio_uart_nema_register_base+offset)=value;
 }
 
-#include <stdint.h>
-extern void audio_uart_checksum_copy(void *,const void *,uint32_t);
-/* Source-owned configuration recovered from authenticated table6becb0. */
-static const uint32_t peripheral_rows[34][4] = {
-    { 0x40021004u, 0x1u, 0x40021008u, 0x30000001u },
-    { 0x40021004u, 0x10000000u, 0x40021008u, 0x30000001u },
-    { 0x40021004u, 0x20000000u, 0x40021008u, 0x30000001u },
-    { 0x40021004u, 0x2u, 0x40021008u, 0x1eu },
-    { 0x40021004u, 0x4u, 0x40021008u, 0x1eu },
-    { 0x40021004u, 0x8u, 0x40021008u, 0x1eu },
-    { 0x40021004u, 0x10u, 0x40021008u, 0x1eu },
-    { 0x40021004u, 0x20u, 0x40021008u, 0x1e0u },
-    { 0x40021004u, 0x40u, 0x40021008u, 0x1e0u },
-    { 0x40021004u, 0x80u, 0x40021008u, 0x1e0u },
-    { 0x40021004u, 0x100u, 0x40021008u, 0x1e0u },
-    { 0x40021004u, 0x200u, 0x40021008u, 0x1e00u },
-    { 0x40021004u, 0x400u, 0x40021008u, 0x1e00u },
-    { 0x40021004u, 0x800u, 0x40021008u, 0x1e00u },
-    { 0x40021004u, 0x1000u, 0x40021008u, 0x1e00u },
-    { 0x40021004u, 0x2000u, 0x40021008u, 0x2000u },
-    { 0x40021004u, 0x4000u, 0x40021008u, 0x4000u },
-    { 0x40021004u, 0x8000u, 0x40021008u, 0x8000u },
-    { 0x40021004u, 0x10000u, 0x40021008u, 0x10000u },
-    { 0x40021004u, 0x20000u, 0x40021008u, 0x20000u },
-    { 0x40021004u, 0x40000u, 0x40021008u, 0x40000u },
-    { 0x40021004u, 0x80000u, 0x40021008u, 0x80000u },
-    { 0x40021004u, 0x100000u, 0x40021008u, 0x100000u },
-    { 0x40021004u, 0x200000u, 0x40021008u, 0x200000u },
-    { 0x40021004u, 0x400000u, 0x40021008u, 0x400000u },
-    { 0x40021004u, 0x800000u, 0x40021008u, 0x800000u },
-    { 0x40021004u, 0x1000000u, 0x40021008u, 0x1000000u },
-    { 0x40021004u, 0x2000000u, 0x40021008u, 0x2000000u },
-    { 0x40021004u, 0x4000000u, 0x40021008u, 0x4000000u },
-    { 0x40021004u, 0x8000000u, 0x40021008u, 0x8000000u },
-    { 0x4002100cu, 0x4u, 0x40021010u, 0x4u },
-    { 0x4002100cu, 0x40u, 0x40021010u, 0xc0u },
-    { 0x4002100cu, 0x80u, 0x40021010u, 0xc0u },
-    { 0x4002100cu, 0x400u, 0x40021010u, 0x400u },
-};
-/* Native47ef18..47ef38. */
-uint32_t audio_uart_power_peripheral_descriptor_47ef18(uint32_t *out,uint32_t peripheral) {
-    if(!out || peripheral>=34u) return 6u;
-    audio_uart_checksum_copy(out,peripheral_rows[peripheral],16u);
-    return 0u;
-}
-
-#include <stdint.h>
-extern uint32_t audio_uart_power_peripheral_descriptor_47ef18(uint32_t *,uint32_t);
-/* Native47f90c..47f942: output clear precedes descriptor lookup. */
-uint32_t audio_uart_nema_power_status_47f90c(uint32_t peripheral,uint8_t *powered) {
-    if(!powered) return 6u;
-    *powered=0u;
-    uint32_t descriptor[4];
-    uint32_t result=audio_uart_power_peripheral_descriptor_47ef18(descriptor,(uint8_t)peripheral);
-    if(result) return result;
-    uint32_t status=*(volatile uint32_t *)(uintptr_t)descriptor[2];
-    *powered=(uint8_t)((status&descriptor[3])!=0u);
-    return 0u;
-}
+/* Removed duplicates: 0x47f90c am_hal_pwrctrl_periph_enabled and its static
+ * descriptor lookup 0x47ef18 am_get_pwrctrl; callers use the upstream HAL
+ * (ambiqhal am_hal_pwrctrl.c) directly. */
 
 #include <stdint.h>
 extern volatile uint32_t audio_uart_nema_context_cell[];
@@ -2281,10 +2112,10 @@ void audio_uart_nema_child_52262e(uint32_t enabled) {
 extern volatile uint32_t audio_uart_nema_context_cell[];
 extern void audio_uart_nema_register_emit_523e92(uint32_t,uint32_t);
 extern void audio_uart_nema_sector_rollover_5147b0(void *);
-extern void audio_uart_nema_error_set_4b127c(uint32_t);
+extern int audio_uart_nema_error_set_4b127c(uint32_t);
 extern void *audio_uart_nema_node_allocate_51416c(uint32_t);
 extern void audio_uart_nema_buffer_create_514070(uint32_t *,uint32_t,uint32_t);
-extern void audio_uart_nema_cl_node_release_514178(void *);
+extern int audio_uart_nema_cl_node_release_514178(void *);
 extern void audio_uart_nema_cl_unbind_5144ba(void);
 static int32_t emit_signed_div(int32_t x,int32_t y) {
     if(y==0) return 0;
@@ -2429,7 +2260,7 @@ void audio_uart_nema_register_emit_523e92(uint32_t reg,uint32_t value) {
 #include <stdint.h>
 extern void *audio_uart_lv_pool_allocate_484180(void *,uint32_t);
 /* Native51416c..514178, same source pool contract as node-release514178. */
-void *audio_uart_nema_node_allocate_51416c(uint32_t size) { return audio_uart_lv_pool_allocate_484180((void *)(uintptr_t)0x20000338u,size); }
+void *audio_uart_nema_node_allocate_51416c(uint32_t size) { return audio_uart_lv_pool_allocate_484180((void *)(uintptr_t)((uint32_t)(uintptr_t)g2ref_g2_stock_ram_20000338),size); }
 
 #include <stdint.h>
 extern void *audio_uart_nema_pool_select_514050(uint32_t);
@@ -2520,7 +2351,7 @@ void *audio_uart_lv_pool_aligned_allocate_4841d8(void *cell,uint32_t bytes,uint3
  * compiled from pinned TLSF 3.1 (third-party/upstream/tlsf/tlsf.c). */
 
 #include <stdint.h>
-extern void audio_uart_nema_error_set_4b127c(uint32_t);
+extern int audio_uart_nema_error_set_4b127c(uint32_t);
 extern void audio_uart_nema_list_finalize_514b7c(void *);
 extern void audio_uart_nema_submit_523f10(uint32_t);
 extern int32_t audio_uart_nema_poll_514026(uint32_t);
@@ -2542,7 +2373,7 @@ void audio_uart_nema_sector_rollover_5147b0(void *cell) {
     } else if(used==0u)return;
     audio_uart_nema_list_finalize_514b7c(cell);
     if(((volatile uint8_t *)cell)[24]&32u) {
-        volatile uint8_t *context=*(volatile uint8_t * volatile *)(uintptr_t)0x20074efcu;
+        volatile uint8_t *context=*(volatile uint8_t * volatile *)(uintptr_t)((uint32_t)(uintptr_t)g2ref_audio_uart_nema_context_cell);
         uint32_t ready=context[249];
         if(ready!=1u) {
             uint32_t capacity=list[10],quarter=capacity>>2,position=list[12];
@@ -2556,7 +2387,7 @@ after_submit:
 }
 
 #include <stdint.h>
-extern void audio_uart_nema_error_set_4b127c(uint32_t);
+extern int audio_uart_nema_error_set_4b127c(uint32_t);
 extern void audio_uart_nema_buffer_flush_5140ea(void *);
 extern uint32_t audio_uart_nema_reg_read_51403c(uint32_t);
 extern int32_t audio_uart_nema_poll_514026(uint32_t);
@@ -2647,7 +2478,7 @@ extern void g2_file_heap_error_log(const char *);
 extern volatile uint32_t audio_uart_nema_last_submission;
 /* Native51400a..51403c: exact semaphore-success gate, native fail-stop, signed submission wait. */
 void audio_uart_nema_wait_irq_51400a(void) {
-    void *handle=*(void * volatile *)(uintptr_t)0x20074814u;
+    void *handle=*(void * volatile *)(uintptr_t)((uint32_t)(uintptr_t)g2ref_g2_nema_irq_semaphore);
     if(xQueueSemaphoreTake(handle,1000u)!=1) {
         g2_file_heap_error_log("GPU assert!!! nema_wait_irq timeout!!!\n");
         for(;;) {}
@@ -2764,7 +2595,7 @@ uint32_t audio_uart_nema_chain_finalize_523dba(void *cell,uint32_t words) {
 
 #include <stdint.h>
 extern volatile uint32_t audio_uart_nema_ring_descriptor[];
-extern void audio_uart_nema_error_set_4b127c(uint32_t);
+extern int audio_uart_nema_error_set_4b127c(uint32_t);
 extern void audio_uart_nema_buffer_flush_5140ea(void *);
 extern void audio_uart_nema_reg_write_514046(uint32_t,uint32_t);
 static void ring_init_store(uint32_t data,uint32_t offset,uint32_t value) {
@@ -2830,7 +2661,7 @@ void audio_uart_nema_rop_blend_mode_522956(uint32_t value) {audio_uart_nema_chil
 
 #include <stdint.h>
 extern volatile uint32_t audio_uart_nema_context_cell[];
-extern void audio_uart_nema_error_set_4b127c(uint32_t);
+extern int audio_uart_nema_error_set_4b127c(uint32_t);
 extern void audio_uart_nema_sector_rollover_5147b0(void *);
 extern int32_t audio_uart_nema_poll_514026(uint32_t);
 /* Native514384..5143d4: parent redirection, chained rewind and bound-parent update. */
@@ -2869,8 +2700,7 @@ int32_t audio_uart_nema_cl_wait_514d00(void *cell) {
 extern volatile uint32_t audio_uart_nema_context_cell[];
 extern volatile uint32_t audio_uart_nema_last_submission;
 extern volatile uint32_t audio_uart_nema_command_state_20073bf0[];
-/* Native51418e..514194. */
-int32_t audio_uart_nema_last_cl_id_51418e(void) {return (int32_t)audio_uart_nema_last_submission;}
+/* Native 0x51418e is audio_uart_nema_last_submission_51418e above (single body). */
 /* Native514194..51419a: command state offset20, distinct from IRQ completion cell. */
 uint32_t audio_uart_nema_last_submission_id_514194(void) {return audio_uart_nema_command_state_20073bf0[5];}
 /* Native5144fa..514504: fresh context pointer then bound list word. */
@@ -2897,9 +2727,13 @@ void audio_uart_nema_cl_create_sized_514278(void *out,uint32_t bytes) {
 
 #include <stdint.h>
 extern volatile uint32_t audio_uart_nema_context_cell[];
-extern void audio_uart_nema_error_set_4b127c(uint32_t);
+extern int audio_uart_nema_error_set_4b127c(uint32_t);
+/* SDIV: a zero divisor gives 0 (DIV_0_TRP is never set) and INT32_MIN/-1 gives INT32_MIN. */
 static int32_t bind236_div(uint32_t a,uint32_t b) {
- int32_t result;__asm__("sdiv %0, %1, %2":"=r"(result):"r"(a),"r"(b));return result;
+ const int32_t n=(int32_t)a,d=(int32_t)b;
+ if(d==0)return 0;
+ if(n==INT32_MIN&&d==-1)return INT32_MIN;
+ return n/d;
 }
 /* Native5143d4..5144ba: G2 sector negotiation and cached previous-list unbind. */
 void audio_uart_nema_cl_bind_sectored_5143d4(void *cell,uint32_t sectors) {
@@ -3056,10 +2890,16 @@ void audio_uart_nema_child_52264e(uint32_t enabled){
 
 #include <stdint.h>
 extern volatile uint32_t audio_uart_nema_context_cell[];
-extern void audio_uart_nema_error_set_4b127c(uint32_t);
+extern int audio_uart_nema_error_set_4b127c(uint32_t);
 extern void audio_uart_nema_sector_rollover_5147b0(void *);
 extern int32_t audio_uart_nema_extend_bound_514504(uint32_t);
-static int32_t space246_div(uint32_t a,uint32_t b){int32_t r;__asm__("sdiv %0, %1, %2":"=r"(r):"r"(a),"r"(b));return r;}
+/* SDIV: a zero divisor gives 0 (DIV_0_TRP is never set) and INT32_MIN/-1 gives INT32_MIN. */
+static int32_t space246_div(uint32_t a,uint32_t b) {
+ const int32_t n=(int32_t)a,d=(int32_t)b;
+ if(d==0)return 0;
+ if(n==INT32_MIN&&d==-1)return INT32_MIN;
+ return n/d;
+}
 /* Native514aec..514b76: pair reservation with sector rollover or list extension. */
 void *audio_uart_nema_cl_get_space_514aec(uint32_t pairs){
  volatile uint32_t *context=(volatile uint32_t *)(uintptr_t)audio_uart_nema_context_cell[0];
@@ -3084,11 +2924,17 @@ void *audio_uart_nema_cl_get_space_514aec(uint32_t pairs){
 
 #include <stdint.h>
 extern volatile uint32_t audio_uart_nema_context_cell[];
-extern void audio_uart_nema_error_set_4b127c(uint32_t);
+extern int audio_uart_nema_error_set_4b127c(uint32_t);
 extern void *audio_uart_nema_node_allocate_51416c(uint32_t);
 extern void audio_uart_nema_buffer_create_514070(uint32_t *,uint32_t,uint32_t);
-extern void audio_uart_nema_cl_node_release_514178(void *);
-static int32_t ext247_div(uint32_t a,uint32_t b){int32_t r;__asm__("sdiv %0, %1, %2":"=r"(r):"r"(a),"r"(b));return r;}
+extern int audio_uart_nema_cl_node_release_514178(void *);
+/* SDIV: a zero divisor gives 0 (DIV_0_TRP is never set) and INT32_MIN/-1 gives INT32_MIN. */
+static int32_t ext247_div(uint32_t a,uint32_t b) {
+ const int32_t n=(int32_t)a,d=(int32_t)b;
+ if(d==0)return 0;
+ if(n==INT32_MIN&&d==-1)return INT32_MIN;
+ return n/d;
+}
 static void ext247_store(uint32_t data,uint32_t index,uint32_t v){*(volatile uint32_t *)(uintptr_t)(data+index*4u)=v;}
 /* Native514504..5147b0: padding, allocation or reuse, chain packet and rebound tail. */
 int32_t audio_uart_nema_extend_bound_514504(uint32_t pairs){
@@ -3185,7 +3031,7 @@ extern void *audio_uart_ambiq_default_unit_4c791a(void);
 extern void *audio_uart_display_surface_alloc(uint32_t,uint32_t,uint32_t,uint32_t);
 extern void *audio_uart_lv_draw_buf_reshape_48b196(void *,uint32_t,uint32_t,uint32_t,uint32_t);
 extern void audio_uart_font_bitmap_release(void *);
-extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,const char *,...);
+extern void lv_log_add(uint32_t,const char *,uint32_t,const char *,const char *,...);
 static const char stencil263_file[]="D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\lvgl_v9.3\\LVGL\\src\\draw\\ambiq\\lv_draw_ambiq_private.c";
 static const char stencil263_message[]="Failed to create stencil buffer!";
 static const char stencil263_function[]="lv_draw_ambiq_stencil_buffer_adjust";
@@ -3207,7 +3053,7 @@ uint32_t audio_uart_ambiq_stencil_adjust_4b0b5a(void *cell,uint32_t width,uint32
   } else unit[16]=(uint32_t)(uintptr_t)reshaped;
  }
  if(unit[16]!=0u)return 1u;
- audio_uart_lvgl_log(3u,stencil263_file,482u,stencil263_function,stencil263_message);
+ lv_log_add(3u,stencil263_file,482u,stencil263_function,stencil263_message);
  return 0u;
 }
 
@@ -3219,7 +3065,7 @@ extern void audio_uart_nema_vg_state_reset_515676(void);
 extern void audio_uart_ambiq_blend_clear_4b075e(void *);
 extern uint32_t audio_uart_ambiq_stencil_adjust_4b0b5a(void *,uint32_t,uint32_t);
 extern void audio_uart_lv_memzero_48949c(void *,uint32_t);
-extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,const char *,...);
+extern void lv_log_add(uint32_t,const char *,uint32_t,const char *,const char *,...);
 typedef struct {uint32_t words[4];} audio_uart_vg_framebuffer_264;
 extern void audio_uart_nema_vg_set_framebuffer_5223a2(uint32_t,uint32_t,audio_uart_vg_framebuffer_264);
 static const char resolution264_file[]="D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\lvgl_v9.3\\LVGL\\src\\draw\\ambiq\\lv_draw_ambiq_private.c";
@@ -3235,7 +3081,7 @@ void audio_uart_ambiq_set_resolution_4b0bea(uint32_t width,uint32_t height) {
  width=(width+3u)&~3u;height=(height+3u)&~3u;
  uint32_t status=audio_uart_ambiq_stencil_adjust_4b0b5a((void *)unit,width,height);
  if((uint8_t)status!=1u) {
-  audio_uart_lvgl_log(3u,resolution264_file,509u,resolution264_function,resolution264_message);
+  lv_log_add(3u,resolution264_file,509u,resolution264_function,resolution264_message);
   return;
  }
  audio_uart_vg_framebuffer_264 framebuffer;
@@ -3288,7 +3134,7 @@ extern void *audio_uart_font_outline_context(void);
 extern void audio_uart_ambiq_vector_font_push_53d8fc(void *);
 extern void audio_uart_ambiq_vector_font_allocate_53da54(void *);
 extern void audio_uart_ambiq_vector_font_release_53db3c(void *);
-extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,const char *,...);
+extern void lv_log_add(uint32_t,const char *,uint32_t,const char *,const char *,...);
 static const char vector270_message[]="unknown event code: %d";
 static const char vector270_function[]="lv_draw_ambiq_vector_font_ft_cb";
 static const char vector270_file[]="D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\lvgl_v9.3\\LVGL\\src\\draw\\ambiq\\lv_draw_ambiq_vector_font.c";
@@ -3300,7 +3146,7 @@ void audio_uart_ambiq_vector_font_callback_53d82c(void *event) {
  if(code==36u)audio_uart_ambiq_vector_font_push_53d8fc(data);
  else if(code==40u)audio_uart_ambiq_vector_font_allocate_53da54(data);
  else if(code==41u)audio_uart_ambiq_vector_font_release_53db3c((void *)(uintptr_t)*(volatile uint32_t *)data);
- else audio_uart_lvgl_log(2u,vector270_file,186u,vector270_function,vector270_message,code);
+ else lv_log_add(2u,vector270_file,186u,vector270_function,vector270_message,code);
 }
 /* Native53d6da..53d6ea: registers the source callback with the original arguments.
  * lv_freetype_outline_add_event 0x529bf2 is compiled from upstream lv_freetype_outline.c. */
@@ -3313,7 +3159,7 @@ void audio_uart_ambiq_vector_font_init_53d6da(void *unit) {
 extern void audio_uart_ambiq_get_path_buffers_5fa21c(void *,uint32_t *,uint32_t *,void **,void **);
 extern void audio_uart_nema_vg_path_destroy_514d98(void *);
 extern void audio_uart_lv_heap_free(void *);
-extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,const char *,...);
+extern void lv_log_add(uint32_t,const char *,uint32_t,const char *,const char *,...);
 static const char release272_null[]="NULL pointer";
 static const char release272_expression[]="outline != NULL";
 static const char release272_message[]="Asserted at expression: %s (%s)";
@@ -3323,7 +3169,7 @@ static const char release272_file[]="D:\\01_workspace\\s200_ap510b_iar_git\\thir
 void audio_uart_ambiq_vector_font_release_53db3c(void *cell) {
  volatile uint32_t *glyph=cell;
  if(!glyph) {
-  audio_uart_lvgl_log(3u,release272_file,312u,release272_function,release272_message,release272_expression,release272_null);
+  lv_log_add(3u,release272_file,312u,release272_function,release272_message,release272_expression,release272_null);
   for(;;)*(volatile uint32_t *)(uintptr_t)UINT32_MAX=0u;
  }
  uint32_t segment_size,data_size;void *segments,*data;
@@ -3357,7 +3203,7 @@ void audio_uart_ambiq_get_path_buffers_5fa21c(void *path,uint32_t *segment_size,
 #include <stdint.h>
 extern void audio_uart_nema_matrix_identity_561810(void *);
 extern void audio_uart_nema_vg_set_error_51565c(uint32_t);
-extern void audio_uart_nema_cl_node_release_514178(void *);
+extern int audio_uart_nema_cl_node_release_514178(void *);
 /* Native514d98..514e0a: reset then release; NULL error bypasses both. */
 void audio_uart_nema_vg_path_destroy_514d98(void *cell) {
  if(!cell){audio_uart_nema_vg_set_error_51565c(1u);return;}
@@ -3376,7 +3222,7 @@ extern void *audio_uart_lv_malloc(uint32_t);
 extern void *audio_uart_nema_vg_path_create_514ebc(void);
 extern void audio_uart_lv_array_clear_488478(void *);
 extern void audio_uart_lv_array_init_external_488440(void *,void *,uint32_t,uint32_t);
-extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,const char *,...);
+extern void lv_log_add(uint32_t,const char *,uint32_t,const char *,const char *,...);
 extern volatile uint32_t audio_uart_ambiq_vector_current_path_200746c4;
 extern uint8_t audio_uart_ambiq_vector_path_data_20073cd4[];
 extern uint8_t audio_uart_ambiq_vector_path_segments_20073cc0[];
@@ -3388,7 +3234,7 @@ static const char alloc277_outline[]="outline != NULL";
 static const char alloc277_data[]="data != NULL";
 static const char alloc277_segments[]="seg != NULL";
 static void alloc277_fail(uint32_t line,const char *expression) {
- audio_uart_lvgl_log(3u,alloc277_file,line,alloc277_function,alloc277_format,expression,alloc277_memory);
+ lv_log_add(3u,alloc277_file,line,alloc277_function,alloc277_format,expression,alloc277_memory);
  for(;;)*(volatile uint32_t *)(uintptr_t)UINT32_MAX=0u;
 }
 /* Native53da54..53db3c: allocator failure is native diagnostic/fail-stop. */
@@ -3413,7 +3259,7 @@ void audio_uart_ambiq_vector_font_allocate_53da54(void *parameter) {
 }
 
 #include <stdint.h>
-extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,const char *,...);
+extern void lv_log_add(uint32_t,const char *,uint32_t,const char *,const char *,...);
 static const char array278_file[]="D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\lvgl_v9.3\\LVGL\\src\\misc\\lv_array.c";
 static const char array278_function[]="lv_array_init_from_buf";
 static const char array278_format[]="Asserted at expression: %s (%s)";
@@ -3429,7 +3275,7 @@ extern void *audio_uart_ambiq_vector_array_front_53d6d0(void *);
 extern uint32_t audio_uart_ambiq_vector_array_count_53d6cc(void *);
 extern void audio_uart_nema_vg_path_shape_514f3c(void *,uint32_t,void *,uint32_t,void *);
 extern void *audio_uart_nema_vg_path_create_514ebc(void);
-extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,const char *,...);
+extern void lv_log_add(uint32_t,const char *,uint32_t,const char *,const char *,...);
 extern volatile uint32_t audio_uart_ambiq_vector_current_path_200746c4;
 extern uint8_t audio_uart_ambiq_vector_path_data_20073cd4[];
 extern uint8_t audio_uart_ambiq_vector_path_segments_20073cc0[];
@@ -3446,7 +3292,7 @@ void audio_uart_ambiq_vector_font_push_53d8fc(void *parameter) {
  volatile uint32_t *p=parameter;
  volatile uint32_t *outline=(void *)(uintptr_t)p[0];
  if(!outline) {
-  audio_uart_lvgl_log(3u,push281_file,209u,push281_function,push281_assertfull,push281_outline,push281_null);
+  lv_log_add(3u,push281_file,209u,push281_function,push281_assertfull,push281_outline,push281_null);
   for(;;)*(volatile uint32_t *)(uintptr_t)UINT32_MAX=0u;
  }
  volatile uint8_t segment=0u;
@@ -3454,11 +3300,11 @@ void audio_uart_ambiq_vector_font_push_53d8fc(void *parameter) {
  switch(type) {
  case 0:segment=0;break;case 1:segment=1;break;case 2:segment=2;break;
  case 3:segment=6;break;case 4:segment=5;break;case 5:segment=0;break;
- default:audio_uart_lvgl_log(3u,push281_file,235u,push281_function,push281_unknown,type);break;
+ default:lv_log_add(3u,push281_file,235u,push281_function,push281_unknown,type);break;
  }
  uint32_t result=audio_uart_lv_array_push_488506(audio_uart_ambiq_vector_path_segments_20073cc0,(const void *)&segment);
  if((uint8_t)result!=1u) {
-  audio_uart_lvgl_log(3u,push281_file,240u,push281_function,push281_assert,push281_result);
+  lv_log_add(3u,push281_file,240u,push281_function,push281_assert,push281_result);
   for(;;)*(volatile uint32_t *)(uintptr_t)UINT32_MAX=0u;
  }
  if(segment==6u || segment==5u) {
@@ -3484,7 +3330,7 @@ void audio_uart_ambiq_vector_font_push_53d8fc(void *parameter) {
 }
 
 #include <stdint.h>
-extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,const char *,...);
+extern void lv_log_add(uint32_t,const char *,uint32_t,const char *,const char *,...);
 static const char access282_file[]="D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\lvgl_v9.3\\LVGL\\src\\misc\\lv_array.c";
 static const char access282_function[]="lv_array_at";
 static const char access282_format[]="Asserted at expression: %s (%s)";
@@ -3505,7 +3351,7 @@ void *audio_uart_ambiq_vector_array_front_53d6d0(void *array) {
 extern uint32_t audio_uart_lv_array_resize_48849c(void *,uint32_t);
 extern void *audio_uart_lv_grid_copy_454738(void *,const void *,uint32_t);
 extern void audio_uart_lv_basic_box_clear_454746(void *,uint32_t,uint32_t);
-extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,const char *,...);
+extern void lv_log_add(uint32_t,const char *,uint32_t,const char *,const char *,...);
 static const char append284_file[]="D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\lvgl_v9.3\\LVGL\\src\\misc\\lv_array.c";
 static const char append284_function[]="lv_array_push_back";
 static const char append284_format[]="Asserted at expression: %s (%s)";
@@ -3528,14 +3374,14 @@ void audio_uart_nema_vg_path_shape_514f3c(void *path,uint32_t segment_count,void
 
 #include <stdint.h>
 extern uint32_t audio_uart_lv_array_push_488506(void *,const void *);
-extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,const char *,...);
+extern void lv_log_add(uint32_t,const char *,uint32_t,const char *,const char *,...);
 extern uint8_t audio_uart_ambiq_vector_path_data_20073cd4[];
 static const char pair288_file[]="D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\lvgl_v9.3\\LVGL\\src\\draw\\ambiq\\lv_draw_ambiq_vector_font.c";
 static const char pair288_function[]="lv_ambiq_ft_data_array_push";
 static const char pair288_format[]="Asserted at expression: %s";
 static const char pair288_expression[]="res == LV_RESULT_OK";
 static void pair288_fail(uint32_t line) {
- audio_uart_lvgl_log(3u,pair288_file,line,pair288_function,pair288_format,pair288_expression);
+ lv_log_add(3u,pair288_file,line,pair288_function,pair288_format,pair288_expression);
  for(;;)*(volatile uint32_t *)(uintptr_t)UINT32_MAX=0u;
 }
 /* Native53d87c..53d8fc: both float conversions precede the first append. */
@@ -3572,26 +3418,22 @@ __attribute__((pcs("aapcs-vfp"))) float audio_uart_float_trig_mode0_509690(float
 
 #include <stdint.h>
 extern volatile uint32_t audio_uart_float_math_error_cell_20074f14;
-/* Native439ca4..439cb2 andshared439cbe..439cc4: consumed void domain store. */
-__attribute__((used,noinline)) static void sqrt295_domain_store(void) {
+/* Native 0x439ca4..0x439cb2 (+ shared 0x439cbe..0x439cc4): record EDOM (33)
+ * in the C library error cell. Stock also preserves r0..r3 for its assembly
+ * callers; every caller here is C. */
+void audio_uart_float_domain_error_439ca4(void) {
  audio_uart_float_math_error_cell_20074f14=33u;
 }
-/* Native handler preservesR0..R3; named architectural wrapper keeps that contract. */
-__attribute__((naked)) void audio_uart_float_domain_error_439ca4(void) {
- __asm__ volatile("push {r0,r1,r2,r3,lr}\n\tsub sp, #4\n\tbl sqrt295_domain_store\n\tadd sp, #4\n\tpop {r0,r1,r2,r3,pc}");
-}
-/* Native4397a8..4397c4: explicit architectural FPU instructions, no opcode data. */
+/* Native4397a8..4397c4: VCMPE #0 / N flag (ordered less than zero, so -0
+ * and NaN take the VSQRT path), then VSQRT. __builtin_elementwise_sqrt is
+ * the bare VSQRT (no errno call, unlike __builtin_sqrtf). */
 __attribute__((pcs("aapcs-vfp"))) float audio_uart_float_sqrt_4397a8(float value) {
- uint32_t status;
- __asm__ volatile("vcmpe.f32 %1, #0.0\n\tvmrs %0, fpscr" : "=r"(status) : "t"(value));
- if(status&0x80000000u) {
+ if(__builtin_isless(value,0.0f)) {
   union {uint32_t bits;float value;} result={.bits=0x7fffffffu};
   audio_uart_float_domain_error_439ca4();
   return result.value;
  }
- float result;
- __asm__ volatile("vsqrt.f32 %0, %1" : "=t"(result) : "t"(value));
- return result;
+ return __builtin_elementwise_sqrt(value);
 }
 
 #include <stdint.h>
@@ -3655,15 +3497,28 @@ __attribute__((pcs("aapcs-vfp"))) float audio_uart_float_remainder_577c3c(float 
 #include <stdint.h>
 static float trig298_float(uint32_t bits) {union {uint32_t bits;float value;} v={.bits=bits};return v.value;}
 static uint32_t trig298_bits(float value) {union {uint32_t bits;float value;} v={.value=value};return v.bits;}
-static float trig298_mul(float a,float b) {float v;__asm__ volatile("vmul.f32 %0,%1,%2":"=t"(v):"t"(a),"t"(b));return v;}
-static float trig298_add(float a,float b) {float v;__asm__ volatile("vadd.f32 %0,%1,%2":"=t"(v):"t"(a),"t"(b));return v;}
-static float trig298_mla(float a,float b,float c) {__asm__ volatile("vmla.f32 %0,%1,%2":"+t"(a):"t"(b),"t"(c));return a;}
-static float trig298_neg(float a) {float v;__asm__ volatile("vneg.f32 %0,%1":"=t"(v):"t"(a));return v;}
-static uint32_t trig298_compare(float a,float b) {uint32_t flags;__asm__ volatile("vcmp.f32 %1,%2\n\tvmrs %0,fpscr":"=r"(flags):"t"(a),"t"(b));return flags;}
-static uint32_t trig298_integer(float a) {float v;__asm__ volatile("vcvt.s32.f32 %0,%1":"=t"(v):"t"(a));return trig298_bits(v);}
-static float trig298_fixed14(uint32_t bits) {float a=trig298_float(bits),v;__asm__ volatile("vcvt.f32.s32 %0,%1,#14":"=t"(v):"t"(a));return v;}
+static float trig298_mul(float a,float b){return a*b;}
+static float trig298_add(float a,float b){return a+b;}
+/* VMLA.F32 is not fused: a + round(b*c). */
+static float trig298_mla(float a,float b,float c){const float product=b*c;return a+product;}
+/* VNEG after the producing operation. Kept out of line: inlined, LLVM may fold
+ * -(a/b) into (-a)/b, which changes the sign of a NaN result (stock VNEG of
+ * the default NaN gives 0xffc00000). */
+static __attribute__((noinline)) float trig298_neg(float a){return -a;}
+/* Only the VCMP N flag (bit 31, ordered a<b) is consumed; quiet compare. */
+static uint32_t trig298_compare(float a,float b){return __builtin_isless(a,b)?0x80000000u:0u;}
+/* VCVT.S32.F32: truncate toward zero, saturate, NaN gives 0. */
+static uint32_t trig298_integer(float a){
+ if(a!=a)return 0u;
+ if(a>=2147483648.0f)return (uint32_t)INT32_MAX;
+ if(a<-2147483648.0f)return (uint32_t)INT32_MIN;
+ return (uint32_t)(int32_t)a;
+}
+/* VCVT.F32.S32 #14: signed integer bits scaled by 2^-14, rounded to
+ * nearest once; scaling the rounded integer by a power of two is exact. */
+static float trig298_fixed14(uint32_t bits){return (float)(int32_t)bits*0x1p-14f;}
 /* Native5094c0..50964c plusauthenticatedordinaryconstantpool50964c..50968c.
- * Named architectural float operations preserve native rounding/NaN/flags order. */
+ * One C operation per stock VFP instruction keeps the native rounding. */
 __attribute__((pcs("aapcs-vfp"))) float audio_uart_float_trig_core_5094c0(uint32_t mode,float angle) {
  float scaled=trig298_mul(angle,trig298_float(0x3f22f983u));
  uint32_t scaled_bits=trig298_bits(scaled),quadrant;
@@ -3728,13 +3583,17 @@ __attribute__((pcs("aapcs-vfp"))) float audio_uart_float_trig_core_5094c0(uint32
 extern void audio_uart_float_domain_error_439ca4(void);
 static float inv300_float(uint32_t b){union{uint32_t b;float f;}v={.b=b};return v.f;}
 static uint32_t inv300_bits(float f){union{uint32_t b;float f;}v={.f=f};return v.b;}
-static float inv300_add(float a,float b){float v;__asm__ volatile("vadd.f32 %0,%1,%2":"=t"(v):"t"(a),"t"(b));return v;}
-static float inv300_sub(float a,float b){float v;__asm__ volatile("vsub.f32 %0,%1,%2":"=t"(v):"t"(a),"t"(b));return v;}
-static float inv300_mul(float a,float b){float v;__asm__ volatile("vmul.f32 %0,%1,%2":"=t"(v):"t"(a),"t"(b));return v;}
-static float inv300_div(float a,float b){float v;__asm__ volatile("vdiv.f32 %0,%1,%2":"=t"(v):"t"(a),"t"(b));return v;}
-static float inv300_mla(float a,float b,float c){__asm__ volatile("vmla.f32 %0,%1,%2":"+t"(a):"t"(b),"t"(c));return a;}
-static float inv300_neg(float a){float v;__asm__ volatile("vneg.f32 %0,%1":"=t"(v):"t"(a));return v;}
-static float inv300_sqrt(float a){float v;__asm__ volatile("vsqrt.f32 %0,%1":"=t"(v):"t"(a));return v;}
+static float inv300_add(float a,float b){return a+b;}
+static float inv300_sub(float a,float b){return a-b;}
+static float inv300_mul(float a,float b){return a*b;}
+static float inv300_div(float a,float b){return a/b;}
+/* VMLA.F32 is not fused: a + round(b*c). */
+static float inv300_mla(float a,float b,float c){const float product=b*c;return a+product;}
+/* VNEG after the producing operation. Kept out of line: inlined, LLVM may fold
+ * -(a/b) into (-a)/b, which changes the sign of a NaN result (stock VNEG of
+ * the default NaN gives 0xffc00000). */
+static __attribute__((noinline)) float inv300_neg(float a){return -a;}
+static float inv300_sqrt(float a){return __builtin_elementwise_sqrt(a);}
 static const uint32_t inv300_angles[8]={0x0u,0x3f060a92u,0x3fc90fdbu,0x3f860a92u,0x3fc90fdbu,0x40060a92u,0x40490fdbu,0x40278d36u};
 /* Native55e99c..55ea06 plusordinarycoefficient/anglepool55ea08..55ea40.
  * Native callers' consumed mode domain0..15; larger table indices unqualified. */
@@ -3793,12 +3652,12 @@ extern __attribute__((pcs("aapcs-vfp"))) float audio_uart_float_inverse_core_55e
 extern void audio_uart_float_domain_error_439ca4(void);
 static float angle302_float(uint32_t b){union{uint32_t b;float f;}v={.b=b};return v.f;}
 static uint32_t angle302_bits(float f){union{uint32_t b;float f;}v={.f=f};return v.b;}
-static float angle302_abs(float a){float v;__asm__ volatile("vabs.f32 %0,%1":"=t"(v):"t"(a));return v;}
-static float angle302_add(float a,float b){float v;__asm__ volatile("vadd.f32 %0,%1,%2":"=t"(v):"t"(a),"t"(b));return v;}
-static float angle302_sub(float a,float b){float v;__asm__ volatile("vsub.f32 %0,%1,%2":"=t"(v):"t"(a),"t"(b));return v;}
-static float angle302_mul(float a,float b){float v;__asm__ volatile("vmul.f32 %0,%1,%2":"=t"(v):"t"(a),"t"(b));return v;}
-static float angle302_div(float a,float b){float v;__asm__ volatile("vdiv.f32 %0,%1,%2":"=t"(v):"t"(a),"t"(b));return v;}
-static float angle302_sqrt(float a){float v;__asm__ volatile("vsqrt.f32 %0,%1":"=t"(v):"t"(a));return v;}
+static float angle302_abs(float a){return __builtin_fabsf(a);}
+static float angle302_add(float a,float b){return a+b;}
+static float angle302_sub(float a,float b){return a-b;}
+static float angle302_mul(float a,float b){return a*b;}
+static float angle302_div(float a,float b){return a/b;}
+static float angle302_sqrt(float a){return __builtin_elementwise_sqrt(a);}
 /* Native50969c..509706: mode/sign gates before magnitude ratio andspecialvalues. */
 __attribute__((pcs("aapcs-vfp"))) float audio_uart_float_two_input_angle_50969c(float y,float x) {
  uint32_t original_y=angle302_bits(y),original_x=angle302_bits(x);
@@ -3839,14 +3698,27 @@ __attribute__((pcs("aapcs-vfp"))) float audio_uart_float_inverse_signed_509708(f
 #include <stdint.h>
 static float tan304_float(uint32_t bits) {union {uint32_t bits;float value;} v={.bits=bits};return v.value;}
 static uint32_t tan304_bits(float value) {union {uint32_t bits;float value;} v={.value=value};return v.bits;}
-static float tan304_mul(float a,float b) {float v;__asm__ volatile("vmul.f32 %0,%1,%2":"=t"(v):"t"(a),"t"(b));return v;}
-static float tan304_add(float a,float b) {float v;__asm__ volatile("vadd.f32 %0,%1,%2":"=t"(v):"t"(a),"t"(b));return v;}
-static float tan304_mla(float a,float b,float c) {__asm__ volatile("vmla.f32 %0,%1,%2":"+t"(a):"t"(b),"t"(c));return a;}
-static float tan304_neg(float a) {float v;__asm__ volatile("vneg.f32 %0,%1":"=t"(v):"t"(a));return v;}
-static uint32_t tan304_compare(float a,float b) {uint32_t flags;__asm__ volatile("vcmp.f32 %1,%2\n\tvmrs %0,fpscr":"=r"(flags):"t"(a),"t"(b));return flags;}
-static uint32_t tan304_integer(float a) {float v;__asm__ volatile("vcvt.s32.f32 %0,%1":"=t"(v):"t"(a));return tan304_bits(v);}
-static float tan304_fixed14(uint32_t bits) {float a=tan304_float(bits),v;__asm__ volatile("vcvt.f32.s32 %0,%1,#14":"=t"(v):"t"(a));return v;}
-static float tan304_div(float a,float b){float v;__asm__ volatile("vdiv.f32 %0,%1,%2":"=t"(v):"t"(a),"t"(b));return v;}
+static float tan304_mul(float a,float b){return a*b;}
+static float tan304_add(float a,float b){return a+b;}
+/* VMLA.F32 is not fused: a + round(b*c). */
+static float tan304_mla(float a,float b,float c){const float product=b*c;return a+product;}
+/* VNEG after the producing operation. Kept out of line: inlined, LLVM may fold
+ * -(a/b) into (-a)/b, which changes the sign of a NaN result (stock VNEG of
+ * the default NaN gives 0xffc00000). */
+static __attribute__((noinline)) float tan304_neg(float a){return -a;}
+/* Only the VCMP N flag (bit 31, ordered a<b) is consumed; quiet compare. */
+static uint32_t tan304_compare(float a,float b){return __builtin_isless(a,b)?0x80000000u:0u;}
+/* VCVT.S32.F32: truncate toward zero, saturate, NaN gives 0. */
+static uint32_t tan304_integer(float a){
+ if(a!=a)return 0u;
+ if(a>=2147483648.0f)return (uint32_t)INT32_MAX;
+ if(a<-2147483648.0f)return (uint32_t)INT32_MIN;
+ return (uint32_t)(int32_t)a;
+}
+/* VCVT.F32.S32 #14: signed integer bits scaled by 2^-14, rounded to
+ * nearest once; scaling the rounded integer by a power of two is exact. */
+static float tan304_fixed14(uint32_t bits){return (float)(int32_t)bits*0x1p-14f;}
+static float tan304_div(float a,float b){return a/b;}
 /* Native563f40..5640ae plusordinaryliteralpool5640b0..5640e4. */
 __attribute__((pcs("aapcs-vfp"))) float audio_uart_float_tangent_563f40(float angle) {
  float scaled=tan304_mul(angle,tan304_float(0x3f22f983u));
@@ -3924,56 +3796,73 @@ extern __attribute__((pcs("aapcs-vfp"))) float audio_uart_float_inverse_ratio_58
 extern __attribute__((pcs("aapcs-vfp"))) float audio_uart_float_inverse_magnitude_58ecbc(float);
 static float pp306_float(uint32_t b){union{uint32_t b;float f;}v={.b=b};return v.f;}
 static uint32_t pp306_bits(float f){union{uint32_t b;float f;}v={.f=f};return v.b;}
-static uint32_t pp306_fpscr(void){uint32_t v;__asm__ volatile("vmrs %0,fpscr":"=r"(v));return v;}
-static int32_t pp306_i32(float f){float v;__asm__ volatile("vcvt.s32.f32 %0,%1":"=t"(v):"t"(f));return (int32_t)pp306_bits(v);}
-static uint32_t VectorSignedToFloat(int32_t i,uint32_t rounding){(void)rounding;float f=pp306_float((uint32_t)i),v;__asm__ volatile("vcvt.f32.s32 %0,%1":"=t"(v):"t"(f));return pp306_bits(v);}
+/* VCVT.S32.F32: truncate toward zero, saturate, NaN gives 0. */
+static int32_t pp306_i32(float f){
+ if(f!=f)return 0;
+ if(f>=2147483648.0f)return INT32_MAX;
+ if(f<-2147483648.0f)return INT32_MIN;
+ return (int32_t)f;
+}
+/* VCVT.F32.S32 rounds per FPSCR, as the C conversion does. */
+static uint32_t VectorSignedToFloat(int32_t i,uint32_t rounding){(void)rounding;return pp306_bits((float)i);}
 #define ABS(v) pp306_float(pp306_bits(v)&0x7fffffffu)
-#define NAN(v) ((pp306_bits(v)&0x7fffffffu)>0x7f800000u)
 #define SUB41(a,b) ((uint8_t)(((uint32_t)(a))>>((b)*8u)))
 #define CONCAT44(a,b) (((uint64_t)pp306_bits(a)<<32)|pp306_bits(b))
 
 /* 562c62..562c66 and 562cf4..562cf8 round division before negation. */
+/* VNEG after the producing operation. Kept out of line: inlined, LLVM may fold
+ * -(a/b) into (-a)/b, which changes the sign of a NaN result (stock VNEG of
+ * the default NaN gives 0xffc00000). */
+static __attribute__((noinline)) float pp309_negate(float a)
+{
+  return -a;
+}
 static inline float pp309_divide_then_negate(float a, float b)
 {
-  float result;
-  __asm__ volatile("vdiv.f32 %0,%1,%2\n\tvneg.f32 %0,%0"
-                   : "=&t"(result) : "t"(a), "t"(b));
-  return result;
+  return pp309_negate(a / b);
 }
+/* VMUL b*b; VMUL c*4; VMLS (not fused): square - round(product*a). With
+ * FPSCR.DN set by startup, a NaN result is the default NaN either way. */
 static inline float pp309_cubic_discriminant(float b, float c, float a)
 {
-  float result, product; float four = 4.0f;
-  __asm__ volatile("vmul.f32 %0,%2,%2\n\tvmul.f32 %1,%3,%5\n\tvmls.f32 %0,%1,%4"
-                   : "=&t"(result), "=&t"(product)
-                   : "t"(b), "t"(c), "t"(a), "t"(four));
-  return result;
+  const float square = b * b;
+  const float product = c * 4.0f;
+  const float scaled = product * a;
+  return square - scaled;
 }
 static inline float pp309_cubic_second_root(float b, float root, float denominator)
 {
-  float result;
-  __asm__ volatile("vneg.f32 %0,%1\n\tvsub.f32 %0,%0,%2\n\tvdiv.f32 %0,%0,%3"
-                   : "=&t"(result) : "t"(b), "t"(root), "t"(denominator));
-  return result;
+  float result = -b;
+  result = result - root;
+  return result / denominator;
 }
 static inline float pp309_conditional_add(float a, float b)
 {
-  float result;
-  __asm__ volatile("vadd.f32 %0,%1,%2" : "=t"(result) : "t"(a), "t"(b));
-  return result;
+  return a + b;
 }
-/* Native VCMP N condition: unordered is PL, unlike C ordered >=. */
+/* Native VCMP N condition (ordered a<b): unordered is PL, unlike C ordered
+ * >=; __builtin_isless is the matching quiet ordered less-than. */
 static inline int pp308_negative_compare(float a, float b)
 {
-  uint32_t flags;
-  __asm__ volatile("vcmp.f32 %1,%2\n\tvmrs %0,fpscr"
-                   : "=r"(flags) : "t"(a), "t"(b) : "cc");
-  return (int)(flags >> 31);
+  return __builtin_isless(a, b);
 }
 static inline int pp308_arc_excludes(float angle, float low, float high)
 {
   if (pp308_negative_compare(angle, low)) return 1;
   return pp308_negative_compare(high, angle);
 }
+
+/* wave16: g2c_fpscr_* NZCV stand-ins removed; every compare in
+ * audio_uart_nema_vg_path_process_561c68 is now a direct C float compare cited to its stock vcmp/vmrs. */
+typedef unsigned int uint;
+typedef unsigned char byte;
+
+/* wave12 ge-pair banner (evidence): stock 0x56280a..0x56286e emits 4 pairs of
+ * vcmp.f32 a,b; vmrs; itt ge; vcmpge.f32 c,a; vmrsge, followed by bge.w 0x56385a, and
+ * 0x562be6..0x562c1c emits 2 more. So taken == (a>=b && c>=a); ge is false on unordered,
+ * which the C >= reproduces. FPSCR here is the vmrs flag copy and has no rmode effect.
+ * Stock VFP liveness from 0x561c74: s18/s19 have no def, so the d9 pair is entry-dead
+ * (d9_pair = 0). */
 void audio_uart_nema_vg_path_process_561c68(void *path)
 
 {
@@ -3996,14 +3885,15 @@ void audio_uart_nema_vg_path_process_561c68(void *path)
   bool bVar14;
   byte bVar15;
   bool bVar16;
-  uint in_fpscr=pp306_fpscr();
   float fVar17;
   float fVar18;
   float fVar19;
   float fVar20;
   float fVar21;
   float fVar22;
-  ulonglong unaff_d9; /* Every live read is dominated by local arc assignments. */
+  /* Evidence (wave12): d9 (s18/s19) entry value is dead in stock 0x561c68. vlive.py from 0x561c74
+   * (after vpush {d8-d15}) reports s18/s19 "none", so it is a plain local pair that starts at 0. */
+  ulonglong d9_pair = 0;
   float fVar23;
   float fVar24;
   float fVar25;
@@ -4031,7 +3921,6 @@ void audio_uart_nema_vg_path_process_561c68(void *path)
   }
   if (initial_count != 0 && uVar3 != 1) {
     fVar17 = pp306_float(param_1[4]);
-    in_fpscr = in_fpscr & 0xfffffff;
     if (0.0f < fVar17) {
       fVar17 = 0.0f;
     }
@@ -4070,7 +3959,6 @@ void audio_uart_nema_vg_path_process_561c68(void *path)
             fVar17 = state.subpath_start_x;
             fVar20 = state.subpath_start_y;
           }
-          in_fpscr = in_fpscr & 0xfffffff;
           fVar21 = pp306_float(param_1[4]);
           if (pp308_negative_compare(fVar17, fVar21)) fVar21 = fVar17;
           param_1[4] = pp306_bits(fVar21);
@@ -4236,7 +4124,6 @@ LAB_00561f3a:
         if (uVar5 == 10) {
           iVar6 = state.coordinate_cursor + 1;
           fVar20 = *(volatile float *)(param_1[3] + state.coordinate_cursor * 4);
-          uVar3 = in_fpscr & 0xfffffff;
           {
             float pp313_bound = pp306_float(param_1[4]);
             fVar17 = pp313_bound;
@@ -4404,12 +4291,9 @@ LAB_00561f3a:
             }
           }
           state.coordinate_cursor = iVar6;
-          in_fpscr = uVar3 | (uint)(state.last_x - state.subpath_start_x == 0.0f) << 0x1e;
-          bVar13 = 0;
-          if ((byte)(in_fpscr >> 0x1e) != 0) {
-            in_fpscr = uVar3 | (uint)(state.last_y - state.subpath_start_y == 0.0f) << 0x1e;
-            bVar13 = (byte)(in_fpscr >> 0x1e);
-          }
+          /* stock 0x5623b6 vcmp dx,#0.0; itttt eq; vcmpeq 0x5623cc dy,#0.0; beq.n 0x562452. */
+          bVar13 = (state.last_x - state.subpath_start_x == 0.0f) &&
+                   (state.last_y - state.subpath_start_y == 0.0f);
           state.previous_x = state.current_x;
           state.previous_y = state.current_y;
           if (bVar13 == 0) {
@@ -4417,7 +4301,6 @@ LAB_00561f3a:
             state.current_x = state.subpath_start_x;
             state.last_x = state.subpath_start_x;
             state.last_y = state.subpath_start_y;
-            in_fpscr = in_fpscr & 0xfffffff;
             {
               float pp313_bound = pp306_float(param_1[4]);
               fVar17 = pp313_bound;
@@ -4459,7 +4342,6 @@ LAB_00561f3a:
           if (uVar5 != 0xb) goto LAB_00561f3a;
           iVar6 = state.coordinate_cursor + 1;
           fVar20 = *(volatile float *)(param_1[3] + state.coordinate_cursor * 4);
-          in_fpscr = in_fpscr & 0xfffffff;
           {
             float pp313_bound = pp306_float(param_1[4]);
             fVar17 = pp313_bound;
@@ -4638,7 +4520,6 @@ LAB_00561f3a:
       if (bVar13 == 6 || bVar13 == 8) {
         local_a8[0] = 0.0f;
         local_a8[1] = 0.0f;
-        uVar3 = in_fpscr & 0xfffffff;
         {
           float pp313_bound = pp306_float(param_1[4]);
           fVar17 = pp313_bound;
@@ -4673,59 +4554,24 @@ LAB_00561f3a:
         local_a8[4] = pp306_float(param_1[6]);
         local_a8[5] = pp306_float(param_1[7]);
         local_8c[0] = state.control1_x;
-        uVar5 = uVar3 | (uint)(state.control1_x < local_a8[2]) << 0x1f;
-        in_fpscr = uVar5 | (uint)(NAN(state.control1_x) || NAN(local_a8[2])) << 0x1c;
         local_8c[1] = state.control1_y;
         local_8c[2] = state.control2_x;
         local_8c[3] = state.control2_y;
-        bVar13 = (byte)(uVar5 >> 0x1f);
-        bVar15 = (byte)(in_fpscr >> 0x1c) & 1;
+        /* wave12 ge-pair (vcmp; itt ge; vcmpge; vmrsge), see ge-pair banner above function */
+        bVar13 = (byte)((state.control1_x) >= (local_a8[2]) && (local_a8[4]) >= (state.control1_x));
+        bVar15 = 1;
         if (bVar13 == bVar15) {
-          in_fpscr = uVar3 | (uint)(local_a8[4] < state.control1_x) << 0x1f |
-                     (uint)(NAN(local_a8[4]) || NAN(state.control1_x)) << 0x1c;
-          bVar15 = (byte)(in_fpscr >> 0x18);
-          bVar13 = bVar15 >> 7;
-          bVar15 = bVar15 >> 4 & 1;
-        }
-        if (bVar13 == bVar15) {
-          uVar3 = in_fpscr & 0xfffffff;
-          uVar5 = uVar3 | (uint)(state.control1_y < local_a8[3]) << 0x1f;
-          in_fpscr = uVar5 | (uint)(NAN(state.control1_y) || NAN(local_a8[3])) << 0x1c;
-          bVar13 = (byte)(uVar5 >> 0x1f);
-          bVar15 = (byte)(in_fpscr >> 0x1c) & 1;
+          /* wave12 ge-pair (vcmp; itt ge; vcmpge; vmrsge), see ge-pair banner above function */
+          bVar13 = (byte)((state.control1_y) >= (local_a8[3]) && (local_a8[5]) >= (state.control1_y));
+          bVar15 = 1;
           if (bVar13 == bVar15) {
-            in_fpscr = uVar3 | (uint)(local_a8[5] < state.control1_y) << 0x1f |
-                       (uint)(NAN(local_a8[5]) || NAN(state.control1_y)) << 0x1c;
-            bVar15 = (byte)(in_fpscr >> 0x18);
-            bVar13 = bVar15 >> 7;
-            bVar15 = bVar15 >> 4 & 1;
-          }
-          if (bVar13 == bVar15) {
-            uVar3 = in_fpscr & 0xfffffff;
-            uVar5 = uVar3 | (uint)(state.control2_x < local_a8[2]) << 0x1f;
-            in_fpscr = uVar5 | (uint)(NAN(state.control2_x) || NAN(local_a8[2])) << 0x1c;
-            bVar13 = (byte)(uVar5 >> 0x1f);
-            bVar15 = (byte)(in_fpscr >> 0x1c) & 1;
+            /* wave12 ge-pair (vcmp; itt ge; vcmpge; vmrsge), see ge-pair banner above function */
+            bVar13 = (byte)((state.control2_x) >= (local_a8[2]) && (local_a8[4]) >= (state.control2_x));
+            bVar15 = 1;
             if (bVar13 == bVar15) {
-              in_fpscr = uVar3 | (uint)(local_a8[4] < state.control2_x) << 0x1f |
-                         (uint)(NAN(local_a8[4]) || NAN(state.control2_x)) << 0x1c;
-              bVar15 = (byte)(in_fpscr >> 0x18);
-              bVar13 = bVar15 >> 7;
-              bVar15 = bVar15 >> 4 & 1;
-            }
-            if (bVar13 == bVar15) {
-              uVar3 = in_fpscr & 0xfffffff;
-              uVar5 = uVar3 | (uint)(state.control2_y < local_a8[3]) << 0x1f;
-              in_fpscr = uVar5 | (uint)(NAN(state.control2_y) || NAN(local_a8[3])) << 0x1c;
-              bVar13 = (byte)(uVar5 >> 0x1f);
-              bVar15 = (byte)(in_fpscr >> 0x1c) & 1;
-              if (bVar13 == bVar15) {
-                in_fpscr = uVar3 | (uint)(local_a8[5] < state.control2_y) << 0x1f |
-                           (uint)(NAN(local_a8[5]) || NAN(state.control2_y)) << 0x1c;
-                bVar15 = (byte)(in_fpscr >> 0x18);
-                bVar13 = bVar15 >> 7;
-                bVar15 = bVar15 >> 4 & 1;
-              }
+              /* wave12 ge-pair (vcmp; itt ge; vcmpge; vmrsge), see ge-pair banner above function */
+              bVar13 = (byte)((state.control2_y) >= (local_a8[3]) && (local_a8[5]) >= (state.control2_y));
+              bVar15 = 1;
               if (bVar13 == bVar15) goto LAB_0056385a;
             }
           }
@@ -4746,30 +4592,25 @@ LAB_00561f3a:
           fVar20 = *pfVar7;
           fVar23 = *pfVar12;
           fVar22 = *pfVar9;
-          unaff_d9 = CONCAT44(fVar23,fVar22);
+          d9_pair = CONCAT44(fVar23,fVar22);
           fVar21 = *pfVar10;
           fVar26 = fVar20 * -3.0f + fVar23 * 9.0f + fVar22 * -9.0f + fVar21 * 3.0f;
           iVar8 = 0;
-          uVar3 = in_fpscr & 0xfffffff;
           fVar24 = fVar20 * 6.0f + fVar23 * -12.0f + fVar22 * 6.0f;
           fVar17 = fVar20 * -3.0f + fVar23 * 3.0f;
           if (1e-07f <= ABS(fVar26)) {
             fVar17 = pp309_cubic_discriminant(fVar24, fVar17, fVar26);
-            uVar3 = uVar3 | (uint)(fVar17 < 1.0000001e-07f) << 0x1f;
-            in_fpscr = uVar3 | (uint)NAN(fVar17) << 0x1c;
-            if ((byte)(uVar3 >> 0x1f) == ((byte)(in_fpscr >> 0x1c) & 1)) {
+            /* stock 0x56295c vcmp s0,s28(1e-7); blt.w 0x562b3a: continue on GE (ordered >=). */
+            if (fVar17 >= 1.0000001e-07f) {
               fVar17 = audio_uart_float_sqrt_4397a8(fVar17);
               fVar18 = (fVar17 - fVar24) / (fVar26 * 2.0f);
-              uVar3 = in_fpscr & 0xfffffff;
               if ((1.0000001e-07f <= fVar18) && (fVar18 < 0.9999999f)) {
                 local_a8[0] = fVar18;
                 iVar8 = 1;
               }
               fVar17 = pp309_cubic_second_root(fVar24, fVar17, fVar26 * 2.0f);
-              uVar5 = uVar3 | (uint)(fVar17 < 1.0000001e-07f) << 0x1f;
-              in_fpscr = uVar5 | (uint)NAN(fVar17) << 0x1c;
-              if (((byte)(uVar5 >> 0x1f) == ((byte)(in_fpscr >> 0x1c) & 1)) &&
-                 (in_fpscr = uVar3, fVar17 < 0.9999999f)) {
+              /* stock 0x5629a6 vcmp s0,s28; blt -> skip; 0x5629b0 vcmp s0,s27(0.9999999); bpl -> skip. */
+              if ((fVar17 >= 1.0000001e-07f) && (fVar17 < 0.9999999f)) {
                 pfVar2 = local_6c + iVar8;
                 iVar8 = iVar8 + 1;
                 *pfVar2 = fVar17;
@@ -4779,19 +4620,15 @@ LAB_00561f3a:
             }
           }
           else {
+            /* stock 0x562908 vabs; 0x56290c vcmp |b|,1e-7; itttt ge: vdiv/vneg/vcmpge 0x56291e;
+               blt.w 0x562b3a; 0x56292a vcmp s0,0.9999999; bpl.w -> skip. */
             fVar26 = ABS(fVar24);
-            uVar5 = uVar3 | (uint)(fVar26 < 1.0000001e-07f) << 0x1f;
-            in_fpscr = uVar5 | (uint)NAN(fVar26) << 0x1c;
-            bVar13 = (byte)(uVar5 >> 0x1f);
-            bVar15 = (byte)(in_fpscr >> 0x1c) & 1;
-            if (bVar13 == bVar15) {
+            bool linear_ok = (fVar26 >= 1.0000001e-07f);
+            if (linear_ok) {
               fVar26 = pp309_divide_then_negate(fVar17, fVar24);
-              in_fpscr = uVar3 | (uint)(fVar26 < 1.0000001e-07f) << 0x1f | (uint)NAN(fVar26) << 0x1c;
-              bVar15 = (byte)(in_fpscr >> 0x18);
-              bVar13 = bVar15 >> 7;
-              bVar15 = bVar15 >> 4 & 1;
+              linear_ok = (fVar26 >= 1.0000001e-07f);
             }
-            if ((bVar13 == bVar15) && (in_fpscr = in_fpscr & 0xfffffff, fVar26 < 0.9999999f)) {
+            if (linear_ok && fVar26 < 0.9999999f) {
               local_a8[0] = fVar26;
               iVar8 = 1;
 LAB_005629ce:
@@ -4808,9 +4645,8 @@ LAB_005629ce:
                 }
                 *pfVar11 = fVar24;
                 fVar24 = pfVar11[2];
-                uVar3 = (in_fpscr & 0xfffffff) | (uint)(fVar17 < fVar24) << 0x1f;
-                in_fpscr = uVar3 | (uint)(NAN(fVar17) || NAN(fVar24)) << 0x1c;
-                if ((byte)(uVar3 >> 0x1f) != ((byte)(in_fpscr >> 0x1c) & 1)) {
+                /* stock 0x562a30 vcmp max,val: keep max when value is LT/unordered (N!=V). */
+                if (!(fVar17 >= fVar24)) {
                   fVar17 = fVar24;
                 }
                 pfVar11[2] = fVar17;
@@ -4830,7 +4666,8 @@ LAB_005629ce:
                 fVar17 = fVar24;
               }
               *pfVar11 = fVar17;
-              if (fVar24 < pfVar11[2] || NAN(fVar24) || NAN(pfVar11[2])) {
+              /* stock 0x562ab2 vcmp.f32 s6,s0; vmrs; it lt; vmovlt (LT = less or unordered). */
+              if (!(fVar24 >= pfVar11[2])) {
                 fVar24 = pfVar11[2];
               }
               pfVar11[2] = fVar24;
@@ -4844,9 +4681,8 @@ LAB_005629ce:
               }
               *pfVar11 = fVar17;
               fVar17 = pfVar11[2];
-              uVar3 = (in_fpscr & 0xfffffff) | (uint)(fVar20 < fVar17) << 0x1f;
-              in_fpscr = uVar3 | (uint)(NAN(fVar20) || NAN(fVar17)) << 0x1c;
-              if ((byte)(uVar3 >> 0x1f) == ((byte)(in_fpscr >> 0x1c) & 1)) {
+              /* stock 0x562b22 vcmp: take value when GE (ordered >=). */
+              if (fVar20 >= fVar17) {
                 fVar17 = fVar20;
               }
               pfVar11[2] = fVar17;
@@ -4869,7 +4705,6 @@ LAB_005629ce:
       }
       else if ((bVar13 == 1 || bVar13 == 2) || (bVar13 == 4 || bVar13 == 3)) {
 LAB_00563802:
-        in_fpscr = in_fpscr & 0xfffffff;
         {
           float pp313_bound = pp306_float(param_1[4]);
           fVar17 = pp313_bound;
@@ -4903,7 +4738,6 @@ LAB_00563802:
         }
       }
       else if (bVar13 == 5 || bVar13 == 7) {
-        uVar3 = in_fpscr & 0xfffffff;
         {
           float pp313_bound = pp306_float(param_1[4]);
           fVar17 = pp313_bound;
@@ -4934,48 +4768,29 @@ LAB_00563802:
         }
         fVar20 = pp306_float(param_1[4]);
         param_1[7] = pp306_bits(fVar17);
-        uVar5 = uVar3 | (uint)(state.control1_x < fVar20) << 0x1f;
-        in_fpscr = uVar5 | (uint)(NAN(state.control1_x) || NAN(fVar20)) << 0x1c;
         fVar17 = pp306_float(param_1[5]);
         fVar21 = pp306_float(param_1[6]);
         fVar22 = pp306_float(param_1[7]);
-        bVar13 = (byte)(uVar5 >> 0x1f);
-        bVar15 = (byte)(in_fpscr >> 0x1c) & 1;
+        /* wave12 ge-pair (vcmp; itt ge; vcmpge; vmrsge), see ge-pair banner above function */
+        bVar13 = (byte)((state.control1_x) >= (fVar20) && (fVar21) >= (state.control1_x));
+        bVar15 = 1;
         if (bVar13 == bVar15) {
-          in_fpscr = uVar3 | (uint)(fVar21 < state.control1_x) << 0x1f |
-                     (uint)(NAN(fVar21) || NAN(state.control1_x)) << 0x1c;
-          bVar15 = (byte)(in_fpscr >> 0x18);
-          bVar13 = bVar15 >> 7;
-          bVar15 = bVar15 >> 4 & 1;
-        }
-        if (bVar13 == bVar15) {
-          uVar3 = in_fpscr & 0xfffffff;
-          uVar5 = uVar3 | (uint)(state.control1_y < fVar17) << 0x1f;
-          in_fpscr = uVar5 | (uint)(NAN(state.control1_y) || NAN(fVar17)) << 0x1c;
-          bVar13 = (byte)(uVar5 >> 0x1f);
-          bVar15 = (byte)(in_fpscr >> 0x1c) & 1;
-          if (bVar13 == bVar15) {
-            in_fpscr = uVar3 | (uint)(fVar22 < state.control1_y) << 0x1f |
-                       (uint)(NAN(fVar22) || NAN(state.control1_y)) << 0x1c;
-            bVar15 = (byte)(in_fpscr >> 0x18);
-            bVar13 = bVar15 >> 7;
-            bVar15 = bVar15 >> 4 & 1;
-          }
+          /* wave12 ge-pair (vcmp; itt ge; vcmpge; vmrsge), see ge-pair banner above function */
+          bVar13 = (byte)((state.control1_y) >= (fVar17) && (fVar22) >= (state.control1_y));
+          bVar15 = 1;
           if (bVar13 == bVar15) goto LAB_0056385a;
         }
         fVar23 = state.control1_x * 2.0f + state.previous_x * -2.0f;
         fVar24 = (state.current_x * 2.0f + state.control1_x * -2.0f) - fVar23;
+        /* stock 0x562c4c vabs; 0x562c50 vcmp |a|,s10(1e-7); vcmpge 0x562c6a t,1e-7 (GE chain);
+           0x562c74 vcmp t,s9(0.9999999) MI. */
         fVar26 = ABS(fVar24);
-        bVar16 = NAN(fVar26);
-        uVar3 = (in_fpscr & 0xfffffff) | (uint)(fVar26 < 1.0000001e-07f) << 0x1f;
-        bVar14 = SUB41(uVar3 >> 0x1f,0);
-        if (bVar14 == bVar16) {
+        bool quad_x_ok = (fVar26 >= 1.0000001e-07f);
+        if (quad_x_ok) {
           fVar23 = pp309_divide_then_negate(fVar23, fVar24);
-          bVar16 = NAN(fVar23);
-          uVar3 = (in_fpscr & 0xfffffff) | (uint)(fVar23 < 1.0000001e-07f) << 0x1f;
-          bVar14 = SUB41(uVar3 >> 0x1f,0);
+          quad_x_ok = (fVar23 >= 1.0000001e-07f);
         }
-        if ((bVar14 == bVar16) && (uVar3 = uVar3 & 0xfffffff, fVar23 < 0.9999999f)) {
+        if (quad_x_ok && fVar23 < 0.9999999f) {
           fVar24 = 1.0f - fVar23;
           fVar23 = fVar24 * fVar24 * state.previous_x + fVar24 * 2.0f * fVar23 * state.control1_x +
                    fVar23 * fVar23 * state.current_x;
@@ -4988,20 +4803,14 @@ LAB_00563802:
         }
         fVar23 = state.control1_y * 2.0f + state.previous_y * -2.0f;
         fVar24 = (state.current_y * 2.0f + state.control1_y * -2.0f) - fVar23;
+        /* stock 0x562ce6 vabs; 0x562cea vcmp |a|,1e-7; vcmpge 0x562cfc; 0x562d06 vcmp t,0.9999999 MI. */
         fVar26 = ABS(fVar24);
-        uVar5 = (uVar3 & 0xfffffff) | (uint)(fVar26 < 1.0000001e-07f) << 0x1f;
-        in_fpscr = uVar5 | (uint)NAN(fVar26) << 0x1c;
-        bVar13 = (byte)(uVar5 >> 0x1f);
-        bVar15 = (byte)(in_fpscr >> 0x1c) & 1;
-        if (bVar13 == bVar15) {
+        bool quad_y_ok = (fVar26 >= 1.0000001e-07f);
+        if (quad_y_ok) {
           fVar23 = pp309_divide_then_negate(fVar23, fVar24);
-          in_fpscr = (uVar3 & 0xfffffff) | (uint)(fVar23 < 1.0000001e-07f) << 0x1f |
-                     (uint)NAN(fVar23) << 0x1c;
-          bVar15 = (byte)(in_fpscr >> 0x18);
-          bVar13 = bVar15 >> 7;
-          bVar15 = bVar15 >> 4 & 1;
+          quad_y_ok = (fVar23 >= 1.0000001e-07f);
         }
-        if ((bVar13 == bVar15) && (in_fpscr = in_fpscr & 0xfffffff, fVar23 < 0.9999999f)) {
+        if (quad_y_ok && fVar23 < 0.9999999f) {
           fVar24 = 1.0f - fVar23;
           fVar23 = fVar24 * fVar24 * state.previous_y + fVar24 * 2.0f * fVar23 * state.control1_y +
                    fVar23 * fVar23 * state.current_y;
@@ -5018,15 +4827,14 @@ LAB_00563802:
         param_1[7] = pp306_bits(fVar22);
       }
       else if ((bVar13 & 0xf) == 9) {
+        /* stock 0x562d7e vabs rx; 0x562d86 vcmp 1e-5; itttt pl: vabs ry, vcmppl 0x562d9c;
+           bmi.w 0x563802 (ordered less-than on either radius). */
         fVar20 = ABS(state.control1_x);
-        uVar3 = in_fpscr & 0xfffffff;
-        in_fpscr = uVar3 | (uint)(fVar20 < 1.0000001e-05f) << 0x1f;
-        bVar13 = -(char)((int)in_fpscr >> 0x1f);
+        bVar13 = (fVar20 < 1.0000001e-05f);
         if (bVar13 == 0) {
           fVar17 = ABS(state.control1_y);
-          unaff_d9 = (ulonglong)pp306_bits(fVar17);
-          in_fpscr = uVar3 | (uint)(fVar17 < 1.0000001e-05f) << 0x1f;
-          bVar13 = (byte)(in_fpscr >> 0x1f);
+          d9_pair = (ulonglong)pp306_bits(fVar17);
+          bVar13 = (fVar17 < 1.0000001e-05f);
         }
         if (bVar13 != 0) goto LAB_00563802;
         local_a8[5] = state.control2_x;
@@ -5045,15 +4853,14 @@ LAB_00563802:
         fVar32 = local_a8[0] * local_a8[4] - local_a8[1] * fVar23;
         fVar21 = fVar29 + fVar25;
         fVar18 = fVar30 / fVar17;
-        unaff_d9 = CONCAT44(fVar18,fVar17);
+        d9_pair = CONCAT44(fVar18,fVar17);
         fVar27 = fVar32 / fVar17;
         fVar22 = fVar18 + fVar27;
         fVar33 = fVar29 - fVar25;
         fVar18 = fVar18 - fVar27;
         fVar24 = fVar33 * fVar33 + fVar18 * fVar18;
-        uVar3 = in_fpscr & 0xfffffff;
-        in_fpscr = uVar3 | (uint)(fVar24 == 0.0f) << 0x1e;
-        if ((byte)(in_fpscr >> 0x1e) != 0) goto LAB_0056385a;
+        /* stock 0x562e68 vcmp.f32 s0,#0.0; beq.w 0x56385a. */
+        if (fVar24 == 0.0f) goto LAB_0056385a;
         local_8c[0] = 1.0f / fVar24 + -0.25f;
         if (local_8c[0] < 0.0f) {
           local_8c[0] = 0.0f;
@@ -5062,7 +4869,7 @@ LAB_00563802:
           fVar17 = fVar17 * fVar21;
           fVar29 = fVar28 / fVar20;
           fVar30 = fVar30 / fVar17;
-          unaff_d9 = CONCAT44(fVar30,fVar17);
+          d9_pair = CONCAT44(fVar30,fVar17);
           fVar25 = fVar31 / fVar20;
           fVar21 = fVar29 + fVar25;
           fVar27 = fVar32 / fVar17;
@@ -5073,8 +4880,8 @@ LAB_00563802:
         fVar17 = (float)audio_uart_float_sqrt_4397a8(local_8c[0]);
         fVar31 = fVar21 * 0.5f + fVar17 * fVar18;
         fVar32 = fVar22 * 0.5f - fVar17 * fVar33;
-        fVar24 = (float)audio_uart_float_two_input_angle_50969c(pp306_float((uint32_t)(unaff_d9>>32)) - fVar32,fVar29 - fVar31);
-        fVar28 = pp306_float((uint32_t)unaff_d9);
+        fVar24 = (float)audio_uart_float_two_input_angle_50969c(pp306_float((uint32_t)(d9_pair>>32)) - fVar32,fVar29 - fVar31);
+        fVar28 = pp306_float((uint32_t)d9_pair);
         fVar30 = (float)audio_uart_float_two_input_angle_50969c(fVar27 - fVar32,fVar25 - fVar31);
         fVar24 = fVar30 * 57.29578f - fVar24 * 57.29578f;
         if (fVar24 < 0.0f) {
@@ -5090,21 +4897,13 @@ LAB_00563802:
           fVar32 = fVar22 * 0.5f + fVar17 * fVar33;
         }
         fVar17 = fVar31 * fVar20 * fVar23 + fVar32 * fVar28 * local_a8[4];
-        uVar5 = (uVar3 & 0xfffffff) | (uint)(local_a8[5] == 0.0f) << 0x1e;
         fVar21 = fVar31 * fVar20 * local_a8[4] - fVar32 * fVar28 * fVar23;
         local_a8[4] = -1.0f;
-        bVar15 = (byte)(uVar5 >> 0x1e);
+        /* stock 0x562f90 vcmp angle,#0.0; ittt ne; vcmpne 0x562fa4 (180.0); beq.w 0x563488. */
+        bVar15 = (local_a8[5] == 0.0f) || (local_a8[5] == 180.0f);
         if (bVar15 == 0) {
-          uVar5 = (uVar3 & 0xfffffff) | (uint)(local_a8[5] == 180.0f) << 0x1e;
-          bVar15 = (byte)(uVar5 >> 0x1e);
-        }
-        if (bVar15 == 0) {
-          uVar3 = (uVar5 & 0xfffffff) | (uint)(local_a8[5] == 90.0f) << 0x1e;
-          bVar15 = (byte)(uVar3 >> 0x1e);
-          if (bVar15 == 0) {
-            uVar3 = (uVar5 & 0xfffffff) | (uint)(local_a8[5] == 270.0f) << 0x1e;
-            bVar15 = (byte)(uVar3 >> 0x1e);
-          }
+          /* stock 0x562fb4 vcmp angle,90.0; ittt ne; vcmpne 0x562fca (270.0). */
+          bVar15 = (local_a8[5] == 90.0f) || (local_a8[5] == 270.0f);
           fVar29 = -1.0f;
           if (bVar15 == 0) {
             fVar22 = (float)audio_uart_float_tangent_563f40(fVar26);
@@ -5123,7 +4922,6 @@ LAB_00563802:
             fVar25 = (float)audio_uart_float_trig_mode0_509690(fVar30);
             fVar27 = (float)audio_uart_float_trig_mode0_509690(fVar26);
             fVar25 = (fVar21 + fVar20 * fVar22 * fVar24) - fVar28 * fVar25 * fVar27;
-            uVar3 = uVar3 & 0xfffffff;
             fVar22 = fVar25;
             fVar24 = fVar18;
             if (fVar25 < fVar23) {
@@ -5137,13 +4935,10 @@ LAB_00563802:
             fVar24 = (float)audio_uart_float_trig_mode0_509690(fVar24);
             fVar27 = (float)audio_uart_float_trig_mode1_50968c(fVar26);
             fVar18 = (fVar17 + fVar20 * fVar18 * fVar25 + fVar28 * fVar24 * fVar27) - fVar17;
-            uVar3 = (uVar3 & 0xfffffff) | (uint)(fVar18 < 0.0f) << 0x1f | (uint)(fVar18 == 0.0f) << 0x1e
-            ;
-            uVar5 = uVar3 | (uint)NAN(fVar18) << 0x1c;
             fVar25 = fVar23 - fVar21;
-            bVar15 = (byte)(uVar3 >> 0x18);
             fVar24 = fVar29;
-            if (!(bool)(bVar15 >> 6 & 1) && bVar15 >> 7 == ((byte)(uVar5 >> 0x1c) & 1)) {
+            /* stock 0x563106 vcmp.f32 fVar18,#0.0; vmrs; ite gt; vmovgt #1.0 else -1.0 (s22) — GT; matched by order and sqrt-operand shape */
+            if (fVar18 > 0.0f) {
               fVar24 = 1.0f;
             }
             fVar18 = (float)audio_uart_float_sqrt_4397a8(fVar25 * fVar25 + fVar18 * fVar18);
@@ -5154,13 +4949,10 @@ LAB_00563802:
             fVar30 = (float)audio_uart_float_trig_mode0_509690(fVar30);
             fVar27 = (float)audio_uart_float_trig_mode1_50968c(fVar26);
             fVar30 = (fVar17 + fVar20 * fVar24 * fVar25 + fVar28 * fVar30 * fVar27) - fVar17;
-            uVar5 = (uVar5 & 0xfffffff) | (uint)(fVar30 < 0.0f) << 0x1f | (uint)(fVar30 == 0.0f) << 0x1e
-            ;
-            uVar3 = uVar5 | (uint)NAN(fVar30) << 0x1c;
             fVar25 = fVar22 - fVar21;
-            bVar15 = (byte)(uVar5 >> 0x18);
             fVar24 = fVar29;
-            if (!(bool)(bVar15 >> 6 & 1) && bVar15 >> 7 == ((byte)(uVar3 >> 0x1c) & 1)) {
+            /* stock 0x563188 vcmp.f32 fVar30,#0.0; vmrs; ite gt; vmovgt #1.0 else -1.0 (s22) — GT; matched by order and sqrt-operand shape */
+            if (fVar30 > 0.0f) {
               fVar24 = 1.0f;
             }
             fVar30 = (float)audio_uart_float_sqrt_4397a8(fVar25 * fVar25 + fVar30 * fVar30);
@@ -5181,7 +4973,6 @@ LAB_00563802:
             fVar33 = (float)audio_uart_float_trig_mode0_509690(fVar31);
             fVar19 = (float)audio_uart_float_trig_mode1_50968c(fVar26);
             fVar33 = fVar17 + fVar20 * fVar25 * fVar27 + fVar28 * fVar33 * fVar19;
-            uVar3 = uVar3 & 0xfffffff;
             fVar25 = fVar33;
             fVar27 = fVar32;
             if (fVar33 < fVar24) {
@@ -5195,13 +4986,10 @@ LAB_00563802:
             fVar27 = (float)audio_uart_float_trig_mode0_509690(fVar27);
             fVar33 = (float)audio_uart_float_trig_mode0_509690(fVar26);
             fVar19 = fVar24 - fVar17;
-            uVar3 = (uVar3 & 0xfffffff) | (uint)(fVar19 < 0.0f) << 0x1f | (uint)(fVar19 == 0.0f) << 0x1e
-            ;
-            uVar5 = uVar3 | (uint)NAN(fVar19) << 0x1c;
             fVar32 = ((fVar21 + fVar20 * local_a8[4] * fVar32) - fVar28 * fVar27 * fVar33) - fVar21;
-            bVar15 = (byte)(uVar3 >> 0x18);
             fVar27 = fVar29;
-            if (!(bool)(bVar15 >> 6 & 1) && bVar15 >> 7 == ((byte)(uVar5 >> 0x1c) & 1)) {
+            /* stock 0x5632ec vcmp.f32 fVar19,#0.0; vmrs; ite gt; vmovgt #1.0 else -1.0 (s22) — GT; matched by order and sqrt-operand shape */
+            if (fVar19 > 0.0f) {
               fVar27 = 1.0f;
             }
             fVar33 = (float)audio_uart_float_sqrt_4397a8(fVar32 * fVar32 + fVar19 * fVar19);
@@ -5212,12 +5000,9 @@ LAB_00563802:
             fVar31 = (float)audio_uart_float_trig_mode0_509690(fVar31);
             fVar26 = (float)audio_uart_float_trig_mode0_509690(fVar26);
             fVar19 = fVar25 - fVar17;
-            uVar3 = (uVar5 & 0xfffffff) | (uint)(fVar19 < 0.0f) << 0x1f | (uint)(fVar19 == 0.0f) << 0x1e
-            ;
-            uVar5 = uVar3 | (uint)NAN(fVar19) << 0x1c;
             fVar20 = ((fVar21 + fVar32 * fVar20 * fVar33) - fVar31 * fVar28 * fVar26) - fVar21;
-            bVar15 = (byte)(uVar3 >> 0x18);
-            if (!(bool)(bVar15 >> 6 & 1) && bVar15 >> 7 == ((byte)(uVar5 >> 0x1c) & 1)) {
+            /* stock 0x56336a vcmp.f32 fVar19,#0.0; vmrs; ite gt; vmovgt #1.0 else -1.0 (s22) — GT; matched by order and sqrt-operand shape */
+            if (fVar19 > 0.0f) {
               fVar29 = 1.0f;
             }
             fVar26 = (float)audio_uart_float_sqrt_4397a8(fVar20 * fVar20 + fVar19 * fVar19);
@@ -5233,26 +5018,20 @@ LAB_00563802:
             fVar22 = (float)audio_uart_float_inverse_magnitude_58ecbc(fVar28 / fVar22);
             fVar30 = (float)audio_uart_float_remainder_577c3c(fVar22 * -1.0f + 6.2831855f,pp306_float(0x40c90fdbu));
             fVar25 = -fVar20;
-            uVar3 = (uVar3 & 0xfffffff) | (uint)(fVar25 < 0.0f) << 0x1f | (uint)(fVar25 == 0.0f) << 0x1e
-            ;
-            uVar5 = uVar3 | (uint)NAN(fVar25) << 0x1c;
             fVar23 = fVar21 - fVar28;
             fVar22 = fVar21 + fVar28;
             fVar24 = fVar17 - fVar20;
-            bVar15 = (byte)(uVar3 >> 0x18);
             fVar26 = fVar29;
-            if (!(bool)(bVar15 >> 6 & 1) && bVar15 >> 7 == ((byte)(uVar5 >> 0x1c) & 1)) {
+            /* stock 0x563400 vcmp.f32 fVar25,#0.0; vmrs; ite gt; vmovgt #1.0 else -1.0 (s22) — GT; matched by order and sqrt-operand shape */
+            if (fVar25 > 0.0f) {
               fVar26 = 1.0f;
             }
             fVar25 = (float)audio_uart_float_sqrt_4397a8(fVar25 * fVar25);
             fVar25 = (float)audio_uart_float_inverse_magnitude_58ecbc(0.0f / fVar25);
             fVar27 = (float)audio_uart_float_remainder_577c3c(fVar26 * fVar25 + 6.2831855f,pp306_float(0x40c90fdbu));
-            uVar3 = (uVar5 & 0xfffffff) | (uint)(fVar20 < 0.0f) << 0x1f | (uint)(fVar20 == 0.0f) << 0x1e
-            ;
-            uVar5 = uVar3 | (uint)NAN(fVar20) << 0x1c;
             fVar25 = fVar17 + fVar20;
-            bVar15 = (byte)(uVar3 >> 0x18);
-            if (!(bool)(bVar15 >> 6 & 1) && bVar15 >> 7 == ((byte)(uVar5 >> 0x1c) & 1)) {
+            /* stock 0x563446 vcmp.f32 fVar20,#0.0; vmrs; ite gt; vmovgt #1.0 else -1.0 (s22) — GT; matched by order and sqrt-operand shape */
+            if (fVar20 > 0.0f) {
               fVar29 = 1.0f;
             }
             fVar20 = (float)audio_uart_float_sqrt_4397a8(fVar20 * fVar20);
@@ -5269,13 +5048,11 @@ LAB_00563802:
           fVar22 = (float)audio_uart_float_inverse_magnitude_58ecbc(fVar20 / fVar22);
           fVar30 = (float)audio_uart_float_remainder_577c3c(fVar22 * -1.0f + 6.2831855f,pp306_float(0x40c90fdbu));
           fVar26 = -fVar28;
-          uVar3 = (uVar5 & 0xfffffff) | (uint)(fVar26 < 0.0f) << 0x1f | (uint)(fVar26 == 0.0f) << 0x1e;
-          uVar5 = uVar3 | (uint)NAN(fVar26) << 0x1c;
           fVar23 = fVar21 - fVar20;
           fVar22 = fVar21 + fVar20;
           fVar24 = fVar17 - fVar28;
-          bVar15 = (byte)(uVar3 >> 0x18);
-          if ((bool)(bVar15 >> 6 & 1) || bVar15 >> 7 != ((byte)(uVar5 >> 0x1c) & 1)) {
+          /* stock 0x5634e4 vcmp.f32 fVar26,#0.0; vmrs; ite gt; vmovgt #1.0 else -1.0 (s22) — LE; matched by order and sqrt-operand shape */
+          if (!(fVar26 > 0.0f)) {
             fVar20 = -1.0f;
           }
           else {
@@ -5284,11 +5061,9 @@ LAB_00563802:
           fVar26 = (float)audio_uart_float_sqrt_4397a8(fVar26 * fVar26);
           fVar26 = (float)audio_uart_float_inverse_magnitude_58ecbc(0.0f / fVar26);
           fVar27 = (float)audio_uart_float_remainder_577c3c(fVar20 * fVar26 + 6.2831855f,pp306_float(0x40c90fdbu));
-          uVar3 = (uVar5 & 0xfffffff) | (uint)(fVar28 < 0.0f) << 0x1f | (uint)(fVar28 == 0.0f) << 0x1e;
-          uVar5 = uVar3 | (uint)NAN(fVar28) << 0x1c;
           fVar25 = fVar17 + fVar28;
-          bVar15 = (byte)(uVar3 >> 0x18);
-          if ((bool)(bVar15 >> 6 & 1) || bVar15 >> 7 != ((byte)(uVar5 >> 0x1c) & 1)) {
+          /* stock 0x56352e vcmp.f32 fVar28,#0.0; vmrs; ite gt; vmovgt #1.0 else -1.0 (s22) — LE; matched by order and sqrt-operand shape */
+          if (!(fVar28 > 0.0f)) {
             fVar20 = -1.0f;
           }
           else {
@@ -5301,36 +5076,31 @@ LAB_00563802:
         fVar31 = -1.0f;
         fVar26 = (float)audio_uart_float_remainder_577c3c(fVar20,pp306_float(0x40c90fdbu));
         fVar28 = local_a8[2] - fVar17;
-        uVar3 = (uVar5 & 0xfffffff) | (uint)(fVar28 < 0.0f) << 0x1f | (uint)(fVar28 == 0.0f) << 0x1e;
-        uVar5 = uVar3 | (uint)NAN(fVar28) << 0x1c;
         fVar29 = local_a8[3] - fVar21;
-        bVar15 = (byte)(uVar3 >> 0x18);
         fVar20 = fVar31;
-        if (!(bool)(bVar15 >> 6 & 1) && bVar15 >> 7 == ((byte)(uVar5 >> 0x1c) & 1)) {
+        /* stock 0x563588 vcmp.f32 fVar28,#0.0; vmrs; ite gt; vmovgt #1.0 else -1.0 (s22) — GT; matched by order and sqrt-operand shape */
+        if (fVar28 > 0.0f) {
           fVar20 = 1.0f;
         }
         fVar28 = (float)audio_uart_float_sqrt_4397a8(fVar29 * fVar29 + fVar28 * fVar28);
         fVar28 = (float)audio_uart_float_inverse_magnitude_58ecbc(fVar29 / fVar28);
         fVar20 = (float)audio_uart_float_remainder_577c3c(fVar20 * fVar28 + 6.2831855f,pp306_float(0x40c90fdbu));
         fVar17 = local_a8[0] - fVar17;
-        uVar3 = (uVar5 & 0xfffffff) | (uint)(fVar17 < 0.0f) << 0x1f | (uint)(fVar17 == 0.0f) << 0x1e;
-        in_fpscr = uVar3 | (uint)NAN(fVar17) << 0x1c;
         fVar21 = local_a8[1] - fVar21;
-        unaff_d9 = CONCAT44(fVar21,fVar20);
-        bVar15 = (byte)(uVar3 >> 0x18);
-        if (!(bool)(bVar15 >> 6 & 1) && bVar15 >> 7 == ((byte)(in_fpscr >> 0x1c) & 1)) {
+        d9_pair = CONCAT44(fVar21,fVar20);
+        /* stock 0x5635da vcmp.f32 fVar17,#0.0; vmrs; it gt; vmovgt #1.0 else -1.0 (s22) — GT; matched by order and sqrt-operand shape */
+        if (fVar17 > 0.0f) {
           fVar31 = 1.0f;
         }
         fVar17 = (float)audio_uart_float_sqrt_4397a8(fVar21 * fVar21 + fVar17 * fVar17);
         fVar17 = (float)audio_uart_float_inverse_magnitude_58ecbc(fVar21 / fVar17);
         fVar17 = (float)audio_uart_float_remainder_577c3c(fVar31 * fVar17 + 6.2831855f,pp306_float(0x40c90fdbu));
         if ((bVar13 & 1) == 0) {
-          unaff_d9 = (ulonglong)pp306_bits(fVar17);
+          d9_pair = (ulonglong)pp306_bits(fVar17);
           fVar17 = fVar20;
         }
         bVar16 = false;
-        fVar20 = pp306_float((uint32_t)unaff_d9);
-        in_fpscr = in_fpscr & 0xfffffff;
+        fVar20 = pp306_float((uint32_t)d9_pair);
         /* 563620..56374e uses N/PL, including unordered outcomes. */
         {
           int wrapped = pp308_negative_compare(fVar17, fVar20);
@@ -5445,7 +5215,6 @@ LAB_0056385a:
 
 
 #undef ABS
-#undef NAN
 #undef SUB41
 #undef CONCAT44
 
@@ -5463,10 +5232,10 @@ extern uint32_t audio_uart_lv_style_property_44bdea(void *,uint32_t,uint32_t);
 /* Complete native coordinate getters; qualification receipt round321. */
 /* Complete native43fc2a..43fc63 and43feca..43ff43; pinned lv_obj_pos.c.
  * Genuine native null assertion: diagnostic call then faulting volatile word write.
- * No assertion-body placeholder or fabricated successful return. */
+ * No assertion-body default or fabricated successful return. */
 #include <stdint.h>
 #include <stddef.h>
-extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,const char *,...);
+extern void lv_log_add(uint32_t,const char *,uint32_t,const char *,const char *,...);
 extern void audio_uart_lv_area_copy_43ee94(void *,const void *);
 extern int32_t audio_uart_lv_style_pad_left_43efc6(void *,uint32_t,uint32_t,uint32_t);
 extern int32_t audio_uart_lv_style_pad_right_43eff4(void *,uint32_t);
@@ -5493,7 +5262,7 @@ extern uint32_t audio_uart_lv_obj_event_451670(void *,uint32_t,void *);
  * Inclusive extents and product wrap modulo2^32; preserve repeated size reads. */
 #include <stdint.h>
 extern void audio_uart_lv_get_scrollbar_areas_44eb28(void *,int32_t *,int32_t *);
-extern void audio_uart_display_invalidate_area(void *,const int32_t *);
+extern void lv_obj_invalidate_area(void *,const int32_t *);
 
 /* Full native440a3c..440c2d/440c2e..440d47, pinned lv_obj_pos.c1077..1230.
  * Native wrap, repeated LV_MAX margin fetches, scroll mutation and child order retained. */
@@ -5538,7 +5307,6 @@ extern uint8_t audio_uart_display_lv_root[];
  * All signed arithmetic wraps explicitly; DPI reads retain native macro repeats. */
 #include <stdint.h>
 #include <limits.h>
-extern void audio_uart_lv_area_set_450b5c(void *,uint32_t,uint32_t,uint32_t,uint32_t);
 extern uint32_t audio_uart_lv_obj_has_flag_43e0e0(void *,uint32_t);
 extern uint32_t audio_uart_lv_get_scrollbar_mode_44e42c(const void *);
 extern void *audio_uart_lv_input_next_452edc(void *);
@@ -5568,7 +5336,7 @@ extern int32_t audio_uart_lv_display_dpi_44fbe6(void *);
  * Unadmitted: complete native/selected-TU/compiler qualification remains.
  * Native null assertions retain genuine faulting stores, not substitute traps. */
 #include <stdint.h>
-extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,const char *,...);
+extern void lv_log_add(uint32_t,const char *,uint32_t,const char *,const char *,...);
 extern uint32_t audio_uart_lv_child_count_44ddea(void *);
 extern uint32_t audio_uart_lv_obj_has_flag_any_43e11c(void *,uint32_t);
 extern int32_t audio_uart_lv_style_margin_bottom_43ef7a(void *,uint32_t);
@@ -5591,7 +5359,7 @@ extern int32_t audio_uart_lv_obj_x_44e486(void *);
  * Historical basic_invalidate symbol retained to resolve its existing callers.
  * UNADMITTED: native comparison/selected-TU/API-declaration gates remain. */
 #include <stdint.h>
-extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,const char *,...);
+extern void lv_log_add(uint32_t,const char *,uint32_t,const char *,const char *,...);
 extern void *audio_uart_lv_obj_parent_44dca2(void *);
 extern int32_t audio_uart_lv_obj_width_43fd9e(void *);
 extern int32_t audio_uart_lv_obj_height_43fdda(void *);
@@ -5615,7 +5383,7 @@ extern int32_t audio_uart_lv_style_margin_top_43ef70(void *,uint32_t);
 extern int32_t audio_uart_lv_style_margin_bottom_43ef7a(void *,uint32_t);
 extern int32_t audio_uart_lv_clamp_width_4408d6(int32_t,int32_t,int32_t,int32_t);
 extern int32_t audio_uart_lv_clamp_height_440968(int32_t,int32_t,int32_t,int32_t);
-extern void audio_uart_display_size_changed(void *); /* native440656 invalidate */
+extern void lv_obj_invalidate(void *); /* native440656 invalidate */
 extern void audio_uart_lv_obj_coords_43fc2a(const void *,void *);
 extern void audio_uart_lv_obj_content_coords_43feca(void *,void *);
 extern uint32_t audio_uart_lv_area_contains_450f28(const int32_t *,const int32_t *,uint32_t);
@@ -5682,7 +5450,7 @@ uint32_t audio_uart_lv_fs_dir_close_4c90e4(void *driver,void *directory)
 #include <stddef.h>
 extern void *audio_uart_lv_malloc(uint32_t);
 extern void audio_uart_lv_heap_free(void *);
-extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,const char *,...);
+extern void lv_log_add(uint32_t,const char *,uint32_t,const char *,const char *,...);
 extern int32_t audio_uart_lv_snprintf_483fd0(char *,uint32_t,const char *,...);
 extern uint32_t audio_uart_lv_strlcpy_454778(char *,const char *,uint32_t);
 extern int32_t audio_uart_lv_string_compare_4547be(const char *,const char *);
@@ -5696,7 +5464,7 @@ static void *lv344_filesystem(const void *driver)
 {return (void *)(uintptr_t)*(const volatile uint32_t *)((const uint8_t *)driver+48u);}
 static _Noreturn void lv344_oom(uint32_t line,const char *function,const char *expression)
 {
- audio_uart_lvgl_log(3u,"D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\lvgl_v9.3\\LVGL\\src\\libs\\fsdrv\\lv_fs_littlefs.c",
+ lv_log_add(3u,"D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\lvgl_v9.3\\LVGL\\src\\libs\\fsdrv\\lv_fs_littlefs.c",
   line,function,"Asserted at expression: %s (%s)",expression,"Out of memory");
  for(;;)*(volatile uint32_t *)(uintptr_t)UINT32_MAX=0u;
 }
@@ -6451,7 +6219,7 @@ void *audio_uart_lv_draw_unit_create_484398(uint32_t size)
 {
  void *unit=audio_uart_lv_heap_alloc(size);
  if(unit==0){
-  audio_uart_lvgl_log(3u,"D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\lvgl_v9.3\\LVGL\\src\\draw\\lv_draw.c",84u,"lv_draw_create_unit","Asserted at expression: %s (%s)","new_unit != NULL","Out of memory");
+  lv_log_add(3u,"D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\lvgl_v9.3\\LVGL\\src\\draw\\lv_draw.c",84u,"lv_draw_create_unit","Asserted at expression: %s (%s)","new_unit != NULL","Out of memory");
   for(;;)*(volatile uint32_t *)(uintptr_t)UINT32_MAX=0u;
  }
  draw360_store(unit,0u,draw360_word(audio_uart_display_lv_root,316u));
@@ -6528,7 +6296,7 @@ void *audio_uart_lv_draw_layer_alloc_buf_484836(void *layer)
  void *buffer=audio_uart_display_surface_alloc(width,height,*(const volatile uint8_t *)((const uint8_t *)layer+20u),0u);
  draw360_store(layer,0u,(uint32_t)(uintptr_t)buffer);
  if(draw360_word(layer,0u)==0u){
-  audio_uart_lvgl_log(2u,"D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\lvgl_v9.3\\LVGL\\src\\draw\\lv_draw.c",471u,"lv_draw_layer_alloc_buf","Allocating layer buffer failed. Try later");return 0;
+  lv_log_add(2u,"D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\lvgl_v9.3\\LVGL\\src\\draw\\lv_draw.c",471u,"lv_draw_layer_alloc_buf","Allocating layer buffer failed. Try later");return 0;
  }
  draw360_store(audio_uart_display_lv_root,324u,bytes+draw360_word(audio_uart_display_lv_root,324u));
  if(audio_uart_lv_color_has_alpha_440fc4(*(const volatile uint8_t *)((const uint8_t *)layer+20u))!=0u)
@@ -6546,14 +6314,14 @@ extern void audio_uart_ft_done_memory_5676c6(void *);
 extern void *audio_uart_lv_pool_allocate_484180(void *,uint32_t);
 extern void *audio_uart_lv_pool_realloc_484234(void *,void *,uint32_t);
 void *audio_uart_ft_memory_alloc_5676d4(void *memory,int32_t size)
-{(void)memory;return audio_uart_lv_pool_allocate_484180((void *)(uintptr_t)0x20000354u,(uint32_t)size);}
+{(void)memory;return audio_uart_lv_pool_allocate_484180((void *)(uintptr_t)((uint32_t)(uintptr_t)g2ref_g2_stock_ram_20000338+0x1cu),(uint32_t)size);}
 void *audio_uart_ft_memory_realloc_5676e0(void *memory,int32_t old_size,int32_t new_size,void *block)
-{(void)memory;(void)old_size;return audio_uart_lv_pool_realloc_484234((void *)(uintptr_t)0x20000354u,block,(uint32_t)new_size);}
+{(void)memory;(void)old_size;return audio_uart_lv_pool_realloc_484234((void *)(uintptr_t)((uint32_t)(uintptr_t)g2ref_g2_stock_ram_20000338+0x1cu),block,(uint32_t)new_size);}
 void audio_uart_ft_memory_free_5676ec(void *memory,void *block)
-{(void)memory;audio_uart_lv_pool_free_48429e((void *)(uintptr_t)0x20000354u,block);}
+{(void)memory;audio_uart_lv_pool_free_48429e((void *)(uintptr_t)((uint32_t)(uintptr_t)g2ref_g2_stock_ram_20000338+0x1cu),block);}
 void *audio_uart_ft_new_memory_5676a0(void)
 {
- void *memory=audio_uart_lv_pool_allocate_484180((void *)(uintptr_t)0x20000354u,16u);
+ void *memory=audio_uart_lv_pool_allocate_484180((void *)(uintptr_t)((uint32_t)(uintptr_t)g2ref_g2_stock_ram_20000338+0x1cu),16u);
  if(memory!=0){
   draw360_store(memory,0u,0u);
   draw360_store(memory,4u,(uint32_t)(uintptr_t)&audio_uart_ft_memory_alloc_5676d4);
@@ -6563,7 +6331,7 @@ void *audio_uart_ft_new_memory_5676a0(void)
  return memory;
 }
 void audio_uart_ft_done_memory_5676c6(void *memory)
-{audio_uart_lv_pool_free_48429e((void *)(uintptr_t)0x20000354u,memory);}
+{audio_uart_lv_pool_free_48429e((void *)(uintptr_t)((uint32_t)(uintptr_t)g2ref_g2_stock_ram_20000338+0x1cu),memory);}
 extern uint32_t audio_uart_ft_stream_open_path_5675e8(void *,const char *);
 /* Full LVGL filesystem read callback567734..56777a70bytes. */
 extern uint32_t audio_uart_lv_fs_file_read_4c6f46(void *,void *,uint32_t,uint32_t *);
@@ -6582,7 +6350,7 @@ void audio_uart_ft_lv_fs_stream_close_5676f8(void *stream)
 {
  void *file=draw360_pointer(stream,12u);
  (void)audio_uart_lv_fs_file_close_4c6ee0(file);
- audio_uart_lv_pool_free_48429e((void *)(uintptr_t)0x20000354u,file);
+ audio_uart_lv_pool_free_48429e((void *)(uintptr_t)((uint32_t)(uintptr_t)g2ref_g2_stock_ram_20000338+0x1cu),file);
  draw360_store(stream,12u,0u);draw360_store(stream,4u,0u);draw360_store(stream,0u,0u);
 }
 /* Full product FT_Stream_Open5675e8..5676a0184bytes, pinned LVGL adapter contract. */
@@ -6599,9 +6367,9 @@ uint32_t audio_uart_ft_stream_open_path_5675e8(void *stream,const char *pathname
  if((uint8_t)audio_uart_lv_fs_file_tell_4c7018(file,&size)!=0u){(void)audio_uart_lv_fs_file_close_4c6ee0(file);return 81u;}
  draw360_store(stream,4u,size);
  (void)audio_uart_lv_fs_file_seek_4c6fba(file,0u,0u);
- void *file_p=audio_uart_lv_pool_allocate_484180((void *)(uintptr_t)0x20000354u,12u);
+ void *file_p=audio_uart_lv_pool_allocate_484180((void *)(uintptr_t)((uint32_t)(uintptr_t)g2ref_g2_stock_ram_20000338+0x1cu),12u);
  if(file_p==0){
-  audio_uart_lvgl_log(3u,"D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\lvgl_v9.3\\lvgl_ambiq_demo\\lvgl_ttf\\src\\am_ftsystem.c",129u,"FT_Stream_Open","Asserted at expression: %s (%s)","file_p != NULL","Out of memory");
+  lv_log_add(3u,"D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\lvgl_v9.3\\lvgl_ambiq_demo\\lvgl_ttf\\src\\am_ftsystem.c",129u,"FT_Stream_Open","Asserted at expression: %s (%s)","file_p != NULL","Out of memory");
   for(;;){}
  }
  if(file_p==0){(void)audio_uart_lv_fs_file_close_4c6ee0(file);return 81u;}
@@ -6883,3 +6651,7 @@ extern int32_t audio_uart_font_path_compare(const char *, const char *);
 struct FT_Module_Class;
 struct FT_Driver_ClassRec;
 struct FT_Renderer_Class;
+
+/* Single implementation of stock nema texture bind 0x4b1298. */
+__typeof__(audio_uart_nema_bind_tex_4b1298) audio_uart_ambiq_texture_bind_4b1298
+    __attribute__((alias("audio_uart_nema_bind_tex_4b1298")));

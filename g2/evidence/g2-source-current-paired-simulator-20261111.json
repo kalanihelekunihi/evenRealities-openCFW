@@ -1,0 +1,121 @@
+{
+  "schema": 1,
+  "target": "Current source-built Apollo main versus authenticated stock in the same Renode scenarios",
+  "source_build_report": "build/g2-touch-crt-full-20261111/report.json",
+  "strict_link_report": "build/g2-touch-crt-bundle-20261111/link-report.json",
+  "source_apollo_main": {
+    "path": "build/g2-touch-crt-bundle-20261111/g2-apollo-main/g2-apollo-main.bin",
+    "bytes": 3819008,
+    "sha256": "49d2a068d942133de6cb9e0b80bb26cbf293dc37ca264b3d045130f3fc885d8b"
+  },
+  "stock_apollo_main": {
+    "path": "g2/blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin",
+    "fwpk_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+    "unwrapped_bytes": 3523364,
+    "unwrapped_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+    "verified_fwpk_offset": 32
+  },
+  "emulator": {
+    "path": "/Users/kalani/Repo/jimrandomh/g2-firmware-emulator",
+    "git_head": "f30527c0b7e6fa6e9be06e7067e49468197fa258",
+    "runsim_sha256": "a9764f6fa1cbb74a13fa3433ef95a00e0c4749f17b05d33043347b5de08e9028",
+    "hubsim_sha256": "56dcd86d045389faca5381ecde15c68177b60c2ffd5a7d5df19c72d091c83196",
+    "scenario_env": "PAIRED=1 WIDE=1 LISTPAGE=1 NOSILENT=1; GPUJIM omitted because this Renode build lacks GeneralDrawPolicy",
+    "seconds_hci": 2
+  },
+  "hci": {
+    "stock_packets": 56,
+    "source_packets": 56,
+    "same_sequence": true,
+    "packet_sequence_sha256": "fa73962fbfa228a8eaf7666438c22f9b547bd17f4d7493df402627d0d068d24c",
+    "last_packet": "010A200101"
+  },
+  "paired_hub": {
+    "stock_transcript_sha256": "ae56ad9152ff36f55035ec461c8e8337e076f624a942a0af3cdf2eba890ec2ad",
+    "source_transcript_sha256": "d27be33cc6ba19c0a05025cbd6015aadbf046414fbd9f45142baaae39e73cd65",
+    "pairing_stock": [
+      "complete"
+    ],
+    "pairing_source": [
+      "complete"
+    ],
+    "phone_steps": 18,
+    "phone_step_notification_counts_equal": true,
+    "touch_checks": 5,
+    "touch_check_results_equal": true,
+    "stock_notifications": 16,
+    "source_notifications": 16,
+    "battery_field_12_differences": [
+      {
+        "index": 5,
+        "stock": 31,
+        "source": 38
+      },
+      {
+        "index": 12,
+        "stock": 31,
+        "source": 38
+      },
+      {
+        "index": 15,
+        "stock": 31,
+        "source": 38
+      }
+    ],
+    "stock_health": [
+      "0xE000ED28",
+      "0x00000000",
+      "0xE000ED2C",
+      "0x00000000",
+      "0x00000000",
+      "0x00000000",
+      "0x514022"
+    ],
+    "source_health": [
+      "0xE000ED28",
+      "0x00000000",
+      "0xE000ED2C",
+      "0x00000000",
+      "0x00000000",
+      "0x00000000",
+      "0x49d568"
+    ]
+  },
+  "battery_path": "Stock and source telemetry have the same measured 3.798 V, 0 mA and 25.00 C after two seconds, but SOC is 31 versus 38. Both use CHG_GetSoc to fill settings field 12. The source-only Nordic fuel-gauge provider is uncalibrated; the divergence is upstream of the settings encoder.",
+  "limits": "The emulator executes Apollo main and models EM9305, codec, touch and case; it does not validate their source code or physical hardware. Heartbeat counters and sync IDs differ with run timing. The battery difference is a concrete source/stock behavior gap, but its underlying algorithm has not been isolated.",
+  "telemetry_after_two_seconds": {
+    "stock": {
+      "charge_status": 0,
+      "soc": 31,
+      "voltage_mv": 3798,
+      "current_ma": 0,
+      "temperature_centidegrees": 2500,
+      "unknown_tail": 0,
+      "aggregate_soc_cell": 4294967295,
+      "console_sha256": "f1a98172cbc40b791d58f9bbd228883d261430bc35f7a2f1502620025d4f9def"
+    },
+    "source": {
+      "charge_status": 0,
+      "soc": 38,
+      "voltage_mv": 3798,
+      "current_ma": 0,
+      "temperature_centidegrees": 2500,
+      "unknown_tail": 0,
+      "aggregate_soc_cell": 4294967295,
+      "console_sha256": "d7f63b7668f1c01cc02a3096e3894d1e85d23abfd272f2f3f55718810a3224c7"
+    }
+  },
+  "fuel_gauge_reconstruction_scope": {
+    "public_archive": "third-party/upstream/nrf-fuel-gauge-1.0.1/lib/cortex-m4/hard-float/libnrf_fuel_gauge.a",
+    "public_archive_sha256": "a7df103a4c7cb14cff2693c82dc8b04430ce2a565e77c67abb43a18478704f3d",
+    "public_archive_release": "1.0.1; not the exact c205a2 stock build",
+    "ghidra_version": "12.1.4",
+    "initializer_body_bytes": 196,
+    "initializer_model_helper_bytes": 926,
+    "process_body_bytes": 294,
+    "process_core_helper_bytes": 4314,
+    "model_file": "g2/src/apollo-main/drivers/power/npm1300/battery-model/g2c_npm1300_battery_model.c",
+    "model_file_sha256": "be1d9b2b17c88bebf2fadc56830a93d38ee9a4b1778fc1a87341cc51cdd21aa2",
+    "limitation": "Ghidra inspected the related public archive, not the exact stock build. The core helper uses state and many model arrays; its logic is not represented by the current voltage curve."
+  }
+}

@@ -1,6 +1,125 @@
-/* Symbolic native FlashDB iterator; no instruction-byte arrays. */
-__attribute__((naked,section(".text.r1_health_sync_provider_00063ad8"))) void r1_health_sync_provider_00063ad8(void) { __asm__ volatile("FDI_63ad8:\nstmdb\tsp!, {r0, r1, r2, r3, r4, r5, r6, r7, r8, r9, sl, fp, lr}\nFDI_63adc:\nsub\tsp, #124\nFDI_63ade:\nmov.w\tr9, #0\nFDI_63ae2:\nmov\tr6, r0\nFDI_63ae4:\nstr.w\tr9, [sp, #104]\nFDI_63ae8:\nldrb\tr0, [r0, #24]\nFDI_63aea:\nmov\tr8, r2\nFDI_63aec:\nmov\tr4, r1\nFDI_63aee:\ncbnz r0, FDI_63b0e\nFDI_63af0:\nadr r0, FDI_63c60\nFDI_63af2:\nbl r1_native_printf\nFDI_63af6:\nmov\tr0, r6\nFDI_63af8:\nbl r1_fdb_native_db_path\nFDI_63afc:\nmov\tr2, r0\nFDI_63afe:\nadr r0, FDI_63c70\nFDI_63b00:\nldr\tr1, [r6, #0]\nFDI_63b02:\nbl r1_native_printf\nFDI_63b06:\nadr r0, FDI_63c7c\nFDI_63b08:\nldr\tr1, [r6, #0]\nFDI_63b0a:\nbl r1_native_printf\nFDI_63b0e:\ncmp\tr4, r8\nFDI_63b10:\nbgt.n FDI_63b1e\nFDI_63b12:\nldr\tr0, [r6, #20]\nFDI_63b14:\nstr\tr0, [sp, #52]\nFDI_63b16:\nldr.w fp, FDI_63ca4\nFDI_63b1a:\nldr r0, FDI_63ca8\nFDI_63b1c:\nb.n FDI_63b28\nFDI_63b1e:\nldr\tr0, [r6, #44]\nFDI_63b20:\nstr\tr0, [sp, #52]\nFDI_63b22:\nldr.w fp, FDI_63cac\nFDI_63b26:\nldr r0, FDI_63cb0\nFDI_63b28:\nmov\tsl, r0\nFDI_63b2a:\nldr\tr0, [sp, #136]\nFDI_63b2c:\ncmp\tr0, #0\nFDI_63b2e:\nbeq.n FDI_63b76\nFDI_63b30:\nldr\tr5, [sp, #52]\nFDI_63b32:\nldr\tr1, [r6, #28]\nFDI_63b34:\ncbz r1, FDI_63b3a\nFDI_63b36:\nmov\tr0, r6\nFDI_63b38:\nblx\tr1\nFDI_63b3a:\nldr\tr1, [r6, #12]\nFDI_63b3c:\nmovs\tr3, #0\nFDI_63b3e:\nadd\tr9, r1\nFDI_63b40:\nadd\tr2, sp, #8\nFDI_63b42:\nmov\tr1, r5\nFDI_63b44:\nmov\tr0, r6\nFDI_63b46:\nbl r1_fdb_native_read_sector\nFDI_63b4a:\ncbnz r0, FDI_63b5c\nFDI_63b4c:\nldrb.w\tr0, [sp, #9]\nFDI_63b50:\ncmp\tr0, #2\nFDI_63b52:\nbeq.n FDI_63b7c\nFDI_63b54:\ncmp\tr0, #3\nFDI_63b56:\nbeq.n FDI_63b88\nFDI_63b58:\ncmp\tr0, #1\nFDI_63b5a:\nbeq.n FDI_63b6c\nFDI_63b5c:\nmov\tr2, r9\nFDI_63b5e:\nadd\tr1, sp, #8\nFDI_63b60:\nmov\tr0, r6\nFDI_63b62:\nmov\tr3, fp\nFDI_63b64:\nblx\tr3\nFDI_63b66:\nmov\tr5, r0\nFDI_63b68:\nadds\tr0, r0, #1\nFDI_63b6a:\nbne.n FDI_63b3a\nFDI_63b6c:\nldr\tr1, [r6, #32]\nFDI_63b6e:\ncmp\tr1, #0\nFDI_63b70:\nbeq.n FDI_63b76\nFDI_63b72:\nmov\tr0, r6\nFDI_63b74:\nblx\tr1\nFDI_63b76:\nadd\tsp, #140\nFDI_63b78:\nldmia.w\tsp!, {r4, r5, r6, r7, r8, r9, sl, fp, pc}\nFDI_63b7c:\nmovs\tr2, #40\nFDI_63b7e:\nadd.w\tr1, r6, #40\nFDI_63b82:\nadd\tr0, sp, #8\nFDI_63b84:\nbl r1_native_memory_move\nFDI_63b88:\nldr\tr0, [sp, #104]\nFDI_63b8a:\ncbnz r0, FDI_63bb8\nFDI_63b8c:\ncmp\tr4, r8\nFDI_63b8e:\nbgt.n FDI_63ba2\nFDI_63b90:\nldr\tr0, [sp, #52]\nFDI_63b92:\ncmp\tr5, r0\nFDI_63b94:\nbne.n FDI_63b9c\nFDI_63b96:\nldr\tr0, [sp, #20]\nFDI_63b98:\ncmp\tr0, r4\nFDI_63b9a:\nbge.n FDI_63bb8\nFDI_63b9c:\nldr\tr0, [sp, #24]\nFDI_63b9e:\ncmp\tr0, r4\nFDI_63ba0:\nbge.n FDI_63bb8\nFDI_63ba2:\ncmp\tr4, r8\nFDI_63ba4:\nble.n FDI_63b5c\nFDI_63ba6:\nldr\tr0, [sp, #52]\nFDI_63ba8:\ncmp\tr5, r0\nFDI_63baa:\nbne.n FDI_63bb2\nFDI_63bac:\nldr\tr0, [sp, #24]\nFDI_63bae:\ncmp\tr0, r4\nFDI_63bb0:\nble.n FDI_63bb8\nFDI_63bb2:\nldr\tr0, [sp, #20]\nFDI_63bb4:\ncmp\tr0, r4\nFDI_63bb6:\nbgt.n FDI_63b5c\nFDI_63bb8:\nmovs\tr0, #1\nFDI_63bba:\nldr\tr5, [sp, #12]\nFDI_63bbc:\nldr\tr7, [sp, #28]\nFDI_63bbe:\nadds\tr5, #80\nFDI_63bc0:\nstr\tr0, [sp, #104]\nFDI_63bc2:\nsubs\tr0, r7, r5\nFDI_63bc4:\nadd.w\tr0, r0, r0, lsr #31\nFDI_63bc8:\nmovs\tr1, #31\nFDI_63bca:\nadd.w\tr1, r1, r0, asr #1\nFDI_63bce:\nand.w\tr1, r1, #31\nFDI_63bd2:\nrsb\tr0, r1, r0, asr #1\nFDI_63bd6:\nadd\tr0, r5\nFDI_63bd8:\nadds\tr0, #31\nFDI_63bda:\nstr\tr0, [sp, #92]\nFDI_63bdc:\nadd\tr1, sp, #80\nFDI_63bde:\nmov\tr0, r6\nFDI_63be0:\nbl r1_fdb_native_read_tsl\nFDI_63be4:\nldr\tr1, [sp, #84]\nFDI_63be6:\ncmp\tr1, r4\nFDI_63be8:\nbge.n FDI_63bf2\nFDI_63bea:\nldr\tr5, [sp, #92]\nFDI_63bec:\nadd.w\tr5, r5, #32\nFDI_63bf0:\nb.n FDI_63bfa\nFDI_63bf2:\nble.n FDI_63c5c\nFDI_63bf4:\nldr\tr7, [sp, #92]\nFDI_63bf6:\nsub.w\tr7, r7, #32\nFDI_63bfa:\ncmp\tr5, r7\nFDI_63bfc:\nble.n FDI_63bc2\nFDI_63bfe:\ncmp\tr4, r8\nFDI_63c00:\nble.n FDI_63c14\nFDI_63c02:\nadd\tr1, sp, #80\nFDI_63c04:\nmov\tr0, r6\nFDI_63c06:\nstr\tr5, [sp, #92]\nFDI_63c08:\nbl r1_fdb_native_read_tsl\nFDI_63c0c:\nldr\tr1, [sp, #84]\nFDI_63c0e:\ncmp\tr1, r4\nFDI_63c10:\nble.n FDI_63c14\nFDI_63c12:\nsubs\tr5, #32\nFDI_63c14:\nstr\tr5, [sp, #72]\nFDI_63c16:\nadd\tr1, sp, #60\nFDI_63c18:\nmov\tr0, r6\nFDI_63c1a:\nbl r1_fdb_native_read_tsl\nFDI_63c1e:\nldrb.w\tr0, [sp, #60]\nFDI_63c22:\ncbz r0, FDI_63c4c\nFDI_63c24:\ncmp\tr4, r8\nFDI_63c26:\nbgt.n FDI_63c32\nFDI_63c28:\nldr\tr0, [sp, #64]\nFDI_63c2a:\ncmp\tr0, r4\nFDI_63c2c:\nblt.n FDI_63c32\nFDI_63c2e:\ncmp\tr0, r8\nFDI_63c30:\nble.n FDI_63c40\nFDI_63c32:\ncmp\tr4, r8\nFDI_63c34:\nble.n FDI_63b6c\nFDI_63c36:\nldr\tr0, [sp, #64]\nFDI_63c38:\ncmp\tr0, r4\nFDI_63c3a:\nbgt.n FDI_63b6c\nFDI_63c3c:\ncmp\tr0, r8\nFDI_63c3e:\nblt.n FDI_63b6c\nFDI_63c40:\nldr\tr2, [sp, #136]\nFDI_63c42:\nadd\tr0, sp, #60\nFDI_63c44:\nldr\tr1, [sp, #176]\nFDI_63c46:\nblx\tr2\nFDI_63c48:\ncmp\tr0, #0\nFDI_63c4a:\nbne.n FDI_63b6c\nFDI_63c4c:\nadd\tr1, sp, #60\nFDI_63c4e:\nadd\tr0, sp, #8\nFDI_63c50:\nmov\tr2, sl\nFDI_63c52:\nblx\tr2\nFDI_63c54:\nstr\tr0, [sp, #72]\nFDI_63c56:\nadds\tr0, r0, #1\nFDI_63c58:\nbne.n FDI_63c16\nFDI_63c5a:\nb.n FDI_63b5c\nFDI_63c5c:\nldr\tr5, [sp, #92]\nFDI_63c5e:\nb.n FDI_63c14\nFDI_63c60:\n.asciz \"[FlashDB][tsl]\"\n.space 1,0\nFDI_63c70:\n.asciz \"[%s][%s] \"\n.space 2,0\nFDI_63c7c:\n.asciz \"Error: TSL (%s) isn't initialize OK.\\n\"\n.space 2,0\nFDI_63ca4:\n.word r1_fdb_native_next_sector\nFDI_63ca8:\n.word r1_fdb_native_next_tsl\nFDI_63cac:\n.word r1_fdb_native_last_sector\nFDI_63cb0:\n.word r1_fdb_native_last_tsl\n"); }
-__attribute__((naked,section(".text.r1_fdb_native_last_sector"))) void r1_fdb_native_last_sector(void) { __asm__ volatile("FDI_6a158:\nldr\tr3, [r0, #12]\nFDI_6a15a:\nldr\tr0, [r0, #16]\nFDI_6a15c:\nadd\tr2, r3\nFDI_6a15e:\ncmp\tr2, r0\nFDI_6a160:\nbhi.n FDI_6a170\nFDI_6a162:\nldr\tr1, [r1, #4]\nFDI_6a164:\ncmp\tr1, r3\nFDI_6a166:\nbcc.n FDI_6a16c\nFDI_6a168:\nsubs\tr0, r1, r3\nFDI_6a16a:\nbx\tlr\nFDI_6a16c:\nsubs\tr0, r0, r3\nFDI_6a16e:\nbx\tlr\nFDI_6a170:\nmov.w\tr0, #4294967295\nFDI_6a174:\nbx\tlr\n"); }
-__attribute__((naked,section(".text.r1_fdb_native_last_tsl"))) void r1_fdb_native_last_tsl(void) { __asm__ volatile("FDI_6a176:\nmov\tr2, r0\nFDI_6a178:\nldrb\tr0, [r0, #1]\nFDI_6a17a:\nmov.w\tr3, #4294967295\nFDI_6a17e:\ncmp\tr0, #1\nFDI_6a180:\nbeq.n FDI_6a190\nFDI_6a182:\nldr\tr0, [r1, #12]\nFDI_6a184:\nldr\tr1, [r2, #4]\nFDI_6a186:\nadds\tr1, #112\nFDI_6a188:\ncmp\tr0, r1\nFDI_6a18a:\nbcc.n FDI_6a190\nFDI_6a18c:\nsubs\tr0, #32\nFDI_6a18e:\nbx\tlr\nFDI_6a190:\nmov\tr0, r3\nFDI_6a192:\nbx\tlr\n"); }
-__attribute__((naked,section(".text.r1_fdb_native_next_sector"))) void r1_fdb_native_next_sector(void) { __asm__ volatile("FDI_6a194:\npush\t{r4, lr}\nFDI_6a196:\nldr\tr3, [r0, #12]\nFDI_6a198:\nadds\tr4, r3, r2\nFDI_6a19a:\nldr\tr2, [r0, #16]\nFDI_6a19c:\ncmp\tr4, r2\nFDI_6a19e:\nbhi.n FDI_6a1ac\nFDI_6a1a0:\nldr\tr0, [r1, #4]\nFDI_6a1a2:\nadd\tr0, r3\nFDI_6a1a4:\ncmp\tr0, r2\nFDI_6a1a6:\nbcc.n FDI_6a1aa\nFDI_6a1a8:\nmovs\tr0, #0\nFDI_6a1aa:\npop\t{r4, pc}\nFDI_6a1ac:\nmov.w\tr0, #4294967295\nFDI_6a1b0:\npop\t{r4, pc}\n"); }
-__attribute__((naked,section(".text.r1_fdb_native_next_tsl"))) void r1_fdb_native_next_tsl(void) { __asm__ volatile("FDI_6a1b2:\nmov\tr2, r0\nFDI_6a1b4:\nldrb\tr0, [r0, #1]\nFDI_6a1b6:\nmov.w\tr3, #4294967295\nFDI_6a1ba:\ncmp\tr0, #1\nFDI_6a1bc:\nbeq.n FDI_6a1c8\nFDI_6a1be:\nldr\tr0, [r1, #12]\nFDI_6a1c0:\nldr\tr1, [r2, #20]\nFDI_6a1c2:\nadds\tr0, #32\nFDI_6a1c4:\ncmp\tr0, r1\nFDI_6a1c6:\nbls.n FDI_6a1ca\nFDI_6a1c8:\nmov\tr0, r3\nFDI_6a1ca:\nbx\tlr\n"); }
+#include <stdint.h>
+#include <stdbool.h>
+struct fdb_tsdb;struct fdb_tsl;
+/* Native traversal leaves, 0x6a158..0x6a1cb. Each field load remains ordered
+ * and conditional; arithmetic and comparisons use the native unsigned words. */
+typedef struct __attribute__((packed,may_alias)) { uint32_t value; } r1_fdb_iterator_word;
+static uint32_t word(const volatile uint8_t *p)
+{ return ((const volatile r1_fdb_iterator_word *)p)->value; }
+
+extern uint32_t r1_fdb_native_read_sector(const volatile uint8_t *,uint32_t,volatile uint8_t *,uint32_t);
+extern uint32_t r1_fdb_native_read_tsl(const volatile uint8_t *,volatile uint8_t *);
+extern void *r1_native_memory_move(void *,const void *,uint32_t);
+extern void *r1_fdb_native_db_path(const volatile uint8_t *);
+extern int r1_native_printf(const char *,...);
+uint32_t r1_fdb_native_last_sector(const volatile uint8_t *,const volatile uint8_t *,uint32_t);
+uint32_t r1_fdb_native_next_sector(const volatile uint8_t *,const volatile uint8_t *,uint32_t);
+uint32_t r1_fdb_native_last_tsl(const volatile uint8_t *,const volatile uint8_t *);
+uint32_t r1_fdb_native_next_tsl(const volatile uint8_t *,const volatile uint8_t *);
+static void put(volatile uint8_t *p,uint32_t value)
+{((volatile r1_fdb_iterator_word *)p)->value=value;}
+/* Stock0x63ad8 search/traversal, retaining signed time/address comparisons.
+ * Failed TSL reads leave through the live unlock callback before decoding. */
+void r1_health_sync_provider_00063ad8(struct fdb_tsdb *database,int32_t from,int32_t to,
+ bool (*callback)(struct fdb_tsl *,void *),void *argument)
+{
+ const volatile uint8_t *db=(const volatile uint8_t *)database;
+ uint8_t sector[40]={0},entry[20]={0},probe[20]={0};
+ uint32_t traversed=0;bool started=false;
+ if(!db[24]){
+  (void)r1_native_printf("[FlashDB][tsl]");
+  void *path=r1_fdb_native_db_path(db);
+  (void)r1_native_printf("[%s][%s] ",word(db),path);
+  (void)r1_native_printf("Error: TSL (%s) isn't initialize OK.\n",word(db));
+ }
+ uint32_t start=word(db+(from<=to?20:44)),address=start;
+ uint32_t (*next_sector)(const volatile uint8_t *,const volatile uint8_t *,uint32_t)=
+  from<=to?r1_fdb_native_next_sector:r1_fdb_native_last_sector;
+ uint32_t (*next_entry)(const volatile uint8_t *,const volatile uint8_t *)=
+  from<=to?r1_fdb_native_next_tsl:r1_fdb_native_last_tsl;
+ if(!callback)return;
+ uintptr_t lock=word(db+28);if(lock)((void (*)(const volatile uint8_t *))lock)(db);
+ for(;;){
+  traversed+=word(db+12);
+  /* Define the fallback cursor even if a sector read cannot populate it. */
+  put(sector+4,address);
+  if(r1_fdb_native_read_sector(db,address,sector,0))goto next_sector;
+  if(sector[1]==2)(void)r1_native_memory_move(sector,(const void *)(uintptr_t)(db+40),40);
+  else if(sector[1]!=3){if(sector[1]==1)break;goto next_sector;}
+  if(!started){
+   if(from<=to){
+    if(!(address==start && (int32_t)word(sector+12)>=from) && (int32_t)word(sector+16)<from)goto next_sector;
+   }else if(!(address==start && (int32_t)word(sector+16)<=from) && (int32_t)word(sector+12)>from)goto next_sector;
+  }
+  started=true;
+  uint32_t low=word(sector+4)+80u,high=word(sector+20);bool exact=false;
+  for(;;){
+   int32_t half=(int32_t)(high-low)/2;
+   uint32_t middle=low+(uint32_t)half-((31u+(uint32_t)half)&31u)+31u;
+   put(probe+12,middle);
+   if(r1_fdb_native_read_tsl(db,probe))goto unlock;
+   int32_t time=(int32_t)word(probe+4);
+   if(time<from)low=word(probe+12)+32u;
+   else if(time>from)high=word(probe+12)-32u;
+   else{low=word(probe+12);exact=true;break;}
+   if((int32_t)low>(int32_t)high)break;
+  }
+  if(from>to && !exact){
+   put(probe+12,low);
+   if(r1_fdb_native_read_tsl(db,probe))goto unlock;
+   if((int32_t)word(probe+4)>from)low-=32u;
+  }
+  put(entry+12,low);
+  for(;;){
+   if(r1_fdb_native_read_tsl(db,entry))goto unlock;
+   if(entry[0]){
+    int32_t time=(int32_t)word(entry+4);
+    if(from<=to){if(time<from || time>to)goto unlock;}
+    else if(time>from || time<to)goto unlock;
+    if(callback((struct fdb_tsl *)entry,argument))goto unlock;
+   }
+   uint32_t next=next_entry(sector,entry);put(entry+12,next);
+   if(next==UINT32_MAX)break;
+  }
+ next_sector:
+  address=next_sector(db,sector,traversed);
+  if(address==UINT32_MAX)break;
+ }
+ unlock:;
+ uintptr_t release=word(db+32);if(release)((void (*)(const volatile uint8_t *))release)(db);
+}
+uint32_t r1_fdb_native_last_sector(const volatile uint8_t *db,
+                                  const volatile uint8_t *sector,uint32_t traversed)
+{
+    uint32_t size=word(db+12),limit=word(db+16);
+    if (traversed+size>limit) return UINT32_MAX;
+    uint32_t address=word(sector+4);
+    return address>=size ? address-size : limit-size;
+}
+uint32_t r1_fdb_native_last_tsl(const volatile uint8_t *sector,
+                               const volatile uint8_t *entry)
+{
+    if (sector[1]==1) return UINT32_MAX;
+    uint32_t address=word(entry+12);
+    uint32_t first=word(sector+4)+112u;
+    return address<first ? UINT32_MAX : address-32u;
+}
+uint32_t r1_fdb_native_next_sector(const volatile uint8_t *db,
+                                  const volatile uint8_t *sector,uint32_t traversed)
+{
+    uint32_t size=word(db+12);
+    uint32_t advanced=traversed+size;
+    uint32_t limit=word(db+16);
+    if (advanced>limit) return UINT32_MAX;
+    uint32_t next=word(sector+4)+size;
+    return next<limit ? next : 0u;
+}
+uint32_t r1_fdb_native_next_tsl(const volatile uint8_t *sector,
+                               const volatile uint8_t *entry)
+{
+    if (sector[1]==1) return UINT32_MAX;
+    uint32_t address=word(entry+12);
+    uint32_t last=word(sector+20);
+    uint32_t next=address+32u;
+    return next<=last ? next : UINT32_MAX;
+}

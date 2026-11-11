@@ -1,0 +1,78 @@
+{
+  "schema": 1,
+  "report": "build/sources-goal-r1-app-timer-counter-c/report.json",
+  "report_sha256": "4241c61e4f4a3f27c73dda66c0a329ee62df13d34faf5c5cd6243d08a5f2f66a",
+  "manifest_sha256": "f87aeb5083861c3a1a09878e65681c08cc717914dc876f34e5fd6b6e7e7abf56",
+  "behavior": {
+    "calls": 2708,
+    "counter_values": 264,
+    "wrapped_difference_pairs": 1073,
+    "selected_setup_prescaler": 31,
+    "tick_constants": [
+      1024,
+      4096,
+      65536,
+      10240
+    ],
+    "actual_peer_tracker_rollover_and_expiry": true,
+    "physical_clock_verified": false
+  },
+  "defects": [
+    "wrong-rtc",
+    "no-wrap-mask",
+    "reversed-difference",
+    "wrong-units"
+  ],
+  "configuration_rejections": [
+    "different-tick-rate",
+    "different-lf-clock",
+    "different-tick-source"
+  ],
+  "audit": {
+    "unchanged_prior_object_hashes": 776,
+    "changed_object_hashes": [
+      [
+        "r1-bootloader",
+        "{gen}/r1_startup_vectors.S"
+      ],
+      [
+        "r1-bootloader",
+        "{gen}/r1_uecc.c"
+      ]
+    ],
+    "generated_boot_crypto_and_vectors_allocated_bytes_and_relocations_unchanged": true,
+    "removed_application_imports": [
+      "app_timer_cnt_diff_compute",
+      "app_timer_cnt_get"
+    ],
+    "new_counter_unit": "r1/src/application/rtos/app_timer_counter.c",
+    "counter_has_no_imports_or_state": true,
+    "added_units": [
+      [
+        "r1-application",
+        "r1/src/application/rtos/app_timer_counter.c"
+      ]
+    ]
+  },
+  "strict_boot_link_report": "build/goal-r1-app-timer-counter-c/boot-link/report.json",
+  "stock_entry_address_identity_claimed": false,
+  "physical_clock_verified": false,
+  "evidence_sha256": {
+    "build/goal-r1-app-timer-counter-c/verify.py": "3561daae2089ef48f39378b65103b25968d4b6e88d9ce25d70301d5723344f60",
+    "build/goal-r1-app-timer-counter-c/defects.py": "d0969e4e8a2ccdce09ccb6b697d11f5d5963807610a5ad3189b5953d9903a46c",
+    "build/goal-r1-app-timer-counter-c/config-guards.py": "99b2a5b1f02f86dcb7a0b6eae0e7e4d9e7c19c13ccf238beb9133c053e93a1e5",
+    "build/goal-r1-app-timer-counter-c/compile-oracle.py": "220c6dcc99c53cc1e10037e5789b262b8c4f40291ca21f25512e085c8124ed1c",
+    "build/goal-r1-app-timer-counter-c/audit.py": "6583acd0cd9834ea1cc7e813a3424ea2df71e9d8084e9c44816c91781dd2943c",
+    "build/goal-r1-app-timer-counter-c/verification.json": "7b91379dfc8e2c6a4f363cf1c63504dc4daad246ae13e8fbfabcc47e37b3ce14",
+    "build/goal-r1-app-timer-counter-c/defects.json": "0d8c228dc6e0827e0f9fef5fbf6cf91df0ae2a511a7ba215334de8edc2604f6c",
+    "build/goal-r1-app-timer-counter-c/config-guards.json": "270c45b5d5870d98fc79c1c4ae4da83971cfd4982c14b87dda40c3056d363fba",
+    "build/goal-r1-app-timer-counter-c/audit.json": "45d7dd5c07a8f6283053f4bee172ee11705f69f4e0145be14336c7163f983f88",
+    "build/goal-r1-app-timer-counter-c/sdk-oracle.o": "372e84b51705d59180fec5d3978ca8b2d92c8decc4d78a8787b39fcad9f9f315",
+    "vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/timer/app_timer.c": "782cb6e1189d174ec42ab2ce8a5687a5cc2ff583f76d824415a1916530e0d35f",
+    "vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/timer/app_timer.h": "7eb8fc0422ec5caaacc591d16a7c8e62d30468e8ac94e126505314c7a9270e17",
+    "r1/config-recovered/FreeRTOSConfig.h": "48c67875c6bfadf8b4144046575b652d514ad2ed561c387689366fc827e47df9",
+    "r1/config-recovered/sdk_config.h": "d7dd86c6ed2885df8bd7f1d99b6c4fb911fddd00c90f791b03385623c959920c",
+    "r1/src/application/rtos/port-start/rtc.c": "5d6462be4d5c91f1c4d1b468a2ce53ab16afd6fe939c8d07d36efd54d58c0700",
+    "r1/src/application/rtos/app_timer_counter.c": "dc9ede7503b5c4b30bae11b371a6d920ef44492d8d05c5617a3965b8a60f6299"
+  }
+}

@@ -1,36 +1,17 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_310200\n"
-".type opencfw_em9305_child_310200,@function\n"
-"opencfw_em9305_child_310200:\n"
-"L310200:\n"
-"enter_s [r13,blink]\n"
-"L310202:\n"
-"mov_s r13,r0\n"
-"L310204:\n"
-"bl.d opencfw_em9305_radio_status_311a00\n"
-"L310208:\n"
-"mov_s r0,1\n"
-"L31020a:\n"
-"mov_s r1,0x8012b8\n"
-"L310210:\n"
-"ldb.x r1,[r1]\n"
-"L310214:\n"
-"min r0,r1,r0\n"
-"L310218:\n"
-"brlt.nt r0,r13,L31022e\n"
-"L31021c:\n"
-"mov_s r0,0x8012b9\n"
-"L310222:\n"
-"ldb.x r1,[r0]\n"
-"L310226:\n"
-"mov_s r0,r13\n"
-"L310228:\n"
-"cmp_s r1,r13\n"
-"L31022a:\n"
-"mov.gt r0,r1\n"
-"L31022e:\n"
-"leave_s [r13,blink,pcl]\n"
-".size opencfw_em9305_child_310200,.-opencfw_em9305_child_310200\n"
-);
+#include <stdint.h>
+
+/* Native 0x310200..0x310230: clamp a signed power level. The upper bound
+ * is the smaller of the radio status (query 1) and the signed limit byte at
+ * 0x8012b8; a level above it returns the bound, otherwise the level is
+ * raised to at least the signed floor byte at 0x8012b9. */
+extern uint32_t opencfw_em9305_radio_status_311a00(uint32_t query);
+
+int32_t opencfw_em9305_child_310200(int32_t level)
+{
+    int32_t status = (int32_t)opencfw_em9305_radio_status_311a00(1u);
+    int32_t limit = *(volatile int8_t *)(uintptr_t)0x8012b8u;
+    int32_t upper = limit < status ? limit : status;
+    if (upper < level) return upper;
+    int32_t floor = *(volatile int8_t *)(uintptr_t)0x8012b9u;
+    return floor > level ? floor : level;
+}

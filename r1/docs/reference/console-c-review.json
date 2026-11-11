@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "report": "build/sources-goal-r1-console-c/report.json",
+  "evidence_files": {
+    "build/sources-goal-r1-console-c/report.json": "3b35eb5a717e8a938ba9713b3137898ebaf653fde87d38a726372962a5795dae",
+    "r1/src/sources.json": "bbe0b8302b673e2cccd81e531b28261f9228cdc34c315e41f417067e4e157b35",
+    "r1/src/application/runtime/native_console.c": "c5fe97b98ec79c4b2dd88418c2ba7c030c9faa17fc141cc6cad4f79a4275c211",
+    "r1/src/application/runtime/native_libc_sequences.c": "743438ccdcbeab9ac827e673688a0d2b1ae2dadddf3ba4e778a307d5ca06c5f1",
+    "build/goal-r1-console-c/verify.py": "2182d5e7691096368a07f663f07886c5ca93eac35b8b61da265eeea9d582d159",
+    "build/goal-r1-console-c/verification.json": "5e7c9c05b417959734bb4fe0041ad95334e84b40382d5f13ca62260dffdbe94e",
+    "build/goal-r1-console-c/audit.py": "0dcf892ef8c1d5cc241f4d5c24a4ddcbbecbebdfaf3bb471458aa9158b9ca1d1",
+    "build/goal-r1-console-c/audit.json": "b1cffe588a3795a6f0973056869ed17fef9b2e4d9c1ac793805cb5886a0bf660",
+    "build/goal-r1-console-c/defects.py": "391347b5420d42fcf7997b5f2ee911ff75c7af45f5ea5b50b23571d81fc89916",
+    "build/goal-r1-console-c/defects.json": "fced5cba9e62657f7e2c70bcc066124668647667777e2edabee90d253a16d601",
+    "build/goal-r1-console-c/rea.json": "560c15bd5aedb903ede856ab5723e137c3943430881235444009453c17f328e2",
+    "build/goal-r1-console-c/source.elf": "b8dd5cca703bf6ee2bcb25bb7673b3d3d0efcdfb5eec92dd0bd834c9afba8a43",
+    "build/goal-r1-console-c/r1-sources-check.log": "98979bc518b8ca923a890292418b7bb56d44bf86fe5381dc57bdda1a5745dc38",
+    "build/goal-r1-console-c/sources-check.log": "ce6af393f32564e8e39469644279c3b22cffd62f45d8fcb04c5821cd9b33bbf1",
+    "build/goal-r1-console-c/boot-link/report.json": "dc2c54873707b578ba60b47ea4ddb51e4009519e65dc57c18db5f1e76ffe3945"
+  },
+  "verification": {
+    "tokenizer_pairs": 372,
+    "poll_pipeline_pairs": 216,
+    "actual_rtt_strtok_copy_and_initialization_code": true,
+    "stock_snprintf_executes_in_reference": true,
+    "source_specializes_fixed_percent_s_copy": true,
+    "cursor_and_console_relocated": true,
+    "shared_cursor_continuation_and_third_token_checked": true,
+    "command_dispatch_modeled": true,
+    "private_frames_and_void_outputs_excluded": true
+  },
+  "audit": {
+    "unchanged_prior_object_hashes": 801,
+    "libc_change_only_cursor_address_materialization_and_one_owned_cell": true,
+    "all_other_libc_code_and_relocations_unchanged": true,
+    "generated_boot_allocated_bytes_and_relocations_unchanged": true,
+    "removed_application_imports": [
+      "r1_eat_command_tokenize"
+    ],
+    "added_application_imports": [
+      "r1_eat_command_dispatch"
+    ],
+    "only_manifest_change_new_console_unit": true
+  },
+  "defects": [
+    {
+      "defect": "wrong-delimiter",
+      "compiled": true,
+      "behavioral_assertion_rejected": true
+    },
+    {
+      "defect": "skip-third-token",
+      "compiled": true,
+      "behavioral_assertion_rejected": true
+    },
+    {
+      "defect": "truncate-too-early",
+      "compiled": true,
+      "behavioral_assertion_rejected": true
+    },
+    {
+      "defect": "retain-final-received-byte",
+      "compiled": true,
+      "behavioral_assertion_rejected": true
+    }
+  ],
+  "stock_application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "rea_byte_windows": [
+    {
+      "address": "0x4f260",
+      "length": 92
+    },
+    {
+      "address": "0x88424",
+      "length": 44
+    }
+  ],
+  "limitations": [
+    "Command dispatch is modeled and remains unresolved in normal composition.",
+    "Ordinary C ABI; incidental void return registers and private frame contents excluded.",
+    "Mutable NUL-terminated inputs and valid shared strtok continuations only; cursor is nonreentrant.",
+    "Final application startup placement, physical RTT/debugger concurrency, reset and device boot unverified.",
+    "805 compiled units and a relocatable application composition are not a complete firmware image."
+  ]
+}

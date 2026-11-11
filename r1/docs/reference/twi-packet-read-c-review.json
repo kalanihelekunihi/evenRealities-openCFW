@@ -1,0 +1,288 @@
+{
+  "source": {
+    "source": "r1/src/application/board/native_hw_twi_operations.c",
+    "payload": "r1-application",
+    "role": "candidate",
+    "toolchain": "clang",
+    "link": true,
+    "expect": "compile",
+    "returncode": 0,
+    "argv": [
+      "/usr/bin/clang",
+      "--target=arm-none-eabi",
+      "-mcpu=cortex-m4",
+      "-mthumb",
+      "-mfpu=fpv4-sp-d16",
+      "-mfloat-abi=hard",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-fno-strict-aliasing",
+      "-fshort-enums",
+      "-std=c11",
+      "-Os",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-DNRF52840_XXAA",
+      "-DFLOAT_ABI_HARD",
+      "-DNRF_SD_BLE_API_VERSION=7",
+      "-DNRF_DFU_SVCI_ENABLED",
+      "-DNRF_DFU_TRANSPORT_BLE=1",
+      "-DS140",
+      "-DSOFTDEVICE_PRESENT",
+      "-DFREERTOS",
+      "-DCONFIG_NFCT_PINS_AS_GPIOS",
+      "-DCONFIG_GPIO_AS_PINRESET",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/r1/src/config/sdk",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-twi-packet-read-c/generated/r1",
+      "-include",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-twi-packet-read-c/generated/r1/nrf_svci_clang.h",
+      "-isystem",
+      "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/external/freertos/portable/GCC/nrf52",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/external/freertos/portable/CMSIS/nrf52",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/external/segger_rtt",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/ble/common",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/ble/ble_advertising",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/ble/peer_manager",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/ble/nrf_ble_gatt",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/atomic",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/atomic_flags",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/atomic_fifo",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/delay",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/fds",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/fstorage",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/mutex",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/sortlist",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/timer",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/experimental_section_vars",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/log",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/log/src",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/strerror",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/util",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/softdevice/common",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/softdevice/s140/headers",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/softdevice/s140/headers/nrf52",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/toolchain/cmsis/include",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/integration/nrfx",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/integration/nrfx/legacy",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx/drivers/include",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx/hal",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx/soc",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx/mdk",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/ble/ble_link_ctx_manager",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/ble/ble_services/ble_dfu",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/ble/nrf_ble_qwr",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/balloc",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/bootloader/dfu",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/memobj",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/pwr_mgmt",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/ringbuf",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/external/fprintf",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx/drivers/src",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/bootloader",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/bootloader/ble_dfu",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/svc",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/stack_info",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/mem_manager",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/queue",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/scheduler",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/third-party/upstream/freertos-kernel/include",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/r1/src/config/rtos",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/r1/src/vendor",
+      "-munaligned-access",
+      "-MD",
+      "-MF",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-twi-packet-read-c/r1/r1-application/r1__src__application__board__native_hw_twi_operations.c.d",
+      "-c",
+      "/Users/kalani/Repo/evenRealities-openCFW/r1/src/application/board/native_hw_twi_operations.c",
+      "-o",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-twi-packet-read-c/r1/r1-application/r1__src__application__board__native_hw_twi_operations.c.o"
+    ],
+    "source_sha256": "dc236f20fb36389f0a694d06f8d49afb6a539e99b971f1c51835ade20bfd8ca9",
+    "object_sha256": "237b1dd83edba397e598b35448b555bee0e6810d6e817d68ab6379d81db64f8a",
+    "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-twi-packet-read-c/r1/r1-application/r1__src__application__board__native_hw_twi_operations.c.o",
+    "strong": [
+      "r1_hw_twi0_read",
+      "r1_hw_twi0_write",
+      "r1_hw_twi1_read",
+      "r1_hw_twi1_write"
+    ],
+    "weak": [],
+    "undefined": [
+      "r1_hw_twi0",
+      "r1_hw_twi1",
+      "r1_twi_primary_legacy_tx",
+      "r1_twi_primary_register_read_adapter",
+      "r1_twi_primary_register_write_adapter",
+      "r1_twi_primary_wait_adapter",
+      "r1_twi_secondary_legacy_tx",
+      "r1_twi_secondary_register_read_adapter",
+      "r1_twi_secondary_register_write_adapter",
+      "r1_twi_secondary_wait_adapter"
+    ]
+  },
+  "normal_report": "build/sources-goal-r1-twi-packet-read-c/report.json",
+  "REA": {
+    "evidence_id": "ev_a2a5214efef446a46259f5f177ee4124cb5c752b3a37085b0090218d414af37c",
+    "subject": {
+      "name": "stock.elf",
+      "digest": {
+        "sha256": "25b4a29af80ec8edab5bd861ba9b74a6e22eab29dc3d7a809a16869e8a140f04"
+      },
+      "local_path": "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-queue-reset-c/stock.elf",
+      "format": "elf",
+      "architecture": "arm"
+    },
+    "provider": {
+      "id": "ghidra",
+      "name": "Ghidra",
+      "version": "12.1.4"
+    },
+    "analysis_profile": {
+      "provider": {
+        "id": "ghidra",
+        "name": "Ghidra",
+        "version": "12.1.4"
+      },
+      "parameters": {
+        "target_kind": "executable",
+        "target_format": "elf",
+        "architecture": "arm",
+        "available_architectures": [
+          "arm"
+        ],
+        "import_mode": "ephemeral-source-immutable",
+        "annotation_policy": "atomic-function-entry-metadata-v1",
+        "load_image_observations": "source-mappings-entry-context-v2",
+        "function_body_evidence": "complete-inclusive-ranges-v1",
+        "function_references": "complete-body-and-entry-reference-manager-v2",
+        "call_relationship_coverage": "function-body-call-coverage-v5",
+        "function_dossier_coverage": "observed-facets-and-call-relationships-v1",
+        "string_inventory_evidence": "defined-data-coverage-v1",
+        "location_resolution": "explicit-address-exact-entry-symbol-first-v3",
+        "procedure_file_offset_resolution": "address-first-unique-target-source-mapping-v2",
+        "instruction_flow_evidence": "decoded-return-pcode-v1",
+        "instruction_references": "exact-address-incoming-v1",
+        "function_boundary_observations": "ghidra-function-boundary-limitations-v3",
+        "no_return_repair": "returning-imports-decoded-return-v2",
+        "process_launch": "inspected-jvm-launch-support-v1",
+        "jump_table_evidence": "typed-case-default-blocks-v1",
+        "decompiler_jump_loads": true,
+        "loader": "auto-from-header",
+        "language_id": "auto-from-header",
+        "compiler_spec_id": "auto-default",
+        "analyzer_preset": "ghidra-default"
+      },
+      "digest": "7e46711069eea041af1b9b99e34115c13332795e5cda76e584a722f529ec70de"
+    },
+    "predicate_type": "rea.analysis",
+    "operation": "read_bytes",
+    "parameters": {
+      "address": "0x55414",
+      "length": 104
+    },
+    "raw_result": {
+      "address": "0x55414",
+      "requested_bytes": 104,
+      "returned_bytes": 104,
+      "bytes_hex": "08b510000fd00a49097971b1084910310091038a4188c2680078fff7e3fd002800d00c2008bd092008bd082008bd0000f46f002008b510000fd00a49097971b1084910310091037c8178c2680078fff72dfe002800d00c2008bd092008bd082008bd000060700020",
+      "complete": true
+    },
+    "normalized_result": {
+      "address": "0x55414",
+      "requested_bytes": 104,
+      "returned_bytes": 104,
+      "bytes_hex": "08b510000fd00a49097971b1084910310091038a4188c2680078fff7e3fd002800d00c2008bd092008bd082008bd0000f46f002008b510000fd00a49097971b1084910310091037c8178c2680078fff72dfe002800d00c2008bd092008bd082008bd000060700020",
+      "complete": true
+    },
+    "confidence": "observed",
+    "authority": "shipped-artifact",
+    "environment": null,
+    "limitations": [
+      "The session serves operations only after Ghidra reports default auto-analysis complete; incomplete analysis does not expose partial results.",
+      "The imported Program and temporary project are ephemeral and deleted on close. Annotation operations edit session database metadata; original executable bytes are never written.",
+      "Cancelling an active Ghidra request terminates its ephemeral database and discards session annotations. The selected target remains open; the next provider query imports the original artifact again.",
+      "Default-space addresses use lowercase 0x-prefixed hexadecimal; other address spaces use <percent-encoded-space>:0x<hex>.",
+      "Bytes reflect Ghidra's initialized memory, including loader fixups. Reads stop at an unmapped or uninitialized byte and report completeness explicitly.",
+      "macOS sessions require a matching executable Ghidra native decompiler; REA checks for it but does not build native components or change Gatekeeper quarantine state."
+    ],
+    "relationship_coverage": null,
+    "locations": [],
+    "evidence_links": []
+  },
+  "direct": {
+    "paired_cases": 10752,
+    "native_provider_frame": 8,
+    "candidate_provider_frame": 16,
+    "all_provider_R4_R11": true,
+    "raw_saved_R3_overlap_mutations": true,
+    "unaligned_requests": true,
+    "limitations": [
+      "Read adapters modeled; physical bus and IRQ behavior unproven.",
+      "Private stack addresses normalized; flags and caller-clobbered registers other than R0/R3 excluded."
+    ]
+  },
+  "integrated": {
+    "paired_cases": 16128,
+    "actual_C_register_read_adapters": true,
+    "limits": [
+      "Legacy TX, SDK RX, and wait boundaries modeled; real bus unproven.",
+      "Private stack buffer pointers normalized."
+    ]
+  },
+  "negative_controls": {
+    "null-code": {
+      "rejected": true,
+      "stderr": "arm-none-eabi-ld: warning: cannot find entry symbol _start; defaulting to 01000000\narm-none-eabi-ld: warning: (r1_twi_primary_register_read_adapter): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-twi-packet-read-c/null-code.o\narm-none-eabi-ld: warning: (r1_twi_secondary_register_read_adapter): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-twi-packet-read-c/null-code.o\narm-none-eabi-ld: warning: (r1_twi_primary_legacy_tx): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-twi-packet-read-c/null-code.o\narm-none-eabi-ld: warning: (r1_twi_primary_wait_adapter): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-twi-packet-read-c/null-code.o\narm-none-eabi-ld: warning: (r1_twi_primary_register_write_adapter): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-twi-packet-read-c/null-code.o\narm-none-eabi-ld: warning: (r1_twi_secondary_legacy_tx): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-twi-packet-read-c/null-code.o\narm-none-eabi-ld: warning: (r1_twi_secondary_wait_adapter): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-twi-packet-read-c/null-code.o\narm-none-eabi-ld: warning: (r1_twi_secondary_register_write_adapter): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-twi-packet-read-c/null-code.o\nTraceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-twi-packet-read-c/reject-null-code.py\", line 53, in <module>\n    x=a(*case);y=b(*case);assert x==y,(i,case,x,y)\n                                 ^^^^\nAssertionError: (4, (0, 'read', 1, True, 257, 43981, 0, 0, False, 0), (9, 2712847316, None, [], b'\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\x01\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\x01\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5', b'\\x00\\x01\\x02\\x03\\x04\\x05\\x06\\x07\\x08\\t\\n\\x0b\\x0c\\r\\x0e\\x0f\\x10\\x11\\x12\\x13\\x14\\x15\\x16\\x17\\x18\\x19\\x1a\\x1b\\x1c\\x1d\\x1e\\x1f'), (8, 2712847316, None, [], b'\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\x01\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\x01\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5', b'\\x00\\x01\\x02\\x03\\x04\\x05\\x06\\x07\\x08\\t\\n\\x0b\\x0c\\r\\x0e\\x0f\\x10\\x11\\x12\\x13\\x14\\x15\\x16\\x17\\x18\\x19\\x1a\\x1b\\x1c\\x1d\\x1e\\x1f'))\n"
+    },
+    "secondary-wide-length": {
+      "rejected": true,
+      "stderr": "arm-none-eabi-ld: warning: cannot find entry symbol _start; defaulting to 01000000\narm-none-eabi-ld: warning: (r1_twi_primary_register_read_adapter): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-twi-packet-read-c/secondary-wide-length.o\narm-none-eabi-ld: warning: (r1_twi_secondary_register_read_adapter): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-twi-packet-read-c/secondary-wide-length.o\narm-none-eabi-ld: warning: (r1_twi_primary_legacy_tx): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-twi-packet-read-c/secondary-wide-length.o\narm-none-eabi-ld: warning: (r1_twi_primary_wait_adapter): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-twi-packet-read-c/secondary-wide-length.o\narm-none-eabi-ld: warning: (r1_twi_primary_register_write_adapter): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-twi-packet-read-c/secondary-wide-length.o\narm-none-eabi-ld: warning: (r1_twi_secondary_legacy_tx): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-twi-packet-read-c/secondary-wide-length.o\narm-none-eabi-ld: warning: (r1_twi_secondary_wait_adapter): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-twi-packet-read-c/secondary-wide-length.o\narm-none-eabi-ld: warning: (r1_twi_secondary_register_write_adapter): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-twi-packet-read-c/secondary-wide-length.o\nTraceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-twi-packet-read-c/reject-secondary-wide-length.py\", line 53, in <module>\n    x=a(*case);y=b(*case);assert x==y,(i,case,x,y)\n                                 ^^^^\nAssertionError: (8, (1, 'read', 1, False, 257, 43981, 0, 0, False, 0), (0, 536899696, None, [('r1_twi_secondary_register_read_adapter', [241, 205, 536965120, 1, 536899696], 'a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a501a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5')], b'\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\x01\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\x01\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5', b'\\x00\\x01\\x02\\x03\\x04\\x05\\x06\\x07\\x08\\t\\n\\x0b\\x0c\\r\\x0e\\x0f\\x10\\x11\\x12\\x13\\x14\\x15\\x16\\x17\\x18\\x19\\x1a\\x1b\\x1c\\x1d\\x1e\\x1f'), (0, 536899696, None, [('r1_twi_secondary_register_read_adapter', [241, 205, 536965120, 257, 536899696], 'a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a501a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5')], b'\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\x01\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\x01\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5', b'\\x00\\x01\\x02\\x03\\x04\\x05\\x06\\x07\\x08\\t\\n\\x0b\\x0c\\r\\x0e\\x0f\\x10\\x11\\x12\\x13\\x14\\x15\\x16\\x17\\x18\\x19\\x1a\\x1b\\x1c\\x1d\\x1e\\x1f'))\n"
+    },
+    "secondary-wide-register": {
+      "rejected": true,
+      "stderr": "arm-none-eabi-ld: warning: cannot find entry symbol _start; defaulting to 01000000\narm-none-eabi-ld: warning: (r1_twi_primary_register_read_adapter): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-twi-packet-read-c/secondary-wide-register.o\narm-none-eabi-ld: warning: (r1_twi_secondary_register_read_adapter): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-twi-packet-read-c/secondary-wide-register.o\narm-none-eabi-ld: warning: (r1_twi_primary_legacy_tx): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-twi-packet-read-c/secondary-wide-register.o\narm-none-eabi-ld: warning: (r1_twi_primary_wait_adapter): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-twi-packet-read-c/secondary-wide-register.o\narm-none-eabi-ld: warning: (r1_twi_primary_register_write_adapter): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-twi-packet-read-c/secondary-wide-register.o\narm-none-eabi-ld: warning: (r1_twi_secondary_legacy_tx): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-twi-packet-read-c/secondary-wide-register.o\narm-none-eabi-ld: warning: (r1_twi_secondary_wait_adapter): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-twi-packet-read-c/secondary-wide-register.o\narm-none-eabi-ld: warning: (r1_twi_secondary_register_write_adapter): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-twi-packet-read-c/secondary-wide-register.o\nTraceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-twi-packet-read-c/reject-secondary-wide-register.py\", line 53, in <module>\n    x=a(*case);y=b(*case);assert x==y,(i,case,x,y)\n                                 ^^^^\nAssertionError: (8, (1, 'read', 1, False, 257, 43981, 0, 0, False, 0), (0, 536899696, None, [('r1_twi_secondary_register_read_adapter', [241, 205, 536965120, 1, 536899696], 'a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a501a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5')], b'\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\x01\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\x01\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5', b'\\x00\\x01\\x02\\x03\\x04\\x05\\x06\\x07\\x08\\t\\n\\x0b\\x0c\\r\\x0e\\x0f\\x10\\x11\\x12\\x13\\x14\\x15\\x16\\x17\\x18\\x19\\x1a\\x1b\\x1c\\x1d\\x1e\\x1f'), (0, 536899696, None, [('r1_twi_secondary_register_read_adapter', [241, 43981, 536965120, 1, 536899696], 'a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a501a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5')], b'\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\x01\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\x01\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5', b'\\x00\\x01\\x02\\x03\\x04\\x05\\x06\\x07\\x08\\t\\n\\x0b\\x0c\\r\\x0e\\x0f\\x10\\x11\\x12\\x13\\x14\\x15\\x16\\x17\\x18\\x19\\x1a\\x1b\\x1c\\x1d\\x1e\\x1f'))\n"
+    },
+    "truncated-status": {
+      "rejected": true,
+      "stderr": "arm-none-eabi-ld: warning: cannot find entry symbol _start; defaulting to 01000000\narm-none-eabi-ld: warning: (r1_twi_primary_register_read_adapter): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-twi-packet-read-c/truncated-status.o\narm-none-eabi-ld: warning: (r1_twi_secondary_register_read_adapter): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-twi-packet-read-c/truncated-status.o\narm-none-eabi-ld: warning: (r1_twi_primary_legacy_tx): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-twi-packet-read-c/truncated-status.o\narm-none-eabi-ld: warning: (r1_twi_primary_wait_adapter): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-twi-packet-read-c/truncated-status.o\narm-none-eabi-ld: warning: (r1_twi_primary_register_write_adapter): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-twi-packet-read-c/truncated-status.o\narm-none-eabi-ld: warning: (r1_twi_secondary_legacy_tx): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-twi-packet-read-c/truncated-status.o\narm-none-eabi-ld: warning: (r1_twi_secondary_wait_adapter): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-twi-packet-read-c/truncated-status.o\narm-none-eabi-ld: warning: (r1_twi_secondary_register_write_adapter): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-twi-packet-read-c/truncated-status.o\nTraceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-twi-packet-read-c/reject-truncated-status.py\", line 53, in <module>\n    x=a(*case);y=b(*case);assert x==y,(i,case,x,y)\n                                 ^^^^\nAssertionError: (2, (0, 'read', 1, False, 257, 43981, 256, 0, False, 0), (12, 536899588, None, [('r1_twi_primary_register_read_adapter', [241, 43981, 536965120, 257, 536899588], 'a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a501a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5')], b'\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\x01\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\x01\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5', b'\\x00\\x01\\x02\\x03\\x04\\x05\\x06\\x07\\x08\\t\\n\\x0b\\x0c\\r\\x0e\\x0f\\x10\\x11\\x12\\x13\\x14\\x15\\x16\\x17\\x18\\x19\\x1a\\x1b\\x1c\\x1d\\x1e\\x1f'), (0, 536899588, None, [('r1_twi_primary_register_read_adapter', [241, 43981, 536965120, 257, 536899588], 'a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a501a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5')], b'\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\x01\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\x01\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5', b'\\x00\\x01\\x02\\x03\\x04\\x05\\x06\\x07\\x08\\t\\n\\x0b\\x0c\\r\\x0e\\x0f\\x10\\x11\\x12\\x13\\x14\\x15\\x16\\x17\\x18\\x19\\x1a\\x1b\\x1c\\x1d\\x1e\\x1f'))\n"
+    },
+    "lost-saved-slot": {
+      "rejected": true,
+      "stderr": "arm-none-eabi-ld: warning: cannot find entry symbol _start; defaulting to 01000000\narm-none-eabi-ld: warning: (r1_twi_primary_register_read_adapter): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-twi-packet-read-c/lost-saved-slot.o\narm-none-eabi-ld: warning: (r1_twi_secondary_register_read_adapter): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-twi-packet-read-c/lost-saved-slot.o\narm-none-eabi-ld: warning: (r1_twi_primary_legacy_tx): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-twi-packet-read-c/lost-saved-slot.o\narm-none-eabi-ld: warning: (r1_twi_primary_wait_adapter): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-twi-packet-read-c/lost-saved-slot.o\narm-none-eabi-ld: warning: (r1_twi_primary_register_write_adapter): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-twi-packet-read-c/lost-saved-slot.o\narm-none-eabi-ld: warning: (r1_twi_secondary_legacy_tx): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-twi-packet-read-c/lost-saved-slot.o\narm-none-eabi-ld: warning: (r1_twi_secondary_wait_adapter): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-twi-packet-read-c/lost-saved-slot.o\narm-none-eabi-ld: warning: (r1_twi_secondary_register_write_adapter): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-twi-packet-read-c/lost-saved-slot.o\nTraceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-twi-packet-read-c/reject-lost-saved-slot.py\", line 53, in <module>\n    x=a(*case);y=b(*case);assert x==y,(i,case,x,y)\n                                 ^^^^\nAssertionError: (0, (0, 'read', 1, False, 257, 43981, 0, 0, False, 0), (0, 536899588, None, [('r1_twi_primary_register_read_adapter', [241, 43981, 536965120, 257, 536899588], 'a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a501a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5')], b'\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\x01\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\x01\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5', b'\\x00\\x01\\x02\\x03\\x04\\x05\\x06\\x07\\x08\\t\\n\\x0b\\x0c\\r\\x0e\\x0f\\x10\\x11\\x12\\x13\\x14\\x15\\x16\\x17\\x18\\x19\\x1a\\x1b\\x1c\\x1d\\x1e\\x1f'), (0, 0, None, [('r1_twi_primary_register_read_adapter', [241, 43981, 536965120, 257, 536899588], 'a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a501a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5')], b'\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\x01\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\x01\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5\\xa5', b'\\x00\\x01\\x02\\x03\\x04\\x05\\x06\\x07\\x08\\t\\n\\x0b\\x0c\\r\\x0e\\x0f\\x10\\x11\\x12\\x13\\x14\\x15\\x16\\x17\\x18\\x19\\x1a\\x1b\\x1c\\x1d\\x1e\\x1f'))\n"
+    }
+  },
+  "audit": {
+    "other_objects_identical": 588,
+    "write_function_bytes_and_relocations_identical": true,
+    "normal_and_probe_read_bytes_and_relocations_identical": true,
+    "imports_unchanged": {
+      "application": 164,
+      "bootloader": 34
+    }
+  },
+  "qualification": "build/goal-r1-twi-packet-read-c/qualified-final/qualification.json",
+  "new_exact_bytes": 0,
+  "hybrid": {
+    "report": "build/hybrid-goal-r1-twi-packet-read-c/build-report.json",
+    "sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "totals": {
+      "binary-pull-through": 641915,
+      "source-built": 4245,
+      "resource-file": 248
+    },
+    "source_plan_unchanged": true,
+    "source_completeness_proven": false
+  },
+  "limitations": [
+    "Only normal Clang profile validated; empty SP/register observations remain.",
+    "Candidate 16-byte provider frame differs from stock 8-byte frame.",
+    "Private stack addresses normalized; arbitrary aliases, faults, concurrency, physical DMA/bus/IRQ behavior unproven.",
+    "Legacy TX, SDK RX, wait providers modeled in actual-read-adapter chain."
+  ]
+}

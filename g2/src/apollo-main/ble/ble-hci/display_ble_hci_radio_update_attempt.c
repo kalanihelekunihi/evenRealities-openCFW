@@ -1,6 +1,11 @@
 /* Native 0x52edf0 radio firmware update attempt. Child operations preserve
  * their own error codes; live configuration cells are read at call time. */
 #include <stdint.h>
+/* Stock-RAM literals rewritten to named objects (sim-test wave 2026-10-26,
+ * .waves/sim-fix/apply.py): g2ref_X is the linker symbol X. */
+#include <stdint.h>
+extern unsigned char g2ref_audio_ble_hci_radio_dispatch_cell_20074f51[] __asm__("audio_ble_hci_radio_dispatch_cell_20074f51");
+extern unsigned char g2ref_g2_stock_ram_20074228[] __asm__("g2_stock_ram_20074228");
 extern uint32_t audio_ble_radio_io_mode_52dd1c(uint32_t); /* native call writes r0=0 */
 extern void audio_ble_radio_alt_mode_52dd24(void);
 extern int32_t audio_ble_radio_recover_stop_52e8be(void *);
@@ -26,10 +31,10 @@ static const char up_to_date[]="Already up to date\r\n";
 int32_t audio_ble_radio_attempt_52edf0(void *context,uint32_t force) {
     uint32_t size;
     if(audio_ble_radio_io_mode_52dd1c(0u)==0u) {
-        size=W(0x20074230u);
+        size=W(((uint32_t)(uintptr_t)g2ref_g2_stock_ram_20074228+0x8u));
     } else {
         audio_ble_radio_alt_mode_52dd24();
-        size=W(0x20074240u);
+        size=W(((uint32_t)(uintptr_t)g2ref_g2_stock_ram_20074228+0x18u));
     }
     int32_t result=audio_ble_radio_recover_stop_52e8be(context);
     if(result!=0) {
@@ -38,7 +43,7 @@ int32_t audio_ble_radio_attempt_52edf0(void *context,uint32_t force) {
         audio_ble_hci_boot_log_4733ee(up_to_date);
     } else {
         audio_ble_hci_boot_log_4733ee(in_progress);
-        if(B(0x20074f51u)!=0u) (void)audio_ble_radio_update_prepare_52ed34(context);
+        if(B(((uint32_t)(uintptr_t)g2ref_audio_ble_hci_radio_dispatch_cell_20074f51))!=0u) (void)audio_ble_radio_update_prepare_52ed34(context);
         result=audio_ble_radio_update_erase_52e9b4(context);
         if(result==0) {
             result=audio_ble_radio_update_write_52ebca(context,size);

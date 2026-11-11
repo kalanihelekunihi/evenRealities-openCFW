@@ -4,6 +4,7 @@
  * named CK804 load rather than a fabricated result.
  */
 #include <stdint.h>
+#include "../csky_ops.h"
 
 extern uint64_t gx8002_image_b_time_10005070(void);
 
@@ -46,7 +47,7 @@ int32_t gx8002_image_b_clock_trim_apply_100039f4(void *state, uint32_t timeout_m
     }
 
     uint32_t state_word;
-    __asm__ volatile ("ld.w %0, (%1, 0)" : "=r"(state_word) : "r"(state) : "memory");
+    state_word = *csky_word_ptr((uintptr_t)state);   /* also when state is NULL, as stock */
     if (state_word != 1u)
         return 0;
 

@@ -25,7 +25,7 @@ static void wr16(uintptr_t p,uint32_t v) { *(volatile uint16_t *)p=(uint16_t)v; 
 static void wr32(uintptr_t p,uint32_t v) { *(volatile uint32_t *)p=v; }
 
 /* Prepared complete 0x316704..0x316892, with native 40-byte frame supplied
- * by the ARC entry below.  Every child remains a genuine source identity. */
+ * by the entry below.  Every child remains a genuine source identity. */
 uint32_t opencfw_em9305_init_transition_dispatch_316704_body(uint8_t *frame)
 {
     if(rd8(0x805a71u)==0u) return 0u;
@@ -152,19 +152,8 @@ error_event:
     return opencfw_em9305_init_transition_gate_3168e4();
 }
 
-#ifdef __arc__
-__asm__(
-".text\n.balign 4\n.global opencfw_em9305_init_transition_dispatch_316704\n"
-".type opencfw_em9305_init_transition_dispatch_316704,@function\n"
-"opencfw_em9305_init_transition_dispatch_316704:\n"
-"enter_s [r13-r19,fp,blink]\nsub_s sp,sp,0x28\n"
-"mov r0,sp\nbl opencfw_em9305_init_transition_dispatch_316704_body\n"
-"leave_s [r13-r19,fp,blink,pcl]\n"
-".size opencfw_em9305_init_transition_dispatch_316704,. - opencfw_em9305_init_transition_dispatch_316704\n");
-#else
 uint32_t opencfw_em9305_init_transition_dispatch_316704(void)
 {
     uint8_t frame[40] __attribute__((aligned(4)));
     return opencfw_em9305_init_transition_dispatch_316704_body(frame);
 }
-#endif

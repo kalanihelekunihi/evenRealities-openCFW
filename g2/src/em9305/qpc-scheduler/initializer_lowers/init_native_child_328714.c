@@ -1,44 +1,23 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_328714\n"
-".type opencfw_em9305_child_328714,@function\n"
-"opencfw_em9305_child_328714:\n"
-"L328714:\n"
-"enter_s [r13,blink]\n"
-"L328716:\n"
-"mov_s r13,r0\n"
-"L328718:\n"
-"bl.d opencfw_em9305_common_release_304588\n"
-"L32871c:\n"
-"mov_s r0,1\n"
-"L32871e:\n"
-"ld r0,[0x805c3c]\n"
-"L328726:\n"
-"sub_s r0,r13,r0\n"
-"L328728:\n"
-"lsr_s r0,r0,0x9\n"
-"L32872a:\n"
-"add r0,r0,0x7\n"
-"L32872c:\n"
-"bl.d opencfw_em9305_associated_schedule_drop_3136ac\n"
-"L328730:\n"
-"extb_s r0,r0\n"
-"L328732:\n"
-"bl.d opencfw_em9305_radio_record_release_31ac84\n"
-"L328736:\n"
-"mov_s r0,r13\n"
-"L328738:\n"
-"bl opencfw_em9305_command_count_down_30e48c\n"
-"L32873c:\n"
-"ldb_s r0,[r13,0x1]\n"
-"L32873e:\n"
-"brne.d.nt r0,0x2,L328748\n"
-"L328742:\n"
-"mov_s r0,r13\n"
-"L328744:\n"
-"bl opencfw_em9305_child_323594\n"
-"L328748:\n"
-"leave_s [r13,blink,pcl]\n"
-".size opencfw_em9305_child_328714,.-opencfw_em9305_child_328714\n"
-);
+#include <stdint.h>
+
+/* Native 0x328714..0x32874a: tear down an associated record: release the
+ * common resource (mode 1), drop its schedule entry (id = 512-byte slot
+ * index from *0x805c3c, plus 7), release the record, count down the
+ * command credit and, for role byte 2 (+1), post the 323594 event. */
+extern uint32_t opencfw_em9305_common_release_304588(uint32_t);
+extern uint32_t opencfw_em9305_associated_schedule_drop_3136ac(uint32_t);
+extern void opencfw_em9305_radio_record_release_31ac84(uintptr_t);
+extern uint32_t opencfw_em9305_command_count_down_30e48c(void);
+extern uint32_t opencfw_em9305_child_323594(uintptr_t);
+
+void opencfw_em9305_child_328714(uintptr_t record)
+{
+    (void)opencfw_em9305_common_release_304588(1u);
+    uint32_t base=*(volatile uint32_t *)(uintptr_t)0x805c3cu;
+    (void)opencfw_em9305_associated_schedule_drop_3136ac(
+        (uint8_t)((((uint32_t)record-base)>>9)+7u));
+    opencfw_em9305_radio_record_release_31ac84(record);
+    (void)opencfw_em9305_command_count_down_30e48c();
+    if(*(volatile uint8_t *)(record+1u)==2u)
+        (void)opencfw_em9305_child_323594(record);
+}

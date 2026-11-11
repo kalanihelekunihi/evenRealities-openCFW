@@ -1,0 +1,129 @@
+{
+  "schema_version": 1,
+  "stock_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "entries": {
+    "0x8d538": "r1_hr_cache_future_record_guard",
+    "0x8e27c": "r1_spo2_cache_future_record_guard",
+    "0x8d6d8": "r1_hrv_cache_future_record_guard",
+    "0x8a64c": "r1_activity_flash_record_enqueue_plan",
+    "0x3fba4": "r1_heart_rate_offline_queue_enqueue",
+    "0x43da4": "r1_spo2_offline_queue_enqueue",
+    "0x40a88": "r1_hrv_offline_queue_enqueue",
+    "0x3bee4": "r1_activity_offline_queue_enqueue"
+  },
+  "unit": {
+    "source": "r1/src/application/runtime/native_health_offline_queue.c",
+    "source_sha256": "0434bf877d51cb13041963fc7dac2b5e39cc965dfe5fb3029208aa65b2e8ea8d",
+    "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-future-record-c/r1/r1-application/r1__src__application__runtime__native_health_offline_queue.c.o",
+    "object_sha256": "c941f1c2bba6b09289a8f895ecb71d2f1b2006e024d7eea48fa533bc92dfd898"
+  },
+  "report": "build/sources-goal-r1-future-record-c/report.json",
+  "report_sha256": "5154f600f08baf3903f321dac4fbc5ca83ce02d2e212c39dc3ce50f22b09bccc",
+  "behavior": {
+    "pairs": 2244,
+    "source_clock_calls": 2265,
+    "digest": "c44f747426bd4398cabaf265e33682f5da6d635571460d97eb2ad00ce72ffde4",
+    "actual_C": [
+      "four guards",
+      "four bounded enqueue paths",
+      "all ring arrays/cursors"
+    ],
+    "modeled_boundaries": [
+      "clock and logging"
+    ],
+    "limits": [
+      "Valid initialized cursor read/write indices; counts through255 tested as native byte behavior",
+      "Mapped record/alias SRAM; no locking or asynchronous IRQ behavior added",
+      "Other queue consumers and whole firmware/physical persistence remain unfinished"
+    ]
+  },
+  "reader_hour_integration": {
+    "pairs": 830,
+    "digest": "b5ac023a34e65d6e2ea1b0f530a7ed800ace2626f532900b3f65d04d342c65f0",
+    "actual_C": [
+      "hourly orchestration",
+      "six cache readers through four actual C guards and enqueue paths",
+      "six resets",
+      "cache accessors and owners, shared hourly/stress owner",
+      "canonical stress/temperature timestamps"
+    ],
+    "modeled_boundaries": [
+      "Clock providers, allocation, clear, logging, FlashDB blob/append/clean",
+      "All guards/enqueues execute actual stock/C code; no modeled dispatch boundary"
+    ],
+    "limits": [
+      "Mapped SRAM and canonical nonnull cache accessors",
+      "Synthetic callback masks and size mutations exercise descriptor control flow",
+      "No physical persistence, asynchronous IRQ or complete firmware link"
+    ]
+  },
+  "negative_controls": {
+    "wrong-guard-threshold": {
+      "rejected": true,
+      "diagnostic": "Traceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-future-record-c/verify.py\", line 61, in <module>\n    for entry,data,pattern,slot,timestamp in itertools.product(roots,[0,DATA],range(4),[0,23,24,143,255,0xffffffff],[0,THRESHOLD,THRESHOLD+1]):pair(entry=entry,data=data,pattern=pattern,slot=slot,timestamp=timestamp,modes=(7,))\n                                                                                                                                               ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-future-record-c/verify.py\", line 60, in pair\n    a=run(False,**kw);b=run(True,**kw);assert a==b,(kw,[k for k in a if a[k]!=b[k]],a['trace'],b['trace']);digest.update(json.dumps([kw,a]).encode());clock_calls+=state['time_index'];pairs+=1\n                                              ^^^^\nAssertionError: ({'entry': 'r1_hr_cache_future_record_guard', 'data': 537001984, 'pattern': 0, 'slot': 0, 'timestamp': 946080000, 'modes': (7,)}, ['trace'], [('now', [946080000])], [])\n"
+    },
+    "wrong-future-day-boundary": {
+      "rejected": true,
+      "diagnostic": "\"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-future-record-c/verify.py\", line 62, in <module>\n    for entry,day,timestamp,times,modes in itertools.product(roots,[0,99,100,101],[99,100,101],[(100,),(100,99,101,100),(0xffffffff,0)],[(0,),(7,),(0,4,2,1,2)]):pair(entry=entry,day=day,timestamp=timestamp,times=times,modes=modes,slot=23)\n                                                                                                                                                                 ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-future-record-c/verify.py\", line 60, in pair\n    a=run(False,**kw);b=run(True,**kw);assert a==b,(kw,[k for k in a if a[k]!=b[k]],a['trace'],b['trace']);digest.update(json.dumps([kw,a]).encode());clock_calls+=state['time_index'];pairs+=1\n                                              ^^^^\nAssertionError: ({'entry': 'r1_hr_cache_future_record_guard', 'day': 100, 'timestamp': 99, 'times': (100,), 'modes': (0,), 'slot': 23}, ['trace', 'cursors', 'records'], [('now', [100]), ('now', [100])], [('now', [100]), ('mode', [0]), ('mode', [0]), ('mode', [0])])\n"
+    },
+    "lost-hrv-slot-guard": {
+      "rejected": true,
+      "diagnostic": "Traceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-future-record-c/verify.py\", line 61, in <module>\n    for entry,data,pattern,slot,timestamp in itertools.product(roots,[0,DATA],range(4),[0,23,24,143,255,0xffffffff],[0,THRESHOLD,THRESHOLD+1]):pair(entry=entry,data=data,pattern=pattern,slot=slot,timestamp=timestamp,modes=(7,))\n                                                                                                                                               ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-future-record-c/verify.py\", line 60, in pair\n    a=run(False,**kw);b=run(True,**kw);assert a==b,(kw,[k for k in a if a[k]!=b[k]],a['trace'],b['trace']);digest.update(json.dumps([kw,a]).encode());clock_calls+=state['time_index'];pairs+=1\n                                              ^^^^\nAssertionError: ({'entry': 'r1_hrv_cache_future_record_guard', 'data': 537001984, 'pattern': 0, 'slot': 24, 'timestamp': 0, 'modes': (7,)}, ['trace'], [], [('now', [946080000])])\n"
+    },
+    "wrong-activity-index": {
+      "rejected": true,
+      "diagnostic": "],range(4),[0,23,24,143,255,0xffffffff],[0,THRESHOLD,THRESHOLD+1]):pair(entry=entry,data=data,pattern=pattern,slot=slot,timestamp=timestamp,modes=(7,))\n                                                                                                                                               ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-future-record-c/verify.py\", line 60, in pair\n    a=run(False,**kw);b=run(True,**kw);assert a==b,(kw,[k for k in a if a[k]!=b[k]],a['trace'],b['trace']);digest.update(json.dumps([kw,a]).encode());clock_calls+=state['time_index'];pairs+=1\n                                              ^^^^\nAssertionError: ({'entry': 'r1_activity_flash_record_enqueue_plan', 'data': 537001984, 'pattern': 1, 'slot': 0, 'timestamp': 0, 'modes': (7,)}, ['records'], [('now', [946080000]), ('now', [946080000]), ('now', [946080000]), ('now', [946080000]), ('now', [946080000]), ('now', [946080000]), ('now', [946080000])], [('now', [946080000]), ('now', [946080000]), ('now', [946080000]), ('now', [946080000]), ('now', [946080000]), ('now', [946080000]), ('now', [946080000])])\n"
+    },
+    "wrong-full-ring-read-advance": {
+      "rejected": true,
+      "diagnostic": "Traceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-future-record-c/verify.py\", line 64, in <module>\n    for read_index,write_index,count,offset in itertools.product([0,capacities[i]-1],[0,capacities[i]-1],[0,capacities[i]-1,capacities[i],255],[0,0xffff,0x12345678]):pair(entry=entry,read_index=read_index,write_index=write_index,count=count,offset=offset)\n                                                                                                                                                                      ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-future-record-c/verify.py\", line 60, in pair\n    a=run(False,**kw);b=run(True,**kw);assert a==b,(kw,[k for k in a if a[k]!=b[k]],a['trace'],b['trace']);digest.update(json.dumps([kw,a]).encode());clock_calls+=state['time_index'];pairs+=1\n                                              ^^^^\nAssertionError: ({'entry': 'r1_heart_rate_offline_queue_enqueue', 'read_index': 0, 'write_index': 0, 'count': 24, 'offset': 0}, ['cursors'], [('now', [946080000])], [('now', [946080000])])\n"
+    },
+    "wrong-offset-width": {
+      "rejected": true,
+      "diagnostic": "Traceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-future-record-c/verify.py\", line 61, in <module>\n    for entry,data,pattern,slot,timestamp in itertools.product(roots,[0,DATA],range(4),[0,23,24,143,255,0xffffffff],[0,THRESHOLD,THRESHOLD+1]):pair(entry=entry,data=data,pattern=pattern,slot=slot,timestamp=timestamp,modes=(7,))\n                                                                                                                                               ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-future-record-c/verify.py\", line 60, in pair\n    a=run(False,**kw);b=run(True,**kw);assert a==b,(kw,[k for k in a if a[k]!=b[k]],a['trace'],b['trace']);digest.update(json.dumps([kw,a]).encode());clock_calls+=state['time_index'];pairs+=1\n                                              ^^^^\nAssertionError: ({'entry': 'r1_hr_cache_future_record_guard', 'data': 537001984, 'pattern': 1, 'slot': 0, 'timestamp': 0, 'modes': (7,)}, ['records'], [('now', [946080000]), ('now', [946080000])], [('now', [946080000]), ('now', [946080000])])\n"
+    }
+  },
+  "initialization": {
+    "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "decoded_sha256": "87fdee392022fdbe23dd0daf3e859fb14f3ce26ba3e8403aab56dc9d9a913317",
+    "decoded_length": 6492,
+    "source": "0xc4610",
+    "destination": "0x200064a8",
+    "ring_cursors": {
+      "0x20006798": "000000",
+      "0x2000679b": "000000",
+      "0x200067a8": "000000",
+      "0x200067ab": "000000"
+    },
+    "records_in_authenticated_zero_region": "0x20007e04..0x2003beb8",
+    "actual_native_decompressor_verified": true,
+    "native_decompressor_entry": "0x286f4"
+  },
+  "audit": {
+    "unchanged_prior_objects": 738,
+    "new_units": 1,
+    "storage_symbols": {
+      "r1_offline_hr_records": 384,
+      "r1_offline_spo2_records": 384,
+      "r1_offline_hrv_records": 480,
+      "r1_offline_activity_records": 2304,
+      "r1_offline_hr_cursor": 3,
+      "r1_offline_spo2_cursor": 3,
+      "r1_offline_hrv_cursor": 3,
+      "r1_offline_activity_cursor": 3
+    },
+    "new_storage_bytes": 3564,
+    "added_application_imports": [],
+    "removed_application_imports": [
+      "r1_activity_flash_record_enqueue_plan",
+      "r1_hr_cache_future_record_guard",
+      "r1_hrv_cache_future_record_guard",
+      "r1_spo2_cache_future_record_guard"
+    ],
+    "bootloader_imports_unchanged": true
+  },
+  "source_check": "python3 tools/build/sources.py check\ng2: 5030 units, 4727 source files, 0 not built\nr1: 739 units, 543 source files, 0 not built",
+  "rea": "health-offline-enqueue-c-rea.json",
+  "instruction_identity_proven": false,
+  "image_integration_proven": false
+}

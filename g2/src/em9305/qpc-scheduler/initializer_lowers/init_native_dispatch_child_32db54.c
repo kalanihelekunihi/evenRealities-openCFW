@@ -1,35 +1,17 @@
-/* Full native decoder; sparse writes and dual-register child returns retained. */
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_dispatch_child_32db54\n"
-".type opencfw_em9305_dispatch_child_32db54,@function\n"
-"opencfw_em9305_dispatch_child_32db54:\n"
-"L32db54:\n"
-"enter_s [r13-r14,blink]\n"
-"L32db56:\n"
-"mov_s r13,r0\n"
-"L32db58:\n"
-"mov_s r0,r1\n"
-"L32db5a:\n"
-"bl.d opencfw_em9305_controller_pack_address\n"
-"L32db5e:\n"
-"mov_s r14,r1\n"
-"L32db60:\n"
-"st_s r0,[r13,0]\n"
-"L32db62:\n"
-"add_s r0,r14,0x6\n"
-"L32db64:\n"
-"bl.d opencfw_em9305_controller_pack_address\n"
-"L32db68:\n"
-"st_s r1,[r13,0x4]\n"
-"L32db6a:\n"
-"st_s r0,[r13,0x8]\n"
-"L32db6c:\n"
-"mov_s r0,0xc\n"
-"L32db6e:\n"
-"st_s r1,[r13,0xc]\n"
-"L32db70:\n"
-"leave_s [r13-r14,blink,pcl]\n"
-".size opencfw_em9305_dispatch_child_32db54,.-opencfw_em9305_dispatch_child_32db54\n"
-);
+#include <stdint.h>
+
+/* Native 0x32db54..0x32db74: pack two 6-byte addresses (at source and
+ * source+6) into two 64-bit words at the destination; returns 12. */
+extern uint64_t opencfw_em9305_controller_pack_address(uintptr_t);
+
+uint32_t opencfw_em9305_dispatch_child_32db54(uintptr_t destination, uintptr_t source)
+{
+    volatile uint32_t *out = (volatile uint32_t *)destination;
+    uint64_t first = opencfw_em9305_controller_pack_address(source);
+    out[0] = (uint32_t)first;
+    out[1] = (uint32_t)(first >> 32);
+    uint64_t second = opencfw_em9305_controller_pack_address(source + 6u);
+    out[2] = (uint32_t)second;
+    out[3] = (uint32_t)(second >> 32);
+    return 12u;
+}

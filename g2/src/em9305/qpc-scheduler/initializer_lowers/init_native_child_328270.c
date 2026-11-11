@@ -1,60 +1,24 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_328270\n"
-".type opencfw_em9305_child_328270,@function\n"
-"opencfw_em9305_child_328270:\n"
-"L328270:\n"
-"enter_s [r13-r14,blink]\n"
-"L328272:\n"
-"mov_s r13,r0\n"
-"L328274:\n"
-"mov r0,1432\n"
-"L328278:\n"
-"ldb_s r0,[r13,r0]\n"
-"L32827a:\n"
-"mov_s r14,r1\n"
-"L32827c:\n"
-"mov_s r1,0\n"
-"L32827e:\n"
-"brne_s r0,0,L328284\n"
-"L328280:\n"
-"ldb r1,[r13,76]\n"
-"L328284:\n"
-"bl.d opencfw_em9305_associated_object_init_312918\n"
-"L328288:\n"
-"mov_s r0,r14\n"
-"L32828a:\n"
-"ldb r0,[r13,62]\n"
-"L32828e:\n"
-"breq_s r0,0,L3282b8\n"
-"L328290:\n"
-"ld_s r1,[r13,0x24]\n"
-"L328292:\n"
-"mpywhl r2,r1,r0\n"
-"L328296:\n"
-"ld r1,[r13,0x8e4]\n"
-"L32829e:\n"
-"mov_s r0,0x257ed4\n"
-"L3282a4:\n"
-"add3 r2,r2,1250\n"
-"L3282a8:\n"
-"cmp_s r2,r0\n"
-"L3282aa:\n"
-"mov.c r0,r2\n"
-"L3282ae:\n"
-"cmp_s r0,r1\n"
-"L3282b0:\n"
-"mov.hi r1,r0\n"
-"L3282b4:\n"
-"st.as r1,[r13,209]\n"
-"L3282b8:\n"
-"mov_s r0,r13\n"
-"L3282ba:\n"
-"bl.d opencfw_em9305_child_3284ec\n"
-"L3282be:\n"
-"mov_s r1,r14\n"
-"L3282c0:\n"
-"leave_s [r13-r14,blink,pcl]\n"
-".size opencfw_em9305_child_328270,.-opencfw_em9305_child_328270\n"
-);
+#include <stdint.h>
+
+/* Native 0x328270..0x3282c2: initialise the associated object (seed byte
+ * +76 when +1432 is clear), then, when the count byte +62 is set, raise
+ * the window at +836 to min(count * interval(+36) + 10000, 0x257ed4) if
+ * that exceeds the floor at +2276, and continue with 3284ec. */
+extern uint32_t opencfw_em9305_associated_object_init_312918(uintptr_t object, uint32_t seed);
+extern uint32_t opencfw_em9305_child_3284ec(uintptr_t record, uintptr_t object);
+
+uint32_t opencfw_em9305_child_328270(uintptr_t record, uintptr_t object)
+{
+    uint32_t seed=0u;
+    if(*(volatile uint8_t *)(record+1432u)==0u)seed=*(volatile uint8_t *)(record+76u);
+    (void)opencfw_em9305_associated_object_init_312918(object,seed);
+    uint32_t count=*(volatile uint8_t *)(record+62u);
+    if(count!=0u){
+        uint32_t window=*(volatile uint32_t *)(record+36u)*count+10000u;
+        uint32_t floor=*(volatile uint32_t *)(record+2276u);
+        if(window>0x257ed4u)window=0x257ed4u;
+        if(window>floor)floor=window;
+        *(volatile uint32_t *)(record+836u)=floor;
+    }
+    return opencfw_em9305_child_3284ec(record,object);
+}

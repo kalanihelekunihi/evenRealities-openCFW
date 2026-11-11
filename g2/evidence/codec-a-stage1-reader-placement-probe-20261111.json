@@ -1,0 +1,23 @@
+{
+  "schema": 1,
+  "target": "GX8002 BINH A stage-1 C flash-reader stock-address placement probe",
+  "stock_codec_component": "g2/blobs/official/g2-2.2.6.10/firmware_codec.bin",
+  "stock_codec_component_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+  "stock_stage1_file_offset": "0x95a4",
+  "probe_linker_script": "build/g2-codec-a-flash-reader-stock-address-probe-20261111.ld",
+  "probe_elf": "build/g2-codec-a-flash-reader-stock-address-probe-20261111.elf",
+  "probe_binary": "build/g2-codec-a-flash-reader-stock-address-probe-20261111.bin",
+  "result": {
+    "flash_reader_address": "0x10000c40",
+    "flash_reader_bytes_including_literal_pool": 536,
+    "stock_reader_bytes_including_literal_pool": 536,
+    "matching_bytes_at_stock_address": 41,
+    "total_reader_bytes": 536,
+    "first_mismatch_address": "0x10000c42",
+    "stock_identical_254_byte_spi_function_range_preserved": true,
+    "stock_identical_18_and_28_byte_sdk_helpers_preserved": true,
+    "stage1_load_bytes": 4756,
+    "source_layout_changed": false
+  },
+  "finding": "A feasible linker layout alone does not make the reader byte-identical. The C output uses a different register-save set and calls helpers at different addresses. The probe remains under ignored build/; no stock-address claim is made for the production reader."
+}

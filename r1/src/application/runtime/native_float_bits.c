@@ -6,30 +6,22 @@ static uint32_t lsl32(uint32_t x,uint32_t count)
 { count&=255u;return count<32 ? x<<count : 0; }
 /* Native classifier tags: zero0, subnormal4, normal5, infinity3, NaN7.
  * These are encoded tags, not host FP_* enumeration values. */
-uint32_t r1_binary64_classify_bits(uint64_t bits,uint32_t unused2 __attribute__((unused)),uint32_t saved3)
+R1_CLASSIFIER_CORE_ABI r1_native_classification r1_binary64_classify_bits(uint64_t bits,uint32_t unused2 __attribute__((unused)),uint32_t saved3)
 {
-    register uint32_t incoming3 __asm__("r3")=saved3;
     uint32_t high=(uint32_t)(bits>>32),exponent=(high>>20)&2047u;
     uint32_t tag=((uint32_t)bits || (high&0xfffffu)) ? 4u : 0u;
     if (exponent) tag|=1;
     if (exponent==2047u) tag|=2;
     if (tag==1) tag=5;
-    register uint32_t out0 __asm__("r0")=tag,out1 __asm__("r1")=high<<1;
-    register uint32_t out2 __asm__("r2")=2047u;
-    __asm__ volatile("" : "+r"(out0),"+r"(out1),"+r"(out2),"+r"(incoming3) : : "memory");
-    return out0;
+    return (r1_native_classification){tag,high<<1,2047u,saved3};
 }
-uint32_t r1_binary32_classify_bits(uint32_t bits,uint32_t unused1 __attribute__((unused)),uint32_t unused2 __attribute__((unused)),uint32_t saved3)
+R1_CLASSIFIER_CORE_ABI r1_native_classification r1_binary32_classify_bits(uint32_t bits,uint32_t unused1 __attribute__((unused)),uint32_t unused2 __attribute__((unused)),uint32_t saved3)
 {
-    register uint32_t incoming3 __asm__("r3")=saved3;
     uint32_t exponent=(bits>>23)&255u,tag=(bits&0x7fffffu) ? 4u : 0u;
     if (exponent) tag|=1;
     if (exponent==255u) tag|=2;
     if (tag==1) tag=5;
-    register uint32_t out0 __asm__("r0")=tag,out1 __asm__("r1")=~(bits<<1)&UINT32_C(0xff000000);
-    register uint32_t out2 __asm__("r2")=UINT32_C(0xff000000);
-    __asm__ volatile("" : "+r"(out0),"+r"(out1),"+r"(out2),"+r"(incoming3) : : "memory");
-    return out0;
+    return (r1_native_classification){tag,~(bits<<1)&UINT32_C(0xff000000),UINT32_C(0xff000000),saved3};
 }
 uint64_t r1_signed32_to_binary64_bits(uint32_t word)
 {

@@ -1,71 +1,29 @@
-/* Full native scan finish: ordered flags, buffer release and both queue-drain loops. */
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_scan_finish_325740\n"
-".type opencfw_em9305_scan_finish_325740,@function\n"
-"opencfw_em9305_scan_finish_325740:\n"
-"L325740:\n"
-"enter_s [r13-r14,fp,blink]\n"
-"L325742:\n"
-"sub_s sp,sp,0x4\n"
-"L325744:\n"
-"bl.d opencfw_em9305_command_count_down_30e48c\n"
-"L325748:\n"
-"mov_s r13,r0\n"
-"L32574a:\n"
-"mov_s r0,0x804fd8\n"
-"L325750:\n"
-"cmp_s r13,r0\n"
-"L325752:\n"
-"mov_s r0,0x805a70\n"
-"L325758:\n"
-"beq_s L325760\n"
-"L32575a:\n"
-"stb 0,[r0,4]\n"
-"L32575e:\n"
-"b_s L325764\n"
-"L325760:\n"
-"stb 0,[r0,3]\n"
-"L325764:\n"
-"ldb r0,[r13,66]\n"
-"L325768:\n"
-"bbit0.nt r0,0,L325770\n"
-"L32576c:\n"
-"bl opencfw_em9305_init_state_count_down_30e49c\n"
-"L325770:\n"
-"bl.d opencfw_em9305_pawr_release_322884\n"
-"L325774:\n"
-"mov r0,r13\n"
-"L325778:\n"
-"add r14,r13,0x28\n"
-"L32577c:\n"
-"add r1,sp,0x3\n"
-"L325780:\n"
-"bl.d opencfw_em9305_wsf_event_remove\n"
-"L325784:\n"
-"mov_s r0,r14\n"
-"L325786:\n"
-"breq_s r0,0,L32578e\n"
-"L325788:\n"
-"bl opencfw_em9305_wsf_event_release\n"
-"L32578c:\n"
-"b_s L32577c\n"
-"L32578e:\n"
-"add_s r13,r13,0x30\n"
-"L325790:\n"
-"add r1,sp,0x3\n"
-"L325794:\n"
-"bl.d opencfw_em9305_wsf_event_remove\n"
-"L325798:\n"
-"mov_s r0,r13\n"
-"L32579a:\n"
-"breq_s r0,0,L3257a2\n"
-"L32579c:\n"
-"bl opencfw_em9305_wsf_event_release\n"
-"L3257a0:\n"
-"b_s L325790\n"
-"L3257a2:\n"
-"leave_s [r13-r14,fp,blink,pcl]\n"
-".size opencfw_em9305_scan_finish_325740,.-opencfw_em9305_scan_finish_325740\n"
-);
+#include <stdint.h>
+
+/* Native 0x325740..0x3257a4: finish a scan context (0x804fd8 or the
+ * other scanner): count the command down, clear its busy byte (0x805a73
+ * or 0x805a74), count the init state down when bit 0 of +66 is set,
+ * release its PAwR state and free every event queued at +40 and +48.
+ * Always returns 0. */
+extern uint32_t opencfw_em9305_command_count_down_30e48c(void);
+extern uint32_t opencfw_em9305_init_state_count_down_30e49c(void);
+extern uint32_t opencfw_em9305_pawr_release_322884(uintptr_t scan);
+extern uintptr_t opencfw_em9305_wsf_event_remove(uintptr_t queue, uintptr_t handler_out);
+extern uint32_t opencfw_em9305_wsf_event_release(uintptr_t event);
+
+uint32_t opencfw_em9305_scan_finish_325740(uintptr_t scan)
+{
+    uint8_t handler;
+    uintptr_t event;
+    (void)opencfw_em9305_command_count_down_30e48c();
+    if(scan==0x804fd8u)*(volatile uint8_t *)(uintptr_t)0x805a73u=0u;
+    else *(volatile uint8_t *)(uintptr_t)0x805a74u=0u;
+    if((*(volatile uint8_t *)(scan+66u)&1u)!=0u)
+        (void)opencfw_em9305_init_state_count_down_30e49c();
+    (void)opencfw_em9305_pawr_release_322884(scan);
+    while((event=opencfw_em9305_wsf_event_remove(scan+40u,(uintptr_t)&handler))!=0u)
+        (void)opencfw_em9305_wsf_event_release(event);
+    while((event=opencfw_em9305_wsf_event_remove(scan+48u,(uintptr_t)&handler))!=0u)
+        (void)opencfw_em9305_wsf_event_release(event);
+    return 0u;
+}

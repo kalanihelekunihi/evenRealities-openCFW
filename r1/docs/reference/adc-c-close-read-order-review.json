@@ -1,0 +1,189 @@
+{
+  "cases": 20577,
+  "passed": 20577,
+  "failures": [],
+  "close_cases": 20481,
+  "already_open_lookup_cases": 96,
+  "old_lookup_regression": {
+    "native_calls": [
+      [
+        "strcmp",
+        [
+          17887232,
+          17887232
+        ]
+      ],
+      [
+        "nrfx_saadc_channel_uninit",
+        6
+      ]
+    ],
+    "old_calls": [
+      [
+        "strcmp",
+        [
+          17887232,
+          17887488
+        ]
+      ],
+      [
+        "strcmp",
+        [
+          17887488,
+          17887488
+        ]
+      ],
+      [
+        "nrfx_saadc_channel_uninit",
+        4
+      ]
+    ],
+    "native_first_reads": [
+      [
+        536961024,
+        4,
+        17887232
+      ],
+      [
+        536899320,
+        4,
+        17887232
+      ],
+      [
+        536899324,
+        1,
+        1
+      ],
+      [
+        536899325,
+        1,
+        6
+      ]
+    ],
+    "old_first_reads": [
+      [
+        536899320,
+        4,
+        17887232
+      ],
+      [
+        536961024,
+        4,
+        17887488
+      ],
+      [
+        536899360,
+        4,
+        17887488
+      ],
+      [
+        536961024,
+        4,
+        17887488
+      ]
+    ],
+    "different_closed_record": true
+  },
+  "callback_depths": [
+    [
+      [
+        -16
+      ],
+      [
+        -24
+      ]
+    ],
+    [
+      [
+        -16,
+        -16
+      ],
+      [
+        -24,
+        -24
+      ]
+    ],
+    [
+      [
+        -16,
+        -16,
+        -16
+      ],
+      [
+        -24,
+        -24,
+        -24
+      ]
+    ],
+    [
+      [
+        -16,
+        -16,
+        -16,
+        -16
+      ],
+      [
+        -24,
+        -24,
+        -24,
+        -24
+      ]
+    ],
+    [
+      [
+        -16,
+        -16,
+        -16,
+        -16,
+        -16
+      ],
+      [
+        -24,
+        -24,
+        -24,
+        -24,
+        -24
+      ]
+    ]
+  ],
+  "other_sections_unchanged": [
+    ".r1.adc.ops",
+    ".r1.adc.state",
+    ".text.r1_named_adc_register_all",
+    ".text.r1_named_adc_sample",
+    ".text.r1_named_adc_sample_body"
+  ],
+  "other_source_units_unchanged": 561,
+  "imports_unchanged": true,
+  "application_imports": 211,
+  "bootloader_imports": 34,
+  "report": "build/sources-goal-r1-adc-close/report.json",
+  "report_sha256": "2567c355e644a61618187f3f13b59d3ab5b2815572acfdec1ef783aff13274f3",
+  "manifest_sha256": "9c5b7ae5c0e7493eb22e1fb4df9f0c928c2a9aa70530254aff89b55213bef2e2",
+  "stock_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "rea": {
+    "path": "build/goal-r1-adc-close/REA.json",
+    "sha256": "0a84e6c09b63935e28519a8fb674c946f1ddf5eddefdf00026dae91270d1a75d",
+    "procedure": "0x547f4"
+  },
+  "source_sha256": {
+    "r1/src/application/adc/stock_named_adc.c": "11a73747569faf11c5823dcc7a7521585185ecb996868a0ae4610fb2b3fcc12c"
+  },
+  "probe_artifacts": {
+    "build/goal-r1-adc-close/before.c": "f64e253409d6a22c3947906f7c775ae57d114682b9f39974bfbe9f545a02ad93",
+    "build/goal-r1-adc-close/stock.s": "9587774b80bab70d0b48b7017eb188a7bfe9685f38bc030292eb9d2fc1636f9b",
+    "build/goal-r1-adc-close/stock.elf": "d46ca33a5133610d43776b23a82f13c31034f218df5f34088f075b1c1bb6275e",
+    "build/goal-r1-adc-close/REA.json": "0a84e6c09b63935e28519a8fb674c946f1ddf5eddefdf00026dae91270d1a75d",
+    "build/goal-r1-adc-close/rea-snapshot.json": "dc1eba419a77ec0d71a707314f1b56945e2a8247a783ac94ba4b6ae77e09a233",
+    "build/goal-r1-adc-close/verify.py": "cd7c732ea0e8e531201f7c7e8ea79451c6bce158e8f862c8880cbee2ed12c5fe",
+    "build/goal-r1-adc-close/results.json": "3c46657121b2949aae8a0a35196bd863bb71ac3a851383abfa68f7f344ccd2be",
+    "build/goal-r1-adc-close/source.elf": "40de8fda086d9726ba4ad30528ad083216ac65aa3644676ef74c6c6feba08654",
+    "build/goal-r1-adc-close/old.elf": "aea151ceb73963d540031b515a8254ed0c255371ffb0edb1a93f18f4e540a3cf"
+  },
+  "limits": [
+    "ADC close and already-open lookup paths execute; strcmp and Nordic channel/driver uninit are modeled. Full open initialization, channel setup, delay path and physical SAADC lifecycle remain unproven.",
+    "Controlled name update during a pointer load reproduces old-source divergence; this is not evidence of an observed field failure or complete concurrent-access safety.",
+    "CPU read addresses/order/widths and state/SDK calls are compared; private C stack, arbitrary pointer faults, exception and timing identity are unproven. Callback depth differs from native.",
+    "Manifest eligibility and imports are unchanged. No source qualification, final firmware linking/boot integration or whole-image byte identity claim; no G2 gate or source-plan change."
+  ]
+}

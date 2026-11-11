@@ -1,28 +1,14 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_325fb8\n"
-".type opencfw_em9305_child_325fb8,@function\n"
-"opencfw_em9305_child_325fb8:\n"
-"L325fb8:\n"
-"enter_s [r13,blink]\n"
-"L325fba:\n"
-"mov_s r13,r0\n"
-"L325fbc:\n"
-"bl.d opencfw_em9305_phy_packet_alloc_32d2f0\n"
-"L325fc0:\n"
-"mov_s r0,1\n"
-"L325fc2:\n"
-"mov_s r1,r0\n"
-"L325fc4:\n"
-"breq_s r0,0,L325fd0\n"
-"L325fc6:\n"
-"mov_s r0,r13\n"
-"L325fc8:\n"
-"bl.d opencfw_em9305_phy_packet_send_32d32c\n"
-"L325fcc:\n"
-"stb 11,[r1]\n"
-"L325fd0:\n"
-"leave_s [r13,blink,pcl]\n"
-".size opencfw_em9305_child_325fb8,.-opencfw_em9305_child_325fb8\n"
-);
+#include <stdint.h>
+
+/* Native 0x325fb8..0x325fd2: allocate a one-byte PHY packet, tag it with
+ * opcode 11 and send it on the record. Returns 0 if allocation failed. */
+extern uint32_t opencfw_em9305_phy_packet_alloc_32d2f0(uint32_t);
+extern uint32_t opencfw_em9305_phy_packet_send_32d32c(uintptr_t,uintptr_t);
+
+uint32_t opencfw_em9305_child_325fb8(uintptr_t record)
+{
+    uintptr_t packet=opencfw_em9305_phy_packet_alloc_32d2f0(1u);
+    if(packet==0u) return 0u;
+    *(volatile uint8_t *)packet=11u;
+    return opencfw_em9305_phy_packet_send_32d32c(record,packet);
+}

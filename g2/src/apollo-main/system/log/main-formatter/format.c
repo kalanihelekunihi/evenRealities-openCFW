@@ -60,13 +60,19 @@
 #include <stdint.h>
 #include <stdbool.h>
 #include <stdarg.h>
+/* Stock-RAM literals rewritten to named objects (sim-test wave 2026-10-26,
+ * .waves/sim-fix/apply.py): g2ref_X is the linker symbol X. */
+#include <stdint.h>
+extern unsigned char g2ref_audio_uart_stdio_print_char_cell_200742f0[] __asm__("audio_uart_stdio_print_char_cell_200742f0");
+extern unsigned char g2ref_g2_flashdb_print_buffer[] __asm__("g2_flashdb_print_buffer");
+extern unsigned char g2ref_g2_stock_ram_20074f30[] __asm__("g2_stock_ram_20074f30");
 /* Adaptation: recovered stock string width/precision, default precision-1,
  * fixed stock sink/buffer/translation addresses. Original SDK is preserved.
  * This generic utility is not Apollo510 HAL source/version identity. */
 typedef void (*am_util_stdio_print_char_t)(char *);
-#define g_pfnCharPrint (*(am_util_stdio_print_char_t volatile *)0x200742f0)
-#define g_prfbuf ((char *)0x2006b930)
-#define g_bTxtXlate (*(volatile bool *)0x20074f7f)
+#define g_pfnCharPrint (*(am_util_stdio_print_char_t volatile *)((uint32_t)(uintptr_t)g2ref_audio_uart_stdio_print_char_cell_200742f0))
+#define g_prfbuf ((char *)((uint32_t)(uintptr_t)g2ref_g2_flashdb_print_buffer))
+#define g_bTxtXlate (*(volatile bool *)((uint32_t)(uintptr_t)g2ref_g2_stock_ram_20074f30+0x4fu))
 /* Stock 0x472C84 (divu64_10); AmbiqSuite R3.2.0 utils/am_util_stdio.c */
 static uint64_t
 divu64_10(uint64_t ui64Val)
@@ -989,3 +995,15 @@ audio_sdk_printf(const char *pcFmt, ...)
     return ui32NumChars;
 }
 
+/* audio_heap_log (heap-failure logger, rtos/cmsis-memory-pool/failure.c) is the
+ * same am_util_stdio_printf entry: identical guard, formatter, buffer and
+ * print-callback cell. */
+__typeof__(audio_sdk_printf) audio_heap_log __attribute__((alias("audio_sdk_printf")));
+
+
+/* Single implementation of stock vformatter 0x473036; the former forwarding
+ * adapters in extended-log-runtime/transport_formatter_adapter.c are aliases. */
+__typeof__(audio_heap_formatter) g2_log_transport_vformat_unbounded
+    __attribute__((alias("audio_heap_formatter")));
+__typeof__(audio_heap_formatter) g2_flashdb_vformat
+    __attribute__((alias("audio_heap_formatter")));

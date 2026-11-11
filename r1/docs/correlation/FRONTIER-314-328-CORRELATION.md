@@ -20,10 +20,14 @@ The Ghidra CSV reports 318 bytes for `0x000317CC` while also reporting the inclu
 time-series database, requests sleep-history clearing, obtains the current UTC offset and local
 day start, clears four scalar daily caches, the 144-bucket activity cache, and the HRV cache,
 refreshes their day/timezone metadata, and passes a zeroed aggregate to the health-algorithm
-boundary. `r1_health_clear_all_caches` implements the six R1 cache transitions and returns typed
-actions for FlashDB, sleep, and licensed health-algorithm providers. It performs no persistent
-database mutation itself.
-There is no persistent database mutation in the clean-room API.
+boundary. The current [native C implementation](../reference/health-clear-c-review.md)
+executes the six cache transitions, invokes the FlashDB/sleep providers and writes the sync
+record. It reuses the existing database and cache owners. The subsequent
+[C sleep scan/delete implementation](../reference/sleep-delete-c-review.md) closes the sleep
+deletion dependency through the existing C erase core. Physical persistence and boot remain
+unverified.
+This supersedes the earlier typed-action-only description. The historical unsigned-link
+measurements below are not current build proof.
 
 `0x00051108` is called at `0x0003CD3A`, `0x0004F1CE`, and `0x00062C7A`. The stock routine opens
 two GXT310 channels, waits `0x50` ticks, takes ten paired readings separated by five ticks,

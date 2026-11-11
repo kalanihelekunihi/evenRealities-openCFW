@@ -29,3 +29,5 @@ void case_policy_queue_wait_cleanup(uint32_t queue)
     *(volatile uint8_t *)(uintptr_t)(payload+4u)=0xffu;
     (void)case_policy_scheduler_unlock();
 }
+/* Dedup (0x0800b374): case_queue_unlock (was legacy-default/kernel_queue_unlock_candidate.c). */
+__typeof__(case_policy_queue_wait_cleanup) case_queue_unlock __attribute__((alias("case_policy_queue_wait_cleanup")));

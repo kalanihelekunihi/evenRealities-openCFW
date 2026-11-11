@@ -1,30 +1,15 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_315d80\n"
-".type opencfw_em9305_child_315d80,@function\n"
-"opencfw_em9305_child_315d80:\n"
-"L315d80:\n"
-"enter_s [r13,blink]\n"
-"L315d82:\n"
-"mov_s r13,r0\n"
-"L315d84:\n"
-"add r0,r0,627\n"
-"L315d88:\n"
-"stb 1,[r0]\n"
-"L315d8c:\n"
-"bl.d opencfw_em9305_phy_complete_32c818\n"
-"L315d90:\n"
-"mov_s r0,r13\n"
-"L315d92:\n"
-"bl.d opencfw_em9305_child_32c990\n"
-"L315d96:\n"
-"mov_s r0,r13\n"
-"L315d98:\n"
-"bl.d opencfw_em9305_child_325ccc\n"
-"L315d9c:\n"
-"mov_s r0,r13\n"
-"L315d9e:\n"
-"leave_s [r13,blink,pcl]\n"
-".size opencfw_em9305_child_315d80,.-opencfw_em9305_child_315d80\n"
-);
+#include <stdint.h>
+
+/* Native 0x315d80..0x315da0: mark the record's completion byte (+627), then
+ * run PHY completion, the 32c990 step and the 325ccc step on it. */
+extern uint32_t opencfw_em9305_phy_complete_32c818(uintptr_t);
+extern uint32_t opencfw_em9305_child_32c990(uintptr_t);
+extern uint32_t opencfw_em9305_child_325ccc(uintptr_t);
+
+uint32_t opencfw_em9305_child_315d80(uintptr_t record)
+{
+    *(volatile uint8_t *)(record+627u)=1u;
+    (void)opencfw_em9305_phy_complete_32c818(record);
+    (void)opencfw_em9305_child_32c990(record);
+    return opencfw_em9305_child_325ccc(record);
+}

@@ -1,0 +1,105 @@
+{
+  "schema_version": 1,
+  "entries": {
+    "0x72420": "r1_gomore_record8_valid_native",
+    "0x72550": "r1_gomore_record8_select_native",
+    "0x7260c": "r1_gomore_record8_commit_native",
+    "0x68f64": "r1_gomore_record8_get_native",
+    "0x8ed10": "r1_gomore_record8_apply_native"
+  },
+  "report": "build/sources-goal-r1-record8-c/report.json",
+  "report_sha256": "0053aa40a3cdb1497285d7e7430aa3031d42080b9c854d59fcefd70324dcd002",
+  "unit": {
+    "source": "r1/src/application/runtime/native_gomore_record8.c",
+    "source_sha256": "71adcdcbb9d07b79f5f2f949a5b2fdeb2b2f4f5fa1510d661d6277d5a7a635af",
+    "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-record8-c/r1/r1-application/r1__src__application__runtime__native_gomore_record8.c.o",
+    "object_sha256": "1d1478e9a7cf321eff2b393f456aabf07f04a266bba7fab83f7b1676d5c3b455"
+  },
+  "behavior": {
+    "pairs": 1557,
+    "digest": "e2928069ff50caa7f5c39bbde368139d1f7538ba2a0a94157da2936ae449e6f6",
+    "actual_C": [
+      "five record primitives/adapters",
+      "canonical native-context pointer owner",
+      "health enable/helper and actual event adapter"
+    ],
+    "modeled_boundaries": [
+      "r1_gomore_authorization_dispatch_native",
+      "r1_structured_log_mode_get",
+      "r1_structured_log_format",
+      "nrf_log_frontend_std_1"
+    ],
+    "limits": [
+      "Mapped context and record pointers; no null/invalid-pointer recovery invented",
+      "Overlapping SRAM views preserve ordered word reads/writes",
+      "Kernel/authorization/log delivery, context allocation and hardware activation not proven",
+      "Private getter locals and caller-clobbered registers excluded"
+    ]
+  },
+  "negative_controls": {
+    "wrong-first-upper-limit": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "         ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-record8-c/verify.py\", line 58, in pair\n    a=run(False,**kw);b=run(True,**kw);assert a==b,(kw,[k for k in a if a[k]!=b[k]],a['trace'],b['trace']);digest.update(json.dumps([kw,a]).encode());pairs+=1\n                                              ^^^^\nAssertionError: ({'entry': 'valid', 'first': 60, 'second': 0, 'hour': 0, 'endhour': 0}, ['returns'], [], [])\n"
+    },
+    "wrong-second-sign": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-record8-c/verify.py\", line 58, in pair\n    a=run(False,**kw);b=run(True,**kw);assert a==b,(kw,[k for k in a if a[k]!=b[k]],a['trace'],b['trace']);digest.update(json.dumps([kw,a]).encode());pairs+=1\n                                              ^^^^\nAssertionError: ({'entry': 'valid', 'first': 15, 'second': -32768, 'hour': 0, 'endhour': 0}, ['returns'], [], [])\n"
+    },
+    "wrong-hour-limit": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "        ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-record8-c/verify.py\", line 58, in pair\n    a=run(False,**kw);b=run(True,**kw);assert a==b,(kw,[k for k in a if a[k]!=b[k]],a['trace'],b['trace']);digest.update(json.dumps([kw,a]).encode());pairs+=1\n                                              ^^^^\nAssertionError: ({'entry': 'valid', 'first': 15, 'second': 0, 'hour': 24, 'endhour': 0}, ['returns'], [], [])\n"
+    },
+    "wrong-mode-normalization": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "               ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-record8-c/verify.py\", line 58, in pair\n    a=run(False,**kw);b=run(True,**kw);assert a==b,(kw,[k for k in a if a[k]!=b[k]],a['trace'],b['trace']);digest.update(json.dumps([kw,a]).encode());pairs+=1\n                                              ^^^^\nAssertionError: ({'entry': 'get', 'mode': 4294967295, 'source': 537042944, 'output': 537038848}, ['output'], [], [])\n"
+    },
+    "wrong-cache-flag-gate": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "                                               ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-record8-c/verify.py\", line 58, in pair\n    a=run(False,**kw);b=run(True,**kw);assert a==b,(kw,[k for k in a if a[k]!=b[k]],a['trace'],b['trace']);digest.update(json.dumps([kw,a]).encode());pairs+=1\n                                              ^^^^\nAssertionError: ({'flag180': 0, 'flag184': 1, 'source': 537034750}, ['context'], [], [])\n"
+    },
+    "wrong-apply-status": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-record8-c/verify.py\", line 58, in pair\n    a=run(False,**kw);b=run(True,**kw);assert a==b,(kw,[k for k in a if a[k]!=b[k]],a['trace'],b['trace']);digest.update(json.dumps([kw,a]).encode());pairs+=1\n                                              ^^^^\nAssertionError: ({'entry': 'apply', 'first': -32768, 'second': -32768, 'hour': 0, 'endhour': 0}, ['returns'], [], [])\n"
+    },
+    "wrong-overlap-copy-order": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "                    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-record8-c/verify.py\", line 58, in pair\n    a=run(False,**kw);b=run(True,**kw);assert a==b,(kw,[k for k in a if a[k]!=b[k]],a['trace'],b['trace']);digest.update(json.dumps([kw,a]).encode());pairs+=1\n                                              ^^^^\nAssertionError: ({'entry': 'select', 'mode': 0, 'source': 537042944, 'output': 537006692}, ['context'], [], [])\n"
+    },
+    "wrong-cache-source-offset": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "                        ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-record8-c/verify.py\", line 58, in pair\n    a=run(False,**kw);b=run(True,**kw);assert a==b,(kw,[k for k in a if a[k]!=b[k]],a['trace'],b['trace']);digest.update(json.dumps([kw,a]).encode());pairs+=1\n                                              ^^^^\nAssertionError: ({'entry': 'get', 'mode': 0, 'source': 537042944, 'output': 537038848}, ['output'], [], [])\n"
+    }
+  },
+  "audit": {
+    "unchanged_prior_objects": 750,
+    "new_units": 1,
+    "imports": {
+      "r1-application": {
+        "added": [],
+        "removed": [
+          "r1_gomore_record8_apply_native",
+          "r1_gomore_record8_get_native"
+        ]
+      },
+      "r1-bootloader": {
+        "added": [],
+        "removed": []
+      }
+    },
+    "reused_owners": [
+      "r1_gomore_native_context; no new data ownership"
+    ]
+  },
+  "source_check": "R1 check passes: 751 units, 555 source files, 0 not built. Global check flagged concurrent G2 resident_rom_thumb_set.S absent from manifest.",
+  "rea": "gomore-record8-c-rea.json",
+  "instruction_identity_proven": false,
+  "image_integration_proven": false
+}

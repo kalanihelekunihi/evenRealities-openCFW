@@ -15,7 +15,7 @@ extern uint32_t opencfw_bl_mask_interrupts(void);
 #define MINFREE WORD(0x20027110)
 static void fail(void) {
     (void)opencfw_bl_mask_interrupts();WORD(UINT32_MAX)=0;
-    for (;;)__asm__ volatile("b .":::"memory");
+    for (;;){ }
 }
 void opencfw_boot_rtos_heap_initialize(void) {
     uint32_t base=0x2000055c,total=0x14000;

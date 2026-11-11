@@ -1,144 +1,52 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_31c7c4\n"
-".type opencfw_em9305_child_31c7c4,@function\n"
-"opencfw_em9305_child_31c7c4:\n"
-"L31c7c4:\n"
-"enter_s [r13-r18,blink]\n"
-"L31c7c6:\n"
-"mov_s r14,r1\n"
-"L31c7c8:\n"
-"ldb_s r1,[r1,0x6]\n"
-"L31c7ca:\n"
-"mov_s r16,r0\n"
-"L31c7cc:\n"
-"mov_s r13,r2\n"
-"L31c7ce:\n"
-"add_s r0,r1,0x1\n"
-"L31c7d0:\n"
-"bl.d opencfw_em9305_child_31b794\n"
-"L31c7d4:\n"
-"extb_s r0,r0\n"
-"L31c7d6:\n"
-"breq.d.nt r0,0,L31c87c\n"
-"L31c7da:\n"
-"mov_s r2,r16\n"
-"L31c7dc:\n"
-"ldb r0,[r16,154]\n"
-"L31c7e0:\n"
-"ldb_s r1,[r14,0]\n"
-"L31c7e2:\n"
-"mov r17,r16\n"
-"L31c7e6:\n"
-"add r2,r2,545\n"
-"L31c7ea:\n"
-"add r17,r17,484\n"
-"L31c7ee:\n"
-"bbit0.d.nt r0,0x6,L31c7fe\n"
-"L31c7f2:\n"
-"stb r1,[r2,-12]\n"
-"L31c7f6:\n"
-"ldb r0,[r16,177]\n"
-"L31c7fa:\n"
-"stb r0,[r2,-11]\n"
-"L31c7fe:\n"
-"ldb_s r0,[r14,0x6]\n"
-"L31c800:\n"
-"ldb_s r15,[r14,0x2]\n"
-"L31c802:\n"
-"ldh_s r12,[r14,0x4]\n"
-"L31c804:\n"
-"seteq r3,r0,0x1\n"
-"L31c808:\n"
-"cmp_s r0,2\n"
-"L31c80a:\n"
-"add_s r0,r3,0x1\n"
-"L31c80c:\n"
-"mov r1,300\n"
-"L31c810:\n"
-"mov.eq r0,0x3\n"
-"L31c814:\n"
-"cmp_s r15,0\n"
-"L31c816:\n"
-"mov_s r18,r1\n"
-"L31c818:\n"
-"mov.eq r1,0x1e\n"
-"L31c81c:\n"
-"mpyuw r15,r1,r12\n"
-"L31c820:\n"
-"stb_s r0,[r2,0]\n"
-"L31c822:\n"
-"bl.d opencfw_em9305_init_secondary_current_303f5c\n"
-"L31c826:\n"
-"stb r0,[r2,-1]\n"
-"L31c82a:\n"
-"ldb_s r12,[r14,0x2]\n"
-"L31c82c:\n"
-"mov_s r1,r0\n"
-"L31c82e:\n"
-"ldb_s r0,[r14,0x1]\n"
-"L31c830:\n"
-"mov_s r2,r18\n"
-"L31c832:\n"
-"cmp_s r12,0\n"
-"L31c834:\n"
-"mov r3,500\n"
-"L31c838:\n"
-"mov.eq r2,0x1e\n"
-"L31c83c:\n"
-"cmp_s r0,1\n"
-"L31c83e:\n"
-"mov.eq r3,0x32\n"
-"L31c842:\n"
-"add_s r0,r2,r15\n"
-"L31c844:\n"
-"bl.d opencfw_em9305_init_secondary_time_317ebc\n"
-"L31c848:\n"
-"add_s r1,r1,r3\n"
-"L31c84a:\n"
-"ldb_s r1,[r14,0x2]\n"
-"L31c84c:\n"
-"sub_s r14,r15,r0\n"
-"L31c84e:\n"
-"add_s r13,r13,r14\n"
-"L31c850:\n"
-"cmp_s r1,0\n"
-"L31c852:\n"
-"mov.eq r18,0x1e\n"
-"L31c856:\n"
-"add1 r18,r18,r0\n"
-"L31c85a:\n"
-"mov_s r1,0\n"
-"L31c85c:\n"
-"mov_s r0,r17\n"
-"L31c85e:\n"
-"st.as r13,[r16,123]\n"
-"L31c862:\n"
-"bl.d opencfw_em9305_associated_object_init_312918\n"
-"L31c866:\n"
-"st.as r18,[r16,165]\n"
-"L31c86a:\n"
-"bl opencfw_em9305_scan_current_303f80\n"
-"L31c86e:\n"
-"brhs.d.nt r14,r0,L31c87e\n"
-"L31c872:\n"
-"mov_s r1,0\n"
-"L31c874:\n"
-"add r16,r16,700\n"
-"L31c878:\n"
-"stb 1,[r16]\n"
-"L31c87c:\n"
-"leave_s [r13-r18,blink,pcl]\n"
-"L31c87e:\n"
-"bl.d opencfw_em9305_associated_schedule_insert_312da4\n"
-"L31c882:\n"
-"mov_s r0,r17\n"
-"L31c884:\n"
-"breq_s r0,0,L31c87c\n"
-"L31c886:\n"
-"stb 1,[r16,241]\n"
-"L31c88a:\n"
-"leave_s [r13-r18,blink,pcl]\n"
-".size opencfw_em9305_child_31c7c4,.-opencfw_em9305_child_31c7c4\n"
-);
+#include <stdint.h>
+
+/* Native 0x31c7c4..0x31c88c: arm a periodic-sync/associated receive
+ * from the parameter block {+0 options, +1 clock accuracy, +2 skip-less
+ * flag, +4 interval units, +6 PHY}. Unsupported PHYs return 0. Latches
+ * the options (+533) and, when bit 6 of +154 is set, +177 into +534;
+ * stores the PHY code (1/2/3) at +544/+545; computes the window
+ * (30 or 300 x units) and the widened offset from 317ebc, sets the anchor
+ * (+492) and window (+660) of the object at +484 and either inserts it
+ * (marking +241) or, when the first anchor is too close for the scan
+ * window, flags +700. */
+extern uint32_t opencfw_em9305_child_31b794(uint32_t selector);
+extern uint32_t opencfw_em9305_init_secondary_current_303f5c(void);
+extern uint32_t opencfw_em9305_init_secondary_time_317ebc(uint32_t,uint32_t);
+extern uint32_t opencfw_em9305_associated_object_init_312918(uintptr_t object, uint32_t seed);
+extern uint32_t opencfw_em9305_scan_current_303f80(void);
+extern uint32_t opencfw_em9305_associated_schedule_insert_312da4(uintptr_t,uintptr_t);
+
+uint32_t opencfw_em9305_child_31c7c4(uintptr_t record, uintptr_t parameters, uint32_t start)
+{
+    volatile const uint8_t *p=(volatile const uint8_t *)parameters;
+    if(opencfw_em9305_child_31b794((uint8_t)(p[6]+1u))==0u)return 0u;
+    uint32_t sca_flags=*(volatile uint8_t *)(record+154u);
+    *(volatile uint8_t *)(record+533u)=p[0];
+    if((sca_flags&0x40u)!=0u)
+        *(volatile uint8_t *)(record+534u)=*(volatile uint8_t *)(record+177u);
+    uint32_t phy=p[6];
+    uint32_t skip=p[2];
+    uint32_t units=*(volatile const uint16_t *)(parameters+4u);
+    uint32_t code=phy==2u?3u:(phy==1u)+1u;
+    uint32_t window=(skip==0u?30u:300u)*units;
+    *(volatile uint8_t *)(record+545u)=(uint8_t)code;
+    *(volatile uint8_t *)(record+544u)=(uint8_t)code;
+    uint32_t now=opencfw_em9305_init_secondary_current_303f5c();
+    uint32_t margin=p[2]==0u?30u:300u;
+    uint32_t drift=p[1]==1u?50u:500u;
+    uint32_t widening=opencfw_em9305_init_secondary_time_317ebc(margin+window,now+drift);
+    uint32_t offset=window-widening;
+    uint32_t span=(p[2]==0u?30u:300u)+2u*widening;
+    uintptr_t object=record+484u;
+    *(volatile uint32_t *)(record+492u)=start+offset;
+    *(volatile uint32_t *)(record+660u)=span;
+    (void)opencfw_em9305_associated_object_init_312918(object,0u);
+    uint32_t scan=opencfw_em9305_scan_current_303f80();
+    if(offset<scan){
+        *(volatile uint8_t *)(record+700u)=1u;
+        return scan;
+    }
+    uint32_t inserted=opencfw_em9305_associated_schedule_insert_312da4(object,0u);
+    if(inserted!=0u)*(volatile uint8_t *)(record+241u)=1u;
+    return inserted;
+}

@@ -13,3 +13,5 @@ uint32_t case_binary_3f_enable(void)
     case_binary_3f_set(5u, 3u);
     return case_binary_3f_set(6u, 0x81u);
 }
+/* Dedup (0x0800d154): case_policy_service_idle (was startup/application_policy_shared_aliases_candidate.c). */
+__typeof__(case_binary_3f_enable) case_policy_service_idle __attribute__((alias("case_binary_3f_enable")));

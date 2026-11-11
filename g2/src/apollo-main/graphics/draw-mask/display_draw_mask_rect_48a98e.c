@@ -3,7 +3,7 @@
 #include <stdint.h>
 
 extern uint32_t audio_uart_lv_color_has_alpha_440fc4(uint32_t);
-extern void audio_uart_lvgl_log(uint32_t, const char *, uint32_t,
+extern void lv_log_add(uint32_t, const char *, uint32_t,
                                 const char *, const char *, ...);
 extern void *audio_uart_lv_render_task_alloc_4843ee(void *, const void *);
 extern void *audio_uart_lv_malloc(uint32_t);
@@ -36,7 +36,7 @@ void audio_uart_lv_draw_mask_rect_48a98e(void *layer_arg, const void *dsc_arg)
     uint8_t *const layer = (uint8_t *)layer_arg;
     const uint8_t *const dsc = (const uint8_t *)dsc_arg;
     if (audio_uart_lv_color_has_alpha_440fc4(layer[0x14u]) == 0u) {
-        audio_uart_lvgl_log(2u, source_path, 0x35u, function_name, no_alpha);
+        lv_log_add(2u, source_path, 0x35u, function_name, no_alpha);
         return;
     }
     uint8_t *const task = (uint8_t *)audio_uart_lv_render_task_alloc_4843ee(
@@ -44,7 +44,7 @@ void audio_uart_lv_draw_mask_rect_48a98e(void *layer_arg, const void *dsc_arg)
     uint8_t *const copy = (uint8_t *)audio_uart_lv_malloc(0x34u);
     wr(task, 0x54u, (uint32_t)(uintptr_t)copy);
     if (copy == 0) {
-        audio_uart_lvgl_log(3u, source_path, 0x3du, function_name,
+        lv_log_add(3u, source_path, 0x3du, function_name,
                             assert_format, alloc_assert, alloc_failed);
         for (;;) *(volatile uint32_t *)(uintptr_t)0xffffffffu = 0u;
     }

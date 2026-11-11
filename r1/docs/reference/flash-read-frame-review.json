@@ -1,0 +1,350 @@
+{
+  "schema": 1,
+  "scope": "Native read-adapter/FAL save-frame and placement fidelity for partial reads",
+  "status": "bounded native-chain equality at controlled adapter placement; not instruction/image qualified",
+  "stock_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "read_status_TSL": {
+    "paired_cases": 9310,
+    "executions": 18620,
+    "source_report": "build/sources-goal-r1-flash-read-frame-final/report.json",
+    "groups": {
+      "adapter": 480,
+      "status": 262,
+      "outer": 8568
+    },
+    "partition_IO_modeled": true,
+    "checks": [
+      "FILE_MODE byte rejects before partition read",
+      "signed result mapping and unchanged four callback arguments",
+      "descending status byte loads, early zero, count and shift wrap behavior",
+      "actual C outer control uses read adapter and status scanner",
+      "failed/partial/non-writing reads retain native scratch state",
+      "ordered visible memory accesses, output guards, complete native frame, overlapping database/TSL/scratch views, R0, return SP, saved registers, masks"
+    ],
+    "limits": [
+      "Partition read is modeled; actual FAL/flash transport and physical flash not executed",
+      "Native frame bridge retained; outer read/decode/update control is C",
+      "Private stack below native scratch, caller-clobbered registers and flags excluded"
+    ]
+  },
+  "sector": {
+    "paired_cases": 12302,
+    "executions": 24604,
+    "outcomes": {
+      "returned": 11856,
+      "assertion_halt": 206,
+      "bounded_read_prefix": 240
+    },
+    "source_report": "build/sources-goal-r1-flash-read-frame-final/report.json",
+    "actual_C": [
+      "sector stepper, dispatch, diagnostics and result policy",
+      "sector preparation and advance",
+      "read adapter",
+      "status scanner",
+      "TSL control"
+    ],
+    "modeled": [
+      "partition read",
+      "printf diagnostics",
+      "database path getter"
+    ],
+    "checks": [
+      "header magic and all status combinations",
+      "header read, nested TSL, path and print calls at native outer SP",
+      "live changes from IO/path/diagnostic providers",
+      "native assertions and bounds diagnostics",
+      "header/TSL partial and non-writing failures",
+      "outer buffer caller SP-128 and nested raw view caller SP-176",
+      "live aliasing of sector/database/header fields",
+      "traversal unsigned alignment, overflow and bounds",
+      "ordered shared accesses, complete outer frame and nested raw bytes, ABI and masks"
+    ],
+    "limits": [
+      "Helper-private frames below nested raw view excluded",
+      "Partition read modeled, no physical flash/FAL scheduling",
+      "Caller-clobbered registers/flags and arbitrary corrupted pointers excluded",
+      "Long corrupted-size traversals compared through 16 reads only; termination not established for those fixtures"
+    ]
+  },
+  "FAL_read": {
+    "passed": 9216,
+    "executions": 18432,
+    "lookup_and_driver_modeled": true,
+    "diagnostics_compared": true,
+    "ordered_fields_compared": true,
+    "wrapping_bounds": true,
+    "source_report": "build/sources-goal-r1-flash-read-frame-final/report.json",
+    "source_size": 282,
+    "shared_alias_body": true,
+    "source_sha256": {
+      "{gen}/fal_partition_r1_lookup.c": "f642a2b58748dfcd037a1e79cb2cab2ac7b3c1eea0998e7ee94e3c76306719a7"
+    },
+    "limitations": [
+      "Lookup/driver/printf modeled; real lookup checked separately",
+      "Private frames and caller-clobbered registers/flags excluded",
+      "Invalid driver pointers, arbitrary aliasing, concurrency and electrical flash behavior unverified",
+      "No byte qualification"
+    ]
+  },
+  "FAL_cache": {
+    "passed": 6144,
+    "executions": 12288,
+    "actual_C_lookup": true,
+    "driver_and_printf_modeled": true,
+    "diagnostics_compared": true,
+    "ordered_fields_compared": true,
+    "wrapping_bounds": true,
+    "source_report": "build/sources-goal-r1-flash-read-frame-final/report.json",
+    "source_size": 282,
+    "shared_alias_body": true,
+    "source_sha256": {
+      "{gen}/fal_partition_r1_lookup.c": "f642a2b58748dfcd037a1e79cb2cab2ac7b3c1eea0998e7ee94e3c76306719a7"
+    },
+    "limitations": [
+      "Driver and printf modeled; native/C read and cache lookup execute",
+      "Private frames and caller-clobbered registers/flags excluded",
+      "Invalid driver pointers, arbitrary aliasing, concurrency and electrical flash behavior unverified",
+      "No byte qualification"
+    ]
+  },
+  "strict_native_chain": {
+    "paired_native_chain_cases": 1920,
+    "native_executions": 1920,
+    "native_comparison": "strict full recorded tuple, shared access order and all tracked frame/buffer/partition snapshots",
+    "paired_source_chain_cases": 1920,
+    "executions": 3840,
+    "outcomes": {
+      "returned": 1920,
+      "assertion_halt": 0,
+      "bounded_read_prefix": 0
+    },
+    "baseline": "original reconstructed sector assembly linked to the same current C read/TSL/FAL providers",
+    "candidate": "C stepper with corrected header R6",
+    "source_report": "build/sources-goal-r1-flash-read-frame-final/report.json",
+    "actual_C": [
+      "sector stepper",
+      "flash read adapter",
+      "TSL/status control",
+      "FAL partition read",
+      "partition/cache lookup"
+    ],
+    "modeled": [
+      "final flash driver",
+      "printf diagnostics",
+      "database path getter"
+    ],
+    "native_full_chain_match": true,
+    "previous_stepper_full_chain_match": false,
+    "checks": [
+      "fixed common helper addresses across source variants",
+      "real FAL wrapping bounds and missing-device paths",
+      "partial/non-writing driver outcomes",
+      "outer/nested views and shared access order",
+      "R6 stack residue at first header call",
+      "diagnostic and return behavior"
+    ],
+    "limits": [
+      "Native equality is bounded to this fixture set and controlled read-adapter placement",
+      "No stack-derived values normalized; native counterexample closes in these cases",
+      "Seeded partition/cache, physical flash and startup unproven"
+    ]
+  },
+  "negative_controls": [
+    {
+      "mutation": "old-FAL-frame",
+      "rejected": true
+    },
+    {
+      "mutation": "shifted-read-placement",
+      "rejected": true
+    }
+  ],
+  "object_audit": {
+    "other_573_objects_unchanged": true,
+    "manifest_and_composed_import_sets_unchanged": true,
+    "mutable_and_readonly_data_owners_bytes_flags_alignment_relocations_unchanged": true,
+    "read_prologue": "push r4,r5,r6,lr: 16 bytes",
+    "FAL_prologue": "push r4-r10,lr: 32 bytes",
+    "read_function_bytes": 28,
+    "FAL_function_bytes": 282,
+    "read_alignment": 2,
+    "controlled_read_entry": "0x3f03e",
+    "controlled_call_return_address": "0x3f051",
+    "status_scanner_bytes_unchanged": false,
+    "remaining_instruction_difference": "recorded C uses IT MI where stock uses BGE; no instruction-identity claim"
+  },
+  "repair": [
+    "C flash read retains live R4/R5/R6 and native 16-byte save frame",
+    "C FAL read retains R8/R9/R10 to force native 32-byte save frame",
+    "Dedicated read function section with two-byte alignment admits native 0x3f03e entry and 0x3f051 saved return word"
+  ],
+  "normal_build": {
+    "units": 575,
+    "application_imports": 175,
+    "bootloader_imports": 34,
+    "failures": 0,
+    "duplicate_strong_symbols": 0,
+    "import_delta": 0
+  },
+  "qualification": {
+    "compiled_candidates": 10,
+    "selected_regions": 0,
+    "canonical_plan_unchanged": true
+  },
+  "hybrid": {
+    "application_equals_stock": true,
+    "totals": {
+      "binary-pull-through": 642279,
+      "source-built": 3881,
+      "resource-file": 248
+    },
+    "source_completeness_proven": false
+  },
+  "limits": [
+    "Strict native-chain equality is bounded to 1920 fixtures and explicit native read-adapter placement; no stack values normalized",
+    "Saved-code-address equality fails if adapter placement changes; this is not a generic relocatable execution guarantee",
+    "Read tail still uses compiler IT MI versus stock BGE; byte identity remains false",
+    "Final flash driver/printf/path are modeled; partition/cache state seeded",
+    "Private frames outside the observed views, unused caller-clobbered registers/flags and physical hardware/concurrency unproven",
+    "240 sector fixtures compare a 16-read prefix, not termination",
+    "Full source executable link and image byte equality unproven; G2 gates unchanged"
+  ],
+  "inputs": [
+    {
+      "path": "build/sources-goal-r1-flash-read-frame-final/report.json",
+      "sha256": "41a7d1629ce48639cfc270e7a19ae4af3076e6585d60db664e86d56f01b46320"
+    },
+    {
+      "path": "build/hybrid-goal-r1-flash-read-frame/build-report.json",
+      "sha256": "af85c268a452b2fe672b13805d21ce2ffd14dc3ce56c82d6117c39e8fb9d6706"
+    },
+    {
+      "path": "tools/build/source-plan.json",
+      "sha256": "716cf17b8cf2bed8ad6a99a672b1856af4c5380842c95cb14b9a263a7bb42bc8"
+    },
+    {
+      "path": "r1/src/application/runtime/native_flashdb_log_read.c",
+      "sha256": "4af07ab851a97527811a603075fed63c5985093bd9d7836f9feaa0390f03958a"
+    },
+    {
+      "path": "r1/src/application/board/fal-native/native_partition_read.h",
+      "sha256": "9f392e221228ce4e9decaab97f2410caadc49a726d0634ad94bd44544405868b"
+    },
+    {
+      "path": "r1/src/sources.json",
+      "sha256": "4b6d47de0b0e1626f5df3ee73725bc221c9e05373e2a098596abdf560fd5a0ca"
+    },
+    {
+      "path": "r1/symbols/function-frontier.csv",
+      "sha256": "6ee2110198147d60250c4655eddbe7c61e9826416459f6af4f2b057f7bd449e7"
+    },
+    {
+      "path": "build/generated/r1/fal_partition_r1_lookup.c",
+      "sha256": "f642a2b58748dfcd037a1e79cb2cab2ac7b3c1eea0998e7ee94e3c76306719a7"
+    },
+    {
+      "path": "build/goal-r1-flash-read-frame/before.c",
+      "sha256": "d538c7903b41bab8a8917aca079ab87545e468f41d15c4e7d9e8700bda5057e6"
+    },
+    {
+      "path": "build/goal-r1-flash-read-frame/partition-before.h",
+      "sha256": "dd3891e749194f6c1c18584a295aa91966e4f859f1a07616401c4ae011176305"
+    },
+    {
+      "path": "build/goal-r1-flash-read-frame/read_verify.py",
+      "sha256": "d67bf84326c443e77c49a4683cff12ae388bbc552fe2625e41b40b469c245f2a"
+    },
+    {
+      "path": "build/goal-r1-flash-read-frame/read-results.json",
+      "sha256": "45d2c5910b413116d837faa63d38cb51bfee96a51deffb1be854d1e63e6e164a"
+    },
+    {
+      "path": "build/goal-r1-flash-read-frame/read-verify.log",
+      "sha256": "405e0425a039fb045730c81dcb2fa0ca34631f7e3920e1de74bbb235e31c0f0e"
+    },
+    {
+      "path": "build/goal-r1-flash-read-frame/sector_verify.py",
+      "sha256": "f84463f08e5a9fd11a72c7a04943d6aa2e8a11f226ef3e69ee5b57d34d46f501"
+    },
+    {
+      "path": "build/goal-r1-flash-read-frame/sector-results.json",
+      "sha256": "64a19c7321bd9bb9a266f018f5ca4c10db7cd298a5d6dd3156fb3af3b5d38d6b"
+    },
+    {
+      "path": "build/goal-r1-flash-read-frame/sector-verify.log",
+      "sha256": "6f52ba7ea76454b9ba97bc810d714d509decd3b4a6e5ca8207a634740b104282"
+    },
+    {
+      "path": "build/goal-r1-flash-read-frame/fal-direct/verify.py",
+      "sha256": "a34350413eebdbd1767054bfed097b963ffb3dad59de3e9fff602bea40592318"
+    },
+    {
+      "path": "build/goal-r1-flash-read-frame/fal-direct/results.json",
+      "sha256": "8f79641fe4296953cf6b551e901c43be663d425941185eee66431d41e886f962"
+    },
+    {
+      "path": "build/goal-r1-flash-read-frame/fal-integrated/verify.py",
+      "sha256": "0989379cc3de3ae6ea0f64487b9899bf262e94ebb09e63a9572f4dab11042aeb"
+    },
+    {
+      "path": "build/goal-r1-flash-read-frame/fal-integrated/results.json",
+      "sha256": "983e7a7a3c794dfec6ebcba65d367e45933e05cc0ef72bc8ddb2f8ef6f7478a7"
+    },
+    {
+      "path": "build/goal-r1-flash-read-frame/chain.py",
+      "sha256": "f4e94b30d10223efdf00c429d8730783dacc172665581a22cddd3292b07c995f"
+    },
+    {
+      "path": "build/goal-r1-flash-read-frame/chain.ld",
+      "sha256": "a567f440e4404e424242040f9db863fdbafb118b890f58fb9a2eb39aed2878b8"
+    },
+    {
+      "path": "build/goal-r1-flash-read-frame/chain-results.json",
+      "sha256": "2bf009c6d712cdc3df49acb50d0a032c38868137a762478a0247890aa019c085"
+    },
+    {
+      "path": "build/goal-r1-flash-read-frame/candidate-chain.elf",
+      "sha256": "1ba682a81568a8c51c2d1ccb1af232435d107ebcbc543bc2095809df011f9ab5"
+    },
+    {
+      "path": "build/goal-r1-flash-read-frame/baseline-chain.elf",
+      "sha256": "45a572f301eedf28f5b329ef56ea81e878a0c837c83bb6946e675defb02dbb35"
+    },
+    {
+      "path": "build/goal-r1-flash-read-frame/native-chain-counterexample.json",
+      "sha256": "38e0b9de817f645c4bec37c0d4a3e58baecccb040f5718dc069a72c7385a0bed"
+    },
+    {
+      "path": "build/goal-r1-flash-read-frame/negative.py",
+      "sha256": "7ff1477ddd014c9f8f14a24dc61f2f3fe0f86cd9146982b1a4bbf4d50437cfec"
+    },
+    {
+      "path": "build/goal-r1-flash-read-frame/negative-results.json",
+      "sha256": "1a31db1a2f66cf1ede044b0688917e02c5f8371b736a7b207dda6861cfe4b2c3"
+    },
+    {
+      "path": "build/goal-r1-flash-read-frame/audit.py",
+      "sha256": "a38b876a63cb10aae1cbcf65203d9eb9157b0aa036410d09ca77e9fbfba5cec1"
+    },
+    {
+      "path": "build/goal-r1-flash-read-frame/audit-results.json",
+      "sha256": "7cb25099657377f782a5257c6009180f1a3aa50e9a32fcf899bdb53d1af4d198"
+    },
+    {
+      "path": "build/goal-r1-flash-read-frame/rea.json",
+      "sha256": "e3224d7b732885a3375c90facac408926e8146971ad33cbb0230fefd15bdd464"
+    },
+    {
+      "path": "build/goal-r1-flash-read-frame/qualify.py",
+      "sha256": "b77111960614fb6a2e85804a0c7b8cb34c887864c3983bb8ead2c2bdbacd38da"
+    },
+    {
+      "path": "build/goal-r1-flash-read-frame/qualified-resolved/qualification.json",
+      "sha256": "0f5764cab5eda5b225af74700dc7d559ba8b4bc1e33f761b91d8b3262c73ebba"
+    },
+    {
+      "path": "build/goal-r1-flash-read-frame/qualified-resolved/source-plan.json",
+      "sha256": "3da40e3d766877c0b3059bee372f651c1f56681157782eba12ee3076f1834a0f"
+    }
+  ]
+}

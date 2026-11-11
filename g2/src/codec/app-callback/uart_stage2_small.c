@@ -103,30 +103,16 @@ uint32_t gx8002_uart_stage2_ready_4fb0(void)
     return ready;
 }
 
-/* 0x10004428 reads the preexisting byte at its new stack slot. A naked
- * function preserves that ambient input rather than assigning invented C
- * storage to the upper request bits. The 0x10004db8 callee remains typed. */
+/* Stock 0x10004428: analog request 8 (register 0x38) with level bits 3:0
+ * and enable bit 4. Native builds the byte in an unwritten stack word, so
+ * bits 7:5 and bytes 1..3 were stale; they are 0 here. */
 extern uint32_t gx8002_uart_stage2_analog_request_4db8(uint32_t kind,
                                                           const uint8_t *request);
-__attribute__((naked)) uint32_t gx8002_uart_stage2_set_ldo_request_4428(
-    uint32_t value __attribute__((unused)))
+uint32_t gx8002_uart_stage2_set_ldo_request_4428(uint32_t value)
 {
-    __asm__ volatile(
-        "push r15\n"
-        "subi r14, r14, 4\n"
-        "movi r3, 0\n"
-        "subi r3, 1\n"
-        "cmpne r0, r3\n"
-        "bf 1f\n"
-        "ld.b r3, (r14, 0)\n"
-        "ins r3, r0, 3, 0\n"
-        "movi r2, 1\n"
-        "ins r3, r2, 4, 4\n"
-        "mov r1, r14\n"
-        "movi r0, 8\n"
-        "st.b r3, (r14, 0)\n"
-        "bsr gx8002_uart_stage2_analog_request_4db8\n"
-        "movi r0, 0\n"
-        "1: addi r14, r14, 4\n"
-        "pop r15\n");
+    if (value == UINT32_MAX)
+        return value;
+    const uint32_t request = (value & 15u) | (1u << 4);
+    (void)gx8002_uart_stage2_analog_request_4db8(8u, (const uint8_t *)&request);
+    return 0;
 }

@@ -1,0 +1,196 @@
+{
+  "ISR_receive": {
+    "passed": 7884,
+    "executions": 15768,
+    "source_report": "build/sources-goal-r1-queue-isr-receive-c/report.json",
+    "actual_native_and_C_copy_memory_move_memmove_memcpy": true,
+    "all_signed_lock_bytes": true,
+    "mask_restoration": true,
+    "woken_alias_and_buffer_overlap": true,
+    "callback_stack_depths": {
+      "stock": [
+        -40
+      ],
+      "C": [
+        -32
+      ]
+    },
+    "sizes": {
+      "xQueueReceiveFromISR": 182,
+      "prvCopyDataFromQueue": 32
+    },
+    "limitations": [
+      "Priority validator, task count and event-list removal modeled; actual queue copy and memory providers execute",
+      "Buffer/queue/flag state and boundary snapshots compared; private frames and all internal access order excluded",
+      "Logical assertion mask/address/width/value checked without full fault/exception proof",
+      "Physical ISR nesting, priority validation, scheduling and concurrency unverified",
+      "No byte qualification"
+    ]
+  },
+  "semaphore_regression": {
+    "passed": 6144,
+    "executions": 12288,
+    "source_report": "build/sources-goal-r1-queue-isr-receive-c/report.json",
+    "actual_queue_initialization_reset_lists": true,
+    "initial_count_after_reset": true,
+    "allocation_and_critical_boundaries_modeled": true,
+    "logical_assert_fault_checked": true,
+    "callback_stack_depths": {
+      "stock": [
+        -80,
+        -40
+      ],
+      "C": [
+        -80,
+        -64,
+        -32
+      ]
+    },
+    "sizes": {
+      "xQueueCreateCountingSemaphore": 42,
+      "xQueueCreateCountingSemaphoreStatic": 58
+    },
+    "limitations": [
+      "Heap and critical entry/exit modeled; actual constructors, reset and list initialization execute",
+      "Private frames, caller-clobbered outputs/flags and every ordinary internal access excluded",
+      "Logical assertion checks mask/address/width/value without full fault/exception proof",
+      "Physical semaphore scheduling and concurrency unverified",
+      "No byte qualification"
+    ]
+  },
+  "negative_controls": {
+    "reload-lock": {
+      "rejected": true,
+      "case": [
+        4,
+        1,
+        -1,
+        1,
+        1,
+        32,
+        128,
+        0,
+        0,
+        1,
+        2
+      ],
+      "stderr": "arm-none-eabi-ld: warning: (vPortValidateInterruptPriority): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-isr-receive-c/reload-lock.o\narm-none-eabi-ld: warning: (uxTaskGetNumberOfTasks): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-isr-receive-c/reload-lock.o\narm-none-eabi-ld: warning: (xTaskRemoveFromEventList): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-isr-receive-c/reload-lock.o\nTraceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-queue-isr-receive-c/reject-reload-lock.py\", line 61, in <module>\n    assert a(*case)==b(*case)\n           ^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    "reload-count": {
+      "rejected": true,
+      "case": [
+        4,
+        1,
+        -1,
+        1,
+        1,
+        32,
+        128,
+        0,
+        0,
+        1,
+        2
+      ],
+      "stderr": "arm-none-eabi-ld: warning: (vPortValidateInterruptPriority): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-isr-receive-c/reload-count.o\narm-none-eabi-ld: warning: (uxTaskGetNumberOfTasks): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-isr-receive-c/reload-count.o\narm-none-eabi-ld: warning: (xTaskRemoveFromEventList): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-isr-receive-c/reload-count.o\nTraceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-queue-isr-receive-c/reject-reload-count.py\", line 61, in <module>\n    assert a(*case)==b(*case)\n           ^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    "clear-wake": {
+      "rejected": true,
+      "case": [
+        4,
+        0,
+        -1,
+        1,
+        1,
+        0
+      ],
+      "stderr": "arm-none-eabi-ld: warning: (vPortValidateInterruptPriority): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-isr-receive-c/clear-wake.o\narm-none-eabi-ld: warning: (uxTaskGetNumberOfTasks): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-isr-receive-c/clear-wake.o\narm-none-eabi-ld: warning: (xTaskRemoveFromEventList): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-isr-receive-c/clear-wake.o\nTraceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-queue-isr-receive-c/reject-clear-wake.py\", line 61, in <module>\n    assert a(*case)==b(*case)\n           ^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    "no-mask-restore": {
+      "rejected": true,
+      "case": [
+        4,
+        1,
+        -1,
+        1,
+        1,
+        0
+      ],
+      "stderr": "arm-none-eabi-ld: warning: (vPortValidateInterruptPriority): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-isr-receive-c/no-mask-restore.o\narm-none-eabi-ld: warning: (uxTaskGetNumberOfTasks): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-isr-receive-c/no-mask-restore.o\narm-none-eabi-ld: warning: (xTaskRemoveFromEventList): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-isr-receive-c/no-mask-restore.o\nTraceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-queue-isr-receive-c/reject-no-mask-restore.py\", line 61, in <module>\n    assert a(*case)==b(*case)\n                     ~^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-queue-isr-receive-c/reject-no-mask-restore.py\", line 54, in run\n    assert u.reg_read(UC_ARM_REG_R0)==int(state['count']>0) and u.reg_read(UC_ARM_REG_BASEPRI)==state['restore_mask'];assert u.reg_read(UC_ARM_REG_PRIMASK)==1\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    }
+  },
+  "audit": {
+    "unchanged_existing_function_bodies": [
+      "prvGetDisinheritPriorityAfterTimeout",
+      "prvInitialiseMutex",
+      "prvInitialiseNewQueue",
+      "prvIsQueueEmpty",
+      "prvUnlockQueue",
+      "ulPortRaiseBASEPRI",
+      "xQueueCreateCountingSemaphore",
+      "xQueueCreateCountingSemaphoreStatic",
+      "xQueueCreateMutex",
+      "xQueueCreateMutexStatic",
+      "xQueueGenericCreate",
+      "xQueueGenericCreateStatic",
+      "xQueueGenericReset",
+      "xQueueGiveFromISR",
+      "xQueueGiveMutexRecursive",
+      "xQueueSemaphoreTake",
+      "xQueueTakeMutexRecursive"
+    ],
+    "new_strong_symbols": [
+      "xQueueReceiveFromISR"
+    ],
+    "removed_imports": [
+      "xQueueReceiveFromISR"
+    ],
+    "added_imports": []
+  },
+  "normal_build": {
+    "units": 573,
+    "application_imports": 191,
+    "bootloader_imports": 34,
+    "failures": 0,
+    "duplicate_strong_symbols": 0
+  },
+  "qualification": {
+    "compiled": 5,
+    "selected_regions": 2,
+    "already_covered": 2,
+    "new_functions_byte_qualified": false
+  },
+  "source_plan_unchanged": true,
+  "source_built_bytes": 3833,
+  "binary_pull_through_bytes": 642327,
+  "source_completeness_proven": false,
+  "evidence": {
+    "build/sources-goal-r1-queue-isr-receive-c/report.json": "98d0703974d40a33e9194b9e1b4f83ad3572cd9e6594e8ccbdc6243142037f37",
+    "tools/build/source-plan.json": "0c889650bf8ea03def83ea1ea29730b3ccfe84bb70609c1972a500f02ba4ea2d",
+    "r1/src/application/rtos/mutex-kernel/mutex-kernel.c": "1f900509ea74260bb6800e2d81e4c62dbd8bff70eadf8b74b6bf1e797b2f06c8",
+    "third-party/upstream/freertos-kernel/queue.c": "5cdf4fa35fe059446effff5bf20deaf83ddffb08921bc198fda106b1d17dd894",
+    "r1/src/application/runtime/native_memory_move.c": "26614e927758f8c0d0a9eb294d919a0062665a3d2cb822faa139271c564aec9e",
+    "third-party/upstream/musl-memmove-1.2.5/memmove.c": "1304f9ddfc18594f5d9a84691892b9fdaf3be8ecc6d7f365c691abb138eaf74e",
+    "third-party/upstream/musl-memory-1.2.5/memcpy.c": "1664d565f968b053ac33c5ac615c057a255a5821c8fa510fba61d4f63dee08e9",
+    "r1/src/config/rtos/mutex_kernel_contract.h": "d940797ff263975ba00fd355c3b3535a002c97f3e1ada8419492efb84ed8de81",
+    "r1/src/config/rtos/queue_operations_contract.h": "bca8311a67d844386ea0066c486ffd4ac127696a914adf4cd5514f4c841a3b8e",
+    "r1/src/config/rtos/native_port_assert.h": "efee8118f24a53756b6f14a666524b3d59561f005e1e87ed71309ccab9c4fc9f",
+    "r1/src/sources.json": "6fa37d8afe1e50453bc47962bcfe463cd5163fb4f1b3d2a8033b02adbb77c9d3",
+    "build/hybrid-goal-r1-queue-isr-receive-c/build-report.json": "075ba99d1bfce01493f50b76f816c9c6d2256eead9ef6009c9bc3b2f28037df5",
+    "build/goal-r1-queue-isr-receive-c/before.c": "ce399981b672da3cfaae5c47712e17bf38e814214c0aa60205ba838455e4d364",
+    "build/goal-r1-queue-isr-receive-c/selected-upstream.c": "1292ab8446e103e76b2679f68af0f1f26754c33b812e7fc4e18b41b1cdfd0fde",
+    "build/goal-r1-queue-isr-receive-c/REA-0x9807c.json": "9abaf1885f1a625eb2eca309114d0449e30bae6416c74a56c6b91f52318ce414",
+    "build/goal-r1-queue-isr-receive-c/REA-0x84ea4.json": "dce07e6b29b354d814b74ac0067492a4dcd4a743a7ae58e5b81848801257c856",
+    "build/goal-r1-queue-isr-receive-c/REA.snapshot.json": "af6f871c7ec9ca3537e6bc859c0c97e6110af6993c6f57e0e2aff5dc5a36382d",
+    "build/goal-r1-queue-isr-receive-c/verify.py": "5db3c3a0143c5d4768942eacf490fca5166f298742a84bb5a85fdae50d33960e",
+    "build/goal-r1-queue-isr-receive-c/results.json": "c2d147d40ccba0356a202871d8689ced4fbd5acb04713be1b105e9383b7ef725",
+    "build/goal-r1-queue-isr-receive-c/negative.py": "4eaf013cedfb052cdbb09857b7c15b22f2337f221d06239c2f89cbca2b48d638",
+    "build/goal-r1-queue-isr-receive-c/negative-results.json": "cab02cb04133799616de19e0fb9580f82ef3c9965e18a1f996a4daf910527cad",
+    "build/goal-r1-queue-isr-receive-c/audit.py": "45971a018433171699ae7ce08d07373602878b07e9a100fcbf5030299b4cc244",
+    "build/goal-r1-queue-isr-receive-c/audit-results.json": "285babb7236abe1b00f210a4af832957a3f378a419447ecbf2f05d8c6c7edcf2",
+    "build/goal-r1-queue-isr-receive-c/qualify.py": "9c0225ca1e70fe55b60c94ba7f863a1500c5613f99970b9228161bb0dc64198b",
+    "build/goal-r1-queue-isr-receive-c/qualified/qualification.json": "f854f045acab1a81d8cf2433183129b7bd96a1a4c33b1debdcb7b24b65d0a37b",
+    "build/goal-r1-queue-isr-receive-c/qualified/source-plan.json": "c82d566eec0b9864b0b0fd13157557e5bb7aeaa3e596514f5ad0c6dcdb751634",
+    "build/goal-r1-queue-isr-receive-c/semaphore/verify.py": "ec3831e538f5c4cdaebb3090dbfc138bbef42360011ab2bbf485b6e4b35343ff",
+    "build/goal-r1-queue-isr-receive-c/semaphore/results.json": "09bc1bd0313d876d55efce3ec8a52d9ea2677497e658f06195325d96fe33a172"
+  }
+}

@@ -1,0 +1,231 @@
+{
+  "schema": 1,
+  "scope": "R1 subscriber multicast dispatcher 0x8b028; 202 native body bytes; immutable literals at 0x8b0f4 and 0x8b0f8",
+  "status": "bounded C control candidate with native machine ABI adapters; not instruction qualified",
+  "stock_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "behavior": {
+    "paired_cases": 6997,
+    "executions": 13994,
+    "source_report": "build/sources-goal-r1-multicast-c-final2/report.json",
+    "actual_C_dependencies": [
+      "subscriber lock/unlock",
+      "CMSIS thread getter",
+      "FreeRTOS current-task getter",
+      "native memory-move adapter",
+      "upstream musl memmove and memcpy"
+    ],
+    "modeled": [
+      "allocator",
+      "CMSIS mutex APIs",
+      "opaque callbacks",
+      "event publication and release"
+    ],
+    "checks": [
+      "unbounded selector address arithmetic including mapped overflow aliases",
+      "short-cache clear and root reloads",
+      "16-bit allocation/publication size wrapping and full payload copy length",
+      "callback-only gating and synchronous original payload",
+      "thread snapshot before allocator",
+      "route thread-cell identity and once-per-route publication",
+      "allocation failures continue direct dispatch",
+      "live next reload, callback and publication mutations",
+      "overlapping source/record/cache copies, status independence",
+      "shared structure accesses, native null-root faults, final snapshots, masks, SP and saved registers"
+    ],
+    "limits": [
+      "Movement internal access sizes/order excluded; ordinary RAM copy results and API arguments checked",
+      "Private stack residue and volatile-MMIO copy targets excluded",
+      "Heap allocation extents and queued record lifetime are modeled; physical scheduling and devices unproven"
+    ]
+  },
+  "pipeline": {
+    "paired_pipeline_cases": 192,
+    "executions": 384,
+    "actual_C": [
+      "multicast dispatcher",
+      "native event publisher",
+      "event bus enqueue",
+      "consumer",
+      "mutex wrappers",
+      "thread/task getters",
+      "memory movement"
+    ],
+    "modeled": [
+      "allocator",
+      "CMSIS mutex/queue/flags APIs",
+      "opaque callbacks",
+      "release"
+    ],
+    "checks": [
+      "queued copy bytes and fields",
+      "successful queue wakes consumer",
+      "failed queue still wakes and releases its copy",
+      "multicast releases original copy",
+      "each successful queued descriptor executes consumer and native callbacks",
+      "uninitialized leading queue word excluded; all defined fields checked",
+      "SP, saved registers, masks, final shared state"
+    ],
+    "limits": [
+      "Queue scheduling and physical hardware modeled",
+      "Native publisher private stack residue excluded"
+    ]
+  },
+  "negative_controls": [
+    {
+      "mutation": "duplicate-route-publish",
+      "rejected": true
+    },
+    {
+      "mutation": "stale-list-next",
+      "rejected": true
+    }
+  ],
+  "object_audit": {
+    "no_data_owner_added_or_changed": true,
+    "opaque_callback_gateway_bytes": 2,
+    "entry_argument_result_adapter_bytes": 8,
+    "entry_argument_result_adapter_relocations": [
+      [
+        2,
+        10,
+        "multicast_body"
+      ]
+    ],
+    "other_574_objects_unchanged_including_registration_with_shared_route_type": true,
+    "import_sets_unchanged": true,
+    "one_existing_unit_profile_changed_only": true,
+    "prior_source_hash_matches_backup": true
+  },
+  "normal_build": {
+    "units": 575,
+    "application_units": 501,
+    "bootloader_units": 74,
+    "application_imports": 175,
+    "bootloader_imports": 34,
+    "failed": 0,
+    "known_failures": 0,
+    "duplicate_strong_symbols": 0,
+    "import_delta": 0
+  },
+  "qualification": {
+    "compiled_candidates": 5,
+    "selected_regions": 0,
+    "canonical_plan_unchanged": true
+  },
+  "hybrid": {
+    "application_bytes_equal_stock": true,
+    "totals": {
+      "binary-pull-through": 642279,
+      "source-built": 3881,
+      "resource-file": 248
+    },
+    "source_completeness_proven": false
+  },
+  "retained_assembly": {
+    "entry_adapter_bytes": 8,
+    "entry_adapter_reason": "Stock restores original R0/R1/R2 as result R1/R2/R3; explicitly asserted in paired probes",
+    "callback_gateway_bytes": 2,
+    "callback_gateway_reason": "Opaque callback receives payload, thread-cell reference and own address in R0/R1/R2"
+  },
+  "limits": [
+    "Copy internals use existing native-memory-move adapter and musl, with API arguments and ordinary RAM results compared; volatile MMIO copy/access-size identity excluded",
+    "Queue record leading word and private stack residue excluded; defined queue fields and copied descriptor bytes compared",
+    "Allocator/mutex/queue/flags/callback behavior modeled, physical hardware and scheduling unproven",
+    "Successful huge payload copies, arbitrary pointer corruption and arbitrary heap extents excluded",
+    "No full source executable link or full source byte equality; G2 gates not advanced"
+  ],
+  "inputs": [
+    {
+      "path": "build/sources-goal-r1-multicast-c-final2/report.json",
+      "sha256": "c764328606aa616d3eb05c2f7dd0090f6554d7b310cf926338a2ae549a6fe2b4"
+    },
+    {
+      "path": "build/hybrid-goal-r1-multicast-c/build-report.json",
+      "sha256": "1968bb10f2d350b768dd3dfd0d6cf251cf5d1432e568f217f3da3b0b6378f532"
+    },
+    {
+      "path": "tools/build/source-plan.json",
+      "sha256": "716cf17b8cf2bed8ad6a99a672b1856af4c5380842c95cb14b9a263a7bb42bc8"
+    },
+    {
+      "path": "r1/src/application/runtime/native_event_multicast.c",
+      "sha256": "8a91b7a4dc02d890cd278edfc75e0053714aa3e000e5405e88ef3efe101beff2"
+    },
+    {
+      "path": "r1/src/application/runtime/native_subscriber_registration.c",
+      "sha256": "81ed10d264cf581d3cbbde4d24d6e5a3b302ba0b05bd7156223b250c56b81c29"
+    },
+    {
+      "path": "r1/src/application/runtime/native_subscriber.h",
+      "sha256": "a018a6496371a98cf4ba7171fb558ab2dd64e3733dc5417d449075f96aebbd82"
+    },
+    {
+      "path": "r1/src/sources.json",
+      "sha256": "4b6d47de0b0e1626f5df3ee73725bc221c9e05373e2a098596abdf560fd5a0ca"
+    },
+    {
+      "path": "r1/symbols/function-frontier.csv",
+      "sha256": "293f6b5d61588704f5edefe4a0c67e099b061c51982a50abb86862af2a8c1789"
+    },
+    {
+      "path": "build/goal-r1-multicast-c/before.c",
+      "sha256": "0b3f148a25b9d943a754d78a0d36d63b62796a83ad73bf1a43c0b3bb6f267ea5"
+    },
+    {
+      "path": "build/goal-r1-multicast-c/header-before.h",
+      "sha256": "6227cdc407faab80e4b4b387a3f06c5fa7a19111d7008eb58192fa44239b046b"
+    },
+    {
+      "path": "build/goal-r1-multicast-c/registration-before.c",
+      "sha256": "2cf60677943b9385fc6735497e82fcb0a37a049d3c6c9db37dd970fa14efa438"
+    },
+    {
+      "path": "build/goal-r1-multicast-c/verify.py",
+      "sha256": "9971c5111d2c407ce177096bbd500a631b1ce61d674019116218b61e060be0df"
+    },
+    {
+      "path": "build/goal-r1-multicast-c/results.json",
+      "sha256": "fb9d1ba87c07671747af7cef3ccace8f64bd84c559a11b28e8bd6380f8c81a93"
+    },
+    {
+      "path": "build/goal-r1-multicast-c/pipeline.py",
+      "sha256": "3cc1d13139ac1b201053dd720c625cab255a52a9d675f24fa448670f0f67b03a"
+    },
+    {
+      "path": "build/goal-r1-multicast-c/pipeline-results.json",
+      "sha256": "212b928ecd625dfab4c3702b5ea47f8a0281c2c3bb3f609f86eb5fc76405a757"
+    },
+    {
+      "path": "build/goal-r1-multicast-c/negative.py",
+      "sha256": "6403dc74e855672e8018439ff5154e0a0a3ba4c34bd9a332c25b0bab207e6587"
+    },
+    {
+      "path": "build/goal-r1-multicast-c/negative-results.json",
+      "sha256": "2a3f82465c912cfe9c3a4f10bfe1f1ee4529a9f7a108c98b1118afddbf10cb05"
+    },
+    {
+      "path": "build/goal-r1-multicast-c/audit.py",
+      "sha256": "b100babc32072697b5e8b914d1b88927d0b14d2961a016f4dcba16924bcec718"
+    },
+    {
+      "path": "build/goal-r1-multicast-c/audit-results.json",
+      "sha256": "9ce6117c7d80b849fc5668c3496c961396745cfc6648cdb501c8e7673cd2381a"
+    },
+    {
+      "path": "build/goal-r1-multicast-c/rea.json",
+      "sha256": "c6de403ba3d2f80e5a6d1d1a0af306edc67537833b39587d1b5621529c6c5c61"
+    },
+    {
+      "path": "build/goal-r1-multicast-c/qualified-final2/qualification.json",
+      "sha256": "37247dd0a5c49c8f70abbf42c7bf80222bd24425db53311397cf2bd4323242b7"
+    },
+    {
+      "path": "build/goal-r1-multicast-c/qualified-final2/source-plan.json",
+      "sha256": "3da40e3d766877c0b3059bee372f651c1f56681157782eba12ee3076f1834a0f"
+    },
+    {
+      "path": "build/goal-r1-multicast-c/source.elf",
+      "sha256": "dc5bd463cad2ca4a38d2c172abb537b63d62dbd385cf1c80f09afe730ce6b74a"
+    }
+  ]
+}

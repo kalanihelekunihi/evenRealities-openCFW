@@ -1,0 +1,29 @@
+{
+  "evidence_id": "ev_8db357f420db3d87811f0f08891b02a87c262e9f8ac3a47d86326ede023f5a6c",
+  "subject": {
+    "name": "stock.elf",
+    "digest": {
+      "sha256": "25b4a29af80ec8edab5bd861ba9b74a6e22eab29dc3d7a809a16869e8a140f04"
+    },
+    "local_path": "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-queue-reset-c/stock.elf",
+    "format": "elf",
+    "architecture": "arm"
+  },
+  "normalized_result": {
+    "address": "0x3ec78",
+    "requested_bytes": 138,
+    "returned_bytes": 138,
+    "bytes_hex": "2de9fc5fdff8849057f038f899f800004c4699f80110884219d01d48217800ebc1000668d0f804802078401c00f00f00207057f03bf8a146e488eb46670ae505ed0d4fea073000ebc50a04d006e0bde8fc5f57f02bb8384600f01cf8cde900680822594650461ff0fbfb0028ccd0641cc4f30901a5f58070a9f80610ff38c3d10120b84300f006f8bee7",
+    "complete": true
+  },
+  "limitations": [
+    "The session serves operations only after Ghidra reports default auto-analysis complete; incomplete analysis does not expose partial results.",
+    "The imported Program and temporary project are ephemeral and deleted on close. Annotation operations edit session database metadata; original executable bytes are never written.",
+    "Cancelling an active Ghidra request terminates its ephemeral database and discards session annotations. The selected target remains open; the next provider query imports the original artifact again.",
+    "Default-space addresses use lowercase 0x-prefixed hexadecimal; other address spaces use <percent-encoded-space>:0x<hex>.",
+    "Bytes reflect Ghidra's initialized memory, including loader fixups. Reads stop at an unmapped or uninitialized byte and report completeness explicitly.",
+    "macOS sessions require a matching executable Ghidra native decompiler; REA checks for it but does not build native components or change Gatekeeper quarantine state."
+  ],
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "raw_artifact_match": true
+}

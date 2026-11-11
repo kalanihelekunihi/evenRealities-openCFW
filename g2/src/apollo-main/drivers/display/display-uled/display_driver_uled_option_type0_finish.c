@@ -1,5 +1,9 @@
 /* Apollo type-0 uLED finish callback at 0x59328c. */
 #include <stdint.h>
+/* Stock-RAM literals rewritten to named objects (sim-test wave 2026-10-26,
+ * .waves/sim-fix/apply.py): g2ref_X is the linker symbol X. */
+#include <stdint.h>
+extern unsigned char g2ref_g2_jbd4010_mspi_handle[] __asm__("g2_jbd4010_mspi_handle");
 
 extern int32_t audio_uart_font_flash_power(void *,uint8_t,uint8_t);
 extern uint32_t display_driver_uled_flash_bus_prepare_4c3500(uint32_t,uint32_t);
@@ -11,7 +15,7 @@ extern void display_driver_uled_type0_mode4_finish_5125a8(void);
 
 uint32_t display_driver_uled_type0_finish_59328c(void) {
     void *device=(void *)(uintptr_t)
-        *(volatile const uint32_t *)(uintptr_t)0x20074524u;
+        *(volatile const uint32_t *)(uintptr_t)((uint32_t)(uintptr_t)g2ref_g2_jbd4010_mspi_handle);
     (void)audio_uart_font_flash_power(device,2u,1u);
     (void)display_driver_uled_flash_bus_prepare_4c3500(0u,16u);
     const uint8_t *mode=audio_ble_hci_radio_mode_state_50938e(1u);

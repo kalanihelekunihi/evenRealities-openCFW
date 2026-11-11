@@ -5,7 +5,7 @@
 extern void case_policy_scheduler_lock(void); /* 0xbffc */
 extern uint32_t case_policy_scheduler_unlock(void); /* 0xc014 */
 static __attribute__((noreturn)) void native_fault(void)
-{__asm__ volatile("cpsid i\n1: b 1b" ::: "memory");__builtin_unreachable();}
+{__asm__ volatile("cpsid i" ::: "memory");for(;;){}}
 
 /* Stock 0x0800B4A4 (case_critical_read_word28) */
 uint32_t case_boot_transport_task_context(uint32_t task)

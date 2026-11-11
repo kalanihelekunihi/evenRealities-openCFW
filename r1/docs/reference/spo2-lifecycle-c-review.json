@@ -1,0 +1,554 @@
+{
+  "source": {
+    "source": "r1/src/application/runtime/native_spo2_lifecycle.c",
+    "payload": "r1-application",
+    "role": "candidate",
+    "toolchain": "clang",
+    "link": true,
+    "expect": "compile",
+    "returncode": 0,
+    "argv": [
+      "/usr/bin/clang",
+      "--target=arm-none-eabi",
+      "-mcpu=cortex-m4",
+      "-mthumb",
+      "-mfpu=fpv4-sp-d16",
+      "-mfloat-abi=hard",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-fno-strict-aliasing",
+      "-fshort-enums",
+      "-std=c11",
+      "-Os",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-DNRF52840_XXAA",
+      "-DFLOAT_ABI_HARD",
+      "-DNRF_SD_BLE_API_VERSION=7",
+      "-DNRF_DFU_SVCI_ENABLED",
+      "-DNRF_DFU_TRANSPORT_BLE=1",
+      "-DS140",
+      "-DSOFTDEVICE_PRESENT",
+      "-DFREERTOS",
+      "-DCONFIG_NFCT_PINS_AS_GPIOS",
+      "-DCONFIG_GPIO_AS_PINRESET",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/r1/src/config/sdk",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-spo2-lifecycle-c/generated/r1",
+      "-include",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-spo2-lifecycle-c/generated/r1/nrf_svci_clang.h",
+      "-isystem",
+      "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/external/freertos/portable/GCC/nrf52",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/external/freertos/portable/CMSIS/nrf52",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/external/segger_rtt",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/ble/common",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/ble/ble_advertising",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/ble/peer_manager",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/ble/nrf_ble_gatt",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/atomic",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/atomic_flags",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/atomic_fifo",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/delay",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/fds",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/fstorage",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/mutex",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/sortlist",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/timer",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/experimental_section_vars",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/log",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/log/src",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/strerror",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/util",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/softdevice/common",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/softdevice/s140/headers",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/softdevice/s140/headers/nrf52",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/toolchain/cmsis/include",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/integration/nrfx",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/integration/nrfx/legacy",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx/drivers/include",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx/hal",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx/soc",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx/mdk",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/ble/ble_link_ctx_manager",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/ble/ble_services/ble_dfu",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/ble/nrf_ble_qwr",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/balloc",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/bootloader/dfu",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/memobj",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/pwr_mgmt",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/ringbuf",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/external/fprintf",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx/drivers/src",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/bootloader",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/bootloader/ble_dfu",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/svc",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/stack_info",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/mem_manager",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/queue",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/scheduler",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/r1/src/config/rtos",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/third-party/upstream/freertos-kernel/include",
+      "-MD",
+      "-MF",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-spo2-lifecycle-c/r1/r1-application/r1__src__application__runtime__native_spo2_lifecycle.c.d",
+      "-c",
+      "/Users/kalani/Repo/evenRealities-openCFW/r1/src/application/runtime/native_spo2_lifecycle.c",
+      "-o",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-spo2-lifecycle-c/r1/r1-application/r1__src__application__runtime__native_spo2_lifecycle.c.o"
+    ],
+    "source_sha256": "111af76029e8b1b97128c8b5edac5490310dd2ff7245a83eb69d5ef43e97113c",
+    "object_sha256": "ce9ac9a8d1f75eb7d8af071a1826430c4409aab240e86f2b51a25112e0dd118b",
+    "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-spo2-lifecycle-c/r1/r1-application/r1__src__application__runtime__native_spo2_lifecycle.c.o",
+    "strong": [
+      "r1_native_health_group1_a_callback",
+      "r1_native_health_group4_a_callback",
+      "r1_spo2_streams",
+      "r1_spo2_timing_state",
+      "r1_stress_stream_release"
+    ],
+    "weak": [],
+    "undefined": [
+      "r1_sensor_stream_unregister_by_name",
+      "r1_spo2_timing_start_plan",
+      "r1_stream_timer_release"
+    ]
+  },
+  "stock_REA": {
+    "callback": {
+      "evidence_id": "ev_bc51dd8c3a799072ae27ae353f3017425fb1e73b55a7e621e024a4166602964f",
+      "subject": {
+        "name": "stock.elf",
+        "digest": {
+          "sha256": "25b4a29af80ec8edab5bd861ba9b74a6e22eab29dc3d7a809a16869e8a140f04"
+        },
+        "local_path": "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-queue-reset-c/stock.elf",
+        "format": "elf",
+        "architecture": "arm"
+      },
+      "provider": {
+        "id": "ghidra",
+        "name": "Ghidra",
+        "version": "12.1.4"
+      },
+      "analysis_profile": {
+        "provider": {
+          "id": "ghidra",
+          "name": "Ghidra",
+          "version": "12.1.4"
+        },
+        "parameters": {
+          "target_kind": "executable",
+          "target_format": "elf",
+          "architecture": "arm",
+          "available_architectures": [
+            "arm"
+          ],
+          "import_mode": "ephemeral-source-immutable",
+          "annotation_policy": "atomic-function-entry-metadata-v1",
+          "load_image_observations": "source-mappings-entry-context-v2",
+          "function_body_evidence": "complete-inclusive-ranges-v1",
+          "function_references": "complete-body-and-entry-reference-manager-v2",
+          "call_relationship_coverage": "function-body-call-coverage-v5",
+          "function_dossier_coverage": "observed-facets-and-call-relationships-v1",
+          "string_inventory_evidence": "defined-data-coverage-v1",
+          "location_resolution": "explicit-address-exact-entry-symbol-first-v3",
+          "procedure_file_offset_resolution": "address-first-unique-target-source-mapping-v2",
+          "instruction_flow_evidence": "decoded-return-pcode-v1",
+          "instruction_references": "exact-address-incoming-v1",
+          "function_boundary_observations": "ghidra-function-boundary-limitations-v3",
+          "no_return_repair": "returning-imports-decoded-return-v2",
+          "process_launch": "inspected-jvm-launch-support-v1",
+          "jump_table_evidence": "typed-case-default-blocks-v1",
+          "decompiler_jump_loads": true,
+          "loader": "auto-from-header",
+          "language_id": "auto-from-header",
+          "compiler_spec_id": "auto-default",
+          "analyzer_preset": "ghidra-default"
+        },
+        "digest": "7e46711069eea041af1b9b99e34115c13332795e5cda76e584a722f529ec70de"
+      },
+      "predicate_type": "rea.analysis",
+      "operation": "read_bytes",
+      "parameters": {
+        "address": "0x4ad40",
+        "length": 60
+      },
+      "raw_result": {
+        "address": "0x4ad40",
+        "requested_bytes": 60,
+        "returned_bytes": 60,
+        "bytes_hex": "70b50a4c0025616819b109a03ef0dcfe656000f0c7fa0848457085700078012803d1bde8704000f0d3b870bdd0a3012073706f3200000000986d0020",
+        "complete": true
+      },
+      "normalized_result": {
+        "address": "0x4ad40",
+        "requested_bytes": 60,
+        "returned_bytes": 60,
+        "bytes_hex": "70b50a4c0025616819b109a03ef0dcfe656000f0c7fa0848457085700078012803d1bde8704000f0d3b870bdd0a3012073706f3200000000986d0020",
+        "complete": true
+      },
+      "confidence": "observed",
+      "authority": "shipped-artifact",
+      "environment": null,
+      "limitations": [
+        "The session serves operations only after Ghidra reports default auto-analysis complete; incomplete analysis does not expose partial results.",
+        "The imported Program and temporary project are ephemeral and deleted on close. Annotation operations edit session database metadata; original executable bytes are never written.",
+        "Cancelling an active Ghidra request terminates its ephemeral database and discards session annotations. The selected target remains open; the next provider query imports the original artifact again.",
+        "Default-space addresses use lowercase 0x-prefixed hexadecimal; other address spaces use <percent-encoded-space>:0x<hex>.",
+        "Bytes reflect Ghidra's initialized memory, including loader fixups. Reads stop at an unmapped or uninitialized byte and report completeness explicitly.",
+        "macOS sessions require a matching executable Ghidra native decompiler; REA checks for it but does not build native components or change Gatekeeper quarantine state."
+      ],
+      "relationship_coverage": null,
+      "locations": [],
+      "evidence_links": []
+    },
+    "release": {
+      "evidence_id": "ev_5c665517bd477932ac119633d7954a8c6275af283c72af43142955df5614b2c7",
+      "subject": {
+        "name": "stock.elf",
+        "digest": {
+          "sha256": "25b4a29af80ec8edab5bd861ba9b74a6e22eab29dc3d7a809a16869e8a140f04"
+        },
+        "local_path": "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-queue-reset-c/stock.elf",
+        "format": "elf",
+        "architecture": "arm"
+      },
+      "provider": {
+        "id": "ghidra",
+        "name": "Ghidra",
+        "version": "12.1.4"
+      },
+      "analysis_profile": {
+        "provider": {
+          "id": "ghidra",
+          "name": "Ghidra",
+          "version": "12.1.4"
+        },
+        "parameters": {
+          "target_kind": "executable",
+          "target_format": "elf",
+          "architecture": "arm",
+          "available_architectures": [
+            "arm"
+          ],
+          "import_mode": "ephemeral-source-immutable",
+          "annotation_policy": "atomic-function-entry-metadata-v1",
+          "load_image_observations": "source-mappings-entry-context-v2",
+          "function_body_evidence": "complete-inclusive-ranges-v1",
+          "function_references": "complete-body-and-entry-reference-manager-v2",
+          "call_relationship_coverage": "function-body-call-coverage-v5",
+          "function_dossier_coverage": "observed-facets-and-call-relationships-v1",
+          "string_inventory_evidence": "defined-data-coverage-v1",
+          "location_resolution": "explicit-address-exact-entry-symbol-first-v3",
+          "procedure_file_offset_resolution": "address-first-unique-target-source-mapping-v2",
+          "instruction_flow_evidence": "decoded-return-pcode-v1",
+          "instruction_references": "exact-address-incoming-v1",
+          "function_boundary_observations": "ghidra-function-boundary-limitations-v3",
+          "no_return_repair": "returning-imports-decoded-return-v2",
+          "process_launch": "inspected-jvm-launch-support-v1",
+          "jump_table_evidence": "typed-case-default-blocks-v1",
+          "decompiler_jump_loads": true,
+          "loader": "auto-from-header",
+          "language_id": "auto-from-header",
+          "compiler_spec_id": "auto-default",
+          "analyzer_preset": "ghidra-default"
+        },
+        "digest": "7e46711069eea041af1b9b99e34115c13332795e5cda76e584a722f529ec70de"
+      },
+      "predicate_type": "rea.analysis",
+      "operation": "read_bytes",
+      "parameters": {
+        "address": "0x4b2e4",
+        "length": 24
+      },
+      "raw_result": {
+        "address": "0x4b2e4",
+        "requested_bytes": 24,
+        "returned_bytes": 24,
+        "bytes_hex": "10b5044c6068002803d03ff067f80020606010bd986d0020",
+        "complete": true
+      },
+      "normalized_result": {
+        "address": "0x4b2e4",
+        "requested_bytes": 24,
+        "returned_bytes": 24,
+        "bytes_hex": "10b5044c6068002803d03ff067f80020606010bd986d0020",
+        "complete": true
+      },
+      "confidence": "observed",
+      "authority": "shipped-artifact",
+      "environment": null,
+      "limitations": [
+        "The session serves operations only after Ghidra reports default auto-analysis complete; incomplete analysis does not expose partial results.",
+        "The imported Program and temporary project are ephemeral and deleted on close. Annotation operations edit session database metadata; original executable bytes are never written.",
+        "Cancelling an active Ghidra request terminates its ephemeral database and discards session annotations. The selected target remains open; the next provider query imports the original artifact again.",
+        "Default-space addresses use lowercase 0x-prefixed hexadecimal; other address spaces use <percent-encoded-space>:0x<hex>.",
+        "Bytes reflect Ghidra's initialized memory, including loader fixups. Reads stop at an unmapped or uninitialized byte and report completeness explicitly.",
+        "macOS sessions require a matching executable Ghidra native decompiler; REA checks for it but does not build native components or change Gatekeeper quarantine state."
+      ],
+      "relationship_coverage": null,
+      "locations": [],
+      "evidence_links": []
+    },
+    "wear": {
+      "evidence_id": "ev_3be71790897ecf01ad9bfcb742bfc007cc1f1dc8d531ddaba1f37eb1e05c3e53",
+      "subject": {
+        "name": "stock.elf",
+        "digest": {
+          "sha256": "25b4a29af80ec8edab5bd861ba9b74a6e22eab29dc3d7a809a16869e8a140f04"
+        },
+        "local_path": "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-queue-reset-c/stock.elf",
+        "format": "elf",
+        "architecture": "arm"
+      },
+      "provider": {
+        "id": "ghidra",
+        "name": "Ghidra",
+        "version": "12.1.4"
+      },
+      "analysis_profile": {
+        "provider": {
+          "id": "ghidra",
+          "name": "Ghidra",
+          "version": "12.1.4"
+        },
+        "parameters": {
+          "target_kind": "executable",
+          "target_format": "elf",
+          "architecture": "arm",
+          "available_architectures": [
+            "arm"
+          ],
+          "import_mode": "ephemeral-source-immutable",
+          "annotation_policy": "atomic-function-entry-metadata-v1",
+          "load_image_observations": "source-mappings-entry-context-v2",
+          "function_body_evidence": "complete-inclusive-ranges-v1",
+          "function_references": "complete-body-and-entry-reference-manager-v2",
+          "call_relationship_coverage": "function-body-call-coverage-v5",
+          "function_dossier_coverage": "observed-facets-and-call-relationships-v1",
+          "string_inventory_evidence": "defined-data-coverage-v1",
+          "location_resolution": "explicit-address-exact-entry-symbol-first-v3",
+          "procedure_file_offset_resolution": "address-first-unique-target-source-mapping-v2",
+          "instruction_flow_evidence": "decoded-return-pcode-v1",
+          "instruction_references": "exact-address-incoming-v1",
+          "function_boundary_observations": "ghidra-function-boundary-limitations-v3",
+          "no_return_repair": "returning-imports-decoded-return-v2",
+          "process_launch": "inspected-jvm-launch-support-v1",
+          "jump_table_evidence": "typed-case-default-blocks-v1",
+          "decompiler_jump_loads": true,
+          "loader": "auto-from-header",
+          "language_id": "auto-from-header",
+          "compiler_spec_id": "auto-default",
+          "analyzer_preset": "ghidra-default"
+        },
+        "digest": "7e46711069eea041af1b9b99e34115c13332795e5cda76e584a722f529ec70de"
+      },
+      "predicate_type": "rea.analysis",
+      "operation": "read_bytes",
+      "parameters": {
+        "address": "0x4b2fc",
+        "length": 64
+      },
+      "raw_result": {
+        "address": "0x4b2fc",
+        "requested_bytes": 64,
+        "returned_bytes": 64,
+        "bytes_hex": "70b50078012813d000240a4d264600bf55f8241021b108a03ef0f8fb45f82460641ce4b2022cf3d3bde87040fff7dcbf70bd0000d0a3012073706f3200000000",
+        "complete": true
+      },
+      "normalized_result": {
+        "address": "0x4b2fc",
+        "requested_bytes": 64,
+        "returned_bytes": 64,
+        "bytes_hex": "70b50078012813d000240a4d264600bf55f8241021b108a03ef0f8fb45f82460641ce4b2022cf3d3bde87040fff7dcbf70bd0000d0a3012073706f3200000000",
+        "complete": true
+      },
+      "confidence": "observed",
+      "authority": "shipped-artifact",
+      "environment": null,
+      "limitations": [
+        "The session serves operations only after Ghidra reports default auto-analysis complete; incomplete analysis does not expose partial results.",
+        "The imported Program and temporary project are ephemeral and deleted on close. Annotation operations edit session database metadata; original executable bytes are never written.",
+        "Cancelling an active Ghidra request terminates its ephemeral database and discards session annotations. The selected target remains open; the next provider query imports the original artifact again.",
+        "Default-space addresses use lowercase 0x-prefixed hexadecimal; other address spaces use <percent-encoded-space>:0x<hex>.",
+        "Bytes reflect Ghidra's initialized memory, including loader fixups. Reads stop at an unmapped or uninitialized byte and report completeness explicitly.",
+        "macOS sessions require a matching executable Ghidra native decompiler; REA checks for it but does not build native components or change Gatekeeper quarantine state."
+      ],
+      "relationship_coverage": null,
+      "locations": [],
+      "evidence_links": []
+    }
+  },
+  "replay": {
+    "paired_cases": 4608,
+    "source_object_sha256": "ce9ac9a8d1f75eb7d8af071a1826430c4409aab240e86f2b51a25112e0dd118b",
+    "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "event_fault_cases": 64,
+    "scheduler_entry_SP_preserved": true,
+    "limits": [
+      "All three routines execute compiled C; lower unregister/timer-release and scheduler are modeled",
+      "Fresh versus captured fields, late clears, byte flags, event aliases/faults, ignored tick argument and provider errors/mutations verified",
+      "Scheduler receives1 at stock entrySP; source control-flow completeness does not implement that scheduler",
+      "Compare provider args/order/public state/write widths, saved registers/SP/masks/FPSCR; void R0/caller-clobbered APSR/private stack excluded",
+      "No final source link, full scheduler, physical allocation/streams/concurrency or hardware proof"
+    ]
+  },
+  "completed_cases": 4544,
+  "event_fault_cases": 64,
+  "initialization": {
+    "source_object_sha256": "ce9ac9a8d1f75eb7d8af071a1826430c4409aab240e86f2b51a25112e0dd118b",
+    "stock_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "native_RW_and_ZI_handlers_executed": true,
+    "independent_RW_decoder_matches": true,
+    "region_guards_unchanged": true,
+    "cells": {
+      "r1_spo2_timing_state": {
+        "address": "0x20006d98",
+        "size": 8,
+        "section": ".r1.spo2.timing.state",
+        "sha256": "d86e8112f3c4c4442126f8e9f44f16867da487f29052bf91b810457db34209a4"
+      },
+      "r1_spo2_streams": {
+        "address": "0x2001a3d0",
+        "size": 8,
+        "section": ".bss.r1.spo2.streams",
+        "sha256": "af5570f5a1810b7af78caf4bc70a660f0df51e42baf91d4de5b2328de0e83dfc"
+      }
+    },
+    "owned_bytes": 16,
+    "limits": [
+      "Eight-byte SpO2 state plus two stream handles are owned",
+      "Final whole-image RAM placement and physical startup unproven"
+    ]
+  },
+  "negative_controls": [
+    {
+      "name": "wrong-slot",
+      "rejected": true
+    },
+    {
+      "name": "broad-wear-guard",
+      "rejected": true
+    },
+    {
+      "name": "early-timer-clear",
+      "rejected": true
+    },
+    {
+      "name": "early-stream-clear",
+      "rejected": true
+    },
+    {
+      "name": "word-flag-clear",
+      "rejected": true
+    },
+    {
+      "name": "cached-mode",
+      "rejected": true
+    },
+    {
+      "name": "wrong-scheduler-argument",
+      "rejected": true
+    },
+    {
+      "name": "wrong-topic",
+      "rejected": true
+    },
+    {
+      "name": "broad-mode-guard",
+      "rejected": true
+    }
+  ],
+  "qualification": {
+    "candidate_units": 1,
+    "compiled_units": 1,
+    "units": [
+      {
+        "source": "r1/src/application/runtime/native_spo2_lifecycle.c",
+        "payload": "r1-application",
+        "evidence": "r1/symbols/function-frontier.csv",
+        "selected": [],
+        "compiled": true,
+        "rejections": {
+          "anchored_relocation_pattern_not_exact": 3
+        },
+        "source_implementation_completeness": "not established by compilation or byte matching",
+        "reason": "no exact anchored body under tested production bindings; integration remains unfinished"
+      }
+    ]
+  },
+  "composition": {
+    "report": "build/sources-goal-r1-spo2-lifecycle-c/report.json",
+    "sha256": "8c79bab11f594e39bd1b8031ce1d04cbf0a9f2e51a07919e661317b077a899e9",
+    "units": 661,
+    "unchanged_prior_objects": 660,
+    "prototype_updated_sources": [
+      "r1/src/application/runtime/native_health_registrations.c"
+    ],
+    "application_imports": 165,
+    "bootloader_imports": 34,
+    "resolved_imports": [
+      "r1_native_health_group4_a_callback",
+      "r1_native_health_group1_a_callback"
+    ],
+    "new_native_import": "r1_spo2_timing_start_plan",
+    "native_scheduler_address": "0x4af10"
+  },
+  "hybrid": {
+    "report": "build/hybrid-goal-r1-spo2-lifecycle-c/build-report.json",
+    "sha256": "320980f499130ca3e7783037e161c411a2e0db63773d40c5b7a2363a838b1940",
+    "totals": {
+      "binary-pull-through": 641791,
+      "source-built": 4369,
+      "resource-file": 248
+    },
+    "canonical_plan_unchanged": true
+  },
+  "artifacts": {
+    "build/goal-r1-spo2-lifecycle-c/verify.py": "affc2cc4f00f31b06299abf126e5e23acb8076b3d4030e863fbf01f985eda11c",
+    "build/goal-r1-spo2-lifecycle-c/negative.py": "14a2c06b51d79ed0f226e815e5ee78ad7294449f1b9c1613fe125c6ebff3c655",
+    "build/goal-r1-spo2-lifecycle-c/qualify.py": "1b32c54cfbe4cfc08a1822e874912f9b4bbbff90c9608236b7280e900ca61c56",
+    "build/goal-r1-spo2-lifecycle-c/finalize.py": "d4628b41d340c7c2a2f3155f720085857c288d6804a396de749f3a76660e3987",
+    "build/goal-r1-spo2-lifecycle-c/source.elf": "5b4e3b0d7f367ae3c29ac46fec81f6bb2dbf3e3a98437cb9a80aee20c134dbaa",
+    "build/goal-r1-spo2-lifecycle-c/results.json": "189689cf65a54cf1dc0523c444b7ca117707625b0d98277d1c4b3a73912ab674",
+    "r1/src/application/runtime/native_spo2_timing.h": "e5af7c7070acfad3f9ff23b84b12245da585a418a3c0b54da97ca6983348ba41",
+    "build/goal-r1-spo2-lifecycle-c/initialization.py": "b660c3c2493efaec195369c0fb4bfa8e1913b4ff6cf050f12c273aae53754df3",
+    "build/goal-r1-spo2-lifecycle-c/initialization-results.json": "34c68a310a4ac5d2895da7e7ab900daa735dd0f28ac2d4004f62530dc89a7c5b",
+    "build/goal-r1-spo2-lifecycle-c/wrong-slot.c": "2b55d427072564691a4ffd267acc69c02262ae1c041dea0a8ee1d45f89c3e211",
+    "build/goal-r1-spo2-lifecycle-c/wrong-slot.o": "e8d2e806a043eb216cd1a4b7e88415c0ad77f749834a5eb5779a1ec3aa260a5f",
+    "build/goal-r1-spo2-lifecycle-c/wrong-slot.log": "c252b234042e67580e7ab3dd712df2433e0a931c8c8274e48c28c8eb5d2a5f79",
+    "build/goal-r1-spo2-lifecycle-c/broad-wear-guard.c": "3f82043d1b5b8865eb359969cac887db2f9c70b61f68f04a71eeee19a0da4826",
+    "build/goal-r1-spo2-lifecycle-c/broad-wear-guard.o": "6093c999fe535a3f44fe00296f5c1f8985c1c0fee4d5d2ec1265a77db40dd32e",
+    "build/goal-r1-spo2-lifecycle-c/broad-wear-guard.log": "feb2ecd6d9f63b1c5afe44c86022c6bf3d0eff7f8e5246e7c5d17a87794e27b0",
+    "build/goal-r1-spo2-lifecycle-c/early-timer-clear.c": "e88342b36d8fb25fa56f246acf3d5acfa4b494000ce14915bae14115de7b4a00",
+    "build/goal-r1-spo2-lifecycle-c/early-timer-clear.o": "9920f2c177874697a09918080a087a44e72069fc2e1008c8265f89623cd21446",
+    "build/goal-r1-spo2-lifecycle-c/early-timer-clear.log": "28068055f2ac5f65e381ed66836cef9746c1b369dcf4a503b8af7ced43ce4845",
+    "build/goal-r1-spo2-lifecycle-c/early-stream-clear.c": "230da7407c2aa013912f32d07103db143a2859d7d09ed33447745b71a5f6a6dc",
+    "build/goal-r1-spo2-lifecycle-c/early-stream-clear.o": "18248ce224ebe0b895753a4366915aeac9360ef4ac63b70902095efe07a11d89",
+    "build/goal-r1-spo2-lifecycle-c/early-stream-clear.log": "2aa61749c40995603686e71a9608d81fa0ce6b9e73b4830df067884746a5bb89",
+    "build/goal-r1-spo2-lifecycle-c/word-flag-clear.c": "e9436515ea8e09d5508da4f2ceb94ad7c9f0c29446e2a53b1ce85d29e0e0b74d",
+    "build/goal-r1-spo2-lifecycle-c/word-flag-clear.o": "6b4eef57c9327135d46811fd9d82460d70855c0ce9fd71426e291fdb999dce4d",
+    "build/goal-r1-spo2-lifecycle-c/word-flag-clear.log": "68c11aba0832dff3477949a3107024166f4680b6a3fc6e75ac2364f48dd01a42",
+    "build/goal-r1-spo2-lifecycle-c/cached-mode.c": "eae680685840ec1543fbf030019b8cbb7b58dd87ddfa7686d462571ee526554b",
+    "build/goal-r1-spo2-lifecycle-c/cached-mode.o": "cb32041345029a1845fb5306dd44e99f67e0000ef8f76aaeee663f73c38dbbd8",
+    "build/goal-r1-spo2-lifecycle-c/cached-mode.log": "201349bba898eb20fa5f19dc9e01f96edd130aff2716f40f7f23318f1e4485a1",
+    "build/goal-r1-spo2-lifecycle-c/wrong-scheduler-argument.c": "527fb4575a43bf8b292fe3389259bf5e2026c598a36d3734bf0eb4760a5435cb",
+    "build/goal-r1-spo2-lifecycle-c/wrong-scheduler-argument.o": "6996c8a330ab1e851bf5673f615a95c75ccdb1e36a674b7219cd6842f25347e9",
+    "build/goal-r1-spo2-lifecycle-c/wrong-scheduler-argument.log": "41603478e028dde16b4dc7882392fa27517655b9d262617e1c4de34f1a767b33",
+    "build/goal-r1-spo2-lifecycle-c/wrong-topic.c": "d7aaecc536d0465a5c9e60f34748cf4b1a0e59a88dcdf442670a0a161132e334",
+    "build/goal-r1-spo2-lifecycle-c/wrong-topic.o": "79669c1e5bdce727092caac11991f28937623750ff67866b01d2687dff7a40e9",
+    "build/goal-r1-spo2-lifecycle-c/wrong-topic.log": "9b52aafda52516ec678894c4c932fac641e7ecb8e9d5d997a11cb5bc14ebad6c",
+    "build/goal-r1-spo2-lifecycle-c/broad-mode-guard.c": "3cc07fbefab6276928252cff978c32c4376a885aad29580dc31bfc0e30a776f9",
+    "build/goal-r1-spo2-lifecycle-c/broad-mode-guard.o": "def868eadce1595eba876a4ce69890f5c39973855535b2f957bcc097ee0b8db4",
+    "build/goal-r1-spo2-lifecycle-c/broad-mode-guard.log": "b2fd95dddf7cab06a1aaf5009e7f3d157ed128bf454a0c2016bc4883e2358df7"
+  },
+  "limits": [
+    "Three routines ordinary C, no new assembly; mode/flags/timer8 plus streams8 authenticated, coldmode2 others0",
+    "Lifecycle callback ignores argument; wear callback captures one byte and skips only1; fresh handles/timer/mode, late clears, byte flags and scheduler1 entrySP verified",
+    "Lower stream unregister/timer release and scheduler modeled; scheduler remains native",
+    "Frontier sizes corrected from unknown0 to44/50 for callbacks; timer release20; no new exact-qualified bytes",
+    "No final source-only link, complete scheduler, physical streams/timers/concurrent or hardware proof"
+  ]
+}

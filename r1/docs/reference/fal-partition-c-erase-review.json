@@ -1,0 +1,135 @@
+{
+  "passed": 4608,
+  "executions": 9216,
+  "lookup_and_driver_modeled": true,
+  "diagnostics_compared": true,
+  "ordered_fields_compared": true,
+  "wrapping_bounds": true,
+  "source_report": "build/sources-goal-r1-fal-c-erase/report.json",
+  "source_size": 216,
+  "public_C_erase": true,
+  "input_buffer_preserved": true,
+  "source_sha256": {
+    "{gen}/fal_partition_r1_lookup.c": "f642a2b58748dfcd037a1e79cb2cab2ac7b3c1eea0998e7ee94e3c76306719a7"
+  },
+  "limitations": [
+    "Lookup/driver/printf modeled; lookup modeled",
+    "Private frames and caller-clobbered registers/flags excluded",
+    "Invalid driver pointers, arbitrary aliasing, concurrency and electrical flash behavior unverified",
+    "No byte qualification"
+  ],
+  "negative_control": {
+    "mutation": "Reject wrapping address overflow",
+    "rejected": true,
+    "addr": "0xffffffff",
+    "size": 1,
+    "limit": 16,
+    "stderr": "arm-none-eabi-ld: warning: (strlen): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-fal-c-erase/bad.o\narm-none-eabi-ld: warning: (strlen): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-fal-c-erase/bad.o\narm-none-eabi-ld: warning: (strlen): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-fal-c-erase/bad.o\narm-none-eabi-ld: warning: (strlen): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-fal-c-erase/bad.o\narm-none-eabi-ld: warning: (strlen): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-fal-c-erase/bad.o\narm-none-eabi-ld: warning: (strlen): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-fal-c-erase/bad.o\narm-none-eabi-ld: warning: (fal_flash_device_find): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-fal-c-erase/bad.o\narm-none-eabi-ld: warning: (strcmp): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-fal-c-erase/bad.o\narm-none-eabi-ld: warning: (r1_native_printf): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-fal-c-erase/bad.o\narm-none-eabi-ld: warning: (r1_native_printf): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-fal-c-erase/bad.o\narm-none-eabi-ld: warning: (r1_native_printf): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-fal-c-erase/bad.o\narm-none-eabi-ld: warning: (r1_native_printf): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-fal-c-erase/bad.o\narm-none-eabi-ld: warning: (r1_native_printf): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-fal-c-erase/bad.o\narm-none-eabi-ld: warning: (r1_native_printf): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-fal-c-erase/bad.o\narm-none-eabi-ld: warning: (r1_native_printf): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-fal-c-erase/bad.o\narm-none-eabi-ld: warning: (r1_native_printf): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-fal-c-erase/bad.o\narm-none-eabi-ld: warning: (r1_native_printf): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-fal-c-erase/bad.o\narm-none-eabi-ld: warning: (r1_native_printf): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-fal-c-erase/bad.o\narm-none-eabi-ld: warning: (r1_native_printf): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-fal-c-erase/bad.o\narm-none-eabi-ld: warning: (r1_native_printf): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-fal-c-erase/bad.o\narm-none-eabi-ld: warning: (r1_native_printf): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-fal-c-erase/bad.o\narm-none-eabi-ld: warning: (r1_native_printf): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-fal-c-erase/bad.o\narm-none-eabi-ld: warning: (r1_native_printf): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-fal-c-erase/bad.o\narm-none-eabi-ld: warning: (r1_native_printf): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-fal-c-erase/bad.o\narm-none-eabi-ld: warning: (r1_native_printf): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-fal-c-erase/bad.o\narm-none-eabi-ld: warning: (r1_native_printf): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-fal-c-erase/bad.o\narm-none-eabi-ld: warning: (r1_native_printf): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-fal-c-erase/bad.o\narm-none-eabi-ld: warning: (r1_native_printf): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-fal-c-erase/bad.o\narm-none-eabi-ld: warning: (r1_native_printf): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-fal-c-erase/bad.o\narm-none-eabi-ld: warning: (r1_native_printf): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-fal-c-erase/bad.o\narm-none-eabi-ld: warning: (r1_native_printf): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-fal-c-erase/bad.o\narm-none-eabi-ld: warning: (r1_native_printf): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-fal-c-erase/bad.o\narm-none-eabi-ld: warning: (r1_native_printf): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-fal-c-erase/bad.o\narm-none-eabi-ld: warning: (r1_native_printf): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-fal-c-erase/bad.o\narm-none-eabi-ld: warning: (r1_native_printf): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-fal-c-erase/bad.o\narm-none-eabi-ld: warning: (r1_native_printf): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-fal-c-erase/bad.o\nTraceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-fal-c-erase/reject-overflow-guard.py\", line 66, in <module>\n    for c in cases:assert a(*c)==b(*c),c\n                                 ~^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-fal-c-erase/reject-overflow-guard.py\", line 55, in run\n    boundary=((addr+length)&0xffffffff)>limit;expected=0xffffffff if boundary or not found else result;assert value==expected\n                                                                                                              ^^^^^^^^^^^^^^^\nAssertionError\n"
+  },
+  "integrated": {
+    "passed": 3072,
+    "executions": 6144,
+    "actual_C_lookup": true,
+    "driver_and_printf_modeled": true,
+    "diagnostics_compared": true,
+    "ordered_fields_compared": true,
+    "wrapping_bounds": true,
+    "source_report": "build/sources-goal-r1-fal-c-erase/report.json",
+    "source_size": 216,
+    "public_C_erase": true,
+    "input_buffer_preserved": true,
+    "source_sha256": {
+      "{gen}/fal_partition_r1_lookup.c": "f642a2b58748dfcd037a1e79cb2cab2ac7b3c1eea0998e7ee94e3c76306719a7"
+    },
+    "limitations": [
+      "Driver/printf modeled; actual native/C lookup executes",
+      "Private frames and caller-clobbered registers/flags excluded",
+      "Invalid driver pointers, arbitrary aliasing, concurrency and electrical flash behavior unverified",
+      "No byte qualification"
+    ]
+  },
+  "read_regression": {
+    "passed": 9216,
+    "executions": 18432,
+    "lookup_and_driver_modeled": true,
+    "diagnostics_compared": true,
+    "ordered_fields_compared": true,
+    "wrapping_bounds": true,
+    "source_report": "build/sources-goal-r1-fal-c-erase/report.json",
+    "source_size": 258,
+    "shared_alias_body": true,
+    "source_sha256": {
+      "{gen}/fal_partition_r1_lookup.c": "f642a2b58748dfcd037a1e79cb2cab2ac7b3c1eea0998e7ee94e3c76306719a7"
+    },
+    "limitations": [
+      "Lookup/driver/printf modeled; real lookup checked separately",
+      "Private frames and caller-clobbered registers/flags excluded",
+      "Invalid driver pointers, arbitrary aliasing, concurrency and electrical flash behavior unverified",
+      "No byte qualification"
+    ]
+  },
+  "write_regression": {
+    "passed": 9216,
+    "executions": 18432,
+    "lookup_and_driver_modeled": true,
+    "diagnostics_compared": true,
+    "ordered_fields_compared": true,
+    "wrapping_bounds": true,
+    "source_report": "build/sources-goal-r1-fal-c-erase/report.json",
+    "source_size": 260,
+    "public_C_write": true,
+    "input_buffer_preserved": true,
+    "source_sha256": {
+      "{gen}/fal_partition_r1_lookup.c": "f642a2b58748dfcd037a1e79cb2cab2ac7b3c1eea0998e7ee94e3c76306719a7"
+    },
+    "limitations": [
+      "Lookup/driver/printf modeled; real lookup checked separately",
+      "Private frames and caller-clobbered registers/flags excluded",
+      "Invalid driver pointers, arbitrary aliasing, concurrency and electrical flash behavior unverified",
+      "No byte qualification"
+    ]
+  },
+  "lookup_regression": {
+    "passed": 2765,
+    "executions": 5530,
+    "ordered_state_reads": true,
+    "assertion_text_and_nonreturn_checked": true,
+    "unaligned_interior_partition_values": true,
+    "source_report": "build/sources-goal-r1-fal-c-erase/report.json",
+    "source_size": 118,
+    "shared_private_table_and_cache": true,
+    "source_sha256": {
+      "{gen}/fal_partition_r1_lookup.c": "f642a2b58748dfcd037a1e79cb2cab2ac7b3c1eea0998e7ee94e3c76306719a7"
+    },
+    "limitations": [
+      "Private state is seeded directly; full partition initialization and physical flash behavior unverified",
+      "Valid cache-index ranges sampled, including zero-state underflow cases; arbitrary corrupted table spans excluded",
+      "Diagnostic output modeled; private stack bytes and caller-clobbered registers/flags excluded",
+      "No byte qualification"
+    ]
+  },
+  "evidence": {
+    "build/goal-r1-fal-c-erase/stock.elf": "3a8feeaa8de4614c39629c6ed4c668c36a1b7d88962143595029cf8b61d05441",
+    "build/goal-r1-fal-c-erase/REA.json": "e49538a562e48d5035c016be7ca8114a37744b34723246432bce600efc0220de",
+    "build/goal-r1-fal-c-erase/REA.snapshot.json": "3076fc8f7b825f38497a508356e8717b981db8a647e77c03f4d407783201ce00",
+    "build/goal-r1-fal-c-erase/verify.py": "b3d08e7f22563dc29da37262916d942c92de134ded113efde41d71040559789a",
+    "build/goal-r1-fal-c-erase/source.elf": "f6a9294a15f35f9c7f967644e813083c09ac44fd62d7efa2ff4aba820f63d537",
+    "build/goal-r1-fal-c-erase/bad-header/native_partition_erase.h": "19f93b09e1c61437095aa2832ecddedd18264d5c5010068cd1473edc3bb3b283",
+    "build/goal-r1-fal-c-erase/reject-overflow-guard.py": "e10886bcbfaae6b9aba85df81e9cab9fee0178b94f6ef905bdff720ed47f0493",
+    "build/goal-r1-fal-c-erase/negative-result.json": "cb902f3e2482afeef65f5184d2d681de99c182489b1c32b7f43c2fb6fd2e0fbe",
+    "build/goal-r1-fal-c-erase/integrated/verify.py": "57fcb645d9e76e7b6c9e0d957785fb0687e4f345402bd7c531d3e8ff3c45a152",
+    "build/goal-r1-fal-c-erase/read/verify.py": "ab63962661a5ec130497fa0cf2e84b47f3d0148703d07457e24a4c38a2ff15ff",
+    "build/goal-r1-fal-c-erase/write/verify.py": "53aca0de8796d630b2fbd7cfdadd71df4935353901932fc702c88ec16694b3e4",
+    "build/goal-r1-fal-c-erase/lookup/verify.py": "fd041e831c9788e2e9c0f3844c4f55589c4b941f211be3a137cb69b018ca0f27",
+    "r1/src/application/board/fal-native/native_lookup.h": "39deac9f49d488cba11c9e59b4509f4dc27483fedbd310ac2f206ef1e901cb8e",
+    "r1/src/application/board/fal-native/native_partition_read.h": "dd3891e749194f6c1c18584a295aa91966e4f859f1a07616401c4ae011176305",
+    "r1/src/application/board/fal-native/native_partition_write.h": "16ba1ef1b5578a56a05591a72555923d45c94123adcb35a633ecc89e70c56b6b",
+    "r1/src/application/board/fal-native/native_partition_erase.h": "b113d468b9329c1561a8c9ced53a9694761c8ae2a58c5a57e8b506ff36f68e44",
+    "build/sources-goal-r1-fal-c-erase/generated/r1/fal_partition_r1_lookup.c": "f642a2b58748dfcd037a1e79cb2cab2ac7b3c1eea0998e7ee94e3c76306719a7",
+    "build/sources-goal-r1-fal-c-erase/report.json": "84b2d3b55d32be972a9c71bf4b637c3121f2aae8360ca10dc657e52f2bc949f7",
+    "r1/src/sources.json": "6be47d54d1fe22b5921fe919af11162d49403518059750808394c20d626735ab",
+    "r1/symbols/function-frontier.csv": "f764739c45bdece71e9a6ffbd4fb8141493a6913203fcc507ea37cc7cbc7f93d",
+    "tools/build/source-plan.json": "4d46e8c038db79a174a2d719086fd0be80503ca7cdbfc2c51e5ed3d30d293064"
+  },
+  "source_plan_changed": false
+}

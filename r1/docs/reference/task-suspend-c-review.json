@@ -1,0 +1,174 @@
+{
+  "normal_report": "build/sources-goal-r1-task-suspend-c/report.json",
+  "report_sha256": "71fe9e0c42962840fc36a85675e0ee6e9be0278e3b2a6861c76fd3bd32c69fd9",
+  "unit": {
+    "source": "r1/src/application/rtos/notification-tasks/notification-tasks.c",
+    "payload": "r1-application",
+    "role": "candidate",
+    "toolchain": "clang",
+    "link": true,
+    "expect": "compile",
+    "returncode": 0,
+    "argv": [
+      "/usr/bin/clang",
+      "--target=arm-none-eabi",
+      "-mcpu=cortex-m4",
+      "-mthumb",
+      "-mfpu=fpv4-sp-d16",
+      "-mfloat-abi=hard",
+      "-ffreestanding",
+      "-fno-strict-aliasing",
+      "-std=c11",
+      "-Os",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-DNRF52840_XXAA",
+      "-DSOFTDEVICE_PRESENT",
+      "-DNRF_SD_BLE_API_VERSION=7",
+      "-DS140",
+      "-DFREERTOS",
+      "-DFLOAT_ABI_HARD",
+      "-isystem",
+      "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/r1/src/config/rtos",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/r1/config-recovered",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/third-party/upstream/freertos-kernel/include",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/external/freertos/portable/GCC/nrf52",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/external/freertos/portable/CMSIS/nrf52",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/third-party/upstream/cmsis-freertos/CMSIS/RTOS2/FreeRTOS/Include",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/toolchain/cmsis/include",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/softdevice/common",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/experimental_section_vars",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/util",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/delay",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/atomic",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx/mdk",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx/hal",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx/drivers/include",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/integration/nrfx",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/integration/nrfx/legacy",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/softdevice/s140/headers",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/softdevice/s140/headers/nrf52",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/third-party/upstream/cmsis-5-590/CMSIS/RTOS2/Include",
+      "-fshort-enums",
+      "-fwrapv",
+      "-O0",
+      "-fno-inline",
+      "-I",
+      "/Users/kalani/Repo/evenRealities-openCFW/r1/src/config/rtos",
+      "-include",
+      "/Users/kalani/Repo/evenRealities-openCFW/r1/src/config/rtos/native_port_assert.h",
+      "-MD",
+      "-MF",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-task-suspend-c/r1/r1-application/r1__src__application__rtos__notification-tasks__notification-tasks.c.d",
+      "-c",
+      "/Users/kalani/Repo/evenRealities-openCFW/r1/src/application/rtos/notification-tasks/notification-tasks.c",
+      "-o",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-task-suspend-c/r1/r1-application/r1__src__application__rtos__notification-tasks__notification-tasks.c.o"
+    ],
+    "source_sha256": "603867452de9d9455664e031fb81453e7910a6801481ced053254e8c0c06c7f2",
+    "object_sha256": "9ffaabd7568214976c1c7e9c2264639e1be076aa22dffc7379e7f6d292a2f4c4",
+    "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-task-suspend-c/r1/r1-application/r1__src__application__rtos__notification-tasks__notification-tasks.c.o",
+    "strong": [
+      "vTaskDelay",
+      "vTaskSuspend",
+      "xTaskGenericNotify",
+      "xTaskGenericNotifyFromISR",
+      "xTaskGenericNotifyStateClear",
+      "xTaskGenericNotifyWait"
+    ],
+    "weak": [],
+    "undefined": [
+      "pxCurrentTCB",
+      "pxDelayedTaskList",
+      "pxOverflowDelayedTaskList",
+      "pxReadyTasksLists",
+      "uxCurrentNumberOfTasks",
+      "uxListRemove",
+      "uxTopReadyPriority",
+      "vListInsert",
+      "vListInsertEnd",
+      "vPortEnterCritical",
+      "vPortExitCritical",
+      "vPortValidateInterruptPriority",
+      "vTaskSuspendAll",
+      "vTaskSwitchContext",
+      "xNextTaskUnblockTime",
+      "xPendingReadyList",
+      "xSuspendedTaskList",
+      "xTaskResumeAll",
+      "xYieldPending"
+    ]
+  },
+  "upstream": {
+    "source": "third-party/upstream/freertos-kernel/tasks.c",
+    "sha256": "14020d617b96dd2814e1211f6e3b645bcf5e2bd3179c23fe7dd16bc666fe9463"
+  },
+  "direct": {
+    "total": 1728,
+    "outcomes": {
+      "switch": 288,
+      "clear_current": 288,
+      "other_task": 576,
+      "yield": 576
+    },
+    "digest": "0089a67d922dbbffa40e54f28e9f0de8de33c69e5b0b6b87254b3223052fd6ff",
+    "actual_C_lists": true,
+    "modeled_critical_and_switch_callbacks": true,
+    "limits": [
+      "Valid tasks/list state, single notification slot, sequential execution",
+      "Critical/context-switch callbacks modeled; no full scheduler or physical device proof"
+    ]
+  },
+  "negative": {
+    "lost-notification-clear": {
+      "rejected": true,
+      "diagnostic": "ld/goal-r1-task-suspend-c/verify.py\", line 55, in <module>\n    assert walk(READY+3*20)==[n for n in ready if n!=STATE];assert walk(SUSPEND)==[n for n in suspended if n!=STATE]+[STATE];assert walk(DELAY)==[n for n in delayed if n!=STATE];assert walk(PENDING)==[n for n in (eventnodes if event=='pending' else []) if n!=EVENT];assert walk(EVENTLIST)==[n for n in (eventnodes if event=='other' else []) if n!=EVENT];assert word(EVENT+16)==0 and word(STATE)==initial_value and word(STATE+12)==TASK;assert bytes(v.mem_read(TASK+108,4))==bytes([0 if notification==1 else notification,0x79,0x68,0x57]);assert word(TASK+104)==0x12345678;assert word(TOP)==7\n                                                                                                                                                                                                                                                                                                                                                                                                                                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    "lost-event-unlink": {
+      "rejected": true,
+      "diagnostic": "Traceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-task-suspend-c/verify.py\", line 55, in <module>\n    assert walk(READY+3*20)==[n for n in ready if n!=STATE];assert walk(SUSPEND)==[n for n in suspended if n!=STATE]+[STATE];assert walk(DELAY)==[n for n in delayed if n!=STATE];assert walk(PENDING)==[n for n in (eventnodes if event=='pending' else []) if n!=EVENT];assert walk(EVENTLIST)==[n for n in (eventnodes if event=='other' else []) if n!=EVENT];assert word(EVENT+16)==0 and word(STATE)==initial_value and word(STATE+12)==TASK;assert bytes(v.mem_read(TASK+108,4))==bytes([0 if notification==1 else notification,0x79,0x68,0x57]);assert word(TASK+104)==0x12345678;assert word(TOP)==7\n                                                                                                                                                                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    "lost-unblock-reset": {
+      "rejected": true,
+      "diagnostic": "Traceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-task-suspend-c/verify.py\", line 56, in <module>\n    assert word(NEXT)==((0x400 if delay_other else 0xffffffff) if running else 0x100);expected_current=CTASK if handle=='other' or (not running and not all_suspended) else 0 if not running else TASK;assert word(CURRENT)==expected_current\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    "lost-bootstrap-current-clear": {
+      "rejected": true,
+      "diagnostic": "Traceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-task-suspend-c/verify.py\", line 56, in <module>\n    assert word(NEXT)==((0x400 if delay_other else 0xffffffff) if running else 0x100);expected_current=CTASK if handle=='other' or (not running and not all_suspended) else 0 if not running else TASK;assert word(CURRENT)==expected_current\n                                                                                                                                                                                                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    }
+  },
+  "audit": {
+    "changed": [
+      "r1/src/application/rtos/notification-tasks/notification-tasks.c"
+    ],
+    "unchanged_objects": 729,
+    "modules": {
+      "r1/src/application/rtos/notification-tasks/notification-tasks.c": {
+        "unchanged_existing_text_sections": [
+          ".text.prvAddCurrentTaskToDelayedList",
+          ".text.prvResetNextTaskUnblockTime",
+          ".text.ulPortRaiseBASEPRI",
+          ".text.vTaskDelay",
+          ".text.xTaskGenericNotify",
+          ".text.xTaskGenericNotifyFromISR",
+          ".text.xTaskGenericNotifyStateClear",
+          ".text.xTaskGenericNotifyWait"
+        ],
+        "new_text_sections": [
+          ".text.vTaskSuspend"
+        ],
+        "source_prefix_preserved": true
+      }
+    }
+  },
+  "resolved_imports": [
+    "vTaskSuspend"
+  ],
+  "limits": [
+    "Pinned semantics and established native notification TCB/list contracts; no mapped stock API identity claim",
+    "Actual C lists/reset helper; modeled critical and context-switch callbacks",
+    "No full scheduler, interrupt interleaving or physical device proof"
+  ]
+}

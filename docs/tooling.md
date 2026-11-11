@@ -47,6 +47,7 @@ binary hash.
 | GhidraSVD | Loads SVD register maps as typed peripheral blocks | — | tag `v0.6.6` = `893dfbe02d889dfb7c4cf69b7a395051a8307828` [V] |
 | GNU binutils `objdump` (arm-none-eabi ≥ 2.35, arc-elf32, csky-elfabiv2) | The reference instruction decoder wherever Ghidra is weak (MVE, ARCv2 EM, CK804EF) | The C-SKY GX8002 decode needs the official `c-sky/binutils-gdb` fork (see [`g2/docs/reference/toolchains.md`](../g2/docs/reference/toolchains.md)) | Arm GNU Toolchain 13.3.Rel1 and 9-2020-q2; Synopsys ARC GNU `arc-2026.03-release`; C-SKY `csky-script-3_2_0-release` = `96f037d8` [V] |
 | rizin 0.9.1 + rz-ghidra 0.9.0 | Fast raw inspection and scripting | — | `c3a90e92` / `999df7b8` [V] |
+| REA 6.5.0 (`third-party/tools/rea`; local CLI `node ~/Repos/rea/scripts/rea.mjs`, MCP config in `.waves/mcp.json`) | Evidence-carrying per-function decompile through Ghidra, e.g. `rea function <raw.bin> 0x42740c --target-format raw-binary --architecture arm --entry-point 0x410000` for the bootloader | Needs `GHIDRA_INSTALL_DIR` (Homebrew: `/opt/homebrew/Cellar/ghidra/12.1.4/libexec`) and a JDK 21 on `PATH`/`JAVA_HOME` (`/opt/homebrew/opt/openjdk@21/libexec/openjdk.jdk/Contents/Home`); otherwise it reports `provider_unavailable`. Raw-binary input is Ghidra-only. About 2.5 minutes per cold call | local checkout |
 | IDA Pro 9 + Hex-Rays, Binary Ninja | Optional second opinions; IDA has an ARC module and FLIRT | Commercial; not reproducible in CI | document only |
 
 ### FunctionID, BSim and signature databases

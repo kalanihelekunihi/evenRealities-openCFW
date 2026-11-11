@@ -1,0 +1,80 @@
+{
+  "cases": 2496,
+  "passed": 2496,
+  "failures": [],
+  "actual_cached_reader_and_memcpy_execute": true,
+  "callback_depths": [
+    [
+      [],
+      []
+    ],
+    [
+      [
+        -160,
+        -160
+      ],
+      [
+        -176,
+        -176
+      ]
+    ]
+  ],
+  "source_bridge_size": 14,
+  "source_body_size": 40,
+  "other_function_and_data_sections_unchanged": [
+    ".r1.temp.calibration",
+    ".r1.temp.s6f798",
+    ".r1.temp.s6f7d4",
+    ".text.r1_gxt310_one_shot",
+    ".text.r1_gxt310_one_shot_body",
+    ".text.r1_gxt310_one_shot_channel0",
+    ".text.r1_gxt310_one_shot_channel2",
+    ".text.r1_gxt310_temperature_channel0",
+    ".text.r1_gxt310_temperature_channel2",
+    ".text.r1_gxt310_temperature_read",
+    ".text.r1_gxt310_temperature_read_body",
+    ".text.r1_temperature_pair_read_calibrated"
+  ],
+  "other_source_units_unchanged": 561,
+  "imports_unchanged": true,
+  "application_imports": 214,
+  "bootloader_imports": 34,
+  "integrated_sources": [
+    "r1/src/application/runtime/native_temperature.c",
+    "r1/src/application/runtime/native_protocol_serial.c",
+    "r1/src/application/board/native_kv_class.c",
+    "third-party/upstream/musl-memory-1.2.5/memcpy.c"
+  ],
+  "report": "build/sources-goal-r1-temp-calibration/report.json",
+  "report_sha256": "610cb9655e46dda0080c8ceec86e876ebac1879f195425014a705d1eb46a1331",
+  "manifest_sha256": "853798d70673de8cb97ab199ed0346162136e023b446e79a90de6af63a1b5be8",
+  "stock_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "rea": {
+    "path": "build/goal-r1-temp-calibration/REA.json",
+    "sha256": "009935f156285bdb3a331d384ee1dd0dbb26fa2317915bcb9be24fa5b1435737",
+    "procedure": "0x7badc"
+  },
+  "source_sha256": {
+    "r1/src/application/runtime/native_temperature.c": "aed843ae9bcf99877b8c83b6210eb94c5364053ff76c626054ea04cdb3d86a8b",
+    "r1/src/application/runtime/native_protocol_serial.c": "47fe0057719ba267ad88d5ec38f734c55ba2327ff6ba697870dc0570c24a04a7",
+    "r1/src/application/board/native_kv_class.c": "e9791d39b7a9b5380b1dbce3c7422be921131abbd0e09c3387ea3d4b9930bf6e",
+    "third-party/upstream/musl-memory-1.2.5/memcpy.c": "1664d565f968b053ac33c5ac615c057a255a5821c8fa510fba61d4f63dee08e9"
+  },
+  "probe_artifacts": {
+    "build/goal-r1-temp-calibration/before.c": "8768453c79256c3756511d94326b5159729c979afa1ffd7aeb3e602404c87076",
+    "build/goal-r1-temp-calibration/stock.s": "98cfc5eb1ea97d4bc58fc69b5fe92be3a686c56979d49140533a06cb57685566",
+    "build/goal-r1-temp-calibration/stock.elf": "48ce7917c1a8b9614995cee137c6aa39d72be8345c0ccd01f38c3e63ffdacb89",
+    "build/goal-r1-temp-calibration/REA.json": "009935f156285bdb3a331d384ee1dd0dbb26fa2317915bcb9be24fa5b1435737",
+    "build/goal-r1-temp-calibration/rea-snapshot.json": "79cd4227737b09ba1c3f7c8287c5a75dfebb5a5fdafd41c15a4346528c050dee",
+    "build/goal-r1-temp-calibration/verify.py": "55dcfb82d6e4d6379c46de31c65c3d6d92431948aff0f0b79b559d4874dae340",
+    "build/goal-r1-temp-calibration/results.json": "f05264de2401561c1e576c5269a265a5312f41b879d872565aa2eaa562b46b8f",
+    "build/goal-r1-temp-calibration/source.elf": "904788b38907b68bb8b6ea11f3ad2ca4534712b3cd2d35a21115d74891479bf5",
+    "build/goal-r1-status-storage/expanded-rw.bin": "87fdee392022fdbe23dd0daf3e859fb14f3ce26ba3e8403aab56dc9d9a913317"
+  },
+  "limits": [
+    "Native 34-byte instruction body is replaced by a 40-byte C body and fourteen-byte frame bridge; no byte identity or provider qualification.",
+    "Compiled getter, cached-class reader and pinned musl memcpy execute; only port critical callbacks are modeled. Cold compiled 148-byte class and four-byte handle match decoded initialized stock bytes.",
+    "Native record stays at caller SP-136, including rejected-size seeds. Callback depth is SP-160 for native and SP-176 for C. Private C frame, arbitrary pointer faults, exception/concurrency and timing identity are unproven.",
+    "No physical temperature/calibration behavior, flash persistence or final boot/link proof. Manifest eligibility and imports are unchanged; no G2 gate or source-plan change."
+  ]
+}

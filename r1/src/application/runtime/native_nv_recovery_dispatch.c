@@ -1,6 +1,6 @@
 #include <stdint.h>
-/* Build-only native control flow. Merge/persistence and identity-report effects
- * are unresolved boundaries, separate from bounded planner/runtime admission. */
+/* Native fixed-record admission over the source-owned cached merge/report.
+ * Physical persistence and bounded planner/runtime admission remain separate. */
 extern uint32_t r1_native_nv_recovery_merge_boundary(const void *,uint32_t,uint32_t);
 extern uint32_t r1_native_nv_recovery_report_boundary(void);
 extern uint32_t r1_structured_log_mode_get(void),r1_structured_log_format(uint32_t,const char *,...);

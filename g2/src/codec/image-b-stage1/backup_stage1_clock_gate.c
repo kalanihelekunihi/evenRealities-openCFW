@@ -71,6 +71,14 @@ int gx8002_image_b_stage1_clock_trim_100004f4(void)
     return 0;
 }
 
+/* Stock 0x10001310 is the success-gated 32 kHz trim wrapper. */
+__attribute__((noinline))
+void gx8002_image_b_stage1_clock_trim_enable_10001310(void)
+{
+    if (gx8002_image_b_stage1_clock_trim_100004f4() == 0)
+        gx8002_image_b_stage1_osc_32k_state_10000ea0(1);
+}
+
 void gx8002_image_b_stage1_clock_init_100007d8(void)
 {
     gx8002_image_b_stage1_osc_32k_state_10000ea0(0);
@@ -84,8 +92,7 @@ void gx8002_image_b_stage1_clock_init_100007d8(void)
     for (uint32_t i = 0; i < CLOCK_MODULE_MAX; ++i)
         (void)_clk_set_module((GX_CLOCK_MODULE)i, MODULE_SOURCE_1M_12M);
 
-    if (gx8002_image_b_stage1_clock_trim_100004f4() == 0)
-        gx8002_image_b_stage1_osc_32k_state_10000ea0(1);
+    gx8002_image_b_stage1_clock_trim_enable_10001310();
 
     *(volatile uint32_t *)(uintptr_t)PMU_CFG_SRAM_GATE_ADDR = 1;
     *(volatile uint32_t *)(uintptr_t)PMU_CFG_CLK_GATE &= ~1u;

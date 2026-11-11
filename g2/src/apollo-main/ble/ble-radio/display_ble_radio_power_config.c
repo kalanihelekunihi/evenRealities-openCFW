@@ -4,8 +4,16 @@
 
 extern uint32_t g2_codec_pin_function(uint32_t,uint32_t); /* native 0x480f0c */
 
+/* sim15: 0x2000006c..0x20000110 are stock .data pad configs, now
+ * g2_stock_ram_2000006c (defined in drivers/flash/nor/nor-clock-select.c; values from .waves/init_20000000.bin). 0x20074204..
+ * 0x20074218 are past the stock .data image (zero .bss) and no source writes
+ * them, so they map to own zeroed words (flag: stock runtime writer unknown). */
+extern uint32_t g2_stock_ram_2000006c[];
+static uint32_t g2_stock_ram_20074204[6];
+#define CELL(a) ((a) >= 0x20074204u ? &g2_stock_ram_20074204[((a) - 0x20074204u) / 4u] \
+                                    : &g2_stock_ram_2000006c[((a) - 0x2000006cu) / 4u])
 #define APPLY(pin,address) ((void)g2_codec_pin_function((pin), \
-    *(volatile const uint32_t *)(uintptr_t)(address)))
+    *(volatile const uint32_t *)CELL(address)))
 
 void audio_ble_radio_power_config_4c2b68(uint32_t group,uint8_t setting)
 {

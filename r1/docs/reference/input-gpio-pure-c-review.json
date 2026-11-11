@@ -1,0 +1,72 @@
+{
+  "schema": 1,
+  "report": "build/sources-goal-r1-input-gpio-pure-c/report.json",
+  "report_sha256": "6555e8e0ba9fc5458dafa088948472f87c2e66be400a98e967b15a1285b0d34b",
+  "manifest_sha256": "c24d5e970fba8f7fb8279250c073658d21a724a9b040e83061ff952af831f222",
+  "open": {
+    "cases": 2960,
+    "stock_and_previous_comparison": true,
+    "private_frames_and_caller_clobbered_registers_excluded": true,
+    "actual_port_decoder_and_PIN_CNF_access": true,
+    "physical_gpio_verified": false
+  },
+  "read_callback_close": {
+    "cases": 4608,
+    "read_cases": 1536,
+    "stock_and_previous_compared": true,
+    "caller_clobbered_R3_and_private_frames_excluded": true,
+    "physical_gpio_verified": false
+  },
+  "defects": [
+    "wrong-pin",
+    "wrong-pull",
+    "reopen-opened",
+    "inverted-read"
+  ],
+  "audit": {
+    "unchanged_prior_object_hashes": 775,
+    "changed_object_hashes": [
+      [
+        "r1-application",
+        "r1/src/application/gpio/stock_named_gpio.c"
+      ],
+      [
+        "r1-bootloader",
+        "{gen}/r1_startup_vectors.S"
+      ],
+      [
+        "r1-bootloader",
+        "{gen}/r1_uecc.c"
+      ]
+    ],
+    "generated_boot_crypto_and_vectors_allocated_bytes_and_relocations_unchanged": true,
+    "import_sets_unchanged": true,
+    "unchanged_operation_sections": [
+      ".text.named_gpio_open_body",
+      ".text.named_gpio_read_body",
+      ".text.r1_named_gpio_close",
+      ".text.r1_named_gpio_callback",
+      ".text.r1_named_gpio_irq_dispatch",
+      ".text.r1_named_gpio_register_all"
+    ]
+  },
+  "rea_readbacks": [
+    "ev_3c93efa01a9629f85d23557a6501ae12ba201efce6007ebc6bf0194e382b222a",
+    "ev_6ac0f06ed9be6789d6497d4c502955bfd627da55cc887f3c7e65e196989bee55"
+  ],
+  "strict_boot_link_report": "build/goal-r1-input-gpio-pure-c/boot-link/report.json",
+  "physical_gpiote_verified": false,
+  "private_frames_and_caller_clobbered_registers_excluded": true,
+  "evidence_sha256": {
+    "build/goal-r1-input-gpio-pure-c/verify-open.py": "4b8e2b8b7c44d04e511803b15fd3c8553abc8f0f63af01bc3696c0f4b3ac46f8",
+    "build/goal-r1-input-gpio-pure-c/verify-read.py": "b07c84ca93e5723f048a4060548947851986c01eeaf4692cbd1dfa67f85843d0",
+    "build/goal-r1-input-gpio-pure-c/defects.py": "f30b35283b837a44fb3a32b2601816a39e690c7ef1e5fe284c5ba203a5b85ffe",
+    "build/goal-r1-input-gpio-pure-c/audit.py": "53d5769c8c27783896e4f1f673cf205d5f87f9e37bd8bedd58548cb7424d3cf3",
+    "build/goal-r1-input-gpio-pure-c/open-results.json": "d0c3907da63a9154fe33d1d4a297ce3fa44aa3c34e95701c8dc84c03980ea895",
+    "build/goal-r1-input-gpio-pure-c/read-results.json": "5e0bbda9e9a1d16b81ffc348fd49b86fa71c1ae7d5411e896d96e5f6197b0bb8",
+    "build/goal-r1-input-gpio-pure-c/defects.json": "eb7b3c32a71bda6f28426b712450dd1317221f13c037d39faaf59229ace1767d",
+    "build/goal-r1-input-gpio-pure-c/audit.json": "70e0ab7485cec0c1d13f03cd1c9f36eccc97a54e750568f8e3dde176ce4782cb",
+    "build/goal-r1-input-gpio-pure-c/rea-open.json": "281361ab55c8f74ab903af1787c3bc3bf0f1df0923bcc0d3c42eb27daead3b18",
+    "build/goal-r1-input-gpio-pure-c/rea-read.json": "e69970d6668fd759a21af807aaa2bfb34cc82aac5740ea189dba37ca80f8c6f7"
+  }
+}

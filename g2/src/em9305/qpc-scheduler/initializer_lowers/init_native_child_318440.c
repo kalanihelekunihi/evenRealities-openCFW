@@ -1,136 +1,71 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_318440\n"
-".type opencfw_em9305_child_318440,@function\n"
-"opencfw_em9305_child_318440:\n"
-"L318440:\n"
-"enter_s [r13-r16,fp,blink]\n"
-"L318442:\n"
-"sub_s sp,sp,0x8\n"
-"L318444:\n"
-"mov_s r13,r2\n"
-"L318446:\n"
-"mov_s r15,r1\n"
-"L318448:\n"
-"ldb r1,[r13,57]\n"
-"L31844c:\n"
-"mov_s r16,r0\n"
-"L31844e:\n"
-"mov_s r2,0\n"
-"L318450:\n"
-"bclr r0,r1,0x1\n"
-"L318454:\n"
-"mov_s r14,0x805be2\n"
-"L31845a:\n"
-"st r2,[r14,6]\n"
-"L31845e:\n"
-"st r2,[r14,2]\n"
-"L318462:\n"
-"brne.d.nt r0,0x1,L31847a\n"
-"L318466:\n"
-"stb_s r0,[r14,0]\n"
-"L318468:\n"
-"ldb_s r0,[r13,0x4]\n"
-"L31846a:\n"
-"breq_s r0,0,L31847a\n"
-"L31846c:\n"
-"ld r3,[r13,0xc]\n"
-"L31846e:\n"
-"ld r0,[r13,0x8]\n"
-"L318470:\n"
-"stb 1,[r16,2]\n"
-"L318474:\n"
-"stb_s r2,[r13,0x3]\n"
-"L318476:\n"
-"mov_s r2,1\n"
-"L318478:\n"
-"b_s L318488\n"
-"L31847a:\n"
-"mov_s r0,0x805b40\n"
-"L318480:\n"
-"ld r3,[r0,0x4]\n"
-"L318482:\n"
-"ld r0,[r0,0]\n"
-"L318484:\n"
-"stb r2,[r16,2]\n"
-"L318488:\n"
-"st_s r3,[r13,0x14]\n"
-"L31848a:\n"
-"bbit0.d.nt r1,0x1,L3184c6\n"
-"L31848e:\n"
-"st_s r0,[r13,0x10]\n"
-"L318490:\n"
-"ld_s r2,[r13,0x34]\n"
-"L318492:\n"
-"ld_s r1,[r13,0x30]\n"
-"L318494:\n"
-"ldb r0,[r13,58]\n"
-"L318498:\n"
-"bl.d opencfw_em9305_radio_peer_pair_303a40\n"
-"L31849c:\n"
-"add_s r3,sp,0\n"
-"L31849e:\n"
-"breq_s r0,0,L3184be\n"
-"L3184a0:\n"
-"ld r3,[sp,0x4]\n"
-"L3184a2:\n"
-"ld r0,[sp,0]\n"
-"L3184a4:\n"
-"ldb r1,[r13,57]\n"
-"L3184a8:\n"
-"mov_s r2,1\n"
-"L3184aa:\n"
-"stb 1,[r16,2]\n"
-"L3184ae:\n"
-"st_s r3,[r13,0x14]\n"
-"L3184b0:\n"
-"st_s r0,[r13,0x10]\n"
-"L3184b2:\n"
-"st r3,[r14,6]\n"
-"L3184b6:\n"
-"st r0,[r14,2]\n"
-"L3184ba:\n"
-"stb_s r1,[r14,0]\n"
-"L3184bc:\n"
-"b_s L3184c6\n"
-"L3184be:\n"
-"ld r3,[r13,0x14]\n"
-"L3184c0:\n"
-"ld r0,[r13,0x10]\n"
-"L3184c2:\n"
-"ldb r2,[r16,2]\n"
-"L3184c6:\n"
-"ld_s r1,[r15,0x50]\n"
-"L3184c8:\n"
-"ldb r12,[r13,58]\n"
-"L3184cc:\n"
-"ld r11,[r13,52]\n"
-"L3184d0:\n"
-"ld_s r14,[r13,0x30]\n"
-"L3184d2:\n"
-"cmp_s r2,0\n"
-"L3184d4:\n"
-"bset.ne r1,r1,0x1\n"
-"L3184d8:\n"
-"st_s r0,[r15,0x54]\n"
-"L3184da:\n"
-"bset r0,r1,0\n"
-"L3184de:\n"
-"st_s r3,[r15,0x58]\n"
-"L3184e0:\n"
-"st r11,[r15,96]\n"
-"L3184e4:\n"
-"st_s r14,[r15,0x5c]\n"
-"L3184e6:\n"
-"st_s r0,[r15,0x50]\n"
-"L3184e8:\n"
-"breq_s r12,0,L3184f0\n"
-"L3184ea:\n"
-"or r0,r1,0x9\n"
-"L3184ee:\n"
-"st_s r0,[r15,0x50]\n"
-"L3184f0:\n"
-"leave_s [r13-r16,fp,blink,pcl]\n"
-".size opencfw_em9305_child_318440,.-opencfw_em9305_child_318440\n"
-);
+#include <stdint.h>
+
+/* Native 0x318440..0x3184f2: choose the own address for a connection
+ * request. Address type +57 (bit 1 = resolvable) selects the request's
+ * random address (+8/+12, type 1 with +4 set) or the public address at
+ * 0x805b40, mirrored at 0x805be2 (type) / 0x805be4 (address). A resolvable
+ * type tries the peer-pair resolution (native 0x303a40) on +48/+52/+58. The
+ * chosen address and peer fields go to the parameter block (+0x54..+96),
+ * whose flags +0x50 get bit 0, bit 1 for a random address and bit 3 for a
+ * non-zero peer type; the flags are returned. */
+extern uint32_t opencfw_em9305_radio_peer_pair_303a40(uint32_t,uint32_t,uint32_t,uintptr_t);
+
+uint32_t opencfw_em9305_child_318440(uintptr_t link, uintptr_t params, uintptr_t request)
+{
+    volatile uint8_t *own_type = (volatile uint8_t *)(uintptr_t)0x805be2u;
+    volatile uint32_t *own_address = (volatile uint32_t *)(uintptr_t)0x805be4u;
+    uint32_t type = *(volatile uint8_t *)(request + 57u);
+    uint32_t low, high, random;
+    own_address[1] = 0u;
+    own_address[0] = 0u;
+    *own_type = (uint8_t)(type & ~2u);
+    if ((type & ~2u) == 1u && *(volatile uint8_t *)(request + 4u) != 0u) {
+        high = *(volatile uint32_t *)(request + 12u);
+        low = *(volatile uint32_t *)(request + 8u);
+        *(volatile uint8_t *)(link + 2u) = 1u;
+        *(volatile uint8_t *)(request + 3u) = 0u;
+        random = 1u;
+    } else {
+        high = *(volatile uint32_t *)(uintptr_t)0x805b44u;
+        low = *(volatile uint32_t *)(uintptr_t)0x805b40u;
+        *(volatile uint8_t *)(link + 2u) = 0u;
+        random = 0u;
+    }
+    *(volatile uint32_t *)(request + 20u) = high;
+    *(volatile uint32_t *)(request + 16u) = low;
+    if ((type & 2u) != 0u) {
+        uint32_t pair[2];
+        if (opencfw_em9305_radio_peer_pair_303a40(*(volatile uint8_t *)(request + 58u),
+                                                  *(volatile uint32_t *)(request + 48u),
+                                                  *(volatile uint32_t *)(request + 52u),
+                                                  (uintptr_t)pair) != 0u) {
+            high = pair[1];
+            low = pair[0];
+            uint32_t resolved_type = *(volatile uint8_t *)(request + 57u);
+            random = 1u;
+            *(volatile uint8_t *)(link + 2u) = 1u;
+            *(volatile uint32_t *)(request + 20u) = high;
+            *(volatile uint32_t *)(request + 16u) = low;
+            own_address[1] = high;
+            own_address[0] = low;
+            *own_type = (uint8_t)resolved_type;
+        } else {
+            high = *(volatile uint32_t *)(request + 20u);
+            low = *(volatile uint32_t *)(request + 16u);
+            random = *(volatile uint8_t *)(link + 2u);
+        }
+    }
+    uint32_t flags = *(volatile uint32_t *)(params + 0x50u);
+    uint32_t peer_type = *(volatile uint8_t *)(request + 58u);
+    uint32_t peer_high = *(volatile uint32_t *)(request + 52u);
+    uint32_t peer_low = *(volatile uint32_t *)(request + 48u);
+    if (random != 0u) flags |= 2u;
+    *(volatile uint32_t *)(params + 0x54u) = low;
+    *(volatile uint32_t *)(params + 0x58u) = high;
+    *(volatile uint32_t *)(params + 96u) = peer_high;
+    *(volatile uint32_t *)(params + 0x5cu) = peer_low;
+    *(volatile uint32_t *)(params + 0x50u) = flags | 1u;
+    if (peer_type == 0u) return flags | 1u;
+    *(volatile uint32_t *)(params + 0x50u) = flags | 9u;
+    return flags | 9u;
+}

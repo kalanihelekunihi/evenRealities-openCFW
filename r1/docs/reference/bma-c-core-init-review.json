@@ -1,0 +1,87 @@
+{
+  "cases": 2048,
+  "passed": 2048,
+  "failures": [],
+  "direct_cases": 1024,
+  "combined_cases": 1024,
+  "stock_entry": "0x5447e",
+  "stock_body_bytes": 74,
+  "source_body_bytes": 84,
+  "outer_source_body_bytes": 62,
+  "callback_stack_depth_pairs": [
+    [
+      [],
+      []
+    ],
+    [
+      [
+        -40
+      ],
+      [
+        -32
+      ]
+    ],
+    [
+      [
+        -40,
+        -40
+      ],
+      [
+        -32,
+        -32
+      ]
+    ],
+    [
+      [
+        -24
+      ],
+      [
+        -16
+      ]
+    ],
+    [
+      [
+        -24,
+        -24
+      ],
+      [
+        -16,
+        -16
+      ]
+    ]
+  ],
+  "unchanged_functions": [
+    "r1_bma456w_configure_boundary"
+  ],
+  "report": "build/sources-goal-r1-bma-core-init/report.json",
+  "report_sha256": "71ad0f9cec10f7355c2ba0a330b5a0d0534fc97940d92350208245cd8b9fe3b4",
+  "source_sha256": "e1a7c168098531970fd80b8b4aea6ed1d92cc42133969a3a06052f27eb703a49",
+  "manifest_sha256": "be76bf00509f1551b53a08edbc5515ed3a3dcb9b1721ff4481fdf60b77d82eb8",
+  "stock_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "checker": {
+    "source": "r1/src/application/board/sensor-kernels/bma-interface/bosch-null-check.c",
+    "source_sha256": "4b285adf623cb05f1e83b83b392405f6bcfb44cc48467912644cc02b2c9e5c71",
+    "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-bma-core-init/r1/r1-application/r1__src__application__board__sensor-kernels__bma-interface__bosch-null-check.c.o",
+    "object_sha256": "7c050e94c33dd881c326560a9dcc8119edc7542a7eed2bbd0fd448fef5fad023"
+  },
+  "native_span_sha256": "ea8b82b62151a6b6ce0ede71a8b1cc206ab9e4dd53969a94b1b45b480143382f",
+  "rea": {
+    "completed": true,
+    "procedure": "0x5447e",
+    "path": "build/goal-r1-bma-core-init/REA.json",
+    "sha256": "fd6e1e9c81d2aa3933b2cc468a1b83e803a5a64d1dad3c07deeae05e94c803e9",
+    "limitation": "Decompiler infers void return; observed native R0 status propagation is established by instructions and execution."
+  },
+  "probe_artifacts": {
+    "build/goal-r1-bma-core-init/verify.py": "c53be285ad36c98e90d5a64a23ed0f7eec8eecb8e7fe2c06f62b5b9ec5fe8069",
+    "build/goal-r1-bma-core-init/before.c": "846b618e4b82c413c4c3925b1abbe1b9b1235d501c0497ae5d1f969495427d94",
+    "build/goal-r1-bma-core-init/source.elf": "59f75fb2b4844dad7be0144dc54523382130f0c33f5263606e70c3e048d1ee76",
+    "build/goal-r1-bma-core-init/stock.elf": "740313e7faf9ed07181386862722e25b75cd7e9823a97ef1f09a3408bb0b5882",
+    "build/goal-r1-bma-core-init/rea-snapshot.json": "cb6a187b5f741392579d2af6664364f5e4f314b611f83913caf2d0f8f122dbec"
+  },
+  "limits": [
+    "Actual compiled device checker and outer initializer execute; register-read boundary is mocked and clobbers caller-saved registers.",
+    "Native zeroes two scratch bytes within saved-register words; only those output bytes and pointer distinction are reproduced, not surrounding private bytes.",
+    "Private frames differ; no physical bus operation, timing, complete fault-state, final firmware link, source qualification or byte-identity claim."
+  ]
+}

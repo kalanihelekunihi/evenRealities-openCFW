@@ -3,7 +3,7 @@
  * load/store sites. Logging and assertion failure paths remain oracle gates. */
 #include <stdint.h>
 
-extern void audio_uart_display_size_changed(void *); /* 0x440656 */
+extern void lv_obj_invalidate(void *); /* 0x440656 */
 extern uint32_t audio_uart_lv_image_source_type_488cb8(const void *);
 extern uint32_t audio_uart_lv_image_header_488f6a(const void *, void *);
 extern void audio_uart_lv_heap_free(void *); /* 0x44f758 */
@@ -16,7 +16,7 @@ extern void audio_uart_page_event_calculate_489546(void *, const char *,
 extern void audio_uart_page_relayout_43ffa0(void *); /* 0x43ffa0 */
 extern void audio_uart_lv_image_update_align_4992cc(void *);
 extern void audio_uart_lv_refresh_draw_452d42(void *);
-extern void audio_uart_lvgl_log(uint32_t, const char *, uint32_t,
+extern void lv_log_add(uint32_t, const char *, uint32_t,
     const char *, const char *, ...);
 extern int32_t audio_uart_lv_snprintf_483fd0(char *, uint32_t, const char *, ...);
 
@@ -35,17 +35,17 @@ static void put32(uint8_t *p, uint32_t value) {
 
 void audio_uart_page_498680(void *object, const void *source) {
     if (object == 0) {
-        audio_uart_lvgl_log(3u, source_path, 0x96u, function,
+        lv_log_add(3u, source_path, 0x96u, function,
             "Asserted at expression: %s (%s)", "obj != NULL", "NULL pointer");
         for (;;) *(volatile uint32_t *)(uintptr_t)UINT32_MAX = 0u;
     }
     uint8_t *image = (uint8_t *)object;
-    audio_uart_display_size_changed(object);
+    lv_obj_invalidate(object);
     uint32_t type = (uint8_t)audio_uart_lv_image_source_type_488cb8(source);
     uint32_t old_type = get32(image + 0x58u) & 3u;
     if (type == 3u) {
         if (source != 0)
-            audio_uart_lvgl_log(2u, source_path, 0xafu, function,
+            lv_log_add(2u, source_path, 0xafu, function,
                 "unknown image type");
         if (old_type == 1u || old_type == 2u)
             audio_uart_lv_heap_free((void *)(uintptr_t)get32(image + 0x2cu));
@@ -54,7 +54,11 @@ void audio_uart_page_498680(void *object, const void *source) {
         return;
     }
 
-    uint32_t header[2] = {0u, 0u};
+    /* Fix 57: lv_image_decoder_get_info (0x488f6a) writes a full 12-byte
+     * lv_image_header_t (magic/cf/flags, w/h, stride/reserved); stock 0x498680
+     * gives it sp+12..sp+32. An 8-byte buffer let the stride word overwrite the
+     * caller's saved r4 (sim62 h28: r4 0x2005de38 -> 0x18). */
+    uint32_t header[3] = {0u, 0u, 0u};
     if ((uint8_t)audio_uart_lv_image_header_488f6a(source, header) != 1u) {
         char formatted[24];
         const char *description = (const char *)source;
@@ -63,7 +67,7 @@ void audio_uart_page_498680(void *object, const void *source) {
                                                   "%p", source);
             description = formatted;
         }
-        audio_uart_lvgl_log(2u, source_path, 0xbeu, function,
+        lv_log_add(2u, source_path, 0xbeu, function,
             "failed to get image info: %s", description);
         return;
     }
@@ -73,7 +77,7 @@ void audio_uart_page_498680(void *object, const void *source) {
             const uint8_t *draw_buffer = (const uint8_t *)source;
             if (get32(draw_buffer + 20u) == 0u ||
                 get32(draw_buffer + 24u) == 0u) {
-                audio_uart_lvgl_log(3u, source_path, 0xc9u, function,
+                lv_log_add(3u, source_path, 0xc9u, function,
                     "Invalid draw buffer, unaligned_data: %p, handlers: %p",
                     (void *)(uintptr_t)get32(draw_buffer + 20u),
                     (void *)(uintptr_t)get32(draw_buffer + 24u));
@@ -90,7 +94,7 @@ void audio_uart_page_498680(void *object, const void *source) {
                 get32(image + 0x2cu) : 0u;
             char *copy = audio_uart_font_path_duplicate((const char *)source);
             if (copy == 0) {
-                audio_uart_lvgl_log(3u, source_path, 0xdfu, function,
+                lv_log_add(3u, source_path, 0xdfu, function,
                     "Asserted at expression: %s (%s)", "new_str != NULL",
                     "Out of memory");
                 for (;;) *(volatile uint32_t *)(uintptr_t)UINT32_MAX = 0u;
@@ -122,5 +126,5 @@ void audio_uart_page_498680(void *object, const void *source) {
     if (get32(image + 0x44u) != 0u || get32(image + 0x48u) != 256u ||
         get32(image + 0x4cu) != 256u)
         audio_uart_lv_refresh_draw_452d42(object);
-    audio_uart_display_size_changed(object);
+    lv_obj_invalidate(object);
 }

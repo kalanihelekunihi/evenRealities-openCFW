@@ -124,3 +124,15 @@ uint32_t clock_release(uint32_t clock_id_register, uint32_t user_id_register)
     default: return 6u;
     }
 }
+
+/* AmbiqSuite 5.1.0 am_hal_clkmgr.c names (stock 0x4222f0 / 0x422364), used by
+ * the upstream am_hal_mspi.c. */
+uint32_t am_hal_clkmgr_clock_request(uint32_t clock_id_register,
+                                     uint32_t user_id_register)
+    __attribute__((alias("clock_request")));
+uint32_t am_hal_clkmgr_clock_release(uint32_t clock_id_register,
+                                     uint32_t user_id_register)
+    __attribute__((alias("clock_release")));
+
+/* Stock entry names that branch straight to the provider above. */
+__typeof__(clock_request) opencfw_bl_clock_request __attribute__((alias("clock_request")));

@@ -1,0 +1,127 @@
+{
+  "status": "experimental_not_integrated",
+  "stock_entry": "0x883d4",
+  "stock_size": 26,
+  "direct_replay": {
+    "pairs": 2056,
+    "faults": 7,
+    "independent_byte_cases": 2048,
+    "provider_depths": [
+      8,
+      0
+    ],
+    "digest": "9f85173b1280c18651cef17de5f01e1b9231b8182b4f8b537f628dbb50975804",
+    "limits": [
+      "Stock EABI clear executes on both paths; private frame writes excluded",
+      "Raw R0 checked for selected compiled void routine, not asserted as a portable C return contract",
+      "No physical/final source-only link or byte identity proof"
+    ]
+  },
+  "negative_controls": [
+    {
+      "name": "short-first-clear",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "short-second-clear",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "wrong-second-offset",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "reverse-clear-order",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "merged-clear-call",
+      "compiled": true,
+      "rejected": true
+    }
+  ],
+  "respiratory_C_helpers": {
+    "provider_modes": {
+      "optical": "modeled",
+      "clear_two": "C",
+      "history_statistics": "C"
+    },
+    "linked_C_helpers": {
+      "build/goal-r1-gomore-clear-two-c/candidate.o": "bb1d5a775793452e35a72d97a3ec7505701e76d6fca9a910a1d56fcc58eb8ff6",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-respiratory-stats-c/r1/r1-application/r1__src__application__runtime__native_gomore_history_record.c.o": "06fe545b53a313ae6d990af2502d68c5b01b1c319c447b65b18696d44305ae01",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-respiratory-stats-c/r1/r1-application/r1__src__application__runtime__native_gomore_respiratory_stats.c.o": "5d6c01db06c9d9f9ee5240e8bb894fab474414ec46e86d03d122cd34b9e65288"
+    },
+    "pairs": 2792,
+    "estimator_frame_offsets": {
+      "stock": [
+        [
+          -80,
+          -84,
+          -96
+        ]
+      ],
+      "C": [
+        [
+          -80,
+          -84,
+          -96
+        ]
+      ]
+    },
+    "digest": "f8833dca1b489ee83ba539257122030d1f52424dfceff711df40bd4d1770a42e",
+    "limits": [
+      "Actual native versus C respiratory root; optical estimator modeled",
+      "Helper execution mode and C object hashes are recorded; software FP and EABI byte-clear execute natively",
+      "Numeric estimator scratch pointers and 96-byte frame depth compared without normalization",
+      "No physical/full source graph or byte identity proof"
+    ]
+  },
+  "artifacts": {
+    "build/goal-r1-gomore-clear-two-c/candidate.c": "27135aa2a646f47ec94602a7abaa16e3a625ccd0cb5e9a2c16563222da431846",
+    "build/goal-r1-gomore-clear-two-c/candidate.o": "bb1d5a775793452e35a72d97a3ec7505701e76d6fca9a910a1d56fcc58eb8ff6",
+    "build/goal-r1-gomore-clear-two-c/compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/goal-r1-gomore-clear-two-c/verify.py": "de4227ffe3facb5d4095a0a7c43cfd9c9d3363ea0af3ed8737a36a9b9ed35034",
+    "build/goal-r1-gomore-clear-two-c/results.json": "b5228421c658a92635c48e2b637ee1aef7dee90eb42802d7cd7dbad5dae32a84",
+    "build/goal-r1-gomore-clear-two-c/negative.py": "f6537327eb165140df61e6ee2f432b59943961755bc51a0e3b6a79ab7bee1e88",
+    "build/goal-r1-gomore-clear-two-c/negative-results.json": "2f48fd4a4f78c53986ecd88e53b17e08c45b266597183f300bd89c2a26a720a3",
+    "build/goal-r1-gomore-clear-two-c/rea.json": "2ea0cc9ae5a4d83c1d0dfc55fd6074dc6bf2bdf7e8ab75574d0ec723d842f34e",
+    "build/goal-r1-gomore-clear-two-c/respiratory.log": "52a862a551d4fd9ce4f2d97e502da6003726ad16f22936a9a3589cd0e653466c",
+    "build/goal-r1-gomore-clear-two-c/respiratory-results.json": "9b44e22ac58e14bfe7111eb435d27203124d583876b7ee387e0ba78b18263306",
+    "build/goal-r1-gomore-clear-two-c/respiratory-c-leaves.log": "52a862a551d4fd9ce4f2d97e502da6003726ad16f22936a9a3589cd0e653466c",
+    "build/goal-r1-gomore-clear-two-c/respiratory-c-leaves-results.json": "12468b734b045713b9bdd6f76f774f9c75d3346adf22b33ad81fd43c0f1c0e9d",
+    "build/goal-r1-gomore-clear-two-c/short-first-clear.c": "6624f57614b08f9e227219fbf47a317b5f76a7685ba8b1ed08964758377f7768",
+    "build/goal-r1-gomore-clear-two-c/short-first-clear.o": "7c940933e8cd518dfa786628810b4509aaeb1957eecc195eef100ca30fa75b19",
+    "build/goal-r1-gomore-clear-two-c/short-first-clear.compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/goal-r1-gomore-clear-two-c/short-first-clear.log": "4588bfb38432dc73322db093b3796e60cb29929776eca09413fd8a5341273a6c",
+    "build/goal-r1-gomore-clear-two-c/short-second-clear.c": "7251ce68a2859cfbaf27bbfc2c58d62a57382b42316af024f932c4bbb6634078",
+    "build/goal-r1-gomore-clear-two-c/short-second-clear.o": "8e91dbeab02693a9221aea8265e183e497e81d647a930dc2d3434bb68609ec4c",
+    "build/goal-r1-gomore-clear-two-c/short-second-clear.compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/goal-r1-gomore-clear-two-c/short-second-clear.log": "03f974777d34b9d91625570b5eda3768fa86b93e4de5a8c104982addf398210f",
+    "build/goal-r1-gomore-clear-two-c/wrong-second-offset.c": "5fc27102d1bc5aded7ae6b10c1f0ad2b6f4de5179ea7fee3e532cef2850e2a56",
+    "build/goal-r1-gomore-clear-two-c/wrong-second-offset.o": "05ea7b248b8972f83cc1f6c56ebce4157e246729c6c6f69954e6a7df05a5bce9",
+    "build/goal-r1-gomore-clear-two-c/wrong-second-offset.compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/goal-r1-gomore-clear-two-c/wrong-second-offset.log": "03f974777d34b9d91625570b5eda3768fa86b93e4de5a8c104982addf398210f",
+    "build/goal-r1-gomore-clear-two-c/reverse-clear-order.c": "d275918eaafa56a63fb02b07ef0e01357e4b6d0b0ae077cf7112bfb469f494b6",
+    "build/goal-r1-gomore-clear-two-c/reverse-clear-order.o": "47c955205f4e0e4c60f4c0a2b4a4514c418b11dde8e24b85f4c57d2795069a98",
+    "build/goal-r1-gomore-clear-two-c/reverse-clear-order.compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/goal-r1-gomore-clear-two-c/reverse-clear-order.log": "03f974777d34b9d91625570b5eda3768fa86b93e4de5a8c104982addf398210f",
+    "build/goal-r1-gomore-clear-two-c/merged-clear-call.c": "ec046a54bef4d9e97d056cd0bd34ad7360b075f08d631eccc906c8537bb134bb",
+    "build/goal-r1-gomore-clear-two-c/merged-clear-call.o": "3628d5b32b87810c1a3ada0e76ed0ff381f3a562289829c06214f6b6ece98f4a",
+    "build/goal-r1-gomore-clear-two-c/merged-clear-call.compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/goal-r1-gomore-clear-two-c/merged-clear-call.log": "4588bfb38432dc73322db093b3796e60cb29929776eca09413fd8a5341273a6c"
+  },
+  "respiratory_probe": {
+    "path": "build/goal-r1-gomore-respiratory-c/verify.py",
+    "sha256": "7143c0458b21800e078bf1eee6e76096f0a195a9b9857149b510829b4b14b2dc"
+  },
+  "remaining": [
+    "Consolidate generic clear-two owner and guarded wrapper",
+    "Promote with respiratory root and coordinator frame reservation",
+    "Normal production build/replay and qualification",
+    "Optical estimator and remaining stage providers"
+  ]
+}

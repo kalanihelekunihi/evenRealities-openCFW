@@ -1,0 +1,19 @@
+# Packet-flush paths in C
+
+The four flush bodies at `0x4011c`, `0x442f4`, `0x4101c` and `0x3c578` now have ordinary C providers. Notification stages and offline merges call their typed interfaces. Existing cache accessors and builder resets are reused; no packet data is pulled through from stock. The [REA call-site bytes](health-packet-flush-c-rea.json) confirm the six-argument post boundary, including offset, timestamp/context word and auxiliary pointer.
+
+HR/SpO2 accept null builders; HRV/activity retain the native mapped-builder precondition. Empty builders return immediately. HR/SpO2/HRV reject future maximum timestamp or day; activity rejects only a future maximum timestamp, preserving stock's distinction. Future rejection resets the builder. Main-packet allocation failure logs and returns without resetting it.
+
+Packet headers are 12 bytes for HR/SpO2, 13 for HRV and seven for activity. Flagged rows compact in slot order using four-byte or seven-byte copies. Headers preserve the native unaligned offset/day fields and live-cache latest value/timestamp widths, including null-cache fallback for the three applicable formats. Declared size captures the pre-allocation count while header fields and row flags reload afterward, as in stock.
+
+An optional eight-byte acknowledgement context is allocated when the preserved builder timestamp is nonzero. Only its flag byte and maximum-timestamp word are initialized; padding is not invented. Allocation failure logs but still posts with a null auxiliary pointer. The sync-field getter runs before preserved offset/timestamp reloads for posting. On either post success or failure, the main packet is freed and the builder resets. The auxiliary pointer passes onward and is not freed locally, matching the stock caller; its final ownership remains part of the unresolved event-post providers.
+
+The [machine-readable receipt](health-packet-flush-c-review.json) records 870 direct stock/C comparisons and 370 source post calls. Cases cover packing, sparse/full flags, spare declared capacity, future boundaries, allocation and post failures, cache absence, auxiliary padding, zero-extended offset, and controlled provider-time field mutations. Actual C flush/reset bodies execute; clocks/logging, allocation, cache getters, sync field and event posting are modeled in the direct suite.
+
+Another 612 merge-to-flush cases execute actual C queue owners, empty/reset/enqueue/consume functions, four merges, cache getters and all four flush bodies. These include 260 actual flush calls. Only allocation/free, clock/logging, sync field and event-post providers remain modeled. Physical transmission and event-post internals are not established.
+
+Eight separately compiled defects fail runtime assertions: wrong future equality, adding a future-day filter to activity, resetting on main allocation failure, wrong HRV header size, lost row compaction, wrong auxiliary timestamp, freeing transferred context and omitted final reset. The initial and reviewed flush objects are byte-identical.
+
+The normal build compiles/composes 668 application and 74 bootloader units with no failures or duplicate strong symbols; `make sources-check` passes. Four flush imports resolve while five lower imports appear, moving application imports from 143 to 144; bootloader imports remain 34. The new imports are `r1_sync_block_field_get` and event-post modules 1, 2, 4 and 5. Their bodies are not supplied by stubs in the normal build.
+
+All 739 other prior objects remain identical. The two changed caller/merge objects retain all allocated instruction/data bytes, with exactly twelve intended relocation-name replacements. No exact source-plan selection or complete-image claim is added. Tests require mapped builders and sufficient allocation capacity; asynchronous IRQ/scheduler behavior, event ownership, physical persistence/transmission and complete firmware linkage remain unfinished or unverified.

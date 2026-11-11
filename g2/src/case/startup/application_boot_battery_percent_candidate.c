@@ -15,3 +15,5 @@ int32_t case_boot_battery_percent(uint32_t *out)
     *out=percent;
     return 0;
 }
+/* Dedup (0x08009ebc): case_init_read_product_byte (was startup/application_init_product_measure_candidate.c). */
+__typeof__(case_boot_battery_percent) case_init_read_product_byte __attribute__((alias("case_boot_battery_percent")));

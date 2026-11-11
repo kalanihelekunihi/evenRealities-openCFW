@@ -27,8 +27,11 @@ uint8_t audio_terminal_state_is_processing(uint32_t state) {
 /* Stock 0x59734A (td_state_ptr_alias2) */
 uint8_t *audio_td_state_ptr_alias2(void) {return audio_td_state;}
 
+/* Stock 0x5973DC (td_counter_b_get) */
 uint32_t audio_td_counter_b_get(void) {
     const uint8_t *p=audio_td_state+0x9564u;
     return (uint32_t)p[0]|((uint32_t)p[1]<<8)|
            ((uint32_t)p[2]<<16)|((uint32_t)p[3]<<24);
 }
+__typeof__(audio_td_counter_b_get) audio_terminal_counter_b_get_5973dc
+    __attribute__((alias("audio_td_counter_b_get")));

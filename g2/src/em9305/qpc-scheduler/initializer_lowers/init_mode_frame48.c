@@ -1,50 +1,74 @@
 #include <stdint.h>
 
-/* Mutually exclusive source alternative to init_mode_event_323028.c.
- * This native-frame ARC wrapper preserves all six incoming caller-stack
- * words, the 0x30-byte local frame, and untouched record bytes. It uses
- * relocations to selected C memset/address-writer/LL-callback providers. */
-extern uint32_t opencfw_em9305_mode_event_323028(
-    uint32_t,uint32_t,uintptr_t,uint32_t,uint32_t,uint32_t,uint32_t,
-    uint32_t,uint32_t,uint32_t,uint32_t,uint32_t,uint32_t,uint32_t);
+/* Native 0x323028..0x3230de: report the LL connection-complete event (code
+ * 5) with status, role, peer address type and addresses (peer a4/a5, local
+ * RPA s0/s1, peer RPA a6/a7) and, for a known record, its connection
+ * parameters (+0x20, +0x24, +43). After a successful completion (status 0)
+ * with feature bit 6 of 0x805a95 set, LL event 33 follows with byte s3.
+ * Returns the last event result, or 33 when no follow-up is sent. */
 extern void *opencfw_em9305_memset(void *,uint32_t,uint32_t);
-extern uintptr_t opencfw_em9305_radio_address_write_3045e8(
-    uintptr_t,uint32_t,uint32_t);
+extern uintptr_t opencfw_em9305_radio_address_write_3045e8(uintptr_t,uint32_t,uint32_t);
 extern uint32_t opencfw_em9305_ll_event_callback_30e79c(uintptr_t);
-__asm__(
-".text\n.balign 4\n.global opencfw_em9305_mode_event_323028\n"
-".type opencfw_em9305_mode_event_323028,@function\n"
-"opencfw_em9305_mode_event_323028:\n"
-"enter_s [r13-r21,fp,blink]\nsub_s sp,sp,0x30\n"
-"ld_s r14,[sp,0x64]\nmov_s r13,r2\nmov_s r15,r0\n"
-"stb_s r1,[sp,8]\nsth r0,[sp,6]\nsth r0,[sp]\n"
-"add r0,sp,10\nmov r1,0\nmov r2,25\n"
-"mov r18,r7\nmov r19,r6\nmov r20,r5\nmov r21,r4\n"
-"stb r3,[sp,9]\nstb 5,[sp,2]\nstb_s r14,[sp,4]\n"
-"bl.d opencfw_em9305_memset\nstb r14,[sp,3]\n"
-"ld_s r1,[sp,0x70]\nld_s r0,[sp,0x6c]\n"
-"ld r16,[sp,96]\nld r17,[sp,92]\n"
-"sth r1,[sp,36]\nstb r0,[sp,35]\n"
-"breq_s r13,0,.Lmode323028_addresses\n"
-"ld_s r2,[r13,0x20]\nldh_s r1,[r13,0x24]\n"
-"ldb r0,[r13,43]\nst_s r2,[sp,16]\n"
-"sth r1,[sp,20]\nstb r0,[sp,22]\n"
-".Lmode323028_addresses:\n"
-"add r0,sp,10\nmov_s r1,r21\n"
-"bl.d opencfw_em9305_radio_address_write_3045e8\nmov_s r2,r20\n"
-"add r0,sp,29\nmov_s r1,r19\n"
-"bl.d opencfw_em9305_radio_address_write_3045e8\nmov_s r2,r18\n"
-"add r0,sp,23\nmov_s r1,r17\n"
-"bl.d opencfw_em9305_radio_address_write_3045e8\nmov_s r2,r16\n"
-"bl.d opencfw_em9305_ll_event_callback_30e79c\nmov_s r0,sp\n"
-"breq_s r14,0,.Lmode323028_flag\n"
-".Lmode323028_return:\nleave_s [r13-r21,fp,blink,pcl]\n"
-".Lmode323028_flag:\n"
-"mov r0,0x805a95\nldb_s r0,[r0]\n"
-"bbit0.d.t r0,6,.Lmode323028_return\nmov r0,33\n"
-"ld_s r1,[sp,0x68]\nmov_s r2,sp\n"
-"sth_s r0,[r2,42]\nadd r0,sp,40\n"
-"sth_s r15,[r2,44]\nsth_s r15,[r2,40]\n"
-"bl.d opencfw_em9305_ll_event_callback_30e79c\nstb r1,[sp,46]\n"
-"leave_s [r13-r21,fp,blink,pcl]\n"
-".size opencfw_em9305_mode_event_323028,.-opencfw_em9305_mode_event_323028\n");
+
+struct ll_connection_event {
+    uint16_t handle;
+    uint8_t code;
+    uint8_t status;
+    uint8_t status_again;
+    uint8_t reserved;
+    uint16_t handle_again;
+    uint8_t role;
+    uint8_t peer_type;
+    uint8_t peer_address[6];
+    uint32_t interval;
+    uint16_t latency;
+    uint8_t accuracy;
+    uint8_t local_rpa[6];
+    uint8_t peer_rpa[6];
+    uint8_t clock_accuracy;
+    uint16_t timeout;
+} __attribute__((aligned(4)));
+
+struct ll_event_33 {
+    uint16_t handle;
+    uint16_t code;
+    uint16_t handle_again;
+    uint8_t value;
+};
+
+uint32_t opencfw_em9305_mode_event_323028(uint32_t handle, uint32_t role, uintptr_t record,
+                                          uint32_t peer_type, uint32_t peer_low, uint32_t peer_high,
+                                          uint32_t peer_rpa_low, uint32_t peer_rpa_high,
+                                          uint32_t local_rpa_low, uint32_t local_rpa_high,
+                                          uint32_t status, uint32_t follow_up,
+                                          uint32_t clock_accuracy, uint32_t timeout)
+{
+    struct ll_connection_event event;
+    event.role = (uint8_t)role;
+    event.handle_again = (uint16_t)handle;
+    event.handle = (uint16_t)handle;
+    event.peer_type = (uint8_t)peer_type;
+    event.code = 5u;
+    event.status_again = (uint8_t)status;
+    event.status = (uint8_t)status;
+    (void)opencfw_em9305_memset(event.peer_address, 0u, 25u);
+    event.timeout = (uint16_t)timeout;
+    event.clock_accuracy = (uint8_t)clock_accuracy;
+    if (record != 0u) {
+        event.interval = *(volatile uint32_t *)(record + 0x20u);
+        event.latency = *(volatile uint16_t *)(record + 0x24u);
+        event.accuracy = *(volatile uint8_t *)(record + 43u);
+    }
+    (void)opencfw_em9305_radio_address_write_3045e8((uintptr_t)event.peer_address, peer_low, peer_high);
+    (void)opencfw_em9305_radio_address_write_3045e8((uintptr_t)event.peer_rpa, peer_rpa_low, peer_rpa_high);
+    (void)opencfw_em9305_radio_address_write_3045e8((uintptr_t)event.local_rpa, local_rpa_low, local_rpa_high);
+    uint32_t result = opencfw_em9305_ll_event_callback_30e79c((uintptr_t)&event);
+    if (status != 0u) return result;
+    if ((*(volatile uint8_t *)(uintptr_t)0x805a95u & 0x40u) == 0u) return 33u;
+    struct ll_event_33 follow;
+    follow.code = 33u;
+    follow.handle_again = (uint16_t)handle;
+    follow.handle = (uint16_t)handle;
+    follow.value = (uint8_t)follow_up;
+    return opencfw_em9305_ll_event_callback_30e79c((uintptr_t)&follow);
+}

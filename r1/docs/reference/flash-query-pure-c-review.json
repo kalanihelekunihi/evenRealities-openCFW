@@ -1,0 +1,120 @@
+{
+  "schema_version": 1,
+  "report": "build/sources-goal-r1-flash-query-pure-c-final/report.json",
+  "report_sha256": "6ed27839d965fb87777f53adf3b91fbdd688df6d8cf3b4773833ffacb70bcb20",
+  "manifest_sha256": "1931eabb7053c60df0282c35368aa8481a63982c6e3f5d41bf2c14088b71c79d",
+  "verification": {
+    "paired_cases": 1740,
+    "executions": 3480,
+    "groups": {
+      "path": 100,
+      "callback": 1280,
+      "query": 360
+    },
+    "source_report": "build/sources-goal-r1-flash-query-pure-c-final/report.json",
+    "C_query_calls_actual_C_callback_and_path": true,
+    "checks": [
+      "whole mode byte and non-dereferenced wrapping partition +4",
+      "ordered status-byte loads before conditional unaligned counter read/write",
+      "aliased record/context/count bytes and unsigned counter wrap",
+      "initialized status/count context and canonical callback execution",
+      "initialized callback iteration and uninitialized diagnostics",
+      "output guards, R0, SP, saved registers and masks"
+    ],
+    "limits": [
+      "Query iterator and printf are modeled; actual callback and path execute",
+      "No physical flash, asynchronous iteration or arbitrary invalid memory tested",
+      "Private frames and caller-clobbered registers/flags excluded"
+    ]
+  },
+  "integration": {
+    "paired_cases": 2016,
+    "executions": 4032,
+    "actual_iterator_traversal_leaves_counter_and_path": true,
+    "single_closed_sector_fully_populated_metadata_model": true,
+    "signed_forward_reverse_ranges_and_status_oracle": true,
+    "lock_unlock_and_lower_read_traces_match": true,
+    "lower_sector_tsl_reads_and_printf_modeled": true
+  },
+  "integration_group_counts": {
+    "initialized_actual_iterator": 1008,
+    "uninitialized_query": 1008
+  },
+  "defects": {
+    "initial-count": {
+      "compiled": true,
+      "behavior_rejected": true
+    },
+    "wrong-status": {
+      "compiled": true,
+      "behavior_rejected": true
+    },
+    "initialized-bit-only": {
+      "compiled": true,
+      "behavior_rejected": true
+    },
+    "reversed-range": {
+      "compiled": true,
+      "behavior_rejected": true
+    },
+    "stop-iteration": {
+      "compiled": true,
+      "behavior_rejected": true
+    }
+  },
+  "audit": {
+    "unchanged_prior_object_hashes": 797,
+    "changed_object_hashes": [
+      [
+        "r1-application",
+        "r1/src/application/runtime/native_flashdb_query_count.c"
+      ],
+      [
+        "r1-bootloader",
+        "{gen}/r1_startup_vectors.S"
+      ],
+      [
+        "r1-bootloader",
+        "{gen}/r1_uecc.c"
+      ]
+    ],
+    "generated_boot_crypto_and_vectors_allocated_bytes_and_relocations_unchanged": true,
+    "removed_application_imports": [],
+    "unchanged_query_function_bodies": [
+      "r1_fdb_native_db_path",
+      "r1_fdb_native_query_count_cb"
+    ]
+  },
+  "rea_bytes": {
+    "evidence_id": "ev_6aa4ba4d9d11cc1b5bdac4f725c0b993eddb53415348ed33ec153dd189dd4c4d",
+    "address": "0x63cb4",
+    "length": 152,
+    "matches_locked_raw": true,
+    "sha256": "ed7d4abb226cb6758d922551d202a87844636e8b6a646fff461e0ed020b4893c"
+  },
+  "strict_bootloader_link_report_sha256": "ccf9bcd393258dfc5f46de7f12f0114d213cbca5dd57cac435ef021199fb750c",
+  "evidence_files": {
+    "build/goal-r1-flash-query-pure-c/verify.py": "e818e0699be31dadcbdf6b9be0ea325208bb173d3eb8f7ce97b325f225f508f7",
+    "build/goal-r1-flash-query-pure-c/integration.py": "d5346508670758780363cb109a89ca3d794fc8f227e028681306e38f139f9685",
+    "build/goal-r1-flash-query-pure-c/defects.py": "00edc8d5eef6e219a9ba07c15c0d462ba4658ab940145c82e7bfa786e9269fa6",
+    "build/goal-r1-flash-query-pure-c/audit.py": "819f84bfa2695686d989258c97185f80e19a1baeccb241630ff98b22897db951",
+    "build/goal-r1-flash-query-pure-c/source.elf": "9c2a8ed4ffa4441444d09b3acd6416b356872d17215a9d351c1f87d83d7a6bf6",
+    "build/goal-r1-flash-query-pure-c/integration.elf": "9e3d196cd94056fdac5e53128782cdbb20741b5c520dff656a724ff47be8684e",
+    "build/goal-r1-flash-query-pure-c/verify-final.log": "177d7bfa414f079a215d95bba8b5cf29cb2d2583f6b515789d574211f7135f7a",
+    "build/goal-r1-flash-query-pure-c/integration-final.log": "6adf2e991de61c4e049bbb2577eb6ef74ff0fd9712a688859a6d89e744b1e016",
+    "build/goal-r1-flash-query-pure-c/defects-final.log": "221deadd4f43a7363b278b37c093b931f90fdfe7d842eab6e5216e5c807824cc",
+    "build/goal-r1-flash-query-pure-c/results.json": "b2a8e19b78d5fc7491fc149e7c8f8ad6ca72cd9bfbffc74c23e438a562ac6260",
+    "build/goal-r1-flash-query-pure-c/integration.json": "7dc0b5337785b81f6c16a28141449ca1b5a2d7ef9295c40ffe33119424f5ff10",
+    "build/goal-r1-flash-query-pure-c/defects.json": "1ac50aa8d8c338f06b54498d7085a7af4472ec2d1011e39b5e7a9f1ed13d0884",
+    "build/goal-r1-flash-query-pure-c/rea.json": "7d49461ca9ec320891708c29282b4a76befbde549edf5ddf5beddb9cb03ef729",
+    "build/goal-r1-flash-query-pure-c/previous.c": "6cd0d3d3a1e2c9ebbde2249ead5c4f628473bdccd544265476c573c62c02ff6a",
+    "build/goal-r1-flash-query-pure-c/sources-check.log": "7fdd3767a0eaab7b42e9bc800c6c284dda486cac1f67e2022c4dcc9b79aa1e67"
+  },
+  "source_plan_modified": false,
+  "limitations": [
+    "Focused iterator and printf modeled; integration executes actual iterator/traversal/counter/path with single closed sector and full metadata supplied by models.",
+    "Private frames and saved incidental R1/R2/R3 outputs excluded.",
+    "No physical flash, arbitrary fault/alias, concurrency, asynchronous callback or full application final-link proof.",
+    "Global check retains unrelated G2 manifest failure."
+  ]
+}

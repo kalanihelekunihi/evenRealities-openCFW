@@ -38,7 +38,7 @@ extern void audio_uart_nema_cl_submit_514cf2(uint32_t);
 extern void audio_uart_nema_cl_wait_514d00(uint32_t);
 extern void audio_uart_nema_cl_rewind_514384(uint32_t);
 extern void audio_uart_lv_image_decoder_close_48908c(void *);
-extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,
+extern void lv_log_add(uint32_t,const char *,uint32_t,
                                 const char *,const char *,...);
 
 static const char image_core_path[] =
@@ -57,7 +57,7 @@ static uint32_t image_core_pow2(uint32_t n) {
     return n!=0u && (n&(n-1u))==0u;
 }
 static void image_core_log(uint32_t severity,uint32_t line,const char *message) {
-    audio_uart_lvgl_log(severity,image_core_path,line,image_core_name,message);
+    lv_log_add(severity,image_core_path,line,image_core_name,message);
 }
 
 void audio_uart_ambiq_draw_image_core_53f548(

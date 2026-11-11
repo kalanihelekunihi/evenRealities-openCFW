@@ -18,3 +18,8 @@ uint32_t opencfw_boot_device_mode_wait(uint32_t mode, uint32_t event,
                                                 result);
     return 6u;
 }
+
+/* AmbiqSuite am_hal_info1_read name (stock 0x421548), used by upstream am_hal_pwrctrl.c. */
+uint32_t am_hal_info1_read(uint32_t mode, uint32_t event, uint32_t flags,
+                           volatile uint32_t *result)
+    __attribute__((alias("opencfw_boot_device_mode_wait")));

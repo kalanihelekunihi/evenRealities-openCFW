@@ -1,109 +1,46 @@
-/* Full native formatter; genuine child symbols and ARC DSP/loop ABI. */
-__asm__(
-    ".text\n"
-    ".balign 4\n"
-    ".global opencfw_em9305_dispatch_child_322e80\n"
-    ".type opencfw_em9305_dispatch_child_322e80,@function\n"
-    "opencfw_em9305_dispatch_child_322e80:\n"
-    "L322e80:\n"
-    "enter_s [r13-r15,fp,blink]\n"
-    "L322e82:\n"
-    "sub_s sp,sp,0x20\n"
-    "L322e84:\n"
-    "mov_s r14,r1\n"
-    "L322e86:\n"
-    "mov_s r13,r0\n"
-    "L322e88:\n"
-    "add_s r0,sp,0x4\n"
-    "L322e8a:\n"
-    "mov_s r1,0\n"
-    "L322e8c:\n"
-    "bl.d opencfw_em9305_memset\n"
-    "L322e90:\n"
-    "mov_s r2,0x1c\n"
-    "L322e92:\n"
-    "ldb_s r0,[r13,0x2]\n"
-    "L322e94:\n"
-    "mov_s r1,0x2c\n"
-    "L322e96:\n"
-    "add r11,sp,0\n"
-    "L322e9a:\n"
-    "stb_s r14,[sp,0x4]\n"
-    "L322e9c:\n"
-    "stb r14,[sp,3]\n"
-    "L322ea0:\n"
-    "stb r1,[sp,2]\n"
-    "L322ea4:\n"
-    "stb r0,[sp,5]\n"
-    "L322ea8:\n"
-    "sth r0,[sp]\n"
-    "L322eac:\n"
-    "brne_s r14,0,L322efe\n"
-    "L322eae:\n"
-    "ld_s r15,[r13,0x10]\n"
-    "L322eb0:\n"
-    "ld_s r1,[r13,0x2c]\n"
-    "L322eb2:\n"
-    "ldb_s r2,[r13,0x19]\n"
-    "L322eb4:\n"
-    "mpydu r4,r15,0x1a36e3\n"
-    "L322ebc:\n"
-    "ldb_s r3,[r13,0x18]\n"
-    "L322ebe:\n"
-    "ldh_s r12,[r13,0x1a]\n"
-    "L322ec0:\n"
-    "ldh_s r14,[r13,0x4]\n"
-    "L322ec2:\n"
-    "mov lp_count,0x4\n"
-    "L322ec6:\n"
-    "st_s r1,[sp,0x8]\n"
-    "L322ec8:\n"
-    "stb_s r2,[sp,0xc]\n"
-    "L322eca:\n"
-    "asl r2,r5\n"
-    "L322ece:\n"
-    "lsr r1,r4,0x1f\n"
-    "L322ed2:\n"
-    "mov_s r0,0\n"
-    "L322ed4:\n"
-    "add_s r13,r13,0x38\n"
-    "L322ed6:\n"
-    "or_s r1,r1,r2\n"
-    "L322ed8:\n"
-    "stb r3,[sp,13]\n"
-    "L322edc:\n"
-    "mov_s r2,sp\n"
-    "L322ede:\n"
-    "sth_s r12,[r2,0xe]\n"
-    "L322ee0:\n"
-    "sth_s r14,[r2,0x10]\n"
-    "L322ee2:\n"
-    "sth_s r1,[r2,0x12]\n"
-    "L322ee4:\n"
-    "lp L322efc\n"
-    "L322ee8:\n"
-    "ld.ab r1,[r13,4]\n"
-    "L322eec:\n"
-    "breq_s r1,0,L322efa\n"
-    "L322eee:\n"
-    "ldh_s r2,[r1,0x2]\n"
-    "L322ef0:\n"
-    "extb_s r1,r0\n"
-    "L322ef2:\n"
-    "add_s r0,r0,1\n"
-    "L322ef4:\n"
-    "add1 r1,r11,r1\n"
-    "L322ef8:\n"
-    "sth_s r2,[r1,0x16]\n"
-    "L322efa:\n"
-    "nop_s\n"
-    "L322efc:\n"
-    "stb_s r0,[sp,0x14]\n"
-    "L322efe:\n"
-    "bl.d opencfw_em9305_ll_event_callback_30e79c\n"
-    "L322f02:\n"
-    "add_s r0,sp,0\n"
-    "L322f04:\n"
-    "leave_s [r13-r15,fp,blink,pcl]\n"
-    ".size opencfw_em9305_dispatch_child_322e80,.-opencfw_em9305_dispatch_child_322e80\n"
-);
+#include <stdint.h>
+
+/* Native 0x322e80..0x322f06: report LL event 0x2c (BIG sync established)
+ * for a BIG record: {u16 handle, 0x2c, status, status, handle, ...}. On
+ * success it adds the transport latency (+44), NSE/BN (+25/+24), max PDU
+ * (+26), ISO interval (+4), the scaled sync delay (+16 x 0x1a36e3 / 2^31)
+ * and the handles (+2 of each of the four BIS objects at +56..) with
+ * their count. */
+extern void *opencfw_em9305_memset(void *destination, uint32_t value, uint32_t bytes);
+extern uint32_t opencfw_em9305_ll_event_callback_30e79c(uintptr_t event);
+
+uint32_t opencfw_em9305_dispatch_child_322e80(uintptr_t big, uint32_t status)
+{
+    uint8_t event[32] __attribute__((aligned(4)));
+    (void)opencfw_em9305_memset(&event[4],0u,0x1cu);
+    uint32_t handle=*(volatile uint8_t *)(big+2u);
+    event[4]=(uint8_t)status;
+    event[3]=(uint8_t)status;
+    event[2]=0x2cu;
+    event[5]=(uint8_t)handle;
+    *(uint16_t *)&event[0]=(uint16_t)handle;
+    if(status==0u){
+        uint32_t delay=*(volatile uint32_t *)(big+16u);
+        uint32_t latency=*(volatile uint32_t *)(big+44u);
+        uint32_t nse=*(volatile uint8_t *)(big+25u);
+        uint32_t bn=*(volatile uint8_t *)(big+24u);
+        uint32_t max_pdu=*(volatile uint16_t *)(big+26u);
+        uint32_t interval=*(volatile uint16_t *)(big+4u);
+        uint32_t scaled=(uint32_t)(((uint64_t)delay*0x1a36e3u)>>31);
+        *(uint32_t *)&event[8]=latency;
+        event[12]=(uint8_t)nse;
+        event[13]=(uint8_t)bn;
+        *(uint16_t *)&event[14]=(uint16_t)max_pdu;
+        *(uint16_t *)&event[16]=(uint16_t)interval;
+        *(uint16_t *)&event[18]=(uint16_t)scaled;
+        uint32_t count=0u;
+        for(uint32_t index=0u;index<4u;++index){
+            uintptr_t bis=*(volatile uint32_t *)(big+56u+index*4u);
+            if(bis==0u)continue;
+            *(uint16_t *)&event[22u+(uint8_t)count*2u]=*(volatile uint16_t *)(bis+2u);
+            ++count;
+        }
+        event[20]=(uint8_t)count;
+    }
+    return opencfw_em9305_ll_event_callback_30e79c((uintptr_t)event);
+}

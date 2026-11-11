@@ -1,0 +1,123 @@
+{
+  "cases": 3168,
+  "passed": 3168,
+  "source_sha256": "cc6aaf02a4d0534e07f92cd08808d16553c090e803ff2e203ffaba2e818d594b",
+  "report": "build/sources-goal-r1-twi-packet-c/report.json",
+  "source_bridge_sizes": {
+    "r1_hw_twi1_read": 10,
+    "r1_hw_twi1_write": 10,
+    "r1_hw_twi0": 0,
+    "r1_hw_twi1": 0,
+    "r1_hw_twi0_read": 10,
+    "r1_hw_twi0_write": 10
+  },
+  "old_bridge_sizes": {
+    "r1_hw_twi1_read": 38,
+    "r1_hw_twi1_write": 76,
+    "r1_hw_twi0": 0,
+    "r1_hw_twi1": 0,
+    "r1_hw_twi0_read": 38,
+    "r1_hw_twi0_write": 76
+  },
+  "application_imports": 211,
+  "bootloader_imports": 34,
+  "other_units_unchanged": 561,
+  "limitations": [
+    "Transport and wait providers modeled; physical transfers and driver IRQ behavior unverified",
+    "Private stack placement below explicit native saved frame differs",
+    "Not byte qualified; source plan unchanged"
+  ],
+  "integrated": {
+    "cases": 2112,
+    "passed": 2112,
+    "source_sha256": "cc6aaf02a4d0534e07f92cd08808d16553c090e803ff2e203ffaba2e818d594b",
+    "report": "build/sources-goal-r1-twi-packet-c/report.json",
+    "actual_register_adapters": true,
+    "source_bridge_sizes": {
+      "r1_hw_twi1_read": 10,
+      "r1_hw_twi1_write": 10,
+      "r1_hw_twi0": 0,
+      "r1_hw_twi1": 0,
+      "r1_hw_twi0_read": 10,
+      "r1_hw_twi0_write": 10
+    },
+    "old_bridge_sizes": {
+      "r1_hw_twi1_read": 38,
+      "r1_hw_twi1_write": 76,
+      "r1_hw_twi0": 0,
+      "r1_hw_twi1": 0,
+      "r1_hw_twi0_read": 38,
+      "r1_hw_twi0_write": 76
+    },
+    "application_imports": 211,
+    "bootloader_imports": 34,
+    "other_units_unchanged": 561,
+    "limitations": [
+      "Transport and wait providers modeled; physical transfers and driver IRQ behavior unverified",
+      "Private stack placement below explicit native saved frame differs",
+      "Not byte qualified; source plan unchanged"
+    ]
+  },
+  "evidence": [
+    {
+      "path": "build/goal-r1-twi-packet-c/before.c",
+      "sha256": "f99131abcab15df09c622f1905354e40fb127f48f46f569d790e0a87f226f70d"
+    },
+    {
+      "path": "build/goal-r1-twi-packet-c/verify.py",
+      "sha256": "37514919f6a710371e6a38bbab90421ea176def704178ec6c29dc38fd1178be5"
+    },
+    {
+      "path": "build/goal-r1-twi-packet-c/integrated.py",
+      "sha256": "e52e38e904d728e028be5902737e5b1ecd2e57c06628a0abbc9d52e12d4e2fa0"
+    },
+    {
+      "path": "build/goal-r1-twi-packet-c/REA.json",
+      "sha256": "15c98ed9c47b71e2feec82064ccc5a901a590bcd845d4d492e1f6f66848c91bf"
+    },
+    {
+      "path": "build/goal-r1-twi-packet-c/rea-snapshot.json",
+      "sha256": "f12c505ee2725066d43d2c979d3820fee3d708b541b549a240ef75424244cede"
+    },
+    {
+      "path": "r1/src/application/board/native_hw_twi_operations.c",
+      "sha256": "cc6aaf02a4d0534e07f92cd08808d16553c090e803ff2e203ffaba2e818d594b"
+    },
+    {
+      "path": "r1/src/application/board/native_hw_twi_register.c",
+      "sha256": "d4ed356ed9cfacd12cfc95c3e91a0e07b66418270cad5355aca782afd831b107"
+    },
+    {
+      "path": "r1/src/application/board/native_hw_twi.h",
+      "sha256": "7b7df5db3ef99bfd6ce5cb7ed1e3d9d1628135b9a1335e07092d7ff440763f17"
+    },
+    {
+      "path": "r1/src/sources.json",
+      "sha256": "9c5b7ae5c0e7493eb22e1fb4df9f0c928c2a9aa70530254aff89b55213bef2e2"
+    },
+    {
+      "path": "tools/build/source-plan.json",
+      "sha256": "964cbd3af9f4ea7ed207bb4b480d18a9529060dc3801663d296389472982aa7c"
+    },
+    {
+      "path": "build/sources-goal-r1-twi-packet-c/report.json",
+      "sha256": "0dfa021aa15f37c2b410d4e50673e12e6481c4ce15def28fa7bfed6e11409082"
+    }
+  ],
+  "asm_bridge_bytes": {
+    "before": 228,
+    "after": 40
+  },
+  "comparison_scope": [
+    "raw R0; saved R3 for reads; saved R2/R3 for writes",
+    "provider name, arguments, fifth argument, transfer bytes and state visible at callbacks",
+    "both controlled 108-byte bus clusters; caller input/output guards",
+    "R4-R11, SP, PRIMASK, BASEPRI and 8-byte provider-call alignment"
+  ],
+  "g2_workflow": "P2_INTERRUPTED; no gate advanced",
+  "subsequent_direct_packet_write_C": {
+    "evidence": "r1/docs/reference/twi-packet-write-c-review.json",
+    "write_bridges_removed": true,
+    "read_paths_and_register_write_adapters_unchanged": true
+  }
+}

@@ -1,6 +1,10 @@
 /* SPDX-License-Identifier: MIT
  * Authenticated CASE semantic NUL-terminated strings.
  * Provenance: case-semantic-strings.json; exact bytes, no stock payload.
+ * Boot-test fix: 0800225c, 080022c0, 080022ec, 08003380, 08003438 and
+ * 08003480 were recorded one byte early (a trailing literal-pool byte ' ',
+ * 'P' or '@' as the first character); stock adr/literal references use the
+ * aligned addresses, so the console printed e.g. "@pmic self check done.".
  */
 #include "case_semantic_strings.h"
 const char case_string_0800131c[] = "clear led status.";
@@ -41,11 +45,11 @@ const char case_string_08001e20[] = "[OTA_BOX]: Inform GLS ota result: %d";
 const char case_string_08001e48[] = "\015\012";
 const char case_string_08001e5c[] = "[OTA_BOX]: Inform GLS fail.";
 const char case_string_08001e78[] = "[OTA_BOX]: Inform GLS done.";
-const char case_string_0800225b[] = " GLS_RX error: CRC wrong.";
+const char case_string_0800225c[] = "GLS_RX error: CRC wrong.";
 const char case_string_08002278[] = "\015\012";
 const char case_string_0800227c[] = "CRC_Cal: %02x, CRC_Rx: %02x, header: 5a a5 ff %02x, data: ";
-const char case_string_080022bf[] = " Disable charging since bat(%d) >= 98";
-const char case_string_080022eb[] = " L charging:%d, done:%d, vol:%dmv, bat:%d, cur:%d///";
+const char case_string_080022c0[] = "Disable charging since bat(%d) >= 98";
+const char case_string_080022ec[] = "L charging:%d, done:%d, vol:%dmv, bat:%d, cur:%d///";
 const char case_string_08002320[] = "R charging:%d, done:%d, vol:%dmv, bat:%d, cur:%d\\\\\\";
 const char case_string_08002354[] = "L charging:1, confirmed by GLS_L///";
 const char case_string_08002378[] = "R charging:1, confirmed by GLS_R\\\\\\";
@@ -78,15 +82,15 @@ const char case_string_08002ebc[] = "[OTA_BOX]:fail to program.";
 const char case_string_08002ed8[] = "\015\012";
 const char case_string_08003350[] = "****** B200 %s %08x%08x%08x******";
 const char case_string_08003374[] = "\015\012";
-const char case_string_0800337f[] = "Pself check fail, reason: 2217 wrong chip id: 0x%x";
+const char case_string_08003380[] = "self check fail, reason: 2217 wrong chip id: 0x%x";
 const char case_string_080033b4[] = "2217 self check done.";
 const char case_string_080033cc[] = "using: 0x70, chipid, 0x%x";
 const char case_string_080033e8[] = "reset pmic register...";
 const char case_string_08003400[] = "self check fail, reason: pmic in shipmode.";
-const char case_string_08003437[] = "@pmic self check done.";
+const char case_string_08003438[] = "pmic self check done.";
 const char case_string_08003450[] = "PMIC reg 0x10-0x17:";
 const char case_string_08003464[] = "PMIC enable boost: %d";
-const char case_string_0800347f[] = " 2510 self check done, adjVal:%d";
+const char case_string_08003480[] = "2510 self check done, adjVal:%d";
 const char case_string_080034a0[] = "self check fail, reason: 2510 wrong chip id: 0x%x";
 const char case_string_080034d4[] = "4005 self check done.";
 const char case_string_080034ec[] = "self check fail, reason: 4005 wrong chip id: 0x%x";

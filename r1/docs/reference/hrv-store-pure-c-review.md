@@ -1,0 +1,11 @@
+# R1 HRV writer and complete C sample-storage unit
+
+The HRV writer at `0x5af60` now uses ordinary C. It captures the hour before reloading average-kind5 inputs, uses six-byte rows and unsigned 16-bit extrema with the zero-minimum sentinel, stores the low 16-bit average and six-byte latest record at 147/151, and preserves live diagnostic reads with the full 32-bit average. All five writers in `native_health_sample_storage.c` now contain no inline assembly.
+
+REA matches the 226-byte stock body. All 226 instruction bytes execute across 51,866 stock/C comparisons. Cache/sample read and write widths, order and values match, including high-bit samples, odd-address aliases, changing modes and callback mutations. Nine compiled defects are rejected, including a forced byte-access profile. Another 864 writer/accessor/latest/reset and 12 activity-reset checks pass, as do 138,344 comparisons for the four other C writers. The probes no longer force sample-writer assembly alignment.
+
+The unit explicitly selects `-munaligned-access`, documenting its SRAM helper requirement. The pinned Cortex-M4 default already produces the identical object; this does not establish a previous access-width fault. Storage sections and other C writer bodies remain unchanged. The normal reviewed serial build compiles 862 units with 63 application and 22 bootloader imports, without failures or duplicate strong symbols. Its sample object equals the probe. The other 851 prior nongenerated objects are identical. Source plan and cache layout remain unchanged; R1 source checking passes. An earlier serial attempt lost one unrelated GCC process with 137; no GCC source was altered.
+
+Hour/average/log providers are modeled in direct tests. The chain executes actual C writers, accessors, latest readers, resets and memory clear with modeled hour/average and disabled logging. Void return, caller scratch, private frames and APSR are excluded; saved integer/FP state, SP, masks and guards are checked. Physical atomicity/concurrency, hardware faults, complete application linking, final startup/scatter integration, physical sensors and boot remain unverified.
+
+See the [receipt](hrv-store-pure-c-review.json) for hashes and scope. Probes are under `build/goal-r1-hrv-store-pure-c/`.

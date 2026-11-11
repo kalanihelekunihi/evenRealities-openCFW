@@ -1,0 +1,37 @@
+{
+  "schema": "opencfw.g2.case.flash-status-source.v1",
+  "date": "2026-11-11",
+  "reference": {
+    "payload": "g2/blobs/official/g2-2.2.6.10/firmware_box.bin",
+    "header_bytes": 32,
+    "image_base": "0x08000000",
+    "observed_functions": {
+      "0x08004bf4": "prepare: return 0 if initially unlocked or key write clears lock, otherwise 1",
+      "0x08004b6c": "option unlock: initialize return to 1; after key writes return 0 only if lock clears",
+      "0x08004b3c": "commit A: set CR bit 27, return 1",
+      "0x08004b50": "commit B: set CR bit 30, read back and return 0 if set, otherwise 1",
+      "0x08004b20": "commit C: set CR bit 31, read back and return 0 if set, otherwise 1",
+      "0x08003664": "legacy Set SN returns the value from commit C",
+      "0x0800373c": "binary Set SN ignores the value from commit C and returns explicit success or failure"
+    }
+  },
+  "change": {
+    "provider": "g2/src/case/startup/application_boot_lowers_candidate.c",
+    "summary": "Restore five stock status returns and controller readbacks; align caller prototypes and keep same-address flash aliases type compatible.",
+    "limit": "Register-backed host checks do not model key acceptance, flash persistence, timing, or physical hardware."
+  },
+  "verification": {
+    "manifest_check": "g2: 4890 units, 4551 source files, 1 not built",
+    "case_compile": "366/366, zero duplicate strong symbols, zero unresolved",
+    "case_strict_link_bytes": 60200,
+    "host_register_harness": "passed; generated copy substitutes an in-memory register array and wrappers for Darwin-unsupported aliases",
+    "all_compile": "4885/4885 enabled units; zero failures and zero duplicate strong symbols",
+    "all_strict_links": 7,
+    "source_bundle_bytes": 4638044,
+    "source_bundle_sha256": "edea0f8ddad60b7864ae368cbe98ca3b5fa7b2bfb2a216bd23194ce31c8013b0",
+    "source_bundle_matches_locked_target": false,
+    "source_completeness_proven": false,
+    "build_report": "build/case-flash-status-20261111/all/report.json",
+    "link_report": "build/case-flash-status-20261111/bundle/link-report.json"
+  }
+}

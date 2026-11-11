@@ -422,6 +422,21 @@ typedef struct {
     void *operation_context;
 } quantized_runtime_gomore_executor_graph;
 
+typedef uint32_t (*quantized_runtime_stage_token_rewrite_fn)(
+    void *context, uint32_t target_token);
+
+/* Borrow a live target-layout graph instead of copying its 568/732 bytes.
+ * bytes and recurrent must outlive the executor plan built from this view. */
+typedef struct {
+    const uint8_t *bytes;
+    size_t byte_count;
+    uint32_t mode;
+    const quantized_runtime_recurrent_descriptor *recurrent;
+    const quantized_runtime *runtime;
+    quantized_runtime_stage_token_rewrite_fn rewrite;
+    void *rewrite_context;
+} quantized_runtime_gomore_executor_graph_view;
+
 /* Typed representation of stock's 0x344-byte generated-model instance.
  * Target offsets are asserted in the implementation; native-pointer hosts
  * widen only the three live pointer/vector fields. */
@@ -804,6 +819,15 @@ typedef struct {
     void *operation_context;
 } quantized_runtime_goodix_second_graph;
 
+/* Borrow the initializer-owned 984-byte mode-6 target graph. The graph must
+ * outlive plans whose stage descriptors point into its bytes. */
+typedef struct {
+    const uint8_t *bytes;
+    size_t byte_count;
+    quantized_runtime_stage_token_rewrite_fn rewrite;
+    void *rewrite_context;
+} quantized_runtime_goodix_second_graph_view;
+
 typedef struct {
     bool optional_preprocess;
     float output_min;
@@ -939,6 +963,14 @@ bool quantized_runtime_goodix_second_executor_plan_build(
     void *resolve_context,
     quantized_runtime_multi_stage_token_resolver_fn resolve_multi,
     void *resolve_multi_context);
+bool quantized_runtime_goodix_second_executor_plan_build_view(
+    const quantized_runtime *rt,
+    const quantized_runtime_goodix_second_graph_view *graph,
+    quantized_runtime_goodix_second_executor_plan *plan,
+    quantized_runtime_stage_token_resolver_fn resolve,
+    void *resolve_context,
+    quantized_runtime_multi_stage_token_resolver_fn resolve_multi,
+    void *resolve_multi_context);
 
 /* Build/destroy the complete initializer-owned mode-0 or mode-1 executor
  * graph.  The model and optional mode-0 remap are caller-owned transparent
@@ -962,6 +994,11 @@ void quantized_runtime_gomore_executor_graph_destroy(
  * tokens from becoming truncated host function pointers. */
 bool quantized_runtime_gomore_executor_plan_build(
     const quantized_runtime_gomore_executor_graph *graph,
+    quantized_runtime_goodix_executor_plan *plan,
+    quantized_runtime_stage_token_resolver_fn resolve,
+    void *resolve_context);
+bool quantized_runtime_gomore_executor_plan_build_view(
+    const quantized_runtime_gomore_executor_graph_view *graph,
     quantized_runtime_goodix_executor_plan *plan,
     quantized_runtime_stage_token_resolver_fn resolve,
     void *resolve_context);

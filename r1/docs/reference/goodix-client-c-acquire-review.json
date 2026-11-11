@@ -1,0 +1,53 @@
+{
+  "passed": 2080,
+  "executions": 4160,
+  "ordered_state_accesses": true,
+  "startup_calls_compared": true,
+  "callback_mutations": true,
+  "source_size": 238,
+  "source_report": "build/sources-goal-r1-goodix-client-acquire-verified/report.json",
+  "limitations": [
+    "Seeded counts/mask/callback; initial startup state unverified",
+    "Hardware/SDK calls modeled; private frames and caller-clobbered registers/flags excluded",
+    "Concurrency, physical power/reset behavior and byte qualification unverified"
+  ],
+  "release_regression": {
+    "passed": 2080,
+    "executions": 4160,
+    "ordered_state_accesses": true,
+    "shutdown_calls_compared": true,
+    "callback_mutations": true,
+    "source_size": 196,
+    "source_report": "build/sources-goal-r1-goodix-client-acquire-verified/report.json",
+    "limitations": [
+      "Seeded counts/mask/callback; initialization and acquisition unverified",
+      "Hardware/SDK calls modeled; private frames and caller-clobbered registers/flags excluded",
+      "Concurrency, physical power/reset behavior and byte qualification unverified"
+    ]
+  },
+  "negative_control": {
+    "mutation": "Require new count exactly one instead of at most one",
+    "rejected": true,
+    "counterexample": "Maximum count wraps to zero; stock initializes, variant skips initialization",
+    "stderr": "arm-none-eabi-ld: warning: (r1_shared_power_client_acquire): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-goodix-acquire/bad.o\narm-none-eabi-ld: warning: (r1_goodix_power_enable): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-goodix-acquire/bad.o\narm-none-eabi-ld: warning: (r1_goodix_transport_prepare): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-goodix-acquire/bad.o\narm-none-eabi-ld: warning: (r1_goodix_i2c_open): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-goodix-acquire/bad.o\narm-none-eabi-ld: warning: (nrf_delay_ms): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-goodix-acquire/bad.o\narm-none-eabi-ld: warning: (Gh3x2xDemoInit): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-goodix-acquire/bad.o\narm-none-eabi-ld: warning: (r1_goodix_irq_prepare): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-goodix-acquire/bad.o\narm-none-eabi-ld: warning: (Gh3x2xDemoArrayCfgSwitch): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-goodix-acquire/bad.o\narm-none-eabi-ld: warning: (Gh3x2xDemoStartSampling): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-goodix-acquire/bad.o\narm-none-eabi-ld: warning: (GH3X2X_FifoWatermarkThrConfig): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-goodix-acquire/bad.o\narm-none-eabi-ld: warning: (r1_goodix_i2c_open): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-goodix-acquire/bad.o\narm-none-eabi-ld: warning: (Gh3x2xDemoStartSampling): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-goodix-acquire/bad.o\narm-none-eabi-ld: warning: (r1_shared_power_client_acquire): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-goodix-acquire/bad.o\narm-none-eabi-ld: warning: (r1_goodix_transport_prepare): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-goodix-acquire/bad.o\narm-none-eabi-ld: warning: (r1_goodix_power_enable): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-goodix-acquire/bad.o\narm-none-eabi-ld: warning: (r1_goodix_irq_prepare): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-goodix-acquire/bad.o\narm-none-eabi-ld: warning: (r1_goodix_i2c_open): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-goodix-acquire/bad.o\narm-none-eabi-ld: warning: (Gh3x2xDemoArrayCfgSwitch): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-goodix-acquire/bad.o\narm-none-eabi-ld: warning: (r1_goodix_i2c_close): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-goodix-acquire/bad.o\narm-none-eabi-ld: warning: (r1_goodix_i2c_open): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-goodix-acquire/bad.o\narm-none-eabi-ld: warning: (Gh3x2xDemoStartSampling): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-goodix-acquire/bad.o\narm-none-eabi-ld: warning: (GH3X2X_FifoWatermarkThrConfig): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-goodix-acquire/bad.o\narm-none-eabi-ld: warning: (r1_goodix_i2c_close): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-goodix-acquire/bad.o\nTraceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-goodix-acquire/reject-wrap-guard.py\", line 47, in <module>\n    for c in cases:assert a(*c)==b(*c),c\n                          ^^^^^^^^^^^^\nAssertionError: (1, 4294967295, 0, False, 0)\n"
+  },
+  "evidence": {
+    "build/goal-r1-goodix-acquire/stock.elf": "ecb51981f6165aad8c6d9371d7dfdc26a618d5d5421b5582f74bcf2aae2cb4b3",
+    "build/goal-r1-goodix-acquire/REA.json": "5170c0cfcf84e5aa093ca1b704837a98f0566f0a7d1e13ff6e3ce94e53ea1de7",
+    "build/goal-r1-goodix-acquire/REA.snapshot.json": "798c7c91c24bc07813a742281770bd2313de588c092cf03037ed0ec50d294d35",
+    "build/goal-r1-goodix-acquire/verify.py": "451cd6ed4bfe4140aabcddf6bb60aebdb5208b50b5dfe149a600d9fe90fb5f28",
+    "build/goal-r1-goodix-acquire/source.elf": "09203b177a2f582f646e23c0ebaeb4bdded529cdc59e6c3ef2e5c39209f81a5a",
+    "build/goal-r1-goodix-acquire/results.json": "f121aab77672f3f390abe9411d95625fc2af2f08e8c11dd35ea92fc62aee80e7",
+    "build/goal-r1-goodix-acquire/release/verify.py": "36924ab035d19da18733ba75d72ec1117c96d3304dc12b3105387a95099c2b82",
+    "build/goal-r1-goodix-acquire/release/results.json": "d5e9bf83fb11d890e457df63d866e5b89ea48858ded4dec1b4f548614a158c67",
+    "build/goal-r1-goodix-acquire/bad.c": "7232333f46eb2b07aa4396a4de4bce2f7b8b32fdfe7d3f3eebe585579ffc6fe1",
+    "build/goal-r1-goodix-acquire/reject-wrap-guard.py": "a267069f73eea481558d28bba2292a01d6e741e59b859b86e027d270be01984f",
+    "build/goal-r1-goodix-acquire/negative-result.json": "e92fa97964d9dd61b0316eb0f63859c63f1217a8bbe48c6b32f6c7c48dd66f05",
+    "r1/src/application/goodix/stock_client_release.c": "6a12b9e22c71c595ded398ef468cc337bd5f476054037f66ee91fc80917dfc8d",
+    "build/sources-goal-r1-goodix-client-acquire-verified/report.json": "9e62c59498ccce6a53ad4220f0f0bdaf9974bddb9564cb61a2561813e75a72b5",
+    "r1/src/sources.json": "1aafa12d094d12d32de7c12874bee69bb8e3a987233cbd4cd9740fc27895a66b",
+    "r1/symbols/function-frontier.csv": "40bbfac1f2e4ccca6e1606e99579ef28e5bfb770c6ceb20281973cad12c41cd1",
+    "tools/build/source-plan.json": "4d46e8c038db79a174a2d719086fd0be80503ca7cdbfc2c51e5ed3d30d293064"
+  },
+  "source_plan_changed": false
+}

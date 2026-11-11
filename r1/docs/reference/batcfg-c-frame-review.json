@@ -1,0 +1,127 @@
+{
+  "cases": 6624,
+  "passed": 6624,
+  "failures": [],
+  "per_entry": {
+    "r1_batcfg_byte0_get": 2208,
+    "r1_batcfg_flag1_get": 2208,
+    "r1_batcfg_word1_signed_get": 2208
+  },
+  "entries": [
+    {
+      "name": "r1_batcfg_byte0_get",
+      "body": "r1_batcfg_byte0_body",
+      "entry": 506692,
+      "size": 20,
+      "offset": 0,
+      "width": 1,
+      "bridge_bytes": 10,
+      "c_body_bytes": 28,
+      "native_span_sha256": "f216d21cfe1854166cdf370747c7c4a5deee5c03b677bfcf321c113b84d21e3f"
+    },
+    {
+      "name": "r1_batcfg_flag1_get",
+      "body": "r1_batcfg_flag1_body",
+      "entry": 506716,
+      "size": 26,
+      "offset": 2,
+      "width": 2,
+      "bridge_bytes": 10,
+      "c_body_bytes": 34,
+      "native_span_sha256": "831757f8a47e03052c3eeff73a740c9b14fc029e612d25898d429c431cbc685f"
+    },
+    {
+      "name": "r1_batcfg_word1_signed_get",
+      "body": "r1_batcfg_word1_signed_body",
+      "entry": 506748,
+      "size": 20,
+      "offset": 2,
+      "width": 2,
+      "bridge_bytes": 10,
+      "c_body_bytes": 30,
+      "native_span_sha256": "ef1518c258fdb39bc62af7a67d94e0f2b142ef30ea6f617dbb2bffe90b38c250"
+    }
+  ],
+  "callback_stack_depth_pairs": [
+    [
+      [
+        -8
+      ],
+      [
+        -16
+      ]
+    ]
+  ],
+  "before_frame_mismatches": [
+    {
+      "name": "r1_batcfg_byte0_get",
+      "old_read_pointer_delta": -12,
+      "stock_and_new_delta": -8
+    },
+    {
+      "name": "r1_batcfg_flag1_get",
+      "old_read_pointer_delta": -12,
+      "stock_and_new_delta": -8
+    },
+    {
+      "name": "r1_batcfg_word1_signed_get",
+      "old_read_pointer_delta": -12,
+      "stock_and_new_delta": -8
+    }
+  ],
+  "other_source_units_unchanged": 561,
+  "report": "build/sources-goal-r1-batcfg-frame/report.json",
+  "report_sha256": "4ad85e02cc04354af4c81308101f4aa1d5bec99e7cc0e456f779fd6142f70601",
+  "source_sha256": "3a46eaa46ac6d51a97aae1830dad4a82bcd78288e8ebfeb5b249a6b33d97661e",
+  "manifest_sha256": "59fdbc1dac961b45d682cd2bb5bd1fbc417cd95e7082d50a778c69d6e24ee734",
+  "stock_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "cached_class_integration": {
+    "cases": 315,
+    "passed": 315,
+    "failures": [],
+    "actual_cached_reader_executes": true,
+    "port_and_memcpy_not_reached": true,
+    "kv_source": "r1/src/application/board/native_kv_class.c",
+    "kv_source_sha256": "e9791d39b7a9b5380b1dbce3c7422be921131abbd0e09c3387ea3d4b9930bf6e"
+  },
+  "total_cases": 6939,
+  "rea": [
+    {
+      "completed": true,
+      "procedure": "0x7bb44",
+      "path": "build/goal-r1-batcfg-frame/REA-0x7bb44.json",
+      "sha256": "ffc1ba0fc531a591ebf91a31484353bce236d221684b15eab993801eaea032a8"
+    },
+    {
+      "completed": true,
+      "procedure": "0x7bb5c",
+      "path": "build/goal-r1-batcfg-frame/REA-0x7bb5c.json",
+      "sha256": "876618f46e1e5ffa5cad6c4a5490aa0452de4fd4e183cf209d41fa0f99411d24"
+    },
+    {
+      "completed": true,
+      "procedure": "0x7bb7c",
+      "path": "build/goal-r1-batcfg-frame/REA-0x7bb7c.json",
+      "sha256": "8d027c634f35cd0a3ce0a7293235b0aab183077b1605af0571a10b13099ce489"
+    }
+  ],
+  "handle_cell": "0x20007df8",
+  "probe_artifacts": {
+    "build/goal-r1-batcfg-frame/verify.py": "28421103cc04456f5e688999487cd4705b466e674c9c35fb403bf3bb58656c8b",
+    "build/goal-r1-batcfg-frame/class_mismatch.py": "64c04a04c5746eacf907edfa269f6f62078bcbe1ed294524a9588cdb4405b0d2",
+    "build/goal-r1-batcfg-frame/before.c": "75676915c0ea76831a667f2eca80c746826867c0a6fa99bfe171e31e6da18dc6",
+    "build/goal-r1-batcfg-frame/before.elf": "1cc02d439abadb738a2a6003a1fad17e6c41a6397f63454f4178038b5893a243",
+    "build/goal-r1-batcfg-frame/source.elf": "0c7429c77bd3f4fab1c527e363315973f817d2c461abfb87c45104c0e7585e1c",
+    "build/goal-r1-batcfg-frame/stock.elf": "27b2b36a48d91c32d98c7bf860d32a4f55116b8c33c04a00c5bf478c21707408",
+    "build/goal-r1-batcfg-frame/class-source.elf": "ad6f8ff4d86a0bf363cf3c228174a9190f4f50539e4ea52fa8574f3258ecf318",
+    "build/goal-r1-batcfg-frame/class-results.json": "1872e2fa23694f36d3c234dc842dbaa23567403514a3f8f33c6c7b876bb29b16",
+    "build/goal-r1-batcfg-frame/rea-snapshot.json": "f0eb11307d694079751d35fae3f01db15fd404505662ffce70de21505d0463e1"
+  },
+  "limits": [
+    "Ten-byte entry bridges preserve the exact saved-R3 word and native read-buffer address; these are partial C extractions.",
+    "Primary comparisons model the cached-class read API, including arbitrary statuses and partial/non-writing responses.",
+    "Integration executes actual native/C cached-class size rejection only; cached-class success, locking, memory-copy and flash behavior are not established here.",
+    "C helpers add callback frame depth below the native saved word; complete flags/fault states are not claimed.",
+    "The handle cell remains an unresolved dependency; no cold value or default record is invented. No physical battery behavior, final link, provider qualification or byte identity claim."
+  ]
+}

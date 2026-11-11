@@ -1,12 +1,11 @@
 /* SPDX-License-Identifier: MIT. Reconstructed locked 0x42c988..0x42cc34.
  * CQ adapter calls remain explicit dependencies; peripheral effects are MMIO. */
+#include "../platform-control/am_hal_pwrctrl_api.h"
 #include "context_claim.h"
 #include "../clock-manager/clock_manager.h"
-extern uint32_t opencfw_bl_mspi_mode_enter(uint32_t selector);
-extern uint32_t opencfw_bl_mspi_mode_leave(uint32_t selector);
 extern uint32_t opencfw_boot_iom_cq_enable(void *handle);
 extern uint32_t opencfw_boot_iom_cq_disable(void *handle);
-extern uint32_t opencfw_hal_status_poll(uint32_t, uintptr_t, uint32_t, uint32_t, uint32_t);
+extern uint32_t am_hal_delay_us_status_check(uint32_t, uintptr_t, uint32_t, uint32_t, uint32_t);
 #define WORD(h,o) (*(volatile uint32_t *)((uintptr_t)(h)+(o)))
 #define BYTE(h,o) (*(volatile uint8_t *)((uintptr_t)(h)+(o)))
 #define REG(h,o) (*(volatile uint32_t *)(0x40050000u + (h)->module * 0x1000u + (o)))
@@ -19,7 +18,7 @@ uint32_t opencfw_boot_context_transaction(struct opencfw_iom_context *h,
     retain = (uint8_t)retain;
     if (command == 0u) {
         if (retain && !BYTE(h,0x868u)) return 7u;
-        (void)opencfw_bl_mspi_mode_enter((uint8_t)(h->module+3u));
+        (void)am_hal_pwrctrl_periph_enable((uint8_t)(h->module+3u));
         if (retain) {
             REG(h,0x104u)=WORD(h,0x86cu);
             REG(h,0x118u)=WORD(h,0x874u);
@@ -36,7 +35,7 @@ uint32_t opencfw_boot_context_transaction(struct opencfw_iom_context *h,
             REG(h,0x11cu)=WORD(h,0x878u);
             if (BYTE(h,0x87cu)&1u) (void)opencfw_boot_iom_cq_enable(h);
             if (h->flags & 0x02000000u)
-                (void)opencfw_hal_status_poll(1000u,
+                (void)am_hal_delay_us_status_check(1000u,
                     0x40050248u+h->module*0x1000u,6u,4u,1u);
             BYTE(h,0x868u)=0u;
         }
@@ -64,6 +63,9 @@ uint32_t opencfw_boot_context_transaction(struct opencfw_iom_context *h,
     }
     REG(h,0x11cu)&=~1u;
     REG(h,0x11cu)&=~0x10u;
-    (void)opencfw_bl_mspi_mode_leave((uint8_t)(h->module+3u));
+    (void)am_hal_pwrctrl_periph_disable((uint8_t)(h->module+3u));
     return clock_release(4u,(uint8_t)(h->module+3u));
 }
+
+/* Stock entry names that branch straight to the provider above. */
+__typeof__(opencfw_boot_context_transaction) opencfw_bl_config_transaction __attribute__((alias("opencfw_boot_context_transaction")));

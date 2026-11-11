@@ -1,0 +1,58 @@
+{
+  "cases": 292,
+  "passed": 292,
+  "failures": [],
+  "max_polls_per_phase": 102,
+  "stock_entry": "0x871c4",
+  "stock_body_bytes": 138,
+  "source_body_bytes": 138,
+  "unchanged_functions": [
+    "r1_qma6100_configure_boundary",
+    "r1_qma_any_motion",
+    "r1_qma_range",
+    "r1_qma_setup",
+    "r1_qma_steps",
+    "r1_qma_tap"
+  ],
+  "report": "build/sources-goal-r1-qma-reset/report.json",
+  "report_sha256": "f6b5a346a964f10f55afd7e2d67fe68e7f342eb352a15ab8da4350a249c16698",
+  "source_sha256": "9df0a48482a6cbcf4a6ecb603c5c88a4a26b728ee5cdb232989be715d444e478",
+  "manifest_sha256": "be76bf00509f1551b53a08edbc5515ed3a3dcb9b1721ff4481fdf60b77d82eb8",
+  "stock_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "callback_depth_pairs": [
+    [
+      [
+        -16
+      ],
+      [
+        -24
+      ]
+    ]
+  ],
+  "callback_count_range": [
+    11,
+    516
+  ],
+  "callback_frame_shapes": 86,
+  "native_span_sha256": "7f40093f45ba9195467bf2832cbbb0a2199dbd0d2425ddb453a6b231534ca22d",
+  "rea": {
+    "completed": true,
+    "procedure": "0x871c4",
+    "path": "build/goal-r1-qma-reset/REA.json",
+    "sha256": "2ad7304278b95c6ced1f637f9e078ee033c9e4473102d28dfb87db2bc131f025",
+    "limitation": "Decompiler presents incoming saved-register words as parameters; only their initialized low scratch bytes are owned."
+  },
+  "probe_artifacts": {
+    "build/goal-r1-qma-reset/verify.py": "6f02ea0955b3a7b38b7b8286fcc2d8254d3af8b3c14e37118f3fcea116b53635",
+    "build/goal-r1-qma-reset/before.c": "95a9f793d889df235544aedec8733999b840d1cf12dcdece0de62dbe0a50769e",
+    "build/goal-r1-qma-reset/source.elf": "25dc349dfa2efea4b5c052f251b5bb23bbc8a372db00e1d79de8bf0315fa3bed",
+    "build/goal-r1-qma-reset/stock.elf": "a05602c42191787c675ad6770fcda957f8622042c6401a65898493635f28c476",
+    "build/goal-r1-qma-reset/rea-snapshot.json": "92277f45d85ce2f5e33452aac9ec3ebe77602d6eb17e3efb4f80acbe8a8440ec",
+    "build/goal-r1-qma-reset/results.json": "690ddab8707d6642818b3d904bffb6d13e5e52a0c72142c6774f433572f71ea9"
+  },
+  "limits": [
+    "Register read/write and delay wrappers are mocked and clobber caller-saved registers/flags.",
+    "Only two zero-initialized output bytes and their distinct stable pointers are reproduced; surrounding native saved words are private.",
+    "No physical sensor reset, delay timing, complete fault-state, final linking, source qualification or byte-identity claim."
+  ]
+}

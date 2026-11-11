@@ -1,7 +1,7 @@
 /* Apollo Main LVGL asynchronous object delete, native 0x44d90e..0x44d94b. */
 #include <stdint.h>
 
-extern void audio_uart_lvgl_log(uint32_t, const char *, uint32_t,
+extern void lv_log_add(uint32_t, const char *, uint32_t,
                                 const char *, const char *, ...);
 extern uint32_t audio_uart_lv_async_post_484014(void (*)(void *), void *);
 extern void audio_uart_lv_delete_event_callback_44df20(void *);

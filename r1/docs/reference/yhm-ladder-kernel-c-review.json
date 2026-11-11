@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "report": "build/sources-goal-r1-yhm-ladder-kernel-c/report.json",
+  "report_sha256": "984ab9c1e47322bbaabc8f33c1090a9bf6b64e6415f385f77d3fe9d72885939f",
+  "manifest_sha256": "1931eabb7053c60df0282c35368aa8481a63982c6e3f5d41bf2c14088b71c79d",
+  "verification": {
+    "paired_cases": 23872,
+    "executions": 47744,
+    "float_inputs": 611,
+    "FPSCR_configurations": 32,
+    "actual_C_math_helper_executed": true,
+    "controlled_source_table_address": "0x9a678",
+    "checks": [
+      "native fallback scratch pointer and bytes at read/write providers",
+      "final callee-saved R4-R11/S16-S31 restoration",
+      "all eight abs operands and FPSCR snapshots including rounding/FZ/DN/NaN/overflow/underflow",
+      "partial/untouched/full-word reads, ignored raw transport errors, output bits and selected return index",
+      "initial stack bytes, final scratch words and write callback mutations, SP and interrupt masks"
+    ],
+    "limits": [
+      "Register transport modeled, no physical charger/single-wire proof",
+      "Table linked at controlled native address for ABI comparison; normal final placement unproven",
+      "Private frames and live callee-saved temporaries, APSR and caller-clobbered outputs, faults and concurrency excluded"
+    ]
+  },
+  "defects": {
+    "late-tie": {
+      "compiled": true,
+      "behavior_rejected": true
+    },
+    "initialized-scratch": {
+      "compiled": true,
+      "behavior_rejected": true
+    },
+    "abort-read-error": {
+      "compiled": true,
+      "behavior_rejected": true
+    },
+    "wrong-low-bits": {
+      "compiled": true,
+      "behavior_rejected": true
+    },
+    "reassociated-product": {
+      "compiled": true,
+      "behavior_rejected": true
+    }
+  },
+  "audit": {
+    "unchanged_prior_object_hashes": 797,
+    "changed_object_hashes": [
+      [
+        "r1-application",
+        "r1/src/application/board/native_yhm_ladder.c"
+      ],
+      [
+        "r1-bootloader",
+        "{gen}/r1_startup_vectors.S"
+      ],
+      [
+        "r1-bootloader",
+        "{gen}/r1_uecc.c"
+      ]
+    ],
+    "generated_boot_crypto_and_vectors_allocated_bytes_and_relocations_unchanged": true,
+    "removed_application_imports": []
+  },
+  "existing_qualified_dispatch_tail_bytes_and_relocations_unchanged": true,
+  "rea_bytes": {
+    "evidence_id": "ev_b865a7a3d5cc55f1ee97621e8b7dd1a999b52246e0bd85be39727a1b07fa3e23",
+    "address": "0x35508",
+    "length": 160,
+    "matches_locked_raw": true,
+    "sha256": "f0a1114c452770f2c7fb602eff44693e96923e35b01907a2e8aab9aeeb9c827a"
+  },
+  "strict_bootloader_link_report_sha256": "027ad7f9dd3959284202c08ead6ab9af028a5794d6206c3f38130f9dd3bd7a4e",
+  "evidence_files": {
+    "build/goal-r1-yhm-ladder-kernel-c/verify.py": "81131031704dddc15786b386585331d00db79884c876e177c5005af6aa2ec67f",
+    "build/goal-r1-yhm-ladder-kernel-c/defects.py": "de538933a77cba8bd9fa8862acd5f2941e775b7569d92c95490740a87e6ad01e",
+    "build/goal-r1-yhm-ladder-kernel-c/audit.py": "89d3c83cfaca86634bdea016e41ab146980e23a387e18b8e056ef4658d901065",
+    "build/goal-r1-yhm-ladder-kernel-c/source.elf": "0b1084cb66a18f4157cb41f61206fc2f0d3bb199b7cc3c995f1ddd9a90b12925",
+    "build/goal-r1-yhm-ladder-kernel-c/verify-final.log": "614c8e7fa093ff182ea9227270490870e59bde0b11c6b49275f2b13490400c54",
+    "build/goal-r1-yhm-ladder-kernel-c/results.json": "e567fa07575572d7e6657be245c5b662aef61a58a546bd62983eb605e19ad3ef",
+    "build/goal-r1-yhm-ladder-kernel-c/defects.json": "3c668e125134b7ce392cea3498b8728ef6e6356de4a37496db53cef592a24d3e",
+    "build/goal-r1-yhm-ladder-kernel-c/rea.json": "b5dbdacecd036bf96923f177f8626f260256ef2593f72467c4cf4914a9c13b15",
+    "build/goal-r1-yhm-ladder-kernel-c/previous.c": "ccf5bfac2213f6f106f804049bf73fa26c7e1e188ac5fd1e16b03ef21b29a08a"
+  },
+  "source_plan_modified": false
+}

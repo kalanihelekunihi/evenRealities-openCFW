@@ -1,0 +1,131 @@
+{
+  "schema_version": 1,
+  "sources": [
+    "r1/src/application/runtime/native_touch_slider_support.c"
+  ],
+  "native_roots": [
+    "0x59aac",
+    "0x92c70"
+  ],
+  "report": "build/sources-goal-r1-slider-support-c/report.json",
+  "compiled_units": 841,
+  "application_imports": 73,
+  "added_imports": [],
+  "removed_imports": [],
+  "verification": {
+    "stock_C_pairs": {
+      "velocity_history": 4096,
+      "velocity_delta_time": 5110,
+      "release_counter_window": 10752,
+      "velocity_sequences": 1440
+    },
+    "total_pairs": 21398,
+    "state_owner_reused": true,
+    "ring_index_invariant": "0..2",
+    "REA_bytes_match": true,
+    "callee_saves_stack_guards_masks": true,
+    "device_execution": false
+  },
+  "unmodified_rerun": {
+    "stock_C_pairs": {
+      "velocity_history": 256,
+      "velocity_delta_time": 5110,
+      "release_counter_window": 10752,
+      "velocity_sequences": 1440
+    },
+    "total_pairs": 17558,
+    "state_owner_reused": true,
+    "ring_index_invariant": "0..2",
+    "REA_bytes_match": true,
+    "callee_saves_stack_guards_masks": true,
+    "device_execution": false
+  },
+  "mutants": [
+    {
+      "name": "deadband",
+      "rejected": true
+    },
+    {
+      "name": "rounding",
+      "rejected": true
+    },
+    {
+      "name": "saturation",
+      "rejected": true
+    },
+    {
+      "name": "smoothing",
+      "rejected": true
+    },
+    {
+      "name": "reversal",
+      "rejected": true
+    },
+    {
+      "name": "zero_elapsed",
+      "rejected": true
+    },
+    {
+      "name": "release_window",
+      "rejected": true
+    },
+    {
+      "name": "release_fifth",
+      "rejected": true
+    },
+    {
+      "name": "client_mask",
+      "rejected": true
+    }
+  ],
+  "prior_objects_unchanged": 838,
+  "changed_generated_objects": [
+    [
+      "r1-bootloader",
+      "{gen}/r1_startup_vectors.S"
+    ],
+    [
+      "r1-bootloader",
+      "{gen}/r1_uecc.c"
+    ]
+  ],
+  "changed_existing_allocated_sections": {},
+  "new_state_owners": [],
+  "reused_owners": [
+    "r1_touch_contact_state",
+    "r1_touch_client_bits"
+  ],
+  "contract": [
+    "Three ring-buffer samples reuse contact offsets68..91; the index at92 is required to be0..2, matching stock state invariants. Position is truncated to one byte; timestamps are uint32 little endian.",
+    "Count saturates upward at3. Once count reaches2, compare the two newest samples. Delta -3..3 is direction-neutral. Reversal clears the prior smoothed speed.",
+    "Speed is (abs(delta)*100+(elapsed>>1))/elapsed, with uint32 addition wrap and a255 cap. A nonzero old speed blends40 percent new and60 percent old using integer division. Zero elapsed returns old speed, or1 when old speed is zero.",
+    "Release detection reads the low client bit2 and the caller-owned timestamp atcontact52. A difference above2500 resets count to1; otherwise increment with byte wrap and report1 on count>=5, clearing count. Disabled clients clear count. No timestamp store is invented."
+  ],
+  "limits": [
+    "These are the two leaf dependencies of the still-unimplemented main slider state machine at0x92cbc. They do not close that import or prove a complete slider pipeline.",
+    "Ring index0..2 is a precondition. Native out-of-buffer behavior for corrupt indices is excluded. No original-source, byte-identity, physical timing, final placement or device boot claim is made.",
+    "The isolated probe links actual C leaves against the existing contact/client addresses. All100 contact bytes, return word, callee saves, stack guards and interrupt masks are compared. There are no mocked service callbacks in these leaves.",
+    "REA read_bytes results match the pinned stock bytes including the contact/context literal pointers; manual Thumb decoding supplies the behavior contract. The main slider function is absent from the active REA analyzed-function inventory, so that failed instruction request is not accepted as pseudocode evidence.",
+    "R1 sources-check passes; global sources-check retains the unrelated unlisted G2 resident_rom_thumb_set.S failure."
+  ],
+  "evidence_files": {
+    "build/sources-goal-r1-slider-support-c/report.json": "aa240714461dadb695749cc15328717fd3899ec4b2178c1a53a178c750bc2087",
+    "r1/src/sources.json": "80d0b924b51e94f8c51fb3c2ff920f6c783ae39c468abecdd47489bdfd871c81",
+    "r1/src/application/runtime/native_touch_slider_support.c": "1bff42411ff1e6899d4273f55592bc7d12f9abd174be9c7a7c576a54614eb855",
+    "r1/docs/correlation/TOUCH-SLIDER-CORRELATION.md": "44417701633e0f1dcacf7db860c255eb5c38c100e8fafad62498c62f89caca64",
+    "build/goal-r1-slider-support-c/verify.py": "b2c9a25db105df242f3150498fae9865f1233c42694b019d8330b13a27a40afc",
+    "build/goal-r1-slider-support-c/verification.json": "7b4c20bfe387b742fcc22d5fc54f8bdc7e677a26c92673db99b80d0085cb047f",
+    "build/goal-r1-slider-support-c/verification.log": "fd1ff5a491d1c74365ca031e85c8cf3dcc6966c6830575fdf88450c00a971138",
+    "build/goal-r1-slider-support-c/unmodified-rerun.log": "8a6e1158076c39ef401fe86c64e1a6e7bed80120e2e8cbef6144df7cb83a40fd",
+    "build/goal-r1-slider-support-c/rea.json": "2cfee7b2dec18a671972e90941a90f75faf6dd4255d43ec5b943b34138bcaaac",
+    "build/goal-r1-slider-support-c/59aac.asm": "6e81f0c7db9375e27428693d2e35f0d10814d5336065edbe49495d8c966dfac4",
+    "build/goal-r1-slider-support-c/92c70.asm": "de1dbe02ba1ea26832c2f72cc30934901f1101139c215b48239caa6c53fc9d7d",
+    "build/goal-r1-slider-support-c/mutants.py": "91fa86680f2a39f72146988caae6461fdeb76674a05d55b48de6ffbd85a18d10",
+    "build/goal-r1-slider-support-c/mutants.json": "4d655d22b8f2691c019d4b4436cc6a008853d4f90753f1db27df23a71c9fdb08",
+    "build/goal-r1-slider-support-c/mutants.log": "b3a37d17c2e53a2e2065977a05449a7a212cc7dbe2460097173db01f26dde743",
+    "build/goal-r1-slider-support-c/audit.py": "4266faf641e6e9382fa6f4048d8d003610802dc60e883347b99513f77aba6013",
+    "build/goal-r1-slider-support-c/object-audit.json": "92206731ff280c8d003b616368c063fc2415ed7a310b9ab1dd7c5543ff149bfb",
+    "build/goal-r1-slider-support-c/r1-check.log": "b123522666968f3be05d11befc8f3fbe0b91b393d7330be73f88307595d563ab",
+    "build/goal-r1-slider-support-c/sources-check.log": "b0e0f7b9db9e1c8c93905db7c83d4df768eacfeef21690725195739a1471c5bd"
+  }
+}

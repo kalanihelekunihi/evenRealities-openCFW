@@ -1,0 +1,160 @@
+{
+  "schema_version": 1,
+  "scope": "R1 native previous-state flash append through one shared C core",
+  "report": "build/sources-goal-r1-state-append-reviewed-c/report.json",
+  "comparison_report": "build/sources-goal-r1-worker-exit-c/report.json",
+  "audit": {
+    "compiled_units": 862,
+    "application_imports": 65,
+    "bootloader_imports": 22,
+    "unchanged_prior_nongenerated_objects": 850,
+    "changed_prior_nongenerated_objects": [
+      "r1/src/vendor/gomore_primitives/gomore_primitives.c"
+    ],
+    "new_nongenerated_sources": [
+      "r1/src/application/runtime/native_previous_state_append.c"
+    ],
+    "normal_adapter_and_core_objects_equal_direct_probe": true,
+    "manifest_change": "one native C adapter, explicit 32-bit enum ABI",
+    "source_plan_unchanged": true,
+    "closed_import": "r1_previous_state_append_native",
+    "new_imports": [],
+    "source_scope": {
+      "only_existing_C_source_change": "previous-state append implementation block",
+      "other_GoMore_function_source_text_unchanged": true,
+      "header_only_adds_optional_hooks_API": true
+    }
+  },
+  "direct": {
+    "stock_C_comparisons": 17370,
+    "native_instruction_bytes_executed": 824,
+    "source_only_IO_scenarios": 24,
+    "observed_IO_error_stops": 19,
+    "overflow_metadata_rejections": 6,
+    "shared_core_executes": true,
+    "exact_flash_calls_bytes_logs_and_context": true,
+    "live_offset_device_and_header_observations": true,
+    "bind_storage_geometry_flash_allocation_and_logging_modeled": true,
+    "private_frame_void_registers_APSR_and_physical_NOR_unverified": true
+  },
+  "legacy_API_regression": {
+    "previous_C_current_C_comparisons": 17922,
+    "legacy_strict_status_results_flash_and_scratch_unchanged": true,
+    "initialization_capacity_all_IO_failures_and_offset_mutations": true,
+    "unrelated_monolithic_functions_cannot_execute": true
+  },
+  "actual_parent_chain": {
+    "stock_C_dispatch_cases": 768,
+    "checked_peer_cases": 0,
+    "native_dispatch_instruction_bytes_executed": 252,
+    "actual_CMSIS_reset_AIRCR_write_and_barriers": true,
+    "all_relevant_event_combinations_and_priority": true,
+    "ordered_status_worker_exit_reset_tags_delays_and_cleanup": true,
+    "retained_assertion_logs_and_architecture_gate_observed": true,
+    "actual_manager_exit_state_append_core_payload_status_and_reset": true,
+    "remaining_helpers_modeled": true,
+    "private_reset_PC_LR_and_stack_register_residue_excluded": true
+  },
+  "compiled_defects_rejected": [
+    {
+      "defect": "wrong-live-partition-offset",
+      "changed": "native",
+      "rejected": true,
+      "log": "build/goal-r1-state-append-c/wrong-live-partition-offset/test.log"
+    },
+    {
+      "defect": "reject-successful-FAL-read",
+      "changed": "native",
+      "rejected": true,
+      "log": "build/goal-r1-state-append-c/reject-successful-FAL-read/test.log"
+    },
+    {
+      "defect": "missing-scratch-release",
+      "changed": "native",
+      "rejected": true,
+      "log": "build/goal-r1-state-append-c/missing-scratch-release/test.log"
+    },
+    {
+      "defect": "missing-FAL-read-failure-stop",
+      "changed": "native",
+      "rejected": true,
+      "log": "build/goal-r1-state-append-c/missing-FAL-read-failure-stop/test.log"
+    },
+    {
+      "defect": "wrong-key-record-length",
+      "changed": "core",
+      "rejected": true,
+      "log": "build/goal-r1-state-append-c/wrong-key-record-length/test.log"
+    },
+    {
+      "defect": "wrong-state-alignment",
+      "changed": "core",
+      "rejected": true,
+      "log": "build/goal-r1-state-append-c/wrong-state-alignment/test.log"
+    },
+    {
+      "defect": "wrong-record-length-word",
+      "changed": "core",
+      "rejected": true,
+      "log": "build/goal-r1-state-append-c/wrong-record-length-word/test.log"
+    },
+    {
+      "defect": "missing-key-overflow-guard",
+      "changed": "core",
+      "rejected": true,
+      "log": "build/goal-r1-state-append-c/missing-key-overflow-guard/test.log"
+    }
+  ],
+  "contract": [
+    "Native two-argument adapter reuses existing pkey storage and FAL binding; no second append algorithm.",
+    "Preserve native successful-I/O operation/log ordering, live partition/device/header observations, three-slot selection, compaction and slot-zero fallback.",
+    "Existing seven-argument API retains strict status/capacity/error semantics with no native fallback policy.",
+    "Adapter and core use explicit 32-bit enums with compile-time ABI size assertions."
+  ],
+  "intentional_hardening": [
+    "Negative FAL status stops subsequent commands; release allocated scratch on all reached failures. 24 failure scenarios include 19 observed failing-operation stops.",
+    "Reject overflowing state/key length metadata and wide page-size sums before writes or erase; six rejection cases.",
+    "Caller must supply rounded source extent; actual exit caller supplies 736 aligned bytes."
+  ],
+  "limits": [
+    "Models FAL I/O, heap, logging and binding boundaries; all 824 native instruction bytes execute in compatible successful-I/O cases.",
+    "Probe-only bindings for unused monolithic core imports are protected by instruction allowlists; unrelated functions cannot execute. Normal source build retains actual providers/imports.",
+    "Actual parent fixture executes dispatcher, worker exit, payload getter, append adapter/core, status ring and CMSIS reset; remaining services modeled.",
+    "Physical NOR programming, power-loss atomicity, concurrency, payload producer lifecycle, final application linking and boot remain unverified.",
+    "Relocatable source composition is not a bootable firmware claim; byte identity is not required."
+  ],
+  "evidence_files": {
+    "build/sources-goal-r1-state-append-reviewed-c/report.json": "6c885ed16a01bdfeca31e29fbf77f15d9c9e4e5eeefc02e5d665f7bc703252b9",
+    "build/sources-goal-r1-worker-exit-c/report.json": "a8944dc7862c3705272677b9c9382847d3e22c8d1d8de88d3e45443016a72f32",
+    "r1/src/application/runtime/native_previous_state_append.c": "5b5f777ab4fe164526a0a99cc74d4b28a3b5d86e64691ee9f7904a1e80dde5c7",
+    "r1/src/vendor/gomore_primitives/gomore_primitives.c": "8228e19ef26cbd15c3d30d63dd3c71aa76db803c698f01547c0d1b6940dbfbe8",
+    "r1/src/vendor/gomore_primitives/gomore_primitives.h": "d64f755460aa9174a06f5a12c840dec9f700dfb7097539d170f568a9148416f3",
+    "r1/src/sources.json": "a1e91fc0d71fd7c7ca7ccd2222ddf6e9497fee3408e27de27fb837539f54d1b5",
+    "tools/build/source-plan.json": "eeb516e31b3310fb0718f36908977f8125723f7c5e0e86cd6744395826259a4d",
+    "build/goal-r1-state-append-c/manifest-before.json": "8768e2e6e137fb10d496bc5a354134efbf6c9d90f246fcd1c73d6d6fc0b7cc08",
+    "build/goal-r1-state-append-c/core-before.c": "9bd2eb5b462f236e3369bce50b6236575534b3ea211198b8d59a452234e9d623",
+    "build/goal-r1-state-append-c/header-before.h": "2fab5a230a2dad0feb7f95aa62da8e8bf7a8fe9cdc122e918ca9ce3793c22039",
+    "build/goal-r1-state-append-c/source-audit.json": "9eaaab963a45cd7524a2a4c06c441dc17ab2994e46a75893dac1e603c88f8ca9",
+    "build/goal-r1-state-append-c/record.py": "e839c1ab90a17c9ad4f32f38cc00439379f430c5bf23881872e3808498b3bb98",
+    "build/goal-r1-state-append-c/rea.json": "1799a78be7ab7934cac2291c47c338b5b3f7d298357d1fd715b214a8fede97e3",
+    "build/goal-r1-state-append-c/verify.py": "3beb357867634accdfb842a40b604f8e2093b338f0fd0d204875d69bc4018f02",
+    "build/goal-r1-state-append-c/results.json": "537d3c05edeed89658d03c42fdffa11d7a5d785b0a3ab21e9197872a23171ae6",
+    "build/goal-r1-state-append-c/verification.log": "c9e3ea77edf6887c61fa1d96f7c7f0bb152ac39494cb4ae1474c30289a71c382",
+    "build/goal-r1-state-append-c/source.o": "ab258eb2856799c28a96651bb52d3641bb6db593374e093f562e7f63030a4aaf",
+    "build/goal-r1-state-append-c/core.o": "2695c29f88f9d5db9f7873b48cca8e2b4c92342f9fbcf2fbea42641525cd69cd",
+    "build/goal-r1-state-append-c/source.elf": "16e96ad266d49ac9b8bdc3d1f7e8b81bd1a5c7fa2f62d4b4166e300a1d99e9bf",
+    "build/goal-r1-state-append-c/pipeline/verify.py": "c1e1f4061d18229e2128a3b8873a35054ae1a6ce204c48627fc3c92769959c19",
+    "build/goal-r1-state-append-c/pipeline/results.json": "76706389e57c34e91c1f22a8a87927c785d7ca87768b25a96ae907e6eee46489",
+    "build/goal-r1-state-append-c/pipeline/verification.log": "5ff548d5934f97ace1c98c110f79231bffa642b52d1e9259f00798fc08a439e4",
+    "build/goal-r1-state-append-c/pipeline/source.elf": "1e77a4b9f09b7477c4aaa744d54ece3209b33d5702a881f666884f0e2f53ae3a",
+    "build/goal-r1-state-append-c/regression.py": "24cf6f32e7dcc35d2c8a624b56423edbf6a82ff36b634d8829589139ebdce7e1",
+    "build/goal-r1-state-append-c/regression/results.json": "c1a38a32ef94d2f56e150f29278dc214f4c0d68bd714f9e3e2cae04f7ba62085",
+    "build/goal-r1-state-append-c/regression/old.elf": "a3d435f7b3aeaa9cce6a615d59f6a4dd60f71b1dc24255516e8be2e4863d1acc",
+    "build/goal-r1-state-append-c/regression/new.elf": "747aa654bca6e1187dbea5ab209dd41e9ca24f1f09d941d4d5feff74712128c4",
+    "build/goal-r1-state-append-c/negative.py": "81608220572fb13d25b631185fd4509241206f15bbef4ced964016d86bd29235",
+    "build/goal-r1-state-append-c/negative.json": "73c2f915fbb16cb0b81b2c2b0add4ef3a0a4db2e9f8136720403cd41d62f3fd8",
+    "build/goal-r1-state-append-c/negative.log": "09191b8dcea6a5ccf28dc51a486af8fbc7746c9c357048df78b39d1cc35550dd",
+    "build/goal-r1-state-append-c/build.log": "eb4480114e1b402918fa6bb24d63b325403db97567e4ad53ef97048a86516776",
+    "build/goal-r1-state-append-c/sources-check.log": "b6ab468f43815a75634eab2762e209dbee8ab94c4cc3d601fded4210b6833f2a"
+  }
+}

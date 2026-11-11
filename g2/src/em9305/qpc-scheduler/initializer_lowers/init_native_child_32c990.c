@@ -1,114 +1,54 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_32c990\n"
-".type opencfw_em9305_child_32c990,@function\n"
-"opencfw_em9305_child_32c990:\n"
-"L32c990:\n"
-"enter_s [r13-r14,fp,blink]\n"
-"L32c992:\n"
-"sub_s sp,sp,0xc\n"
-"L32c994:\n"
-"mov_s r13,r0\n"
-"L32c996:\n"
-"mov_s r14,0x80281c\n"
-"L32c99c:\n"
-"ldb_s r0,[r0,0x4]\n"
-"L32c99e:\n"
-"ld r2,[r14,0]\n"
-"L32c9a0:\n"
-"ld r1,[r14,0x4]\n"
-"L32c9a2:\n"
-"st 0,[sp,8]\n"
-"L32c9a6:\n"
-"st_s r2,[sp,0]\n"
-"L32c9a8:\n"
-"bbit1.d.nt r0,0x4,L32c9b6\n"
-"L32c9ac:\n"
-"st_s r1,[sp,0x4]\n"
-"L32c9ae:\n"
-"bl.d opencfw_em9305_ll_connection_parameters_validate_30a6b4\n"
-"L32c9b2:\n"
-"add_s r0,sp,0\n"
-"L32c9b4:\n"
-"breq_s r0,0,L32c9b8\n"
-"L32c9b6:\n"
-"leave_s [r13-r14,fp,blink,pcl]\n"
-"L32c9b8:\n"
-"mov_s r0,r13\n"
-"L32c9ba:\n"
-"add r0,r0,684\n"
-"L32c9be:\n"
-"mov_s r2,0x18\n"
-"L32c9c0:\n"
-"bl.d opencfw_em9305_memcpy\n"
-"L32c9c4:\n"
-"mov_s r1,r14\n"
-"L32c9c6:\n"
-"ldb_s r0,[r13,0x4]\n"
-"L32c9c8:\n"
-"bbit1.d.nt r0,0x5,L32ca0c\n"
-"L32c9cc:\n"
-"mov_s r1,r13\n"
-"L32c9ce:\n"
-"add r1,r1,660\n"
-"L32c9d2:\n"
-"ldh_s r0,[r14,0]\n"
-"L32c9d4:\n"
-"ldh_s r2,[r1,0]\n"
-"L32c9d6:\n"
-"brlo.nt r0,r2,L32c9e4\n"
-"L32c9da:\n"
-"ldh_s r3,[r1,0x2]\n"
-"L32c9dc:\n"
-"brlo.nt r3,r0,L32c9e4\n"
-"L32c9e0:\n"
-"mov_s r2,r0\n"
-"L32c9e2:\n"
-"sth_s r0,[r1,0]\n"
-"L32c9e4:\n"
-"ldh_s r0,[r14,0x2]\n"
-"L32c9e6:\n"
-"brlo.nt r0,r2,L32c9f2\n"
-"L32c9ea:\n"
-"ldh_s r2,[r1,0x2]\n"
-"L32c9ec:\n"
-"brlo.nt r2,r0,L32c9f2\n"
-"L32c9f0:\n"
-"sth_s r0,[r1,0x2]\n"
-"L32c9f2:\n"
-"add r13,r13,664\n"
-"L32c9f6:\n"
-"ldh_s r1,[r14,0x4]\n"
-"L32c9f8:\n"
-"ldh_s r2,[r14,0x6]\n"
-"L32c9fa:\n"
-"ldh_s r0,[r13,0]\n"
-"L32c9fc:\n"
-"ldh_s r3,[r13,0x2]\n"
-"L32c9fe:\n"
-"min r1,r0,r1\n"
-"L32ca02:\n"
-"max r0,r3,r2\n"
-"L32ca06:\n"
-"sth_s r1,[r13,0]\n"
-"L32ca08:\n"
-"sth_s r0,[r13,0x2]\n"
-"L32ca0a:\n"
-"leave_s [r13-r14,fp,blink,pcl]\n"
-"L32ca0c:\n"
-"ld r2,[sp,0]\n"
-"L32ca0e:\n"
-"ld r1,[sp,0x4]\n"
-"L32ca10:\n"
-"ld r0,[sp,0x8]\n"
-"L32ca12:\n"
-"st.as r2,[r13,165]\n"
-"L32ca16:\n"
-"st.as r1,[r13,166]\n"
-"L32ca1a:\n"
-"st.as r0,[r13,167]\n"
-"L32ca1e:\n"
-"leave_s [r13-r14,fp,blink,pcl]\n"
-".size opencfw_em9305_child_32c990,.-opencfw_em9305_child_32c990\n"
-);
+#include <stdint.h>
+
+/* Native 0x32c990..0x32ca20: apply the pending connection-parameter
+ * request at 0x80281c to the record. Skipped (returning the options byte)
+ * when bit 4 of the record options (+4) is set or the request fails
+ * validation. Otherwise the 24-byte request is copied to +684; with
+ * option bit 5 the first three request words replace words 165..167,
+ * else the interval range at +660/+662 takes each new bound that lies
+ * within it and the range at +664/+666 widens to the new limits. Returns
+ * the last stored value, as in stock. */
+extern uint32_t opencfw_em9305_ll_connection_parameters_validate_30a6b4(uintptr_t controls);
+extern void *opencfw_em9305_memcpy(void *destination,const void *source,
+                                   uint32_t bytes);
+
+static inline uint32_t r16(uintptr_t a){return *(volatile uint16_t *)a;}
+static inline void w16(uintptr_t a,uint32_t v){*(volatile uint16_t *)a=(uint16_t)v;}
+
+uint32_t opencfw_em9305_child_32c990(uintptr_t record)
+{
+    uint32_t request[3];
+    uint32_t options=*(volatile uint8_t *)(record+4u);
+    request[2]=0u;
+    request[0]=*(volatile uint32_t *)0x80281cu;
+    request[1]=*(volatile uint32_t *)0x802820u;
+    if((options&0x10u)!=0u)return options;
+    uint32_t status=opencfw_em9305_ll_connection_parameters_validate_30a6b4(
+        (uintptr_t)request);
+    if(status!=0u)return status;
+    (void)opencfw_em9305_memcpy((void *)(record+684u),(const void *)0x80281cu,24u);
+    if((*(volatile uint8_t *)(record+4u)&0x20u)!=0u){
+        uint32_t first=request[0],second=request[1],third=request[2];
+        *(volatile uint32_t *)(record+660u)=first;
+        *(volatile uint32_t *)(record+664u)=second;
+        *(volatile uint32_t *)(record+668u)=third;
+        return third;
+    }
+    uintptr_t range=record+660u;
+    uint32_t minimum=r16(0x80281cu);
+    uint32_t low=r16(range);
+    if(minimum>=low&&r16(range+2u)>=minimum){
+        low=minimum;
+        w16(range,minimum);
+    }
+    uint32_t maximum=r16(0x80281eu);
+    if(maximum>=low&&r16(range+2u)>=maximum)w16(range+2u,maximum);
+    uintptr_t limits=record+664u;
+    uint32_t new_low=r16(0x802820u),new_high=r16(0x802822u);
+    uint32_t old_low=r16(limits),old_high=r16(limits+2u);
+    uint32_t lowest=old_low<new_low?old_low:new_low;
+    uint32_t highest=old_high>new_high?old_high:new_high;
+    w16(limits,lowest);
+    w16(limits+2u,highest);
+    return highest;
+}

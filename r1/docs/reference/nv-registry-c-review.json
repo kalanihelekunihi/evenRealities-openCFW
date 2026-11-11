@@ -1,0 +1,140 @@
+{
+  "schema_version": 1,
+  "report": "build/sources-goal-r1-nv-registry-c/report.json",
+  "report_sha256": "6240dc328c62dc0ae597097600cacf9234dede5769474dd0c8f4ac82bdfbe6ee",
+  "manifest_sha256": "95440e3d32f0076e18f4163f1f0e144fdb2e773bc96fab0b82d5e95e598a6518",
+  "source_sha256": "18886304e6d8c34dad9f4b96fa0e219fdcfc1faa4fce8390c7ae53d860114a5e",
+  "verification": {
+    "cases": 2048,
+    "executions": 4096,
+    "all_flag_masks": 128,
+    "log_modes": 8,
+    "live_handle_replacement": true
+  },
+  "defects": [
+    {
+      "defect": "order",
+      "compiled": true,
+      "behavioral_assertion_rejected": true
+    },
+    {
+      "defect": "skip-last",
+      "compiled": true,
+      "behavioral_assertion_rejected": true
+    },
+    {
+      "defect": "dirty-only",
+      "compiled": true,
+      "behavioral_assertion_rejected": true
+    },
+    {
+      "defect": "no-flush",
+      "compiled": true,
+      "behavioral_assertion_rejected": true
+    }
+  ],
+  "audit": {
+    "unchanged_prior_object_hashes": 798,
+    "changed_object_hashes": [
+      [
+        "r1-application",
+        "r1/src/application/runtime/native_nv_update.c"
+      ],
+      [
+        "r1-bootloader",
+        "{gen}/r1_startup_vectors.S"
+      ],
+      [
+        "r1-bootloader",
+        "{gen}/r1_uecc.c"
+      ]
+    ],
+    "generated_boot_crypto_and_vectors_allocated_bytes_and_relocations_unchanged": true,
+    "removed_application_imports": [
+      "r1_nv_handles_begin",
+      "r1_nv_handles_end"
+    ]
+  },
+  "unchanged_function_bodies": [
+    "bit2_body",
+    "peer_body",
+    "clear_peer_body",
+    "r1_nv_modules_idle_check",
+    "r1_kv_dev_info_bit2_set",
+    "r1_peer_address_record_write",
+    "r1_protocol_command_000844b0"
+  ],
+  "cold_registry_bindings": [
+    {
+      "index": 0,
+      "handle": "r1_device_info_record_kv_handle",
+      "stock_handle": "0x20007de8",
+      "stock_class": "0x200069a8",
+      "class_bytes": 76
+    },
+    {
+      "index": 1,
+      "handle": "r1_ble_mult_kv_handle",
+      "stock_handle": "0x20007dec",
+      "stock_class": "0x200069f4",
+      "class_bytes": 116
+    },
+    {
+      "index": 2,
+      "handle": "r1_health_settings_kv_handle",
+      "stock_handle": "0x20007df0",
+      "stock_class": "0x20006a68",
+      "class_bytes": 36
+    },
+    {
+      "index": 3,
+      "handle": "r1_health_record_kv_handle",
+      "stock_handle": "0x20007df4",
+      "stock_class": "0x20006a8c",
+      "class_bytes": 48
+    },
+    {
+      "index": 4,
+      "handle": "r1_batcfg_record_kv_handle",
+      "stock_handle": "0x20007df8",
+      "stock_class": "0x20006abc",
+      "class_bytes": 28
+    },
+    {
+      "index": 5,
+      "handle": "r1_device_info_kv_handle",
+      "stock_handle": "0x20007dfc",
+      "stock_class": "0x20006ad8",
+      "class_bytes": 148
+    },
+    {
+      "index": 6,
+      "handle": "r1_r_size_kv_handle",
+      "stock_handle": "0x20007e00",
+      "stock_class": "0x20006b6c",
+      "class_bytes": 28
+    }
+  ],
+  "rea_evidence_id": "ev_e8b5d4b253fac14b6e10fe97a98c51595518318280511be24dda732e2677dab2",
+  "rea_registry_literals_match_raw": true,
+  "evidence_files": {
+    "build/goal-r1-nv-registry-c/verify.py": "8e85b794a8c03c1ce101d1aa37f757fac7c547122f80f884f54959629c9ff96a",
+    "build/goal-r1-nv-registry-c/defects.py": "cb9f3ecff7c5e8342279e2b7d043c3c5cc1bbe9349645b66cb1a6a3c2c34d73e",
+    "build/goal-r1-nv-registry-c/audit.py": "27af1c21b88d4db63d9ac9f37708185718745db88f7e206dc74df41df17cef63",
+    "build/goal-r1-nv-registry-c/document.py": "16886a6ed32149deb4333141ad85e30eaadda38a241db6475652cd9b0abeb692",
+    "build/goal-r1-nv-registry-c/verification.json": "c8894a5c75e1c6066a1fdd3fc3b2aff17a80b5e6df7d6674833833f24b5d17a7",
+    "build/goal-r1-nv-registry-c/defects.json": "6ebc2cd0513fc20141b99b3aaf0a04b3b202c2379f553bbac801fc8c58704d1d",
+    "build/goal-r1-nv-registry-c/audit.json": "b9131570f01f15a2254097dfa8152303b04e9ee10d2ff754f38eb09e3d6559fd",
+    "build/goal-r1-nv-registry-c/source.elf": "dd25e1e0e4d83a69f7f246a333b9394542ca4d47a57fc03e99c8465c00f9804d",
+    "build/goal-r1-nv-registry-c/rea-registry.json": "1b6ebd6f96555ac6a39b04146c107bc374f1642fb0a3382fb7ce44cac9525041",
+    "build/goal-r1-nv-registry-c/verify-final.log": "01c6138eb262491dc0464f625dd4c068dd237b7f607cff2ade23a15df9d57f43",
+    "build/goal-r1-nv-registry-c/sources-check.log": "f631cce80ab62163bd75c18877fd360880eecbdf2d26ea1436a7dbedd3bf9234",
+    "build/goal-r1-nv-registry-c/boot-link/report.json": "7b603867f91a9d698ad55409b06c7fd7c3a3962c147eca0cdef16c22ac0de449"
+  },
+  "limitations": [
+    "Modeled persistence and logging services; physical flash and asynchronous behavior unverified.",
+    "Existing private-frame adapters remain unchanged.",
+    "Application composition is relocatable, not a complete firmware final link.",
+    "Unrelated G2 sources-check failure remains."
+  ]
+}

@@ -1,0 +1,11 @@
+# Hardware TWI packet reads use the C status ABI
+
+The primary and secondary packet-read wrappers in `native_hw_twi_operations.c` no longer use fixed-register variables, empty assembly or stack-word observations. The controller instance is supplied through the declared fifth C argument. Packet-write code retains its separate frame implementation.
+
+The wrappers still return nine for a NULL request, eight for a closed bus and twelve for any nonzero adapter status. Primary register/length fields remain 16-bit; secondary fields remain low bytes. The output pointer is read from request offset twelve, and the controller instance remains cluster offset twenty-eight. The C API returns status only; saved-R3/outgoing-slot restoration from the [historical review](twi-packet-read-c-review.md) is retired.
+
+The [receipt](twi-read-pure-c-review.json) records 10,752 direct stock/C comparisons and 16,128 through the actual C register-read adapters. Cases cover both buses, opened values zero/one/255, NULL requests, field boundaries, full-width statuses, outgoing-slot mutations, unaligned request addresses, lower wait errors and received bytes. Comparisons include adapter arguments and fifth-word instance, call order, output and controller memory, final status, stack balance, preserved registers and interrupt masks. Four controls with wrong NULL status, widened secondary fields or truncated error status are rejected.
+
+REA raw-byte observations identify both stock entries. The direct check models read adapters; the integration executes them while modeling legacy TX, SDK RX and waits. Private register-buffer pointers are normalized. Scratch-register values, private frame layout, electrical bus operation, IRQ timing and arbitrary aliases/faults remain outside the proof. No fully source-only bus image or physical-device operation is claimed.
+
+The normal report is `build/sources-goal-r1-twi-read-pure-c/report.json`: 727 compiled units, no failures or duplicate strong symbols, 178 application imports and 34 bootloader imports. Only the packet-operations object changed; 726 objects remain unchanged. Both packet-write instruction sections are byte unchanged. Both source manifests pass `make sources-check`. No source-plan selection or byte-identity claim was added.

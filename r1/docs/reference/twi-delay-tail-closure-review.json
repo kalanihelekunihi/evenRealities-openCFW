@@ -1,0 +1,230 @@
+{
+  "cases": 1608,
+  "passed": 1608,
+  "full_kernel_cases": 566,
+  "handoff_only_cases": 1042,
+  "executions": 6432,
+  "source_wrapper_bytes": 16,
+  "source_kernel_bytes": 6,
+  "application_imports": 210,
+  "bootloader_imports": 34,
+  "other_source_units_unchanged": 561,
+  "report": "build/sources-goal-r1-twi-delay-tail/report.json",
+  "manifest_sha256": "27eec6d55b26d2f40111f0bb41704d9fd54e0057497660d71a3eac19cd1f7f1a",
+  "source_sha256": "03dd72f8a0c112c8318b7c0470969ed48203e9d7a75e46ab1a19e479a8df35e5",
+  "limitations": [
+    "Large countdowns validated to primitive entry only",
+    "Physical bus/electrical timing unverified",
+    "Hybrid byte equality does not establish complete source-only firmware"
+  ],
+  "qualification_tests": {
+    "checks": 41,
+    "passed": 41,
+    "unanchored_duplicate_rejected": true,
+    "anchored_full_links_equal": true,
+    "fixed_byte_perturbations_rejected": 24,
+    "instruction_literal_misclassification_rejected": true,
+    "unknown_relocation_rejected": true,
+    "unnamed_entry_rejected": true,
+    "cbz_candidate_rejected": true,
+    "source_primitive_bytes": "0338fdd87047"
+  },
+  "qualification": {
+    "candidate_units": 1,
+    "compiled_units": 1,
+    "units": [
+      {
+        "source": "r1/src/application/software-twi/sdk_delay_busy.c",
+        "payload": "r1-application",
+        "evidence": "r1/symbols/function-frontier.csv",
+        "selected": [
+          {
+            "payload": "r1-application",
+            "symbol": "r1_twi_delay_busy",
+            "start": 341724,
+            "end": 341740,
+            "sha256": "8f1c6787efc7916715fe76c3158721246ba059fb87ed947261b22ead49b58513",
+            "evidence": "r1/symbols/function-frontier.csv",
+            "bindings": {
+              "r1_rtt_delay_cycles": 632385
+            },
+            "address": 501468,
+            "match_evidence": {
+              "method": "independently named native entry and all unrelocated bytes, followed by full linked equality",
+              "fixed_bytes": 12,
+              "compiled_pattern_sha256": "0b6997849376ce858a66da16018925cac392d5262195a67469fad8ef5cebac43",
+              "relocations": [
+                {
+                  "symbol": "r1_rtt_delay_cycles",
+                  "offset": 12,
+                  "relocation_type": 2,
+                  "address": 632385,
+                  "role": "native_literal_symbol"
+                }
+              ]
+            }
+          },
+          {
+            "payload": "r1-application",
+            "symbol": "r1_twi_delay_busy",
+            "start": 341740,
+            "end": 341756,
+            "sha256": "d156c0a63e701410ba8fd9f8d8ae6a7a2d7d24e9bcd51a58e6282b3e9f41dc8d",
+            "evidence": "r1/symbols/function-frontier.csv",
+            "bindings": {
+              "r1_rtt_delay_cycles": 632401
+            },
+            "address": 501484,
+            "match_evidence": {
+              "method": "independently named native entry and all unrelocated bytes, followed by full linked equality",
+              "fixed_bytes": 12,
+              "compiled_pattern_sha256": "0b6997849376ce858a66da16018925cac392d5262195a67469fad8ef5cebac43",
+              "relocations": [
+                {
+                  "symbol": "r1_rtt_delay_cycles",
+                  "offset": 12,
+                  "relocation_type": 2,
+                  "address": 632401,
+                  "role": "native_literal_symbol"
+                }
+              ]
+            }
+          }
+        ],
+        "compiled": true,
+        "rejections": {},
+        "source_implementation_completeness": "not established by compilation or byte matching",
+        "reason": "exact selected bodies"
+      }
+    ]
+  },
+  "tool_tests": {
+    "command": "python3 -m unittest discover -s tools/build -p 'test_*.py'",
+    "passed": 19
+  },
+  "evidence": [
+    {
+      "path": "build/goal-r1-twi-delay-tail/publish.py",
+      "sha256": "9a7805894e045bd73f70a70cdd5e3b008079679ab5dcba416d8b8b378bd6b934"
+    },
+    {
+      "path": "build/goal-r1-twi-delay-tail/verify.py",
+      "sha256": "735ad3cc7c10347407f7839f7512af281023af7f73b499298dc5d01282e2ba0c"
+    },
+    {
+      "path": "build/goal-r1-twi-delay-tail/test_qualification.py",
+      "sha256": "46e2c05305e90d55258c38ec34d1cb2a0997ad8c04d538bb990e0b49f67192c6"
+    },
+    {
+      "path": "build/goal-r1-twi-delay-tail/qualify.py",
+      "sha256": "a8831ce13259e57c5a4e33b04f74f7c2f35046b8dcdf5a8aeaa9a83156c1ff33"
+    },
+    {
+      "path": "build/goal-r1-twi-delay-tail/scope.json",
+      "sha256": "7acd6d072f450f6604439fcfda12e9915e8eb00ecfaa4404d2eb70b3c26c087c"
+    },
+    {
+      "path": "build/goal-r1-twi-delay-tail/qualified/source-plan.json",
+      "sha256": "fa2b9f33de262b0fe34bde7a0290f32ecfbeff821264ac20dc7ffb835e72442b"
+    },
+    {
+      "path": "build/goal-r1-twi-delay-tail/qualified/qualification.json",
+      "sha256": "e3c107ff4522f7a117d0d5110d5436318444d20e6b6c5cf94119b8b634a27dd5"
+    },
+    {
+      "path": "build/goal-r1-twi-delay-tail/source-plan-before.json",
+      "sha256": "964cbd3af9f4ea7ed207bb4b480d18a9529060dc3801663d296389472982aa7c"
+    },
+    {
+      "path": "build/goal-r1-twi-delay-tail/before.c",
+      "sha256": "750e29762eacf000e4062c67f12c68d989beb7169de948e2466d1abf66659f60"
+    },
+    {
+      "path": "build/goal-r1-twi-delay-tail/manifest-before.json",
+      "sha256": "9c5b7ae5c0e7493eb22e1fb4df9f0c928c2a9aa70530254aff89b55213bef2e2"
+    },
+    {
+      "path": "build/goal-r1-twi-delay-tail/frontier-before.csv",
+      "sha256": "3805656f89c3d43bf82781f644d45b3164bc6e8164c6866d316bf203220bca51"
+    },
+    {
+      "path": "build/goal-r1-twi-delay-tail/qualifier-before.py",
+      "sha256": "3bf8267a58268806ff06a60eb3440e29f95f08a31d265fd60651b5e638c64011"
+    },
+    {
+      "path": "build/goal-r1-twi-delay-tail/qualification-tests.json",
+      "sha256": "df6ebadbbb99bce41f6a13fb41815e04ab9554714657aecfb8db8d3bab4a9ef5"
+    },
+    {
+      "path": "build/goal-r1-twi-delay-tail/tool-tests.log",
+      "sha256": "f1c4f5a292694a8f6e82282113883cff57c024fa7297132728ceb61d019c09f8"
+    },
+    {
+      "path": "tools/build/source-plan.json",
+      "sha256": "cd45c1480a7aedf32dd3c2afdfb461458c4f4163bd3e3d12ffb1963ad234a3a8"
+    },
+    {
+      "path": "tools/build/qualify_sources.py",
+      "sha256": "e8a2a8fffcc9e363bddc6ad4472b8186ebba6a0f3d015cd114120edd40a3a168"
+    },
+    {
+      "path": "tools/build/match_compiled.py",
+      "sha256": "39a9df5c4ce1d1f035e6142513846edd64b3b1f3d2b8cb65a3046c8cffeba374"
+    },
+    {
+      "path": "r1/src/application/software-twi/sdk_delay_busy.c",
+      "sha256": "03dd72f8a0c112c8318b7c0470969ed48203e9d7a75e46ab1a19e479a8df35e5"
+    },
+    {
+      "path": "r1/src/sources.json",
+      "sha256": "27eec6d55b26d2f40111f0bb41704d9fd54e0057497660d71a3eac19cd1f7f1a"
+    },
+    {
+      "path": "r1/symbols/function-frontier.csv",
+      "sha256": "3742cf10aec173490e67611086a7aa8b68ced593a995755b71405531d99ff772"
+    },
+    {
+      "path": "build/sources-goal-r1-twi-delay-tail/report.json",
+      "sha256": "6a178f516b118b6b8eefe6805f8f72038e5de6249c708bcfa1be5794d7796e12"
+    },
+    {
+      "path": "build/hybrid-goal-r1-twi-delay-tail/build-report.json",
+      "sha256": "dae870e6f86e09852c7364ea3032d66ece7129be4fe593456aa3f9c3d55c9321"
+    },
+    {
+      "path": "build/goal-r1-twi-busy-wrapper/REA-0x7a6dc.json",
+      "sha256": "ba2579574957add9f466e24cafee75c9eda0ee8addfd08daab325bcd54384f3e"
+    },
+    {
+      "path": "build/goal-r1-twi-busy-wrapper/REA-0x7a6ec.json",
+      "sha256": "47fe533b42ee91e4fb36ba5eef7d978d50a4df9c27a75d477e5a19c158f02b6d"
+    },
+    {
+      "path": "build/goal-r1-twi-busy-wrapper/REA-0x9a640.json",
+      "sha256": "b21cd8d917a4670073838698e8cf851a114b3cf78be5e9612620a301d7b62f42"
+    },
+    {
+      "path": "build/goal-r1-twi-busy-wrapper/REA-0x9a650.json",
+      "sha256": "26d6812f0ff8f6d11d42d5b620963abf6065606e3fb218731480a579c99d6c42"
+    },
+    {
+      "path": "build/goal-r1-twi-busy-wrapper/rea-snapshot.json",
+      "sha256": "b5d97e793b24adfd8744dc5db479364f68403d74ee8f0978295ff6e423aa3bfa"
+    }
+  ],
+  "hybrid": {
+    "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "source_built_bytes": 3649,
+    "retained_bytes": 642511,
+    "resource_bytes": 248,
+    "complete_source_rebuild": false
+  },
+  "plan_change": {
+    "new_regions": 2,
+    "new_bytes": 32,
+    "existing_units_preserved": true,
+    "primitive_regions_already_source_qualified": true
+  },
+  "workflow": "G2 P2_INTERRUPTED; no gate advanced",
+  "frontier_correction": "Only the two existing native delay entries now identify sdk_delay_busy.c as their current candidate source; entry addresses and native instruction sizes unchanged."
+}

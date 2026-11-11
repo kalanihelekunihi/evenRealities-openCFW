@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "scope": "Remaining Goodix shutdown dependency analysis; not source admission",
+  "analysis_sha256": "f7c4e9578b40e134b654e77352a5b1ac0bf5ec9a21b9a39849ceccc3923a5150",
+  "evidence_file": "build/goal-r1-goodix-native-processing-teardown-c/shutdown-dependency-rea.json",
+  "evidence_sha256": "30e564bd286a25ce6ce1aed63855a3e3953b6e7ae2bf4193ffe646792fe3f5cc",
+  "implementation_receipt": "r1/docs/reference/goodix-native-processing-teardown-c-review.json",
+  "callback_table_base": "0x9d404",
+  "callback_table_deinit_column": "0x9d40c",
+  "supported_nonzero_deinit_slots": [
+    0,
+    1,
+    2,
+    6,
+    9,
+    15
+  ],
+  "rejected_unresolved_entry_pseudocode": true,
+  "additional_source_admission": "r1/docs/reference/goodix-native-spo2-teardown-c-review.json",
+  "additional_exact_bytes_file": "build/goal-r1-goodix-native-spo2-teardown-c/rea-bytes.json",
+  "additional_exact_bytes_sha256": "67847a4657d39fb380cc7113dfb402e55c268bf4ef7e991c7c0fe51faa6efbbb",
+  "nadt_source_admission": "r1/docs/reference/goodix-native-nadt-reset-c-review.json",
+  "nadt_exact_bytes_file": "build/goal-r1-goodix-native-nadt-reset-c/rea-bytes.json",
+  "nadt_exact_bytes_sha256": "59fe7bd9c29c0d33f3f640d6a463a5ae9f7e824d8ec14caf8afdedd2c620dff0",
+  "controller_source_admission": "r1/docs/reference/goodix-algorithm-shutdown-c-review.json",
+  "controller_exact_bytes_file": "build/goal-r1-goodix-algorithm-shutdown-c/rea-bytes.json",
+  "controller_exact_bytes_sha256": "a0f8d1952a5f2cdfa4e476a6ebf9cbf46c524c8625446cac78ea8ba3375ed0b8"
+}

@@ -1,32 +1,17 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_319990\n"
-".type opencfw_em9305_child_319990,@function\n"
-"opencfw_em9305_child_319990:\n"
-"L319990:\n"
-"enter_s [r13,blink]\n"
-"L319992:\n"
-"mov_s r13,r0\n"
-"L319994:\n"
-"add3 r0,r0,0x2e\n"
-"L319998:\n"
-"ldb_s r0,[r0,0]\n"
-"L31999a:\n"
-"brne.d.nt r0,0x1,L3199aa\n"
-"L31999e:\n"
-"mov_s r0,r13\n"
-"L3199a0:\n"
-"bl opencfw_em9305_associated_action_324aa8\n"
-"L3199a4:\n"
-"bl.d opencfw_em9305_associated_release_324a60\n"
-"L3199a8:\n"
-"mov_s r0,r13\n"
-"L3199aa:\n"
-"bl.d opencfw_em9305_command_record_clear_31ac54\n"
-"L3199ae:\n"
-"mov_s r0,r13\n"
-"L3199b0:\n"
-"leave_s [r13,blink,pcl]\n"
-".size opencfw_em9305_child_319990,.-opencfw_em9305_child_319990\n"
-);
+#include <stdint.h>
+
+/* Native 0x319990..0x3199b2: if the record's associated state byte (+368)
+ * is 1, run the associated action and release; then clear the command
+ * record. */
+extern uint32_t opencfw_em9305_associated_action_324aa8(uintptr_t record);
+extern uint32_t opencfw_em9305_associated_release_324a60(uintptr_t record);
+extern void opencfw_em9305_command_record_clear_31ac54(uintptr_t record);
+
+void opencfw_em9305_child_319990(uintptr_t record)
+{
+    if(*(volatile uint8_t *)(record+368u)==1u){
+        (void)opencfw_em9305_associated_action_324aa8(record);
+        (void)opencfw_em9305_associated_release_324a60(record);
+    }
+    opencfw_em9305_command_record_clear_31ac54(record);
+}

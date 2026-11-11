@@ -67,10 +67,7 @@ IAR_VFP float frexpf(float value, int *exponent)
 
 static float vfp_mul(float a, float b)
 {
-    float result;
-
-    __asm__ volatile("vmul.f32 %0, %1, %2" : "=t"(result) : "t"(a), "t"(b));
-    return result;
+    return a * b;
 }
 
 /* 0x59d2d0: final right scaling by 2^-shift into the subnormal range. */
@@ -83,9 +80,12 @@ static float ldexpf_scale_down(float value, uint32_t shift)
     if (shift > 25u)
         return bits_float(float_bits(value) & 0x80000000u);
     __asm__ volatile("vmrs %0, fpscr" : "=r"(saved));
-    __asm__ volatile("vmsr fpscr, %0" : : "r"(saved & ~0x1f1fu));
+    /* The "+t" operand ties the multiply after the flag clear and the "t"
+     * input below ties the UFC read after it, so the C multiply cannot be
+     * moved outside the cleared-flags window. */
+    __asm__ volatile("vmsr fpscr, %1" : "+t"(value) : "r"(saved & ~0x1f1fu));
     result = vfp_mul(value, bits_float((127u - shift) << 23));
-    __asm__ volatile("vmrs %0, fpscr" : "=r"(status));
+    __asm__ volatile("vmrs %0, fpscr" : "=r"(status) : "t"(result));
     __asm__ volatile("vmsr fpscr, %0" : : "r"(saved));
     if ((status & 0x8u) != 0u) /* UFC */
         audio_uart_ring_errno_range_set_439cb2();

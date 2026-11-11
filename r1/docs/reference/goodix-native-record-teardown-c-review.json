@@ -1,0 +1,174 @@
+{
+  "schema_version": 1,
+  "scope": "Native Goodix record teardown in ordinary C",
+  "report": "build/sources-goal-r1-goodix-native-record-teardown-c/report.json",
+  "comparison_report": "build/sources-goal-r1-goodix-native-workspace-teardown-c/report.json",
+  "stock_entries": [
+    {
+      "entry": "0x29354",
+      "size": 46,
+      "symbol": "r1_goodix_native_record_destroy",
+      "provider": "r1/src/application/goodix/native_record_teardown.c"
+    },
+    {
+      "entry": "0x5a628",
+      "size": 4,
+      "symbol": "r1_goodix_native_record_destroy",
+      "provider": "r1/src/application/goodix/native_record_teardown.c"
+    },
+    {
+      "entry": "0x34a38",
+      "size": 4,
+      "symbol": "r1_goodix_native_record_destroy",
+      "provider": "r1/src/application/goodix/native_record_teardown.c"
+    },
+    {
+      "entry": "0x3e6b0",
+      "size": 22,
+      "symbol": "r1_goodix_native_extended_record_destroy",
+      "provider": "r1/src/application/goodix/native_record_teardown.c"
+    },
+    {
+      "entry": "0x36230",
+      "size": 12,
+      "symbol": "r1_goodix_native_release_nullable",
+      "provider": "r1/src/application/goodix/native_record_teardown.c"
+    },
+    {
+      "entry": "0x3757c",
+      "size": 12,
+      "symbol": "r1_goodix_native_release_nullable",
+      "provider": "r1/src/application/goodix/native_record_teardown.c"
+    }
+  ],
+  "audit": {
+    "compiled_units": 871,
+    "unchanged_prior_nongenerated_objects": 860,
+    "new_units": [
+      "r1/src/application/goodix/native_record_teardown.c"
+    ],
+    "differing_existing_generated_objects": [
+      "{gen}/r1_startup_vectors.S",
+      "{gen}/r1_uecc.c"
+    ],
+    "application_imports": 62,
+    "bootloader_imports": 22,
+    "removed_imports": [],
+    "added_imports": [],
+    "new_writable_state_bytes": 0,
+    "source_plan_and_cache_layout_unchanged": true,
+    "tested_object_equals_normal_build": true,
+    "only_manifest_change_is_one_new_unit": true,
+    "portable_heap_and_existing_byte_fill_objects_unchanged": true
+  },
+  "direct": {
+    "field_mask_and_result_comparisons": 576,
+    "live_field_mutation_comparisons": 80,
+    "null_argument_cases": 6,
+    "native_instruction_bytes_executed": [
+      22,
+      46,
+      4,
+      4,
+      12,
+      12
+    ],
+    "release_arguments_snapshots_and_full_record_bytes_match": true,
+    "no_record_cells_cleared": true,
+    "source_cannot_execute_stock": true,
+    "allocator_release_modeled": true
+  },
+  "actual_heap": {
+    "actual_C_heap_record_comparisons": 256,
+    "actual_C_initializer_malloc_free_and_record_destructors_execute": true,
+    "root_before_or_after_children_optional_live_guard": true,
+    "entire_heap_and_write_width_order_values_match": true,
+    "source_pipeline_cannot_execute_stock": true,
+    "native_destructor_instruction_bytes": [
+      46,
+      22,
+      12
+    ]
+  },
+  "compiled_defects_rejected": [
+    {
+      "defect": "wrong-owned-offset",
+      "rejected": true
+    },
+    {
+      "defect": "owned-order",
+      "rejected": true
+    },
+    {
+      "defect": "missing-owned-cell",
+      "rejected": true
+    },
+    {
+      "defect": "extended-offset",
+      "rejected": true
+    },
+    {
+      "defect": "nullable-release",
+      "rejected": true
+    },
+    {
+      "defect": "clear-owned-cell",
+      "rejected": true
+    },
+    {
+      "defect": "retain-root",
+      "rejected": true
+    },
+    {
+      "defect": "return-status",
+      "rejected": true
+    },
+    {
+      "defect": "guard-extended-null",
+      "rejected": true
+    }
+  ],
+  "contract": [
+    "Common destructor: null is success; otherwise release nonzero pointers at1c0,1dc,1f4 in order, then release root. Leave fields unchanged. Return zero.",
+    "Extended destructor: load pointer at260 without an initial null guard, release it if nonzero, then invoke common destructor.",
+    "Nullable allocation helper: free nonnull allocation, return zero. Duplicate wrappers map to canonical bodies."
+  ],
+  "limits": [
+    "All100 native instruction bytes execute. Direct tests model free with call-time record snapshots and caller-scratch clobbers. Actual-heap integration executes the C allocator and prohibits entering stock code.",
+    "Null extended record access at260 is an emulator access-shape check, not a claim of physical MCU fault. Other null arguments return zero without release.",
+    "Saved integer/FP registers, SP, masks, FPSCR and caller guards checked; caller scratch, APSR and private frames excluded.",
+    "Typed record preparation is a fixture, not recovered algorithm initialization. No new writable state or imports.",
+    "Parent dispatch/destructor integration, remaining initialization/computation, concurrency, physical hardware, final linking/startup and boot remain open. Relocatable composition is not executable firmware."
+  ],
+  "evidence_files": {
+    "build/sources-goal-r1-goodix-native-record-teardown-c/report.json": "1c91ecf9ef7cc8ba9317fdec17f515c5ad27b704b47e701b59dfd39fb8f541d4",
+    "build/sources-goal-r1-goodix-native-workspace-teardown-c/report.json": "845dc9107e22ad1899b0599935be89afafb5a869a541965adf7d09f039566d2d",
+    "r1/src/application/goodix/native_record_teardown.c": "b7cea98e79bac3f8c5d80bc58c59e81840d7e9b8b9267429e83c4ebb981bbf45",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-native-record-teardown-c/r1/r1-application/r1__src__application__goodix__native_record_teardown.c.o": "785df1baa1e96a2723aa03debb90b5dc7bfa44a1e76283a79645968876cec4de",
+    "r1/src/sources.json": "fb3a6fb5484091a41d019575a772173e2880c4049d4b24d445c46706e0152d42",
+    "tools/build/source-plan.json": "eeb516e31b3310fb0718f36908977f8125723f7c5e0e86cd6744395826259a4d",
+    "r1/src/config/runtime/native_health_cache.ld": "eb8f131c489cd818d4e36718718fa1989719ca0170f164541a1a5bf56dfc1ec3",
+    "r1/src/application/goodix/native_hrv_teardown.c": "74c35c824e0ba0c9f9c782fb1a42ec140d569c509b18a9552733dbead271048c",
+    "r1/docs/reference/FUNCTION-OWNERSHIP.csv": "79f678106124b06156a35aa2b05f10b60cd05b9dd0018089a3ee01d6444e6119",
+    "r1/symbols/function-frontier.csv": "8f2cabae4629d2df4cfc2f1164593dd0cc768e4e2011b121d524b4b375fe559e",
+    "build/goal-r1-goodix-native-record-teardown-c/audit.json": "b1e545670d3e5cdf965f0039ab5c3147db58104bc5bcc56603f384276aef3f37",
+    "build/goal-r1-goodix-native-record-teardown-c/verify.log": "c2bd7686a725bf819f68d89b3902e8245e66cfdfda703e48aab233785f7bddf3",
+    "build/goal-r1-goodix-native-record-teardown-c/negative.json": "e536667a6f0140b647522199882ee3d73ed5d8bb9229ba349c069bc6ce6b3eb1",
+    "build/goal-r1-goodix-native-record-teardown-c/audit.py": "a39444d03d9e448121088a0c7988261870df28ecf12de9b9f2a993977cf0bd89",
+    "build/goal-r1-goodix-native-record-teardown-c/source.elf": "c3e8bea751e21b6f832251ec014f8148ea81bd468c5d4a5566d11024e9ad90b8",
+    "build/goal-r1-goodix-native-record-teardown-c/negative.py": "9adfd678f3d943ceee80cc8933e63864f04d1375ac37bdb65476212825012e0c",
+    "build/goal-r1-goodix-native-record-teardown-c/negative.log": "e0e16023b574226a1a4ff3abbe4ce2c16a00f4ed679e97ff3ac46cbc552877ea",
+    "build/goal-r1-goodix-native-record-teardown-c/source.o": "785df1baa1e96a2723aa03debb90b5dc7bfa44a1e76283a79645968876cec4de",
+    "build/goal-r1-goodix-native-record-teardown-c/results.json": "388b095b8068cf9b8b2d3f98d9ec1304d480f4f49f503a258909c9cc4d7370ff",
+    "build/goal-r1-goodix-native-record-teardown-c/pipeline.log": "83aaf3bf4e21b112c0c1ce585adcf6894495aeba174f4428810942395c79acf5",
+    "build/goal-r1-goodix-native-record-teardown-c/pipeline.py": "a99a75c43fab4295f536bde6bdb9427f2cfe696513bfa5782beea6e4c7cf654d",
+    "build/goal-r1-goodix-native-record-teardown-c/rea-bytes.json": "92137ba0e79c655218183196b55c34b21d8d5d8d03a2abf75024091dec4ac22b",
+    "build/goal-r1-goodix-native-record-teardown-c/manifest-before.json": "98b43320f969e7a8f573c75bdf7b381f5b8c4fbfaa39bc186fa52ff264857f18",
+    "build/goal-r1-goodix-native-record-teardown-c/verify.py": "4f6ffdec3d9b71103c83ab7e03520ef35c48c26df46d4d3218faa9cfb124f944",
+    "build/goal-r1-goodix-native-record-teardown-c/parent-dependencies-rea.json": "6eb1562d276e0bb610c413ade4a61ee49c1ad5d885d7fb8859de557e3bf99f2c",
+    "build/goal-r1-goodix-native-record-teardown-c/build.log": "d3e9840eb6073b0499f60d891ea29c8b119a5117b003aa66709a9aa39484ecd0",
+    "build/goal-r1-goodix-native-record-teardown-c/pipeline/test.ld": "006166e723e913b6917e1d48557f5023f0960d09b0f04f46bca7d7aeb9f88815",
+    "build/goal-r1-goodix-native-record-teardown-c/pipeline/source.elf": "bfc92e677efed9ad6741a1e44deb5185b7f8319dbadcac1c9977b697a0a1d8ff",
+    "build/goal-r1-goodix-native-record-teardown-c/pipeline/results.json": "7ce01ff9e985ada813d28774a9f9c8e56a908224d56ba20cddecf41042dca662"
+  }
+}

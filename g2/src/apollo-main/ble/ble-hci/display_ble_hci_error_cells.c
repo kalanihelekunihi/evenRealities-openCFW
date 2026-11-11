@@ -4,4 +4,3 @@
 #include <stdint.h>
 
 uint32_t audio_ble_hci_error_callback_20074644;
-volatile uint32_t audio_ble_hci_error_value_20074648;

@@ -1,9 +1,8 @@
 #include <stdint.h>
 
-/* Native 0x325474..0x32553e. The original 168-byte local frame is retained
- * by the ARC entry wrapper; mode 3 leaves most frame bytes untouched before
- * the event callback, so an ordinary uninitialized C array is not an ABI
- * substitute. The two key-operation children remain genuine source imports. */
+/* Native 0x325474..0x32553e. The 168-byte local frame is reserved by the
+ * entry function below; mode 3 leaves most frame bytes untouched before the
+ * event callback. The two key-operation children remain genuine source imports. */
 extern uint32_t opencfw_em9305_radio_key_operation_30ff70(uintptr_t,
                                                              uintptr_t,
                                                              uintptr_t);
@@ -55,15 +54,11 @@ uint32_t opencfw_em9305_init_callback_body_325474(uintptr_t frame)
     return 0u;
 }
 
-#ifdef __arc__
-__attribute__((naked)) uint32_t opencfw_em9305_init_callback_325474(void)
+/* Native entry 0x325474: reserve the 168-byte local frame and run the body
+ * on it (stock: enter_s, sub sp,sp,168, mov r0,sp). The body leaves most
+ * bytes untouched in mode 3; they stay uninitialised, as in stock. */
+uint32_t opencfw_em9305_init_callback_325474(void)
 {
-    __asm__ volatile(
-        "enter_s [r13-r14,fp,blink]\n\t"
-        "sub sp,sp,168\n\t"
-        "mov r0,sp\n\t"
-        "bl opencfw_em9305_init_callback_body_325474\n\t"
-        "leave_s [r13-r14,fp,blink,pcl]\n\t"
-    );
+    uint32_t frame[42];
+    return opencfw_em9305_init_callback_body_325474((uintptr_t)frame);
 }
-#endif

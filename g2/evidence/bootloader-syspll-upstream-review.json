@@ -1,0 +1,110 @@
+{
+ "schema_version": 1,
+ "scope": "Bounded differential review of the Even bootloader SYSPLL against the pinned AmbiqSuite 5.1.0 am_hal_syspll.c. Not workflow coverage, not hardware proof.",
+ "date": "2026-10-29",
+ "stock": {
+  "path": "g2/blobs/official/g2-2.2.6.10/ota_s200_bootloader.bin",
+  "sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "load_address": "0x410000"
+ },
+ "upstream": {
+  "repository": "https://github.com/AmbiqMicro/ambiqhal_ambiq",
+  "commit": "5efc0228528a8adce5eae0d226fac85d2551eb3b",
+  "path": "mcu/apollo510/hal/mcu/am_hal_syspll.c",
+  "git_blob": "c07fe2a1db693df23bff104a3f81eba25198fa83",
+  "sha256": "b2ac1b4a89ff7c2e17f57f199998688e9de4a67ca9035d5dbf8063b94da18b28",
+  "release": "release_sdk5p1p0-366b80e084"
+ },
+ "build_copy": {
+  "generated": "{gen}/ambiqhal-apollo510-boot/am_hal_syspll.c",
+  "change": "am_hal_syspll_mux_select compiled out (#if 0); the stock bootloader links no am_hal_sysctrl_clkmuxrst_clkneeded_update",
+  "sha256": "449d2754aabfa58d19b192c13b1d8d52c0cf38149ac62b1a40f0d9514bbfced7"
+ },
+ "rea": {
+  "tool": "REA 6.5.0 (rea function, raw-binary, arm, entry 0x410000)",
+  "provider": "Ghidra 12.1.4 (GHIDRA_INSTALL_DIR=/opt/homebrew/Cellar/ghidra/12.1.4/libexec, JAVA_HOME=openjdk@21)",
+  "function": "0x42740c",
+  "finding": "Decompiles to am_hal_syspll_configure: handle check (bInit|magic 0x504C30), bEnable->7, RefDiv<64, integer FBDIV 4..960 / fraction 10..96, PostDiv<8 and PostDiv2<=PostDiv1, PLLCTL0 VCOSELECT/FREFSEL/DSMPD, PLLDIV0 FRAC, PLLDIV1 FBDIV/REFDIV/POSTDIV1/2, fref update call 0x41ac92, DACPD/FOUT* writes."
+ },
+ "method": {
+  "emulator": "Unicorn 2.1.4 (A-class Thumb core; M-profile PRIMASK MRS/MSR/CPSID emulated by an instruction hook)",
+  "stock_entries": {
+   "am_hal_syspll_config_generate_with_postdiv": "0x427160",
+   "am_hal_syspll_config_generate": "0x426f6c",
+   "am_hal_syspll_configure": "0x42740c",
+   "am_hal_syspll_enable": "0x427360",
+   "am_hal_syspll_disable": "0x4273dc",
+   "am_hal_syspll_deinitialize": "0x427310",
+   "am_hal_syspll_lock_wait": "0x427522"
+  },
+  "candidate": "Same C as the bootloader build (generated am_hal_syspll.c, syspll_hal_bindings.c, clock_pll_rounding.c, clock_pll_mod.c) compiled with the g2-apollo-bootloader-6 profile but -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 so the emulator decodes it (clang emits VSEL for M55). Delay stubs replace am_hal_delay_us; stock 0x41d1c0 is short-circuited.",
+  "abi_note": "Stock am_hal_syspll_config_generate takes its floats in s0/s1 (IAR); the build passes them in r1/r2 (softfp). The test feeds each side its own convention.",
+  "compared": "return value; 12-byte am_hal_syspll_config_t output; handle word; PLLCTL0/PLLDIV0/PLLDIV1/HALSTATES/D2ASPARE final values; configure MMIO write sequence",
+  "harness": "build/boot-hal-diff/diff.py (ignored build/; seed 0x5150)"
+ },
+ "results": {
+  "config_generate_with_postdiv": {
+   "cases": 526,
+   "mismatches": 0
+  },
+  "config_generate": {
+   "cases": 310,
+   "mismatches": 0
+  },
+  "configure": {
+   "cases": 600,
+   "mismatches": 0,
+   "write_sequence_mismatches": 0
+  },
+  "lifecycle": {
+   "cases": 1600,
+   "mismatches": 0
+  }
+ },
+ "outcome_classes": {
+  "config_generate_with_postdiv": {
+   "0": 454,
+   "5": 72
+  },
+  "config_generate": {
+   "0": 286,
+   "5": 18,
+   "1": 6
+  },
+  "configure": {
+   "6": 358,
+   "0": 86,
+   "7": 85,
+   "2": 71
+  },
+  "lifecycle": "enable 0/2/7, disable 0/2, deinitialize 0/2, lock_wait 0/2/4/7"
+ },
+ "mutant_check": "PostDiv2 > PostDiv1 changed to >= in the candidate: 25 of 600 configure cases mismatch.",
+ "limitations": [
+  "Emulated MMIO is plain RAM; lock and power settling are not modelled.",
+  "am_hal_syspll_initialize (0x4272ac) and am_hal_pwrctrl_syspll_enable (0x41ca5c) were compared by reading, not executed.",
+  "No hardware run."
+ ],
+ "build_source_update": {
+  "date": "2026-10-29",
+  "note": "The bootloader now builds am_hal_syspll.c from AmbiqSuite SDK 5.0.0 (third-party/upstream/ambiqhal-apollo510-sdk5.0.0 @ 392042e), the SDK the bootloader was identified as using (bootloader-hal-upstream-review.json). The 5.0.0 file differs from the 5.1.0 one compared here only in comments and the revision line.",
+  "git_blob": "fb951c49cfdf82f5e16b605c7f848f9d659a8bf6"
+ },
+ "final_image_rerun": {
+  "date": "2026-10-29",
+  "image": "g2-apollo-bootloader 154,652 B (sha256 in bootloader-hal-upstream-review.json build)",
+  "harness": "build/boot-hal-diff/diff_syspll.py (seed 0x5150): the earlier cases on the IT-safe base harness, running the final image's cortex-m55 code (VSEL emulated) instead of a cortex-m4 recompile",
+  "results": {
+   "config_generate_with_postdiv": 526,
+   "config_generate": 310,
+   "configure": 600,
+   "enable": 400,
+   "disable": 400,
+   "deinitialize": 400,
+   "lock_wait": 400
+  },
+  "mismatches": 0,
+  "faults_or_timeouts": 0,
+  "note": "config_generate floats go in s0/s1 on the stock (hard-float) side and r1/r2 on the softfp build, matching each image's own callers."
+ }
+}

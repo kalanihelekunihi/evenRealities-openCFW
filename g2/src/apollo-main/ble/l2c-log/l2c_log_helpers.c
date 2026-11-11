@@ -10,3 +10,5 @@ int32_t audio_l2c_strncmp(const char *a,const char *b,uint32_t count) {
     }
     return 0;
 }
+__typeof__(audio_l2c_strncmp) audio_ble_hci_vendor_compare_44b610
+    __attribute__((alias("audio_l2c_strncmp")));

@@ -86,12 +86,15 @@
  * Privileged execution is a caller precondition. Physical IRQ delivery is not
  * supplied by the callable module. */
 #ifdef OPENCFW_REAL_CRITICAL
-uint32_t __attribute__((naked))
+/* PRIMASK has no C spelling: read it and mask interrupts with the same two
+ * instructions CMSIS __get_PRIMASK()/__disable_irq() expand to. */
+uint32_t
 am_hal_interrupt_master_disable(void)
 {
-    __asm("    mrs     r0, PRIMASK");
-    __asm("    cpsid i");
-    __asm("    bx lr");
+    uint32_t primask;
+    __asm volatile("mrs %0, primask" : "=r"(primask));
+    __asm volatile("cpsid i" ::: "memory");
+    return primask;
 }
 /* Alias adapts the recovered CMDQ subset's existing provider name; no wrapper
  * or alternate instructions. */

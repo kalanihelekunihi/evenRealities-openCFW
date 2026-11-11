@@ -7,7 +7,7 @@ extern void case_policy_task_list_insert(uint32_t list, uint32_t link);
 static uint32_t rd(uint32_t a){return *(volatile uint32_t *)(uintptr_t)a;}
 static void wr(uint32_t a,uint32_t v){*(volatile uint32_t *)(uintptr_t)a=v;}
 static __attribute__((noreturn)) void native_fault(void)
-{__asm__ volatile("cpsid i\n1: b 1b");__builtin_unreachable();}
+{__asm__ volatile("cpsid i");for(;;){}}
 uint32_t case_boot_pool_wake_waiter(uint32_t list)
 {
     uint32_t task=rd(rd(list+12u)+12u);
@@ -28,3 +28,5 @@ uint32_t case_boot_pool_wake_waiter(uint32_t list)
     }
     return 0u;
 }
+/* Dedup (0x0800cba0): case_queue_wake (was legacy-default/kernel_task_list_candidates.c). */
+uint32_t case_queue_wake(uint32_t *list) __attribute__((alias("case_boot_pool_wake_waiter")));

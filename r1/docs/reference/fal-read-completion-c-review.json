@@ -1,0 +1,303 @@
+{
+  "schema_version": 1,
+  "report": "build/sources-goal-r1-fal-read-completion-c/report.json",
+  "verification": {
+    "compatible_native_request_comparisons": 36,
+    "actual_C_chunked_reads": [
+      [
+        65536,
+        false,
+        2
+      ],
+      [
+        65536,
+        true,
+        2
+      ],
+      [
+        65537,
+        false,
+        2
+      ],
+      [
+        65537,
+        true,
+        2
+      ],
+      [
+        131069,
+        false,
+        2
+      ],
+      [
+        131069,
+        true,
+        2
+      ],
+      [
+        131070,
+        false,
+        2
+      ],
+      [
+        131070,
+        true,
+        2
+      ],
+      [
+        131071,
+        false,
+        3
+      ],
+      [
+        131071,
+        true,
+        3
+      ]
+    ],
+    "dispatch_failure_cases": [
+      [
+        0,
+        1,
+        1
+      ],
+      [
+        0,
+        1,
+        26
+      ],
+      [
+        0,
+        1,
+        27
+      ],
+      [
+        0,
+        1,
+        4294967295
+      ],
+      [
+        32,
+        1,
+        1
+      ],
+      [
+        32,
+        1,
+        26
+      ],
+      [
+        32,
+        1,
+        27
+      ],
+      [
+        32,
+        1,
+        4294967295
+      ],
+      [
+        80,
+        1,
+        1
+      ],
+      [
+        80,
+        1,
+        26
+      ],
+      [
+        80,
+        1,
+        27
+      ],
+      [
+        80,
+        1,
+        4294967295
+      ],
+      [
+        65535,
+        1,
+        1
+      ],
+      [
+        65535,
+        1,
+        26
+      ],
+      [
+        65535,
+        1,
+        27
+      ],
+      [
+        65535,
+        1,
+        4294967295
+      ],
+      [
+        65536,
+        1,
+        1
+      ],
+      [
+        65536,
+        1,
+        26
+      ],
+      [
+        65536,
+        1,
+        27
+      ],
+      [
+        65536,
+        1,
+        4294967295
+      ],
+      [
+        65536,
+        2,
+        1
+      ],
+      [
+        65536,
+        2,
+        26
+      ],
+      [
+        65536,
+        2,
+        27
+      ],
+      [
+        65536,
+        2,
+        4294967295
+      ],
+      [
+        131071,
+        1,
+        1
+      ],
+      [
+        131071,
+        1,
+        26
+      ],
+      [
+        131071,
+        1,
+        27
+      ],
+      [
+        131071,
+        1,
+        4294967295
+      ],
+      [
+        131071,
+        2,
+        1
+      ],
+      [
+        131071,
+        2,
+        26
+      ],
+      [
+        131071,
+        2,
+        27
+      ],
+      [
+        131071,
+        2,
+        4294967295
+      ],
+      [
+        131071,
+        3,
+        1
+      ],
+      [
+        131071,
+        3,
+        26
+      ],
+      [
+        131071,
+        3,
+        27
+      ],
+      [
+        131071,
+        3,
+        4294967295
+      ]
+    ],
+    "uninitialized_provider_cases": 3,
+    "unrepresentable_count_guards": 2,
+    "actual_C_internal_policy_and_mapped_byte_copy": true,
+    "native_dispatch_modeled": true
+  },
+  "negative_controls": [
+    {
+      "name": "length_truncation",
+      "rejected": true,
+      "returncode": 1
+    },
+    {
+      "name": "ignored_error",
+      "rejected": true,
+      "returncode": 1
+    }
+  ],
+  "audit": {
+    "unchanged_nongenerated_objects": 841,
+    "changed_nongenerated_objects": [
+      "r1/src/application/board/native_fal_device.c"
+    ],
+    "changed_generated_objects": [
+      "{gen}/r1_startup_vectors.S",
+      "{gen}/r1_uecc.c"
+    ],
+    "changed_allocated_sections": [
+      ".text.r1_native_fal_device_read"
+    ],
+    "compiled_units": 852,
+    "application_imports": 66,
+    "bootloader_imports": 22,
+    "import_sets_unchanged": true
+  },
+  "intentional_improvement": "FAL read splits counts into <=65535-byte device requests and returns-1 on any nonzero device status, instead of discarding the status and reporting unperformed bytes. Reject counts not representable as positive int32. Zero-length still dispatches once.",
+  "proof_limits": [
+    "36 stock/C comparisons establish unchanged successful single-request arguments/return for bounded counts with the native dispatch boundary modeled. Native code evidence shows the discarded status and uint16 provider length. This is not native equality for the new chunk/error behavior.",
+    "10 large reads execute actual C FAL, internal-flash policy and mapped-byte-copy loop with a controlled C dispatch boundary.36 injected failures test stopping, prefix retention and untouched suffix.3 actual uninitialized-provider cases and2 oversized signed-count guards pass. Before/after hooks are modeled.",
+    "Both compiled defects are rejected by runtime assertions. Only the read text section changes; existing data owners and other function sections remain unchanged.",
+    "Driver success is still a device status, not independent physical completion proof. Arbitrary provider corruption, callback mutation, overlapping buffers, address-wrap faults and concurrency are outside this replay. Global request ownership is retained.",
+    "Upper TSL/sector readers still ignore read errors and retain native stack behavior; iterator error propagation and coupled assembly removal remain unfinished.",
+    "852 units compile and both relocatable payloads compose, with66 application and22 bootloader imports. Final firmware linking, physical flash and boot remain unverified."
+  ],
+  "evidence_files": {
+    "build/sources-goal-r1-fal-read-completion-c/report.json": "89ecfbde533680b113ac29dd2368a8a50d3a1387174ae3618c194ba726b355ee",
+    "build/sources-goal-r1-send-hook-c/report.json": "85cf2d70e33a149bdb7489b25af0ea2da15bf3abac83cbf8ad74eec6e7191d1e",
+    "r1/src/application/board/native_fal_device.c": "56bc003d348a51b160e51dc4c8297e88afc631c24d9707a5720eda24636e80f5",
+    "r1/src/application/board/native_internal_flash.c": "3f295a29fdcc69dbf57bdb75cf448c7fd2ec9134b126ee1805f9add8846019fc",
+    "r1/src/application/board/native_internal_flash_operations.c": "2d24b8dbe5b59b035743d8d1f8591c0179deaf7a3755490d8c8ab42b56a42de5",
+    "build/goal-r1-fal-read-completion-c/rea.json": "f82875e5aff0a0252bee0b65e42021e96b53b5eb1f8ff07e93c9d38b3ef3b64d",
+    "build/goal-r1-fal-read-completion-c/verify.py": "411d9e690dc5b8c5a70d18fd93ed8347674cf2d4f6d3572b996a1d3f51c0861a",
+    "build/goal-r1-fal-read-completion-c/verification.json": "e907aeb67f654b3833f947a2431f35fcb22e299c929bc8b23a7ffcbe23483b50",
+    "build/goal-r1-fal-read-completion-c/verification.log": "98132c0cfe6f04684627d439d4ab66ba744819b06d6dd31cfc56c8ba6df5d07d",
+    "build/goal-r1-fal-read-completion-c/dispatch.c": "cdec900f5ab2621aa4050a7dcc60d04a70213dbc3527fb3f59975b1c9e4e46c1",
+    "build/goal-r1-fal-read-completion-c/negative.py": "65d5f107cc51d40afe67ca748b1a39137ce63ece9b522410571ead0da59df449",
+    "build/goal-r1-fal-read-completion-c/negative.json": "e1774e2a382a91211ca77cf29b9c530024c931c5e9f436e413ef1e6ea954fe7e",
+    "build/goal-r1-fal-read-completion-c/negative.log": "2c88fbe19549546573208eeaee153f4c7d494fa269d70bf73cc5dedd524276a0",
+    "build/goal-r1-fal-read-completion-c/length_truncation/mutant.c": "b6a306689760114bf47718a29d6257ea71de2cb217e71e1181a37045d9e083e7",
+    "build/goal-r1-fal-read-completion-c/length_truncation/result.log": "dae80b7f776ac4f3ad34c0b16b4b36b81830bbda1ae87aa10db630c730c32123",
+    "build/goal-r1-fal-read-completion-c/ignored_error/mutant.c": "6957cbbc2bbd07935627653219a18ae74f498f4f1daa34fc602d353a4a57b98a",
+    "build/goal-r1-fal-read-completion-c/ignored_error/result.log": "e22df69c0bd63531d6f495fba6bacc637f9599fc509d32206a542be1a2d28c2d",
+    "build/goal-r1-fal-read-completion-c/r1-check.log": "ff00837ff85e19cf04a893c77e51ce602c362675651960cf956f13903b124dc6"
+  }
+}

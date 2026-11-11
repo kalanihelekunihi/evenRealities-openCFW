@@ -1,0 +1,127 @@
+{
+  "schema_version": 1,
+  "scope": "R1 reset clear-all storage orchestration and existing database accessor",
+  "report": "build/sources-goal-r1-health-clear-final-c/report.json",
+  "comparison_report": "build/sources-goal-r1-state-append-reviewed-c/report.json",
+  "audit": {
+    "compiled_units": 863,
+    "application_imports": 64,
+    "bootloader_imports": 22,
+    "unchanged_prior_nongenerated_objects": 851,
+    "changed_prior_nongenerated_objects": [
+      "r1/src/application/runtime/native_health_database_initialize.c"
+    ],
+    "new_nongenerated_sources": [
+      "r1/src/application/runtime/native_health_clear.c"
+    ],
+    "normal_clear_and_DB_objects_equal_probes": true,
+    "prior_database_allocated_sections_identical": true,
+    "manifest_change": "one C clear-all unit using existing FlashDB profile",
+    "source_plan_unchanged": true,
+    "new_mutable_persistent_bytes": 0,
+    "closed_imports": [
+      "r1_health_clear_all_caches",
+      "r1_health_sync_provider_00070028"
+    ],
+    "new_imports": [
+      "r1_sleep_storage_delete_all"
+    ]
+  },
+  "direct": {
+    "stock_C_comparisons": 18432,
+    "native_instruction_bytes_executed": 328,
+    "cache_bytes_and_operation_log_order_match": true,
+    "all_nullable_cache_combinations_and_database_guard": true,
+    "unaligned_and_aliased_cache_providers": true,
+    "private_frame_void_registers_APSR_and_physical_storage_unverified": true
+  },
+  "actual_cache_chain": {
+    "stock_C_comparisons": 54,
+    "native_instruction_bytes_executed": 328,
+    "cache_bytes_and_operation_log_order_match": true,
+    "actual_cache_accessors_database_owner_and_memclear": true,
+    "remaining_FlashDB_sleep_time_record_logging_modeled": true,
+    "private_frame_void_registers_APSR_and_physical_storage_unverified": true
+  },
+  "compiled_defects_rejected": [
+    {
+      "defect": "short-scalar-clear",
+      "rejected": true,
+      "log": "build/goal-r1-health-clear-c/short-scalar-clear/test.log"
+    },
+    {
+      "defect": "wrong-HRV-tail",
+      "rejected": true,
+      "log": "build/goal-r1-health-clear-c/wrong-HRV-tail/test.log"
+    },
+    {
+      "defect": "lost-timezone",
+      "rejected": true,
+      "log": "build/goal-r1-health-clear-c/lost-timezone/test.log"
+    },
+    {
+      "defect": "wrong-day",
+      "rejected": true,
+      "log": "build/goal-r1-health-clear-c/wrong-day/test.log"
+    },
+    {
+      "defect": "missing-DB-null-guard",
+      "rejected": true,
+      "log": "build/goal-r1-health-clear-c/missing-DB-null-guard/test.log"
+    },
+    {
+      "defect": "nonzero-sync-record",
+      "rejected": true,
+      "log": "build/goal-r1-health-clear-c/nonzero-sync-record/test.log"
+    },
+    {
+      "defect": "short-activity-clear",
+      "rejected": true,
+      "log": "build/goal-r1-health-clear-c/short-activity-clear/test.log"
+    }
+  ],
+  "contract": [
+    "Log start; clean nonnull database; request sleep history delete; capture halfword timezone then day start.",
+    "In order clear HR, SpO2, temperature and stress: 72 bytes, zero bytes75..79, offset72, day80; retain intervening bytes.",
+    "Clear activity576 bytes, offset576, day580. Clear HRV144 bytes, zero147..152, offset144, day156. Each accessor is live and nullable.",
+    "Write zeroed24-byte sync record and log done regardless of service status.",
+    "Database getter returns the existing 0x2001690c source-owned database. No duplicate cache/DB state."
+  ],
+  "limits": [
+    "Direct services and memory clear modeled; actual-chain fixture executes six real cache accessors, actual database getter/owner and actual memory clear/memset.",
+    "FlashDB clean, sleep deletion, time/logging and sync-record persistence are modeled boundaries. Sleep deletion becomes explicit unresolved dependency.",
+    "SP, saved integer/FP registers, masks and caller-stack guards checked; private frames, incidental void registers, APSR, concurrency and faults excluded.",
+    "Physical flash erase, power-loss behavior, final source linking and boot remain unverified. Relocatable composition is not a bootable firmware claim."
+  ],
+  "evidence_files": {
+    "build/sources-goal-r1-health-clear-final-c/report.json": "8a0955545ffd80c398acde26d988e4edbeb98995cf1b1081923e64a207b6b38c",
+    "build/sources-goal-r1-state-append-reviewed-c/report.json": "6c885ed16a01bdfeca31e29fbf77f15d9c9e4e5eeefc02e5d665f7bc703252b9",
+    "r1/src/application/runtime/native_health_clear.c": "f4c2857da65b3e77e1b3906c0959399f3f0cb28a56c164e67232fb03111bcc01",
+    "r1/src/application/runtime/native_health_database_initialize.c": "1230bac7089aca08b5d58a7655cff7f77bd8df54edfbf26e7d43fbc755d61ae3",
+    "r1/src/sources.json": "6ea6ab6f16e97b34b73ee1fb683c7c49eb7228bf29fdbdb21f5aded6d4d13380",
+    "tools/build/source-plan.json": "eeb516e31b3310fb0718f36908977f8125723f7c5e0e86cd6744395826259a4d",
+    "build/goal-r1-health-clear-c/manifest-before.json": "a1e91fc0d71fd7c7ca7ccd2222ddf6e9497fee3408e27de27fb837539f54d1b5",
+    "build/goal-r1-health-clear-c/database-before.c": "dc74acf0b94c0cf31fa1b8bcaadf2d5dbb039a257acbc278cde7e050b09934b3",
+    "build/goal-r1-health-clear-c/database-object-audit.json": "bb6c27c80768f91295a6d6e033261098abfeaa79979bdcc369c0b21e77e5079e",
+    "build/goal-r1-health-clear-c/record.py": "2c32b8852c6eae0ae5893b190d60f36ada7f7d6c2a04f96f29d04552c7ace764",
+    "build/goal-r1-health-clear-c/rea.json": "2123ba4912747c1fb2954ca267dd2bcd32b429ad0e763bb5f0f1fb1578e73fe6",
+    "build/goal-r1-health-clear-c/rea-db.json": "c9b364fc2e7904e47c1df5cdb7d034ca8a0ace98574602f7e1577e9131e756fa",
+    "build/goal-r1-health-clear-c/verify.py": "30059f9b57231af7ad6672b019559af35626344b5135cd4a28fe003a7cd01d4d",
+    "build/goal-r1-health-clear-c/results.json": "34250e6d630465a70eb20b26c1dc8f26f139340fa15521bb88f000bd9c8eab7f",
+    "build/goal-r1-health-clear-c/verification.log": "fb6f66a2c2e08a46d324215746d812b28826d3625dbef5197c80c96cdd8a6b70",
+    "build/goal-r1-health-clear-c/source.o": "75b9797d7181f8b4dbfe74d518673f6f951392314b5567379fcbdd90715517be",
+    "build/goal-r1-health-clear-c/source.elf": "a3a7fc0f28f0605b4e11e94e580dccde02c6a4e1753cfe848868cfead3607dd4",
+    "build/goal-r1-health-clear-c/make_pipeline.py": "4e4ea74719bef96c46403f64150980b3b090adf434fa0322b5d6f5c7336768b1",
+    "build/goal-r1-health-clear-c/pipeline.py": "e2b0a349a3415d4446d04d6f54c62a98253feb1e68ac5918c9869c4bf7172e1a",
+    "build/goal-r1-health-clear-c/pipeline/results.json": "aa4216ade42868d930142fef98d0a06e49e18e959f5ac65377d903978eaa7a9d",
+    "build/goal-r1-health-clear-c/pipeline.log": "100c74d36df5eda5d6084c57cdacacb5041b85b06747d4e61c24c5cc0dbe64d2",
+    "build/goal-r1-health-clear-c/pipeline/source.elf": "8f90d6914cbe8c761df730611ff56585b76fa477a99d06fc0ef7886ed2eabdf3",
+    "build/goal-r1-health-clear-c/pipeline/database.o": "09dd7e83caa6d946f1a13df71268168dfede9ea9855a34c8744bae562171166d",
+    "build/goal-r1-health-clear-c/negative.py": "55dc4aab28682906ebea45a1b44c52d92a3e43240c3c24a431266b611ca8b1c5",
+    "build/goal-r1-health-clear-c/negative-verify.py": "5d356fc14a2b8ffc95e449089bc238ed0c8bbef4d1f3544877458c00401682d0",
+    "build/goal-r1-health-clear-c/negative.json": "985f50648c22e509001e4db715cfbf2dbb8f6373d24b2ef4da0bcddcdefe4237",
+    "build/goal-r1-health-clear-c/negative.log": "cc5492bc5b0c56dd39fb9e7653c8b0c791a77ab1931ecec97b653f478bf3ff4c",
+    "build/goal-r1-health-clear-c/build.log": "e373bc61ac7d6fda80cf728cae422a812db4a6f466f3801ebcd44aa9f65fb3bf",
+    "build/goal-r1-health-clear-c/sources-check.log": "c56719af1d0b2d08393a257d3e2022d40896a70239925ecc83fc942850eca238"
+  }
+}

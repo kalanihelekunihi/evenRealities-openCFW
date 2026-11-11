@@ -1,0 +1,123 @@
+{
+  "schema_version": 1,
+  "scope": "SpO2 and temperature state publication in ordinary C",
+  "report": "build/sources-goal-r1-health-state-publish-c/report.json",
+  "comparison_report": "build/sources-goal-r1-latest-entry-pure-c/report.json",
+  "stock_ranges": [
+    {
+      "entry": "0x8a87e",
+      "size": 24,
+      "symbol": "r1_health_publish_spo2_state"
+    },
+    {
+      "entry": "0x8a896",
+      "size": 24,
+      "symbol": "r1_health_publish_temperature_state"
+    }
+  ],
+  "audit": {
+    "compiled_units": 862,
+    "unchanged_prior_nongenerated_objects": 851,
+    "changed_prior_nongenerated_objects": [
+      "r1/src/application/runtime/native_health_state_publish.c"
+    ],
+    "application_imports": 63,
+    "bootloader_imports": 22,
+    "manifest_unchanged": true,
+    "source_plan_and_cache_layout_unchanged": true,
+    "new_state_definitions": 0,
+    "whole_state_publish_unit_has_no_inline_assembly": true,
+    "final_object_equals_tested_object": true
+  },
+  "direct": {
+    "stock_C_comparisons": 4608,
+    "native_instruction_bytes_executed": [
+      24,
+      24
+    ],
+    "all_low_bytes_full_backing_word_and_provider_mutations": true,
+    "void_return_caller_scratch_private_frame_and_physical_delivery_excluded": true
+  },
+  "service_publisher_enqueue_pipeline": {
+    "stock_C_state_service_publisher_enqueue_comparisons": 1728,
+    "actual_state_publishers_services_event_publisher_enqueue_memory_move_execute": true,
+    "event_publisher_retains_its_frame_bridge": true,
+    "prepared_contexts_queue_flags_and_delivery_modeled": true,
+    "leading_uninitialized_queue_word_private_frames_and_caller_scratch_excluded": true
+  },
+  "compiled_defects_rejected": [
+    {
+      "defect": "fullword-gate",
+      "rejected": true
+    },
+    {
+      "defect": "drop-one",
+      "rejected": true
+    },
+    {
+      "defect": "accept-two",
+      "rejected": true
+    },
+    {
+      "defect": "spo2-id",
+      "rejected": true
+    },
+    {
+      "defect": "length",
+      "rejected": true
+    },
+    {
+      "defect": "backing-word",
+      "rejected": true
+    },
+    {
+      "defect": "temperature-id",
+      "rejected": true
+    }
+  ],
+  "contract": [
+    "Initialize a complete32-bit local from status, gate on its low byte<2, and pass the local address with length1 to the synchronous event publisher.",
+    "SpO2 publishes0x1003, temperature0x1007. Preserve full backing-word bytes and callback mutations during the call; public entry return type is void.",
+    "Two identified external direct transfers are C service-wrapper tail calls. Standard C callers do not consume restored caller-scratch R3 from the former frame."
+  ],
+  "limits": [
+    "REA48 bytes match locked raw; all48 instruction bytes execute in4608 comparisons covering all low bytes, high words, masks, arbitrary provider returns and byte/word/tail mutations.",
+    "1728 comparisons execute actual state entries, existing C service wrappers, publisher with its retained frame bridge, enqueue and native/musl movement. Queue/flags APIs and prepared context state/delivery are modeled.",
+    "Queue record leading word is native uninitialized private residue and is excluded. Defined id/length/payload fields, failed-send wakeup, live thread reload, caller guards, saved integer/FP registers, SP, masks and FPSCR are checked.",
+    "Void return, caller scratch including former R3 restoration, private frame location and APSR excluded. Indirect and nonstandard external ABI consumers are not exhaustively proven.",
+    "No persistent state, manifest or source-plan changes. Physical scheduler/queue delivery, concurrency, complete application linking, startup/scatter integration, physical sensors and boot remain unverified."
+  ],
+  "evidence_files": {
+    "build/sources-goal-r1-health-state-publish-c/report.json": "6827527f5d67c422d920ccaa9f9c903a080864a6cfb2ced0f9caa033ef31d1b9",
+    "build/sources-goal-r1-latest-entry-pure-c/report.json": "048065dcf26ec26a7606b09f56fb3de60abfc1ff773ee114115b59daa445a77b",
+    "r1/src/application/runtime/native_health_state_publish.c": "ba404913b438d269251aa305e74c8bf2de586f30ecb20519dc8df32b4a6f98ce",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-health-state-publish-c/r1/r1-application/r1__src__application__runtime__native_health_state_publish.c.o": "8a49761286ea7fc4c0b677d03eb93fc7e12c76fce53eb8f917f021c46d6cf678",
+    "r1/src/sources.json": "c641a01569c9d39f05bc4bce48d9b5ca6ba6bf8f501b0eabae9dbbbd61b01efb",
+    "tools/build/source-plan.json": "eeb516e31b3310fb0718f36908977f8125723f7c5e0e86cd6744395826259a4d",
+    "r1/src/application/board/native_events.c": "98fa08d643192d38c204416a1edc17c55286d631029458e0895b4bfc142e1c2b",
+    "r1/src/application/runtime/native_health_service_wrappers.c": "5bc10b4b607230e98c171fc7899fe2c96c6a53a72256d1e5789fb0ecbed655e4",
+    "r1/src/application/runtime/native_memory_move.c": "26614e927758f8c0d0a9eb294d919a0062665a3d2cb822faa139271c564aec9e",
+    "build/goal-r1-health-state-publish-c/audit.json": "c9fb1e846309991d20c76dfb39e6a516e7ec927c9d3006c2d3a3b56717a2f648",
+    "build/goal-r1-health-state-publish-c/negative.json": "5a065ad564cdd69d1fe35bf220cfaa742df8c35f195513baf3101e72b1ae1ca8",
+    "build/goal-r1-health-state-publish-c/audit.py": "025bbbddd0b9e604d10f4a4d5e6b872937ead086a18dcd5932d166d3d74265c6",
+    "build/goal-r1-health-state-publish-c/source.elf": "6a60fe9405cc4cb4c2ab66ecb57f489c63642d15d8d09dc5ae806050b91c4a4d",
+    "build/goal-r1-health-state-publish-c/negative.py": "1c32dc11883ac163cda59dd975f03f8f829c29349a73fcf2b837f29dd4f66d55",
+    "build/goal-r1-health-state-publish-c/callers.py": "89b231a2a6c3aadfd72309ce39fda59da5b9e91c79c07ca242a36c8f1ccf26b3",
+    "build/goal-r1-health-state-publish-c/negative.log": "be20e5dde870404288892e79901ae8eff8f552b4712dfd0fde1fa9ae4bb5f4df",
+    "build/goal-r1-health-state-publish-c/source.o": "8a49761286ea7fc4c0b677d03eb93fc7e12c76fce53eb8f917f021c46d6cf678",
+    "build/goal-r1-health-state-publish-c/results.json": "4754ee5ab2d6d54ca705f41532f9606f22a4795d0abbca0f459eab3a592c101b",
+    "build/goal-r1-health-state-publish-c/pipeline.log": "85ce16ddaefeb702ec304cdf2de0ef5d66a1090b51bba81e80ea55abe6762e1e",
+    "build/goal-r1-health-state-publish-c/rea.json": "e2c01a7d37454d982b489e56952e51f9580d70112c52fb8fb56b0b7ae6810264",
+    "build/goal-r1-health-state-publish-c/pipeline.py": "49a2e270fb0488c2ab9f1c8a837f64e7264ff8a7382546849c45794bd0277a1e",
+    "build/goal-r1-health-state-publish-c/sources-check.log": "b6ab468f43815a75634eab2762e209dbee8ab94c4cc3d601fded4210b6833f2a",
+    "build/goal-r1-health-state-publish-c/callers.json": "4004764170fa60d0e423ceac981b7c33b1cca16f2510f93003b37f60d5551035",
+    "build/goal-r1-health-state-publish-c/record.py": "95864d5fdc33fa420931b596e952d9ab287d29956ac612dd15ebd07696497b56",
+    "build/goal-r1-health-state-publish-c/verify.py": "c4195075ad5031f6a65fd84fbb41365b798f7598b34e5ff0b708c52fd551533c",
+    "build/goal-r1-health-state-publish-c/verification.log": "f638720b205ca54354433ba5ba9c682e1e0598ccf8b30436d7abf6a8f7fa2fe0",
+    "build/goal-r1-health-state-publish-c/source-before.c": "6423d24deb826b40e4bd0a60b6402da127d28be33698d1f095ed3720979fef4f",
+    "build/goal-r1-health-state-publish-c/build.log": "5fb2c292b97fc84cefb1f8baf82b25f7e1daa7baefe127c823dfd01e5c81ccbc",
+    "build/goal-r1-health-state-publish-c/pipeline/test.ld": "95bb82b2b534fa687658f283c933f8375145c37a816c8450e17adfa2a2e2faac",
+    "build/goal-r1-health-state-publish-c/pipeline/source.elf": "f920f37605c6d85157d0fae6b340ace683d235e910c921aeb6de7f5b836a53e0",
+    "build/goal-r1-health-state-publish-c/pipeline/results.json": "cf1c2fbf041e68844509aa8383cbc2e32789180610603c1e96eabaeb00cc836a"
+  }
+}

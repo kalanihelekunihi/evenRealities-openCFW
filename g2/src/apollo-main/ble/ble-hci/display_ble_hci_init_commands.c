@@ -1,6 +1,12 @@
 /* Native Cordio HCI initialization commands. Opcode/length and payload
  * bytes are literal stock contracts; masks remain caller-owned ROM data. */
 #include <stdint.h>
+/* Stock-RAM literals rewritten to named objects (sim-test wave 2026-10-26,
+ * .waves/sim-fix/apply.py): g2ref_X is the linker symbol X. */
+#include <stdint.h>
+extern unsigned char g2ref_audio_ble_hci_controller_state_20071478[] __asm__("audio_ble_hci_controller_state_20071478");
+extern unsigned char g2ref_audio_ble_hci_le_supported_features[] __asm__("audio_ble_hci_le_supported_features");
+extern unsigned char g2ref_g2_stock_ram_20074150[] __asm__("g2_stock_ram_20074150");
 extern void *audio_ble_hci_cmd_alloc_52ae38(uint16_t,uint16_t);
 extern void audio_ble_hci_cmd_send(void *);
 extern void audio_ble_hci_vendor_specific_cmd(uint16_t opcode,uint8_t length, const void *payload); /* opencfw U5: now provided by the Cordio unit */
@@ -25,23 +31,23 @@ uint64_t HciVscSetRfPowerLevelEx(uint32_t level) { /* 0x4b4cb2 */
     return ((uint64_t)level<<32u)|valid;
 }
 void HciVscUpdateNvdsParam(void) { /* 0x4b4c8a */
-    volatile uint8_t *const nvds=(volatile uint8_t *)(uintptr_t)0x20074150u;
+    volatile uint8_t *const nvds=(volatile uint8_t *)(uintptr_t)((uint32_t)(uintptr_t)g2ref_g2_stock_ram_20074150);
     nvds[0]=0xffu;nvds[1]=0x7cu;nvds[2]=1u;
     nvds[3]=0x0fu;nvds[4]=0xb8u;nvds[5]=0x19u;
     audio_ble_hci_vendor_specific_cmd(0xfff2u,8u,(const void *)nvds);
 }
 void audio_ble_hci_read_max_data_len(const void *ignored) { /* 0x569b2a */
     (void)ignored;
-    volatile uint8_t *const state=(volatile uint8_t *)(uintptr_t)0x20071478u;
-    volatile uint8_t *const capabilities=(volatile uint8_t *)(uintptr_t)0x20000028u;
+    volatile uint8_t *const state=(volatile uint8_t *)(uintptr_t)((uint32_t)(uintptr_t)g2ref_audio_ble_hci_controller_state_20071478);
+    volatile uint8_t *const capabilities=(volatile uint8_t *)(uintptr_t)((uint32_t)(uintptr_t)g2ref_audio_ble_hci_le_supported_features);
     if((state[0x88u]&0x20u)!=0u && (*capabilities&0x20u)!=0u)
         HciLeReadMaxDataLen();
     else HciLeRandCmd();
 }
 void audio_ble_hci_read_resolving_list_size(const void *ignored) { /* 0x569b04 */
     (void)ignored;
-    volatile uint8_t *const state=(volatile uint8_t *)(uintptr_t)0x20071478u;
-    volatile uint8_t *const capabilities=(volatile uint8_t *)(uintptr_t)0x20000028u;
+    volatile uint8_t *const state=(volatile uint8_t *)(uintptr_t)((uint32_t)(uintptr_t)g2ref_audio_ble_hci_controller_state_20071478);
+    volatile uint8_t *const capabilities=(volatile uint8_t *)(uintptr_t)((uint32_t)(uintptr_t)g2ref_audio_ble_hci_le_supported_features);
     if((state[0x88u]&0x40u)!=0u && (*capabilities&0x40u)!=0u)
         HciLeReadResolvingListSize();
     else {

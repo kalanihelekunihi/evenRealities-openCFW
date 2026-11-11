@@ -1,0 +1,403 @@
+{
+  "source": {
+    "source": "r1/src/application/runtime/native_stream_bootstrap.c",
+    "payload": "r1-application",
+    "role": "candidate",
+    "toolchain": "clang",
+    "link": true,
+    "expect": "compile",
+    "returncode": 0,
+    "argv": [
+      "/usr/bin/clang",
+      "--target=arm-none-eabi",
+      "-mcpu=cortex-m4",
+      "-mthumb",
+      "-munaligned-access",
+      "-mfpu=fpv4-sp-d16",
+      "-mfloat-abi=hard",
+      "-std=c11",
+      "-Os",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-fshort-enums",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-fno-delete-null-pointer-checks",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/r1/src/vendor",
+      "-isystem",
+      "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
+      "-MD",
+      "-MF",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-stream-timer-back-c/r1/r1-application/r1__src__application__runtime__native_stream_bootstrap.c.d",
+      "-c",
+      "/Users/kalani/Repo/evenRealities-openCFW/r1/src/application/runtime/native_stream_bootstrap.c",
+      "-o",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-stream-timer-back-c/r1/r1-application/r1__src__application__runtime__native_stream_bootstrap.c.o"
+    ],
+    "source_sha256": "27b18786d05df1ec44acc87caf7c3520d9cc9c405b198d9e11a914666cf7d87c",
+    "object_sha256": "2219eabfccdb02b3320780c0bd6ede8a15d1cb895745067a4823410d8e823b52",
+    "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-stream-timer-back-c/r1/r1-application/r1__src__application__runtime__native_stream_bootstrap.c.o",
+    "strong": [
+      "r1_native_stream_initialize",
+      "r1_stream_enable",
+      "r1_stream_housekeeping",
+      "r1_stream_keepalive",
+      "r1_stream_tick_getter",
+      "r1_stream_tick_now",
+      "r1_stream_timer_create_back",
+      "r1_stream_timer_create_front",
+      "r1_stream_wake"
+    ],
+    "weak": [],
+    "undefined": [
+      "osKernelGetTickCount",
+      "r1_native_list_append",
+      "r1_native_list_initialize",
+      "r1_native_list_prepend"
+    ]
+  },
+  "normal_report": "build/sources-goal-r1-stream-timer-back-c/report.json",
+  "native_entry": "0x8a368",
+  "native_code_size": 84,
+  "validation": {
+    "paired_cases": 1872,
+    "executions": 3744,
+    "groups": {
+      "tick": 384,
+      "wake": 384,
+      "enable": 384,
+      "initialize": 192,
+      "create": 192,
+      "back": 336
+    },
+    "source_report": "build/sources-goal-r1-stream-timer-back-c/report.json",
+    "back_provider_depths": {
+      "native": {
+        "0x855a0": [
+          40
+        ],
+        "0x7d28c": [
+          24
+        ],
+        "0x1100500": [
+          24
+        ],
+        "0x1100400": [
+          24
+        ],
+        "0x1100300": [
+          24
+        ]
+      },
+      "C": {
+        "0x1100100": [
+          32
+        ],
+        "0x1100200": [
+          24
+        ],
+        "0x1100500": [
+          24
+        ],
+        "0x1100400": [
+          24
+        ],
+        "0x1100300": [
+          24
+        ]
+      }
+    },
+    "actual_C_list_initialize_prepend_append": true,
+    "modeled": [
+      "allocator return",
+      "kernel tick fallback",
+      "registered tick/wake callbacks"
+    ],
+    "normalization": "Initializer node callback validated against actual keepalive symbol before address normalization",
+    "checks": [
+      "fresh volatile tick/wake/context dispatch and callback return values",
+      "whole 32-bit enable decision with low byte store",
+      "actual list initialization/prepend and timer record creation order",
+      "callback mutation between initial wake, clock and second wake",
+      "OOM BASEPRI and native fault",
+      "shared accesses in bootstrap/timer functions, final list/node guards, R0, return SP, saved registers and masks"
+    ],
+    "limits": [
+      "List provider internals checked through final state/call graph, not instruction-for-instruction memory trace",
+      "Allocator and external callbacks modeled; no physical sensor scheduling or asynchronous execution",
+      "Private frames and caller-clobbered registers/flags excluded"
+    ]
+  },
+  "actual_registration_constructor_chain": {
+    "paired_timer_period_cases": 32,
+    "paired_registration_timer_chain_cases": 108,
+    "actual_bootstrap_object_sha256": "2219eabfccdb02b3320780c0bd6ede8a15d1cb895745067a4823410d8e823b52",
+    "provider_frames": {
+      "native": {
+        "r1_native_list_empty": [
+          48
+        ],
+        "r1_native_list_prepend": [
+          48,
+          72
+        ],
+        "strlen": [
+          48
+        ],
+        "r1_native_memory_move": [
+          48
+        ],
+        "pvPortMalloc": [
+          48
+        ],
+        "osKernelGetTickCount": [
+          72
+        ],
+        "start": [
+          48
+        ],
+        "r1_native_list_append": [
+          72
+        ],
+        "r1_structured_log_mode_get": [
+          48
+        ],
+        "r1_structured_log_format": [
+          48
+        ],
+        "nrf_log_frontend_std_0": [
+          48
+        ]
+      },
+      "C": {
+        "r1_native_list_empty": [
+          40
+        ],
+        "r1_native_list_prepend": [
+          40,
+          64
+        ],
+        "strlen": [
+          40
+        ],
+        "r1_native_memory_move": [
+          40
+        ],
+        "pvPortMalloc": [
+          40
+        ],
+        "r1_stream_zero_divisor_result": [
+          40
+        ],
+        "osKernelGetTickCount": [
+          64
+        ],
+        "start": [
+          40
+        ],
+        "r1_native_list_append": [
+          64
+        ],
+        "r1_structured_log_mode_get": [
+          40
+        ],
+        "r1_structured_log_format": [
+          40
+        ],
+        "nrf_log_frontend_std_0": [
+          40
+        ]
+      }
+    },
+    "source_object_sha256": "94fdfb51d2d3c3935bee9cda7c2bf21a325b89542a8bcec00054144eba713ee5",
+    "limits": [
+      "Actual native/C timer constructors, tick and wake execute; list/allocator/kernel tick/string/copy/logging and driver modeled.",
+      "Fault comparison ends before BASEPRI/store gateway; native register/exception identity unproven.",
+      "Zero divisor observed with Unicorn DIV_0_TRP disabled; C architectural zero-divisor provider remains unresolved.",
+      "Frame, caller-saved registers, private stack words and physical hardware effects excluded."
+    ]
+  },
+  "negative_controls": [
+    {
+      "name": "prepend-instead-append",
+      "rejected": true
+    },
+    {
+      "name": "discard-context",
+      "rejected": true
+    },
+    {
+      "name": "keep-disabled-bit",
+      "rejected": true
+    },
+    {
+      "name": "wrong-notification-byte",
+      "rejected": true
+    },
+    {
+      "name": "return-wake-result",
+      "rejected": true
+    }
+  ],
+  "audit": {
+    "units": 610,
+    "other_objects_identical": 609,
+    "changed_source": "r1/src/application/runtime/native_stream_bootstrap.c",
+    "existing_function_sections_and_relocations_identical": [
+      ".text.r1_stream_tick_now",
+      ".text.r1_stream_wake",
+      ".text.r1_stream_enable",
+      ".text.r1_stream_keepalive",
+      ".text.r1_stream_timer_create_front",
+      ".text.allocation_failure",
+      ".text.r1_native_stream_initialize"
+    ],
+    "manifest_unchanged": true,
+    "resolved_imports": [
+      "r1_stream_timer_create_back"
+    ],
+    "new_imports": [],
+    "unresolved": {
+      "r1-application": 169,
+      "r1-bootloader": 34
+    },
+    "source_plan_unchanged": true,
+    "hybrid_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "totals": {
+      "binary-pull-through": 641889,
+      "source-built": 4271,
+      "resource-file": 248
+    }
+  },
+  "qualification": {
+    "candidate_units": 1,
+    "compiled_units": 1,
+    "units": [
+      {
+        "source": "r1/src/application/runtime/native_stream_bootstrap.c",
+        "payload": "r1-application",
+        "evidence": "r1/symbols/function-frontier.csv",
+        "selected": [],
+        "compiled": true,
+        "rejections": {
+          "native_symbol_anchor_missing": 2,
+          "anchored_relocation_pattern_not_exact": 6
+        },
+        "source_implementation_completeness": "not established by compilation or byte matching",
+        "reason": "no exact anchored body under tested production bindings; integration remains unfinished"
+      }
+    ]
+  },
+  "REA": [
+    {
+      "evidence_id": "ev_44a7815c66a0d06b71d43a44e5049a50739637da19f1c734c702a0b3d9045413",
+      "subject": {
+        "name": "stock.elf",
+        "digest": {
+          "sha256": "25b4a29af80ec8edab5bd861ba9b74a6e22eab29dc3d7a809a16869e8a140f04"
+        },
+        "local_path": "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-queue-reset-c/stock.elf",
+        "format": "elf",
+        "architecture": "arm"
+      },
+      "provider": {
+        "id": "ghidra",
+        "name": "Ghidra",
+        "version": "12.1.4"
+      },
+      "analysis_profile": {
+        "provider": {
+          "id": "ghidra",
+          "name": "Ghidra",
+          "version": "12.1.4"
+        },
+        "parameters": {
+          "target_kind": "executable",
+          "target_format": "elf",
+          "architecture": "arm",
+          "available_architectures": [
+            "arm"
+          ],
+          "import_mode": "ephemeral-source-immutable",
+          "annotation_policy": "atomic-function-entry-metadata-v1",
+          "load_image_observations": "source-mappings-entry-context-v2",
+          "function_body_evidence": "complete-inclusive-ranges-v1",
+          "function_references": "complete-body-and-entry-reference-manager-v2",
+          "call_relationship_coverage": "function-body-call-coverage-v5",
+          "function_dossier_coverage": "observed-facets-and-call-relationships-v1",
+          "string_inventory_evidence": "defined-data-coverage-v1",
+          "location_resolution": "explicit-address-exact-entry-symbol-first-v3",
+          "procedure_file_offset_resolution": "address-first-unique-target-source-mapping-v2",
+          "instruction_flow_evidence": "decoded-return-pcode-v1",
+          "instruction_references": "exact-address-incoming-v1",
+          "function_boundary_observations": "ghidra-function-boundary-limitations-v3",
+          "no_return_repair": "returning-imports-decoded-return-v2",
+          "process_launch": "inspected-jvm-launch-support-v1",
+          "jump_table_evidence": "typed-case-default-blocks-v1",
+          "decompiler_jump_loads": true,
+          "loader": "auto-from-header",
+          "language_id": "auto-from-header",
+          "compiler_spec_id": "auto-default",
+          "analyzer_preset": "ghidra-default"
+        },
+        "digest": "7e46711069eea041af1b9b99e34115c13332795e5cda76e584a722f529ec70de"
+      },
+      "predicate_type": "rea.analysis",
+      "operation": "read_bytes",
+      "parameters": {
+        "address": "0x8a368",
+        "length": 88
+      },
+      "raw_result": {
+        "address": "0x8a368",
+        "requested_bytes": 88,
+        "returned_bytes": 88,
+        "bytes_hex": "2de9f041074615460e461248d3f7e9fa040018d0a7604ff0ff3026602061606920f001006061fff71fffe56060606069084940f0020060610120c87300f0ccf82046bde8f081402080f31188002040f8010cfee7bca20120",
+        "complete": true
+      },
+      "normalized_result": {
+        "address": "0x8a368",
+        "requested_bytes": 88,
+        "returned_bytes": 88,
+        "bytes_hex": "2de9f041074615460e461248d3f7e9fa040018d0a7604ff0ff3026602061606920f001006061fff71fffe56060606069084940f0020060610120c87300f0ccf82046bde8f081402080f31188002040f8010cfee7bca20120",
+        "complete": true
+      },
+      "confidence": "observed",
+      "authority": "shipped-artifact",
+      "environment": null,
+      "limitations": [
+        "The session serves operations only after Ghidra reports default auto-analysis complete; incomplete analysis does not expose partial results.",
+        "The imported Program and temporary project are ephemeral and deleted on close. Annotation operations edit session database metadata; original executable bytes are never written.",
+        "Cancelling an active Ghidra request terminates its ephemeral database and discards session annotations. The selected target remains open; the next provider query imports the original artifact again.",
+        "Default-space addresses use lowercase 0x-prefixed hexadecimal; other address spaces use <percent-encoded-space>:0x<hex>.",
+        "Bytes reflect Ghidra's initialized memory, including loader fixups. Reads stop at an unmapped or uninitialized byte and report completeness explicitly.",
+        "macOS sessions require a matching executable Ghidra native decompiler; REA checks for it but does not build native components or change Gatekeeper quarantine state."
+      ],
+      "relationship_coverage": null,
+      "locations": [],
+      "evidence_links": []
+    }
+  ],
+  "frontier_before": {
+    "image": "application",
+    "inventory_source": "ghidra_functions_csv",
+    "entry": "0x0008a368",
+    "size": "84",
+    "provider_family": "unknown_sensor_stream_framework_candidate",
+    "source_symbol": "sensor_stream_object_allocation_from_8a368",
+    "candidate_symbol": "r1_stream_timer_create_back",
+    "status": "unresolved_source_route",
+    "candidate_sources": "",
+    "candidate_objects": "",
+    "candidate_reports": "",
+    "behavior_receipt": "",
+    "instruction_identity_proven": "false",
+    "image_integration_proven": "false"
+  },
+  "new_exact_bytes": 0,
+  "source_completeness_proven": false,
+  "physical_validation": false
+}

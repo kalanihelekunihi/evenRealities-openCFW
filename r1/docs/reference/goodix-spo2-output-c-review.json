@@ -1,0 +1,468 @@
+{
+  "schema_version": 1,
+  "acceptance_target": "License-free C firmware; byte identity waived",
+  "entries": {
+    "0x00036974": "r1_goodix_spo2_output"
+  },
+  "total_stock_c_pairs": 134344,
+  "independent_fraction_oracle_pairs": 4864,
+  "calculate_caller_pairs": 456,
+  "verification": {
+    "results": {
+      "pairs": 32768,
+      "fpscr_modes": 32,
+      "elapsed_seconds": 17.315127750160173,
+      "scope": "Actual C soft double conversion/add and hardware single rounding, native ordered state snapshot and64-byte packet; full public RAM/FPSCR and saved ABI."
+    },
+    "alias-results": {
+      "pairs": 67584,
+      "fpscr_modes": 6,
+      "aliases": [
+        {
+          "packet_alias": "state"
+        },
+        {
+          "packet_alias": "selected"
+        },
+        {
+          "packet_alias": "valid"
+        },
+        {
+          "packet_alias": "summary"
+        },
+        {
+          "packet_alias": "summary+8"
+        },
+        {
+          "packet_alias": "confidence"
+        },
+        {
+          "packet_alias": "config"
+        },
+        {
+          "packet_alias": "config+16"
+        },
+        {
+          "state_alias": "summary"
+        },
+        {
+          "state_alias": "selected"
+        },
+        {
+          "state_alias": "confidence"
+        }
+      ],
+      "elapsed_seconds": 35.463022750103846,
+      "scope": "Ordered public state/packet aliases including live configuration recheck and overwritten confidence/summary/scalar fields. Invalid owner-pointer aliases excluded."
+    },
+    "oracle-results": {
+      "pairs": 4096,
+      "independent_fraction_oracles": 4096,
+      "fpscr_modes": 32,
+      "elapsed_seconds": 1.861885542050004,
+      "scope": "Independent rational scale/add-half/truncation and exact snapshot/packet layout oracles for finite half-integer inputs; signed validity and confidence gate; full final FPSCR unchanged for exact products."
+    },
+    "caller-results": {
+      "pairs": 384,
+      "fpscr_modes": 32,
+      "reset_bytes": [
+        0,
+        1,
+        2,
+        255
+      ],
+      "scope": "Actual native calculate C caller, quartic, heap, inference parent, constructors, model graph, output quality, selection and output stages. Earlier processing plus confidence are explicit controlled test boundaries. Full public RAM and saved ABI compared, only45 guarded callback fields normalized. Source has no stock code mapping.",
+      "elapsed_seconds": 56.78238783287816
+    },
+    "normal-results": {
+      "pairs": 6144,
+      "fpscr_modes": 6,
+      "elapsed_seconds": 3.0720270411111414,
+      "scope": "Actual C soft double conversion/add and hardware single rounding, native ordered state snapshot and64-byte packet; full public RAM/FPSCR and saved ABI."
+    },
+    "normal-alias-results": {
+      "pairs": 22528,
+      "fpscr_modes": 2,
+      "aliases": [
+        {
+          "packet_alias": "state"
+        },
+        {
+          "packet_alias": "selected"
+        },
+        {
+          "packet_alias": "valid"
+        },
+        {
+          "packet_alias": "summary"
+        },
+        {
+          "packet_alias": "summary+8"
+        },
+        {
+          "packet_alias": "confidence"
+        },
+        {
+          "packet_alias": "config"
+        },
+        {
+          "packet_alias": "config+16"
+        },
+        {
+          "state_alias": "summary"
+        },
+        {
+          "state_alias": "selected"
+        },
+        {
+          "state_alias": "confidence"
+        }
+      ],
+      "elapsed_seconds": 11.203886792063713,
+      "scope": "Ordered public state/packet aliases including live configuration recheck and overwritten confidence/summary/scalar fields. Invalid owner-pointer aliases excluded."
+    },
+    "normal-oracle-results": {
+      "pairs": 768,
+      "independent_fraction_oracles": 768,
+      "fpscr_modes": 32,
+      "elapsed_seconds": 0.32374820904806256,
+      "scope": "Independent rational scale/add-half/truncation and exact snapshot/packet layout oracles for finite half-integer inputs; signed validity and confidence gate; full final FPSCR unchanged for exact products."
+    },
+    "normal-caller-results": {
+      "pairs": 72,
+      "fpscr_modes": 6,
+      "reset_bytes": [
+        0,
+        1,
+        2,
+        255
+      ],
+      "scope": "Actual native calculate C caller, quartic, heap, inference parent, constructors, model graph, output quality, selection and output stages. Earlier processing plus confidence are explicit controlled test boundaries. Full public RAM and saved ABI compared, only45 guarded callback fields normalized. Source has no stock code mapping.",
+      "elapsed_seconds": 10.803449125029147
+    },
+    "coverage": {
+      "native_coverage_calls": 20,
+      "instruction_bytes": 460,
+      "instruction_starts": 134,
+      "entry": "0x36974"
+    }
+  },
+  "compiled_defect_controls": [
+    {
+      "defect": "snapshot-offset",
+      "detected": true,
+      "detection_case": "(0, {})",
+      "diagnostic": ""
+    },
+    {
+      "defect": "valid-sign",
+      "detected": true,
+      "detection_case": "(128, {})",
+      "diagnostic": ""
+    },
+    {
+      "defect": "confidence-gate",
+      "detected": true,
+      "detection_case": "(10, {})",
+      "diagnostic": ""
+    },
+    {
+      "defect": "selected-scale",
+      "detected": true,
+      "detection_case": "(1, {})",
+      "diagnostic": ""
+    },
+    {
+      "defect": "half-bias",
+      "detected": true,
+      "detection_case": "(1, {})",
+      "diagnostic": ""
+    },
+    {
+      "defect": "missing-zero",
+      "detected": true,
+      "detection_case": "(0, {})",
+      "diagnostic": ""
+    },
+    {
+      "defect": "flag-byte",
+      "detected": true,
+      "detection_case": "(1, {})",
+      "diagnostic": ""
+    },
+    {
+      "defect": "stale-configuration",
+      "detected": true,
+      "detection_case": "(5, {'packet_alias': 'config+16'})",
+      "diagnostic": ""
+    },
+    {
+      "defect": "stale-confidence",
+      "detected": true,
+      "detection_case": "(5, {'packet_alias': 'confidence'})",
+      "diagnostic": ""
+    }
+  ],
+  "normal_build": {
+    "normal_report": "build/sources-goal-r1-spo2-output-c/report.json",
+    "units": 938,
+    "unchanged_source_object_pairs": 926,
+    "generated_sources_excluded": [
+      "{gen}/r1_cmsis_os2_rtc.c",
+      "{gen}/fal_partition_r1_lookup.c",
+      "{gen}/fdb_utils_r1.c",
+      "{gen}/gh_demo_r1.c",
+      "{gen}/gh_demo_hook_r1.c",
+      "{gen}/gh_demo_user_r1.c",
+      "{gen}/app_error_handler_gcc_clang.c",
+      "{gen}/r1_startup_vectors.S",
+      "{gen}/gh_ppg_timestamp_hooks_r1.c",
+      "{gen}/r1_uecc.c"
+    ],
+    "new_sources": [
+      "r1/src/application/goodix/native_spo2_output.c"
+    ],
+    "normal_provider_matches_tested_sections_and_decoded_symbols": true,
+    "no_new_assembly_or_writable_sections": true,
+    "coverage_instruction_bytes": 460,
+    "coverage_instruction_starts": 134,
+    "calculate_header_change_preserves_entire_object": true,
+    "removed_imports": [
+      "r1_goodix_spo2_output"
+    ],
+    "imports": {
+      "r1-application": [
+        "GH3X2X_GetVersion",
+        "GH3X2X_UprotocolPacketFormat",
+        "Gh3x2xDemoSendProtocolData",
+        "__data_start__",
+        "gh3x2x_print_fmt",
+        "goodix_hba_calc",
+        "goodix_hba_essential_info_print",
+        "goodix_hrv_calc",
+        "goodix_nadt_calc",
+        "r1_cmb_code_end",
+        "r1_cmb_code_start",
+        "r1_cmb_stack_end",
+        "r1_cmb_stack_start",
+        "r1_eat_command_dispatch",
+        "r1_eat_core_init",
+        "r1_export_plan_command",
+        "r1_factory_input_record_plan_dispatch",
+        "r1_glasses_role_conflict_fault",
+        "r1_gomore_final_sleep_record_publish_native",
+        "r1_gomore_interval_statistics_native",
+        "r1_gomore_sleep_interval_select_native",
+        "r1_gomore_sleep_score_native",
+        "r1_gomore_sleep_stage_refine_native",
+        "r1_gomore_stage_5ef1c_native",
+        "r1_gomore_stage_5f264_native",
+        "r1_gomore_stage_5f3d8_native",
+        "r1_gomore_stage_5f4b6_native",
+        "r1_gomore_stage_5f56c_native",
+        "r1_gomore_stage_5feb8_native",
+        "r1_gomore_stage_605dc_native",
+        "r1_gomore_stage_60af4_native",
+        "r1_gomore_stage_60b80_native",
+        "r1_gomore_stage_60dc4_native",
+        "r1_gomore_stage_610c8_native",
+        "r1_gomore_stage_61198_native",
+        "r1_gomore_stage_61274_native",
+        "r1_gomore_stage_6138c_native",
+        "r1_gomore_stage_statistics_native",
+        "r1_gomore_table_record11_native",
+        "r1_goodix_spo2_confidence",
+        "r1_health_auth_parameters_set",
+        "r1_health_lifecycle_engine_initialize_native",
+        "r1_health_settings_plan_command",
+        "r1_health_sync_provider_0003c0d8",
+        "r1_health_sync_provider_0003c304",
+        "r1_health_sync_provider_0003c958",
+        "r1_health_sync_provider_0003fcec",
+        "r1_health_sync_provider_0003fef4",
+        "r1_health_sync_provider_00040508",
+        "r1_health_sync_provider_00040bd4",
+        "r1_health_sync_provider_00040de0",
+        "r1_health_sync_provider_00041438",
+        "r1_health_sync_provider_00043eb0",
+        "r1_health_sync_provider_000440c4",
+        "r1_health_sync_provider_000446b4",
+        "r1_health_sync_provider_0005b39c",
+        "r1_health_sync_provider_0008f954",
+        "r1_legacy_command_route_frame",
+        "r1_manager_assertion_stack_transfer",
+        "r1_manager_logging_start_91504",
+        "r1_phone_role_assertion_stack_transfer",
+        "r1_structured_log_typed",
+        "r1_user_profile_handler"
+      ],
+      "r1-bootloader": [
+        "__bss_end__",
+        "__bss_start__",
+        "__data_start__",
+        "__etext",
+        "__start_crypto_data",
+        "__start_dfu_trans",
+        "__start_fs_data",
+        "__start_sdh_ble_observers",
+        "__start_sdh_req_observers",
+        "__start_sdh_soc_observers",
+        "__start_sdh_stack_observers",
+        "__start_sdh_state_observers",
+        "__start_svc_data",
+        "__stop_crypto_data",
+        "__stop_dfu_trans",
+        "__stop_fs_data",
+        "__stop_sdh_ble_observers",
+        "__stop_sdh_req_observers",
+        "__stop_sdh_soc_observers",
+        "__stop_sdh_stack_observers",
+        "__stop_sdh_state_observers",
+        "__stop_svc_data"
+      ]
+    }
+  },
+  "semantics": [
+    "The native eight-argument output stage first updates the68-byte channel state snapshot using raw floating payloads, unsigned status bytes, summary fields and optionally confidence fields. Preserve field-store order and reread configuration/confidence references rather than caching across writes. It then emits the64-byte public packet with the native zero/reserved fields and fixed count1.",
+    "Packet validity is sign extended from its8-bit input, while the summary flags remain unsigned. Scaling is single-precision multiplication FIRST, then software binary64 promotion/add0.5/truncation through actual C helpers. Factors10000/100000/100 and the unscaled confidence field preserve native rounding order, including biased negative-integer results. Independent Fraction oracles check exact snapshot/packet layout and unchanged FPSCR for finite half-integer exact products.",
+    "Public aliases cover snapshots, selected/status scalars, summary/confidence data and configuration. Packet writes can change the second confidence-mode check or subsequent summary/confidence reads; those changes are retained. Nine compiled defects detect wrong offsets, signed validity, confidence gate, factor, half bias, missing zero, flag byte and stale configuration/confidence reads.",
+    "Caller tests execute actual C calculate/quartic, heap, model/inference, output quality, selection and output packing together. Earlier processing and confidence remain explicit controlled boundaries. The confidence boundary supplies mapped output data when enabled; this is not confidence-algorithm evidence. Only45 guarded model callback fields are normalized after exact native-address/C-symbol checks. Source maps no stock executable code.",
+    "REA authenticates all460 native instruction bytes and24 literal bytes. All460 bytes/134 starts execute. Direct/oracle/caller candidate suites cover all32 FP configurations; aliases cover six. Normal direct/caller samples use six, aliases two, and768 oracle cases cycle all32."
+  ],
+  "limitations": [
+    "Valid mapped and suitably aligned owners/configuration/state/packet buffers are assumed. Selected public aliases are tested; invalid pointer/count aliases are not given invented recovery. The void C interface does not promise incidental native caller-scratch registers or APSR.",
+    "Comparisons check public RAM excluding8192 private stack bytes below incoming SP, full FPSCR, savedR4-R11/S16-S31, SP and interrupt masks. Hardware timing, interrupts/concurrency and physical-device operation remain unverified.",
+    "The normal938-unit build is relocatable composition with63 application and22 boot imports, not a complete bootable firmware. Confidence is the remaining open SpO2 parent stage, with feature/statistics/math dependencies still being traced. Other hardware and startup dependencies remain. Source plan and health-cache layout are unchanged."
+  ],
+  "evidence_sha256": {
+    "build/goal-r1-model-i8-convolution-c/stock-entry.elf": "8faf5ed5a7e99752b781c1118086f6ada13458b084bd14e8fbb9a2eb58a05e76",
+    "build/goal-r1-spo2-infer-support-c/normal-dependencies.a": "7e62b43a34fcf2b0ae34045a276bf4d564be5dde2ddb636dd0f69169c8843637",
+    "build/goal-r1-spo2-output-integration-c/alias-results.json": "dfdd5dee4647e6097c3e6710bc4c148e768c3c81bb2fa594c5c45d527d0c6e38",
+    "build/goal-r1-spo2-output-integration-c/aliases.log": "5ad7fee0d309a947fcd422201a20da35787ebb2bef166cd46db8a61bb8e85354",
+    "build/goal-r1-spo2-output-integration-c/aliases.py": "4a87d57f866a3f3212b0bc6f70c3a0255f28a89acc6af26afa4faef1ff6be8d6",
+    "build/goal-r1-spo2-output-integration-c/audit.json": "689fffa271ee43455c8c59ee601dfb72cad46132a35f64d9aafbbd8b23ccfa44",
+    "build/goal-r1-spo2-output-integration-c/audit.py": "d2ac6d7a16c069841a72e1609ad8e72e36b72e0e21cc62c87d39b888a724328e",
+    "build/goal-r1-spo2-output-integration-c/caller-link.json": "20707710827cc73d546f00de0310ea411829ea8d2e7305a88a8dd9a0a3714a57",
+    "build/goal-r1-spo2-output-integration-c/caller-link.log": "453ebe0f6632df9993f1ce2ab504b823df5b6cb33da2dc74f3eb64e6d4b37403",
+    "build/goal-r1-spo2-output-integration-c/caller-results.json": "f9f51e039a896037ccbf65b3dd97c0b56264ca1f5e2012c611ca11d438a3780e",
+    "build/goal-r1-spo2-output-integration-c/caller.elf": "3e880828ce1e8a9a3e9b5c8c9a50dcdf1e9cd959544b778b7b4dbe86d5a4342c",
+    "build/goal-r1-spo2-output-integration-c/caller.log": "fd743a831f6b9a357647127fdbcea34ea8c5c335e68c804dd53b2bf2cb460668",
+    "build/goal-r1-spo2-output-integration-c/caller.py": "128467d0bde594c94381173b215b6d254d983866aaca12c4ef8baaca62a1fb28",
+    "build/goal-r1-spo2-output-integration-c/caller_fixture.py": "1a114e95edd7fce48345ff7c2a1929620d4ec3af3fa0027038c329dbb1a0f1fd",
+    "build/goal-r1-spo2-output-integration-c/caller_matrix.py": "bfdfc836f2b9953c4cf2d9fe1b9bb89ec6913198688805ff2c95663e46523a9f",
+    "build/goal-r1-spo2-output-integration-c/candidate.c": "582356d692cee8c21fd1d6d4db3996a867840e9794d03b53ace8c23954f2b3be",
+    "build/goal-r1-spo2-output-integration-c/candidate.elf": "53b6327b28d10ebe6f85292fcca8117e83038019fd3e63327bdd0d97b669616c",
+    "build/goal-r1-spo2-output-integration-c/candidate.o": "4159200b779eb2c6e0e83f230728b458a84c064aa0625248de9b40be4f2fca40",
+    "build/goal-r1-spo2-output-integration-c/compile-argv.json": "9f47e89e06d3e799be06b6bc47a9776edf2631fac2ef80534fa7e3301d21494d",
+    "build/goal-r1-spo2-output-integration-c/controls-results.json": "6c85ad0542e312293559b9a6170a6a9a5eca5071a9c39fbbc740d319ddd71fd5",
+    "build/goal-r1-spo2-output-integration-c/controls.log": "8606140b3af773f0a72a009508ae44b690aabb96be976591d0ca13a8dfcef6e0",
+    "build/goal-r1-spo2-output-integration-c/controls.py": "2af1f90fafd5fef9c6a68a64ca2790afed2e9ddb28ba8b8070377016a3bcdc39",
+    "build/goal-r1-spo2-output-integration-c/coverage-results.json": "95edfe8320bc64d22499269790f1c6829034715d8dea6f5544f9d464ad7ad732",
+    "build/goal-r1-spo2-output-integration-c/coverage.log": "40d4bcc886b0d319cdbefae9cc8ec7324c6c75b66c6c98baec906a24525f23b7",
+    "build/goal-r1-spo2-output-integration-c/coverage.py": "7f50998db336a27e6d1df09c384c709ee0c75bdb6c9f4071a734756ae3aef6c3",
+    "build/goal-r1-spo2-output-integration-c/defect.c": "bb53332cb196a03154eb4ecb43cb5625f4eee98ae18626ce45b46b9ff4aa55ec",
+    "build/goal-r1-spo2-output-integration-c/defect.elf": "4f4c350df3533ebba435251d4f6772d5f5109285ca919b9376c87db2af2bd714",
+    "build/goal-r1-spo2-output-integration-c/defect.o": "f7448dd7eaa0d2dd71b3ca3ebd76d6e91a4301e67309020446b589d287a0838d",
+    "build/goal-r1-spo2-output-integration-c/defect_fixture.py": "8ba44828524199e5d61ece5f2944adcb6c8f3cb47a22a26e916bef72cfc19b50",
+    "build/goal-r1-spo2-output-integration-c/defect_verify.py": "597f3215c3f59292794f9529d1ae0b00bf19e6137b9572bc1b6e258772b15f62",
+    "build/goal-r1-spo2-output-integration-c/document.py": "b441fa08a0ac48073789c36a43f49afd48391d9c6309cc95a5de10c171c68349",
+    "build/goal-r1-spo2-output-integration-c/fixture.py": "de0259a81ebb2b4a0414667683ec08b5896f1275e311ba8bdc2e8e9c101799a0",
+    "build/goal-r1-spo2-output-integration-c/link-argv.json": "c8b2c621239621f153f7f6bf95226b97cad7a403154213fdec76228d2a0cdcd7",
+    "build/goal-r1-spo2-output-integration-c/link-argv.log": "a875a7aae7a31724e52852700af76c904d845c8f9180c1d483cf220472a5c5dd",
+    "build/goal-r1-spo2-output-integration-c/normal-alias-results.json": "adc8dd80e5dba67f040a2c3a365c382d8a1b74767827be802c7cd89fe5db54b2",
+    "build/goal-r1-spo2-output-integration-c/normal-aliases.log": "fb744b128a14a72e6fb4c4b9dd59ddae95db60b01e8eccf2a98ac44d9d0e431e",
+    "build/goal-r1-spo2-output-integration-c/normal-build.log": "ee8d27ea66a2d5d59bdb487949be2c9fecade6249ea82e55f395c9329b15753e",
+    "build/goal-r1-spo2-output-integration-c/normal-caller-link.json": "ee02b6421f3828149cf7af6723894a6bccd0fe218050539d5c678c76bcd8c6ff",
+    "build/goal-r1-spo2-output-integration-c/normal-caller-link.log": "7d007cfe2139ce4a62b3bba37784c72bac8482606075ca302ca7f98b54ec54b4",
+    "build/goal-r1-spo2-output-integration-c/normal-caller-results.json": "4782b2ef6c7d94ba16db579bbe5dccd85adedae164c126c340bc2a9de4a459e5",
+    "build/goal-r1-spo2-output-integration-c/normal-caller.elf": "e0b0946d6220a9177ed0fd8cefefdf7922e941595df0c1310f28c122573cfa70",
+    "build/goal-r1-spo2-output-integration-c/normal-caller.log": "0ce212d0e6c01dd5e5e80e6ea16803fea2fb9f624e238ea420b1c266f36045d2",
+    "build/goal-r1-spo2-output-integration-c/normal-direct-link.json": "11a54c2b17d13afbdf08a6894415f7e2b74aac89d034146d1dc83e007da6cbf1",
+    "build/goal-r1-spo2-output-integration-c/normal-direct-link.log": "463e165adb626ae8544265e95abac149c34f68c4db25eb7057044d5a58fb7ef1",
+    "build/goal-r1-spo2-output-integration-c/normal-oracle-results.json": "f9dbc901b00b587d6fe8353c4058655f427b9eb7d9ce9eedfa5a3188bc8d1516",
+    "build/goal-r1-spo2-output-integration-c/normal-oracles.log": "c05450bf7bab0905c8a1814f314d980d667cad972599f261ff9c01b6d3eecaa0",
+    "build/goal-r1-spo2-output-integration-c/normal-results.json": "9b802505f50497d76a58d9177595fec1caa388ab90d9bfb3c8f6a140cc037747",
+    "build/goal-r1-spo2-output-integration-c/normal-verify.log": "588098845078b06732a85e98dd32292cfa9a5b00d42f337f8a396f1118b64a77",
+    "build/goal-r1-spo2-output-integration-c/normal.elf": "99486472755356c1d42d83d3d3ee815cfbf153f2da6165d11b7a113d1f61a968",
+    "build/goal-r1-spo2-output-integration-c/normal_aliases.py": "1ab356b6cc2b8c956b05740369973af45ec26dcd66494016714498bde11b05dc",
+    "build/goal-r1-spo2-output-integration-c/normal_caller.py": "043d13d8495ab4912a2851e7ba634d5d8111ff8fdedb314f67025e8b46029618",
+    "build/goal-r1-spo2-output-integration-c/normal_caller_fixture.py": "b48fe64582e7bdba1bb0499c13a95357de2182b83954969d47ba6731866720b9",
+    "build/goal-r1-spo2-output-integration-c/normal_caller_matrix.py": "872094641f5ba4eea011bf1cd23d4233bed729a23d80a32f4914bc51cac2d700",
+    "build/goal-r1-spo2-output-integration-c/normal_fixture.py": "398c28090a801083480958ff0d0fe379b46c68ac8c706c7461393595846f2683",
+    "build/goal-r1-spo2-output-integration-c/normal_oracles.py": "ab5dcef3a6ea238df0326a04ac575e73e5ca9e6e0f026af4b88c653dfd97bf2c",
+    "build/goal-r1-spo2-output-integration-c/normal_prepare.py": "cca309f4ad5ce06bc6935e5dc09c79b64ef677bd37021952fa436b5b620dee42",
+    "build/goal-r1-spo2-output-integration-c/normal_verify.py": "06343aaa7872e971ce17b1d1f376fd5819ff3f8e41c93a5a8331049814172610",
+    "build/goal-r1-spo2-output-integration-c/oracle-results.json": "5a0f4786112b93b7a36153a15c6e1641dd1be5893c1f6794fc40b20ff8cd3c08",
+    "build/goal-r1-spo2-output-integration-c/oracles.log": "add346677549861606ea23b9d0299d2f3181a9a1e4692a7a57c9728781545ff6",
+    "build/goal-r1-spo2-output-integration-c/oracles.py": "21804cb420f790576a58830bf0bc6c036916f6cc93d4a66c014a2031fb1d8466",
+    "build/goal-r1-spo2-output-integration-c/rea-bytes.json": "3e950fafa654d1e75668d035765729a18af319a19112e51a559053711d5e565e",
+    "build/goal-r1-spo2-output-integration-c/rea-dossier.json": "ab20e73e802152bd63e027b96c141c65a1b340c0fdf6a01a644d00139029993c",
+    "build/goal-r1-spo2-output-integration-c/rea-literals.json": "0790ff8514644ed9a747c1a866d8faf88ad196fc676b9d43919866f727e42d33",
+    "build/goal-r1-spo2-output-integration-c/results.json": "e0f943cbe6e7d2b883d5a9c84a27da1df76f83488694de7acb71b08445e2ab93",
+    "build/goal-r1-spo2-output-integration-c/sources-check.log": "84c1283b266440cd2e6a8616b36df9b46de0998e4c31d34eaeae09e53ef7e167",
+    "build/goal-r1-spo2-output-integration-c/verify.log": "9cdd25852438cc585cbcf5b38bb9d0dd1a07b9f5ec4c4c38e946f6e2eced8fdb",
+    "build/goal-r1-spo2-output-integration-c/verify.py": "fc6ad01a950e938cfbc13e26c3cb4f8642653142a0a1fda22ed25332245da64d",
+    "build/goal-r1-spo2-ratio-c/normal-stream-test.ld": "808ff9c64adde68933158791e9d115c75817ae1840e2bdcbcfa42c7a39314cc6",
+    "build/sources-goal-r1-spo2-output-c/r1/r1-application/r1__src__application__goodix__native_model_concatenate.c.o": "6f80a63fefdad83c8cf73df17d40caf691c382ed676a0aae82f28bed9f636689",
+    "build/sources-goal-r1-spo2-output-c/r1/r1-application/r1__src__application__goodix__native_model_convolution.c.o": "5c211d9e5cf520e4fef7121843440b89fd956ede5526e2b8db0e48f500747f02",
+    "build/sources-goal-r1-spo2-output-c/r1/r1-application/r1__src__application__goodix__native_model_dense.c.o": "a5baaa994ed42a49be6aaf395a00671963a6c1b6b5d8583777c6305ee05bd1bd",
+    "build/sources-goal-r1-spo2-output-c/r1/r1-application/r1__src__application__goodix__native_model_float_pool.c.o": "17c92a4b130dda0281e7a897dc114fb0450d44b91b380e1dd49f5a2090c2e7ec",
+    "build/sources-goal-r1-spo2-output-c/r1/r1-application/r1__src__application__goodix__native_model_graph_execute.c.o": "4c0c63c859caf0fd22f1320b45136d908f8abbb84d4b0a2e3e2e20a8edc5dd7a",
+    "build/sources-goal-r1-spo2-output-c/r1/r1-application/r1__src__application__goodix__native_model_i8_convolution.c.o": "2657a7199915d67c47531fc0fc9ffbfbe865f4b95534abd1dbdafa390e0ba767",
+    "build/sources-goal-r1-spo2-output-c/r1/r1-application/r1__src__application__goodix__native_model_merge.c.o": "33a43b8fe5af49f578e7ebaf13ebcca37e457e06c19432fbb93762fa6c1024e4",
+    "build/sources-goal-r1-spo2-output-c/r1/r1-application/r1__src__application__goodix__native_model_pool_add.c.o": "73969bf6f08d01ca962bc9a8d85d5696ef178591ae9b5530e89af713b96b8474",
+    "build/sources-goal-r1-spo2-output-c/r1/r1-application/r1__src__application__goodix__native_model_quantization.c.o": "e317ed0e53906a7020f44905fb697f421b021e1d221f9da3f6e78435bcfef649",
+    "build/sources-goal-r1-spo2-output-c/r1/r1-application/r1__src__application__goodix__native_model_recurrent.c.o": "a9f03474c4391045cceb74e33a1aa0031387d459054add0966cbcd300bc9b513",
+    "build/sources-goal-r1-spo2-output-c/r1/r1-application/r1__src__application__goodix__native_model_recurrent_support.c.o": "d9da585a816de8b36c1a8a255860a168d8ba685233e4baf53ed695609bf9b129",
+    "build/sources-goal-r1-spo2-output-c/r1/r1-application/r1__src__application__goodix__native_model_scale.c.o": "70c03a7ad29fde9d634eaae50e201f9b9648d9ce173e72e04289113dedefb7f3",
+    "build/sources-goal-r1-spo2-output-c/r1/r1-application/r1__src__application__goodix__native_model_softmax.c.o": "9e00e9077ae03eb4c80bf06e81f6356747499337da700fd8ba7b3cd79b645fc2",
+    "build/sources-goal-r1-spo2-output-c/r1/r1-application/r1__src__application__goodix__native_model_transform.c.o": "c9d2e209373e9696eee3f03cd6b5dc0a5d47503d7d8b769a368158e5fcd3fad0",
+    "build/sources-goal-r1-spo2-output-c/r1/r1-application/r1__src__application__goodix__native_spo2_calculate.c.o": "0d1e2ddeeefd0ad393d0933a15bf7185e395422378e50e2c584b449fa1cff367",
+    "build/sources-goal-r1-spo2-output-c/r1/r1-application/r1__src__application__goodix__native_spo2_generated_model.c.o": "14f0da4eff0d75d6014f40d928a6bd58dcc44b79b1a4c6ed695c9dbdf87ee210",
+    "build/sources-goal-r1-spo2-output-c/r1/r1-application/r1__src__application__goodix__native_spo2_infer.c.o": "0b447e494745412c299b3839c8bef24cffc7960b638a3d189bb553045d5ed7ab",
+    "build/sources-goal-r1-spo2-output-c/r1/r1-application/r1__src__application__goodix__native_spo2_infer_support.c.o": "ebea499ddab2b91f3bf531f7301ac0cdf5bd5eb051c923a0cbae29e0ac3bdb5c",
+    "build/sources-goal-r1-spo2-output-c/r1/r1-application/r1__src__application__goodix__native_spo2_math.c.o": "265990bd7f6c22c801d820280faeccc977bbacff30e719a4ad3f08414b33dfc5",
+    "build/sources-goal-r1-spo2-output-c/r1/r1-application/r1__src__application__goodix__native_spo2_model_graph.c.o": "ede8398723a208a4ee7336b6004b9189576cd36520f3222c84be227cc166473b",
+    "build/sources-goal-r1-spo2-output-c/r1/r1-application/r1__src__application__goodix__native_spo2_output.c.o": "6edd8ecdc64c4726fb4e2109e787f0a670ab6e52dde7f491c3b3a6a533137e01",
+    "build/sources-goal-r1-spo2-output-c/r1/r1-application/r1__src__application__goodix__native_spo2_output_quality.c.o": "45f124497678c47d01f0b15a4af23575b2be8cdd9921cf8254f73cfb73067d8f",
+    "build/sources-goal-r1-spo2-output-c/r1/r1-application/r1__src__application__goodix__native_spo2_select.c.o": "f5d1dacbf728a653e0326d68ef1e28d556cba595700b2f10675ee19b089fc135",
+    "build/sources-goal-r1-spo2-output-c/r1/r1-application/r1__src__application__runtime__native_expf_tanhf.c.o": "1b2a1142fd859ed7e67a172be060968c238a5a942afbee379d2318896b946b45",
+    "build/sources-goal-r1-spo2-output-c/r1/r1-application/r1__src__application__runtime__native_float_bits.c.o": "cc448df0a2076c6dd5ee05a700f3221fb9d253ae9ae0cb7b591a0ea3a474c154",
+    "build/sources-goal-r1-spo2-output-c/r1/r1-application/r1__src__application__runtime__native_math_selection.c.o": "8af75876c6bb312a8daeeed99f72214e4afa4afb080649df66a4cbd5a05f2afc",
+    "build/sources-goal-r1-spo2-output-c/report.json": "acfd6214b79baea9d5556b587af29d13955f0ee2a2b101aba92f4ff7b3994269",
+    "build/sources-goal-r1-spo2-select-c/r1/r1-application/r1__src__application__goodix__native_model_concatenate.c.o": "6f80a63fefdad83c8cf73df17d40caf691c382ed676a0aae82f28bed9f636689",
+    "build/sources-goal-r1-spo2-select-c/r1/r1-application/r1__src__application__goodix__native_model_convolution.c.o": "5c211d9e5cf520e4fef7121843440b89fd956ede5526e2b8db0e48f500747f02",
+    "build/sources-goal-r1-spo2-select-c/r1/r1-application/r1__src__application__goodix__native_model_dense.c.o": "a5baaa994ed42a49be6aaf395a00671963a6c1b6b5d8583777c6305ee05bd1bd",
+    "build/sources-goal-r1-spo2-select-c/r1/r1-application/r1__src__application__goodix__native_model_float_pool.c.o": "17c92a4b130dda0281e7a897dc114fb0450d44b91b380e1dd49f5a2090c2e7ec",
+    "build/sources-goal-r1-spo2-select-c/r1/r1-application/r1__src__application__goodix__native_model_graph_execute.c.o": "4c0c63c859caf0fd22f1320b45136d908f8abbb84d4b0a2e3e2e20a8edc5dd7a",
+    "build/sources-goal-r1-spo2-select-c/r1/r1-application/r1__src__application__goodix__native_model_i8_convolution.c.o": "2657a7199915d67c47531fc0fc9ffbfbe865f4b95534abd1dbdafa390e0ba767",
+    "build/sources-goal-r1-spo2-select-c/r1/r1-application/r1__src__application__goodix__native_model_merge.c.o": "33a43b8fe5af49f578e7ebaf13ebcca37e457e06c19432fbb93762fa6c1024e4",
+    "build/sources-goal-r1-spo2-select-c/r1/r1-application/r1__src__application__goodix__native_model_pool_add.c.o": "73969bf6f08d01ca962bc9a8d85d5696ef178591ae9b5530e89af713b96b8474",
+    "build/sources-goal-r1-spo2-select-c/r1/r1-application/r1__src__application__goodix__native_model_quantization.c.o": "e317ed0e53906a7020f44905fb697f421b021e1d221f9da3f6e78435bcfef649",
+    "build/sources-goal-r1-spo2-select-c/r1/r1-application/r1__src__application__goodix__native_model_recurrent.c.o": "a9f03474c4391045cceb74e33a1aa0031387d459054add0966cbcd300bc9b513",
+    "build/sources-goal-r1-spo2-select-c/r1/r1-application/r1__src__application__goodix__native_model_recurrent_support.c.o": "d9da585a816de8b36c1a8a255860a168d8ba685233e4baf53ed695609bf9b129",
+    "build/sources-goal-r1-spo2-select-c/r1/r1-application/r1__src__application__goodix__native_model_scale.c.o": "70c03a7ad29fde9d634eaae50e201f9b9648d9ce173e72e04289113dedefb7f3",
+    "build/sources-goal-r1-spo2-select-c/r1/r1-application/r1__src__application__goodix__native_model_softmax.c.o": "9e00e9077ae03eb4c80bf06e81f6356747499337da700fd8ba7b3cd79b645fc2",
+    "build/sources-goal-r1-spo2-select-c/r1/r1-application/r1__src__application__goodix__native_model_transform.c.o": "c9d2e209373e9696eee3f03cd6b5dc0a5d47503d7d8b769a368158e5fcd3fad0",
+    "build/sources-goal-r1-spo2-select-c/r1/r1-application/r1__src__application__goodix__native_spo2_calculate.c.o": "0d1e2ddeeefd0ad393d0933a15bf7185e395422378e50e2c584b449fa1cff367",
+    "build/sources-goal-r1-spo2-select-c/r1/r1-application/r1__src__application__goodix__native_spo2_generated_model.c.o": "14f0da4eff0d75d6014f40d928a6bd58dcc44b79b1a4c6ed695c9dbdf87ee210",
+    "build/sources-goal-r1-spo2-select-c/r1/r1-application/r1__src__application__goodix__native_spo2_infer.c.o": "0b447e494745412c299b3839c8bef24cffc7960b638a3d189bb553045d5ed7ab",
+    "build/sources-goal-r1-spo2-select-c/r1/r1-application/r1__src__application__goodix__native_spo2_infer_support.c.o": "ebea499ddab2b91f3bf531f7301ac0cdf5bd5eb051c923a0cbae29e0ac3bdb5c",
+    "build/sources-goal-r1-spo2-select-c/r1/r1-application/r1__src__application__goodix__native_spo2_math.c.o": "265990bd7f6c22c801d820280faeccc977bbacff30e719a4ad3f08414b33dfc5",
+    "build/sources-goal-r1-spo2-select-c/r1/r1-application/r1__src__application__goodix__native_spo2_model_graph.c.o": "ede8398723a208a4ee7336b6004b9189576cd36520f3222c84be227cc166473b",
+    "build/sources-goal-r1-spo2-select-c/r1/r1-application/r1__src__application__goodix__native_spo2_output_quality.c.o": "45f124497678c47d01f0b15a4af23575b2be8cdd9921cf8254f73cfb73067d8f",
+    "build/sources-goal-r1-spo2-select-c/r1/r1-application/r1__src__application__goodix__native_spo2_select.c.o": "f5d1dacbf728a653e0326d68ef1e28d556cba595700b2f10675ee19b089fc135",
+    "build/sources-goal-r1-spo2-select-c/r1/r1-application/r1__src__application__runtime__native_expf_tanhf.c.o": "1b2a1142fd859ed7e67a172be060968c238a5a942afbee379d2318896b946b45",
+    "build/sources-goal-r1-spo2-select-c/r1/r1-application/r1__src__application__runtime__native_float_bits.c.o": "cc448df0a2076c6dd5ee05a700f3221fb9d253ae9ae0cb7b591a0ea3a474c154",
+    "build/sources-goal-r1-spo2-select-c/r1/r1-application/r1__src__application__runtime__native_math_selection.c.o": "8af75876c6bb312a8daeeed99f72214e4afa4afb080649df66a4cbd5a05f2afc",
+    "build/sources-goal-r1-spo2-select-c/report.json": "3d9111c325bb13e2738f25d3f8a1d9f41e9ef19bbc098aadb4ed85c0e845df4f",
+    "r1/blobs/official/r1-2.2.6.0009/application.bin": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "r1/docs/reference/FUNCTION-OWNERSHIP.csv": "2ae9d553b9de2cffd48727eaca06273e1555df9518945b32a8385cb36e2fd2b9",
+    "r1/src/application/goodix/native_spo2_calculate.c": "e4dd125d2add198ceeab4d1e5c57620e26083f2bb34ff5398a61835384cdef47",
+    "r1/src/application/goodix/native_spo2_output.c": "7dd0314a91774d2c779428411b1142f3cc9955fcc748af8ea12a8378ea6fd483",
+    "r1/src/application/goodix/native_spo2_output.h": "1e40f0a92bc8623274dc37d55803fa4d4f597c3e2fba5dfd5083bc0a55eb2cb3",
+    "r1/src/config/runtime/native_health_cache.ld": "eb8f131c489cd818d4e36718718fa1989719ca0170f164541a1a5bf56dfc1ec3",
+    "r1/src/sources.json": "2ce1623cc2702be5515572fe5bdebeb756e815af797abeb6ded461e2586c435b",
+    "tools/build/source-plan.json": "eeb516e31b3310fb0718f36908977f8125723f7c5e0e86cd6744395826259a4d"
+  }
+}

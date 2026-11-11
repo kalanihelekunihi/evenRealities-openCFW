@@ -1,185 +1,50 @@
-/* Full native frequency/channel bit permutation and LP scan body. */
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_dispatch_child_30e5a4\n"
-".type opencfw_em9305_dispatch_child_30e5a4,@function\n"
-"opencfw_em9305_dispatch_child_30e5a4:\n"
-"L30e5a4:\n"
-"enter_s [r13-r17,blink]\n"
-"L30e5a6:\n"
-"mov_s r13,r0\n"
-"L30e5a8:\n"
-"ldh_s r0,[r0,0x30]\n"
-"L30e5aa:\n"
-"mov_s r8,0xf0f0\n"
-"L30e5b0:\n"
-"asl r2,r8,0x4\n"
-"L30e5b4:\n"
-"xor_s r1,r1,r0\n"
-"L30e5b6:\n"
-"and r9,r1,r8\n"
-"L30e5ba:\n"
-"asl_s r1,r1,0x8\n"
-"L30e5bc:\n"
-"and_s r1,r1,r2\n"
-"L30e5be:\n"
-"mov_s r12,0xcccc0\n"
-"L30e5c4:\n"
-"or r1,r1,r9\n"
-"L30e5c8:\n"
-"asl_s r14,r12,0x2\n"
-"L30e5ca:\n"
-"and r9,r1,r12\n"
-"L30e5ce:\n"
-"asl r1,r1,0x4\n"
-"L30e5d0:\n"
-"and_s r1,r1,r14\n"
-"L30e5d2:\n"
-"mov_s r11,0x2aaa80\n"
-"L30e5d8:\n"
-"or r1,r1,r9\n"
-"L30e5dc:\n"
-"asl r15,r11\n"
-"L30e5e0:\n"
-"and r9,r1,r11\n"
-"L30e5e4:\n"
-"asl r1,r1,0x2\n"
-"L30e5e6:\n"
-"and_s r1,r1,r15\n"
-"L30e5e8:\n"
-"or r1,r1,r9\n"
-"L30e5ec:\n"
-"lsr_s r1,r1,0x7\n"
-"L30e5ee:\n"
-"mpyuw r1,r1,0x11\n"
-"L30e5f2:\n"
-"mov_s r17,r3\n"
-"L30e5f4:\n"
-"add_s r1,r1,r0\n"
-"L30e5f6:\n"
-"and r9,r1,r8\n"
-"L30e5fa:\n"
-"asl_s r1,r1,0x8\n"
-"L30e5fc:\n"
-"and_s r1,r1,r2\n"
-"L30e5fe:\n"
-"or r1,r1,r9\n"
-"L30e602:\n"
-"and r9,r1,r12\n"
-"L30e606:\n"
-"asl r1,r1,0x4\n"
-"L30e608:\n"
-"and_s r1,r1,r14\n"
-"L30e60a:\n"
-"or r1,r1,r9\n"
-"L30e60e:\n"
-"and r9,r1,r11\n"
-"L30e612:\n"
-"asl r1,r1,0x2\n"
-"L30e614:\n"
-"and_s r1,r1,r15\n"
-"L30e616:\n"
-"or r1,r1,r9\n"
-"L30e61a:\n"
-"lsr_s r1,r1,0x7\n"
-"L30e61c:\n"
-"mpyuw r1,r1,0x11\n"
-"L30e620:\n"
-"add_s r1,r1,r0\n"
-"L30e622:\n"
-"and r8,r8,r1\n"
-"L30e626:\n"
-"asl_s r1,r1,0x8\n"
-"L30e628:\n"
-"and_s r1,r1,r2\n"
-"L30e62a:\n"
-"or r1,r1,r8\n"
-"L30e62e:\n"
-"and_s r12,r12,r1\n"
-"L30e630:\n"
-"asl r1,r1,0x4\n"
-"L30e632:\n"
-"and_s r14,r14,r1\n"
-"L30e634:\n"
-"or r1,r14,r12\n"
-"L30e638:\n"
-"and r11,r11,r1\n"
-"L30e63c:\n"
-"asl r1,r1,0x2\n"
-"L30e63e:\n"
-"and_s r15,r15,r1\n"
-"L30e640:\n"
-"or r1,r15,r11\n"
-"L30e644:\n"
-"lsr_s r1,r1,0x7\n"
-"L30e646:\n"
-"mpyuw r1,r1,0x11\n"
-"L30e64a:\n"
-"add_s r1,r1,r0\n"
-"L30e64c:\n"
-"xor r16,r1,r0\n"
-"L30e650:\n"
-"mpyuw r14,r16,0xdd68\n"
-"L30e658:\n"
-"sth_s r1,[r13,0x32]\n"
-"L30e65a:\n"
-"ld r0,[r13,0]\n"
-"L30e65c:\n"
-"lsr_s r14,r14,0x15\n"
-"L30e65e:\n"
-"mpyw r14,r14,-37\n"
-"L30e662:\n"
-"ld r1,[r13,0x4]\n"
-"L30e664:\n"
-"add_s r14,r14,r16\n"
-"L30e666:\n"
-"exth_s r15,r14\n"
-"L30e668:\n"
-"bl.d opencfw_em9305_radio_shift_3027f4\n"
-"L30e66c:\n"
-"mov_s r2,r15\n"
-"L30e66e:\n"
-"bbit0.nt r0,0,L30e690\n"
-"L30e672:\n"
-"breq.d.nt r17,0,L30e6ac\n"
-"L30e676:\n"
-"mov lp_count,0x25\n"
-"L30e67a:\n"
-"add_s r1,r13,0x8\n"
-"L30e67c:\n"
-"mov r0,0\n"
-"L30e680:\n"
-"lp L30e68e\n"
-"L30e684:\n"
-"ldb.ab r2,[r1,1]\n"
-"L30e688:\n"
-"breq.nt r15,r2,L30e6a8\n"
-"L30e68c:\n"
-"add_s r0,r0,1\n"
-"L30e68e:\n"
-"b_s L30e6ac\n"
-"L30e690:\n"
-"ldb r0,[r13,45]\n"
-"L30e694:\n"
-"mpyuw r0,r16,r0\n"
-"L30e698:\n"
-"breq.d.nt r17,0,L30e6a2\n"
-"L30e69c:\n"
-"lsr_s r0,r0,0x10\n"
-"L30e69e:\n"
-"stb r0,[r13,52]\n"
-"L30e6a2:\n"
-"add_s r13,r13,r0\n"
-"L30e6a4:\n"
-"ldb_s r14,[r13,0x8]\n"
-"L30e6a6:\n"
-"b_s L30e6ac\n"
-"L30e6a8:\n"
-"stb r0,[r13,52]\n"
-"L30e6ac:\n"
-"extb_s r0,r14\n"
-"L30e6ae:\n"
-"leave_s [r13-r17,blink,pcl]\n"
-".size opencfw_em9305_dispatch_child_30e5a4,.-opencfw_em9305_dispatch_child_30e5a4\n"
-);
+#include <stdint.h>
+
+/* Native 0x30e5a4..0x30e6b0: LE Channel Selection Algorithm #2. From the
+ * event counter and the channel identifier (+0x30) compute prn_e with three
+ * rounds of byte-wise bit reversal and MAM (x * 17 + id), store prn_s at
+ * +0x32 and take the unmapped channel prn_e mod 37. A channel that is used
+ * in the 37-bit map (+0/+4, tested with native 0x3027f4) is kept, and with
+ * remap set its position in the used-channel list (+8) is stored at +52;
+ * an unused channel is remapped to list entry (prn_e * count(+45)) >> 16,
+ * whose index is stored at +52 with remap set. Returns the channel. */
+extern uint64_t opencfw_em9305_radio_shift_3027f4(uint32_t,uint32_t,uint32_t);
+
+static uint32_t csa2_permute(uint32_t value)
+{
+    value = (value & 0xf0f0u) | ((value << 8) & 0xf0f00u);
+    value = (value & 0xcccc0u) | ((value << 4) & 0x333300u);
+    value = (value & 0x2aaa80u) | ((value << 2) & 0x555500u);
+    return value >> 7;
+}
+
+uint32_t opencfw_em9305_dispatch_child_30e5a4(uintptr_t context, uint32_t counter, uint32_t unused,
+                                              uint32_t remap)
+{
+    (void)unused;
+    uint32_t id = *(volatile uint16_t *)(context + 0x30u);
+    uint32_t prn = counter ^ id;
+    for (uint32_t round = 0u; round < 3u; ++round)
+        prn = (csa2_permute(prn) & 0xffffu) * 17u + id;
+    uint32_t prn_e = prn ^ id;
+    *(volatile uint16_t *)(context + 0x32u) = (uint16_t)prn;
+    uint32_t quotient = ((prn_e & 0xffffu) * 0xdd68u) >> 21;
+    uint32_t channel = (uint16_t)(prn_e + (uint32_t)((int32_t)quotient * -37));
+    uint64_t map = opencfw_em9305_radio_shift_3027f4(*(volatile uint32_t *)context,
+                                                     *(volatile uint32_t *)(context + 4u), channel);
+    if (((uint32_t)map & 1u) != 0u) {
+        if (remap != 0u) {
+            const volatile uint8_t *used = (const volatile uint8_t *)(context + 8u);
+            for (uint32_t index = 0u; index < 37u; ++index) {
+                if (used[index] == channel) {
+                    *(volatile uint8_t *)(context + 52u) = (uint8_t)index;
+                    break;
+                }
+            }
+        }
+        return (uint8_t)channel;
+    }
+    uint32_t index = ((prn_e & 0xffffu) * *(volatile uint8_t *)(context + 45u)) >> 16;
+    if (remap != 0u) *(volatile uint8_t *)(context + 52u) = (uint8_t)index;
+    return *(volatile uint8_t *)(context + 8u + index);
+}

@@ -1,0 +1,207 @@
+{
+  "schema": 1,
+  "scope": "R1 stock Goodix software-reset configuration; generated kernel/demo-user units",
+  "native_reset_calls": {
+    "Gh3x2xDemoArrayCfgSwitch": {
+      "call": "0x2d6be",
+      "target": "0x2accc",
+      "instruction_sha256": "a08c006007daf5fb0e85552a880247052f561a55bcab5fac1a77752ed756fd06"
+    },
+    "Gh3x2xDemoInit": {
+      "call": "0x2d9be",
+      "target": "0x2accc",
+      "instruction_sha256": "44d503a0b48f131195479f199ca8f884ef28712162b05cbd9c6dabefbe9b8db9"
+    },
+    "Gh3x2xDemoInterruptProcess": {
+      "call": "0x2dd54",
+      "target": "0x2accc",
+      "instruction_sha256": "f64143f4bfdd5b1eb3c155fb4fcd759bc86312cda8e993254db64ae9c88bb4ee"
+    },
+    "Gh3x2xDemoStartSamplingInner": {
+      "call": "0x2e486",
+      "target": "0x2accc",
+      "instruction_sha256": "75d11e393f279e531de956492484f5e48c4ab55ef2078b86d811915f35a8f1bc"
+    }
+  },
+  "native_engineering_mode_entry_unmapped": true,
+  "audit": {
+    "unchanged_other_objects": 573,
+    "changed_kernel_functions": [
+      "Gh3x2xDemoInit",
+      "Gh3x2xDemoInterruptProcess",
+      "Gh3x2xDemoArrayCfgSwitch",
+      "Gh3x2xDemoStartSamplingInner",
+      "Gh3x2xDemoStopSamplingForEngineeringMode"
+    ],
+    "removed_demo_user_functions": [
+      "hal_gh3x2x_reset_pin_ctrl",
+      "hal_gh3x2x_reset_pin_init"
+    ],
+    "unchanged_other_kernel_functions": 39,
+    "unchanged_other_demo_user_functions": 22,
+    "macro_differences": {
+      "__SUPPORT_HARD_RESET_CONFIG__": [
+        "(1)",
+        "(0)"
+      ],
+      "R1_NATIVE_DEMO_RESET_CONFIG_H": [
+        null,
+        ""
+      ]
+    },
+    "removed_imports": [
+      "gh3026_reset_pin_ctrl",
+      "gh3026_reset_pin_init"
+    ],
+    "added_imports": [],
+    "application_unresolved": 173,
+    "bootloader_unresolved": 34,
+    "retargeted_existing_frontier_rows": 20,
+    "native_reset_call": {
+      "entry": "0x2d9be",
+      "target": "0x2accc",
+      "name": "GH3X2X_SoftReset"
+    },
+    "C_Gh3x2xDemoInit_calls": [
+      "g_uchGh3x2xIntMode",
+      "g_uchGh3x2xIntMode",
+      "snprintf",
+      "g_pSnprintfUserIn",
+      "g_pSnprintfUserIn",
+      "snprintf",
+      ".L__FUNCTION__.Gh3x2xDemoInit",
+      ".L.str.21",
+      ".L__FUNCTION__.Gh3x2xDemoInit",
+      ".L.str.19",
+      ".L.str.21",
+      ".L.str.19",
+      "gh3x2x_print_fmt",
+      "GH3X2X_GetDriverLibVersion",
+      ".L.str.22",
+      ".L.str.22",
+      "gh3x2x_print_fmt",
+      "GH3X2X_GetVirtualRegVersion",
+      ".L.str.23",
+      ".L.str.23",
+      "gh3x2x_print_fmt",
+      "__aeabi_memclr4",
+      ".L.str.24",
+      ".L.str.24",
+      "GH3X2X_Memset",
+      "GH3X2X_AlgoVersion",
+      "gh3x2x_print_fmt",
+      "g_uchGh3x2xInitFlag",
+      "g_uchGh3x2xInitFlag",
+      "hal_gh3x2x_i2c_init",
+      "hal_gh3x2x_i2c_write",
+      "hal_gh3x2x_i2c_read",
+      "hal_gh3x2x_i2c_write",
+      "hal_gh3x2x_i2c_read",
+      "GH3X2X_RegisterI2cOperationFunc",
+      "gh3x2x_write_algo_config_hook",
+      "gh3x2x_write_algo_config_hook",
+      "gh3x2x_config_set_stop_hook",
+      "gh3x2x_config_set_stop_hook",
+      "gh3x2x_config_set_start_hook",
+      "gh3x2x_config_set_start_hook",
+      "gh3x2x_reset_by_protocol_hook",
+      "gh3x2x_reset_by_protocol_hook",
+      "gh3x2x_frame_data_hook_func",
+      "gh3x2x_init_hook_func",
+      "gh3x2x_sampling_start_hook_func",
+      "gh3x2x_sampling_stop_hook_func",
+      "gh3x2x_get_rawdata_hook_func",
+      "gh3x2x_frame_data_hook_func",
+      "gh3x2x_init_hook_func",
+      "gh3x2x_sampling_start_hook_func",
+      "gh3x2x_sampling_stop_hook_func",
+      "gh3x2x_get_rawdata_hook_func",
+      "GH3X2X_RegisterHookFunc",
+      "Gh3x2x_BspDelayUs",
+      "Gh3x2x_BspDelayUs",
+      "GH3X2X_RegisterDelayUsCallback",
+      "GH3X2X_SetChipSleepFlag",
+      "GH3X2X_SoftReset",
+      "Gh3x2x_BspDelayMs",
+      "GhDrvConfigManagerInit",
+      "g_uchGh3x2xRegCfgArrIndex",
+      "g_stGh3x2xCfgListArr",
+      "g_uchGh3x2xRegCfgArrIndex",
+      "g_stGh3x2xCfgListArr",
+      "GH3X2X_Init",
+      "Gh3x2xDemoStopSampling",
+      ".L.str.26",
+      ".L.str.26",
+      "gh3x2x_print_fmt",
+      "g_stGh3x2xCfgListArr",
+      "g_stGh3x2xCfgListArr",
+      "Gh3x2xGetConfigVersion",
+      ".L.str.25",
+      ".L.str.25",
+      "gh3x2x_print_fmt",
+      "GH3X2X_SetMaxNumWhenReadFifo",
+      "GH3X2X_EnterLowPowerMode",
+      "g_uchGh3x2xIntCallBackIsCalled",
+      "g_uchGh3x2xIntCallBackIsCalled",
+      "hal_gh3x2x_int_init",
+      "GhMultSensorWearEventManagerInit",
+      "GhMultiSensorTimerInit",
+      "GhGsMoveDetecterInit",
+      "Gh3x2xFunctionInfoForUserInit",
+      "g_unDemoFuncMode",
+      "g_unDemoFuncMode"
+    ]
+  },
+  "manifest_changes": {
+    "retargeted_units": 1,
+    "existing_generator_include_replacement_changed": 1,
+    "new_generator": 1,
+    "profiles_unchanged": true,
+    "vendor_source_unmodified": true
+  },
+  "source_build": {
+    "units": 575,
+    "compiled": 575,
+    "failed": 0,
+    "duplicate_strong_symbols": 0,
+    "application_unresolved": 173,
+    "bootloader_unresolved": 34
+  },
+  "qualification": {
+    "candidates": 5,
+    "compiled": 5,
+    "selected": 0,
+    "canonical_plan_unchanged_this_round": true
+  },
+  "hybrid": {
+    "report": "build/hybrid-goal-r1-goodix-soft-reset/build-report.json",
+    "payload_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "totals": {
+      "binary-pull-through": 642255,
+      "source-built": 3905,
+      "resource-file": 248
+    },
+    "source_completeness_proven": false
+  },
+  "files": {
+    "r1/src/config/goodix/native_demo_reset_config.h": "ad09460cefc8e42261d37cf16fc7f581ff60bc85a1b52a7ff451b63772e0a011",
+    "r1/src/sources.json": "80545d54b3a9f10716645cb75311a6f34478925e2598e1b5b18913a30e0ee59a",
+    "third-party/upstream/goodix-gh3x2x/gh3x2x/demo_code/demo_kernel_code/kernel/gh_demo.c": "ec5ae749ce56abf803276a4adb796ba600803dddfde1888500a7aa42338fd4cf",
+    "r1/symbols/function-frontier.csv": "21a56c8c14c55d0bbd504fa894075993591e49f7341d8f1e294ae863480ff32e",
+    "build/sources-goal-r1-goodix-soft-reset-final/report.json": "0b6ba538e2a7c1a2297fd14f614db8ad07701c3bfaad6b6a6bed33e27e476fd3",
+    "build/hybrid-goal-r1-goodix-soft-reset/build-report.json": "96991c1ae85331135b7278522fe39dec8d8afbda385ef1fdbb5149b70c8f5aca",
+    "tools/build/source-plan.json": "b75a13f8cb2608f77f02582570ec5a031de8790cd1af50130f4b9f644ddb6931",
+    "build/goal-r1-queue-reset-c/stock.elf": "25b4a29af80ec8edab5bd861ba9b74a6e22eab29dc3d7a809a16869e8a140f04",
+    "build/goal-r1-goodix-soft-reset/rea.json": "12ef0a00240998c665267baa729147e99d4a100c8793f0ba26858459ae4ec329",
+    "build/goal-r1-goodix-soft-reset/audit.py": "a6c65a115a50d0c1d31a3b27bd664eef0d98892c3b780df0729b5a2ff9a266b6",
+    "build/goal-r1-goodix-soft-reset/audit-results.json": "c1348a93083647e7d7ad4f6d61534336f775f932a742022ae3882096b4a002c9",
+    "build/goal-r1-goodix-soft-reset/qualified/qualification.json": "58a1ded22d7fa74e63cd432f279230a6bdf43495e4d04667c3aae4e147f00f92",
+    "build/goal-r1-goodix-soft-reset/sources-before.json": "372b853c5c6d27a137cee320c4b75905e54b781a17d86f5bbd3905f908b5c7ce"
+  },
+  "limits": [
+    "No complete initialization runtime or physical sensor validation",
+    "Interrupt-pin hook and other Goodix configuration mismatches remain separate work",
+    "Five affected C functions; four mapped stock soft-reset callsites, engineering helper not independently located",
+    "No G2 gate advancement or global pseudocode/source-completeness claim"
+  ]
+}

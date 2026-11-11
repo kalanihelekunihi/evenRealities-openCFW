@@ -1,0 +1,149 @@
+{
+  "cases": 2816,
+  "passed": 2816,
+  "failures": [],
+  "stock_entry": "0x86e34",
+  "stock_body_bytes": 18,
+  "bridge_bytes": 10,
+  "c_body_bytes": 18,
+  "callback_stack_depth_pairs": [
+    [
+      [
+        -40
+      ],
+      [
+        -48
+      ]
+    ],
+    [
+      [
+        -40,
+        -40,
+        -40
+      ],
+      [
+        -48,
+        -48,
+        -48
+      ]
+    ],
+    [
+      [
+        -40,
+        -40,
+        -40,
+        -40,
+        -40
+      ],
+      [
+        -48,
+        -48,
+        -48,
+        -48,
+        -48
+      ]
+    ],
+    [
+      [
+        -40,
+        -40,
+        -40,
+        -40,
+        -40,
+        -40,
+        -40
+      ],
+      [
+        -48,
+        -48,
+        -48,
+        -48,
+        -48,
+        -48,
+        -48
+      ]
+    ],
+    [
+      [
+        -40,
+        -40,
+        -40,
+        -40,
+        -40,
+        -40,
+        -40,
+        -40,
+        -40
+      ],
+      [
+        -48,
+        -48,
+        -48,
+        -48,
+        -48,
+        -48,
+        -48,
+        -48,
+        -48
+      ]
+    ],
+    [
+      [
+        -40,
+        -40,
+        -40,
+        -40,
+        -40,
+        -40,
+        -40,
+        -40,
+        -40,
+        -40
+      ],
+      [
+        -48,
+        -48,
+        -48,
+        -48,
+        -48,
+        -48,
+        -48,
+        -48,
+        -48,
+        -48
+      ]
+    ]
+  ],
+  "unchanged_functions": [
+    "r1_qma6100_bounded_fifo_read",
+    "r1_qma6100_irq_boundary",
+    "r1_qma_delay_units",
+    "r1_qma_read_retry",
+    "r1_qma_write_retry"
+  ],
+  "report": "build/sources-goal-r1-qma-chip-id/report.json",
+  "report_sha256": "73b868de697979102236d477aea832c11fc5f5a4c059c105a5bbd9bc6555649d",
+  "source_sha256": "76f38d2fd80bbff19d0a547acac50022ef35747d995ae17b40ef608c3b346c50",
+  "manifest_sha256": "be76bf00509f1551b53a08edbc5515ed3a3dcb9b1721ff4481fdf60b77d82eb8",
+  "stock_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "native_span_sha256": "9150e53e6c6413f7361a9e9ceeca3c25168a088f1afeb0554bb9a3a8bc87d013",
+  "rea": {
+    "completed": true,
+    "procedure": "0x86e34",
+    "path": "build/goal-r1-qma-chip-id/REA.json",
+    "sha256": "bed231e315dd469c5cd81d745141ba8e76c2b1419136cfb800ad7a13468ade2e"
+  },
+  "probe_artifacts": {
+    "build/goal-r1-qma-chip-id/verify.py": "6259b7e9dcaf4e55577b250ab8a78e9d3eaa747264a099f2fa142453bc573138",
+    "build/goal-r1-qma-chip-id/before.c": "c49b9347e0c61252122b04b6af3459c1e553cfb5002442d36ca3d2ce324d14fc",
+    "build/goal-r1-qma-chip-id/source.elf": "0124c3e6a4185c0132d51873bdf36711bab43bc32d6cf1e4b4f07cfee9b0fd7d",
+    "build/goal-r1-qma-chip-id/stock.elf": "a532a099c8be083df77bd020e8890d4315b4fe983d255cb51f31e8933bfdf76c",
+    "build/goal-r1-qma-chip-id/rea-snapshot.json": "456122e7b316a8c0f968d509f47b426cdeb66633861c544f59017d8fdaac1c7a"
+  },
+  "limits": [
+    "Ten bytes of frame assembly remain to capture incoming R3; this is a partial C extraction, not an assembly-free entry.",
+    "Actual C retry loop executes; final bus and delay wrappers are modeled and clobber caller-saved registers/flags.",
+    "Native data pointer stays at entry SP-8; callback frame depths differ because the C body has its own frame.",
+    "No physical chip-ID read, delay timing, complete fault-state, final linking, source qualification or byte-identity claim."
+  ]
+}

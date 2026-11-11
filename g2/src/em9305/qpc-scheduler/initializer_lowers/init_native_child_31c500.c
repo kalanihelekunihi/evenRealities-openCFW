@@ -1,40 +1,21 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_31c500\n"
-".type opencfw_em9305_child_31c500,@function\n"
-"opencfw_em9305_child_31c500:\n"
-"L31c500:\n"
-"mov_s r2,r0\n"
-"L31c502:\n"
-"add r2,r2,512\n"
-"L31c506:\n"
-"ldb_s r1,[r2,0x2]\n"
-"L31c508:\n"
-"breq_s r1,0,L31c528\n"
-"L31c50a:\n"
-"ldb_s r1,[r2,0x1]\n"
-"L31c50c:\n"
-"ldb_s r3,[r2,0]\n"
-"L31c50e:\n"
-"stb r3,[r0,110]\n"
-"L31c512:\n"
-"brne.d.nt r1,0x1,L31c524\n"
-"L31c516:\n"
-"stb r1,[r0,111]\n"
-"L31c51a:\n"
-"mov_s r1,r0\n"
-"L31c51c:\n"
-"add r1,r1,262\n"
-"L31c520:\n"
-"st_s r1,[r0,0x70]\n"
-"L31c522:\n"
-"b_s L31c528\n"
-"L31c524:\n"
-"st 0,[r0,112]\n"
-"L31c528:\n"
-"j_s.d [blink]\n"
-"L31c52a:\n"
-"stb 0,[r2,2]\n"
-".size opencfw_em9305_child_31c500,.-opencfw_em9305_child_31c500\n"
-);
+#include <stdint.h>
+
+/* Native 0x31c500..0x31c52c: consume a pending parameter update. When the
+ * pending byte +514 is set, copy bytes +512/+513 to +110/+111; mode 1 points
+ * the +112 buffer slot at the record's inline area +262, any other mode
+ * clears it. The pending byte is always cleared; the record is returned. */
+uintptr_t opencfw_em9305_child_31c500(uintptr_t record)
+{
+    volatile uint8_t *pending = (volatile uint8_t *)(record + 512u);
+    if (pending[2] != 0u) {
+        uint8_t mode = pending[1];
+        *(volatile uint8_t *)(record + 110u) = pending[0];
+        *(volatile uint8_t *)(record + 111u) = mode;
+        if (mode == 1u)
+            *(volatile uint32_t *)(record + 112u) = (uint32_t)(record + 262u);
+        else
+            *(volatile uint32_t *)(record + 112u) = 0u;
+    }
+    pending[2] = 0u;
+    return record;
+}

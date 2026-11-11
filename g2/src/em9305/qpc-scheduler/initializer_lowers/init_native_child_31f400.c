@@ -1,190 +1,90 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_31f400\n"
-".type opencfw_em9305_child_31f400,@function\n"
-"opencfw_em9305_child_31f400:\n"
-"L31f400:\n"
-"enter_s [r13-r20,fp,blink]\n"
-"L31f402:\n"
-"sub_s sp,sp,0x14\n"
-"L31f404:\n"
-"ld r16,[r0,36]\n"
-"L31f408:\n"
-"mov_s r15,r1\n"
-"L31f40a:\n"
-"mov_s r19,r0\n"
-"L31f40c:\n"
-"breq_s r1,0,L31f452\n"
-"L31f40e:\n"
-"ld r20,[r19,44]\n"
-"L31f412:\n"
-"mov_s r0,r16\n"
-"L31f414:\n"
-"bl.d opencfw_em9305_child_3256c8\n"
-"L31f418:\n"
-"add2 r17,r16,0x27\n"
-"L31f41c:\n"
-"mov_s r13,0x803b68\n"
-"L31f422:\n"
-"add_s r0,r13,0xc\n"
-"L31f424:\n"
-"mov_s r1,r15\n"
-"L31f426:\n"
-"add r14,r13,0xa\n"
-"L31f42a:\n"
-"bl.d opencfw_em9305_child_32db0c\n"
-"L31f42e:\n"
-"mov_s r18,r0\n"
-"L31f430:\n"
-"add_s r2,r15,r0\n"
-"L31f432:\n"
-"add2 r0,r16,0x26\n"
-"L31f436:\n"
-"bl.d opencfw_em9305_dispatch_child_32df24\n"
-"L31f43a:\n"
-"mov_s r1,r14\n"
-"L31f43c:\n"
-"mov_s r1,r16\n"
-"L31f43e:\n"
-"add r1,r1,701\n"
-"L31f442:\n"
-"ldb_s r3,[r1,0]\n"
-"L31f444:\n"
-"mov_s r2,1\n"
-"L31f446:\n"
-"stb_s r0,[r13,0xb]\n"
-"L31f448:\n"
-"stb_s r2,[r13,0x9]\n"
-"L31f44a:\n"
-"breq_s r3,0,L31f45a\n"
-"L31f44c:\n"
-"ldb r11,[r16,154]\n"
-"L31f450:\n"
-"b_s L31f496\n"
-"L31f452:\n"
-"bl.d opencfw_em9305_child_325688\n"
-"L31f456:\n"
-"mov_s r0,r16\n"
-"L31f458:\n"
-"b_s L31f508\n"
-"L31f45a:\n"
-"ldb r0,[r16,153]\n"
-"L31f45e:\n"
-"breq_s r0,0,L31f478\n"
-"L31f460:\n"
-"ldb_s r0,[r14,0]\n"
-"L31f462:\n"
-"ldb r3,[r16,154]\n"
-"L31f466:\n"
-"stb_s r2,[r1,0]\n"
-"L31f468:\n"
-"bic r0,r0,0x26\n"
-"L31f46c:\n"
-"bic r11,r3,0x26\n"
-"L31f470:\n"
-"stb_s r0,[r14,0]\n"
-"L31f472:\n"
-"stb r11,[r16,154]\n"
-"L31f476:\n"
-"b_s L31f47c\n"
-"L31f478:\n"
-"ldb r11,[r16,154]\n"
-"L31f47c:\n"
-"bmsk r0,r11,0x2\n"
-"L31f480:\n"
-"brne.nt r0,0x7,L31f496\n"
-"L31f484:\n"
-"ldb_s r0,[r14,0]\n"
-"L31f486:\n"
-"and r11,r11,217\n"
-"L31f48a:\n"
-"stb_s r2,[r1,0]\n"
-"L31f48c:\n"
-"bic r0,r0,0x26\n"
-"L31f490:\n"
-"stb r11,[r16,154]\n"
-"L31f494:\n"
-"stb_s r0,[r14,0]\n"
-"L31f496:\n"
-"ld r14,[r17]\n"
-"L31f49a:\n"
-"ld_s r3,[r17,0x8]\n"
-"L31f49c:\n"
-"ldb r2,[r18]\n"
-"L31f4a0:\n"
-"ldh r1,[r18,2]\n"
-"L31f4a4:\n"
-"ld r0,[r19,44]\n"
-"L31f4a8:\n"
-"ld r15,[r17,4]\n"
-"L31f4ac:\n"
-"ld r12,[r17,12]\n"
-"L31f4b0:\n"
-"st_s r14,[sp,0]\n"
-"L31f4b2:\n"
-"add2 r14,r20,0x24\n"
-"L31f4b6:\n"
-"st_s r3,[sp,0x8]\n"
-"L31f4b8:\n"
-"stb_s r2,[sp,0x10]\n"
-"L31f4ba:\n"
-"sth r1,[sp,18]\n"
-"L31f4be:\n"
-"add1 r1,r0,0x26\n"
-"L31f4c2:\n"
-"add_s r0,sp,0\n"
-"L31f4c4:\n"
-"mov_s r2,0\n"
-"L31f4c6:\n"
-"mov_s r3,r14\n"
-"L31f4c8:\n"
-"stb r11,[sp,17]\n"
-"L31f4cc:\n"
-"st_s r15,[sp,0x4]\n"
-"L31f4ce:\n"
-"bl.d opencfw_em9305_child_30301c\n"
-"L31f4d2:\n"
-"st_s r12,[sp,0xc]\n"
-"L31f4d4:\n"
-"breq_s r0,0,L31f504\n"
-"L31f4d6:\n"
-"ldb r0,[r16,153]\n"
-"L31f4da:\n"
-"bmsk.f 0,r0,0x1\n"
-"L31f4de:\n"
-"bne_s L31f504\n"
-"L31f4e0:\n"
-"ld r3,[r14,0x4]\n"
-"L31f4e2:\n"
-"ld r1,[r16,108]\n"
-"L31f4e6:\n"
-"ld r2,[r14,0]\n"
-"L31f4e8:\n"
-"ld r0,[r16,104]\n"
-"L31f4ec:\n"
-"xor_s r1,r1,r3\n"
-"L31f4ee:\n"
-"xor_s r0,r0,r2\n"
-"L31f4f0:\n"
-"or.f 0,r0,r1\n"
-"L31f4f4:\n"
-"bne_s L31f504\n"
-"L31f4f6:\n"
-"ldh r0,[r16,64]\n"
-"L31f4fa:\n"
-"and r0,r0,0x17\n"
-"L31f4fe:\n"
-"bset_s r0,r0,0x3\n"
-"L31f500:\n"
-"sth_s r0,[r13,0x2a]\n"
-"L31f502:\n"
-"b_s L31f508\n"
-"L31f504:\n"
-"stb 1,[r13,1]\n"
-"L31f508:\n"
-"mov_s r0,0\n"
-"L31f50a:\n"
-"leave_s [r13-r20,fp,blink,pcl]\n"
-".size opencfw_em9305_child_31f400,.-opencfw_em9305_child_31f400\n"
-);
+#include <stdint.h>
+
+/* Native 0x31f400..0x31f50c: periodic-sync report handler. Without data
+ * the sync context (object +36) is dropped (325688). Otherwise the report
+ * header at 0x803b68 is decoded from the PDU (32db0c into +12, 32df24 flags
+ * into +10/+11, ready byte +9); on the first report (+701 clear) the
+ * address-type bits 0x26 are cleared from the flags and the context's
+ * advertiser type byte (+154) when filtering is on (+153), and always
+ * when all three low type bits are set. After 3256c8 runs, the peer
+ * address (+156..+168), the decoded header (kind, id) and type form a 20-byte request for 30301c on
+ * the scanner (object +44, filter +76, list +144); a match of an
+ * unfiltered context whose address (+104/+108) equals the list entry
+ * publishes the PHY options (+64 & 0x17 | 8) at 0x803b92, anything else
+ * marks the report rejected (0x803b69). Returns 0. */
+extern uintptr_t opencfw_em9305_child_3256c8(uintptr_t link);
+extern uint32_t opencfw_em9305_child_32db0c(uintptr_t out,uintptr_t in);
+extern uint32_t opencfw_em9305_dispatch_child_32df24(uintptr_t out,
+    uintptr_t flags_out,uintptr_t in);
+extern uint32_t opencfw_em9305_child_325688(uintptr_t record);
+extern uint32_t opencfw_em9305_child_30301c(uintptr_t request,uintptr_t filter,
+                                            uint32_t flags,uintptr_t list);
+
+static inline uint32_t r8(uintptr_t a){return *(volatile uint8_t *)a;}
+static inline uint32_t r32(uintptr_t a){return *(volatile uint32_t *)a;}
+static inline void w8(uintptr_t a,uint32_t v){*(volatile uint8_t *)a=(uint8_t)v;}
+
+uint32_t opencfw_em9305_child_31f400(uintptr_t object,uintptr_t data)
+{
+    uintptr_t context=r32(object+36u);
+    if(data==0u){
+        (void)opencfw_em9305_child_325688(context);
+        return 0u;
+    }
+    uintptr_t scanner=r32(object+44u);
+    (void)opencfw_em9305_child_3256c8(context);
+    uintptr_t peer=context+156u;
+    uint32_t used=opencfw_em9305_child_32db0c(0x803b74u,data);
+    uint32_t flags_status=opencfw_em9305_dispatch_child_32df24(context+152u,
+                                                               0x803b72u,data+used);
+    uintptr_t first=context+701u;
+    w8(0x803b73u,flags_status);
+    w8(0x803b71u,1u);
+    uint32_t type;
+    if(r8(first)!=0u){
+        type=r8(context+154u);
+    }else{
+        if(r8(context+153u)!=0u){
+            uint32_t flags=r8(0x803b72u);
+            uint32_t stored=r8(context+154u);
+            w8(first,1u);
+            flags&=~0x26u;
+            type=stored&~0x26u;
+            w8(0x803b72u,flags);
+            w8(context+154u,type);
+        }else{
+            type=r8(context+154u);
+        }
+        if((type&7u)==7u){
+            uint32_t flags=r8(0x803b72u);
+            type&=0xd9u;
+            w8(first,1u);
+            flags&=~0x26u;
+            w8(context+154u,type);
+            w8(0x803b72u,flags);
+        }
+    }
+    _Alignas(4) uint8_t request[20];
+    uint32_t a=r32(peer),c=r32(peer+8u);
+    uint32_t kind=r8(0x803b74u);
+    uint32_t sid=*(volatile uint16_t *)0x803b76u;
+    uintptr_t current=r32(object+44u);
+    uint32_t b=r32(peer+4u),d=r32(peer+12u);
+    *(uint32_t *)(void *)request=a;
+    uintptr_t list=scanner+144u;
+    *(uint32_t *)(void *)(request+8)=c;
+    request[16]=(uint8_t)kind;
+    *(uint16_t *)(void *)(request+18)=(uint16_t)sid;
+    request[17]=(uint8_t)type;
+    *(uint32_t *)(void *)(request+4)=b;
+    *(uint32_t *)(void *)(request+12)=d;
+    if(opencfw_em9305_child_30301c((uintptr_t)request,current+76u,0u,list)!=0u
+       &&(r8(context+153u)&3u)==0u
+       &&((r32(list+4u)^r32(context+108u))|(r32(list)^r32(context+104u)))==0u){
+        uint32_t options=*(volatile uint16_t *)(context+64u);
+        *(volatile uint16_t *)0x803b92u=(uint16_t)((options&0x17u)|8u);
+        return 0u;
+    }
+    w8(0x803b69u,1u);
+    return 0u;
+}

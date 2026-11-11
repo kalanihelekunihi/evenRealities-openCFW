@@ -1,0 +1,149 @@
+{
+  "schema_version": 1,
+  "entries": {
+    "0x3bca8": "r1_ack_record_insert",
+    "0x825c0": "r1_ack_timeout_reaper",
+    "0x83a00": "r1_ack_record_remove",
+    "0x83b20": "r1_ack_record_register"
+  },
+  "report": "build/sources-goal-r1-ack-registry-c/report.json",
+  "report_sha256": "3f43e23fdeb3f64be40f7041db715c90558b390522dbe07fa0d814b34d7b3632",
+  "unit": {
+    "source": "r1/src/application/runtime/native_ack_registry.c",
+    "source_sha256": "8687c3467ca0ecb7792ec70b0a2b3ed3155bb301367b497ca64cb2cf5ff793c6",
+    "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-ack-registry-c/r1/r1-application/r1__src__application__runtime__native_ack_registry.c.o",
+    "object_sha256": "154938494224280acfb30bd8ed97b5072b60cb08921339928233e87ee0eee7a6"
+  },
+  "behavior": {
+    "pairs": 372,
+    "digest": "18f3f9c574ca6668f29d82aba24cc9769a1e96c21c22bded56af0766c1f84894",
+    "actual_C": [
+      "four registry roots",
+      "existing shared table and sequence data owners"
+    ],
+    "modeled_boundaries": [
+      "mutex lock/unlock",
+      "kernel ticks",
+      "logging",
+      "heap free"
+    ],
+    "limits": [
+      "No asynchronous concurrency or physical transport",
+      "Callback values recorded but registry does not invoke them",
+      "Private stack and caller-clobbered registers excluded; public table including padding and call-time snapshots compared"
+    ]
+  },
+  "event_integration": {
+    "pairs": 956,
+    "digest": "dc4e39f27e521f2b71777b7aa2c6473dd069d689f7b45f99bdf58d85335d7324",
+    "actual_C": [
+      "four event post wrappers",
+      "typed ACK registration/removal adapters",
+      "payload copy and response header sender",
+      "phone-handle accessor/flag helper",
+      "sync field getter/owner"
+    ],
+    "modeled_boundaries": [
+      "mutex and kernel ticks",
+      "protocol response backend",
+      "allocator/free"
+    ],
+    "limits": [
+      "Mapped payload/copy/context buffers and sufficient allocation capacity; wrapped large lengths tested only on failure",
+      "Response internals and physical delivery remain unfinished",
+      "No asynchronous IRQ or complete firmware linkage"
+    ]
+  },
+  "flush_integration": {
+    "pairs": 870,
+    "source_sends": 350,
+    "digest": "491009ec599c418f1409918a682b519a6c2f7006ba8a772274a495fe9001ee1b",
+    "actual_C": [
+      "four flushes and builder resets",
+      "four event wrappers",
+      "typed ACK adapters",
+      "payload copy and protocol header sender",
+      "sync field and phone accessor"
+    ],
+    "modeled_boundaries": [
+      "clock/logging",
+      "live cache getter",
+      "mutex and kernel ticks",
+      "protocol response backend",
+      "allocator/free"
+    ],
+    "limits": [
+      "Valid mapped builders and bounded allocations",
+      "Physical delivery not executed"
+    ]
+  },
+  "negative_controls": {
+    "wrong-timeout-boundary": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "368]), ('mode', [0]), ('mode', [0]), ('mode', [0]), ('mode', [0]), ('mode', [0]), ('mode', [0]), ('free', [537018368]), ('mode', [0]), ('mode', [0]), ('mode', [0]), ('mode', [0]), ('mode', [0]), ('mode', [0]), ('free', [537018368]), ('mode', [0]), ('mode', [0]), ('mode', [0]), ('unlock', []), ('lock', []), ('tick', [20000]), ('unlock', [])], [('lock', []), ('unlock', []), ('tick', [20000]), ('lock', []), ('unlock', []), ('lock', []), ('unlock', []), ('mode', [0]), ('mode', [0]), ('mode', [0])])\n"
+    },
+    "lost-expired-context-free": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "'mode', [0]), ('mode', [0]), ('mode', [0]), ('mode', [0]), ('mode', [0]), ('mode', [0]), ('mode', [0]), ('mode', [0]), ('mode', [0]), ('mode', [0]), ('mode', [0]), ('mode', [0]), ('mode', [0]), ('mode', [0]), ('mode', [0]), ('mode', [0]), ('mode', [0]), ('mode', [0]), ('mode', [0]), ('mode', [0]), ('mode', [0]), ('mode', [0]), ('mode', [0]), ('mode', [0]), ('mode', [0]), ('mode', [0]), ('mode', [0]), ('mode', [0]), ('mode', [0]), ('unlock', []), ('lock', []), ('tick', [20000]), ('unlock', [])])\n"
+    },
+    "lost-retry-reaping": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "x[1]) for x in b['trace']]);digest.update(json.dumps([kw,a]).encode());pairs+=1\n                                              ^^^^\nAssertionError: ({'entry': 'r1_ack_record_register', 'layout': 4, 'age': 9999, 'modes': (0,)}, ['trace'], [('lock', []), ('unlock', []), ('tick', [20000]), ('lock', []), ('unlock', []), ('lock', []), ('unlock', []), ('mode', [0]), ('mode', [0]), ('mode', [0])], [('lock', []), ('unlock', []), ('lock', []), ('unlock', []), ('mode', [0]), ('mode', [0]), ('mode', [0])])\n"
+    },
+    "lost-identifier-output": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "gistry-c/verify.py\", line 72, in pair\n    a=run(False,**kw);b=run(True,**kw);assert a==b,(kw,[k for k in a if a[k]!=b[k]],[(x[0],x[1]) for x in a['trace']],[(x[0],x[1]) for x in b['trace']]);digest.update(json.dumps([kw,a]).encode());pairs+=1\n                                              ^^^^\nAssertionError: ({'entry': 'r1_ack_record_register', 'layout': 0, 'age': 9999, 'modes': (0,)}, ['out'], [('lock', []), ('tick', [20000]), ('unlock', [])], [('lock', []), ('tick', [20000]), ('unlock', [])])\n"
+    },
+    "wrong-insert-padding": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "ode', [0]), ('mode', [0]), ('free', [537018368]), ('mode', [0]), ('mode', [0]), ('mode', [0]), ('mode', [0]), ('mode', [0]), ('mode', [0]), ('free', [537018368]), ('mode', [0]), ('mode', [0]), ('mode', [0]), ('mode', [0]), ('mode', [0]), ('mode', [0]), ('free', [537018368]), ('mode', [0]), ('mode', [0]), ('mode', [0]), ('mode', [0]), ('mode', [0]), ('mode', [0]), ('free', [537018368]), ('mode', [0]), ('mode', [0]), ('mode', [0]), ('unlock', []), ('lock', []), ('tick', [20000]), ('unlock', [])])\n"
+    },
+    "wrong-remove-key-width": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "code());pairs+=1\n                                              ^^^^\nAssertionError: ({'entry': 'r1_ack_record_remove', 'first': 258, 'second': 1, 'third': 1, 'sequence': 32769, 'layout': 1, 'modes': (7,)}, ['trace', 'table'], [('lock', []), ('unlock', [])], [('lock', []), ('mode', [7]), ('ring', [218103808, '[RING]ack removed: module=%d cmd=%d sub=%d seq=%d', 258, 1, 1, 32769]), ('mode', [7]), ('log4', [1835011, 'ack removed: module=%d cmd=%d sub=%d seq=%d', 258, 1, 1, 32769]), ('unlock', [])])\n"
+    },
+    "wrong-sequence-source": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "\", line 72, in pair\n    a=run(False,**kw);b=run(True,**kw);assert a==b,(kw,[k for k in a if a[k]!=b[k]],[(x[0],x[1]) for x in a['trace']],[(x[0],x[1]) for x in b['trace']]);digest.update(json.dumps([kw,a]).encode());pairs+=1\n                                              ^^^^\nAssertionError: ({'entry': 'r1_ack_record_register', 'layout': 0, 'age': 9999, 'modes': (0,)}, ['trace', 'table', 'out'], [('lock', []), ('tick', [20000]), ('unlock', [])], [('lock', []), ('tick', [20000]), ('unlock', [])])\n"
+    },
+    "wrong-no-free-on-remove": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "rue,**kw);assert a==b,(kw,[k for k in a if a[k]!=b[k]],[(x[0],x[1]) for x in a['trace']],[(x[0],x[1]) for x in b['trace']]);digest.update(json.dumps([kw,a]).encode());pairs+=1\n                                              ^^^^\nAssertionError: ({'entry': 'r1_ack_record_remove', 'layout': 1, 'age': 9999, 'modes': (0,)}, ['trace'], [('lock', []), ('mode', [0]), ('mode', [0]), ('mode', [0]), ('unlock', [])], [('lock', []), ('free', [0]), ('mode', [0]), ('mode', [0]), ('mode', [0]), ('unlock', [])])\n"
+    }
+  },
+  "audit": {
+    "unchanged_prior_objects": 743,
+    "new_units": 1,
+    "imports": {
+      "r1-application": {
+        "added": [],
+        "removed": [
+          "r1_ack_record_register",
+          "r1_ack_record_remove"
+        ]
+      },
+      "r1-bootloader": {
+        "added": [],
+        "removed": []
+      }
+    },
+    "reused_owners": [
+      "r1_protocol_reset_workspace",
+      "r1_protocol_sequence",
+      "r1_ack_table_lock",
+      "r1_ack_table_unlock"
+    ]
+  },
+  "source_check": "R1-specific check passes: 744 units, 548 source files, 0 not built",
+  "rea": "ack-registry-c-rea.json",
+  "instruction_identity_proven": false,
+  "image_integration_proven": false
+}

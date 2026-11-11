@@ -196,6 +196,13 @@ Purpose: FlashDB 2.0.0 configuration.
   image-pinned.
 - **openR1**: `FDB_PRINT` no-op (line 7).
 
+The compiler ABI is a separate build input: both FlashDB profiles in
+`r1/src/sources.json` explicitly use `-fshort-enums`, matching the observed
+byte-sized sector status and native TSDB field offsets. The former Clang
+default produced a 108-byte C layout instead of the recovered 100-byte
+model. See [the ABI review](../docs/reference/flashdb-abi-review.md) for
+instruction evidence, control comparisons and unchanged stored geometry.
+
 ## `r1_recovered_config.h` (bootloader)
 
 Purpose: force-included before Nordic's `pca10056_s140_ble` secure-bootloader `sdk_config.h`.

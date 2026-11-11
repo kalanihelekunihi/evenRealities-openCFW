@@ -1,0 +1,192 @@
+{
+  "schema_version": 1,
+  "source": "r1/src/application/board/native_dfu_event_policy.c",
+  "native_roots": {
+    "r1_buttonless_dfu_event_policy": {
+      "entry": "0x5232c",
+      "instruction_bytes": 364
+    },
+    "r1_ble_disconnect_attempt": {
+      "entry": "0x5c58c",
+      "instruction_bytes": 84
+    }
+  },
+  "report": "build/sources-goal-r1-dfu-policy-c/report.json",
+  "compiled_units": 851,
+  "verification": {
+    "pairs": 5708,
+    "groups": {
+      "event_seeds": 5,
+      "disconnect_seeds": 2,
+      "all_event_ids_modes": 5120,
+      "actual_SDK_iterator_and_configuration": 312,
+      "direct_disconnect_callback": 216,
+      "live_backend_mutations": 27,
+      "actual_init_registered_delivery": 20,
+      "masks_and_boundary_count": 6
+    },
+    "native_instruction_bytes_covered": 446,
+    "native_instruction_bytes_expected": 448,
+    "native_uncovered_byte_addresses": [
+      "0x5243e",
+      "0x5243f"
+    ],
+    "actual_C": [
+      "DFU event policy and disconnect callback",
+      "existing advertising initializer and contexts A/B",
+      "SDK configuration copy",
+      "SDK connected iterator and atomic flag getter",
+      "C memory routines",
+      "existing checked DFU initializer and registered callback address"
+    ],
+    "modeled": [
+      "logging",
+      "cached124-byte record backend",
+      "S140 disconnect service",
+      "SDK DFU init return and error handler"
+    ],
+    "not_executed": "SDK assertion target; no physical reset/DFU request"
+  },
+  "control_flow": {
+    "method": "Direct-control-flow overapproximation from both legal entries; returning calls and both conditional successors retained; external tail calls and POP PC terminate.",
+    "entry_points": [
+      "0x5232c",
+      "0x5c58c"
+    ],
+    "unreachable_instructions": [
+      {
+        "address": "0x5243e",
+        "bytes": "01e0",
+        "instruction": "b #0x52444",
+        "internal_predecessors": []
+      }
+    ],
+    "reachable_instruction_bytes": 446,
+    "decoded_instruction_bytes": 448,
+    "dynamic_uncovered_equals_static_unreachable": true,
+    "limits": [
+      "No external jump into a function interior, exception resume or corrupted return address is assumed. This is not a general execution proof for arbitrary machine state."
+    ]
+  },
+  "mutants": [
+    {
+      "name": "advertise_after_disconnect",
+      "rejected": true
+    },
+    {
+      "name": "wrong_advertising_instance",
+      "rejected": true
+    },
+    {
+      "name": "disconnect_reason",
+      "rejected": true
+    },
+    {
+      "name": "invalid_handle_precheck",
+      "rejected": true
+    },
+    {
+      "name": "status_guard",
+      "rejected": true
+    },
+    {
+      "name": "disconnect_warning_marker",
+      "rejected": true
+    },
+    {
+      "name": "event_route",
+      "rejected": true
+    },
+    {
+      "name": "error_severity",
+      "rejected": true
+    },
+    {
+      "name": "count_diagnostic",
+      "rejected": true
+    },
+    {
+      "name": "callback_context",
+      "rejected": true
+    },
+    {
+      "name": "skip_disconnect_iterator",
+      "rejected": true
+    },
+    {
+      "name": "enter_has_no_disconnect",
+      "rejected": true
+    },
+    {
+      "name": "unknown_severity",
+      "rejected": true
+    }
+  ],
+  "audit": {
+    "unchanged_prior_nongenerated_objects": 840,
+    "changed_prior_nongenerated_objects": [],
+    "changed_generated_objects": [
+      "{gen}/r1_startup_vectors.S",
+      "{gen}/r1_uecc.c"
+    ],
+    "added_objects": [
+      "r1/src/application/board/native_dfu_event_policy.c"
+    ],
+    "removed_imports": [
+      "r1_buttonless_dfu_event_policy"
+    ],
+    "added_imports": [],
+    "application_imports": 67,
+    "new_mutable_state": false,
+    "existing_advertising_and_SDK_connection_owners_reused": true,
+    "advertising_config_bytes": 44,
+    "assembly_added": false
+  },
+  "contract": [
+    "Prepare reports the event, initializes a fresh44-byte advertising configuration through the actual existing initializer and cached configuration getter, sets ble_adv_on_disconnect_disabled=true, and copies the configuration into existing advertising context B at native0x200082b0 through the actual SDK configuration setter. Context A and unrelated B bytes are preserved absent explicit backend mutations.",
+    "Prepare then calls the actual SDK connected iterator with the actual C disconnect callback and a null context. The SDK snapshots its connected flags, visits handles0..19 in order and counts callback invocations, independent of disconnect success. Backend mutations of the global connected flags during callbacks do not rewrite that captured iteration set. The returned count is reported after all requests.",
+    "The typed uint16 callback ignores context and always requests sd_ble_gap_disconnect with reason0x13. It performs no invalid-handle or connected-status precheck. Nonzero SDK status produces warning diagnostics with handle/status; no additional error-handler call or reset is introduced.",
+    "Enter reports information; enter failure and response-send failure report distinct errors. Unknown events report the existing unknown-event error. These branches perform no advertising update, disconnect or boot request; the SDK remains responsible for bootloader entry.",
+    "The existing checked DFU initializer is exercised with its actual C callback pointer, modeled SDK init results and returning error boundary. Success invokes the captured pointer; modeled init failure checks its error call without delivering an event."
+  ],
+  "limits": [
+    "Actual C policy, disconnect callback, advertising initializer/getter, contexts A/B, SDK configuration copy, SDK connected iterator/flag getter, C memory routines and checked initializer execute. Cached124-byte record reads, logging, S140 disconnect results, SDK DFU init acceptance and error-handler results are modeled. No real flash, peer disconnect, firmware upload, reset or bootloader entry occurs.",
+    "The fixture supplies complete124-byte cached records and exercises both configuration-byte queries independently. It does not establish partial/malformed cached-class behavior or persistent flash recovery. Advertising configurations are44 bytes; the stock48-byte stack allocation includes padding.",
+    "All446 reachable native instruction bytes in the two routines execute across5708 stock/C comparisons. Two additional decoded bytes at0x5243e form an unconditional branch with no predecessor in the direct-control-flow overapproximation from the legal entries. They are documented as unreachable rather than counted as dynamically covered. The CFG assumes no external jump into the function interior, corrupted return or synthetic exception resume.",
+    "All256 event-byte values,20 possible connected bits and out-of-range high bits, independent SDK results, callbacks, log modes and live backend mutations are checked. The typed callback handle domain is uint16; the observer type follows the pinned short-enum SDK ABI. Callee-saved integer/FP registers, masks, SP and stack/state guards are checked. Void callback incidental scratch registers, private addresses and timing are outside the contract.",
+    "SDK configuration/iterator entry hooks only observe their real bodies; they are not replacement implementations. The assertion target is an unexecuted failure sentinel. Source execution into stock executable addresses is rejected. Fixed-address fixtures establish controlled aliases only, not final firmware placement.",
+    "The normal build compiles851 units, closes the buttonless DFU policy import and adds no imports or mutable owners. It leaves67 application imports and22 bootloader linker imports. All840 prior nongenerated objects remain unchanged. R1 manifest check passes; global sources-check retains the unrelated unlisted G2 resident_rom_thumb_set.S issue. Final source linking, firmware boot and physical DFU behavior remain unverified. Byte identity and paid compilers are not requirements."
+  ],
+  "evidence_files": {
+    "r1/src/application/board/native_dfu_event_policy.c": "bb48eb31f234f89f6cd017d49020177815071b887dd6d00bed215ad19bc65032",
+    "build/sources-goal-r1-dfu-policy-c/report.json": "cdca7a2513d90b31d5c145c2281fe00e4b693fa6232ec0f369b58d6d45ce5e2a",
+    "build/sources-goal-r1-peer-policy-final-c/report.json": "4517e1805d107ad074200b08dd6feae1efa474eace1eb09cd88668eaf9cc12d7",
+    "r1/src/sources.json": "7412799c6e3e8ed1df42b93d2965ba839108e4c165f5ea1484cc80436ac9c511",
+    "r1/src/application/board/native_ble_initialize.c": "f60833454dac9c56614ee77237ed18237dd28bc55efb7e2134d0230db7f208bf",
+    "r1/src/application/board/native_advertising_configuration.c": "926b26008f57832ac0914a4e47083b237bde82574a1923589c89c7de43202a12",
+    "r1/src/application/board/native_advertising_contexts.c": "84c5a2583b0f89f354e819b2f1f089ee934d8b4043cb16528892db7bf60633f2",
+    "r1/src/application/runtime/native_protocol_serial.c": "47fe0057719ba267ad88d5ec38f734c55ba2327ff6ba697870dc0570c24a04a7",
+    "vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/ble/ble_advertising/ble_advertising.c": "f9358c27b1d4dcbd904b969afc74ac703a21a4f868f3c8761f7a15bfcbf657ab",
+    "vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/ble/ble_advertising/ble_advertising.h": "e0bb53f7668d50059834310b36ccaf628a2c5024287372755829ee765cd9750a",
+    "vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/ble/common/ble_conn_state.c": "ad1f9eaf43c7e852790cb378b13085210a699012e27ddb26df2ce5ddec245600",
+    "vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/ble/common/ble_conn_state.h": "4539fbd06ffe3ea3bb9fc278c11f863d792578347366ed66b382f1b8a2b59f85",
+    "vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/ble/ble_services/ble_dfu/ble_dfu.h": "1a3b14094b98948acf6c864827799e1dd8a6f8ad3c7b54892e6f590a054d1f94",
+    "build/goal-r1-dfu-policy-c/rea.json": "4bdd815aea3f760adfd3e22c94b73bdfc999c7a9c95551c21c91135fae8cc583",
+    "build/goal-r1-dfu-policy-c/disconnect-rea.json": "ddac12b5bd4770beecffba67c70bfa0f68d5d6a986487bfbdc78f7fc3f900093",
+    "build/goal-r1-dfu-policy-c/stock.asm": "f192b6586bed6e5444d0fa446c056cfa7f9d8ac812daebf869994e3fcc78af91",
+    "build/goal-r1-dfu-policy-c/strings.py": "5b1151d6a79e4d39f7769a712be8ed825d0f89687cb3ffd3da8d50be2d748c9c",
+    "build/goal-r1-dfu-policy-c/strings.json": "4908141cf6f58e9082cc7052f8dea32134f1b87a8bca105051aec3772e4627de",
+    "build/goal-r1-dfu-policy-c/verify.py": "1e8865a29690880f6fa9f2641bf7ddb732ba1b25bedd2928c2b852e0c4cb478d",
+    "build/goal-r1-dfu-policy-c/verification.json": "8a028fc7918f78a0b7bbb3b5d059e584557c624e9efda74b5f702a591f68c532",
+    "build/goal-r1-dfu-policy-c/verification.log": "2b5650e65d9a63a19f8ed8b80c610cd0638b842620e67aa53296e2ab3c6469b6",
+    "build/goal-r1-dfu-policy-c/cfg.py": "10b7b0b043deffcfcb09a2f35d16c50554b3bc09e1f029770b9ae698fb36e375",
+    "build/goal-r1-dfu-policy-c/cfg.json": "20a533f7ad1e8bf2eebf504cbbf0733363eebafa26bc41d199e10ee036c6f450",
+    "build/goal-r1-dfu-policy-c/mutants.py": "1d7a0f4ee473852c6cfab7f64e8c83a8e218f662e26dbba700e3c694ee05c96f",
+    "build/goal-r1-dfu-policy-c/mutants.json": "156bc8830d1859226cfadd7e1f98efbfb3c288edeae659272bac83c6f33f4000",
+    "build/goal-r1-dfu-policy-c/mutants.log": "de75aa595e173dfb5db43f3c79cee725469882c607b8a21e7fd915230e24fb4a",
+    "build/goal-r1-dfu-policy-c/audit.py": "842436989fae9318d49283e5e305a991e1c075e9731eced3f0b52bfbf3362fa8",
+    "build/goal-r1-dfu-policy-c/object-audit.json": "e02a31cfac74d66b2ba902ba1e3a347d25ddf8fe5be2d24317ef95d7fa53c704",
+    "build/goal-r1-dfu-policy-c/r1-check.log": "504a4924a5b231f377437bfb24dae23e1232e166781c9b4864a7d61e3e41d8ad",
+    "build/goal-r1-dfu-policy-c/sources-check.log": "b4b0e82efbf8ad99d8e66f48e6b4b4ee36d3ec4cc2f27a06c3d8ff4ea84f9873"
+  }
+}

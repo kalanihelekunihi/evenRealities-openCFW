@@ -1,0 +1,288 @@
+{
+  "schema_version": 1,
+  "normal_report": "build/sources-goal-r1-health-profile-verified/report.json",
+  "normal_report_sha256": "7ad173e1219332040407d896b1e34eacea4cca83463b6d1e3614111481f46ae6",
+  "direct": {
+    "pairs": 3434,
+    "outcomes": {
+      "0x6c640/0": 695,
+      "0x6c640/1": 449,
+      "0x735e0/200": 1034,
+      "0x735e0/0": 50,
+      "0x735e0/32768": 4,
+      "0x735e0/4294967295": 45,
+      "0x735e0/65535": 4,
+      "0x735e0/1": 4,
+      "0x735e0/32767": 4,
+      "0x6abf8/0": 786,
+      "0x6abf8/1": 359
+    },
+    "digest": "edf00855b0bdb21fb17a234d5354f3c8056c13dd399f58141cf2a8a616ee3d4f",
+    "source_only_link": true,
+    "modeled_boundary": "dynamic critical-section callbacks",
+    "elf_sha256": "ef6899eca36c1820d6d731df33edd956092dbcbbf95571ce804dc595d99124d3",
+    "units": [
+      {
+        "source": "r1/src/application/runtime/native_health_profile.c",
+        "source_sha256": "12c95770d6a7e7d246dd5aa931d9642d1095c1cdc2d3ab02b4b23ce0befe282e",
+        "object_sha256": "97dd5de460f1581e9423e7407eff896211e07368ce3936b6fcfddc47e58befe2"
+      },
+      {
+        "source": "r1/src/application/board/native_kv_class.c",
+        "source_sha256": "e9791d39b7a9b5380b1dbce3c7422be921131abbd0e09c3387ea3d4b9930bf6e",
+        "object_sha256": "a5bb465de089d9f041801c39add875d91645d33873df5dd8950475483de73171"
+      },
+      {
+        "source": "r1/src/application/runtime/native_nv_table_config.c",
+        "source_sha256": "b2062291e211d48e3eb4a4e290fd827ff4e8b6f7e970fe707d29d27081827f9f",
+        "object_sha256": "f761126eaae595290789d974dec7bcab6ed9b1c6494336f5c372810010aaba28"
+      },
+      {
+        "source": "r1/src/application/board/native_kv_port.c",
+        "source_sha256": "45a4394808e7a03115ef07440f2444b740e75c6e08d3e78d129afaaa3066c5d8",
+        "object_sha256": "232b0bcd4bd2d4328a2521916f30010eb15dcc1d1f111e349d274ac4c40cd5fd"
+      },
+      {
+        "source": "third-party/upstream/musl-memory-1.2.5/memcpy.c",
+        "source_sha256": "1664d565f968b053ac33c5ac615c057a255a5821c8fa510fba61d4f63dee08e9",
+        "object_sha256": "a4b54c7315f7ca2f8097e3f9afb4a9bcd7860c75649fc9e185d951c3ea0696cf"
+      }
+    ]
+  },
+  "lifecycle": {
+    "pairs": 689,
+    "entry_counts": {
+      "init": 412,
+      "reset": 36,
+      "event": 241
+    },
+    "flash_counts": {
+      "key_header": 436,
+      "key_body": 436,
+      "state_header": 1177,
+      "state_body": 189
+    },
+    "digest": "43bc32b6dc25361be74f0de9926862c819f3bb34761ef138cc856f69761a7fc4",
+    "native_branch_hits": {
+      "0x4bee2": 100,
+      "0x4bef8": 99,
+      "0x4bf00": 3,
+      "0x4bf84": 204,
+      "0x4bfde": 96
+    },
+    "lower_bindings": {
+      "gomore_primitives_size_736": 427808,
+      "gomore_primitives_size_14816": 427034,
+      "r1_health_lifecycle_authorize_native": 438908,
+      "fal_partition_find": 405840,
+      "fal_flash_device_find": 404980,
+      "r1_health_lifecycle_engine_initialize_native": 458400,
+      "gomore_primitives_noop_91080": 594048,
+      "r1_gomore_authorization_dispatch_native": 300048,
+      "r1_time_backend_timestamp": 568740,
+      "r1_subscriber_register": 569228,
+      "r1_structured_log_mode_get": 595180,
+      "r1_structured_log_format": 595512,
+      "nrf_log_frontend_std_0": 498112,
+      "nrf_log_frontend_std_1": 498120,
+      "nrf_log_frontend_std_2": 498134,
+      "r1_native_memory_move": 161628
+    },
+    "elf": "build/goal-r1-health-profile-c/lifecycle/source-77380.elf",
+    "elf_sha256": "811a15dd61457555af96faa3dffbd4c656ae52c4c0bc9a5839d8322921afc7f9",
+    "void_return": true
+  },
+  "negative": {
+    "age-inclusive": {
+      "rejected": true,
+      "counterexample": {
+        "args": {
+          "entry": 443968,
+          "record": "0a00af41c8003200c8000000"
+        },
+        "stock": [
+          0,
+          null,
+          "96969696969696969696969696969696969696969696969696969696969696969696969696969696969696969696969696969696969696969696969696969696",
+          [],
+          "a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a70c00a7a70a00af41c8003200c8000000",
+          "686a0020",
+          0,
+          1,
+          128,
+          0
+        ],
+        "C": [
+          1,
+          null,
+          "96969696969696969696969696969696969696969696969696969696969696969696969696969696969696969696969696969696969696969696969696969696",
+          [],
+          "a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a70c00a7a70a00af41c8003200c8000000",
+          "686a0020",
+          0,
+          1,
+          128,
+          0
+        ]
+      }
+    },
+    "signed-optional": {
+      "rejected": true,
+      "counterexample": {
+        "args": {
+          "entry": 437240,
+          "record": "1400af410080008000800000",
+          "seeds": [
+            0,
+            0,
+            0
+          ],
+          "size": 12,
+          "mut": 0
+        },
+        "stock": [
+          1,
+          1101987860,
+          "0000a0410000000000002f4300008242000000c7000000c7000000c7969696969696969696969696969696969696969696969696969696969696969696969696",
+          [
+            17826048,
+            17826304
+          ],
+          "a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a70c00a7a71400af410080008000800000",
+          "686a0020",
+          0,
+          1,
+          128,
+          0
+        ],
+        "C": [
+          1,
+          1101987860,
+          "0000a0410000000000002f4300008242000000470000004700000047969696969696969696969696969696969696969696969696969696969696969696969696",
+          [
+            17826048,
+            17826304
+          ],
+          "a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a70c00a7a71400af410080008000800000",
+          "686a0020",
+          0,
+          1,
+          128,
+          0
+        ]
+      }
+    },
+    "zero-sentinel": {
+      "rejected": true,
+      "counterexample": {
+        "args": {
+          "entry": 437240,
+          "record": "1400af410080008000800000",
+          "seeds": [
+            0,
+            0,
+            0
+          ],
+          "size": 0,
+          "mut": 0
+        },
+        "stock": [
+          0,
+          0,
+          "00000000000000000000000000000000000080bf000080bf000080bf969696969696969696969696969696969696969696969696969696969696969696969696",
+          [],
+          "a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a70000a7a71400af410080008000800000",
+          "686a0020",
+          0,
+          1,
+          128,
+          0
+        ],
+        "C": [
+          0,
+          0,
+          "00000000000000000000000000000000000000000000000000000000969696969696969696969696969696969696969696969696969696969696969696969696",
+          [],
+          "a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a70000a7a71400af410080008000800000",
+          "686a0020",
+          0,
+          1,
+          128,
+          0
+        ]
+      }
+    },
+    "reject-read-error": {
+      "rejected": true,
+      "counterexample": {
+        "args": {
+          "entry": 472544,
+          "record": "1400af410080008000800000",
+          "seeds": [
+            0,
+            0,
+            0
+          ],
+          "size": 0,
+          "mut": 0
+        },
+        "stock": [
+          0,
+          0,
+          "00000000000000000000000096969696969696969696969696969696969696969696969696969696969696969696969696969696969696969696969696969696",
+          [],
+          "a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a70000a7a71400af410080008000800000",
+          "686a0020",
+          0,
+          1,
+          128,
+          0
+        ],
+        "C": [
+          0,
+          0,
+          "96969696969696969696969696969696969696969696969696969696969696969696969696969696969696969696969696969696969696969696969696969696",
+          [],
+          "a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a70000a7a71400af410080008000800000",
+          "686a0020",
+          0,
+          1,
+          128,
+          0
+        ]
+      }
+    }
+  },
+  "audit": {
+    "changed": [
+      "r1/src/application/runtime/native_record_update.c",
+      "r1/src/vendor/gomore_primitives/gomore_primitives.c",
+      "r1/src/application/runtime/native_health_lifecycle.c"
+    ],
+    "added": [
+      "r1/src/application/runtime/native_health_profile.c"
+    ],
+    "unchanged_objects": 721
+  },
+  "rea": [
+    {
+      "path": "build/goal-r1-health-profile-c/rea-6abf8.json",
+      "sha256": "4c1ca2568e95c1c9ce0d1a56c16cd55cc9a642453eb238a3075c153d63db7d41"
+    },
+    {
+      "path": "build/goal-r1-health-profile-c/rea-6c640.json",
+      "sha256": "958676b3dccba7aa458e5f21a34d9bd1799e35eb0aaf1231f4c39844cec2b859"
+    },
+    {
+      "path": "build/goal-r1-health-profile-c/rea-735e0.json",
+      "sha256": "21d23bf2215231d2a42cd563447e3515d95e059408449f2f7461616dc406885d"
+    }
+  ],
+  "limits": [
+    "No full firmware link or physical hardware run",
+    "Lifecycle proof models authorization, engine initialization, logging, subscription, timestamp and flash callbacks",
+    "Native getter R2/R3 scratch restoration is not a C return contract; event-service alias remains unresolved",
+    "Explicit scratch seeds are zero in C lifecycle; direct getter/profile tests exercise arbitrary seeds",
+    "Byte identity is not required or claimed"
+  ]
+}

@@ -1,0 +1,217 @@
+{
+  "stock_REA": {
+    "evidence_id": "ev_658749cd0677eba71c770593c804b00b63fab1bf09631a8b5d5e0877514271a9",
+    "subject": {
+      "name": "stock.elf",
+      "digest": {
+        "sha256": "25b4a29af80ec8edab5bd861ba9b74a6e22eab29dc3d7a809a16869e8a140f04"
+      },
+      "local_path": "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-queue-reset-c/stock.elf",
+      "format": "elf",
+      "architecture": "arm"
+    },
+    "provider": {
+      "id": "ghidra",
+      "name": "Ghidra",
+      "version": "12.1.4"
+    },
+    "analysis_profile": {
+      "provider": {
+        "id": "ghidra",
+        "name": "Ghidra",
+        "version": "12.1.4"
+      },
+      "parameters": {
+        "target_kind": "executable",
+        "target_format": "elf",
+        "architecture": "arm",
+        "available_architectures": [
+          "arm"
+        ],
+        "import_mode": "ephemeral-source-immutable",
+        "annotation_policy": "atomic-function-entry-metadata-v1",
+        "load_image_observations": "source-mappings-entry-context-v2",
+        "function_body_evidence": "complete-inclusive-ranges-v1",
+        "function_references": "complete-body-and-entry-reference-manager-v2",
+        "call_relationship_coverage": "function-body-call-coverage-v5",
+        "function_dossier_coverage": "observed-facets-and-call-relationships-v1",
+        "string_inventory_evidence": "defined-data-coverage-v1",
+        "location_resolution": "explicit-address-exact-entry-symbol-first-v3",
+        "procedure_file_offset_resolution": "address-first-unique-target-source-mapping-v2",
+        "instruction_flow_evidence": "decoded-return-pcode-v1",
+        "instruction_references": "exact-address-incoming-v1",
+        "function_boundary_observations": "ghidra-function-boundary-limitations-v3",
+        "no_return_repair": "returning-imports-decoded-return-v2",
+        "process_launch": "inspected-jvm-launch-support-v1",
+        "jump_table_evidence": "typed-case-default-blocks-v1",
+        "decompiler_jump_loads": true,
+        "loader": "auto-from-header",
+        "language_id": "auto-from-header",
+        "compiler_spec_id": "auto-default",
+        "analyzer_preset": "ghidra-default"
+      },
+      "digest": "7e46711069eea041af1b9b99e34115c13332795e5cda76e584a722f529ec70de"
+    },
+    "predicate_type": "rea.analysis",
+    "operation": "read_bytes",
+    "parameters": {
+      "address": "0x692e4",
+      "length": 540
+    },
+    "raw_result": {
+      "address": "0x692e4",
+      "requested_bytes": 540,
+      "returned_bytes": 540,
+      "bytes_hex": "2de9ff4f8db00f46dde91b841e9d1646202105a8bef757fa04208df82e0094f826002168c0eb001001eb800007906068089094f82500022801d1287988b107980590d7f8ac0020b10599814200d90598059008984ff03c0a012e48d0297919b145e020680590ece7d8f8041041b1c1eb01118900002901dd084438e0084436e0a0f1010b002697f8b610012969d09fed5e0a00230f21a3eb03120beb8202b2fbfafc0afb1c2cbcf13b0f5dd0b2fbfafcbcfbf1f901fb19ccbcf1000f5bd0b2fbfaf2b2fbf1fc01fb1c22521e07eb8202d2ed000af4eec00af1ee10fa03dc761c5b1c0f2bd7dba6eb061100eb81000599814200d305980690d7f8a40020b10699814200d80698069010984068099005980a90dde90510401ab0fbfaf6b5f90090b4271a980599b0f90000c0eb001001eb800001a9f0f74afc9df80e00a979884202d2e979884200d2142798f802108df82f102e4ae16991420fdb01208df8300049e09fed2b0a94e7b2fbfaf2b2fbf1fc01fb1c22aae70e22a8e7b6f5617f17dba16891b194ed060af8eec00a00ee101ab8eec01a80ee810a1e4a10ee101a914206dd02208df8300025e09fed1b0af3e7be420bdb9df82e0040f0080040f010008df82e0000208df8300014e04e450fdba97988420cd2e979884209d39df82e0040f008008df82e0003208df8300002e004208df83000202205a90d98bef73cf911b0bde8f08f00003333333f0000c8429a99593f3d0a573e00000000",
+      "complete": true
+    },
+    "normalized_result": {
+      "address": "0x692e4",
+      "requested_bytes": 540,
+      "returned_bytes": 540,
+      "bytes_hex": "2de9ff4f8db00f46dde91b841e9d1646202105a8bef757fa04208df82e0094f826002168c0eb001001eb800007906068089094f82500022801d1287988b107980590d7f8ac0020b10599814200d90598059008984ff03c0a012e48d0297919b145e020680590ece7d8f8041041b1c1eb01118900002901dd084438e0084436e0a0f1010b002697f8b610012969d09fed5e0a00230f21a3eb03120beb8202b2fbfafc0afb1c2cbcf13b0f5dd0b2fbfafcbcfbf1f901fb19ccbcf1000f5bd0b2fbfaf2b2fbf1fc01fb1c22521e07eb8202d2ed000af4eec00af1ee10fa03dc761c5b1c0f2bd7dba6eb061100eb81000599814200d305980690d7f8a40020b10699814200d80698069010984068099005980a90dde90510401ab0fbfaf6b5f90090b4271a980599b0f90000c0eb001001eb800001a9f0f74afc9df80e00a979884202d2e979884200d2142798f802108df82f102e4ae16991420fdb01208df8300049e09fed2b0a94e7b2fbfaf2b2fbf1fc01fb1c22aae70e22a8e7b6f5617f17dba16891b194ed060af8eec00a00ee101ab8eec01a80ee810a1e4a10ee101a914206dd02208df8300025e09fed1b0af3e7be420bdb9df82e0040f0080040f010008df82e0000208df8300014e04e450fdba97988420cd2e979884209d39df82e0040f008008df82e0003208df8300002e004208df83000202205a90d98bef73cf911b0bde8f08f00003333333f0000c8429a99593f3d0a573e00000000",
+      "complete": true
+    },
+    "confidence": "observed",
+    "authority": "shipped-artifact",
+    "environment": null,
+    "limitations": [
+      "The session serves operations only after Ghidra reports default auto-analysis complete; incomplete analysis does not expose partial results.",
+      "The imported Program and temporary project are ephemeral and deleted on close. Annotation operations edit session database metadata; original executable bytes are never written.",
+      "Cancelling an active Ghidra request terminates its ephemeral database and discards session annotations. The selected target remains open; the next provider query imports the original artifact again.",
+      "Default-space addresses use lowercase 0x-prefixed hexadecimal; other address spaces use <percent-encoded-space>:0x<hex>.",
+      "Bytes reflect Ghidra's initialized memory, including loader fixups. Reads stop at an unmapped or uninitialized byte and report completeness explicitly.",
+      "macOS sessions require a matching executable Ghidra native decompiler; REA checks for it but does not build native components or change Gatekeeper quarantine state."
+    ],
+    "relationship_coverage": null,
+    "locations": [],
+    "evidence_links": []
+  },
+  "native_replay": {
+    "native_cases": 4676,
+    "fault_cases": 8,
+    "history_cases": 968,
+    "history_comparisons": 10284,
+    "ratio_oracle_cases": 1095,
+    "calendar_mutation_cases": 216,
+    "statuses": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "limits": [
+      "Native interval build and actual native clear/movement; calendar provider modeled with native13-byte output shape",
+      "Independent scalar record/history/FPSCR and rational ratio oracle; no compiled build replacement",
+      "No physical/concurrent/final-link or instruction-identity proof"
+    ]
+  },
+  "rounding_sensitive_threshold": [
+    {
+      "case": {
+        "duration": 900,
+        "mode": 1,
+        "count": 1800,
+        "sum": 378,
+        "metric": 0,
+        "minimum": 10,
+        "hour": 6,
+        "output": "normal",
+        "fpscr": 0
+      },
+      "status": 0,
+      "ratio_bits": 1045891645,
+      "fpscr": 16
+    },
+    {
+      "case": {
+        "duration": 900,
+        "mode": 1,
+        "count": 1800,
+        "sum": 378,
+        "metric": 0,
+        "minimum": 10,
+        "hour": 6,
+        "output": "normal",
+        "fpscr": 4194304
+      },
+      "status": 2,
+      "ratio_bits": 1045891646,
+      "fpscr": 4194320
+    },
+    {
+      "case": {
+        "duration": 900,
+        "mode": 1,
+        "count": 1800,
+        "sum": 378,
+        "metric": 0,
+        "minimum": 10,
+        "hour": 6,
+        "output": "normal",
+        "fpscr": 8388608
+      },
+      "status": 0,
+      "ratio_bits": 1045891645,
+      "fpscr": 8388624
+    },
+    {
+      "case": {
+        "duration": 900,
+        "mode": 1,
+        "count": 1800,
+        "sum": 378,
+        "metric": 0,
+        "minimum": 10,
+        "hour": 6,
+        "output": "normal",
+        "fpscr": 12582912
+      },
+      "status": 0,
+      "ratio_bits": 1045891645,
+      "fpscr": 12582928
+    }
+  ],
+  "composition": {
+    "report": "build/sources-goal-r1-interval-refine-c/report.json",
+    "sha256": "c925bf1b813fb7408b160954b004e177cede447dd75518ee9632d7dc522b264d",
+    "unchanged_units": 670,
+    "application_imports": 164,
+    "bootloader_imports": 34,
+    "manifest_unchanged": true,
+    "canonical_plan_unchanged": true
+  },
+  "frontier": {
+    "image": "application",
+    "inventory_source": "ghidra_functions_csv",
+    "entry": "0x000692e4",
+    "size": "518",
+    "provider_family": "gomore_health_algorithm_candidate",
+    "source_symbol": "gomore_primitives_sleep_interval_build",
+    "candidate_symbol": "r1_gomore_sleep_interval_build_native",
+    "status": "unresolved_source_route",
+    "candidate_sources": "",
+    "candidate_objects": "",
+    "candidate_reports": "",
+    "behavior_receipt": "r1/docs/reference/gomore-interval-build-native-analysis.json",
+    "instruction_identity_proven": "false",
+    "image_integration_proven": "false"
+  },
+  "artifacts": {
+    "build/goal-r1-interval-build-analysis/probe.py": "57780054b66c61501b54692687c913847a365b96fc971e8d36fe63c46edc9925",
+    "build/goal-r1-interval-build-analysis/probe.log": "a091520a30011b8e78e72eb469ec80e1b962492cb6131a0a32fd45d004a21d0b",
+    "build/goal-r1-interval-build-analysis/results.json": "143021d3630752442b013d4698a977e146168f7d9fc367081c2a3286839eb363",
+    "build/goal-r1-interval-build-analysis/finalize.py": "10296df5e3cf3f4f28ddd36ced14caf6ccc66567f71ba5a3f34528a1f3624d2b",
+    "build/goal-r1-interval-build-analysis/instructions.json": "b5ed5141dab621e0dc825bbe9f70b92e408d216e627ee8ecb76a72e2da50420e",
+    "build/goal-r1-interval-build-analysis/decompile.json": "5a180b2cca4fb5b8243ad59439f97e79eed99c1dfc5bfac3df894a5aa4d47ef2",
+    "build/goal-r1-interval-build-analysis/calendar-instructions.json": "5ca091f41e8c36a39c36042308b859c8490819ea0dfecc5c25ee03703cc041ed",
+    "build/goal-r1-descriptor-merge-analysis/probe.py": "77945df1a1864cce7723bf9f10f357c7ffebb9bf4ce93a72a93d0c201d95612c"
+  },
+  "limits": [
+    "Native interval build and actual native clear/movement; calendar provider modeled with native13-byte output shape",
+    "Independent scalar record/history/FPSCR and rational ratio oracle; no compiled build replacement",
+    "No physical/concurrent/final-link or instruction-identity proof",
+    "Portable build is not the native ABI provider; native build route and calendar binding remain unresolved"
+  ]
+}

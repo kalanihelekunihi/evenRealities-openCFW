@@ -1,80 +1,37 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_323424\n"
-".type opencfw_em9305_child_323424,@function\n"
-"opencfw_em9305_child_323424:\n"
-"L323424:\n"
-"enter_s [r13-r14,blink]\n"
-"L323426:\n"
-"ld.as r14,[r0,159]\n"
-"L32342a:\n"
-"bbit0.d.nt r14,r1,L323476\n"
-"L32342e:\n"
-"mov_s r2,r1\n"
-"L323430:\n"
-"ldb r12,[0x802818]\n"
-"L323438:\n"
-"mov_s r3,1\n"
-"L32343a:\n"
-"asl_s r3,r3,r2\n"
-"L32343c:\n"
-"mov_s r1,0x1a\n"
-"L32343e:\n"
-"bic_s r14,r14,r3\n"
-"L323440:\n"
-"st.as 0,[r0,160]\n"
-"L323444:\n"
-"breq.d.nt r12,0x7,L323478\n"
-"L323448:\n"
-"st.as r14,[r0,159]\n"
-"L32344c:\n"
-"breq.nt r12,0x11,L323454\n"
-"L323450:\n"
-"brne.nt r12,0xd,L32345c\n"
-"L323454:\n"
-"ldb r1,[0x80281d]\n"
-"L32345c:\n"
-"brne.nt r2,0x1c,L323476\n"
-"L323460:\n"
-"mov r2,745\n"
-"L323464:\n"
-"ldb_s r2,[r0,r2]\n"
-"L323466:\n"
-"breq_s r2,0,L323476\n"
-"L323468:\n"
-"mov_s r2,2\n"
-"L32346a:\n"
-"mov_s r3,0\n"
-"L32346c:\n"
-"mov_s r4,0\n"
-"L32346e:\n"
-"mov_s r5,0\n"
-"L323470:\n"
-"bl.d opencfw_em9305_callback_323620\n"
-"L323474:\n"
-"mov_s r6,0\n"
-"L323476:\n"
-"leave_s [r13-r14,blink,pcl]\n"
-"L323478:\n"
-"breq.nt r2,0x1b,L32348c\n"
-"L32347c:\n"
-"brne.t r2,0x1c,L323476\n"
-"L323480:\n"
-"ld.as r2,[r0,137]\n"
-"L323484:\n"
-"bclr_s r2,r2,0x1\n"
-"L323486:\n"
-"st.as r2,[r0,137]\n"
-"L32348a:\n"
-"b_s L323460\n"
-"L32348c:\n"
-"ld.as r1,[r0,137]\n"
-"L323490:\n"
-"bclr_s r1,r1,0x2\n"
-"L323492:\n"
-"st.as r1,[r0,137]\n"
-"L323496:\n"
-"leave_s [r13-r14,blink,pcl]\n"
-".size opencfw_em9305_child_323424,.-opencfw_em9305_child_323424\n"
-);
+#include <stdint.h>
+
+/* Native 0x323424..0x323498: finish the pending LL procedure whose bit is
+ * set in the record's pending mask (+636): clear the bit and the procedure
+ * timer word (+640). For opcode 7 (0x802818) procedure 0x1b only clears
+ * flag bit 2 of +548, and procedure 0x1c clears flag bit 1; otherwise the
+ * reason is the stored byte (0x80281d) for opcodes 0x11/0x0d, else 0x1a.
+ * Procedure 0x1c then reports the reason through 323620 when the
+ * record's report enable (+745) is set. */
+extern uint32_t opencfw_em9305_callback_323620(uintptr_t,uint32_t,uint32_t,uint32_t,
+                                               int32_t,uint32_t,int32_t);
+
+void opencfw_em9305_child_323424(uintptr_t record,uint32_t procedure)
+{
+    uint32_t pending=*(volatile uint32_t *)(record+636u);
+    uint32_t mask=1u<<(procedure&31u);
+    if((pending&mask)==0u) return;
+    uint32_t opcode=*(volatile uint8_t *)(uintptr_t)0x802818u;
+    uint32_t reason=0x1au;
+    *(volatile uint32_t *)(record+640u)=0u;
+    *(volatile uint32_t *)(record+636u)=pending&~mask;
+    volatile uint32_t *flags=(volatile uint32_t *)(record+548u);
+    if(opcode==7u) {
+        if(procedure==0x1bu) {
+            *flags&=~4u;
+            return;
+        }
+        if(procedure!=0x1cu) return;
+        *flags&=~2u;
+    } else {
+        if(opcode==0x11u||opcode==0x0du)
+            reason=*(volatile uint8_t *)(uintptr_t)0x80281du;
+        if(procedure!=0x1cu) return;
+    }
+    if(*(volatile uint8_t *)(record+745u)==0u) return;
+    (void)opencfw_em9305_callback_323620(record,reason,2u,0u,0,0u,0);
+}

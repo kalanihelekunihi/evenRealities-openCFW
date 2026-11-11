@@ -1,44 +1,29 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_30e8dc\n"
-".type opencfw_em9305_child_30e8dc,@function\n"
-"opencfw_em9305_child_30e8dc:\n"
-"L30e8dc:\n"
-"st.aw blink,[sp,-16]\n"
-"L30e8e0:\n"
-"mov_s r12,0\n"
-"L30e8e2:\n"
-"stb r1,[sp,9]\n"
-"L30e8e6:\n"
-"stb_s r0,[sp,0x8]\n"
-"L30e8e8:\n"
-"sth r0,[sp,4]\n"
-"L30e8ec:\n"
-"add r0,sp,0xa\n"
-"L30e8f0:\n"
-"mov_s r1,r2\n"
-"L30e8f2:\n"
-"mov_s r2,r3\n"
-"L30e8f4:\n"
-"sth 26,[sp,6]\n"
-"L30e8f8:\n"
-"mov_s r3,sp\n"
-"L30e8fa:\n"
-"sth_s r12,[r3,0xa]\n"
-"L30e8fc:\n"
-"sth_s r12,[r3,0xc]\n"
-"L30e8fe:\n"
-"bl.d opencfw_em9305_radio_address_write_3045e8\n"
-"L30e902:\n"
-"sth_s r12,[r3,0xe]\n"
-"L30e904:\n"
-"bl.d opencfw_em9305_ll_event_callback_30e79c\n"
-"L30e908:\n"
-"add_s r0,sp,0x4\n"
-"L30e90a:\n"
-"ld.ab blink,[sp,16]\n"
-"L30e90e:\n"
-"j_s [blink]\n"
-".size opencfw_em9305_child_30e8dc,.-opencfw_em9305_child_30e8dc\n"
-);
+#include <stdint.h>
+
+/* Native 0x30e8dc..0x30e910: post LL event 26 for a handle: status and
+ * reason bytes followed by a six-byte address built from {low,high}. */
+extern uintptr_t opencfw_em9305_radio_address_write_3045e8(uintptr_t,uint32_t,uint32_t);
+extern uint32_t opencfw_em9305_ll_event_callback_30e79c(uintptr_t);
+
+struct init_event_30e8dc {
+    uint16_t handle;
+    uint16_t event;
+    uint8_t status;
+    uint8_t reason;
+    uint16_t address[3];
+};
+
+uint32_t opencfw_em9305_child_30e8dc(uint32_t handle,uint32_t reason,
+                                     uint32_t low,uint32_t high)
+{
+    struct init_event_30e8dc message;
+    message.reason=(uint8_t)reason;
+    message.status=(uint8_t)handle;
+    message.handle=(uint16_t)handle;
+    message.event=26u;
+    message.address[0]=0u;
+    message.address[1]=0u;
+    message.address[2]=0u;
+    (void)opencfw_em9305_radio_address_write_3045e8((uintptr_t)message.address,low,high);
+    return opencfw_em9305_ll_event_callback_30e79c((uintptr_t)&message);
+}

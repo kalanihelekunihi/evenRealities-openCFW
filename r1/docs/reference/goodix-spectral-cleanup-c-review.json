@@ -1,0 +1,190 @@
+{
+  "schema_version": 1,
+  "scope": "Native spectral sign cleanup and fixed window/copy in C",
+  "acceptance_target": "Hardware-first license-free C firmware; byte identity waived",
+  "report": "build/sources-goal-r1-goodix-spectral-cleanup-c/report.json",
+  "comparison_report": "build/sources-goal-r1-goodix-spo2-motion-c/report.json",
+  "stock_entries": [
+    {
+      "symbol": "r1_goodix_native_zero_masked_runs",
+      "entry": "0x72fb8",
+      "instruction_bytes": 222
+    },
+    {
+      "symbol": "r1_goodix_native_scale_copy",
+      "entry": "0x32744",
+      "instruction_bytes": 86
+    }
+  ],
+  "shared_tail": {
+    "start": "0x92924",
+    "end": "0x9293d",
+    "owner_entry": "0x32744",
+    "included_in_86_byte_owner": true
+  },
+  "audit": {
+    "compiled_units": 909,
+    "application_imports": 87,
+    "bootloader_imports": 22,
+    "unchanged_prior_nongenerated_sources_and_objects": 898,
+    "tested_object_equals_normal_build": true,
+    "new_owned_state_bytes": 0,
+    "new_window_coefficient_bytes": 500,
+    "new_native_instruction_bytes": 308,
+    "paired_scenarios": 21472,
+    "function_invocation_pairs": 22816,
+    "chained_cases_included": 1344,
+    "independent_finite_oracle_cases": 3040,
+    "compiled_defects_rejected": 10,
+    "removed_imports": [],
+    "added_imports": [],
+    "remaining_processing_boundaries": 10,
+    "source_plan_and_cache_layout_unchanged": true
+  },
+  "direct_and_chained": {
+    "paired_cases": 18432,
+    "finite_oracle_cases": 3040,
+    "chained_cleanup_window_cases": 1344,
+    "native_instruction_bytes_executed": [
+      222,
+      60,
+      26
+    ],
+    "actual_C_memory_helpers": true,
+    "window_500_bytes_match_stock": true,
+    "full_public_RAM_FPSCR_saved_registers_SP_masks_match": true,
+    "source_cannot_execute_stock": true,
+    "source_object_sha256": "16dfba356a91ca63b7d92c2c4263050b7b43bb05bebeae74c11c0d7dcf778962"
+  },
+  "compiled_defects_rejected": [
+    {
+      "name": "mask-byte-semantics",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "backward-zero-index",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "nan-invalid-flag",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "denormal-status",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "masked-zero-retention",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "non-window-modes",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "window-coefficient",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "window-product",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "last-window-sample",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "window-factor",
+      "compiled": true,
+      "rejected": true
+    }
+  ],
+  "contract": [
+    "Mask bytes other than exactly1 copy raw sample bits, including0xff. A marked positive or negative sample clears its complete sign run by backward/forward scans with live reads. Marked zeros and NaNs leave output unchanged; destination memory is not globally initialized. Preserve writes that may change subsequent samples or mask bytes.",
+    "Comparison is native VCMPE.F32 against zero: unordered raises IOC for all NaNs and sets unordered NZCV; FZ denormals raise IDC and compare as signed zero without rewriting input memory. Ordinary integer C plus FPSCR intrinsics preserve the status/branch behavior without inline assembly.",
+    "Scale/copy writes factor1 before dispatch. Mode1 then writes factor1.5 and multiplies sequential samples by the native125-value periodic window; other modes call actual C memmove, preserving overlaps. The60-byte scale entry and26-byte shared tail have one C provider.",
+    "All500 coefficient bytes are explicit non-executable data in the C object. The observed spectral caller uses125 samples. Ghidra only defines an undefined4 at the table address; no broader array layout or modes beyond the observed contract are inferred. No writable owner is added."
+  ],
+  "limits": [
+    "21472 scenario pairs comprise18432 differential scenarios and3040 independent finite oracle scenarios. The former includes1344 two-call cleanup-to-window chains and64 signed-count boundaries. There are22816 top-level native/C entry-call pairs because each chain invokes both helpers. Nested memory helper calls are not included in that count.",
+    "Independent oracles use sign-group behavior, untouched-output sentinels and long positive/negative/mixed runs; window products use exact rational rounding in the tested normal finite range. Both test paths cover all308 unique native instruction bytes, including the shared tail. All500 coefficient bytes match stock.",
+    "Full public RAM, active FPSCR, saved R4-R11/S16-S31, stack and masks agree across selected input/output/mask/factor aliases and all rounding/FZ/DN settings with clear/set flags. C source cannot execute stock. Actual C memory helpers run without algorithm/math mocks.",
+    "Ten compiled defects are rejected. The coefficient mutation is rejected by the pinned table-data oracle; the other controls expose behavioral, status, mask, boundary or window errors.",
+    "Mode1 window counts0..125 cover the observed sensor path; reads beyond the owned500-byte table and final adjacent-RO placement are unverified. Non-window tests use bounded mapped copy lengths. Arbitrary faults/private aliases, cold FPU, interrupts/concurrency, throughput/stack budget, final startup/layout, physical sensors and boot remain open.",
+    "909 units compile and compose without failures/duplicate strong symbols. The tested object equals normal build;898 prior nongenerated source/object pairs, source-plan and cache layout remain unchanged. Imports stay87 application/22 boot. The spectral parent, quantile/mask/FFT stages and ten higher-level processing boundaries are still incomplete. Relocatable composition is not bootable firmware."
+  ],
+  "evidence_files": {
+    "build/sources-goal-r1-goodix-spectral-cleanup-c/report.json": "460d3163e45477cff432b7a9525d526325becf7424c5eeb4e8ddd829a1c4ae2f",
+    "build/sources-goal-r1-goodix-spo2-motion-c/report.json": "07bf616d97065517d28030f16d8423a6c43e4f3f439964cf860ad14218473ce9",
+    "r1/src/application/goodix/native_spectral_cleanup.c": "a206b9b9879b4615d2dfb37674ab59d2e59c55b23eb1960d5e7eac6426906b19",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-spectral-cleanup-c/r1/r1-application/r1__src__application__goodix__native_spectral_cleanup.c.o": "16dfba356a91ca63b7d92c2c4263050b7b43bb05bebeae74c11c0d7dcf778962",
+    "r1/src/sources.json": "a932f812a55eede9c0e2e0f35630573c7dc9db417e7e785887e3d00ff602c6e4",
+    "tools/build/source-plan.json": "eeb516e31b3310fb0718f36908977f8125723f7c5e0e86cd6744395826259a4d",
+    "r1/src/config/runtime/native_health_cache.ld": "eb8f131c489cd818d4e36718718fa1989719ca0170f164541a1a5bf56dfc1ec3",
+    "r1/docs/reference/FUNCTION-OWNERSHIP.csv": "c85cfff3a7bd125d4d949e358fbdc3f69586e85cfe1c930a02dc06be8ad0e755",
+    "r1/symbols/function-frontier.csv": "c86d58c9ba559a026f4b999e967ec904f8407466a8e486bc4a817a8410604b56",
+    "build/goal-r1-goodix-spo2-spectral-c/rea-analysis.json": "79692ed709306125f4538f6b14d2f05267c78913ce11d717b339c514d0043c5a",
+    "third-party/upstream/musl-memmove-1.2.5/memmove.c": "1304f9ddfc18594f5d9a84691892b9fdaf3be8ecc6d7f365c691abb138eaf74e",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-spectral-cleanup-c/r1/r1-application/third-party__upstream__musl-memmove-1.2.5__memmove.c.o": "4a6ccefb180ef4af2cfe631f54df4d6f629d1b3a2d374911c00b25c107bcb723",
+    "third-party/upstream/musl-memory-1.2.5/memcpy.c": "1664d565f968b053ac33c5ac615c057a255a5821c8fa510fba61d4f63dee08e9",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-spectral-cleanup-c/r1/r1-application/third-party__upstream__musl-memory-1.2.5__memcpy.c.o": "a4b54c7315f7ca2f8097e3f9afb4a9bcd7860c75649fc9e185d951c3ea0696cf",
+    "build/goal-r1-goodix-spectral-cleanup-c/audit.json": "416501a1d673cc67905a958598e8174a46b2b5298adbe9134de02cc2b2808420",
+    "build/goal-r1-goodix-spectral-cleanup-c/negative-non-window-modes.log": "7b652b801592e1ccb89674e614e66a44887fb9b3956be3da8fa5ebfe57022ce8",
+    "build/goal-r1-goodix-spectral-cleanup-c/candidate.d": "fabc6b27bad7989b0d14dc36a7300253af4631164440f49a8e68874e0b499c63",
+    "build/goal-r1-goodix-spectral-cleanup-c/negative-non-window-modes.c": "f8f75969bab27b222491b1dbeffb23c8c4d91b30c86f36c4236ef7d2b1267855",
+    "build/goal-r1-goodix-spectral-cleanup-c/candidate.c": "2ed90a7914dc5f20f1f1977796f491f9c2fa6512fed3b263c683aa6554da2b8d",
+    "build/goal-r1-goodix-spectral-cleanup-c/negative-denormal-status.c": "a2bb47da61ab3b486e6b6b7c3dbc50fc67697d63ea4290a85462ae8b43257638",
+    "build/goal-r1-goodix-spectral-cleanup-c/verify.log": "395b92f73739c5d79b851f7617ea28845be452f1b8e375425efb6403208d3c02",
+    "build/goal-r1-goodix-spectral-cleanup-c/checkpoint.json": "b46ece4a2ee7e7ec0305449834f5f0d16019dc2aa77ed6c323b76555dada0764",
+    "build/goal-r1-goodix-spectral-cleanup-c/test.ld": "b2ff9ac27a31674636716d033098cceafafc2f782e6660e4dd431dc3e9dc449d",
+    "build/goal-r1-goodix-spectral-cleanup-c/rea-scale-entry-bytes.json": "7d2a1e19813944aa81f55e50ca9dd9217a0137040393e75d1ee07c75ab8d8ec7",
+    "build/goal-r1-goodix-spectral-cleanup-c/audit.py": "b00c6086fb1d6ca7dd2621cc337db16767b41dee938b375319558a0198dd54ec",
+    "build/goal-r1-goodix-spectral-cleanup-c/negative-window-product.c": "50339df2a016d5e93cbb52658155b34f0893d82372ffa5ee28912267d835669b",
+    "build/goal-r1-goodix-spectral-cleanup-c/negative-nan-invalid-flag.c": "564ddd883f7d4831593767ddd3ed4c1e2efc1385b37429210b8635d856360fb4",
+    "build/goal-r1-goodix-spectral-cleanup-c/negative-nan-invalid-flag.log": "89218915e2cd596edb390c8870c3746af1b22ddd10dacefcbf82ce868354b481",
+    "build/goal-r1-goodix-spectral-cleanup-c/source.elf": "baa1c7b7e6a21493d77c45137fa59a236170a8f0b1f2a56adde30b14602f1ed0",
+    "build/goal-r1-goodix-spectral-cleanup-c/negative-mask-byte-semantics.log": "ec76a5baff8368fd17eb74e1f43ba8c851a0d1ecea4b26a94c2385677305d4b4",
+    "build/goal-r1-goodix-spectral-cleanup-c/rea-window-xrefs.json": "453be52b156addc837fdc61f4be383a38fb35e78e53380922276ad194995864c",
+    "build/goal-r1-goodix-spectral-cleanup-c/negative-window-product.log": "800f80044010ead1169846f2048b10354c025838c9df2d0bf4288881c63017f1",
+    "build/goal-r1-goodix-spectral-cleanup-c/negative.py": "46e56f55b0ab83e16ece5044941bf6682f8570064c9cdddfefddbc49bba1bc28",
+    "build/goal-r1-goodix-spectral-cleanup-c/production-compile-argv.json": "2e57cf52c10d663b3190cc4ad6274d043575e7e2cff041b0d8062b94f871c7f5",
+    "build/goal-r1-goodix-spectral-cleanup-c/negative.log": "e6390751f9952fb91571273ce1ebfe0b5634673abaea92ed71e18715eb56187a",
+    "build/goal-r1-goodix-spectral-cleanup-c/negative-results.json": "9efe7c70450d9fd709afe4f9d2294800d05858601f65f99b5b36426c9df1bd3d",
+    "build/goal-r1-goodix-spectral-cleanup-c/rea-scale-copy.json": "d2be5e6cbfeefafc9f07a67235e3643dc060f70a34df122590e5a1b60059ad1d",
+    "build/goal-r1-goodix-spectral-cleanup-c/source.o": "16dfba356a91ca63b7d92c2c4263050b7b43bb05bebeae74c11c0d7dcf778962",
+    "build/goal-r1-goodix-spectral-cleanup-c/results.json": "cc581717cf2945b06ebd16cd8031dbfa0d1fe11b82d055be656c42129401bfc1",
+    "build/goal-r1-goodix-spectral-cleanup-c/negative-backward-zero-index.log": "2c1e3781338cb4f65e5e1d16d656ca994957df97cf0096940009961b8f545f23",
+    "build/goal-r1-goodix-spectral-cleanup-c/negative-masked-zero-retention.log": "a4d0a2e159d429c6e41b0c9eca661b3e0d429176b7e989df5e26d80cc5b9495b",
+    "build/goal-r1-goodix-spectral-cleanup-c/negative-masked-zero-retention.c": "f82e9d8daa1fa1a7243253c65389270c72b4f01d5ba165a44883fc59f3f906f2",
+    "build/goal-r1-goodix-spectral-cleanup-c/rea-window-type.json": "0986c17d00843925d7fa21b1bc822ab493fa9c6f23bf7d509574958902ed20ad",
+    "build/goal-r1-goodix-spectral-cleanup-c/negative-last-window-sample.log": "93d5c3b871cd27016fcca971123a1fbf6dbaf20b96d52d16e7147db8154443d2",
+    "build/goal-r1-goodix-spectral-cleanup-c/rea-scale-tail-bytes.json": "c556e5b2e506192cbd228030716df71eb79014d75abd74a97b5d3f78eb2d26cf",
+    "build/goal-r1-goodix-spectral-cleanup-c/negative-last-window-sample.c": "b4af0778f9d70cc7ace66cf6d7e55b56b1df53af043a6d3f3d9b167ce6390e64",
+    "build/goal-r1-goodix-spectral-cleanup-c/negative-denormal-status.log": "33fc69de1d1bdfb0836ba7ccc3d5bbeffce24c631daef48dd0dbc3802fe2fbae",
+    "build/goal-r1-goodix-spectral-cleanup-c/record.py": "e8d8b036c447f288813521a3a3f8a67065c47af8baf28eacc5ca2b61ee8cffa5",
+    "build/goal-r1-goodix-spectral-cleanup-c/next-steps.md": "eba4476fb21c77196591c072082ef63a9921e38a6ea14390ee3afd08d2118f43",
+    "build/goal-r1-goodix-spectral-cleanup-c/negative-backward-zero-index.c": "381ca16c56dd11a8083cf4f731e8a53540a9a1b6768ae8c04404e467de4dca66",
+    "build/goal-r1-goodix-spectral-cleanup-c/rea-zero-runs.json": "5953074c3cec8af5926dcfad3e5ac24f057ebc2b3039e7f495417ac317ee9513",
+    "build/goal-r1-goodix-spectral-cleanup-c/compile-argv.json": "c68f19e7d0316574c02ea2b395a8ad514c2aa6d3f7a20244e82ff52261d246f1",
+    "build/goal-r1-goodix-spectral-cleanup-c/manifest-before.json": "9ac868a8e3f685f925475806df0763381cfbbc9738390494326857ebc66faed3",
+    "build/goal-r1-goodix-spectral-cleanup-c/negative-mask-byte-semantics.c": "638e600cf866742d86c00a6408d8695e34e69c60184215e3e7d151f9cfea12fe",
+    "build/goal-r1-goodix-spectral-cleanup-c/oracle.py": "535e1a01aa4b8af98dd3e86ef4bf0dd1f9ad026384738cf2572658c41b9cae23",
+    "build/goal-r1-goodix-spectral-cleanup-c/verify.py": "e66272d732098356996d7ce78ad3ff25dd99a1fb9e54c462a02e6c9bba15304f",
+    "build/goal-r1-goodix-spectral-cleanup-c/rea-window.json": "d96e7a58820d19320e673c8c82f77717a0af600a21733166e9b6f045da7ce7ff",
+    "build/goal-r1-goodix-spectral-cleanup-c/negative-window-factor.log": "ba60091466ef3939c55eadd38bb67938a6e88a2ccb67d81042ac6e07744886d7",
+    "build/goal-r1-goodix-spectral-cleanup-c/negative-window-coefficient.log": "bd8ad5120cdf1130ca694b2b8c1e89482ceace89b0535656a95627a0e8de6a83",
+    "build/goal-r1-goodix-spectral-cleanup-c/negative-window-coefficient.c": "b792cb6727de4e7be12786f46972c5a63dc86363a430366cc986d643a85cbca6",
+    "build/goal-r1-goodix-spectral-cleanup-c/rea-zero-bytes.json": "4cc181bf64cdd936abb1c038ca8bfd6012610c1dadacc716c2ba79cf713003c2",
+    "build/goal-r1-goodix-spectral-cleanup-c/negative-window-factor.c": "871ad9e21339d8ad1c290b4b8a7f2f51bdb780bacc46aa6e30c27ebd323c20de",
+    "build/goal-r1-goodix-spectral-cleanup-c/build.log": "49f7f9da98b1770cbc8317824676c5584f95d129640a26128f041a336d3cec22"
+  }
+}

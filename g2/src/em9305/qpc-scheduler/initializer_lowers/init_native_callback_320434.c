@@ -1,194 +1,71 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_callback_320434\n"
-".type opencfw_em9305_callback_320434,@function\n"
-"opencfw_em9305_callback_320434:\n"
-"L320434:\n"
-"enter_s [r13-r17,blink]\n"
-"L320436:\n"
-"mov_s r15,r0\n"
-"L320438:\n"
-"ldb_s r0,[r0,0x3]\n"
-"L32043a:\n"
-"breq.d.nt r0,0x6,L320458\n"
-"L32043e:\n"
-"mov_s r16,r0\n"
-"L320440:\n"
-"breq.nt r16,0x5,L32045c\n"
-"L320444:\n"
-"brne.nt r16,0x2,L32045e\n"
-"L320448:\n"
-"mov_s r1,0x803561\n"
-"L32044e:\n"
-"ldb_s r0,[r1,0]\n"
-"L320450:\n"
-"mov_s r16,2\n"
-"L320452:\n"
-"add_s r0,r0,1\n"
-"L320454:\n"
-"stb_s r0,[r1,0]\n"
-"L320456:\n"
-"b_s L32045e\n"
-"L320458:\n"
-"mov_s r16,1\n"
-"L32045a:\n"
-"b_s L32045e\n"
-"L32045c:\n"
-"mov_s r16,2\n"
-"L32045e:\n"
-"ldh_s r1,[r15,0]\n"
-"L320460:\n"
-"mov_s r13,0x803560\n"
-"L320466:\n"
-"ldb_s r0,[r13,0]\n"
-"L320468:\n"
-"cmp r1,255\n"
-"L32046c:\n"
-"mov_s r14,opencfw_em9305_stream_objects_3357b4\n"
-"L320472:\n"
-"beq_s L320492\n"
-"L320474:\n"
-"sub r2,r16,0x1\n"
-"L320478:\n"
-"brlo.nt r2,0x2,L320492\n"
-"L32047c:\n"
-"ldb_s r2,[r15,0x2]\n"
-"L32047e:\n"
-"cmp r2,255\n"
-"L320482:\n"
-"beq_s L320492\n"
-"L320484:\n"
-"bbit0.nt r0,r1,L3204aa\n"
-"L320488:\n"
-"ld_s.as r0,[r14,r1]\n"
-"L32048a:\n"
-"bl.d opencfw_em9305_child_320540\n"
-"L32048e:\n"
-"mov_s r1,r16\n"
-"L320490:\n"
-"b_s L3204aa\n"
-"L320492:\n"
-"mov_s r17,0\n"
-"L320494:\n"
-"bbit0.d.nt r0,r17,L3204a2\n"
-"L320498:\n"
-"mov_s r1,r16\n"
-"L32049a:\n"
-"bl.d opencfw_em9305_child_320540\n"
-"L32049e:\n"
-"ld r0,[r14,0]\n"
-"L3204a0:\n"
-"ldb_s r0,[r13,0]\n"
-"L3204a2:\n"
-"add_s r17,r17,1\n"
-"L3204a4:\n"
-"brlo.d.t r17,0x3,L320494\n"
-"L3204a8:\n"
-"add_s r14,r14,4\n"
-"L3204aa:\n"
-"ldb_s r0,[r15,0x3]\n"
-"L3204ac:\n"
-"breq.nt r0,0x6,L3204fa\n"
-"L3204b0:\n"
-"breq.nt r0,0x2,L32051e\n"
-"L3204b4:\n"
-"breq.nt r0,0x3,L320532\n"
-"L3204b8:\n"
-"brne.d.nt r0,0x1,L32051c\n"
-"L3204bc:\n"
-"add_s r0,r13,0xc\n"
-"L3204be:\n"
-"ldb_s r1,[r15,0x4]\n"
-"L3204c0:\n"
-"add1 r14,r13,0x2e\n"
-"L3204c4:\n"
-"stb_s r1,[r13,0x9]\n"
-"L3204c6:\n"
-"setne r1,r1,0\n"
-"L3204ca:\n"
-"add1 r16,r13,0x36\n"
-"L3204ce:\n"
-"bl.d opencfw_em9305_scan_ring_init_316a54\n"
-"L3204d2:\n"
-"stb 0,[r13,1]\n"
-"L3204d6:\n"
-"bl.d opencfw_em9305_wsf_timer_stop\n"
-"L3204da:\n"
-"mov_s r0,r14\n"
-"L3204dc:\n"
-"bl.d opencfw_em9305_wsf_timer_stop\n"
-"L3204e0:\n"
-"mov_s r0,r16\n"
-"L3204e2:\n"
-"ld r1,[r15,0x8]\n"
-"L3204e4:\n"
-"st_s r1,[r13,0x54]\n"
-"L3204e6:\n"
-"ld r0,[r15,0xc]\n"
-"L3204e8:\n"
-"st_s r0,[r13,0x58]\n"
-"L3204ea:\n"
-"breq_s r1,0,L32051c\n"
-"L3204ec:\n"
-"bl.d opencfw_em9305_wsf_timer_start_ms\n"
-"L3204f0:\n"
-"mov_s r0,r14\n"
-"L3204f2:\n"
-"ld_s r1,[r13,0x58]\n"
-"L3204f4:\n"
-"breq_s r1,0,L32051c\n"
-"L3204f6:\n"
-"mov_s r0,r16\n"
-"L3204f8:\n"
-"b_s L320518\n"
-"L3204fa:\n"
-"ldb_s r0,[r13,0x9]\n"
-"L3204fc:\n"
-"brne.d.nt r0,0x2,L320508\n"
-"L320500:\n"
-"add_s r0,r13,0xc\n"
-"L320502:\n"
-"bl.d opencfw_em9305_scan_ring_init_316a54\n"
-"L320506:\n"
-"mov_s r1,1\n"
-"L320508:\n"
-"ld_s r1,[r13,0x54]\n"
-"L32050a:\n"
-"bl.d opencfw_em9305_wsf_timer_start_ms\n"
-"L32050e:\n"
-"add1 r0,r13,0x2e\n"
-"L320512:\n"
-"ld_s r1,[r13,0x58]\n"
-"L320514:\n"
-"add1 r0,r13,0x36\n"
-"L320518:\n"
-"bl opencfw_em9305_wsf_timer_start_ms\n"
-"L32051c:\n"
-"leave_s [r13-r17,blink,pcl]\n"
-"L32051e:\n"
-"add1 r0,r13,0x2e\n"
-"L320522:\n"
-"bl.d opencfw_em9305_wsf_timer_stop\n"
-"L320526:\n"
-"add1 r13,r13,0x36\n"
-"L32052a:\n"
-"bl.d opencfw_em9305_wsf_timer_stop\n"
-"L32052e:\n"
-"mov_s r0,r13\n"
-"L320530:\n"
-"leave_s [r13-r17,blink,pcl]\n"
-"L320532:\n"
-"ldb_s r0,[r13,0x1]\n"
-"L320534:\n"
-"brne_s r0,0,L32051c\n"
-"L320536:\n"
-"ld_s r0,[r13,0x58]\n"
-"L320538:\n"
-"brne_s r0,0,L32051c\n"
-"L32053a:\n"
-"bl opencfw_em9305_child_30e910\n"
-"L32053e:\n"
-"leave_s [r13-r17,blink,pcl]\n"
-".size opencfw_em9305_callback_320434,.-opencfw_em9305_callback_320434\n"
-);
+#include <stdint.h>
+
+/* Native 0x320434..0x320540: stream control event callback. Event kinds
+ * 6/5/2 map to stream modes 1/2/2 (kind 2 also bumps 0x803561); others
+ * are passed through. The mode goes to 320540 for the addressed stream
+ * object, or for every object enabled in 0x803560 when the handle (+0)
+ * or index (+2) is 0xff or the mode is 1/2. Then kind 1 (re)configures
+ * the scan ring (0x80356c) and the two timers at 0x8035bc/0x8035cc with
+ * the periods at +8/+12 (kept at 0x8035b4/0x8035b8), kind 6 restarts
+ * them, kind 2 stops them, and kind 3 finishes through 30e910 once both
+ * the counter and the second period are clear. */
+extern uint32_t opencfw_em9305_child_320540(uintptr_t object, uint32_t mode);
+extern uint32_t opencfw_em9305_scan_ring_init_316a54(uintptr_t ring, uint32_t enable);
+extern uint32_t opencfw_em9305_wsf_timer_stop(uintptr_t timer);
+extern uint32_t opencfw_em9305_wsf_timer_start_ms(uintptr_t timer, uint32_t milliseconds);
+extern uint32_t opencfw_em9305_child_30e910(void);
+extern uint8_t *const opencfw_em9305_stream_objects_3357b4[3];
+
+void opencfw_em9305_callback_320434(uintptr_t event)
+{
+    volatile uint8_t *control=(volatile uint8_t *)(uintptr_t)0x803560u;
+    volatile uint32_t *periods=(volatile uint32_t *)(uintptr_t)0x8035b4u;
+    const uintptr_t first_timer=0x8035bcu,second_timer=0x8035ccu;
+    uint32_t kind=*(volatile uint8_t *)(event+3u);
+    uint32_t mode=kind;
+    if(kind==6u)mode=1u;
+    else if(kind==5u)mode=2u;
+    else if(kind==2u){
+        control[1]=(uint8_t)(control[1]+1u);
+        mode=2u;
+    }
+    uint32_t handle=*(volatile uint16_t *)event;
+    uint32_t enabled=control[0];
+    if(handle!=255u&&mode-1u>=2u&&*(volatile uint8_t *)(event+2u)!=255u){
+        if(((enabled>>(handle&31u))&1u)!=0u)
+            (void)opencfw_em9305_child_320540((uintptr_t)opencfw_em9305_stream_objects_3357b4[handle],mode);
+    }else{
+        for(uint32_t index=0u;index<3u;++index){
+            if(((enabled>>index)&1u)==0u)continue;
+            (void)opencfw_em9305_child_320540((uintptr_t)opencfw_em9305_stream_objects_3357b4[index],mode);
+            enabled=control[0];
+        }
+    }
+    kind=*(volatile uint8_t *)(event+3u);
+    if(kind==6u){
+        if(control[9]==2u)(void)opencfw_em9305_scan_ring_init_316a54(0x80356cu,1u);
+        (void)opencfw_em9305_wsf_timer_start_ms(first_timer,periods[0]);
+        (void)opencfw_em9305_wsf_timer_start_ms(second_timer,periods[1]);
+    }else if(kind==2u){
+        (void)opencfw_em9305_wsf_timer_stop(first_timer);
+        (void)opencfw_em9305_wsf_timer_stop(second_timer);
+    }else if(kind==3u){
+        if(control[1]!=0u||periods[1]!=0u)return;
+        (void)opencfw_em9305_child_30e910();
+    }else if(kind==1u){
+        uint32_t scan=*(volatile uint8_t *)(event+4u);
+        control[9]=(uint8_t)scan;
+        control[1]=0u;
+        (void)opencfw_em9305_scan_ring_init_316a54(0x80356cu,scan!=0u);
+        (void)opencfw_em9305_wsf_timer_stop(first_timer);
+        (void)opencfw_em9305_wsf_timer_stop(second_timer);
+        uint32_t period=*(volatile uint32_t *)(event+8u);
+        periods[0]=period;
+        periods[1]=*(volatile uint32_t *)(event+12u);
+        if(period==0u)return;
+        (void)opencfw_em9305_wsf_timer_start_ms(first_timer,period);
+        period=periods[1];
+        if(period==0u)return;
+        (void)opencfw_em9305_wsf_timer_start_ms(second_timer,period);
+    }
+}

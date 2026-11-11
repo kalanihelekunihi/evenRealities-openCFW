@@ -2,10 +2,15 @@
  * Queue and event-group children remain typed source/data contracts. */
 #include <stdint.h>
 #include <stdbool.h>
+/* Stock-RAM literals rewritten to named objects (sim-test wave 2026-10-26,
+ * .waves/sim-fix/apply.py): g2ref_X is the linker symbol X. */
+#include <stdint.h>
+extern unsigned char g2ref_g2_elog_async_enabled[] __asm__("g2_elog_async_enabled");
+extern unsigned char g2ref_g2_elog_default_level[] __asm__("g2_elog_default_level");
 
 /* 0x448fc4 and 0x448fc8 literals in the locked Apollo image. */
-static volatile uint8_t *const enabled = (volatile uint8_t *)(uintptr_t)0x20074fc0u;
-static volatile uint8_t *const default_level = (volatile uint8_t *)(uintptr_t)0x20004546u;
+static volatile uint8_t *const enabled = (volatile uint8_t *)(uintptr_t)((uint32_t)(uintptr_t)g2ref_g2_elog_async_enabled);
+static volatile uint8_t *const default_level = (volatile uint8_t *)(uintptr_t)((uint32_t)(uintptr_t)g2ref_g2_elog_default_level);
 extern uint8_t *g2_log_transport_node_allocate(void); /* >=269 writable bytes */
 extern uint32_t g2_log_transport_node_enqueue(uint8_t *node); /* 0=failure */
 extern void g2_log_transport_node_free(uint8_t *node);

@@ -1,0 +1,226 @@
+{
+  "cases": 1080,
+  "passed": 1080,
+  "failures": [],
+  "categories": {
+    "status_and_reset": 256,
+    "adc_cache_filter": 32,
+    "thread_flags": 36,
+    "cadence": 756
+  },
+  "imports_removed": [
+    "r1_battery_device_context",
+    "r1_battery_runtime_context",
+    "r1_battery_thread_handle",
+    "r1_device_state_byte_2c",
+    "r1_device_state_byte_2d",
+    "r1_low_battery_thread_handle",
+    "r1_shared_power_clients"
+  ],
+  "imports_added": [],
+  "application_imports": 220,
+  "bootloader_imports": 34,
+  "probe_cells": {
+    "r1_battery_device_storage": {
+      "address": "0x20016b84",
+      "size": 68,
+      "section": ".r1.battery.device",
+      "alignment": 4,
+      "bytes": "0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "sha256": "1751ac12e70e15b4f76c16775cd329ae55973b612521dab2de828a5cdb6c8ab3"
+    },
+    "r1_battery_runtime_storage": {
+      "address": "0x20006890",
+      "size": 92,
+      "section": ".r1.battery.runtime",
+      "alignment": 4,
+      "bytes": "ff0000ff0000000000000000000000000000000000000000000000000000000000000000000000000000000026003c006c00e001fe102c01300048009000e001fe102c0126003c006c00e001fe102c01300048009000e001fe102c01",
+      "sha256": "707323acdfd173d75292dee06411eb5fc40a35722b034e77838ba906af7f80e2"
+    },
+    "r1_battery_thread_handle": {
+      "address": "0x20006638",
+      "size": 4,
+      "section": ".r1.battery.thread",
+      "alignment": 4,
+      "bytes": "00000000",
+      "sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119"
+    },
+    "r1_low_battery_thread_handle": {
+      "address": "0x20006548",
+      "size": 4,
+      "section": ".r1.battery.low.thread",
+      "alignment": 4,
+      "bytes": "00000000",
+      "sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119"
+    },
+    "r1_shared_power_clients": {
+      "address": "0x20006878",
+      "size": 4,
+      "section": ".r1.battery.power.clients",
+      "alignment": 4,
+      "bytes": "00000000",
+      "sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119"
+    }
+  },
+  "integrated_sources": [
+    "r1/src/application/board/native_battery_cadence.c",
+    "r1/src/application/board/native_battery_control.c",
+    "r1/src/application/board/native_battery_filter.c",
+    "r1/src/application/board/native_status_record.c",
+    "r1/src/application/runtime/native_battery_context_config.c",
+    "r1/src/application/runtime/native_vbat_cache.c"
+  ],
+  "report": "build/sources-goal-r1-battery-context-verified/report.json",
+  "report_sha256": "4c2d57d49a20efc554c8100586958f1de166f9f1c44798a06e51b43e70cba665",
+  "manifest_sha256": "49803fdc777c016138b497b60d424c7a2b7530cd606ce1180b1f339566793c57",
+  "stock_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "initialization": {
+    "stock_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "native_startup_handlers_executed": true,
+    "independent_decoder_matches": true,
+    "guards_unchanged": true,
+    "expanded_sha256": "87fdee392022fdbe23dd0daf3e859fb14f3ce26ba3e8403aab56dc9d9a913317",
+    "rw_region": {
+      "start": "0x200064a8",
+      "size": 6492
+    },
+    "zero_region": {
+      "start": "0x20007e04",
+      "size": 213172,
+      "sha256": "0a67659d94ccb390a3b32c0ddd7d16aef736eb7f1dea9d1cdbfdf7b27c27a564"
+    },
+    "cells": {
+      "r1_battery_device_storage": {
+        "address": "0x20016b84",
+        "size": 68,
+        "section": ".r1.battery.device",
+        "alignment": 4,
+        "bytes": "0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        "sha256": "1751ac12e70e15b4f76c16775cd329ae55973b612521dab2de828a5cdb6c8ab3"
+      },
+      "r1_battery_runtime_storage": {
+        "address": "0x20006890",
+        "size": 92,
+        "section": ".r1.battery.runtime",
+        "alignment": 4,
+        "bytes": "ff0000ff0000000000000000000000000000000000000000000000000000000000000000000000000000000026003c006c00e001fe102c01300048009000e001fe102c0126003c006c00e001fe102c01300048009000e001fe102c01",
+        "sha256": "707323acdfd173d75292dee06411eb5fc40a35722b034e77838ba906af7f80e2"
+      },
+      "r1_battery_thread_handle": {
+        "address": "0x20006638",
+        "size": 4,
+        "section": ".r1.battery.thread",
+        "alignment": 4,
+        "bytes": "00000000",
+        "sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119"
+      },
+      "r1_low_battery_thread_handle": {
+        "address": "0x20006548",
+        "size": 4,
+        "section": ".r1.battery.low.thread",
+        "alignment": 4,
+        "bytes": "00000000",
+        "sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119"
+      },
+      "r1_shared_power_clients": {
+        "address": "0x20006878",
+        "size": 4,
+        "section": ".r1.battery.power.clients",
+        "alignment": 4,
+        "bytes": "00000000",
+        "sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119"
+      }
+    },
+    "owned_bytes": 172
+  },
+  "rea": [
+    {
+      "completed": true,
+      "procedure": "0x3bc68",
+      "path": "build/goal-r1-battery-context/REA-0x3bc68.json",
+      "sha256": "4669c57877df5a1b5e289b2ab10cede0f5787ed33bd078064a72d1410fbc8fa2"
+    },
+    {
+      "completed": true,
+      "procedure": "0x9143c",
+      "path": "build/goal-r1-battery-context/REA-0x9143c.json",
+      "sha256": "ed4bc4c16be0ad8d79181ec2c1037d94ca7d29fc453d3daa3956c0cc2873f0bb"
+    },
+    {
+      "completed": true,
+      "procedure": "0x4fe70",
+      "path": "build/goal-r1-battery-context/REA-0x4fe70.json",
+      "sha256": "8289d1685c201b6215c00e6d889996ad2484db3452ccc8879aab122d9aad29af"
+    }
+  ],
+  "changed_sources": [
+    "r1/src/application/board/native_battery_cadence.c",
+    "r1/src/application/board/native_battery_control.c",
+    "r1/src/application/board/native_battery_diagnostic.c",
+    "r1/src/application/board/native_battery_discharge.c",
+    "r1/src/application/board/native_battery_filter.c",
+    "r1/src/application/board/native_battery_low.c",
+    "r1/src/application/board/native_battery_recovery.c",
+    "r1/src/application/board/native_battery_runtime.c",
+    "r1/src/application/board/native_battery_statistics.c",
+    "r1/src/application/board/native_battery_voltage.c",
+    "r1/src/application/board/native_status_record.c",
+    "r1/src/application/runtime/native_battery_context_config.c",
+    "r1/src/application/runtime/native_status_ring.c",
+    "r1/src/application/runtime/native_vbat_cache.c"
+  ],
+  "source_sha256": {
+    "r1/src/application/board/native_battery_cadence.c": "096b04ff0bb8b0edac74661903b23e1f15e53635e5e7eacbf1501f2b6d21c511",
+    "r1/src/application/board/native_battery_context.h": "6b338ba13d97fd1f2dc1823a2efb3fd4d903864e3521eb7b0bcab12bb2995282",
+    "r1/src/application/board/native_battery_control.c": "075a9ce7647e2569bf30a433ce6c588ee7cbef26ccd8095d38d8f528fc54b3ae",
+    "r1/src/application/board/native_battery_diagnostic.c": "c5676141a59cdc4d4a7e7b11e4add59196df030f97495a98108a7b3b16d7e648",
+    "r1/src/application/board/native_battery_discharge.c": "adbe621d9ca97b9672d8d9be7ef045e49ecd47e7e6857b9a28e00e481e600408",
+    "r1/src/application/board/native_battery_filter.c": "be3bc2e39dcf1c7beadcf1d4a8fc4bc882934ba1bd864997cca8c716b49ab09b",
+    "r1/src/application/board/native_battery_low.c": "c8bbf686e9ddb1af5f1040ec63b47577098e43bab77c9eae4a63f9b14dcdcfb9",
+    "r1/src/application/board/native_battery_recovery.c": "30e10825a351116158b4108616ad31c31db9e6a2a8d204c6ce5a30d715c6187d",
+    "r1/src/application/board/native_battery_runtime.c": "35af54f32948cccacad1337d0535804b1c59076ae5eb3ba514eb7a0c65d53dce",
+    "r1/src/application/board/native_battery_statistics.c": "42e8dcb850c01088d8f80d5be50a781b9cd5d515cba196deaa3a678973305e29",
+    "r1/src/application/board/native_battery_voltage.c": "4b747785e4dc5c39579c123a7f014bb52efb281f9a1a348ab99b5196435f05af",
+    "r1/src/application/board/native_status_record.c": "02cd6d4f2baa5c472074f2745b65cbd604c4a0ade19d542eaec05c478e39181b",
+    "r1/src/application/runtime/native_battery_context_config.c": "2f286ba3158db295a53c5bf5d776bfafc5afaafe6705163298cb091bdbc584b5",
+    "r1/src/application/runtime/native_status_ring.c": "04bb387d7d44debc9cc4ce052fb9634871e068eab6097022a1f699dacb5be6c0",
+    "r1/src/application/runtime/native_vbat_cache.c": "9e234407080d58e84a448f4a0a5e4abe57ef74c43a189243a913fc8244001354"
+  },
+  "probe_artifacts": {
+    "build/goal-r1-battery-context/verify.py": "e2f81e9b156d95620dea29afdf8221233f8675469cc406e34a6004a761fb6be5",
+    "build/goal-r1-battery-context/initialization.py": "16397fe1eda519958c5f7492e0d2067100c145e5f1c16795ca200a695c0910f3",
+    "build/goal-r1-battery-context/initialization.json": "f430c4ba919db76cb39ab2fee52bc370dc780a8f05b57760058ff4e3d2b8e71a",
+    "build/goal-r1-battery-context/expanded-rw.bin": "87fdee392022fdbe23dd0daf3e859fb14f3ce26ba3e8403aab56dc9d9a913317",
+    "build/goal-r1-battery-context/source.elf": "fcfe2694f471ac1184d6905ec9c3f4b2ee3389ec275509f11091a4178f96b86b",
+    "build/goal-r1-battery-context/stock.elf": "fb1355ccbe10d869f97760fef778e1a3c1e16d8bc1479d9e7da8ca7e5343787a",
+    "build/goal-r1-battery-context/rea-snapshot.json": "f1570d83ac7518d4110ed5c10da1ab62c38702af59ff5e8def8c92dea45b9dcf"
+  },
+  "before_artifacts": {
+    "build/goal-r1-battery-context/before/r1/src/application/board/native_battery_cadence.c": "e86224faaf016d3f30537643da833a57305021fa24afc18790260fcaff50fdbc",
+    "build/goal-r1-battery-context/before/r1/src/application/board/native_battery_control.c": "d3caad94c2184b4e40511c5e623a2b6045d98bd45914ce77667044a8009d03b6",
+    "build/goal-r1-battery-context/before/r1/src/application/board/native_battery_diagnostic.c": "6f611d081cd5b27751e5731c371715395ab34110206bf18639afe81e53834468",
+    "build/goal-r1-battery-context/before/r1/src/application/board/native_battery_discharge.c": "64547d7e50f8bdf236d91e6b1cad69a2b405a1206ad4e005c34ddb2d75dc12f3",
+    "build/goal-r1-battery-context/before/r1/src/application/board/native_battery_filter.c": "c6ac0cbb5b267e5280f29e7266ad28501163393e5b14809678e56f59f3bba3b8",
+    "build/goal-r1-battery-context/before/r1/src/application/board/native_battery_low.c": "d39f357ec882c02b332324810ee7fdb53970f3326118209bae77eb55ae0e43a5",
+    "build/goal-r1-battery-context/before/r1/src/application/board/native_battery_recovery.c": "c13f55c5d45186e7fa9a90b230a0f8bc6232a5861cada16866717c79912c7c47",
+    "build/goal-r1-battery-context/before/r1/src/application/board/native_battery_runtime.c": "d96bcfed1da9d6c2ad7ead0d404330432e6c38b43499a7c6e7cab6fb7ad9a2f3",
+    "build/goal-r1-battery-context/before/r1/src/application/board/native_battery_statistics.c": "906ecd19add3abfeffc76f771e4a0ae80cf7e84963bd1d8af8bee42bfa5878d6",
+    "build/goal-r1-battery-context/before/r1/src/application/board/native_battery_voltage.c": "1ec2f7a3dffadf776aba469cf83ac7f813c22a5756de0efdd7bf2fddd68c4606",
+    "build/goal-r1-battery-context/before/r1/src/application/board/native_status_record.c": "588cbbb7b357f19c6eb5a8a15b324f8f24c9e085ea7fc769b95061c666565ce9",
+    "build/goal-r1-battery-context/before/r1/src/application/runtime/native_battery_context_config.c": "5ebdad644478d641e0beab43a04ac97cdd1581577af5db80daa98d5613e56169",
+    "build/goal-r1-battery-context/before/r1/src/application/runtime/native_status_ring.c": "01053081a783e9c573dcabebe9ebeadfcc1afc93227f3d91d870c163722545f4",
+    "build/goal-r1-battery-context/before/r1/src/application/runtime/native_vbat_cache.c": "5f6ceef1e6eb01674978342428ad90cc253c8c3719bf64585a54fb1d3d39a507",
+    "build/goal-r1-battery-context/before/r1/src/sources.json": "59fdbc1dac961b45d682cd2bb5bd1fbc417cd95e7082d50a778c69d6e24ee734"
+  },
+  "shared_views": {
+    "status2c": "device owner +44",
+    "status2d": "device owner +45",
+    "vbat ADC cache": "runtime owner +16"
+  },
+  "limits": [
+    "The five owned cells/contexts total 172 bytes, not whole initialized or zeroed RAM ownership. Native startup handlers execute only in an emulator.",
+    "Probe layout pins the owners to their native addresses; final firmware linker placement and boot integration remain unproven.",
+    "Registry lookup, ADC dispatch, delay, configuration, clock, KV-kind and thread-flag APIs are modeled. The complete battery/event/RTOS graph and physical battery behavior are not established.",
+    "This is relocatable source composition, not source-plan qualification or whole-image byte identity."
+  ]
+}

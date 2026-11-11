@@ -19,9 +19,9 @@ extern const char audio_uart_role_e_read[],audio_uart_role_c_read[];
 extern const char audio_uart_role_e_unstable[],audio_uart_role_c_unstable[];
 extern const char audio_uart_role_e_stable[],audio_uart_role_c_stable[];
 
-void audio_uart_wait_ms(uint32_t milliseconds) {
-    audio_delay_us_selected(milliseconds*1000u);
-}
+/* Millisecond wait 0x4910f4: audio_uart_wait_ms is an alias of
+ * audio_ble_hci_radio_reset_4910f4 (ble/ble-hci/display_ble_hci_radio_context_children.c). */
+void audio_uart_wait_ms(uint32_t milliseconds);
 
 /* Stock 0x45A578 (role strap sampling, audio_uart_role_get) */
 uint8_t audio_uart_role_get(void) {

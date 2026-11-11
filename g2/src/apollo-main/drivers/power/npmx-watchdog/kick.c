@@ -1,6 +1,12 @@
 /* Apollo S200 NPMX watchdog kick at 0x5118e8. */
 #include <stdint.h>
 
+/* Sim-test fix (2026-10-26): stock literal 0x20070f78 is the npmx_instance
+ * that npmx_main_driver.c defines as g2_npmx_instance; our link places it
+ * elsewhere, so the literal read zero (Renode HardFault blx 0 in the kick). */
+struct npmx_instance;
+extern struct npmx_instance g2_npmx_instance; /* RAM 0x20070f78 */
+
 extern uint32_t g2_flashdb_candidate_flags(void);
 extern void g2_flashdb_candidate_log(uint32_t,const char *,const char *,
                                       const char *,uint32_t,const char *,...);
@@ -25,7 +31,7 @@ uint32_t audio_ble_npmx_kick_watchdog_5118e8(uint32_t arg0,
     (void)arg2;
     (void)arg3;
     /* The device base is 0x20070f78; slot zero begins at +0x84. */
-    const uint32_t slot = 0x20070f78u + 0x84u;
+    const uint32_t slot = ((uint32_t)(uintptr_t)&g2_npmx_instance) + 0x84u;
     const uint32_t driver = *(volatile const uint32_t *)(uintptr_t)slot;
     const uint32_t entry = *(volatile const uint32_t *)(uintptr_t)driver;
     const uint32_t context =

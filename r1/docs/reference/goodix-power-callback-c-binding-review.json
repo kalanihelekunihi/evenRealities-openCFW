@@ -1,0 +1,89 @@
+{
+  "passed": 1536,
+  "executions": 3072,
+  "exact_callback_word_store": true,
+  "mask_counts_and_neighbor_preserved": true,
+  "raw_r0_and_nzcvq_preserved": true,
+  "source_size": 12,
+  "source_report": "build/sources-goal-r1-goodix-power-callback/report.json",
+  "limitations": [
+    "Seeded state and abstract callback words; concrete target validity not inferred",
+    "Caller-clobbered registers except native observable R0 excluded",
+    "Startup placement, concurrency, physical callback behavior and byte qualification unverified"
+  ],
+  "acquire_integration": {
+    "passed": 2080,
+    "executions": 4160,
+    "ordered_state_accesses": true,
+    "startup_calls_compared": true,
+    "callback_mutations": true,
+    "actual_callback_setter": true,
+    "source_size": 238,
+    "source_report": "build/sources-goal-r1-goodix-power-callback/report.json",
+    "limitations": [
+      "Seeded counts/mask/callback; initial startup state unverified",
+      "Hardware/SDK calls modeled; private frames and caller-clobbered registers/flags excluded",
+      "Concurrency, physical power/reset behavior and byte qualification unverified"
+    ]
+  },
+  "release_integration": {
+    "passed": 2080,
+    "executions": 4160,
+    "ordered_state_accesses": true,
+    "shutdown_calls_compared": true,
+    "callback_mutations": true,
+    "actual_callback_setter": true,
+    "source_size": 196,
+    "source_report": "build/sources-goal-r1-goodix-power-callback/report.json",
+    "limitations": [
+      "Seeded counts/mask/callback; initialization and acquisition unverified",
+      "Hardware/SDK calls modeled; private frames and caller-clobbered registers/flags excluded",
+      "Concurrency, physical power/reset behavior and byte qualification unverified"
+    ]
+  },
+  "audit": {
+    "existing_executable_sections_unchanged": [
+      ".text.r1_goodix_identity_probe",
+      ".text.r1_goodix_initialize_probe",
+      ".text.r1_goodix_reference_counted_acquire",
+      ".text.r1_goodix_reference_counted_release",
+      ".text.r1_goodix_sampling_mode_glue",
+      ".text.r1_goodix_start_profile_2000",
+      ".text.r1_goodix_start_profile_4000",
+      ".text.r1_goodix_stop_stock_profiles",
+      ".text.r1_goodix_switch_profile"
+    ],
+    "added_sections": [
+      ".text.r1_health_module_field_set"
+    ],
+    "import_sets_unchanged": true
+  },
+  "negative_control": {
+    "mutation": "Store callback word into neighboring active-mask cell",
+    "rejected": true,
+    "stderr": "Traceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-goodix-power-callback/reject-wrong-cell.py\", line 33, in <module>\n    for c in cases:assert a(*c)==b(*c),c\n                                 ~^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-goodix-power-callback/reject-wrong-cell.py\", line 29, in run\n    assert state['writes']==[['callback',4,value]] and bytes(u.mem_read(counts,40))==seed and bytes(u.mem_read(active,4))==struct.pack('<I',0xa5a5a5a5) and bytes(u.mem_read(callback,8))==struct.pack('<II',value,0xdeadbeef)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+  },
+  "source_plan_changed": false,
+  "evidence": {
+    "build/goal-r1-goodix-power-callback/stock.elf": "2a791c844da8250325da74ba651b2ff3a491401357da749e9e2647d1af3a72c6",
+    "build/goal-r1-goodix-power-callback/REA.json": "1d863779f1ef75a98d18b680e4fab4f29024472df64872d162447c6d76524114",
+    "build/goal-r1-goodix-power-callback/REA.snapshot.json": "1339d8fdb82579858fbe60709315ef043e87d34e1dac07b6e17e6724965595cf",
+    "build/goal-r1-goodix-power-callback/verify.py": "59a43ec1112f2547ae8af82ecad71dd28c5ab870f1255b4ae7b2a2076569822a",
+    "build/goal-r1-goodix-power-callback/source.elf": "1f772a0c30e032b6598febe0c7482a2b922931d670a6443bd3e2c9b2dab23486",
+    "build/goal-r1-goodix-power-callback/results.json": "43fce11d68da337ef68200f1a57533d8df1c37ab57d7b44f995e46927bead851",
+    "build/goal-r1-goodix-power-callback/acquire/verify.py": "43ecdff4c59e73ea8d61a891bce87f3a82376e08a3615f048b185acbb086431e",
+    "build/goal-r1-goodix-power-callback/acquire/results.json": "26fecbad2aa4bcaf8ae75b09ed93e7725838a88f31ff6428a415046631f3d2ee",
+    "build/goal-r1-goodix-power-callback/release/verify.py": "8d51672e6a81f1ebc3324026ce76554c2bd737561eee616ee014ad03cb543617",
+    "build/goal-r1-goodix-power-callback/release/results.json": "c4d5c293f3f6a45994ef25fc716222efcf0477f5f1083b9552733f35d07de02f",
+    "build/goal-r1-goodix-power-callback/audit.py": "22c47a012d2586be8491ec5306450184a6d6403a3b0f04a7981769e6ef11d764",
+    "build/goal-r1-goodix-power-callback/audit.json": "6a32ee2131ce5c8c33f1b6ca180b1b35b2f8b29cabac665cdca89dbeeab16ab5",
+    "build/goal-r1-goodix-power-callback/bad.c": "ee39e74d194dd16e61668f83ef017ec1fb0267ee15697d85a943861ab573c126",
+    "build/goal-r1-goodix-power-callback/reject-wrong-cell.py": "763f090708860701fa122c2593849dddef9d35a32961ab4e4e75e7d70cd5fa6d",
+    "build/goal-r1-goodix-power-callback/negative-result.json": "daac9658c53e083efe39d554918309e41899d747c3ef55cd2c147f4f71a34914",
+    "r1/src/application/goodix/stock_client_release.c": "e4260461a5f153ca51ea3e4c0764df5f2ff89a8bdd1fc586c4a61eecb5d7d61d",
+    "build/sources-goal-r1-goodix-power-callback/report.json": "b8052602b077f7d67ffab02941ab28cc01b40748469e5ff442162be30fe6ea20",
+    "r1/src/sources.json": "e32450af0ad855a39e15e9c4029af6bc1b267b6f8d10085ad7714c4130b94bcc",
+    "r1/symbols/function-frontier.csv": "2d1e729059e626bc5c76fc03af55b0e5b8ad85e201bd52fe64883a958f897346",
+    "tools/build/source-plan.json": "c9466961ae2b5ca59e30580d7aaa1d9ac7cb1d7872e190d4ca2127cc1c07e98a"
+  }
+}

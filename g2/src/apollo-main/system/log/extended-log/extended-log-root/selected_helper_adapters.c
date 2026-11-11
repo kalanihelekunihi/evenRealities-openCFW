@@ -11,18 +11,14 @@
 
 extern uint32_t g2_log_candidate_module_length(const uint8_t *);
 extern uint32_t g2_log_candidate_find_token(const uint8_t *,const uint8_t *);
-extern uint32_t g2_log_candidate_timestamp_5(uint8_t *,uint32_t);
+extern int32_t g2_audio_dump_snprintf(char *,uint32_t,const char *,...);
 extern void g2_log_candidate_stack_fill(uint8_t *,uint32_t,uint32_t);
 
-void g2_log_stack_fill(char *destination,uint32_t count,uint8_t value)
-{
-    g2_log_candidate_stack_fill((uint8_t *)destination,count,value);
-}
+/* g2_log_stack_fill (memset 0x43c0e4) is an alias of audio_uart_buffer_zero
+ * in drivers/peripherals/ring-init/ring_init.c. */
 
-uint32_t g2_log_module_length(const char *module)
-{
-    return g2_log_candidate_module_length((const uint8_t *)module);
-}
+/* g2_log_module_length (strlen 0x44a43c) is an alias of
+ * g2_log_candidate_module_length in extended-log-memory.c. */
 int32_t g2_log_contains(const char *text,const char *token)
 {
     return (int32_t)g2_log_candidate_find_token((const uint8_t *)text,
@@ -35,5 +31,5 @@ int32_t g2_log_module_filter(const char *module,const uint8_t *token)
 void g2_log_line_five(char out[6],const char *format,uint32_t line)
 {
     (void)format;
-    (void)g2_log_candidate_timestamp_5((uint8_t *)out,line);
+    (void)g2_audio_dump_snprintf(out,5u,"%ld",(long)(int32_t)line); /* stock snprintf 0x44b728 */
 }

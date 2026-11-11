@@ -11,7 +11,7 @@
 #define PROFILE_TABLE      UINT32_C(0x20000244)
 #define EXPECTED_JEDEC_ID  UINT32_C(0x002539c2)
 
-extern uint32_t opencfw_hal_mspi_control(uint32_t handle, uint32_t request,
+extern uint32_t am_hal_mspi_control(uint32_t handle, uint32_t request,
                                          void *value);
 extern uint32_t opencfw_bl_nor_read_jedec_id(uint32_t *id,
     uint32_t reserved1, uint32_t reserved2, uint32_t initial_word);
@@ -100,7 +100,7 @@ uint32_t opencfw_provider_420002(uint8_t output[6])
         for (uint32_t step = 0u; step < 32u; ++step) {
             uint32_t id = 0u;
             control_record[4] = (uint8_t)step;
-            (void)opencfw_hal_mspi_control(*handle_slot, 0x10u,
+            (void)am_hal_mspi_control(*handle_slot, 0x10u,
                                            control_record);
             const uint32_t status = opencfw_bl_nor_read_jedec_id(
                 &id, 0u, 0u, 0u);

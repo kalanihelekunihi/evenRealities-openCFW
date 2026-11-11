@@ -1,0 +1,181 @@
+{
+  "schema_version": 1,
+  "scope": "R1 record-store retry policy and registered storage event in ordinary C",
+  "report": "build/sources-goal-r1-sleep-record-c/report.json",
+  "comparison_report": "build/sources-goal-r1-sleep-select-c/report.json",
+  "audit": {
+    "compiled_units": 863,
+    "application_imports": 63,
+    "bootloader_imports": 22,
+    "unchanged_prior_nongenerated_objects": 852,
+    "changed_prior_nongenerated_objects": [
+      "r1/src/application/runtime/native_sleep_record.c"
+    ],
+    "normal_object_equals_direct_parent_and_regression_probes": true,
+    "manifest_and_source_plan_unchanged": true,
+    "new_mutable_persistent_bytes": 0,
+    "assembly_entries_replaced_with_C": 2,
+    "entire_record_store_unit_is_C": true,
+    "legacy_parent_literal_alignment_dependency_removed": true,
+    "object_audit": {
+      "strong_symbol_set_unchanged": true,
+      "no_allocated_writable_data": true,
+      "assembly_entries_replaced_with_C": 2,
+      "entire_record_store_unit_is_C": true,
+      "prior_other_C_source_text_unchanged": true,
+      "unchanged_core_section_bytes_and_normalized_relocations": [
+        ".text.r1_sleep_sector_count",
+        ".text.r1_sleep_erase_all",
+        ".text.r1_event_service_0008dd88"
+      ],
+      "old_parent_section_alignment": 2,
+      "new_parent_compiler_section_alignment": 4,
+      "no_legacy_log_const_data_dependency": true,
+      "whole_executed_storage_graph_sources_have_no_inline_assembly": [
+        "native_sleep_record.c",
+        "native_sleep_sector_select.c",
+        "native_sleep_sector_write.c",
+        "native_sleep_sector_finalize.c",
+        "stock_checksums.c",
+        "memory_eabi.c",
+        "memset.c",
+        "memcpy.c"
+      ],
+      "default_linker_layout_without_alignment_workaround": true,
+      "manifest_unchanged": true
+    }
+  },
+  "direct": {
+    "stock_C_comparisons": 31104,
+    "native_instruction_bytes_executed": {
+      "r1_sleep_record_store": 284,
+      "r1_event_service_0008dc94": 132
+    },
+    "two_attempts_byte_selected_full_diagnostics_and_reset_erase_match": true,
+    "event_length_wrap_and_success_only_notification_match": true,
+    "actual_erase_count_core_executes": true,
+    "no_assembly_in_record_store_unit": true,
+    "private_frame_void_event_returns_APSR_and_physical_NOR_unverified": true
+  },
+  "full_record_event_flash_model": {
+    "stock_C_full_record_event_flash_model_comparisons": 3456,
+    "actual_C_record_event_selection_fallback_write_finalize_count_erase_CRC_clear": true,
+    "no_retained_parent_assembly_or_custom_alignment_script": true,
+    "normal_linker_uses_compiler_provided_section_alignment": true,
+    "flash_bytes_provider_calls_and_logs_match": true,
+    "only_FAL_logging_and_notification_modeled": true
+  },
+  "prior_C_entry_regression": {
+    "prior_scan_delete_stock_C_regression_comparisons": 288,
+    "new_normal_unit_preserves_other_C_entry_behavior": true
+  },
+  "compiled_defects_rejected": [
+    {
+      "defect": "wide-initialized-test",
+      "rejected": true,
+      "log": "build/goal-r1-sleep-record-c/wide-initialized-test/test.log"
+    },
+    {
+      "defect": "reject-max-valid-length",
+      "rejected": true,
+      "log": "build/goal-r1-sleep-record-c/reject-max-valid-length/test.log"
+    },
+    {
+      "defect": "single-attempt",
+      "rejected": true,
+      "log": "build/goal-r1-sleep-record-c/single-attempt/test.log"
+    },
+    {
+      "defect": "reversed-fallback-test",
+      "rejected": true,
+      "log": "build/goal-r1-sleep-record-c/reversed-fallback-test/test.log"
+    },
+    {
+      "defect": "missing-selected-byte-cast",
+      "rejected": true,
+      "log": "build/goal-r1-sleep-record-c/missing-selected-byte-cast/test.log"
+    },
+    {
+      "defect": "one-only-write-success",
+      "rejected": true,
+      "log": "build/goal-r1-sleep-record-c/one-only-write-success/test.log"
+    },
+    {
+      "defect": "missing-failed-write-erase",
+      "rejected": true,
+      "log": "build/goal-r1-sleep-record-c/missing-failed-write-erase/test.log"
+    },
+    {
+      "defect": "wide-event-length",
+      "rejected": true,
+      "log": "build/goal-r1-sleep-record-c/wide-event-length/test.log"
+    },
+    {
+      "defect": "notify-on-failure",
+      "rejected": true,
+      "log": "build/goal-r1-sleep-record-c/notify-on-failure/test.log"
+    },
+    {
+      "defect": "truncate-selected-diagnostic",
+      "rejected": true,
+      "log": "build/goal-r1-sleep-record-c/truncate-selected-diagnostic/test.log"
+    }
+  ],
+  "contract": [
+    "Check only the existing initialized byte, then reject null data or length>3888; preserve diagnostic priority.",
+    "Make up to two attempts. Select each time; fallback only for full-word FFFFFFFF. Pass the selected byte to write, but log the full selected result. Any nonzero write return succeeds and returns1.",
+    "After two failed writes invoke the existing C erase-all core, log flash-reset diagnostic and return0. No MCU reset is implied.",
+    "Event input null logs and returns. Otherwise pass (uint16_t)(halfword at30+32) to store. Notify type6 only on success; log event storage failure otherwise.",
+    "The record-store unit contains no inline assembly. Other preexisting C source text is unchanged, with count/erase/thunk section bytes and normalized relocations identical."
+  ],
+  "limits": [
+    "Direct selection/fallback/write, logging and notification boundaries modeled; actual C erase/count core executes. All416 native instruction bytes across the two replaced entries execute.",
+    "Full-chain fixture executes C record/event, selection/fallback, write/finalize/count/erase, CRC and memory-clear functions. FAL read/write/erase, logging and health notification modeled; full flash-model bytes and operation/log traces match.",
+    "The compiler now advertises parent section alignment4 rather than the legacy assembly alignment2. Default linking uses compiler alignment; no custom parent-alignment script or legacy log-constant linker symbol is required. This resolves that caller-specific dependency, not all firmware linking requirements.",
+    "Prior scan/delete entries pass288 stock comparisons in the new normal unit. Other sleep/health assembly remains separate work.",
+    "Saved integer/FP registers, masks, caller-stack and pointer guards checked; private frames, void event returns, APSR, concurrency/faults excluded.",
+    "Physical NOR operation, power-loss behavior, final application linking and boot remain unverified. Relocatable composition is not a bootable firmware claim."
+  ],
+  "evidence_files": {
+    "build/sources-goal-r1-sleep-record-c/report.json": "5e890426acaae4c62d29e0cb7b4cfbe7a60ac5d16f6171c7e3e70ed4cc9fd4c4",
+    "build/sources-goal-r1-sleep-select-c/report.json": "93ad7ab4ed3316fa6f3d74c2a4bce0a74b4c1b0bf9fb95cfe7bf8a0a7084f78e",
+    "r1/src/application/runtime/native_sleep_record.c": "d8e3ae935e3a080a72c7040a6a962909a2fe923d9003ee176e3c8f99c9e6c4b2",
+    "r1/src/application/board/native_battery_memory.h": "e646c981681787c87d8088f663239c9006beb4e4c1827e95854093f0628528b6",
+    "r1/src/application/runtime/native_sleep_sector_select.c": "94b40df8a13800bf317ebe50ecba6a1ed2f97526866c7ea9398f058e33542299",
+    "r1/src/application/runtime/native_sleep_sector_write.c": "0a3a17161b5d27255ede805eecb81ab3fe668e495d69fa960f6232e94852a021",
+    "r1/src/application/runtime/native_sleep_sector_finalize.c": "04cf449316a0c0e1cf233d4da7af9ccfffa67bc08c72093b120f47e4ba69e547",
+    "r1/src/sources.json": "6ea6ab6f16e97b34b73ee1fb683c7c49eb7228bf29fdbdb21f5aded6d4d13380",
+    "tools/build/source-plan.json": "eeb516e31b3310fb0718f36908977f8125723f7c5e0e86cd6744395826259a4d",
+    "build/goal-r1-sleep-record-c/manifest-before.json": "6ea6ab6f16e97b34b73ee1fb683c7c49eb7228bf29fdbdb21f5aded6d4d13380",
+    "build/goal-r1-sleep-record-c/source-before.c": "3c45ef686b843a7645336643f82b6440612b101d2a2907891c9353f1ffd5e2d6",
+    "build/goal-r1-sleep-record-c/new-prefix.c": "4ae0c61936773d2aaf778ea20798f3e08da424da35c272d3845bb99429bc3f4f",
+    "build/goal-r1-sleep-record-c/audit.py": "dc103a7d9ebeee59d53297c289dde226ed05579399db9206e6c6f2920380a37d",
+    "build/goal-r1-sleep-record-c/object-audit.json": "ed7a8b84a68da325ee17579adeb57b475358c4e3b884f77bcab0ebec9d3ec5b5",
+    "build/goal-r1-sleep-record-c/record.py": "a5e59821c393a8544437d3ed6f639e01b25dcff1657c7d17c631fbf43bc2e3e4",
+    "build/goal-r1-sleep-record-c/rea-store.json": "b98860c98f3f00049fefff3886b24a2573e4c068d74f5b18a907c537ab2c877e",
+    "build/goal-r1-sleep-record-c/rea-event.json": "49e75e8262f94eb6f3e9ddf5b754bc2ae0980dbcfb0cfeb8fc997e85d5fef2cf",
+    "build/goal-r1-sleep-record-c/verify.py": "194007382618cece4bbc58cfe8441831fd65df4dffe587f24db4879755d8c990",
+    "build/goal-r1-sleep-record-c/results.json": "1edc8a1e559235bcab3009d63a176d74d4e936b52b43044c72204cf5e70b65a9",
+    "build/goal-r1-sleep-record-c/verification.log": "71d21a61a500658a34dbb33e56642d7ab33f0e4e714bb97428425e3fe68275e8",
+    "build/goal-r1-sleep-record-c/source.o": "d966847a0d12dfa95a4d711261ffca21bad0eb1c8314730d276cfc8e1b5d295b",
+    "build/goal-r1-sleep-record-c/source.elf": "d3caa78ee0996a819ce08930e1b4e295d6875873696ecdbd0c7082975afc1a46",
+    "build/goal-r1-sleep-record-c/make_pipeline.py": "909dab4a1adc937d4e5aef8b9961935d73c360fefe0671c927fb2a8a1e5361bc",
+    "build/goal-r1-sleep-record-c/pipeline.py": "68923031dffb8f6702b93d725ea67a0e8445fc2d173ef7e1046ed83d5a7fe94a",
+    "build/goal-r1-sleep-record-c/pipeline/results.json": "c3e9ae65132fe595ab425d69c2015828a6bcc797927f606517f374057ad4ca91",
+    "build/goal-r1-sleep-record-c/pipeline.log": "0689ad683a0cfa401167dca110d6e487842793900b28afc70b31cc6d7723b584",
+    "build/goal-r1-sleep-record-c/pipeline/record.o": "d966847a0d12dfa95a4d711261ffca21bad0eb1c8314730d276cfc8e1b5d295b",
+    "build/goal-r1-sleep-record-c/pipeline/source.elf": "16115066dd79fb9042f1abc1b29baa0a93e0ae64211a09e0c9537ecd68bb7f29",
+    "build/goal-r1-sleep-record-c/make_regression.py": "30390fe2c6d2bc82b2180f4650e9c8ec71ee14ed223cb79d0f5d1c4c9ea3a55e",
+    "build/goal-r1-sleep-record-c/regression.py": "e37b6ac39e6dca4a08a8e5a4ac610328d8233a0fb945968c133b56abb6f29f3a",
+    "build/goal-r1-sleep-record-c/regression/results.json": "7e9a0f30c6b242c6b5dccd2f6fc0fef2e194e518d5bd77e6b225fd753e39cde7",
+    "build/goal-r1-sleep-record-c/regression.log": "b96d2e1631dcba28c8cb72c24114e1678f335dd308545eed473847ba19f242f3",
+    "build/goal-r1-sleep-record-c/regression/source.o": "d966847a0d12dfa95a4d711261ffca21bad0eb1c8314730d276cfc8e1b5d295b",
+    "build/goal-r1-sleep-record-c/regression/source.elf": "ec35c6c88d2e9a448793470db784ac59c1c7281f5b3c1cd65691b5cfe7f79a33",
+    "build/goal-r1-sleep-record-c/negative.py": "f29a4b6c47ac8672ae3929ae238dd7866e8e9c07dd2da2494971ec1bb7bf1a76",
+    "build/goal-r1-sleep-record-c/negative-verify.py": "9cba592eef3e3898ba9cc8e134a11e88fc06a4d3f235a98d4b8a4f6dbc602407",
+    "build/goal-r1-sleep-record-c/negative.json": "b1f139bc2a11fb55352bf832db0fc36e6e66abe2522f9162bd790448d35f3fbf",
+    "build/goal-r1-sleep-record-c/negative.log": "d75b58ed9ba59d986a97c5999302481884ff04eaf063a54486506efdd5787f49",
+    "build/goal-r1-sleep-record-c/build.log": "e963182f8dd9c34c8434cbb9bb26e1e970557be4c08f5a6fd31927667a4e6423",
+    "build/goal-r1-sleep-record-c/sources-check.log": "c56719af1d0b2d08393a257d3e2022d40896a70239925ecc83fc942850eca238"
+  }
+}

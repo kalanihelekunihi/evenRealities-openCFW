@@ -1,32 +1,41 @@
 #include <stdint.h>
 
-/* Alternate source implementation for native 0x3231c4..0x323228.
- * This replaces, rather than co-links with, init_mode_event_3231c4.c.
- * Named ARC instructions retain the original twelve-byte stack frame and
- * untouched record bytes across the indirect callback and ten-byte copy. */
-extern uint32_t opencfw_em9305_mode_event_3231c4(uintptr_t context);
-extern uint32_t opencfw_em9305_ll_event_callback_30e79c(uintptr_t event);
-extern void *opencfw_em9305_memcpy(void *,const void *,uint32_t);
-__asm__(
-".text\n.balign 4\n.global opencfw_em9305_mode_event_3231c4\n"
-".type opencfw_em9305_mode_event_3231c4,@function\n"
-"opencfw_em9305_mode_event_3231c4:\n"
-"enter_s [r13,fp,blink]\nsub_s sp,sp,0xc\n"
-"ldb_s r1,[r0,0xc]\nmov_s r13,r0\ncmp r1,255\n"
-"beq .Lmode3231c4_exit\n"
-"mov r0,0x805c70\nld_s r2,[r0]\nstb_s r1,[sp,8]\n"
-"mov r0,636\nsub r1,r13,r2\ndiv r1,r1,912\n"
-"ldb r0,[r13,r0]\nstb 0,[sp,4]\nsth 6,[sp,2]\n"
-"btst r0,0\nextb r0,r1\nmov r1,sp\n"
-"sth r0,[r1,6]\nsth r0,[r1,0]\nbeq .Lmode3231c4_no_flag\n"
-"stb 22,[sp,8]\n.Lmode3231c4_no_flag:\n"
-"ld r1,[0x8028c4]\nbreq r1,0,.Lmode3231c4_event\n"
-"jl [r1]\nbreq r0,0,.Lmode3231c4_event\n"
-"add r13,r13,800\nmov r1,sp\nmov r2,10\n"
-"bl.d opencfw_em9305_memcpy\nmov r0,r13\n"
-"stb 1,[r13,-2]\n.Lmode3231c4_exit:\n"
-"leave_s [r13,fp,blink,pcl]\n"
-".Lmode3231c4_event:\n"
-"bl.d opencfw_em9305_ll_event_callback_30e79c\nmov r0,sp\n"
-"leave_s [r13,fp,blink,pcl]\n"
-".size opencfw_em9305_mode_event_3231c4,.-opencfw_em9305_mode_event_3231c4\n");
+/* Native 0x3231c4..0x32323e: report LL event 6 (reason byte +12, or 22 when
+ * flag +636 bit 0 is set) for a 912-byte connection entry. When the optional
+ * filter hook at 0x8028c4 accepts the connection index, the 10-byte event
+ * is parked at +800 with +798 set instead of being reported. No event is
+ * produced when the reason is 255. */
+extern void *opencfw_em9305_memcpy(void *destination, const void *source, uint32_t bytes);
+extern uint32_t opencfw_em9305_ll_event_callback_30e79c(uintptr_t);
+
+struct ll_event_6 {
+    uint16_t handle;
+    uint16_t code;
+    uint8_t zero;
+    uint8_t reserved;
+    uint16_t handle_again;
+    uint8_t reason;
+} __attribute__((aligned(4)));
+
+uint32_t opencfw_em9305_mode_event_3231c4(uintptr_t context)
+{
+    struct ll_event_6 event;
+    uint32_t reason = *(volatile uint8_t *)(context + 12u);
+    if (reason == 255u) return (uint32_t)context;
+    uintptr_t base = *(volatile uint32_t *)(uintptr_t)0x805c70u;
+    event.reason = (uint8_t)reason;
+    uint32_t flags = *(volatile uint8_t *)(context + 636u);
+    event.zero = 0u;
+    event.code = 6u;
+    uint8_t index = (uint8_t)((int32_t)(context - base) / 912);
+    event.handle_again = index;
+    event.handle = index;
+    if ((flags & 1u) != 0u) event.reason = 22u;
+    uintptr_t hook = *(volatile uint32_t *)(uintptr_t)0x8028c4u;
+    if (hook != 0u && ((uint32_t (*)(uint32_t, uintptr_t))hook)(index, hook) != 0u) {
+        void *parked = opencfw_em9305_memcpy((void *)(context + 800u), &event, 10u);
+        *(volatile uint8_t *)(context + 798u) = 1u;
+        return (uint32_t)(uintptr_t)parked;
+    }
+    return opencfw_em9305_ll_event_callback_30e79c((uintptr_t)&event);
+}

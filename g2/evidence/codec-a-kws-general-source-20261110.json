@@ -1,0 +1,51 @@
+{
+  "schema": 1,
+  "target": "locked G2 2.2.6.10 GX8002 KWS NPU copy and tensor command source",
+  "stock": {
+    "firmware": "g2/blobs/official/g2-2.2.6.10/firmware_codec.bin",
+    "command_file_window": [
+      "0x18d90",
+      "0x1b15c"
+    ],
+    "command_bytes": 9164,
+    "command_sha256": "c38ed6d22c7c0b6178288678364acd10bd5730aa382c1e19a32f6cf2bd1430b9",
+    "command_count": 212
+  },
+  "source": {
+    "c_file": "g2/src/codec/npu/kws_general_commands.c",
+    "c_sha256": "fe18108bf9f469596adce94b089857eddb50019be01960f3c7f70689bd42c7fb",
+    "c_object_sha256": "33e843c569189ba6373b661b8e45589d9d41f3fd85f7e7a43a09ac334e005ef3",
+    "manifest_link": false,
+    "copy_commands": 123,
+    "tensor_commands": 29,
+    "commands_matched": 152,
+    "command_bytes_matched": 6692,
+    "concatenated_sha256": "b460e60fee1c7b36f233710a871d00c333bb2f864d0b97b13f5abfe06749c40a",
+    "explicit_terminal_link_records": 1,
+    "header_precision_flags_semantics": "Bits 8 and 9 are retained as typed header flags; their full meaning remains unresolved."
+  },
+  "combined_kws_progress": {
+    "activation_commands": 12,
+    "general_commands": 152,
+    "sourced_commands": 164,
+    "sourced_command_bytes": 7220,
+    "total_commands": 212,
+    "total_command_bytes": 9164,
+    "remaining_opaque_commands": 48,
+    "remaining_opaque_bytes": 1944,
+    "weights_source_available": false
+  },
+  "verification": {
+    "host_c_oracle": "152/152 emitted copy/tensor records compared directly with authenticated instruction bytes",
+    "durable_c_oracle_test": "g2/tests/test_gxdnn_c_source.py: 1 passed, checks 164 records and 7220 bytes",
+    "gxdnn_emitter_tests": "18 passed",
+    "sources_check": "make -C g2 sources-check",
+    "full_source_report": "build/g2-all-c-npu-general-20261110/report.json",
+    "full_source_report_sha256": "5ff8e560d92cb4ac4febd8fecc2c03aba491060238f05277d65c76e63f2e2575",
+    "strict_link_report": "build/g2-all-c-npu-general-link-20261110/link-report.json",
+    "strict_link_report_sha256": "e9f2cd0c3c59a408cf4fae3b95016f43d01557232df8b91125754d55042ac426",
+    "payloads_linked": 7,
+    "payload_binaries_unchanged_from_prior_link": true
+  },
+  "qualification": "The C unit reconstructs decoded copy/tensor commands as field-level descriptors and compiles with the pinned C-SKY compiler. It remains compile-only until the complete NPU program is source-authored. Forty-eight command records, header-flag semantics, the proprietary weights, bundle byte identity, and hardware behavior remain unresolved."
+}

@@ -41,3 +41,5 @@ failed:
     case_binary_sensor_stop();
     return 0u;
 }
+/* Dedup (0x080028b4): case_policy_timer_device_read (was startup/application_boot_pmic_read_candidate.c). */
+uint32_t case_policy_timer_device_read(uint32_t selector,uint8_t *out,uint32_t count) __attribute__((alias("case_binary_sensor_transaction")));

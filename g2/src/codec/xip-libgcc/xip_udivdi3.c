@@ -87,9 +87,8 @@ static void multiply_limbs(uint32_t left, uint32_t right,
  * divider, keeping the stock divide-by-zero behaviour explicit. */
 static uint32_t hardware_reciprocal_of_zero(uint32_t zero)
 {
-    uint32_t result;
-    __asm__ volatile("divu %0, %1, %2" : "=r"(result) : "r"(1u), "r"(zero));
-    return result;
+    volatile uint32_t divisor = zero;   /* keep the runtime divu by zero */
+    return 1u / divisor;
 }
 
 /* Stock 0x10209C74 (gx8002_uart_transmit_dma: interior boundary of this body) */
@@ -159,3 +158,7 @@ uint64_t gx8002_udivdi3(uint64_t numerator, uint64_t denominator)
     }
     return ((uint64_t)q1 << 32) | q0;
 }
+
+/* The compiler helper and recovered stock entry share one C body. */
+uint64_t __udivdi3(uint64_t, uint64_t)
+    __attribute__((alias("gx8002_udivdi3")));

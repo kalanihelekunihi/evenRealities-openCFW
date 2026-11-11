@@ -52,12 +52,12 @@ enum { G2_EM_MYAPP_IDLE_SIG = 4, G2_EM_MYAPP_RESET_SIG = 5, G2_EM_MYAPP_IGNORED_
 static const char g2_em_myapp_module[] = "MyApp"; /* ROM 0x334514 */
 
 extern struct g2_em_qactive g2_em_myapp_ao;       /* RAM 0x801970 */
-extern uint32_t g2_em_qf_next_priority;           /* RAM 0x8012bc, decremented per AO start */
+extern uint32_t g2_em_qf_next_priority __attribute__((section(".bss.opencfw_qf_next_priority_8012bc")));           /* RAM 0x8012bc, decremented per AO start */
 extern const g2_em_qevt *g2_em_myapp_queue[4];    /* RAM 0x80f97c */
 
 extern void QActive_ctor(struct g2_em_qactive *me, g2_em_qstate_handler initial); /* 0x310d18 */
 extern g2_em_qstate QHsm_top(struct g2_em_qactive *me, const g2_em_qevt *e);       /* 0x311550 */
-extern uintptr_t opencfw_em9305_qpc_event_allocate(uint32_t bytes, uint32_t margin, uint32_t signal); /* QF_newX_ 0x311060 */
+extern uintptr_t QF_newX_(uint32_t bytes, uint32_t margin, uint32_t signal); /* QF_newX_ 0x311060 */
 extern void opencfw_em9305_assert(uint32_t module, uint32_t line); /* Q_onAssert 0x3117d8 (returns) */
 extern _Noreturn void em9305_rom_system_reset_103f14(void);
 
@@ -82,7 +82,7 @@ static g2_em_qstate myapp_initial_30ea84(struct g2_em_qactive *me, const g2_em_q
 /* Native 0x30ea90: allocate an 8-byte event and post it FIFO to MyApp. */
 static void myapp_post_30ea90(uint32_t sig, uint32_t param)
 {
-    g2_em_myapp_evt *evt = (g2_em_myapp_evt *)opencfw_em9305_qpc_event_allocate(
+    g2_em_myapp_evt *evt = (g2_em_myapp_evt *)QF_newX_(
         sizeof(g2_em_myapp_evt), G2_EM_QF_NO_MARGIN, sig);
     evt->param = param;
     (void)g2_em_myapp_ao.vptr->post(&g2_em_myapp_ao, &evt->super, G2_EM_QF_NO_MARGIN);

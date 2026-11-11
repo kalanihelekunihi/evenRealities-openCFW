@@ -1,0 +1,106 @@
+{
+  "schema_version": 1,
+  "entries": {
+    "0x4a5bc": "r1_algo_sleep_low_power"
+  },
+  "report": "build/sources-goal-r1-sleep-low-power-c/report.json",
+  "report_sha256": "8592b0402b572cf68f8e183f6e5f215f776751d52cb93359e90b333af83d37e4",
+  "unit": {
+    "source": "r1/src/application/runtime/native_sleep_low_power.c",
+    "source_sha256": "786a2b169e68128521d3811c1edc3b00b9d8856c3791443183968b1a0c224dfe",
+    "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-sleep-low-power-c/r1/r1-application/r1__src__application__runtime__native_sleep_low_power.c.o",
+    "object_sha256": "8b7fd119f0e862ede7d92ee7076568843aecfc97d2c427382ba313c9d9d6d10f"
+  },
+  "behavior": {
+    "pairs": 1576,
+    "digest": "ff920dd20b4599a16987a6492a45ca0d767764d924e0ca04c20942e01a610192",
+    "actual_C": [
+      "low-power handler and event adapter",
+      "sleep report/getter/default-mode/force-wake callbacks",
+      "single shared sleep control owner"
+    ],
+    "modeled_boundaries": [
+      "r1_structured_log_mode_get",
+      "r1_structured_log_format",
+      "nrf_log_frontend_std_1",
+      "nrf_log_frontend_std_0",
+      "r1_event_publish",
+      "r1_event_service_0008b028",
+      "r1_algo_sleep_vivo_probe_start",
+      "r1_temp_sleep_status_report",
+      "r1_gomore_sleep_force_wake_native",
+      "r1_stream_timer_create_front",
+      "r1_stream_timer_release"
+    ],
+    "limits": [
+      "No asynchronous IRQ/concurrency",
+      "Private status pointer normalized by one-byte contents",
+      "Algorithm wake, temperature, multicast, vivo probe and timer services modeled"
+    ]
+  },
+  "negative_controls": {
+    "wrong-active-truthiness": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "ower',), 'active': 2, 'modes': (0,)}, ['trace', 'state'], [('mode', [0], '0212345600000000'), ('mode', [0], '0212345600000000'), ('mode', [0], '0212345600000000')], [('mode', [0], '0212345600000000'), ('mode', [0], '0212345600000000'), ('mode', [0], '0212345600000000'), ('mode', [0], '0212345600000000'), ('mode', [0], '0212345600000000'), ('mode', [0], '0212345600000000'), ('temperature', [0], '0012345600000000'), ('force', [], '0012345600000000'), ('event', [12, '00', 1], '0012345600000000')])\n"
+    },
+    "late-state-clear": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "00'), ('mode', [0], '0112345600000000'), ('temperature', [0], '0012345600000000'), ('force', [], '0012345600000000'), ('event', [12, '00', 1], '0012345600000000')], [('mode', [0], '0112345600000000'), ('mode', [0], '0112345600000000'), ('mode', [0], '0112345600000000'), ('mode', [0], '0112345600000000'), ('mode', [0], '0112345600000000'), ('mode', [0], '0112345600000000'), ('temperature', [0], '0112345600000000'), ('force', [], '0012345600000000'), ('event', [12, '00', 1], '0012345600000000')])\n"
+    },
+    "lost-temperature-report": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "600000000'), ('mode', [0], '0112345600000000'), ('mode', [0], '0112345600000000'), ('temperature', [0], '0012345600000000'), ('force', [], '0012345600000000'), ('event', [12, '00', 1], '0012345600000000')], [('mode', [0], '0112345600000000'), ('mode', [0], '0112345600000000'), ('mode', [0], '0112345600000000'), ('mode', [0], '0112345600000000'), ('mode', [0], '0112345600000000'), ('mode', [0], '0112345600000000'), ('force', [], '0012345600000000'), ('event', [12, '00', 1], '0012345600000000')])\n"
+    },
+    "lost-algorithm-wake": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "00'), ('mode', [0], '0112345600000000'), ('mode', [0], '0112345600000000'), ('temperature', [0], '0012345600000000'), ('force', [], '0012345600000000'), ('event', [12, '00', 1], '0012345600000000')], [('mode', [0], '0112345600000000'), ('mode', [0], '0112345600000000'), ('mode', [0], '0112345600000000'), ('mode', [0], '0112345600000000'), ('mode', [0], '0112345600000000'), ('mode', [0], '0112345600000000'), ('temperature', [0], '0012345600000000'), ('event', [12, '00', 1], '0012345600000000')])\n"
+    },
+    "wrong-event-topic": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "00'), ('mode', [0], '0112345600000000'), ('temperature', [0], '0012345600000000'), ('force', [], '0012345600000000'), ('event', [12, '00', 1], '0012345600000000')], [('mode', [0], '0112345600000000'), ('mode', [0], '0112345600000000'), ('mode', [0], '0112345600000000'), ('mode', [0], '0112345600000000'), ('mode', [0], '0112345600000000'), ('mode', [0], '0112345600000000'), ('temperature', [0], '0012345600000000'), ('force', [], '0012345600000000'), ('event', [13, '00', 1], '0012345600000000')])\n"
+    },
+    "wrong-temperature-status": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "00'), ('mode', [0], '0112345600000000'), ('temperature', [0], '0012345600000000'), ('force', [], '0012345600000000'), ('event', [12, '00', 1], '0012345600000000')], [('mode', [0], '0112345600000000'), ('mode', [0], '0112345600000000'), ('mode', [0], '0112345600000000'), ('mode', [0], '0112345600000000'), ('mode', [0], '0112345600000000'), ('mode', [0], '0112345600000000'), ('temperature', [1], '0012345600000000'), ('force', [], '0012345600000000'), ('event', [12, '00', 1], '0012345600000000')])\n"
+    },
+    "early-active-guard": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "kalani/Repo/evenRealities-openCFW/build/goal-r1-sleep-low-power-c/verify.py\", line 65, in pair\n    a=run(False,**kw);b=run(True,**kw);assert a==b,(kw,[k for k in a if a[k]!=b[k]],a['trace'],b['trace']);digest.update(json.dumps([kw,a]).encode());pairs+=1\n                                              ^^^^\nAssertionError: ({'actions': ('lowpower',), 'active': 0, 'modes': (0,)}, ['trace'], [('mode', [0], '0012345600000000'), ('mode', [0], '0012345600000000'), ('mode', [0], '0012345600000000')], [])\n"
+    },
+    "lost-state-publication": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "2345600000000'), ('mode', [0], '0112345600000000'), ('mode', [0], '0112345600000000'), ('temperature', [0], '0012345600000000'), ('force', [], '0012345600000000'), ('event', [12, '00', 1], '0012345600000000')], [('mode', [0], '0112345600000000'), ('mode', [0], '0112345600000000'), ('mode', [0], '0112345600000000'), ('mode', [0], '0112345600000000'), ('mode', [0], '0112345600000000'), ('mode', [0], '0112345600000000'), ('temperature', [0], '0012345600000000'), ('force', [], '0012345600000000')])\n"
+    }
+  },
+  "audit": {
+    "unchanged_prior_objects": 755,
+    "new_units": 1,
+    "imports": {
+      "r1-application": {
+        "added": [],
+        "removed": [
+          "r1_event_service_0004a5bc"
+        ]
+      },
+      "r1-bootloader": {
+        "added": [],
+        "removed": []
+      }
+    },
+    "reused_owners": [
+      "r1_sleep_wake_control; no new data ownership"
+    ]
+  },
+  "source_check": "R1 check passes: 756 units, 560 source files, 0 not built. Global check flagged existing G2 resident_rom_thumb_set.S absent from manifest.",
+  "rea": "sleep-low-power-c-rea.json",
+  "instruction_identity_proven": false,
+  "image_integration_proven": false
+}

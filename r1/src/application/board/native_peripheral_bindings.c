@@ -1,14 +1,18 @@
 /* Native product handle caches. Only the accessed four-byte cells are owned;
  * surrounding motion/PPG/touch contexts retain independent ownership gates. */
 #include "../registry/stock_registry.h"
+#include "native_touch_ready_state.h"
+#include "native_battery_memory.h"
 #define TEXT(name,sec,value) const char name[] __attribute__((section(sec)))=value
 /* Separate cells avoid claiming the intervening context fields. */
 #define HANDLE(name) generic_device_registry_device *volatile name __attribute__((section(".r1.bind." #name),aligned(4)))=0
 HANDLE(r1_led_enable_device);HANDLE(r1_touch_ldo_device);
 HANDLE(r1_motion_irq_device);HANDLE(r1_motion_bus_device);
 HANDLE(r1_ppg_bus_device);HANDLE(r1_ppg_irq_device);HANDLE(r1_ppg_reset_device);
-HANDLE(r1_touch_bus_device);HANDLE(r1_touch_input_device);HANDLE(r1_touch_output_device);
+HANDLE(r1_touch_bus_device);HANDLE(r1_touch_output_device);
 #undef HANDLE
+volatile union r1_touch_ready_store r1_touch_ready_storage
+ __attribute__((section(".r1.touch.ready_pair"),aligned(4)))={.words=0};
 TEXT(r1_bind_motion_irq_name,".r1.bind.name0","acc_int_1");
 TEXT(r1_bind_motion_bus_name,".r1.bind.name1","i2c_1");
 TEXT(r1_bind_led_name,".r1.bind.name2","ppg_led_en");
@@ -25,15 +29,20 @@ uintptr_t r1_led_ldo_device_bind(void) {
  if(!result){result=r1_stock_registry_find(r1_bind_ldo_name);r1_touch_ldo_device=result;}
  return (uintptr_t)result;
 }
-uintptr_t r1_motion_bus_device_bind(void) {
+__attribute__((noinline)) uintptr_t r1_motion_bus_device_bind(void) {
  generic_device_registry_device *result=r1_motion_bus_device;
  if(!result){result=r1_stock_registry_find(r1_bind_motion_bus_name);r1_motion_bus_device=result;}
  return (uintptr_t)result;
 }
+/* The bus lookup precedes the live IRQ-cache read; both retain their existing
+ * volatile owners. Provider-visible saved-register values are not C inputs. */
 uintptr_t r1_motion_interrupt_input_lookup(void) {
  (void)r1_motion_bus_device_bind();
  generic_device_registry_device *result=r1_motion_irq_device;
- if(!result){result=r1_stock_registry_find(r1_bind_motion_irq_name);r1_motion_irq_device=result;}
+ if (!result) {
+  result=r1_stock_registry_find(r1_bind_motion_irq_name);
+  r1_motion_irq_device=result;
+ }
  return (uintptr_t)result;
 }
 uint32_t r1_ppg_device_bind(void) {

@@ -1,0 +1,91 @@
+{
+  "report": "build/sources-goal-r1-pmic-charged-c/report.json",
+  "units": 820,
+  "application_imports": 70,
+  "import_set_unchanged": true,
+  "verification": {
+    "charged_policy_pairs": 7200,
+    "continuation_pairs": 150,
+    "live_mutation_pairs": 135,
+    "seeded_pairs": 256,
+    "actual_ST25_interrupt_control_enable_providers": true
+  },
+  "actual_GPIO_pulse": {
+    "actual_GPIO_pulse_pairs": 96
+  },
+  "compiled_defects": [
+    {
+      "defect": "wrong-isns-bound",
+      "rejected": true
+    },
+    {
+      "defect": "wrong-voltage-bound",
+      "rejected": true
+    },
+    {
+      "defect": "short-retry-budget",
+      "rejected": true
+    },
+    {
+      "defect": "wrong-special-flag",
+      "rejected": true
+    },
+    {
+      "defect": "wrong-state-two",
+      "rejected": true
+    },
+    {
+      "defect": "wrong-retry-delay",
+      "rejected": true
+    },
+    {
+      "defect": "wrong-poll-delay",
+      "rejected": true
+    },
+    {
+      "defect": "wrong-interrupt-bit",
+      "rejected": true
+    },
+    {
+      "defect": "skip-mailbox-enable",
+      "rejected": true
+    },
+    {
+      "defect": "wrong-GPO-callback",
+      "rejected": true
+    }
+  ],
+  "prior_objects_identical": 817,
+  "generated_object_hash_changes": [
+    "{gen}/r1_startup_vectors.S",
+    "{gen}/r1_uecc.c"
+  ],
+  "rea_evidence_ids": [
+    "ev_92297448b6a8c1d34c5c1af73e99ef010af5a7f724f5d886c439bd75a941bb4b",
+    "ev_0f43e59b9d6484fad0b432d6808ba1f9fc0b7a8af8d81d90346c87a31bdbd642"
+  ],
+  "evidence_files": {
+    "build/goal-r1-pmic-charged-c/verify.py": "7456ba379bcf176cd2e200cdabd1289b31fd21778f65f7039b59f2158ff9ebf7",
+    "build/goal-r1-pmic-charged-c/verification.json": "c3049a6de81ef5ea103634fa2642c5ba5ddc483c32e4ea50e52d9486409c49a1",
+    "build/goal-r1-pmic-charged-c/verify-final.log": "a7e84dc1cd781e0252b0af386e3a34a82ced92e1b322eb8e080807055e985fc6",
+    "build/goal-r1-pmic-charged-c/defects.py": "a7bb4d29274678518ac1c533325a0f1e34bbf7f1b69cd86754df16a5db416200",
+    "build/goal-r1-pmic-charged-c/defects.json": "967cb221ed03f0a691ae5fef3591958cf3b624fc38bea5f22fa7347406f1f6e0",
+    "build/goal-r1-pmic-charged-c/pulse.py": "77d9f0d905bc4d09b4e04b1738ea51b805b28de775b7b7d9914bc402d3c7ee31",
+    "build/goal-r1-pmic-charged-c/pulse.log": "19772298c7e142de7b3ebc35d42b21bae040791b4726a8c4082aa57f905cd3b8",
+    "build/goal-r1-pmic-charged-c/pulse/verification.json": "ea679419bfab25a772bd136fe7a51ba20207d92c54403b853c0bf8ab16863398",
+    "build/goal-r1-pmic-charged-c/rea.json": "1ad7d8c7d3861e3118500f06d7420be9db4cc3fdd8ae2688b150a97510bf1500",
+    "build/goal-r1-pmic-charged-c/document.py": "504d2511edf7d1edfa2c66ec36c7f141ab3a6798040dd3e69ac897a65f7f6703",
+    "build/sources-goal-r1-pmic-charged-c/report.json": "2b0414263939a7e69e8febb250482b8d5939f8d44a48c21dc6286c9f045bcf5b",
+    "r1/src/sources.json": "7b6888c72375033c89408250927ecde985aaa1d69a6d3051585258e74bbdec24",
+    "r1/src/application/runtime/native_pmic_charged.c": "9f39a009edfba3267ecceb76414993e1d3e3f7a772877b0a2c0cb3f7bccb42c6",
+    "r1/src/application/board/native_ship_mode.c": "dd5998cdec2003b89ec9ef2fe94553b4232b8d37af70281caf886509ebb31eca",
+    "r1/src/application/runtime/native_nfc_late_setup.c": "52b993822a06c82e6f67b62545cd15b0002a0465422fcfe48b30e48d4469c63a"
+  },
+  "limitations": [
+    "ADC, voltage, charger state, charge-event policy, timer/GPO/touch and logging leaves modeled in policy tests.",
+    "Actual ST25 interrupt/control/mailbox-enable providers execute with prepared register contexts; IO callbacks modeled.",
+    "GPIO integration executes actual pin configuration/pulse helpers; MMIO is emulated and RTOS delay modeled.",
+    "Successful register reads must supply requested byte; zero-initialized C temporaries prevent uninitialized-data fallback.",
+    "Final application linking, RAM placement, physical electrical timing and device boot remain unverified."
+  ]
+}

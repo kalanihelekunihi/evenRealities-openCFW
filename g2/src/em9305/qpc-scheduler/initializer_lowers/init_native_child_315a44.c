@@ -1,38 +1,17 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_315a44\n"
-".type opencfw_em9305_child_315a44,@function\n"
-"opencfw_em9305_child_315a44:\n"
-"L315a44:\n"
-"enter_s [r13,blink]\n"
-"L315a46:\n"
-"mov_s r13,r0\n"
-"L315a48:\n"
-"mov_s r1,r0\n"
-"L315a4a:\n"
-"ldb_s r0,[r13,0xd]\n"
-"L315a4c:\n"
-"add r1,r1,627\n"
-"L315a50:\n"
-"stb 1,[r1]\n"
-"L315a54:\n"
-"bclr_s r0,r0,0\n"
-"L315a56:\n"
-"stb_s r0,[r13,0xd]\n"
-"L315a58:\n"
-"bl.d opencfw_em9305_phy_complete_32c818\n"
-"L315a5c:\n"
-"mov_s r0,r13\n"
-"L315a5e:\n"
-"bl.d opencfw_em9305_child_32ca20\n"
-"L315a62:\n"
-"mov_s r0,r13\n"
-"L315a64:\n"
-"bl.d opencfw_em9305_child_325ccc\n"
-"L315a68:\n"
-"mov_s r0,r13\n"
-"L315a6a:\n"
-"leave_s [r13,blink,pcl]\n"
-".size opencfw_em9305_child_315a44,.-opencfw_em9305_child_315a44\n"
-);
+#include <stdint.h>
+
+/* Native 0x315a44..0x315a6c: mark completion (+627), clear bit 0 of the
+ * record flags (+13), then run PHY completion, 32ca20 and 325ccc. */
+extern uint32_t opencfw_em9305_phy_complete_32c818(uintptr_t);
+extern uint32_t opencfw_em9305_child_32ca20(uintptr_t);
+extern uint32_t opencfw_em9305_child_325ccc(uintptr_t);
+
+uint32_t opencfw_em9305_child_315a44(uintptr_t record)
+{
+    uint32_t flags=*(volatile uint8_t *)(record+13u);
+    *(volatile uint8_t *)(record+627u)=1u;
+    *(volatile uint8_t *)(record+13u)=(uint8_t)(flags&~1u);
+    (void)opencfw_em9305_phy_complete_32c818(record);
+    (void)opencfw_em9305_child_32ca20(record);
+    return opencfw_em9305_child_325ccc(record);
+}

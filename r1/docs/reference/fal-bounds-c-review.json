@@ -1,0 +1,122 @@
+{
+  "schema_version": 1,
+  "report": "build/sources-goal-r1-fal-bounds-c/report.json",
+  "audit": {
+    "unchanged_nongenerated_objects": 842,
+    "changed_generated_objects": [
+      "{gen}/fal_partition_r1_lookup.c",
+      "{gen}/r1_startup_vectors.S",
+      "{gen}/r1_uecc.c"
+    ],
+    "changed_function_symbols": [
+      "fal_partition_read",
+      "fal_partition_write",
+      "fal_partition_erase",
+      "r1_fdb_native_partition_read"
+    ],
+    "data_bytes_unchanged": true,
+    "compiled_units": 852,
+    "application_imports": 66,
+    "bootloader_imports": 22,
+    "import_sets_unchanged": true
+  },
+  "verification": {
+    "read": {
+      "compatible_stock_C_comparisons": 9763,
+      "C_only_overflow_rejections": 965,
+      "extra_boundary_cases": 1512,
+      "native_wrap_counterexample": {
+        "address": "fffffff0",
+        "length": 32,
+        "limit": 16,
+        "native_result": 7,
+        "native_provider_calls": 2,
+        "C_result": 4294967295,
+        "C_provider_calls": 0
+      },
+      "lookup_driver_diagnostics_modeled": true
+    },
+    "write": {
+      "compatible_stock_C_comparisons": 9763,
+      "C_only_overflow_rejections": 965,
+      "extra_boundary_cases": 1512,
+      "native_wrap_counterexample": {
+        "address": "fffffff0",
+        "length": 32,
+        "limit": 16,
+        "native_result": 7,
+        "native_provider_calls": 2,
+        "C_result": 4294967295,
+        "C_provider_calls": 0
+      },
+      "lookup_driver_diagnostics_modeled": true
+    },
+    "erase": {
+      "compatible_stock_C_comparisons": 5155,
+      "C_only_overflow_rejections": 965,
+      "extra_boundary_cases": 1512,
+      "native_wrap_counterexample": {
+        "address": "fffffff0",
+        "length": 32,
+        "limit": 16,
+        "native_result": 7,
+        "native_provider_calls": 2,
+        "C_result": 4294967295,
+        "C_provider_calls": 0
+      },
+      "lookup_driver_diagnostics_modeled": true
+    }
+  },
+  "negative_controls": [
+    {
+      "function": "read",
+      "reverted_wrap_guard_rejected": true
+    },
+    {
+      "function": "write",
+      "reverted_wrap_guard_rejected": true
+    },
+    {
+      "function": "erase",
+      "reverted_wrap_guard_rejected": true
+    }
+  ],
+  "intentional_C_change": "Reject addr>limit or size>limit-addr, replacing wrapping32-bit addition. No lookup/driver on rejection; preserve existing diagnostic/error and valid zero-length endpoint behavior.",
+  "limits": [
+    "24681 comparisons cover requests whose native/new admission agrees;2895 C-only cases reject overflow admission that stock allows. The mathematical oracle uses unbounded Python integers. Native counterexamples execute only in emulated memory.",
+    "Lookup, final flash driver and diagnostics are modeled. Provider event counts include lookup plus the final driver, not physical flash operations.",
+    "Only relative partition range admission changes. Base-offset translation wrapping, corrupted partition metadata, concurrent mutation and physical flash geometry remain outside this fix.",
+    "852 units compile/compose;66 application and22 bootloader imports remain. No new state or imports. Full linking, hardware operation and boot remain unverified."
+  ],
+  "evidence_files": {
+    "build/sources-goal-r1-fal-bounds-c/report.json": "506ffb726b6d4d508e0955679a8cc9298db63ac3eda25f7adf4341abea4f150e",
+    "build/sources-goal-r1-flash-write-c/report.json": "abb2aecfe5a45c1a1c4ef4b45cc71d1c20a36b59656d4e7e00886ad3ecfcbc1e",
+    "r1/src/application/board/fal-native/native_partition_read.h": "8d569701e9a565cc0046687129bb7f1a4614e475dd462746d821b63859a3f1e7",
+    "r1/src/application/board/fal-native/native_partition_write.h": "96f7dc52e4a5e91e7c629809ac9821bb1d5ba739eed0c0f3e29b1bbc4d785001",
+    "r1/src/application/board/fal-native/native_partition_erase.h": "19f93b09e1c61437095aa2832ecddedd18264d5c5010068cd1473edc3bb3b283",
+    "build/goal-r1-fal-bounds-c/rea.json": "eaa3f5f437f0c1ed52e181cacbd5087cfbc00eee7ad3d61d98f31e91153ef964",
+    "build/goal-r1-fal-bounds-c/generate.py": "43bbe7be5896f33c131160ba04a3053bba9bd943919e3a628b8d5a16c4b157be",
+    "build/goal-r1-fal-bounds-c/negative.py": "6984268993adb73ce55fe4557f5f8fdd278997203531cc6be41055efdd52be78",
+    "build/goal-r1-fal-bounds-c/negative.json": "fb5d4b6535056173adc5dbd19d62937e99fb93598f06ddf6a342c67b497001ae",
+    "build/goal-r1-fal-bounds-c/negative.log": "471efd96a006cf4edbe2c4efd3b52df43201ceba1b4b2833ce86a0b92453eea8",
+    "build/goal-r1-fal-bounds-c/r1-check.log": "ff00837ff85e19cf04a893c77e51ce602c362675651960cf956f13903b124dc6",
+    "build/goal-r1-fal-bounds-c/read/verify.py": "6837422ef45f62de03761e6ba898b273fe359a90ac3f465a06811e96edf2dec9",
+    "build/goal-r1-fal-bounds-c/read/results.json": "8fb131bf74c02b1c95663ac8de737573a4079aebed2c25a4ed60bab83dc4385b",
+    "build/goal-r1-fal-bounds-c/read/verification.log": "589b9659a7d7b3e5442d1d6493749d41dd5460469ba203ebb117015cd7fd7460",
+    "build/goal-r1-fal-bounds-c/old-read/verify.py": "dc151c41635e7f77e4c363f90203eaaef5b08ea5f3ad4a7768cb11f6518a08e8",
+    "build/goal-r1-fal-bounds-c/old-read/native_partition_read.h": "dd3891e749194f6c1c18584a295aa91966e4f859f1a07616401c4ae011176305",
+    "build/goal-r1-fal-bounds-c/old-read/result.log": "36dd6447bc3db3f18e88058947bc1342f116f8836fd132da8b0985978eb4a120",
+    "build/goal-r1-fal-bounds-c/write/verify.py": "dfc57b36e79509d145e0582cf29a224c0ffd7888362740627e0c79c572a60496",
+    "build/goal-r1-fal-bounds-c/write/results.json": "8fb131bf74c02b1c95663ac8de737573a4079aebed2c25a4ed60bab83dc4385b",
+    "build/goal-r1-fal-bounds-c/write/verification.log": "589b9659a7d7b3e5442d1d6493749d41dd5460469ba203ebb117015cd7fd7460",
+    "build/goal-r1-fal-bounds-c/old-write/verify.py": "8a395a2211b2f2dbfc2110e0806cf6fb78e66e371adf9298a8c4016d7d20c8ef",
+    "build/goal-r1-fal-bounds-c/old-write/native_partition_write.h": "16ba1ef1b5578a56a05591a72555923d45c94123adcb35a633ecc89e70c56b6b",
+    "build/goal-r1-fal-bounds-c/old-write/result.log": "a65fd39270a5e570af671a106bdc8f51a912b544ab0016b20e3e01ef9b5616c0",
+    "build/goal-r1-fal-bounds-c/erase/verify.py": "05385483ab8957a68d9ddc9f8f6d029dbd7e0c281e138ab2a16526d179d272e9",
+    "build/goal-r1-fal-bounds-c/erase/results.json": "313a2ab5c3b3735eecf37c1025545936d2e056624530a4fbd2631fa605957fcf",
+    "build/goal-r1-fal-bounds-c/erase/verification.log": "378e4812e31380b3206800eff8094651d4e078804a6cd03993ec59a80e38c9c7",
+    "build/goal-r1-fal-bounds-c/old-erase/verify.py": "0ee6599c11ec080f8b4cd0fdae0b0ce6c594addabd39244e9d117dd71979fe47",
+    "build/goal-r1-fal-bounds-c/old-erase/native_partition_erase.h": "b113d468b9329c1561a8c9ced53a9694761c8ae2a58c5a57e8b506ff36f68e44",
+    "build/goal-r1-fal-bounds-c/old-erase/result.log": "545b35a2359198b9e1ef98a4ea814dda971af45c2754ee5fc5149e9a959242f8"
+  }
+}

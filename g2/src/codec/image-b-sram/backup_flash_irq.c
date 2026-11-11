@@ -1,7 +1,8 @@
 /* SPDX-License-Identifier: MIT
- * Image-B flash interrupt 0x10007138. Native reads status once and reads
- * the two acknowledgement registers conditionally; Ghidra omitted the
- * volatile reads because their values are not returned.
+ * Image-B flash interrupt 0x10007138.
+ * Evidence: corpus image_b_sram/functions-000.jsonl gx8002_flash_interrupt
+ * @ 0x10007138 (34 B sha b58c520e…); native reads status + conditional ACK
+ * regs (headless decomp omitted volatiles — disasm restores them).
  */
 #include <stdint.h>
 

@@ -11,3 +11,7 @@ volatile uint16_t r1_connection_field10
  __attribute__((section(".r1.connection.field10"),aligned(2)))=UINT16_MAX;
 uint32_t r1_phone_connection_handle_get(void) { return r1_connection_field8; }
 uint32_t r1_glasses_connection_handle_get(void) { return r1_connection_field10; }
+
+/* Native 0x4d584 preserves the full input return register while storing low16. */
+uint32_t r1_conn_field6_set(uint32_t value)
+{ r1_connection_field6=(uint16_t)value;return value; }

@@ -43,19 +43,19 @@ extern void audio_uart_page_43f506(void *obj, int32_t w);                   /* s
 extern void audio_uart_page_43f568(void *obj, int32_t h);                   /* set_height */
 extern void audio_uart_page_43f66c(void *obj);                              /* update_layout */
 extern uint32_t audio_uart_page_44104c(uint32_t rgb);                       /* lv_color_hex */
-extern void audio_uart_page_44120e(void *obj, int32_t v, uint32_t selector); /* pad_top */
-extern void audio_uart_page_44121c(void *obj, int32_t v, uint32_t selector); /* pad_bottom */
-extern void audio_uart_page_44122a(void *obj, int32_t v, uint32_t selector); /* pad_left */
-extern void audio_uart_page_441238(void *obj, int32_t v, uint32_t selector); /* pad_right */
+extern void lv_obj_set_style_pad_top(void *obj, int32_t v, uint32_t selector); /* pad_top */
+extern void lv_obj_set_style_pad_bottom(void *obj, int32_t v, uint32_t selector); /* pad_bottom */
+extern void lv_obj_set_style_pad_left(void *obj, int32_t v, uint32_t selector); /* pad_left */
+extern void lv_obj_set_style_pad_right(void *obj, int32_t v, uint32_t selector); /* pad_right */
 extern void audio_uart_page_44127e(void *obj, uint32_t color, uint32_t selector); /* bg_color */
 extern void audio_uart_page_44129e(void *obj, uint32_t opa, uint32_t selector);   /* bg_opa */
 extern void audio_uart_page_4412ec(void *obj, uint32_t color, uint32_t selector); /* border_color */
 extern void audio_uart_page_44130c(void *obj, uint32_t opa, uint32_t selector);   /* border_opa */
-extern void audio_uart_page_44131c(void *obj, int32_t w, uint32_t selector);      /* border_width */
+extern void lv_obj_set_style_border_width(void *obj, int32_t w, uint32_t selector);      /* border_width */
 extern void audio_uart_page_4413ce(void *obj, uint32_t opa, uint32_t selector);   /* image_opa */
 extern void audio_uart_page_44140e(void *obj, uint32_t color, uint32_t selector); /* text_color */
 extern void audio_uart_page_44143e(void *obj, uint32_t font, uint32_t selector);  /* text_font */
-extern void audio_uart_page_44146a(void *obj, int32_t r, uint32_t selector);      /* radius */
+extern void lv_obj_set_style_radius(void *obj, int32_t r, uint32_t selector);      /* radius */
 extern void style_prop_2d_441478(void *obj, uint32_t value, uint32_t selector);   /* style prop 0x2d */
 extern uint32_t audio_uart_page_44e368(void *obj, uint32_t mode);           /* scrollbar_mode */
 extern uint32_t audio_uart_page_44e3ca(void *obj, uint32_t dir);            /* scroll_dir */
@@ -128,7 +128,7 @@ static const char *menu_item_text(int32_t i)
     return g2_menu_display_items[i].text;
 }
 
-/* Row icon (child 0): the item image, or a 20x20 grey rounded placeholder. */
+/* Row icon (child 0): the item image, or a 20x20 grey rounded default. */
 void *menu_item_icon_create_462ea8(void *parent, int32_t index)
 {
     void *img = audio_uart_page_498668(parent);
@@ -137,7 +137,7 @@ void *menu_item_icon_create_462ea8(void *parent, int32_t index)
         audio_uart_page_43f568(img, 20);
         audio_uart_page_44127e(img, audio_uart_page_44104c(0x444444u), 0u);
         audio_uart_page_44129e(img, 0xffu, 0u);
-        audio_uart_page_44146a(img, 4, 0u);
+        lv_obj_set_style_radius(img, 4, 0u);
     } else {
         audio_uart_page_498680(img, g2_menu_display_items[index].icon);
         audio_uart_page_43f0e0(img, 16);
@@ -307,7 +307,7 @@ static void menu_page_init(void *parent)
     audio_uart_page_44127e(g2_menu_focus_anim_obj, audio_uart_page_44104c(0u), 0u);
     audio_uart_page_44129e(g2_menu_focus_anim_obj, 0xffu, 0u);
     audio_uart_page_4412ec(g2_menu_focus_anim_obj, audio_uart_page_44104c(0u), 0u);
-    audio_uart_page_44131c(g2_menu_focus_anim_obj, 0, 0u);
+    lv_obj_set_style_border_width(g2_menu_focus_anim_obj, 0, 0u);
     style_pad_all_460128(g2_menu_focus_anim_obj, 0, 0u);
 
     g2_menu_frame_obj = audio_uart_page_43de82(g2_menu_focus_anim_obj);
@@ -321,15 +321,15 @@ static void menu_page_init(void *parent)
     (void)audio_uart_page_44e368(g2_menu_frame_obj, LV_SCROLLBAR_MODE_OFF);
     audio_uart_page_43dfa4(g2_menu_frame_obj, LV_OBJ_FLAG_SCROLLABLE);
     audio_uart_page_44129e(g2_menu_frame_obj, 0u, 0u);
-    audio_uart_page_44146a(g2_menu_frame_obj, 6, 0u);
+    lv_obj_set_style_radius(g2_menu_frame_obj, 6, 0u);
     audio_uart_page_4412ec(g2_menu_frame_obj, audio_uart_page_44104c(0xffffffu), 0u);
-    audio_uart_page_44131c(g2_menu_frame_obj, 1, 0u);
+    lv_obj_set_style_border_width(g2_menu_frame_obj, 1, 0u);
     audio_uart_page_44130c(g2_menu_frame_obj, 0xffu, 0u);
     style_prop_2d_441478(g2_menu_frame_obj, 1u, 0u);
-    audio_uart_page_44120e(g2_menu_frame_obj, 0x13, 0u);
-    audio_uart_page_44121c(g2_menu_frame_obj, 0x13, 0u);
-    audio_uart_page_44122a(g2_menu_frame_obj, 0, 0u);
-    audio_uart_page_441238(g2_menu_frame_obj, 0, 0u);
+    lv_obj_set_style_pad_top(g2_menu_frame_obj, 0x13, 0u);
+    lv_obj_set_style_pad_bottom(g2_menu_frame_obj, 0x13, 0u);
+    lv_obj_set_style_pad_left(g2_menu_frame_obj, 0, 0u);
+    lv_obj_set_style_pad_right(g2_menu_frame_obj, 0, 0u);
 
     g2_menu_list_obj = audio_uart_page_43de82(g2_menu_frame_obj);
     audio_uart_page_43f506(g2_menu_list_obj, width - 0x10);
@@ -338,7 +338,7 @@ static void menu_page_init(void *parent)
     (void)audio_uart_page_44e3ca(g2_menu_list_obj, LV_DIR_VER);
     (void)audio_uart_page_44e368(g2_menu_list_obj, LV_SCROLLBAR_MODE_OFF);
     audio_uart_page_44129e(g2_menu_list_obj, 0u, 0u);
-    audio_uart_page_44131c(g2_menu_list_obj, 0, 0u);
+    lv_obj_set_style_border_width(g2_menu_list_obj, 0, 0u);
     style_pad_all_460128(g2_menu_list_obj, 0, 0u);
     style_prop_2d_441478(g2_menu_list_obj, 1u, 0u);
 
@@ -349,7 +349,7 @@ static void menu_page_init(void *parent)
     audio_uart_page_43f0e0(g2_menu_content_container, 0);
     audio_uart_page_43f142(g2_menu_content_container, 0);
     audio_uart_page_44129e(g2_menu_content_container, 0u, 0u);
-    audio_uart_page_44131c(g2_menu_content_container, 0, 0u);
+    lv_obj_set_style_border_width(g2_menu_content_container, 0, 0u);
     style_pad_all_460128(g2_menu_content_container, 0, 0u);
     audio_uart_page_43dfa4(g2_menu_content_container, LV_OBJ_FLAG_SCROLLABLE);
     (void)audio_uart_lv_style_unlink_450500(g2_menu_content_container, NULL);
@@ -365,7 +365,7 @@ static void menu_page_init(void *parent)
         audio_uart_page_43f142(g2_menu_item_objs[i], g2_menu_item_height * i);
         audio_uart_page_44127e(g2_menu_item_objs[i], audio_uart_page_44104c(0u), 0u);
         audio_uart_page_44129e(g2_menu_item_objs[i], 0u, 0u);
-        audio_uart_page_44131c(g2_menu_item_objs[i], 0, 0u);
+        lv_obj_set_style_border_width(g2_menu_item_objs[i], 0, 0u);
         audio_uart_page_43dfa4(g2_menu_item_objs[i], LV_OBJ_FLAG_SCROLLABLE);
 
         void *row = g2_menu_item_objs[i];

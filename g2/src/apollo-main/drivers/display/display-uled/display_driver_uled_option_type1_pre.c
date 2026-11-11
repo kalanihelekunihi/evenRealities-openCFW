@@ -1,5 +1,9 @@
 /* Apollo type-1 uLED option pre-enable sequence at 0x5bcb6c. */
 #include <stdint.h>
+/* Stock-RAM literals rewritten to named objects (sim-test wave 2026-10-26,
+ * .waves/sim-fix/apply.py): g2ref_X is the linker symbol X. */
+#include <stdint.h>
+extern unsigned char g2ref_g2_a6ng_mspi_handle[] __asm__("g2_a6ng_mspi_handle");
 
 extern const uint8_t *audio_ble_hci_radio_mode_state_50938e(uint32_t);
 extern void display_driver_uled_type1_pin_prepare_5bc690(void);
@@ -17,7 +21,7 @@ uint32_t display_driver_uled_type1_pre_5bcb6c(void) {
     (void)audio_delay(1u);
     *(volatile uint32_t *)(uintptr_t)0x4001044cu = 1u;
     (void)audio_delay(110u);
-    void *device = (void *)(uintptr_t)*(volatile uint32_t *)(uintptr_t)0x20074510u;
+    void *device = (void *)(uintptr_t)*(volatile uint32_t *)(uintptr_t)((uint32_t)(uintptr_t)g2ref_g2_a6ng_mspi_handle);
     (void)audio_uart_font_flash_power(device,0u,1u);
     return 0u;
 }

@@ -1,7 +1,7 @@
 #include <stdint.h>
 
 /* Native 0x3263ec..0x3266ce: complete second connection packet constructor.
- * The ARC DSP operations are preserved as named instructions. Resident radio
+ * The ARC DSP operations are written as C arithmetic. Resident radio
  * effects remain in the selected child providers. */
 extern uint32_t opencfw_em9305_phy_packet_alloc_32d2f0(uint32_t);
 extern uint32_t opencfw_em9305_phy_packet_send_32d32c(uintptr_t,uintptr_t);
@@ -13,66 +13,42 @@ extern uintptr_t opencfw_em9305_radio_address_write_3045e8(uintptr_t,uint32_t,ui
 
 static uint32_t native_mpywhl(uint32_t left,uint32_t right)
 {
-#ifdef __arc__
-uint32_t result;__asm__ volatile("mpywhl %0,%1,%2":"=r"(result):"r"(left),"r"(right):"r58","r59","memory");return result;
-#else
-return (uint32_t)((int64_t)(int32_t)left*(int16_t)right);
-#endif
+return (uint32_t)left*(uint32_t)(int32_t)(int16_t)right;
 }
 static uint32_t native_mpywhul(uint32_t left,uint32_t right)
 {
-#ifdef __arc__
-uint32_t result;__asm__ volatile("mpywhul %0,%1,%2":"=r"(result):"r"(left),"r"(right):"r58","r59","memory");return result;
-#else
-return (uint32_t)((uint64_t)left*(uint16_t)right);
-#endif
+return (uint32_t)left*(uint16_t)right;
 }
 struct native_mac_div_result {uint32_t quotient,low;};
 /* Native 3264c4 MOV R58 precedes the volatile period load at 3264ca.
  * DIVU R1 destination starts as the state address, not the scheduled time;
- * this matters when denominator is zero. The host fallback models a divider
- * that leaves ACC0_LO intact; radix-2 hardware behavior remains a gate. */
+ * that would only show for a zero denominator with STATUS32.DZ clear.
+ * A zero divisor traps: stock sets STATUS32.DZ at startup (0x302b1a) and the
+ * EV_DivZero handler 0x30f170 resets the chip; C division emits the same DIVU.
+ * MetaWare scheduled the accumulator load before the DIVU, so DIVU does not
+ * disturb ACC0 on this core. */
 static struct native_mac_div_result native_divu_macwhul_from_state(
     uint32_t numerator,uintptr_t period_address,uint32_t scheduled,uint32_t state_address)
 {
-#ifdef __arc__
-    uint32_t quotient=state_address,iteration,low,period;
-    __asm__ volatile("mov r58,%4\n\tld %3,[%5]\n\tdivu %0,%6,%3\n\tadd %1,%0,1\n\tmacwhul %2,%3,%1"
-        : "+&r"(quotient),"=&r"(iteration),"=&r"(low),"=&r"(period)
-        : "r"(scheduled),"r"(period_address),"r"(numerator)
-        : "r58","r59","memory");
-    struct native_mac_div_result result={quotient,low};return result;
-#else
     uint32_t period=*(volatile uint32_t *)period_address;
-    uint32_t quotient=period==0u?state_address:numerator/period;
+    (void)state_address;
+    uint32_t quotient=numerator/period;
     struct native_mac_div_result result={quotient,scheduled+(uint32_t)((uint64_t)period*(uint16_t)(quotient+1u))};
     return result;
-#endif
 }
+/* prior: register stock DIVU leaves only for a zero divisor with DZ clear. */
 static uint32_t native_divu_prior(uint32_t numerator,uint32_t denominator,uint32_t prior)
 {
-#ifdef __arc__
-__asm__ volatile("divu %0,%1,%2":"+r"(prior):"r"(numerator),"r"(denominator):"memory");return prior;
-#else
-return denominator==0u?prior:numerator/denominator;
-#endif
+(void)prior;return numerator/denominator;
 }
 static uint32_t native_mpymu(uint32_t left,uint32_t right)
 {
-#ifdef __arc__
-uint32_t result;__asm__ volatile("mpymu %0,%1,%2":"=r"(result):"r"(left),"r"(right):"r58","r59","memory");return result;
-#else
-return (uint32_t)(((uint64_t)left*right)>>32u);
-#endif
+return (uint32_t)(((uint64_t)left*(uint32_t)right)>>32);
 }
 struct product_pair {uint32_t low,high;};
 static struct product_pair native_mpydu(uint32_t left,uint32_t right)
 {
-#ifdef __arc__
-register uint32_t low __asm__("r4"),high __asm__("r5");__asm__ volatile("mpydu r4,%2,%3":"=r"(low),"=r"(high):"r"(left),"r"(right):"r58","r59","memory");struct product_pair p={low,high};return p;
-#else
 uint64_t product=(uint64_t)left*right;struct product_pair p={(uint32_t)product,(uint32_t)(product>>32u)};return p;
-#endif
 }
 
 uint32_t opencfw_em9305_init_registered_3263ec(uintptr_t root)

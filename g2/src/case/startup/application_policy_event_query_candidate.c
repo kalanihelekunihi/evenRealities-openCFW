@@ -5,18 +5,8 @@
 extern void case_policy_scheduler_lock(void); /* 0xbffc */
 extern uint32_t case_policy_scheduler_unlock(void); /* 0xc014 */
 static uint32_t rd(uint32_t a){return *(volatile uint32_t *)(uintptr_t)a;}
-static void wr(uint32_t a,uint32_t v){*(volatile uint32_t *)(uintptr_t)a=v;}
-static __attribute__((noreturn)) void native_fault(void)
-{__asm__ volatile("cpsid i\n1: b 1b");__builtin_unreachable();}
-uint32_t case_policy_event_receive(uint32_t event,uint32_t mask)
-{
-    if(event==0u || (mask>>24)!=0u)native_fault();
-    case_policy_scheduler_lock();
-    uint32_t prior=rd(event);
-    wr(event,prior&~mask);
-    (void)case_policy_scheduler_unlock();
-    return prior;
-}
+/* Dedup (0x0800c44c): case_policy_event_receive is an alias of xEventGroupClearBits (glue/event_clear_task.c). */
+extern uint32_t case_policy_event_receive(uint32_t event,uint32_t mask);
 uint32_t case_policy_event_receive_irq(uint32_t event)
 {
     uint32_t primask;

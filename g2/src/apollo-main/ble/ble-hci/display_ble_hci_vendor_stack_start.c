@@ -46,6 +46,4 @@ uint64_t audio_ble_radio_stack_start_body(void *record,uint32_t unused,
     }
     return ((uint64_t)high<<32)|status;
 }
-__attribute__((naked)) uint64_t audio_ble_radio_stack_start_55c32e(void *record) {
-    __asm volatile("b audio_ble_radio_stack_start_body");
-}
+uint64_t audio_ble_radio_stack_start_55c32e(void *record) __attribute__((alias("audio_ble_radio_stack_start_body")));

@@ -24,7 +24,9 @@ extern uint32_t display_driver_uled_mspi_dma_next_4bfdf4(uint32_t *);
 extern uint32_t display_driver_uled_mspi_pin_control_4c4530(uint32_t, uint32_t);
 
 #define MSPI_REG_BASE UINT32_C(0x40060000)
-#define MSPI_STATE_BASE UINT32_C(0x200523d8)
+/* Fix 46: stock 0x200523d8 = Ambiq g_MSPIState[4] (stride 0x8d0; ours is 4 x 0x8d0 = 0x2340 B). */
+extern unsigned char g2ref_g_MSPIState[] __asm__("g_MSPIState");
+#define MSPI_STATE_BASE ((uint32_t)(uintptr_t)g2ref_g_MSPIState)
 #define MSPI_STATE_STRIDE UINT32_C(0x8d0)
 
 static volatile uint32_t *reg(uint32_t module, uint32_t offset)

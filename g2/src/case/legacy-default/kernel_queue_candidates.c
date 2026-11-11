@@ -42,47 +42,7 @@ uint32_t case_kernel_queue_post(uint32_t queue,const void *item,
     case_kernel_irq_restore(token);
     return result;
 }
-uint32_t case_kernel_queue_send(uint32_t queue,const void *item,
-                                uint32_t timeout,uint32_t mode)
-{
-    if(queue==0u)case_kernel_invariant_failure(4u);
-    if(item==0 && word(queue,0x40u)!=0u)case_kernel_invariant_failure(5u);
-    if(mode==2u && word(queue,0x3cu)!=1u)case_kernel_invariant_failure(6u);
-    if(case_kernel_mode()==0u && timeout!=0u)case_kernel_invariant_failure(7u);
-    uint32_t clock[2]={0u,0u};
-    uint32_t started=0u;
-    for(;;){
-        case_kernel_enter();
-        if(word(queue,0x38u)<word(queue,0x3cu)||mode==2u){
-            uint32_t copied=case_queue_copy_in(queue,item,mode);
-            if(word(queue,0x24u)==0u){
-                if(copied!=0u)case_kernel_yield();
-            }else if(case_queue_wake((uint32_t *)(uintptr_t)(queue+0x24u))!=0u)
-                case_kernel_yield();
-            case_kernel_exit();
-            return 1u;
-        }
-        if(timeout==0u){case_kernel_exit();return 0u;}
-        if(started==0u){case_kernel_timeout_start(clock);started=1u;}
-        case_kernel_exit();
-        case_kernel_scheduler_suspend();
-        case_kernel_enter();
-        volatile int8_t *sendwait=(volatile int8_t *)(uintptr_t)(queue+0x44u);
-        volatile int8_t *recvwait=(volatile int8_t *)(uintptr_t)(queue+0x45u);
-        if(*sendwait==-1)*sendwait=0;
-        if(*recvwait==-1)*recvwait=0;
-        case_kernel_exit();
-        if(case_kernel_timeout_check(clock,&timeout)!=0u)break;
-        if(case_queue_is_active(queue)==0u){
-            case_queue_unlock(queue);
-            (void)case_kernel_scheduler_resume();
-        }else{
-            case_queue_wait(queue+0x10u,timeout);
-            case_queue_unlock(queue);
-            if(case_kernel_scheduler_resume()==0u)case_kernel_yield();
-        }
-    }
-    case_queue_unlock(queue);
-    (void)case_kernel_scheduler_resume();
-    return 0u;
-}
+/* Dedup (0x0800c686): case_kernel_queue_send is an alias of case_policy_task_message_send (startup/application_policy_task_message_send_candidate.c). */
+extern uint32_t case_kernel_queue_send(uint32_t queue,const void *item, uint32_t timeout,uint32_t mode);
+/* Dedup (0x0800c7a8): case_policy_task_message_special (was startup/application_policy_task_message_special_candidate.c). */
+uint32_t case_policy_task_message_special(uint32_t scheduler,const uint32_t *args,uint32_t notify,uint32_t mode,uint32_t meta) __attribute__((alias("case_kernel_queue_post")));

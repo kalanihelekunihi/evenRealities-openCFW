@@ -19,7 +19,7 @@ static _Noreturn void timer_fatal(void)
     (void)opencfw_bl_mask_interrupts();
     WORD(UINT32_MAX) = 0u;
     for (;;)
-        __asm__ volatile("b ." ::: "memory");
+        { }
 }
 
 /* Stock 0x419508: choose the current or wrapped timer list, or report that

@@ -1,7 +1,7 @@
 #include <stdint.h>
 
-void *audio_file_api_mutex
-    __attribute__((section(".g2_ram_200748f4"), used));
+/* audio_file_api_mutex (stock RAM 0x200748f4): alias defined in
+ * storage/file-redirect/file_redirect_mutex_ram.c. */
 volatile uint8_t audio_uart_dashboard_ready
     __attribute__((section(".g2_ram_20074fa5"), used));
 uint8_t audio_uart_dashboard_file_buffer[4096]

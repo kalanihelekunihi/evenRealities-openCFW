@@ -22,7 +22,7 @@ static _Noreturn void flags_fatal(void)
     (void)opencfw_bl_mask_interrupts();
     *(volatile uint32_t *)(uintptr_t)UINT32_MAX = 0u;
     for (;;)
-        __asm__ volatile("b ." ::: "memory");
+        { }
 }
 
 uint32_t opencfw_provider_418d7a(void)

@@ -45,7 +45,7 @@ _Static_assert(offsetof(struct g2_lv_font_glyph_dsc, entry) == 0x1cu, "lv_font_g
 
 /* lv_memset(dst, value, len), stock 0x454746 (name from existing g2/src units). */
 extern void audio_uart_lv_basic_box_clear_454746(void *dst, uint32_t value, uint32_t len);
-extern void audio_uart_lvgl_log(uint32_t level, const char *file, uint32_t line,
+extern void lv_log_add(uint32_t level, const char *file, uint32_t line,
                                 const char *function, const char *format, ...); /* lv_log_add 0x44d25c */
 extern void g2_norflash_lock_46f65e(void);
 extern void g2_norflash_unlock_46f674(void);
@@ -63,7 +63,7 @@ void lv_font_glyph_release_draw_data_4d5664(g2_lv_font_glyph_dsc_t *g_dsc)
     const g2_lv_font_t *font;
 
     if (g_dsc == NULL) {
-        audio_uart_lvgl_log(3u, source, 0x43u, function, assertion, expression, reason);
+        lv_log_add(3u, source, 0x43u, function, assertion, expression, reason);
         for (;;)
             *(volatile uint32_t *)(uintptr_t)UINT32_MAX = 0u; /* LV_ASSERT_HANDLER */
     }

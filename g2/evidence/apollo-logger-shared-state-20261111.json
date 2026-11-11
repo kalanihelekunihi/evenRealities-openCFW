@@ -1,0 +1,51 @@
+{
+  "schema": 1,
+  "target": "Apollo main EasyLogger event handle and transport free head share one C allocation",
+  "stock_evidence": {
+    "pool_initialization_decomp": "g2/research/corpus/apollo-main/ghidra/open-2026-09-29/decomp/0044895e.c",
+    "node_allocation_decomp": "g2/research/corpus/apollo-main/ghidra/open-2026-09-29/decomp/00448a0c.c",
+    "stock_ram_cell": "0x20074570",
+    "stock_layout": "Eight-byte state cell: event-flags handle at +0 and logger free-list head at +4"
+  },
+  "change": "The named g2_audio_log_event_handle now aliases g2_stock_ram_20074570 in the same C translation unit. The separate BSS definition in display_ring_persist_state.c was removed. Existing transport queue and pool-init C continue to use the +4 word of that allocation.",
+  "source_files_sha256": {
+    "g2/src/apollo-main/system/stock-ram/stock_ram_cells.c": "c85c588d7b680b1f8c7e902bca0c4fd8c24bb3ab58d5aa8c927343ad92556bf8",
+    "g2/src/apollo-main/drivers/peripherals/ring-persist/display_ring_persist_state.c": "c7920b04c8d4bc79838f77a5417064429c5ae301739f65286ee6c6ec898ba847"
+  },
+  "symbol_observation": {
+    "previous_elf": "build/g2-touch-pdl-ilo-callback-full-link-20261111/g2-apollo-main/g2-apollo-main.elf",
+    "previous_handle": "0x200a25dc",
+    "previous_transport_state": "0x200b4f50",
+    "current_elf": "build/g2-apollo-logger-shared-state-link-20261111/g2-apollo-main/g2-apollo-main.elf",
+    "current_handle": "0x200b4f50",
+    "current_transport_state": "0x200b4f50",
+    "current_free_head_offset": 4,
+    "current_elf_alias_verified_with_nm": true
+  },
+  "verification": {
+    "sources_check": "make -C g2 sources-check passed; 4888 manifest units, 4549 source files, 1 existing source not built",
+    "focused_source_report": "build/g2-apollo-logger-shared-state-source-20261111/report.json",
+    "focused_source_report_sha256": "97633b4281938bf224fb7d877dae681afed542f73667f90cfb89db39aca4285f",
+    "focused_compiled_units": 2719,
+    "focused_compile_failures": 0,
+    "focused_duplicate_strong_symbols": 0,
+    "focused_link_report": "build/g2-apollo-logger-shared-state-link-20261111/link-report.json",
+    "focused_link_report_sha256": "8c03a157207dcec03b85660d5ee51322271492176cc767ca9889ccf3c9b2332c",
+    "apollo_main_binary_bytes": 3819028,
+    "apollo_main_binary_sha256": "4de7079f346d9610860338c0adf9a57be085c7964a542260bbddae359dfb7680",
+    "changed_bytes_from_previous_candidate": 316
+  },
+  "full_g2_verification": {
+    "source_report": "build/g2-apollo-logger-shared-state-full-source-20261111/report.json",
+    "source_report_sha256": "9e9c47829fcadad8782b8edeb9f1f0ddc3c350effb3e473a655d37a9ac73915b",
+    "compiled_units": 4883,
+    "compile_failures": 0,
+    "duplicate_strong_symbols": 0,
+    "strict_link_report": "build/g2-apollo-logger-shared-state-full-link-20261111/link-report.json",
+    "strict_link_report_sha256": "3be4a81aad59e388183cc518b11025d22889ef6600f0d6aa3f4a35019e7a2b36",
+    "linked_payloads": ["g2-apollo-bootloader", "g2-apollo-main", "g2-case", "g2-codec-a", "g2-codec-b", "g2-em9305", "g2-touch"],
+    "strict_link_passed": true,
+    "source_completeness_proven": false
+  },
+  "qualification": "The same logger state is now reached through the named handle and the transport's base symbol. This corrects one duplicated allocation; the broader Apollo RAM address audit, stock-layout correspondence, physical behavior, and whole-firmware C source completeness remain open."
+}

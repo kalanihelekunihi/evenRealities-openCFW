@@ -1,0 +1,126 @@
+{
+  "schema_version": 1,
+  "scope": "Activity storage in ordinary C; complete activity-storage translation unit has no assembly",
+  "report": "build/sources-goal-r1-activity-store-pure-c/report.json",
+  "comparison_report": "build/sources-goal-r1-activity-bucket-pure-c/report.json",
+  "stock_entry": "0x5aa14",
+  "stock_size": 246,
+  "audit": {
+    "compiled_units": 862,
+    "unchanged_prior_nongenerated_objects": 851,
+    "changed_prior_nongenerated_objects": [
+      "r1/src/application/runtime/native_activity_storage.c"
+    ],
+    "application_imports": 63,
+    "bootloader_imports": 22,
+    "manifest_change": "explicit -munaligned-access for activity-storage unit",
+    "source_plan_and_cache_layout_unchanged": true,
+    "new_state_definitions": 0,
+    "whole_activity_storage_unit_has_no_inline_assembly": true,
+    "bucket_C_body_bytes_and_relocations_unchanged": true,
+    "shared_diagnostic_strings_unchanged": true,
+    "final_object_equals_tested_object": true
+  },
+  "direct": {
+    "stock_C_comparisons": 41627,
+    "native_instruction_bytes_executed": 246,
+    "cache_and_payload_memory_width_order_values_match": true,
+    "packed_field_wrap_live_provider_mutations_and_aliases": true,
+    "all_144_rows_and_invalid_bucket_domains": true,
+    "void_return_caller_scratch_private_frames_APSR_and_physical_activity_excluded": true
+  },
+  "real_calendar_activity_pipeline": {
+    "real_RTC_calendar_bucket_comparisons": 936,
+    "actual_activity_parent_real_calendar_comparisons": 2594,
+    "actual_C_RTC_offset_calendar_forward_and_state_owners": true,
+    "independent_wrapped_ten_minute_oracle": true,
+    "activity_cache_packed_updates_and_logging_match": true,
+    "only_logging_modeled": true,
+    "whole_activity_unit_C_without_forced_parent_alignment": true
+  },
+  "compiled_defects_rejected": [
+    {
+      "defect": "guard",
+      "rejected": true
+    },
+    {
+      "defect": "target",
+      "rejected": true
+    },
+    {
+      "defect": "steps-mask",
+      "rejected": true
+    },
+    {
+      "defect": "middle-mask",
+      "rejected": true
+    },
+    {
+      "defect": "upper-mask",
+      "rejected": true
+    },
+    {
+      "defect": "separate-writes",
+      "rejected": true
+    },
+    {
+      "defect": "live-timestamp",
+      "rejected": true
+    },
+    {
+      "defect": "steps-width",
+      "rejected": true
+    },
+    {
+      "defect": "multi-log",
+      "rejected": true
+    }
+  ],
+  "contract": [
+    "Null input is inert. Read duration/timestamp for start bucket, then reload timestamp for end bucket. Reject either unsigned bucket>=144.",
+    "Keep independent live mode/diagnostic reads. Cross-bucket records log but update only the start row. Preserve original diagnostic metadata and field order.",
+    "Update low12 bits from sample+4, middle10 from sample+2, upper10 from sample+0. Retain each intermediate packed word and three separate volatile writes, with mask-local wrap and live payload reads.",
+    "Explicit SRAM unaligned-access flag documents the packed helper requirement; no source plan, cache owner or persistent state is added."
+  ],
+  "limits": [
+    "REA246 bytes match locked raw; all246 execute.41627 cases cover every valid row, invalid wide bucket results, field wraps, null, aliases and bucket/mode/logger mutations. Observed cache/payload widths, order and values match.",
+    "936 real-calendar and2594 activity-caller comparisons execute actual C offset, calendar adapter/forward converter, both activity functions and state owners; only logging is modeled. No sample/activity assembly alignment is forced.",
+    "The known direct caller overwrites R0 with4 before the throttle tail call. Void return, caller scratch, private frames and APSR are excluded; indirect/nonstandard ABI consumers are not exhaustively proven. Saved integer/FP state, SP, masks, FPSCR and guards checked.",
+    "Bucket C code/relocations and shared diagnostic strings remain identical. The whole activity unit now has no inline assembly or old embedded-pool alignment dependency.",
+    "Physical atomicity/concurrency, hardware faults, complete application linking, final startup/scatter integration, physical activity sensors/clock and boot remain unverified."
+  ],
+  "evidence_files": {
+    "build/sources-goal-r1-activity-store-pure-c/report.json": "fe2c408d7486d3d3a3b68d345aa9e95e8f7349db4f7b5d4a7d8156efbcb58c01",
+    "build/sources-goal-r1-activity-bucket-pure-c/report.json": "c4433c50eb3a5c6a1b53d487d79d831750edc6a6ff6f85e3a2a26547e94ea7b7",
+    "r1/src/application/runtime/native_activity_storage.c": "ff7469088c974ffdc3c22c831f3465c2cb2fe19025ca4b5a5b626f1861223d59",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-activity-store-pure-c/r1/r1-application/r1__src__application__runtime__native_activity_storage.c.o": "99bd023649a9a4832a7c3d1ed2cbbc1a1079dee35e5fae983abdbf3facf21298",
+    "r1/src/sources.json": "ac403598295564e9a4af5013cd797a60793cf6c47dfac150c902be6d400a7093",
+    "tools/build/source-plan.json": "eeb516e31b3310fb0718f36908977f8125723f7c5e0e86cd6744395826259a4d",
+    "r1/src/config/runtime/native_health_cache.ld": "eb8f131c489cd818d4e36718718fa1989719ca0170f164541a1a5bf56dfc1ec3",
+    "r1/src/application/board/native_battery_memory.h": "e646c981681787c87d8088f663239c9006beb4e4c1827e95854093f0628528b6",
+    "r1/src/application/runtime/native_health_event_consumers.c": "a1895c60d12daaf2dc70322894981e1a79062edfcf8cfcb96f5b6e17e5661eef",
+    "build/goal-r1-activity-store-pure-c/audit.json": "4c857c0d2c3e894961dc5f65d102fd9eed0b360c6cf7f7ff31fbdc2ee2c6a46e",
+    "build/goal-r1-activity-store-pure-c/negative.json": "a6ec0e492808dadb9ee8d7474b57a4c64842ef986228e3f8d5266677ce483c0b",
+    "build/goal-r1-activity-store-pure-c/audit.py": "a3df14ff82ffad32ea29a2820a062b8a5969853374a8671c9659c0d37a8891e0",
+    "build/goal-r1-activity-store-pure-c/source.elf": "0d55c93fec3aec92b381ca9b2ddfaa829653ac34cb64e94b4d5a26dbaa37c37e",
+    "build/goal-r1-activity-store-pure-c/negative.py": "7001cf7c4f990d0af6a43c32087e8fc17038129ecbaf50d35232013291872186",
+    "build/goal-r1-activity-store-pure-c/callers.py": "b6a62b2ebda30960e2fe6cfa7ed83361cc36e186eaa6630729bfe6ac5a688a41",
+    "build/goal-r1-activity-store-pure-c/negative.log": "979e4612c1cca6582b1363a27b40504ac9ea115074d1eb2f7d3d38179fd2b313",
+    "build/goal-r1-activity-store-pure-c/source.o": "99bd023649a9a4832a7c3d1ed2cbbc1a1079dee35e5fae983abdbf3facf21298",
+    "build/goal-r1-activity-store-pure-c/results.json": "60d2b7af583d4456495c881861e28aff4046fa470e1cacbee13ef55d14cdfe33",
+    "build/goal-r1-activity-store-pure-c/pipeline.log": "ecc842b1a9f4929263dd71b583fc6115bbee31861473c3e1bdff804f4d0469a2",
+    "build/goal-r1-activity-store-pure-c/rea.json": "162edec1b90cf3d4dcbe5dd49299d0c3b1ffeba76c76aef5ec1a14a80af92c59",
+    "build/goal-r1-activity-store-pure-c/pipeline.py": "241c69b6ea8bb0afb8d1aeb1b76dc758761cc286b1c325feb2ffd9baa0475322",
+    "build/goal-r1-activity-store-pure-c/sources-check.log": "b6ab468f43815a75634eab2762e209dbee8ab94c4cc3d601fded4210b6833f2a",
+    "build/goal-r1-activity-store-pure-c/callers.json": "b897d9779a28396a4fa1fcc50e550d703078272279765c00722a5166fb344bb1",
+    "build/goal-r1-activity-store-pure-c/record.py": "2ae9bbf634e6f9e701e3852493193fd52cd2b84eb8728f36b5b229c3ca06ee04",
+    "build/goal-r1-activity-store-pure-c/manifest-before.json": "c641a01569c9d39f05bc4bce48d9b5ca6ba6bf8f501b0eabae9dbbbd61b01efb",
+    "build/goal-r1-activity-store-pure-c/verify.py": "0fc30a9960c24cd9dae4a49555bf153c7c43bd27fcd5278b4528c75084bc59f9",
+    "build/goal-r1-activity-store-pure-c/verification.log": "cae1b7453efd2c8b7ec5117012f8e59392f6df90a3322d43e28ee7ffc799e7c3",
+    "build/goal-r1-activity-store-pure-c/source-before.c": "b66a0ff91f1186b3edb8a1b1125d84ba4780fc494c7d34cdff4f4b5f5707ed29",
+    "build/goal-r1-activity-store-pure-c/build.log": "c3a9dca274d78a6a162b06640eb4e57862967e79bae29f5cde829cf718661a6f",
+    "build/goal-r1-activity-store-pure-c/pipeline/test.ld": "80ce96eebf4adf72c8b42c250d022b5cf73e55db08c5047d2196cbcb3e199291",
+    "build/goal-r1-activity-store-pure-c/pipeline/source.elf": "f753ceac07d40bc7372932dd960c80ad60424076bb8bf69732598487c81c1f17",
+    "build/goal-r1-activity-store-pure-c/pipeline/results.json": "6257c57e6f660b539e5a70e9b6d3a52e1d822cce4be2c3d5583e41716f900070"
+  }
+}

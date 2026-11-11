@@ -1,0 +1,126 @@
+{
+  "schema_version": 1,
+  "normal_report": "build/sources-goal-r1-health-engine-modes-c/report.json",
+  "direct": {
+    "pairs": 9852,
+    "fault_pairs": 43,
+    "by_entry": {
+      "0x723ec": 160,
+      "0x72410": 160,
+      "0x72650": 160,
+      "0x726fa": 160,
+      "0x7271c": 160,
+      "0x8ecd8": 7168,
+      "0x8ec7c": 1150,
+      "0x916c8": 734
+    },
+    "digest": "ed51cd7b8262405d508f55351a7ba81d987691a6de074562856ccfd800bcad2e",
+    "elf": "build/goal-r1-health-engine-modes-c/source-61854.elf",
+    "elf_sha256": "86d6b5b66a88a62b44fc0861e7ce01d251aaf610b8cf70a7be677224940663ab",
+    "undefined": [],
+    "native_link_bindings": []
+  },
+  "checked": {
+    "pairs": 48,
+    "null_guards": 12,
+    "void_return": true
+  },
+  "lifecycle": {
+    "pairs": 653,
+    "entry_counts": {
+      "init": 376,
+      "reset": 36,
+      "event": 241
+    },
+    "digest": "8f863d7335da0204c2d67cb7d97944391bd764c0b516bcbc9d56d639c951a21b",
+    "native_branch_hits": {
+      "0x4bee2": 88,
+      "0x4bef8": 87,
+      "0x4bf00": 3,
+      "0x4bf84": 192,
+      "0x4bfde": 96
+    },
+    "lower_bindings": {
+      "gomore_primitives_size_736": 427808,
+      "gomore_primitives_size_14816": 427034,
+      "r1_health_lifecycle_authorize_native": 438908,
+      "r1_health_lifecycle_restore_native": 438192,
+      "r1_health_lifecycle_profile_native": 437240,
+      "r1_health_lifecycle_engine_initialize_native": 458400,
+      "gomore_primitives_noop_91080": 594048,
+      "r1_gomore_authorization_dispatch_native": 300048,
+      "r1_time_backend_timestamp": 568740,
+      "r1_subscriber_register": 569228,
+      "r1_structured_log_mode_get": 595180,
+      "r1_structured_log_format": 595512,
+      "nrf_log_frontend_std_0": 498112,
+      "nrf_log_frontend_std_1": 498120,
+      "nrf_log_frontend_std_2": 498134,
+      "r1_native_memory_move": 161628
+    },
+    "elf": "build/goal-r1-health-engine-modes-c/lifecycle/source-62286.elf",
+    "elf_sha256": "e8f16798427d033ed81928dfb9f68edae5b0c02cd08eea77afe443bda7369387",
+    "void_return": true
+  },
+  "negative_controls": [
+    {
+      "control": "narrow-full-word",
+      "rejected": true,
+      "compiled": true,
+      "source_sha256": "67eeeb13c2308c21a87ca1453d24e5364cb9f0f618c0331ba373901cdd30e25a"
+    },
+    {
+      "control": "low-byte-five",
+      "rejected": true,
+      "compiled": true,
+      "source_sha256": "36d081b619df6f029796e0f96346369b46f4586ee4eda9735fc24bd05e55558b"
+    },
+    {
+      "control": "cached-context",
+      "rejected": true,
+      "compiled": true,
+      "source_sha256": "0551cdf4ec37e80776ed7acaa15006288b5cbc9ac358b8b78455778e57424809"
+    },
+    {
+      "control": "accept-106",
+      "rejected": true,
+      "compiled": true,
+      "source_sha256": "57def6928376ecf1753955a5a398a8369aff1742f78d923561dfb663edcedf69"
+    }
+  ],
+  "source_only_mode_subset_link": true,
+  "source_only_lifecycle_link": false,
+  "hardware_tested": false,
+  "removed_application_imports": [
+    "r1_health_lifecycle_mode_native",
+    "r1_health_lifecycle_profile_apply_native"
+  ],
+  "sha256": {
+    "build/sources-goal-r1-health-engine-modes-c/report.json": "eda8a3b78d16e1cce7a442a3d15d963ac997e9d9e5bf25f14f578b952587c2ad",
+    "r1/src/application/runtime/native_health_engine_modes.h": "74ad048fc6cfdc667f474928864cdb30f69f732324e11f6c00448229852f5889",
+    "r1/src/sources.json": "e1effb4674fa7e5a132da8b6f5e1d89d441c0703523ab4818a9f6ee98c835a55",
+    "tools/build/source-plan.json": "43281e3850f6c7b83c5616e5968c4939993501810057ca3deaeea85eaae351ba",
+    "build/goal-r1-health-engine-modes-c/source-61854.elf": "86d6b5b66a88a62b44fc0861e7ce01d251aaf610b8cf70a7be677224940663ab",
+    "r1/src/application/runtime/native_health_engine_modes.c": "ecf959096c17f70c54550aebc13c64eaba0be1553214cef2c1f537e5cbe79a05",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-health-engine-modes-c/r1/r1-application/r1__src__application__runtime__native_health_engine_modes.c.o": "e5f9eb671123dec0ce009b8154f1349b551b1252013a43d076d94e5471596be0",
+    "r1/src/application/runtime/native_health_lifecycle.c": "41002e2679a7840f753f83148957b88f0f660c38bd40dd56246e904920815e41",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-health-engine-modes-c/r1/r1-application/r1__src__application__runtime__native_health_lifecycle.c.o": "b67ecb28db262fa1977eb079862ba2eb09ce892bc65ce5a03777fe3dc1dd48a4",
+    "r1/src/vendor/gomore_primitives/gomore_primitives.c": "251a759214ea630eff92a91b680e517bdb09b406e555cc342ec75a605c7ab7fb",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-health-engine-modes-c/r1/r1-application/r1__src__vendor__gomore_primitives__gomore_primitives.c.o": "9311340f5e022ce4b86886551c6cde15433f55f7b256869a2f084f0253513efe",
+    "r1/src/application/runtime/native_gomore_dispatch.c": "c0b92ec5f17be6dd473100120b030fd8c57d70fd765b79750c404656324422c6",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-health-engine-modes-c/r1/r1-application/r1__src__application__runtime__native_gomore_dispatch.c.o": "1413ffed6f76804b526b9d9e2927fe1d9a76ec45bf397e322da5ac68e95026b0",
+    "build/goal-r1-health-engine-modes-c/verify.py": "396ddd5221655edb427407b36e7f756bd0b0bab031e71ce3a36607998b9156ad",
+    "build/goal-r1-health-engine-modes-c/checked.py": "8fb7cef50d6d0ccd6d5bad0723afab34d46ce6fbcec75625e6ce1eeb733435c2",
+    "build/goal-r1-health-engine-modes-c/lifecycle.py": "c5fb2bd81735a13f8c55b7eab0af50e70fd7b005eb47ae541eaaa3901b9b7258",
+    "build/goal-r1-health-engine-modes-c/negative.py": "36b2446f050715f0b48b497ad1fc7fef997668410ec55dba16a9bab2afa0ca74",
+    "build/goal-r1-health-engine-modes-c/sources-check.log": "f6e6de5812b8b6253bb19854778d166ea398ccc2362c793b7b20aa6d158f0201",
+    "build/goal-r1-health-engine-modes-c/rea-723ec.json": "154ecfcb16bcc5bbbac5d9969e41327ff8429f015954350e4a6010f50899fe17",
+    "build/goal-r1-health-engine-modes-c/rea-72410.json": "87a0ef305ecef8174f47fad6631a65478b1bd69511f4934406f5992034db7d33",
+    "build/goal-r1-health-engine-modes-c/rea-72650.json": "79c378db14a507e04ba9fb14fba90c66c58a3e6d25a96533697076b28d01b2f7",
+    "build/goal-r1-health-engine-modes-c/rea-726fa.json": "46c69fb2a993f47f03910addd2cf060ea0e30dfe88b6ca7a9da5915e8aae167c",
+    "build/goal-r1-health-engine-modes-c/rea-7271c.json": "9deba5c9fb4559af256b1eda030afac6ce972b972cafe740d415610d01229819",
+    "build/goal-r1-health-engine-modes-c/rea-8ecd8.json": "2a5c786ebf4228e4a0cca0ab6f4e7f8dd86e75312ccbc408e5c341aa8c3fb927",
+    "build/goal-r1-health-engine-modes-c/rea-8ec7c.json": "1166fab3766fce50068a25733d3470a49d28a8830ed1f04363d0cd9946fe9003",
+    "build/goal-r1-health-engine-modes-c/rea-916c8.json": "e201315e3c87dbcd285f7d0fa5e8a5082e995804ee0a64663dbc41af33f464d4"
+  }
+}

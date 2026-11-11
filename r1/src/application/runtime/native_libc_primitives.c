@@ -1,14 +1,14 @@
 #include <stdint.h>
-/* Observed native state address. Initial seed/startup ownership remains a
- * separate integration gate; callers may seed this recurrence explicitly. */
-static volatile uint32_t *const random_state=(volatile uint32_t *)0x20007db0u;
+/* The stock state occupied 0x20007db0. The source linker now places Goodix
+ * workspace there, so the C runtime owns a relocatable seed word. */
+static volatile uint32_t random_state;
 uint32_t r1_native_rand(void)
 {
- uint32_t next=*random_state*UINT32_C(0x41c64e6d)+UINT32_C(12345);
- *random_state=next;
+ uint32_t next=random_state*UINT32_C(0x41c64e6d)+UINT32_C(12345);
+ random_state=next;
  return next>>1;
 }
-void r1_native_srand(uint32_t seed){*random_state=seed;}
+void r1_native_srand(uint32_t seed){random_state=seed;}
 /* The unsigned >= 'A' branch follows 0x28000 BCC, including malformed input.
  * Frozen pseudocode's strict comparison is not used as this contract. */
 uint32_t r1_native_scanf_digit(uint32_t character,uint32_t radix)

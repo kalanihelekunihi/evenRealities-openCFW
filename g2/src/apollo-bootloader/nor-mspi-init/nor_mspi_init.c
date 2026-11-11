@@ -37,17 +37,18 @@ _Static_assert(offsetof(opencfw_mspi_config_t, tcb) == 4,
 _Static_assert(offsetof(opencfw_mspi_config_t, clock_on_d4) == 8,
                "MSPI clock option offset");
 
-extern uint32_t opencfw_hal_power_control(uint32_t handle, uint32_t state,
+extern uint32_t am_hal_mspi_initialize(uint32_t module, void **handle_out);
+extern uint32_t am_hal_mspi_power_control(uint32_t handle, uint32_t state,
                                           uint32_t retain);
-extern uint32_t opencfw_hal_mspi_configure(uint32_t handle,
+extern uint32_t am_hal_mspi_configure(uint32_t handle,
                                            const opencfw_mspi_config_t *config);
-extern uint32_t opencfw_hal_mspi_device_configure(uint32_t handle,
+extern uint32_t am_hal_mspi_device_configure(uint32_t handle,
                                                   const void *device_config);
-extern uint32_t opencfw_hal_mspi_enable(uint32_t handle);
-extern uint32_t opencfw_hal_mspi_deinitialize(uint32_t handle);
-extern uint32_t opencfw_hal_mspi_interrupt_clear(uint32_t handle,
+extern uint32_t am_hal_mspi_enable(uint32_t handle);
+extern uint32_t am_hal_mspi_deinitialize(uint32_t handle);
+extern uint32_t am_hal_mspi_interrupt_clear(uint32_t handle,
                                                  uint32_t mask);
-extern uint32_t opencfw_hal_mspi_interrupt_enable(uint32_t handle,
+extern uint32_t am_hal_mspi_interrupt_enable(uint32_t handle,
                                                   uint32_t mask);
 extern uint32_t opencfw_hal_mspi_control_latency(uint8_t enabled);
 extern uint32_t opencfw_publish_mspi_mode(uint32_t module, uint32_t mode);
@@ -56,7 +57,7 @@ extern uint32_t opencfw_read_mspi_register_id(uint32_t register_id,
 extern void opencfw_bl_interrupt_priority(uint32_t interrupt,
                                           uint32_t priority);
 extern void opencfw_bl_interrupt_enable(uint32_t interrupt);
-extern uint32_t opencfw_bl_irq_guard_initialize(void);
+extern uint32_t am_hal_interrupt_master_enable(void);
 extern void opencfw_bl_log(uint32_t level, const char *module,
                            const char *file, const char *function,
                            uint32_t line, const char *format, ...);
@@ -74,29 +75,6 @@ static const char interrupt_enable_failed[] =
     "Error - Failed to enable interrupt .\n";
 static const char initialized[] = "MX25U25643G mSPI interface initialized.";
 
-uint32_t opencfw_provider_424a5a(uint32_t module, void **handle_out)
-{
-    if (module >= OPENCFW_MSPI_MODULE_COUNT)
-        return OPENCFW_STATUS_OUT_OF_RANGE;
-    if (handle_out == NULL)
-        return OPENCFW_STATUS_INVALID_ARG;
-
-    volatile uint32_t *const state = (volatile uint32_t *)(uintptr_t)
-        (OPENCFW_MSPI_STATE_BASE + module * OPENCFW_MSPI_STATE_STRIDE);
-    if ((int32_t)(state[0] << 7) < 0)
-        return OPENCFW_STATUS_INVALID_OPERATION;
-
-    state[0] = (state[0] & UINT32_C(0xff000000)) | UINT32_C(0x01000000);
-    state[0] = (state[0] & UINT32_C(0xff000000)) | UINT32_C(0x00bebebe);
-    state[1] = module;
-    *(volatile uint8_t *)(uintptr_t)((uintptr_t)state + 0x0cu) = 0u;
-    *(volatile uint32_t *)(uintptr_t)((uintptr_t)state + 0x18u) = 0u;
-    *(volatile uint8_t *)(uintptr_t)((uintptr_t)state + 0x8c9u) = 7u;
-    *(volatile uint32_t *)(uintptr_t)((uintptr_t)state + 0x8ccu) = 8u;
-    *handle_out = (void *)state;
-    return 0u;
-}
-
 uint32_t opencfw_provider_420254(uint32_t module,
                                  const void *device_config,
                                  void **current_device_out,
@@ -108,14 +86,14 @@ uint32_t opencfw_provider_420254(uint32_t module,
     if (slot[0x0cu] != 0u)
         return UINT32_MAX;
 
-    uint32_t status = opencfw_provider_424a5a(module,
+    uint32_t status = am_hal_mspi_initialize(module,
         (void **)(uintptr_t)OPENCFW_MSPI_HANDLE_SLOT);
     if (status != 0u)
         return status;
 
     const uint32_t handle = *(volatile const uint32_t *)(uintptr_t)
         OPENCFW_MSPI_HANDLE_SLOT;
-    status = opencfw_hal_power_control(handle, 0u, 0u);
+    status = am_hal_mspi_power_control(handle, 0u, 0u);
     if (status != 0u) {
         opencfw_bl_log(1u, log_module, source_file, init_function, 0x22au,
                        power_failed);
@@ -128,29 +106,29 @@ uint32_t opencfw_provider_420254(uint32_t module,
         .clock_on_d4 = 0u,
         .reserved = {0u, 0u, 0u}
     };
-    status = opencfw_hal_mspi_configure(handle, &base_config);
+    status = am_hal_mspi_configure(handle, &base_config);
     if (status != 0u) {
         opencfw_bl_log(1u, log_module, source_file, init_function, 0x233u,
                        configure_failed);
-        (void)opencfw_hal_mspi_deinitialize(handle);
+        (void)am_hal_mspi_deinitialize(handle);
         return status;
     }
 
     const void *const config = device_config != NULL ? device_config :
         (const void *)(uintptr_t)OPENCFW_DEFAULT_DEVICE;
-    status = opencfw_hal_mspi_device_configure(handle, config);
+    status = am_hal_mspi_device_configure(handle, config);
     if (status != 0u) {
         opencfw_bl_log(1u, log_module, source_file, init_function, 0x23fu,
                        device_configure_failed);
-        (void)opencfw_hal_mspi_deinitialize(handle);
+        (void)am_hal_mspi_deinitialize(handle);
         return status;
     }
 
-    status = opencfw_hal_mspi_enable(handle);
+    status = am_hal_mspi_enable(handle);
     if (status != 0u) {
         opencfw_bl_log(1u, log_module, source_file, init_function, 0x246u,
                        enable_failed);
-        (void)opencfw_hal_mspi_deinitialize(handle);
+        (void)am_hal_mspi_deinitialize(handle);
         return status;
     }
 
@@ -159,11 +137,11 @@ uint32_t opencfw_provider_420254(uint32_t module,
     uint32_t ignored_register_value = 0u;
     (void)opencfw_read_mspi_register_id(0x67u, &ignored_register_value);
 
-    status = opencfw_hal_mspi_interrupt_clear(handle,
+    status = am_hal_mspi_interrupt_clear(handle,
                                                OPENCFW_MSPI_INTERRUPTS);
     if (status != 0u)
         return 1u;
-    status = opencfw_hal_mspi_interrupt_enable(handle,
+    status = am_hal_mspi_interrupt_enable(handle,
                                                 OPENCFW_MSPI_INTERRUPTS);
     if (status != 0u) {
         opencfw_bl_log(1u, log_module, source_file, init_function, 0x269u,
@@ -173,7 +151,7 @@ uint32_t opencfw_provider_420254(uint32_t module,
 
     opencfw_bl_interrupt_priority(0x15u, 4u);
     opencfw_bl_interrupt_enable(0x15u);
-    (void)opencfw_bl_irq_guard_initialize();
+    (void)am_hal_interrupt_master_enable();
 
     volatile uint32_t *const record =
         (volatile uint32_t *)(uintptr_t)OPENCFW_MSPI_SLOT_RECORDS;

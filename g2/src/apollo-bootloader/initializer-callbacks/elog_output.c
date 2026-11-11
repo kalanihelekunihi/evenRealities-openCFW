@@ -75,13 +75,16 @@ void opencfw_boot_elog_lock(void) {if(B(0x200267f2)){opencfw_bl_service_wake();B
 void opencfw_boot_elog_unlock(void) {if(B(0x200267f2)){opencfw_bl_service_sleep();B(0x200267f4)=0;}else B(0x200267f3)=0;}
 /* Native 0x417b7c changes the logger lock mode and synchronizes the
  * existing active-lock flag with the service mutex when the mode is enabled. */
-void opencfw_boot_elog_set_lock_mode(uint8_t mode) {
- B(0x200267f2)=mode;
+void opencfw_boot_elog_set_lock_mode(uint32_t mode) {
+ B(0x200267f2)=(uint8_t)mode;
  if(B(0x200267f2)){
   if(!B(0x200267f4) && B(0x200267f3))opencfw_bl_service_wake();
   else if(B(0x200267f4) && !B(0x200267f3))opencfw_bl_service_sleep();
  }
 }
+/* The elog_init path (initializer_callbacks.c, stock 0x41733c) calls 0x417b7c
+ * under this name; it used to carry an identical second body. */
+__typeof__(opencfw_boot_elog_set_lock_mode) opencfw_boot_services_reset __attribute__((alias("opencfw_boot_elog_set_lock_mode")));
 uint32_t opencfw_boot_elog_tag_level(const char *tag) {
  if(!tag)opencfw_boot_elog_assert("tag != ((void *)0)","elog_get_filter_tag_lvl",481);
  uint32_t level=5;
@@ -299,3 +302,9 @@ const char *elog_port_get_time(void){
  opencfw_boot_elog_snprintf((char *)(uintptr_t)0x20026f18,28,"%d",W(0x20027148));
  return (const char *)(uintptr_t)0x20026f18;
 }
+
+/* Stock entry names that branch straight to the provider above. */
+__typeof__(opencfw_boot_elog_output) opencfw_provider_4176ce __attribute__((alias("opencfw_boot_elog_output")));
+__typeof__(opencfw_boot_elog_output) opencfw_bl_logger_output __attribute__((alias("opencfw_boot_elog_output")));
+__typeof__(opencfw_boot_elog_output) opencfw_bl_log __attribute__((alias("opencfw_boot_elog_output")));
+__typeof__(opencfw_boot_elog_output) opencfw_boot_log __attribute__((alias("opencfw_boot_elog_output")));

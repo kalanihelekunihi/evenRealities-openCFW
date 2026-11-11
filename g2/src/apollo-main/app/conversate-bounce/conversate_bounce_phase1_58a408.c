@@ -6,7 +6,7 @@ extern void audio_uart_page_43f142(uint32_t, int32_t);
 extern void audio_uart_lv_anim_init_4503d6(void *);
 extern void audio_uart_lv_anim_values_4506ce(void *, int32_t, int32_t);
 extern void *audio_uart_lv_anim_start_450408(void *);
-extern void audio_uart_lv_anim_path_450672(void);
+extern void lv_anim_path_ease_out(void);
 extern void audio_conversate_bounce_phase2_y_58a598(uint32_t, int32_t);
 extern void audio_conversate_bounce_phase2_done_58a5a4(void *);
 extern uint32_t audio_log_flags(void);
@@ -68,7 +68,7 @@ void audio_conversate_bounce_phase1_done_58a408(const uint8_t *descriptor) {
     animation[1] = (uint32_t)(uintptr_t)audio_conversate_bounce_phase2_y_58a598;
     audio_uart_lv_anim_values_4506ce(animation, start, y);
     animation[12] = 200u;
-    animation[8] = (uint32_t)(uintptr_t)audio_uart_lv_anim_path_450672;
+    animation[8] = (uint32_t)(uintptr_t)lv_anim_path_ease_out;
     animation[4] = (uint32_t)(uintptr_t)audio_conversate_bounce_phase2_done_58a5a4;
     animation[7] = (uint32_t)(uintptr_t)state;
     (void)audio_uart_lv_anim_start_450408(animation);

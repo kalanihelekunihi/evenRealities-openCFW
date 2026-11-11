@@ -11,14 +11,14 @@ extern void audio_uart_display_frame_transfer_5fa13c(const void *, const void *,
                                                      uint32_t, uint32_t);
 extern void audio_uart_ambiq_blend_clear_4b075e(void *);
 extern uint32_t audio_uart_ambiq_submit_4b0c8a(uint32_t);
-extern void audio_uart_lvgl_log(uint32_t, const char *, uint32_t,
+extern void lv_log_add(uint32_t, const char *, uint32_t,
                                 const char *, const char *, ...);
 
 void audio_uart_display_flush_transfer_47366c(uint32_t display_index,
                                                const void *pixels,
                                                uint32_t sync) {
     if (display_index != 0u) {
-        audio_uart_lvgl_log(3u, "display", 0xa1u,
+        lv_log_add(3u, "display", 0xa1u,
                             "display_flush_transfer", "invalid display index");
         __builtin_trap();
     }

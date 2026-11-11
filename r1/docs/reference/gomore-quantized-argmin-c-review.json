@@ -1,0 +1,53 @@
+{
+  "stock_entry": "0x4ec9c",
+  "candidate": "r1_gomore_quantized_argmin_native",
+  "direct": {
+    "pairs": 5744,
+    "fault_pairs": 3,
+    "object_sha256": "1a80e4dd91c9a7100b6f59238936fac43076c53a0d37686852469f4b2edd5ee8",
+    "source_sha256": "c2f96f18b6dac45d24a25a330b3f3eee4998fce745f00ab7e3ba315071915023"
+  },
+  "matcher": {
+    "pairs": 56,
+    "provider_counts": {
+      "stock": {
+        "0x4ec9c": 126,
+        "0x87600": 0,
+        "0x62000": 112,
+        "0x62034": 112,
+        "0x6208c": 56,
+        "0x58a40": 616
+      },
+      "C": {
+        "0x4ec9c": 126,
+        "0x87600": 0,
+        "0x62000": 112,
+        "0x62034": 112,
+        "0x6208c": 56,
+        "0x58a40": 616
+      }
+    }
+  },
+  "qualification": {
+    "candidate_units": 1,
+    "selected_units": 0,
+    "selected_regions": 0
+  },
+  "artifacts": {
+    "r1/src/application/runtime/native_gomore_quantized_argmin.c": "c2f96f18b6dac45d24a25a330b3f3eee4998fce745f00ab7e3ba315071915023",
+    "r1/src/sources.json": "9d64939753c60ee43cd15837a087e95e5836b134ab7f2651da2fca46b2c15ba5",
+    "build/sources-goal-r1-gomore-argmin-final-c/report.json": "b897bce262484567f6f70f869fb57eea7cc9bf842e9028a660dd81808f3fcde8",
+    "build/sources-goal-r1-gomore-argmin-final-c/r1/r1-application/r1__src__application__runtime__native_gomore_quantized_argmin.c.o": "1a80e4dd91c9a7100b6f59238936fac43076c53a0d37686852469f4b2edd5ee8",
+    "build/goal-r1-gomore-argmin-c/rea.json": "0b1a2a14a9fd280e2d7f5da17c9c2fe9f638e28b582f2ff184d41f90130a1826",
+    "build/goal-r1-gomore-argmin-c/verify.py": "882068ee4f51d7e16512d1cf089d711d5fcd2d17e6df9468d1825f86b079f2c0",
+    "build/goal-r1-gomore-argmin-c/results.json": "8dcda3c963a9a109e1212e8eca5bbd4af678f8146e3c94a9dd74010701fc830c",
+    "build/goal-r1-gomore-argmin-c/negative.py": "87decab1587103d5e889e7e1806bb71373112fad4d542f8e5733494e5e5488cd",
+    "build/goal-r1-gomore-argmin-c/negative.json": "106e2641b36cbd218c2a6b2ce45af4ff2550437564f2db4a9f4278aab1c7df87",
+    "build/goal-r1-gomore-argmin-c/qualify.py": "a7f0ae543d26e661c05e346c9015f1ca14cae9c72baf4c82c11128473976046d",
+    "build/goal-r1-gomore-argmin-c/integration.py": "45e05a99d11b1f28f261aa3afcb997fc3174a16e7cfc41cfff947e340dc02b82",
+    "build/goal-r1-gomore-argmin-c/integration-results.json": "a595b96bf60040bb32a5da86c8c96d87523c4f6b86308ce47481081a4ecfe90c",
+    "build/goal-r1-gomore-argmin-c/matcher.py": "96e7b06c14d3bc7bfebedf1f841b19991b63bca9b1579ab2880857b9a1c5ddad",
+    "build/goal-r1-gomore-argmin-c/matcher-results.json": "ba336ddcc378edbd1558d2e875828f7f3e3fb8b289d4432a89219f704d72e5ec"
+  },
+  "prior_objects_unchanged_excluding_checked_api_owner": 697
+}

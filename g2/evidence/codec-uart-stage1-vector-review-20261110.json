@@ -1,0 +1,39 @@
+{
+  "schema": 1,
+  "target": "s200_v2.2.6.10 codec FWPK UART stage 1",
+  "stock": {
+    "bytes": 10240,
+    "sha256": "cbbe85a2d60f5bb805dddb45fa2eac1632bdf0ab80665c040c0892c64074133f"
+  },
+  "source": {
+    "bytes": 9408,
+    "sha256": "62fe70e7ed16360107c057a8d90b368f94dbd8e5b758e6b399613219720f84e3",
+    "vector_table_bytes": 256,
+    "vector_table_matches_stock": true,
+    "trap_entries_match_stock": true,
+    "reset_entry": "0x10000100",
+    "reset_body_matches_stock": false,
+    "unit_count_compiled": 348,
+    "duplicate_strong_symbols": 0,
+    "undefined_symbols": 0,
+    "prior_focused_sha256": "ff5ae5bfb3abd1099f029dc654effbb1e1aa373cfcb7769786e991f9e0e2ac93",
+    "final_link_verified": true
+  },
+  "link_report": {
+    "path": "build/g2-codec-stage1-vectors-link-20261110/link-report.json",
+    "sha256": "60e903eebf08b30b72ac17f4aaf4f2a27929fcd2121cb56f985a1b4ed0873ff2"
+  },
+  "limitations": [
+    "Source stage 1 is 832 bytes shorter than stock; other bytes are not proven equivalent.",
+    "Codec UART stage 2 still lacks its source vector table and fixed entries.",
+    "No source FWPK/BINH/NPU package or hardware boot proof exists."
+  ],
+  "full_manifest_validation": {
+    "source_report": "build/g2-all-codec-uart-entries-20261110/report.json",
+    "source_report_sha256": "513e2ad55b35f3b09459825069c8af5d15eec9820a3bd3d3ade23a973a4424aa",
+    "link_report": "build/g2-all-codec-uart-entries-link-20261110/link-report.json",
+    "link_report_sha256": "968526b0457ba0fb8790c12432c2e495b2ab7af556ee972a28648e7b06f1563a",
+    "all_seven_final_links": "passed",
+    "external_binary_archive_used": false
+  }
+}

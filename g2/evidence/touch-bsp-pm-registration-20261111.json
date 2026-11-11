@@ -1,0 +1,72 @@
+{
+  "schema": 1,
+  "target": "G2 touch BSP deep-sleep clock callback registration",
+  "stock_component": "g2/blobs/official/g2-2.2.6.10/firmware_touch.bin",
+  "stock_component_sha256": "0d13d8bb1337bf22989dc16143e3d5eca29a31cc1ed753ff624668750ea9470d",
+  "stock_function_addresses": {
+    "cybsp_register_sysclk_pm_callback": "0x00004634",
+    "cybsp_init": "0x00004650",
+    "Cy_SysPm_RegisterCallback": "0x0000a3b0",
+    "callback_descriptor_ram": "0x20000850"
+  },
+  "stock_register_semantics": "Call Cy_SysPm_RegisterCallback with the reset-copied descriptor; return zero when true, 0x06020000 when false. cybsp_init calls generated initialization then registration.",
+  "source": "g2/src/touch/glue/touch_cybsp.c",
+  "source_sha256": "0e2814dab3a816cfe64332cd3fb8ef6d46e9d06a35466aef28e796d32e824128",
+  "linked_symbols": {
+    "cybsp_register_sysclk_pm_callback": "0x92f4",
+    "cybsp_init": "0x9310",
+    "Cy_SysPm_RegisterCallback": "0x7aac",
+    "touch_reset_ilo_pm_descriptor": "0x20000850",
+    "touch_ilo_deep_sleep_callback": "0x58cc"
+  },
+  "verification": {
+    "focused_source_report": "build/g2-touch-pm-register-final-source-20261111/report.json",
+    "focused_source_report_sha256": "a3beda2b9e65e3a4a11238a72ae36bd94c84b9d09b4509bfeb374ee5b22ba799",
+    "compiled_units": 101,
+    "failed_units": 0,
+    "duplicate_strong_symbols": 0,
+    "focused_link_report": "build/g2-touch-pm-register-final-link-20261111/link-report.json",
+    "focused_link_report_sha256": "d0d62f99344cb1dc75cc71ec2e9af01d6dd29cdeb4736c36653b3d785d8246fa",
+    "source_binary_bytes": 29000,
+    "source_binary_sha256": "f10c5f6346a06b47914ed16cae41d3e4e3baa70e1486cde0a260831336fab3ac",
+    "stock_application_bytes": 34432,
+    "stock_application_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+    "byte_identical": false,
+    "stock_result_literals_present_in_source_function": true,
+    "PDL_registration_function_retained": true,
+    "descriptor_noncallback_bytes_match_stock": true,
+    "stock_descriptor_callback_thumb": "0x0000a1c1",
+    "source_descriptor_callback_thumb": "0x000058cd",
+    "descriptor_fields": {
+      "type": 1,
+      "skip": 0,
+      "params": "0x20000ccc",
+      "prev": 0,
+      "next": 0,
+      "order": 255
+    },
+    "stock_registration_function_bytes": 28,
+    "source_registration_function_bytes": 28
+  },
+  "qualification": "The C BSP now registers its deep-sleep callback using the upstream PDL and stock-addressed descriptor. The complete touch image and hardware behavior remain unverified.",
+  "full_g2_verification": {
+    "source_report": "build/g2-touch-pm-registration-full-source-20261111/report.json",
+    "source_report_sha256": "f0c279bc300abf92553163506f35e1b59be9d5d369d8f4876aa327977c774397",
+    "compiled_units": 4884,
+    "compile_failures": 0,
+    "duplicate_strong_symbols": 0,
+    "strict_link_report": "build/g2-touch-pm-registration-full-link-20261111/link-report.json",
+    "strict_link_report_sha256": "c81233354bd759735cce8acb044c3e2e4d5f8742a7b239171cd2ddd7ac74235b",
+    "linked_payloads": [
+      "g2-apollo-bootloader",
+      "g2-apollo-main",
+      "g2-case",
+      "g2-codec-a",
+      "g2-codec-b",
+      "g2-em9305",
+      "g2-touch"
+    ],
+    "strict_link_passed": true,
+    "source_completeness_proven": false
+  }
+}

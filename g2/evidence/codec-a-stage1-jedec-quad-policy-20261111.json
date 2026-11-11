@@ -1,0 +1,60 @@
+{
+  "schema": "opencfw.g2.codec-a.stage1-jedec-quad-policy.v1",
+  "date": "2026-11-11",
+  "stock": {
+    "component": "g2/blobs/official/g2-2.2.6.10/firmware_codec.bin",
+    "component_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+    "binh_a_stage1_load_offset": "0x95a4",
+    "nor_reader_entry": "0x10000c40",
+    "id_classification_address": "0x10000cac..0x10000d00",
+    "no_quad_enable_ids": ["0x001c3812", "0x001c3813"],
+    "combined_status_write_ids": ["0x00854012", "0x00856013", "0x00856014"],
+    "other_ids": "Read status 2 and, if QE is clear, issue write-enable and status-2-only write."
+  },
+  "independent_source": {
+    "path": "third-party/upstream/nationalchip-lvp-kws/arch/soc/grus/spl/spl_spinor.c",
+    "function": "sflash_init",
+    "fact": "The pinned SDK switch leaves EN25S20A and EN25S40A alone, uses sflash_enable_quad_1 for three PUYA IDs, and sflash_enable_quad for other IDs."
+  },
+  "correction": {
+    "path": "g2/src/codec/image-a-stage1/main_stage1_flash_reader.c",
+    "source_sha256": "f398f87e47ddb64f25b45b26438ed06c61f344916182b34069b26899083bf340",
+    "before": "The source grouped 0x001c3812 and 0x001c3813 with PUYA IDs and attempted a combined status write.",
+    "after": "The two ESMT IDs skip status reads and quad-enable writes, then proceed to XIP setup; PUYA and other-ID behavior stays on its existing route.",
+    "linked_c_branch": "At source 0x10000296..0x1000029c the compiled C tests id-0x001c3812 < 2 and branches directly to XIP setup at 0x100002f6."
+  },
+  "focused_verification": {
+    "codec_a_compiled_units": 367,
+    "failed_units": 0,
+    "duplicate_strong_symbols": 0,
+    "unresolved_symbols": 0,
+    "codec_a_strict_link_passed": true,
+    "uart_image_unchanged": true,
+    "stage1_linked_bytes": 4756,
+    "stage1_stock_limit": 12260,
+    "stage1_before_sha256": "62f4cb42b6ddc76dde24270995c6e81ec73c66e88a02363243448260d2c98b9f",
+    "stage1_after_sha256": "86026249f285d190dc5b75280a69c67a679b165aaeb28a6029b24b46b127f2f4",
+    "clock_switch_table_gate_preserved": true,
+    "source_report": "build/codec-a-stage1-jedec-20261111/sources/report.json",
+    "link_report": "build/codec-a-stage1-jedec-20261111/link/link-report.json"
+  },
+  "full_g2_verification": {
+    "manifest_check": "g2: 4883 units, 4544 source files, 1 final-link-only unit",
+    "make_sources_compiled_units": 4878,
+    "make_sources_failed_units": 0,
+    "duplicate_strong_symbols": 0,
+    "strict_payload_links": 7,
+    "all_seven_payload_binary_hashes_unchanged": true,
+    "only_changed_ota_component": "firmware/codec.bin",
+    "codec_component_sha256": "64a4141daad8802c50c23173d77d98bb3df02d89c0626ccf9a363a8bf953b00f",
+    "source_bundle_bytes": 4638028,
+    "source_bundle_sha256": "02668eeebe7e3ea87bec6f72c88c9e62ee2de729248cd486a869ebccbceb57cb",
+    "source_completeness_proven": false,
+    "source_report": "build/codec-a-stage1-jedec-20261111/all/report.json",
+    "link_report": "build/codec-a-stage1-jedec-20261111/bundle/link-report.json"
+  },
+  "limits": [
+    "This corrects the JEDEC decision seen in stock disassembly and the pinned SDK; it does not prove the whole NOR reader or physical flash transactions.",
+    "The full BINH A stage-1 image still differs from stock and has not been booted on hardware."
+  ]
+}

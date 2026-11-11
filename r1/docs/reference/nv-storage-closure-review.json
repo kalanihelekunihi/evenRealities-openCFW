@@ -1,0 +1,389 @@
+{
+  "setter_bridge_size": 10,
+  "setter_body_size": 54,
+  "cases": 5830,
+  "passed": 5830,
+  "failures": [],
+  "categories": {
+    "r1_kv_class_read": 1024,
+    "r1_kv_class_write": 1024,
+    "r1_health_record_read": 257,
+    "r1_health_record_write": 257,
+    "r1_record12_persist": 353
+  },
+  "actual_cached_read_write_and_memcpy_execute": true,
+  "callback_depths": [
+    [
+      [],
+      []
+    ],
+    [
+      [
+        -48,
+        -48,
+        -48,
+        -48
+      ],
+      [
+        -64,
+        -64,
+        -48,
+        -48
+      ]
+    ],
+    [
+      [
+        -24,
+        -24
+      ],
+      [
+        -24,
+        -24
+      ]
+    ],
+    [
+      [
+        -24,
+        -24
+      ],
+      [
+        -16,
+        -16
+      ]
+    ]
+  ],
+  "imports_removed": [
+    "r1_health_record_kv_handle",
+    "r1_health_settings_kv_handle",
+    "r1_r_size_kv_handle"
+  ],
+  "imports_added": [],
+  "application_imports": 211,
+  "bootloader_imports": 34,
+  "other_source_units_unchanged": 560,
+  "integrated_sources": [
+    "r1/src/application/runtime/native_nv_table_config.c",
+    "r1/src/application/runtime/native_record_providers.c",
+    "r1/src/application/board/native_kv_class.c",
+    "third-party/upstream/musl-memory-1.2.5/memcpy.c"
+  ],
+  "report": "build/sources-goal-r1-nv-storage-final/report.json",
+  "report_sha256": "90cbdd8851066a95faae7e04faa9ec18113d0a7b435e5b73e89669f1b0d7af1c",
+  "manifest_sha256": "a11efb774a601951f83505eff054a65413979eaff7a670c34ae1be16048c41ce",
+  "placements": [
+    {
+      "setter_placement": "0x1008000",
+      "setter_bridge_size": 10,
+      "setter_body_size": 54,
+      "cases": 2915,
+      "passed": 2915,
+      "failures": [],
+      "categories": {
+        "r1_kv_class_read": 1024,
+        "r1_kv_class_write": 1024,
+        "r1_health_record_read": 257,
+        "r1_health_record_write": 257,
+        "r1_record12_persist": 353
+      },
+      "actual_cached_read_write_and_memcpy_execute": true,
+      "callback_depths": [
+        [
+          [],
+          []
+        ],
+        [
+          [
+            -48,
+            -48,
+            -48,
+            -48
+          ],
+          [
+            -64,
+            -64,
+            -48,
+            -48
+          ]
+        ],
+        [
+          [
+            -24,
+            -24
+          ],
+          [
+            -24,
+            -24
+          ]
+        ],
+        [
+          [
+            -24,
+            -24
+          ],
+          [
+            -16,
+            -16
+          ]
+        ]
+      ],
+      "imports_removed": [
+        "r1_health_record_kv_handle",
+        "r1_health_settings_kv_handle",
+        "r1_r_size_kv_handle"
+      ],
+      "imports_added": [],
+      "application_imports": 211,
+      "bootloader_imports": 34,
+      "other_source_units_unchanged": 560,
+      "integrated_sources": [
+        "r1/src/application/runtime/native_nv_table_config.c",
+        "r1/src/application/runtime/native_record_providers.c",
+        "r1/src/application/board/native_kv_class.c",
+        "third-party/upstream/musl-memory-1.2.5/memcpy.c"
+      ],
+      "report": "build/sources-goal-r1-nv-storage-final/report.json",
+      "report_sha256": "90cbdd8851066a95faae7e04faa9ec18113d0a7b435e5b73e89669f1b0d7af1c",
+      "manifest_sha256": "a11efb774a601951f83505eff054a65413979eaff7a670c34ae1be16048c41ce"
+    },
+    {
+      "setter_placement": "0x1008002",
+      "setter_bridge_size": 10,
+      "setter_body_size": 54,
+      "cases": 2915,
+      "passed": 2915,
+      "failures": [],
+      "categories": {
+        "r1_kv_class_read": 1024,
+        "r1_kv_class_write": 1024,
+        "r1_health_record_read": 257,
+        "r1_health_record_write": 257,
+        "r1_record12_persist": 353
+      },
+      "actual_cached_read_write_and_memcpy_execute": true,
+      "callback_depths": [
+        [
+          [],
+          []
+        ],
+        [
+          [
+            -48,
+            -48,
+            -48,
+            -48
+          ],
+          [
+            -64,
+            -64,
+            -48,
+            -48
+          ]
+        ],
+        [
+          [
+            -24,
+            -24
+          ],
+          [
+            -24,
+            -24
+          ]
+        ],
+        [
+          [
+            -24,
+            -24
+          ],
+          [
+            -16,
+            -16
+          ]
+        ]
+      ],
+      "imports_removed": [
+        "r1_health_record_kv_handle",
+        "r1_health_settings_kv_handle",
+        "r1_r_size_kv_handle"
+      ],
+      "imports_added": [],
+      "application_imports": 211,
+      "bootloader_imports": 34,
+      "other_source_units_unchanged": 560,
+      "integrated_sources": [
+        "r1/src/application/runtime/native_nv_table_config.c",
+        "r1/src/application/runtime/native_record_providers.c",
+        "r1/src/application/board/native_kv_class.c",
+        "third-party/upstream/musl-memory-1.2.5/memcpy.c"
+      ],
+      "report": "build/sources-goal-r1-nv-storage-final/report.json",
+      "report_sha256": "90cbdd8851066a95faae7e04faa9ec18113d0a7b435e5b73e89669f1b0d7af1c",
+      "manifest_sha256": "a11efb774a601951f83505eff054a65413979eaff7a670c34ae1be16048c41ce"
+    }
+  ],
+  "initialization": {
+    "stock_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "native_decoder_executed": true,
+    "guards_unchanged": true,
+    "expanded_sha256": "87fdee392022fdbe23dd0daf3e859fb14f3ce26ba3e8403aab56dc9d9a913317",
+    "cells": {
+      "r1_nv_ble_mult_class": {
+        "address": "0x200069f4",
+        "size": 116,
+        "section": ".r1.nv.class.ble_mult",
+        "alignment": 4,
+        "bytes": "00000000626c655f6d756c7400000000010000005a0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        "sha256": "ac6cac33530d0356f8ddb8c7c5f7e05a29505010b50c987e6b27484c72beeafc",
+        "relocation": null
+      },
+      "r1_nv_health_class": {
+        "address": "0x20006a68",
+        "size": 36,
+        "section": ".r1.nv.class.health",
+        "alignment": 4,
+        "bytes": "000000006865616c7468000000000000010000000c0000001400af41c8003200c8000000",
+        "sha256": "15008abd7e106495cd4f8fb84c54d27a791e916af8a353fcf5bd6bebd35be320",
+        "relocation": null
+      },
+      "r1_nv_hsync_class": {
+        "address": "0x20006a8c",
+        "size": 48,
+        "section": ".r1.nv.class.hsync",
+        "alignment": 4,
+        "bytes": "000000006873796e63000000000000000100000018000000000000000000000000000000000000000000000000000000",
+        "sha256": "e5d32ee1ca04003dbade0828f0476b59021cb1782c0cf85059b3061e49f95a87",
+        "relocation": null
+      },
+      "r1_nv_r_size_class": {
+        "address": "0x20006b6c",
+        "size": 28,
+        "section": ".r1.nv.class.r_size",
+        "alignment": 4,
+        "bytes": "00000000725f73697a65000000000000010002000100000000000000",
+        "sha256": "ce612a2b5df5f2415ddadcf8be5bff5602ce08ffa8fa53d149202f09a52f7a0c",
+        "relocation": null
+      },
+      "r1_ble_mult_kv_handle": {
+        "address": "0x20007dec",
+        "size": 4,
+        "section": ".r1.nv.ble_mult.handle",
+        "alignment": 4,
+        "bytes": "f4690020",
+        "sha256": "91049decde1563e08e6fdef323bd0b3f264a08b3b032c1ce0eeb8babb16bb287",
+        "relocation": {
+          "type": "R_ARM_ABS32",
+          "target": "r1_nv_ble_mult_class"
+        }
+      },
+      "r1_health_settings_kv_handle": {
+        "address": "0x20007df0",
+        "size": 4,
+        "section": ".r1.nv.health.handle",
+        "alignment": 4,
+        "bytes": "686a0020",
+        "sha256": "ce33b44698d98d63f9984576a0e3c2168c7588ece1218466dc8555e956518682",
+        "relocation": {
+          "type": "R_ARM_ABS32",
+          "target": "r1_nv_health_class"
+        }
+      },
+      "r1_health_record_kv_handle": {
+        "address": "0x20007df4",
+        "size": 4,
+        "section": ".r1.nv.hsync.handle",
+        "alignment": 4,
+        "bytes": "8c6a0020",
+        "sha256": "0a3c55a63e8597f40563c8b4c2261bb318d1c7043feaf85c5c24cd2667133d2e",
+        "relocation": {
+          "type": "R_ARM_ABS32",
+          "target": "r1_nv_hsync_class"
+        }
+      },
+      "r1_r_size_kv_handle": {
+        "address": "0x20007e00",
+        "size": 4,
+        "section": ".r1.nv.r_size.handle",
+        "alignment": 4,
+        "bytes": "6c6b0020",
+        "sha256": "f396b5a705393132073724ad4ab4cb26ea84598dad5eb3fd2dfa7d51c627aa0a",
+        "relocation": {
+          "type": "R_ARM_ABS32",
+          "target": "r1_nv_r_size_class"
+        }
+      }
+    },
+    "owned_bytes": 244
+  },
+  "alignment_regression": {
+    "old_source": "r1/src/application/runtime/native_record_providers.c",
+    "old_source_sha256": "567026891c772ec32c08179232300caec5cee3c75821e5dbdf667a4be105e928",
+    "old_object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-temp-calibration/r1/r1-application/r1__src__application__runtime__native_record_providers.c.o",
+    "old_object_sha256": "5f02139db0ec7134cc0d33acaf4f1869d7fdfc060d089cc370c8894253c69b55",
+    "original_section_alignment": 2,
+    "old_placement_results": [
+      {
+        "placement": "0x1008000",
+        "literal_label": "0x100802c",
+        "literal_load_address": "0x100802c",
+        "loaded_r5": "0x20007df0",
+        "pc": "0x1000000",
+        "reached_cached_reader": true,
+        "error": null,
+        "elf": "build/goal-r1-nv-storage/old-setter-0x1008000.elf"
+      },
+      {
+        "placement": "0x1008002",
+        "literal_label": "0x100802e",
+        "literal_load_address": "0x1008030",
+        "loaded_r5": "0x2000",
+        "pc": "0x100800e",
+        "reached_cached_reader": false,
+        "error": "Invalid memory read (UC_ERR_READ_UNMAPPED)",
+        "elf": "build/goal-r1-nv-storage/old-setter-0x1008002.elf"
+      }
+    ],
+    "other_sections_unchanged": [
+      ".text.r1_record12_apply"
+    ]
+  },
+  "rea": {
+    "path": "build/goal-r1-nv-storage/REA.json",
+    "sha256": "d0c542555beda794657c4ab91642240d243ac537b2337507e400a9fa964d2143",
+    "procedure": "0x73604"
+  },
+  "source_sha256": {
+    "r1/src/application/runtime/native_nv_table_config.c": "b2062291e211d48e3eb4a4e290fd827ff4e8b6f7e970fe707d29d27081827f9f",
+    "r1/src/application/runtime/native_record_providers.c": "bde0a08b8a36e91460f89efc734aad76b63676c8c230e9d75b2c4248c66b46c3",
+    "r1/src/application/board/native_kv_class.c": "e9791d39b7a9b5380b1dbce3c7422be921131abbd0e09c3387ea3d4b9930bf6e",
+    "third-party/upstream/musl-memory-1.2.5/memcpy.c": "1664d565f968b053ac33c5ac615c057a255a5821c8fa510fba61d4f63dee08e9"
+  },
+  "probe_artifacts": {
+    "build/goal-r1-nv-storage/before.c": "606ed362c8b32db99fdd257d30502caa4197e5caa8987e08f00f374e79dd0566",
+    "build/goal-r1-nv-storage/record-providers-before.c": "567026891c772ec32c08179232300caec5cee3c75821e5dbdf667a4be105e928",
+    "build/goal-r1-nv-storage/manifest-before.json": "853798d70673de8cb97ab199ed0346162136e023b446e79a90de6af63a1b5be8",
+    "build/goal-r1-nv-storage/stock.s": "45078f279362cdb23915699b35b2a464a0e223430b1d40c814fc4d81bea17ea9",
+    "build/goal-r1-nv-storage/stock.elf": "db43643979039c7a2bb43c7d188d0e3f614fbb36f6b55f9141fea4621ec1187c",
+    "build/goal-r1-nv-storage/REA.json": "d0c542555beda794657c4ab91642240d243ac537b2337507e400a9fa964d2143",
+    "build/goal-r1-nv-storage/rea-snapshot.json": "dbe04a7b24d557591ea1811432d981367795019b065bc53276300fbfd4790fd9",
+    "build/goal-r1-nv-storage/initialization.py": "ad3ecaa96265bcbb1b4217503f303835bbe3d741ea4127ee6ae1fa5778b87b25",
+    "build/goal-r1-nv-storage/initialization.json": "7a1517516d59940ae88e3bef408bd387de309ed7da8186bc13b7ced402fb1e3d",
+    "build/goal-r1-nv-storage/expanded-rw.bin": "87fdee392022fdbe23dd0daf3e859fb14f3ce26ba3e8403aab56dc9d9a913317",
+    "build/goal-r1-nv-storage/verify.py": "97f632054b7b6dac7b7003fcf848c3b9b41e766ff159e5d32f0f5aa09427cf98",
+    "build/goal-r1-nv-storage/alignment.py": "f1f97872b4c67e295ceacffec7ca59b81a1fe14737eb25eac549002122f76144",
+    "build/goal-r1-nv-storage/alignment.json": "334d0a6d49fe8c3c7ec2c9e78487eef8bf568b1cbcd648a91243388d1b5a38a4",
+    "build/goal-r1-nv-storage/source-half-aligned.elf": "ac6842fd6a306ffdbe874b358e9ea0fde0449bb7b0b8c3d7f77a0dd31285a25d",
+    "build/goal-r1-nv-storage/source-word-aligned.elf": "be1398198f2d3087d2f1a8c36bfcd2fb5147ae0248c28ff4189e9ec7fdb6496d",
+    "build/goal-r1-nv-storage/results-0x1008000.json": "a7fe9f99011395a6816cee2a59e73b47dd523d581c34ab7e7824a857b76dd1b9",
+    "build/goal-r1-nv-storage/results-0x1008002.json": "33437c33decfbbc61729e384aeb8aae59dddc34f2ca77bca93cc13ca8318cd5d",
+    "build/goal-r1-nv-storage/old-setter-0x1008000.elf": "191723a8112e08a7e54e7b11befa7e92158dc73d7a1ac60caf5bb86e365b976a",
+    "build/goal-r1-nv-storage/old-setter-0x1008002.elf": "3b7ef76fce35cbad81d512dcdf140acd607687bc5baa26138acfffd797091ac7",
+    "build/goal-r1-nv-storage/layout-0x1008000.ld": "a5c940f7a61ff801fe70168bad5ca698baaa4b3cb23e790998dde74636f0765a",
+    "build/goal-r1-nv-storage/layout-0x1008002.ld": "b87d2a3195e67586ad32f479e34a9a6f373dd502f58ad8eb1261fbeffb7ade1a"
+  },
+  "limits": [
+    "Four class bodies and four handles own 244 initialized bytes; final layout and boot integration are unproven. Symbolic handle relocations are verified, not the entire cached-class arena.",
+    "Actual cached reader/writer, health wrappers, settings setter and pinned musl memcpy execute; port critical callbacks are modeled. No flash persistence, physical sensor or recovery service proof.",
+    "C setter has a 54-byte body plus ten-byte native-frame bridge versus 42 native instruction bytes. No byte identity, complete private-frame/fault/timing identity or provider qualification.",
+    "Only the settings setter is converted in native_record_providers.c; existing r1_record12_apply bytes/relocations remain unchanged and its broader behavior remains a separate gate.",
+    "Both app and bootloader compile and compose relocatables, not complete firmware. No G2 gate or source-plan change."
+  ]
+}

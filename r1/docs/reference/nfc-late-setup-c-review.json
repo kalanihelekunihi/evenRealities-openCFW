@@ -1,0 +1,128 @@
+{
+  "schema_version": 1,
+  "report": "build/sources-goal-r1-nfc-late-setup-final-c/report.json",
+  "evidence_files": {
+    "build/sources-goal-r1-nfc-late-setup-final-c/report.json": "19c0092707e01f32d3f28ad56b0d07a63def0f9591d4741ceb9768c55f1f51de",
+    "r1/src/sources.json": "b87252b4b1889233ffe3b9ddfaf2b53835b2a5f2d7c9c8e072389b5176911220",
+    "r1/src/application/runtime/native_nfc_late_setup.c": "7f9bab32ab5fffb64e5ccdc616535c75c660ad2c2c0caeabbce3d25b8db86187",
+    "r1/src/application/runtime/native_nfc_charge_task.c": "eddb50ffc97301479c6d88bf16c89c581573dfd60c369bbf9223a2cc397b209f",
+    "r1/src/application/i2c5/stock_transport.c": "de022e8dbd37824ccd568e7689ac6db28cbae14e9356db6e0f563275f0c64ce2",
+    "r1/src/application/i2c5/stock_transport.h": "fdc350bab95e1098850cd06a04cc2e1c32a2ca6785070e2d033862ab0929c1d8",
+    "r1/src/application/board/native_yhm_transport.c": "7e686ec02f4709ee478e191a3c6da4c33998808dc3a899d5f02efd6ceda0eb17",
+    "r1/src/application/board/native_yhm_state.c": "e9529abd5e4fe3407c99d67a2d69edfdeb0b35da7e55a6cdde5cfc94df5658b2",
+    "r1/src/application/board/native_battery_control.c": "075a9ce7647e2569bf30a433ce6c588ee7cbef26ccd8095d38d8f528fc54b3ae",
+    "r1/src/application/runtime/native_battery_context_config.c": "2f286ba3158db295a53c5bf5d776bfafc5afaafe6705163298cb091bdbc584b5",
+    "r1/src/application/registry/stock_registry.c": "68c16fe9a2fcd328012b8613c9da9aa4cd31bd30df36a55e64e56e7b534246fa",
+    "build/goal-r1-fstorage-registry/expanded-rw.bin": "87fdee392022fdbe23dd0daf3e859fb14f3ce26ba3e8403aab56dc9d9a913317",
+    "build/goal-r1-nfc-late-setup-c/manifest-before.json": "576831753fade3439246ea0ea0960a2dcd670d40fdc9e4481418fc4dc6cd63f7",
+    "build/goal-r1-nfc-late-setup-c/verify.py": "1e13939699f5410e8a4ed8a17fa1195dadcfbf423724e097dd12e31ad6debb56",
+    "build/goal-r1-nfc-late-setup-c/verification.json": "69f33a4bbef62ce79e1e59f3607030fd44043bf12a488ec1219629f4013e528c",
+    "build/goal-r1-nfc-late-setup-c/verify-final.log": "1b51b3496d73533ff54201d123f3e19e6159a30463bec1b0d7a9509d9c4da9b3",
+    "build/goal-r1-nfc-late-setup-c/audit.py": "091c93320dfe2bfe595dc18c5537ee9f54b6d7881be560f9651fa2d1d1efc41f",
+    "build/goal-r1-nfc-late-setup-c/audit.json": "f175fddde450aa4389aa16f2dcfef6285700d6277aa10d416292f153b306b210",
+    "build/goal-r1-nfc-late-setup-c/defects.py": "39083983223f14a10dfd5e8fd479de7ebce14116033b8b930ee73adc12ba4e32",
+    "build/goal-r1-nfc-late-setup-c/defects.json": "9db9f538fe26021526e8200ac2dfd0935075e0a4495bacc3c7f93468ed8c2d23",
+    "build/goal-r1-nfc-late-setup-c/rea.json": "8429dd96cb385662332e7bfca121fe9964e90114804a944e0c40d8703f468536",
+    "build/goal-r1-nfc-late-setup-c/source.elf": "4dd75ad7ab2bd80ced07db21ceb6637a85830ba83208bce95906882aa4e43793",
+    "build/goal-r1-nfc-late-setup-c/r1-sources-check.log": "f01e782ad84dcf1a5d0f32f306fecb5ee0257e812af9a1c67c0177d33ef9823e",
+    "build/goal-r1-nfc-late-setup-c/sources-check.log": "c73d239deab6c65838885d7e7d08d22ca10353db948259134344a1d1a0427cac",
+    "build/goal-r1-nfc-late-setup-c/boot-link/report.json": "2f5f02ae6f77071e6047efe5765746fe38cbdd80e82a943234e05fb0a05535f5"
+  },
+  "stock_application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "rea_windows": [
+    {
+      "address": "0x96a7c",
+      "length": 84
+    },
+    {
+      "address": "0x42ec4",
+      "length": 36
+    },
+    {
+      "address": "0x42d2e",
+      "length": 16
+    },
+    {
+      "address": "0x77214",
+      "length": 44
+    }
+  ],
+  "verification": {
+    "direct_adapter_stock_C_pairs": 720,
+    "late_setup_stock_C_pairs": 192,
+    "registered_callback_sequences": 8,
+    "actual_i2c5_leases_gpio_writes_YHM_and_registry_code": true,
+    "existing_GPO_YHM_battery_owners_reused": true,
+    "all_device_reload_and_callback_words_checked": true,
+    "missing_chip_monitor_delay_OS_and_leaf_device_operations_modeled": true,
+    "void_returns_private_frames_and_incidental_registers_excluded": true
+  },
+  "audit": {
+    "unchanged_prior_object_hashes": 807,
+    "generated_boot_allocated_bytes_and_relocations_unchanged": true,
+    "added_application_imports": [
+      "r1_nfc_charge_monitor_callback_00042d40",
+      "r1_st25dvxxkc_initialize_configuration"
+    ],
+    "removed_application_imports": [
+      "r1_pmic_late_init_plan_build"
+    ],
+    "only_manifest_change_one_new_unit": true,
+    "no_handwritten_assembly_in_late_setup": true,
+    "one_existing_battery_thread_handle_owner": true,
+    "existing_I2C5_and_YHM_owners_reused": true
+  },
+  "defects": [
+    {
+      "defect": "late-flag-clear",
+      "compiled": true,
+      "behavioral_assertion_rejected": true
+    },
+    {
+      "defect": "wrong-settle-delay",
+      "compiled": true,
+      "behavioral_assertion_rejected": true
+    },
+    {
+      "defect": "stop-after-chip-error",
+      "compiled": true,
+      "behavioral_assertion_rejected": true
+    },
+    {
+      "defect": "stale-GPO-device",
+      "compiled": true,
+      "behavioral_assertion_rejected": true
+    },
+    {
+      "defect": "wrong-GPO-flag",
+      "compiled": true,
+      "behavioral_assertion_rejected": true
+    },
+    {
+      "defect": "wrong-YHM-flag",
+      "compiled": true,
+      "behavioral_assertion_rejected": true
+    },
+    {
+      "defect": "wrong-YHM-callback",
+      "compiled": true,
+      "behavioral_assertion_rejected": true
+    },
+    {
+      "defect": "narrow-mode-gate",
+      "compiled": true,
+      "behavioral_assertion_rejected": true
+    },
+    {
+      "defect": "wrong-delayed-interval",
+      "compiled": true,
+      "behavioral_assertion_rejected": true
+    }
+  ],
+  "limitations": [
+    "Chip configuration and the periodic monitor callback remain unresolved; neither is replaced with a no-op.",
+    "Delay, OS thread flags, device operation leaves and delayed registration are modeled; actual I2C5 resource/GPIO, YHM and registry code execute.",
+    "Void late-init/delayed callback outputs, private frames and incidental registers are excluded.",
+    "Physical IRQ/electrical timing, missing hardware children, manager wiring, full application link and device boot remain open."
+  ]
+}

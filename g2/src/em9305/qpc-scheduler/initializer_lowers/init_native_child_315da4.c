@@ -1,42 +1,23 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_315da4\n"
-".type opencfw_em9305_child_315da4,@function\n"
-"opencfw_em9305_child_315da4:\n"
-"L315da4:\n"
-"enter_s [r13,blink]\n"
-"L315da6:\n"
-"bl.d opencfw_em9305_phy_complete_32c818\n"
-"L315daa:\n"
-"mov_s r13,r0\n"
-"L315dac:\n"
-"bl.d opencfw_em9305_phy_update_complete_32e220\n"
-"L315db0:\n"
-"mov_s r0,r13\n"
-"L315db2:\n"
-"bl.d opencfw_em9305_child_32e214\n"
-"L315db6:\n"
-"mov_s r0,r13\n"
-"L315db8:\n"
-"mov_s r0,0x802818\n"
-"L315dbe:\n"
-"ldb_s r2,[r0,0]\n"
-"L315dc0:\n"
-"ldb_s r1,[r0,0x5]\n"
-"L315dc2:\n"
-"mov_s r0,r13\n"
-"L315dc4:\n"
-"cmp_s r2,0x7\n"
-"L315dc6:\n"
-"bl.d opencfw_em9305_child_322dd8\n"
-"L315dca:\n"
-"mov.eq r1,0x1a\n"
-"L315dce:\n"
-"add r13,r13,515\n"
-"L315dd2:\n"
-"stb 0,[r13]\n"
-"L315dd6:\n"
-"leave_s [r13,blink,pcl]\n"
-".size opencfw_em9305_child_315da4,.-opencfw_em9305_child_315da4\n"
-);
+#include <stdint.h>
+
+/* Native 0x315da4..0x315dd8: PHY update completion: complete the procedure
+ * and the PHY update, run 32e214, report the end through 322dd8 (reason
+ * 0x1a for opcode 7 at 0x802818, else the reason byte at 0x80281d) and
+ * clear the record's busy byte (+515). */
+extern uint32_t opencfw_em9305_phy_complete_32c818(uintptr_t);
+extern uint32_t opencfw_em9305_phy_update_complete_32e220(uintptr_t);
+extern uint32_t opencfw_em9305_child_32e214(uintptr_t);
+extern uint32_t opencfw_em9305_child_322dd8(uintptr_t,uint32_t);
+
+uint32_t opencfw_em9305_child_315da4(uintptr_t record)
+{
+    (void)opencfw_em9305_phy_complete_32c818(record);
+    (void)opencfw_em9305_phy_update_complete_32e220(record);
+    (void)opencfw_em9305_child_32e214(record);
+    uint32_t opcode=*(volatile uint8_t *)(uintptr_t)0x802818u;
+    uint32_t reason=*(volatile uint8_t *)(uintptr_t)0x80281du;
+    if(opcode==7u) reason=0x1au;
+    uint32_t status=opencfw_em9305_child_322dd8(record,reason);
+    *(volatile uint8_t *)(record+515u)=0u;
+    return status;
+}

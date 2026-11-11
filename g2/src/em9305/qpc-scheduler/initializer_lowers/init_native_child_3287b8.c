@@ -1,76 +1,37 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_3287b8\n"
-".type opencfw_em9305_child_3287b8,@function\n"
-"opencfw_em9305_child_3287b8:\n"
-"L3287b8:\n"
-"enter_s [r13-r15,fp,blink]\n"
-"L3287ba:\n"
-"sub_s sp,sp,0x4\n"
-"L3287bc:\n"
-"mov_s r13,r0\n"
-"L3287be:\n"
-"bl.d opencfw_em9305_child_3172c8\n"
-"L3287c2:\n"
-"mov_s r0,3\n"
-"L3287c4:\n"
-"mov_s r15,r0\n"
-"L3287c6:\n"
-"breq_s r0,0,L328808\n"
-"L3287c8:\n"
-"ldh_s r14,[r13,0x20]\n"
-"L3287ca:\n"
-"add_s r0,sp,0\n"
-"L3287cc:\n"
-"mov_s r1,0x334470\n"
-"L3287d2:\n"
-"bl.d opencfw_em9305_memcpy\n"
-"L3287d6:\n"
-"mov_s r2,4\n"
-"L3287d8:\n"
-"add_s r1,sp,0\n"
-"L3287da:\n"
-"bl.d opencfw_em9305_ll_stream_header_3175d0\n"
-"L3287de:\n"
-"mov_s r0,r15\n"
-"L3287e0:\n"
-"mov r1,290\n"
-"L3287e4:\n"
-"ldb_s r1,[r13,r1]\n"
-"L3287e6:\n"
-"add_s r14,r14,6\n"
-"L3287e8:\n"
-"add_s r0,r0,r15\n"
-"L3287ea:\n"
-"bl.d opencfw_em9305_child_3175bc\n"
-"L3287ee:\n"
-"exth_s r2,r14\n"
-"L3287f0:\n"
-"mov_s r2,6\n"
-"L3287f2:\n"
-"mov_s r1,r15\n"
-"L3287f4:\n"
-"bl.d opencfw_em9305_child_3172dc\n"
-"L3287f8:\n"
-"mov_s r0,r13\n"
-"L3287fa:\n"
-"add3 r1,r13,0x22\n"
-"L3287fe:\n"
-"ldb_s r0,[r1,0]\n"
-"L328800:\n"
-"sth.as r14,[r13,144]\n"
-"L328804:\n"
-"bset_s r0,r0,0x1\n"
-"L328806:\n"
-"stb_s r0,[r1,0]\n"
-"L328808:\n"
-"mov_s r1,3\n"
-"L32880a:\n"
-"bl.d opencfw_em9305_child_329064\n"
-"L32880e:\n"
-"mov_s r0,r13\n"
-"L328810:\n"
-"leave_s [r13-r15,fp,blink,pcl]\n"
-".size opencfw_em9305_child_3287b8,.-opencfw_em9305_child_3287b8\n"
-);
+#include <stdint.h>
+
+/* Native 0x3287b8..0x328812: build a stream PDU for the record: allocate
+ * a type-3 buffer, write the fixed stream header (0x334470) with the
+ * record byte +290 and length +32 plus 6, queue it on the record, store
+ * the new length at +288 and set bit 1 of flags byte +272. Always send
+ * status message 3 for the record. */
+extern const uint8_t opencfw_em9305_stream_header_334470[4];
+extern uint32_t opencfw_em9305_child_3172c8(uint32_t kind);
+extern void *opencfw_em9305_memcpy(void *destination,const void *source,
+                                   uint32_t bytes);
+extern uint32_t opencfw_em9305_ll_stream_header_3175d0(uintptr_t output,
+                                                       uintptr_t fields);
+extern uint32_t opencfw_em9305_child_3175bc(uint32_t a,uint32_t b,uint32_t c);
+extern uint32_t opencfw_em9305_child_3172dc(uintptr_t record,uintptr_t payload,
+                                            uint32_t flags);
+extern uint32_t opencfw_em9305_child_329064(uintptr_t record,uint32_t status);
+
+uint32_t opencfw_em9305_child_3287b8(uintptr_t record)
+{
+    uintptr_t buffer=opencfw_em9305_child_3172c8(3u);
+    if(buffer!=0u){
+        _Alignas(4) uint8_t fields[4];
+        uint32_t length=*(volatile uint16_t *)(record+32u);
+        (void)opencfw_em9305_memcpy(fields,opencfw_em9305_stream_header_334470,4u);
+        uint32_t used=opencfw_em9305_ll_stream_header_3175d0(buffer,(uintptr_t)fields);
+        length+=6u;
+        (void)opencfw_em9305_child_3175bc(used+buffer,
+                                          *(volatile uint8_t *)(record+290u),
+                                          (uint16_t)length);
+        (void)opencfw_em9305_child_3172dc(record,buffer,6u);
+        uint32_t flags=*(volatile uint8_t *)(record+272u);
+        *(volatile uint16_t *)(record+288u)=(uint16_t)length;
+        *(volatile uint8_t *)(record+272u)=(uint8_t)(flags|2u);
+    }
+    return opencfw_em9305_child_329064(record,3u);
+}

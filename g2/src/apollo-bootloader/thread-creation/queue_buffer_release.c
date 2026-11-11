@@ -17,7 +17,7 @@ static _Noreturn void queue_buffer_release_fatal(void)
     (void)opencfw_bl_mask_interrupts();
     WORD(UINT32_MAX) = 0u;
     for (;;)
-        __asm__ volatile("b ." ::: "memory");
+        { }
 }
 
 uint32_t opencfw_boot_queue_buffer_release(uint32_t *thread)

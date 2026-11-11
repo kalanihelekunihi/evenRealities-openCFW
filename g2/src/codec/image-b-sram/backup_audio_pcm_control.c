@@ -3,6 +3,7 @@
  * Each register update is a separate volatile operation in the original.
  */
 #include <stdint.h>
+#include "../csky_ops.h"
 
 #define AUDIO_ENABLE (*(volatile uint32_t *)(uintptr_t)UINT32_C(0xa0a00100))
 static void set_field(volatile uint32_t *word, uint32_t mask, uint32_t value)
@@ -30,8 +31,8 @@ void gx8002_image_b_audio_pcm_control_10005978(uint32_t channel,
     } else {
         /* Native invalid-channel path dereferences null. Retain its actual
          * architectural memory access rather than inventing a return. */
-        __asm__ volatile ("movi r3, 0\nld.w r2, (r3, 0)\nst.w r2, (r3, 0)"
-                          : : : "r2", "r3", "memory");
+        volatile uint32_t *const null_page = csky_word_ptr(0u);
+        null_page[0] = null_page[0];
         return;
     }
     set_field(control, 1u << 26, 1u << 26);

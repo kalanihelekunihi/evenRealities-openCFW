@@ -1,7 +1,7 @@
 /* Apollo Ambiq image entry at 0x53f42a..0x53f545. */
 #include <stdint.h>
 
-extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,
+extern void lv_log_add(uint32_t,const char *,uint32_t,
                                 const char *,const char *,...);
 extern void audio_uart_ambiq_draw_image_core_53f548(void *,const void *,void *);
 
@@ -26,7 +26,7 @@ static uint32_t image_power_of_two(uint32_t x) {
     return x != 0u && (x & (x-1u)) == 0u;
 }
 static void image_log(uint32_t line,const char *message) {
-    audio_uart_lvgl_log(2u,image_source_path,line,image_function_name,message);
+    lv_log_add(2u,image_source_path,line,image_function_name,message);
 }
 
 void audio_uart_ambiq_draw_image_53f42a(void *unit,const void *descriptor,

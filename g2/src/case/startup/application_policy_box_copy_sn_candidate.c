@@ -6,9 +6,9 @@
 #include <stdint.h>
 extern void case_policy_box_read_serial(uint8_t *); /* 0x2f60 */
 extern void case_policy_box_read_identity(uint8_t *); /* 0x2f88 */
-extern void case_boot_option_prepare(void); /* 0x4bf4 */
+extern uint32_t case_boot_option_prepare(void); /* 0x4bf4 */
 extern uint32_t case_binary_5e_flash_program(uint32_t,uint32_t,uint32_t,uint32_t); /* 0x4b94 */
-extern void case_boot_option_commit_c(void); /* 0x4b20 */
+extern uint32_t case_boot_option_commit_c(void); /* 0x4b20 */
 static uint32_t be32(const uint8_t *p){return ((uint32_t)p[0]<<24)|((uint32_t)p[1]<<16)|((uint32_t)p[2]<<8)|p[3];}
 /* Stock 0x08002B4C (case_policy_box_copy_sn) */
 uint32_t case_policy_box_copy_sn(void)

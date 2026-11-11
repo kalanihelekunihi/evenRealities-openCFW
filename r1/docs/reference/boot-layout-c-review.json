@@ -1,0 +1,18 @@
+{
+  "schema": 1,
+  "source_report": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-boot-start-c/report.json",
+  "strict_link_report": "build/goal-r1-boot-layout-c/strict-tool/report.json",
+  "strict_link_report_sha256": "2592b347a0e842bea528b36a599266f96bf1ae3f2ccfcfbb41fd1fd103e4f5e1",
+  "linked": false,
+  "undefined_references": [
+    "nrf_cc310_bl_ecdsa_verify_secp256r1",
+    "nrf_cc310_bl_hash_sha256_finalize",
+    "nrf_cc310_bl_hash_sha256_init",
+    "nrf_cc310_bl_hash_sha256_update",
+    "nrf_cc310_bl_init"
+  ],
+  "layout": "r1/config-recovered/openr1_bootloader.ld",
+  "validation": "build/goal-r1-boot-layout-c/verify.py",
+  "result": "PASS diagnostic and nonempty-data layout fixture; full bootloader link remains incomplete",
+  "physical_boot_verified": false
+}

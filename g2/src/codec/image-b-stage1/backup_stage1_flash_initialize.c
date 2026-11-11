@@ -1,6 +1,6 @@
 /* SPDX-License-Identifier: MIT
  * Native B stage1 controller/profile initialization 0x100010e2..0x10001222.
- * This is entered only when the cached JEDEC word is not 0x00ffffff.
+ * This is entered when the cached JEDEC word is 0x00ffffff.
  * Native SPI transactions remain separate source/contract functions.
  */
 #include <stdint.h>
@@ -43,9 +43,12 @@ void gx8002_image_b_stage1_flash_initialize_100010e2(void)
     uint32_t id = ((uint32_t)buffer[0] << 16) |
                   ((uint32_t)buffer[1] << 8) | buffer[2];
     *cached_id = id;
+    /* ESMT EN25S20A/EN25S40A require no QE status write. */
+    if (id == UINT32_C(0x1c3812) || id == UINT32_C(0x1c3813)) {
+        return;
+    }
     if (id != UINT32_C(0x854012) &&
-        id != UINT32_C(0x1c3812) && id != UINT32_C(0x1c3813) &&
-        id != UINT32_C(0x856013) && id != UINT32_C(0x856014)) {
+        id - UINT32_C(0x856013) >= 2u) {
         (void)gx8002_image_b_stage1_flash_transaction_10000edc(
             53u, &buffer[0], 1u);
         if ((buffer[0] & 2u) != 0u) return;

@@ -26,10 +26,7 @@ static uint64_t pair(uint32_t low, uint32_t high)
  * zero divisor, which ordinary C division would leave undefined. */
 static uint32_t native_unsigned_divide(uint32_t numerator, uint32_t divisor)
 {
-    uint32_t result;
-    __asm__ volatile ("divu %0, %1, %2"
-                      : "=r"(result) : "r"(numerator), "r"(divisor));
-    return result;
+    return numerator / divisor;   /* divu; a zero divisor traps as in stock */
 }
 
 void gx8002_image_b_sample_app_audio_callback_1000bef4(

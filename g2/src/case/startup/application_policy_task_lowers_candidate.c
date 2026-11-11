@@ -13,7 +13,7 @@ extern void case_policy_task_list_insert(uint32_t list,uint32_t link); /* 0xbfe2
 extern uint32_t case_policy_scheduler_unlock(void); /* 0xc014 */
 
 static __attribute__((noreturn)) void case_policy_native_fault(void)
-{__asm__ volatile("cpsid i\n1: b 1b");__builtin_unreachable();}
+{__asm__ volatile("cpsid i");for(;;){}}
 static uint32_t read32(uint32_t address)
 {return *(volatile uint32_t *)(uintptr_t)address;}
 

@@ -17,9 +17,11 @@ void *codec_allocate(uint32_t bytes) {
         allocated = g2_file_pool_allocate(g2_codec_heap_pool, bytes);
         (void)audio_file_mutex_release(g2_codec_heap_mutex);
     } else {
-        g2_file_heap_error_log((const char *)(uintptr_t)0x7646f0u);
-        g2_file_close_error((const char *)(uintptr_t)0x474e40u,
-                            (const char *)(uintptr_t)0x6fc7c4u, 1074u);
+        g2_file_heap_error_log("get malloc semaphore failed.\r\n" /* stock 0x7646f0 */);
+        g2_file_close_error("0" /* stock 0x474e40 */,
+                            "D:\\01_workspace\\s200_ap510b_iar_git\\product\\s200\\app\\config\\redirect.c" /* stock 0x6fc7c4 */, 1074u);
     }
     return allocated;
 }
+/* Stock file_heap_allocate entry: single implementation. */
+__typeof__(codec_allocate) file_heap_allocate __attribute__((alias("codec_allocate")));

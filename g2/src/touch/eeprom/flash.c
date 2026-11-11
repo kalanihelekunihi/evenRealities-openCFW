@@ -2,6 +2,7 @@
  * boundary; this is not a physical programming implementation or safe patch. */
 #include <stdint.h>
 #include "cy_syslib.h"
+#include "provider.h"
 #define SYSARG (*(volatile uint32_t *)0x40100008u)
 #define SYSREQ (*(volatile uint32_t *)0x40100004u)
 /* Stock 0x00008BF4 (ProcessStatusCode) */
@@ -31,8 +32,8 @@ static uint32_t configure(void) { SYSARG=0xe8b6u;SYSREQ=0x80000015u;return touch
 static uint32_t restore(void) { uint32_t p[2]={0xeab6u,0x20000f04u};SYSARG=(uint32_t)p;SYSREQ=0x80000017u;return touch_flash_status(); }
 /* Stock 0x00008D50 (Cy_Flash_WriteRow) */
 uint32_t touch_flash_write_row(uint32_t address,const uint8_t *data) {
- uint32_t row=(address>0xffffu ? address-0x0ffff200u : address)>>7;
- if(!((address<0x10000u || address-0x0ffff200u<0x200u) && !(address&127u)) || !data)return 0x00520021u;
+ if(!touch_flash_valid_addr(address) || !data)return 0x00520021u;
+ uint32_t row=touch_flash_row_number(address);
  uint32_t p[34];for(unsigned i=0;i<128;i++)((uint8_t *)(p+2))[i]=data[i];
  p[0]=0xd7b6u|((row>>9)<<24);p[1]=127;SYSARG=(uint32_t)p;SYSREQ=0x80000004u;
  uint32_t status=touch_flash_status();if(status)return status;

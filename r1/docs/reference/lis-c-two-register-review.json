@@ -1,0 +1,150 @@
+{
+  "cases": 10240,
+  "passed": 10240,
+  "failures": [],
+  "per_entry": {
+    "lis2dw12_data_rate_set": 5120,
+    "lis2dw12_filter_path_set": 5120
+  },
+  "entries": [
+    {
+      "name": "lis2dw12_data_rate_set",
+      "entry": 479520,
+      "registers": [
+        32,
+        34
+      ],
+      "stock_body_bytes": 92,
+      "bridge_bytes": 10,
+      "c_body_bytes": 92,
+      "native_span_sha256": "0afdee6b54bf11ff86b4a1fd88ee389993e9b89e26684f58d1d866cd88ba703f"
+    },
+    {
+      "name": "lis2dw12_filter_path_set",
+      "entry": 480336,
+      "registers": [
+        37,
+        63
+      ],
+      "stock_body_bytes": 92,
+      "bridge_bytes": 10,
+      "c_body_bytes": 98,
+      "native_span_sha256": "8d2b2f84aae90c610dfff99fe29c5008c5138f69ffe12f7295ca6e1988e6f68a"
+    }
+  ],
+  "callback_stack_depth_pairs": [
+    [
+      [
+        -24
+      ],
+      [
+        -40
+      ]
+    ],
+    [
+      [
+        -24,
+        -24
+      ],
+      [
+        -40,
+        -40
+      ]
+    ],
+    [
+      [
+        -24,
+        -24,
+        -24
+      ],
+      [
+        -40,
+        -40,
+        -40
+      ]
+    ],
+    [
+      [
+        -24,
+        -24,
+        -24,
+        -24
+      ],
+      [
+        -40,
+        -40,
+        -40,
+        -24
+      ]
+    ]
+  ],
+  "unchanged_functions": [
+    "lis2dw12_block_data_update_set",
+    "lis2dw12_fifo_data_level_get",
+    "lis2dw12_fifo_mode_set",
+    "lis2dw12_fifo_watermark_set",
+    "lis2dw12_filter_bandwidth_set",
+    "lis2dw12_full_scale_set",
+    "lis2dw12_reset_get",
+    "lis2dw12_reset_set",
+    "lis2dw12_tap_detection_on_x_set",
+    "lis2dw12_tap_detection_on_y_set",
+    "lis2dw12_tap_detection_on_z_set",
+    "lis2dw12_tap_dur_set",
+    "lis2dw12_tap_mode_set",
+    "lis2dw12_tap_quiet_set",
+    "lis2dw12_tap_shock_set",
+    "lis2dw12_tap_threshold_x_set",
+    "lis2dw12_tap_threshold_y_set",
+    "lis2dw12_tap_threshold_z_set",
+    "r1_lis_byte_get_body",
+    "r1_lis_byte_set_body",
+    "r1_lis_native_power_mode_set",
+    "r1_lis_reg17_bit6_enable"
+  ],
+  "integrated_sources": [
+    "r1/src/application/runtime/native_lis_call_frames.c",
+    "r1/src/application/board/sensor-kernels/lis-setup/st-setup-frames.c",
+    "r1/src/application/runtime/native_lis_fifo.c",
+    "r1/src/application/runtime/native_lis_registers.c"
+  ],
+  "report": "build/sources-goal-r1-lis-two-register/report.json",
+  "report_sha256": "a19888ffa6eb3894362683b12536d2a879241c6450082594f8635c5f9907f12c",
+  "source_sha256": "0e9448eb71b1698455c9906e2d41c8261dc9c6e01845f20c6f2a4b4863989073",
+  "manifest_sha256": "be76bf00509f1551b53a08edbc5515ed3a3dcb9b1721ff4481fdf60b77d82eb8",
+  "stock_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "rea": [
+    {
+      "completed": true,
+      "procedure": "0x75120",
+      "path": "build/goal-r1-lis-two-register/REA-0x75120.json",
+      "sha256": "c3ded579704f12149eb8fa6458935ad94a4c51e92f3e9c7265fb4f6537ef7356"
+    },
+    {
+      "completed": true,
+      "procedure": "0x75450",
+      "path": "build/goal-r1-lis-two-register/REA-0x75450.json",
+      "sha256": "89436719ee0f2348905e54e34a1dbe2706358b338b3d0417dc1329b37f024bfd"
+    }
+  ],
+  "probe_artifacts": {
+    "build/goal-r1-lis-two-register/verify.py": "b3c9c31ee5db3a49bba96e18599ec829e5db8abaa6993e7289884875f40e4ea7",
+    "build/goal-r1-lis-two-register/before.c": "197b8aca5d912f116eb433019b2c1fb15bb407544b479604edf856a14610d61f",
+    "build/goal-r1-lis-two-register/source.elf": "2cb850573064a946fa98dba0e978e31580acf28aa86cea7a40f1d29270913135",
+    "build/goal-r1-lis-two-register/stock.elf": "588ba3ec699f0f1d357eb3434240007f40fbf06d9ef40240b0989a68987f6d99",
+    "build/goal-r1-lis-two-register/rea-snapshot.json": "c9167664c568751595cb5072adc6a0e688cf004d46f7d899a7fb0034bce70567"
+  },
+  "integrated_source_sha256": {
+    "r1/src/application/runtime/native_lis_call_frames.c": "0e9448eb71b1698455c9906e2d41c8261dc9c6e01845f20c6f2a4b4863989073",
+    "r1/src/application/board/sensor-kernels/lis-setup/st-setup-frames.c": "135849687e3d0a346381f225ad42e9bbd95212aff91ae0fe051f4b38b7d95dbc",
+    "r1/src/application/runtime/native_lis_fifo.c": "d7c14b45179e6c9a46a6641074f3fabde3ee4df3701fc64f50333a5911133314",
+    "r1/src/application/runtime/native_lis_registers.c": "630862b4a317e123795a77ff2b8a8b92a02877fa0f7c62e9fd89d658790a0a78"
+  },
+  "existing_c_bodies_reused_without_source_changes": true,
+  "limits": [
+    "Ten-byte native entry bridges retain incoming R2/R3 words, scratch addresses and final restoration. These are partial C extractions.",
+    "Existing ST-attributed C bodies are reused; actual native/C transport wrappers execute, with modeled final bus callbacks and caller-saved register/flag clobbers.",
+    "Native scratch addresses and eight-byte callback alignment match; existing C bodies add callback frame depth.",
+    "No physical ODR/filter behavior, sensor timing, complete fault-state equivalence, final link, provider qualification or byte identity claim."
+  ]
+}

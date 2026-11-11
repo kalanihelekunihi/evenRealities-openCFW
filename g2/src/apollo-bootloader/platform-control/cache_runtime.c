@@ -30,3 +30,7 @@ uint32_t opencfw_boot_cache_maintain(const uint32_t *range,uint32_t operation) {
  do { *mmio(operation ? 0xe000ef70u : 0xe000ef5cu)=address;address+=32u;count-=32u; } while((int32_t)count>=1);
  dsb();isb();return 0;
 }
+
+/* Stock entry names that branch straight to the provider above. */
+__typeof__(opencfw_boot_cache_maintain) opencfw_cache_invalidate __attribute__((alias("opencfw_boot_cache_maintain")));
+__typeof__(opencfw_boot_cache_maintain) opencfw_boot_runtime_call __attribute__((alias("opencfw_boot_cache_maintain")));

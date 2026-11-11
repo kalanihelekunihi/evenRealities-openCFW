@@ -1,0 +1,38 @@
+{
+  "schema": 1,
+  "target": "locked G2 2.2.6.10 GX8002 BINH A image-A SRAM",
+  "change": "Pin the three source-built AOUT initialized objects to their stock SRAM addresses rather than appending them after 0x10026d7c.",
+  "stock": {
+    "firmware": "g2/blobs/official/g2-2.2.6.10/firmware_codec.bin",
+    "sram_base": "0x10023400",
+    "sram_bytes": 14716,
+    "sram_sha256": "53860d6974097ad494c6697df52f95b796360131fab63cd8bfd7efc9c5596de8",
+    "context": {"address": "0x10026b94", "bytes": 52, "sha256": "b490dd275c5c8e43a917e17bf20a05ffac97ea4d870a26e61f7a3992ad777c0e"},
+    "operations": {"address": "0x10026bc8", "bytes": 84, "sha256": "b5466e260001986f04418e55cdc810ea9654f2f6b1c3ef24dbd95af7b3995f8a"},
+    "configuration": {"address": "0x10026c1c", "bytes": 88, "sha256": "1d5c6201e8d1d2cc00d6fa541ac409a9b36e2ba9bee03073e35edf914a6c6a84"}
+  },
+  "source": {
+    "sram_bytes_before": 14940,
+    "sram_bytes_after": 14716,
+    "sram_sha256_after": "972f25de5b2c720517bbb79f810fe5b2476ead4826e444731d71522c2dedaea7",
+    "context": {"address": "0x10026b94", "bytes": 52, "sha256": "1a025ed5d288367adb441e3e050dd18d0f86a3b25d3ffb738a157553b3252d8a", "equal_bytes": 50},
+    "operations": {"address": "0x10026bc8", "bytes": 84, "sha256": "001aba18f60ac579b3b93ec2c44d4b993ede070cb3db3d9c89c09d8dbb124a03", "equal_bytes": 44},
+    "configuration": {"address": "0x10026c1c", "bytes": 88, "sha256": "1d5c6201e8d1d2cc00d6fa541ac409a9b36e2ba9bee03073e35edf914a6c6a84", "equal_bytes": 88},
+    "whole_sram_equal_bytes": 2458,
+    "whole_sram_bytes": 14716,
+    "xip_bytes": 46764,
+    "xip_stock_limit": 36484,
+    "vectors": {"reset": "0x10023500", "exception": "0x1002351e", "irq": "0x1002575c"},
+    "stock_vectors": {"reset": "0x10023500", "exception": "0x10023640", "irq": "0x10025574"}
+  },
+  "verification": {
+    "sources_check": "make -C g2 sources-check",
+    "source_report": "build/g2-all-binh-a-stage1-link-20261110/report.json",
+    "source_report_sha256": "8436bcc9bc2ad447b78c51658c20a5749d7445d26d05fd6adb7905a49026de4a",
+    "strict_link_report": "build/g2-aout-pin-final-20261110/link-report.json",
+    "strict_link_report_sha256": "1273094590f378fba8f89c766e9a8f57ce9a33b7e1e0bfdfd367d35d99fc0187",
+    "payloads_linked": 7,
+    "external_binary_archive_used": false
+  },
+  "qualification": "SRAM size and AOUT object placement match stock. Full SRAM content, vector targets, XIP size, BINH A packaging, NPU command and weights, and hardware behavior remain unqualified."
+}

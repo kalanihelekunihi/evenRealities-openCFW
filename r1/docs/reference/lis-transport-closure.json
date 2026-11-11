@@ -1,0 +1,356 @@
+{
+  "schema_version": 1,
+  "stock_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "report": "build/sources-goal-r1-lis/report.json",
+  "report_sha256": "f2434cc5a6f939e935d4b00b4de32001d3a1924507b69c4c77c7ed570ca47a5d",
+  "manifest_sha256": "c5f6e572c9346eba46c91935b3243a3024ca6e5f84efc2895272200f7aa7f4a9",
+  "superseded_public_wrappers_removed": 18,
+  "retained_assembly_statements_unchanged": true,
+  "execution": {
+    "cases": 1023,
+    "passed": 1023,
+    "failures": [],
+    "counts": {
+      "read": 18,
+      "write": 18,
+      "level": 96,
+      "burst": 27,
+      "fifo": 864
+    }
+  },
+  "rea": [
+    {
+      "name": "fifo_read",
+      "evidence_id": "ev_7445a227d3fc3b80f8626b7693676dbea4c113ca70e7f658aedd134fabe2df8c",
+      "analysis_profile": {
+        "provider": {
+          "id": "ghidra",
+          "name": "Ghidra",
+          "version": "12.1.4"
+        },
+        "parameters": {
+          "target_kind": "executable",
+          "target_format": "elf",
+          "architecture": "arm",
+          "available_architectures": [
+            "arm"
+          ],
+          "import_mode": "ephemeral-source-immutable",
+          "annotation_policy": "atomic-function-entry-metadata-v1",
+          "load_image_observations": "source-mappings-entry-context-v2",
+          "function_body_evidence": "complete-inclusive-ranges-v1",
+          "function_references": "complete-body-and-entry-reference-manager-v2",
+          "call_relationship_coverage": "function-body-call-coverage-v5",
+          "function_dossier_coverage": "observed-facets-and-call-relationships-v1",
+          "string_inventory_evidence": "defined-data-coverage-v1",
+          "location_resolution": "explicit-address-exact-entry-symbol-first-v3",
+          "procedure_file_offset_resolution": "address-first-unique-target-source-mapping-v2",
+          "instruction_flow_evidence": "decoded-return-pcode-v1",
+          "instruction_references": "exact-address-incoming-v1",
+          "function_boundary_observations": "ghidra-function-boundary-limitations-v3",
+          "no_return_repair": "returning-imports-decoded-return-v2",
+          "process_launch": "inspected-jvm-launch-support-v1",
+          "jump_table_evidence": "typed-case-default-blocks-v1",
+          "decompiler_jump_loads": true,
+          "loader": "auto-from-header",
+          "language_id": "auto-from-header",
+          "compiler_spec_id": "auto-default",
+          "analyzer_preset": "ghidra-default"
+        },
+        "digest": "7e46711069eea041af1b9b99e34115c13332795e5cda76e584a722f529ec70de"
+      },
+      "limitations": [
+        "The session serves operations only after Ghidra reports default auto-analysis complete; incomplete analysis does not expose partial results.",
+        "The imported Program and temporary project are ephemeral and deleted on close. Annotation operations edit session database metadata; original executable bytes are never written.",
+        "Cancelling an active Ghidra request terminates its ephemeral database and discards session annotations. The selected target remains open; the next provider query imports the original artifact again.",
+        "Default-space addresses use lowercase 0x-prefixed hexadecimal; other address spaces use <percent-encoded-space>:0x<hex>.",
+        "References cover the complete Ghidra function-body AddressSet and exact entry. Dossier incoming edges omit sources owned by that function; procedure_references also retains those internal edges.",
+        "The dossier combines Ghidra FunctionManager, Listing, ReferenceManager, BasicBlockModel, and decompiler observations; provider-specific pseudocode and assembly are not cross-provider text invariants.",
+        "Resolved reference metadata identifies computed, indirect, external, call, jump, and data edges; unresolved targetless flows remain unknown, and function classifications distinguish thunks and externals.",
+        "Synthetic Ghidra entry-point references without actionable memory sources are omitted.",
+        "The Java bridge serializes one function request per Program and lets each decompilation run until it completes or the caller cancels.",
+        "macOS sessions require a matching executable Ghidra native decompiler; REA checks for it but does not build native components or change Gatekeeper quarantine state."
+      ],
+      "procedure": {
+        "address": "0x750e8",
+        "name": "fifo_read",
+        "classification": {
+          "external": false,
+          "thunk": false,
+          "thunk_target": null,
+          "provenance": "ghidra-function-manager"
+        },
+        "body": {
+          "available": true,
+          "provenance": "ghidra-function-body-address-set",
+          "ranges": [
+            {
+              "start": "0x750e8",
+              "end": "0x7511b"
+            }
+          ],
+          "total_bytes": 52,
+          "span_bytes": 52,
+          "non_contiguous": false,
+          "contains_entry": true
+        },
+        "signature": "undefined fifo_read()",
+        "locals": [
+          {
+            "description": "undefined1 local_10 @ Stack[-0x10]:1",
+            "provenance": "ghidra-function-database"
+          }
+        ]
+      },
+      "pseudocode": "\nuint fifo_read(undefined4 param_1,uint param_2,undefined4 param_3,uint param_4)\n\n{\n  uint local_10;\n  \n  local_10 = param_4 & 0xffffff00;\n  fifo_level(&DAT_2001e4d8,&local_10);\n  if ((local_10 & 0xff) != 0) {\n    if (param_2 < (local_10 & 0xff)) {\n      local_10 = CONCAT31(local_10._1_3_,(char)param_2);\n    }\n    fifo_burst(&DAT_2001e4d8,param_1,local_10 & 0xff);\n  }\n  return local_10 & 0xff;\n}\n\n",
+      "assembly": [
+        "0x750e8: push {r3,r4,r5,lr}",
+        "0x750ea: mov r5, r0",
+        "0x750ec: movs r0, #0x0",
+        "0x750ee: mov r4, r1",
+        "0x750f0: strb.w r0, [sp,#0x0]",
+        "0x750f4: mov r1, sp",
+        "0x750f6: ldr r0, [0x0007511c]",
+        "0x750f8: bl 0x000753ac",
+        "0x750fc: ldrb.w r1, [sp,#0x0]",
+        "0x75100: cbz r1, 0x00075116",
+        "0x75102: cmp r1, r4",
+        "0x75104: bls 0x0007510a",
+        "0x75106: strb.w r4, [sp,#0x0]",
+        "0x7510a: ldrb.w r2, [sp,#0x0]",
+        "0x7510e: mov r1, r5",
+        "0x75110: ldr r0, [0x0007511c]",
+        "0x75112: bl 0x000750a0",
+        "0x75116: ldrb.w r0, [sp,#0x0]",
+        "0x7511a: pop {r3,r4,r5,pc}"
+      ]
+    },
+    {
+      "name": "fifo_level",
+      "evidence_id": "ev_f1cf1c31ab90a324b9848153cf37515db39bf6df197debd401565469c3542da6",
+      "analysis_profile": {
+        "provider": {
+          "id": "ghidra",
+          "name": "Ghidra",
+          "version": "12.1.4"
+        },
+        "parameters": {
+          "target_kind": "executable",
+          "target_format": "elf",
+          "architecture": "arm",
+          "available_architectures": [
+            "arm"
+          ],
+          "import_mode": "ephemeral-source-immutable",
+          "annotation_policy": "atomic-function-entry-metadata-v1",
+          "load_image_observations": "source-mappings-entry-context-v2",
+          "function_body_evidence": "complete-inclusive-ranges-v1",
+          "function_references": "complete-body-and-entry-reference-manager-v2",
+          "call_relationship_coverage": "function-body-call-coverage-v5",
+          "function_dossier_coverage": "observed-facets-and-call-relationships-v1",
+          "string_inventory_evidence": "defined-data-coverage-v1",
+          "location_resolution": "explicit-address-exact-entry-symbol-first-v3",
+          "procedure_file_offset_resolution": "address-first-unique-target-source-mapping-v2",
+          "instruction_flow_evidence": "decoded-return-pcode-v1",
+          "instruction_references": "exact-address-incoming-v1",
+          "function_boundary_observations": "ghidra-function-boundary-limitations-v3",
+          "no_return_repair": "returning-imports-decoded-return-v2",
+          "process_launch": "inspected-jvm-launch-support-v1",
+          "jump_table_evidence": "typed-case-default-blocks-v1",
+          "decompiler_jump_loads": true,
+          "loader": "auto-from-header",
+          "language_id": "auto-from-header",
+          "compiler_spec_id": "auto-default",
+          "analyzer_preset": "ghidra-default"
+        },
+        "digest": "7e46711069eea041af1b9b99e34115c13332795e5cda76e584a722f529ec70de"
+      },
+      "limitations": [
+        "The session serves operations only after Ghidra reports default auto-analysis complete; incomplete analysis does not expose partial results.",
+        "The imported Program and temporary project are ephemeral and deleted on close. Annotation operations edit session database metadata; original executable bytes are never written.",
+        "Cancelling an active Ghidra request terminates its ephemeral database and discards session annotations. The selected target remains open; the next provider query imports the original artifact again.",
+        "Default-space addresses use lowercase 0x-prefixed hexadecimal; other address spaces use <percent-encoded-space>:0x<hex>.",
+        "References cover the complete Ghidra function-body AddressSet and exact entry. Dossier incoming edges omit sources owned by that function; procedure_references also retains those internal edges.",
+        "The dossier combines Ghidra FunctionManager, Listing, ReferenceManager, BasicBlockModel, and decompiler observations; provider-specific pseudocode and assembly are not cross-provider text invariants.",
+        "Resolved reference metadata identifies computed, indirect, external, call, jump, and data edges; unresolved targetless flows remain unknown, and function classifications distinguish thunks and externals.",
+        "Synthetic Ghidra entry-point references without actionable memory sources are omitted.",
+        "The Java bridge serializes one function request per Program and lets each decompilation run until it completes or the caller cancels.",
+        "macOS sessions require a matching executable Ghidra native decompiler; REA checks for it but does not build native components or change Gatekeeper quarantine state."
+      ],
+      "procedure": {
+        "address": "0x753ac",
+        "name": "fifo_level",
+        "classification": {
+          "external": false,
+          "thunk": false,
+          "thunk_target": null,
+          "provenance": "ghidra-function-manager"
+        },
+        "body": {
+          "available": true,
+          "provenance": "ghidra-function-body-address-set",
+          "ranges": [
+            {
+              "start": "0x753ac",
+              "end": "0x753c5"
+            }
+          ],
+          "total_bytes": 26,
+          "span_bytes": 26,
+          "non_contiguous": false,
+          "contains_entry": true
+        },
+        "signature": "undefined fifo_level()",
+        "locals": [
+          {
+            "description": "undefined1 local_10 @ Stack[-0x10]:1",
+            "provenance": "ghidra-function-database"
+          }
+        ]
+      },
+      "pseudocode": "\nvoid fifo_level(undefined4 param_1,byte *param_2,undefined4 param_3,undefined4 param_4)\n\n{\n  undefined4 local_10;\n  \n  local_10 = param_4;\n  read_transport(param_1,0x2f,&local_10,1);\n  *param_2 = (byte)local_10 & 0x3f;\n  return;\n}\n\n",
+      "assembly": [
+        "0x753ac: push {r3,r4,r5,lr}",
+        "0x753ae: mov r4, r1",
+        "0x753b0: movs r3, #0x1",
+        "0x753b2: mov r2, sp",
+        "0x753b4: movs r1, #0x2f",
+        "0x753b6: bl 0x000757c4",
+        "0x753ba: ldrb.w r1, [sp,#0x0]",
+        "0x753be: and r1, r1, #0x3f",
+        "0x753c2: strb r1, [r4,#0x0]",
+        "0x753c4: pop {r3,r4,r5,pc}"
+      ]
+    },
+    {
+      "name": "fifo_burst",
+      "evidence_id": "ev_f86d72731785c004e6b6aa4712933aac8a90a07666fe83bc9a077f4254206b98",
+      "analysis_profile": {
+        "provider": {
+          "id": "ghidra",
+          "name": "Ghidra",
+          "version": "12.1.4"
+        },
+        "parameters": {
+          "target_kind": "executable",
+          "target_format": "elf",
+          "architecture": "arm",
+          "available_architectures": [
+            "arm"
+          ],
+          "import_mode": "ephemeral-source-immutable",
+          "annotation_policy": "atomic-function-entry-metadata-v1",
+          "load_image_observations": "source-mappings-entry-context-v2",
+          "function_body_evidence": "complete-inclusive-ranges-v1",
+          "function_references": "complete-body-and-entry-reference-manager-v2",
+          "call_relationship_coverage": "function-body-call-coverage-v5",
+          "function_dossier_coverage": "observed-facets-and-call-relationships-v1",
+          "string_inventory_evidence": "defined-data-coverage-v1",
+          "location_resolution": "explicit-address-exact-entry-symbol-first-v3",
+          "procedure_file_offset_resolution": "address-first-unique-target-source-mapping-v2",
+          "instruction_flow_evidence": "decoded-return-pcode-v1",
+          "instruction_references": "exact-address-incoming-v1",
+          "function_boundary_observations": "ghidra-function-boundary-limitations-v3",
+          "no_return_repair": "returning-imports-decoded-return-v2",
+          "process_launch": "inspected-jvm-launch-support-v1",
+          "jump_table_evidence": "typed-case-default-blocks-v1",
+          "decompiler_jump_loads": true,
+          "loader": "auto-from-header",
+          "language_id": "auto-from-header",
+          "compiler_spec_id": "auto-default",
+          "analyzer_preset": "ghidra-default"
+        },
+        "digest": "7e46711069eea041af1b9b99e34115c13332795e5cda76e584a722f529ec70de"
+      },
+      "limitations": [
+        "The session serves operations only after Ghidra reports default auto-analysis complete; incomplete analysis does not expose partial results.",
+        "The imported Program and temporary project are ephemeral and deleted on close. Annotation operations edit session database metadata; original executable bytes are never written.",
+        "Cancelling an active Ghidra request terminates its ephemeral database and discards session annotations. The selected target remains open; the next provider query imports the original artifact again.",
+        "Default-space addresses use lowercase 0x-prefixed hexadecimal; other address spaces use <percent-encoded-space>:0x<hex>.",
+        "References cover the complete Ghidra function-body AddressSet and exact entry. Dossier incoming edges omit sources owned by that function; procedure_references also retains those internal edges.",
+        "The dossier combines Ghidra FunctionManager, Listing, ReferenceManager, BasicBlockModel, and decompiler observations; provider-specific pseudocode and assembly are not cross-provider text invariants.",
+        "Resolved reference metadata identifies computed, indirect, external, call, jump, and data edges; unresolved targetless flows remain unknown, and function classifications distinguish thunks and externals.",
+        "Synthetic Ghidra entry-point references without actionable memory sources are omitted.",
+        "The Java bridge serializes one function request per Program and lets each decompilation run until it completes or the caller cancels.",
+        "macOS sessions require a matching executable Ghidra native decompiler; REA checks for it but does not build native components or change Gatekeeper quarantine state."
+      ],
+      "procedure": {
+        "address": "0x750a0",
+        "name": "fifo_burst",
+        "classification": {
+          "external": false,
+          "thunk": false,
+          "thunk_target": null,
+          "provenance": "ghidra-function-manager"
+        },
+        "body": {
+          "available": true,
+          "provenance": "ghidra-function-body-address-set",
+          "ranges": [
+            {
+              "start": "0x750a0",
+              "end": "0x750b7"
+            }
+          ],
+          "total_bytes": 24,
+          "span_bytes": 24,
+          "non_contiguous": false,
+          "contains_entry": true
+        },
+        "signature": "undefined fifo_burst()",
+        "locals": []
+      },
+      "pseudocode": "\nvoid fifo_burst(undefined4 param_1,undefined4 param_2,short param_3)\n\n{\n  read_transport(param_1,0x28,param_2,param_3 * 6);\n  return;\n}\n\n",
+      "assembly": [
+        "0x750a0: add.w r2, r2, r2, lsl #0x1",
+        "0x750a4: movw r3, #0xffff",
+        "0x750a8: and.w r3, r3, r2, lsl #0x1",
+        "0x750ac: push {r4,lr}",
+        "0x750ae: mov r2, r1",
+        "0x750b0: movs r1, #0x28",
+        "0x750b2: bl 0x000757c4",
+        "0x750b6: pop {r4,pc}"
+      ]
+    }
+  ],
+  "composition": {
+    "application_unresolved": 244,
+    "bootloader_unresolved": 34,
+    "resolved": [
+      "lis2dw12_read_reg",
+      "lis2dw12_write_reg",
+      "r1_lis2dw12_fifo_read",
+      "r1_lis_context"
+    ],
+    "added": [],
+    "compiled_units": 561
+  },
+  "sources": [
+    {
+      "source": "r1/src/application/runtime/native_lis_fifo.c",
+      "source_sha256": "b568d9eeaf2b68f0b4b86978195c89f055ad25b7929b73d3a5c74618d3f8cfd0",
+      "object_sha256": "2a41dad37832252e014519e6e60e661283120b50cb01c5acf04678c1bab7d5ee",
+      "link": true
+    },
+    {
+      "source": "r1/src/application/runtime/native_lis_registers.c",
+      "source_sha256": "138b7952f16e91acebe3e03b8c17db756802c65bc8890bfff840446046b5710a",
+      "object_sha256": "174ec4107a3bbdaea884ac69018656db8515c6d76ff6e180fc67d64cbd424566",
+      "link": true
+    }
+  ],
+  "hashes": {
+    "build/goal-r1-lis-closure/compare.py": "b028f8f6d15534911d8082b4995cdeb8d86e6bc355dcbe6cc075ced09ec273df",
+    "build/goal-r1-lis-closure/comparison.json": "0c29469830f481f6740ee371c3466759d28a5d31191fdbd75c32a4888a541cbe",
+    "build/goal-r1-lis-closure/source.elf": "bc9d5e7ea5c7caa22a78b276e91824f4066239ede5e442d433452f23517ac428",
+    "build/goal-r1-lis-closure/stock.elf": "db26592f04b562896c8f90eb014ef1be72747e0ce4cd5acd899b837adfb49e15",
+    "build/goal-r1-lis-closure/rea-snapshot.json": "406d5db812f7ef268ba4589b69c3f8aac102f4ba1ccc4999d5037bebb7716259"
+  },
+  "limitations": [
+    "Retained register-sensitive bridges still contain inline assembly; this is not a pure-C or source-qualified firmware result.",
+    "The context provides callbacks and a handle for execution tests; native startup installation is not validated.",
+    "Transport callbacks are controlled mocks; no physical accelerometer/I2C behavior is established.",
+    "Only r4-r7 and SP preservation are explicitly checked; remaining callee-saved registers were not independently asserted.",
+    "No full firmware linking or byte identity."
+  ]
+}

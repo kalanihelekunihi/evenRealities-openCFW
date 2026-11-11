@@ -1,0 +1,43 @@
+{
+  "schema": "opencfw.g2.case.uart-live-source-consolidation.v1",
+  "date": "2026-11-11",
+  "finding": {
+    "description": "Five separately compiled CASE C units formed a disconnected duplicate UART receive graph. The strict CASE linker discarded all five; the startup UART graph is the live source implementation.",
+    "removed_units": [
+      "g2/src/case/frame-callback/frame.c",
+      "g2/src/case/glue/uart_read_provider.c",
+      "g2/src/case/glue/uart_rx_complete_callback.c",
+      "g2/src/case/uart-receive/receive.c",
+      "g2/src/case/uart-start/start.c"
+    ],
+    "stock_functions_with_live_startup_providers": {
+      "0x080063ec": "case_boot_sensor_finish_guard",
+      "0x080064ec": "case_boot_sensor_bind",
+      "0x08006544": "case_boot_sensor_callback_finish",
+      "0x08008758": "case_boot_sensor_callback_8758",
+      "0x08008998": "case_boot_sensor_callback_8998",
+      "0x08008d98": "case_boot_sensor_bind_core"
+    },
+    "linked_path": "vector slot 43 -> case_vector_irq_8f98 -> case_irq_child_5f50 -> descriptor callback -> case_boot_sensor_callback_8998 or case_boot_sensor_callback_8758 -> case_boot_sensor_callback_finish -> case_boot_sensor_finish_guard and case_boot_sensor_bind",
+    "linked_case_vector_slot_43": "0x0800c31d"
+  },
+  "verification": {
+    "before_case_binary_sha256": "36515eb18baa64a722b5bd09efc272c039007e84ae107177bded36aad0b28d22",
+    "after_case_binary_sha256": "36515eb18baa64a722b5bd09efc272c039007e84ae107177bded36aad0b28d22",
+    "manifest_check": "g2: 4885 units, 4546 source files, 1 final-link-only unit",
+    "case_compile": "361/361; zero duplicate strong symbols and zero unresolved",
+    "all_compile": "4880/4880 enabled C units; zero failures and zero duplicate strong symbols",
+    "all_strict_links": 7,
+    "all_seven_payload_binary_hashes_unchanged": true,
+    "source_bundle_bytes": 4638024,
+    "source_bundle_sha256": "c1187eee3fa765619ad3f99a10bf2011300fc43ecb9d49a1d1399f74ee971f54",
+    "source_bundle_matches_locked_target": false,
+    "source_completeness_proven": false,
+    "build_report": "build/case-uart-live-20261111/all/report.json",
+    "link_report": "build/case-uart-live-20261111/bundle/link-report.json"
+  },
+  "limits": [
+    "A linked call path and an unchanged image do not prove physical UART operation or full firmware behavior.",
+    "The removed offline candidates remain recoverable in Git history and the pre-consolidation tag."
+  ]
+}

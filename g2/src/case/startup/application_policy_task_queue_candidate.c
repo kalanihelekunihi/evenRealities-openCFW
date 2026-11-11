@@ -6,7 +6,7 @@ extern void case_policy_task_list_insert_sorted(uint32_t list,uint32_t link); /*
 static uint32_t rd(uint32_t a){return *(volatile uint32_t *)(uintptr_t)a;}
 static void wr(uint32_t a,uint32_t v){*(volatile uint32_t *)(uintptr_t)a=v;}
 static __attribute__((noreturn)) void native_fault(void)
-{__asm__ volatile("cpsid i\n1: b 1b");__builtin_unreachable();}
+{__asm__ volatile("cpsid i");for(;;){}}
 /* Stock 0x0800BF94 (case_policy_task_list_initialize) */
 void case_policy_task_list_initialize(uint32_t list)
 {
@@ -68,3 +68,5 @@ void case_policy_task_sleep_enqueue(uint32_t ticks,uint32_t mode)
     case_policy_task_list_insert_sorted(list,current+4u);
     if(deadline>=now && deadline<rd(scheduler+40u))wr(scheduler+40u,deadline);
 }
+/* Dedup (0x0800abb0): case_kernel_task_delay (was legacy-default/kernel_task_delay_candidate.c). */
+__typeof__(case_policy_task_sleep_enqueue) case_kernel_task_delay __attribute__((alias("case_policy_task_sleep_enqueue")));

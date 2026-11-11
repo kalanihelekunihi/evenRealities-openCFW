@@ -1,0 +1,219 @@
+{
+  "schema_version": 1,
+  "report": "build/sources-goal-r1-dfu-sdm-c/report.json",
+  "report_sha256": "82f7f1c4bebe4b58b816fd963529b7b4400a059ace27125c740afa9a56d446f0",
+  "manifest_sha256": "95440e3d32f0076e18f4163f1f0e144fdb2e773bc96fab0b82d5e95e598a6518",
+  "set": {
+    "paired_cases": 2912,
+    "native_provider_depths": [
+      [
+        "nrf_log_frontend_std_0",
+        24
+      ],
+      [
+        "nrf_log_frontend_std_1",
+        24
+      ],
+      [
+        "r1_structured_log_format",
+        24
+      ],
+      [
+        "r1_structured_log_mode_get",
+        24
+      ],
+      [
+        "svc",
+        24
+      ]
+    ],
+    "C_provider_depths": [
+      [
+        "nrf_log_frontend_std_0",
+        8
+      ],
+      [
+        "nrf_log_frontend_std_1",
+        8
+      ],
+      [
+        "r1_structured_log_format",
+        8
+      ],
+      [
+        "r1_structured_log_mode_get",
+        8
+      ],
+      [
+        "svc",
+        8
+      ]
+    ],
+    "primary_then_UICR_fallback": true,
+    "captured_base_survives_provider_mutations": true,
+    "raw_SVC19_status": true,
+    "log_gates_and_text_checked": true,
+    "limits": [
+      "Log providers and SVC19 modeled; no physical SoftDevice handoff, actual vector changes, boot or exception frames validated.",
+      "Provider frames recorded, not equated; caller-clobbered nonarguments, APSR, live callee-register values and private spills excluded.",
+      "Mapped address words and normal terminating provider behavior only."
+    ]
+  },
+  "restore": {
+    "paired_cases": 672,
+    "native_provider_depths": [
+      [
+        "nrf_log_frontend_std_0",
+        16
+      ],
+      [
+        "nrf_log_frontend_std_1",
+        16
+      ],
+      [
+        "r1_structured_log_format",
+        16
+      ],
+      [
+        "r1_structured_log_mode_get",
+        16
+      ],
+      [
+        "svc",
+        16
+      ]
+    ],
+    "C_provider_depths": [
+      [
+        "nrf_log_frontend_std_0",
+        8
+      ],
+      [
+        "nrf_log_frontend_std_1",
+        8
+      ],
+      [
+        "r1_structured_log_format",
+        8
+      ],
+      [
+        "r1_structured_log_mode_get",
+        8
+      ],
+      [
+        "svc",
+        8
+      ]
+    ],
+    "fixed_application_base": true,
+    "captured_base_survives_provider_mutations": true,
+    "raw_SVC19_status": true,
+    "log_gates_and_text_checked": true,
+    "limits": [
+      "Log providers and SVC19 modeled; no physical SoftDevice handoff, actual vector changes, boot or exception frames validated.",
+      "Provider frames recorded, not equated; caller-clobbered nonarguments, APSR, live callee-register values and private spills excluded.",
+      "Mapped address words and normal terminating provider behavior only."
+    ]
+  },
+  "paired_cases": 3584,
+  "executions": 7168,
+  "defects": {
+    "wrong-service": {
+      "compiled": true,
+      "both_paths_behavior_rejected": true
+    },
+    "wrong-base": {
+      "compiled": true,
+      "both_paths_behavior_rejected": true
+    },
+    "discard-status": {
+      "compiled": true,
+      "both_paths_behavior_rejected": true
+    }
+  },
+  "audit": {
+    "unchanged_prior_object_hashes": 798,
+    "changed_object_hashes": [
+      [
+        "r1-application",
+        "r1/src/application/runtime/native_dfu_vector_restore.c"
+      ],
+      [
+        "r1-bootloader",
+        "{gen}/r1_startup_vectors.S"
+      ],
+      [
+        "r1-bootloader",
+        "{gen}/r1_uecc.c"
+      ]
+    ],
+    "generated_boot_crypto_and_vectors_allocated_bytes_and_relocations_unchanged": true,
+    "removed_application_imports": []
+  },
+  "rea_bytes": [
+    {
+      "name": "set",
+      "evidence_id": "ev_808884a503b560143bf4da3cb1e6e277ee74fecea4811b01f61f2ffb7066bd00",
+      "address": "0x78590",
+      "length": 202,
+      "matches_locked_raw": true,
+      "sha256": "defe73f352ca91c0458a39653e029de35bc18a4f7d07340a6c5bde6c44746f46"
+    },
+    {
+      "name": "unset",
+      "evidence_id": "ev_87bb99b4a3e94ae1d1c571c727e00550ee27315f9d671bf00c4c284627c636b0",
+      "address": "0x7876c",
+      "length": 132,
+      "matches_locked_raw": true,
+      "sha256": "8f8c9ce9dd6c183e084d50ce7fc941e7649401539e0fce9466890f3a414173f2"
+    }
+  ],
+  "raw_application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "compiled_header_sha256": {
+    "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stdint.h": "f43783466c93f77a6464274ebf18f9e4cc46f0d90770ddee2993c6cf39f7514f",
+    "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/softdevice/s140/headers/nrf_sdm.h": "366345f08ed61185d3352fe8847401c8af3dfe3c5092ad7585913df35bff15e1",
+    "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx/mdk/nrf.h": "b56766254c51caeaf7916fcd61ea43bbabbeac3e261a8acf98dd43b59cb16bc6",
+    "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx/mdk/nrf52840.h": "3ee4810a62209afab4892a37b09e13e5f6926217bc23bc977c40c9be61ff0ff3",
+    "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/toolchain/cmsis/include/core_cm4.h": "cdc0c5ab9ba0f24c065e891d26c3e686ed04106700ce6a572cc7e83e71965b59",
+    "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/toolchain/cmsis/include/cmsis_version.h": "dd03af200b23bdd8d091ffa7beb3d1a2c4fc5611557567bd57ec613205f6df1f",
+    "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/toolchain/cmsis/include/cmsis_compiler.h": "869640702d811c4c63abb52206715c891a93fd03be954df5ad40d378355af3d6",
+    "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/toolchain/cmsis/include/cmsis_gcc.h": "0837f98e834d6a529854c8c86336e9d99eb8e379bf1deb964858d7863950f862",
+    "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/toolchain/cmsis/include/mpu_armv7.h": "e504a7d47dfdb3d61dfae3cf08d27ba9bc69aa4b2b81ca568efdafd65d6abdcc",
+    "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx/mdk/system_nrf52840.h": "01304326c0d3c2c371536cbbb75ba560a92f7fa06dc06f06ca878b52466eff97",
+    "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx/mdk/nrf52840_bitfields.h": "ad25863466e6844f277a9b4bcc5559d1289047d122f2806ea2e12d858f68de97",
+    "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx/mdk/nrf51_to_nrf52840.h": "304c8a3ac374baab709c0098da7f6e352a8ee135eb75e046cc5ddb33e3abe029",
+    "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx/mdk/nrf52_to_nrf52840.h": "5f5e52064fa9fced7c64ebcf5920b00107fe8782cb6e277959b03f0f355d5609",
+    "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx/mdk/compiler_abstraction.h": "dfff53ae3e96833a90a11ea3f71ae17bf2af8063049f0c9a12f9a0b9ecfd283b",
+    "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/softdevice/s140/headers/nrf_svc.h": "d8deffc6ca5924e53543f86772e8bc4625ab08e2c7d0760d7d4ae90dc4a3a65e",
+    "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/softdevice/s140/headers/nrf_error.h": "e0b2a0aea6d28ca2f8215a66fb8816ae17852d505283e4d70863a7dc86f88fc5",
+    "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/softdevice/s140/headers/nrf_error_sdm.h": "06ff592f41b31ca4b9a465355d12bb0783d21efa328198169f1c0cc7992c459f",
+    "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/softdevice/s140/headers/nrf_soc.h": "44b27de1a00798ca4db7ae881d1dc953703649d5402760a434f51b9a2b672c4f",
+    "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/softdevice/s140/headers/nrf_error_soc.h": "809df4e68f850f420a57c5e30b99fe93b58c69845a8cefdd58f14a75d9654598"
+  },
+  "strict_bootloader_link_report_sha256": "e0708335e00807be645a9707e3d37c0b885e1135e0ce7ae67a7a162ff0f7f396",
+  "evidence_files": {
+    "build/goal-r1-dfu-sdm-c/verify-set.py": "f4c43cadbfde593121fd07e40d01e035fe6dcb8c01d4340b68b80c8c408dcbb6",
+    "build/goal-r1-dfu-sdm-c/verify-unset.py": "710cb3b230f7ab82c453a7c74c29da7f820b21893be1eda1483dd578b53f50cd",
+    "build/goal-r1-dfu-sdm-c/defects.py": "3d5e255a4f66dbaab03a90b3488977f3607dc83ae66077ac5e98382a4fd06211",
+    "build/goal-r1-dfu-sdm-c/audit.py": "91bafdeac752082a5122eb4d7bfa79f03df042fb0ac58860ccdd59160c81dfea",
+    "build/goal-r1-dfu-sdm-c/set.elf": "cc388729afa1ecd1c86857efe07d4f5ebe29bab3cdf9981d3bc5319b2eced424",
+    "build/goal-r1-dfu-sdm-c/unset.elf": "d71368f7e4f324f1e931e508fd1f463c92f634fbe28cfc4654c0f2ae7d60446b",
+    "build/goal-r1-dfu-sdm-c/set-results.json": "3a3dc3fe7b544325ea1e510215f2b0b34fb714345744b07ce3a6e86a3b968b8a",
+    "build/goal-r1-dfu-sdm-c/unset-results.json": "953b844d45e5d98a8880b35348e050af92e750686db6725eaa66cba01c03652d",
+    "build/goal-r1-dfu-sdm-c/verify-set-final.log": "5320f033dd557489abe5139a010a842fea6d357574f018b6969d7c9509956385",
+    "build/goal-r1-dfu-sdm-c/verify-unset-final.log": "ff0807bfc8471bb966ab1c1fcb6c362852762ab7aa9fb6aa08aa645214bf2dc5",
+    "build/goal-r1-dfu-sdm-c/defects.log": "2c9f489740527ac8738adcfcbca5bb04954446e99f1187f3d93f3e2631075f01",
+    "build/goal-r1-dfu-sdm-c/defects.json": "01b438cbcbb0f6cede3f7954677f444d345d811d8f083770946fc4b6ae139c16",
+    "build/goal-r1-dfu-sdm-c/unit.dis": "bb0fe97598b9284dbb91bed8fb63cc62da6c3e7331967a9598874a16f3747273",
+    "build/goal-r1-dfu-sdm-c/rea-set.json": "0a0a836f77b68d02faac8e02af015ea8c4e974aa86a884e6c4ce4978bd8a6212",
+    "build/goal-r1-dfu-sdm-c/rea-unset.json": "0acc7a544b0f3b33136e5ad7a6d916b8216e7739c8e9f2dda1dddfda8e6d9919",
+    "build/goal-r1-dfu-sdm-c/sources-check.log": "f631cce80ab62163bd75c18877fd360880eecbdf2d26ea1436a7dbedd3bf9234"
+  },
+  "source_plan_modified": false,
+  "limitations": [
+    "SDK SVC primitive executes; exception handling/returned status and logging are modeled.",
+    "Physical SoftDevice dispatch, vector mutation, NVIC/exception frames and full application final link unverified.",
+    "Private spills/live temporaries, caller-clobbered outputs and APSR excluded.",
+    "Global manifest check retains unrelated G2 failure."
+  ]
+}

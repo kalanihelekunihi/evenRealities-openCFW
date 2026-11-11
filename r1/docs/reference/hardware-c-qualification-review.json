@@ -1,0 +1,565 @@
+{
+  "schema": 1,
+  "scope": "Existing R1 C hardware providers: anchored qualification and exact image admission",
+  "normal_source_build_unchanged": true,
+  "all_78_input_source_hashes_unchanged": true,
+  "qualified_regions_added": [
+    {
+      "payload": "r1-application",
+      "symbol": "r1_goodix_transport_release",
+      "start": 168812,
+      "end": 168818,
+      "sha256": "33bf7bad4199eae8dc41d42274c131695819876fbfb469aa904a7458b0c2f61c",
+      "evidence": "r1/symbols/function-frontier.csv",
+      "bindings": {
+        "r1_peripheral_line_release": 328453
+      },
+      "address": 328556,
+      "binding_evidence": "r1/symbols/function-frontier.csv"
+    },
+    {
+      "payload": "r1-application",
+      "symbol": "r1_goodix_transport_prepare",
+      "start": 168818,
+      "end": 168824,
+      "sha256": "74e443196ae329fdefcfcba015ee28ceeedc3755739440a1de247e8bc670f3a2",
+      "evidence": "r1/symbols/function-frontier.csv",
+      "bindings": {
+        "r1_peripheral_line_acquire": 328505
+      },
+      "address": 328562,
+      "binding_evidence": "r1/symbols/function-frontier.csv"
+    },
+    {
+      "payload": "r1-application",
+      "symbol": "r1_touch_bus_enable_on",
+      "start": 168824,
+      "end": 168830,
+      "sha256": "9a6c80e7430d2372665b4c8ef60b94c25d98cdcac6012fec680495eb8631c040",
+      "evidence": "r1/symbols/function-frontier.csv",
+      "bindings": {
+        "r1_peripheral_line_release": 328453
+      },
+      "address": 328568,
+      "binding_evidence": "r1/symbols/function-frontier.csv"
+    },
+    {
+      "payload": "r1-application",
+      "symbol": "r1_touch_bus_acquire_on",
+      "start": 168830,
+      "end": 168836,
+      "sha256": "55324487a4f34514581a629ab36b6b0bd2a8f7be0672ff868bd91207b5a2685f",
+      "evidence": "r1/symbols/function-frontier.csv",
+      "bindings": {
+        "r1_peripheral_line_acquire": 328505
+      },
+      "address": 328574,
+      "binding_evidence": "r1/symbols/function-frontier.csv"
+    }
+  ],
+  "new_C_executable_bytes": 24,
+  "canonical_plan_only_appends_one_official_unit": true,
+  "sweeps": {
+    "qualified": {
+      "candidate_units": 312,
+      "compiled_units": 312,
+      "selected_regions": [
+        {
+          "source": "r1/src/application/board/native_charger_state.c",
+          "payload": "r1-application",
+          "symbol": "r1_native_charger_state_get",
+          "start": 169496,
+          "end": 169500,
+          "sha256": "9011d0939e811241075a55f8ebf69d4ebe99a0f5f8db71bbcedbd001ead7ae2b",
+          "evidence": "r1/symbols/function-frontier.csv",
+          "bindings": {
+            "r1_yhm_charge_state_native": 217715
+          },
+          "address": 329240,
+          "binding_evidence": "r1/symbols/function-frontier.csv",
+          "already_selected": true
+        },
+        {
+          "source": "r1/src/application/board/native_watchdog_device.c",
+          "payload": "r1-application",
+          "symbol": "r1_native_watchdog_hw_close",
+          "start": 168136,
+          "end": 168148,
+          "sha256": "710b2af46f13fa6b722856c5c8bd4ff46cd8b983e158f82744871e9e501b0441",
+          "evidence": "r1/symbols/function-frontier.csv",
+          "bindings": {
+            "r1_stock_dispatch_0c": 548027,
+            "r1_native_watchdog_device": 536901268
+          },
+          "address": 327880,
+          "match_evidence": {
+            "method": "independently named native entry and all unrelocated bytes, followed by full linked equality",
+            "fixed_bytes": 4,
+            "compiled_pattern_sha256": "18cf2ecabc30b1b2881abcbf34d3d48d3db265cec04c49763fb84c1b4494a09d",
+            "relocations": [
+              {
+                "symbol": "r1_stock_dispatch_0c",
+                "offset": 4,
+                "relocation_type": 30,
+                "address": 548027,
+                "role": "native_function"
+              },
+              {
+                "symbol": "r1_native_watchdog_device",
+                "offset": 8,
+                "relocation_type": 2,
+                "address": 536901268,
+                "role": "native_literal_symbol"
+              }
+            ]
+          },
+          "already_selected": true
+        },
+        {
+          "source": "r1/src/application/board/native_watchdog_device.c",
+          "payload": "r1-application",
+          "symbol": "r1_native_watchdog_hw_feed_thunk",
+          "start": 453608,
+          "end": 453612,
+          "sha256": "07983508cd241588ec24ee42f080e1abe7f59dfb06a3522f4fb2f0cf9f28213e",
+          "evidence": "r1/symbols/function-frontier.csv",
+          "bindings": {
+            "r1_native_watchdog_hw_feed": 327933
+          },
+          "address": 613352,
+          "binding_evidence": "r1/symbols/function-frontier.csv",
+          "already_selected": true
+        },
+        {
+          "source": "r1/src/application/board/native_yhm_frontend.c",
+          "payload": "r1-application",
+          "symbol": "r1_yhm_register_read_native",
+          "start": 58380,
+          "end": 58386,
+          "sha256": "6ba60cc0148015a8c204c06e20d138f413cce8e7d75e3a2abb08d8a57bfc2c35",
+          "evidence": "r1/symbols/function-frontier.csv",
+          "bindings": {
+            "r1_yhm_register_read_record": 329677
+          },
+          "address": 218124,
+          "binding_evidence": "r1/symbols/function-frontier.csv",
+          "already_selected": true
+        },
+        {
+          "source": "r1/src/application/board/native_yhm_transport.c",
+          "payload": "r1-application",
+          "symbol": "r1_yhm_register_write_native",
+          "start": 59232,
+          "end": 59238,
+          "sha256": "f34358d99aab6f335322dd6e2f8619f823a9f889b1e0fc4862e674f903f529c8",
+          "evidence": "r1/symbols/function-frontier.csv",
+          "bindings": {
+            "r1_yhm_register_write_record": 329733
+          },
+          "address": 218976,
+          "binding_evidence": "r1/symbols/function-frontier.csv",
+          "already_selected": true
+        },
+        {
+          "source": "r1/src/application/board/native_time_utc_offset.c",
+          "payload": "r1-application",
+          "symbol": "r1_time_utc_offset_get",
+          "start": 409012,
+          "end": 409024,
+          "sha256": "1a4b646abd6beac7eda33fe13c66432704ed01689d6b1e34d729a2cab57eb8ab",
+          "evidence": "r1/symbols/function-frontier.csv",
+          "bindings": {
+            "r1_time_state": 536963780
+          },
+          "address": 568756,
+          "match_evidence": {
+            "method": "independently named native entry and all unrelocated bytes, followed by full linked equality",
+            "fixed_bytes": 8,
+            "compiled_pattern_sha256": "d97f4edd851a2994dd7fef3c019718ac3527676a1213ba4e60fd52d6208aa680",
+            "relocations": [
+              {
+                "symbol": "r1_time_state",
+                "offset": 8,
+                "relocation_type": 2,
+                "address": 536963780,
+                "role": "native_literal_symbol"
+              }
+            ]
+          },
+          "already_selected": true
+        },
+        {
+          "source": "r1/src/application/goodix/stock_gsensor_sink.c",
+          "payload": "r1-application",
+          "symbol": "r1_gsensor_sample_sink_nop",
+          "start": 15868,
+          "end": 15870,
+          "sha256": "c7dfbb7d02759eacb64dbc916c1bb6f21eabaff1c1032ea5c9176abf7fd28df8",
+          "evidence": "r1/symbols/function-frontier.csv",
+          "already_selected": true
+        },
+        {
+          "source": "r1/src/application/board/native_touch_device_ops.c",
+          "payload": "r1-application",
+          "symbol": "delayed_touch_release",
+          "start": 130952,
+          "end": 130958,
+          "sha256": "972ff6f355a5b431c393c6dfaf0f12173dcf4a44a787a81bb9684b5157d3f18d",
+          "evidence": "r1/symbols/function-frontier.csv",
+          "bindings": {
+            "r1_shared_power_client_release": 329561
+          },
+          "address": 290696,
+          "binding_evidence": "r1/symbols/function-frontier.csv",
+          "already_selected": true
+        },
+        {
+          "source": "r1/src/application/board/native_touch_board.c",
+          "payload": "r1-application",
+          "symbol": "r1_touch_ready_irq_callback",
+          "start": 443388,
+          "end": 443394,
+          "sha256": "ea747aaa451934f1eec237aeecbd8fbe4b73925bf48b26620873a4bcbaaa43f2",
+          "evidence": "r1/symbols/function-frontier.csv",
+          "bindings": {
+            "r1_touch_task_event_post": 603397
+          },
+          "address": 603132,
+          "match_evidence": {
+            "method": "independently named native entry and all unrelocated bytes, followed by full linked equality",
+            "fixed_bytes": 2,
+            "compiled_pattern_sha256": "b76dd35587991e82540c9163db330a522804f3cd60ddd27442b352d8203997fa",
+            "relocations": [
+              {
+                "symbol": "r1_touch_task_event_post",
+                "offset": 2,
+                "relocation_type": 30,
+                "address": 603397,
+                "role": "native_function"
+              }
+            ]
+          },
+          "already_selected": true
+        }
+      ],
+      "new_bytes": 0
+    },
+    "qualified-gcc": {
+      "candidate_units": 308,
+      "compiled_units": 242,
+      "selected_regions": [
+        {
+          "source": "r1/src/application/board/native_charger_state.c",
+          "payload": "r1-application",
+          "symbol": "r1_native_charger_state_get",
+          "start": 169496,
+          "end": 169500,
+          "sha256": "9011d0939e811241075a55f8ebf69d4ebe99a0f5f8db71bbcedbd001ead7ae2b",
+          "evidence": "r1/symbols/function-frontier.csv",
+          "bindings": {
+            "r1_yhm_charge_state_native": 217715
+          },
+          "address": 329240,
+          "binding_evidence": "r1/symbols/function-frontier.csv",
+          "already_selected": true
+        },
+        {
+          "source": "r1/src/application/board/native_peripheral_line_power.c",
+          "payload": "r1-application",
+          "symbol": "r1_goodix_transport_release",
+          "start": 168812,
+          "end": 168818,
+          "sha256": "33bf7bad4199eae8dc41d42274c131695819876fbfb469aa904a7458b0c2f61c",
+          "evidence": "r1/symbols/function-frontier.csv",
+          "bindings": {
+            "r1_peripheral_line_release": 328453
+          },
+          "address": 328556,
+          "binding_evidence": "r1/symbols/function-frontier.csv",
+          "already_selected": false
+        },
+        {
+          "source": "r1/src/application/board/native_peripheral_line_power.c",
+          "payload": "r1-application",
+          "symbol": "r1_goodix_transport_prepare",
+          "start": 168818,
+          "end": 168824,
+          "sha256": "74e443196ae329fdefcfcba015ee28ceeedc3755739440a1de247e8bc670f3a2",
+          "evidence": "r1/symbols/function-frontier.csv",
+          "bindings": {
+            "r1_peripheral_line_acquire": 328505
+          },
+          "address": 328562,
+          "binding_evidence": "r1/symbols/function-frontier.csv",
+          "already_selected": false
+        },
+        {
+          "source": "r1/src/application/board/native_peripheral_line_power.c",
+          "payload": "r1-application",
+          "symbol": "r1_touch_bus_enable_on",
+          "start": 168824,
+          "end": 168830,
+          "sha256": "9a6c80e7430d2372665b4c8ef60b94c25d98cdcac6012fec680495eb8631c040",
+          "evidence": "r1/symbols/function-frontier.csv",
+          "bindings": {
+            "r1_peripheral_line_release": 328453
+          },
+          "address": 328568,
+          "binding_evidence": "r1/symbols/function-frontier.csv",
+          "already_selected": false
+        },
+        {
+          "source": "r1/src/application/board/native_peripheral_line_power.c",
+          "payload": "r1-application",
+          "symbol": "r1_touch_bus_acquire_on",
+          "start": 168830,
+          "end": 168836,
+          "sha256": "55324487a4f34514581a629ab36b6b0bd2a8f7be0672ff868bd91207b5a2685f",
+          "evidence": "r1/symbols/function-frontier.csv",
+          "bindings": {
+            "r1_peripheral_line_acquire": 328505
+          },
+          "address": 328574,
+          "binding_evidence": "r1/symbols/function-frontier.csv",
+          "already_selected": false
+        },
+        {
+          "source": "r1/src/application/board/native_yhm_transport.c",
+          "payload": "r1-application",
+          "symbol": "r1_yhm_register_write_native",
+          "start": 59232,
+          "end": 59238,
+          "sha256": "f34358d99aab6f335322dd6e2f8619f823a9f889b1e0fc4862e674f903f529c8",
+          "evidence": "r1/symbols/function-frontier.csv",
+          "bindings": {
+            "r1_yhm_register_write_record": 329733
+          },
+          "address": 218976,
+          "binding_evidence": "r1/symbols/function-frontier.csv",
+          "already_selected": true
+        },
+        {
+          "source": "r1/src/application/goodix/stock_gsensor_sink.c",
+          "payload": "r1-application",
+          "symbol": "r1_gsensor_sample_sink_nop",
+          "start": 15868,
+          "end": 15870,
+          "sha256": "c7dfbb7d02759eacb64dbc916c1bb6f21eabaff1c1032ea5c9176abf7fd28df8",
+          "evidence": "r1/symbols/function-frontier.csv",
+          "already_selected": true
+        },
+        {
+          "source": "r1/src/application/board/native_touch_device_ops.c",
+          "payload": "r1-application",
+          "symbol": "delayed_touch_release",
+          "start": 130952,
+          "end": 130958,
+          "sha256": "972ff6f355a5b431c393c6dfaf0f12173dcf4a44a787a81bb9684b5157d3f18d",
+          "evidence": "r1/symbols/function-frontier.csv",
+          "bindings": {
+            "r1_shared_power_client_release": 329561
+          },
+          "address": 290696,
+          "binding_evidence": "r1/symbols/function-frontier.csv",
+          "already_selected": true
+        }
+      ],
+      "new_bytes": 24
+    },
+    "qualified-gcc-mounted": {
+      "candidate_units": 308,
+      "compiled_units": 250,
+      "selected_regions": [
+        {
+          "source": "r1/src/application/board/native_charger_state.c",
+          "payload": "r1-application",
+          "symbol": "r1_native_charger_state_get",
+          "start": 169496,
+          "end": 169500,
+          "sha256": "9011d0939e811241075a55f8ebf69d4ebe99a0f5f8db71bbcedbd001ead7ae2b",
+          "evidence": "r1/symbols/function-frontier.csv",
+          "bindings": {
+            "r1_yhm_charge_state_native": 217715
+          },
+          "address": 329240,
+          "binding_evidence": "r1/symbols/function-frontier.csv",
+          "already_selected": true
+        },
+        {
+          "source": "r1/src/application/board/native_peripheral_line_power.c",
+          "payload": "r1-application",
+          "symbol": "r1_goodix_transport_release",
+          "start": 168812,
+          "end": 168818,
+          "sha256": "33bf7bad4199eae8dc41d42274c131695819876fbfb469aa904a7458b0c2f61c",
+          "evidence": "r1/symbols/function-frontier.csv",
+          "bindings": {
+            "r1_peripheral_line_release": 328453
+          },
+          "address": 328556,
+          "binding_evidence": "r1/symbols/function-frontier.csv",
+          "already_selected": false
+        },
+        {
+          "source": "r1/src/application/board/native_peripheral_line_power.c",
+          "payload": "r1-application",
+          "symbol": "r1_goodix_transport_prepare",
+          "start": 168818,
+          "end": 168824,
+          "sha256": "74e443196ae329fdefcfcba015ee28ceeedc3755739440a1de247e8bc670f3a2",
+          "evidence": "r1/symbols/function-frontier.csv",
+          "bindings": {
+            "r1_peripheral_line_acquire": 328505
+          },
+          "address": 328562,
+          "binding_evidence": "r1/symbols/function-frontier.csv",
+          "already_selected": false
+        },
+        {
+          "source": "r1/src/application/board/native_peripheral_line_power.c",
+          "payload": "r1-application",
+          "symbol": "r1_touch_bus_enable_on",
+          "start": 168824,
+          "end": 168830,
+          "sha256": "9a6c80e7430d2372665b4c8ef60b94c25d98cdcac6012fec680495eb8631c040",
+          "evidence": "r1/symbols/function-frontier.csv",
+          "bindings": {
+            "r1_peripheral_line_release": 328453
+          },
+          "address": 328568,
+          "binding_evidence": "r1/symbols/function-frontier.csv",
+          "already_selected": false
+        },
+        {
+          "source": "r1/src/application/board/native_peripheral_line_power.c",
+          "payload": "r1-application",
+          "symbol": "r1_touch_bus_acquire_on",
+          "start": 168830,
+          "end": 168836,
+          "sha256": "55324487a4f34514581a629ab36b6b0bd2a8f7be0672ff868bd91207b5a2685f",
+          "evidence": "r1/symbols/function-frontier.csv",
+          "bindings": {
+            "r1_peripheral_line_acquire": 328505
+          },
+          "address": 328574,
+          "binding_evidence": "r1/symbols/function-frontier.csv",
+          "already_selected": false
+        },
+        {
+          "source": "r1/src/application/board/native_yhm_transport.c",
+          "payload": "r1-application",
+          "symbol": "r1_yhm_register_write_native",
+          "start": 59232,
+          "end": 59238,
+          "sha256": "f34358d99aab6f335322dd6e2f8619f823a9f889b1e0fc4862e674f903f529c8",
+          "evidence": "r1/symbols/function-frontier.csv",
+          "bindings": {
+            "r1_yhm_register_write_record": 329733
+          },
+          "address": 218976,
+          "binding_evidence": "r1/symbols/function-frontier.csv",
+          "already_selected": true
+        },
+        {
+          "source": "r1/src/application/goodix/stock_gsensor_sink.c",
+          "payload": "r1-application",
+          "symbol": "r1_gsensor_sample_sink_nop",
+          "start": 15868,
+          "end": 15870,
+          "sha256": "c7dfbb7d02759eacb64dbc916c1bb6f21eabaff1c1032ea5c9176abf7fd28df8",
+          "evidence": "r1/symbols/function-frontier.csv",
+          "already_selected": true
+        },
+        {
+          "source": "r1/src/application/board/native_touch_device_ops.c",
+          "payload": "r1-application",
+          "symbol": "delayed_touch_release",
+          "start": 130952,
+          "end": 130958,
+          "sha256": "972ff6f355a5b431c393c6dfaf0f12173dcf4a44a787a81bb9684b5157d3f18d",
+          "evidence": "r1/symbols/function-frontier.csv",
+          "bindings": {
+            "r1_shared_power_client_release": 329561
+          },
+          "address": 290696,
+          "binding_evidence": "r1/symbols/function-frontier.csv",
+          "already_selected": true
+        }
+      ],
+      "new_bytes": 24
+    }
+  },
+  "mount_audit": {
+    "unchanged_successful_objects": 242,
+    "newly_compiled": [
+      [
+        112,
+        "r1/src/application/board/native_log_prefix.c"
+      ],
+      [
+        113,
+        "r1/src/application/board/native_log_prefix.c"
+      ],
+      [
+        114,
+        "r1/src/application/board/native_log_prefix.c"
+      ],
+      [
+        115,
+        "r1/src/application/board/native_log_prefix.c"
+      ],
+      [
+        160,
+        "r1/src/application/board/native_segger_rtt_initialize.c"
+      ],
+      [
+        161,
+        "r1/src/application/board/native_segger_rtt_initialize.c"
+      ],
+      [
+        162,
+        "r1/src/application/board/native_segger_rtt_initialize.c"
+      ],
+      [
+        163,
+        "r1/src/application/board/native_segger_rtt_initialize.c"
+      ]
+    ],
+    "selected_regions_unchanged": true,
+    "no_missing_generated_header_after_fix": true
+  },
+  "canonical_hybrid": {
+    "report": "build/hybrid-goal-r1-hardware-c-canonical/build-report.json",
+    "payload_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "totals": {
+      "binary-pull-through": 642255,
+      "source-built": 3905,
+      "resource-file": 248
+    },
+    "source_completeness_proven": false
+  },
+  "files": {
+    "tools/build/qualify_sources.py": "9747cfc8d13d94f1e59d35b19222bc85d35e89960bbc218b3b38342e3f843224",
+    "tools/build/source-plan.json": "b75a13f8cb2608f77f02582570ec5a031de8790cd1af50130f4b9f644ddb6931",
+    "r1/src/application/board/native_peripheral_line_power.c": "cd22dca59bd3109c36e413b759c9502d08c1fa2740d7826ce0d225378b305464",
+    "build/hybrid-goal-r1-hardware-c-canonical/build-report.json": "9fbb01406a0896b04e95136acc20f75a667ab35e01f950170abbb65f54fafc13",
+    "build/sources-goal-r1-flash-write-frame-final/report.json": "6cf1932e49f9d7b685521c35ec8237992198abdf242676201c32154ecb918c4c",
+    "build/goal-r1-hardware-c-qualification/inputs.json": "8b06f15fa241968183aa23cc3d624cc33f5433f9418aa1ffdcb58162428be30b",
+    "build/goal-r1-hardware-c-qualification/input-hashes.json": "dc98e6c462a59641eebf5282f90a3d44f9df39e80b8ce1f634fb53bdde7f1c17",
+    "build/goal-r1-hardware-c-qualification/run.py": "bb45b6d4c4760e499ca753acd39af5b878e67cfea593601e950b21644a047dcc",
+    "build/goal-r1-hardware-c-qualification/run-gcc-mounted.py": "5a74cc99e2458a164d4df06f12701b093119e3a6bb740bb28c2824cc36535411",
+    "build/goal-r1-hardware-c-qualification/comparison.json": "762f4243d11d85c0c2c30c92eec46e8a47fc88f3f0d1313604830e4cfb762176",
+    "build/goal-r1-hardware-c-qualification/mount-audit.json": "f18a2e671c8f56797dd84f274545848c8289758c847bc8f944564a65cb50618b",
+    "build/goal-r1-hardware-c-qualification/source-plan-before.json": "716cf17b8cf2bed8ad6a99a672b1856af4c5380842c95cb14b9a263a7bb42bc8",
+    "build/goal-r1-hardware-c-qualification/qualified/qualification.json": "e39f8f2a1596dc5412a57c8650e8ec0de7a758d1bdb1b44a55d6e74462e2ff32",
+    "build/goal-r1-hardware-c-qualification/qualified-gcc/qualification.json": "4cd7ea3e86ab6ba5ee6cde0ae554691ef6635f7a9d94edb9fe8ab10b12d1feb0",
+    "build/goal-r1-hardware-c-qualification/qualified-gcc-mounted/qualification.json": "2c5dd7cd80a1c0a57c49d8446cdf10ef38d744973471ee060ff92572a8bd11b1",
+    "build/goal-r1-hardware-c-qualification/qualified-gcc-mounted/source-plan.json": "6215f3aeefe1c49461e70e8b429cdecab6cf7b0cf5000cbdf06a2ecddc863adb"
+  },
+  "limits": [
+    "Remaining compiler-profile failures are explicit, not passing tests",
+    "No physical power or concurrency validation",
+    "C caller wrappers qualified; their provider bodies remain outside this new coverage",
+    "No G2 gates advanced"
+  ]
+}

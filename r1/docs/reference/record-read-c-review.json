@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "report": "build/sources-goal-r1-record-read-c/report.json",
+  "report_sha256": "3daa990e9f5b49159a92c1ca7f5a9ae3ca9225adfa2fc21fe9417eb31c36a84d",
+  "manifest_sha256": "3956090d745ff9ddb1dd03b19e421dbcb3ed8d0fe84499587f58e822638fd1d2",
+  "verification": {
+    "cases": {
+      "modeled_direct": 520,
+      "actual_kv_direct": 80,
+      "actual_callback": 384
+    },
+    "stock_c_match": true,
+    "explicit_three_fallback_words": true,
+    "actual_kv_memcpy_and_existing_callback_executed": true,
+    "unaligned_destinations_null_partial_and_nonwriting_reads": true,
+    "void_return_caller_clobbered_outputs_and_private_frames_excluded": true,
+    "physical_flash_unverified": true
+  },
+  "defects": {
+    "detected": [
+      "zero-fallback",
+      "short-read",
+      "short-copy",
+      "skip-error-copy"
+    ]
+  },
+  "audit": {
+    "unchanged_prior_object_hashes": 783,
+    "changed_object_hashes": [
+      [
+        "r1-bootloader",
+        "{gen}/r1_startup_vectors.S"
+      ],
+      [
+        "r1-bootloader",
+        "{gen}/r1_uecc.c"
+      ]
+    ],
+    "generated_boot_crypto_and_vectors_allocated_bytes_and_relocations_unchanged": true,
+    "removed_application_imports": [
+      "r1_event_service_000735e0"
+    ]
+  },
+  "rea": {
+    "analysis_evidence_id": "ev_c07e7379688b0a4ae6f7c8aef91adb82c53b75690799313e8947b69185d5df6a",
+    "bytes_evidence_id": "ev_cd7c09449b914e9088f5706ebf645e224cb8c6358b7869abf1f90178f880b3c9",
+    "address": "0x735e0",
+    "length": 36,
+    "bytes_sha256": "6954c41d8ab4d58343d861120dedb309489405f5cdebd780e74e7315f303d789",
+    "matches_locked_raw": true
+  },
+  "raw_application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "strict_bootloader_link_report": "build/goal-r1-record-read-c/boot-link/report.json",
+  "strict_bootloader_link_report_sha256": "e93dc176190261b4b9e15f66033af620e60530e9727576f1a7dff56d633dace1",
+  "evidence_files": {
+    "build/goal-r1-record-read-c/verify.py": "e2c2bbb0c36f674b59d194c997cd4de40b642deec90210761dfe5b4314704d45",
+    "build/goal-r1-record-read-c/defects.py": "425fdfe5aadee95d152f07421f404783ba957d6a070ef98a9d3d48c25642829e",
+    "build/goal-r1-record-read-c/audit.py": "0c8a1a4799a0299796c9455ef9ba899828dcec1f51c5a737e7d7c5b30af78027",
+    "build/goal-r1-record-read-c/verify-final.log": "1b1f1e7f346a13e8d100810cafd62da6511ce05ccb61ec416c51f3689ac82bc3",
+    "build/goal-r1-record-read-c/verification.json": "c83807198a8b81892a719b6de17bf2919dc45c00b0b4ba4ede55b8f4a02d5aa8",
+    "build/goal-r1-record-read-c/defects.json": "124e007c10456650d0236901c97d9b618c71c5609ebcb82f9f67ab5a7d999882",
+    "build/goal-r1-record-read-c/rea-bytes.json": "066852a59b976acfd5afed069b68d387eafc53a2b1fa3784f1f7381f8285b1c5",
+    "build/goal-r1-record-read-c/rea-analysis.json": "87c9a6697ad836a50522da5c8457c3cb5f2879802e47c62039b092c3e126db3e"
+  },
+  "limitations": [
+    "Four-core-register entry with explicit fallback arguments; not a one-argument C getter.",
+    "Actual cached KV/memcpy integrated; critical-section callbacks modeled.",
+    "Settings callback logging disabled and later update boundary modeled.",
+    "Void-return caller-clobbered outputs, private frames and aliases/concurrency excluded.",
+    "No full application link or physical flash validation.",
+    "Global source check retains unrelated G2 manifest failure."
+  ]
+}

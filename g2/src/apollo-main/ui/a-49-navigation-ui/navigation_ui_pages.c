@@ -212,19 +212,19 @@ extern void audio_uart_page_44e368(void *obj, uint32_t mode);              /* lv
 extern void audio_uart_page_44e3ca(void *obj, uint32_t dir);               /* lv_obj_set_scroll_dir */
 extern void audio_uart_lv_scroll_to_y_44ea04(void *obj, int32_t y, uint32_t anim); /* lv_obj_scroll_to_y */
 extern uint32_t audio_uart_page_44104c(uint32_t hex);                      /* lv_color_hex */
-extern void audio_uart_page_44120e(void *obj, int32_t v, uint32_t sel);    /* pad_top */
-extern void audio_uart_page_44121c(void *obj, int32_t v, uint32_t sel);    /* pad_bottom */
-extern void audio_uart_page_44122a(void *obj, int32_t v, uint32_t sel);    /* pad_left */
-extern void audio_uart_page_441238(void *obj, int32_t v, uint32_t sel);    /* pad_right */
+extern void lv_obj_set_style_pad_top(void *obj, int32_t v, uint32_t sel);    /* pad_top */
+extern void lv_obj_set_style_pad_bottom(void *obj, int32_t v, uint32_t sel);    /* pad_bottom */
+extern void lv_obj_set_style_pad_left(void *obj, int32_t v, uint32_t sel);    /* pad_left */
+extern void lv_obj_set_style_pad_right(void *obj, int32_t v, uint32_t sel);    /* pad_right */
 extern void audio_uart_page_44127e(void *obj, uint32_t color, uint32_t sel); /* bg_color */
 extern void audio_uart_page_44129e(void *obj, uint32_t opa, uint32_t sel); /* bg_opa */
 extern void audio_uart_page_4412ec(void *obj, uint32_t color, uint32_t sel); /* border_color */
-extern void audio_uart_page_44131c(void *obj, int32_t v, uint32_t sel);    /* border_width */
+extern void lv_obj_set_style_border_width(void *obj, int32_t v, uint32_t sel);    /* border_width */
 extern void audio_uart_page_441180(void *obj, int32_t v, uint32_t sel);    /* max_width */
 extern void audio_uart_page_4413ce(void *obj, uint32_t opa, uint32_t sel); /* image_opa */
 extern void audio_uart_page_44140e(void *obj, uint32_t color, uint32_t sel); /* text_color */
 extern void audio_uart_page_44143e(void *obj, const void *font, uint32_t sel); /* text_font */
-extern void audio_uart_page_44146a(void *obj, int32_t v, uint32_t sel);    /* radius */
+extern void lv_obj_set_style_radius(void *obj, int32_t v, uint32_t sel);    /* radius */
 extern void audio_uart_display_audio_reset_441488(void *obj, uint32_t opa, uint32_t sel); /* opa */
 extern void *audio_uart_page_499416(void *parent);                         /* lv_label_create */
 extern void audio_uart_page_49942e(void *label, const char *text);         /* lv_label_set_text */
@@ -235,7 +235,7 @@ extern void audio_uart_lv_anim_init_4503d6(g2_lv_anim_t *a);
 extern void audio_uart_lv_anim_values_4506ce(g2_lv_anim_t *a, int32_t start, int32_t end);
 extern void *audio_uart_lv_anim_start_450408(const g2_lv_anim_t *a);
 extern uint32_t audio_uart_lv_style_unlink_450500(void *var, void *exec_cb); /* lv_anim_delete */
-extern int32_t audio_uart_lv_anim_path_450688(void *anim);                 /* lv_anim_path_ease_in_out */
+extern int32_t lv_anim_path_ease_in_out(void *anim);                 /* lv_anim_path_ease_in_out */
 
 /* Decompressors shared with the EvenHub image path. */
 extern uint32_t evenhub_lz4_decompress_4e0c0c(const void *src, uint32_t src_len, void *dst,
@@ -401,7 +401,7 @@ void navigation_container_B_fade_out_complete_cb_548484(void *anim)
     a.exec_cb = navigation_container_opa_anim_exec_cb_547abc;
     audio_uart_lv_anim_values_4506ce(&a, 0, 0xff);
     a.duration = 100;
-    a.path_cb = audio_uart_lv_anim_path_450688;
+    a.path_cb = lv_anim_path_ease_in_out;
     a.completed_cb = navigation_container_A_fade_in_complete_cb_5482c4;
     (void)audio_uart_lv_anim_start_450408(&a);
 }
@@ -449,13 +449,13 @@ int32_t navigation_ui_create_location_list_page_5485c4(void)
     audio_uart_page_44e368(container, LV_SCROLLBAR_MODE_OFF);
     audio_uart_page_44e3ca(container, LV_DIR_VER);
     audio_uart_page_44129e(container, LV_OPA_TRANSP, 0u);
-    audio_uart_page_44146a(container, 10, 0u);
+    lv_obj_set_style_radius(container, 10, 0u);
     audio_uart_page_4412ec(container, audio_uart_page_44104c(0u), 0u);
-    audio_uart_page_44131c(container, 0, 0u);
-    audio_uart_page_44120e(container, 0, 0u);
-    audio_uart_page_44121c(container, 0, 0u);
-    audio_uart_page_44122a(container, 0, 0u);
-    audio_uart_page_441238(container, 0, 0u);
+    lv_obj_set_style_border_width(container, 0, 0u);
+    lv_obj_set_style_pad_top(container, 0, 0u);
+    lv_obj_set_style_pad_bottom(container, 0, 0u);
+    lv_obj_set_style_pad_left(container, 0, 0u);
+    lv_obj_set_style_pad_right(container, 0, 0u);
 
     /* Content height: fewer than 5 rows keep the 216 px viewport content
      * (top-aligned); exactly 5 use 266; more use count * 40 + 60. */
@@ -473,7 +473,7 @@ int32_t navigation_ui_create_location_list_page_5485c4(void)
     audio_uart_page_43f0e0(content, 0);
     audio_uart_page_43f142(content, 0);
     audio_uart_page_44129e(content, LV_OPA_TRANSP, 0u);
-    audio_uart_page_44131c(content, 0, 0u);
+    lv_obj_set_style_border_width(content, 0, 0u);
     lv_obj_set_style_pad_all_545594(content, 0, 0u);
     audio_uart_page_43dfa4(content, LV_OBJ_FLAG_SCROLLABLE);
     (void)audio_uart_lv_style_unlink_450500(content, NULL);
@@ -489,21 +489,21 @@ int32_t navigation_ui_create_location_list_page_5485c4(void)
 
         g2_navigation_location_items_20072c68[i] = audio_uart_page_43de82(content);
         item = g2_navigation_location_items_20072c68[i];
-        audio_uart_page_44122a(item, 12, 0u);
-        audio_uart_page_441238(item, 12, 0u);
+        lv_obj_set_style_pad_left(item, 12, 0u);
+        lv_obj_set_style_pad_right(item, 12, 0u);
         audio_uart_page_43f4c0(item, LV_SIZE_CONTENT, NAV_ITEM_H);
         audio_uart_page_43f0e0(item, 0);
         audio_uart_page_43f142(item, navigation_location_item_y_54c3ec((int32_t)i, (int32_t)count));
         audio_uart_page_44127e(item, audio_uart_page_44104c(0u), 0u);
         audio_uart_page_44129e(item, LV_OPA_TRANSP, 0u);
-        audio_uart_page_44146a(item, 10, 0u);
+        lv_obj_set_style_radius(item, 10, 0u);
         if (i == 0u) {
             /* Row 0 starts selected: white 1 px frame. */
-            audio_uart_page_44131c(g2_navigation_location_items_20072c68[0], 1, 0u);
+            lv_obj_set_style_border_width(g2_navigation_location_items_20072c68[0], 1, 0u);
             audio_uart_page_4412ec(g2_navigation_location_items_20072c68[0],
                                    audio_uart_page_44104c(0xffffffu), 0u);
         } else {
-            audio_uart_page_44131c(item, 0, 0u);
+            lv_obj_set_style_border_width(item, 0, 0u);
         }
         audio_uart_page_43dfa4(item, LV_OBJ_FLAG_SCROLLABLE);
 
@@ -572,13 +572,13 @@ int32_t navigation_ui_create_mode_list_page_548b98(void)
     audio_uart_page_44e368(container, LV_SCROLLBAR_MODE_OFF);
     audio_uart_page_44e3ca(container, LV_DIR_VER);
     audio_uart_page_44129e(container, LV_OPA_TRANSP, 0u);
-    audio_uart_page_44146a(container, 10, 0u);
+    lv_obj_set_style_radius(container, 10, 0u);
     audio_uart_page_4412ec(container, audio_uart_page_44104c(0u), 0u);
-    audio_uart_page_44131c(container, 0, 0u);
-    audio_uart_page_44120e(container, 16, 0u);
-    audio_uart_page_44121c(container, 16, 0u);
-    audio_uart_page_44122a(container, 0, 0u);
-    audio_uart_page_441238(container, 0, 0u);
+    lv_obj_set_style_border_width(container, 0, 0u);
+    lv_obj_set_style_pad_top(container, 16, 0u);
+    lv_obj_set_style_pad_bottom(container, 16, 0u);
+    lv_obj_set_style_pad_left(container, 0, 0u);
+    lv_obj_set_style_pad_right(container, 0, 0u);
 
     g2_navigation_mode_content_200747b0 = audio_uart_page_43de82(container);
     content = g2_navigation_mode_content_200747b0;
@@ -587,7 +587,7 @@ int32_t navigation_ui_create_mode_list_page_548b98(void)
     audio_uart_page_43f0e0(content, 0);
     audio_uart_page_43f142(content, 0);
     audio_uart_page_44129e(content, LV_OPA_TRANSP, 0u);
-    audio_uart_page_44131c(content, 0, 0u);
+    lv_obj_set_style_border_width(content, 0, 0u);
     lv_obj_set_style_pad_all_545594(content, 0, 0u);
     audio_uart_page_43dfa4(content, LV_OBJ_FLAG_SCROLLABLE);
     (void)audio_uart_lv_style_unlink_450500(content, NULL);
@@ -600,20 +600,20 @@ int32_t navigation_ui_create_mode_list_page_548b98(void)
 
         g2_navigation_mode_items_20074160[i] = audio_uart_page_43de82(content);
         item = g2_navigation_mode_items_20074160[i];
-        audio_uart_page_44122a(item, 20, 0u);
-        audio_uart_page_441238(item, 20, 0u);
+        lv_obj_set_style_pad_left(item, 20, 0u);
+        lv_obj_set_style_pad_right(item, 20, 0u);
         audio_uart_page_43f4c0(item, LV_SIZE_CONTENT, NAV_ITEM_H);
         audio_uart_page_43f0e0(item, 0);
         audio_uart_page_43f142(item, navigation_mode_item_y_54dad8(i, NAV_MODE_COUNT));
         audio_uart_page_44127e(item, audio_uart_page_44104c(0u), 0u);
         audio_uart_page_44129e(item, LV_OPA_TRANSP, 0u);
-        audio_uart_page_44146a(item, 10, 0u);
+        lv_obj_set_style_radius(item, 10, 0u);
         if (i == 0) {
-            audio_uart_page_44131c(g2_navigation_mode_items_20074160[0], 1, 0u);
+            lv_obj_set_style_border_width(g2_navigation_mode_items_20074160[0], 1, 0u);
             audio_uart_page_4412ec(g2_navigation_mode_items_20074160[0],
                                    audio_uart_page_44104c(0xffffffu), 0u);
         } else {
-            audio_uart_page_44131c(item, 0, 0u);
+            lv_obj_set_style_border_width(item, 0, 0u);
         }
         audio_uart_page_43dfa4(item, LV_OBJ_FLAG_SCROLLABLE);
 

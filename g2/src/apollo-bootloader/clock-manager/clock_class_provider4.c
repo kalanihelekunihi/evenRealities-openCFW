@@ -1,8 +1,11 @@
 /* Recovered class-4 clock-provider pair and direct HFADJ leaves.
  * Addresses/state are the private bootloader ABI; tests use synthetic SRAM
- * and register memory. The final calibrated wait is the external ROM routine
+ * and register memory. The HFADJ leaves are upstream am_hal_clkgen.c. The final calibrated wait is the external ROM routine
  * at Thumb address 0x00000041 (raw BL target 0x40). */
 #include "clock_class_provider4.h"
+#include <stdbool.h>
+#include "am_mcu_apollo.h"
+#include "am_hal_clkgen_private.h" /* AmbiqSuite 5.1.0; stock 0x426c24..0x426d2c */
 #include "clock_popcount_421584.h"
 #include "clock_wait_4216b2.h"
 
@@ -14,8 +17,6 @@ enum {
     CLOCK4_CONFIG_VALUE = 0x20026fecu,
     CLOCK4_REQUEST_ALLOWED = 0x20000550u,
     CLOCK4_DEFERRED_FLAG = 0x2002719eu,
-    HFADJ_ENABLE_REGISTER = 0x40004044u,
-    HFADJ_CONFIG_REGISTER = 0x40004020u,
     DELAY_CLOCK_MODE_REGISTER = 0x40021000u,
     ROM_CYCLE_WAIT_THUMB = 0x41u
 };
@@ -60,22 +61,6 @@ static uint32_t critical_save_disable(void)
 static void critical_restore(uint32_t previous)
 {
     __asm volatile("msr primask, %0" :: "r"(previous) : "memory");
-}
-
-/* Stock 0x426C58 (clkgen_hfadj_enable_426c58; am_hal_clkgen_private_hfrc_force_on) */
-static uint32_t hfadj_enable(uint32_t enabled)
-{
-    volatile uint32_t *const reg =
-        (volatile uint32_t *)(uintptr_t)HFADJ_ENABLE_REGISTER;
-    *reg = (*reg & ~1u) | (enabled != 0u);
-    return 0u;
-}
-
-/* Stock 0x426C72 (clkgen_hfadj_config_426c72; am_hal_clkgen_private_hfadj_apply) */
-static uint32_t hfadj_configure(uint32_t value)
-{
-    *(volatile uint32_t *)(uintptr_t)HFADJ_CONFIG_REGISTER = value | 1u;
-    return 0u;
 }
 
 void opencfw_bl_delay_us(uint32_t microseconds)
@@ -140,15 +125,15 @@ uint32_t opencfw_bl_clock_request_id4(uint8_t user_id)
         status = 1u;
     } else {
         if (clock_user_count() == 0u) {
-            (void)hfadj_enable(1u);
+            (void)am_hal_clkgen_private_hfrc_force_on(true);
             if (*(volatile uint32_t *)(uintptr_t)CLOCK4_CONFIG_PRESENT != 0u) {
-                status = hfadj_configure(
+                status = am_hal_clkgen_private_hfadj_apply(
                     *(volatile uint32_t *)(uintptr_t)CLOCK4_CONFIG_VALUE);
                 if (status == 0u && *active == 0u &&
                     *(volatile uint8_t *)(uintptr_t)CLOCK4_DEFERRED_FLAG == 0u) {
                     *active = 1u;
                 } else if (status != 0u) {
-                    (void)hfadj_enable(0u);
+                    (void)am_hal_clkgen_private_hfrc_force_on(false);
                 }
             }
         }
@@ -171,7 +156,7 @@ uint32_t opencfw_bl_clock_release_id4(uint8_t user_id)
     const uint32_t previous = critical_save_disable();
     clock_user_update(user_id, 0u);
     if (clock_user_count() == 0u)
-        (void)hfadj_enable(0u);
+        (void)am_hal_clkgen_private_hfrc_force_on(false);
     critical_restore(previous);
     return 0u;
 }

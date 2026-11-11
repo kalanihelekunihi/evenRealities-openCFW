@@ -1,0 +1,49 @@
+{
+  "schema": 1,
+  "target": "Replace inline touch flash address logic with two separate stock-exact C helpers used by the source-linked row writer",
+  "source": "g2/src/touch/eeprom/flash_address.c",
+  "source_sha256": "ed2fdd96e930da2bf8f8c120b582b7d9a0de9a2d4e841f19342c79e4297f1cea",
+  "caller": "g2/src/touch/eeprom/flash.c",
+  "caller_sha256": "ce485faca5ac0f4069f832451ad4c35b75f4c8a85723b96039e75a7cb1f2e574",
+  "qualified_exact_bodies": [
+    {
+      "symbol": "touch_flash_valid_addr",
+      "stock_va": "0x8c74",
+      "source_va": "0x33c0",
+      "bytes": 52,
+      "sha256": "86e77c10215d3e1ef95a671ddcf4eb790ca4e41e2017b0c0e48eae6067189a2a"
+    },
+    {
+      "symbol": "touch_flash_row_number",
+      "stock_va": "0x8ca8",
+      "source_va": "0x33f4",
+      "bytes": 28,
+      "sha256": "8242330bb12931a2ef7a9f05a4abd3b996839206a2cf00648a94b12c3f065cff"
+    }
+  ],
+  "qualification_report": "build/g2-touch-flash-address-qualification-20261111/qualification.json",
+  "qualification_report_sha256": "4119a30cee8a6b1f6f224ed6d6d6ab9d4fde9c1186191cae52a1c891f16e5bde",
+  "qualification_plan": "build/g2-touch-flash-address-qualification-20261111/source-plan.json",
+  "qualification_plan_sha256": "ba76bcf118fdbd1bcc2c22255537b1102ec8b2d14e061320d83f87dabb99fc4f",
+  "source_plan": "tools/build/source-plan.json",
+  "source_plan_sha256": "a44d49fa58aadff4696a1713c4ae4aff93c8077f1350225066720d099cb52ace",
+  "source_plan_g2_regions": 58,
+  "r1_selections_unchanged_from_staged_plan": true,
+  "hybrid_report": "build/g2-flash-address-hybrid-20261111/build-report.json",
+  "hybrid_report_sha256": "1b4ac8fcd574570228e3cc5fbfa8d97936f99244f3f287ceb46d769b3a6ef511",
+  "full_source_report": "build/g2-flash-address-full-20261111/report.json",
+  "full_source_report_sha256": "7507f2fe8ba0bda0baffbd3a394cf7c098a2ceb90c0d254e3f0ac2262f584d3d",
+  "compiled_units": 4881,
+  "failed_units": 0,
+  "duplicate_strong_symbols": 0,
+  "strict_link_report": "build/g2-flash-address-bundle-20261111/link-report.json",
+  "strict_link_report_sha256": "5b4c57cdc0f3e0b2b6a1478ee4adb9af57263e69dfb7b18d75795058988db58e",
+  "authenticated_comparison": "build/g2-flash-address-bundle-20261111/comparison.json",
+  "authenticated_comparison_sha256": "b9962525b9b0b5895b2f5652fe48e963216f6625ceb1dc7c38dc13c625204783",
+  "candidate_bundle_sha256": "f3be37fd6cd80cdc4cc9b30246a498abbd85610bcff143bc15c401841fdea09a",
+  "candidate_bundle_bytes": 4638152,
+  "bundle_byte_identical": false,
+  "touch_component_bytes": 29200,
+  "touch_component_size_delta": -5264,
+  "limits": "Two complete function bodies are exact at stock entries and now owned by linked C. Overall source completeness and byte identity remain unproven; same-offset component counts are not code coverage."
+}

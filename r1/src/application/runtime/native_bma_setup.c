@@ -1,14 +1,82 @@
 #include <stdint.h>
 /* Raw register/stack interfaces follow the observed ARM entry contracts. */
-__attribute__((naked)) uint32_t r1_bma4_set_accel_enable(void)
+#include <stddef.h>
+#include "bma4.h"
+extern int8_t r1_bma4_null_pointer_check(const struct bma4_dev *dev);
+extern uint32_t r1_bma4_read_regs_boundary(uint32_t reg, uint8_t *data, uint32_t length, struct bma4_dev *dev);
+extern uint32_t r1_bma4_write_regs_boundary(uint32_t reg, uint8_t *data, uint32_t length, struct bma4_dev *dev);
+extern uint32_t r1_bma_accel_enable_byte(uint32_t byte, uint32_t value);
+_Static_assert(offsetof(struct bma4_dev,intf_ptr)==4 && offsetof(struct bma4_dev,delay_us)==44, "native Bosch enable delay fields");
+uint32_t r1_bma4_set_accel_enable(uint32_t enabled, struct bma4_dev *dev)
 {
- __asm__ volatile("push {r3,r4,r5,r6,r7,lr}\nmov r6,r0\nmovs r0,#0\nstrb r0,[sp]\nmov r5,r1\nmov r0,r1\nbl r1_bma4_null_pointer_check\nmovs r4,r0\nbne 1f\nmov r3,r5\nmovs r2,#1\nmov r1,sp\nmovs r0,#125\nbl r1_bma4_read_regs_boundary\nmovs r4,r0\nbne 1f\nldrb r0,[sp]\nmov r1,r6\nbl r1_bma_accel_enable_byte\nstrb r0,[sp]\nmov r3,r5\nmovs r2,#1\nmov r1,sp\nmovs r0,#125\nbl r1_bma4_write_regs_boundary\nmov r4,r0\nldr r2,[r5,#44]\nmovw r0,#25000\nldr r1,[r5,#4]\nblx r2\n1: mov r0,r4\npop {r3,r4,r5,r6,r7,pc}\n");
+ uint8_t value = 0;
+ uint32_t status = (uint32_t)(int32_t)r1_bma4_null_pointer_check(dev);
+ if (status == 0) {
+  status = r1_bma4_read_regs_boundary(0x7d, &value, 1, dev);
+  if (status == 0) {
+   value = (uint8_t)r1_bma_accel_enable_byte(value, enabled);
+   status = r1_bma4_write_regs_boundary(0x7d, &value, 1, dev);
+   /* Stock delays even when the write reports failure. */
+   volatile struct bma4_dev *live = dev;
+   bma4_delay_us_fptr_t delay = live->delay_us;
+   void *handle = live->intf_ptr;
+   delay(25000, handle);
+  }
+ }
+ return status;
 }
-__attribute__((naked)) uint32_t r1_bma4_set_accel_config(void)
+extern int8_t r1_bma_validate_accel_parameters(uint8_t odr, uint8_t bandwidth, uint8_t performance);
+_Static_assert(sizeof(struct bma4_accel_config)==4 &&
+               offsetof(struct bma4_accel_config,perf_mode)==2 &&
+               offsetof(struct bma4_accel_config,range)==3 &&
+               offsetof(struct bma4_dev,perf_mode_status)==50,
+               "native Bosch acceleration configuration fields");
+uint32_t r1_bma4_set_accel_config(const struct bma4_accel_config *config, struct bma4_dev *dev)
 {
- __asm__ volatile("push {r3,r4,r5,lr}\nmov r4,r0\nmovs r0,#0\nstr r0,[sp]\nmov r5,r1\nmov r0,r1\nbl r1_bma4_null_pointer_check\ncbnz r0,1f\ncbz r4,1f\nldrb r2,[r4,#2]\nldrb r1,[r4,#1]\nldrb r0,[r4]\nbl r1_bma_validate_accel_parameters\ncmp r0,#0\nbne 2f\nldrb r0,[r4]\nmov r3,r5\nand r0,r0,#15\nstrb r0,[sp]\nldrb r1,[r4,#1]\nmovs r2,#1\norr r0,r0,r1,lsl #4\nldrb r1,[r4,#2]\norr r0,r0,r1,lsl #7\nstrb r0,[sp]\nldrb r0,[r4,#3]\nadd r1,sp,#1\nand r0,r0,#3\nstrb r0,[sp,#1]\nmovs r0,#65\nbl r1_bma4_write_regs_boundary\ncmp r0,#0\nbne 2f\nmov r3,r5\nmovs r2,#1\nmov r1,sp\nmovs r0,#64\nbl r1_bma4_write_regs_boundary\nldrb r1,[sp]\nlsrs r1,r1,#7\nstrb r1,[r5,#50]\n2: pop {r3,r4,r5,pc}\n1: mov.w r0,#0xffffffff\npop {r3,r4,r5,pc}\n");
+ uint8_t bytes[2] = {0, 0};
+ if (r1_bma4_null_pointer_check(dev) != 0 || config == 0)
+  return UINT32_MAX;
+ const volatile struct bma4_accel_config *live = config;
+ uint8_t performance = live->perf_mode;
+ uint8_t bandwidth = live->bandwidth;
+ uint8_t odr = live->odr;
+ uint32_t status = (uint32_t)(int32_t)r1_bma_validate_accel_parameters(odr, bandwidth, performance);
+ if (status != 0)
+  return status;
+ odr = live->odr;
+ bandwidth = live->bandwidth;
+ performance = live->perf_mode;
+ bytes[0] = (uint8_t)((odr & 15u) | ((uint32_t)bandwidth << 4) | ((uint32_t)performance << 7));
+ bytes[1] = live->range & 3u;
+ status = r1_bma4_write_regs_boundary(0x41, bytes + 1, 1, dev);
+ if (status == 0) {
+  status = r1_bma4_write_regs_boundary(0x40, bytes, 1, dev);
+  const volatile uint8_t *live_byte = bytes;
+  ((volatile struct bma4_dev *)dev)->perf_mode_status = *live_byte >> 7;
+ }
+ return status;
 }
-__attribute__((naked)) uint32_t r1_bma4_set_fifo_config(void)
+extern uint32_t r1_bma_fifo_config_bytes(uint32_t packed, uint32_t config, uint32_t enable);
+uint32_t r1_bma4_set_fifo_config(uint32_t config, uint32_t enabled, struct bma4_dev *dev)
 {
- __asm__ volatile("push {r3,r4,r5,r6,r7,lr}\nmov r7,r0\nmovs r0,#0\nstr r0,[sp]\nmov r6,r1\nmov r4,r2\nmov r0,r2\nbl r1_bma4_null_pointer_check\ncmp r0,#0\nbne 1f\nmov r3,r4\nmovs r2,#2\nmov r1,sp\nmovs r0,#72\nbl r1_bma4_read_regs_boundary\ncmp r0,#0\nbne 1f\nldrh r0,[sp]\nmov r1,r7\nmov r2,r6\nbl r1_bma_fifo_config_bytes\nstrb r0,[sp]\nlsrs r0,r0,#8\nstrb r0,[sp,#1]\nmov r3,r4\nmovs r2,#1\nmov r1,sp\nmovs r0,#72\nbl r1_bma4_write_regs_boundary\ncmp r0,#0\nbne 1f\nldr r2,[r4,#44]\nmov.w r0,#1000\nldr r1,[r4,#4]\nblx r2\nmov r3,r4\nmovs r2,#1\nmovs r0,#73\nadd r1,sp,#1\nbl r1_bma4_write_regs_boundary\n1: pop {r3,r4,r5,r6,r7,pc}\n");
+ uint8_t bytes[2] = {0, 0};
+ uint32_t status = (uint32_t)(int32_t)r1_bma4_null_pointer_check(dev);
+ if (status != 0)
+  return status;
+ status = r1_bma4_read_regs_boundary(0x48, bytes, 2, dev);
+ if (status != 0)
+  return status;
+ uint32_t packed = (uint32_t)bytes[0] | ((uint32_t)bytes[1] << 8);
+ packed = r1_bma_fifo_config_bytes(packed, config, enabled);
+ bytes[0] = (uint8_t)packed;
+ bytes[1] = (uint8_t)(packed >> 8);
+ status = r1_bma4_write_regs_boundary(0x48, bytes, 1, dev);
+ if (status == 0) {
+  volatile struct bma4_dev *live = dev;
+  bma4_delay_us_fptr_t delay = live->delay_us;
+  void *handle = live->intf_ptr;
+  delay(1000, handle);
+  status = r1_bma4_write_regs_boundary(0x49, bytes + 1, 1, dev);
+ }
+ return status;
 }

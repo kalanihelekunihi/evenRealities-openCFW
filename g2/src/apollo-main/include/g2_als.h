@@ -11,9 +11,16 @@
  * else multiplies by the calibration word and divides by 1,000,000, so the
  * driver value is in 0.1 lux steps scaled by calibration / 100000.
  *
- * The stock placeholder names als_function_NN are the qualify anchors; the
- * comment on each prototype states the real role (stock name when a log
- * string gives it). */
+ * Evidence (wave11 recheck): all 29 als_function_NN addresses below are function
+ * entries with that exact name in corpus open-2026-09-29 functions-000.jsonl. Each
+ * DRV_ALS* role name is the __func__ string the function loads from its literal pool
+ * in stock 2.2.6.10. String at -> pool word -> loader:
+ * FilterValueByPitch 0x768994->0x4ae4d4->_08 (ldr 0x4adafc);
+ * UpdateTargetWithExtremeDarkMode 0x746d74->0x4ae4ec->_11; Init 0x789f98->0x4ae960->_25 (0x4adfce);
+ * ReadData 0x784b80->0x4ae978->_27; Open 0x789fa4->0x4ae98c->_28; Close 0x784ba0->0x4ae9a4->_29;
+ * TimerHandlerStart 0x7689cc->0x4ae9b0->_31; TimerHandlerAdjust 0x768a04->0x4ae9c4->_32;
+ * TimerHandlerPolling 0x768a20->0x4ae9d8->_33; TimerHandler 0x77d8e4->0x4aea04->_34 (0x4ae708).
+ * Roles without a DRV name are inferred from the decompile bodies (not string-anchored). */
 #ifndef G2_ALS_H
 #define G2_ALS_H
 

@@ -145,7 +145,7 @@ extern void audio_uart_lv_scroll_to_y_44ea04(void *obj, int32_t y, uint32_t anim
 extern void audio_uart_lv_anim_init_4503d6(g2_lv_anim_t *a);
 extern void audio_uart_lv_anim_values_4506ce(g2_lv_anim_t *a, int32_t start, int32_t end);
 extern void *audio_uart_lv_anim_start_450408(const g2_lv_anim_t *a);
-extern int32_t audio_uart_lv_anim_path_450672(const void *a);             /* lv_anim_path_ease_out */
+extern int32_t lv_anim_path_ease_out(const void *a);             /* lv_anim_path_ease_out */
 extern void audio_uart_page_49942e(void *label, const char *text);       /* lv_label_set_text */
 
 /* ui_common byte FIFO, onboarding main page. */
@@ -416,7 +416,7 @@ void onboarding_news_scroll_content_with_anim_50c1c0(void *obj, int32_t target_y
     audio_uart_lv_anim_values_4506ce(&a, audio_uart_lv_obj_y_44e498(obj), target_y);
     a.duration = time_ms;
     a.exec_cb = onboarding_news_scroll_anim_exec_cb_50c150;
-    a.path_cb = audio_uart_lv_anim_path_450672;
+    a.path_cb = lv_anim_path_ease_out;
     a.completed_cb = onboarding_news_scroll_content_anim_ready_cb_50be4c;
     g2_onboarding_news_animating_20074d94 = 1;
     (void)audio_uart_lv_anim_start_450408(&a);
@@ -617,7 +617,7 @@ void onboarding_news_container_move_with_anim_50c7a8(int32_t direction, int32_t 
     audio_uart_lv_anim_values_4506ce(&a, 0, delta);
     a.duration = time_ms;
     a.exec_cb = onboarding_news_container_anim_exec_cb_50c768;
-    a.path_cb = audio_uart_lv_anim_path_450672;
+    a.path_cb = lv_anim_path_ease_out;
     a.completed_cb = onboarding_news_container_switch_anim_ready_cb_50bfb0;
     g2_onboarding_news_animating_20074d94 = 1;
     (void)audio_uart_lv_anim_start_450408(&a);

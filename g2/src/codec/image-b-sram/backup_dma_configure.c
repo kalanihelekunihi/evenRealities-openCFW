@@ -3,6 +3,7 @@
  * validation branches follow the retained native function.
  */
 #include <stdint.h>
+#include "../csky_ops.h"
 
 extern uint32_t gx8002_image_b_dma_bus_address_100051c4(uint32_t address);
 extern void gx8002_image_b_dma_descriptors_100048d0(
@@ -11,8 +12,7 @@ extern void gx8002_image_b_dma_descriptors_100048d0(
 
 static uint32_t native_shift(uint32_t value, uint32_t count)
 {
-    __asm__ volatile ("lsl %0, %1\n" : "+r"(value) : "r"(count));
-    return value;
+    return csky_lsl(value, count);
 }
 
 int32_t gx8002_image_b_dma_configure_100049d4(

@@ -1,6 +1,6 @@
 #include <stdint.h>
+#include "native_battery_context.h"
 #include "native_battery_memory.h"
-extern volatile uint8_t r1_battery_device_context[],r1_battery_runtime_context[];
 extern uint32_t osKernelGetTickCount(void),osKernelGetTickFreq(void),r1_batcfg_byte0_get(void);
 uint32_t r1_battery_charging_cadence(uint32_t voltage,uint32_t timestamp)
 {

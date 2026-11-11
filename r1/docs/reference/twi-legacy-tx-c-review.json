@@ -1,0 +1,473 @@
+{
+  "schema": 1,
+  "scope": "Provide typed C instantiations of both native legacy TWI transmit wrappers",
+  "native": {
+    "primary": "0x78a24",
+    "secondary": "0x78a32",
+    "code_bytes_each": 14,
+    "embedded_TWIM_offset": 4,
+    "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a"
+  },
+  "REA": {
+    "evidence_id": "ev_524863499a4b8829c45f755c70ea615858a02354013c2fe9f9d304bf78226bbf",
+    "subject": {
+      "name": "stock.elf",
+      "digest": {
+        "sha256": "25b4a29af80ec8edab5bd861ba9b74a6e22eab29dc3d7a809a16869e8a140f04"
+      },
+      "local_path": "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-queue-reset-c/stock.elf",
+      "format": "elf",
+      "architecture": "arm"
+    },
+    "provider": {
+      "id": "ghidra",
+      "name": "Ghidra",
+      "version": "12.1.4"
+    },
+    "analysis_profile": {
+      "provider": {
+        "id": "ghidra",
+        "name": "Ghidra",
+        "version": "12.1.4"
+      },
+      "parameters": {
+        "target_kind": "executable",
+        "target_format": "elf",
+        "architecture": "arm",
+        "available_architectures": [
+          "arm"
+        ],
+        "import_mode": "ephemeral-source-immutable",
+        "annotation_policy": "atomic-function-entry-metadata-v1",
+        "load_image_observations": "source-mappings-entry-context-v2",
+        "function_body_evidence": "complete-inclusive-ranges-v1",
+        "function_references": "complete-body-and-entry-reference-manager-v2",
+        "call_relationship_coverage": "function-body-call-coverage-v5",
+        "function_dossier_coverage": "observed-facets-and-call-relationships-v1",
+        "string_inventory_evidence": "defined-data-coverage-v1",
+        "location_resolution": "explicit-address-exact-entry-symbol-first-v3",
+        "procedure_file_offset_resolution": "address-first-unique-target-source-mapping-v2",
+        "instruction_flow_evidence": "decoded-return-pcode-v1",
+        "instruction_references": "exact-address-incoming-v1",
+        "function_boundary_observations": "ghidra-function-boundary-limitations-v3",
+        "no_return_repair": "returning-imports-decoded-return-v2",
+        "process_launch": "inspected-jvm-launch-support-v1",
+        "jump_table_evidence": "typed-case-default-blocks-v1",
+        "decompiler_jump_loads": true,
+        "loader": "auto-from-header",
+        "language_id": "auto-from-header",
+        "compiler_spec_id": "auto-default",
+        "analyzer_preset": "ghidra-default"
+      },
+      "digest": "7e46711069eea041af1b9b99e34115c13332795e5cda76e584a722f529ec70de"
+    },
+    "predicate_type": "rea.analysis",
+    "operation": "read_bytes",
+    "parameters": {
+      "address": "0x78a24",
+      "length": 28
+    },
+    "raw_result": {
+      "address": "0x78a24",
+      "requested_bytes": 28,
+      "returned_bytes": 28,
+      "bytes_hex": "38b5001d049c009402f0b8fc38bd38b5001d049c009402f0b1fc38bd",
+      "complete": true
+    },
+    "normalized_result": {
+      "address": "0x78a24",
+      "requested_bytes": 28,
+      "returned_bytes": 28,
+      "bytes_hex": "38b5001d049c009402f0b8fc38bd38b5001d049c009402f0b1fc38bd",
+      "complete": true
+    },
+    "confidence": "observed",
+    "authority": "shipped-artifact",
+    "environment": null,
+    "limitations": [
+      "The session serves operations only after Ghidra reports default auto-analysis complete; incomplete analysis does not expose partial results.",
+      "The imported Program and temporary project are ephemeral and deleted on close. Annotation operations edit session database metadata; original executable bytes are never written.",
+      "Cancelling an active Ghidra request terminates its ephemeral database and discards session annotations. The selected target remains open; the next provider query imports the original artifact again.",
+      "Default-space addresses use lowercase 0x-prefixed hexadecimal; other address spaces use <percent-encoded-space>:0x<hex>.",
+      "Bytes reflect Ghidra's initialized memory, including loader fixups. Reads stop at an unmapped or uninitialized byte and report completeness explicitly.",
+      "macOS sessions require a matching executable Ghidra native decompiler; REA checks for it but does not build native components or change Gatekeeper quarantine state."
+    ],
+    "relationship_coverage": null,
+    "locations": [],
+    "evidence_links": []
+  },
+  "SDK": {
+    "header": "vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/integration/nrfx/legacy/nrf_drv_twi.h",
+    "header_sha256": "00c44646337bfc297f88643f7cf0df2e76c64674eb733704f9ac39dfacaeea2b",
+    "version": "17.1.0_ddde560",
+    "implementation": "Pinned nrf_drv_twi_tx inline path, no copied SDK function body"
+  },
+  "normal_build": {
+    "report": "build/sources-goal-r1-twi-legacy-tx-c/report.json",
+    "unit": {
+      "source": "r1/src/application/board/native_hw_twi_legacy_tx.c",
+      "payload": "r1-application",
+      "role": "candidate",
+      "toolchain": "clang",
+      "link": true,
+      "expect": "compile",
+      "returncode": 0,
+      "argv": [
+        "/usr/bin/clang",
+        "--target=arm-none-eabi",
+        "-mcpu=cortex-m4",
+        "-mthumb",
+        "-mfpu=fpv4-sp-d16",
+        "-mfloat-abi=hard",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-fno-strict-aliasing",
+        "-fshort-enums",
+        "-std=c11",
+        "-Os",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-DNRF52840_XXAA",
+        "-DFLOAT_ABI_HARD",
+        "-DNRF_SD_BLE_API_VERSION=7",
+        "-DNRF_DFU_SVCI_ENABLED",
+        "-DNRF_DFU_TRANSPORT_BLE=1",
+        "-DS140",
+        "-DSOFTDEVICE_PRESENT",
+        "-DFREERTOS",
+        "-DCONFIG_NFCT_PINS_AS_GPIOS",
+        "-DCONFIG_GPIO_AS_PINRESET",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/r1/src/config/sdk",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-twi-legacy-tx-c/generated/r1",
+        "-include",
+        "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-twi-legacy-tx-c/generated/r1/nrf_svci_clang.h",
+        "-isystem",
+        "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/external/freertos/portable/GCC/nrf52",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/external/freertos/portable/CMSIS/nrf52",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/external/segger_rtt",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/ble/common",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/ble/ble_advertising",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/ble/peer_manager",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/ble/nrf_ble_gatt",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/atomic",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/atomic_flags",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/atomic_fifo",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/delay",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/fds",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/fstorage",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/mutex",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/sortlist",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/timer",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/experimental_section_vars",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/log",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/log/src",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/strerror",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/util",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/softdevice/common",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/softdevice/s140/headers",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/softdevice/s140/headers/nrf52",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/toolchain/cmsis/include",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/integration/nrfx",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/integration/nrfx/legacy",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx/drivers/include",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx/hal",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx/soc",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx/mdk",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/ble/ble_link_ctx_manager",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/ble/ble_services/ble_dfu",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/ble/nrf_ble_qwr",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/balloc",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/bootloader/dfu",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/memobj",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/pwr_mgmt",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/ringbuf",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/external/fprintf",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx/drivers/src",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/bootloader",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/bootloader/ble_dfu",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/svc",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/stack_info",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/mem_manager",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/queue",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/scheduler",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/third-party/upstream/freertos-kernel/include",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/r1/src/config/rtos",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/r1/src/vendor",
+        "-fno-optimize-sibling-calls",
+        "-MD",
+        "-MF",
+        "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-twi-legacy-tx-c/r1/r1-application/r1__src__application__board__native_hw_twi_legacy_tx.c.d",
+        "-c",
+        "/Users/kalani/Repo/evenRealities-openCFW/r1/src/application/board/native_hw_twi_legacy_tx.c",
+        "-o",
+        "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-twi-legacy-tx-c/r1/r1-application/r1__src__application__board__native_hw_twi_legacy_tx.c.o"
+      ],
+      "source_sha256": "cb0652ca21c2eb8d6a75f790d62e5a4c263aa2327bee48f4082b6c2dec88ecf0",
+      "object_sha256": "5b4e1a52262c57249023660a6fda0ef7e4f2f4b87eeaa955b3191b71c12d476a",
+      "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-twi-legacy-tx-c/r1/r1-application/r1__src__application__board__native_hw_twi_legacy_tx.c.o",
+      "strong": [
+        "r1_twi_primary_legacy_tx",
+        "r1_twi_secondary_legacy_tx"
+      ],
+      "weak": [],
+      "undefined": [
+        "nrfx_twim_tx"
+      ]
+    }
+  },
+  "validation": {
+    "normal_Clang": {
+      "paired_cases": 11520,
+      "executions": 23040,
+      "checks": [
+        "both native copies versus C SDK wrappers",
+        "embedded TWIM pointer +4 and all five arguments",
+        "16-byte SDK-entry frame, R4-R11 and APSR at provider entry",
+        "raw return statuses, final saved registers/masks, data effects and caller fifth word",
+        "provider mutates buffer or outgoing fifth argument"
+      ],
+      "limits": [
+        "Pinned SDK header code executes; nrfx_twim_tx is modeled, so no bus/DMA/IRQ proof",
+        "Valid byte address/length and Boolean fifth argument only",
+        "Raw caller-clobbered R1-R3/R12 and LR, private stack padding/saves, arbitrary faults and concurrency excluded"
+      ]
+    },
+    "GCC_warning_probe": {
+      "paired_cases": 11520,
+      "executions": 23040,
+      "checks": [
+        "both native copies versus C SDK wrappers",
+        "embedded TWIM pointer +4 and all five arguments",
+        "16-byte SDK-entry frame, R4-R11 and APSR at provider entry",
+        "raw return statuses, final saved registers/masks, data effects and caller fifth word",
+        "provider mutates buffer or outgoing fifth argument"
+      ],
+      "limits": [
+        "Pinned SDK header code executes; nrfx_twim_tx is modeled, so no bus/DMA/IRQ proof",
+        "Valid byte address/length and Boolean fifth argument only",
+        "Raw caller-clobbered R1-R3/R12 and LR, private stack padding/saves, arbitrary faults and concurrency excluded"
+      ]
+    }
+  },
+  "negative_controls": [
+    {
+      "mutation": "wrong-embedded-offset",
+      "rejected": true,
+      "evidence": "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-twi-legacy-tx-c/wrong-embedded-offset/rejection.log"
+    },
+    {
+      "mutation": "wrong-fifth",
+      "rejected": true,
+      "evidence": "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-twi-legacy-tx-c/wrong-fifth/rejection.log"
+    },
+    {
+      "mutation": "missing-R4-binding",
+      "rejected": true,
+      "evidence": "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-twi-legacy-tx-c/missing-R4-binding/rejection.log"
+    },
+    {
+      "mutation": "tail-frame",
+      "rejected": true,
+      "evidence": "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-twi-legacy-tx-c/tail-frame/rejection.log"
+    }
+  ],
+  "audit": {
+    "units": 577,
+    "existing_objects_unchanged": 576,
+    "new_linked_providers": [
+      "r1_twi_primary_legacy_tx",
+      "r1_twi_secondary_legacy_tx"
+    ],
+    "provider_dependency": "nrfx_twim_tx already linked from pinned SDK",
+    "existing_callers_unchanged": true,
+    "existing_consumers_of_new_wrappers": [],
+    "application_imports": 164,
+    "bootloader_imports": 34,
+    "manifest_only_adds_one_unit": true,
+    "other_manifest_fields_unchanged": true,
+    "empty_R4_constraints_only": true
+  },
+  "qualification": {
+    "generic": {
+      "report": "build/goal-r1-twi-legacy-tx-c/qualified-generic/qualification.json",
+      "compiled": 10,
+      "candidates": 10,
+      "new_regions": 0
+    },
+    "gcc": {
+      "report": "build/goal-r1-twi-legacy-tx-c/qualified-gcc/qualification.json",
+      "compiled": 0,
+      "candidates": 6,
+      "new_regions": 0
+    }
+  },
+  "GCC_probe": {
+    "extra_flag": "-Wno-error=unused-parameter",
+    "argv": "build/goal-r1-twi-legacy-tx-c/gcc-warning-probe-argv.json",
+    "compiler_log": "build/goal-r1-twi-legacy-tx-c/gcc-warning-probe-compile.log",
+    "reason": "Pinned SDK SVC naked declarations have C-unused parameters; strict GCC profile promotes them to errors before wrapper qualification.",
+    "normal_manifest_warning_policy_unchanged": true,
+    "probe_not_an_official_exact_selection": true
+  },
+  "canonical_hybrid": {
+    "report": "build/hybrid-goal-r1-twi-legacy-tx-c/build-report.json",
+    "source_plan_unchanged": true,
+    "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "source_built_bytes_including_assembly_and_data": 4035,
+    "binary_fallback_bytes": 642125,
+    "resource_bytes": 248,
+    "source_completeness_proven": false
+  },
+  "probe_hashes": {
+    "build/goal-r1-twi-legacy-tx-c/verify.py": "09adab59cc22aef33992063c277dd161bc37bc58f09fbfe276c9ad69e37244bf",
+    "build/goal-r1-twi-legacy-tx-c/negative.py": "6071b027bf245998ab3fca297ab7d2895fed6f3fa8b1ca871b9a1863194007e3",
+    "build/goal-r1-twi-legacy-tx-c/audit.py": "9dbdc5559e0c9eda005a244173a29d21f77b63cc86713f267ad8826bcb8d7230",
+    "build/goal-r1-twi-legacy-tx-c/rea.json": "9c0144c6b4602be5bee3e759d5934bbdbe2cf379a71dfb41f0252cf750fefb9a"
+  },
+  "limitations": [
+    "New C providers are available in normal composition; existing register adapter callers are unchanged and do not yet consume them.",
+    "SDK TX body modeled; no DMA, bus, interrupt or physical device behavior proof.",
+    "Valid uint8 address/length and Boolean no_stop only; noncanonical ABI values excluded.",
+    "Raw caller-clobbered R1-R3/R12/LR and private stack padding/saves, arbitrary faults and concurrency excluded.",
+    "Empty R4 constraint and no-sibling-call compiler flag preserve recorded SDK-entry contract; no emitted inline assembly added.",
+    "Normal Clang build passes; strict official GCC matrix does not compile, while warning-severity probe passes.",
+    "No new exact regions or complete source-only firmware proof."
+  ],
+  "write_adapter_boundary": {
+    "scope": "Actual native register-write boundary; TX modeled to return17 without writes",
+    "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "cases": [
+      {
+        "secondary": false,
+        "input_length": 0,
+        "return_status": 17,
+        "incoming_R4": "0x44444440",
+        "returned_R4": "0x44444440",
+        "calls": [
+          {
+            "buffer_offset_from_entry_SP": -100,
+            "length": 1,
+            "bytes": "77",
+            "saved_R4_slot": "40444444"
+          }
+        ]
+      },
+      {
+        "secondary": false,
+        "input_length": 79,
+        "return_status": 17,
+        "incoming_R4": "0x44444440",
+        "returned_R4": "0x44444440",
+        "calls": [
+          {
+            "buffer_offset_from_entry_SP": -100,
+            "length": 80,
+            "bytes": "77000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e",
+            "saved_R4_slot": "40444444"
+          }
+        ]
+      },
+      {
+        "secondary": false,
+        "input_length": 80,
+        "return_status": 17,
+        "incoming_R4": "0x44444440",
+        "returned_R4": "0x4444444f",
+        "calls": [
+          {
+            "buffer_offset_from_entry_SP": -100,
+            "length": 81,
+            "bytes": "77000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e4f",
+            "saved_R4_slot": "4f444444"
+          }
+        ]
+      },
+      {
+        "secondary": false,
+        "input_length": 81,
+        "return_status": 9,
+        "incoming_R4": "0x44444440",
+        "returned_R4": "0x44444440",
+        "calls": []
+      },
+      {
+        "secondary": true,
+        "input_length": 0,
+        "return_status": 17,
+        "incoming_R4": "0x44444440",
+        "returned_R4": "0x44444440",
+        "calls": [
+          {
+            "buffer_offset_from_entry_SP": -100,
+            "length": 1,
+            "bytes": "77",
+            "saved_R4_slot": "40444444"
+          }
+        ]
+      },
+      {
+        "secondary": true,
+        "input_length": 79,
+        "return_status": 17,
+        "incoming_R4": "0x44444440",
+        "returned_R4": "0x44444440",
+        "calls": [
+          {
+            "buffer_offset_from_entry_SP": -100,
+            "length": 80,
+            "bytes": "77000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e",
+            "saved_R4_slot": "40444444"
+          }
+        ]
+      },
+      {
+        "secondary": true,
+        "input_length": 80,
+        "return_status": 17,
+        "incoming_R4": "0x44444440",
+        "returned_R4": "0x4444444f",
+        "calls": [
+          {
+            "buffer_offset_from_entry_SP": -100,
+            "length": 81,
+            "bytes": "77000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e4f",
+            "saved_R4_slot": "4f444444"
+          }
+        ]
+      },
+      {
+        "secondary": true,
+        "input_length": 81,
+        "return_status": 9,
+        "incoming_R4": "0x44444440",
+        "returned_R4": "0x44444440",
+        "calls": []
+      }
+    ],
+    "finding": "For length80 the last payload byte at frame+84 overwrites saved R4 low byte. Both native adapters restore that mutated R4. Length79 does not, length81 returns9 before TX.",
+    "limit": "No bus or physical-device proof; this is a native stack alias contract to preserve in future C conversion."
+  },
+  "subsequent_read_adapter_consumption": {
+    "evidence": "r1/docs/reference/twi-read-c-review.json",
+    "consumer": "r1/src/application/board/native_hw_twi_register.c",
+    "normal_Clang_validated": true
+  },
+  "subsequent_direct_packet_write_C": {
+    "evidence": "r1/docs/reference/twi-packet-write-c-review.json",
+    "write_bridges_removed": true,
+    "read_paths_and_register_write_adapters_unchanged": true
+  },
+  "subsequent_direct_register_write_C": {
+    "review": "r1/docs/reference/twi-register-write-c-review.json",
+    "read_sections_unchanged": true,
+    "length80_overlap_preserved": true,
+    "bulk_C_chain_pairs": 9000,
+    "bulk_SDK_depth": 136
+  }
+}

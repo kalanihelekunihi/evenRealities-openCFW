@@ -1,0 +1,168 @@
+{
+  "normal_report": "build/sources-goal-r1-yhm-track-pure-c/report.json",
+  "report_sha256": "3c44def7c71e20176f8adc6e241e3755c10ef34e5a9d8500b3ceda882d456e32",
+  "unit": {
+    "source": "r1/src/application/board/native_yhm_system_track.c",
+    "payload": "r1-application",
+    "role": "selected",
+    "toolchain": "clang",
+    "link": true,
+    "expect": "compile",
+    "returncode": 0,
+    "argv": [
+      "/usr/bin/clang",
+      "--target=arm-none-eabi",
+      "-mcpu=cortex-m4",
+      "-mthumb",
+      "-munaligned-access",
+      "-mfpu=fpv4-sp-d16",
+      "-mfloat-abi=hard",
+      "-std=c11",
+      "-Os",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-fshort-enums",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-fno-delete-null-pointer-checks",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/r1/src/vendor",
+      "-isystem",
+      "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
+      "-MD",
+      "-MF",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-yhm-track-pure-c/r1/r1-application/r1__src__application__board__native_yhm_system_track.c.d",
+      "-c",
+      "/Users/kalani/Repo/evenRealities-openCFW/r1/src/application/board/native_yhm_system_track.c",
+      "-o",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-yhm-track-pure-c/r1/r1-application/r1__src__application__board__native_yhm_system_track.c.o"
+    ],
+    "source_sha256": "b95545c390f1ad1b859456846b2051e93e9b772c10f366fc508c22ec0352bf31",
+    "object_sha256": "6732094ddd803ad8ea466a9ee146e9d20c7fc55289a6b28264ffa64ea806fbce",
+    "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-yhm-track-pure-c/r1/r1-application/r1__src__application__board__native_yhm_system_track.c.o",
+    "strong": [
+      "r1_native_charger_initialize",
+      "r1_native_charger_tracking_clear",
+      "r1_yhm_system_track_clear_native",
+      "r1_yhm_system_track_clear_ring",
+      "r1_yhm_system_track_clear_sdk",
+      "r1_yhm_system_track_native",
+      "r1_yhm_system_track_ring",
+      "r1_yhm_system_track_sdk"
+    ],
+    "weak": [],
+    "undefined": [
+      "nrf_log_frontend_std_1",
+      "r1_structured_log_format",
+      "r1_structured_log_mode_get",
+      "r1_yhm_register_read_native",
+      "r1_yhm_register_write_native"
+    ]
+  },
+  "set": {
+    "clear": false,
+    "thunk": false,
+    "paired_cases": 16512,
+    "executions": 33024,
+    "base_cases": 6912,
+    "callback_mutation_cases": 9600,
+    "checks": [
+      "Bit1 set/clear, ignored read status, raw write status",
+      "Live log-mode short circuits and log values",
+      "Read/tx low bytes, callback mutations, SP, saved registers and masks"
+    ],
+    "limits": [
+      "Register transport and logging providers modeled",
+      "Unused upper bytes, private frames and scratch-register returns excluded",
+      "Physical charger, I2C and IRQ timing unverified"
+    ]
+  },
+  "clear": {
+    "clear": true,
+    "thunk": false,
+    "paired_cases": 16512,
+    "executions": 33024,
+    "base_cases": 6912,
+    "callback_mutation_cases": 9600,
+    "checks": [
+      "Bit1 set/clear, ignored read status, raw write status",
+      "Live log-mode short circuits and log values",
+      "Read/tx low bytes, callback mutations, SP, saved registers and masks"
+    ],
+    "limits": [
+      "Register transport and logging providers modeled",
+      "Unused upper bytes, private frames and scratch-register returns excluded",
+      "Physical charger, I2C and IRQ timing unverified"
+    ]
+  },
+  "negative": {
+    "wrong-clear-bit": {
+      "rejected": true,
+      "diagnostic": "Traceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-yhm-track-pure-c/verify.py\", line 53, in <module>\n    c=(*c,0);x=a(*c);y=b(*c);assert x==y,(c,x,y);count+=1\n                                    ^^^^\nAssertionError: ((0, 0, 2, (0, 0, 0), 0, 0, 0), (0, [('read', 1, 1, '00'), ('mode', 0), ('mode', 0), ('mode', 0), ('write', 1, 1, '00')]), (0, [('read', 1, 1, '00'), ('mode', 0), ('mode', 0), ('mode', 0), ('write', 1, 1, '02')]))\n"
+    },
+    "wrong-set-bit": {
+      "rejected": true,
+      "diagnostic": "Traceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-yhm-track-pure-c/verify.py\", line 53, in <module>\n    c=(*c,0);x=a(*c);y=b(*c);assert x==y,(c,x,y);count+=1\n                                    ^^^^\nAssertionError: ((0, 0, -1, (0, 0, 0), 0, 0, 0), (0, [('read', 1, 1, '00'), ('mode', 0), ('mode', 0), ('mode', 0), ('write', 1, 1, '02')]), (0, [('read', 1, 1, '00'), ('mode', 0), ('mode', 0), ('mode', 0), ('write', 1, 1, '04')]))\n"
+    },
+    "abort-read-error": {
+      "rejected": true,
+      "diagnostic": "Traceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-yhm-track-pure-c/verify.py\", line 53, in <module>\n    c=(*c,0);x=a(*c);y=b(*c);assert x==y,(c,x,y);count+=1\n                                    ^^^^\nAssertionError: ((0, 0, -1, (0, 0, 0), 4294967295, 0, 0), (0, [('read', 1, 1, '00'), ('mode', 0), ('mode', 0), ('mode', 0), ('write', 1, 1, '02')]), (0, [('read', 1, 1, '00')]))\n"
+    },
+    "discard-write-status": {
+      "rejected": true,
+      "diagnostic": "Traceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-yhm-track-pure-c/verify.py\", line 53, in <module>\n    c=(*c,0);x=a(*c);y=b(*c);assert x==y,(c,x,y);count+=1\n                                    ^^^^\nAssertionError: ((0, 0, -1, (0, 0, 0), 0, 1, 0), (1, [('read', 1, 1, '00'), ('mode', 0), ('mode', 0), ('mode', 0), ('write', 1, 1, '02')]), (0, [('read', 1, 1, '00'), ('mode', 0), ('mode', 0), ('mode', 0), ('write', 1, 1, '02')]))\n"
+    }
+  },
+  "audit": {
+    "changed": [
+      "r1/src/application/board/native_yhm_system_track.c"
+    ],
+    "unchanged_objects": 726,
+    "unchanged_other_text_sections": [
+      ".text.r1_native_charger_initialize",
+      ".text.r1_native_charger_tracking_clear"
+    ]
+  },
+  "thunk_relocations": {
+    "unchanged": true,
+    "thunks": {
+      "r1_native_charger_initialize": {
+        "bytes": "fff7febf",
+        "relocations": [
+          [
+            0,
+            30,
+            "r1_yhm_system_track_native"
+          ]
+        ]
+      },
+      "r1_native_charger_tracking_clear": {
+        "bytes": "fff7febf",
+        "relocations": [
+          [
+            0,
+            30,
+            "r1_yhm_system_track_clear_native"
+          ]
+        ]
+      }
+    }
+  },
+  "rea": [
+    {
+      "path": "build/goal-r1-yhm-track-pure-c/rea-0x355bc.json",
+      "sha256": "910fede68293a12a3a26912a4458dd2f3884588103463c1f2048afa5b011abd6"
+    },
+    {
+      "path": "build/goal-r1-yhm-track-pure-c/rea-0x3543c.json",
+      "sha256": "9d287a5427d7160f1dac882cbde31129ef1b2a5333cc79ab4f06e2833666a9c3"
+    }
+  ],
+  "limits": [
+    "Register transport and logs modeled",
+    "Unused upper scratch bytes, private frames and raw R2/R3 returns excluded",
+    "No physical PMIC/I2C/IRQ validation or full source-only image proof"
+  ]
+}

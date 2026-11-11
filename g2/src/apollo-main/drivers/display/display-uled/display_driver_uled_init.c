@@ -1,11 +1,15 @@
 /* Apollo uLED startup wrapper 0x4c9f32..0x4c9fb3. Candidate. */
 #include <stdint.h>
+/* Stock-RAM literals rewritten to named objects (sim-test wave 2026-10-26,
+ * .waves/sim-fix/apply.py): g2ref_X is the linker symbol X. */
+#include <stdint.h>
+extern unsigned char g2ref_g2_stock_ram_20094400[] __asm__("g2_stock_ram_20094400");
 extern uint8_t *audio_ble_hci_radio_mode_state_50938e(uint32_t); /* selected 0x50938e */
 extern uint32_t display_driver_uled_config_mode_4c9d9c(uint32_t); /* lower body pending */
 extern void * volatile display_driver_uled_instance; /* SRAM 0x20074530 */
 extern void display_driver_uled_row_callback_4ca2ac(void); /* callback body pending */
 extern uint8_t display_driver_uled_work_buffer[]; /* native SRAM 0x203795a0, size gated */
-void *display_driver_uled_context=(void *)(uintptr_t)0x20094400u; /* decoded SRAM cell 0x200007b8 */
+void *display_driver_uled_context=(void *)(uintptr_t)((uint32_t)(uintptr_t)g2ref_g2_stock_ram_20094400); /* decoded SRAM cell 0x200007b8 */
 extern uint32_t audio_log_flags(void);
 extern void audio_log_extended(uint8_t,const char *,const char *,const char *,uint32_t,const char *,...);
 extern uint32_t compressed_log_output(uint32_t,const char *,const char *,...);

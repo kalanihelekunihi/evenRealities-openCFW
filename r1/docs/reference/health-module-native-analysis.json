@@ -1,0 +1,2102 @@
+{
+  "REA": {
+    "evidence_id": "ev_7504247f2cf4e9293d45301c2179c142c9b402f1a0d80fcf3c8bbe4661897d40",
+    "subject": {
+      "name": "stock.elf",
+      "digest": {
+        "sha256": "25b4a29af80ec8edab5bd861ba9b74a6e22eab29dc3d7a809a16869e8a140f04"
+      },
+      "local_path": "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-queue-reset-c/stock.elf",
+      "format": "elf",
+      "architecture": "arm"
+    },
+    "provider": {
+      "id": "ghidra",
+      "name": "Ghidra",
+      "version": "12.1.4"
+    },
+    "analysis_profile": {
+      "provider": {
+        "id": "ghidra",
+        "name": "Ghidra",
+        "version": "12.1.4"
+      },
+      "parameters": {
+        "target_kind": "executable",
+        "target_format": "elf",
+        "architecture": "arm",
+        "available_architectures": [
+          "arm"
+        ],
+        "import_mode": "ephemeral-source-immutable",
+        "annotation_policy": "atomic-function-entry-metadata-v1",
+        "load_image_observations": "source-mappings-entry-context-v2",
+        "function_body_evidence": "complete-inclusive-ranges-v1",
+        "function_references": "complete-body-and-entry-reference-manager-v2",
+        "call_relationship_coverage": "function-body-call-coverage-v5",
+        "function_dossier_coverage": "observed-facets-and-call-relationships-v1",
+        "string_inventory_evidence": "defined-data-coverage-v1",
+        "location_resolution": "explicit-address-exact-entry-symbol-first-v3",
+        "procedure_file_offset_resolution": "address-first-unique-target-source-mapping-v2",
+        "instruction_flow_evidence": "decoded-return-pcode-v1",
+        "instruction_references": "exact-address-incoming-v1",
+        "function_boundary_observations": "ghidra-function-boundary-limitations-v3",
+        "no_return_repair": "returning-imports-decoded-return-v2",
+        "process_launch": "inspected-jvm-launch-support-v1",
+        "jump_table_evidence": "typed-case-default-blocks-v1",
+        "decompiler_jump_loads": true,
+        "loader": "auto-from-header",
+        "language_id": "auto-from-header",
+        "compiler_spec_id": "auto-default",
+        "analyzer_preset": "ghidra-default"
+      },
+      "digest": "7e46711069eea041af1b9b99e34115c13332795e5cda76e584a722f529ec70de"
+    },
+    "predicate_type": "rea.analysis",
+    "operation": "read_bytes",
+    "parameters": {
+      "address": "0x4c5c4",
+      "length": 112
+    },
+    "raw_result": {
+      "address": "0x4c5c4",
+      "requested_bytes": 112,
+      "returned_bytes": 112,
+      "bytes_hex": "38b5114804f0e6f9104c606840b90120034600900e4a0fa110a03df003f960600f4902200f4a81f8250014460e4904203ef0cafc22460d4903203ef0c5fcbde83840f0f779bd000051d10300946e002081cd0300616c676f000000006163630054e401201066002089370400b9d10300",
+      "complete": true
+    },
+    "normalized_result": {
+      "address": "0x4c5c4",
+      "requested_bytes": 112,
+      "returned_bytes": 112,
+      "bytes_hex": "38b5114804f0e6f9104c606840b90120034600900e4a0fa110a03df003f960600f4902200f4a81f8250014460e4904203ef0cafc22460d4903203ef0c5fcbde83840f0f779bd000051d10300946e002081cd0300616c676f000000006163630054e401201066002089370400b9d10300",
+      "complete": true
+    },
+    "confidence": "observed",
+    "authority": "shipped-artifact",
+    "environment": null,
+    "limitations": [
+      "The session serves operations only after Ghidra reports default auto-analysis complete; incomplete analysis does not expose partial results.",
+      "The imported Program and temporary project are ephemeral and deleted on close. Annotation operations edit session database metadata; original executable bytes are never written.",
+      "Cancelling an active Ghidra request terminates its ephemeral database and discards session annotations. The selected target remains open; the next provider query imports the original artifact again.",
+      "Default-space addresses use lowercase 0x-prefixed hexadecimal; other address spaces use <percent-encoded-space>:0x<hex>.",
+      "Bytes reflect Ghidra's initialized memory, including loader fixups. Reads stop at an unmapped or uninitialized byte and report completeness explicitly.",
+      "macOS sessions require a matching executable Ghidra native decompiler; REA checks for it but does not build native components or change Gatekeeper quarantine state."
+    ],
+    "relationship_coverage": null,
+    "locations": [],
+    "evidence_links": []
+  },
+  "native_probe": {
+    "cases": [
+      {
+        "initial_handle": 0,
+        "registered_handle": 0,
+        "mutation": "none",
+        "calls": [
+          {
+            "address": "0x50998",
+            "args": [
+              250193
+            ],
+            "handle": 0,
+            "state": 185
+          },
+          {
+            "address": "0x897e8",
+            "args": [
+              "acc",
+              "algo",
+              249217,
+              1,
+              1
+            ],
+            "handle": 2882400000,
+            "state": 185
+          },
+          {
+            "address": "0x8af8c",
+            "args": [
+              4,
+              276361,
+              536897040
+            ],
+            "handle": 0,
+            "state": 2
+          },
+          {
+            "address": "0x8af8c",
+            "args": [
+              3,
+              250297,
+              536897040
+            ],
+            "handle": 0,
+            "state": 2
+          },
+          {
+            "address": "0x3d0fc",
+            "args": [],
+            "handle": 0,
+            "state": 2
+          }
+        ],
+        "writes": [
+          [
+            "0x20006e98",
+            4,
+            0
+          ],
+          [
+            "0x2001e479",
+            1,
+            2
+          ]
+        ]
+      },
+      {
+        "initial_handle": 0,
+        "registered_handle": 0,
+        "mutation": "install",
+        "calls": [
+          {
+            "address": "0x50998",
+            "args": [
+              250193
+            ],
+            "handle": 2005440938,
+            "state": 185
+          },
+          {
+            "address": "0x8af8c",
+            "args": [
+              4,
+              276361,
+              536897040
+            ],
+            "handle": 2005440938,
+            "state": 2
+          },
+          {
+            "address": "0x8af8c",
+            "args": [
+              3,
+              250297,
+              536897040
+            ],
+            "handle": 2005440938,
+            "state": 2
+          },
+          {
+            "address": "0x3d0fc",
+            "args": [],
+            "handle": 2005440938,
+            "state": 2
+          }
+        ],
+        "writes": [
+          [
+            "0x2001e479",
+            1,
+            2
+          ]
+        ]
+      },
+      {
+        "initial_handle": 0,
+        "registered_handle": 0,
+        "mutation": "clear",
+        "calls": [
+          {
+            "address": "0x50998",
+            "args": [
+              250193
+            ],
+            "handle": 0,
+            "state": 185
+          },
+          {
+            "address": "0x897e8",
+            "args": [
+              "acc",
+              "algo",
+              249217,
+              1,
+              1
+            ],
+            "handle": 2882400000,
+            "state": 185
+          },
+          {
+            "address": "0x8af8c",
+            "args": [
+              4,
+              276361,
+              536897040
+            ],
+            "handle": 0,
+            "state": 2
+          },
+          {
+            "address": "0x8af8c",
+            "args": [
+              3,
+              250297,
+              536897040
+            ],
+            "handle": 0,
+            "state": 2
+          },
+          {
+            "address": "0x3d0fc",
+            "args": [],
+            "handle": 0,
+            "state": 2
+          }
+        ],
+        "writes": [
+          [
+            "0x20006e98",
+            4,
+            0
+          ],
+          [
+            "0x2001e479",
+            1,
+            2
+          ]
+        ]
+      },
+      {
+        "initial_handle": 0,
+        "registered_handle": 0,
+        "mutation": "state",
+        "calls": [
+          {
+            "address": "0x50998",
+            "args": [
+              250193
+            ],
+            "handle": 0,
+            "state": 185
+          },
+          {
+            "address": "0x897e8",
+            "args": [
+              "acc",
+              "algo",
+              249217,
+              1,
+              1
+            ],
+            "handle": 2882400000,
+            "state": 185
+          },
+          {
+            "address": "0x8af8c",
+            "args": [
+              4,
+              276361,
+              536897040
+            ],
+            "handle": 0,
+            "state": 85
+          },
+          {
+            "address": "0x8af8c",
+            "args": [
+              3,
+              250297,
+              536897040
+            ],
+            "handle": 0,
+            "state": 85
+          },
+          {
+            "address": "0x3d0fc",
+            "args": [],
+            "handle": 0,
+            "state": 85
+          }
+        ],
+        "writes": [
+          [
+            "0x20006e98",
+            4,
+            0
+          ],
+          [
+            "0x2001e479",
+            1,
+            2
+          ]
+        ]
+      },
+      {
+        "initial_handle": 0,
+        "registered_handle": 305419896,
+        "mutation": "none",
+        "calls": [
+          {
+            "address": "0x50998",
+            "args": [
+              250193
+            ],
+            "handle": 0,
+            "state": 185
+          },
+          {
+            "address": "0x897e8",
+            "args": [
+              "acc",
+              "algo",
+              249217,
+              1,
+              1
+            ],
+            "handle": 2882400000,
+            "state": 185
+          },
+          {
+            "address": "0x8af8c",
+            "args": [
+              4,
+              276361,
+              536897040
+            ],
+            "handle": 305419896,
+            "state": 2
+          },
+          {
+            "address": "0x8af8c",
+            "args": [
+              3,
+              250297,
+              536897040
+            ],
+            "handle": 305419896,
+            "state": 2
+          },
+          {
+            "address": "0x3d0fc",
+            "args": [],
+            "handle": 305419896,
+            "state": 2
+          }
+        ],
+        "writes": [
+          [
+            "0x20006e98",
+            4,
+            305419896
+          ],
+          [
+            "0x2001e479",
+            1,
+            2
+          ]
+        ]
+      },
+      {
+        "initial_handle": 0,
+        "registered_handle": 305419896,
+        "mutation": "install",
+        "calls": [
+          {
+            "address": "0x50998",
+            "args": [
+              250193
+            ],
+            "handle": 2005440938,
+            "state": 185
+          },
+          {
+            "address": "0x8af8c",
+            "args": [
+              4,
+              276361,
+              536897040
+            ],
+            "handle": 2005440938,
+            "state": 2
+          },
+          {
+            "address": "0x8af8c",
+            "args": [
+              3,
+              250297,
+              536897040
+            ],
+            "handle": 2005440938,
+            "state": 2
+          },
+          {
+            "address": "0x3d0fc",
+            "args": [],
+            "handle": 2005440938,
+            "state": 2
+          }
+        ],
+        "writes": [
+          [
+            "0x2001e479",
+            1,
+            2
+          ]
+        ]
+      },
+      {
+        "initial_handle": 0,
+        "registered_handle": 305419896,
+        "mutation": "clear",
+        "calls": [
+          {
+            "address": "0x50998",
+            "args": [
+              250193
+            ],
+            "handle": 0,
+            "state": 185
+          },
+          {
+            "address": "0x897e8",
+            "args": [
+              "acc",
+              "algo",
+              249217,
+              1,
+              1
+            ],
+            "handle": 2882400000,
+            "state": 185
+          },
+          {
+            "address": "0x8af8c",
+            "args": [
+              4,
+              276361,
+              536897040
+            ],
+            "handle": 305419896,
+            "state": 2
+          },
+          {
+            "address": "0x8af8c",
+            "args": [
+              3,
+              250297,
+              536897040
+            ],
+            "handle": 305419896,
+            "state": 2
+          },
+          {
+            "address": "0x3d0fc",
+            "args": [],
+            "handle": 305419896,
+            "state": 2
+          }
+        ],
+        "writes": [
+          [
+            "0x20006e98",
+            4,
+            305419896
+          ],
+          [
+            "0x2001e479",
+            1,
+            2
+          ]
+        ]
+      },
+      {
+        "initial_handle": 0,
+        "registered_handle": 305419896,
+        "mutation": "state",
+        "calls": [
+          {
+            "address": "0x50998",
+            "args": [
+              250193
+            ],
+            "handle": 0,
+            "state": 185
+          },
+          {
+            "address": "0x897e8",
+            "args": [
+              "acc",
+              "algo",
+              249217,
+              1,
+              1
+            ],
+            "handle": 2882400000,
+            "state": 185
+          },
+          {
+            "address": "0x8af8c",
+            "args": [
+              4,
+              276361,
+              536897040
+            ],
+            "handle": 305419896,
+            "state": 85
+          },
+          {
+            "address": "0x8af8c",
+            "args": [
+              3,
+              250297,
+              536897040
+            ],
+            "handle": 305419896,
+            "state": 85
+          },
+          {
+            "address": "0x3d0fc",
+            "args": [],
+            "handle": 305419896,
+            "state": 85
+          }
+        ],
+        "writes": [
+          [
+            "0x20006e98",
+            4,
+            305419896
+          ],
+          [
+            "0x2001e479",
+            1,
+            2
+          ]
+        ]
+      },
+      {
+        "initial_handle": 0,
+        "registered_handle": 4294967295,
+        "mutation": "none",
+        "calls": [
+          {
+            "address": "0x50998",
+            "args": [
+              250193
+            ],
+            "handle": 0,
+            "state": 185
+          },
+          {
+            "address": "0x897e8",
+            "args": [
+              "acc",
+              "algo",
+              249217,
+              1,
+              1
+            ],
+            "handle": 2882400000,
+            "state": 185
+          },
+          {
+            "address": "0x8af8c",
+            "args": [
+              4,
+              276361,
+              536897040
+            ],
+            "handle": 4294967295,
+            "state": 2
+          },
+          {
+            "address": "0x8af8c",
+            "args": [
+              3,
+              250297,
+              536897040
+            ],
+            "handle": 4294967295,
+            "state": 2
+          },
+          {
+            "address": "0x3d0fc",
+            "args": [],
+            "handle": 4294967295,
+            "state": 2
+          }
+        ],
+        "writes": [
+          [
+            "0x20006e98",
+            4,
+            4294967295
+          ],
+          [
+            "0x2001e479",
+            1,
+            2
+          ]
+        ]
+      },
+      {
+        "initial_handle": 0,
+        "registered_handle": 4294967295,
+        "mutation": "install",
+        "calls": [
+          {
+            "address": "0x50998",
+            "args": [
+              250193
+            ],
+            "handle": 2005440938,
+            "state": 185
+          },
+          {
+            "address": "0x8af8c",
+            "args": [
+              4,
+              276361,
+              536897040
+            ],
+            "handle": 2005440938,
+            "state": 2
+          },
+          {
+            "address": "0x8af8c",
+            "args": [
+              3,
+              250297,
+              536897040
+            ],
+            "handle": 2005440938,
+            "state": 2
+          },
+          {
+            "address": "0x3d0fc",
+            "args": [],
+            "handle": 2005440938,
+            "state": 2
+          }
+        ],
+        "writes": [
+          [
+            "0x2001e479",
+            1,
+            2
+          ]
+        ]
+      },
+      {
+        "initial_handle": 0,
+        "registered_handle": 4294967295,
+        "mutation": "clear",
+        "calls": [
+          {
+            "address": "0x50998",
+            "args": [
+              250193
+            ],
+            "handle": 0,
+            "state": 185
+          },
+          {
+            "address": "0x897e8",
+            "args": [
+              "acc",
+              "algo",
+              249217,
+              1,
+              1
+            ],
+            "handle": 2882400000,
+            "state": 185
+          },
+          {
+            "address": "0x8af8c",
+            "args": [
+              4,
+              276361,
+              536897040
+            ],
+            "handle": 4294967295,
+            "state": 2
+          },
+          {
+            "address": "0x8af8c",
+            "args": [
+              3,
+              250297,
+              536897040
+            ],
+            "handle": 4294967295,
+            "state": 2
+          },
+          {
+            "address": "0x3d0fc",
+            "args": [],
+            "handle": 4294967295,
+            "state": 2
+          }
+        ],
+        "writes": [
+          [
+            "0x20006e98",
+            4,
+            4294967295
+          ],
+          [
+            "0x2001e479",
+            1,
+            2
+          ]
+        ]
+      },
+      {
+        "initial_handle": 0,
+        "registered_handle": 4294967295,
+        "mutation": "state",
+        "calls": [
+          {
+            "address": "0x50998",
+            "args": [
+              250193
+            ],
+            "handle": 0,
+            "state": 185
+          },
+          {
+            "address": "0x897e8",
+            "args": [
+              "acc",
+              "algo",
+              249217,
+              1,
+              1
+            ],
+            "handle": 2882400000,
+            "state": 185
+          },
+          {
+            "address": "0x8af8c",
+            "args": [
+              4,
+              276361,
+              536897040
+            ],
+            "handle": 4294967295,
+            "state": 85
+          },
+          {
+            "address": "0x8af8c",
+            "args": [
+              3,
+              250297,
+              536897040
+            ],
+            "handle": 4294967295,
+            "state": 85
+          },
+          {
+            "address": "0x3d0fc",
+            "args": [],
+            "handle": 4294967295,
+            "state": 85
+          }
+        ],
+        "writes": [
+          [
+            "0x20006e98",
+            4,
+            4294967295
+          ],
+          [
+            "0x2001e479",
+            1,
+            2
+          ]
+        ]
+      },
+      {
+        "initial_handle": 1,
+        "registered_handle": 0,
+        "mutation": "none",
+        "calls": [
+          {
+            "address": "0x50998",
+            "args": [
+              250193
+            ],
+            "handle": 1,
+            "state": 185
+          },
+          {
+            "address": "0x8af8c",
+            "args": [
+              4,
+              276361,
+              536897040
+            ],
+            "handle": 1,
+            "state": 2
+          },
+          {
+            "address": "0x8af8c",
+            "args": [
+              3,
+              250297,
+              536897040
+            ],
+            "handle": 1,
+            "state": 2
+          },
+          {
+            "address": "0x3d0fc",
+            "args": [],
+            "handle": 1,
+            "state": 2
+          }
+        ],
+        "writes": [
+          [
+            "0x2001e479",
+            1,
+            2
+          ]
+        ]
+      },
+      {
+        "initial_handle": 1,
+        "registered_handle": 0,
+        "mutation": "install",
+        "calls": [
+          {
+            "address": "0x50998",
+            "args": [
+              250193
+            ],
+            "handle": 2005440938,
+            "state": 185
+          },
+          {
+            "address": "0x8af8c",
+            "args": [
+              4,
+              276361,
+              536897040
+            ],
+            "handle": 2005440938,
+            "state": 2
+          },
+          {
+            "address": "0x8af8c",
+            "args": [
+              3,
+              250297,
+              536897040
+            ],
+            "handle": 2005440938,
+            "state": 2
+          },
+          {
+            "address": "0x3d0fc",
+            "args": [],
+            "handle": 2005440938,
+            "state": 2
+          }
+        ],
+        "writes": [
+          [
+            "0x2001e479",
+            1,
+            2
+          ]
+        ]
+      },
+      {
+        "initial_handle": 1,
+        "registered_handle": 0,
+        "mutation": "clear",
+        "calls": [
+          {
+            "address": "0x50998",
+            "args": [
+              250193
+            ],
+            "handle": 0,
+            "state": 185
+          },
+          {
+            "address": "0x897e8",
+            "args": [
+              "acc",
+              "algo",
+              249217,
+              1,
+              1
+            ],
+            "handle": 2882400000,
+            "state": 185
+          },
+          {
+            "address": "0x8af8c",
+            "args": [
+              4,
+              276361,
+              536897040
+            ],
+            "handle": 0,
+            "state": 2
+          },
+          {
+            "address": "0x8af8c",
+            "args": [
+              3,
+              250297,
+              536897040
+            ],
+            "handle": 0,
+            "state": 2
+          },
+          {
+            "address": "0x3d0fc",
+            "args": [],
+            "handle": 0,
+            "state": 2
+          }
+        ],
+        "writes": [
+          [
+            "0x20006e98",
+            4,
+            0
+          ],
+          [
+            "0x2001e479",
+            1,
+            2
+          ]
+        ]
+      },
+      {
+        "initial_handle": 1,
+        "registered_handle": 0,
+        "mutation": "state",
+        "calls": [
+          {
+            "address": "0x50998",
+            "args": [
+              250193
+            ],
+            "handle": 1,
+            "state": 185
+          },
+          {
+            "address": "0x8af8c",
+            "args": [
+              4,
+              276361,
+              536897040
+            ],
+            "handle": 1,
+            "state": 85
+          },
+          {
+            "address": "0x8af8c",
+            "args": [
+              3,
+              250297,
+              536897040
+            ],
+            "handle": 1,
+            "state": 85
+          },
+          {
+            "address": "0x3d0fc",
+            "args": [],
+            "handle": 1,
+            "state": 85
+          }
+        ],
+        "writes": [
+          [
+            "0x2001e479",
+            1,
+            2
+          ]
+        ]
+      },
+      {
+        "initial_handle": 1,
+        "registered_handle": 305419896,
+        "mutation": "none",
+        "calls": [
+          {
+            "address": "0x50998",
+            "args": [
+              250193
+            ],
+            "handle": 1,
+            "state": 185
+          },
+          {
+            "address": "0x8af8c",
+            "args": [
+              4,
+              276361,
+              536897040
+            ],
+            "handle": 1,
+            "state": 2
+          },
+          {
+            "address": "0x8af8c",
+            "args": [
+              3,
+              250297,
+              536897040
+            ],
+            "handle": 1,
+            "state": 2
+          },
+          {
+            "address": "0x3d0fc",
+            "args": [],
+            "handle": 1,
+            "state": 2
+          }
+        ],
+        "writes": [
+          [
+            "0x2001e479",
+            1,
+            2
+          ]
+        ]
+      },
+      {
+        "initial_handle": 1,
+        "registered_handle": 305419896,
+        "mutation": "install",
+        "calls": [
+          {
+            "address": "0x50998",
+            "args": [
+              250193
+            ],
+            "handle": 2005440938,
+            "state": 185
+          },
+          {
+            "address": "0x8af8c",
+            "args": [
+              4,
+              276361,
+              536897040
+            ],
+            "handle": 2005440938,
+            "state": 2
+          },
+          {
+            "address": "0x8af8c",
+            "args": [
+              3,
+              250297,
+              536897040
+            ],
+            "handle": 2005440938,
+            "state": 2
+          },
+          {
+            "address": "0x3d0fc",
+            "args": [],
+            "handle": 2005440938,
+            "state": 2
+          }
+        ],
+        "writes": [
+          [
+            "0x2001e479",
+            1,
+            2
+          ]
+        ]
+      },
+      {
+        "initial_handle": 1,
+        "registered_handle": 305419896,
+        "mutation": "clear",
+        "calls": [
+          {
+            "address": "0x50998",
+            "args": [
+              250193
+            ],
+            "handle": 0,
+            "state": 185
+          },
+          {
+            "address": "0x897e8",
+            "args": [
+              "acc",
+              "algo",
+              249217,
+              1,
+              1
+            ],
+            "handle": 2882400000,
+            "state": 185
+          },
+          {
+            "address": "0x8af8c",
+            "args": [
+              4,
+              276361,
+              536897040
+            ],
+            "handle": 305419896,
+            "state": 2
+          },
+          {
+            "address": "0x8af8c",
+            "args": [
+              3,
+              250297,
+              536897040
+            ],
+            "handle": 305419896,
+            "state": 2
+          },
+          {
+            "address": "0x3d0fc",
+            "args": [],
+            "handle": 305419896,
+            "state": 2
+          }
+        ],
+        "writes": [
+          [
+            "0x20006e98",
+            4,
+            305419896
+          ],
+          [
+            "0x2001e479",
+            1,
+            2
+          ]
+        ]
+      },
+      {
+        "initial_handle": 1,
+        "registered_handle": 305419896,
+        "mutation": "state",
+        "calls": [
+          {
+            "address": "0x50998",
+            "args": [
+              250193
+            ],
+            "handle": 1,
+            "state": 185
+          },
+          {
+            "address": "0x8af8c",
+            "args": [
+              4,
+              276361,
+              536897040
+            ],
+            "handle": 1,
+            "state": 85
+          },
+          {
+            "address": "0x8af8c",
+            "args": [
+              3,
+              250297,
+              536897040
+            ],
+            "handle": 1,
+            "state": 85
+          },
+          {
+            "address": "0x3d0fc",
+            "args": [],
+            "handle": 1,
+            "state": 85
+          }
+        ],
+        "writes": [
+          [
+            "0x2001e479",
+            1,
+            2
+          ]
+        ]
+      },
+      {
+        "initial_handle": 1,
+        "registered_handle": 4294967295,
+        "mutation": "none",
+        "calls": [
+          {
+            "address": "0x50998",
+            "args": [
+              250193
+            ],
+            "handle": 1,
+            "state": 185
+          },
+          {
+            "address": "0x8af8c",
+            "args": [
+              4,
+              276361,
+              536897040
+            ],
+            "handle": 1,
+            "state": 2
+          },
+          {
+            "address": "0x8af8c",
+            "args": [
+              3,
+              250297,
+              536897040
+            ],
+            "handle": 1,
+            "state": 2
+          },
+          {
+            "address": "0x3d0fc",
+            "args": [],
+            "handle": 1,
+            "state": 2
+          }
+        ],
+        "writes": [
+          [
+            "0x2001e479",
+            1,
+            2
+          ]
+        ]
+      },
+      {
+        "initial_handle": 1,
+        "registered_handle": 4294967295,
+        "mutation": "install",
+        "calls": [
+          {
+            "address": "0x50998",
+            "args": [
+              250193
+            ],
+            "handle": 2005440938,
+            "state": 185
+          },
+          {
+            "address": "0x8af8c",
+            "args": [
+              4,
+              276361,
+              536897040
+            ],
+            "handle": 2005440938,
+            "state": 2
+          },
+          {
+            "address": "0x8af8c",
+            "args": [
+              3,
+              250297,
+              536897040
+            ],
+            "handle": 2005440938,
+            "state": 2
+          },
+          {
+            "address": "0x3d0fc",
+            "args": [],
+            "handle": 2005440938,
+            "state": 2
+          }
+        ],
+        "writes": [
+          [
+            "0x2001e479",
+            1,
+            2
+          ]
+        ]
+      },
+      {
+        "initial_handle": 1,
+        "registered_handle": 4294967295,
+        "mutation": "clear",
+        "calls": [
+          {
+            "address": "0x50998",
+            "args": [
+              250193
+            ],
+            "handle": 0,
+            "state": 185
+          },
+          {
+            "address": "0x897e8",
+            "args": [
+              "acc",
+              "algo",
+              249217,
+              1,
+              1
+            ],
+            "handle": 2882400000,
+            "state": 185
+          },
+          {
+            "address": "0x8af8c",
+            "args": [
+              4,
+              276361,
+              536897040
+            ],
+            "handle": 4294967295,
+            "state": 2
+          },
+          {
+            "address": "0x8af8c",
+            "args": [
+              3,
+              250297,
+              536897040
+            ],
+            "handle": 4294967295,
+            "state": 2
+          },
+          {
+            "address": "0x3d0fc",
+            "args": [],
+            "handle": 4294967295,
+            "state": 2
+          }
+        ],
+        "writes": [
+          [
+            "0x20006e98",
+            4,
+            4294967295
+          ],
+          [
+            "0x2001e479",
+            1,
+            2
+          ]
+        ]
+      },
+      {
+        "initial_handle": 1,
+        "registered_handle": 4294967295,
+        "mutation": "state",
+        "calls": [
+          {
+            "address": "0x50998",
+            "args": [
+              250193
+            ],
+            "handle": 1,
+            "state": 185
+          },
+          {
+            "address": "0x8af8c",
+            "args": [
+              4,
+              276361,
+              536897040
+            ],
+            "handle": 1,
+            "state": 85
+          },
+          {
+            "address": "0x8af8c",
+            "args": [
+              3,
+              250297,
+              536897040
+            ],
+            "handle": 1,
+            "state": 85
+          },
+          {
+            "address": "0x3d0fc",
+            "args": [],
+            "handle": 1,
+            "state": 85
+          }
+        ],
+        "writes": [
+          [
+            "0x2001e479",
+            1,
+            2
+          ]
+        ]
+      },
+      {
+        "initial_handle": 4294967295,
+        "registered_handle": 0,
+        "mutation": "none",
+        "calls": [
+          {
+            "address": "0x50998",
+            "args": [
+              250193
+            ],
+            "handle": 4294967295,
+            "state": 185
+          },
+          {
+            "address": "0x8af8c",
+            "args": [
+              4,
+              276361,
+              536897040
+            ],
+            "handle": 4294967295,
+            "state": 2
+          },
+          {
+            "address": "0x8af8c",
+            "args": [
+              3,
+              250297,
+              536897040
+            ],
+            "handle": 4294967295,
+            "state": 2
+          },
+          {
+            "address": "0x3d0fc",
+            "args": [],
+            "handle": 4294967295,
+            "state": 2
+          }
+        ],
+        "writes": [
+          [
+            "0x2001e479",
+            1,
+            2
+          ]
+        ]
+      },
+      {
+        "initial_handle": 4294967295,
+        "registered_handle": 0,
+        "mutation": "install",
+        "calls": [
+          {
+            "address": "0x50998",
+            "args": [
+              250193
+            ],
+            "handle": 2005440938,
+            "state": 185
+          },
+          {
+            "address": "0x8af8c",
+            "args": [
+              4,
+              276361,
+              536897040
+            ],
+            "handle": 2005440938,
+            "state": 2
+          },
+          {
+            "address": "0x8af8c",
+            "args": [
+              3,
+              250297,
+              536897040
+            ],
+            "handle": 2005440938,
+            "state": 2
+          },
+          {
+            "address": "0x3d0fc",
+            "args": [],
+            "handle": 2005440938,
+            "state": 2
+          }
+        ],
+        "writes": [
+          [
+            "0x2001e479",
+            1,
+            2
+          ]
+        ]
+      },
+      {
+        "initial_handle": 4294967295,
+        "registered_handle": 0,
+        "mutation": "clear",
+        "calls": [
+          {
+            "address": "0x50998",
+            "args": [
+              250193
+            ],
+            "handle": 0,
+            "state": 185
+          },
+          {
+            "address": "0x897e8",
+            "args": [
+              "acc",
+              "algo",
+              249217,
+              1,
+              1
+            ],
+            "handle": 2882400000,
+            "state": 185
+          },
+          {
+            "address": "0x8af8c",
+            "args": [
+              4,
+              276361,
+              536897040
+            ],
+            "handle": 0,
+            "state": 2
+          },
+          {
+            "address": "0x8af8c",
+            "args": [
+              3,
+              250297,
+              536897040
+            ],
+            "handle": 0,
+            "state": 2
+          },
+          {
+            "address": "0x3d0fc",
+            "args": [],
+            "handle": 0,
+            "state": 2
+          }
+        ],
+        "writes": [
+          [
+            "0x20006e98",
+            4,
+            0
+          ],
+          [
+            "0x2001e479",
+            1,
+            2
+          ]
+        ]
+      },
+      {
+        "initial_handle": 4294967295,
+        "registered_handle": 0,
+        "mutation": "state",
+        "calls": [
+          {
+            "address": "0x50998",
+            "args": [
+              250193
+            ],
+            "handle": 4294967295,
+            "state": 185
+          },
+          {
+            "address": "0x8af8c",
+            "args": [
+              4,
+              276361,
+              536897040
+            ],
+            "handle": 4294967295,
+            "state": 85
+          },
+          {
+            "address": "0x8af8c",
+            "args": [
+              3,
+              250297,
+              536897040
+            ],
+            "handle": 4294967295,
+            "state": 85
+          },
+          {
+            "address": "0x3d0fc",
+            "args": [],
+            "handle": 4294967295,
+            "state": 85
+          }
+        ],
+        "writes": [
+          [
+            "0x2001e479",
+            1,
+            2
+          ]
+        ]
+      },
+      {
+        "initial_handle": 4294967295,
+        "registered_handle": 305419896,
+        "mutation": "none",
+        "calls": [
+          {
+            "address": "0x50998",
+            "args": [
+              250193
+            ],
+            "handle": 4294967295,
+            "state": 185
+          },
+          {
+            "address": "0x8af8c",
+            "args": [
+              4,
+              276361,
+              536897040
+            ],
+            "handle": 4294967295,
+            "state": 2
+          },
+          {
+            "address": "0x8af8c",
+            "args": [
+              3,
+              250297,
+              536897040
+            ],
+            "handle": 4294967295,
+            "state": 2
+          },
+          {
+            "address": "0x3d0fc",
+            "args": [],
+            "handle": 4294967295,
+            "state": 2
+          }
+        ],
+        "writes": [
+          [
+            "0x2001e479",
+            1,
+            2
+          ]
+        ]
+      },
+      {
+        "initial_handle": 4294967295,
+        "registered_handle": 305419896,
+        "mutation": "install",
+        "calls": [
+          {
+            "address": "0x50998",
+            "args": [
+              250193
+            ],
+            "handle": 2005440938,
+            "state": 185
+          },
+          {
+            "address": "0x8af8c",
+            "args": [
+              4,
+              276361,
+              536897040
+            ],
+            "handle": 2005440938,
+            "state": 2
+          },
+          {
+            "address": "0x8af8c",
+            "args": [
+              3,
+              250297,
+              536897040
+            ],
+            "handle": 2005440938,
+            "state": 2
+          },
+          {
+            "address": "0x3d0fc",
+            "args": [],
+            "handle": 2005440938,
+            "state": 2
+          }
+        ],
+        "writes": [
+          [
+            "0x2001e479",
+            1,
+            2
+          ]
+        ]
+      },
+      {
+        "initial_handle": 4294967295,
+        "registered_handle": 305419896,
+        "mutation": "clear",
+        "calls": [
+          {
+            "address": "0x50998",
+            "args": [
+              250193
+            ],
+            "handle": 0,
+            "state": 185
+          },
+          {
+            "address": "0x897e8",
+            "args": [
+              "acc",
+              "algo",
+              249217,
+              1,
+              1
+            ],
+            "handle": 2882400000,
+            "state": 185
+          },
+          {
+            "address": "0x8af8c",
+            "args": [
+              4,
+              276361,
+              536897040
+            ],
+            "handle": 305419896,
+            "state": 2
+          },
+          {
+            "address": "0x8af8c",
+            "args": [
+              3,
+              250297,
+              536897040
+            ],
+            "handle": 305419896,
+            "state": 2
+          },
+          {
+            "address": "0x3d0fc",
+            "args": [],
+            "handle": 305419896,
+            "state": 2
+          }
+        ],
+        "writes": [
+          [
+            "0x20006e98",
+            4,
+            305419896
+          ],
+          [
+            "0x2001e479",
+            1,
+            2
+          ]
+        ]
+      },
+      {
+        "initial_handle": 4294967295,
+        "registered_handle": 305419896,
+        "mutation": "state",
+        "calls": [
+          {
+            "address": "0x50998",
+            "args": [
+              250193
+            ],
+            "handle": 4294967295,
+            "state": 185
+          },
+          {
+            "address": "0x8af8c",
+            "args": [
+              4,
+              276361,
+              536897040
+            ],
+            "handle": 4294967295,
+            "state": 85
+          },
+          {
+            "address": "0x8af8c",
+            "args": [
+              3,
+              250297,
+              536897040
+            ],
+            "handle": 4294967295,
+            "state": 85
+          },
+          {
+            "address": "0x3d0fc",
+            "args": [],
+            "handle": 4294967295,
+            "state": 85
+          }
+        ],
+        "writes": [
+          [
+            "0x2001e479",
+            1,
+            2
+          ]
+        ]
+      },
+      {
+        "initial_handle": 4294967295,
+        "registered_handle": 4294967295,
+        "mutation": "none",
+        "calls": [
+          {
+            "address": "0x50998",
+            "args": [
+              250193
+            ],
+            "handle": 4294967295,
+            "state": 185
+          },
+          {
+            "address": "0x8af8c",
+            "args": [
+              4,
+              276361,
+              536897040
+            ],
+            "handle": 4294967295,
+            "state": 2
+          },
+          {
+            "address": "0x8af8c",
+            "args": [
+              3,
+              250297,
+              536897040
+            ],
+            "handle": 4294967295,
+            "state": 2
+          },
+          {
+            "address": "0x3d0fc",
+            "args": [],
+            "handle": 4294967295,
+            "state": 2
+          }
+        ],
+        "writes": [
+          [
+            "0x2001e479",
+            1,
+            2
+          ]
+        ]
+      },
+      {
+        "initial_handle": 4294967295,
+        "registered_handle": 4294967295,
+        "mutation": "install",
+        "calls": [
+          {
+            "address": "0x50998",
+            "args": [
+              250193
+            ],
+            "handle": 2005440938,
+            "state": 185
+          },
+          {
+            "address": "0x8af8c",
+            "args": [
+              4,
+              276361,
+              536897040
+            ],
+            "handle": 2005440938,
+            "state": 2
+          },
+          {
+            "address": "0x8af8c",
+            "args": [
+              3,
+              250297,
+              536897040
+            ],
+            "handle": 2005440938,
+            "state": 2
+          },
+          {
+            "address": "0x3d0fc",
+            "args": [],
+            "handle": 2005440938,
+            "state": 2
+          }
+        ],
+        "writes": [
+          [
+            "0x2001e479",
+            1,
+            2
+          ]
+        ]
+      },
+      {
+        "initial_handle": 4294967295,
+        "registered_handle": 4294967295,
+        "mutation": "clear",
+        "calls": [
+          {
+            "address": "0x50998",
+            "args": [
+              250193
+            ],
+            "handle": 0,
+            "state": 185
+          },
+          {
+            "address": "0x897e8",
+            "args": [
+              "acc",
+              "algo",
+              249217,
+              1,
+              1
+            ],
+            "handle": 2882400000,
+            "state": 185
+          },
+          {
+            "address": "0x8af8c",
+            "args": [
+              4,
+              276361,
+              536897040
+            ],
+            "handle": 4294967295,
+            "state": 2
+          },
+          {
+            "address": "0x8af8c",
+            "args": [
+              3,
+              250297,
+              536897040
+            ],
+            "handle": 4294967295,
+            "state": 2
+          },
+          {
+            "address": "0x3d0fc",
+            "args": [],
+            "handle": 4294967295,
+            "state": 2
+          }
+        ],
+        "writes": [
+          [
+            "0x20006e98",
+            4,
+            4294967295
+          ],
+          [
+            "0x2001e479",
+            1,
+            2
+          ]
+        ]
+      },
+      {
+        "initial_handle": 4294967295,
+        "registered_handle": 4294967295,
+        "mutation": "state",
+        "calls": [
+          {
+            "address": "0x50998",
+            "args": [
+              250193
+            ],
+            "handle": 4294967295,
+            "state": 185
+          },
+          {
+            "address": "0x8af8c",
+            "args": [
+              4,
+              276361,
+              536897040
+            ],
+            "handle": 4294967295,
+            "state": 85
+          },
+          {
+            "address": "0x8af8c",
+            "args": [
+              3,
+              250297,
+              536897040
+            ],
+            "handle": 4294967295,
+            "state": 85
+          },
+          {
+            "address": "0x3d0fc",
+            "args": [],
+            "handle": 4294967295,
+            "state": 85
+          }
+        ],
+        "writes": [
+          [
+            "0x2001e479",
+            1,
+            2
+          ]
+        ]
+      }
+    ],
+    "count": 36,
+    "stock_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "limits": [
+      "Native probe only; modeled provider effects and no C behavior claim",
+      "Pointer-only callback contracts; callback bodies not executed",
+      "No final RAM ownership or physical startup established"
+    ]
+  },
+  "artifacts": {
+    "build/goal-r1-health-module-analysis/probe.py": "c1915c2beb07d6b9ae8040d3e7a35807777c8b50c82db067ed3cc475a9b0d5dc",
+    "build/goal-r1-health-module-analysis/probe-results.json": "eb76301522cad2dc7a4665e56181fd30f0adbc57e9a7e07757cf23abe193e573",
+    "build/goal-r1-health-module-analysis/frontier-before.csv": "ae0e385a251d7d3cbd76c0d0e214fde6f9d3d2fa5fc5b5d024c2f35c1c0d4e2f"
+  },
+  "boundary": {
+    "entry": "0x4c5c4",
+    "code_end_exclusive": "0x4c60a",
+    "code_bytes": 70,
+    "previous_inventory_bytes": 158,
+    "literal_and_strings_begin": "0x4c60a",
+    "adjacent_function_entry": "0x4c634"
+  },
+  "limits": [
+    "No new C source or byte-qualified region in this analysis",
+    "Native dependency callback contracts are pointer-only",
+    "Cold initialization and source-only placement of touched RAM cells remain to be verified"
+  ]
+}

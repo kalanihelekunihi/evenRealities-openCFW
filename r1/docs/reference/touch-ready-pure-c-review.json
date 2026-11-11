@@ -1,0 +1,113 @@
+{
+  "normal_report": "build/sources-goal-r1-touch-ready-pure-c/report.json",
+  "report_sha256": "2de57155859cce41c8e6cfad89b92be6041e9eb92ba909b113eea44672b32d5f",
+  "unit": {
+    "source": "r1/src/application/board/native_touch_transport.c",
+    "payload": "r1-application",
+    "role": "candidate",
+    "toolchain": "clang",
+    "link": true,
+    "expect": "compile",
+    "returncode": 0,
+    "argv": [
+      "/usr/bin/clang",
+      "--target=arm-none-eabi",
+      "-mcpu=cortex-m4",
+      "-mthumb",
+      "-munaligned-access",
+      "-mfpu=fpv4-sp-d16",
+      "-mfloat-abi=hard",
+      "-std=c11",
+      "-Os",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-fshort-enums",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-fno-delete-null-pointer-checks",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/r1/src/vendor",
+      "-isystem",
+      "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
+      "-MD",
+      "-MF",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-touch-ready-pure-c/r1/r1-application/r1__src__application__board__native_touch_transport.c.d",
+      "-c",
+      "/Users/kalani/Repo/evenRealities-openCFW/r1/src/application/board/native_touch_transport.c",
+      "-o",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-touch-ready-pure-c/r1/r1-application/r1__src__application__board__native_touch_transport.c.o"
+    ],
+    "source_sha256": "c27d3e3dc20a3dc5a6f3f29129e43f6fbe9d8712bb9f42a7bf4ee68826da05cc",
+    "object_sha256": "c264544bc3f81bfa48544f6fc78dd14790f588fface30134c6622911e312df9d",
+    "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-touch-ready-pure-c/r1/r1-application/r1__src__application__board__native_touch_transport.c.o",
+    "strong": [
+      "r1_touch_ready_level_read",
+      "r1_touch_request",
+      "r1_touch_request_read_native",
+      "r1_touch_request_write_native"
+    ],
+    "weak": [],
+    "undefined": [
+      "r1_stock_dispatch_10",
+      "r1_stock_dispatch_14",
+      "r1_touch_bus_device",
+      "r1_touch_ready_storage"
+    ]
+  },
+  "direct": {
+    "ready_reader_pairs": 928,
+    "full_probe_pairs": 2592,
+    "actual_C_ready_and_request_chain": true,
+    "100_poll_limit_and_early_readiness": true,
+    "private_counter_register_encoding_compared": false,
+    "late_ID_buffer_mutations": true,
+    "probe_scratch_R3_return_preserved": false,
+    "ready_scratch_R3_return_preserved": false,
+    "native_body_size_corrected": {
+      "prior_frontier": 124,
+      "complete_through_pop": 126
+    },
+    "frames": {
+      "ready_native": 8,
+      "ready_C": 16,
+      "probe_native": 16,
+      "probe_C": 16
+    },
+    "limitations": [
+      "Private buffer locations normalized and frame depths differ; initial stack write order not compared.",
+      "GPIO/power/delay and final registry providers modeled; electrical/timing/arbitrary alias/fault/concurrency behavior unproven.",
+      "Caller-clobbered registers and unused upper scratch bytes excluded for both ready reader and probe."
+    ]
+  },
+  "negative": {
+    "nonzero-initial-byte": {
+      "rejected": true,
+      "diagnostic": " if stock else syms['r1_touch_chip_id_probe' if outer else 'r1_touch_ready_level_read'];u.emu_start(root|1,STOP,count=30000)\n                                                                                                                                ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 769, in emu_start\n    raise self._hook_exception\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 363, in wrapper\n    return func(uc, *args, **kwargs)\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 1063, in __hook_code_cb\n    callback(uc, address, size, user_data)\n    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-touch-ready-pure-c/verify.py\", line 29, in code\n    word=int.from_bytes(u.mem_read(r2,4),'little');assert word&255==0\n                                                          ^^^^^^^^^^^\nAssertionError\n"
+    },
+    "wrong-output-byte": {
+      "rejected": true,
+      "diagnostic": "es-openCFW/build/sources-goal-r1-touch-ready-pure-c/r1/r1-application/r1__src__application__board__native_touch_identity.c.o\narm-none-eabi-ld: warning: (r1_touch_device_op_stop): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-touch-ready-pure-c/r1/r1-application/r1__src__application__board__native_touch_identity.c.o\narm-none-eabi-ld: warning: (r1_touch_power_on_step): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-touch-ready-pure-c/r1/r1-application/r1__src__application__board__native_touch_identity.c.o\nTraceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-touch-ready-pure-c/verify.py\", line 81, in <module>\n    c=(False,0,value,style,status,1,seed,handle);assert a(*c)==b(*c),c;n+=1\n                                                               ~^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-touch-ready-pure-c/verify.py\", line 75, in run\n    assert u.reg_read(UC_ARM_REG_R0)==expected&255\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    "wrong-input-handle": {
+      "rejected": true,
+      "diagnostic": "'r1_touch_chip_id_probe' if outer else 'r1_touch_ready_level_read'];u.emu_start(root|1,STOP,count=30000)\n                                                                                                                                ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 769, in emu_start\n    raise self._hook_exception\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 363, in wrapper\n    return func(uc, *args, **kwargs)\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 1063, in __hook_code_cb\n    callback(uc, address, size, user_data)\n    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-touch-ready-pure-c/verify.py\", line 25, in code\n    assert r0==int.from_bytes(u.mem_read(INPUT,4),'little') and r1==0 and r3==0\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    }
+  },
+  "audit": {
+    "changed": [
+      "r1/src/application/board/native_touch_transport.c"
+    ],
+    "unchanged_objects": 726
+  },
+  "rea": {
+    "path": "build/goal-r1-touch-ready-pure-c/rea.json",
+    "sha256": "1198ac7f126d7e4c3df83e67fe94cfa157dd26479a27c26a61da92f44d83d429"
+  },
+  "limits": [
+    "Ready reader and probe return only low bytes; scratch-register returns excluded",
+    "Power, GPIO, delay and final registry boundaries modeled",
+    "No physical touch identity, timing or complete firmware link proof"
+  ]
+}

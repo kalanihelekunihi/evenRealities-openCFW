@@ -1,0 +1,286 @@
+{
+  "schema_version": 1,
+  "scope": "HR hardware-frame adapter and disabled result hook in C",
+  "acceptance_target": "Hardware-first license-free C firmware; byte identity waived",
+  "report": "build/sources-goal-r1-goodix-hr-execute-c/report.json",
+  "comparison_report": "build/sources-goal-r1-goodix-hrv-execute-c/report.json",
+  "stock_entries": [
+    {
+      "symbol": "GH3x2xHrAlgoExe",
+      "entry": "0x2c944",
+      "instruction_bytes": 342,
+      "ranges": [
+        [
+          "0x2c944",
+          "0x2ca3c"
+        ],
+        [
+          "0x2ca3e",
+          "0x2ca9c"
+        ]
+      ],
+      "range_end_exclusive": true
+    },
+    {
+      "symbol": "GH3X2X_HrAlgorithmResultReport",
+      "entry": "0x2a658",
+      "instruction_bytes": 2
+    }
+  ],
+  "audit": {
+    "compiled_units": 897,
+    "application_imports": 78,
+    "bootloader_imports": 22,
+    "unchanged_prior_nongenerated_sources_and_objects": 886,
+    "tested_object_equals_normal_build": true,
+    "persistent_state_added": 0,
+    "canonical_scenario_and_channel_map_reused": true,
+    "source_plan_and_cache_layout_unchanged": true,
+    "new_native_instruction_bytes": 344,
+    "paired_cases": 4995,
+    "removed_imports": [
+      "GH3x2xHrAlgoExe"
+    ],
+    "added_imports": [
+      "goodix_hba_calc",
+      "goodix_hba_essential_info_print"
+    ],
+    "HR_calculation_and_diagnostics_unfinished": true
+  },
+  "direct": {
+    "paired_cases": 1612,
+    "matched_faults": 34,
+    "native_instruction_bytes_executed": [
+      342,
+      2
+    ],
+    "actual_C_and_native_clear_sleep_and_popcount": true,
+    "calculation_core_and_diagnostics_modeled": true,
+    "typed_input_pointer_normalization": true,
+    "independent_input_packing_oracle": true,
+    "full_nonstack_RAM_and_boundary_snapshots_match": true,
+    "source_cannot_execute_stock": true,
+    "source_object_sha256": "4f030813f31d6879207215b0e591acd27484ce2980a022965fec84aeceedf347"
+  },
+  "dispatcher_integration": {
+    "HR_source_object_sha256": "4f030813f31d6879207215b0e591acd27484ce2980a022965fec84aeceedf347",
+    "HR_native_instruction_bytes_executed": [
+      342,
+      2
+    ],
+    "HRV_source_object_sha256": "7a8e23895e10217462ac71aa88d70986c82c2ea1239681e691fb440842960f09",
+    "HRV_native_instruction_bytes_executed": [
+      376,
+      2
+    ],
+    "ADT_source_object_sha256": "07a2bd82f33a700387d3c876906de3a224609b4697109133032997e8de1b6b2a",
+    "ADT_native_instruction_bytes_executed": [
+      298,
+      94,
+      36
+    ],
+    "paired_cases": 3383,
+    "matched_faults": 6,
+    "native_instruction_bytes_executed": 190,
+    "actual_C_and_native_sleep_popcount_and_memory_helpers": true,
+    "logging_ports_modeled": true,
+    "actual_ADT_filter_report_and_soft_events": true,
+    "HR_HRV_cores_diagnostics_and_remaining_two_engine_executors_modeled": true,
+    "actual_HR_adapter": true,
+    "actual_HRV_adapter": true,
+    "full_nonstack_RAM_and_boundary_snapshots_match": true,
+    "source_cannot_execute_stock": true,
+    "source_object_sha256": "7e4344bae1eb7809e1c9e85939abf2545e030c93b83cbce39431ee1a8c3872d1",
+    "signed_8_bit_executor_ABI": true
+  },
+  "compiled_defects_rejected": [
+    {
+      "name": "map-banks",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "invalid-map",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "unsigned-accel",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "wide-scenario",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "gain-not-zero",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "missing-diagnostics",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "diagnostic-error-gate",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "boolean-output",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "SNR-scale",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "score-field",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "result-mask",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "popcount",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "truncated-status",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "record-HR",
+      "compiled": true,
+      "rejected": true
+    }
+  ],
+  "unfinished_providers": [
+    {
+      "symbol": "goodix_hba_calc",
+      "entry": "0x6c6a8"
+    },
+    {
+      "symbol": "goodix_hba_essential_info_print",
+      "entry": "0x6ccc0"
+    }
+  ],
+  "contract": [
+    "Null frame returns-1. Clear exact typed56-byte input,40-byte output and local4/48/12/24-byte enable/PPG/gain/driver buffers. Cache the low scenario byte from canonical g_unHrParamsArr[1] in a zero-extended local word. Sign-extend accelerometer samples, use the low frame-counter byte, raw sleep byte, channel count4, bit width24 and chip1.",
+    "Populate twelve PPG slots through canonical g_stHbaAlgoChnlMap offsets3+i+4*(i/4). Only255 is disabled; enabled slots set descending mask bits and use the selected raw-word index. Unselected samples remain0. Gain/driver buffers remain0 and last-gain metadata is untouched.",
+    "Call calculation then diagnostics unconditionally, preserving calculation status across diagnostics. Inspect output only afterward. Nonzero full32 status returns-5; zero status only publishes when output flag is exactly1.",
+    "Publish HR, score, wrapped uint32 SNR*100, level, motion and scene in native order. Set mask3f and actual popcount6. The native report is disabled BX LR. Then update the separate HR record flag/value consumed by the HRV adapter, preserving live result/record pointers.",
+    "Direct input oracles preserve scalar bytes/padding and normalize only five typed local pointer fields. Diagnostics receives the same input object after calculation, including callback mutations. Fixtures compare full nonstack RAM, snapshots, status, saved registers, stack and masks; source cannot execute stock.",
+    "Dispatcher tests execute actual ADT/HR/HRV adapters and native/C helpers. HR publication feeds the HRV cache/input path. Core results, diagnostics, logging and the remaining two engine executors are modeled."
+  ],
+  "limits": [
+    "The HR function spans344 bytes but contains an unreachable2-byte branch at2ca3c; its admitted executable ranges total342. The separate disabled report adds2bytes. No instruction identity or retention of unreachable junk is required.",
+    "The4995 pairs comprise1612 direct and3383 dispatcher cases, including selected matching faults and null-HR gate order. They establish adapter behavior, not the unfinished HBA/HRV computation, diagnostics implementation or physical sensor/concurrency behavior.",
+    "One aggregate import is replaced by two concrete dependencies: GH3x2xHrAlgoExe resolves; goodix_hba_calc and goodix_hba_essential_info_print remain open. Imports increase77 to78 application; boot remains22. Diagnostics is not omitted or replaced by a firmware no-op.",
+    "All897 units compile and compose without failures/duplicate strong symbols.886 prior nongenerated source/object pairs, source-plan/cache layout and canonical scenario/map owners are unchanged. No persistent state is added. This is relocatable composition, not a final executable or boot proof."
+  ],
+  "evidence_files": {
+    "build/sources-goal-r1-goodix-hr-execute-c/report.json": "becc2788f1409ce1428ee26fd315d5e446362675e78ec35d37eeaf7d6e7e3739",
+    "build/sources-goal-r1-goodix-hrv-execute-c/report.json": "ec7e06492600bf7ef252922070ce77ed1fc8550b0304fb7e2f7c51b2f0762ac8",
+    "r1/src/application/goodix/native_hr_execute.c": "d72f453ddd7b9500e56761a41c62804187301a8fa69c11105048c4ee6a143348",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-hr-execute-c/r1/r1-application/r1__src__application__goodix__native_hr_execute.c.o": "4f030813f31d6879207215b0e591acd27484ce2980a022965fec84aeceedf347",
+    "r1/src/sources.json": "bc8510fba36257f7a03631262170a72c4f2ee98a4c5a96f0e754aecbf71aa828",
+    "tools/build/source-plan.json": "eeb516e31b3310fb0718f36908977f8125723f7c5e0e86cd6744395826259a4d",
+    "r1/src/config/runtime/native_health_cache.ld": "eb8f131c489cd818d4e36718718fa1989719ca0170f164541a1a5bf56dfc1ec3",
+    "r1/docs/reference/FUNCTION-OWNERSHIP.csv": "6cab67d1f7651691bee91f593b6cabb460eac25ba6bea3569758c194f3aa9dc3",
+    "r1/symbols/function-frontier.csv": "aa9fd733f1f54a41c7ea7768f7ae88ffd076ade132737e5d9bffb4c61ebddbb2",
+    "r1/docs/reference/goodix-algorithm-calculate-c-review.md": "1cb78c4a4659bf1984ca43d02013f533a89b1a97ec8704b2607fa349461b077c",
+    "r1/docs/reference/goodix-engine-setup-c-review.md": "7ae50ab951a67824249325f9cf2bdadb1b368800ca02b2ef802df86531cfbb55",
+    "r1/docs/reference/goodix-hrv-execute-c-review.md": "d31be42ba71671388967252b0defd6f283ac8a1fd2069539961196a804da3937",
+    "r1/src/application/runtime/memory_eabi.c": "e89f73174230a5111606f175a2429695c62f178ace0b44478ab93497a9ebacff",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-hr-execute-c/r1/r1-application/r1__src__application__runtime__memory_eabi.c.o": "e26f26d06a6113b53a70667703a46d09ccdd26875e58d267c6242504f683ecc6",
+    "third-party/upstream/goodix-gh3x2x/gh3x2x/demo_code/demo_algo_code/goodix_algo_application/src/gh3x2x_demo_algo_config.c": "65345b49ac1d9818fcc6f5dff3a33dbdd89c4e2182e6fe35480543b0a803a861",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-hr-execute-c/r1/r1-application/third-party__upstream__goodix-gh3x2x__gh3x2x__demo_code__demo_algo_code__goodix_algo_application__src__gh3x2x_demo_algo_config.c.o": "6a65ddb671429ddab29014c4e028d634b5e4159d720ecc05d1f7f53e8c0f3789",
+    "third-party/upstream/goodix-gh3x2x/gh3x2x/demo_code/demo_kernel_code/driver/src/gh_drv_control.c": "8cf1dbd049598242ca0517819afe9bfe7af8c6714f8941fb10922263be98a949",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-hr-execute-c/r1/r1-application/third-party__upstream__goodix-gh3x2x__gh3x2x__demo_code__demo_kernel_code__driver__src__gh_drv_control.c.o": "0b33631d2c75d5bd4bc0e1ba36f602fe492e9e64200da26489906d62018c159c",
+    "third-party/upstream/musl-memory-1.2.5/memset.c": "2a74d9e7f988945e0d691d480b78d77a228da0d2be401c1000637cc879b2c0be",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-hr-execute-c/r1/r1-application/third-party__upstream__musl-memory-1.2.5__memset.c.o": "6c2f1a8f480c27d5bc20f79ac535dac28fbbdcaec12e69bad96721f724ec9057",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-hr-execute-c/r1/r1-bootloader/r1__src__application__runtime__memory_eabi.c.o": "e26f26d06a6113b53a70667703a46d09ccdd26875e58d267c6242504f683ecc6",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-hr-execute-c/r1/r1-bootloader/third-party__upstream__musl-memory-1.2.5__memset.c.o": "6c2f1a8f480c27d5bc20f79ac535dac28fbbdcaec12e69bad96721f724ec9057",
+    "r1/src/application/goodix/native_algorithm_calculate.c": "b713000e757c77a1d00cce6a01c4270214ad1e375226c1691d0157ed752ec425",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-hr-execute-c/r1/r1-application/r1__src__application__goodix__native_algorithm_calculate.c.o": "7e4344bae1eb7809e1c9e85939abf2545e030c93b83cbce39431ee1a8c3872d1",
+    "r1/src/application/goodix/native_adt_calculate.c": "0a2e2618d958d1f734b9f47a031f7977102b89616728382e4bd2c536180f0e14",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-hr-execute-c/r1/r1-application/r1__src__application__goodix__native_adt_calculate.c.o": "07a2bd82f33a700387d3c876906de3a224609b4697109133032997e8de1b6b2a",
+    "r1/src/application/goodix/native_hrv_execute.c": "f5fd66c42ac7b04a1a828c50af720009a2fcfae77bae324697ab0899c8b0a6fa",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-hr-execute-c/r1/r1-application/r1__src__application__goodix__native_hrv_execute.c.o": "7a8e23895e10217462ac71aa88d70986c82c2ea1239681e691fb440842960f09",
+    "build/goal-r1-goodix-hr-execute-c/negative-SNR-scale.log": "0163cba6fb3b4b116241d2cbe3334bf13c0b4b9095f56e791093750ae0404b93",
+    "build/goal-r1-goodix-hr-execute-c/negative-popcount.log": "992bc5a6195b5752fc0cbb3caa67f92c82a8e3555ecf52c46311b1e559e96895",
+    "build/goal-r1-goodix-hr-execute-c/negative-result-mask.c": "c2e86b5e774286a5c90f5038d29a9db639750f3f34ddf0528ec824d6ba7c9b6a",
+    "build/goal-r1-goodix-hr-execute-c/negative-diagnostic-error-gate.log": "ccf84bfdd93c8f0b409a087e086dc8b42b6598aebae2df6ab279c696fb1ca342",
+    "build/goal-r1-goodix-hr-execute-c/negative-gain-not-zero.o": "d2db76b30272fc632c5fcdbcaec4ac6fee26c12ad8ac099ea1951c60d1a3c9d5",
+    "build/goal-r1-goodix-hr-execute-c/audit.json": "a7cf7723e3ffebca346d35274cf82d7276f45147e8db73b2bb02b3e651f2276e",
+    "build/goal-r1-goodix-hr-execute-c/negative-diagnostic-error-gate.c": "4ebed4611cbdd829212f26cf599f2728d6bae81846a34508fade1358318e7daf",
+    "build/goal-r1-goodix-hr-execute-c/test.ld": "0b49c061ffa041bd53202b53b95cd8e1b9411c7c78782e7f70d8aa61b38f35ee",
+    "build/goal-r1-goodix-hr-execute-c/audit.py": "390f8c19fc65a84d1110861cb9473d2f335e63bb8cbaad462e24bd4e69f5fc4f",
+    "build/goal-r1-goodix-hr-execute-c/negative-boolean-output.c": "73738a60abfa1729b687c24024440607be67c5d884f6bb350cd1fcdbb06b8628",
+    "build/goal-r1-goodix-hr-execute-c/negative-unsigned-accel.c": "c8ae15f7757b8cb4f852617db21139c928d37fe9168857a94137dc678cb5d30e",
+    "build/goal-r1-goodix-hr-execute-c/negative-record-HR.c": "2db285a25d27ed685ae0777c3830ad61c8f0b99fc0366866696af7e25f138982",
+    "build/goal-r1-goodix-hr-execute-c/integration.elf": "f9866a6aa308f3096c5261f9e498fe75788bfbe59bb73bb441ae18f2b9abd76a",
+    "build/goal-r1-goodix-hr-execute-c/source.elf": "85cc4a654fb9ca0c62b2e3f49730afa83ebe4b67096609e2a9b93fbc632efc4f",
+    "build/goal-r1-goodix-hr-execute-c/negative.py": "2dba4ebd735dc71e80f830d6a141fef2bac35cb99ca42f2f63b3c63860d3c455",
+    "build/goal-r1-goodix-hr-execute-c/integration-results.json": "445470a48bc1f86bf317af3ec82a5ea8f103a538b5ee81cfb0326614220ff7f7",
+    "build/goal-r1-goodix-hr-execute-c/negative-map-banks.log": "df536c6a6670969e0a648eb40e13d45eb994f8e377d52cf3928352163a1ad34b",
+    "build/goal-r1-goodix-hr-execute-c/negative-invalid-map.o": "45584ebf2deab2a2f91ec26ca85612f9d2aeb044df3a08f053d15138f5b2293f",
+    "build/goal-r1-goodix-hr-execute-c/negative-score-field.c": "ba1452e71a3f7a89d1b4aacdf0499b7f74429d640dcddebee6f0d784090fa0ad",
+    "build/goal-r1-goodix-hr-execute-c/negative-popcount.c": "276a51e5ee3c39b9eb73cf2f5334318113b333ce3a8908e25f8bef8f2b2da782",
+    "build/goal-r1-goodix-hr-execute-c/negative-results.json": "b6879c380abd890c8ba1ac05c2d58b60950559a1bedf937b428f301846d6675e",
+    "build/goal-r1-goodix-hr-execute-c/negative-map-banks.c": "f3ef145c7c19694313ce727b0d9bdbc423ea1c91ff905f964f2ae62050e23e4e",
+    "build/goal-r1-goodix-hr-execute-c/negative-gain-not-zero.log": "df536c6a6670969e0a648eb40e13d45eb994f8e377d52cf3928352163a1ad34b",
+    "build/goal-r1-goodix-hr-execute-c/source.o": "4f030813f31d6879207215b0e591acd27484ce2980a022965fec84aeceedf347",
+    "build/goal-r1-goodix-hr-execute-c/results.json": "2d2cff069441e09db0800717e239cb79dd6ae6f10c0478badcccb5aa4f40e85f",
+    "build/goal-r1-goodix-hr-execute-c/negative-wide-scenario.c": "fe2004d25a1711ce8930ff14c164c86800a8e903f75dcff2d7ed3097f47732bc",
+    "build/goal-r1-goodix-hr-execute-c/negative-SNR-scale.o": "20c7b790ba39f1c8bf7f5a974e166252d522ae21c6ff0e630395eb060f0a164e",
+    "build/goal-r1-goodix-hr-execute-c/negative-truncated-status.o": "eae59c2e95f9b0ffb7962468e86d158b1faded74087682a9b71b44564a1c55e7",
+    "build/goal-r1-goodix-hr-execute-c/make-integration.py": "a1720201c97f23f55f70339bf6f70d683ab51a276a8978106ba3fd74993b01a6",
+    "build/goal-r1-goodix-hr-execute-c/negative-missing-diagnostics.c": "a72958772061902215dcf20bb15638f308d2100c2c63be79af6d648a3d115c01",
+    "build/goal-r1-goodix-hr-execute-c/diagnostics-pseudocode.json": "19d26d5ea94e2ddcd065f294cff4db5e27d59ee6480db99c3db506dffe0225dc",
+    "build/goal-r1-goodix-hr-execute-c/integration.py": "5924d95bd6ffdec3e2f4f0b02008c8ccba3ac4be9893752d1562a123529560b4",
+    "build/goal-r1-goodix-hr-execute-c/negative-diagnostic-error-gate.o": "d13f43c074d966c0ffad51ca7e9a707d2a2e4ff27c07afee436a521c5a77d2f6",
+    "build/goal-r1-goodix-hr-execute-c/rea.json": "577082b439c363dda3b04159b60b1cbb3b400f05de89f1d911de2d92643b2258",
+    "build/goal-r1-goodix-hr-execute-c/negative-gain-not-zero.c": "a1c30f0f5e4a2f128a48d07ac4506f29a2da044a3407153774c92a10d47d7ae7",
+    "build/goal-r1-goodix-hr-execute-c/negative-unsigned-accel.log": "94ad6ed741297b4b6148cab16a50eb20e3adc027a085ba21e6103c9d97e37332",
+    "build/goal-r1-goodix-hr-execute-c/negative-result-mask.o": "07e994489382bbc05cf4770b1a1f71f75497a8338da47f3be8204404ba8d6d8b",
+    "build/goal-r1-goodix-hr-execute-c/negative-result-mask.log": "414cb60ba57c3a8ce154a3a29818d8d1e0bfb1cf3b5df4f46dfb610d269a1899",
+    "build/goal-r1-goodix-hr-execute-c/negative-unsigned-accel.o": "9464c6b8abf1d402251cafdb22604a5348d0481d765a2a4ecf505a10df76e2f4",
+    "build/goal-r1-goodix-hr-execute-c/negative-record-HR.o": "a8ea2f5993ee14d4be2418a1985ce8caa157a3c56285ddd74c30bfa180641ef3",
+    "build/goal-r1-goodix-hr-execute-c/negative-missing-diagnostics.log": "c6da125b33a5d8e6bee421b14557344be86beddc2bc8a438a7e8aee0da46fe66",
+    "build/goal-r1-goodix-hr-execute-c/record.py": "7e738e3e7b0cf023ea2cba33ef184e74e9c3e6198760dd181c482f018db99c2d",
+    "build/goal-r1-goodix-hr-execute-c/negative-invalid-map.log": "df536c6a6670969e0a648eb40e13d45eb994f8e377d52cf3928352163a1ad34b",
+    "build/goal-r1-goodix-hr-execute-c/negative-boolean-output.o": "e62c32b4a5cd456fc95f04e2a5ec4fa4bcbee3c19caf96ef7ae294bbba40ecc6",
+    "build/goal-r1-goodix-hr-execute-c/disassembly.txt": "f6257395afb43c5415aa356b81c2dec2cd6e849b7967005a9608434a0c8a9a58",
+    "build/goal-r1-goodix-hr-execute-c/adapt.py": "688d29dbcd523a817b0ec2abbd58275a78d43ef5d8664d91dfc5069aca0520b3",
+    "build/goal-r1-goodix-hr-execute-c/compile-argv.json": "f50393f5eb83157ff38c08f407c923abdf4e5cdea3ef866d26c51cd3176372cc",
+    "build/goal-r1-goodix-hr-execute-c/manifest-before.json": "b2ecf2b3e2052ddd033cbf9803762b86078e2fa5471763e4771320e69c38d682",
+    "build/goal-r1-goodix-hr-execute-c/negative-boolean-output.log": "abd9f02013ac340cc33446b5f81a35f308a49c4f97ac8712af59ffe259e4e216",
+    "build/goal-r1-goodix-hr-execute-c/verify.py": "9c7bcc81fa6198b66c1c54507da9a37a2964010ad22f8e99512fe198cffef34e",
+    "build/goal-r1-goodix-hr-execute-c/negative-map-banks.o": "768d66dcd49a50b7682abf86c5761f3be8cc033e873f934f908f6aa3c8f4ec0e",
+    "build/goal-r1-goodix-hr-execute-c/negative-truncated-status.log": "c1e60572e17c4276d30b9467dcdb4f7d7e96f3079ac6162c36f394443995565b",
+    "build/goal-r1-goodix-hr-execute-c/negative-invalid-map.c": "eb4d36f8c902b898e47e9c67186dbacfd3a271ad5ffd00a33ef472e8dc5cd8f3",
+    "build/goal-r1-goodix-hr-execute-c/negative-popcount.o": "f69152d7ae29e33978d35afae76a581c43f860f83356ca9c234444714d2a61ec",
+    "build/goal-r1-goodix-hr-execute-c/negative-score-field.o": "e2d0df8adb066b7c30e4fedd2e828c4d88bd09f04d1cc544aa30f84ba0522253",
+    "build/goal-r1-goodix-hr-execute-c/negative-wide-scenario.log": "01bc0e0bcf408f4481a5ed27aa9798048e567a7b5e0f4b65beef262857aa7502",
+    "build/goal-r1-goodix-hr-execute-c/integration.ld": "349e27cd51d5ab582cbeb82f556729b9553a699515dd618673f9fd0a8ef02c9f",
+    "build/goal-r1-goodix-hr-execute-c/negative-record-HR.log": "8b12ce9e701a71f6d198e961931fb927d72cad843276e26bdac0669e5208d2dc",
+    "build/goal-r1-goodix-hr-execute-c/negative-missing-diagnostics.o": "6011e9e0febdd45bb41d8016e30cb3bb35459055dc9004d249e6450ba47a64d0",
+    "build/goal-r1-goodix-hr-execute-c/negative-score-field.log": "487fa0c7f99b2864fb1a072593b44b88b97ff3937bd2c51bc4128a8f6d1f8406",
+    "build/goal-r1-goodix-hr-execute-c/negative-wide-scenario.o": "94623bf14eeecda4bc979864329a35ae0a28c30ced71abf941a8803c07644404",
+    "build/goal-r1-goodix-hr-execute-c/negative-SNR-scale.c": "3461d9277491e798ff8e11e8ded18189cdfd2a0b415f3656514361670393cfe2",
+    "build/goal-r1-goodix-hr-execute-c/negative-truncated-status.c": "0915c935ac2782b67483ec1e5d8058da91fdea8cf60eb979d1c215a8c97b745b",
+    "build/goal-r1-goodix-hr-execute-c/build.log": "60024fc0055378d43e50d9d0f2d7d1898bd16354264ad79b7b9db41f207e6f69"
+  }
+}

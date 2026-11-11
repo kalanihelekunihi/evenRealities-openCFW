@@ -1,0 +1,229 @@
+{
+  "schema_version": 1,
+  "scope": "Native Goodix release, free-space query and bin helpers in ordinary C",
+  "report": "build/sources-goal-r1-goodix-native-heap-free-c/report.json",
+  "comparison_report": "build/sources-goal-r1-goodix-native-heap-init-c/report.json",
+  "stock_entry_mappings": [
+    {
+      "entry": "0x2d460",
+      "head_end": "0x2d4d5",
+      "instruction_bytes": 294,
+      "symbol": "goodix_mem_free"
+    },
+    {
+      "entry": "0x6dfc8",
+      "head_end": "0x6dfcb",
+      "instruction_bytes": 4,
+      "symbol": "goodix_mem_free"
+    },
+    {
+      "entry": "0x6dfcc",
+      "head_end": "0x6dfd5",
+      "instruction_bytes": 10,
+      "symbol": "goodix_mem_get_free_size"
+    },
+    {
+      "entry": "0x2d4d6",
+      "head_end": "0x2d4f3",
+      "instruction_bytes": 30,
+      "symbol": "goodix_mem_get_free_size"
+    },
+    {
+      "entry": "0x42d1c",
+      "head_end": "0x42d21",
+      "instruction_bytes": 6,
+      "symbol": "r1_goodix_native_heap_control"
+    },
+    {
+      "entry": "0x93e14",
+      "head_end": "0x93e39",
+      "instruction_bytes": 38,
+      "symbol": "r1_goodix_native_size_bin"
+    },
+    {
+      "entry": "0x76a44",
+      "head_end": "0x76a65",
+      "instruction_bytes": 34,
+      "symbol": "r1_goodix_native_bin_remove"
+    },
+    {
+      "entry": "0x93e5e",
+      "head_end": "0x93ea1",
+      "instruction_bytes": 68,
+      "symbol": "r1_goodix_native_bin_insert"
+    }
+  ],
+  "audit": {
+    "compiled_units": 865,
+    "unchanged_prior_nongenerated_objects": 854,
+    "new_units": [
+      "r1/src/application/goodix/native_heap_free.c"
+    ],
+    "differing_existing_generated_objects": [
+      "{gen}/r1_startup_vectors.S",
+      "{gen}/r1_uecc.c"
+    ],
+    "application_imports": 62,
+    "bootloader_imports": 22,
+    "removed_imports": [],
+    "added_imports": [],
+    "new_writable_state_bytes": 0,
+    "source_plan_and_cache_layout_unchanged": true,
+    "tested_object_equals_normal_build": true,
+    "only_manifest_change_is_one_new_unit": true,
+    "portable_heap_and_existing_byte_fill_objects_unchanged": true
+  },
+  "comparisons": {
+    "stock_C_release_transitions": 4613,
+    "bin_index_comparisons": 2054,
+    "mixed_native_allocate_C_release_transitions": 251,
+    "mixed_operations": 500,
+    "strict_release_write_order_width_values_and_full_pool_match": true,
+    "query_control_and_null_pool_checked": true,
+    "native_allocator_used_only_for_fixture_preparation_and_interop": true,
+    "source_release_cannot_execute_stock_code": true,
+    "native_instruction_bytes_executed": [
+      4,
+      118,
+      176,
+      10,
+      30,
+      6,
+      34,
+      34,
+      68
+    ],
+    "native_ranges": [
+      {
+        "entry": "0x6dfc8",
+        "size": 4,
+        "unexecuted_bytes": []
+      },
+      {
+        "entry": "0x2d460",
+        "size": 118,
+        "unexecuted_bytes": []
+      },
+      {
+        "entry": "0x37480",
+        "size": 176,
+        "unexecuted_bytes": []
+      },
+      {
+        "entry": "0x6dfcc",
+        "size": 10,
+        "unexecuted_bytes": []
+      },
+      {
+        "entry": "0x2d4d6",
+        "size": 30,
+        "unexecuted_bytes": []
+      },
+      {
+        "entry": "0x42d1c",
+        "size": 6,
+        "unexecuted_bytes": []
+      },
+      {
+        "entry": "0x93e14",
+        "size": 38,
+        "unexecuted_bytes": [
+          "0x93e26",
+          "0x93e27",
+          "0x93e28",
+          "0x93e29"
+        ]
+      },
+      {
+        "entry": "0x76a44",
+        "size": 34,
+        "unexecuted_bytes": []
+      },
+      {
+        "entry": "0x93e5e",
+        "size": 68,
+        "unexecuted_bytes": []
+      }
+    ]
+  },
+  "compiled_defects_rejected": [
+    {
+      "defect": "bin-lower-bound",
+      "rejected": true
+    },
+    {
+      "defect": "bin-upper-bound",
+      "rejected": true
+    },
+    {
+      "defect": "top-flags",
+      "rejected": true
+    },
+    {
+      "defect": "previous-coalesce",
+      "rejected": true
+    },
+    {
+      "defect": "next-coalesce",
+      "rejected": true
+    },
+    {
+      "defect": "remove-bitmap",
+      "rejected": true
+    },
+    {
+      "defect": "insert-bitmap",
+      "rejected": true
+    },
+    {
+      "defect": "query-reserve",
+      "rejected": true
+    },
+    {
+      "defect": "allocated-bit",
+      "rejected": true
+    }
+  ],
+  "contract": [
+    "One native C release implementation serves public thunk and split stock body. Null/control/range/allocated-bit gates, top coalescing, neighboring free blocks, bin metadata and boundary tags are preserved.",
+    "The query retains stock unsigned arithmetic: available minus(top-base+16) only if available exceeds that amount; it is not replaced by a sum of portable free-list nodes.",
+    "Bin selection returns0 only for8..1032; insertion uses encoded-header order and circular anchors, removal preserves bitmap clearing. Bin-helper inputs are valid native descriptors with index0 or1."
+  ],
+  "limits": [
+    "484 instruction bytes are accounted across wrappers, split body and helpers;480 execute. The only four unexecuted bytes are0x93e26..0x93e29: the increment path cannot run because guarded(size-8)<=1024 and the first threshold is1024.",
+    "4613 release comparisons include all four-block free orders across six size profiles, two alignments, terminal guards and masks, plus explicit invalid pointers.2054 bin comparisons cover low-size domain and high unsigned edges. Null control/query behavior is checked.",
+    "500 mixed operations include251 C releases, with stock allocation between them. Complete pool images, descriptor write width/order/value and query results match. Source release is forbidden from entering stock code.",
+    "Stock allocation/initialization are used only to prepare fixture data and test interoperability. They do not establish a source-only allocator, reallocator or complete teardown lifecycle.",
+    "Saved integer/FP registers, SP, masks, FPSCR and guards are checked. Caller scratch, void return, private frames, APSR, concurrent mutation, malformed list structures, invalid bin indices, physical memory behavior, final startup/scatter integration and boot remain unverified.",
+    "No new persistent state. Native provider uses existing r1_goodix_native_heap_pool. Portable model code remains unchanged; only frontier selection is superseded. Source plan/cache layout and import sets remain unchanged."
+  ],
+  "evidence_files": {
+    "build/sources-goal-r1-goodix-native-heap-free-c/report.json": "c6b54ad94ec18c459744b4c64a6ab356c0aa8fa875266dd5f1028ea6d3356fbd",
+    "build/sources-goal-r1-goodix-native-heap-init-c/report.json": "827c207d12fb7089d6ed1143dbe8d302e6ce406fd301a2fa3b7ea0803009b41f",
+    "r1/src/application/goodix/native_heap_free.c": "175cf893ee4b475bee0a886d69522782ac879dd0b29c43285d957c03fb4dc7c4",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-native-heap-free-c/r1/r1-application/r1__src__application__goodix__native_heap_free.c.o": "bc333928ee0e42aaf0a0446eb69f4ff0528fd2f27737d5ed1744ed750b807022",
+    "r1/src/sources.json": "fa6528350e5bce16ba9f8ad7215b19f62425c1c4e22eaaf316b9b106079aa996",
+    "tools/build/source-plan.json": "eeb516e31b3310fb0718f36908977f8125723f7c5e0e86cd6744395826259a4d",
+    "r1/src/config/runtime/native_health_cache.ld": "eb8f131c489cd818d4e36718718fa1989719ca0170f164541a1a5bf56dfc1ec3",
+    "r1/src/application/goodix/native_heap_init.c": "c3085064866b23d603697918b6dfdd29f66ab68c7e82cb1f3e10443c80e3f8b6",
+    "r1/src/vendor/goodix_heap/goodix_heap.c": "dfc58c6edb39f1e30fb346e6c4df0c7c573a07df9ded2bdafaa1ba5c91b4bd45",
+    "r1/docs/reference/FUNCTION-OWNERSHIP.csv": "64b20a26d73801a2565ffe616fbad500a228dab81791d638ad5b95dd85df5fb4",
+    "r1/symbols/function-frontier.csv": "0ed2467dfc223b613b35e245b400351168bc01270f141ff8fbd44baa0b6b9ef4",
+    "r1/docs/correlation/GOODIX-HEAP-REDUCTION-CORRELATION.md": "b13b9dc776340becf36ed2b1d17494733888e825ed4064fddd03d94dc055e4c2",
+    "build/goal-r1-goodix-native-heap-free-c/audit.json": "ac5f980fd8d82aa8455d966f3763537d881ff5edcf4c7bb3a6d84b8d64b80085",
+    "build/goal-r1-goodix-native-heap-free-c/verify.log": "b829170749150838374f9abf80834006573e5ca84acb4258a3e7704da8032cf6",
+    "build/goal-r1-goodix-native-heap-free-c/negative.json": "af679e86c2604721bf48da24650d26b08b11f14992c5c6a08987a86fbc406fd2",
+    "build/goal-r1-goodix-native-heap-free-c/audit.py": "ed990dd079a8836488005cf42e3ce1b6653ad44e77d57678913cb8b7ec5342c3",
+    "build/goal-r1-goodix-native-heap-free-c/source.elf": "15895bb1073b0ac82658776abdb5e104017b2dddda4af41217d8fda83b038c24",
+    "build/goal-r1-goodix-native-heap-free-c/negative.py": "0ae62de7be126b49b25035fe47391a22d6b11abf576b4a91b747fc6cd799bfd7",
+    "build/goal-r1-goodix-native-heap-free-c/negative.log": "fc01b5c4a130bb0035142ccec88e0c5fa7f831577061c05b49fe26cff20cec77",
+    "build/goal-r1-goodix-native-heap-free-c/source.o": "bc333928ee0e42aaf0a0446eb69f4ff0528fd2f27737d5ed1744ed750b807022",
+    "build/goal-r1-goodix-native-heap-free-c/results.json": "668093da92265b48ca487eb5cfbf0394e8ff48918bce0d6ab45704af3928df9f",
+    "build/goal-r1-goodix-native-heap-free-c/sources-check.log": "b0bdbf3206a0f21e84d3d58947c28ba296fef6d1cbc63af64972166c8d9d5217",
+    "build/goal-r1-goodix-native-heap-free-c/record.py": "79e10881f4c6e252abeabf206a3333fbb44fc33527dc234a9b83896e2b480168",
+    "build/goal-r1-goodix-native-heap-free-c/rea-bytes.json": "2ab5b74d587b23c678511d58fa9af39cb28704eeb68afdf034a8552fe7bf8a57",
+    "build/goal-r1-goodix-native-heap-free-c/manifest-before.json": "43c9c254ee79c2798e75301466aeec696f61b1b2cccd35103a7a3d8a48ff052f",
+    "build/goal-r1-goodix-native-heap-free-c/verify.py": "ba9aa9fa8203265cc7fc7e0a75cc13061e66ab1c2e3f1d9a98ebb0d41060a8df",
+    "build/goal-r1-goodix-native-heap-free-c/build.log": "31f1153d37a79e5da81a5ab66d4b9172d2bee4968d29fc2303144f0161f695cb"
+  }
+}

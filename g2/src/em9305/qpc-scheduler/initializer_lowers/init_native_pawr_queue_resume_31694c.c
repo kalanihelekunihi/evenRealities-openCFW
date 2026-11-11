@@ -1,27 +1,17 @@
-/* Native PAwR child; byte counter and ring-buffer stores retained in order. */
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_pawr_queue_resume_31694c\n"
-".type opencfw_em9305_pawr_queue_resume_31694c,@function\n"
-"opencfw_em9305_pawr_queue_resume_31694c:\n"
-"L31694c:\n"
-"push_s blink\n"
-"L31694e:\n"
-"bl opencfw_em9305_wsf_critical_enter\n"
-"L316952:\n"
-"mov_s r0,0x805b01\n"
-"L316958:\n"
-"ldb_s r1,[r0,0]\n"
-"L31695a:\n"
-"add_s r1,r1,-1\n"
-"L31695c:\n"
-"bl.d opencfw_em9305_wsf_critical_exit\n"
-"L316960:\n"
-"stb_s r1,[r0,0]\n"
-"L316962:\n"
-"pop_s blink\n"
-"L316964:\n"
-"j_s [blink]\n"
-".size opencfw_em9305_pawr_queue_resume_31694c,.-opencfw_em9305_pawr_queue_resume_31694c\n"
-);
+/* Stock 0x31694c: wsf_critical_enter(); decrement byte SRAM 0x805b01; return wsf_critical_exit().
+ * Converted from the lowered ARC asm; compiled with the g2-em9305-1 profile (-Os) and the
+ * disassembly diffed against the stock lowering: identical, or differing only in delay-slot
+ * scheduling / a redundant zero-extension / absolute-address ld/st forms (reviewed by hand). */
+#include <stdint.h>
+#define B8(a)  (*(volatile uint8_t  *)(uintptr_t)(a))
+#define H16(a) (*(volatile uint16_t *)(uintptr_t)(a))
+#define W32(a) (*(volatile uint32_t *)(uintptr_t)(a))
+extern uint32_t opencfw_em9305_wsf_critical_enter(void);
+extern uint32_t opencfw_em9305_wsf_critical_exit(void);
+uint32_t opencfw_em9305_pawr_queue_resume_31694c(void)
+{
+  (void)opencfw_em9305_wsf_critical_enter();
+  uint8_t v = (uint8_t)(B8(0x805b01u) - 1u);
+  B8(0x805b01u) = v;
+  return opencfw_em9305_wsf_critical_exit();
+}

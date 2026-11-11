@@ -1,334 +1,126 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_callback_321c30\n"
-".type opencfw_em9305_callback_321c30,@function\n"
-"opencfw_em9305_callback_321c30:\n"
-"L321c30:\n"
-"enter_s [r13-r20,fp,blink]\n"
-"L321c32:\n"
-"sub_s sp,sp,0x8\n"
-"L321c34:\n"
-"ld_s r13,[r0,0x24]\n"
-"L321c36:\n"
-"mov_s r18,r0\n"
-"L321c38:\n"
-"mov r0,777\n"
-"L321c3c:\n"
-"ld r20,[r18,44]\n"
-"L321c40:\n"
-"ldb_s r14,[r13,r0]\n"
-"L321c42:\n"
-"mov_s r15,r1\n"
-"L321c44:\n"
-"breq_s r14,0,L321c5a\n"
-"L321c46:\n"
-"ld.as r2,[r13,195]\n"
-"L321c4a:\n"
-"ld r0,[r2,0x8]\n"
-"L321c4c:\n"
-"ld r1,[r2,0xc]\n"
-"L321c4e:\n"
-"bl.d opencfw_em9305_child_3027f4\n"
-"L321c52:\n"
-"ldb_s r2,[r2,0x12]\n"
-"L321c54:\n"
-"and r16,r0,0x1\n"
-"L321c58:\n"
-"b_s L321c5c\n"
-"L321c5a:\n"
-"mov_s r16,1\n"
-"L321c5c:\n"
-"breq_s r15,0,L321cc6\n"
-"L321c5e:\n"
-"add_s r0,sp,0\n"
-"L321c60:\n"
-"bl.d opencfw_em9305_child_32db0c\n"
-"L321c64:\n"
-"mov_s r1,r15\n"
-"L321c66:\n"
-"ldb_s r0,[sp,0]\n"
-"L321c68:\n"
-"mov_s r19,0\n"
-"L321c6a:\n"
-"cmp_s r0,0x7\n"
-"L321c6c:\n"
-"bne_s L321e0e\n"
-"L321c6e:\n"
-"ld r17,[r18,36]\n"
-"L321c72:\n"
-"mov_s r14,r17\n"
-"L321c74:\n"
-"ldb r0,[r17,1]\n"
-"L321c78:\n"
-"brne.d.nt r0,0x1,L321d40\n"
-"L321c7c:\n"
-"add r14,r14,758\n"
-"L321c80:\n"
-"ldb r0,[r17,7]\n"
-"L321c84:\n"
-"breq.nt r0,0,L321d40\n"
-"L321c88:\n"
-"mov_s r0,0x803b72\n"
-"L321c8e:\n"
-"ldb_s r0,[r0,0]\n"
-"L321c90:\n"
-"bbit0.d.nt r0,0x3,L321d40\n"
-"L321c94:\n"
-"mov_s r0,0\n"
-"L321c96:\n"
-"ldb_s r2,[r14,0x13]\n"
-"L321c98:\n"
-"ldh_s r1,[r14,0]\n"
-"L321c9a:\n"
-"breq_s r2,0,L321ca4\n"
-"L321c9c:\n"
-"ld.as r0,[r17,195]\n"
-"L321ca0:\n"
-"ldb_s r0,[r0,0x12]\n"
-"L321ca2:\n"
-"bmsk_s r0,r0,0x6\n"
-"L321ca4:\n"
-"add1 r0,r17,r0\n"
-"L321ca8:\n"
-"ldh.as r0,[r0,140]\n"
-"L321cac:\n"
-"breq.d.nt r1,r0,L321d32\n"
-"L321cb0:\n"
-"bxor.f 0,r16,0\n"
-"L321cb4:\n"
-"bne_s L321d32\n"
-"L321cb6:\n"
-"breq.d.nt r2,0,L321d38\n"
-"L321cba:\n"
-"mov_s r0,0\n"
-"L321cbc:\n"
-"ld.as r0,[r17,195]\n"
-"L321cc0:\n"
-"ldb_s r0,[r0,0x12]\n"
-"L321cc2:\n"
-"bmsk_s r0,r0,0x6\n"
-"L321cc4:\n"
-"b_s L321d38\n"
-"L321cc6:\n"
-"ldb r0,[r13,36]\n"
-"L321cca:\n"
-"brne.nt r0,0x1,L321cdc\n"
-"L321cce:\n"
-"ldb_s r0,[r13,0x1]\n"
-"L321cd0:\n"
-"brne.d.nt r0,0x1,L321cdc\n"
-"L321cd4:\n"
-"mov_s r19,0\n"
-"L321cd6:\n"
-"brne.nt r16,0,L321ce8\n"
-"L321cda:\n"
-"b_s L321e0e\n"
-"L321cdc:\n"
-"cmp_s r14,0\n"
-"L321cde:\n"
-"mov_s r19,0\n"
-"L321ce0:\n"
-"beq_s L321e0e\n"
-"L321ce2:\n"
-"bxor.f 0,r16,0\n"
-"L321ce6:\n"
-"bne_s L321e0e\n"
-"L321ce8:\n"
-"add_s r0,r13,0x10\n"
-"L321cea:\n"
-"mov_s r1,0\n"
-"L321cec:\n"
-"bl.d opencfw_em9305_memset\n"
-"L321cf0:\n"
-"mov_s r2,0x14\n"
-"L321cf2:\n"
-"sub r2,r13,0x803d78\n"
-"L321cfa:\n"
-"ld.as r1,[r13,195]\n"
-"L321cfe:\n"
-"div r2,r2,784\n"
-"L321d02:\n"
-"mov_s r12,0x7f7f\n"
-"L321d08:\n"
-"cmp_s r14,0\n"
-"L321d0a:\n"
-"mov_s r0,-1\n"
-"L321d0c:\n"
-"sth_s r12,[r13,0x16]\n"
-"L321d0e:\n"
-"ldh r3,[r13,248]\n"
-"L321d12:\n"
-"mov.eq r0,0x2\n"
-"L321d16:\n"
-"ldb_s r1,[r1,0x12]\n"
-"L321d18:\n"
-"stb_s r0,[r13,0x19]\n"
-"L321d1a:\n"
-"extb_s r0,r2\n"
-"L321d1c:\n"
-"sth_s r0,[r13,0x14]\n"
-"L321d1e:\n"
-"mov_s r0,r13\n"
-"L321d20:\n"
-"stb -1,[r13,24]\n"
-"L321d24:\n"
-"sth_s r3,[r13,0x20]\n"
-"L321d26:\n"
-"bl.d opencfw_em9305_child_324734\n"
-"L321d2a:\n"
-"stb r1,[r13,34]\n"
-"L321d2e:\n"
-"mov_s r19,0\n"
-"L321d30:\n"
-"b_s L321e0e\n"
-"L321d32:\n"
-"brne.nt r1,r0,L321d40\n"
-"L321d36:\n"
-"b_s L321e0e\n"
-"L321d38:\n"
-"add1 r0,r17,r0\n"
-"L321d3c:\n"
-"sth.as r1,[r0,140]\n"
-"L321d40:\n"
-"ldb_s r0,[r13,0x5]\n"
-"L321d42:\n"
-"breq.d.nt r0,0,L321e0e\n"
-"L321d46:\n"
-"bxor.f 0,r16,0\n"
-"L321d4a:\n"
-"bne_s L321e0e\n"
-"L321d4c:\n"
-"ldb r0,[r13,36]\n"
-"L321d50:\n"
-"mov_s r16,0x803b68\n"
-"L321d56:\n"
-"breq_s r0,0,L321d62\n"
-"L321d58:\n"
-"breq.nt r0,0x2,L321e0e\n"
-"L321d5c:\n"
-"ldh r19,[r13,26]\n"
-"L321d60:\n"
-"b_s L321dc6\n"
-"L321d62:\n"
-"ld r18,[r18,44]\n"
-"L321d66:\n"
-"ldb r15,[r16,10]\n"
-"L321d6a:\n"
-"add_s r0,r13,0x10\n"
-"L321d6c:\n"
-"mov_s r1,0\n"
-"L321d6e:\n"
-"bl.d opencfw_em9305_memset\n"
-"L321d72:\n"
-"mov_s r2,0x14\n"
-"L321d74:\n"
-"sub r0,r17,0x803d78\n"
-"L321d7c:\n"
-"div r0,r0,784\n"
-"L321d80:\n"
-"extb_s r0,r0\n"
-"L321d82:\n"
-"bbit0.d.nt r15,0x6,L321d8c\n"
-"L321d86:\n"
-"sth_s r0,[r13,0x14]\n"
-"L321d88:\n"
-"ldb_s r0,[r14,0x3]\n"
-"L321d8a:\n"
-"stb_s r0,[r13,0x16]\n"
-"L321d8c:\n"
-"ldb r0,[r18,138]\n"
-"L321d90:\n"
-"mov_s r2,0xff\n"
-"L321d92:\n"
-"mov_s r3,0xff\n"
-"L321d94:\n"
-"bbit0.d.nt r15,0x2,L321d9e\n"
-"L321d98:\n"
-"stb_s r0,[r13,0x17]\n"
-"L321d9a:\n"
-"ldb r3,[r14,-1]\n"
-"L321d9e:\n"
-"ldb_s r12,[r14,0x13]\n"
-"L321da0:\n"
-"ld r1,[r17,40]\n"
-"L321da4:\n"
-"ldh r0,[r17,248]\n"
-"L321da8:\n"
-"stb_s r3,[r13,0x18]\n"
-"L321daa:\n"
-"st_s r1,[r13,0x1c]\n"
-"L321dac:\n"
-"sth_s r0,[r13,0x20]\n"
-"L321dae:\n"
-"breq_s r12,0,L321db6\n"
-"L321db0:\n"
-"ld.as r0,[r17,195]\n"
-"L321db4:\n"
-"ldb_s r2,[r0,0x12]\n"
-"L321db6:\n"
-"ldb_s r0,[r13,0x1]\n"
-"L321db8:\n"
-"mov_s r19,0\n"
-"L321dba:\n"
-"brne.d.nt r0,0x1,L321e08\n"
-"L321dbe:\n"
-"stb r2,[r13,34]\n"
-"L321dc2:\n"
-"stb 1,[r13,36]\n"
-"L321dc6:\n"
-"mov_s r0,0x805cac\n"
-"L321dcc:\n"
-"ld r0,[r0,0]\n"
-"L321dce:\n"
-"ldb r14,[r16,8]\n"
-"L321dd2:\n"
-"ldh_s r0,[r0,0x20]\n"
-"L321dd4:\n"
-"sub r0,r0,r19\n"
-"L321dd8:\n"
-"exth_s r0,r0\n"
-"L321dda:\n"
-"brhs.d.nt r0,r14,L321de8\n"
-"L321dde:\n"
-"mov_s r2,r14\n"
-"L321de0:\n"
-"stb 2,[r13,25]\n"
-"L321de4:\n"
-"mov_s r19,0\n"
-"L321de6:\n"
-"b_s L321e08\n"
-"L321de8:\n"
-"ld_s r0,[r13,0x28]\n"
-"L321dea:\n"
-"ld_s r1,[r16,0x4]\n"
-"L321dec:\n"
-"ldb r15,[r20,138]\n"
-"L321df0:\n"
-"bl.d opencfw_em9305_memcpy\n"
-"L321df4:\n"
-"add_s r0,r0,r19\n"
-"L321df6:\n"
-"ldh_s r1,[r13,0x1a]\n"
-"L321df8:\n"
-"ldb r0,[r16,10]\n"
-"L321dfc:\n"
-"mov_s r19,1\n"
-"L321dfe:\n"
-"add_s r14,r14,r1\n"
-"L321e00:\n"
-"stb_s r15,[r13,0x17]\n"
-"L321e02:\n"
-"bbit1.d.nt r0,0x4,L321e0e\n"
-"L321e06:\n"
-"sth_s r14,[r13,0x1a]\n"
-"L321e08:\n"
-"bl.d opencfw_em9305_child_324734\n"
-"L321e0c:\n"
-"mov_s r0,r13\n"
-"L321e0e:\n"
-"mov_s r0,r19\n"
-"L321e10:\n"
-"leave_s [r13-r20,fp,blink,pcl]\n"
-".size opencfw_em9305_callback_321c30,.-opencfw_em9305_callback_321c30\n"
-);
+#include <stdint.h>
+
+/* Native 0x321c30..0x321e12: periodic advertising report assembly for the
+ * sync context at object+0x24. The channel-map check (PAwR +777: bit of
+ * the subevent counter in the map at +780) gates reporting. Without data,
+ * an established train (+36 = +1 = 1) or a failed PAwR subevent reports
+ * an empty/truncated record (status 2 or 0xff, 0x7f7f power) via 324734.
+ * With an ADV_EXT header (type 7), PAwR response slots dedupe on the
+ * stored DID (+280 table, receiver +758/+777). Then, when reporting is
+ * enabled (+5), start a fresh report (+0x10..: index, power, RSSI, CTE,
+ * event counter, subevent) or continue one (+26 bytes so far), append the
+ * received data (0x803b6c/+0x803b70) while it fits the configured length,
+ * mark truncation (status 2) otherwise, and flush via 324734 unless more
+ * data follows (0x803b72 bit 4). Returns 1 when data was appended. */
+extern uint64_t opencfw_em9305_child_3027f4(uint32_t,uint32_t,uint32_t);
+extern uint32_t opencfw_em9305_child_32db0c(uintptr_t,uintptr_t);
+extern void *opencfw_em9305_memset(void *,uint32_t,uint32_t);
+extern void *opencfw_em9305_memcpy(void *,const void *,uint32_t);
+extern uint32_t opencfw_em9305_child_324734(uintptr_t);
+
+static uint32_t r32(uintptr_t a){return *(volatile uint32_t *)a;}
+static uint32_t r16(uintptr_t a){return *(volatile uint16_t *)a;}
+static uint32_t r8(uintptr_t a){return *(volatile uint8_t *)a;}
+static void w32(uintptr_t a,uint32_t v){*(volatile uint32_t *)a=v;}
+static void w16(uintptr_t a,uint32_t v){*(volatile uint16_t *)a=(uint16_t)v;}
+static void w8(uintptr_t a,uint32_t v){*(volatile uint8_t *)a=(uint8_t)v;}
+
+static uint32_t slot_321c30(uintptr_t base)
+{
+    return (uint8_t)((int32_t)((uint32_t)base-0x803d78u)/784);
+}
+
+uint32_t opencfw_em9305_callback_321c30(uintptr_t object,uintptr_t data)
+{
+    uintptr_t sync=r32(object+0x24u);
+    uintptr_t pdu=r32(object+44u);
+    const uintptr_t report=(uintptr_t)0x803b68u;
+    uint32_t pawr=r8(sync+777u);
+    uint32_t in_map=1u;
+    if(pawr!=0u) {
+        uintptr_t block=r32(sync+780u);
+        in_map=(uint32_t)opencfw_em9305_child_3027f4(r32(block+8u),r32(block+0xcu),
+                                                     r8(block+0x12u))&1u;
+    }
+    if(data==0u) {
+        if(!(r8(sync+36u)==1u&&r8(sync+1u)==1u&&in_map!=0u)) {
+            if(pawr==0u||in_map!=1u) return 0u;
+        }
+        (void)opencfw_em9305_memset((void *)(sync+0x10u),0u,0x14u);
+        uint32_t index=slot_321c30(sync);
+        uintptr_t block=r32(sync+780u);
+        w16(sync+0x16u,0x7f7fu);
+        uint32_t counter=r16(sync+248u);
+        uint32_t subevent=r8(block+0x12u);
+        w8(sync+0x19u,(pawr==0u)?2u:0xffu);
+        w16(sync+0x14u,index);
+        w8(sync+24u,0xffu);
+        w16(sync+0x20u,counter);
+        w8(sync+34u,subevent);
+        (void)opencfw_em9305_child_324734(sync);
+        return 0u;
+    }
+    uint8_t header[8];
+    (void)opencfw_em9305_child_32db0c((uintptr_t)header,data);
+    if(header[0]!=7u) return 0u;
+    uintptr_t receiver=r32(object+36u);
+    uintptr_t response=receiver+758u;
+    if(r8(receiver+1u)==1u&&r8(receiver+7u)!=0u&&(r8(0x803b72u)&8u)) {
+        uint32_t enabled=r8(response+0x13u);
+        uint32_t did=r16(response);
+        uint32_t slot=0u;
+        if(enabled!=0u) slot=r8(r32(receiver+780u)+0x12u)&0x7fu;
+        if(did==r16(receiver+280u+2u*slot)) return 0u;
+        if(in_map==1u) {
+            slot=0u;
+            if(enabled!=0u) slot=r8(r32(receiver+780u)+0x12u)&0x7fu;
+            w16(receiver+280u+2u*slot,did);
+        }
+    }
+    if(r8(sync+5u)==0u||in_map!=1u) return 0u;
+    uint32_t state=r8(sync+36u);
+    uint32_t offset;
+    if(state==0u) {
+        uintptr_t current=r32(object+44u);
+        uint32_t flags=r8(report+10u);
+        (void)opencfw_em9305_memset((void *)(sync+0x10u),0u,0x14u);
+        w16(sync+0x14u,slot_321c30(receiver));
+        if(flags&0x40u) w8(sync+0x16u,r8(response+3u));
+        uint32_t cte=0xffu,subevent=0xffu;
+        w8(sync+0x17u,r8(current+138u));
+        if(flags&4u) cte=r8(response-1u);
+        uint32_t enabled=r8(response+0x13u);
+        uint32_t anchor=r32(receiver+40u);
+        uint32_t counter=r16(receiver+248u);
+        w8(sync+0x18u,cte);
+        w32(sync+0x1cu,anchor);
+        w16(sync+0x20u,counter);
+        if(enabled!=0u) subevent=r8(r32(receiver+780u)+0x12u);
+        w8(sync+34u,subevent);
+        if(r8(sync+1u)!=1u) {
+            (void)opencfw_em9305_child_324734(sync);
+            return 0u;
+        }
+        w8(sync+36u,1u);
+        offset=0u;
+    } else if(state==2u) {
+        return 0u;
+    } else {
+        offset=r16(sync+26u);
+    }
+    uint32_t length=r8(report+8u);
+    if((uint16_t)(r16(r32(0x805cacu)+0x20u)-offset)<length) {
+        w8(sync+25u,2u);
+        (void)opencfw_em9305_child_324734(sync);
+        return 0u;
+    }
+    uint32_t rssi=r8(pdu+138u);
+    (void)opencfw_em9305_memcpy((void *)(r32(sync+0x28u)+offset),
+                                (const void *)r32(report+4u),length);
+    uint32_t more=r8(report+10u);
+    length+=r16(sync+0x1au);
+    w8(sync+0x17u,rssi);
+    w16(sync+0x1au,length);
+    if((more&0x10u)==0u) (void)opencfw_em9305_child_324734(sync);
+    return 1u;
+}

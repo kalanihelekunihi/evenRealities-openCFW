@@ -70,3 +70,8 @@ int8_t audio_uart_lv_font_kerning_4b28ee(const void *font,
                               (uint32_t)(rc - 1u)];
     return 0;
 }
+
+/* Former duplicate body ui/freetype/font-kerning/display_font_kerning.c
+ * (open-coded binary search instead of the stock 0x52a284 bsearch call). */
+__typeof__(audio_uart_lv_font_kerning_4b28ee) audio_uart_font_glyph_kerning
+    __attribute__((alias("audio_uart_lv_font_kerning_4b28ee")));

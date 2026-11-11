@@ -1,0 +1,115 @@
+{
+  "schema": 1,
+  "scope": "Native registered frame-wrapper C behavior, not I/O dispatcher implementation",
+  "original_frontier_entry": {
+    "image": "application",
+    "inventory_source": "ghidra_functions_csv",
+    "entry": "0x0006a4d8",
+    "size": "376",
+    "provider_family": "r1_goodix_provider_adapter",
+    "source_symbol": "r1_goodix_frame_data_hook",
+    "candidate_symbol": "r1_goodix_frame_data_hook",
+    "status": "unresolved_source_route",
+    "candidate_sources": "",
+    "candidate_objects": "",
+    "candidate_reports": "",
+    "behavior_receipt": "",
+    "instruction_identity_proven": "false",
+    "image_integration_proven": "false"
+  },
+  "corrected_entry_span": {
+    "start": "0x6a4d8",
+    "end_exclusive": "0x6a4fe",
+    "bytes": 38,
+    "manual_supplement": true
+  },
+  "native_wrapper_sha256": "03654c74759734d996144df35cbea24f9d998339acf080282d61dcf04f6e54ac",
+  "execution": {
+    "paired_cases": 384,
+    "executions": 768,
+    "checks": [
+      "native flag/enable branch order and arguments",
+      "opaque fill or I/O tail call at caller SP",
+      "no frame dereference or raw notification in wrapper, including null/unmapped pointers",
+      "8-byte save frame, saved registers, masks, actual return bits"
+    ],
+    "modeled": [
+      "timestamp/enable returns, including alternate valid-byte returns for branch coverage",
+      "I/O dispatcher and PPG-fill providers"
+    ],
+    "limits": [
+      "I/O dispatcher body not validated or replaced",
+      "No full sensor/algorithm/physical execution",
+      "Caller-clobbered registers/flags excluded; R0 reflects emitted void function behavior"
+    ]
+  },
+  "negative": {
+    "restored_template_notification_rejected": true,
+    "reason": "Extra post-dispatch work violates native tail-transfer/frame-access contract"
+  },
+  "audit": {
+    "other_575_objects_unchanged": true,
+    "other_hook_function_bodies_and_relocations_unchanged": 15,
+    "only_changed_function": "gh3x2x_frame_data_hook_func",
+    "one_existing_unit_retargeted_one_generator_added": true,
+    "profiles_unchanged": true,
+    "resolved_macros_unchanged": true,
+    "removed_imports": [
+      "gh3x2x_rawdata_notify"
+    ],
+    "added_imports": [],
+    "application_unresolved": 167,
+    "bootloader_unresolved": 34
+  },
+  "qualification": {
+    "generic": {
+      "candidates": 4,
+      "compiled": 4,
+      "selected_regions": 0
+    },
+    "r1-gcc": {
+      "candidates": 4,
+      "compiled": 4,
+      "selected_regions": 0
+    }
+  },
+  "canonical_plan_unchanged": true,
+  "hybrid": {
+    "report": "build/hybrid-goal-r1-goodix-frame-hook/build-report.json",
+    "payload_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "totals": {
+      "binary-pull-through": 642215,
+      "source-built": 3945,
+      "resource-file": 248
+    },
+    "source_completeness_proven": false
+  },
+  "files": {
+    "r1/src/sources.json": "0b87782f44f29772556826d641f74549d56ba2dd8a0e7437e970c249edea6a8b",
+    "r1/symbols/function-frontier.csv": "8a87c4bed58ecf61792f16368cfe59bad93d085eae0be5e0f34fafaea9d32063",
+    "r1/docs/reference/FUNCTION-OWNERSHIP.csv": "966d9df76fba459bed6e4e9fada912da092d5efe5055e8c2551ffee2ce354381",
+    "tools/build/source-plan.json": "883e978279baf64f99dca97ebdba10d30a192b022d392bc282832ed5982bb491",
+    "third-party/upstream/goodix-gh3x2x/gh3x2x/demo_code/demo_kernel_code/kernel/gh_demo_hook.c": "6c4ea0cfe71ee674a3ee7bba66d2880276f666a9162383a8e2dbd23c5a84f990",
+    "build/sources-goal-r1-goodix-frame-hook-final/report.json": "2770e6e953d0017e9d53416b37c399deb03dc8fe20f8528cab52f1d0d8bfc7c0",
+    "build/hybrid-goal-r1-goodix-frame-hook/build-report.json": "8e43e131db4c63c8011e2bb9c92f437b1785f7336e60dc73ae7d6c9b53f824b4",
+    "build/goal-r1-goodix-timestamp-closure/rea.json": "7d0b722814aa35c2438b6bc319bac891787e42cd602b834569baae24aaf36ede",
+    "build/goal-r1-goodix-timestamp-closure/binding-results.json": "fe9bfb2d4675ab46e69487e047d85eec572d9a83b449b66fd2b5784774e435b9",
+    "build/goal-r1-goodix-frame-hook/sources-before.json": "40cba91583e443e9c705570ef3127d63327626f35f772df697c25320ad836609",
+    "build/goal-r1-goodix-frame-hook/frontier-original-entry.json": "1b6836876c2798fcf91aba9315a25e2df720f2112eba32ddb1648626de71f02c",
+    "build/goal-r1-goodix-frame-hook/ownership-original-entry.json": "ca68b5d3c0aebeea20ac4db73ca7a2ffe1dc8626b3c933e711a369aac712c283",
+    "build/goal-r1-goodix-frame-hook/verify.py": "3494933b1f70cf30be88fecc1f42af66ea97baad4992b05aa9061b0665f07cf9",
+    "build/goal-r1-goodix-frame-hook/results.json": "b31660278949a46bd7c1da4c7df6fd21706476b381c12a989e0c7b3174de3f30",
+    "build/goal-r1-goodix-frame-hook/negative.py": "d90b0c0d45371fd4060d6ada46e1ce09d71d1529d597bbf4e13e88f7cde8f395",
+    "build/goal-r1-goodix-frame-hook/negative-results.json": "8b443e89a19c1bc2831047544c44e6b5957b356ee386046e14cd0131fb86ceea",
+    "build/goal-r1-goodix-frame-hook/audit.py": "72fca3ed4c924b8e7f101aeeca06101289f526aad576e5ae8e629b3c0d2b9c93",
+    "build/goal-r1-goodix-frame-hook/audit-results.json": "dd197b392534cf0f6b5106b227a07c5b658290034511957e0b708c1bbb21f105",
+    "build/goal-r1-goodix-frame-hook/qualified-generic/qualification.json": "cb5a0612ffd7bf73bcee1e774ec8e40bda20fb8f859e36505c2d15266cf3b923",
+    "build/goal-r1-goodix-frame-hook/qualified-r1-gcc/qualification.json": "cb5a0612ffd7bf73bcee1e774ec8e40bda20fb8f859e36505c2d15266cf3b923"
+  },
+  "limits": [
+    "Dispatcher/provider bodies modeled; full algorithm/physical sampling unproven",
+    "Alternate timestamp/enable provider returns used for branch coverage",
+    "Manual contiguous entry correction does not establish global Ghidra coverage",
+    "New C wrapper not byte-qualified; G2 gates and full source completeness unproven"
+  ]
+}

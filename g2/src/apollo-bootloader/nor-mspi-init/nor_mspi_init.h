@@ -10,6 +10,5 @@ uint32_t opencfw_provider_420254(uint32_t module,
                                  uint32_t reserved);
 
 /* Source implementation of the firmware's internal HAL handle constructor. */
-uint32_t opencfw_provider_424a5a(uint32_t module, void **handle_out);
 
 #endif

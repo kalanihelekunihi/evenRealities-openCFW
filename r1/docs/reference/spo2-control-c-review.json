@@ -1,0 +1,146 @@
+{
+  "schema_version": 1,
+  "entries": {
+    "0x4aaf8": [
+      "r1_spo2_once_control",
+      46
+    ],
+    "0x4ab40": [
+      "r1_spo2_mode_transition",
+      104
+    ],
+    "0x4ad7c": [
+      "r1_spo2_mode_set",
+      22
+    ]
+  },
+  "report": "build/sources-goal-r1-spo2-control-c/report.json",
+  "report_sha256": "e2b0378d1fd1f556a79ee01ad78228f6b2fde64565ad0ae0c290da94cd250ad3",
+  "unit": {
+    "source": "r1/src/application/runtime/native_spo2_control.c",
+    "source_sha256": "01d090d7d1ec21df7efa6bd808571cae58443e61176afd1b3c8315336a84a86e",
+    "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-spo2-control-c/r1/r1-application/r1__src__application__runtime__native_spo2_control.c.o",
+    "object_sha256": "d7f6ed9d747c8255477038a36e687d964f2db0794ecb9e4406aaaeb246ca5fec"
+  },
+  "behavior": {
+    "pairs": 1254,
+    "digest": "5768487f75c5711deb44ca2913966ce528180714cae3c3c3b0f77a5208834aae",
+    "actual_C": [
+      "SpO2 once control/mode transition/setter",
+      "canonical expanded three-slot streams and state",
+      "existing wear/tick/timer release helpers"
+    ],
+    "actual_adapters": "Existing event assembly gates/loggers execute unchanged",
+    "modeled_boundaries": [
+      "r1_sensor_stream_register_by_name",
+      "r1_sensor_stream_unregister_by_name",
+      "r1_stream_timer_release",
+      "r1_spo2_timing_start_plan",
+      "r1_structured_log_mode_get",
+      "r1_structured_log_format",
+      "nrf_log_frontend_std_0",
+      "nrf_log_frontend_std_1"
+    ],
+    "limits": [
+      "Mapped wrapped/outlying slot addresses only; no invalid-pointer recovery",
+      "Result callback checked by identity, not invoked",
+      "Physical streams, scheduler, timers, logging and async behavior not proven",
+      "Private stack and caller-clobbered registers excluded"
+    ]
+  },
+  "negative_controls": {
+    "wrong-once-normalization": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "s-openCFW/build/goal-r1-spo2-mode-c/verify.py\", line 64, in pair\n    a=run(False,**kw);b=run(True,**kw);assert a==b,(kw,[k for k in a if a[k]!=b[k]],a['trace'],b['trace']);digest.update(json.dumps([kw,a]).encode());pairs+=1\n                                              ^^^^\nAssertionError: ({'entry': 'once', 'value': 2, 'length': 0, 'handles': 0, 'registered': 0, 'modes': (7,)}, ['trace'], [('register', ['spo2', 'once', 'once result', 1, 1], '0241424355050000', '000000000000000000000000')], [])\n"
+    },
+    "wrong-mode-limit": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-spo2-mode-c/verify.py\", line 64, in pair\n    a=run(False,**kw);b=run(True,**kw);assert a==b,(kw,[k for k in a if a[k]!=b[k]],a['trace'],b['trace']);digest.update(json.dumps([kw,a]).encode());pairs+=1\n                                              ^^^^\nAssertionError: ({'entry': 'set', 'old': 0, 'new': 2, 'handles': 0, 'timer': 0, 'modes': (0,)}, ['state'], [], [])\n"
+    },
+    "wrong-initial-slot-wrap": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": ", in pair\n    a=run(False,**kw);b=run(True,**kw);assert a==b,(kw,[k for k in a if a[k]!=b[k]],a['trace'],b['trace']);digest.update(json.dumps([kw,a]).encode());pairs+=1\n                                              ^^^^\nAssertionError: ({'entry': 'set', 'old': 2, 'new': 0, 'handles': 7, 'timer': 0, 'modes': (0,)}, ['trace', 'streams'], [('unregister', ['spo2', 258], '0241424300000000', '000100000101000002010000')], [('unregister', ['spo2', 256], '0241424300000000', '000100000101000002010000')])\n"
+    },
+    "lost-once-clear": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "in pair\n    a=run(False,**kw);b=run(True,**kw);assert a==b,(kw,[k for k in a if a[k]!=b[k]],a['trace'],b['trace']);digest.update(json.dumps([kw,a]).encode());pairs+=1\n                                              ^^^^\nAssertionError: ({'entry': 'once', 'value': 0, 'length': 0, 'handles': 7, 'registered': 0, 'modes': (7,)}, ['streams'], [('unregister', ['spo2', 256], '0241424355050000', '000100000101000002010000')], [('unregister', ['spo2', 256], '0241424355050000', '000100000101000002010000')])\n"
+    },
+    "lost-flag2-clear": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-spo2-mode-c/verify.py\", line 64, in pair\n    a=run(False,**kw);b=run(True,**kw);assert a==b,(kw,[k for k in a if a[k]!=b[k]],a['trace'],b['trace']);digest.update(json.dumps([kw,a]).encode());pairs+=1\n                                              ^^^^\nAssertionError: ({'entry': 'set', 'old': 1, 'new': 0, 'handles': 0, 'timer': 0, 'modes': (0,)}, ['state'], [], [])\n"
+    },
+    "wrong-timer-gate": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-spo2-mode-c/verify.py\", line 64, in pair\n    a=run(False,**kw);b=run(True,**kw);assert a==b,(kw,[k for k in a if a[k]!=b[k]],a['trace'],b['trace']);digest.update(json.dumps([kw,a]).encode());pairs+=1\n                                              ^^^^\nAssertionError: ({'entry': 'set', 'old': 0, 'new': 1, 'handles': 0, 'timer': 0, 'modes': (0,)}, ['state'], [], [])\n"
+    },
+    "lost-timer-release": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-spo2-mode-c/verify.py\", line 64, in pair\n    a=run(False,**kw);b=run(True,**kw);assert a==b,(kw,[k for k in a if a[k]!=b[k]],a['trace'],b['trace']);digest.update(json.dumps([kw,a]).encode());pairs+=1\n                                              ^^^^\nAssertionError: ({'entry': 'set', 'old': 1, 'new': 0, 'handles': 0, 'timer': 1365, 'modes': (0,)}, ['trace', 'state'], [('release', [1365], '0141424355050000', '000000000000000000000000')], [])\n"
+    },
+    "early-mode-commit": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "lse,**kw);b=run(True,**kw);assert a==b,(kw,[k for k in a if a[k]!=b[k]],a['trace'],b['trace']);digest.update(json.dumps([kw,a]).encode());pairs+=1\n                                              ^^^^\nAssertionError: ({'entry': 'set', 'old': 0, 'new': 1, 'handles': 0, 'timer': 0, 'modes': (0,)}, ['trace'], [], [('mode', [0], '0141424300000000', '000000000000000000000000'), ('mode', [0], '0141424300000000', '000000000000000000000000'), ('mode', [0], '0141424300000000', '000000000000000000000000')])\n"
+    }
+  },
+  "audit": {
+    "unchanged_prior_objects": 755,
+    "changed_object": "r1/src/application/runtime/native_spo2_lifecycle.c",
+    "all_existing_allocated_code_and_relocations_unchanged": true,
+    "handle_owner_bytes_before": 8,
+    "handle_owner_bytes_after": 12,
+    "new_units": 1,
+    "imports": {
+      "r1-application": {
+        "added": [
+          "r1_spo2_once_result_plan"
+        ],
+        "removed": [
+          "r1_event_service_0004aaf8",
+          "r1_event_service_0004ad7c"
+        ]
+      },
+      "r1-bootloader": {
+        "added": [],
+        "removed": []
+      }
+    }
+  },
+  "initialization": {
+    "source_object_sha256": "e6e74d8bf601427eb38761192f272b955223e154620bad5482ab300bc5ac179e",
+    "stock_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "native_RW_and_ZI_handlers_executed": true,
+    "independent_RW_decoder_matches": true,
+    "region_guards_unchanged": true,
+    "cells": {
+      "r1_spo2_timing_state": {
+        "address": "0x20006d98",
+        "size": 8,
+        "section": ".r1.spo2.timing.state",
+        "sha256": "d86e8112f3c4c4442126f8e9f44f16867da487f29052bf91b810457db34209a4"
+      },
+      "r1_spo2_streams": {
+        "address": "0x2001a3d0",
+        "size": 12,
+        "section": ".bss.r1.spo2.streams",
+        "sha256": "15ec7bf0b50732b49f8228e07d24365338f9e3ab994b00af08e5a3bffe55fd8b"
+      }
+    },
+    "owned_bytes": 20,
+    "limits": [
+      "Eight-byte SpO2 state plus three stream handles are owned",
+      "Final whole-image RAM placement and physical startup unproven"
+    ]
+  },
+  "source_check": "R1 passes: 757 units, 561 source files, 0 not built. Global check flags existing G2 resident_rom_thumb_set.S absent from manifest.",
+  "rea": "spo2-control-c-rea.json",
+  "instruction_identity_proven": false,
+  "image_integration_proven": false
+}

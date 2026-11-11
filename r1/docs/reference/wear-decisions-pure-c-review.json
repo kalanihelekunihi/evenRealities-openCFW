@@ -1,0 +1,451 @@
+{
+  "schema_version": 1,
+  "scope": "Remove remaining inline assembly from optical/motion wear-on and wear-off decisions",
+  "report": "build/sources-goal-r1-wear-decisions-pure-c/report.json",
+  "comparison_report": "build/sources-goal-r1-goodix-algorithm-shutdown-c/report.json",
+  "stock_entries": [
+    {
+      "entry": "0x3d268",
+      "size": 294,
+      "symbol": "r1_wear_on_decision",
+      "source": "r1/src/application/runtime/native_wear_on_decision.c"
+    },
+    {
+      "entry": "0x3d45c",
+      "size": 480,
+      "symbol": "r1_wear_off_decision",
+      "source": "r1/src/application/runtime/native_wear_off_decision.c"
+    }
+  ],
+  "audit": {
+    "compiled_units": 877,
+    "modified_units": [
+      "r1/src/application/runtime/native_wear_on_decision.c",
+      "r1/src/application/runtime/native_wear_off_decision.c"
+    ],
+    "unchanged_other_nongenerated_objects": 865,
+    "differing_existing_generated_objects": [
+      "{gen}/r1_startup_vectors.S",
+      "{gen}/r1_uecc.c"
+    ],
+    "application_imports": 61,
+    "bootloader_imports": 22,
+    "added_imports": [],
+    "removed_imports": [],
+    "inline_assembly_boundaries_removed": 3,
+    "new_writable_state_bytes": 0,
+    "writable_sections_and_initializers_unchanged": true,
+    "existing_conversion_provider_and_range_and_statistics_objects_unchanged": true,
+    "both_tested_objects_equal_normal_build": true,
+    "only_manifest_changes_are_two_gcc9_profile_selections": true,
+    "source_plan_and_cache_layout_unchanged": true
+  },
+  "direct_on": {
+    "native_decision_instruction_bytes_executed": [
+      294,
+      0
+    ],
+    "Cortex_M4": true,
+    "BX_LR_port_returns": true,
+    "paired_cases": 7011,
+    "source_object_sha256": "142243f0244a906f455026fed504e9778f280c9364355a5f9153036e1caad028",
+    "range_object_sha256": "b095e0d25a9073c1766147c2004d7dac34533e7d13e9699679d5409b77807f8d",
+    "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "actual_C_range_executed": true,
+    "FP_context_initialized_before_FPSCR": true,
+    "provider_frames": {
+      "native": {
+        "r1_structured_log_mode_get": [
+          24
+        ],
+        "r1_structured_log_format": [
+          24
+        ],
+        "nrf_log_frontend_std_1": [
+          0
+        ],
+        "nrf_log_frontend_std_0": [
+          0
+        ]
+      },
+      "C": {
+        "r1_structured_log_mode_get": [
+          16
+        ],
+        "r1_structured_log_format": [
+          16
+        ],
+        "nrf_log_frontend_std_1": [
+          0
+        ],
+        "nrf_log_frontend_std_0": [
+          0
+        ]
+      }
+    },
+    "limits": [
+      "Actual C history range; mode/log providers modeled with active/history/mode mutation",
+      "Native binary64 helpers execute; active FP context established before FPSCR settings",
+      "NaN position/threshold/null arguments and fresh log reads covered; public state/args/faults/FPSCR compared",
+      "Preserved registers/SP checked on normal return; masks checked; void R0/fault PC/caller-clobbered regs/APSR/private stack excluded",
+      "No physical/concurrent execution proof"
+    ]
+  },
+  "direct_off": {
+    "native_decision_instruction_bytes_executed": [
+      0,
+      480
+    ],
+    "Cortex_M4": true,
+    "BX_LR_port_returns": true,
+    "paired_cases": 7503,
+    "source_object_sha256": "948fed3ea862a681f8fdf07290530de3eb1d47a9ed5a9771a81f7cd033adff25",
+    "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "FP_context_initialized_before_FPSCR": true,
+    "provider_frames": {
+      "native": {
+        "osKernelGetTickCount": [
+          40
+        ],
+        "r1_structured_log_mode_get": [
+          40
+        ],
+        "r1_sensor_stream_unregister_by_name": [
+          40
+        ],
+        "r1_sensor_stream_register_by_name": [
+          40
+        ],
+        "r1_structured_log_format": [
+          40
+        ],
+        "nrf_log_frontend_std_2": [
+          0,
+          40
+        ]
+      },
+      "C": {
+        "osKernelGetTickCount": [
+          32
+        ],
+        "r1_structured_log_mode_get": [
+          32
+        ],
+        "r1_sensor_stream_unregister_by_name": [
+          40
+        ],
+        "r1_sensor_stream_register_by_name": [
+          32
+        ],
+        "r1_structured_log_format": [
+          32
+        ],
+        "nrf_log_frontend_std_2": [
+          0,
+          32
+        ]
+      }
+    },
+    "limits": [
+      "Tick/register/unregister/mode/log providers modeled with timestamp, handle, sample, sleep and counter mutations",
+      "Unsigned tick wrap, fresh timestamp, strict optical/float thresholds, byte counter wrap and signaling compare/conversion tested",
+      "Public memory/args/faults/FPSCR compared; preserved regs/SP checked on normal return; masks checked",
+      "Void R0/fault PC/caller-clobbered registers/APSR/private stack excluded",
+      "No physical/concurrent execution proof"
+    ]
+  },
+  "actual_motion_pipeline": {
+    "actual_conversion_entry_hits": {
+      "native": 64,
+      "C": 64
+    },
+    "native_decision_instruction_bytes_executed": [
+      98,
+      290
+    ],
+    "Cortex_M4": true,
+    "BX_LR_port_returns": true,
+    "FP_context_initialized_before_FPSCR": true,
+    "actual_C_off_executed": true,
+    "off_object_sha256": "948fed3ea862a681f8fdf07290530de3eb1d47a9ed5a9771a81f7cd033adff25",
+    "actual_C_on_and_range_executed": true,
+    "on_object_sha256": "142243f0244a906f455026fed504e9778f280c9364355a5f9153036e1caad028",
+    "range_object_sha256": "b095e0d25a9073c1766147c2004d7dac34533e7d13e9699679d5409b77807f8d",
+    "actual_C_statistics_executed": true,
+    "statistics_object_sha256": "89629db23c5484909d7464f45ca561d072db8597f981e4cc1468bef87b8e1d69",
+    "paired_cases": 1688,
+    "source_object_sha256": "fb4d3a539a00069c10fbb8378df477fa51f25d711a082253c5acc38ffbddf094",
+    "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "provider_frames": {
+      "native": {
+        "r1_event_service_0008b028": [
+          48
+        ],
+        "__aeabi_memclr": [
+          48
+        ],
+        "r1_structured_log_mode_get": [
+          72,
+          88
+        ],
+        "r1_structured_log_format": [
+          72,
+          88
+        ],
+        "nrf_log_frontend_std_0": [
+          48
+        ],
+        "osKernelGetTickCount": [
+          88
+        ],
+        "nrf_log_frontend_std_2": [
+          48
+        ],
+        "r1_sensor_stream_unregister_by_name": [
+          88
+        ]
+      },
+      "C": {
+        "r1_event_service_0008b028": [
+          48
+        ],
+        "__aeabi_memclr": [
+          48
+        ],
+        "r1_structured_log_mode_get": [
+          64,
+          80
+        ],
+        "r1_structured_log_format": [
+          64,
+          80
+        ],
+        "nrf_log_frontend_std_0": [
+          48
+        ],
+        "osKernelGetTickCount": [
+          80
+        ],
+        "nrf_log_frontend_std_2": [
+          48
+        ],
+        "r1_sensor_stream_unregister_by_name": [
+          88
+        ]
+      }
+    },
+    "limits": [
+      "Actual C statistics/on/off/range executed; clear/multicast/tick/register/unregister/mode/log providers modeled",
+      "Fresh mode and sleep reads, changing providers, unaligned packet counts, ignored length and null early return covered",
+      "Public state/args/boolean R0 compared; preserved registers/SP/masks/FPSCR checked",
+      "Void callback R0, caller-clobbered registers/APSR/private stack excluded",
+      "No physical/concurrent execution proof"
+    ]
+  },
+  "focused_signaling_comparisons": {
+    "native_VCMPE_C_helper_comparisons": 131712,
+    "input_bit_patterns": 2058,
+    "FPSCR_configurations": 32,
+    "actual_compiled_helper_bodies": true,
+    "independent_native_NZCV_predicate": true,
+    "all_result_bits_FPSCR_saved_registers_SP_masks_match": true,
+    "Cortex_M4": true,
+    "FP_context_primed": true
+  },
+  "compiled_defects_rejected": [
+    {
+      "defect": "on-quiet-comparison",
+      "rejected": true
+    },
+    {
+      "defect": "on-inclusive-variance",
+      "rejected": true
+    },
+    {
+      "defect": "on-inclusive-range",
+      "rejected": true
+    },
+    {
+      "defect": "on-optical-equality",
+      "rejected": true
+    },
+    {
+      "defect": "on-lost-mode-store",
+      "rejected": true
+    },
+    {
+      "defect": "on-cached-history",
+      "rejected": true
+    },
+    {
+      "defect": "off-quiet-comparison",
+      "rejected": true
+    },
+    {
+      "defect": "off-inclusive-variance",
+      "rejected": true
+    },
+    {
+      "defect": "off-lost-conversion",
+      "rejected": true
+    },
+    {
+      "defect": "off-unsigned-conversion",
+      "rejected": true
+    },
+    {
+      "defect": "off-early-handle-clear",
+      "rejected": true
+    },
+    {
+      "defect": "off-ir-wrap",
+      "rejected": true
+    },
+    {
+      "defect": "off-quiet-wrap",
+      "rejected": true
+    },
+    {
+      "defect": "off-age-equality",
+      "rejected": true
+    }
+  ],
+  "contract": [
+    "Keep both wear decisions in C, preserving original optical/history thresholds, wrapping counters, live provider/state reads, log arguments, register/unregister timing and mode changes.",
+    "Use ordinary C greater-than2000 and less-than40 comparisons with the established GCC9 strict signaling/rounding/trapping flags. Compiled helpers emit native signaling VCMPE and preserve exact FPSCR effects for quiet/signaling NaNs, flushed subnormals and preset flags.",
+    "Wear-off reuses r1_native_float_to_signed32 rather than a second conversion body. The conversion executes before logging decisions even when logging is disabled, preserving result/FPSCR effects after provider mutation."
+  ],
+  "limits": [
+    "All774 native decision instruction bytes execute in the full parent corpora. Direct tests compare state and write width/order/value, provider arguments/snapshots, logical invalid accesses and full FPSCR. The actual C range provider is included.",
+    "The1688-case motion pipeline executes actual C coordination, statistics, both decisions, range and conversion. Clear/multicast/tick/register/unregister/log providers remain modeled. Source execution cannot enter stock code; modeled calls return through BX LR stubs.",
+    "The focused131712 comparisons execute the actual compiled static helpers against the native VCMPE instruction and an independent NZCV predicate, across2058 binary32 patterns and32 FPSCR configurations.",
+    "Cortex-M4 is selected explicitly. FP context is initialized before assigning FPSCR; cold-FPU/task-context activation, physical execution and concurrency remain unproven.",
+    "Saved integer/FP registers, SP, masks and guards checked on normal return. Caller scratch, APSR, void return values, fault PC and private frames excluded. The pipeline compares public state and modeled boundary arguments rather than private scratch addresses.",
+    "The two manifest units switch from Clang to the existing license-free GCC9 FP profile; all other nongenerated objects, existing conversion/range/statistics bodies and writable state remain unchanged. No new imports or RAM ownership.",
+    "Final executable linking/startup, remaining hardware dependencies, sensor delivery and boot remain open. Relocatable composition is not bootable firmware; instruction or image identity is not claimed."
+  ],
+  "evidence_files": {
+    "build/sources-goal-r1-wear-decisions-pure-c/report.json": "2a6db420ea6dfe3fc31f24bed383259b9003c6f8b502587f2d0cb7cbba17e8e1",
+    "build/sources-goal-r1-goodix-algorithm-shutdown-c/report.json": "de04beb8daf1288807bb5c327efffe1fc2e4fc789a53ecdd285ce91b4a8b0134",
+    "r1/src/sources.json": "af7b29173bb17171338f75389205cff349014aba919181bdfc422786a00ff23c",
+    "tools/build/source-plan.json": "eeb516e31b3310fb0718f36908977f8125723f7c5e0e86cd6744395826259a4d",
+    "r1/src/config/runtime/native_health_cache.ld": "eb8f131c489cd818d4e36718718fa1989719ca0170f164541a1a5bf56dfc1ec3",
+    "r1/src/application/runtime/native_float_to_signed.h": "e14be1a03afabfd5736fa4f68cf25cc5416907548123652796c3a5265bb0507d",
+    "r1/docs/reference/FUNCTION-OWNERSHIP.csv": "296930be48d4a6c88a0df9e2521ae8bf58e7ae15c8ffc68dcde6d8fce44fdc0a",
+    "r1/symbols/function-frontier.csv": "d0c96fd28c25378ba5494ab3b3ec77a8d7099c9384c01476e54183532e42cf87",
+    "r1/docs/reference/wear-on-c-review.md": "51f305d1cdd35d2a1e4e5f5fa1856c22731e177f60f32fdaa7a6b6610ce3426e",
+    "r1/docs/reference/wear-off-c-review.md": "6de58fece4476c9bca87980c6ec3c95cd767a2b59794e1a1d54412af2e5abe3a",
+    "r1/src/application/runtime/native_wear_on_decision.c": "41bb3d8d481aaec235afacb2d714e47baa5a8ff8f52c89386012dc4b3ffd82f0",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-wear-decisions-pure-c/r1/r1-application/r1__src__application__runtime__native_wear_on_decision.c.o": "142243f0244a906f455026fed504e9778f280c9364355a5f9153036e1caad028",
+    "r1/src/application/runtime/native_wear_off_decision.c": "ef4a1d327580802b2408c2e27ced91367e26d3fa4763b1f207cb9a74ab2b3673",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-wear-decisions-pure-c/r1/r1-application/r1__src__application__runtime__native_wear_off_decision.c.o": "948fed3ea862a681f8fdf07290530de3eb1d47a9ed5a9771a81f7cd033adff25",
+    "r1/src/application/runtime/native_wear_motion.c": "a1f6f38405696cc28fcba33c7e6b35ae676e36273acbcf8c58fd94e1bd659142",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-wear-decisions-pure-c/r1/r1-application/r1__src__application__runtime__native_wear_motion.c.o": "fb4d3a539a00069c10fbb8378df477fa51f25d711a082253c5acc38ffbddf094",
+    "r1/src/application/runtime/native_wear_motion_statistics.c": "dca38b1a3bca4584ae7b47e19f6a4818b52f7ec5938ef127785be2af33d3cfdf",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-wear-decisions-pure-c/r1/r1-application/r1__src__application__runtime__native_wear_motion_statistics.c.o": "89629db23c5484909d7464f45ca561d072db8597f981e4cc1468bef87b8e1d69",
+    "r1/src/application/runtime/native_wear_history_range.c": "7821a6c433aba0d737a968ae3a3e5a51ebc63accd25e67262e144d6e5ca3122d",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-wear-decisions-pure-c/r1/r1-application/r1__src__application__runtime__native_wear_history_range.c.o": "b095e0d25a9073c1766147c2004d7dac34533e7d13e9699679d5409b77807f8d",
+    "r1/src/application/runtime/native_float_to_signed.c": "fc85bde60ab9c43327f9d9c537925a38886ddb6a7a83f351cc47d814e84b1107",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-wear-decisions-pure-c/r1/r1-application/r1__src__application__runtime__native_float_to_signed.c.o": "2d87b400633338ca1f11fffb4bad2ef8b55221eb4c34f08a8d6724078ba511e0",
+    "build/goal-r1-wear-decisions-pure-c/audit.json": "d0ee1fb0407ae9e1e554e117517323d4168c6cca16673d41d911775db5e64cf0",
+    "build/goal-r1-wear-decisions-pure-c/audit.py": "36d1f108914c2b8dd19a51ebe3235013e9c3253ca4e18946d4d0522df93c702a",
+    "build/goal-r1-wear-decisions-pure-c/focused.py": "6f9b592b16a313de7838632f29c8faae51e20ac41f809ef496a73ae9e89ebeff",
+    "build/goal-r1-wear-decisions-pure-c/off.py": "d8ecc93c57767761b731f76edc0a8313da6f6dc804fea7561b7b24f60270896d",
+    "build/goal-r1-wear-decisions-pure-c/negative.py": "ab53301da9c59607c1c21e79b92c38bbb62bef0e4a267cf8e6276d969d29e176",
+    "build/goal-r1-wear-decisions-pure-c/chain.py": "7dcda1ef6ee638df4909c2d2263166043eab2d9e3ff843f1a1109a148bc404ba",
+    "build/goal-r1-wear-decisions-pure-c/on.py": "f29fece335eb227f30c1f1851b9451878c2bbb2de9d5da8836b91a69b98b0caa",
+    "build/goal-r1-wear-decisions-pure-c/negative.log": "d6a331a29c31175712273a7a01e884de3287eba105cf7e9c3514deeca0920fdd",
+    "build/goal-r1-wear-decisions-pure-c/negative-results.json": "76e39158772f65794d5ca9d64df8e4bff7244c34bfa7c75df2f0e3085bf04e99",
+    "build/goal-r1-wear-decisions-pure-c/chain.log": "3303c84f5eec78aad4479244d2c6806cd652f3ce40ea148578021248fce530c1",
+    "build/goal-r1-wear-decisions-pure-c/native_wear_on_decision.c.before": "d5d8f58052716b2b386bfe4c592582ca5ded85e972f4234a9fab14d061bd93b3",
+    "build/goal-r1-wear-decisions-pure-c/on.o": "142243f0244a906f455026fed504e9778f280c9364355a5f9153036e1caad028",
+    "build/goal-r1-wear-decisions-pure-c/rea-bytes.json": "524d2e47eb514695b7fba09bf1cbfc69aec60bbf1f49ff5bbf55c9d63a6ac8dd",
+    "build/goal-r1-wear-decisions-pure-c/manifest-before.json": "acdb89888bb7f2c5841b8a23518b8caefe5203bf20e92f49eec72f0fcd71efd1",
+    "build/goal-r1-wear-decisions-pure-c/native_wear_off_decision.c.before": "5afe11d49a5c37e9ceb8d0cc8a007dfde64dceffed01acf031780180f18bc35a",
+    "build/goal-r1-wear-decisions-pure-c/on.log": "06c5918e0af3b41608cbe00a476ca3ad7a6bd40292c958dd16e24ce1efa17e16",
+    "build/goal-r1-wear-decisions-pure-c/off.o": "948fed3ea862a681f8fdf07290530de3eb1d47a9ed5a9771a81f7cd033adff25",
+    "build/goal-r1-wear-decisions-pure-c/focused-results.json": "cde496d53d8fe115681aa5582f17feb4ef3e3ff7980f4ce5fe3a6b207712c3f6",
+    "build/goal-r1-wear-decisions-pure-c/focused.log": "252c7641fa69d854397e7a9ce66174f71490e7402e32f918049dfd3bd9884c79",
+    "build/goal-r1-wear-decisions-pure-c/off.log": "8109fff597bb6d293cc3a1c81c2fe447cde6a4dcd597e2b78124b652b021a835",
+    "build/goal-r1-wear-decisions-pure-c/build.log": "749c0bef08e5b70bb0bdb96b66817d55905dc7aa05cd01b207710df4fa4abacd",
+    "build/goal-r1-wear-decisions-pure-c/negative-off-age-equality/test.ld": "8b340983d96f636dbeb4fad7589dbf8659fd08730598ea95d54e4bb696ee6041",
+    "build/goal-r1-wear-decisions-pure-c/negative-off-age-equality/source.o": "873f4681d88d549b535d1d3272496b553c4215931dda334861c6aad3af99918c",
+    "build/goal-r1-wear-decisions-pure-c/negative-off-age-equality/mutant.elf": "925d227d5cacc5eb2221c65d1c7d6b005efe27b3cace4dc30074fd7158b6e08e",
+    "build/goal-r1-wear-decisions-pure-c/negative-off-age-equality/log": "eb6c9137592972fae480637f75ccf99f2d0c57c63f144a01d5fb64d706d2ca0c",
+    "build/goal-r1-wear-decisions-pure-c/negative-off-age-equality/source.c": "97136d6e3ad623071f93da1052896b15bae4d9165c7c1e486f73aeb417a9632a",
+    "build/goal-r1-wear-decisions-pure-c/negative-on-quiet-comparison/test.ld": "fb0189cf85ac0e7eda378887b832d424d977e929724d6a0295a8f11a369c5db2",
+    "build/goal-r1-wear-decisions-pure-c/negative-on-quiet-comparison/source.o": "42d40bf315c4cd130da4e1568302a9121ee289c63e7a025b8a516a45c5faf7de",
+    "build/goal-r1-wear-decisions-pure-c/negative-on-quiet-comparison/mutant.elf": "baf2c9d1f53726015039b5db27a96cb950613106af473b43e35f0cdae9d45420",
+    "build/goal-r1-wear-decisions-pure-c/negative-on-quiet-comparison/log": "a3108a3df8225798396073c058fded75f89437e3fdf29317c68abdb617948dc8",
+    "build/goal-r1-wear-decisions-pure-c/negative-on-quiet-comparison/source.c": "e7363269b10d3d2aa8617affcb58798c1bb30b5e29f43aac5c4af0287873816f",
+    "build/goal-r1-wear-decisions-pure-c/negative-off-lost-conversion/test.ld": "8b340983d96f636dbeb4fad7589dbf8659fd08730598ea95d54e4bb696ee6041",
+    "build/goal-r1-wear-decisions-pure-c/negative-off-lost-conversion/source.o": "41566e331b9cbae84b9cbff427057ec6103c79f79346629c2b846b249d8f22a7",
+    "build/goal-r1-wear-decisions-pure-c/negative-off-lost-conversion/mutant.elf": "3b4b31e28dde4d8fe0174d42c97c0fedc98161a8df2a435b4ecd811cd24963e7",
+    "build/goal-r1-wear-decisions-pure-c/negative-off-lost-conversion/log": "a6d6a4bee66cae50dbc834ef34e44716c1d415c7e6434d30fd966bab282c295c",
+    "build/goal-r1-wear-decisions-pure-c/negative-off-lost-conversion/source.c": "fbd7bd892433e2aa14c68a0ec488f11d14c9284c23545fd03dc349d525673995",
+    "build/goal-r1-wear-decisions-pure-c/negative-off-quiet-comparison/test.ld": "8b340983d96f636dbeb4fad7589dbf8659fd08730598ea95d54e4bb696ee6041",
+    "build/goal-r1-wear-decisions-pure-c/negative-off-quiet-comparison/source.o": "38c4e2d2d387c46e84ab464dee87a1468062a8fd46a34c625aff10f06a4ab264",
+    "build/goal-r1-wear-decisions-pure-c/negative-off-quiet-comparison/mutant.elf": "e07ee0f1ddbd8c51e1454e2caede06b423f0c7e31891304b912ed1317c20f446",
+    "build/goal-r1-wear-decisions-pure-c/negative-off-quiet-comparison/log": "2dc469fb202231aa6b4c4c043a2e7033b61c1b635ecda3033af5495a916ba8e3",
+    "build/goal-r1-wear-decisions-pure-c/negative-off-quiet-comparison/source.c": "45edf18afef06d9fbaec367f5b4b46f47cbb981d980013718ae0cb38a77ddaae",
+    "build/goal-r1-wear-decisions-pure-c/negative-off-inclusive-variance/test.ld": "8b340983d96f636dbeb4fad7589dbf8659fd08730598ea95d54e4bb696ee6041",
+    "build/goal-r1-wear-decisions-pure-c/negative-off-inclusive-variance/source.o": "d70f9edd55f086c77b1f85768347cec83b3c9b7dd1c9aa3a9fc04b253d8fafed",
+    "build/goal-r1-wear-decisions-pure-c/negative-off-inclusive-variance/mutant.elf": "6a8f110b52d6156f1cd7dc069a0e5bbc4ea49ee890644dd32de7dcafe8c6800a",
+    "build/goal-r1-wear-decisions-pure-c/negative-off-inclusive-variance/log": "b1a68a12f508d200300135d7ff7f713616bf62c1d8c3bd7b0fa6d6cd27099d92",
+    "build/goal-r1-wear-decisions-pure-c/negative-off-inclusive-variance/source.c": "42561017d85a87173165d2a3f7c033dbd179250918e750625aa0fa2172553179",
+    "build/goal-r1-wear-decisions-pure-c/negative-off-ir-wrap/test.ld": "8b340983d96f636dbeb4fad7589dbf8659fd08730598ea95d54e4bb696ee6041",
+    "build/goal-r1-wear-decisions-pure-c/negative-off-ir-wrap/source.o": "e3396abd61a09f1bdcab91c410f907f85248f8dac2a1f6a71b163f83096e2b74",
+    "build/goal-r1-wear-decisions-pure-c/negative-off-ir-wrap/mutant.elf": "8fff37ad73de5e3796d411b0492153d765eecdddeb6377c84ae72cade92e0d8f",
+    "build/goal-r1-wear-decisions-pure-c/negative-off-ir-wrap/log": "955ae966c514697d8608db6ba3c349d70e91248f69014cfd1064ca4002429e55",
+    "build/goal-r1-wear-decisions-pure-c/negative-off-ir-wrap/source.c": "20a52350416ea85c8bb8eb4e83f560b6f7e3d4222b8721e6c75aaaa971082ae3",
+    "build/goal-r1-wear-decisions-pure-c/chain/test.ld": "f104e4c655be121a32289916f92466ad2e5dba155bbc421e3b94cad277cef6e3",
+    "build/goal-r1-wear-decisions-pure-c/chain/source.elf": "c5372a2bbb299a7d7932019ea4f91be4c52d171055351090b66ae0c8fb4e0ee4",
+    "build/goal-r1-wear-decisions-pure-c/chain/results.json": "baaca6a60105b689dcc69d0bf36031b66840f55be218e8ace6fee99797fbe2ff",
+    "build/goal-r1-wear-decisions-pure-c/negative-on-cached-history/test.ld": "fb0189cf85ac0e7eda378887b832d424d977e929724d6a0295a8f11a369c5db2",
+    "build/goal-r1-wear-decisions-pure-c/negative-on-cached-history/source.o": "9a524f2dd069d826a367665b3ba2c2327cf7e7bc954de3b279f010d91ee6302b",
+    "build/goal-r1-wear-decisions-pure-c/negative-on-cached-history/mutant.elf": "91fb0c87d804b926bae97b643063fe9f1eb36e1736200d7712b4655d0f34bf14",
+    "build/goal-r1-wear-decisions-pure-c/negative-on-cached-history/log": "30014f02ea23cd0fb648b1d75cfd50a47691d0a86f8d9d00c484c1e8d5fe6dad",
+    "build/goal-r1-wear-decisions-pure-c/negative-on-cached-history/source.c": "44e088e3b556f32111400fb3b3ac01a3d9edf5bbb3ba2eabfc3ec29f4a2ba6b3",
+    "build/goal-r1-wear-decisions-pure-c/negative-off-early-handle-clear/test.ld": "8b340983d96f636dbeb4fad7589dbf8659fd08730598ea95d54e4bb696ee6041",
+    "build/goal-r1-wear-decisions-pure-c/negative-off-early-handle-clear/source.o": "552a5de89f5fd0ef27fa40e76b3d1d55c4426faf7bd4ec39aa9318eacc3eadc5",
+    "build/goal-r1-wear-decisions-pure-c/negative-off-early-handle-clear/mutant.elf": "c59739a83436d9e5a4da42a1704a4afb26eef2629abc020cf15f038ae2faea99",
+    "build/goal-r1-wear-decisions-pure-c/negative-off-early-handle-clear/log": "3f3de839891426319be4867ab8828678be2909fc5f33a6b58ed0b325d843e195",
+    "build/goal-r1-wear-decisions-pure-c/negative-off-early-handle-clear/source.c": "1096d969ec01c27845f3046ba9dbe3c4ca9bea380534f945dd9e78ee8b6dd36a",
+    "build/goal-r1-wear-decisions-pure-c/negative-on-lost-mode-store/test.ld": "fb0189cf85ac0e7eda378887b832d424d977e929724d6a0295a8f11a369c5db2",
+    "build/goal-r1-wear-decisions-pure-c/negative-on-lost-mode-store/source.o": "251579725a52d43cc0b7d7f944c16f534ab4e67f46490db39c402dbd7c84e27e",
+    "build/goal-r1-wear-decisions-pure-c/negative-on-lost-mode-store/mutant.elf": "5fe30fced72d00c8c24e842d11b182ba168f6b8c1e331d7eb3b777ef3f7b852f",
+    "build/goal-r1-wear-decisions-pure-c/negative-on-lost-mode-store/log": "e7cfde5eb43ce994fef3c366b107e1e9f9374152cafe18cf1585de897e65a031",
+    "build/goal-r1-wear-decisions-pure-c/negative-on-lost-mode-store/source.c": "6df2756f703277f7fca81b7b6f2eed9f0f6718209ff6d63b715933edb86c4678",
+    "build/goal-r1-wear-decisions-pure-c/negative-on-inclusive-range/test.ld": "fb0189cf85ac0e7eda378887b832d424d977e929724d6a0295a8f11a369c5db2",
+    "build/goal-r1-wear-decisions-pure-c/negative-on-inclusive-range/source.o": "590819738469173f7c89d27f6dfb2e2328fc4c5e9b3375958d97fdac83d54330",
+    "build/goal-r1-wear-decisions-pure-c/negative-on-inclusive-range/mutant.elf": "134361c94e3ac980d69ee722e8142db225faef1aa8b66008e51b9e6ed3a1343b",
+    "build/goal-r1-wear-decisions-pure-c/negative-on-inclusive-range/log": "b94f22318839478538b55255dd1fd2c92dd9ed049d30039b0e4f5efa4a54526a",
+    "build/goal-r1-wear-decisions-pure-c/negative-on-inclusive-range/source.c": "d35e444158d514041627a32d8f3cd558c5701ab033e94739057364f0652c28dc",
+    "build/goal-r1-wear-decisions-pure-c/negative-on-optical-equality/test.ld": "fb0189cf85ac0e7eda378887b832d424d977e929724d6a0295a8f11a369c5db2",
+    "build/goal-r1-wear-decisions-pure-c/negative-on-optical-equality/source.o": "42c7f7683f39597a3186d683b8def186c48e81550d5f05bfc3f4c90ca4375aeb",
+    "build/goal-r1-wear-decisions-pure-c/negative-on-optical-equality/mutant.elf": "4ce6bfa967d1756d85cfeef4e39e8df878b217d9ad97b62de26ba3290221f92e",
+    "build/goal-r1-wear-decisions-pure-c/negative-on-optical-equality/log": "fd7aa1c294fbdeaf615c1414cef75fdeef1de182b286b93da3868baa4f277d27",
+    "build/goal-r1-wear-decisions-pure-c/negative-on-optical-equality/source.c": "5b7857402659fa097f07bf9336aeac06d547b6152305875b44d34d8d3b87738d",
+    "build/goal-r1-wear-decisions-pure-c/negative-off-quiet-wrap/test.ld": "8b340983d96f636dbeb4fad7589dbf8659fd08730598ea95d54e4bb696ee6041",
+    "build/goal-r1-wear-decisions-pure-c/negative-off-quiet-wrap/source.o": "c3e36903188287ede365998d39f4186a931702b81c8c9bd8b8077a338e37d185",
+    "build/goal-r1-wear-decisions-pure-c/negative-off-quiet-wrap/mutant.elf": "bd327bfe5c19143d1b2c058b066c8c88f42998d3d159ddcfecea233baf0d4384",
+    "build/goal-r1-wear-decisions-pure-c/negative-off-quiet-wrap/log": "61e392b62f2130981910f8c4b3ba4bc140dc6de508531c0626893e2f8fcdde55",
+    "build/goal-r1-wear-decisions-pure-c/negative-off-quiet-wrap/source.c": "d2a9f18b1a08763de9421cbea3e564a5034a783e9101574368c77d9800b2adf5",
+    "build/goal-r1-wear-decisions-pure-c/on/test.ld": "fb0189cf85ac0e7eda378887b832d424d977e929724d6a0295a8f11a369c5db2",
+    "build/goal-r1-wear-decisions-pure-c/on/source.elf": "e235331b1362a1cc50ca9258e4e2fd96a155487a4dfc92e627cd9037424b9209",
+    "build/goal-r1-wear-decisions-pure-c/on/results.json": "27b17c7b558f7bd604955f5176d674d8f6c3f9ea95e4e1273e9b4b376cad922b",
+    "build/goal-r1-wear-decisions-pure-c/negative-off-unsigned-conversion/test.ld": "8b340983d96f636dbeb4fad7589dbf8659fd08730598ea95d54e4bb696ee6041",
+    "build/goal-r1-wear-decisions-pure-c/negative-off-unsigned-conversion/source.o": "f9c471060f55b703966b4f35634d0fb3f1b4c490e85d842f80941759cb383fcf",
+    "build/goal-r1-wear-decisions-pure-c/negative-off-unsigned-conversion/mutant.elf": "04eb942ed8b04c036638763eed4c3b93bf98921e95e245408883d688d5c0120d",
+    "build/goal-r1-wear-decisions-pure-c/negative-off-unsigned-conversion/log": "c30930177d825bbe1c8ba7acc3dcc2e946974502986f6bb36dbcea9420d821bd",
+    "build/goal-r1-wear-decisions-pure-c/negative-off-unsigned-conversion/source.c": "cbccd0feb8f9f9f24212a689b2d854fe8042af575e73a379efaf437679096aff",
+    "build/goal-r1-wear-decisions-pure-c/negative-on-inclusive-variance/test.ld": "fb0189cf85ac0e7eda378887b832d424d977e929724d6a0295a8f11a369c5db2",
+    "build/goal-r1-wear-decisions-pure-c/negative-on-inclusive-variance/source.o": "451721ea05de5482357c90e0fde5844cd50c2f40cb216025b63403ad16916a74",
+    "build/goal-r1-wear-decisions-pure-c/negative-on-inclusive-variance/mutant.elf": "4f267bf82242e9a02bfab630762f60632587236321f36a14eede189878a9dfe7",
+    "build/goal-r1-wear-decisions-pure-c/negative-on-inclusive-variance/log": "e7210f4cf954dd4ca0bfc10b327cf5456dcf2528886b3eb3ad2997d1f9d2e3ea",
+    "build/goal-r1-wear-decisions-pure-c/negative-on-inclusive-variance/source.c": "c6c0f565c2eb679a96ac56be87cd80f84025bb227a52a5e5dc7204531e1c8865",
+    "build/goal-r1-wear-decisions-pure-c/off/test.ld": "8b340983d96f636dbeb4fad7589dbf8659fd08730598ea95d54e4bb696ee6041",
+    "build/goal-r1-wear-decisions-pure-c/off/source.elf": "b25851845369f8d395b1e226e294128c19c36ddac4959ef7f9503317b0c42ab2",
+    "build/goal-r1-wear-decisions-pure-c/off/results.json": "0185ed6d8630f45cbe37ef1b4c5dc68bfe7b4e3af43f60a14d24451299d7e50f"
+  }
+}

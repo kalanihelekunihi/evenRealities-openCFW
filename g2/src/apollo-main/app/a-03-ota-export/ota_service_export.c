@@ -86,8 +86,6 @@ extern void *file_open(const char *path, const char *mode);                 /* 0
 extern int32_t file_close(void *file);                                      /* 0x4745f4 */
 extern uint32_t file_read(void *buffer, uint32_t size, uint32_t count, void *file); /* 0x474634 */
 extern int32_t file_seek(void *file, int32_t offset, int32_t origin);       /* 0x474814 */
-extern uint64_t audio_uart_ring_u64_div_47cc60(uint32_t low, uint32_t high,
-                                               uint32_t divisor_low, uint32_t divisor_high);
 extern void audio_uart_buffer_zero(void *dst, uint32_t len, uint32_t fill); /* 0x43c0e4 */
 extern void audio_uart_checksum_copy(void *dst, const void *src, uint32_t len); /* 0x439be4 */
 extern uint32_t audio_log_flags(void);                                      /* 0x43d0ce */
@@ -232,8 +230,7 @@ static void export_next_chunk(g2_ota_export_t *xfer)
     _evenOtaReplyToAPP(OTA_CMD_EXPORT, 1u, 0u);
     if (xfer->file_size != 0u) {
         uint64_t scaled = (uint64_t)xfer->sent_total * 100u;
-        xfer->progress = (uint8_t)audio_uart_ring_u64_div_47cc60((uint32_t)scaled, (uint32_t)(scaled >> 32),
-                                                                 xfer->file_size, 0u);
+        xfer->progress = (uint8_t)(scaled / xfer->file_size);
     }
     g2_ota_last_tick = osKernelGetTickCount();
     OTA_LOG(export_fn, 4u, 0x726u, 0x10c00000u,

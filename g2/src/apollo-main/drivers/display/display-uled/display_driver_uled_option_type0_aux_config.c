@@ -13,18 +13,18 @@ void display_driver_uled_type0_aux_config_592e9c(uint32_t first,
                                                    uint32_t second,
                                                    uint32_t third) {
     uint32_t mode=display_driver_uled_mode_45a568() & 255u;
-    const char *kind=(const char *)(uintptr_t)(mode==1u ? 0x593080u :
-                              mode==2u ? 0x593084u : 0x593088u);
+    const char *kind=mode==1u ? "R" /* stock 0x593080 */ :
+                     mode==2u ? "L" /* stock 0x593084 */ : "?" /* stock 0x593088 */;
     if (g2_flashdb_candidate_flags() & 2u)
-        g2_flashdb_candidate_log(3u,(const char *)(uintptr_t)0x785c90u,
-            (const char *)(uintptr_t)0x6f313cu,
-            (const char *)(uintptr_t)0x74986cu,0x23cu,
-            (const char *)(uintptr_t)0x728f74u,kind,first,second,third);
+        g2_flashdb_candidate_log(3u,"driver.jbd4010" /* stock 0x785c90 */,
+            "D:\\01_workspace\\s200_ap510b_iar_git\\driver\\uled\\jbd4010\\drv_mspi_jbd4010.c" /* stock 0x6f313c */,
+            "am_devices_mspi_jbd4010_setBrightness" /* stock 0x74986c */,0x23cu,
+            "jbd setBright: eye=%s level=%d lum=%d current=%d" /* stock 0x728f74 */,kind,first,second,third);
     if ((g2_flashdb_candidate_flags() & 1u) ||
         (g2_flashdb_candidate_flags() & 4u))
         (void)audio_log_simple(0x0d000000u,
-            (const char *)(uintptr_t)0x70247cu,
-            (const char *)(uintptr_t)0x70247cu,kind,first,second,third);
+            "[driver.jbd4010]jbd setBright: eye=%s level=%d lum=%d current=%d" /* stock 0x70247c */,
+            "[driver.jbd4010]jbd setBright: eye=%s level=%d lum=%d current=%d" /* stock 0x70247c */,kind,first,second,third);
 
     uint8_t payload[20]={0};
     display_driver_uled_command_5926ee(6u,payload,0u);

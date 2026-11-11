@@ -30,28 +30,15 @@ void audio_ble_dm_sec_slave_req_body(uint32_t connection,uint32_t policy)
 
 extern void audio_ble_slave_security_apply(uint8_t connection); /* opencfw U5: now provided by the Cordio unit */
 
-void audio_ble_slave_security_request_body(uint32_t connection,uint32_t *saved)
+/* Stock 0x46DF7E (_bleSlaveSecReq). The stock epilogue popped spilled
+ * argument words (or their log-argument overwrites) into R0:R1; the only
+ * caller (display_ble_slave_proc_msg.c) declares it void. */
+void audio_ble_slave_security_request(uint8_t id)
 {
-    uint8_t id=(uint8_t)connection;
     if (audio_log_level()&2u) {
-        saved[0]=0x138u;
-        saved[1]=(uint32_t)(uintptr_t)message;
-        saved[2]=id;
         audio_log_extended(4u,module,source,function,0x138u,message,id);
     }
     if ((audio_log_level()&1u)||(audio_log_level()&4u))
         (void)compressed_log_output(0x10400000u,message_short,message_short,id);
     audio_ble_slave_security_apply(id);
-}
-
-/* The native six-word frame returns saved R0/R1, including log overwrites. */
-/* Stock 0x46DF7E (_bleSlaveSecReq) */
-__attribute__((naked)) uint64_t audio_ble_slave_security_request(
-    uint8_t connection __attribute__((unused)),...)
-{
-    __asm__ volatile(
-        "push {r0, r1, r2, r3, r4, lr}\n"
-        "mov r1, sp\n"
-        "bl audio_ble_slave_security_request_body\n"
-        "pop {r0, r1, r2, r3, r4, pc}\n");
 }

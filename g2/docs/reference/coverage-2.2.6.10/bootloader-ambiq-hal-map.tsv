@@ -1,0 +1,116 @@
+# Even bootloader f89a4c46 (0x410000) functions attributed to the AmbiqSuite SDK 5.0.0 RTM HAL
+# (third-party/upstream/ambiqhal-apollo510-sdk5.0.0 @ 392042e, release_sdk5p0p0-5f68a8286b; code-identical to 5.1.0 except MSPI). Paths relative to mcu/apollo510/hal/.
+address	size	stock_tsv_name	upstream_file	upstream_function	confidence	basis
+0x41AC92		(not a tsv row)	mcu/am_hal_sysctrl.c	am_hal_sysctrl_clkmuxrst_pll_fref_update	Strong	source comparison; exercised through the syspll differential (am_hal_syspll_configure path, HALSTATES 0x40008858)
+0x41B8E0	10	(stock row absent)	mcu/am_hal_interrupt.c	am_hal_interrupt_master_enable	Verified	differential: stock vs built upstream, Unicorn, g2/evidence/bootloader-hal-upstream-review.json
+0x41B8EC	10	critical_save	mcu/am_hal_interrupt.c	am_hal_interrupt_master_disable	Verified	differential: stock vs built upstream, Unicorn, g2/evidence/bootloader-hal-upstream-review.json
+0x41B8F8	32	(stock row absent)	am_hal_pwrctrl.c	am_get_pwrctrl	Verified	differential through its callers (upstream static/inline, no out-of-line copy in the build), g2/evidence/bootloader-hal-upstream-review.json (PWRCTRL section)
+0x41B918	60	(stock row absent)	am_hal_pwrctrl.c	TrimVersionGet	Verified	differential through its callers (upstream static/inline, no out-of-line copy in the build), g2/evidence/bootloader-hal-upstream-review.json (PWRCTRL section)
+0x41B954	300	(stock row absent)	am_hal_pwrctrl.c	mcu_hp_lp_switch_sequence	Verified	differential through its callers (upstream static/inline, no out-of-line copy in the build), g2/evidence/bootloader-hal-upstream-review.json (PWRCTRL section)
+0x41BA80	104	(stock row absent)	am_hal_pwrctrl.c	am_hal_pwrctrl_mcu_mode_select	Verified	differential: stock vs built upstream, Unicorn, g2/evidence/bootloader-hal-upstream-review.json (PWRCTRL section)
+0x41BAE8	232	(stock row absent)	am_hal_pwrctrl.c	am_hal_pwrctrl_gpu_mode_select	Verified	differential: stock vs built upstream, Unicorn, g2/evidence/bootloader-hal-upstream-review.json (PWRCTRL section)
+0x41BBD0	450	(stock row absent)	am_hal_pwrctrl.c	am_hal_pwrctrl_mcu_memory_config	Verified	differential: stock vs built upstream, Unicorn, g2/evidence/bootloader-hal-upstream-review.json (PWRCTRL section)
+0x41BD92	82	(stock row absent)	am_hal_pwrctrl.c	am_hal_pwrctrl_rom_enable	Verified	differential: stock vs built upstream, Unicorn, g2/evidence/bootloader-hal-upstream-review.json (PWRCTRL section)
+0x41BDE4	82	(stock row absent)	am_hal_pwrctrl.c	am_hal_pwrctrl_rom_disable	Verified	differential: stock vs built upstream, Unicorn, g2/evidence/bootloader-hal-upstream-review.json (PWRCTRL section)
+0x41BE36	260	(stock row absent)	am_hal_pwrctrl.c	am_hal_pwrctrl_sram_config	Verified	differential: stock vs built upstream, Unicorn, g2/evidence/bootloader-hal-upstream-review.json (PWRCTRL section)
+0x41BF3A	74	(stock row absent)	am_hal_pwrctrl.c	crypto_quiesce	Verified	differential through its callers (upstream static/inline, no out-of-line copy in the build), g2/evidence/bootloader-hal-upstream-review.json (PWRCTRL section)
+0x41BF84	314	(stock row absent)	am_hal_pwrctrl.c	am_hal_pwrctrl_periph_enable	Verified	differential: stock vs built upstream, Unicorn, g2/evidence/bootloader-hal-upstream-review.json (PWRCTRL section)
+0x41C0BE	188	(stock row absent)	am_hal_pwrctrl.c	pwrctrl_periph_disable_msk_check	Verified	differential through its callers (upstream static/inline, no out-of-line copy in the build), g2/evidence/bootloader-hal-upstream-review.json (PWRCTRL section)
+0x41C17A	350	(stock row absent)	am_hal_pwrctrl.c	am_hal_pwrctrl_periph_disable	Verified	differential: stock vs built upstream, Unicorn, g2/evidence/bootloader-hal-upstream-review.json (PWRCTRL section)
+0x41C2D8	72	(stock row absent)	am_hal_pwrctrl.c	am_hal_pwrctrl_periph_enabled	Verified	differential: stock vs built upstream, Unicorn, g2/evidence/bootloader-hal-upstream-review.json (PWRCTRL section)
+0x41C320	404	(stock row absent)	am_hal_pwrctrl.c	pwrctrl_INFO1_populate	Verified	differential through its callers (upstream static/inline, no out-of-line copy in the build), g2/evidence/bootloader-hal-upstream-review.json (PWRCTRL section)
+0x41C4B4	810	(stock row absent)	am_hal_pwrctrl.c	am_hal_pwrctrl_low_power_init	Verified	differential: stock vs built upstream, Unicorn, g2/evidence/bootloader-hal-upstream-review.json (PWRCTRL section)
+0x41C7DE	90	(stock row absent)	am_hal_pwrctrl.c	buck_ldo_override_init	Verified	differential through its callers (upstream static/inline, no out-of-line copy in the build), g2/evidence/bootloader-hal-upstream-review.json (PWRCTRL section)
+0x41C838	52	(stock row absent)	am_hal_pwrctrl.c	buck_ldo_update_override	Verified	differential: stock vs built upstream, Unicorn, g2/evidence/bootloader-hal-upstream-review.json (PWRCTRL section)
+0x41C86C	292	(stock row absent)	am_hal_pwrctrl.c	am_hal_pwrctrl_control	Verified	differential: stock vs built upstream, Unicorn, g2/evidence/bootloader-hal-upstream-review.json (PWRCTRL section)
+0x41C990	58	(stock row absent)	am_hal_pwrctrl.c	am_hal_pwrctrl_settings_restore	Verified	differential: stock vs built upstream, Unicorn, g2/evidence/bootloader-hal-upstream-review.json (PWRCTRL section)
+0x41C9CA	66	(stock row absent)	am_hal_pwrctrl.c	am_hal_pwrctrl_pwrmodctl_cpdlp_config	Verified	differential: stock vs built upstream, Unicorn, g2/evidence/bootloader-hal-upstream-review.json (PWRCTRL section)
+0x41CA0C	32	(stock row absent)	am_hal_pwrctrl.c	am_hal_pwrctrl_pwrmodctl_cpdlp_get	Verified	differential: stock vs built upstream, Unicorn, g2/evidence/bootloader-hal-upstream-review.json (PWRCTRL section)
+0x41CA2C	48	(stock row absent)	am_hal_pwrctrl.c	am_hal_pwrctrl_temp_update	Verified	differential: stock vs built upstream, Unicorn, g2/evidence/bootloader-hal-upstream-review.json (PWRCTRL section)
+0x41CA5C	70	(stock row absent)	am_hal_pwrctrl.c	am_hal_pwrctrl_syspll_enable	Verified	differential: stock vs built upstream, Unicorn, g2/evidence/bootloader-hal-upstream-review.json (PWRCTRL section)
+0x41CAA2	70	(stock row absent)	am_hal_pwrctrl.c	am_hal_pwrctrl_syspll_disable	Verified	differential: stock vs built upstream, Unicorn, g2/evidence/bootloader-hal-upstream-review.json (PWRCTRL section)
+0x41D1C0	92	delay_us	mcu/am_hal_utils.c	am_hal_delay_us	Inferred	stock calls the boot-ROM cycle loop (0x41) where SDK 5.0.0/5.1.0 use the ITCM br_util_delay_cycles; kept as hand code (glue/hal_delay_us_entry.c)
+0x41D21C	42	delay_status_change	mcu/am_hal_utils.c	am_hal_delay_us_status_change	Verified	differential: stock vs built upstream, Unicorn, g2/evidence/bootloader-hal-upstream-review.json
+0x41D246	68	delay_us_status_check	mcu/am_hal_utils.c	am_hal_delay_us_status_check	Verified	differential: stock vs built upstream, Unicorn, g2/evidence/bootloader-hal-upstream-review.json
+0x422468	74	debug_disable	mcu/am_hal_debug.c	am_hal_debug_disable	Inferred	stock tsv name equals an upstream function name; not body-compared
+0x422AD4		(stock row absent)	mcu/am_hal_uart.c (SDK 5.1.0 file)	am_hal_uart_initialize	Verified	differential: stock vs built upstream, Unicorn, g2/evidence/bootloader-hal-upstream-review.json (UART section)
+0x422BA8		(stock row absent)	mcu/am_hal_uart.c (SDK 5.1.0 file)	am_hal_uart_power_control	Verified	differential: stock vs built upstream, Unicorn, g2/evidence/bootloader-hal-upstream-review.json (UART section)
+0x422DC6		(stock row absent)	mcu/am_hal_uart.c (SDK 5.1.0 file)	am_hal_uart_buffer_configure	Verified	differential: stock vs built upstream, Unicorn, g2/evidence/bootloader-hal-upstream-review.json (UART section)
+0x42308E		earliest_complete_opaque_body	mcu/am_hal_uart.c (SDK 5.1.0 file)	am_hal_uart_configure	Verified	differential: stock vs built upstream, Unicorn, g2/evidence/bootloader-hal-upstream-review.json (UART section)
+0x4232C8		(stock row absent)	mcu/am_hal_uart.c (SDK 5.1.0 file)	am_hal_uart_fifo_read	Verified	differential: stock vs built upstream, Unicorn, g2/evidence/bootloader-hal-upstream-review.json (UART section)
+0x4233E8		(stock row absent)	mcu/am_hal_uart.c (SDK 5.1.0 file)	am_hal_uart_transfer	Verified	differential: stock vs built upstream, Unicorn, g2/evidence/bootloader-hal-upstream-review.json (UART section)
+0x4236CE		(stock row absent)	mcu/am_hal_uart.c (SDK 5.1.0 file)	am_hal_uart_interrupt_enable	Verified	differential: stock vs built upstream, Unicorn, g2/evidence/bootloader-hal-upstream-review.json (UART section)
+0x423700		(stock row absent)	mcu/am_hal_uart.c (SDK 5.1.0 file)	am_hal_uart_interrupt_clear	Verified	differential: stock vs built upstream, Unicorn, g2/evidence/bootloader-hal-upstream-review.json (UART section)
+0x42372A		(stock row absent)	mcu/am_hal_uart.c (SDK 5.1.0 file)	am_hal_uart_interrupt_status_get	Verified	differential: stock vs built upstream, Unicorn, g2/evidence/bootloader-hal-upstream-review.json (UART section)
+0x42377C		(stock row absent)	mcu/am_hal_uart.c (SDK 5.1.0 file)	am_hal_uart_interrupt_service	Verified	differential: stock vs built upstream, Unicorn, g2/evidence/bootloader-hal-upstream-review.json (UART section)
+0x423E14	44	stage_two_mode_flags	mcu/am_hal_mspi.c	get_pause_val	Verified	differential: stock vs built upstream, Unicorn, g2/evidence/bootloader-hal-upstream-review.json
+0x423E40	74	mspi_fifo_write	mcu/am_hal_mspi.c	mspi_fifo_write	Verified	differential: stock vs built upstream, Unicorn, g2/evidence/bootloader-hal-upstream-review.json
+0x423E8A	158	mspi_fifo_read	mcu/am_hal_mspi.c	mspi_fifo_read	Verified	differential: stock vs built upstream, Unicorn, g2/evidence/bootloader-hal-upstream-review.json
+0x423F28	44	mspi_cq_init	mcu/am_hal_mspi.c	mspi_cq_init	Verified	differential: stock vs built upstream, Unicorn, g2/evidence/bootloader-hal-upstream-review.json
+0x423F54	58	cq_term	mcu/am_hal_mspi.c	mspi_cq_term	Verified	differential: stock vs built upstream, Unicorn, g2/evidence/bootloader-hal-upstream-review.json
+0x423F8E	30	(stock row absent)	mcu/am_hal_mspi.c	mspi_cq_enable	Verified	differential: stock vs built upstream, Unicorn, g2/evidence/bootloader-hal-upstream-review.json
+0x423FAC	12	cq_disable	mcu/am_hal_mspi.c	mspi_cq_disable	Verified	differential: stock vs built upstream, Unicorn, g2/evidence/bootloader-hal-upstream-review.json
+0x423FB8	134	mspi_cq_pause	mcu/am_hal_mspi.c	mspi_cq_pause	Verified	differential: stock vs built upstream, Unicorn, g2/evidence/bootloader-hal-upstream-review.json
+0x42403E	108	program_dma	mcu/am_hal_mspi.c	program_dma	Verified	differential: stock vs built upstream, Unicorn, g2/evidence/bootloader-hal-upstream-review.json
+0x4240AA	118	sched_hiprio	mcu/am_hal_mspi.c	sched_hiprio	Verified	differential: stock vs built upstream, Unicorn, g2/evidence/bootloader-hal-upstream-review.json
+0x424120	1902	mspi_device_configure	mcu/am_hal_mspi.c	mspi_device_configure	Verified	differential: stock vs built upstream, Unicorn, g2/evidence/bootloader-hal-upstream-review.json
+0x42488E	232	mspi_piomixed_configure	mcu/am_hal_mspi.c	mspi_piomixed_configure	Verified	differential: stock vs built upstream, Unicorn, g2/evidence/bootloader-hal-upstream-review.json
+0x424976	2	mspi_dummy_callback	mcu/am_hal_mspi.c	mspi_dummy_callback	Verified	differential: stock vs built upstream, Unicorn, g2/evidence/bootloader-hal-upstream-review.json
+0x424978	36	mspi_seq_loopback	mcu/am_hal_mspi.c	mspi_seq_loopback	Verified	differential: stock vs built upstream, Unicorn, g2/evidence/bootloader-hal-upstream-review.json
+0x4249A0	120	mspi_clkgen_ctrl	mcu/am_hal_mspi.c	mspi_clkgen_ctrl	Verified	differential: stock vs built upstream, Unicorn, g2/evidence/bootloader-hal-upstream-review.json
+0x424A18	66	mspi_get_xip_off_min_delay	mcu/am_hal_mspi.c	mspi_get_xip_off_min_delay	Verified	differential: stock vs built upstream, Unicorn, g2/evidence/bootloader-hal-upstream-review.json
+0x424A5A	144	am_hal_mspi_initialize	mcu/am_hal_mspi.c	am_hal_mspi_initialize	Verified	differential: stock vs built upstream, Unicorn, g2/evidence/bootloader-hal-upstream-review.json
+0x424AF0	228	am_hal_mspi_configure	mcu/am_hal_mspi.c	am_hal_mspi_configure	Verified	differential: stock vs built upstream, Unicorn, g2/evidence/bootloader-hal-upstream-review.json
+0x424BE4	1154	am_hal_mspi_device_configure	mcu/am_hal_mspi.c	am_hal_mspi_device_configure	Verified	differential: stock vs built upstream, Unicorn, g2/evidence/bootloader-hal-upstream-review.json
+0x425066	138	am_hal_mspi_enable	mcu/am_hal_mspi.c	am_hal_mspi_enable	Verified	differential: stock vs built upstream, Unicorn, g2/evidence/bootloader-hal-upstream-review.json
+0x4250F0	118	am_hal_mspi_disable	mcu/am_hal_mspi.c	am_hal_mspi_disable	Verified	differential: stock vs built upstream, Unicorn, g2/evidence/bootloader-hal-upstream-review.json
+0x42516C	56	am_hal_mspi_deinitialize	mcu/am_hal_mspi.c	am_hal_mspi_deinitialize	Verified	differential: stock vs built upstream, Unicorn, g2/evidence/bootloader-hal-upstream-review.json
+0x4251C0	4384	am_hal_mspi_control	mcu/am_hal_mspi.c	am_hal_mspi_control	Verified	differential: stock vs built upstream, Unicorn, g2/evidence/bootloader-hal-upstream-review.json
+0x4262E0	256	am_hal_mspi_blocking_transfer	mcu/am_hal_mspi.c	am_hal_mspi_blocking_transfer	Verified	differential: stock vs built upstream, Unicorn, g2/evidence/bootloader-hal-upstream-review.json
+0x426450	44	am_hal_mspi_interrupt_enable	mcu/am_hal_mspi.c	am_hal_mspi_interrupt_enable	Verified	differential: stock vs built upstream, Unicorn, g2/evidence/bootloader-hal-upstream-review.json
+0x426484	44	am_hal_mspi_interrupt_disable	mcu/am_hal_mspi.c	am_hal_mspi_interrupt_disable	Verified	differential: stock vs built upstream, Unicorn, g2/evidence/bootloader-hal-upstream-review.json
+0x4264BA	60	am_hal_mspi_interrupt_status_get	mcu/am_hal_mspi.c	am_hal_mspi_interrupt_status_get	Verified	differential: stock vs built upstream, Unicorn, g2/evidence/bootloader-hal-upstream-review.json
+0x426506	48	am_hal_mspi_interrupt_clear	mcu/am_hal_mspi.c	am_hal_mspi_interrupt_clear	Verified	differential: stock vs built upstream, Unicorn, g2/evidence/bootloader-hal-upstream-review.json
+0x426536	712	am_hal_mspi_interrupt_service	mcu/am_hal_mspi.c	am_hal_mspi_interrupt_service	Verified	differential: stock vs built upstream, Unicorn, g2/evidence/bootloader-hal-upstream-review.json
+0x426808	1014	am_hal_mspi_power_control	mcu/am_hal_mspi.c	am_hal_mspi_power_control	Verified	differential: stock vs built upstream, Unicorn, g2/evidence/bootloader-hal-upstream-review.json
+0x426C24	42	clkmgr_hfrc2_uq15_divider_426c24	mcu/am_hal_clkgen.c	am_hal_clkgen_hfrc2adj_ratio_calculate	Verified	differential: stock vs built upstream, Unicorn, g2/evidence/bootloader-hal-upstream-review.json
+0x426C4E	10	clkmgr_hfrc_integer_divider_426c4e	mcu/am_hal_clkgen.c	am_hal_clkgen_hfrcadj_target_calculate	Verified	differential: stock vs built upstream, Unicorn, g2/evidence/bootloader-hal-upstream-review.json
+0x426C58	24	clkgen_hfadj_enable_426c58	mcu/am_hal_clkgen.c	am_hal_clkgen_private_hfrc_force_on	Verified	differential: stock vs built upstream, Unicorn, g2/evidence/bootloader-hal-upstream-review.json
+0x426C72	12	clkgen_hfadj_config_426c72	mcu/am_hal_clkgen.c	am_hal_clkgen_private_hfadj_apply	Verified	differential: stock vs built upstream, Unicorn, g2/evidence/bootloader-hal-upstream-review.json
+0x426C7E	14	clkgen_hfadj_disable_426c7e	mcu/am_hal_clkgen.c	am_hal_clkgen_private_hfadj_disable	Verified	differential: stock vs built upstream, Unicorn, g2/evidence/bootloader-hal-upstream-review.json
+0x426C8C	56	dual_switch_426c8c	mcu/am_hal_clkgen.c	am_hal_clkgen_private_hfrc2_force_on	Verified	differential: stock vs built upstream, Unicorn, g2/evidence/bootloader-hal-upstream-review.json
+0x426CCC	82	clkgen_config_426ccc	mcu/am_hal_clkgen.c	am_hal_clkgen_private_hf2adj_apply	Verified	differential: stock vs built upstream, Unicorn, g2/evidence/bootloader-hal-upstream-review.json
+0x426D1E	14	clkgen_disable_426d1e	mcu/am_hal_clkgen.c	am_hal_clkgen_private_hf2adj_disable	Verified	differential: stock vs built upstream, Unicorn, g2/evidence/bootloader-hal-upstream-review.json
+0x426D48	106	float_gcd_426d48	mcu/am_hal_syspll.c	syspll_config_util_gcd	Verified	differential: stock vs built upstream, Unicorn, g2/evidence/bootloader-syspll-upstream-review.json
+0x426DB4	248	float_ratio_426db4	mcu/am_hal_syspll.c	syspll_config_util_integer_mode_check	Verified	differential: stock vs built upstream, Unicorn, g2/evidence/bootloader-syspll-upstream-review.json
+0x426EAC	190	float_multiplier_426eac	mcu/am_hal_syspll.c	syspll_config_util_fraction_mode_check	Verified	differential: stock vs built upstream, Unicorn, g2/evidence/bootloader-syspll-upstream-review.json
+0x426F6C	198	float_encoding_select_426f6c	mcu/am_hal_syspll.c	am_hal_syspll_config_generate	Verified	differential: stock vs built upstream, Unicorn, g2/evidence/bootloader-syspll-upstream-review.json
+0x427040	268	syspll_min_fvco_427040	mcu/am_hal_syspll.c	am_hal_syspll_config_generate_minFVCO	Verified	differential: stock vs built upstream, Unicorn, g2/evidence/bootloader-syspll-upstream-review.json
+0x427160		bl_syspll_postdiv	mcu/am_hal_syspll.c	am_hal_syspll_config_generate_with_postdiv	Verified	differential: stock vs built upstream, Unicorn, g2/evidence/bootloader-syspll-upstream-review.json
+0x4272AC		bl_syspll_initialize	mcu/am_hal_syspll.c	am_hal_syspll_initialize	Strong	source comparison (handle prefix, magic 0x504C30, power-up call); not separately emulated
+0x427310	80	syspll_deinitialize_427310	mcu/am_hal_syspll.c	am_hal_syspll_deinitialize	Verified	differential: stock vs built upstream, Unicorn, g2/evidence/bootloader-syspll-upstream-review.json
+0x427360	124	syspll_enable_427360	mcu/am_hal_syspll.c	am_hal_syspll_enable	Verified	differential: stock vs built upstream, Unicorn, g2/evidence/bootloader-syspll-upstream-review.json
+0x4273DC	48	syspll_disable_4273dc	mcu/am_hal_syspll.c	am_hal_syspll_disable	Verified	differential: stock vs built upstream, Unicorn, g2/evidence/bootloader-syspll-upstream-review.json
+0x42740C	278	syspll_configure_42740c	mcu/am_hal_syspll.c	am_hal_syspll_configure	Verified	differential: stock vs built upstream, Unicorn, g2/evidence/bootloader-syspll-upstream-review.json
+0x427522	102	syspll_lock_wait_427522	mcu/am_hal_syspll.c	am_hal_syspll_lock_wait	Verified	differential: stock vs built upstream, Unicorn, g2/evidence/bootloader-syspll-upstream-review.json
+0x4275EA	24	queue_init_4275ea	am_hal_queue.c	am_hal_queue_init	Verified	differential: stock vs built upstream, Unicorn, g2/evidence/bootloader-hal-upstream-review.json
+0x427602	94	queue_item_add_427602	am_hal_queue.c	am_hal_queue_item_add	Verified	differential: stock vs built upstream, Unicorn, g2/evidence/bootloader-hal-upstream-review.json
+0x427660	90	queue_item_get_427660	am_hal_queue.c	am_hal_queue_item_get	Verified	differential: stock vs built upstream, Unicorn, g2/evidence/bootloader-hal-upstream-review.json
+0x427754	64	cmdq_update_indices_427754	mcu/am_hal_cmdq.c	update_indices (static)	Verified	differential: stock vs built upstream, Unicorn, g2/evidence/bootloader-hal-upstream-review.json
+0x427794	228	am_hal_cmdq_init	mcu/am_hal_cmdq.c	am_hal_cmdq_init	Verified	differential: stock vs built upstream, Unicorn, g2/evidence/bootloader-hal-upstream-review.json
+0x427878	68	cmdq_enable_427878	mcu/am_hal_cmdq.c	am_hal_cmdq_enable	Verified	differential: stock vs built upstream, Unicorn, g2/evidence/bootloader-hal-upstream-review.json
+0x4278C8	52	cmdq_disable_4278c8	mcu/am_hal_cmdq.c	am_hal_cmdq_disable	Verified	differential: stock vs built upstream, Unicorn, g2/evidence/bootloader-hal-upstream-review.json
+0x42790A	148	cmdq_alloc_block_42790a	mcu/am_hal_cmdq.c	am_hal_cmdq_alloc_block	Verified	differential: stock vs built upstream, Unicorn, g2/evidence/bootloader-hal-upstream-review.json
+0x4279BE	48	cmdq_release_block_4279be	mcu/am_hal_cmdq.c	am_hal_cmdq_release_block	Verified	differential: stock vs built upstream, Unicorn, g2/evidence/bootloader-hal-upstream-review.json
+0x4279F0	92	cmdq_post_block_4279f0	mcu/am_hal_cmdq.c	am_hal_cmdq_post_block	Verified	differential: stock vs built upstream, Unicorn, g2/evidence/bootloader-hal-upstream-review.json
+0x427A56	104	cmdq_get_status_427a56	mcu/am_hal_cmdq.c	am_hal_cmdq_get_status	Verified	differential: stock vs built upstream, Unicorn, g2/evidence/bootloader-hal-upstream-review.json
+0x427AD6	88	cmdq_term_427ad6	mcu/am_hal_cmdq.c	am_hal_cmdq_term	Verified	differential: stock vs built upstream, Unicorn, g2/evidence/bootloader-hal-upstream-review.json
+0x427B38	88	cmdq_error_resume_427b38	mcu/am_hal_cmdq.c	am_hal_cmdq_error_resume	Verified	differential: stock vs built upstream, Unicorn, g2/evidence/bootloader-hal-upstream-review.json
+0x427BAA	88	cmdq_reset_427baa	mcu/am_hal_cmdq.c	am_hal_cmdq_reset	Verified	differential: stock vs built upstream, Unicorn, g2/evidence/bootloader-hal-upstream-review.json
+0x427C12	96	cmdq_post_loop_block_427c12	mcu/am_hal_cmdq.c	am_hal_cmdq_post_loop_block	Verified	differential: stock vs built upstream, Unicorn, g2/evidence/bootloader-hal-upstream-review.json
+0x42A1BC	232	spotmgr_power_ton_adjust_42a1bc	am_hal_spotmgr_pcm2_1.c	spotmgr_power_ton_adjust	Verified	upstream SDK 5.0.0 + 66185cb (+ stock-matching 5.1.0 hunks) built in place of the hand code; SPOTMGR differential 1500/0 in-image and standalone, g2/evidence/bootloader-hal-upstream-review.json (spotmgr)
+0x42A43A	130	spotmgr_temperature_transition_separate_42a43a	am_hal_spotmgr_pcm2_2.c	spotmgr_temperature_transition_separate	Verified	upstream SDK 5.0.0 + 66185cb (+ stock-matching 5.1.0 hunks) built in place of the hand code; SPOTMGR differential 1500/0 in-image and standalone, g2/evidence/bootloader-hal-upstream-review.json (spotmgr)
+0x42A4BC	138	spotmgr_power_trims_update_42a4bc	am_hal_spotmgr_pcm2_1.c	spotmgr_power_trims_update	Verified	upstream SDK 5.0.0 + 66185cb (+ stock-matching 5.1.0 hunks) built in place of the hand code; SPOTMGR differential 1500/0 in-image and standalone, g2/evidence/bootloader-hal-upstream-review.json (spotmgr)
+0x42A550	782	spotmgr_power_state_determine_42a550	am_hal_spotmgr_pcm2_1.c	spotmgr_power_state_determine	Verified	upstream SDK 5.0.0 + 66185cb (+ stock-matching 5.1.0 hunks) built in place of the hand code; SPOTMGR differential 1500/0 in-image and standalone, g2/evidence/bootloader-hal-upstream-review.json (spotmgr)
+0x42A878	758	spotmgr_power_state_update_42a878	am_hal_spotmgr.c	am_hal_spotmgr_power_state_update	Verified	upstream SDK 5.0.0 + 66185cb (+ stock-matching 5.1.0 hunks) built in place of the hand code; SPOTMGR differential 1500/0 in-image and standalone, g2/evidence/bootloader-hal-upstream-review.json (spotmgr)
+0x42ABBC	146	spotmgr_init_42abbc	am_hal_spotmgr.c	am_hal_spotmgr_init	Verified	upstream SDK 5.0.0 + 66185cb (+ stock-matching 5.1.0 hunks) built in place of the hand code; SPOTMGR differential 1500/0 in-image and standalone, g2/evidence/bootloader-hal-upstream-review.json (spotmgr)

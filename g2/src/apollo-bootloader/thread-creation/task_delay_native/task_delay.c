@@ -13,7 +13,7 @@ void opencfw_kernel_delay(uint32_t ticks){
  if(ticks){
   if(W(0x2002716c)){
    (void)opencfw_bl_mask_interrupts();W(UINT32_MAX)=0;
-   for(;;)__asm__ volatile("b .":::"memory");
+   for(;;){ }
   }
   opencfw_bl_scheduler_suspend();opencfw_boot_task_block(ticks,0);
   resumed=opencfw_bl_scheduler_resume();
@@ -25,3 +25,6 @@ int32_t opencfw_cmsis_delay(uint32_t ticks){
  if(ticks)opencfw_kernel_delay(ticks);
  return 0;
 }
+
+/* Stock entry names that reach the provider above directly. */
+__typeof__(opencfw_cmsis_delay) opencfw_bl_task_delay __attribute__((alias("opencfw_cmsis_delay")));

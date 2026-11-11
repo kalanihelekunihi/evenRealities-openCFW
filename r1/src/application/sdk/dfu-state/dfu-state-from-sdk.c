@@ -4,6 +4,7 @@
 #include "nrf_bootloader_info.h"
 static void buttonless_dfu_sdh_state_observer(nrf_sdh_state_evt_t state, void * p_context)
 {
+    (void)p_context;
     if (state == NRF_SDH_EVT_STATE_DISABLED)
     {
         // Softdevice was disabled before going into reset. Inform bootloader to skip CRC on next boot.

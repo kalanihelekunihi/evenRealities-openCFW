@@ -5,7 +5,7 @@ extern uint8_t audio_uart_display_lv_root[];
 extern uint32_t audio_uart_font_bitmap_stride(uint32_t, uint8_t);
 extern uint32_t audio_uart_lv_display_event_44fdbe(void *, uint32_t, void *);
 extern uint32_t audio_uart_lv_area_height_4515a4(const void *);
-extern void audio_uart_lvgl_log(uint32_t, const char *, uint32_t,
+extern void lv_log_add(uint32_t, const char *, uint32_t,
                                 const char *, const char *, ...);
 
 static const char source[] =

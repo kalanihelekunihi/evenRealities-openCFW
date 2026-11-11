@@ -1,4 +1,55 @@
-/* Native calendar frames; symbolic instructions and typed literals only. */
-__attribute__((naked,section(".text.r1_event_service_0008aea4"))) void r1_event_service_0008aea4(void) { __asm__ volatile("NCF_8aea4:\nldr r1, NCF_8aeac\nNCF_8aea6:\nmovs\tr0, #1\nNCF_8aea8:\nstrb\tr0, [r1, #11]\nNCF_8aeaa:\nbx\tlr\nNCF_8aeac:\n.word r1_time_state\n"); }
-__attribute__((naked,section(".text.r1_event_service_0008aeb0"))) void r1_event_service_0008aeb0(void) { __asm__ volatile("NCF_8aeb0:\nstmdb\tsp!, {r4, r5, r6, r7, r8, r9, sl, lr}\nNCF_8aeb4:\nldr r5, NCF_8af38\nNCF_8aeb6:\nmov\tsl, r0\nNCF_8aeb8:\nsub\tsp, #24\nNCF_8aeba:\nldrb\tr0, [r5, #10]\nNCF_8aebc:\nmov\tr4, r1\nNCF_8aebe:\ncmp\tr0, #0\nNCF_8aec0:\nbeq.n NCF_8af2c\nNCF_8aec2:\nmov\tr1, sp\nNCF_8aec4:\nadd\tr0, sp, #4\nNCF_8aec6:\nbl r1_clock_backend_snapshot\nNCF_8aeca:\ncmp\tr0, #0\nNCF_8aecc:\nbeq.n NCF_8af2c\nNCF_8aece:\nldr\tr6, [sp, #4]\nNCF_8aed0:\ncbz r6, NCF_8af32\nNCF_8aed2:\nldr\tr0, [r6, #16]\nNCF_8aed4:\ncbz r0, NCF_8af32\nNCF_8aed6:\nldrsh.w\tr1, [r5, #8]\nNCF_8aeda:\nadd.w\tr0, r5, #12\nNCF_8aede:\nmov\tr9, r0\nNCF_8aee0:\ncmp\tr1, r4\nNCF_8aee2:\nbeq.n NCF_8aeec\nNCF_8aee4:\nstrh\tr4, [r5, #8]\nNCF_8aee6:\nmovs\tr1, #20\nNCF_8aee8:\nbl __aeabi_memclr\nNCF_8aeec:\nldr.w r8, NCF_8af3c\nNCF_8aef0:\nmovs\tr5, #0\nNCF_8aef2:\nldrb.w\tr0, [r8]\nNCF_8aef6:\neors.w\tr7, r0, #1\nNCF_8aefa:\nbeq.n NCF_8af06\nNCF_8aefc:\nldr\tr1, [r6, #8]\nNCF_8aefe:\ncbz r1, NCF_8af06\nNCF_8af00:\nldr\tr0, [sp, #0]\nNCF_8af02:\nblx\tr1\nNCF_8af04:\nmov\tr5, r0\nNCF_8af06:\nldr\tr0, [sp, #4]\nNCF_8af08:\nmov\tr1, r4\nNCF_8af0a:\nldr\tr2, [sp, #0]\nNCF_8af0c:\nldr\tr3, [r0, #16]\nNCF_8af0e:\nmov\tr0, sl\nNCF_8af10:\nblx\tr3\nNCF_8af12:\nmovs\tr4, r0\nNCF_8af14:\nbeq.n NCF_8af2a\nNCF_8af16:\nmovs\tr1, #20\nNCF_8af18:\nmov\tr0, r9\nNCF_8af1a:\nbl __aeabi_memclr\nNCF_8af1e:\ncbz r7, NCF_8af2a\nNCF_8af20:\nmovs\tr1, #1\nNCF_8af22:\nstr.w\tr5, [r8, #4]\nNCF_8af26:\nstrb.w\tr1, [r8]\nNCF_8af2a:\nmov\tr0, r4\nNCF_8af2c:\nadd\tsp, #24\nNCF_8af2e:\nldmia.w\tsp!, {r4, r5, r6, r7, r8, r9, sl, pc}\nNCF_8af32:\nb.n NCF_8af34\nNCF_8af34:\nmovs\tr0, #0\nNCF_8af36:\nb.n NCF_8af2c\nNCF_8af38:\n.word r1_time_state\nNCF_8af3c:\n.word r1_time_registration\n"); }
-__attribute__((naked,section(".text.r1_clock_backend_snapshot"))) void r1_clock_backend_snapshot(void) { __asm__ volatile("NCF_5a990:\nldr r2, NCF_5a9b0\nNCF_5a992:\npush\t{r4, lr}\nNCF_5a994:\nldrb\tr3, [r2, #0]\nNCF_5a996:\nnegs\tr4, r3\nNCF_5a998:\nldr\tr3, [r2, #4]\nNCF_5a99a:\ntst\tr4, r3\nNCF_5a99c:\nbne.n NCF_5a9a2\nNCF_5a99e:\nmovs\tr0, #0\nNCF_5a9a0:\npop\t{r4, pc}\nNCF_5a9a2:\ncbz r0, NCF_5a9a6\nNCF_5a9a4:\nstr\tr3, [r0, #0]\nNCF_5a9a6:\ncbz r1, NCF_5a9ac\nNCF_5a9a8:\nldr\tr0, [r2, #8]\nNCF_5a9aa:\nstr\tr0, [r1, #0]\nNCF_5a9ac:\nmovs\tr0, #1\nNCF_5a9ae:\npop\t{r4, pc}\nNCF_5a9b0:\n.word r1_time_registration+12\n"); }
+/* Native clock-update contracts use ordinary C and the shared clock owners. */
+#include "../../vendor/time_calendar/time_calendar.h"
+#include "../board/native_clock_bootstrap.h"
+#include "../board/native_battery_memory.h"
+extern time_calendar_state r1_time_state;
+extern time_calendar_registration r1_time_registration;
+extern void __aeabi_memclr(void *,uint32_t);
+_Static_assert(offsetof(time_calendar_state,time_update_pending)==11,"native pending flag");
+
+__attribute__((section(".text.r1_event_service_0008aea4")))
+uint32_t r1_event_service_0008aea4(void)
+{
+    ((volatile time_calendar_state *)&r1_time_state)->time_update_pending=1;
+    return 1;
+}
+
+uint32_t r1_event_service_0008aeb0(uint32_t epoch,int32_t offset)
+{
+    volatile uint8_t *state=(volatile uint8_t *)&r1_time_state;
+    volatile uint8_t *registration=(volatile uint8_t *)&r1_time_registration;
+    /* The snapshot exposes these two output slots to the backend. Reload
+     * them after get; the cached pending decision remains independent of
+     * later changes to the shared registration byte. */
+    volatile struct {
+        void *context;
+        const r1_native_clock_ops *ops;
+        uint32_t pending;
+    } frame;
+    if (!state[10]) return 0;
+    if (!r1_clock_backend_snapshot((const r1_native_clock_ops **)&frame.ops,
+            (void **)&frame.context)) return 0;
+    const r1_native_clock_ops *initial_ops=frame.ops;
+    if (!initial_ops || !read32((const volatile uint8_t *)initial_ops+16)) return 0;
+    if ((int32_t)(int16_t)read16(state+8)!=offset) {
+        write16(state+8,(uint32_t)offset);
+        __aeabi_memclr((void *)(uintptr_t)(state+12),20);
+    }
+    uint32_t old_time=0;
+    frame.pending=registration[0]^1u;
+    if (frame.pending) {
+        uint32_t (*get)(void *)=(uint32_t (*)(void *))(uintptr_t)
+            read32((const volatile uint8_t *)initial_ops+8);
+        if (get) old_time=get(frame.context);
+    }
+    int32_t (*update)(uint32_t,int32_t,void *)=frame.ops->prefix.update;
+    uint32_t result=(uint32_t)update(epoch,offset,frame.context);
+    if (result) {
+        __aeabi_memclr((void *)(uintptr_t)(state+12),20);
+        if (frame.pending) {
+            write32(registration+4,old_time);
+            registration[0]=1;
+        }
+    }
+    return result;
+}

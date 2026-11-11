@@ -1,0 +1,114 @@
+{
+  "schema_version": 1,
+  "entries": {
+    "0x590ac": [
+      "r1_log_bin_initialize",
+      258
+    ]
+  },
+  "report": "build/sources-goal-r1-log-init-c/report.json",
+  "report_sha256": "c10e21771178640caf5c8c5ec60e76acb5687ec05c5cace4b058396f33448309",
+  "unit": {
+    "source": "r1/src/application/runtime/native_log_bin_initialize.c",
+    "source_sha256": "bb6cd46c193dc896f84b3bf4ee1a3d788ffeb321e37e0854287ef60f35f6e842",
+    "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-log-init-c/r1/r1-application/r1__src__application__runtime__native_log_bin_initialize.c.o",
+    "object_sha256": "a2d7f564d5db8d2892de2c08e5e11afc1cd4072d5e62979891ab7f628fa63c7d"
+  },
+  "behavior": {
+    "pairs": 2992,
+    "digest": "a4de070d580104fcfd0a82bcd294c368fb33225d33faaffaec3ad05b36ec57f7",
+    "actual_C": "log initialization, sector-ring writer and sector-count accessor",
+    "modeled_boundaries": [
+      "fal_partition_find",
+      "fal_flash_device_find",
+      "r1_structured_log_mode_get",
+      "r1_structured_log_format",
+      "nrf_log_frontend_std_0",
+      "nrf_log_frontend_std_1",
+      "nrf_log_frontend_std_2",
+      "nrf_log_frontend_std_3",
+      "flash read/write/erase callbacks"
+    ],
+    "limits": [
+      "Flash callback return values modeled; marker reads can fail while still writing the marker word",
+      "FAL finders, flash and logging modeled; no physical flash or FAL lookup execution",
+      "Private scratch, caller-clobbered registers and writer return excluded; sector-count return compared",
+      "Zero-divisor native UDIV tested with default DIV_0_TRP clear"
+    ]
+  },
+  "negative_controls": {
+    "wrong-partition-name": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "Realities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 1063, in __hook_code_cb\n    callback(uc, address, size, user_data)\n    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-log-init-c/verify.py\", line 35, in hook\n    if n=='partition':assert text(r0)=='log.bin';out=[text(r0)];result=PART if state['find_partition'] else 0\n                             ^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    "wrong-device-name-offset": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 1063, in __hook_code_cb\n    callback(uc, address, size, user_data)\n    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-log-init-c/verify.py\", line 36, in hook\n    elif n=='device':assert r0==PART+28 and text(r0)=='nor0';out=[text(r0)];result=DRIVER if state['find_device'] else 0\n                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    "missing-failure-partition-clear": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "b7b7b7b7b7b7b7b7b7b7b7b7b7b7b', '0000400000000000']), ('mode', [0], ['7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b007b7bff7b7b7b7b00200220000000007b0000007b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b', '0000400000000000']), ('mode', [0], ['7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b007b7bff7b7b7b7b00200220000000007b0000007b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b', '0000400000000000'])], 'state': ['7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b007b7bff7b7b7b7b00200220000000007b0000007b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b', '0000400000000000'], 'returns': []})\n"
+    },
+    "wrong-initial-offset": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "b7b7b7b7b7b7b7b7b7b7b7b7b7b7b', '0000400000300000']), ('mode', [0], ['7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b017b7b007b7b7b7b0020022000210220000000007b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b', '0000400000300000']), ('mode', [0], ['7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b017b7b007b7b7b7b0020022000210220000000007b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b', '0000400000300000'])], 'state': ['7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b017b7b007b7b7b7b0020022000210220000000007b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b', '0000400000300000'], 'returns': []})\n"
+    },
+    "wrong-erased-marker": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "b7b7b7b7b7b7b7b7b7b7b7b7b7b7b', '0000400000300000']), ('mode', [0], ['7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b017b7b007b7b7b7b0020022000210220000000007b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b', '0000400000300000']), ('mode', [0], ['7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b017b7b007b7b7b7b0020022000210220000000007b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b', '0000400000300000'])], 'state': ['7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b017b7b007b7b7b7b0020022000210220000000007b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b', '0000400000300000'], 'returns': []})\n"
+    },
+    "wrong-selected-sector": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "b7b7b7b7b7b7b7b7b7b7b7b7b7b7b', '0000400000300000']), ('mode', [0], ['7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b017b7b017b7b7b7b0020022000210220000000007b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b', '0000400000300000']), ('mode', [0], ['7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b017b7b017b7b7b7b0020022000210220000000007b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b', '0000400000300000'])], 'state': ['7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b017b7b017b7b7b7b0020022000210220000000007b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b', '0000400000300000'], 'returns': []})\n"
+    },
+    "missing-initialized-flag": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "b7b7b7b7b7b7b7b7b7b7b7b7b7b7b', '0000400000300000']), ('mode', [0], ['7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b007b7b007b7b7b7b0020022000210220000000007b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b', '0000400000300000']), ('mode', [0], ['7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b007b7b007b7b7b7b0020022000210220000000007b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b', '0000400000300000'])], 'state': ['7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b007b7b007b7b7b7b0020022000210220000000007b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b', '0000400000300000'], 'returns': []})\n"
+    },
+    "reset-marker-between-reads": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "896, 4202500], ['7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b017b7b007b7b7b7b0020022000210220000000007b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b', '0000400000300000']), ('log2', [1835011, 'log flash init sector: %d, offset: %d', 0, 0], ['7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b017b7b007b7b7b7b0020022000210220000000007b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b', '0000400000300000'])], 'state': ['7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b017b7b007b7b7b7b0020022000210220000000007b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b', '0000400000300000'], 'returns': []})\n"
+    }
+  },
+  "audit": {
+    "unchanged_prior_objects": 764,
+    "new_units": 1,
+    "imports": {
+      "r1-application": {
+        "added": [],
+        "removed": [
+          "r1_log_bin_initialize"
+        ]
+      },
+      "r1-bootloader": {
+        "added": [],
+        "removed": []
+      }
+    },
+    "reused_owners": [
+      "existing writer owners; no new state"
+    ]
+  },
+  "source_check": "R1 passes: 765 units, 569 source files, 0 not built. Global check flags existing G2 resident_rom_thumb_set.S absent from manifest.",
+  "initialization": "log-writer-initialization.json",
+  "header": {
+    "path": "r1/src/application/runtime/native_log_bin.h",
+    "sha256": "2d4b9b25d69a9520d51c4fbad747aa7e19203ce9d06f9ae675f0c1767e9fe54e"
+  },
+  "rea": [
+    "log-init-c-rea.json"
+  ],
+  "instruction_identity_proven": false,
+  "image_integration_proven": false,
+  "integration_receipts": [
+    "r1/docs/reference/log-chain-review.json"
+  ]
+}

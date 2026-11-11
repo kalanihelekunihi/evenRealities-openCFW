@@ -1,2 +1,73 @@
-/* Native calendar frames; symbolic instructions and typed literals only. */
-__attribute__((naked,section(".text.r1_event_service_0008b028"))) void r1_event_service_0008b028(void) { __asm__ volatile("NCF_8b028:\nstmdb\tsp!, {r0, r1, r2, r4, r5, r6, r7, r8, r9, sl, fp, lr}\nNCF_8b02c:\nldr r5, NCF_8b0f4\nNCF_8b02e:\nmov\tr4, r0\nNCF_8b030:\nmov\tr7, r2\nNCF_8b032:\nldr.w\tr0, [r5, r4, lsl #2]\nNCF_8b036:\ncmp\tr0, #0\nNCF_8b038:\nbeq.n NCF_8b0e6\nNCF_8b03a:\nbl r1_subscriber_lock\nNCF_8b03e:\ncmp\tr7, #4\nNCF_8b040:\nbhi.n NCF_8b058\nNCF_8b042:\nldr.w\tr0, [r5, r4, lsl #2]\nNCF_8b046:\nmovs\tr1, #0\nNCF_8b048:\nmov\tr2, r7\nNCF_8b04a:\nstr\tr1, [r0, #8]\nNCF_8b04c:\nldr.w\tr0, [r5, r4, lsl #2]\nNCF_8b050:\nldr\tr1, [sp, #4]\nNCF_8b052:\nadds\tr0, #8\nNCF_8b054:\nbl memmove\nNCF_8b058:\nbl r1_subscriber_current_thread\nNCF_8b05c:\nmov\tr6, r0\nNCF_8b05e:\nldr.w\tr0, [r5, r4, lsl #2]\nNCF_8b062:\nmov.w\tr8, #0\nNCF_8b066:\nldr\tr5, [r0, #0]\nNCF_8b068:\nadd.w\tr0, r7, #8\nNCF_8b06c:\nuxth\tr0, r0\nNCF_8b06e:\nmov\tsl, r0\nNCF_8b070:\ncbz r5, NCF_8b0e0\nNCF_8b072:\nbl pvPortMalloc\nNCF_8b076:\nmovs\tr4, r0\nNCF_8b078:\nbeq.n NCF_8b088\nNCF_8b07a:\nstr\tr5, [r4, #0]\nNCF_8b07c:\nstrh\tr7, [r4, #4]\nNCF_8b07e:\nmov\tr2, r7\nNCF_8b080:\nadds\tr0, r4, #6\nNCF_8b082:\nldr\tr1, [sp, #4]\nNCF_8b084:\nbl memmove\nNCF_8b088:\nldr r7, NCF_8b0f8\nNCF_8b08a:\nmov.w\tr9, #1\nNCF_8b08e:\nldr\tr2, [r5, #0]\nNCF_8b090:\ncbz r2, NCF_8b0d2\nNCF_8b092:\nldr\tr1, [r5, #4]\nNCF_8b094:\nldr\tr0, [r1, #0]\nNCF_8b096:\ncmp\tr0, r6\nNCF_8b098:\nbne.n NCF_8b0a0\nNCF_8b09a:\nldr\tr0, [sp, #4]\nNCF_8b09c:\nblx\tr2\nNCF_8b09e:\nb.n NCF_8b0d2\nNCF_8b0a0:\nmovs.w\tr0, #0\nNCF_8b0a4:\nldr.w\tr2, [r7, r0, lsl #3]\nNCF_8b0a8:\ncmp\tr2, r1\nNCF_8b0aa:\nbne.n NCF_8b0ea\nNCF_8b0ac:\nsxtb\tr0, r0\nNCF_8b0ae:\nadds\tr1, r0, #1\nNCF_8b0b0:\nbeq.n NCF_8b0d2\nNCF_8b0b2:\nlsl.w\tfp, r9, r0\nNCF_8b0b6:\ntst.w\tfp, r8\nNCF_8b0ba:\nbne.n NCF_8b0d2\nNCF_8b0bc:\ncbz r4, NCF_8b0ce\nNCF_8b0be:\nadd.w\tr0, r7, r0, lsl #3\nNCF_8b0c2:\nmov\tr2, sl\nNCF_8b0c4:\nldrh\tr0, [r0, #4]\nNCF_8b0c6:\nmov\tr1, r4\nNCF_8b0c8:\nuxth\tr0, r0\nNCF_8b0ca:\nbl r1_event_publish\nNCF_8b0ce:\norr.w\tr8, fp, r8\nNCF_8b0d2:\nldr\tr5, [r5, #8]\nNCF_8b0d4:\ncmp\tr5, #0\nNCF_8b0d6:\nbne.n NCF_8b08e\nNCF_8b0d8:\ncbz r4, NCF_8b0e0\nNCF_8b0da:\nmov\tr0, r4\nNCF_8b0dc:\nbl vPortFree\nNCF_8b0e0:\nbl r1_subscriber_unlock\nNCF_8b0e4:\nmovs\tr0, #1\nNCF_8b0e6:\nldmia.w\tsp!, {r1, r2, r3, r4, r5, r6, r7, r8, r9, sl, fp, pc}\nNCF_8b0ea:\nadds\tr0, r0, #1\nNCF_8b0ec:\ncmp\tr0, #2\nNCF_8b0ee:\nbcc.n NCF_8b0a4\nNCF_8b0f0:\nb.n NCF_8b0d2\n.space 2,0\nNCF_8b0f4:\n.word r1_subscriber_roots\nNCF_8b0f8:\n.word r1_subscriber_routes\n"); }
+#include <stddef.h>
+#include <stdint.h>
+#include "native_subscriber.h"
+extern void *pvPortMalloc(size_t);
+extern void vPortFree(void *);
+extern void *r1_native_memory_move(void *,const void *,size_t);
+extern uint32_t r1_event_publish(uint32_t,const void *,uint32_t);
+typedef struct __attribute__((packed,may_alias)) {uint32_t value;} multicast_word;
+typedef struct __attribute__((packed,may_alias)) {uint16_t value;} multicast_half;
+static uint32_t word(const volatile uint8_t *p)
+{return ((const volatile multicast_word *)p)->value;}
+static void put(volatile uint8_t *p,uint32_t value)
+{((volatile multicast_word *)p)->value=value;}
+/* The opaque native callback receives payload, thread-cell address and its
+ * own target in R0/R1/R2. The required tail call preserves the caller's LR. */
+typedef void (*r1_multicast_callback_fn)(uint32_t,uint32_t,uint32_t);
+__attribute__((noinline,used)) void r1_subscriber_multicast_invoke(
+ uint32_t payload,uint32_t reference,uint32_t callback)
+{
+ __attribute__((musttail)) return
+  ((r1_multicast_callback_fn)(uintptr_t)callback)(payload,reference,callback);
+}
+static volatile uint8_t *root_at(uint32_t kind)
+{
+ uint32_t address=(uint32_t)(uintptr_t)r1_subscriber_roots+kind*4u;
+ return (volatile uint8_t *)(uintptr_t)word((const volatile uint8_t *)(uintptr_t)address);
+}
+/* Stock 0x8b028: cached short payload, synchronous current-thread callbacks,
+ * and one queued copy per known destination thread-cell address. */
+uint32_t r1_event_service_0008b028(uint32_t kind,const void *payload,uint32_t length)
+{
+ if(!root_at(kind))return 0;
+ (void)r1_subscriber_lock();
+ if(length<=4){
+  put(root_at(kind)+8,0);
+  r1_native_memory_move((void *)(uintptr_t)(root_at(kind)+8),payload,length);
+ }
+ uint32_t thread=(uint32_t)(uintptr_t)osThreadGetId();
+ uint32_t node=word(root_at(kind));
+ uint32_t sent=0,size=(uint16_t)(length+8u);
+ if(!node){(void)r1_subscriber_unlock();return 1;}
+ volatile uint8_t *record=pvPortMalloc(size);
+ if(record){
+  put(record,node);
+  ((volatile multicast_half *)(record+4))->value=(uint16_t)length;
+  r1_native_memory_move((void *)(uintptr_t)(record+6),payload,length);
+ }
+ do{
+  const volatile uint8_t *entry=(const volatile uint8_t *)(uintptr_t)node;
+  uint32_t callback=word(entry);
+  if(callback){
+   uint32_t reference=word(entry+4);
+   if(word((const volatile uint8_t *)(uintptr_t)reference)==thread)
+    r1_subscriber_multicast_invoke((uint32_t)(uintptr_t)payload,reference,callback);
+   else for(uint32_t route=0;route<2;++route){
+    const volatile uint8_t *row=(const volatile uint8_t *)&r1_subscriber_routes[route];
+    if(word(row)!=reference)continue;
+    uint32_t bit=1u<<route;
+    if(!(sent&bit)){
+     if(record){
+      uint32_t id=((const volatile multicast_half *)(row+4))->value;
+      (void)r1_event_publish(id,(const void *)(uintptr_t)record,size);
+     }
+     sent|=bit;
+    }
+    break;
+   }
+  }
+  node=word(entry+8);
+ }while(node);
+ if(record)vPortFree((void *)(uintptr_t)record);
+ (void)r1_subscriber_unlock();return 1;
+}

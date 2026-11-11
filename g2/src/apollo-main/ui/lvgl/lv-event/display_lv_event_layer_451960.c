@@ -1,7 +1,7 @@
 /* Apollo LV event layer accessor, native 0x451960..0x45199f. */
 #include <stdint.h>
 
-extern void audio_uart_lvgl_log(uint32_t, const char *, uint32_t,
+extern void lv_log_add(uint32_t, const char *, uint32_t,
                                const char *, const char *);
 
 static const char source[] =

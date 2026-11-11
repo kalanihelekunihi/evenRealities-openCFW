@@ -106,6 +106,13 @@ and the unconditional offset write in epoch-initialize.
 
 ## Host test mapping (`tests/test_openr1.c`)
 
+These historical contextual/host tests are not native instruction receipts.
+The later [native cache/kernel review](../reference/rtc-cache-kernel-review.md)
+compares the current native C candidates directly with stock. In particular,
+stock uses a four-year calendar cycle and reports February 29, 2100 where
+host Gregorian `gmtime` reports March 1. Do not substitute the contextual
+calendar contract for the native kernel's recovered behavior.
+
 - `test_rtc_device_epoch_to_calendar`: civil-time vectors (leap years 2000/
   2016, non-leap 2100, 30/31-day months, year rollover, `0xFFFFFFFF`
   wraparound to 2106-02-07 06:28:15) plus a sweep cross-checked against host

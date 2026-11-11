@@ -1,0 +1,123 @@
+{
+  "passed": 7680,
+  "executions": 15360,
+  "actual_native_and_C_registry_lifecycle_completion": true,
+  "persistent_request_fields": true,
+  "ordered_context_request_accesses": true,
+  "driver_effects_survive_errors": true,
+  "tail_callback_original_sp_lr": true,
+  "source_report": "build/sources-goal-r1-yhm-callbacks/report.json",
+  "source_sizes": {
+    "r1_yhm_register_read_record": 80,
+    "r1_yhm_register_write_record": 80
+  },
+  "limitations": [
+    "Device methods/callbacks modeled; actual lifecycle/registry/completion bodies execute",
+    "Private frames/caller-clobbered registers/flags excluded",
+    "Null data is modeled as driver-defined behavior; no physical null-pointer claim",
+    "Concrete callbacks, arbitrary aliases/concurrency, electrical bus behavior and byte qualification unverified"
+  ],
+  "public_write": {
+    "passed": 3840,
+    "executions": 7680,
+    "actual_native_and_C_registry_lifecycle_completion": true,
+    "persistent_request_fields": true,
+    "ordered_context_request_accesses": true,
+    "driver_effects_survive_errors": true,
+    "tail_callback_original_sp_lr": true,
+    "source_report": "build/sources-goal-r1-yhm-callbacks/report.json",
+    "public_write_size": 6,
+    "limitations": [
+      "Device methods/callbacks modeled; actual lifecycle/registry/completion bodies execute",
+      "Private frames/caller-clobbered registers/flags excluded",
+      "Null data is modeled as driver-defined behavior; no physical null-pointer claim",
+      "Concrete callbacks, arbitrary aliases/concurrency, electrical bus behavior and byte qualification unverified"
+    ]
+  },
+  "negative_control": {
+    "mutation": "Clear all shared request bytes before transaction field updates",
+    "rejected": true,
+    "counterexample": "Seeded unrelated request fields must survive; stock retains 0x5a, variant clears them",
+    "stderr": "Traceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-yhm-transactions/reject-request-clear.py\", line 64, in <module>\n    for c in cases:assert a(*c)==b(*c),c\n                                 ~^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-yhm-transactions/reject-request-clear.py\", line 60, in run\n    assert bytes(u.mem_read(request,20))==expected_request\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+  },
+  "qualified_new_regions": [
+    {
+      "payload": "r1-application",
+      "symbol": "r1_yhm_register_write_native",
+      "start": 59232,
+      "end": 59238,
+      "sha256": "f34358d99aab6f335322dd6e2f8619f823a9f889b1e0fc4862e674f903f529c8",
+      "evidence": "r1/symbols/function-frontier.csv",
+      "bindings": {
+        "r1_yhm_register_write_record": 329733
+      },
+      "address": 218976,
+      "binding_evidence": "r1/symbols/function-frontier.csv"
+    }
+  ],
+  "source_bytes_added": 6,
+  "canonical_plan_promoted": true,
+  "hybrid_totals": {
+    "binary-pull-through": 642339,
+    "source-built": 3821,
+    "resource-file": 248
+  },
+  "application_equals_official": true,
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "source_completeness_proven": false,
+  "qualification": {
+    "clang": {
+      "candidate_units": 5,
+      "compiled_units": 5,
+      "selected_symbols": [
+        "r1_yhm_register_write_native",
+        "r1_yhm_transport_acquire",
+        "r1_yhm_transport_release",
+        "r1_yhm_block_word_set"
+      ]
+    },
+    "gcc9": {
+      "candidate_units": 4,
+      "compiled_units": 4,
+      "selected_symbols": [
+        "r1_yhm_register_write_native"
+      ]
+    }
+  },
+  "evidence": {
+    "build/goal-r1-yhm-transactions/stock.elf": "b92807cf28d5ba7aebee096559a011a9b44369f772b249130ba80176acad09ef",
+    "build/goal-r1-yhm-transactions/REA-0x507cc.json": "ce15ec0ee2648ee8a07a7dab0562118b12340603881c04ebe885dc51b8d58327",
+    "build/goal-r1-yhm-transactions/REA-0x50804.json": "44f6682bc83dc06c4df5b68dd5bf808933db284df7e2777fd2b9d16a92fe008e",
+    "build/goal-r1-yhm-transactions/REA.snapshot.json": "26e0488c880af06da770eb05b1f4c9b4d43a77037475294f1a75133c643231ce",
+    "build/goal-r1-yhm-transactions/wrapper-stock.elf": "85c1bab16b6f150a0ae8030a2317c09289c6dd2131d730836043f1b6c189d66b",
+    "build/goal-r1-yhm-transactions/REA-wrapper.json": "0c2cc09844229c8b16326137b355a80fdcbc3a4b954b67daa192e1009151b074",
+    "build/goal-r1-yhm-transactions/REA-wrapper.snapshot.json": "fefcc8d3992db38ab7c08ea19a207586a89fbc4e9e9069a0ac18a7ccd9885f5e",
+    "build/goal-r1-yhm-transactions/verify.py": "4ca4105aa19fe4efdac243e8cedd5cc1beb16f67b4f5220da75566a39320c6cc",
+    "build/goal-r1-yhm-transactions/source.elf": "fc65b77ae93800104776df5a27cc4132ddccda7ce4390e2da80e63abcc7bfa02",
+    "build/goal-r1-yhm-transactions/results.json": "37e5883434e44601514a69cf453563084c57e6bcf0bd75ee732c89654fa3f771",
+    "build/goal-r1-yhm-transactions/public/verify.py": "94f2a3a8f8457efe30c610b5eef24c3829f7630149a093c65faeb7d9b2cffa1a",
+    "build/goal-r1-yhm-transactions/public/results.json": "bf7ccba38554305e10898cb34a9a9c62b822afa0e67ac9875744d3f240cf88dc",
+    "build/goal-r1-yhm-transactions/negative-result.json": "cd52c2b275551a453d0b9806c15657a81526e980a02cc3aed7038f1151b9b56f",
+    "build/goal-r1-yhm-transactions/bad.c": "52168df1e540403a97a644eb32d0a4ce5f7533123bfd027ae844143ccc7fc8e0",
+    "build/goal-r1-yhm-transactions/reject-request-clear.py": "35cce7f5dbb7451ff92573a51ab01f5b86a93a2e6b2ee9db1247b3a06ee2c241",
+    "build/goal-r1-yhm-transactions/verified-qualify.py": "7b6e5fe7ca0d215612327c31ebfd86c89456e96130d6bb9374aef812875f7fa0",
+    "build/goal-r1-yhm-transactions/verified-qualify-gcc.py": "ec226325f001298a1dba1b2dc063fbfee5d45246e059cd890d4a30c2d6023e52",
+    "build/goal-r1-yhm-transactions/verified-qualified/qualification.json": "60da24458c307f70d1aa8d14bef2794bc7a7d902a868b60066fff52860f08c65",
+    "build/goal-r1-yhm-transactions/verified-qualified/source-plan.json": "1df68839ac280d87b8a91e75261d4919e3653f108b4d364bb32482804989bd20",
+    "build/goal-r1-yhm-transactions/verified-gcc-qualified/qualification.json": "e005570e1ce5574f39bf8348208557efc1d4e2b1e7b39c032ff82abac959124a",
+    "build/goal-r1-yhm-transactions/verified-gcc-qualified/source-plan.json": "725254ee6ed96202cb1370623f7913769508f5047ff8feb65153cf4ddb469e85",
+    "build/goal-r1-yhm-transactions/source-plan-before.json": "06994e8e9bd0e33b4d4c96d07f040ecc5e09d2159c7bbbfe20a512fd84c25ced",
+    "build/goal-r1-yhm-transactions/merged-source-plan.json": "c9466961ae2b5ca59e30580d7aaa1d9ac7cb1d7872e190d4ca2127cc1c07e98a",
+    "build/goal-r1-yhm-transactions/merge-audit.json": "74151fd2cf78e4665e4f16b6b3d0847b7324bb8cf53452e206c3da5d65cf023a",
+    "build/hybrid-goal-r1-yhm-transactions/build-report.json": "7370eea4dab835d3e55e76411dddb28bea3760a848832fb5ad6d42581e64758f",
+    "build/hybrid-goal-r1-yhm-transactions/coverage.json": "a584cd48934da304a5d57dfde84efca6344d707f5d2c9ae2b81e9f091cbf4888",
+    "build/hybrid-goal-r1-yhm-transactions/payloads/application.bin": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "r1/src/application/board/native_yhm_transport.c": "e1f4650f8b44dbcf91a91e90c2396a6eeccd8a9562322f7d1d0179756867b50f",
+    "r1/src/application/board/native_yhm_state.c": "e9529abd5e4fe3407c99d67a2d69edfdeb0b35da7e55a6cdde5cfc94df5658b2",
+    "r1/src/application/registry/stock_registry.c": "68c16fe9a2fcd328012b8613c9da9aa4cd31bd30df36a55e64e56e7b534246fa",
+    "build/sources-goal-r1-yhm-callbacks/report.json": "d79e5facb36fdfe3fe7f9e0388c972e89cdb51da42b30339be8a54ea03ad97a6",
+    "r1/src/sources.json": "e32450af0ad855a39e15e9c4029af6bc1b267b6f8d10085ad7714c4130b94bcc",
+    "r1/symbols/function-frontier.csv": "cb7175a331dd811b7a44db9c6ee64355177414e041e2ac869bb810d2910bfb95",
+    "tools/build/source-plan.json": "c9466961ae2b5ca59e30580d7aaa1d9ac7cb1d7872e190d4ca2127cc1c07e98a"
+  }
+}

@@ -1,0 +1,377 @@
+{
+  "cases": 440,
+  "passed": 440,
+  "actual_nordic_gpio_and_gpiote": true,
+  "hardware_model": "OUTSET/OUTCLR update ordinary-memory OUT; reads/writes traced",
+  "names": [
+    "r1_output_gpio_driver10",
+    "r1_output_gpio_driver0c",
+    "r1_output_gpio_high",
+    "r1_output_gpio_low",
+    "r1_output_gpio_toggle"
+  ],
+  "native_addresses": [
+    "0x54d8c",
+    "0x54d92",
+    "0x54f3c",
+    "0x54f42",
+    "0x54f8a"
+  ],
+  "source_sha256": {
+    "r1/src/application/gpio/native_output_gpio_drivers.c": "3a4c8a152b8f4ba2e74409c01023966cb1014cb926f433840c3e420589769406",
+    "r1/src/application/software-twi/sdk_gpio.c": "635adbf4f03ba1ff0a10ec836f2242ee3c2a9660636f234a3c7f085d5cdec00e",
+    "vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx/drivers/src/nrfx_gpiote.c": "bc1dd3aa36d53d269ee311003e3c540257bff27fc50faac7b1e59ca3af8d6a9d"
+  },
+  "report": "build/sources-goal-r1-twi-delay-tail/report.json",
+  "limitations": [
+    "Physical GPIO/electrical behavior unverified",
+    "Void interfaces: raw volatile register residue and private stack bytes not compared",
+    "Bounded valid-model pins; full invalid-pin/fault/concurrency behavior unproven"
+  ],
+  "qualification": {
+    "candidate_units": 3,
+    "compiled_units": 3,
+    "units": [
+      {
+        "source": "r1/src/application/gpio/native_output_gpio_drivers.c",
+        "payload": "r1-application",
+        "evidence": "r1/symbols/function-frontier.csv",
+        "selected": [
+          {
+            "payload": "r1-application",
+            "symbol": "r1_output_gpio_driver10",
+            "start": 187788,
+            "end": 187794,
+            "sha256": "907d406898d0f13eb7ad1a8b41611fb657cc8733ffcc8dfb8a11e228a627383f",
+            "evidence": "r1/symbols/function-frontier.csv",
+            "bindings": {
+              "r1_twi_gpio_high": 496713
+            },
+            "address": 347532,
+            "match_evidence": {
+              "method": "independently named native entry and all unrelocated bytes, followed by full linked equality",
+              "fixed_bytes": 2,
+              "compiled_pattern_sha256": "d08e97269bdc5b06356969721e548728251ec6936026e48c74837c7835019d0d",
+              "relocations": [
+                {
+                  "symbol": "r1_twi_gpio_high",
+                  "offset": 2,
+                  "relocation_type": 30,
+                  "address": 496713,
+                  "role": "native_function"
+                }
+              ]
+            }
+          },
+          {
+            "payload": "r1-application",
+            "symbol": "r1_output_gpio_driver0c",
+            "start": 187794,
+            "end": 187800,
+            "sha256": "43da0844a73cd37c80cf9db81249ae35966e8c795a76805969df3f45088bc619",
+            "evidence": "r1/symbols/function-frontier.csv",
+            "bindings": {
+              "r1_twi_gpio_low": 496001
+            },
+            "address": 347538,
+            "match_evidence": {
+              "method": "independently named native entry and all unrelocated bytes, followed by full linked equality",
+              "fixed_bytes": 2,
+              "compiled_pattern_sha256": "d08e97269bdc5b06356969721e548728251ec6936026e48c74837c7835019d0d",
+              "relocations": [
+                {
+                  "symbol": "r1_twi_gpio_low",
+                  "offset": 2,
+                  "relocation_type": 30,
+                  "address": 496001,
+                  "role": "native_function"
+                }
+              ]
+            }
+          },
+          {
+            "payload": "r1-application",
+            "symbol": "r1_output_gpio_high",
+            "start": 188220,
+            "end": 188226,
+            "sha256": "9ad23541595db97b5835de1cfa3f945fa262ea2ec81bac3a259aa84ebfb408d8",
+            "evidence": "r1/symbols/function-frontier.csv",
+            "bindings": {
+              "nrfx_gpiote_out_set": 502589
+            },
+            "address": 347964,
+            "binding_evidence": "r1/symbols/function-frontier.csv"
+          },
+          {
+            "payload": "r1-application",
+            "symbol": "r1_output_gpio_low",
+            "start": 188226,
+            "end": 188232,
+            "sha256": "864e05f0e22d56baa3b60280eb4cd36b7d389e91c1cd7ed29313ee9c902fac9a",
+            "evidence": "r1/symbols/function-frontier.csv",
+            "bindings": {
+              "nrfx_gpiote_out_clear": 502317
+            },
+            "address": 347970,
+            "binding_evidence": "r1/symbols/function-frontier.csv"
+          },
+          {
+            "payload": "r1-application",
+            "symbol": "r1_output_gpio_toggle",
+            "start": 188298,
+            "end": 188304,
+            "sha256": "3d48a4a3652514d2fcea0e9df118993ec9bcc38f1177b1ec47850cf9f89913ba",
+            "evidence": "r1/symbols/function-frontier.csv",
+            "bindings": {
+              "nrfx_gpiote_out_toggle": 502665
+            },
+            "address": 348042,
+            "binding_evidence": "r1/symbols/function-frontier.csv"
+          }
+        ],
+        "compiled": true,
+        "rejections": {},
+        "source_implementation_completeness": "not established by compilation or byte matching",
+        "reason": "exact selected bodies"
+      },
+      {
+        "source": "r1/src/application/software-twi/sdk_gpio.c",
+        "payload": "r1-application",
+        "evidence": "r1/symbols/function-frontier.csv",
+        "selected": [],
+        "compiled": true,
+        "rejections": {
+          "compiled_bytes_differ": 24
+        },
+        "source_implementation_completeness": "not established by compilation or byte matching",
+        "reason": "no exact anchored body under tested production bindings; integration remains unfinished"
+      },
+      {
+        "source": "vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx/drivers/src/nrfx_gpiote.c",
+        "payload": "r1-application",
+        "evidence": "r1/symbols/function-frontier.csv",
+        "selected": [],
+        "compiled": true,
+        "rejections": {
+          "native_symbol_anchor_missing": 21,
+          "anchored_relocation_pattern_not_exact": 4,
+          "compiled_bytes_differ": 3
+        },
+        "source_implementation_completeness": "not established by compilation or byte matching",
+        "reason": "no exact anchored body under tested production bindings; integration remains unfinished"
+      }
+    ]
+  },
+  "qualification_tests": {
+    "checks": 30,
+    "passed": 30,
+    "previously_missing_manual_target_cases": 4,
+    "altered_fixed_instructions_rejected": 10,
+    "removed_targets_rejected": 5,
+    "instruction_literal_misclassification_rejected": 5,
+    "unsupported_branch_addends_rejected": 5
+  },
+  "anchor_changes": {
+    "new_entries": 9,
+    "updated_entries": [
+      "0x79448"
+    ],
+    "items": [
+      [
+        347532,
+        6,
+        "r1_output_gpio_driver10",
+        "r1/src/application/gpio/native_output_gpio_drivers.c",
+        "r1_nordic_gpio_provider_adapter"
+      ],
+      [
+        347538,
+        6,
+        "r1_output_gpio_driver0c",
+        "r1/src/application/gpio/native_output_gpio_drivers.c",
+        "r1_nordic_gpio_provider_adapter"
+      ],
+      [
+        347964,
+        6,
+        "r1_output_gpio_high",
+        "r1/src/application/gpio/native_output_gpio_drivers.c",
+        "r1_nordic_gpiote_provider_adapter"
+      ],
+      [
+        347970,
+        6,
+        "r1_output_gpio_low",
+        "r1/src/application/gpio/native_output_gpio_drivers.c",
+        "r1_nordic_gpiote_provider_adapter"
+      ],
+      [
+        348042,
+        6,
+        "r1_output_gpio_toggle",
+        "r1/src/application/gpio/native_output_gpio_drivers.c",
+        "r1_nordic_gpiote_provider_adapter"
+      ],
+      [
+        496000,
+        20,
+        "r1_twi_gpio_low",
+        "r1/src/application/software-twi/sdk_gpio.c",
+        "nordic_nrf5_sdk_17_1_0"
+      ],
+      [
+        496712,
+        20,
+        "r1_twi_gpio_high",
+        "r1/src/application/software-twi/sdk_gpio.c",
+        "nordic_nrf5_sdk_17_1_0"
+      ],
+      [
+        502588,
+        4,
+        "nrfx_gpiote_out_set",
+        "vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx/drivers/src/nrfx_gpiote.c",
+        "nordic_nrf5_sdk_17_1_0"
+      ],
+      [
+        502316,
+        4,
+        "nrfx_gpiote_out_clear",
+        "vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx/drivers/src/nrfx_gpiote.c",
+        "nordic_nrf5_sdk_17_1_0"
+      ],
+      [
+        502664,
+        36,
+        "nrfx_gpiote_out_toggle",
+        "vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx/drivers/src/nrfx_gpiote.c",
+        "nordic_nrf5_sdk_17_1_0"
+      ]
+    ],
+    "scope": "Observed table adapters and call targets; behavior tests do not advance pseudocode/source/byte gates."
+  },
+  "scope": {
+    "selected": [
+      "r1/src/application/gpio/native_output_gpio_drivers.c",
+      "r1/src/application/software-twi/sdk_gpio.c",
+      "vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx/drivers/src/nrfx_gpiote.c"
+    ],
+    "all_candidates": 4055,
+    "purpose": "Keep helper anchors available while qualifying the table adapters."
+  },
+  "evidence": [
+    {
+      "path": "build/goal-r1-output-driver-qualification/verify.py",
+      "sha256": "e3a63f433f66f617d8a84a52c2b17e83050bac6d4ce4330b5b0f861e77f55941"
+    },
+    {
+      "path": "build/goal-r1-output-driver-qualification/test_qualification.py",
+      "sha256": "e8bda6305c06891b5afcf2bdc651b495dc81adb622d6c4c7e34260c431239156"
+    },
+    {
+      "path": "build/goal-r1-output-driver-qualification/qualify.py",
+      "sha256": "124975f4e3010384adefad4b7ec0e60d5452cbdf7a92f58d897d012b4637f6f2"
+    },
+    {
+      "path": "build/goal-r1-output-driver-qualification/scatter.py",
+      "sha256": "ac67556d39cc552b26fca4a2d2977ce33c576a37d8f11374b79a62c9ecd7b6f6"
+    },
+    {
+      "path": "build/goal-r1-output-driver-qualification/scatter.json",
+      "sha256": "5cb83d48db1afd5a6e0c939741f8f4aa53db297aac7d423d0c927077f702e7cd"
+    },
+    {
+      "path": "build/goal-r1-output-driver-qualification/scope.json",
+      "sha256": "7aa5965c9999e803246c5a6002939002d3a2cc0b66f0d544e22f40d5a990e78c"
+    },
+    {
+      "path": "build/goal-r1-output-driver-qualification/qualified/source-plan.json",
+      "sha256": "937946651caa7e2a73eac3c0d2dc5d764660f0a70e413aced9f1f094f93dd7e5"
+    },
+    {
+      "path": "build/goal-r1-output-driver-qualification/qualified/qualification.json",
+      "sha256": "9fe7e4b2fb6be4b46d9c20976da155988a5cac31c3f71f1c87374ac918c7125d"
+    },
+    {
+      "path": "build/goal-r1-output-driver-qualification/source-plan-before.json",
+      "sha256": "49258fe24065f518dfdbaafee469624bd9c8bcbb2d9f1d0544fcf72da4b8f4c2"
+    },
+    {
+      "path": "build/goal-r1-output-driver-qualification/frontier-before.csv",
+      "sha256": "3742cf10aec173490e67611086a7aa8b68ced593a995755b71405531d99ff772"
+    },
+    {
+      "path": "build/goal-r1-output-driver-qualification/qualifier-before.py",
+      "sha256": "e8a2a8fffcc9e363bddc6ad4472b8186ebba6a0f3d015cd114120edd40a3a168"
+    },
+    {
+      "path": "build/goal-r1-output-driver-qualification/anchor-changes.json",
+      "sha256": "b794b4b256497488d883d80db42b7f239f609dfd1350ca001f02aef76177387b"
+    },
+    {
+      "path": "build/goal-r1-output-driver-qualification/REA.json",
+      "sha256": "f4fe60f8dcc128e927c63cef1b4097ccd5f58257d11ce8da13b18bba9b5be369"
+    },
+    {
+      "path": "build/goal-r1-output-driver-qualification/rea-snapshot.json",
+      "sha256": "92e24a65c7e501c7d4636afde4ea1d89fec68be2f9a5958d611578f57c724c47"
+    },
+    {
+      "path": "build/goal-r1-output-driver-qualification/stock.elf",
+      "sha256": "50712f19663f81b5be6ee993b38bae90a040efe8cf587799f4c8ccfc9fed2e76"
+    },
+    {
+      "path": "build/goal-r1-output-driver-qualification/tool-tests.log",
+      "sha256": "df4f7916cee602785aa46adfcdd030dff4bc7717e2cabfccbfc8345dbd5a3684"
+    },
+    {
+      "path": "tools/build/source-plan.json",
+      "sha256": "432d01e6a7b79c5c680b62143962870a021836bbe8905e6a41015a7970d5af63"
+    },
+    {
+      "path": "tools/build/qualify_sources.py",
+      "sha256": "c959bf278e8876aa0ca5a02f405f84d581914f7d17fbe79fd0583f313cba9521"
+    },
+    {
+      "path": "r1/symbols/function-frontier.csv",
+      "sha256": "5e86b06f2dba3374dde5bf39f48b1f4249d15f251e8c70502b97b17e040080cb"
+    },
+    {
+      "path": "r1/src/sources.json",
+      "sha256": "27eec6d55b26d2f40111f0bb41704d9fd54e0057497660d71a3eac19cd1f7f1a"
+    },
+    {
+      "path": "build/sources-goal-r1-twi-delay-tail/report.json",
+      "sha256": "6a178f516b118b6b8eefe6805f8f72038e5de6249c708bcfa1be5794d7796e12"
+    },
+    {
+      "path": "build/hybrid-goal-r1-output-driver-qualification/build-report.json",
+      "sha256": "6994c7b2fb66031070d6f684acb6edd600d378fd401b6355536fe0b895a99a1e"
+    },
+    {
+      "path": "r1/src/application/gpio/native_output_gpio_drivers.c",
+      "sha256": "3a4c8a152b8f4ba2e74409c01023966cb1014cb926f433840c3e420589769406"
+    },
+    {
+      "path": "r1/src/application/software-twi/sdk_gpio.c",
+      "sha256": "635adbf4f03ba1ff0a10ec836f2242ee3c2a9660636f234a3c7f085d5cdec00e"
+    },
+    {
+      "path": "vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx/drivers/src/nrfx_gpiote.c",
+      "sha256": "bc1dd3aa36d53d269ee311003e3c540257bff27fc50faac7b1e59ca3af8d6a9d"
+    }
+  ],
+  "tool_tests_passed": 19,
+  "new_source_bytes": 30,
+  "hybrid": {
+    "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "source_built_bytes": 3691,
+    "retained_bytes": 642469,
+    "resource_bytes": 248,
+    "source_completeness_proven": false
+  },
+  "firmware_sources_changed": false,
+  "manifest_changed": false,
+  "existing_plan_units_preserved": true,
+  "g2_workflow": "P2_INTERRUPTED; no gate advanced"
+}

@@ -1,0 +1,114 @@
+{
+  "schema_version": 1,
+  "scope": "R1 activity ten-minute bucket in ordinary C",
+  "report": "build/sources-goal-r1-activity-bucket-pure-c/report.json",
+  "comparison_report": "build/sources-goal-r1-health-state-publish-c/report.json",
+  "stock_entry": "0x5ac74",
+  "stock_size": 50,
+  "audit": {
+    "compiled_units": 862,
+    "unchanged_prior_nongenerated_objects": 851,
+    "changed_prior_nongenerated_objects": [
+      "r1/src/application/runtime/native_activity_storage.c"
+    ],
+    "application_imports": 63,
+    "bootloader_imports": 22,
+    "manifest_unchanged": true,
+    "source_plan_and_cache_layout_unchanged": true,
+    "new_state_definitions": 0,
+    "parent_assembly_bytes_and_relocations_unchanged": true,
+    "parent_section_sha256": "a63df94a0afea0183afd4e88e95550119c9619ade3727d9829a0728e1cd82f2f",
+    "shared_diagnostic_strings_unchanged": true,
+    "final_object_equals_tested_object": true
+  },
+  "direct": {
+    "stock_C_comparisons": 68161,
+    "native_instruction_bytes_executed": 50,
+    "complete_hour_minute_byte_matrix": true,
+    "zero_initialized_calendar_partial_outputs_and_ignored_status": true,
+    "independent_bucket_oracle": true,
+    "caller_scratch_private_frames_APSR_and_physical_time_excluded": true
+  },
+  "real_calendar_activity_caller": {
+    "real_RTC_calendar_bucket_comparisons": 936,
+    "actual_activity_parent_real_calendar_comparisons": 2594,
+    "actual_C_RTC_offset_calendar_forward_and_state_owners": true,
+    "independent_wrapped_ten_minute_oracle": true,
+    "activity_cache_packed_updates_and_logging_match": true,
+    "only_logging_modeled": true,
+    "unchanged_parent_assembly_aligned4_in_probe": true
+  },
+  "compiled_defects_rejected": [
+    {
+      "defect": "minute-divisor",
+      "rejected": true
+    },
+    {
+      "defect": "hour-scale",
+      "rejected": true
+    },
+    {
+      "defect": "byte-wrap",
+      "rejected": true
+    },
+    {
+      "defect": "scratch",
+      "rejected": true
+    },
+    {
+      "defect": "timestamp-width",
+      "rejected": true
+    },
+    {
+      "defect": "offset",
+      "rejected": true
+    }
+  ],
+  "contract": [
+    "Initialize canonical eight-byte calendar scratch, fetch the signed offset, and call the existing typed UTC/calendar converter with unchanged timestamp bits. Ignore converter status.",
+    "Read minute before hour, calculate hour*6 + minute/10 and truncate to uint8. Preserve partial provider writes and out-of-range byte behavior instead of inventing validation.",
+    "Two identified direct calls are in the unchanged activity-storage parent; its functional paths consume R0 and reload their own arguments."
+  ],
+  "limits": [
+    "REA50 code bytes match locked raw; all50 execute.65536 hour/minute byte combinations and2625 boundary/partial/status/offset controls pass against stock plus an independent bucket oracle.",
+    "936 direct real RTC/calendar and2594 actual activity-parent comparisons execute actual C offset getter, calendar adapter/forward converter and owners. Only logging is modeled. Packed cache updates and diagnostics match, including UTC wrap and duration crossings.",
+    "The parent assembly and relocations are unchanged; it is aligned4 in the probe. Full final-image parent alignment is separate work.",
+    "Private frame location and restored caller-scratch R2/R3 are excluded; indirect/nonstandard ABI consumers not exhaustively proven. Saved integer/FP state, masks, SP, FPSCR and guards checked.",
+    "No persistent state or manifest changes. Complete application linking, startup/scatter integration, concurrency, physical clock/sensors and device boot remain unverified."
+  ],
+  "evidence_files": {
+    "build/sources-goal-r1-activity-bucket-pure-c/report.json": "c4433c50eb3a5c6a1b53d487d79d831750edc6a6ff6f85e3a2a26547e94ea7b7",
+    "build/sources-goal-r1-health-state-publish-c/report.json": "6827527f5d67c422d920ccaa9f9c903a080864a6cfb2ced0f9caa033ef31d1b9",
+    "r1/src/application/runtime/native_activity_storage.c": "b66a0ff91f1186b3edb8a1b1125d84ba4780fc494c7d34cdff4f4b5f5707ed29",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-activity-bucket-pure-c/r1/r1-application/r1__src__application__runtime__native_activity_storage.c.o": "0357a2a7fdbf63f629ad0c2a098fc0d032ae253b9f66a61a8e5e335c43c2155b",
+    "r1/src/sources.json": "c641a01569c9d39f05bc4bce48d9b5ca6ba6bf8f501b0eabae9dbbbd61b01efb",
+    "tools/build/source-plan.json": "eeb516e31b3310fb0718f36908977f8125723f7c5e0e86cd6744395826259a4d",
+    "r1/src/config/runtime/native_health_cache.ld": "eb8f131c489cd818d4e36718718fa1989719ca0170f164541a1a5bf56dfc1ec3",
+    "r1/src/vendor/time_calendar/time_calendar.h": "6682b586810e47e41053163bb03f0a5acd8005721ab7bcbb70442ce4da78c59f",
+    "r1/src/application/board/native_time_utc_offset.c": "71cfe0055cff4ddf0164da21283127c4f7c0c16b469569ed29db5e602c86fc85",
+    "r1/src/application/board/native_calendar_utc.c": "1f65478314f4801344e237e4997001cd947f6410e7d8041da3efb3f2bf73666e",
+    "r1/src/application/board/native_calendar_forward.c": "22c0b6b605fbde913d588c59cbdabee975310d36b75eaa9b0f68bf9bb51a37ac",
+    "build/goal-r1-activity-bucket-pure-c/audit.json": "ed7dde5ac793138b16467ab1b472f788e8f89d75bfe59b03778a7612eb02f746",
+    "build/goal-r1-activity-bucket-pure-c/negative.json": "60c3548928349533ea4f92b9b22fc47d9b7ed507ea078c5909b4e6cb28bc73dc",
+    "build/goal-r1-activity-bucket-pure-c/audit.py": "0ee5ce1219d790ca0d7b77c88e74260288ee8abca2edddf79266a30fa79d0dfc",
+    "build/goal-r1-activity-bucket-pure-c/source.elf": "86302b5e030e9bbecc28b3aa833d6e010b14eb8e496ba510825bbb2ee8025df1",
+    "build/goal-r1-activity-bucket-pure-c/negative.py": "703c11486ad2b93ad4f3cc144dce70c3d582dae45ae3456b7bcb80dccdc8f28a",
+    "build/goal-r1-activity-bucket-pure-c/callers.py": "4ee5c0eab7e4b80cbae108bb7f047adfbcb3f88b3ac028b9fcfdd232603e2810",
+    "build/goal-r1-activity-bucket-pure-c/negative.log": "7cd5c60649c6170325e3a3e42ec687520466e0cbdd31c983b751bd86490e43c6",
+    "build/goal-r1-activity-bucket-pure-c/source.o": "0357a2a7fdbf63f629ad0c2a098fc0d032ae253b9f66a61a8e5e335c43c2155b",
+    "build/goal-r1-activity-bucket-pure-c/results.json": "71e22e7c3ba75adac82231cd89fbe0cb461f139a2ce095c79e9e47090a2d491f",
+    "build/goal-r1-activity-bucket-pure-c/pipeline.log": "e06edbb497e1580fc326cafb284e8e3ecf3a77cecdef31bc9fa8312e656fd8ce",
+    "build/goal-r1-activity-bucket-pure-c/rea.json": "c4c22b0ac6ee7efa16b0ee3e035336afa5c001142e6dc6004f1d7d0f3494c1f3",
+    "build/goal-r1-activity-bucket-pure-c/pipeline.py": "6ca1edda3f913ca6194612abeb825a071805b184b8d4f15cd083b38afee7543e",
+    "build/goal-r1-activity-bucket-pure-c/sources-check.log": "b6ab468f43815a75634eab2762e209dbee8ab94c4cc3d601fded4210b6833f2a",
+    "build/goal-r1-activity-bucket-pure-c/callers.json": "6038e992adbf4d770ad24a46db61994df4a5257cdd7b3c26fe646fc6b1833bda",
+    "build/goal-r1-activity-bucket-pure-c/record.py": "4622c7830c40116e317eb8e1c453b06a6b219f4f1bfb251bf05e73fc90b80765",
+    "build/goal-r1-activity-bucket-pure-c/verify.py": "da61e6c729c33c973e9cfd4a7c5ef330ac5cbaf3030ce3b925dc071c805c5a19",
+    "build/goal-r1-activity-bucket-pure-c/verification.log": "02b69354a6d048166f688b9fb5761d9180effebf15239489f0b5921ae644a6e6",
+    "build/goal-r1-activity-bucket-pure-c/source-before.c": "a52e952a95d0f6be365d1e01de5cec605e5a223bb7d71306219ad43f3abca43f",
+    "build/goal-r1-activity-bucket-pure-c/build.log": "31979866e441d6344712fec7b2c6dbcc48736d53d61033fac5968c57375d8cc8",
+    "build/goal-r1-activity-bucket-pure-c/pipeline/test.ld": "53ccb191dcebf33be552c5d3d8d006545ba8be6939d58c9afa8191d669980b6a",
+    "build/goal-r1-activity-bucket-pure-c/pipeline/source.elf": "2f49ced162d3ca17b93a3dcab709866085a8014b9c6edc51cc0dbe1b3bd2be28",
+    "build/goal-r1-activity-bucket-pure-c/pipeline/results.json": "f09754849725e8d2a3095f15ace27f44c551c0ce359dd89a5a2e694732beefa4"
+  }
+}

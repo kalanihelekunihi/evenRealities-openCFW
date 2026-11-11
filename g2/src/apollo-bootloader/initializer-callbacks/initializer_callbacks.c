@@ -37,46 +37,11 @@ void opencfw_boot_services_enable(uint32_t value);
 void opencfw_boot_services_configure(uint32_t selector);
 void opencfw_boot_services_pin_configure(uint32_t pin, uint32_t value);
 
-/* Leaf wrapper at 0x4303bc, reached by the initializer's mode-1 branch. */
-__attribute__((used, noinline, naked))
-static uint32_t mode_register_update_wrapper(
-    uint32_t mode __attribute__((unused)),
-    uint32_t enabled __attribute__((unused)))
+/* Stock 0x42fff2 -> 0x42ff00 -> 0x4303bc: enable mode register 0x81. The
+ * stock wrappers map a nonzero status to -1, which nothing reads. */
+static void mode_apply_wrapper(void)
 {
-    __asm__ volatile(
-        "push {r7, lr}\n"
-        "uxtb r1, r1\n"
-        "cmp r1, #1\n"
-        "bne 1f\n"
-        "movs r1, #1\n"
-        "b 2f\n"
-        "1: movs r1, #0\n"
-        "2: bl opencfw_bl_mode_register_update\n"
-        "cmp r0, #0\n"
-        "beq 3f\n"
-        "movs r0, #0\n"
-        "mvns r0, r0\n"
-        "b 4f\n"
-        "3: movs r0, #0\n"
-        "4: pop {r1, pc}\n");
-}
-
-/* Exact 0x42ff00 branch reached by the initializer's fixed (1, 1) call. */
-__attribute__((used, noinline))
-static void mode_apply_initializer_route(void)
-{
-    (void)mode_register_update_wrapper(0x81u, 1u);
-}
-
-/* Exact wrapper behavior at 0x42fff2 for this recovered route. */
-__attribute__((naked)) static void mode_apply_wrapper(void)
-{
-    __asm__ volatile(
-        "push {r7, lr}\n"
-        "movs r1, #1\n"
-        "movs r0, #1\n"
-        "bl mode_apply_initializer_route\n"
-        "pop {r0, pc}\n");
+    (void)opencfw_bl_mode_register_update(0x81u, 1u);
 }
 
 /* Stock 0x4301D6 (platform_boot_sequence_4301d6) */
@@ -124,16 +89,9 @@ uint32_t opencfw_boot_services_initialize(uint32_t initial_state)
     return (uint8_t)status;
 }
 
-void opencfw_boot_services_reset(uint32_t value)
-{
-    SERVICES_STATE[0xf2] = (uint8_t)value;
-    if (SERVICES_STATE[0xf2] == 0u)
-        return;
-    if (SERVICES_STATE[0xf4] == 0u && SERVICES_STATE[0xf3] != 0u)
-        opencfw_bl_service_wake();
-    else if (SERVICES_STATE[0xf4] != 0u && SERVICES_STATE[0xf3] == 0u)
-        opencfw_bl_service_sleep();
-}
+/* opencfw_boot_services_reset is stock 0x417b7c (EasyLogger output-lock
+ * enable); its single body is opencfw_boot_elog_set_lock_mode in elog_output.c,
+ * which defines this name as an alias. */
 
 void opencfw_boot_services_enable(uint32_t value)
 {

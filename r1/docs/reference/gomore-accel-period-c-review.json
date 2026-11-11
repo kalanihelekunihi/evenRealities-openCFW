@@ -1,0 +1,398 @@
+{
+  "schema_version": 1,
+  "stock_application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "entries": [
+    "0x56f94",
+    "0x58a7e"
+  ],
+  "normal_report": "build/sources-goal-r1-gomore-accel-period-final-c/report.json",
+  "native_helpers": {
+    "pairs": 396,
+    "fault_pairs": 12,
+    "provider_counts": {
+      "0x8f3c8": 78000,
+      "0x761f8": 1635,
+      "0x27606": 224
+    },
+    "digest": "316ef92e39a7bd289962e2be185cf27681e988f30106e13e930bf41897a178b4",
+    "native_branch_hits": {
+      "0x570dc": 218,
+      "0x5711e": 1962,
+      "0x571e2": 41420,
+      "0x57432": 18,
+      "0x5745a": 6,
+      "0x57520": 184,
+      "0x57584": 22
+    },
+    "output_words": [
+      0,
+      1114636288,
+      1115291647,
+      1115569342,
+      1116099599,
+      1116099600,
+      1116658542,
+      1116965502,
+      1117225953,
+      1117225954,
+      1117327276,
+      1117327277,
+      1117378718,
+      1118158576,
+      1118158577,
+      1119584256,
+      1120259421,
+      1120279803,
+      1120279804,
+      1120403456,
+      1120403457,
+      1120466170,
+      1120723143,
+      1120723145,
+      1121339684,
+      1121339686,
+      1122759807,
+      1122847170,
+      1122847172,
+      1122935529,
+      1123680255,
+      1123680258,
+      1124233038,
+      1124233039,
+      1125515264,
+      1126384619,
+      1126384620,
+      1126544027,
+      1126607530,
+      1126607532,
+      1127775730,
+      1127775731
+    ],
+    "path_values": {
+      "distinct_filter_inputs": 345,
+      "distinct_filter_results": 7139,
+      "transition_entry_flags": [
+        "00",
+        "01"
+      ],
+      "transition_state_changes": 156,
+      "transition_estimate_changes": 90,
+      "transition_initializations": 18,
+      "initialized_transition_updates": 138
+    },
+    "limits": [
+      "C period root with native lower providers and C VCVT helper for isolation.",
+      "Entry and return traces compare raw R0, live parent history/state bytes, argument addresses, helper entry depths and FPSCR.",
+      "Final external hashes/writes, logical faults, masks, SP and preserved registers compared; private save/coefficient-copy bytes, caller-clobbered residue/APSR excluded.",
+      "Callback code identity is mapped between the verified C comparator and native callback; all data pointers and parent entry depths remain raw. No physical hardware, complete source link or byte identity proof."
+    ]
+  },
+  "c_helpers": {
+    "pairs": 396,
+    "fault_pairs": 12,
+    "provider_counts": {
+      "0x8f3c8": 78000,
+      "0x761f8": 1635,
+      "0x27606": 224
+    },
+    "digest": "316ef92e39a7bd289962e2be185cf27681e988f30106e13e930bf41897a178b4",
+    "native_branch_hits": {
+      "0x570dc": 218,
+      "0x5711e": 1962,
+      "0x571e2": 41420,
+      "0x57432": 18,
+      "0x5745a": 6,
+      "0x57520": 184,
+      "0x57584": 22
+    },
+    "output_words": [
+      0,
+      1114636288,
+      1115291647,
+      1115569342,
+      1116099599,
+      1116099600,
+      1116658542,
+      1116965502,
+      1117225953,
+      1117225954,
+      1117327276,
+      1117327277,
+      1117378718,
+      1118158576,
+      1118158577,
+      1119584256,
+      1120259421,
+      1120279803,
+      1120279804,
+      1120403456,
+      1120403457,
+      1120466170,
+      1120723143,
+      1120723145,
+      1121339684,
+      1121339686,
+      1122759807,
+      1122847170,
+      1122847172,
+      1122935529,
+      1123680255,
+      1123680258,
+      1124233038,
+      1124233039,
+      1125515264,
+      1126384619,
+      1126384620,
+      1126544027,
+      1126607530,
+      1126607532,
+      1127775730,
+      1127775731
+    ],
+    "path_values": {
+      "distinct_filter_inputs": 345,
+      "distinct_filter_results": 7139,
+      "transition_entry_flags": [
+        "00",
+        "01"
+      ],
+      "transition_state_changes": 156,
+      "transition_estimate_changes": 90,
+      "transition_initializations": 18,
+      "initialized_transition_updates": 138
+    },
+    "limits": [
+      "C root, filter, transition, arithmetic/conversions/shifts, qsort, comparator, memset/EABI clear, float conversion and sqrt execute.",
+      "Entry and return traces compare raw R0, live parent history/state bytes, argument addresses, helper entry depths and FPSCR.",
+      "Final external hashes/writes, logical faults, masks, SP and preserved registers compared; private save/coefficient-copy bytes, caller-clobbered residue/APSR excluded.",
+      "Callback code identity is mapped between the verified C comparator and native callback; all data pointers and parent entry depths remain raw. No physical hardware, complete source link or byte identity proof."
+    ]
+  },
+  "comparator": {
+    "pairs": 65796,
+    "fault_pairs": 4,
+    "digest": "b7448051da07b8f48d4b48fd2aaa28378df8848e513861d02bf7382b34f40337",
+    "limits": [
+      "Complete 256x256 byte domain, identical pointers and logical faults compared.",
+      "Raw R0, input/caller bytes, public writes, FPSCR, masks, SP and preserved registers compared; caller-clobbered/APSR residue and private frames excluded."
+    ]
+  },
+  "checked": {
+    "pairs": 100,
+    "guard_cases": 6,
+    "limits": [
+      "Actual checked utility delegates to native C root; bridge validates passed input/output addresses, mode, signed baseline and seed.",
+      "Checked API returns bool; native R0 and nested wrapper scratch addresses are distinct contracts, so child-call traces are excluded here. Raw native-provider entry depth/buffers are verified separately.",
+      "Unrelated vendor imports bind unused stop sentinels; complete C estimator linkage is verified separately."
+    ]
+  },
+  "classifier": {
+    "pairs": 216,
+    "provider_counts": {
+      "0x722ec": 0,
+      "0x723b6": 0,
+      "0x568f0": 0,
+      "0x8f4b4": 0,
+      "0x3b00e": 432,
+      "0x8f3c8": 86400,
+      "0x761f8": 2520,
+      "0x56cf4": 216,
+      "0x56f94": 432,
+      "0x582c4": 216,
+      "0x56a0c": 216,
+      "0x569bc": 432,
+      "0x56ba8": 216,
+      "0x58256": 216,
+      "0x583c8": 216,
+      "0x56980": 864,
+      "0x7eaf6": 216,
+      "0x56920": 162,
+      "0x67e4c": 216,
+      "0x4834a": 0,
+      "0x710d4": 0,
+      "0x58480": 0,
+      "0x484fc": 0,
+      "0x277aa": 1080
+    },
+    "digest": "9aa6e966656fdf3faae0886ddb3ba275a382f310ef930da11f1f149b1faca751",
+    "limits": [
+      "Actual native classifier with three C mean/hysteresis/linear helpers and existing C lower math/statistics where called.",
+      "Other spectral functions remain stock; memory/writes, helper arguments, FPSCR, return, preserved registers, SP and masks compared.",
+      "Parent/helper entry depths and caller-visible buffer addresses compared; unexposed internal C frames and private save bytes excluded."
+    ]
+  },
+  "negative_controls": [
+    {
+      "kind": "root",
+      "control": "unsigned-rms",
+      "rejected": true,
+      "source_sha256": "e159c7ddecda2a82f6e3aad5df30c801b148cfb1755ad2604c70969516024262",
+      "object_sha256": "2129948734a4eb116030164bdc40b069743f2a6ef34d3bc3e2a52ce13393aa2d"
+    },
+    {
+      "kind": "root",
+      "control": "short-rms-read",
+      "rejected": true,
+      "source_sha256": "4adab941d87096ec5542c4454996a735f9600cc612c8414e39d3d94c35c5e12a",
+      "object_sha256": "527205012dafb5342942b8be35bc1cc87e308338f697497c6242961fd791988d"
+    },
+    {
+      "kind": "root",
+      "control": "truncated-baseline",
+      "rejected": true,
+      "source_sha256": "ae352387c0fa9ffcd6eb278ec73f95ac99fe0d80c85b36712f01cd51c93c6ea4",
+      "object_sha256": "6390f32a6053b4772885d189fe69ccb91ecdcaf7239907c82e038d36588b3cdf"
+    },
+    {
+      "kind": "root",
+      "control": "wrong-normalization",
+      "rejected": true,
+      "source_sha256": "a611620112a1e79ff1314de52e5cfd5b8eb77fd8d43007b3af7a626ef9452810",
+      "object_sha256": "7ef67e6d219662d86e37a5103194889dba72d58000b2b3957515f88644614c33"
+    },
+    {
+      "kind": "root",
+      "control": "short-warm-mirror",
+      "rejected": true,
+      "source_sha256": "17ce925b6cb42f23f0c4aed5404a664023a4ec6f143d76b6f9290475de9bb7b4",
+      "object_sha256": "6f7ece6be2931a0fe764d7b0c6f2b06a5b67b66d26cb91c9ba49073af690bf59"
+    },
+    {
+      "kind": "root",
+      "control": "wrong-end-mirror",
+      "rejected": true,
+      "source_sha256": "56bbef57f93034a80ae269eb79b4240874aee2e20f8771e1658c0b1f57434e03",
+      "object_sha256": "8d0a99305332871e795635a4b2f0265300c60eb1029009f74373d5b5a930ed97"
+    },
+    {
+      "kind": "root",
+      "control": "wrong-minimum",
+      "rejected": true,
+      "source_sha256": "0ae19604b279e610f58e43775ba4d3432f01bda6e75d0ba32c1103077cc52df3",
+      "object_sha256": "f6cc9c5b5dac191f2c13762e658dc6ef7034ff767d4a7592544bad7ceb23d752"
+    },
+    {
+      "kind": "root",
+      "control": "wrong-transition-target",
+      "rejected": true,
+      "source_sha256": "fdefd36410de2920fd7050f7e1639d670a709b74583d3b69d99a4c373ced8e7c",
+      "object_sha256": "fe2cffe0b4d15d474ce869b6984a4a9105993dd7efd6d507602b93dfba9fd547"
+    },
+    {
+      "kind": "root",
+      "control": "missing-interval-pair",
+      "rejected": true,
+      "source_sha256": "954911cb8b694de271fc519f51bedc0f76ca6ff8b934d885f1999c541cceb589",
+      "object_sha256": "b2dd2d9509b435d627cd94aba8c94e4faac56a26443eb9a738334b67836ab9aa"
+    },
+    {
+      "kind": "root",
+      "control": "wrong-trim-factor",
+      "rejected": true,
+      "source_sha256": "e23a7e63c1c78baa97d31a8e67c89fc5bff858d81d31e103e4860999bc4d7e6c",
+      "object_sha256": "e15ef5cf7b64e483c75611fd0585da229897b7d2fdd729f0b7b84397459aa76e"
+    },
+    {
+      "kind": "root",
+      "control": "wrong-upper-quartile",
+      "rejected": true,
+      "source_sha256": "d1a0f7f66fc881a53411d272b6e650b8c20e1b83a18fc73abde94d4ebd97850b",
+      "object_sha256": "b850a016d1e9e49c35fe2cb707543b5fa422437447755a791d04abbd5e1080ff"
+    },
+    {
+      "kind": "root",
+      "control": "wrong-spread-threshold",
+      "rejected": true,
+      "source_sha256": "e82363641991d4799c69d2c46419b633cbea821136e9628220d737b89e33628e",
+      "object_sha256": "82b1d44c868a95a4e293149a59fbd6bae6bc0d4fb82465acef9b131caf2546b4"
+    },
+    {
+      "kind": "root",
+      "control": "missing-mode-double",
+      "rejected": true,
+      "source_sha256": "df8f1310ccc756e7c00a4a17978b6099f7048527c071d4f048e889b242e3da3d",
+      "object_sha256": "3b18967f27b51a6f288bc69ccd545820e4e51a5587ae47c0e1b588b17d5ec291"
+    },
+    {
+      "kind": "root",
+      "control": "zero-final-rate",
+      "rejected": true,
+      "source_sha256": "6cfad73a46727f65ff500cebc119b23e68fb346b4d3431848797332cef222a13",
+      "object_sha256": "17c95d39df0927c6a933201ec83b4404f68b1e31d7070cb6201dd2978af14ea3"
+    },
+    {
+      "kind": "root",
+      "control": "overaligned-frame",
+      "rejected": true,
+      "source_sha256": "b6759c852469ee748c8e36b9e00c42f99d35bf278840f37baa214030255bb314",
+      "object_sha256": "309991982993b0b5441cb7d4e6f35d803d55255a27e795046300f16f37b9ca7c"
+    },
+    {
+      "kind": "comparator",
+      "control": "difference-not-tristate",
+      "rejected": true,
+      "source_sha256": "c36754ecb296c572786f292ec9693381d8c5b33c90b9b7fc50c76508317cb415",
+      "object_sha256": "bea62c0275bdd279baa2f49c8d02e9fe22212fb901ead35d1b2c9549e6ea064d"
+    },
+    {
+      "kind": "comparator",
+      "control": "signed-byte-order",
+      "rejected": true,
+      "source_sha256": "91df0363af3cd456d160daf13a5eca12829fba788b001fba50aef8aff57edc36",
+      "object_sha256": "e58309a70f77be0753c5bf67b15792364a538374b69e0444dd20d27f5006dae6"
+    }
+  ],
+  "closure": {
+    "elf": "build/goal-r1-gomore-accel-period-c/period-24843.elf",
+    "sha256": "9619aff35929e51330e9f80ff9d5423ede176a08723c4ef20344c3aedfb8bfc8",
+    "undefined": [],
+    "required": {
+      "r1_gomore_accel_crossing_period_native": "0x1000079",
+      "r1_gomore_accel_u8_compare_native": "0x100002f",
+      "r1_gomore_accel_iir4_native": "0x1000745",
+      "r1_gomore_accel_transition_native": "0x10007b9",
+      "r1_native_qsort": "0x1000e71",
+      "__aeabi_memclr": "0x1000f2f",
+      "memset": "0x1000f39",
+      "r1_native_sqrtf": "0x1000efb"
+    },
+    "discarded_checked": [
+      "__aeabi_uldivmod",
+      "__aeabi_ldivmod",
+      "__udivmoddi4",
+      "r1_binary64_square_root_bits"
+    ],
+    "linker_native_bindings": false
+  },
+  "qualification": {
+    "selected_units": 0,
+    "selected_regions": 0
+  },
+  "canonical_bytes": {
+    "source": 4381,
+    "stock": 641779,
+    "resource": 248
+  },
+  "instruction_identity_proven": false,
+  "image_integration_proven": false,
+  "sha256": {
+    "r1/src/application/runtime/native_gomore_accel_period.c": "7a27be956656adb1e22affda8074fc277e7aaa80d8605fbb37849f102e6ac70b",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-accel-period-final-c/r1/r1-application/r1__src__application__runtime__native_gomore_accel_period.c.o": "32d412cc9e28f3cbd091930c9c85aae0d5499cee524628ace3683b3171d8b233",
+    "build/sources-goal-r1-gomore-accel-period-final-c/report.json": "b46c5ae977b6c9599e77711e9eaa38616521fc3a683a2d77aece010aff195178",
+    "r1/src/sources.json": "7bdbea114720555423b0f76e0865784290c7e89b72b214646fcb2b1a801ccd18",
+    "tools/build/source-plan.json": "43281e3850f6c7b83c5616e5968c4939993501810057ca3deaeea85eaae351ba",
+    "build/goal-r1-gomore-accel-period-c/verify.py": "8a4ab7ebad57abea21991b33630444cf3419bcf23a3ac9ccdb5ef7fa1f4e9bb0",
+    "build/goal-r1-gomore-accel-period-c/full-C.py": "4aa25c05fb2a34b1ee958fea4b14f140273069bc27f495a17b19661f32b81e3b",
+    "build/goal-r1-gomore-accel-period-c/comparator.py": "a6e3d91904d15236f2ecbf2094b079cfcfadda2c9926cb072f1d65a621b4c56c",
+    "build/goal-r1-gomore-accel-period-c/negative.py": "df2b7aaed72372d5e7b168f66f7bc7c46979459a84f74df8b74188e4bf34fe97",
+    "build/goal-r1-gomore-accel-period-c/classifier.py": "7bc55f440b05b63c666f976dcceb832e7ff44ff7edde3e453a3967e8dcdd6994",
+    "build/goal-r1-gomore-accel-period-c/checked.py": "e1de8cde3b17aca95de3bf8642a8f7dc6eb52ca348a60e222de40f37de0f411e",
+    "build/goal-r1-gomore-accel-period-c/rea-root.json": "e7af158036765fbcce8106b71e8fd8e119d6077861e761310c11d95303de82cd",
+    "build/goal-r1-gomore-accel-period-c/rea-comparator-bytes.json": "b1d6cb33851a5779ad1476352a0549aad1f05284494c411cf34872bbeeb7c17d",
+    "build/goal-r1-gomore-accel-period-c/closure.json": "d4d878d1097bd9a11d5e103138b1c75170410bdf64e313edea1a05a25cc829db",
+    "build/goal-r1-gomore-accel-period-c/searched-trim.json": "6efa3323864946f318f565b689f88b96fb2ff6a72b9968da12dd7a7ba5861fcc",
+    "build/goal-r1-gomore-accel-period-c/searched-spread.json": "cd43f5e031543c666a1fcf646e6b881fd51576f5b5227df46b7b4f405bbc0e24",
+    "build/goal-r1-gomore-accel-period-c/sources-check.log": "3c4dc74fef1556a758ee5b69305d976658e6591e315cebc20066826624c38e24",
+    "build/goal-r1-gomore-accel-period-c/hybrid.log": "51aaee27d707e9103d14fcff1f4f539dbf111da5e193f85e96f637a240bf7c88"
+  }
+}

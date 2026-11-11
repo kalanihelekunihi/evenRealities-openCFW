@@ -1,239 +1,116 @@
-/* Full native callback including branches to out-of-line blocks. */
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_dispatch_callback_31cbb0\n"
-".type opencfw_em9305_dispatch_callback_31cbb0,@function\n"
-"opencfw_em9305_dispatch_callback_31cbb0:\n"
-"L31cbb0:\n"
-"enter_s [r13-r15,fp,blink]\n"
-"L31cbb2:\n"
-"sub_s sp,sp,0x8\n"
-"L31cbb4:\n"
-"ld_s r13,[r0,0x24]\n"
-"L31cbb6:\n"
-"ldb_s r0,[r13,0x1]\n"
-"L31cbb8:\n"
-"cmp_s r0,2\n"
-"L31cbba:\n"
-"bne_s L31ccd0\n"
-"L31cbbc:\n"
-"mov_s r14,0x8029ac\n"
-"L31cbc2:\n"
-"mov_s r1,0\n"
-"L31cbc4:\n"
-"mov_s r2,0x88\n"
-"L31cbc6:\n"
-"bl.d opencfw_em9305_memset\n"
-"L31cbca:\n"
-"mov_s r0,r14\n"
-"L31cbcc:\n"
-"ldb_s r1,[r13,0x1f]\n"
-"L31cbce:\n"
-"mov r0,268\n"
-"L31cbd2:\n"
-"ldb_s r0,[r13,r0]\n"
-"L31cbd4:\n"
-"brne.d.nt r1,0x1,L31cbec\n"
-"L31cbd8:\n"
-"stb_s r0,[r14,0]\n"
-"L31cbda:\n"
-"ldb r2,[r13,52]\n"
-"L31cbde:\n"
-"brlo.d.nt r2,0x2,L31cbfa\n"
-"L31cbe2:\n"
-"ld_s r12,[r13,0xc]\n"
-"L31cbe4:\n"
-"ld.as r0,[r13,65]\n"
-"L31cbe8:\n"
-"brne_s r0,0,L31cc06\n"
-"L31cbea:\n"
-"b_s L31cc02\n"
-"L31cbec:\n"
-"ldb_s r3,[r13,0x19]\n"
-"L31cbee:\n"
-"brlo.d.nt r3,0x2,L31cc2e\n"
-"L31cbf2:\n"
-"mov_s r1,0\n"
-"L31cbf4:\n"
-"ld.as r0,[r13,64]\n"
-"L31cbf8:\n"
-"b_s L31cc3c\n"
-"L31cbfa:\n"
-"ldb_s r0,[r13,0x19]\n"
-"L31cbfc:\n"
-"brlo.d.nt r0,0x2,L31cc0c\n"
-"L31cc00:\n"
-"mov_s r1,0\n"
-"L31cc02:\n"
-"ld.as r0,[r13,64]\n"
-"L31cc06:\n"
-"add2 r1,r0,0x2c\n"
-"L31cc0a:\n"
-"st_s r1,[r14,0x10]\n"
-"L31cc0c:\n"
-"brlo.d.nt r2,0x2,L31cc8a\n"
-"L31cc10:\n"
-"st_s r12,[r14,0xc]\n"
-"L31cc12:\n"
-"ld.as r0,[r13,65]\n"
-"L31cc16:\n"
-"brne_s r0,0,L31cc8a\n"
-"L31cc18:\n"
-"ldb_s r3,[r13,0x19]\n"
-"L31cc1a:\n"
-"mpywhl r0,r12,r2\n"
-"L31cc1e:\n"
-"brlo.d.nt r3,0x2,L31cc8a\n"
-"L31cc22:\n"
-"st_s r0,[r14,0xc]\n"
-"L31cc24:\n"
-"ld.as r0,[r13,64]\n"
-"L31cc28:\n"
-"add2 r1,r0,0x2c\n"
-"L31cc2c:\n"
-"b_s L31cc90\n"
-"L31cc2e:\n"
-"ldb r0,[r13,52]\n"
-"L31cc32:\n"
-"brlo.nt r0,0x2,L31cc42\n"
-"L31cc36:\n"
-"ld.as r0,[r13,65]\n"
-"L31cc3a:\n"
-"breq_s r0,0,L31cc42\n"
-"L31cc3c:\n"
-"add2 r1,r0,0x2c\n"
-"L31cc40:\n"
-"st_s r1,[r14,0x10]\n"
-"L31cc42:\n"
-"ldb_s r2,[r13,0x18]\n"
-"L31cc44:\n"
-"ldb_s r0,[r13,0x1b]\n"
-"L31cc46:\n"
-"mpyuw_s r0,r0,r2\n"
-"L31cc48:\n"
-"brne.nt r0,0x1,L31cc86\n"
-"L31cc4c:\n"
-"ldb_s r0,[r13,0x1a]\n"
-"L31cc4e:\n"
-"breq_s r0,0,L31cc86\n"
-"L31cc50:\n"
-"ldb r0,[r13,52]\n"
-"L31cc54:\n"
-"brhs.nt r0,0x2,L31cc86\n"
-"L31cc58:\n"
-"brlo.d.nt r3,0x2,L31cc86\n"
-"L31cc5c:\n"
-"mov_s r15,1\n"
-"L31cc5e:\n"
-"ld r1,[r14,0]\n"
-"L31cc60:\n"
-"ldb_s r0,[r14,0x4]\n"
-"L31cc62:\n"
-"st_s r1,[sp,0]\n"
-"L31cc64:\n"
-"stb r0,[sp,4]\n"
-"L31cc68:\n"
-"add_s r1,sp,0\n"
-"L31cc6a:\n"
-"bl.d opencfw_em9305_dispatch_child_317418\n"
-"L31cc6e:\n"
-"mov_s r0,r13\n"
-"L31cc70:\n"
-"breq_s r0,0,L31ccd6\n"
-"L31cc72:\n"
-"ldb_s r0,[sp,0]\n"
-"L31cc74:\n"
-"add2 r0,r13,r0\n"
-"L31cc78:\n"
-"ld_s r0,[r0,0x38]\n"
-"L31cc7a:\n"
-"breq_s r0,0,L31cc82\n"
-"L31cc7c:\n"
-"ldb r1,[sp,3]\n"
-"L31cc80:\n"
-"breq_s r1,0,L31ccdc\n"
-"L31cc82:\n"
-"add_s r15,r15,1\n"
-"L31cc84:\n"
-"b_s L31cc68\n"
-"L31cc86:\n"
-"ld_s r0,[r13,0x30]\n"
-"L31cc88:\n"
-"st_s r0,[r14,0xc]\n"
-"L31cc8a:\n"
-"brne_s r1,0,L31cc92\n"
-"L31cc8c:\n"
-"add3 r1,r13,0x33\n"
-"L31cc90:\n"
-"st_s r1,[r14,0x10]\n"
-"L31cc92:\n"
-"ldb_s r2,[r13,0x18]\n"
-"L31cc94:\n"
-"ld_s r0,[r13,0x24]\n"
-"L31cc96:\n"
-"ld_s r3,[r13,0x20]\n"
-"L31cc98:\n"
-"mpywhl r12,r0,r2\n"
-"L31cc9c:\n"
-"mpydu r2,r3,r2\n"
-"L31cca0:\n"
-"add3 r0,r13,0x33\n"
-"L31cca4:\n"
-"cmp_s r1,r0\n"
-"L31cca6:\n"
-"add_s r0,r3,r12\n"
-"L31cca8:\n"
-"beq_s L31ccb4\n"
-"L31ccaa:\n"
-"ldb_s r1,[r14,0x1]\n"
-"L31ccac:\n"
-"add.f r2,r2,r1\n"
-"L31ccb0:\n"
-"adc.f r0,r0,0\n"
-"L31ccb4:\n"
-"st r2,[r14,128]\n"
-"L31ccb8:\n"
-"st r0,[r14,132]\n"
-"L31ccbc:\n"
-"mov_s r1,0\n"
-"L31ccbe:\n"
-"mov_s r2,0\n"
-"L31ccc0:\n"
-"mov_s r0,r13\n"
-"L31ccc2:\n"
-"stb -1,[r14,8]\n"
-"L31ccc6:\n"
-"bl.d opencfw_em9305_dispatch_child_31d5e8\n"
-"L31ccca:\n"
-"stb 1,[r14,7]\n"
-"L31ccce:\n"
-"brne_s r0,0,L31ccd4\n"
-"L31ccd0:\n"
-"bl opencfw_em9305_auxiliary_signal_304394\n"
-"L31ccd4:\n"
-"leave_s [r13-r15,fp,blink,pcl]\n"
-"L31ccd6:\n"
-"add3 r1,r13,0x33\n"
-"L31ccda:\n"
-"b_s L31cce0\n"
-"L31ccdc:\n"
-"add2 r1,r0,0x2c\n"
-"L31cce0:\n"
-"ld_s r2,[r13,0x30]\n"
-"L31cce2:\n"
-"extb_s r0,r15\n"
-"L31cce4:\n"
-"ld r3,[r14,0xc]\n"
-"L31cce6:\n"
-"mpywhl r0,r2,r0\n"
-"L31ccea:\n"
-"st_s r1,[r14,0x10]\n"
-"L31ccec:\n"
-"add_s r0,r0,r3\n"
-"L31ccee:\n"
-"st_s r0,[r14,0xc]\n"
-"L31ccf0:\n"
-"b_s L31cc92\n"
-".size opencfw_em9305_dispatch_callback_31cbb0,.-opencfw_em9305_dispatch_callback_31cbb0\n"
-);
+#include <stdint.h>
+
+/* Native 0x31cbb0..0x31ccf2: prepare the BIG transmit descriptor at
+ * 0x8029ac for the group (object +36) in state 2, else signal the
+ * auxiliary task. The descriptor (136 bytes, cleared) takes the BIG handle
+ * (+268), the first PDU source (+16: the second (+260) or first (+256)
+ * stream's +176 block, else the group's own +408 block) and the event
+ * offset (+12): the sub-interval (+12) or its multiple by the stream count
+ * (+52) for sequential multi-stream groups, the ISO interval (+48) plus,
+ * for single-stream framed groups with one burst and pre-transmission
+ * (+24 * +27 == 1, +26, +25 >= 2), the slot of the first unacknowledged
+ * stream found by 317418 times +48. The 64-bit anchor is +32/+36 times the
+ * burst number (+24), plus the descriptor's subevent byte (+1) for stream
+ * sources. Then the transmit chain (31d5e8) is started, signalling the
+ * auxiliary task when it fails. */
+extern void *opencfw_em9305_memset(void *dst,uint32_t value,uint32_t count);
+extern uint32_t opencfw_em9305_dispatch_child_317418(uintptr_t config,
+                                                     uintptr_t state);
+extern uint32_t opencfw_em9305_dispatch_child_31d5e8(uintptr_t set,uint32_t done,
+                                                     uintptr_t buffer);
+extern void opencfw_em9305_auxiliary_signal_304394(void);
+
+static inline uint32_t r8(uintptr_t a){return *(volatile uint8_t *)a;}
+static inline uint32_t r32(uintptr_t a){return *(volatile uint32_t *)a;}
+static inline void w8(uintptr_t a,uint32_t v){*(volatile uint8_t *)a=(uint8_t)v;}
+static inline void w32(uintptr_t a,uint32_t v){*(volatile uint32_t *)a=v;}
+
+#define TX 0x8029acu
+
+void opencfw_em9305_dispatch_callback_31cbb0(uintptr_t object)
+{
+    uintptr_t group=r32(object+36u);
+    if(r8(group+1u)!=2u){
+        opencfw_em9305_auxiliary_signal_304394();
+        return;
+    }
+    (void)opencfw_em9305_memset((void *)TX,0u,0x88u);
+    uint32_t framing=r8(group+31u);
+    w8(TX,r8(group+268u));
+    uintptr_t source=0u;
+    if(framing==1u){
+        uint32_t streams=r8(group+52u);
+        uint32_t offset=r32(group+12u);
+        if(streams>=2u){
+            uintptr_t stream=r32(group+260u);
+            if(stream==0u)stream=r32(group+256u);
+            source=stream+176u;
+            w32(TX+16u,source);
+            w32(TX+12u,offset);
+            if(r32(group+260u)==0u){
+                uint32_t total=offset*streams;
+                if(r8(group+25u)>=2u){
+                    w32(TX+12u,total);
+                    source=r32(group+256u)+176u;
+                    w32(TX+16u,source);
+                    goto anchor;
+                }
+                w32(TX+12u,total);
+            }
+        }else{
+            if(r8(group+25u)>=2u){
+                source=r32(group+256u)+176u;
+                w32(TX+16u,source);
+            }
+            w32(TX+12u,offset);
+        }
+    }else{
+        uint32_t bursts=r8(group+25u);
+        if(bursts>=2u){
+            source=r32(group+256u)+176u;
+            w32(TX+16u,source);
+        }else if(r8(group+52u)>=2u&&r32(group+260u)!=0u){
+            source=r32(group+260u)+176u;
+            w32(TX+16u,source);
+        }
+        if((r8(group+27u)*r8(group+24u)&0xffffu)==1u&&r8(group+26u)!=0u
+           &&r8(group+52u)<2u&&bursts>=2u){
+            _Alignas(4) uint8_t cursor[8];
+            uint32_t slot=1u;
+            *(uint32_t *)(void *)cursor=r32(TX);
+            cursor[4]=(uint8_t)r8(TX+4u);
+            for(;;){
+                if(opencfw_em9305_dispatch_child_317418(group,(uintptr_t)cursor)==0u){
+                    source=group+408u;
+                    break;
+                }
+                uintptr_t stream=r32(group+cursor[0]*4u+56u);
+                if(stream!=0u&&cursor[3]==0u){
+                    source=stream+176u;
+                    break;
+                }
+                ++slot;
+            }
+            uint32_t interval=r32(group+48u);
+            uint32_t base=r32(TX+12u);
+            w32(TX+16u,source);
+            w32(TX+12u,interval*(uint8_t)slot+base);
+            goto anchor;
+        }
+        w32(TX+12u,r32(group+48u));
+    }
+    if(source==0u){
+        source=group+408u;
+        w32(TX+16u,source);
+    }
+anchor:;
+    uint32_t burst=r8(group+24u);
+    uint64_t anchor=((uint64_t)r32(group+36u)<<32|r32(group+32u))*burst;
+    if(source!=group+408u)anchor+=r8(TX+1u);
+    w32(TX+128u,(uint32_t)anchor);
+    w32(TX+132u,(uint32_t)(anchor>>32));
+    w8(TX+8u,0xffu);
+    w8(TX+7u,1u);
+    if(opencfw_em9305_dispatch_child_31d5e8(group,0u,0u)==0u)
+        opencfw_em9305_auxiliary_signal_304394();
+}

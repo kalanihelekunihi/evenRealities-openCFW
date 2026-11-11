@@ -1,28 +1,16 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_315f64\n"
-".type opencfw_em9305_child_315f64,@function\n"
-"opencfw_em9305_child_315f64:\n"
-"L315f64:\n"
-"enter_s [r13,blink]\n"
-"L315f66:\n"
-"bl.d opencfw_em9305_child_3197e8\n"
-"L315f6a:\n"
-"mov_s r13,r0\n"
-"L315f6c:\n"
-"bl.d opencfw_em9305_child_3197d8\n"
-"L315f70:\n"
-"mov_s r0,r13\n"
-"L315f72:\n"
-"bl.d opencfw_em9305_child_326a48\n"
-"L315f76:\n"
-"mov_s r0,r13\n"
-"L315f78:\n"
-"bl.d opencfw_em9305_phy_timer_start_32c7e4\n"
-"L315f7c:\n"
-"mov_s r0,r13\n"
-"L315f7e:\n"
-"leave_s [r13,blink,pcl]\n"
-".size opencfw_em9305_child_315f64,.-opencfw_em9305_child_315f64\n"
-);
+#include <stdint.h>
+
+/* Native 0x315f64..0x315f80: run the 3197e8, 3197d8 and 326a48 steps on the
+ * record, then return the PHY timer start status. */
+extern uint32_t opencfw_em9305_child_3197e8(uint32_t);
+extern uint32_t opencfw_em9305_child_3197d8(uint32_t);
+extern uint32_t opencfw_em9305_child_326a48(uint32_t);
+extern uint32_t opencfw_em9305_phy_timer_start_32c7e4(uintptr_t);
+
+uint32_t opencfw_em9305_child_315f64(uintptr_t record)
+{
+    (void)opencfw_em9305_child_3197e8(record);
+    (void)opencfw_em9305_child_3197d8(record);
+    (void)opencfw_em9305_child_326a48(record);
+    return opencfw_em9305_phy_timer_start_32c7e4(record);
+}

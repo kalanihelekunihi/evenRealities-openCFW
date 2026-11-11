@@ -112,6 +112,11 @@ class Toolchain:
         if not self.docker:
             return [self.host_path(self.spec["cc"])]
         d = self.docker
+        if self.spec.get("compiler_sha256") and not getattr(self, "_compiler_checked", False):
+            compiler = Path(self.host_path(d["mounts"]["/tool"])) / Path(self.spec["cc"]).relative_to("/tool")
+            if sha(compiler) != self.spec["compiler_sha256"]:
+                raise RuntimeError(f"{self.name}: compiler identity changed: {compiler}")
+            self._compiler_checked = True
         argv = [self.host_path("docker"), "run", "--rm", "--network=none", "--read-only",
                 "--platform", d.get("platform", "linux/amd64"),
                 "--mount", f"type=bind,src={ROOT},dst=/repo,readonly",
@@ -129,7 +134,11 @@ def render(args, ctx):
 
 def unit_argv(manifest, unit, ctx):
     profile = manifest["profiles"][unit["profile"]]
-    return render(profile + unit.get("flags", []), ctx)
+    extra = []
+    # Diagnostic sim builds only (unset by default): extra clang flags for apollo-main units.
+    if unit.get("payload") == "g2-apollo-main" and os.environ.get("G2_SIM_EXTRA_CFLAGS"):
+        extra = os.environ["G2_SIM_EXTRA_CFLAGS"].split()
+    return render(profile + unit.get("flags", []) + extra, ctx)
 
 
 # --- generated inputs ------------------------------------------------------
@@ -219,8 +228,44 @@ def finish(unit, obj, argv, rc, log, gen):
         row["object"] = str(obj)
         try:
             row.update(elf_symbols(obj))
-        except ValueError as exc:
+            selection = unit.get("retain")
+            if selection is not None:
+                if not isinstance(selection, dict):
+                    raise ValueError("retain must specify linker and symbols")
+                roots = selection.get("symbols", [])
+                if not isinstance(roots, list) or not roots or len(set(roots)) != len(roots) or not all(
+                        isinstance(s, str) and s and not s.startswith("-") for s in roots):
+                    raise ValueError("retain.symbols must name distinct defined roots")
+                if set(roots) - set(row["strong"] + row["weak"]):
+                    raise ValueError("retain root not defined in compiled object")
+                selected = obj.with_suffix(".selected.o")
+                command = [selection["linker"], "-r", "--gc-sections"]
+                for symbol in roots:
+                    command += ["--undefined", symbol]
+                command += ["-o", str(selected), str(obj)]
+                proc = subprocess.run(command, cwd=ROOT, capture_output=True, text=True)
+                row["retain"] = {"symbols": roots, "argv": command,
+                                 "returncode": proc.returncode,
+                                 "log": (proc.stdout + proc.stderr)[-4000:]}
+                if proc.returncode != 0:
+                    raise ValueError("retained-root relocatable link failed")
+                symbols = elf_symbols(selected)
+                if set(roots) - set(symbols["strong"] + symbols["weak"]):
+                    raise ValueError("retained-root link lost a requested definition")
+                row["compiler_object"] = row["object"]
+                row["compiler_object_sha256"] = row["object_sha256"]
+                row["compiler_symbols"] = {k: row[k] for k in ("strong", "weak", "undefined")}
+                row.update(symbols, object=str(selected), object_sha256=sha(selected))
+        except (ValueError, OSError, KeyError, TypeError) as exc:
+            row["returncode"] = 125
             row["symbol_error"] = str(exc)
+            if unit.get("retain") is not None:
+                row["compiler_object"] = str(obj)
+                row["compiler_object_sha256"] = sha(obj)
+                row.setdefault("compiler_symbols", {k: row.get(k, []) for k in ("strong", "weak", "undefined")})
+                row.update(strong=[], weak=[], undefined=[])
+                row.pop("object", None)
+                row.pop("object_sha256", None)
     elif rc == 0:
         row["returncode"] = 125
         row["error"] = "compiler reported success without an object"
@@ -255,7 +300,9 @@ def build(args):
     report = {"schema": 1, "devices": {}}
     failed = False
     for device in args.devices:
-        manifest = load(device)
+        manifest_bytes = manifest_path(device).read_bytes()
+        manifest_sha256 = hashlib.sha256(manifest_bytes).hexdigest()
+        manifest = json.loads(manifest_bytes)
         toolchains = {k: Toolchain(k, v) for k, v in manifest["toolchains"].items()}
         out = (args.out / device).resolve()
         gen = (args.out / "generated" / device).resolve()
@@ -292,20 +339,37 @@ def build(args):
                        "failed": [r["source"] for r in prow if r["returncode"] != 0 and r["expect"] != "fails"],
                        "known_failures": [r["source"] for r in prow if r["returncode"] != 0 and r["expect"] == "fails"],
                        "now_compiling": [r["source"] for r in prow if r["returncode"] == 0 and r["expect"] == "fails"],
-                       "duplicate_strong_symbols": dups, "unresolved_symbols": len(undefined)}
+                       "duplicate_strong_symbols": dups, "object_unresolved_symbols": len(undefined),
+                       "composed_unresolved_symbols": None, "unresolved_symbols": len(undefined),
+                       "unresolved_scope": "objects"}
             if not dups and not args.no_compose:
                 summary["compose"] = compose(manifest, toolchains, payload, prow, out / payload, gen)
+            composition = summary.get("compose")
+            compose_failed = composition is not None and composition["returncode"] != 0
+            if composition is not None and not compose_failed:
+                summary["composed_unresolved_symbols"] = len(composition["undefined"])
+                summary["unresolved_symbols"] = summary["composed_unresolved_symbols"]
+                summary["unresolved_scope"] = "composed"
             payloads[payload] = summary
-            status = "ok" if not summary["failed"] and not dups else "FAILED"
+            status = "ok" if not summary["failed"] and not dups and not compose_failed else "FAILED"
+            scope_note = (f"composed; {len(undefined)} before aliases"
+                          if summary["unresolved_scope"] == "composed" else "objects; no successful composition")
             print(f"{device}: {payload}: {summary['compiled']}/{summary['units']} compiled "
                   f"({len(summary['known_failures'])} known failures), {len(dups)} duplicate strong symbols, "
-                  f"{len(undefined)} unresolved: {status}", flush=True)
+                  f"{summary['unresolved_symbols']} unresolved: {status} ({scope_note})", flush=True)
             for source in summary["failed"]:
                 print(f"  failed: {source}", flush=True)
             for source in summary["now_compiling"]:
                 print(f"  now compiles (update expect): {source}", flush=True)
-            failed |= bool(summary["failed"] or dups)
-        report["devices"][device] = {"manifest_sha256": sha(manifest_path(device)), "generated": generated,
+            if compose_failed:
+                print(f"  relocatable link failed (exit {composition['returncode']}): {composition['log']}", flush=True)
+            failed |= bool(summary["failed"] or dups or compose_failed)
+        manifest_changed = sha(manifest_path(device)) != manifest_sha256
+        if manifest_changed:
+            print(f"{device}: source manifest changed during the build; rerun with stable inputs", flush=True)
+            failed = True
+        report["devices"][device] = {"manifest_sha256": manifest_sha256,
+                                     "manifest_changed_during_build": manifest_changed, "generated": generated,
                                      "payloads": payloads, "units": rows}
     report["source_completeness"] = "not established by compilation"
     (args.out / "report.json").write_text(json.dumps(report, indent=1) + "\n")

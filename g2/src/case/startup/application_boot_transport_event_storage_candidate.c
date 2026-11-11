@@ -24,7 +24,7 @@ uint32_t case_boot_transport_event_create(uint32_t storage)
 {
     if(storage==0u){
         __asm__ volatile("cpsid i" ::: "memory");
-        for(;;)__asm__ volatile("b ." ::: "memory");
+        for(;;){ }
     }
     volatile uint32_t *state=(volatile uint32_t *)(uintptr_t)storage;
     state[0u]=0u;

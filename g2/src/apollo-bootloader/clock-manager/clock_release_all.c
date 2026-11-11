@@ -10,3 +10,6 @@ uint32_t opencfw_bl_clock_release_all(uint32_t user_register) {
  }
  return 0u;
 }
+/* AmbiqSuite 5.1.0 am_hal_clkmgr.c name (stock 0x4223d8). */
+uint32_t am_hal_clkmgr_clock_release_all(uint32_t user_register)
+    __attribute__((alias("opencfw_bl_clock_release_all")));

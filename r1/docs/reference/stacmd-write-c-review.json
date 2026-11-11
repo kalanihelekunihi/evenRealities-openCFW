@@ -1,0 +1,383 @@
+{
+  "schema": 1,
+  "scope": "STACMD write frame direct C replaces naked bridge and private worker; read frame bridge retained",
+  "native_entry": "0x28c6c",
+  "native_code_bytes": 130,
+  "padding_bytes": 2,
+  "literal_bytes": 4,
+  "normal_build": {
+    "report": "build/sources-goal-r1-stacmd-write-c/report.json",
+    "units": 576,
+    "unit": {
+      "source": "r1/src/application/board/native_stacmd_frames.c",
+      "payload": "r1-application",
+      "role": "candidate",
+      "toolchain": "clang",
+      "link": true,
+      "expect": "compile",
+      "returncode": 0,
+      "argv": [
+        "/usr/bin/clang",
+        "--target=arm-none-eabi",
+        "-mcpu=cortex-m4",
+        "-mthumb",
+        "-munaligned-access",
+        "-mfpu=fpv4-sp-d16",
+        "-mfloat-abi=hard",
+        "-std=c11",
+        "-Os",
+        "-falign-loops=1",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-fshort-enums",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-fno-delete-null-pointer-checks",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/r1/src/vendor",
+        "-isystem",
+        "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
+        "-MD",
+        "-MF",
+        "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-stacmd-write-c/r1/r1-application/r1__src__application__board__native_stacmd_frames.c.d",
+        "-c",
+        "/Users/kalani/Repo/evenRealities-openCFW/r1/src/application/board/native_stacmd_frames.c",
+        "-o",
+        "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-stacmd-write-c/r1/r1-application/r1__src__application__board__native_stacmd_frames.c.o"
+      ],
+      "source_sha256": "a25927fdcf494f7cc33c5bbec619e25c7221872b16df9cbb050f816f0a181fb9",
+      "object_sha256": "011f51fa0835e437d6d3fbc042ac58148a4740407111f7bcfe7a83e8fbaab673",
+      "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-stacmd-write-c/r1/r1-application/r1__src__application__board__native_stacmd_frames.c.o",
+      "strong": [
+        "r1_stacmd_read_frame_native",
+        "r1_stacmd_write_frame_native"
+      ],
+      "weak": [],
+      "undefined": [
+        "r1_stacmd",
+        "r1_stacmd_drive_bit_native",
+        "r1_stacmd_idle_native",
+        "r1_stacmd_parity_native",
+        "r1_stacmd_read_bit_adapter_native",
+        "r1_stacmd_read_bit_native",
+        "r1_stacmd_write_bits_native"
+      ]
+    }
+  },
+  "audit": {
+    "other_objects_unchanged": 575,
+    "read_frame_bridge_and_worker_bytes_and_relocations_unchanged": true,
+    "retired_worker": "stacmd_write_frame_body",
+    "retired_bridge_bytes": 14,
+    "new_write_frame_bytes": 146,
+    "new_write_empty_constraints": 1,
+    "remaining_naked_function": "r1_stacmd_read_frame_native",
+    "application_imports": 164,
+    "bootloader_imports": 34,
+    "import_sets_unchanged": true
+  },
+  "validation": {
+    "clang": {
+      "paired_cases": 3824,
+      "executions": 7648,
+      "actual_parity_executes": true,
+      "checks": [
+        "ACK word initialized from incoming R3 and restored to R3",
+        "native ACK pointer and all provider depths 24 bytes",
+        "volatile byte reload after ACK mutation",
+        "signed length gate, header truncation, parity/status and release ordering",
+        "full controlled shared state, saved registers and interrupt masks"
+      ],
+      "callback_depths": [
+        [
+          [
+            -24
+          ],
+          [
+            -24
+          ]
+        ]
+      ],
+      "limitations": [
+        "Idle/write/drive/ACK/release providers modeled; real parity executes",
+        "Active provider saved-register values and private stack/save slots differ",
+        "Header C local is private and not native saved-register storage",
+        "R1/R2/R12/APSR/return-address bits, saved-slot aliases, faults, wire timing and physical devices excluded"
+      ]
+    },
+    "gcc9": {
+      "paired_cases": 3824,
+      "executions": 7648,
+      "actual_parity_executes": true,
+      "checks": [
+        "ACK word initialized from incoming R3 and restored to R3",
+        "native ACK pointer and all provider depths 24 bytes",
+        "volatile byte reload after ACK mutation",
+        "signed length gate, header truncation, parity/status and release ordering",
+        "full controlled shared state, saved registers and interrupt masks"
+      ],
+      "callback_depths": [
+        [
+          [
+            -24
+          ],
+          [
+            -24
+          ]
+        ]
+      ],
+      "limitations": [
+        "Idle/write/drive/ACK/release providers modeled; real parity executes",
+        "Active provider saved-register values and private stack/save slots differ",
+        "Header C local is private and not native saved-register storage",
+        "R1/R2/R12/APSR/return-address bits, saved-slot aliases, faults, wire timing and physical devices excluded"
+      ]
+    },
+    "clang_protocol_integration": {
+      "cases": 219,
+      "passed": 219,
+      "gpio_only_model": true,
+      "actual_units": [
+        "r1/src/application/board/native_stacmd_delay.c",
+        "r1/src/application/board/native_stacmd_frames.c",
+        "r1/src/application/board/native_stacmd_receive.c",
+        "r1/src/application/board/native_stacmd_recovery.c",
+        "r1/src/application/board/native_stacmd_transmit.c"
+      ],
+      "source_sha256": {
+        "r1/src/application/board/native_stacmd_delay.c": "a32a752c54def86d2abf1da657712875dd62c9feb2baf6badedbbe77742947c5",
+        "r1/src/application/board/native_stacmd_frames.c": "a25927fdcf494f7cc33c5bbec619e25c7221872b16df9cbb050f816f0a181fb9",
+        "r1/src/application/board/native_stacmd_receive.c": "40a155224ae6e5ecf0d2b436f51350649c0afb2db195fb95f5b89d4e18f7345e",
+        "r1/src/application/board/native_stacmd_recovery.c": "bcb2f8feff97748f9f67bf3e558ae64b3fc7767d41365a65037d71a694f0f25f",
+        "r1/src/application/board/native_stacmd_transmit.c": "26da88091528558fdf193f0a1e8ced7206e5e9967fd93f450830f1d10049a73c"
+      },
+      "report": "build/sources-goal-r1-stacmd-write-c/report.json",
+      "fixture_compile_argv": [
+        "clang",
+        "--target=arm-none-eabi",
+        "-mcpu=cortex-m4",
+        "-mthumb",
+        "-mfpu=fpv4-sp-d16",
+        "-mfloat-abi=hard",
+        "-Os",
+        "-fshort-enums",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-c",
+        "build/goal-r1-stacmd-write-c/integration/gpio.c",
+        "-o",
+        "build/goal-r1-stacmd-write-c/integration/gpio.o"
+      ],
+      "source_elf_sha256": "19a7955e959cfdc07b373b8a40c1352aae1fc68a7fbba09298a4433f21654d91",
+      "limitations": [
+        "GPIO callbacks are probe C models; no physical timing or peripheral validation",
+        "Private stack depth differs; ABI preservation and GPIO traces checked"
+      ]
+    },
+    "gcc9_frames_protocol_integration": {
+      "cases": 219,
+      "passed": 219,
+      "gpio_only_model": true,
+      "actual_units": [
+        "r1/src/application/board/native_stacmd_delay.c",
+        "r1/src/application/board/native_stacmd_frames.c",
+        "r1/src/application/board/native_stacmd_receive.c",
+        "r1/src/application/board/native_stacmd_recovery.c",
+        "r1/src/application/board/native_stacmd_transmit.c"
+      ],
+      "source_sha256": {
+        "r1/src/application/board/native_stacmd_delay.c": "a32a752c54def86d2abf1da657712875dd62c9feb2baf6badedbbe77742947c5",
+        "r1/src/application/board/native_stacmd_frames.c": "a25927fdcf494f7cc33c5bbec619e25c7221872b16df9cbb050f816f0a181fb9",
+        "r1/src/application/board/native_stacmd_receive.c": "40a155224ae6e5ecf0d2b436f51350649c0afb2db195fb95f5b89d4e18f7345e",
+        "r1/src/application/board/native_stacmd_recovery.c": "bcb2f8feff97748f9f67bf3e558ae64b3fc7767d41365a65037d71a694f0f25f",
+        "r1/src/application/board/native_stacmd_transmit.c": "26da88091528558fdf193f0a1e8ced7206e5e9967fd93f450830f1d10049a73c"
+      },
+      "report": "build/sources-goal-r1-stacmd-write-c/report.json",
+      "fixture_compile_argv": [
+        "clang",
+        "--target=arm-none-eabi",
+        "-mcpu=cortex-m4",
+        "-mthumb",
+        "-mfpu=fpv4-sp-d16",
+        "-mfloat-abi=hard",
+        "-Os",
+        "-fshort-enums",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-c",
+        "build/goal-r1-stacmd-write-c/integration/gpio.c",
+        "-o",
+        "build/goal-r1-stacmd-write-c/integration/gpio.o"
+      ],
+      "source_elf_sha256": "a487098c12ba1587d852a1b74124c5f7fbf444a104d8b81c5904974e6457dcde",
+      "limitations": [
+        "GPIO callbacks are probe C models; no physical timing or peripheral validation",
+        "Private stack depth differs; ABI preservation and GPIO traces checked"
+      ]
+    }
+  },
+  "negative_controls": [
+    {
+      "mutation": "zero-seed",
+      "rejected": true
+    },
+    {
+      "mutation": "stale-byte-after-ACK",
+      "rejected": true
+    },
+    {
+      "mutation": "wrong-ACK-address",
+      "rejected": true
+    },
+    {
+      "mutation": "unsigned-length",
+      "rejected": true
+    },
+    {
+      "mutation": "previous-bridge",
+      "rejected": true
+    },
+    {
+      "mutation": "straightforward-C-frame32",
+      "rejected": true
+    }
+  ],
+  "frame": {
+    "native_provider_depth": 24,
+    "Clang_local_bytes": 8,
+    "Clang_saved_bytes": 16,
+    "GCC9_local_extent_bytes": 8,
+    "GCC9_saved_bytes": 16,
+    "ACK_pointer_offset": -24,
+    "ACK_word_seeded_from_incoming_R3_bytes_pointer": true,
+    "R3_reloaded_on_all_return_paths": true,
+    "volatile_private_header_in_second_word": true,
+    "private_save_slots_equal": false
+  },
+  "REA": {
+    "evidence_id": "ev_7ffdd663c1fca851eaf155662886f8b945d2bf282d714cf2ba6b4f0ba6074582",
+    "subject": {
+      "name": "stock.elf",
+      "digest": {
+        "sha256": "25b4a29af80ec8edab5bd861ba9b74a6e22eab29dc3d7a809a16869e8a140f04"
+      },
+      "local_path": "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-queue-reset-c/stock.elf",
+      "format": "elf",
+      "architecture": "arm"
+    },
+    "provider": {
+      "id": "ghidra",
+      "name": "Ghidra",
+      "version": "12.1.4"
+    },
+    "analysis_profile": {
+      "provider": {
+        "id": "ghidra",
+        "name": "Ghidra",
+        "version": "12.1.4"
+      },
+      "parameters": {
+        "target_kind": "executable",
+        "target_format": "elf",
+        "architecture": "arm",
+        "available_architectures": [
+          "arm"
+        ],
+        "import_mode": "ephemeral-source-immutable",
+        "annotation_policy": "atomic-function-entry-metadata-v1",
+        "load_image_observations": "source-mappings-entry-context-v2",
+        "function_body_evidence": "complete-inclusive-ranges-v1",
+        "function_references": "complete-body-and-entry-reference-manager-v2",
+        "call_relationship_coverage": "function-body-call-coverage-v5",
+        "function_dossier_coverage": "observed-facets-and-call-relationships-v1",
+        "string_inventory_evidence": "defined-data-coverage-v1",
+        "location_resolution": "explicit-address-exact-entry-symbol-first-v3",
+        "procedure_file_offset_resolution": "address-first-unique-target-source-mapping-v2",
+        "instruction_flow_evidence": "decoded-return-pcode-v1",
+        "instruction_references": "exact-address-incoming-v1",
+        "function_boundary_observations": "ghidra-function-boundary-limitations-v3",
+        "no_return_repair": "returning-imports-decoded-return-v2",
+        "process_launch": "inspected-jvm-launch-support-v1",
+        "jump_table_evidence": "typed-case-default-blocks-v1",
+        "decompiler_jump_loads": true,
+        "loader": "auto-from-header",
+        "language_id": "auto-from-header",
+        "compiler_spec_id": "auto-default",
+        "analyzer_preset": "ghidra-default"
+      },
+      "digest": "7e46711069eea041af1b9b99e34115c13332795e5cda76e584a722f529ec70de"
+    },
+    "predicate_type": "rea.analysis",
+    "operation": "read_bytes",
+    "parameters": {
+      "address": "0x28c6c",
+      "length": 136
+    },
+    "raw_result": {
+      "address": "0x28c6c",
+      "requested_bytes": 136,
+      "returned_bytes": 136,
+      "bytes_hex": "f8b5164601271d46420627d500f0f0000844c4b234f024f80121204633f0eeff002033f0a9ff68466df0aafeb0b16006000e6df003fe009988420fd1002413e0285d002133f0daff68466df099fe28b1285d6df0f3fd0099884204d0002433f0ffff2046f8bd641cb442e9db33f0f8ff0448c36890f82010c269184690473846f8bd0000c4750020",
+      "complete": true
+    },
+    "normalized_result": {
+      "address": "0x28c6c",
+      "requested_bytes": 136,
+      "returned_bytes": 136,
+      "bytes_hex": "f8b5164601271d46420627d500f0f0000844c4b234f024f80121204633f0eeff002033f0a9ff68466df0aafeb0b16006000e6df003fe009988420fd1002413e0285d002133f0daff68466df099fe28b1285d6df0f3fd0099884204d0002433f0ffff2046f8bd641cb442e9db33f0f8ff0448c36890f82010c269184690473846f8bd0000c4750020",
+      "complete": true
+    },
+    "confidence": "observed",
+    "authority": "shipped-artifact",
+    "environment": null,
+    "limitations": [
+      "The session serves operations only after Ghidra reports default auto-analysis complete; incomplete analysis does not expose partial results.",
+      "The imported Program and temporary project are ephemeral and deleted on close. Annotation operations edit session database metadata; original executable bytes are never written.",
+      "Cancelling an active Ghidra request terminates its ephemeral database and discards session annotations. The selected target remains open; the next provider query imports the original artifact again.",
+      "Default-space addresses use lowercase 0x-prefixed hexadecimal; other address spaces use <percent-encoded-space>:0x<hex>.",
+      "Bytes reflect Ghidra's initialized memory, including loader fixups. Reads stop at an unmapped or uninitialized byte and report completeness explicitly.",
+      "macOS sessions require a matching executable Ghidra native decompiler; REA checks for it but does not build native components or change Gatekeeper quarantine state."
+    ],
+    "relationship_coverage": null,
+    "locations": [],
+    "evidence_links": []
+  },
+  "qualification": {
+    "generic": {
+      "report": "build/goal-r1-stacmd-write-c/qualified-generic/qualification.json",
+      "compiled_units": 4,
+      "selected_regions": 0
+    },
+    "gcc": {
+      "report": "build/goal-r1-stacmd-write-c/qualified-gcc/qualification.json",
+      "compiled_units": 4,
+      "selected_regions": 0
+    }
+  },
+  "canonical_hybrid": {
+    "report": "build/hybrid-goal-r1-stacmd-write-c/build-report.json",
+    "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "source_completeness_proven": false,
+    "source_plan_unchanged": true,
+    "source_built_bytes_including_assembly_and_data": 3961,
+    "binary_fallback_bytes": 642199,
+    "resource_bytes": 248
+  },
+  "probe_hashes": {
+    "build/goal-r1-stacmd-write-c/verify.py": "c974b46ba6320ecc98665bd7235d4d493414f356afd0de29a4efb746dfc827e2",
+    "build/goal-r1-stacmd-write-c/integration.py": "edee35a546059cf1a92d06e027adde90c8920945e79905506b1bbc44c8f815ff",
+    "build/goal-r1-stacmd-write-c/audit.py": "86db3be7397f458014d2c38936f0ca1eb7f12cd8569bfb0e80007ee02d64dc98",
+    "build/goal-r1-stacmd-write-c/negative.py": "45c1a2769bc92737242748ddbd1993f273dc052e3e5fecaf5086a2220b76b994",
+    "build/goal-r1-stacmd-write-c/rea.json": "d6da22a848b9741cb2d77ab054ee24949ef5f606b13cfc1b3e30f5e970e4f689"
+  },
+  "limitations": [
+    "One empty fixed-R3 compiler constraint remains in direct write body; not portable ISO C.",
+    "Read-frame bridge and private worker are unchanged.",
+    "Direct tests model idle/write/drive/ACK/release providers and execute actual parity; integration uses five actual units with probe C GPIO callbacks.",
+    "Active provider saved registers, private save slots/header word, saved-slot aliases, R1/R2/R12/APSR/return-address bits, arbitrary faults and exceptions excluded.",
+    "No equal-cycle, physical wire timing, electrical or hardware-operation proof.",
+    "No newly exact-qualified region or complete source-only firmware."
+  ]
+}

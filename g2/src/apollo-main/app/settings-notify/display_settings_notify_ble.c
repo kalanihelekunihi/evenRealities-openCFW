@@ -18,7 +18,9 @@ static const char left[]="------left can't notify pb------";
 static const char left_short[]="[ble.msgtx]------left can't notify pb------";
 static const char cmd[]="------not as cmd role------";
 static const char cmd_short[]="[ble.msgtx]------not as cmd role------";
-uint32_t audio_settings_notify_ble(uint8_t type,uint8_t command,
+/* type/command arrive as full words from callers declaring uint32_t; they
+ * are narrowed here (as the removed 0x475c1a forwarder did). */
+uint32_t audio_settings_notify_ble(uint32_t type,uint32_t command,
                                    const void *payload,uint32_t length) {
     if(audio_ota_transfer_active()!=0u) {
         if((audio_log_flags()&2u)!=0u)
@@ -41,5 +43,8 @@ uint32_t audio_settings_notify_ble(uint8_t type,uint8_t command,
             (void)compressed_log_output(0x10000000u,cmd_short,cmd_short);
         return 8u;
     }
-    return audio_ble_msg_tx(0u,1u,type,command,payload,(uint16_t)length);
+    return audio_ble_msg_tx(0u,1u,(uint8_t)type,(uint8_t)command,payload,(uint16_t)length);
 }
+/* Single implementation of stock Thread_MsgPbNotifyByBle 0x475c1a. */
+__typeof__(audio_settings_notify_ble) audio_ring_pb_tx_ble_475c1a
+    __attribute__((alias("audio_settings_notify_ble")));

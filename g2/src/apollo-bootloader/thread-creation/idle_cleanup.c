@@ -20,3 +20,6 @@ uint32_t opencfw_boot_idle_cleanup(uint32_t a,uint32_t b,uint32_t c,uint32_t car
  }
  return carry;
 }
+
+/* Stock entry names that branch straight to the provider above. */
+__typeof__(opencfw_boot_idle_cleanup) cleanup __attribute__((alias("opencfw_boot_idle_cleanup")));

@@ -1,0 +1,110 @@
+{
+  "cases": 8448,
+  "passed": 8448,
+  "failures": [],
+  "callback_depths": [
+    [
+      [
+        -16
+      ],
+      [
+        -32
+      ]
+    ],
+    [
+      [
+        -16,
+        -16,
+        -16,
+        -16
+      ],
+      [
+        -32,
+        -32,
+        -32,
+        -32
+      ]
+    ],
+    [
+      [
+        -16,
+        -16,
+        -16,
+        -16,
+        -16
+      ],
+      [
+        -32,
+        -32,
+        -32,
+        -32,
+        -32
+      ]
+    ],
+    [
+      [
+        -16,
+        -16,
+        -16,
+        -16,
+        -16,
+        -16
+      ],
+      [
+        -32,
+        -32,
+        -32,
+        -32,
+        -32,
+        -32
+      ]
+    ]
+  ],
+  "source_bridge_size": 10,
+  "source_body_size": 96,
+  "other_function_and_data_sections_unchanged": [
+    ".r1.temp.calibration",
+    ".r1.temp.s6f798",
+    ".r1.temp.s6f7d4",
+    ".text.r1_gxt310_one_shot_channel0",
+    ".text.r1_gxt310_one_shot_channel2",
+    ".text.r1_gxt310_temperature_channel0",
+    ".text.r1_gxt310_temperature_channel2",
+    ".text.r1_gxt310_temperature_read",
+    ".text.r1_gxt310_temperature_read_body",
+    ".text.r1_temperature_calibration_read",
+    ".text.r1_temperature_pair_read_calibrated"
+  ],
+  "other_source_units_unchanged": 561,
+  "imports_unchanged": true,
+  "application_imports": 214,
+  "bootloader_imports": 34,
+  "report": "build/sources-goal-r1-temp-trigger/report.json",
+  "report_sha256": "055a3943de98550131b8a2e6bd11cea6e0ce28e64e2523b182b754bf2271221b",
+  "manifest_sha256": "853798d70673de8cb97ab199ed0346162136e023b446e79a90de6af63a1b5be8",
+  "stock_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "rea": {
+    "path": "build/goal-r1-temp-trigger/REA.json",
+    "sha256": "a9af06bb0e5fe4c74fcea8beb1cd1d472266864fd9516a3f7d80c597934b2be9",
+    "procedure": "0x6f738"
+  },
+  "source_sha256": {
+    "r1/src/application/runtime/native_temperature.c": "8768453c79256c3756511d94326b5159729c979afa1ffd7aeb3e602404c87076"
+  },
+  "probe_artifacts": {
+    "build/goal-r1-temp-trigger/before.c": "2760fe104055776b02739b299b8073ea5e23c93a0489885c796e7c8ab08b3df3",
+    "build/goal-r1-temp-trigger/stock.s": "790e71f32c389ed1651188ca48cdc6ef90aa493728d28f9072cb5c7e7d0a4daf",
+    "build/goal-r1-temp-trigger/stock.elf": "c62cbf42ea02bb242ac52af604a844787460d761a92bb2a6d19470f70010f4b9",
+    "build/goal-r1-temp-trigger/REA.json": "a9af06bb0e5fe4c74fcea8beb1cd1d472266864fd9516a3f7d80c597934b2be9",
+    "build/goal-r1-temp-trigger/rea-snapshot.json": "7f7a7cbbcc6593b56779742934d71423b0ddd4cd1a536aacf0b4fe2e006dd9e5",
+    "build/goal-r1-temp-trigger/verify.py": "7cae6635b65409ef335fa8c60d41bb899f1974f0ee5095203c47d03521b84cae",
+    "build/goal-r1-temp-trigger/results.json": "061dbdbeab65843481e5a3ed148333fd73d74d33f58c7119bb47c3d4da302675",
+    "build/goal-r1-temp-trigger/source.elf": "5f84bb279ef0db09b6942fd8e9852c06248bf5cb7de254cbf2e89b0a5e6f837d"
+  },
+  "limits": [
+    "Native 92-byte instruction body is replaced by a 96-byte C body and ten-byte frame bridge; no byte identity or provider qualification.",
+    "Transfer, mode and logging callbacks are modeled and clobber caller-saved registers. No physical GXT310 bus or log-delivery proof.",
+    "Command word and full-word R3 restore remain at caller SP-16; native callback SP is SP-16 and C callback SP is SP-32. Private C frame, exception/fault behavior and timing identity are not established.",
+    "Manifest eligibility and imports are unchanged. Final firmware linking, boot integration, source completeness and whole-image byte identity remain open; no G2 gate or source-plan change."
+  ]
+}

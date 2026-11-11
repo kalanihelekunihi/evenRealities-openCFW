@@ -12,6 +12,7 @@ extern void r1_twi_gpio_output(uint32_t pin), r1_twi_gpio_input(uint32_t pin,uin
 extern void r1_twi_gpio_release(uint32_t pin);
 extern uint32_t r1_twi_gpio_read(uint32_t pin);
 extern void r1_twi_delay_busy(uint32_t value),r1_twi_delay_noop(uint32_t value);
+extern void r1_twi_i2c5_delay_noop(uint32_t value);
 #define RECORD(bus,scl,sda,delay,delayfn) { \
     .name="i2c_" #bus, .engine={.delay_context=delay,.scl_pin=scl,.sda_pin=sda, \
     .drive_low=r1_twi_gpio_low,.release_high=r1_twi_gpio_high,.set_output=r1_twi_gpio_output, \
@@ -23,7 +24,7 @@ r1_stock_twi_record r1_stock_twi_records[4]
     RECORD(2,28,45,1,r1_twi_delay_busy),
     RECORD(3,12,11,5,r1_twi_delay_busy),
     RECORD(4,31,41,1,r1_twi_delay_noop),
-    RECORD(5,43,46,1,r1_twi_delay_noop)
+    RECORD(5,43,46,1,r1_twi_i2c5_delay_noop)
 };
 static uint32_t bind_record(r1_stock_twi_record *record) {
     record->device.name=record->name;

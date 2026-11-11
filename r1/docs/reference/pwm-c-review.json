@@ -1,0 +1,496 @@
+{
+  "source": {
+    "source": "r1/src/application/runtime/native_pwm.c",
+    "payload": "r1-application",
+    "role": "candidate",
+    "toolchain": "clang",
+    "link": true,
+    "expect": "compile",
+    "returncode": 0,
+    "argv": [
+      "/usr/bin/clang",
+      "--target=arm-none-eabi",
+      "-mcpu=cortex-m4",
+      "-mthumb",
+      "-mfpu=fpv4-sp-d16",
+      "-mfloat-abi=hard",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-fno-strict-aliasing",
+      "-fshort-enums",
+      "-std=c11",
+      "-Os",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-DNRF52840_XXAA",
+      "-DFLOAT_ABI_HARD",
+      "-DNRF_SD_BLE_API_VERSION=7",
+      "-DNRF_DFU_SVCI_ENABLED",
+      "-DNRF_DFU_TRANSPORT_BLE=1",
+      "-DS140",
+      "-DSOFTDEVICE_PRESENT",
+      "-DFREERTOS",
+      "-DCONFIG_NFCT_PINS_AS_GPIOS",
+      "-DCONFIG_GPIO_AS_PINRESET",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/r1/src/config/sdk",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-pwm-c/generated/r1",
+      "-include",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-pwm-c/generated/r1/nrf_svci_clang.h",
+      "-isystem",
+      "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/external/freertos/portable/GCC/nrf52",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/external/freertos/portable/CMSIS/nrf52",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/external/segger_rtt",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/ble/common",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/ble/ble_advertising",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/ble/peer_manager",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/ble/nrf_ble_gatt",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/atomic",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/atomic_flags",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/atomic_fifo",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/delay",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/fds",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/fstorage",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/mutex",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/sortlist",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/timer",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/experimental_section_vars",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/log",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/log/src",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/strerror",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/util",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/softdevice/common",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/softdevice/s140/headers",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/softdevice/s140/headers/nrf52",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/toolchain/cmsis/include",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/integration/nrfx",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/integration/nrfx/legacy",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx/drivers/include",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx/hal",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx/soc",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx/mdk",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/ble/ble_link_ctx_manager",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/ble/ble_services/ble_dfu",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/ble/nrf_ble_qwr",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/balloc",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/bootloader/dfu",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/memobj",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/pwr_mgmt",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/ringbuf",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/external/fprintf",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx/drivers/src",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/bootloader",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/bootloader/ble_dfu",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/svc",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/stack_info",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/mem_manager",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/queue",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/scheduler",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/r1/src/config/rtos",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/third-party/upstream/freertos-kernel/include",
+      "-MD",
+      "-MF",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-pwm-c/r1/r1-application/r1__src__application__runtime__native_pwm.c.d",
+      "-c",
+      "/Users/kalani/Repo/evenRealities-openCFW/r1/src/application/runtime/native_pwm.c",
+      "-o",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-pwm-c/r1/r1-application/r1__src__application__runtime__native_pwm.c.o"
+    ],
+    "source_sha256": "97b8c201fe28bf5bf143962916f29d2305b406d929466d76751cea3df1926519",
+    "object_sha256": "fbd173770caf89990376d10f7ee8285a13a62c319350a31ca15562378d81c53a",
+    "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-pwm-c/r1/r1-application/r1__src__application__runtime__native_pwm.c.o",
+    "strong": [
+      "PWM0_IRQHandler",
+      "PWM1_IRQHandler",
+      "PWM2_IRQHandler",
+      "m_nrf_log_PWM_logs_data_const",
+      "nrfx_pwm_complex_playback",
+      "nrfx_pwm_init",
+      "nrfx_pwm_is_stopped",
+      "nrfx_pwm_simple_playback",
+      "nrfx_pwm_stop",
+      "nrfx_pwm_uninit"
+    ],
+    "weak": [],
+    "undefined": []
+  },
+  "normal_report": "build/sources-goal-r1-pwm-c/report.json",
+  "source_configuration_scoped_to_new_wrapper": true,
+  "SDK_source_unmodified": true,
+  "native": {
+    "PWM_entries": [
+      "0x30ca8",
+      "0x30cb8",
+      "0x30cc8"
+    ],
+    "stub_code_bytes": 8,
+    "shared_dispatch": "0x72a32",
+    "shared_dispatch_code_bytes": 156,
+    "previous_shared_dispatch_source_misrouted_to_timer": true,
+    "PWM3_vector": "0x274a3"
+  },
+  "REA": [
+    {
+      "evidence_id": "ev_332b51fbf37878188e450ec7085c6e78dc9216eacb1c216743194b10a9a10846",
+      "subject": {
+        "name": "stock.elf",
+        "digest": {
+          "sha256": "25b4a29af80ec8edab5bd861ba9b74a6e22eab29dc3d7a809a16869e8a140f04"
+        },
+        "local_path": "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-queue-reset-c/stock.elf",
+        "format": "elf",
+        "architecture": "arm"
+      },
+      "provider": {
+        "id": "ghidra",
+        "name": "Ghidra",
+        "version": "12.1.4"
+      },
+      "analysis_profile": {
+        "provider": {
+          "id": "ghidra",
+          "name": "Ghidra",
+          "version": "12.1.4"
+        },
+        "parameters": {
+          "target_kind": "executable",
+          "target_format": "elf",
+          "architecture": "arm",
+          "available_architectures": [
+            "arm"
+          ],
+          "import_mode": "ephemeral-source-immutable",
+          "annotation_policy": "atomic-function-entry-metadata-v1",
+          "load_image_observations": "source-mappings-entry-context-v2",
+          "function_body_evidence": "complete-inclusive-ranges-v1",
+          "function_references": "complete-body-and-entry-reference-manager-v2",
+          "call_relationship_coverage": "function-body-call-coverage-v5",
+          "function_dossier_coverage": "observed-facets-and-call-relationships-v1",
+          "string_inventory_evidence": "defined-data-coverage-v1",
+          "location_resolution": "explicit-address-exact-entry-symbol-first-v3",
+          "procedure_file_offset_resolution": "address-first-unique-target-source-mapping-v2",
+          "instruction_flow_evidence": "decoded-return-pcode-v1",
+          "instruction_references": "exact-address-incoming-v1",
+          "function_boundary_observations": "ghidra-function-boundary-limitations-v3",
+          "no_return_repair": "returning-imports-decoded-return-v2",
+          "process_launch": "inspected-jvm-launch-support-v1",
+          "jump_table_evidence": "typed-case-default-blocks-v1",
+          "decompiler_jump_loads": true,
+          "loader": "auto-from-header",
+          "language_id": "auto-from-header",
+          "compiler_spec_id": "auto-default",
+          "analyzer_preset": "ghidra-default"
+        },
+        "digest": "7e46711069eea041af1b9b99e34115c13332795e5cda76e584a722f529ec70de"
+      },
+      "predicate_type": "rea.analysis",
+      "operation": "read_bytes",
+      "parameters": {
+        "address": "0x30ca8",
+        "length": 48
+      },
+      "raw_result": {
+        "address": "0x30ca8",
+        "requested_bytes": 48,
+        "returned_bytes": 48,
+        "bytes_hex": "0149024841f0c1bee4c2022000c001400149024841f0b9beecc20220001002400149024841f0b1bef4c2022000200240",
+        "complete": true
+      },
+      "normalized_result": {
+        "address": "0x30ca8",
+        "requested_bytes": 48,
+        "returned_bytes": 48,
+        "bytes_hex": "0149024841f0c1bee4c2022000c001400149024841f0b9beecc20220001002400149024841f0b1bef4c2022000200240",
+        "complete": true
+      },
+      "confidence": "observed",
+      "authority": "shipped-artifact",
+      "environment": null,
+      "limitations": [
+        "The session serves operations only after Ghidra reports default auto-analysis complete; incomplete analysis does not expose partial results.",
+        "The imported Program and temporary project are ephemeral and deleted on close. Annotation operations edit session database metadata; original executable bytes are never written.",
+        "Cancelling an active Ghidra request terminates its ephemeral database and discards session annotations. The selected target remains open; the next provider query imports the original artifact again.",
+        "Default-space addresses use lowercase 0x-prefixed hexadecimal; other address spaces use <percent-encoded-space>:0x<hex>.",
+        "Bytes reflect Ghidra's initialized memory, including loader fixups. Reads stop at an unmapped or uninitialized byte and report completeness explicitly.",
+        "macOS sessions require a matching executable Ghidra native decompiler; REA checks for it but does not build native components or change Gatekeeper quarantine state."
+      ],
+      "relationship_coverage": null,
+      "locations": [],
+      "evidence_links": []
+    },
+    {
+      "evidence_id": "ev_374fec981870f504feec7c723a5306bbe9a801c276f9f02e542ae688dddd97ac",
+      "subject": {
+        "name": "stock.elf",
+        "digest": {
+          "sha256": "25b4a29af80ec8edab5bd861ba9b74a6e22eab29dc3d7a809a16869e8a140f04"
+        },
+        "local_path": "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-queue-reset-c/stock.elf",
+        "format": "elf",
+        "architecture": "arm"
+      },
+      "provider": {
+        "id": "ghidra",
+        "name": "Ghidra",
+        "version": "12.1.4"
+      },
+      "analysis_profile": {
+        "provider": {
+          "id": "ghidra",
+          "name": "Ghidra",
+          "version": "12.1.4"
+        },
+        "parameters": {
+          "target_kind": "executable",
+          "target_format": "elf",
+          "architecture": "arm",
+          "available_architectures": [
+            "arm"
+          ],
+          "import_mode": "ephemeral-source-immutable",
+          "annotation_policy": "atomic-function-entry-metadata-v1",
+          "load_image_observations": "source-mappings-entry-context-v2",
+          "function_body_evidence": "complete-inclusive-ranges-v1",
+          "function_references": "complete-body-and-entry-reference-manager-v2",
+          "call_relationship_coverage": "function-body-call-coverage-v5",
+          "function_dossier_coverage": "observed-facets-and-call-relationships-v1",
+          "string_inventory_evidence": "defined-data-coverage-v1",
+          "location_resolution": "explicit-address-exact-entry-symbol-first-v3",
+          "procedure_file_offset_resolution": "address-first-unique-target-source-mapping-v2",
+          "instruction_flow_evidence": "decoded-return-pcode-v1",
+          "instruction_references": "exact-address-incoming-v1",
+          "function_boundary_observations": "ghidra-function-boundary-limitations-v3",
+          "no_return_repair": "returning-imports-decoded-return-v2",
+          "process_launch": "inspected-jvm-launch-support-v1",
+          "jump_table_evidence": "typed-case-default-blocks-v1",
+          "decompiler_jump_loads": true,
+          "loader": "auto-from-header",
+          "language_id": "auto-from-header",
+          "compiler_spec_id": "auto-default",
+          "analyzer_preset": "ghidra-default"
+        },
+        "digest": "7e46711069eea041af1b9b99e34115c13332795e5cda76e584a722f529ec70de"
+      },
+      "predicate_type": "rea.analysis",
+      "operation": "read_bytes",
+      "parameters": {
+        "address": "0x72a32",
+        "length": 156
+      },
+      "raw_result": {
+        "address": "0x72a32",
+        "requested_bytes": 156,
+        "returned_bytes": 156,
+        "bytes_hex": "70b50c464ff488760546314607f07bf950b13146284607f07bf96079400703d5216809b1012088474ff48a763146284607f069f950b13146284607f069f96079000703d5216809b1022088474ff48e763146284607f057f950b13146284607f057f96079c00603d4216809b1002088474ff482763146284607f045f900280cd03146284607f044f9012020712168002903d0bde870400320084770bd",
+        "complete": true
+      },
+      "normalized_result": {
+        "address": "0x72a32",
+        "requested_bytes": 156,
+        "returned_bytes": 156,
+        "bytes_hex": "70b50c464ff488760546314607f07bf950b13146284607f07bf96079400703d5216809b1012088474ff48a763146284607f069f950b13146284607f069f96079000703d5216809b1022088474ff48e763146284607f057f950b13146284607f057f96079c00603d4216809b1002088474ff482763146284607f045f900280cd03146284607f044f9012020712168002903d0bde870400320084770bd",
+        "complete": true
+      },
+      "confidence": "observed",
+      "authority": "shipped-artifact",
+      "environment": null,
+      "limitations": [
+        "The session serves operations only after Ghidra reports default auto-analysis complete; incomplete analysis does not expose partial results.",
+        "The imported Program and temporary project are ephemeral and deleted on close. Annotation operations edit session database metadata; original executable bytes are never written.",
+        "Cancelling an active Ghidra request terminates its ephemeral database and discards session annotations. The selected target remains open; the next provider query imports the original artifact again.",
+        "Default-space addresses use lowercase 0x-prefixed hexadecimal; other address spaces use <percent-encoded-space>:0x<hex>.",
+        "Bytes reflect Ghidra's initialized memory, including loader fixups. Reads stop at an unmapped or uninitialized byte and report completeness explicitly.",
+        "macOS sessions require a matching executable Ghidra native decompiler; REA checks for it but does not build native components or change Gatekeeper quarantine state."
+      ],
+      "relationship_coverage": null,
+      "locations": [],
+      "evidence_links": []
+    }
+  ],
+  "layout": {
+    "control_size": 8,
+    "handler": 0,
+    "state": 4,
+    "flags": 5,
+    "instances": 3,
+    "DMA_workaround": false
+  },
+  "validation": {
+    "paired_sequences": 12528,
+    "IRQ_invocations_per_sequence": 2,
+    "paired_IRQ_invocations": 25056,
+    "base_sequences": 12288,
+    "mutation_sequences": 240,
+    "native_callback_depths": [
+      [
+        16
+      ],
+      [
+        16
+      ],
+      [
+        16
+      ],
+      [
+        0
+      ]
+    ],
+    "C_callback_depths": [
+      [
+        24
+      ],
+      [
+        24
+      ],
+      [
+        24
+      ],
+      [
+        0
+      ]
+    ],
+    "control_base": "0x2002c2e4",
+    "control_stride": 8,
+    "instances": 3,
+    "actual_native_and_C_MMIO": true,
+    "ordered_MMIO_reads_writes": true,
+    "STOPPED_tail_SP_LR_and_R4_R11": true,
+    "limits": [
+      "IRQ events and control blocks are controlled inputs; autonomous PWM waveforms/DMA/clock/IRQ generation unproven.",
+      "Non-tail callback registers/private frames may differ; final link binding, arbitrary faults/aliases/concurrency and real exception return unproven.",
+      "Only IRQ/flag/state paths are runtime-tested; other newly compiled PWM APIs are not behavior-qualified."
+    ]
+  },
+  "negative_controls": {
+    "wrong-SEQ0-flag": {
+      "rejected": true,
+      "stderr": "Traceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-pwm-c/reject-wrong-SEQ0-flag.py\", line 59, in <module>\n    x,dx=a(*c);y,dy=b(*c);assert x==y,c\n                                 ^^^^\nAssertionError: (0, 1, 4, 1, 1, 2, 0)\n"
+    },
+    "inverted-FINISH-gate": {
+      "rejected": true,
+      "stderr": "Traceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-pwm-c/reject-inverted-FINISH-gate.py\", line 59, in <module>\n    x,dx=a(*c);y,dy=b(*c);assert x==y,c\n                                 ^^^^\nAssertionError: (0, 1, 4, 1, 1, 2, 1)\n"
+    },
+    "missing-initialized": {
+      "rejected": true,
+      "stderr": "Traceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-pwm-c/reject-missing-initialized.py\", line 59, in <module>\n    x,dx=a(*c);y,dy=b(*c);assert x==y,c\n                                 ^^^^\nAssertionError: (0, 1, 4, 1, 1, 2, 1)\n"
+    },
+    "wrong-STOP-event": {
+      "rejected": true,
+      "stderr": "Traceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-pwm-c/reject-wrong-STOP-event.py\", line 59, in <module>\n    x,dx=a(*c);y,dy=b(*c);assert x==y,c\n                                 ^^^^\nAssertionError: (0, 1, 4, 1, 1, 2, 1)\n"
+    },
+    "retain-SEQ0": {
+      "rejected": true,
+      "stderr": "Traceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-pwm-c/reject-retain-SEQ0.py\", line 59, in <module>\n    x,dx=a(*c);y,dy=b(*c);assert x==y,c\n                                 ^^^^\nAssertionError: (0, 1, 4, 1, 1, 2, 0)\n"
+    },
+    "cached-handler": {
+      "rejected": true,
+      "stderr": "Traceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-pwm-c/reject-cached-handler.py\", line 59, in <module>\n    x,dx=a(*c);y,dy=b(*c);assert x==y,c\n                                 ^^^^\nAssertionError: (0, 1, 4, 1, 1, 2, 1)\n"
+    }
+  },
+  "audit": {
+    "prior_objects_identical": 589,
+    "manifest_only_adds_one_candidate": true,
+    "new_unit_no_imports": true,
+    "imports_unchanged": {
+      "application": 164,
+      "bootloader": 34
+    },
+    "SDK_source": "vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx/drivers/src/nrfx_pwm.c",
+    "SDK_sha256": "e449181e9ea94b215a44ccd0aceb85d628253791dd1701e00514908ee55cafb6"
+  },
+  "frontier_before": [
+    {
+      "image": "application",
+      "inventory_source": "ghidra_functions_csv",
+      "entry": "0x00030ca8",
+      "size": "8",
+      "provider_family": "nordic_nrf5_sdk_17_1_0",
+      "source_symbol": "nrfx_pwm_0_irq_handler",
+      "candidate_symbol": "nrfx_pwm_0_irq_handler",
+      "status": "unresolved_source_route",
+      "candidate_sources": "",
+      "candidate_objects": "",
+      "candidate_reports": "",
+      "behavior_receipt": "",
+      "instruction_identity_proven": "false",
+      "image_integration_proven": "false"
+    },
+    {
+      "image": "application",
+      "inventory_source": "ghidra_functions_csv",
+      "entry": "0x00030cb8",
+      "size": "8",
+      "provider_family": "nordic_nrf5_sdk_17_1_0",
+      "source_symbol": "nrfx_pwm_1_irq_handler",
+      "candidate_symbol": "nrfx_pwm_1_irq_handler",
+      "status": "unresolved_source_route",
+      "candidate_sources": "",
+      "candidate_objects": "",
+      "candidate_reports": "",
+      "behavior_receipt": "",
+      "instruction_identity_proven": "false",
+      "image_integration_proven": "false"
+    },
+    {
+      "image": "application",
+      "inventory_source": "ghidra_functions_csv",
+      "entry": "0x00030cc8",
+      "size": "8",
+      "provider_family": "nordic_nrf5_sdk_17_1_0",
+      "source_symbol": "nrfx_pwm_2_irq_handler",
+      "candidate_symbol": "nrfx_pwm_2_irq_handler",
+      "status": "unresolved_source_route",
+      "candidate_sources": "",
+      "candidate_objects": "",
+      "candidate_reports": "",
+      "behavior_receipt": "",
+      "instruction_identity_proven": "false",
+      "image_integration_proven": "false"
+    },
+    {
+      "image": "application",
+      "inventory_source": "ghidra_functions_csv",
+      "entry": "0x00072a32",
+      "size": "156",
+      "provider_family": "nordic_nrf5_sdk_17_1_0",
+      "source_symbol": "irq_handler",
+      "candidate_symbol": "irq_handler",
+      "status": "compiled_symbol_hint",
+      "candidate_sources": "vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx/drivers/src/nrfx_timer.c",
+      "candidate_objects": "pre-consolidation:r1/research/source-build/application-sdk/63_nrfx_timer.o",
+      "candidate_reports": "application-sdk/report.json",
+      "behavior_receipt": "",
+      "instruction_identity_proven": "false",
+      "image_integration_proven": "false"
+    }
+  ],
+  "qualification": "build/goal-r1-pwm-c/qualified-product/qualification.json",
+  "new_exact_bytes": 0,
+  "hybrid": {
+    "report": "build/hybrid-goal-r1-pwm-c/build-report.json",
+    "sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "totals": {
+      "binary-pull-through": 641915,
+      "source-built": 4245,
+      "resource-file": 248
+    },
+    "source_plan_unchanged": true,
+    "source_completeness_proven": false
+  },
+  "limits": [
+    "Only IRQ/flag/state paths runtime-tested; compiled init/uninit/playback/stop APIs are not behavior-qualified.",
+    "Test-only native BSS placement does not prove final linking or stock cold initialization.",
+    "Extra SDK read-only PWM log metadata is not claimed to reproduce stock data.",
+    "Native/C non-tail frames and live callback registers differ; physical waveforms/DMA and real IRQ/exception behavior unproven."
+  ],
+  "subsequent_playback_stock_search": {
+    "control_base_literal_hits": [
+      "0x30cb0"
+    ],
+    "absence_not_proven": true,
+    "no_additional_API_route_accepted": true,
+    "playback_and_stop_remain_compile_only": true
+  }
+}

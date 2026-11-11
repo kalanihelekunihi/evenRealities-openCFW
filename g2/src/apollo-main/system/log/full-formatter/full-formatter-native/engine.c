@@ -6,11 +6,15 @@
 #include "format_parser.h"
 #include "integer_cursor.h"
 #include "record.h"
+/* Stock-RAM literals rewritten to named objects (sim-test wave 2026-10-26,
+ * .waves/sim-fix/apply.py): g2ref_X is the linker symbol X. */
+#include <stdint.h>
+extern unsigned char g2ref_g2_iar_constraint_handler[] __asm__("g2_iar_constraint_handler");
 extern uint64_t g2_main_format_integer_render(void *,unsigned,uint32_t,uint32_t);
 extern void g2_main_formatter_abort(void);
 static int constraint(const char *message){
  typedef void (*handler)(const char *,void *,unsigned);
- handler fn=*(handler volatile *)(uintptr_t)0x20074f10;
+ handler fn=*(handler volatile *)(uintptr_t)((uint32_t)(uintptr_t)g2ref_g2_iar_constraint_handler);
  if(fn)fn(message,0,34);else g2_main_formatter_abort();return 34;
 }
 static int put(g2_main_format_put callback,void **context,uint32_t *count,unsigned byte){

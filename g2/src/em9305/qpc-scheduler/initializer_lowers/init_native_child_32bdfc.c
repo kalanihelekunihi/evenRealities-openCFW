@@ -1,98 +1,41 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_32bdfc\n"
-".type opencfw_em9305_child_32bdfc,@function\n"
-"opencfw_em9305_child_32bdfc:\n"
-"L32bdfc:\n"
-"enter_s [r13-r17,fp,blink]\n"
-"L32bdfe:\n"
-"sub_s sp,sp,0x14\n"
-"L32be00:\n"
-"ld r16,[r0,44]\n"
-"L32be04:\n"
-"mov_s r13,0x8019fc\n"
-"L32be0a:\n"
-"mov_s r17,r0\n"
-"L32be0c:\n"
-"mov_s r0,r13\n"
-"L32be0e:\n"
-"bl.d opencfw_em9305_child_32db0c\n"
-"L32be12:\n"
-"mov_s r14,r1\n"
-"L32be14:\n"
-"ldb_s r0,[r13,0]\n"
-"L32be16:\n"
-"cmp_s r0,3\n"
-"L32be18:\n"
-"mov_s r0,0\n"
-"L32be1a:\n"
-"bne_s L32be72\n"
-"L32be1c:\n"
-"ldb_s r1,[r13,0x4]\n"
-"L32be1e:\n"
-"brne.d.nt r1,0xc,L32be72\n"
-"L32be22:\n"
-"add_s r1,r14,0x2\n"
-"L32be24:\n"
-"mov_s r14,0x801a04\n"
-"L32be2a:\n"
-"bl.d opencfw_em9305_child_32e144\n"
-"L32be2e:\n"
-"mov_s r0,r14\n"
-"L32be30:\n"
-"ld r3,[r14,0x8]\n"
-"L32be32:\n"
-"ldb_s r2,[r13,0]\n"
-"L32be34:\n"
-"ldh_s r1,[r13,0x2]\n"
-"L32be36:\n"
-"ld r0,[r17,44]\n"
-"L32be3a:\n"
-"ld r11,[r14,4]\n"
-"L32be3e:\n"
-"ld_s r15,[r14,0]\n"
-"L32be40:\n"
-"ld_s r12,[r14,0xc]\n"
-"L32be42:\n"
-"st_s r3,[sp,0x8]\n"
-"L32be44:\n"
-"stb_s r2,[sp,0x10]\n"
-"L32be46:\n"
-"sth r1,[sp,18]\n"
-"L32be4a:\n"
-"add2 r3,r16,0x2e\n"
-"L32be4e:\n"
-"add1 r1,r0,0x26\n"
-"L32be52:\n"
-"add_s r0,sp,0\n"
-"L32be54:\n"
-"mov_s r2,0\n"
-"L32be56:\n"
-"stb 3,[sp,17]\n"
-"L32be5a:\n"
-"st r11,[sp,4]\n"
-"L32be5e:\n"
-"st_s r15,[sp,0]\n"
-"L32be60:\n"
-"bl.d opencfw_em9305_child_30301c\n"
-"L32be64:\n"
-"st_s r12,[sp,0xc]\n"
-"L32be66:\n"
-"breq_s r0,0,L32be74\n"
-"L32be68:\n"
-"ldb r0,[r16,204]\n"
-"L32be6c:\n"
-"cmp_s r0,0\n"
-"L32be6e:\n"
-"mov_s r0,1\n"
-"L32be70:\n"
-"beq_s L32be74\n"
-"L32be72:\n"
-"leave_s [r13-r17,fp,blink,pcl]\n"
-"L32be74:\n"
-"mov_s r0,0\n"
-"L32be76:\n"
-"leave_s [r13-r17,fp,blink,pcl]\n"
-".size opencfw_em9305_child_32bdfc,.-opencfw_em9305_child_32bdfc\n"
-);
+#include <stdint.h>
+
+/* Native 0x32bdfc..0x32be78: decode the received PDU header into
+ * 0x8019fc; for LLID 3 with control opcode 12 parse the payload into
+ * 0x801a04 (32e144), then build the 20-byte request {four parsed words,
+ * LLID, 3, header halfword} and hand it to 30301c with the context's
+ * +76 and the link's +184. Returns 1 only when that succeeds and the
+ * link byte +204 is set. */
+extern uint32_t opencfw_em9305_child_32db0c(uintptr_t out, uintptr_t in);
+extern uint32_t opencfw_em9305_child_32e144(uintptr_t out, uintptr_t payload);
+extern uint32_t opencfw_em9305_child_30301c(uintptr_t request, uintptr_t context,
+                                            uint32_t flags, uintptr_t link);
+
+struct opencfw_em9305_request_32bdfc {
+    uint32_t words[4];
+    uint8_t llid;
+    uint8_t kind;
+    uint16_t header;
+};
+
+uint32_t opencfw_em9305_child_32bdfc(uintptr_t record, uintptr_t pdu)
+{
+    struct opencfw_em9305_request_32bdfc request;
+    uintptr_t link=*(volatile uint32_t *)(record+44u);
+    (void)opencfw_em9305_child_32db0c(0x8019fcu,pdu);
+    if(*(volatile uint8_t *)(uintptr_t)0x8019fcu!=3u)return 0u;
+    if(*(volatile uint8_t *)(uintptr_t)0x801a00u!=12u)return 0u;
+    (void)opencfw_em9305_child_32e144(0x801a04u,pdu+2u);
+    volatile const uint32_t *parsed=(volatile const uint32_t *)(uintptr_t)0x801a04u;
+    request.words[2]=parsed[2];
+    request.llid=*(volatile uint8_t *)(uintptr_t)0x8019fcu;
+    request.header=*(volatile uint16_t *)(uintptr_t)0x8019feu;
+    uintptr_t context=*(volatile uint32_t *)(record+44u);
+    request.words[1]=parsed[1];
+    request.words[0]=parsed[0];
+    request.words[3]=parsed[3];
+    request.kind=3u;
+    if(opencfw_em9305_child_30301c((uintptr_t)&request,context+76u,0u,link+184u)==0u)
+        return 0u;
+    return *(volatile uint8_t *)(link+204u)!=0u;
+}

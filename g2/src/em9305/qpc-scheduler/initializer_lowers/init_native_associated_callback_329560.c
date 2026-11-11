@@ -1,25 +1,15 @@
-/* Full native body; named genuine children. */
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_associated_callback_329560\n"
-".type opencfw_em9305_associated_callback_329560,@function\n"
-"opencfw_em9305_associated_callback_329560:\n"
-"L329560:\n"
-"push_s blink\n"
-"L329562:\n"
-"mov_s r12,r0\n"
-"L329564:\n"
-"bl.d opencfw_em9305_associated_reset_32ae50\n"
-"L329568:\n"
-"ld_s r0,[r0,0x24]\n"
-"L32956a:\n"
-"bl.d opencfw_em9305_associated_callback_329888\n"
-"L32956e:\n"
-"mov_s r0,r12\n"
-"L329570:\n"
-"pop_s blink\n"
-"L329572:\n"
-"j_s [blink]\n"
-".size opencfw_em9305_associated_callback_329560,.-opencfw_em9305_associated_callback_329560\n"
-);
+/* Stock 0x329560: associated_reset_32ae50(word[a+0x24]); return associated_callback_329888(a).
+ * Converted from the lowered ARC asm; compiled with the g2-em9305-1 profile (-Os) and the
+ * disassembly diffed against the stock lowering: identical, or differing only in delay-slot
+ * scheduling / a redundant zero-extension / absolute-address ld/st forms (reviewed by hand). */
+#include <stdint.h>
+#define B8(a)  (*(volatile uint8_t  *)(uintptr_t)(a))
+#define H16(a) (*(volatile uint16_t *)(uintptr_t)(a))
+#define W32(a) (*(volatile uint32_t *)(uintptr_t)(a))
+extern uint32_t opencfw_em9305_associated_reset_32ae50(uint32_t);
+extern uint32_t opencfw_em9305_associated_callback_329888(uint32_t);
+uint32_t opencfw_em9305_associated_callback_329560(uint32_t a)
+{
+  (void)opencfw_em9305_associated_reset_32ae50(W32(a + 0x24u));
+  return opencfw_em9305_associated_callback_329888(a);
+}

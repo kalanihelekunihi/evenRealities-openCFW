@@ -19,6 +19,8 @@
 #define configMAX_PRIORITIES 56
 #define configMINIMAL_STACK_SIZE 256
 #define configMAX_TASK_NAME_LEN 16
+/* Stock native task constructors receive a full 32-bit depth word. */
+#define configSTACK_DEPTH_TYPE uint32_t
 
 #define configUSE_PREEMPTION 1
 #define configUSE_PORT_OPTIMISED_TASK_SELECTION 0

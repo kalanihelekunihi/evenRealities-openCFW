@@ -1,0 +1,60 @@
+{
+  "passed": 384,
+  "executions": 768,
+  "two_distinct_acquisitions": true,
+  "first_halfword_stored_before_second_acquisition": true,
+  "actual_scaling_executes": true,
+  "source_size": 50,
+  "source_report": "build/sources-goal-r1-adc-pair/report.json",
+  "limitations": [
+    "Average boundaries modeled; actual native/C scaling executes including compiler inlining",
+    "Private saved frames and caller-clobbered registers/flags excluded",
+    "Physical ADC behavior/timing, arbitrary aliases, concurrency and byte qualification unverified"
+  ],
+  "average_scaling_regression": {
+    "averaging_passed": 224,
+    "averaging_executions": 448,
+    "scaling_passed": 65536,
+    "scaling_executions": 131072,
+    "saved_frame_and_partial_samples_compared": true,
+    "handle_reloads": true,
+    "negative_clipping": true,
+    "source_report": "build/sources-goal-r1-adc-pair/report.json",
+    "source_sizes": {
+      "r1_adc_channel_read_averaged": 14,
+      "r1_adc_channel_read_averaged_body": 116,
+      "r1_battery_raw_to_percent": 42
+    },
+    "limitations": [
+      "Driver/delay boundaries modeled; converter average modeled for exhaustive scaling",
+      "Private kernel frames and caller-clobbered registers/flags excluded",
+      "Actual timing, ADC electrical behavior, arbitrary aliases/concurrency and byte qualification unverified"
+    ]
+  },
+  "negative_control": {
+    "mutation": "Scale cached first acquisition instead of taking second acquisition",
+    "rejected": true,
+    "counterexample": "First average 1, second 4095; stock acquires twice and scales 4095; variant acquires once and scales 1",
+    "stderr": "arm-none-eabi-ld: warning: (r1_stock_dispatch_08): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-adc-pair/bad.o\narm-none-eabi-ld: warning: (r1_rtt_delay_cycles): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-adc-pair/bad.o\narm-none-eabi-ld: warning: (r1_stock_dispatch_10): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-adc-pair/bad.o\narm-none-eabi-ld: warning: (r1_stock_dispatch_0c): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-adc-pair/bad.o\nTraceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-adc-pair/reject-single-acquisition.py\", line 45, in <module>\n    for c in cases:assert a(*c)==b(*c),c\n                                 ~^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-adc-pair/reject-single-acquisition.py\", line 40, in run\n    assert len(state['calls'])==2;assert state['stores']==[[0,2,first],[2,2,scale(second)]],(stock,first,second,seed,mutation,state);assert bytes(u.mem_read(OUT-4,12))==b'ZZZZ'+struct.pack('<HH',0xbeef if mutation==1 else first,scale(second))+b'ZZZZ'\n           ^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+  },
+  "evidence": {
+    "build/goal-r1-adc-pair/stock.elf": "107c46e6d84a4b6ac549ff7f12f75aca1995e41066437eb0a51f488b98bfa490",
+    "build/goal-r1-adc-pair/REA.json": "9e3def7a513ea94a11c2c6f825d5042651c588e998ea093f48802be6effdd340",
+    "build/goal-r1-adc-pair/REA.snapshot.json": "c0d128cfb26e9851fa9ad4845c3b68867180439eba7c6ef5cc6d57a464d5ee06",
+    "build/goal-r1-adc-pair/verify.py": "10a7d5a9ce8b1338263b69c1160b40dce797b1a7c241bc4566b736ea344b2eaa",
+    "build/goal-r1-adc-pair/source.elf": "ed4a268777f75511d3653550495adc2c3fd3c9ef0f41ff22ffffa7dead495e5d",
+    "build/goal-r1-adc-pair/results.json": "750ef8dcc50482fd1d26f7622338bee1acbb598f4851e7825511ab126bfb16c5",
+    "build/goal-r1-adc-pair/average/verify.py": "41f911aa25772ec53cb144e2f7e096f757da9c0691711cd880f119359ad267b6",
+    "build/goal-r1-adc-pair/average/results.json": "7eb19ba062dbf6bcd8b24fcc68286ff70616973a348cf38899fb86bdb25ce770",
+    "build/goal-r1-adc-pair/bad.c": "9345a3ffa396bc65e43f266edd7fd583f5c6af3c9186100f3ac2087abe04c2cf",
+    "build/goal-r1-adc-pair/reject-single-acquisition.py": "bc6c287d184e3689d6331b822ac093e6f24d17ad2acbed67cd00ab37a9625fd7",
+    "build/goal-r1-adc-pair/negative-result.json": "1a6440420b70f7fafc18a3d6a33ca6fbdaee9bfdf75cbadb3155cacf6a8c51d3",
+    "r1/src/application/adc/stock_battery_average.c": "e321f318f5000d851e666c8f9c62b933055be9f74c421c43104c68c57065a2e6",
+    "r1/src/application/adc/stock_battery_average_frame.c": "29823ae0e5ab72bbc5192a62b23d3098626f2f115fb92d233dc9d16597f84cb2",
+    "build/sources-goal-r1-adc-pair/report.json": "ca928ec65594ca4def29fcf090d312312850675a5aa8e7f6b023f92267641b72",
+    "r1/src/sources.json": "e32450af0ad855a39e15e9c4029af6bc1b267b6f8d10085ad7714c4130b94bcc",
+    "r1/symbols/function-frontier.csv": "c164b2fd0467da423da4d9798462882b3ea1eff452ae3f1a63ed99fd4f4cf050",
+    "tools/build/source-plan.json": "b056107b9773e0eaac8d64015682a68020b1b3e145310f7d399aaa078bd96e91"
+  },
+  "source_plan_changed": false
+}

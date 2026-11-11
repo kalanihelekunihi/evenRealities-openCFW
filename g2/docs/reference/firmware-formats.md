@@ -203,6 +203,9 @@ The CRC is CRC-32C with poly `0x82F63B78` reflected, init and xorout
 The payload carries a second checksum in its last word: the reflected CRC-32C
 of all preceding payload bytes (`0xF75CF6F4`). The programmed length is
 therefore `0x867C` (`g2/docs/research/g2-touch-identity-recovery.md:80-84,118-120`).
+For a source-linked touch image, `wrap_touch_source_image` computes this
+footer before the FWPK record CRC. Vector validation uses the application
+flash base `0x3300`; using address zero rejects valid shorter source images.
 
 Confidence:
 
@@ -276,6 +279,12 @@ The two stages that follow:
 - **Stage 2:** 27,964 bytes at file offset 10,272. Loaded to IRAM
   `0x10002800`, entry `0x10002900`.
 
+`wrap_codec_uart_boot` can produce a type-1 source candidate from the linked
+stage images. It validates both 64-word vector tables, pads the shorter source
+images to these wire lengths, and computes the stage-2 byte-sum checksum. The
+source segment has the stock container structure but is not byte-identical or
+hardware-qualified (`g2/evidence/codec-uart-source-segment-review-20261110.json`).
+
 Both stages use C-SKY 64-word vector tables with `reset = base + 0x100`. The
 wire protocol is:
 
@@ -329,8 +338,44 @@ The NPU payload offset `0xF804` is a literal in the KWS init code (at flash
 `0x6D40`/`0x6D84`). The check `0xF804 + 9,164 + 120,800 = 0x2F3B0` proves
 there is no third section.
 
+`wrap_codec_binh_a` and `wrap_codec_fwpk` reproduce the locked BINH A and
+two-segment FWPK when given their stock inputs. The source link extracts
+image-A XIP and SRAM. Removing the codec-A-unowned DSP sections and using
+the reconstructed C soft-float bodies for eight compiler entry points brought
+XIP to 35,900 bytes, 584 below its locked 36,484-byte limit. The linker now
+rejects XIP growth past that limit. Pinning the three AOUT data objects to
+their stock SRAM addresses
+removed the 224-byte SRAM excess; the 14,716-byte source SRAM region now fits
+the locked span. All 64 image-A SRAM vectors now match stock exactly after
+placing the early startup, trap, and compact IRQ source sections at their
+stock addresses. Most SRAM code and data bytes still differ. BINH A stage-1
+reset, boot dispatch, loader, NOR reader, SPI
+transaction, clock, and timer C candidates are now registered. A separate
+4,756-byte C stage-1 candidate links with stock-identical vectors and
+initialized data, but its code differs. The NPU command stream now has
+field-level C source that emits all 9,164 stock bytes. The strict source link
+writes that command region beside the codec A executable candidate. The
+120,800-byte trained weight region is a declared, authenticated non-executable
+data asset at `g2/src/codec/npu/kws_weights_2_2_6_10.bin`; it is not
+reconstructed C source and does not establish model behavior. A complete
+source-candidate BINH A can now be packaged with this asset, while code
+equivalence and hardware behavior remain unverified. See
+`g2/evidence/codec-a-kws-trained-weights-20261111.json`,
+`g2/evidence/codec-a-binh-source-boundary-review-20261110.json` and
+`g2/evidence/codec-a-aout-sram-placement-20261110.json` and
+`g2/evidence/codec-a-exception-vector-placement-20261110.json` and
+`g2/evidence/codec-a-full-vector-placement-20261110.json` and
+`g2/evidence/codec-a-xip-source-consolidation-20261110.json`.
+
 Image B loads to IRAM `[0x10003000, 0x1001708C)`, entry `0x10003100`, stack
 `0x2002FFFC`. Its internal text/data split is heuristic.
+
+`wrap_codec_binh_b` can package the separately linked C stage-1 boot block
+and image B SRAM load as a format-valid source BINH B candidate. It computes
+the stage-1 CRC-32/MPEG-2 and pads the shorter source loads to the locked
+wire lengths. The wrapper reproduces the locked BINH B bytes when given the
+locked stages. The source candidate differs from stock and has not been
+verified on hardware (`g2/evidence/codec-b-stage1-source-package-review-20261110.json`).
 
 ## 8. EM9305: record-table package
 
@@ -348,7 +393,7 @@ Confidence: Proven.
 |---:|---|
 | `0x00` | magic bytes `00 02 04 04` |
 | `0x04` | total record-payload length (u32) |
-| `0x08` | record count (4) |
+| `0x08` | record count (4 in the stock package; 3 in the current source candidate) |
 | `0x0C` | erase-sector count (u32) |
 | `0x10` | descriptors `{file_offset, size, target_address}` × count (12 B each), contiguous and canonical |
 | then | erase-sector IDs, u16 each |
@@ -361,12 +406,32 @@ Official records (the metadata is 124 bytes):
 |---|---:|---:|---:|
 | 0 | 124 | 224 | `0x00300000` |
 | 1 | 348 | 656 | `0x00300400` |
-| 2 FHDR | 1,004 | 56 | `0x00302000` (image descriptor; entry point `0x00302028`) |
+| 2 FHDR + NVM entry | 1,004 | 56 | `0x00302000` (40-byte header; 10-byte NVM entry at `0x00302028`; 6 erased bytes) |
 | 3 application | 1,060 | 210,888 | `0x00302400` |
 
 The builder preserves the gaps between records and never produces a gap-filled
-flat image (`g2/docs/memory-map.md:1780-1791`). The erase-sector count is 29 or
-30 (inferred from the 124-byte metadata size, not stated in the sources).
+flat image (`g2/docs/memory-map.md:1780-1791`). The parsed stock header gives
+29 erase-sector IDs (including repeated IDs for records in the same sector).
+
+The local EM9305 SDK v4.6 public `firmwareHeaderV0_t` definition matches the
+stock `FHDR` layout. Its firmware start and execution fields both point to
+`0x00302028`, while its firmware size (`0x33ba0`) reaches the end of record 3
+at `0x00335bc8`. The header CRC is standard CRC-32 over the first 34 bytes.
+The firmware CRC is standard CRC-32 over the span from `0x00302028` to
+`0x00335bc8`, treating the unrecorded flash gap as erased `0xFF` bytes.
+The 10-byte NVM entry sets SP to `0x80f978` and branches to the application
+boot loop at stock `0x30ed80`. These details were checked against the locked
+record bytes; see `g2/evidence/em9305-record2-source-review-20261110.json`.
+The locked header's firmware-options word is zero. In the authenticated NVM
+bootloader, option bit 8 set skips payload CRC verification; with this stock
+option-zero header, the bootloader checks the payload CRC before selection.
+The branch was observed while executing the stock record in QEMU ARC and is
+recorded in `g2/evidence/em9305-boot-selection-review-20261110.json`.
+
+The source candidate has one C NVM bootloader record starting at `0x300000`,
+followed by the source `FHDR` and application. Its different record count and
+bootloader body are valid inputs to the container builder, but no hardware
+load or stock-equivalence claim follows from that packaging check.
 
 ## 9. Case backup windows (device data outside OTA)
 

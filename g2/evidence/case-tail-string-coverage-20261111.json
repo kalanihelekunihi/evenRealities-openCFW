@@ -1,0 +1,145 @@
+{
+  "schema": 1,
+  "date": "2026-11-11",
+  "reference": {
+    "artifact": "g2/blobs/official/g2-2.2.6.10/firmware_box.raw.bin",
+    "sha256": "773b6d4cfdaf0a5a74a557e3babe8222a0ae813436b76a7437c1096d2c60d677",
+    "flash_base": "0x08000000"
+  },
+  "method": "Manual locked-byte review of two truncated function tails and three source-backed data objects, with explicit separation of two zero alignment halfwords. Function sources and data symbols were confirmed in the source-linked CASE ELF.",
+  "transitions": [
+    {
+      "original": {
+        "start": "0x0800622C",
+        "end_exclusive": "0x08006230",
+        "bytes": 4,
+        "sha256": "c4f0bd70b866526c085c4485b87c1867fa83ab571239f65bb5c1ae98353506b1"
+      },
+      "children": [
+        {
+          "start": "0x0800622C",
+          "end_exclusive": "0x0800622E",
+          "bytes": 2,
+          "sha256": "0d4542e69834fdd98d546c52551d295d1465ce1e0870def994e76e97d60d4736",
+          "classification": "typed_executable_source_candidate",
+          "reason": "POP PC tail of HAL_UART_IRQHandler begun at 0x08005F50; source case_irq_child_5f50"
+        },
+        {
+          "start": "0x0800622E",
+          "end_exclusive": "0x08006230",
+          "bytes": 2,
+          "sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+          "classification": "typed_zero_alignment_or_data",
+          "reason": "zero halfword after POP PC aligns following literal pool"
+        }
+      ]
+    },
+    {
+      "original": {
+        "start": "0x080068E8",
+        "end_exclusive": "0x080068F0",
+        "bytes": 8,
+        "sha256": "82163b84d18ee13b2da29c91c146fbb264172ced4e98dbbb4b9c64f8fcddfeba"
+      },
+      "children": [
+        {
+          "start": "0x080068E8",
+          "end_exclusive": "0x080068F0",
+          "bytes": 8,
+          "sha256": "82163b84d18ee13b2da29c91c146fbb264172ced4e98dbbb4b9c64f8fcddfeba",
+          "classification": "typed_source_semantic_data",
+          "reason": "eight-byte fixed ACK template 00 01 03 01 00 00 00 00 loaded by ADR/LDMIA at 0x080068D2/0x080068D4; source case_ack"
+        }
+      ]
+    },
+    {
+      "original": {
+        "start": "0x0800916C",
+        "end_exclusive": "0x08009170",
+        "bytes": 4,
+        "sha256": "ea30c4d3c48e475875e4913e721abc8ed559bb580b9f5127c4d83ba0f5767959"
+      },
+      "children": [
+        {
+          "start": "0x0800916C",
+          "end_exclusive": "0x08009170",
+          "bytes": 4,
+          "sha256": "ea30c4d3c48e475875e4913e721abc8ed559bb580b9f5127c4d83ba0f5767959",
+          "classification": "typed_source_semantic_data",
+          "reason": "CR LF NUL and alignment NUL; source case_string_0800916c"
+        }
+      ]
+    },
+    {
+      "original": {
+        "start": "0x0800ACDC",
+        "end_exclusive": "0x0800ACE4",
+        "bytes": 8,
+        "sha256": "4149b1cfe7a7921d4c38a7ce73ceb211e72266331ce00b280f26f0c550899ac4"
+      },
+      "children": [
+        {
+          "start": "0x0800ACDC",
+          "end_exclusive": "0x0800ACE4",
+          "bytes": 8,
+          "sha256": "4149b1cfe7a7921d4c38a7ce73ceb211e72266331ce00b280f26f0c550899ac4",
+          "classification": "typed_source_semantic_data",
+          "reason": "TmrQ NUL-terminated task queue name with alignment NULs; source case_boot_scheduler_name"
+        }
+      ]
+    },
+    {
+      "original": {
+        "start": "0x0800B1EE",
+        "end_exclusive": "0x0800B1F8",
+        "bytes": 10,
+        "sha256": "7888263bb2f04b4afb49c466fdf502a38e556b1ad86be539db797172a78fcbc1"
+      },
+      "children": [
+        {
+          "start": "0x0800B1EE",
+          "end_exclusive": "0x0800B1F8",
+          "bytes": 10,
+          "sha256": "7888263bb2f04b4afb49c466fdf502a38e556b1ad86be539db797172a78fcbc1",
+          "classification": "typed_executable_source_candidate",
+          "reason": "tail of timer command drain from 0x0800B0FC, including second BL halfword, conditional loop branch and POP PC; source case_boot_timer_expired"
+        }
+      ]
+    },
+    {
+      "original": {
+        "start": "0x0800C2E6",
+        "end_exclusive": "0x0800C2F0",
+        "bytes": 10,
+        "sha256": "474e7a13285eb4f549164013f55630d3a905b8eda4ef68f0ced3a6611b99ef0f"
+      },
+      "children": [
+        {
+          "start": "0x0800C2E6",
+          "end_exclusive": "0x0800C2E8",
+          "bytes": 2,
+          "sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+          "classification": "typed_zero_alignment_or_data",
+          "reason": "zero halfword after POP PC aligns the following task name"
+        },
+        {
+          "start": "0x0800C2E8",
+          "end_exclusive": "0x0800C2F0",
+          "bytes": 8,
+          "sha256": "fdc21847bf8baffbe65ff945c6e5e104d627e5d4fe6771231b33cff2068013c3",
+          "classification": "typed_source_semantic_data",
+          "reason": "IDLE NUL-terminated task name with alignment NULs; source case_boot_idle_task_name"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "all_frontier_hashes_match": true,
+    "rows_nonoverlapping": true,
+    "unsupported_bytes_after": 12
+  },
+  "limits": [
+    "The five self-loop halfwords at 0x0800014C..0x08000156 and the BX LR halfword at 0x080091FE remain unresolved.",
+    "Typed source data does not prove exact linked placement or whole-bundle byte identity."
+  ]
+}

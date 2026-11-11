@@ -1,0 +1,232 @@
+{
+ "g2-apollo-bootloader": {
+  "counts": {
+   "guess": 0,
+   "stub": 0,
+   "weak": 0,
+   "raw_decompile": 0,
+   "nvg_leftover": 0,
+   "unverified": 0,
+   "flag": 0,
+   "inferred": 0,
+   "files_scanned": 576
+  },
+  "ld_counts": {
+   "guess": 0,
+   "stub": 0,
+   "weak": 0,
+   "raw_decompile": 0,
+   "nvg_leftover": 0,
+   "unverified": 0,
+   "flag": 0,
+   "inferred": 0
+  },
+  "samples": {
+   "guess": [],
+   "stub": [],
+   "weak": [],
+   "raw_decompile": [],
+   "nvg_leftover": [],
+   "unverified": [],
+   "flag": [],
+   "inferred": []
+  }
+ },
+ "g2-codec-a": {
+  "counts": {
+   "guess": 1,
+   "stub": 0,
+   "weak": 0,
+   "raw_decompile": 0,
+   "nvg_leftover": 0,
+   "unverified": 0,
+   "flag": 1,
+   "inferred": 0,
+   "files_scanned": 347
+  },
+  "ld_counts": {
+   "guess": 1,
+   "stub": 0,
+   "weak": 0,
+   "raw_decompile": 0,
+   "nvg_leftover": 0,
+   "unverified": 0,
+   "flag": 1,
+   "inferred": 0
+  },
+  "samples": {
+   "guess": [
+    "g2/src/codec/link/g2-codec-a.ld:1"
+   ],
+   "stub": [],
+   "weak": [],
+   "raw_decompile": [],
+   "nvg_leftover": [],
+   "unverified": [],
+   "flag": [
+    "g2/src/codec/link/g2-codec-a.ld:1"
+   ],
+   "inferred": []
+  }
+ },
+ "g2-codec-b": {
+  "counts": {
+   "guess": 0,
+   "stub": 0,
+   "weak": 0,
+   "raw_decompile": 1,
+   "nvg_leftover": 0,
+   "unverified": 0,
+   "flag": 0,
+   "inferred": 2,
+   "files_scanned": 325
+  },
+  "ld_counts": {
+   "guess": 0,
+   "stub": 0,
+   "weak": 0,
+   "raw_decompile": 0,
+   "nvg_leftover": 0,
+   "unverified": 0,
+   "flag": 0,
+   "inferred": 0
+  },
+  "samples": {
+   "guess": [],
+   "stub": [],
+   "weak": [],
+   "raw_decompile": [
+    "g2/src/codec/image-b-sram/backup_runtime_printf.c:1"
+   ],
+   "nvg_leftover": [],
+   "unverified": [],
+   "flag": [],
+   "inferred": [
+    "g2/src/codec/image-b-sram/backup_stage2_gpio_irq_masks.c:1",
+    "g2/src/codec/image-b-sram/backup_beamforming_process_energy_stat.c:1"
+   ]
+  }
+ },
+ "g2-touch": {
+  "counts": {
+   "guess": 0,
+   "stub": 0,
+   "weak": 0,
+   "raw_decompile": 0,
+   "nvg_leftover": 0,
+   "unverified": 0,
+   "flag": 1,
+   "inferred": 0,
+   "files_scanned": 135
+  },
+  "ld_counts": {
+   "guess": 0,
+   "stub": 0,
+   "weak": 0,
+   "raw_decompile": 0,
+   "nvg_leftover": 0,
+   "unverified": 0,
+   "flag": 0,
+   "inferred": 0
+  },
+  "samples": {
+   "guess": [],
+   "stub": [],
+   "weak": [],
+   "raw_decompile": [],
+   "nvg_leftover": [],
+   "unverified": [],
+   "flag": [
+    "g2/src/touch/reset-data/touch_stock_reset_gaps.c:1"
+   ],
+   "inferred": []
+  }
+ },
+ "g2-em9305": {
+  "counts": {
+   "guess": 0,
+   "stub": 0,
+   "weak": 0,
+   "raw_decompile": 0,
+   "nvg_leftover": 0,
+   "unverified": 1,
+   "flag": 1,
+   "inferred": 1,
+   "files_scanned": 623
+  },
+  "ld_counts": {
+   "guess": 0,
+   "stub": 0,
+   "weak": 0,
+   "raw_decompile": 0,
+   "nvg_leftover": 0,
+   "unverified": 1,
+   "flag": 1,
+   "inferred": 0
+  },
+  "samples": {
+   "guess": [],
+   "stub": [],
+   "weak": [],
+   "raw_decompile": [],
+   "nvg_leftover": [],
+   "unverified": [
+    "g2/src/em9305/link/g2-em9305.ld:1"
+   ],
+   "flag": [
+    "g2/src/em9305/link/g2-em9305.ld:1"
+   ],
+   "inferred": [
+    "g2/src/em9305/qpc-scheduler/controller_init.c:1"
+   ]
+  }
+ },
+ "g2-apollo-main": {
+  "counts": {
+   "guess": 4,
+   "stub": 1,
+   "weak": 3,
+   "raw_decompile": 0,
+   "nvg_leftover": 0,
+   "unverified": 0,
+   "flag": 0,
+   "inferred": 5,
+   "files_scanned": 2762
+  },
+  "ld_counts": {
+   "guess": 0,
+   "stub": 0,
+   "weak": 0,
+   "raw_decompile": 0,
+   "nvg_leftover": 0,
+   "unverified": 0,
+   "flag": 0,
+   "inferred": 0
+  },
+  "samples": {
+   "guess": [
+    "g2/src/apollo-main/ble/g2c-leaves/g2c_ble_leaves.c:1",
+    "g2/src/apollo-main/hal/clkmgr-g2c/am_hal_clkmgr_g2.c:1",
+    "g2/src/apollo-main/runtime/g2c-gnu/g2c_vectors.c:1",
+    "g2/src/apollo-main/graphics/g2c-nema/include/g2c_ghidra_shim.h:1"
+   ],
+   "stub": [
+    "g2/src/apollo-main/ui/a-61-navigation-data/notify_app_icon.c:1"
+   ],
+   "weak": [
+    "g2/src/apollo-main/runtime/a-68-iar-stdout/iar_stdout.c:3"
+   ],
+   "raw_decompile": [],
+   "nvg_leftover": [],
+   "unverified": [],
+   "flag": [],
+   "inferred": [
+    "g2/src/apollo-main/drivers/power/charger-common/cb_ring_battery.c:1",
+    "g2/src/apollo-main/app/p-02-aging-test/aging_test_page.c:1",
+    "g2/src/apollo-main/include/g2_als.h:1",
+    "g2/src/apollo-main/system/glue/dmic_request_provider.c:1",
+    "g2/src/apollo-main/system/glue/i2s_request_provider.c:1"
+   ]
+  }
+ }
+}

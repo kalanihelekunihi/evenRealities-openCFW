@@ -1,24 +1,16 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_3175bc\n"
-".type opencfw_em9305_child_3175bc,@function\n"
-"opencfw_em9305_child_3175bc:\n"
-"L3175bc:\n"
-"mov_s r3,r0\n"
-"L3175be:\n"
-"stb_s r2,[r0,0x2]\n"
-"L3175c0:\n"
-"lsr_s r2,r2,0x8\n"
-"L3175c2:\n"
-"stb_s r1,[r0,0x1]\n"
-"L3175c4:\n"
-"stb_s r2,[r0,0x3]\n"
-"L3175c6:\n"
-"mov_s r0,4\n"
-"L3175c8:\n"
-"j_s.d [blink]\n"
-"L3175ca:\n"
-"stb 1,[r3]\n"
-".size opencfw_em9305_child_3175bc,.-opencfw_em9305_child_3175bc\n"
-);
+/* Stock 0x3175bc: writes a 4-byte record at a: [0]=1,[1]=b,[2]=c,[3]=c>>8; returns 4.
+ * Converted from the lowered ARC asm; compiled with the g2-em9305-1 profile (-Os) and the
+ * disassembly diffed against the stock lowering: identical, or differing only in delay-slot
+ * scheduling / a redundant zero-extension / absolute-address ld/st forms (reviewed by hand). */
+#include <stdint.h>
+#define B8(a)  (*(volatile uint8_t  *)(uintptr_t)(a))
+#define H16(a) (*(volatile uint16_t *)(uintptr_t)(a))
+#define W32(a) (*(volatile uint32_t *)(uintptr_t)(a))
+uint32_t opencfw_em9305_child_3175bc(uint32_t a,uint32_t b,uint32_t c)
+{
+  B8(a + 2u) = (uint8_t)c;
+  B8(a + 1u) = (uint8_t)b;
+  B8(a + 3u) = (uint8_t)(c >> 8);
+  B8(a) = 1u;
+  return 4u;
+}

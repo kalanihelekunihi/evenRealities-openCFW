@@ -7,7 +7,7 @@ extern uint32_t case_policy_scheduler_unlock(void);
 extern uint32_t case_policy_task_event_send(uint32_t task,uint32_t op,uint32_t value,uint32_t option,uint32_t timeout); /* 0xcd80 */
 extern int32_t case_policy_event_signal(uint32_t task,uint32_t value); /* 0xaaf0 */
 static __attribute__((noreturn)) void native_fault(void)
-{__asm__ volatile("cpsid i\n1: b 1b");__builtin_unreachable();}
+{__asm__ volatile("cpsid i");for(;;){}}
 /* Stock 0x0800CDE4 (case_critical_read_flag40) */
 uint32_t case_policy_task_active(uint32_t task) /* 0xcde4 */
 {
@@ -34,3 +34,7 @@ void case_policy_refresh(void) /* 0xbb74 */
     (void)case_policy_task_reset(task);
     (void)case_policy_event_signal(task,1000u);
 }
+/* Dedup (0x0800ab26): case_binary_56_cancel (was legacy-default/task_cancel_candidate.c). */
+uint32_t case_binary_56_cancel(uint32_t task) __attribute__((alias("case_policy_task_reset")));
+/* Dedup (0x0800cde4): case_task_lookup (was legacy-default/task_kernel_candidates.c). */
+__typeof__(case_policy_task_active) case_task_lookup __attribute__((alias("case_policy_task_active")));

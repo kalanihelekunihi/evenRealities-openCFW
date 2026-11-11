@@ -19,16 +19,14 @@ __attribute__((used)) void audio_ble_dm_l2c_conn_update_cnf_impl(uint32_t handle
     if(ccb!=0){event[2u]=0x73u;event[4u]=(uint8_t)result;event[5u]=(uint8_t)(result>>8);
         audio_ble_dm_conn_upd_execute_4b6532(ccb,event);}
 }
-__attribute__((naked)) void audio_ble_dm_l2c_conn_update_cnf_56e580(uint16_t handle,uint16_t result){
-    __asm__ volatile("b.w audio_ble_dm_l2c_conn_update_cnf_impl");
-}
-__attribute__((used)) void audio_ble_dm_l2c_cmd_rej_ind_impl(uint32_t handle,uint32_t reason,uint32_t ambient_r5){
-    uint8_t event[8];event[0u]=(uint8_t)ambient_r5;event[1u]=(uint8_t)(ambient_r5>>8);
+void audio_ble_dm_l2c_conn_update_cnf_56e580(uint16_t handle,uint16_t result) __attribute__((alias("audio_ble_dm_l2c_conn_update_cnf_impl")));
+/* Cordio DmL2cCmdRejInd. Upstream leaves hdr.param uninitialised (stock
+ * passes whatever was in r5); it is zero here. */
+void audio_ble_dm_l2c_cmd_rej_ind_56e5a4(uint16_t handle,uint16_t reason){
+    uint8_t event[8];event[0u]=0u;event[1u]=0u;
     event[2u]=0x77u;event[3u]=0u;event[4u]=(uint8_t)reason;event[5u]=(uint8_t)(reason>>8);
     event[6u]=(uint8_t)handle;event[7u]=(uint8_t)(handle>>8);
     uint32_t raw=*(const uint32_t *)(const void *)(audio_dm_connection_records+0x9cu);
     ((void (*)(const uint8_t *))(uintptr_t)raw)(event);
 }
-__attribute__((naked)) void audio_ble_dm_l2c_cmd_rej_ind_56e5a4(uint16_t handle,uint16_t reason){
-    __asm__ volatile("mov r2, r5\n b.w audio_ble_dm_l2c_cmd_rej_ind_impl");
-}
+

@@ -1,0 +1,210 @@
+{
+  "cases": 9217,
+  "passed": 9217,
+  "failures": [],
+  "actual_delay_integrated_cases": 1,
+  "delay_primitive_bytes": "0338fdd87047",
+  "old_frame_regression": {
+    "native_config_pointer": "0x2002ffe8",
+    "old_config_pointer": "0x2002ffe4",
+    "native_r3": "0x60002",
+    "old_r3": "0xabc00003",
+    "old_delay_argument": 1000,
+    "native_delay_argument": 64000
+  },
+  "callback_depths": [
+    [
+      [
+        -24
+      ],
+      [
+        -56
+      ]
+    ],
+    [
+      [
+        -24,
+        -24
+      ],
+      [
+        -56,
+        -56
+      ]
+    ],
+    [
+      [
+        -24,
+        -24,
+        -24
+      ],
+      [
+        -56,
+        -56,
+        -56
+      ]
+    ],
+    [
+      [
+        -24,
+        -24,
+        -24,
+        -24
+      ],
+      [
+        -56,
+        -56,
+        -56,
+        -56
+      ]
+    ],
+    [
+      [
+        -24,
+        -24,
+        -24,
+        -24,
+        -24
+      ],
+      [
+        -56,
+        -56,
+        -56,
+        -56,
+        -56
+      ]
+    ],
+    [
+      [
+        -24,
+        -24,
+        -24,
+        -24,
+        -24,
+        -24
+      ],
+      [
+        -56,
+        -56,
+        -56,
+        -56,
+        -56,
+        -56
+      ]
+    ],
+    [
+      [
+        -24,
+        -24,
+        -24,
+        -24,
+        -24,
+        -24,
+        -24
+      ],
+      [
+        -56,
+        -56,
+        -56,
+        -56,
+        -56,
+        -56,
+        -56
+      ]
+    ],
+    [
+      [
+        -24,
+        -24,
+        -24,
+        -24,
+        -24,
+        -24,
+        -24,
+        -24
+      ],
+      [
+        -56,
+        -56,
+        -56,
+        -56,
+        -56,
+        -56,
+        -56,
+        -56
+      ]
+    ],
+    [
+      [
+        -24,
+        -24,
+        -24,
+        -24,
+        -24,
+        -24,
+        -24,
+        -24,
+        -24
+      ],
+      [
+        -56,
+        -56,
+        -56,
+        -56,
+        -56,
+        -56,
+        -56,
+        -56,
+        -56
+      ]
+    ]
+  ],
+  "source_bridge_size": 10,
+  "source_body_size": 146,
+  "other_sections_unchanged": [
+    ".r1.adc.ops",
+    ".r1.adc.state",
+    ".text.r1_named_adc_close",
+    ".text.r1_named_adc_register_all",
+    ".text.r1_named_adc_sample",
+    ".text.r1_named_adc_sample_body"
+  ],
+  "other_source_units_unchanged": 561,
+  "imports_unchanged": true,
+  "application_imports": 211,
+  "bootloader_imports": 34,
+  "integrated_sources": [
+    "r1/src/application/adc/stock_named_adc.c",
+    "r1/src/application/board/native_rtt_delay.c"
+  ],
+  "report": "build/sources-goal-r1-adc-open/report.json",
+  "report_sha256": "1a413a86484564baa010bf54f2e5f819830ed4428829aad4ebdbc544e8df1b82",
+  "manifest_sha256": "9c5b7ae5c0e7493eb22e1fb4df9f0c928c2a9aa70530254aff89b55213bef2e2",
+  "stock_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "rea": {
+    "path": "build/goal-r1-adc-open/REA.json",
+    "sha256": "8bde20b4edc45661cd0ad87e8c58c40057da708642c546104afb8de238bec247",
+    "procedure": "0x54864"
+  },
+  "source_sha256": {
+    "r1/src/application/adc/stock_named_adc.c": "d989154ce86050da8fb2b30dcfbee6076a6a2d68058858156682dc13caeed90f",
+    "r1/src/application/board/native_rtt_delay.c": "e614166951aa96b4de91200ad9d67e71434f9bb759faab1fbf6f9225cb4576c7"
+  },
+  "probe_artifacts": {
+    "build/goal-r1-adc-open/before.c": "11a73747569faf11c5823dcc7a7521585185ecb996868a0ae4610fb2b3fcc12c",
+    "build/goal-r1-adc-open/stock.s": "9587774b80bab70d0b48b7017eb188a7bfe9685f38bc030292eb9d2fc1636f9b",
+    "build/goal-r1-adc-open/stock.elf": "419daa332fb2adaba477bbce489fc4556a727c189cacfe526aac1a0bf7e6c21d",
+    "build/goal-r1-adc-open/REA.json": "8bde20b4edc45661cd0ad87e8c58c40057da708642c546104afb8de238bec247",
+    "build/goal-r1-adc-open/rea-snapshot.json": "bf5c8e54d8c0a6b26a527866083d14b89717c2587a99861b7951b3a133ad5373",
+    "build/goal-r1-adc-open/verify.py": "211094305d115917b8494fb262cf10a9e069b3e4e59038e6d1dc89190fda701c",
+    "build/goal-r1-adc-open/results.json": "6b6436cde4337d6c9c45236c3c731d38a41e46db9766d64989b64fff50932503",
+    "build/goal-r1-adc-open/source.elf": "6b6db56330816d5c6fef8f28dcdf4ec7c87a1ae380542a3a32f61b6228781923",
+    "build/goal-r1-adc-open/old.elf": "7dab025fd542253a954accde9a72c85e4934031cae2e2d4d82021ff76b00fe4f"
+  },
+  "limits": [
+    "C open body is 146 bytes plus ten-byte native-frame bridge versus 130 native instruction bytes. No byte identity or provider qualification. The four-byte typed SDK template matches native initial bytes.",
+    "String comparison, Nordic init/channel-init and returning error callbacks are modeled. Delay is modeled for bulk cases; one integrated case executes both native/source six-byte delay loops twice. No real clock-duration, SAADC, analog or error-handler recovery proof.",
+    "Configuration remains at caller SP-24 and R3 restores its final word. Native callbacks use SP-24; C callbacks use SP-56. Private C stack, faults, exceptions/concurrency and timing identity are unproven.",
+    "ADC open no longer imports r1_twi_delay_busy and calls the existing exact loop with 64000 twice. Other users still leave that wrapper unresolved; application imports remain unchanged.",
+    "Manifest eligibility, G2 gates and source-plan selections are unchanged. Final firmware linking, boot integration, source completeness and whole-image byte identity remain open."
+  ]
+}

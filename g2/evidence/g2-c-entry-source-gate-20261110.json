@@ -1,0 +1,45 @@
+{
+  "schema": 1,
+  "target": "G2 build-enabled source translation units and architectural entries",
+  "changes": {
+    "bootloader_reset": "g2/src/apollo-bootloader/startup/reset.c",
+    "bootloader_itcm": "g2/src/apollo-bootloader/startup/itcm_helpers.c",
+    "bootloader_exception": "g2/src/apollo-bootloader/thread-creation/exception_entry.c",
+    "apollo_main_hardfault": "g2/src/apollo-main/system/p-10-cmbacktrace/cmb_fault_entry.c",
+    "manifest": "g2/src/sources.json",
+    "removed_generated_assembly": "U8/cmbacktrace/cmb_fault.S",
+    "architecture_instructions": "The naked C entries retain inline Thumb instructions where the stack, exception frame, control registers, or interrupt state cannot be expressed with an ordinary C prologue."
+  },
+  "source_gate": {
+    "sources_check": "make -C g2 sources-check",
+    "registered_units": 4882,
+    "build_enabled_units": 4877,
+    "build_enabled_c_units": 4877,
+    "build_enabled_assembly_units": 0,
+    "disabled_assembly_units": 1,
+    "disabled_assembly_unit": "third-party/upstream/psoc4-touch-slice/mtb-pdl-cat2-35f1714623cfea682d5e285af80d50416b4c7bbc/drivers/source/COMPONENT_CM0P/TOOLCHAIN_GCC_ARM/cy_syslib_gcc.S",
+    "source_report": "build/g2-all-c-entry-final-20261110/report.json",
+    "source_report_sha256": "6fd4a576e10b21c01ce0bcb9f8bba45e1708b0d8715d1ab99391d12cdbde8f4d",
+    "compile_failures": 0,
+    "duplicate_strong_symbols": 0
+  },
+  "link_gate": {
+    "strict_link_report": "build/g2-all-c-entry-final-link-20261110/link-report.json",
+    "strict_link_report_sha256": "725d7e2b323453c51e5c8b2b9465cc1c976cc593b6bab743a7b64b7f46057fd7",
+    "payloads_linked": 7,
+    "external_binary_archive_used": false,
+    "bootloader_binary_sha256": "90094f1c7b9b1986c9576146f4b2aa866ab668011938a00048c7b031ff5cf5c1",
+    "apollo_main_binary_sha256": "ac202c01d4be444ae76e01ecf7efc27068c94cca26f5a9ec293324afd42cac8a"
+  },
+  "body_checks": {
+    "reset_and_stack_48_bytes_unchanged": true,
+    "itcm_24_bytes_unchanged": true,
+    "itcm_24_bytes_sha256": "0676154418085b0630f2a20cc50fbbe3967dd2d9b7794fe1aad3f6af14f2fb83",
+    "svc_first_restore_pendsv_linked_bytes_unchanged": true,
+    "hardfault_object_text_bytes": 12,
+    "hardfault_old_and_new_object_text_sha256": "18c11187c8dcda135abdda211a0b25113375e288322562b9d30891cdd754791e",
+    "hardfault_linked_address": "0x004f9638",
+    "hardfault_old_and_new_linked_body_sha256": "b404737dd6212ddb9ee26763bf4e06d6712322ace8cf6b0f95887a2cd9829b70"
+  },
+  "qualification": "Every build-enabled G2 manifest unit is C-compiled and all seven payloads source-link. This does not establish complete stock source coverage, full BINH A or FWPK construction, NPU data source, byte identity, device boot, or absence of inline architecture instructions."
+}

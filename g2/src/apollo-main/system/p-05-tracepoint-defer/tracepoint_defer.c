@@ -32,9 +32,11 @@ extern void audio_uart_ring_persist_event_set_47dd62(void);      /* 0x47dd62 */
 static const char timer_name[] = "tracepoint_defer"; /* ROM 0x7844f0 */
 
 /* 0x47dce4: MRS PRIMASK; CPSID i; returns the previous PRIMASK. */
-__attribute__((naked)) uint32_t g2_irq_save_47dce4(void)
+uint32_t g2_irq_save_47dce4(void)
 {
-    __asm__ volatile("mrs r0, PRIMASK\n\tcpsid i\n\tbx lr");
+    uint32_t primask = __builtin_arm_rsr("primask");
+    __asm__ volatile("cpsid i" ::: "memory");
+    return primask;
 }
 
 /* 0x47ddac: timer re-arm used by elog_async_ext_flieStore_Init (0x448e48). */

@@ -24,3 +24,11 @@ __attribute__((noinline)) void case_control_b(uint32_t enable)
 {
     case_control_write(0x50000000u, 0x80u, enable != 0u);
 }
+/* Dedup (0x08006b80): case_boot_transport_stop_clock (was startup/application_boot_transport_pin_candidate.c). */
+__typeof__(case_control_a) case_boot_transport_stop_clock __attribute__((alias("case_control_a")));
+/* Dedup (0x08006b80): case_policy_led_left_clear (was startup/application_policy_shared_aliases_candidate.c). */
+__typeof__(case_control_a) case_policy_led_left_clear __attribute__((alias("case_control_a")));
+/* Dedup (0x08006b98): case_boot_transport_stop_link (was startup/application_boot_transport_pin_candidate.c). */
+__typeof__(case_control_b) case_boot_transport_stop_link __attribute__((alias("case_control_b")));
+/* Dedup (0x08006b98): case_policy_led_right_clear (was startup/application_policy_shared_aliases_candidate.c). */
+__typeof__(case_control_b) case_policy_led_right_clear __attribute__((alias("case_control_b")));

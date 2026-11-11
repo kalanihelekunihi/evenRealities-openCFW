@@ -3,6 +3,10 @@
 #include "../../xtal-request/request.h"
 #include "../../hfrc-syspll/clocks.h"
 #include "../clock-leaf-providers/providers.h"
+/* Stock-RAM literals rewritten to named objects (sim-test wave 2026-10-26,
+ * .waves/sim-fix/apply.py): g2ref_X is the linker symbol X. */
+#include <stdint.h>
+extern unsigned char g2ref_g2_stock_ram_200001c8[] __asm__("g2_stock_ram_200001c8");
 extern uint32_t stock_save_irq(void);
 static void restore_irq(uint32_t saved) {
     __asm__ volatile("msr primask, %0" :: "r"(saved) : "memory");
@@ -19,7 +23,7 @@ static uint32_t ownership(uint32_t clock, uint32_t user, uint32_t requested) {
 uint32_t audio_lfrc_request(uint32_t user) { return ownership(0, user, 1); }
 uint32_t audio_lfrc_release(uint32_t user) { return ownership(0, user, 0); }
 uint32_t audio_xtal_ls_request(uint32_t user) {
-    if (!*(volatile uint32_t *)0x200001d8) return 7;
+    if (!*(volatile uint32_t *)((uint32_t)(uintptr_t)g2ref_g2_stock_ram_200001c8+0x10u)) return 7;
     /* No stock EXT32K enable/status path: SDK optional code was compiled out. */
     return ownership(1, user, 1);
 }

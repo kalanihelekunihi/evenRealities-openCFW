@@ -1497,15 +1497,17 @@ bool quantized_runtime_goodix_second_graph_build(
 
 static bool goodix_second_plan_stage(
     const quantized_runtime *rt,
-    const quantized_runtime_goodix_second_graph *graph,
+    const quantized_runtime_goodix_second_graph_view *graph,
     quantized_runtime_stage *stage, size_t descriptor_offset,
     size_t token_offset, quantized_runtime_stage_token_resolver_fn resolve,
     void *resolve_context, bool required) {
-    if (descriptor_offset >= sizeof(graph->bytes) ||
-            token_offset + 4u > sizeof(graph->bytes)) {
+    if (descriptor_offset >= graph->byte_count ||
+            token_offset + 4u > graph->byte_count) {
         return false;
     }
-    const uint32_t token = load_u32_le(graph->bytes + token_offset);
+    const uint32_t raw_token = load_u32_le(graph->bytes + token_offset);
+    const uint32_t token = graph->rewrite != NULL
+        ? graph->rewrite(graph->rewrite_context, raw_token) : raw_token;
     stage->descriptor = graph->bytes + descriptor_offset;
     stage->execute = token != 0u ? resolve(resolve_context, token) : NULL;
     if (stage->execute != NULL) {
@@ -1535,7 +1537,29 @@ bool quantized_runtime_goodix_second_executor_plan_build(
     void *resolve_context,
     quantized_runtime_multi_stage_token_resolver_fn resolve_multi,
     void *resolve_multi_context) {
+    if (graph == NULL) {
+        return false;
+    }
+    const quantized_runtime_goodix_second_graph_view view = {
+        .bytes = graph->bytes,
+        .byte_count = sizeof(graph->bytes),
+    };
+    return quantized_runtime_goodix_second_executor_plan_build_view(
+        rt, &view, plan, resolve, resolve_context,
+        resolve_multi, resolve_multi_context);
+}
+
+bool quantized_runtime_goodix_second_executor_plan_build_view(
+    const quantized_runtime *rt,
+    const quantized_runtime_goodix_second_graph_view *graph,
+    quantized_runtime_goodix_second_executor_plan *plan,
+    quantized_runtime_stage_token_resolver_fn resolve,
+    void *resolve_context,
+    quantized_runtime_multi_stage_token_resolver_fn resolve_multi,
+    void *resolve_multi_context) {
     if (rt == NULL || graph == NULL || plan == NULL || resolve == NULL ||
+            graph->bytes == NULL ||
+            graph->byte_count != QUANTIZED_RUNTIME_GOODIX_SECOND_GRAPH_BYTES ||
             resolve_multi == NULL || load_u32_le(graph->bytes) != 6u ||
             rt->providers.expf_fn == NULL) {
         return false;
@@ -1560,7 +1584,10 @@ bool quantized_runtime_goodix_second_executor_plan_build(
         }
     }
 
-    const uint32_t merge_token = load_u32_le(graph->bytes + 0x1A0u);
+    const uint32_t raw_merge_token = load_u32_le(graph->bytes + 0x1A0u);
+    const uint32_t merge_token = graph->rewrite != NULL
+        ? graph->rewrite(graph->rewrite_context, raw_merge_token)
+        : raw_merge_token;
     plan->merge_four.descriptor = graph->bytes + 0x1A0u;
     plan->merge_four.execute = merge_token != 0u
         ? resolve_multi(resolve_multi_context, merge_token) : NULL;
@@ -4174,7 +4201,7 @@ bool quantized_runtime_gomore_executor_graph_build(
 }
 
 static bool gomore_executor_plan_stage(
-    const quantized_runtime_gomore_executor_graph *graph,
+    const quantized_runtime_gomore_executor_graph_view *graph,
     quantized_runtime_stage *stage, size_t descriptor_offset,
     size_t token_offset, quantized_runtime_stage_token_resolver_fn resolve,
     void *resolve_context, bool required) {
@@ -4182,7 +4209,9 @@ static bool gomore_executor_plan_stage(
             token_offset + 4u > graph->byte_count) {
         return false;
     }
-    const uint32_t token = load_u32_le(graph->bytes + token_offset);
+    const uint32_t raw_token = load_u32_le(graph->bytes + token_offset);
+    const uint32_t token = graph->rewrite != NULL
+        ? graph->rewrite(graph->rewrite_context, raw_token) : raw_token;
     stage->descriptor = graph->bytes + descriptor_offset;
     stage->execute = token != 0u ? resolve(resolve_context, token) : NULL;
     if (stage->execute != NULL) {
@@ -4208,7 +4237,28 @@ bool quantized_runtime_gomore_executor_plan_build(
     quantized_runtime_goodix_executor_plan *plan,
     quantized_runtime_stage_token_resolver_fn resolve,
     void *resolve_context) {
-    if (graph == NULL || plan == NULL || resolve == NULL || graph->mode > 1u ||
+    if (graph == NULL) {
+        return false;
+    }
+    const quantized_runtime_gomore_executor_graph_view view = {
+        .bytes = graph->bytes,
+        .byte_count = graph->byte_count,
+        .mode = graph->mode,
+        .recurrent = graph->recurrent,
+        .runtime = graph->runtime,
+    };
+    return quantized_runtime_gomore_executor_plan_build_view(
+        &view, plan, resolve, resolve_context);
+}
+
+bool quantized_runtime_gomore_executor_plan_build_view(
+    const quantized_runtime_gomore_executor_graph_view *graph,
+    quantized_runtime_goodix_executor_plan *plan,
+    quantized_runtime_stage_token_resolver_fn resolve,
+    void *resolve_context) {
+    if (graph == NULL || graph->bytes == NULL ||
+            graph->recurrent == NULL || plan == NULL || resolve == NULL ||
+            graph->mode > 1u ||
             graph->byte_count != (graph->mode == 0u
                 ? QUANTIZED_RUNTIME_GOMORE_EXECUTOR_GRAPH_MODE0_BYTES
                 : QUANTIZED_RUNTIME_GOMORE_EXECUTOR_GRAPH_MODE1_BYTES) ||

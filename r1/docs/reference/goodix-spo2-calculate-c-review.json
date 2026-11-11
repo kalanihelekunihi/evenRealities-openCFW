@@ -1,0 +1,278 @@
+{
+  "schema_version": 1,
+  "scope": "Native SpO2 core control flow and calibration semantics in C",
+  "acceptance_target": "Hardware-first license-free C firmware; byte identity waived",
+  "report": "build/sources-goal-r1-goodix-spo2-calculate-c/report.json",
+  "comparison_report": "build/sources-goal-r1-goodix-spo2-math-c/report.json",
+  "stock_entries": [
+    {
+      "symbol": "goodix_spo2_calc",
+      "entry": "0x6e838",
+      "instruction_bytes": 682
+    }
+  ],
+  "audit": {
+    "compiled_units": 901,
+    "application_imports": 91,
+    "bootloader_imports": 22,
+    "unchanged_prior_nongenerated_sources_and_objects": 890,
+    "tested_object_equals_normal_build": true,
+    "new_owned_state_bytes": 0,
+    "new_native_instruction_bytes": 682,
+    "paired_cases": 1821,
+    "compiled_defects_rejected": 12,
+    "removed_imports": [
+      "goodix_spo2_calc"
+    ],
+    "added_imports": [
+      "r1_goodix_spo2_accumulate",
+      "r1_goodix_spo2_assemble",
+      "r1_goodix_spo2_batch",
+      "r1_goodix_spo2_confidence",
+      "r1_goodix_spo2_failure",
+      "r1_goodix_spo2_infer",
+      "r1_goodix_spo2_output",
+      "r1_goodix_spo2_output_quality",
+      "r1_goodix_spo2_quality",
+      "r1_goodix_spo2_ratio",
+      "r1_goodix_spo2_select",
+      "r1_goodix_spo2_spectral",
+      "r1_goodix_spo2_summary",
+      "r1_goodix_spo2_transition"
+    ],
+    "native_core_control_flow_C": true,
+    "unfinished_processing_stages": 14,
+    "allocator_and_stages_modeled": true,
+    "FP_status_intrinsics_no_inline_assembly": true,
+    "source_plan_and_cache_layout_unchanged": true
+  },
+  "direct": {
+    "paired_cases": 1821,
+    "native_instruction_bytes_executed": 682,
+    "source_object_sha256": "0d1e2ddeeefd0ad393d0933a15bf7185e395422378e50e2c584b449fa1cff367",
+    "processing_stages_and_allocator_modeled": true,
+    "independent_call_order_status_packet_and_allocation_oracles": true,
+    "actual_native_C_polynomial": true,
+    "full_FPSCR_and_public_RAM_snapshots_match": true,
+    "source_cannot_execute_stock": true
+  },
+  "compiled_defects_rejected": [
+    {
+      "name": "null-status",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "counter",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "assembly-leak",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "skip-failure",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "wrong-window",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "reload-descriptor",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "boolean-enable",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "skip-adjust",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "bad-calibration-bound",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "drop-invalid-FP",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "wrong-return",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "free-order",
+      "compiled": true,
+      "rejected": true
+    }
+  ],
+  "unfinished_processing_stages": [
+    {
+      "symbol": "r1_goodix_spo2_assemble",
+      "entry": "0x61da4"
+    },
+    {
+      "symbol": "r1_goodix_spo2_batch",
+      "entry": "0x72dcc"
+    },
+    {
+      "symbol": "r1_goodix_spo2_accumulate",
+      "entry": "0x357ce"
+    },
+    {
+      "symbol": "r1_goodix_spo2_spectral",
+      "entry": "0x766ac"
+    },
+    {
+      "symbol": "r1_goodix_spo2_ratio",
+      "entry": "0x30114"
+    },
+    {
+      "symbol": "r1_goodix_spo2_summary",
+      "entry": "0x290bc"
+    },
+    {
+      "symbol": "r1_goodix_spo2_quality",
+      "entry": "0x88e80"
+    },
+    {
+      "symbol": "r1_goodix_spo2_transition",
+      "entry": "0x36282"
+    },
+    {
+      "symbol": "r1_goodix_spo2_infer",
+      "entry": "0x968c4"
+    },
+    {
+      "symbol": "r1_goodix_spo2_output_quality",
+      "entry": "0x44a78"
+    },
+    {
+      "symbol": "r1_goodix_spo2_select",
+      "entry": "0x36f88"
+    },
+    {
+      "symbol": "r1_goodix_spo2_confidence",
+      "entry": "0x95828"
+    },
+    {
+      "symbol": "r1_goodix_spo2_output",
+      "entry": "0x36974"
+    },
+    {
+      "symbol": "r1_goodix_spo2_failure",
+      "entry": "0x76a68"
+    }
+  ],
+  "contract": [
+    "Null canonical context returns7. Capture descriptor from initial context+12; subsequent context uses reload the shared pointer. Increment frame count with32-bit wrap.",
+    "Clear28-byte assembly scratch and allocate channel_count*24 with32-bit wrap. Assembly error leaks that scratch as stock does; batch always frees it. Their errors call failure encoding then return original status. Aggregation errors return directly.",
+    "On successful aggregation compute unsigned elapsed count/25, prepare spectral/ratio state, allocate channel_count*44 summary and two4-byte buffers. Preserve inference status while processing output. Later allocate4-byte and1-byte buffers and release five buffers in native order.",
+    "Calibration loop runs once. Descriptor flag exactly1 enables threshold comparison, which uses unsigned32-to-float32 conversion and signaling VCMPE semantics. Raw-bit wrapped bounds are preserved. Metric modulo conversions truncate toward zero and saturate, including invalid/inexact/input-denormal status, through defined integer decoding and ARM status intrinsics. No undefined float-to-int cast or inline assembly is introduced.",
+    "Execute the already verified actual C/native polynomial. Calibration uses distinct strict/inclusive bit bounds and mutually exclusive adjustments. Full active FPSCR, public RAM at boundaries, call order, typed local scratch, allocation sizes, saved registers, stack/masks and return status agree."
+  ],
+  "limits": [
+    "Fourteen processing stages and allocation/free/clear ports are modeled. This admits core control flow, not a complete sensor computation engine, actual allocator lifecycle, inference executor or hardware sampling. Native/C polynomial bodies are real.",
+    "1821 paired cases cover all682 native instruction bytes and all active rounding/FZ/DN combinations. Cases include signaling/quiet NaNs, saturation metrics, wrapped counts/sizes, callback context/status changes and error timing. Physical concurrency, allocation failures, arbitrary private aliases, cold FPU and final startup/placement remain unverified. The assembler reads a12-byte enable prefix extending into PPG storage; the modeled ports do not establish that frame-producer layout.",
+    "The separately pinned20832-case instruction replay checks the defined C conversion primitive against the exact observed VCVT opcode. It is controlled instruction replay, not an additional stock function admission.",
+    "An exploratory NaN-invalid mutation was unobservable because the preceding VCMPE already set IOC. It is retained and excluded from the twelve rejected controls; the final invalid-flag control tests finite overflow instead.",
+    "901 units compile/compose without failures or duplicate strong symbols;890 prior nongenerated source/object pairs and source-plan/cache files are unchanged. One aggregate import becomes14 explicit unfinished stages, increasing application imports78 to91; boot imports stay22. Relocatable composition is not a bootable image."
+  ],
+  "evidence_files": {
+    "build/sources-goal-r1-goodix-spo2-calculate-c/report.json": "1cc27cafc51cbc6dcdb87768a02af2b19d87b71037f84d639bb39917f3d427ef",
+    "build/sources-goal-r1-goodix-spo2-math-c/report.json": "fe088cad35b3e2ccc1e1a4af70a55be961dfcc16061141381e68bd8cf96d9c1e",
+    "r1/src/application/goodix/native_spo2_calculate.c": "91c85a7620b5a78a5954247ff0af4df5f4e82ceb472a6d81402951cadb8977e0",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-spo2-calculate-c/r1/r1-application/r1__src__application__goodix__native_spo2_calculate.c.o": "0d1e2ddeeefd0ad393d0933a15bf7185e395422378e50e2c584b449fa1cff367",
+    "r1/src/sources.json": "2791038c22e7c883c4f9e5ab1583c762e7ec5910aac51509ed002ede088be229",
+    "tools/build/source-plan.json": "eeb516e31b3310fb0718f36908977f8125723f7c5e0e86cd6744395826259a4d",
+    "r1/src/config/runtime/native_health_cache.ld": "eb8f131c489cd818d4e36718718fa1989719ca0170f164541a1a5bf56dfc1ec3",
+    "r1/docs/reference/FUNCTION-OWNERSHIP.csv": "2f7084a10e4848b0356f85a180dfdad532d417b8a2c2c40eb9d26c0efd9799fc",
+    "r1/symbols/function-frontier.csv": "d55ed011394c0470fcef634141e450755c24026335a36b62141a67a14a819e3f",
+    "r1/docs/reference/goodix-spo2-execute-c-review.md": "af593333dd0a2a26a3c1f2bab3221b71f22fb907a13368235aa147fdf0bdb52f",
+    "r1/docs/reference/goodix-spo2-math-c-review.md": "ec519e9b2f044c88b242a933540539b4c5b5a474f94aecf45626b110c6080737",
+    "r1/docs/reference/goodix-algorithm-calculate-c-review.md": "5a2256f9baade02537ef169b866bba3c4a8022a25be05e67e0cd61e88ce6f856",
+    "r1/docs/reference/goodix-engine-setup-c-review.md": "2c4129f4ea2412f387b373130a20984d11534c90faeb06aa97e287403f6b1aaf",
+    "build/goal-r1-goodix-spo2-core-c/rea-analysis.json": "d26a6268b732e939a6b505b48821d43ccafd5858ca4ffa23966bbe717f76fc43",
+    "build/goal-r1-goodix-spo2-core-c/rea-bytes.json": "5c6c0d6c1deb9e5ff65ab9f03a68ed615c006629c3069b36e9769129f36f58a9",
+    "build/goal-r1-goodix-spo2-core-c/truncate-probe.c": "0190afc132f605789084e7eded345b6ac2af5cd722b226fbf38fdd2912f90053",
+    "build/goal-r1-goodix-spo2-core-c/truncate-results.json": "da66bee3bee48fdcece514e6af829fd77b29f982b202a613c0df7a44aa552223",
+    "build/goal-r1-goodix-spo2-core-c/verify-truncate.py": "bfa4d68dc9bf49bbe9b4100c5a6deae833753b815366d3088ee2aa1ea078bd83",
+    "r1/src/application/goodix/native_spo2_teardown.c": "9ae3cfae4ef6fd1cfcdaa5a0bc1dda0ff036c336436e5b2217d217fff632003f",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-spo2-calculate-c/r1/r1-application/r1__src__application__goodix__native_spo2_teardown.c.o": "2df10a24911f72ece7ad1da5bc944e9994cfcfaa1357c3404f19ba13e503ecab",
+    "r1/src/application/goodix/native_spo2_math.c": "ffee2e1ee1d93a3c3d3b2b7ee68e52b572a9df88a5c5e1dc5058c3221be990b9",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-spo2-calculate-c/r1/r1-application/r1__src__application__goodix__native_spo2_math.c.o": "265990bd7f6c22c801d820280faeccc977bbacff30e719a4ad3f08414b33dfc5",
+    "build/goal-r1-goodix-spo2-calculate-c/negative-counter.o": "8439fed03c8148bf813ba5952a3c04aa8402902c5d6d2874c7e34f16c4d58c9e",
+    "build/goal-r1-goodix-spo2-calculate-c/negative-wrong-window.o": "076d8234c9b83d4664da81ff0cb352a44ef06637d010cdacbadb3ff977c00c32",
+    "build/goal-r1-goodix-spo2-calculate-c/negative-wrong-return.o": "74f7cb0ffae2c7122b200e90b9a8fd570225027829a88a6f0090e7350f12500c",
+    "build/goal-r1-goodix-spo2-calculate-c/negative-skip-failure.o": "95ba0f6415b41ca1dea1bf12b2c654d9d8f739d29af82b9922e37e125e3de676",
+    "build/goal-r1-goodix-spo2-calculate-c/negative-boolean-enable.c": "1322596e4f14c9d65d0b73b6d03cd10ae58c38e163978404533d9f8193939d41",
+    "build/goal-r1-goodix-spo2-calculate-c/audit.json": "5057bcdced5198d2de5f833ebe751b5a471d741b8d375932d7a21df03bcd2f54",
+    "build/goal-r1-goodix-spo2-calculate-c/candidate.d": "667163fbaff4459f58e33d685aaa268ed3089fdce818a218875648cb2e27fe5b",
+    "build/goal-r1-goodix-spo2-calculate-c/candidate.c": "91c85a7620b5a78a5954247ff0af4df5f4e82ceb472a6d81402951cadb8977e0",
+    "build/goal-r1-goodix-spo2-calculate-c/negative-bad-calibration-bound.o": "ebe5efa6ba0b3aaabe5314e03f199b6802111b8b1b3c6c7bcb0aa3e750b2c2e8",
+    "build/goal-r1-goodix-spo2-calculate-c/verify.log": "aa5ba23dce933d9d6c41db878e5dbf84ff32f392de8a409744be8c89ca57540e",
+    "build/goal-r1-goodix-spo2-calculate-c/test.ld": "b2ff9ac27a31674636716d033098cceafafc2f782e6660e4dd431dc3e9dc449d",
+    "build/goal-r1-goodix-spo2-calculate-c/audit.py": "d1a0138ffcd74ee1462ddb5a3a05cc916c088b8f89787328bd57add21e2519e5",
+    "build/goal-r1-goodix-spo2-calculate-c/negative-wrong-window.log": "afdab310520f3d09de4d89cc08f2bee9821dc1a55005d987d5c2996f5c5b3452",
+    "build/goal-r1-goodix-spo2-calculate-c/negative-free-order.c": "6293f3f2d41c80d697d0845bb7935fa27e80510d24d89c2a8b47dc122fbf0770",
+    "build/goal-r1-goodix-spo2-calculate-c/source.elf": "a78a3594b37132ecf80f9eb7e0f64720c77a18873a48093139899506719b33a2",
+    "build/goal-r1-goodix-spo2-calculate-c/negative.py": "bafbf5b71a04a0bfec5536d51c54ebd66b55e84d5a09261cfc6bdb24643a7c8e",
+    "build/goal-r1-goodix-spo2-calculate-c/negative-skip-adjust.log": "da759b7591d7be2e1a730c2f826fe132f3ab4aef0a6dff2151b4052a3be8aecb",
+    "build/goal-r1-goodix-spo2-calculate-c/production-compile-argv.json": "d1ad152e8663f4f53b3b3415444bcbf06fd61390541ae9c87f587e7e12f29d1c",
+    "build/goal-r1-goodix-spo2-calculate-c/negative.log": "4e1df98682bbf6bab0edbb84af4292ec2a38efcb84a89120da3d7e6cea5c71c6",
+    "build/goal-r1-goodix-spo2-calculate-c/negative-results.json": "8867f54a7e73f257bfd204a50893a0778703366d87de90fa8c6972f238319810",
+    "build/goal-r1-goodix-spo2-calculate-c/negative-assembly-leak.c": "f26a5d08e06e82e4a6c8c630d707603976ed3c5080cbb756c02bc22e8f794e46",
+    "build/goal-r1-goodix-spo2-calculate-c/results.json": "d415c9d6e594d3ebd498091ed2f708f10b944f848207e279e879f5d18edff92e",
+    "build/goal-r1-goodix-spo2-calculate-c/negative-null-status.c": "750199be579320aa9ff6113a82e2111208d6832672b470ea58e6a428d730b405",
+    "build/goal-r1-goodix-spo2-calculate-c/negative-drop-invalid-FP.o": "59b21582643c44197af34248f32f2910d696a64cff6dea3bd3acab97dbee1f57",
+    "build/goal-r1-goodix-spo2-calculate-c/negative-boolean-enable.log": "3183c5f81d6c38a50ef05583ef82a7b9b42a8c0bbdddeb6432f6e5d22ff25ee5",
+    "build/goal-r1-goodix-spo2-calculate-c/negative-reload-descriptor.log": "b03dd1b8695430f88f257f699162acef2b106c9cf9dbc6cc06138bb4535de695",
+    "build/goal-r1-goodix-spo2-calculate-c/negative-skip-adjust.o": "a769323d40c72ba2d3c1bb4db29449fc781a2871b808f042154d9ea56db663d0",
+    "build/goal-r1-goodix-spo2-calculate-c/negative-skip-failure.log": "300547289434b18eca46bd1f854b1a56cb7fc56cb71a6bc94fe4fe12968982e8",
+    "build/goal-r1-goodix-spo2-calculate-c/negative-control-note.md": "7b3ff65fad9edd0dd85119b2d424cc522862865bf95173b2065b034ae0a7ba59",
+    "build/goal-r1-goodix-spo2-calculate-c/nan-invalid-already-sticky.log": "317953546c663b125eb502c2f88dac5d31dad323b9e802cf384bbbc1660c2713",
+    "build/goal-r1-goodix-spo2-calculate-c/negative-reload-descriptor.o": "b2c429abb62b8318d83c5cec87cf63ce113490d4801eea1e04404d74d8c74683",
+    "build/goal-r1-goodix-spo2-calculate-c/nan-invalid-already-sticky.o": "24e027b1865c10ac0f6e7d8927186709c0cd53bb5486fea10cf8060381414240",
+    "build/goal-r1-goodix-spo2-calculate-c/compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/goal-r1-goodix-spo2-calculate-c/negative-wrong-return.log": "8074dc0a8f36caaf21351954bfc02bcf034deebc40b868cc3e6ba5156050157e",
+    "build/goal-r1-goodix-spo2-calculate-c/negative-boolean-enable.o": "b977d5ce2a7b3e3ed3267ab4988f90211395d0191d093b86c725a8828d8be3c5",
+    "build/goal-r1-goodix-spo2-calculate-c/negative-wrong-window.c": "eec9ea1978e54a074eef366fdafad1036eef1d1037ac08f4af09c959ffaebebf",
+    "build/goal-r1-goodix-spo2-calculate-c/negative-wrong-return.c": "5b7b5c3567b95ccc115e8805718384905912871f34c6bb315b356404906027d6",
+    "build/goal-r1-goodix-spo2-calculate-c/negative-skip-failure.c": "1223b7eb7f3ce5b859828d70cc4115b9999e48209336b8c3ac73c42a39d35eed",
+    "build/goal-r1-goodix-spo2-calculate-c/negative-counter.c": "86b01977e6d0886d19b3cc597152519b997a1af5a67d4281ff22e702022b1433",
+    "build/goal-r1-goodix-spo2-calculate-c/negative-free-order.log": "db61eaeb719cad986423439f377ba9b1db1051f64ce21a8bc709d031326eb9a3",
+    "build/goal-r1-goodix-spo2-calculate-c/negative-free-order.o": "372033bf516687dd010d9d07bad1894cb5683c4dbd8cd842ac2e03d15c0f1497",
+    "build/goal-r1-goodix-spo2-calculate-c/negative-assembly-leak.log": "af1e9208999bcb2adb0958b8703bc8d8ab873f2a9015cb5d907be64a652db857",
+    "build/goal-r1-goodix-spo2-calculate-c/record.py": "73838942804dc9903a7665c3b026bb74e870f18366e4113a088ed9377a00ce05",
+    "build/goal-r1-goodix-spo2-calculate-c/coverage.json": "c15d419d6ee6b8738a3d4349e4148978a2144d992b24e6a7a5c36dfcba68fef3",
+    "build/goal-r1-goodix-spo2-calculate-c/candidate.o": "0d1e2ddeeefd0ad393d0933a15bf7185e395422378e50e2c584b449fa1cff367",
+    "build/goal-r1-goodix-spo2-calculate-c/negative-bad-calibration-bound.c": "cdbf53cbec1acfdc39bda20d3ee654b2290fd95d04252ed216963206b543808f",
+    "build/goal-r1-goodix-spo2-calculate-c/compile-argv.json": "f75cefe86ef650c3801cf65ca0a2c5297d6d8c004a7879a8f8c224568622c9c1",
+    "build/goal-r1-goodix-spo2-calculate-c/manifest-before.json": "6cf85047f54a2a56387251078fa7e379701902765b6824e6eb4e47bd7b3cba80",
+    "build/goal-r1-goodix-spo2-calculate-c/verify.py": "2a2a32f968de9a6559a3ffc764b726a40b8320e2b22ee40635b0d382ce01ec25",
+    "build/goal-r1-goodix-spo2-calculate-c/negative-assembly-leak.o": "924571b0eaf047a3b04eb6307d276f5d9dd587829d25e4b070243feee068d82b",
+    "build/goal-r1-goodix-spo2-calculate-c/negative-drop-invalid-FP.log": "5fa92ee8e35f7ccd36e0bd13c4095df1edbcce64c55260610344a59a815e7be3",
+    "build/goal-r1-goodix-spo2-calculate-c/negative-reload-descriptor.c": "f9ef3cbf53bc3ca80fda2b8c4878177d0a35ffdcc7436c38ed7f8a708c830a8a",
+    "build/goal-r1-goodix-spo2-calculate-c/nan-invalid-already-sticky-results.json": "183908b410091428101fc18290253a119a1062c1046268e0f226dfe266023ced",
+    "build/goal-r1-goodix-spo2-calculate-c/nan-invalid-already-sticky.c": "5031e5e52ace6b6f5288756c0444030db98da0d3758602a5efd3b474aad54e88",
+    "build/goal-r1-goodix-spo2-calculate-c/negative-null-status.log": "8074dc0a8f36caaf21351954bfc02bcf034deebc40b868cc3e6ba5156050157e",
+    "build/goal-r1-goodix-spo2-calculate-c/negative-bad-calibration-bound.log": "8f8582eac29282e14057cfdb378b486905f3fc2f39e001ca672576c764290d17",
+    "build/goal-r1-goodix-spo2-calculate-c/negative-skip-adjust.c": "4e59938ab0297582d9be6b7489c711aa05ffa08884e9c31bebfed64f9f783611",
+    "build/goal-r1-goodix-spo2-calculate-c/negative-counter.log": "dac40c7b95bb800d49add4e091b11081be70d6ffa4961d6dcc0471babfe59a89",
+    "build/goal-r1-goodix-spo2-calculate-c/negative-null-status.o": "22c3ba7dfddb43c25a04367daface9b837bd4e1ddeea16fdaae3f75c2b6a0940",
+    "build/goal-r1-goodix-spo2-calculate-c/negative-drop-invalid-FP.c": "27c3d7ee32ef0eb04b211cb14a461d8688c48decccda3a4c54aaf6568fb1c027",
+    "build/goal-r1-goodix-spo2-calculate-c/build.log": "3181cee50f927a80137ace48862b7df4fcf4117ead3a604b7173b21806ea2900"
+  }
+}

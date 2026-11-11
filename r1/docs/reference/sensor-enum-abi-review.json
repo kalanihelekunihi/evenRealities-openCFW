@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "manifest_sha256": "c3d2752dac093f738d946ffe1b637ea0230193fca8077adebe9fab44b46a383f",
+  "compiler": "Apple clang version 21.0.0 (clang-2100.3.34.2)",
+  "profile": "r1-application-6",
+  "comparison": "Configured profile versus same profile plus -fshort-enums; all other flags unchanged",
+  "normalization": "All SHF_ALLOC section names, types, flags, sizes and bytes; relocation target, offset, type, symbol name and explicit addend. ARM attributes excluded from executable/data comparison.",
+  "results": [
+    {
+      "source": "r1/src/vendor/rtc_device/rtc_device.c",
+      "source_sha256": "619f320509c01396f92bbdde72b8943ffba82d6c073e0716f44d5afc1b17f78b",
+      "header_sha256": "4b33d8177bea605ec8d4b3e760a3d85eb4326dac90df2aa01b2bcd67d559fc35",
+      "allocated_sections_equal": true,
+      "relocations_equal": true,
+      "allocated_section_count": 3,
+      "relocation_count": 13,
+      "complete_record_layouts_equal": true,
+      "dump_record_count_including_builtins": 10
+    },
+    {
+      "source": "r1/src/vendor/gxt310/gxt310.c",
+      "source_sha256": "c82f3070372b958a9ec881420d7a118342eed62f272309450b6cec4fe09af83d",
+      "header_sha256": "14f59f6570a25f41e452589a2936f456faccd1eefbcde4744431a0f453354bad",
+      "allocated_sections_equal": true,
+      "relocations_equal": true,
+      "allocated_section_count": 3,
+      "relocation_count": 16,
+      "complete_record_layouts_equal": true,
+      "dump_record_count_including_builtins": 4
+    },
+    {
+      "source": "r1/src/vendor/qma6100/qma6100.c",
+      "source_sha256": "9f691f8583f5c023d7f1ef78a954879d36ca4b27edddaf68915bceee43622d32",
+      "header_sha256": "ce5d49efc949e198f4a9f2036484dadd63329032223af9eb1de5bf65e3dced39",
+      "allocated_sections_equal": true,
+      "relocations_equal": true,
+      "allocated_section_count": 2,
+      "relocation_count": 66,
+      "complete_record_layouts_equal": true,
+      "dump_record_count_including_builtins": 5
+    },
+    {
+      "source": "r1/src/vendor/yhm2710/yhm2710.c",
+      "source_sha256": "d201181594aa5a08483df1d1dd75799fdb379f9b038bc01f54477683a48a8f0a",
+      "header_sha256": "6d50a84f8d9d16e9fbd82ee7c16c0375011e3a3b0dd06271f7dc5fc9301812d6",
+      "allocated_sections_equal": true,
+      "relocations_equal": true,
+      "allocated_section_count": 3,
+      "relocation_count": 103,
+      "complete_record_layouts_equal": true,
+      "dump_record_count_including_builtins": 9
+    },
+    {
+      "source": "r1/src/vendor/sensor_stream/sensor_stream.c",
+      "source_sha256": "6eeeb539f8a762c6254cd5d86bcb35eea34080935d67de7850e9d0c5e11d26cd",
+      "header_sha256": "a7b33edfd1505130daba527c6fcde1f33819ab07e91cf50ed7f2eb89929fdf7f",
+      "allocated_sections_equal": true,
+      "relocations_equal": true,
+      "allocated_section_count": 3,
+      "relocation_count": 75,
+      "complete_record_layouts_equal": true,
+      "dump_record_count_including_builtins": 13
+    }
+  ],
+  "decision": "No source or compiler flag changes: no allocated-byte, relocation or record-layout discrepancy observed in these five candidates.",
+  "limitations": [
+    "This is a candidate-to-candidate compiler audit, not native stock equivalence or hardware validation.",
+    "Complete record dumps include compiler builtin records; counts are not counts of public structures.",
+    "gxt310_failure_operation changes sizeof from 4 to 1. Existing code emits only constants 0 and 1 to callbacks; identical provider code does not prove compatibility with future consumers, arbitrary enum representations or enum storage.",
+    "Other wide-enum objects and third-party ABI boundaries remain unaudited.",
+    "No final firmware link or source qualification is established."
+  ],
+  "reproduction": [
+    "build/rea-iom-hardware/venv/bin/python build/goal-r1-sensor-abi/audit.py",
+    "build/rea-iom-hardware/venv/bin/python build/goal-r1-sensor-abi/layout.py"
+  ]
+}

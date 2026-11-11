@@ -6,7 +6,7 @@ extern uint32_t audio_uart_nema_pool_contains_514148(uint32_t,uint32_t);
 extern void audio_uart_nema_cl_buffer_destroy_5140c6(void *);
 extern void audio_uart_nema_buffer_flush_5140ea(void *);
 extern void audio_uart_nema_buffer_invalidate_51411a(void *);
-extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,
+extern void lv_log_add(uint32_t,const char *,uint32_t,
                                 const char *,const char *,...);
 
 static const char buffer_path[] =
@@ -24,7 +24,7 @@ static const char invalidate_function[] =
 
 static void buffer_outside_pool(uint32_t line,const char *function,
                                  const char *expression) {
-    audio_uart_lvgl_log(3u,buffer_path,line,function,
+    lv_log_add(3u,buffer_path,line,function,
                         asserted,expression,outside_pool);
     for (;;) *(volatile uint32_t *)(uintptr_t)UINT32_MAX = 0u;
 }

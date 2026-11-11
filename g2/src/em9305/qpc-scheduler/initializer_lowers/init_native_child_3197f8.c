@@ -1,50 +1,28 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_3197f8\n"
-".type opencfw_em9305_child_3197f8,@function\n"
-"opencfw_em9305_child_3197f8:\n"
-"L3197f8:\n"
-"st.aw blink,[sp,-20]\n"
-"L3197fc:\n"
-"mov_s r1,0x805c70\n"
-"L319802:\n"
-"ld r2,[r1,0]\n"
-"L319804:\n"
-"mov_s r1,r0\n"
-"L319806:\n"
-"add r1,r1,445\n"
-"L31980a:\n"
-"sub_s r2,r0,r2\n"
-"L31980c:\n"
-"div r2,r2,912\n"
-"L319810:\n"
-"ldh.as r0,[r0,227]\n"
-"L319814:\n"
-"sth 13,[sp,6]\n"
-"L319818:\n"
-"mov_s r3,sp\n"
-"L31981a:\n"
-"sth_s r0,[r3,0x12]\n"
-"L31981c:\n"
-"extb_s r0,r2\n"
-"L31981e:\n"
-"sth_s r0,[r3,0x8]\n"
-"L319820:\n"
-"sth_s r0,[r3,0x4]\n"
-"L319822:\n"
-"add r0,sp,0xa\n"
-"L319826:\n"
-"bl.d opencfw_em9305_memcpy\n"
-"L31982a:\n"
-"mov_s r2,0x8\n"
-"L31982c:\n"
-"bl.d opencfw_em9305_ll_event_callback_30e79c\n"
-"L319830:\n"
-"add_s r0,sp,0x4\n"
-"L319832:\n"
-"ld.ab blink,[sp,20]\n"
-"L319836:\n"
-"j_s [blink]\n"
-".size opencfw_em9305_child_3197f8,.-opencfw_em9305_child_3197f8\n"
-);
+#include <stdint.h>
+
+/* Native 0x3197f8..0x319838: report LL event 13 for a connection record.
+ * The handle is the record index ((record - base at 0x805c70) / 912); the
+ * event carries the 8-byte value at +445 and the halfword at +454. */
+extern void *opencfw_em9305_memcpy(void *destination, const void *source, uint32_t length);
+extern uint32_t opencfw_em9305_ll_event_callback_30e79c(uintptr_t event);
+
+struct opencfw_em9305_event_13 {
+    uint16_t handle;
+    uint16_t code;
+    uint16_t handle_again;
+    uint8_t value[8];
+    uint16_t extra;
+};
+
+uint32_t opencfw_em9305_child_3197f8(uintptr_t record)
+{
+    struct opencfw_em9305_event_13 event;
+    uintptr_t base=*(volatile uint32_t *)(uintptr_t)0x805c70u;
+    uint32_t handle=(uint8_t)((int32_t)(record-base)/912);
+    event.code=13u;
+    event.extra=*(volatile uint16_t *)(record+454u);
+    event.handle_again=(uint16_t)handle;
+    event.handle=(uint16_t)handle;
+    (void)opencfw_em9305_memcpy(event.value,(const void *)(record+445u),8u);
+    return opencfw_em9305_ll_event_callback_30e79c((uintptr_t)&event);
+}

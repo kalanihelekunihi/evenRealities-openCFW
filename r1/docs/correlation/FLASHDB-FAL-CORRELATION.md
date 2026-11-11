@@ -87,6 +87,12 @@ all six provider objects.
 
 ## Integrity and licensing
 
+The source ABI also needs to match the recovered RAM structures. Both
+FlashDB compiler profiles now explicitly use short enums; the Clang default
+otherwise shifts `last_time` and rollover away from the native +80/+92
+offsets. See [the ABI review](../reference/flashdb-abi-review.md). This fixes
+RAM layout without changing the pinned provider sources or stored geometry.
+
 The pin is reproducible from the commit archive whose SHA-256 is
 `7758fb46976acebc754fb452bbac2144badc713a3e158bab8a8961bc112eca1b`. The manifest also pins
 individual hashes for `fdb.c`, `fdb_tsdb.c`, `fdb_utils.c`, `fal.c`, `fal_flash.c`, and

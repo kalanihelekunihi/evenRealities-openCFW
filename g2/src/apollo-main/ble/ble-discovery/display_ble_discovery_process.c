@@ -132,3 +132,8 @@ void audio_ble_discovery_process_532924(const uint8_t *message){
         audio_ble_dm_conn_set_idle(connection,8u,0u);row[11]=0u;dispatch(connection,5u);
     }
 }
+
+/* _bleCommHandler 0x4b7d32 names the same native 0x532924 entry (formerly a
+ * forwarding wrapper in audio/master-dispatch/dm_runtime_bindings.c). */
+__typeof__(audio_ble_discovery_process_532924) audio_ble_comm_dm_dispatch_a
+    __attribute__((alias("audio_ble_discovery_process_532924")));

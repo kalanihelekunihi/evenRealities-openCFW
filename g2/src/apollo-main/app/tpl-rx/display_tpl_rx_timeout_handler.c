@@ -1,5 +1,4 @@
-/* Native TPL_RxPacketTimeoutHandler 0x4b8da2. The fourth ARM entry register
- * is the inherited fourth argument to the initial extended diagnostic. */
+/* Native TPL_RxPacketTimeoutHandler 0x4b8da2. */
 #include <stdint.h>
 extern uint8_t audio_tpl_contexts[4u * 56u]; /* TPL_Init owns exact 0xe0 clear */
 extern void tpl_context_free_004b8ba2(uint8_t *);
@@ -34,13 +33,14 @@ static void diagnostic(uint32_t line, const char *plain, const char *short_text,
     if (compact()) (void)compressed_log_output(mask, short_text, short_text);
 }
 
-void audio_tpl_rx_timeout_handler_body(const uint8_t *ids, uint32_t ignored1,
-                                        uint32_t ignored2, uint32_t inherited_r3)
+/* Stock 0x4B8DA2 (TPL_RxPacketTimeoutHandler). The stock first extended log
+ * also passed the caller's R3 as a fourth variadic word; its format consumes
+ * only three, so that word is not passed. */
+void TPL_RxPacketTimeoutHandler(const uint8_t *ids)
 {
-    (void)ignored1; (void)ignored2;
     if (extended())
         audio_log_extended(2u, module, source, function, 0x11fu, begin,
-                           ids[0], ids[1], ids[2], inherited_r3);
+                           ids[0], ids[1], ids[2]);
     if (compact())
         (void)compressed_log_output(0x08c00000u, begin_short, begin_short,
                                     ids[0], ids[1], ids[2]);
@@ -66,9 +66,4 @@ void audio_tpl_rx_timeout_handler_body(const uint8_t *ids, uint32_t ignored1,
         tpl_context_free_004b8ba2(context);
     }
     audio_tpl_response(ids[2], ids[1], ids[0], 3u);
-}
-
-__attribute__((naked)) void TPL_RxPacketTimeoutHandler(const uint8_t *ids __attribute__((unused)))
-{
-    __asm__ volatile("b audio_tpl_rx_timeout_handler_body");
 }

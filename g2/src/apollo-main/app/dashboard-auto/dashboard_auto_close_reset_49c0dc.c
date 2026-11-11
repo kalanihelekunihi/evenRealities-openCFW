@@ -6,9 +6,14 @@ extern uint32_t audio_log_flags(void);
 extern void audio_log_extended(uint8_t,const char *,const char *,const char *,uint32_t,const char *,...);
 extern uint32_t compressed_log_output(uint32_t,const char *,const char *,...);
 /* Bounded neighboring cells; final linker placement and complete allocation extent remain open. */
-__attribute__((section(".noinit.dashboard_auto_close_200743d0"),aligned(4)))
+/* Fix 43 (RAM-init, 2026-11-01): native 0x200743d0/d4 are inside the stock DTCM
+ * startup zero range [0x20004558,0x20075048), so stock cstartup clears them at
+ * boot. .noinit left them uninitialised: zero in the Renode simulator, random
+ * on hardware. Plain zero-init (.bss) so the region table clears them, as stock
+ * does; the gap zero row in g2c_gnu_init.c also covers these DTCM literals. */
+__attribute__((aligned(4)))
 volatile uint32_t audio_dashboard_auto_close_current_200743d0;
-__attribute__((section(".noinit.dashboard_auto_close_200743d4"),aligned(4)))
+__attribute__((aligned(4)))
 volatile uint32_t audio_dashboard_auto_close_default_200743d4;
 static const char module[]="dashboard";
 static const char path[]="D:\\01_workspace\\s200_ap510b_iar_git\\app\\gui\\dashboard\\dashboard.c";

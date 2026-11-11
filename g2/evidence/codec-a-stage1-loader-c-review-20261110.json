@@ -1,0 +1,60 @@
+{
+  "schema": 1,
+  "target": "GX8002 BINH A stage-1 NOR loader at 0x10000a2c",
+  "stock_stage1_load_sha256": "65775a0feea148f5e1582693160c06204d5183fee717ba75706ce1cb4d40f605",
+  "stock_disassembly_contract": {
+    "boot_package_word": "0x20001284",
+    "alternate_marker_word": "0x20033ffc",
+    "alternate_marker": "0xaabbccdd",
+    "flash_reader": "0x10000c40",
+    "entry_word": "0x2002e938",
+    "normal": {
+      "xip_length_read": "package+0x3000",
+      "source": "package+0x3004+xip_length",
+      "destination": "0x10023400",
+      "bytes": 14716,
+      "entry": "0x10023500"
+    },
+    "alternate": {
+      "xip_length_read": "package+0x323b0",
+      "source": "0x323b4+xip_length",
+      "destination": "0x20003000",
+      "bytes": 82060,
+      "entry": "0x10003100"
+    }
+  },
+  "source": {
+    "file": "g2/src/codec/image-a-stage1/main_stage1_loader.c",
+    "manifest": "g2/src/sources.json",
+    "linked_into_final_codec_a": false,
+    "reason": "The flash reader and the rest of BINH A stage 1 are not reconstructed or linked yet."
+  },
+  "checks": {
+    "host_branch_plan": "build/g2-binh-a-stage1-20261110/loader_contract.c",
+    "host_branch_plan_passed": true,
+    "csky_direct_compile_passed": true,
+    "object_sha256": "93bdc5d708a0f1682dc14c36d8c60ad361c43b5495474c0fd027b7ae19074214",
+    "unresolved_symbol": "gx8002_image_a_stage1_flash_read_10000c40",
+    "focused_compiled_units": 352,
+    "focused_failed_units": 0,
+    "focused_duplicate_strong_symbols": 0,
+    "focused_source_report": "build/g2-codec-a-stage1-loader-20261110/report.json",
+    "focused_source_report_sha256": "f366701a3093348b930ca5b1123a5e9c1f3650e38ad9a964d368d06c872d4d23",
+    "focused_link_report": "build/g2-codec-a-stage1-loader-link-20261110/link-report.json",
+    "focused_link_report_sha256": "2f4490a35dfccce2d3ea29deccc9224c4f250774ee9d55bb7d336e1b0318a154",
+    "existing_codec_a_binary_unchanged": true
+  },
+  "full_g2_gate": {
+    "source_report": "build/g2-all-binh-a-loader-20261110/report.json",
+    "source_report_sha256": "fd1c2271c75d60ab93dee931cfad5aeb1ba59c196e874c4871d5c8c2dbb84e0d",
+    "built_units": 4869,
+    "failed_units": 0,
+    "duplicate_strong_symbols": 0,
+    "manifest_changed_during_build": false,
+    "link_report": "build/g2-all-binh-a-loader-link-20261110/link-report.json",
+    "link_report_sha256": "d6a06a547fef83e4d4daace7bc034656c1080b201b1006756f08694583c2a9e5",
+    "linked_payloads": 7,
+    "external_binary_archive_used": false
+  },
+  "qualification": "The C loader reproduces the observed transfer plan, not stock instruction bytes or complete BINH A boot behavior; it is not yet in the final source link."
+}

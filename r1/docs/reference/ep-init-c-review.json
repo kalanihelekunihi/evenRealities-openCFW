@@ -1,0 +1,144 @@
+{
+  "schema_version": 1,
+  "entries": {
+    "0x5e228": [
+      "r1_ep_storage_initialize",
+      236
+    ],
+    "0x5e0ec": [
+      "r1_ep_plan_initialization",
+      40
+    ],
+    "0x3ee34": [
+      "r1_ep_scan_cursor",
+      264
+    ]
+  },
+  "report": "build/sources-goal-r1-ep-init-c/report.json",
+  "report_sha256": "c37fe65444749c61b47cd4cdf6c6d18fba925782dab8ab7f98717a6bdb9b828e",
+  "unit": {
+    "source": "r1/src/application/runtime/native_ep_initialize.c",
+    "source_sha256": "480b247be693b62ab36b4f07cdc9ec4a099fd33c0d00d4e517588f383c0269ea",
+    "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-ep-init-c/r1/r1-application/r1__src__application__runtime__native_ep_initialize.c.o",
+    "object_sha256": "d09aa41e9331ff9a352cc7b45c140f1cdf97345ec2e0e486d8c7129b35c6985a"
+  },
+  "behavior": {
+    "pairs": 1024,
+    "digest": "ed57bbc1652ebe68abd7e0d77d91411928c3ce588d3afbb8229d51828f6e7023",
+    "actual_C": "EP FAL initialization, scan and ensure with actual storage/flush/guard paths",
+    "modeled_boundaries": [
+      "xTaskGetTickCount",
+      "xQueueSemaphoreTake",
+      "xQueueGenericSend",
+      "r1_structured_log_mode_get",
+      "r1_structured_log_format",
+      "nrf_log_frontend_std_0",
+      "r1_event_service_000914a0",
+      "vPortEnterCritical",
+      "vPortExitCritical",
+      "nrf_log_frontend_std_2",
+      "nrf_log_frontend_std_1",
+      "fal_partition_find",
+      "fal_flash_device_find",
+      "xQueueCreateMutex",
+      "pvPortMalloc",
+      "vPortFree",
+      "indirect flash callbacks"
+    ],
+    "limits": [
+      "FAL lookup, heap/mutex allocation, queue/critical sections, clock, persistence and logging modeled",
+      "Flash reads fill a modeled 8 KiB sector image or retain existing scan buffer bytes",
+      "Reconstructed path prohibited from entering stock instructions",
+      "Private scratch, caller-clobbered registers and void returns excluded; storage-initializer return compared",
+      "No physical flash, heap behavior, real semaphore contention or async scheduling proof"
+    ]
+  },
+  "negative_controls": {
+    "wrong-ready-fast-path": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "4006587050034120500658706003412060065870700341207006587080034120800658709003412090065870a0034120a0065870b0034120b0065870c0034120c0065870d0034120d0065870e0034120e0065870f0034120f00658769696969696969696969696969696969', '555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555', '7d2c7ac4888bfd75cd5f56e8d61f69595121183afc81556c876732fd3782c62f'], 'returns': [0]})\n"
+    },
+    "wrong-partition-name": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "ealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 1063, in __hook_code_cb\n    callback(uc, address, size, user_data)\n    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-ep-init-c/verify.py\", line 41, in hook\n    elif n=='partition':assert text(r0)=='ep.bin';out=[text(r0)];result=PART if state['find_partition'] else 0\n                               ^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    "wrong-capacity-boundary": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "4006587050034120500658706003412060065870700341207006587080034120800658709003412090065870a0034120a0065870b0034120b0065870c0034120c0065870d0034120d0065870e0034120e0065870f0034120f00658769696969696969696969696969696969', '555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555', '7d2c7ac4888bfd75cd5f56e8d61f69595121183afc81556c876732fd3782c62f'], 'returns': [0]})\n"
+    },
+    "missing-small-partition-clear": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "4006587050034120500658706003412060065870700341207006587080034120800658709003412090065870a0034120a0065870b0034120b0065870c0034120c0065870d0034120d0065870e0034120e0065870f0034120f00658769696969696969696969696969696969', '555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555', '7d2c7ac4888bfd75cd5f56e8d61f69595121183afc81556c876732fd3782c62f'], 'returns': [0]})\n"
+    },
+    "wrong-tie-precedence": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "04006587050034120500658706003412060065870700341207006587080034120800658709003412090065870a0034120a0065870b0034120b0065870c0034120c0065870d0034120d0065870e0034120e0065870f0034120f00658769696969696969696969696969696969', '555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555', '6747b8d638cdaf18766cbc166d74dfdd4eccaebfdfbcec8c19f4c76bd308c812'], 'returns': []})\n"
+    },
+    "zero-timestamp-promoted": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "04006587050034120500658706003412060065870700341207006587080034120800658709003412090065870a0034120a0065870b0034120b0065870c0034120c0065870d0034120d0065870e0034120e0065870f0034120f00658769696969696969696969696969696969', '555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555', '65ab89fffb1ed3ed9831f27fc317822d8849ce11a9cfa662fe7873e165a568cd'], 'returns': []})\n"
+    },
+    "last-empty-instead-first": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "04006587050034120500658706003412060065870700341207006587080034120800658709003412090065870a0034120a0065870b0034120b0065870c0034120c0065870d0034120d0065870e0034120e0065870f0034120f00658769696969696969696969696969696969', '555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555', '7d2c7ac4888bfd75cd5f56e8d61f69595121183afc81556c876732fd3782c62f'], 'returns': []})\n"
+    },
+    "early-active-store": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "04006587050034120500658706003412060065870700341207006587080034120800658709003412090065870a0034120a0065870b0034120b0065870c0034120c0065870d0034120d0065870e0034120e0065870f0034120f00658769696969696969696969696969696969', '555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555', 'f6d2c578def4d657ebb2deccc0a50f9c69d1dfafe531de754956cf462dffb7dd'], 'returns': []})\n"
+    }
+  },
+  "audit": {
+    "unchanged_prior_objects": 768,
+    "new_units": 1,
+    "imports": {
+      "r1-application": {
+        "added": [],
+        "removed": [
+          "r1_ep_plan_initialization"
+        ]
+      },
+      "r1-bootloader": {
+        "added": [],
+        "removed": []
+      }
+    },
+    "reused_owners": [
+      "existing EP export/storage/ring owners; no new state"
+    ]
+  },
+  "source_check": "R1 passes: 769 units, 573 source files, 0 not built. Global check flags existing G2 resident_rom_thumb_set.S absent from manifest.",
+  "initialization": [
+    "ep-storage-initialization.json",
+    "export-guard-initialization.json",
+    "ep-flush-initialization.json"
+  ],
+  "headers": [
+    {
+      "path": "r1/src/application/runtime/native_ep_storage.h",
+      "sha256": "96bf6d6902fbea6b5b64f3b54e17c8a4b8d816c1371a4c99f80473c9b040300f"
+    },
+    {
+      "path": "r1/src/application/runtime/native_log_bin.h",
+      "sha256": "2d4b9b25d69a9520d51c4fbad747aa7e19203ce9d06f9ae675f0c1767e9fe54e"
+    },
+    {
+      "path": "r1/src/application/runtime/native_status_ring.h",
+      "sha256": "393d347bafd57dda1138f63ce3f83bfe377203250ae034806ebab1fcb0d7bd2f"
+    }
+  ],
+  "rea": [
+    "ep-init-c-rea.json",
+    "ep-ensure-c-rea.json",
+    "ep-scan-c-rea.json"
+  ],
+  "instruction_identity_proven": false,
+  "image_integration_proven": false
+}

@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "scope": "R1 power control ordinary C command",
+  "report": "build/sources-goal-r1-power-command-pure-c/report.json",
+  "comparison_report": "build/sources-goal-r1-battery-low-pure-c/report.json",
+  "audit": {
+    "compiled_units": 855,
+    "application_imports": 62,
+    "bootloader_imports": 22,
+    "unchanged_prior_nongenerated_objects": 844,
+    "changed_nongenerated_objects": [
+      "r1/src/application/runtime/native_power_command.c"
+    ],
+    "import_sets_unchanged": true,
+    "no_new_persistent_state": true
+  },
+  "verification": {
+    "stock_C_comparisons": 4560,
+    "actual_C_payload_getter": true,
+    "actual_C_KV_field_setter": false,
+    "full_result_and_KV_record_compared": true,
+    "live_delay_command_and_post_callback_handle_reads": true,
+    "private_unused_upper_record_bits_excluded": true,
+    "complete_readable_packet_fixtures_only": true
+  },
+  "integrated": {
+    "stock_C_comparisons": 4560,
+    "actual_C_payload_getter": true,
+    "actual_C_KV_field_setter": true,
+    "full_result_and_KV_record_compared": true,
+    "live_delay_command_and_post_callback_handle_reads": true,
+    "private_unused_upper_record_bits_excluded": true,
+    "complete_readable_packet_fixtures_only": true
+  },
+  "compiled_defects_rejected": [
+    {
+      "name": "invalid_command",
+      "rejected": true
+    },
+    {
+      "name": "delay_reload",
+      "rejected": true
+    },
+    {
+      "name": "voltage_width",
+      "rejected": true
+    },
+    {
+      "name": "shutdown_flags",
+      "rejected": true
+    },
+    {
+      "name": "recovery_flags",
+      "rejected": true
+    }
+  ],
+  "intentional_C_policy": "Initialize the private timestamp/voltage record to zero. Only timestamp, kind three and low 14 voltage bits reach the KV field setter; unused upper scratch bits no longer reflect incoming caller registers.",
+  "limits": [
+    "Actual battery sampling, persistence, RTOS wakes and events on hardware remain unverified.",
+    "Private-frame aliases, scratch-register residues and incidental void return values excluded.",
+    "Sampling, logs, time, KV backend, events and thread flags modeled; actual C field packing separately exercised.",
+    "Byte identity is not claimed."
+  ],
+  "evidence_files": {
+    "build/sources-goal-r1-power-command-pure-c/report.json": "d3a5ce1eb0bb9fa1d1fab36fe5ac4ccbc2d05b1b667c70238dbf57e780211b5e",
+    "build/sources-goal-r1-battery-low-pure-c/report.json": "5baf96f7b8161ccd9387020c55be2d21c4b893c4feeceaab11b17e6835399aed",
+    "r1/src/application/runtime/native_power_command.c": "951b9eeb3e3afb736d393ee62b9a20937db60a6338af34b42035d5b10ffada67",
+    "r1/src/application/runtime/native_battery_context_config.c": "2f286ba3158db295a53c5bf5d776bfafc5afaafe6705163298cb091bdbc584b5",
+    "r1/src/application/board/native_kv_device_fields.c": "91e7386cb6703a972330a45e95a2b1e188d88f01c88b3d0c9d9986e2895533ee",
+    "r1/src/application/board/native_kv_class.c": "e9791d39b7a9b5380b1dbce3c7422be921131abbd0e09c3387ea3d4b9930bf6e",
+    "r1/src/application/runtime/native_protocol_ack.c": "d03b6416838d3dd10e07c5cd005d732408b432d3447000f2cb94492af2c6247c",
+    "r1/src/sources.json": "618e3f6056f74edee68027c82dddb1d2e8c53810e0c04e416f42841fc974e4ec",
+    "tools/build/source-plan.json": "eeb516e31b3310fb0718f36908977f8125723f7c5e0e86cd6744395826259a4d",
+    "build/goal-r1-power-command-pure-c/rea.json": "e9c845b54a63134a4bd51b21452c237536b67747e46dd12758d31954b73b7dc5",
+    "build/goal-r1-power-command-pure-c/integrated/results.json": "bdb8cd892ce47eba4d54b4358b792c8169d0fd54f06ec8dc99ba1d315855cec5",
+    "build/goal-r1-power-command-pure-c/integrated/verification.log": "501faded2831226d44d62b442670b52a63d55e369531097be8787eafcafd0a16",
+    "build/goal-r1-power-command-pure-c/verify.py": "3bab1cbcd847a5d27bc60572b84555c22b0ad6f87dd6f75f950d31082c2a353c",
+    "build/goal-r1-power-command-pure-c/results.json": "4bac68307a04f79da1bc2494c26fa0704472b14e3f72819f6ac1ddc547d0f578",
+    "build/goal-r1-power-command-pure-c/verification.log": "1ab0e61fd6f85b653d755fd62cf6a40ca4195d83aa9bb4823e3bb29aefeeb47a",
+    "build/goal-r1-power-command-pure-c/negative.py": "a079ed3465ec5ae078e7c841653f4a6e6f935b0b0ecfc9bbaa3253e5a5c5e658",
+    "build/goal-r1-power-command-pure-c/negative.json": "f43043d8082fa9231ef0196b28ecbcef318c0c4170b8df0eb7ad6fc14e37cfcb",
+    "build/goal-r1-power-command-pure-c/negative.log": "a60c8108e9f9e626a478dbbc767f8a9410bd16ad3086b8df8c63f9ae30a64ace",
+    "build/goal-r1-power-command-pure-c/build.log": "2f8237df28efac9b4493d9df2cf5483b541bb51bafe7de843ca978397d68102f",
+    "build/goal-r1-power-command-pure-c/sources-check.log": "f610d186f791ebf717d9fd6eed6c4f28612779fff34b885bcf8dc8a49c9ae80c"
+  }
+}

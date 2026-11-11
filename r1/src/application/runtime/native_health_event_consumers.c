@@ -1,9 +1,118 @@
+/* Health sample event gates and five/six-byte storage records. */
 #include <stdint.h>
-/* Native health-event serialization and timestamp contracts.
- * Preserve saved-r2/r3 packing and do not add length/NULL policies. */
-__attribute__((naked)) void r1_event_service_0008a7f4(uint32_t payload __attribute__((unused)),uint32_t length __attribute__((unused))) { __asm__ volatile("HEC_8a7f4:\npush {r4, lr}\nHEC_8a7f6:\ncmp r0, #0\nHEC_8a7f8:\nbeq HEC_8a808\nHEC_8a7fa:\nbl r1_activity_event_storage\nHEC_8a7fe:\nldmia.w sp!, {r4, lr}\nHEC_8a802:\nmovs r0, #4\nHEC_8a804:\nb.w r1_health_event_notification_throttle\nHEC_8a808:\npop {r4, pc}\n"); }
-__attribute__((naked)) void r1_event_service_0008a80a(uint32_t payload __attribute__((unused)),uint32_t length __attribute__((unused))) { __asm__ volatile("HEC_8a80a:\npush {r2, r3, r4, lr}\nHEC_8a80c:\nmovs r4, r0\nHEC_8a80e:\nbeq HEC_8a83c\nHEC_8a810:\nldrb r0, [r4, #0]\nHEC_8a812:\ncmp r0, #40\nHEC_8a814:\nbcc HEC_8a83c\nHEC_8a816:\ncmp r0, #220\nHEC_8a818:\nbhi HEC_8a83c\nHEC_8a81a:\nldr r0, [r4, #4]\nHEC_8a81c:\ncbnz r0, HEC_8a824\nHEC_8a81e:\nbl r1_time_backend_timestamp\nHEC_8a822:\nstr r0, [r4, #4]\nHEC_8a824:\nldrb r0, [r4, #0]\nHEC_8a826:\nstrb.w r0, [sp]\nHEC_8a82a:\nldr r0, [r4, #4]\nHEC_8a82c:\nstr.w r0, [sp, #1]\nHEC_8a830:\nmov r0, sp\nHEC_8a832:\nbl r1_hr_event_storage\nHEC_8a836:\nmovs r0, #0\nHEC_8a838:\nbl r1_health_event_notification_throttle\nHEC_8a83c:\npop {r2, r3, r4, pc}\n"); }
-__attribute__((naked)) void r1_event_service_0008a83e(uint32_t payload __attribute__((unused)),uint32_t length __attribute__((unused))) { __asm__ volatile("HEC_8a83e:\npush {r2, r3, r4, lr}\nHEC_8a840:\nmov r4, r0\nHEC_8a842:\nldr r0, [r0, #4]\nHEC_8a844:\ncbnz r0, HEC_8a84c\nHEC_8a846:\nbl r1_time_backend_timestamp\nHEC_8a84a:\nstr r0, [r4, #4]\nHEC_8a84c:\nldrh r0, [r4, #0]\nHEC_8a84e:\nstrh.w r0, [sp]\nHEC_8a852:\nldr r0, [r4, #4]\nHEC_8a854:\nstr.w r0, [sp, #2]\nHEC_8a858:\nmov r0, sp\nHEC_8a85a:\nbl r1_hrv_event_storage\nHEC_8a85e:\nmovs r0, #5\nHEC_8a860:\nbl r1_health_event_notification_throttle\nHEC_8a864:\npop {r2, r3, r4, pc}\n"); }
-__attribute__((naked)) void r1_event_service_0008a8ae(uint32_t payload __attribute__((unused)),uint32_t length __attribute__((unused))) { __asm__ volatile("HEC_8a8ae:\npush {r2, r3, r4, lr}\nHEC_8a8b0:\nmovs r4, r0\nHEC_8a8b2:\nbeq HEC_8a8d6\nHEC_8a8b4:\nldrb r0, [r4, #0]\nHEC_8a8b6:\ncmp r0, #70\nHEC_8a8b8:\nbcc HEC_8a8d6\nHEC_8a8ba:\nbl r1_time_backend_timestamp\nHEC_8a8be:\nstr r0, [r4, #4]\nHEC_8a8c0:\nldrb r1, [r4, #0]\nHEC_8a8c2:\nstrb.w r1, [sp]\nHEC_8a8c6:\nstr.w r0, [sp, #1]\nHEC_8a8ca:\nmov r0, sp\nHEC_8a8cc:\nbl r1_spo2_event_storage\nHEC_8a8d0:\nmovs r0, #1\nHEC_8a8d2:\nbl r1_health_event_notification_throttle\nHEC_8a8d6:\npop {r2, r3, r4, pc}\n"); }
-__attribute__((naked)) void r1_event_service_0008a8d8(uint32_t payload __attribute__((unused)),uint32_t length __attribute__((unused))) { __asm__ volatile("HEC_8a8d8:\npush {r2, r3, r4, lr}\nHEC_8a8da:\nmovs r4, r0\nHEC_8a8dc:\nbeq HEC_8a8fa\nHEC_8a8de:\nldrb r0, [r4, #0]\nHEC_8a8e0:\ncmp r0, #100\nHEC_8a8e2:\nbhi HEC_8a8fa\nHEC_8a8e4:\nbl r1_time_backend_timestamp\nHEC_8a8e8:\nstr r0, [r4, #4]\nHEC_8a8ea:\nldrb r1, [r4, #0]\nHEC_8a8ec:\nstrb.w r1, [sp]\nHEC_8a8f0:\nstr.w r0, [sp, #1]\nHEC_8a8f4:\nmov r0, sp\nHEC_8a8f6:\nbl r1_stress_event_storage\nHEC_8a8fa:\npop {r2, r3, r4, pc}\n"); }
-__attribute__((naked)) void r1_event_service_0008a8fc(uint32_t payload __attribute__((unused)),uint32_t length __attribute__((unused))) { __asm__ volatile("HEC_8a8fc:\npush {r2, r3, r4, lr}\nHEC_8a8fe:\nmovs r4, r0\nHEC_8a900:\nbeq HEC_8a926\nHEC_8a902:\nldrh r0, [r4, #0]\nHEC_8a904:\ncmp r0, #250\nHEC_8a906:\nbcc HEC_8a926\nHEC_8a908:\ncmp.w r0, #500\nHEC_8a90c:\nbhi HEC_8a926\nHEC_8a90e:\nbl r1_time_backend_timestamp\nHEC_8a912:\nstr r0, [r4, #4]\nHEC_8a914:\nldrb r1, [r4, #0]\nHEC_8a916:\nadds r1, r1, #6\nHEC_8a918:\nstrb.w r1, [sp]\nHEC_8a91c:\nstr.w r0, [sp, #1]\nHEC_8a920:\nmov r0, sp\nHEC_8a922:\nbl r1_temperature_event_storage\nHEC_8a926:\npop {r2, r3, r4, pc}\n"); }
+
+extern void r1_activity_event_storage(const volatile uint8_t *sample);
+extern void r1_hr_event_storage(const volatile uint8_t *sample);
+extern void r1_hrv_event_storage(const volatile uint8_t *sample);
+extern void r1_spo2_event_storage(const volatile uint8_t *sample);
+extern void r1_stress_event_storage(const volatile uint8_t *sample);
+extern void r1_temperature_event_storage(const volatile uint8_t *sample);
+extern uint32_t r1_time_backend_timestamp(void);
+extern void r1_health_event_notification_throttle(uint32_t kind);
+
+static uint32_t load_timestamp(const volatile uint8_t *sample)
+{
+    return *(const volatile uint32_t *)(const void *)(sample + 4);
+}
+
+static void store_timestamp(volatile uint8_t *sample, uint32_t timestamp)
+{
+    *(volatile uint32_t *)(void *)(sample + 4) = timestamp;
+}
+
+static void record_timestamp(uint8_t *record, uint32_t timestamp, uint32_t offset)
+{
+    record[offset] = (uint8_t)timestamp;
+    record[offset + 1u] = (uint8_t)(timestamp >> 8);
+    record[offset + 2u] = (uint8_t)(timestamp >> 16);
+    record[offset + 3u] = (uint8_t)(timestamp >> 24);
+}
+
+void r1_event_service_0008a7f4(uint32_t payload, uint32_t length)
+{
+    (void)length;
+    if (payload == 0u) return;
+    r1_activity_event_storage((const volatile uint8_t *)(uintptr_t)payload);
+    r1_health_event_notification_throttle(4u);
+}
+
+void r1_event_service_0008a80a(uint32_t payload, uint32_t length)
+{
+    (void)length;
+    if (payload == 0u) return;
+    volatile uint8_t *sample = (volatile uint8_t *)(uintptr_t)payload;
+    uint32_t value = sample[0];
+    if (value < 40u || value > 220u) return;
+    uint32_t timestamp = load_timestamp(sample);
+    if (timestamp == 0u) {
+        timestamp = r1_time_backend_timestamp();
+        store_timestamp(sample, timestamp);
+    }
+    uint8_t record[5];
+    record[0] = sample[0];
+    record_timestamp(record, load_timestamp(sample), 1u);
+    r1_hr_event_storage(record);
+    r1_health_event_notification_throttle(0u);
+}
+
+void r1_event_service_0008a83e(uint32_t payload, uint32_t length)
+{
+    (void)length;
+    volatile uint8_t *sample = (volatile uint8_t *)(uintptr_t)payload;
+    uint32_t timestamp = load_timestamp(sample);
+    if (timestamp == 0u) {
+        timestamp = r1_time_backend_timestamp();
+        store_timestamp(sample, timestamp);
+    }
+    uint16_t value = *(const volatile uint16_t *)(const void *)sample;
+    uint8_t record[6];
+    record[0] = (uint8_t)value;
+    record[1] = (uint8_t)(value >> 8);
+    record_timestamp(record, load_timestamp(sample), 2u);
+    r1_hrv_event_storage(record);
+    r1_health_event_notification_throttle(5u);
+}
+
+void r1_event_service_0008a8ae(uint32_t payload, uint32_t length)
+{
+    (void)length;
+    if (payload == 0u) return;
+    volatile uint8_t *sample = (volatile uint8_t *)(uintptr_t)payload;
+    if (sample[0] < 70u) return;
+    uint32_t timestamp = r1_time_backend_timestamp();
+    store_timestamp(sample, timestamp);
+    uint8_t record[5];
+    record[0] = sample[0];
+    record_timestamp(record, timestamp, 1u);
+    r1_spo2_event_storage(record);
+    r1_health_event_notification_throttle(1u);
+}
+
+void r1_event_service_0008a8d8(uint32_t payload, uint32_t length)
+{
+    (void)length;
+    if (payload == 0u) return;
+    volatile uint8_t *sample = (volatile uint8_t *)(uintptr_t)payload;
+    if (sample[0] > 100u) return;
+    uint32_t timestamp = r1_time_backend_timestamp();
+    store_timestamp(sample, timestamp);
+    uint8_t record[5];
+    record[0] = sample[0];
+    record_timestamp(record, timestamp, 1u);
+    r1_stress_event_storage(record);
+}
+
+void r1_event_service_0008a8fc(uint32_t payload, uint32_t length)
+{
+    (void)length;
+    if (payload == 0u) return;
+    volatile uint8_t *sample = (volatile uint8_t *)(uintptr_t)payload;
+    uint32_t value = *(const volatile uint16_t *)(const void *)sample;
+    if (value < 250u || value > 500u) return;
+    uint32_t timestamp = r1_time_backend_timestamp();
+    store_timestamp(sample, timestamp);
+    uint8_t record[5];
+    record[0] = (uint8_t)(sample[0] + 6u);
+    record_timestamp(record, timestamp, 1u);
+    r1_temperature_event_storage(record);
+}

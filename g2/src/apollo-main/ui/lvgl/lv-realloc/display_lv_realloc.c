@@ -1,7 +1,7 @@
 /* Native LVGL realloc 0x44f76a and pool layer 0x48432a/0x484234.
  * Product mutex/pool cells remain authenticated live RAM contracts. */
 #include <stdint.h>
-extern uint8_t audio_uart_lv_heap_pool[];
+extern uint8_t audio_uart_lv_heap_pool[] __asm__("g2_stock_ram_20000338"); /* sim15: stock 0x20000338 */
 extern uint8_t audio_uart_lv_static_slot[];
 extern int32_t xQueueSemaphoreTake(void *,uint32_t);
 extern int32_t audio_uart_queue_send(void *,const void *,uint32_t,uint32_t);
@@ -9,7 +9,7 @@ extern void *g2_tlsf_reallocate_4d0868(void *,void *,uint32_t);
 extern uint32_t audio_uart_lv_allocation_size_4d05e4(void *);
 extern void audio_uart_lv_heap_free(void *); /* selected 0x44f758 */
 extern void *audio_uart_lv_malloc(uint32_t); /* selected 0x44f718 */
-extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,const char *,...);
+extern void lv_log_add(uint32_t,const char *,uint32_t,const char *,const char *,...);
 static const char path[]="D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\lvgl_v9.3\\LVGL\\src\\stdlib\\lv_mem.c";
 void *audio_uart_lv_pool_realloc_484234(void *pool_cell,void *ptr,uint32_t size) {
     volatile uint32_t *pool=(volatile uint32_t *)pool_cell;

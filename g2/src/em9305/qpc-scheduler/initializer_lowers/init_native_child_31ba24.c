@@ -1,54 +1,23 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_31ba24\n"
-".type opencfw_em9305_child_31ba24,@function\n"
-"opencfw_em9305_child_31ba24:\n"
-"L31ba24:\n"
-"ldb_s r3,[r1,0x1]\n"
-"L31ba26:\n"
-"ldb_s r12,[r1,0]\n"
-"L31ba28:\n"
-"mov_s r2,r0\n"
-"L31ba2a:\n"
-"asl_s r0,r3\n"
-"L31ba2c:\n"
-"or_s r0,r0,r12\n"
-"L31ba2e:\n"
-"stb_s r0,[r2,0]\n"
-"L31ba30:\n"
-"ldb_s r3,[r1,0]\n"
-"L31ba32:\n"
-"ldb_s r0,[r1,0x2]\n"
-"L31ba34:\n"
-"breq_s r3,0,L31ba3c\n"
-"L31ba36:\n"
-"stb_s r0,[r2,0x1]\n"
-"L31ba38:\n"
-"j_s.d [blink]\n"
-"L31ba3a:\n"
-"mov_s r0,2\n"
-"L31ba3c:\n"
-"add_s r0,r0,3\n"
-"L31ba3e:\n"
-"stb_s r0,[r2,0x1]\n"
-"L31ba40:\n"
-"ld r0,[r1,0x4]\n"
-"L31ba42:\n"
-"stb_s r0,[r2,0x2]\n"
-"L31ba44:\n"
-"ld r0,[r1,0x4]\n"
-"L31ba46:\n"
-"lsr_s r0,r0,0x8\n"
-"L31ba48:\n"
-"stb_s r0,[r2,0x3]\n"
-"L31ba4a:\n"
-"ldh_s r1,[r1,0x6]\n"
-"L31ba4c:\n"
-"mov_s r0,5\n"
-"L31ba4e:\n"
-"j_s.d [blink]\n"
-"L31ba50:\n"
-"stb_s r1,[r2,0x4]\n"
-".size opencfw_em9305_child_31ba24,.-opencfw_em9305_child_31ba24\n"
-);
+#include <stdint.h>
+
+/* Native 0x31ba24..0x31ba52: pack a descriptor into bytes. Byte 0 is
+ * type | sub<<1; a zero type adds {len+3, u32 value low byte, its second
+ * byte, low byte of the halfword at +6} and returns 5, otherwise the
+ * length byte is copied and 2 is returned. */
+uint32_t opencfw_em9305_child_31ba24(uintptr_t out, uintptr_t in)
+{
+    volatile uint8_t *o=(volatile uint8_t *)out;
+    volatile const uint8_t *i=(volatile const uint8_t *)in;
+    o[0]=(uint8_t)((i[1]<<1)|i[0]);
+    uint32_t type=i[0];
+    uint32_t length=i[2];
+    if(type!=0u){
+        o[1]=(uint8_t)length;
+        return 2u;
+    }
+    o[1]=(uint8_t)(length+3u);
+    o[2]=(uint8_t)*(volatile const uint32_t *)(in+4u);
+    o[3]=(uint8_t)(*(volatile const uint32_t *)(in+4u)>>8);
+    o[4]=(uint8_t)*(volatile const uint16_t *)(in+6u);
+    return 5u;
+}

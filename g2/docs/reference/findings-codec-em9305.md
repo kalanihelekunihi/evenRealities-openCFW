@@ -25,7 +25,42 @@ None of these was checked on G2 hardware.
 
 ---
 
+## EM9305 timer calibration ROM argument (2026-11-11)
+
+The stock `0x31398c`/`0x3139cc` probe routines pass a zero halfword count
+unchanged to ROM `0x104ca4`/`0x104cb4` after skipping their LP delay. The
+current C helper now does the same; its prior zero substitution of
+`UINT32_MAX` was incorrect. `EXTH` is unsigned extension in the ARCv2 ISA,
+so the stock nonzero `EXTH(count - 1) + 1` is the original 16-bit count.
+The corrected full C build and seven strict links passed. See
+[`em9305-timer-probe-zero-20261111.json`](../../evidence/em9305-timer-probe-zero-20261111.json).
+
+
 ## 1. GX8002 codec (C-SKY CK804EF)
+
+### Build configuration: backup-stage clock unit
+
+`g2/src/codec/image-b-stage1/backup_stage1_clock_gate.c` now compiles with
+the pinned C-SKY GCC 6.3 toolchain. Its manifest entry selects
+`CONFIG_ARCH_GRUS=1`: without it, vendor `driver/gx_clock.h` includes no
+architecture clock API and `clk_priv.h` fails on `GX_CLOCK_MODULE` and
+related types. The entry also marks the pinned GRUS private-header directory
+as a system include path, isolating existing vendor signedness diagnostics;
+`-Wall -Wextra -Werror` still apply to the reconstructed translation unit.
+No vendor source or clock policy changed. The stale expected-failure entry
+was removed; `link: false` remains because compilation does not establish
+behavioral qualification or workflow admission.
+
+The full baseline `make sources` compiled 5,001/5,002 G2 units with this one
+known failure, no unexpected failures and no duplicate strong symbols. A
+focused rebuild using the updated manifest then compiled the remaining unit.
+This is combined baseline/delta verification, not a second full build.
+R1 retained ten known failures. Reports are under
+`build/sources-hardware-20261021-rea/report.json` and
+`build/rea-iom-hardware/clock-manifest/report.json`; durable results are in
+[`hardware-build-validation.json`](../../evidence/hardware-build-validation.json).
+Unresolved imports remain, so these results do not establish a complete
+linked firmware, byte identity, or physical hardware operation.
 
 ### 1.1 Images and loaders
 
@@ -46,6 +81,16 @@ Source: `CSC/codec/scatter-loader-evidence.md`.
 - `0x10000a9e` reads the XIP length;
 - `0x10000aa4..ab8` computes the SRAM length `0x397c` (14,716 B);
 - it reads flash into IRAM `0x10023400`, then jumps to `0x10023500`.
+- The NOR reader at `0x10000c40` leaves ESMT IDs `0x1c3812/13` without a
+  quad-enable status write, uses a combined two-byte status write for PUYA
+  `0x854012` and `0x856013/14`, and uses a status-2-only write for other
+  IDs. The BINH A C candidate now follows those three routes
+  [codec-a-stage1-jedec-quad-policy-20261111].
+- Clock initialization calls the wrapper at `0x10000f34`; that wrapper
+  calls trim `0x10000860` and enables the 32 kHz oscillator through
+  `0x10000b10` only when trim succeeds. The C source now has this distinct
+  function at its stock address. Its 18 instruction bytes differ only at
+  the relocated call offsets [codec-a-stage1-clock-trim-20261111].
 
 Source: `CSC/codec/scatter-loader-evidence.md`.
 
@@ -75,6 +120,16 @@ Source: `CSC/codec/final-imports-and-layout-audit.md`.
 **Image-B stage-1** (`binh_b_stage1`). The 24-byte BINH header is
 file-only, so runtime PC = file offset + `0x0fffffe8`. Static facts:
 
+- The NOR initializer at `0x100010e2` stores the JEDEC ID, then skips
+  quad-enable status writes for ESMT `0x1c3812/13`. PUYA `0x854012` and
+  `0x856013/14` take the two-byte status write; other IDs take the
+  status-2-only write. The source stage-1 C dispatch follows these branches.
+- The 61 direct `bsr` sites reach 22 distinct targets. The C stage-1 tree
+  names 21 by stock address; pinned `clk_priv.h` supplies the remaining
+  `__module_get_info` at `0x10000138`. The trim-success wrapper at
+  `0x10001310` now has a distinct C provider. This accounts for direct
+  call ownership, not all code or behavior
+  [codec-b-stage1-direct-call-closure-20261111].
 - Reset `0x10000100` sets SP `0x20002ffc` and calls `0x10000df0`.
   - If `*(u32*)0x20001720 == 2`, it runs the loader `0x10000d4c`.
 - **Normal branch:**
@@ -617,7 +672,9 @@ Source: `PC:em9305-qpc-source-binding-2026-10-09/REPORT.md`,
 **WSF:**
 
 - Buffer pool:
-  - pool init `0x313dfc`;
+  - pool init `0x313dfc`: with statistics enabled, it zeros 32 bytes at the
+    aligned miss-counter base, then reserves 256 bytes before placing pool
+    metadata. The `ADD3` at `0x313e5c` scales its `0x20` operand by eight;
   - first-fit alloc `0x313ce0`: 16-bit header, optional histogram and miss
     statistics;
   - free `0x313d98`: marker `0xfaabd00d`.

@@ -1,0 +1,151 @@
+{
+  "schema_version": 1,
+  "normal_report": "build/sources-goal-r1-health-storage-c/report.json",
+  "direct": {
+    "pairs": 812,
+    "by_entry": {
+      "0x6ba68": 72,
+      "0x6ad80": 386,
+      "0x6afb0": 354
+    },
+    "outcomes": {
+      "0x6ad80/0": 340,
+      "0x6ad80/1": 46,
+      "0x6afb0/0": 104,
+      "0x6afb0/1": 250
+    },
+    "digest": "3607287f920ed4c4ab1963f63dcdc71591bff9bfcea2d22b19625fab464fb6bb",
+    "elf": "build/goal-r1-health-storage-c/source-69632.elf",
+    "elf_sha256": "02be2b7d5d6f9df467e06ab7f17dfea65f1b9f72dcb38c12719e020eb3ab5374",
+    "provider_bindings": {
+      "fal_partition_find": 405840,
+      "fal_flash_device_find": 404980,
+      "r1_structured_log_mode_get": 595180,
+      "r1_structured_log_format": 595512,
+      "nrf_log_frontend_std_0": 498112,
+      "nrf_log_frontend_std_2": 498134
+    }
+  },
+  "lifecycle": {
+    "pairs": 653,
+    "entry_counts": {
+      "init": 376,
+      "reset": 36,
+      "event": 241
+    },
+    "flash_counts": {
+      "key_header": 400,
+      "key_body": 400,
+      "state_header": 1087,
+      "state_body": 171
+    },
+    "digest": "e23991c93b1ed312bc2ed3069d727f17ef6e6f49899de3c24edda20ac82b292a",
+    "native_branch_hits": {
+      "0x4bee2": 88,
+      "0x4bef8": 87,
+      "0x4bf00": 3,
+      "0x4bf84": 192,
+      "0x4bfde": 96
+    },
+    "lower_bindings": {
+      "gomore_primitives_size_736": 427808,
+      "gomore_primitives_size_14816": 427034,
+      "r1_health_lifecycle_authorize_native": 438908,
+      "fal_partition_find": 405840,
+      "fal_flash_device_find": 404980,
+      "r1_health_lifecycle_profile_native": 437240,
+      "r1_health_lifecycle_engine_initialize_native": 458400,
+      "gomore_primitives_noop_91080": 594048,
+      "r1_gomore_authorization_dispatch_native": 300048,
+      "r1_time_backend_timestamp": 568740,
+      "r1_subscriber_register": 569228,
+      "r1_structured_log_mode_get": 595180,
+      "r1_structured_log_format": 595512,
+      "nrf_log_frontend_std_0": 498112,
+      "nrf_log_frontend_std_1": 498120,
+      "nrf_log_frontend_std_2": 498134,
+      "r1_native_memory_move": 161628
+    },
+    "elf": "build/goal-r1-health-storage-c/lifecycle/source-69789.elf",
+    "elf_sha256": "453a11e223fb0d01d0d08c412ce2342a287d93e0e09129fc64ad5c651458e9f8",
+    "void_return": true
+  },
+  "negative_controls": [
+    {
+      "control": "abort-read-status",
+      "compiled": true,
+      "rejected": true,
+      "source_sha256": "6aa0b7b90b2656b22260bdcae60a53e2783c3fa6baa860cc5e65b67727d5e740"
+    },
+    {
+      "control": "accept-erased-length",
+      "compiled": true,
+      "rejected": true,
+      "source_sha256": "cb4e54e475c4ccbb98e87c25170d26d602238085327dfffb31aaa2279639352b"
+    },
+    {
+      "control": "round-state-down",
+      "compiled": true,
+      "rejected": true,
+      "source_sha256": "2b397a29764120f0c5ccfbd5f5c4de7d5f7615e4dbb7d165f1ed3815c8984802"
+    },
+    {
+      "control": "wide-bool-result",
+      "compiled": true,
+      "rejected": true,
+      "source_sha256": "79a8984a8ef88dfc13ef95f8dd0cc8ed5389470a382ff79de6835a77b350a4a7"
+    }
+  ],
+  "cold_state": {
+    "locked_application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "native_decoder": "0x286f4",
+    "source": "0xc4610",
+    "destination": "0x200064a8",
+    "length": 6492,
+    "owner_address": "0x20006ee0",
+    "initial_bytes": "000000000000000000000000",
+    "decoder_return_r0": "0x0"
+  },
+  "audit": {
+    "new_payload_sources": [
+      [
+        "r1-application",
+        "r1/src/application/runtime/native_health_storage.c"
+      ]
+    ],
+    "changed_existing_objects": [
+      [
+        "r1-application",
+        "r1/src/application/runtime/native_health_lifecycle.c"
+      ]
+    ],
+    "unchanged_existing_objects": 722
+  },
+  "source_only_storage_link": false,
+  "hardware_tested": false,
+  "removed_application_imports": [
+    "r1_health_lifecycle_restore_native"
+  ],
+  "sha256": {
+    "build/sources-goal-r1-health-storage-c/report.json": "8b2ff44ce84659a2d991aefbbbb31cd4364accd28d56c23d56568b80e5134e92",
+    "r1/src/application/runtime/native_health_storage.h": "43895f634e588ed47db79611131cf84c6eed493a3c08fcaf18902d69fc0bd0b6",
+    "r1/src/sources.json": "1b8eeb38dd96ec5c35ee44da1243a4a15f78140f7715dba9b8f6af3d93bbaf03",
+    "tools/build/source-plan.json": "43281e3850f6c7b83c5616e5968c4939993501810057ca3deaeea85eaae351ba",
+    "r1/src/application/runtime/native_health_storage.c": "5de5ad2e12d4969fe19ee1b848a48526e45f08a4686ce1f314605f69d097b08b",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-health-storage-c/r1/r1-application/r1__src__application__runtime__native_health_storage.c.o": "62bb33bdb55d184c5f0f3604a4ac1ca983bc4cc9a0c09df6e9aeaa85d1c474c8",
+    "r1/src/application/runtime/native_health_lifecycle.c": "73f88ee0b6706c8046c1a826f001dc12f23da2fe2be14a9d994294c5feaa3293",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-health-storage-c/r1/r1-application/r1__src__application__runtime__native_health_lifecycle.c.o": "af24245b7dd26b2c3e642bc8603603895aacbaa7f75d8293ef49f1e5eaead234",
+    "r1/src/application/checksums/stock_checksums.c": "63f78e208048b5bd4b91c00f97e1260a5a53f5bee50dc51aa5ce4aaa1cdfe898",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-health-storage-c/r1/r1-application/r1__src__application__checksums__stock_checksums.c.o": "5410da4a6fdd3c0291503711f2da59238ec3e95d4306e3c17af0619cef54b4e7",
+    "build/goal-r1-health-storage-c/verify.py": "b858ee1d97332073383641d2bf8a5d494bc0cf2fb1c884f8c539acc3cef671e3",
+    "build/goal-r1-health-storage-c/lifecycle.py": "719c6cf189c323d191d3d706b1ddf5ad64eb250db0ac478b639e875ed3916fce",
+    "build/goal-r1-health-storage-c/negative.py": "0e82b587e81326ff7d2893a779c9c754e53a15a06c39cc534f47f6dce3a10498",
+    "build/goal-r1-health-storage-c/scatter.py": "cb690de873cce516be44b1b2f8e8c022167368795e036ce44a16c7c0770611e7",
+    "build/goal-r1-health-storage-c/scatter-results.json": "23842e049b9a17ef3586dd44e8066813ad8af0081b3121c4f2d3ec7cb5ace256",
+    "build/goal-r1-health-storage-c/audit.json": "4730de5defa419d579b3140a8bb2a6abf340846ad403ca631039f9eac4ba5c64",
+    "build/goal-r1-health-storage-c/sources-check.log": "6cf15aeb023dc2e5ab1b2f0bb09c96790ff338bfd4f21db74e2db32ae5fc6b7a",
+    "build/goal-r1-health-storage-c/rea-6ba68.json": "5a16944b5d9d223c016756db6d7bd5a7b4eb02da4ac3d15a0097699d8313aa2e",
+    "build/goal-r1-health-storage-c/rea-6ad80.json": "88dcdf6e739c9bac37db854798c0f75bd8e907af152957cf14b7313b982856d4",
+    "build/goal-r1-health-storage-c/rea-6afb0.json": "5acae49726f720fc26d5be9a0e18e7e34adcc291da5d121467270a22c205219c"
+  }
+}

@@ -8,7 +8,7 @@ extern void *audio_uart_lv_grid_copy_454738(void *, const void *, uint32_t);
 extern uint32_t audio_uart_lv_tick(void); /* native 0x473482 */
 extern void audio_uart_lv_anim_normalize_450a3e(void *);
 extern void audio_uart_lv_transition_schedule_4509da(void);
-extern void audio_uart_lvgl_log(uint32_t, const char *, uint32_t,
+extern void lv_log_add(uint32_t, const char *, uint32_t,
                                 const char *, const char *, ...);
 
 static const char scheduler_source[] =

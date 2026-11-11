@@ -1,0 +1,186 @@
+{
+  "schema_version": 1,
+  "report": "build/sources-goal-r1-nv-route-reviewed-c/report.json",
+  "audit": {
+    "unchanged_prior_nongenerated_objects": 843,
+    "changed_nongenerated_objects": [
+      "r1/src/application/board/native_protocol_modules.c",
+      "r1/src/application/runtime/native_nv_recovery_envelope.c"
+    ],
+    "changed_generated_objects": [
+      "{gen}/r1_startup_vectors.S",
+      "{gen}/r1_uecc.c"
+    ],
+    "compiled_units": 855,
+    "application_imports": 62,
+    "bootloader_imports": 22,
+    "removed_imports": [
+      "r1_nv_recovery_command_handler_plan_decode"
+    ],
+    "new_imports": [],
+    "new_persistent_state": false,
+    "command_table_bytes_unchanged": true,
+    "only_table_relocation_change": [
+      [
+        [
+          116,
+          "r1_nv_recovery_command_handler_plan_decode"
+        ],
+        [
+          116,
+          "r1_native_nv_recovery_envelope_handler"
+        ]
+      ]
+    ],
+    "assembly_removed_from_both_units": true,
+    "manifest_unchanged": true
+  },
+  "module_verification": {
+    "native_instruction_bytes_covered": {
+      "search": 58,
+      "health": 36,
+      "system": 36,
+      "special": 36
+    },
+    "stock_C_comparisons": 2721,
+    "below_minimum_C_rejections": 4,
+    "native_underflow_observed": true,
+    "exact_callback_lower_seed_preserved": true,
+    "all35_command_entries_verified": true,
+    "all_module_bodies_and_lookup_ordinary_C": true,
+    "callbacks_modeled": true,
+    "caller_saved_results_excluded": true
+  },
+  "link_ready_verification": {
+    "native_instruction_bytes_covered": 32,
+    "stock_C_comparisons": 25,
+    "all7_send_arguments_checked": true,
+    "caller_saved_frame_excluded": true
+  },
+  "actual_NV_pipeline": {
+    "actual_C_command_table_pipeline_cases": 288,
+    "actual_C": [
+      "module lookup/dispatch",
+      "20-entry system command table",
+      "packet payload getter",
+      "NV envelope handler",
+      "fixed-record command admission",
+      "CRC and fill-only merge",
+      "cached KV reads/writes",
+      "memory routines"
+    ],
+    "payload_ownership_and_dirty_flags_checked": true,
+    "other_handlers_and_services": "unexecuted assertion stubs",
+    "report_backend_and_logging_modeled": true,
+    "physical_flash_not_executed": true
+  },
+  "touch_regression": {
+    "pairs": 6378,
+    "groups": {
+      "selector_seeds": 4,
+      "all_selectors_dispatch": 3072,
+      "state_byte_and_client_ownership": 2560,
+      "getter_guards_handles_scalar_results": 450,
+      "live_backend_mutations": 288,
+      "masks_and_route": 4
+    },
+    "native_instruction_bytes_covered": 184,
+    "native_instruction_bytes_expected": 184,
+    "native_uncovered_byte_addresses": [],
+    "actual_C": [
+      "touch switch with canonical/legacy alias",
+      "module lookup/dispatcher and actual20-command table",
+      "packed payload getter",
+      "checked-send and header wrappers",
+      "touch services and client owner"
+    ],
+    "modeled": [
+      "logging",
+      "final protocol response backend",
+      "RTOS flags",
+      "synthetic release"
+    ],
+    "other_handlers": "unexecuted assertion stubs"
+  },
+  "negative_controls": [
+    {
+      "name": "wrong_NV_target",
+      "rejected": true
+    },
+    {
+      "name": "wrong_callback_seed",
+      "rejected": true
+    },
+    {
+      "name": "unsigned_underflow",
+      "rejected": true
+    },
+    {
+      "name": "wrong_query_arguments",
+      "rejected": true
+    },
+    {
+      "name": "wrong_query_result",
+      "rejected": true
+    }
+  ],
+  "contract": [
+    "System command0011 now refers to the existing canonical four-argument C NV envelope handler, not an unresolved plan name. All35 table key/reserved/target relationships are verified.",
+    "Replace register-bound lookup/module adapters with a shared C lookup result carrying callback and lower index. Preserve full handle, packet, callback-address third argument and native lower-search fourth argument. Null packet returns handle; ordinary misses return0.",
+    "Replace link-ready assembly frame with a C call using exactly(handle,17,1,1,0,NULL,0), returning whether the provider result is nonzero."
+  ],
+  "intentional_C_changes": [
+    "Break before unsigned upper-index underflow at index0; below-minimum keys now return0 without reading before the table. A controlled stock counterexample returns a phantom callback from TABLE-8; it is never executed.",
+    "Correct NV logger declarations to pinned SDK void signatures and define empty-payload handler completion as0 instead of incidental logger/register values.",
+    "Caller-saved register outputs and private frame words are no longer a C API; the meaningful callback seed is carried explicitly."
+  ],
+  "limits": [
+    "2721 module/lookup comparisons cover all166 native instruction bytes and35 command entries.25 link-ready comparisons cover all32 bytes and all7 send arguments. Leaf callbacks/phone/send services are modeled.",
+    "288 complete C recovery route cases execute actual module table/lookup, packet payload getter, envelope, command admission, CRC/merge, cached KV and memory routines. Logging/report backend is modeled; unrelated handlers/services are unexecuted assertion stubs.",
+    "6378 existing actual touch-handler/module regressions pass with the new lookup. This does not validate all other leaf handler implementations.",
+    "Packet available-length validation and the payload getter existing advertised-length semantics are unchanged. Tests supply readable complete buffers; this change only bounds command-table search. Arbitrary pointer corruption, asynchronous mutation and physical persistence remain unverified.",
+    "855 units compile/compose;62 application and22 bootloader imports remain. No new persistent state or manifest changes. Full linking, physical radio/flash and boot remain unverified."
+  ],
+  "evidence_files": {
+    "build/sources-goal-r1-nv-route-reviewed-c/report.json": "8fc03ebfd0ddab2c499e37f824a62abb6d2f977def2cf47bd21903320da5183a",
+    "build/sources-goal-r1-nv-merge-reviewed-c/report.json": "5a211c8e76eb62de3fa49afffb32a33fc6e72b5ed2b80b7b5ac44c969bc2ee37",
+    "r1/src/application/board/native_protocol_modules.c": "08768c2ec1b124e7d9d1656f29be9c67f21cacb4bee45f80b6241641c41f6ef0",
+    "r1/src/application/runtime/native_nv_recovery_envelope.c": "6938d3bed6b3814d8feba2bc8077e9c37e02bbdb1a9b01ecd9c68f66e8fe17e2",
+    "r1/src/sources.json": "618e3f6056f74edee68027c82dddb1d2e8c53810e0c04e416f42841fc974e4ec",
+    "r1/src/application/runtime/native_nv_recovery_dispatch.c": "4b1037ac0d56ecf0fd7ad83aa046aa5bb699b25bda4baefe23bde298eaf4418b",
+    "r1/src/application/runtime/native_nv_recovery_merge.c": "f0f3331f70e7e298f8396d9cbcdf4cc29e03bb5b5836e2d24ac53ee3cc31f4d1",
+    "r1/src/application/board/native_kv_class.c": "e9791d39b7a9b5380b1dbce3c7422be921131abbd0e09c3387ea3d4b9930bf6e",
+    "r1/src/application/runtime/native_protocol_ack.c": "d03b6416838d3dd10e07c5cd005d732408b432d3447000f2cb94492af2c6247c",
+    "vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/log/src/nrf_log_frontend.c": "2ff3b08586b574db42d24e3f6f9e586f64d2a42535b077b9f0d484b2e8e034d9",
+    "build/goal-r1-nv-route-c/rea.json": "b8e4b7feabea960ca5409181445fa263946a3116f33843d27085905a950c096a",
+    "build/goal-r1-nv-route-c/modules.py": "df36c210cc64c22b2184e6615922dd3088a8853b41f21dc1d196ce221bec7647",
+    "build/goal-r1-nv-route-c/modules.json": "938962bb46618456c31df777b1a1b2da06e17506551208fd21d2b5f1c5c5e643",
+    "build/goal-r1-nv-route-c/modules.log": "234a8a01eb3d8a49ff31c51154c4b2e8936f3887ee6ff6e322ac5cd5cfa60b4f",
+    "build/goal-r1-nv-route-c/link-ready.py": "687c0bd3c0a59d6cb99930bd3222d3aebd2bd9c446575c163aeebda8223f30bd",
+    "build/goal-r1-nv-route-c/link-ready.json": "50b61791483be4c6ab1165d73bdfa638ae925743909d9bcea41dfa869d778642",
+    "build/goal-r1-nv-route-c/link-ready.log": "f66e21fce14788ad8a91504d0d671206f907e6dbe891217e85224a3cdd324c00",
+    "build/goal-r1-nv-route-c/make-pipeline.py": "f966748bf19ab3cac243cf51cff291fb834229c18bd1a9678dac4334f43285ab",
+    "build/goal-r1-nv-route-c/pipeline/verify.py": "bda86a2c93923e2c444d8eacb365ebf73225c78900b090a16a015f180830bff2",
+    "build/goal-r1-nv-route-c/pipeline/rea.json": "98d073906814ac60c308b82eb2f948c19a5810d87a9bd0f452060731b0ede3f7",
+    "build/goal-r1-nv-route-c/pipeline/verification.json": "8b67593af8c692ede24d13c9aa596e5e3e75f41fcc924c843fbb5c33903a53ab",
+    "build/goal-r1-nv-route-c/pipeline/verification.log": "c35337612af6ef7eceacda45847e68276883ce535b532c847002256c353b5787",
+    "build/goal-r1-nv-route-c/touch/verify.py": "592712df458145735eef64cab3c67a4f0821c7767deee697d2e543af29289572",
+    "build/goal-r1-nv-route-c/touch/rea.json": "4263632476d31a69fd6b40a75b1e23f4be0de9a75dddb6499c3c9d39b72b18f1",
+    "build/goal-r1-nv-route-c/touch/verification.json": "5002c1af79942223968d4203fe111b1ef43ff84e3f591ee1ec9563ea84a726c6",
+    "build/goal-r1-nv-route-c/touch/verification.log": "1b2ad825d7836d0a7c12bbc0e3b792a1f857a6219b0c24fe063ea2ed96185ea3",
+    "build/goal-r1-nv-route-c/negative.py": "0ddb1bcaa1b3adb7e45bea8456bf39c39af4265982674a9148e9f75a26046541",
+    "build/goal-r1-nv-route-c/negative.json": "3e74a363eca633fd89c65d41d6a6547ea2600cb8b783576411019b9fba835328",
+    "build/goal-r1-nv-route-c/negative.log": "6700622a2000cbe240d2180dcb4bc57bf1bef6b0aeb2c035e7920db5aa2e62d6",
+    "build/goal-r1-nv-route-c/r1-check.log": "f610d186f791ebf717d9fd6eed6c4f28612779fff34b885bcf8dc8a49c9ae80c",
+    "build/goal-r1-nv-route-c/wrong_NV_target/mutant.c": "5b4bbdd44ac161953830c50c2e498352b6814e874d49df302f5b4686b849cd4d",
+    "build/goal-r1-nv-route-c/wrong_NV_target/result.log": "8861bb4bf5f5344961289f9270562d31e6c38d77232ca55b51f691e53097b5c6",
+    "build/goal-r1-nv-route-c/wrong_callback_seed/mutant.c": "a8b33645dae69f54aeedf3899e3cb25cab2e7db59633d5688f9ac38a98a40eb4",
+    "build/goal-r1-nv-route-c/wrong_callback_seed/result.log": "cda844da9eb910ed426828fd81d5eb35929ba0bea5efb430edca914b25bdd59e",
+    "build/goal-r1-nv-route-c/unsigned_underflow/mutant.c": "29fffce72c50a0c12e902b306706ca144b02e11af171a20598ed0052446d8b33",
+    "build/goal-r1-nv-route-c/unsigned_underflow/result.log": "ac344d0e4b64207e542fc23aa41c9f512f887f92fd5b0f0cf2a3f87df0af05cf",
+    "build/goal-r1-nv-route-c/wrong_query_arguments/mutant.c": "a89333eeecef3565f8ecfbede5c506bd80d091559949991362534fc604fa798e",
+    "build/goal-r1-nv-route-c/wrong_query_arguments/result.log": "c55a56327e6806792124b8e5b2a1776ac72c336bc260c512f375027f5e2463b0",
+    "build/goal-r1-nv-route-c/wrong_query_result/mutant.c": "0ed815b19e04cf0125a22d18813d9fa7753e9ac8bc8349c904d79fad327f6e89",
+    "build/goal-r1-nv-route-c/wrong_query_result/result.log": "9a6a6ba25bb1f7ac996a4b18f14f0ca17bb78f3e7f1198382e0df286fa1d4a77"
+  }
+}

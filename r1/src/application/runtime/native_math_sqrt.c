@@ -25,8 +25,8 @@ double r1_native_sqrt(double x)
 float r1_native_sqrtf(float x)
 {
     union { float value; uint32_t bits; } input={.value=x},result;
-    /* Preserve the authenticated VFP instruction and FPSCR exception behavior. */
-    __asm__ volatile("vsqrt.f32 %0,%1" : "=t"(result.value) : "t"(x));
+    /* The target builtin emits VSQRT; native errno handling remains below. */
+    result.value=__builtin_sqrtf(x);
     uint32_t result_nan=(0x7f800000u-(result.bits&0x7fffffffu))>>31;
     uint32_t input_nan=(0x7f800000u-(input.bits&0x7fffffffu))>>31;
     if (result_nan && !input_nan) r1_native_errno_set(1);

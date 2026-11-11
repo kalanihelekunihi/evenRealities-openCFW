@@ -1,15 +1,15 @@
 /* SPDX-License-Identifier: MIT
  * Omitted UART boot stage 1, stock 0x10000584..0x10000658.
- * Its literal pool repeatedly points to the RAM UART-base word 0x20002014.
+ * Its literal pool repeatedly points to the RAM UART-base word 0x20002014
+ * (gx8002_uart_stage1_state.uart_base).
  * The initializer of that word is a separate product/startup obligation.
  */
 #include <stdint.h>
+#include "uart_stage1_state.h"
 
 static volatile uint32_t *stage1_uart(void)
 {
-    const volatile uint32_t *const base_word =
-        (const volatile uint32_t *)(uintptr_t)UINT32_C(0x20002014);
-    return (volatile uint32_t *)(uintptr_t)*base_word;
+    return (volatile uint32_t *)(uintptr_t)gx8002_uart_stage1_state.uart_base;
 }
 
 void gx8002_uart_stage1_put(uint32_t value)

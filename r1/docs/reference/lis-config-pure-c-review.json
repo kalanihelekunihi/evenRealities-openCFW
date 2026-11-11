@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "scope": "R1 LIS2DW12 typed C configuration sequence",
+  "report": "build/sources-goal-r1-lis-config-pure-c/report.json",
+  "comparison_report": "build/sources-goal-r1-lis-entries-pure-c/report.json",
+  "audit": {
+    "compiled_units": 855,
+    "application_imports": 61,
+    "bootloader_imports": 22,
+    "unchanged_prior_nongenerated_objects": 844,
+    "changed_nongenerated_objects": [
+      "r1/src/application/runtime/native_lis_configure.c"
+    ],
+    "import_sets_unchanged": true,
+    "normal_object_equals_direct_probe_object": true,
+    "log_sections_unchanged": true,
+    "no_new_persistent_state": true,
+    "assembly_bridges_removed": 2,
+    "only_manifest_change": "configure profile r1-application-36 to existing r1-application-12"
+  },
+  "direct": {
+    "stock_C_comparisons": 32921,
+    "typed_policy_calls": true,
+    "identity_and_reset_no_write_cases": true,
+    "live_logging_modes_and_context": true,
+    "all_callee_results_ignored": true,
+    "private_stack_and_R1_R3_residue_excluded": true,
+    "helper_ports_modeled": true
+  },
+  "actual_register_graph": {
+    "stock_C_actual_configuration_graph_cases": 378,
+    "actual_C_configure_and_register_entries": true,
+    "transport_and_identity_FIFO_delay_logs_modeled": true,
+    "private_helper_register_residue_excluded": true
+  },
+  "compiled_defects_rejected": [
+    {
+      "name": "early_timeout",
+      "rejected": true
+    },
+    {
+      "name": "poll_delay",
+      "rejected": true
+    },
+    {
+      "name": "watermark",
+      "rejected": true
+    },
+    {
+      "name": "rate_150",
+      "rejected": true
+    },
+    {
+      "name": "identity_admission",
+      "rejected": true
+    }
+  ],
+  "public_contract": [
+    "Identity admission, reset read-delay-limit-check ordering and at most twelve reset polls retained.",
+    "All existing helper statuses remain ignored; rate mapping, ordered configuration writes and five-sample discard retained.",
+    "Local identity/reset bytes and discarded sample storage initialized; private helper frame/register aliases are excluded."
+  ],
+  "limits": [
+    "Physical sensor/bus timing and reset electrical behavior, final application linking/startup unverified.",
+    "Direct helper boundaries modeled; graph runs actual C register helpers with modeled transport, identity, FIFO, delays and logs.",
+    "Separate auxiliary/FIFO assembly remains unchanged.",
+    "Provider buffer overruns, private frame aliases, incidental caller registers, APSR, faults/concurrency and byte identity excluded."
+  ],
+  "evidence_files": {
+    "build/sources-goal-r1-lis-config-pure-c/report.json": "5372cee0228daff66bd59713ae1571a24f14dc575e310a2e19df657eed71f003",
+    "build/sources-goal-r1-lis-entries-pure-c/report.json": "82610a5629dec8c6da85741bde4eaac29b63b101e5646741fd702178cb9248c2",
+    "r1/src/application/runtime/native_lis_configure.c": "a33e6ad26bcc8c157612b60775ea921fa77f4a2424b3698a4d395e54f13cfdad",
+    "r1/src/application/runtime/native_lis_context.h": "7daf3b80d04d3b8b02c6fb242b0d16a1a6bb9c4cda12491117dbd1cff6877776",
+    "r1/src/application/runtime/native_lis_call_frames.c": "7baa52fbae28db3ccb7b52be25b8acda4f994a7062b6ab5de43519140664aa0f",
+    "r1/src/application/runtime/native_lis_setup.c": "d6234fc527e1c8e560434d280c045706ba3936d1b6b2ee70cf926080b088d7a4",
+    "r1/src/application/board/sensor-kernels/lis-setup/st-setup-frames.c": "135849687e3d0a346381f225ad42e9bbd95212aff91ae0fe051f4b38b7d95dbc",
+    "vendor-cache/r1/st-lis2dw12-8d4bd522015004a9646102702901ba5a15ec6d39/lis2dw12_reg.h": "8ec9712080bf855726f764303b0c2f3eb209c51b8fdada86af059a1ee70fa048",
+    "r1/src/sources.json": "f74aa01d5bac1e3a8786b1052791cbd6344c1fd57ce26a11f1d65de93506ad72",
+    "tools/build/source-plan.json": "eeb516e31b3310fb0718f36908977f8125723f7c5e0e86cd6744395826259a4d",
+    "build/goal-r1-lis-config-pure-c/rea.json": "6d90fb8e77e5cce31aa97690f06c02451b29edda7ab9123f064f59337caa24a6",
+    "build/goal-r1-lis-config-pure-c/verify.py": "b8464f9f11d13bc062d6936604e8bd0e578b5e3ef3e61faa9a4bc2ea90076a62",
+    "build/goal-r1-lis-config-pure-c/results.json": "95527144441bd71038602bfae3bdede81eafd28311e85a8ade8f2a3b3a54fe43",
+    "build/goal-r1-lis-config-pure-c/verification.log": "6dfffdb546b6e351701fcbcabeee4dd14d3a296661314a30b1e92975d9dd0c5b",
+    "build/goal-r1-lis-config-pure-c/source.elf": "1c52cb92c4e953081b5f4ff2ee052da62f6df89b9429fba3cb5b661cfc0fee68",
+    "build/goal-r1-lis-config-pure-c/graph/verify.py": "4e55aaf4bd4c8c196305a3e88c9489cc6f983b5cfe67f1cc8e6da11941b7cddc",
+    "build/goal-r1-lis-config-pure-c/graph/results.json": "cd18513767ee739e7d476b0362940f387adbf51e7ecc6e9780f75d63658bd6bb",
+    "build/goal-r1-lis-config-pure-c/graph/verification.log": "10fcde7b5b988ee2fecc8e200e16d1c7898bc68d83661a41e03e047405329d5f",
+    "build/goal-r1-lis-config-pure-c/graph/source.elf": "fbe4ceb55ec9cf270d416f1d9d13dd9cfcca1927415a80277c24a4ea3f0567e3",
+    "build/goal-r1-lis-config-pure-c/negative.py": "030e279e67e5012afc5eb17d79b58eaa002cdb5cad842ed417744284f99ad675",
+    "build/goal-r1-lis-config-pure-c/negative.json": "e9b8b0c66d0e4af581abfd616aa8e34ef2963ed30d090bd8c9dda54d4ed6ffb9",
+    "build/goal-r1-lis-config-pure-c/negative.log": "77358e5b1399a0739947d981ac49f840f92bb58c2fe2cc84abe8a3bfb72f638a",
+    "build/goal-r1-lis-config-pure-c/build.log": "0d83454eaa878470466c4f482e4ebeb094c033f64f283c812633b68a30a3e4c2",
+    "build/goal-r1-lis-config-pure-c/sources-check.log": "f610d186f791ebf717d9fd6eed6c4f28612779fff34b885bcf8dc8a49c9ae80c"
+  }
+}

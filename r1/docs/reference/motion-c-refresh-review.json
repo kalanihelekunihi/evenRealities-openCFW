@@ -1,0 +1,111 @@
+{
+  "cases": 1048,
+  "passed": 1048,
+  "failures": [],
+  "integrated_cases": 704,
+  "actual_fallback_cases": 487,
+  "stock_entry": "0x5025c",
+  "stock_body_bytes": 16,
+  "source_body_bytes": 22,
+  "selected_cell": "0x200076ac",
+  "callback_stack_depth_pairs": [
+    [
+      [
+        -16,
+        -16,
+        -16
+      ],
+      [
+        -8,
+        -8,
+        -8
+      ]
+    ],
+    [
+      [
+        -16,
+        -16,
+        -16,
+        -16
+      ],
+      [
+        -8,
+        -8,
+        -8,
+        -8
+      ]
+    ],
+    [
+      [
+        -16,
+        -16,
+        -16,
+        -16,
+        -16
+      ],
+      [
+        -8,
+        -8,
+        -8,
+        -8,
+        -8
+      ]
+    ],
+    [
+      [
+        0
+      ],
+      [
+        0
+      ]
+    ]
+  ],
+  "unchanged_functions": [
+    "r1_bma456w_configuration_wrapper",
+    "r1_bma456w_interrupt_noop",
+    "r1_bma456w_probe_wrapper",
+    "r1_lis2dw12_configuration_wrapper",
+    "r1_lis2dw12_interrupt_noop",
+    "r1_lis2dw12_probe_wrapper",
+    "r1_motion_bus_acquire",
+    "r1_motion_bus_release",
+    "r1_motion_probe_and_select_provider",
+    "r1_qma6100_configuration_wrapper",
+    "r1_qma6100_interrupt_wrapper",
+    "r1_qma6100_probe_wrapper"
+  ],
+  "unchanged_operation_tables": [
+    ".r1.motion.bma.table",
+    ".r1.motion.lis.table",
+    ".r1.motion.qma.table"
+  ],
+  "report": "build/sources-goal-r1-motion-refresh/report.json",
+  "report_sha256": "1f658cf752b051184bd70c61200c2821416760d35b55509e009de512d9648326",
+  "source_sha256": "2ff5a9301b8cdd3fe6ae13ddd7fecb5f747bb2740ff590984e36ad50bdd7b86f",
+  "header_sha256": "79568bea8e79f67fb559e9d66c1b5312bcc7806ee00de078548ba3a929af4d0a",
+  "manifest_sha256": "be76bf00509f1551b53a08edbc5515ed3a3dcb9b1721ff4481fdf60b77d82eb8",
+  "stock_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "native_span_sha256": "b7353e4f9d5e586170912919e7bec46dca93d6a0bfd3129ea495c4f6a1629887",
+  "rea": {
+    "completed": true,
+    "procedure": "0x5025c",
+    "path": "build/goal-r1-motion-refresh/REA.json",
+    "sha256": "9d311d33d16c840281daa474f86a99c2454660f1bed7333c5dea81769b9837c9",
+    "limitations": [
+      "Decompiler infers void return and emits repeated global expressions; instructions and execution establish full R0 result and one global read."
+    ]
+  },
+  "probe_artifacts": {
+    "build/goal-r1-motion-refresh/verify.py": "a9c53663993f98f7d3aaac4f6f47e792a7cebed997255a788b5c9fc6ce3db714",
+    "build/goal-r1-motion-refresh/before.c": "ba84202eef2993d4d3caf4051fd24029ab94b48337635fa9fe39583f2aac7189",
+    "build/goal-r1-motion-refresh/source.elf": "8732119e155fb9244ac219d18c9a0cfceee21bfc8c59a925c4ebbcfc514d34eb",
+    "build/goal-r1-motion-refresh/stock.elf": "c3ea4f448d05d369e9f6315f7134df1aa6846b85f1694afa23c27aeba630cfd7",
+    "build/goal-r1-motion-refresh/rea-snapshot.json": "a6029d4a2ce62c2e9e9505358af3e6cb3d69caa5031d8161ec87998a1d51a73f"
+  },
+  "limits": [
+    "Probe cell placement at 0x200076ac is controlled; final firmware placement is not established.",
+    "Bus and sensor identity calls are mocked; the actual selection routine executes in 487 cases.",
+    "Typed auxiliary entries retain pointer-only ownership; no auxiliary argument ABI is admitted.",
+    "No physical sensor operation, timing, complete fault-state, final linking, source qualification or byte-identity claim."
+  ]
+}

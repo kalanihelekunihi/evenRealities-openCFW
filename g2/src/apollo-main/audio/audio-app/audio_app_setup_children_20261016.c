@@ -11,6 +11,12 @@ void audio_app_stream_enable_53ca10(uint32_t enabled) {
     uint32_t packet[3] = {0u, 1u, (uint8_t)enabled};
     audio_app_control_packet_53c638(packet);
 }
+/* Same stock entry 0x53ca10 (aud_send_message_type0) under the codec-thread
+ * watchdog and diagnostic codec-control names. */
+__typeof__(audio_app_stream_enable_53ca10) audio_watchdog_emit_type0
+    __attribute__((alias("audio_app_stream_enable_53ca10")));
+__typeof__(audio_app_stream_enable_53ca10) audio_codec_control
+    __attribute__((alias("audio_app_stream_enable_53ca10")));
 
 void audio_app_codec_enable_53ca32(uint32_t enabled) {
     uint32_t packet[3] = {1u, 1u, (uint8_t)enabled};
@@ -26,3 +32,8 @@ void audio_app_first_hardware_prepare_57a926(void *context) {
     void *handle = lc3_setup_encoder((int)first, (int)second, 0, bytes + 0x1cu);
     *(uint32_t *)(bytes + 0x18u) = (uint32_t)(uintptr_t)handle;
 }
+
+/* The diagnostic deinit path names the same native 0x53ca32 entry
+ * (formerly a duplicate body in system/glue/pdm_control_provider.c). */
+__typeof__(audio_app_codec_enable_53ca32) audio_pdm_control
+    __attribute__((alias("audio_app_codec_enable_53ca32")));

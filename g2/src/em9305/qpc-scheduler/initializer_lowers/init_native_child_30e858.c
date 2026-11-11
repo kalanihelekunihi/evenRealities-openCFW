@@ -1,30 +1,23 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_30e858\n"
-".type opencfw_em9305_child_30e858,@function\n"
-"opencfw_em9305_child_30e858:\n"
-"L30e858:\n"
-"st.aw blink,[sp,-12]\n"
-"L30e85c:\n"
-"stb_s r0,[sp,0x8]\n"
-"L30e85e:\n"
-"mov_s r0,0x35\n"
-"L30e860:\n"
-"asl_s r0,r0,0x10\n"
-"L30e862:\n"
-"st_s r0,[sp,0x4]\n"
-"L30e864:\n"
-"add_s r0,sp,0x4\n"
-"L30e866:\n"
-"stb r2,[sp,10]\n"
-"L30e86a:\n"
-"bl.d opencfw_em9305_ll_event_callback_30e79c\n"
-"L30e86e:\n"
-"stb r1,[sp,9]\n"
-"L30e872:\n"
-"ld.ab blink,[sp,12]\n"
-"L30e876:\n"
-"j_s [blink]\n"
-".size opencfw_em9305_child_30e858,.-opencfw_em9305_child_30e858\n"
-);
+#include <stdint.h>
+
+/* Native 0x30e858..0x30e876: report LL event 0x35 with three byte fields. */
+extern uint32_t opencfw_em9305_ll_event_callback_30e79c(uintptr_t);
+
+struct ll_event_35 {
+    uint16_t reserved;
+    uint16_t code;
+    uint8_t value0;
+    uint8_t value1;
+    uint8_t value2;
+};
+
+uint32_t opencfw_em9305_child_30e858(uint32_t value0, uint32_t value1, uint32_t value2)
+{
+    struct ll_event_35 event;
+    event.reserved = 0u;
+    event.code = 0x35u;
+    event.value0 = (uint8_t)value0;
+    event.value1 = (uint8_t)value1;
+    event.value2 = (uint8_t)value2;
+    return opencfw_em9305_ll_event_callback_30e79c((uintptr_t)&event);
+}

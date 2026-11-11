@@ -45,10 +45,15 @@ uint32_t case_boot_bus_set_frequency(uint32_t descriptor,uint32_t frequency,uint
         }
     }
     wr(base+20u,frequency);
-    wr(base+24u,(rd(base+24u)&~7u)|width);
+    /* Boot-test fix: stock 0x08005a06..0x08005a18 clears WUCKSEL and then
+     * sets it in two RTC_CR writes (HAL_RTCEx_SetWakeUpTimer_IT). */
+    wr(base+24u,rd(base+24u)&~7u);
+    wr(base+24u,rd(base+24u)|width);
     wr(0x40021880u,rd(0x40021880u)|(1u<<19));
     wr(base+24u,rd(base+24u)|(1u<<14));
     wr(base+24u,rd(base+24u)|(1u<<10));
     wr(base+36u,255u);wr8(state+9u,1u);wr8(state+8u,0u);
     return 0u;
 }
+/* Dedup (0x0800598c): case_policy_flash_write (was startup/application_policy_bus_frequency_alias_candidate.c). */
+void case_policy_flash_write(uint32_t descriptor,uint32_t frequency,uint32_t width) __attribute__((alias("case_boot_bus_set_frequency")));

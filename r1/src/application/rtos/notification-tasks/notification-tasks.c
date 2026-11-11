@@ -554,3 +554,141 @@ static void prvResetNextTaskUnblockTime( void )
         xNextTaskUnblockTime = listGET_ITEM_VALUE_OF_HEAD_ENTRY( pxDelayedTaskList );
     }
 }
+
+/* Notification-state query/clear from the same pinned kernel tasks.c. */
+#define prvGetTCBFromHandle(handle) ((handle)==NULL ? pxCurrentTCB : (TCB_t *)(handle))
+    BaseType_t xTaskGenericNotifyStateClear( TaskHandle_t xTask,
+                                             UBaseType_t uxIndexToClear )
+    {
+        TCB_t * pxTCB;
+        BaseType_t xReturn;
+
+        configASSERT( uxIndexToClear < configTASK_NOTIFICATION_ARRAY_ENTRIES );
+
+        /* If null is passed in here then it is the calling task that is having
+         * its notification state cleared. */
+        pxTCB = prvGetTCBFromHandle( xTask );
+
+        taskENTER_CRITICAL();
+        {
+            if( pxTCB->ucNotifyState[ uxIndexToClear ] == taskNOTIFICATION_RECEIVED )
+            {
+                pxTCB->ucNotifyState[ uxIndexToClear ] = taskNOT_WAITING_NOTIFICATION;
+                xReturn = pdPASS;
+            }
+            else
+            {
+                xReturn = pdFAIL;
+            }
+        }
+        taskEXIT_CRITICAL();
+
+        return xReturn;
+    }
+#undef prvGetTCBFromHandle
+
+/* Task suspension from the same pinned kernel tasks.c. */
+#define prvGetTCBFromHandle(handle) ((handle)==NULL ? pxCurrentTCB : (TCB_t *)(handle))
+#define taskRESET_READY_PRIORITY(uxPriority)
+void vTaskSuspend( TaskHandle_t xTaskToSuspend )
+    {
+        TCB_t * pxTCB;
+
+        taskENTER_CRITICAL();
+        {
+            /* If null is passed in here then it is the running task that is
+             * being suspended. */
+            pxTCB = prvGetTCBFromHandle( xTaskToSuspend );
+
+            traceTASK_SUSPEND( pxTCB );
+
+            /* Remove task from the ready/delayed list and place in the
+             * suspended list. */
+            if( uxListRemove( &( pxTCB->xStateListItem ) ) == ( UBaseType_t ) 0 )
+            {
+                taskRESET_READY_PRIORITY( pxTCB->uxPriority );
+            }
+            else
+            {
+                mtCOVERAGE_TEST_MARKER();
+            }
+
+            /* Is the task waiting on an event also? */
+            if( listLIST_ITEM_CONTAINER( &( pxTCB->xEventListItem ) ) != NULL )
+            {
+                ( void ) uxListRemove( &( pxTCB->xEventListItem ) );
+            }
+            else
+            {
+                mtCOVERAGE_TEST_MARKER();
+            }
+
+            vListInsertEnd( &xSuspendedTaskList, &( pxTCB->xStateListItem ) );
+
+            #if ( configUSE_TASK_NOTIFICATIONS == 1 )
+            {
+                BaseType_t x;
+
+                for( x = 0; x < configTASK_NOTIFICATION_ARRAY_ENTRIES; x++ )
+                {
+                    if( pxTCB->ucNotifyState[ x ] == taskWAITING_NOTIFICATION )
+                    {
+                        /* The task was blocked to wait for a notification, but is
+                         * now suspended, so no notification was received. */
+                        pxTCB->ucNotifyState[ x ] = taskNOT_WAITING_NOTIFICATION;
+                    }
+                }
+            }
+            #endif /* if ( configUSE_TASK_NOTIFICATIONS == 1 ) */
+        }
+        taskEXIT_CRITICAL();
+
+        if( xSchedulerRunning != pdFALSE )
+        {
+            /* Reset the next expected unblock time in case it referred to the
+             * task that is now in the Suspended state. */
+            taskENTER_CRITICAL();
+            {
+                prvResetNextTaskUnblockTime();
+            }
+            taskEXIT_CRITICAL();
+        }
+        else
+        {
+            mtCOVERAGE_TEST_MARKER();
+        }
+
+        if( pxTCB == pxCurrentTCB )
+        {
+            if( xSchedulerRunning != pdFALSE )
+            {
+                /* The current task has just been suspended. */
+                configASSERT( uxSchedulerSuspended == 0 );
+                portYIELD_WITHIN_API();
+            }
+            else
+            {
+                /* The scheduler is not running, but the task that was pointed
+                 * to by pxCurrentTCB has just been suspended and pxCurrentTCB
+                 * must be adjusted to point to a different task. */
+                if( listCURRENT_LIST_LENGTH( &xSuspendedTaskList ) == uxCurrentNumberOfTasks ) /*lint !e931 Right has no side effect, just volatile. */
+                {
+                    /* No other tasks are ready, so set pxCurrentTCB back to
+                     * NULL so when the next task is created pxCurrentTCB will
+                     * be set to point to it no matter what its relative priority
+                     * is. */
+                    pxCurrentTCB = NULL;
+                }
+                else
+                {
+                    vTaskSwitchContext();
+                }
+            }
+        }
+        else
+        {
+            mtCOVERAGE_TEST_MARKER();
+        }
+    }
+#undef taskRESET_READY_PRIORITY
+#undef prvGetTCBFromHandle

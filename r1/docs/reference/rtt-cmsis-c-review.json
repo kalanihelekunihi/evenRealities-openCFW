@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "report": "build/sources-goal-r1-rtt-cmsis-c/report.json",
+  "report_sha256": "080c13f2d8604742088015113363fc5c9ecf5c22193371d3dd0d43b00dd4af0f",
+  "manifest_sha256": "6f2bf125a3403bfd1f319afaaef021996d3de2fd86f5fdc9378ec87a61aaed66",
+  "verification": {
+    "cases": {
+      "modeled_mask_and_status": 3072,
+      "actual_initialized_ring": 14652,
+      "actual_cold_init_and_ring": 32
+    },
+    "stock_previous_c_match": true,
+    "actual_init_ring_memcpy_memset_executed": true,
+    "basepri_save_mask_restore_and_primask_preserved": true,
+    "privileged_thread_emulation_only": true,
+    "blocking_only_with_sufficient_initial_space": true,
+    "caller_clobbered_registers_private_frames_excluded": true,
+    "physical_debugger_interrupt_delivery_unverified": true
+  },
+  "defects": {
+    "detected": [
+      "wrong-mask",
+      "missing-restore",
+      "late-save",
+      "missing-init",
+      "wrong-status"
+    ]
+  },
+  "audit": {
+    "unchanged_prior_object_hashes": 782,
+    "changed_objects": [
+      [
+        "r1-application",
+        "r1/src/application/runtime/native_rtt_write.c"
+      ],
+      [
+        "r1-bootloader",
+        "{gen}/r1_startup_vectors.S"
+      ],
+      [
+        "r1-bootloader",
+        "{gen}/r1_uecc.c"
+      ]
+    ],
+    "rtt_init_ring_and_memory_objects_unchanged": true,
+    "generated_boot_allocated_bytes_and_relocations_unchanged": true,
+    "imports_unchanged": true
+  },
+  "rea": {
+    "evidence_id": "ev_b0410bdb9a3bc1a16118223db91a2c6f65040d7baf06a1558469fb3f09ceec4e",
+    "address": "0x319e0",
+    "length": 56,
+    "sha256": "4d568c97548ee2bdcaa2c9a649c1a2267110b020103f6bd76afe08531afcdda9",
+    "matches_locked_application": true
+  },
+  "bootloader_link_report": "build/goal-r1-rtt-cmsis-c/boot-link/report.json",
+  "bootloader_link_report_sha256": "44f15c00862dacc54ee380256890565b564f1691eee1d94f2ff36b1086d04e5d",
+  "evidence_files": {
+    "build/goal-r1-rtt-cmsis-c/verify.py": "beb79132554e3c2d5403da847967089523cef3b34da4999a9be0e41a3b546904",
+    "build/goal-r1-rtt-cmsis-c/audit.py": "46594506877d4d88815196bacfe0e392c94604ad197d376abc03af1134cc078a",
+    "build/goal-r1-rtt-cmsis-c/defects.py": "c52500d711a8229c81688aefb7805f3a32f9f586ea4c9925fff04cb46128ccb8",
+    "build/goal-r1-rtt-cmsis-c/verification.json": "fd31166de1d6f2b1dfe71d7146fcc2165f69e479e198acb09585703e06d4b9c3",
+    "build/goal-r1-rtt-cmsis-c/defects.json": "c27c5263a231c00ce9e3785764029c383f19811d32310944e1535845a544ba4f",
+    "build/goal-r1-rtt-cmsis-c/rea.json": "6048c7736089eca6ca15ae66e680e0ab92d9aac1e5ff6927b669862bb19bc717",
+    "build/goal-r1-rtt-cmsis-c/verify-final.log": "b0b4324f863a8eb9495dc8353017d9d020a111004b2bd6d5ad66e760edc2e589"
+  },
+  "limitations": [
+    "3072 modeled provider cases and 14684 actual init/ring/memory cases; privileged thread emulation only; physical IRQ/debugger behavior unverified.",
+    "Caller-clobbered registers and private stack addresses/content excluded.",
+    "Caller-clobbered register outputs and private frames excluded; CMSIS still emits architectural MRS/MSR instructions.",
+    "Full application remains unlinked."
+  ],
+  "raw_application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a"
+}

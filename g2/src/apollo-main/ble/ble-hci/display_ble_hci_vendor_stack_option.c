@@ -64,8 +64,6 @@ uint64_t audio_ble_radio_stack_option_body(void *record,uint32_t option,
     return ((uint64_t)saved_high<<32)|
         (uint32_t)audio_ble_vendor_irq_enable_4c4530(4u,(index+3u)&0xffu);
 }
-__attribute__((naked)) uint64_t audio_ble_radio_stack_option_55c7e8(void *record,
+uint64_t audio_ble_radio_stack_option_55c7e8(void *record,
                                                                         uint32_t option,
-                                                                        uint32_t enabled) {
-    __asm volatile("b audio_ble_radio_stack_option_body");
-}
+                                                                        uint32_t enabled) __attribute__((alias("audio_ble_radio_stack_option_body")));

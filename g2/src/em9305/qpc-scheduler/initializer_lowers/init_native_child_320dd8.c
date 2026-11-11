@@ -1,38 +1,16 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_320dd8\n"
-".type opencfw_em9305_child_320dd8,@function\n"
-"opencfw_em9305_child_320dd8:\n"
-"L320dd8:\n"
-"enter_s [r13-r14,fp,blink]\n"
-"L320dda:\n"
-"sub_s sp,sp,0x8\n"
-"L320ddc:\n"
-"mov_s r14,r0\n"
-"L320dde:\n"
-"add_s r0,sp,0\n"
-"L320de0:\n"
-"bl.d opencfw_em9305_dispatch_child_32db0c\n"
-"L320de4:\n"
-"mov_s r13,r1\n"
-"L320de6:\n"
-"ldb_s r1,[sp,0]\n"
-"L320de8:\n"
-"breq.d.nt r1,0x7,L320df4\n"
-"L320dec:\n"
-"mov_s r0,0\n"
-"L320dee:\n"
-"brne.d.nt r1,0x9,L320df6\n"
-"L320df2:\n"
-"mov_s r1,r13\n"
-"L320df4:\n"
-"leave_s [r13-r14,fp,blink,pcl]\n"
-"L320df6:\n"
-"bl.d opencfw_em9305_child_320978\n"
-"L320dfa:\n"
-"mov_s r0,r14\n"
-"L320dfc:\n"
-"leave_s [r13-r14,fp,blink,pcl]\n"
-".size opencfw_em9305_child_320dd8,.-opencfw_em9305_child_320dd8\n"
-);
+#include <stdint.h>
+
+/* Native 0x320dd8..0x320dfe: decode the incoming command into an 8-byte
+ * result and, unless its status byte is 7 or 9, pass record and command
+ * on to 320978. */
+extern uint32_t opencfw_em9305_dispatch_child_32db0c(uintptr_t result, uintptr_t command);
+extern uint32_t opencfw_em9305_child_320978(uintptr_t record, uintptr_t command);
+
+uint32_t opencfw_em9305_child_320dd8(uintptr_t record, uintptr_t command)
+{
+    uint8_t result[8];
+    (void)opencfw_em9305_dispatch_child_32db0c((uintptr_t)result,command);
+    uint32_t status=result[0];
+    if(status==7u||status==9u)return 0u;
+    return opencfw_em9305_child_320978(record,command);
+}

@@ -1,0 +1,194 @@
+{
+  "cases": 83200,
+  "passed": 83200,
+  "failures": [],
+  "actual_register_read_frontend_executes": true,
+  "callback_depths": [
+    [
+      [
+        -16,
+        -16,
+        -16,
+        -16,
+        -16
+      ],
+      [
+        -32,
+        -32,
+        -32,
+        -32,
+        -16
+      ]
+    ],
+    [
+      [
+        -16,
+        -16,
+        -16,
+        -16,
+        -16,
+        -16
+      ],
+      [
+        -32,
+        -32,
+        -32,
+        -32,
+        -32,
+        -16
+      ]
+    ],
+    [
+      [
+        -16,
+        -16,
+        -16,
+        -16,
+        -16,
+        -16,
+        -16
+      ],
+      [
+        -32,
+        -32,
+        -32,
+        -32,
+        -32,
+        -32,
+        -16
+      ]
+    ]
+  ],
+  "old_store_width_regression": {
+    "same_r0_r2_r3_and_io": true,
+    "native_writes": [
+      [
+        0,
+        4,
+        2864434397
+      ],
+      [
+        4,
+        4,
+        287454020
+      ],
+      [
+        4,
+        1,
+        0
+      ],
+      [
+        0,
+        1,
+        130
+      ]
+    ],
+    "old_writes": [
+      [
+        4,
+        4,
+        287453952
+      ],
+      [
+        0,
+        4,
+        2864434397
+      ],
+      [
+        0,
+        4,
+        2864434306
+      ]
+    ]
+  },
+  "source_bridge_size": 10,
+  "source_body_size": 108,
+  "other_sections_unchanged": [
+    ".r1.yhm_track.ring",
+    ".r1.yhm_track.sdk",
+    ".text.r1_native_charger_initialize"
+  ],
+  "other_source_units_unchanged": 561,
+  "imports_unchanged": true,
+  "application_imports": 211,
+  "bootloader_imports": 34,
+  "integrated_sources": [
+    "r1/src/application/board/native_yhm_system_track.c",
+    "r1/src/application/board/native_yhm_frontend.c"
+  ],
+  "report": "build/sources-goal-r1-yhm-track/report.json",
+  "report_sha256": "d270a7fdb7b22137dbd301ac7f108ae1d9ecd2525370332a5877b0d563ae9730",
+  "manifest_sha256": "9c5b7ae5c0e7493eb22e1fb4df9f0c928c2a9aa70530254aff89b55213bef2e2",
+  "existing_wrapper_selection": {
+    "symbol": "r1_native_charger_initialize",
+    "address": "0x5079c",
+    "bindings": {
+      "r1_yhm_system_track_native": 218557
+    },
+    "size": 4,
+    "bytes": "e4f70ebf",
+    "sha256": "b1322d2a50626c62b1d53606d9839bbd54b123ab62b7fe729766d35540450a2c",
+    "existing_selection_preserved": true,
+    "source_plan_sha256": "71a911169e6c49ab458a742847d91d0140eacf8f4ef8c821d221fe7f837c3536",
+    "argv": [
+      "clang",
+      "--target=arm-none-eabi",
+      "-mcpu=cortex-m4",
+      "-mthumb",
+      "-munaligned-access",
+      "-mfpu=fpv4-sp-d16",
+      "-mfloat-abi=hard",
+      "-std=c11",
+      "-Os",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-fshort-enums",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-fno-delete-null-pointer-checks",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/r1/src/vendor",
+      "-isystem",
+      "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
+      "-c",
+      "r1/src/application/board/native_yhm_system_track.c",
+      "-o",
+      "build/goal-r1-yhm-track/production-wrapper.o"
+    ],
+    "object_sha256": "761373f7815d9e8f151db3d4df4048438b168fb0836ed588884f36675df16dd7",
+    "elf_sha256": "e91332782ed3e1849e6d9f9e09aca573cbdeeb925d712df3c1b9869bd24cc069"
+  },
+  "stock_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "rea": {
+    "path": "build/goal-r1-yhm-track/REA.json",
+    "sha256": "9c52bed931c6806cb53d018b66ab82b2c33dbaa7d9fb3c631fc48302be7b5481",
+    "procedure": "0x355bc"
+  },
+  "source_sha256": {
+    "r1/src/application/board/native_yhm_system_track.c": "810bcfb444ad226b8e5bf0daf85e798d69ee91d0cfb80edc3e46287a0d970409",
+    "r1/src/application/board/native_yhm_frontend.c": "1a185bd812b5dd53e1a486af2fc8f5a60d006b5b9fd0a19fd85ae68885756d39"
+  },
+  "probe_artifacts": {
+    "build/goal-r1-yhm-track/before.c": "57baff9e9da27f51cca40f5d4ff92033e27bd724f3d3f49b820d65e7370c55c4",
+    "build/goal-r1-yhm-track/stock.s": "105f8d7c7dd8bcc9e3772deaf770fbebb4d4a1b0f4cc9f877d11df6d7e09a165",
+    "build/goal-r1-yhm-track/stock.elf": "3295c8f5afd13a27b6e95d8b4f629ab0910b194f7020beff2262b02d835e69e0",
+    "build/goal-r1-yhm-track/REA.json": "9c52bed931c6806cb53d018b66ab82b2c33dbaa7d9fb3c631fc48302be7b5481",
+    "build/goal-r1-yhm-track/rea-snapshot.json": "182e886d25c0153d696d615f984feb6b85a55a094e0d78872b7aa6019d137c29",
+    "build/goal-r1-yhm-track/verify.py": "6f35581bab04e87ec1e742bae5397dacec8e37996b54de38ccd4068af97533eb",
+    "build/goal-r1-yhm-track/results.json": "49ba2310563daa98370a02375f8e740642c9e37afbbb5787c8b1a2d154fb7d02",
+    "build/goal-r1-yhm-track/source.elf": "e44474c4e3030dfec00ec697244b2a365c7a1a156cd6f1dbd0f858adee0425bd",
+    "build/goal-r1-yhm-track/old.elf": "c52539690964fa62716e213d00af615e5ad64d3b92b3fe7017df62b3ea55217d",
+    "build/goal-r1-yhm-track/qualified_wrapper.py": "174b4e0c30e923646c22eba2e9d020a7b8274605ca4d3c3bf4522b1ce0eb6682",
+    "build/goal-r1-yhm-track/qualified-wrapper.json": "62d980b18fca5b6926b16b1b877af5befc87cfdd710b519056682d8029a459f6",
+    "build/goal-r1-yhm-track/production-wrapper.o": "761373f7815d9e8f151db3d4df4048438b168fb0836ed588884f36675df16dd7",
+    "build/goal-r1-yhm-track/production-wrapper.elf": "e91332782ed3e1849e6d9f9e09aca573cbdeeb925d712df3c1b9869bd24cc069"
+  },
+  "limits": [
+    "System-track C body is 108 bytes plus ten-byte bridge versus 106 native instruction bytes. Its body is not qualified or byte-identical. The preexisting four-byte initialize wrapper selection alone remains exact under its existing production arguments and binding.",
+    "Actual register-read frontend executes. Lower read transport, register-write boundary, mode and logging are modeled callbacks; actual GPIO, wire timing and YHM2710 hardware are unproven.",
+    "Native saved words remain at caller SP-16 and SP-12. Read/log callbacks run at SP-16 native and SP-32 C; final write boundary is SP-16 in both. Private C frames, arbitrary faults, exceptions, concurrency and timing identity are unproven.",
+    "Manifest eligibility, import sets and source-plan selections are unchanged. Final firmware linking, boot integration, source completeness and whole-image byte identity remain open; no G2 gate change."
+  ]
+}

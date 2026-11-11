@@ -1,0 +1,337 @@
+{
+  "stock_entries": [
+    "0x56dc0",
+    "0x67c30",
+    "0x641c4"
+  ],
+  "production_units": [
+    {
+      "source": "r1/src/application/runtime/native_gomore_half_positions.c",
+      "payload": "r1-application",
+      "role": "candidate",
+      "toolchain": "gcc9",
+      "link": true,
+      "expect": "compile",
+      "returncode": 0,
+      "argv": [
+        "/opt/homebrew/bin/python3",
+        "/Users/kalani/Repo/evenRealities-openCFW/tools/build/linux_gcc.py",
+        "--compiler",
+        "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/bin/arm-none-eabi-gcc",
+        "--read-root",
+        "/Users/kalani/Repo/evenRealities-openCFW/r1",
+        "--read-root",
+        "/Users/kalani/Repo/evenRealities-openCFW/third-party/upstream",
+        "--read-root",
+        "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1",
+        "--read-root",
+        "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-control-extract-frame-c/generated/r1",
+        "--",
+        "-mcpu=cortex-m4",
+        "-mthumb",
+        "-munaligned-access",
+        "-mfpu=fpv4-sp-d16",
+        "-mfloat-abi=hard",
+        "-std=c11",
+        "-Os",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-fshort-enums",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-fno-delete-null-pointer-checks",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/r1/src/vendor",
+        "-isystem",
+        "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
+        "-fno-strict-aliasing",
+        "-ffp-contract=off",
+        "-fsignaling-nans",
+        "-frounding-math",
+        "-ftrapping-math",
+        "-fno-if-conversion",
+        "-fno-if-conversion2",
+        "-MD",
+        "-MF",
+        "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-control-extract-frame-c/r1/r1-application/r1__src__application__runtime__native_gomore_half_positions.c.d",
+        "-c",
+        "/Users/kalani/Repo/evenRealities-openCFW/r1/src/application/runtime/native_gomore_half_positions.c",
+        "-o",
+        "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-control-extract-frame-c/r1/r1-application/r1__src__application__runtime__native_gomore_half_positions.c.o"
+      ],
+      "source_sha256": "2aff392643a0aeb73c9f3847e3125fb2dbc61326416e50d69a6081fbcbac29d6",
+      "object_sha256": "9a85e4aa0c22211bff42b3c99eea6de72d11e0b0371e7e9b3d9db14c8dd0e53d",
+      "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-control-extract-frame-c/r1/r1-application/r1__src__application__runtime__native_gomore_half_positions.c.o",
+      "strong": [
+        "r1_gomore_expand_half_positions_native",
+        "r1_gomore_fill_float_progression_native"
+      ],
+      "weak": [],
+      "undefined": [
+        "r1_binary32_to_binary64_bits",
+        "r1_binary64_to_signed32_bits",
+        "r1_native_round"
+      ]
+    },
+    {
+      "source": "r1/src/application/runtime/native_gomore_control_extract.c",
+      "payload": "r1-application",
+      "role": "candidate",
+      "toolchain": "gcc9",
+      "link": true,
+      "expect": "compile",
+      "returncode": 0,
+      "argv": [
+        "/opt/homebrew/bin/python3",
+        "/Users/kalani/Repo/evenRealities-openCFW/tools/build/linux_gcc.py",
+        "--compiler",
+        "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/bin/arm-none-eabi-gcc",
+        "--read-root",
+        "/Users/kalani/Repo/evenRealities-openCFW/r1",
+        "--read-root",
+        "/Users/kalani/Repo/evenRealities-openCFW/third-party/upstream",
+        "--read-root",
+        "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1",
+        "--read-root",
+        "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-control-extract-frame-c/generated/r1",
+        "--",
+        "-mcpu=cortex-m4",
+        "-mthumb",
+        "-munaligned-access",
+        "-mfpu=fpv4-sp-d16",
+        "-mfloat-abi=hard",
+        "-std=c11",
+        "-Os",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-fshort-enums",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-fno-delete-null-pointer-checks",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/r1/src/vendor",
+        "-isystem",
+        "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
+        "-fno-strict-aliasing",
+        "-ffp-contract=off",
+        "-fsignaling-nans",
+        "-frounding-math",
+        "-ftrapping-math",
+        "-fno-if-conversion",
+        "-fno-if-conversion2",
+        "-MD",
+        "-MF",
+        "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-control-extract-frame-c/r1/r1-application/r1__src__application__runtime__native_gomore_control_extract.c.d",
+        "-c",
+        "/Users/kalani/Repo/evenRealities-openCFW/r1/src/application/runtime/native_gomore_control_extract.c",
+        "-o",
+        "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-control-extract-frame-c/r1/r1-application/r1__src__application__runtime__native_gomore_control_extract.c.o"
+      ],
+      "source_sha256": "c376ccc8747abf1d42d71a7615194a20f66ed23a0ad81b8f655917c5cf482cd1",
+      "object_sha256": "3e32dfb272faa63e4238c9dd1ede7276f71994b302d9f5f0c55197d7542830bc",
+      "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-control-extract-frame-c/r1/r1-application/r1__src__application__runtime__native_gomore_control_extract.c.o",
+      "strong": [
+        "r1_gomore_locomotion_control_extract_native"
+      ],
+      "weak": [],
+      "undefined": [
+        "__aeabi_memclr",
+        "r1_binary32_to_binary64_bits",
+        "r1_format_double_multiply_bits",
+        "r1_gomore_expand_half_positions_native",
+        "r1_gomore_locomotion_feature_reduce_native",
+        "r1_signed32_to_binary64_bits"
+      ]
+    }
+  ],
+  "direct_half_positions": {
+    "fill_pairs": 1500,
+    "expand_pairs": 1805,
+    "fault_pairs": 3,
+    "round_call_stack_depths": {
+      "stock": [
+        48
+      ],
+      "C": [
+        56
+      ]
+    },
+    "object_sha256": "9a85e4aa0c22211bff42b3c99eea6de72d11e0b0371e7e9b3d9db14c8dd0e53d",
+    "source_sha256": "2aff392643a0aeb73c9f3847e3125fb2dbc61326416e50d69a6081fbcbac29d6"
+  },
+  "direct_control": {
+    "pairs": 420,
+    "successes": 230,
+    "fault_pairs": 4,
+    "incoming_argument_aliases": 4,
+    "provider_counts": {
+      "stock": {
+        "expand": 233,
+        "reduce": 223
+      },
+      "C": {
+        "expand": 233,
+        "reduce": 223
+      }
+    },
+    "provider_stack_depths": {
+      "stock": [
+        [
+          "expand",
+          176
+        ],
+        [
+          "reduce",
+          176
+        ]
+      ],
+      "C": [
+        [
+          "expand",
+          176
+        ],
+        [
+          "reduce",
+          176
+        ]
+      ]
+    }
+  },
+  "modeled_control": {
+    "pairs": 420,
+    "successes": 230,
+    "fault_pairs": 4,
+    "incoming_argument_aliases": 4,
+    "provider_counts": {
+      "stock": {
+        "expand": 233,
+        "reduce": 223
+      },
+      "C": {
+        "expand": 233,
+        "reduce": 223
+      }
+    },
+    "provider_stack_depths": {
+      "stock": [
+        [
+          "expand",
+          176
+        ],
+        [
+          "reduce",
+          176
+        ]
+      ],
+      "C": [
+        [
+          "expand",
+          176
+        ],
+        [
+          "reduce",
+          176
+        ]
+      ]
+    }
+  },
+  "defect_controls": [
+    {
+      "control": "wrong-half",
+      "rejected": true
+    },
+    {
+      "control": "zero-span-accepted",
+      "rejected": true
+    },
+    {
+      "control": "reversed-slope",
+      "rejected": true
+    },
+    {
+      "control": "wrong-denominator",
+      "rejected": true
+    },
+    {
+      "control": "equal-capacity-rejected",
+      "rejected": true
+    },
+    {
+      "control": "wrong-tail",
+      "rejected": true
+    },
+    {
+      "control": "wrong-fill-index",
+      "rejected": true
+    },
+    {
+      "control": "wrong-lower",
+      "rejected": true
+    },
+    {
+      "control": "wrong-upper",
+      "rejected": true
+    },
+    {
+      "control": "wrong-mode",
+      "rejected": true
+    },
+    {
+      "control": "reversed-difference",
+      "rejected": true
+    },
+    {
+      "control": "wrong-required",
+      "rejected": true
+    },
+    {
+      "control": "wrong-output-order",
+      "rejected": true
+    }
+  ],
+  "qualification": {
+    "candidate_units": 2,
+    "selected_units": 0,
+    "selected_regions": 0
+  },
+  "prior_objects_unchanged_excluding_checked_api_owner": 699,
+  "added_imports": [
+    "r1_gomore_locomotion_feature_reduce_native"
+  ],
+  "stack_bytes": {
+    "control_native": 176,
+    "control_C": 176,
+    "expansion_native": 48,
+    "expansion_C": 56
+  },
+  "artifacts": {
+    "build/sources-goal-r1-gomore-control-extract-frame-c/report.json": "a6cd9d6cbc4184a546b6d7ba8e09e67d3adb8fe7bfafe06c3c4ebd4233adb7cb",
+    "r1/src/sources.json": "894f979b7a38609773a5e53e334a5c8bd1bd400983cb93aa1322baac3a80a295",
+    "r1/symbols/function-frontier.csv": "9b9d46b84975e1f98676f2ab8bac8d1beb1056a54b572ac8f2c0bc7183fa8222",
+    "tools/build/source-plan.json": "43281e3850f6c7b83c5616e5968c4939993501810057ca3deaeea85eaae351ba",
+    "r1/src/application/runtime/native_gomore_half_positions.c": "2aff392643a0aeb73c9f3847e3125fb2dbc61326416e50d69a6081fbcbac29d6",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-control-extract-frame-c/r1/r1-application/r1__src__application__runtime__native_gomore_half_positions.c.o": "9a85e4aa0c22211bff42b3c99eea6de72d11e0b0371e7e9b3d9db14c8dd0e53d",
+    "r1/src/application/runtime/native_gomore_control_extract.c": "c376ccc8747abf1d42d71a7615194a20f66ed23a0ad81b8f655917c5cf482cd1",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-control-extract-frame-c/r1/r1-application/r1__src__application__runtime__native_gomore_control_extract.c.o": "3e32dfb272faa63e4238c9dd1ede7276f71994b302d9f5f0c55197d7542830bc",
+    "build/goal-r1-gomore-half-positions-c/expand-instructions.json": "b74296f0941a35989209d05324b8f325993943dca857a054635ef92472c241f8",
+    "build/goal-r1-gomore-half-positions-c/fill-instructions.json": "aaa29483b0a927487ed550b23e61600345e70a70acd98da3a3fd7163f7624eff",
+    "build/goal-r1-gomore-half-positions-c/control-rea.json": "168fee52e05cc349ee220dc28343f65340c4e48a98af9adf5fca3cb4cf1d318c",
+    "build/goal-r1-gomore-half-positions-c/control-instructions.json": "c3781b697ce50d4189b82d73483039318beea7c3872823dddf8e0b6331f61e05",
+    "build/goal-r1-gomore-half-positions-c/verify.py": "c385d9030052d44eba79bd33696c3c77d32bf37fe72b7be8cfe12737ca24d2c2",
+    "build/goal-r1-gomore-half-positions-c/results.json": "913d6fd2baeb6ab817ef52b3759a2a74fabe69b751c85fcf4cb557f5a3ada6f6",
+    "build/goal-r1-gomore-half-positions-c/control.py": "773f95bf5426d86e253d484bbb47ce3412395b97a79eecbb2514de0145dfe7d9",
+    "build/goal-r1-gomore-half-positions-c/control-results.json": "43d08b7b169bef52daeb73f2b40a346eca89ebfde384a12e52b3ae7692511580",
+    "build/goal-r1-gomore-half-positions-c/control-modeled-results.json": "43d08b7b169bef52daeb73f2b40a346eca89ebfde384a12e52b3ae7692511580",
+    "build/goal-r1-gomore-half-positions-c/negative.py": "f0de3b708d2c980090eccdc36141d7e305ae33575b543f85bf865bc3528bf585",
+    "build/goal-r1-gomore-half-positions-c/negative.json": "f27180fe3d9f03da75f6108ad8f8155121803a28997c2d8af26aafdd42d37ecc",
+    "build/goal-r1-gomore-half-positions-c/integration.py": "cc046278356057a8c941ce312492282aa7b81b69830183e6eab00e6a7d3972d0",
+    "build/goal-r1-gomore-half-positions-c/integration-results.json": "3b4e5106fc67b12dd2c887b759862485f32625881a3373e815391dec8883ed05",
+    "build/goal-r1-gomore-half-positions-c/qualify.py": "9f8b19b69b33c6cdb47695e7e5d0d664c1264f9215108e26429d1dfc46ebd4b0",
+    "build/goal-r1-gomore-half-positions-c/qualified-frame/qualification.json": "6c343c874880d83a6c9232b6746ca1819154b012ebf4ba5aaacae535db96e91a",
+    "build/goal-r1-gomore-half-positions-c/qualified-frame/source-plan.json": "3da40e3d766877c0b3059bee372f651c1f56681157782eba12ee3076f1834a0f"
+  }
+}

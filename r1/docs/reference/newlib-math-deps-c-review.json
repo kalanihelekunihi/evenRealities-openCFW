@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "report": "build/sources-goal-r1-newlib-math-deps-c/report.json",
+  "report_sha256": "926e77f164a74469dec1e8145feb4278fa8a08ddf1cc2d28348c23106c85bced",
+  "manifest_sha256": "dcea2eec9249df14da279055d4b3dcd461c35f4d455eb922ee80866c52c34e46",
+  "verification": {
+    "input_patterns": 21504,
+    "calls": 43016,
+    "independent_integer_oracle": true,
+    "every_binary64_exponent_and_sign_selected_mantissas": true,
+    "normal_C_caller_cases": 8,
+    "no_stock_code_or_modeled_providers": true,
+    "default_fp_environment_only": true,
+    "physical_or_full_vfprintf_validation": false
+  },
+  "defects": {
+    "detected": [
+      "normal-as-zero",
+      "subnormal-as-normal",
+      "wrong-initial-exponent",
+      "wrong-subnormal-exponent"
+    ]
+  },
+  "audit": {
+    "unchanged_prior_object_hashes": 784,
+    "changed_object_hashes": [
+      [
+        "r1-bootloader",
+        "{gen}/r1_startup_vectors.S"
+      ],
+      [
+        "r1-bootloader",
+        "{gen}/r1_uecc.c"
+      ]
+    ],
+    "generated_boot_crypto_and_vectors_allocated_bytes_and_relocations_unchanged": true,
+    "removed_application_imports": [
+      "__fpclassifyd",
+      "frexp"
+    ]
+  },
+  "upstream": {
+    "commit": "6d79e0a58866548f435527798fbd4a6849d05bc7",
+    "provenance": "third-party/upstream/newlib-stdio-3.3.0/provenance.json",
+    "provenance_sha256": "664d76fd2d9553d1d8996a3ee8ee9612cfa28fce57e9a57a1b86fbd27325596c",
+    "selected_sources": [
+      {
+        "source": "third-party/upstream/newlib-stdio-3.3.0/newlib/libm/common/s_fpclassify.c",
+        "source_sha256": "96302e5bae17556aad7083fd79125cee52aae23a94e8f172ea799a95c7cb9ac4",
+        "object_sha256": "7ca9e19711a5d075f556935b0f9240ce371a17382f780795de8ad712e23c86f1"
+      },
+      {
+        "source": "third-party/upstream/newlib-stdio-3.3.0/newlib/libm/math/s_frexp.c",
+        "source_sha256": "ee515123298d758b6ff532f335f06bf75eb96c330e7867f31b2345babaeb2c80",
+        "object_sha256": "a6315bac1b8c7ac065e1746d2c884af87c452aeea2310981f1d3b371c12e3778"
+      }
+    ],
+    "matches_verified_archive_bytes": true
+  },
+  "strict_bootloader_link_report": "build/goal-r1-newlib-math-deps-c/boot-link/report.json",
+  "strict_bootloader_link_report_sha256": "fef0fe27398cb3279394a2cdd1b6c79f23d12aec2c706fa3da486d2fe6cac0e6",
+  "evidence_files": {
+    "build/goal-r1-newlib-math-deps-c/verify.py": "4c4a16953d6b9b0694c834d4fbc4ea4a4cd293a5c431ccc7e75b1c27d15867db",
+    "build/goal-r1-newlib-math-deps-c/defects.py": "1f3c762587fd36d7f73fa9ee5d50a905af2375621d94974c5cbfecb042ac325c",
+    "build/goal-r1-newlib-math-deps-c/audit.py": "c6c4885797563a8c31da086cf1476bc73fe07740907afae71c0900642f887f28",
+    "build/goal-r1-newlib-math-deps-c/caller.c": "79eb33b783fe34359e14ddd0f9b5aaad24bb116d3b2b36b67bca40f62c379132",
+    "build/goal-r1-newlib-math-deps-c/probe.elf": "d280202d7dbc5320a1a4b0995c6a9a30547565e9e29ac4bddfc859bb972e2ef4",
+    "build/goal-r1-newlib-math-deps-c/verify-final.log": "9dc27855becfe82007046b572e198e7ca4eebba6669b11965359425977ec7680",
+    "build/goal-r1-newlib-math-deps-c/verification.json": "3af7bf095391ca29f85d94aeeff023a8d3b99dd57daf79f308aeb8df1fe7462e",
+    "build/goal-r1-newlib-math-deps-c/defects.json": "c001d51e5e5f463b8977e3751602877fccbd3f8a9495cb5aef8b4f158cdbb598"
+  },
+  "limitations": [
+    "Default FP environment; exception flags and arbitrary rounding modes unclaimed.",
+    "Math/API closure only; no full vfprintf, application link or physical hardware validation.",
+    "Bosch typed-callback experiment discarded; original source/object restored.",
+    "Global source check retains unrelated G2 manifest failure."
+  ]
+}

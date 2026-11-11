@@ -11,6 +11,7 @@ extern void gx8002_image_b_main_10015cfc(void);
 extern void gx8002_image_b_default_exception_10003240(void);
 extern void gx8002_image_b_generic_irq_10004880(void);
 
+/* Must stay assembly: reset entry that sets PSR and the stack pointer. */
 __attribute__((naked, used, section(".text.image_b_reset")))
 void gx8002_image_b_reset_10003100(void)
 {

@@ -1,0 +1,123 @@
+{
+  "schema_version": 1,
+  "stock_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "entries": {
+    "0x3faa4": "r1_heart_rate_offline_queue_consume",
+    "0x43ca0": "r1_spo2_offline_queue_consume",
+    "0x40984": "r1_hrv_offline_queue_consume",
+    "0x3bdd8": "r1_activity_offline_queue_consume",
+    "0x3fb90": "r1_heart_rate_offline_queue_empty",
+    "0x43d90": "r1_spo2_offline_queue_empty",
+    "0x40a74": "r1_hrv_offline_queue_empty",
+    "0x3bed0": "r1_activity_offline_queue_empty",
+    "0x3fa84": "r1_hr_sync_builder_reset",
+    "0x43c80": "r1_spo2_sync_builder_reset",
+    "0x40964": "r1_hrv_sync_builder_reset",
+    "0x3bdac": "r1_activity_day_builder_reset"
+  },
+  "unit": {
+    "source": "r1/src/application/runtime/native_health_offline_consume.c",
+    "source_sha256": "67af32dde4bc84727525387850bb323b4e18a8a0a97635243480063246c539a0",
+    "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-offline-consume-c/r1/r1-application/r1__src__application__runtime__native_health_offline_consume.c.o",
+    "object_sha256": "545a760a6e627a2cfa252f906d5bbb969f4ccf448810650eedee495ab5ccf052"
+  },
+  "report": "build/sources-goal-r1-offline-consume-c/report.json",
+  "report_sha256": "0690be3ced5711d187454d5048060f2d99c303621b234f9f7a6105adf5b37902",
+  "behavior": {
+    "pairs": 2576,
+    "digest": "0665d7f553d259b661962e9626d45b4a9ba8ceaa83d59edbbd4b105a965f1ef2",
+    "actual_C": [
+      "four consume paths",
+      "four empty checks",
+      "four builder resets",
+      "source-owned queues and existing enqueue functions in mixed sequences"
+    ],
+    "modeled_boundaries": [
+      "clock and logging only"
+    ],
+    "limits": [
+      "Valid mapped buffers and read/write indices; byte counts through255 tested",
+      "Other queue merge/drain consumers, asynchronous IRQ, physical storage and complete firmware remain unfinished"
+    ]
+  },
+  "native_flush_callers": {
+    "pairs": 144,
+    "C_builder_calls": 144,
+    "digest": "efeac65a0216a64205652a7ff419e617e5dfd3009ed967286e20f91020f5081a",
+    "actual_stock_callers": [
+      "0x4011c",
+      "0x442f4",
+      "0x4101c",
+      "0x3c578"
+    ],
+    "modeled_boundaries": [
+      "clock and logging only"
+    ],
+    "limits": [
+      "Raw native flush callers take future-record rejection branch and tail-call actual C reset",
+      "Flush packet-allocation/send/consume branches are not established by these cases"
+    ]
+  },
+  "negative_controls": {
+    "wrong-cutoff-equality": {
+      "rejected": true,
+      "diagnostic": "Traceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-offline-consume-c/verify.py\", line 80, in <module>\n    for head in [0,capacities[kind]-1]:pair(kind=kind,head=head,count=count,layout=layout,cutoff=cutoff,modes=modes)\n                                       ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-offline-consume-c/verify.py\", line 77, in pair\n    a=run(False,**kw);b=run(True,**kw);assert a==b,(kw,[k for k in a if a[k]!=b[k]],a['trace'],b['trace']);digest.update(json.dumps([kw,a]).encode());pairs+=1\n                                              ^^^^\nAssertionError: ({'kind': 0, 'head': 0, 'count': 1, 'layout': 0, 'cutoff': 100, 'modes': (0,)}, ['trace', 'cursors', 'records'], [('mode', [0]), ('mode', [0]), ('mode', [0])], [])\n"
+    },
+    "wrong-activity-capacity": {
+      "rejected": true,
+      "diagnostic": "Traceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-offline-consume-c/verify.py\", line 80, in <module>\n    for head in [0,capacities[kind]-1]:pair(kind=kind,head=head,count=count,layout=layout,cutoff=cutoff,modes=modes)\n                                       ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-offline-consume-c/verify.py\", line 77, in pair\n    a=run(False,**kw);b=run(True,**kw);assert a==b,(kw,[k for k in a if a[k]!=b[k]],a['trace'],b['trace']);digest.update(json.dumps([kw,a]).encode());pairs+=1\n                                              ^^^^\nAssertionError: ({'kind': 3, 'head': 0, 'count': 143, 'layout': 0, 'cutoff': 100, 'modes': (0,)}, ['cursors', 'records'], [('mode', [0]), ('mode', [0]), ('mode', [0])], [('mode', [0]), ('mode', [0]), ('mode', [0])])\n"
+    },
+    "lost-full-record-clear": {
+      "rejected": true,
+      "diagnostic": "Traceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-offline-consume-c/verify.py\", line 80, in <module>\n    for head in [0,capacities[kind]-1]:pair(kind=kind,head=head,count=count,layout=layout,cutoff=cutoff,modes=modes)\n                                       ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-offline-consume-c/verify.py\", line 77, in pair\n    a=run(False,**kw);b=run(True,**kw);assert a==b,(kw,[k for k in a if a[k]!=b[k]],a['trace'],b['trace']);digest.update(json.dumps([kw,a]).encode());pairs+=1\n                                              ^^^^\nAssertionError: ({'kind': 0, 'head': 0, 'count': 1, 'layout': 0, 'cutoff': 100, 'modes': (0,)}, ['records'], [('mode', [0]), ('mode', [0]), ('mode', [0])], [('mode', [0]), ('mode', [0]), ('mode', [0])])\n"
+    },
+    "changed-write-cursor": {
+      "rejected": true,
+      "diagnostic": "Traceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-offline-consume-c/verify.py\", line 80, in <module>\n    for head in [0,capacities[kind]-1]:pair(kind=kind,head=head,count=count,layout=layout,cutoff=cutoff,modes=modes)\n                                       ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-offline-consume-c/verify.py\", line 77, in pair\n    a=run(False,**kw);b=run(True,**kw);assert a==b,(kw,[k for k in a if a[k]!=b[k]],a['trace'],b['trace']);digest.update(json.dumps([kw,a]).encode());pairs+=1\n                                              ^^^^\nAssertionError: ({'kind': 0, 'head': 0, 'count': 23, 'layout': 2, 'cutoff': 99, 'modes': (0,)}, ['cursors'], [('mode', [0]), ('mode', [0]), ('mode', [0])], [('mode', [0]), ('mode', [0]), ('mode', [0])])\n"
+    },
+    "wrong-builder-metadata-offset": {
+      "rejected": true,
+      "diagnostic": "Traceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-offline-consume-c/verify.py\", line 82, in <module>\n    for kind,pattern,shift,null in itertools.product(range(4),range(3),range(4),[False,True]):pair(kind=kind,mode='builder',pattern=pattern,shift=shift,null=null)\n                                                                                              ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-offline-consume-c/verify.py\", line 77, in pair\n    a=run(False,**kw);b=run(True,**kw);assert a==b,(kw,[k for k in a if a[k]!=b[k]],a['trace'],b['trace']);digest.update(json.dumps([kw,a]).encode());pairs+=1\n                                              ^^^^\nAssertionError: ({'kind': 0, 'mode': 'builder', 'pattern': 1, 'shift': 0, 'null': False}, ['builder'], [], [])\n"
+    },
+    "lost-builder-flag": {
+      "rejected": true,
+      "diagnostic": "Traceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-offline-consume-c/verify.py\", line 82, in <module>\n    for kind,pattern,shift,null in itertools.product(range(4),range(3),range(4),[False,True]):pair(kind=kind,mode='builder',pattern=pattern,shift=shift,null=null)\n                                                                                              ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-offline-consume-c/verify.py\", line 77, in pair\n    a=run(False,**kw);b=run(True,**kw);assert a==b,(kw,[k for k in a if a[k]!=b[k]],a['trace'],b['trace']);digest.update(json.dumps([kw,a]).encode());pairs+=1\n                                              ^^^^\nAssertionError: ({'kind': 0, 'mode': 'builder', 'pattern': 1, 'shift': 0, 'null': False}, ['builder'], [], [])\n"
+    }
+  },
+  "audit": {
+    "unchanged_prior_objects": 738,
+    "changed_objects": [
+      "r1/src/application/runtime/native_health_notification_stages.c"
+    ],
+    "allocated_instruction_and_data_bytes_unchanged": true,
+    "only_named_relocation_changes": 12,
+    "renamed_relocations": {
+      "r1_health_sync_provider_0003fa84": "r1_hr_sync_builder_reset",
+      "r1_health_sync_provider_00040964": "r1_hrv_sync_builder_reset",
+      "r1_health_sync_provider_00043c80": "r1_spo2_sync_builder_reset",
+      "r1_health_sync_provider_0003bdac": "r1_activity_day_builder_reset",
+      "r1_health_sync_provider_0003fb90": "r1_heart_rate_offline_queue_empty",
+      "r1_health_sync_provider_00040a74": "r1_hrv_offline_queue_empty",
+      "r1_health_sync_provider_00043d90": "r1_spo2_offline_queue_empty",
+      "r1_health_sync_provider_0003bed0": "r1_activity_offline_queue_empty"
+    },
+    "new_units": 1,
+    "added_application_imports": [],
+    "removed_application_imports": [
+      "r1_health_sync_provider_0003bdac",
+      "r1_health_sync_provider_0003bed0",
+      "r1_health_sync_provider_0003fa84",
+      "r1_health_sync_provider_0003fb90",
+      "r1_health_sync_provider_00040964",
+      "r1_health_sync_provider_00040a74",
+      "r1_health_sync_provider_00043c80",
+      "r1_health_sync_provider_00043d90"
+    ],
+    "bootloader_imports_unchanged": true,
+    "new_queue_storage": false
+  },
+  "source_check": "python3 tools/build/sources.py check\ng2: 5030 units, 4727 source files, 0 not built\nr1: 740 units, 544 source files, 0 not built",
+  "rea": "health-offline-consume-c-rea.json",
+  "instruction_identity_proven": false,
+  "image_integration_proven": false
+}

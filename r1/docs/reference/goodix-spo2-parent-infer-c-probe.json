@@ -1,0 +1,109 @@
+{
+  "status": "probe_only_not_admitted",
+  "native_entry": "0x968c4",
+  "native_bytes": 290,
+  "candidate_symbol": "r1_goodix_native_spo2_infer",
+  "actual_graph_pairs": 640,
+  "explicit_graph_boundary_pairs": 2688,
+  "branch_coverage_pairs": 36,
+  "coverage": {
+    "pairs": 36,
+    "instruction_bytes": 290,
+    "instruction_starts": 100,
+    "entry": "0x968c4",
+    "scope": "Explicit graph boundary plus actual heap/normalization; error, history, clamp and success branches."
+  },
+  "compiled_defects": [
+    {
+      "defect": "first-dimension",
+      "detected": true,
+      "diagnostic": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\n    import sys;sys.path.insert(0,'build/goal-r1-spo2-parent-infer-c');import defect_fixture as f;f.test(0,0,1,132,132)\n                                                                                                 ~~~~~~^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-spo2-parent-infer-c/defect_fixture.py\", line 61, in test\n    assert result[0]==result[1],('mismatch',case,mode,reset,[(x[0],hex(x[1]),x[2].hex()) for x in result],[(i,next((j for j,(a,b) in enumerate(zip(result[0][i],result[1][i])) if a!=b),None)) for i in range(2,6)])\n           ^^^^^^^^^^^^^^^^^^^^\nAssertionError: ('mismatch', 0, 0, 1, [(0, '0x20000010', '4f11183f'), (0, '0x20000018', '86c6373f')], [(2, 0), (3, None), (4, 0), (5, 16384)])\n"
+    },
+    {
+      "defect": "second-dimension",
+      "detected": true,
+      "diagnostic": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\n    import sys;sys.path.insert(0,'build/goal-r1-spo2-parent-infer-c');import defect_fixture as f;f.test(0,0,1,132,132)\n                                                                                                 ~~~~~~^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-spo2-parent-infer-c/defect_fixture.py\", line 61, in test\n    assert result[0]==result[1],('mismatch',case,mode,reset,[(x[0],hex(x[1]),x[2].hex()) for x in result],[(i,next((j for j,(a,b) in enumerate(zip(result[0][i],result[1][i])) if a!=b),None)) for i in range(2,6)])\n           ^^^^^^^^^^^^^^^^^^^^\nAssertionError: ('mismatch', 0, 0, 1, [(0, '0x20000010', '4f11183f'), (5, '0xa0000000', '00000000')], [(2, 0), (3, None), (4, 0), (5, 16384)])\n"
+    },
+    {
+      "defect": "short-workspace",
+      "detected": true,
+      "diagnostic": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\n    import sys;sys.path.insert(0,'build/goal-r1-spo2-parent-infer-c');import defect_fixture as f;f.test(0,0,1,132,132)\n                                                                                                 ~~~~~~^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-spo2-parent-infer-c/defect_fixture.py\", line 61, in test\n    assert result[0]==result[1],('mismatch',case,mode,reset,[(x[0],hex(x[1]),x[2].hex()) for x in result],[(i,next((j for j,(a,b) in enumerate(zip(result[0][i],result[1][i])) if a!=b),None)) for i in range(2,6)])\n           ^^^^^^^^^^^^^^^^^^^^\nAssertionError: ('mismatch', 0, 0, 1, [(0, '0x20000010', '4f11183f'), (0, '0x20000010', '4f11183f')], [(2, None), (3, None), (4, None), (5, 134796)])\n"
+    },
+    {
+      "defect": "reject-exact-history",
+      "detected": true,
+      "diagnostic": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\n    import sys;sys.path.insert(0,'build/goal-r1-spo2-parent-infer-c');import defect_fixture as f;f.test(0,0,1,125,125)\n                                                                                                 ~~~~~~^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-spo2-parent-infer-c/defect_fixture.py\", line 61, in test\n    assert result[0]==result[1],('mismatch',case,mode,reset,[(x[0],hex(x[1]),x[2].hex()) for x in result],[(i,next((j for j,(a,b) in enumerate(zip(result[0][i],result[1][i])) if a!=b),None)) for i in range(2,6)])\n           ^^^^^^^^^^^^^^^^^^^^\nAssertionError: ('mismatch', 0, 0, 1, [(0, '0x20000010', 'bc59263f'), (5, '0xa0000000', '00000000')], [(2, 0), (3, None), (4, 0), (5, 16384)])\n"
+    },
+    {
+      "defect": "wrong-reset-byte",
+      "detected": true,
+      "diagnostic": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\n    import sys;sys.path.insert(0,'build/goal-r1-spo2-parent-infer-c');import defect_fixture as f;f.test(0,0,1,132,132)\n                                                                                                 ~~~~~~^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-spo2-parent-infer-c/defect_fixture.py\", line 61, in test\n    assert result[0]==result[1],('mismatch',case,mode,reset,[(x[0],hex(x[1]),x[2].hex()) for x in result],[(i,next((j for j,(a,b) in enumerate(zip(result[0][i],result[1][i])) if a!=b),None)) for i in range(2,6)])\n           ^^^^^^^^^^^^^^^^^^^^\nAssertionError: ('mismatch', 0, 0, 1, [(0, '0x20000010', '4f11183f'), (0, '0x20000010', 'ceba233f')], [(2, 0), (3, None), (4, 0), (5, 16384)])\n"
+    },
+    {
+      "defect": "quiet-nan-status",
+      "detected": true,
+      "diagnostic": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\n    import sys;sys.path.insert(0,'build/goal-r1-spo2-parent-infer-c');import defect_fixture as f;f.BOUNDARY=(2143294004,0);f.test(0,0,1,132,132)\n                                                                                                                           ~~~~~~^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-spo2-parent-infer-c/defect_fixture.py\", line 66, in test\n    assert result[0]==result[1],('mismatch',case,mode,reset,[(x[0],hex(x[1]),x[2].hex()) for x in result],[(i,next((j for j,(a,b) in enumerate(zip(result[0][i],result[1][i])) if a!=b),None)) for i in range(2,6)])\n           ^^^^^^^^^^^^^^^^^^^^\nAssertionError: ('mismatch', 0, 0, 1, [(0, '0x30000011', '00000040'), (0, '0x30000010', '00000040')], [(2, None), (3, None), (4, None), (5, None)])\n"
+    },
+    {
+      "defect": "ignore-fz",
+      "detected": true,
+      "diagnostic": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\n    import sys;sys.path.insert(0,'build/goal-r1-spo2-parent-infer-c');import defect_fixture as f;f.BOUNDARY=(2147483649,0);f.test(0,4,1,132,132)\n                                                                                                                           ~~~~~~^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-spo2-parent-infer-c/defect_fixture.py\", line 66, in test\n    assert result[0]==result[1],('mismatch',case,mode,reset,[(x[0],hex(x[1]),x[2].hex()) for x in result],[(i,next((j for j,(a,b) in enumerate(zip(result[0][i],result[1][i])) if a!=b),None)) for i in range(2,6)])\n           ^^^^^^^^^^^^^^^^^^^^\nAssertionError: ('mismatch', 0, 4, 1, [(0, '0x61000090', '01000080'), (0, '0x81000010', '00000000')], [(2, 0), (3, None), (4, None), (5, 16384)])\n"
+    },
+    {
+      "defect": "unsigned-upper-clamp",
+      "detected": true,
+      "diagnostic": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\n    import sys;sys.path.insert(0,'build/goal-r1-spo2-parent-infer-c');import defect_fixture as f;f.BOUNDARY=(4290795128,0);f.test(0,0,1,132,132)\n                                                                                                                           ~~~~~~^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-spo2-parent-infer-c/defect_fixture.py\", line 66, in test\n    assert result[0]==result[1],('mismatch',case,mode,reset,[(x[0],hex(x[1]),x[2].hex()) for x in result],[(i,next((j for j,(a,b) in enumerate(zip(result[0][i],result[1][i])) if a!=b),None)) for i in range(2,6)])\n           ^^^^^^^^^^^^^^^^^^^^\nAssertionError: ('mismatch', 0, 0, 1, [(0, '0x30000011', '7856c0ff'), (0, '0x30000011', '00000040')], [(2, 0), (3, None), (4, None), (5, 16384)])\n"
+    },
+    {
+      "defect": "leak-success",
+      "detected": true,
+      "diagnostic": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\n    import sys;sys.path.insert(0,'build/goal-r1-spo2-parent-infer-c');import defect_fixture as f;f.test(0,0,1,132,132)\n                                                                                                 ~~~~~~^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-spo2-parent-infer-c/defect_fixture.py\", line 61, in test\n    assert result[0]==result[1],('mismatch',case,mode,reset,[(x[0],hex(x[1]),x[2].hex()) for x in result],[(i,next((j for j,(a,b) in enumerate(zip(result[0][i],result[1][i])) if a!=b),None)) for i in range(2,6)])\n           ^^^^^^^^^^^^^^^^^^^^\nAssertionError: ('mismatch', 0, 0, 1, [(0, '0x20000010', '4f11183f'), (0, '0x20000010', '4f11183f')], [(2, None), (3, None), (4, None), (5, 131100)])\n"
+    }
+  ],
+  "limitations": [
+    "No normal source unit or import binding yet. Native calculate consumer integration and normal build admission remain.",
+    "Injected graph boundary tests validate parent status/clamp only; they do not establish graph algorithm behavior. Actual graph comparisons are separately recorded.",
+    "History insufficiency preserves native allocations without freeing; no invented correction to that observed leak.",
+    "Quiet NaN VCMPE IOC and FZ comparison effects require the C bit/status helper; ordinary C float comparison failed this boundary before correction.",
+    "Physical device, startup, timing and concurrency unverified."
+  ],
+  "next_native_stages": {
+    "0x44a78": "output quality",
+    "0x36f88": "selection",
+    "0x95828": "confidence",
+    "0x36974": "output packing"
+  },
+  "evidence_sha256": {
+    "build/goal-r1-spo2-parent-infer-c/NOTES.txt": "6426014e8f8109082761aaf1582e5288165052d833517f379fdec6914577ef60",
+    "build/goal-r1-spo2-parent-infer-c/boundaries.log": "0bd95dcbe33476a4362a496c73716a8a8dc671bf0768badc1b7f2f6f9307dd61",
+    "build/goal-r1-spo2-parent-infer-c/boundaries.py": "d017783c545e62d2be918da44242365f4e6da10c16c90de855b780a7dc584a49",
+    "build/goal-r1-spo2-parent-infer-c/boundary-results.json": "fbbd73ca85d1e6a7dc5548b1df1b7866aff45e7d101278f4f517d2a4d59c98be",
+    "build/goal-r1-spo2-parent-infer-c/boundary_fixture.py": "49b416ac50fcb4ceb36a906856c0ac0c78a93f83ad3033db44eade463a9f7e1b",
+    "build/goal-r1-spo2-parent-infer-c/candidate.c": "7f294e4ab217250e4d5df6a7cc1d1abfada2d60961736d208807b131e9186780",
+    "build/goal-r1-spo2-parent-infer-c/candidate.elf": "6c9468c460acef1201869e5a7361f22bb867dc51ef2fbee4d463567cb8f35090",
+    "build/goal-r1-spo2-parent-infer-c/candidate.o": "511d46f2e14c4d1da7a14111c7d0a43c7f246d222ae753cbf8f1f339187a994c",
+    "build/goal-r1-spo2-parent-infer-c/compile-argv.json": "d72fbda805a9ec8170a1407bde159ad2fce2b0c76dbca4db90d3304203a33270",
+    "build/goal-r1-spo2-parent-infer-c/controls-results.json": "4bf050d2e8814cdf32be8b772da87b44bada019aa313bd20c9b0dcdc26c119fd",
+    "build/goal-r1-spo2-parent-infer-c/controls.log": "8cec29a450ab57f8dd472059d3be32dc664e4382d70d1c21fed07856be406956",
+    "build/goal-r1-spo2-parent-infer-c/controls.py": "f9763af503e4bc54d3b5be7a1b19b73cb3fc0bdf0a3095e3ab9e11a38fc14cf8",
+    "build/goal-r1-spo2-parent-infer-c/coverage.py": "0409e5cde1c1e82ef321918184ce68ea6993f523a8753e384720ef8bc80a3122",
+    "build/goal-r1-spo2-parent-infer-c/coverage_fixture.py": "98fc7f318a8108acf8a4306fd7a6027af7ad5c8f7efa93c25e8663d89b695f4e",
+    "build/goal-r1-spo2-parent-infer-c/defect.c": "5383bb970837c6da8b2a137bd42ba5ca0489100a54510f99ef2496ff35b9fc93",
+    "build/goal-r1-spo2-parent-infer-c/defect.elf": "3d3841e0d039751000529fc9f62e531fa8397c3e6273f6055962e966465a7e1e",
+    "build/goal-r1-spo2-parent-infer-c/defect.o": "0b36227e952ed63a85deacce6be08a701e568c957a1396cfd0858a09091ca75a",
+    "build/goal-r1-spo2-parent-infer-c/defect_fixture.py": "3a03fadff9ab224aa5dad5e8b5c8ac7e32747ea86e418cb83c7104831ddc9a9f",
+    "build/goal-r1-spo2-parent-infer-c/integration-coverage.json": "bc7c267396337090bb7ee1e49ceb5e6fc6b50a333a2e7de4f8541dc57d45820d",
+    "build/goal-r1-spo2-parent-infer-c/integration-matrix.json": "76193708a48a54e4e68bda0d0d2cab8ccd287ba6a0db56d493fe4807599cb8ff",
+    "build/goal-r1-spo2-parent-infer-c/integration-matrix.log": "0109d2584c3674f75e7201eda5c9e40d3078e2c8e9abd19e3d9a2b9479c37c5f",
+    "build/goal-r1-spo2-parent-infer-c/integration.py": "501323977e6ba104ae53a232bb7ca07fa63bdb8dad20ab0b44d9ca9325f25a63",
+    "build/goal-r1-spo2-parent-infer-c/integration_matrix.py": "700d986cdd82953acc49376194af9c2b239ed7112cd210e4963a56a104bff355",
+    "build/goal-r1-spo2-parent-infer-c/link-argv.json": "eb19c4811624e9ab4c5cb1581939fdc66c7be79249ba5a935abea48cd4744d37",
+    "build/goal-r1-spo2-parent-infer-c/link.log": "2200b924bdfa579918f25baa827c284fcbb194768e56e4409d18dcf703f4f9e9",
+    "build/goal-r1-spo2-parent-infer-c/parent-coverage.json": "449ae48eba8ee8f3b8e1dabce2703953fddb9eb0cafeba2f2cbbd5d1eb15633b",
+    "build/goal-r1-spo2-parent-infer-c/rea-dossier.json": "d637811f7485d1818ea77a99393852899ef88dcae829dd38ce684e16d21af556",
+    "build/goal-r1-spo2-parent-infer-c/rea-next-36974.json": "ab20e73e802152bd63e027b96c141c65a1b340c0fdf6a01a644d00139029993c",
+    "build/goal-r1-spo2-parent-infer-c/rea-next-36f88.json": "70c76058bb401f810375154a795ed18f60b394dcf46582fc148011c89458e297",
+    "build/goal-r1-spo2-parent-infer-c/rea-next-44a78.json": "c265ecc8e305f7c0607d499d39e7e2c59b400591ed160ab99d379b627750ed43",
+    "build/goal-r1-spo2-parent-infer-c/rea-next-95828.json": "a253c62072af2f8c85d901c75711b390e76ca68ed3c38b52d819c7a013816eea"
+  }
+}

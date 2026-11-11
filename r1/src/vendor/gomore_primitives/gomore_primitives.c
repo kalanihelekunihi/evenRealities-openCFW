@@ -5,6 +5,19 @@
  */
 
 #include "gomore_primitives/gomore_primitives.h"
+#include "../../application/runtime/native_health_profile.h"
+#include "../../application/runtime/native_gomore_history_record.h"
+#include "../../application/runtime/native_gomore_respiratory_stats.h"
+#include "../../application/runtime/native_gomore_clear_two.h"
+#include "../../application/runtime/native_gomore_accel_history.h"
+#include "../../application/runtime/native_gomore_i16_statistics.h"
+#include "../../application/runtime/native_gomore_accel_class_helpers.h"
+#include "../../application/runtime/native_gomore_accel_ring_predicates.h"
+#include "../../application/runtime/native_gomore_accel_axis_gate.h"
+#include "../../application/runtime/native_gomore_accel_crossing.h"
+#include "../../application/runtime/native_gomore_accel_period_helpers.h"
+#include "../../application/runtime/native_gomore_accel_crossing_period.h"
+#include "../../application/runtime/native_gomore_accel_autocorrelation.h"
 
 #include "gomore_tensor_runtime/gomore_tensor_runtime.h"
 #include "openr1/r1_crc.h"
@@ -198,12 +211,11 @@ void gomore_primitives_span_initialize(uint32_t record[2],
     record[1] = add_record_offset ? base + UINT32_C(0x14) : 0u;
 }
 
-bool gomore_primitives_clear_two_records(void *record, size_t length) {
+bool gomore_primitives_clear_two_records_checked(void *record, size_t length) {
     if (record == NULL || length < 0x28u) {
         return false;
     }
-    clear_bytes(record, 0x14u);
-    clear_bytes((uint8_t *)record + 0x14u, 0x14u);
+    r1_gomore_clear_two_native(record);
     return true;
 }
 
@@ -340,7 +352,7 @@ float gomore_primitives_state2_cadence_estimate(
     return latest;
 }
 
-bool gomore_primitives_locomotion_transition_accumulate(
+bool gomore_primitives_locomotion_transition_accumulate_checked(
     gomore_primitives_locomotion_transition_state *state,
     float target, uint8_t previous, uint8_t current,
     float shape_first, float shape_second, bool *updated) {
@@ -401,7 +413,7 @@ bool gomore_primitives_locomotion_transition_accumulate(
     return true;
 }
 
-int32_t gomore_primitives_three_axis_window_gate(
+int32_t gomore_primitives_three_axis_window_gate_checked(
     const int16_t *first, const int16_t *second, const int16_t *third,
     size_t sample_count, uint8_t ring_length, int32_t current_index,
     uint32_t window_count, int32_t primary_threshold,
@@ -413,47 +425,13 @@ int32_t gomore_primitives_three_axis_window_gate(
             window_count > (uint32_t)ring_length) {
         return -1;
     }
-    int32_t sums[3] = {0, 0, 0};
-    uint8_t primary_counts[3] = {0u, 0u, 0u};
-    uint8_t secondary_counts[3] = {0u, 0u, 0u};
-    const int16_t *const channels[3] = {first, second, third};
-    for (uint32_t offset = 1u; offset <= window_count; ++offset) {
-        int32_t index = current_index - (int32_t)offset;
-        if (index < 0) {
-            index += (int32_t)ring_length;
-        }
-        for (size_t channel = 0u; channel < 3u; ++channel) {
-            const int32_t sample = channels[channel][(size_t)index];
-            sums[channel] += sample;
-            if (sample > primary_threshold) {
-                ++primary_counts[channel];
-            }
-            if (sample > secondary_threshold) {
-                ++secondary_counts[channel];
-            }
-        }
-    }
-
-    int32_t maximum = 0;
-    int32_t second_maximum = 0;
-    size_t maximum_index = 0u;
-    size_t second_index = 0u;
-    for (size_t channel = 0u; channel < 3u; ++channel) {
-        if (sums[channel] > maximum) {
-            second_maximum = maximum;
-            second_index = maximum_index;
-            maximum = sums[channel];
-            maximum_index = channel;
-        } else if (sums[channel] > second_maximum) {
-            second_maximum = sums[channel];
-            second_index = channel;
-        }
-    }
-    return primary_counts[maximum_index] >= 3u &&
-           secondary_counts[second_index] >= 3u ? 1 : -1;
+    return (int32_t)r1_gomore_accel_axis_gate_native(
+        (uint32_t)(uintptr_t)first, (uint32_t)(uintptr_t)second,
+        (uint32_t)(uintptr_t)third, ring_length, (uint32_t)current_index,
+        window_count, (uint32_t)primary_threshold, (uint32_t)secondary_threshold);
 }
 
-bool gomore_primitives_locomotion_window_classify(
+bool gomore_primitives_locomotion_window_classify_checked(
     void *state, size_t state_length,
     void *output, size_t output_length,
     const gomore_primitives_locomotion_classifier_configuration *configuration) {
@@ -491,17 +469,17 @@ bool gomore_primitives_locomotion_window_classify(
     }
 
     store_u32_le(&output_bytes[0x08u], float_bits(
-        gomore_primitives_nonzero_i16_mean8(magnitude_mean)));
+        gomore_primitives_nonzero_i16_mean8_checked(magnitude_mean)));
     store_u32_le(&output_bytes[0x0Cu], float_bits(
-        gomore_primitives_nonzero_i16_mean8(z_mean)));
+        gomore_primitives_nonzero_i16_mean8_checked(z_mean)));
     store_u32_le(&output_bytes[0x04u], float_bits(
-        gomore_primitives_nonzero_i16_mean8(x_standard_deviation)));
+        gomore_primitives_nonzero_i16_mean8_checked(x_standard_deviation)));
     store_u32_le(&output_bytes[0x00u], float_bits(
-        gomore_primitives_nonzero_i16_mean8(
+        gomore_primitives_nonzero_i16_mean8_checked(
             magnitude_standard_deviation)));
 
     const int32_t primary_predicate =
-        gomore_primitives_circular_count_predicate(
+        gomore_primitives_circular_count_predicate_checked(
             magnitude_range, 8u, cursor, 5, 130, 20000,
             UINT8_C(0x3E), 3);
     float autocorrelation[5];
@@ -524,9 +502,9 @@ bool gomore_primitives_locomotion_window_classify(
     float crossing_mode2 = 0.0f;
     float crossing_mode1 = 0.0f;
     if (primary_predicate == 1) {
-        hysteresis_crossings = gomore_primitives_count_hysteresis_crossings(
+        hysteresis_crossings = gomore_primitives_count_hysteresis_crossings_checked(
             magnitude_history, 200u);
-        if (!gomore_primitives_locomotion_crossing_wrapper(
+        if (!gomore_primitives_locomotion_crossing_wrapper_checked(
                 magnitude_mean, cursor, magnitude_history, 200u,
                 &crossing_mode2, &crossing_mode1,
                 configuration->crossing_estimate)) {
@@ -556,19 +534,19 @@ bool gomore_primitives_locomotion_window_classify(
             ratio = (float)count1 / (float)count0;
         }
         output_bytes[0x3Du] = (uint8_t)
-            gomore_primitives_linear_sign_classify(
+            gomore_primitives_linear_sign_classify_checked(
                 shape[0], shape[1], ratio, (int32_t)count0,
                 configuration->linear_sign_coefficients,
                 configuration->linear_sign_bias);
     }
 
     output_bytes[0x39u] = (uint8_t)
-        gomore_primitives_circular_signal_predicate(
+        gomore_primitives_circular_signal_predicate_checked(
             magnitude_range, x_standard_deviation,
             y_standard_deviation, z_standard_deviation,
             8u, cursor, 5u);
     int16_t ring_score = 0;
-    if (!gomore_primitives_six_channel_ring_score(
+    if (!gomore_primitives_six_channel_ring_score_checked(
             magnitude_range, magnitude_standard_deviation,
             magnitude_mean_absolute_difference,
             x_mean_absolute_difference, y_mean_absolute_difference,
@@ -577,14 +555,14 @@ bool gomore_primitives_locomotion_window_classify(
         return false;
     }
     output_bytes[0x3Au] = (uint8_t)
-        gomore_primitives_shift_i16_trend_gate5(
+        gomore_primitives_shift_i16_trend_gate5_checked(
             (int16_t *)&state_bytes[0x264u], (int32_t)ring_score);
     output_bytes[0x3Bu] = (uint8_t)
-        gomore_primitives_circular_count_predicate(
+        gomore_primitives_circular_count_predicate_checked(
             magnitude_range, 8u, cursor, 5, 1900, 20000,
             UINT8_C(0x3E), 3);
     output_bytes[0x3Cu] = (uint8_t)
-        gomore_primitives_three_axis_window_gate(
+        gomore_primitives_three_axis_window_gate_checked(
             x_standard_deviation, y_standard_deviation,
             z_standard_deviation, 8u, 8u, cursor, 5u, 400, 400);
     return true;
@@ -973,8 +951,9 @@ int32_t gomore_primitives_sleep_motion_feature(
     }
 
     for (size_t axis = 0u; axis < 3u; ++axis) {
-        gomore_primitives_linear_resample(
-            channels[axis], 25, 30, 25, samples);
+        (void)r1_gomore_linear_native(
+            (uint32_t)(uintptr_t)channels[axis], 25, 30, 25,
+            (uint32_t)(uintptr_t)samples);
         (void)gomore_primitives_scale_milli(samples, 30u);
         (void)gomore_primitives_motion_iir4_filter(
             samples, 30u, state->input_history[axis],
@@ -991,7 +970,7 @@ int32_t gomore_primitives_sleep_motion_feature(
         output[1] += magnitude * magnitude;
     }
 
-    if (state->warmup_count < 5u) {
+    if ((int32_t)state->warmup_count < 5) {
         ++state->warmup_count;
         (void)gomore_primitives_fill_missing_pair(output);
         return UINT32_C(0x41);
@@ -1144,7 +1123,7 @@ bool gomore_primitives_tensor_bank_initialize(
     return true;
 }
 
-bool gomore_primitives_sleep_iir2_filter(float *samples, size_t count) {
+bool gomore_primitives_sleep_iir2_filter_checked(float *samples, size_t count) {
     if (samples == NULL && count != 0u) {
         return false;
     }
@@ -1232,6 +1211,7 @@ bool gomore_primitives_sleep_step_update(
     return true;
 }
 
+#pragma clang fp exceptions(strict)
 bool gomore_primitives_sleep_stage_decide(
     const void *state, size_t state_length,
     uint32_t current_time, uint32_t elapsed_seconds,
@@ -1325,6 +1305,7 @@ bool gomore_primitives_sleep_stage_decide(
     *decision = result;
     return true;
 }
+#pragma clang fp exceptions(ignore)
 
 bool gomore_primitives_sleep_cycle_update(
     gomore_primitives_sleep_cycle_state *state,
@@ -1347,6 +1328,9 @@ bool gomore_primitives_sleep_cycle_update(
     _Static_assert(offsetof(gomore_primitives_sleep_cycle_state,
                             policy) == 0x130u,
                    "sleep-cycle policy offset must match recovered ABI");
+    _Static_assert(offsetof(gomore_primitives_sleep_cycle_state,
+                            policy_source) == 0x138u,
+                   "sleep-cycle policy-source offset must match recovered ABI");
     if (state == NULL || input == NULL || output == NULL) {
         return false;
     }
@@ -1356,7 +1340,8 @@ bool gomore_primitives_sleep_cycle_update(
     state->step.activity_latch = active;
     state->step.active = active;
     const bool output_had_flags = output->flags != 0u;
-    if (active == 0u && state->step.countdown == 0u && !output_had_flags) {
+    if (active == 0u &&
+            load_u32_le(&step_bytes[0xACu]) == 0u && !output_had_flags) {
         state->step.countdown = 300u;
         store_u32_le(&step_bytes[0xACu], input->current_time);
     } else if (active != 0u && !output_had_flags &&
@@ -1462,6 +1447,10 @@ bool gomore_primitives_sleep_cycle_update(
             return false;
         }
         *output = candidate;
+        for (size_t index = 0u; index < 8u; ++index) {
+            ((uint8_t *)&state->policy)[index] =
+                state->policy_source[index + 2u];
+        }
     }
 
     if (!gomore_primitives_statistics_accumulate(
@@ -1497,7 +1486,7 @@ bool gomore_primitives_composite_engine_initialize(
     uint8_t *bytes = state;
     const uint32_t binding = load_u32_le(&bytes[0x3890u]);
 
-    if (!gomore_primitives_large_filter_state_initialize(
+    if (!gomore_primitives_large_filter_state_initialize_checked(
             &bytes[0x228u], state_length - 0x228u,
             initialize_large_filter)) {
         return false;
@@ -1508,7 +1497,7 @@ bool gomore_primitives_composite_engine_initialize(
     clear_bytes(&bytes[0x225u], 2u);
     bytes[0x3800u] = 0u;
 
-    if (!gomore_primitives_mode8_state_initialize(
+    if (!gomore_primitives_mode8_state_initialize_checked(
             &bytes[0x8F4u], state_length - 0x8F4u)) {
         return false;
     }
@@ -1594,135 +1583,15 @@ bool gomore_primitives_composite_engine_initialize(
     return true;
 }
 
-static const gomore_primitives_output_stage_descriptor output_stages[
-    GOMORE_PRIMITIVES_OUTPUT_STAGE_COUNT] = {
-    {
-        GOMORE_PRIMITIVES_OUTPUT_STAGE_RESPIRATORY_RATE,
-        0x01F8u, 0x3848u, 0x3800u, 3u, 3u,
-        {0x0030u, 0x0040u, 0x0044u},
-    },
-    {
-        GOMORE_PRIMITIVES_OUTPUT_STAGE_LOCOMOTION_PREPROCESS,
-        0x08F4u, 0x384Cu, 0x3804u, 7u, 2u,
-        {0x0088u, 0x0098u},
-    },
-    {
-        GOMORE_PRIMITIVES_OUTPUT_STAGE_MOTION_CLASSIFIER,
-        0x0B62u, 0x384Du, 0x3805u, 8u, 4u,
-        {0x0088u, 0x0000u, 0x0098u, 0x00D8u},
-    },
-    {
-        GOMORE_PRIMITIVES_OUTPUT_STAGE_SPS_CANDIDATE,
-        0x0B74u, 0x384Eu, 0x3806u, 9u, 4u,
-        {0x0098u, 0x00D8u, 0x0074u, 0x00DCu},
-    },
-    {
-        GOMORE_PRIMITIVES_OUTPUT_STAGE_SPS_SELECT,
-        0x0BD0u, 0x384Fu, 0x3807u, 10u, 4u,
-        {0x0010u, 0x006Cu, 0x00DCu, 0x00E4u},
-    },
-    {
-        GOMORE_PRIMITIVES_OUTPUT_STAGE_SLEEP_MOTION,
-        0x0BD4u, 0x3850u, 0x3808u, 11u, 2u,
-        {0x0088u, 0x00F0u},
-    },
-    {
-        GOMORE_PRIMITIVES_OUTPUT_STAGE_HEART_RATE_SELECT,
-        0x0C54u, 0x3857u, 0x380Fu, 18u, 3u,
-        {0x002Cu, 0x00F8u, 0x0104u},
-    },
-    {
-        GOMORE_PRIMITIVES_OUTPUT_STAGE_ENERGY,
-        0x0C58u, 0x3859u, 0x3811u, 20u, 10u,
-        {
-            0x0104u, 0x0074u, 0x0028u, 0x0110u, 0x0020u,
-            0x00E4u, 0x00F0u, 0x00D8u, 0x0014u, 0x0114u,
-        },
-    },
-    {
-        GOMORE_PRIMITIVES_OUTPUT_STAGE_DORMANT_ESTIMATOR,
-        0x0CB4u, 0x385Cu, 0x3814u, 23u, 7u,
-        {0x0050u, 0x0104u, 0x00E4u, 0x0054u,
-         0x0014u, 0x0114u, 0x0140u},
-    },
-    {
-        GOMORE_PRIMITIVES_OUTPUT_STAGE_MOTION_GATE,
-        0x33B4u, 0x3868u, 0x3820u, 35u, 3u,
-        {0x0050u, 0x00F0u, 0x01B8u},
-    },
-    {
-        GOMORE_PRIMITIVES_OUTPUT_STAGE_SLEEP_CYCLE,
-        0x0FF0u, 0x3861u, 0x3819u, 28u, 9u,
-        {0x0050u, 0x004Cu, 0x00F0u, 0x0088u, 0x0030u,
-         0x0104u, 0x01C0u, 0x01B8u, 0x0184u},
-    },
-    {
-        GOMORE_PRIMITIVES_OUTPUT_STAGE_SLEEP_OPTICAL_PEAK,
-        0x112Cu, 0x3863u, 0x381Bu, 30u, 2u,
-        {0x0030u, 0x01A4u},
-    },
-    {
-        GOMORE_PRIMITIVES_OUTPUT_STAGE_SLEEP_STREAM,
-        0x12B8u, 0x3865u, 0x381Du, 32u, 5u,
-        {0x01A4u, 0x0184u, 0x0050u, 0x01B8u, 0x01B5u},
-    },
-    {
-        GOMORE_PRIMITIVES_OUTPUT_STAGE_ACTIVITY_WINDOW,
-        0x33D8u, 0x3877u, 0x382Fu, 50u, 3u,
-        {0x0030u, 0x0038u, 0x01C0u},
-    },
-    {
-        GOMORE_PRIMITIVES_OUTPUT_STAGE_STEP_ACCUMULATE,
-        0x37DCu, 0x3881u, 0x3839u, 60u, 3u,
-        {0x00D8u, 0x00F0u, 0x01C4u},
-    },
-    {
-        GOMORE_PRIMITIVES_OUTPUT_STAGE_ACTIVITY_ACCUMULATE,
-        0x37F8u, 0x3886u, 0x383Eu, 65u, 6u,
-        {0x0050u, 0x004Cu, 0x01C4u, 0x0114u, 0x00E4u, 0x01C8u},
-    },
-};
-
-bool gomore_primitives_output_orchestrate(
-    void *engine, size_t engine_length, uint32_t elapsed_updates,
-    const gomore_primitives_output_orchestrator_providers *providers,
-    uint8_t **result_pointer) {
-    if (engine == NULL || engine_length < 0x3894u || providers == NULL ||
-            result_pointer == NULL) {
-        return false;
+static void gomore_sleep_initialize_log(
+    const gomore_primitives_sleep_algorithm_configuration *configuration,
+    const char *format, int32_t status) {
+    if (configuration->native_log_u32 != NULL) {
+        configuration->native_log_u32(1u, 1u, format, (uint32_t)status);
+    } else {
+        (void)gomore_primitives_log_u32_checked(
+            configuration->logger, 1u, 1u, format, (uint32_t)status);
     }
-    for (size_t index = 0u;
-            index < GOMORE_PRIMITIVES_OUTPUT_STAGE_COUNT; ++index) {
-        if (providers->stages[index] == NULL) {
-            return false;
-        }
-    }
-
-    uint8_t *const bytes = engine;
-    for (size_t index = 0u;
-            index < GOMORE_PRIMITIVES_OUTPUT_STAGE_COUNT; ++index) {
-        const gomore_primitives_output_stage_descriptor *const descriptor =
-            &output_stages[index];
-        const uint8_t control = bytes[descriptor->control_offset];
-        uint32_t status = 0u;
-        if (control == 0u || control == 1u) {
-            const uint32_t effective_elapsed = control == 1u
-                ? 1u : elapsed_updates;
-            if (!providers->stages[index](
-                    providers->context, bytes, engine_length,
-                    effective_elapsed, descriptor, &status)) {
-                return false;
-            }
-            if (control == 1u) {
-                bytes[descriptor->control_offset] = 0u;
-            }
-        } else if (control == 2u) {
-            bytes[descriptor->control_offset] = 3u;
-        }
-        bytes[descriptor->status_offset] = (uint8_t)status;
-    }
-    *result_pointer = &bytes[0x37FDu];
-    return true;
 }
 
 int32_t gomore_primitives_sleep_algorithm_initialize(
@@ -1758,17 +1627,18 @@ int32_t gomore_primitives_sleep_algorithm_initialize(
     store_u16_le_early(
         &bytes[0x39DAu], (uint16_t)(random_remainder + 23));
 
-    int32_t status = gomore_primitives_runtime_version_validate(
-        runtime_value, true,
-        configuration->version_validation_enabled,
-        configuration->configured_runtime_limit,
-        configuration->runtime_present,
-        configuration->configured_version,
-        configuration->runtime_version);
+    int32_t status = configuration->native_runtime_validate != NULL
+        ? configuration->native_runtime_validate(runtime_value, 1u)
+        : gomore_primitives_runtime_version_validate(
+            runtime_value, true,
+            configuration->version_validation_enabled,
+            configuration->configured_runtime_limit,
+            configuration->runtime_present,
+            configuration->configured_version,
+            configuration->runtime_version);
     if (status < 0) {
-        (void)gomore_primitives_log_u32(
-            configuration->logger, 1u, 1u,
-            "[InitAuth] errorCode : %u", (uint32_t)status);
+        gomore_sleep_initialize_log(
+            configuration, "[InitAuth] errorCode : %u", status);
         bytes[0x39D8u] = (uint8_t)status;
         return status;
     }
@@ -1778,9 +1648,8 @@ int32_t gomore_primitives_sleep_algorithm_initialize(
                 index < (size_t)gomore_primitives_size_736(); ++index) {
             if (previous_bytes[index] != 0u) {
                 status = -5;
-                (void)gomore_primitives_log_u32(
-                    configuration->logger, 1u, 1u,
-                    "[InitPre] errorCode : %u", (uint32_t)status);
+                gomore_sleep_initialize_log(
+                    configuration, "[InitPre] errorCode : %u", status);
                 bytes[0x39D8u] = (uint8_t)status;
                 return status;
             }
@@ -1807,37 +1676,40 @@ int32_t gomore_primitives_sleep_algorithm_initialize(
     }
     store_u32_le(&bytes[0x190u], runtime_value);
 
-    float persistent_cache[2] = {
-        bits_float(load_u32_le(&previous_bytes[0x2D8u])),
-        bits_float(load_u32_le(&previous_bytes[0x2DCu])),
-    };
-    gomore_primitives_profile_output converted;
-    status = gomore_primitives_profile_convert(
-        profile, persistent_cache, &converted);
-    store_u32_le(&previous_bytes[0x2D8u],
-                 float_bits(persistent_cache[0]));
-    store_u32_le(&previous_bytes[0x2DCu],
-                 float_bits(persistent_cache[1]));
-    nested[0x7Cu] = converted.age_years;
-    nested[0x7Du] = converted.binary_sex;
-    store_u32_le(&nested[0x74u],
-                 float_bits(converted.height_centimeters));
-    store_u32_le(&nested[0x78u],
-                 float_bits(converted.weight_kilograms));
-    store_u32_le(&nested[0x80u], float_bits(converted.parameter_4));
-    store_u32_le(&nested[0x84u],
-                 float_bits(converted.parameter_5_raw));
-    store_u32_le(&nested[0x28u], float_bits(converted.parameter_4));
-    store_u32_le(&nested[0x110u],
-                 float_bits(converted.parameter_5_normalized));
-    store_u32_le(&nested[0x20u],
-                 float_bits(converted.cached_parameters[0]));
-    store_u32_le(&nested[0x24u],
-                 float_bits(converted.cached_parameters[1]));
+    if (configuration->native_profile_convert != NULL) {
+        status = configuration->native_profile_convert(profile, nested);
+    } else {
+        float persistent_cache[2] = {
+            bits_float(load_u32_le(&previous_bytes[0x2D8u])),
+            bits_float(load_u32_le(&previous_bytes[0x2DCu])),
+        };
+        gomore_primitives_profile_output converted;
+        status = gomore_primitives_profile_convert(
+            profile, persistent_cache, &converted);
+        store_u32_le(&previous_bytes[0x2D8u],
+                     float_bits(persistent_cache[0]));
+        store_u32_le(&previous_bytes[0x2DCu],
+                     float_bits(persistent_cache[1]));
+        nested[0x7Cu] = converted.age_years;
+        nested[0x7Du] = converted.binary_sex;
+        store_u32_le(&nested[0x74u],
+                     float_bits(converted.height_centimeters));
+        store_u32_le(&nested[0x78u],
+                     float_bits(converted.weight_kilograms));
+        store_u32_le(&nested[0x80u], float_bits(converted.parameter_4));
+        store_u32_le(&nested[0x84u],
+                     float_bits(converted.parameter_5_raw));
+        store_u32_le(&nested[0x28u], float_bits(converted.parameter_4));
+        store_u32_le(&nested[0x110u],
+                     float_bits(converted.parameter_5_normalized));
+        store_u32_le(&nested[0x20u],
+                     float_bits(converted.cached_parameters[0]));
+        store_u32_le(&nested[0x24u],
+                     float_bits(converted.cached_parameters[1]));
+    }
     if (status < 0) {
-        (void)gomore_primitives_log_u32(
-            configuration->logger, 1u, 1u,
-            "[InitUser] errorCode : %u", (uint32_t)status);
+        gomore_sleep_initialize_log(
+            configuration, "[InitUser] errorCode : %u", status);
         bytes[0x39D8u] = (uint8_t)status;
         return status;
     }
@@ -1981,7 +1853,7 @@ float gomore_primitives_sps_secondary_model(
     return output_offset + combined;
 }
 
-bool gomore_primitives_expand_half_positions(
+bool gomore_primitives_expand_half_positions_checked(
     const uint16_t *positions, const float *control_values,
     size_t control_count, float *output, size_t output_count,
     gomore_primitives_double_unary_fn round_value) {
@@ -1999,7 +1871,7 @@ bool gomore_primitives_expand_half_positions(
     }
     int32_t output_index = (int32_t)first_rounded;
     if ((size_t)output_index > output_count ||
-            !gomore_primitives_fill_float_progression(
+            !gomore_primitives_fill_float_progression_checked(
                 output, output_count, 0u, (size_t)output_index,
                 control_values[0], 0.0f)) {
         return false;
@@ -2026,7 +1898,7 @@ bool gomore_primitives_expand_half_positions(
         const float step =
             (control_values[index + 1u] - control_values[index]) /
             (float)segment_length;
-        if (!gomore_primitives_fill_float_progression(
+        if (!gomore_primitives_fill_float_progression_checked(
                 output, output_count, (size_t)output_index, (size_t)end,
                 control_values[index], step)) {
             return false;
@@ -2035,7 +1907,7 @@ bool gomore_primitives_expand_half_positions(
     }
 
     if ((size_t)output_index < output_count) {
-        return gomore_primitives_fill_float_progression(
+        return gomore_primitives_fill_float_progression_checked(
             output, output_count, (size_t)output_index, output_count,
             control_values[control_count - 1u], 0.0f);
     }
@@ -2142,7 +2014,7 @@ static bool locomotion_extrema_periods(
     return true;
 }
 
-bool gomore_primitives_locomotion_feature_reduce(
+bool gomore_primitives_locomotion_feature_reduce_checked(
     float expanded[GOMORE_PRIMITIVES_LOCOMOTION_EXPANDED_COUNT],
     uint8_t first_indices[
         GOMORE_PRIMITIVES_LOCOMOTION_FEATURE_INDEX_CAPACITY],
@@ -2161,20 +2033,20 @@ bool gomore_primitives_locomotion_feature_reduce(
     }
 
     float standard_deviation = 0.0f;
-    if (!gomore_primitives_standard_deviation(
+    if (!gomore_primitives_standard_deviation_checked(
             expanded, GOMORE_PRIMITIVES_LOCOMOTION_EXPANDED_COUNT,
             math->power_f32, math->square_root_f32,
             &standard_deviation)) {
         return false;
     }
-    const float mean = gomore_primitives_mean(
+    const float mean = gomore_primitives_mean_checked(
         expanded, GOMORE_PRIMITIVES_LOCOMOTION_EXPANDED_COUNT);
     for (size_t index = 0u;
             index < GOMORE_PRIMITIVES_LOCOMOTION_EXPANDED_COUNT; ++index) {
         expanded[index] = standard_deviation == 0.0f
             ? 0.0f : (expanded[index] - mean) / standard_deviation;
     }
-    if (!gomore_primitives_sleep_iir2_filter(
+    if (!gomore_primitives_sleep_iir2_filter_checked(
             expanded, GOMORE_PRIMITIVES_LOCOMOTION_EXPANDED_COUNT)) {
         return false;
     }
@@ -2182,7 +2054,7 @@ bool gomore_primitives_locomotion_feature_reduce(
     size_t first_count = 0u;
     size_t second_count = 0u;
     const bool extrema_valid =
-        gomore_primitives_moving_average_extrema_indices(
+        gomore_primitives_moving_average_extrema_indices_checked(
             expanded, GOMORE_PRIMITIVES_LOCOMOTION_EXPANDED_COUNT,
             38u, 12u,
             first_indices,
@@ -2202,7 +2074,7 @@ bool gomore_primitives_locomotion_feature_reduce(
         controls[index] = expanded[first_indices[index]];
     }
     float first_percentile = 0.0f;
-    if (!gomore_primitives_sorted_percentile(
+    if (!gomore_primitives_sorted_percentile_checked(
             controls, first_count, 75u,
             math->qsort_provider, math->compare, &first_percentile)) {
         return false;
@@ -2214,7 +2086,7 @@ bool gomore_primitives_locomotion_feature_reduce(
         controls[index] = expanded[second_indices[index]];
     }
     float second_percentile = 0.0f;
-    if (!gomore_primitives_sorted_percentile(
+    if (!gomore_primitives_sorted_percentile_checked(
             controls, second_count, 25u,
             math->qsort_provider, math->compare, &second_percentile)) {
         return false;
@@ -2254,10 +2126,10 @@ bool gomore_primitives_locomotion_feature_reduce(
     if (period_count <= 1u) {
         return true;
     }
-    const float period_mean = gomore_primitives_mean(
+    const float period_mean = gomore_primitives_mean_checked(
         controls, period_count);
     float period_standard_deviation = 0.0f;
-    if (!gomore_primitives_standard_deviation(
+    if (!gomore_primitives_standard_deviation_checked(
             controls, period_count,
             math->power_f32, math->square_root_f32,
             &period_standard_deviation)) {
@@ -2296,12 +2168,12 @@ bool gomore_primitives_locomotion_feature_reduce(
     const float complement =
         1.0f - (float)included_count / denominator;
     *primary = included_mean;
-    *secondary = gomore_primitives_bounded_linear_complement(
+    *secondary = gomore_primitives_bounded_linear_complement_checked(
         dispersion, complement);
     return true;
 }
 
-bool gomore_primitives_locomotion_control_extract(
+bool gomore_primitives_locomotion_control_extract_checked(
     const gomore_primitives_locomotion_control_sample *samples,
     size_t sample_count, float sample_period, float difference_scale,
     uint32_t mode,
@@ -2378,7 +2250,7 @@ bool gomore_primitives_locomotion_control_extract(
         return true;
     }
 
-    if (!gomore_primitives_expand_half_positions(
+    if (!gomore_primitives_expand_half_positions_checked(
             workspace->positions, workspace->controls, retained,
             workspace->expanded,
             GOMORE_PRIMITIVES_LOCOMOTION_EXPANDED_COUNT,
@@ -2732,15 +2604,34 @@ bool gomore_primitives_previous_state_restore(
     return false;
 }
 
+static uint32_t previous_append_offset(
+    const gomore_primitives_pkey_store *store,
+    const gomore_primitives_previous_append_hooks *hooks) {
+    return hooks != NULL && hooks->current_offset != NULL
+        ? hooks->current_offset(hooks->context) : store->partition_offset;
+}
+static void previous_append_observe(
+    const gomore_primitives_previous_append_hooks *hooks,
+    gomore_primitives_previous_append_stage stage, uint32_t first,
+    uint32_t second, const uint8_t *header) {
+    if (hooks != NULL && hooks->observe != NULL)
+        hooks->observe(hooks->context, stage, first, second, header);
+}
+static void previous_append_release(
+    const gomore_primitives_previous_append_hooks *hooks, void *scratch,
+    bool allocated) {
+    if (allocated && hooks != NULL && hooks->release != NULL)
+        hooks->release(hooks->context, scratch);
+}
+
 gomore_primitives_previous_append_status
-gomore_primitives_previous_state_append(
+gomore_primitives_previous_state_append_with_hooks(
     gomore_primitives_pkey_store *store,
     const void *state, size_t state_length, size_t state_capacity,
     void *scratch, size_t scratch_capacity,
-    gomore_primitives_previous_append_result *result) {
-    if (result == NULL) {
-        return GOMORE_PRIMITIVES_PREVIOUS_APPEND_BAD_ARGUMENT;
-    }
+    gomore_primitives_previous_append_result *result,
+    const gomore_primitives_previous_append_hooks *hooks) {
+    if (result == NULL) return GOMORE_PRIMITIVES_PREVIOUS_APPEND_BAD_ARGUMENT;
     result->compacted = false;
     result->slot = UINT8_MAX;
     result->key_length = 0u;
@@ -2748,26 +2639,17 @@ gomore_primitives_previous_state_append(
     result->aligned_state_length = 0u;
     result->record_offset = 0u;
     result->status = GOMORE_PRIMITIVES_PREVIOUS_APPEND_BAD_ARGUMENT;
-
     if (store == NULL || state == NULL || state_length == 0u ||
-            state_length > UINT32_MAX - 3u ||
-            store->read == NULL || store->write == NULL ||
-            store->erase == NULL ||
-            store->partition_offset >
-                UINT32_MAX - GOMORE_PRIMITIVES_PKEY_PARTITION_BYTES) {
+        state_length > UINT32_MAX - 3u || store->read == NULL ||
+        store->write == NULL || store->erase == NULL ||
+        store->partition_offset > UINT32_MAX - GOMORE_PRIMITIVES_PKEY_PARTITION_BYTES)
         return result->status;
-    }
-    const uint32_t aligned_state_length =
-        ((uint32_t)state_length + 3u) & ~UINT32_C(3);
-    if (state_capacity < aligned_state_length) {
-        return result->status;
-    }
+    const uint32_t aligned_state_length = ((uint32_t)state_length + 3u) & ~UINT32_C(3);
+    if (state_capacity < aligned_state_length) return result->status;
     result->aligned_state_length = aligned_state_length;
-
     if (!store->initialized) {
         if (store->initialize == NULL || !store->initialize(store)) {
-            result->status =
-                GOMORE_PRIMITIVES_PREVIOUS_APPEND_STORE_UNAVAILABLE;
+            result->status = GOMORE_PRIMITIVES_PREVIOUS_APPEND_STORE_UNAVAILABLE;
             return result->status;
         }
     }
@@ -2775,100 +2657,128 @@ gomore_primitives_previous_state_append(
         result->status = GOMORE_PRIMITIVES_PREVIOUS_APPEND_STORE_UNAVAILABLE;
         return result->status;
     }
-
-    uint8_t header[GOMORE_PRIMITIVES_PREVIOUS_STATE_SLOT_HEADER_BYTES];
-    if (!store->read(store->flash_context, store->partition_offset,
+    uint8_t header[GOMORE_PRIMITIVES_PREVIOUS_STATE_SLOT_HEADER_BYTES] = {0};
+    if (!store->read(store->flash_context, previous_append_offset(store,hooks),
                      header, sizeof(header))) {
         result->status = GOMORE_PRIMITIVES_PREVIOUS_APPEND_READ_FAILED;
+        previous_append_observe(hooks,GOMORE_PREVIOUS_APPEND_READ_ERROR,0,0,NULL);
         return result->status;
     }
     const uint32_t key_length = load_u32_le(&header[0]);
     result->key_length = key_length;
     if (key_length > UINT32_MAX - 3u) {
         result->status = GOMORE_PRIMITIVES_PREVIOUS_APPEND_TOO_LARGE;
+        previous_append_observe(hooks,GOMORE_PREVIOUS_APPEND_TOO_LARGE,0,0,NULL);
         return result->status;
     }
-    const uint32_t aligned_key_length =
-        (key_length + 3u) & ~UINT32_C(3);
+    const uint32_t aligned_key_length = (key_length + 3u) & ~UINT32_C(3);
     result->aligned_key_length = aligned_key_length;
+    previous_append_observe(hooks,GOMORE_PREVIOUS_APPEND_LENGTHS,
+        aligned_state_length,aligned_key_length,header);
     if ((uint64_t)aligned_key_length + aligned_state_length + 16u >
             GOMORE_PRIMITIVES_PKEY_APPEND_WINDOW_BYTES) {
         result->status = GOMORE_PRIMITIVES_PREVIOUS_APPEND_TOO_LARGE;
+        previous_append_observe(hooks,GOMORE_PREVIOUS_APPEND_TOO_LARGE,0,0,NULL);
         return result->status;
     }
-
-    const uint32_t records_offset =
-        store->partition_offset + aligned_key_length + 8u;
     const uint32_t stride = aligned_state_length + 8u;
+    const uint32_t records_offset = previous_append_offset(store,hooks) +
+        aligned_key_length + 8u;
     const uint32_t trigger_offset = records_offset + 2u * stride;
-    if (!store->read(store->flash_context, trigger_offset,
-                     header, sizeof(header))) {
+    previous_append_observe(hooks,GOMORE_PREVIOUS_APPEND_TRIGGER,trigger_offset,0,NULL);
+    if (!store->read(store->flash_context, trigger_offset, header, sizeof(header))) {
         result->status = GOMORE_PRIMITIVES_PREVIOUS_APPEND_READ_FAILED;
+        previous_append_observe(hooks,GOMORE_PREVIOUS_APPEND_READ_ERROR,0,0,NULL);
         return result->status;
     }
-
     uint8_t selected_slot = 0u;
     if (load_u32_le(&header[0]) != UINT32_MAX) {
         const size_t key_record_length = (size_t)aligned_key_length + 8u;
-        if (scratch == NULL || scratch_capacity < key_record_length) {
-            result->status =
-                GOMORE_PRIMITIVES_PREVIOUS_APPEND_SCRATCH_TOO_SMALL;
+        void *working = scratch;
+        bool allocated = false;
+        if ((working == NULL || scratch_capacity < key_record_length) &&
+                hooks != NULL && hooks->allocate != NULL) {
+            working = hooks->allocate(hooks->context,key_record_length);
+            allocated = working != NULL;
+        }
+        if (working == NULL || (!allocated && scratch_capacity < key_record_length)) {
+            result->status = GOMORE_PRIMITIVES_PREVIOUS_APPEND_SCRATCH_TOO_SMALL;
+            previous_append_observe(hooks,GOMORE_PREVIOUS_APPEND_SCRATCH_ERROR,0,0,NULL);
             return result->status;
         }
-        if (!store->read(store->flash_context, store->partition_offset,
-                         scratch, key_record_length)) {
+        if (!store->read(store->flash_context,previous_append_offset(store,hooks),
+                         working,key_record_length)) {
+            previous_append_release(hooks,working,allocated);
             result->status = GOMORE_PRIMITIVES_PREVIOUS_APPEND_READ_FAILED;
+            previous_append_observe(hooks,GOMORE_PREVIOUS_APPEND_READ_ERROR,0,0,NULL);
             return result->status;
         }
-        if (!store->erase(store->flash_context, store->partition_offset,
+        if (!store->erase(store->flash_context,previous_append_offset(store,hooks),
                           GOMORE_PRIMITIVES_PKEY_PARTITION_BYTES)) {
+            previous_append_release(hooks,working,allocated);
             result->status = GOMORE_PRIMITIVES_PREVIOUS_APPEND_ERASE_FAILED;
+            previous_append_observe(hooks,GOMORE_PREVIOUS_APPEND_ERASE_ERROR,0,0,NULL);
             return result->status;
         }
-        if (!store->write(store->flash_context, store->partition_offset,
-                          scratch, key_record_length)) {
+        previous_append_observe(hooks,GOMORE_PREVIOUS_APPEND_ERASED,0,0,NULL);
+        if (!store->write(store->flash_context,previous_append_offset(store,hooks),
+                          working,key_record_length)) {
+            previous_append_release(hooks,working,allocated);
             result->status = GOMORE_PRIMITIVES_PREVIOUS_APPEND_WRITE_FAILED;
+            previous_append_observe(hooks,GOMORE_PREVIOUS_APPEND_WRITE_ERROR,0,0,NULL);
             return result->status;
         }
+        previous_append_release(hooks,working,allocated);
         result->compacted = true;
     } else {
         bool found = false;
-        for (uint8_t slot = 0u;
-             slot < GOMORE_PRIMITIVES_PREVIOUS_STATE_SLOT_COUNT; ++slot) {
-            const uint32_t slot_offset = records_offset + slot * stride;
-            if (!store->read(store->flash_context, slot_offset,
-                             header, sizeof(header))) {
-                result->status =
-                    GOMORE_PRIMITIVES_PREVIOUS_APPEND_READ_FAILED;
+        for (uint8_t slot=0;slot<GOMORE_PRIMITIVES_PREVIOUS_STATE_SLOT_COUNT;slot++) {
+            const uint32_t slot_offset=(hooks != NULL && hooks->current_offset != NULL
+                ? previous_append_offset(store,hooks)+aligned_key_length+8u
+                : records_offset)+slot*stride;
+            if (!store->read(store->flash_context,slot_offset,header,sizeof(header))) {
+                result->status=GOMORE_PRIMITIVES_PREVIOUS_APPEND_READ_FAILED;
+                previous_append_observe(hooks,GOMORE_PREVIOUS_APPEND_READ_ERROR,0,0,NULL);
                 return result->status;
             }
-            if (load_u32_le(&header[0]) == UINT32_MAX) {
-                selected_slot = slot;
-                found = true;
+            previous_append_observe(hooks,GOMORE_PREVIOUS_APPEND_SLOT_READ,slot_offset,slot,header);
+            if (load_u32_le(&header[0])==UINT32_MAX) {
+                selected_slot=slot;found=true;
+                previous_append_observe(hooks,GOMORE_PREVIOUS_APPEND_SELECTED,slot,0,NULL);
                 break;
             }
         }
-        if (!found) {
-            result->status =
-                GOMORE_PRIMITIVES_PREVIOUS_APPEND_NO_ERASED_SLOT;
+        if (!found && (hooks==NULL || !hooks->fallback_slot_zero)) {
+            result->status=GOMORE_PRIMITIVES_PREVIOUS_APPEND_NO_ERASED_SLOT;
             return result->status;
         }
     }
-
-    const uint32_t record_offset = records_offset + selected_slot * stride;
-    store_u32_le(&header[0], (uint32_t)state_length);
-    store_u32_le(&header[4], 0u);
-    if (!store->write(store->flash_context, record_offset,
-                      header, sizeof(header)) ||
-            !store->write(store->flash_context, record_offset + 8u,
-                          state, aligned_state_length)) {
-        result->status = GOMORE_PRIMITIVES_PREVIOUS_APPEND_WRITE_FAILED;
+    const uint32_t record_offset=(hooks != NULL && hooks->current_offset != NULL
+        ? previous_append_offset(store,hooks)+aligned_key_length+8u
+        : records_offset)+selected_slot*stride;
+    store_u32_le(&header[0],(uint32_t)state_length);
+    store_u32_le(&header[4],0u);
+    if (!store->write(store->flash_context,record_offset,header,sizeof(header)) ||
+        !store->write(store->flash_context,record_offset+8u,state,aligned_state_length)) {
+        result->status=GOMORE_PRIMITIVES_PREVIOUS_APPEND_WRITE_FAILED;
+        previous_append_observe(hooks,GOMORE_PREVIOUS_APPEND_WRITE_ERROR,0,0,NULL);
         return result->status;
     }
-    result->slot = selected_slot;
-    result->record_offset = record_offset;
-    result->status = GOMORE_PRIMITIVES_PREVIOUS_APPEND_OK;
+    previous_append_observe(hooks,GOMORE_PREVIOUS_APPEND_WRITTEN,record_offset,0,NULL);
+    result->slot=selected_slot;
+    result->record_offset=record_offset;
+    result->status=GOMORE_PRIMITIVES_PREVIOUS_APPEND_OK;
     return result->status;
+}
+
+gomore_primitives_previous_append_status
+gomore_primitives_previous_state_append(
+    gomore_primitives_pkey_store *store,
+    const void *state,size_t state_length,size_t state_capacity,
+    void *scratch,size_t scratch_capacity,
+    gomore_primitives_previous_append_result *result) {
+    return gomore_primitives_previous_state_append_with_hooks(store,state,
+        state_length,state_capacity,scratch,scratch_capacity,result,NULL);
 }
 
 bool gomore_primitives_cubic_candidates(
@@ -2945,7 +2855,7 @@ bool gomore_primitives_callback_record_initialize(uint8_t *record,
     return true;
 }
 
-bool gomore_primitives_sort_float_subrange(
+bool gomore_primitives_sort_float_subrange_checked(
     float *values, size_t value_count, size_t first, size_t last,
     gomore_primitives_qsort_fn qsort_provider,
     gomore_primitives_compare_fn compare) {
@@ -3360,16 +3270,9 @@ bool gomore_primitives_pack4_binding_initialize(
     return true;
 }
 
-int16_t gomore_primitives_i16_mean(const int16_t *values, size_t count) {
-    if (values == NULL || count == 0u || count > (size_t)INT32_MAX) {
-        return 0;
-    }
-    uint32_t wrapped_sum = 0u;
-    for (size_t index = 0u; index < count; ++index) {
-        wrapped_sum += (uint32_t)(int32_t)values[index];
-    }
-    const int32_t signed_sum = (int32_t)wrapped_sum;
-    return (int16_t)(signed_sum / (int32_t)count);
+int16_t gomore_primitives_i16_mean_checked(const int16_t *values, size_t count) {
+    if (values == NULL || count == 0u || count > (size_t)INT32_MAX) return 0;
+    return (int16_t)r1_gomore_i16_mean_native((uint32_t)(uintptr_t)values,(uint32_t)count);
 }
 
 bool gomore_primitives_float_floor_update(float candidate, float *value) {
@@ -3472,16 +3375,17 @@ bool gomore_primitives_parameter_state_initialize(void *record,
     return true;
 }
 
-size_t gomore_primitives_count_encoded_i32(const int32_t *values,
+size_t gomore_primitives_count_encoded_i32_checked(const int32_t *values,
                                            size_t count) {
     if (values == NULL && count != 0u) {
         return 0u;
     }
     size_t matches = 0u;
-    for (size_t index = 0u; index < count; ++index) {
-        const uint32_t encoded =
-            (uint32_t)values[index] + UINT32_C(0xBF200000);
-        matches += encoded < UINT32_C(0x00E80001) ? 1u : 0u;
+    while (count != 0u) {
+        const size_t chunk = count > (size_t)INT32_MAX ? (size_t)INT32_MAX : count;
+        matches += r1_gomore_encoded_count_native(values, (uint32_t)chunk);
+        values += chunk;
+        count -= chunk;
     }
     return matches;
 }
@@ -3497,9 +3401,15 @@ float gomore_primitives_scaled_ratio(float numerator, float denominator) {
 }
 
 uint8_t gomore_primitives_piecewise_clamp_70_100(int32_t value) {
-    int64_t delta = (int64_t)value - INT64_C(96);
-    delta *= delta < 0 ? INT64_C(5) : INT64_C(8);
-    int64_t transformed = delta / INT64_C(10) + INT64_C(96);
+    /* Native SUBS/multiply wrap at 32 bits before signed division. */
+    const uint32_t delta = (uint32_t)value - UINT32_C(96);
+    const uint32_t product = delta *
+        ((delta & UINT32_C(0x80000000)) ? UINT32_C(5) : UINT32_C(8));
+    const int64_t signed_product = (int64_t)product -
+        ((product & UINT32_C(0x80000000)) ? INT64_C(4294967296) : 0);
+    const int32_t quotient = (int32_t)signed_product / INT32_C(10);
+    int32_t transformed = (int32_t)((uint32_t)(quotient + 96) & UINT32_C(0xffff));
+    if (transformed >= INT32_C(32768)) transformed -= INT32_C(65536);
     if (transformed < 70) {
         transformed = 70;
     } else if (transformed > 100) {
@@ -3508,16 +3418,10 @@ uint8_t gomore_primitives_piecewise_clamp_70_100(int32_t value) {
     return (uint8_t)transformed;
 }
 
-bool gomore_primitives_missing_window_initialize(void *record,
+bool gomore_primitives_missing_window_initialize_checked(void *record,
                                                  size_t length) {
-    if (record == NULL || length < 0x3Eu) {
-        return false;
-    }
-    uint8_t *bytes = record;
-    clear_bytes(bytes, 0x38u);
-    for (size_t index = 0u; index < 6u; ++index) {
-        bytes[0x38u + index] = UINT8_C(0xFF);
-    }
+    if (record == NULL || length < 0x3Eu) return false;
+    (void)r1_gomore_missing_window_reset_native((uint32_t)(uintptr_t)record);
     return true;
 }
 
@@ -3537,13 +3441,9 @@ bool gomore_primitives_modulo_value_get(const uint8_t *bytes,
     return true;
 }
 
-bool gomore_primitives_mode8_state_initialize(void *record, size_t length) {
-    if (record == NULL || length < 0x26Eu) {
-        return false;
-    }
-    uint8_t *bytes = record;
-    clear_bytes(bytes, 0x26Eu);
-    bytes[0] = 8u;
+bool gomore_primitives_mode8_state_initialize_checked(void *record, size_t length) {
+    if (record == NULL || length < 0x26Eu) return false;
+    (void)r1_gomore_accel_state_reset_native((uint32_t)(uintptr_t)record);
     return true;
 }
 
@@ -3607,7 +3507,7 @@ uint32_t gomore_primitives_shift_presence_history(uint8_t *record,
     return 0u;
 }
 
-bool gomore_primitives_fill_float_progression(float *values, size_t count,
+bool gomore_primitives_fill_float_progression_checked(float *values, size_t count,
                                               size_t begin, size_t end,
                                               float first, float step) {
     if (values == NULL || begin > end || end > count) {
@@ -3665,22 +3565,9 @@ int32_t gomore_primitives_float_argmax_above_floor(const float *values,
     return result;
 }
 
-int32_t gomore_primitives_i16_range(const int16_t *values, size_t count) {
-    if (values == NULL || count == 0u) {
-        return 32000;
-    }
-    int32_t minimum = values[0];
-    int32_t maximum = values[0];
-    for (size_t index = 0u; index < count; ++index) {
-        if (values[index] < minimum) {
-            minimum = values[index];
-        }
-        if (values[index] > maximum) {
-            maximum = values[index];
-        }
-    }
-    const int32_t range = maximum - minimum;
-    return range < 32001 ? (int32_t)(int16_t)range : 32000;
+int32_t gomore_primitives_i16_range_checked(const int16_t *values, size_t count) {
+    if (values == NULL || count == 0u || count > (size_t)INT32_MAX) return 32000;
+    return (int32_t)r1_gomore_i16_range_native((uint32_t)(uintptr_t)values,(uint32_t)count);
 }
 
 bool gomore_primitives_packed_2bit_set(uint8_t *bytes, size_t length,
@@ -3706,20 +3593,10 @@ float gomore_primitives_rational_transform(float value, float state) {
     return scaled / denominator;
 }
 
-int16_t gomore_primitives_i16_mean_absolute_difference(
+int16_t gomore_primitives_i16_mean_absolute_difference_checked(
     const int16_t *values, size_t count) {
-    if (values == NULL || count <= 1u) {
-        return 0;
-    }
-    uint32_t sum = 0u;
-    for (size_t index = 0u; index + 1u < count; ++index) {
-        int32_t difference = (int32_t)values[index + 1u] - values[index];
-        if (difference < 0) {
-            difference = -difference;
-        }
-        sum += (uint32_t)difference;
-    }
-    return (int16_t)(sum / (uint32_t)(count - 1u));
+    if (values == NULL || count <= 1u || count > (size_t)INT32_MAX) return 0;
+    return (int16_t)r1_gomore_i16_mean_difference_native((uint32_t)(uintptr_t)values,(uint32_t)count);
 }
 
 bool gomore_primitives_u16_all_within_300(const uint16_t *values,
@@ -3738,19 +3615,9 @@ bool gomore_primitives_u16_all_within_300(const uint16_t *values,
     return true;
 }
 
-float gomore_primitives_nonzero_i16_mean8(const int16_t values[8]) {
-    if (values == NULL) {
-        return 0.0f;
-    }
-    int32_t sum = 0;
-    int32_t count = 0;
-    for (size_t index = 0u; index < 8u; ++index) {
-        if (values[index] != 0) {
-            sum += values[index];
-            ++count;
-        }
-    }
-    return count > 0 ? (float)sum / (float)count : 0.0f;
+float gomore_primitives_nonzero_i16_mean8_checked(const int16_t values[8]) {
+    if (values == NULL) return 0.0f;
+    return r1_gomore_accel_nonzero_mean8_native((uint32_t)(uintptr_t)values);
 }
 
 float gomore_primitives_circular_u8_dot18(const uint8_t values[18],
@@ -3774,8 +3641,12 @@ bool gomore_primitives_motion_gate_accumulate(
     uint32_t elapsed_seconds, uint32_t current_timestamp,
     float sample, const float weights[18],
     gomore_primitives_motion_gate_output *output) {
-    if (state == NULL || weights == NULL || output == NULL ||
-            elapsed_seconds > current_timestamp) {
+    _Static_assert(sizeof(gomore_primitives_motion_gate_state) == 36u,
+                   "stock motion gate state size");
+    _Static_assert(offsetof(gomore_primitives_motion_gate_state,
+                           pending_sum) == 24u,
+                   "stock motion gate accumulator offset");
+    if (state == NULL || weights == NULL || output == NULL) {
         return false;
     }
     output->updated = false;
@@ -3816,12 +3687,7 @@ bool gomore_primitives_motion_gate_accumulate(
                     state->last_bucket;
             }
         } else {
-            for (size_t index = 0u; index < 18u; ++index) {
-                state->buckets[index] = 0u;
-            }
-            state->pending_sum = 0.0f;
-            state->pending_count = 0;
-            state->last_bucket = 0u;
+            clear_bytes((uint8_t *)state, sizeof(*state));
         }
 
         output->score = gomore_primitives_circular_u8_dot18(
@@ -3906,77 +3772,6 @@ bool gomore_primitives_peak_statistics(
     return true;
 }
 
-static float difference_sample(const void *samples,
-                               gomore_primitives_difference_mode mode,
-                               size_t index) {
-    if (mode == GOMORE_PRIMITIVES_DIFFERENCE_FLOAT32) {
-        const float *values = samples;
-        return values[index] - values[index - 1u];
-    }
-    if (mode == GOMORE_PRIMITIVES_DIFFERENCE_INT16) {
-        const int16_t *values = samples;
-        return (float)((int32_t)values[index] -
-                       (int32_t)values[index - 1u]);
-    }
-    const int32_t *values = samples;
-    return (float)(values[index] - values[index - 1u]);
-}
-
-bool gomore_primitives_direction_change_statistics(
-    float normalizer, float threshold_scale,
-    gomore_primitives_difference_mode mode,
-    const void *samples, size_t difference_count,
-    gomore_primitives_direction_change_output *output) {
-    if (samples == NULL || output == NULL || difference_count > 127u ||
-            (mode != GOMORE_PRIMITIVES_DIFFERENCE_FLOAT32 &&
-             mode != GOMORE_PRIMITIVES_DIFFERENCE_INT16 &&
-             mode != GOMORE_PRIMITIVES_DIFFERENCE_INT32)) {
-        return false;
-    }
-    if (difference_count < 6u) {
-        output->direction_changes = -1;
-        output->normalized_variation = -1.0f;
-        output->average_completed_run = -1.0f;
-        output->above_threshold_changes = -1;
-        return true;
-    }
-
-    const float threshold = normalizer * threshold_scale;
-    int8_t direction_changes = 0;
-    int8_t above_threshold_changes = 0;
-    int8_t run_length = 1;
-    int16_t completed_run_sum = 0;
-    float variation_sum = 0.0f;
-    float previous = difference_sample(samples, mode, 1u);
-    for (size_t index = 2u; index <= difference_count; ++index) {
-        const float current = difference_sample(samples, mode, index);
-        const bool same_direction =
-            (current > 0.0f && previous > 0.0f) ||
-            (current < 0.0f && previous < 0.0f);
-        if (same_direction) {
-            ++run_length;
-        } else {
-            ++direction_changes;
-            completed_run_sum = (int16_t)(completed_run_sum + run_length);
-            const float delta = current - previous;
-            variation_sum += (delta < 0.0f ? -delta : delta) /
-                (float)run_length;
-            const float magnitude = current < 0.0f ? -current : current;
-            if (normalizer > 0.0f && magnitude > threshold) {
-                ++above_threshold_changes;
-            }
-            run_length = 1;
-        }
-        previous = current;
-    }
-    output->direction_changes = direction_changes;
-    output->above_threshold_changes = above_threshold_changes;
-    output->normalized_variation = normalizer == 0.0f ? 0.0f :
-        variation_sum / normalizer;
-    output->average_completed_run = direction_changes == 0 ? 0.0f :
-        (float)completed_run_sum / (float)direction_changes;
-    return true;
-}
 
 _Static_assert(
     sizeof(gomore_primitives_dormant_heart_rate_filter_state) == 100u,
@@ -4078,7 +3873,7 @@ int32_t gomore_primitives_dormant_heart_rate_filter_update(
     return status;
 }
 
-bool gomore_primitives_six_channel_ring_score(
+bool gomore_primitives_six_channel_ring_score_checked(
     const int16_t *channel0, const int16_t *channel1,
     const int16_t *channel2, const int16_t *channel3,
     const int16_t *channel4, const int16_t *channel5,
@@ -4208,60 +4003,36 @@ bool gomore_primitives_complex_power(
     return true;
 }
 
-bool gomore_primitives_circular_feature_slot_advance(
+bool gomore_primitives_circular_feature_slot_advance_checked(
     void *state, size_t state_length) {
-    if (state == NULL || state_length < 0x224u) {
-        return false;
-    }
-    uint8_t *bytes = state;
-    const uint8_t cursor = bytes[0x52u];
-    if (cursor >= 8u) {
-        return false;
-    }
-    const size_t slot_offset = (size_t)cursor * 2u;
-    static const size_t bases[9] = {
-        0x02u, 0x204u, 0x214u, 0x12u, 0x22u,
-        0x32u, 0x42u, 0x1E4u, 0x1F4u,
-    };
-    for (size_t index = 0u; index < 9u; ++index) {
-        store_u16_le_early(&bytes[bases[index] + slot_offset], 0u);
-    }
-    bytes[0x52u] = (uint8_t)((cursor + 1u) & 7u);
+    if (state == NULL || state_length < 0x224u) return false;
+    if (((const uint8_t *)state)[0x52u] >= 8u) return false;
+    (void)r1_gomore_accel_slot_advance_native((uint32_t)(uintptr_t)state);
     return true;
 }
 
-bool gomore_primitives_circular_i16_mean3(
+bool gomore_primitives_circular_i16_mean3_checked(
     const int16_t *first, const int16_t *second, const int16_t *third,
     size_t ring_size, size_t cursor, size_t count,
     int16_t output[3]) {
     if (output == NULL) {
         return false;
     }
-    output[0] = 0;
-    output[1] = 0;
-    output[2] = 0;
     if (first == NULL || second == NULL || third == NULL ||
             ring_size == 0u || ring_size > 128u || cursor >= ring_size ||
             count > ring_size) {
+        output[0] = 0; output[1] = 0; output[2] = 0;
         return false;
     }
-    int32_t totals[3] = {0, 0, 0};
-    for (size_t distance = 1u; distance <= count; ++distance) {
-        const size_t index = (cursor + ring_size - distance) % ring_size;
-        totals[0] += first[index];
-        totals[1] += second[index];
-        totals[2] += third[index];
-    }
-    if (count != 0u) {
-        const int32_t divisor = (int32_t)count;
-        output[0] = (int16_t)(totals[0] / divisor);
-        output[1] = (int16_t)(totals[1] / divisor);
-        output[2] = (int16_t)(totals[2] / divisor);
-    }
+    (void)r1_gomore_accel_recent_mean3_native(
+        (uint32_t)(uintptr_t)first, (uint32_t)(uintptr_t)second,
+        (uint32_t)(uintptr_t)third, (uint32_t)ring_size, (uint32_t)cursor,
+        (uint32_t)count, (uint32_t)(uintptr_t)&output[0],
+        (uint32_t)(uintptr_t)&output[1], (uint32_t)(uintptr_t)&output[2]);
     return true;
 }
 
-int16_t gomore_primitives_circular_positive_fill_mean(
+int16_t gomore_primitives_circular_positive_fill_mean_checked(
     const int16_t *values, size_t ring_size, size_t cursor,
     size_t begin_distance, size_t end_distance) {
     if (values == NULL || ring_size == 0u || ring_size > 128u ||
@@ -4269,29 +4040,12 @@ int16_t gomore_primitives_circular_positive_fill_mean(
             begin_distance > end_distance) {
         return 0;
     }
-    int32_t carried = 0;
-    for (size_t distance = ring_size; distance > end_distance; --distance) {
-        const size_t index = (cursor + ring_size - distance) % ring_size;
-        if (values[index] > 0) {
-            carried = values[index];
-        }
-    }
-    int32_t total = 0;
-    for (size_t distance = end_distance;; --distance) {
-        const size_t index = (cursor + ring_size - distance) % ring_size;
-        if (values[index] > 0) {
-            carried = values[index];
-        }
-        total += carried;
-        if (distance == begin_distance) {
-            break;
-        }
-    }
-    const size_t sample_count = end_distance - begin_distance + 1u;
-    return (int16_t)(total / (int32_t)sample_count);
+    return (int16_t)r1_gomore_accel_positive_fill_native(
+        (uint32_t)(uintptr_t)values, (uint32_t)ring_size, (uint32_t)cursor,
+        (uint32_t)begin_distance, (uint32_t)end_distance);
 }
 
-bool gomore_primitives_locomotion_crossing_wrapper(
+bool gomore_primitives_locomotion_crossing_wrapper_checked(
     const int16_t baseline_ring[8], int32_t baseline_cursor,
     const uint16_t *samples, size_t sample_count,
     float *mode2_output, float *mode1_output,
@@ -4301,7 +4055,7 @@ bool gomore_primitives_locomotion_crossing_wrapper(
             mode2_output == NULL || mode1_output == NULL || estimate == NULL) {
         return false;
     }
-    const int16_t baseline = gomore_primitives_circular_positive_fill_mean(
+    const int16_t baseline = gomore_primitives_circular_positive_fill_mean_checked(
         baseline_ring, 8u, (size_t)baseline_cursor, 1u, 8u);
     float mode2 = 0.0f;
     float mode1 = 0.0f;
@@ -4324,44 +4078,7 @@ bool gomore_primitives_locomotion_crossing_wrapper(
     return true;
 }
 
-static int32_t crossing_signed_u32(uint32_t value) {
-    return value <= (uint32_t)INT32_MAX
-        ? (int32_t)value
-        : (int32_t)((int64_t)value - INT64_C(4294967296));
-}
-
-static uint32_t crossing_integer_square_root(uint32_t value) {
-    uint32_t root = 0u;
-    uint32_t bit = UINT32_C(1) << 30u;
-    while (bit > value) {
-        bit >>= 2u;
-    }
-    while (bit != 0u) {
-        if (value >= root + bit) {
-            value -= root + bit;
-            root = (root >> 1u) + bit;
-        } else {
-            root >>= 1u;
-        }
-        bit >>= 2u;
-    }
-    return root;
-}
-
-static void crossing_sort_u8(uint8_t *values, size_t count) {
-    for (size_t index = 1u; index < count; ++index) {
-        const uint8_t selected = values[index];
-        size_t destination = index;
-        while (destination > 0u &&
-                values[destination - 1u] > selected) {
-            values[destination] = values[destination - 1u];
-            --destination;
-        }
-        values[destination] = selected;
-    }
-}
-
-bool gomore_primitives_locomotion_crossing_period_estimate(
+bool gomore_primitives_locomotion_crossing_period_estimate_checked(
     const uint16_t *samples, size_t sample_count, int16_t baseline,
     uint32_t mode, float *output) {
     if (samples == NULL || sample_count < 200u || output == NULL ||
@@ -4369,200 +4086,9 @@ bool gomore_primitives_locomotion_crossing_period_estimate(
         return false;
     }
 
-    const int32_t long_length = mode == 1u ? 20 : 12;
-    const int32_t short_length = mode == 1u ? 10 : 6;
-    const int32_t long_half = long_length / 2;
-    const int32_t short_half = short_length / 2;
-    const float minimum_interval = mode == 1u ? 20.0f : 6.25f;
-    const int32_t maximum_interval = mode == 1u ? 50 : 25;
-
-    uint32_t square_sum = 0u;
-    for (size_t index = 0u; index < 200u; ++index) {
-        const int32_t centered = (int32_t)samples[index] - (int32_t)baseline;
-        square_sum += (uint32_t)centered * (uint32_t)centered;
-    }
-    const int32_t signed_square_sum = crossing_signed_u32(square_sum);
-    int32_t scale = 0;
-    if (signed_square_sum > 0) {
-        scale = (int32_t)crossing_integer_square_root(
-            (uint32_t)(signed_square_sum / 200));
-    }
-
-    int32_t input_history[4] = {0, 0, 0, 0};
-    int32_t output_history[4] = {0, 0, 0, 0};
-    int32_t filtered[200];
-    for (size_t index = 0u; index < 200u; ++index) {
-        int32_t normalized = 0;
-        if (scale != 0) {
-            normalized = ((int32_t)samples[index] - (int32_t)baseline) *
-                1000 / scale;
-        }
-        filtered[index] = gomore_primitives_integer_iir4_update(
-            normalized, input_history, output_history, (int32_t)mode);
-    }
-
-    uint8_t intervals[80] = {0u};
-    size_t interval_count = 0u;
-    uint8_t maximum_pair[2] = {0u, 0u};
-    uint8_t minimum_pair[2] = {0u, 0u};
-    bool transition_initialized = false;
-    float transition_estimate = -1.0f;
-    int32_t previous_maximum_index = -1;
-    int32_t previous_minimum_index = -1;
-    int32_t previous_maximum_value = -1;
-    int32_t previous_minimum_value = -1;
-    int32_t selected_index = 0;
-    int32_t selected_value = filtered[0];
-    int32_t interval = -1;
-    bool previous_regime = false;
-
-    for (int32_t sample = 0; sample < 200; ++sample) {
-        uint32_t long_sum = 0u;
-        for (int32_t offset = -long_half;
-                offset < long_length - long_half; ++offset) {
-            int32_t source = sample + offset;
-            if (source < 0) {
-                source = 0;
-            } else if (source >= 200) {
-                source = 199;
-            }
-            long_sum += (uint32_t)filtered[source];
-        }
-        uint32_t short_sum = 0u;
-        for (int32_t offset = -short_half;
-                offset < short_length - short_half; ++offset) {
-            int32_t source = sample + offset;
-            if (source < 0) {
-                source = 0;
-            } else if (source >= 200) {
-                source = 199;
-            }
-            short_sum += (uint32_t)filtered[source];
-        }
-        const bool regime =
-            crossing_signed_u32(long_sum) / long_length <
-            crossing_signed_u32(short_sum) / short_length;
-        const int32_t current_value = filtered[sample];
-        if (sample == 0) {
-            selected_index = 0;
-            selected_value = current_value;
-        } else if (regime == previous_regime) {
-            if ((regime && selected_value < current_value) ||
-                    (!regime && current_value < selected_value)) {
-                selected_index = sample;
-                selected_value = current_value;
-            }
-        } else {
-            uint8_t *pair = minimum_pair;
-            float shape_first = 0.0f;
-            float shape_second = 0.0f;
-            bool has_new_interval = false;
-            int32_t raw_interval = interval;
-            if (previous_regime) {
-                pair = maximum_pair;
-                if (previous_maximum_index > 0) {
-                    interval = selected_index - previous_maximum_index;
-                    raw_interval = interval;
-                    shape_first = (float)(selected_value -
-                        previous_minimum_value);
-                    shape_second = (float)(previous_maximum_value -
-                        previous_minimum_value);
-                    has_new_interval = true;
-                }
-                previous_maximum_index = selected_index;
-                previous_maximum_value = selected_value;
-            } else {
-                if (previous_minimum_index > 0) {
-                    interval = selected_index - previous_minimum_index;
-                    raw_interval = interval;
-                    shape_first = (float)(previous_maximum_value -
-                        selected_value);
-                    shape_second = (float)(previous_maximum_value -
-                        previous_minimum_value);
-                    has_new_interval = true;
-                }
-                previous_minimum_index = selected_index;
-                previous_minimum_value = selected_value;
-            }
-            if (mode == 1u && has_new_interval) {
-                gomore_primitives_locomotion_transition_state state = {
-                    .accumulated = (uint32_t)interval,
-                    .initialized = transition_initialized,
-                    .estimate = transition_estimate,
-                };
-                bool updated = false;
-                if (!gomore_primitives_locomotion_transition_accumulate(
-                        &state, minimum_interval * 0.8f,
-                        pair[0], pair[1], shape_first, shape_second,
-                        &updated)) {
-                    return false;
-                }
-                interval = (int32_t)state.accumulated;
-                transition_initialized = state.initialized;
-                transition_estimate = state.estimate;
-                (void)updated;
-            }
-            if (has_new_interval) {
-                pair[0] = pair[1];
-                pair[1] = (uint8_t)raw_interval;
-            }
-            if ((float)interval >= minimum_interval &&
-                    interval <= maximum_interval && interval_count < 80u) {
-                intervals[interval_count++] = (uint8_t)interval;
-            }
-            selected_index = sample;
-            selected_value = current_value;
-        }
-        previous_regime = regime;
-    }
-
-    if (transition_initialized && interval_count > 2u) {
-        crossing_sort_u8(intervals, interval_count);
-        size_t remove_count = 0u;
-        const int16_t cutoff = (int16_t)(transition_estimate * 70.0f);
-        while (remove_count < interval_count &&
-                (int32_t)intervals[remove_count] * 100 < (int32_t)cutoff) {
-            ++remove_count;
-        }
-        for (size_t index = 0u; index < interval_count - remove_count;
-                ++index) {
-            intervals[index] = intervals[index + remove_count];
-        }
-        interval_count -= remove_count;
-    }
-
-    *output = 0.0f;
-    if (interval_count <= 2u) {
-        return true;
-    }
-    crossing_sort_u8(intervals, interval_count);
-    uint32_t median;
-    if ((interval_count & 1u) == 0u) {
-        median = ((uint32_t)intervals[interval_count / 2u - 1u] +
-            (uint32_t)intervals[interval_count / 2u]) >> 1u;
-    } else {
-        median = intervals[(interval_count - 1u) / 2u];
-    }
-    const size_t first_quartile = interval_count / 4u;
-    const size_t third_quartile = (interval_count * 3u) / 4u;
-    float selected_period = (float)median;
-    const float spread = (float)((int32_t)intervals[third_quartile] -
-        (int32_t)intervals[first_quartile]) / selected_period;
-    if ((int32_t)float_bits(spread) <
-            (int32_t)UINT32_C(0x3E99999A)) {
-        int16_t sum = 0;
-        for (size_t index = first_quartile; index <= third_quartile;
-                ++index) {
-            sum = (int16_t)((uint16_t)sum + intervals[index]);
-        }
-        selected_period = (float)sum /
-            (float)(third_quartile - first_quartile + 1u);
-    }
-    float estimate = (25.0f / selected_period) * 60.0f;
-    if (mode == 1u) {
-        estimate *= 2.0f;
-    }
-    *output = estimate;
+    (void)r1_gomore_accel_crossing_period_native(
+        -1.0f, (uint32_t)(uintptr_t)samples, (uint32_t)(uintptr_t)output,
+        mode, (uint32_t)(int32_t)baseline);
     return true;
 }
 
@@ -4705,6 +4231,7 @@ static void dormant_ratio_reset_qualified(
 bool gomore_primitives_dormant_ratio_accumulator(
     gomore_primitives_dormant_ratio_accumulator_state *state,
     const gomore_primitives_dormant_ratio_input *input,
+    uint8_t profile_flag,
     gomore_primitives_float_binary_fn power) {
     if (state == NULL || input == NULL || power == NULL ||
             input->thresholds == NULL || input->primary_sums == NULL ||
@@ -4724,7 +4251,7 @@ bool gomore_primitives_dormant_ratio_accumulator(
         return true;
     }
 
-    const float below_range_weight = state->profile_flag == 0u
+    const float below_range_weight = profile_flag == 0u
         ? bits_float(UINT32_C(0x3F9C28F6))
         : bits_float(UINT32_C(0x3FA8F5C3));
     if (!gomore_primitives_weighted_histogram6_accumulate(
@@ -4784,7 +4311,8 @@ bool gomore_primitives_dormant_estimator_cycle(
     const gomore_primitives_dormant_cycle_providers *providers,
     int32_t *result) {
     if (state == NULL || state_length < 0x328u || input == NULL ||
-            input->auxiliary == NULL || providers == NULL ||
+            input->auxiliary == NULL ||
+            providers == NULL ||
             providers->arctangent == NULL || providers->cosine == NULL ||
             providers->sine == NULL || providers->power == NULL ||
             providers->reduce == NULL || providers->finalize == NULL ||
@@ -5887,144 +5415,6 @@ bool gomore_primitives_activity_window_update(
     return true;
 }
 
-bool gomore_primitives_respiratory_rate_update(
-    gomore_primitives_respiratory_rate_state *state, uint32_t elapsed,
-    const gomore_primitives_respiratory_rate_input *input,
-    void *estimator_state,
-    const gomore_primitives_respiratory_rate_providers *providers,
-    float output[2], uint32_t *status) {
-    if (state == NULL || input == NULL || estimator_state == NULL ||
-            providers == NULL || providers->estimate == NULL ||
-            providers->square_root == NULL || output == NULL ||
-            status == NULL) {
-        return false;
-    }
-
-    if (elapsed > 1u) {
-        uint32_t missing = elapsed - 1u;
-        if (missing > 20u) {
-            missing = 20u;
-        }
-        for (uint32_t index = 0u; index < missing; ++index) {
-            if (!gomore_primitives_modulo5_record(
-                    (uint8_t *)(void *)state, sizeof(*state), 2u, 2u)) {
-                return false;
-            }
-        }
-    }
-    if (!gomore_primitives_modulo5_record(
-            (uint8_t *)(void *)state, sizeof(*state),
-            input->secondary_code, input->primary_code)) {
-        return false;
-    }
-
-    float secondary_square_mean = 0.0f;
-    for (size_t index = 0u; index < 2u; ++index) {
-        const uint32_t code = state->secondary_codes[index];
-        secondary_square_mean += (float)(code * code);
-    }
-    secondary_square_mean *= 0.5f;
-    float primary_square_mean = 0.0f;
-    for (size_t index = 0u; index < 4u; ++index) {
-        const uint32_t code = state->primary_codes[index];
-        primary_square_mean += (float)(code * code);
-    }
-    primary_square_mean *= 0.25f;
-
-    uint32_t flags = input->input_unavailable ? UINT32_C(0x40) : 0u;
-    float rate = 0.0f;
-    float confidence = 0.0f;
-    if (providers->estimate(
-            estimator_state, elapsed, input->estimator_input, flags,
-            &rate, &confidence) != 0) {
-        flags |= UINT32_C(0x08);
-    }
-
-    const bool encoded_rate_valid =
-        float_bits(rate) + UINT32_C(0xBF200000) < UINT32_C(0x00E80001);
-    if (!encoded_rate_valid) {
-        if (rate > 0.0f && confidence > 0.0f) {
-            if ((int32_t)float_bits(rate) >
-                    (int32_t)UINT32_C(0x41C80000)) {
-                rate = 25.0f;
-            } else if ((int32_t)float_bits(rate) <
-                           (int32_t)UINT32_C(0x40E00000)) {
-                rate = 7.0f;
-            }
-        } else if (float_bits(rate) != UINT32_C(0xBF800000)) {
-            rate = -1.0f;
-        }
-        flags |= UINT32_C(0x10);
-    }
-
-    if (elapsed > 1u) {
-        if (!gomore_primitives_clear_two_records(state, sizeof(*state))) {
-            return false;
-        }
-        flags |= UINT32_C(0x20);
-    }
-
-    if ((int32_t)float_bits(secondary_square_mean) >
-            (int32_t)UINT32_C(0x3F800000)) {
-        const double adjustment =
-            providers->square_root((double)secondary_square_mean) *
-            0.25 * 0.30000001192092896;
-        confidence = (float)((double)confidence - adjustment);
-    }
-    if ((int32_t)float_bits(primary_square_mean) >
-            (int32_t)UINT32_C(0x3F000000)) {
-        const double adjustment =
-            providers->square_root((double)primary_square_mean) *
-            0.25 * 0.30000001192092896;
-        confidence = (float)((double)confidence - adjustment);
-    }
-    if (confidence < 0.0f) {
-        confidence = 0.0f;
-        rate = -1.0f;
-    }
-
-    for (size_t index = 1u; index < 5u; ++index) {
-        state->rate_history[index - 1u] = state->rate_history[index];
-        state->confidence_history[index - 1u] =
-            state->confidence_history[index];
-    }
-    state->rate_history[4] = rate;
-    state->confidence_history[4] = confidence;
-
-    if (gomore_primitives_count_encoded_i32(
-            (const int32_t *)(const void *)state->rate_history, 5u) < 1u) {
-        output[0] = rate;
-        output[1] = confidence;
-        *status = flags;
-        return true;
-    }
-
-    const int32_t maximum_index = gomore_primitives_argmax_from_zero(
-        state->confidence_history, 5u);
-    if (maximum_index < 0) {
-        return false;
-    }
-    const float maximum_confidence =
-        state->confidence_history[(size_t)maximum_index];
-    const float threshold =
-        (int32_t)float_bits(maximum_confidence) >
-            (int32_t)UINT32_C(0x3F000000)
-        ? 0.5f
-        : (float)((double)maximum_confidence * 0.8);
-    const int32_t included = gomore_primitives_thresholded_mean5(
-        threshold, state->rate_history, state->confidence_history,
-        &output[0]);
-    if (included < 0) {
-        return false;
-    }
-    float inclusion_share = (float)included / 5.0f;
-    inclusion_share *= 0.30000001192092896f;
-    output[1] = (float)(
-        (double)maximum_confidence * 0.7 + (double)inclusion_share);
-    *status = flags;
-    return true;
-}
-
 static bool float_is_nan(float value) {
     const uint32_t bits = float_bits(value);
     return (bits & UINT32_C(0x7F800000)) == UINT32_C(0x7F800000) &&
@@ -6096,7 +5486,7 @@ static bool optical_period_shift(
     gomore_primitives_optical_interval_state *state,
     const float input[25], bool zero_fill,
     const gomore_primitives_optical_period_providers *providers) {
-    return gomore_primitives_shift_negated_filter_history(
+    return gomore_primitives_shift_negated_filter_history_checked(
         state, sizeof(*state), input, zero_fill, providers->apply_filter);
 }
 
@@ -6109,7 +5499,7 @@ static float optical_period_tolerance_update(float previous,
                    (double)measurement * 0.25);
 }
 
-bool gomore_primitives_optical_period_estimate(
+bool gomore_primitives_optical_period_estimate_checked(
     gomore_primitives_optical_interval_state *state,
     uint32_t elapsed_windows, const float input[25], uint32_t flags,
     const gomore_primitives_optical_period_providers *providers,
@@ -6138,7 +5528,7 @@ bool gomore_primitives_optical_period_estimate(
                           (flags & UINT32_C(0x40)) == 0u;
     if (!ordinary) {
         if (elapsed_windows > 20u) {
-            if (!gomore_primitives_large_filter_state_initialize(
+            if (!gomore_primitives_large_filter_state_initialize_checked(
                     state, sizeof(*state),
                     providers->initialize_filter_state)) {
                 return false;
@@ -6147,7 +5537,7 @@ bool gomore_primitives_optical_period_estimate(
         }
         state->prefix[80] = 9u;
         for (uint32_t index = 0u; index < elapsed_windows; ++index) {
-            if (!gomore_primitives_compact_25_windows(
+            if (!gomore_primitives_compact_25_windows_checked(
                     (uint8_t *)(void *)state->intervals, 40u,
                     &state->interval_count, state->current_window)) {
                 return false;
@@ -6166,7 +5556,7 @@ bool gomore_primitives_optical_period_estimate(
     if (state->prefix[80] != 0u) {
         --state->prefix[80];
         if (!optical_period_shift(state, input, false, providers) ||
-                !gomore_primitives_compact_25_windows(
+                !gomore_primitives_compact_25_windows_checked(
                     (uint8_t *)(void *)state->intervals, 40u,
                     &state->interval_count, state->current_window)) {
             return false;
@@ -6185,7 +5575,7 @@ bool gomore_primitives_optical_period_estimate(
 
     size_t first_count = 0u;
     size_t second_count = 0u;
-    (void)gomore_primitives_moving_average_extrema_indices(
+    (void)gomore_primitives_moving_average_extrema_indices_checked(
         state->signal, 250u, 25u, 6u,
         workspace->first_indices, GOMORE_PRIMITIVES_EXTREMA_CAPACITY,
         &first_count,
@@ -6194,7 +5584,7 @@ bool gomore_primitives_optical_period_estimate(
     uint8_t first_count_u8 = (uint8_t)first_count;
     uint8_t second_count_u8 = (uint8_t)second_count;
     float median_spacing = 0.0f;
-    (void)gomore_primitives_peak_candidate_match(
+    (void)gomore_primitives_peak_candidate_match_checked(
         state->signal, 250u,
         workspace->first_indices, workspace->second_indices,
         &first_count_u8, &second_count_u8,
@@ -6204,7 +5594,7 @@ bool gomore_primitives_optical_period_estimate(
         providers->feature_math.power_f32,
         providers->feature_math.square_root_f32);
     float mean_amplitude = 0.0f;
-    if (!gomore_primitives_optical_interval_merge(
+    if (!gomore_primitives_optical_interval_merge_checked(
             state, workspace->first_indices, workspace->second_indices,
             first_count_u8, &mean_amplitude)) {
         return false;
@@ -6232,23 +5622,23 @@ bool gomore_primitives_optical_period_estimate(
     float mode2_quality = 0.0f;
     size_t accepted_count = 0u;
     int32_t extraction_status = 0;
-    if (!gomore_primitives_locomotion_control_extract(
+    if (!gomore_primitives_locomotion_control_extract_checked(
             workspace->control_samples, state->interval_count,
             state->position_tolerance_scale,
             state->amplitude_tolerance_scale, 1u,
             &workspace->control_workspace,
             providers->round_value,
-            gomore_primitives_locomotion_feature_reduce,
+            gomore_primitives_locomotion_feature_reduce_checked,
             &providers->feature_math,
             &mode1_rate, &mode1_quality,
             &accepted_count, &extraction_status) ||
-            !gomore_primitives_locomotion_control_extract(
+            !gomore_primitives_locomotion_control_extract_checked(
                 workspace->control_samples, state->interval_count,
                 state->position_tolerance_scale,
                 state->amplitude_tolerance_scale, 2u,
                 &workspace->control_workspace,
                 providers->round_value,
-                gomore_primitives_locomotion_feature_reduce,
+                gomore_primitives_locomotion_feature_reduce_checked,
                 &providers->feature_math,
                 &mode2_rate, &mode2_quality,
                 &accepted_count, &extraction_status)) {
@@ -6274,7 +5664,7 @@ bool gomore_primitives_optical_period_estimate(
             workspace->control_workspace.expanded[index] = smoothed;
             workspace->control_workspace.expanded[249u - index] = smoothed;
         }
-        if (!gomore_primitives_locomotion_feature_reduce(
+        if (!gomore_primitives_locomotion_feature_reduce_checked(
                 workspace->control_workspace.expanded,
                 workspace->control_workspace.first_indices,
                 workspace->control_workspace.second_indices,
@@ -6295,7 +5685,7 @@ bool gomore_primitives_optical_period_estimate(
     return true;
 }
 
-bool gomore_primitives_optical_interval_merge(
+bool gomore_primitives_optical_interval_merge_checked(
     gomore_primitives_optical_interval_state *state,
     const uint8_t *end_positions, const uint8_t *start_positions,
     size_t candidate_count, float *mean_amplitude) {
@@ -6313,7 +5703,7 @@ bool gomore_primitives_optical_interval_merge(
     }
     *mean_amplitude = 0.0f;
 
-    if (!gomore_primitives_compact_25_windows(
+    if (!gomore_primitives_compact_25_windows_checked(
             (uint8_t *)(void *)state->intervals, 40u,
             &state->interval_count, state->current_window)) {
         return false;
@@ -6328,7 +5718,7 @@ bool gomore_primitives_optical_interval_merge(
             candidate_index < candidate_count; ++candidate_index) {
         const uint8_t local_end = end_positions[candidate_index];
         const uint8_t local_start = start_positions[candidate_index];
-        const uint32_t local_peak = gomore_primitives_max_difference_index(
+        const uint32_t local_peak = gomore_primitives_max_difference_index_checked(
             state->signal, local_start, local_end);
         if (local_peak == UINT32_MAX) {
             return false;
@@ -6358,8 +5748,8 @@ bool gomore_primitives_optical_interval_merge(
                 use_tail = true;
             } else if (current->end_position == candidate.end_position &&
                     current->start_position == candidate.start_position) {
-                /* Stock retries forever on an exact duplicate; one copy is
-                 * the complete observable bounded result. */
+                /* Stock skips an exact duplicate. The separate last-cursor
+                 * retry enters its tail path on the next iteration. */
                 continue;
             } else if (current->end_position > candidate.end_position &&
                     current->start_position > candidate.start_position) {
@@ -6900,7 +6290,7 @@ bool gomore_primitives_sleep_stage_stream_update(
     return true;
 }
 
-bool gomore_primitives_peak_candidate_match(
+bool gomore_primitives_peak_candidate_match_checked(
     const float *signal, size_t signal_count,
     uint8_t candidates[20], uint8_t references[20],
     uint8_t *candidate_count, uint8_t *reference_count,
@@ -6942,14 +6332,14 @@ bool gomore_primitives_peak_candidate_match(
     }
 
     float deviation = 0.0f;
-    if (!gomore_primitives_standard_deviation(
+    if (!gomore_primitives_standard_deviation_checked(
             workspace, *candidate_count, power, square_root, &deviation)) {
         return false;
     }
-    const float mean = gomore_primitives_mean(workspace, *candidate_count);
+    const float mean = gomore_primitives_mean_checked(workspace, *candidate_count);
     size_t filtered_count = 0u;
     if (deviation > mean) {
-        if (!gomore_primitives_sort_float_subrange(
+        if (!gomore_primitives_sort_float_subrange_checked(
                 workspace, 25u, 0u, (size_t)*candidate_count - 1u,
                 qsort_provider, compare)) {
             return false;
@@ -6990,7 +6380,7 @@ bool gomore_primitives_peak_candidate_match(
                                   (int32_t)filtered_candidates[index]);
     }
     float median = 0.0f;
-    if (!gomore_primitives_median(
+    if (!gomore_primitives_median_checked(
             workspace, filtered_count - 1u,
             qsort_provider, compare, &median)) {
         *candidate_count = 0u;
@@ -7037,7 +6427,7 @@ bool gomore_primitives_peak_candidate_match(
                 (double)median * 1.25 < (double)spacing) {
             continue;
         }
-        const int32_t valley = gomore_primitives_quantized_argmin(
+        const int32_t valley = gomore_primitives_quantized_argmin_checked(
             signal, (uint32_t)previous + 1u, candidate);
         if (valley < 0 || (size_t)valley >= signal_count) {
             *candidate_count = 0u;
@@ -7067,7 +6457,7 @@ bool gomore_primitives_peak_candidate_match(
         workspace[index] = (float)((int32_t)candidates[index + 1u] -
                                   (int32_t)candidates[index]);
     }
-    if (!gomore_primitives_median(
+    if (!gomore_primitives_median_checked(
             workspace, output_count - 1u,
             qsort_provider, compare, median_spacing)) {
         *candidate_count = 0u;
@@ -7286,11 +6676,11 @@ float gomore_primitives_affine_reciprocal_model4_evaluate(
         model->coefficients[3] * values[2] +
         model->coefficients[4] * values[3] +
         model->coefficients[5];
-    const float scaled = (values[0] / 50.0f) * affine;
-    return (float)((double)scaled / 3.6);
+    const float scaled = (values[0] / 60.0f) * affine;
+    return (float)((double)scaled * 3.6);
 }
 
-float gomore_primitives_bounded_linear_complement(
+float gomore_primitives_bounded_linear_complement_checked(
     float primary, float secondary) {
     if ((int32_t)float_bits(primary) > INT32_C(0x40A00000) ||
             (int32_t)float_bits(secondary) > INT32_C(0x3F333333)) {
@@ -7299,31 +6689,6 @@ float gomore_primitives_bounded_linear_complement(
     const double normalized = (double)secondary / 0.7 +
         (double)(primary / 5.0f);
     return (float)(1.0 - normalized * 0.5);
-}
-
-static int32_t autocorrelation_wrap_multiply_add(
-    int32_t accumulator, int32_t left, int32_t right) {
-    union {
-        uint32_t unsigned_value;
-        int32_t signed_value;
-    } converted;
-    converted.unsigned_value = (uint32_t)accumulator +
-        (uint32_t)left * (uint32_t)right;
-    return converted.signed_value;
-}
-
-static float autocorrelation_peak_rate(const int32_t values[100],
-                                       uint8_t lag) {
-    if (lag == 0u || lag >= 99u) {
-        return 0.0f;
-    }
-    const float refined = (float)lag + gomore_primitives_centered_ratio(
-        values[lag - 1u], values[lag], values[lag + 1u]);
-    const float absolute = refined < 0.0f ? -refined : refined;
-    if ((int32_t)float_bits(absolute) < INT32_C(0x358637BD)) {
-        return 0.0f;
-    }
-    return 1500.0f / refined;
 }
 
 bool gomore_primitives_locomotion_autocorrelation_analyze(
@@ -7335,209 +6700,8 @@ bool gomore_primitives_locomotion_autocorrelation_analyze(
             second_binding == 0u) {
         return false;
     }
-    int8_t *const turning_counts = (int8_t *)first_binding;
-    float *const shape = (float *)second_binding;
-    int32_t correlation[100];
-    uint8_t peaks[12] = {0u};
-    *first = 1.0f;
-
-    int32_t sum = 0;
-    for (size_t index = 0u; index < 100u; ++index) {
-        sum += samples[index];
-    }
-    const int32_t mean = sum / 100;
-    int32_t energy = 0;
-    for (size_t index = 0u; index < 100u; ++index) {
-        const int32_t centered = (int32_t)samples[index] - mean;
-        energy = autocorrelation_wrap_multiply_add(
-            energy, centered, centered);
-    }
-    for (size_t lag = 0u; lag < 100u; ++lag) {
-        int32_t accumulator = 0;
-        for (size_t index = 0u; index < 100u - lag; ++index) {
-            const int32_t first_centered =
-                (int32_t)samples[index] - mean;
-            const int32_t second_centered =
-                (int32_t)samples[index + lag] - mean;
-            accumulator = autocorrelation_wrap_multiply_add(
-                accumulator, first_centered, second_centered);
-        }
-        correlation[lag] = accumulator;
-    }
-    const int32_t variance_scale = (energy / 100) * 100;
-
-    uint8_t strict_count = 0u;
-    for (uint8_t lag = 1u; lag < 99u; ++lag) {
-        if (correlation[lag - 1u] < correlation[lag] &&
-                correlation[lag + 1u] < correlation[lag]) {
-            if (strict_count < 10u) {
-                peaks[strict_count] = lag;
-            }
-            ++strict_count;
-        }
-    }
-    if (strict_count < 2u) {
-        *first = -1.0f;
-    }
-    if (strict_count > 10u) {
-        if (strict_count > 15u) {
-            *first = -1.0f;
-        }
-        strict_count = 10u;
-    }
-    if (*first >= 0.0f) {
-        int32_t band_maximum = -variance_scale;
-        for (uint8_t index = 0u; index < strict_count; ++index) {
-            const uint8_t lag = peaks[index];
-            if (band_maximum < correlation[lag] && lag > 12u && lag < 40u) {
-                band_maximum = correlation[lag];
-            }
-        }
-        for (uint8_t index = 0u; index + 1u < strict_count; ++index) {
-            peaks[index] = (uint8_t)(peaks[index + 1u] - peaks[index]);
-        }
-        --strict_count;
-        bool consistent = strict_count >= 2u;
-        for (uint8_t index = 0u; index + 1u < strict_count; ++index) {
-            const int32_t difference =
-                (int32_t)peaks[index] - (int32_t)peaks[index + 1u];
-            if (difference < -3 || difference > 3) {
-                consistent = false;
-            }
-        }
-        const float scaled_variance = (float)variance_scale;
-        if ((float)band_maximum > scaled_variance * 0.55f ||
-                (consistent &&
-                 (float)band_maximum > scaled_variance * 0.4f)) {
-            *first = 1.0f;
-        } else {
-            *first = -1.0f;
-        }
-    }
-
-    uint8_t peak_count = 0u;
-    uint8_t strongest_lag = 0u;
-    int32_t strongest_value = 0;
-    const float peak_threshold = (float)variance_scale * 0.03f;
-    for (uint8_t lag = 1u; lag < 99u; ++lag) {
-        const int32_t value = correlation[lag];
-        if (value >= correlation[lag - 1u] &&
-                value >= correlation[lag + 1u] &&
-                (float)value >= peak_threshold) {
-            peaks[peak_count] = lag;
-            if (strongest_value < value && lag < 51u) {
-                strongest_lag = lag;
-                strongest_value = value;
-            }
-            ++peak_count;
-            if (peak_count > 10u) {
-                peak_count = 11u;
-                break;
-            }
-        }
-    }
-
-    uint8_t secondary_lag = 0u;
-    int32_t secondary_value = 0;
-    for (uint8_t index = 0u; index < peak_count; ++index) {
-        const uint8_t lag = peaks[index];
-        const int32_t value = correlation[lag];
-        if (secondary_value < value && value < strongest_value && lag < 51u) {
-            secondary_lag = lag;
-            secondary_value = value;
-        }
-    }
-    int32_t minimum_before_peak = variance_scale;
-    for (uint8_t lag = 0u; lag < strongest_lag; ++lag) {
-        if (correlation[lag] < minimum_before_peak) {
-            minimum_before_peak = correlation[lag];
-        }
-    }
-
-    const int32_t harmonic_tolerance = strongest_lag < 30u
-        ? 4 : (strongest_lag < 35u ? 5 : 6);
-    if ((float)strongest_value > (float)variance_scale * 0.17f &&
-            strongest_lag > 5u) {
-        for (uint8_t index = 0u; index < peak_count; ++index) {
-            const int32_t distance = (int32_t)strongest_lag * 2 -
-                                     (int32_t)peaks[index];
-            if (distance >= -harmonic_tolerance &&
-                    distance <= harmonic_tolerance) {
-                *second = 1.0f;
-                break;
-            }
-        }
-    }
-
-    if (*second >= 0.0f) {
-        gomore_primitives_direction_change_output direction;
-        if (!gomore_primitives_direction_change_statistics(
-                (float)(strongest_value - minimum_before_peak), 0.3f,
-                GOMORE_PRIMITIVES_DIFFERENCE_INT32,
-                correlation, strongest_lag, &direction)) {
-            return false;
-        }
-        turning_counts[0] = direction.direction_changes;
-        turning_counts[1] = direction.above_threshold_changes;
-        shape[0] = direction.normalized_variation;
-        shape[1] = direction.average_completed_run;
-        const int32_t direction_count = direction.direction_changes;
-        if (direction_count > 4) {
-            const float minimum_share = direction_count > 8 ? 0.35f : 0.45f;
-            if ((float)direction.above_threshold_changes /
-                    (float)direction_count < minimum_share) {
-                *second = -1.0f;
-            }
-        }
-    }
-    if (peak_count > 7u &&
-            (float)strongest_value > (float)variance_scale * 0.35f &&
-            peaks[7] < 48u) {
-        *second = -1.0f;
-    }
-    if ((float)minimum_before_peak > (float)variance_scale * -0.1f) {
-        *second = -1.0f;
-    }
-
-    uint8_t selected_lag = 0u;
-    if (*second >= 0.0f && peak_count > 2u) {
-        const uint16_t third_peak = peaks[2];
-        *third = third_peak == 0u ? 0.0f : 4500.0f / (float)third_peak;
-        const int32_t harmonic_distance =
-            (int32_t)secondary_lag * 2 - (int32_t)strongest_lag;
-        selected_lag = strongest_lag;
-        if (harmonic_distance >= -2 && harmonic_distance <= 2) {
-            selected_lag = secondary_lag;
-        }
-        *fourth = autocorrelation_peak_rate(correlation, selected_lag);
-    }
-
-    int32_t selected_index = -1;
-    for (uint8_t index = 0u; index < peak_count; ++index) {
-        if (peaks[index] == selected_lag) {
-            selected_index = (int32_t)index;
-            break;
-        }
-    }
-    uint8_t earlier_lag = 0u;
-    if (selected_index == 0) {
-        earlier_lag = peaks[0];
-    } else if (selected_index == 1) {
-        earlier_lag = peaks[0];
-        if (earlier_lag < 6u || earlier_lag > 50u) {
-            earlier_lag = peaks[1];
-        }
-    } else if (selected_index > 1) {
-        int32_t best_value = 0;
-        for (int32_t index = 0; index < selected_index; ++index) {
-            const uint8_t lag = peaks[index];
-            if (lag >= 6u && lag <= 50u && best_value < correlation[lag]) {
-                earlier_lag = lag;
-                best_value = correlation[lag];
-            }
-        }
-    }
-    *fifth = autocorrelation_peak_rate(correlation, earlier_lag);
+    (void)r1_gomore_accel_autocorrelation_native(samples, first, second,
+        third, fourth, fifth, first_binding, second_binding);
     return true;
 }
 
@@ -7572,7 +6736,7 @@ bool gomore_primitives_select_heart_rate(
     }
     if (state == 0u && gomore_primitives_float_in_encoded_range(direct)) {
         output->heart_rate = direct;
-        output->quality = 1u;
+        output->quality = UINT32_C(0x3f800000);
         output->source = 0u;
     } else if (gomore_primitives_float_in_encoded_range(
                    estimated->heart_rate)) {
@@ -7690,7 +6854,7 @@ bool gomore_primitives_sps_accelerometer_candidate_update(
     }
 
     gomore_primitives_sps_model_state *model_state = NULL;
-    float values[4] = {0.0f, 0.0f, 0.0f, 0.0f};
+    float values[4] = {0.0f, 0.0f, 0.0f, -1.0f};
     float *smoothed = NULL;
     double new_weight = 0.0;
     double prior_weight = 0.0;
@@ -7718,6 +6882,8 @@ bool gomore_primitives_sps_accelerometer_candidate_update(
         minimum = model_state->calibration_enabled == 1u ? 2.0f : 4.0f;
         maximum = 7.0f;
     } else {
+        state->latest_candidate = 0.0f;
+        state->latest_primary_model = 0.0f;
         output->candidate = 0.0f;
         output->status = 1u;
         return true;
@@ -8021,23 +7187,13 @@ uint32_t gomore_primitives_update_failure_counter(
     return 0u;
 }
 
-int32_t gomore_primitives_shift_i16_trend_gate5(
+int32_t gomore_primitives_shift_i16_trend_gate5_checked(
     int16_t history[5], int32_t sample) {
     if (history == NULL) {
         return -1;
     }
-    for (size_t index = 0u; index < 4u; ++index) {
-        history[index] = history[index + 1u];
-    }
-    history[4] = (int16_t)sample;
-    if (sample > 0) {
-        return 1;
-    }
-    if (sample > -500 && history[3] > -1800 && history[2] > -1200 &&
-            history[1] > 1000 && history[0] > 1000) {
-        return 1;
-    }
-    return -1;
+    return (int32_t)r1_gomore_accel_recent_decision_native(
+        (uint32_t)(uintptr_t)history - 612u, (uint32_t)sample);
 }
 
 bool gomore_primitives_sps_refresh_affine_pairs(
@@ -8110,7 +7266,9 @@ bool gomore_primitives_activity_score_variability_adjust(
         }
         variability = square_root(sum / 25.0f);
     }
-    if ((int32_t)variability > 200) {
+    /* Stock compares the positive float's encoded word with 200.0f; an
+     * integer cast incorrectly drops the fractional interval above 200. */
+    if ((int32_t)float_bits(variability) > (int32_t)UINT32_C(0x43480000)) {
         *score += 0.1f;
     }
     return true;
@@ -8317,7 +7475,7 @@ int32_t gomore_primitives_profile_state_apply(
     return 0;
 }
 
-bool gomore_primitives_sorted_percentile(
+bool gomore_primitives_sorted_percentile_checked(
     float *values, size_t count, uint32_t percentile,
     gomore_primitives_qsort_fn qsort_provider,
     gomore_primitives_compare_fn compare, float *result) {
@@ -8480,7 +7638,7 @@ bool gomore_primitives_step_accumulate(
         ++state->positive_streak;
         state->accumulated += contribution;
     }
-    if (state->required_streak <= state->positive_streak &&
+    if ((int32_t)state->required_streak <= (int32_t)state->positive_streak &&
             contribution > 0.0f) {
         *completed = state->accumulated;
         state->accumulated = 0.0f;
@@ -8668,18 +7826,18 @@ bool gomore_primitives_sleep_interval_refine(
     const float average = average_count == 0 ? 0.0f :
         (float)average_sum / (float)average_count;
     if ((previous->flags & 8u) == 0u) {
-        output->status = 2u;
+        output->tail[0] = 2u;
     } else if (span > 43200u) {
-        output->status = 1u;
+        output->tail[0] = 1u;
     } else if ((int32_t)gap > (int32_t)gap_limit_minutes * 60) {
-        output->status = 3u;
+        output->tail[0] = 3u;
     } else if (average_count >= 1800 && average > 0.32f && gap > 1800u) {
-        output->status = 5u;
+        output->tail[0] = 5u;
     } else {
         if (span >= 10800u) {
             output->flags |= 0x10u;
         }
-        output->status = 0u;
+        output->tail[0] = 0u;
         output->start = previous->start;
     }
     return true;
@@ -8880,22 +8038,10 @@ int32_t gomore_primitives_sleep_interval_dispatch(
     return status == 0 ? 0 : -1;
 }
 
-uint8_t gomore_primitives_count_hysteresis_crossings(
+uint8_t gomore_primitives_count_hysteresis_crossings_checked(
     const uint16_t *values, size_t count) {
-    if (values == NULL && count != 0u) {
-        return 0u;
-    }
-    bool armed = true;
-    uint8_t crossings = 0u;
-    for (size_t index = 0u; index < count; ++index) {
-        if (armed && values[index] > UINT16_C(1200)) {
-            armed = false;
-            ++crossings;
-        } else if (!armed && values[index] < UINT16_C(1000)) {
-            armed = true;
-        }
-    }
-    return crossings;
+    if ((values == NULL && count != 0u) || count > (size_t)INT32_MAX) return 0u;
+    return (uint8_t)r1_gomore_accel_hysteresis_count_native((uint32_t)(uintptr_t)values,(uint32_t)count);
 }
 
 int32_t gomore_primitives_nullable_compare_n(const uint8_t *left,
@@ -8958,13 +8104,13 @@ int32_t gomore_primitives_record_quality_classify(const void *record,
 
 int32_t gomore_primitives_seeded_random_offset(
     uint32_t seed, uint32_t *stored_seed,
-    gomore_primitives_simple_fn prepare,
+    gomore_primitives_seed_fn seed_random,
     gomore_primitives_random_fn random_value) {
-    if (stored_seed == NULL || prepare == NULL || random_value == NULL) {
+    if (stored_seed == NULL || seed_random == NULL || random_value == NULL) {
         return -1;
     }
     *stored_seed = seed;
-    prepare();
+    seed_random(seed);
     return random_value() % 100 + 23;
 }
 
@@ -9163,26 +8309,17 @@ bool gomore_primitives_quality_code(const void *record, size_t length,
     return true;
 }
 
-float gomore_primitives_i16_standard_deviation(
+float gomore_primitives_i16_standard_deviation_checked(
     const int16_t *values, size_t count, int32_t center,
     gomore_primitives_float_unary_fn square_root) {
-    if (square_root == NULL || (values == NULL && count != 0u)) {
-        return 0.0f;
-    }
-    uint32_t sum = 0u;
-    for (size_t index = 0u; index < count; ++index) {
-        const int32_t difference = (int32_t)values[index] - center;
-        const int64_t wide_square = (int64_t)difference * difference;
-        sum += (uint32_t)wide_square;
-    }
-    int32_t variance = 0;
-    if (count > 1u && count <= (size_t)INT32_MAX) {
-        variance = (int32_t)sum / (int32_t)(count - 1u);
-    }
-    return square_root((float)variance);
+    if (square_root == NULL || (values == NULL && count != 0u) ||
+        count > (size_t)INT32_MAX) return 0.0f;
+    uint32_t variance=r1_gomore_i16_variance_bits((uint32_t)(uintptr_t)values,
+                                               (uint32_t)count,(uint32_t)center);
+    return square_root((float)(int32_t)variance);
 }
 
-bool gomore_primitives_locomotion_summary_update(
+bool gomore_primitives_locomotion_summary_update_checked(
     gomore_primitives_locomotion_summary_state *state,
     const int16_t *const channels[4], size_t sample_count,
     gomore_primitives_float_unary_fn square_root) {
@@ -9199,17 +8336,17 @@ bool gomore_primitives_locomotion_summary_update(
     const size_t slot = state->next_slot;
     int16_t means[4];
     for (size_t channel = 0u; channel < 4u; ++channel) {
-        means[channel] = gomore_primitives_i16_mean(
+        means[channel] = gomore_primitives_i16_mean_checked(
             channels[channel], sample_count);
         state->means[channel][slot] = means[channel];
     }
     for (size_t channel = 0u; channel < 4u; ++channel) {
-        const float deviation = gomore_primitives_i16_standard_deviation(
+        const float deviation = gomore_primitives_i16_standard_deviation_checked(
             channels[channel], sample_count, means[channel], square_root);
         state->standard_deviations[channel][slot] =
             (int16_t)dormant_estimator_float_to_i32(deviation);
     }
-    state->fourth_range[slot] = (int16_t)gomore_primitives_i16_range(
+    state->fourth_range[slot] = (int16_t)gomore_primitives_i16_range_checked(
         channels[3], sample_count);
 
     const int8_t signed_difference_count = (int8_t)(uint8_t)sample_count;
@@ -9217,14 +8354,14 @@ bool gomore_primitives_locomotion_summary_update(
         ? (size_t)signed_difference_count : 0u;
     for (size_t channel = 0u; channel < 4u; ++channel) {
         state->mean_absolute_differences[channel][slot] =
-            gomore_primitives_i16_mean_absolute_difference(
+            gomore_primitives_i16_mean_absolute_difference_checked(
                 channels[channel], difference_count);
     }
     state->next_slot = (uint8_t)((slot + 1u) & 7u);
     return true;
 }
 
-static bool locomotion_raw_summary_update(
+static bool locomotion_raw_summary_update_checked(
     uint8_t *state, size_t state_length,
     const int16_t *const channels[4],
     gomore_primitives_float_unary_fn square_root) {
@@ -9243,7 +8380,7 @@ static bool locomotion_raw_summary_update(
     };
     int16_t means[4];
     for (size_t channel = 0u; channel < 4u; ++channel) {
-        means[channel] = gomore_primitives_i16_mean(
+        means[channel] = gomore_primitives_i16_mean_checked(
             channels[channel], 25u);
         store_u16_le_early(
             &state[mean_offsets[channel] + slot_offset],
@@ -9251,25 +8388,25 @@ static bool locomotion_raw_summary_update(
     }
     for (size_t channel = 0u; channel < 4u; ++channel) {
         const float deviation =
-            gomore_primitives_i16_standard_deviation(
+            gomore_primitives_i16_standard_deviation_checked(
                 channels[channel], 25u, means[channel], square_root);
         store_u16_le_early(
             &state[deviation_offsets[channel] + slot_offset],
             (uint16_t)(int16_t)dormant_estimator_float_to_i32(deviation));
         store_u16_le_early(
             &state[difference_offsets[channel] + slot_offset],
-            (uint16_t)gomore_primitives_i16_mean_absolute_difference(
+            (uint16_t)gomore_primitives_i16_mean_absolute_difference_checked(
                 channels[channel], 25u));
     }
     store_u16_le_early(
         &state[0x42u + slot_offset],
-        (uint16_t)(int16_t)gomore_primitives_i16_range(
+        (uint16_t)(int16_t)gomore_primitives_i16_range_checked(
             channels[3], 25u));
     state[0x52u] = (uint8_t)((state[0x52u] + 1u) & 7u);
     return true;
 }
 
-int32_t gomore_primitives_locomotion_window_preprocess(
+int32_t gomore_primitives_locomotion_window_preprocess_checked(
     void *state, size_t state_length, uint32_t elapsed_windows,
     const float *const axes[3], bool input_unavailable,
     void *output, size_t output_length,
@@ -9291,9 +8428,9 @@ int32_t gomore_primitives_locomotion_window_preprocess(
         }
     } else {
         if (elapsed_windows > 8u) {
-            (void)gomore_primitives_missing_window_initialize(
+            (void)gomore_primitives_missing_window_initialize_checked(
                 output, output_length);
-            (void)gomore_primitives_mode8_state_initialize(
+            (void)gomore_primitives_mode8_state_initialize_checked(
                 state, state_length);
             return 1;
         }
@@ -9301,7 +8438,7 @@ int32_t gomore_primitives_locomotion_window_preprocess(
             ++elapsed_windows;
         }
         for (uint32_t gap = 0u; gap + 1u < elapsed_windows; ++gap) {
-            if (!gomore_primitives_circular_feature_slot_advance(
+            if (!gomore_primitives_circular_feature_slot_advance_checked(
                     state, state_length)) {
                 return -1;
             }
@@ -9321,7 +8458,7 @@ int32_t gomore_primitives_locomotion_window_preprocess(
     }
 
     if (input_unavailable) {
-        (void)gomore_primitives_missing_window_initialize(
+        (void)gomore_primitives_missing_window_initialize_checked(
             output, output_length);
         return 1;
     }
@@ -9358,7 +8495,7 @@ int32_t gomore_primitives_locomotion_window_preprocess(
     const int16_t *const channels[4] = {
         axis_values[0], axis_values[1], axis_values[2], magnitude,
     };
-    if (!locomotion_raw_summary_update(
+    if (!locomotion_raw_summary_update_checked(
             bytes, state_length, channels, square_root)) {
         return -1;
     }
@@ -9381,7 +8518,7 @@ int32_t gomore_primitives_locomotion_window_preprocess(
     if (bytes[0] < 5u) {
         classify(state, output);
     } else {
-        (void)gomore_primitives_missing_window_initialize(
+        (void)gomore_primitives_missing_window_initialize_checked(
             output, output_length);
     }
     return 0;
@@ -10110,8 +9247,8 @@ _Static_assert(offsetof(gomore_primitives_energy_update_state,
                         auxiliary_history) == 0x1Cu,
                "energy update history offset");
 _Static_assert(offsetof(gomore_primitives_energy_update_state,
-                        reference_value) == 0x58u,
-               "energy update reference offset");
+                        reference_binding) == 0x58u,
+               "energy update reference binding offset");
 _Static_assert(sizeof(gomore_primitives_energy_update_output) == 0x2Cu,
                "energy update output layout");
 
@@ -10194,7 +9331,7 @@ static bool energy_update_finish(
     }
 
     state->current_rate = total_rate;
-    state->reference_value = current_input;
+    *(float *)(uintptr_t)(state->reference_binding + 4u) = current_input;
     output->total_kcal = output->resting_kcal + output->active_kcal;
     const float weight = bits_float(load_u32_le(
         (const uint8_t *)profile + 4u));
@@ -10246,11 +9383,12 @@ uint32_t gomore_primitives_energy_update(
         state->elapsed_since_reference = (int32_t)(
             (uint32_t)state->elapsed_since_reference +
             (uint32_t)elapsed_seconds);
-        if (!gomore_primitives_float_in_encoded_range(
-                state->reference_value)) {
-            state->reference_value = lower_reference;
+        float *const reference = (float *)(uintptr_t)(
+            state->reference_binding + 4u);
+        if (!gomore_primitives_float_in_encoded_range(*reference)) {
+            *reference = lower_reference;
         }
-        current_input = state->reference_value;
+        current_input = *reference;
     }
     if (state->elapsed_since_reference > 600) {
         recent_reference = false;
@@ -10416,12 +9554,14 @@ uint32_t gomore_primitives_energy_update(
                      bits_float(UINT32_C(0x39077371)));
             }
         } else {
-            rate = resting_rate;
+            if (state->variant != 2) {
+                rate = resting_rate;
+            }
             if (state->variant == 2) {
                 if (state->mode == 1u || state->mode == 2u) {
                     rate = weight *
                         (bits_float(UINT32_C(0x39178DA0)) +
-                         (metric > 0.0f ? metric : 0.0f) *
+                         normalized *
                              bits_float(UINT32_C(0x3B2D0C52)));
                 } else if (state->mode == 3u) {
                     float mode_rate = 0.0f;
@@ -10441,7 +9581,7 @@ uint32_t gomore_primitives_energy_update(
                                     0x1.999999999999ap-4);
                         }
                         if (float_bits(metric) < UINT32_C(0x40C00000)) {
-                            float factor = 0.5f - metric * 0.25f;
+                            float factor = metric * 0.25f - 0.5f;
                             if (factor < 0.0f) {
                                 factor = 0.0f;
                             }
@@ -10453,12 +9593,12 @@ uint32_t gomore_primitives_energy_update(
                     rate *= bits_float(UINT32_C(0x3F666666));
                 } else if (state->mode == 4u) {
                     rate = weight *
-                        (metric * bits_float(UINT32_C(0x3B2FC8C9)) -
+                        (normalized * bits_float(UINT32_C(0x3B2FC8C9)) -
                          bits_float(UINT32_C(0x37B905C0)));
                 } else if (state->mode == 5u) {
                     rate = weight *
                         (bits_float(UINT32_C(0x3911AF7F)) +
-                         metric * bits_float(UINT32_C(0x3B0BFC6C)));
+                         normalized * bits_float(UINT32_C(0x3B0BFC6C)));
                 }
             }
         }
@@ -10523,16 +9663,16 @@ bool gomore_primitives_activity_accumulate(
             state->local_day = local_day;
         }
     }
-    if (!(step_increment < 0.0f)) {
+    if (step_increment >= 0.0f) {
         state->cumulative_steps += step_increment;
     }
-    if (!(energy->active_kcal < 0.0f)) {
+    if (energy->active_kcal >= 0.0f) {
         state->cumulative_active_kcal += energy->active_kcal;
     }
-    if (!(energy->total_kcal < 0.0f)) {
+    if (energy->total_kcal >= 0.0f) {
         state->cumulative_total_kcal += energy->total_kcal;
     }
-    if (!(selected_speed < 0.0f)) {
+    if (selected_speed >= 0.0f) {
         state->cumulative_distance += selected_speed /
                                       bits_float(UINT32_C(0x45610000));
     }
@@ -10817,12 +9957,15 @@ bool gomore_primitives_sleep_score(
         wake_ratio = statistics->awake_after_onset_minutes / sleep_minutes;
     }
     const float wake_percentage = wake_ratio * 100.0f;
-    const float wake_exponent = wake_ratio +
+    /* Stock rounds the percentage and divides it back by 100 before adding
+     * the exponent offset; reusing wake_ratio changes some low bits. */
+    const float wake_exponent = wake_percentage / 100.0f +
         ((int32_t)float_bits(wake_percentage) < INT32_C(0x42200000)
             ? bits_float(UINT32_C(0x3DE147AE))
             : bits_float(UINT32_C(0x4050A3D7)));
-    const float wake_adjusted = duration_score /
-        power(bits_float(UINT32_C(0x3F8CCCCD)), wake_exponent);
+    const float wake_adjusted =
+        (1.0f / power(bits_float(UINT32_C(0x3F8CCCCD)), wake_exponent)) *
+        duration_score;
 
     const uint32_t rem_bits = float_bits(statistics->rem_fraction);
     float rem_weight = 0.1f;
@@ -10830,7 +9973,7 @@ bool gomore_primitives_sleep_score(
         if (rem_bits + UINT32_C(0xC1E66666) < UINT32_C(0x0099999A)) {
             rem_weight = rem_bits + UINT32_C(0xC1B33333) <
                     UINT32_C(0x004CCCCE)
-                ? 0.3f : 0.4f;
+                ? 0.4f : 0.3f;
         } else {
             rem_weight = 0.2f;
         }
@@ -10850,7 +9993,9 @@ bool gomore_primitives_sleep_score(
         deep_weight = 0.3f;
     }
 
-    float result = wake_adjusted + rem_weight + deep_weight;
+    /* Stock 0x67970-0x67996 rounds the two stage weights together before
+     * adding the wake-adjusted score. The grouping affects the low bit. */
+    float result = wake_adjusted + (rem_weight + deep_weight);
     const float upper_candidate =
         (int32_t)float_bits(result) < INT32_C(0x42C80000)
             ? result : 100.0f;
@@ -10863,7 +10008,7 @@ bool gomore_primitives_sleep_score(
     return true;
 }
 
-bool gomore_primitives_moving_average_extrema_indices(
+bool gomore_primitives_moving_average_extrema_indices_checked(
     const float *values, size_t count,
     uint32_t long_window, uint32_t short_window,
     uint8_t *maxima, size_t maxima_capacity, size_t *maxima_count,
@@ -11470,12 +10615,16 @@ bool gomore_primitives_sleep_stage_refine(
         ? 0.0f : stage[3] / efficiency;
     const float rem_fraction = efficiency == 0.0f
         ? 0.0f : stage[1] / efficiency;
-    int32_t deep_adjustment = (int32_t)(
+    const int32_t deep_target_count = (int32_t)(
         (deep_fraction + (0.18f - deep_fraction) * 0.5f) *
-        efficiency * (float)count - stage[11] * 2.0f);
-    int32_t rem_adjustment = (int32_t)(
+        efficiency * (float)count);
+    const int32_t rem_target_count = (int32_t)(
         (rem_fraction + (0.225f - rem_fraction) * 0.5f) *
-        efficiency * (float)count - stage[9] * 2.0f);
+        efficiency * (float)count);
+    int32_t deep_adjustment = (int32_t)(
+        (float)deep_target_count - stage[11] * 2.0f);
+    int32_t rem_adjustment = (int32_t)(
+        (float)rem_target_count - stage[9] * 2.0f);
 
     for (size_t attempt = 0u; attempt < 10u; ++attempt) {
         if (!gomore_primitives_sleep_stage_proportion_adjust(
@@ -11534,23 +10683,28 @@ bool gomore_primitives_sleep_stage_refine(
     float light_minutes = stage[10];
     float deep_minutes = stage[11];
     for (size_t cursor = count;
-         cursor > 0u && deep_minutes + light_minutes + rem_minutes > 0.0f &&
-         deep_minutes / (deep_minutes + light_minutes + rem_minutes) >= 0.35f;
+         cursor > 0u && deep_minutes + rem_minutes + light_minutes > 0.0f &&
+         deep_minutes / (deep_minutes + rem_minutes + light_minutes) >= 0.35f;
          --cursor) {
         if (stages[cursor - 1u] == 3) {
             stages[cursor - 1u] = 2;
             deep_minutes -= 0.5f;
-            light_minutes += 0.5f;
         }
     }
+    if (!sleep_refine_statistics(
+            stages, count, duration_seconds, interval, stage)) {
+        return false;
+    }
+    rem_minutes = stage[9];
+    light_minutes = stage[10];
+    deep_minutes = stage[11];
     for (size_t cursor = 0u;
-         cursor < count && deep_minutes + light_minutes + rem_minutes > 0.0f &&
-         rem_minutes / (deep_minutes + light_minutes + rem_minutes) > 0.25f;
+         cursor < count && deep_minutes + rem_minutes + light_minutes > 0.0f &&
+         rem_minutes / (deep_minutes + rem_minutes + light_minutes) >= 0.25f;
          ++cursor) {
         if (stages[cursor] == 1) {
             stages[cursor] = 2;
             rem_minutes -= 0.5f;
-            light_minutes += 0.5f;
         }
     }
     if ((configuration[3] & 1u) != 0u) {
@@ -11625,10 +10779,13 @@ bool gomore_primitives_sleep_optical_peak_update(
                 state, sizeof(*state), input->samples, input->invalid, 25,
                 resample, apply_filter) ||
             !gomore_primitives_sleep_valley_candidates(
-                state->window, 75u, candidates, &candidate_count) ||
-            !gomore_primitives_interval_nonzero_argmax(
-                state->window, 75u, candidates, candidate_count,
-                positions, sizeof(positions), &position_count) ||
+                state->window, 75u, candidates, &candidate_count)) {
+        return false;
+    }
+    const bool selected = gomore_primitives_interval_nonzero_argmax(
+        state->window, 75u, candidates, candidate_count,
+        positions, sizeof(positions), &position_count);
+    if ((!selected && candidate_count != 0u) ||
             !gomore_primitives_trim_below_reference_tail(
                 state->positions, state->position_count,
                 positions, sizeof(positions), &position_count) ||
@@ -11703,7 +10860,7 @@ bool gomore_primitives_table_record11(const uint8_t *table,
 int32_t gomore_primitives_status_or_random(
     uint8_t *state, size_t state_length,
     const void *status_record, size_t status_length,
-    gomore_primitives_simple_fn prepare,
+    gomore_primitives_seed_fn seed_random,
     gomore_primitives_random_fn random_value) {
     if (state == NULL || state_length < 0x14u || status_record == NULL ||
             status_length < 12u) {
@@ -11720,25 +10877,25 @@ int32_t gomore_primitives_status_or_random(
     if (state[0x10u] != 4u) {
         return 0;
     }
-    if (prepare == NULL || random_value == NULL) {
+    if (seed_random == NULL || random_value == NULL) {
         return -1;
     }
     store_u32_le(state, load_u32_le(status));
-    prepare();
+    seed_random(load_u32_le(status));
     return (int16_t)(random_value() % 100 + 23);
 }
 
 static void identifier_status_commit(
     uint8_t *state, size_t state_length,
     uint8_t *status, size_t status_length,
-    gomore_primitives_simple_fn prepare,
+    gomore_primitives_seed_fn seed_random,
     gomore_primitives_random_fn random_value,
     bool set_error, bool clear_state_word) {
     if (set_error) {
         store_u16_le_early(&status[4], (uint16_t)(int16_t)-1004);
     }
     const int32_t result = gomore_primitives_status_or_random(
-        state, state_length, status, status_length, prepare, random_value);
+        state, state_length, status, status_length, seed_random, random_value);
     store_u16_le_early(&state[4], (uint16_t)result);
     if (clear_state_word) {
         store_u32_le(&state[8], 0u);
@@ -11749,7 +10906,7 @@ int32_t gomore_primitives_validate_identifier_status(
     const uint8_t *identifier, const uint8_t classes[256],
     uint8_t *state, size_t state_length,
     uint8_t *status_record, size_t status_length,
-    gomore_primitives_simple_fn prepare,
+    gomore_primitives_seed_fn seed_random,
     gomore_primitives_random_fn random_value) {
     if (classes == NULL || state == NULL || state_length < 0x14u ||
             status_record == NULL || status_length < 12u) {
@@ -11765,7 +10922,7 @@ int32_t gomore_primitives_validate_identifier_status(
             identifier, length, classes) != 0) {
         identifier_status_commit(
             state, state_length, status_record, status_length,
-            prepare, random_value, true, true);
+            seed_random, random_value, true, true);
         return -1004;
     }
     const bool special =
@@ -11776,23 +10933,23 @@ int32_t gomore_primitives_validate_identifier_status(
     if (!special) {
         identifier_status_commit(
             state, state_length, status_record, status_length,
-            prepare, random_value, true, true);
+            seed_random, random_value, true, true);
         return -1004;
     }
     if (gomore_primitives_nullable_compare(
             template_identifier, identifier) == 0) {
         identifier_status_commit(
             state, state_length, status_record, status_length,
-            prepare, random_value, false, false);
-        return 0;
+            seed_random, random_value, true, true);
+        return -1020;
     }
     identifier_status_commit(
         state, state_length, status_record, status_length,
-        prepare, random_value, true, true);
-    return -1020;
+        seed_random, random_value, false, false);
+    return 0;
 }
 
-bool gomore_primitives_mode_state_configure(
+bool gomore_primitives_mode_state_configure_checked(
     void *record, size_t length, uint32_t mode, uint32_t count,
     const float parameters[2],
     gomore_primitives_mode_lt2_init_fn initialize_lt2,
@@ -11815,7 +10972,7 @@ bool gomore_primitives_mode_state_configure(
     return true;
 }
 
-bool gomore_primitives_iir_low_high_coefficients(
+bool gomore_primitives_iir_low_high_coefficients_checked(
     gomore_primitives_iir_coefficients *record,
     uint32_t mode, uint32_t order, float normalized_cutoff,
     gomore_primitives_float_unary_fn cosine,
@@ -11899,7 +11056,7 @@ bool gomore_primitives_iir_low_high_coefficients(
     return true;
 }
 
-bool gomore_primitives_iir_bandpass_coefficients(
+bool gomore_primitives_iir_bandpass_coefficients_checked(
     gomore_primitives_iir_coefficients *record,
     uint32_t order, const float normalized_cutoffs[2],
     gomore_primitives_float_unary_fn cosine,
@@ -12024,7 +11181,7 @@ bool gomore_primitives_iir_bandpass_coefficients(
     return true;
 }
 
-bool gomore_primitives_large_filter_state_initialize(
+bool gomore_primitives_large_filter_state_initialize_checked(
     void *record, size_t length,
     gomore_primitives_mode2_init_fn initialize_mode2) {
     if (record == NULL || length < 0x6C8u || initialize_mode2 == NULL) {
@@ -12041,7 +11198,7 @@ bool gomore_primitives_large_filter_state_initialize(
         bits_float(UINT32_C(0x3D23D70A)),
         bits_float(UINT32_C(0x3EA3D70A))
     };
-    return gomore_primitives_mode_state_configure(
+    return gomore_primitives_mode_state_configure_checked(
         record, length, 2u, 2u, parameters, NULL, initialize_mode2);
 }
 
@@ -12058,41 +11215,6 @@ bool gomore_primitives_engine_state_initialize(
     return true;
 }
 
-void gomore_primitives_linear_resample(
-    const float *source, int32_t input_count, int32_t output_count,
-    int32_t source_total, float *destination) {
-    if (source == NULL || destination == NULL || input_count < 0 ||
-            output_count < 0 || source_total < 0) {
-        return;
-    }
-    if (input_count == output_count) {
-        for (int32_t index = 0; index < source_total; ++index) {
-            destination[index] = source[index];
-        }
-        return;
-    }
-
-    const int32_t blocks = input_count == 0
-        ? 0 : source_total / input_count;
-    if (output_count != 0 && blocks > INT32_MAX / output_count) {
-        return;
-    }
-    const int32_t produced = output_count * blocks;
-    const float ratio = output_count == 0
-        ? 0.0f : (float)input_count / (float)output_count;
-    for (int32_t index = 0; index < produced; ++index) {
-        const float position = ratio * (float)index;
-        const int32_t left = (int32_t)position;
-        int32_t right = left + 1;
-        if (right >= source_total) {
-            right = source_total - 1;
-        }
-        const float left_value = source[left];
-        destination[index] = left_value +
-            (source[right] - left_value) * (position - (float)left);
-    }
-}
-
 static bool resample25_and_filter_common(
     void *filter_state, const float *source, int32_t input_count,
     int32_t source_total, float destination[25],
@@ -12105,26 +11227,6 @@ static bool resample25_and_filter_common(
     resample(source, input_count, 25, source_total, destination);
     apply_filter(filter_state, destination, 25u);
     return true;
-}
-
-int32_t gomore_primitives_resample25_and_filter(
-    void *filter_state, const float *source, int32_t input_count,
-    int32_t source_total, float destination[25],
-    gomore_primitives_resample_fn resample,
-    gomore_primitives_filter_apply_fn apply_filter) {
-    return resample25_and_filter_common(
-        filter_state, source, input_count, source_total, destination,
-        resample, apply_filter) ? 0 : -1;
-}
-
-void gomore_primitives_resample25_and_filter_tail(
-    void *filter_state, const float *source, int32_t input_count,
-    int32_t source_total, float destination[25],
-    gomore_primitives_resample_fn resample,
-    gomore_primitives_filter_apply_fn apply_filter) {
-    (void)resample25_and_filter_common(
-        filter_state, source, input_count, source_total, destination,
-        resample, apply_filter);
 }
 
 bool gomore_primitives_prepare_filter_input(
@@ -12253,111 +11355,28 @@ bool gomore_primitives_fill_packed_time_gap(void *record, size_t length,
     return true;
 }
 
-float gomore_primitives_centered_ratio(int32_t first, int32_t middle,
-                                      int32_t last) {
-    const uint32_t wrapped =
-        ((uint32_t)first + (uint32_t)last - (uint32_t)middle * 2u) * 2u;
-    const int32_t denominator = (int32_t)wrapped;
-    const float magnitude = denominator < 0
-        ? -(float)denominator : (float)denominator;
-    if ((int32_t)float_bits(magnitude) < INT32_C(0x358637BD)) {
-        return 0.0f;
-    }
-    const int32_t numerator = (int32_t)((uint32_t)first - (uint32_t)last);
-    return (float)numerator / (float)denominator;
-}
 
-bool gomore_primitives_iir_filter_apply(void *state, size_t state_length,
-                                       float *values, size_t count) {
-    if (state == NULL || (values == NULL && count != 0u) ||
-            state_length < 0x44u) {
-        return false;
-    }
-    uint8_t *bytes = state;
-    const int32_t order = (int32_t)load_u32_le(bytes);
-    const size_t required_length = order > 0
-        ? 0x40u + (size_t)order * 4u : 0x44u;
-    if (order < 0 || order > 11 || state_length < required_length) {
-        return false;
-    }
-    for (size_t sample = 0u; sample < count; ++sample) {
-        float output = bits_float(load_u32_le(&bytes[0x1Cu])) * values[sample];
-        for (int32_t index = 1; index <= order; ++index) {
-            const size_t input_history = 0x30u + (size_t)(index - 1) * 4u;
-            const size_t input_coefficient = 0x1Cu + (size_t)index * 4u;
-            const size_t output_history = 0x40u + (size_t)(index - 1) * 4u;
-            const size_t output_coefficient = 8u + (size_t)index * 4u;
-            output += bits_float(load_u32_le(&bytes[input_history])) *
-                      bits_float(load_u32_le(&bytes[input_coefficient]));
-            output -= bits_float(load_u32_le(&bytes[output_history])) *
-                      bits_float(load_u32_le(&bytes[output_coefficient]));
-        }
-        for (int32_t index = order - 1; index > 0; --index) {
-            store_u32_le(&bytes[0x30u + (size_t)index * 4u],
-                         load_u32_le(&bytes[0x30u +
-                                            (size_t)(index - 1) * 4u]));
-            store_u32_le(&bytes[0x40u + (size_t)index * 4u],
-                         load_u32_le(&bytes[0x40u +
-                                            (size_t)(index - 1) * 4u]));
-        }
-        store_u32_le(&bytes[0x30u], float_bits(values[sample]));
-        store_u32_le(&bytes[0x40u], float_bits(output));
-        values[sample] = output;
-    }
-    store_u32_le(&bytes[4], 1u);
-    return true;
-}
-
-int32_t gomore_primitives_integer_iir4_update(
+int32_t gomore_primitives_integer_iir4_update_checked(
     int32_t input, int32_t input_history[4],
     int32_t output_history[4], int32_t profile) {
     if (input_history == NULL || output_history == NULL) {
         return 0;
     }
-    static const int32_t feedback[2][5] = {
-        {1000, -2595, 2746, -1459, 347},
-        {1000, -3722, 5276, -3374, 822},
-    };
-    static const int32_t feedforward[2][5] = {
-        {9131, 0, -18262, 0, 9131},
-        {434, 0, -869, 0, 434},
-    };
-    const size_t selected = profile == 1 ? 1u : 0u;
-    uint32_t accumulated =
-        (uint32_t)feedforward[selected][0] * (uint32_t)input;
-    for (size_t index = 0u; index < 4u; ++index) {
-        accumulated += (uint32_t)input_history[index] *
-            (uint32_t)feedforward[selected][index + 1u];
-        accumulated -= (uint32_t)output_history[index] *
-            (uint32_t)feedback[selected][index + 1u];
-    }
-    for (size_t index = 3u; index > 0u; --index) {
-        input_history[index] = input_history[index - 1u];
-        output_history[index] = output_history[index - 1u];
-    }
-    input_history[0] = input;
-    const int64_t signed_accumulated = accumulated <= (uint32_t)INT32_MAX
-        ? (int64_t)accumulated
-        : (int64_t)accumulated - INT64_C(4294967296);
-    output_history[0] = (int32_t)(signed_accumulated / INT64_C(1000));
-    return output_history[0];
+    return (int32_t)r1_gomore_accel_iir4_native(
+        (uint32_t)input, (uint32_t)(uintptr_t)input_history,
+        (uint32_t)(uintptr_t)output_history, (uint32_t)profile);
 }
 
-int32_t gomore_primitives_thresholded_mean5(
+int32_t gomore_primitives_thresholded_mean5_checked(
     float threshold, const float values[5], const float comparisons[5],
     float *mean) {
     if (values == NULL || comparisons == NULL || mean == NULL) {
         return -1;
     }
-    float sum = 0.0f;
-    int32_t included = 0;
-    for (size_t index = 0u; index < 5u; ++index) {
-        if (comparisons[index] >= threshold) {
-            sum += values[index];
-            ++included;
-        }
-    }
-    *mean = sum / (float)included;
+    float result;
+    const int32_t included = (int32_t)r1_gomore_threshold5_native(
+        threshold, values, comparisons, &result);
+    *mean = result;
     return included;
 }
 
@@ -12384,7 +11403,7 @@ float gomore_primitives_magnitude_score10(float threshold,
     return score;
 }
 
-int32_t gomore_primitives_circular_count_predicate(
+int32_t gomore_primitives_circular_count_predicate_checked(
     const int16_t *values, size_t count, int32_t cursor,
     int32_t lookback, int32_t lower, int32_t upper,
     uint8_t comparison, int32_t required) {
@@ -12392,24 +11411,10 @@ int32_t gomore_primitives_circular_count_predicate(
             cursor >= (int32_t)count || lookback < 0) {
         return -1;
     }
-    int32_t matches = 0;
-    for (int32_t offset = 1; offset <= lookback; ++offset) {
-        int32_t index = cursor - offset;
-        if (index < 0) {
-            index += (int32_t)count;
-        }
-        const int32_t value = values[index];
-        if (value > lower && value < upper) {
-            ++matches;
-        }
-    }
-    if (comparison == UINT8_C(0x3E)) {
-        return matches >= required ? 1 : -1;
-    }
-    if (comparison == UINT8_C(0x3C)) {
-        return matches < required ? 1 : -1;
-    }
-    return -1;
+    return (int32_t)r1_gomore_accel_band_count_native(
+        (uint32_t)(uintptr_t)values, (uint32_t)count, (uint32_t)cursor,
+        (uint32_t)lookback, (uint32_t)lower, (uint32_t)upper,
+        comparison, (uint32_t)required);
 }
 
 bool gomore_primitives_run_length_encode_2bit(
@@ -12724,7 +11729,7 @@ bool gomore_primitives_filter_bank_initialize(
         bits_float(UINT32_C(0x3C2A64C3)),
         bits_float(UINT32_C(0x3F75C28F))
     };
-    if (!gomore_primitives_mode_state_configure(
+    if (!gomore_primitives_mode_state_configure_checked(
             bytes, length, 2u, 2u, first_parameters,
             initialize_lt2, initialize_mode2)) {
         return false;
@@ -12733,7 +11738,7 @@ bool gomore_primitives_filter_bank_initialize(
         bits_float(UINT32_C(0x3F75C28F)), 0.0f
     };
     for (size_t index = 1u; index < 4u; ++index) {
-        if (!gomore_primitives_mode_state_configure(
+        if (!gomore_primitives_mode_state_configure_checked(
                 &bytes[index * 0x50u], length - index * 0x50u,
                 0u, 2u, remaining_parameters,
                 initialize_lt2, initialize_mode2)) {
@@ -12823,7 +11828,9 @@ bool gomore_primitives_sleep_stage_proportion_adjust(
     }
 
     const int32_t original_adjustment = remaining;
-    for (size_t run = 0u; run < run_count && remaining > 12; ++run) {
+    for (size_t run = 0u;
+            run < run_count && (run == 0u || remaining >= 13);
+            ++run) {
         const size_t begin = runs[run][0];
         const size_t leading_begin = begin > 12u ? begin - 12u : 0u;
         bool all_two = true;
@@ -13001,14 +12008,15 @@ int32_t gomore_primitives_seed_and_test_text_class(
     void *destination_record, size_t destination_length,
     gomore_primitives_seed_fn seed) {
     if ((text == NULL && text_length != 0u) || classes == NULL ||
-            source_record == NULL || source_length < 0x10u ||
+            source_record == NULL ||
+            source_length < sizeof(gomore_primitives_auth_parameters) ||
             destination_record == NULL || destination_length < 0x10u ||
             seed == NULL) {
         return -1;
     }
-    const uint8_t *source = source_record;
+    const gomore_primitives_auth_parameters *source = source_record;
     uint8_t *destination = destination_record;
-    const uint32_t seed_value = load_u32_le(&source[0x0Cu]);
+    const uint32_t seed_value = source->timestamp;
     store_u32_le(&destination[0x0Cu], seed_value);
     seed(seed_value);
     return gomore_primitives_all_class_0x20(text, text_length, classes) != 0
@@ -13019,18 +12027,18 @@ int32_t gomore_primitives_validate_record_bytes(
     const uint8_t *candidate, size_t candidate_length,
     const void *source_record, size_t source_length,
     void *destination_record, size_t destination_length) {
-    if (candidate == NULL || source_record == NULL || source_length < 9u ||
+    if (candidate == NULL || source_record == NULL ||
+            source_length < sizeof(gomore_primitives_auth_parameters) ||
             destination_record == NULL || destination_length < 0x10u) {
         return -1;
     }
-    const uint8_t *source = source_record;
-    const size_t compare_length = source[8];
-    if (compare_length > candidate_length ||
-            compare_length > source_length - 4u) {
+    const gomore_primitives_auth_parameters *source = source_record;
+    const size_t compare_length = source->device_uuid_length;
+    if (source->device_uuid == NULL || compare_length > candidate_length) {
         return -1;
     }
     for (size_t index = 0u; index < compare_length; ++index) {
-        if (source[4u + index] != candidate[index]) {
+        if (source->device_uuid[index] != candidate[index]) {
             store_u32_le(&((uint8_t *)destination_record)[0x0Cu], 0u);
             return -1005;
         }
@@ -13136,7 +12144,7 @@ float gomore_primitives_scaled_product(float first, float second) {
     return (float)(product / 200.0);
 }
 
-int32_t gomore_primitives_linear_sign_classify(
+int32_t gomore_primitives_linear_sign_classify_checked(
     float first, float second, float third, int32_t integer,
     const float coefficients[4], float bias) {
     if (coefficients == NULL) {
@@ -13155,37 +12163,36 @@ int32_t gomore_primitives_validate_key_and_update_status(
     const void *configuration, size_t configuration_length,
     void *state, size_t state_length,
     void *status_record, size_t status_length,
-    gomore_primitives_simple_fn prepare,
+    gomore_primitives_seed_fn seed_random,
     gomore_primitives_random_fn random_value) {
     if (candidate == NULL || configuration == NULL ||
-            configuration_length < 9u || state == NULL ||
+            configuration_length < sizeof(gomore_primitives_auth_parameters) || state == NULL ||
             state_length < 0x14u || status_record == NULL ||
             status_length < 12u) {
         return -1;
     }
-    const uint8_t *config = configuration;
-    const size_t compare_length = config[8];
-    if (compare_length > candidate_length ||
-            compare_length > configuration_length - 4u) {
+    const gomore_primitives_auth_parameters *config = configuration;
+    const size_t compare_length = config->device_uuid_length;
+    if (config->device_uuid == NULL || compare_length > candidate_length) {
         return -1;
     }
     uint8_t *state_bytes = state;
     uint8_t *status = status_record;
     state_bytes[0x10u] = (uint8_t)(state_bytes[0x10u] + 1u);
     const int32_t comparison = gomore_primitives_nullable_compare_n(
-        &config[4], candidate, compare_length);
+        config->device_uuid, candidate, compare_length);
     if (comparison != 0) {
         store_u16_le_early(&status[6], (uint16_t)(int16_t)-1005);
         const int32_t result = gomore_primitives_status_or_random(
             state_bytes, state_length, status, status_length,
-            prepare, random_value);
+            seed_random, random_value);
         store_u16_le_early(&state_bytes[4], (uint16_t)result);
         store_u32_le(&state_bytes[8], 0u);
         return -1005;
     }
     const int32_t result = gomore_primitives_status_or_random(
         state_bytes, state_length, status, status_length,
-        prepare, random_value);
+        seed_random, random_value);
     store_u16_le_early(&state_bytes[4], (uint16_t)result);
     return 0;
 }
@@ -13196,7 +12203,7 @@ int32_t gomore_primitives_decimal_config_update(
     void *state, size_t state_length,
     void *status_record, size_t status_length,
     bool validation_enabled,
-    gomore_primitives_simple_fn prepare,
+    gomore_primitives_seed_fn seed_random,
     gomore_primitives_random_fn random_value) {
     if (text == NULL || configuration == NULL ||
             configuration_length < 0x10u || state == NULL ||
@@ -13212,12 +12219,12 @@ int32_t gomore_primitives_decimal_config_update(
         const uint32_t cap = parsed <= UINT32_C(0x6953F6FF)
             ? parsed : UINT32_C(0x6953F6FF);
         const uint32_t configured =
-            load_u32_le(&((const uint8_t *)configuration)[0x0Cu]);
+            ((const gomore_primitives_auth_parameters *)configuration)->timestamp;
         if (cap < configured || configured < UINT32_C(0x688A4180)) {
             store_u16_le_early(&status[8], (uint16_t)(int16_t)-1006);
             const int32_t result = gomore_primitives_status_or_random(
                 state_bytes, state_length, status, status_length,
-                prepare, random_value);
+                seed_random, random_value);
             store_u16_le_early(&state_bytes[4], (uint16_t)result);
             store_u32_le(&state_bytes[8], 0u);
             return -1006;
@@ -13225,9 +12232,36 @@ int32_t gomore_primitives_decimal_config_update(
     }
     const int32_t result = gomore_primitives_status_or_random(
         state_bytes, state_length, status, status_length,
-        prepare, random_value);
+        seed_random, random_value);
     store_u16_le_early(&state_bytes[4], (uint16_t)result);
     store_u32_le(&state_bytes[8], parsed);
+    return 0;
+}
+
+int32_t gomore_primitives_sdk_auth_final_field_parse(
+    const uint8_t *field, uint8_t *state, size_t state_length,
+    uint8_t *status_record, size_t status_length,
+    gomore_primitives_seed_fn seed_random,
+    gomore_primitives_random_fn random_value) {
+    if (field == NULL || state == NULL || state_length < 0x14u ||
+            status_record == NULL || status_length < 12u) {
+        return -1;
+    }
+    static const uint8_t signature[3] = {'S', '1', 0u};
+    state[0x10u] = (uint8_t)(state[0x10u] + 1u);
+    const bool mismatch = gomore_primitives_nullable_compare_n(
+        signature, field, 2u) != 0;
+    if (mismatch) {
+        store_u16_le_early(&status_record[10u], (uint16_t)(int16_t)-1007);
+    }
+    const int32_t status = gomore_primitives_status_or_random(
+        state, state_length, status_record, status_length,
+        seed_random, random_value);
+    store_u16_le_early(&state[4u], (uint16_t)status);
+    if (mismatch) {
+        store_u32_le(&state[8u], 0u);
+        return -1007;
+    }
     return 0;
 }
 
@@ -13286,7 +12320,7 @@ bool gomore_primitives_dominant_sorted_i32(
     return true;
 }
 
-int32_t gomore_primitives_circular_signal_predicate(
+int32_t gomore_primitives_circular_signal_predicate_checked(
     const int16_t *primary, const int16_t *first,
     const int16_t *second, const int16_t *third,
     size_t count, int32_t cursor, size_t lookback) {
@@ -13295,24 +12329,10 @@ int32_t gomore_primitives_circular_signal_predicate(
             cursor < 0 || cursor >= (int32_t)count) {
         return -1;
     }
-    int32_t primary_matches = 0;
-    int32_t combined_matches = 0;
-    for (size_t offset = 1u; offset <= lookback; ++offset) {
-        int32_t index = cursor - (int32_t)offset;
-        if (index < 0) {
-            index += (int32_t)count;
-        }
-        if (primary[index] > 200) {
-            ++primary_matches;
-        }
-        const int32_t combined = (int32_t)first[index] +
-                                 (int32_t)second[index] +
-                                 (int32_t)third[index];
-        if (combined > 180) {
-            ++combined_matches;
-        }
-    }
-    return primary_matches >= 3 && combined_matches >= 3 ? 1 : -1;
+    return (int32_t)r1_gomore_accel_activity_gate_native(
+        (uint32_t)(uintptr_t)primary, (uint32_t)(uintptr_t)first,
+        (uint32_t)(uintptr_t)second, (uint32_t)(uintptr_t)third,
+        (uint32_t)count, (uint32_t)cursor, (uint32_t)lookback);
 }
 
 float gomore_primitives_average_sign_crossing_spacing(
@@ -13524,24 +12544,6 @@ bool gomore_primitives_key_or_cached_copy(
     return true;
 }
 
-void gomore_primitives_slot_state_transition(uint8_t *state,
-                                             uint8_t requested,
-                                             bool guarded_mode) {
-    if (state == NULL) {
-        return;
-    }
-    if (guarded_mode) {
-        if (*state == 4u) {
-            if (requested == 5u) {
-                *state = 1u;
-            }
-        } else {
-            *state = requested;
-        }
-    } else if (*state != 3u && *state != 4u) {
-        *state = requested;
-    }
-}
 
 int32_t gomore_primitives_copy_key_blob(
     uint8_t *destination, size_t capacity,
@@ -13582,7 +12584,7 @@ int32_t gomore_primitives_stage_32_and_consume(
     return consumer(first, second, staged, fourth, fifth);
 }
 
-float gomore_primitives_mean(const float *values, size_t count) {
+float gomore_primitives_mean_checked(const float *values, size_t count) {
     if (values == NULL || count == 0u) {
         return 0.0f;
     }
@@ -13593,20 +12595,11 @@ float gomore_primitives_mean(const float *values, size_t count) {
     return sum / (float)count;
 }
 
-int32_t gomore_primitives_argmax_from_zero(const float *values, size_t count) {
+int32_t gomore_primitives_argmax_from_zero_checked(const float *values, size_t count) {
     if (values == NULL || count == 0u || count > (size_t)INT32_MAX) {
         return -1;
     }
-    int32_t result = (int32_t)(count - 1u);
-    float largest = 0.0f;
-    for (size_t remaining = count; remaining != 0u; --remaining) {
-        const size_t index = remaining - 1u;
-        if (values[index] > largest) {
-            largest = values[index];
-            result = (int32_t)index;
-        }
-    }
-    return result;
+    return (int32_t)r1_gomore_argmax_native(values, (uint32_t)count);
 }
 
 bool gomore_primitives_reset_provider_state(
@@ -13628,28 +12621,13 @@ bool gomore_primitives_reset_provider_state(
 }
 
 bool gomore_primitives_sample_plausible(const uint8_t sample[4]) {
-    return sample != NULL && sample[0] > 10u && sample[0] < 100u &&
-           sample[1] < 2u && sample[2] > 100u && sample[2] < 0xDCu &&
-           sample[3] > 0x1Eu && sample[3] < 0x96u;
+    return sample != NULL && r1_record12_validate(sample) != 0;
 }
 
 uint32_t gomore_primitives_health_sample_features(
     const uint8_t record[12], float output[7]) {
-    if (record == NULL || output == NULL) {
-        return 0u;
-    }
-    output[0] = (float)record[0];
-    output[1] = record[1] == 1u ? 1.0f : 0.0f;
-    output[2] = (float)record[2];
-    output[3] = (float)record[3];
-    for (size_t index = 0u; index < 3u; ++index) {
-        const uint16_t encoded = load_u16_le_early(&record[4u + index * 2u]);
-        const int32_t value = (encoded & UINT16_C(0x8000)) != 0u
-            ? (int32_t)encoded - INT32_C(65536)
-            : (int32_t)encoded;
-        output[4u + index] = value == 0 ? -1.0f : (float)value;
-    }
-    return gomore_primitives_sample_plausible(record) ? 1u : 0u;
+    if (record == NULL || output == NULL) return 0;
+    return r1_health_profile_features(record, output);
 }
 
 bool gomore_primitives_scaled_sample_publish(
@@ -13851,7 +12829,7 @@ bool gomore_primitives_records_any_bit1(const uint8_t *records,
     return records_any_enabled_bit(records, record_bytes, UINT8_C(0x02));
 }
 
-int32_t gomore_primitives_quantized_argmin(const float *values,
+int32_t gomore_primitives_quantized_argmin_checked(const float *values,
                                            uint32_t begin,
                                            uint32_t end_exclusive) {
     if (values == NULL || end_exclusive < begin ||
@@ -13869,7 +12847,7 @@ int32_t gomore_primitives_quantized_argmin(const float *values,
     return (int32_t)result;
 }
 
-uint32_t gomore_primitives_max_difference_index(const float *values,
+uint32_t gomore_primitives_max_difference_index_checked(const float *values,
                                                 uint32_t begin,
                                                 uint32_t end_exclusive) {
     if (values == NULL || begin >= end_exclusive) {
@@ -13887,7 +12865,7 @@ uint32_t gomore_primitives_max_difference_index(const float *values,
     return result;
 }
 
-bool gomore_primitives_median(float *values, size_t count,
+bool gomore_primitives_median_checked(float *values, size_t count,
                               gomore_primitives_qsort_fn qsort_provider,
                               gomore_primitives_compare_fn compare,
                               float *result) {
@@ -13903,7 +12881,7 @@ bool gomore_primitives_median(float *values, size_t count,
     return true;
 }
 
-bool gomore_primitives_standard_deviation(
+bool gomore_primitives_standard_deviation_checked(
     const float *values, size_t count,
     gomore_primitives_float_binary_fn pow_provider,
     gomore_primitives_float_unary_fn sqrt_provider,
@@ -13912,7 +12890,7 @@ bool gomore_primitives_standard_deviation(
             sqrt_provider == NULL || result == NULL) {
         return false;
     }
-    const float mean = gomore_primitives_mean(values, count);
+    const float mean = gomore_primitives_mean_checked(values, count);
     float sum = 0.0f;
     for (size_t index = 0u; index < count; ++index) {
         sum += pow_provider(values[index] - mean, 2.0f);
@@ -13938,20 +12916,13 @@ bool gomore_primitives_logistic_score(
     return true;
 }
 
-bool gomore_primitives_modulo5_record(uint8_t *record, size_t length,
+bool gomore_primitives_modulo5_record_checked(uint8_t *record, size_t length,
                                       uint8_t secondary,
                                       uint8_t primary) {
     if (record == NULL || length < 0x2Fu || record[0x28u] >= 20u) {
         return false;
     }
-    const uint8_t counter = record[0x28u];
-    if ((counter % 5u) == 0u) {
-        const size_t slot = (size_t)(counter / 5u);
-        record[0x29u + slot] = primary == UINT8_C(0xFF) ? 1u : primary;
-        record[0x2Du + (slot & 1u)] =
-            secondary == UINT8_C(0xFF) ? 1u : secondary;
-    }
-    record[0x28u] = (uint8_t)((counter + 1u) % 20u);
+    (void)r1_gomore_modulo5_native(record, secondary, primary);
     return true;
 }
 
@@ -13964,7 +12935,7 @@ static void store_u16_le(uint8_t *bytes, uint16_t value) {
     bytes[1] = (uint8_t)(value >> 8);
 }
 
-bool gomore_primitives_compact_25_windows(uint8_t *records,
+bool gomore_primitives_compact_25_windows_checked(uint8_t *records,
                                          size_t record_capacity,
                                          uint8_t *record_count,
                                          uint32_t current_window) {
@@ -13997,6 +12968,7 @@ bool gomore_primitives_compact_25_windows(uint8_t *records,
     return true;
 }
 
+#pragma clang fp exceptions(strict)
 bool gomore_primitives_decimated_ring_write(float value, uint8_t ring[90],
                                             uint32_t begin_tick,
                                             uint32_t end_tick) {
@@ -14018,6 +12990,7 @@ bool gomore_primitives_decimated_ring_write(float value, uint8_t ring[90],
     }
     return true;
 }
+#pragma clang fp exceptions(ignore)
 
 int32_t gomore_primitives_csv4_prefix_compare(
     const uint8_t *pattern, size_t pattern_length,
@@ -14101,7 +13074,7 @@ bool gomore_primitives_sleep_engine_open(
     return true;
 }
 
-bool gomore_primitives_shift_negated_filter_history(
+bool gomore_primitives_shift_negated_filter_history_checked(
     void *state, size_t state_length,
     const float input[25], bool zero_fill,
     gomore_primitives_filter_apply_fn apply_filter) {
@@ -14123,7 +13096,7 @@ bool gomore_primitives_shift_negated_filter_history(
     return true;
 }
 
-bool gomore_primitives_log_u32(
+bool gomore_primitives_log_u32_checked(
     const gomore_primitives_log_config *configuration,
     uint32_t level, uint32_t category,
     const char *format, uint32_t value) {
@@ -14191,12 +13164,12 @@ bool gomore_primitives_accelerometer_resample25(
     } else {
         uint8_t *states = filter_states;
         for (size_t axis = 0u; axis < 3u; ++axis) {
-            (void)gomore_primitives_resample25_and_filter(
+            (void)resample25_and_filter_common(
                 &states[0x50u + axis * 0x50u], sources[axis], sample_count,
                 sample_count, destinations[axis], resample, apply_filter);
         }
     }
-    (void)gomore_primitives_log_u32(
+    (void)gomore_primitives_log_u32_checked(
         logger, 2u, 2u, "[SnP][ACC]status:%u\r\n", *status);
     return true;
 }
@@ -14226,7 +13199,7 @@ bool gomore_primitives_ppg_resample25(
         if (channel_count > 0) {
             float filtered[25];
             clear_bytes((uint8_t *)filtered, sizeof(filtered));
-            gomore_primitives_resample25_and_filter_tail(
+            (void)resample25_and_filter_common(
                 filter_states, sources[0], sample_count, sample_count,
                 filtered, resample, apply_filter);
             for (size_t index = 0u; index < 25u; ++index) {
@@ -14238,7 +13211,7 @@ bool gomore_primitives_ppg_resample25(
             output[index] *= reciprocal;
         }
     }
-    (void)gomore_primitives_log_u32(
+    (void)gomore_primitives_log_u32_checked(
         logger, 2u, 2u, "[SnP][Ppg]status:%u\r\n", *status);
     return true;
 }

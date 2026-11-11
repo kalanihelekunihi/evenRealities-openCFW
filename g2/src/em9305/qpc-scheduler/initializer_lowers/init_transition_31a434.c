@@ -11,13 +11,7 @@ extern uint32_t opencfw_em9305_init_transition_count_down_320068(void);
 
 static uint32_t native_mpywhl_31a518(uint32_t left)
 {
-#ifdef __arc__
-    uint32_t result;
-    __asm__ volatile("mpywhl %0,%1,1250":"=r"(result):"r"(left):"r58","r59","memory");
-    return result;
-#else
-    return left*1250u; /* Host fixture model only. */
-#endif
+    return (uint32_t)left*1250u;
 }
 
 /* Full native 0x31a434..0x31a536. The first schedule pointer is captured

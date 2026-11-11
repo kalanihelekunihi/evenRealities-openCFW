@@ -1,0 +1,163 @@
+{
+  "schema_version": 1,
+  "scope": "Two native R1 CmBacktrace task stack accessors in existing source unit",
+  "native_application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "native_entries": {
+    "vTaskStackAddr": "0x964b0",
+    "vTaskStackSize": "0x964bc"
+  },
+  "current_tcb_cell": "0x2000781c",
+  "normal_execution": {
+    "paired_cases": 320,
+    "executions": 640,
+    "source_report": "build/sources-goal-r1-task-stack-accessors-c/report.json",
+    "actual_C_without_function_stubs": true,
+    "checks": [
+      "stack base offset 48",
+      "full 32-bit stack depth at offset 84, no byte scaling",
+      "changed current task reloaded on each invocation",
+      "ordered 32-bit reads and no TCB/current-cell writes",
+      "null current faults at native field address",
+      "R0, saved registers, successful-return SP, BASEPRI and PRIMASK"
+    ],
+    "limits": [
+      "Seeded TCB state in ARM emulator; no physical crashes or unwind integration",
+      "Caller-clobbered registers, flags and private stack traffic excluded",
+      "Synchronous reads only; no asynchronous task switch interleaving"
+    ]
+  },
+  "qualified_profile_execution": {
+    "profile": "-Oz",
+    "paired_cases": 320,
+    "log": "build/goal-r1-task-stack-accessors-c/qualified-execution.log"
+  },
+  "negative_controls": [
+    {
+      "mutation": "depth-scaled-to-bytes",
+      "rejected": true
+    },
+    {
+      "mutation": "stack-from-top-of-stack",
+      "rejected": true
+    }
+  ],
+  "audit": {
+    "existing_function_bodies_unchanged": [
+      "uxTaskGetNumberOfTasks",
+      "xTaskGetCurrentTaskHandle",
+      "xTaskGetSchedulerState",
+      "xTaskGetTickCount",
+      "xTaskGetTickCountFromISR"
+    ],
+    "other_object_bytes_unchanged": true,
+    "removed_imports": [
+      "vTaskStackAddr",
+      "vTaskStackSize"
+    ],
+    "added_imports": []
+  },
+  "normal_build": {
+    "compiled": 573,
+    "application_imports": 177,
+    "bootloader_imports": 34,
+    "failures": 0,
+    "duplicate_strong_symbols": 0
+  },
+  "qualification": {
+    "compiled_profiles": 5,
+    "new_C_regions": [
+      {
+        "payload": "r1-application",
+        "symbol": "vTaskStackAddr",
+        "start": 455856,
+        "end": 455868,
+        "sha256": "ecadada43daec93c967bb9559a00d5608bd2ffd6866f576b145334c01279233c",
+        "evidence": "r1/symbols/function-frontier.csv",
+        "bindings": {
+          "pxCurrentTCB": 536901660
+        },
+        "address": 615600,
+        "match_evidence": {
+          "method": "independently named native entry and all unrelocated bytes, followed by full linked equality",
+          "fixed_bytes": 8,
+          "compiled_pattern_sha256": "d3445bdcf6650490b96645e508c4165fbaa7b283f511b999455616b6b8ff6e46",
+          "relocations": [
+            {
+              "symbol": "pxCurrentTCB",
+              "offset": 8,
+              "relocation_type": 2,
+              "address": 536901660,
+              "role": "native_literal_symbol"
+            }
+          ]
+        }
+      },
+      {
+        "payload": "r1-application",
+        "symbol": "vTaskStackSize",
+        "start": 455868,
+        "end": 455880,
+        "sha256": "d1ba8d74f11e531467f6489f9969c507ab719d7b9ced52ae30d0f7ec0149525a",
+        "evidence": "r1/symbols/function-frontier.csv",
+        "bindings": {
+          "pxCurrentTCB": 536901660
+        },
+        "address": 615612,
+        "match_evidence": {
+          "method": "independently named native entry and all unrelocated bytes, followed by full linked equality",
+          "fixed_bytes": 8,
+          "compiled_pattern_sha256": "21ae341bb0c065dc024c6d66b8ae42cb949b78d5cdb931da731107129671a3cc",
+          "relocations": [
+            {
+              "symbol": "pxCurrentTCB",
+              "offset": 8,
+              "relocation_type": 2,
+              "address": 536901660,
+              "role": "native_literal_symbol"
+            }
+          ]
+        }
+      }
+    ],
+    "new_source_built_bytes": 24,
+    "promoted_after_stock_identical_staged_hybrid": true
+  },
+  "source_built_bytes": 3881,
+  "binary_pull_through_bytes": 642279,
+  "resource_bytes": 248,
+  "fresh_promoted_hybrid_equals_locked_application": true,
+  "source_completeness_proven": false,
+  "limits": [
+    "Local R1 evidence only; no G2 workflow advancement",
+    "Seeded synchronous emulator state; no physical crash/unwind integration",
+    "Existing stack-sensitive assembly bridges and name wrapper remain separate",
+    "Stored-byte provenance counts do not establish executable-C coverage"
+  ],
+  "evidence": {
+    "build/sources-goal-r1-task-stack-accessors-c/report.json": "1cb80136fe6c983487f3227f3797fc9c3c03a088174ba8949bc7fb440b3ea8d1",
+    "r1/src/application/rtos/task-count/task-count.c": "0dd1dfafc8b5410525cb57eb267cf7eaac20291a5a76511051f7fa3b1dd4396e",
+    "r1/src/application/board/native_task_construction.h": "5b3c5564a841a375f285e45314809710258efe11f2f4162f97663fa59deb4484",
+    "r1/src/sources.json": "e4c2161f5a94ed8f60f515c71ed7f323fa68daecf30f6a35feb8327e77cfec3e",
+    "r1/symbols/function-frontier.csv": "629cec6f04a76919bc656f0e3a94d97c2e60857ec9d59facff1d233c7d468cf7",
+    "tools/build/source-plan.json": "716cf17b8cf2bed8ad6a99a672b1856af4c5380842c95cb14b9a263a7bb42bc8",
+    "build/hybrid-goal-r1-task-stack-accessors-c-promoted/build-report.json": "5373c659b754b4b55900143c431d6864bdcad34157aab0d084b0296ccca4804e",
+    "build/hybrid-goal-r1-task-stack-accessors-c-promoted/payloads/application.bin": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "r1/docs/reference/source-composition-review.json": "56a3386badaf6ba4237ad0c410963f1b0b1ea0133b513210d7e23e45cf04ee46",
+    "build/goal-r1-task-stack-accessors-c/before.c": "290869e3413ba56e960120b96cc7462cbf340a09b4afa519caa328a129841410",
+    "build/goal-r1-task-stack-accessors-c/REA.json": "8dec687a944bbc1c8adeecc47e7cb12699f0cf7c47ade1ccad7ebec107197e02",
+    "build/goal-r1-task-stack-accessors-c/verify.py": "b6827a75dfcd2979069407c3cbfefcf44086a28bbdda261abc54c30c8b5c123e",
+    "build/goal-r1-task-stack-accessors-c/results.json": "282048ea0764593a99eb2a2a97ee978f4cdbdeff0c86cb2772b4c12fa002d889",
+    "build/goal-r1-task-stack-accessors-c/negative.py": "fc895b0f96e991db1808298d4eec48a1f5d264df46df9ec9cf479d7a3d486138",
+    "build/goal-r1-task-stack-accessors-c/negative-results.json": "44d34e9cf35e8dcfcaccda2978d1a49a4850910c89dda2af520b284897d61a81",
+    "build/goal-r1-task-stack-accessors-c/audit.py": "405bcb6d574df60ebdfc6bef9041541e907cdefec3153dd5cf6ad556479045ec",
+    "build/goal-r1-task-stack-accessors-c/audit-results.json": "d588b76997801d10e79c17530ade7965f2f6a1bfb7fab2f1f9cb36e88a94c841",
+    "build/goal-r1-task-stack-accessors-c/qualify.py": "eb339cc7a19fc259da12ea3d1cb24c8c5c576b6a15959060673dd924263812fa",
+    "build/goal-r1-task-stack-accessors-c/qualified/qualification.json": "626f3b7292f2b17e74100b9e49b062103cc1b52dd32785aaa59c1382778e654a",
+    "build/goal-r1-task-stack-accessors-c/qualified/source-plan.json": "24fd687187baf2cf812157b1ee3c5867e9e1b2f94f7dca25140946d89af0565e",
+    "build/goal-r1-task-stack-accessors-c/qualified-execution.log": "5a34628e810539682e25f0d916406049b6093dc7d9af3f3bf40e3a3be6ddb06f",
+    "build/goal-r1-task-stack-accessors-c/source-plan-before.json": "969af3130987be89dcdc8777d86b4c891d596b4ecef5cccfd763861f05a12d31",
+    "build/goal-r1-task-stack-accessors-c/source-plan-merged.json": "716cf17b8cf2bed8ad6a99a672b1856af4c5380842c95cb14b9a263a7bb42bc8",
+    "build/goal-r1-task-stack-accessors-c/merge-plan.py": "d762a0040bc562093bf57675210d435826d4478b23514f766f338ab5a7d9c4da",
+    "build/goal-r1-task-stack-accessors-c/sources-check.log": "bd60965367f10bcc604039941b628ee9282d683344509ab9faf85d501a53a26c"
+  }
+}

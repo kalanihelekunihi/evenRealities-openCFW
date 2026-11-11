@@ -1,16 +1,16 @@
 /* Recovered main-image failure/logger wrapper, not full formatter attribution. */
 #include <stdint.h>
 #include <stdarg.h>
+/* Stock-RAM literals rewritten to named objects (sim-test wave 2026-10-26,
+ * .waves/sim-fix/apply.py): g2ref_X is the linker symbol X. */
+#include <stdint.h>
+extern unsigned char g2ref_audio_uart_stdio_print_char_cell_200742f0[] __asm__("audio_uart_stdio_print_char_cell_200742f0");
+extern unsigned char g2ref_g2_flashdb_print_buffer[] __asm__("g2_flashdb_print_buffer");
 extern uint32_t audio_heap_formatter(char *,const char *,va_list);
-uint32_t audio_heap_log(const char *format,...){
- if(!*(volatile uint32_t *)0x200742f0u)return 0;
- va_list args;va_start(args,format);
- uint32_t result=audio_heap_formatter((char*)0x2006b930u,format,args);
- va_end(args);
- ((void(*)(char*))(uintptr_t)*(volatile uint32_t*)0x200742f0u)((char*)0x2006b930u);
- return result;
-}
+/* audio_heap_log is an alias of audio_sdk_printf (am_util_stdio_printf) in
+ * system/log/main-formatter/format.c. */
+extern uint32_t audio_heap_log(const char *format,...);
 __attribute__((noreturn)) void audio_heap_malloc_failed(void){
- audio_heap_log((const char*)0x758f70u);
+ audio_heap_log("MallocFailed: cannot malloc memory\n" /* stock 0x758f70 */);
  for(;;){}
 }

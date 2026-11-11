@@ -8,8 +8,9 @@
  */
 #include <stdint.h>
 
-/* Stock 0x1020BD08 (gx8002_fpadd_parts_nan, data) */
-static const uint32_t opposite_infinity_nan_parts[5] = {0u, 0u, 0u, 0u, 0u};
+/* Stock 0x1020BD08 (gx8002_fpadd_parts_nan, data). Exported for
+ * xip_softfp_double.c; followups.md link blocker. */
+const uint32_t gx8002_fpadd_parts_nan[5] = {0u, 0u, 0u, 0u, 0u};
 
 static uint64_t join_parts(const uint32_t *parts)
 {
@@ -41,7 +42,7 @@ const uint32_t *gx8002_xip_fpadd_parts_10209dd8(
     if (second[0] < 2u) return second;
     if (first[0] == 4u) {
         if (second[0] != 4u || first[1] == second[1]) return first;
-        return opposite_infinity_nan_parts;
+        return gx8002_fpadd_parts_nan;
     }
     if (second[0] == 4u) return second;
     if (second[0] == 2u) {

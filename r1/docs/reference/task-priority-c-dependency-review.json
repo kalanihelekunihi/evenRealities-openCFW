@@ -1,0 +1,79 @@
+{
+  "priority_set": {
+    "passed": 7236,
+    "valid": 7200,
+    "invalid": 36,
+    "executions": 14472,
+    "source_report": "build/sources-goal-r1-task-priority-c/report.json",
+    "actual_list_remove_and_ready_insert": true,
+    "pendsv_sev_dsb_isb_checked": true,
+    "source_bytes": 484,
+    "limitations": [
+      "Critical entry/exit modeled; actual priority, list removal/insertion and yield instructions execute",
+      "Valid initialized task/list relationships; null handle selects current task; malformed pointer/list faults unverified",
+      "Private frames, caller-clobbered words/flags and asynchronous scheduler behavior excluded",
+      "Logical assertion mask/address/width/value checked; complete exception state and physical concurrency unverified",
+      "No byte qualification"
+    ]
+  },
+  "audit": {
+    "unchanged_existing_function_bodies": [
+      "pvTaskIncrementMutexHeldCount",
+      "vTaskPriorityDisinheritAfterTimeout",
+      "xTaskPriorityInherit"
+    ],
+    "changed_existing_function_bodies": {},
+    "new_strong_symbols": [
+      "vTaskPrioritySet"
+    ],
+    "removed_imports": [
+      "vTaskPrioritySet"
+    ],
+    "added_imports": []
+  },
+  "negative_controls": {
+    "lose-inheritance": true,
+    "overwrite-event": true,
+    "omit-yield": true
+  },
+  "normal_build": {
+    "compiled": 573,
+    "application_imports": 181,
+    "bootloader_imports": 34,
+    "failures": 0,
+    "duplicate_strong_symbols": 0
+  },
+  "qualification": {
+    "compiled_profiles": 5,
+    "selected_regions": 0,
+    "new_function_byte_identity": false
+  },
+  "source_plan_unchanged": true,
+  "hybrid_equals_locked_application": true,
+  "source_built_bytes": 3857,
+  "binary_pull_through_bytes": 642303,
+  "source_completeness_proven": false,
+  "evidence": {
+    "build/sources-goal-r1-task-priority-c/report.json": "a4f0eb62f0a92eaaf017aa310730cdf7c187d870f1e3ea701424b533962a7fe2",
+    "tools/build/source-plan.json": "969af3130987be89dcdc8777d86b4c891d596b4ecef5cccfd763861f05a12d31",
+    "r1/src/application/rtos/mutex-tasks/mutex-tasks.c": "63816cf826c4db455848a9e15c2d568ff52c8e40c196a30a35880d7bba9df5c1",
+    "third-party/upstream/freertos-kernel/tasks.c": "14020d617b96dd2814e1211f6e3b645bcf5e2bd3179c23fe7dd16bc666fe9463",
+    "third-party/upstream/freertos-kernel/list.c": "db5c169cf3efd68da1c6a923ac84eebc724d602c940bde0b9b5f01f05028fde4",
+    "r1/src/config/rtos/mutex_tasks_contract.h": "65a2b7e2df91987b1421da303f885bd40d402560c5996659f5aec01d1249a7a7",
+    "r1/src/config/rtos/native_port_assert.h": "efee8118f24a53756b6f14a666524b3d59561f005e1e87ed71309ccab9c4fc9f",
+    "r1/src/sources.json": "73c3fb03932b37db089ff50fdae47f8b7e73914b6b1fb99ddf99467302ff84ad",
+    "r1/symbols/function-frontier.csv": "af8a7ff389bd34ce91905f8c97781ab9b4c9181258a6458c5a0395ea1cac5c0a",
+    "build/hybrid-goal-r1-task-priority-c/build-report.json": "1ca085aa48504870f10000173d37eab39b46ace2e1cf36121fab4f04d52b95db",
+    "build/goal-r1-task-priority-c/REA.json": "bd02385aa0227af406c9fb204c274cb1355d33d09ba818024d38b27b8652d60a",
+    "build/goal-r1-task-priority-c/before.c": "c335428cf9b3d13ac3d194870f4cf28b3f9314a457e945018410a5faa31fe9db",
+    "build/goal-r1-task-priority-c/selected-upstream.c": "df7b5ae7965f8b7f077d75396cfa4c1d9d35b3b928b94a5ecf6c40bea2fca5bd",
+    "build/goal-r1-task-priority-c/verify.py": "d8d269dc57b1bbaa8d30ea1899686d2bb20a49963e411e33ae9e57fe781658ed",
+    "build/goal-r1-task-priority-c/results.json": "cf45d49deda10317f0d65616c3c2f7c863092e4155d616af9f05977398155bee",
+    "build/goal-r1-task-priority-c/negative.py": "0d7422fa068bc1db627e903b3b1884ffa95bfe996b30a4eb24d90e3e79e094dd",
+    "build/goal-r1-task-priority-c/negative-results.json": "d15a202debfe991564818b9e7c4543d52215c8f8b47f06bdd674d0c6b1109480",
+    "build/goal-r1-task-priority-c/audit.py": "cda79071a4c751f2fa5e58f7ee688c0b6a2045b0c154ff4005780adb21f956a1",
+    "build/goal-r1-task-priority-c/audit-results.json": "28806392770a180fbea8e2c95724b4c9876fc3dc620aa82338c74768d7c9f5c4",
+    "build/goal-r1-task-priority-c/qualify.py": "3b0a2a910da456590979a39cc69f9681c247e09c36b9b5848514f03491450cfa",
+    "build/goal-r1-task-priority-c/qualified/qualification.json": "6654fda600110c6e5003e585ddeb55802b227a08f3195e0740bbc0e7a2c3f9fb"
+  }
+}

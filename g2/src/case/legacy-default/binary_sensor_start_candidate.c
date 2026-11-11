@@ -19,3 +19,5 @@ uint32_t case_binary_sensor_start(void)
     case_binary_sensor_line_a(0u);
     return case_binary_sensor_delay();
 }
+/* Dedup: PMIC transaction name for stock 0x0800a4b4 (see sensor_transport). */
+__typeof__(case_binary_sensor_start) case_pmic_bus_start __attribute__((alias("case_binary_sensor_start")));

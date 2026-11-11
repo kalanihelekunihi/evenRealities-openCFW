@@ -4,7 +4,7 @@
  */
 #include <stdint.h>
 #include "../thread-creation/resource_creators.h"
-extern uint32_t opencfw_hal_power_control(uint32_t, uint32_t, uint32_t);
+extern uint32_t am_hal_mspi_power_control(uint32_t, uint32_t, uint32_t);
 extern void opencfw_provider_4176ce(uint32_t, const char *, const char *,
                                   const char *, uint32_t, const char *, ...);
 #define POWERED (*(volatile uint8_t *)(uintptr_t)0x200271c6u)
@@ -19,12 +19,12 @@ static const uint32_t mutex_attributes[4] = {
 };
 void opencfw_provider_41fe28(void) {
     if (POWERED != 1u) {
-        (void)opencfw_hal_power_control(HANDLE, 2u, 1u);
+        (void)am_hal_mspi_power_control(HANDLE, 2u, 1u);
         POWERED = 1u; /* Stock ignores HAL status; retain that behavior. */
     }
 }
 void opencfw_provider_41fe48(void) {
-    (void)opencfw_hal_power_control(HANDLE, 0u, 1u);
+    (void)am_hal_mspi_power_control(HANDLE, 0u, 1u);
     POWERED = 0u;
 }
 void opencfw_provider_41fe62(void) {

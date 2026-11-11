@@ -8,7 +8,9 @@ extern void gx8002_uart_stage2_init_clock(void);
 extern void gx8002_uart_stage2_init_runtime(void);
 extern void gx8002_uart_stage2_enter_application(void);
 
-__attribute__((naked, noreturn)) void gx8002_uart_stage1_second_entry(void)
+/* Must stay assembly: stage-2 entry that sets PSR and a new stack pointer. */
+__attribute__((naked, noreturn, section(".text.gx8002_uart_stage2_reset_entry")))
+void gx8002_uart_stage1_second_entry(void)
 {
     __asm__ volatile(
         "lrw r0, 0x80000200\n"

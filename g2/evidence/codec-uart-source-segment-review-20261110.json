@@ -1,0 +1,47 @@
+{
+  "schema": 1,
+  "target": "s200_v2.2.6.10 codec FWPK UART type-1 segment",
+  "stock": {
+    "segment_bytes": 38236,
+    "segment_sha256": "393d2ae1f10ed1382f3eec6e3f9f9ac99d744b7ab41d0c89a003f96588afe391",
+    "stage1_bytes": 10240,
+    "stage2_bytes": 27964
+  },
+  "source": {
+    "stage1_linked_bytes": 9408,
+    "stage1_linked_sha256": "62fe70e7ed16360107c057a8d90b368f94dbd8e5b758e6b399613219720f84e3",
+    "stage2_linked_bytes": 24158,
+    "stage2_linked_sha256": "d0ebf4562da1a1825255eacab08a87006c51ccfec22e74ec6263a03641248b9a",
+    "stage1_vectors_match_stock": true,
+    "stage2_vectors_match_stock": true,
+    "stage2_reset_address": "0x10002900",
+    "stage2_trap_address": "0x10002950",
+    "stage2_exception_bridge_address": "0x10002994",
+    "stage2_irq_address": "0x10003124",
+    "stage2_trap_first_68_equal_bytes": 66,
+    "stage2_exception_bridge_matches_stock": true,
+    "stage2_irq_first_70_equal_bytes": 46,
+    "uart_segment_bytes": 38236,
+    "uart_segment_sha256": "4aa2f9b0718cb5df3f4dfad1f7c70b31106146bda41ebd8d8aae7505650c94c4",
+    "stock_byte_identical": false
+  },
+  "focused_link_report": {
+    "path": "build/g2-codec-stage2-uart-link-20261110/link-report.json",
+    "sha256": "410e6d46fc05f9bc932d05e63a31c301dbef9004a10a701141d7451821246460"
+  },
+  "limitations": [
+    "UART stages are zero-padded to stock wire lengths; executable and data bytes beyond vectors and trap entry are not stock-identical.",
+    "Trap diagnostic output is a source candidate and has not been behaviorally compared against stock.",
+    "The IRQ save sequence differs from stock; hardware interrupts are unverified.",
+    "Codec BINH images and NPU command/weight payload are not source packaged; the full codec FWPK remains incomplete."
+  ],
+  "full_manifest_validation": {
+    "source_report": "build/g2-all-codec-uart-source-20261110/report.json",
+    "source_report_sha256": "4cf597abc678b037e5e151781844a9c54c5ce5e0441cb16a3f658c84e7b8abc2",
+    "link_report": "build/g2-all-codec-uart-source-link-20261110/link-report.json",
+    "link_report_sha256": "c4b842aee32dd93efa6374869224e9fb500d07153672b7b132671231a6432a98",
+    "all_seven_final_links": "passed",
+    "external_binary_archive_used": false,
+    "vector_tables_rechecked_in_final_link": true
+  }
+}

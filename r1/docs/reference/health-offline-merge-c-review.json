@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "stock_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "entries": {
+    "0x40700": "r1_heart_rate_offline_queue_merge",
+    "0x448b0": "r1_spo2_offline_queue_merge",
+    "0x41638": "r1_hrv_offline_queue_merge",
+    "0x3cb80": "r1_activity_offline_queue_merge"
+  },
+  "unit": {
+    "source": "r1/src/application/runtime/native_health_offline_merge.c",
+    "source_sha256": "42bcc320c2b0f0c765cbf85d26fd1f03706ba8eb8f9fe75a17d5512c4288a0fc",
+    "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-offline-merge-c/r1/r1-application/r1__src__application__runtime__native_health_offline_merge.c.o",
+    "object_sha256": "d3c7ddf660b7c66fdee9490aa901f3363fffa205330f8893562b4d1688c9e09f"
+  },
+  "report": "build/sources-goal-r1-offline-merge-c/report.json",
+  "report_sha256": "fd75f4dde729b9d4c78c44e137f3df58520d2a330166acee771963f7524e124f",
+  "behavior": {
+    "pairs": 612,
+    "digest": "3ba4661ed5a79dbf903ae4393bcc59ed7e80989dc88e1ddd0961547f4ee4324e",
+    "modeled_flush_calls": 256,
+    "actual_C": [
+      "four merges",
+      "empty checks and builder resets",
+      "existing enqueue/consume paths in sequences",
+      "shared queue owners"
+    ],
+    "modeled_boundaries": [
+      "clock, logging and four still-unresolved packet flush providers"
+    ],
+    "limits": [
+      "Mapped distinct builders and well-formed queued slot indices; valid queue head",
+      "Byte counts through255 and provider-time queue mutation tested",
+      "No physical packet transmission, asynchronous IRQ or full firmware linkage"
+    ]
+  },
+  "negative_controls": {
+    "wrong-future-equality": {
+      "rejected": true,
+      "diagnostic": "Traceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-offline-merge-c/verify.py\", line 97, in <module>\n    for now in [100,600,601,743,0xffffffff]:pair(kind=kind,now=now,initial_count=1)\n                                            ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-offline-merge-c/verify.py\", line 90, in pair\n    a=run(False,**kw);b=run(True,**kw);assert a==b,(kw,[k for k in a if a[k]!=b[k]],a['trace'],b['trace']);digest.update(json.dumps([kw,a]).encode());pairs+=1;flushes+=state['flushes']\n                                              ^^^^\nAssertionError: ({'kind': 0, 'now': 600, 'initial_count': 1}, ['trace', 'builder'], [('now', [600]), ('mode', [0]), ('mode', [0]), ('mode', [0]), ('mode', [0]), ('mode', [0]), ('mode', [0])], [('now', [600]), ('mode', [0]), ('mode', [0]), ('mode', [0]), ('mode', [0]), ('mode', [0]), ('mode', [0]), ('mode', [0]), ('mode', [0]), ('mode', [0])])\n"
+    },
+    "snapshot-queue-count": {
+      "rejected": true,
+      "diagnostic": "00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001000000640000003c000000580200006b6b00006b6b6b6beb000000'])], [('now', [1000]), ('flush0', ['00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001000000c80000003c000000f40100006b6b6b6b6b6b6b6b6b6b6b6b']), ('flush0', ['01000000000000000000000000000000000000000000000000010203000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001000000640000003c000000580200006b6b00006b6b6b6beb000000']), ('flush0', ['00010000000000000000000000000000000000000000000000000000010203040000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001000000c800000078000000590200006b6b00006b6b6b6b6b000000'])])\n"
+    },
+    "lost-offset-boundary": {
+      "rejected": true,
+      "diagnostic": "Traceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-offline-merge-c/verify.py\", line 98, in <module>\n    for offset in [0,0x8000,0xffff]:pair(kind=kind,offset=offset,initial_count=1)\n                                    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-offline-merge-c/verify.py\", line 90, in pair\n    a=run(False,**kw);b=run(True,**kw);assert a==b,(kw,[k for k in a if a[k]!=b[k]],a['trace'],b['trace']);digest.update(json.dumps([kw,a]).encode());pairs+=1;flushes+=state['flushes']\n                                              ^^^^\nAssertionError: ({'kind': 0, 'offset': 0, 'initial_count': 1}, ['trace', 'builder', 'flushes'], [('now', [1000]), ('flush0', ['000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010000006400000000000000f40100006b6b6b6b6b6b6b6b6b6b6b6b'])], [('now', [1000])])\n"
+    },
+    "wrong-hrv-row-stride": {
+      "rejected": true,
+      "diagnostic": "Traceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-offline-merge-c/verify.py\", line 91, in <module>\n    for kind,layout,flags,initial_count,modes in itertools.product(range(4),range(7),[0,2],[0,1,255],[(0,),(7,),(0,4,2)]):pair(kind=kind,layout=layout,flags=flags,initial_count=initial_count,modes=modes)\n                                                                                                                          ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-offline-merge-c/verify.py\", line 90, in pair\n    a=run(False,**kw);b=run(True,**kw);assert a==b,(kw,[k for k in a if a[k]!=b[k]],a['trace'],b['trace']);digest.update(json.dumps([kw,a]).encode());pairs+=1;flushes+=state['flushes']\n                                              ^^^^\nAssertionError: ({'kind': 2, 'layout': 0, 'flags': 0, 'initial_count': 0, 'modes': (0,)}, ['builder'], [('now', [1000])], [('now', [1000])])\n"
+    },
+    "wrong-activity-mask": {
+      "rejected": true,
+      "diagnostic": "Traceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-offline-merge-c/verify.py\", line 93, in <module>\n    for head,count in itertools.product([0,capacities[kind]-1],[0,1,capacities[kind],255]):pair(kind=kind,head=head,count=count,initial_count=1)\n                                                                                           ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-offline-merge-c/verify.py\", line 90, in pair\n    a=run(False,**kw);b=run(True,**kw);assert a==b,(kw,[k for k in a if a[k]!=b[k]],a['trace'],b['trace']);digest.update(json.dumps([kw,a]).encode());pairs+=1;flushes+=state['flushes']\n                                              ^^^^\nAssertionError: ({'kind': 3, 'head': 0, 'count': 144, 'initial_count': 1}, ['builder'], [('now', [1000])], [('now', [1000])])\n"
+    },
+    "wrong-latest-timestamp": {
+      "rejected": true,
+      "diagnostic": "Traceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-offline-merge-c/verify.py\", line 91, in <module>\n    for kind,layout,flags,initial_count,modes in itertools.product(range(4),range(7),[0,2],[0,1,255],[(0,),(7,),(0,4,2)]):pair(kind=kind,layout=layout,flags=flags,initial_count=initial_count,modes=modes)\n                                                                                                                          ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-offline-merge-c/verify.py\", line 90, in pair\n    a=run(False,**kw);b=run(True,**kw);assert a==b,(kw,[k for k in a if a[k]!=b[k]],a['trace'],b['trace']);digest.update(json.dumps([kw,a]).encode());pairs+=1;flushes+=state['flushes']\n                                              ^^^^\nAssertionError: ({'kind': 0, 'layout': 0, 'flags': 0, 'initial_count': 0, 'modes': (0,)}, ['builder'], [('now', [1000])], [('now', [1000])])\n"
+    },
+    "duplicate-activity-count": {
+      "rejected": true,
+      "diagnostic": "Traceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-offline-merge-c/verify.py\", line 91, in <module>\n    for kind,layout,flags,initial_count,modes in itertools.product(range(4),range(7),[0,2],[0,1,255],[(0,),(7,),(0,4,2)]):pair(kind=kind,layout=layout,flags=flags,initial_count=initial_count,modes=modes)\n                                                                                                                          ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-offline-merge-c/verify.py\", line 90, in pair\n    a=run(False,**kw);b=run(True,**kw);assert a==b,(kw,[k for k in a if a[k]!=b[k]],a['trace'],b['trace']);digest.update(json.dumps([kw,a]).encode());pairs+=1;flushes+=state['flushes']\n                                              ^^^^\nAssertionError: ({'kind': 3, 'layout': 0, 'flags': 2, 'initial_count': 1, 'modes': (0,)}, ['builder'], [('now', [1000])], [('now', [1000])])\n"
+    },
+    "stale-head-before-clock": {
+      "rejected": true,
+      "diagnostic": "Traceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-offline-merge-c/verify.py\", line 95, in <module>\n    for kind in range(4):pair(kind=kind,clock_mutation=True);pair(kind=kind,layout=1,mutate_log=True,modes=(0,4,2));pair(kind=kind,null=True);pair(kind=kind,sequence=True,modes=(7,))\n                         ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-offline-merge-c/verify.py\", line 90, in pair\n    a=run(False,**kw);b=run(True,**kw);assert a==b,(kw,[k for k in a if a[k]!=b[k]],a['trace'],b['trace']);digest.update(json.dumps([kw,a]).encode());pairs+=1;flushes+=state['flushes']\n                                              ^^^^\nAssertionError: ({'kind': 0, 'clock_mutation': True}, ['builder'], [('now', [1000])], [('now', [1000])])\n"
+    }
+  },
+  "audit": {
+    "unchanged_prior_objects": 739,
+    "changed_objects": [
+      "r1/src/application/runtime/native_health_notification_stages.c"
+    ],
+    "allocated_instruction_and_data_bytes_unchanged": true,
+    "only_named_relocation_changes": 4,
+    "renamed_relocations": {
+      "r1_health_sync_provider_00040700": "r1_heart_rate_offline_queue_merge",
+      "r1_health_sync_provider_000448b0": "r1_spo2_offline_queue_merge",
+      "r1_health_sync_provider_00041638": "r1_hrv_offline_queue_merge",
+      "r1_health_sync_provider_0003cb80": "r1_activity_offline_queue_merge"
+    },
+    "new_units": 1,
+    "added_application_imports": [],
+    "removed_application_imports": [
+      "r1_health_sync_provider_0003cb80",
+      "r1_health_sync_provider_00040700",
+      "r1_health_sync_provider_00041638",
+      "r1_health_sync_provider_000448b0"
+    ],
+    "bootloader_imports_unchanged": true,
+    "new_queue_storage": false
+  },
+  "source_check": "python3 tools/build/sources.py check\ng2: 5031 units, 4728 source files, 0 not built\nr1: 741 units, 545 source files, 0 not built",
+  "rea": "health-offline-merge-c-rea.json",
+  "instruction_identity_proven": false,
+  "image_integration_proven": false
+}

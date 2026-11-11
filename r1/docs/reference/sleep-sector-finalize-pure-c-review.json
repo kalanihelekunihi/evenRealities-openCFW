@@ -1,0 +1,130 @@
+{
+  "schema_version": 1,
+  "scope": "R1 sleep-sector completion marker programming in ordinary C",
+  "report": "build/sources-goal-r1-sleep-finalize-c/report.json",
+  "comparison_report": "build/sources-goal-r1-sleep-write-c/report.json",
+  "audit": {
+    "compiled_units": 863,
+    "application_imports": 63,
+    "bootloader_imports": 22,
+    "unchanged_prior_nongenerated_objects": 852,
+    "changed_prior_nongenerated_objects": [
+      "r1/src/application/runtime/native_sleep_sector_finalize.c"
+    ],
+    "normal_object_equals_direct_and_parent_probes": true,
+    "normal_write_object_equals_parent_probe": true,
+    "manifest_and_source_plan_unchanged": true,
+    "new_mutable_persistent_bytes": 0,
+    "assembly_entries_replaced_with_C": 1,
+    "object_audit": {
+      "strong_symbol_set_unchanged": true,
+      "no_allocated_writable_data": true,
+      "assembly_entries_replaced_with_C": 1,
+      "manifest_unchanged": true
+    }
+  },
+  "direct": {
+    "stock_C_comparisons": 19280,
+    "native_instruction_bytes_executed": 192,
+    "actual_sector_count_core_executes": true,
+    "minimum_unsigned_counters_and_empty_scan_marker_match": true,
+    "partial_failed_read_header_carry_and_fixed_target": true,
+    "live_partition_device_and_logging_mutations": true,
+    "exact_marker_bytes_and_zero_only_write_success": true,
+    "private_frame_APSR_and_physical_NOR_unverified": true
+  },
+  "actual_write_finalize_chain": {
+    "stock_C_write_finalize_chain_comparisons": 1458,
+    "actual_C_write_finalize_sector_count_CRC_and_clear": true,
+    "FAL_and_logging_modeled": true
+  },
+  "compiled_defects_rejected": [
+    {
+      "defect": "wrong-magic",
+      "rejected": true,
+      "log": "build/goal-r1-sleep-finalize-c/wrong-magic/test.log"
+    },
+    {
+      "defect": "maximum-instead-of-minimum",
+      "rejected": true,
+      "log": "build/goal-r1-sleep-finalize-c/maximum-instead-of-minimum/test.log"
+    },
+    {
+      "defect": "signed-counter-order",
+      "rejected": true,
+      "log": "build/goal-r1-sleep-finalize-c/signed-counter-order/test.log"
+    },
+    {
+      "defect": "wrong-counter-field",
+      "rejected": true,
+      "log": "build/goal-r1-sleep-finalize-c/wrong-counter-field/test.log"
+    },
+    {
+      "defect": "wrong-empty-default",
+      "rejected": true,
+      "log": "build/goal-r1-sleep-finalize-c/wrong-empty-default/test.log"
+    },
+    {
+      "defect": "accept-positive-write-status",
+      "rejected": true,
+      "log": "build/goal-r1-sleep-finalize-c/accept-positive-write-status/test.log"
+    },
+    {
+      "defect": "rebase-fixed-target",
+      "rejected": true,
+      "log": "build/goal-r1-sleep-finalize-c/rebase-fixed-target/test.log"
+    },
+    {
+      "defect": "repeat-count-query",
+      "rejected": true,
+      "log": "build/goal-r1-sleep-finalize-c/repeat-count-query/test.log"
+    }
+  ],
+  "contract": [
+    "Capture the target address from the live partition base and full sector argument before calling the actual sector-count getter. Keep target fixed thereafter.",
+    "Snapshot byte-truncated count once. Initialize16-byte scratch once, read16 bytes from every sector with live partition/device reloads, and retain scratch across partial/failed reads. Ignore read status as stock.",
+    "Compute unsigned minimum of header word8; all-FFFFFFFF or empty scan yields marker count1, otherwise minimum+1. Do not infer magic/CRC validation.",
+    "Write16-byte marker words CCFFAABB,66889977,count,0, after ring/SDK diagnostics. Reload the write callback after logging; only zero write status returns1."
+  ],
+  "limits": [
+    "Direct FAL/logging boundaries modeled; actual C sector-count getter executes. All192 native instruction bytes execute.",
+    "Write-chain fixture executes actual C payload/header programming, finalization/count, CRC and memory-clear routines; FAL/logging modeled.",
+    "Saved integer/FP registers, masks and caller-stack guards checked; private frames, APSR, concurrency/faults excluded.",
+    "Read-error scratch carry, unsigned counter boundaries and zero-only write success preserve native behavior; this is not a physical reliability guarantee.",
+    "Physical NOR programming, power-loss behavior, final source linking and boot remain unverified. Sector-selection and other sleep assembly remain separate work."
+  ],
+  "evidence_files": {
+    "build/sources-goal-r1-sleep-finalize-c/report.json": "81245b1258d6fc99540da4880afe617bd273683843246bca59699b036e9869ef",
+    "build/sources-goal-r1-sleep-write-c/report.json": "6a19d64b40b7ee60ceed0434063ff6a84581cedac13464b4ac43da5039303d76",
+    "r1/src/application/runtime/native_sleep_sector_finalize.c": "04cf449316a0c0e1cf233d4da7af9ccfffa67bc08c72093b120f47e4ba69e547",
+    "r1/src/application/board/native_battery_memory.h": "e646c981681787c87d8088f663239c9006beb4e4c1827e95854093f0628528b6",
+    "r1/src/application/runtime/native_sleep_record.c": "3c45ef686b843a7645336643f82b6440612b101d2a2907891c9353f1ffd5e2d6",
+    "r1/src/application/runtime/native_sleep_sector_write.c": "0a3a17161b5d27255ede805eecb81ab3fe668e495d69fa960f6232e94852a021",
+    "r1/src/sources.json": "6ea6ab6f16e97b34b73ee1fb683c7c49eb7228bf29fdbdb21f5aded6d4d13380",
+    "tools/build/source-plan.json": "eeb516e31b3310fb0718f36908977f8125723f7c5e0e86cd6744395826259a4d",
+    "build/goal-r1-sleep-finalize-c/manifest-before.json": "6ea6ab6f16e97b34b73ee1fb683c7c49eb7228bf29fdbdb21f5aded6d4d13380",
+    "build/goal-r1-sleep-finalize-c/source-before.c": "3a98fdea81966253d07fbe9f3de66bf86ef171f3e75513b9f36343ab709b1d55",
+    "build/goal-r1-sleep-finalize-c/audit.py": "8a2dd38b09c9f7424c2a00d328d61cbbc68c77ef6ed6707acae0ba7510a36d08",
+    "build/goal-r1-sleep-finalize-c/object-audit.json": "95aab0a63fe5e2ccfbabc945cd5fccc5cc02066cf02b49c4e447f585aa20f994",
+    "build/goal-r1-sleep-finalize-c/record.py": "8f27dd1da0147f7918142966f0bc0a2bd7e9361225c617dfd7fbe11c6c74c0f4",
+    "build/goal-r1-sleep-finalize-c/rea.json": "65c96d9ecf09544ac4d1ca2f2f2eb48b5457edd7cee0c505c7054112d5f83248",
+    "build/goal-r1-sleep-finalize-c/verify.py": "27d31f8fe1dbb6e1cc423e81619925b0166b84c255cd00ff4f14167f4f8c3763",
+    "build/goal-r1-sleep-finalize-c/results.json": "7cc3c7690f1033fd957c8d5c88e652ea150a17945783707b615dc7ed63f36e36",
+    "build/goal-r1-sleep-finalize-c/verification.log": "159ea347f0bbc24ac25e64c9d66fe23d82146b4bde004e07a6213c0f2f2b8497",
+    "build/goal-r1-sleep-finalize-c/source.o": "3dce3a715255936a9eb13644c50163fba6fb154d35becf77fc0f1a35d5cecddd",
+    "build/goal-r1-sleep-finalize-c/source.elf": "ddb1704ad6bd0caba7698d811cfd7ef228dca009b1455d501de0668e59df0f1f",
+    "build/goal-r1-sleep-finalize-c/make_pipeline.py": "817e174e8b832daf6a345e8c5dd5bb5ac81eeb21062b4b44e69114e9360c4789",
+    "build/goal-r1-sleep-finalize-c/pipeline.py": "a3b82c2b900dea87c61dbfc87fc375a6ee91eb48ef1b7e4b527f96111e18d940",
+    "build/goal-r1-sleep-finalize-c/pipeline/results.json": "c117054882944af205d7ef5d4ec5077050f89f82cf9788fbd610ef20ed344f71",
+    "build/goal-r1-sleep-finalize-c/pipeline.log": "6188087a40d0fb04b1081accff25562aadf10953cedbd355e57f17aba6623c47",
+    "build/goal-r1-sleep-finalize-c/pipeline/source.elf": "295d903682f922601f5f06cf970208c9435e45b8cfa8874dfd2737ec5d6f06f7",
+    "build/goal-r1-sleep-finalize-c/pipeline/source.o": "e138877589264d492357ea818cca46b67ce839c560ca439ca9b2cefcc4b9d8bf",
+    "build/goal-r1-sleep-finalize-c/pipeline/finalize.o": "3dce3a715255936a9eb13644c50163fba6fb154d35becf77fc0f1a35d5cecddd",
+    "build/goal-r1-sleep-finalize-c/negative.py": "d45e86bbdd981213ed979e8127622e3e0b7aa12b54f862415f80465899f8a44a",
+    "build/goal-r1-sleep-finalize-c/negative-verify.py": "f7f09cce17d84181e188b0c844ed7ac02098d17c78f7dde71447d7dc2e6ec7bf",
+    "build/goal-r1-sleep-finalize-c/negative.json": "bb4fddb7e8c1da4328f5a190dadac92649e51680cd14c7cc84c7634a57c222e9",
+    "build/goal-r1-sleep-finalize-c/negative.log": "d1894477bbf31034b4a6bfcb098f34a26f682c2486cde51d79b0351e53b1c99e",
+    "build/goal-r1-sleep-finalize-c/build.log": "c27306ac9e5f57dffa2fec9bfdc2b20240eaefb324d9f77456249576f7e41441",
+    "build/goal-r1-sleep-finalize-c/sources-check.log": "c56719af1d0b2d08393a257d3e2022d40896a70239925ecc83fc942850eca238"
+  }
+}

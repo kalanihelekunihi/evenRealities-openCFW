@@ -1,0 +1,34 @@
+{
+  "schema": 1,
+  "target": "G2 codec A BINH and FWPK candidate packaging from source-linked regions",
+  "source_link_tool": "tools/build/link_g2_sources.py",
+  "source_report": "build/g2-all-c-kws-generator-20261110/report.json",
+  "fixture": {
+    "location": "build/g2-codec-synthetic-weights-20261110/",
+    "kind": "synthetic all-zero packaging fixture; not a trained model",
+    "weight_bytes": 120800,
+    "weight_sha256": "6d561e5692c7f5d5c059ffdb0cb4c993b96a53c04a28c33cc821fc954914d51b"
+  },
+  "verification": {
+    "link_report": "build/g2-codec-composed-synthetic-final-20261110/link-report.json",
+    "link_report_sha256": "e43938f88d3c0ab76434f44d4f55ec93270d1bb0476220b6905e15739627fd94",
+    "binh_a_bytes": 193456,
+    "binh_a_sha256": "d139e86b85054098970f94641ef7550b342c2abe24f334d891c7c78d8f697b92",
+    "fwpk_bytes": 326092,
+    "fwpk_sha256": "e7c04e70f0df176e3943b7f1b731b374fb5acec8ea88406537a858dc6e0936ee",
+    "binh_a_command_window_equals_c_generated_stream": true,
+    "binh_a_weight_window_equals_declared_fixture": true,
+    "fwpk_contains_binh_a_candidate": true,
+    "mismatched_provenance_rejected_before_link": true,
+    "sources_check": "4889 units, 4550 source files, 1 not built",
+    "focused_tests": "12 tests passed in tests.test_open_cfw and tests.test_gxdnn_c_source"
+  },
+  "remaining": {
+    "trained_weight_source": false,
+    "functional_kws_model": false,
+    "stock_codec_byte_identity": false,
+    "hardware_boot": false,
+    "all_g2_source_completeness": false
+  },
+  "qualification": "The candidate packer composes C-linked code and C-authored commands with a declared external weight input. The synthetic fixture proves structural integration only; it is not model or device validation."
+}

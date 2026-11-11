@@ -1,0 +1,125 @@
+{
+  "schema_version": 1,
+  "entries": {
+    "0x3ec78": [
+      "r1_ep_export_ring_flush",
+      138
+    ],
+    "0x3ed0c": [
+      "r1_ep_sector_erase_if_dirty",
+      40
+    ]
+  },
+  "report": "build/sources-goal-r1-ep-flush-c/report.json",
+  "report_sha256": "498a96d7bdeb00c925b19f8c8814b4c01837eb2541c0b87faf557e7702088c6d",
+  "unit": {
+    "source": "r1/src/application/runtime/native_ep_ring_flush.c",
+    "source_sha256": "94a5fdddff91e6d92e7aa3e3ac88a204f4d4ec2820689b13ccccf96caf88e86a",
+    "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-ep-flush-c/r1/r1-application/r1__src__application__runtime__native_ep_ring_flush.c.o",
+    "object_sha256": "15290108e45948bb73e18ef5babb58330920fe8475a4fc670e0f02b626f1d35c"
+  },
+  "behavior": {
+    "pairs": 3808,
+    "digest": "7f0204adb0474a94de388639b98af620b1a1a12df69fae972375aae680630075",
+    "actual_C": "EP ring flush/sector preparation with actual export guard and shared status owners",
+    "actual_adapter": "Existing persistence-then-poll assembly adapter",
+    "modeled_boundaries": [
+      "xTaskGetTickCount",
+      "r1_ep_plan_initialization",
+      "xQueueSemaphoreTake",
+      "xQueueGenericSend",
+      "r1_structured_log_mode_get",
+      "r1_structured_log_format",
+      "nrf_log_frontend_std_0",
+      "r1_event_service_000914a0",
+      "r1_ep_record_read",
+      "r1_ep_record_write",
+      "r1_ep_sector_erase",
+      "vPortEnterCritical",
+      "vPortExitCritical"
+    ],
+    "limits": [
+      "Storage read/write/erase, initializer, critical sections, semaphore/queue, clock, persistence and logs modeled",
+      "Reconstructed path prohibited from executing stock instructions",
+      "Private scratch, caller-clobbered registers and void returns excluded",
+      "No real queue contention, flash export or asynchronous RTOS scheduling proof"
+    ]
+  },
+  "negative_controls": {
+    "wrong-pop-wrap": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "\"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-ep-flush-c/verify.py\", line 61, in run\n    assert v.reg_read(UC_ARM_REG_PC)==STOP and v.reg_read(UC_ARM_REG_SP)==SP and [v.reg_read(rr) for rr in saved]==sv and v.reg_read(UC_ARM_REG_PRIMASK)==1 and v.reg_read(UC_ARM_REG_BASEPRI)==64\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    "wrong-word-order": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "120e0065870f0034120f00658769696969696969696969696969696969'])], 'state': ['7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b020200007b7b020000000000000000007b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b', '6969696969696969696969696969696900003412000065870100341201006587020034120200658703003412030065870400341204006587050034120500658706003412060065870700341207006587080034120800658709003412090065870a0034120a0065870b0034120b0065870c0034120c0065870d0034120d0065870e0034120e0065870f0034120f00658769696969696969696969696969696969']})\n"
+    },
+    "wrong-cursor-wrap": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "120e0065870f0034120f00658769696969696969696969696969696969'])], 'state': ['7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b020202017b7bff0121436587ffffffff7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b', '6969696969696969696969696969696900003412000065870100341201006587020034120200658703003412030065870400341204006587050034120500658706003412060065870700341207006587080034120800658709003412090065870a0034120a0065870b0034120b0065870c0034120c0065870d0034120d0065870e0034120e0065870f0034120f00658769696969696969696969696969696969']})\n"
+    },
+    "wrong-sector-boundary": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "120e0065870f0034120f00658769696969696969696969696969696969'])], 'state': ['7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b020200007b7b020000000000000000007b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b', '6969696969696969696969696969696900003412000065870100341201006587020034120200658703003412030065870400341204006587050034120500658706003412060065870700341207006587080034120800658709003412090065870a0034120a0065870b0034120b0065870c0034120c0065870d0034120d0065870e0034120e0065870f0034120f00658769696969696969696969696969696969']})\n"
+    },
+    "advance-on-failure": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "120e0065870f0034120f00658769696969696969696969696969696969'])], 'state': ['7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b020200007b7b000000000000000000007b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b', '6969696969696969696969696969696900003412000065870100341201006587020034120200658703003412030065870400341204006587050034120500658706003412060065870700341207006587080034120800658709003412090065870a0034120a0065870b0034120b0065870c0034120c0065870d0034120d0065870e0034120e0065870f0034120f00658769696969696969696969696969696969']})\n"
+    },
+    "wrong-next-sector": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "120e0065870f0034120f00658769696969696969696969696969696969'])], 'state': ['7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b020202017b7bff0121436587ffffffff7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b', '6969696969696969696969696969696900003412000065870100341201006587020034120200658703003412030065870400341204006587050034120500658706003412060065870700341207006587080034120800658709003412090065870a0034120a0065870b0034120b0065870c0034120c0065870d0034120d0065870e0034120e0065870f0034120f00658769696969696969696969696969696969']})\n"
+    },
+    "wrong-marker-seed": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 1063, in __hook_code_cb\n    callback(uc, address, size, user_data)\n    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-ep-flush-c/verify.py\", line 41, in hook\n    elif n=='read':assert r2==1 and bytes(v.mem_read(r1,1))==b'\\xff';out=[r0,r2];result=state['read_ok'];v.mem_write(r1,bytes([state['marker']]))\n                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    "wrong-erased-marker": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "120e0065870f0034120f00658769696969696969696969696969696969'])], 'state': ['7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b020200007b7b020000000000000000007b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b', '6969696969696969696969696969696900003412000065870100341201006587020034120200658703003412030065870400341204006587050034120500658706003412060065870700341207006587080034120800658709003412090065870a0034120a0065870b0034120b0065870c0034120c0065870d0034120d0065870e0034120e0065870f0034120f00658769696969696969696969696969696969']})\n"
+    }
+  },
+  "audit": {
+    "unchanged_prior_objects": 766,
+    "new_units": 1,
+    "imports": {
+      "r1-application": {
+        "added": [
+          "r1_ep_record_read",
+          "r1_ep_record_write",
+          "r1_ep_sector_erase"
+        ],
+        "removed": [
+          "r1_ep_export_ring_flush"
+        ]
+      },
+      "r1-bootloader": {
+        "added": [],
+        "removed": []
+      }
+    },
+    "reused_owners": [
+      "new authenticated EP cursor halfword; existing shared status ring owners reused"
+    ]
+  },
+  "source_check": "R1 passes: 767 units, 571 source files, 0 not built. Global check flags existing G2 resident_rom_thumb_set.S absent from manifest.",
+  "initialization": "ep-flush-initialization.json",
+  "header": {
+    "path": "r1/src/application/runtime/native_status_ring.h",
+    "sha256": "393d347bafd57dda1138f63ce3f83bfe377203250ae034806ebab1fcb0d7bd2f"
+  },
+  "rea": [
+    "ep-flush-c-rea.json",
+    "ep-sector-prepare-c-rea.json"
+  ],
+  "instruction_identity_proven": false,
+  "image_integration_proven": false
+}

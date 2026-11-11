@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "scope": "R1 YHM2710 ladder ordinary C entry",
+  "report": "build/sources-goal-r1-yhm-ladder-pure-c/report.json",
+  "comparison_report": "build/sources-goal-r1-serial-final-c/report.json",
+  "audit": {
+    "compiled_units": 855,
+    "application_imports": 62,
+    "bootloader_imports": 22,
+    "unchanged_prior_nongenerated_objects": 844,
+    "changed_nongenerated_objects": [
+      "r1/src/application/board/native_yhm_ladder.c"
+    ],
+    "import_sets_unchanged": true,
+    "multiplier_table_unchanged": true,
+    "no_new_persistent_state": true
+  },
+  "verification": {
+    "paired_cases": 26720,
+    "executions": 53440,
+    "float_inputs": 355,
+    "FPSCR_configurations": 32,
+    "C_only_nonwriting_read_cases": 90,
+    "actual_C_math_helper_executed": true,
+    "transport_status_ignored": true,
+    "transport_byte_contract": true,
+    "private_frames_excluded": true
+  },
+  "compiled_defects_rejected": [
+    {
+      "name": "later_ties",
+      "rejected": true
+    },
+    {
+      "name": "lost_low_bits",
+      "rejected": true
+    },
+    {
+      "name": "read_error_aborts",
+      "rejected": true
+    },
+    {
+      "name": "reassociated_product",
+      "rejected": true
+    }
+  ],
+  "intentional_C_policy": "A read provider which writes no byte uses initialized zero for the preserved low five bits. Read and write statuses remain ignored, as stock. This is not evidence of a successful hardware read.",
+  "limits": [
+    "Register transport modeled; physical charger behavior and single-wire timing unverified.",
+    "Actual C-backed architectural absolute helper remains; this change removes assembly from the ladder unit only.",
+    "Private frames, stack addresses, scratch registers and provider over-writes beyond the requested one-byte buffer excluded.",
+    "Controlled native table placement in comparison fixture; final application linking/startup unverified.",
+    "Byte identity is not claimed."
+  ],
+  "evidence_files": {
+    "build/sources-goal-r1-yhm-ladder-pure-c/report.json": "eb50f28eaf9d19502be545a642a789f25d68dea3f523f97ab47000ed03ce051d",
+    "build/sources-goal-r1-serial-final-c/report.json": "5f1f34289b5f5a38f58c92a13f145ff42b1e09409f6cd523f27cb6ac0f871689",
+    "r1/src/application/board/native_yhm_ladder.c": "f0ea5405295a4c9ae6be4c536680a2343ee4bfe621edd93b4594d68bf9104ab3",
+    "r1/src/application/runtime/native_math_selection.c": "0f3f3f48e2a613cf14ba63b46ff245edc9fac4363d291e0009afe28246355220",
+    "r1/src/application/board/native_yhm_frontend.c": "30f84af6ab75c9dd6798e52bf29e21257a03ce7b996aa57bea1b0ee402b0a373",
+    "r1/src/application/board/native_yhm_transport.c": "7e686ec02f4709ee478e191a3c6da4c33998808dc3a899d5f02efd6ceda0eb17",
+    "r1/src/sources.json": "618e3f6056f74edee68027c82dddb1d2e8c53810e0c04e416f42841fc974e4ec",
+    "tools/build/source-plan.json": "eeb516e31b3310fb0718f36908977f8125723f7c5e0e86cd6744395826259a4d",
+    "build/goal-r1-yhm-ladder-pure-c/rea.json": "9312374f0332811297dacc571817e0b11f25f6924e9318d2d2df60ea22ba593f",
+    "build/goal-r1-yhm-ladder-pure-c/make-probe.py": "d2a25e7cd4c9f41335b2ba876420430364f6d24a06cf8f339b25ed363884572b",
+    "build/goal-r1-yhm-ladder-pure-c/verify.py": "ed70a2e31c928949ec1767c789e8216ab55c3ee1bf5d1eaa7b88a5b342b4484b",
+    "build/goal-r1-yhm-ladder-pure-c/results.json": "1d19f1b112e2678f1896c5c05dcc79a9d47592d2ad12bfbbe8fb0197f75903a5",
+    "build/goal-r1-yhm-ladder-pure-c/verification.log": "851e242ee95b53240beb31b7d0993964260c88d67ac556d7c70a8607dee28458",
+    "build/goal-r1-yhm-ladder-pure-c/negative.py": "b9fea1ddd89449d113261245b1d3e3c6e5b7998dd85da8ba912dc31389b3852b",
+    "build/goal-r1-yhm-ladder-pure-c/negative.json": "3c153d0f218d1a5ae8e499fe7f8fde50a2c4b857c26297e1a4f8c9a18ed5392b",
+    "build/goal-r1-yhm-ladder-pure-c/negative.log": "41d10e77ce0835a21eeba3823333203bebcb99b88678634ccc8b555515d4c657",
+    "build/goal-r1-yhm-ladder-pure-c/build.log": "1e7ecda6266e3076084bd5fc727729f04e72fd5617d1f9e6bdee87b6c116a1d3",
+    "build/goal-r1-yhm-ladder-pure-c/sources-check.log": "f610d186f791ebf717d9fd6eed6c4f28612779fff34b885bcf8dc8a49c9ae80c"
+  }
+}

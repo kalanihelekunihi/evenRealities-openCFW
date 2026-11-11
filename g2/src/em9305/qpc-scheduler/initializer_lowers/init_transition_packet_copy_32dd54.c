@@ -24,10 +24,6 @@ uint32_t opencfw_em9305_init_transition_packet_copy_32dd54(
     uint32_t b17=rd8(source+17u),b18=rd8(source+18u),b16=rd8(source+16u);
     wr32(out+20u,b16|(b17<<8u)|(b18<<16u));
     uint32_t b19=rd8(source+19u);
-#ifdef __arc__
-    /* Native 32dd96 clears the high accumulator before writing byte38. */
-    __asm__ volatile("mov r59,0" : : : "r59","memory");
-#endif
     wr8(out+38u,b19);
     uint32_t b21=rd8(source+21u),b20=rd8(source+20u);
     wr16(out+40u,b20|(b21<<8u));
@@ -38,22 +34,9 @@ uint32_t opencfw_em9305_init_transition_packet_copy_32dd54(
     uint32_t b27=rd8(source+27u),b26=rd8(source+26u);
     wr16(out+36u,b26|(b27<<8u));
     uint32_t b28=rd8(source+28u);
-#ifdef __arc__
-    __asm__ volatile("mov r58,%0" : : "r"(b28) : "r58","memory");
-#endif
     uint32_t b29=rd8(source+29u);
     uint32_t b30=rd8(source+30u);
-#ifdef __arc__
-    /* MACU writes its register operand.  Use a separate read/write scratch
-     * so subsequent byte packing still consumes the original b29. */
-    uint32_t macu_scratch=b29;
-    __asm__ volatile("macu %0,%0,256" : "+r"(macu_scratch) : : "r58","r59","memory");
-#endif
     uint32_t b31=rd8(source+31u);
-#ifdef __arc__
-    uint32_t macdu_scratch=b30;
-    __asm__ volatile("macdu 0,%0,0x10000" : "+r"(macdu_scratch) : : "r58","r59","memory");
-#endif
     uint32_t b32=rd8(source+32u);
     wr32(out+24u,b28|(b29<<8u)|(b30<<16u)|(b31<<24u));
     wr32(out+28u,b32);

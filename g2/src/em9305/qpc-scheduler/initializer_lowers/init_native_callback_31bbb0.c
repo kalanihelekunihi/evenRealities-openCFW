@@ -1,94 +1,50 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_callback_31bbb0\n"
-".type opencfw_em9305_callback_31bbb0,@function\n"
-"opencfw_em9305_callback_31bbb0:\n"
-"L31bbb0:\n"
-"enter_s [r13-r15,fp,blink]\n"
-"L31bbb2:\n"
-"mov_s r13,0x8028d0\n"
-"L31bbb8:\n"
-"ld r0,[r13,0x4]\n"
-"L31bbba:\n"
-"ld r1,[r13,0]\n"
-"L31bbbc:\n"
-"breq.d.nt r0,r1,L31bc26\n"
-"L31bbc0:\n"
-"sub_s sp,sp,0x18\n"
-"L31bbc2:\n"
-"mov_s r14,0\n"
-"L31bbc4:\n"
-"mpy r0,r0,0x14\n"
-"L31bbc8:\n"
-"st_s r14,[sp,0x14]\n"
-"L31bbca:\n"
-"stb_s r14,[sp,0x10]\n"
-"L31bbcc:\n"
-"add_s r1,r13,r0\n"
-"L31bbce:\n"
-"ldh_s r2,[r1,0x8]\n"
-"L31bbd0:\n"
-"mov r0,258\n"
-"L31bbd4:\n"
-"ld_s r15,[r1,0x14]\n"
-"L31bbd6:\n"
-"sth r0,[sp,2]\n"
-"L31bbda:\n"
-"ld r0,[r1,0x10]\n"
-"L31bbdc:\n"
-"ldh_s r3,[r1,0x18]\n"
-"L31bbde:\n"
-"sth r2,[sp]\n"
-"L31bbe2:\n"
-"ld r2,[r1,0xc]\n"
-"L31bbe4:\n"
-"sub_s r15,r15,0xc\n"
-"L31bbe6:\n"
-"st_s r0,[sp,0x8]\n"
-"L31bbe8:\n"
-"add_s r1,sp,0\n"
-"L31bbea:\n"
-"mov_s r0,r15\n"
-"L31bbec:\n"
-"sth r3,[sp,4]\n"
-"L31bbf0:\n"
-"sth r3,[sp,14]\n"
-"L31bbf4:\n"
-"bl.d opencfw_em9305_dispatch_child_31b9ac\n"
-"L31bbf8:\n"
-"sth r2,[sp,12]\n"
-"L31bbfc:\n"
-"bl.d opencfw_em9305_ll_received_event_active\n"
-"L31bc00:\n"
-"mov_s r0,r15\n"
-"L31bc02:\n"
-"ld r2,[r13,0x4]\n"
-"L31bc04:\n"
-"ld r1,[sp,0x8]\n"
-"L31bc06:\n"
-"ldh r0,[sp]\n"
-"L31bc0a:\n"
-"mpy r2,r2,0x14\n"
-"L31bc0e:\n"
-"add_s r2,r2,r13\n"
-"L31bc10:\n"
-"bl.d opencfw_em9305_ll_test_timer_31c490\n"
-"L31bc14:\n"
-"st_s r14,[r2,0x14]\n"
-"L31bc16:\n"
-"ld r0,[r13,0x4]\n"
-"L31bc18:\n"
-"ld r1,[r13,0]\n"
-"L31bc1a:\n"
-"add_s r0,r0,1\n"
-"L31bc1c:\n"
-"remu r0,r0,0x6\n"
-"L31bc20:\n"
-"brne.d.t r0,r1,L31bbc4\n"
-"L31bc24:\n"
-"st_s r0,[r13,0x4]\n"
-"L31bc26:\n"
-"leave_s [r13-r15,fp,blink,pcl]\n"
-".size opencfw_em9305_callback_31bbb0,.-opencfw_em9305_callback_31bbb0\n"
-);
+#include <stdint.h>
+
+/* Native 0x31bbb0..0x31bc28: drain the six-entry received-test-packet
+ * ring at 0x8028d0 (tail +0, head +4, 20-byte entries from +8). Each
+ * entry becomes a type-258 report (id +8, length +0x18, timestamp +0x10,
+ * status +0xc) for the message 12 bytes before the stored buffer (+0x14);
+ * the buffer slot is cleared and the test timer restarted. */
+extern uint32_t opencfw_em9305_dispatch_child_31b9ac(uintptr_t,uintptr_t);
+extern uint32_t opencfw_em9305_ll_received_event_active(uintptr_t);
+extern uint32_t opencfw_em9305_ll_test_timer_31c490(uint32_t,uint32_t);
+
+struct init_test_report_31bbb0 {
+    uint16_t id;
+    uint16_t type;
+    uint16_t length;
+    uint16_t reserved0;
+    uint32_t timestamp;
+    uint16_t status;
+    uint16_t length_copy;
+    uint8_t flag;
+    uint8_t reserved1[3];
+    uint32_t extra;
+};
+
+void opencfw_em9305_callback_31bbb0(void)
+{
+    volatile uint32_t *ring=(volatile uint32_t *)(uintptr_t)0x8028d0u;
+    uint32_t head=ring[1];
+    if(head==ring[0]) return;
+    struct init_test_report_31bbb0 report;
+    do {
+        uintptr_t entry=(uintptr_t)0x8028d0u+head*20u;
+        report.extra=0u;
+        report.flag=0u;
+        report.id=*(volatile uint16_t *)(entry+8u);
+        report.type=258u;
+        uintptr_t message=*(volatile uint32_t *)(entry+0x14u)-12u;
+        report.timestamp=*(volatile uint32_t *)(entry+0x10u);
+        uint32_t length=*(volatile uint16_t *)(entry+0x18u);
+        report.length=(uint16_t)length;
+        report.length_copy=(uint16_t)length;
+        report.status=(uint16_t)*(volatile uint32_t *)(entry+0xcu);
+        (void)opencfw_em9305_dispatch_child_31b9ac(message,(uintptr_t)&report);
+        (void)opencfw_em9305_ll_received_event_active(message);
+        *(volatile uint32_t *)((uintptr_t)0x8028d0u+ring[1]*20u+0x14u)=0u;
+        (void)opencfw_em9305_ll_test_timer_31c490(report.id,report.timestamp);
+        head=(ring[1]+1u)%6u;
+        ring[1]=head;
+    } while(head!=ring[0]);
+}

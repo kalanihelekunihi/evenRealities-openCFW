@@ -30,3 +30,8 @@ void opencfw_dfu_log_detail_native(uint32_t level,uint32_t line,uint32_t detail)
 void opencfw_dfu_log_native(uint32_t level,uint32_t line){opencfw_dfu_log_detail_native(level,line,0);}
 void opencfw_allocator_log_native(uint32_t line){if(line==19u)opencfw_boot_elog_output(4,"tlsf","D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\tlsf\\tlsf_init.c","tlsf_adapter_init",19,"tlsf init.");}
 void opencfw_control_log_native(uint32_t level,uint32_t line){if(line==505u)opencfw_boot_elog_output(level,"task.dfu","D:\\01_workspace\\s200_ap510b_iar_git\\product\\s200\\bootloader\\threads\\thread_dfu.c","bootloader_error_reset",505,"Bootloader ota fail, system reset!!!");}
+
+/* Stock entry names that branch straight to the provider above. */
+__typeof__(opencfw_allocator_log_native) opencfw_boot_allocator_log __attribute__((alias("opencfw_allocator_log_native")));
+__typeof__(opencfw_control_log_native) opencfw_boot_control_log __attribute__((alias("opencfw_control_log_native")));
+__typeof__(opencfw_dfu_log_native) opencfw_boot_dfu_log __attribute__((alias("opencfw_dfu_log_native")));

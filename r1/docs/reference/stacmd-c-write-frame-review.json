@@ -1,0 +1,66 @@
+{
+  "cases": 3824,
+  "passed": 3824,
+  "failures": [],
+  "actual_parity_executes": true,
+  "old_frame_regression": {
+    "native_r3": "0x1",
+    "old_r3": "0xabc00003",
+    "native_pointers": [
+      "0x2002ffe8",
+      "0x2002ffe8"
+    ],
+    "old_pointers": [
+      "0x2002ffe8",
+      "0x2002ffe8"
+    ]
+  },
+  "source_bridge_size": 14,
+  "source_body_size": 152,
+  "read_sections_unchanged": true,
+  "callback_depths": [
+    [
+      [
+        -24
+      ],
+      [
+        -64
+      ]
+    ]
+  ],
+  "other_source_units_unchanged": 561,
+  "imports_unchanged": true,
+  "application_imports": 211,
+  "bootloader_imports": 34,
+  "report": "build/sources-goal-r1-stacmd-write-frame/report.json",
+  "report_sha256": "6c18e60fbd79b5b43d765b70aa7f2eeba19d18daeb2e341641e3cdb308bd002a",
+  "manifest_sha256": "9c5b7ae5c0e7493eb22e1fb4df9f0c928c2a9aa70530254aff89b55213bef2e2",
+  "stock_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "rea": {
+    "path": "build/goal-r1-stacmd-write-frame/REA.json",
+    "sha256": "d3f41cf66934edec5f3409ff77bf4f9af8a577461e34b684ccfda234a1e9d461",
+    "procedure": "0x28c6c"
+  },
+  "source_sha256": {
+    "r1/src/application/board/native_stacmd_frames.c": "e674fafeb32e9effe615a18f51c22f7ca4d7e0f1281fade48416addc8ac392ca",
+    "r1/src/application/board/native_stacmd_transmit.c": "08d500162404d60c89631c3df358e4e681a52ac1ed1bea5d6df63a473b7d768a"
+  },
+  "probe_artifacts": {
+    "build/goal-r1-stacmd-write-frame/before.c": "a2f51225cb8a7bc5669f61f1d9378c66b28de0318689cf730eb01218ade7c946",
+    "build/goal-r1-stacmd-write-frame/stock.s": "e0e3be69b9758344faba521ba761cb9de7bb0c8ff1dab908d0df174d5aca928d",
+    "build/goal-r1-stacmd-write-frame/stock.elf": "a554f2c0083b6706aa7684137f246724d948ab98a4170b79042a35e01f6d16d2",
+    "build/goal-r1-stacmd-write-frame/REA.json": "d3f41cf66934edec5f3409ff77bf4f9af8a577461e34b684ccfda234a1e9d461",
+    "build/goal-r1-stacmd-write-frame/rea-snapshot.json": "eac5b381ba4d25743fa9a8f1f04d33995b26c9879410810a2914a4c96f5938ea",
+    "build/goal-r1-stacmd-write-frame/verify.py": "75c82dd2ea8f86250a4e8265e315d92c5ff13dab07f345d0d3e124863bf6f21d",
+    "build/goal-r1-stacmd-write-frame/results.json": "2dff05b6845d152e68a1254bd3a417bcfa3f640e8ce1a6bfb2b51776534f323e",
+    "build/goal-r1-stacmd-write-frame/source.elf": "569ab9d14b4d89e2abc5c55abec6905a1704d116cd9c8b5102c87b931c4cdb7f",
+    "build/goal-r1-stacmd-write-frame/old.elf": "3b1e92d6ca330a5f75ada0bd57320517ef57e4a5f4393384079bc70a9144785f"
+  },
+  "limits": [
+    "C write body is 152 bytes plus fourteen-byte native-frame bridge versus 130 native instruction bytes. No byte identity or provider qualification.",
+    "Actual parity executes; idle, write/drive-bit, ACK reader and release boundaries are modeled. Physical GPIO/STACMD wire and timing are unproven.",
+    "Native ACK scratch stays at caller SP-24, seeded by incoming R3 and restored into R3. Modeled boundaries use SP-24 native and SP-64 C; private frames, faults, exceptions and timing identity remain unproven.",
+    "Payload/configuration mutations are controlled callback scenarios, not observed field issues or a general concurrent-access safety proof.",
+    "Read kernel/bridge bytes and relocations are unchanged. Eligibility/import sets, G2 gates and source-plan selections remain unchanged; final source/boot/link and whole-image byte gates remain open."
+  ]
+}

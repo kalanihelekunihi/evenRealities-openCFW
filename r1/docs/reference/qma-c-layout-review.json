@@ -1,0 +1,93 @@
+{
+  "cases": 3224,
+  "passed": 3224,
+  "failures": [],
+  "functions": [
+    {
+      "name": "r1_qma6100_configure_boundary",
+      "stock_entry": "0x86e68",
+      "stock_bytes": 110,
+      "source_bytes": 114,
+      "native_span_sha256": "c5d03aad9ed018efc702937ee49b081151389bd58baaca0d589ae89309dfd855"
+    },
+    {
+      "name": "r1_qma_range",
+      "stock_entry": "0x87188",
+      "stock_bytes": 56,
+      "source_bytes": 60,
+      "native_span_sha256": "ed4e473b41a6125acb9c1260643621d0741429f05585785b5e293b0dee9de81b"
+    }
+  ],
+  "native_defaults_address": "0x9a6a6",
+  "callback_stack_depth_pairs": [
+    [
+      "config",
+      [
+        -40,
+        -40
+      ],
+      [
+        -24,
+        -24
+      ]
+    ],
+    [
+      "config",
+      [
+        -40,
+        -40,
+        -40
+      ],
+      [
+        -24,
+        -24,
+        -24
+      ]
+    ],
+    [
+      "range",
+      [
+        0
+      ],
+      [
+        0
+      ]
+    ]
+  ],
+  "unchanged_functions": [
+    "r1_qma_any_motion",
+    "r1_qma_reset",
+    "r1_qma_setup",
+    "r1_qma_steps",
+    "r1_qma_tap"
+  ],
+  "report": "build/sources-goal-r1-qma-layout/report.json",
+  "report_sha256": "8deb8fa8cb49f86f3701f585e222a8a263ee7ad1ab23758cca5b1eda2c134e97",
+  "source_sha256": "261e88299ba6149108d3fdafb13696c3842d5069b89464d4b52ce88272ff2ebf",
+  "manifest_sha256": "be76bf00509f1551b53a08edbc5515ed3a3dcb9b1721ff4481fdf60b77d82eb8",
+  "stock_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "rea": {
+    "completed": true,
+    "procedures": [
+      "0x86e68",
+      "0x87188"
+    ],
+    "path": "build/goal-r1-qma-layout/REA.json",
+    "sha256": "6327080f2cf64f58f918a04b00546b1e88a5385e58f7fbdbdb2c529f71502da1",
+    "limitation": "Range return inferred void; native tail-call instructions and execution establish full write-wrapper result."
+  },
+  "probe_artifacts": {
+    "build/goal-r1-qma-layout/verify.py": "245676b5efe592f187401362c17affa8a83622a04f0cfcffa8708c2fbb48ba0e",
+    "build/goal-r1-qma-layout/before.c": "45acdac99ea8973cc681acd8bc2c3996ee4d05c2ca4aac3c2687a4a360982d62",
+    "build/goal-r1-qma-layout/source.elf": "96b19378ad4c05d67297de9508b4bcebf34a43fbf89acbe783ad3acd7b898b10",
+    "build/goal-r1-qma-layout/stock.elf": "b666439e9921edfb1a863e77bb3cb75d67be28e0263403008c738c30b93e4f92",
+    "build/goal-r1-qma-layout/rea-snapshot.json": "e83c161ecae21999aadb77e947b67709433d52c7ecad6e51bb9ecfdb0d47568a",
+    "build/goal-r1-qma-layout/entries.json": "c3c8521a32e7c62e611af13a820ac137973ab4e9e400c6577d25fd11bc8851e8"
+  },
+  "limits": [
+    "Chip-ID, setup and write callbacks are modeled and clobber caller-saved registers/flags.",
+    "Axis-data mutation is probe fault injection, not a claim that stock flash is writable.",
+    "Sensor-state placement at 0x2001e4b0 is controlled; the distinct runtime transport address is not changed.",
+    "No physical sensor operation, timing, complete fault-state, final linking, source qualification or byte-identity claim."
+  ]
+}

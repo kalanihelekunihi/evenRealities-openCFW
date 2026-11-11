@@ -2,6 +2,12 @@
  * Requires product initialization of pool/free head and pending sentinel. */
 #include <stdint.h>
 #include <stddef.h>
+/* Stock-RAM literals rewritten to named objects (sim-test wave 2026-10-26,
+ * .waves/sim-fix/apply.py): g2ref_X is the linker symbol X. */
+#include <stdint.h>
+extern unsigned char g2ref_g2_elog_pending_tail[] __asm__("g2_elog_pending_tail");
+extern unsigned char g2ref_g2_elog_stats[] __asm__("g2_elog_stats");
+extern unsigned char g2ref_g2_stock_ram_20074570[] __asm__("g2_stock_ram_20074570");
 
 typedef struct LogNode {
     struct LogNode *next;       /* 0x00 */
@@ -14,9 +20,9 @@ typedef struct LogNode {
 _Static_assert(offsetof(LogNode,payload)==13 && sizeof(LogNode)==272,
                "stock logger node layout and 4-byte tail padding");
 
-static LogNode *volatile *const free_head=(LogNode *volatile *)(uintptr_t)0x20074574u;
-static LogNode *volatile *const pending_tail=(LogNode *volatile *)(uintptr_t)0x2007413cu;
-static volatile uint32_t *const stats=(volatile uint32_t *)(uintptr_t)0x2007342cu;
+static LogNode *volatile *const free_head=(LogNode *volatile *)(uintptr_t)((uint32_t)(uintptr_t)g2ref_g2_stock_ram_20074570+0x4u);
+static LogNode *volatile *const pending_tail=(LogNode *volatile *)(uintptr_t)((uint32_t)(uintptr_t)g2ref_g2_elog_pending_tail);
+static volatile uint32_t *const stats=(volatile uint32_t *)(uintptr_t)((uint32_t)(uintptr_t)g2ref_g2_elog_stats);
 
 /* Word-aligned LDR/LDREX/STREX-compatible operations on the Cortex-M target. */
 static LogNode *load_node(LogNode *volatile *p) {

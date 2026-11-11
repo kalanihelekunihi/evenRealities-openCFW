@@ -1,0 +1,125 @@
+{
+  "schema_version": 1,
+  "report": "build/sources-goal-r1-nfc-irq-monitor-c/report.json",
+  "evidence_files": {
+    "build/sources-goal-r1-nfc-irq-monitor-c/report.json": "d1b416a208bd45009c1f45fb35bf2554548efa26c99cf6eb873da9fbde245516",
+    "r1/src/sources.json": "fe3e76ea9530975cc50f793dc8e512bb0b1ed45aeae2eff867883229de8321e1",
+    "r1/src/application/runtime/native_nfc_irq_monitor.c": "8f31bedf7d02f66da29012f46b2b423a3da32178f1be4b0d1486143b894e971c",
+    "r1/src/application/runtime/native_nfc_late_setup.c": "7f9bab32ab5fffb64e5ccdc616535c75c660ad2c2c0caeabbce3d25b8db86187",
+    "r1/src/application/board/native_battery_control.c": "075a9ce7647e2569bf30a433ce6c588ee7cbef26ccd8095d38d8f528fc54b3ae",
+    "r1/src/application/runtime/native_battery_context_config.c": "2f286ba3158db295a53c5bf5d776bfafc5afaafe6705163298cb091bdbc584b5",
+    "r1/src/application/board/native_yhm_transport.c": "7e686ec02f4709ee478e191a3c6da4c33998808dc3a899d5f02efd6ceda0eb17",
+    "r1/src/application/gpio/stock_named_gpio.c": "586037af9f510157b776e4b7ceeed6ad756e0874cc395014c0c8c0132dc5ca50",
+    "build/goal-r1-fstorage-registry/expanded-rw.bin": "87fdee392022fdbe23dd0daf3e859fb14f3ce26ba3e8403aab56dc9d9a913317",
+    "build/goal-r1-nfc-irq-monitor-c/manifest-before.json": "b87252b4b1889233ffe3b9ddfaf2b53835b2a5f2d7c9c8e072389b5176911220",
+    "build/goal-r1-nfc-irq-monitor-c/verify.py": "7860d572b3a8661a30be7a1be94f53c4eba7287f847e160b319cf1d00176e8f0",
+    "build/goal-r1-nfc-irq-monitor-c/verification.json": "f6259f50efedf40db2a67dbfde8eb761c370e8e82e1a0ef80e01f0826ac8e95e",
+    "build/goal-r1-nfc-irq-monitor-c/verify-final.log": "eae58bee7b4f3887d83495446c202a51577da6a48390ca97f2ac29d61819e514",
+    "build/goal-r1-nfc-irq-monitor-c/late-integration.py": "189664e8fa0dd2bb1b657493432daa514418b5bcddb7a84eef1d5e52dda56e86",
+    "build/goal-r1-nfc-irq-monitor-c/late-integration/verification.json": "2aca251c23ae57f44d40fc2a28b8269b4227963de1d05ab86ac0099a5dff681f",
+    "build/goal-r1-nfc-irq-monitor-c/late-integration.log": "b7b37b971ce28c94fdeed041b3136e4a6c0fe3c5bcd70c72231d084fa48fe149",
+    "build/goal-r1-nfc-irq-monitor-c/late-integration/source.elf": "6889dff4c6f11f17cab47650c4289053f704c4fe2cc1eb3f159b31f2ad4ab809",
+    "build/goal-r1-nfc-irq-monitor-c/audit.py": "88b9eb48dac3850ea4a217195eaf9ba485e01a76ec15d8542e1d3b2a3cc68fca",
+    "build/goal-r1-nfc-irq-monitor-c/audit.json": "74d26292d21d5362831226e2186ff8bd5de45ea2e395e0591f05e86a80f5aea2",
+    "build/goal-r1-nfc-irq-monitor-c/defects.py": "f2b4119a8b5d588858a316b765b1d019bd80533726a1a325022120827c481a6a",
+    "build/goal-r1-nfc-irq-monitor-c/defects.json": "79bae5a8cc6a871acc78460e26757590292ac602839828d1f35109662979de21",
+    "build/goal-r1-nfc-irq-monitor-c/rea.json": "b6899bc11d0cca777fe274bbbb7df7f2867d7cc33a3a4e66de2fb652917b56f3",
+    "build/goal-r1-nfc-irq-monitor-c/source.elf": "21bcd94d5b29e8eb47b63979a2263b5838e9b3d4835fa80c6499e802200ddce7",
+    "build/goal-r1-nfc-irq-monitor-c/r1-sources-check.log": "ded6b1f165524152f50ab95d25e37bddbfa919ab2c47cd0a644b56510007db50",
+    "build/goal-r1-nfc-irq-monitor-c/sources-check.log": "360342b70e4c0bc63d6a259fb4a3d13188bd3b04faa35fc6a4dc7cc56bae1683",
+    "build/goal-r1-nfc-irq-monitor-c/boot-link/report.json": "8e5ee2c78c6cc50790850a9e91c0ab6b68f3994f7877ec2c8433dea955f92d34"
+  },
+  "stock_application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "rea_window": {
+    "address": "0x42d40",
+    "length": 388,
+    "code_extent_bytes": 218,
+    "includes_literals_and_strings": true
+  },
+  "verification": {
+    "boundary_stock_C_pairs": 10752,
+    "seeded_stock_C_pairs": 1024,
+    "live_clock_and_log_mutation_pairs": 168,
+    "independent_window_state_oracle": true,
+    "actual_battery_flag_wrapper_and_shared_thread_owner": true,
+    "ordered_state_writes_and_all_log_arguments_checked": true,
+    "valid_cursor_domain": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "time_logging_and_OS_flag_leaves_modeled": true,
+    "ordinary_C_ABI_private_frames_and_void_outputs_excluded": true
+  },
+  "integration": {
+    "actual_setup_completion_registered_monitor_sequences": 4,
+    "callbacks_per_sequence": 8,
+    "suppression_and_recovery_checked": true,
+    "remaining_hardware_and_OS_leaves_modeled": true
+  },
+  "audit": {
+    "unchanged_prior_object_hashes": 808,
+    "generated_boot_allocated_bytes_and_relocations_unchanged": true,
+    "added_application_imports": [],
+    "removed_application_imports": [
+      "r1_nfc_charge_monitor_callback_00042d40"
+    ],
+    "only_manifest_change_one_new_unit": true,
+    "no_handwritten_assembly_in_monitor": true,
+    "one_existing_battery_thread_handle_owner": true,
+    "existing_I2C5_and_YHM_owners_reused": true
+  },
+  "defects": [
+    {
+      "defect": "exclusive-window",
+      "compiled": true,
+      "behavioral_assertion_rejected": true
+    },
+    {
+      "defect": "count-zero-sentinel",
+      "compiled": true,
+      "behavioral_assertion_rejected": true
+    },
+    {
+      "defect": "early-suppression",
+      "compiled": true,
+      "behavioral_assertion_rejected": true
+    },
+    {
+      "defect": "notify-while-suppressed",
+      "compiled": true,
+      "behavioral_assertion_rejected": true
+    },
+    {
+      "defect": "missing-suppression-state",
+      "compiled": true,
+      "behavioral_assertion_rejected": true
+    },
+    {
+      "defect": "failed-recovery-clear",
+      "compiled": true,
+      "behavioral_assertion_rejected": true
+    },
+    {
+      "defect": "wrong-cursor-modulus",
+      "compiled": true,
+      "behavioral_assertion_rejected": true
+    },
+    {
+      "defect": "wrong-timestamp-slot",
+      "compiled": true,
+      "behavioral_assertion_rejected": true
+    }
+  ],
+  "limitations": [
+    "The cursor precondition is 0..6; corrupt out-of-range cursors are outside this C contract.",
+    "Clock, logging and OS flag leaves are modeled; physical IRQ concurrency and timing are unverified.",
+    "Timestamp storage has C zero initialization; final application startup/BSS placement is not validated here.",
+    "Chip configuration, acquisition/dispatcher children, manager wiring, final application linking and device boot remain open.",
+    "Private frames and incidental callback return registers are outside the void C callback contract."
+  ]
+}

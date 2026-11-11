@@ -1,44 +1,19 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_325e84\n"
-".type opencfw_em9305_child_325e84,@function\n"
-"opencfw_em9305_child_325e84:\n"
-"L325e84:\n"
-"enter_s [r13-r14,blink]\n"
-"L325e86:\n"
-"mov_s r14,r0\n"
-"L325e88:\n"
-"mov_s r0,4\n"
-"L325e8a:\n"
-"bl.d opencfw_em9305_wsf_event_allocate\n"
-"L325e8e:\n"
-"mov_s r13,r1\n"
-"L325e90:\n"
-"mov_s r1,r0\n"
-"L325e92:\n"
-"breq_s r0,0,L325eb0\n"
-"L325e94:\n"
-"breq_s r14,0,L325e9a\n"
-"L325e96:\n"
-"ldb_s r2,[r14,0x10]\n"
-"L325e98:\n"
-"b_s L325e9c\n"
-"L325e9a:\n"
-"mov_s r2,0xff\n"
-"L325e9c:\n"
-"mov_s r0,0x805b18\n"
-"L325ea2:\n"
-"ldb_s r0,[r0,0]\n"
-"L325ea4:\n"
-"stb_s r13,[r1,0x3]\n"
-"L325ea6:\n"
-"sth_s r2,[r1,0]\n"
-"L325ea8:\n"
-"bl.d opencfw_em9305_wsf_task_message_send\n"
-"L325eac:\n"
-"stb 9,[r1,2]\n"
-"L325eb0:\n"
-"leave_s [r13-r14,blink,pcl]\n"
-".size opencfw_em9305_child_325e84,.-opencfw_em9305_child_325e84\n"
-);
+#include <stdint.h>
+
+/* Native 0x325e84..0x325eb2: allocate a 4-byte message {u16 handle,
+ * u8 9, u8 status} (handle from +16 of the connection, 0xff when none)
+ * and send it to the task at 0x805b18. Returns 0 if allocation fails. */
+extern uintptr_t opencfw_em9305_wsf_event_allocate(uint32_t length);
+extern uint32_t opencfw_em9305_wsf_task_message_send(uint32_t task, uintptr_t message);
+
+uint32_t opencfw_em9305_child_325e84(uintptr_t connection, uint32_t status)
+{
+    uintptr_t message=opencfw_em9305_wsf_event_allocate(4u);
+    if(message==0u)return 0u;
+    uint32_t handle=connection!=0u?*(volatile uint8_t *)(connection+16u):0xffu;
+    uint32_t task=*(volatile uint8_t *)(uintptr_t)0x805b18u;
+    *(volatile uint8_t *)(message+3u)=(uint8_t)status;
+    *(volatile uint16_t *)message=(uint16_t)handle;
+    *(volatile uint8_t *)(message+2u)=9u;
+    return opencfw_em9305_wsf_task_message_send(task,message);
+}

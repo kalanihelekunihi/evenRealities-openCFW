@@ -48,10 +48,9 @@ static __attribute__((always_inline)) inline void log1(const char *ring,const ch
  if((r1_structured_log_mode_get()&1u)||(r1_structured_log_mode_get()&4u))r1_structured_log_format(0x0c400000u,ring,ring,*value&mask);
  if(r1_structured_log_mode_get()&2u)nrf_log_frontend_std_1(header(),sdk,*value&mask);
 }
-uint32_t r1_reset_reason_decode_kernel(uint32_t raw,uint32_t incoming_r1,uint32_t incoming_r2,uint32_t incoming_r3)
+uint32_t r1_reset_reason_decode_and_report(uint32_t raw)
 {
- (void)incoming_r1;(void)incoming_r2;
- uint32_t pc=0,lr=0,tag_word=raw&0xffffff00u,caller_word=incoming_r3&0xffffff00u;
+ uint32_t pc=0,lr=0,tag_word=0,caller_word=0;
  if(!raw){log0(r1_reset_decode_zero_ring,r1_reset_decode_zero_sdk);return 0;}
  if(raw&1u)log0(r1_reset_decode_pin_ring,r1_reset_decode_pin_sdk);
  if(raw&2u)log0(r1_reset_decode_dog_ring,r1_reset_decode_dog_sdk);
@@ -70,7 +69,3 @@ uint32_t r1_reset_reason_decode_kernel(uint32_t raw,uint32_t incoming_r1,uint32_
  if(raw&0x40000u)log0(r1_reset_decode_dif_pointer,r1_reset_decode_dif_sdk);
  return raw&0x7000fu;
 }
-/* Preserve incoming scratch-register seed bytes via an explicit raw ABI bridge. */
-__attribute__((naked,noinline)) uint32_t r1_reset_reason_decode_and_report(uint32_t raw __attribute__((unused)))
-{__asm__ volatile("b r1_reset_reason_decode_kernel");}
-

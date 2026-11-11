@@ -1,0 +1,162 @@
+{
+  "schema": 1,
+  "scope": "Three additional stock timestamp identities and pinned C bodies; native dependency closure",
+  "binding": {
+    "register_hook_setup_executed": {
+      "start": "0x2d994",
+      "stop": "0x2aadc",
+      "all_nine_arguments": [
+        "0x6a501",
+        "0x6a59d",
+        "0x6a59f",
+        "0x6a4ff",
+        "0x6a4d9",
+        "0x6a52d",
+        "0x6a4b1",
+        "0x6a4b3",
+        "0x6a5a1"
+      ],
+      "fifth_argument_frame_hook": "0x6a4d9"
+    },
+    "direct_native_targets": {
+      "acc_init": {
+        "site": "0x6f988",
+        "target": "0x2adfa",
+        "raw": "bbf737fa"
+      },
+      "get_frame_flag": {
+        "site": "0x6a4dc",
+        "target": "0x2ae00",
+        "raw": "c0f790fc"
+      },
+      "fill_ppg": {
+        "site": "0x6a4f0",
+        "target": "0x2adfe",
+        "raw": "c0f785bc"
+      }
+    },
+    "limit": "Register setup fragment and direct target identities; no full initialization or frame processing execution"
+  },
+  "execution": {
+    "paired_cases": 960,
+    "executions": 1920,
+    "checks": [
+      "four no-work hooks return through LR; frame flag returns constant one",
+      "all registers and masks preserved except constant getter R0 and MOVS N/Z flags",
+      "no data reads or writes; only the exact one- or two-instruction body executes"
+    ],
+    "limits": [
+      "No physical timing or sensor sampling validation",
+      "No algorithm inferred; stock and pinned source both perform no work"
+    ]
+  },
+  "negative": {
+    "zero_frame_flag_rejected": true,
+    "mutation": "Frame-data flag returns zero instead of native constant one"
+  },
+  "audit": {
+    "other_574_objects_unchanged": true,
+    "all_other_primitive_function_bodies_and_relocations_unchanged": 320,
+    "removed_superseded_constant_helper": "goodix_primitives_constant_one_b",
+    "existing_two_timestamp_bodies_unchanged": true,
+    "added_pinned_functions": [
+      "GH3X2X_TimestampSyncAccInit",
+      "GH3X2X_TimestampSyncFillPpgSyncBuffer",
+      "GH3X2X_TimestampSyncGetFrameDataFlag"
+    ],
+    "removed_imports": [
+      "GH3X2X_TimestampSyncAccInit",
+      "GH3X2X_TimestampSyncFillPpgSyncBuffer",
+      "GH3X2X_TimestampSyncGetFrameDataFlag"
+    ],
+    "added_imports": [],
+    "application_unresolved": 168,
+    "bootloader_unresolved": 34,
+    "no_unit_or_profile_changes": true
+  },
+  "source_build": {
+    "compiled_units": 576,
+    "failures": 0,
+    "duplicate_strong_symbols": 0,
+    "application_unresolved": 168,
+    "bootloader_unresolved": 34
+  },
+  "qualification": {
+    "candidates": 5,
+    "compiled": 5,
+    "selected_regions_total": 5,
+    "new_regions": [
+      {
+        "payload": "r1-application",
+        "symbol": "GH3X2X_TimestampSyncGetFrameDataFlag",
+        "start": 15872,
+        "end": 15876,
+        "sha256": "64d23481cb6a254816fb9c4c9b22031f78ed0a6ece5a6b0f6849a3ee7f77a2bb",
+        "evidence": "r1/symbols/function-frontier.csv"
+      },
+      {
+        "payload": "r1-application",
+        "symbol": "GH3X2X_TimestampSyncAccInit",
+        "start": 15866,
+        "end": 15868,
+        "sha256": "c7dfbb7d02759eacb64dbc916c1bb6f21eabaff1c1032ea5c9176abf7fd28df8",
+        "evidence": "r1/symbols/function-frontier.csv"
+      },
+      {
+        "payload": "r1-application",
+        "symbol": "GH3X2X_TimestampSyncFillPpgSyncBuffer",
+        "start": 15870,
+        "end": 15872,
+        "sha256": "c7dfbb7d02759eacb64dbc916c1bb6f21eabaff1c1032ea5c9176abf7fd28df8",
+        "evidence": "r1/symbols/function-frontier.csv"
+      }
+    ],
+    "new_C_bytes": 8,
+    "previous_two_regions_unchanged": true
+  },
+  "canonical_hybrid": {
+    "report": "build/hybrid-goal-r1-goodix-timestamp-closure-canonical/build-report.json",
+    "payload_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "totals": {
+      "binary-pull-through": 642215,
+      "source-built": 3945,
+      "resource-file": 248
+    },
+    "source_completeness_proven": false
+  },
+  "files": {
+    "r1/src/sources.json": "ea830958d5cbf23d12f10ec99bbeb049dbd07f657ed77102ed519990ab86771a",
+    "r1/src/vendor/goodix_primitives/goodix_primitives.c": "863d5bb18da37345645a8368a52c151cf4d032269740ba67189f488b5ab84259",
+    "r1/src/vendor/goodix_primitives/goodix_primitives.h": "fcdcffeac77f4cf6f05af924b84fd5c7604e1700653fa342777b43c431af4aa8",
+    "r1/symbols/function-frontier.csv": "cfc483b3ef2a7e484ede43e91123f7a92e110774d9c7b524b56d9a90160f9f5b",
+    "r1/docs/reference/FUNCTION-OWNERSHIP.csv": "4b92e75331cda906d128b60a45718b1ccf6afc3291eae5bbcdbf1c1ac639a0d1",
+    "tools/build/source-plan.json": "883e978279baf64f99dca97ebdba10d30a192b022d392bc282832ed5982bb491",
+    "third-party/upstream/goodix-gh3x2x/gh3x2x/demo_code/demo_algo_code/goodix_algo_application/src/gh3x2x_demo_accppg_sync.c": "7b8d1561374d33f76d25b36aa3ee946a654f273bbadf9a55aa1b0733f74e719f",
+    "build/sources-goal-r1-goodix-timestamp-closure/report.json": "c0ad0b2ac074342f7cc1b215e344d24ae3970f565f8d131bf98c63580d445960",
+    "build/hybrid-goal-r1-goodix-timestamp-closure-canonical/build-report.json": "e4dbff6967653182691064efe53dc2c0197f0ababa588d952c296b6dcc80e30d",
+    "build/goal-r1-goodix-timestamp-closure/sources-before.json": "9f885538f479656f27fa7f8213f2c1bf210e97fa5f1f68cec8ea61a37c167ad9",
+    "build/goal-r1-goodix-timestamp-closure/source-plan-before.json": "245cfc4a25f591d78d7e69a7dda25bbdbad6bd737c15e9db532a230eee256e99",
+    "build/goal-r1-goodix-timestamp-closure/primitives-before.c": "dc11eb96eb1e12eb1a6393d5e535857f984df3db731e1260831ebbed2301d7f7",
+    "build/goal-r1-goodix-timestamp-closure/primitives-before.h": "b7190e7b30f15f812fc7c865a6c0503935917d84dcb6d21d72047651670122d8",
+    "build/goal-r1-goodix-timestamp-closure/rea.json": "7d0b722814aa35c2438b6bc319bac891787e42cd602b834569baae24aaf36ede",
+    "build/goal-r1-goodix-timestamp-closure/before-function-frontier.csv": "a35b99821fb7736dfc3d0171642ddbd7c7206ee2e3e273e06e692746caeb52d4",
+    "build/goal-r1-goodix-timestamp-closure/before-FUNCTION-OWNERSHIP.csv": "608e4d845e3e7d457bfcb01c5dd8612f794833eff3905391b27512c490056ac5",
+    "build/goal-r1-goodix-timestamp-closure/binding.py": "3a1a5d377d6209b653d0c264c918d1aeb5bfa13fc88500a9628d9e897984059e",
+    "build/goal-r1-goodix-timestamp-closure/binding-results.json": "fe9bfb2d4675ab46e69487e047d85eec572d9a83b449b66fd2b5784774e435b9",
+    "build/goal-r1-goodix-timestamp-closure/verify.py": "d615e05ceace77423d600d6ef3948df4a28a3f4edd85f25748df8faebd94d33d",
+    "build/goal-r1-goodix-timestamp-closure/results.json": "82e384660e9d3d7500cb97f10b7d2dae04d59e343a41b444437962fe38aa47c8",
+    "build/goal-r1-goodix-timestamp-closure/negative.py": "bad31a2950223e877e38a7cb9ed9d1c67e420bc3ebe2374ec542054d54825e7d",
+    "build/goal-r1-goodix-timestamp-closure/negative-results.json": "b8c02b631d01c5fc9b47668d7bf8de216e306c25015c6cf78b6acfad473f326c",
+    "build/goal-r1-goodix-timestamp-closure/audit.py": "b0c37b3ca7a7e55925762e86481b5b4108adb2eb614b54314c07660a138bfe3f",
+    "build/goal-r1-goodix-timestamp-closure/audit-results.json": "81943070042663207e01ffa689906f59a7abaa04e8db7c12728f53bae6c28025",
+    "build/goal-r1-goodix-timestamp-closure/qualified/qualification.json": "7333389b30d905de91639c79cdb4ad883b576c30c529d879886610fc0fb878b0",
+    "build/goal-r1-goodix-timestamp-closure/qualified/source-plan.json": "14f8b43dd6699e9bda0fd513ee628108561a753294cf979a2de0f07b6ec138c2",
+    "build/goal-r1-goodix-timestamp-closure/added-regions.json": "f669064df895218cbd77e78bcb90ea7b8c5df9294baa402089919591e969ae66"
+  },
+  "limits": [
+    "No full initialization/frame dispatch or physical sampling execution",
+    "REA grouped procedure boundaries are not global inventory coverage",
+    "One manual target supplement, no G2 gate advances",
+    "Full firmware source completeness remains unproven"
+  ]
+}

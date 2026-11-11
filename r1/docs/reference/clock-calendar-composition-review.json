@@ -1,0 +1,419 @@
+{
+  "schema": 1,
+  "scope": "Enable RTC calendar ports, requests and selected inverse C providers in normal composition",
+  "normal_build": {
+    "report": "build/sources-goal-r1-clock-calendar-composition-final/report.json",
+    "units": 575,
+    "newly_linked_units": [
+      {
+        "source": "r1/src/application/board/clock-calendar/selected-calendar.c",
+        "payload": "r1-application",
+        "role": "candidate",
+        "toolchain": "clang",
+        "link": true,
+        "expect": "compile",
+        "returncode": 0,
+        "argv": [
+          "/usr/bin/clang",
+          "--target=arm-none-eabi",
+          "-mcpu=cortex-m4",
+          "-mthumb",
+          "-munaligned-access",
+          "-mfpu=fpv4-sp-d16",
+          "-mfloat-abi=hard",
+          "-std=c11",
+          "-Os",
+          "-ffreestanding",
+          "-fno-builtin",
+          "-fshort-enums",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-fno-delete-null-pointer-checks",
+          "-I/Users/kalani/Repo/evenRealities-openCFW/r1/src/vendor",
+          "-isystem",
+          "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
+          "-MD",
+          "-MF",
+          "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-clock-calendar-composition-final/r1/r1-application/r1__src__application__board__clock-calendar__selected-calendar.c.d",
+          "-c",
+          "/Users/kalani/Repo/evenRealities-openCFW/r1/src/application/board/clock-calendar/selected-calendar.c",
+          "-o",
+          "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-clock-calendar-composition-final/r1/r1-application/r1__src__application__board__clock-calendar__selected-calendar.c.o"
+        ],
+        "source_sha256": "41607b21f6725ed24e697ecd439c42acf2672cfe8dd6f8bfd533be390f581ca1",
+        "object_sha256": "69ae28021e06a491fb4979aa202d9fd555a7a53778af50102fb9381ee0e21041",
+        "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-clock-calendar-composition-final/r1/r1-application/r1__src__application__board__clock-calendar__selected-calendar.c.o",
+        "strong": [
+          "time_calendar_broken_down_to_unix",
+          "time_calendar_to_utc"
+        ],
+        "weak": [],
+        "undefined": []
+      },
+      {
+        "source": "r1/src/application/board/native_clock_calendar.c",
+        "payload": "r1-application",
+        "role": "candidate",
+        "toolchain": "clang",
+        "link": true,
+        "expect": "compile",
+        "returncode": 0,
+        "argv": [
+          "/usr/bin/clang",
+          "--target=arm-none-eabi",
+          "-mcpu=cortex-m4",
+          "-mthumb",
+          "-munaligned-access",
+          "-mfpu=fpv4-sp-d16",
+          "-mfloat-abi=hard",
+          "-std=c11",
+          "-Os",
+          "-ffreestanding",
+          "-fno-builtin",
+          "-fshort-enums",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-fno-delete-null-pointer-checks",
+          "-I/Users/kalani/Repo/evenRealities-openCFW/r1/src/vendor",
+          "-isystem",
+          "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
+          "-MD",
+          "-MF",
+          "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-clock-calendar-composition-final/r1/r1-application/r1__src__application__board__native_clock_calendar.c.d",
+          "-c",
+          "/Users/kalani/Repo/evenRealities-openCFW/r1/src/application/board/native_clock_calendar.c",
+          "-o",
+          "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-clock-calendar-composition-final/r1/r1-application/r1__src__application__board__native_clock_calendar.c.o"
+        ],
+        "source_sha256": "5ebfc1a8058c8ec1fcb5056c89b999fbdfbdfc129249217b14f7b879a9f36ce2",
+        "object_sha256": "87cd8b86f8ce159dd63b97abf7cb2f135f64c76e0d09b97d04108a16cd481df8",
+        "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-clock-calendar-composition-final/r1/r1-application/r1__src__application__board__native_clock_calendar.c.o",
+        "strong": [
+          "r1_clock_backend_slot20",
+          "r1_clock_backend_slot24"
+        ],
+        "weak": [],
+        "undefined": [
+          "r1_clock_rtc_write",
+          "r1_structured_log_timestamp_adapter",
+          "r1_time_utc_offset_get",
+          "time_calendar_to_utc",
+          "time_calendar_utc_to_calendar"
+        ]
+      },
+      {
+        "source": "r1/src/application/board/native_clock_port.c",
+        "payload": "r1-application",
+        "role": "candidate",
+        "toolchain": "clang",
+        "link": true,
+        "expect": "compile",
+        "returncode": 0,
+        "argv": [
+          "/usr/bin/clang",
+          "--target=arm-none-eabi",
+          "-mcpu=cortex-m4",
+          "-mthumb",
+          "-munaligned-access",
+          "-mfpu=fpv4-sp-d16",
+          "-mfloat-abi=hard",
+          "-std=c11",
+          "-Os",
+          "-ffreestanding",
+          "-fno-builtin",
+          "-fshort-enums",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-fno-delete-null-pointer-checks",
+          "-I/Users/kalani/Repo/evenRealities-openCFW/r1/src/vendor",
+          "-isystem",
+          "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
+          "-MD",
+          "-MF",
+          "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-clock-calendar-composition-final/r1/r1-application/r1__src__application__board__native_clock_port.c.d",
+          "-c",
+          "/Users/kalani/Repo/evenRealities-openCFW/r1/src/application/board/native_clock_port.c",
+          "-o",
+          "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-clock-calendar-composition-final/r1/r1-application/r1__src__application__board__native_clock_port.c.o"
+        ],
+        "source_sha256": "edd93e85dd5213cd922568578b551665487802207ca4f27ffb0eb1a8478e96e7",
+        "object_sha256": "b5071bf2c62e187e35694d5b7bf0efc6db380246e8795862ff9dc0b7946bee76",
+        "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-clock-calendar-composition-final/r1/r1-application/r1__src__application__board__native_clock_port.c.o",
+        "strong": [
+          "r1_clock_backend_bind_tick",
+          "r1_clock_backend_slot12",
+          "r1_clock_backend_update",
+          "r1_clock_rtc_bind",
+          "r1_clock_rtc_write"
+        ],
+        "weak": [],
+        "undefined": [
+          "memset",
+          "r1_stock_dispatch_10",
+          "r1_stock_dispatch_14",
+          "r1_stock_dispatch_20",
+          "r1_structured_rtc_device"
+        ]
+      }
+    ]
+  },
+  "native_callbacks": {
+    "read": "0x50d64",
+    "read_code_bytes": 26,
+    "write": "0x50d8a",
+    "write_code_bytes": 32,
+    "offset_getter": "0x8adb4"
+  },
+  "audit": {
+    "other_objects_unchanged": 574,
+    "units": 575,
+    "newly_linked_units": [
+      "r1/src/application/board/native_clock_calendar.c",
+      "r1/src/application/board/clock-calendar/selected-calendar.c",
+      "r1/src/application/board/native_clock_port.c"
+    ],
+    "newly_linked_providers": [
+      "r1_clock_backend_slot20",
+      "r1_clock_backend_slot24",
+      "time_calendar_to_utc",
+      "time_calendar_broken_down_to_unix",
+      "r1_clock_rtc_write",
+      "r1_clock_rtc_bind",
+      "r1_clock_backend_slot12",
+      "r1_clock_backend_update",
+      "r1_clock_backend_bind_tick"
+    ],
+    "bootstrap_remains_compile_only": true,
+    "new_assembly": false,
+    "application_imports": 164,
+    "bootloader_imports": 34,
+    "import_sets_unchanged": true,
+    "manifest_other_fields_unchanged": true
+  },
+  "validation": {
+    "callbacks": {
+      "paired_cases": 640,
+      "executions": 1280,
+      "checks": [
+        "native request call sequence and argument words",
+        "read tail provider SP and restored active R4-R11",
+        "write provider SP-8 and active R4 input pointer",
+        "offset sign, callback mutation, null pointers and status policy",
+        "all return R0-R12/APSR, final SP, masks and guards"
+      ],
+      "limits": [
+        "Timestamp, offset, converter and RTC-write providers modeled",
+        "Private null-path frames and LR address bits excluded",
+        "No physical RTC execution"
+      ]
+    },
+    "inverse": {
+      "paired_cases": 3610,
+      "executions": 7220,
+      "actual_inverse_converter": true,
+      "checks": [
+        "actual stock/C inverse adapter and Gregorian validation/conversion",
+        "year/month/day and time boundaries, leap dates, signed/full-width offsets",
+        "null input, unchanged packed input and guards",
+        "return epoch, final callee-saved registers, SP and masks"
+      ],
+      "limits": [
+        "Internal scratch ordering, stack aliases, caller-clobbered registers/flags and faults excluded",
+        "No physical RTC write"
+      ]
+    },
+    "integrated_C_chain": {
+      "paired_cases": 408,
+      "executions": 816,
+      "actual_C_units": [
+        "r1/src/application/board/clock-calendar/selected-calendar.c",
+        "r1/src/application/board/native_clock_calendar.c",
+        "r1/src/application/board/native_clock_port.c",
+        "r1/src/application/board/structured_time.c",
+        "r1/src/application/registry/stock_registry.c",
+        "r1/src/application/runtime/memory_eabi.c",
+        "r1/src/application/board/native_calendar_forward.c",
+        "r1/src/application/board/native_calendar_utc.c",
+        "r1/src/application/board/native_time_utc_offset.c",
+        "third-party/upstream/musl-memory-1.2.5/memset.c"
+      ],
+      "checks": [
+        "calendar ports through actual forward/inverse conversion, offset getter, timestamp/write request, memset and registry dispatch",
+        "registered RTC request contents and native provider stack depths",
+        "packed calendar output, zero write offset and ignored operation status",
+        "final result, guards, saved registers, SP and masks"
+      ],
+      "modeled": [
+        "registered RTC snapshot/write operations"
+      ],
+      "limits": [
+        "Internal converter stack access/order, caller-clobbered registers/flags and aliases into private frames excluded",
+        "Physical RTC peripherals, faults and concurrency unverified"
+      ]
+    }
+  },
+  "negative_controls": [
+    {
+      "mutation": "wrong-write-offset",
+      "rejected": true
+    },
+    {
+      "mutation": "wrong-write-status",
+      "rejected": true
+    },
+    {
+      "mutation": "old direct state read and absent offset provider call",
+      "rejected": true
+    }
+  ],
+  "REA": {
+    "evidence_id": "ev_a90d8c1aa54f0dba0aa23489839dab89f0005cf7e0801383f9b30828f73a57e7",
+    "subject": {
+      "name": "stock.elf",
+      "digest": {
+        "sha256": "25b4a29af80ec8edab5bd861ba9b74a6e22eab29dc3d7a809a16869e8a140f04"
+      },
+      "local_path": "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-queue-reset-c/stock.elf",
+      "format": "elf",
+      "architecture": "arm"
+    },
+    "provider": {
+      "id": "ghidra",
+      "name": "Ghidra",
+      "version": "12.1.4"
+    },
+    "analysis_profile": {
+      "provider": {
+        "id": "ghidra",
+        "name": "Ghidra",
+        "version": "12.1.4"
+      },
+      "parameters": {
+        "target_kind": "executable",
+        "target_format": "elf",
+        "architecture": "arm",
+        "available_architectures": [
+          "arm"
+        ],
+        "import_mode": "ephemeral-source-immutable",
+        "annotation_policy": "atomic-function-entry-metadata-v1",
+        "load_image_observations": "source-mappings-entry-context-v2",
+        "function_body_evidence": "complete-inclusive-ranges-v1",
+        "function_references": "complete-body-and-entry-reference-manager-v2",
+        "call_relationship_coverage": "function-body-call-coverage-v5",
+        "function_dossier_coverage": "observed-facets-and-call-relationships-v1",
+        "string_inventory_evidence": "defined-data-coverage-v1",
+        "location_resolution": "explicit-address-exact-entry-symbol-first-v3",
+        "procedure_file_offset_resolution": "address-first-unique-target-source-mapping-v2",
+        "instruction_flow_evidence": "decoded-return-pcode-v1",
+        "instruction_references": "exact-address-incoming-v1",
+        "function_boundary_observations": "ghidra-function-boundary-limitations-v3",
+        "no_return_repair": "returning-imports-decoded-return-v2",
+        "process_launch": "inspected-jvm-launch-support-v1",
+        "jump_table_evidence": "typed-case-default-blocks-v1",
+        "decompiler_jump_loads": true,
+        "loader": "auto-from-header",
+        "language_id": "auto-from-header",
+        "compiler_spec_id": "auto-default",
+        "analyzer_preset": "ghidra-default"
+      },
+      "digest": "7e46711069eea041af1b9b99e34115c13332795e5cda76e584a722f529ec70de"
+    },
+    "predicate_type": "rea.analysis",
+    "operation": "read_bytes",
+    "parameters": {
+      "address": "0x50d64",
+      "length": 70
+    },
+    "raw_result": {
+      "address": "0x50d64",
+      "requested_bytes": 70,
+      "returned_bytes": 70,
+      "bytes_hex": "10b5040007d000f0a7fb2246bde8104000213af0e3b8002010bd00f09dbb00f087bb0120704710b504000ad03af010f8014620463af05ef8002100f027f8012010bd002010bd",
+      "complete": true
+    },
+    "normalized_result": {
+      "address": "0x50d64",
+      "requested_bytes": 70,
+      "returned_bytes": 70,
+      "bytes_hex": "10b5040007d000f0a7fb2246bde8104000213af0e3b8002010bd00f09dbb00f087bb0120704710b504000ad03af010f8014620463af05ef8002100f027f8012010bd002010bd",
+      "complete": true
+    },
+    "confidence": "observed",
+    "authority": "shipped-artifact",
+    "environment": null,
+    "limitations": [
+      "The session serves operations only after Ghidra reports default auto-analysis complete; incomplete analysis does not expose partial results.",
+      "The imported Program and temporary project are ephemeral and deleted on close. Annotation operations edit session database metadata; original executable bytes are never written.",
+      "Cancelling an active Ghidra request terminates its ephemeral database and discards session annotations. The selected target remains open; the next provider query imports the original artifact again.",
+      "Default-space addresses use lowercase 0x-prefixed hexadecimal; other address spaces use <percent-encoded-space>:0x<hex>.",
+      "Bytes reflect Ghidra's initialized memory, including loader fixups. Reads stop at an unmapped or uninitialized byte and report completeness explicitly.",
+      "macOS sessions require a matching executable Ghidra native decompiler; REA checks for it but does not build native components or change Gatekeeper quarantine state."
+    ],
+    "relationship_coverage": null,
+    "locations": [],
+    "evidence_links": []
+  },
+  "qualification": {
+    "generic": {
+      "report": "build/goal-r1-clock-calendar-composition/qualified-generic/qualification.json",
+      "compiled_units": 35,
+      "selected_symbols": [
+        "r1_clock_backend_bind_tick",
+        "r1_clock_backend_update",
+        "r1_clock_rtc_bind",
+        "r1_time_utc_offset_get"
+      ],
+      "new_regions": 0
+    },
+    "gcc": {
+      "report": "build/goal-r1-clock-calendar-composition/qualified-gcc-supported/qualification.json",
+      "compiled_units": 21,
+      "selected_symbols": [
+        "r1_clock_backend_bind_tick",
+        "r1_clock_backend_update"
+      ],
+      "new_regions": 0
+    }
+  },
+  "initial_GCC_matrix": {
+    "report": "build/goal-r1-clock-calendar-composition/qualified-gcc/qualification.json",
+    "compiled": 27,
+    "variants": 28,
+    "unsupported_profile": "inherited Clang -Oz for unchanged UTC offset accessor; GCC9 rejects the option",
+    "replacement_matrix": "explicit O2/Os/Og, normal manifest unchanged"
+  },
+  "canonical_hybrid": {
+    "report": "build/hybrid-goal-r1-clock-calendar-composition/build-report.json",
+    "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "source_completeness_proven": false,
+    "source_plan_unchanged": true,
+    "source_built_bytes_including_assembly_and_data": 4023,
+    "binary_fallback_bytes": 642137,
+    "resource_bytes": 248
+  },
+  "probe_hashes": {
+    "build/goal-r1-clock-calendar-composition/verify.py": "21a3df4400ade7be9f774411b82ab4f622cc36ffad9b581888812a3ec3762d6c",
+    "build/goal-r1-clock-calendar-composition/inverse.py": "0a46ebda497be05d9d5103a4e0ac6a9427bd396e782bc520e3df550cbba020b3",
+    "build/goal-r1-clock-calendar-composition/integration.py": "852e1ef4db26aa6c2948439d02af6719694046f57d697c4156b3dd71d695aa6a",
+    "build/goal-r1-clock-calendar-composition/audit.py": "ef016c09f6844a3967cfac2cf7d772a181b04fc377f5506cbc57a4e552040b03",
+    "build/goal-r1-clock-calendar-composition/negative.py": "c64a8414bc118657cb1318a3dab216aa1c11d727633334e638fe0e6cc676e67b",
+    "build/goal-r1-clock-calendar-composition/rea.json": "8c633398cb77a83b04ba03f0dfbb2aeafb2e6eb4d8c401892c0ddd3920f0a099"
+  },
+  "limitations": [
+    "Execution validation uses normal Clang objects; GCC qualification is separate byte-selection/compilation evidence.",
+    "Direct callback tests model providers; inverse tests execute actual stock/C converter; integrated chain models only registered RTC snapshot/write operations.",
+    "Inverse internal scratch ordering/stack aliases, raw caller-clobbered registers/flags in integrated cases, arbitrary faults, concurrency and physical peripherals excluded.",
+    "Clock bootstrap unit remains compile-only pending its own ABI validation.",
+    "No new exact source-plan regions, final complete source link or source completeness proof."
+  ]
+}

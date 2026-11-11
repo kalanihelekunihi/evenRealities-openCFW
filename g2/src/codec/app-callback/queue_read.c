@@ -5,9 +5,7 @@
 struct queue_view { uint32_t tail, head; uint8_t *buffer; int32_t size, member_size; };
 static uint32_t native_remainder(uint32_t sum, int32_t size)
 {
-    int32_t quotient;
-    __asm__ volatile("divs %0, %1, %2" : "=r"(quotient)
-                     : "r"(sum), "r"(size) : "cc");
+    const int32_t quotient = (int32_t)sum / size;   /* divs */
     return sum - (uint32_t)quotient * (uint32_t)size;
 }
 /* Stock 0x10206FFC (LvpQueueIsEmpty) */

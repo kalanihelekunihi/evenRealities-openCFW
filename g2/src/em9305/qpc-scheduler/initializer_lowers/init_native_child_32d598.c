@@ -1,20 +1,12 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_32d598\n"
-".type opencfw_em9305_child_32d598,@function\n"
-"opencfw_em9305_child_32d598:\n"
-"L32d598:\n"
-"mov_s r0,0x805cac\n"
-"L32d59e:\n"
-"ld r0,[r0,0]\n"
-"L32d5a0:\n"
-"ldh_s r0,[r0,0x2c]\n"
-"L32d5a2:\n"
-"add r0,r0,0x10\n"
-"L32d5a4:\n"
-"b.d opencfw_em9305_wsf_event_allocate\n"
-"L32d5a8:\n"
-"exth_s r0,r0\n"
-".size opencfw_em9305_child_32d598,.-opencfw_em9305_child_32d598\n"
-);
+#include <stdint.h>
+
+/* Native 0x32d598..0x32d5aa: allocate a WSF event sized for the configured
+ * payload length (config halfword +0x2c) plus a 16-byte header. */
+extern uintptr_t opencfw_em9305_wsf_event_allocate(uint32_t);
+
+uintptr_t opencfw_em9305_child_32d598(void)
+{
+    uintptr_t config = *(volatile uint32_t *)(uintptr_t)0x805cacu;
+    uint16_t length = (uint16_t)(*(volatile uint16_t *)(config + 0x2cu) + 0x10u);
+    return opencfw_em9305_wsf_event_allocate(length);
+}

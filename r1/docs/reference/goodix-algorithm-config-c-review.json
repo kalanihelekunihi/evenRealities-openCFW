@@ -1,0 +1,185 @@
+{
+  "schema_version": 1,
+  "scope": "Goodix algorithm configuration and memory lifecycle front end in ordinary C",
+  "report": "build/sources-goal-r1-goodix-algo-config-c/report.json",
+  "comparison_report": "build/sources-goal-r1-goodix-init-hook-c-body/report.json",
+  "stock_ranges": [
+    {
+      "entry": "0x00029f58",
+      "end": "0x00029f7d",
+      "size": 38,
+      "symbol": "GH3X2X_AlgoCallConfigInit"
+    },
+    {
+      "entry": "0x0002a090",
+      "end": "0x0002a0af",
+      "size": 32,
+      "symbol": "GH3X2X_AlgoMemConfig"
+    },
+    {
+      "entry": "0x0002a0b4",
+      "end": "0x0002a0d9",
+      "size": 38,
+      "symbol": "GH3X2X_AlgoMemInit"
+    }
+  ],
+  "audit": {
+    "compiled_units": 863,
+    "unchanged_prior_nongenerated_objects": 852,
+    "new_units": [
+      "r1/src/application/goodix/native_algorithm_config.c"
+    ],
+    "differing_existing_generated_objects": [
+      "{gen}/r1_startup_vectors.S",
+      "{gen}/r1_uecc.c"
+    ],
+    "application_imports": 63,
+    "bootloader_imports": 22,
+    "removed_imports": [
+      "GH3X2X_AlgoCallConfigInit"
+    ],
+    "added_imports": [
+      "goodix_mem_init"
+    ],
+    "new_writable_state_bytes": 30032,
+    "typed_readonly_configuration_bytes": 236,
+    "source_plan_and_cache_layout_unchanged": true,
+    "tested_object_equals_normal_build": true,
+    "prior_hook_and_reset_getter_objects_identical": true,
+    "only_manifest_change_is_one_new_unit": true
+  },
+  "direct": {
+    "configuration_comparisons": 18432,
+    "memory_configuration_comparisons": 2304,
+    "memory_initialization_comparisons": 20480,
+    "native_instruction_bytes_executed": [
+      38,
+      32,
+      38
+    ],
+    "typed_four_list_arrays_descriptors_match_all238_native_bytes": true,
+    "strict_shared_state_access_width_order_values": true,
+    "callback_mutations_masks_saved_integer_FP_SP_and_guards_checked": true,
+    "deinitialization_allocator_and_register_loader_modeled": true
+  },
+  "actual_hook_and_reset_getter": {
+    "actual_init_hook_reset_getter_configuration_memory_chain_comparisons": 36864,
+    "all32_hook_instruction_bytes_executed": true,
+    "new_C_configuration_memory_entries_execute": true,
+    "typed_lists_and_full_algorithm_state_match": true,
+    "deinitialization_allocator_and_loader_modeled": true
+  },
+  "actual_hook_getter_and_loader": {
+    "actual_init_hook_reset_getter_configuration_memory_chain_comparisons": 36864,
+    "all32_hook_instruction_bytes_executed": true,
+    "new_C_configuration_memory_entries_execute": true,
+    "typed_lists_and_full_algorithm_state_match": true,
+    "deinitialization_allocator_and_virtual_register_writer_modeled": true,
+    "normal_loader_section_and_relocations_verified": true
+  },
+  "loader_section": {
+    "normal_object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-algo-config-c/r1/r1-application/third-party__upstream__goodix-gh3x2x__gh3x2x__demo_code__demo_algo_code__goodix_algo_application__src__gh3x2x_demo_algo_config.c.o",
+    "loader_section_bytes_and_relocations_identical": true,
+    "only_virtual_register_writer_modeled": true
+  },
+  "compiled_defects_rejected": [
+    {
+      "defect": "null-frame",
+      "rejected": true
+    },
+    {
+      "defect": "memory-size",
+      "rejected": true
+    },
+    {
+      "defect": "index-bound",
+      "rejected": true
+    },
+    {
+      "defect": "memory-failure-gates-config",
+      "rejected": true
+    },
+    {
+      "defect": "zero-size-deinit",
+      "rejected": true
+    },
+    {
+      "defect": "nonzero-status",
+      "rejected": true
+    },
+    {
+      "defect": "zero-size-allocation",
+      "rejected": true
+    },
+    {
+      "defect": "allocator-status",
+      "rejected": true
+    },
+    {
+      "defect": "size-truncate",
+      "rejected": true
+    }
+  ],
+  "contract": [
+    "Non-null frame tables replace the active pointer; null retains it. Configure 0x7540 memory bytes, ignore its error for register loading, and load one of four lists for uint8 index<4.",
+    "Zero memory size returns -5 without deinitializing. Otherwise deinitialize all function bits, ignore that return, then store the requested full word size and initialize.",
+    "Any nonzero initialization byte bypasses initialization. For zero, read size before publishing the static pool pointer, reject zero size or any nonzero allocator result with -5, and write status 1 only on success. Callback changes otherwise remain live.",
+    "Four typed register lists contain 48,1,1,1 pairs. All238 native bytes including descriptors and alignment match when symbols are placed at native addresses in probes."
+  ],
+  "limits": [
+    "All108 instruction bytes across the three native entries execute in41216 direct comparisons. Caller/state guards, reserved bytes, saved integer/FP registers, SP, masks and FPSCR are checked; state access widths/order/values match.",
+    "Two36864-case chains execute the existing init hook and actual reset getter. One models the loader; the other executes its C section with bytes/relocations equal to the normal object and models the virtual-register writer. Deinitializer and pool initializer remain modeled in both.",
+    "The full build removes the GH3X2X_AlgoCallConfigInit import and exposes goodix_mem_init instead; count63 is not an unchanged import set. The portable goodix_heap API is not presented as an admitted native allocator ABI.",
+    "One new C unit owns the shared frame pointer,12-byte memory state,30016-byte pool, four typed lists and descriptor table. Future lifecycle work must share these owners.",
+    "Native data addresses are probe placement only. Void return/caller scratch/private frames/APSR and out-of-contract non-uint8 indices excluded. Arbitrary requested sizes are forwarded in modeled tests; physical allocator writes, capacity behavior and buffer placement remain unverified.",
+    "Deinitializer correctness, allocator ABI, virtual register application, physical sensor behavior, concurrency, final linking, startup/scatter integration and boot remain open. No source-plan qualification or byte-identity claim."
+  ],
+  "evidence_files": {
+    "build/sources-goal-r1-goodix-algo-config-c/report.json": "4bfbf30bc2d0ffe811a306a22cdc7fd2a28d75a31353927f447aa3b2765d07da",
+    "build/sources-goal-r1-goodix-init-hook-c-body/report.json": "7759c20961b60dfdd48ddb1354c7f22fb5b0dd86ae1bc03a45d364acb69e4a58",
+    "r1/src/application/goodix/native_algorithm_config.c": "b8455589dcb3449592bffe09f57f533f5360e0cd55f1e371bd6e0800b6a415ab",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-algo-config-c/r1/r1-application/r1__src__application__goodix__native_algorithm_config.c.o": "ffaeb592c1c7f4584f79c5dc0a808886223dc111fa5acf2e2110f304494fe42d",
+    "r1/src/sources.json": "8038e76ad94cf8b6ac738c01182ef0bfcfc1bdfb754c32abb9c0ac1111ecb1e9",
+    "tools/build/source-plan.json": "eeb516e31b3310fb0718f36908977f8125723f7c5e0e86cd6744395826259a4d",
+    "r1/src/config/runtime/native_health_cache.ld": "eb8f131c489cd818d4e36718718fa1989719ca0170f164541a1a5bf56dfc1ec3",
+    "r1/docs/reference/FUNCTION-OWNERSHIP.csv": "0d2e753d0dfcb46c21d536e4c4776988390a5da4c6c5436719e5cb90804e332f",
+    "r1/symbols/function-frontier.csv": "75cf99487fc983a329df5c1936a85a0b781c4a624439a647c32bfa9a94b7bba7",
+    "r1/docs/boundaries/GOODIX-DEMO-DRIVER-MAPPING-2026-08.md": "8b5eea7a410fb0d3a29ba315ef0ca1ecbf720f7dbce0a170764f78a4a596d2f4",
+    "r1/src/application/goodix/native_init_hook.h": "08bcb5526780ff75932590123fdc5e183a476526e010da4434451dbbfb22f42d",
+    "third-party/upstream/goodix-gh3x2x/gh3x2x/demo_code/demo_algo_code/goodix_algo_application/src/gh3x2x_demo_algo_config.c": "65345b49ac1d9818fcc6f5dff3a33dbdd89c4e2182e6fe35480543b0a803a861",
+    "build/goal-r1-goodix-algo-config-c/loader.c": "18bc4c03c1ae6afe3f76cf7a26416bfbacf41cf5be0ab4f449398f123a16e78d",
+    "build/goal-r1-goodix-algo-config-c/audit.json": "85933b369b6fc15270ede9ce0a7264dac246d32aa21ad0637fb65ec4cdb700aa",
+    "build/goal-r1-goodix-algo-config-c/verify.log": "6b9280c248ccc3be606eb0e49ae6ab9f5d7381457115459ca22a1681abd11143",
+    "build/goal-r1-goodix-algo-config-c/negative.json": "f449b8fa24ee0576a76b367955b764bd691f8e1a498e519521295cbc7cac82f0",
+    "build/goal-r1-goodix-algo-config-c/test.ld": "0f5a3dae0bd8d284cf9b46f362e4b3ac9403978f0cea412ecb7b68d45d9e9b77",
+    "build/goal-r1-goodix-algo-config-c/audit.py": "4006fe2a06332b8f94c73864f2bec58754aeb1dedfc95c804145ff50b9c44a96",
+    "build/goal-r1-goodix-algo-config-c/list0.c": "eb4244c495d7ff1eb86ffa55396b006ce06cebec2ebe0b9f1c0e1cbe300203fb",
+    "build/goal-r1-goodix-algo-config-c/source.elf": "be09115745e88d55087552800c8024b6f64dfeb06edc41a50adebdc6b047853e",
+    "build/goal-r1-goodix-algo-config-c/negative.py": "05fd043bc14b17b0ebf73b8dea1534c54adef39c3e52406d6982685a7138ed9c",
+    "build/goal-r1-goodix-algo-config-c/negative.log": "ade5c00759a03c8257fa165df8c0f69b94c76881505b08899b40ccc0bb4577fd",
+    "build/goal-r1-goodix-algo-config-c/source.o": "ffaeb592c1c7f4584f79c5dc0a808886223dc111fa5acf2e2110f304494fe42d",
+    "build/goal-r1-goodix-algo-config-c/results.json": "18d782b786a9b0f4d29d5a5d8ac5ccfa20afa85269792d9c0309b7bd2c1c188c",
+    "build/goal-r1-goodix-algo-config-c/list3.c": "4fe8fbbea3ee45ad47e6281e862c40ee5d5d395d7edf7fa0aa2eb05d8ee02b0f",
+    "build/goal-r1-goodix-algo-config-c/pipeline.log": "d2897487142222ff956ee0066563cf8cef986053d1c8fd8cf55833d24723d10c",
+    "build/goal-r1-goodix-algo-config-c/loader.o": "652990db97b75f57e6572458ce274486f958807dad4896988b7e9f9532344f8c",
+    "build/goal-r1-goodix-algo-config-c/loader-pipeline.py": "8f9b708b26be81a4c3c0033552fcdc3036d9c2984447d7a077610393b0e10593",
+    "build/goal-r1-goodix-algo-config-c/list2.c": "b0232b3e6a478e3e8ee0fdb18e05c7b9df43c24c9c037211fe2dd6653fb99aa5",
+    "build/goal-r1-goodix-algo-config-c/loader.py": "1282ef206eef9c1f899c4564609dc031f9b5a549981700c80e8c9813fd445845",
+    "build/goal-r1-goodix-algo-config-c/pipeline.py": "66d3699997268d3f39a2ed6e5266cdb3d06126d7aac1ea4c0891464deebb3d2a",
+    "build/goal-r1-goodix-algo-config-c/sources-check.log": "c56719af1d0b2d08393a257d3e2022d40896a70239925ecc83fc942850eca238",
+    "build/goal-r1-goodix-algo-config-c/record.py": "caeafe8c026f7d2f28de4bda91579be272f2fb9048525df4d78be3ee7da19d80",
+    "build/goal-r1-goodix-algo-config-c/rea-bytes.json": "75b3239531f0aa25dd40902b5f8b5e9ed7411c5cec697b2dbd8cccc6076e68aa",
+    "build/goal-r1-goodix-algo-config-c/manifest-before.json": "67fa5561415254750bce5b837253dd2e89e69ab1aa6c9834fb0832336dc156e1",
+    "build/goal-r1-goodix-algo-config-c/verify.py": "01a294b5c45a6ccffac212a00ef9d60862951f01319118f35604c6e5d917130f",
+    "build/goal-r1-goodix-algo-config-c/loader-pipeline.log": "0b96dd7239f813ffde1486051950ea00dc1e4a0306bd55c437d219841a2fd5f2",
+    "build/goal-r1-goodix-algo-config-c/list1.c": "95f644b745d19bffb30698f67ea512602209d068b970c355d86dfecd0f3dfa47",
+    "build/goal-r1-goodix-algo-config-c/loader-section.json": "47d303fd325b02fe069f7e186bae63de0cbcc7f7488ec66a5b24e551d4781d50",
+    "build/goal-r1-goodix-algo-config-c/build.log": "78973a6c73482e148a7f3731886ee9a2d92b3aa69a3da66b07a511cb288e71aa",
+    "build/goal-r1-goodix-algo-config-c/pipeline/test.ld": "cf16ed1b78e72498b161ef9ca116f438d2378f113232447620528617de3aaa6c",
+    "build/goal-r1-goodix-algo-config-c/pipeline/source.elf": "a6edf9d8607de056cf1172a7b7c735a2852c50276805c6c1a89133e6e8827fa3",
+    "build/goal-r1-goodix-algo-config-c/pipeline/results.json": "dc37eedee5b7b01e7f8c686abc903cb612af549b8ec040dd3f6ff71549e8dc58",
+    "build/goal-r1-goodix-algo-config-c/loader-pipeline/test.ld": "cf16ed1b78e72498b161ef9ca116f438d2378f113232447620528617de3aaa6c",
+    "build/goal-r1-goodix-algo-config-c/loader-pipeline/source.elf": "afe3a06a2e74c40c1fe194faeffc121c2361ba06364f3e9017c4f3292b3f93d7",
+    "build/goal-r1-goodix-algo-config-c/loader-pipeline/results.json": "5201e6dbeb2ef30f7de427ee15a617cf18de00e576388d6781f20c072430c93a"
+  }
+}

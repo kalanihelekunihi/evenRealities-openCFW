@@ -1,0 +1,68 @@
+{
+  "passed": 192,
+  "executions": 384,
+  "setup_for_invalid_selectors": true,
+  "rtos_delay_arguments": true,
+  "tail_start_original_sp_lr": true,
+  "source_size": 62,
+  "source_report": "build/sources-goal-r1-goodix-profile/report.json",
+  "limitations": [
+    "Hardware/SDK/RTOS calls modeled; private frames and caller-clobbered registers/flags excluded",
+    "Actual scheduling, power, bus, sampling and byte qualification unverified"
+  ],
+  "acquire_regression": {
+    "passed": 2080,
+    "executions": 4160,
+    "ordered_state_accesses": true,
+    "startup_calls_compared": true,
+    "callback_mutations": true,
+    "source_size": 238,
+    "source_report": "build/sources-goal-r1-goodix-profile/report.json",
+    "limitations": [
+      "Seeded counts/mask/callback; initial startup state unverified",
+      "Hardware/SDK calls modeled; private frames and caller-clobbered registers/flags excluded",
+      "Concurrency, physical power/reset behavior and byte qualification unverified"
+    ]
+  },
+  "release_regression": {
+    "passed": 2080,
+    "executions": 4160,
+    "ordered_state_accesses": true,
+    "shutdown_calls_compared": true,
+    "callback_mutations": true,
+    "source_size": 196,
+    "source_report": "build/sources-goal-r1-goodix-profile/report.json",
+    "limitations": [
+      "Seeded counts/mask/callback; initialization and acquisition unverified",
+      "Hardware/SDK calls modeled; private frames and caller-clobbered registers/flags excluded",
+      "Concurrency, physical power/reset behavior and byte qualification unverified"
+    ]
+  },
+  "negative_control": {
+    "mutation": "Reject unsupported selector before hardware setup",
+    "rejected": true,
+    "counterexample": "Selector 2: stock performs seven setup calls; variant makes none",
+    "stderr": "arm-none-eabi-ld: warning: (r1_goodix_power_enable): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-goodix-profile/bad.o\narm-none-eabi-ld: warning: (r1_goodix_transport_prepare): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-goodix-profile/bad.o\narm-none-eabi-ld: warning: (r1_goodix_i2c_open): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-goodix-profile/bad.o\narm-none-eabi-ld: warning: (osDelay): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-goodix-profile/bad.o\narm-none-eabi-ld: warning: (Gh3x2xDemoArrayCfgSwitch): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-goodix-profile/bad.o\narm-none-eabi-ld: warning: (Gh3x2xDemoStopSampling): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-goodix-profile/bad.o\narm-none-eabi-ld: warning: (osDelay): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-goodix-profile/bad.o\narm-none-eabi-ld: warning: (Gh3x2xDemoStartSampling): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-goodix-profile/bad.o\nTraceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-goodix-profile/reject-early-selector.py\", line 41, in <module>\n    for c in cases:assert a(*c)==b(*c),c\n                                 ~^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-goodix-profile/reject-early-selector.py\", line 38, in run\n    assert state['calls']==expected;return state['calls']\n           ^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+  },
+  "evidence": {
+    "build/goal-r1-goodix-profile/stock.elf": "5da1bf69c7d8931cce16706124800f092225cff02b005e1da859f63eb861dddc",
+    "build/goal-r1-goodix-profile/REA.json": "8668f03d08c5eb9295b352e981ce64e92300475142a214f064bda84f26db85a2",
+    "build/goal-r1-goodix-profile/REA.snapshot.json": "05bcc26236cb0e897d3e2b21eb5165206f1be5ab2bdb794cc5e36e4526a29d04",
+    "build/goal-r1-goodix-profile/verify.py": "cf73e96b2c668982d3d48dc0bd44e051facfa294cd979fa1cf9c4199ade760a9",
+    "build/goal-r1-goodix-profile/source.elf": "4d93a158a9d186b64df2f1bb39025746c96db14193160379ba08d4b52fba16f5",
+    "build/goal-r1-goodix-profile/results.json": "e3952767388a1a5b1d21a2890281ae8fdc3a83f05126b81cf8f7bc5172adace4",
+    "build/goal-r1-goodix-profile/acquire/verify.py": "ea5a6014a20bbbc675df54e3f297efe560a8da80215d97bfc0b5164655b20621",
+    "build/goal-r1-goodix-profile/acquire/results.json": "03a44ccae430f4326590049a7b95b4e7bd04b9925902b66c81ad666845008291",
+    "build/goal-r1-goodix-profile/release/verify.py": "46f88fef38375641b26593c24d1d9e236aa362f0d121465ca8a2aac28d090c45",
+    "build/goal-r1-goodix-profile/release/results.json": "93b212c7ac01feecf9c9fe45d04b758eff10c04cececb6675445aa402418f841",
+    "build/goal-r1-goodix-profile/bad.c": "dcce57506d8ce2a01d47610cb0d4afdefb6389f5347d93ac63f535e15dce3ad1",
+    "build/goal-r1-goodix-profile/reject-early-selector.py": "24345f879994dfa924e6d7208e6af26b748eff8138fd10e9981a639d952d57e9",
+    "build/goal-r1-goodix-profile/negative-result.json": "7cc33db2a054000b3a9b37e914db08f18ad78b8656b1f8abd90538eab5043b69",
+    "r1/src/application/goodix/stock_client_release.c": "9a1a836e34da6d107783980d9880691a698eaf4b64b004be6ee7b4c89951bf5f",
+    "build/sources-goal-r1-goodix-profile/report.json": "1725417b93d3f7857216565eb27c146e13c2e987bae1e278ff468d957680100b",
+    "r1/src/sources.json": "1aafa12d094d12d32de7c12874bee69bb8e3a987233cbd4cd9740fc27895a66b",
+    "r1/symbols/function-frontier.csv": "2678ae6182e145af4de622b04719fb643f3f3435fe57c374ea900bb00b5d85e3",
+    "tools/build/source-plan.json": "4d46e8c038db79a174a2d719086fd0be80503ca7cdbfc2c51e5ed3d30d293064"
+  },
+  "source_plan_changed": false
+}

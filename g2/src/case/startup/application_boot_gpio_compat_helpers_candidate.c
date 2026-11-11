@@ -28,16 +28,19 @@ void case_boot_gpio_b8_input(void) /* 0xba64 */
 /* Stock 0x0800BA84 (case_transition_word4) */
 void case_boot_gpio_a4_output(void) /* 0xba84 */
 {configure_if_changed(0x50000400u,0x20000014u,1u,1u);}
+/* Stock 0x0800BAA4 (case_transition_word4_alt) */
 void case_boot_gpio_b8_output(void) /* 0xbaa4 */
 {configure_if_changed(0x50000000u,0x200000a0u,1u,1u);}
 /* Stock 0x0800BAC4 (case_write_mask4_set) */
 void case_boot_gpio_a4_high(void) /* 0xbac4 */
 {case_control_write(0x50000400u,4u,1u);}
+/* Stock 0x0800BAD8 (case_write_mask8_set) */
 void case_boot_gpio_b8_high(void) /* 0xbad8 */
 {case_control_write(0x50000000u,8u,1u);}
 /* Stock 0x0800BAE8 (case_write_mask4_clear) */
 void case_boot_gpio_a4_low(void) /* 0xbae8 */
 {case_control_write(0x50000400u,4u,0u);}
+/* Stock 0x0800BAFC (case_write_mask8_clear) */
 void case_boot_gpio_b8_low(void) /* 0xbafc */
 {case_control_write(0x50000000u,8u,0u);}
 /* Stock 0x0800BB0C (case_transition_word8) */
@@ -46,3 +49,9 @@ void case_boot_gpio_a4_alt(void) /* 0xbb0c */
 /* Stock 0x0800BB2C (case_transition_word8_alt) */
 void case_boot_gpio_b8_alt(void) /* 0xbb2c */
 {configure_if_changed(0x50000000u,0x200000a0u,2u,1u);}
+
+/* Dedup: the config-channel names used by the 2510 bus code
+ * (formerly legacy-default/bus_pin_leaves_candidate.c) are these bodies. */
+__typeof__(case_boot_gpio_b8_high) case_bus_drive_a __attribute__((alias("case_boot_gpio_b8_high")));
+__typeof__(case_boot_gpio_b8_output) case_bus_drive_b __attribute__((alias("case_boot_gpio_b8_output")));
+__typeof__(case_boot_gpio_b8_low) case_bus_drive_c __attribute__((alias("case_boot_gpio_b8_low")));

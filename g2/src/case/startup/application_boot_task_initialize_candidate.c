@@ -6,7 +6,7 @@ extern void case_boot_task_fill(uint32_t address,uint32_t count,uint8_t value);
 extern void case_boot_task_link_reset(uint32_t link);
 extern uint32_t case_boot_task_frame(uint32_t top,void (*entry)(void *),void *arg);
 static __attribute__((noreturn)) void native_fault(void)
-{__asm__ volatile("cpsid i\n1: b 1b");__builtin_unreachable();}
+{__asm__ volatile("cpsid i");for(;;){}}
 static void wr(uint32_t a,uint32_t v){*(volatile uint32_t *)(uintptr_t)a=v;}
 /* Stock 0x0800AE96 (case_boot_task_initialize) */
 void case_boot_task_initialize(void (*entry)(void *),const char *name,

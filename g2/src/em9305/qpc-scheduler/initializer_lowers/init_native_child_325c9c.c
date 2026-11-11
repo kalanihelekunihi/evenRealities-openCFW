@@ -1,24 +1,13 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_325c9c\n"
-".type opencfw_em9305_child_325c9c,@function\n"
-"opencfw_em9305_child_325c9c:\n"
-"L325c9c:\n"
-"mov_s r2,r0\n"
-"L325c9e:\n"
-"add r2,r2,660\n"
-"L325ca2:\n"
-"ldh_s r1,[r2,0x2]\n"
-"L325ca4:\n"
-"mov_s r3,4\n"
-"L325ca6:\n"
-"cmp_s r1,0x7\n"
-"L325ca8:\n"
-"mov.hi r3,0x8\n"
-"L325cac:\n"
-"b.d opencfw_em9305_child_325c40\n"
-"L325cb0:\n"
-"mov_s r1,0xf\n"
-".size opencfw_em9305_child_325c9c,.-opencfw_em9305_child_325c9c\n"
-);
+#include <stdint.h>
+
+/* Native 0x325c9c..0x325cb2: forward the record's sub-block at +660 to
+ * native 0x325c40 with mask 0xf and a width of 8 when the halfword at
+ * +662 exceeds 7, otherwise 4. */
+extern uint32_t opencfw_em9305_child_325c40(uint32_t,uint32_t,uint32_t,uint32_t);
+
+uint32_t opencfw_em9305_child_325c9c(uintptr_t record)
+{
+    uintptr_t block = record + 660u;
+    uint32_t width = *(volatile uint16_t *)(block + 2u) > 7u ? 8u : 4u;
+    return opencfw_em9305_child_325c40((uint32_t)record, 0xfu, (uint32_t)block, width);
+}

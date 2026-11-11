@@ -1,0 +1,122 @@
+{
+  "schema_version": 1,
+  "report": "build/sources-goal-r1-nfc-task-c/report.json",
+  "evidence_files": {
+    "build/sources-goal-r1-nfc-task-c/report.json": "c3e76c83f8c721a591eb7b8a80ca98698ba2cf4fcdef1252d7f2485b5e95281f",
+    "r1/src/sources.json": "b21ae035b97ef0b2267b8fa316eda6cacbd7f33f0c27e439295ab13b91bbfc70",
+    "r1/src/application/runtime/native_nfc_charge_task.c": "eddb50ffc97301479c6d88bf16c89c581573dfd60c369bbf9223a2cc397b209f",
+    "r1/src/application/runtime/native_battery_context_config.c": "2f286ba3158db295a53c5bf5d776bfafc5afaafe6705163298cb091bdbc584b5",
+    "r1/src/application/board/native_sync.c": "4d3dea4208f4b8a302f46571d5026a66d172452ecfd93191889d9f9789edb569",
+    "r1/src/application/board/native_cortex_fault.c": "ab5723bbe87054d1f4ec147fed067184ee1558fcedcdba24885f2128e9c3a6d1",
+    "build/goal-r1-fstorage-registry/expanded-rw.bin": "87fdee392022fdbe23dd0daf3e859fb14f3ce26ba3e8403aab56dc9d9a913317",
+    "build/goal-r1-nfc-task-c/manifest-before.json": "161408f64ecc178f1822bfacd05f088c17b309d8a73e288bcb7010c84265cac0",
+    "build/goal-r1-nfc-task-c/verify.py": "4630df50660b011a3e46e57a7e9b4f94472bdbfa3a5d3dd1b98cd610e8724dfc",
+    "build/goal-r1-nfc-task-c/verification.json": "0f77a6702eb8f832557eb26b2808b296657eeb9c0891c1fe609a80493ddd89f2",
+    "build/goal-r1-nfc-task-c/verify-final.log": "8d7c2d374e96ed4f36c66c54b5fcf260c9571e0549d1f42d3ffb23aa2dae3aea",
+    "build/goal-r1-nfc-task-c/audit.py": "a05f2683869a18cc318b4d2a4d2b2e435929ae99310f730d30a1d0160ba2d7f9",
+    "build/goal-r1-nfc-task-c/audit.json": "8b3c81cbba20aa326fffe9f4b4674334f7c73a8e69512c961a7965897350f910",
+    "build/goal-r1-nfc-task-c/defects.py": "fe6bf3fb266a93b935a31ea0641e9ab251d754d7e10f277d5be6178448dbc450",
+    "build/goal-r1-nfc-task-c/defects.json": "5b1f79f57dc924890e0b427722e58a8fb5fea053789430cd978f2ee393b67a81",
+    "build/goal-r1-nfc-task-c/rea.json": "75c1dafdad069d40d49db4befe34e03ca49bb50d9d7a9a469ce1a5938d84b8bc",
+    "build/goal-r1-nfc-task-c/source.elf": "5de664c9b1c71ad2ffb34175fe5bc20fd33b97237eee2b2cc7b2e39612ff13cc",
+    "build/goal-r1-nfc-task-c/sync.elf": "76f2394d80355e42c80902cc2e5fdaa14c1376675b1ba5b045375813af86bdd4",
+    "build/goal-r1-nfc-task-c/r1-sources-check.log": "61f62e69be0161c692ed6e0ecee7eed771fe3f3c227c4c90c25075616e47946a",
+    "build/goal-r1-nfc-task-c/sources-check.log": "0ac8e3632c64f58d850dcd74074610a9ef2ad983afbec14c593119f22418e84f",
+    "build/goal-r1-nfc-task-c/boot-link/report.json": "ce585063ee6b634bcb4f6abcb8fc2e3100b7e0f8c6eaa877d1dd2aa02cec7868"
+  },
+  "stock_application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "rea_windows": [
+    {
+      "address": "0x924f4",
+      "length": 140
+    },
+    {
+      "address": "0x45fbc",
+      "length": 72
+    },
+    {
+      "address": "0x99264",
+      "length": 36
+    }
+  ],
+  "verification": {
+    "lifecycle_stock_C_pairs": 32,
+    "worker_stock_C_pairs": 528,
+    "actual_sync_gate_pairs": 176,
+    "actual_common_fault_primitive": true,
+    "all_notification_status_boundaries_checked": true,
+    "watchdog_reloads_and_mutations_checked": true,
+    "hardware_initializers_dispatch_and_RTOS_leaves_modeled": true,
+    "nonreturning_worker_stopped_at_next_wait": true,
+    "ordinary_C_ABI_private_frames_excluded": true
+  },
+  "audit": {
+    "unchanged_prior_object_hashes": 805,
+    "generated_boot_allocated_bytes_and_relocations_unchanged": true,
+    "added_application_imports": [
+      "r1_battery_initialize_000912a8",
+      "r1_battery_periodic_schedule_00091174",
+      "r1_nfc_charge_task_plan_build",
+      "r1_pmic_late_init_plan_build"
+    ],
+    "removed_application_imports": [],
+    "only_manifest_change_one_new_unit": true,
+    "no_handwritten_assembly_in_task": true,
+    "one_existing_battery_thread_handle_owner": true
+  },
+  "defects": [
+    {
+      "defect": "wrong-queue-capacity",
+      "compiled": true,
+      "behavioral_assertion_rejected": true
+    },
+    {
+      "defect": "late-queue-publication",
+      "compiled": true,
+      "behavioral_assertion_rejected": true
+    },
+    {
+      "defect": "invalid-status-dispatch",
+      "compiled": true,
+      "behavioral_assertion_rejected": true
+    },
+    {
+      "defect": "missing-watchdog-arm",
+      "compiled": true,
+      "behavioral_assertion_rejected": true
+    },
+    {
+      "defect": "cached-watchdog-handle",
+      "compiled": true,
+      "behavioral_assertion_rejected": true
+    },
+    {
+      "defect": "skip-feed-on-idle",
+      "compiled": true,
+      "behavioral_assertion_rejected": true
+    },
+    {
+      "defect": "clear-before-terminate",
+      "compiled": true,
+      "behavioral_assertion_rejected": true
+    },
+    {
+      "defect": "ignore-thread-allocation-failure",
+      "compiled": true,
+      "behavioral_assertion_rejected": true
+    }
+  ],
+  "new_explicit_dependencies": [
+    "r1_battery_initialize_000912a8",
+    "r1_battery_periodic_schedule_00091174",
+    "r1_nfc_charge_task_plan_build",
+    "r1_pmic_late_init_plan_build"
+  ],
+  "limitations": [
+    "Hardware initialization/scheduling/PMIC and flag-dispatch children remain unresolved; their full ABI and behavior require separate verification.",
+    "RTOS queue/thread leaves and watchdog calls are modeled; actual existing startup sync code and common fault primitive execute.",
+    "The nonreturning worker is bounded at the next notification wait; private frames and incidental registers are excluded.",
+    "Static TCB/stack reservations and attributes do not establish full kernel TCB layout or physical stack usage.",
+    "Manager topology, full application link, physical charging/NFC behavior and device boot remain open."
+  ]
+}

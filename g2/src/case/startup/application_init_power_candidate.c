@@ -32,3 +32,7 @@ void case_init_power_set(uint32_t enabled)
     }
     (void)case_init_secondary_write(4u,1u,&value);
 }
+/* Dedup (0x08002c30): case_legacy_ee_power_stop (was legacy-default/shipmode_power_stop.c). */
+uint32_t case_legacy_ee_power_stop(uint32_t mode) __attribute__((alias("case_init_boost_set")));
+/* Dedup (0x08002c8e): case_legacy_watchdog_set (was legacy-default/watchdog_frame_candidate.c). */
+uint32_t case_legacy_watchdog_set(uint32_t enabled) __attribute__((alias("case_init_power_set")));

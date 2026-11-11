@@ -20,6 +20,29 @@ sys.path.insert(0, str(ROOT/'tools/cutting'))
 import firmware_cut as cut
 
 
+def add_r1_frontier_bindings(symbol_addresses, known_addresses, rows, stock_size):
+    """A native callee need not have compilable source to bind a caller.
+
+    Use the application frontier independently of the selected compilation
+    units. Entry-only rows can supply addresses, never selected callee bytes.
+    Ambiguous names retain all addresses so bind() continues to reject them.
+    """
+    payload, base = 'r1-application', 0x27000
+    for row in rows:
+        if row.get('image') != 'application':
+            continue
+        try:
+            address = int(row['entry'], 16)
+        except (KeyError, TypeError, ValueError):
+            continue
+        if address & 1 or not base <= address < base + stock_size:
+            continue
+        known_addresses[payload].add(address)
+        name = row.get('candidate_symbol')
+        if name:
+            symbol_addresses[payload][name].add(address | 1)
+
+
 def candidates():
     """Every ARM unit in the device source manifests, anchored to its payload's stock map."""
     import sources
@@ -44,6 +67,13 @@ def candidates():
                 argv = ['clang', *flags]
             elif unit['toolchain'] == 'gcc9':
                 argv = ['python3', *flags]
+            elif unit['toolchain'] == 'arm-gcc14':
+                spec = manifest['toolchains']['arm-gcc14']
+                gcc = ROOT / spec['docker']['mounts']['/tool'] / Path(spec['cc']).relative_to('/tool')
+                compiler = str(gcc).replace(str(ROOT), '{root}')
+                argv = ['python3', '{root}/tools/build/linux_gcc.py', '--compiler', compiler,
+                        '--read-root', '{root}/g2', '--read-root', '{root}/third-party',
+                        '--read-root', '{root}/vendor-cache/g2', '--', *flags]
             else:
                 continue  # C-SKY and ARC payloads have no stock cut for byte comparison yet
             if unit['payload'] == 'r1-application':
@@ -65,7 +95,19 @@ def candidates():
                 evidence = f'g2/symbols/{symbolfile}.tsv'
             else:
                 continue
-            units.append(dict(source=source, argv=argv, payload=unit['payload'], evidence=evidence, anchors=anchors))
+            candidate = dict(source=source, argv=argv, payload=unit['payload'], evidence=evidence, anchors=anchors)
+            if (len(argv) > 3 and argv[:3] ==
+                    ['python3', '{root}/tools/build/linux_gcc.py', '--compiler']):
+                compiler = argv[3]
+                candidate['compiler_path'] = compiler
+                candidate['compiler_sha256'] = hashlib.sha256(
+                    Path(compiler.replace('{root}', str(ROOT))).read_bytes()).hexdigest()
+            if source.startswith('{gen}/'):
+                # Match manifest/frontier identities above, but compile the same
+                # materialized input that the firmware builder regenerates.
+                candidate['manifest_source'] = source
+                candidate['source'] = str((generated / source[len('{gen}/'):]).relative_to(ROOT))
+            units.append(candidate)
     seen = set(); result = []
     for u in units:
         key = (u['source'], tuple(u['argv']))
@@ -83,6 +125,7 @@ def main():
     p.add_argument('--profile', choices=['generic','touch-gcc','r1-gcc','g2-gcc','all'], default='generic')
     p.add_argument('--float-abi', choices=['recorded','soft','softfp','hard'], default='recorded')
     p.add_argument('--only-fp-sources', action='store_true', help='test existing sources containing float/double with an explicit FPU ABI')
+    p.add_argument('--source', action='append', help='qualify only this exact manifest source path (repeatable)')
     args = p.parse_args()
     if args.out.exists(): p.error('choose a fresh output directory')
     stocks = {m['payload']: cut.official_bytes(m) for m in cut.load_manifests()}
@@ -97,7 +140,7 @@ def main():
         for unit in candidates():
             if unit['payload']!='r1-application' or unit['argv'][0]!='clang':continue
             converted=dict(unit)
-            converted['argv']=['python3','{root}/tools/build/linux_gcc.py','--compiler',str(gcc).replace(str(ROOT),'{root}'),*[v for p in ('r1','third-party/upstream','vendor-cache/r1') for v in ('--read-root','{root}/'+p)],'--',*[a for a in unit['argv'][1:] if not a.startswith('--target=')]]
+            converted['argv']=['python3','{root}/tools/build/linux_gcc.py','--compiler',str(gcc).replace(str(ROOT),'{root}'),*[v for p in ('r1','third-party/upstream','vendor-cache/r1','build/generated/r1') for v in ('--read-root','{root}/'+p)],'--',*[a for a in unit['argv'][1:] if not a.startswith('--target=')]]
             converted.update(compiler_path=str(gcc).replace(str(ROOT),'{root}'),compiler_sha256=sha(gcc))
             derived.append(converted)
         original+=derived
@@ -114,6 +157,11 @@ def main():
         original=[u for u in original if any(a.startswith('-mfloat-abi=') for a in u['argv']) and re.search(r'\b(float|double)\b',(ROOT/u['source']).read_text())]
     if args.float_abi!='recorded':
         original=[dict(u,argv=[a for a in u['argv'] if not a.startswith('-mfloat-abi=')]+['-mfloat-abi='+args.float_abi]) for u in original]
+    if args.source:
+        wanted=set(args.source)
+        original=[u for u in original if u['source'] in wanted]
+        missing=wanted-{u['source'] for u in original}
+        if missing:p.error('no candidate for source: '+', '.join(sorted(missing)))
     units = []
     for unit in original:
         for optimization in args.optimizations:
@@ -131,11 +179,19 @@ def main():
             address=anchor['start']+bases[unit['payload']]
             known_addresses[unit['payload']].add(address)
             if anchor['symbol']: symbol_addresses[unit['payload']][anchor['symbol']].add(address|1)
+    with (ROOT/'r1/symbols/function-frontier.csv').open() as stream:
+        add_r1_frontier_bindings(
+            symbol_addresses, known_addresses, csv.DictReader(stream),
+            len(stocks['r1-application']))
     native_entries={}
     for payload,base in bases.items():
         if payload=='r1-application':
             rows=csv.DictReader((ROOT/'r1/research/decompilation/application/functions.csv').read_text().splitlines())
-            native_entries[payload]={int(r['entry'],16)-base for r in rows}
+            # Manual function-frontier supplements are named entry evidence too.
+            # Keep them available for validating recovered branch targets;
+            # decompiler inventory alone omits small table-referenced thunks.
+            native_entries[payload]=({int(r['entry'],16)-base for r in rows} |
+                                     {a-base for a in known_addresses[payload]})
         else:
             native_entries[payload]={a-base for a in known_addresses[payload]}
     def bind(unit, function):
@@ -152,6 +208,8 @@ def main():
         index, unit = pair
         folder = args.out/'compilation'/f'{index:04d}'
         result = dict(source=unit['source'], payload=unit['payload'], evidence=unit['evidence'], selected=[])
+        if 'manifest_source' in unit:
+            result['manifest_source'] = unit['manifest_source']
         try:
             funcs, receipt = compile_unit(unit, folder)
             (folder/'receipt.json').write_text(json.dumps(receipt,indent=2)+'\n')
@@ -159,6 +217,33 @@ def main():
             result['compiled'] = True
             selected = []
             reasons=defaultdict(int)
+            local_functions = {f['symbol']: f for f in funcs if f['executable']}
+            def linked_bindings(found):
+                """Include stock-anchored bindings of referenced local C functions."""
+                from match_compiled import match
+                expanded = dict(found['bindings'])
+                pending = list(expanded)
+                visited = set()
+                while pending:
+                    name = pending.pop()
+                    if name in visited or name not in local_functions:
+                        continue
+                    visited.add(name)
+                    target = local_functions[name]
+                    address = expanded[name] & ~1
+                    entry = address - bases[unit['payload']]
+                    dependency = match(target, stocks[unit['payload']],
+                                       native_entries[unit['payload']] | {entry},
+                                       bases[unit['payload']], anchored_entry=entry)
+                    if not dependency:
+                        raise ValueError('local callee lacks stock-anchored body')
+                    for symbol, value in dependency['bindings'].items():
+                        if symbol in expanded and expanded[symbol] != value:
+                            raise ValueError('conflicting local callee binding')
+                        if symbol not in expanded:
+                            expanded[symbol] = value
+                            pending.append(symbol)
+                return expanded
             for f in funcs:
                 if not f['executable'] or (f['relocations'] and not (args.link_functions or args.match_functions)): continue
                 suffix = re.search(r'_([0-9a-fA-F]{6,8})$', f['symbol'])
@@ -177,8 +262,27 @@ def main():
                             extra=dict(bindings=bindings,address=address,
                                        binding_evidence='r1/symbols/function-frontier.csv' if unit['payload']=='r1-application' else unit['evidence'])
                         except ValueError:
-                            reasons['native_bindings_or_isolated_link_unresolved']+=1
-                            continue
+                            if not args.match_functions:
+                                reasons['native_bindings_or_isolated_link_unresolved']+=1
+                                continue
+                            from match_compiled import match
+                            # A named inventory anchor disambiguates repeated bodies.
+                            # Recover only relocation scalars, then compile/link the
+                            # complete body at that exact entry and require equality.
+                            found=match(f,stocks[unit['payload']],
+                                        native_entries[unit['payload']]|{lo},
+                                        bases[unit['payload']],anchored_entry=lo)
+                            if not found:
+                                reasons['anchored_relocation_pattern_not_exact']+=1
+                                continue
+                            try:
+                                found['bindings'] = linked_bindings(found)
+                                data,_=link_function(folder/'unit.o',f,found['address'],
+                                                     found['bindings'],folder/('anchor-'+f['symbol']+'-'+str(lo)))
+                            except ValueError:
+                                reasons['anchored_relocation_link_unresolved']+=1
+                                continue
+                            extra={k:found[k] for k in ('bindings','address','match_evidence')}
                     if data != stocks[unit['payload']][lo:hi]:
                         reasons['compiled_bytes_differ']+=1
                         continue
@@ -189,6 +293,7 @@ def main():
                     found=match(f,stocks[unit['payload']],native_entries[unit['payload']],bases[unit['payload']])
                     if found:
                         try:
+                            found['bindings'] = linked_bindings(found)
                             data,_=link_function(folder/'unit.o',f,found['address'],found['bindings'],folder/('unique-'+f['symbol'])) if f['relocations'] else (f['data'],None)
                             if data==stocks[unit['payload']][found['start']:found['end']]:
                                 found.update(payload=unit['payload'],symbol=f['symbol'],sha256=hashlib.sha256(data).hexdigest(),evidence=unit['evidence'])
@@ -198,7 +303,7 @@ def main():
             result['source_implementation_completeness']='not established by compilation or byte matching'
             result['selected'] = selected
             result['reason'] = 'exact selected bodies' if selected else 'no exact anchored body under tested production bindings; integration remains unfinished'
-            clean = {k:unit[k] for k in ('source','argv','compiler_path','compiler_sha256') if k in unit}
+            clean = {k:unit[k] for k in ('source','manifest_source','argv','compiler_path','compiler_sha256') if k in unit}
             clean['regions'] = selected
             return clean, result
         except (OSError, RuntimeError, ValueError, subprocess.CalledProcessError) as e:

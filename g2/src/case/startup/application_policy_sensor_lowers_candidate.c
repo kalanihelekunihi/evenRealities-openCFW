@@ -49,12 +49,8 @@ int32_t case_policy_sensor_delay(uint32_t amount)
     if(amount!=0u)case_policy_task_sleep(amount);
     return 0;
 }
-/* Both call sites name native entry 0x0800a7b0. The delay ABI returns status
- * in R0; the policy callers discard it. */
-int32_t case_policy_wait(uint32_t amount)
-{
-    return case_policy_sensor_delay(amount);
-}
+/* Dedup (0x0800a7b0): case_policy_wait is an alias of case_policy_sensor_delay (startup/application_policy_sensor_lowers_candidate.c). */
+int32_t case_policy_wait(uint32_t amount) __attribute__((alias("case_policy_sensor_delay")));
 /* Stock 0x0800AA00 (case_start_scheduler) */
 int32_t case_policy_task_cancel(uint32_t task)
 {

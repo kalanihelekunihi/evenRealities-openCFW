@@ -19,7 +19,7 @@ static void wr(uint32_t a,uint32_t v){*(volatile uint32_t *)(uintptr_t)a=v;}
 static uint8_t rb(uint32_t a){return *(volatile uint8_t *)(uintptr_t)a;}
 static void wb(uint32_t a,uint8_t v){*(volatile uint8_t *)(uintptr_t)a=v;}
 static __attribute__((noreturn)) void native_fault(void)
-{__asm__ volatile("cpsid i\n1: b 1b");__builtin_unreachable();}
+{__asm__ volatile("cpsid i");for(;;){}}
 static void copy_bytes(uint32_t destination,uint32_t source,uint32_t count)
 {for(uint32_t i=0u;i<count;++i)*(volatile uint8_t *)(uintptr_t)(destination+i)=rb(source+i);}
 static void copy_out(uint32_t queue,uint32_t destination)

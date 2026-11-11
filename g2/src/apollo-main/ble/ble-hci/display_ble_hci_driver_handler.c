@@ -2,7 +2,27 @@
  * under the actual WSF timer/radio recovery state machine.  RAM/MMIO cells
  * below are native literals, not fabricated initial configuration. */
 #include <stdint.h>
-extern void audio_ble_hci_read_buf_size_cmd_52b620(void); /* native 0x52b620 */
+/* Stock-RAM literals rewritten to named objects (sim-test wave 2026-10-26,
+ * .waves/sim-fix/apply.py): g2ref_X is the linker symbol X. */
+#include <stdint.h>
+extern unsigned char g2ref_audio_ble_hci_driver_handler_id[] __asm__("audio_ble_hci_driver_handler_id");
+extern unsigned char g2ref_audio_ble_hci_radio_active[] __asm__("audio_ble_hci_radio_active");
+extern unsigned char g2ref_audio_ble_hci_radio_command_cell[] __asm__("audio_ble_hci_radio_command_cell");
+extern unsigned char g2ref_audio_ble_hci_radio_context_ptr[] __asm__("audio_ble_hci_radio_context_ptr");
+extern unsigned char g2ref_audio_ble_hci_radio_pending[] __asm__("audio_ble_hci_radio_pending");
+extern unsigned char g2ref_audio_ble_hci_radio_scheduler_state[] __asm__("audio_ble_hci_radio_scheduler_state");
+extern unsigned char g2ref_audio_ble_hci_radio_timer[] __asm__("audio_ble_hci_radio_timer");
+extern unsigned char g2ref_g2_stock_ram_20000da8[] __asm__("g2_stock_ram_20000da8");
+extern unsigned char g2ref_g2_stock_ram_200704e8[] __asm__("g2_stock_ram_200704e8");
+extern void *hciCmdAlloc(uint16_t opcode,uint16_t len); /* native 0x52ae38 */
+extern void hciCmdSend(void *pkt); /* native 0x52ae5e */
+/* Native 0x52b620 (tsv-labelled HciReadBufSizeCmd) sends opcode 0x1001, not
+ * Cordio's 0x1005: stock `movs r1,#0; movw r0,#4097; bl 0x52ae38; ...bl 0x52ae5e`
+ * at 0x52b620..0x52b638.  Stock sim log sends 01011000 here; we sent 01051000. */
+static void audio_ble_hci_read_buf_size_cmd_52b620(void) {
+    void *pkt=hciCmdAlloc(0x1001u,0u);
+    if(pkt!=0)hciCmdSend(pkt);
+}
 extern void WsfTimerStartMs(void *,uint32_t); /* native 0x52a4c4 */
 extern void WsfTimerStop(void *); /* selected 0x52a4d2 */
 extern uint32_t audio_ble_hci_serial_rx_incoming_530186(void *,uint16_t);
@@ -32,52 +52,52 @@ uint32_t audio_ble_handler_4b4ab2(uint32_t ignored,const void *message,
     (void)ignored;(void)ignored3;
     if(message!=0 && ((const uint8_t *)message)[2u]==2u) {
         audio_ble_hci_read_buf_size_cmd_52b620();
-        WsfTimerStartMs((void *)(uintptr_t)0x20073e64u,10000u);
+        WsfTimerStartMs((void *)(uintptr_t)((uint32_t)(uintptr_t)g2ref_audio_ble_hci_radio_timer),10000u);
         return high;
     }
     uint32_t iterations=0u,received_blocks=0u,write_failures=0u,next=0u;
-    uint32_t total=W(0x20074638u),done=W(0x2007463cu);
+    uint32_t total=W(((uint32_t)(uintptr_t)g2ref_audio_ble_hci_radio_active)),done=W(((uint32_t)(uintptr_t)g2ref_audio_ble_hci_radio_pending));
     if(done<total) {
         uint32_t got=audio_ble_hci_serial_rx_incoming_530186(
-            (void *)(uintptr_t)(W(0x20000dacu)+done),(uint16_t)(total-done));
-        done+=got;W(0x2007463cu)=done;
+            (void *)(uintptr_t)(W(((uint32_t)(uintptr_t)g2ref_g2_stock_ram_20000da8+0x4u))+done),(uint16_t)(total-done));
+        done+=got;W(((uint32_t)(uintptr_t)g2ref_audio_ble_hci_radio_pending))=done;
         if(done!=total) {
-            audio_ble_wsf_set_event(B(0x20074fcbu),1u);
+            audio_ble_wsf_set_event(B(((uint32_t)(uintptr_t)g2ref_audio_ble_hci_driver_handler_id)),1u);
             return high;
         }
-        W(0x20074638u)=0u;W(0x2007463cu)=0u;
+        W(((uint32_t)(uintptr_t)g2ref_audio_ble_hci_radio_active))=0u;W(((uint32_t)(uintptr_t)g2ref_audio_ble_hci_radio_pending))=0u;
     }
     for(;;) {
         next=iterations+1u;
         if(iterations>=1000u)break;
         iterations=next;
         if((W(0x40010410u)&0x00200000u)!=0u) {
-            high=W(0x20074640u);
-            WsfTimerStop((void *)(uintptr_t)0x20073e64u);
-            WsfTimerStartMs((void *)(uintptr_t)0x20073e64u,10000u);
-            W(0x20074638u)=0u;
+            high=W(((uint32_t)(uintptr_t)g2ref_audio_ble_hci_radio_command_cell));
+            WsfTimerStop((void *)(uintptr_t)((uint32_t)(uintptr_t)g2ref_audio_ble_hci_radio_timer));
+            WsfTimerStartMs((void *)(uintptr_t)((uint32_t)(uintptr_t)g2ref_audio_ble_hci_radio_timer),10000u);
+            W(((uint32_t)(uintptr_t)g2ref_audio_ble_hci_radio_active))=0u;
             int32_t result=audio_ble_radio_exchange_receive_52e1ea(
-                (void *)(uintptr_t)W(0x20074630u),
-                (void *)(uintptr_t)0x200704ecu,
-                (uint32_t *)(uintptr_t)0x20074638u);
-            if(W(0x20074638u)>0x100u)
+                (void *)(uintptr_t)W(((uint32_t)(uintptr_t)g2ref_audio_ble_hci_radio_context_ptr)),
+                (void *)(uintptr_t)((uint32_t)(uintptr_t)g2ref_g2_stock_ram_200704e8+0x4u),
+                (uint32_t *)(uintptr_t)((uint32_t)(uintptr_t)g2ref_audio_ble_hci_radio_active));
+            if(W(((uint32_t)(uintptr_t)g2ref_audio_ble_hci_radio_active))>0x100u)
                 audio_ble_hci_error_check_4b47ae(0x09000002u);
             if(result==0) {
                 uint32_t tries=0u;
                 while(tries<2000u && (W(0x40010410u)&0x00200000u)!=0u &&
-                      W(0x20074640u)==high) {
+                      W(((uint32_t)(uintptr_t)g2ref_audio_ble_hci_radio_command_cell))==high) {
                     audio_ble_hci_boot_delay_491102(1u);
                     tries++;
                 }
                 uint32_t got=audio_ble_hci_serial_rx_incoming_530186(
-                    (void *)(uintptr_t)W(0x20000dacu),
-                    (uint16_t)W(0x20074638u));
-                W(0x2007463cu)=got;
-                if(got!=W(0x20074638u)) {
-                    audio_ble_wsf_set_event(B(0x20074fcbu),1u);
+                    (void *)(uintptr_t)W(((uint32_t)(uintptr_t)g2ref_g2_stock_ram_20000da8+0x4u)),
+                    (uint16_t)W(((uint32_t)(uintptr_t)g2ref_audio_ble_hci_radio_active)));
+                W(((uint32_t)(uintptr_t)g2ref_audio_ble_hci_radio_pending))=got;
+                if(got!=W(((uint32_t)(uintptr_t)g2ref_audio_ble_hci_radio_active))) {
+                    audio_ble_wsf_set_event(B(((uint32_t)(uintptr_t)g2ref_audio_ble_hci_driver_handler_id)),1u);
                     break;
                 }
-                W(0x20074638u)=0u;W(0x2007463cu)=0u;
+                W(((uint32_t)(uintptr_t)g2ref_audio_ble_hci_radio_active))=0u;W(((uint32_t)(uintptr_t)g2ref_audio_ble_hci_radio_pending))=0u;
                 received_blocks++;
             } else {
                 audio_ble_hci_error_check_4b47ae((uint32_t)result);
@@ -85,26 +105,26 @@ uint32_t audio_ble_handler_4b4ab2(uint32_t ignored,const void *message,
                 return high;
             }
             if(received_blocks>3u) {
-                audio_ble_wsf_set_event(B(0x20074fcbu),1u);
+                audio_ble_wsf_set_event(B(((uint32_t)(uintptr_t)g2ref_audio_ble_hci_driver_handler_id)),1u);
                 break;
             }
         } else {
-            volatile uint8_t *ring=(volatile uint8_t *)(uintptr_t)0x20073ba8u;
+            volatile uint8_t *ring=(volatile uint8_t *)(uintptr_t)((uint32_t)(uintptr_t)g2ref_audio_ble_hci_radio_scheduler_state);
             if(get32(ring+8u)==0u)break;
             uint32_t pointer=get32(ring+0x14u)+get32(ring+4u);
             uint32_t length=get32((volatile uint8_t *)(uintptr_t)pointer);
             int32_t result=audio_ble_radio_exchange_begin_52e0d2(
-                (void *)(uintptr_t)W(0x20074630u),
+                (void *)(uintptr_t)W(((uint32_t)(uintptr_t)g2ref_audio_ble_hci_radio_context_ptr)),
                 (const void *)(uintptr_t)(pointer+4u),length);
             if(result==0) {
-                WsfTimerStop((void *)(uintptr_t)0x20073e64u);
-                WsfTimerStartMs((void *)(uintptr_t)0x20073e64u,10000u);
+                WsfTimerStop((void *)(uintptr_t)((uint32_t)(uintptr_t)g2ref_audio_ble_hci_radio_timer));
+                WsfTimerStartMs((void *)(uintptr_t)((uint32_t)(uintptr_t)g2ref_audio_ble_hci_radio_timer),10000u);
                 (void)audio_ble_hci_ring_consume_5300e2((void *)ring,0,1u);
                 write_failures=0u;iterations=0u;
             } else {
                 write_failures++;
                 if(write_failures>=0x2711u) {
-                    audio_ble_wsf_set_event(B(0x20074fcbu),1u);
+                    audio_ble_wsf_set_event(B(((uint32_t)(uintptr_t)g2ref_audio_ble_hci_driver_handler_id)),1u);
                     break;
                 }
             }

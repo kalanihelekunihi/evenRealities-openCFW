@@ -1,0 +1,68 @@
+{
+  "averaging_passed": 224,
+  "averaging_executions": 448,
+  "scaling_passed": 65536,
+  "scaling_executions": 131072,
+  "saved_frame_and_partial_samples_compared": true,
+  "handle_reloads": true,
+  "negative_clipping": true,
+  "source_report": "build/sources-goal-r1-adc-average/report.json",
+  "source_sizes": {
+    "r1_adc_channel_read_averaged": 14,
+    "r1_adc_channel_read_averaged_body": 116,
+    "r1_battery_raw_to_percent": 42
+  },
+  "limitations": [
+    "Driver/delay boundaries modeled; converter average modeled for exhaustive scaling",
+    "Private kernel frames and caller-clobbered registers/flags excluded",
+    "Actual timing, ADC electrical behavior, arbitrary aliases/concurrency and byte qualification unverified"
+  ],
+  "integrated": {
+    "passed": 224,
+    "actual_average_and_scaling": true,
+    "driver_and_delays_modeled": true,
+    "limitations": [
+      "Only declared sample halfword compared at driver entry; converter private saved-register values and code addresses differ",
+      "No arbitrary overreads/aliases or physical timing proof"
+    ]
+  },
+  "negative_controls": {
+    "no-clip": {
+      "rejected": true,
+      "stderr": "arm-none-eabi-ld: warning: (r1_stock_dispatch_08): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-adc-average/no-clip.o\narm-none-eabi-ld: warning: (r1_rtt_delay_cycles): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-adc-average/no-clip.o\narm-none-eabi-ld: warning: (r1_stock_dispatch_10): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-adc-average/no-clip.o\narm-none-eabi-ld: warning: (r1_stock_dispatch_0c): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-adc-average/no-clip.o\nTraceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-adc-average/reject-no-clip.py\", line 61, in <module>\n    for c in cases:assert a(*c)==b(*c),c\n                                 ~^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-adc-average/reject-no-clip.py\", line 54, in run\n    values=[max(x,0) for x in samples] if style in [0,1] else ([x&255 for x in samples] if style==2 else [0,0,0]);expected=sum(values)//3;expected=scale(expected) if convert else expected;assert u.reg_read(UC_ARM_REG_R0)==expected\n                                                                                                                                                                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    "wide-clear": {
+      "rejected": true,
+      "stderr": "arm-none-eabi-ld: warning: (r1_stock_dispatch_08): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-adc-average/wide-clear.o\narm-none-eabi-ld: warning: (r1_rtt_delay_cycles): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-adc-average/wide-clear.o\narm-none-eabi-ld: warning: (r1_stock_dispatch_10): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-adc-average/wide-clear.o\narm-none-eabi-ld: warning: (r1_stock_dispatch_0c): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-adc-average/wide-clear.o\nTraceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-adc-average/reject-wide-clear.py\", line 61, in <module>\n    for c in cases:assert a(*c)==b(*c),c\n                          ^^^^^^^^^^^^\nAssertionError: ((-32768, -1, 0), 0, False, 2882343476, 0)\n"
+    }
+  },
+  "evidence": {
+    "build/goal-r1-adc-average/stock.elf": "6387d5fd2a0dcdc817c9fa1148f61275637942cb6aa02fd36fed47c860639abb",
+    "build/goal-r1-adc-average/REA-0x50c90.json": "2d39a9d94f69ba033688448e81ccf3201bc6732d39c4032b326acecb359dfdd8",
+    "build/goal-r1-adc-average/REA-0x50d00.json": "485a05d4171b87cb1a7bb4c738c149b681a972b1f8e4ebd3108624126eca9132",
+    "build/goal-r1-adc-average/REA.snapshot.json": "f8320675812ba93b55e3307d29b4151ba649291b4272e38f56a85a9c14aed985",
+    "build/goal-r1-adc-average/verify.py": "19e8edd2d5f648b88582917c2f66678600a9b9151729957e5be177a7072c2efe",
+    "build/goal-r1-adc-average/source.elf": "8498898b560efefc7f8d5f5de590b2ba478b201e663f6096001a3045024e66a6",
+    "build/goal-r1-adc-average/results.json": "07bdad18bc389548a699e8a814d6cad1126fd7477307a4fed7f19c401f541036",
+    "build/goal-r1-adc-average/integrated.py": "7e54a73ca37d1d3f00f45109050aa1e2d730d76acee47bf16a58412b382ef706",
+    "build/goal-r1-adc-average/integration-results.json": "8ecc34388f9518d1c5accbc5135c55ca07c9aba5ec5c1b1f34be5e276a78c09f",
+    "build/goal-r1-adc-average/negative.py": "583a7e39192d1be5fb7801fb4bf1b9342143e7afee5561774856796eb74b37ad",
+    "build/goal-r1-adc-average/no-clip.c": "86f92e2a14ac4bb5ff2600e153eacc1d4b668e7691f7a415ae795e6442f03e6c",
+    "build/goal-r1-adc-average/wide-clear.c": "eba0d35796cffcce66ef6eea128a875a030cc99a2fcde1324c85b3e74d13c168",
+    "build/goal-r1-adc-average/reject-no-clip.py": "c69d6fc0d061b792cccc70c048d2b83dc46e93ed79b5d4517e295d3a9e025071",
+    "build/goal-r1-adc-average/reject-wide-clear.py": "98e0a934c239d1b93b5ae31a19d6b497c5ade75fd83fa121656343b8fae2bc78",
+    "build/goal-r1-adc-average/negative-results.json": "44474db9489fdaa2dec5a06faf0aade772526f2a69d15baedeacde5bcd84243b",
+    "r1/src/application/adc/stock_battery_average.c": "83a81033e7a634aaeb47eb1b34a948d2649d4ca192faa8298119e55b8f6cf448",
+    "r1/src/application/adc/stock_battery_average_frame.c": "29823ae0e5ab72bbc5192a62b23d3098626f2f115fb92d233dc9d16597f84cb2",
+    "r1/src/application/board/native_battery_context.h": "6b338ba13d97fd1f2dc1823a2efb3fd4d903864e3521eb7b0bcab12bb2995282",
+    "build/sources-goal-r1-adc-average/report.json": "430914ed0574bab98b4a9ae8ad0fc4931997443f3f849bd40ac3d207b897d240",
+    "r1/src/sources.json": "e32450af0ad855a39e15e9c4029af6bc1b267b6f8d10085ad7714c4130b94bcc",
+    "r1/symbols/function-frontier.csv": "8c901026d3a596b96ccaf3358358a6876aafad4859b9b9e247eba2c6e097e9e2",
+    "tools/build/source-plan.json": "b056107b9773e0eaac8d64015682a68020b1b3e145310f7d399aaa078bd96e91"
+  },
+  "source_plan_changed": false,
+  "superseded_handle_binding": {
+    "review": "r1/docs/reference/vnfc-adc-binding-review.json",
+    "reason": "Earlier fixture assigned different handle cells to stock and C, masking wrong VBAT ownership."
+  }
+}

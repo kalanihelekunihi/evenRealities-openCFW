@@ -1,36 +1,16 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_3159e8\n"
-".type opencfw_em9305_child_3159e8,@function\n"
-"opencfw_em9305_child_3159e8:\n"
-"L3159e8:\n"
-"enter_s [r13,blink]\n"
-"L3159ea:\n"
-"mov_s r13,r0\n"
-"L3159ec:\n"
-"mov_s r0,0x805c6c\n"
-"L3159f2:\n"
-"ldb_s r2,[r13,0xd]\n"
-"L3159f4:\n"
-"ld r1,[r0,0]\n"
-"L3159f6:\n"
-"mov_s r0,r13\n"
-"L3159f8:\n"
-"bclr_s r2,r2,0\n"
-"L3159fa:\n"
-"stb_s r2,[r13,0xd]\n"
-"L3159fc:\n"
-"ldb_s r1,[r1,0x4]\n"
-"L3159fe:\n"
-"bl.d opencfw_em9305_phy_reject_32698c\n"
-"L315a02:\n"
-"mov_s r2,1\n"
-"L315a04:\n"
-"bl.d opencfw_em9305_phy_complete_32c818\n"
-"L315a08:\n"
-"mov_s r0,r13\n"
-"L315a0a:\n"
-"leave_s [r13,blink,pcl]\n"
-".size opencfw_em9305_child_3159e8,.-opencfw_em9305_child_3159e8\n"
-);
+#include <stdint.h>
+
+/* Native 0x3159e8..0x315a0c: clear bit 0 of the record flags (+13), reject
+ * the pending PHY procedure with the reason byte from *0x805c6c+4, then
+ * complete it. */
+extern uint32_t opencfw_em9305_phy_reject_32698c(uintptr_t,uint32_t,uint32_t);
+extern uint32_t opencfw_em9305_phy_complete_32c818(uintptr_t);
+
+uint32_t opencfw_em9305_child_3159e8(uintptr_t record)
+{
+    uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805c6cu;
+    uint32_t flags=*(volatile uint8_t *)(record+13u);
+    *(volatile uint8_t *)(record+13u)=(uint8_t)(flags&~1u);
+    (void)opencfw_em9305_phy_reject_32698c(record,*(volatile uint8_t *)(config+4u),1u);
+    return opencfw_em9305_phy_complete_32c818(record);
+}

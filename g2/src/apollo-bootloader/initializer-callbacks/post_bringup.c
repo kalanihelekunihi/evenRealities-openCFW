@@ -14,18 +14,18 @@ struct post_bringup_row {
 
 extern uint32_t opencfw_bl_power_register_update(uint32_t id, uint32_t value);
 extern uint32_t opencfw_bl_register_mode(uint32_t kind, uint32_t mode);
-extern uint32_t opencfw_bl_post_context_register(uint32_t id,
+extern uint32_t am_hal_uart_initialize(uint32_t id,
                                                  const void *context);
-extern uint64_t opencfw_bl_post_configure(uint32_t transfer,
-                                         uint32_t a, uint32_t b);
-extern uint32_t opencfw_bl_post_validate(uint32_t transfer,
+extern uint32_t am_hal_uart_power_control(uint32_t context,
+                                          uint32_t state, uint32_t retain);
+extern uint32_t am_hal_uart_configure(uint32_t transfer,
                                          uint32_t context);
-extern uint32_t opencfw_bl_post_activate(uint32_t transfer,
+extern uint32_t am_hal_uart_buffer_configure(uint32_t transfer,
                                          uint32_t a, uint32_t b,
                                          uint32_t c, uint32_t d);
 extern uint32_t opencfw_bl_post_enable(uint32_t kind);
 extern uint32_t opencfw_bl_post_precommit(uint32_t kind);
-extern uint32_t opencfw_bl_post_finish(uint32_t context, uint32_t code);
+extern uint32_t am_hal_uart_interrupt_enable(uint32_t context, uint32_t code);
 extern uint32_t opencfw_bl_post_record_initialized(uint32_t index);
 
 #define POST_TABLE ((volatile struct post_bringup_row *)0x20000454u)
@@ -49,7 +49,7 @@ uint32_t opencfw_bl_post_bringup_setup(void)
         if (row->register_config == 0 || row->transfer == 0)
             continue;
 
-        status |= opencfw_bl_post_context_register(
+        status |= am_hal_uart_initialize(
             row->kind, (const void *)&row->context);
 
         if (index == 2u) {
@@ -62,11 +62,11 @@ uint32_t opencfw_bl_post_bringup_setup(void)
 
         const volatile uint32_t *const registers = row->register_config;
         status |= opencfw_bl_power_register_update(registers[1], registers[3]);
-        status |= opencfw_bl_post_configure(row->context, 0u, 0u);
-        status |= opencfw_bl_post_validate(row->context, row->transfer);
+        status |= am_hal_uart_power_control(row->context, 0u, 0u);
+        status |= am_hal_uart_configure(row->context, row->transfer);
 
         const volatile uint32_t *const extended = row->extended_config;
-        const uint32_t activation = opencfw_bl_post_activate(
+        const uint32_t activation = am_hal_uart_buffer_configure(
             row->context, extended[1], extended[0], 0u, 0u);
         status |= activation;
         (void)opencfw_bl_post_enable((uint32_t)signed_kind(row->kind));
@@ -78,7 +78,7 @@ uint32_t opencfw_bl_post_bringup_setup(void)
             (void)opencfw_bl_register_mode((uint32_t)signed_kind(row->kind),
                                            4u);
         (void)opencfw_bl_post_precommit((uint32_t)signed_kind(row->kind));
-        status = opencfw_bl_post_finish(row->context, 0x471u) | status;
+        status = am_hal_uart_interrupt_enable(row->context, 0x471u) | status;
         row->initialized = 1u;
         (void)opencfw_bl_post_record_initialized(index);
     }

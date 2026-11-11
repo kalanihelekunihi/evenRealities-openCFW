@@ -1,0 +1,80 @@
+{
+  "schema": 1,
+  "target": "G2 touch shared deep-sleep callback state",
+  "stock_component": "g2/blobs/official/g2-2.2.6.10/firmware_touch.bin",
+  "stock_component_sha256": "0d13d8bb1337bf22989dc16143e3d5eca29a31cc1ed753ff624668750ea9470d",
+  "stock_address_evidence": {
+    "last_executed_callback": "0x20000f24",
+    "failed_callback_array": "0x20000f28",
+    "callback_root_array": "0x20000f34",
+    "stock_literal_locations": [
+      "0x0000a440",
+      "0x0000a518",
+      "0x0000a520",
+      "0x0000a524",
+      "0x0000a584",
+      "0x0000a5f0"
+    ]
+  },
+  "previous_source_addresses": {
+    "last_executed_callback": "0x20000f68",
+    "failed_callback_array": "0x20000f6c",
+    "callback_root_array": "0x20000f5c"
+  },
+  "source_files": {
+    "g2/src/touch/link/g2-touch-stockram.ld.inc": "d3619737b7e70200e04993cc25a7016e9121ea9cdb3d2fea3385b1e510deb782",
+    "g2/src/touch/pm-callbacks/callbacks.c": "8bfada907a882ee2f9d553cf39b0d24a94ecbddbe36778303d189dd60179a8c6",
+    "g2/src/touch/pm-callbacks/callbacks.h": "b1dbd00ccbb06bb83fae9b8f32336677fb9a86ae784dc7c4a288b564e65c6f45",
+    "g2/src/touch/application/app_platform.c": "f38dda337e150752dee71b96b3cba99b6897a3a340c1cc7c6a8f34de55872d4d",
+    "g2/src/touch/glue/touch_cybsp.c": "289ada0239f8ddfade28d7beb0af1bdc1f3959b651395bb60e6f09262c839ed0"
+  },
+  "implementation": "The linker places the upstream PDL callback root, failed-root array, and last-callback cell into their stock zeroed RAM slots. Both BSP and application descriptors register with the single PDL function. The redundant custom registrar was removed; the C deep-sleep path reads the same type-1 root slot.",
+  "verification": {
+    "focused_source_report": "build/g2-touch-pm-shared-root-final3-source-20261111/report.json",
+    "focused_source_report_sha256": "1031c5077108d407a0afc8bb38a03955bc31f2bb8a2410959bb6ab87be00ff78",
+    "compiled_units": 101,
+    "compile_failures": 0,
+    "duplicate_strong_symbols": 0,
+    "focused_link_report": "build/g2-touch-pm-shared-root-final3-link-20261111/link-report.json",
+    "focused_link_report_sha256": "609dad9711904409b26cf8c8b204aa88ed43d31fda201f22f7e8c4ca9c696f59",
+    "touch_binary_bytes": 28852,
+    "touch_binary_sha256": "cd5983a89ca034e141ce376e599d1fba10252945c1115ef6e8cb393842a1b857",
+    "root_address_and_size": {
+      "address": "0x20000f34",
+      "bytes": 12
+    },
+    "failed_address_and_size": {
+      "address": "0x20000f28",
+      "bytes": 12
+    },
+    "last_address_and_size": {
+      "address": "0x20000f24",
+      "bytes": 4
+    },
+    "both_registration_call_sites_verified": true,
+    "deep_sleep_type1_root_address": "0x20000f38",
+    "duplicate_custom_registrar_absent": true
+  },
+  "qualification": "The source registration and sleep paths now share callback state at stock RAM addresses. The complete image remains nonidentical to stock and hardware deep sleep has not been validated.",
+  "full_g2_verification": {
+    "source_report": "build/g2-touch-pm-shared-root-full-source-20261111/report.json",
+    "source_report_sha256": "558d23fcac5f2a2dafd6b9a04c2aecbfa0a0df8176d75c3e79afc635110cecac",
+    "compiled_units": 4884,
+    "compile_failures": 0,
+    "duplicate_strong_symbols": 0,
+    "strict_link_report": "build/g2-touch-pm-shared-root-full-link-20261111/link-report.json",
+    "strict_link_report_sha256": "51a924a3e9ebbcc1df836e7d476727f38096a8132c062b090be68eb2e444adb5",
+    "linked_payloads": [
+      "g2-apollo-bootloader",
+      "g2-apollo-main",
+      "g2-case",
+      "g2-codec-a",
+      "g2-codec-b",
+      "g2-em9305",
+      "g2-touch"
+    ],
+    "strict_link_passed": true,
+    "source_completeness_proven": false,
+    "stock_pm_ram_addresses_preserved": true
+  }
+}

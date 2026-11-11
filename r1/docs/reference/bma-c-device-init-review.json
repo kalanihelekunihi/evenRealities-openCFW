@@ -1,0 +1,51 @@
+{
+  "cases": 796,
+  "passed": 796,
+  "failures": [],
+  "stock_entry": "0x543c4",
+  "stock_body_bytes": 64,
+  "source_body_bytes": 62,
+  "stock_remap_address": "0x9a768",
+  "remap_bytes": "000102000000802e",
+  "callback_stack_depth_pairs": [
+    [
+      [
+        -16
+      ],
+      [
+        -16
+      ]
+    ]
+  ],
+  "unchanged_functions": [
+    "r1_bma4_initialize",
+    "r1_bma456w_configure_boundary"
+  ],
+  "report": "build/sources-goal-r1-bma-device-init-verified/report.json",
+  "report_sha256": "248cb964e934607d5b68a27cb1b8c80c43e58d95597f5dac62e82f50933c9ea1",
+  "source_sha256": "846b618e4b82c413c4c3925b1abbe1b9b1235d501c0497ae5d1f969495427d94",
+  "manifest_sha256": "be76bf00509f1551b53a08edbc5515ed3a3dcb9b1721ff4481fdf60b77d82eb8",
+  "stock_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "native_span_sha256": "406ba10732b80b7b272a17a334a0ca79bbd53dbb8286210fd3578f612bce499b",
+  "rea": {
+    "completed": true,
+    "procedure": "0x543c4",
+    "path": "build/goal-r1-bma-device-init/REA.json",
+    "sha256": "c99030d5b1aa647f7ffcc45248b4fa5ff9253f64d35d717485255d4d83cb7e74"
+  },
+  "probe_artifacts": {
+    "build/goal-r1-bma-device-init/verify.py": "2160b0105ce3d7eec89ecfd2d894eafe0d83b8d7016e4e77fd2c58077aedf748",
+    "build/goal-r1-bma-device-init/before.c": "7abda5019f2558b67325ce57be53f64eb1a8f5c513a26ffd97ee1291189df459",
+    "build/goal-r1-bma-device-init/source.elf": "c5035d10f29446f7ca655c7b632c16c155872bbfc2b8b62b3017295b4bc91be0",
+    "build/goal-r1-bma-device-init/stock.elf": "e1e29470f2f1ea1ff62ec3f9f491b392771f10c010567660ddf22421997191b6",
+    "build/goal-r1-bma-device-init/rea-snapshot.json": "a53a9f4b26d367ae2e0c8f2b0733a78ea65f41491f4001b10fb42843a76ac7c5",
+    "build/goal-r1-bma-device-init/check_siblings.py": "0c46c7558fd68a998552a97538947f9c34e3624fb07f633194d3aeb459020ea0",
+    "build/goal-r1-bma-device-init/siblings.json": "7611d5647d38525ba1a7061b39b4e147df3bd7952a73af74801021b2394b626b"
+  },
+  "limits": [
+    "Lower device initializer is modeled and clobbers caller-saved registers; snapshot mutation is probe fault injection, not a claim that stock flash is writable.",
+    "Native and C callbacks use SP-16, but private spill contents are not proven identical.",
+    "Eight-byte remap input retains its existing six attributed bytes plus two independently gated following bytes.",
+    "No physical sensor operation, timing, complete fault-state, final firmware link, source qualification or byte-identity claim."
+  ]
+}

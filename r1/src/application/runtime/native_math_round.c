@@ -1,4 +1,5 @@
 #include <stdint.h>
+#include "native_float_bits.h"
 extern uint64_t r1_binary64_round_integral_bits(uint64_t);
 extern uint32_t r1_binary32_round_integral_bits(uint32_t);
 extern uint64_t r1_binary64_subtract_bits(uint64_t,uint64_t);
@@ -7,15 +8,8 @@ __attribute__((section(".r1.math.round_data"),used))
 const uint64_t r1_native_round_data[3]={UINT64_C(0x3ff0000000000000),UINT64_C(0x3fe0000000000000),UINT64_C(0xbfe0000000000000)};
 static uint32_t compare_status(uint64_t a,uint64_t b,uint32_t reverse)
 {
-    register uint32_t r0 __asm__("r0")=(uint32_t)a,r1 __asm__("r1")=(uint32_t)(a>>32);
-    register uint32_t r2 __asm__("r2")=(uint32_t)b,r3 __asm__("r3")=(uint32_t)(b>>32);
-    uint32_t status;
-    if (reverse) {
-        __asm__ volatile("bl r1_binary64_compare_reverse_flags\n\tmrs %[status],APSR" : [status]"=r"(status),"+r"(r0),"+r"(r1),"+r"(r2),"+r"(r3) : : "lr","cc","memory");
-    } else {
-        __asm__ volatile("bl r1_binary64_compare_flags\n\tmrs %[status],APSR" : [status]"=r"(status),"+r"(r0),"+r"(r1),"+r"(r2),"+r"(r3) : : "lr","cc","memory");
-    }
-    return status;
+    return reverse ? r1_binary64_comparison_cz(b,a) :
+                     r1_binary64_comparison_cz(a,b);
 }
 double r1_native_round(double value)
 {
@@ -38,11 +32,12 @@ double r1_native_round(double value)
     result.bits=(result.bits&UINT64_C(0x7fffffffffffffff))|(input.bits&UINT64_C(0x8000000000000000));
     return result.value;
 }
+#pragma clang fp exceptions(strict)
 float r1_native_roundf(float value)
 {
     union {float value;uint32_t bits;} input={.value=value},result,delta,one={.bits=0x3f800000u};
     result.bits=r1_binary32_round_integral_bits(input.bits);
-    __asm__ volatile("vsub.f32 %0,%1,%2" : "=t"(delta.value) : "t"(value),"t"(result.value));
+    delta.value=value-result.value;
     uint32_t doubled=delta.bits<<1;
     uint32_t subtract,add;
     if (input.bits>>31) {
@@ -52,8 +47,8 @@ float r1_native_roundf(float value)
         subtract=delta.bits>0xbf000000u && doubled<=0xff000000u;
         add=!subtract && (int32_t)delta.bits>=0x3f000000 && doubled<=0xff000000u;
     }
-    if (subtract) __asm__ volatile("vsub.f32 %0,%0,%1" : "+t"(result.value) : "t"(one.value));
-    else if (add) __asm__ volatile("vadd.f32 %0,%0,%1" : "+t"(result.value) : "t"(one.value));
+    if (subtract) result.value-=one.value;
+    else if (add) result.value+=one.value;
     result.bits=(result.bits&0x7fffffffu)|(input.bits&0x80000000u);
     return result.value;
 }

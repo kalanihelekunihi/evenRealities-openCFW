@@ -1,0 +1,62 @@
+{
+  "schema": 1,
+  "target": "locked GX8002 BINH A stage-1 C module lookup",
+  "stock_codec_component": "g2/blobs/official/g2-2.2.6.10/firmware_codec.bin",
+  "stock_codec_component_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+  "stock_stage1_file_offset": "0x95a4",
+  "source": "g2/src/codec/image-a-stage1/main_stage1_clock_gate.c",
+  "source_sha256": "6efb961ed88d78b00fc46775482e65e558e58e23cac3a77ecd9a94d5877ce3c1",
+  "local_sdk_header": "g2/src/codec/image-a-stage1/clk_priv_stage1.h",
+  "local_sdk_header_sha256": "09778135f1c0ffd7f969904ddf0443658464c7810fc4e3cdd5e450c35dbba2c2",
+  "local_sdk_header_origin": "third-party/upstream/nationalchip-lvp-kws/arch/soc/grus/include/clk_priv.h",
+  "local_sdk_header_license": "MIT, Copyright (c) 2024 NationalChip; permission notice preserved in the copy",
+  "sdk_change": "Stage the direct-table candidate pointer and module comparison before clearing info->param; all other pinned SDK header lines are unchanged.",
+  "stock_identical_c_function": {
+    "name": "__module_get_info",
+    "address": "0x10000160",
+    "bytes": 164,
+    "sha256": "0f629a6637a1530cddcce97a8fb48fbc376e7a17d48a89db9abb59509cda38b5"
+  },
+  "source_stage1": {
+    "bytes": 4756,
+    "sha256": "62f4cb42b6ddc76dde24270995c6e81ec73c66e88a02363243448260d2c98b9f",
+    "probe_binary_identical": true,
+    "same_offset_equal_bytes_before": 2212,
+    "same_offset_equal_bytes_after": 2228,
+    "previous_exact_clock_source_and_clock_gate_preserved": true,
+    "vectors_and_initialized_data_match_stock": true
+  },
+  "verification": {
+    "focused_source_report": "build/g2-module-lookup-source-20261111/report.json",
+    "focused_source_report_sha256": "ee2c8c346d399663edc1e6daf18ff0c24aa8d0c5737e7a331e7bafe585262fc4",
+    "focused_compile_units": 367,
+    "focused_compile_failures": 0,
+    "focused_duplicate_strong_symbols": 0,
+    "focused_unresolved_symbols": 0,
+    "focused_link_report": "build/g2-module-lookup-link-20261111/link-report.json",
+    "focused_link_report_sha256": "ef9a637b49fe9d6c8084edb49756cf7a45d3760a4fc0783d490e41dab39e0c12",
+    "source_linker_checks_six_exact_c_ranges": true
+  },
+  "qualification": "The C module lookup now occupies its locked address and matches all function bytes. Other stage-1 code, the complete codec and OTA, trained model weights, and hardware behavior remain unverified.",
+  "full_g2_verification": {
+    "source_report": "build/g2-touch-crt-exit-full-source-20261111/report.json",
+    "source_report_sha256": "8730f98741eeb1ab291ffcbe0ca357c0e8d76c0ca51573953b063591337e31c1",
+    "payload_count": 7,
+    "compiled_units": 4884,
+    "compile_failures": 0,
+    "duplicate_strong_symbols": 0,
+    "strict_link_report": "build/g2-touch-crt-exit-full-link-20261111/link-report.json",
+    "strict_link_report_sha256": "76e8b0d38d5047135aab6f0530dc39d72c7df0ebfd1cc8308926a48c0e44f672",
+    "linked_payloads": [
+      "g2-apollo-bootloader",
+      "g2-apollo-main",
+      "g2-case",
+      "g2-codec-a",
+      "g2-codec-b",
+      "g2-em9305",
+      "g2-touch"
+    ],
+    "strict_link_passed": true,
+    "source_completeness_proven": false
+  }
+}

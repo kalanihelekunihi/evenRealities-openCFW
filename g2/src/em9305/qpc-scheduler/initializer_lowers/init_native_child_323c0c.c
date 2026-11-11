@@ -1,80 +1,32 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_323c0c\n"
-".type opencfw_em9305_child_323c0c,@function\n"
-"opencfw_em9305_child_323c0c:\n"
-"L323c0c:\n"
-"enter_s [r13-r17,fp,blink]\n"
-"L323c0e:\n"
-"sub_s sp,sp,0xc\n"
-"L323c10:\n"
-"mov_s r17,r1\n"
-"L323c12:\n"
-"mov_s r13,r0\n"
-"L323c14:\n"
-"mov_s r1,0x805a84\n"
-"L323c1a:\n"
-"mov_s r0,0\n"
-"L323c1c:\n"
-"add r14,r13,0x9d4\n"
-"L323c24:\n"
-"ld_s r15,[r1,0]\n"
-"L323c26:\n"
-"mov_s r16,r2\n"
-"L323c28:\n"
-"stb_s r0,[sp,0x8]\n"
-"L323c2a:\n"
-"stb r0,[sp,7]\n"
-"L323c2e:\n"
-"stb r0,[sp,6]\n"
-"L323c32:\n"
-"stb r0,[sp,5]\n"
-"L323c36:\n"
-"add_s r0,sp,0x4\n"
-"L323c38:\n"
-"mov_s r1,r14\n"
-"L323c3a:\n"
-"mov_s r2,r13\n"
-"L323c3c:\n"
-"bl.d opencfw_em9305_child_318440\n"
-"L323c40:\n"
-"stb 7,[sp,4]\n"
-"L323c44:\n"
-"add_s r0,sp,0x4\n"
-"L323c46:\n"
-"mov_s r1,r14\n"
-"L323c48:\n"
-"bl.d opencfw_em9305_child_3184f4\n"
-"L323c4c:\n"
-"mov_s r2,r13\n"
-"L323c4e:\n"
-"btst_s r15,0xb\n"
-"L323c50:\n"
-"mov_s r1,0x9\n"
-"L323c52:\n"
-"mov_s r0,r13\n"
-"L323c54:\n"
-"add r13,r13,1696\n"
-"L323c58:\n"
-"add r4,sp,0x4\n"
-"L323c5c:\n"
-"mov.eq r1,0x1\n"
-"L323c60:\n"
-"mov_s r2,0x50\n"
-"L323c62:\n"
-"mov_s r3,0\n"
-"L323c64:\n"
-"mov_s r7,3\n"
-"L323c66:\n"
-"mov r6,r17\n"
-"L323c6a:\n"
-"mov_s r5,r13\n"
-"L323c6c:\n"
-"bl.d opencfw_em9305_radio_compose_323dc0\n"
-"L323c70:\n"
-"st r16,[sp]\n"
-"L323c74:\n"
-"leave_s [r13-r17,fp,blink,pcl]\n"
-".size opencfw_em9305_child_323c0c,.-opencfw_em9305_child_323c0c\n"
-);
+#include <stdint.h>
+
+/* Native 0x323c0c..0x323c76: compose a type-3 radio PDU for the record.
+ * A 5-byte header (7, then zeros) is filled by children 318440 and
+ * 3184f4 from the record's request block (+2516); the compose call is
+ * forced to 9 when bit 11 of the controller options (*0x805a84) is set,
+ * otherwise 1, with 0x50 allowed bits, no prefix and source +1696. */
+extern uint32_t opencfw_em9305_child_318440(uintptr_t link,uintptr_t params,
+                                            uintptr_t request);
+extern void opencfw_em9305_child_3184f4(uintptr_t out,uintptr_t link,
+                                        uintptr_t request);
+extern uint32_t opencfw_em9305_radio_compose_323dc0(uintptr_t record,
+    uint32_t forced,uint32_t allowed,uint32_t prefix,uintptr_t header,
+    uintptr_t source,uintptr_t output,uint32_t type,uint32_t count);
+
+uint32_t opencfw_em9305_child_323c0c(uintptr_t record,uintptr_t output,
+                                     uint32_t count)
+{
+    _Alignas(4) uint8_t header[8];
+    uintptr_t request=record+0x9d4u;
+    uint32_t options=*(volatile uint32_t *)0x805a84u;
+    header[4]=0u;
+    header[3]=0u;
+    header[2]=0u;
+    header[1]=0u;
+    header[0]=7u;
+    (void)opencfw_em9305_child_318440((uintptr_t)header,request,record);
+    opencfw_em9305_child_3184f4((uintptr_t)header,request,record);
+    uint32_t forced=(options&0x800u)!=0u?9u:1u;
+    return opencfw_em9305_radio_compose_323dc0(record,forced,0x50u,0u,
+        (uintptr_t)header,record+1696u,output,3u,count);
+}

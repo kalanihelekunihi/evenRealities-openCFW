@@ -1,43 +1,16 @@
-/* Native queue peek/remove including delayed argument stores. */
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_dispatch_child_3174d8\n"
-".type opencfw_em9305_dispatch_child_3174d8,@function\n"
-"opencfw_em9305_dispatch_child_3174d8:\n"
-"L3174d8:\n"
-"enter_s [r13-r14,fp,blink]\n"
-"L3174da:\n"
-"sub_s sp,sp,0x4\n"
-"L3174dc:\n"
-"add r13,r0,0x8\n"
-"L3174e0:\n"
-"mov_s r14,r1\n"
-"L3174e2:\n"
-"add r1,sp,0x3\n"
-"L3174e6:\n"
-"bl.d opencfw_em9305_wsf_event_peek\n"
-"L3174ea:\n"
-"mov_s r0,r13\n"
-"L3174ec:\n"
-"mov_s r1,0\n"
-"L3174ee:\n"
-"breq_s r0,0,L317504\n"
-"L3174f0:\n"
-"ldb r0,[sp,3]\n"
-"L3174f4:\n"
-"brne.d.nt r0,r14,L317504\n"
-"L3174f8:\n"
-"mov_s r0,r13\n"
-"L3174fa:\n"
-"bl.d opencfw_em9305_wsf_event_remove\n"
-"L3174fe:\n"
-"add r1,sp,0x3\n"
-"L317502:\n"
-"add_s r1,r0,0xa\n"
-"L317504:\n"
-"mov_s r0,r1\n"
-"L317506:\n"
-"leave_s [r13-r14,fp,blink,pcl]\n"
-".size opencfw_em9305_dispatch_child_3174d8,.-opencfw_em9305_dispatch_child_3174d8\n"
-);
+#include <stdint.h>
+
+/* Native 0x3174d8..0x317508: if the head event of the queue at
+ * object + 8 has the requested tag, remove it and return its payload
+ * (event + 10); otherwise return 0. */
+extern uintptr_t opencfw_em9305_wsf_event_peek(uintptr_t queue,uintptr_t out_u8);
+extern uintptr_t opencfw_em9305_wsf_event_remove(uintptr_t queue,uintptr_t out_u8);
+
+uintptr_t opencfw_em9305_dispatch_child_3174d8(uintptr_t object,uint32_t tag)
+{
+    uintptr_t queue=object+8u;
+    uint8_t found;
+    if(opencfw_em9305_wsf_event_peek(queue,(uintptr_t)&found)==0u)return 0u;
+    if(found!=tag)return 0u;
+    return opencfw_em9305_wsf_event_remove(queue,(uintptr_t)&found)+10u;
+}

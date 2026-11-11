@@ -1,0 +1,61 @@
+{
+  "report": "build/sources-goal-r1-pmic-retry-c/report.json",
+  "units": 815,
+  "application_imports": 70,
+  "import_set_unchanged": true,
+  "verification": {
+    "direct_stock_C_pairs": 288,
+    "actual_scheduler_registration_pairs": 128,
+    "actual_expiry_dispatch_rearm_roundtrips": 64,
+    "actual_battery_flag_wrapper_and_shared_thread_owner": true,
+    "actual_schedule_reschedule_push_worker_and_state": true,
+    "RTOS_time_lock_timer_queue_and_flag_leaves_modeled": true,
+    "raw_scheduler_delay_preserved": true,
+    "ordinary_C_ABI_private_frames_and_void_outputs_excluded": true
+  },
+  "compiled_defects": [
+    {
+      "defect": "wrong-delay",
+      "rejected": true
+    },
+    {
+      "defect": "wrong-flag",
+      "rejected": true
+    },
+    {
+      "defect": "forward-argument",
+      "rejected": true
+    },
+    {
+      "defect": "missing-schedule",
+      "rejected": true
+    },
+    {
+      "defect": "signal-before-rearm",
+      "rejected": true
+    }
+  ],
+  "prior_objects_identical": 812,
+  "generated_object_hash_changes": [
+    "{gen}/r1_startup_vectors.S",
+    "{gen}/r1_uecc.c"
+  ],
+  "rea_evidence_id": "ev_ebc7e2833868de9b9b64502a6b31d02756120ff62fb0fa9cffbfa249d393c0f3",
+  "evidence_files": {
+    "build/goal-r1-pmic-retry-c/verify.py": "456267f7fed2338b35847f5206039d179d364274cc11e02c3dbce612722e23ac",
+    "build/goal-r1-pmic-retry-c/verification.json": "5c06aa0ff34034fe9e868b5916b598c0f58f03d50f256a849a11dab2916bd3d4",
+    "build/goal-r1-pmic-retry-c/verify-final.log": "5f9d371478ac94e77e06bba81b87ce15f2c681c451e477e2f6ea47e1dc2ad9f2",
+    "build/goal-r1-pmic-retry-c/defects.py": "bd5d51696eb2583af03875e385a8b54ce8bad5177537120c6c5353dfd6c9dec8",
+    "build/goal-r1-pmic-retry-c/defects.json": "a98d46a1adb0a647603fcb8a9b7a852b54adf8fc74f0d80790af4cd96b5009f9",
+    "build/goal-r1-pmic-retry-c/rea.json": "8abb630816bdec9f50810a4bca9451947bc8f03fe09185cec6ac3b1e97b449e5",
+    "build/sources-goal-r1-pmic-retry-c/report.json": "4de018560fac83b7756a3f0fa9d9ae399eae22f336ca75be73d6a5ae0666e909",
+    "r1/src/sources.json": "16e42d366744c800e40d65395695bd081b01d1b6b06e3a23aed19da14700ec89",
+    "r1/src/application/runtime/native_pmic_retry.c": "9bf7a800021a2a9b76c0a35ed8b6293e298242ce29438b0e406cd91504b251e7"
+  },
+  "limitations": [
+    "Raw scheduler delay 0x199; no invented wall-clock conversion.",
+    "RTOS timer, time, locks, flags and queue leaves modeled; actual scheduler and task flag wrapper execute.",
+    "NFC flag dispatcher and PMIC charge/charged policy bodies remain incomplete.",
+    "Final application link, startup RAM layout and device behavior unverified."
+  ]
+}

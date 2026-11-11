@@ -1,0 +1,934 @@
+{
+  "source": {
+    "source": "r1/src/application/board/native_event_callbacks.c",
+    "payload": "r1-application",
+    "role": "candidate",
+    "toolchain": "clang",
+    "link": true,
+    "expect": "compile",
+    "returncode": 0,
+    "argv": [
+      "/usr/bin/clang",
+      "--target=arm-none-eabi",
+      "-mcpu=cortex-m4",
+      "-mthumb",
+      "-munaligned-access",
+      "-mfloat-abi=hard",
+      "-mfpu=fpv4-sp-d16",
+      "-std=c11",
+      "-Os",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-fshort-enums",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-MD",
+      "-MF",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-event-veneers-c/r1/r1-application/r1__src__application__board__native_event_callbacks.c.d",
+      "-c",
+      "/Users/kalani/Repo/evenRealities-openCFW/r1/src/application/board/native_event_callbacks.c",
+      "-o",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-event-veneers-c/r1/r1-application/r1__src__application__board__native_event_callbacks.c.o"
+    ],
+    "source_sha256": "5e086ca60134c74d5026a73971ca5ac94f660bc24e3424c496da509a0402bb8b",
+    "object_sha256": "9dcd61a978f8daea7ae400ceba7cb3cb346f5d85a62fe66e5c9f2981a0063368",
+    "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-event-veneers-c/r1/r1-application/r1__src__application__board__native_event_callbacks.c.o",
+    "strong": [
+      "r1_event_callback_00042108",
+      "r1_event_callback_0004210c",
+      "r1_event_callback_00042118",
+      "r1_event_callback_00042122",
+      "r1_event_callback_00042128",
+      "r1_event_callback_000421c0",
+      "r1_event_callback_000421c4",
+      "r1_event_callback_00042244",
+      "r1_event_callback_000422c8",
+      "r1_event_callback_00042350",
+      "r1_event_callback_000423d4",
+      "r1_event_callback_000423d8",
+      "r1_event_callback_00042474",
+      "r1_event_callback_00042514",
+      "r1_event_callback_000425b0",
+      "r1_event_callback_00042788",
+      "r1_event_callback_00042840",
+      "r1_event_callback_00042856",
+      "r1_event_callback_00042860",
+      "r1_event_callback_0004286e",
+      "r1_event_callback_0004287c",
+      "r1_event_callback_00042896",
+      "r1_event_callback_000428a4",
+      "r1_event_callback_000428b2",
+      "r1_event_callback_000428b4",
+      "r1_event_callback_00042960",
+      "r1_event_callback_00042964",
+      "r1_event_callback_0004296a",
+      "r1_event_callback_00042978",
+      "r1_event_callback_00042a10",
+      "r1_event_callback_00042a20",
+      "r1_event_callback_00042b20",
+      "r1_event_callback_00042bb0",
+      "r1_event_callback_00042bbe",
+      "r1_event_callback_00042bc2",
+      "r1_event_callback_00042bc6",
+      "r1_event_callback_00042bca",
+      "r1_event_text_42180",
+      "r1_event_text_421a8",
+      "r1_event_text_42214",
+      "r1_event_text_42234",
+      "r1_event_text_42294",
+      "r1_event_text_422b4",
+      "r1_event_text_42318",
+      "r1_event_text_4233c",
+      "r1_event_text_423a0",
+      "r1_event_text_423c0",
+      "r1_event_text_42430",
+      "r1_event_text_42458",
+      "r1_event_text_424cc",
+      "r1_event_text_424f8",
+      "r1_event_text_4256c",
+      "r1_event_text_42594",
+      "r1_event_text_42710",
+      "r1_event_text_42724",
+      "r1_event_text_42738",
+      "r1_event_text_42750",
+      "r1_event_text_42760",
+      "r1_event_text_42778",
+      "r1_event_text_427f4",
+      "r1_event_text_42820",
+      "r1_event_text_42920",
+      "r1_event_text_42948",
+      "r1_event_text_429cc",
+      "r1_event_text_429f4",
+      "r1_event_text_42ab4",
+      "r1_event_text_42af0",
+      "r1_event_text_42b74",
+      "r1_event_text_42b98"
+    ],
+    "weak": [],
+    "undefined": [
+      "nrf_log_frontend_std_1",
+      "nrf_log_frontend_std_2",
+      "nrf_log_frontend_std_3",
+      "nrf_log_frontend_std_4",
+      "nrf_log_frontend_std_5",
+      "r1_authenticated_phone_connection_gate",
+      "r1_event_service_00049068",
+      "r1_event_service_000496fc",
+      "r1_event_service_000497cc",
+      "r1_event_service_000499c4",
+      "r1_event_service_0004a4b4",
+      "r1_event_service_0004a5bc",
+      "r1_event_service_0004aaf8",
+      "r1_event_service_0004ad7c",
+      "r1_event_service_0004b33e",
+      "r1_event_service_0004b48c",
+      "r1_event_service_0004b6c0",
+      "r1_event_service_0004bab4",
+      "r1_event_service_0004c4b8",
+      "r1_event_service_0005e0de",
+      "r1_event_service_0006b724",
+      "r1_event_service_0006c66c",
+      "r1_event_service_000735e0",
+      "r1_event_service_0007c52c",
+      "r1_event_service_000838e0",
+      "r1_event_service_0008a7f4",
+      "r1_event_service_0008a80a",
+      "r1_event_service_0008a83e",
+      "r1_event_service_0008a8ae",
+      "r1_event_service_0008a8d8",
+      "r1_event_service_0008a8fc",
+      "r1_event_service_0008aea4",
+      "r1_event_service_0008aeb0",
+      "r1_event_service_0008b028",
+      "r1_event_service_0008b0fc",
+      "r1_event_service_0008b378",
+      "r1_event_service_0008b8e8",
+      "r1_event_service_0008d380",
+      "r1_event_service_0008dc94",
+      "r1_event_service_0008dd88",
+      "r1_event_service_0008dd90",
+      "r1_event_service_0008e154",
+      "r1_event_service_0008e1e0",
+      "r1_event_service_0008e274",
+      "r1_event_service_0008e552",
+      "r1_event_service_0008e55c",
+      "r1_event_service_000914a0",
+      "r1_structured_log_format",
+      "r1_structured_log_mode_get",
+      "r1_time_backend_timestamp"
+    ]
+  },
+  "normal_report": "build/sources-goal-r1-event-veneers-c/report.json",
+  "converted_entries": [
+    {
+      "entry": "0x42108",
+      "service": "0x49068"
+    },
+    {
+      "entry": "0x421c0",
+      "service": "0x4a5bc"
+    },
+    {
+      "entry": "0x423d4",
+      "service": "0x4a4b4"
+    },
+    {
+      "entry": "0x42bbe",
+      "service": "0x7c52c"
+    },
+    {
+      "entry": "0x42122",
+      "service": "0x496fc"
+    },
+    {
+      "entry": "0x428b2",
+      "service": null
+    }
+  ],
+  "validation": {
+    "paired_cases": 3264,
+    "cases_per_entry": 544,
+    "entries": [
+      {
+        "entry": "0x42108",
+        "service": "0x49068"
+      },
+      {
+        "entry": "0x421c0",
+        "service": "0x4a5bc"
+      },
+      {
+        "entry": "0x423d4",
+        "service": "0x4a4b4"
+      },
+      {
+        "entry": "0x42bbe",
+        "service": "0x7c52c"
+      },
+      {
+        "entry": "0x42122",
+        "service": "0x496fc"
+      },
+      {
+        "entry": "0x428b2",
+        "service": null
+      }
+    ],
+    "source_object_sha256": "9dcd61a978f8daea7ae400ceba7cb3cb346f5d85a62fe66e5c9f2981a0063368",
+    "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "all_integer_registers_compared": true,
+    "APSR_masks_CONTROL_FPSCR_and_S0_S31_compared": true,
+    "no_RAM_writes": true,
+    "limits": [
+      "Execution ends at the unresolved service entry or normal no-op return",
+      "No provider implementation or physical hardware behavior established"
+    ]
+  },
+  "negative_controls": [
+    {
+      "name": "truncate-length",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "omit-low-byte",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "truncate-all",
+      "compiled": true,
+      "rejected": true
+    }
+  ],
+  "audit": {
+    "units": 618,
+    "other_objects_identical": 617,
+    "converted_functions": 6,
+    "allocated_sections_and_semantic_relocations_identical": [
+      ".text",
+      ".text.r1_event_callback_00042108",
+      ".ARM.exidx.text.r1_event_callback_00042108",
+      ".text.r1_event_callback_0004210c",
+      ".ARM.exidx.text.r1_event_callback_0004210c",
+      ".text.r1_event_callback_00042118",
+      ".ARM.exidx.text.r1_event_callback_00042118",
+      ".text.r1_event_callback_00042122",
+      ".ARM.exidx.text.r1_event_callback_00042122",
+      ".text.r1_event_callback_00042128",
+      ".ARM.exidx.text.r1_event_callback_00042128",
+      ".text.r1_event_callback_000421c0",
+      ".ARM.exidx.text.r1_event_callback_000421c0",
+      ".text.r1_event_callback_000421c4",
+      ".ARM.exidx.text.r1_event_callback_000421c4",
+      ".text.r1_event_callback_00042244",
+      ".ARM.exidx.text.r1_event_callback_00042244",
+      ".text.r1_event_callback_000422c8",
+      ".ARM.exidx.text.r1_event_callback_000422c8",
+      ".text.r1_event_callback_00042350",
+      ".ARM.exidx.text.r1_event_callback_00042350",
+      ".text.r1_event_callback_000423d4",
+      ".ARM.exidx.text.r1_event_callback_000423d4",
+      ".text.r1_event_callback_000423d8",
+      ".ARM.exidx.text.r1_event_callback_000423d8",
+      ".text.r1_event_callback_00042474",
+      ".ARM.exidx.text.r1_event_callback_00042474",
+      ".text.r1_event_callback_00042514",
+      ".ARM.exidx.text.r1_event_callback_00042514",
+      ".text.r1_event_callback_000425b0",
+      ".ARM.exidx.text.r1_event_callback_000425b0",
+      ".text.r1_event_callback_00042788",
+      ".ARM.exidx.text.r1_event_callback_00042788",
+      ".text.r1_event_callback_00042840",
+      ".ARM.exidx.text.r1_event_callback_00042840",
+      ".text.r1_event_callback_00042856",
+      ".ARM.exidx.text.r1_event_callback_00042856",
+      ".text.r1_event_callback_00042860",
+      ".ARM.exidx.text.r1_event_callback_00042860",
+      ".text.r1_event_callback_0004286e",
+      ".ARM.exidx.text.r1_event_callback_0004286e",
+      ".text.r1_event_callback_0004287c",
+      ".ARM.exidx.text.r1_event_callback_0004287c",
+      ".text.r1_event_callback_00042896",
+      ".ARM.exidx.text.r1_event_callback_00042896",
+      ".text.r1_event_callback_000428a4",
+      ".ARM.exidx.text.r1_event_callback_000428a4",
+      ".text.r1_event_callback_000428b2",
+      ".ARM.exidx.text.r1_event_callback_000428b2",
+      ".text.r1_event_callback_000428b4",
+      ".ARM.exidx.text.r1_event_callback_000428b4",
+      ".text.r1_event_callback_00042960",
+      ".ARM.exidx.text.r1_event_callback_00042960",
+      ".text.r1_event_callback_00042964",
+      ".ARM.exidx.text.r1_event_callback_00042964",
+      ".text.r1_event_callback_0004296a",
+      ".ARM.exidx.text.r1_event_callback_0004296a",
+      ".text.r1_event_callback_00042978",
+      ".ARM.exidx.text.r1_event_callback_00042978",
+      ".text.r1_event_callback_00042a10",
+      ".ARM.exidx.text.r1_event_callback_00042a10",
+      ".text.r1_event_callback_00042a20",
+      ".ARM.exidx.text.r1_event_callback_00042a20",
+      ".text.r1_event_callback_00042b20",
+      ".ARM.exidx.text.r1_event_callback_00042b20",
+      ".text.r1_event_callback_00042bb0",
+      ".ARM.exidx.text.r1_event_callback_00042bb0",
+      ".text.r1_event_callback_00042bbe",
+      ".ARM.exidx.text.r1_event_callback_00042bbe",
+      ".text.r1_event_callback_00042bc2",
+      ".ARM.exidx.text.r1_event_callback_00042bc2",
+      ".text.r1_event_callback_00042bc6",
+      ".ARM.exidx.text.r1_event_callback_00042bc6",
+      ".text.r1_event_callback_00042bca",
+      ".ARM.exidx.text.r1_event_callback_00042bca",
+      ".r1.event.s42180",
+      ".r1.event.s421a8",
+      ".r1.event.s42214",
+      ".r1.event.s42234",
+      ".r1.event.s42294",
+      ".r1.event.s422b4",
+      ".r1.event.s42318",
+      ".r1.event.s4233c",
+      ".r1.event.s423a0",
+      ".r1.event.s423c0",
+      ".r1.event.s42430",
+      ".r1.event.s42458",
+      ".r1.event.s424cc",
+      ".r1.event.s424f8",
+      ".r1.event.s4256c",
+      ".r1.event.s42594",
+      ".r1.event.s42710",
+      ".r1.event.s42738",
+      ".r1.event.s42750",
+      ".r1.event.s42760",
+      ".r1.event.s42778",
+      ".r1.event.s427f4",
+      ".r1.event.s42820",
+      ".r1.event.s42920",
+      ".r1.event.s42948",
+      ".r1.event.s429cc",
+      ".r1.event.s429f4",
+      ".r1.event.s42ab4",
+      ".r1.event.s42af0",
+      ".r1.event.s42b74",
+      ".r1.event.s42b98"
+    ],
+    "manifest_unchanged": true,
+    "unresolved": {
+      "r1-application": 167,
+      "r1-bootloader": 34
+    },
+    "canonical_source_plan_promoted": true,
+    "added_exact_bytes": 2,
+    "hybrid_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "totals": {
+      "binary-pull-through": 641887,
+      "source-built": 4273,
+      "resource-file": 248
+    }
+  },
+  "qualification": {
+    "candidate_units": 1,
+    "compiled_units": 1,
+    "units": [
+      {
+        "source": "r1/src/application/board/native_event_callbacks.c",
+        "payload": "r1-application",
+        "evidence": "r1/symbols/function-frontier.csv",
+        "selected": [
+          {
+            "payload": "r1-application",
+            "symbol": "r1_event_callback_000428b2",
+            "start": 112818,
+            "end": 112820,
+            "sha256": "c7dfbb7d02759eacb64dbc916c1bb6f21eabaff1c1032ea5c9176abf7fd28df8",
+            "evidence": "r1/symbols/function-frontier.csv"
+          }
+        ],
+        "compiled": true,
+        "rejections": {
+          "anchored_relocation_pattern_not_exact": 5
+        },
+        "source_implementation_completeness": "not established by compilation or byte matching",
+        "reason": "exact selected bodies"
+      }
+    ]
+  },
+  "qualification_scope": "Only the six converted functions; other functions in the object excluded from qualification",
+  "REA": [
+    {
+      "evidence_id": "ev_76279e1984a273581768c815316a46bb709d542f5dc694e31e6ccbbab876025c",
+      "subject": {
+        "name": "stock.elf",
+        "digest": {
+          "sha256": "25b4a29af80ec8edab5bd861ba9b74a6e22eab29dc3d7a809a16869e8a140f04"
+        },
+        "local_path": "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-queue-reset-c/stock.elf",
+        "format": "elf",
+        "architecture": "arm"
+      },
+      "provider": {
+        "id": "ghidra",
+        "name": "Ghidra",
+        "version": "12.1.4"
+      },
+      "analysis_profile": {
+        "provider": {
+          "id": "ghidra",
+          "name": "Ghidra",
+          "version": "12.1.4"
+        },
+        "parameters": {
+          "target_kind": "executable",
+          "target_format": "elf",
+          "architecture": "arm",
+          "available_architectures": [
+            "arm"
+          ],
+          "import_mode": "ephemeral-source-immutable",
+          "annotation_policy": "atomic-function-entry-metadata-v1",
+          "load_image_observations": "source-mappings-entry-context-v2",
+          "function_body_evidence": "complete-inclusive-ranges-v1",
+          "function_references": "complete-body-and-entry-reference-manager-v2",
+          "call_relationship_coverage": "function-body-call-coverage-v5",
+          "function_dossier_coverage": "observed-facets-and-call-relationships-v1",
+          "string_inventory_evidence": "defined-data-coverage-v1",
+          "location_resolution": "explicit-address-exact-entry-symbol-first-v3",
+          "procedure_file_offset_resolution": "address-first-unique-target-source-mapping-v2",
+          "instruction_flow_evidence": "decoded-return-pcode-v1",
+          "instruction_references": "exact-address-incoming-v1",
+          "function_boundary_observations": "ghidra-function-boundary-limitations-v3",
+          "no_return_repair": "returning-imports-decoded-return-v2",
+          "process_launch": "inspected-jvm-launch-support-v1",
+          "jump_table_evidence": "typed-case-default-blocks-v1",
+          "decompiler_jump_loads": true,
+          "loader": "auto-from-header",
+          "language_id": "auto-from-header",
+          "compiler_spec_id": "auto-default",
+          "analyzer_preset": "ghidra-default"
+        },
+        "digest": "7e46711069eea041af1b9b99e34115c13332795e5cda76e584a722f529ec70de"
+      },
+      "predicate_type": "rea.analysis",
+      "operation": "read_bytes",
+      "parameters": {
+        "address": "0x42108",
+        "length": 4
+      },
+      "raw_result": {
+        "address": "0x42108",
+        "requested_bytes": 4,
+        "returned_bytes": 4,
+        "bytes_hex": "06f0aebf",
+        "complete": true
+      },
+      "normalized_result": {
+        "address": "0x42108",
+        "requested_bytes": 4,
+        "returned_bytes": 4,
+        "bytes_hex": "06f0aebf",
+        "complete": true
+      },
+      "confidence": "observed",
+      "authority": "shipped-artifact",
+      "environment": null,
+      "limitations": [
+        "The session serves operations only after Ghidra reports default auto-analysis complete; incomplete analysis does not expose partial results.",
+        "The imported Program and temporary project are ephemeral and deleted on close. Annotation operations edit session database metadata; original executable bytes are never written.",
+        "Cancelling an active Ghidra request terminates its ephemeral database and discards session annotations. The selected target remains open; the next provider query imports the original artifact again.",
+        "Default-space addresses use lowercase 0x-prefixed hexadecimal; other address spaces use <percent-encoded-space>:0x<hex>.",
+        "Bytes reflect Ghidra's initialized memory, including loader fixups. Reads stop at an unmapped or uninitialized byte and report completeness explicitly.",
+        "macOS sessions require a matching executable Ghidra native decompiler; REA checks for it but does not build native components or change Gatekeeper quarantine state."
+      ],
+      "relationship_coverage": null,
+      "locations": [],
+      "evidence_links": []
+    },
+    {
+      "evidence_id": "ev_4b81684fce035b36a24af896dd1ce2378eb172c1794217a7eca5039433490ab2",
+      "subject": {
+        "name": "stock.elf",
+        "digest": {
+          "sha256": "25b4a29af80ec8edab5bd861ba9b74a6e22eab29dc3d7a809a16869e8a140f04"
+        },
+        "local_path": "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-queue-reset-c/stock.elf",
+        "format": "elf",
+        "architecture": "arm"
+      },
+      "provider": {
+        "id": "ghidra",
+        "name": "Ghidra",
+        "version": "12.1.4"
+      },
+      "analysis_profile": {
+        "provider": {
+          "id": "ghidra",
+          "name": "Ghidra",
+          "version": "12.1.4"
+        },
+        "parameters": {
+          "target_kind": "executable",
+          "target_format": "elf",
+          "architecture": "arm",
+          "available_architectures": [
+            "arm"
+          ],
+          "import_mode": "ephemeral-source-immutable",
+          "annotation_policy": "atomic-function-entry-metadata-v1",
+          "load_image_observations": "source-mappings-entry-context-v2",
+          "function_body_evidence": "complete-inclusive-ranges-v1",
+          "function_references": "complete-body-and-entry-reference-manager-v2",
+          "call_relationship_coverage": "function-body-call-coverage-v5",
+          "function_dossier_coverage": "observed-facets-and-call-relationships-v1",
+          "string_inventory_evidence": "defined-data-coverage-v1",
+          "location_resolution": "explicit-address-exact-entry-symbol-first-v3",
+          "procedure_file_offset_resolution": "address-first-unique-target-source-mapping-v2",
+          "instruction_flow_evidence": "decoded-return-pcode-v1",
+          "instruction_references": "exact-address-incoming-v1",
+          "function_boundary_observations": "ghidra-function-boundary-limitations-v3",
+          "no_return_repair": "returning-imports-decoded-return-v2",
+          "process_launch": "inspected-jvm-launch-support-v1",
+          "jump_table_evidence": "typed-case-default-blocks-v1",
+          "decompiler_jump_loads": true,
+          "loader": "auto-from-header",
+          "language_id": "auto-from-header",
+          "compiler_spec_id": "auto-default",
+          "analyzer_preset": "ghidra-default"
+        },
+        "digest": "7e46711069eea041af1b9b99e34115c13332795e5cda76e584a722f529ec70de"
+      },
+      "predicate_type": "rea.analysis",
+      "operation": "read_bytes",
+      "parameters": {
+        "address": "0x421c0",
+        "length": 4
+      },
+      "raw_result": {
+        "address": "0x421c0",
+        "requested_bytes": 4,
+        "returned_bytes": 4,
+        "bytes_hex": "08f0fcb9",
+        "complete": true
+      },
+      "normalized_result": {
+        "address": "0x421c0",
+        "requested_bytes": 4,
+        "returned_bytes": 4,
+        "bytes_hex": "08f0fcb9",
+        "complete": true
+      },
+      "confidence": "observed",
+      "authority": "shipped-artifact",
+      "environment": null,
+      "limitations": [
+        "The session serves operations only after Ghidra reports default auto-analysis complete; incomplete analysis does not expose partial results.",
+        "The imported Program and temporary project are ephemeral and deleted on close. Annotation operations edit session database metadata; original executable bytes are never written.",
+        "Cancelling an active Ghidra request terminates its ephemeral database and discards session annotations. The selected target remains open; the next provider query imports the original artifact again.",
+        "Default-space addresses use lowercase 0x-prefixed hexadecimal; other address spaces use <percent-encoded-space>:0x<hex>.",
+        "Bytes reflect Ghidra's initialized memory, including loader fixups. Reads stop at an unmapped or uninitialized byte and report completeness explicitly.",
+        "macOS sessions require a matching executable Ghidra native decompiler; REA checks for it but does not build native components or change Gatekeeper quarantine state."
+      ],
+      "relationship_coverage": null,
+      "locations": [],
+      "evidence_links": []
+    },
+    {
+      "evidence_id": "ev_fb30eea6a372afb6625513c687926ed72dc3f637970dd677701ebbe9f4ff2678",
+      "subject": {
+        "name": "stock.elf",
+        "digest": {
+          "sha256": "25b4a29af80ec8edab5bd861ba9b74a6e22eab29dc3d7a809a16869e8a140f04"
+        },
+        "local_path": "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-queue-reset-c/stock.elf",
+        "format": "elf",
+        "architecture": "arm"
+      },
+      "provider": {
+        "id": "ghidra",
+        "name": "Ghidra",
+        "version": "12.1.4"
+      },
+      "analysis_profile": {
+        "provider": {
+          "id": "ghidra",
+          "name": "Ghidra",
+          "version": "12.1.4"
+        },
+        "parameters": {
+          "target_kind": "executable",
+          "target_format": "elf",
+          "architecture": "arm",
+          "available_architectures": [
+            "arm"
+          ],
+          "import_mode": "ephemeral-source-immutable",
+          "annotation_policy": "atomic-function-entry-metadata-v1",
+          "load_image_observations": "source-mappings-entry-context-v2",
+          "function_body_evidence": "complete-inclusive-ranges-v1",
+          "function_references": "complete-body-and-entry-reference-manager-v2",
+          "call_relationship_coverage": "function-body-call-coverage-v5",
+          "function_dossier_coverage": "observed-facets-and-call-relationships-v1",
+          "string_inventory_evidence": "defined-data-coverage-v1",
+          "location_resolution": "explicit-address-exact-entry-symbol-first-v3",
+          "procedure_file_offset_resolution": "address-first-unique-target-source-mapping-v2",
+          "instruction_flow_evidence": "decoded-return-pcode-v1",
+          "instruction_references": "exact-address-incoming-v1",
+          "function_boundary_observations": "ghidra-function-boundary-limitations-v3",
+          "no_return_repair": "returning-imports-decoded-return-v2",
+          "process_launch": "inspected-jvm-launch-support-v1",
+          "jump_table_evidence": "typed-case-default-blocks-v1",
+          "decompiler_jump_loads": true,
+          "loader": "auto-from-header",
+          "language_id": "auto-from-header",
+          "compiler_spec_id": "auto-default",
+          "analyzer_preset": "ghidra-default"
+        },
+        "digest": "7e46711069eea041af1b9b99e34115c13332795e5cda76e584a722f529ec70de"
+      },
+      "predicate_type": "rea.analysis",
+      "operation": "read_bytes",
+      "parameters": {
+        "address": "0x423d4",
+        "length": 4
+      },
+      "raw_result": {
+        "address": "0x423d4",
+        "requested_bytes": 4,
+        "returned_bytes": 4,
+        "bytes_hex": "08f06eb8",
+        "complete": true
+      },
+      "normalized_result": {
+        "address": "0x423d4",
+        "requested_bytes": 4,
+        "returned_bytes": 4,
+        "bytes_hex": "08f06eb8",
+        "complete": true
+      },
+      "confidence": "observed",
+      "authority": "shipped-artifact",
+      "environment": null,
+      "limitations": [
+        "The session serves operations only after Ghidra reports default auto-analysis complete; incomplete analysis does not expose partial results.",
+        "The imported Program and temporary project are ephemeral and deleted on close. Annotation operations edit session database metadata; original executable bytes are never written.",
+        "Cancelling an active Ghidra request terminates its ephemeral database and discards session annotations. The selected target remains open; the next provider query imports the original artifact again.",
+        "Default-space addresses use lowercase 0x-prefixed hexadecimal; other address spaces use <percent-encoded-space>:0x<hex>.",
+        "Bytes reflect Ghidra's initialized memory, including loader fixups. Reads stop at an unmapped or uninitialized byte and report completeness explicitly.",
+        "macOS sessions require a matching executable Ghidra native decompiler; REA checks for it but does not build native components or change Gatekeeper quarantine state."
+      ],
+      "relationship_coverage": null,
+      "locations": [],
+      "evidence_links": []
+    },
+    {
+      "evidence_id": "ev_74684e5577fcedcf757df34aa593f9c7b51c2e159287c4487d26dc2656000b4b",
+      "subject": {
+        "name": "stock.elf",
+        "digest": {
+          "sha256": "25b4a29af80ec8edab5bd861ba9b74a6e22eab29dc3d7a809a16869e8a140f04"
+        },
+        "local_path": "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-queue-reset-c/stock.elf",
+        "format": "elf",
+        "architecture": "arm"
+      },
+      "provider": {
+        "id": "ghidra",
+        "name": "Ghidra",
+        "version": "12.1.4"
+      },
+      "analysis_profile": {
+        "provider": {
+          "id": "ghidra",
+          "name": "Ghidra",
+          "version": "12.1.4"
+        },
+        "parameters": {
+          "target_kind": "executable",
+          "target_format": "elf",
+          "architecture": "arm",
+          "available_architectures": [
+            "arm"
+          ],
+          "import_mode": "ephemeral-source-immutable",
+          "annotation_policy": "atomic-function-entry-metadata-v1",
+          "load_image_observations": "source-mappings-entry-context-v2",
+          "function_body_evidence": "complete-inclusive-ranges-v1",
+          "function_references": "complete-body-and-entry-reference-manager-v2",
+          "call_relationship_coverage": "function-body-call-coverage-v5",
+          "function_dossier_coverage": "observed-facets-and-call-relationships-v1",
+          "string_inventory_evidence": "defined-data-coverage-v1",
+          "location_resolution": "explicit-address-exact-entry-symbol-first-v3",
+          "procedure_file_offset_resolution": "address-first-unique-target-source-mapping-v2",
+          "instruction_flow_evidence": "decoded-return-pcode-v1",
+          "instruction_references": "exact-address-incoming-v1",
+          "function_boundary_observations": "ghidra-function-boundary-limitations-v3",
+          "no_return_repair": "returning-imports-decoded-return-v2",
+          "process_launch": "inspected-jvm-launch-support-v1",
+          "jump_table_evidence": "typed-case-default-blocks-v1",
+          "decompiler_jump_loads": true,
+          "loader": "auto-from-header",
+          "language_id": "auto-from-header",
+          "compiler_spec_id": "auto-default",
+          "analyzer_preset": "ghidra-default"
+        },
+        "digest": "7e46711069eea041af1b9b99e34115c13332795e5cda76e584a722f529ec70de"
+      },
+      "predicate_type": "rea.analysis",
+      "operation": "read_bytes",
+      "parameters": {
+        "address": "0x42bbe",
+        "length": 4
+      },
+      "raw_result": {
+        "address": "0x42bbe",
+        "requested_bytes": 4,
+        "returned_bytes": 4,
+        "bytes_hex": "39f0b5bc",
+        "complete": true
+      },
+      "normalized_result": {
+        "address": "0x42bbe",
+        "requested_bytes": 4,
+        "returned_bytes": 4,
+        "bytes_hex": "39f0b5bc",
+        "complete": true
+      },
+      "confidence": "observed",
+      "authority": "shipped-artifact",
+      "environment": null,
+      "limitations": [
+        "The session serves operations only after Ghidra reports default auto-analysis complete; incomplete analysis does not expose partial results.",
+        "The imported Program and temporary project are ephemeral and deleted on close. Annotation operations edit session database metadata; original executable bytes are never written.",
+        "Cancelling an active Ghidra request terminates its ephemeral database and discards session annotations. The selected target remains open; the next provider query imports the original artifact again.",
+        "Default-space addresses use lowercase 0x-prefixed hexadecimal; other address spaces use <percent-encoded-space>:0x<hex>.",
+        "Bytes reflect Ghidra's initialized memory, including loader fixups. Reads stop at an unmapped or uninitialized byte and report completeness explicitly.",
+        "macOS sessions require a matching executable Ghidra native decompiler; REA checks for it but does not build native components or change Gatekeeper quarantine state."
+      ],
+      "relationship_coverage": null,
+      "locations": [],
+      "evidence_links": []
+    },
+    {
+      "evidence_id": "ev_53c350ccb3621f25f5497b41511c700535651790f7410e733746061ba9e1327b",
+      "subject": {
+        "name": "stock.elf",
+        "digest": {
+          "sha256": "25b4a29af80ec8edab5bd861ba9b74a6e22eab29dc3d7a809a16869e8a140f04"
+        },
+        "local_path": "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-queue-reset-c/stock.elf",
+        "format": "elf",
+        "architecture": "arm"
+      },
+      "provider": {
+        "id": "ghidra",
+        "name": "Ghidra",
+        "version": "12.1.4"
+      },
+      "analysis_profile": {
+        "provider": {
+          "id": "ghidra",
+          "name": "Ghidra",
+          "version": "12.1.4"
+        },
+        "parameters": {
+          "target_kind": "executable",
+          "target_format": "elf",
+          "architecture": "arm",
+          "available_architectures": [
+            "arm"
+          ],
+          "import_mode": "ephemeral-source-immutable",
+          "annotation_policy": "atomic-function-entry-metadata-v1",
+          "load_image_observations": "source-mappings-entry-context-v2",
+          "function_body_evidence": "complete-inclusive-ranges-v1",
+          "function_references": "complete-body-and-entry-reference-manager-v2",
+          "call_relationship_coverage": "function-body-call-coverage-v5",
+          "function_dossier_coverage": "observed-facets-and-call-relationships-v1",
+          "string_inventory_evidence": "defined-data-coverage-v1",
+          "location_resolution": "explicit-address-exact-entry-symbol-first-v3",
+          "procedure_file_offset_resolution": "address-first-unique-target-source-mapping-v2",
+          "instruction_flow_evidence": "decoded-return-pcode-v1",
+          "instruction_references": "exact-address-incoming-v1",
+          "function_boundary_observations": "ghidra-function-boundary-limitations-v3",
+          "no_return_repair": "returning-imports-decoded-return-v2",
+          "process_launch": "inspected-jvm-launch-support-v1",
+          "jump_table_evidence": "typed-case-default-blocks-v1",
+          "decompiler_jump_loads": true,
+          "loader": "auto-from-header",
+          "language_id": "auto-from-header",
+          "compiler_spec_id": "auto-default",
+          "analyzer_preset": "ghidra-default"
+        },
+        "digest": "7e46711069eea041af1b9b99e34115c13332795e5cda76e584a722f529ec70de"
+      },
+      "predicate_type": "rea.analysis",
+      "operation": "read_bytes",
+      "parameters": {
+        "address": "0x42122",
+        "length": 6
+      },
+      "raw_result": {
+        "address": "0x42122",
+        "requested_bytes": 6,
+        "returned_bytes": 6,
+        "bytes_hex": "c0b207f0eaba",
+        "complete": true
+      },
+      "normalized_result": {
+        "address": "0x42122",
+        "requested_bytes": 6,
+        "returned_bytes": 6,
+        "bytes_hex": "c0b207f0eaba",
+        "complete": true
+      },
+      "confidence": "observed",
+      "authority": "shipped-artifact",
+      "environment": null,
+      "limitations": [
+        "The session serves operations only after Ghidra reports default auto-analysis complete; incomplete analysis does not expose partial results.",
+        "The imported Program and temporary project are ephemeral and deleted on close. Annotation operations edit session database metadata; original executable bytes are never written.",
+        "Cancelling an active Ghidra request terminates its ephemeral database and discards session annotations. The selected target remains open; the next provider query imports the original artifact again.",
+        "Default-space addresses use lowercase 0x-prefixed hexadecimal; other address spaces use <percent-encoded-space>:0x<hex>.",
+        "Bytes reflect Ghidra's initialized memory, including loader fixups. Reads stop at an unmapped or uninitialized byte and report completeness explicitly.",
+        "macOS sessions require a matching executable Ghidra native decompiler; REA checks for it but does not build native components or change Gatekeeper quarantine state."
+      ],
+      "relationship_coverage": null,
+      "locations": [],
+      "evidence_links": []
+    },
+    {
+      "evidence_id": "ev_e3025628128f0f5b452a574b44e517758d005e0d31ebbfa730fabdea4df4f85e",
+      "subject": {
+        "name": "stock.elf",
+        "digest": {
+          "sha256": "25b4a29af80ec8edab5bd861ba9b74a6e22eab29dc3d7a809a16869e8a140f04"
+        },
+        "local_path": "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-queue-reset-c/stock.elf",
+        "format": "elf",
+        "architecture": "arm"
+      },
+      "provider": {
+        "id": "ghidra",
+        "name": "Ghidra",
+        "version": "12.1.4"
+      },
+      "analysis_profile": {
+        "provider": {
+          "id": "ghidra",
+          "name": "Ghidra",
+          "version": "12.1.4"
+        },
+        "parameters": {
+          "target_kind": "executable",
+          "target_format": "elf",
+          "architecture": "arm",
+          "available_architectures": [
+            "arm"
+          ],
+          "import_mode": "ephemeral-source-immutable",
+          "annotation_policy": "atomic-function-entry-metadata-v1",
+          "load_image_observations": "source-mappings-entry-context-v2",
+          "function_body_evidence": "complete-inclusive-ranges-v1",
+          "function_references": "complete-body-and-entry-reference-manager-v2",
+          "call_relationship_coverage": "function-body-call-coverage-v5",
+          "function_dossier_coverage": "observed-facets-and-call-relationships-v1",
+          "string_inventory_evidence": "defined-data-coverage-v1",
+          "location_resolution": "explicit-address-exact-entry-symbol-first-v3",
+          "procedure_file_offset_resolution": "address-first-unique-target-source-mapping-v2",
+          "instruction_flow_evidence": "decoded-return-pcode-v1",
+          "instruction_references": "exact-address-incoming-v1",
+          "function_boundary_observations": "ghidra-function-boundary-limitations-v3",
+          "no_return_repair": "returning-imports-decoded-return-v2",
+          "process_launch": "inspected-jvm-launch-support-v1",
+          "jump_table_evidence": "typed-case-default-blocks-v1",
+          "decompiler_jump_loads": true,
+          "loader": "auto-from-header",
+          "language_id": "auto-from-header",
+          "compiler_spec_id": "auto-default",
+          "analyzer_preset": "ghidra-default"
+        },
+        "digest": "7e46711069eea041af1b9b99e34115c13332795e5cda76e584a722f529ec70de"
+      },
+      "predicate_type": "rea.analysis",
+      "operation": "read_bytes",
+      "parameters": {
+        "address": "0x428b2",
+        "length": 2
+      },
+      "raw_result": {
+        "address": "0x428b2",
+        "requested_bytes": 2,
+        "returned_bytes": 2,
+        "bytes_hex": "7047",
+        "complete": true
+      },
+      "normalized_result": {
+        "address": "0x428b2",
+        "requested_bytes": 2,
+        "returned_bytes": 2,
+        "bytes_hex": "7047",
+        "complete": true
+      },
+      "confidence": "observed",
+      "authority": "shipped-artifact",
+      "environment": null,
+      "limitations": [
+        "The session serves operations only after Ghidra reports default auto-analysis complete; incomplete analysis does not expose partial results.",
+        "The imported Program and temporary project are ephemeral and deleted on close. Annotation operations edit session database metadata; original executable bytes are never written.",
+        "Cancelling an active Ghidra request terminates its ephemeral database and discards session annotations. The selected target remains open; the next provider query imports the original artifact again.",
+        "Default-space addresses use lowercase 0x-prefixed hexadecimal; other address spaces use <percent-encoded-space>:0x<hex>.",
+        "Bytes reflect Ghidra's initialized memory, including loader fixups. Reads stop at an unmapped or uninitialized byte and report completeness explicitly.",
+        "macOS sessions require a matching executable Ghidra native decompiler; REA checks for it but does not build native components or change Gatekeeper quarantine state."
+      ],
+      "relationship_coverage": null,
+      "locations": [],
+      "evidence_links": []
+    }
+  ],
+  "new_exact_bytes": 2,
+  "source_completeness_proven": false,
+  "physical_validation": false
+}

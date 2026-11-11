@@ -16,17 +16,26 @@ uint32_t r1_stacmd_read_bit_native(uint32_t *bit)
     uint32_t valid=1,count;
     for (count=0;count<1000;count++) if (sample_pin()!=1) break;
     if (count==1000) valid=0;
-    for (uint32_t i=0;i<26;i++) __asm__ volatile("nop\nnop\nnop\nnop");
+    for (uint32_t i=0;i<26u;i++) {
+        __builtin_arm_nop();
+        __builtin_arm_nop();
+        __builtin_arm_nop();
+        __builtin_arm_nop();
+    }
     uint32_t sample=sample_pin();
     for (count=0;count<1000;count++) if (sample_pin()!=0) break;
     if (count==1000) valid=0;
     *bit=(~sample)&1u;
     return valid;
 }
-uint32_t r1_stacmd_read_bit_adapter_native(uint32_t *bit)
+struct __attribute__((packed,may_alias)) stacmd_received_word { uint32_t value; };
+/* Stock 0x969ec typed result/output contract. The concrete reader above
+ * writes its output on both valid and timed-out returns, so no incoming
+ * scratch-register seed is needed. Keep unaligned output support. */
+__attribute__((noinline)) uint32_t r1_stacmd_read_bit_adapter_native(uint32_t *bit)
 {
     uint32_t received;
     uint32_t result=r1_stacmd_read_bit_native(&received);
-    *bit=received;
+    ((volatile struct stacmd_received_word *)bit)->value=received;
     return result;
 }

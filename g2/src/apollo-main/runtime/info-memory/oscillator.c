@@ -1,9 +1,13 @@
 #include "oscillator.h"
+/* Stock-RAM literals rewritten to named objects (sim-test wave 2026-10-26,
+ * .waves/sim-fix/apply.py): g2ref_X is the linker symbol X. */
+#include <stdint.h>
+extern unsigned char g2ref_g2_stock_ram_200001c8[] __asm__("g2_stock_ram_200001c8");
 #define W(a) (*(volatile uint32_t *)(a))
 #define B(a) (*(volatile uint8_t *)(a))
 extern void stock_delay(uint32_t);
 extern uint32_t stock_clock_request(uint32_t,uint32_t),stock_clock_release(uint32_t,uint32_t);
-static uint32_t caps(void){return (B(0x200001e0)&63)|((W(0x200001e4)<<6)&960);}
+static uint32_t caps(void){return (B(((uint32_t)(uintptr_t)g2ref_g2_stock_ram_200001c8+0x18u))&63)|((W(((uint32_t)(uintptr_t)g2ref_g2_stock_ram_200001c8+0x1cu))<<6)&960);}
 uint32_t audio_oscillator_control(uint32_t action,const void *arguments){
  uint32_t external=0;
  if((uint8_t)action==0||(uint8_t)action==2||(uint8_t)action==3)external=arguments&&*(const uint8_t*)arguments==1;

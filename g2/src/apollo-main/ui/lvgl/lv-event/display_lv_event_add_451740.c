@@ -1,7 +1,7 @@
 /* Apollo LVGL event callback add and first-use pointer-array setup. */
 #include <stdint.h>
 
-extern void audio_uart_lvgl_log(uint32_t, const char *, uint32_t,
+extern void lv_log_add(uint32_t, const char *, uint32_t,
                                 const char *, ...);
 extern void *audio_uart_lv_malloc(uint32_t);
 extern void audio_uart_lv_obj_setup_layer_43e1fa(void *);

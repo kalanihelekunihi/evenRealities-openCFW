@@ -1,0 +1,514 @@
+{
+  "source": {
+    "source": "r1/src/application/runtime/native_gomore_sensor_update.c",
+    "payload": "r1-application",
+    "role": "candidate",
+    "toolchain": "clang",
+    "link": true,
+    "expect": "compile",
+    "returncode": 0,
+    "argv": [
+      "/usr/bin/clang",
+      "--target=arm-none-eabi",
+      "-mcpu=cortex-m4",
+      "-mthumb",
+      "-mfpu=fpv4-sp-d16",
+      "-mfloat-abi=hard",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-fno-strict-aliasing",
+      "-fshort-enums",
+      "-std=c11",
+      "-Os",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-DNRF52840_XXAA",
+      "-DFLOAT_ABI_HARD",
+      "-DNRF_SD_BLE_API_VERSION=7",
+      "-DNRF_DFU_SVCI_ENABLED",
+      "-DNRF_DFU_TRANSPORT_BLE=1",
+      "-DS140",
+      "-DSOFTDEVICE_PRESENT",
+      "-DFREERTOS",
+      "-DCONFIG_NFCT_PINS_AS_GPIOS",
+      "-DCONFIG_GPIO_AS_PINRESET",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/r1/src/config/sdk",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-sensor-update-c/generated/r1",
+      "-include",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-sensor-update-c/generated/r1/nrf_svci_clang.h",
+      "-isystem",
+      "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/external/freertos/portable/GCC/nrf52",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/external/freertos/portable/CMSIS/nrf52",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/external/segger_rtt",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/ble/common",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/ble/ble_advertising",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/ble/peer_manager",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/ble/nrf_ble_gatt",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/atomic",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/atomic_flags",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/atomic_fifo",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/delay",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/fds",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/fstorage",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/mutex",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/sortlist",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/timer",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/experimental_section_vars",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/log",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/log/src",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/strerror",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/util",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/softdevice/common",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/softdevice/s140/headers",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/softdevice/s140/headers/nrf52",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/toolchain/cmsis/include",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/integration/nrfx",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/integration/nrfx/legacy",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx/drivers/include",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx/hal",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx/soc",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx/mdk",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/ble/ble_link_ctx_manager",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/ble/ble_services/ble_dfu",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/ble/nrf_ble_qwr",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/balloc",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/bootloader/dfu",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/memobj",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/pwr_mgmt",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/ringbuf",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/external/fprintf",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx/drivers/src",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/bootloader",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/bootloader/ble_dfu",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/svc",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/stack_info",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/mem_manager",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/queue",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/scheduler",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/r1/src/config/rtos",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/third-party/upstream/freertos-kernel/include",
+      "-ffp-contract=off",
+      "-fno-delete-null-pointer-checks",
+      "-munaligned-access",
+      "-MD",
+      "-MF",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-sensor-update-c/r1/r1-application/r1__src__application__runtime__native_gomore_sensor_update.c.d",
+      "-c",
+      "/Users/kalani/Repo/evenRealities-openCFW/r1/src/application/runtime/native_gomore_sensor_update.c",
+      "-o",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-sensor-update-c/r1/r1-application/r1__src__application__runtime__native_gomore_sensor_update.c.o"
+    ],
+    "source_sha256": "62a787ff6b50c7d4ca152e6737e7df28426a4770faa4d9a59365e375263f7ce5",
+    "object_sha256": "05f7549ded9bca366b73dcdd53fdc12db739676a6a4bed72961b07a828770cd2",
+    "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-sensor-update-c/r1/r1-application/r1__src__application__runtime__native_gomore_sensor_update.c.o",
+    "strong": [
+      "r1_gomore_sensor_debug",
+      "r1_gomore_sensor_update_native",
+      "r1_gomore_timestamp_clamp_native"
+    ],
+    "weak": [],
+    "undefined": [
+      "gomore_primitives_noop_76500",
+      "r1_binary32_to_binary64_bits",
+      "r1_gomore_copy_output_native",
+      "r1_gomore_host_input_update_native",
+      "r1_gomore_log_native",
+      "r1_gomore_native_context",
+      "r1_gomore_runtime_validate_native"
+    ]
+  },
+  "REA": [
+    {
+      "evidence_id": "ev_a5edebbd491f439cf91835cc5f075015a01586b0cdafc9eead2112a92aee2c11",
+      "subject": {
+        "name": "stock.elf",
+        "digest": {
+          "sha256": "25b4a29af80ec8edab5bd861ba9b74a6e22eab29dc3d7a809a16869e8a140f04"
+        },
+        "local_path": "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-queue-reset-c/stock.elf",
+        "format": "elf",
+        "architecture": "arm"
+      },
+      "provider": {
+        "id": "ghidra",
+        "name": "Ghidra",
+        "version": "12.1.4"
+      },
+      "analysis_profile": {
+        "provider": {
+          "id": "ghidra",
+          "name": "Ghidra",
+          "version": "12.1.4"
+        },
+        "parameters": {
+          "target_kind": "executable",
+          "target_format": "elf",
+          "architecture": "arm",
+          "available_architectures": [
+            "arm"
+          ],
+          "import_mode": "ephemeral-source-immutable",
+          "annotation_policy": "atomic-function-entry-metadata-v1",
+          "load_image_observations": "source-mappings-entry-context-v2",
+          "function_body_evidence": "complete-inclusive-ranges-v1",
+          "function_references": "complete-body-and-entry-reference-manager-v2",
+          "call_relationship_coverage": "function-body-call-coverage-v5",
+          "function_dossier_coverage": "observed-facets-and-call-relationships-v1",
+          "string_inventory_evidence": "defined-data-coverage-v1",
+          "location_resolution": "explicit-address-exact-entry-symbol-first-v3",
+          "procedure_file_offset_resolution": "address-first-unique-target-source-mapping-v2",
+          "instruction_flow_evidence": "decoded-return-pcode-v1",
+          "instruction_references": "exact-address-incoming-v1",
+          "function_boundary_observations": "ghidra-function-boundary-limitations-v3",
+          "no_return_repair": "returning-imports-decoded-return-v2",
+          "process_launch": "inspected-jvm-launch-support-v1",
+          "jump_table_evidence": "typed-case-default-blocks-v1",
+          "decompiler_jump_loads": true,
+          "loader": "auto-from-header",
+          "language_id": "auto-from-header",
+          "compiler_spec_id": "auto-default",
+          "analyzer_preset": "ghidra-default"
+        },
+        "digest": "7e46711069eea041af1b9b99e34115c13332795e5cda76e584a722f529ec70de"
+      },
+      "predicate_type": "rea.analysis",
+      "operation": "read_bytes",
+      "parameters": {
+        "address": "0x94384",
+        "length": 524
+      },
+      "raw_result": {
+        "address": "0x94384",
+        "requested_bytes": 524,
+        "returned_bytes": 524,
+        "bytes_hex": "2de9f04387b004465548407c012854d1b4f90400009053a2002102202368eef719f8a06a93f79cfdcde9000153a200210220eef70ff8237d52a200210220eef709f800251de0206950f8250093f788fd0646e0680f4650f8250093f781fd8046a068894650f8250093f77afd8de803032b464aa2cde9046700210220edf7eaff6d1c207da842dedc237f4da200210220edf7e0ff00250de0a06950f8250093f75ffdcde900012b464ba200210220edf7d1ff6d1c207fa842eedc294e361f306800f5405090f9d80900280ddb0021206802f0b8f90546002d09da2b4644a201210220edf7b7ff284607b0bde8f0832068d4f77cf80546306800f54050d0f8dc194a680ab96a1e4a60d0f8dc094068a84209d36ff00304234635a201210220edf799ff2046e0e72946204600f06ff807462046e2f723f82046c5f76efc306800f54050d0f8dc194d60d0f8dc090222016802ebf1714fea710101603846c4e70000507c00205b5570646174655d2074733d257520745a3d25640000000068723d25662000005b5570646174655d206163634c656e3d25750d0a000000005b5570646174655d5b6163635d5b25645d20783d256620793d2566207a3d2566200d0a005b5570646174655d207070674c656e3d25750d0a000000005b5570646174655d5b7070675d5b25645d5b25665d0d0a005b5570646174655d5b6572726f72436f64655d3d25640d0a00000000",
+        "complete": true
+      },
+      "normalized_result": {
+        "address": "0x94384",
+        "requested_bytes": 524,
+        "returned_bytes": 524,
+        "bytes_hex": "2de9f04387b004465548407c012854d1b4f90400009053a2002102202368eef719f8a06a93f79cfdcde9000153a200210220eef70ff8237d52a200210220eef709f800251de0206950f8250093f788fd0646e0680f4650f8250093f781fd8046a068894650f8250093f77afd8de803032b464aa2cde9046700210220edf7eaff6d1c207da842dedc237f4da200210220edf7e0ff00250de0a06950f8250093f75ffdcde900012b464ba200210220edf7d1ff6d1c207fa842eedc294e361f306800f5405090f9d80900280ddb0021206802f0b8f90546002d09da2b4644a201210220edf7b7ff284607b0bde8f0832068d4f77cf80546306800f54050d0f8dc194a680ab96a1e4a60d0f8dc094068a84209d36ff00304234635a201210220edf799ff2046e0e72946204600f06ff807462046e2f723f82046c5f76efc306800f54050d0f8dc194d60d0f8dc090222016802ebf1714fea710101603846c4e70000507c00205b5570646174655d2074733d257520745a3d25640000000068723d25662000005b5570646174655d206163634c656e3d25750d0a000000005b5570646174655d5b6163635d5b25645d20783d256620793d2566207a3d2566200d0a005b5570646174655d207070674c656e3d25750d0a000000005b5570646174655d5b7070675d5b25645d5b25665d0d0a005b5570646174655d5b6572726f72436f64655d3d25640d0a00000000",
+        "complete": true
+      },
+      "confidence": "observed",
+      "authority": "shipped-artifact",
+      "environment": null,
+      "limitations": [
+        "The session serves operations only after Ghidra reports default auto-analysis complete; incomplete analysis does not expose partial results.",
+        "The imported Program and temporary project are ephemeral and deleted on close. Annotation operations edit session database metadata; original executable bytes are never written.",
+        "Cancelling an active Ghidra request terminates its ephemeral database and discards session annotations. The selected target remains open; the next provider query imports the original artifact again.",
+        "Default-space addresses use lowercase 0x-prefixed hexadecimal; other address spaces use <percent-encoded-space>:0x<hex>.",
+        "Bytes reflect Ghidra's initialized memory, including loader fixups. Reads stop at an unmapped or uninitialized byte and report completeness explicitly.",
+        "macOS sessions require a matching executable Ghidra native decompiler; REA checks for it but does not build native components or change Gatekeeper quarantine state."
+      ],
+      "relationship_coverage": null,
+      "locations": [],
+      "evidence_links": []
+    },
+    {
+      "evidence_id": "ev_05cc3f69aae9653b22fe3f0c1d16bd4b44c83c330f6cc7dad5db31991fbbe3c5",
+      "subject": {
+        "name": "stock.elf",
+        "digest": {
+          "sha256": "25b4a29af80ec8edab5bd861ba9b74a6e22eab29dc3d7a809a16869e8a140f04"
+        },
+        "local_path": "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-queue-reset-c/stock.elf",
+        "format": "elf",
+        "architecture": "arm"
+      },
+      "provider": {
+        "id": "ghidra",
+        "name": "Ghidra",
+        "version": "12.1.4"
+      },
+      "analysis_profile": {
+        "provider": {
+          "id": "ghidra",
+          "name": "Ghidra",
+          "version": "12.1.4"
+        },
+        "parameters": {
+          "target_kind": "executable",
+          "target_format": "elf",
+          "architecture": "arm",
+          "available_architectures": [
+            "arm"
+          ],
+          "import_mode": "ephemeral-source-immutable",
+          "annotation_policy": "atomic-function-entry-metadata-v1",
+          "load_image_observations": "source-mappings-entry-context-v2",
+          "function_body_evidence": "complete-inclusive-ranges-v1",
+          "function_references": "complete-body-and-entry-reference-manager-v2",
+          "call_relationship_coverage": "function-body-call-coverage-v5",
+          "function_dossier_coverage": "observed-facets-and-call-relationships-v1",
+          "string_inventory_evidence": "defined-data-coverage-v1",
+          "location_resolution": "explicit-address-exact-entry-symbol-first-v3",
+          "procedure_file_offset_resolution": "address-first-unique-target-source-mapping-v2",
+          "instruction_flow_evidence": "decoded-return-pcode-v1",
+          "instruction_references": "exact-address-incoming-v1",
+          "function_boundary_observations": "ghidra-function-boundary-limitations-v3",
+          "no_return_repair": "returning-imports-decoded-return-v2",
+          "process_launch": "inspected-jvm-launch-support-v1",
+          "jump_table_evidence": "typed-case-default-blocks-v1",
+          "decompiler_jump_loads": true,
+          "loader": "auto-from-header",
+          "language_id": "auto-from-header",
+          "compiler_spec_id": "auto-default",
+          "analyzer_preset": "ghidra-default"
+        },
+        "digest": "7e46711069eea041af1b9b99e34115c13332795e5cda76e584a722f529ec70de"
+      },
+      "predicate_type": "rea.analysis",
+      "operation": "read_bytes",
+      "parameters": {
+        "address": "0x68570",
+        "length": 44
+      },
+      "raw_result": {
+        "address": "0x68570",
+        "requested_bytes": 44,
+        "returned_bytes": 44,
+        "bytes_hex": "00280ed00849096801f54051d1f8dc194968ca1c824203d3c21c914200d8481c70470120704700004c7c0020",
+        "complete": true
+      },
+      "normalized_result": {
+        "address": "0x68570",
+        "requested_bytes": 44,
+        "returned_bytes": 44,
+        "bytes_hex": "00280ed00849096801f54051d1f8dc194968ca1c824203d3c21c914200d8481c70470120704700004c7c0020",
+        "complete": true
+      },
+      "confidence": "observed",
+      "authority": "shipped-artifact",
+      "environment": null,
+      "limitations": [
+        "The session serves operations only after Ghidra reports default auto-analysis complete; incomplete analysis does not expose partial results.",
+        "The imported Program and temporary project are ephemeral and deleted on close. Annotation operations edit session database metadata; original executable bytes are never written.",
+        "Cancelling an active Ghidra request terminates its ephemeral database and discards session annotations. The selected target remains open; the next provider query imports the original artifact again.",
+        "Default-space addresses use lowercase 0x-prefixed hexadecimal; other address spaces use <percent-encoded-space>:0x<hex>.",
+        "Bytes reflect Ghidra's initialized memory, including loader fixups. Reads stop at an unmapped or uninitialized byte and report completeness explicitly.",
+        "macOS sessions require a matching executable Ghidra native decompiler; REA checks for it but does not build native components or change Gatekeeper quarantine state."
+      ],
+      "relationship_coverage": null,
+      "locations": [],
+      "evidence_links": []
+    }
+  ],
+  "direct_replay": {
+    "noop_provider": {
+      "source": "r1/src/vendor/gomore_primitives/gomore_primitives.c",
+      "source_sha256": "3efadce086e0298fee3421c45a6f1b51cb75d22f0343e34c111c51efa4507bf8",
+      "production_object_sha256": "d71ce16008a72f4b394b327d4848ff59c0279d84b60bec9ae7c0d8f78564a842",
+      "isolated_object_sha256": "c76c76722fb81166571952c68b7ba20279041035896a73a94b0f1517389d0fc6",
+      "production_instruction_bytes": "7047"
+    },
+    "paired_cases": 3053,
+    "fault_cases": 18,
+    "log_calls": 6708,
+    "source_object_sha256": "05f7549ded9bca366b73dcdd53fdc12db739676a6a4bed72961b07a828770cd2",
+    "dependency_objects": {
+      "r1/src/application/runtime/native_gomore_dispatch.c": "1413ffed6f76804b526b9d9e2927fe1d9a76ec45bf397e322da5ac68e95026b0",
+      "r1/src/application/runtime/native_float_bits.c": "b00e7776dff412aa35a312811041a7a9e993ad6cf6090a5ff239946c82632bec"
+    },
+    "probe_sha256": "c15f28ed52fa1c121f28708db05eb01337cb34a51476425ddfe71c507e30b1a9",
+    "observations_sha256": "4a9fdd0299764848e9cecbe473f5e8dfd1ef8da5e9ddedf124036b6a0c18d2a1",
+    "limits": [
+      "Native/C sensor update and timestamp clamp; independent state/call/bit-promotion oracle",
+      "Actual C/native promotion/no-op; validate/host/copy/log providers modeled with live context/count/time mutations",
+      "Warm FPU; no physical/concurrent/full-source firmware-link proof"
+    ]
+  },
+  "idle_integration": {
+    "noop_provider": {
+      "source": "r1/src/vendor/gomore_primitives/gomore_primitives.c",
+      "source_sha256": "3efadce086e0298fee3421c45a6f1b51cb75d22f0343e34c111c51efa4507bf8",
+      "production_object_sha256": "d71ce16008a72f4b394b327d4848ff59c0279d84b60bec9ae7c0d8f78564a842",
+      "isolated_object_sha256": "c76c76722fb81166571952c68b7ba20279041035896a73a94b0f1517389d0fc6",
+      "production_instruction_bytes": "7047"
+    },
+    "paired_cases": 512,
+    "fault_cases": 0,
+    "log_calls": 1696,
+    "source_object_sha256": "05f7549ded9bca366b73dcdd53fdc12db739676a6a4bed72961b07a828770cd2",
+    "dependency_objects": {
+      "r1/src/application/runtime/native_gomore_dispatch.c": "1413ffed6f76804b526b9d9e2927fe1d9a76ec45bf397e322da5ac68e95026b0",
+      "r1/src/application/runtime/native_float_bits.c": "b00e7776dff412aa35a312811041a7a9e993ad6cf6090a5ff239946c82632bec",
+      "r1/src/application/runtime/native_gomore_authorization.c": "2ac04b04ea9f08d61707ef2923cb0fc9ddc9b8e6d9fc4c2de5c1f8b6e5fbb364",
+      "r1/src/application/runtime/native_gomore_sensor_idle.c": "67cd47c8a9eb6e57b8476d68339e313817e94c83dba5fd2b55ed6d88a687680b"
+    },
+    "probe_sha256": "d79c5898acbc12f911ec85061b6113833c64ed707247c6ef1a0538f4d290a24c",
+    "observations_sha256": "526da9d527ac9ae0f45dceb5b13640f87dc9f7465212dbfcdcb13c4787b3c35d",
+    "limits": [
+      "Native/C sensor update and timestamp clamp; independent state/call/bit-promotion oracle",
+      "Actual C/native promotion/no-op; validate/host/copy/log providers modeled with live context/count/time mutations",
+      "Warm FPU; no physical/concurrent/full-source firmware-link proof"
+    ]
+  },
+  "initialization": {
+    "symbol": "r1_gomore_sensor_debug",
+    "address": "0x20007c61",
+    "section": ".r1.gomore.sensor.debug",
+    "owned_bytes": 1,
+    "value": 0,
+    "native_RW_ZI_handlers_executed": true,
+    "independent_RW_decoder_matches": true,
+    "region_guards_unchanged": true,
+    "source_object_sha256": "05f7549ded9bca366b73dcdd53fdc12db739676a6a4bed72961b07a828770cd2"
+  },
+  "negative_controls": [
+    {
+      "name": "boolean-debug",
+      "rejected": true
+    },
+    {
+      "name": "unsigned-ready",
+      "rejected": true
+    },
+    {
+      "name": "nonzero-validate-error",
+      "rejected": true
+    },
+    {
+      "name": "wrong-initial-last",
+      "rejected": true
+    },
+    {
+      "name": "accept-equal-index",
+      "rejected": true
+    },
+    {
+      "name": "wrong-clamp-window",
+      "rejected": true
+    },
+    {
+      "name": "host-error-early-return",
+      "rejected": true
+    },
+    {
+      "name": "cached-context",
+      "rejected": true
+    },
+    {
+      "name": "counter-carry",
+      "rejected": true
+    },
+    {
+      "name": "cached-debug-count",
+      "rejected": true
+    }
+  ],
+  "qualification": {
+    "candidate_units": 1,
+    "compiled_units": 1,
+    "units": [
+      {
+        "source": "r1/src/application/runtime/native_gomore_sensor_update.c",
+        "payload": "r1-application",
+        "evidence": "r1/symbols/function-frontier.csv",
+        "selected": [],
+        "compiled": true,
+        "rejections": {
+          "anchored_relocation_pattern_not_exact": 2
+        },
+        "source_implementation_completeness": "not established by compilation or byte matching",
+        "reason": "no exact anchored body under tested production bindings; integration remains unfinished"
+      }
+    ]
+  },
+  "composition": {
+    "report": "build/sources-goal-r1-gomore-sensor-update-c/report.json",
+    "sha256": "d8f6b33d310bbedb265b6ec3ae9c91911b715630c09cae4e8bd8a835da72c227",
+    "units": 677,
+    "unchanged_prior_source_object_pairs": 676,
+    "application_imports": 167,
+    "bootloader_imports": 34,
+    "resolved_import": "r1_gomore_sensor_update_native",
+    "new_native_imports": [
+      "r1_gomore_copy_output_native",
+      "r1_gomore_host_input_update_native",
+      "r1_gomore_log_native",
+      "r1_gomore_runtime_validate_native"
+    ]
+  },
+  "hybrid": {
+    "report": "build/hybrid-goal-r1-gomore-sensor-update-c/build-report.json",
+    "sha256": "39f13a2fe2d8618c28329a3f1bb39724e18ca08b2c2b20661248e178f95a4b1e",
+    "totals": {
+      "binary-pull-through": 641791,
+      "source-built": 4369,
+      "resource-file": 248
+    },
+    "canonical_plan_unchanged": true
+  },
+  "artifacts": {
+    "build/goal-r1-gomore-sensor-update-c/verify.py": "c15f28ed52fa1c121f28708db05eb01337cb34a51476425ddfe71c507e30b1a9",
+    "build/goal-r1-gomore-sensor-update-c/results.json": "25ca0bf9fea5e642f6f13198eaa807938da5e4fa625e0350d92eeee7d5d46484",
+    "build/goal-r1-gomore-sensor-update-c/source.elf": "52a650a895accc8ad6e48195de1e3008c21fb691ab280477d5e8222611d277b6",
+    "build/goal-r1-gomore-sensor-update-c/noop.c": "b3d04a2a1c1f73dcce8cd7e153d674c24934048903cfab19437aa7fead97a561",
+    "build/goal-r1-gomore-sensor-update-c/noop.o": "c76c76722fb81166571952c68b7ba20279041035896a73a94b0f1517389d0fc6",
+    "build/goal-r1-gomore-sensor-update-c/idle.py": "d79c5898acbc12f911ec85061b6113833c64ed707247c6ef1a0538f4d290a24c",
+    "build/goal-r1-gomore-sensor-update-c/idle/results.json": "ec1fa060a214c44d176af991dbb982faf5c44ecb5dbd1222b0cf420367d469d5",
+    "build/goal-r1-gomore-sensor-update-c/idle/source.elf": "8334ec984a2a2d4d7364d5036d1f069d507231b3721a6ae1738cfcd81729c4d7",
+    "build/goal-r1-gomore-sensor-update-c/idle/noop.c": "b3d04a2a1c1f73dcce8cd7e153d674c24934048903cfab19437aa7fead97a561",
+    "build/goal-r1-gomore-sensor-update-c/idle/noop.o": "c76c76722fb81166571952c68b7ba20279041035896a73a94b0f1517389d0fc6",
+    "build/goal-r1-gomore-sensor-update-c/initialization.py": "27974b4e755215a922a55d90ae8a8ad05dc771a16d347f5562166971fe8d77b9",
+    "build/goal-r1-gomore-sensor-update-c/initialization-results.json": "41c35a06d7f0ea66f84612b03cb592a056ba11e5fcbe0525909de591a6c99de9",
+    "build/goal-r1-gomore-sensor-update-c/finalize.py": "7e6f0bfe75856a47503abd0ad46c3dc76d0d16421f041cbf5165b1e16ccd134e",
+    "build/goal-r1-gomore-sensor-update-c/qualify.py": "bad987a65472b0d2561012c329eebfabea82a7e50f7c132449de8c40745a7b45",
+    "build/goal-r1-gomore-sensor-update-c/negative.py": "56a91f15c7b0d1daa27e49e8e0ae4d86cd18cc330518674d5890a0bbb9c12c8b",
+    "build/goal-r1-gomore-sensor-update-c/negative-results.json": "d2072b82b55a3131465c22152e9508a524e4626464108f96e77294f72593d6ea",
+    "build/goal-r1-gomore-sensor-update-c/rea-update.json": "b8b9cd206c4927431b127623a5ede8d5dbdcceffe573646f24e97a12fc399a3c",
+    "build/goal-r1-gomore-sensor-update-c/rea-clamp.json": "475f55f85b136e9ebbc9cd603931cf84c87ef4e0ad1c5d08f2e572afd2678b1c",
+    "build/goal-r1-gomore-sensor-update-c/decompile.json": "c51273bbf12555ce4f42267ecca3156b36f623cf058b01b8b11f3a7c5fc7b85f",
+    "build/goal-r1-gomore-sensor-update-c/boolean-debug.c": "d9dce4e489eb28c9210415342fca3c3ed4ea7dd9d8c9e8415d6775e051d9b0a0",
+    "build/goal-r1-gomore-sensor-update-c/boolean-debug.o": "3479b1b3a9c085c9fc08baa65e0cc867d077155a4a44bd7cd287d360d0649927",
+    "build/goal-r1-gomore-sensor-update-c/boolean-debug.log": "22de5581655f830b0d088353bcaca0a71fce78ec5922a7e8ca566ceee857652f",
+    "build/goal-r1-gomore-sensor-update-c/boolean-debug.compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/goal-r1-gomore-sensor-update-c/unsigned-ready.c": "1987a6863a02d7d8acde032737e883a754fa91804c4eab3d0450cedd699d74fa",
+    "build/goal-r1-gomore-sensor-update-c/unsigned-ready.o": "9e1c778694a21708d410869fa71573192f69f2ab85cfd9208e55b3ed30c2f65c",
+    "build/goal-r1-gomore-sensor-update-c/unsigned-ready.log": "705b60b33c614a38e1341b72fd633fc8c77c895484b2a4094ce6633c23d5bfad",
+    "build/goal-r1-gomore-sensor-update-c/unsigned-ready.compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/goal-r1-gomore-sensor-update-c/nonzero-validate-error.c": "15832079ec3a5614d493b9e33de58d373c41a5977025f705edb4ae0508d207af",
+    "build/goal-r1-gomore-sensor-update-c/nonzero-validate-error.o": "b8b958d2026c29036a27e949e1521ca395d85637d9717cfc22c5e7d6d51acec3",
+    "build/goal-r1-gomore-sensor-update-c/nonzero-validate-error.log": "c4ace6351ce2782412d8f099c56e8ce8e8313c1edf7e212579edaef0ab15a0fc",
+    "build/goal-r1-gomore-sensor-update-c/nonzero-validate-error.compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/goal-r1-gomore-sensor-update-c/wrong-initial-last.c": "9992440b71fe19348d79c031f899c3766a4ee2eb11f859a46a524a6e3643eddd",
+    "build/goal-r1-gomore-sensor-update-c/wrong-initial-last.o": "8870275d05ef0bdf413065cba6bc420670b47afabf8ae6b97b63c256c51cae15",
+    "build/goal-r1-gomore-sensor-update-c/wrong-initial-last.log": "4ed93a3c64e53418aa4929c321ab11518ed48aac0ea8de830f6d3ae138eb1c57",
+    "build/goal-r1-gomore-sensor-update-c/wrong-initial-last.compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/goal-r1-gomore-sensor-update-c/accept-equal-index.c": "2689040df65cc0bbb326e8a2a0fe3070d85d3bdd009ccc1e2f70a7fe06baad14",
+    "build/goal-r1-gomore-sensor-update-c/accept-equal-index.o": "781752996876fd8bd4dc42f7eecdc439da31e741e2a77bf6c53bbfe96c89b9b1",
+    "build/goal-r1-gomore-sensor-update-c/accept-equal-index.log": "6a25a1bb45adcfe2a2bc7d391d4e8827c457dd5319bab30859e668b5df03277b",
+    "build/goal-r1-gomore-sensor-update-c/accept-equal-index.compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/goal-r1-gomore-sensor-update-c/wrong-clamp-window.c": "d329bacc329289eb0e7ab0e75ff916da2858a3d41e68582af49a415e75d05007",
+    "build/goal-r1-gomore-sensor-update-c/wrong-clamp-window.o": "f7d5e219b774218783066afb50847f83a9d966e6859a036d31e9c74c5c4090ff",
+    "build/goal-r1-gomore-sensor-update-c/wrong-clamp-window.log": "eee1a65fa1e361cd10d1c4fbaf014671e185ac7f98626ded13e44a6d99e26260",
+    "build/goal-r1-gomore-sensor-update-c/wrong-clamp-window.compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/goal-r1-gomore-sensor-update-c/host-error-early-return.c": "dba5a938fc72b2a9ae7284d45a325a53f181ad88d8ff112b189974d6f6287b16",
+    "build/goal-r1-gomore-sensor-update-c/host-error-early-return.o": "f144d8acb5d1df45fc63083313e5e3a8742a1700ff31c00552c7e69d3c941466",
+    "build/goal-r1-gomore-sensor-update-c/host-error-early-return.log": "c71af9a1234bf27b1ea7d4820e368a316a31d8944f299ef5472ead37e7ad8ed8",
+    "build/goal-r1-gomore-sensor-update-c/host-error-early-return.compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/goal-r1-gomore-sensor-update-c/cached-context.c": "5722c4fa0ad79136c342e1dfefd289daaf4cac59f59796eac5ae449b033141f9",
+    "build/goal-r1-gomore-sensor-update-c/cached-context.o": "c4ee5cb7dd2056be6ef56e08c28a6ab816f408df5467e8874c54d049d7de27eb",
+    "build/goal-r1-gomore-sensor-update-c/cached-context.log": "33aaf9c6c957caec1cd4fe7397c4af9ff638db9409764cd189abf43b0af3c698",
+    "build/goal-r1-gomore-sensor-update-c/cached-context.compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/goal-r1-gomore-sensor-update-c/counter-carry.c": "a693705e9f916b30dfe831d29118d5b802e9c683d95a0d6afe1c14c5eaa46fd2",
+    "build/goal-r1-gomore-sensor-update-c/counter-carry.o": "a3836b996386dc2c960f125087f8bd4dbf083b8bb02f5e006a619a02fb286c6e",
+    "build/goal-r1-gomore-sensor-update-c/counter-carry.log": "41ea4ae623299f013184465bcb8cdd8486fc7582d38c48316aef90bda0b82e52",
+    "build/goal-r1-gomore-sensor-update-c/counter-carry.compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/goal-r1-gomore-sensor-update-c/cached-debug-count.c": "c5783fdc99e9575c32cc547ba91d9e99a5eb5c73ee87b96bfc21b01f0a1b7e15",
+    "build/goal-r1-gomore-sensor-update-c/cached-debug-count.o": "fb22e0edf6432a36ef5580366a3f82766ca86d921478f7f808a355e37fa1981b",
+    "build/goal-r1-gomore-sensor-update-c/cached-debug-count.log": "5fa75b6f8189c47ac06a6c8683067b9d15e37ce2cfc998287453433bc65cd08d",
+    "build/goal-r1-gomore-sensor-update-c/cached-debug-count.compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "limits": [
+    "Debug byte owned at20007c61, cold0; full context allocation/initialization remains unresolved",
+    "Actual C idle/update/clamp/promotion graph executes; lower logging/validate/host/copy/time/health/reinit providers modeled",
+    "Existing C no-op independently compiled from exact provider body and instruction-checked against production monolithic object; no new production copy",
+    "No physical/concurrent/first-use FP/final firmware link or instruction identity proof"
+  ]
+}

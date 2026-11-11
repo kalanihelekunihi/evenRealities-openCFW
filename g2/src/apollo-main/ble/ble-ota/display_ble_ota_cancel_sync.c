@@ -1,5 +1,6 @@
 /* Native OTA cancel 0x448784 and RPC status sync 0x444e90. */
 #include <stdint.h>
+extern unsigned char g2ref_g2_ota_cache_buffer[] __asm__("g2_ota_cache_buffer"); /* Fix 45: stock owner (owner.py) */
 
 extern uint8_t audio_ble_ota_export_state[]; /* live 0x20072730 */
 extern volatile uint8_t audio_ble_ota_sync_enabled; /* live 0x20074ff3 */
@@ -36,7 +37,7 @@ void audio_ble_rpc_ota_status_sync(uint32_t status) {
 void audio_ble_ota_disconnect(void) {
     audio_uart_buffer_zero(audio_ble_ota_export_state,0x60u,0u);
     audio_ble_ota_export_state[0]=0u;
-    uint32_t resume_pointer=0x2034bc10u; /* authenticated literal at 0x44887c */
+    uint32_t resume_pointer=((uint32_t)(uintptr_t)g2ref_g2_ota_cache_buffer+0x0u); /* authenticated literal at 0x44887c */
     __builtin_memcpy(audio_ble_ota_export_state+0x34u,&resume_pointer,4u);
     audio_ble_rpc_ota_status_sync(0u);
 }

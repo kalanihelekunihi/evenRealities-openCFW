@@ -1,20 +1,11 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_32cb2c\n"
-".type opencfw_em9305_child_32cb2c,@function\n"
-"opencfw_em9305_child_32cb2c:\n"
-"L32cb2c:\n"
-"mov_s r1,0x805c6c\n"
-"L32cb32:\n"
-"ld r1,[r1,0]\n"
-"L32cb34:\n"
-"add r0,r0,405\n"
-"L32cb38:\n"
-"mov_s r2,0x10\n"
-"L32cb3a:\n"
-"b.d opencfw_em9305_memcpy\n"
-"L32cb3e:\n"
-"add_s r1,r1,4\n"
-".size opencfw_em9305_child_32cb2c,.-opencfw_em9305_child_32cb2c\n"
-);
+#include <stdint.h>
+
+/* Native 0x32cb2c..0x32cb40: copy the 16-byte block at offset 4 of the
+ * shared record at 0x805c6c into record+405. */
+extern void *opencfw_em9305_memcpy(void *destination, const void *source, uint32_t length);
+
+void *opencfw_em9305_child_32cb2c(uintptr_t record)
+{
+    uintptr_t shared=*(volatile uint32_t *)0x805c6cu;
+    return opencfw_em9305_memcpy((void *)(record+405u),(const void *)(shared+4u),16u);
+}

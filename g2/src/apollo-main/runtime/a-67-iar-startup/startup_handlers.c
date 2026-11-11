@@ -9,7 +9,9 @@
  * MSP 0x2007fb00, then the IAR program entry 0x5e4254). */
 #include <stdint.h>
 
-#define G2_MAIN_STACK_LIMIT 0x2007d000u
+/* CSTACK base, stock 0x2007d000 (link/g2-apollo-main.ld: _sstack). */
+extern uint32_t _sstack[];
+#define G2_MAIN_STACK_LIMIT ((uint32_t)(uintptr_t)_sstack)
 
 extern void iar_program_start_5e4254(void);
 

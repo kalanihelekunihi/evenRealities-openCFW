@@ -1,0 +1,77 @@
+{
+  "schema": 1,
+  "target": "locked GX8002 BINH A stage-1 C clock-source and clock-gate placement",
+  "stock_codec_component": "g2/blobs/official/g2-2.2.6.10/firmware_codec.bin",
+  "stock_codec_component_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+  "stock_stage1_file_offset": "0x95a4",
+  "linker_script": "g2/src/codec/link/g2-codec-a-binh-stage1.ld",
+  "linker_script_sha256": "176acfd263338ee522567cb87b9ae0b410a40383bb855b800af30db6ae0adade",
+  "stock_identical_c_functions": [
+    {
+      "name": "gx8002_image_a_stage1_clock_source_1000014c",
+      "address": "0x1000014c",
+      "bytes": 20,
+      "sha256": "52175e4de21f4f4eec23119a8b607fd27be6b6dc67fc27d07cbb3c2256021a12"
+    },
+    {
+      "name": "gx8002_image_a_stage1_clock_gate_100005a4",
+      "address": "0x100005a4",
+      "bytes": 256,
+      "sha256": "67072a3913d54f83fd76a07d8bbfd306e2e5e99534a5b27dff344355ae63b4cc"
+    }
+  ],
+  "placed_but_not_stock_identical": [
+    {"name": "__module_get_info", "address": "0x10000160", "matching_bytes": 148, "total_bytes": 164},
+    {"name": "gx8002_image_a_stage1_clock_frequency_100006a4", "address": "0x100006a4", "matching_bytes": 288, "total_bytes": 448},
+    {"name": "clock switch tables", "address": "0x10000f48", "matching_bytes": 203, "total_bytes": 224}
+  ],
+  "rejected_compiler_probe": {
+    "flag": "-fno-schedule-insns2",
+    "module_lookup_matching_bytes": 150,
+    "module_lookup_total_bytes": 164,
+    "clock_gate_matching_bytes": 242,
+    "clock_gate_total_bytes": 256,
+    "reason": "The small lookup improvement loses the byte-identical clock gate and clock-source ranges."
+  },
+  "source_stage1": {
+    "bytes": 4756,
+    "sha256": "519536408361893504e70af2e9fa1fedbda6edd30575647749d845dd5c0782f6",
+    "stock_zero_tail_start": "0x1294",
+    "stock_zero_tail_end": "0x2fe4",
+    "stock_zero_tail_bytes": 7504,
+    "source_wrapper_pads_zero_tail": true,
+    "vectors_match_stock": true,
+    "initialized_data_match_stock": true,
+    "same_offset_equal_bytes_before": 1476,
+    "same_offset_equal_bytes_after": 2212
+  },
+  "verification": {
+    "source_report": "build/g2-codec-a-divider-source-20261111/report.json",
+    "source_report_sha256": "4a3a8fb690c08e800456c0011cf38f0df786d2e1c6e3f5f0758278de11ad289c",
+    "source_compile_units": 367,
+    "source_compile_failures": 0,
+    "source_duplicate_strong_symbols": 0,
+    "link_report": "build/g2-codec-a-clock-guard-link-20261111/link-report.json",
+    "link_report_sha256": "46c9089d22e27f00e6f2eb5b3efc6c51b8e78822cfa329a24ff2cbbc4159e4fd",
+    "strict_link_passed": true,
+    "source_linker_checks_five_exact_c_ranges": true,
+    "full_source_report": "build/g2-divider-full-source-20261111/report.json",
+    "full_source_report_sha256": "c3887dcceaaa115bc5b8a2848abfd15fde5d81962b1867f3fc49075957b8d206",
+    "full_g2_compile_units": 4884,
+    "full_g2_compile_failures": 0,
+    "full_g2_duplicate_strong_symbols": 0,
+    "full_link_report": "build/g2-divider-clock-full-link-20261111/link-report.json",
+    "full_link_report_sha256": "9ad22e4fae042f0780e56a34d0296ccf6759fbfb16a5105eb0dab4b287f80c84",
+    "full_link_payloads": 7,
+    "synthetic_bundle_link_report": "build/g2-divider-clock-bundle-20261111/link-report.json",
+    "synthetic_bundle_link_report_sha256": "b8797cd4ca610da2a706ebec6e5e22dfe9aa07709fc0ac637fe413cf9d512e03",
+    "synthetic_bundle_sha256": "19ccdec287fc88d4735f4af39a8bbd3de82054af3d88cd89bc300b6e5fabd544",
+    "authenticated_comparison": "build/g2-divider-clock-comparison-20261111",
+    "authenticated_comparison_sha256": "4350be9e4a89e8e7ebb7cbb20b5748a9283805fd69a18e9eab414bb8abd934ac",
+    "codec_component_same_offset_equal_bytes_before": 39052,
+    "codec_component_same_offset_equal_bytes_after": 40108,
+    "synthetic_bundle_byte_identical": false,
+    "all_six_components_byte_identical": false
+  },
+  "qualification": "The C clock-source and clock-gate functions are at their locked addresses and byte-identical there. Module lookup, clock frequency, switch-table content, the rest of BINH A, the full codec and bundle, and hardware behavior remain unverified."
+}

@@ -32,7 +32,8 @@ void case_boot_transport_action(uint32_t left,uint32_t right)
         }else{
             *(volatile uint32_t *)(void *)(state+0x3cu)=0u;
             (*(volatile uint32_t *)(void *)(state+0x40u))++;
-            if(*quiet==0u){(void)case_policy_log(CASE_STRING_ADDR(08001d14));(void)case_policy_log(CASE_STRING_ADDR(08001d3c));}
+            /* Boot-test fix: stock 0x08001c9a passes the incremented failure count for "cnt:%d". */
+            if(*quiet==0u){(void)case_policy_log(CASE_STRING_ADDR(08001d14),*(volatile uint32_t *)(void *)(state+0x40u));(void)case_policy_log(CASE_STRING_ADDR(08001d3c));}
         }
     }
     if(right!=0u && state[17u]!=0u){
@@ -47,7 +48,7 @@ void case_boot_transport_action(uint32_t left,uint32_t right)
         }else{
             *(volatile uint32_t *)(void *)(state+0x58u)=0u;
             (*(volatile uint32_t *)(void *)(state+0x5cu))++;
-            if(*quiet==0u){(void)case_policy_log(CASE_STRING_ADDR(08001d40));(void)case_policy_log(CASE_STRING_ADDR(08001d3c));}
+            if(*quiet==0u){(void)case_policy_log(CASE_STRING_ADDR(08001d40),*(volatile uint32_t *)(void *)(state+0x5cu));(void)case_policy_log(CASE_STRING_ADDR(08001d3c));}
         }
     }
 }

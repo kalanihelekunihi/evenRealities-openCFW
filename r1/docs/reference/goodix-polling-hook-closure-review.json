@@ -1,0 +1,186 @@
+{
+  "schema": 1,
+  "scope": "R1 polling-only external-interrupt template guard and registered empty-hook closure",
+  "sources": {
+    "rawdata": "r1/src/application/goodix/native_empty_hooks.h",
+    "generator": "r1/src/sources.json",
+    "pinned_vendor_unchanged": true,
+    "no_inline_assembly_in_new_C_body": true
+  },
+  "native_registration": {
+    "start": "0x2d994",
+    "stop": "0x2aadc",
+    "all_nine_arguments": [
+      "0x6a501",
+      "0x6a59d",
+      "0x6a59f",
+      "0x6a4ff",
+      "0x6a4d9",
+      "0x6a52d",
+      "0x6a4b1",
+      "0x6a4b3",
+      "0x6a5a1"
+    ],
+    "fifth_argument_frame_hook": "0x6a4d9"
+  },
+  "native_disassembly": {
+    "config-start": "\nbuild/goal-r1-queue-reset-c/stock.elf:     file format elf32-littlearm\n\n\nDisassembly of section .text:\n\n0006a4b0 <adc_pair+0x19786>:\n   6a4b0:\t4770      \tbx\tlr\n",
+    "rawdata": "\nbuild/goal-r1-queue-reset-c/stock.elf:     file format elf32-littlearm\n\n\nDisassembly of section .text:\n\n0006a4fe <adc_pair+0x197d4>:\n   6a4fe:\t4770      \tbx\tlr\n",
+    "sampling-start": "\nbuild/goal-r1-queue-reset-c/stock.elf:     file format elf32-littlearm\n\n\nDisassembly of section .text:\n\n0006a59c <adc_pair+0x19872>:\n   6a59c:\t4770      \tbx\tlr\n",
+    "sampling-stop": "\nbuild/goal-r1-queue-reset-c/stock.elf:     file format elf32-littlearm\n\n\nDisassembly of section .text:\n\n0006a59e <adc_pair+0x19874>:\n   6a59e:\t4770      \tbx\tlr\n",
+    "config-stop-retained": "\nbuild/goal-r1-queue-reset-c/stock.elf:     file format elf32-littlearm\n\n\nDisassembly of section .text:\n\n0006a4b2 <adc_pair+0x19788>:\n   6a4b2:\tb570      \tpush\t{r4, r5, r6, lr}\n   6a4b4:\tf7c4 fa0a \tbl\t2e8cc <goodix_register_i2c+0x3dd4>\n   6a4b8:\tf7c2 fc22 \tbl\t2cd00 <goodix_register_i2c+0x2208>\n   6a4bc:\tf7c0 f8a8 \tbl\t2a610 <start+0x3610>\n   6a4c0:\t4605      \tmov\tr5, r0\n   6a4c2:\tf7c0 f843 \tbl\t2a54c <start+0x354c>\n   6a4c6:\t4604      \tmov\tr4, r0\n   6a4c8:\tf7c0 f87c \tbl\t2a5c4 <start+0x35c4>\n   6a4cc:\t462a      \tmov\tr2, r5\n   6a4ce:\t4621      \tmov\tr1, r4\n   6a4d0:\te8bd 4070 \tldmia.w\tsp!, {r4, r5, r6, lr}\n   6a4d4:\tf7bf be06 \tb.w\t2a0e4 <start+0x30e4>\n"
+  },
+  "REA_limit": "procedure_assembly at 0x6a4b0 returned no analyzed procedure; no REA procedure coverage claimed. Raw locked bytes, explicit Thumb disassembly, executed registration fragment, and native execution fixtures establish the scoped evidence.",
+  "normal_build": {
+    "report": "build/sources-goal-r1-goodix-polling-hook-closure-verified/report.json",
+    "compiled_units": 576,
+    "application_unresolved": 165,
+    "bootloader_unresolved": 34
+  },
+  "guard": [
+    {
+      "mode": "polling",
+      "source": "gh_demo_r1.c",
+      "definition_present": false,
+      "call_present": false
+    },
+    {
+      "mode": "polling",
+      "source": "gh_demo_user_r1.c",
+      "definition_present": false,
+      "call_present": false
+    },
+    {
+      "mode": "normal",
+      "source": "gh_demo_r1.c",
+      "definition_present": false,
+      "call_present": true
+    },
+    {
+      "mode": "normal",
+      "source": "gh_demo_user_r1.c",
+      "definition_present": true,
+      "call_present": false
+    },
+    {
+      "mode": "mix",
+      "source": "gh_demo_r1.c",
+      "definition_present": false,
+      "call_present": true
+    },
+    {
+      "mode": "mix",
+      "source": "gh_demo_user_r1.c",
+      "definition_present": true,
+      "call_present": false
+    }
+  ],
+  "unit": {
+    "paired_cases": 768,
+    "executions": 1536,
+    "checks": [
+      "four registered hooks return through LR without work",
+      "all registers, flags and interrupt masks preserved",
+      "no data reads or writes; only the exact one- or two-instruction body executes"
+    ],
+    "limits": [
+      "No physical timing or sensor sampling validation",
+      "No algorithm inferred; stock and pinned source both perform no work"
+    ]
+  },
+  "negative": {
+    "writes_raw_buffer_rejected": true
+  },
+  "audit": {
+    "unrelated_objects_unchanged": 574,
+    "affected": {
+      "{gen}/gh_demo_hook_r1.c": {
+        "changed": [
+          "gh3x2x_get_rawdata_hook_func"
+        ],
+        "removed": [],
+        "unchanged": 16
+      },
+      "{gen}/gh_demo_user_r1.c": {
+        "changed": [],
+        "removed": [
+          "hal_gh3x2x_int_init"
+        ],
+        "unchanged": 18
+      }
+    },
+    "application_unresolved": 165,
+    "bootloader_unresolved": 34,
+    "source_regions_added": 4,
+    "source_bytes_added": 8,
+    "source_plan_qualifier_output_admitted_unchanged": true,
+    "profiles_and_units_unchanged": true
+  },
+  "qualification": {
+    "report": "build/goal-r1-goodix-polling-hook-closure/qualified-generic/qualification.json",
+    "candidate_units": 1,
+    "compiled_units": 1,
+    "selected": [
+      {
+        "payload": "r1-application",
+        "symbol": "gh3x2x_sampling_start_hook_func",
+        "start": 275868,
+        "end": 275870,
+        "sha256": "c7dfbb7d02759eacb64dbc916c1bb6f21eabaff1c1032ea5c9176abf7fd28df8",
+        "evidence": "r1/symbols/function-frontier.csv"
+      },
+      {
+        "payload": "r1-application",
+        "symbol": "gh3x2x_sampling_stop_hook_func",
+        "start": 275870,
+        "end": 275872,
+        "sha256": "c7dfbb7d02759eacb64dbc916c1bb6f21eabaff1c1032ea5c9176abf7fd28df8",
+        "evidence": "r1/symbols/function-frontier.csv"
+      },
+      {
+        "payload": "r1-application",
+        "symbol": "gh3x2x_get_rawdata_hook_func",
+        "start": 275710,
+        "end": 275712,
+        "sha256": "c7dfbb7d02759eacb64dbc916c1bb6f21eabaff1c1032ea5c9176abf7fd28df8",
+        "evidence": "r1/symbols/function-frontier.csv"
+      },
+      {
+        "payload": "r1-application",
+        "symbol": "gh3x2x_config_set_start_hook",
+        "start": 275632,
+        "end": 275634,
+        "sha256": "c7dfbb7d02759eacb64dbc916c1bb6f21eabaff1c1032ea5c9176abf7fd28df8",
+        "evidence": "r1/symbols/function-frontier.csv"
+      }
+    ]
+  },
+  "canonical_hybrid": {
+    "report": "build/hybrid-goal-r1-goodix-polling-hook-closure/build-report.json",
+    "sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "source_bytes": 3953,
+    "fallback_bytes": 642207,
+    "resource_bytes": 248,
+    "source_completeness_proven": false
+  },
+  "corrected_analysis_error": "Configuration-stop 0x6a4b2 is not empty. The initial no-op assumption failed native execution, was reverted before admission, and the final object audit proves that function unchanged. Only four empty entries are added, none at 0x6a4b2.",
+  "limits": [
+    "Registration fragment is not full initialization execution",
+    "No physical sampling, IRQ line operation, or full source-only image proven",
+    "Only four two-byte bodies enter exact plan; no global pseudocode/freeze coverage or G2 gate change"
+  ],
+  "hashes": {
+    "r1/src/sources.json": "b53a27dc8d832bc1e6574ad91476dd0556112fc9fb2cc79a0f00a1950c257574",
+    "r1/src/application/goodix/native_empty_hooks.h": "282264fdcefa71cd342e4d9548bc283ce68fd6266bcb59508397da7bf7ac5abd",
+    "tools/build/source-plan.json": "dcf003847d8032eee844ea15b84e2e9adce1c84089930797c1a309efe93d64e2",
+    "build/sources-goal-r1-goodix-polling-hook-closure-verified/report.json": "83373150a382528e4fb8cf6749eff015e52e8044a6bf77d097cf5ee338e98e76",
+    "build/hybrid-goal-r1-goodix-polling-hook-closure/build-report.json": "7160cf712d6be0852ad675ec36257a48218674ad76092426127135e7c9bd9388",
+    "build/goal-r1-goodix-polling-hook-closure/qualified-generic/qualification.json": "90ed3b11155d553cc0060dc5f5584da97e7142e905ce719c3f66e2866965ad6a",
+    "build/goal-r1-goodix-polling-hook-closure/verify.py": "eda1542e1d280f33eb9f2159a9b1c0b80650ca607dd51bb3320a9d70729d14f8",
+    "build/goal-r1-goodix-polling-hook-closure/binding.py": "a7e08c56dfd8f4c42e7927c2cf66f0dd87ddc991e8b6b104928e281b6f894ef1",
+    "build/goal-r1-goodix-polling-hook-closure/guard.py": "d4b8bbef9ffebf08529f8770fcaff2afa40ebcb845477d9ce9e87d27f860baee",
+    "build/goal-r1-goodix-polling-hook-closure/audit.py": "8ef7f6ac14c8dd825ba142a7b98d4a1959f72f2cf8c80c604d486be698613ff0",
+    "build/goal-r1-goodix-polling-hook-closure/native-disassembly.json": "2c186eff4931f4b3a09951ad68d39be42c9c147ea80febf5a82ca038a4667ddb",
+    "build/goal-r1-goodix-polling-hook-closure/rea-no-procedure.json": "53d8341cc180df965e8a355b83d412a75dd471eecadb72907d13f54fa38db2c4"
+  }
+}

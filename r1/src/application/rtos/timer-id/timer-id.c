@@ -102,3 +102,12 @@
         return pvReturn;
     }
 _Static_assert(sizeof(Timer_t)==44 && offsetof(Timer_t,pvTimerID)==28,"native timer ID layout");
+
+/* Standard timer-name API from the same pinned kernel timers.c. */
+    const char * pcTimerGetName( TimerHandle_t xTimer ) /*lint !e971 Unqualified char types are allowed for strings and single characters only. */
+    {
+        Timer_t * pxTimer = xTimer;
+
+        configASSERT( xTimer );
+        return pxTimer->pcTimerName;
+    }

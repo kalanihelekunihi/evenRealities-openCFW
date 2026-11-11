@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "report": "build/sources-goal-r1-record-persist-pure-c/report.json",
+  "report_sha256": "48a3e46534127d1937fc1d7edf85f21900f97fa4bf3aa613c7509b39481d71d0",
+  "manifest_sha256": "6f2bf125a3403bfd1f319afaaef021996d3de2fd86f5fdc9378ec87a61aaed66",
+  "verification": {
+    "cases": {
+      "modeled_kv": 1728,
+      "actual_kv": 144
+    },
+    "stock_previous_and_c_match": true,
+    "actual_cached_kv_and_memcpy_executed": true,
+    "unaligned_inputs_cached_payload_aliases_null_and_handle_reloads": true,
+    "private_frame_addresses_contents_and_caller_clobbered_outputs_excluded": true,
+    "public_void_return": true,
+    "physical_flash_unverified": true
+  },
+  "defects": {
+    "detected": [
+      "missing-read",
+      "short-copy",
+      "stale-handle",
+      "wrong-write-size"
+    ]
+  },
+  "audit": {
+    "unchanged_prior_object_hashes": 782,
+    "changed_objects": [
+      [
+        "r1-application",
+        "r1/src/application/runtime/native_record_providers.c"
+      ],
+      [
+        "r1-bootloader",
+        "{gen}/r1_startup_vectors.S"
+      ],
+      [
+        "r1-bootloader",
+        "{gen}/r1_uecc.c"
+      ]
+    ],
+    "kv_implementations_and_other_objects_unchanged": true,
+    "apply_and_persist_body_sections_and_relocations_unchanged": true,
+    "generated_boot_allocated_bytes_and_relocations_unchanged": true,
+    "imports_unchanged": true
+  },
+  "rea": {
+    "evidence_id": "ev_8c649ebb30797c88fd4441413ba634397aab2a1c10a7cf6694922a90f10ba699",
+    "address": "0x73604",
+    "length": 58,
+    "sha256": "f027e33f81cc3f35173f52b4905f80e3662c5586c8b2ce9da116ce31c68fe9d3",
+    "matches_locked_application": true
+  },
+  "bootloader_link_report": "build/goal-r1-record-persist-pure-c/boot-link/report.json",
+  "bootloader_link_report_sha256": "f258db3e7e58af7d2aaf94c88280a856b9c0ec310af71257f7360f2c9347f2e7",
+  "evidence_files": {
+    "build/goal-r1-record-persist-pure-c/verify.py": "ae65db9bed27b906285b1ce8c25b5a7fbdb53a26fd3550a17fb2fc684b5034a2",
+    "build/goal-r1-record-persist-pure-c/audit.py": "aa1a81560c4f121a7663aec8e9af7c423317c36a99b392f49b3480dbca4920f9",
+    "build/goal-r1-record-persist-pure-c/defects.py": "552c7c331314e17c821892d51547481a3eed74736c4c836ad7bc1caad5491e0d",
+    "build/goal-r1-record-persist-pure-c/verification.json": "0c3e8568286a6e94d2cc3670bc069e8350095373f3f2a6ac8434c7c66a4c9b18",
+    "build/goal-r1-record-persist-pure-c/defects.json": "6e5c7d30a922fd7522fca725aa330f57700310b76780c990accbdbefca1ebd55",
+    "build/goal-r1-record-persist-pure-c/rea.json": "099e8e12398bc746a9933f63036ef65a10b1ffc85245e4d37afee16716f1362f",
+    "build/goal-r1-record-persist-pure-c/verify-final.log": "c79bce6da817cbe011c7b2d15f93a38009775419fcbbe0340aebda11d55f7dca"
+  },
+  "limitations": [
+    "KV boundaries modeled in 1728 cases; actual cached KV and memcpy with modeled critical callbacks in 144 cases; no physical flash validation.",
+    "Caller-clobbered registers and private stack addresses/content excluded.",
+    "Public void return excludes incidental R0; callback live-register/private-frame identity unclaimed.",
+    "Full application remains unlinked."
+  ],
+  "raw_application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a"
+}

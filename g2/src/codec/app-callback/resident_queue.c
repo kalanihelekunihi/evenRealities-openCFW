@@ -17,9 +17,7 @@ _Static_assert(offsetof(struct resident_queue_view, member_size) == 16, "queue m
 
 static uint32_t resident_remainder(uint32_t sum, int32_t size)
 {
-    int32_t quotient;
-    __asm__ volatile("divs %0, %1, %2" : "=r"(quotient)
-                     : "r"(sum), "r"(size) : "cc");
+    const int32_t quotient = (int32_t)sum / size;   /* divs */
     return sum - (uint32_t)quotient * (uint32_t)size;
 }
 

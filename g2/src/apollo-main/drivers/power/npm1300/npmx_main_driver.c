@@ -6,8 +6,8 @@
  * 0x512998, 0x512a64.., 0x512b10.., 0x512bb4..0x512c83.
  *
  * The PMIC is on product I2C bus 7, 7-bit address 0x6b, with 16-bit register
- * addresses sent big-endian (high byte first). The npmx library (v1.0.1) and
- * the closed nrf_fuel_gauge library are linked unchanged; this file is only
+ * addresses sent big-endian (high byte first). The npmx library (v1.0.1) is
+ * linked unchanged; the fuel-gauge calls use an uncalibrated C candidate. This file is
  * the board glue: backend callbacks, init sequence, event callbacks, fuel
  * gauge bookkeeping and a few power-rail helpers. npmx calls return
  * npmx_error_t (NPMX_SUCCESS 0x2bad0000, INVALID_PARAM 0x2bad0001, IO

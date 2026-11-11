@@ -1,0 +1,38 @@
+{
+  "date": "2026-11-10",
+  "source_report": "build/g2-all-source-20261110/report.json",
+  "source_report_sha256": "26baafdc5a31e426e7463112e5566c73e5eadb7be602052b320b1cfab942a308",
+  "manifest_sha256": "757a3ea110c87a2857532775d05bba38af78e88d9ecc0327bc7f2e1ce17e0122",
+  "compile_enabled_units": 4862,
+  "compiled_units": 4862,
+  "compile_failures": 0,
+  "duplicate_strong_symbols": 0,
+  "final_link_report": "build/g2-all-source-link-20261110/link-report.json",
+  "final_link_report_sha256": "550d9d9c4c274dee862fea526aef1ef97a8c4bd0cd8f70c0385d3648fe561609",
+  "payloads_linked": 7,
+  "undefined_symbols_in_final_elfs": 0,
+  "external_binary_archive_used": false,
+  "apollo_main_binary_sha256": "6451d9109ae0e618ae331e16ecadf246597075718088535b80ae972c175d1182",
+  "apollo_main_renode": {
+    "virtual_seconds": 2.0,
+    "log": "build/boot-trace/g2-all-source-20261110.log",
+    "log_sha256": "40ca215107a86e8335721d304dbfbe8b8df3d3d21604b7b3bfc41df34e64b35b",
+    "hci_host_packets": 56,
+    "same_packet_sequence_as_archive_linked_baseline": true,
+    "advertising_enable_command_seen": true,
+    "qualification": "Lenient peripheral fixtures and no battery discharge/charge measurement; not a hardware boot result."
+  },
+  "fuel_gauge": {
+    "source": "g2/src/apollo-main/drivers/power/npm1300/battery-model/g2c_fuel_gauge_source.c",
+    "status": "clean-room, uncalibrated development candidate",
+    "basis": "public Nordic API current convention, stock 80 mAh design capacity, generic voltage curve",
+    "stock_algorithm_or_battery_model_reconstructed": false,
+    "host_contract_check": "build/g2-fuel-source-20261110/fuel_contract.c passed"
+  },
+  "remaining_gaps": [
+    "EM9305 stock records 0-2 have no source-linked producers",
+    "remaining assembly and opaque executable providers have not all been replaced by C",
+    "whole-artifact source coverage, byte identity, and physical boot are unproven",
+    "fuel-gauge SOC needs measured battery calibration before hardware use"
+  ]
+}

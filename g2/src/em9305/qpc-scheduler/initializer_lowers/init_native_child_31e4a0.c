@@ -1,246 +1,108 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_31e4a0\n"
-".type opencfw_em9305_child_31e4a0,@function\n"
-"opencfw_em9305_child_31e4a0:\n"
-"L31e4a0:\n"
-"enter_s [r13-r15,blink]\n"
-"L31e4a2:\n"
-"sub_s sp,sp,0x18\n"
-"L31e4a4:\n"
-"mov_s r13,r0\n"
-"L31e4a6:\n"
-"ldb_s r0,[r0,0x1]\n"
-"L31e4a8:\n"
-"mov_s r15,r13\n"
-"L31e4aa:\n"
-"mov_s r14,r1\n"
-"L31e4ac:\n"
-"add r15,r15,570\n"
-"L31e4b0:\n"
-"breq_s r0,0,L31e4d8\n"
-"L31e4b2:\n"
-"breq.d.nt r0,0x3,L31e586\n"
-"L31e4b6:\n"
-"cmp_s r14,0x4c\n"
-"L31e4b8:\n"
-"cmp_s r0,2\n"
-"L31e4ba:\n"
-"bne_s L31e5b0\n"
-"L31e4bc:\n"
-"mov_s r0,r14\n"
-"L31e4be:\n"
-"add r0,r0,-71\n"
-"L31e4c2:\n"
-"cmp_s r0,2\n"
-"L31e4c4:\n"
-"bc.d L31e5e0\n"
-"L31e4c8:\n"
-"cmp_s r14,0x3f\n"
-"L31e4ca:\n"
-"beq_s L31e5e0\n"
-"L31e4cc:\n"
-"brne.d.nt r14,0x3d,L31e5aa\n"
-"L31e4d0:\n"
-"mov_s r0,r13\n"
-"L31e4d2:\n"
-"bl opencfw_em9305_mode_event_32279c\n"
-"L31e4d6:\n"
-"b_s L31e5e0\n"
-"L31e4d8:\n"
-"cmp_s r14,0x4d\n"
-"L31e4da:\n"
-"beq_s L31e5c4\n"
-"L31e4dc:\n"
-"cmp_s r14,0x4c\n"
-"L31e4de:\n"
-"beq_s L31e5b8\n"
-"L31e4e0:\n"
-"cmp_s r14,0x3f\n"
-"L31e4e2:\n"
-"bne_s L31e5e0\n"
-"L31e4e4:\n"
-"bl.d opencfw_em9305_mode_event_322b70\n"
-"L31e4e8:\n"
-"mov_s r0,r13\n"
-"L31e4ea:\n"
-"bl.d opencfw_em9305_mode_event_32c978\n"
-"L31e4ee:\n"
-"mov_s r0,r13\n"
-"L31e4f0:\n"
-"ld r0,[r13,0x4]\n"
-"L31e4f2:\n"
-"bbit0.d.nt r0,0,L31e500\n"
-"L31e4f6:\n"
-"mov_s r1,0x66\n"
-"L31e4f8:\n"
-"bl.d opencfw_em9305_mode_event_31bd78\n"
-"L31e4fc:\n"
-"mov_s r0,r13\n"
-"L31e4fe:\n"
-"ld r0,[r13,0x4]\n"
-"L31e500:\n"
-"bbit0.d.nt r0,0x8,L31e50e\n"
-"L31e504:\n"
-"mov_s r1,0x67\n"
-"L31e506:\n"
-"bl.d opencfw_em9305_mode_event_31bd78\n"
-"L31e50a:\n"
-"mov_s r0,r13\n"
-"L31e50c:\n"
-"ld r0,[r13,0x4]\n"
-"L31e50e:\n"
-"bbit0.nt r0,0x6,L31e528\n"
-"L31e512:\n"
-"ldh_s r0,[r15,0]\n"
-"L31e514:\n"
-"brhs.nt r0,0x1c,L31e520\n"
-"L31e518:\n"
-"ldh_s r0,[r15,0x2]\n"
-"L31e51a:\n"
-"cmp r0,329\n"
-"L31e51e:\n"
-"blo_s L31e528\n"
-"L31e520:\n"
-"mov_s r1,0x68\n"
-"L31e522:\n"
-"bl.d opencfw_em9305_mode_event_31bd78\n"
-"L31e526:\n"
-"mov_s r0,r13\n"
-"L31e528:\n"
-"mov_s r0,0x805c6c\n"
-"L31e52e:\n"
-"ld r1,[r0,0]\n"
-"L31e530:\n"
-"mov_s r0,0x805c70\n"
-"L31e536:\n"
-"ldh.as r2,[r15,161]\n"
-"L31e53a:\n"
-"ld r0,[r0,0]\n"
-"L31e53c:\n"
-"mov r3,890\n"
-"L31e540:\n"
-"ldb r11,[r15,-249]\n"
-"L31e544:\n"
-"ldb_s r3,[r13,r3]\n"
-"L31e546:\n"
-"ld r6,[r1,68]\n"
-"L31e54a:\n"
-"ld r5,[r1,64]\n"
-"L31e54e:\n"
-"ld r4,[r1,60]\n"
-"L31e552:\n"
-"ldb r8,[r1,52]\n"
-"L31e556:\n"
-"ld r7,[r1,72]\n"
-"L31e55a:\n"
-"ld_s r15,[r1,0x4c]\n"
-"L31e55c:\n"
-"ld_s r12,[r1,0x50]\n"
-"L31e55e:\n"
-"st_s r2,[sp,0x14]\n"
-"L31e560:\n"
-"sub_s r2,r13,r0\n"
-"L31e562:\n"
-"div r2,r2,912\n"
-"L31e566:\n"
-"st_s r3,[sp,0x10]\n"
-"L31e568:\n"
-"mov_s r3,r8\n"
-"L31e56a:\n"
-"st r11,[sp,12]\n"
-"L31e56e:\n"
-"st_s r12,[sp,0x4]\n"
-"L31e570:\n"
-"extb_s r0,r2\n"
-"L31e572:\n"
-"add_s r2,r1,0x4\n"
-"L31e574:\n"
-"mov_s r1,0\n"
-"L31e576:\n"
-"st_s r15,[sp,0]\n"
-"L31e578:\n"
-"bl.d opencfw_em9305_mode_event_323028\n"
-"L31e57c:\n"
-"st 0,[sp,8]\n"
-"L31e580:\n"
-"stb 2,[r13,1]\n"
-"L31e584:\n"
-"b_s L31e5e0\n"
-"L31e586:\n"
-"beq_s L31e5b8\n"
-"L31e588:\n"
-"cmp_s r14,0x4d\n"
-"L31e58a:\n"
-"beq_s L31e5c4\n"
-"L31e58c:\n"
-"cmp_s r14,0x51\n"
-"L31e58e:\n"
-"bne_s L31e5e0\n"
-"L31e590:\n"
-"ld.as r0,[r13,159]\n"
-"L31e594:\n"
-"st.as 0,[r13,160]\n"
-"L31e598:\n"
-"bclr_s r0,r0,0\n"
-"L31e59a:\n"
-"st.as r0,[r13,159]\n"
-"L31e59e:\n"
-"bl.d opencfw_em9305_mode_event_32cadc\n"
-"L31e5a2:\n"
-"mov_s r0,r13\n"
-"L31e5a4:\n"
-"stb 0,[r15,50]\n"
-"L31e5a8:\n"
-"b_s L31e5e0\n"
-"L31e5aa:\n"
-"bl.d opencfw_em9305_mode_event_3212f0\n"
-"L31e5ae:\n"
-"mov_s r1,r14\n"
-"L31e5b0:\n"
-"cmp_s r14,0x4d\n"
-"L31e5b2:\n"
-"beq_s L31e5c4\n"
-"L31e5b4:\n"
-"cmp_s r14,0x4c\n"
-"L31e5b6:\n"
-"bne_s L31e5e0\n"
-"L31e5b8:\n"
-"bl.d opencfw_em9305_mode_event_31ac3c\n"
-"L31e5bc:\n"
-"mov_s r0,r13\n"
-"L31e5be:\n"
-"bl.d opencfw_em9305_mode_event_3231c4\n"
-"L31e5c2:\n"
-"mov_s r0,r13\n"
-"L31e5c4:\n"
-"mov_s r0,0x805c70\n"
-"L31e5ca:\n"
-"ld r0,[r0,0]\n"
-"L31e5cc:\n"
-"sub_s r1,r13,r0\n"
-"L31e5ce:\n"
-"div r1,r1,912\n"
-"L31e5d2:\n"
-"bl.d opencfw_em9305_associated_schedule_drop_3136ac\n"
-"L31e5d6:\n"
-"extb_s r0,r1\n"
-"L31e5d8:\n"
-"bl.d opencfw_em9305_init_connection_release_31ad90\n"
-"L31e5dc:\n"
-"mov_s r0,r13\n"
-"L31e5de:\n"
-"b_s L31e5e8\n"
-"L31e5e0:\n"
-"mov_s r0,r13\n"
-"L31e5e2:\n"
-"bl.d opencfw_em9305_mode_event_318edc\n"
-"L31e5e6:\n"
-"mov_s r1,r14\n"
-"L31e5e8:\n"
-"add_s sp,sp,0x18\n"
-"L31e5ea:\n"
-"leave_s [r13-r15,blink,pcl]\n"
-".size opencfw_em9305_child_31e4a0,.-opencfw_em9305_child_31e4a0\n"
-);
+#include <stdint.h>
+
+/* Native 0x31e4a0..0x31e5ec: connection state machine event (state +1).
+ * State 0 (initiating): connect-complete 0x3f runs the setup children,
+ * raises the feature/PHY events (0x66/0x67/0x68, from flags +4 and the
+ * data length +570/+572) and reports the new connection through 323028
+ * with the pending connect command (*0x805c6c), moving to state 2. State 2
+ * forwards events other than 0x3d/0x3f/0x47/0x48 to 3212f0 (0x3d goes to
+ * 32279c). State 3 handles 0x51 (clear pending procedure +640/+636 bit 0,
+ * 32cadc, clear +620). In every state 0x4c tears down via 31ac3c/3231c4
+ * and 0x4d (and 0x4c) drop the schedule entry and release the connection;
+ * everything else ends in 318edc. */
+extern uint32_t opencfw_em9305_mode_event_32279c(uintptr_t);
+extern uint32_t opencfw_em9305_mode_event_322b70(uintptr_t);
+extern uint32_t opencfw_em9305_mode_event_32c978(uintptr_t);
+extern uint32_t opencfw_em9305_mode_event_31bd78(uintptr_t,uint32_t);
+extern uint32_t opencfw_em9305_mode_event_323028(uint32_t,uint32_t,uintptr_t,uint32_t,uint32_t,
+                                                 uint32_t,uint32_t,uint32_t,uint32_t,uint32_t,
+                                                 uint32_t,uint32_t,uint32_t,uint32_t);
+extern uint32_t opencfw_em9305_mode_event_32cadc(uintptr_t);
+extern uint32_t opencfw_em9305_mode_event_3212f0(uintptr_t,uint32_t);
+extern uint32_t opencfw_em9305_mode_event_31ac3c(uintptr_t);
+extern uint32_t opencfw_em9305_mode_event_3231c4(uintptr_t);
+extern uint32_t opencfw_em9305_associated_schedule_drop_3136ac(uint32_t);
+extern uint32_t opencfw_em9305_init_connection_release_31ad90(uintptr_t);
+extern uint32_t opencfw_em9305_mode_event_318edc(uintptr_t,uint32_t);
+
+static uint32_t r32(uintptr_t a){return *(volatile uint32_t *)a;}
+static uint32_t r16(uintptr_t a){return *(volatile uint16_t *)a;}
+static uint32_t r8(uintptr_t a){return *(volatile uint8_t *)a;}
+
+static uint32_t index_31e4a0(uintptr_t record)
+{
+    uint32_t base=r32(0x805c70u);
+    return (uint8_t)((int32_t)((uint32_t)record-base)/912);
+}
+
+static void connect_complete_31e4a0(uintptr_t record)
+{
+    (void)opencfw_em9305_mode_event_322b70(record);
+    (void)opencfw_em9305_mode_event_32c978(record);
+    uint32_t features=r32(record+4u);
+    if(features&1u) {
+        (void)opencfw_em9305_mode_event_31bd78(record,0x66u);
+        features=r32(record+4u);
+    }
+    if(features&0x100u) {
+        (void)opencfw_em9305_mode_event_31bd78(record,0x67u);
+        features=r32(record+4u);
+    }
+    if((features&0x40u)&&(r16(record+570u)>=0x1cu||r16(record+572u)>=329u))
+        (void)opencfw_em9305_mode_event_31bd78(record,0x68u);
+    uintptr_t command=r32(0x805c6cu);
+    uint32_t value892=r16(record+892u);
+    uint32_t value321=r8(record+321u);
+    uint32_t value890=r8(record+890u);
+    (void)opencfw_em9305_mode_event_323028(index_31e4a0(record),0u,command+4u,
+        r8(command+52u),r32(command+60u),r32(command+64u),r32(command+68u),
+        r32(command+72u),r32(command+0x4cu),r32(command+0x50u),0u,value321,value890,value892);
+    *(volatile uint8_t *)(record+1u)=2u;
+}
+
+uint32_t opencfw_em9305_child_31e4a0(uintptr_t record,uint32_t event)
+{
+    uint32_t state=r8(record+1u);
+    uint32_t teardown=0u,release=0u;
+    if(state==0u) {
+        if(event==0x4du) release=1u;
+        else if(event==0x4cu) teardown=1u;
+        else if(event==0x3fu) connect_complete_31e4a0(record);
+    } else if(state==3u) {
+        if(event==0x4cu) teardown=1u;
+        else if(event==0x4du) release=1u;
+        else if(event==0x51u) {
+            uint32_t pending=r32(record+636u);
+            *(volatile uint32_t *)(record+640u)=0u;
+            *(volatile uint32_t *)(record+636u)=pending&~1u;
+            (void)opencfw_em9305_mode_event_32cadc(record);
+            *(volatile uint8_t *)(record+620u)=0u;
+        }
+    } else {
+        uint32_t forward=1u;
+        if(state==2u) {
+            if(event-71u<2u||event==0x3fu) {
+                forward=0u;
+            } else if(event==0x3du) {
+                (void)opencfw_em9305_mode_event_32279c(record);
+                forward=0u;
+            } else {
+                (void)opencfw_em9305_mode_event_3212f0(record,event);
+            }
+        }
+        if(forward) {
+            if(event==0x4du) release=1u;
+            else if(event==0x4cu) teardown=1u;
+        }
+    }
+    if(teardown) {
+        (void)opencfw_em9305_mode_event_31ac3c(record);
+        (void)opencfw_em9305_mode_event_3231c4(record);
+        release=1u;
+    }
+    if(release) {
+        (void)opencfw_em9305_associated_schedule_drop_3136ac(index_31e4a0(record));
+        return opencfw_em9305_init_connection_release_31ad90(record);
+    }
+    return opencfw_em9305_mode_event_318edc(record,event);
+}

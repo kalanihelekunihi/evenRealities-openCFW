@@ -1,400 +1,149 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_30301c\n"
-".type opencfw_em9305_child_30301c,@function\n"
-"opencfw_em9305_child_30301c:\n"
-"L30301c:\n"
-"enter_s [r13-r25,blink]\n"
-"L30301e:\n"
-"st.aw fp,[sp,-4]\n"
-"L303022:\n"
-"sub_s sp,sp,0xc\n"
-"L303024:\n"
-"mov_s r24,r0\n"
-"L303026:\n"
-"ldb_s r12,[r0,0x10]\n"
-"L303028:\n"
-"ldh_s r0,[r1,0]\n"
-"L30302a:\n"
-"mov_s r23,r1\n"
-"L30302c:\n"
-"mov_s r15,r3\n"
-"L30302e:\n"
-"mov_s fp,r2\n"
-"L303030:\n"
-"bbit0.d.nt r0,r12,L303090\n"
-"L303034:\n"
-"mov_s r17,1\n"
-"L303036:\n"
-"ld_s r1,[r24,0x4]\n"
-"L303038:\n"
-"ld r13,[r23,4]\n"
-"L30303c:\n"
-"ld_s r0,[r24,0]\n"
-"L30303e:\n"
-"ldb r2,[r24,18]\n"
-"L303042:\n"
-"ldh r3,[r23,2]\n"
-"L303046:\n"
-"st_s r1,[r15,0xc]\n"
-"L303048:\n"
-"st_s r1,[r15,0x4]\n"
-"L30304a:\n"
-"mov_s r1,r13\n"
-"L30304c:\n"
-"asl r12,r17,r12\n"
-"L303050:\n"
-"st_s r0,[r15,0x8]\n"
-"L303052:\n"
-"st.ab r0,[r15,8]\n"
-"L303056:\n"
-"and r1,r1,64\n"
-"L30305a:\n"
-"and r21,r12,r3\n"
-"L30305e:\n"
-"stb_s r2,[r15,0xb]\n"
-"L303060:\n"
-"stb_s r2,[r15,0xa]\n"
-"L303062:\n"
-"lsr r0,r1,0x6\n"
-"L303066:\n"
-"add r2,r15,0xb\n"
-"L30306a:\n"
-"mov_s r1,fp\n"
-"L30306c:\n"
-"mov_s r3,r15\n"
-"L30306e:\n"
-"bl.d opencfw_em9305_radio_classify_314470\n"
-"L303072:\n"
-"mov_s r25,r2\n"
-"L303074:\n"
-"breq.d.nt r0,0x1,L30309e\n"
-"L303078:\n"
-"and r20,r13,0x4\n"
-"L30307c:\n"
-"cmp_s r0,3\n"
-"L30307e:\n"
-"beq_s L303178\n"
-"L303080:\n"
-"mov_s r19,1\n"
-"L303082:\n"
-"brne.d.nt r0,0x2,L3030ac\n"
-"L303086:\n"
-"mov_s r18,0\n"
-"L303088:\n"
-"mov_s r18,2\n"
-"L30308a:\n"
-"mov_s r19,0\n"
-"L30308c:\n"
-"mov_s r17,0\n"
-"L30308e:\n"
-"b_s L3030ac\n"
-"L303090:\n"
-"brne.nt r12,0x9,L303178\n"
-"L303094:\n"
-"ldb r0,[r23,4]\n"
-"L303098:\n"
-"bbit0.nt r0,0x7,L303178\n"
-"L30309c:\n"
-"b_s L30317a\n"
-"L30309e:\n"
-"extb r0,r21\n"
-"L3030a2:\n"
-"mov_s r18,3\n"
-"L3030a4:\n"
-"or.f 0,r20,r0\n"
-"L3030a8:\n"
-"mov_s r19,0\n"
-"L3030aa:\n"
-"bne_s L303178\n"
-"L3030ac:\n"
-"ld_s r14,[r15,0x4]\n"
-"L3030ae:\n"
-"ld_s r13,[r15,0]\n"
-"L3030b0:\n"
-"ldb r22,[r25]\n"
-"L3030b4:\n"
-"breq.d.nt r20,0,L3030e0\n"
-"L3030b8:\n"
-"mov_s r16,0\n"
-"L3030ba:\n"
-"ld_s r1,[r23,0x14]\n"
-"L3030bc:\n"
-"ld_s r0,[r23,0x10]\n"
-"L3030be:\n"
-"mov_s r16,3\n"
-"L3030c0:\n"
-"xor_s r1,r1,r14\n"
-"L3030c2:\n"
-"xor_s r0,r0,r13\n"
-"L3030c4:\n"
-"or.f 0,r0,r1\n"
-"L3030c8:\n"
-"bne_s L3030e0\n"
-"L3030ca:\n"
-"ldb r0,[r23,4]\n"
-"L3030ce:\n"
-"setne r1,r22,0\n"
-"L3030d2:\n"
-"and r0,r0,0x8\n"
-"L3030d6:\n"
-"lsr_s r0,r0,0x3\n"
-"L3030d8:\n"
-"xor.f 0,r1,r0\n"
-"L3030dc:\n"
-"bne_s L3030e0\n"
-"L3030de:\n"
-"mov_s r16,2\n"
-"L3030e0:\n"
-"extb.f r21,r21\n"
-"L3030e4:\n"
-"mov_s r0,0\n"
-"L3030e6:\n"
-"beq_s L30310a\n"
-"L3030e8:\n"
-"or.f 0,r13,r14\n"
-"L3030ec:\n"
-"bne_s L3030f8\n"
-"L3030ee:\n"
-"bl opencfw_em9305_radio_address_mode_303e5c\n"
-"L3030f2:\n"
-"cmp_s r0,0\n"
-"L3030f4:\n"
-"mov_s r0,2\n"
-"L3030f6:\n"
-"bne_s L30310a\n"
-"L3030f8:\n"
-"setne r0,r22,0\n"
-"L3030fc:\n"
-"mov_s r1,r13\n"
-"L3030fe:\n"
-"bl.d opencfw_em9305_radio_address_match_303df8\n"
-"L303102:\n"
-"mov_s r2,r14\n"
-"L303104:\n"
-"seteq r0,r0,0\n"
-"L303108:\n"
-"add_s r0,r0,2\n"
-"L30310a:\n"
-"ld_s r13,[r15,0x4]\n"
-"L30310c:\n"
-"ld_s r14,[r15,0]\n"
-"L30310e:\n"
-"brhs.d.nt r0,r16,L30314a\n"
-"L303112:\n"
-"ldb r22,[r25]\n"
-"L303116:\n"
-"breq.d.nt r20,0,L303184\n"
-"L30311a:\n"
-"setne r3,r22,0\n"
-"L30311e:\n"
-"ldb r2,[r23,4]\n"
-"L303122:\n"
-"ld_s r0,[r23,0x14]\n"
-"L303124:\n"
-"ld_s r1,[r23,0x10]\n"
-"L303126:\n"
-"and r2,r2,0x8\n"
-"L30312a:\n"
-"xor_s r0,r0,r13\n"
-"L30312c:\n"
-"xor_s r1,r1,r14\n"
-"L30312e:\n"
-"lsr_s r2,r2,0x3\n"
-"L303130:\n"
-"or.f 0,r1,r0\n"
-"L303134:\n"
-"xor_s r3,r3,r2\n"
-"L303136:\n"
-"or.ne r3,r3,0x1\n"
-"L30313a:\n"
-"not_s r0,r3\n"
-"L30313c:\n"
-"cmp_s r3,0\n"
-"L30313e:\n"
-"or r1,r17,r0\n"
-"L303142:\n"
-"mov.eq r18,0x2\n"
-"L303146:\n"
-"btst_s r1,0\n"
-"L303148:\n"
-"b_s L303174\n"
-"L30314a:\n"
-"breq.d.nt r21,0,L303184\n"
-"L30314e:\n"
-"or.f 0,r14,r13\n"
-"L303152:\n"
-"bne_s L30315e\n"
-"L303154:\n"
-"bl opencfw_em9305_radio_address_mode_303e5c\n"
-"L303158:\n"
-"cmp_s r0,0\n"
-"L30315a:\n"
-"mov_s r0,2\n"
-"L30315c:\n"
-"bne_s L30318c\n"
-"L30315e:\n"
-"setne r0,r22,0\n"
-"L303162:\n"
-"mov_s r1,r14\n"
-"L303164:\n"
-"bl.d opencfw_em9305_radio_address_match_303df8\n"
-"L303168:\n"
-"mov_s r2,r13\n"
-"L30316a:\n"
-"cmp_s r0,0\n"
-"L30316c:\n"
-"mov.ne r18,0x2\n"
-"L303170:\n"
-"or.f 0,r17,r0\n"
-"L303174:\n"
-"mov_s r0,r18\n"
-"L303176:\n"
-"bne_s L30318c\n"
-"L303178:\n"
-"mov_s r17,0\n"
-"L30317a:\n"
-"mov_s r0,r17\n"
-"L30317c:\n"
-"add_s sp,sp,0xc\n"
-"L30317e:\n"
-"ld.ab fp,[sp,4]\n"
-"L303182:\n"
-"leave_s [r13-r25,blink,pcl]\n"
-"L303184:\n"
-"breq.d.nt r19,0,L30318c\n"
-"L303188:\n"
-"mov_s r0,r18\n"
-"L30318a:\n"
-"mov_s r0,2\n"
-"L30318c:\n"
-"ldb r1,[r24,17]\n"
-"L303190:\n"
-"mov_s r17,1\n"
-"L303192:\n"
-"seteq r0,r0,0x2\n"
-"L303196:\n"
-"stb r17,[r15,13]\n"
-"L30319a:\n"
-"bbit0.d.t r1,0x1,L30317a\n"
-"L30319e:\n"
-"stb_s r0,[r15,0xc]\n"
-"L3031a0:\n"
-"ld_s r0,[r23,0x4]\n"
-"L3031a2:\n"
-"ld r1,[r15,0x4]\n"
-"L3031a4:\n"
-"ld r14,[r24,12]\n"
-"L3031a8:\n"
-"ld r13,[r24,8]\n"
-"L3031ac:\n"
-"ldb r16,[r24,19]\n"
-"L3031b0:\n"
-"ldb r2,[r25]\n"
-"L3031b4:\n"
-"ld r3,[r15,0]\n"
-"L3031b6:\n"
-"mov_s r4,r1\n"
-"L3031b8:\n"
-"stb r2,[sp,11]\n"
-"L3031bc:\n"
-"st_s r1,[sp,0x4]\n"
-"L3031be:\n"
-"bbit1.d.nt r0,0x4,L303204\n"
-"L3031c2:\n"
-"st_s r3,[sp,0]\n"
-"L3031c4:\n"
-"ld_s r2,[r23,0x4]\n"
-"L3031c6:\n"
-"lsr.f r1,r2\n"
-"L3031ca:\n"
-"bnc.d L30317a\n"
-"L3031ce:\n"
-"setne r0,r16,0\n"
-"L3031d2:\n"
-"xor_s r0,r0,r1\n"
-"L3031d4:\n"
-"bbit1.nt r0,0,L3031e6\n"
-"L3031d8:\n"
-"ld_s r0,[r23,0x8]\n"
-"L3031da:\n"
-"ld_s r1,[r23,0xc]\n"
-"L3031dc:\n"
-"xor_s r13,r13,r0\n"
-"L3031de:\n"
-"xor_s r1,r1,r14\n"
-"L3031e0:\n"
-"or.f 0,r13,r1\n"
-"L3031e4:\n"
-"beq_s L30317a\n"
-"L3031e6:\n"
-"breq.t r16,0,L303178\n"
-"L3031ea:\n"
-"and r0,r14,0xc000\n"
-"L3031f2:\n"
-"bxor.f 0,r0,0xe\n"
-"L3031f6:\n"
-"bne_s L303178\n"
-"L3031f8:\n"
-"bbit0.d.t r2,0x5,L30317a\n"
-"L3031fc:\n"
-"mov_s r17,0\n"
-"L3031fe:\n"
-"stb 0,[r15,13]\n"
-"L303202:\n"
-"b_s L30323c\n"
-"L303204:\n"
-"breq.nt r16,0,L303240\n"
-"L303208:\n"
-"and r0,r14,0xc000\n"
-"L303210:\n"
-"bxor.f 0,r0,0xe\n"
-"L303214:\n"
-"bne_s L303240\n"
-"L303216:\n"
-"breq.d.nt fp,0,L303232\n"
-"L30321a:\n"
-"mov_s r0,r13\n"
-"L30321c:\n"
-"add r2,sp,0xb\n"
-"L303220:\n"
-"add_s r3,sp,0\n"
-"L303222:\n"
-"bl.d opencfw_em9305_radio_address_project_303b7c\n"
-"L303226:\n"
-"mov_s r1,r14\n"
-"L303228:\n"
-"ld r4,[sp,4]\n"
-"L30322c:\n"
-"ld r3,[sp,0]\n"
-"L30322e:\n"
-"ldb r2,[sp,11]\n"
-"L303232:\n"
-"mov_s r0,r13\n"
-"L303234:\n"
-"bl.d opencfw_em9305_radio_address_associate_303844\n"
-"L303238:\n"
-"mov_s r1,r14\n"
-"L30323a:\n"
-"breq_s r0,0,L3031c4\n"
-"L30323c:\n"
-"mov_s r17,1\n"
-"L30323e:\n"
-"b_s L30317a\n"
-"L303240:\n"
-"setne r0,r2,0\n"
-"L303244:\n"
-"mov_s r1,r3\n"
-"L303246:\n"
-"bl.d opencfw_em9305_radio_peer_kind_3039f0\n"
-"L30324a:\n"
-"mov_s r2,r4\n"
-"L30324c:\n"
-"and r0,r0,254\n"
-"L303250:\n"
-"breq.t r0,0x2,L303178\n"
-"L303254:\n"
-"b_s L3031c4\n"
-".size opencfw_em9305_child_30301c,.-opencfw_em9305_child_30301c\n"
-);
+#include <stdint.h>
+
+/* Native 0x30301c..0x30324e: advertising/scan address filter policy. The
+ * PDU kind (request +16) must be enabled in the filter mask (filter +0;
+ * kind 9 alone passes on filter flag 0x80). The advertiser address (request
+ * +0/+4, type +18) is copied twice into the report (out +0/+8) and
+ * classified (native 0x314470, resolving when asked): rejected (3), resolved
+ * (2) or listed (1). An expected peer (filter flags bit 2, +0x10/+0x14,
+ * type bit 3) and the white list (filter +2 bit per kind, natives 0x303e5c,
+ * 0x303df8) decide whether the report passes and whether it counts as a
+ * resolved/identity match (out +20); out +21 marks acceptance. With target
+ * checking (request +17 bit 1) the target address (request +8/+12, type
+ * +19) must match our own address (filter +8/+12, flags bits 0/1), be an
+ * associated RPA (flags bit 4, natives 0x303b7c/0x303844/0x3039f0) or be an
+ * unresolved RPA accepted by flags bit 5. Returns 1 when accepted. */
+extern uint32_t opencfw_em9305_radio_classify_314470(uint32_t,uint32_t,uintptr_t,uintptr_t);
+extern uint32_t opencfw_em9305_radio_address_mode_303e5c(void);
+extern uint32_t opencfw_em9305_radio_address_match_303df8(uint32_t,uint32_t,uint32_t);
+extern uint32_t opencfw_em9305_radio_address_project_303b7c(uint32_t,uint32_t,uintptr_t,uintptr_t);
+extern uint32_t opencfw_em9305_radio_address_associate_303844(uint32_t,uint32_t,uint32_t,uint32_t,uint32_t);
+extern uint32_t opencfw_em9305_radio_peer_kind_3039f0(uint32_t,uint32_t,uint32_t);
+
+#define AF_U8(a) (*(volatile uint8_t *)(a))
+#define AF_U16(a) (*(volatile uint16_t *)(a))
+#define AF_U32(a) (*(volatile uint32_t *)(a))
+
+struct address_key {
+    uint32_t low;
+    uint32_t high;
+    uint8_t reserved[3];
+    uint8_t type;
+};
+
+uint32_t opencfw_em9305_child_30301c(uintptr_t request, uintptr_t filter, uint32_t resolve, uintptr_t out)
+{
+    struct address_key key;
+    uint32_t kind = AF_U8(request + 16u);
+    if (((AF_U16(filter) >> (kind & 31u)) & 1u) == 0u) {
+        if (kind != 9u) return 0u;
+        return (AF_U8(filter + 4u) & 0x80u) != 0u ? 1u : 0u;
+    }
+    uint32_t high = AF_U32(request + 4u);
+    uint32_t flags = AF_U32(filter + 4u);
+    uint32_t low = AF_U32(request + 0u);
+    uint32_t type = AF_U8(request + 18u);
+    uint32_t list_mask = AF_U16(filter + 2u);
+    AF_U32(out + 12u) = high;
+    AF_U32(out + 4u) = high;
+    AF_U32(out + 8u) = low;
+    AF_U32(out + 0u) = low;
+    uint32_t listed = ((1u << (kind & 31u)) & list_mask) & 0xffu;
+    AF_U8(out + 19u) = (uint8_t)type;
+    AF_U8(out + 18u) = (uint8_t)type;
+    uint32_t class = opencfw_em9305_radio_classify_314470((flags & 64u) >> 6, resolve, out + 19u, out + 8u);
+    uint32_t expect_peer = flags & 4u;
+    uint32_t accept = 1u, verdict = 0u, fallback = 1u;
+    if (class == 1u) {
+        verdict = 3u;
+        if ((expect_peer | listed) != 0u) return 0u;
+        fallback = 0u;
+    } else if (class == 3u) {
+        return 0u;
+    } else if (class == 2u) {
+        verdict = 2u;
+        fallback = 0u;
+        accept = 0u;
+    }
+    uint32_t a_high = AF_U32(out + 12u);
+    uint32_t a_low = AF_U32(out + 8u);
+    uint32_t a_type = AF_U8(out + 19u);
+    uint32_t level = 0u;
+    if (expect_peer != 0u) {
+        level = 3u;
+        if (AF_U32(filter + 0x14u) == a_high && AF_U32(filter + 0x10u) == a_low &&
+            (a_type != 0u ? 1u : 0u) == ((AF_U8(filter + 4u) & 8u) >> 3))
+            level = 2u;
+    }
+    uint32_t score = 0u;
+    if (listed != 0u) {
+        if ((a_low | a_high) == 0u && opencfw_em9305_radio_address_mode_303e5c() != 0u)
+            score = 2u;
+        else
+            score = (opencfw_em9305_radio_address_match_303df8(a_type != 0u, a_low, a_high) == 0u) + 2u;
+    }
+    uint32_t b_high = AF_U32(out + 12u);
+    uint32_t b_low = AF_U32(out + 8u);
+    a_type = AF_U8(out + 19u);
+    uint32_t code;
+    if (score < level) {
+        if (expect_peer == 0u) {
+            code = fallback == 0u ? verdict : 2u;
+        } else {
+            uint32_t mismatch = (a_type != 0u ? 1u : 0u) ^ ((AF_U8(filter + 4u) & 8u) >> 3);
+            if (((AF_U32(filter + 0x10u) ^ b_low) | (AF_U32(filter + 0x14u) ^ b_high)) != 0u) mismatch |= 1u;
+            if (mismatch == 0u) verdict = 2u;
+            if (((accept | ~mismatch) & 1u) == 0u) return 0u;
+            code = verdict;
+        }
+    } else if (listed == 0u) {
+        code = fallback == 0u ? verdict : 2u;
+    } else if ((b_low | b_high) == 0u && opencfw_em9305_radio_address_mode_303e5c() != 0u) {
+        code = 2u;
+    } else {
+        uint32_t matched = opencfw_em9305_radio_address_match_303df8(a_type != 0u, b_low, b_high);
+        if (matched != 0u) verdict = 2u;
+        if ((accept | matched) == 0u) return 0u;
+        code = verdict;
+    }
+    uint32_t options = AF_U8(request + 17u);
+    AF_U8(out + 21u) = 1u;
+    AF_U8(out + 20u) = code == 2u;
+    if ((options & 2u) == 0u) return 1u;
+    uint32_t target_flags = AF_U32(filter + 4u);
+    uint32_t o_high = AF_U32(out + 12u);
+    uint32_t peer_high = AF_U32(request + 12u);
+    uint32_t peer_low = AF_U32(request + 8u);
+    uint32_t peer_type = AF_U8(request + 19u);
+    uint32_t o_type = AF_U8(out + 19u);
+    uint32_t o_low = AF_U32(out + 8u);
+    key.type = (uint8_t)o_type;
+    key.high = o_high;
+    key.low = o_low;
+    if ((target_flags & 0x10u) != 0u) {
+        if (peer_type != 0u && (peer_high & 0xc000u) == 0x4000u) {
+            uint32_t k_type = o_type, k_low = o_low, k_high = o_high;
+            if (resolve != 0u) {
+                (void)opencfw_em9305_radio_address_project_303b7c(peer_low, peer_high, (uintptr_t)&key.type,
+                                                                  (uintptr_t)&key);
+                k_high = key.high;
+                k_low = key.low;
+                k_type = key.type;
+            }
+            if (opencfw_em9305_radio_address_associate_303844(peer_low, peer_high, k_type, k_low, k_high) != 0u)
+                return 1u;
+        } else if ((opencfw_em9305_radio_peer_kind_3039f0(o_type != 0u, o_low, o_high) & 0xfeu) == 2u) {
+            return 0u;
+        }
+    }
+    uint32_t own = AF_U32(filter + 4u);
+    if ((own & 1u) == 0u) return 1u;
+    if ((((peer_type != 0u ? 1u : 0u) ^ (own >> 1)) & 1u) == 0u &&
+        ((peer_low ^ AF_U32(filter + 8u)) | (AF_U32(filter + 12u) ^ peer_high)) == 0u)
+        return 1u;
+    if (peer_type == 0u) return 0u;
+    if ((peer_high & 0xc000u) != 0x4000u) return 0u;
+    if ((own & 0x20u) == 0u) return 0u;
+    AF_U8(out + 21u) = 0u;
+    return 1u;
+}

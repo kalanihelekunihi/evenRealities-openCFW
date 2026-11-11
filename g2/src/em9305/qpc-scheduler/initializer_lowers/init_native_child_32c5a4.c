@@ -1,118 +1,45 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_32c5a4\n"
-".type opencfw_em9305_child_32c5a4,@function\n"
-"opencfw_em9305_child_32c5a4:\n"
-"L32c5a4:\n"
-"enter_s [r13-r17,blink]\n"
-"L32c5a6:\n"
-"ld_s r13,[r0,0x24]\n"
-"L32c5a8:\n"
-"ld r2,[r13,0xadc]\n"
-"L32c5b0:\n"
-"brne_s r2,0,L32c5b8\n"
-"L32c5b2:\n"
-"brne.d.nt r1,0,L32c64a\n"
-"L32c5b6:\n"
-"mov_s r16,0\n"
-"L32c5b8:\n"
-"mov_s r0,0x805cac\n"
-"L32c5be:\n"
-"ld r0,[r0,0]\n"
-"L32c5c0:\n"
-"cmp_s r1,0\n"
-"L32c5c2:\n"
-"ldb r3,[r13,0xae0]\n"
-"L32c5ca:\n"
-"mov_s r14,r13\n"
-"L32c5cc:\n"
-"ldh_s r1,[r0,0x16]\n"
-"L32c5ce:\n"
-"add r12,r13,0x9d5\n"
-"L32c5d6:\n"
-"add r14,r14,1706\n"
-"L32c5da:\n"
-"add r16,r2,r1\n"
-"L32c5de:\n"
-"stb_s r3,[r12,0]\n"
-"L32c5e0:\n"
-"beq_s L32c622\n"
-"L32c5e2:\n"
-"ldh_s r15,[r14,0]\n"
-"L32c5e4:\n"
-"ldh r0,[r13,0x8c8]\n"
-"L32c5ec:\n"
-"mov_s r17,r13\n"
-"L32c5ee:\n"
-"brhs.d.nt r15,r0,L32c5fc\n"
-"L32c5f2:\n"
-"add r17,r17,1696\n"
-"L32c5f6:\n"
-"bl.d opencfw_em9305_child_325854\n"
-"L32c5fa:\n"
-"mov_s r0,r13\n"
-"L32c5fc:\n"
-"mov_s r1,r13\n"
-"L32c5fe:\n"
-"add r1,r1,1011\n"
-"L32c602:\n"
-"mov_s r3,0\n"
-"L32c604:\n"
-"mov_s r2,r17\n"
-"L32c606:\n"
-"bl.d opencfw_em9305_associated_packet_continue_323ac8\n"
-"L32c60a:\n"
-"mov_s r0,r13\n"
-"L32c60c:\n"
-"add2 r13,r13,663\n"
-"L32c610:\n"
-"ldh_s r1,[r14,0]\n"
-"L32c612:\n"
-"ld.as r2,[r13,-238]\n"
-"L32c616:\n"
-"sth_s r0,[r13,0]\n"
-"L32c618:\n"
-"sub_s r0,r1,r15\n"
-"L32c61a:\n"
-"add_s r15,r15,r2\n"
-"L32c61c:\n"
-"sth_s r0,[r13,0x8]\n"
-"L32c61e:\n"
-"st_s r15,[r13,0xc]\n"
-"L32c620:\n"
-"b_s L32c64a\n"
-"L32c622:\n"
-"mov_s r0,r13\n"
-"L32c624:\n"
-"bl.d opencfw_em9305_child_325854\n"
-"L32c628:\n"
-"sth 0,[r14]\n"
-"L32c62c:\n"
-"mov_s r1,r13\n"
-"L32c62e:\n"
-"add r1,r1,1011\n"
-"L32c632:\n"
-"mov_s r2,0\n"
-"L32c634:\n"
-"bl.d opencfw_em9305_child_323c0c\n"
-"L32c638:\n"
-"mov_s r0,r13\n"
-"L32c63a:\n"
-"add2 r13,r13,659\n"
-"L32c63e:\n"
-"ldh_s r2,[r14,0]\n"
-"L32c640:\n"
-"ld.as r1,[r13,-234]\n"
-"L32c644:\n"
-"sth_s r0,[r13,0]\n"
-"L32c646:\n"
-"sth_s r2,[r13,0x8]\n"
-"L32c648:\n"
-"st_s r1,[r13,0xc]\n"
-"L32c64a:\n"
-"mov_s r0,r16\n"
-"L32c64c:\n"
-"leave_s [r13-r17,blink,pcl]\n"
-".size opencfw_em9305_child_32c5a4,.-opencfw_em9305_child_32c5a4\n"
-);
+#include <stdint.h>
+
+/* Native 0x32c5a4..0x32c64e: build the next associated packet for the
+ * link at +36. Without a pending length (+2780) only a fresh start goes
+ * on. Latches +2784 into +2517 and returns pending + the configured
+ * overhead (+22 of 0x805cac; 0 when skipped). A fresh start resets the
+ * offset (+1706) and builds the first packet (323c0c) into
+ * {+2636 length, +2644 offset, +2648 base}; a continuation flushes when
+ * the offset is below +2248, continues (323ac8) and records
+ * {+2652 length, +2660 consumed, +2664 position}. */
+extern uint32_t opencfw_em9305_child_325854(uintptr_t link);
+extern uint32_t opencfw_em9305_associated_packet_continue_323ac8(uintptr_t,uintptr_t,uintptr_t,uint32_t);
+extern uint32_t opencfw_em9305_child_323c0c(uintptr_t link, uintptr_t buffer, uint32_t flags);
+
+uint32_t opencfw_em9305_child_32c5a4(uintptr_t owner, uint32_t continuing)
+{
+    uintptr_t link=*(volatile uint32_t *)(owner+36u);
+    uint32_t pending=*(volatile uint32_t *)(link+2780u);
+    if(pending==0u&&continuing!=0u)return 0u;
+    uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+    uint32_t latched=*(volatile uint8_t *)(link+2784u);
+    uint32_t total=pending+*(volatile uint16_t *)(config+22u);
+    volatile uint16_t *offset=(volatile uint16_t *)(link+1706u);
+    *(volatile uint8_t *)(link+2517u)=(uint8_t)latched;
+    if(continuing==0u){
+        *offset=0u;
+        (void)opencfw_em9305_child_325854(link);
+        uint32_t length=opencfw_em9305_child_323c0c(link,link+1011u,0u);
+        uint32_t position=*offset;
+        uint32_t base=*(volatile uint32_t *)(link+1700u);
+        *(volatile uint16_t *)(link+2636u)=(uint16_t)length;
+        *(volatile uint16_t *)(link+2644u)=(uint16_t)position;
+        *(volatile uint32_t *)(link+2648u)=base;
+        return total;
+    }
+    uint32_t start=*offset;
+    if(start<*(volatile uint16_t *)(link+2248u))(void)opencfw_em9305_child_325854(link);
+    uint32_t length=opencfw_em9305_associated_packet_continue_323ac8(link,link+1011u,link+1696u,0u);
+    uint32_t position=*offset;
+    uint32_t base=*(volatile uint32_t *)(link+1700u);
+    *(volatile uint16_t *)(link+2652u)=(uint16_t)length;
+    *(volatile uint16_t *)(link+2660u)=(uint16_t)(position-start);
+    *(volatile uint32_t *)(link+2664u)=start+base;
+    return total;
+}

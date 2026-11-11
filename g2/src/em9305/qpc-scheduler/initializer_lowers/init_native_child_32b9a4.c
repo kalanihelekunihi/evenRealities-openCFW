@@ -1,272 +1,113 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_32b9a4\n"
-".type opencfw_em9305_child_32b9a4,@function\n"
-"opencfw_em9305_child_32b9a4:\n"
-"L32b9a4:\n"
-"enter_s [r13-r19,blink]\n"
-"L32b9a6:\n"
-"ld_s r14,[r0,0x2c]\n"
-"L32b9a8:\n"
-"ld_s r13,[r0,0x24]\n"
-"L32b9aa:\n"
-"mov_s r15,r0\n"
-"L32b9ac:\n"
-"mov_s r0,r14\n"
-"L32b9ae:\n"
-"mov_s r16,r13\n"
-"L32b9b0:\n"
-"sth 0,[r14,224]\n"
-"L32b9b4:\n"
-"bl.d opencfw_em9305_init_callback_child_3246dc\n"
-"L32b9b8:\n"
-"add r13,r13,788\n"
-"L32b9bc:\n"
-"ldb r0,[r13,-90]\n"
-"L32b9c0:\n"
-"breq_s r0,0,L32b9cc\n"
-"L32b9c2:\n"
-"mov_s r1,3\n"
-"L32b9c4:\n"
-"bl.d opencfw_em9305_associated_cleanup_3266d0\n"
-"L32b9c8:\n"
-"mov_s r0,r16\n"
-"L32b9ca:\n"
-"leave_s [r13-r19,blink,pcl]\n"
-"L32b9cc:\n"
-"bl.d opencfw_em9305_init_callback_child_3246c0\n"
-"L32b9d0:\n"
-"mov_s r0,r14\n"
-"L32b9d2:\n"
-"ldb_s r0,[r14,0xf]\n"
-"L32b9d4:\n"
-"mov_s r1,0x805bed\n"
-"L32b9da:\n"
-"brne_s r0,0,L32b9de\n"
-"L32b9dc:\n"
-"ldb_s r0,[r1,0]\n"
-"L32b9de:\n"
-"stb_s r0,[r14,0xe]\n"
-"L32b9e0:\n"
-"ldb_s r0,[r1,0x1]\n"
-"L32b9e2:\n"
-"breq_s r0,0,L32b9fa\n"
-"L32b9e4:\n"
-"ld r4,[r15,8]\n"
-"L32b9e8:\n"
-"ld.as r3,[r16,175]\n"
-"L32b9ec:\n"
-"ldh.as r1,[r16,188]\n"
-"L32b9f0:\n"
-"ldb r0,[r16,1]\n"
-"L32b9f4:\n"
-"bl.d opencfw_em9305_associated_report_30e89c\n"
-"L32b9f8:\n"
-"mov_s r2,0\n"
-"L32b9fa:\n"
-"ldb_s r1,[r13,0]\n"
-"L32b9fc:\n"
-"ld.as r0,[r16,198]\n"
-"L32ba00:\n"
-"ld.as r2,[r16,175]\n"
-"L32ba04:\n"
-"mov r19,r16\n"
-"L32ba08:\n"
-"mpywhl r0,r0,r1\n"
-"L32ba0c:\n"
-"add r17,r16,0xafc\n"
-"L32ba14:\n"
-"add r19,r19,720\n"
-"L32ba18:\n"
-"sub r18,r2,r0\n"
-"L32ba1c:\n"
-"st r2,[r15,20]\n"
-"L32ba20:\n"
-"ldb_s r0,[r13,0xb]\n"
-"L32ba22:\n"
-"ldb_s r2,[r13,0]\n"
-"L32ba24:\n"
-"add_s r0,r0,1\n"
-"L32ba26:\n"
-"bmsk r1,r0,0x6\n"
-"L32ba2a:\n"
-"brne.d.nt r1,r2,L32ba4a\n"
-"L32ba2e:\n"
-"stb_s r0,[r13,0xb]\n"
-"L32ba30:\n"
-"ldh.as r0,[r16,188]\n"
-"L32ba34:\n"
-"ld.as r2,[r16,198]\n"
-"L32ba38:\n"
-"ld r1,[r15,0x8]\n"
-"L32ba3a:\n"
-"add_s r3,r0,0x1\n"
-"L32ba3c:\n"
-"stb 0,[r13,11]\n"
-"L32ba40:\n"
-"add r0,r18,r2\n"
-"L32ba44:\n"
-"sth.as r3,[r16,188]\n"
-"L32ba48:\n"
-"b_s L32ba50\n"
-"L32ba4a:\n"
-"ld.as r1,[r16,198]\n"
-"L32ba4e:\n"
-"ld r0,[r15,0x8]\n"
-"L32ba50:\n"
-"add_s r0,r0,r1\n"
-"L32ba52:\n"
-"st.as r0,[r16,200]\n"
-"L32ba56:\n"
-"st_s r0,[r15,0x8]\n"
-"L32ba58:\n"
-"bl.d opencfw_em9305_associated_channel_pending_327af4\n"
-"L32ba5c:\n"
-"mov_s r0,r16\n"
-"L32ba5e:\n"
-"ldb_s r1,[r13,0xb]\n"
-"L32ba60:\n"
-"ldh.as r0,[r16,188]\n"
-"L32ba64:\n"
-"xor_s r1,r1,r0\n"
-"L32ba66:\n"
-"bl.d opencfw_em9305_associated_channel_seed_324c98\n"
-"L32ba6a:\n"
-"mov_s r0,r19\n"
-"L32ba6c:\n"
-"ld_s r2,[r17,0]\n"
-"L32ba6e:\n"
-"ldb_s r1,[r13,0xb]\n"
-"L32ba70:\n"
-"ldb r3,[r2,76]\n"
-"L32ba74:\n"
-"bmsk_s r1,r1,0x6\n"
-"L32ba76:\n"
-"brne.d.nt r1,r3,L32ba82\n"
-"L32ba7a:\n"
-"stb r0,[r13,-91]\n"
-"L32ba7e:\n"
-"stb 1,[r2,77]\n"
-"L32ba82:\n"
-"mov_s r1,0\n"
-"L32ba84:\n"
-"bl.d opencfw_em9305_associated_schedule_insert_312da4\n"
-"L32ba88:\n"
-"mov_s r0,r15\n"
-"L32ba8a:\n"
-"breq_s r0,0,L32ba20\n"
-"L32ba8c:\n"
-"ldb_s r1,[r13,0xb]\n"
-"L32ba8e:\n"
-"ld.as r2,[r13,93]\n"
-"L32ba92:\n"
-"mov_s r15,0xf0c\n"
-"L32ba98:\n"
-"bmsk r0,r1,0x6\n"
-"L32ba9c:\n"
-"add_s r0,r0,r2\n"
-"L32ba9e:\n"
-"ldb_s r0,[r0,r15]\n"
-"L32baa0:\n"
-"add r14,r14,261\n"
-"L32baa4:\n"
-"stb 0,[r14]\n"
-"L32baa8:\n"
-"cmp r0,255\n"
-"L32baac:\n"
-"beq_s L32bab4\n"
-"L32baae:\n"
-"asl_s r0,r0,0x8\n"
-"L32bab0:\n"
-"ldb_s r0,[r2,r0]\n"
-"L32bab2:\n"
-"brne_s r0,0,L32bad6\n"
-"L32bab4:\n"
-"sth.as 0,[r13,178]\n"
-"L32bab8:\n"
-"bl opencfw_em9305_scan_random_30c478\n"
-"L32babc:\n"
-"mov_s r1,0\n"
-"L32babe:\n"
-"bl.d opencfw_em9305_crc_update_304678\n"
-"L32bac2:\n"
-"mov_s r2,0\n"
-"L32bac4:\n"
-"ldh r1,[r16,64]\n"
-"L32bac8:\n"
-"sth r0,[r13,-82]\n"
-"L32bacc:\n"
-"xor_s r1,r1,r0\n"
-"L32bace:\n"
-"bmsk.f 0,r1,0xb\n"
-"L32bad2:\n"
-"beq_s L32bab8\n"
-"L32bad4:\n"
-"ldb_s r1,[r13,0xb]\n"
-"L32bad6:\n"
-"bmsk.f 0,r1,0x6\n"
-"L32bada:\n"
-"bne_s L32b9ca\n"
-"L32badc:\n"
-"ld.as r0,[r13,93]\n"
-"L32bae0:\n"
-"mov_s r14,0xf08\n"
-"L32bae6:\n"
-"add_s r0,r0,r14\n"
-"L32bae8:\n"
-"ld r1,[r0,0]\n"
-"L32baea:\n"
-"bl.d opencfw_em9305_ll_mask_count_30c414\n"
-"L32baee:\n"
-"ld r0,[r0,-4]\n"
-"L32baf2:\n"
-"ldb_s r2,[r13,0]\n"
-"L32baf4:\n"
-"brhs.nt r0,r2,L32bb0a\n"
-"L32baf8:\n"
-"ld.as r0,[r13,93]\n"
-"L32bafc:\n"
-"add_s r14,r14,r0\n"
-"L32bafe:\n"
-"ld r1,[r14,0]\n"
-"L32bb00:\n"
-"bl.d opencfw_em9305_ll_mask_count_30c414\n"
-"L32bb04:\n"
-"ld r0,[r14,-4]\n"
-"L32bb08:\n"
-"mov_s r2,r0\n"
-"L32bb0a:\n"
-"sub.f lp_count,r2,0\n"
-"L32bb0e:\n"
-"beq_s L32bb28\n"
-"L32bb10:\n"
-"ld.as r0,[r13,93]\n"
-"L32bb14:\n"
-"add r15,r15,r0\n"
-"L32bb18:\n"
-"lp L32bb28\n"
-"L32bb1c:\n"
-"ldb.ab r0,[r15,1]\n"
-"L32bb20:\n"
-"cmp r0,255\n"
-"L32bb24:\n"
-"bne_s L32b9ca\n"
-"L32bb26:\n"
-"nop_s\n"
-"L32bb28:\n"
-"ld_s r1,[r17,0]\n"
-"L32bb2a:\n"
-"ldb r0,[r16,1]\n"
-"L32bb2e:\n"
-"stb 0,[r1,78]\n"
-"L32bb32:\n"
-"stb r2,[r1,79]\n"
-"L32bb36:\n"
-"bl.d opencfw_em9305_child_30e858\n"
-"L32bb3a:\n"
-"mov_s r1,0\n"
-"L32bb3c:\n"
-"leave_s [r13-r19,blink,pcl]\n"
-".size opencfw_em9305_child_32b9a4,.-opencfw_em9305_child_32b9a4\n"
-);
+#include <stdint.h>
+
+/* Native 0x32b9a4..0x32bb40: advance a BIG/BIS event after transmission.
+ * Reset the session (+224, native 0x3246dc); a terminating group (+698)
+ * is cleaned up with action 3. Otherwise refresh the session (native
+ * 0x3246c0, +14 from +15 or the default 0x805bed), optionally report the
+ * event (0x805bee, native 0x30e89c), then step the subevent counter (+799,
+ * 7 bits, wrapping at the subevent count +788 into the event counter +376)
+ * and the anchor (+800 / context +8, by the subevent spacing +792) with
+ * channel selection (natives 0x327af4, 0x324c98) until the schedule accepts
+ * the event; the control subevent (+0xafc +76) is flagged. After the
+ * insertion, a missing payload (table at *(+1160): +0xf0c / +0x0) resets
+ * the payload state and re-seeds its CRC (distinct from +64 in the low 12
+ * bits); at the event boundary, when every subevent slot is still empty
+ * (0xff) the group reports LL event 0x35 with the subevent count. */
+extern uint32_t opencfw_em9305_init_callback_child_3246dc(uintptr_t);
+extern uint32_t opencfw_em9305_init_callback_child_3246c0(uintptr_t);
+extern uint32_t opencfw_em9305_associated_cleanup_3266d0(uintptr_t,uint32_t);
+extern uint32_t opencfw_em9305_associated_report_30e89c(uint32_t,uint32_t,uint32_t,uint32_t,uint32_t);
+extern uint32_t opencfw_em9305_associated_channel_pending_327af4(uintptr_t);
+extern uint32_t opencfw_em9305_associated_channel_seed_324c98(uintptr_t,uint32_t);
+extern uint32_t opencfw_em9305_associated_schedule_insert_312da4(uintptr_t,uintptr_t);
+extern uint32_t opencfw_em9305_scan_random_30c478(void);
+extern uint32_t opencfw_em9305_crc_update_304678(uint32_t,uint32_t,uintptr_t);
+extern uint32_t opencfw_em9305_ll_mask_count_30c414(uint32_t,uint32_t);
+extern uint32_t opencfw_em9305_child_30e858(uint32_t,uint32_t,uint32_t);
+
+#define BIG_U8(a) (*(volatile uint8_t *)(a))
+#define BIG_U16(a) (*(volatile uint16_t *)(a))
+#define BIG_U32(a) (*(volatile uint32_t *)(a))
+
+void opencfw_em9305_child_32b9a4(uintptr_t context)
+{
+    uintptr_t session = BIG_U32(context + 0x2cu);
+    uintptr_t group = BIG_U32(context + 0x24u);
+    BIG_U16(session + 224u) = 0u;
+    (void)opencfw_em9305_init_callback_child_3246dc(session);
+    if (BIG_U8(group + 698u) != 0u) {
+        (void)opencfw_em9305_associated_cleanup_3266d0(group, 3u);
+        return;
+    }
+    (void)opencfw_em9305_init_callback_child_3246c0(session);
+    uint32_t value = BIG_U8(session + 15u);
+    if (value == 0u) value = BIG_U8(0x805bedu);
+    BIG_U8(session + 14u) = (uint8_t)value;
+    if (BIG_U8(0x805beeu) != 0u)
+        (void)opencfw_em9305_associated_report_30e89c(BIG_U8(group + 1u), BIG_U16(group + 376u), 0u,
+                                                      BIG_U32(group + 700u), BIG_U32(context + 8u));
+    uint32_t subevents = BIG_U8(group + 788u);
+    uint32_t spacing = BIG_U32(group + 792u);
+    uint32_t anchor = BIG_U32(group + 700u);
+    uint32_t base = anchor - spacing * subevents;
+    BIG_U32(context + 20u) = anchor;
+    do {
+        uint32_t next = BIG_U8(group + 799u) + 1u;
+        uint32_t count = BIG_U8(group + 788u);
+        BIG_U8(group + 799u) = (uint8_t)next;
+        uint32_t time, step;
+        if ((next & 0x7fu) == count) {
+            uint32_t event = BIG_U16(group + 376u);
+            uint32_t interval = BIG_U32(group + 792u);
+            step = BIG_U32(context + 8u);
+            BIG_U8(group + 799u) = 0u;
+            time = base + interval;
+            BIG_U16(group + 376u) = (uint16_t)(event + 1u);
+        } else {
+            step = BIG_U32(group + 792u);
+            time = BIG_U32(context + 8u);
+        }
+        time += step;
+        BIG_U32(group + 800u) = time;
+        BIG_U32(context + 8u) = time;
+        (void)opencfw_em9305_associated_channel_pending_327af4(group);
+        uint32_t seed = opencfw_em9305_associated_channel_seed_324c98(
+            group + 720u, BIG_U8(group + 799u) ^ BIG_U16(group + 376u));
+        uintptr_t control = BIG_U32(group + 0xafcu);
+        uint32_t subevent = BIG_U8(group + 799u) & 0x7fu;
+        uint32_t control_subevent = BIG_U8(control + 76u);
+        BIG_U8(group + 697u) = (uint8_t)seed;
+        if (subevent == control_subevent) BIG_U8(control + 77u) = 1u;
+    } while (opencfw_em9305_associated_schedule_insert_312da4(context, 0u) == 0u);
+    uint32_t subevent = BIG_U8(group + 799u);
+    uintptr_t payloads = BIG_U32(group + 1160u);
+    uint32_t slot = BIG_U8(payloads + (subevent & 0x7fu) + 0xf0cu);
+    BIG_U8(session + 261u) = 0u;
+    if (slot == 255u || BIG_U8(payloads + (slot << 8)) == 0u) {
+        BIG_U16(group + 1144u) = 0u;
+        uint32_t crc;
+        do {
+            uint32_t random = opencfw_em9305_scan_random_30c478();
+            crc = opencfw_em9305_crc_update_304678(random, 0u, 0u);
+            BIG_U16(group + 706u) = (uint16_t)crc;
+        } while (((BIG_U16(group + 64u) ^ crc) & 0xfffu) == 0u);
+        subevent = BIG_U8(group + 799u);
+    }
+    if ((subevent & 0x7fu) != 0u) return;
+    payloads = BIG_U32(group + 1160u);
+    uint32_t pending = opencfw_em9305_ll_mask_count_30c414(BIG_U32(payloads + 0xf04u), BIG_U32(payloads + 0xf08u));
+    uint32_t count = BIG_U8(group + 788u);
+    if (pending < count) {
+        payloads = BIG_U32(group + 1160u);
+        count = opencfw_em9305_ll_mask_count_30c414(BIG_U32(payloads + 0xf04u), BIG_U32(payloads + 0xf08u));
+    }
+    if (count != 0u) {
+        const volatile uint8_t *slots = (const volatile uint8_t *)(BIG_U32(group + 1160u) + 0xf0cu);
+        for (uint32_t index = 0u; index < count; ++index)
+            if (slots[index] != 255u) return;
+    }
+    uintptr_t control = BIG_U32(group + 0xafcu);
+    BIG_U8(control + 78u) = 0u;
+    BIG_U8(control + 79u) = (uint8_t)count;
+    (void)opencfw_em9305_child_30e858(BIG_U8(group + 1u), 0u, count);
+}

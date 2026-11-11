@@ -85,7 +85,7 @@ extern void audio_uart_lv_anim_init_4503d6(void *anim);              /* lv_anim_
 extern void *audio_uart_lv_anim_start_450408(void *anim);            /* lv_anim_start */
 extern uint32_t audio_uart_lv_style_unlink_450500(void *var, void *exec_cb); /* lv_anim_delete */
 extern void *audio_uart_page_lv_anim_lookup_450566(void *var, void *exec_cb); /* lv_anim_get */
-extern int32_t audio_uart_lv_anim_path_450672(void *anim);           /* lv_anim_path_ease_out */
+extern int32_t lv_anim_path_ease_out(void *anim);           /* lv_anim_path_ease_out */
 extern void audio_uart_lv_anim_values_4506ce(void *anim, int32_t start, int32_t end);
 extern const char *audio_uart_page_49942e(void *label, const char *text); /* lv_label_set_text */
 extern uint32_t g2_log_module_length(const char *s);                 /* strlen 0x44a43c */
@@ -281,7 +281,7 @@ void common_text_scroll_with_anim_4dfb78(common_text_t *text, int32_t target_y, 
                                      target_y);
     a.duration = duration;
     a.exec_cb = common_text_scroll_anim_exec_cb_4df9a2;
-    a.path_cb = audio_uart_lv_anim_path_450672;
+    a.path_cb = lv_anim_path_ease_out;
     a.completed_cb = common_text_scroll_anim_complete_cb_4dfa2c;
     a.user_data = text;
     (void)audio_uart_lv_anim_start_450408(&a);
@@ -348,7 +348,7 @@ void common_text_trigger_rubber_band_4dfe50(common_text_t *text, uint8_t is_top)
     audio_uart_lv_anim_values_4506ce(&a, 0, stretch_y);
     a.duration = RUBBER_BAND_MS;
     a.exec_cb = common_text_rubber_band_anim_exec_cb_4dfcb8;
-    a.path_cb = audio_uart_lv_anim_path_450672;
+    a.path_cb = lv_anim_path_ease_out;
     a.reverse_duration = RUBBER_BAND_MS;
     a.reverse_delay = 0u;
     a.completed_cb = common_text_rubber_band_anim_complete_cb_4dfcc0;

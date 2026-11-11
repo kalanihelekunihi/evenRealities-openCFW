@@ -40,7 +40,7 @@ typedef struct {
 #define MSPI_MODULE 1u
 
 extern volatile uint32_t g2_norflash_controller_handle_20074544; /* RAM 0x20074544 */
-extern void *audio_uart_font_flash_mutex;                       /* RAM 0x20074548 */
+extern void * volatile audio_uart_font_flash_mutex;              /* RAM 0x20074548 */
 extern void *g2_norflash_device_context_20074540;              /* RAM 0x20074540 */
 extern g2_mspi_timing_t g2_mspi_timing_config_20000820;        /* RAM 0x20000820 (8-byte slot) */
 extern const g2_mspi_timing_t g2_mspi_timing_table_20000828[TIMING_SETTINGS]; /* RAM 0x20000828 */

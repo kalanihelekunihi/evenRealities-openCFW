@@ -1,2 +1,35 @@
-/* Native calendar frames; symbolic instructions and typed literals only. */
-__attribute__((naked,section(".text.r1_event_service_0008b0fc"))) void r1_event_service_0008b0fc(void) { __asm__ volatile("NCF_8b0fc:\npush\t{r4, r5, r6, lr}\nNCF_8b0fe:\ncmp\tr0, #0\nNCF_8b100:\nbeq.n NCF_8b134\nNCF_8b102:\nmov\tr4, r0\nNCF_8b104:\nbl r1_subscriber_current_thread\nNCF_8b108:\nmov\tr5, r0\nNCF_8b10a:\nbl r1_subscriber_lock\nNCF_8b10e:\nldr\tr0, [r4, #0]\nNCF_8b110:\nb.n NCF_8b128\nNCF_8b112:\nldr\tr1, [r0, #0]\nNCF_8b114:\ncbz r1, NCF_8b122\nNCF_8b116:\nldr\tr0, [r0, #4]\nNCF_8b118:\nldr\tr0, [r0, #0]\nNCF_8b11a:\ncmp\tr0, r5\nNCF_8b11c:\nbne.n NCF_8b122\nNCF_8b11e:\nadds\tr0, r4, #6\nNCF_8b120:\nblx\tr1\nNCF_8b122:\nldr\tr0, [r4, #0]\nNCF_8b124:\nldr\tr0, [r0, #8]\nNCF_8b126:\nstr\tr0, [r4, #0]\nNCF_8b128:\ncmp\tr0, #0\nNCF_8b12a:\nbne.n NCF_8b112\nNCF_8b12c:\nldmia.w\tsp!, {r4, r5, r6, lr}\nNCF_8b130:\nb.w r1_subscriber_unlock\nNCF_8b134:\npop\t{r4, r5, r6, pc}\n.space 2,0\n"); }
+#include "native_subscriber.h"
+typedef struct __attribute__((packed,may_alias)) {uint32_t value;} subscriber_word;
+static uint32_t word(const volatile uint8_t *p)
+{return ((const volatile subscriber_word *)p)->value;}
+static void put(volatile uint8_t *p,uint32_t value)
+{((volatile subscriber_word *)p)->value=value;}
+/* The native callback receives its payload in R0 and its own target in R1.
+ * A required tail call preserves the caller's link register. */
+typedef void (*r1_subscriber_callback_fn)(uint32_t,uint32_t);
+__attribute__((noinline,used)) void r1_subscriber_invoke(
+ uint32_t payload,uint32_t callback)
+{__attribute__((musttail)) return
+ ((r1_subscriber_callback_fn)(uintptr_t)callback)(payload,callback);}
+/* Native 0x8b0fc reloads the event head after every callback, before loading
+ * next. A callback clearing that head still causes the native read at +8. */
+osStatus_t r1_event_service_0008b0fc(volatile uint8_t *event)
+{
+ if(!event)return osOK;
+ uint32_t thread=(uint32_t)(uintptr_t)osThreadGetId();
+ (void)r1_subscriber_lock();
+ uint32_t node=word(event);
+ while(node){
+  const volatile uint8_t *entry=(const volatile uint8_t *)(uintptr_t)node;
+  uint32_t callback=word(entry);
+  if(callback){
+   uint32_t owner=word(entry+4);
+   if(word((const volatile uint8_t *)(uintptr_t)owner)==thread)
+    r1_subscriber_invoke((uint32_t)(uintptr_t)event+6u,callback);
+  }
+  node=word(event);
+  node=word((const volatile uint8_t *)(uintptr_t)(node+8u));
+  put(event,node);
+ }
+ return r1_subscriber_unlock();
+}

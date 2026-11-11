@@ -1,0 +1,53 @@
+{
+  "schema": 1,
+  "target": "s200_v2.2.6.10 codec BINH B image",
+  "stock": {
+    "bytes": 94352,
+    "sha256": "2d5b778f89f28f35a0ab6addcefb1f9adddf79beafd8ba61f695eedb859128e1",
+    "stage1_block_bytes": 12288,
+    "stage2_bytes": 82060
+  },
+  "source": {
+    "stage1_registered_c_units": 11,
+    "stage1_linked_bytes": 6764,
+    "stage1_sha256": "973c21bea4c70bdbe64a11b7f76666f856f16547595fe55f927efc273a878801",
+    "stage1_vectors_match_stock": true,
+    "stage1_reset_address": "0x10000100",
+    "stage1_default_address": "0x10000130",
+    "stage1_boot_info_vma": "0x20001720",
+    "stage2_linked_bytes": 81600,
+    "stage2_sha256": "b9dba1471388c801e082292b0cf3c62a7ebf294dc6fb7711b47a5f0056432a80",
+    "stage2_reset_address": "0x10003100",
+    "package_bytes": 94352,
+    "package_sha256": "6d5915789f8c996c1e74fbc1ea7300f858398cc4e58d8053fca0f2e071a3cea2",
+    "package_crc32_mpeg2": "0x13bb6793",
+    "stock_byte_identical": false
+  },
+  "focused_source_report": {
+    "path": "build/g2-codec-b-stage1-source-20261110/report.json",
+    "sha256": "5d97fbabd13f6f0ab9e9bea11e1a318f563a0db13661b58c90d264fe7ea583b2"
+  },
+  "focused_link_report": {
+    "path": "build/g2-codec-b-stage1-link-20261110/link-report.json",
+    "sha256": "385db5fda8b5fe876c2fe92ea918d38de592c3e307fe623e484f637df60e2270"
+  },
+  "full_source_report": {
+    "path": "build/g2-all-codec-b-stage1-20261110/report.json",
+    "sha256": "4ed83c4bf951f7876cbe7a2466b29ea3727e77ad538f511d153725140064dc62",
+    "built_units": 4868,
+    "failed_units": 0,
+    "duplicate_strong_symbols": 0,
+    "manifest_changed_during_build": false
+  },
+  "full_link_report": {
+    "path": "build/g2-all-codec-b-stage1-link-20261110/link-report.json",
+    "sha256": "23461b6c4f159b4dea80f34775f8b41d055cb9a04674d8f1c1c47f35ada8214a",
+    "linked_payloads": 7,
+    "external_binary_archive_used": false
+  },
+  "limitations": [
+    "The stage-1 C source is a candidate; reset/body behavior and physical boot have not been compared against stock.",
+    "Padding fills unproduced stage-1 and stage-2 wire bytes; package format validation does not prove source completeness.",
+    "BINH A and NPU command/weight payload are not source packaged; full codec FWPK remains incomplete."
+  ]
+}

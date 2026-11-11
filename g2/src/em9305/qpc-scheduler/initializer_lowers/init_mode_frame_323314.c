@@ -1,31 +1,38 @@
 #include <stdint.h>
 
-/* Native 0x323314..0x323370. The -20 ARC frame is passed, including
- * untouched bytes, to the selected event callback. */
-extern uint32_t opencfw_em9305_mode_event_323314(uintptr_t context,
-                                                     uint32_t reason);
+/* Native 0x323314..0x323370: report mode event 10 for the connection
+ * context (handle = context index in the 912-byte table at *0x805c70).
+ * The 16-byte event carries the handle at +0 and +6, the reason at +3 and
+ * +4, and an 8-byte primary query result at +8 (cleared first). The
+ * query uses the context words +536/+540 when the configuration byte
+ * (*0x805cac)+4 is at least 9, otherwise +544/+548. Byte +5 is not
+ * written, as in stock. */
 extern uint32_t opencfw_em9305_primary_query_313960(uintptr_t packet,
                                                    uint32_t first,
                                                    uint32_t second);
 extern uint32_t opencfw_em9305_ll_event_callback_30e79c(uintptr_t event);
-__asm__(
-".text\n.balign 4\n.global opencfw_em9305_mode_event_323314\n"
-".type opencfw_em9305_mode_event_323314,@function\n"
-"opencfw_em9305_mode_event_323314:\n"
-"st.aw blink,[sp,-20]\n"
-"ld r2,[0x805c70]\nld r12,[0x805cac]\n"
-"st 0,[sp,16]\nsub r2,r0,r2\ndiv r2,r2,912\n"
-"st 0,[sp,12]\nstb_s r1,[sp,8]\nstb r1,[sp,7]\n"
-"stb 10,[sp,6]\nextb r3,r2\nmov r1,sp\n"
-"sth_s r3,[r1,10]\nldb_s r2,[r12,4]\n"
-"brhs.d r2,9,.Lmode_323314_high\n"
-"sth_s r3,[r1,4]\n"
-"ld r2,[r0,548]\nld r1,[r0,544]\n"
-"b .Lmode_323314_call\n"
-".Lmode_323314_high:\n"
-"ld r2,[r0,540]\nld r1,[r0,536]\n"
-".Lmode_323314_call:\n"
-"bl.d opencfw_em9305_primary_query_313960\nadd r0,sp,12\n"
-"bl.d opencfw_em9305_ll_event_callback_30e79c\nadd r0,sp,4\n"
-"ld.ab blink,[sp,20]\nj [blink]\n"
-".size opencfw_em9305_mode_event_323314,.-opencfw_em9305_mode_event_323314\n");
+
+uint32_t opencfw_em9305_mode_event_323314(uintptr_t context,uint32_t reason)
+{
+    _Alignas(4) uint8_t event[16];
+    uintptr_t base=*(volatile uint32_t *)0x805c70u;
+    uintptr_t config=*(volatile uint32_t *)0x805cacu;
+    *(uint32_t *)(void *)(event+12)=0u;
+    int32_t index=(int32_t)(context-base)/912;
+    *(uint32_t *)(void *)(event+8)=0u;
+    event[4]=(uint8_t)reason;
+    event[3]=(uint8_t)reason;
+    event[2]=10u;
+    *(uint16_t *)(void *)(event+6)=(uint8_t)index;
+    *(uint16_t *)(void *)event=(uint8_t)index;
+    uint32_t first,second;
+    if(*(volatile uint8_t *)(config+4u)>=9u){
+        second=*(volatile uint32_t *)(context+540u);
+        first=*(volatile uint32_t *)(context+536u);
+    }else{
+        second=*(volatile uint32_t *)(context+548u);
+        first=*(volatile uint32_t *)(context+544u);
+    }
+    (void)opencfw_em9305_primary_query_313960((uintptr_t)(event+8),first,second);
+    return opencfw_em9305_ll_event_callback_30e79c((uintptr_t)event);
+}

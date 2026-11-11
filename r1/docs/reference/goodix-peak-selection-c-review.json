@@ -1,0 +1,340 @@
+{
+  "schema_version": 1,
+  "acceptance_target": "License-free C firmware; byte identity waived",
+  "entries": {
+    "0x000668dc": "r1_goodix_native_minimum_row",
+    "0x00066900": "r1_goodix_native_peak_mask",
+    "0x00036734": "r1_goodix_native_peak_indices"
+  },
+  "total_stock_c_pairs": 5508,
+  "independent_oracle_pairs": 612,
+  "verification": {
+    "results": {
+      "pairs": 840,
+      "elapsed_seconds": 19.672147375065833,
+      "scope": "Actual C heap/memset,row minimum,packed mask matrix and selected indices. 2 FP modes for helpers;4 parent modes,37-row descriptor,capacities/begin offsets,NaN/denormal/tie data;public RAM,FPSCR,saved ABI,SP/masks."
+    },
+    "alias-results": {
+      "pairs": 168,
+      "elapsed_seconds": 2.0663415419403464,
+      "scope": "Ordered output/input aliases and minimum-index output/descriptor aliases;6 FP modes,actual C heap/public RAM and saved ABI."
+    },
+    "oracle-results": {
+      "pairs": 306,
+      "elapsed_seconds": 5.993157792137936,
+      "scope": "Independent signed argmin and mathematical finite-sample multiscale maxima/earliest-row/plateau selection oracles;2 FP modes;actual heap and public-RAM stock/C comparisons."
+    }
+  },
+  "probe": {
+    "schema_version": 1,
+    "status": "stock-validated C candidate; source admission pending",
+    "entries": {
+      "0x668dc": "native_minimum_row",
+      "0x66900": "native_peak_mask",
+      "0x36734": "native_peak_indices"
+    },
+    "total_stock_c_pairs": 4194,
+    "independent_oracle_pairs": 306,
+    "verification": {
+      "results": {
+        "pairs": 3720,
+        "elapsed_seconds": 52.93740233290009,
+        "scope": "Actual C heap/memset,row minimum,packed mask matrix and selected indices. All32 FP modes for helpers;4 parent modes,37-row descriptor,capacities/begin offsets,NaN/denormal/tie data;public RAM,FPSCR,saved ABI,SP/masks."
+      },
+      "alias-results": {
+        "pairs": 168,
+        "elapsed_seconds": 2.2872462500818074,
+        "scope": "Ordered output/input aliases and minimum-index output/descriptor aliases;6 FP modes,actual C heap/public RAM and saved ABI."
+      },
+      "oracle-results": {
+        "pairs": 306,
+        "elapsed_seconds": 5.495983792003244,
+        "scope": "Independent signed argmin and mathematical finite-sample multiscale maxima/earliest-row/plateau selection oracles;2 FP modes;actual heap and public-RAM stock/C comparisons."
+      }
+    },
+    "coverage": {
+      "instruction_bytes": 610,
+      "instruction_starts": 214,
+      "entries": 3
+    },
+    "compiled_defect_controls": [
+      {
+        "defect": "signed-row-minimum",
+        "detected": true
+      },
+      {
+        "defect": "minimum-output-zero",
+        "detected": true
+      },
+      {
+        "defect": "unordered-mask",
+        "detected": true
+      },
+      {
+        "defect": "inclusive-best-row",
+        "detected": true
+      },
+      {
+        "defect": "fixed-row-descriptor",
+        "detected": true
+      },
+      {
+        "defect": "capacity-bound",
+        "detected": true
+      },
+      {
+        "defect": "equal-plateau",
+        "detected": true
+      }
+    ],
+    "semantics": [
+      "Minimum-row668dc loads signed16 input0 before zeroing the output index,then keeps the earliest strict minimum with a16-bit wrapped loop index. Count0 still reads input0 and writes output0.",
+      "Mask66900 caches u16 length/row count,allocates and zeros a packed bit matrix,marks triangular boundaries,and checks left then right neighbors using signaling comparisons. Native unsigned BHI conditions accept unordered NaNs;the C comparison flags preserve this behavior and short-circuit order. Actual zero-filling C heap row sums feed signed16 earliest-row selection. Output u16 counts accumulate existing values through the selected row inclusively.",
+      "Indices36734 allocates its zeroed mask,uses the locked descriptor row count37,and scans from index1. Zero-mask candidates and equal adjacent plateau samples with neighboring mask counts1 can qualify. Preserve signed begin+1/capacity comparisons,signed16 selected-counter increments,live aliases,halfword index stores,and final count store before freeing the mask."
+    ],
+    "limitations": [
+      "Probe only;not admitted to sources.json. Valid aligned/mapped buffers are assumed. Direct mask cases have1<=rows<=length<=125;parent lengths37/75/125 use37 rows. Minimum helper tests count0..125;counts above65535 would wrap indefinitely in stock and are not assigned invented recovery. Negative matrix indices or invalid descriptors/allocations remain outside the tested domain.",
+      "Public RAM excludes8192 private stack bytes below SP;void caller scratch/APSR are excluded. FPSCR,saved core/FP registers,SP and interrupt masks are checked. Helpers use32 FP configurations;parent uses4 and aliases6. Timing,physical hardware and interrupts/concurrency remain unverified.",
+      "Independent finite-sample oracles cover signed argmin,mathematical multiscale maxima,earliest-row ties,existing output-count accumulation,and plateau/capacity/begin selection. Full dual-window extraction and confidence parent remain open."
+    ],
+    "evidence_sha256": {
+      "build/goal-r1-dual-window-support-c/rea-36734.json": "3fd58f98946722a01a2bdc59f14eb9ebc42f4cb53b6c27e7409ed698d8ad4971",
+      "build/goal-r1-model-i8-convolution-c/stock-entry.elf": "8faf5ed5a7e99752b781c1118086f6ada13458b084bd14e8fbb9a2eb58a05e76",
+      "build/goal-r1-peak-selection-c/alias-results.json": "dea23d376561f69c914f8dd5d2fcc692bd44ca0bf72a0a72735dd69b618f0666",
+      "build/goal-r1-peak-selection-c/aliases.log": "c02efad74c4db35b2450beec922eb590d202b34c5b436bff0b6acc15059f5d21",
+      "build/goal-r1-peak-selection-c/aliases.py": "943f745996f563605b1a2a529cdd15ac152151e09be44bafe134fb99a07415a9",
+      "build/goal-r1-peak-selection-c/candidate.c": "4af6735ee402701e04f4f79c928abf84d5546fc35aaa0c0eea0c8f8cceac84da",
+      "build/goal-r1-peak-selection-c/candidate.elf": "3a2d118b20e52b85156756803be0f65e6bad2aa96531d3dd36e72ddcb85d38a0",
+      "build/goal-r1-peak-selection-c/candidate.o": "741935df6f9b84386e83d4e21161d11940a83405e798ee42aa667582a9a28575",
+      "build/goal-r1-peak-selection-c/compile-argv.json": "8c034af83622730ffc142ba85711028bf36b1d80cc9dcf6f590f52198164171d",
+      "build/goal-r1-peak-selection-c/controls-results.json": "42425fb952dbff570b880b2caebac41e73592b87a7b4e566d2be3032a6f71553",
+      "build/goal-r1-peak-selection-c/controls.log": "03542a9f1f05a0e53c2adaf81a290c9b5ff6737ec456f7ac5cdbfcf80543665d",
+      "build/goal-r1-peak-selection-c/controls.py": "56be7378ea5bffccda5dfa3c5a013971cbbb1182ccf9bf7107575f82b332de68",
+      "build/goal-r1-peak-selection-c/coverage-results.json": "19e2747c76e731755dbcca34122ffcb273f60189eb11684edec16d02c81383ea",
+      "build/goal-r1-peak-selection-c/coverage.log": "11958283667ecd9cc934021ce71a42dd845585b38df4bfa38da1ad69af05c7a5",
+      "build/goal-r1-peak-selection-c/coverage.py": "2ce257b7c61ebf657d40bab4b78d5c0cb7786241a360b7697edbb03c210047fd",
+      "build/goal-r1-peak-selection-c/defect.c": "420662ccc8520c6c87a4a1d559a3919813f7714867ce9470a5264de370f240da",
+      "build/goal-r1-peak-selection-c/defect.elf": "177b9303117f27c8375da97c8883d0d6875df29ef5d179deb9f35d1034c62a7b",
+      "build/goal-r1-peak-selection-c/defect.o": "c8320cad3bb38f29843e9cead46752c174b5a309c7100de40dacbe9935a67d75",
+      "build/goal-r1-peak-selection-c/document.py": "acc120693e037172d5e5d44569079648fc756b73586d2995c7cc1c053b2eb245",
+      "build/goal-r1-peak-selection-c/fixture.py": "0981d175d12685504b8e7da3f4b2b5b06a74d7d28d68e63097e97bf423415bcb",
+      "build/goal-r1-peak-selection-c/link-argv.json": "e3da9b9463a1f392202393880ec664b8574dcb5e882ad9eee5530a5f370c1378",
+      "build/goal-r1-peak-selection-c/link.log": "3cd152c811cdfcc70bd005c9b734f5d2c47e0921956d6b7953eb00e37dfbedb1",
+      "build/goal-r1-peak-selection-c/oracle-results.json": "c58e34874d8fa20e74db843d8ecec72a2de93d8c5270e00c7e261e6f4659b837",
+      "build/goal-r1-peak-selection-c/oracles.log": "fc53fb23e4ae1df02b05ea4cbe66145dfbeca9037cb56cb7b3e900eb0ee11b5a",
+      "build/goal-r1-peak-selection-c/oracles.py": "25e4111cbab61d78f93a8a439d9bb53bdb9ed8859ff8ea4034fd5d66b8ca4937",
+      "build/goal-r1-peak-selection-c/peaklib.py": "33fa5dd8f22312e11bd8284f499f85fd6d7d33591a4d280d20da2e7720a46980",
+      "build/goal-r1-peak-selection-c/prepare.py": "9cba7280a87eec7d791c2be2d3ef3030544a3982c10482656ebdc7935675549d",
+      "build/goal-r1-peak-selection-c/rea-668dc.json": "fe4350e9e76bcc5fc3063fb00a3c03da9c7a903650a1f6e6356a8c3aa91c654a",
+      "build/goal-r1-peak-selection-c/rea-66900.json": "cc87f3210871c75ffd381938af2f0ee49f2c73778626cc7e763968ca5e32a77c",
+      "build/goal-r1-peak-selection-c/rea-bytes.json": "26e7ec5eca507df2c95314fd943fa8198895cf4ffe8e663d4bbcefcee4be5a94",
+      "build/goal-r1-peak-selection-c/results.json": "156e4740c5633b6c5cdf687eb6499bcf859641a5e5febe6d872b1e6d6f4cf410",
+      "build/goal-r1-peak-selection-c/verify.log": "9f2272eec277b80c3572eed194eda779c8955766f7f67e1196e2514a88f15c66",
+      "build/goal-r1-peak-selection-c/verify.py": "6e8e9c40fe197162a978e813b1a49d9d64c72631731564f1b606c14b2e15790f",
+      "build/goal-r1-spo2-infer-support-c/normal-dependencies.a": "7e62b43a34fcf2b0ae34045a276bf4d564be5dde2ddb636dd0f69169c8843637",
+      "build/goal-r1-spo2-ratio-c/normal-stream-test.ld": "808ff9c64adde68933158791e9d115c75817ae1840e2bdcbcfa42c7a39314cc6",
+      "build/sources-goal-r1-spo2-statistics-c/r1/r1-application/r1__src__application__goodix__native_spectral_peaks.c.o": "9b99c7c3b40c8e0c3a3ba34e7736b37f710d063c760ef0898482243c361e1ec0",
+      "build/sources-goal-r1-spo2-statistics-c/r1/r1-application/r1__src__application__runtime__native_float_bits.c.o": "cc448df0a2076c6dd5ee05a700f3221fb9d253ae9ae0cb7b591a0ea3a474c154",
+      "r1/blobs/official/r1-2.2.6.0009/application.bin": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+      "r1/src/sources.json": "1a8f981f880971158d495770a30bf9b701c7f1ac8586db0ee665f651c279c401"
+    }
+  },
+  "normal_build": {
+    "normal_report": "build/sources-goal-r1-peak-selection-c/report.json",
+    "units": 945,
+    "unchanged_source_object_pairs": 934,
+    "generated_sources_excluded": [
+      "{gen}/r1_cmsis_os2_rtc.c",
+      "{gen}/fal_partition_r1_lookup.c",
+      "{gen}/fdb_utils_r1.c",
+      "{gen}/gh_demo_r1.c",
+      "{gen}/gh_demo_hook_r1.c",
+      "{gen}/gh_demo_user_r1.c",
+      "{gen}/app_error_handler_gcc_clang.c",
+      "{gen}/r1_startup_vectors.S",
+      "{gen}/gh_ppg_timestamp_hooks_r1.c",
+      "{gen}/r1_uecc.c"
+    ],
+    "new_sources": [
+      "r1/src/application/goodix/native_peak_selection.c"
+    ],
+    "normal_provider_matches_tested_sections_and_decoded_symbols": true,
+    "no_new_assembly_or_writable_sections": true,
+    "imports": {
+      "r1-application": [
+        "GH3X2X_GetVersion",
+        "GH3X2X_UprotocolPacketFormat",
+        "Gh3x2xDemoSendProtocolData",
+        "__data_start__",
+        "gh3x2x_print_fmt",
+        "goodix_hba_calc",
+        "goodix_hba_essential_info_print",
+        "goodix_hrv_calc",
+        "goodix_nadt_calc",
+        "r1_cmb_code_end",
+        "r1_cmb_code_start",
+        "r1_cmb_stack_end",
+        "r1_cmb_stack_start",
+        "r1_eat_command_dispatch",
+        "r1_eat_core_init",
+        "r1_export_plan_command",
+        "r1_factory_input_record_plan_dispatch",
+        "r1_glasses_role_conflict_fault",
+        "r1_gomore_final_sleep_record_publish_native",
+        "r1_gomore_interval_statistics_native",
+        "r1_gomore_sleep_interval_select_native",
+        "r1_gomore_sleep_score_native",
+        "r1_gomore_sleep_stage_refine_native",
+        "r1_gomore_stage_5ef1c_native",
+        "r1_gomore_stage_5f264_native",
+        "r1_gomore_stage_5f3d8_native",
+        "r1_gomore_stage_5f4b6_native",
+        "r1_gomore_stage_5f56c_native",
+        "r1_gomore_stage_5feb8_native",
+        "r1_gomore_stage_605dc_native",
+        "r1_gomore_stage_60af4_native",
+        "r1_gomore_stage_60b80_native",
+        "r1_gomore_stage_60dc4_native",
+        "r1_gomore_stage_610c8_native",
+        "r1_gomore_stage_61198_native",
+        "r1_gomore_stage_61274_native",
+        "r1_gomore_stage_6138c_native",
+        "r1_gomore_stage_statistics_native",
+        "r1_gomore_table_record11_native",
+        "r1_goodix_spo2_confidence",
+        "r1_health_auth_parameters_set",
+        "r1_health_lifecycle_engine_initialize_native",
+        "r1_health_settings_plan_command",
+        "r1_health_sync_provider_0003c0d8",
+        "r1_health_sync_provider_0003c304",
+        "r1_health_sync_provider_0003c958",
+        "r1_health_sync_provider_0003fcec",
+        "r1_health_sync_provider_0003fef4",
+        "r1_health_sync_provider_00040508",
+        "r1_health_sync_provider_00040bd4",
+        "r1_health_sync_provider_00040de0",
+        "r1_health_sync_provider_00041438",
+        "r1_health_sync_provider_00043eb0",
+        "r1_health_sync_provider_000440c4",
+        "r1_health_sync_provider_000446b4",
+        "r1_health_sync_provider_0005b39c",
+        "r1_health_sync_provider_0008f954",
+        "r1_legacy_command_route_frame",
+        "r1_manager_assertion_stack_transfer",
+        "r1_manager_logging_start_91504",
+        "r1_phone_role_assertion_stack_transfer",
+        "r1_structured_log_typed",
+        "r1_user_profile_handler"
+      ],
+      "r1-bootloader": [
+        "__bss_end__",
+        "__bss_start__",
+        "__data_start__",
+        "__etext",
+        "__start_crypto_data",
+        "__start_dfu_trans",
+        "__start_fs_data",
+        "__start_sdh_ble_observers",
+        "__start_sdh_req_observers",
+        "__start_sdh_soc_observers",
+        "__start_sdh_stack_observers",
+        "__start_sdh_state_observers",
+        "__start_svc_data",
+        "__stop_crypto_data",
+        "__stop_dfu_trans",
+        "__stop_fs_data",
+        "__stop_sdh_ble_observers",
+        "__stop_sdh_req_observers",
+        "__stop_sdh_soc_observers",
+        "__stop_sdh_stack_observers",
+        "__stop_sdh_state_observers",
+        "__stop_svc_data"
+      ]
+    }
+  },
+  "semantics": [
+    "Minimum-row668dc loads signed16 input0 before zeroing the output index,then keeps the earliest strict minimum with a16-bit wrapped loop index. Count0 still reads input0 and writes output0.",
+    "Mask66900 caches u16 length/row count,allocates and zeros a packed bit matrix,marks triangular boundaries,and checks left then right neighbors using signaling comparisons. Native unsigned BHI conditions accept unordered NaNs;the C comparison flags preserve this behavior and short-circuit order. Actual zero-filling C heap row sums feed signed16 earliest-row selection. Output u16 counts accumulate existing values through the selected row inclusively.",
+    "Indices36734 allocates its zeroed mask,uses the locked descriptor row count37,and scans from index1. Zero-mask candidates and equal adjacent plateau samples with neighboring mask counts1 can qualify. Preserve signed begin+1/capacity comparisons,signed16 selected-counter increments,live aliases,halfword index stores,and final count store before freeing the mask."
+  ],
+  "limitations": [
+    "Public RAM excludes8192 private stack bytes below SP;void caller scratch/APSR are excluded. FPSCR,saved core/FP registers,SP and interrupt masks are checked. Helpers use32 FP configurations;parent uses4 and aliases6. Timing,physical hardware and interrupts/concurrency remain unverified.",
+    "Valid aligned/mapped buffers are assumed. Direct mask probes use1<=rows<=length<=125;parent lengths37/75/125 use37 rows. Minimum helper counts0..125 are tested;counts above65535 wrap indefinitely in stock and no recovery is invented. Invalid descriptors,large counts and allocation recovery remain outside the tested domain.",
+    "All945 normal units compile without new imports or duplicate strong symbols;934 prior source/object pairs remain unchanged. Normal provider matches candidate sections and decoded symbols after source-file symbol normalization. The original helper probe uses32 FP modes;normal helpers2,parent4,aliases6. This remains relocatable composition with63 application and22 boot imports,not complete bootable firmware. Feature extraction,confidence and hardware/startup dependencies remain open."
+  ],
+  "evidence_sha256": {
+    "build/goal-r1-model-i8-convolution-c/stock-entry.elf": "8faf5ed5a7e99752b781c1118086f6ada13458b084bd14e8fbb9a2eb58a05e76",
+    "build/goal-r1-peak-selection-c/alias-results.json": "dea23d376561f69c914f8dd5d2fcc692bd44ca0bf72a0a72735dd69b618f0666",
+    "build/goal-r1-peak-selection-c/aliases.log": "c02efad74c4db35b2450beec922eb590d202b34c5b436bff0b6acc15059f5d21",
+    "build/goal-r1-peak-selection-c/aliases.py": "943f745996f563605b1a2a529cdd15ac152151e09be44bafe134fb99a07415a9",
+    "build/goal-r1-peak-selection-c/candidate.c": "4af6735ee402701e04f4f79c928abf84d5546fc35aaa0c0eea0c8f8cceac84da",
+    "build/goal-r1-peak-selection-c/candidate.elf": "3a2d118b20e52b85156756803be0f65e6bad2aa96531d3dd36e72ddcb85d38a0",
+    "build/goal-r1-peak-selection-c/candidate.o": "741935df6f9b84386e83d4e21161d11940a83405e798ee42aa667582a9a28575",
+    "build/goal-r1-peak-selection-c/compile-argv.json": "8c034af83622730ffc142ba85711028bf36b1d80cc9dcf6f590f52198164171d",
+    "build/goal-r1-peak-selection-c/controls-results.json": "42425fb952dbff570b880b2caebac41e73592b87a7b4e566d2be3032a6f71553",
+    "build/goal-r1-peak-selection-c/controls.log": "03542a9f1f05a0e53c2adaf81a290c9b5ff6737ec456f7ac5cdbfcf80543665d",
+    "build/goal-r1-peak-selection-c/controls.py": "56be7378ea5bffccda5dfa3c5a013971cbbb1182ccf9bf7107575f82b332de68",
+    "build/goal-r1-peak-selection-c/coverage-results.json": "19e2747c76e731755dbcca34122ffcb273f60189eb11684edec16d02c81383ea",
+    "build/goal-r1-peak-selection-c/coverage.log": "11958283667ecd9cc934021ce71a42dd845585b38df4bfa38da1ad69af05c7a5",
+    "build/goal-r1-peak-selection-c/coverage.py": "2ce257b7c61ebf657d40bab4b78d5c0cb7786241a360b7697edbb03c210047fd",
+    "build/goal-r1-peak-selection-c/defect.c": "420662ccc8520c6c87a4a1d559a3919813f7714867ce9470a5264de370f240da",
+    "build/goal-r1-peak-selection-c/defect.elf": "177b9303117f27c8375da97c8883d0d6875df29ef5d179deb9f35d1034c62a7b",
+    "build/goal-r1-peak-selection-c/defect.o": "c8320cad3bb38f29843e9cead46752c174b5a309c7100de40dacbe9935a67d75",
+    "build/goal-r1-peak-selection-c/document.py": "acc120693e037172d5e5d44569079648fc756b73586d2995c7cc1c053b2eb245",
+    "build/goal-r1-peak-selection-c/fixture.py": "0981d175d12685504b8e7da3f4b2b5b06a74d7d28d68e63097e97bf423415bcb",
+    "build/goal-r1-peak-selection-c/link-argv.json": "e3da9b9463a1f392202393880ec664b8574dcb5e882ad9eee5530a5f370c1378",
+    "build/goal-r1-peak-selection-c/link.log": "3cd152c811cdfcc70bd005c9b734f5d2c47e0921956d6b7953eb00e37dfbedb1",
+    "build/goal-r1-peak-selection-c/oracle-results.json": "c58e34874d8fa20e74db843d8ecec72a2de93d8c5270e00c7e261e6f4659b837",
+    "build/goal-r1-peak-selection-c/oracles.log": "fc53fb23e4ae1df02b05ea4cbe66145dfbeca9037cb56cb7b3e900eb0ee11b5a",
+    "build/goal-r1-peak-selection-c/oracles.py": "25e4111cbab61d78f93a8a439d9bb53bdb9ed8859ff8ea4034fd5d66b8ca4937",
+    "build/goal-r1-peak-selection-c/peaklib.py": "33fa5dd8f22312e11bd8284f499f85fd6d7d33591a4d280d20da2e7720a46980",
+    "build/goal-r1-peak-selection-c/prepare.py": "9cba7280a87eec7d791c2be2d3ef3030544a3982c10482656ebdc7935675549d",
+    "build/goal-r1-peak-selection-c/rea-668dc.json": "fe4350e9e76bcc5fc3063fb00a3c03da9c7a903650a1f6e6356a8c3aa91c654a",
+    "build/goal-r1-peak-selection-c/rea-66900.json": "cc87f3210871c75ffd381938af2f0ee49f2c73778626cc7e763968ca5e32a77c",
+    "build/goal-r1-peak-selection-c/rea-bytes.json": "26e7ec5eca507df2c95314fd943fa8198895cf4ffe8e663d4bbcefcee4be5a94",
+    "build/goal-r1-peak-selection-c/results.json": "156e4740c5633b6c5cdf687eb6499bcf859641a5e5febe6d872b1e6d6f4cf410",
+    "build/goal-r1-peak-selection-c/verify.log": "9f2272eec277b80c3572eed194eda779c8955766f7f67e1196e2514a88f15c66",
+    "build/goal-r1-peak-selection-c/verify.py": "6e8e9c40fe197162a978e813b1a49d9d64c72631731564f1b606c14b2e15790f",
+    "build/goal-r1-peak-selection-integration-c/admit.py": "77cfca8cb2229e3b99186d83612f50df4408b56657cdc7801ba4bc469c6301c0",
+    "build/goal-r1-peak-selection-integration-c/alias-results.json": "562742cf9afd115e03ca4b1942614c5e87d0223a19c87fb4b4e3689b5565531c",
+    "build/goal-r1-peak-selection-integration-c/aliases.log": "c02efad74c4db35b2450beec922eb590d202b34c5b436bff0b6acc15059f5d21",
+    "build/goal-r1-peak-selection-integration-c/aliases.py": "943f745996f563605b1a2a529cdd15ac152151e09be44bafe134fb99a07415a9",
+    "build/goal-r1-peak-selection-integration-c/audit.json": "0071d113b47d33baa49ef42fa4318c4346d91154ff5f2017a3218ee857ee1274",
+    "build/goal-r1-peak-selection-integration-c/audit.py": "b05dfcfd31b9ad6f2ab4cf43afffd85fe27082f3be1f4a0ce957d3fcbd7ed014",
+    "build/goal-r1-peak-selection-integration-c/candidate.c": "13241f7f4b965b60c3e2ebd05a8c7e3c6dc6b021f7450dd24d11a8e07ebb6163",
+    "build/goal-r1-peak-selection-integration-c/candidate.elf": "96c9e23fd1d027ae229a06d3e24d6d1b01e597f3fe8f6423ffaaacd3a8227783",
+    "build/goal-r1-peak-selection-integration-c/candidate.o": "a1add456fb5a3d6775d33167f327f5b6b0890b8459d5a923a5a71d75b750b5fe",
+    "build/goal-r1-peak-selection-integration-c/compile-argv.json": "c51e850bec7cded329114a6a14ae4be96be85a91ab542e458ea75f6bcd8a69ee",
+    "build/goal-r1-peak-selection-integration-c/document.py": "8601d598bfd0fd2d693d454e110ad28eb21b3d613c9e8546e7a0a8b765e56800",
+    "build/goal-r1-peak-selection-integration-c/fixture.py": "294667cab85065fd732aa7e4cf2b76c9f282b472993abdd4d4e2fe8f1f689285",
+    "build/goal-r1-peak-selection-integration-c/link-argv.json": "d5297dc61d4b3ce14f7b898a6f9845cd0c5c0a898c6381dd12d74c857181975a",
+    "build/goal-r1-peak-selection-integration-c/link.log": "3cd152c811cdfcc70bd005c9b734f5d2c47e0921956d6b7953eb00e37dfbedb1",
+    "build/goal-r1-peak-selection-integration-c/normal-build.log": "72a137c49e2f8b9940e79e32b3e70dd9d55257047a4bdc80f7de3c67368e3877",
+    "build/goal-r1-peak-selection-integration-c/normal-link.json": "31bf0c9b1e679114e4d46d1a0f09f63568065cdce7e24c0755ed9763e38fe8f7",
+    "build/goal-r1-peak-selection-integration-c/normal-link.log": "3cd152c811cdfcc70bd005c9b734f5d2c47e0921956d6b7953eb00e37dfbedb1",
+    "build/goal-r1-peak-selection-integration-c/normal.elf": "8d30bd3f737991e1611e6a856053573ef7bf07f41838e83a64eb434a196759d6",
+    "build/goal-r1-peak-selection-integration-c/oracle-results.json": "2c612addc868c58f774f927c58aaf0de334e0fd96825ff9186e0e9b1609f34e6",
+    "build/goal-r1-peak-selection-integration-c/oracles.log": "fc53fb23e4ae1df02b05ea4cbe66145dfbeca9037cb56cb7b3e900eb0ee11b5a",
+    "build/goal-r1-peak-selection-integration-c/oracles.py": "25e4111cbab61d78f93a8a439d9bb53bdb9ed8859ff8ea4034fd5d66b8ca4937",
+    "build/goal-r1-peak-selection-integration-c/peaklib.py": "8fcc5b0e3037c1f667f9234a36a9781b732f12e4b91939a4b7da52a1752aabdb",
+    "build/goal-r1-peak-selection-integration-c/prepare.py": "f71b14dae76c6621b0a250ffc7aabee89fc44cf0af425bc8aba42e210fba02e1",
+    "build/goal-r1-peak-selection-integration-c/results.json": "16a52919075aa4490e7dbfa99ea7c5163f18c74b2e25d99a4b2c23d64bc943f7",
+    "build/goal-r1-peak-selection-integration-c/verify.log": "6e92c2638d30f1d8b69908ae7b94d6ad1441ab68109f1f366ff8ca50a8e71bba",
+    "build/goal-r1-peak-selection-integration-c/verify.py": "5043e7c771f6726ac396cd175b717304bb18aa6d4a659f9f8561bb65695100da",
+    "build/goal-r1-spo2-infer-support-c/normal-dependencies.a": "7e62b43a34fcf2b0ae34045a276bf4d564be5dde2ddb636dd0f69169c8843637",
+    "build/goal-r1-spo2-ratio-c/normal-stream-test.ld": "808ff9c64adde68933158791e9d115c75817ae1840e2bdcbcfa42c7a39314cc6",
+    "build/sources-goal-r1-peak-rate-c/report.json": "414017923e58497e9257f783ee0bc323e019697f45d5cb6b8ade332f248c06b3",
+    "build/sources-goal-r1-peak-selection-c/r1/r1-application/r1__src__application__goodix__native_peak_selection.c.o": "6e1d172da8129c6c18790e8c832e4ce841bd3d317b56dba0e60bfe5a45abdbac",
+    "build/sources-goal-r1-peak-selection-c/report.json": "d7c2217c9acef09d2c0c006e0a3eb7fa907d9e2c24388b8d7a0adecdf16ad82d",
+    "build/sources-goal-r1-spo2-statistics-c/r1/r1-application/r1__src__application__goodix__native_spectral_peaks.c.o": "9b99c7c3b40c8e0c3a3ba34e7736b37f710d063c760ef0898482243c361e1ec0",
+    "build/sources-goal-r1-spo2-statistics-c/r1/r1-application/r1__src__application__runtime__native_float_bits.c.o": "cc448df0a2076c6dd5ee05a700f3221fb9d253ae9ae0cb7b591a0ea3a474c154",
+    "r1/blobs/official/r1-2.2.6.0009/application.bin": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "r1/docs/reference/FUNCTION-OWNERSHIP.csv": "8b9cf3b24fb708dfbad87735a2eea95e6cfe8c22add704e71e27bc614235f019",
+    "r1/docs/reference/goodix-peak-selection-c-probe.json": "5a13f65664c40f4e734050ae3d875813893eed55b3e3e1df8458c251a6b2717e",
+    "r1/src/application/goodix/native_peak_selection.c": "c6e1c5a6a8e97c4435b039e9d7405e8cd542d7126308c27ed62245fde6235984",
+    "r1/src/application/goodix/native_peak_selection.h": "5892f06be6fa05d2eb2851d1d730ad0f840ed273a6015b060f692daff40ae3f9",
+    "r1/src/config/runtime/native_health_cache.ld": "eb8f131c489cd818d4e36718718fa1989719ca0170f164541a1a5bf56dfc1ec3",
+    "r1/src/sources.json": "549426e6a57df2fdb15fd6aa81a1837a2f06ae1d22fbc0db8164953048ba3930",
+    "tools/build/source-plan.json": "eeb516e31b3310fb0718f36908977f8125723f7c5e0e86cd6744395826259a4d"
+  }
+}

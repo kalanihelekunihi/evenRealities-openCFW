@@ -1,63 +1,39 @@
-/* Native PAwR queue body; unresolved children remain genuine imports. */
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_callback_3227e0\n"
-".type opencfw_em9305_callback_3227e0,@function\n"
-"opencfw_em9305_callback_3227e0:\n"
-"L3227e0:\n"
-"enter_s [r13,fp,blink]\n"
-"L3227e2:\n"
-"sub_s sp,sp,0x20\n"
-"L3227e4:\n"
-"mov_s r0,0x805008\n"
-"L3227ea:\n"
-"bl.d opencfw_em9305_wsf_event_remove\n"
-"L3227ee:\n"
-"add r1,sp,0x1f\n"
-"L3227f2:\n"
-"mov_s r13,r0\n"
-"L3227f4:\n"
-"breq_s r0,0,L322830\n"
-"L3227f6:\n"
-"add_s r1,sp,0\n"
-"L3227f8:\n"
-"add r2,sp,0x1e\n"
-"L3227fc:\n"
-"bl.d opencfw_em9305_pawr_decode_31e84c\n"
-"L322800:\n"
-"mov_s r0,r13\n"
-"L322802:\n"
-"breq_s r0,0,L322824\n"
-"L322804:\n"
-"add_s r1,r13,0x8\n"
-"L322806:\n"
-"add r0,sp,0x13\n"
-"L32280a:\n"
-"mov_s r2,6\n"
-"L32280c:\n"
-"bl.d opencfw_em9305_memcpy\n"
-"L322810:\n"
-"stb 1,[sp,18]\n"
-"L322814:\n"
-"ldb r0,[sp,30]\n"
-"L322818:\n"
-"breq_s r0,0,L32281e\n"
-"L32281a:\n"
-"stb -1,[sp,18]\n"
-"L32281e:\n"
-"bl.d opencfw_em9305_pawr_response_dispatch_322834\n"
-"L322822:\n"
-"add_s r0,sp,0\n"
-"L322824:\n"
-"bl.d opencfw_em9305_wsf_event_release\n"
-"L322828:\n"
-"mov_s r0,r13\n"
-"L32282a:\n"
-"bl opencfw_em9305_pawr_queue_resume_31694c\n"
-"L32282e:\n"
-"b_s L3227e4\n"
-"L322830:\n"
-"leave_s [r13,fp,blink,pcl]\n"
-".size opencfw_em9305_callback_3227e0,.-opencfw_em9305_callback_3227e0\n"
-);
+#include <stdint.h>
+
+/* Native 0x3227e0..0x322832: drain the PAwR response queue at 0x805008.
+ * Each event is decoded; a decoded response gets its 6-byte address (event
+ * +8) and a status of 1, or -1 when the decoder flagged it, and is
+ * dispatched. Every event is released and the queue resumed. */
+extern uintptr_t opencfw_em9305_wsf_event_remove(uintptr_t,uintptr_t);
+extern uint32_t opencfw_em9305_pawr_decode_31e84c(uintptr_t,uintptr_t,uintptr_t);
+extern void *opencfw_em9305_memcpy(void *destination, const void *source, uint32_t bytes);
+extern uint32_t opencfw_em9305_pawr_response_dispatch_322834(uintptr_t);
+extern uint32_t opencfw_em9305_wsf_event_release(uintptr_t);
+extern uint32_t opencfw_em9305_pawr_queue_resume_31694c(void);
+
+struct pawr_response {
+    uint8_t decoded[18];
+    int8_t status;
+    uint8_t address[6];
+    uint8_t reserved[5];
+    uint8_t flagged;
+    uint8_t handler;
+} __attribute__((aligned(4)));
+
+void opencfw_em9305_callback_3227e0(void)
+{
+    struct pawr_response response;
+    for (;;) {
+        uintptr_t event = opencfw_em9305_wsf_event_remove(0x805008u, (uintptr_t)&response.handler);
+        if (event == 0u) return;
+        if (opencfw_em9305_pawr_decode_31e84c(event, (uintptr_t)&response,
+                                              (uintptr_t)&response.flagged) != 0u) {
+            response.status = 1;
+            (void)opencfw_em9305_memcpy(response.address, (const void *)(event + 8u), 6u);
+            if (response.flagged != 0u) response.status = -1;
+            (void)opencfw_em9305_pawr_response_dispatch_322834((uintptr_t)&response);
+        }
+        (void)opencfw_em9305_wsf_event_release(event);
+        (void)opencfw_em9305_pawr_queue_resume_31694c();
+    }
+}

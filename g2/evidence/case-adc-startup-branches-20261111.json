@@ -1,0 +1,46 @@
+{
+  "schema": 1,
+  "date": "2026-11-11",
+  "reference": {
+    "artifact": "g2/blobs/official/g2-2.2.6.10/firmware_box.raw.bin",
+    "sha256": "773b6d4cfdaf0a5a74a557e3babe8222a0ae813436b76a7437c1096d2c60d677",
+    "flash_base": "0x08000000"
+  },
+  "source": "g2/src/case/startup/application_policy_adc_config_candidate.c",
+  "source_sha256": "982aa8822c42b770ba84d72926ead521167bbe550dd92304dfafbfa5a33725fa",
+  "locked_functions": [
+    {"span": "0x080006D4..0x08000730", "sha256": "0cece80f6b94f0348d7eeb80f5d3ad07ad1ccdbb52e53beed45718864b22b8bb", "finding": "The initial 0x0800678A helper is followed by a fresh controller-pointer read at 0x080006E2. The wait and timeout tests at 0x08000724 and 0x08000708 reload that pointer and read status bit 2."},
+    {"span": "0x08000734..0x080007A2", "sha256": "486650b539c8d304e71cb705c085c38cfe87d527bee0edebde56785b9d26c762", "finding": "The initial 0x0800677A helper is followed by controller-pointer reloads at 0x0800074C and 0x08000766. The wait and timeout tests at 0x08000796 and 0x0800077E reload the pointer and read status bit 0."},
+    {"span": "0x080007A8..0x0800084A", "sha256": "e80a57f4551a88af7841b8b5f9ffee5c36ee4fefc860327bb999849dc31", "finding": "At 0x080007B2 the stock code calls enabled helper 0x0800677A, and 0x080007B8 returns zero immediately when it is nonzero. The C candidate omitted this guard. The subsequent controller accesses and wait loop reload the handle pointer."}
+  ],
+  "change": "Added the already-enabled early return in case_policy_adc_open_config and reloaded the controller pointer at the stock wait, timeout, and post-helper access sites in all three ADC startup functions.",
+  "focused_verification": {
+    "fixture": "build/case-adc-review-20261111/verify.c (ignored)",
+    "method": "Hosted C harness uses the unmodified function bodies with address-based memory accessors adapted to an array; five scenarios exercise helper-induced controller pointer changes, the already-enabled early return, and both timeout/error paths.",
+    "result": "5/5 scenarios passed",
+    "limit": "This is not execution of the locked firmware or physical device validation."
+  },
+  "source_gate": {
+    "sources_check": "pass: 4883 manifest units, one final-link-only C helper",
+    "full_build": "pass: 4878/4878 enabled C units, zero compilation failures, zero duplicate strong symbols",
+    "full_build_receipt": "build/g2-adc-20261111/report.json",
+    "full_build_receipt_sha256": "e37bdb8017430f524665d979956a3f881d138cdd3368a03fd00736e9a4944b8e",
+    "strict_source_links": "pass: seven payloads, no external binary archive",
+    "strict_link_receipt": "build/g2-adc-source-images-20261111/link-report.json",
+    "strict_link_receipt_sha256": "e1f9bf671af1cda71241cb0f4320e326552820398060668fd33e0ca9425e780c",
+    "case_binary_bytes": 60180,
+    "case_binary_sha256": "e88ec496541b037de81faa2807cef9dced0df2ea929edcddd772f325ad48b2c9",
+    "case_open_config_linked_address": "0x0800895C",
+    "case_open_config_linked_guard": "BL case_policy_adc_enabled at 0x08008964, then conditional branch to zero return at 0x0800896C",
+    "source_only_bundle_bytes": 4638056,
+    "source_only_bundle_sha256": "1828ea5e6b9267b4132a7e8cf3eca0a9db6a77fcc43d72bb053fdf5f2698166c",
+    "source_only_bundle_matches_locked_target": false,
+    "source_only_bundle_receipt": "build/g2-adc-source-bundle-20261111/link-report.json",
+    "source_only_bundle_receipt_sha256": "28bcb3ebcefa9b0a8bdceaab4a2e169ba7ef6139160bb7a1f059d3fcde69c81c",
+    "diff_check": "pass"
+  },
+  "limits": [
+    "The changed functions are in the source-linked CASE image, but neither exact stock bytes nor hardware behavior is established by this review.",
+    "Whole-firmware source completeness remains open."
+  ]
+}

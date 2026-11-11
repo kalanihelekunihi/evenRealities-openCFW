@@ -1,54 +1,25 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_callback_329844\n"
-".type opencfw_em9305_callback_329844,@function\n"
-"opencfw_em9305_callback_329844:\n"
-"L329844:\n"
-"enter_s [r13-r14,blink]\n"
-"L329846:\n"
-"mov_s r13,r0\n"
-"L329848:\n"
-"ldb_s r0,[r0,0x2]\n"
-"L32984a:\n"
-"mov_s r14,0x805c6c\n"
-"L329850:\n"
-"cmp r0,255\n"
-"L329854:\n"
-"beq_s L329860\n"
-"L329856:\n"
-"mov_s r0,r13\n"
-"L329858:\n"
-"bl.d opencfw_em9305_child_329fd8\n"
-"L32985c:\n"
-"st_s r13,[r14,0]\n"
-"L32985e:\n"
-"leave_s [r13-r14,blink,pcl]\n"
-"L329860:\n"
-"mov r1,0\n"
-"L329864:\n"
-"sth_s r1,[r13,0]\n"
-"L329866:\n"
-"mov_s r0,0x805cac\n"
-"L32986c:\n"
-"ld r0,[r0,0]\n"
-"L32986e:\n"
-"ldb r2,[r0,34]\n"
-"L329872:\n"
-"exth_s r0,r1\n"
-"L329874:\n"
-"brhs.d.t r0,r2,L32985e\n"
-"L329878:\n"
-"mov_s r0,r13\n"
-"L32987a:\n"
-"bl.d opencfw_em9305_child_329fd8\n"
-"L32987e:\n"
-"st_s r13,[r14,0]\n"
-"L329880:\n"
-"ldh_s r0,[r13,0]\n"
-"L329882:\n"
-"add_s r1,r0,0x1\n"
-"L329884:\n"
-"b_s L329864\n"
-".size opencfw_em9305_callback_329844,.-opencfw_em9305_callback_329844\n"
-);
+#include <stdint.h>
+
+/* Native 0x329844..0x329886: make the packet current (*0x805c6c) and run
+ * 329fd8 on it. A packet whose id byte (+2) is 255 is a broadcast: its
+ * halfword index (+0) is stepped from 0 over every configured record
+ * (config byte 34), running 329fd8 for each; returns the packet. */
+extern uint32_t opencfw_em9305_child_329fd8(uintptr_t);
+
+uint32_t opencfw_em9305_callback_329844(uintptr_t packet)
+{
+    volatile uint32_t *current=(volatile uint32_t *)(uintptr_t)0x805c6cu;
+    if(*(volatile uint8_t *)(packet+2u)!=255u) {
+        *current=packet;
+        return opencfw_em9305_child_329fd8(packet);
+    }
+    uint32_t index=0u;
+    for(;;) {
+        *(volatile uint16_t *)packet=(uint16_t)index;
+        uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+        if((uint16_t)index>=*(volatile uint8_t *)(config+34u)) return (uint32_t)packet;
+        *current=packet;
+        (void)opencfw_em9305_child_329fd8(packet);
+        index=*(volatile uint16_t *)packet+1u;
+    }
+}

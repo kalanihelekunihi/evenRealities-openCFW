@@ -1,0 +1,193 @@
+{
+  "schema_version": 1,
+  "scope": "Native Goodix sensor-frame calculation dispatcher in C",
+  "acceptance_target": "Hardware-first license-free C firmware; byte identity waived",
+  "report": "build/sources-goal-r1-goodix-algorithm-calculate-c/report.json",
+  "comparison_report": "build/sources-goal-r1-time-update-pure-c/report.json",
+  "stock_entries": [
+    {
+      "symbol": "GH3X2X_AlgoCalculate",
+      "entry": "0x29e8c",
+      "instruction_bytes": 190
+    }
+  ],
+  "native_callback_table": {
+    "address": "0x9d404",
+    "records": 20,
+    "record_bytes": 12,
+    "calculate_word_offset": 4,
+    "supported_slots": [
+      0,
+      1,
+      2,
+      6,
+      9,
+      15
+    ]
+  },
+  "audit": {
+    "compiled_units": 894,
+    "application_imports": 78,
+    "bootloader_imports": 22,
+    "unchanged_prior_nongenerated_sources_and_objects": 883,
+    "tested_object_equals_normal_build": true,
+    "persistent_state_added": 0,
+    "canonical_algorithm_owners_reused": true,
+    "native_instruction_bytes_executed": 190,
+    "source_plan_and_cache_layout_unchanged": true,
+    "removed_imports": [
+      "GH3X2X_AlgoCalculate"
+    ],
+    "added_imports": [
+      "GH3x2xAdtAlgoExe",
+      "GH3x2xHrAlgoExe",
+      "GH3x2xHrvAlgoExe",
+      "GH3x2xSoftAdtAlgoExe",
+      "GH3x2xSpo2AlgoExe"
+    ],
+    "unfinished_engine_executors_visible": true
+  },
+  "execution": {
+    "paired_cases": 3377,
+    "matched_faults": 2,
+    "native_instruction_bytes_executed": 190,
+    "actual_C_and_native_sleep_popcount_and_memory_helpers": true,
+    "engine_executors_modeled": true,
+    "full_nonstack_RAM_and_boundary_snapshots_match": true,
+    "source_cannot_execute_stock": true,
+    "source_object_sha256": "7e4344bae1eb7809e1c9e85939abf2545e030c93b83cbce39431ee1a8c3872d1",
+    "signed_8_bit_executor_ABI": true
+  },
+  "compiled_defects_rejected": [
+    {
+      "name": "unselected-result",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "partial-started",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "boolean-init",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "sleep-bit",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "frame-counter",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "default-mask",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "publication-gate",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "copy-source",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "soft-slot",
+      "compiled": true,
+      "rejected": true
+    }
+  ],
+  "unfinished_engine_executors": [
+    "GH3x2xAdtAlgoExe",
+    "GH3x2xHrAlgoExe",
+    "GH3x2xHrvAlgoExe",
+    "GH3x2xSoftAdtAlgoExe",
+    "GH3x2xSpo2AlgoExe"
+  ],
+  "contract": [
+    "If canonical started bitmap is0, return0 before inspecting frames. Otherwise scan exactly20 slots. Every unselected slot resets the signed8 result to0; selected unsupported slots preserve it. Initial result is-1.",
+    "Every selected slot checks the whole requested mask against the live started bitmap. Reload the live frame-table owner for each accepted slot. Sleep reporting sets bit3 of frame flags word2 even when that slot is not initialized or has no executor. Initialized means any nonzero byte.",
+    "The immutable native calculate-column mapping has ADT0,HR1,HRV2,SpO2 6 and soft ADT9/15; other entries are null. C refers to named function providers, with no retained executable bytes or function-address blobs.",
+    "After an executor, if the live frame counter is0 and result update byte is0, clear68 result bytes, set update1 and mask255, obtain the actual popcount and reload the live result pointer before writing its count.",
+    "If the live update byte is exactly1, copy68 result bytes to frame+0x40 output. This publication is present in stock and absent from the pinned public outer dispatcher. No guard or rollback is invented.",
+    "Actual native/source sleep, popcount, memory-fill and forward-copy helpers execute. Only the five engines are modeled with BX LR stubs and valid signed8 ABI results. Full nonstack RAM, helper/engine entry snapshots, status, saved registers, stack and masks match. Mutations cover live started/init/frame owners and result/output pointers."
+  ],
+  "limits": [
+    "The five engine bodies are unfinished; resolving the outer dispatcher replaces one aggregate import with five concrete imports. Application imports therefore increase74 to78; this does not claim a complete calculation engine or source-complete firmware.",
+    "The894-unit build is relocatable composition, not an executable image or physical sensor/RTC/SoftDevice proof. Final startup/linking and remaining78 application/22 boot imports are open.",
+    "Executor callback effects and selected helper-entry mutations are synthetic ordering tests. They do not prove arbitrary concurrency, private-stack aliases, valid pointers or physical interrupt/FPU behavior.",
+    "The known raw-ABI logging tail and history-dependent DFU frame wrappers were inspected and retained. No unsupported assembly removal or placeholder engine implementation is introduced."
+  ],
+  "evidence_files": {
+    "build/sources-goal-r1-goodix-algorithm-calculate-c/report.json": "96016b7a37540ac8acdb5f9ffedb1422a583a8ee3d478c5a65965ba174a753a6",
+    "build/sources-goal-r1-time-update-pure-c/report.json": "d70efe56568d434165997fd0f8de4e4a47095e6bde0b1541ee2df2792ff86f35",
+    "r1/src/application/goodix/native_algorithm_calculate.c": "b713000e757c77a1d00cce6a01c4270214ad1e375226c1691d0157ed752ec425",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-algorithm-calculate-c/r1/r1-application/r1__src__application__goodix__native_algorithm_calculate.c.o": "7e4344bae1eb7809e1c9e85939abf2545e030c93b83cbce39431ee1a8c3872d1",
+    "r1/src/application/goodix/native_algorithm_state.h": "c98aed8531803b62293e8c034f75aa95512ba41ced0cf3c6f46527315d8363fa",
+    "r1/src/sources.json": "aa7144ec372530fbec2369bbffa8872d903d0517e41174fba4708afcfb464776",
+    "tools/build/source-plan.json": "eeb516e31b3310fb0718f36908977f8125723f7c5e0e86cd6744395826259a4d",
+    "r1/src/config/runtime/native_health_cache.ld": "eb8f131c489cd818d4e36718718fa1989719ca0170f164541a1a5bf56dfc1ec3",
+    "r1/docs/reference/FUNCTION-OWNERSHIP.csv": "e4f4898ce47dd7e6f4dcb2c256cfc744800d1f298f0485677b73446bd18fa147",
+    "r1/symbols/function-frontier.csv": "130ca49b4410b93f856385ce2f0be312f3c8ee485060d0929d45cc84650b1288",
+    "r1/docs/reference/goodix-io-dispatch-c-review.md": "2ace38587b3a6afcef853bf5bda7855e278b8373fb468a576112a4a314e18899",
+    "r1/docs/reference/goodix-algorithm-init-c-review.md": "2840f8238c96e03e18f84392cbb7bffa6b1d5facaeabf164f76f6fb90593f7f2",
+    "third-party/upstream/goodix-gh3x2x/gh3x2x/demo_code/demo_algo_code/goodix_algo_application/src/gh3x2x_demo_algo_config.c": "65345b49ac1d9818fcc6f5dff3a33dbdd89c4e2182e6fe35480543b0a803a861",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-algorithm-calculate-c/r1/r1-application/third-party__upstream__goodix-gh3x2x__gh3x2x__demo_code__demo_algo_code__goodix_algo_application__src__gh3x2x_demo_algo_config.c.o": "6a65ddb671429ddab29014c4e028d634b5e4159d720ecc05d1f7f53e8c0f3789",
+    "third-party/upstream/goodix-gh3x2x/gh3x2x/demo_code/demo_kernel_code/driver/src/gh_drv_control.c": "8cf1dbd049598242ca0517819afe9bfe7af8c6714f8941fb10922263be98a949",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-algorithm-calculate-c/r1/r1-application/third-party__upstream__goodix-gh3x2x__gh3x2x__demo_code__demo_kernel_code__driver__src__gh_drv_control.c.o": "0b33631d2c75d5bd4bc0e1ba36f602fe492e9e64200da26489906d62018c159c",
+    "r1/src/application/goodix/native_algorithm_config.c": "4cc965713c68586899ce22fee2481196d42f0d23e313603a2466e8b011ca350c",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-algorithm-calculate-c/r1/r1-application/r1__src__application__goodix__native_algorithm_config.c.o": "ffaeb592c1c7f4584f79c5dc0a808886223dc111fa5acf2e2110f304494fe42d",
+    "r1/src/application/goodix/native_algorithm_shutdown.c": "cdb3a46d52f5f6b669a8b351f2af44d871235b4074399c6ed7fa19154c683b2f",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-algorithm-calculate-c/r1/r1-application/r1__src__application__goodix__native_algorithm_shutdown.c.o": "47ad9b3187c30082288f6c6842806b26b7aebf77c708ee17ba8177b7f7838eb6",
+    "build/goal-r1-goodix-algorithm-calculate-c/negative-frame-counter.c": "c122c18bfe3f561441d14fbf64f8465db01a7666f2a36c8859be946d66631803",
+    "build/goal-r1-goodix-algorithm-calculate-c/negative-soft-slot.o": "c6034641e68cc28f52a3f9f7ffc0cd90075c361b198c9a34f91bd4d46eef062f",
+    "build/goal-r1-goodix-algorithm-calculate-c/negative-soft-slot.log": "410793d3ee50928b5b69a10a2989aec6dd1ce1f147c9467a720fd3b3253728f9",
+    "build/goal-r1-goodix-algorithm-calculate-c/negative-partial-started.c": "4f166b946628a74cb8207e92aa57a8b078ec8752dcee9bcf08290752befa5288",
+    "build/goal-r1-goodix-algorithm-calculate-c/negative-sleep-bit.c": "0f6c4c2e661b8466a5212033fd58818a9e35e824b94baf843dd9bc3cc96c4da4",
+    "build/goal-r1-goodix-algorithm-calculate-c/negative-copy-source.o": "1a610ac535027971b97157f6bc73dfffef94d42be014a8304600d53b25c2db0a",
+    "build/goal-r1-goodix-algorithm-calculate-c/negative-boolean-init.log": "615530e0544e0d6105d69b92c5496525ecf0fb6ad42646d2c02433b8b6aed17a",
+    "build/goal-r1-goodix-algorithm-calculate-c/audit.json": "c5d1268b1a16c50d476caf589c76fa0efbe2e80765b19720a9156c6d959bccd4",
+    "build/goal-r1-goodix-algorithm-calculate-c/negative-partial-started.log": "a656bd2b019f730eaf744dec4bbb43fb2ab70fc36a201174919b5e0f34cfe2c1",
+    "build/goal-r1-goodix-algorithm-calculate-c/negative-unselected-result.c": "313df8a2415ba7c5019c244cee2ea12e5e6a75bdfea265a6206acf1cffbb0f22",
+    "build/goal-r1-goodix-algorithm-calculate-c/test.ld": "29003f01ef867d13a85a561ad40f1b13591d70c66c0573bb58a6a4b4379e9f5e",
+    "build/goal-r1-goodix-algorithm-calculate-c/audit.py": "3387839b41fe990ba9a95795dcef421b962e3201fbd06a146be4014bebb9d306",
+    "build/goal-r1-goodix-algorithm-calculate-c/negative-unselected-result.log": "e460e782d97f16386a8b5e01b436634fdcb2eb4d50d2020cdec9de2d423c4fb9",
+    "build/goal-r1-goodix-algorithm-calculate-c/negative-publication-gate.log": "29ba871007169aaf6d890199359f83dddd52a68779b0065244c0ea07c7a3a770",
+    "build/goal-r1-goodix-algorithm-calculate-c/negative-boolean-init.o": "de66cd6c38e9f70af2141fddbeb70cd2bec2d8e6a219fbf15a7bd911ad746a88",
+    "build/goal-r1-goodix-algorithm-calculate-c/negative-publication-gate.c": "dad539707b8ed3e5c2a93d95344e940786f00da2eb0b3cc717030f05ac34cadd",
+    "build/goal-r1-goodix-algorithm-calculate-c/negative-default-mask.o": "570f481990884d027f795516e3eda952250f87261b2098c41d41592967296c3c",
+    "build/goal-r1-goodix-algorithm-calculate-c/source.elf": "b8057d8c5cc376e24d1195e66682a06fe7a6af1b245ca739deecec36b302463a",
+    "build/goal-r1-goodix-algorithm-calculate-c/negative.py": "c1134e77b6c0396b5e04c0e351f761cdf90630ecbc1f87a5f3cece6c551c9244",
+    "build/goal-r1-goodix-algorithm-calculate-c/negative-results.json": "158e36802dde936ca9023a8ec7919d72664baad3cdabfca9e099b4cdec446588",
+    "build/goal-r1-goodix-algorithm-calculate-c/rea-helpers.json": "660bab1623babb871d161366fdce7c82d009e63757da58660735927c9bb5d375",
+    "build/goal-r1-goodix-algorithm-calculate-c/source.o": "7e4344bae1eb7809e1c9e85939abf2545e030c93b83cbce39431ee1a8c3872d1",
+    "build/goal-r1-goodix-algorithm-calculate-c/results.json": "8f35fc743ff3e9d0b9b81b1e7946e464d1feb95347f34c186c59e3c95829d212",
+    "build/goal-r1-goodix-algorithm-calculate-c/negative-frame-counter.log": "d6fdbbe717188060ab07e5abe9389159f4cbcbdb35446a4116158e82cae89b76",
+    "build/goal-r1-goodix-algorithm-calculate-c/negative-sleep-bit.o": "48d95729e6e2694c0ecabe20f98f94a5176b2dcb2e02fb9802cb1288d1b41b0c",
+    "build/goal-r1-goodix-algorithm-calculate-c/negative-copy-source.c": "a8fa014d74c6defa8b213bb47e3dde6cba8c1f240b9753b6607561af25c49e5f",
+    "build/goal-r1-goodix-algorithm-calculate-c/rea.json": "d64efc1ae229685cf3047b0f85c83fd726ec3912911645a50efda91fd426cfa1",
+    "build/goal-r1-goodix-algorithm-calculate-c/negative-partial-started.o": "5c7cc3311d5c0c5769ab0a2c7451cfa0468699d47d10fb868cc11d23206c173a",
+    "build/goal-r1-goodix-algorithm-calculate-c/negative-frame-counter.o": "b7387c5d240ea6df08e691432341ecbf495212936c60094ebe72da8a2fb553b4",
+    "build/goal-r1-goodix-algorithm-calculate-c/negative-soft-slot.c": "c162cdf6eb5c66e2dca014cc5c4f7559c8c1424e86785f66a73c7d0fc1588682",
+    "build/goal-r1-goodix-algorithm-calculate-c/negative-default-mask.log": "4b2babcc7fbb1f788559e72aff74695439328b4ee13556541a816d68b0cc3cbb",
+    "build/goal-r1-goodix-algorithm-calculate-c/negative-default-mask.c": "2413239818e4c806aa3db98b91bc07ffaca20c7c68cfecdf1444ce2d01a46885",
+    "build/goal-r1-goodix-algorithm-calculate-c/negative-sleep-bit.log": "24a082fb5575238af4b457f66c3e4e5110346e1e441134e04f7f8d0a51d23896",
+    "build/goal-r1-goodix-algorithm-calculate-c/negative-publication-gate.o": "7dfd85909e16ca1b93df6f166450c96570b3d760a7b63ad7e158da9db380f571",
+    "build/goal-r1-goodix-algorithm-calculate-c/record.py": "c74d0e156fa92b218f0ff6db1236609a14c2bc8088bee3e5af3124efa643ee77",
+    "build/goal-r1-goodix-algorithm-calculate-c/negative-boolean-init.c": "5852fe8cfc8c87bb18af20c8a0bce4ab415a74c18bc6aceb42ec5e1bad039698",
+    "build/goal-r1-goodix-algorithm-calculate-c/compile-argv.json": "fd418c6a67df0a3d8bf8254bdbe8e60709ad2e9d585e915de9325bfcf76e32f8",
+    "build/goal-r1-goodix-algorithm-calculate-c/manifest-before.json": "e807f5d1469b9c135db8eae3ab908228922fdc8c37c6a7f4be247dffc0eb622c",
+    "build/goal-r1-goodix-algorithm-calculate-c/negative-unselected-result.o": "750248fcabe163519d14709685284a6d0b786f0db391b69702343d1aa7b4f548",
+    "build/goal-r1-goodix-algorithm-calculate-c/negative-copy-source.log": "c5b2f26a3553adb494c976e47a889fd0125c16c87662d452e4a8e29579d96753",
+    "build/goal-r1-goodix-algorithm-calculate-c/verify.py": "c95697fe16d7d98cd9c07e4959345f8ba4ca0486547a035745efc8365f3a8431",
+    "build/goal-r1-goodix-algorithm-calculate-c/build.log": "3fab2110d26c45897e7a8938d52f64d53c5244d84ce318cf8e93ca880dd65d91"
+  }
+}

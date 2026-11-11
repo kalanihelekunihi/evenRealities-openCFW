@@ -1,82 +1,36 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_324354\n"
-".type opencfw_em9305_child_324354,@function\n"
-"opencfw_em9305_child_324354:\n"
-"L324354:\n"
-"enter_s [r13-r15,fp,blink]\n"
-"L324356:\n"
-"mov_s r14,r0\n"
-"L324358:\n"
-"ldb r0,[r0,57]\n"
-"L32435c:\n"
-"mov_s r13,r1\n"
-"L32435e:\n"
-"breq.d.nt r0,0x3,L32436e\n"
-"L324362:\n"
-"st.aw 4,[sp,-8]\n"
-"L324366:\n"
-"breq.nt r0,0x2,L3243ac\n"
-"L32436a:\n"
-"brne.nt r0,0x1,L324372\n"
-"L32436e:\n"
-"stb 1,[sp,2]\n"
-"L324372:\n"
-"mov r15,1717\n"
-"L324376:\n"
-"ldb_s r0,[r14,r15]\n"
-"L324378:\n"
-"add_s r1,sp,0\n"
-"L32437a:\n"
-"add_s r0,r0,6\n"
-"L32437c:\n"
-"stb_s r0,[sp,0x4]\n"
-"L32437e:\n"
-"bl.d opencfw_em9305_radio_encode_3239d4\n"
-"L324382:\n"
-"mov_s r0,r13\n"
-"L324384:\n"
-"ld r2,[r14,0x14]\n"
-"L324386:\n"
-"ld r1,[r14,0x10]\n"
-"L324388:\n"
-"add_s r13,r13,r0\n"
-"L32438a:\n"
-"bl.d opencfw_em9305_radio_address_write_3045e8\n"
-"L32438e:\n"
-"mov_s r0,r13\n"
-"L324390:\n"
-"ldb_s r1,[r14,r15]\n"
-"L324392:\n"
-"breq_s r1,0,L3243a4\n"
-"L324394:\n"
-"add r14,r14,1718\n"
-"L324398:\n"
-"add_s r0,r13,0x6\n"
-"L32439a:\n"
-"min r2,r1,0x1f\n"
-"L32439e:\n"
-"bl.d opencfw_em9305_memcpy\n"
-"L3243a2:\n"
-"mov_s r1,r14\n"
-"L3243a4:\n"
-"ldb_s r0,[sp,0x4]\n"
-"L3243a6:\n"
-"add_s r0,r0,2\n"
-"L3243a8:\n"
-"extb_s r0,r0\n"
-"L3243aa:\n"
-"leave_s [r13-r15,fp,blink,pcl]\n"
-"L3243ac:\n"
-"ld r0,[r14,0x14]\n"
-"L3243ae:\n"
-"and r0,r0,0xc000\n"
-"L3243b6:\n"
-"bxor.f 0,r0,0xe\n"
-"L3243ba:\n"
-"beq_s L32436e\n"
-"L3243bc:\n"
-"b_s L324372\n"
-".size opencfw_em9305_child_324354,.-opencfw_em9305_child_324354\n"
-);
+#include <stdint.h>
+
+/* Native 0x324354..0x3243ba: write an advertising PDU into the output buffer:
+ * encoded header (type 4, length = data length +1717 plus 6, flag set for
+ * mode 1/3, or mode 2 with address bits 15:14 == 01), the 6-byte address from
+ * +0x10/+0x14, then up to 31 data bytes from +1718. Returns length + 2. */
+extern uint32_t opencfw_em9305_radio_encode_3239d4(uintptr_t output,uintptr_t input);
+extern uintptr_t opencfw_em9305_radio_address_write_3045e8(uintptr_t,uint32_t,uint32_t);
+extern void *opencfw_em9305_memcpy(void *destination, const void *source, uint32_t bytes);
+
+struct adv_header {
+    uint8_t type;
+    uint8_t reserved;
+    uint8_t flag;
+    uint8_t reserved2;
+    uint8_t length;
+} __attribute__((aligned(4)));
+
+uint32_t opencfw_em9305_child_324354(uintptr_t record, uintptr_t output)
+{
+    struct adv_header header;
+    uint32_t mode = *(volatile uint8_t *)(record + 57u);
+    *(volatile uint32_t *)&header = 4u;
+    if (mode == 3u || mode == 1u ||
+        (mode == 2u && (*(volatile uint32_t *)(record + 0x14u) & 0xc000u) == 0x4000u))
+        header.flag = 1u;
+    header.length = (uint8_t)(*(volatile uint8_t *)(record + 1717u) + 6u);
+    uintptr_t cursor = output + opencfw_em9305_radio_encode_3239d4(output, (uintptr_t)&header);
+    (void)opencfw_em9305_radio_address_write_3045e8(cursor, *(volatile uint32_t *)(record + 0x10u),
+                                                    *(volatile uint32_t *)(record + 0x14u));
+    uint32_t length = *(volatile uint8_t *)(record + 1717u);
+    if (length != 0u)
+        (void)opencfw_em9305_memcpy((void *)(cursor + 6u), (const void *)(record + 1718u),
+                                    length < 31u ? length : 31u);
+    return (uint8_t)(header.length + 2u);
+}

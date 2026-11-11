@@ -1,7 +1,9 @@
 /* LittleFS port for the MX25U25643G external NOR, stock
  * D:\01_workspace\s200_ap510b_iar_git\third_party\littlefs\port\littlefs_mx25u25643g_porting.c.
- * Native 0x475fe8..0x476453 plus the sync stub at 0x4764dc; literal pool
- * 0x476454..0x4764db. lfs_config lives in ROM at 0x6e83a4.
+ * Evidence: FUN_00475fe8 @ 0x475fe8 (490 B sha 58bb087d…) corpus
+ * apollo-main/ghidra/open-2026-09-29; sync leaf at 0x4764dc is
+ * movs r0,#0; bx lr inside the literal pool (see littlefs_block_sync_4764dc).
+ * Literal pool 0x476454..0x4764db; lfs_config ROM 0x6e83a4.
  *
  * The filesystem occupies NOR 0x01400000.., 3008 blocks of 4 KiB (block n is at
  * 0x01400000 + n * 0x1000). The block callbacks report failures through the

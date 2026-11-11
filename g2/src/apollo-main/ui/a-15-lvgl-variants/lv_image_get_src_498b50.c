@@ -10,7 +10,7 @@
 #include <stdint.h>
 #include <stddef.h>
 
-extern void audio_uart_lvgl_log(uint32_t level, const char *file, uint32_t line,
+extern void lv_log_add(uint32_t level, const char *file, uint32_t line,
                                 const char *function, const char *format, ...); /* 0x44d25c */
 
 static const char source_file[] =
@@ -23,7 +23,7 @@ static const char null_reason[] = "NULL pointer"; /* ROM 0x787480 */
 const void *lv_image_get_src_498b50(void *obj)
 {
     if (obj == NULL) {
-        audio_uart_lvgl_log(3u, source_file, 472u, function_name, assert_format,
+        lv_log_add(3u, source_file, 472u, function_name, assert_format,
                             null_expression, null_reason);
         for (;;)
             *(volatile uint32_t *)(uintptr_t)0xffffffffu = 0u; /* LV_ASSERT_HANDLER */

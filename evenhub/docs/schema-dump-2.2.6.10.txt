@@ -1,0 +1,163 @@
+MSG root @0x77754c fields=23 required=0 largest_tag=23
+  tag   1 static optional uint off=0x0 size=1 array=1 sizeoff=0
+  tag   2 static optional uint off=0x1 size=1 array=1 sizeoff=0
+  tag   3 static oneof message off=0x4 size=14164 array=1 sizeoff=2
+    MSG root.3 @0x7773b4 fields=5 required=0 largest_tag=5
+      tag   1 static optional uint off=0x0 size=4 array=1 sizeoff=0
+      tag   2 static repeated message off=0x8 size=1364 array=4 sizeoff=4
+        MSG root.3.2 @0x77730c fields=13 required=0 largest_tag=13
+          tag   1 static optional uint off=0x0 size=4 array=1 sizeoff=0
+          tag   2 static optional uint off=0x4 size=4 array=1 sizeoff=0
+          tag   3 static optional uint off=0x8 size=4 array=1 sizeoff=0
+          tag   4 static optional uint off=0xc size=4 array=1 sizeoff=0
+          tag   5 static optional uint off=0x10 size=4 array=1 sizeoff=0
+          tag   6 static optional uint off=0x14 size=4 array=1 sizeoff=0
+          tag   7 static optional uint off=0x18 size=4 array=1 sizeoff=0
+          tag   8 static optional uint off=0x1c size=4 array=1 sizeoff=0
+          tag   9 static optional uint off=0x20 size=4 array=1 sizeoff=0
+          tag  10 static optional string off=0x24 size=16 array=1 sizeoff=0
+          tag  11 static optional message off=0x38 size=1296 array=1 sizeoff=4
+            MSG root.3.2.11 @0x7772f4 fields=4 required=0 largest_tag=4
+              tag   1 static optional uint off=0x0 size=4 array=1 sizeoff=0
+              tag   2 static optional uint off=0x4 size=4 array=1 sizeoff=0
+              tag   3 static optional uint off=0x8 size=4 array=1 sizeoff=0
+              tag   4 static repeated string off=0xe size=64 array=20 sizeoff=2
+          tag  12 static optional uint off=0x548 size=4 array=1 sizeoff=0
+          tag  13 static optional uint off=0x550 size=4 array=1 sizeoff=4
+      tag   3 static repeated message off=0x155c size=1064 array=8 sizeoff=4
+        MSG root.3.3 @0x777354 fields=13 required=0 largest_tag=13
+          tag   1 static optional uint off=0x0 size=4 array=1 sizeoff=0
+          tag   2 static optional uint off=0x4 size=4 array=1 sizeoff=0
+          tag   3 static optional uint off=0x8 size=4 array=1 sizeoff=0
+          tag   4 static optional uint off=0xc size=4 array=1 sizeoff=0
+          tag   5 static optional uint off=0x10 size=4 array=1 sizeoff=0
+          tag   6 static optional uint off=0x14 size=4 array=1 sizeoff=0
+          tag   7 static optional uint off=0x18 size=4 array=1 sizeoff=0
+          tag   8 static optional uint off=0x1c size=4 array=1 sizeoff=0
+          tag   9 static optional uint off=0x20 size=4 array=1 sizeoff=0
+          tag  10 static optional string off=0x24 size=16 array=1 sizeoff=0
+          tag  11 static optional uint off=0x34 size=4 array=1 sizeoff=0
+          tag  12 static optional string off=0x38 size=1000 array=1 sizeoff=0
+          tag  13 static optional uint off=0x424 size=4 array=1 sizeoff=4
+      tag   4 static repeated message off=0x36a0 size=44 array=4 sizeoff=4
+        MSG root.3.4 @0x77739c fields=7 required=0 largest_tag=7
+          tag   1 static optional uint off=0x0 size=4 array=1 sizeoff=0
+          tag   2 static optional uint off=0x4 size=4 array=1 sizeoff=0
+          tag   3 static optional uint off=0x8 size=4 array=1 sizeoff=0
+          tag   4 static optional uint off=0xc size=4 array=1 sizeoff=0
+          tag   5 static optional uint off=0x10 size=4 array=1 sizeoff=0
+          tag   6 static optional string off=0x14 size=16 array=1 sizeoff=0
+          tag   7 static optional uint off=0x28 size=4 array=1 sizeoff=4
+      tag   5 static optional uint off=0x3750 size=4 array=1 sizeoff=0
+  tag   4 static oneof message off=0x4 size=1 array=1 sizeoff=2
+    MSG root.4 @0x7773cc fields=1 required=0 largest_tag=1
+      tag   1 static optional uint off=0x0 size=1 array=1 sizeoff=0
+  tag   5 static oneof message off=0x4 size=4140 array=1 sizeoff=2
+    MSG root.5 @0x77736c fields=8 required=0 largest_tag=8
+      tag   1 static optional uint off=0x0 size=4 array=1 sizeoff=0
+      tag   2 static optional string off=0x4 size=16 array=1 sizeoff=0
+      tag   3 static optional uint off=0x14 size=4 array=1 sizeoff=0
+      tag   4 static optional uint off=0x18 size=4 array=1 sizeoff=0
+      tag   5 static optional uint off=0x1c size=4 array=1 sizeoff=0
+      tag   6 static optional uint off=0x20 size=4 array=1 sizeoff=0
+      tag   7 static optional uint off=0x24 size=4 array=1 sizeoff=0
+      tag   8 static optional bytes off=0x28 size=4098 array=1 sizeoff=0
+  tag   6 static oneof message off=0x4 size=44 array=1 sizeoff=2
+    MSG root.6 @0x777384 fields=8 required=0 largest_tag=8
+      tag   1 static optional uint off=0x0 size=4 array=1 sizeoff=0
+      tag   2 static optional string off=0x4 size=16 array=1 sizeoff=0
+      tag   3 static optional uint off=0x14 size=4 array=1 sizeoff=0
+      tag   4 static optional uint off=0x18 size=4 array=1 sizeoff=0
+      tag   5 static optional uint off=0x1c size=4 array=1 sizeoff=0
+      tag   6 static optional uint off=0x20 size=4 array=1 sizeoff=0
+      tag   7 static optional uint off=0x24 size=4 array=1 sizeoff=0
+      tag   8 static optional uint off=0x28 size=1 array=1 sizeoff=0
+  tag   7 static oneof message off=0x4 size=14160 array=1 sizeoff=2
+    MSG root.7 @0x7773e4 fields=4 required=0 largest_tag=4
+      tag   1 static optional uint off=0x0 size=4 array=1 sizeoff=0
+      tag   2 static repeated message off=0x8 size=1364 array=4 sizeoff=4
+        root.7.2 -> see 0x77730c
+      tag   3 static repeated message off=0x155c size=1064 array=8 sizeoff=4
+        root.7.3 -> see 0x777354
+      tag   4 static repeated message off=0x36a0 size=44 array=4 sizeoff=4
+        root.7.4 -> see 0x77739c
+  tag   8 static oneof message off=0x4 size=1 array=1 sizeoff=2
+    MSG root.8 @0x7773fc fields=1 required=0 largest_tag=1
+      tag   1 static optional uint off=0x0 size=1 array=1 sizeoff=0
+  tag   9 static oneof message off=0x4 size=2028 array=1 sizeoff=2
+    MSG root.9 @0x777324 fields=5 required=0 largest_tag=5
+      tag   1 static optional uint off=0x0 size=4 array=1 sizeoff=0
+      tag   2 static optional string off=0x4 size=16 array=1 sizeoff=0
+      tag   3 static optional uint off=0x14 size=4 array=1 sizeoff=0
+      tag   4 static optional uint off=0x18 size=4 array=1 sizeoff=0
+      tag   5 static optional string off=0x1c size=2000 array=1 sizeoff=0
+  tag  10 static oneof message off=0x4 size=1 array=1 sizeoff=2
+    MSG root.10 @0x77733c fields=1 required=0 largest_tag=1
+      tag   1 static optional uint off=0x0 size=1 array=1 sizeoff=0
+  tag  11 static oneof message off=0x4 size=4 array=1 sizeoff=2
+    MSG root.11 @0x777414 fields=1 required=0 largest_tag=1
+      tag   1 static optional uint off=0x0 size=4 array=1 sizeoff=0
+  tag  12 static oneof message off=0x4 size=1 array=1 sizeoff=2
+    MSG root.12 @0x77742c fields=1 required=0 largest_tag=1
+      tag   1 static optional uint off=0x0 size=1 array=1 sizeoff=0
+  tag  13 static oneof message off=0x4 size=96 array=1 sizeoff=2
+    MSG root.13 @0x7772dc fields=3 required=0 largest_tag=3
+      tag   1 static oneof message off=0x4 size=92 array=1 sizeoff=4
+        MSG root.13.1 @0x777264 fields=5 required=0 largest_tag=5
+          tag   1 static optional uint off=0x0 size=4 array=1 sizeoff=0
+          tag   2 static optional string off=0x4 size=16 array=1 sizeoff=0
+          tag   3 static optional string off=0x14 size=64 array=1 sizeoff=0
+          tag   4 static optional uint off=0x54 size=4 array=1 sizeoff=0
+          tag   5 static optional uint off=0x58 size=1 array=1 sizeoff=0
+      tag   2 static oneof message off=0x4 size=24 array=1 sizeoff=4
+        MSG root.13.2 @0x77727c fields=3 required=0 largest_tag=3
+          tag   1 static optional uint off=0x0 size=4 array=1 sizeoff=0
+          tag   2 static optional string off=0x4 size=16 array=1 sizeoff=0
+          tag   3 static optional uint off=0x14 size=1 array=1 sizeoff=0
+      tag   3 static oneof message off=0x4 size=20 array=1 sizeoff=4
+        MSG root.13.3 @0x7772c4 fields=4 required=0 largest_tag=4
+          tag   1 static optional uint off=0x0 size=1 array=1 sizeoff=0
+          tag   2 static optional uint off=0x1 size=1 array=1 sizeoff=0
+          tag   3 static optional message off=0x4 size=12 array=1 sizeoff=2
+            MSG root.13.3.3 @0x777294 fields=3 required=0 largest_tag=3
+              tag   1 static optional fixed32 off=0x0 size=4 array=1 sizeoff=0
+              tag   2 static optional fixed32 off=0x4 size=4 array=1 sizeoff=0
+              tag   3 static optional fixed32 off=0x8 size=4 array=1 sizeoff=0
+          tag   4 static optional uint off=0x10 size=4 array=1 sizeoff=0
+  tag  14 static oneof message off=0x4 size=4 array=1 sizeoff=2
+    MSG root.14 @0x777474 fields=1 required=0 largest_tag=1
+      tag   1 static optional uint off=0x0 size=4 array=1 sizeoff=0
+  tag  15 static oneof message off=0x4 size=8 array=1 sizeoff=2
+    MSG root.15 @0x77748c fields=2 required=0 largest_tag=2
+      tag   1 static optional uint off=0x0 size=4 array=1 sizeoff=0
+      tag   2 static optional uint off=0x4 size=1 array=1 sizeoff=0
+  tag  16 static oneof message off=0x4 size=28 array=1 sizeoff=2
+    MSG root.16 @0x77745c fields=4 required=0 largest_tag=4
+      tag   1 static optional uint off=0x0 size=4 array=1 sizeoff=0
+      tag   2 static optional string off=0x4 size=16 array=1 sizeoff=0
+      tag   3 static optional uint off=0x14 size=4 array=1 sizeoff=0
+      tag   4 static optional uint off=0x18 size=4 array=1 sizeoff=0
+  tag  17 static oneof message off=0x4 size=8 array=1 sizeoff=2
+    MSG root.17 @0x7774a4 fields=2 required=0 largest_tag=2
+      tag   1 static optional uint off=0x0 size=1 array=1 sizeoff=0
+      tag   2 static optional uint off=0x4 size=4 array=1 sizeoff=0
+  tag  18 static oneof message off=0x4 size=4 array=1 sizeoff=2
+    MSG root.18 @0x7774bc fields=1 required=0 largest_tag=1
+      tag   1 static optional uint off=0x0 size=4 array=1 sizeoff=0
+  tag  19 static oneof message off=0x4 size=4 array=1 sizeoff=2
+    MSG root.19 @0x7774d4 fields=1 required=0 largest_tag=1
+      tag   1 static optional uint off=0x0 size=4 array=1 sizeoff=0
+  tag  20 static oneof message off=0x4 size=4 array=1 sizeoff=2
+    MSG root.20 @0x7774ec fields=1 required=0 largest_tag=1
+      tag   1 static optional uint off=0x0 size=4 array=1 sizeoff=0
+  tag  21 static oneof message off=0x4 size=204 array=1 sizeoff=2
+    MSG root.21 @0x777504 fields=2 required=0 largest_tag=2
+      tag   1 static optional uint off=0x0 size=4 array=1 sizeoff=0
+      tag   2 static optional string off=0x4 size=200 array=1 sizeoff=0
+  tag  22 static oneof message off=0x4 size=8 array=1 sizeoff=2
+    MSG root.22 @0x77751c fields=2 required=0 largest_tag=2
+      tag   1 static optional uint off=0x0 size=4 array=1 sizeoff=0
+      tag   2 static optional uint off=0x4 size=4 array=1 sizeoff=0
+  tag  23 static oneof message off=0x4 size=4 array=1 sizeoff=2
+    MSG root.23 @0x777534 fields=1 required=0 largest_tag=1
+      tag   1 static optional uint off=0x0 size=4 array=1 sizeoff=0

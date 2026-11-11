@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "scope": "R1 low-battery escalation ordinary C entry",
+  "report": "build/sources-goal-r1-battery-low-pure-c/report.json",
+  "comparison_report": "build/sources-goal-r1-yhm-status-pure-c/report.json",
+  "audit": {
+    "compiled_units": 855,
+    "application_imports": 62,
+    "bootloader_imports": 22,
+    "unchanged_prior_nongenerated_objects": 844,
+    "changed_nongenerated_objects": [
+      "r1/src/application/board/native_battery_low.c"
+    ],
+    "import_sets_unchanged": true,
+    "no_new_persistent_state": true
+  },
+  "verification": {
+    "stock_C_comparisons": 7360,
+    "actual_C_battery_storage": true,
+    "actual_C_KV_field_setter": false,
+    "KV_record_bytes_compared": true,
+    "private_unused_upper_record_bits_excluded": true,
+    "public_void_result_excluded": true,
+    "caller_scratch_and_frame_aliases_excluded": true
+  },
+  "integrated": {
+    "stock_C_comparisons": 7360,
+    "actual_C_battery_storage": true,
+    "actual_C_KV_field_setter": true,
+    "KV_record_bytes_compared": true,
+    "private_unused_upper_record_bits_excluded": true,
+    "public_void_result_excluded": true,
+    "caller_scratch_and_frame_aliases_excluded": true
+  },
+  "compiled_defects_rejected": [
+    {
+      "name": "threshold",
+      "rejected": true
+    },
+    {
+      "name": "event_count",
+      "rejected": true
+    },
+    {
+      "name": "voltage_width",
+      "rejected": true
+    },
+    {
+      "name": "logging_gate",
+      "rejected": true
+    },
+    {
+      "name": "record_kind",
+      "rejected": true
+    }
+  ],
+  "intentional_C_policy": "Initialize the private timestamp/voltage record to zero. Only timestamp, kind zero and low 14 voltage bits reach the KV field setter; unused upper scratch bits no longer reflect incoming caller registers.",
+  "limits": [
+    "Actual battery sampling, persistence, RTOS wakes and events on hardware remain unverified.",
+    "Private-frame aliases, scratch-register residues and incidental void return values excluded.",
+    "Sampling, logs, time, KV backend, events and thread flags modeled; actual C field packing separately exercised.",
+    "Byte identity is not claimed."
+  ],
+  "evidence_files": {
+    "build/sources-goal-r1-battery-low-pure-c/report.json": "5baf96f7b8161ccd9387020c55be2d21c4b893c4feeceaab11b17e6835399aed",
+    "build/sources-goal-r1-yhm-status-pure-c/report.json": "5ecf94646d031a17b96d273504710d8b9f1a43ef194c55ea7c48b2e88c1be483",
+    "r1/src/application/board/native_battery_low.c": "f3380a713bb0596c9661da54341fcdb2268d5fd2dbdecdd09a42f84cb940c037",
+    "r1/src/application/runtime/native_battery_context_config.c": "2f286ba3158db295a53c5bf5d776bfafc5afaafe6705163298cb091bdbc584b5",
+    "r1/src/application/board/native_kv_device_fields.c": "91e7386cb6703a972330a45e95a2b1e188d88f01c88b3d0c9d9986e2895533ee",
+    "r1/src/application/board/native_kv_class.c": "e9791d39b7a9b5380b1dbce3c7422be921131abbd0e09c3387ea3d4b9930bf6e",
+    "r1/src/sources.json": "618e3f6056f74edee68027c82dddb1d2e8c53810e0c04e416f42841fc974e4ec",
+    "tools/build/source-plan.json": "eeb516e31b3310fb0718f36908977f8125723f7c5e0e86cd6744395826259a4d",
+    "build/goal-r1-battery-low-pure-c/rea.json": "c4166ad501fa74a63fdabd9d6f49abff667efb4c8f156483055bbac461d744ae",
+    "build/goal-r1-battery-low-pure-c/integrated/results.json": "7211f7f6f9fb68a704602294834d56866981803314aeb8780a7b56a49340a584",
+    "build/goal-r1-battery-low-pure-c/integrated/verification.log": "88853f70a2d06d5cc314c5fc59b3709d8275fd9f94bc3f2fa9dc03eb3474b4ab",
+    "build/goal-r1-battery-low-pure-c/verify.py": "145a6480fd0f93b4a94845eaa7d8d7547aa87eb42ec66322b3b1428a5c4aeda4",
+    "build/goal-r1-battery-low-pure-c/results.json": "243ce26c28d060286d68b018005a073b8fca62ff29233aadc431f478ba505621",
+    "build/goal-r1-battery-low-pure-c/verification.log": "0aa48574f951957a0fde2c8b527cd13fff8f7da7920cec94edf21397c0e8962d",
+    "build/goal-r1-battery-low-pure-c/negative.py": "7b724ed85ad895d6e2cc119db76ae8a1fca402c1d9f5c6fd5354fba2fb5d81dc",
+    "build/goal-r1-battery-low-pure-c/negative.json": "1d48c48cf91e5030040a3828bd06da2a7333cdc998ee0f5b976585566c7c9f1a",
+    "build/goal-r1-battery-low-pure-c/negative.log": "f67b2a09908083a372cd42eeac36cb4e900841b3bf1ae3da09bc00a49562420b",
+    "build/goal-r1-battery-low-pure-c/build.log": "ac70bebb21936f471e774188f03aa91f50bc6d61c3909125a32500696b47aed1",
+    "build/goal-r1-battery-low-pure-c/sources-check.log": "f610d186f791ebf717d9fd6eed6c4f28612779fff34b885bcf8dc8a49c9ae80c"
+  }
+}

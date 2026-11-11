@@ -1,86 +1,51 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_320d68\n"
-".type opencfw_em9305_child_320d68,@function\n"
-"opencfw_em9305_child_320d68:\n"
-"L320d68:\n"
-"enter_s [r13-r17,fp,blink]\n"
-"L320d6a:\n"
-"sub_s sp,sp,0x1c\n"
-"L320d6c:\n"
-"mov_s r17,r1\n"
-"L320d6e:\n"
-"mov_s r14,r0\n"
-"L320d70:\n"
-"breq_s r1,0,L320dd4\n"
-"L320d72:\n"
-"ld_s r13,[r14,0x24]\n"
-"L320d74:\n"
-"ld r16,[r14,44]\n"
-"L320d78:\n"
-"add_s r0,sp,0x14\n"
-"L320d7a:\n"
-"mov_s r1,r17\n"
-"L320d7c:\n"
-"bl.d opencfw_em9305_dispatch_child_32db0c\n"
-"L320d80:\n"
-"add2 r15,r13,0x27\n"
-"L320d84:\n"
-"add r2,r17,r0\n"
-"L320d88:\n"
-"add2 r0,r13,0x26\n"
-"L320d8c:\n"
-"bl.d opencfw_em9305_dispatch_child_32df24\n"
-"L320d90:\n"
-"add r1,sp,0x1b\n"
-"L320d94:\n"
-"ldb_s r1,[sp,0x14]\n"
-"L320d96:\n"
-"ldh r2,[sp,22]\n"
-"L320d9a:\n"
-"ld r3,[r15,0x4]\n"
-"L320d9c:\n"
-"ld r0,[r15,0xc]\n"
-"L320d9e:\n"
-"ld r8,[r14,44]\n"
-"L320da2:\n"
-"ld_s r12,[r15,0]\n"
-"L320da4:\n"
-"ld_s r15,[r15,0x8]\n"
-"L320da6:\n"
-"ldb r11,[r13,154]\n"
-"L320daa:\n"
-"stb_s r1,[sp,0x10]\n"
-"L320dac:\n"
-"sth r2,[sp,18]\n"
-"L320db0:\n"
-"st_s r3,[sp,0x4]\n"
-"L320db2:\n"
-"st_s r0,[sp,0xc]\n"
-"L320db4:\n"
-"add2 r3,r16,0x24\n"
-"L320db8:\n"
-"add1 r1,r8,0x26\n"
-"L320dbc:\n"
-"add_s r0,sp,0\n"
-"L320dbe:\n"
-"mov_s r2,1\n"
-"L320dc0:\n"
-"st_s r12,[sp,0]\n"
-"L320dc2:\n"
-"st_s r15,[sp,0x8]\n"
-"L320dc4:\n"
-"bl.d opencfw_em9305_child_30301c\n"
-"L320dc8:\n"
-"stb r11,[sp,17]\n"
-"L320dcc:\n"
-"bl.d opencfw_em9305_auxiliary_signal_304394\n"
-"L320dd0:\n"
-"stb 1,[r13,1]\n"
-"L320dd4:\n"
-"mov_s r0,0\n"
-"L320dd6:\n"
-"leave_s [r13-r17,fp,blink,pcl]\n"
-".size opencfw_em9305_child_320d68,.-opencfw_em9305_child_320d68\n"
-);
+#include <stdint.h>
+
+/* Native 0x320d68..0x320dda: handle a received control PDU for the link
+ * (+0x24): parse its header (native 0x32db0c) and payload (native 0x32df24
+ * into link +152), then schedule the response (native 0x30301c) with the
+ * link's four timing words (+156..+168), the parsed type and length and the
+ * channel byte +154, mark the link busy (+1) and signal the auxiliary task.
+ * Always returns 0. */
+extern uint32_t opencfw_em9305_dispatch_child_32db0c(uintptr_t,uintptr_t);
+extern uint32_t opencfw_em9305_dispatch_child_32df24(uintptr_t,uintptr_t,uintptr_t);
+extern uint32_t opencfw_em9305_child_30301c(uintptr_t,uintptr_t,uint32_t,uintptr_t);
+extern uint32_t opencfw_em9305_auxiliary_signal_304394(void);
+
+struct pdu_header {
+    uint8_t type;
+    uint8_t reserved;
+    uint16_t length;
+};
+
+struct pdu_response {
+    uint32_t timing[4];
+    uint8_t type;
+    uint8_t channel;
+    uint16_t length;
+};
+
+uint32_t opencfw_em9305_child_320d68(uintptr_t context, uintptr_t pdu)
+{
+    struct pdu_header header;
+    struct pdu_response response;
+    uint8_t status;
+    if (pdu == 0u) return 0u;
+    uintptr_t link = *(volatile uint32_t *)(context + 0x24u);
+    uintptr_t session = *(volatile uint32_t *)(context + 44u);
+    uint32_t used = opencfw_em9305_dispatch_child_32db0c((uintptr_t)&header, pdu);
+    (void)opencfw_em9305_dispatch_child_32df24(link + 152u, (uintptr_t)&status, pdu + used);
+    volatile uint32_t *timing = (volatile uint32_t *)(link + 156u);
+    response.type = header.type;
+    response.length = header.length;
+    response.timing[1] = timing[1];
+    response.timing[3] = timing[3];
+    response.timing[0] = timing[0];
+    response.timing[2] = timing[2];
+    response.channel = *(volatile uint8_t *)(link + 154u);
+    (void)opencfw_em9305_child_30301c((uintptr_t)&response,
+                                      *(volatile uint32_t *)(context + 44u) + 76u, 1u,
+                                      session + 144u);
+    *(volatile uint8_t *)(link + 1u) = 1u;
+    (void)opencfw_em9305_auxiliary_signal_304394();
+    return 0u;
+}

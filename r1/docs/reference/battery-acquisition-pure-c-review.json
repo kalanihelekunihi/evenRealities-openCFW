@@ -1,0 +1,89 @@
+{
+  "schema_version": 1,
+  "report": "build/sources-goal-r1-battery-acquisition-pure-c/report.json",
+  "report_sha256": "9754e5cb16de3bc1a5838364e2f04b9c8732f345aedb620cc403cd8b17418fbe",
+  "manifest_sha256": "07d1d673a3a503de947c5a2336275e5281b759cb112b0562bb60cd07f9eb6853",
+  "verification": {
+    "cases": {
+      "voltage": 416,
+      "average": 416,
+      "scaled": 416,
+      "pair": 416
+    },
+    "three_way_stock_previous_c_match": true,
+    "handle_reloads_and_distinct_vpmic_vbat_contexts": true,
+    "partial_fullword_and_nonwriting_samples": true,
+    "actual_pair_and_scaling_consumers_executed": true,
+    "private_stack_and_caller_clobbered_registers_excluded": true,
+    "callbacks_modeled": true,
+    "physical_hardware_unverified": true
+  },
+  "defects": {
+    "detected": [
+      "wrong-owner",
+      "missing-reset",
+      "missing-clamp",
+      "wrong-scale",
+      "discard-average"
+    ]
+  },
+  "audit": {
+    "unchanged_prior_object_hashes": 780,
+    "changed_objects": [
+      [
+        "r1-bootloader",
+        "{gen}/r1_startup_vectors.S"
+      ],
+      [
+        "r1-application",
+        "r1/src/application/adc/native_battery_voltage_read.c"
+      ],
+      [
+        "r1-application",
+        "r1/src/application/adc/stock_battery_average_frame.c"
+      ],
+      [
+        "r1-bootloader",
+        "{gen}/r1_uecc.c"
+      ]
+    ],
+    "existing_average_body_object_unchanged": true,
+    "generated_boot_allocated_bytes_and_relocations_unchanged": true,
+    "imports_unchanged": true
+  },
+  "rea": [
+    {
+      "name": "voltage",
+      "evidence_id": "ev_be5d7131d53c37f11167ad35b0b8f8dd548d3d84359557d11e3a40de69207e97",
+      "address": "0x506a4",
+      "length": 96,
+      "sha256": "31354bd530b12c212cee34c61ecf6524d6901414ca0efee18e2d97b43deaeacd",
+      "matches_locked_application": true
+    },
+    {
+      "name": "average",
+      "evidence_id": "ev_7caf8ded05128c0d74a86aac2386c915e197f4e74844b74ca71e5a2f25cb5c43",
+      "address": "0x50c90",
+      "length": 112,
+      "sha256": "ec2725fff114488624e62613f44ca81d4159825cb49b25d372e7da0e58ef08e7",
+      "matches_locked_application": true
+    }
+  ],
+  "bootloader_link_report": "build/goal-r1-battery-acquisition-pure-c/boot-link/report.json",
+  "bootloader_link_report_sha256": "ff098242f4469fd3a3f0a33cb1646110806c45eb375b831703373a29bd1f0831",
+  "evidence_files": {
+    "build/goal-r1-battery-acquisition-pure-c/verify.py": "faae623d17361b099e9422251c83156748898d83d0502338f6e8a8acf3e714d1",
+    "build/goal-r1-battery-acquisition-pure-c/audit.py": "c700215ab0d5acb6fd3a757ba79c2ff72d4ddd7b52a50df3bed7935a93f90e3e",
+    "build/goal-r1-battery-acquisition-pure-c/defects.py": "35a950bc095b43c60aa11bc674aa23eaefef2f4c8f8ef2888703e80748086a0c",
+    "build/goal-r1-battery-acquisition-pure-c/verification.json": "9389798f6e8879a0cd349470f914f2b790f66fe50ff28ba4c9b3ff510c1f287a",
+    "build/goal-r1-battery-acquisition-pure-c/defects.json": "755e155dd994bfb425e62a9ea349b9914ae0a2825a163a33f1528b25b2bc20ad",
+    "build/goal-r1-battery-acquisition-pure-c/rea-voltage.json": "eb36420633f536ed79eadbbc7fc83061325aba0cc2e84d9eccb831b404b46ac6",
+    "build/goal-r1-battery-acquisition-pure-c/rea-average.json": "ef9fea3c2d2bd38266b17b4d1e660570e4d1151e4c4bf2079ed5e832402454d4"
+  },
+  "limitations": [
+    "Modeled registry/ADC/delay callbacks; no physical hardware validation.",
+    "Caller-clobbered registers and private stack addresses/content excluded.",
+    "Output aliasing private scratch is not a public typed C contract.",
+    "Full application remains unlinked."
+  ]
+}

@@ -43,6 +43,7 @@ licensing terms and boundaries.
 | --- | --- | --- |
 | `./make.sh sources-check` | every file in `g2/src` and `r1/src` is listed in its `sources.json` once, and every unit exists | nothing |
 | `./make.sh sources` | compiles every reconstructed source unit, checks each link group for duplicate strong symbols, composes ARM relocatables | Clang, `arm-none-eabi-ld`, Docker + `vendor-cache/` for codec, EM9305 and GCC units |
+| `make -C g2 source-link` | strictly links the seven G2 source-build relocatables into ELFs and binary payload candidates; Apollo main uses an uncalibrated C fuel-gauge candidate | a fresh G2 `sources` report and the same open toolchains |
 | `./make.sh sources-qualify` | compiles the ARM units and selects functions whose bytes equal the stock payloads at their anchors | as `sources`, plus the official payloads |
 | `./make.sh g2-test` | tests for the kept G2 tools; tests that read payloads skip when they are absent | nothing |
 | `./make.sh g2-reference` | repacks the six official payloads into the byte-identical reference EVENOTA | G2 payloads |
@@ -51,6 +52,8 @@ licensing terms and boundaries.
 | `make -C g2 ghidra-harvest` | re-exports Apollo pseudocode from an analyzed Ghidra project | Ghidra, JDK, G2 payloads |
 | `./make.sh r1-test` | structural check of the R1 decompilation corpus | nothing |
 | `./make.sh r1-verify` | adds the exact-byte R1 image oracle | R1 images |
+| `./make.sh r1-source-link` | compiles every R1 source unit, then strictly links and exports checked application and bootloader regions plus separate boot UICR words | R1 source inputs, Clang, Arm GNU tools and cached SDK headers |
+| `./make.sh r1-source-regions` | builds those regions and exports a sparse Intel HEX containing only the checked C-linked application, bootloader and UICR words | same as `r1-source-link`; each output directory must be fresh |
 | `make -C r1 vendor-audit ...` | authenticates the fetched R1 archives and FreeRTOS/CMSIS/CmBacktrace submodules | fetched cache, initialised submodules |
 | `./make.sh third-party` | checks every initialised submodule is at its pinned commit | nothing |
 | `./make.sh tools` | lists the pinned analysis tools | nothing |
@@ -80,10 +83,148 @@ unit fails that the manifest does not record as `"expect": "fails"`, or when
 two linked units define the same strong symbol. Docker units run in one
 container per toolchain. A full build takes about eight minutes.
 
+A unit can select a dependency graph from its compiled object with
+`"retain": {"linker": "arm-none-eabi-ld", "symbols": ["entry", "state"]}`.
+The named roots must be defined in that object. A relocatable section-GC link
+keeps the roots and their dependencies; the original compiler object, its
+symbol inventory, the selection command and the selected object are recorded.
+Definition and import checks use the selected graph. Missing roots, failed
+selection or invalid output fail the unit and never publish the full object
+as a fallback. Per-function/data sections are needed to discard unrelated
+definitions; remaining duplicates are still errors. This is composition
+selection, not firmware byte qualification.
+
+Generated units keep their `{gen}/…` manifest identity for frontier matching,
+then compile from `build/generated/<device>/…`. Qualification records and
+selected-plan metadata retain that identity as `manifest_source`; the firmware
+builder regenerates these inputs before compiling selected providers. See the
+[generated-input qualification check](../r1/docs/reference/generated-qualification-review.md).
+
 Compiling is not byte identity. `sources-qualify` (`qualify_sources.py`) reads
 the same manifests, compiles each ARM unit and selects only whole functions
 whose bytes equal the stock payload at an anchored address; the hybrid
 `source-plan.json` is built from those selections.
+
+G2 final source linkage is a separate, strict step. It validates the source
+report against current inputs, links each payload, writes ELFs and binaries,
+and records hashes in `link-report.json`. Apollo main now uses a source-only,
+uncalibrated fuel-gauge candidate. The final link does not load the Nordic
+object archive, but the candidate has not been validated against battery
+measurements or physical hardware:
+
+```sh
+make -C g2 source-link SOURCES_OUT=build/g2-current \
+  SOURCE_LINK_OUT=build/g2-source-images
+```
+
+The final linker accepts the architecture-specific assembly units registered
+in `sources.json`. A successful link alone does not establish whole-artifact
+coverage, all-C code, correct hardware behavior, or an OTA package.
+
+The codec A link emits a source-built BINH stage-1 load, XIP and SRAM loads,
+and a C-generated NPU command stream as separate regions. To package them
+into BINH A, supply a declared 120,800-byte weight asset and a JSON provenance
+file whose `sha256` matches that asset. With codec B selected too, the same
+link writes a codec FWPK candidate. Select `--bundle-candidate` with all seven
+G2 payloads to assemble a six-component EVENOTA candidate using the recovered
+container metadata:
+
+```sh
+python3 tools/build/link_g2_sources.py \
+  --source-out build/g2-current \
+  --out build/g2-source-candidate \
+  --codec-a-weights build/declared-model/weights.bin \
+  --codec-a-weights-provenance build/declared-model/provenance.json \
+  --bundle-candidate
+```
+
+The weight asset is external to the C build and must have an independently
+established source before the result can count toward source completeness.
+The link report records both its digest and provenance, along with each OTA
+component's digest and whether the bundle matches the locked target. The
+packaged image is only a candidate until model behavior, hardware startup and
+byte equality are verified.
+
+For a read-only comparison with the authenticated stock components, run:
+
+```sh
+python3 g2/tools/compare_source_candidate.py \
+  --candidate build/g2-source-candidate/g2-source-candidate.evenota.bin \
+  --link-report build/g2-source-candidate/link-report.json \
+  --out build/g2-source-candidate-comparison/report.json
+```
+
+The report lists size
+deltas and same-offset byte matches for all six components, and separately
+checks the codec KWS command window. Same-offset matches are diagnostic only:
+changed section placement can shift a correct function, so the report is not
+a source-coverage or behavioral proof.
+
+`r1-source-link` links each participating R1 application object with the recovered
+GNU memory layout and toolchain C/runtime libraries. The strict linker adapts
+the source-owned log and SDK observer registries to final flash/RAM addresses,
+keeping their record-size assertions. It does not pull in stock
+executable regions or suppress unresolved references. Use fresh output paths
+for each attempt, for example:
+
+```sh
+./make.sh r1-source-link R1_SOURCE_OUT=build/r1-source-try1 \
+  R1_LINK_OUT=build/r1-link-try1 R1_BOOT_LINK_OUT=build/r1-boot-link-try1
+```
+
+The linker receipt and complete diagnostic log are written even when this
+target fails. In the latest 2026-11-11 1,045-unit source checkpoint, all 963
+application and 82 bootloader units compile and compose; `sources-check`
+records 834 R1 source files and none unbuilt. The strict
+application link now resolves every reference, places the 512-byte vector
+table at flash origin, and uses 694,120 of 696,320 available flash bytes.
+The strict bootloader link also passes. These receipts are
+`build/sources-r1-event-dispatch-ordered-20261111/report.json`,
+`build/r1-link-event-dispatch-ordered-20261111/report.json` and
+`build/r1-boot-link-event-dispatch-ordered-20261111/report.json`. The linkers verify
+that all 941 participating application units and 82 bootloader units come
+from repository or generated `.c` files with matching source/object hashes;
+the application map has no archive members.
+The application vector now starts MSP at the linker RAM top `0x20040000`:
+the old stock pointer `0x2003beb8` fell 1,720 bytes inside the relinked
+`.bss`. The C vector unit reserves an 8 KiB MSP stack, and the strict link
+checks its lower limit stays above static data. Current static RAM ends at
+`0x2003c570`, leaving 6,800 bytes before the reserved stack.
+The bootloader receipt also checks its existing 16 KiB heap and 16 KiB MSP
+reservations against linked RAM bounds.
+The strict linkers now also export checked raw regions: `application.bin`
+starts at `0x27000` and is 694,244 bytes; `bootloader.bin` starts at
+`0xf8000` and is 23,024 bytes. The bootloader export supplies separate
+four-byte UICR words at `0x10001014` and `0x10001018`, rather than padding
+the raw region across that address gap. The same strict-link receipts record
+the raw image hashes. These are region
+artifacts, not a complete installable bundle: SoftDevice, settings/MBR pages
+and package metadata are outside the two raw images.
+`r1-source-regions` also emits a sparse `r1-source-regions.hex` and a
+provenance report after checking that both link receipts came from the same
+source build, their image hashes still match, the UICR words are exact, and
+the ranges do not overlap. It preserves the gaps rather than filling them;
+the HEX excludes the same external SoftDevice and settings content
+([source-region review](../r1/docs/reference/source-region-hex-review.md)).
+The NADT calculation root passes bounded stock-output replay through 100
+fresh direct and calibrated input calls at 25, 50, 100 and 200 Hz. The [NADT replay review](../r1/docs/reference/goodix-nadt-root-replay-review.md)
+records the comparisons and limits; 2,072 flash bytes remain for changes.
+The link excludes stock executable regions but does not establish byte identity or complete behavior
+([direct-link and size review](../r1/docs/reference/application-source-link-review.md)).
+The reset entry and five fault-vector adapters have C source. The R1
+manifest also compiles its bootloader startup vectors from C; some R1 C files
+still include `naked` declarations. A source scan including headers finds 23
+`__asm__` tokens on 19 lines across 8 R1 files, so the current link is not yet an
+assembly-free firmware. The Goodix wear hook is now an isolated ordinary C
+unit with a frame-pointer flag; its paired stock/C replay passes and the
+other generated hook functions match their prior object bytes.
+The GoMore packed consumer's raw frame bridge now uses checked C stack
+allocation; its stock/C and later provider-chain replays pass.
+The Goodix I/O dispatcher now has its own C unit, with all other generated
+hook function bodies unchanged. Its fixed-frame transfer still uses assembly.
+The application map now has zero archive members. Its last prebuilt Newlib
+member was `strcpy`, used by Segger RTT; the existing R1 libc source unit owns
+that function in C. The strict app linker rejects future archive members.
 
 ## Local inputs
 

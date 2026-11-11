@@ -1,4 +1,5 @@
 #include <stdint.h>
+#include "native_application_launch.h"
 typedef uint32_t (*timestamp_function)(void);
 extern uint32_t nrf_log_init(timestamp_function,uint32_t);
 extern void nrf_log_default_backends_init(void);
@@ -28,7 +29,7 @@ const uint32_t r1_app_entry_scr=UINT32_C(0xe000ed10);
 __attribute__((section(".r1.app.entry.log_bounds"),used))
 const uint32_t r1_app_entry_log_bounds[2]={UINT32_C(0xc44fc),UINT32_C(0xc441c)};
 __attribute__((section(".r1.app.entry.callback_cell"),used))
-const uint32_t r1_app_entry_callback_cell=UINT32_C(0x20006540);
+const uint32_t r1_app_entry_callback_cell=(uint32_t)(uintptr_t)&r1_application_lifecycle.start;
 /* Descriptor callbacks, initialization state and all declared providers remain
  * explicit dependency/ABI gates until their source integration is verified. */
 void r1_native_application_entry(void)

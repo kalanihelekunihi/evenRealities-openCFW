@@ -1,0 +1,179 @@
+{
+  "schema_version": 1,
+  "scope": "Native Goodix pool initialization ABI in ordinary C",
+  "report": "build/sources-goal-r1-goodix-native-heap-init-c/report.json",
+  "comparison_report": "build/sources-goal-r1-goodix-algo-config-c/report.json",
+  "stock_ranges": [
+    {
+      "entry": "0x0006dfd6",
+      "end": "0x0006e003",
+      "size": 46,
+      "symbol": "goodix_mem_init"
+    },
+    {
+      "entry": "0x0002d4f4",
+      "end": "0x0002d541",
+      "size": 78,
+      "symbol": "r1_goodix_native_pool_initialize"
+    }
+  ],
+  "audit": {
+    "compiled_units": 864,
+    "unchanged_prior_nongenerated_objects": 853,
+    "new_units": [
+      "r1/src/application/goodix/native_heap_init.c"
+    ],
+    "differing_existing_generated_objects": [
+      "{gen}/r1_startup_vectors.S",
+      "{gen}/r1_uecc.c"
+    ],
+    "application_imports": 62,
+    "bootloader_imports": 22,
+    "removed_imports": [
+      "goodix_mem_init"
+    ],
+    "added_imports": [],
+    "new_writable_state_bytes": 4,
+    "source_plan_and_cache_layout_unchanged": true,
+    "tested_object_equals_normal_build": true,
+    "only_manifest_change_is_one_new_unit": true,
+    "portable_heap_and_existing_byte_fill_objects_unchanged": true
+  },
+  "modeled_fill": {
+    "stock_C_comparisons": 3520,
+    "actual_C_fill": false,
+    "native_instruction_bytes_executed": [
+      46,
+      78
+    ],
+    "strict_descriptor_write_order_width_values": true,
+    "independent_null_signed_size_unsigned_range_and_descriptor_oracle": true,
+    "whole_observed_pool_bytes_guards_saved_integer_FP_SP_masks_checked": true,
+    "huge_clear_requests_modeled_only": true,
+    "aligned4_pool_addresses_only": true
+  },
+  "actual_fill": {
+    "stock_C_comparisons": 560,
+    "actual_C_fill": true,
+    "native_instruction_bytes_executed": [
+      46,
+      78
+    ],
+    "strict_descriptor_write_order_width_values": true,
+    "independent_null_signed_size_unsigned_range_and_descriptor_oracle": true,
+    "whole_observed_pool_bytes_guards_saved_integer_FP_SP_masks_checked": true,
+    "huge_clear_requests_modeled_only": false,
+    "aligned4_pool_addresses_only": true
+  },
+  "algorithm_configuration_chain": {
+    "actual_init_hook_reset_getter_configuration_memory_chain_comparisons": 288,
+    "all32_hook_instruction_bytes_executed": true,
+    "new_C_configuration_memory_entries_execute": true,
+    "typed_lists_and_full_algorithm_state_match": true,
+    "actual_native_allocator_initializer_and_C_fill_execute": true,
+    "deinitialization_and_virtual_register_writer_modeled": true,
+    "normal_loader_section_and_relocations_verified": true
+  },
+  "fill_body": {
+    "normal_object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-native-heap-init-c/r1/r1-application/r1__src__vendor__goodix_primitives__goodix_primitives.c.o",
+    "function_bytes": 104,
+    "body_and_relocations_equal_normal_build": true
+  },
+  "compiled_defects_rejected": [
+    {
+      "defect": "minimum-1025",
+      "rejected": true
+    },
+    {
+      "defect": "upper-bound",
+      "rejected": true
+    },
+    {
+      "defect": "validate-before-clear",
+      "rejected": true
+    },
+    {
+      "defect": "wrong-top-alignment",
+      "rejected": true
+    },
+    {
+      "defect": "wrong-control-cell",
+      "rejected": true
+    },
+    {
+      "defect": "missing-bin-anchor",
+      "rejected": true
+    },
+    {
+      "defect": "missing-size-encoding",
+      "rejected": true
+    },
+    {
+      "defect": "unsigned-outer-size",
+      "rejected": true
+    },
+    {
+      "defect": "invalid-pool-null",
+      "rejected": true
+    }
+  ],
+  "contract": [
+    "Null pool returns -1. Nonpositive signed size returns -2 before clearing. Positive sizes are cleared before descriptor validation, including positive invalid sizes.",
+    "Descriptor accepts unsigned sizes1024..0x40000000 inclusive. It publishes the canonical pool cell, initializes bin anchors, top/end/available words and initial block size encoding in native write order.",
+    "Top alignment is(base+51)&~7, not a fixed portable-model offset. Shared control words retain absolute32-bit addresses; no portable heap context is aliased to them."
+  ],
+  "limits": [
+    "All124 native instruction bytes execute in3520 direct comparisons with fill modeled, and560 comparisons with actual fill. Huge fills are modeled requests with only the observed arena materialized; no ownership of a gigabyte allocation is claimed. Real-fill cases are bounded to the mapped pool.",
+    "The existing C fill body and relocations equal the normal object. It has a bool return unlike the native void leaf; both initializer callers discard that result. SRAM fill transaction widths are not constrained; descriptor writes match in width/order/value.",
+    "288 chains execute actual init hook, reset getter, algorithm configuration/memory entries, new native initializer, C fill and register loader. Deinitializer and virtual-register writer remain modeled. Full30016-byte pool contents and shared state match.",
+    "The new ABI provider supersedes the old frontier symbol hint. Portable goodix_heap utilities are preserved, with their own different API and behavior; their objects are unchanged. Only one native initialization provider is selected.",
+    "Only4-byte-aligned pool addresses are tested. Caller scratch, private frames, APSR, out-of-arena clearing, physical memory faults, concurrent interrupts, allocation/release/exhaustion policy, physical sensor behavior, final startup/scatter integration, full application linking and boot remain unverified.",
+    "No new pool buffer: the existing algorithm pool is reused. One4-byte canonical active-pool cell and one C unit are added. The goodix_mem_init import is removed without new imports."
+  ],
+  "evidence_files": {
+    "build/sources-goal-r1-goodix-native-heap-init-c/report.json": "827c207d12fb7089d6ed1143dbe8d302e6ce406fd301a2fa3b7ea0803009b41f",
+    "build/sources-goal-r1-goodix-algo-config-c/report.json": "4bfbf30bc2d0ffe811a306a22cdc7fd2a28d75a31353927f447aa3b2765d07da",
+    "r1/src/application/goodix/native_heap_init.c": "c3085064866b23d603697918b6dfdd29f66ab68c7e82cb1f3e10443c80e3f8b6",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-native-heap-init-c/r1/r1-application/r1__src__application__goodix__native_heap_init.c.o": "d25f87d5c62ab05f6d5e4d73cc1de5afacf8300a5f1286735b75c9715c30063c",
+    "r1/src/sources.json": "43c9c254ee79c2798e75301466aeec696f61b1b2cccd35103a7a3d8a48ff052f",
+    "tools/build/source-plan.json": "eeb516e31b3310fb0718f36908977f8125723f7c5e0e86cd6744395826259a4d",
+    "r1/src/config/runtime/native_health_cache.ld": "eb8f131c489cd818d4e36718718fa1989719ca0170f164541a1a5bf56dfc1ec3",
+    "r1/src/vendor/goodix_primitives/goodix_primitives.c": "6ba3fff7701c90db05c8700e5b27d9cdbca327887deb92a9cef2bda03c5bf75b",
+    "r1/src/vendor/goodix_heap/goodix_heap.c": "dfc58c6edb39f1e30fb346e6c4df0c7c573a07df9ded2bdafaa1ba5c91b4bd45",
+    "r1/src/application/goodix/native_algorithm_config.c": "b8455589dcb3449592bffe09f57f533f5360e0cd55f1e371bd6e0800b6a415ab",
+    "r1/docs/reference/FUNCTION-OWNERSHIP.csv": "cdf673bc76ea3cc53b3431d079e27dfe5236ddcbb922e0265cf11ce61eb0bcd8",
+    "r1/symbols/function-frontier.csv": "3f8c019614768705bc1a16bda55bde337e209f9e3581e2b6a98df456380da0df",
+    "r1/docs/correlation/GOODIX-HEAP-REDUCTION-CORRELATION.md": "026d46bee7b42077600d84d0273bab8955c47c33aa83823e1df780ff71fb4855",
+    "build/goal-r1-goodix-algo-config-c/loader.o": "652990db97b75f57e6572458ce274486f958807dad4896988b7e9f9532344f8c",
+    "build/goal-r1-goodix-algo-config-c/loader-section.json": "47d303fd325b02fe069f7e186bae63de0cbcc7f7488ec66a5b24e551d4781d50",
+    "build/goal-r1-goodix-native-heap-init-c/audit.json": "d5597e25358cb961318a1bcd512c13984c6d574e7dc68aa653ac14f72abcc901",
+    "build/goal-r1-goodix-native-heap-init-c/fill.o": "5b9881f48c6329da35510eb6b3f4be65d3c31bab24e2f6ab7d5713597d06c391",
+    "build/goal-r1-goodix-native-heap-init-c/real-fill.log": "7d201e76b192ede952e4c81813bd6265e67b92a4b5dd28460887ccf1df467d81",
+    "build/goal-r1-goodix-native-heap-init-c/verify.log": "6c9e9192f57a7c58d905f506ba089bdbcf8b4cf6a9a990a828b07a4c54cd06d9",
+    "build/goal-r1-goodix-native-heap-init-c/negative.json": "32d407ec3e5f1bbbea41378f38b1f6b053019d726ca153e59ed007bacb949324",
+    "build/goal-r1-goodix-native-heap-init-c/test.ld": "90c7ba5a5321b14f2a1f14fde49f292cfb9835d44a3d924ff370794204650f13",
+    "build/goal-r1-goodix-native-heap-init-c/audit.py": "8690e0f84f29fac9292986f80a79e7ac000263f103770aef586783ab67ff688a",
+    "build/goal-r1-goodix-native-heap-init-c/fill.py": "55466c67a939bc77e0b8db4df99f31da5a1d1f5ff0c3a817fe23c0a91399a6e3",
+    "build/goal-r1-goodix-native-heap-init-c/source.elf": "61fef7c4419265529288d5e9ffac61d397dd9f5beae68f2045d77a2a4f05c2de",
+    "build/goal-r1-goodix-native-heap-init-c/negative.py": "aa1625113b82344fe492db4b2d37a4e12f0e54d8f42fe596f6e886a8d40ce699",
+    "build/goal-r1-goodix-native-heap-init-c/algorithm-pipeline.log": "4085f129bce45c8a6578efc91a53e83cd8c3e0efe49c80d8bbee188e3f30ac93",
+    "build/goal-r1-goodix-native-heap-init-c/negative.log": "890d193d452753e825107595a0e708359d9c4deae2fde15f78e1974e1eb0cf06",
+    "build/goal-r1-goodix-native-heap-init-c/source.o": "d25f87d5c62ab05f6d5e4d73cc1de5afacf8300a5f1286735b75c9715c30063c",
+    "build/goal-r1-goodix-native-heap-init-c/results.json": "278517005d57093c74cebe91b041016243c1d1d224687397778d0298cf9d3af8",
+    "build/goal-r1-goodix-native-heap-init-c/fill.c": "987342ae3c222e73743e02acfb36758228b9c86b6ef9579e15403818cf1ffa4e",
+    "build/goal-r1-goodix-native-heap-init-c/sources-check.log": "5ae592d9e65889bd76b83bb465e81998fc43a36b1a62b6becaf6430a4b9870ea",
+    "build/goal-r1-goodix-native-heap-init-c/record.py": "e7c4e3a4c09ef609adaccd0833ea1bf6f19d23984ac4cb26ccfd90f8a1829048",
+    "build/goal-r1-goodix-native-heap-init-c/rea-bytes.json": "73767abc082b5e0d3809f24678859d6830f9c5c86e48499d4fcf0130db4f5fe1",
+    "build/goal-r1-goodix-native-heap-init-c/manifest-before.json": "8038e76ad94cf8b6ac738c01182ef0bfcfc1bdfb754c32abb9c0ac1111ecb1e9",
+    "build/goal-r1-goodix-native-heap-init-c/verify.py": "cae268c24342284e955cb9ee41425acfd49fe048aad8ff450c80cd9badbbfed1",
+    "build/goal-r1-goodix-native-heap-init-c/algorithm-pipeline.py": "cb707ad60020fa31bb3310932eacee84e57e2d85ed780890d26663db5f9d39f0",
+    "build/goal-r1-goodix-native-heap-init-c/fill-body.json": "9bf851f3f2cb56510504f22b5d435b9a6db08019815db0e446543e23e3a17c13",
+    "build/goal-r1-goodix-native-heap-init-c/build.log": "69b6cfe94ccaee23683bd2ab5edceb366e018c35c7f56fed2f59e63a5b5eb771",
+    "build/goal-r1-goodix-native-heap-init-c/algorithm-pipeline/test.ld": "341499a3c571228e3d6aebfd371f7791a350d302ba8ddcf08e4fd89430a14ae7",
+    "build/goal-r1-goodix-native-heap-init-c/algorithm-pipeline/source.elf": "af1dca725f97fd6beff5153e3650bcab2398ddc86e9d7e5f740bb4e1ef32d39f",
+    "build/goal-r1-goodix-native-heap-init-c/algorithm-pipeline/results.json": "96434240387435cfd0f200b1e3363232698ae209c95f67434497e65965a5d443",
+    "build/goal-r1-goodix-native-heap-init-c/real-fill/test.ld": "90c7ba5a5321b14f2a1f14fde49f292cfb9835d44a3d924ff370794204650f13",
+    "build/goal-r1-goodix-native-heap-init-c/real-fill/source.elf": "061b7ab480e6e7664cff965bd6bca8129405abcee03b922a79f516e3d6c92559",
+    "build/goal-r1-goodix-native-heap-init-c/real-fill/results.json": "116c3338ac4a17febb1108f129ffb7f6adab03a6992e509a970085eb16b2c91c"
+  }
+}

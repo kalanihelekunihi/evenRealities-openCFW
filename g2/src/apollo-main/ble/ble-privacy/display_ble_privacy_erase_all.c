@@ -59,10 +59,7 @@ uint64_t audio_ble_privacy_erase_storage_body(uint32_t entry0, uint32_t entry1,
     return ((uint64_t)entry1 << 32u) | entry0;
 }
 
-__attribute__((naked)) uint64_t audio_ble_privacy_erase_storage(void)
-{
-    __asm__ volatile("b audio_ble_privacy_erase_storage_body");
-}
+uint64_t audio_ble_privacy_erase_storage(void) __attribute__((alias("audio_ble_privacy_erase_storage_body")));
 
 uint64_t audio_ble_privacy_reset_local_body(uint32_t entry0, uint32_t entry1,
                                              uint32_t entry2, uint32_t entry3)
@@ -85,8 +82,4 @@ uint64_t audio_ble_privacy_reset_local_body(uint32_t entry0, uint32_t entry1,
     return ((uint64_t)entry3 << 32u) | entry2;
 }
 
-/* Stock 0x47ACF8 (FUN_0047acf8, AppDbDeleteAllRecords) */
-__attribute__((naked)) uint64_t audio_ble_privacy_reset_local(void)
-{
-    __asm__ volatile("b audio_ble_privacy_reset_local_body");
-}
+uint64_t audio_ble_privacy_reset_local(void) __attribute__((alias("audio_ble_privacy_reset_local_body")));

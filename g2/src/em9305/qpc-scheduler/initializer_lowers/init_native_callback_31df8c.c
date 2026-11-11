@@ -1,52 +1,27 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_callback_31df8c\n"
-".type opencfw_em9305_callback_31df8c,@function\n"
-"opencfw_em9305_callback_31df8c:\n"
-"L31df8c:\n"
-"enter_s [r13-r15,blink]\n"
-"L31df8e:\n"
-"mov_s r13,r0\n"
-"L31df90:\n"
-"ldb_s r0,[r0,0x2]\n"
-"L31df92:\n"
-"mov_s r15,0x805c6c\n"
-"L31df98:\n"
-"cmp r0,255\n"
-"L31df9c:\n"
-"beq_s L31dfa8\n"
-"L31df9e:\n"
-"mov_s r0,r13\n"
-"L31dfa0:\n"
-"bl.d opencfw_em9305_child_31e458\n"
-"L31dfa4:\n"
-"st_s r13,[r15,0]\n"
-"L31dfa6:\n"
-"leave_s [r13-r15,blink,pcl]\n"
-"L31dfa8:\n"
-"mov r0,0\n"
-"L31dfac:\n"
-"sth_s r0,[r13,0]\n"
-"L31dfae:\n"
-"ld r1,[0x805cac]\n"
-"L31dfb6:\n"
-"exth_s r0,r0\n"
-"L31dfb8:\n"
-"ldb r1,[r1,34]\n"
-"L31dfbc:\n"
-"brhs.t r0,r1,L31dfa6\n"
-"L31dfc0:\n"
-"mov_s r0,r13\n"
-"L31dfc2:\n"
-"bl.d opencfw_em9305_child_31e458\n"
-"L31dfc6:\n"
-"st_s r13,[r15,0]\n"
-"L31dfc8:\n"
-"ldh_s r0,[r13,0]\n"
-"L31dfca:\n"
-"add_s r0,r0,1\n"
-"L31dfcc:\n"
-"b_s L31dfac\n"
-".size opencfw_em9305_callback_31df8c,.-opencfw_em9305_callback_31df8c\n"
-);
+#include <stdint.h>
+
+/* Native 0x31df8c..0x31dfce: make the command current (0x805c6c) and run
+ * 31e458 for its connection handle; handle 0xff (+2) instead walks every
+ * handle below the configured count (+34 of 0x805cac), using the
+ * halfword at +0 as the loop index. */
+extern uint32_t opencfw_em9305_child_31e458(uintptr_t command);
+
+uint32_t opencfw_em9305_callback_31df8c(uintptr_t command)
+{
+    volatile uint32_t *current=(volatile uint32_t *)(uintptr_t)0x805c6cu;
+    volatile uint16_t *handle=(volatile uint16_t *)command;
+    if(*(volatile uint8_t *)(command+2u)!=255u){
+        *current=(uint32_t)command;
+        return opencfw_em9305_child_31e458(command);
+    }
+    uint32_t index=0u;
+    for(;;){
+        *handle=(uint16_t)index;
+        uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+        index&=0xffffu;
+        if(index>=*(volatile uint8_t *)(config+34u))return index;
+        *current=(uint32_t)command;
+        (void)opencfw_em9305_child_31e458(command);
+        index=*handle+1u;
+    }
+}

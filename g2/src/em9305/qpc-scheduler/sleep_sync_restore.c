@@ -11,7 +11,7 @@ uint32_t opencfw_em9305_sleep_sync_restore(uint32_t incoming)
  *(volatile uint32_t *)(context+72u)=captured;
  index=*(volatile uint8_t *)(uintptr_t)0x80fd34u;
  uint32_t bit=1;
- __asm__ volatile("asl %0,%0,%1" : "+r"(bit) : "r"(index));
+ bit<<=(index&31u);
  uint32_t old=*(volatile uint8_t *)(uintptr_t)0xf0047au;
  uint32_t mask=(~bit)|240u;
  *(volatile uint8_t *)(uintptr_t)0xf0047au=(uint8_t)(old&mask);

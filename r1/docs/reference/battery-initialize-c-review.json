@@ -1,0 +1,75 @@
+{
+  "report": "build/sources-goal-r1-battery-initialize-c/report.json",
+  "units": 814,
+  "application_imports": 70,
+  "removed_imports": [
+    "r1_battery_initialize_000912a8"
+  ],
+  "added_imports": [],
+  "verification": {
+    "initializer_pairs": 800,
+    "getter_pairs": 96,
+    "initialized_fallback_cases": 10
+  },
+  "actual_cached_reader": {
+    "actual_cached_reader_pairs": 64,
+    "size_mismatch_zero_fallbacks": 4
+  },
+  "compiled_defects": [
+    {
+      "defect": "short-sampling",
+      "rejected": true
+    },
+    {
+      "defect": "clear-too-far",
+      "rejected": true
+    },
+    {
+      "defect": "wrong-charging-state",
+      "rejected": true
+    },
+    {
+      "defect": "zero-level-history",
+      "rejected": true
+    },
+    {
+      "defect": "wrong-record-word",
+      "rejected": true
+    },
+    {
+      "defect": "wrong-delay",
+      "rejected": true
+    }
+  ],
+  "prior_objects_identical": 811,
+  "generated_object_hash_changes": [
+    "{gen}/r1_startup_vectors.S",
+    "{gen}/r1_uecc.c"
+  ],
+  "rea_evidence_ids": [
+    "ev_9b7b54115e5739b434245809ab4d389cd256c0a8387ec57607aedcd79c4bc238",
+    "ev_b2090c20fceacf19f27d36f571f1f878f625753bc5f069311f8956e82e12d99e",
+    "ev_3c7dbacdbb81763a833f25434bc8404ee9c559f347aec22731616995a710745f"
+  ],
+  "evidence_files": {
+    "build/goal-r1-battery-initialize-c/verify.py": "b92dabb906ab246a8ee110190b2f98717d9a33db9d9ced38657505c35c6e6b28",
+    "build/goal-r1-battery-initialize-c/verification.json": "dfb84fee8f3e66f109465dd0825df0940d251aa1fadd0be392f5b1f03cf21cb6",
+    "build/goal-r1-battery-initialize-c/verify-final.log": "bb1f82346f00c0b0c654e4c3ae74709cdfbd4e485535cdba1031338223495909",
+    "build/goal-r1-battery-initialize-c/defects.py": "349735ca7e952f1542a7e8c89fd729a6032bdd95939883c223d6673560558f60",
+    "build/goal-r1-battery-initialize-c/defects.json": "ce44e3144c5a7f5e8f6ed661ab5a5cdb2c16c20951b8eb6fc42cf4e125309c09",
+    "build/goal-r1-battery-initialize-c/cached-reader.py": "21045cb08e8d64d8d9d2ea4cce19c8788355b529fc375a7e502477465e199f3e",
+    "build/goal-r1-battery-initialize-c/cached-reader.log": "baae20b95f4562cac0207daedf9efd9c364fa7d653ec30228a5d0ffae7894cce",
+    "build/goal-r1-battery-initialize-c/cached-reader/verification.json": "1d2953070e0d0c5808899ad8dd340de4feb3cdf0a0e80a35ad8fab43e3785721",
+    "build/goal-r1-battery-initialize-c/rea.json": "c5c5caafe373894f28cfac92fd88758834df37c1426a6cd9500fff0bb0df7c72",
+    "build/sources-goal-r1-battery-initialize-c/report.json": "15af263ff2a2757af35262f1355d43e6d2b8c373441ad8694106685d324efcb6",
+    "r1/src/sources.json": "b8b3eb4f93d45c8068d98f577efb1a201c1289a5fbc4695d8d6c3bcd3b28443a",
+    "r1/src/application/board/native_battery_initialize.c": "a3100eab18bf3b92de0a4915f0061b1364b75683b73e9b8721d25b78015a4339",
+    "r1/src/application/board/native_battery_context.h": "6b338ba13d97fd1f2dc1823a2efb3fd4d903864e3521eb7b0bcab12bb2995282",
+    "r1/src/application/board/native_kv_class.c": "e9791d39b7a9b5380b1dbce3c7422be921131abbd0e09c3387ea3d4b9930bf6e"
+  },
+  "limitations": [
+    "Partial or failed record reads use zero-initialized bytes, a deliberate improvement over private stack residue.",
+    "Hardware sample/state/curve/reset and delay providers modeled in direct tests. Actual cached-reader integration models enter/leave and memcpy only.",
+    "No final application link, startup RAM placement, electrical timing or device boot proof."
+  ]
+}

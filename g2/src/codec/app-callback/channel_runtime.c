@@ -3,6 +3,7 @@
  * Resident critical save/restore are genuine unresolved ABI contracts.
  */
 #include <stdint.h>
+#include "../csky_ops.h"
 extern uint32_t g2_codec_critical_save(void); /* 0x10025560 */
 extern void g2_codec_critical_restore(uint32_t state); /* 0x1002556c */
 static volatile uint32_t *channel_address(uint32_t channel)
@@ -39,9 +40,8 @@ uint32_t g2_codec_channel_stop(uint32_t index)
 uint32_t g2_codec_channel_timer_start(uint32_t timer)
 {
     const uint32_t count = timer - 1u;
-    uint32_t bit = 1;
-    /* Keep decoded hardware shift behavior for every input, including >31. */
-    __asm__ volatile("lsl %0, %1" : "+r"(bit) : "r"(count) : "cc");
+    /* C-SKY lsl semantics for every input, including counts above 31. */
+    const uint32_t bit = csky_lsl(1u, count);
     volatile uint32_t *const timer_state = (volatile uint32_t *)(uintptr_t)UINT32_C(0x2002dfbc);
     const uint32_t allowed = timer_state[1];
     if ((allowed & bit) == 0) return UINT32_MAX;

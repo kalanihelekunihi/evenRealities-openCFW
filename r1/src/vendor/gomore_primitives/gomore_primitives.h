@@ -271,7 +271,6 @@ typedef struct {
 } gomore_primitives_dormant_ratio_input;
 
 typedef struct {
-    uint8_t profile_flag;
     float all_heart_rate_mean;
     float all_sample_count;
     float qualified_square_sum;
@@ -292,6 +291,7 @@ typedef struct {
 
 typedef struct {
     uint8_t buckets[18];
+    uint8_t reserved[6];
     float pending_sum;
     int32_t pending_count;
     uint8_t last_bucket;
@@ -961,6 +961,15 @@ typedef struct {
     gomore_primitives_void_context_fn finish_sps_initialize;
     gomore_primitives_filter_init_fn initialize_filter;
     const gomore_primitives_log_config *logger;
+    /* Firmware validation reads the just-written engine header and live
+     * runtime configuration; invoke it after seeding and random stamping. */
+    int32_t (*native_runtime_validate)(uint32_t runtime_value,
+                                       uint32_t allow_missing);
+    void (*native_log_u32)(uint32_t level, uint32_t category,
+                           const char *format, uint32_t value);
+    /* Firmware binding for stock 0x71E34. When supplied, this callback owns
+     * profile fields, previous-state cache writes and FP status effects. */
+    int32_t (*native_profile_convert)(const void *profile, void *state);
 } gomore_primitives_sleep_algorithm_configuration;
 
 typedef struct {
@@ -994,7 +1003,7 @@ typedef struct {
     float copied_auxiliary_1;
     float copied_auxiliary_2;
     gomore_primitives_dormant_cycle_auxiliary *auxiliary;
-    float unused_heart_rate_feature;
+    float trailing_total_energy;
 } gomore_primitives_dormant_cycle_input;
 
 typedef struct {
@@ -1248,6 +1257,7 @@ typedef struct {
     gomore_primitives_interval_descriptor previous_descriptor;
     gomore_primitives_sleep_interval_result previous_interval;
     gomore_primitives_sleep_interval_policy policy;
+    const uint8_t *policy_source;
 } gomore_primitives_sleep_cycle_state;
 
 typedef struct {
@@ -1305,7 +1315,7 @@ typedef struct {
     int32_t adaptive_count;
     int32_t adaptive_fall_count;
     float adaptive_average;
-    float reference_value;
+    uint32_t reference_binding;
 } gomore_primitives_energy_update_state;
 
 typedef struct {
@@ -1451,7 +1461,7 @@ void gomore_primitives_span_initialize(uint32_t record[2],
                                        uint32_t base);
 
 /* 0x883D4 / 0x71B2A / 0x71704. */
-bool gomore_primitives_clear_two_records(void *record, size_t length);
+bool gomore_primitives_clear_two_records_checked(void *record, size_t length);
 bool gomore_primitives_fill_missing_pair(float values[2]);
 bool gomore_primitives_clear_90(void *record, size_t length);
 
@@ -1474,20 +1484,20 @@ float gomore_primitives_state2_cadence_estimate(
     float first, float middle, float latest, uint8_t *consensus);
 
 /* 0x761F8: accumulate a consistent locomotion transition pair. */
-bool gomore_primitives_locomotion_transition_accumulate(
+bool gomore_primitives_locomotion_transition_accumulate_checked(
     gomore_primitives_locomotion_transition_state *state,
     float target, uint8_t previous, uint8_t current,
     float shape_first, float shape_second, bool *updated);
 
 /* 0x582C4: rank three circular Int16 windows and gate two crossing counts. */
-int32_t gomore_primitives_three_axis_window_gate(
+int32_t gomore_primitives_three_axis_window_gate_checked(
     const int16_t *first, const int16_t *second, const int16_t *third,
     size_t sample_count, uint8_t ring_length, int32_t current_index,
     uint32_t window_count, int32_t primary_threshold,
     int32_t secondary_threshold);
 
 /* 0x67E4C: compose one complete locomotion feature/classification output. */
-bool gomore_primitives_locomotion_window_classify(
+bool gomore_primitives_locomotion_window_classify_checked(
     void *state, size_t state_length,
     void *output, size_t output_length,
     const gomore_primitives_locomotion_classifier_configuration *configuration);
@@ -1549,7 +1559,7 @@ bool gomore_primitives_tensor_bank_initialize(
     gomore_primitives_tensor_fill_binding_fn create_filled_tensor);
 
 /* 0x64274: stateless fixed-coefficient second-order Float32 IIR. */
-bool gomore_primitives_sleep_iir2_filter(float *samples, size_t count);
+bool gomore_primitives_sleep_iir2_filter_checked(float *samples, size_t count);
 
 /* 0x94070: compose one private sleep-step state update. */
 bool gomore_primitives_sleep_step_update(
@@ -1584,12 +1594,6 @@ bool gomore_primitives_composite_engine_initialize(
     gomore_primitives_void_context_fn finish_sps_initialize,
     gomore_primitives_filter_init_fn initialize_filter);
 
-/* 0x5FF94: run the complete fixed-order output-stage schedule. */
-bool gomore_primitives_output_orchestrate(
-    void *engine, size_t engine_length, uint32_t elapsed_updates,
-    const gomore_primitives_output_orchestrator_providers *providers,
-    uint8_t **result_pointer);
-
 /* 0x6FEA0: authorize and initialize the complete sleep-algorithm engine. */
 int32_t gomore_primitives_sleep_algorithm_initialize(
     void *engine, size_t engine_length, uint32_t runtime_value,
@@ -1618,13 +1622,13 @@ float gomore_primitives_sps_secondary_model(
     gomore_primitives_double_unary_fn square_root);
 
 /* 0x67C30: expand control points over rounded half-position spans. */
-bool gomore_primitives_expand_half_positions(
+bool gomore_primitives_expand_half_positions_checked(
     const uint16_t *positions, const float *control_values,
     size_t control_count, float *output, size_t output_count,
     gomore_primitives_double_unary_fn round_value);
 
 /* 0x56DC0: filter locomotion control points, expand, and reduce features. */
-bool gomore_primitives_locomotion_control_extract(
+bool gomore_primitives_locomotion_control_extract_checked(
     const gomore_primitives_locomotion_control_sample *samples,
     size_t sample_count, float sample_period, float difference_scale,
     uint32_t mode,
@@ -1635,7 +1639,7 @@ bool gomore_primitives_locomotion_control_extract(
     float *primary, float *secondary,
     size_t *accepted_count, int32_t *status);
 /* 0x68840: normalize/filter extrema and reduce paired periods. */
-bool gomore_primitives_locomotion_feature_reduce(
+bool gomore_primitives_locomotion_feature_reduce_checked(
     float expanded[GOMORE_PRIMITIVES_LOCOMOTION_EXPANDED_COUNT],
     uint8_t first_indices[
         GOMORE_PRIMITIVES_LOCOMOTION_FEATURE_INDEX_CAPACITY],
@@ -1679,6 +1683,35 @@ gomore_primitives_previous_state_append(
     void *scratch, size_t scratch_capacity,
     gomore_primitives_previous_append_result *result);
 
+/* Optional native-adapter observations; NULL hooks retain the strict API.
+ * LENGTHS: first=aligned state, second=aligned key. TRIGGER/WRITTEN:
+ * first=address. SLOT_READ: first=address, second=index, header is live.
+ * SELECTED: first=index. Other stages carry zero values and no header.
+ * current_offset enables live record placement; omitted hooks retain the
+ * strict API's cached record positions. Allocate/release apply only to
+ * compaction scratch; fallback_slot_zero is an explicit native policy. */
+typedef enum {
+ GOMORE_PREVIOUS_APPEND_LENGTHS,GOMORE_PREVIOUS_APPEND_TRIGGER,
+ GOMORE_PREVIOUS_APPEND_ERASED,GOMORE_PREVIOUS_APPEND_SLOT_READ,
+ GOMORE_PREVIOUS_APPEND_SELECTED,GOMORE_PREVIOUS_APPEND_WRITTEN,
+ GOMORE_PREVIOUS_APPEND_TOO_LARGE,GOMORE_PREVIOUS_APPEND_SCRATCH_ERROR,
+ GOMORE_PREVIOUS_APPEND_READ_ERROR,GOMORE_PREVIOUS_APPEND_ERASE_ERROR,
+ GOMORE_PREVIOUS_APPEND_WRITE_ERROR
+} gomore_primitives_previous_append_stage;
+typedef struct {
+ void *context;
+ uint32_t (*current_offset)(void *);
+ void (*observe)(void *,gomore_primitives_previous_append_stage,uint32_t,uint32_t,const uint8_t *);
+ void *(*allocate)(void *,size_t);
+ void (*release)(void *,void *);
+ bool fallback_slot_zero;
+} gomore_primitives_previous_append_hooks;
+gomore_primitives_previous_append_status
+gomore_primitives_previous_state_append_with_hooks(
+ gomore_primitives_pkey_store *,const void *,size_t,size_t,void *,size_t,
+ gomore_primitives_previous_append_result *,
+ const gomore_primitives_previous_append_hooks *);
+
 /* 0x6808C: solve cubic coefficients into three Cardano candidates. */
 bool gomore_primitives_cubic_candidates(
     float a, float b, float c, float d,
@@ -1702,7 +1735,7 @@ bool gomore_primitives_callback_record_initialize(uint8_t *record,
                                                   uint32_t field_bc);
 
 /* 0x87600: sort inclusive float subrange [first,last]. */
-bool gomore_primitives_sort_float_subrange(
+bool gomore_primitives_sort_float_subrange_checked(
     float *values, size_t value_count, size_t first, size_t last,
     gomore_primitives_qsort_fn qsort_provider,
     gomore_primitives_compare_fn compare);
@@ -1788,7 +1821,7 @@ bool gomore_primitives_low24_binding_initialize(
 bool gomore_primitives_pack4_binding_initialize(
     uint32_t record[2], uint8_t byte0, uint8_t byte1,
     uint8_t byte2, uint8_t byte3, uint32_t binding);
-int16_t gomore_primitives_i16_mean(const int16_t *values, size_t count);
+int16_t gomore_primitives_i16_mean_checked(const int16_t *values, size_t count);
 bool gomore_primitives_float_floor_update(float candidate, float *value);
 bool gomore_primitives_validate_selector(const uint8_t *state,
                                          size_t length, int8_t *selector);
@@ -1808,16 +1841,16 @@ bool gomore_primitives_half_span_initialize(uint32_t record[5],
 bool gomore_primitives_parameter_state_initialize(void *record,
                                                   size_t length,
                                                   uint32_t binding);
-size_t gomore_primitives_count_encoded_i32(const int32_t *values,
+size_t gomore_primitives_count_encoded_i32_checked(const int32_t *values,
                                            size_t count);
 float gomore_primitives_scaled_ratio(float numerator, float denominator);
 uint8_t gomore_primitives_piecewise_clamp_70_100(int32_t value);
-bool gomore_primitives_missing_window_initialize(void *record,
+bool gomore_primitives_missing_window_initialize_checked(void *record,
                                                  size_t length);
 bool gomore_primitives_modulo_value_get(const uint8_t *bytes,
                                         size_t length, uint32_t index,
                                         bool packed, uint8_t *value);
-bool gomore_primitives_mode8_state_initialize(void *record, size_t length);
+bool gomore_primitives_mode8_state_initialize_checked(void *record, size_t length);
 
 /* Pure 42...62-byte vector, record, and predicate closure. */
 bool gomore_primitives_vector_pair_transform(float scale, float offset,
@@ -1832,7 +1865,7 @@ bool gomore_primitives_accumulate_i8x4_milli(float values[4],
 uint32_t gomore_primitives_shift_presence_history(uint8_t *record,
                                                   size_t length,
                                                   uint8_t value);
-bool gomore_primitives_fill_float_progression(float *values, size_t count,
+bool gomore_primitives_fill_float_progression_checked(float *values, size_t count,
                                               size_t begin, size_t end,
                                               float first, float step);
 bool gomore_primitives_time_record_valid(const void *record, size_t length);
@@ -1841,15 +1874,15 @@ size_t gomore_primitives_float_argmax_range(const float *values,
                                             size_t end);
 int32_t gomore_primitives_float_argmax_above_floor(const float *values,
                                                    size_t count);
-int32_t gomore_primitives_i16_range(const int16_t *values, size_t count);
+int32_t gomore_primitives_i16_range_checked(const int16_t *values, size_t count);
 bool gomore_primitives_packed_2bit_set(uint8_t *bytes, size_t length,
                                       uint32_t index, uint8_t value);
 float gomore_primitives_rational_transform(float value, float state);
-int16_t gomore_primitives_i16_mean_absolute_difference(
+int16_t gomore_primitives_i16_mean_absolute_difference_checked(
     const int16_t *values, size_t count);
 bool gomore_primitives_u16_all_within_300(const uint16_t *values,
                                          size_t count, uint16_t target);
-float gomore_primitives_nonzero_i16_mean8(const int16_t values[8]);
+float gomore_primitives_nonzero_i16_mean8_checked(const int16_t values[8]);
 float gomore_primitives_circular_u8_dot18(const uint8_t values[18],
                                          uint32_t sample_index,
                                          const float weights[18]);
@@ -1879,7 +1912,7 @@ int32_t gomore_primitives_dormant_heart_rate_filter_update(
     uint32_t interval_milliseconds);
 
 /* 0x56A0C: six-channel circular-window linear score. */
-bool gomore_primitives_six_channel_ring_score(
+bool gomore_primitives_six_channel_ring_score_checked(
     const int16_t *channel0, const int16_t *channel1,
     const int16_t *channel2, const int16_t *channel3,
     const int16_t *channel4, const int16_t *channel5,
@@ -1900,22 +1933,22 @@ bool gomore_primitives_complex_power(
     gomore_primitives_float_unary_fn exponential,
     gomore_primitives_float_unary_fn cosine,
     gomore_primitives_float_unary_fn sine);
-bool gomore_primitives_circular_feature_slot_advance(
+bool gomore_primitives_circular_feature_slot_advance_checked(
     void *state, size_t state_length);
-bool gomore_primitives_circular_i16_mean3(
+bool gomore_primitives_circular_i16_mean3_checked(
     const int16_t *first, const int16_t *second, const int16_t *third,
     size_t ring_size, size_t cursor, size_t count,
     int16_t output[3]);
-int16_t gomore_primitives_circular_positive_fill_mean(
+int16_t gomore_primitives_circular_positive_fill_mean_checked(
     const int16_t *values, size_t ring_size, size_t cursor,
     size_t begin_distance, size_t end_distance);
-bool gomore_primitives_locomotion_crossing_wrapper(
+bool gomore_primitives_locomotion_crossing_wrapper_checked(
     const int16_t baseline_ring[8], int32_t baseline_cursor,
     const uint16_t *samples, size_t sample_count,
     float *mode2_output, float *mode1_output,
     gomore_primitives_locomotion_crossing_estimate_fn estimate);
 /* 0x56F94: derive one cadence estimate from 200 UInt16 magnitudes. */
-bool gomore_primitives_locomotion_crossing_period_estimate(
+bool gomore_primitives_locomotion_crossing_period_estimate_checked(
     const uint16_t *samples, size_t sample_count, int16_t baseline,
     uint32_t mode, float *output);
 bool gomore_primitives_final_sleep_record_publish(
@@ -1936,6 +1969,7 @@ bool gomore_primitives_dormant_heart_rate_ratio_wrapper(
 bool gomore_primitives_dormant_ratio_accumulator(
     gomore_primitives_dormant_ratio_accumulator_state *state,
     const gomore_primitives_dormant_ratio_input *input,
+    uint8_t profile_flag,
     gomore_primitives_float_binary_fn power);
 /* 0x721B4: compose one dormant speed/heart-rate estimator cycle. */
 bool gomore_primitives_dormant_estimator_cycle(
@@ -2066,26 +2100,21 @@ bool gomore_primitives_activity_window_update(
     float differences[249], size_t difference_capacity,
     gomore_primitives_activity_window_output *output);
 /* 0x60680: update the five-sample optical respiratory-rate history. */
-bool gomore_primitives_respiratory_rate_update(
-    gomore_primitives_respiratory_rate_state *state, uint32_t elapsed,
-    const gomore_primitives_respiratory_rate_input *input,
-    void *estimator_state,
-    const gomore_primitives_respiratory_rate_providers *providers,
-    float output[2], uint32_t *status);
+
 bool gomore_primitives_optical_period_candidates_select(
     float mode1_rate, float mode1_quality,
     float mode2_rate, float mode2_quality,
     float fallback_rate, float fallback_quality,
     float output[2]);
 /* 0x69834: update and reduce the complete optical-period estimator state. */
-bool gomore_primitives_optical_period_estimate(
+bool gomore_primitives_optical_period_estimate_checked(
     gomore_primitives_optical_interval_state *state,
     uint32_t elapsed_windows, const float input[25], uint32_t flags,
     const gomore_primitives_optical_period_providers *providers,
     gomore_primitives_optical_period_workspace *workspace,
     float output[2], int32_t *status);
 /* 0x4857C: merge ordered optical interval candidates and emit mean amplitude. */
-bool gomore_primitives_optical_interval_merge(
+bool gomore_primitives_optical_interval_merge_checked(
     gomore_primitives_optical_interval_state *state,
     const uint8_t *end_positions, const uint8_t *start_positions,
     size_t candidate_count, float *mean_amplitude);
@@ -2105,7 +2134,7 @@ bool gomore_primitives_sleep_stage_classify(
     gomore_primitives_sleep_stage_classifier_result *result,
     gomore_primitives_sleep_stage_stream_state *state,
     uint8_t iteration, const int8_t mode_adjustment[4], void *context);
-bool gomore_primitives_peak_candidate_match(
+bool gomore_primitives_peak_candidate_match_checked(
     const float *signal, size_t signal_count,
     uint8_t candidates[20], uint8_t references[20],
     uint8_t *candidate_count, uint8_t *reference_count,
@@ -2140,7 +2169,7 @@ float gomore_primitives_activity_scaled_quadratic_difference(
 float gomore_primitives_affine_reciprocal_model4_evaluate(
     const float values[4],
     const gomore_primitives_affine_reciprocal_model4 *model);
-float gomore_primitives_bounded_linear_complement(
+float gomore_primitives_bounded_linear_complement_checked(
     float primary, float secondary);
 bool gomore_primitives_locomotion_autocorrelation_wrapper(
     bool enabled, const uint16_t *samples, float outputs[5],
@@ -2194,7 +2223,7 @@ uint32_t gomore_primitives_update_failure_counter(
     uint32_t status, uint32_t timestamp, uint8_t *counter,
     gomore_primitives_update_failure_log_fn log_failure,
     gomore_primitives_simple_fn reset_provider);
-int32_t gomore_primitives_shift_i16_trend_gate5(
+int32_t gomore_primitives_shift_i16_trend_gate5_checked(
     int16_t history[5], int32_t sample);
 bool gomore_primitives_sps_refresh_affine_pairs(
     const float source[4], float first[2], uint32_t *first_mode,
@@ -2222,7 +2251,7 @@ bool gomore_primitives_sliding_window_mean(
 int32_t gomore_primitives_profile_state_apply(
     uint8_t *state, size_t state_length,
     int32_t profile, int32_t selector, uint8_t requested);
-bool gomore_primitives_sorted_percentile(
+bool gomore_primitives_sorted_percentile_checked(
     float *values, size_t count, uint32_t percentile,
     gomore_primitives_qsort_fn qsort_provider,
     gomore_primitives_compare_fn compare, float *result);
@@ -2300,7 +2329,7 @@ int32_t gomore_primitives_sleep_interval_dispatch(
     size_t output_record_length,
     uintptr_t first, uintptr_t second, uintptr_t fourth, uintptr_t fifth,
     gomore_primitives_stage_consumer_fn consumer);
-uint8_t gomore_primitives_count_hysteresis_crossings(
+uint8_t gomore_primitives_count_hysteresis_crossings_checked(
     const uint16_t *values, size_t count);
 int32_t gomore_primitives_nullable_compare_n(const uint8_t *left,
                                              const uint8_t *right,
@@ -2314,7 +2343,7 @@ int32_t gomore_primitives_record_quality_classify(const void *record,
 /* Explicit-provider and fully recovered 26...70-byte closure. */
 int32_t gomore_primitives_seeded_random_offset(
     uint32_t seed, uint32_t *stored_seed,
-    gomore_primitives_simple_fn prepare,
+    gomore_primitives_seed_fn seed_random,
     gomore_primitives_random_fn random_value);
 void *gomore_primitives_allocate_mode2_state(
     uintptr_t binding, gomore_primitives_zero_allocate_fn allocate,
@@ -2351,16 +2380,16 @@ bool gomore_primitives_composite_record_initialize(
     gomore_primitives_record_init_fn tail_initialize);
 bool gomore_primitives_quality_code(const void *record, size_t length,
                                     uint8_t *code);
-float gomore_primitives_i16_standard_deviation(
+float gomore_primitives_i16_standard_deviation_checked(
     const int16_t *values, size_t count, int32_t center,
     gomore_primitives_float_unary_fn square_root);
 /* 0x4834A: append one four-channel locomotion summary into 8-slot histories. */
-bool gomore_primitives_locomotion_summary_update(
+bool gomore_primitives_locomotion_summary_update_checked(
     gomore_primitives_locomotion_summary_state *state,
     const int16_t *const channels[4], size_t sample_count,
     gomore_primitives_float_unary_fn square_root);
 /* 0x5ED14: advance and classify the 25-sample locomotion window. */
-int32_t gomore_primitives_locomotion_window_preprocess(
+int32_t gomore_primitives_locomotion_window_preprocess_checked(
     void *state, size_t state_length, uint32_t elapsed_windows,
     const float *const axes[3], bool input_unavailable,
     void *output, size_t output_length,
@@ -2465,7 +2494,7 @@ bool gomore_primitives_sleep_score(
     gomore_primitives_float_binary_fn power,
     float *score);
 /* 0x647C4: collect extrema at two moving-average state transitions. */
-bool gomore_primitives_moving_average_extrema_indices(
+bool gomore_primitives_moving_average_extrema_indices_checked(
     const float *values, size_t count,
     uint32_t long_window, uint32_t short_window,
     uint8_t *maxima, size_t maxima_capacity, size_t *maxima_count,
@@ -2531,54 +2560,45 @@ bool gomore_primitives_table_record11(const uint8_t *table,
 int32_t gomore_primitives_status_or_random(
     uint8_t *state, size_t state_length,
     const void *status_record, size_t status_length,
-    gomore_primitives_simple_fn prepare,
+    gomore_primitives_seed_fn seed_random,
     gomore_primitives_random_fn random_value);
 int32_t gomore_primitives_validate_identifier_status(
     const uint8_t *identifier, const uint8_t classes[256],
     uint8_t *state, size_t state_length,
     uint8_t *status_record, size_t status_length,
-    gomore_primitives_simple_fn prepare,
+    gomore_primitives_seed_fn seed_random,
     gomore_primitives_random_fn random_value);
 
 /* Initializer-chain, resample, compaction, and predicate closure. */
-bool gomore_primitives_mode_state_configure(
+bool gomore_primitives_mode_state_configure_checked(
     void *record, size_t length, uint32_t mode, uint32_t count,
     const float parameters[2],
     gomore_primitives_mode_lt2_init_fn initialize_lt2,
     gomore_primitives_mode2_init_fn initialize_mode2);
 /* 0x717AC: bounded order-one-through-four low/high-pass IIR designer. */
-bool gomore_primitives_iir_low_high_coefficients(
+bool gomore_primitives_iir_low_high_coefficients_checked(
     gomore_primitives_iir_coefficients *record,
     uint32_t mode, uint32_t order, float normalized_cutoff,
     gomore_primitives_float_unary_fn cosine,
     gomore_primitives_float_unary_fn sine,
     gomore_primitives_float_binary_fn power);
 /* 0x711B4: bounded one/two-pole-pair band-pass IIR designer. */
-bool gomore_primitives_iir_bandpass_coefficients(
+bool gomore_primitives_iir_bandpass_coefficients_checked(
     gomore_primitives_iir_coefficients *record,
     uint32_t order, const float normalized_cutoffs[2],
     gomore_primitives_float_unary_fn cosine,
     gomore_primitives_float_unary_fn sine,
     gomore_primitives_float_unary_fn tangent);
-bool gomore_primitives_large_filter_state_initialize(
+bool gomore_primitives_large_filter_state_initialize_checked(
     void *record, size_t length,
     gomore_primitives_mode2_init_fn initialize_mode2);
 bool gomore_primitives_engine_state_initialize(
     void *record, size_t length, uint32_t binding,
     gomore_primitives_large_init_fn initialize);
-void gomore_primitives_linear_resample(
-    const float *source, int32_t input_count, int32_t output_count,
-    int32_t source_total, float *destination);
-int32_t gomore_primitives_resample25_and_filter(
-    void *filter_state, const float *source, int32_t input_count,
-    int32_t source_total, float destination[25],
-    gomore_primitives_resample_fn resample,
-    gomore_primitives_filter_apply_fn apply_filter);
-void gomore_primitives_resample25_and_filter_tail(
-    void *filter_state, const float *source, int32_t input_count,
-    int32_t source_total, float destination[25],
-    gomore_primitives_resample_fn resample,
-    gomore_primitives_filter_apply_fn apply_filter);
+/* Stock 0x882ec uses five 32-bit words and exposes the native raw return. */
+uint32_t r1_gomore_linear_native(
+    uint32_t source, uint32_t input_count, uint32_t output_count,
+    uint32_t source_total, uint32_t destination);
 bool gomore_primitives_prepare_filter_input(
     void *filter_state, size_t filter_length,
     const float *source, bool clear_only, int32_t source_total,
@@ -2602,17 +2622,16 @@ float gomore_primitives_centered_ratio(int32_t first, int32_t middle,
                                       int32_t last);
 
 /* Direct-filter, compact encoding, and arithmetic-state closure. */
-bool gomore_primitives_iir_filter_apply(void *state, size_t state_length,
-                                       float *values, size_t count);
-int32_t gomore_primitives_integer_iir4_update(
+
+int32_t gomore_primitives_integer_iir4_update_checked(
     int32_t input, int32_t input_history[4],
     int32_t output_history[4], int32_t profile);
-int32_t gomore_primitives_thresholded_mean5(
+int32_t gomore_primitives_thresholded_mean5_checked(
     float threshold, const float values[5], const float comparisons[5],
     float *mean);
 float gomore_primitives_magnitude_score10(float threshold,
                                          const float values[10]);
-int32_t gomore_primitives_circular_count_predicate(
+int32_t gomore_primitives_circular_count_predicate_checked(
     const int16_t *values, size_t count, int32_t cursor,
     int32_t lookback, int32_t lower, int32_t upper,
     uint8_t comparison, int32_t required);
@@ -2691,7 +2710,7 @@ float gomore_primitives_one_minus(float value);
 float gomore_primitives_logistic(
     float value, gomore_primitives_float_unary_fn exponential);
 float gomore_primitives_scaled_product(float first, float second);
-int32_t gomore_primitives_linear_sign_classify(
+int32_t gomore_primitives_linear_sign_classify_checked(
     float first, float second, float third, int32_t integer,
     const float coefficients[4], float bias);
 int32_t gomore_primitives_validate_key_and_update_status(
@@ -2699,7 +2718,7 @@ int32_t gomore_primitives_validate_key_and_update_status(
     const void *configuration, size_t configuration_length,
     void *state, size_t state_length,
     void *status_record, size_t status_length,
-    gomore_primitives_simple_fn prepare,
+    gomore_primitives_seed_fn seed_random,
     gomore_primitives_random_fn random_value);
 int32_t gomore_primitives_decimal_config_update(
     const uint8_t *text,
@@ -2707,7 +2726,13 @@ int32_t gomore_primitives_decimal_config_update(
     void *state, size_t state_length,
     void *status_record, size_t status_length,
     bool validation_enabled,
-    gomore_primitives_simple_fn prepare,
+    gomore_primitives_seed_fn seed_random,
+    gomore_primitives_random_fn random_value);
+/* Stock 0x74D0C: parse the final SDK authorization field against "S1". */
+int32_t gomore_primitives_sdk_auth_final_field_parse(
+    const uint8_t *field, uint8_t *state, size_t state_length,
+    uint8_t *status_record, size_t status_length,
+    gomore_primitives_seed_fn seed_random,
     gomore_primitives_random_fn random_value);
 int32_t gomore_primitives_runtime_version_validate(
     uint32_t value, bool allow_missing_runtime, bool validation_enabled,
@@ -2716,7 +2741,7 @@ int32_t gomore_primitives_runtime_version_validate(
 bool gomore_primitives_dominant_sorted_i32(
     int32_t *values, size_t count,
     int32_t *dominant_value, size_t *dominant_count);
-int32_t gomore_primitives_circular_signal_predicate(
+int32_t gomore_primitives_circular_signal_predicate_checked(
     const int16_t *primary, const int16_t *first,
     const int16_t *second, const int16_t *third,
     size_t count, int32_t cursor, size_t lookback);
@@ -2760,8 +2785,8 @@ int32_t gomore_primitives_stage_32_and_consume(
     uintptr_t first, uintptr_t second, const uint8_t *source,
     size_t source_length, uintptr_t fourth, uintptr_t fifth,
     gomore_primitives_stage_consumer_fn consumer);
-float gomore_primitives_mean(const float *values, size_t count);
-int32_t gomore_primitives_argmax_from_zero(const float *values, size_t count);
+float gomore_primitives_mean_checked(const float *values, size_t count);
+int32_t gomore_primitives_argmax_from_zero_checked(const float *values, size_t count);
 bool gomore_primitives_reset_provider_state(
     uint8_t *state, size_t length, bool active,
     gomore_primitives_mode_fn set_mode,
@@ -2802,17 +2827,17 @@ bool gomore_primitives_records_any_bit1(const uint8_t *records,
                                         size_t record_bytes);
 
 /* Selected fully recovered utilities from the 64...127-byte tier. */
-int32_t gomore_primitives_quantized_argmin(const float *values,
+int32_t gomore_primitives_quantized_argmin_checked(const float *values,
                                            uint32_t begin,
                                            uint32_t end_exclusive);
-uint32_t gomore_primitives_max_difference_index(const float *values,
+uint32_t gomore_primitives_max_difference_index_checked(const float *values,
                                                 uint32_t begin,
                                                 uint32_t end_exclusive);
-bool gomore_primitives_median(float *values, size_t count,
+bool gomore_primitives_median_checked(float *values, size_t count,
                               gomore_primitives_qsort_fn qsort_provider,
                               gomore_primitives_compare_fn compare,
                               float *result);
-bool gomore_primitives_standard_deviation(
+bool gomore_primitives_standard_deviation_checked(
     const float *values, size_t count,
     gomore_primitives_float_binary_fn pow_provider,
     gomore_primitives_float_unary_fn sqrt_provider,
@@ -2820,10 +2845,10 @@ bool gomore_primitives_standard_deviation(
 bool gomore_primitives_logistic_score(
     float scale, float bias, float feature, float coefficient,
     gomore_primitives_float_unary_fn exp_provider, float *result);
-bool gomore_primitives_modulo5_record(uint8_t *record, size_t length,
+bool gomore_primitives_modulo5_record_checked(uint8_t *record, size_t length,
                                       uint8_t secondary,
                                       uint8_t primary);
-bool gomore_primitives_compact_25_windows(uint8_t *records,
+bool gomore_primitives_compact_25_windows_checked(uint8_t *records,
                                          size_t record_capacity,
                                          uint8_t *record_count,
                                          uint32_t current_window);
@@ -2836,11 +2861,11 @@ int32_t gomore_primitives_csv4_prefix_compare(
 bool gomore_primitives_sleep_engine_open(
     void *state, size_t state_length,
     gomore_primitives_tensor_construct_binding_fn construct_tensor);
-bool gomore_primitives_shift_negated_filter_history(
+bool gomore_primitives_shift_negated_filter_history_checked(
     void *state, size_t state_length,
     const float input[25], bool zero_fill,
     gomore_primitives_filter_apply_fn apply_filter);
-bool gomore_primitives_log_u32(
+bool gomore_primitives_log_u32_checked(
     const gomore_primitives_log_config *configuration,
     uint32_t level, uint32_t category,
     const char *format, uint32_t value);

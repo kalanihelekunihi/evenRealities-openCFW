@@ -1,0 +1,161 @@
+{
+  "schema_version": 1,
+  "source": "r1/src/application/runtime/native_iqs_recovery.c",
+  "native_roots": [
+    "0x6f9e4",
+    "0x6fce8"
+  ],
+  "report": "build/sources-goal-r1-iqs-recovery-c/report.json",
+  "compiled_units": 836,
+  "application_imports": 77,
+  "added_imports": [
+    "r1_iqs7211e_ati_error_audit_policy",
+    "r1_iqs7211e_configure"
+  ],
+  "removed_imports": [
+    "r1_iqs7211e_ati_recovery_policy",
+    "r1_iqs7211e_reset_reconfigure"
+  ],
+  "prior_objects_unchanged": 833,
+  "changed_generated_objects": [
+    [
+      "r1-bootloader",
+      "{gen}/r1_startup_vectors.S"
+    ],
+    [
+      "r1-bootloader",
+      "{gen}/r1_uecc.c"
+    ]
+  ],
+  "verification": {
+    "stock_C_pairs": {
+      "counter_thresholds": 3072,
+      "retry_byte_domain": 1536,
+      "live_log_modes": 384,
+      "live_external_mutations": 600,
+      "reset_logging_and_status": 256
+    },
+    "total_pairs": 5848,
+    "actual_C_event_post_ports_transport_registry": false,
+    "policy_oracle_cases": 30,
+    "REA_bytes_match": true,
+    "callee_saves_stack_guards_masks": true,
+    "device_execution": false
+  },
+  "actual_event_post_port_transport_registry_integration": {
+    "stock_C_pairs": {
+      "counter_thresholds": 72,
+      "retry_byte_domain": 36,
+      "live_log_modes": 384,
+      "live_external_mutations": 600,
+      "reset_logging_and_status": 256
+    },
+    "total_pairs": 1348,
+    "actual_C_event_post_ports_transport_registry": true,
+    "policy_oracle_cases": 30,
+    "REA_bytes_match": true,
+    "callee_saves_stack_guards_masks": true,
+    "device_execution": false
+  },
+  "actual_IRQ_recovery_model_port_transport_registry_integration": {
+    "worker_policy_pairs": 384,
+    "raw_selection_pairs": 32,
+    "float_callback_pairs": 104,
+    "adapter_pairs": 40,
+    "seeded_live_pairs": 16,
+    "actual_C_average_and_event_dispatch": true,
+    "average_oracle_pairs": 4,
+    "retained_or_cleared_partial_read_pairs": 32,
+    "defined_private_buffer_fallback_cases": 12,
+    "callee_saved_integer_and_FP_registers_checked": true,
+    "actual_C_ports_transport_registry": true
+  },
+  "mutants": [
+    {
+      "name": "saturate",
+      "rejected": true
+    },
+    {
+      "name": "threshold",
+      "rejected": true
+    },
+    {
+      "name": "retry_budget",
+      "rejected": true
+    },
+    {
+      "name": "give_up",
+      "rejected": true
+    },
+    {
+      "name": "clear_consecutive",
+      "rejected": true
+    },
+    {
+      "name": "slider_flag",
+      "rejected": true
+    },
+    {
+      "name": "first_event",
+      "rejected": true
+    },
+    {
+      "name": "close_event",
+      "rejected": true
+    },
+    {
+      "name": "reg_word",
+      "rejected": true
+    },
+    {
+      "name": "audit_order",
+      "rejected": true
+    },
+    {
+      "name": "configure",
+      "rejected": true
+    },
+    {
+      "name": "live_log_retry",
+      "rejected": true
+    }
+  ],
+  "new_owners": [],
+  "reused_owners": [
+    "r1_iqs_recovery_consecutive",
+    "r1_iqs_recovery_used",
+    "r1_touch_slider_flag"
+  ],
+  "contract": [
+    "Initial ATI error logs, error audit, then touch event 0x20 precede the live counter reads.",
+    "Increment the consecutive byte unless it is already 255.",
+    "Consecutive >=5 and used <3 increments used, clears consecutive, sets slider flag=1, logs fresh used values and posts event4.",
+    "Otherwise used >=3 logs exhaustion without a write or close event, retaining state.",
+    "Otherwise write register33 two bytes 2000 through the existing IQS write port, then log re-ATI.",
+    "Reset logs, calls the real lower configure dependency once, and logs completion without checking a status.",
+    "Logging mode and retry values are reloaded at native decision and sink boundaries."
+  ],
+  "limits": [
+    "Error audit at 0x41a40 and configure at 0x2f880 remain unresolved lower policies, modeled in probes.",
+    "Direct probes model logging and event/port providers. Deeper probes execute actual C event posting, ports, touch transport and registry against prepared kernel/device callbacks.",
+    "IRQ probes also execute actual C detector, model/count/average/event helpers and recovery policies; the BSN accessor and lower audit/configuration providers are modeled.",
+    "The 12 IRQ private-buffer fallback checks specify initialized C outputs rather than native private stack garbage.",
+    "Global make sources-check still fails for the pre-existing unlisted G2 resident_rom_thumb_set.S; the R1 check passes.",
+    "No physical bus timing, final placement, final application link or device boot proof; byte identity is not required."
+  ],
+  "evidence_files": {
+    "build/sources-goal-r1-iqs-recovery-c/report.json": "f6a5df579a980fd63e9eb49365efdf1aa2b8973bdd45e03fc7c6fbd4df962bc7",
+    "r1/src/sources.json": "6826d753fec6482227f511e69f69e178dbf60359d4df86a7fffeb378727d0820",
+    "r1/src/application/runtime/native_iqs_recovery.c": "ee7eb1b2382ebdfa30ca468df2eded28a6aa8600eaa389bf4a9001ca44de393b",
+    "r1/src/application/board/native_iqs_state.h": "54ae441254a3388d0620d0582450a1c5a0d6eaf77f878eb76c20b3b82e264156",
+    "build/goal-r1-iqs-recovery-c/verify.py": "16c67798dd05c986b48d2af0682979818182baad3642c9c3bd0a096ee19eebd8",
+    "build/goal-r1-iqs-recovery-c/verification.json": "7fee3bdd42651414870257110a71d5b05a10c392770d61f9b7552f4de34d58e2",
+    "build/goal-r1-iqs-recovery-c/integration.json": "b45db96a012183125e5e5685da6e356bdbfa92ce9303e90d6ae3f00c72098174",
+    "build/goal-r1-iqs-recovery-c/mutants.py": "bd0fb362f366d95cecd25c21040c871a29cf82b151530b6fdcf9ef9b615905cb",
+    "build/goal-r1-iqs-recovery-c/mutants.json": "9a01b25b0a5a3b898259e079b771cec38e19e0601f4eb8134888e7078cd2a6f6",
+    "build/goal-r1-iqs-recovery-c/irq.py": "37ec2190d047eb48132cce7930a6488599d8587b7092e192890ec7a7f763d97f",
+    "build/goal-r1-iqs-recovery-c/irq-integration.json": "211ea084515c86f0c692bdd4baa6973cf62671358f55d6914638d64e8edfc3f4",
+    "build/goal-r1-iqs-recovery-c/sources-check.log": "7603d7f37b37a37a2250ec59567218c04d6fa1639b573f3e7158ab4fdfff3cd8",
+    "r1/docs/reference/iqs-recovery-rea-bytes.json": "f4b1dec7b7d38a2299f8101851d211267e09d587da341204a45caefae10e18fd"
+  }
+}

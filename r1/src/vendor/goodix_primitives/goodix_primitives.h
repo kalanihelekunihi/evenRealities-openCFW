@@ -11,8 +11,9 @@
 #include <stdbool.h>
 #include <stddef.h>
 #include <stdint.h>
+#include "nadt_workspace_view.h"
 
-#include "quantized_runtime/quantized_runtime.h"
+#include "../quantized_runtime/quantized_runtime.h"
 
 #define GOODIX_PRIMITIVES_STATE_COUNT 7u
 #define GOODIX_PRIMITIVES_RECORD_BYTES 35u
@@ -90,7 +91,6 @@
 
 typedef void (*goodix_primitives_state_handler_fn)(void *record);
 typedef int32_t (*goodix_primitives_device_initialize_fn)(uint16_t device_id);
-typedef void (*goodix_primitives_hook_fn)(void);
 typedef void *(*goodix_primitives_allocate_fn)(void *context, size_t bytes);
 typedef void (*goodix_primitives_release_fn)(void *context, void *allocation);
 typedef uintptr_t (*goodix_primitives_hr_graph_build_fn)(
@@ -931,6 +931,9 @@ typedef struct {
 
 typedef struct {
     const int32_t *direct_values;
+    /* Stock 0x36034 also writes the three prepared lanes to the caller's
+     * sample buffer. NULL keeps detached typed callers read-only. */
+    int32_t *prepared_values;
     size_t direct_value_count;
     const int32_t *calibration_values;
     size_t calibration_value_count;
@@ -981,9 +984,11 @@ typedef struct {
 
 typedef struct {
     bool window_ready;
+    bool sample_prepared;
     uint8_t classification;
     uint8_t quality;
     uint8_t status;
+    uint8_t history_ordinal;
     uint16_t configuration_changed;
 } goodix_primitives_nadt_stream_output;
 
@@ -1189,10 +1194,20 @@ typedef struct {
     uint32_t reserved;
 } goodix_primitives_float_descriptor;
 
+/* Stock 0x3113C places each 12-byte filter descriptor in a 16-byte slot.
+ * The four-byte prefix and terminal reserve make the view alias the 344-byte
+ * initializer-owned workspace without copying its buffers. */
 typedef struct {
-    goodix_primitives_pair_buffer pair_buffers[9];
+    goodix_primitives_pair_buffer buffer;
+    uint32_t reserved;
+} goodix_primitives_hr_pair_slot;
+
+typedef struct {
+    uint32_t reserved_00;
+    goodix_primitives_hr_pair_slot pair_buffers[9];
     goodix_primitives_buffer_descriptor i16_buffers[9];
     goodix_primitives_float_descriptor float_histories[7];
+    uint32_t reserved_tail[3];
 } goodix_primitives_hr_secondary_context;
 
 typedef struct {
@@ -1683,12 +1698,6 @@ typedef struct {
     goodix_primitives_clock_fn clock;
     void *context;
 } goodix_primitives_command_poll_ops;
-
-typedef struct {
-    goodix_primitives_register_write_fn write_register;
-    goodix_primitives_register_bit_field_write_fn write_bit_field;
-    void *context;
-} goodix_primitives_register_configuration_ops;
 
 /* Ownership-only views of two stock Goodix contexts.  The names retain the
  * observed 32-bit target offsets while allowing the rebuilt firmware to use
@@ -2270,13 +2279,11 @@ bool goodix_primitives_reset_state_record(uint8_t *record, size_t length);
 bool goodix_primitives_clear_state_flags(uint8_t *record, size_t length);
 
 /* 0x6F9D4. */
-bool goodix_primitives_call_hook(goodix_primitives_hook_fn hook);
 
 /* 0x6A140 / 0x2E8C4 / 0x2E8C8 / 0x2AE00. */
 uint32_t goodix_primitives_library_code(void);
 uint32_t goodix_primitives_constant_four(void);
 uint32_t goodix_primitives_constant_one_a(void);
-uint32_t goodix_primitives_constant_one_b(void);
 
 /* 0x6A130 / 0x6A138 / 0x6A148 / 0x6A150 / 0x6A018 / 0x6CC2C /
  * 0x6EAF8.  The stock functions returned absolute pointers into hidden
@@ -2967,8 +2974,6 @@ bool goodix_primitives_nadt_channel_quality_update(
 /* Additional exact leaf utilities from the closed Goodix call graph. */
 void goodix_primitives_noop_a(void);
 void goodix_primitives_noop_b(void);
-int32_t goodix_primitives_zero_a(void);
-int32_t goodix_primitives_zero_b(void);
 uint32_t goodix_primitives_second_word(const uint32_t *words);
 bool goodix_primitives_transformed_differs(
     int32_t value, goodix_primitives_i32_unary_fn transform);
@@ -3155,6 +3160,13 @@ bool goodix_primitives_nadt_stream_process(
     goodix_primitives_nadt_stream_workspace *workspace,
     goodix_primitives_nadt_window_diagnostics *window_diagnostics,
     goodix_primitives_nadt_stream_output *output);
+bool goodix_primitives_nadt_stream_process_view(
+    const goodix_primitives_nadt_stream_input *input,
+    const goodix_primitives_nadt_stream_plan *plan,
+    goodix_primitives_nadt_stream_state *state,
+    const goodix_primitives_nadt_stream_workspace_view *workspace,
+    goodix_primitives_nadt_window_diagnostics *window_diagnostics,
+    goodix_primitives_nadt_stream_output *output);
 /* 0x00034B08: issue command 0xA6 for flag bit 13, otherwise issue 0xAE and
  * poll register 0xAE until clear or the wrapping 320-tick timeout. */
 bool goodix_primitives_command_status_poll(
@@ -3217,10 +3229,6 @@ bool goodix_primitives_i32_autocorrelation_transform(
     const int32_t *samples, int16_t *output, size_t count,
     int32_t mean, int32_t scale,
     goodix_primitives_autocorrelation_state *state);
-/* 0x0002E8CC: invoke the admitted GH3X2X register operations with the exact
- * reset constants and stock ordering. */
-bool goodix_primitives_reset_register_fields(
-    const goodix_primitives_register_configuration_ops *operations);
 /* 0x0005CEA8: copy the input word, dispatch the recovered five bindings, and
  * return whether the propagated signed result is nonzero. */
 bool goodix_primitives_dispatch_word_copy(

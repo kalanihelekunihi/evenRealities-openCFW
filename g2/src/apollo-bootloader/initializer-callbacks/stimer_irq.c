@@ -10,13 +10,14 @@ extern uint32_t opencfw_bl_port_timer_compare_set(uint32_t compare_id,
                                                   uint32_t delta);
 extern uint32_t opencfw_bl_mask_interrupts(void);
 extern uint32_t opencfw_bl_tick_increment(void);
+/* am_hal_stimer_int_clear 0x41f4b6 (thread-creation/idle_sleep/idle_chain.c). */
+extern uint32_t stimer_interrupt_clear(uint32_t bits);
 
+/* UDIV with DIV_0_TRP clear (the firmware never sets it) gives 0 for a
+ * zero divisor. */
 static uint32_t native_udiv(uint32_t numerator, uint32_t denominator)
 {
-    uint32_t quotient;
-    __asm__ volatile("udiv %0, %1, %2"
-                     : "=r"(quotient) : "r"(numerator), "r"(denominator));
-    return quotient;
+    return denominator != 0u ? numerator / denominator : 0u;
 }
 
 /* Stock 0x41f4c0: the vector wrapper at 0x41b6e2 passes zero and observes
@@ -56,8 +57,7 @@ void opencfw_boot_stimer_tickless_service(void)
 void opencfw_boot_stimer_irq(void)
 {
     if ((opencfw_boot_stimer_irq_status(0u) & 1u) != 0u) {
-        WORD(UINT32_C(0x40008908)) = 1u;
-        (void)WORD(UINT32_C(0x40008904));
+        (void)stimer_interrupt_clear(1u);
         opencfw_boot_stimer_tickless_service();
     }
 }

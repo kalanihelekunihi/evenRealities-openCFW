@@ -1,75 +1,45 @@
-/* Native response descriptor commit, fresh pointer rereads and copy/schedule order preserved. */
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_callback_3225b0\n"
-".type opencfw_em9305_callback_3225b0,@function\n"
-"opencfw_em9305_callback_3225b0:\n"
-"L3225b0:\n"
-"enter_s [r13-r15,blink]\n"
-"L3225b2:\n"
-"ld_s r3,[r0,0x5c]\n"
-"L3225b4:\n"
-"ld.as r15,[r0,195]\n"
-"L3225b8:\n"
-"mov_s r14,r0\n"
-"L3225ba:\n"
-"ldh r0,[r3,120]\n"
-"L3225be:\n"
-"ld.as r13,[r15,107]\n"
-"L3225c2:\n"
-"ld_s r2,[r3,0x7c]\n"
-"L3225c4:\n"
-"st.as r1,[r15,99]\n"
-"L3225c8:\n"
-"sth r0,[r13,120]\n"
-"L3225cc:\n"
-"ld.as r0,[r15,107]\n"
-"L3225d0:\n"
-"ld r1,[r3,144]\n"
-"L3225d4:\n"
-"st_s r2,[r0,0x7c]\n"
-"L3225d6:\n"
-"ldh r2,[r3,128]\n"
-"L3225da:\n"
-"ld.as r0,[r15,107]\n"
-"L3225de:\n"
-"sth r2,[r0,128]\n"
-"L3225e2:\n"
-"ld.as r2,[r15,107]\n"
-"L3225e6:\n"
-"ld_s r0,[r3,0x70]\n"
-"L3225e8:\n"
-"ld r3,[r3,132]\n"
-"L3225ec:\n"
-"add_s r0,r0,r1\n"
-"L3225ee:\n"
-"st.as r0,[r15,98]\n"
-"L3225f2:\n"
-"st r3,[r2,132]\n"
-"L3225f6:\n"
-"ld_s r1,[r14,0x5c]\n"
-"L3225f8:\n"
-"mov_s r2,0x4c\n"
-"L3225fa:\n"
-"bl.d opencfw_em9305_memcpy\n"
-"L3225fe:\n"
-"mov_s r0,r13\n"
-"L322600:\n"
-"ld.as r0,[r14,195]\n"
-"L322604:\n"
-"mov_s r1,0\n"
-"L322606:\n"
-"stb 15,[r13]\n"
-"L32260a:\n"
-"ldb_s r0,[r0,0x14]\n"
-"L32260c:\n"
-"stb_s r0,[r13,0x1]\n"
-"L32260e:\n"
-"bl.d opencfw_em9305_associated_schedule_insert_312da4\n"
-"L322612:\n"
-"add3 r0,r15,0x30\n"
-"L322616:\n"
-"leave_s [r13-r15,blink,pcl]\n"
-".size opencfw_em9305_callback_3225b0,.-opencfw_em9305_callback_3225b0\n"
-);
+#include <stdint.h>
+
+/* Native 0x3225b0..0x322618: commit a PAwR response descriptor. Copy the
+ * source descriptor's (object +92) length/word/halfword/word fields
+ * (+120/+124/+128/+132) into the context's current descriptor (context =
+ * object +780, descriptor = context +428, re-read for each store), store
+ * the value at context +396 and the source start (+112 plus +144) at
+ * context +392, copy the 76-byte descriptor body over the first-read
+ * descriptor, tag it 15 with the context byte +20 and insert the context
+ * schedule entry (+384). */
+extern void *opencfw_em9305_memcpy(void *destination,const void *source,
+                                   uint32_t bytes);
+extern uint32_t opencfw_em9305_associated_schedule_insert_312da4(uintptr_t object,
+                                                                 uintptr_t tie);
+
+static inline uintptr_t descriptor(uintptr_t context)
+{ return *(volatile uint32_t *)(context+428u); }
+
+uint32_t opencfw_em9305_callback_3225b0(uintptr_t object,uint32_t value)
+{
+    uintptr_t source=*(volatile uint32_t *)(object+92u);
+    uintptr_t context=*(volatile uint32_t *)(object+780u);
+    uint32_t length=*(volatile uint16_t *)(source+120u);
+    uintptr_t target=descriptor(context);
+    uint32_t word=*(volatile uint32_t *)(source+124u);
+    *(volatile uint32_t *)(context+396u)=value;
+    *(volatile uint16_t *)(target+120u)=(uint16_t)length;
+    uintptr_t current=descriptor(context);
+    uint32_t offset=*(volatile uint32_t *)(source+144u);
+    *(volatile uint32_t *)(current+124u)=word;
+    uint32_t half=*(volatile uint16_t *)(source+128u);
+    current=descriptor(context);
+    *(volatile uint16_t *)(current+128u)=(uint16_t)half;
+    current=descriptor(context);
+    uint32_t start=*(volatile uint32_t *)(source+112u);
+    uint32_t last=*(volatile uint32_t *)(source+132u);
+    *(volatile uint32_t *)(context+392u)=start+offset;
+    *(volatile uint32_t *)(current+132u)=last;
+    (void)opencfw_em9305_memcpy((void *)target,
+                                (const void *)*(volatile uint32_t *)(object+92u),76u);
+    uintptr_t fresh=*(volatile uint32_t *)(object+780u);
+    *(volatile uint8_t *)target=15u;
+    *(volatile uint8_t *)(target+1u)=*(volatile uint8_t *)(fresh+20u);
+    return opencfw_em9305_associated_schedule_insert_312da4(context+384u,0u);
+}

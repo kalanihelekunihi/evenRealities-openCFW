@@ -59,6 +59,66 @@ class OpenCFWTests(unittest.TestCase):
         self.assertEqual(open_cfw.wrap_case_image(case[0x20:]), case)
         self.assertEqual(open_cfw.wrap_touch_image(touch[0x20:]), touch)
 
+    def test_touch_wrapper_uses_application_flash_base(self) -> None:
+        # The source image starts at 0x3300; a valid reset vector may exceed
+        # the image's byte length when interpreted from address zero.
+        raw = bytearray(0x100)
+        raw[0:4] = (0x20002000).to_bytes(4, "little")
+        raw[4:8] = (0x3301).to_bytes(4, "little")
+        wrapped = open_cfw.wrap_touch_source_image(bytes(raw))
+        open_cfw.validate_touch(wrapped)
+        self.assertEqual(len(wrapped), len(raw) + 36)
+        corrupted = bytearray(wrapped)
+        corrupted[-1] ^= 1
+        with self.assertRaisesRegex(open_cfw.OpenCFWError, "CRC-32C"):
+            open_cfw.validate_touch(bytes(corrupted))
+        raw[4:8] = (0x3201).to_bytes(4, "little")
+        with self.assertRaisesRegex(open_cfw.OpenCFWError, "outside the image"):
+            open_cfw.wrap_touch_source_image(bytes(raw))
+
+    def test_codec_uart_boot_header_reproduces_stock_segment(self) -> None:
+        codec = self.payloads["codec"]
+        segment = codec[0x30:0x30 + 38236]
+        stage1 = segment[32:32 + 0x2800]
+        stage2 = segment[32 + 0x2800:]
+        self.assertEqual(open_cfw.wrap_codec_uart_boot(stage1, stage2), segment)
+        invalid = bytearray(stage2)
+        invalid[0] ^= 1
+        with self.assertRaisesRegex(open_cfw.OpenCFWError, "vectors"):
+            open_cfw.wrap_codec_uart_boot(stage1, bytes(invalid))
+
+    def test_codec_binh_b_wrap_reproduces_stock_image(self) -> None:
+        codec = self.payloads["codec"]
+        image = codec[0x958C + 0x2F3B0:0x958C + 0x46440]
+        stage1 = image[24:0x3000 - 4]
+        stage2 = image[0x3004:]
+        self.assertEqual(open_cfw.wrap_codec_binh_b(stage1, stage2), image)
+        invalid = bytearray(stage1)
+        invalid[0] ^= 1
+        with self.assertRaisesRegex(open_cfw.OpenCFWError, "stage-1 vectors"):
+            open_cfw.wrap_codec_binh_b(bytes(invalid), stage2)
+
+    def test_codec_binh_a_and_fwpk_wrap_reproduce_stock(self) -> None:
+        codec = self.payloads["codec"]
+        uart = codec[0x30:0x958C]
+        flash = codec[0x958C:]
+        image_a = flash[:0x2F3B0]
+        image_b = flash[0x2F3B0:]
+        stage1 = image_a[24:0x3000 - 4]
+        xip = image_a[0x3004:0xBE88]
+        sram = image_a[0xBE88:0xF804]
+        commands = image_a[0xF804:0x11BD0]
+        weights = image_a[0x11BD0:]
+        self.assertEqual(open_cfw.wrap_codec_binh_a(
+            stage1, xip, sram, commands, weights), image_a)
+        self.assertEqual(open_cfw.wrap_codec_fwpk(uart, image_a, image_b), codec)
+        with self.assertRaisesRegex(open_cfw.OpenCFWError, "XIP load size"):
+            open_cfw.wrap_codec_binh_a(stage1, xip + b"\0", sram,
+                                      commands, weights)
+        with self.assertRaisesRegex(open_cfw.OpenCFWError, "NPU source regions"):
+            open_cfw.wrap_codec_binh_a(stage1, xip, sram,
+                                      commands[:-1], weights)
+
     def test_corrupted_main_is_rejected(self) -> None:
         corrupted = bytearray(self.payloads["apollo_main"])
         corrupted[-1] ^= 0x01

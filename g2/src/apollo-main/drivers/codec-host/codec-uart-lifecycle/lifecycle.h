@@ -4,7 +4,9 @@
 #include "../../../hal/uart/uart-rx/uart-rx-consumer/ring.h"
 /* Fixed ARM addresses, log-disabled, power-of-two ring initialization only.
  * Peripheral/config/GPIO operations remain external providers. */
-void codec_ring_initialize(uart3_ring_t *,uint8_t *,uint32_t);
+/* Upstream ring_buffer_init (third-party/upstream/ring-buffer/ringbuffer.c) is stock
+ * 0x598160; uart3_ring_t has the ring_buffer_t layout {buffer, mask, tail, head}. */
+void ring_buffer_init(void *buffer,char *buf,uint32_t buf_size);
 void codec_channel_callback(uint32_t,uint32_t);
 uint32_t codec_channel_enable(uint32_t);
 uint32_t codec_channel_disable(uint32_t);

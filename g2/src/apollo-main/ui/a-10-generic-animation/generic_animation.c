@@ -89,8 +89,8 @@ extern void audio_uart_display_audio_reset_441488(void *object, uint32_t opa, ui
 extern void audio_uart_lv_anim_init_4503d6(void *anim);
 extern void audio_uart_lv_anim_values_4506ce(void *anim, int32_t start, int32_t end);
 extern void *audio_uart_lv_anim_start_450408(void *anim);
-extern int32_t audio_uart_lv_anim_path_45065a(void *anim);               /* fade-in path */
-extern int32_t audio_uart_lv_anim_path_450672(void *anim);               /* fade-out path */
+extern int32_t lv_anim_path_ease_in(void *anim);               /* fade-in path */
+extern int32_t lv_anim_path_ease_out(void *anim);               /* fade-out path */
 extern void audio_uart_master_display_stop(uint32_t app, const void *payload,
                                            uint16_t length, uint32_t extra); /* 0x464c36 */
 
@@ -355,7 +355,7 @@ void page_fade_in_anim_start_46410a(void *object)
     audio_uart_lv_anim_values_4506ce(&a, 0, 0xff);
     a.duration = 250;
     a.exec_cb = fade_in_anim_set_opa_4640fe;
-    a.path_cb = audio_uart_lv_anim_path_45065a;
+    a.path_cb = lv_anim_path_ease_in;
     a.completed_cb = fade_in_anim_ready_cb_4640c0;
     (void)audio_uart_lv_anim_start_450408(&a);
 }
@@ -386,7 +386,7 @@ void Common_Fadeout_Anim_Start_4641b6(void *object, uint32_t app)
     audio_uart_lv_anim_values_4506ce(&a, 0xff, 0);
     a.duration = 250;
     a.exec_cb = fade_out_anim_set_opa_464152;
-    a.path_cb = audio_uart_lv_anim_path_450672;
+    a.path_cb = lv_anim_path_ease_out;
     a.user_data = (void *)(uintptr_t)app;
     a.completed_cb = fade_out_anim_ready_cb_46415e;
     (void)audio_uart_lv_anim_start_450408(&a);
@@ -402,6 +402,6 @@ void dispThread_Fadeout_Anim_Start_464242(void *object, uint32_t duration_ms)
     audio_uart_lv_anim_values_4506ce(&a, 0xff, 0);
     a.duration = (int32_t)duration_ms;
     a.exec_cb = fade_out_anim_set_opa_464152;
-    a.path_cb = audio_uart_lv_anim_path_450672;
+    a.path_cb = lv_anim_path_ease_out;
     (void)audio_uart_lv_anim_start_450408(&a);
 }

@@ -1,57 +1,24 @@
-/* Full native decoder; sparse writes and dual-register child returns retained. */
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_dispatch_child_32db0c\n"
-".type opencfw_em9305_dispatch_child_32db0c,@function\n"
-"opencfw_em9305_dispatch_child_32db0c:\n"
-"L32db0c:\n"
-"enter_s [r13-r14]\n"
-"L32db0e:\n"
-"mov_s r2,r0\n"
-"L32db10:\n"
-"ldb_s r0,[r1,0x1]\n"
-"L32db12:\n"
-"ldb_s r1,[r1,0]\n"
-"L32db14:\n"
-"ld r3,[0x805cac]\n"
-"L32db1c:\n"
-"asl_s r0,r0,0x8\n"
-"L32db1e:\n"
-"add_s r0,r0,r1\n"
-"L32db20:\n"
-"bmsk r12,r0,0x3\n"
-"L32db24:\n"
-"extb_s r1,r0\n"
-"L32db26:\n"
-"stb_s r12,[r2,0]\n"
-"L32db28:\n"
-"lsr r12,r1,0x7\n"
-"L32db2c:\n"
-"xbfu r13,r1,0x6\n"
-"L32db30:\n"
-"xbfu r14,r1,0x5\n"
-"L32db34:\n"
-"ldb_s r1,[r3,0x4]\n"
-"L32db36:\n"
-"and r0,r0,0xff00\n"
-"L32db3e:\n"
-"lsr_s r0,r0,0x8\n"
-"L32db40:\n"
-"cmp_s r1,0x8\n"
-"L32db42:\n"
-"bmsk.ls r0,r0,0x5\n"
-"L32db46:\n"
-"stb_s r13,[r2,0x2]\n"
-"L32db48:\n"
-"stb_s r14,[r2,0x1]\n"
-"L32db4a:\n"
-"stb_s r0,[r2,0x4]\n"
-"L32db4c:\n"
-"mov_s r0,2\n"
-"L32db4e:\n"
-"stb_s r12,[r2,0x3]\n"
-"L32db50:\n"
-"leave_s [r13-r14,pcl]\n"
-".size opencfw_em9305_dispatch_child_32db0c,.-opencfw_em9305_dispatch_child_32db0c\n"
-);
+#include <stdint.h>
+
+/* Native 0x32db0c..0x32db52: decode the 16-bit PDU header at in[0..1]
+ * into out[0..4]: LLID (bits 0..3), bits 5, 6 and 7, and the length byte
+ * (masked to 6 bits when the configured version at +4 of 0x805cac is 8 or
+ * below). Returns 2, the header length. */
+uint32_t opencfw_em9305_dispatch_child_32db0c(uintptr_t out, uintptr_t in)
+{
+    volatile uint8_t *o=(volatile uint8_t *)out;
+    uint32_t header=((uint32_t)*(volatile uint8_t *)(in+1u)<<8)+*(volatile uint8_t *)in;
+    uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+    o[0]=(uint8_t)(header&15u);
+    uint32_t length=(header&0xff00u)>>8;
+    if(*(volatile uint8_t *)(config+4u)<=8u)length&=63u;
+    o[2]=(uint8_t)((header>>6)&1u);
+    o[1]=(uint8_t)((header>>5)&1u);
+    o[4]=(uint8_t)length;
+    o[3]=(uint8_t)((header>>7)&1u);
+    return 2u;
+}
+
+/* Same stock function 0x32db0c, also called under its child name. */
+__typeof__(opencfw_em9305_dispatch_child_32db0c) opencfw_em9305_child_32db0c
+    __attribute__((alias("opencfw_em9305_dispatch_child_32db0c")));

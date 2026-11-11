@@ -1,0 +1,379 @@
+{
+  "schema": 1,
+  "scope": "STACMD read-bit copy adapter direct C replaces naked bridge and private worker",
+  "native_entry": "0x969ec",
+  "native_code_bytes": 16,
+  "normal_build": {
+    "report": "build/sources-goal-r1-stacmd-adapter-c/report.json",
+    "units": 576,
+    "unit": {
+      "source": "r1/src/application/board/native_stacmd_receive.c",
+      "payload": "r1-application",
+      "role": "candidate",
+      "toolchain": "clang",
+      "link": true,
+      "expect": "compile",
+      "returncode": 0,
+      "argv": [
+        "/usr/bin/clang",
+        "--target=arm-none-eabi",
+        "-mcpu=cortex-m4",
+        "-mthumb",
+        "-munaligned-access",
+        "-mfpu=fpv4-sp-d16",
+        "-mfloat-abi=hard",
+        "-std=c11",
+        "-Os",
+        "-falign-loops=1",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-fshort-enums",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-fno-delete-null-pointer-checks",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/r1/src/vendor",
+        "-isystem",
+        "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
+        "-MD",
+        "-MF",
+        "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-stacmd-adapter-c/r1/r1-application/r1__src__application__board__native_stacmd_receive.c.d",
+        "-c",
+        "/Users/kalani/Repo/evenRealities-openCFW/r1/src/application/board/native_stacmd_receive.c",
+        "-o",
+        "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-stacmd-adapter-c/r1/r1-application/r1__src__application__board__native_stacmd_receive.c.o"
+      ],
+      "source_sha256": "40a155224ae6e5ecf0d2b436f51350649c0afb2db195fb95f5b89d4e18f7345e",
+      "object_sha256": "a0fc379ed935d86a92722467c69505ad807c4bded09f12c8bca6e6b47f3f69df",
+      "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-stacmd-adapter-c/r1/r1-application/r1__src__application__board__native_stacmd_receive.c.o",
+      "strong": [
+        "r1_stacmd_read_bit_adapter_native",
+        "r1_stacmd_read_bit_native"
+      ],
+      "weak": [],
+      "undefined": [
+        "r1_stacmd"
+      ]
+    }
+  },
+  "audit": {
+    "other_objects_unchanged": 575,
+    "actual_bit_reader_body_and_relocations_unchanged": true,
+    "retired_worker": "stacmd_read_adapter_body",
+    "retired_bridge_bytes": 10,
+    "new_adapter_bytes": 24,
+    "naked_functions": 0,
+    "empty_constraints": 3,
+    "remaining_instruction_assembly": "four NOPs per actual bit-reader delay iteration",
+    "application_imports": 164,
+    "bootloader_imports": 34,
+    "import_sets_unchanged": true
+  },
+  "validation": {
+    "clang": {
+      "paired_cases": 2304,
+      "executions": 4608,
+      "actual_reader_cases": 256,
+      "mocked_reader_cases": 2048,
+      "checks": [
+        "native sample word address and 16-byte reader-provider depth",
+        "partial writes seeded by incoming R3",
+        "unaligned destination and destination/sample-word overlaps",
+        "R0/R1/R2/R3/R12, shared state, final saved registers and masks",
+        "actual reader GPIO sequence and 104 NOPs"
+      ],
+      "callback_depths": [
+        [
+          [],
+          []
+        ],
+        [
+          [
+            -48
+          ],
+          [
+            -40
+          ]
+        ]
+      ],
+      "limitations": [
+        "Actual bit reader with modeled GPIO or modeled reader; physical electrical behavior unverified",
+        "Active provider saved registers and raw APSR/return-address bits excluded",
+        "Private save slots differ; aliases into saved registers, arbitrary faults and exceptions excluded",
+        "GPIO callback depth recorded, not required equal across stock/C bit-reader implementations"
+      ]
+    },
+    "gcc9": {
+      "paired_cases": 2304,
+      "executions": 4608,
+      "actual_reader_cases": 256,
+      "mocked_reader_cases": 2048,
+      "checks": [
+        "native sample word address and 16-byte reader-provider depth",
+        "partial writes seeded by incoming R3",
+        "unaligned destination and destination/sample-word overlaps",
+        "R0/R1/R2/R3/R12, shared state, final saved registers and masks",
+        "actual reader GPIO sequence and 104 NOPs"
+      ],
+      "callback_depths": [
+        [
+          [],
+          []
+        ],
+        [
+          [
+            -48
+          ],
+          [
+            -40
+          ]
+        ]
+      ],
+      "limitations": [
+        "Actual bit reader with modeled GPIO or modeled reader; physical electrical behavior unverified",
+        "Active provider saved registers and raw APSR/return-address bits excluded",
+        "Private save slots differ; aliases into saved registers, arbitrary faults and exceptions excluded",
+        "GPIO callback depth recorded, not required equal across stock/C bit-reader implementations"
+      ]
+    },
+    "clang_protocol_integration": {
+      "cases": 219,
+      "passed": 219,
+      "gpio_only_model": true,
+      "actual_units": [
+        "r1/src/application/board/native_stacmd_delay.c",
+        "r1/src/application/board/native_stacmd_frames.c",
+        "r1/src/application/board/native_stacmd_receive.c",
+        "r1/src/application/board/native_stacmd_recovery.c",
+        "r1/src/application/board/native_stacmd_transmit.c"
+      ],
+      "source_sha256": {
+        "r1/src/application/board/native_stacmd_delay.c": "a32a752c54def86d2abf1da657712875dd62c9feb2baf6badedbbe77742947c5",
+        "r1/src/application/board/native_stacmd_frames.c": "e674fafeb32e9effe615a18f51c22f7ca4d7e0f1281fade48416addc8ac392ca",
+        "r1/src/application/board/native_stacmd_receive.c": "40a155224ae6e5ecf0d2b436f51350649c0afb2db195fb95f5b89d4e18f7345e",
+        "r1/src/application/board/native_stacmd_recovery.c": "bcb2f8feff97748f9f67bf3e558ae64b3fc7767d41365a65037d71a694f0f25f",
+        "r1/src/application/board/native_stacmd_transmit.c": "26da88091528558fdf193f0a1e8ced7206e5e9967fd93f450830f1d10049a73c"
+      },
+      "report": "build/sources-goal-r1-stacmd-adapter-c/report.json",
+      "fixture_compile_argv": [
+        "clang",
+        "--target=arm-none-eabi",
+        "-mcpu=cortex-m4",
+        "-mthumb",
+        "-mfpu=fpv4-sp-d16",
+        "-mfloat-abi=hard",
+        "-Os",
+        "-fshort-enums",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-c",
+        "build/goal-r1-stacmd-adapter-c/integration/gpio.c",
+        "-o",
+        "build/goal-r1-stacmd-adapter-c/integration/gpio.o"
+      ],
+      "source_elf_sha256": "a57b1d3e3885c2ff8a91d635e5caaf04907c3e1346d6769684d06cb91b485a07",
+      "limitations": [
+        "GPIO callbacks are probe C models; no physical timing or peripheral validation",
+        "Private stack depth differs; ABI preservation and GPIO traces checked"
+      ]
+    },
+    "gcc9_receive_protocol_integration": {
+      "cases": 219,
+      "passed": 219,
+      "gpio_only_model": true,
+      "actual_units": [
+        "r1/src/application/board/native_stacmd_delay.c",
+        "r1/src/application/board/native_stacmd_frames.c",
+        "r1/src/application/board/native_stacmd_receive.c",
+        "r1/src/application/board/native_stacmd_recovery.c",
+        "r1/src/application/board/native_stacmd_transmit.c"
+      ],
+      "source_sha256": {
+        "r1/src/application/board/native_stacmd_delay.c": "a32a752c54def86d2abf1da657712875dd62c9feb2baf6badedbbe77742947c5",
+        "r1/src/application/board/native_stacmd_frames.c": "e674fafeb32e9effe615a18f51c22f7ca4d7e0f1281fade48416addc8ac392ca",
+        "r1/src/application/board/native_stacmd_receive.c": "40a155224ae6e5ecf0d2b436f51350649c0afb2db195fb95f5b89d4e18f7345e",
+        "r1/src/application/board/native_stacmd_recovery.c": "bcb2f8feff97748f9f67bf3e558ae64b3fc7767d41365a65037d71a694f0f25f",
+        "r1/src/application/board/native_stacmd_transmit.c": "26da88091528558fdf193f0a1e8ced7206e5e9967fd93f450830f1d10049a73c"
+      },
+      "report": "build/sources-goal-r1-stacmd-adapter-c/report.json",
+      "fixture_compile_argv": [
+        "clang",
+        "--target=arm-none-eabi",
+        "-mcpu=cortex-m4",
+        "-mthumb",
+        "-mfpu=fpv4-sp-d16",
+        "-mfloat-abi=hard",
+        "-Os",
+        "-fshort-enums",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-c",
+        "build/goal-r1-stacmd-adapter-c/integration/gpio.c",
+        "-o",
+        "build/goal-r1-stacmd-adapter-c/integration/gpio.o"
+      ],
+      "source_elf_sha256": "87ef7a0cdcfb7dfa119e8e3e161d51ff7910767da90d90b668fe3425f5135c62",
+      "limitations": [
+        "GPIO callbacks are probe C models; no physical timing or peripheral validation",
+        "Private stack depth differs; ABI preservation and GPIO traces checked"
+      ]
+    }
+  },
+  "negative_controls": [
+    {
+      "mutation": "zero-seed",
+      "rejected": true
+    },
+    {
+      "mutation": "stale-r3-after-copy",
+      "rejected": true
+    },
+    {
+      "mutation": "wrong-sample-address",
+      "rejected": true
+    },
+    {
+      "mutation": "previous bridge and private worker",
+      "rejected": true
+    }
+  ],
+  "frame": {
+    "native_depth": 16,
+    "Clang_local_bytes": 8,
+    "Clang_saved_bytes": 8,
+    "GCC9_local_extent_bytes": 8,
+    "GCC9_saved_bytes": 8,
+    "sample_pointer_offset": -16,
+    "sample_word_seeded_from_incoming_R3": true,
+    "R1_returns_copied_word": true,
+    "R3_reloaded_after_copy_for_overlap": true,
+    "R2_captured_after_reader_and_restored": true,
+    "private_save_slots_equal": false
+  },
+  "REA": {
+    "evidence_id": "ev_f02e2fd0e6339eaa97c97dc543f4ffb5945a93ef169326978c24f7b5393281be",
+    "subject": {
+      "name": "stock.elf",
+      "digest": {
+        "sha256": "25b4a29af80ec8edab5bd861ba9b74a6e22eab29dc3d7a809a16869e8a140f04"
+      },
+      "local_path": "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-queue-reset-c/stock.elf",
+      "format": "elf",
+      "architecture": "arm"
+    },
+    "provider": {
+      "id": "ghidra",
+      "name": "Ghidra",
+      "version": "12.1.4"
+    },
+    "analysis_profile": {
+      "provider": {
+        "id": "ghidra",
+        "name": "Ghidra",
+        "version": "12.1.4"
+      },
+      "parameters": {
+        "target_kind": "executable",
+        "target_format": "elf",
+        "architecture": "arm",
+        "available_architectures": [
+          "arm"
+        ],
+        "import_mode": "ephemeral-source-immutable",
+        "annotation_policy": "atomic-function-entry-metadata-v1",
+        "load_image_observations": "source-mappings-entry-context-v2",
+        "function_body_evidence": "complete-inclusive-ranges-v1",
+        "function_references": "complete-body-and-entry-reference-manager-v2",
+        "call_relationship_coverage": "function-body-call-coverage-v5",
+        "function_dossier_coverage": "observed-facets-and-call-relationships-v1",
+        "string_inventory_evidence": "defined-data-coverage-v1",
+        "location_resolution": "explicit-address-exact-entry-symbol-first-v3",
+        "procedure_file_offset_resolution": "address-first-unique-target-source-mapping-v2",
+        "instruction_flow_evidence": "decoded-return-pcode-v1",
+        "instruction_references": "exact-address-incoming-v1",
+        "function_boundary_observations": "ghidra-function-boundary-limitations-v3",
+        "no_return_repair": "returning-imports-decoded-return-v2",
+        "process_launch": "inspected-jvm-launch-support-v1",
+        "jump_table_evidence": "typed-case-default-blocks-v1",
+        "decompiler_jump_loads": true,
+        "loader": "auto-from-header",
+        "language_id": "auto-from-header",
+        "compiler_spec_id": "auto-default",
+        "analyzer_preset": "ghidra-default"
+      },
+      "digest": "7e46711069eea041af1b9b99e34115c13332795e5cda76e584a722f529ec70de"
+    },
+    "predicate_type": "rea.analysis",
+    "operation": "read_bytes",
+    "parameters": {
+      "address": "0x969ec",
+      "length": 16
+    },
+    "raw_result": {
+      "address": "0x969ec",
+      "requested_bytes": 16,
+      "returned_bytes": 16,
+      "bytes_hex": "38b504466846f1f79df80099216038bd",
+      "complete": true
+    },
+    "normalized_result": {
+      "address": "0x969ec",
+      "requested_bytes": 16,
+      "returned_bytes": 16,
+      "bytes_hex": "38b504466846f1f79df80099216038bd",
+      "complete": true
+    },
+    "confidence": "observed",
+    "authority": "shipped-artifact",
+    "environment": null,
+    "limitations": [
+      "The session serves operations only after Ghidra reports default auto-analysis complete; incomplete analysis does not expose partial results.",
+      "The imported Program and temporary project are ephemeral and deleted on close. Annotation operations edit session database metadata; original executable bytes are never written.",
+      "Cancelling an active Ghidra request terminates its ephemeral database and discards session annotations. The selected target remains open; the next provider query imports the original artifact again.",
+      "Default-space addresses use lowercase 0x-prefixed hexadecimal; other address spaces use <percent-encoded-space>:0x<hex>.",
+      "Bytes reflect Ghidra's initialized memory, including loader fixups. Reads stop at an unmapped or uninitialized byte and report completeness explicitly.",
+      "macOS sessions require a matching executable Ghidra native decompiler; REA checks for it but does not build native components or change Gatekeeper quarantine state."
+    ],
+    "relationship_coverage": null,
+    "locations": [],
+    "evidence_links": []
+  },
+  "qualification": {
+    "generic": {
+      "report": "build/goal-r1-stacmd-adapter-c/qualified-generic/qualification.json",
+      "compiled_units": 4,
+      "selected_regions": 0
+    },
+    "gcc": {
+      "report": "build/goal-r1-stacmd-adapter-c/qualified-gcc/qualification.json",
+      "compiled_units": 4,
+      "selected_regions": 0
+    }
+  },
+  "canonical_hybrid": {
+    "report": "build/hybrid-goal-r1-stacmd-adapter-c/build-report.json",
+    "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "source_completeness_proven": false,
+    "source_plan_unchanged": true,
+    "source_built_bytes_including_assembly_and_data": 3961,
+    "binary_fallback_bytes": 642199,
+    "resource_bytes": 248
+  },
+  "probe_hashes": {
+    "build/goal-r1-stacmd-adapter-c/verify.py": "1e012b6733039ec1e2d923b9ea93588f43ae3b6043bb5d35719ce183c9bcb112",
+    "build/goal-r1-stacmd-adapter-c/integration.py": "771c3aadd827cb8a54c46ef1f15fb117a39d46e61f23f99240ef40947032a682",
+    "build/goal-r1-stacmd-adapter-c/audit.py": "3a023daef314d236bf1f3c38806004441d79e72b21ef719583fabc871fd5e6a6",
+    "build/goal-r1-stacmd-adapter-c/negative.py": "2c68592a6245ea8aab25c85c0a04c00bb56d4899f0b0099f6fa57957b6bd1f45",
+    "build/goal-r1-stacmd-adapter-c/rea.json": "6b554d89675f8762903cf0d9a3aa118fa8b68f91d11717cb1eda04bac38111cc"
+  },
+  "limitations": [
+    "Fixed register bindings and three empty constraints remain; not portable ISO C.",
+    "Actual bit-reader four-NOP timing block remains; unchanged object bytes and relocations verified.",
+    "Modeled reader or actual bit reader with GPIO models; protocol integration executes five real source units with probe C GPIO callbacks.",
+    "Native/source GPIO callback depths differ (-48/-40 with Clang); no equal-cycle, wire timing, electrical or physical-device claim.",
+    "Active provider saved registers, private save slots, raw APSR/return-address bits, aliases into saved registers, arbitrary faults and exceptions excluded.",
+    "No newly exact-qualified region or complete source-only firmware."
+  ]
+}

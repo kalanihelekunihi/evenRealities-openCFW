@@ -5,12 +5,20 @@
 #define B(a) (*(volatile uint8_t *)(uintptr_t)(a))
 static float as_float(uint32_t n) {union {uint32_t bits;float value;} x={.bits=n};return x.value;}
 static uint32_t valid(uint32_t context) {(void)R(context+4u);return context&&(R(context)&0x01ffffffu)==0x01afafafu;}
-static float unsigned_to_float(uint32_t n) {float f;__asm__ volatile("vmov %0, %1\n\tvcvt.f32.u32 %0, %0":"=t"(f):"r"(n));return f;}
-static uint32_t float_to_unsigned(float f) {uint32_t n;__asm__ volatile("vcvt.u32.f32 %1, %1\n\tvmov %0, %1":"=r"(n),"+t"(f));return n;}
-static float subtract(float x,float y) {float f;__asm__ volatile("vsub.f32 %0, %1, %2":"=t"(f):"t"(x),"t"(y));return f;}
-static float divide(float x,float y) {float f;__asm__ volatile("vdiv.f32 %0, %1, %2":"=t"(f):"t"(x),"t"(y));return f;}
-static float multiply(float x,float y) {float f;__asm__ volatile("vmul.f32 %0, %1, %2":"=t"(f):"t"(x),"t"(y));return f;}
-static float accumulate(float x,float y,float z) {__asm__ volatile("vmla.f32 %0, %1, %2":"+t"(x):"t"(y),"t"(z));return x;}
+/* VCVT.F32.U32 rounds per FPSCR, as the C conversion does. */
+static float unsigned_to_float(uint32_t n) {return (float)n;}
+/* VCVT.U32.F32 truncates toward zero and saturates: NaN and values <= -1
+ * give 0, values >= 2^32 give 0xffffffff (C leaves those undefined). */
+static uint32_t float_to_unsigned(float f) {
+    if(!(f>-1.0f))return 0u;
+    if(f>=4294967296.0f)return UINT32_MAX;
+    return (uint32_t)f;
+}
+static float subtract(float x,float y) {return x-y;}
+static float divide(float x,float y) {return x/y;}
+static float multiply(float x,float y) {return x*y;}
+/* VMLA.F32 is not fused: the product is rounded before the add. */
+static float accumulate(float x,float y,float z) {const float product=y*z;return x+product;}
 /* Stock 0x42EE00 (hw_channel_normalize_42ee00; am_hal_adc.c sample_correction_apply) */
 __attribute__((noinline))
 uint32_t opencfw_boot_adc_correct_sample(uint32_t word,uint32_t enabled) {

@@ -1,0 +1,153 @@
+{
+  "cases": 690,
+  "passed": 690,
+  "source_sha256": {
+    "r1/src/application/gpio/native_output_gpio_command.c": "60685c309d826a4593cd75f72943b1918a5a2021e05ba498f5a5a23301b0421a",
+    "r1/src/application/gpio/native_output_gpio_lifecycle.c": "7c4a816645e2d4fd0a32316bbbad150053b050ee425acf2ae98a23bf0f684213"
+  },
+  "report": "build/sources-goal-r1-output-lifecycle-order/report.json",
+  "old_regressions": {
+    "open": {
+      "native_reads": [
+        [
+          536969216,
+          4
+        ],
+        [
+          536900136,
+          4
+        ]
+      ],
+      "old_reads": [
+        [
+          536900136,
+          4
+        ],
+        [
+          536969216,
+          4
+        ],
+        [
+          536900192,
+          4
+        ],
+        [
+          536969216,
+          4
+        ]
+      ],
+      "native_return": 0,
+      "old_return": 0
+    },
+    "close": {
+      "native_reads": [
+        [
+          536969216,
+          4
+        ],
+        [
+          536900136,
+          4
+        ]
+      ],
+      "old_reads": [
+        [
+          536900136,
+          4
+        ],
+        [
+          536969216,
+          4
+        ],
+        [
+          536900192,
+          4
+        ],
+        [
+          536969216,
+          4
+        ]
+      ],
+      "native_return": 0,
+      "old_return": 0
+    },
+    "slot18": {
+      "native_reads": [
+        [
+          536969216,
+          4
+        ],
+        [
+          536900136,
+          4
+        ]
+      ],
+      "old_reads": [
+        [
+          536900136,
+          4
+        ],
+        [
+          536969216,
+          4
+        ],
+        [
+          536900192,
+          4
+        ],
+        [
+          536969216,
+          4
+        ]
+      ],
+      "native_return": 0,
+      "old_return": 0
+    }
+  },
+  "other_units_unchanged": 560,
+  "application_imports": 211,
+  "bootloader_imports": 34,
+  "limitations": [
+    "strcmp, lifecycle/command callbacks and delay primitive modeled",
+    "Controlled mutation is not a claim of production race frequency",
+    "No physical GPIO, native byte qualification or final firmware proof"
+  ],
+  "evidence": [
+    {
+      "path": "build/goal-r1-output-lifecycle-order/lifecycle-before.c",
+      "sha256": "22be62647555d9831da18b0da8e72a9c5ecfdc965a0c8369b5da8360e128e019"
+    },
+    {
+      "path": "build/goal-r1-output-lifecycle-order/command-before.c",
+      "sha256": "a586e1e661fceee37a872bb565409edf7d9cbd7f47e3b66242f7ef4124b7ca6f"
+    },
+    {
+      "path": "build/goal-r1-output-lifecycle-order/verify.py",
+      "sha256": "f0b90c62b6d9af44658a3549aa465f0867e9a1e6faa46a14bf5ee3f34a05f214"
+    },
+    {
+      "path": "build/sources-goal-r1-output-lifecycle-order/report.json",
+      "sha256": "196069adf794a57a7c0e08057e0c600c28f845e5a9abcff0531241c5f8d3db42"
+    },
+    {
+      "path": "build/goal-r1-twi-packet-c/stock.elf",
+      "sha256": "0a73bd084a4ccf8cdd579852b46deda970b701b2c22e9aecf423166f949350e4"
+    },
+    {
+      "path": "r1/src/application/gpio/native_output_gpio_lifecycle.c",
+      "sha256": "7c4a816645e2d4fd0a32316bbbad150053b050ee425acf2ae98a23bf0f684213"
+    },
+    {
+      "path": "r1/src/application/gpio/native_output_gpio_command.c",
+      "sha256": "60685c309d826a4593cd75f72943b1918a5a2021e05ba498f5a5a23301b0421a"
+    },
+    {
+      "path": "r1/src/sources.json",
+      "sha256": "9c5b7ae5c0e7493eb22e1fb4df9f0c928c2a9aa70530254aff89b55213bef2e2"
+    },
+    {
+      "path": "tools/build/source-plan.json",
+      "sha256": "964cbd3af9f4ea7ed207bb4b480d18a9529060dc3801663d296389472982aa7c"
+    }
+  ]
+}

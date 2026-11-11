@@ -1,198 +1,88 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_callback_317f5c\n"
-".type opencfw_em9305_callback_317f5c,@function\n"
-"opencfw_em9305_callback_317f5c:\n"
-"L317f5c:\n"
-"enter_s [r13-r16,blink]\n"
-"L317f5e:\n"
-"mov_s r16,r0\n"
-"L317f60:\n"
-"cmp_s r1,0x70\n"
-"L317f62:\n"
-"mov_s r2,0\n"
-"L317f64:\n"
-"beq_s L317f82\n"
-"L317f66:\n"
-"breq.d.nt r1,0x29,L317fb0\n"
-"L317f6a:\n"
-"mov_s r3,1\n"
-"L317f6c:\n"
-"cmp_s r1,0xc\n"
-"L317f6e:\n"
-"bne_s L318076\n"
-"L317f70:\n"
-"mov_s r1,0x802818\n"
-"L317f76:\n"
-"ldb_s r0,[r1,0]\n"
-"L317f78:\n"
-"mov_s r3,0\n"
-"L317f7a:\n"
-"breq.d.nt r0,0x26,L317fc2\n"
-"L317f7e:\n"
-"mov_s r1,1\n"
-"L317f80:\n"
-"b_s L318076\n"
-"L317f82:\n"
-"ld.as r0,[r16,161]\n"
-"L317f86:\n"
-"bbit1.d.nt r0,0x1d,L317fb4\n"
-"L317f8a:\n"
-"btst_s r0,0x1e\n"
-"L317f8c:\n"
-"beq_s L318076\n"
-"L317f8e:\n"
-"bclr_s r0,r0,0x1e\n"
-"L317f90:\n"
-"mov_s r1,r16\n"
-"L317f92:\n"
-"st.as r2,[r16,162]\n"
-"L317f96:\n"
-"st.as r0,[r16,161]\n"
-"L317f9a:\n"
-"add r1,r1,866\n"
-"L317f9e:\n"
-"mov_s r0,0x80281c\n"
-"L317fa4:\n"
-"bl.d opencfw_em9305_memcpy\n"
-"L317fa8:\n"
-"mov_s r2,0xa\n"
-"L317faa:\n"
-"mov_s r3,0\n"
-"L317fac:\n"
-"mov_s r1,1\n"
-"L317fae:\n"
-"b_s L317fc2\n"
-"L317fb0:\n"
-"mov_s r1,0\n"
-"L317fb2:\n"
-"b_s L317fc2\n"
-"L317fb4:\n"
-"bclr_s r0,r0,0x1d\n"
-"L317fb6:\n"
-"st.as r2,[r16,162]\n"
-"L317fba:\n"
-"mov_s r3,1\n"
-"L317fbc:\n"
-"mov_s r1,0\n"
-"L317fbe:\n"
-"st.as r0,[r16,161]\n"
-"L317fc2:\n"
-"mov_s r13,r16\n"
-"L317fc4:\n"
-"add r13,r13,635\n"
-"L317fc8:\n"
-"ldb r0,[r13,-15]\n"
-"L317fcc:\n"
-"breq.nt r0,0x1,L31800a\n"
-"L317fd0:\n"
-"brne.nt r0,0,L318074\n"
-"L317fd4:\n"
-"mov_s r0,0x805a87\n"
-"L317fda:\n"
-"ldb_s r2,[r0,0]\n"
-"L317fdc:\n"
-"bbit1.nt r2,0x2,L317fec\n"
-"L317fe0:\n"
-"ldb r2,[r13,-101]\n"
-"L317fe4:\n"
-"brne_s r2,0,L317fec\n"
-"L317fe6:\n"
-"ldb_s r0,[r0,0x11]\n"
-"L317fe8:\n"
-"bbit1.nt r0,0x6,L31803a\n"
-"L317fec:\n"
-"bl.d opencfw_em9305_child_317f2c\n"
-"L317ff0:\n"
-"mov_s r0,r16\n"
-"L317ff2:\n"
-"ldb r0,[r13,-11]\n"
-"L317ff6:\n"
-"breq.d.nt r0,0,L318076\n"
-"L317ffa:\n"
-"mov_s r2,1\n"
-"L317ffc:\n"
-"add r16,r16,635\n"
-"L318000:\n"
-"stb 1,[r13,-15]\n"
-"L318004:\n"
-"stb 29,[r16]\n"
-"L318008:\n"
-"b_s L318076\n"
-"L31800a:\n"
-"ldb_s r0,[r13,0]\n"
-"L31800c:\n"
-"brne.d.nt r0,0x1d,L31802c\n"
-"L318010:\n"
-"mov_s r0,r16\n"
-"L318012:\n"
-"bl opencfw_em9305_child_317f2c\n"
-"L318016:\n"
-"ldb r0,[r13,-11]\n"
-"L31801a:\n"
-"brne_s r0,0,L318074\n"
-"L31801c:\n"
-"mov_s r0,r16\n"
-"L31801e:\n"
-"stb 0,[r13,-15]\n"
-"L318022:\n"
-"bl.d opencfw_em9305_phy_finish_32c810\n"
-"L318026:\n"
-"stb -1,[r13]\n"
-"L31802a:\n"
-"b_s L318074\n"
-"L31802c:\n"
-"ld.as r1,[r16,161]\n"
-"L318030:\n"
-"mov_s r2,1\n"
-"L318032:\n"
-"bset_s r1,r1,0x1d\n"
-"L318034:\n"
-"st.as r1,[r16,161]\n"
-"L318038:\n"
-"b_s L318076\n"
-"L31803a:\n"
-"ld.as r0,[r16,162]\n"
-"L31803e:\n"
-"ld.as r1,[r16,161]\n"
-"L318042:\n"
-"breq_s r3,0,L318050\n"
-"L318044:\n"
-"bset_s r1,r1,0x1d\n"
-"L318046:\n"
-"st.as r0,[r16,162]\n"
-"L31804a:\n"
-"st.as r1,[r16,161]\n"
-"L31804e:\n"
-"b_s L31806c\n"
-"L318050:\n"
-"st.as r0,[r16,162]\n"
-"L318054:\n"
-"bset_s r1,r1,0x1e\n"
-"L318056:\n"
-"mov_s r0,r16\n"
-"L318058:\n"
-"st.as r1,[r16,161]\n"
-"L31805c:\n"
-"add r0,r0,866\n"
-"L318060:\n"
-"mov_s r1,0x80281c\n"
-"L318066:\n"
-"bl.d opencfw_em9305_memcpy\n"
-"L31806a:\n"
-"mov_s r2,0xa\n"
-"L31806c:\n"
-"mov_s r1,0x67\n"
-"L31806e:\n"
-"bl.d opencfw_em9305_mode_event_31bd78\n"
-"L318072:\n"
-"mov_s r0,r16\n"
-"L318074:\n"
-"mov_s r2,1\n"
-"L318076:\n"
-"mov_s r0,r2\n"
-"L318078:\n"
-"leave_s [r13-r16,blink,pcl]\n"
-".size opencfw_em9305_callback_317f5c,.-opencfw_em9305_callback_317f5c\n"
-);
+#include <stdint.h>
+
+/* Native 0x317f5c..0x31807a: PHY-update procedure state machine. Event
+ * 0x70 resumes a deferred procedure (bit 29 of +644) or a parked peer
+ * request (bit 30: the saved 10-byte request at +866 is restored to
+ * 0x80281c), event 0x29 starts a local procedure and event 0x0c a peer
+ * request of type 0x26; +648 is cleared on resume. With the procedure
+ * idle (+620 == 0) the request is run by 317f2c and, if work is pending
+ * (+624), the procedure becomes active in state 29 (+635) - unless another
+ * procedure owns the link (bit 6 of 0x805a98 with bit 2 of 0x805a87 and
+ * +534 clear), in which case the local procedure is deferred (bit 29) or
+ * the peer request parked (bit 30, saved to +866) and mode event 0x67 is
+ * raised. An active procedure in state 29 runs 317f2c and, when nothing
+ * is pending, goes idle and finishes the PHY; otherwise the event is
+ * deferred. Returns 1 when the event was taken. */
+extern void opencfw_em9305_child_317f2c(uintptr_t record,uint32_t selector);
+extern void *opencfw_em9305_memcpy(void *destination,const void *source,
+                                   uint32_t bytes);
+extern uint32_t opencfw_em9305_mode_event_31bd78(uintptr_t context,uint32_t event);
+extern uint32_t opencfw_em9305_phy_finish_32c810(uintptr_t record);
+
+static inline uint32_t r8(uintptr_t a){return *(volatile uint8_t *)a;}
+static inline uint32_t r32(uintptr_t a){return *(volatile uint32_t *)a;}
+static inline void w8(uintptr_t a,uint32_t v){*(volatile uint8_t *)a=(uint8_t)v;}
+static inline void w32(uintptr_t a,uint32_t v){*(volatile uint32_t *)a=v;}
+
+uint32_t opencfw_em9305_callback_317f5c(uintptr_t record,uint32_t event)
+{
+    uint32_t selector,local;
+    if(event==0x70u){
+        uint32_t flags=r32(record+644u);
+        if((flags&0x20000000u)!=0u){
+            w32(record+648u,0u);
+            local=1u;
+            selector=0u;
+            w32(record+644u,flags&~0x20000000u);
+        }else{
+            if((flags&0x40000000u)==0u)return 0u;
+            w32(record+648u,0u);
+            w32(record+644u,flags&~0x40000000u);
+            (void)opencfw_em9305_memcpy((void *)0x80281cu,(const void *)(record+866u),10u);
+            local=0u;
+            selector=1u;
+        }
+    }else if(event==0x29u){
+        local=1u;
+        selector=0u;
+    }else{
+        if(event!=0x0cu)return 0u;
+        if(r8(0x802818u)!=0x26u)return 0u;
+        local=0u;
+        selector=1u;
+    }
+    uint32_t active=r8(record+620u);
+    if(active==1u){
+        if(r8(record+635u)!=29u){
+            w32(record+644u,r32(record+644u)|0x20000000u);
+            return 1u;
+        }
+        opencfw_em9305_child_317f2c(record,selector);
+        if(r8(record+624u)!=0u)return 1u;
+        w8(record+620u,0u);
+        w8(record+635u,0xffu);
+        (void)opencfw_em9305_phy_finish_32c810(record);
+        return 1u;
+    }
+    if(active!=0u)return 1u;
+    if((r8(0x805a87u)&4u)==0u&&r8(record+534u)==0u
+       &&(r8(0x805a98u)&0x40u)!=0u){
+        uint32_t pending=r32(record+648u);
+        uint32_t flags=r32(record+644u);
+        if(local!=0u){
+            w32(record+648u,pending);
+            w32(record+644u,flags|0x20000000u);
+        }else{
+            w32(record+648u,pending);
+            w32(record+644u,flags|0x40000000u);
+            (void)opencfw_em9305_memcpy((void *)(record+866u),(const void *)0x80281cu,10u);
+        }
+        (void)opencfw_em9305_mode_event_31bd78(record,0x67u);
+        return 1u;
+    }
+    opencfw_em9305_child_317f2c(record,selector);
+    if(r8(record+624u)==0u)return 1u;
+    w8(record+620u,1u);
+    w8(record+635u,29u);
+    return 1u;
+}

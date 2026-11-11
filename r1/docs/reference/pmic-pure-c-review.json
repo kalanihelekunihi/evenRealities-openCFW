@@ -1,0 +1,111 @@
+{
+  "normal_report": "build/sources-goal-r1-pmic-pure-c/report.json",
+  "report_sha256": "7691602c33648a736d1f1e5c66247f25abbdaa825a0c2aeedc0c5ee9f71ee895",
+  "unit": {
+    "source": "r1/src/application/board/native_pmic_charge_decode.c",
+    "payload": "r1-application",
+    "role": "candidate",
+    "toolchain": "clang",
+    "link": true,
+    "expect": "compile",
+    "returncode": 0,
+    "argv": [
+      "/usr/bin/clang",
+      "--target=arm-none-eabi",
+      "-mcpu=cortex-m4",
+      "-mthumb",
+      "-mfpu=fpv4-sp-d16",
+      "-mfloat-abi=hard",
+      "-std=c11",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-fno-strict-aliasing",
+      "-fshort-enums",
+      "-Os",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-fno-delete-null-pointer-checks",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/r1/src/vendor",
+      "-MD",
+      "-MF",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-pmic-pure-c/r1/r1-application/r1__src__application__board__native_pmic_charge_decode.c.d",
+      "-c",
+      "/Users/kalani/Repo/evenRealities-openCFW/r1/src/application/board/native_pmic_charge_decode.c",
+      "-o",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-pmic-pure-c/r1/r1-application/r1__src__application__board__native_pmic_charge_decode.c.o"
+    ],
+    "source_sha256": "7d2c7d67872ecc64947d0ce84e4c312cc80ec2ed7a567fcc937963f5e2044b5e",
+    "object_sha256": "ba488af3c44c52ca50390e6a06e0fce814d0f056edede7b4a97c74df7b9e3cd8",
+    "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-pmic-pure-c/r1/r1-application/r1__src__application__board__native_pmic_charge_decode.c.o",
+    "strong": [
+      "r1_pmic_charge_status_decode",
+      "r1_yhm_register_write_byte_native",
+      "r1_yhm_single_wire_command_native",
+      "r1_yhm_single_wire_command_thunk"
+    ],
+    "weak": [],
+    "undefined": [
+      "r1_yhm_register_read_byte_native",
+      "r1_yhm_register_write_native"
+    ]
+  },
+  "direct": {
+    "outcomes": {
+      "0": 44736,
+      "1": 3768
+    },
+    "decode_pairs": 48504,
+    "adapter_pairs": 288,
+    "vectors": 2021,
+    "limitations": [
+      "Byte transport boundaries modeled; electrical behavior unverified",
+      "Private stack locations, upper scratch bytes and caller-clobbered register returns excluded"
+    ]
+  },
+  "negative": {
+    "wrong-nibble": {
+      "rejected": true,
+      "diagnostic": "tive): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-pmic-pure-c/wrong-nibble.o\narm-none-eabi-ld: warning: (r1_yhm_register_read_byte_native): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-pmic-pure-c/wrong-nibble.o\narm-none-eabi-ld: warning: (r1_yhm_register_read_byte_native): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-pmic-pure-c/wrong-nibble.o\narm-none-eabi-ld: warning: (r1_yhm_register_write_native): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-pmic-pure-c/wrong-nibble.o\nTraceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-pmic-pure-c/verify.py\", line 56, in <module>\n    x=a(*c);y=b(*c);assert x==y,(c,x,y);n+=1\n                           ^^^^\nAssertionError: (((128, 192, 0, 0), 0, 0, 305419896, True), (1, [['read', 5], ['read', 6], ['read', 7], ['read', 3], ['write', 3, 1, '40']]), (0, [['read', 5], ['read', 6], ['read', 7]]))\n"
+    },
+    "wrong-inhibit-bit": {
+      "rejected": true,
+      "diagnostic": "tive): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-pmic-pure-c/wrong-inhibit-bit.o\narm-none-eabi-ld: warning: (r1_yhm_register_read_byte_native): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-pmic-pure-c/wrong-inhibit-bit.o\narm-none-eabi-ld: warning: (r1_yhm_register_read_byte_native): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-pmic-pure-c/wrong-inhibit-bit.o\narm-none-eabi-ld: warning: (r1_yhm_register_write_native): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-pmic-pure-c/wrong-inhibit-bit.o\nTraceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-pmic-pure-c/verify.py\", line 56, in <module>\n    x=a(*c);y=b(*c);assert x==y,(c,x,y);n+=1\n                           ^^^^\nAssertionError: (((144, 206, 73, 118), 0, 0, 305419896, True), (1, [['read', 5], ['read', 6], ['read', 7], ['read', 3]]), (0, [['read', 5], ['read', 6], ['read', 7]]))\n"
+    },
+    "wrong-enable-bit": {
+      "rejected": true,
+      "diagnostic": "de (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-pmic-pure-c/wrong-enable-bit.o\narm-none-eabi-ld: warning: (r1_yhm_register_read_byte_native): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-pmic-pure-c/wrong-enable-bit.o\narm-none-eabi-ld: warning: (r1_yhm_register_read_byte_native): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-pmic-pure-c/wrong-enable-bit.o\narm-none-eabi-ld: warning: (r1_yhm_register_write_native): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-pmic-pure-c/wrong-enable-bit.o\nTraceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-pmic-pure-c/verify.py\", line 56, in <module>\n    x=a(*c);y=b(*c);assert x==y,(c,x,y);n+=1\n                           ^^^^\nAssertionError: (((128, 192, 0, 0), 0, 0, 305419896, True), (1, [['read', 5], ['read', 6], ['read', 7], ['read', 3], ['write', 3, 1, '40']]), (1, [['read', 5], ['read', 6], ['read', 7], ['read', 3], ['write', 3, 1, '20']]))\n"
+    },
+    "wrong-single-command": {
+      "rejected": true,
+      "diagnostic": "alities-openCFW/build/goal-r1-pmic-pure-c/wrong-single-command.o\narm-none-eabi-ld: warning: (r1_yhm_register_read_byte_native): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-pmic-pure-c/wrong-single-command.o\narm-none-eabi-ld: warning: (r1_yhm_register_read_byte_native): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-pmic-pure-c/wrong-single-command.o\narm-none-eabi-ld: warning: (r1_yhm_register_write_native): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-pmic-pure-c/wrong-single-command.o\nTraceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-pmic-pure-c/verify.py\", line 59, in <module>\n    args=([0,0,0,0],0,status,seed,False,kind,reg,value);x=a(*args);y=b(*args);assert x==y,(args,x,y);adapter_pairs+=1\n                                                                                     ^^^^\nAssertionError: (([0, 0, 0, 0], 0, 0, 0, False, 'single', 0, 0), (0, [['write', 2, 1, 'f8']]), (0, [['write', 2, 1, 'f9']]))\n"
+    }
+  },
+  "audit": {
+    "changed": [
+      "r1/src/application/board/native_pmic_charge_decode.c"
+    ],
+    "unchanged_objects": 726
+  },
+  "rea": [
+    {
+      "path": "build/goal-r1-pmic-pure-c/rea-0x5061c.json",
+      "sha256": "d7423a0d1ec7b6fe79cbb67687896dd178105cb69aaeda4b23eb1f308f9e405d"
+    },
+    {
+      "path": "build/goal-r1-pmic-pure-c/rea-0x35766.json",
+      "sha256": "c12f464e01fd86487802d9c417f1e7db93738df4541eb616aa13229c02d6ee13"
+    },
+    {
+      "path": "build/goal-r1-pmic-pure-c/rea-0x35684.json",
+      "sha256": "e5e4469320bc2e7749199a7c49ce1e551d3d49ab99fdb92b6ef40a9d7a5a820c"
+    }
+  ],
+  "limits": [
+    "Byte transport modeled",
+    "C status ABI excludes scratch register returns, private frames and unused upper bytes",
+    "No physical PMIC/charger measurement"
+  ]
+}

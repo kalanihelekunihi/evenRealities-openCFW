@@ -1,0 +1,97 @@
+{
+  "passed": 14652,
+  "executions": 29304,
+  "actual_stock_ring_helpers": true,
+  "shared_stock_memcpy_boundary": true,
+  "control_block_size": 120,
+  "source_report": "build/sources-goal-r1-rtt-selected-write-final/report.json",
+  "source_sha256": {
+    "vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/external/segger_rtt/SEGGER_RTT.c": "52f9a10baa6cea801134e7eb87848631fd03232540366c407c2a9183641c9088"
+  },
+  "source_size": 120,
+  "limitations": [
+    "Blocking mode only when enough initial space exists; host-draining progress and concurrent writes unverified",
+    "Initialized valid ring sizes/offsets and buffer indices only; malformed pointers excluded",
+    "Stock memcpy executes for both graphs; its C replacement is outside this comparison",
+    "Private frames and caller-clobbered registers/flags excluded",
+    "No physical debugger or byte qualification"
+  ],
+  "retained_graph": {
+    "symbols": [
+      "SEGGER_RTT_WriteNoLock",
+      "_SEGGER_RTT"
+    ],
+    "argv": [
+      "arm-none-eabi-ld",
+      "-r",
+      "--gc-sections",
+      "--undefined",
+      "SEGGER_RTT_WriteNoLock",
+      "--undefined",
+      "_SEGGER_RTT",
+      "-o",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-rtt-selected-write-final/r1/r1-application/vendor-cache__r1__nRF5_SDK_17.1.0_ddde560__external__segger_rtt__SEGGER_RTT.c.selected.o",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-rtt-selected-write-final/r1/r1-application/vendor-cache__r1__nRF5_SDK_17.1.0_ddde560__external__segger_rtt__SEGGER_RTT.c.o"
+    ],
+    "returncode": 0,
+    "log": ""
+  },
+  "original_definitions": [
+    "SEGGER_RTT_AllocDownBuffer",
+    "SEGGER_RTT_AllocUpBuffer",
+    "SEGGER_RTT_ConfigDownBuffer",
+    "SEGGER_RTT_ConfigUpBuffer",
+    "SEGGER_RTT_GetKey",
+    "SEGGER_RTT_HasData",
+    "SEGGER_RTT_HasKey",
+    "SEGGER_RTT_Init",
+    "SEGGER_RTT_PutChar",
+    "SEGGER_RTT_PutCharSkip",
+    "SEGGER_RTT_PutCharSkipNoLock",
+    "SEGGER_RTT_Read",
+    "SEGGER_RTT_ReadNoLock",
+    "SEGGER_RTT_SetFlagsDownBuffer",
+    "SEGGER_RTT_SetFlagsUpBuffer",
+    "SEGGER_RTT_SetNameDownBuffer",
+    "SEGGER_RTT_SetNameUpBuffer",
+    "SEGGER_RTT_SetTerminal",
+    "SEGGER_RTT_TerminalOut",
+    "SEGGER_RTT_WaitKey",
+    "SEGGER_RTT_Write",
+    "SEGGER_RTT_WriteNoLock",
+    "SEGGER_RTT_WriteSkipNoLock",
+    "SEGGER_RTT_WriteString",
+    "SEGGER_RTT_WriteWithOverwriteNoLock",
+    "_SEGGER_RTT"
+  ],
+  "selected_definitions": [
+    "SEGGER_RTT_WriteNoLock",
+    "_SEGGER_RTT"
+  ],
+  "selected_imports": [
+    "memcpy"
+  ],
+  "application_imports": 202,
+  "bootloader_imports": 34,
+  "tool_tests": {
+    "command": "python3 -m unittest discover -s tools/build -p 'test_*.py'",
+    "passed": 21
+  },
+  "evidence": {
+    "build/goal-r1-rtt-selected-write/stock.elf": "49158e0659fa42863b4a10cf6a4fb2b50939ff7e9ce5f9986f86860d13b02c49",
+    "build/goal-r1-rtt-selected-write/REA.snapshot.json": "395b27f63e64b39e751328b20e3f23aa05ee708b8525406ced5cf790a6370ac4",
+    "build/goal-r1-rtt-selected-write/verify.py": "295c4f02b2ad5d73d27a77b42e414bfc9e528074f8ad8db67ae461afbb8599bd",
+    "build/goal-r1-rtt-selected-write/source.elf": "feec61bdf0a8b9e711ab109e998459e0a97d290b435a829e949505e51cdd789c",
+    "build/goal-r1-rtt-selected-write/tool-tests.log": "b1d256cd41588f9c4de4ba4e9b86d11554fb34438d96c6182c5a289fb32c19f2",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-rtt-selected-write-final/r1/r1-application/vendor-cache__r1__nRF5_SDK_17.1.0_ddde560__external__segger_rtt__SEGGER_RTT.c.o": "ed21360ea89b45205173bb350e344d9ee8df4437edb092f2e3e3bb53b57ccfa6",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-rtt-selected-write-final/r1/r1-application/vendor-cache__r1__nRF5_SDK_17.1.0_ddde560__external__segger_rtt__SEGGER_RTT.c.selected.o": "ffcef131acf936ee58f96cb30f513e5c15293b8f04cf425ab82568ae8cd36347",
+    "build/sources-goal-r1-rtt-selected-write-final/report.json": "f3ed1e59553457a2b65717a3394290e62efb3b4cf123749a06fa7de6aa29ad9d",
+    "tools/build/sources.py": "20aa7a396bf6a048a7123154af095372a50fdecac2825ae801554814d9631eba",
+    "tools/build/test_sources.py": "29b6baef9870d2087f07b8a7d135ca6873d89475d65210b2c19837b24082989b",
+    "r1/src/sources.json": "1320e1e351a2a70a27db0d495a5d02d308ae1223f943cd9655fbc7071b2d9976",
+    "r1/symbols/function-frontier.csv": "9a811250a32f2f6bc24c856facb8c1301ec9f13cb7f6309c3fcb3cdcf48fed81",
+    "tools/build/source-plan.json": "4d46e8c038db79a174a2d719086fd0be80503ca7cdbfc2c51e5ed3d30d293064",
+    "r1/src/application/board/native_segger_rtt_initialize.c": "f5c8724fa98eae4e31b2d715a597accd9ae5330722b2c678974e735845ce080f"
+  },
+  "source_plan_changed": false
+}

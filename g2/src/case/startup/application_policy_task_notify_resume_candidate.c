@@ -7,7 +7,7 @@ extern void case_policy_task_list_insert(uint32_t list,uint32_t link); /* 0xbfe2
 static uint32_t rd(uint32_t a){return *(volatile uint32_t *)(uintptr_t)a;}
 static void wr(uint32_t a,uint32_t v){*(volatile uint32_t *)(uintptr_t)a=v;}
 static __attribute__((noreturn)) void native_fault(void)
-{__asm__ volatile("cpsid i\n1: b 1b");__builtin_unreachable();}
+{__asm__ volatile("cpsid i");for(;;){}}
 uint32_t case_policy_task_notify_resume(uint32_t task)
 {
     if(task==0u)return 0u;
@@ -26,3 +26,7 @@ uint32_t case_policy_task_notify_resume(uint32_t task)
     case_policy_task_list_insert(0x20000ff4u+20u*inherited,task+4u);
     return 1u;
 }
+/* Dedup (0x0800cb38): case_kernel_mutex_release (was legacy-default/kernel_task_list_candidates.c). */
+__typeof__(case_policy_task_notify_resume) case_kernel_mutex_release __attribute__((alias("case_policy_task_notify_resume")));
+/* Dedup (0x0800cb38): case_disinherit (was scheduler-list/disinherit.c). */
+__typeof__(case_policy_task_notify_resume) case_disinherit __attribute__((alias("case_policy_task_notify_resume")));

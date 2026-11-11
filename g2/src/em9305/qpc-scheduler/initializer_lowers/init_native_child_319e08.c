@@ -1,106 +1,44 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_319e08\n"
-".type opencfw_em9305_child_319e08,@function\n"
-"opencfw_em9305_child_319e08:\n"
-"L319e08:\n"
-"enter_s [r13,blink]\n"
-"L319e0a:\n"
-"mov_s r13,r0\n"
-"L319e0c:\n"
-"bl.d opencfw_em9305_common_request_30455c\n"
-"L319e10:\n"
-"mov_s r0,1\n"
-"L319e12:\n"
-"ld r2,[0x805cbc]\n"
-"L319e1a:\n"
-"mov_s r0,r13\n"
-"L319e1c:\n"
-"add r3,r13,0x8d6\n"
-"L319e24:\n"
-"mov_s r1,0\n"
-"L319e26:\n"
-"ldb_s r12,[r2,0x8]\n"
-"L319e28:\n"
-"add r0,r0,826\n"
-"L319e2c:\n"
-"stb_s r1,[r3,0]\n"
-"L319e2e:\n"
-"stb r1,[r3,-2]\n"
-"L319e32:\n"
-"st.as r1,[r13,207]\n"
-"L319e36:\n"
-"stb_s r1,[r0,0]\n"
-"L319e38:\n"
-"stb r1,[r0,-1]\n"
-"L319e3c:\n"
-"stb r12,[r0,-2]\n"
-"L319e40:\n"
-"ld r1,[r2,0x4]\n"
-"L319e42:\n"
-"bl.d opencfw_em9305_child_32a780\n"
-"L319e46:\n"
-"mov_s r0,r13\n"
-"L319e48:\n"
-"mov_s r1,r0\n"
-"L319e4a:\n"
-"breq_s r0,0,L319e5c\n"
-"L319e4c:\n"
-"bl.d opencfw_em9305_command_rows_status_30e7ac\n"
-"L319e50:\n"
-"ldb_s r0,[r13,0x1]\n"
-"L319e52:\n"
-"mov_s r1,4\n"
-"L319e54:\n"
-"bl.d opencfw_em9305_child_325a40\n"
-"L319e58:\n"
-"mov_s r0,r13\n"
-"L319e5a:\n"
-"leave_s [r13,blink,pcl]\n"
-"L319e5c:\n"
-"mov_s r2,0x805a72\n"
-"L319e62:\n"
-"ldb r0,[r13,59]\n"
-"L319e66:\n"
-"ldb_s r1,[r2,0]\n"
-"L319e68:\n"
-"cmp_s r0,0\n"
-"L319e6a:\n"
-"add_s r0,r1,0x1\n"
-"L319e6c:\n"
-"stb_s r0,[r2,0]\n"
-"L319e6e:\n"
-"beq_s L319e74\n"
-"L319e70:\n"
-"bl opencfw_em9305_init_secondary_count_up_30e4cc\n"
-"L319e74:\n"
-"ld r0,[0x805cbc]\n"
-"L319e7c:\n"
-"ld r2,[r0,0x4]\n"
-"L319e7e:\n"
-"breq_s r2,0,L319e94\n"
-"L319e80:\n"
-"ld_s r1,[r13,0x24]\n"
-"L319e82:\n"
-"mov_s r0,r13\n"
-"L319e84:\n"
-"add r0,r0,808\n"
-"L319e88:\n"
-"divu r1,r1,1000\n"
-"L319e8c:\n"
-"sub_s r1,r2,r1\n"
-"L319e8e:\n"
-"bl.d opencfw_em9305_wsf_timer_start_ms\n"
-"L319e92:\n"
-"sub_s r1,r1,0xa\n"
-"L319e94:\n"
-"ldb_s r0,[r13,0x1]\n"
-"L319e96:\n"
-"bl.d opencfw_em9305_command_rows_status_30e7ac\n"
-"L319e9a:\n"
-"mov_s r1,0\n"
-"L319e9c:\n"
-"leave_s [r13,blink,pcl]\n"
-".size opencfw_em9305_child_319e08,.-opencfw_em9305_child_319e08\n"
-);
+#include <stdint.h>
+
+/* Native 0x319e08..0x319e9e: (re)start a connection's procedure state.
+ * Requests common resource 1, clears the procedure bytes (+825..+828,
+ * +2260, +2262), loads +824 from the config at 0x805cbc and asks 32a780
+ * to start with the config timeout. A failure status is reported and
+ * forwarded through 325a40 (event 4). On success the started counter
+ * (0x805a72) is bumped, the secondary count raised when +59 is set, the
+ * supervision timer at +808 armed (timeout - interval/1000 - 10 ms) and
+ * success reported. */
+extern uint32_t opencfw_em9305_common_request_30455c(uint32_t index);
+extern uint32_t opencfw_em9305_child_32a780(uintptr_t record, uint32_t timeout);
+extern uint32_t opencfw_em9305_command_rows_status_30e7ac(uint32_t handle, uint32_t status);
+extern uint32_t opencfw_em9305_child_325a40(uintptr_t record, uint32_t status);
+extern uint32_t opencfw_em9305_init_secondary_count_up_30e4cc(void);
+extern uint32_t opencfw_em9305_wsf_timer_start_ms(uintptr_t timer, uint32_t milliseconds);
+
+uint32_t opencfw_em9305_child_319e08(uintptr_t record)
+{
+    (void)opencfw_em9305_common_request_30455c(1u);
+    uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cbcu;
+    uint32_t value=*(volatile uint8_t *)(config+8u);
+    *(volatile uint8_t *)(record+2262u)=0u;
+    *(volatile uint8_t *)(record+2260u)=0u;
+    *(volatile uint32_t *)(record+828u)=0u;
+    *(volatile uint8_t *)(record+826u)=0u;
+    *(volatile uint8_t *)(record+825u)=0u;
+    *(volatile uint8_t *)(record+824u)=(uint8_t)value;
+    uint32_t status=opencfw_em9305_child_32a780(record,*(volatile uint32_t *)(config+4u));
+    if(status!=0u){
+        (void)opencfw_em9305_command_rows_status_30e7ac(*(volatile uint8_t *)(record+1u),status);
+        return opencfw_em9305_child_325a40(record,4u);
+    }
+    volatile uint8_t *started=(volatile uint8_t *)(uintptr_t)0x805a72u;
+    uint32_t secondary=*(volatile uint8_t *)(record+59u);
+    *started=(uint8_t)(*started+1u);
+    if(secondary!=0u)(void)opencfw_em9305_init_secondary_count_up_30e4cc();
+    uint32_t timeout=*(volatile uint32_t *)(*(volatile uint32_t *)(uintptr_t)0x805cbcu+4u);
+    if(timeout!=0u){
+        uint32_t interval=*(volatile uint32_t *)(record+36u);
+        (void)opencfw_em9305_wsf_timer_start_ms(record+808u,timeout-interval/1000u-10u);
+    }
+    return opencfw_em9305_command_rows_status_30e7ac(*(volatile uint8_t *)(record+1u),0u);
+}

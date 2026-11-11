@@ -1,0 +1,248 @@
+{
+  "schema_version": 1,
+  "report": "build/sources-goal-r1-sdk-svc/report.json",
+  "report_sha256": "97ea37163daf0f031cf3ec4ef669f34a4583f23e777b0627b536e108f96a7ef4",
+  "manifest_sha256": "2d30939bfb6dbd5384577abf7865fd21ae0156a26706da440a98e07479ca0316",
+  "stock_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "sources": [
+    {
+      "source": "r1/src/application/board/native_advertising_configuration.c",
+      "source_sha256": "8b0a6826dcb91e6e851750698b60ffa99b8e854b0be99b80c4aba414b0542e14",
+      "object_sha256": "dda77fb81bdcaf80c407cf7c67a35aad10cc674428c41874bb25563e97f9f442",
+      "link": true
+    },
+    {
+      "source": "r1/src/application/sdk/nordic_gap_address.c",
+      "source_sha256": "67bdafbfd3ba8d78b3c6d3d877170c7aeae7c853daef1af13a9f4eeacc986bd5",
+      "object_sha256": "65fd5bacedebf9a1f937382fc978b478d0c0ec7191be2868a2c7af23d057dd8a",
+      "link": true
+    }
+  ],
+  "verification": {
+    "cases": 36,
+    "passed": 36,
+    "gateway_bytes": "6ddf7047",
+    "advertising_other_allocated_sections_unchanged": true,
+    "advertising_other_relocations_unchanged": true,
+    "removed_owner_sections": [
+      ".text.r1_advertising_controller_address_get",
+      ".ARM.exidx.text.r1_advertising_controller_address_get"
+    ],
+    "composed_imports_unchanged": true
+  },
+  "rea": {
+    "evidence_id": "ev_0dea15819bb40b532816645a5cdd03dde23f25c5b4f5600032945b4c87eee852",
+    "analysis_profile": {
+      "provider": {
+        "id": "ghidra",
+        "name": "Ghidra",
+        "version": "12.1.4"
+      },
+      "parameters": {
+        "target_kind": "executable",
+        "target_format": "elf",
+        "architecture": "arm",
+        "available_architectures": [
+          "arm"
+        ],
+        "import_mode": "ephemeral-source-immutable",
+        "annotation_policy": "atomic-function-entry-metadata-v1",
+        "load_image_observations": "source-mappings-entry-context-v2",
+        "function_body_evidence": "complete-inclusive-ranges-v1",
+        "function_references": "complete-body-and-entry-reference-manager-v2",
+        "call_relationship_coverage": "function-body-call-coverage-v5",
+        "function_dossier_coverage": "observed-facets-and-call-relationships-v1",
+        "string_inventory_evidence": "defined-data-coverage-v1",
+        "location_resolution": "explicit-address-exact-entry-symbol-first-v3",
+        "procedure_file_offset_resolution": "address-first-unique-target-source-mapping-v2",
+        "instruction_flow_evidence": "decoded-return-pcode-v1",
+        "instruction_references": "exact-address-incoming-v1",
+        "function_boundary_observations": "ghidra-function-boundary-limitations-v3",
+        "no_return_repair": "returning-imports-decoded-return-v2",
+        "process_launch": "inspected-jvm-launch-support-v1",
+        "jump_table_evidence": "typed-case-default-blocks-v1",
+        "decompiler_jump_loads": true,
+        "loader": "auto-from-header",
+        "language_id": "auto-from-header",
+        "compiler_spec_id": "auto-default",
+        "analyzer_preset": "ghidra-default"
+      },
+      "digest": "7e46711069eea041af1b9b99e34115c13332795e5cda76e584a722f529ec70de"
+    },
+    "limitations": [
+      "The session serves operations only after Ghidra reports default auto-analysis complete; incomplete analysis does not expose partial results.",
+      "The imported Program and temporary project are ephemeral and deleted on close. Annotation operations edit session database metadata; original executable bytes are never written.",
+      "Cancelling an active Ghidra request terminates its ephemeral database and discards session annotations. The selected target remains open; the next provider query imports the original artifact again.",
+      "Default-space addresses use lowercase 0x-prefixed hexadecimal; other address spaces use <percent-encoded-space>:0x<hex>.",
+      "References cover the complete Ghidra function-body AddressSet and exact entry. Dossier incoming edges omit sources owned by that function; procedure_references also retains those internal edges.",
+      "The dossier combines Ghidra FunctionManager, Listing, ReferenceManager, BasicBlockModel, and decompiler observations; provider-specific pseudocode and assembly are not cross-provider text invariants.",
+      "Resolved reference metadata identifies computed, indirect, external, call, jump, and data edges; unresolved targetless flows remain unknown, and function classifications distinguish thunks and externals.",
+      "Synthetic Ghidra entry-point references without actionable memory sources are omitted.",
+      "The Java bridge serializes one function request per Program and lets each decompilation run until it completes or the caller cancels.",
+      "macOS sessions require a matching executable Ghidra native decompiler; REA checks for it but does not build native components or change Gatekeeper quarantine state."
+    ],
+    "procedure": {
+      "address": "0x48a28",
+      "name": "stock_advertising_config",
+      "classification": {
+        "external": false,
+        "thunk": false,
+        "thunk_target": null,
+        "provenance": "ghidra-function-manager"
+      },
+      "body": {
+        "available": true,
+        "provenance": "ghidra-function-body-address-set",
+        "ranges": [
+          {
+            "start": "0x48a28",
+            "end": "0x48abb"
+          }
+        ],
+        "total_bytes": 148,
+        "span_bytes": 148,
+        "non_contiguous": false,
+        "contains_entry": true
+      },
+      "signature": "undefined stock_advertising_config()",
+      "locals": [
+        {
+          "description": "undefined1 local_14 @ Stack[-0x14]:1",
+          "provenance": "ghidra-function-database"
+        },
+        {
+          "description": "undefined4 local_18 @ Stack[-0x18]:4",
+          "provenance": "ghidra-function-database"
+        },
+        {
+          "description": "undefined2 local_1c @ Stack[-0x1c]:2",
+          "provenance": "ghidra-function-database"
+        },
+        {
+          "description": "undefined2 local_20 @ Stack[-0x20]:2",
+          "provenance": "ghidra-function-database"
+        },
+        {
+          "description": "undefined4 local_24 @ Stack[-0x24]:4",
+          "provenance": "ghidra-function-database"
+        },
+        {
+          "description": "undefined2 local_27 @ Stack[-0x27]:2",
+          "provenance": "ghidra-function-database"
+        },
+        {
+          "description": "undefined4 local_2b @ Stack[-0x2b]:4",
+          "provenance": "ghidra-function-database"
+        },
+        {
+          "description": "undefined4 local_34 @ Stack[-0x34]:4",
+          "provenance": "ghidra-function-database"
+        },
+        {
+          "description": "undefined4 local_78 @ Stack[-0x78]:4",
+          "provenance": "ghidra-function-database"
+        },
+        {
+          "description": "undefined4 local_7c @ Stack[-0x7c]:4",
+          "provenance": "ghidra-function-database"
+        },
+        {
+          "description": "undefined1 local_d5 @ Stack[-0xd5]:1",
+          "provenance": "ghidra-function-database"
+        },
+        {
+          "description": "undefined1 local_d6 @ Stack[-0xd6]:1",
+          "provenance": "ghidra-function-database"
+        },
+        {
+          "description": "undefined1 local_d8 @ Stack[-0xd8]:1",
+          "provenance": "ghidra-function-database"
+        }
+      ]
+    },
+    "assembly": [
+      "0x48a28: push {r4,r5,lr}",
+      "0x48a2a: sub sp, #0xcc",
+      "0x48a2c: movs r1, #0xac",
+      "0x48a2e: mov r0, sp",
+      "0x48a30: bl 0x000277aa",
+      "0x48a34: movs r0, #0x2",
+      "0x48a36: strb.w r0, [sp,#0x0]",
+      "0x48a3a: movs r0, #0x1",
+      "0x48a3c: strb.w r0, [sp,#0x2]",
+      "0x48a40: movs r0, #0x6",
+      "0x48a42: strb.w r0, [sp,#0x3]",
+      "0x48a46: ldr r0, [0x00048abc]",
+      "0x48a48: ldr r0, [r0,#0x0]",
+      "0x48a4a: str r0, [sp,#0xb4]",
+      "0x48a4c: add r0, sp,#0xb4",
+      "0x48a4e: str r0, [sp,#0x5c]",
+      "0x48a50: add r0, sp,#0xac",
+      "0x48a52: svc 0x6d",
+      "0x48a54: cbz r0, 0x00048a5a",
+      "0x48a56: bl 0x0004e5bc",
+      "0x48a5a: ldr r5, [0x00048ac0]",
+      "0x48a5c: ldr.w r1, [sp,#0xad]",
+      "0x48a60: movs r4, #0x6",
+      "0x48a62: str r1, [r5,#0x0]",
+      "0x48a64: ldrh.w r1, [sp,#0xb1]",
+      "0x48a68: strh r1, [r5,#0x4]",
+      "0x48a6a: movs r1, #0x0",
+      "0x48a6c: strb.w r1, [sp,#0xc4]",
+      "0x48a70: add r1, sp,#0xc4",
+      "0x48a72: adds r0, r5, #0x6",
+      "0x48a74: bl 0x0007ba78",
+      "0x48a78: ldrb.w r0, [sp,#0xc4]",
+      "0x48a7c: cmp r0, #0xf",
+      "0x48a7e: bcc 0x00048a82",
+      "0x48a80: movs r4, #0x15",
+      "0x48a82: movw r0, #0x5245",
+      "0x48a86: strh.w r0, [sp,#0xb8]",
+      "0x48a8a: add r0, sp,#0xb8",
+      "0x48a8c: str r0, [sp,#0x60]",
+      "0x48a8e: strh.w r4, [sp,#0xbc]",
+      "0x48a92: str r5, [sp,#0xc0]",
+      "0x48a94: add r0, sp,#0x78",
+      "0x48a96: bl 0x000489e6",
+      "0x48a9a: ldr r0, [0x00048ac4]",
+      "0x48a9c: str r0, [sp,#0xa4]",
+      "0x48a9e: ldr r0, [0x00048ac0]",
+      "0x48aa0: mov r1, sp",
+      "0x48aa2: adds r0, #0x60",
+      "0x48aa4: bl 0x00051716",
+      "0x48aa8: cbz r0, 0x00048aae",
+      "0x48aaa: bl 0x0004e5bc",
+      "0x48aae: ldr r0, [0x00048ac0]",
+      "0x48ab0: movs r1, #0x1",
+      "0x48ab2: adds r0, #0x60",
+      "0x48ab4: bl 0x00051710",
+      "0x48ab8: add sp, #0xcc",
+      "0x48aba: pop {r4,r5,pc}"
+    ],
+    "pseudocode": "\n/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */\n\nvoid stock_advertising_config(void)\n\n{\n  int iVar1;\n  undefined2 uVar2;\n  undefined1 local_d8 [2];\n  undefined1 local_d6;\n  undefined1 local_d5;\n  undefined4 *local_7c;\n  undefined2 *local_78;\n  undefined1 auStack_60 [44];\n  undefined1 *local_34;\n  undefined4 local_2b;\n  undefined2 local_27;\n  undefined4 local_24;\n  undefined2 local_20 [2];\n  undefined2 local_1c;\n  undefined1 *local_18;\n  byte local_14 [8];\n  \n  FUN_000277aa(local_d8,0xac);\n  local_d8[0] = 2;\n  local_d6 = 1;\n  local_d5 = 6;\n  local_24 = 0x280018;\n  local_7c = &local_24;\n  software_interrupt(0x6d);\n  if (&stack0x00000000 != (undefined1 *)0x2c) {\n    FUN_0004e5bc();\n  }\n  uVar2 = 6;\n  _DAT_20007e04 = local_2b;\n  _DAT_20007e08 = local_27;\n  local_14[0] = 0;\n  FUN_0007ba78(0x20007e0a,local_14);\n  if (0xe < local_14[0]) {\n    uVar2 = 0x15;\n  }\n  local_20[0] = 0x5245;\n  local_78 = local_20;\n  local_18 = &DAT_20007e04;\n  local_1c = uVar2;\n  FUN_000489e6(auStack_60);\n  local_34 = &LAB_0007cbc8_1;\n  iVar1 = FUN_00051716(0x20007e64,local_d8);\n  if (iVar1 != 0) {\n    FUN_0004e5bc();\n  }\n  FUN_00051710(0x20007e64,1);\n  return;\n}\n\n"
+  },
+  "composition": {
+    "compiled_units": 562,
+    "application_units": 488,
+    "bootloader_units": 74,
+    "application_unresolved": 241,
+    "bootloader_unresolved": 34
+  },
+  "hashes": {
+    "vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/softdevice/s140/headers/ble_gap.h": "73f3bf6bdbb94b05ab1f4be0df5e97d384dd95abeb32f81b09ced58e441dde19",
+    "vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/softdevice/s140/headers/nrf_svc.h": "d8deffc6ca5924e53543f86772e8bc4625ab08e2c7d0760d7d4ae90dc4a3a65e",
+    "build/goal-r1-sdk-svc/verify.py": "9753f5aca2e7ce463303f9bb7bdcda7a5c5c967de5524462b36a903a9772101d",
+    "build/goal-r1-sdk-svc/verification.json": "1eb37ccc8788b429b71db7d166759b118121defe11ddb1e5095184d9ef5519dc",
+    "build/goal-r1-sdk-svc/before.elf": "cc9203e9e2db7bad73b443112948604b65845ceb6e3e65b29cea7f077e9f615a",
+    "build/goal-r1-sdk-svc/sdk.elf": "af31958b7450c9456a4099f9f386c3a76c83a69ec8b5329a487ffe29a2c5e3f2",
+    "build/goal-r1-sdk-svc/stock.elf": "22845d486cba0745141934ed7226861ee0dd7029a7d3d79fdff44c20dd94767a",
+    "build/goal-r1-sdk-svc/rea-snapshot.json": "59fcfbbcc425413878c0792d7c1559a6316252e40ac753abbbb1c271809f4883"
+  },
+  "limitations": [
+    "The unchanged four-byte gateway is compared to the prior reconstructed wrapper; only its SVC instruction is compared to the inline native call site at 0x48a52.",
+    "SVC exceptions are controlled mocks; no resident SoftDevice implementation or real radio execution was tested.",
+    "The product translation unit has no handwritten assembly; the authenticated SDK macro still emits the required SVC assembly.",
+    "Whole advertising configuration instruction identity is not established by this unchanged-section comparison.",
+    "No source-plan qualification, workflow gate, full source completeness or whole-image byte identity is established."
+  ]
+}

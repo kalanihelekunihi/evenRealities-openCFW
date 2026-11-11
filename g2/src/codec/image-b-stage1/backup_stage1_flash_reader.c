@@ -24,7 +24,7 @@ uint32_t gx8002_image_b_stage1_flash_read_10000fdc(
 {
     uint8_t *cursor = destination;
     gx8002_image_b_stage1_clock_gate_100001f8(13u, 1u);
-    if (gx8002_stage1_flash_jedec !=
+    if (gx8002_stage1_flash_jedec ==
         UINT32_C(0x00ffffff))
         gx8002_image_b_stage1_flash_initialize_100010e2();
     uint8_t status;

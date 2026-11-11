@@ -1,0 +1,174 @@
+{
+  "cases": 10240,
+  "passed": 10240,
+  "failures": [],
+  "per_entry": {
+    "r1_lis_native_power_mode_set": 5120,
+    "r1_lis_reg17_bit6_enable": 5120
+  },
+  "entries": [
+    {
+      "name": "r1_lis_native_power_mode_set",
+      "body": "r1_lis_power_body",
+      "entry": 481114,
+      "registers": [
+        32,
+        37
+      ],
+      "frame": 24,
+      "words": 2,
+      "size": 106,
+      "stock_body_bytes": 106,
+      "bridge_bytes": 10,
+      "c_body_bytes": 112,
+      "native_span_sha256": "3c18aa0b4ebacb17a496be7f31a10d98e6778e1fbdb9b2f499270633711868d4"
+    },
+    {
+      "name": "r1_lis_reg17_bit6_enable",
+      "body": "r1_lis_reg17_body",
+      "entry": 479626,
+      "registers": [
+        23
+      ],
+      "frame": 16,
+      "words": 1,
+      "size": 44,
+      "stock_body_bytes": 44,
+      "bridge_bytes": 10,
+      "c_body_bytes": 44,
+      "native_span_sha256": "cf988546322b43367782ca367a4306a6a9d6aec809f6395f7709c9d196df3853"
+    }
+  ],
+  "callback_stack_depth_pairs": [
+    [
+      [
+        -24
+      ],
+      [
+        -48
+      ]
+    ],
+    [
+      [
+        -24,
+        -24
+      ],
+      [
+        -48,
+        -48
+      ]
+    ],
+    [
+      [
+        -24,
+        -24,
+        -24,
+        -24
+      ],
+      [
+        -48,
+        -48,
+        -48,
+        -48
+      ]
+    ],
+    [
+      [
+        -16
+      ],
+      [
+        -32
+      ]
+    ],
+    [
+      [
+        -16,
+        -16
+      ],
+      [
+        -32,
+        -16
+      ]
+    ]
+  ],
+  "unchanged_functions": [
+    "lis2dw12_block_data_update_set",
+    "lis2dw12_data_rate_set",
+    "lis2dw12_fifo_data_level_get",
+    "lis2dw12_fifo_mode_set",
+    "lis2dw12_fifo_watermark_set",
+    "lis2dw12_filter_bandwidth_set",
+    "lis2dw12_filter_path_set",
+    "lis2dw12_full_scale_set",
+    "lis2dw12_reset_get",
+    "lis2dw12_reset_set",
+    "lis2dw12_tap_detection_on_x_set",
+    "lis2dw12_tap_detection_on_y_set",
+    "lis2dw12_tap_detection_on_z_set",
+    "lis2dw12_tap_dur_set",
+    "lis2dw12_tap_mode_set",
+    "lis2dw12_tap_quiet_set",
+    "lis2dw12_tap_shock_set",
+    "lis2dw12_tap_threshold_x_set",
+    "lis2dw12_tap_threshold_y_set",
+    "lis2dw12_tap_threshold_z_set",
+    "r1_lis_byte_get_body",
+    "r1_lis_byte_set_body"
+  ],
+  "integrated_sources": [
+    "r1/src/application/runtime/native_lis_call_frames.c",
+    "r1/src/application/runtime/native_lis_fifo.c",
+    "r1/src/application/runtime/native_lis_registers.c",
+    "r1/src/application/runtime/native_lis_setup.c"
+  ],
+  "report": "build/sources-goal-r1-lis-power/report.json",
+  "report_sha256": "25208e5585f5a9ca54b4b6072e043cc2684dcbd1960f3dc2660c2083b20ddfd8",
+  "source_sha256": "cb2287952b96bda845d88a4973ca131947a6845ee0c3bd45238c22bbdf95e76c",
+  "manifest_sha256": "66d92d8b694bf69fcdbf6dd7aed54ce8dac0a70598cde4f64bdf7802ed03d949",
+  "stock_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "rea": [
+    {
+      "completed": true,
+      "procedure": "0x7575a",
+      "path": "build/goal-r1-lis-power/REA-0x7575a.json",
+      "sha256": "bcf3a04d61a5435a008b418077f0ba34c3cbc09e1ab31576f6c5615d179ea2a3"
+    },
+    {
+      "completed": true,
+      "procedure": "0x7518a",
+      "path": "build/goal-r1-lis-power/REA-0x7518a.json",
+      "sha256": "a9e76d24cae98bc879511d4929d8746b6ba1233140292b6e2b4fdaf60a0d06ec"
+    }
+  ],
+  "probe_artifacts": {
+    "build/goal-r1-lis-power/verify.py": "269b083b9a613d7e35e8b9521fbaa215d91820d03dd0ea4a9de8841c24d8e234",
+    "build/goal-r1-lis-power/frames-before.c": "0e9448eb71b1698455c9906e2d41c8261dc9c6e01845f20c6f2a4b4863989073",
+    "build/goal-r1-lis-power/setup-before.c": "cb8cdbac65df4c1cff0dc94c0aefb3870b57d889d8dd5bafea3dcc54ae4e24f9",
+    "build/goal-r1-lis-power/manifest-before.json": "be76bf00509f1551b53a08edbc5515ed3a3dcb9b1721ff4481fdf60b77d82eb8",
+    "build/goal-r1-lis-power/source.elf": "456d93b5a608929f17872a076f4a6db66c10f5d333de70bdc107d5f3b0a792bc",
+    "build/goal-r1-lis-power/stock.elf": "f2c94bda87e6ee1760eb6aafaebc860641d3b5efb55c6d4094ce80ffbc560c0f",
+    "build/goal-r1-lis-power/rea-snapshot.json": "a6df88bfd173a2207e7c7ba34f9e0496918b2cb21ded0bc5ac172b89d3800eb5"
+  },
+  "integrated_source_sha256": {
+    "r1/src/application/runtime/native_lis_call_frames.c": "cb2287952b96bda845d88a4973ca131947a6845ee0c3bd45238c22bbdf95e76c",
+    "r1/src/application/runtime/native_lis_fifo.c": "d7c14b45179e6c9a46a6641074f3fabde3ee4df3701fc64f50333a5911133314",
+    "r1/src/application/runtime/native_lis_registers.c": "630862b4a317e123795a77ff2b8a8b92a02877fa0f7c62e9fd89d658790a0a78",
+    "r1/src/application/runtime/native_lis_setup.c": "d6234fc527e1c8e560434d280c045706ba3936d1b6b2ee70cf926080b088d7a4"
+  },
+  "composition_change": {
+    "activated_source": "r1/src/application/runtime/native_lis_setup.c",
+    "removed_duplicate_public_bridges": [
+      "lis2dw12_data_rate_set",
+      "lis2dw12_filter_path_set",
+      "r1_lis_native_power_mode_set",
+      "r1_lis_reg17_bit6_enable"
+    ],
+    "existing_c_body_instruction_bytes_unchanged": true
+  },
+  "limits": [
+    "Ten-byte frame bridges retain native scratch addresses and R3 restoration; power also restores R2. These are partial C extractions.",
+    "Existing C bodies and actual transport wrappers execute; final bus callbacks are modeled with caller-saved register and flag clobbers.",
+    "Native scratch addresses and eight-byte callback alignment match; C bodies add callback frame depth.",
+    "No physical power/filter/interrupt behavior, sensor timing, complete fault-state equivalence, final link, provider qualification or byte identity claim."
+  ]
+}

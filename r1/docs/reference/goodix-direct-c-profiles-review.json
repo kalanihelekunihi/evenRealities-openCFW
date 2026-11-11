@@ -1,0 +1,110 @@
+{
+  "passed": 240,
+  "executions": 480,
+  "call_order_and_full_arguments": true,
+  "tail_boundaries_original_sp_lr": true,
+  "identity_low_byte_preserved": true,
+  "source_sizes": {
+    "r1_goodix_stop_stock_profiles": 34,
+    "r1_goodix_start_profile_4000": 38,
+    "r1_goodix_start_profile_2000": 38,
+    "r1_goodix_identity_probe": 48,
+    "r1_goodix_sampling_mode_glue": 20
+  },
+  "source_report": "build/sources-goal-r1-goodix-direct-profiles/report.json",
+  "limitations": [
+    "Hardware/SDK/RTOS boundaries modeled; actual native/C communication glue executes in identity test",
+    "Private frames and caller-clobbered registers/flags excluded",
+    "Concurrency, physical power/reset/timing and byte qualification unverified"
+  ],
+  "initialize_regression": {
+    "passed": 4096,
+    "executions": 8192,
+    "ten_word_counter_clear": true,
+    "live_log_queries": true,
+    "cleanup_and_status_compared": true,
+    "source_size": 164,
+    "source_report": "build/sources-goal-r1-goodix-direct-profiles/report.json",
+    "limitations": [
+      "Hardware/SDK/logging/memory-clear boundaries modeled",
+      "Private frames and caller-clobbered registers/flags excluded",
+      "Concurrency, actual logs, physical reset/bus/timing and byte qualification unverified"
+    ]
+  },
+  "acquire_regression": {
+    "passed": 2080,
+    "executions": 4160,
+    "ordered_state_accesses": true,
+    "startup_calls_compared": true,
+    "callback_mutations": true,
+    "source_size": 238,
+    "source_report": "build/sources-goal-r1-goodix-direct-profiles/report.json",
+    "limitations": [
+      "Seeded counts/mask/callback; initial startup state unverified",
+      "Hardware/SDK calls modeled; private frames and caller-clobbered registers/flags excluded",
+      "Concurrency, physical power/reset behavior and byte qualification unverified"
+    ]
+  },
+  "release_regression": {
+    "passed": 2080,
+    "executions": 4160,
+    "ordered_state_accesses": true,
+    "shutdown_calls_compared": true,
+    "callback_mutations": true,
+    "source_size": 196,
+    "source_report": "build/sources-goal-r1-goodix-direct-profiles/report.json",
+    "limitations": [
+      "Seeded counts/mask/callback; initialization and acquisition unverified",
+      "Hardware/SDK calls modeled; private frames and caller-clobbered registers/flags excluded",
+      "Concurrency, physical power/reset behavior and byte qualification unverified"
+    ]
+  },
+  "profile_regression": {
+    "passed": 192,
+    "executions": 384,
+    "setup_for_invalid_selectors": true,
+    "rtos_delay_arguments": true,
+    "tail_start_original_sp_lr": true,
+    "source_size": 62,
+    "source_report": "build/sources-goal-r1-goodix-direct-profiles/report.json",
+    "limitations": [
+      "Hardware/SDK/RTOS calls modeled; private frames and caller-clobbered registers/flags excluded",
+      "Actual scheduling, power, bus, sampling and byte qualification unverified"
+    ]
+  },
+  "negative_control": {
+    "mutation": "Invert communication result condition to presumed success semantics",
+    "rejected": true,
+    "counterexample": "Communication result zero gives stock identity byte 0xa5; variant gives zero",
+    "stderr": "arm-none-eabi-ld: warning: (Gh3x2xDemoStopSampling): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-goodix-direct-profiles/bad.o\narm-none-eabi-ld: warning: (Gh3x2xDemoStopSampling): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-goodix-direct-profiles/bad.o\narm-none-eabi-ld: warning: (r1_goodix_i2c_close): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-goodix-direct-profiles/bad.o\narm-none-eabi-ld: warning: (r1_goodix_transport_release): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-goodix-direct-profiles/bad.o\narm-none-eabi-ld: warning: (r1_goodix_power_disable): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-goodix-direct-profiles/bad.o\narm-none-eabi-ld: warning: (r1_goodix_power_enable): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-goodix-direct-profiles/bad.o\narm-none-eabi-ld: warning: (r1_goodix_transport_prepare): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-goodix-direct-profiles/bad.o\narm-none-eabi-ld: warning: (r1_goodix_i2c_open): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-goodix-direct-profiles/bad.o\narm-none-eabi-ld: warning: (osDelay): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-goodix-direct-profiles/bad.o\narm-none-eabi-ld: warning: (Gh3x2xDemoInit): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-goodix-direct-profiles/bad.o\narm-none-eabi-ld: warning: (Gh3x2xDemoStartSamplingWithCfgSwitch): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-goodix-direct-profiles/bad.o\narm-none-eabi-ld: warning: (r1_goodix_power_enable): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-goodix-direct-profiles/bad.o\narm-none-eabi-ld: warning: (r1_goodix_transport_prepare): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-goodix-direct-profiles/bad.o\narm-none-eabi-ld: warning: (r1_goodix_i2c_open): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-goodix-direct-profiles/bad.o\narm-none-eabi-ld: warning: (osDelay): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-goodix-direct-profiles/bad.o\narm-none-eabi-ld: warning: (Gh3x2xDemoInit): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-goodix-direct-profiles/bad.o\narm-none-eabi-ld: warning: (Gh3x2xDemoStartSamplingWithCfgSwitch): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-goodix-direct-profiles/bad.o\narm-none-eabi-ld: warning: (GH3X2X_CommunicateConfirm): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-goodix-direct-profiles/bad.o\narm-none-eabi-ld: warning: (r1_goodix_power_enable): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-goodix-direct-profiles/bad.o\narm-none-eabi-ld: warning: (r1_goodix_transport_prepare): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-goodix-direct-profiles/bad.o\narm-none-eabi-ld: warning: (nrf_delay_ms): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-goodix-direct-profiles/bad.o\narm-none-eabi-ld: warning: (r1_goodix_i2c_open): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-goodix-direct-profiles/bad.o\narm-none-eabi-ld: warning: (GH3X2X_CommunicateConfirm): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-goodix-direct-profiles/bad.o\narm-none-eabi-ld: warning: (r1_goodix_i2c_close): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-goodix-direct-profiles/bad.o\narm-none-eabi-ld: warning: (r1_goodix_transport_release): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-goodix-direct-profiles/bad.o\narm-none-eabi-ld: warning: (r1_goodix_power_disable): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-goodix-direct-profiles/bad.o\nTraceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-goodix-direct-profiles/reject-result-inversion.py\", line 51, in <module>\n    for c in cases:assert a(*c)==b(*c),c\n                                 ~^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-goodix-direct-profiles/reject-result-inversion.py\", line 47, in run\n    if function in [3,4]:assert ret==((0xa5 if function==3 else 0xffffffa5) if result==0 else 0)\n                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+  },
+  "evidence": {
+    "build/goal-r1-goodix-direct-profiles/stock.elf": "51e5ae94a2364dfebbb7cdb7a1819cb953d12fd41ec1b520298f9e25a33f0609",
+    "build/goal-r1-goodix-direct-profiles/REA.snapshot.json": "dee28d76ebd29e7e4e16a704d3d6ead2eb11b250e724c1aea31c5365b163c15a",
+    "build/goal-r1-goodix-direct-profiles/verify.py": "3b16a37d4fc3f5de16a65eed4a92117b4069d1706fd7e9140f876e74ce1fac45",
+    "build/goal-r1-goodix-direct-profiles/source.elf": "0d53637f8fca2692afc84e90b44badfe4bc866f4409e961aa9d5b4f202152c97",
+    "build/goal-r1-goodix-direct-profiles/results.json": "d637eb9f45a09ee9a2740953bd6058e51a37b83f284bc10ab3429c03dea4f07f",
+    "build/goal-r1-goodix-direct-profiles/bad.c": "90c61ab516d6e6991eb8f599b93dca505f1065484f289347b4f3b6273b4d0ad9",
+    "build/goal-r1-goodix-direct-profiles/reject-result-inversion.py": "8cb54857897b63387ea21f805e96a5a6d0f82080e8a823f453baf9e92c315e23",
+    "build/goal-r1-goodix-direct-profiles/negative-result.json": "09638be91902ec0e093c71bdb891cbadd5923be16ecf18da4214f6884d1626ee",
+    "build/goal-r1-goodix-direct-profiles/REA-0x50870.json": "b5db67190c5b46c3eaae15c38f3ace242657df8499c0cffafb7792f9d11d4db0",
+    "build/goal-r1-goodix-direct-profiles/REA-0x50892.json": "a0da4b315007a2d4af8b654e814a132cc5e2a4f944e2dcc9928f1eb738653cdb",
+    "build/goal-r1-goodix-direct-profiles/REA-0x508b6.json": "1246654c57d392f046149f5039d004f140becb1b06ed5481946ae7bfd724eafd",
+    "build/goal-r1-goodix-direct-profiles/REA-0x508da.json": "a17c3f78cecca233685082eed4fdaa4c207b1fc822eddd69457827516b37ebea",
+    "build/goal-r1-goodix-direct-profiles/REA-0x2e734.json": "43aaaa4e077ade74365309c288cb98bef533e35756e9f1a53be46ceb2da0523a",
+    "build/goal-r1-goodix-direct-profiles/initialize/verify.py": "ce712596b6234a6d873689c4adb72a158b53feb99db99464050c0e736e16b828",
+    "build/goal-r1-goodix-direct-profiles/initialize/results.json": "b217cf091c5068e51eb82fb30140c1883c49176f2bcee47bc249f351477f38b1",
+    "build/goal-r1-goodix-direct-profiles/acquire/verify.py": "286e1ec7f7d315899855cf12d07eec0cd7c613709255f73ce8668df3e24e3041",
+    "build/goal-r1-goodix-direct-profiles/acquire/results.json": "f233ea1bea0bf6f7549870380f1ccac415c8adf3b08b8a7da482d160b5a7e839",
+    "build/goal-r1-goodix-direct-profiles/release/verify.py": "5aff299816e892f8b454b96d95a1e1484a45620e0397f4dee84f095d649b8557",
+    "build/goal-r1-goodix-direct-profiles/release/results.json": "78f93416643552b7a815d0195a9f375aab436de3d2405e93e48b8809d09614ab",
+    "build/goal-r1-goodix-direct-profiles/profile/verify.py": "62a589ea6920738c046a9cb491d88e91b254d9b1ecfb16d6df06012708be60c8",
+    "build/goal-r1-goodix-direct-profiles/profile/results.json": "b959db2b9cbe0b228235b4b7d8f389d31d46ac26e074e509f5f80b1335a11af7",
+    "r1/src/application/goodix/stock_client_release.c": "609921a0df3465dd0f877de495a1d4c933ec924a6c4093bbc3b24052421fd9c6",
+    "build/sources-goal-r1-goodix-direct-profiles/report.json": "4b849ff6033651062abb516a272ac6fce1e734161bfc89f6ad164ad78b494f20",
+    "r1/src/sources.json": "1aafa12d094d12d32de7c12874bee69bb8e3a987233cbd4cd9740fc27895a66b",
+    "r1/symbols/function-frontier.csv": "123ad30aceda5dff52c98fa6c45c09b8165c70694b815637d90c0c68ddde8229",
+    "tools/build/source-plan.json": "b056107b9773e0eaac8d64015682a68020b1b3e145310f7d399aaa078bd96e91"
+  },
+  "source_plan_changed": false
+}

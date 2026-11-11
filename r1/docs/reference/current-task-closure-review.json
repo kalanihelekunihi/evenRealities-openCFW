@@ -1,0 +1,80 @@
+{
+  "cases": 1064,
+  "stock_and_source_invocations": 4256,
+  "failures": [],
+  "stock_getter": "0x9879c",
+  "stock_getter_bytes": 6,
+  "source_getter_bytes": 12,
+  "cell": {
+    "stock": "0x2000781c",
+    "probe": "0x1001014",
+    "size": 4,
+    "alignment": 4,
+    "initial_bytes": "00000000",
+    "section": ".r1.rtos.current_tcb"
+  },
+  "consumers": [
+    "r1/src/application/rtos/context-port/selection.c",
+    "r1/src/application/rtos/mutex-tasks/mutex-tasks.c",
+    "r1/src/application/rtos/notification-tasks/notification-tasks.c",
+    "r1/src/application/rtos/scheduler-resume/scheduler.c",
+    "r1/src/application/rtos/scheduler-tick/scheduler-tick.c",
+    "r1/src/application/rtos/task-construction/ready.c",
+    "r1/src/application/rtos/task-termination/termination.c",
+    "r1/src/application/rtos/task-wait/task-wait.c",
+    "r1/src/application/rtos/timer-task-wait/task-wait.c",
+    "r1/src/application/rtos/unordered-event/unordered-event.c",
+    "vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/external/freertos/portable/GCC/nrf52/port.c"
+  ],
+  "owners": [
+    "r1/src/application/rtos/task-count/task-count.c"
+  ],
+  "previous_function_bodies_unchanged": [
+    "uxTaskGetNumberOfTasks",
+    "xTaskGetSchedulerState",
+    "xTaskGetTickCount",
+    "xTaskGetTickCountFromISR"
+  ],
+  "report": "build/sources-goal-r1-current-task/report.json",
+  "report_sha256": "3580a06f28eca73ce8ab5186952bd295c658e4b3d0c1a064a21c6486f00575ae",
+  "source_sha256": "290869e3413ba56e960120b96cc7462cbf340a09b4afa519caa328a129841410",
+  "manifest_sha256": "be76bf00509f1551b53a08edbc5515ed3a3dcb9b1721ff4481fdf60b77d82eb8",
+  "application_imports": 227,
+  "limitations": [
+    "Probe normalizes stock and candidate cell addresses by storage role; final firmware placement is not established.",
+    "Getter tests do not dereference or validate task objects.",
+    "No final firmware link, native byte identity or physical hardware validation."
+  ],
+  "initialization": {
+    "stock_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "decoder_entry": "0x286f4",
+    "compressed_source": "0xc4610",
+    "destination": "0x200064a8",
+    "expanded_bytes": 6492,
+    "compressed_bytes_consumed": 1781,
+    "tokens": 556,
+    "expanded_sha256": "87fdee392022fdbe23dd0daf3e859fb14f3ce26ba3e8403aab56dc9d9a913317",
+    "stock_execution_matches_decoder": true,
+    "guards_unchanged": true,
+    "current_task_word": {
+      "address": "0x2000781c",
+      "bytes": "00000000",
+      "value": 0
+    }
+  },
+  "rea": {
+    "procedure": "0x9879c",
+    "completed": true,
+    "pseudocode": "return _DAT_2000781c;",
+    "evidence_path": "build/goal-r1-current-task/REA.json",
+    "sha256": "2893a9d4db47ca5f22eb954f696e37be6ea0c19a0c9260740dbd11c567cd0b29"
+  },
+  "probe_artifacts": {
+    "build/goal-r1-current-task/verify.py": "4e733e58d4614b02cffb6adc61f74ef656ceb6f7e22a82dc7393bd93e4065616",
+    "build/goal-r1-current-task/initialization.py": "21db2904868f0df6d5909b7d9a5e822ac1558034c5e0d8e0717297eddcf7df52",
+    "build/goal-r1-current-task/source.elf": "92c35bd031d6e4ab31997c98eddc207d7294a75ca4f78e9a9f4a3c3eb11e5185",
+    "build/goal-r1-current-task/stock.elf": "86642978e1d07d662510e1879b28cf14553546fdc1ca1bfff5dc25a7c7dd2d04",
+    "build/goal-r1-current-task/expanded-rw.bin": "87fdee392022fdbe23dd0daf3e859fb14f3ce26ba3e8403aab56dc9d9a913317",
+    "build/goal-r1-current-task/rea-current-task-snapshot.json": "07df88ccbdbaa50cf2199d639f5e8dccf4bd690dca9dfd84d075fad4b661cc5e"
+  }
+}

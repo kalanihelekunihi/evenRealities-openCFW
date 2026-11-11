@@ -1,0 +1,97 @@
+{
+  "report": "build/sources-goal-r1-task-startup-c/report.json",
+  "units": 824,
+  "application_imports": 71,
+  "added_imports": [
+    "r1_ble_io_worker",
+    "r1_touch_io_worker"
+  ],
+  "removed_imports": [],
+  "unresolved_worker_entries": {
+    "r1_ble_io_worker": "0x91f54",
+    "r1_touch_io_worker": "0x927c8"
+  },
+  "verification": {
+    "startup_pairs": 32,
+    "actual_BLE_touch_lifecycle_startup_pairs": 12,
+    "lifecycle_and_fault_pairs": 96
+  },
+  "compiled_defects": [
+    {
+      "defect": "wrong-low-priority",
+      "rejected": true
+    },
+    {
+      "defect": "wrong-final-priority",
+      "rejected": true
+    },
+    {
+      "defect": "truncate-configuration",
+      "rejected": true
+    },
+    {
+      "defect": "omit-delayed-initialization",
+      "rejected": true
+    },
+    {
+      "defect": "wrong-touch-priority",
+      "rejected": true
+    },
+    {
+      "defect": "wrong-BLE-worker",
+      "rejected": true
+    },
+    {
+      "defect": "publish-after-fault",
+      "rejected": true
+    },
+    {
+      "defect": "skip-clear-on-error",
+      "rejected": true
+    }
+  ],
+  "prior_objects_identical": 820,
+  "changed_prior_sources": [
+    "r1/src/application/runtime/native_factory_task.c",
+    "r1/src/application/runtime/native_bae8_thread.c",
+    "r1/src/application/runtime/native_nfc_charge_task.c"
+  ],
+  "lifecycle_header_consumers_object_identical": true,
+  "rea_evidence_ids": [
+    "ev_eb5f56d6cbe63c17417418090496273970ea190fec2f74510b10a4ba1aac49b6",
+    "ev_827c493a1f5e25277d422fa1a8a92ead370870fdac8a0a77d04bdd99095b18da",
+    "ev_d3a9ebc04c5e20d06d5097466a81da55c4f791c7d85c7e53d23c6aba496e2ab0",
+    "ev_ec2e3d20ba5e2b8bdad857da1cc221bad551dc3cac262e26165e0fa2ffc4149b",
+    "ev_1690aaa884d7b6564fae4bc4ce2fc7b2c6c418884ec729496d274b8b155a8ae6"
+  ],
+  "evidence_files": {
+    "build/goal-r1-task-startup-c/verify.py": "894fb40d9915259ee7ae6e99370a235e56c0734b3f40efe4b89e6f0fe2a0904a",
+    "build/goal-r1-task-startup-c/verification.json": "bfc03ce34dabfd73c9c8e86544be3ac56021c7157e7cb03f57dc9120fada1d76",
+    "build/goal-r1-task-startup-c/verify-final.log": "b25d9446eafed7256f05aa608b48ea502543569e0786201e5c3e8420f3d05ad9",
+    "build/goal-r1-task-startup-c/defects.py": "3a864f05337a61b78c5a83c58780f264b73228d42f71ea5e19d9f61366e523b6",
+    "build/goal-r1-task-startup-c/defects.json": "b2de4ffa088466b6e4d7b3a6b71e95484fc7cf37dd36ad72c09c116217fae4fc",
+    "build/goal-r1-task-startup-c/rea.json": "8f97ea9e85bef00c4c19309b0f244d9fbdcfba0a4938f749dd37af1eb6a50f36",
+    "build/goal-r1-task-startup-c/nfc-before.c": "eddb50ffc97301479c6d88bf16c89c581573dfd60c369bbf9223a2cc397b209f",
+    "build/goal-r1-task-startup-c/bae-before.c": "80276734cb006fea99a7eec69482c94d92b1b90625870d782dafd2f33001effa",
+    "build/goal-r1-task-startup-c/factory-before.c": "f51bf54473b41bc12b861fa297162340dcf97d73f90167ec2e3c7fe92ad9a1a1",
+    "build/goal-r1-task-startup-c/native_nfc_charge_task.c.diff": "27d5231bdf776ef2e2930527056a7c2a785b96c427053e9ea696c6b8b2680c3a",
+    "build/goal-r1-task-startup-c/native_bae8_thread.c.diff": "8f078d69af97558ca08162e4199ed410388c1d775490267fbc508d044f806e7b",
+    "build/goal-r1-task-startup-c/native_factory_task.c.diff": "b0dbde864858de927382be05ba6cf96b088be95346a7837512827e1a94d017cc",
+    "build/goal-r1-task-startup-c/document.py": "ef7d2bdf31389078026a4f922b87b3d4bdfde88ebb36dc7f28b1adc6894cafda",
+    "build/sources-goal-r1-task-startup-c/report.json": "2559cba94017df1efa988ddd50f847d848e31cb0deea17c37fc88428e7b1ef6f",
+    "r1/src/sources.json": "9d88877dab36694b5454f48a1b714fcff3628e604ba704d95f369eb28ae4b0bf",
+    "r1/src/application/runtime/native_io_worker_lifecycle.c": "68621d8c11fca8c7b977affd68e6054fa73c8c9370877d245dafd1a4abdfe621",
+    "r1/src/application/runtime/native_task_startup.c": "cba4c425a091d064602b350fc3c7f89ba137914659fe4b2e5fad0acddb6fda7d",
+    "r1/src/application/board/native_task_contexts.h": "4063c122a5fa6be340150c068ca9a8c70f8d9e538036efab4dde30feedaeaa7c",
+    "r1/src/application/board/native_cortex_fault.c": "ab5723bbe87054d1f4ec147fed067184ee1558fcedcdba24885f2128e9c3a6d1",
+    "r1/src/application/runtime/native_factory_task.c": "b826f0e5374c541a74e59f7d4a975e37388617769c2fc4e63ab07842b92dcf1f",
+    "r1/src/application/runtime/native_bae8_thread.c": "b46bbc08e4abb034662e84892aba0df6d5c3a6491e3391826cc3ffdf966b02b4",
+    "r1/src/application/runtime/native_nfc_charge_task.c": "3cb5c441c985405992a674433db9da21720bc02e6f49d5d59cfb9fac75c11f7a"
+  },
+  "limitations": [
+    "Lifecycle creation records worker pointers but does not execute the unresolved worker bodies.",
+    "RTOS creation/termination/priority and initialization children modeled; actual C lifecycle and fault primitive execute.",
+    "Fault proof observes BASEPRI 64 and zero write at UINT32_MAX in emulation; no physical exception recovery claim.",
+    "Final application link, manager wiring, runtime storage placement and device boot remain open."
+  ]
+}

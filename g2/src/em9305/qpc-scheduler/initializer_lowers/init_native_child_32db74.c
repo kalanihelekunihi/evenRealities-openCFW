@@ -1,46 +1,17 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_32db74\n"
-".type opencfw_em9305_child_32db74,@function\n"
-"opencfw_em9305_child_32db74:\n"
-"L32db74:\n"
-"ldb_s r2,[r1,0]\n"
-"L32db76:\n"
-"bmsk_s r2,r2,0x5\n"
-"L32db78:\n"
-"stb_s r2,[r0,0]\n"
-"L32db7a:\n"
-"ldb_s r2,[r1,0]\n"
-"L32db7c:\n"
-"xbfu r2,r2,0x6\n"
-"L32db80:\n"
-"stb_s r2,[r0,0x1]\n"
-"L32db82:\n"
-"ldb_s r2,[r1,0]\n"
-"L32db84:\n"
-"lsr_s r2,r2,0x7\n"
-"L32db86:\n"
-"stb_s r2,[r0,0x2]\n"
-"L32db88:\n"
-"ldb_s r2,[r1,0x2]\n"
-"L32db8a:\n"
-"ldb_s r3,[r1,0x1]\n"
-"L32db8c:\n"
-"asl_s r2,r2,0x8\n"
-"L32db8e:\n"
-"add_s r1,r2,r3\n"
-"L32db90:\n"
-"bmsk r2,r1,0xc\n"
-"L32db94:\n"
-"and r1,r1,0xe000\n"
-"L32db9c:\n"
-"lsr_s r1,r1,0xd\n"
-"L32db9e:\n"
-"sth_s r2,[r0,0x4]\n"
-"L32dba0:\n"
-"j_s.d [blink]\n"
-"L32dba2:\n"
-"stb_s r1,[r0,0x6]\n"
-".size opencfw_em9305_child_32db74,.-opencfw_em9305_child_32db74\n"
-);
+#include <stdint.h>
+
+/* Native 0x32db74..0x32dba4: unpack a 3-byte packed header into fields:
+ * out[0]=bits 0-5, out[1]=bit 6, out[2]=bit 7 of byte 0; the little-endian
+ * halfword at bytes 1-2 gives out+4 (low 13 bits) and out[6] (top 3 bits).
+ * Byte 0 is re-read for each field, as stock does. */
+void opencfw_em9305_child_32db74(uintptr_t out,uintptr_t packed)
+{
+    volatile uint8_t *source=(volatile uint8_t *)packed;
+    volatile uint8_t *field=(volatile uint8_t *)out;
+    field[0]=(uint8_t)(source[0]&0x3fu);
+    field[1]=(uint8_t)((source[0]>>6)&1u);
+    field[2]=(uint8_t)(source[0]>>7);
+    uint32_t word=((uint32_t)source[2]<<8)+source[1];
+    *(volatile uint16_t *)(out+4u)=(uint16_t)(word&0x1fffu);
+    field[6]=(uint8_t)((word&0xe000u)>>13);
+}

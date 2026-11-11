@@ -63,6 +63,11 @@ typedef struct {
 #define HWID_ADC_PIN 16u
 #define HWID_ADC_SLOT 3u
 #define HWID_SAMPLES 3u
+/* openCFW Fix 51: bound on the ADC FIFO wait (see board_hw_version_detect). At
+ * high-performance clock a register read is tens of ns, so ~1e6 spins is tens
+ * of ms -- far longer than a real IRTT-driven conversion, short enough that a
+ * dead ADC does not noticeably delay boot. */
+#define HWID_ADC_POLL_LIMIT 1000000u
 #define ADC_REQ_CORRECTION_TRIMS_GET 3u
 #define ADC_POWER_WAKE 0u
 #define ADC_POWER_DEEPSLEEP 2u
@@ -174,10 +179,25 @@ void board_hw_version_detect_509134(void)
     (void)am_hal_adc_irtt_enable_55dc26(adc);
     (void)am_hal_adc_sw_trigger_55e070(adc);
 
+    /* openCFW Fix 51 (2026-11-01): bound the ADC FIFO wait. Stock spins here
+     * until the hardware-id conversion lands; on real silicon a non-converting
+     * ADC (wrong clock/trim/slot bring-up, or a clock the sim doesn't gate)
+     * leaves FIFO COUNT at zero forever, hanging the whole boot before any
+     * service starts. The Renode sim satisfies the FIFO on the first read, so
+     * it never surfaced. On timeout we default to a safe board profile and let
+     * boot continue instead of bricking the temple. */
     uint8_t matched = 0u;
+    bool adc_timed_out = false;
     while (matched < HWID_SAMPLES) {
+        uint32_t spins = HWID_ADC_POLL_LIMIT;
         while (((ADC_FIFO_REG >> 20) & 0xffu) == 0u) {
+            if (--spins == 0u) {
+                adc_timed_out = true;
+                break;
+            }
         }
+        if (adc_timed_out)
+            break;
         count = 1u;
         (void)am_hal_adc_samples_read_55deec(adc, false, NULL, &count, &sample);
         if (sample.slot == HWID_ADC_SLOT)
@@ -208,6 +228,17 @@ void board_hw_version_detect_509134(void)
         }
         info->hw_adc_mv = (uint16_t)(int32_t)mv;
         audio_ble_hci_boot_log_4733ee(adc_result, sample.sample, (double)mv);
+    }
+    if (adc_timed_out) {
+        /* ADC produced no sample within the bound: keep the nPM1300 charger
+         * family (board_type 1, this hardware) and mark the hw version unknown
+         * so board_power_init and the rest of boot proceed. */
+        (void)am_hal_adc_irtt_disable_55dc5e(adc);
+        (void)am_hal_adc_disable_55de1c(adc);
+        g2_board_info_t *info = &audio_ble_hci_radio_mode_cells_20074368;
+        info->board_type = 1u;
+        info->hw_version = 0xffu;
+        info->hw_adc_mv = 0u;
     }
 
     (void)am_hal_adc_power_control_55e09c(adc, ADC_POWER_DEEPSLEEP, false);

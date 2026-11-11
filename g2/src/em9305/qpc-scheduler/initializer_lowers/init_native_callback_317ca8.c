@@ -1,356 +1,146 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_callback_317ca8\n"
-".type opencfw_em9305_callback_317ca8,@function\n"
-"opencfw_em9305_callback_317ca8:\n"
-"L317ca8:\n"
-"enter_s [r13-r17,blink]\n"
-"L317caa:\n"
-"mov_s r13,r0\n"
-"L317cac:\n"
-"add r13,r13,846\n"
-"L317cb0:\n"
-"mov_s r16,r0\n"
-"L317cb2:\n"
-"ldb r0,[r13,42]\n"
-"L317cb6:\n"
-"mov_s r14,r2\n"
-"L317cb8:\n"
-"mov_s r17,r1\n"
-"L317cba:\n"
-"breq_s r0,0,L317cfa\n"
-"L317cbc:\n"
-"mov r0,378\n"
-"L317cc0:\n"
-"ldb r0,[r16,r0]\n"
-"L317cc4:\n"
-"brne_s r0,0,L317d30\n"
-"L317cc6:\n"
-"breq_s r14,0,L317d30\n"
-"L317cc8:\n"
-"ldh_s r0,[r13,0x22]\n"
-"L317cca:\n"
-"ldh_s r1,[r13,0x28]\n"
-"L317ccc:\n"
-"ldh_s r3,[r13,0x1e]\n"
-"L317cce:\n"
-"sth_s r0,[r13,0x4]\n"
-"L317cd0:\n"
-"mpyuw r0,r1,0xa\n"
-"L317cd4:\n"
-"ldh_s r2,[r13,0x20]\n"
-"L317cd6:\n"
-"ldh_s r12,[r13,0x26]\n"
-"L317cd8:\n"
-"sth_s r1,[r13,0x6]\n"
-"L317cda:\n"
-"sth.as r0,[r16,191]\n"
-"L317cde:\n"
-"exth_s r1,r0\n"
-"L317ce0:\n"
-"add3 r0,r16,0x30\n"
-"L317ce4:\n"
-"stb 0,[r13,42]\n"
-"L317ce8:\n"
-"sth_s r3,[r13,0]\n"
-"L317cea:\n"
-"sth_s r2,[r13,0x2]\n"
-"L317cec:\n"
-"bl.d opencfw_em9305_wsf_timer_start_ms\n"
-"L317cf0:\n"
-"sth.as r12,[r16,130]\n"
-"L317cf4:\n"
-"ldb r0,[r13,42]\n"
-"L317cf8:\n"
-"brne_s r0,0,L317d30\n"
-"L317cfa:\n"
-"ld.as r0,[r16,159]\n"
-"L317cfe:\n"
-"bbit0.nt r0,0x1d,L317d30\n"
-"L317d02:\n"
-"breq_s r14,0,L317d30\n"
-"L317d04:\n"
-"mov_s r1,0x805c70\n"
-"L317d0a:\n"
-"ld r1,[r1,0]\n"
-"L317d0c:\n"
-"ldh r4,[r13,6]\n"
-"L317d10:\n"
-"ldh_s r3,[r13,0x4]\n"
-"L317d12:\n"
-"sub r12,r16,r1\n"
-"L317d16:\n"
-"div r12,r12,912\n"
-"L317d1a:\n"
-"ldh_s r1,[r13,0]\n"
-"L317d1c:\n"
-"ldh.as r2,[r16,130]\n"
-"L317d20:\n"
-"bclr_s r0,r0,0x1d\n"
-"L317d22:\n"
-"st.as r0,[r16,159]\n"
-"L317d26:\n"
-"extb_s r0,r12\n"
-"L317d28:\n"
-"bl.d opencfw_em9305_child_3234c4\n"
-"L317d2c:\n"
-"st.as 0,[r16,160]\n"
-"L317d30:\n"
-"ldh_s r12,[r13,0]\n"
-"L317d32:\n"
-"brhs.d.nt r12,0x2,L317d40\n"
-"L317d36:\n"
-"mov_s r3,0\n"
-"L317d38:\n"
-"ldh_s r0,[r13,0x1e]\n"
-"L317d3a:\n"
-"cmp_s r0,2\n"
-"L317d3c:\n"
-"bc L317ea0\n"
-"L317d40:\n"
-"ldb r0,[r16,11]\n"
-"L317d44:\n"
-"btst_s r0,0x6\n"
-"L317d46:\n"
-"beq_s L317ea0\n"
-"L317d48:\n"
-"ldh.as r6,[r16,131]\n"
-"L317d4c:\n"
-"ldh_s r2,[r13,0x2]\n"
-"L317d4e:\n"
-"mov_s r7,0xc000\n"
-"L317d54:\n"
-"add r15,r6,0x1\n"
-"L317d58:\n"
-"sub_s r0,r15,r2\n"
-"L317d5a:\n"
-"sexh_s r1,r0\n"
-"L317d5c:\n"
-"rem r0,r1,r12\n"
-"L317d60:\n"
-"sub r3,r6,r2\n"
-"L317d64:\n"
-"exth_s r14,r3\n"
-"L317d66:\n"
-"cmp_s r1,0\n"
-"L317d68:\n"
-"exth r8,r15\n"
-"L317d6c:\n"
-"remu r4,r14,r12\n"
-"L317d70:\n"
-"neg.lt r0,r0\n"
-"L317d74:\n"
-"exth_s r1,r0\n"
-"L317d76:\n"
-"and r9,r2,r7\n"
-"L317d7a:\n"
-"cmp r8,r2\n"
-"L317d7e:\n"
-"sub_s r0,r12,r1\n"
-"L317d80:\n"
-"mov_s r11,r1\n"
-"L317d82:\n"
-"mov.hi r11,r0\n"
-"L317d86:\n"
-"cmp r9,r7\n"
-"L317d8a:\n"
-"tst.eq r6,r7\n"
-"L317d8e:\n"
-"bne_s L317d9e\n"
-"L317d90:\n"
-"add_s r3,r3,r12\n"
-"L317d92:\n"
-"sub_s r0,r3,0x1\n"
-"L317d94:\n"
-"remu r3,r0,r12\n"
-"L317d98:\n"
-"sub_s r0,r0,r3\n"
-"L317d9a:\n"
-"add_s r0,r0,r2\n"
-"L317d9c:\n"
-"sth_s r0,[r13,0x2]\n"
-"L317d9e:\n"
-"or.f r0,r4,r17\n"
-"L317da2:\n"
-"bne_s L317dac\n"
-"L317da4:\n"
-"sub r11,r12,0x1\n"
-"L317da8:\n"
-"sth 0,[r13,8]\n"
-"L317dac:\n"
-"brne_s r1,0,L317db8\n"
-"L317dae:\n"
-"breq_s r0,0,L317db8\n"
-"L317db0:\n"
-"mov_s r3,0\n"
-"L317db2:\n"
-"sth 0,[r13,8]\n"
-"L317db6:\n"
-"b_s L317e38\n"
-"L317db8:\n"
-"breq.d.nt r0,0,L317e38\n"
-"L317dbc:\n"
-"mov_s r3,r11\n"
-"L317dbe:\n"
-"breq.nt r17,0,L317dc6\n"
-"L317dc2:\n"
-"sth 0,[r13,8]\n"
-"L317dc6:\n"
-"ldb r12,[r13,42]\n"
-"L317dca:\n"
-"breq_s r12,0,L317dd0\n"
-"L317dcc:\n"
-"ldh_s r0,[r13,0x22]\n"
-"L317dce:\n"
-"breq_s r0,0,L317de6\n"
-"L317dd0:\n"
-"ldh_s r0,[r13,0x8]\n"
-"L317dd2:\n"
-"ldh_s r1,[r13,0x4]\n"
-"L317dd4:\n"
-"mov_s r3,r11\n"
-"L317dd6:\n"
-"add_s r2,r0,0x1\n"
-"L317dd8:\n"
-"cmp_s r0,r1\n"
-"L317dda:\n"
-"mov.c r3,0\n"
-"L317dde:\n"
-"bc.d L317e38\n"
-"L317de2:\n"
-"sth_s r2,[r13,0x8]\n"
-"L317de4:\n"
-"breq_s r12,0,L317e38\n"
-"L317de6:\n"
-"ldh_s r2,[r13,0x20]\n"
-"L317de8:\n"
-"ldh_s r14,[r13,0x1e]\n"
-"L317dea:\n"
-"sub_s r0,r15,r2\n"
-"L317dec:\n"
-"sexh_s r0,r0\n"
-"L317dee:\n"
-"rem r3,r0,r14\n"
-"L317df2:\n"
-"and r0,r2,r7\n"
-"L317df6:\n"
-"cmp_s r0,r7\n"
-"L317df8:\n"
-"tst.eq r6,r7\n"
-"L317dfc:\n"
-"bne_s L317e10\n"
-"L317dfe:\n"
-"sub r0,r6,r2\n"
-"L317e02:\n"
-"add_s r0,r0,r14\n"
-"L317e04:\n"
-"add_s r0,r0,-1\n"
-"L317e06:\n"
-"remu r1,r0,r14\n"
-"L317e0a:\n"
-"sub_s r0,r0,r1\n"
-"L317e0c:\n"
-"add_s r2,r2,r0\n"
-"L317e0e:\n"
-"sth_s r2,[r13,0x20]\n"
-"L317e10:\n"
-"exth.f r12,r3\n"
-"L317e14:\n"
-"mov_s r3,0\n"
-"L317e16:\n"
-"beq_s L317e36\n"
-"L317e18:\n"
-"brhs.d.nt r17,0x2,L317e20\n"
-"L317e1c:\n"
-"mov_s r0,0\n"
-"L317e1e:\n"
-"ldh_s r0,[r13,0x24]\n"
-"L317e20:\n"
-"ldh_s r1,[r13,0x22]\n"
-"L317e22:\n"
-"add_s r2,r0,0x1\n"
-"L317e24:\n"
-"brlo.d.nt r0,r1,L317e38\n"
-"L317e28:\n"
-"sth_s r2,[r13,0x24]\n"
-"L317e2a:\n"
-"sub_s r1,r14,r12\n"
-"L317e2c:\n"
-"exth r0,r11\n"
-"L317e30:\n"
-"min r3,r0,r1\n"
-"L317e34:\n"
-"b_s L317e38\n"
-"L317e36:\n"
-"sth_s r3,[r13,0x24]\n"
-"L317e38:\n"
-"ldb r0,[r13,-211]\n"
-"L317e3c:\n"
-"breq.nt r0,0x1,L317e76\n"
-"L317e40:\n"
-"breq.nt r0,0x15,L317e7c\n"
-"L317e44:\n"
-"brne.d.nt r0,0x11,L317e8e\n"
-"L317e48:\n"
-"exth_s r1,r3\n"
-"L317e4a:\n"
-"ldh r0,[r13,-164]\n"
-"L317e4e:\n"
-"sub_s r2,r0,r15\n"
-"L317e50:\n"
-"exth_s r0,r2\n"
-"L317e52:\n"
-"brlo.d.nt r1,r0,L317e8e\n"
-"L317e56:\n"
-"setne r0,r0,0\n"
-"L317e5a:\n"
-"ldh r3,[r13,-170]\n"
-"L317e5e:\n"
-"ldh.as r1,[r16,133]\n"
-"L317e62:\n"
-"cmp_s r3,r1\n"
-"L317e64:\n"
-"sub_s r3,r2,r0\n"
-"L317e66:\n"
-"beq_s L317e8e\n"
-"L317e68:\n"
-"add r16,r16,850\n"
-"L317e6c:\n"
-"sth 1,[r13]\n"
-"L317e70:\n"
-"sth 0,[r16]\n"
-"L317e74:\n"
-"b_s L317e8e\n"
-"L317e76:\n"
-"add r16,r16,716\n"
-"L317e7a:\n"
-"b_s L317e80\n"
-"L317e7c:\n"
-"add r16,r16,724\n"
-"L317e80:\n"
-"ldh r0,[r16]\n"
-"L317e84:\n"
-"exth_s r1,r3\n"
-"L317e86:\n"
-"sub_s r0,r0,r15\n"
-"L317e88:\n"
-"exth_s r0,r0\n"
-"L317e8a:\n"
-"min r3,r1,r0\n"
-"L317e8e:\n"
-"exth_s r0,r3\n"
-"L317e90:\n"
-"add_s r0,r0,r8\n"
-"L317e92:\n"
-"mov_s r8,r0\n"
-"L317e94:\n"
-"brlo.nt r0,0x10000,L317ea0\n"
-"L317e9c:\n"
-"sth r8,[r13,2]\n"
-"L317ea0:\n"
-"exth_s r0,r3\n"
-"L317ea2:\n"
-"leave_s [r13-r17,blink,pcl]\n"
-".size opencfw_em9305_callback_317ca8,.-opencfw_em9305_callback_317ca8\n"
-);
+#include <stdint.h>
+
+/* Native 0x317ca8..0x317ea4: connection subrating bookkeeping, returns the
+ * number of connection events that may be skipped. The subrate block lives
+ * at +846: factor +0, base event +2, latency +4, timeout +6, counter +8,
+ * pending factor/base/latency +30/+32/+34, continuation counter +36,
+ * continuation +38, timeout +40, update flag +42. An active pending update
+ * (no host hold +378) is applied, restarting the supervision timer (+384,
+ * timeout * 10 ms); a flagged change (+636 bit 29) is reported through
+ * native 0x3234c4. With subrating enabled (+11 bit 6) the skip count is the
+ * distance to the next subrated anchor (with 16-bit event counter wrap
+ * correction of the base event), limited by the latency/continuation rules
+ * of the current and pending parameters and by a pending procedure instant
+ * (+635 kind 1/0x15/0x11 at +716/+724/+682). */
+extern uint32_t opencfw_em9305_wsf_timer_start_ms(uintptr_t,uint32_t);
+extern uint32_t opencfw_em9305_child_3234c4(uint32_t,uint32_t,uint32_t,uint32_t,uint32_t);
+
+#define SR_U8(a) (*(volatile uint8_t *)(a))
+#define SR_U16(a) (*(volatile uint16_t *)(a))
+#define SR_U32(a) (*(volatile uint32_t *)(a))
+
+static int32_t subrate_min_signed(int32_t a, int32_t b) { return a < b ? a : b; }
+
+uint32_t opencfw_em9305_callback_317ca8(uintptr_t record, uint32_t continuing, uint32_t active)
+{
+    uintptr_t block = record + 846u;
+    uint32_t skip_from_update = 1u;
+    if (SR_U8(block + 42u) != 0u) {
+        skip_from_update = 0u;
+        if (SR_U8(record + 378u) == 0u && active != 0u) {
+            uint32_t latency = SR_U16(block + 34u);
+            uint32_t timeout = SR_U16(block + 40u);
+            uint32_t factor = SR_U16(block + 30u);
+            SR_U16(block + 4u) = (uint16_t)latency;
+            uint32_t supervision = timeout * 10u;
+            uint32_t base = SR_U16(block + 32u);
+            uint32_t continuation = SR_U16(block + 38u);
+            SR_U16(block + 6u) = (uint16_t)timeout;
+            SR_U16(record + 382u) = (uint16_t)supervision;
+            SR_U8(block + 42u) = 0u;
+            SR_U16(block + 0u) = (uint16_t)factor;
+            SR_U16(block + 2u) = (uint16_t)base;
+            SR_U16(record + 260u) = (uint16_t)continuation;
+            (void)opencfw_em9305_wsf_timer_start_ms(record + 384u, (uint16_t)supervision);
+            skip_from_update = SR_U8(block + 42u) == 0u;
+        }
+    }
+    if (skip_from_update != 0u) {
+        uint32_t flags = SR_U32(record + 636u);
+        if ((flags & (1u << 29)) != 0u && active != 0u) {
+            uintptr_t table = SR_U32(0x805c70u);
+            uint32_t timeout = SR_U16(block + 6u);
+            uint32_t latency = SR_U16(block + 4u);
+            int32_t index = (int32_t)(record - table) / 912;
+            uint32_t factor = SR_U16(block + 0u);
+            uint32_t continuation = SR_U16(record + 260u);
+            SR_U32(record + 636u) = flags & ~(1u << 29);
+            SR_U32(record + 640u) = 0u;
+            (void)opencfw_em9305_child_3234c4((uint8_t)index, factor, continuation, latency, timeout);
+        }
+    }
+    uint32_t factor = SR_U16(block + 0u);
+    if (factor < 2u && SR_U16(block + 30u) < 2u) return 0u;
+    if ((SR_U8(record + 11u) & 0x40u) == 0u) return 0u;
+    uint32_t counter = SR_U16(record + 262u);
+    uint32_t base = SR_U16(block + 2u);
+    uint32_t next = counter + 1u;
+    int32_t phase = (int32_t)(int16_t)(next - base) % (int32_t)factor;
+    uint32_t aligned = (uint16_t)(counter - base) % factor;
+    if ((int32_t)(int16_t)(next - base) < 0) phase = -phase;
+    uint32_t offset = (uint16_t)phase;
+    uint32_t event = (uint16_t)next;
+    uint32_t skip = event > base ? factor - offset : offset;
+    if ((base & 0xc000u) == 0xc000u && (counter & 0xc000u) == 0u) {
+        uint32_t span = counter - base + factor - 1u;
+        SR_U16(block + 2u) = (uint16_t)(span - span % factor + base);
+    }
+    uint32_t boundary = aligned | continuing;
+    uint32_t result;
+    if (boundary == 0u) {
+        skip = factor - 1u;
+        SR_U16(block + 8u) = 0u;
+    }
+    if (offset == 0u && boundary != 0u) {
+        result = 0u;
+        SR_U16(block + 8u) = 0u;
+    } else {
+        result = skip;
+        if (boundary != 0u) {
+            if (continuing != 0u) SR_U16(block + 8u) = 0u;
+            uint32_t update = SR_U8(block + 42u);
+            uint32_t check_pending = 1u;
+            if (update == 0u || SR_U16(block + 34u) != 0u) {
+                uint32_t count = SR_U16(block + 8u);
+                uint32_t latency = SR_U16(block + 4u);
+                SR_U16(block + 8u) = (uint16_t)(count + 1u);
+                if (count < latency) {
+                    result = 0u;
+                    check_pending = 0u;
+                } else if (update == 0u) {
+                    check_pending = 0u;
+                }
+            }
+            if (check_pending != 0u) {
+                uint32_t new_base = SR_U16(block + 32u);
+                uint32_t new_factor = SR_U16(block + 30u);
+                int32_t pending_phase = (int32_t)(int16_t)(next - new_base) % (int32_t)new_factor;
+                if ((new_base & 0xc000u) == 0xc000u && (counter & 0xc000u) == 0u) {
+                    uint32_t span = counter - new_base + new_factor - 1u;
+                    SR_U16(block + 32u) = (uint16_t)(new_base + (span - span % new_factor));
+                }
+                uint32_t pending_offset = (uint16_t)pending_phase;
+                result = 0u;
+                if (pending_offset == 0u) {
+                    SR_U16(block + 36u) = 0u;
+                } else {
+                    uint32_t count = continuing < 2u ? SR_U16(block + 36u) : 0u;
+                    uint32_t latency = SR_U16(block + 34u);
+                    SR_U16(block + 36u) = (uint16_t)(count + 1u);
+                    if (count >= latency)
+                        result = (uint32_t)subrate_min_signed((int32_t)(uint16_t)skip,
+                                                              (int32_t)(new_factor - pending_offset));
+                }
+            }
+        }
+    }
+    uint32_t kind = SR_U8(record + 635u);
+    if (kind == 1u || kind == 0x15u) {
+        uint32_t instant = SR_U16(record + (kind == 1u ? 716u : 724u));
+        result = (uint32_t)subrate_min_signed((int32_t)(uint16_t)result, (int32_t)(uint16_t)(instant - next));
+    } else if (kind == 0x11u) {
+        uint32_t distance = SR_U16(record + 682u) - next;
+        uint32_t distance16 = (uint16_t)distance;
+        if ((uint16_t)result >= distance16) {
+            uint32_t interval = SR_U16(record + 676u);
+            result = distance - (distance16 != 0u ? 1u : 0u);
+            if (interval != SR_U16(record + 266u)) {
+                SR_U16(block + 0u) = 1u;
+                SR_U16(record + 850u) = 0u;
+            }
+        }
+    }
+    uint32_t anchor = (uint16_t)result + event;
+    if (anchor >= 0x10000u) SR_U16(block + 2u) = (uint16_t)anchor;
+    return (uint16_t)result;
+}

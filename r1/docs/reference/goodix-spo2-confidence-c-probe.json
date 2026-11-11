@@ -1,0 +1,136 @@
+{
+  "schema_version": 1,
+  "status": "stock-validated C candidate; source admission pending",
+  "entry": "0x95828",
+  "total_stock_c_pairs": 600,
+  "full_graph_pairs": 144,
+  "explicit_feature_boundary_pairs": 456,
+  "verification": {
+    "results": {
+      "pairs": 144,
+      "elapsed_seconds": 34.802888290956616,
+      "scope": "Full C confidence/dual-window/helper graph,actual heap/statistics/history/Gaussian;configuration gate,empty/nonempty/saturated windows and special-value input;public RAM,FPSCR,saved ABI/SP/masks."
+    },
+    "boundary-results": {
+      "pairs": 440,
+      "elapsed_seconds": 12.558659791946411,
+      "scope": "Explicit feature-output boundary on both stock/C;actual timing statistics,heap,rolling history,Gaussian and soft doubles. Rate blends,raw score cutoffs,miss/counter wraps and signed mode bytes;2 FP modes."
+    },
+    "corner-results": {
+      "pairs": 16,
+      "elapsed_seconds": 0.37570395902730525,
+      "scope": "Explicit feature boundaries:positive rate1/4/5/9 with empty old history and score50/71;small-distance branch and raw-score acceptance;2 FP modes."
+    }
+  },
+  "coverage": {
+    "instruction_bytes": 674,
+    "instruction_starts": 243,
+    "scope": "Full graph plus explicit feature boundaries for confidence policy branches;all remaining C statistics/history/Gaussian helpers execute."
+  },
+  "compiled_defect_controls": [
+    {
+      "defect": "late-config-gate",
+      "detected": true,
+      "scope": "full graph"
+    },
+    {
+      "defect": "rate-blend",
+      "detected": true,
+      "scope": "explicit feature boundary"
+    },
+    {
+      "defect": "raw-quality-cutoff",
+      "detected": true,
+      "scope": "explicit feature boundary"
+    },
+    {
+      "defect": "mode-counter",
+      "detected": true,
+      "scope": "explicit feature boundary"
+    },
+    {
+      "defect": "miss-counter-wrap",
+      "detected": true,
+      "scope": "explicit feature boundary"
+    },
+    {
+      "defect": "initial-rate-window",
+      "detected": true,
+      "scope": "explicit feature boundary"
+    },
+    {
+      "defect": "mode-zero-limit",
+      "detected": true,
+      "scope": "explicit feature boundary"
+    },
+    {
+      "defect": "gaussian-radius",
+      "detected": true,
+      "scope": "explicit feature boundary"
+    }
+  ],
+  "semantics": [
+    "Native95828 processes one channel record through pointer-to-record and pointer-to-state arguments. Cache both pointed-to addresses before the actual C eight-argument dual-window feature call. Blend rate estimates within distance10 using actual software-double0.8/0.2 multiply/add/truncate;select quality via signaling carry comparison. Evaluate the configuration word at28 AFTER features.",
+    "Enabled processing allocates496 bytes for timing differences,uses live timing pointer/count248/252,converts signed u16 differences to binary32,and calls the actual C124-sample mean even though its value is discarded. Float-count standard deviation drives signed raw quality/variance counters,including wrap and signed-byte mode policy.",
+    "Preserve positive-rate acceptance thresholds,empty-history bootstrap,miss-byte wrap and stale-rate hold rules. Actual C rolling-window push/mean/count/stddev feed a software-double mean*0.05 radius and the C Gaussian interval. Nonpositive rate only increments the miss byte. Record state fields are accessed in native order."
+  ],
+  "limitations": [
+    "Probe only;candidate is not admitted to sources.json and the calculate caller remains unresolved against r1_goodix_spo2_confidence. Full graph uses actual C helper implementations;456 policy comparisons deliberately replace only feature outputs on both stock and C,with all timing/history/Gaussian helpers real. These controlled boundaries are not claimed as full graph coverage.",
+    "Histories have125 floats;timing counts0/1/2/125 and valid mapped/aligned owners are tested. Window counts0/1/2/8 use capacity8. Oversized timing counts,invalid pointer-owner aliases,allocation failure recovery and physical hardware/timing/interrupts remain unverified.",
+    "Public RAM excludes8192 private stack bytes below SP. Full FPSCR,saved core/FP registers,SP and masks are compared;void caller scratch/APSR are excluded. Full graph uses6 FP configurations and boundaries2. The confidence policy has no independent numerical oracle in this probe;exact stock/C comparisons,full instruction coverage and8 compiled controls provide the evidence.",
+    "Whole-firmware hardware/startup/boot integration and confidence source admission remain open."
+  ],
+  "evidence_sha256": {
+    "build/goal-r1-dual-window-integration-c/candidate.o": "13b5a1ecc600f033e2f45bc1a63247e9aefc2354e2e44f41fa7bae32fe18b22b",
+    "build/goal-r1-model-i8-convolution-c/stock-entry.elf": "8faf5ed5a7e99752b781c1118086f6ada13458b084bd14e8fbb9a2eb58a05e76",
+    "build/goal-r1-peak-selection-integration-c/candidate.o": "a1add456fb5a3d6775d33167f327f5b6b0890b8459d5a923a5a71d75b750b5fe",
+    "build/goal-r1-spo2-confidence-c/boundaries.log": "e2d1b6647866a6cd8fc5d8a8559d4e960a6c1f5e442c4b3d5af3b1743e47b7c6",
+    "build/goal-r1-spo2-confidence-c/boundaries.py": "9e8fdc849a97945e06d3894abe0a0dc1ac3071915508c3fe49ae1ca0790144ae",
+    "build/goal-r1-spo2-confidence-c/boundary-results.json": "86d92ee28ac5629adca5c9c4561e84501e0fd27907431d2bf26b7261894f9649",
+    "build/goal-r1-spo2-confidence-c/candidate.c": "2dd9167b7270e2266ff5525f9e3995c92b86bf68dac163059bec15a4d7511239",
+    "build/goal-r1-spo2-confidence-c/candidate.elf": "0c4c9a1adcfc6ec1a7559652f32876c595dfd872119dab9f6187251466c6acb4",
+    "build/goal-r1-spo2-confidence-c/candidate.o": "9e489096cefa54efdbae892b94c0286dc9305aa12f50b0506f590ed086fb6dc0",
+    "build/goal-r1-spo2-confidence-c/compile-argv.json": "feb2437d07a602df1aa21f6f04d807c38c73ce15ef8502735ddddff3da07df4a",
+    "build/goal-r1-spo2-confidence-c/confidencelib.py": "1eb4435bf074c4d117c876060c06d059971d77e5f0303bfb2123d4cb0ef15eb4",
+    "build/goal-r1-spo2-confidence-c/controls-results.json": "ad0b9c653daa653e4d5eef8ab88df9ad5e647911eb7565fbde429fdc505daf95",
+    "build/goal-r1-spo2-confidence-c/controls.log": "412028c350bdc95c96e6176fd271806942e26e8fc07f6e4a35a549cd9a1e65ab",
+    "build/goal-r1-spo2-confidence-c/controls.py": "7112aba5768686166879d562e24a31440bb10b20ff841a368f13265bf19ed5d3",
+    "build/goal-r1-spo2-confidence-c/corner-results.json": "d8bd466c04411d46cb6af6c52645f08456fa708d78746ab7ed37465e57c63ab7",
+    "build/goal-r1-spo2-confidence-c/corners.log": "e6c21e8d260fe71882debdb339d2402a2ca7648529bc2303f48649bce0380017",
+    "build/goal-r1-spo2-confidence-c/corners.py": "4786d0e61b4401d9dd54945a391a48d18214fea722b2729eabdf49b55fa0075e",
+    "build/goal-r1-spo2-confidence-c/coverage-results.json": "7c032e84a2ddebf928cf9aec8e15f84ba14e8a7d22155225e488cb01293fa086",
+    "build/goal-r1-spo2-confidence-c/coverage.log": "882ecae93b7f84ba8005753c4a62c4900d08e4f45f8783bf34044eb952cb0895",
+    "build/goal-r1-spo2-confidence-c/coverage.py": "0bf0c4aaae423542207c905f4efe5909112fdb55992851544d9b867c97b07eeb",
+    "build/goal-r1-spo2-confidence-c/defect.c": "d372013e0beea437b719db4d90b14524ab0bc71d7194a74bea12b5bf5af11ad7",
+    "build/goal-r1-spo2-confidence-c/defect.elf": "f505b3848658c42aee80b1fd9efa88a630c3d5c4f2e43a1bb8e249016f5705a1",
+    "build/goal-r1-spo2-confidence-c/defect.o": "d8ca6a682ad0f6b101fc88acfbf067031001ba4c030ceb78df40f5ebf5e9b0b0",
+    "build/goal-r1-spo2-confidence-c/document.py": "72c117e095dc2d475691ad1616f92f81084175d6fe29d68924c26c31775acdf6",
+    "build/goal-r1-spo2-confidence-c/fixture.py": "0b75f314ad260a259ddb7fb13b7e8da032e0858a322fa09e3e766a446fe51bb2",
+    "build/goal-r1-spo2-confidence-c/link-argv.json": "1c62eac4d250c313ff884adcdd634645977d97e7782c35202af22031fa0267a0",
+    "build/goal-r1-spo2-confidence-c/link.log": "5aa6266964a2b43e3133f0e1c6d2626e8e7fe0164e79c37c435bc9ed44e6a0af",
+    "build/goal-r1-spo2-confidence-c/prepare.py": "2da60efab81518804bab610edd84fb47dbf2558330d77a1b07e54f5a947540ca",
+    "build/goal-r1-spo2-confidence-c/rea-95828.json": "c9f7d9a684aee9a3c7eb6aa2103c05db062d4b0c6db4afd44f9de8c3a761fd45",
+    "build/goal-r1-spo2-confidence-c/rea-bytes.json": "d4cbb955240abaca8c453420211e7049a54c4f3821cc2ce1b71b8954197ea733",
+    "build/goal-r1-spo2-confidence-c/results.json": "cd43a4e5ce307cf1a3972d57ce149bcb18a05c8c08d37bed26452bfcf88214bb",
+    "build/goal-r1-spo2-confidence-c/verify.log": "33685e86b669c052add2e9683e8bfbf2af2c45cdab297f36b753ffc06179914f",
+    "build/goal-r1-spo2-confidence-c/verify.py": "96361787e2d501909826712ba31bc0776e5ee6234bb6d9ad3b1b8dba3aba0d72",
+    "build/goal-r1-spo2-infer-support-c/normal-dependencies.a": "7e62b43a34fcf2b0ae34045a276bf4d564be5dde2ddb636dd0f69169c8843637",
+    "build/goal-r1-spo2-ratio-c/normal-stream-test.ld": "808ff9c64adde68933158791e9d115c75817ae1840e2bdcbcfa42c7a39314cc6",
+    "build/sources-goal-r1-autocorrelation-integration-c/r1/r1-application/r1__src__application__goodix__native_autocorrelation.c.o": "299ae25162517ac49062ef41b73151f59c138ecb76f6233a8cfdf9364e6da8aa",
+    "build/sources-goal-r1-autocorrelation-integration-c/r1/r1-application/r1__src__application__goodix__native_spo2_statistics.c.o": "4775b074c0ad295abb459f38a0280c09ce2d0415d853ee209c3cfbb8832fcda2",
+    "build/sources-goal-r1-gaussian-interval-c/r1/r1-application/r1__src__application__goodix__native_gaussian_interval.c.o": "87f64b2693efb3e48e6efca093594757746f9172d09e40ee9f11c9d20c854905",
+    "build/sources-goal-r1-packed-conversion-c/r1/r1-application/r1__src__application__goodix__native_packed_conversion.c.o": "5a016b4688f63f0cd12fe295cb8eb2b626eb82de68fdba11ffb590a223b03cbb",
+    "build/sources-goal-r1-peak-metrics-c/r1/r1-application/r1__src__application__goodix__native_spo2_peak_metrics.c.o": "1acf16e40139c1b02540fe4ba1c786a3e3d0196e0216aef72e09ed507b42fad9",
+    "build/sources-goal-r1-peak-rate-c/r1/r1-application/r1__src__application__goodix__native_peak_rate.c.o": "745a6e1d74f506555251d842720d074c0f4b1d0f090b6208ac17ee0dbedbdd0e",
+    "build/sources-goal-r1-spo2-statistics-c/r1/r1-application/r1__src__application__goodix__native_spectral_peaks.c.o": "9b99c7c3b40c8e0c3a3ba34e7736b37f710d063c760ef0898482243c361e1ec0",
+    "build/sources-goal-r1-spo2-statistics-c/r1/r1-application/r1__src__application__runtime__native_float_bits.c.o": "cc448df0a2076c6dd5ee05a700f3221fb9d253ae9ae0cb7b591a0ea3a474c154",
+    "r1/blobs/official/r1-2.2.6.0009/application.bin": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "r1/src/application/goodix/native_dual_window_features.c": "a3723e2de3c61de3da1ba7d4ee5ce0ccb821d862f9ffc51744ea90025f2daa35",
+    "r1/src/application/goodix/native_gaussian_interval.c": "dde6ad478cc5f789c1e5459344f3e13d69af2a75ae96c15835ccbf25b66f9ecd",
+    "r1/src/application/goodix/native_peak_selection.c": "c6e1c5a6a8e97c4435b039e9d7405e8cd542d7126308c27ed62245fde6235984",
+    "r1/src/application/goodix/native_rolling_feature.c": "54e10de824916b7976cd36bf25689b8f2926ccaa9ad85843d1dba37420b7c9af",
+    "r1/src/application/goodix/native_spo2_statistics.c": "242c50bb5efdd2daa07400d9eb1ca7fb1b3b44c2a12f5cda1a0acaf182ef579e",
+    "r1/src/application/goodix/native_spo2_summary.c": "527ea35acfbfd6c36d943482324c1a80806b174172282ef3eb16436735a73998",
+    "r1/src/sources.json": "e6e6eb575dc7e0dc93f6bfed5164bb4d932da0b8e584f1c260217df7dc0fb29f"
+  }
+}

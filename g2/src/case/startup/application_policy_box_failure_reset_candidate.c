@@ -20,3 +20,5 @@ void case_policy_box_failure_reset(void)
         (void)case_legacy_logger((const char *)(uintptr_t)CASE_STRING_ADDR(08001330));
     }
 }
+/* Dedup (0x080012e4): case_binary_56_exit (was legacy-default/binary_56_exit_candidate.c). */
+uint32_t case_binary_56_exit(void) __attribute__((alias("case_policy_box_failure_reset")));

@@ -10,7 +10,7 @@ extern void audio_uart_lv_anim_init_4503d6(void *);
 extern void audio_uart_lv_anim_values_4506ce(void *, int32_t, int32_t);
 extern void *audio_uart_lv_anim_start_450408(void *);
 extern void audio_terminal_button_fade_callback_58c230(void);
-extern void audio_uart_lv_anim_path_450688(void);
+extern void lv_anim_path_ease_in_out(void);
 
 static const char module[] = "fade.anim";
 static const char path[] =
@@ -40,7 +40,7 @@ static void start(uint32_t object, uint32_t duration, uint32_t complete,
     write_word(descriptor, 4u,
                (uint32_t)(uintptr_t)&audio_terminal_button_fade_callback_58c230);
     write_word(descriptor, 0x20u,
-               (uint32_t)(uintptr_t)&audio_uart_lv_anim_path_450688);
+               (uint32_t)(uintptr_t)&lv_anim_path_ease_in_out);
     if (complete != 0u)
         write_word(descriptor, 0x10u, complete);
     (void)audio_uart_lv_anim_start_450408(descriptor);

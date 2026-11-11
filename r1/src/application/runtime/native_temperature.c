@@ -3,11 +3,122 @@
 uint8_t r1_temperature_calibration[6] __attribute__((section(".r1.temp.calibration"),aligned(1)))={0};
 const char r1_temp_text_6f798[52] __attribute__((section(".r1.temp.s6f798")))="[RING][GXT310] Trigger one-shot failed, addr=0x%02X";
 const char r1_temp_text_6f7d4[48] __attribute__((section(".r1.temp.s6f7d4")))="[GXT310] Trigger one-shot failed, addr=0x%02X";
-__attribute__((naked)) uint32_t r1_temperature_pair_read_calibrated(void) { __asm__ volatile("TC_50e4c:\npush {r4,r5,r6,lr}\nTC_50e4e:\nbl r1_gxt310_bus_acquire\nTC_50e52:\nbl r1_gxt310_enable_pair_native\nTC_50e56:\nbl r1_gxt310_one_shot_channel0\nTC_50e5a:\nbl r1_gxt310_one_shot_channel2\nTC_50e5e:\nmovs r0, #0x50\nTC_50e60:\nbl osDelay\nTC_50e64:\nbl r1_gxt310_temperature_channel0\nTC_50e68:\nmov r5, r0\nTC_50e6a:\nbl r1_gxt310_temperature_channel2\nTC_50e6e:\nmov r4, r0\nTC_50e70:\nbl r1_gxt310_disable_pair_native\nTC_50e74:\nbl r1_gxt310_bus_release\nTC_50e78:\nldr r0,=r1_temperature_calibration\nTC_50e7a:\nbl r1_temperature_calibration_read\nTC_50e7e:\nldr r1,=r1_temperature_calibration\nTC_50e80:\nmovs r0, #0x0\nTC_50e82:\nldrb r2, [r1,r0]\nTC_50e84:\ncmp r2, #0xff\nTC_50e86:\nbeq TC_50e92\nTC_50e88:\nldrb r0, [r1,#0x0]\nTC_50e8a:\ncbz r0, TC_50e9a\nTC_50e8c:\ncmp r0, #0x1\nTC_50e8e:\nbeq TC_50ea2\nTC_50e90:\nb TC_50ea8\nTC_50e92:\nadds r0, r0, #0x1\nTC_50e94:\ncmp r0, #0x6\nTC_50e96:\nblt TC_50e82\nTC_50e98:\nb TC_50ebc\nTC_50e9a:\nldrh.w r0, [r1,#0x1]\nTC_50e9e:\nsubs r5, r5, r0\nTC_50ea0:\nb TC_50ea8\nTC_50ea2:\nldrh.w r0, [r1,#0x1]\nTC_50ea6:\nadd r5, r0\nTC_50ea8:\nldrb r0, [r1,#0x3]\nTC_50eaa:\ncbz r0, TC_50eb2\nTC_50eac:\ncmp r0, #0x1\nTC_50eae:\nbeq TC_50eb8\nTC_50eb0:\nb TC_50ebc\nTC_50eb2:\nldrh r0, [r1,#0x4]\nTC_50eb4:\nsubs r4, r4, r0\nTC_50eb6:\nb TC_50ebc\nTC_50eb8:\nldrh r0, [r1,#0x4]\nTC_50eba:\nadd r4, r0\nTC_50ebc:\nadds r0, r5, r4\nTC_50ebe:\nadd.w r0, r0, r0, lsr #0x1f\nTC_50ec2:\nubfx r0, r0, #0x1, #0x10\nTC_50ec6:\npop {r4,r5,r6,pc}\n"); }
-__attribute__((naked)) uint32_t r1_gxt310_temperature_read(void) { __asm__ volatile("TC_6f600:\npush {r3,lr}\nTC_6f602:\nmovs r1, #0x0\nTC_6f604:\nmovs r3, #0x2\nTC_6f606:\nmov r2, sp\nTC_6f608:\nstr r1, [sp,#0x0]\nTC_6f60a:\nbl r1_gxt310_transfer_read_native\nTC_6f60e:\nldrh.w r0, [sp,#0x0]\nTC_6f612:\nvldr s1,TC_SCALE\nTC_6f616:\nrev16 r0, r0\nTC_6f618:\nsxth r0, r0\nTC_6f61a:\nvmov s0, r0\nTC_6f61e:\nvcvt.f32.s32 s0, s0\nTC_6f622:\nvmul.f32 s0, s0, s1\nTC_6f626:\nvldr s1,TC_MILLI\nTC_6f62a:\nvmul.f32 s0, s0, s1\nTC_6f62e:\nvcvt.s32.f32 s0, s0\nTC_6f632:\nvmov r0, s0\nTC_6f636:\npop {r3,pc}\n.p2align 2\nTC_SCALE: .float 0.0078125\nTC_MILLI: .float 1000.0\n"); }
-__attribute__((naked)) uint32_t r1_gxt310_temperature_channel0(void) { __asm__ volatile("TC_6f80c:\nmovs r0, #0x90\nTC_6f80e:\nb.w r1_gxt310_temperature_read\n"); }
-__attribute__((naked)) uint32_t r1_gxt310_temperature_channel2(void) { __asm__ volatile("TC_6f826:\nmovs r0, #0x94\nTC_6f828:\nb.w r1_gxt310_temperature_read\n"); }
-__attribute__((naked)) uint32_t r1_gxt310_one_shot(void) { __asm__ volatile("TC_6f738:\npush {r3,r4,r5,lr}\nTC_6f73a:\nmov r4, r0\nTC_6f73c:\nldr r0,=0x0000c101\nTC_6f73e:\nmovs r3, #0x2\nTC_6f740:\nnop\nTC_6f742:\nstr r0, [sp,#0x0]\nTC_6f744:\nmov r2, sp\nTC_6f746:\nmovs r1, #0x1\nTC_6f748:\nmov r0, r4\nTC_6f74a:\nbl r1_gxt310_transfer_write_native\nTC_6f74e:\ncbz r0, TC_6f754\nTC_6f750:\nmovs r0, #0x1\nTC_6f752:\npop {r3,r4,r5,pc}\nTC_6f754:\nbl r1_structured_log_mode_get\nTC_6f758:\nlsls r0, r0, #0x1f\nTC_6f75a:\nbne TC_6f764\nTC_6f75c:\nbl r1_structured_log_mode_get\nTC_6f760:\nlsls r0, r0, #0x1d\nTC_6f762:\nbpl TC_6f772\nTC_6f764:\nmov r3, r4\nTC_6f766:\nldr r2, =r1_temp_text_6f798\nTC_6f768:\nldr r1, =r1_temp_text_6f798\nTC_6f76a:\nmov.w r0, #0x4400000\nTC_6f76e:\nbl r1_structured_log_format\nTC_6f772:\nbl r1_structured_log_mode_get\nTC_6f776:\nlsls r0, r0, #0x1e\nTC_6f778:\nbpl TC_6f790\nTC_6f77a:\nldr r0, =0xc44fc\nTC_6f77c:\nldr r1, =0xc441c\nTC_6f77e:\nmov r2, r4\nTC_6f780:\nsubs r0, r0, r1\nTC_6f782:\nlsrs r0, r0, #0x3\nTC_6f784:\nmovs r1, #0x1\nTC_6f786:\nadd.w r0, r1, r0, lsl #0x10\nTC_6f78a:\nldr r1, =r1_temp_text_6f7d4\nTC_6f78c:\nbl nrf_log_frontend_std_1\nTC_6f790:\nmovs r0, #0x0\nTC_6f792:\npop {r3,r4,r5,pc}\n"); }
-__attribute__((naked)) uint32_t r1_gxt310_one_shot_channel0(void) { __asm__ volatile("TC_6f818:\nmovs r0, #0x90\nTC_6f81a:\nb.w r1_gxt310_one_shot\n"); }
-__attribute__((naked)) uint32_t r1_gxt310_one_shot_channel2(void) { __asm__ volatile("TC_6f832:\nmovs r0, #0x94\nTC_6f834:\nb.w r1_gxt310_one_shot\n"); }
-__attribute__((naked)) uint32_t r1_temperature_calibration_read(void) { __asm__ volatile("TC_7badc:\npush {r4,lr}\nTC_7bade:\nmov r4, r0\nTC_7bae0:\nldr r0,=r1_device_info_kv_handle\nTC_7bae2:\nsub sp, #0x80\nTC_7bae4:\nmovs r2, #0x7c\nTC_7bae6:\nmov r1, sp\nTC_7bae8:\nldr r0,[r0]\nTC_7baea:\nbl r1_kv_class_read\nTC_7baee:\nldr.w r0, [sp,#0x3e]\nTC_7baf2:\nstr r0, [r4,#0x0]\nTC_7baf4:\nldrh.w r0, [sp,#0x42]\nTC_7baf8:\nstrh r0, [r4,#0x4]\nTC_7bafa:\nadd sp, #0x80\nTC_7bafc:\npop {r4,pc}\n"); }
+extern void r1_gxt310_bus_acquire(void),r1_gxt310_bus_release(void);
+extern uint32_t r1_gxt310_enable_pair_native(void);
+extern void r1_gxt310_disable_pair_native(void);
+extern int32_t osDelay(uint32_t ticks);
+uint32_t r1_gxt310_one_shot_channel0(void),r1_gxt310_one_shot_channel2(void);
+uint32_t r1_gxt310_temperature_channel0(void),r1_gxt310_temperature_channel2(void);
+uint32_t r1_temperature_calibration_read(void *destination);
+uint32_t r1_gxt310_one_shot(uint32_t address);
+uint32_t r1_gxt310_temperature_read(uint32_t address);
+struct __attribute__((packed,may_alias)) r1_temperature_unaligned_halfword {
+    uint16_t value;
+};
+static uint16_t calibration_halfword(const volatile uint8_t *bytes)
+{
+    return ((const volatile struct r1_temperature_unaligned_halfword *)
+            (const volatile void *)bytes)->value;
+}
+/* Native 0x50e4c: preserve the channel sequence and modulo-32-bit arithmetic.
+ * Calibration uses live byte/halfword loads, including the unaligned +1 load.
+ * Adding the sign bit before extracting bits 1..16 matches native rounding. */
+uint32_t r1_temperature_pair_read_calibrated(void)
+{
+    r1_gxt310_bus_acquire();
+    (void)r1_gxt310_enable_pair_native();
+    (void)r1_gxt310_one_shot_channel0();
+    (void)r1_gxt310_one_shot_channel2();
+    (void)osDelay(80);
+    uint32_t first=r1_gxt310_temperature_channel0();
+    uint32_t second=r1_gxt310_temperature_channel2();
+    r1_gxt310_disable_pair_native();
+    r1_gxt310_bus_release();
+    (void)r1_temperature_calibration_read(r1_temperature_calibration);
+    const volatile uint8_t *calibration=r1_temperature_calibration;
+    for (uint32_t i=0;i<6;i++) {
+        if (calibration[i]==UINT8_MAX) continue;
+        uint8_t mode=calibration[0];
+        if (mode==0) first-=calibration_halfword(calibration+1);
+        else if (mode==1) first+=calibration_halfword(calibration+1);
+        mode=calibration[3];
+        if (mode==0) second-=calibration_halfword(calibration+4);
+        else if (mode==1) second+=calibration_halfword(calibration+4);
+        break;
+    }
+    uint32_t sum=first+second;
+    return ((sum+(sum>>31))>>1)&UINT16_MAX;
+}
+extern uint32_t r1_gxt310_transfer_read_native(uint32_t address,uint32_t reg,
+                                              void *destination,uint32_t size);
+/* Native conversion with an explicit zeroed transfer word; scratch R3 is not a C result. */
+__attribute__((noinline,used)) uint32_t
+r1_gxt310_temperature_read_body(uint32_t address,volatile uint32_t *frame)
+{
+    *frame=0;
+    (void)r1_gxt310_transfer_read_native(address,0,(void *)frame,2);
+    uint32_t raw=__builtin_bswap16(calibration_halfword(
+        (const volatile uint8_t *)frame));
+    int32_t sample=(int32_t)raw;
+    if (raw&0x8000u) sample-=65536;
+    float scaled=(float)sample*0.0078125f;
+    return (uint32_t)(int32_t)(scaled*1000.0f);
+}
+__attribute__((noinline)) uint32_t r1_gxt310_temperature_read(uint32_t address)
+{
+    volatile uint32_t frame;
+    return r1_gxt310_temperature_read_body(address,&frame);
+}
+uint32_t r1_gxt310_temperature_channel0(void) { return r1_gxt310_temperature_read(0x90); }
+uint32_t r1_gxt310_temperature_channel2(void) { return r1_gxt310_temperature_read(0x94); }
+extern uint32_t r1_gxt310_transfer_write_native(uint32_t address,uint32_t reg,
+                                               const void *source,uint32_t size);
+extern uint32_t r1_structured_log_mode_get(void);
+extern uint32_t r1_structured_log_format(uint32_t,const char *,const char *,...);
+extern void nrf_log_frontend_std_1(uint32_t,const char *,uint32_t);
+/* Native trigger command and logging policy, with an ordinary C transfer word. */
+__attribute__((noinline,used)) uint32_t
+r1_gxt310_one_shot_body(uint32_t address,volatile uint32_t *frame)
+{
+    *frame=0x0000c101u;
+    if (r1_gxt310_transfer_write_native(address,1,(const void *)frame,2))
+        return 1;
+    if ((r1_structured_log_mode_get()&1u)||
+        (r1_structured_log_mode_get()&4u))
+        (void)r1_structured_log_format(0x04400000u,r1_temp_text_6f798,
+                                     r1_temp_text_6f798,address);
+    if (r1_structured_log_mode_get()&2u)
+        nrf_log_frontend_std_1(0x001c0001u,r1_temp_text_6f7d4,address);
+    return 0;
+}
+__attribute__((noinline)) uint32_t r1_gxt310_one_shot(uint32_t address)
+{
+    volatile uint32_t frame;
+    return r1_gxt310_one_shot_body(address,&frame);
+}
+uint32_t r1_gxt310_one_shot_channel0(void) { return r1_gxt310_one_shot(0x90); }
+uint32_t r1_gxt310_one_shot_channel2(void) { return r1_gxt310_one_shot(0x94); }
+extern void *volatile r1_device_info_kv_handle;
+extern uint32_t r1_kv_class_read(void *,void *,uint32_t);
+struct __attribute__((packed,may_alias)) r1_temperature_unaligned_word {
+    uint32_t value;
+};
+/* Cached-class extraction requires a valid fully populated 124-byte nv_r1
+ * record. Keep ordered stores; private stack aliases are outside the C ABI. */
+__attribute__((noinline,used)) uint32_t
+r1_temperature_calibration_read_body(void *destination,volatile uint8_t *record)
+{
+    (void)r1_kv_class_read(r1_device_info_kv_handle,(void *)record,124);
+    uint32_t word=((const volatile struct r1_temperature_unaligned_word *)
+                  (const volatile void *)(record+62))->value;
+    ((volatile struct r1_temperature_unaligned_word *)destination)->value=word;
+    uint32_t halfword=calibration_halfword(record+66);
+    ((volatile struct r1_temperature_unaligned_halfword *)
+     ((volatile uint8_t *)destination+4))->value=(uint16_t)halfword;
+    return halfword;
+}
+__attribute__((noinline)) uint32_t r1_temperature_calibration_read(void *destination)
+{
+    _Alignas(4) volatile uint8_t record[124];
+    return r1_temperature_calibration_read_body(destination,record);
+}

@@ -51,7 +51,7 @@ extern void audio_uart_lv_scroll_to_y_44ea04(void *obj, int32_t y, uint32_t anim
 extern void audio_uart_lv_anim_init_4503d6(g2_lv_anim_t *anim);
 extern void *audio_uart_lv_anim_start_450408(const g2_lv_anim_t *anim);
 extern void audio_uart_lv_anim_values_4506ce(g2_lv_anim_t *anim, int32_t start, int32_t end);
-extern int32_t audio_uart_lv_anim_path_450672(const void *anim); /* lv_anim_path_ease_out */
+extern int32_t lv_anim_path_ease_out(const void *anim); /* lv_anim_path_ease_out */
 extern void Dashboard_Fadeout_Anim_Start_4e8a90(void);
 
 /* Same TU, reconstructed separately. */
@@ -268,7 +268,7 @@ void quicklist_scroll_content_with_anim_ready_cb_4f6e6c(void *obj, int32_t targe
     a.exec_cb = quicklist_scroll_anim_exec_cb_4f6d50;
     if (ready_cb != NULL)
         a.completed_cb = ready_cb;
-    a.path_cb = audio_uart_lv_anim_path_450672;
+    a.path_cb = lv_anim_path_ease_out;
     g2_quicklist_anim_state_20074e20 = 1;
     (void)audio_uart_lv_anim_start_450408(&a);
 }

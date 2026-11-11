@@ -1,86 +1,32 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_31fdc4\n"
-".type opencfw_em9305_child_31fdc4,@function\n"
-"opencfw_em9305_child_31fdc4:\n"
-"L31fdc4:\n"
-"push_s blink\n"
-"L31fdc6:\n"
-"ld_s r0,[r0,0x24]\n"
-"L31fdc8:\n"
-"ldb_s r1,[r0,0x10]\n"
-"L31fdca:\n"
-"ldb_s r2,[r0,0x2]\n"
-"L31fdcc:\n"
-"seteq r1,r1,0x2\n"
-"L31fdd0:\n"
-"asl_s r12,r1\n"
-"L31fdd2:\n"
-"brne_s r2,0,L31fdd8\n"
-"L31fdd4:\n"
-"ldb_s r1,[r0,0x1]\n"
-"L31fdd6:\n"
-"breq_s r1,0,L31fe0e\n"
-"L31fdd8:\n"
-"ldb r1,[r0,242]\n"
-"L31fddc:\n"
-"ldb r3,[r0,241]\n"
-"L31fde0:\n"
-"add_s r1,r1,1\n"
-"L31fde2:\n"
-"stb r1,[r0,242]\n"
-"L31fde6:\n"
-"breq_s r3,0,L31fdee\n"
-"L31fde8:\n"
-"extb_s r2,r1\n"
-"L31fdea:\n"
-"brhs.nt r2,0x2,L31fdf6\n"
-"L31fdee:\n"
-"brne_s r3,0,L31fe0a\n"
-"L31fdf0:\n"
-"extb.f 0,r1\n"
-"L31fdf4:\n"
-"beq_s L31fe0a\n"
-"L31fdf6:\n"
-"mov_s r2,0x8019f8\n"
-"L31fdfc:\n"
-"ldb_s r1,[r2,0]\n"
-"L31fdfe:\n"
-"bclr r1,r1,r12\n"
-"L31fe02:\n"
-"stb_s r1,[r2,0]\n"
-"L31fe04:\n"
-"bl.d opencfw_em9305_child_325edc\n"
-"L31fe08:\n"
-"mov_s r1,3\n"
-"L31fe0a:\n"
-"pop_s blink\n"
-"L31fe0c:\n"
-"j_s [blink]\n"
-"L31fe0e:\n"
-"mov_s r2,0x8019fa\n"
-"L31fe14:\n"
-"ldb r1,[r0,241]\n"
-"L31fe18:\n"
-"ldb_s r3,[r2,0]\n"
-"L31fe1a:\n"
-"add3 r11,r0,0x37\n"
-"L31fe1e:\n"
-"cmp_s r1,0\n"
-"L31fe20:\n"
-"bclr r1,r3,r12\n"
-"L31fe24:\n"
-"st.as 0,[r0,106]\n"
-"L31fe28:\n"
-"stb 0,[r11]\n"
-"L31fe2c:\n"
-"stb_s r1,[r2,0]\n"
-"L31fe2e:\n"
-"bne_s L31fe0a\n"
-"L31fe30:\n"
-"bl opencfw_em9305_child_31fe38\n"
-"L31fe34:\n"
-"b_s L31fe0a\n"
-".size opencfw_em9305_child_31fdc4,.-opencfw_em9305_child_31fdc4\n"
-);
+#include <stdint.h>
+
+/* Native 0x31fdc4..0x31fe36: count a link event and clear the link's
+ * pending bit (bit 2 for role 2, else bit 0). Active links count +242 and
+ * once due (two events when +241 is set, any wrap-free count otherwise)
+ * clear the bit in 0x8019f8 and notify 325edc with status 3. Idle links
+ * clear the bit in 0x8019fa, reset +424/+440 and, when +241 is clear,
+ * pass the new mask to 31fe38. Returns the link when nothing is called. */
+extern uint32_t opencfw_em9305_child_325edc(uintptr_t link, uint32_t status);
+extern uint32_t opencfw_em9305_child_31fe38(uintptr_t link, uint32_t mask);
+
+uint32_t opencfw_em9305_child_31fdc4(uintptr_t owner)
+{
+    uintptr_t link=*(volatile uint32_t *)(owner+36u);
+    uint32_t bit=(*(volatile uint8_t *)(link+16u)==2u)?2u:0u;
+    if(*(volatile uint8_t *)(link+2u)!=0u||*(volatile uint8_t *)(link+1u)!=0u){
+        uint32_t count=(uint8_t)(*(volatile uint8_t *)(link+242u)+1u);
+        uint32_t armed=*(volatile uint8_t *)(link+241u);
+        *(volatile uint8_t *)(link+242u)=(uint8_t)count;
+        if(armed!=0u?count<2u:count==0u)return (uint32_t)link;
+        volatile uint8_t *pending=(volatile uint8_t *)(uintptr_t)0x8019f8u;
+        *pending=(uint8_t)(*pending&~(1u<<bit));
+        return opencfw_em9305_child_325edc(link,3u);
+    }
+    uint32_t armed=*(volatile uint8_t *)(link+241u);
+    uint32_t mask=*(volatile uint8_t *)(uintptr_t)0x8019fau&~(1u<<bit);
+    *(volatile uint32_t *)(link+424u)=0u;
+    *(volatile uint8_t *)(link+440u)=0u;
+    *(volatile uint8_t *)(uintptr_t)0x8019fau=(uint8_t)mask;
+    if(armed!=0u)return (uint32_t)link;
+    return opencfw_em9305_child_31fe38(link,mask);
+}

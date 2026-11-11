@@ -18,7 +18,7 @@ extern void audio_uart_ambiq_clip_change_4b077e(uint32_t,const int32_t *,
                                                   uint32_t);
 extern void display_driver_gpu_position_4b1b48(uint32_t,uint32_t);
 extern uint32_t audio_uart_ambiq_submit_4b0c8a(uint32_t);
-extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,
+extern void lv_log_add(uint32_t,const char *,uint32_t,
                                 const char *,const char *,...);
 
 static const char render_path[] =
@@ -39,10 +39,10 @@ static const char unreachable_message[] = "Should never come to this!";
 static void render_fault(uint32_t line,const char *expression,
                          const char *message,uint32_t a,uint32_t b) {
     if (line == 0xb5u)
-        audio_uart_lvgl_log(3u,render_path,line,render_function,
+        lv_log_add(3u,render_path,line,render_function,
                             message,expression,a,b);
     else
-        audio_uart_lvgl_log(3u,render_path,line,render_function,
+        lv_log_add(3u,render_path,line,render_function,
                             asserted_message,expression,message);
     for (;;) *(volatile uint32_t *)(uintptr_t)UINT32_MAX = 0u;
 }

@@ -121,7 +121,6 @@ extern void generic_animation_destroy_463e1c(void *anim, uint8_t delete_image);
 extern uint32_t navigation_ui_exit_page_handler_54c268(void);
 extern void audio_ble_param_reset_delayed_event(uint32_t delay); /* 0x478252 */
 extern int32_t StopIMUCompassFunc_54566c(void);
-extern uint64_t audio_uart_ring_u64_div_47cc60(uint32_t lo, uint32_t hi, uint32_t dlo, uint32_t dhi); /* u64 / u64 */
 extern void audio_uart_ring_wear_persist_48eb32(uint32_t key, uint32_t length, const void *payload); /* event report */
 
 void *navigation_page_manager_get_585cba(void);
@@ -367,7 +366,7 @@ int32_t audio_uart_registry_callback_58607a(int32_t event, const uint8_t *payloa
         {
             uint64_t scaled = (uint64_t)elapsed * 1000u;
             report = session_report_template;
-            report.seconds = (uint32_t)audio_uart_ring_u64_div_47cc60((uint32_t)scaled, (uint32_t)(scaled >> 32), 1000u, 0u);
+            report.seconds = (uint32_t)(scaled / 1000u);
         }
         audio_uart_ring_wear_persist_48eb32(NAV_SESSION_EVENT_ID, 2u, &report);
         return 0;

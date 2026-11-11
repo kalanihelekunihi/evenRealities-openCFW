@@ -1,0 +1,98 @@
+{
+  "schema_version": 1,
+  "status": "stock-validated C candidate; source admission pending",
+  "entry": "0x71e34",
+  "total_stock_c_pairs": 6078,
+  "verification": {
+    "pairs": 6078,
+    "elapsed_seconds": 4.94146112492308,
+    "fpscr_modes": 32,
+    "scope": "Actual C float promotion/logger with logging disabled,RTZ helper and raw profile validation;all field bounds/special values,persisted fallback and output/input aliases. Return/public RAM/FPSCR/saved ABI,SP/masks."
+  },
+  "coverage": {
+    "instruction_bytes": 436,
+    "instruction_starts": 141
+  },
+  "compiled_defect_controls": [
+    {
+      "defect": "age-upper-edge",
+      "detected": true
+    },
+    {
+      "defect": "sex-zero-gate",
+      "detected": true
+    },
+    {
+      "defect": "height-default",
+      "detected": true
+    },
+    {
+      "defect": "age-rate-default",
+      "detected": true
+    },
+    {
+      "defect": "persisted-fallback-slot",
+      "detected": true
+    },
+    {
+      "defect": "raw-resting-copy",
+      "detected": true
+    },
+    {
+      "defect": "last-error-status",
+      "detected": true
+    },
+    {
+      "defect": "unordered-positive",
+      "detected": true
+    }
+  ],
+  "semantics": [
+    "Native71e34 is a two-core-argument converter;extra parameters inferred by Ghidra are overwritten private temporaries. Seven actual C custom binary32-to-binary64 promotions and variadic GoMore logger calls precede all validation. Tests disable the logger through its actual12-byte configuration at20007cec;no fixed-output logger substitute is used.",
+    "Preserve signed/raw modular field ranges,age/sex unsigned RTZ conversion and FPSCR effects,ordered last-error-wins status,nonfused208-age*0.7 default,and the unordered BHI policy for profile field6. Valid finite values,default -1 markers,signed zero,denormals and both NaN classes are compared across all32 FP configurations.",
+    "Load the existing native context pointer at20007c4c after field conversion. Each of two persisted defaults reads its own slot atprevious+2d8+4*i;both fallback branches WRITE previous+2d8. Preserve that stock asymmetry. Outputs store cached converted fields in native order,then reread the original resting-rate word into output84 while storing converted/default resting rate at110. Shifted output/input aliases retain that late read."
+  ],
+  "limitations": [
+    "Probe only;not admitted to sources.json. Full436-byte instruction coverage is within the profile converter;enabled logging/callback behavior is not exercised. Existing C logger and promotion helpers are linked and execute with logging disabled.",
+    "Public RAM excludes8192 private stack bytes below SP. Return value,full FPSCR,saved core/FP registers,SP and masks are checked;caller scratch/APSR are excluded. Valid mapped/aligned record owners and shifted output/input aliases are covered. Invalid owner-pointer aliases,physical hardware,timing and interrupts/concurrency remain unverified.",
+    "The engine initialization parent,filter coefficient construction,composite engine reset and authorization/runtime checks still require native C integration. No authorization checks are bypassed by this probe."
+  ],
+  "evidence_sha256": {
+    "build/goal-r1-engine-profile-c/candidate.c": "1e5f0a29e931e787aa006ea29db1f8e6df01b006e15dd47d1da083080f180a29",
+    "build/goal-r1-engine-profile-c/candidate.elf": "1530a333c776f0b6f829a86f4abdadd9aaa1c1c528d2445ad89393129a76052f",
+    "build/goal-r1-engine-profile-c/candidate.o": "0c384a8e734c97f8799f9ead84e57e8e89929d4117f9d619a0937866331d7915",
+    "build/goal-r1-engine-profile-c/compile-argv.json": "650394e8609bc3cc15bffa953abc3fb4720153a26b62f6863a057a97b1c12243",
+    "build/goal-r1-engine-profile-c/controls-results.json": "f045dc9207bee715d0f3a1d842a0cdbf3b82f04e571726386acc15dc6db053dc",
+    "build/goal-r1-engine-profile-c/controls.log": "6587ca8e0588824f8c68b2cef27165c669a2c3b71abb18d6252d0c1845fe98af",
+    "build/goal-r1-engine-profile-c/controls.py": "05084dc60e478b4c30677e3570a0773549d12cf35ef394f580aeb640149be7da",
+    "build/goal-r1-engine-profile-c/coverage-results.json": "0b14f2cff3d377f24ed9a4aa5aec521596c374871327d2acb1186c4393d4fb25",
+    "build/goal-r1-engine-profile-c/coverage.log": "6aa88df58896afca125ff355d274e82b901a0623e6ebec0eed0c96d4c1ac87c3",
+    "build/goal-r1-engine-profile-c/coverage.py": "e32bbd2e8e3f629b9de9320ee35bce6e5b8d43ab6ff0e2768fc309daf7178cfe",
+    "build/goal-r1-engine-profile-c/defect.c": "f7ac94d2017fa36320ac79f6e0273294b7b156f5c9e41d6ebaed665af6ad331f",
+    "build/goal-r1-engine-profile-c/defect.elf": "97e17f3862aab693ac80d081aa3c48872362f620220fa856e7ed85246c6853fa",
+    "build/goal-r1-engine-profile-c/defect.o": "45dcaa693b91a12b6667e59181833f4447094b6e2e79d75d18aa8c2634583eb1",
+    "build/goal-r1-engine-profile-c/document.py": "fd686dae13e1901bb68e1dcc1265890d258834bcb2356b3e7d4ac11cf9bfaa63",
+    "build/goal-r1-engine-profile-c/fixture.py": "aad56bdf5280c414fcdd68da15e0eb09e5b1205aa4a833f21e9aa93bce172ea1",
+    "build/goal-r1-engine-profile-c/link-argv.json": "0debc48d31e0eed25d6181d18c17e9b6e0b1db24c4916485e6c962b5d5d0d400",
+    "build/goal-r1-engine-profile-c/link.log": "ca58c131c781777f67e20cc1fc31e0ed71b15d18c0e3ed16de707350935a0642",
+    "build/goal-r1-engine-profile-c/prepare.py": "ec314b91bb03aaed5c4ce77715d8e02d03c74d2113ecbc330082d656d2dfc4b7",
+    "build/goal-r1-engine-profile-c/profilelib.py": "d2be924e3b8ae48431ef07a7fdc3cab108e5cc7b34f16a81a81e6e7184b4fb13",
+    "build/goal-r1-engine-profile-c/rea-bytes.json": "1f37f09eb4e0815a8cfb4603d73c297ccf452ca77b96ae19c907c39566c11fc3",
+    "build/goal-r1-engine-profile-c/results.json": "eb31986bd126241ae07bcc57b69d5e2009ebe5caff0ee2e2aec5be3d1de843ab",
+    "build/goal-r1-engine-profile-c/test.ld": "adab82ee190bb985de8afbac70a4d1a9dfd8bc8212a037f26210c2e926f19157",
+    "build/goal-r1-engine-profile-c/verify.log": "ea0258e6a022e14e75c8521375cf248077228de51c901d4f68d3dd267705ca55",
+    "build/goal-r1-engine-profile-c/verify.py": "36da2e1fabb8df833fad9b84901f558001f5e9921898791ce10f95db25130c85",
+    "build/goal-r1-engine-state-c/rea-71e34.json": "60f6132ceb075c4e7d87135e42d3ad9a6806fc07d8a7349cd6bff753b40529de",
+    "build/goal-r1-model-i8-convolution-c/stock-entry.elf": "8faf5ed5a7e99752b781c1118086f6ada13458b084bd14e8fbb9a2eb58a05e76",
+    "build/goal-r1-spo2-infer-support-c/normal-dependencies.a": "7e62b43a34fcf2b0ae34045a276bf4d564be5dde2ddb636dd0f69169c8843637",
+    "build/sources-goal-r1-spo2-confidence-integration-c/r1/r1-application/r1__src__application__runtime__native_float_bits.c.o": "cc448df0a2076c6dd5ee05a700f3221fb9d253ae9ae0cb7b591a0ea3a474c154",
+    "build/sources-goal-r1-spo2-confidence-integration-c/r1/r1-application/r1__src__application__runtime__native_gomore_log.c.o": "b7533dfde2ee10ff1c04051f1e4d5d93cd44108464e8317506c4a3e3ff3afc52",
+    "r1/blobs/official/r1-2.2.6.0009/application.bin": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "r1/src/application/runtime/native_f32_integer.h": "239b6c7dc2bd398d8abf541979a85039a7a5391d4ea37e4bd9dad0503420c741",
+    "r1/src/application/runtime/native_float_bits.c": "aa36e420af30a285705c406ccf990a88fa9aa69042514a112b337a22697197c0",
+    "r1/src/application/runtime/native_float_bits.h": "de60835c4a543d0251ab8f2d87b5ee314d55a6f9f3c86e45e0628932e356616e",
+    "r1/src/application/runtime/native_gomore_dispatch.c": "c0b92ec5f17be6dd473100120b030fd8c57d70fd765b79750c404656324422c6",
+    "r1/src/application/runtime/native_gomore_log.c": "cdf8ca282a71a8097aae2a27d4e970d83aa075ce62cf35b2df0c3314d45456cf",
+    "r1/src/sources.json": "62767c27e22822f40208af0812717566f0da57b669462032ebef33a805216905"
+  }
+}

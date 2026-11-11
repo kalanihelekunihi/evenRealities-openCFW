@@ -1,156 +1,55 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_3239fc\n"
-".type opencfw_em9305_child_3239fc,@function\n"
-"opencfw_em9305_child_3239fc:\n"
-"L3239fc:\n"
-"enter_s [r13-r19,fp,blink]\n"
-"L3239fe:\n"
-"sub_s sp,sp,0xc\n"
-"L323a00:\n"
-"mov_s r14,r0\n"
-"L323a02:\n"
-"mov_s r19,r1\n"
-"L323a04:\n"
-"ldh_s r1,[r14,0x20]\n"
-"L323a06:\n"
-"mov_s r17,r3\n"
-"L323a08:\n"
-"mov_s r18,r2\n"
-"L323a0a:\n"
-"bmsk_s r1,r1,0x2\n"
-"L323a0c:\n"
-"mov_s r0,0\n"
-"L323a0e:\n"
-"add r16,r14,0x9d4\n"
-"L323a16:\n"
-"stb 7,[sp,4]\n"
-"L323a1a:\n"
-"stb_s r0,[sp,0x8]\n"
-"L323a1c:\n"
-"stb r0,[sp,7]\n"
-"L323a20:\n"
-"stb r0,[sp,6]\n"
-"L323a24:\n"
-"brhs.d.nt r1,0x7,L323a5c\n"
-"L323a28:\n"
-"stb r0,[sp,5]\n"
-"L323a2c:\n"
-"mov r0,827\n"
-"L323a30:\n"
-"mov_s r15,0x9\n"
-"L323a32:\n"
-"mov_s r13,0x40\n"
-"L323a34:\n"
-"bih [r1]\n"
-"L323a38:\n"
-"b_s L323a46\n"
-"L323a3a:\n"
-"b_s L323a92\n"
-"L323a3c:\n"
-"b_s L323a92\n"
-"L323a3e:\n"
-"b_s L323a5c\n"
-"L323a40:\n"
-"b_s L323a62\n"
-"L323a42:\n"
-"b_s L323a8a\n"
-"L323a44:\n"
-"b_s L323a8e\n"
-"L323a46:\n"
-"ldb_s r1,[r14,r0]\n"
-"L323a48:\n"
-"mov r0,369\n"
-"L323a4c:\n"
-"ldb_s r0,[r14,r0]\n"
-"L323a4e:\n"
-"and r13,r1,0x1\n"
-"L323a52:\n"
-"mov_s r15,0x8\n"
-"L323a54:\n"
-"xor r13,r13,81\n"
-"L323a58:\n"
-"brne_s r0,0,L323a7c\n"
-"L323a5a:\n"
-"b_s L323a92\n"
-"L323a5c:\n"
-"mov_s r13,0\n"
-"L323a5e:\n"
-"mov_s r15,0\n"
-"L323a60:\n"
-"b_s L323a92\n"
-"L323a62:\n"
-"ldb_s r0,[r14,r0]\n"
-"L323a64:\n"
-"mov r1,369\n"
-"L323a68:\n"
-"ldb_s r1,[r14,r1]\n"
-"L323a6a:\n"
-"and r13,r0,0x1\n"
-"L323a6e:\n"
-"and r0,r0,0x2\n"
-"L323a72:\n"
-"xor r13,r13,81\n"
-"L323a76:\n"
-"xor r15,r0,0xa\n"
-"L323a7a:\n"
-"breq_s r1,0,L323a92\n"
-"L323a7c:\n"
-"ldb r0,[r14,0xae2]\n"
-"L323a84:\n"
-"brne_s r0,0,L323a92\n"
-"L323a86:\n"
-"bset_s r13,r13,0x5\n"
-"L323a88:\n"
-"b_s L323a92\n"
-"L323a8a:\n"
-"mov_s r15,0xb\n"
-"L323a8c:\n"
-"b_s L323a92\n"
-"L323a8e:\n"
-"mov_s r15,0xb\n"
-"L323a90:\n"
-"mov_s r13,0x48\n"
-"L323a92:\n"
-"add_s r0,sp,0x4\n"
-"L323a94:\n"
-"mov_s r1,r16\n"
-"L323a96:\n"
-"bl.d opencfw_em9305_child_318440\n"
-"L323a9a:\n"
-"mov_s r2,r14\n"
-"L323a9c:\n"
-"add_s r0,sp,0x4\n"
-"L323a9e:\n"
-"mov_s r1,r16\n"
-"L323aa0:\n"
-"bl.d opencfw_em9305_child_3184f4\n"
-"L323aa4:\n"
-"mov_s r2,r14\n"
-"L323aa6:\n"
-"ldh_s r3,[r14,0x20]\n"
-"L323aa8:\n"
-"add r4,sp,0x4\n"
-"L323aac:\n"
-"mov_s r7,2\n"
-"L323aae:\n"
-"bmsk_s r3,r3,0x1\n"
-"L323ab0:\n"
-"mov_s r1,r15\n"
-"L323ab2:\n"
-"mov_s r2,r13\n"
-"L323ab4:\n"
-"mov r5,r18\n"
-"L323ab8:\n"
-"mov r6,r19\n"
-"L323abc:\n"
-"mov_s r0,r14\n"
-"L323abe:\n"
-"bl.d opencfw_em9305_radio_compose_323dc0\n"
-"L323ac2:\n"
-"st r17,[sp]\n"
-"L323ac6:\n"
-"leave_s [r13-r19,fp,blink,pcl]\n"
-".size opencfw_em9305_child_3239fc,.-opencfw_em9305_child_3239fc\n"
-);
+#include <stdint.h>
+
+/* Native 0x3239fc..0x323ac8: compose an advertising PDU for the set. The
+ * advertising type (+0x20, low 3 bits) selects the PDU type and header
+ * flags: legacy connectable (0) and scannable (4) types take the
+ * address-type bits from +827 and set 0x20 unless channel selection
+ * (+0xae2) is off when +369 is enabled; types 1/2 use 9/0x40, 5 uses 0xb/
+ * 0x40, 6 uses 0xb/0x48, others 0/0. The 5-byte header buffer starts as
+ * {7,0,0,0,0} and is filled by 318440 and 3184f4 before composing. */
+extern uint32_t opencfw_em9305_child_318440(uintptr_t,uintptr_t,uintptr_t);
+extern uint32_t opencfw_em9305_child_3184f4(uintptr_t,uintptr_t,uintptr_t);
+extern uint32_t opencfw_em9305_radio_compose_323dc0(uintptr_t,uint32_t,uint32_t,uint32_t,
+                                                    uintptr_t,uintptr_t,uintptr_t,uint32_t,
+                                                    uint32_t);
+
+uint32_t opencfw_em9305_child_3239fc(uintptr_t set,uintptr_t output,uintptr_t source,
+                                     uint32_t count)
+{
+    uint8_t header[5]={7u,0u,0u,0u,0u};
+    uint32_t pdu=9u,flags=0x40u;
+    uint32_t mode=0u;
+    switch(*(volatile uint16_t *)(set+0x20u)&7u) {
+    case 0:
+        flags=(*(volatile uint8_t *)(set+827u)&1u)^81u;
+        pdu=8u;
+        mode=*(volatile uint8_t *)(set+369u);
+        break;
+    case 1:
+    case 2:
+        break;
+    case 4: {
+        uint32_t address=*(volatile uint8_t *)(set+827u);
+        mode=*(volatile uint8_t *)(set+369u);
+        flags=(address&1u)^81u;
+        pdu=(address&2u)^0xau;
+        break;
+    }
+    case 5:
+        pdu=0xbu;
+        break;
+    case 6:
+        pdu=0xbu;
+        flags=0x48u;
+        break;
+    default:
+        pdu=0u;
+        flags=0u;
+        break;
+    }
+    if(mode!=0u&&*(volatile uint8_t *)(set+0xae2u)==0u) flags|=0x20u;
+    (void)opencfw_em9305_child_318440((uintptr_t)header,set+0x9d4u,set);
+    (void)opencfw_em9305_child_3184f4((uintptr_t)header,set+0x9d4u,set);
+    return opencfw_em9305_radio_compose_323dc0(set,pdu,flags,
+        *(volatile uint16_t *)(set+0x20u)&3u,(uintptr_t)header,source,output,2u,count);
+}

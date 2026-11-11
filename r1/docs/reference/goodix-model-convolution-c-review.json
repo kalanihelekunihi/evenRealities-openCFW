@@ -1,0 +1,633 @@
+{
+  "schema_version": 1,
+  "entries": {
+    "0x00076bdc": "r1_goodix_native_graph_convolution"
+  },
+  "native_instruction_bytes": 1234,
+  "direct_native_candidate_pairs": 34132,
+  "constructor_callback_pairs": 7296,
+  "total_pairs": 41428,
+  "verification": {
+    "verify": {
+      "native_candidate_pairs": 24576,
+      "FP_settings": 6
+    },
+    "edge": {
+      "native_candidate_pairs": 3872,
+      "FP_settings": 32,
+      "aliases": 5,
+      "zero_and_NaN_slopes": true
+    },
+    "oracle": {
+      "native_candidate_pairs": 352,
+      "independent_output_oracles": 704,
+      "independent_restored_input_oracles": 640,
+      "FP_settings": 32
+    },
+    "coverage": {
+      "native_candidate_pairs": 4196,
+      "native_instruction_bytes": 1234,
+      "expected_bytes": 1234,
+      "instruction_starts": 442,
+      "missing": []
+    },
+    "metadata": {
+      "native_candidate_pairs": 992,
+      "FP_settings": 32,
+      "input_metadata_low_bytes": true,
+      "byte_count_vs_four_byte_addressing": true,
+      "padded_columns_wrap_8bits": true,
+      "signed_output_batches": true,
+      "low_byte_output_columns_and_wrapped_word_span": true
+    },
+    "live": {
+      "native_candidate_pairs": 128,
+      "FP_settings": 32,
+      "independent_metadata_oracles": 256,
+      "cached_output_span": true,
+      "live_output_batches": true,
+      "live_specialized_output_channels_and_activation_selector": true
+    }
+  },
+  "constructor_verification": {
+    "constructor": {
+      "native_candidate_pairs": 6144,
+      "FP_settings": 32,
+      "actual_C_constructor_and_indirect_callback": true,
+      "function_identity_verified": true,
+      "only_callback_word_normalized": true,
+      "source_has_no_stock_mapping": true,
+      "constructor_groups_nonzero": true
+    },
+    "normal-constructor": {
+      "native_candidate_pairs": 1152,
+      "FP_settings": 6,
+      "actual_C_constructor_and_indirect_callback": true,
+      "function_identity_verified": true,
+      "only_callback_word_normalized": true,
+      "source_has_no_stock_mapping": true,
+      "constructor_groups_nonzero": true
+    }
+  },
+  "compiled_defect_controls": [
+    {
+      "name": "word-input-rows",
+      "rejected": true,
+      "positive_baseline": true,
+      "witness": {
+        "case": 1,
+        "mode": 0,
+        "options": {
+          "rows": 16777218,
+          "columns": 5,
+          "input_channels": 2,
+          "units": 2,
+          "kernel": 3,
+          "groups": 1,
+          "activation": 0,
+          "left": 1,
+          "right": 2
+        }
+      }
+    },
+    {
+      "name": "lost-eight-bit-padding-wrap",
+      "rejected": true,
+      "positive_baseline": true,
+      "witness": {
+        "case": 1,
+        "mode": 0,
+        "options": {
+          "rows": 2,
+          "columns": 255,
+          "units": 0,
+          "kernel": 7,
+          "groups": 1,
+          "activation": 0,
+          "left": 1,
+          "right": 0
+        }
+      }
+    },
+    {
+      "name": "byte-scaled-overlap-check",
+      "rejected": true,
+      "positive_baseline": true,
+      "witness": {
+        "case": 1,
+        "mode": 0,
+        "options": {
+          "rows": 4,
+          "columns": 5,
+          "units": 4,
+          "kernel": 3,
+          "groups": 2,
+          "activation": 0,
+          "left": 1,
+          "right": 2,
+          "output_offset": 64
+        }
+      }
+    },
+    {
+      "name": "wrong-relocation-target",
+      "rejected": true,
+      "positive_baseline": true,
+      "witness": {
+        "case": 1,
+        "mode": 0,
+        "options": {
+          "rows": 4,
+          "columns": 5,
+          "units": 4,
+          "kernel": 3,
+          "groups": 2,
+          "activation": 0,
+          "left": 1,
+          "right": 2,
+          "alias": "forward"
+        }
+      }
+    },
+    {
+      "name": "four-byte-copy-length",
+      "rejected": true,
+      "positive_baseline": true,
+      "witness": {
+        "case": 1,
+        "mode": 0,
+        "options": {
+          "rows": 2,
+          "columns": 5,
+          "units": 2,
+          "kernel": 3,
+          "groups": 1,
+          "activation": 0,
+          "left": 1,
+          "right": 2,
+          "element": 1
+        }
+      }
+    },
+    {
+      "name": "wrong-group-weight-stride",
+      "rejected": true,
+      "positive_baseline": true,
+      "witness": {
+        "case": 1,
+        "mode": 0,
+        "options": {
+          "rows": 4,
+          "columns": 5,
+          "units": 4,
+          "kernel": 3,
+          "groups": 2,
+          "activation": 0,
+          "left": 1,
+          "right": 2,
+          "output_offset": 64
+        }
+      }
+    },
+    {
+      "name": "invented-kernel-one-group-loop",
+      "rejected": true,
+      "positive_baseline": true,
+      "witness": {
+        "case": 288,
+        "mode": 0,
+        "options": null
+      }
+    },
+    {
+      "name": "invented-grouped-kernel-five",
+      "rejected": true,
+      "positive_baseline": true,
+      "witness": {
+        "case": 416,
+        "mode": 0,
+        "options": null
+      }
+    },
+    {
+      "name": "reversed-bias-operands",
+      "rejected": true,
+      "positive_baseline": true,
+      "witness": {
+        "case": 54,
+        "mode": 0,
+        "options": null
+      }
+    },
+    {
+      "name": "lost-slope-compare",
+      "rejected": true,
+      "positive_baseline": true,
+      "witness": {
+        "case": 1,
+        "mode": 0,
+        "options": {
+          "rows": 0,
+          "columns": 1,
+          "units": 0,
+          "kernel": 7,
+          "groups": 1,
+          "activation": 1,
+          "left": 0,
+          "right": 0
+        }
+      }
+    },
+    {
+      "name": "zero-slope-multiply",
+      "rejected": true,
+      "positive_baseline": true,
+      "witness": {
+        "case": 1,
+        "mode": 0,
+        "options": {
+          "rows": 0,
+          "columns": 1,
+          "units": 1,
+          "kernel": 1,
+          "groups": 1,
+          "activation": 1,
+          "left": 0,
+          "right": 0,
+          "slope": 0,
+          "bias": [
+            3221225472
+          ]
+        }
+      }
+    },
+    {
+      "name": "numeric-exp-clamp",
+      "rejected": true,
+      "positive_baseline": true,
+      "witness": {
+        "case": 1,
+        "mode": 0,
+        "options": {
+          "rows": 0,
+          "columns": 1,
+          "units": 1,
+          "kernel": 7,
+          "groups": 1,
+          "activation": 2,
+          "left": 0,
+          "right": 0,
+          "output_columns": 1,
+          "alias": "descriptor-rows"
+        }
+      }
+    },
+    {
+      "name": "reloaded-cached-output-span",
+      "rejected": true,
+      "positive_baseline": true,
+      "witness": {
+        "case": 1,
+        "mode": 0,
+        "options": {
+          "rows": 0,
+          "columns": 1,
+          "units": 1,
+          "kernel": 7,
+          "groups": 1,
+          "activation": 2,
+          "left": 0,
+          "right": 0,
+          "output_columns": 1,
+          "alias": "descriptor-rows"
+        }
+      }
+    },
+    {
+      "name": "cached-specialized-channels",
+      "rejected": true,
+      "positive_baseline": true,
+      "witness": {
+        "case": 1,
+        "mode": 0,
+        "options": {
+          "rows": 0,
+          "columns": 1,
+          "units": 2,
+          "kernel": 3,
+          "groups": 1,
+          "activation": 1,
+          "left": 0,
+          "right": 0,
+          "output_columns": 1,
+          "alias": "operation-channels",
+          "bias": [
+            0,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "wrong-input-channel-stride",
+      "rejected": true,
+      "positive_baseline": true,
+      "witness": {
+        "case": 1,
+        "mode": 0,
+        "options": {
+          "rows": 16777218,
+          "columns": 5,
+          "input_channels": 2,
+          "units": 2,
+          "kernel": 3,
+          "groups": 1,
+          "activation": 0,
+          "left": 1,
+          "right": 2
+        }
+      }
+    },
+    {
+      "name": "lost-input-restore",
+      "rejected": true,
+      "positive_baseline": true,
+      "witness": {
+        "case": 1,
+        "mode": 0,
+        "options": {
+          "rows": 16777218,
+          "columns": 5,
+          "input_channels": 2,
+          "units": 2,
+          "kernel": 3,
+          "groups": 1,
+          "activation": 0,
+          "left": 1,
+          "right": 2
+        }
+      }
+    }
+  ],
+  "normal_build": {
+    "normal_report": "build/sources-goal-r1-model-convolution-c/report.json",
+    "units": 930,
+    "unchanged_source_object_pairs": 919,
+    "generated_sources_excluded": [
+      "{gen}/r1_cmsis_os2_rtc.c",
+      "{gen}/fal_partition_r1_lookup.c",
+      "{gen}/fdb_utils_r1.c",
+      "{gen}/gh_demo_r1.c",
+      "{gen}/gh_demo_hook_r1.c",
+      "{gen}/gh_demo_user_r1.c",
+      "{gen}/app_error_handler_gcc_clang.c",
+      "{gen}/r1_startup_vectors.S",
+      "{gen}/gh_ppg_timestamp_hooks_r1.c",
+      "{gen}/r1_uecc.c"
+    ],
+    "new_sources": [
+      "r1/src/application/goodix/native_model_convolution.c"
+    ],
+    "normal_provider_matches_tested_sections_and_decoded_symbols": true,
+    "no_new_assembly_or_writable_sections": true,
+    "removed_imports": [
+      "r1_goodix_graph_convolution_executor_address"
+    ],
+    "imports": {
+      "r1-application": [
+        "GH3X2X_GetVersion",
+        "GH3X2X_UprotocolPacketFormat",
+        "Gh3x2xDemoSendProtocolData",
+        "__data_start__",
+        "gh3x2x_print_fmt",
+        "goodix_hba_calc",
+        "goodix_hba_essential_info_print",
+        "goodix_hrv_calc",
+        "goodix_nadt_calc",
+        "r1_cmb_code_end",
+        "r1_cmb_code_start",
+        "r1_cmb_stack_end",
+        "r1_cmb_stack_start",
+        "r1_eat_command_dispatch",
+        "r1_eat_core_init",
+        "r1_export_plan_command",
+        "r1_factory_input_record_plan_dispatch",
+        "r1_glasses_role_conflict_fault",
+        "r1_gomore_final_sleep_record_publish_native",
+        "r1_gomore_interval_statistics_native",
+        "r1_gomore_sleep_interval_select_native",
+        "r1_gomore_sleep_score_native",
+        "r1_gomore_sleep_stage_refine_native",
+        "r1_gomore_stage_5ef1c_native",
+        "r1_gomore_stage_5f264_native",
+        "r1_gomore_stage_5f3d8_native",
+        "r1_gomore_stage_5f4b6_native",
+        "r1_gomore_stage_5f56c_native",
+        "r1_gomore_stage_5feb8_native",
+        "r1_gomore_stage_605dc_native",
+        "r1_gomore_stage_60af4_native",
+        "r1_gomore_stage_60b80_native",
+        "r1_gomore_stage_60dc4_native",
+        "r1_gomore_stage_610c8_native",
+        "r1_gomore_stage_61198_native",
+        "r1_gomore_stage_61274_native",
+        "r1_gomore_stage_6138c_native",
+        "r1_gomore_stage_statistics_native",
+        "r1_gomore_table_record11_native",
+        "r1_goodix_graph_aligned_executor_address",
+        "r1_goodix_model_recurrent_executor_address",
+        "r1_goodix_spo2_confidence",
+        "r1_goodix_spo2_infer",
+        "r1_goodix_spo2_output",
+        "r1_goodix_spo2_output_quality",
+        "r1_goodix_spo2_select",
+        "r1_health_auth_parameters_set",
+        "r1_health_lifecycle_engine_initialize_native",
+        "r1_health_settings_plan_command",
+        "r1_health_sync_provider_0003c0d8",
+        "r1_health_sync_provider_0003c304",
+        "r1_health_sync_provider_0003c958",
+        "r1_health_sync_provider_0003fcec",
+        "r1_health_sync_provider_0003fef4",
+        "r1_health_sync_provider_00040508",
+        "r1_health_sync_provider_00040bd4",
+        "r1_health_sync_provider_00040de0",
+        "r1_health_sync_provider_00041438",
+        "r1_health_sync_provider_00043eb0",
+        "r1_health_sync_provider_000440c4",
+        "r1_health_sync_provider_000446b4",
+        "r1_health_sync_provider_0005b39c",
+        "r1_health_sync_provider_0008f954",
+        "r1_legacy_command_route_frame",
+        "r1_manager_assertion_stack_transfer",
+        "r1_manager_logging_start_91504",
+        "r1_phone_role_assertion_stack_transfer",
+        "r1_structured_log_typed",
+        "r1_user_profile_handler"
+      ],
+      "r1-bootloader": [
+        "__bss_end__",
+        "__bss_start__",
+        "__data_start__",
+        "__etext",
+        "__start_crypto_data",
+        "__start_dfu_trans",
+        "__start_fs_data",
+        "__start_sdh_ble_observers",
+        "__start_sdh_req_observers",
+        "__start_sdh_soc_observers",
+        "__start_sdh_stack_observers",
+        "__start_sdh_state_observers",
+        "__start_svc_data",
+        "__stop_crypto_data",
+        "__stop_dfu_trans",
+        "__stop_fs_data",
+        "__stop_sdh_ble_observers",
+        "__stop_sdh_req_observers",
+        "__stop_sdh_soc_observers",
+        "__stop_sdh_stack_observers",
+        "__stop_sdh_state_observers",
+        "__stop_svc_data"
+      ]
+    }
+  },
+  "remaining_callback_bindings": [
+    "r1_goodix_graph_aligned_executor_address",
+    "r1_goodix_model_recurrent_executor_address"
+  ],
+  "semantics": [
+    "Operation bytes0..7 are kernel,stride,left/right padding,input/output channels,groups,activation; slope float8, weights12,bias16. Cache input descriptor element size/rows/columns as BYTES, input data and padded low8(columns+padding). Output rows*columns word product is cached, but arithmetic uses low8 output columns.",
+    "When padding changes row*columns, expand input descending rows using actual C memmove/memset. Copy/clear lengths use cached element-size byte, while addresses advance four bytes per element. Reload input descriptor/data and padding bytes at native points. Cache arithmetic input data before expansion writes.",
+    "Output overlap relocation compares unsigned output pointer strictly between input pointer and input+padded-element-count, not a byte-scaled upper bound. Save original and move output pointer to input+padded-count*4. After computation/activation, restore input ascending rows. Copy relocated output using live output rows*columns*element-size word products, then restore pointer through current output descriptor.",
+    "Unsigned division determines channels per group. Kernel1 computes one out-per-group set; kernel3 uses specialized groups1 or general grouped path; kernel5 executes only groups1. Unsupported kernels/groups skip arithmetic but retain activation/restoration. Specialized3/5 output-channel bound rereads operation byte5. Grouped3 weight base advances group*out-per-group*kernel words, omitting in-per-group from that group offset, as native evidence requires.",
+    "Convolution reads live input/weight words, multiplies then adds with separate rounding and accumulator first. Bias is added SECOND after the inner sum. Output stores and overlaps remain live for subsequent computations. No numeric activation simplification or reassociation is used.",
+    "Activation selector byte7 is read separately before each pass. Selector1 always signaling-compares cached slope with zero, including empty output. Zero-slope path replaces strictly negative values with raw positive zero; nonzero path multiplies. Unordered inputs are retained. Each loop test multiplies cached output row/column span by LIVE output batches. Selector2 sign-bit negates raw output bits, signed-compares against0x42b00000, clamps to88, calls actual C expf, adds1 as second operand and divides1 by the result.",
+    "Actual C descriptor constructor installs real C relocation; indirect callback identity is verified and invoked. Only callback word at operation+20 is normalized after execution. Source maps no stock code and uses no math/memory models. REA full function-manager body/pseudocode/assembly and raw body/literals/binding authenticate1234 bytes at0x76bdc..0x770ad and Thumb pointer0x76bdd at0x74b40. Instruction evidence resolves pseudocode float/int and incidental return-register ambiguities."
+  ],
+  "limitations": [
+    "Valid aligned descriptors and sufficient mapped backing capacity for padded input/output/scratch are required. Wrapped metadata is tested only where effective accesses remain mapped. No invented fallback is provided for invalid enormous buffers.",
+    "Constructors require nonzero groups. Direct callback tests include zero groups with Cortex-M DIV_0_TRP clear: native UDIV yields0, matched by explicit C guards. Division-trap-enabled zero groups and asynchronous interleaving are outside proof.",
+    "Public RAM/full FPSCR, saved R4-R11/S16-S31, SP/masks and scalar R0 checked;8192 private stack bytes below incoming SP and caller scratch/APSR excluded. Native incidental R1 operation-pointer restoration is not a promised C scalar ABI return. Only constructor callback address word is normalized after identity guard.",
+    "All1234 bytes/442 instruction starts execute. Broad cases use six FP settings; targeted edge/metadata/oracle/live and constructor suites use all32 settings. This is not all inputs or interleavings. Cold FPU, timing, interrupts, concurrency and physical hardware remain unverified.",
+    "Probe linker enum-size warnings retained; called interfaces use pointers/integers/floats rather than enums.930-unit relocatable composition with69 application/22 boot imports is not a complete bootable image. Quantized convolution and recurrent bindings, five parent SpO2 stages, other hardware imports and startup remain."
+  ],
+  "evidence_sha256": {
+    "r1/src/application/goodix/native_model_convolution.c": "1cca30ebffdae5a134ad239934bccad7bd2a24777645eccfe80613e3ecbba878",
+    "r1/src/application/goodix/native_spo2_model_graph.c": "7099eb945658be2d7d5cad6b337de2f1afa15d57161266455268d3c25481b6ef",
+    "r1/src/application/runtime/native_expf_tanhf.c": "6b20f74db24eb1471381722262279c5a6ce0e3c89a8adad48d27aff90b51efb3",
+    "r1/src/sources.json": "6d049cc3848c9a1c7a6a455a2cb369dbdd0666bb33ad22bce73108472a21af41",
+    "r1/docs/reference/FUNCTION-OWNERSHIP.csv": "f0a6710d71d344f89a24264f497d073cb491ebc8bad41ef5f96330d144ffc90b",
+    "build/sources-goal-r1-model-convolution-c/report.json": "e18b33ecf7ffa5aa49a0a4b70b3cbd60f2c101744691d30701cc3aea0422642f",
+    "build/sources-goal-r1-model-dense-c/report.json": "52a67a9e85a876360a9de15934057a3e8221ec54221f0a773dfb341fb47d9d2e",
+    "tools/build/source-plan.json": "eeb516e31b3310fb0718f36908977f8125723f7c5e0e86cd6744395826259a4d",
+    "r1/src/config/runtime/native_health_cache.ld": "eb8f131c489cd818d4e36718718fa1989719ca0170f164541a1a5bf56dfc1ec3",
+    "r1/blobs/official/r1-2.2.6.0009/application.bin": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "build/goal-r1-queue-reset-c/stock.elf": "25b4a29af80ec8edab5bd861ba9b74a6e22eab29dc3d7a809a16869e8a140f04",
+    "build/goal-r1-spo2-infer-support-c/normal-dependencies.a": "7e62b43a34fcf2b0ae34045a276bf4d564be5dde2ddb636dd0f69169c8843637",
+    "build/goal-r1-model-convolution-c/NOTES.txt": "f066c3cfb322f402768db9addc0532605cbae248867c9e837ac63ae199dcdb7a",
+    "build/goal-r1-model-convolution-c/audit.json": "ecfaee1ac5dba8be2f6d7120d536d6cc42e50759cae81b3c1103d218bec82b56",
+    "build/goal-r1-model-convolution-c/audit.py": "eb0a68a67d0c53c348ac23383d749637b55fc9b26e423fd8638b4bed26a317fd",
+    "build/goal-r1-model-convolution-c/authenticate.py": "a28b247218bcd513029ad1fb012f0c746e4f92928bb4f80ad8d2b4a8e927b3fd",
+    "build/goal-r1-model-convolution-c/candidate.c": "1cca30ebffdae5a134ad239934bccad7bd2a24777645eccfe80613e3ecbba878",
+    "build/goal-r1-model-convolution-c/candidate.elf": "69aaa693b58cb4289f7422e199e12add51ab5c0dc29504a20c17815fbf5a87a9",
+    "build/goal-r1-model-convolution-c/candidate.o": "5cb9397ba1b7c2fba41927e16c8f082f3ef307e0df7fbce5e4d9864450e9b33a",
+    "build/goal-r1-model-convolution-c/compile-argv.json": "e63ffa6382d845e02453a5a983795ab9386325760a9c187b06841808057905de",
+    "build/goal-r1-model-convolution-c/constructor-link.json": "3a79e025011d4c9424358fd9a21d67e31f4db6cf606230723db8de460c89db90",
+    "build/goal-r1-model-convolution-c/constructor-prepare.log": "0dc22183c55d5c7fa2dc995bbc105c5f13d4d44104941823379c1b4fd02b52cf",
+    "build/goal-r1-model-convolution-c/constructor-results.json": "96fbe6f3c9710e3f00dc46cd2a440e16a46085daecb14f800ed533bcb599f121",
+    "build/goal-r1-model-convolution-c/constructor.elf": "cddc66c9cc97c1c40c371123ce655047f6c09bae293b42102cfc82f1219727c1",
+    "build/goal-r1-model-convolution-c/constructor_fixture.py": "8794db39bd41bd56d97623fda6251c87a97b287ab4f2785ea63da03328eb0162",
+    "build/goal-r1-model-convolution-c/constructor_prepare.py": "4eea99758883bd5c18809d6ca44f6446671d990447cd279a0edf21af854e0b25",
+    "build/goal-r1-model-convolution-c/constructor_probe.c": "9e97915b7974b5349f44de15fc33c3ec7c1f9381048a37e28a6ba972009a7851",
+    "build/goal-r1-model-convolution-c/constructor_probe.o": "40ad259ed6296ee9b5ca8587cb2c121c6e05c3c08c473ae617ad953156c65f4a",
+    "build/goal-r1-model-convolution-c/constructors.log": "d4a0984f44305c9b43c0ade763a037a25a539a65448058131931f26948889847",
+    "build/goal-r1-model-convolution-c/constructors.py": "413b71c100ea6731077297ca9fe5b8ede6a466daf5f8acd0b93169ea2509c6f7",
+    "build/goal-r1-model-convolution-c/control-byte-scaled-overlap-check.c": "d770cee10ea33130bce8ae58f691e2bfc4fc798690b84edc63e7ef7d5de32b51",
+    "build/goal-r1-model-convolution-c/control-byte-scaled-overlap-check.elf": "4dadcb40f1a84d91b0c14b9fafd5e08853190e9f66a6961fcd8a1d8071ec5a35",
+    "build/goal-r1-model-convolution-c/control-byte-scaled-overlap-check.o": "85eeaf2377593db3d2a501c8a9ec79336c022470341dfa1dbf33954a19b22b4a",
+    "build/goal-r1-model-convolution-c/control-cached-specialized-channels.c": "d15b2640db30252bf6365820eb00bfbac1722c581c9f9c9419ca999e53c150e9",
+    "build/goal-r1-model-convolution-c/control-cached-specialized-channels.elf": "ccd2930d13c28fb4c83a1496738f4465a8f3d393ea8e383a6cdc7b8f022f9452",
+    "build/goal-r1-model-convolution-c/control-cached-specialized-channels.o": "3f9e1115b8847b963281d948d81d64a160b2e1f23508291904845d882b5d4ceb",
+    "build/goal-r1-model-convolution-c/control-four-byte-copy-length.c": "1d67d4baf63b2a22a8ac00b3337758e2537db9192f7223e63a054cff28642348",
+    "build/goal-r1-model-convolution-c/control-four-byte-copy-length.elf": "35435dab835646b2f40ea5cf8e1f67b18c8944f4219c23af07a8d61c42f9d0ac",
+    "build/goal-r1-model-convolution-c/control-four-byte-copy-length.o": "dae035fbb7ca2d03fbb5daaefbf01f1d6f0c7828a8f385bca41df4d3d1c1c3f2",
+    "build/goal-r1-model-convolution-c/control-invented-grouped-kernel-five.c": "f97edd964571fa165af16d635e22e6acb9c43d6e8e24217e3a509a4ba96d718b",
+    "build/goal-r1-model-convolution-c/control-invented-grouped-kernel-five.elf": "868e6e54f3a4535115700566b4c90691e88c93dabd537b9c826b2aa04d5736d5",
+    "build/goal-r1-model-convolution-c/control-invented-grouped-kernel-five.o": "56268e327846fbb07755828ba6c6a97e6c7cb1c41992ddd621a16e5d28cffd5e",
+    "build/goal-r1-model-convolution-c/control-invented-kernel-one-group-loop.c": "a1835cde627b85777b527f12e228ea817239245ce505086e4c74246affc65027",
+    "build/goal-r1-model-convolution-c/control-invented-kernel-one-group-loop.elf": "722f4eeffb373dc345f82739c4abbf3048e0731db5c2ceb09593282b5bc16d24",
+    "build/goal-r1-model-convolution-c/control-invented-kernel-one-group-loop.o": "150dd82626a660324b7af012187e8562380d562f11851e5ab16f52e9b6bff2fa",
+    "build/goal-r1-model-convolution-c/control-lost-eight-bit-padding-wrap.c": "7fd5ad82cb376267c51302f76e64b585ae7db4038c9843d6d75ba8142ff963b3",
+    "build/goal-r1-model-convolution-c/control-lost-eight-bit-padding-wrap.elf": "60f284a92f324e6d117b0e4d4bbd694cf46125d2b315a9212197751530132960",
+    "build/goal-r1-model-convolution-c/control-lost-eight-bit-padding-wrap.o": "12a95976c9d6e652233d2382cd0101225ac67dae95e7d0a92155186674349f2e",
+    "build/goal-r1-model-convolution-c/control-lost-input-restore.c": "4c86c8a3bacf7ecf424f4d4296cb2a8983265740526ff9ff4cedd2a6e8b6bc3c",
+    "build/goal-r1-model-convolution-c/control-lost-input-restore.elf": "c965a8b22cf5fa53de530740119e01429c0f336012e901074b6702e180fa94f6",
+    "build/goal-r1-model-convolution-c/control-lost-input-restore.o": "c008f2a96db52d8ee7e392f78f66d509a4f1e861d35e695abdf8f21060d613e5",
+    "build/goal-r1-model-convolution-c/control-lost-slope-compare.c": "87351af8ecd8477c1fe120fa32f157b551021fc12d39300239f6c6ac6df9c02f",
+    "build/goal-r1-model-convolution-c/control-lost-slope-compare.elf": "180bcded48a1b8450acee045dc6c3e43fd501f8e219c898856ab8779bdf1ade7",
+    "build/goal-r1-model-convolution-c/control-lost-slope-compare.o": "7048e424513bbadb7299fcc599783d8950e0d1c1caeafbb474097d9b7b7b660e",
+    "build/goal-r1-model-convolution-c/control-numeric-exp-clamp.c": "e670787865eb8132cff3deb230ab4a832838bebcc9fa3ae20f074ea6cbb581a6",
+    "build/goal-r1-model-convolution-c/control-numeric-exp-clamp.elf": "3272822a4bb2d820f0acbd5c3af0c1cdcbc72ce2eb9a9bfa3bb052532dc8f77b",
+    "build/goal-r1-model-convolution-c/control-numeric-exp-clamp.o": "cbe42df3d87b4742ef5429ba797f7e59650f43e0244250444c9810c10a6e48bc",
+    "build/goal-r1-model-convolution-c/control-reloaded-cached-output-span.c": "93238dbf8a085278b0e34aa9a3713835e06e3f017c8792c5e140c131976a71ca",
+    "build/goal-r1-model-convolution-c/control-reloaded-cached-output-span.elf": "98e3eeaebd06322e35bacc06e6b6615dcfaad30d72e91f579e172a062b6164fc",
+    "build/goal-r1-model-convolution-c/control-reloaded-cached-output-span.o": "d1e734f18da728667b14c066b48ca16a6f496628da303040fb50b45b3a259191",
+    "build/goal-r1-model-convolution-c/control-reversed-bias-operands.c": "ebe7f5af5e3cf9150fa2b19f3c1072ed1724a2fd17f8ecff3a6356bd5539ed6c",
+    "build/goal-r1-model-convolution-c/control-reversed-bias-operands.elf": "1ec3874ff6267783a79a0c474463a2dd70cfab82fbd1f4643339fe8748c289c8",
+    "build/goal-r1-model-convolution-c/control-reversed-bias-operands.o": "7645142b2743ca39c26698920fe3eddb3119794e6a93aaf197dab2c4474554e5",
+    "build/goal-r1-model-convolution-c/control-word-input-rows.c": "fd911d60ce8338edeead6b8387d961be9c9f5b6fc5919e736e7df03f0cc9a1f5",
+    "build/goal-r1-model-convolution-c/control-word-input-rows.elf": "9d84b78ebb0e27633481976f9356c0b120bb0a58967ed6acbf8743a3f49109a8",
+    "build/goal-r1-model-convolution-c/control-word-input-rows.o": "f67c13dffbc53294dd90038d7041d76990d4fb4c593fdba2c3ccd0a25ba6bc51",
+    "build/goal-r1-model-convolution-c/control-wrong-group-weight-stride.c": "ea0c44c0753fe124298af3b311738650af2e7fbcbc8b0416ee61f64f2ce8c7ae",
+    "build/goal-r1-model-convolution-c/control-wrong-group-weight-stride.elf": "0756e7867020dc7826059f45da8aee7b18bac4ee36f3c711d2b45262ac9f39b4",
+    "build/goal-r1-model-convolution-c/control-wrong-group-weight-stride.o": "5fcc75698edba93dc0a6ff8af477864ad4bca7ad048426501ab53d964ff3bfb0",
+    "build/goal-r1-model-convolution-c/control-wrong-input-channel-stride.c": "39b308cca0fefe2832e5e2e4c2e7859f8274dedf97469edae04907ffa4c33c7d",
+    "build/goal-r1-model-convolution-c/control-wrong-input-channel-stride.elf": "fdbb0dfad4bd829fff6b2c50aab506d35abf0ac1eb747e048fbb3bd495e4db14",
+    "build/goal-r1-model-convolution-c/control-wrong-input-channel-stride.o": "81338c6d33033169826b8086bcd75281396800182d778da411edbe537308d8a9",
+    "build/goal-r1-model-convolution-c/control-wrong-relocation-target.c": "76ae30100322da7e0a2c9cf174861d3610ee0608fc0741ab8abb73eb75c2431b",
+    "build/goal-r1-model-convolution-c/control-wrong-relocation-target.elf": "320d5c4af8777db3b77ab4a7792f0dd95a4fc5b10d748ced959ba76612dafd10",
+    "build/goal-r1-model-convolution-c/control-wrong-relocation-target.o": "95d71003a692b24f0a0719bb71ed51171c35663bb5e8a015efaca7ff4160f820",
+    "build/goal-r1-model-convolution-c/control-zero-slope-multiply.c": "c7a89dac438d31d3ff7fd2c61217a9fbeed32c55f4ecee8bb27029e502be050f",
+    "build/goal-r1-model-convolution-c/control-zero-slope-multiply.elf": "8e82b7868baa9a949bcaf91b282c2450d78c3e47b5830dc391c5830d01a29531",
+    "build/goal-r1-model-convolution-c/control-zero-slope-multiply.o": "2d7a49fc9aafd55c6d29adcc080fabdbdc2040832415584b83e02aec1d94fcf2",
+    "build/goal-r1-model-convolution-c/controls-results.json": "4877ce08ba4efcdab630633315aeb7de42a4bccdd9211e99b7500f200224a24d",
+    "build/goal-r1-model-convolution-c/controls.log": "e987277167d1df73b3f1ce55ce9701e4c8390d9ffec17684e1014bbc0453ed36",
+    "build/goal-r1-model-convolution-c/controls.py": "bd41804e44655e8c4d65d2e60d4f794657789c77151858af0ec31abf83f03b83",
+    "build/goal-r1-model-convolution-c/coverage-results.json": "45c8b17cc7ececf50e29375658761236047ed6389a469eac510abd484be5842e",
+    "build/goal-r1-model-convolution-c/coverage.log": "1a38ea8ec3cd74dcd24cf56b825941b4ff126bfcce99e6f17ec1e64eec24b020",
+    "build/goal-r1-model-convolution-c/coverage.py": "f4ba0ddea88347f4b6eaab4e8cb06186f77a3d6d036f9e595fccf5f789288b5a",
+    "build/goal-r1-model-convolution-c/disassembly.txt": "7a5f5dde9c87645940ce2aae2454ced3f20e710a97b95b2a8992a5cd4f6301ba",
+    "build/goal-r1-model-convolution-c/document.py": "68ba490d36598aa84e856397188782ee5cc05d32751e6e829554444d2aa35f87",
+    "build/goal-r1-model-convolution-c/edge-results.json": "54a123cdb99643e72e288e21d9b6afa8d2d9b469fbb8c1238cc243a62ad945c4",
+    "build/goal-r1-model-convolution-c/edges.log": "d4a0984f44305c9b43c0ade763a037a25a539a65448058131931f26948889847",
+    "build/goal-r1-model-convolution-c/edges.py": "d355add8a8f3995c5827e2f2e4fd49114f96843d0f11b7f5851999f4ed01515e",
+    "build/goal-r1-model-convolution-c/fixture.py": "03e9a27321c7794ee8ee4115e057662b1288da9d272d9eef51a142a9f22468fe",
+    "build/goal-r1-model-convolution-c/link-argv.json": "8eedc05f2f0d9c98a95a2272be2f93d5c60be4ba47f1615e19efa8930d649de3",
+    "build/goal-r1-model-convolution-c/live-results.json": "8f30f396cb91cfbdfbf29cbc15efc5cc4626e7a5fa7cb59b186d5beb90a0b101",
+    "build/goal-r1-model-convolution-c/live.py": "4a948b6c80a05bc36771b1ece9661a03e66ace19c6d7072b4e4b00027a8e7cd2",
+    "build/goal-r1-model-convolution-c/metadata-results.json": "48d7771691c4e085feec4309af9b49e770fd001c52730f3ab37df76b35e641de",
+    "build/goal-r1-model-convolution-c/metadata.log": "5fe02870fba10e4e17954579888662348ef20022be3a86e2e96ef671fe550421",
+    "build/goal-r1-model-convolution-c/metadata.py": "86684cd649dbbaac75cbb15b6f57908de8b3f758cc4f4449bab85bd65e130fc6",
+    "build/goal-r1-model-convolution-c/normal-build.log": "00a5752ebdff07d8a4cbcef4d3df78e3332cb8a9341334a315e7fdff2f46924a",
+    "build/goal-r1-model-convolution-c/normal-constructor-link.json": "4b1823f1fc3c387e537569662616ff06bfff357c08aa120c820f1855d745eef8",
+    "build/goal-r1-model-convolution-c/normal-constructor-results.json": "1b0282c0746c67bcd1e3e761761204e4653c6ebc9068957d1110ad44a2cd703f",
+    "build/goal-r1-model-convolution-c/normal-constructor.elf": "0a53ddb96ff7ec7f20cccbec0aac33d0a5413b459a6d9520024028003e1f1ef2",
+    "build/goal-r1-model-convolution-c/normal-constructors.log": "3f126b2b2980e7aecb76ff9768558780f6e18275de494b5fbeaa42a2f0b1ee10",
+    "build/goal-r1-model-convolution-c/normal-prepare.log": "55800f549ad7fdc49e7567a3c087518f77f6510222a904a9130ac6b77873f6e7",
+    "build/goal-r1-model-convolution-c/normal_constructor_fixture.py": "09b2ae1cd5aaef512825a538ddfb876c2a3928a41c1e131c19351953a69d7ccc",
+    "build/goal-r1-model-convolution-c/normal_constructors.py": "640ed8046d6fdfcdff5a56f8371b397faac6879b8c171564f4aef238220fcdea",
+    "build/goal-r1-model-convolution-c/normal_prepare.py": "2c4157c2cef2def3f55b0dc84cf5caa32fe013ab77b5a92c4a3313186744062d",
+    "build/goal-r1-model-convolution-c/oracle-results.json": "b0898f45761a660b8df252c578e768f0ef81eb1f4b39672bff588020ff2a3c24",
+    "build/goal-r1-model-convolution-c/oracles.log": "3e45de0e718e71bd048a3f984306973e0b3905062d3644248a277e62b95b6e1a",
+    "build/goal-r1-model-convolution-c/oracles.py": "c7892bc1288afdb0922287fa2508d2890aeb3be965b4c18aa2174a7501be5174",
+    "build/goal-r1-model-convolution-c/raw-authentication.json": "486a662efd85e3f29e3ef8219d6ab43b132e5304583377eb70212305708cf850",
+    "build/goal-r1-model-convolution-c/rea-binding.json": "762cb093ce27c767fd84d0f28c01065acd995b08257c4320e27f11ff6025be00",
+    "build/goal-r1-model-convolution-c/rea-body.json": "2c03efb63fbb2f7644cf92eb82b9d9bf49c3eb808c9532d7e346231594d289f9",
+    "build/goal-r1-model-convolution-c/rea-dossier.json": "7176f9ab07fcdb55843c445b15174b46b5267e33475108eef19048171785ec5a",
+    "build/goal-r1-model-convolution-c/rea-literals.json": "18f4dbf0207e55779185b26e46eb6a9155de4ef21d0b53083e62b146ecaeb6c9",
+    "build/goal-r1-model-convolution-c/sources-check.log": "4dfc91fc0191b188e95e1b842e2f1ebe8b8880bc88918da933d4bebbc88e693e",
+    "build/goal-r1-model-convolution-c/verify-results.json": "438d7ef391975411ea772eb7f327eb81af44dac48723de9e7efdc47b323af4c2",
+    "build/goal-r1-model-convolution-c/verify.log": "3f126b2b2980e7aecb76ff9768558780f6e18275de494b5fbeaa42a2f0b1ee10",
+    "build/goal-r1-model-convolution-c/verify.py": "c90487b0ef741c6e43fa737fefb75c6632c0ed2a58f592eb98eb1d978dd3d361"
+  }
+}

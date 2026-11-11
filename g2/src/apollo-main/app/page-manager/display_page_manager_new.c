@@ -6,7 +6,6 @@ extern void *file_heap_allocate(uint32_t); /* selected allocator contract */
 uint8_t *audio_uart_display_page_manager; /* BSS slot 0x20074858, assigned below */
 extern void (*audio_uart_display_fatal_handler)(const char *,const char *,uint32_t); /* RAM 0x2007456c */
 extern const uint8_t audio_uart_display_page_style[]; /* ROM 0x755610 */
-extern uint32_t audio_uart_display_page_size_cell; /* RAM 0x20000064, address passed */
 extern uint32_t audio_log_flags(void);
 extern void audio_log_extended(uint8_t,const char *,const char *,const char *,uint32_t,const char *,...);
 extern uint32_t compressed_log_output(uint32_t,const char *,const char *,...);
@@ -18,18 +17,18 @@ extern void audio_uart_page_44fe0e(void *,void *);
 extern void *audio_uart_page_43de82(void *);
 extern void audio_uart_page_43f4c0(void *,uint32_t,uint32_t);
 extern void audio_uart_page_45ec7c(void *,uint32_t,uint32_t);
-extern void audio_uart_page_44131c(void *,uint32_t,uint32_t);
+extern void lv_obj_set_style_border_width(void *,uint32_t,uint32_t);
 extern void audio_uart_page_44129e(void *,uint32_t,uint32_t);
 extern void audio_uart_page_43dfa4(void *,uint32_t);
 extern void *audio_uart_page_44104c(uint32_t);
 extern void audio_uart_page_44127e(void *,void *,uint32_t);
-extern void audio_uart_page_44146a(void *,uint32_t,uint32_t);
-extern void audio_uart_page_44133a(void *,uint32_t,uint32_t);
-extern void audio_uart_page_441378(void *,uint32_t,uint32_t);
-extern void audio_uart_page_441386(void *,uint32_t,uint32_t);
-extern void audio_uart_page_4413b0(void *,uint32_t,uint32_t);
-extern void audio_uart_page_441394(void *,uint32_t,uint32_t);
-extern void audio_uart_page_4413a2(void *,uint32_t,uint32_t);
+extern void lv_obj_set_style_radius(void *,uint32_t,uint32_t);
+extern void lv_obj_set_style_outline_width(void *,uint32_t,uint32_t);
+extern void lv_obj_set_style_outline_pad(void *,uint32_t,uint32_t);
+extern void lv_obj_set_style_shadow_width(void *,uint32_t,uint32_t);
+extern void lv_obj_set_style_shadow_spread(void *,uint32_t,uint32_t);
+extern void lv_obj_set_style_shadow_offset_x(void *,uint32_t,uint32_t);
+extern void lv_obj_set_style_shadow_offset_y(void *,uint32_t,uint32_t);
 extern void audio_uart_page_45fba2(void *);
 extern void audio_uart_page_451740(void *,void (*)(void),uint32_t,void *);
 extern void audio_uart_page_event_45f914(void); /* native callback Thumb 0x45f915 */
@@ -70,31 +69,35 @@ uint32_t audio_uart_display_audio_new(void *active_screen) {
     __builtin_memcpy(page+0x18u,&root,4u);
     audio_uart_page_43f4c0(root,0x240u,0x120u);
     audio_uart_page_45ec7c(root,0u,0u);
-    audio_uart_page_44131c(root,0u,0u);
+    lv_obj_set_style_border_width(root,0u,0u);
     audio_uart_page_44129e(root,0u,0u);
     audio_uart_page_43dfa4(root,0x10u);
     void *middle=audio_uart_page_43de82(root);
     __builtin_memcpy(page+0x1cu,&middle,4u);
-    uint32_t dimension=(uint32_t)(uintptr_t)&audio_uart_display_page_size_cell;
+    /* Evidence: stock 0x45f284 loads literal 0x45fa98 = 0x20000064 into r5
+     * and passes it as both w and h to lv_obj_set_size (0x43f4c0). That is
+     * the LVGL 9 coordinate LV_PCT(100) = LV_COORD_TYPE_SPEC(1<<29)|100, not
+     * a RAM address; it only coincides with stock RAM 0x20000064. */
+    uint32_t dimension=0x20000064u; /* LV_PCT(100) */
     audio_uart_page_43f4c0(middle,dimension,dimension);
     audio_uart_page_45ec7c(middle,0u,0u);
-    audio_uart_page_44131c(middle,0u,0u);
+    lv_obj_set_style_border_width(middle,0u,0u);
     void *align=audio_uart_page_44104c(0u);
     audio_uart_page_44127e(middle,align,0u);
     audio_uart_page_44129e(middle,0xffu,0u);
-    audio_uart_page_44146a(middle,0u,0u);
-    audio_uart_page_44133a(middle,0u,0u);
-    audio_uart_page_441378(middle,0u,0u);
-    audio_uart_page_441386(middle,0u,0u);
-    audio_uart_page_4413b0(middle,0u,0u);
-    audio_uart_page_441394(middle,0u,0u);
-    audio_uart_page_4413a2(middle,0u,0u);
+    lv_obj_set_style_radius(middle,0u,0u);
+    lv_obj_set_style_outline_width(middle,0u,0u);
+    lv_obj_set_style_outline_pad(middle,0u,0u);
+    lv_obj_set_style_shadow_width(middle,0u,0u);
+    lv_obj_set_style_shadow_spread(middle,0u,0u);
+    lv_obj_set_style_shadow_offset_x(middle,0u,0u);
+    lv_obj_set_style_shadow_offset_y(middle,0u,0u);
     audio_uart_page_43dfa4(middle,0x10u);
     void *last=audio_uart_page_43de82(root);
     __builtin_memcpy(page+0x20u,&last,4u);
     audio_uart_page_43f4c0(last,dimension,dimension);
     audio_uart_page_45ec7c(last,0u,0u);
-    audio_uart_page_44131c(last,0u,0u);
+    lv_obj_set_style_border_width(last,0u,0u);
     audio_uart_page_44129e(last,0u,0u);
     audio_uart_page_43dfa4(last,0x10u);
     for(uint32_t offset=0u;offset<=0x10u;offset+=4u)

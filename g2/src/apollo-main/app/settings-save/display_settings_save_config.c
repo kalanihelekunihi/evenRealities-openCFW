@@ -24,10 +24,9 @@ static uint16_t crc16_24(const uint8_t *bytes) {
     }
     return crc;
 }
-void audio_settings_signal_save(void) {
-    uint32_t event=g2_audio_log_event_handle;
-    if(event!=0) (void)g2_log_event_set_task(event,4u);
-}
+/* Stock 0x448e34 (event bit-4 request): single body audio_uart_hand_mismatch_448e34
+ * in drivers/peripherals/ring-hand/display_ring_hand_mismatch.c, which aliases this name. */
+extern void audio_settings_signal_save(void);
 void SVC_Settings_SaveSettingConfigToKVCheck(void) {
     uint16_t crc=crc16_24(audio_settings_config_live);
     audio_settings_config_live[24]=(uint8_t)crc;

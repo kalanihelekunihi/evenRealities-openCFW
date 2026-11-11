@@ -1,13 +1,15 @@
 /* Apollo Ambiq label callback, native 0x53fcc4..0x53ffe9. */
 #include <stdint.h>
 
-extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,
+extern void lv_log_add(uint32_t,const char *,uint32_t,
                                 const char *,const char *,...);
 extern uint32_t audio_uart_ambiq_color_resolve_4b06a8(uint32_t,uint8_t);
 extern void audio_uart_ambiq_label_rect_copy_53fa94(uint32_t *,const uint32_t *);
 extern void audio_uart_ambiq_area_move_450bb2(void *,int32_t,int32_t);
 extern uint32_t audio_uart_ambiq_label_width_aligned_53faba(uint32_t,uint32_t);
 extern void g2_norflash_lock_46f65e(void);
+/* LVGL fmt_txt get_glyph_bitmap callback, stock 0x4b239c (ui/lvgl/lv-font). */
+extern void *audio_uart_lv_font_glyph_bitmap_4b239c(const void *, void *);
 extern void g2_norflash_unlock_46f674(void);
 extern uint32_t audio_uart_ambiq_glyph_bitmap_4d5612(uint32_t,uint32_t);
 extern void audio_uart_ambiq_label_glyph_blit_53fb18(uint32_t,void *,uint32_t,
@@ -51,7 +53,7 @@ void audio_uart_ambiq_label_pixel_53fcc4(void *unit,void *glyph,
     uint32_t needs_sync=0u;
     if(f==0 && g==0) return;
     if(f!=0 && g!=0)
-        audio_uart_lvgl_log(2u,pixel_path,0xa5u,pixel_function,pixel_both);
+        lv_log_add(2u,pixel_path,0xa5u,pixel_function,pixel_both);
     if(g==0) {
         color=audio_uart_ambiq_color_resolve_4b06a8(rgb(f+0x21u),f[0x20u]);
     } else {
@@ -74,7 +76,7 @@ void audio_uart_ambiq_label_pixel_53fcc4(void *unit,void *glyph,
                 uint32_t row_mode=(rd16(bitmap_data+0x12u)>>14)==3u;
                 uint32_t aligned=row_mode?1u:
                     audio_uart_ambiq_label_width_aligned_53faba(width,header[0xeu]);
-                uint32_t compact=(rd32(bitmap+4u)==0x4b239du) &&
+                uint32_t compact=(rd32(bitmap+4u)==(uint32_t)(uintptr_t)&audio_uart_lv_font_glyph_bitmap_4b239c) &&
                     ((rd16(bitmap_data+0x12u)>>14)==0u||row_mode);
                 if(0x80000001u<=bitmap_address) g2_norflash_unlock_46f674();
                 if((int8_t)g[4u]==3) compact=0u;
@@ -88,14 +90,14 @@ void audio_uart_ambiq_label_pixel_53fcc4(void *unit,void *glyph,
                         header[0xeu],color,aligned?1u:0u,aligned?row_mode:0u);
                     needs_sync=(0x80000001u<=bitmap_address);
                 } else {
-                    audio_uart_lvgl_log(2u,pixel_path,0x10du,pixel_function,pixel_slow);
+                    lv_log_add(2u,pixel_path,0x10du,pixel_function,pixel_slow);
                     header[0x14u]&=(uint8_t)~1u;
                     uint32_t cache=rd32(g+0x2cu);
                     uint32_t image=audio_uart_ambiq_glyph_bitmap_4d5612(
                         (uint32_t)(uintptr_t)header,cache);
                     *(uint32_t *)g=image;
                     if(image==0u) {
-                        audio_uart_lvgl_log(2u,pixel_path,0x111u,pixel_function,pixel_missing);
+                        lv_log_add(2u,pixel_path,0x111u,pixel_function,pixel_missing);
                     } else {
                         uint32_t cache_image=rd32((const void *)(uintptr_t)(cache+0x10u));
                         audio_uart_ambiq_label_glyph_blit_53fb18(gpu,

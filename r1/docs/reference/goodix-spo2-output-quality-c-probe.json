@@ -1,0 +1,150 @@
+{
+  "status": "probe_only_not_admitted",
+  "native_entry": "0x44a78",
+  "native_instruction_bytes": 348,
+  "native_literal_bytes": 12,
+  "actual_helper_pairs": 32768,
+  "explicit_extrema_boundary_pairs": 1024,
+  "calculate_caller_pairs": 384,
+  "independent_integer_oracles": 4096,
+  "coverage": {
+    "explicit_extrema_boundary_pairs": 1024,
+    "actual_helper_native_coverage_calls": 2048,
+    "actual_helper_instruction_bytes": 344,
+    "actual_helper_missing_starts": [
+      "0x44b92"
+    ],
+    "combined_instruction_bytes": 348,
+    "combined_instruction_starts": 115,
+    "entry": "0x44a78",
+    "scope": "Reverse subtraction at0x44b92 cannot be reached by ordinary same-span extrema in mapped public memory; retained and exercised through explicit max/min test boundaries. These boundary comparisons are distinct from real helper evidence."
+  },
+  "compiled_defects": [
+    {
+      "defect": "counter-saturation",
+      "detected": true,
+      "detection_case": "2",
+      "diagnostic": ""
+    },
+    {
+      "defect": "whole-flag-reset",
+      "detected": true,
+      "detection_case": "24",
+      "diagnostic": ""
+    },
+    {
+      "defect": "skip-window-push",
+      "detected": true,
+      "detection_case": "0",
+      "diagnostic": ""
+    },
+    {
+      "defect": "policy-threshold",
+      "detected": true,
+      "detection_case": "9",
+      "diagnostic": ""
+    },
+    {
+      "defect": "wrong-window",
+      "detected": true,
+      "detection_case": "6",
+      "diagnostic": ""
+    },
+    {
+      "defect": "max-as-min",
+      "detected": true,
+      "detection_case": "6",
+      "diagnostic": ""
+    },
+    {
+      "defect": "insufficient-bit",
+      "detected": true,
+      "detection_case": "3",
+      "diagnostic": ""
+    },
+    {
+      "defect": "mask-low-flags",
+      "detected": true,
+      "detection_case": "24",
+      "diagnostic": ""
+    },
+    {
+      "defect": "nan-status",
+      "detected": true,
+      "detection_case": "375",
+      "diagnostic": ""
+    }
+  ],
+  "limitations": [
+    "No source unit/import binding or normal build admission yet.",
+    "Actual extrema helpers reach344 native instruction bytes; the remaining4-byte reverse subtraction is retained and tested using explicit extrema boundaries.",
+    "Valid aligned backing spans, positive signed window lengths and single-channel native configuration are assumed. Null/zero/negative windows are not assigned invented behavior.",
+    "Direct/caller suites compare public RAM excluding8192 private stack bytes, full FPSCR, saved registers/SP/masks; only45 guarded model callback fields normalized in the caller.",
+    "Earlier processing and selection/confidence/output remain explicit caller test boundaries; physical hardware, timing and concurrency unverified."
+  ],
+  "evidence_sha256": {
+    "build/goal-r1-spo2-infer-c/candidate.o": "9e71f4b2126101d0956f959b4220bf210aedbd08c1066840ed50675662918b54",
+    "build/goal-r1-spo2-infer-support-c/normal-dependencies.a": "7e62b43a34fcf2b0ae34045a276bf4d564be5dde2ddb636dd0f69169c8843637",
+    "build/goal-r1-spo2-output-quality-c/caller-link.json": "2f14f0e4ce4d45a88d1d4db9e1c95da7e0517589417d74bb9d014049341d88a5",
+    "build/goal-r1-spo2-output-quality-c/caller-link.log": "201710bbc3eb19fdf49f50b0a4b3a5021cda67a44a6a5c88a6a4a72c74a5d9db",
+    "build/goal-r1-spo2-output-quality-c/caller-matrix.log": "db79539132486b99478ee5290806822c9eb05558000f62e66f267648b9614207",
+    "build/goal-r1-spo2-output-quality-c/caller-results.json": "1237ae4c7d00feeda6f723a36bc7d10da9128aef17cd555aff2929d9c91cd7f4",
+    "build/goal-r1-spo2-output-quality-c/caller.elf": "e5bf848165cf9b2efb52dca690d4839125a0760d41187d84372306eec964c09b",
+    "build/goal-r1-spo2-output-quality-c/caller.py": "03979e049617284a12aa6d8e98c4b484242858595e134c0028393db3eb600ccf",
+    "build/goal-r1-spo2-output-quality-c/caller_fixture.py": "b8bba025856114863c6625e00e2e707d5db667727be5629747263c491d571e28",
+    "build/goal-r1-spo2-output-quality-c/caller_matrix.py": "a3219e3aa8d3b7220322ce575725d5ea34434db6e93b9a0f8e5ce2814662f056",
+    "build/goal-r1-spo2-output-quality-c/candidate.c": "ee0830c283be80e3127b8032b03ea5bec812ec38279afa5899d7c3ebd84dfb61",
+    "build/goal-r1-spo2-output-quality-c/candidate.elf": "eff99f7185bb35e003bef03f3821c56e30234248c83dd7473fdedf77b9c89fa8",
+    "build/goal-r1-spo2-output-quality-c/candidate.o": "0a41f53ec826041c34681b6803b6aee979ab9b050ef6e9dd9786208cec75b08b",
+    "build/goal-r1-spo2-output-quality-c/compile-argv.json": "273a1f5451c5111fb4ad7b82750a0a1e8797e0884eb79cc5234db05894b923eb",
+    "build/goal-r1-spo2-output-quality-c/controls-results.json": "357b64f90c32e0b577d022641b87c65ac2818309c6dc2a17dfe7d5ea47409620",
+    "build/goal-r1-spo2-output-quality-c/controls.log": "bc30a9c0ec96bfd16bd181c4dd0bbe654b4694314f49f25156063bbb56ca35ea",
+    "build/goal-r1-spo2-output-quality-c/controls.py": "e06b0614b1f0db0d2598d8f3aabaeb1ce5cb65c641a945821e9234913f79243c",
+    "build/goal-r1-spo2-output-quality-c/coverage-results.json": "497032671a8f5a15e6e224c8239e3f3e42307a5911c012874ed988a888cad3f5",
+    "build/goal-r1-spo2-output-quality-c/coverage.py": "7402a2d67f3ae07dccf5ff45a9b92655958c9e600d83a9caefb79ac2716034f5",
+    "build/goal-r1-spo2-output-quality-c/defect.c": "734cadf10e16905d901a01801c83b5516278ded846e144c2947ab840670b70b0",
+    "build/goal-r1-spo2-output-quality-c/defect.elf": "1f5ac3b04e7e4356f2f0e313d5f9fcbcb7692f993bdc4452701be312d7c84553",
+    "build/goal-r1-spo2-output-quality-c/defect.o": "b4d826588e58ccfa4e15bf856867d1589e02dcb9626769539cffa53072048fc2",
+    "build/goal-r1-spo2-output-quality-c/defect_fixture.py": "7709a47631387b8cd8da91e2500de0a47c9811924193361c02753f2536f23374",
+    "build/goal-r1-spo2-output-quality-c/defect_verify.py": "6279fac6d2116c2e8b56514e16cf972fe630cf94609501489603b026b5d8bad7",
+    "build/goal-r1-spo2-output-quality-c/fixture.py": "c0924b3f25c06e0f7ed0f4270d215ca01d1a943ac10e13d46def399c5bc6116d",
+    "build/goal-r1-spo2-output-quality-c/link-argv.json": "16b5733c31dd9fee43f92a684c635c7ce64b351f3af0e5b72e346591b0a5d6bc",
+    "build/goal-r1-spo2-output-quality-c/link.log": "dc2cf54161424f7b7d0058ac0db011937a37843ef9eb3ffb5d049b72a1fbd8d1",
+    "build/goal-r1-spo2-output-quality-c/oracle-results.json": "e588f7a321a716aacaa920c49191842042f712199717ce1fde0c618fb711d787",
+    "build/goal-r1-spo2-output-quality-c/oracles.py": "1a067c5aac1ab81c51ae29646e973e4c8a94ad411469ad8d5980662c69321cd4",
+    "build/goal-r1-spo2-output-quality-c/rea-bytes.json": "544ed816f9013cec3fc2b6e80e02aed9eb7b316029bc36a16c767d1e5dd171df",
+    "build/goal-r1-spo2-output-quality-c/rea-dossier.json": "c265ecc8e305f7c0607d499d39e7e2c59b400591ed160ab99d379b627750ed43",
+    "build/goal-r1-spo2-output-quality-c/rea-literals.json": "98c11574af799f52d2ad1bb7fc8e7c321ddea932ca16232849e7c7e0570f0bcd",
+    "build/goal-r1-spo2-output-quality-c/results.json": "f1e79ff4c7e9b049a8eb700a8f6177e3681c12d2f19307ea3f031c6cbd034003",
+    "build/goal-r1-spo2-output-quality-c/verify.log": "8e16cdd614b32173d4baccac2c03d1f1f987d85fbffada2db15e0ba190812137",
+    "build/goal-r1-spo2-output-quality-c/verify.py": "b4037dfb51b73dcf5416eb7683a1216f7da2a67b08548c957e1c27643b93332f",
+    "build/goal-r1-spo2-ratio-c/normal-stream-test.ld": "808ff9c64adde68933158791e9d115c75817ae1840e2bdcbcfa42c7a39314cc6",
+    "build/sources-goal-r1-model-graph-execute-c/r1/r1-application/r1__src__application__goodix__native_model_concatenate.c.o": "6f80a63fefdad83c8cf73df17d40caf691c382ed676a0aae82f28bed9f636689",
+    "build/sources-goal-r1-model-graph-execute-c/r1/r1-application/r1__src__application__goodix__native_model_convolution.c.o": "5c211d9e5cf520e4fef7121843440b89fd956ede5526e2b8db0e48f500747f02",
+    "build/sources-goal-r1-model-graph-execute-c/r1/r1-application/r1__src__application__goodix__native_model_dense.c.o": "a5baaa994ed42a49be6aaf395a00671963a6c1b6b5d8583777c6305ee05bd1bd",
+    "build/sources-goal-r1-model-graph-execute-c/r1/r1-application/r1__src__application__goodix__native_model_float_pool.c.o": "17c92a4b130dda0281e7a897dc114fb0450d44b91b380e1dd49f5a2090c2e7ec",
+    "build/sources-goal-r1-model-graph-execute-c/r1/r1-application/r1__src__application__goodix__native_model_graph_execute.c.o": "4c0c63c859caf0fd22f1320b45136d908f8abbb84d4b0a2e3e2e20a8edc5dd7a",
+    "build/sources-goal-r1-model-graph-execute-c/r1/r1-application/r1__src__application__goodix__native_model_i8_convolution.c.o": "2657a7199915d67c47531fc0fc9ffbfbe865f4b95534abd1dbdafa390e0ba767",
+    "build/sources-goal-r1-model-graph-execute-c/r1/r1-application/r1__src__application__goodix__native_model_merge.c.o": "33a43b8fe5af49f578e7ebaf13ebcca37e457e06c19432fbb93762fa6c1024e4",
+    "build/sources-goal-r1-model-graph-execute-c/r1/r1-application/r1__src__application__goodix__native_model_pool_add.c.o": "73969bf6f08d01ca962bc9a8d85d5696ef178591ae9b5530e89af713b96b8474",
+    "build/sources-goal-r1-model-graph-execute-c/r1/r1-application/r1__src__application__goodix__native_model_quantization.c.o": "e317ed0e53906a7020f44905fb697f421b021e1d221f9da3f6e78435bcfef649",
+    "build/sources-goal-r1-model-graph-execute-c/r1/r1-application/r1__src__application__goodix__native_model_recurrent.c.o": "a9f03474c4391045cceb74e33a1aa0031387d459054add0966cbcd300bc9b513",
+    "build/sources-goal-r1-model-graph-execute-c/r1/r1-application/r1__src__application__goodix__native_model_recurrent_support.c.o": "d9da585a816de8b36c1a8a255860a168d8ba685233e4baf53ed695609bf9b129",
+    "build/sources-goal-r1-model-graph-execute-c/r1/r1-application/r1__src__application__goodix__native_model_scale.c.o": "70c03a7ad29fde9d634eaae50e201f9b9648d9ce173e72e04289113dedefb7f3",
+    "build/sources-goal-r1-model-graph-execute-c/r1/r1-application/r1__src__application__goodix__native_model_softmax.c.o": "9e00e9077ae03eb4c80bf06e81f6356747499337da700fd8ba7b3cd79b645fc2",
+    "build/sources-goal-r1-model-graph-execute-c/r1/r1-application/r1__src__application__goodix__native_model_transform.c.o": "c9d2e209373e9696eee3f03cd6b5dc0a5d47503d7d8b769a368158e5fcd3fad0",
+    "build/sources-goal-r1-model-graph-execute-c/r1/r1-application/r1__src__application__goodix__native_spectral_peaks.c.o": "9b99c7c3b40c8e0c3a3ba34e7736b37f710d063c760ef0898482243c361e1ec0",
+    "build/sources-goal-r1-model-graph-execute-c/r1/r1-application/r1__src__application__goodix__native_spo2_calculate.c.o": "0d1e2ddeeefd0ad393d0933a15bf7185e395422378e50e2c584b449fa1cff367",
+    "build/sources-goal-r1-model-graph-execute-c/r1/r1-application/r1__src__application__goodix__native_spo2_generated_model.c.o": "14f0da4eff0d75d6014f40d928a6bd58dcc44b79b1a4c6ed695c9dbdf87ee210",
+    "build/sources-goal-r1-model-graph-execute-c/r1/r1-application/r1__src__application__goodix__native_spo2_infer_support.c.o": "ebea499ddab2b91f3bf531f7301ac0cdf5bd5eb051c923a0cbae29e0ac3bdb5c",
+    "build/sources-goal-r1-model-graph-execute-c/r1/r1-application/r1__src__application__goodix__native_spo2_math.c.o": "265990bd7f6c22c801d820280faeccc977bbacff30e719a4ad3f08414b33dfc5",
+    "build/sources-goal-r1-model-graph-execute-c/r1/r1-application/r1__src__application__goodix__native_spo2_model_graph.c.o": "ede8398723a208a4ee7336b6004b9189576cd36520f3222c84be227cc166473b",
+    "build/sources-goal-r1-model-graph-execute-c/r1/r1-application/r1__src__application__runtime__native_expf_tanhf.c.o": "1b2a1142fd859ed7e67a172be060968c238a5a942afbee379d2318896b946b45",
+    "build/sources-goal-r1-model-graph-execute-c/r1/r1-application/r1__src__application__runtime__native_float_bits.c.o": "cc448df0a2076c6dd5ee05a700f3221fb9d253ae9ae0cb7b591a0ea3a474c154",
+    "build/sources-goal-r1-model-graph-execute-c/r1/r1-application/r1__src__application__runtime__native_math_selection.c.o": "8af75876c6bb312a8daeeed99f72214e4afa4afb080649df66a4cbd5a05f2afc",
+    "r1/blobs/official/r1-2.2.6.0009/application.bin": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "r1/src/application/goodix/native_spo2_calculate.c": "59435a7225ca7a9bba4576fd62e92c9d77b609da1acd48e0d3553b6c7431b8f2",
+    "r1/src/application/goodix/native_spo2_infer.c": "7a51ff3b41c333a41395975a998ee4ccffe7b63901c2acba88530c3289aedda7",
+    "r1/src/sources.json": "1e4ce3252d0f07bf131435ee18cf4a8d88e8cb12a24a6c7ae704bdd97e0aa2a3"
+  }
+}

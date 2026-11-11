@@ -9,14 +9,10 @@ extern uint32_t opencfw_em9305_radio_record_timing_30c40c(uint32_t,uint32_t);
 
 static uint32_t extract_native_bit(uint32_t value,unsigned bit)
 {
-#ifdef __arc__
     uint32_t out;
-    if (bit==10u) __asm__ volatile("xbfu %0,%1,0xa":"=r"(out):"r"(value));
-    else __asm__ volatile("xbfu %0,%1,0x9":"=r"(out):"r"(value));
+    if (bit==10u) out=((uint32_t)value>>10u)&0x1u;
+    else out=((uint32_t)value>>9u)&0x1u;
     return out;
-#else
-    return (value>>bit)&1u;
-#endif
 }
 
 uint32_t opencfw_em9305_mode_callback_32cffc(uintptr_t context,

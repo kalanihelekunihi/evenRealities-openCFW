@@ -1,0 +1,41 @@
+{
+  "schema": 1,
+  "date": "2026-11-11",
+  "reference": {
+    "artifact": "g2/blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin",
+    "sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+    "installed_image_offset": 32,
+    "installed_image_base": "0x438000",
+    "stock_node_add": "0x46d1ba..0x46d1c4 stores item, type, next and head but does not write list count at +8",
+    "stock_constructor": [
+      "0x46cdd6 saves the old list head",
+      "0x46cdee calls the node-add helper",
+      "0x46cdf2..0x46cdf8 compares the new head and increments the local success counter only if it changed",
+      "0x46cdfe..0x46ce04 tests the local success counter for an empty chain",
+      "0x46cef2..0x46cef4 stores the first font and then the final success count at list +8"
+    ]
+  },
+  "change": "The C node-add helper no longer increments list count. The constructor detects success from the head pointer, tracks a local count, and publishes it only on the successful return path.",
+  "verification": {
+    "sources_check": "pass: 4883 manifest units, one final-link-only C helper",
+    "full_source_build": "build/apollo-font-chain-count-20261111/all/report.json: 4878/4878 enabled C units compiled with no failures or duplicate strong symbols",
+    "strict_link": "build/apollo-font-chain-count-20261111/bundle/link-report.json: all seven payloads linked without an external binary archive",
+    "linked_apollo_count_stores": [
+      "0x483d3a: initializes list count at +8 to zero",
+      "0x4842f6: writes the final local count at +8 on the successful return path"
+    ],
+    "payload_delta_vs_previous_bundle": "Only g2-apollo-main changed versus build/tracepoint-efs-state-20261111/bundle/link-report.json.",
+    "apollo_main_binary": {
+      "bytes": 3819048,
+      "sha256": "2b94b1387a08528fdf58c8ba5bf30d04f4da34f9a7043fcd55a72b43de5cbc62"
+    },
+    "source_candidate_ota": {
+      "bytes": 4638060,
+      "sha256": "37c3f73290aea91d7f84d1a5c08d1e7eb37d51c38d0d38145af0562cadfb507c"
+    }
+  },
+  "limits": [
+    "Static instruction and link evidence does not verify physical font allocation or display behavior.",
+    "The source-only OTA differs from the locked artifact; whole-firmware C completeness remains unproven."
+  ]
+}

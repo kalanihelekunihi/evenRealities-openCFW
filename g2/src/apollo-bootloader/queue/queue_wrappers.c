@@ -164,3 +164,11 @@ int32_t opencfw_bl_queue_get(opencfw_queue_handle_t queue, void *msg,
     pend_deferred_switch(woken);
     return OPENCFW_OS_OK;
 }
+
+/* Stock entry names that branch straight to the provider above. */
+__typeof__(opencfw_bl_queue_create) opencfw_provider_416816 __attribute__((alias("opencfw_bl_queue_create")));
+__typeof__(opencfw_bl_queue_create) opencfw_boot_dfu_queue_new __attribute__((alias("opencfw_bl_queue_create")));
+__typeof__(opencfw_bl_queue_get) opencfw_provider_416920 __attribute__((alias("opencfw_bl_queue_get")));
+__typeof__(opencfw_bl_queue_get) opencfw_boot_dfu_queue_get __attribute__((alias("opencfw_bl_queue_get")));
+__typeof__(opencfw_bl_queue_put) opencfw_provider_4168a2 __attribute__((alias("opencfw_bl_queue_put")));
+__typeof__(opencfw_bl_queue_put) opencfw_boot_dfu_queue_put __attribute__((alias("opencfw_bl_queue_put")));

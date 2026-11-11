@@ -1,0 +1,54 @@
+{
+  "passed": 15552,
+  "executions": 31104,
+  "actual_registry_dispatchers": true,
+  "callback_mutation_cases": true,
+  "report": "build/sources-goal-r1-peripheral-line-power/report.json",
+  "source_sha256": {
+    "r1/src/application/board/native_peripheral_line_power.c": "cd22dca59bd3109c36e413b759c9502d08c1fa2740d7826ce0d225378b305464",
+    "r1/src/application/board/native_peripheral_bindings.c": "c2b283e25857766ad1046bdd837e859bd9baad5cccca5de057d019cce813a1e6",
+    "r1/src/application/registry/stock_registry.c": "68c16fe9a2fcd328012b8613c9da9aa4cd31bd30df36a55e64e56e7b534246fa"
+  },
+  "limitations": [
+    "Final registry operations modeled; physical GPIO/electrical effects unverified",
+    "Bounded serialized cases; concurrent access, invalid record/table pointers and fault paths unproven",
+    "Void return residues and private stack bytes excluded",
+    "No byte qualification or final placement proof"
+  ],
+  "native_entries": {
+    "0x50304": "r1_peripheral_line_release",
+    "0x50338": "r1_peripheral_line_acquire",
+    "0x5036c": "r1_goodix_transport_release",
+    "0x50372": "r1_goodix_transport_prepare",
+    "0x50378": "r1_touch_bus_enable_on",
+    "0x5037e": "r1_touch_bus_acquire_on"
+  },
+  "negative_control": {
+    "mutation": "Cache device once instead of reloading after first operation",
+    "rejected": true,
+    "counterexample": [
+      0,
+      0,
+      1,
+      2,
+      7,
+      1,
+      0
+    ],
+    "stderr": "Traceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-peripheral-line-power/reject-hoisting.py\", line 59, in <module>\n    for c in [(0,0,1,2,7,1,0)]:assert a(*c)==b(*c),c\n                                      ^^^^^^^^^^^^\nAssertionError: (0, 0, 1, 2, 7, 1, 0)\n"
+  },
+  "evidence": {
+    "build/goal-r1-peripheral-line-power/stock.elf": "ff3ecb125d2dae4f4479aed1495f9354444dafa7274901c397b93bf6958a3309",
+    "build/goal-r1-peripheral-line-power/REA.snapshot.json": "762f252010a8037a18f8670c11b34c2720952765448a13c13bcdede9345b899e",
+    "build/goal-r1-peripheral-line-power/verify.py": "8f14e6524de8a3db97dd29e400084370a4e7badfec74d2e7869d4e0087e8695f",
+    "build/goal-r1-peripheral-line-power/source.elf": "0448c02e1dfd9eb69838da2a265c7cbbd3e3b04657fa8c135d609d28658c6c2f",
+    "build/goal-r1-peripheral-line-power/bad-hoisted.c": "d80d428d1a3e2ffae80759a0adb907c01aa54f2587f9f1cbdc49250e89f25c4c",
+    "build/goal-r1-peripheral-line-power/reject-hoisting.py": "601eceb1521f3b07d33e23e89e8f0be3b46ffa8d2f82b7c71aeddf42d4576a56",
+    "build/sources-goal-r1-peripheral-line-power/report.json": "96e607b0228270d2cce9144c9f578e972ad299f777cc13b672c9520e6e77229c",
+    "r1/src/sources.json": "f860146befe6853fb7b6591e7fa28c6098739eed73d477c7d0cf87fdf3fc6b2f",
+    "r1/symbols/function-frontier.csv": "652aa6b85c91e13c0879bfdf058d414989879484de3581a88a4a25e67f6584ce",
+    "tools/build/source-plan.json": "432d01e6a7b79c5c680b62143962870a021836bbe8905e6a41015a7970d5af63"
+  },
+  "instruction_identity_proven": false,
+  "image_integration_proven": false
+}

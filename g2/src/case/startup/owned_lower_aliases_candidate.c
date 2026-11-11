@@ -6,8 +6,10 @@
 extern uint32_t case_binary_5e_wait(uint32_t ticks); /* 0x08004958 */
 extern void log_hex_buffer(const uint8_t *bytes,uint32_t count); /* 0x080067c8 */
 extern void case_send(const uint8_t *bytes,uint32_t count); /* 0x0800680c */
-void case_init_wait(uint32_t ticks){(void)case_binary_5e_wait(ticks);}
-void case_init_hex_log(const uint8_t *bytes,uint32_t count){log_hex_buffer(bytes,count);}
+/* Dedup (0x08004958): case_init_wait is an alias of case_binary_5e_wait (legacy-default/flash_wait_candidate.c). */
+extern void case_init_wait(uint32_t ticks);
+/* Dedup (0x080067c8): case_init_hex_log is an alias of log_hex_buffer (glue/hex_log_provider.c). */
+extern void case_init_hex_log(const uint8_t *bytes,uint32_t count);
 void case_record_hex_log(const uint8_t *bytes,uint32_t count){log_hex_buffer(bytes,count);}
 void case_record_forward(const uint8_t *bytes,uint32_t count){case_send(bytes,count);}
 /* Native 0x08004e94 and 0x08004eb8/4ec4/4ed0 use these register offsets. */
@@ -50,3 +52,9 @@ void case_init_sensor_prepare(void)
     clear16(b+0x12);b[0x10]=0u;
     clear32(b+0x1c);clear32(b+0x18);clear32(b+0x20);clear32(b+0x24);
 }
+/* Dedup (0x08005094): case_legacy_ee_wake_prepare (was legacy-default/shipmode_mmio_children.c). */
+uint32_t case_legacy_ee_wake_prepare(uint32_t mode) __attribute__((alias("case_init_wake_mask")));
+/* Dedup (0x080050a8): case_legacy_ee_wake_enable (was legacy-default/shipmode_mmio_children.c). */
+uint32_t case_legacy_ee_wake_enable(uint32_t mode) __attribute__((alias("case_init_wake_config")));
+/* Dedup (0x080050c4): case_legacy_ee_enter_standby (was legacy-default/shipmode_mmio_children.c). */
+uint32_t case_legacy_ee_enter_standby(void) __attribute__((alias("case_init_wake_clock")));

@@ -1,46 +1,26 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_31ff2c\n"
-".type opencfw_em9305_child_31ff2c,@function\n"
-"opencfw_em9305_child_31ff2c:\n"
-"L31ff2c:\n"
-"enter_s [r13,blink]\n"
-"L31ff2e:\n"
-"mov_s r13,r0\n"
-"L31ff30:\n"
-"bl.d opencfw_em9305_common_release_304588\n"
-"L31ff34:\n"
-"mov_s r0,1\n"
-"L31ff36:\n"
-"ldb r0,[r13,98]\n"
-"L31ff3a:\n"
-"brhs.d.nt r0,0x5,L31ff48\n"
-"L31ff3e:\n"
-"mov_s r1,0x1a\n"
-"L31ff40:\n"
-"bbit0.nt r1,r0,L31ff48\n"
-"L31ff44:\n"
-"bl opencfw_em9305_init_state_count_down_30e49c\n"
-"L31ff48:\n"
-"ld.as r0,[r13,98]\n"
-"L31ff4c:\n"
-"breq_s r0,0,L31ff56\n"
-"L31ff4e:\n"
-"bl opencfw_em9305_wsf_event_release\n"
-"L31ff52:\n"
-"st.as 0,[r13,98]\n"
-"L31ff56:\n"
-"mov_s r0,0x805a74\n"
-"L31ff5c:\n"
-"ldb_s r1,[r0,0]\n"
-"L31ff5e:\n"
-"add_s r1,r1,-1\n"
-"L31ff60:\n"
-"bl.d opencfw_em9305_command_count_down_30e48c\n"
-"L31ff64:\n"
-"stb_s r1,[r0,0]\n"
-"L31ff66:\n"
-"leave_s [r13,blink,pcl]\n"
-".size opencfw_em9305_child_31ff2c,.-opencfw_em9305_child_31ff2c\n"
-);
+#include <stdint.h>
+
+/* Native 0x31ff2c..0x31ff68: release a finished command. Releases common
+ * resource 1, counts down the init state for command states 1, 3 and 4
+ * (+98), frees the pending event at +392, and decrements the outstanding
+ * command count at 0x805a74. */
+extern uint32_t opencfw_em9305_common_release_304588(uint32_t resource);
+extern uint32_t opencfw_em9305_init_state_count_down_30e49c(void);
+extern uint32_t opencfw_em9305_wsf_event_release(uintptr_t event);
+extern uint32_t opencfw_em9305_command_count_down_30e48c(void);
+
+uint32_t opencfw_em9305_child_31ff2c(uintptr_t command)
+{
+    (void)opencfw_em9305_common_release_304588(1u);
+    uint32_t state=*(volatile uint8_t *)(command+98u);
+    if(state<5u&&((0x1au>>state)&1u)!=0u)
+        (void)opencfw_em9305_init_state_count_down_30e49c();
+    uintptr_t event=*(volatile uint32_t *)(command+392u);
+    if(event!=0u){
+        (void)opencfw_em9305_wsf_event_release(event);
+        *(volatile uint32_t *)(command+392u)=0u;
+    }
+    volatile uint8_t *count=(volatile uint8_t *)(uintptr_t)0x805a74u;
+    *count=(uint8_t)(*count-1u);
+    return opencfw_em9305_command_count_down_30e48c();
+}

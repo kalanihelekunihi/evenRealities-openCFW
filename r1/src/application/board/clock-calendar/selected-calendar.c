@@ -102,35 +102,13 @@ _Static_assert(sizeof(time_calendar_state) == 0x20u,
                "recovered state root is 32 bytes");
 #endif
 
-/* Recovered 20-byte cache invalidation (stock: memset thunk 0x000277AA over
- * state +0x0C..+0x1F).  The span from reserved_0c to the end of the struct
- * is exactly those bytes on the 32-bit target ABI (asserted above) and the
- * equivalent fields on wider host ABIs.  Local loop; the freestanding build
- * uses no libc. */
-static void cache_invalidate(time_calendar_state *state) {
-    uint8_t *bytes = (uint8_t *)state;
-    for (size_t index = offsetof(time_calendar_state, reserved_0c);
-            index < sizeof(*state); ++index) {
-        bytes[index] = 0u;
-    }
-}
-
-/* Evidence-derived data: the stock image carries two identical private
- * 24-byte dual month-length tables (non-leap row then leap row), one per
- * converter translation unit, at 0x00099C5C (forward converter) and
- * 0x00099C74 (inverse converter).  Bytes read from the rebuilt image. */
-static const uint8_t month_days_forward[24] = {
-    31u, 28u, 31u, 30u, 31u, 30u, 31u, 31u, 30u, 31u, 30u, 31u,
-    31u, 29u, 31u, 30u, 31u, 30u, 31u, 31u, 30u, 31u, 30u, 31u
-};
+/* This selected TU contains only the inverse converter and UTC adapters.
+ * The forward converter and cache owner retain their own table/state.
+ * Native inverse month-length table: 0x00099C74, non-leap then leap row. */
 static const uint8_t month_days_inverse[24] = {
     31u, 28u, 31u, 30u, 31u, 30u, 31u, 31u, 30u, 31u, 30u, 31u,
     31u, 29u, 31u, 30u, 31u, 30u, 31u, 31u, 30u, 31u, 30u, 31u
 };
-
-/* Stock NULL-output fallback for the forward converter (0x20016AE4): one
- * shared static buffer, returned to the caller. */
-static time_calendar_broken_down unix_to_broken_down_fallback;
 
 /* Recovered Gregorian leap rule: divisible by 4 and not by 100, or by 400.
  * (The stock mod-4 miss path still tests mod 400; the rule is identical.) */
@@ -171,31 +149,7 @@ int32_t time_calendar_broken_down_to_unix(
         broken_down->minute * TIME_CALENDAR_SECONDS_PER_MINUTE;
     return (int32_t)epoch;
 }
-uint32_t time_calendar_utc_to_calendar(int32_t epoch_seconds,
-                                       int32_t utc_offset_minutes,
-                                       time_calendar_datetime *out) {
-    if (out == NULL) {
-        return 0u;
-    }
-    /* Recovered 32-bit wrap arithmetic (stock: rsb/lsl scale, add.w). */
-    const uint32_t local = (uint32_t)epoch_seconds +
-        (uint32_t)utc_offset_minutes * TIME_CALENDAR_SECONDS_PER_MINUTE;
-    time_calendar_broken_down broken_down;
-    const time_calendar_broken_down *filled =
-        time_calendar_unix_to_broken_down(local, &broken_down);
-    if (filled == NULL) {
-        /* Unreachable with a valid buffer; stock keeps the same check. */
-        return 0u;
-    }
-    out->year = (uint16_t)(filled->year + 1900u);
-    out->month = (uint8_t)(filled->month + 1u);
-    out->day = (uint8_t)filled->day;
-    out->hour = (uint8_t)filled->hour;
-    out->minute = (uint8_t)filled->minute;
-    out->second = (uint8_t)filled->second;
-    out->weekday = (uint8_t)filled->weekday;
-    return 1u;
-}
+/* UTC adapter is owned by the native C kernel and ABI-frame bridge. */
 int32_t time_calendar_to_utc(const time_calendar_datetime *datetime,
                              int32_t utc_offset_minutes) {
     if (datetime == NULL) {

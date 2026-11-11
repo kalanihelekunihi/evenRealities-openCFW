@@ -13,7 +13,7 @@ extern void opencfw_bl_kernel_reschedule(void);
 extern void opencfw_boot_next_unblock_refresh(void);
 static void fail(void) {
     (void)opencfw_bl_mask_interrupts();WORD(UINT32_MAX)=0;
-    for (;;) __asm__ volatile("b .":::"memory");
+    for (;;) { }
 }
 uint32_t opencfw_boot_thread_notify_wait(uint32_t index,uint32_t clear_entry,uint32_t clear_exit,uint32_t *output,uint32_t ticks) {
     if (index)fail();

@@ -1,0 +1,98 @@
+{
+  "schema_version": 1,
+  "report": "build/sources-goal-r1-rtos-critical-verified/report.json",
+  "report_sha256": "5b57e6a6d32c7712a425d0c790233c40b5557ae6dedac9866d1ffbab483cf0ab",
+  "manifest_sha256": "f86dd8b447adf4e23f2a3acfccaaef1c568e21d9d4acf21976c353d7ae3f2447",
+  "stock_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "source": {
+    "source": "r1/src/application/rtos/port-start/port.c",
+    "source_sha256": "f7b5db8c0134e7b9a07ce837f4c16a0592c223f0139fd3740fb0913bd2604fb0",
+    "object_sha256": "a745309b49998542d259e4cc5b311a62347000ac54c33b95f8551bb7989f4f7f",
+    "link": true
+  },
+  "shared_nesting_word": "0x20007814",
+  "unchanged_existing_function_bodies": [
+    "xPortStartScheduler"
+  ],
+  "verification": {
+    "cases": 372,
+    "passed": 372,
+    "failures": []
+  },
+  "bodies": [
+    {
+      "function": "vPortEnterCritical",
+      "stock_entry": "0x95cf4",
+      "stock_size": 40,
+      "source_size": 54,
+      "stock_bytes": "402181f31188084a5068401c5060012809d106480068c00505d081f31188002040f8010cfee77047",
+      "source_bytes": "402080f3118847f61400c2f2000001684a1c026001b170474ef60450cef200000068c005f7d0402080f311884ff0ff3000210160fee7",
+      "byte_identical": false
+    },
+    {
+      "function": "vPortExitCritical",
+      "stock_entry": "0x95d24",
+      "stock_size": 32,
+      "source_size": 46,
+      "stock_bytes": "07490022486828b1401e486001d182f311887047402080f3118842f8012cfee7",
+      "source_bytes": "47f61400c2f20000016839b10139016018bf7047002080f311887047402080f311884ff0ff300021016000bffee7",
+      "byte_identical": false
+    }
+  ],
+  "rea": {
+    "completed": false,
+    "errors": [
+      {
+        "code": "execution_failure",
+        "message": "Analysis could not complete. Run `rea doctor` and review the reported details; repeating the unchanged request is not expected to succeed.",
+        "failure_cause": {
+          "name": "GhidraRemoteError",
+          "message": "Ghidra decompilation failed:  Low-level Error: Trying to construct memory range beyond end of address space: ram",
+          "code": "decompile_failed"
+        },
+        "remote_message": "Ghidra decompilation failed:  Low-level Error: Trying to construct memory range beyond end of address space: ram"
+      },
+      {
+        "code": "execution_failure",
+        "message": "Analysis could not complete. Run `rea doctor` and review the reported details; repeating the unchanged request is not expected to succeed.",
+        "failure_cause": {
+          "name": "GhidraRemoteError",
+          "message": "Ghidra decompilation failed:  Low-level Error: Trying to construct memory range beyond end of address space: ram",
+          "code": "decompile_failed"
+        },
+        "remote_message": "Ghidra decompilation failed:  Low-level Error: Trying to construct memory range beyond end of address space: ram"
+      }
+    ]
+  },
+  "composition": {
+    "compiled_units": 561,
+    "application_unresolved_before": 238,
+    "application_unresolved_after": 236,
+    "bootloader_unresolved": 34,
+    "resolved": [
+      "vPortEnterCritical",
+      "vPortExitCritical"
+    ],
+    "added": []
+  },
+  "hashes": {
+    "build/goal-r1-rtos-critical/port-before.c": "9d8f2495c0a19063d12c488142ebab98126a4a0487173518353a4d9498f01870",
+    "build/goal-r1-rtos-critical/verify.py": "7929045e15a9cbf35c166e807e40a690480cc61bf0945014ba7ea121f81d6497",
+    "build/goal-r1-rtos-critical/results.json": "4c8fe8e8f4aae83ca988118e5ede501dc065a0f189394944171c17ac496a4aec",
+    "build/goal-r1-rtos-critical/source.elf": "0d09d73fc2453824549ba7067ba04b2ca8a98fe6b01e9b34c054ce7f0faa3240",
+    "build/goal-r1-rtos-critical/stock.elf": "de83011dcf1eac8edbd56013f90bf58fe7e5eb86a855f72e90d32a47ca89f02a",
+    "build/goal-r1-rtos-critical/REA.json": "fa5b56af29e13dfc085a610cb994757344694e4e4230cc9e84e554c00d8be903",
+    "build/goal-r1-rtos-critical/rea-snapshot.json": "cad4f11f8c7c3348d52696e6ff22938f5899df50ee4781dc50e4573123c890cb",
+    "r1/src/config/rtos/port_start_contract.h": "993d3e4b20aa180ce45dac53d3ac1baf03d958650c8696b67ac8ae959341873f",
+    "r1/src/config/rtos/native_port_assert.h": "efee8118f24a53756b6f14a666524b3d59561f005e1e87ed71309ccab9c4fc9f",
+    "vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/external/freertos/portable/CMSIS/nrf52/port_cmsis.c": "8cc9caf3b2ff2495f90c5bd010a88f9277aac644f7a9be7b6832ca20a1d802e5"
+  },
+  "limitations": [
+    "M-class register/MMIO model, not real NVIC interrupt delivery or scheduler execution.",
+    "Assertion checks compare the attempted invalid store and observed BASEPRI/nesting; no full exception escalation or fault-register snapshot is established.",
+    "Valid-return ABI preservation is checked, not private stack/fault state or timing/byte identity.",
+    "REA decompilation failed; raw stock instruction decoding and execution provide this review evidence.",
+    "Full SDK port remains excluded to avoid duplicate selected providers.",
+    "No source-plan selection or workflow gate advanced."
+  ]
+}

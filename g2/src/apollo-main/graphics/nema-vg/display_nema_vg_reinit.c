@@ -7,7 +7,7 @@ extern void audio_uart_nema_instruction_upload_522920(const uint32_t *, uint32_t
 extern void audio_uart_nema_child_514846(uint32_t, uint32_t);
 extern void *audio_uart_nema_vg_framebuffer_get_51562e(void);
 
-volatile uint32_t audio_uart_nema_vg_framebuffer_context_cell_20074f08;
+extern volatile uint32_t audio_uart_nema_vg_framebuffer_context_cell_20074f08;
 
 static const uint32_t vg_records[5][2] = {
     {0x080c0182u, 0x8a9f5a24u},

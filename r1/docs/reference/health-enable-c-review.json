@@ -1,0 +1,105 @@
+{
+  "schema_version": 1,
+  "entries": {
+    "0x496fc": "r1_health_enable_update",
+    "0x8f6f8": "r1_health_engine_enabled_update_native"
+  },
+  "report": "build/sources-goal-r1-health-enable-c/report.json",
+  "report_sha256": "8ed1b705c71f57d5d7ff024f61cdde7460d58b249d47b1d5cccd5afe623daa0e",
+  "unit": {
+    "source": "r1/src/application/runtime/native_health_enable.c",
+    "source_sha256": "464c9474a4edf64cd4ecdb6ec8270049914ac19b51de97135c1fcb462989a5d0",
+    "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-health-enable-c/r1/r1-application/r1__src__application__runtime__native_health_enable.c.o",
+    "object_sha256": "44765f060870817ae94c6d6adce6e926e92328a5c79694d3336bbf15cefb99ee"
+  },
+  "behavior": {
+    "pairs": 1344,
+    "digest": "a39d919fa6d1c46ffc5cb7d205bbbb5277036f3ab4c8825b2743a9cdecb947f9",
+    "actual_C": [
+      "health enable handler",
+      "eight-byte engine toggle",
+      "actual event callback adapter"
+    ],
+    "modeled_boundaries": [
+      "r1_gomore_record8_get_native",
+      "r1_gomore_record8_apply_native",
+      "r1_gomore_authorization_dispatch_native",
+      "r1_structured_log_mode_get",
+      "r1_structured_log_format",
+      "nrf_log_frontend_std_1"
+    ],
+    "limits": [
+      "No asynchronous IRQ/concurrency",
+      "Private record normalized by full eight-byte contents; modeled partial provider writes",
+      "Algorithm record internals, authorization effects and physical sensor activation remain modeled"
+    ]
+  },
+  "negative_controls": {
+    "wrong-nonzero-normalization": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "e());pairs+=1\n                                              ^^^^\nAssertionError: ({'entry': 'update', 'value': 2, 'disabled': 0, 'written': 0, 'modes': (0,)}, {'trace': [('mode', [0]), ('mode', [0]), ('mode', [0]), ('get', [0, '0000000000000000']), ('authorize', [0, 1]), ('authorize', [3, 1])], 'returns': [3]}, {'trace': [('mode', [0]), ('mode', [0]), ('mode', [0]), ('get', [0, '0000000000000000']), ('apply', ['0000000000010000']), ('authorize', [0, 0]), ('authorize', [3, 0])], 'returns': [3]})\n"
+    },
+    "wrong-disable-byte-test": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "e());pairs+=1\n                                              ^^^^\nAssertionError: ({'entry': 'update', 'value': 0, 'disabled': 2, 'written': 6, 'modes': (0,)}, {'trace': [('mode', [0]), ('mode', [0]), ('mode', [0]), ('get', [0, '0000000000000000']), ('authorize', [0, 0]), ('authorize', [3, 0])], 'returns': [3]}, {'trace': [('mode', [0]), ('mode', [0]), ('mode', [0]), ('get', [0, '0000000000000000']), ('apply', ['123456789a010000']), ('authorize', [0, 0]), ('authorize', [3, 0])], 'returns': [3]})\n"
+    },
+    "wrong-status-logging-width": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": ": [('mode', [7]), ('ring', [205520896, '[RING]health enable update: %d', 256]), ('mode', [7]), ('log1', [1835011, 'health enable update: %d', 256]), ('get', [0, '0000000000000000']), ('authorize', [0, 1]), ('authorize', [3, 1])], 'returns': [3]}, {'trace': [('mode', [7]), ('ring', [205520896, '[RING]health enable update: %d', 0]), ('mode', [7]), ('log1', [1835011, 'health enable update: %d', 256]), ('get', [0, '0000000000000000']), ('authorize', [0, 1]), ('authorize', [3, 1])], 'returns': [3]})\n"
+    },
+    "wrong-authorization-slot": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "                           ^^^^\nAssertionError: ({'entry': 'update', 'value': 0, 'disabled': 0, 'written': 0, 'modes': (0,)}, {'trace': [('mode', [0]), ('mode', [0]), ('mode', [0]), ('get', [0, '0000000000000000']), ('apply', ['0000000000010000']), ('authorize', [0, 0]), ('authorize', [3, 0])], 'returns': [3]}, {'trace': [('mode', [0]), ('mode', [0]), ('mode', [0]), ('get', [0, '0000000000000000']), ('apply', ['0000000000010000']), ('authorize', [0, 0]), ('authorize', [0, 0])], 'returns': [0]})\n"
+    },
+    "wrong-record-byte": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "                           ^^^^\nAssertionError: ({'entry': 'update', 'value': 0, 'disabled': 0, 'written': 0, 'modes': (0,)}, {'trace': [('mode', [0]), ('mode', [0]), ('mode', [0]), ('get', [0, '0000000000000000']), ('apply', ['0000000000010000']), ('authorize', [0, 0]), ('authorize', [3, 0])], 'returns': [3]}, {'trace': [('mode', [0]), ('mode', [0]), ('mode', [0]), ('get', [0, '0000000000000000']), ('apply', ['0000000001000000']), ('authorize', [0, 0]), ('authorize', [3, 0])], 'returns': [3]})\n"
+    },
+    "lost-engine-update": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "st.update(json.dumps([kw,a]).encode());pairs+=1\n                                              ^^^^\nAssertionError: ({'entry': 'update', 'value': 0, 'disabled': 0, 'written': 0, 'modes': (0,)}, {'trace': [('mode', [0]), ('mode', [0]), ('mode', [0]), ('get', [0, '0000000000000000']), ('apply', ['0000000000010000']), ('authorize', [0, 0]), ('authorize', [3, 0])], 'returns': [3]}, {'trace': [('mode', [0]), ('mode', [0]), ('mode', [0]), ('authorize', [0, 0]), ('authorize', [3, 0])], 'returns': [3]})\n"
+    },
+    "wrong-record-toggle": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "                           ^^^^\nAssertionError: ({'entry': 'update', 'value': 0, 'disabled': 0, 'written': 0, 'modes': (0,)}, {'trace': [('mode', [0]), ('mode', [0]), ('mode', [0]), ('get', [0, '0000000000000000']), ('apply', ['0000000000010000']), ('authorize', [0, 0]), ('authorize', [3, 0])], 'returns': [3]}, {'trace': [('mode', [0]), ('mode', [0]), ('mode', [0]), ('get', [0, '0000000000000000']), ('apply', ['0000000000020000']), ('authorize', [0, 0]), ('authorize', [3, 0])], 'returns': [3]})\n"
+    },
+    "wrong-readback-branch": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "e());pairs+=1\n                                              ^^^^\nAssertionError: ({'entry': 'update', 'value': 0, 'disabled': 0, 'written': 0, 'modes': (0,)}, {'trace': [('mode', [0]), ('mode', [0]), ('mode', [0]), ('get', [0, '0000000000000000']), ('apply', ['0000000000010000']), ('authorize', [0, 0]), ('authorize', [3, 0])], 'returns': [3]}, {'trace': [('mode', [0]), ('mode', [0]), ('mode', [0]), ('get', [0, '0000000000000000']), ('authorize', [0, 0]), ('authorize', [3, 0])], 'returns': [3]})\n"
+    }
+  },
+  "audit": {
+    "unchanged_prior_objects": 749,
+    "new_units": 1,
+    "imports": {
+      "r1-application": {
+        "added": [
+          "r1_gomore_record8_apply_native",
+          "r1_gomore_record8_get_native"
+        ],
+        "removed": [
+          "r1_event_service_000496fc"
+        ]
+      },
+      "r1-bootloader": {
+        "added": [],
+        "removed": []
+      }
+    },
+    "reused_owners": [
+      "No new state; callback prototype updated without object changes"
+    ]
+  },
+  "source_check": "R1 check passes: 750 units, 554 source files, 0 not built. Global check flagged concurrent G2 resident_rom_thumb_set.S absent from manifest.",
+  "rea": "health-enable-c-rea.json",
+  "instruction_identity_proven": false,
+  "image_integration_proven": false
+}

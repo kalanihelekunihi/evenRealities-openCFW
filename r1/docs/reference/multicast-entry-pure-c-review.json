@@ -1,0 +1,159 @@
+{
+  "schema_version": 1,
+  "scope": "R1 multicast dispatcher entry in ordinary C; opaque callback trampoline retained",
+  "report": "build/sources-goal-r1-multicast-entry-final-c/report.json",
+  "comparison_report": "build/sources-goal-r1-retained-sink-c/report.json",
+  "stock_entry": "0x8b028",
+  "stock_size": 202,
+  "audit": {
+    "compiled_units": 862,
+    "unchanged_prior_nongenerated_objects": 851,
+    "changed_prior_nongenerated_objects": [
+      "r1/src/application/runtime/native_event_multicast.c"
+    ],
+    "manifest_unchanged": true,
+    "source_plan_unchanged": true,
+    "application_imports": 63,
+    "bootloader_imports": 22,
+    "new_mutable_persistent_bytes": 0,
+    "only_entry_signature_and_wrapper_changed": true,
+    "final_object_equals_tested_object": true,
+    "opaque_callback_trampoline_section_unchanged_sha256": "dd9261f0471768edc33bf979649f6297463be423da17c3f881684f5747e163a1"
+  },
+  "direct": {
+    "native_instruction_bytes_executed": 202,
+    "paired_cases": 6997,
+    "executions": 13994,
+    "source_report": "build/sources-goal-r1-multicast-entry-c/report.json",
+    "actual_C_dependencies": [
+      "subscriber lock/unlock",
+      "CMSIS thread getter",
+      "FreeRTOS current-task getter",
+      "native memory-move adapter",
+      "upstream musl memmove and memcpy"
+    ],
+    "modeled": [
+      "allocator",
+      "CMSIS mutex APIs",
+      "opaque callbacks",
+      "event publication and release"
+    ],
+    "checks": [
+      "unbounded selector address arithmetic including mapped overflow aliases",
+      "short-cache clear and root reloads",
+      "16-bit allocation/publication size wrapping and full payload copy length",
+      "callback-only gating and synchronous original payload",
+      "thread snapshot before allocator",
+      "route thread-cell identity and once-per-route publication",
+      "allocation failures continue direct dispatch",
+      "live next reload, callback and publication mutations",
+      "overlapping source/record/cache copies, status independence",
+      "shared structure accesses, native null-root faults, final snapshots, masks, SP and saved registers"
+    ],
+    "limits": [
+      "Movement internal access sizes/order excluded; ordinary RAM copy results and API arguments checked",
+      "Private stack residue and volatile-MMIO copy targets excluded",
+      "Heap allocation extents and queued record lifetime are modeled; physical scheduling and devices unproven"
+    ]
+  },
+  "queue_consumer_pipeline": {
+    "paired_pipeline_cases": 192,
+    "executions": 384,
+    "actual_C": [
+      "multicast dispatcher",
+      "native event publisher",
+      "event bus enqueue",
+      "consumer",
+      "mutex wrappers",
+      "thread/task getters",
+      "memory movement"
+    ],
+    "modeled": [
+      "allocator",
+      "CMSIS mutex/queue/flags APIs",
+      "opaque callbacks",
+      "release"
+    ],
+    "checks": [
+      "queued copy bytes and fields",
+      "successful queue wakes consumer",
+      "failed queue still wakes and releases its copy",
+      "multicast releases original copy",
+      "each successful queued descriptor executes consumer and native callbacks",
+      "uninitialized leading queue word excluded; all defined fields checked",
+      "SP, saved registers, masks, final shared state"
+    ],
+    "limits": [
+      "Queue scheduling and physical hardware modeled",
+      "Native publisher private stack residue excluded"
+    ]
+  },
+  "compiled_defects_rejected": [
+    {
+      "defect": "duplicate-route",
+      "rejected": true
+    },
+    {
+      "defect": "size",
+      "rejected": true
+    },
+    {
+      "defect": "empty-root",
+      "rejected": true
+    },
+    {
+      "defect": "cache-clear",
+      "rejected": true
+    },
+    {
+      "defect": "empty-unlock",
+      "rejected": true
+    },
+    {
+      "defect": "free",
+      "rejected": true
+    }
+  ],
+  "contract": [
+    "Promote the existing C dispatcher body to the public entry, removing only its saved-input-to-caller-scratch restoration wrapper. Scalar return, routing algorithm and all state access remain unchanged.",
+    "Preserve short-payload caching, current-thread snapshot, opaque callback arguments, uint16 allocation/publication size, once-per-route delivery, live next-node reload, cleanup and lock/unlock.",
+    "Keep the opaque callback trampoline and its executable section unchanged."
+  ],
+  "limits": [
+    "Eight direct transfers identified in locked raw scan, including two tail calls. No identified continuing caller consumes wrapper-restored R1/R2/R3. Indirect callers and nonstandard external ABI consumers are not exhaustively proven.",
+    "Caller scratch outputs and private stack placement are excluded. Saved integer/FP registers, masks, SP and caller guards checked. API boundaries use executable BX LR stubs rather than PC teleportation.",
+    "Allocator, CMSIS mutex/queue/flags and opaque callbacks are modeled. Actual C synchronization wrappers, thread/task getters, memory movement, publisher/enqueue and consumer execute where specified. Publisher retains its separate frame bridge.",
+    "Native null-root-after-lock faults remain compared. Uninitialized queue-leading word, memory-move internal access widths/order and private stack residue excluded.",
+    "Final linking, physical scheduling, queued object lifetime on hardware and device boot remain unverified."
+  ],
+  "evidence_files": {
+    "build/sources-goal-r1-multicast-entry-final-c/report.json": "02ac248ade216894ac380d773dcf0aed03b4fd479b91ada2fe59eee11eba586a",
+    "build/sources-goal-r1-retained-sink-c/report.json": "b02ee94c29c1b4564a1b01c737dcc28a10bce1512677faf2db68f5d08fca66d6",
+    "build/sources-goal-r1-multicast-entry-c/report.json": "2f8f147ad4f88a37d198e6c5d89dd8983292357824691cba70e8843fe157c4bc",
+    "r1/src/application/runtime/native_event_multicast.c": "ac48d7af74374c25c5fbb88daca4628c3d5bc6480dd1f513ad024548cbdc5933",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-multicast-entry-final-c/r1/r1-application/r1__src__application__runtime__native_event_multicast.c.o": "aa333a9938984dfc5485bc3922416273cb653706d9f4e39806cc04a38dc21b7d",
+    "r1/src/sources.json": "f28c024dc0cd0a3b3a18849dae57615da4716e182026d3a75c1591023b0cf445",
+    "tools/build/source-plan.json": "eeb516e31b3310fb0718f36908977f8125723f7c5e0e86cd6744395826259a4d",
+    "build/goal-r1-multicast-entry-c/audit.json": "111045f4378ddf2b2b7116ebe8eb9849db01cb3c30b7e8bd7d1c803e87a86fa6",
+    "build/goal-r1-multicast-entry-c/negative.json": "cb48365e8faa4e66e0fe4c60e23538cbbafa1fee1046ec2869b7f98dbf87fac2",
+    "build/goal-r1-multicast-entry-c/test.ld": "147c28ea57336b88161d27e84db6ffb340c7d0ffa57e374a728d907537b576ae",
+    "build/goal-r1-multicast-entry-c/audit.py": "fcbaa3e954c2f0ec17911db479ec84cab6cac4f885e179c0b11ea3dc4ab28e7d",
+    "build/goal-r1-multicast-entry-c/source.elf": "a071f51e39ca0dfa6a287748fd490be27a36355ed25f01748bd011afaaf509da",
+    "build/goal-r1-multicast-entry-c/negative.py": "2137f942361ff5838ea8e85c7b41f8254e6d28c7d170fee0b4442cb69865ce87",
+    "build/goal-r1-multicast-entry-c/callers.py": "3ff59e511f6bc07157c94e7ecab1a47440d250db47d4b50a586fcb321efebb08",
+    "build/goal-r1-multicast-entry-c/negative.log": "0300333cae6016c3a2fb4e8250e0e0bf842ee4a24fc143749f1824909c909a1c",
+    "build/goal-r1-multicast-entry-c/results.json": "ea161d3e724ce7113e424080661882ca29ddaadf75f391e6b7060b704782ce48",
+    "build/goal-r1-multicast-entry-c/pipeline.log": "6404732042ce9c7973d521599903fce2d655404493f8904ac3cb47d703d03951",
+    "build/goal-r1-multicast-entry-c/final-build.log": "aee6a0c1028d6f599ae707146ba3ee1233607188facdcedede1396d5239c2582",
+    "build/goal-r1-multicast-entry-c/rea.json": "6eaa704b6b684f7e402febb3055fe901f5af32de0c460ebff1dc7c337d5498a6",
+    "build/goal-r1-multicast-entry-c/pipeline-results.json": "212b928ecd625dfab4c3702b5ea47f8a0281c2c3bb3f609f86eb5fc76405a757",
+    "build/goal-r1-multicast-entry-c/pipeline.py": "0e1add3b39f6c2d4cc50157d1538aba137bfec545250ce15964a8b30dfac4c58",
+    "build/goal-r1-multicast-entry-c/sources-check.log": "b6ab468f43815a75634eab2762e209dbee8ab94c4cc3d601fded4210b6833f2a",
+    "build/goal-r1-multicast-entry-c/callers.json": "f6dc3a4e78a2d62a50d6f4e2007a2a4c4d306363420c35d763161ce563fd4012",
+    "build/goal-r1-multicast-entry-c/record.py": "ccce3fd9f088e2e0d8e058bf17e769c42db2df35bf05d069ba1dd1c3922cffde",
+    "build/goal-r1-multicast-entry-c/verify.py": "51edacb94e9f22ae80438df1aa4c27be0eca29362f19b4b2e2f2065fc0b897b2",
+    "build/goal-r1-multicast-entry-c/verification.log": "40cafa052f7342734de3216389ac3283f1d1cfa9e9557230417344d89f833f3e",
+    "build/goal-r1-multicast-entry-c/source-before.c": "8a91b7a4dc02d890cd278edfc75e0053714aa3e000e5405e88ef3efe101beff2",
+    "build/goal-r1-multicast-entry-c/build.log": "f9fe4b5383829d982ecf44548284b117e10068b8d3f9d44803ca9f8b2b9ed05e"
+  }
+}

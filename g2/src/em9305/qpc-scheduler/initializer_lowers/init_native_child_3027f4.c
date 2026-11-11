@@ -1,34 +1,18 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_3027f4\n"
-".type opencfw_em9305_child_3027f4,@function\n"
-"opencfw_em9305_child_3027f4:\n"
-"L3027f4:\n"
-"bmsk.f r2,r2,0x5\n"
-"L3027f8:\n"
-"jeq_s [blink]\n"
-"L3027fa:\n"
-"rsub.f r3,r2,0x20\n"
-"L3027fe:\n"
-"ble L302812\n"
-"L302802:\n"
-"asl r12,r1,r3\n"
-"L302806:\n"
-"lsr r1,r1,r2\n"
-"L30280a:\n"
-"lsr r0,r0,r2\n"
-"L30280e:\n"
-"j_s.d [blink]\n"
-"L302810:\n"
-"or_s r0,r0,r12\n"
-"L302812:\n"
-"neg r3,r3\n"
-"L302816:\n"
-"lsr r0,r1,r3\n"
-"L30281a:\n"
-"j_s.d [blink]\n"
-"L30281c:\n"
-"sub_s r1,r1,r1\n"
-".size opencfw_em9305_child_3027f4,.-opencfw_em9305_child_3027f4\n"
-);
+#include <stdint.h>
+
+/* Native 0x3027f4..0x302816: 64-bit logical shift right, count taken
+ * modulo 64 (libgcc __lshrdi3 shape, without the libgcc call). */
+uint64_t opencfw_em9305_child_3027f4(uint64_t value, uint32_t count)
+{
+    uint32_t low=(uint32_t)value,high=(uint32_t)(value>>32);
+    count&=63u;
+    if(count==0u)return value;
+    if(count>=32u){
+        low=high>>(count-32u);
+        high=0u;
+    }else{
+        low=(low>>count)|(high<<(32u-count));
+        high>>=count;
+    }
+    return ((uint64_t)high<<32)|low;
+}

@@ -1,6 +1,6 @@
 #include <stdint.h>
+#include "native_battery_context.h"
 #include "native_battery_memory.h"
-extern volatile uint8_t r1_battery_device_context[];
 extern void *volatile r1_battery_thread_handle;
 extern volatile uint32_t r1_shared_power_clients;
 extern uint32_t osThreadFlagsSet(void *,uint32_t);

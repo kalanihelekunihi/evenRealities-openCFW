@@ -1,0 +1,759 @@
+{
+  "stock_entries": [
+    "0x4857c",
+    "0x64774"
+  ],
+  "modified_producer_entry": "0x64380",
+  "production_units": [
+    {
+      "source": "r1/src/application/runtime/native_gomore_peak_match.c",
+      "payload": "r1-application",
+      "role": "candidate",
+      "toolchain": "gcc9",
+      "link": true,
+      "expect": "compile",
+      "returncode": 0,
+      "argv": [
+        "/opt/homebrew/bin/python3",
+        "/Users/kalani/Repo/evenRealities-openCFW/tools/build/linux_gcc.py",
+        "--compiler",
+        "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/bin/arm-none-eabi-gcc",
+        "--read-root",
+        "/Users/kalani/Repo/evenRealities-openCFW/r1",
+        "--read-root",
+        "/Users/kalani/Repo/evenRealities-openCFW/third-party/upstream",
+        "--read-root",
+        "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1",
+        "--read-root",
+        "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-interval-merge-final-c/generated/r1",
+        "--",
+        "-mcpu=cortex-m4",
+        "-mthumb",
+        "-munaligned-access",
+        "-mfpu=fpv4-sp-d16",
+        "-mfloat-abi=hard",
+        "-std=c11",
+        "-Os",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-fshort-enums",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-fno-delete-null-pointer-checks",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/r1/src/vendor",
+        "-isystem",
+        "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
+        "-fno-strict-aliasing",
+        "-ffp-contract=off",
+        "-fsignaling-nans",
+        "-frounding-math",
+        "-ftrapping-math",
+        "-fno-if-conversion",
+        "-fno-if-conversion2",
+        "-MD",
+        "-MF",
+        "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-interval-merge-final-c/r1/r1-application/r1__src__application__runtime__native_gomore_peak_match.c.d",
+        "-c",
+        "/Users/kalani/Repo/evenRealities-openCFW/r1/src/application/runtime/native_gomore_peak_match.c",
+        "-o",
+        "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-interval-merge-final-c/r1/r1-application/r1__src__application__runtime__native_gomore_peak_match.c.o"
+      ],
+      "source_sha256": "4f42ac6c64d52dc7b041c361fec97d8724f0abe2e901e7dfaea582a9a319e09a",
+      "object_sha256": "84b0998a1e932caf5a202749803bc1ca1cca7a6cd981ff1e825f3355d7a30353",
+      "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-interval-merge-final-c/r1/r1-application/r1__src__application__runtime__native_gomore_peak_match.c.o",
+      "strong": [
+        "r1_gomore_peak_candidate_match_native"
+      ],
+      "weak": [],
+      "undefined": [
+        "__aeabi_memclr",
+        "r1_binary32_to_binary64_bits",
+        "r1_binary64_to_signed32_bits",
+        "r1_format_double_multiply_bits",
+        "r1_gomore_deviation_native",
+        "r1_gomore_mean_native",
+        "r1_gomore_median_native",
+        "r1_gomore_quantized_argmin_native",
+        "r1_gomore_sort_float_subrange_native",
+        "r1_native_memory_move",
+        "r1_signed32_to_binary64_bits",
+        "r1_unsigned32_to_binary64_bits"
+      ]
+    },
+    {
+      "source": "r1/src/application/runtime/native_gomore_interval_merge.c",
+      "payload": "r1-application",
+      "role": "candidate",
+      "toolchain": "gcc9",
+      "link": true,
+      "expect": "compile",
+      "returncode": 0,
+      "argv": [
+        "/opt/homebrew/bin/python3",
+        "/Users/kalani/Repo/evenRealities-openCFW/tools/build/linux_gcc.py",
+        "--compiler",
+        "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/bin/arm-none-eabi-gcc",
+        "--read-root",
+        "/Users/kalani/Repo/evenRealities-openCFW/r1",
+        "--read-root",
+        "/Users/kalani/Repo/evenRealities-openCFW/third-party/upstream",
+        "--read-root",
+        "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1",
+        "--read-root",
+        "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-interval-merge-final-c/generated/r1",
+        "--",
+        "-mcpu=cortex-m4",
+        "-mthumb",
+        "-munaligned-access",
+        "-mfpu=fpv4-sp-d16",
+        "-mfloat-abi=hard",
+        "-std=c11",
+        "-Os",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-fshort-enums",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-fno-delete-null-pointer-checks",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/r1/src/vendor",
+        "-isystem",
+        "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
+        "-fno-strict-aliasing",
+        "-ffp-contract=off",
+        "-fsignaling-nans",
+        "-frounding-math",
+        "-ftrapping-math",
+        "-fno-if-conversion",
+        "-fno-if-conversion2",
+        "-MD",
+        "-MF",
+        "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-interval-merge-final-c/r1/r1-application/r1__src__application__runtime__native_gomore_interval_merge.c.d",
+        "-c",
+        "/Users/kalani/Repo/evenRealities-openCFW/r1/src/application/runtime/native_gomore_interval_merge.c",
+        "-o",
+        "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-interval-merge-final-c/r1/r1-application/r1__src__application__runtime__native_gomore_interval_merge.c.o"
+      ],
+      "source_sha256": "42778505672f5a94bd649421c2072b38c935039a2d20e54558c4736fb315568e",
+      "object_sha256": "f6894cf4c30de2a1210478a39cb117ad3c28ae0b3688659bf69c826cf85b3876",
+      "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-interval-merge-final-c/r1/r1-application/r1__src__application__runtime__native_gomore_interval_merge.c.o",
+      "strong": [
+        "r1_gomore_max_difference_index_native",
+        "r1_gomore_optical_interval_merge_native"
+      ],
+      "weak": [],
+      "undefined": [
+        "r1_binary32_to_binary64_bits",
+        "r1_binary64_to_unsigned32_bits",
+        "r1_format_double_multiply_bits",
+        "r1_gomore_optical_compact_native",
+        "r1_signed32_to_binary64_bits"
+      ]
+    }
+  ],
+  "direct": {
+    "derivative_pairs": 604,
+    "merger_pairs": 600,
+    "discarded_local_copy_vectors": 1,
+    "exact_duplicate_vectors": 1,
+    "nan_mean_vector": "7856c07f",
+    "fault_pairs": 6,
+    "incoming_argument_aliases": 3,
+    "native_blocks": {
+      "0x48676": 322,
+      "0x486bc": 1326,
+      "0x48928": 21,
+      "0x487a0": 158,
+      "0x48668": 299,
+      "0x488d8": 146,
+      "0x48886": 1074,
+      "0x48878": 725,
+      "0x48656": 209,
+      "0x48848": 1
+    },
+    "statuses": {
+      "1": 166,
+      "0": 434
+    },
+    "provider_stack_depths": {
+      "stock": {
+        "0x64774": [
+          0,
+          128
+        ],
+        "0x8eeba": [
+          128
+        ]
+      },
+      "C": {
+        "0x64774": [
+          0,
+          128
+        ],
+        "0x8eeba": [
+          128
+        ]
+      }
+    }
+  },
+  "modeled": {
+    "derivative_pairs": 0,
+    "merger_pairs": 600,
+    "discarded_local_copy_vectors": 1,
+    "exact_duplicate_vectors": 1,
+    "nan_mean_vector": "7856c07f",
+    "fault_pairs": 5,
+    "incoming_argument_aliases": 3,
+    "native_blocks": {
+      "0x486bc": 1084,
+      "0x48676": 225,
+      "0x48886": 1128,
+      "0x48878": 533,
+      "0x488d8": 112,
+      "0x487a0": 164,
+      "0x48656": 187,
+      "0x48668": 201,
+      "0x48928": 14,
+      "0x48848": 1
+    },
+    "statuses": {
+      "0": 475,
+      "1": 125
+    },
+    "provider_stack_depths": {
+      "stock": {
+        "0x8eeba": [
+          128
+        ],
+        "0x64774": [
+          128
+        ]
+      },
+      "C": {
+        "0x8eeba": [
+          128
+        ],
+        "0x64774": [
+          128
+        ]
+      }
+    }
+  },
+  "sequential": {
+    "pairs": 63,
+    "merger_invocations_per_side": 126,
+    "cases": [
+      {
+        "count": 0,
+        "fpscr": 0,
+        "padding": "0000"
+      },
+      {
+        "count": 0,
+        "fpscr": 4194304,
+        "padding": "0000"
+      },
+      {
+        "count": 0,
+        "fpscr": 8388608,
+        "padding": "0000"
+      },
+      {
+        "count": 0,
+        "fpscr": 12582912,
+        "padding": "0000"
+      },
+      {
+        "count": 0,
+        "fpscr": 16777216,
+        "padding": "0000"
+      },
+      {
+        "count": 0,
+        "fpscr": 33554432,
+        "padding": "0000"
+      },
+      {
+        "count": 0,
+        "fpscr": 50331648,
+        "padding": "0000"
+      },
+      {
+        "count": 1,
+        "fpscr": 0,
+        "padding": "0000"
+      },
+      {
+        "count": 1,
+        "fpscr": 4194304,
+        "padding": "0000"
+      },
+      {
+        "count": 1,
+        "fpscr": 8388608,
+        "padding": "0000"
+      },
+      {
+        "count": 1,
+        "fpscr": 12582912,
+        "padding": "0000"
+      },
+      {
+        "count": 1,
+        "fpscr": 16777216,
+        "padding": "0000"
+      },
+      {
+        "count": 1,
+        "fpscr": 33554432,
+        "padding": "0000"
+      },
+      {
+        "count": 1,
+        "fpscr": 50331648,
+        "padding": "0000"
+      },
+      {
+        "count": 2,
+        "fpscr": 0,
+        "padding": "0000"
+      },
+      {
+        "count": 2,
+        "fpscr": 4194304,
+        "padding": "0000"
+      },
+      {
+        "count": 2,
+        "fpscr": 8388608,
+        "padding": "0000"
+      },
+      {
+        "count": 2,
+        "fpscr": 12582912,
+        "padding": "0000"
+      },
+      {
+        "count": 2,
+        "fpscr": 16777216,
+        "padding": "0000"
+      },
+      {
+        "count": 2,
+        "fpscr": 33554432,
+        "padding": "0000"
+      },
+      {
+        "count": 2,
+        "fpscr": 50331648,
+        "padding": "0000"
+      },
+      {
+        "count": 3,
+        "fpscr": 0,
+        "padding": "0000"
+      },
+      {
+        "count": 3,
+        "fpscr": 4194304,
+        "padding": "0000"
+      },
+      {
+        "count": 3,
+        "fpscr": 8388608,
+        "padding": "0000"
+      },
+      {
+        "count": 3,
+        "fpscr": 12582912,
+        "padding": "0000"
+      },
+      {
+        "count": 3,
+        "fpscr": 16777216,
+        "padding": "0000"
+      },
+      {
+        "count": 3,
+        "fpscr": 33554432,
+        "padding": "0000"
+      },
+      {
+        "count": 3,
+        "fpscr": 50331648,
+        "padding": "0000"
+      },
+      {
+        "count": 6,
+        "fpscr": 0,
+        "padding": "0000"
+      },
+      {
+        "count": 6,
+        "fpscr": 4194304,
+        "padding": "0000"
+      },
+      {
+        "count": 6,
+        "fpscr": 8388608,
+        "padding": "0000"
+      },
+      {
+        "count": 6,
+        "fpscr": 12582912,
+        "padding": "0000"
+      },
+      {
+        "count": 6,
+        "fpscr": 16777216,
+        "padding": "0000"
+      },
+      {
+        "count": 6,
+        "fpscr": 33554432,
+        "padding": "0000"
+      },
+      {
+        "count": 6,
+        "fpscr": 50331648,
+        "padding": "0000"
+      },
+      {
+        "count": 14,
+        "fpscr": 0,
+        "padding": "0000"
+      },
+      {
+        "count": 14,
+        "fpscr": 4194304,
+        "padding": "0000"
+      },
+      {
+        "count": 14,
+        "fpscr": 8388608,
+        "padding": "0000"
+      },
+      {
+        "count": 14,
+        "fpscr": 12582912,
+        "padding": "0000"
+      },
+      {
+        "count": 14,
+        "fpscr": 16777216,
+        "padding": "0000"
+      },
+      {
+        "count": 14,
+        "fpscr": 33554432,
+        "padding": "0000"
+      },
+      {
+        "count": 14,
+        "fpscr": 50331648,
+        "padding": "0000"
+      },
+      {
+        "count": 15,
+        "fpscr": 0,
+        "padding": "da00"
+      },
+      {
+        "count": 15,
+        "fpscr": 4194304,
+        "padding": "da00"
+      },
+      {
+        "count": 15,
+        "fpscr": 8388608,
+        "padding": "da00"
+      },
+      {
+        "count": 15,
+        "fpscr": 12582912,
+        "padding": "da00"
+      },
+      {
+        "count": 15,
+        "fpscr": 16777216,
+        "padding": "da00"
+      },
+      {
+        "count": 15,
+        "fpscr": 33554432,
+        "padding": "da00"
+      },
+      {
+        "count": 15,
+        "fpscr": 50331648,
+        "padding": "da00"
+      },
+      {
+        "count": 16,
+        "fpscr": 0,
+        "padding": "ccda"
+      },
+      {
+        "count": 16,
+        "fpscr": 4194304,
+        "padding": "ccda"
+      },
+      {
+        "count": 16,
+        "fpscr": 8388608,
+        "padding": "ccda"
+      },
+      {
+        "count": 16,
+        "fpscr": 12582912,
+        "padding": "ccda"
+      },
+      {
+        "count": 16,
+        "fpscr": 16777216,
+        "padding": "ccda"
+      },
+      {
+        "count": 16,
+        "fpscr": 33554432,
+        "padding": "ccda"
+      },
+      {
+        "count": 16,
+        "fpscr": 50331648,
+        "padding": "ccda"
+      },
+      {
+        "count": 20,
+        "fpscr": 0,
+        "padding": "a2ad"
+      },
+      {
+        "count": 20,
+        "fpscr": 4194304,
+        "padding": "a2ad"
+      },
+      {
+        "count": 20,
+        "fpscr": 8388608,
+        "padding": "a2ad"
+      },
+      {
+        "count": 20,
+        "fpscr": 12582912,
+        "padding": "a2ad"
+      },
+      {
+        "count": 20,
+        "fpscr": 16777216,
+        "padding": "a2ad"
+      },
+      {
+        "count": 20,
+        "fpscr": 33554432,
+        "padding": "a2ad"
+      },
+      {
+        "count": 20,
+        "fpscr": 50331648,
+        "padding": "a2ad"
+      }
+    ]
+  },
+  "counterexample": {
+    "incoming_padding": [
+      "0000",
+      "0020"
+    ],
+    "different_buffer_offsets": [
+      95,
+      111,
+      127,
+      143,
+      159,
+      175
+    ],
+    "stock_record_words": [
+      "18011301170100000000204100000000",
+      "36013101350100000000204100000000",
+      "54014f01530100000000204100000000",
+      "72016d01710100000000204100000000",
+      "90018b018f0100000000204100000000",
+      "ae01a901ad0100000000204100000000"
+    ],
+    "C_record_words": [
+      "18011301170100200000204100000000",
+      "36013101350100200000204100000000",
+      "54014f01530100200000204100000000",
+      "72016d01710100200000204100000000",
+      "90018b018f0100200000204100000000",
+      "ae01a901ad0100200000204100000000"
+    ],
+    "peak_object_sha256": "ed0e9a64bbcf8fb3bd26262916a826073f4683d42282756bfcd13d0ac9b39f63"
+  },
+  "frame_proof": {
+    "wrapper_bytes": 24,
+    "worker_bytes": 104,
+    "provider_depth": 128,
+    "wrapper_padding_access_relative_current_sp": -90,
+    "inherited_padding_relative_entry_sp": -114,
+    "peak_frame_bytes": 120,
+    "peak_store_offset_from_current_sp": 6,
+    "wrapper_disassembly": "\n   0:\tb537      \tpush\t{r0, r1, r2, r4, r5, lr}\n   2:\t9c06      \tldr\tr4, [sp, #24]\n   4:\t2500      \tmovs\tr5, #0\n   6:\t6025      \tstr\tr5, [r4, #0]\n   8:\tf83d 4c5a \tldrh.w\tr4, [sp, #-90]\n   c:\tad06      \tadd\tr5, sp, #24\n   e:\tb2a4      \tuxth\tr4, r4\n  10:\t9401      \tstr\tr4, [sp, #4]\n  12:\t9500      \tstr\tr5, [sp, #0]\n  14:\tf7ff fffe \tbl\t0 <r1_gomore_optical_interval_merge_native>\n  18:\tf82d 4c5a \tstrh.w\tr4, [sp, #-90]\n  1c:\tb003      \tadd\tsp, #12\n  1e:\tbd30      \tpop\t{r4, r5, pc}\n",
+    "worker_prologue": [
+      "",
+      "   0:\te92d 4ff0 \tstmdb\tsp!, {r4, r5, r6, r7, r8, r9, sl, fp, lr}",
+      "   4:\ted2d 8b04 \tvpush\t{d8-d9}",
+      "   8:\tb08d      \tsub\tsp, #52\t@ 0x34",
+      "   a:\te9cd 1209 \tstrd\tr1, r2, [sp, #36]\t@ 0x24",
+      "   e:\t6d42      \tldr\tr2, [r0, #84]\t@ 0x54"
+    ],
+    "merge_object_sha256": "f6894cf4c30de2a1210478a39cb117ad3c28ae0b3688659bf69c826cf85b3876",
+    "peak_object_sha256": "84b0998a1e932caf5a202749803bc1ca1cca7a6cd981ff1e825f3355d7a30353",
+    "counterexample_old_peak_object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-interval-merge-probe2-c/r1/r1-application/r1__src__application__runtime__native_gomore_peak_match.c.o",
+    "counterexample_old_peak_object_sha256": "ed0e9a64bbcf8fb3bd26262916a826073f4683d42282756bfcd13d0ac9b39f63",
+    "counterexample_old_peak_source_sha256": "04b9186a1336db827fb3f4cf00f287455216a0831a39ee2dd94c2604dcc7d117"
+  },
+  "defect_controls": [
+    {
+      "control": "derivative-empty-guard",
+      "rejected": true,
+      "source_sha256": "c55bb1c71fabb2bec8443049b0a567ae836da3183160e18be905241f5a9c03ac",
+      "object_sha256": "f3e15d8dd1649a7d3301146d9b0ba6d833eb63fe007f04226ae1a185b6b84f4a"
+    },
+    {
+      "control": "offset-scale",
+      "rejected": true,
+      "source_sha256": "d14f427b74324b6eaf1938dd61925d97788f68974392d259195ee0cc66fa9bca",
+      "object_sha256": "3685b7ff9c0425de95614125ab6574ea9e6feba5e0e08cc8995a29202ea41630"
+    },
+    {
+      "control": "offset-after-compact",
+      "rejected": true,
+      "source_sha256": "ee8354e78e7d0be291543c9ac72a64291d72c537a25eba2152a4386806187275",
+      "object_sha256": "bfba97fea2933e0c675aef5ea9ee4f3bda461bb4b2c3b9358fb016b9695b271f"
+    },
+    {
+      "control": "zero-inherited-padding",
+      "rejected": true,
+      "source_sha256": "70ef4283817f1020f4136a7a2d9cd3af455ff779c9f64bea756623a723ffeee8",
+      "object_sha256": "8215e0033acc93ad5acd7a85c8ad36fc0cae35dc72119f46ab475d8276ea58e9"
+    },
+    {
+      "control": "missing-padding-restore",
+      "rejected": true,
+      "source_sha256": "6788810fadf0494599840fdd9ad0ef6dbf9b9cb77267b36e659a0f1a74d91ba8",
+      "object_sha256": "8822c7fdf58584946ac4b963924a367bd423a5426cd9a01db9f0fe6c9f59edc1"
+    },
+    {
+      "control": "middle-mask",
+      "rejected": true,
+      "source_sha256": "d0a84d8bf921e9dbacb51cb0c8bdf6f8d703a05e905edbd88b4fcbbfd07172dc",
+      "object_sha256": "ba4faabfddf8505a42dc20d5ff03a7e7afe690e7612adec2c998c03ce0bda59c"
+    },
+    {
+      "control": "dropped-retry",
+      "rejected": true,
+      "source_sha256": "5bfa19c9f5d7d8df46ac6942e15f21aae5a6efeb14f38734efed1295280e4238",
+      "object_sha256": "fb44d3ee274a84e2bee6a6127d1170aaf8473f49c374c63a4841a37a0dde4c72"
+    },
+    {
+      "control": "duplicate-overwrite",
+      "rejected": true,
+      "source_sha256": "6f02643bc6ab757884ba6557587783d58562e1984254a2d65ad92b56e85bb4c5",
+      "object_sha256": "94c87bf783b20048568a2ed514b9c71d6ca5961e3282849b9f78fed1ebe237ca"
+    },
+    {
+      "control": "persistent-local-replacement",
+      "rejected": true,
+      "source_sha256": "a0c8475e4f55df0010443510f99ca1a5f9ceb0e678af42759e346265c523e1aa",
+      "object_sha256": "3d1237504af20cd14ae8ebcb9a10cc9cda9e0b8dfd46ce5a619869472aa5d754"
+    },
+    {
+      "control": "shift-write-order",
+      "rejected": true,
+      "source_sha256": "3349b217517848fa5b07a15463318628265b5bd7524f6a380c00ff8cb2ec32b1",
+      "object_sha256": "a36baebb6db2373b8b0661b4a68aea84eb25da7bb0edff0db3210feac8829255"
+    },
+    {
+      "control": "insert-count-order",
+      "rejected": true,
+      "source_sha256": "8b122408dfaa2563dc3855cb4045ef01c6cc4a3c69389c0c683dcf1e1d154dec",
+      "object_sha256": "b18c34cdd1c62e1bbc434e1b81984e0e755f87fd7292713bcdec57e4d7a7f3c5"
+    },
+    {
+      "control": "premature-capacity",
+      "rejected": true,
+      "source_sha256": "4d1b8a3b436899c7cdedc7abf713f55684122d27be07498b8f9d8a2595b6b5c4",
+      "object_sha256": "409a2a7a5274b5f610233493cd6cbf32c534b9846d50d3f3fb4c85c3dd33c55e"
+    },
+    {
+      "control": "mean-operand-order",
+      "rejected": true,
+      "source_sha256": "e710950f2bc1951315ad6174d635e1c015e2c04090b52c5d2dca3a866f350f88",
+      "object_sha256": "2162d2fed67aad7348dffe0c02efc837f3ddad6acf1668c606a95f9a352cb570"
+    },
+    {
+      "control": "zero-reference-padding",
+      "rejected": true,
+      "source_sha256": "3ffecc65e3baa247131dc9b34877c1a3b35f8ed250bddd940fa71472e9167a2d",
+      "object_sha256": "9a45cc81f110d896bdf440c8e8bd6212f99c60663e21d2d7a7b70a7cba2e9273"
+    }
+  ],
+  "qualification": {
+    "candidate_units": 2,
+    "selected_units": 0,
+    "selected_regions": 0
+  },
+  "prior_objects_unchanged_excluding_checked_api_owner_and_modified_producer": 702,
+  "padding_checkpoint_final_identical_objects_excluding_checked_api_owner": 704,
+  "import_sets_unchanged": true,
+  "limitations": [
+    "Recorded GCC9 CFA behavior; other compilers require ABI validation",
+    "General private-frame aliasing, bus atomicity/fault timing and physical hardware excluded",
+    "Native qsort and soft-double/math primitives execute in fixtures",
+    "No complete source link or whole executable byte-identity claim"
+  ],
+  "artifacts": {
+    "build/sources-goal-r1-gomore-interval-merge-final-c/report.json": "29cbcce84aa3dbdd3efad3379878ac03958b38de2e5e529ead56f92d28c61e93",
+    "r1/src/sources.json": "436a7d76e0ab7c60ce0b16ee680ca7e8ee28f38b6aedc7aa4279327c23e63e78",
+    "r1/symbols/function-frontier.csv": "156be438062e5fb747bfcdcc2f5ffc0b349836bc9b970301d9b97c341ca17a3a",
+    "tools/build/source-plan.json": "43281e3850f6c7b83c5616e5968c4939993501810057ca3deaeea85eaae351ba",
+    "build/sources-goal-r1-gomore-interval-merge-padding-c/report.json": "c0481527ec5a63912362d52fe7cc0fb3d8b1c0c18cdb3305d5d061ee1ca87d88",
+    "build/sources-goal-r1-gomore-interval-merge-probe2-c/report.json": "a1683e2012fed3f426909e6cebdffc1cb5df557b9d1c54b25ad12a918cbea7ae",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-interval-merge-probe2-c/r1/r1-application/r1__src__application__runtime__native_gomore_peak_match.c.o": "ed0e9a64bbcf8fb3bd26262916a826073f4683d42282756bfcd13d0ac9b39f63",
+    "r1/src/application/runtime/native_gomore_peak_match.c": "4f42ac6c64d52dc7b041c361fec97d8724f0abe2e901e7dfaea582a9a319e09a",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-interval-merge-final-c/r1/r1-application/r1__src__application__runtime__native_gomore_peak_match.c.o": "84b0998a1e932caf5a202749803bc1ca1cca7a6cd981ff1e825f3355d7a30353",
+    "r1/src/application/runtime/native_gomore_interval_merge.c": "42778505672f5a94bd649421c2072b38c935039a2d20e54558c4736fb315568e",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-interval-merge-final-c/r1/r1-application/r1__src__application__runtime__native_gomore_interval_merge.c.o": "f6894cf4c30de2a1210478a39cb117ad3c28ae0b3688659bf69c826cf85b3876",
+    "build/goal-r1-gomore-interval-merge-c/rea.json": "36c373378408c84fb3472c2177c29aff353ba2f74299a5b2a7625f2237c7155c",
+    "build/goal-r1-gomore-interval-merge-c/instructions.json": "1229f94ece9c95e188a8426032388ddef58b38bb1f3de63015b2c21266b9ea7c",
+    "build/goal-r1-gomore-interval-merge-c/derivative-instructions.json": "08adcc992baf427a3dd9a4a0e8c0675fec4f33d549ff7d9b0a7c5a2a520c67d9",
+    "build/goal-r1-gomore-interval-merge-c/cfa-probe.c": "01afe5d04330ec6af3a7038260af0000389dd948446d43d63deed286912f5b9b",
+    "build/goal-r1-gomore-interval-merge-c/cfa-probe.o": "969ba08d3ccf4074dc7d083ced5e936e3e93c0a14c5d53d440b02a57eacfdcff",
+    "build/goal-r1-gomore-interval-merge-c/frame-proof.json": "55d4b063e72d7b8e930ef64ee781a3aeb8c7bd8e250a6a4546d464af2871e5b7",
+    "build/goal-r1-gomore-interval-merge-c/peak-before-padding.c": "04b9186a1336db827fb3f4cf00f287455216a0831a39ee2dd94c2604dcc7d117",
+    "build/goal-r1-gomore-interval-merge-c/padding_probe.py": "6cdaf430d6a8cdd52907bf0b23069f708353538f6a5ee9d3982ee39f843e7a5c",
+    "build/goal-r1-gomore-interval-merge-c/padding-counterexample.json": "3d13b76270df4bce5535e4f0347336f1ccdffb986348a3b42c3ee1695b984c8a",
+    "build/goal-r1-gomore-interval-merge-c/verify.py": "fd7604d4e785729c31bad1a6afd6b2548f265dde629e4e336ca01de43f08c4c3",
+    "build/goal-r1-gomore-interval-merge-c/results.json": "1359ce43e2e4d3b3828c48839570736b3b5b96f6d534414f4a1dbe3eaa7c2eaf",
+    "build/goal-r1-gomore-interval-merge-c/modeled-results.json": "f4e2a190e59aec62c79746213c5118ec6d2291bac95068f75666df59f0118233",
+    "build/goal-r1-gomore-interval-merge-c/pipeline.py": "3364b9396772ac9d8f71ee86dd6a3adde04e559ae9c2d0debbd37e4198fb6470",
+    "build/goal-r1-gomore-interval-merge-c/pipeline-results.json": "0b0d93d80eb4f26b633e30f5ac478e8d109483b34fa7efbbb0a2f13d369069ef",
+    "build/goal-r1-gomore-interval-merge-c/peak.py": "05c1d3eec07871cdcb2faefc36be0fa6314f2d7473ebd8134478d21608683dc8",
+    "build/goal-r1-gomore-interval-merge-c/peak-results.json": "34f415d8a04717bd6e2aebdf9e5d20745b1027d31c8b1143480416da0ad6e019",
+    "build/goal-r1-gomore-interval-merge-c/peak-modeled-results.json": "8c09af1d9ad0b15f7c3481c765b9fb75e6298ca6d751af2cfd1e699250370dd9",
+    "build/goal-r1-gomore-interval-merge-c/negative.py": "8543ffda3a27417994f77d7c468c9dc10087e9d5dba0013adef48251b8afe85a",
+    "build/goal-r1-gomore-interval-merge-c/negative.json": "e7c54596dda2a79ec8ed8f9512c44c0f90ed9cf2957359a6cb155f20a319810f",
+    "build/goal-r1-gomore-interval-merge-c/integration.py": "8acc6e0d14f5e5b0cf3507d8f214c1c212e5e47b950f0738d23ca39b67ebd57b",
+    "build/goal-r1-gomore-interval-merge-c/integration-results.json": "b1bfb1b3dda19d94ed894d14118468318a74335419413c56e27d805a5f1c9e21",
+    "build/goal-r1-gomore-interval-merge-c/qualify.py": "061655a1251461d8904d6b3aa261084e6175ede00fffb0057099c453eeb01ec2",
+    "build/goal-r1-gomore-interval-merge-c/qualified/qualification.json": "685225d292441b6e8153392c1ec32266d446c712596780a6327fc1a72de9fdbf",
+    "build/goal-r1-gomore-interval-merge-c/qualified/source-plan.json": "3da40e3d766877c0b3059bee372f651c1f56681157782eba12ee3076f1834a0f"
+  }
+}

@@ -1,80 +1,33 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_320274\n"
-".type opencfw_em9305_child_320274,@function\n"
-"opencfw_em9305_child_320274:\n"
-"L320274:\n"
-"enter_s [r13-r18,blink]\n"
-"L320276:\n"
-"ld_s r1,[r0,0x24]\n"
-"L320278:\n"
-"mov_s r15,r0\n"
-"L32027a:\n"
-"ldb_s r0,[r1,0x1]\n"
-"L32027c:\n"
-"breq_s r0,0,L3202d8\n"
-"L32027e:\n"
-"ldb r0,[r1,241]\n"
-"L320282:\n"
-"brne_s r0,0,L3202d8\n"
-"L320284:\n"
-"ldh r1,[r1,88]\n"
-"L320288:\n"
-"mov_s r0,0x805c70\n"
-"L32028e:\n"
-"ld_s r13,[r0,0]\n"
-"L320290:\n"
-"mpyuw r1,r1,912\n"
-"L320294:\n"
-"mov_s r14,opencfw_em9305_init_schedule_compare_318b78\n"
-"L32029a:\n"
-"add_s r13,r13,r1\n"
-"L32029c:\n"
-"ld r16,[r13,24]\n"
-"L3202a0:\n"
-"add_s r0,r13,0x10\n"
-"L3202a2:\n"
-"mov_s r1,r14\n"
-"L3202a4:\n"
-"bl.d opencfw_em9305_associated_schedule_insert_312da4\n"
-"L3202a8:\n"
-"mov_s r17,r0\n"
-"L3202aa:\n"
-"brne_s r0,0,L3202d8\n"
-"L3202ac:\n"
-"mov r18,0x1\n"
-"L3202b0:\n"
-"ldh.as r0,[r13,133]\n"
-"L3202b4:\n"
-"mpyuw r1,r18,r0\n"
-"L3202b8:\n"
-"ldh.as r0,[r13,131]\n"
-"L3202bc:\n"
-"mpywhl r1,r1,1250\n"
-"L3202c0:\n"
-"add_s r0,r0,1\n"
-"L3202c2:\n"
-"sth.as r0,[r13,131]\n"
-"L3202c6:\n"
-"add r0,r16,r1\n"
-"L3202ca:\n"
-"st_s r0,[r13,0x18]\n"
-"L3202cc:\n"
-"mov_s r0,r17\n"
-"L3202ce:\n"
-"bl.d opencfw_em9305_associated_schedule_insert_312da4\n"
-"L3202d2:\n"
-"mov_s r1,r14\n"
-"L3202d4:\n"
-"add_s r18,r18,1\n"
-"L3202d6:\n"
-"breq_s r0,0,L3202b0\n"
-"L3202d8:\n"
-"bl.d opencfw_em9305_child_320314\n"
-"L3202dc:\n"
-"mov_s r0,r15\n"
-"L3202de:\n"
-"leave_s [r13-r18,blink,pcl]\n"
-".size opencfw_em9305_child_320274,.-opencfw_em9305_child_320274\n"
-);
+#include <stdint.h>
+
+/* Native 0x320274..0x3202e0: while the link (+0x24) requests (+1) and is not
+ * on hold (+241), insert its connection entry's schedule node (+16) into the
+ * schedule; when the slot is taken, push the anchor (+24) out by k connection
+ * intervals (+266, units of 1250 us) and bump the event counter (+262) until
+ * the insertion succeeds. Then run the retry step native 0x320314. */
+extern uint32_t opencfw_em9305_init_schedule_compare_318b78(uintptr_t,uintptr_t);
+extern uint32_t opencfw_em9305_associated_schedule_insert_312da4(uintptr_t,uintptr_t);
+extern void opencfw_em9305_child_320314(uintptr_t context);
+
+void opencfw_em9305_child_320274(uintptr_t context)
+{
+    uintptr_t link = *(volatile uint32_t *)(context + 0x24u);
+    if (*(volatile uint8_t *)(link + 1u) != 0u && *(volatile uint8_t *)(link + 241u) == 0u) {
+        uint32_t handle = *(volatile uint16_t *)(link + 88u);
+        uintptr_t entry = *(volatile uint32_t *)(uintptr_t)0x805c70u + handle * 912u;
+        uintptr_t compare = (uintptr_t)opencfw_em9305_init_schedule_compare_318b78;
+        uint32_t anchor = *(volatile uint32_t *)(entry + 24u);
+        uintptr_t node = entry + 16u;
+        if (opencfw_em9305_associated_schedule_insert_312da4(node, compare) == 0u) {
+            uint32_t step = 1u;
+            do {
+                uint32_t delay = (step & 0xffffu) * *(volatile uint16_t *)(entry + 266u) * 1250u;
+                volatile uint16_t *counter = (volatile uint16_t *)(entry + 262u);
+                *counter = (uint16_t)(*counter + 1u);
+                *(volatile uint32_t *)(entry + 24u) = anchor + delay;
+                ++step;
+            } while (opencfw_em9305_associated_schedule_insert_312da4(node, compare) == 0u);
+        }
+    }
+    opencfw_em9305_child_320314(context);
+}

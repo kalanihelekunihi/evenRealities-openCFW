@@ -15,7 +15,7 @@ __attribute__((section(".boot_timer_name"),used))
 const char opencfw_boot_timer_name[]="Tmr Svc";
 static void fail(void) {
     (void)opencfw_bl_mask_interrupts();WORD(UINT32_MAX)=0;
-    for (;;)__asm__ volatile("b .":::"memory");
+    for (;;){ }
 }
 /* This specializes the proven fresh-queue branch, not the reuse/wakeup path. */
 uint32_t opencfw_boot_timer_queue_fresh(uint32_t count,uint32_t item_size,

@@ -1,232 +1,86 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_32bc98\n"
-".type opencfw_em9305_child_32bc98,@function\n"
-"opencfw_em9305_child_32bc98:\n"
-"L32bc98:\n"
-"enter_s [r13-r18,fp,blink]\n"
-"L32bc9a:\n"
-"sub_s sp,sp,0x48\n"
-"L32bc9c:\n"
-"ld_s r13,[r0,0x24]\n"
-"L32bc9e:\n"
-"mov_s r14,0x8019fc\n"
-"L32bca4:\n"
-"mov_s r16,r0\n"
-"L32bca6:\n"
-"mov_s r0,r14\n"
-"L32bca8:\n"
-"bl.d opencfw_em9305_child_32db0c\n"
-"L32bcac:\n"
-"mov_s r17,r1\n"
-"L32bcae:\n"
-"add r1,r17,r0\n"
-"L32bcb2:\n"
-"bl.d opencfw_em9305_init_transition_packet_copy_32dd54\n"
-"L32bcb6:\n"
-"add_s r0,sp,0x1c\n"
-"L32bcb8:\n"
-"ldb_s r0,[r14,0x4]\n"
-"L32bcba:\n"
-"mov_s r15,0\n"
-"L32bcbc:\n"
-"cmp_s r0,0x22\n"
-"L32bcbe:\n"
-"bne_s L32bdf8\n"
-"L32bcc0:\n"
-"ldb_s r0,[r14,0]\n"
-"L32bcc2:\n"
-"cmp_s r0,5\n"
-"L32bcc4:\n"
-"bne_s L32bdf8\n"
-"L32bcc6:\n"
-"ld r0,[0x802954]\n"
-"L32bcce:\n"
-"cmp_s r0,0\n"
-"L32bcd0:\n"
-"beq_s L32bdf8\n"
-"L32bcd2:\n"
-"bl.d opencfw_em9305_init_transition_packet_check_32e278\n"
-"L32bcd6:\n"
-"add_s r0,sp,0x1c\n"
-"L32bcd8:\n"
-"cmp_s r0,0\n"
-"L32bcda:\n"
-"beq_s L32bdf8\n"
-"L32bcdc:\n"
-"ld_s r3,[sp,0x28]\n"
-"L32bcde:\n"
-"ld_s r2,[sp,0x24]\n"
-"L32bce0:\n"
-"ldb_s r1,[r14,0]\n"
-"L32bce2:\n"
-"ldh_s r0,[r14,0x2]\n"
-"L32bce4:\n"
-"ld r11,[r16,44]\n"
-"L32bce8:\n"
-"ld_s r15,[sp,0x20]\n"
-"L32bcea:\n"
-"ld_s r12,[sp,0x1c]\n"
-"L32bcec:\n"
-"add r16,r13,0xa8c\n"
-"L32bcf4:\n"
-"st_s r3,[sp,0xc]\n"
-"L32bcf6:\n"
-"st_s r2,[sp,0x8]\n"
-"L32bcf8:\n"
-"stb_s r1,[sp,0x10]\n"
-"L32bcfa:\n"
-"sth r0,[sp,18]\n"
-"L32bcfe:\n"
-"add1 r1,r11,0x26\n"
-"L32bd02:\n"
-"add_s r0,sp,0\n"
-"L32bd04:\n"
-"mov_s r2,0\n"
-"L32bd06:\n"
-"mov_s r3,r16\n"
-"L32bd08:\n"
-"stb 3,[sp,17]\n"
-"L32bd0c:\n"
-"st_s r15,[sp,0x4]\n"
-"L32bd0e:\n"
-"bl.d opencfw_em9305_child_30301c\n"
-"L32bd12:\n"
-"st_s r12,[sp,0]\n"
-"L32bd14:\n"
-"breq.d.nt r0,0,L32bdf8\n"
-"L32bd18:\n"
-"mov_s r15,0\n"
-"L32bd1a:\n"
-"ldb r0,[r13,0xaa0]\n"
-"L32bd22:\n"
-"breq.d.nt r0,0,L32bdf8\n"
-"L32bd26:\n"
-"mov_s r0,r13\n"
-"L32bd28:\n"
-"ld_s r2,[r16,0x4]\n"
-"L32bd2a:\n"
-"ld_s r1,[r16,0]\n"
-"L32bd2c:\n"
-"bl.d opencfw_em9305_radio_address_write_3045e8\n"
-"L32bd30:\n"
-"add r0,r0,1021\n"
-"L32bd34:\n"
-"add r0,r13,0xae7\n"
-"L32bd3c:\n"
-"ldb r1,[r0,-73]\n"
-"L32bd40:\n"
-"ldb_s r14,[r14,0x3]\n"
-"L32bd42:\n"
-"stb_s r1,[r0,0]\n"
-"L32bd44:\n"
-"bl.d opencfw_em9305_controller_pack_address\n"
-"L32bd48:\n"
-"add r0,r17,0x8\n"
-"L32bd4c:\n"
-"mov_s r15,r0\n"
-"L32bd4e:\n"
-"ldb r0,[r13,57]\n"
-"L32bd52:\n"
-"mov_s r18,r13\n"
-"L32bd54:\n"
-"mov_s r17,r13\n"
-"L32bd56:\n"
-"mov_s r3,r1\n"
-"L32bd58:\n"
-"add r16,r13,0xae4\n"
-"L32bd60:\n"
-"mov_s r12,0x805b84\n"
-"L32bd66:\n"
-"add r18,r18,1015\n"
-"L32bd6a:\n"
-"add r17,r17,1011\n"
-"L32bd6e:\n"
-"st_s r1,[sp,0x18]\n"
-"L32bd70:\n"
-"bbit1.d.nt r0,0x1,L32bd80\n"
-"L32bd74:\n"
-"st_s r15,[sp,0x14]\n"
-"L32bd76:\n"
-"st 0,[r12,100]\n"
-"L32bd7a:\n"
-"st 0,[r12,96]\n"
-"L32bd7e:\n"
-"b_s L32bdac\n"
-"L32bd80:\n"
-"and r0,r3,0xc000\n"
-"L32bd88:\n"
-"bxor.f 0,r0,0xe\n"
-"L32bd8c:\n"
-"bne_s L32bdac\n"
-"L32bd8e:\n"
-"add r0,r13,0xa98\n"
-"L32bd96:\n"
-"ld r2,[r0,0]\n"
-"L32bd98:\n"
-"ld r1,[r0,-4]\n"
-"L32bd9c:\n"
-"ldb_s r0,[r0,0x7]\n"
-"L32bd9e:\n"
-"st_s r3,[r12,0x64]\n"
-"L32bda0:\n"
-"add_s r3,sp,0x14\n"
-"L32bda2:\n"
-"bl.d opencfw_em9305_radio_peer_set_303cc0\n"
-"L32bda6:\n"
-"st_s r15,[r12,0x60]\n"
-"L32bda8:\n"
-"ld r3,[sp,0x18]\n"
-"L32bdaa:\n"
-"ld_s r15,[sp,0x14]\n"
-"L32bdac:\n"
-"mov_s r0,r18\n"
-"L32bdae:\n"
-"mov_s r1,r15\n"
-"L32bdb0:\n"
-"bl.d opencfw_em9305_radio_address_write_3045e8\n"
-"L32bdb4:\n"
-"mov_s r2,r3\n"
-"L32bdb6:\n"
-"add r15,r13,0xae6\n"
-"L32bdbe:\n"
-"mov_s r0,r17\n"
-"L32bdc0:\n"
-"mov_s r1,r16\n"
-"L32bdc2:\n"
-"bl.d opencfw_em9305_radio_encode_3239d4\n"
-"L32bdc6:\n"
-"stb_s r14,[r15,0]\n"
-"L32bdc8:\n"
-"add r14,r13,0x8d4\n"
-"L32bdd0:\n"
-"mov r0,257\n"
-"L32bdd4:\n"
-"add3 r13,r13,337\n"
-"L32bdd8:\n"
-"ldb r1,[r15,-97]\n"
-"L32bddc:\n"
-"sth_s r0,[r14,0]\n"
-"L32bdde:\n"
-"ldb r0,[r13,-167]\n"
-"L32bde2:\n"
-"ld.as r16,[r14,109]\n"
-"L32bde6:\n"
-"mov_s r2,0x24\n"
-"L32bde8:\n"
-"mov_s r15,1\n"
-"L32bdea:\n"
-"bl.d opencfw_em9305_radio_duration_piece_312b88\n"
-"L32bdee:\n"
-"stb 1,[r14,-8]\n"
-"L32bdf2:\n"
-"add_s r0,r0,r16\n"
-"L32bdf4:\n"
-"st r0,[r14,-4]\n"
-"L32bdf8:\n"
-"mov_s r0,r15\n"
-"L32bdfa:\n"
-"leave_s [r13-r18,fp,blink,pcl]\n"
-".size opencfw_em9305_child_32bc98,.-opencfw_em9305_child_32bc98\n"
-);
+#include <stdint.h>
+
+/* Native 0x32bc98..0x32bdfc: handle a received periodic-advertising
+ * response PDU (LLID 5, opcode 0x22) while the auxiliary hook (0x802954)
+ * is armed. The payload is copied and checked, then offered to 30301c as
+ * the request {16 payload bytes, LLID, 3, header} with the context's +76
+ * and the link's +2700. If accepted and the link expects it (+2720), the
+ * link records the advertiser address (+1021), its options (+2791), the
+ * peer address from the PDU (resolved through 303cc0 for a resolvable
+ * private address when bit 1 of +57 is set, else cleared at
+ * 0x805be4/0x805be8) at +1015, the encoded header (+1011/+2788, opcode at
+ * +2790) and the response timing (+2252..+2260). Returns 1 on success. */
+extern uint32_t opencfw_em9305_child_32db0c(uintptr_t out, uintptr_t in);
+extern uint32_t opencfw_em9305_init_transition_packet_copy_32dd54(uintptr_t out, uintptr_t in);
+extern uint32_t opencfw_em9305_init_transition_packet_check_32e278(uintptr_t packet);
+extern uint32_t opencfw_em9305_child_30301c(uintptr_t request, uintptr_t context,
+                                            uint32_t flags, uintptr_t link);
+extern uintptr_t opencfw_em9305_radio_address_write_3045e8(uintptr_t,uint32_t,uint32_t);
+extern uint64_t opencfw_em9305_controller_pack_address(uintptr_t address);
+extern uint32_t opencfw_em9305_radio_peer_set_303cc0(uint32_t type, uint32_t low, uint32_t high,
+                                                     uintptr_t address);
+extern uint32_t opencfw_em9305_radio_encode_3239d4(uintptr_t,uintptr_t);
+extern uint32_t opencfw_em9305_radio_duration_piece_312b88(uint32_t phy, uint32_t coded, uint32_t length);
+
+struct opencfw_em9305_request_32bc98 {
+    uint32_t words[4];
+    uint8_t llid;
+    uint8_t kind;
+    uint16_t header;
+};
+
+uint32_t opencfw_em9305_child_32bc98(uintptr_t owner, uintptr_t pdu)
+{
+    struct opencfw_em9305_request_32bc98 request;
+    uint32_t payload[4];
+    uint32_t peer[2];
+    uintptr_t link=*(volatile uint32_t *)(owner+36u);
+    uint32_t used=opencfw_em9305_child_32db0c(0x8019fcu,pdu);
+    (void)opencfw_em9305_init_transition_packet_copy_32dd54((uintptr_t)payload,pdu+used);
+    if(*(volatile uint8_t *)(uintptr_t)0x801a00u!=0x22u)return 0u;
+    if(*(volatile uint8_t *)(uintptr_t)0x8019fcu!=5u)return 0u;
+    if(*(volatile uint32_t *)(uintptr_t)0x802954u==0u)return 0u;
+    if(opencfw_em9305_init_transition_packet_check_32e278((uintptr_t)payload)==0u)return 0u;
+    uintptr_t context=*(volatile uint32_t *)(owner+44u);
+    request.words[3]=((volatile uint32_t *)payload)[3];
+    request.words[2]=((volatile uint32_t *)payload)[2];
+    request.llid=*(volatile uint8_t *)(uintptr_t)0x8019fcu;
+    request.header=*(volatile uint16_t *)(uintptr_t)0x8019feu;
+    request.kind=3u;
+    request.words[1]=((volatile uint32_t *)payload)[1];
+    request.words[0]=((volatile uint32_t *)payload)[0];
+    uintptr_t target=link+2700u;
+    if(opencfw_em9305_child_30301c((uintptr_t)&request,context+76u,0u,target)==0u)return 0u;
+    if(*(volatile uint8_t *)(link+2720u)==0u)return 0u;
+    (void)opencfw_em9305_radio_address_write_3045e8(link+1021u,*(volatile uint32_t *)target,
+                                                     *(volatile uint32_t *)(target+4u));
+    uint32_t opcode=*(volatile uint8_t *)(uintptr_t)0x8019ffu;
+    *(volatile uint8_t *)(link+2791u)=*(volatile uint8_t *)(link+2718u);
+    uint64_t address=opencfw_em9305_controller_pack_address(pdu+8u);
+    uint32_t low=(uint32_t)address,high=(uint32_t)(address>>32);
+    volatile uint32_t *resolved=(volatile uint32_t *)(uintptr_t)0x805be4u;
+    peer[1]=high;
+    peer[0]=low;
+    if((*(volatile uint8_t *)(link+57u)&2u)==0u){
+        resolved[1]=0u;
+        resolved[0]=0u;
+    }else if((high&0xc000u)==0x4000u){
+        resolved[1]=high;
+        resolved[0]=low;
+        (void)opencfw_em9305_radio_peer_set_303cc0(*(volatile uint8_t *)(link+2719u),
+            *(volatile uint32_t *)(link+2708u),*(volatile uint32_t *)(link+2712u),(uintptr_t)peer);
+        high=((volatile uint32_t *)peer)[1];
+        low=((volatile uint32_t *)peer)[0];
+    }
+    (void)opencfw_em9305_radio_address_write_3045e8(link+1015u,low,high);
+    *(volatile uint8_t *)(link+2790u)=(uint8_t)opcode;
+    (void)opencfw_em9305_radio_encode_3239d4(link+1011u,link+2788u);
+    uint32_t coded=*(volatile uint8_t *)(link+2693u);
+    *(volatile uint16_t *)(link+2260u)=257u;
+    uint32_t phy=*(volatile uint8_t *)(link+2529u);
+    uint32_t anchor=*(volatile uint32_t *)(link+2696u);
+    *(volatile uint8_t *)(link+2252u)=1u;
+    *(volatile uint32_t *)(link+2256u)=
+        opencfw_em9305_radio_duration_piece_312b88(phy,coded,0x24u)+anchor;
+    return 1u;
+}

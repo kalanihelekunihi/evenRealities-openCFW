@@ -4,9 +4,16 @@
  * placement and any wider native allocation remain separate gates. */
 #include <stdint.h>
 
-struct ring_thread_manager {uint8_t reserved[8];void *thread;void *queue;};
+/* Sim-test fix (2026-10-26): the stock init words 0x004c4da5/0x004c4dd1 are
+ * Thumb pointers to thread_ring_create 0x4c4da4 / thread_ring_terminate
+ * 0x4c4dd0 (g2/symbols/apollo_main.tsv); thread_manager_threads_init_4c953e
+ * calls +0 via blx. As raw stock bytes they faulted (INVSTATE) in Renode.
+ * Now relocated to our symbols. Layout unchanged. */
+void thread_ring_create(void);
+void thread_ring_terminate(void);
+struct ring_thread_manager {void (*init)(void);void (*deinit)(void);void *thread;void *queue;};
 _Static_assert(sizeof(struct ring_thread_manager)==16u,"ring manager ABI");
 struct ring_thread_manager audio_uart_ring_thread_manager = {
-    {0xa5u,0x4du,0x4cu,0x00u,0xd1u,0x4du,0x4cu,0x00u},
+    thread_ring_create,thread_ring_terminate,
     0,0,
 };

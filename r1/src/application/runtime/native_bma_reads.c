@@ -1,21 +1,123 @@
 #include <stdint.h>
-/* Native152-byte frame owns the128-byte callback buffer. Pure C copying runs
- * only after the callback returns, preserving the transport call boundary. */
-__attribute__((naked)) uint32_t r1_bma4_read_regs_direct(void)
+#include <stddef.h>
+#include "bma4.h"
+struct bma4_dev;
+extern int8_t r1_bma4_null_pointer_check(const struct bma4_dev *dev);
+extern void r1_bma_copy_read_bytes(uint8_t *,const uint8_t *,uint32_t,
+                                  const volatile struct bma4_dev *);
+_Static_assert(offsetof(struct bma4_dev,intf)==8 &&
+               offsetof(struct bma4_dev,intf_rslt)==9 &&
+               offsetof(struct bma4_dev,dummy_byte)==11 &&
+               offsetof(struct bma4_dev,bus_read)==36 &&
+               offsetof(struct bma4_dev,intf_ptr)==4,"native read context");
+/* Native transport callbacks use full register/result words. The registered
+ * pinned Bosch type describes only the low byte; the product adapter itself
+ * has this full-word ABI. In particular, a raw 0x100 status is still failure. */
+typedef uint32_t (*r1_bma_native_read)(uint32_t,uint8_t *,uint32_t,void *);
+typedef uint32_t r1_bma_callback_word __attribute__((may_alias));
+__attribute__((used,noinline)) static uint32_t bma_direct_read_body(
+ uint32_t reg,uint8_t *data,uint32_t length,struct bma4_dev *dev,uint8_t *buffer)
 {
- __asm__ volatile("push {r4,r5,r6,r7,r8,lr}\nmov r7,r0\nsub sp,#128\nmov r6,r2\nmov r8,r1\nmov r4,r3\nmov r0,r3\nbl r1_bma4_null_pointer_check\nmovs r5,r0\nbne 3f\ncmp r8,#0\nbeq 3f\nldrb r0,[r4,#8]\ncbnz r0,1f\norr r7,r7,#128\n1: ldrb r0,[r4,#11]\nldr r12,[r4,#36]\nadds r2,r0,r6\nmov r1,sp\nmov r0,r7\nldr r3,[r4,#4]\nblx r12\nstrb r0,[r4,#9]\ncbz r0,2f\nmvn r5,#1\nb 4f\n2: mov r0,r8\nmov r1,sp\nmov r2,r6\nmov r3,r4\nbl r1_bma_copy_read_bytes\nb 4f\n3: mov.w r5,#0xffffffff\n4: add sp,#128\nmov r0,r5\npop {r4,r5,r6,r7,r8,pc}\n");
+ if(r1_bma4_null_pointer_check(dev)!=0 || data==0)
+  return UINT32_MAX;
+ volatile struct bma4_dev *live=dev;
+ if(live->intf==0)reg|=0x80u;
+ uint32_t dummy=live->dummy_byte;
+ /* Load the native slot as one word rather than calling through the pinned
+  * byte-result prototype or casting one incompatible function type to another. */
+ uintptr_t address=*(const volatile r1_bma_callback_word *)
+                      ((const uint8_t *)dev+offsetof(struct bma4_dev,bus_read));
+ r1_bma_native_read read=(r1_bma_native_read)address;
+ void *handle=live->intf_ptr;
+ uint32_t status=read(reg,buffer,length+dummy,handle);
+ live->intf_rslt=(BMA4_INTF_RET_TYPE)status;
+ if(status!=0)return UINT32_MAX-1u;
+ r1_bma_copy_read_bytes(data,buffer,length,dev);
+ return 0;
 }
-__attribute__((naked)) uint32_t r1_bma4_read_regs_boundary(void)
+/* The first 128 bytes remain uninitialized transport scratch. The extra
+ * 16-byte reservation makes Clang's C wrapper publish entry SP minus 152,
+ * matching stock and the former assembly bridge. The outgoing fifth argument
+ * and private saves differ from stock; bounded callback data is unchanged.
+ * Keep the generated frame and callback pointer under differential review. */
+__attribute__((noinline)) uint32_t r1_bma4_read_regs_direct(
+ uint32_t reg,uint8_t *data,uint32_t length,struct bma4_dev *dev)
 {
- __asm__ volatile("push {r3,r4,r5,r6,r7,lr}\nmov r7,r0\nmovs r0,#0\nstrb r0,[sp]\nmov r5,r2\nmov r6,r1\nmov r4,r3\nmov r0,r3\nbl r1_bma4_null_pointer_check\ncbnz r0,5f\ncbz r6,5f\ncmp r7,#94\nbeq 1f\nmov r3,r4\nmov r2,r5\nmov r1,r6\nmov r0,r7\nbl r1_bma4_read_regs_direct\npop {r3,r4,r5,r6,r7,pc}\n1: mov r1,r4\nmov r0,sp\nbl r1_bma4_get_advance_power_save\nmov r1,r0\nldrb r0,[sp]\ncmp r0,#1\nbne 2f\nmov r1,r4\nmovs r0,#0\nbl r1_bma4_set_advance_power_save_boundary\nmov r1,r0\n2: lsls r2,r5,#31\nmvn r0,#9\nbne 6f\nldrb r2,[r4,#22]\ncmp r2,r5\nbcc 6f\ncmp r1,#0\nbne 6f\nldrh r0,[r4,#20]\ncmp r0,r5\nbcs 3f\nmov r2,r4\nmov r1,r5\nmov r0,r6\nbl r1_bma4_feature_chunk_read_boundary\nb 4f\n3: mov r3,r4\nmov r2,r5\nmov r1,r6\nmovs r0,#94\nbl r1_bma4_read_regs_direct\n4: cmp r0,#0\nbne 6f\nldrb r1,[sp]\ncmp r1,#1\nbne 6f\nmov r1,r4\nmovs r0,#1\nbl r1_bma4_set_advance_power_save_boundary\npop {r3,r4,r5,r6,r7,pc}\n5: mov.w r0,#0xffffffff\n6: pop {r3,r4,r5,r6,r7,pc}\n");
+ uint8_t buffer[144];
+ return bma_direct_read_body(reg,data,length,dev,buffer);
 }
-__attribute__((naked)) uint32_t r1_bma4_get_advance_power_save(void)
+uint32_t r1_bma4_get_advance_power_save(uint8_t *enabled, struct bma4_dev *dev);
+extern uint32_t r1_bma4_set_advance_power_save_boundary(uint32_t enabled, struct bma4_dev *dev);
+extern uint32_t r1_bma4_feature_chunk_read_boundary(uint8_t *data, uint32_t length, struct bma4_dev *dev);
+_Static_assert(offsetof(struct bma4_dev,feature_len)==22 &&
+               offsetof(struct bma4_dev,read_write_len)==20,
+               "native Bosch feature read limits");
+uint32_t r1_bma4_read_regs_boundary(uint32_t reg, uint8_t *data,
+                                    uint32_t length, struct bma4_dev *dev)
 {
- __asm__ volatile("push {r3,r4,r5,lr}\nmov r4,r0\nmovs r0,#0\nstrb r0,[sp]\nmov r5,r1\nmov r0,r1\nbl r1_bma4_null_pointer_check\ncbnz r0,1f\ncbz r4,1f\nmov r3,r5\nmovs r2,#1\nmov r1,sp\nmovs r0,#124\nbl r1_bma4_read_regs_boundary\ncmp r0,#0\nbne 2f\nldrb r1,[sp]\nand r1,r1,#1\nstrb r1,[r4]\n2: pop {r3,r4,r5,pc}\n1: mov.w r0,#0xffffffff\npop {r3,r4,r5,pc}\n");
+ uint8_t power = 0;
+ const volatile uint8_t *live_power = &power;
+ if (r1_bma4_null_pointer_check(dev) != 0 || data == 0)
+  return UINT32_MAX;
+ if (reg != 0x5e)
+  return r1_bma4_read_regs_direct(reg, data, length, dev);
+ uint32_t status = r1_bma4_get_advance_power_save(&power, dev);
+ if (*live_power == 1)
+  status = r1_bma4_set_advance_power_save_boundary(0, dev);
+ if (length & 1u)
+  return UINT32_MAX - 9;
+ const volatile struct bma4_dev *live = dev;
+ if (live->feature_len < length || status != 0)
+  return UINT32_MAX - 9;
+ if (live->read_write_len < length)
+  status = r1_bma4_feature_chunk_read_boundary(data, length, dev);
+ else
+  status = r1_bma4_read_regs_direct(0x5e, data, length, dev);
+ if (status == 0 && *live_power == 1)
+  status = r1_bma4_set_advance_power_save_boundary(1, dev);
+ return status;
 }
-__attribute__((naked)) uint32_t r1_bma456w_identity_probe(void)
+uint32_t r1_bma4_get_advance_power_save(uint8_t *enabled, struct bma4_dev *dev)
 {
- __asm__ volatile("push {r3,r4,r5,r6,r7,lr}\nmovs r0,#0\nstrb r0,[sp]\nldr r0,=r1_bma_context\nmov.w r6,#0x4400000\nldr r2,[r0,#36]\nldr r4,=0x1c0001\ncmp r2,#0\nbne 3f\nldr r0,=r1_bma_context\nbl r1_bma_interface_initialize\nmovs r5,r0\nbeq 3f\nbl r1_structured_log_mode_get\nlsls r0,r0,#31\nbne 1f\nbl r1_structured_log_mode_get\nlsls r0,r0,#29\nbpl 2f\n1: mov r3,r5\nldr r2,=r1_bma_init_ring\nldr r1,=r1_bma_init_ring\nmov r0,r6\nbl r1_structured_log_format\n2: bl r1_structured_log_mode_get\nlsls r0,r0,#30\nbpl 6f\nmov r0,r4\nmov r2,r5\nldr r1,=r1_bma_init_sdk\nb 5f\n3: ldr r3,=r1_bma_context\nmovs r2,#1\nmov r1,sp\nmovs r0,#0\nbl r1_bma4_read_regs_boundary\nmovs r5,r0\nbeq 7f\nbl r1_structured_log_mode_get\nlsls r0,r0,#31\nbne 4f\nbl r1_structured_log_mode_get\nlsls r0,r0,#29\nbpl 8f\n4: mov r3,r5\nldr r2,=r1_bma_id_ring\nldr r1,=r1_bma_id_ring\nmov r0,r6\nbl r1_structured_log_format\n8: bl r1_structured_log_mode_get\nlsls r0,r0,#30\nbpl 6f\nmov r0,r4\nmov r2,r5\nldr r1,=r1_bma_id_sdk\n5: bl nrf_log_frontend_std_1\n6: movs r0,#0\npop {r3,r4,r5,r6,r7,pc}\n7: ldrb r0,[sp]\npop {r3,r4,r5,r6,r7,pc}\n");
+ uint8_t value = 0;
+ if (r1_bma4_null_pointer_check(dev) != 0 || enabled == 0)
+  return UINT32_MAX;
+ uint32_t status = r1_bma4_read_regs_boundary(0x7c, &value, 1, dev);
+ if (status == 0)
+  *enabled = value & 1u;
+ return status;
+}
+extern struct bma4_dev r1_bma_context;
+extern uint32_t r1_bma_interface_initialize(struct bma4_dev *dev);
+extern uint32_t r1_structured_log_mode_get(void);
+extern uint32_t r1_structured_log_format(uint32_t, const char *, const char *, ...);
+extern void nrf_log_frontend_std_1(uint32_t, const char *, uint32_t);
+extern const char r1_bma_init_ring[40], r1_bma_init_sdk[36];
+extern const char r1_bma_id_ring[40], r1_bma_id_sdk[32];
+_Static_assert(offsetof(struct bma4_dev, bus_read) == 36,
+               "native Bosch identity transport callback");
+uint32_t r1_bma456w_identity_probe(void)
+{
+ uint8_t chip_id = 0;
+ uint32_t status = 0;
+ const char *ring = r1_bma_init_ring;
+ const char *sdk = r1_bma_init_sdk;
+ if (r1_bma_context.bus_read == 0)
+  status = r1_bma_interface_initialize(&r1_bma_context);
+ if (status == 0) {
+  status = r1_bma4_read_regs_boundary(0, &chip_id, 1, &r1_bma_context);
+  if (status == 0)
+   return chip_id;
+  ring = r1_bma_id_ring;
+  sdk = r1_bma_id_sdk;
+ }
+ /* Each mode query is a separate observable call, including short circuiting. */
+ if ((r1_structured_log_mode_get() & 1u) ||
+     (r1_structured_log_mode_get() & 4u))
+  r1_structured_log_format(UINT32_C(0x04400000), ring, ring, status);
+ if (r1_structured_log_mode_get() & 2u)
+  nrf_log_frontend_std_1(UINT32_C(0x001c0001), sdk, status);
+ return 0;
 }
 const char r1_bma_init_ring[40] __attribute__((section(".r1.bma.id.init_ring")))="[RING]BMA456 interface init failed: %d";
 const char r1_bma_init_sdk[36] __attribute__((section(".r1.bma.id.init_sdk")))="BMA456 interface init failed: %d";

@@ -6,7 +6,13 @@ bookkeeping provider. `clock_class_providers.c` reconstructs classes 1 and 3
 and their directly called register-update helper. `clock_class_provider2.c`
 reconstructs class 2 and the mode-apply selectors it uses; class 4 and its
 delay path are in `clock_class_provider4.c`; class 5 covers clkgen/dual-switch
-ownership; and class 6 covers bounded PLL setup/teardown. The exported
+ownership; and class 6 covers bounded PLL setup/teardown. These files are the
+AmbiqSuite SDK 5.0.0 `am_hal_clkmgr.c` reconstructed by hand: the CLKGEN leaves
+they call (`am_hal_clkgen.c`) and the SYSPLL driver (`am_hal_syspll.c`) now
+build from `third-party/upstream/ambiqhal-apollo510-sdk5.0.0`, and the two
+dispatchers also carry their upstream names `am_hal_clkmgr_clock_request` /
+`am_hal_clkmgr_clock_release` (aliases, used by upstream `am_hal_mspi.c`).
+The exported
 dispatch API accepts raw 32-bit register
 arguments and explicitly truncates both to 8 bits, matching the stock `UXTB`
 instructions before validation and provider selection.

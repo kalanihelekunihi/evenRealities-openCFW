@@ -1,0 +1,190 @@
+{
+  "cases": 1608,
+  "passed": 1608,
+  "full_kernel_cases": 566,
+  "handoff_only_cases": 1042,
+  "executions": 6432,
+  "source_wrapper_bytes": 16,
+  "source_kernel_bytes": 6,
+  "application_imports": 206,
+  "bootloader_imports": 34,
+  "report": "build/sources-goal-r1-sensor-delay-c/report.json",
+  "manifest_sha256": "b385be47638f661f89bdef1d4306c414d128f7739c6326e7460e813bb78526bc",
+  "source_sha256": "aa2d27907efb8e1f1c0366d28a8db2c3d83eff4ec555b626272dc54e0381c471",
+  "limitations": [
+    "Large countdowns validated to primitive entry only",
+    "Physical bus/electrical timing unverified",
+    "Hybrid byte equality does not establish complete source-only firmware"
+  ],
+  "bsp": {
+    "passed": 20,
+    "native_entries": [
+      "0x2eb34",
+      "0x2eb4a"
+    ],
+    "per_millisecond_delay_calls": true,
+    "source_report": "build/sources-goal-r1-sensor-delay-c/report.json",
+    "limitations": [
+      "Countdown primitive modeled for call sequence; real countdown tested separately",
+      "SDK GU16 argument domain only; timing overhead and physical elapsed time unverified",
+      "Private frames, void return residue and caller-clobbered flags excluded"
+    ]
+  },
+  "negative_control": {
+    "mutation": "Restore multiplied single-call SDK millisecond delay",
+    "rejected": true,
+    "counterexample": "2 milliseconds: stock calls 64000 cycles twice; variant calls 128000 once",
+    "stderr": "arm-none-eabi-ld: warning: build/goal-r1-sensor-delay-c/bad-aggregate-ms.o uses 32-bit enums yet the output is to use variable-size enums; use of enum values across objects may fail\narm-none-eabi-ld: warning: cannot find entry symbol _start; defaulting to 01000000\nTraceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-sensor-delay-c/reject-aggregate-ms.py\", line 40, in <module>\n    for arg in [0,1,2,3,15,30,255,1000,32768,65535]:assert a(ms,arg)==b(ms,arg);cases+=1\n                                                                      ~^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-sensor-delay-c/reject-aggregate-ms.py\", line 35, in run\n    assert state['calls']==expect\n           ^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+  },
+  "qualification": {
+    "candidate_units": 1,
+    "compiled_units": 1,
+    "units": [
+      {
+        "source": "r1/src/application/software-twi/sdk_delay_busy.c",
+        "payload": "r1-application",
+        "evidence": "r1/symbols/function-frontier.csv",
+        "selected": [
+          {
+            "payload": "r1-application",
+            "symbol": "r1_twi_delay_busy",
+            "start": 341724,
+            "end": 341740,
+            "sha256": "8f1c6787efc7916715fe76c3158721246ba059fb87ed947261b22ead49b58513",
+            "evidence": "r1/symbols/function-frontier.csv",
+            "bindings": {
+              "r1_rtt_delay_cycles": 632385
+            },
+            "address": 501468,
+            "match_evidence": {
+              "method": "independently named native entry and all unrelocated bytes, followed by full linked equality",
+              "fixed_bytes": 12,
+              "compiled_pattern_sha256": "0b6997849376ce858a66da16018925cac392d5262195a67469fad8ef5cebac43",
+              "relocations": [
+                {
+                  "symbol": "r1_rtt_delay_cycles",
+                  "offset": 12,
+                  "relocation_type": 2,
+                  "address": 632385,
+                  "role": "native_literal_symbol"
+                }
+              ]
+            }
+          },
+          {
+            "payload": "r1-application",
+            "symbol": "r1_twi_delay_busy",
+            "start": 341740,
+            "end": 341756,
+            "sha256": "d156c0a63e701410ba8fd9f8d8ae6a7a2d7d24e9bcd51a58e6282b3e9f41dc8d",
+            "evidence": "r1/symbols/function-frontier.csv",
+            "bindings": {
+              "r1_rtt_delay_cycles": 632401
+            },
+            "address": 501484,
+            "match_evidence": {
+              "method": "independently named native entry and all unrelocated bytes, followed by full linked equality",
+              "fixed_bytes": 12,
+              "compiled_pattern_sha256": "0b6997849376ce858a66da16018925cac392d5262195a67469fad8ef5cebac43",
+              "relocations": [
+                {
+                  "symbol": "r1_rtt_delay_cycles",
+                  "offset": 12,
+                  "relocation_type": 2,
+                  "address": 632401,
+                  "role": "native_literal_symbol"
+                }
+              ]
+            }
+          },
+          {
+            "payload": "r1-application",
+            "symbol": "r1_bma_delay_us",
+            "start": 182948,
+            "end": 182964,
+            "sha256": "73b81dab1fc0532cf713f24eef1983cb3adc4a2d8e54313b71f7b728d2f8d4a1",
+            "evidence": "r1/symbols/function-frontier.csv",
+            "bindings": {
+              "r1_rtt_delay_cycles": 632673
+            },
+            "address": 342692,
+            "match_evidence": {
+              "method": "independently named native entry and all unrelocated bytes, followed by full linked equality",
+              "fixed_bytes": 12,
+              "compiled_pattern_sha256": "0b6997849376ce858a66da16018925cac392d5262195a67469fad8ef5cebac43",
+              "relocations": [
+                {
+                  "symbol": "r1_rtt_delay_cycles",
+                  "offset": 12,
+                  "relocation_type": 2,
+                  "address": 632673,
+                  "role": "native_literal_symbol"
+                }
+              ]
+            }
+          },
+          {
+            "payload": "r1-application",
+            "symbol": "delay_us",
+            "start": 341804,
+            "end": 341820,
+            "sha256": "9009cd83c5a6ade78e8542de9ca4718d53e9f0b101371091f5c6d22f219b9f08",
+            "evidence": "r1/symbols/function-frontier.csv",
+            "bindings": {
+              "r1_rtt_delay_cycles": 644049
+            },
+            "address": 501548,
+            "match_evidence": {
+              "method": "independently named native entry and all unrelocated bytes, followed by full linked equality",
+              "fixed_bytes": 12,
+              "compiled_pattern_sha256": "0b6997849376ce858a66da16018925cac392d5262195a67469fad8ef5cebac43",
+              "relocations": [
+                {
+                  "symbol": "r1_rtt_delay_cycles",
+                  "offset": 12,
+                  "relocation_type": 2,
+                  "address": 644049,
+                  "role": "native_literal_symbol"
+                }
+              ]
+            }
+          }
+        ],
+        "compiled": true,
+        "rejections": {},
+        "source_implementation_completeness": "not established by compilation or byte matching",
+        "reason": "exact selected bodies"
+      }
+    ]
+  },
+  "hybrid": {
+    "payload": "r1-application",
+    "sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "size": 646408,
+    "totals": {
+      "binary-pull-through": 642437,
+      "source-built": 3723,
+      "resource-file": 248
+    },
+    "source_completeness_proven": false
+  },
+  "report_path": "build/hybrid-goal-r1-sensor-delay-c/build-report.json",
+  "bma_source_sha256": "9d9cf0bca6e436e2852347bbbb8601bc18190ac31bb268a493d0417ab9805bd3",
+  "evidence": {
+    "build/goal-r1-sensor-delay-c/stock.elf": "bea0ce13ee3278fc43b498e4dd3792c2bfe99d6c6af09a53fc21e8cf0ec45e04",
+    "build/goal-r1-sensor-delay-c/REA.snapshot.json": "ffa21895db08f3089b1ee25fbc81b034945004cdc3caa721f3cf9d2bd4f70674",
+    "build/goal-r1-sensor-delay-c/verify.py": "10ebefc5415cdfd940fef6873830237f8f98249dc48b9e3eaca9f21b5483f58e",
+    "build/goal-r1-sensor-delay-c/verify_bsp.py": "3755c42e0b6444b6c9ed62f53bd0a355389f350402a8cb971e294de4cd39119f",
+    "build/goal-r1-sensor-delay-c/bad-aggregate-ms.c": "04b66c66dba60389d4e432c17f4424f3afa85d60b1bbefdbe31eee6afaa27855",
+    "build/goal-r1-sensor-delay-c/reject-aggregate-ms.py": "de1def9d4a927216ac649c11b8b270d82c715006852671bc601dfd6e3306d24c",
+    "build/goal-r1-sensor-delay-c/qualified/source-plan.json": "b2d43c9ba8947fa167eaf3c579ba2470e9557516a1caa1869ee9426b17f52ecb",
+    "build/goal-r1-sensor-delay-c/source-plan-before.json": "432d01e6a7b79c5c680b62143962870a021836bbe8905e6a41015a7970d5af63",
+    "tools/build/source-plan.json": "cb498f25da9dfefbb181b3b90f6e321e7e5c690a37201bb91bd1c5ccf3eac6ea",
+    "r1/symbols/function-frontier.csv": "f471d732dbd79b641533dad1ce119a38fba9ef9a65f036200b55f7bcfcef4349",
+    "r1/src/sources.json": "b385be47638f661f89bdef1d4306c414d128f7739c6326e7460e813bb78526bc",
+    "r1/src/application/runtime/native_bma_interface.c": "9d9cf0bca6e436e2852347bbbb8601bc18190ac31bb268a493d0417ab9805bd3",
+    "r1/src/application/software-twi/sdk_delay_busy.c": "aa2d27907efb8e1f1c0366d28a8db2c3d83eff4ec555b626272dc54e0381c471",
+    "build/sources-goal-r1-sensor-delay-c/report.json": "aecdf15b2e7998a48dd81e82fe28989df21fb845a93f446d936ffcf99b8c07bd",
+    "build/hybrid-goal-r1-sensor-delay-c/build-report.json": "decf7c7a55f247fac8e2692529bf5c85d24012319e64a00a7d60028cee6b2efd"
+  }
+}

@@ -1,0 +1,11 @@
+# Task and timer query APIs resolve CMSIS dependencies
+
+The source build now supplies `pcTaskGetName`, `uxTaskPriorityGet` and `pcTimerGetName`. Bodies come from the pinned FreeRTOS kernel source, with its MIT notice retained. Task queries use the existing verified native TCB prefix in `mutex_tasks_contract.h`: priority at offset 44 and name at 52. Timer-name lookup is added to the existing timer-ID unit and uses its established `Timer_t` definition. No second task/timer owner or replacement scheduler is introduced.
+
+Task name accepts NULL as the current task and returns the name address. Priority lookup enters the critical section before selecting the current task or reading its priority, then returns that snapshot after leaving the section. Timer name returns its stored pointer. Upstream assertion statements and current build assertion policy are retained; invalid handles retain their upstream preconditions.
+
+The [receipt](rtos-query-c-review.json) records 1,008 API checks across explicit/current tasks, timer-name values, priority values and controlled changes at critical entry/exit. Entry-time task retargeting is observed, and exit-time priority mutation does not alter the sampled result. Calls, return values, stack balance, saved registers and masks agree with the independent layout/ordering oracle. Four defective variants with wrong task-name offset, wrong priority field, missing critical exit or wrong timer-name pointer are rejected.
+
+These are pinned upstream C compatibility providers using existing native-layout evidence, not claims of stock query-function identity. Critical callbacks are modeled. Full scheduler behavior, invalid-object fault handling, physical devices and a complete firmware image remain unverified.
+
+The normal report is `build/sources-goal-r1-rtos-query-c/report.json`: 729 units compile without failures or duplicate strong symbols. Application imports fall from 175 to 172, resolving three CMSIS references; bootloader imports remain 34. One task-query unit was added and the timer-ID object changed. All 727 other prior objects are unchanged. The existing `pvTimerGetTimerID` bytes and named relocations are unchanged. Both manifests pass `make sources-check`; no source-plan selection was added.

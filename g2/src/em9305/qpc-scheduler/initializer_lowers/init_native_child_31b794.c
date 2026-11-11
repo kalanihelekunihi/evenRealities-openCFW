@@ -1,36 +1,11 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_31b794\n"
-".type opencfw_em9305_child_31b794,@function\n"
-"opencfw_em9305_child_31b794:\n"
-"L31b794:\n"
-"breq.nt r0,0x1,L31b7ae\n"
-"L31b798:\n"
-"mov_s r1,0x805a95\n"
-"L31b79e:\n"
-"breq.nt r0,0x3,L31b7b2\n"
-"L31b7a2:\n"
-"brne.d.nt r0,0x2,L31b7ac\n"
-"L31b7a6:\n"
-"mov_s r0,0\n"
-"L31b7a8:\n"
-"ldb_s r0,[r1,0]\n"
-"L31b7aa:\n"
-"bmsk_s r0,r0,0\n"
-"L31b7ac:\n"
-"j_s [blink]\n"
-"L31b7ae:\n"
-"j_s.d [blink]\n"
-"L31b7b0:\n"
-"mov_s r0,1\n"
-"L31b7b2:\n"
-"ldb_s r0,[r1,0]\n"
-"L31b7b4:\n"
-"and r0,r0,0x8\n"
-"L31b7b8:\n"
-"j_s.d [blink]\n"
-"L31b7ba:\n"
-"lsr_s r0,r0,0x3\n"
-".size opencfw_em9305_child_31b794,.-opencfw_em9305_child_31b794\n"
-);
+#include <stdint.h>
+
+/* Native 0x31b794..0x31b7bc: report a capability for selector 1..3;
+ * 1 is always supported, 2 and 3 come from bits 0 and 3 of 0x805a95. */
+uint32_t opencfw_em9305_child_31b794(uint32_t selector)
+{
+    if(selector==1u)return 1u;
+    if(selector==3u)return (*(volatile uint8_t *)(uintptr_t)0x805a95u>>3)&1u;
+    if(selector==2u)return *(volatile uint8_t *)(uintptr_t)0x805a95u&1u;
+    return 0u;
+}

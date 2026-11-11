@@ -1,5 +1,5 @@
 /* Board GPIO interrupt handlers named in the board pin table
- * (app/S3-app-data/pt_production_data.c). Both are 10-byte stubs
+ * (app/S3-app-data/pt_production_data.c). Both are 10-byte stock leaves
  * (push {r7, lr}; movs r0, #0; bl ...; pop {r0, pc}).
  *
  *   0x510fd8..0x510fe1  GPIO4  nPM1300 nIRQ  -> ring-link event 0 (0x4ac16c)

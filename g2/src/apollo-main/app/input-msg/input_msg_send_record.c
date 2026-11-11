@@ -1,7 +1,11 @@
 /* Apollo input_msg_send_record, native 0x51301c. */
 #include <stdint.h>
-uint8_t audio_input_message_state[16]
-    __attribute__((section(".g2_ram_2000408c")));
+/* Stock reads the input thread-manager descriptor at RAM 0x2000408c
+ * (+8 osThreadId, +12 osMessageQueueId). That object is g2_input_thread_desc
+ * (thread_input.c, "RAM 0x2000408c"); a private 16-byte copy here was never
+ * written, so every send saw queue==0 and dropped (Fix 53, touchtrace). */
+extern uint32_t g2_input_thread_desc[];
+#define audio_input_message_state ((const uint8_t *)g2_input_thread_desc)
 extern int32_t audio_cmsis_queue_put(void *,const void *,uint8_t,uint32_t);
 extern uint32_t audio_thread_flags_set(void *,uint32_t);
 extern int32_t audio_ble_hci_boot_log_4733ee(const char *,...);

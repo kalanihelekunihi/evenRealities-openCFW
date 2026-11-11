@@ -17,8 +17,8 @@ extern uint32_t audio_uart_page_441068(uint32_t, uint32_t, uint32_t);
 extern void audio_uart_page_44127e(uint32_t, uint32_t, uint32_t);
 extern void audio_uart_page_44129e(uint32_t, uint32_t, uint32_t);
 extern void audio_uart_page_4412ec(uint32_t, uint32_t, uint32_t);
-extern void audio_uart_page_44131c(uint32_t, uint32_t, uint32_t);
-extern void audio_uart_page_44146a(uint32_t, uint32_t, uint32_t);
+extern void lv_obj_set_style_border_width(uint32_t, uint32_t, uint32_t);
+extern void lv_obj_set_style_radius(uint32_t, uint32_t, uint32_t);
 extern uint32_t audio_uart_registry_context_20003080[];
 
 uint64_t audio_uart_registry_callback_5cf67e(uint32_t event,
@@ -43,8 +43,8 @@ uint64_t audio_uart_registry_callback_5cf67e(uint32_t event,
             audio_uart_page_43dfa4(tile, 0x10u);
             audio_uart_page_43f4c0(tile, 0x48u, 0x120u);
             audio_uart_page_43f09a(tile, (int32_t)(index * 0x48u), 0);
-            audio_uart_page_44131c(tile, 0u, 0u);
-            audio_uart_page_44146a(tile, 0u, 0u);
+            lv_obj_set_style_border_width(tile, 0u, 0u);
+            lv_obj_set_style_radius(tile, 0u, 0u);
             uint32_t gray = (uint8_t)(audio_uart_gray_screen_steps_78df8c[index] * 0x11u);
             audio_uart_page_44127e(tile, audio_uart_page_441068(gray, gray, gray), 0u);
             audio_uart_page_44129e(tile, 0xffu, 0u);

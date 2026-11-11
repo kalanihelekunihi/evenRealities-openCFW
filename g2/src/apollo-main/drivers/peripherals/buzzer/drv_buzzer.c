@@ -110,6 +110,15 @@ static const g2_os_timer_attr_t buzzer_timer_attr = { /* ROM 0x785c60 */
 #define BUZZER_LOG_ON()  (audio_log_flags() & 2u)
 #define BUZZER_CLOG_ON() ((audio_log_flags() & 1u) || (audio_log_flags() & 4u))
 
+/* Timer counts per PWM period, rounded. The stock IAR 64-bit divide returned
+ * its numerator for a zero divisor; DRV_BuzzerStart passes frequencies from
+ * the AT/PT/CLI commands unchecked, so keep that value explicitly instead of
+ * relying on libgcc's __aeabi_uldivmod (all-ones on a zero divisor). */
+static uint64_t buzzer_period(uint32_t frequency) {
+    uint64_t counts = g2_buzzer_timer_clock_hz + (frequency >> 1);
+    return frequency != 0u ? counts / frequency : counts;
+}
+
 uint32_t buzzer_pwm_config(uint32_t timer, uint16_t clock, uint32_t frequency, uint8_t duty) {
     g2_am_timer_config_t config;
     (void)am_hal_timer_default_config_set_471cae(&config);
@@ -119,7 +128,7 @@ uint32_t buzzer_pwm_config(uint32_t timer, uint16_t clock, uint32_t frequency, u
     (void)am_hal_timer_output_config_471e20(BUZZER_GPIO, timer << 1);
     int32_t divider = 4 << ((uint32_t)config.input_clock << 1);
     g2_buzzer_timer_clock_hz = (uint64_t)BUZZER_TIMER_HZ / (uint64_t)(int64_t)divider;
-    uint64_t period = (g2_buzzer_timer_clock_hz + (frequency >> 1)) / frequency;
+    uint64_t period = buzzer_period(frequency);
     (void)am_hal_timer_compare0_set_471e5e(timer, (uint32_t)period);
     /* duty is the high share in percent; compare1 marks the low part. */
     uint32_t low = (uint32_t)((float)period * (1.0f - (float)duty / 100.0f) + 0.5f);
@@ -138,7 +147,7 @@ void buzzer_pwm_stop(void) {
 }
 
 void buzzer_pwm_update(uint32_t frequency, uint8_t duty) {
-    uint64_t period = (g2_buzzer_timer_clock_hz + (frequency >> 1)) / frequency;
+    uint64_t period = buzzer_period(frequency);
     uint32_t low = (uint32_t)((float)period * (1.0f - (float)duty / 100.0f) + 0.5f);
     (void)am_hal_timer_compare0_set_471e5e(BUZZER_TIMER, (uint32_t)period);
     (void)am_hal_timer_compare1_set_471e78(BUZZER_TIMER, low);

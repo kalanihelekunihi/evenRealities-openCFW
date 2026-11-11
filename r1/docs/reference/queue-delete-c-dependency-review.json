@@ -1,0 +1,186 @@
+{
+  "deletion": {
+    "passed": 2052,
+    "executions": 4104,
+    "source_report": "build/sources-goal-r1-queue-delete-c/report.json",
+    "all_ownership_byte_values": true,
+    "free_tail_sp_lr_preserved": true,
+    "free_callback_mutations_preserved": true,
+    "source_bytes": 34,
+    "limitations": [
+      "Heap free modeled; logical ownership/dispatch and tail-call frame checked",
+      "Void-return caller-clobbered words/flags excluded",
+      "Logical assertion mask/address/width/value checked without full exception state",
+      "Heap metadata, use-after-free, allocator corruption and physical concurrency unverified",
+      "No byte qualification"
+    ]
+  },
+  "creation_deletion_lifecycle": {
+    "passed": 8248,
+    "executions": 16496,
+    "source_report": "build/sources-goal-r1-queue-delete-c/report.json",
+    "actual_creation_deletion_initialization_reset_lists": true,
+    "allocation_free_and_critical_boundaries_modeled": true,
+    "logical_assert_fault_checked": true,
+    "queue_and_storage_guards": true,
+    "callback_stack_depths": {
+      "stock": [
+        -72,
+        -64,
+        -32,
+        0
+      ],
+      "C": [
+        -56,
+        -24,
+        0
+      ]
+    },
+    "sizes": {
+      "xQueueGenericCreate": 82,
+      "xQueueGenericCreateStatic": 98,
+      "prvInitialiseNewQueue": 32
+    },
+    "limitations": [
+      "Heap allocation/free and critical boundaries modeled; actual native/C creation, deletion, initialization, reset and list routines execute",
+      "State and boundary snapshots compared; private frames and internal ordinary memory access order excluded",
+      "Logical assertion mask/address/width/value checked; full fault/exception state unverified",
+      "Heap metadata, allocation fragmentation, physical scheduling and concurrency unverified",
+      "No byte qualification"
+    ]
+  },
+  "explicit_native_heap_candidate_probe": {
+    "passed": 216,
+    "executions": 432,
+    "actual_native_and_C_heap_free_and_coalescing": true,
+    "seeded_valid_heap_metadata": true,
+    "heap_source": "r1/src/application/board/native_heap.c",
+    "heap_source_linked_in_normal_composition": false,
+    "explicit_probe_candidate_selection": true,
+    "limitations": [
+      "Scheduler suspend/resume modeled; actual queue delete, vPortFree and free-list insert execute",
+      "Allocator layouts seeded directly; malloc, corrupted metadata, double-free, use-after-free and physical concurrency unverified",
+      "Private frames and caller-clobbered words/flags excluded"
+    ]
+  },
+  "negative_controls": {
+    "free-static": {
+      "rejected": true,
+      "case": [
+        1,
+        0,
+        false
+      ],
+      "stderr": "arm-none-eabi-ld: warning: (vPortFree): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-delete-c/free-static.o\nTraceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-queue-delete-c/reject-free-static.py\", line 44, in <module>\n    assert a(*case)==b(*case)\n                     ~^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-queue-delete-c/reject-free-static.py\", line 38, in run\n    assert len(state['calls'])==int(flag==0) and u.reg_read(UC_ARM_REG_BASEPRI)==(128 if flag==0 and mutation else mask)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    "skip-dynamic-free": {
+      "rejected": true,
+      "case": [
+        0,
+        0,
+        false
+      ],
+      "stderr": "Traceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-queue-delete-c/reject-skip-dynamic-free.py\", line 44, in <module>\n    assert a(*case)==b(*case)\n                     ~^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-queue-delete-c/reject-skip-dynamic-free.py\", line 38, in run\n    assert len(state['calls'])==int(flag==0) and u.reg_read(UC_ARM_REG_BASEPRI)==(128 if flag==0 and mutation else mask)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    "wrong-flag-field": {
+      "rejected": true,
+      "case": [
+        0,
+        0,
+        false
+      ],
+      "stderr": "arm-none-eabi-ld: warning: (vPortFree): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-delete-c/wrong-flag-field.o\nTraceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-queue-delete-c/reject-wrong-flag-field.py\", line 44, in <module>\n    assert a(*case)==b(*case)\n                     ~^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-queue-delete-c/reject-wrong-flag-field.py\", line 38, in run\n    assert len(state['calls'])==int(flag==0) and u.reg_read(UC_ARM_REG_BASEPRI)==(128 if flag==0 and mutation else mask)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    }
+  },
+  "audit": {
+    "unchanged_existing_function_bodies": [
+      "prvCopyDataFromQueue",
+      "prvCopyDataToQueue",
+      "prvGetDisinheritPriorityAfterTimeout",
+      "prvInitialiseMutex",
+      "prvInitialiseNewQueue",
+      "prvIsQueueEmpty",
+      "prvIsQueueFull",
+      "prvUnlockQueue",
+      "ulPortRaiseBASEPRI",
+      "xQueueCreateCountingSemaphore",
+      "xQueueCreateCountingSemaphoreStatic",
+      "xQueueCreateMutex",
+      "xQueueCreateMutexStatic",
+      "xQueueGenericCreate",
+      "xQueueGenericCreateStatic",
+      "xQueueGenericReset",
+      "xQueueGenericSend",
+      "xQueueGenericSendFromISR",
+      "xQueueGiveFromISR",
+      "xQueueGiveMutexRecursive",
+      "xQueueReceive",
+      "xQueueReceiveFromISR",
+      "xQueueSemaphoreTake",
+      "xQueueTakeMutexRecursive"
+    ],
+    "changed_existing_function_bodies": {},
+    "new_strong_symbols": [
+      "vQueueDelete"
+    ],
+    "removed_imports": [
+      "vQueueDelete"
+    ],
+    "added_imports": []
+  },
+  "normal_build": {
+    "units": 573,
+    "application_imports": 187,
+    "bootloader_imports": 34,
+    "failures": 0,
+    "duplicate_strong_symbols": 0
+  },
+  "allocator_boundary": {
+    "normal_selected_source": "third-party/upstream/freertos-kernel/portable/MemMang/heap_4.c",
+    "native_heap_candidate": "r1/src/application/board/native_heap.c",
+    "native_heap_candidate_link": false,
+    "remaining": "Full native malloc/free and allocator-selection validation remains before changing normal composition"
+  },
+  "qualification": {
+    "compiled": 5,
+    "selected_regions": 2,
+    "already_covered": 2,
+    "new_functions_byte_qualified": false
+  },
+  "source_plan_unchanged": true,
+  "source_built_bytes": 3833,
+  "binary_pull_through_bytes": 642327,
+  "source_completeness_proven": false,
+  "evidence": {
+    "build/sources-goal-r1-queue-delete-c/report.json": "e9cf95a0e9fa925cfac7cc947bd6e37893072395f3702d30785ad44e276b970c",
+    "tools/build/source-plan.json": "0c889650bf8ea03def83ea1ea29730b3ccfe84bb70609c1972a500f02ba4ea2d",
+    "r1/src/application/rtos/mutex-kernel/mutex-kernel.c": "2339dfd389e33020d0ff5a7ba9d06b6802d9d0e40ee199eedb59c612b418ac2d",
+    "third-party/upstream/freertos-kernel/queue.c": "5cdf4fa35fe059446effff5bf20deaf83ddffb08921bc198fda106b1d17dd894",
+    "r1/src/application/board/native_heap.c": "83cbdb53b836d594cd67c51b97b38c04a1e062e95a04df4af51d6d0e0713c719",
+    "third-party/upstream/freertos-kernel/portable/MemMang/heap_4.c": "d48a51e34caed771e6650d95f6c2527e52fde2a6ebc6f83b49d003aef0135e05",
+    "r1/src/config/rtos/mutex_kernel_contract.h": "d940797ff263975ba00fd355c3b3535a002c97f3e1ada8419492efb84ed8de81",
+    "r1/src/config/rtos/queue_operations_contract.h": "bca8311a67d844386ea0066c486ffd4ac127696a914adf4cd5514f4c841a3b8e",
+    "r1/src/config/rtos/native_port_assert.h": "efee8118f24a53756b6f14a666524b3d59561f005e1e87ed71309ccab9c4fc9f",
+    "r1/src/sources.json": "6fa37d8afe1e50453bc47962bcfe463cd5163fb4f1b3d2a8033b02adbb77c9d3",
+    "build/hybrid-goal-r1-queue-delete-c/build-report.json": "eb995ae3f4583aa51cf8e0c7ffcaf3fe752ba99d9bf12094ced4904f91a9e4bd",
+    "build/goal-r1-queue-delete-c/before.c": "a327e2b113cf306100af37f6e994e7a78337c77fc786ff240e77a291b96d2e3b",
+    "build/goal-r1-queue-delete-c/selected-upstream.c": "83f3aff3b04be9647926aca3882a66624a01469a88eaaf31f21e820612ff58ae",
+    "build/goal-r1-queue-delete-c/REA.json": "a3b33f2b3bb80c409c58d864828392c1ce2a5cc38f4a743be4a6b8b1916f62bf",
+    "build/goal-r1-queue-delete-c/REA.snapshot.json": "30277c7e8b5d077eff8c35123c3fc3b6b6d98c9717e283c88e4dbfc4d7822a62",
+    "build/goal-r1-queue-delete-c/verify.py": "f3ba769deed733b6992f6ce024dab297f69ee49941d35613e57fcc40b67bd1e2",
+    "build/goal-r1-queue-delete-c/results.json": "8f970929aff1227cf02e48eb9565a7fc1dc4693e13df4db167bd7ae9fc084fd7",
+    "build/goal-r1-queue-delete-c/negative.py": "5194a3708a9963e33ab5bd045c4d23d604633a2b6c100b2998b0d50511261d58",
+    "build/goal-r1-queue-delete-c/negative-results.json": "b04c7d4cfde492781d1532658592e5d5d689b9e0e07a246c104176370e2b18c2",
+    "build/goal-r1-queue-delete-c/audit.py": "210c7ea56344ffbacac3da8f626f3c1133c202b7d28e7bd81d85d1c95ad40fc6",
+    "build/goal-r1-queue-delete-c/audit-results.json": "19e2af8d749dd820813f38385fa8f08d8d882e6510fb19cd0a8a2ac449ae32ab",
+    "build/goal-r1-queue-delete-c/qualify.py": "c45d21003ba57d77fde9c64b2c16c4569e5e8bcd0ee598042263d537b27cb53f",
+    "build/goal-r1-queue-delete-c/qualified/qualification.json": "93f536033a60f2d2e32aed56d775ae0a42c1ef80393da2578878d7dfb2c963b4",
+    "build/goal-r1-queue-delete-c/qualified/source-plan.json": "c82d566eec0b9864b0b0fd13157557e5bb7aeaa3e596514f5ad0c6dcdb751634",
+    "build/goal-r1-queue-delete-c/lifecycle/verify.py": "0e9c508c210e22b5458cacb99f3081fa01ddfc8bae7c6d05f55a31a03dccbc76",
+    "build/goal-r1-queue-delete-c/lifecycle/results.json": "c95b8ece6b5369474d3e52df1c1989181e8bc88313d3112ea14a5b5b5c82a335",
+    "build/goal-r1-queue-delete-c/heap.py": "f3bdd1fe15cb1b881d2ccb2abb4300f2754e092a7773780de6c9fb676746b60d",
+    "build/goal-r1-queue-delete-c/heap.ld": "dcc94e050456d33a939edbec9bba525d3ec8f482fb2ef12b53fad842c0d5ce3e",
+    "build/goal-r1-queue-delete-c/heap.elf": "70002e9869fef885d12e853e03f019baa5b0f17b95851280ee08b38ba29c671f",
+    "build/goal-r1-queue-delete-c/heap-results.json": "e8a6be74bc1aaf29aa661a52f5cc1a60755516f23e90b839b3fd86550bb5017b"
+  }
+}

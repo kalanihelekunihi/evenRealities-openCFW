@@ -1,0 +1,53 @@
+{
+  "removed_imports": [
+    "GH3X2X_TimestampSyncFillAccSyncBuffer",
+    "gh3026_gsensor_data_get"
+  ],
+  "added_imports": [],
+  "remaining_timestamp_sync_import": false,
+  "other_demo_executable_sections_unchanged": 24,
+  "omitted_demo_sections": [
+    ".text.hal_gsensor_drv_get_fifo_data"
+  ],
+  "unchanged_native_objects": [
+    "r1/src/application/goodix/stock_gsensor_callbacks.c",
+    "r1/src/application/goodix/stock_gsensor_sink.c"
+  ],
+  "report": "build/sources-goal-r1-goodix-gsensor-hal-final/report.json",
+  "baseline": "build/sources-goal-r1-goodix-gsensor-sample/report.json",
+  "public_hal_stock_comparison": {
+    "passed": 448,
+    "executions": 896,
+    "live_count_reads": true,
+    "zyx_signed_halfword_reads": true,
+    "board_r0_r1_compared": true,
+    "public_hal_size": 4,
+    "source_size": 72,
+    "sink_size": 2,
+    "source_report": "build/sources-goal-r1-goodix-gsensor-hal-final/report.json",
+    "limitations": [
+      "Board callback modeled; sink executes native/C return body with optional controlled count mutation",
+      "Private frames and caller-clobbered registers/flags excluded",
+      "Arbitrary pointer alias/faults, callback hidden conventions, concurrency and physical hardware unverified",
+      "No byte qualification"
+    ]
+  },
+  "compiled_adapter_direct_tail_branch": true,
+  "evidence": {
+    "build/goal-r1-goodix-gsensor-hal/audit.py": "7362b25c65b807391879051daafb6d260d39ff8f93abfcfbf1527198df299c1a",
+    "build/goal-r1-goodix-gsensor-hal/audit.json": "0e7db82d6f48f25e10a0eaf728eef1a880426c6f47a6bb75008f3e079a7f8416",
+    "build/goal-r1-goodix-gsensor-hal/public/verify.py": "d79cbe8490986dc1e9d4e44a060b0847b9bda7b30ed4c56c5d9b920466b34267",
+    "build/goal-r1-goodix-gsensor-hal/public/source.elf": "80206a2bf2fd12f91999fdf75e46d35045bf14c15042e7609c66668e31b08607",
+    "build/goal-r1-goodix-gsensor-hal/public/results.json": "cebe908363e94c5b7d38e96ae78ea0ede1cc527c21d7e5e4ddcc292a6f426e8e",
+    "build/goal-r1-goodix-gsensor-hal/adapter-disassembly.txt": "cde46475dd04158f4e21f88fcd6271f8bd72626aa96af9ba6a53523e550365bf",
+    "r1/src/application/goodix/stock_gsensor_hal.c": "63247ab5c27c050aec4193e6c583b7e014f7bfe73372381dea6a7c06083fdc14",
+    "r1/src/application/goodix/stock_gsensor_callbacks.c": "7368b0f580539ab70a51be71ba001a02f299f938c0d6598719c87fcdade6e165",
+    "r1/src/application/goodix/stock_gsensor_sink.c": "29e396cd05387d5f10c9b2d7aa60f0f68c123f0de48a2aedf51c8cec72c4fab5",
+    "build/sources-goal-r1-goodix-gsensor-hal-final/generated/r1/gh_demo_user_r1.c": "c727aeb23d5c79d3fcdaa8040481ed7dc14da76b83be94ffcd91edd0931607b6",
+    "build/sources-goal-r1-goodix-gsensor-hal-final/report.json": "90468dc71e230cb2b09f0d77ff4be08b6810d619835e8382a022039aac1f88f5",
+    "r1/src/sources.json": "a342ea9086286abefd9479819efcf9dc98cb1a768415352af3151638bd4bb609",
+    "r1/symbols/function-frontier.csv": "9227ff4a0a919591df8e01862f6ae89160478efeb92c95935b40cb25df692f4f",
+    "tools/build/source-plan.json": "4d46e8c038db79a174a2d719086fd0be80503ca7cdbfc2c51e5ed3d30d293064"
+  },
+  "source_plan_changed": false
+}

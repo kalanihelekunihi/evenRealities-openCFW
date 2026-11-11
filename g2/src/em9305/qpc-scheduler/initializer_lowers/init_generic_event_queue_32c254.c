@@ -1,49 +1,42 @@
 #include <stdint.h>
-extern uint32_t opencfw_em9305_init_callback_32c254(void);
-extern uintptr_t opencfw_em9305_wsf_event_remove(uintptr_t,uintptr_t);
-extern uint32_t opencfw_em9305_ll_event_callback_30e79c(uintptr_t);
-extern uint32_t opencfw_em9305_wsf_event_release(uintptr_t);
-/* Full native32c254..32c2ae. Named source preserves28Bframe, including
- * untouched5..7 and24..26 bytes and handler27. BaselineLD avoids requiring
- * alternateCD2compactencoding. Sourceplacement/byteequalityunproved. */
-__asm__(
-".text\n.align 2\n.global opencfw_em9305_init_callback_32c254\n"
-".type opencfw_em9305_init_callback_32c254,@function\n"
-"opencfw_em9305_init_callback_32c254:\n"
-"enter_s [r13-r14,fp,blink]\n"
-"sub_s sp,sp,28\n"
-"mov_s r14,21\n"
-"asl_s r14,r14,16\n"
-"1: mov_s r0,0x8053f8\n"
-"bl.d opencfw_em9305_wsf_event_remove\n"
-"add r1,sp,27\n"
-"mov_s r13,r0\n"
-"breq_s r0,0,4f\n"
-"st 0,[sp,20]\n"
-"st 0,[sp,16]\n"
-"ld r0,[r13,20]\n"
-"ld r1,[r13,16]\n"
-"st_s r14,[sp,0]\n"
-"st_s r0,[sp,12]\n"
-"ldb_s r2,[r13,12]\n"
-"st_s r1,[sp,8]\n"
-"stb_s r2,[sp,4]\n"
-"ld r12,[r13,8]\n"
-"ld r3,[r13,4]\n"
-"xor_s r0,r0,r12\n"
-"xor_s r1,r1,r3\n"
-"or.f 0,r1,r0\n"
-"bne_s 2f\n"
-"ldb_s r0,[r13,0]\n"
-"breq r2,r0,3f\n"
-"2: bset_s r2,r2,1\n"
-"st_s r3,[sp,16]\n"
-"st_s r12,[sp,20]\n"
-"stb_s r2,[sp,4]\n"
-"3: bl.d opencfw_em9305_ll_event_callback_30e79c\n"
-"add_s r0,sp,0\n"
-"bl.d opencfw_em9305_wsf_event_release\n"
-"mov_s r0,r13\n"
-"b_s 1b\n"
-"4: leave_s [r13-r14,fp,blink,pcl]\n"
-".size opencfw_em9305_init_callback_32c254,.-opencfw_em9305_init_callback_32c254\n");
+
+/* Native 0x32c254..0x32c2ae: drain the event queue at 0x8053f8. For each
+ * event build a 28-byte report (code 0x15 at +2, event byte +12 at +4,
+ * event words +16/+20 at +8/+12 and +4/+8 at +16/+20); when the two word
+ * pairs differ or the event bytes +0/+12 differ, bit 1 of the report byte
+ * is set and the second pair is filled, otherwise it stays zero. The
+ * report goes to the LL event callback and the event is released. Bytes
+ * +5..+7 and +24..+26 are not written, as in stock; the queue handler id
+ * lands at +27. */
+extern uintptr_t opencfw_em9305_wsf_event_remove(uintptr_t queue,uintptr_t out_u8);
+extern uint32_t opencfw_em9305_ll_event_callback_30e79c(uintptr_t event);
+extern uint32_t opencfw_em9305_wsf_event_release(uintptr_t event);
+
+uint32_t opencfw_em9305_init_callback_32c254(void)
+{
+    _Alignas(4) uint8_t report[28];
+    for(;;){
+        uintptr_t event=opencfw_em9305_wsf_event_remove(0x8053f8u,
+                                                        (uintptr_t)&report[27]);
+        if(event==0u)return 0u;
+        *(uint32_t *)(void *)(report+20)=0u;
+        *(uint32_t *)(void *)(report+16)=0u;
+        uint32_t high=*(volatile uint32_t *)(event+20u);
+        uint32_t low=*(volatile uint32_t *)(event+16u);
+        *(uint32_t *)(void *)report=0x150000u;
+        *(uint32_t *)(void *)(report+12)=high;
+        uint32_t flags=*(volatile uint8_t *)(event+12u);
+        *(uint32_t *)(void *)(report+8)=low;
+        report[4]=(uint8_t)flags;
+        uint32_t other_high=*(volatile uint32_t *)(event+8u);
+        uint32_t other_low=*(volatile uint32_t *)(event+4u);
+        if(((low^other_low)|(high^other_high))!=0u
+           ||flags!=*(volatile uint8_t *)event){
+            *(uint32_t *)(void *)(report+16)=other_low;
+            *(uint32_t *)(void *)(report+20)=other_high;
+            report[4]=(uint8_t)(flags|2u);
+        }
+        (void)opencfw_em9305_ll_event_callback_30e79c((uintptr_t)report);
+        (void)opencfw_em9305_wsf_event_release(event);
+    }
+}

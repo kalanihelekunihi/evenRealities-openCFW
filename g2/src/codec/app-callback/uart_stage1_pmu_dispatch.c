@@ -17,15 +17,17 @@ void gx8002_uart_stage1_pmu_dispatch(uint32_t selector, int enable)
     }
     struct stage1_pmu_view view;
     if (gx8002_uart_stage1_pmu_fill_desc(first, &view) == 0) {
+        /* _clk_set_high_gate: one read of the clock select word. */
         const int32_t gate = (int8_t)view.entry[6];
         if (gate != -1) {
-            const uint32_t gate_bit = (uint32_t)gate & 31u;
-            uint32_t skip_status = 0;
-            if (first < 10u && ((UINT32_C(1) << first) & UINT32_C(579)))
-                skip_status = (*view.status >> ((gate_bit + 1u) & 31u)) & 1u;
-            const uint32_t power_mask = UINT32_C(1) <<
-                ((uint32_t)(int8_t)view.entry[4] & 31u);
-            if (!skip_status && ((*view.status >> gate_bit) & 1u) && enable)
+            const uint32_t clk_sel = *view.status;
+            uint32_t selected = 0;
+            if (!(first < 10u && ((UINT32_C(1) << first) & UINT32_C(579))) ||
+                gx8002_uart_stage1_bit(clk_sel, gate + 1) == 0u)
+                selected = gx8002_uart_stage1_bit(clk_sel, gate);
+            const uint32_t power_mask =
+                gx8002_uart_stage1_mask((int8_t)view.entry[4]);
+            if (selected && enable)
                 *view.enable = power_mask;
             else
                 *view.clear = power_mask;
@@ -33,7 +35,7 @@ void gx8002_uart_stage1_pmu_dispatch(uint32_t selector, int enable)
     }
 
     if (gx8002_uart_stage1_pmu_fill_desc(selector, &view) != 0) return;
-    uint32_t mask = UINT32_C(1) << ((uint32_t)(int8_t)view.entry[5] & 31u);
+    uint32_t mask = gx8002_uart_stage1_mask((int8_t)view.entry[5]);   /* _clk_set_all_gate */
     switch (selector) {
     case 6: case 14: mask |= UINT32_C(0x8000); break;
     case 11: mask |= UINT32_C(8); break;

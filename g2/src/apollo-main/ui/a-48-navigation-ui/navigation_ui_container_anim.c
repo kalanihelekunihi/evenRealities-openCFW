@@ -78,7 +78,7 @@ static void start_fade(void *obj, int32_t from, int32_t to, void (*done)(void *)
     anim.exec_cb = navigation_container_opa_anim_exec_cb_547abc;
     audio_uart_lv_anim_values_4506ce(&anim, from, to);
     anim.duration = NAV_FADE_MS;
-    anim.path_cb = audio_uart_lv_anim_path_450688;
+    anim.path_cb = lv_anim_path_ease_in_out;
     anim.completed_cb = done;
     (void)audio_uart_lv_anim_start_450408(&anim);
 }

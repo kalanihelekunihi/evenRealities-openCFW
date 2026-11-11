@@ -1,0 +1,13 @@
+# Native Goodix processing-workspace teardown in C
+
+The [machine-readable receipt](goodix-native-workspace-teardown-c-review.json) records the ordinary C implementation in `r1/src/application/goodix/native_workspace_teardown.c`, normal build report, pinned REA bytes and executed comparison fixtures. This admits a tested behavioral candidate; byte identity is not required or claimed.
+
+Stock workspace destructor `0x29bbc` releases nine record-owned buffers in record order `04,14,24,34,44,54,64,84,74`. The helper at `0x667c0` loads the allocation from **record +4**, calls free even for zero, and leaves the cell unchanged. Sixteen other nullable cells at `94,9c,a4,ac,b4,bc,c4,cc,d4,dc,ec,fc,10c,11c,12c,13c` are released then cleared. The existing C release-cell helper represents the identical contracts at `0x6628a` and `0x662c6`; no second implementation is added. The workspace itself remains allocated for its caller to release. The destructor returns zero.
+
+Verification passes 65,536 clear-mask, 1,024 record-mask, 20 live-cell mutation, 48 helper and four initial-null access-shape cases. All 230 native instruction bytes execute. The free callback records call-time field snapshots and clobbers caller scratch registers. A further 640 comparisons execute the actual C allocator, initializer and destructor, checking complete heap bytes and writes with workspace allocations before/after their children and optional unrelated live allocations. Workspace ownership is checked before the caller releases it. Source execution cannot enter stock code. Ten compiled behavioral defects are rejected, including incorrect record offsets, null-release suppression, record clearing, reordered/missing fields, root release and status changes.
+
+Saved integer/FP registers, SP, interrupt masks, FPSCR and caller guards are checked; caller scratch, APSR and private frames are excluded. Initial-null accesses at 8, 4 and 0 are emulator access-shape evidence, not proof of a physical MCU fault. Typed workspace construction is a fixture, not algorithm initialization.
+
+The normal serial build compiles 870 units (788 application, 82 bootloader), with zero duplicate strong symbols and unchanged 62/22 imports. The tested object equals the normal object; all 859 prior nongenerated objects remain identical. Only two existing generated objects differ with build directory paths. The source plan and existing cache linker layout remain unchanged. No writable state is added.
+
+Processing parent teardown, typed destructor dispatch, remaining algorithm initialization/computation, concurrency, final executable linking/startup, physical memory and boot remain open. `ld -r` composition is not bootable firmware.

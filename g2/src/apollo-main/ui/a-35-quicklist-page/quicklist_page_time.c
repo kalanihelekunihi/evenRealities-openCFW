@@ -44,10 +44,10 @@ enum {
     QL_FORMAT_TIME = 2u,
 };
 
-extern void audio_uart_page_44120e(void *obj, int32_t v, uint32_t sel); /* style pad_top */
-extern void audio_uart_page_44121c(void *obj, int32_t v, uint32_t sel); /* style pad_bottom */
-extern void audio_uart_page_44122a(void *obj, int32_t v, uint32_t sel); /* style pad_left */
-extern void audio_uart_page_441238(void *obj, int32_t v, uint32_t sel); /* style pad_right */
+extern void lv_obj_set_style_pad_top(void *obj, int32_t v, uint32_t sel); /* style pad_top */
+extern void lv_obj_set_style_pad_bottom(void *obj, int32_t v, uint32_t sel); /* style pad_bottom */
+extern void lv_obj_set_style_pad_left(void *obj, int32_t v, uint32_t sel); /* style pad_left */
+extern void lv_obj_set_style_pad_right(void *obj, int32_t v, uint32_t sel); /* style pad_right */
 extern uint32_t audio_quicklist_refresh_lock_4ffac8(void);   /* quicklist_lock_storage */
 extern void audio_quicklist_refresh_unlock_4ffb26(void);     /* quicklist_unlock_storage */
 extern void audio_uart_buffer_zero(void *dst, uint32_t len, uint32_t fill); /* memset 0x43c0e4 */
@@ -80,10 +80,10 @@ static const char fmt_one[] = "%s";                      /* ROM 0x4f5834 */
 
 void lv_obj_set_style_pad_all_4f5068(void *obj, int32_t value, uint32_t selector)
 {
-    audio_uart_page_44122a(obj, value, selector);
-    audio_uart_page_441238(obj, value, selector);
-    audio_uart_page_44120e(obj, value, selector);
-    audio_uart_page_44121c(obj, value, selector);
+    lv_obj_set_style_pad_left(obj, value, selector);
+    lv_obj_set_style_pad_right(obj, value, selector);
+    lv_obj_set_style_pad_top(obj, value, selector);
+    lv_obj_set_style_pad_bottom(obj, value, selector);
 }
 
 void quicklist_page_reset_4f509a(uint8_t full)

@@ -1,0 +1,20 @@
+{
+  "schema": 1,
+  "kind": "G2 codec A KWS model-weight data asset",
+  "path": "g2/src/codec/npu/kws_weights_2_2_6_10.bin",
+  "bytes": 120800,
+  "sha256": "397971427d7097180d07eb63f9822904a555e51f7643d946ebb38d71a967f8cf",
+  "extraction": {
+    "authenticated_source": "g2/blobs/official/g2-2.2.6.10/firmware_codec.bin",
+    "source_bytes": 326092,
+    "source_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+    "source_offset_start": "0x0001b15c",
+    "source_offset_end_exclusive": "0x0003893c",
+    "preceding_command_window_start": "0x00018d90",
+    "preceding_command_window_bytes": 9164,
+    "preceding_command_window_sha256": "c38ed6d22c7c0b6178288678364acd10bd5730aa382c1e19a32f6cf2bd1430b9",
+    "following_region": "BINH B stage-1 block starts at 0x0003893c",
+    "segment_map": "g2/tools/manifests/g2-codec-fwpk-segment-map.tsv"
+  },
+  "classification": "Non-executable model-weight data from the locked codec component. The original model architecture and training provenance are not reconstructed. This asset supplies trained bytes to source-linked codec packaging; it does not prove codec execution or recognition quality."
+}

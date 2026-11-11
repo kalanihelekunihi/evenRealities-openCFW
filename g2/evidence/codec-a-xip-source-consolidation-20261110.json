@@ -1,0 +1,82 @@
+{
+  "schema": 1,
+  "target": "locked G2 2.2.6.10 GX8002 BINH A image-A XIP source composition",
+  "change": {
+    "compiler_entry_points": [
+      "__adddf3",
+      "__subdf3",
+      "__muldf3",
+      "__divdf3",
+      "__fixdfsi",
+      "__fixunsdfsi",
+      "__floatunsidf",
+      "__udivdi3"
+    ],
+    "compiler_rt_compile_only_units": [
+      "third-party/upstream/llvm-compiler-rt-format-20.1.8/adddf3.c",
+      "third-party/upstream/llvm-compiler-rt-format-20.1.8/divdf3.c",
+      "third-party/upstream/llvm-compiler-rt-format-20.1.8/fixdfsi.c",
+      "third-party/upstream/llvm-compiler-rt-format-20.1.8/fixunsdfsi.c",
+      "third-party/upstream/llvm-compiler-rt-format-20.1.8/floatunsidf.c",
+      "third-party/upstream/llvm-compiler-rt-format-20.1.8/muldf3.c",
+      "third-party/upstream/llvm-compiler-rt-format-20.1.8/subdf3.c",
+      "third-party/upstream/llvm-compiler-rt-format-20.1.8/udivdi3.c"
+    ],
+    "image_a_unowned_dsp_compile_only_units": [
+      "third-party/upstream/nationalchip-lvp-kws/utility/libdsp/Source/BasicMathFunctions/csky_shift_q15.c",
+      "third-party/upstream/nationalchip-lvp-kws/utility/libdsp/Source/SupportFunctions/csky_copy_q15.c",
+      "third-party/upstream/nationalchip-lvp-kws/utility/libdsp/Source/SupportFunctions/csky_fill_q15.c",
+      "third-party/upstream/nationalchip-lvp-kws/utility/libdsp/Source/TransformFunctions/csky_bitreversal.c",
+      "third-party/upstream/nationalchip-lvp-kws/utility/libdsp/Source/TransformFunctions/csky_cfft_q15.c",
+      "third-party/upstream/nationalchip-lvp-kws/utility/libdsp/Source/TransformFunctions/csky_cfft_radix4_q15.c",
+      "third-party/upstream/nationalchip-lvp-kws/utility/libdsp/Source/TransformFunctions/csky_cfft_radix4by2_q15.c",
+      "third-party/upstream/nationalchip-lvp-kws/utility/libdsp/Source/TransformFunctions/csky_radix4_butterfly_q15.c",
+      "third-party/upstream/nationalchip-lvp-kws/utility/libdsp/Source/TransformFunctions/csky_rfft_q15.c",
+      "third-party/upstream/nationalchip-lvp-kws/utility/libdsp/Source/TransformFunctions/csky_split_rfft_q15.c"
+    ],
+    "reason": "Compiler entries now alias the existing reconstructed C bodies; the csky DSP functions have no image-A caller and their matching stock bodies occur outside image A. The compiler-rt and DSP units still compile but are excluded from the codec-A relocatable.",
+    "linker_xip_size_assertion": true
+  },
+  "stock": {
+    "firmware": "g2/blobs/official/g2-2.2.6.10/firmware_codec.bin",
+    "xip_file_window": [
+      "0xc590",
+      "0x15414"
+    ],
+    "xip_bytes": 36484,
+    "sram_bytes": 14716
+  },
+  "source": {
+    "previous_xip_bytes": 46764,
+    "xip_bytes": 35900,
+    "xip_headroom_bytes": 584,
+    "xip_sha256": "afc001119576a4f0f7b7e89209767c43b611c7e5561301bdb7bb27f1b9b2c04d",
+    "xip_equal_bytes_at_stock_addresses": 764,
+    "previous_xip_equal_bytes_at_stock_addresses": 742,
+    "sram_bytes": 14716,
+    "sram_equal_bytes_at_stock_addresses": 2857,
+    "sram_vectors_sha256": "d0d1997111e51a07aa63535beffd7d3a0de741c39cd9915aed1ac87b6b978f1a",
+    "sram_vectors_match_stock": true
+  },
+  "verification": {
+    "sources_check": "make -C g2 sources-check",
+    "full_source_report": "build/g2-all-c-softfp-consolidated-20261110/report.json",
+    "full_source_report_sha256": "e936c649ae21c7d56f6842b56fce34180a9cebe3716635341c8f8b3dc6daeddb",
+    "strict_link_report": "build/g2-all-c-softfp-consolidated-gated-link-20261110/link-report.json",
+    "strict_link_report_sha256": "cc9a5ffbec563aeef802a2dd99f15f00472e4751a62f9a7aec919f1e1e808fe3",
+    "payloads_linked": 7,
+    "codec_a_unresolved_after_compose": 0,
+    "external_binary_archive_members_in_codec_a_map": false,
+    "open_cfw_tests": "11 passed via python3 -m unittest discover -s tests -t . -p test_open_cfw.py (cwd g2)"
+  },
+  "qualification": "All seven payloads link from C-compiled source, and BINH A stage-2 XIP/SRAM fit their locked lengths. Only the 256-byte SRAM vector table is byte-identical here. XIP code, most SRAM bytes, NPU command stream/weights, complete BINH A package, byte identity, and hardware behavior remain unresolved.",
+  "assembly_probe": {
+    "artifact": "build/g2-codec-fwpk-borrowed-npu-probe-20261110.bin",
+    "bytes": 326092,
+    "sha256": "78ce8ac6a2ec0e83b42b0c9466d23989983d489880c92b8d79e2a492d6016471",
+    "valid_fwpk_segment_table_and_crc32": true,
+    "borrowed_stock_npu_commands_sha256": "c38ed6d22c7c0b6178288678364acd10bd5730aa382c1e19a32f6cf2bd1430b9",
+    "borrowed_stock_npu_weights_sha256": "397971427d7097180d07eb63f9822904a555e51f7643d946ebb38d71a967f8cf",
+    "qualification": "Packaging probe only: the NPU commands and weights were read from the locked firmware under build/. The probe is not a complete source build, is not byte-identical to stock, and must not be shipped."
+  }
+}

@@ -1,27 +1,14 @@
-/* Native scan lifecycle action; child calls and delay slots preserved. */
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_scan_action_3255c8\n"
-".type opencfw_em9305_scan_action_3255c8,@function\n"
-"opencfw_em9305_scan_action_3255c8:\n"
-"L3255c8:\n"
-"push_s blink\n"
-"L3255ca:\n"
-"bl.d opencfw_em9305_common_release_304588\n"
-"L3255ce:\n"
-"mov_s r0,1\n"
-"L3255d0:\n"
-"mov_s r0,0x804fd8\n"
-"L3255d6:\n"
-"bl opencfw_em9305_scan_finish_325740\n"
-"L3255da:\n"
-"bl.d opencfw_em9305_command_status_30e8c0\n"
-"L3255de:\n"
-"mov_s r0,0\n"
-"L3255e0:\n"
-"pop_s blink\n"
-"L3255e2:\n"
-"j_s [blink]\n"
-".size opencfw_em9305_scan_action_3255c8,.-opencfw_em9305_scan_action_3255c8\n"
-);
+#include <stdint.h>
+
+/* Native 0x3255c8..0x3255e4: release the common resource (mode 1), finish
+ * the scan state block at 0x804fd8 and report command status 0. */
+extern uint32_t opencfw_em9305_common_release_304588(uint32_t);
+extern uint32_t opencfw_em9305_scan_finish_325740(uintptr_t);
+extern uint32_t opencfw_em9305_command_status_30e8c0(uint32_t);
+
+uint32_t opencfw_em9305_scan_action_3255c8(void)
+{
+    (void)opencfw_em9305_common_release_304588(1u);
+    (void)opencfw_em9305_scan_finish_325740((uintptr_t)0x804fd8u);
+    return opencfw_em9305_command_status_30e8c0(0u);
+}

@@ -1,60 +1,25 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_320f30\n"
-".type opencfw_em9305_child_320f30,@function\n"
-"opencfw_em9305_child_320f30:\n"
-"L320f30:\n"
-"enter_s [r13-r17,blink]\n"
-"L320f32:\n"
-"ld_s r13,[r0,0x24]\n"
-"L320f34:\n"
-"mov_s r14,r0\n"
-"L320f36:\n"
-"mov_s r17,r2\n"
-"L320f38:\n"
-"mov_s r16,r13\n"
-"L320f3a:\n"
-"add r16,r16,484\n"
-"L320f3e:\n"
-"ldb r0,[r16,216]\n"
-"L320f42:\n"
-"mov_s r15,0\n"
-"L320f44:\n"
-"breq_s r0,0,L320f74\n"
-"L320f46:\n"
-"ld.as r0,[r13,123]\n"
-"L320f4a:\n"
-"ld.as r3,[r13,124]\n"
-"L320f4e:\n"
-"mov_s r2,r13\n"
-"L320f50:\n"
-"add r2,r2,700\n"
-"L320f54:\n"
-"add_s r0,r0,r3\n"
-"L320f56:\n"
-"bl.d opencfw_em9305_auxiliary_elapsed_303f8c\n"
-"L320f5a:\n"
-"stb_s r15,[r2,0]\n"
-"L320f5c:\n"
-"brhs.d.nt r0,r17,L320f74\n"
-"L320f60:\n"
-"add r13,r13,532\n"
-"L320f64:\n"
-"ld_s r0,[r14,0x2c]\n"
-"L320f66:\n"
-"mov_s r1,r13\n"
-"L320f68:\n"
-"st r16,[r0,132]\n"
-"L320f6c:\n"
-"bl.d opencfw_em9305_child_304184\n"
-"L320f70:\n"
-"mov_s r0,r16\n"
-"L320f72:\n"
-"mov_s r15,1\n"
-"L320f74:\n"
-"mov_s r0,r15\n"
-"L320f76:\n"
-"leave_s [r13-r17,blink,pcl]\n"
-".size opencfw_em9305_child_320f30,.-opencfw_em9305_child_320f30\n"
-);
+#include <stdint.h>
+
+/* Native 0x320f30..0x320f78: if the context (object +36) has a pending
+ * flag (+700), clear it; when the time elapsed since the context's base
+ * (+492 plus +496) is below the limit, attach the +484 block to the
+ * object's radio (+44 word 33) and run child 304184 on it. Returns 1 when
+ * the block was attached. */
+extern uint32_t opencfw_em9305_auxiliary_elapsed_303f8c(uint32_t current,
+                                                        uint32_t previous);
+extern uint32_t opencfw_em9305_child_304184(uintptr_t context,uintptr_t radio);
+
+uint32_t opencfw_em9305_child_320f30(uintptr_t object,uint32_t now,uint32_t limit)
+{
+    uintptr_t context=*(volatile uint32_t *)(object+36u);
+    uintptr_t block=context+484u;
+    if(*(volatile uint8_t *)(context+700u)==0u)return 0u;
+    uint32_t base=*(volatile uint32_t *)(context+492u)
+                  +*(volatile uint32_t *)(context+496u);
+    *(volatile uint8_t *)(context+700u)=0u;
+    if(opencfw_em9305_auxiliary_elapsed_303f8c(base,now)>=limit)return 0u;
+    uintptr_t radio=*(volatile uint32_t *)(object+44u);
+    *(volatile uint32_t *)(radio+132u)=block;
+    (void)opencfw_em9305_child_304184(block,context+532u);
+    return 1u;
+}

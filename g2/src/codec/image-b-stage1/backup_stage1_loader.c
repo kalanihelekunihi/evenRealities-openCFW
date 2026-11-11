@@ -8,7 +8,7 @@
 #include <spl/spl.h>
 extern volatile struct boot_info gx8002_stage1_boot_info;
 extern void gx8002_image_b_stage1_reset_10000100(void);
-extern void gx8002_image_b_stage2_reset_10003100(void);
+extern void gx8002_image_b_reset_10003100(void);
 
 extern uint32_t gx8002_image_b_stage1_flash_read_10000fdc(
     uint32_t source_offset, void *destination, uint32_t bytes);
@@ -31,8 +31,8 @@ int32_t gx8002_image_b_stage1_loader_10000d4c(void)
         (void)gx8002_image_b_stage1_flash_read_10000fdc(
             stage2_package + word + 4u,
             (void *)(uintptr_t)UINT32_C(0x10003000), UINT32_C(0x1408c));
-        *entry_word = (uint32_t)(uintptr_t)&gx8002_image_b_stage2_reset_10003100;
-        gx8002_image_b_stage2_reset_10003100();
+        *entry_word = (uint32_t)(uintptr_t)&gx8002_image_b_reset_10003100;
+        gx8002_image_b_reset_10003100();
     } else {
         /* Native code reads a word from package+0x323b0, then makes a
          * zero-byte reader call at that word+0x323b4 before reset. The

@@ -1,0 +1,36 @@
+{
+  "schema": 1,
+  "target": "GX8002 BINH B stage-1 flash reader at 0x10000fdc",
+  "stock_branch": "At 0x10000ff0..0x10000ff8 the reader compares cached JEDEC at 0x20001730 with 0x00ffffff; cmpne followed by bf enters initialization at 0x100010e2 when equal.",
+  "source_change": {
+    "reader": "g2/src/codec/image-b-stage1/backup_stage1_flash_reader.c",
+    "initial_cached_jedec": "0x00ffffff",
+    "previous_condition": "initialize when cached JEDEC differs from 0x00ffffff",
+    "corrected_condition": "initialize when cached JEDEC equals 0x00ffffff",
+    "host_branch_check": "build/g2-binh-a-stage1-20261110/b_jedec_branch.c",
+    "host_branch_check_passed": true
+  },
+  "linked_change": {
+    "stage1_bytes": 6764,
+    "old_stage1_sha256": "973c21bea4c70bdbe64a11b7f76666f856f16547595fe55f927efc273a878801",
+    "new_stage1_sha256": "ce82f314539d854b1895fe66047d232dd8137e626a4ed8c417dc72f1d4271d34",
+    "differing_stage1_bytes": 1,
+    "differing_stage1_offset": "0x0cad",
+    "old_binh_b_package_sha256": "6d5915789f8c996c1e74fbc1ea7300f858398cc4e58d8053fca0f2e071a3cea2",
+    "new_binh_b_package_sha256": "8cd3cb7ce492b974c2fa1e86903b367fbc6f94f1c9c8efd29b0cb678669e676e",
+    "package_bytes": 94352,
+    "stock_byte_identical": false
+  },
+  "full_g2_gate": {
+    "source_report": "build/g2-all-binh-a-reader-b-jedec-20261110/report.json",
+    "source_report_sha256": "cb6f61126d9fe4b6dab6890f50312c584f0610d23f72bba6dc3621a7aa59f2d9",
+    "built_units": 4870,
+    "failed_units": 0,
+    "duplicate_strong_symbols": 0,
+    "link_report": "build/g2-all-binh-a-reader-b-jedec-link-20261110/link-report.json",
+    "link_report_sha256": "59ed924a37690daba1ee554a5c666a6ebf79e99051642a128dcb6b93fa690b75",
+    "linked_payloads": 7,
+    "external_binary_archive_used": false
+  },
+  "qualification": "The branch polarity matches the locked disassembly and the host branch test. The source BINH B candidate still differs from stock and has not booted on physical hardware."
+}

@@ -1,0 +1,276 @@
+{
+  "observer": {
+    "unicorn_version": "2.1.4",
+    "reproducer": {
+      "global": [
+        {
+          "stock": true,
+          "error": 0,
+          "busy": 0
+        },
+        {
+          "stock": false,
+          "error": 0,
+          "busy": 1
+        }
+      ],
+      "bounded": [
+        {
+          "stock": true,
+          "error": 0,
+          "busy": 0
+        },
+        {
+          "stock": false,
+          "error": 0,
+          "busy": 0
+        }
+      ],
+      "none": [
+        {
+          "stock": true,
+          "error": 0,
+          "busy": 0
+        },
+        {
+          "stock": false,
+          "error": 0,
+          "busy": 0
+        }
+      ]
+    },
+    "bounded_and_memory_unhooked_state_checks": [
+      [
+        "bounded",
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        "bounded",
+        1,
+        0,
+        2,
+        1
+      ],
+      [
+        "bounded",
+        0,
+        1,
+        1,
+        0
+      ],
+      [
+        "bounded",
+        1,
+        1,
+        0,
+        1
+      ],
+      [
+        "bounded",
+        0,
+        2,
+        0,
+        0
+      ],
+      [
+        "bounded",
+        1,
+        2,
+        1,
+        1
+      ],
+      [
+        "bounded",
+        0,
+        3,
+        0,
+        0
+      ],
+      [
+        "bounded",
+        1,
+        3,
+        1,
+        1
+      ],
+      [
+        "none",
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        "none",
+        1,
+        0,
+        2,
+        1
+      ],
+      [
+        "none",
+        0,
+        1,
+        1,
+        0
+      ],
+      [
+        "none",
+        1,
+        1,
+        0,
+        1
+      ],
+      [
+        "none",
+        0,
+        2,
+        0,
+        0
+      ],
+      [
+        "none",
+        1,
+        2,
+        1,
+        1
+      ],
+      [
+        "none",
+        0,
+        3,
+        0,
+        0
+      ],
+      [
+        "none",
+        1,
+        3,
+        1,
+        1
+      ]
+    ],
+    "firmware_defect_claim": false,
+    "observation": "Global combined read/write hooks change execution of this C Thumb IT sequence; bounded hooks and no-memory-hook execution agree."
+  },
+  "regressions": {
+    "saadc": {
+      "original_results": "build/goal-r1-saadc-irq-c/results.json",
+      "bounded_results": "build/goal-r1-twim-irq-c/regressions/saadc/results.json",
+      "results_identical": true,
+      "validation": {
+        "paired_cases": 13056,
+        "independent_limit_pending_pairs": 256,
+        "base_pairs": 9600,
+        "callback_mutation_pairs": 3200,
+        "actual_pinned_SDK_C_IRQ": true,
+        "actual_native_and_C_MMIO": true,
+        "control_block_address": "0x2002c250",
+        "control_block_bytes": 48,
+        "native_callback_frame": 40,
+        "C_callback_frame": 48,
+        "ordered_MMIO_reads_and_writes": true,
+        "meaningful_callback_fields": true,
+        "limits": [
+          "MMIO emulated memory, not autonomous peripheral/DMA hardware.",
+          "Callback event pointers normalized to their respective frames; event padding and live provider registers excluded.",
+          "Valid bool states, channel counts and enabled-limit bits tested; arbitrary corrupt state, private aliases, exception return and concurrency unproven."
+        ]
+      },
+      "verifier_sha256": "26a1a293e4ebff7085328592c78da5f37dc9d02827219fc1d370692d67b0ba38"
+    },
+    "rtc2": {
+      "original_results": "build/goal-r1-rtc2-irq-c/results.json",
+      "bounded_results": "build/goal-r1-twim-irq-c/regressions/rtc2/results.json",
+      "results_identical": true,
+      "validation": {
+        "paired_sequences": 10752,
+        "IRQ_invocations_per_sequence": 2,
+        "paired_IRQ_invocations": 21504,
+        "base_sequences": 8192,
+        "mutation_sequences": 2560,
+        "native_stub_code_bytes": 10,
+        "native_common_code_bytes": 154,
+        "native_callback_frame": 32,
+        "C_callback_frame": 40,
+        "overflow_tail_frame": 0,
+        "handler_slot": "0x20007954",
+        "handler_slot_size": 4,
+        "actual_C_and_native_MMIO": true,
+        "ordered_MMIO_reads_writes": true,
+        "limitations": [
+          "Interrupt/event clear aliases modeled; peripheral clock/event generation and real exception return unproven.",
+          "Non-tail callback live registers and private frame differ; meaningful callback event and register snapshots compared.",
+          "Controlled handler placement does not establish final linker binding; arbitrary faults/aliases/concurrency excluded."
+        ]
+      },
+      "verifier_sha256": "99b0c4a3685ac8db9037f223a2aa3a8ef915938ce38620050cef2e9e74ce23d4"
+    },
+    "gpiote": {
+      "original_results": "build/goal-r1-gpiote-irq-c/results.json",
+      "bounded_results": "build/goal-r1-twim-irq-c/regressions/gpiote/results.json",
+      "results_identical": true,
+      "validation": {
+        "paired_sequences": 68797,
+        "IRQ_invocations_per_sequence": 2,
+        "paired_IRQ_invocations": 137594,
+        "groups": {
+          "all_channel_masks": 65536,
+          "strict_event_and_null_handlers": 144,
+          "PORT": 3072,
+          "mutations": 45
+        },
+        "native_callback_depths": [
+          32,
+          72
+        ],
+        "C_callback_depths": [
+          48
+        ],
+        "control_block_address": "0x2002c168",
+        "control_block_size": 128,
+        "actual_C_and_native_MMIO": true,
+        "ordered_MMIO_reads_writes": true,
+        "limits": [
+          "GPIO LATCH W1C modeled; pin levels, DETECT re-latching, real exceptions and electrical behavior unproven.",
+          "Valid pin/polarity/sense domains and bounded callback changes tested; arbitrary invalid assignments, faults, aliases and concurrency excluded.",
+          "Callback frame and live callee registers may differ; event pin/polarity, state and register transactions compared."
+        ]
+      },
+      "verifier_sha256": "76ebc50ff0892ae1dc4dea2052f30554a9c65ff3a1ad6cdf9328b8058af7fd55"
+    },
+    "spim2": {
+      "original_results": "build/goal-r1-spim2-irq-c/results.json",
+      "bounded_results": "build/goal-r1-twim-irq-c/regressions/spim2/results.json",
+      "results_identical": true,
+      "validation": {
+        "paired_sequences": 2880,
+        "IRQ_invocations_per_sequence": 2,
+        "paired_IRQ_invocations": 5760,
+        "native_MMIO_depths": [
+          24,
+          32
+        ],
+        "C_MMIO_depths": [
+          0,
+          12
+        ],
+        "callback_tail_depth": 0,
+        "control_address": "0x2002c280",
+        "control_bytes": 36,
+        "actual_native_and_C_MMIO": true,
+        "ordered_MMIO_reads_writes": true,
+        "callback_callee_registers_R4_R11": true,
+        "limits": [
+          "OUTSET/OUTCLR aliases modeled; real SPI/EasyDMA traffic, chip-select electrical timing and IRQ delivery unproven.",
+          "Nonzero END values, valid pins/unused sentinel and bool configurations tested; null handlers, corrupt states, arbitrary aliases/faults/concurrency excluded.",
+          "Callback tail forwarding uses ordinary LR; actual exception return unproven."
+        ]
+      },
+      "verifier_sha256": "03172d71eb478eebb638ef874b8949b181fcecd01201b2da4d6a176e7cbd9720"
+    }
+  }
+}

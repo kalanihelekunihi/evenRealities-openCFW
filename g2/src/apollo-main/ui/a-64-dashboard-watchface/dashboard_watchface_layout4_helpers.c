@@ -87,10 +87,10 @@ extern uint32_t audio_time_format_mode_46650c(void);              /* 1 = 12-hour
 extern VFP float roundf_577d08(float x);                          /* IAR roundf (half away from zero) */
 
 /* LVGL 9.3 (stock copies). */
-extern void audio_uart_page_44120e(void *obj, int32_t v, uint32_t sel); /* pad_top */
-extern void audio_uart_page_44121c(void *obj, int32_t v, uint32_t sel); /* pad_bottom */
-extern void audio_uart_page_44122a(void *obj, int32_t v, uint32_t sel); /* pad_left */
-extern void audio_uart_page_441238(void *obj, int32_t v, uint32_t sel); /* pad_right */
+extern void lv_obj_set_style_pad_top(void *obj, int32_t v, uint32_t sel); /* pad_top */
+extern void lv_obj_set_style_pad_bottom(void *obj, int32_t v, uint32_t sel); /* pad_bottom */
+extern void lv_obj_set_style_pad_left(void *obj, int32_t v, uint32_t sel); /* pad_left */
+extern void lv_obj_set_style_pad_right(void *obj, int32_t v, uint32_t sel); /* pad_right */
 
 static const char tag[] = "dashboard.wf.l4";                                         /* ROM 0x7859a0 */
 static const char src[] =
@@ -159,10 +159,10 @@ uint32_t layout4_cfg_valid_5bafc4(const g2_layout4_cfg_t *cfg);
 
 void lv_obj_set_style_pad_all_5bab2c(void *obj, uint32_t value, uint32_t selector)
 {
-    audio_uart_page_44122a(obj, (int32_t)value, selector);
-    audio_uart_page_441238(obj, (int32_t)value, selector);
-    audio_uart_page_44120e(obj, (int32_t)value, selector);
-    audio_uart_page_44121c(obj, (int32_t)value, selector);
+    lv_obj_set_style_pad_left(obj, (int32_t)value, selector);
+    lv_obj_set_style_pad_right(obj, (int32_t)value, selector);
+    lv_obj_set_style_pad_top(obj, (int32_t)value, selector);
+    lv_obj_set_style_pad_bottom(obj, (int32_t)value, selector);
 }
 
 uint8_t layout4_align_from_setting_5bab5e(uint8_t setting)

@@ -2,16 +2,230 @@
 #include <stddef.h>
 /* Owner-authorized reconstruction of authenticated native contracts, not QST source.
  * Only the observed 24-byte state prefix is owned; full object extent is gated.
- * Native instruction spelling preserves callback-visible frame and alias behavior. */
+ * Bus sequencing and register policies are expressed in C. */
 struct r1_qma_sensor_prefix { uint8_t address,id,pad[2]; uint32_t scale; uint8_t state,pad9; uint16_t signs[3],maps[3]; uint8_t tail[2]; };
 _Static_assert(sizeof(struct r1_qma_sensor_prefix)==24 && offsetof(struct r1_qma_sensor_prefix,scale)==4 && offsetof(struct r1_qma_sensor_prefix,signs)==10 && offsetof(struct r1_qma_sensor_prefix,maps)==16,"observed QMA state prefix");
 struct r1_qma_sensor_prefix r1_qma_sensor_state __attribute__((section(".r1.qma.sensor"),aligned(4)));
 const uint16_t r1_qma_axis_defaults[6] __attribute__((section(".r1.qma.axis"),aligned(2)))={1,1,1,0,1,2};
-__attribute__((naked)) uint32_t r1_qma_range(void) { __asm__ volatile("QC_87188:\nldr r1, =r1_qma_sensor_state\nQC_8718a:\ncmp r0, #0x2\nQC_8718c:\nbeq QC_871a8\nQC_8718e:\ncmp r0, #0x4\nQC_87190:\nbeq QC_871ae\nQC_87192:\ncmp r0, #0x8\nQC_87194:\nbeq QC_871b4\nQC_87196:\ncmp r0, #0xf\nQC_87198:\nbeq QC_871ba\nQC_8719a:\nmov.w r2, #0x1000\nQC_8719e:\nstr r2, [r1,#0x4]\nQC_871a0:\nmov r1, r0\nQC_871a2:\nmovs r0, #0xf\nQC_871a4:\nb.w r1_qma_write_retry\nQC_871a8:\nmov.w r2, #0x800\nQC_871ac:\nb QC_8719e\nQC_871ae:\nmov.w r2, #0x400\nQC_871b2:\nb QC_8719e\nQC_871b4:\nmov.w r2, #0x200\nQC_871b8:\nb QC_8719e\nQC_871ba:\nmov.w r2, #0x100\nQC_871be:\nb QC_8719e\n"); }
-__attribute__((naked)) uint32_t r1_qma_steps(void) { __asm__ volatile("QC_87250:\npush {r3,r4,r5,r6,r7,lr}\nQC_87252:\nmovs r6, #0x0\nQC_87254:\nmov r7, r0\nQC_87256:\nmov r5, r6\nQC_87258:\nmov r4, r6\nQC_8725a:\nstrb.w r6, [sp,#0x0]\nQC_8725e:\nmovs r1, #0x80\nQC_87260:\nmovs r0, #0x13\nQC_87262:\nbl r1_qma_write_retry\nQC_87266:\nmovs r0, #0x1\nQC_87268:\nbl r1_qma_delay_units\nQC_8726c:\nmovs r1, #0x7f\nQC_8726e:\nmovs r0, #0x13\nQC_87270:\nbl r1_qma_write_retry\nQC_87274:\ncmp r7, #0x0\nQC_87276:\nbeq QC_872da\nQC_87278:\nldr r7, =r1_qma_sensor_state\nQC_8727a:\nldrb r0, [r7,#0x1]\nQC_8727c:\ncmp r0, #0x90\nQC_8727e:\nbeq QC_87286\nQC_87280:\ncmp r0, #0xfa\nQC_87282:\nbeq QC_8728e\nQC_87284:\nb QC_87294\nQC_87286:\nmovs r6, #0x89\nQC_87288:\nmovs r5, #0xb\nQC_8728a:\nmovs r4, #0xc\nQC_8728c:\nb QC_87294\nQC_8728e:\nmovs r6, #0x89\nQC_87290:\nmovs r5, #0xb\nQC_87292:\nmovs r4, #0xe\nQC_87294:\nmov r1, r6\nQC_87296:\nmovs r0, #0x12\nQC_87298:\nbl r1_qma_write_retry\nQC_8729c:\nmov r1, r5\nQC_8729e:\nmovs r0, #0x14\nQC_872a0:\nbl r1_qma_write_retry\nQC_872a4:\nmov r1, r4\nQC_872a6:\nmovs r0, #0x15\nQC_872a8:\nbl r1_qma_write_retry\nQC_872ac:\nmovs r2, #0x1\nQC_872ae:\nmov r1, sp\nQC_872b0:\nmovs r0, #0x1e\nQC_872b2:\nbl r1_qma_read_retry\nQC_872b6:\nldrb.w r0, [sp,#0x0]\nQC_872ba:\nand r1, r0, #0x3f\nQC_872be:\nstrb.w r1, [sp,#0x0]\nQC_872c2:\nmovs r0, #0x1e\nQC_872c4:\nbl r1_qma_write_retry\nQC_872c8:\nldrb r0, [r7,#0x1]\nQC_872ca:\ncmp r0, #0x90\nQC_872cc:\nbeq QC_872dc\nQC_872ce:\ncmp r0, #0xfa\nQC_872d0:\nbne QC_872da\nQC_872d2:\nmovs r1, #0xaa\nQC_872d4:\nmovs r0, #0x1f\nQC_872d6:\nbl r1_qma_write_retry\nQC_872da:\npop {r3,r4,r5,r6,r7,pc}\nQC_872dc:\nmovs r1, #0xa9\nQC_872de:\nb QC_872d4\n"); }
-__attribute__((naked)) uint32_t r1_qma6100_configure_boundary(void) { __asm__ volatile("QC_86e68:\npush {r3,r4,r5,r6,r7,r8,r9,r10,r11,lr}\nQC_86e6c:\nmov r10, r0\nQC_86e6e:\nldr r0,=0x1312\nQC_86e70:\nmov.w r9, #0x0\nQC_86e74:\nnop\nQC_86e76:\nldr r4, =r1_qma_sensor_state\nQC_86e78:\nmov r5, r9\nQC_86e7a:\nmov r6, r9\nQC_86e7c:\nmov r8, sp\nQC_86e7e:\nmovs r7, #0x9\nQC_86e80:\nstr r0, [sp,#0x0]\nQC_86e82:\nstrb r6, [r4,#0x1]\nQC_86e84:\nldrb.w r0, [r8,r5]\nQC_86e88:\nstrb r0, [r4,#0x0]\nQC_86e8a:\nbl r1_qma6100_chip_id\nQC_86e8e:\nstrb r0, [r4,#0x1]\nQC_86e90:\ncmp r0, #0xfa\nQC_86e92:\nbeq QC_86eaa\nQC_86e94:\ncmp.w r7, r0, lsr #0x4\nQC_86e98:\nbeq QC_86ea2\nQC_86e9a:\nadds r5, r5, #0x1\nQC_86e9c:\nuxtb r5, r5\nQC_86e9e:\ncmp r5, #0x2\nQC_86ea0:\nbcc QC_86e82\nQC_86ea2:\nuxtb r0, r0\nQC_86ea4:\ncmp.w r7, r0, lsr #0x4\nQC_86ea8:\nbne QC_86eb4\nQC_86eaa:\nand r0, r10, #0xff\nQC_86eae:\nbl r1_qma_setup\nQC_86eb2:\nmov r9, r0\nQC_86eb4:\nldr r0, =r1_qma_axis_defaults\nQC_86eb6:\nstrb r6, [r4,#0x8]\nQC_86eb8:\nldrh r1, [r0,#0x6]\nQC_86eba:\nstrh r1, [r4,#0x10]\nQC_86ebc:\nldrh r1, [r0,#0x8]\nQC_86ebe:\nstrh r1, [r4,#0x12]\nQC_86ec0:\nldrh r1, [r0,#0xa]\nQC_86ec2:\nstrh r1, [r4,#0x14]\nQC_86ec4:\nldrh r1, [r0,#0x0]\nQC_86ec6:\nstrh r1, [r4,#0xa]\nQC_86ec8:\nldrh r1, [r0,#0x2]\nQC_86eca:\nstrh r1, [r4,#0xc]\nQC_86ecc:\nldrh r0, [r0,#0x4]\nQC_86ece:\nstrh r0, [r4,#0xe]\nQC_86ed0:\nmov r0, r9\nQC_86ed2:\npop.w {r3,r4,r5,r6,r7,r8,r9,r10,r11,pc}\n"); }
-__attribute__((naked)) uint32_t r1_qma_setup(void) { __asm__ volatile("QC_86ee4:\npush {r4,lr}\nQC_86ee6:\nmov r4, r0\nQC_86ee8:\nbl r1_qma_reset\nQC_86eec:\nmovs r1, #0x20\nQC_86eee:\nmovs r0, #0x4a\nQC_86ef0:\nbl r1_qma_write_retry\nQC_86ef4:\nmovs r1, #0x51\nQC_86ef6:\nmovs r0, #0x50\nQC_86ef8:\nbl r1_qma_write_retry\nQC_86efc:\nmovs r1, #0x1\nQC_86efe:\nmovs r0, #0x56\nQC_86f00:\nbl r1_qma_write_retry\nQC_86f04:\nmovs r0, #0x4\nQC_86f06:\nbl r1_qma_range\nQC_86f0a:\ncmp r4, #0x64\nQC_86f0c:\nbeq QC_86f96\nQC_86f0e:\nbgt QC_86f1a\nQC_86f10:\ncmp r4, #0x19\nQC_86f12:\nbeq QC_86f24\nQC_86f14:\ncmp r4, #0x32\nQC_86f16:\nbne QC_86f40\nQC_86f18:\nb QC_86f30\nQC_86f1a:\ncmp r4, #0x96\nQC_86f1c:\nbeq QC_86f9a\nQC_86f1e:\ncmp r4, #0xc8\nQC_86f20:\nbne QC_86f40\nQC_86f22:\nb QC_86f9a\nQC_86f24:\nmovs r1, #0x0\nQC_86f26:\nmovs r0, #0x10\nQC_86f28:\nbl r1_qma_write_retry\nQC_86f2c:\nmovs r1, #0x86\nQC_86f2e:\nb QC_86f3a\nQC_86f30:\nmovs r1, #0x6\nQC_86f32:\nmovs r0, #0x10\nQC_86f34:\nbl r1_qma_write_retry\nQC_86f38:\nmovs r1, #0x84\nQC_86f3a:\nmovs r0, #0x11\nQC_86f3c:\nbl r1_qma_write_retry\nQC_86f40:\nmovs r1, #0x87\nQC_86f42:\nmovs r0, #0x3e\nQC_86f44:\nbl r1_qma_write_retry\nQC_86f48:\nmovs r1, #0x28\nQC_86f4a:\nmovs r0, #0x4a\nQC_86f4c:\nbl r1_qma_write_retry\nQC_86f50:\nmovs r1, #0x5\nQC_86f52:\nmovs r0, #0x20\nQC_86f54:\nbl r1_qma_write_retry\nQC_86f58:\nmovs r0, #0x5\nQC_86f5a:\nbl r1_qma_delay_units\nQC_86f5e:\nmovs r1, #0x80\nQC_86f60:\nmovs r0, #0x5f\nQC_86f62:\nbl r1_qma_write_retry\nQC_86f66:\nmovs r0, #0x5\nQC_86f68:\nbl r1_qma_delay_units\nQC_86f6c:\nmovs r1, #0x0\nQC_86f6e:\nmovs r0, #0x5f\nQC_86f70:\nbl r1_qma_write_retry\nQC_86f74:\nmovs r0, #0x5\nQC_86f76:\nbl r1_qma_delay_units\nQC_86f7a:\nmovs r0, #0x1\nQC_86f7c:\nbl r1_qma_steps\nQC_86f80:\nmovs r1, #0x1\nQC_86f82:\nmovs r0, #0x0\nQC_86f84:\nbl r1_qma_any_motion\nQC_86f88:\nmovs r2, #0x1\nQC_86f8a:\nmovs r1, #0x0\nQC_86f8c:\nmovs r0, #0x31\nQC_86f8e:\nbl r1_qma_tap\nQC_86f92:\nmovs r0, #0x1\nQC_86f94:\npop {r4,pc}\nQC_86f96:\nmovs r1, #0x1\nQC_86f98:\nb QC_86f9c\nQC_86f9a:\nmovs r1, #0x2\nQC_86f9c:\nmovs r0, #0x10\nQC_86f9e:\nbl r1_qma_write_retry\nQC_86fa2:\nmovs r1, #0x85\nQC_86fa4:\nb QC_86f3a\n"); }
-__attribute__((naked)) uint32_t r1_qma_any_motion(void) { __asm__ volatile("QC_86d40:\npush {r0,r1,r2,r3,r4,r5,r6,lr}\nQC_86d42:\nmovs r2, #0x0\nQC_86d44:\nmov r5, r1\nQC_86d46:\nmov r4, r0\nQC_86d48:\nstrb.w r2, [sp,#0x0]\nQC_86d4c:\nstrb.w r2, [sp,#0x4]\nQC_86d50:\nstrb.w r2, [sp,#0x8]\nQC_86d54:\nstrb.w r2, [sp,#0xc]\nQC_86d58:\nmovs r2, #0x1\nQC_86d5a:\nmov r1, sp\nQC_86d5c:\nmovs r0, #0x18\nQC_86d5e:\nbl r1_qma_read_retry\nQC_86d62:\nmovs r2, #0x1\nQC_86d64:\nadd r1, sp,#0x4\nQC_86d66:\nmovs r0, #0x1a\nQC_86d68:\nbl r1_qma_read_retry\nQC_86d6c:\nmovs r2, #0x1\nQC_86d6e:\nadd r1, sp,#0x8\nQC_86d70:\nmovs r0, #0x1c\nQC_86d72:\nbl r1_qma_read_retry\nQC_86d76:\nmovs r2, #0x1\nQC_86d78:\nadd r1, sp,#0xc\nQC_86d7a:\nmovs r0, #0x2c\nQC_86d7c:\nbl r1_qma_read_retry\nQC_86d80:\nldrb.w r0, [sp,#0xc]\nQC_86d84:\norr r1, r0, #0x1\nQC_86d88:\nstrb.w r1, [sp,#0xc]\nQC_86d8c:\nmovs r0, #0x2c\nQC_86d8e:\nbl r1_qma_write_retry\nQC_86d92:\nldr r0, =r1_qma_sensor_state\nQC_86d94:\nldrb r0, [r0,#0x1]\nQC_86d96:\ncmp r0, #0x90\nQC_86d98:\nbeq QC_86d9e\nQC_86d9a:\ncmp r0, #0xfa\nQC_86d9c:\nbne QC_86da6\nQC_86d9e:\nmovs r1, #0x10\nQC_86da0:\nmovs r0, #0x2e\nQC_86da2:\nbl r1_qma_write_retry\nQC_86da6:\nmovs r1, #0x0\nQC_86da8:\nmovs r0, #0x2f\nQC_86daa:\nbl r1_qma_write_retry\nQC_86dae:\nmovs r1, #0xff\nQC_86db0:\nmovs r0, #0x30\nQC_86db2:\nbl r1_qma_write_retry\nQC_86db6:\nldrb.w r0, [sp,#0x0]\nQC_86dba:\ncbz r5, QC_86dfc\nQC_86dbc:\norr r1, r0, #0x7\nQC_86dc0:\nldrb.w r0, [sp,#0x4]\nQC_86dc4:\nstrb.w r1, [sp,#0x0]\nQC_86dc8:\norr r0, r0, #0x1\nQC_86dcc:\nstrb.w r0, [sp,#0x4]\nQC_86dd0:\nldrb.w r0, [sp,#0x8]\nQC_86dd4:\norr r0, r0, #0x1\nQC_86dd8:\nstrb.w r0, [sp,#0x8]\nQC_86ddc:\nmovs r0, #0x18\nQC_86dde:\nbl r1_qma_write_retry\nQC_86de2:\ncbz r4, QC_86df0\nQC_86de4:\ncmp r4, #0x1\nQC_86de6:\nbne QC_86dfa\nQC_86de8:\nldrb.w r1, [sp,#0x8]\nQC_86dec:\nmovs r0, #0x1c\nQC_86dee:\nb QC_86df6\nQC_86df0:\nldrb.w r1, [sp,#0x4]\nQC_86df4:\nmovs r0, #0x1a\nQC_86df6:\nbl r1_qma_write_retry\nQC_86dfa:\npop {r0,r1,r2,r3,r4,r5,r6,pc}\nQC_86dfc:\nbic r1, r0, #0x7\nQC_86e00:\nldrb.w r0, [sp,#0x4]\nQC_86e04:\nstrb.w r1, [sp,#0x0]\nQC_86e08:\nbic r0, r0, #0x1\nQC_86e0c:\nstrb.w r0, [sp,#0x4]\nQC_86e10:\nldrb.w r0, [sp,#0x8]\nQC_86e14:\nbic r0, r0, #0x1\nQC_86e18:\nstrb.w r0, [sp,#0x8]\nQC_86e1c:\nmovs r0, #0x18\nQC_86e1e:\nbl r1_qma_write_retry\nQC_86e22:\nldrb.w r1, [sp,#0x4]\nQC_86e26:\nmovs r0, #0x1a\nQC_86e28:\nbl r1_qma_write_retry\nQC_86e2c:\nb QC_86de8\n"); }
-__attribute__((naked)) uint32_t r1_qma_reset(void) { __asm__ volatile("QC_871c4:\npush {r2,r3,r4,lr}\nQC_871c6:\nmovs r0, #0x0\nQC_871c8:\nstrb.w r0, [sp,#0x0]\nQC_871cc:\nstrb.w r0, [sp,#0x4]\nQC_871d0:\nmov r4, r0\nQC_871d2:\nmovs r1, #0xb6\nQC_871d4:\nmovs r0, #0x36\nQC_871d6:\nbl r1_qma_write_retry\nQC_871da:\nmovs r0, #0x5\nQC_871dc:\nbl r1_qma_delay_units\nQC_871e0:\nmovs r1, #0x0\nQC_871e2:\nmovs r0, #0x36\nQC_871e4:\nbl r1_qma_write_retry\nQC_871e8:\nmovs r0, #0x64\nQC_871ea:\nbl r1_qma_delay_units\nQC_871ee:\nb QC_87210\nQC_871f0:\nmovs r1, #0x80\nQC_871f2:\nmovs r0, #0x11\nQC_871f4:\nbl r1_qma_write_retry\nQC_871f8:\nmovs r0, #0x2\nQC_871fa:\nbl r1_qma_delay_units\nQC_871fe:\nmovs r2, #0x1\nQC_87200:\nmov r1, sp\nQC_87202:\nmovs r0, #0x11\nQC_87204:\nbl r1_qma_read_retry\nQC_87208:\nmov r0, r4\nQC_8720a:\nadds r4, r4, #0x1\nQC_8720c:\ncmp r0, #0x64\nQC_8720e:\nbhi QC_87218\nQC_87210:\nldrb.w r0, [sp,#0x0]\nQC_87214:\ncmp r0, #0x80\nQC_87216:\nbne QC_871f0\nQC_87218:\nmovs r1, #0x8\nQC_8721a:\nmovs r0, #0x33\nQC_8721c:\nbl r1_qma_write_retry\nQC_87220:\nmovs r0, #0x5\nQC_87222:\nbl r1_qma_delay_units\nQC_87226:\nmovs r4, #0x0\nQC_87228:\nb QC_87242\nQC_8722a:\nmovs r2, #0x1\nQC_8722c:\nadd r1, sp,#0x4\nQC_8722e:\nmovs r0, #0x33\nQC_87230:\nbl r1_qma_read_retry\nQC_87234:\nmovs r0, #0xa\nQC_87236:\nbl r1_qma_delay_units\nQC_8723a:\nmov r0, r4\nQC_8723c:\nadds r4, r4, #0x1\nQC_8723e:\ncmp r0, #0x64\nQC_87240:\nbhi QC_8724a\nQC_87242:\nldrb.w r0, [sp,#0x4]\nQC_87246:\ncmp r0, #0x5\nQC_87248:\nbne QC_8722a\nQC_8724a:\nmovs r0, #0x0\nQC_8724c:\npop {r2,r3,r4,pc}\n"); }
-__attribute__((naked)) uint32_t r1_qma_tap(void) { __asm__ volatile("QC_872e4:\npush {r4,r5,r6,r7,lr}\nQC_872e6:\nsub sp, #0x14\nQC_872e8:\nmov r7, r2\nQC_872ea:\nmov r6, r1\nQC_872ec:\nmov r5, r0\nQC_872ee:\nuxtb r4, r0\nQC_872f0:\nmovs r2, #0x1\nQC_872f2:\nmov r1, sp\nQC_872f4:\nmovs r0, #0x16\nQC_872f6:\nbl r1_qma_read_retry\nQC_872fa:\nmovs r2, #0x1\nQC_872fc:\nadd r1, sp,#0x4\nQC_872fe:\nmovs r0, #0x19\nQC_87300:\nbl r1_qma_read_retry\nQC_87304:\nmovs r2, #0x1\nQC_87306:\nadd r1, sp,#0x8\nQC_87308:\nmovs r0, #0x1a\nQC_8730a:\nbl r1_qma_read_retry\nQC_8730e:\nmovs r2, #0x1\nQC_87310:\nadd r1, sp,#0xc\nQC_87312:\nmovs r0, #0x1b\nQC_87314:\nbl r1_qma_read_retry\nQC_87318:\nmovs r2, #0x1\nQC_8731a:\nadd r1, sp,#0x10\nQC_8731c:\nmovs r0, #0x1c\nQC_8731e:\nbl r1_qma_read_retry\nQC_87322:\nmovs r1, #0x3\nQC_87324:\nmovs r0, #0x1e\nQC_87326:\nbl r1_qma_write_retry\nQC_8732a:\nmovs r1, #0x86\nQC_8732c:\nmovs r0, #0x2a\nQC_8732e:\nbl r1_qma_write_retry\nQC_87332:\nmovs r1, #0x85\nQC_87334:\nmovs r0, #0x2b\nQC_87336:\nbl r1_qma_write_retry\nQC_8733a:\nldrb.w r1, [sp,#0x0]\nQC_8733e:\ncbz r7, QC_87398\nQC_87340:\norrs r1, r4\nQC_87342:\nstrb.w r1, [sp,#0x0]\nQC_87346:\nmovs r0, #0x16\nQC_87348:\nbl r1_qma_write_retry\nQC_8734c:\ncbz r6, QC_87370\nQC_8734e:\ncmp r6, #0x1\nQC_87350:\nbne QC_87394\nQC_87352:\nlsls r0, r5, #0x1f\nQC_87354:\nbeq QC_87368\nQC_87356:\nldrb.w r0, [sp,#0x10]\nQC_8735a:\norr r1, r0, #0x2\nQC_8735e:\nstrb.w r1, [sp,#0x10]\nQC_87362:\nmovs r0, #0x1c\nQC_87364:\nbl r1_qma_write_retry\nQC_87368:\nldrb.w r1, [sp,#0xc]\nQC_8736c:\norrs r1, r4\nQC_8736e:\nb QC_873c6\nQC_87370:\nlsls r0, r5, #0x1f\nQC_87372:\nbeq QC_87386\nQC_87374:\nldrb.w r0, [sp,#0x8]\nQC_87378:\norr r1, r0, #0x2\nQC_8737c:\nstrb.w r1, [sp,#0x8]\nQC_87380:\nmovs r0, #0x1a\nQC_87382:\nbl r1_qma_write_retry\nQC_87386:\nldrb.w r1, [sp,#0x4]\nQC_8738a:\norrs r1, r4\nQC_8738c:\nb QC_873ea\nQC_87390:\nbl r1_qma_write_retry\nQC_87394:\nadd sp, #0x14\nQC_87396:\npop {r4,r5,r6,r7,pc}\nQC_87398:\nbics r1, r4\nQC_8739a:\nstrb.w r1, [sp,#0x0]\nQC_8739e:\nmovs r0, #0x16\nQC_873a0:\nbl r1_qma_write_retry\nQC_873a4:\ncbz r6, QC_873ce\nQC_873a6:\ncmp r6, #0x1\nQC_873a8:\nbne QC_87394\nQC_873aa:\nlsls r0, r5, #0x1f\nQC_873ac:\nbeq QC_873c0\nQC_873ae:\nldrb.w r0, [sp,#0x10]\nQC_873b2:\nbic r1, r0, #0x2\nQC_873b6:\nstrb.w r1, [sp,#0x10]\nQC_873ba:\nmovs r0, #0x1c\nQC_873bc:\nbl r1_qma_write_retry\nQC_873c0:\nldrb.w r1, [sp,#0xc]\nQC_873c4:\nbics r1, r4\nQC_873c6:\nstrb.w r1, [sp,#0xc]\nQC_873ca:\nmovs r0, #0x1b\nQC_873cc:\nb QC_87390\nQC_873ce:\nlsls r0, r5, #0x1f\nQC_873d0:\nbeq QC_873e4\nQC_873d2:\nldrb.w r0, [sp,#0x8]\nQC_873d6:\nbic r1, r0, #0x2\nQC_873da:\nstrb.w r1, [sp,#0x8]\nQC_873de:\nmovs r0, #0x1a\nQC_873e0:\nbl r1_qma_write_retry\nQC_873e4:\nldrb.w r1, [sp,#0x4]\nQC_873e8:\nbics r1, r4\nQC_873ea:\nstrb.w r1, [sp,#0x4]\nQC_873ee:\nmovs r0, #0x19\nQC_873f0:\nb QC_87390\n"); }
+extern uint32_t r1_qma_write_retry(uint32_t, uint32_t);
+extern uint32_t r1_qma_read_retry(uint32_t, uint8_t *, uint32_t);
+extern uint32_t r1_qma_delay_units(uint32_t);
+extern uint32_t r1_qma6100_chip_id(void);
+uint32_t r1_qma_setup(uint32_t rate);
+uint32_t r1_qma_range(uint32_t range)
+{
+ uint32_t scale = range == 2 ? 2048 : range == 4 ? 1024 :
+                  range == 8 ? 512 : range == 15 ? 256 : 4096;
+ ((volatile struct r1_qma_sensor_prefix *)&r1_qma_sensor_state)->scale = scale;
+ return r1_qma_write_retry(0x0f, range);
+}
+uint32_t r1_qma_steps(uint32_t enabled)
+{
+ uint8_t value = 0;
+ (void)r1_qma_write_retry(0x13, 0x80);
+ (void)r1_qma_delay_units(1);
+ uint32_t status = r1_qma_write_retry(0x13, 0x7f);
+ if (enabled == 0)
+  return status;
+ const volatile struct r1_qma_sensor_prefix *live = &r1_qma_sensor_state;
+ uint8_t id = live->id;
+ uint32_t a = 0, b = 0, c = 0;
+ if (id == 0x90 || id == 0xfa) {
+  a = 0x89;
+  b = 0x0b;
+  c = id == 0x90 ? 0x0c : 0x0e;
+ }
+ (void)r1_qma_write_retry(0x12, a);
+ (void)r1_qma_write_retry(0x14, b);
+ (void)r1_qma_write_retry(0x15, c);
+ (void)r1_qma_read_retry(0x1e, &value, 1);
+ value &= 0x3f;
+ (void)r1_qma_write_retry(0x1e, value);
+ id = live->id;
+ if (id == 0x90)
+  return r1_qma_write_retry(0x1f, 0xa9);
+ if (id == 0xfa)
+  return r1_qma_write_retry(0x1f, 0xaa);
+ return id;
+}
 
+uint32_t r1_qma6100_configure_boundary(uint32_t rate)
+{
+ volatile struct r1_qma_sensor_prefix *live = &r1_qma_sensor_state;
+ uint32_t id = 0;
+ for (uint32_t attempt = 0; attempt < 2; ++attempt) {
+  live->id = 0;
+  live->address = (uint8_t)(0x12u + attempt);
+  id = r1_qma6100_chip_id();
+  live->id = (uint8_t)id;
+  if (id == 0xfa || (id >> 4) == 9)
+   break;
+ }
+ uint32_t status = 0;
+ if (id == 0xfa || ((uint8_t)id >> 4) == 9)
+  status = r1_qma_setup((uint8_t)rate);
+ const volatile uint16_t *defaults = r1_qma_axis_defaults;
+ live->state = 0;
+ live->maps[0] = defaults[3];
+ live->maps[1] = defaults[4];
+ live->maps[2] = defaults[5];
+ live->signs[0] = defaults[0];
+ live->signs[1] = defaults[1];
+ live->signs[2] = defaults[2];
+ return status;
+}
+uint32_t r1_qma_reset(void);
+uint64_t r1_qma_any_motion(uint32_t, uint32_t);
+uint32_t r1_qma_tap(uint32_t, uint32_t, uint32_t);
+uint32_t r1_qma_setup(uint32_t rate)
+{
+ (void)r1_qma_reset();
+ (void)r1_qma_write_retry(0x4a, 0x20);
+ (void)r1_qma_write_retry(0x50, 0x51);
+ (void)r1_qma_write_retry(0x56, 1);
+ (void)r1_qma_range(4);
+ switch (rate) {
+ case 25:
+  (void)r1_qma_write_retry(0x10, 0);
+  (void)r1_qma_write_retry(0x11, 0x86);
+  break;
+ case 50:
+  (void)r1_qma_write_retry(0x10, 6);
+  (void)r1_qma_write_retry(0x11, 0x84);
+  break;
+ case 100:
+  (void)r1_qma_write_retry(0x10, 1);
+  (void)r1_qma_write_retry(0x11, 0x85);
+  break;
+ case 150:
+ case 200:
+  (void)r1_qma_write_retry(0x10, 2);
+  (void)r1_qma_write_retry(0x11, 0x85);
+  break;
+ default:
+  break;
+ }
+ (void)r1_qma_write_retry(0x3e, 0x87);
+ (void)r1_qma_write_retry(0x4a, 0x28);
+ (void)r1_qma_write_retry(0x20, 5);
+ (void)r1_qma_delay_units(5);
+ (void)r1_qma_write_retry(0x5f, 0x80);
+ (void)r1_qma_delay_units(5);
+ (void)r1_qma_write_retry(0x5f, 0);
+ (void)r1_qma_delay_units(5);
+ (void)r1_qma_steps(1);
+ (void)r1_qma_any_motion(0, 1);
+ (void)r1_qma_tap(0x31, 0, 1);
+ return 1;
+}
+uint64_t r1_qma_any_motion(uint32_t axis, uint32_t enabled)
+{
+ /* Native POP restores both parameter words; each low byte is scratch. */
+ uint32_t axis_word = axis & UINT32_C(0xffffff00);
+ uint32_t enabled_word = enabled & UINT32_C(0xffffff00);
+ uint8_t b = 0, wake = 0;
+ volatile uint8_t *control = (volatile uint8_t *)&axis_word;
+ volatile uint8_t *live_a = (volatile uint8_t *)&enabled_word;
+ volatile uint8_t *live_b = &b, *live_wake = &wake;
+ (void)r1_qma_read_retry(0x18, (uint8_t *)&axis_word, 1);
+ (void)r1_qma_read_retry(0x1a, (uint8_t *)&enabled_word, 1);
+ (void)r1_qma_read_retry(0x1c, &b, 1);
+ (void)r1_qma_read_retry(0x2c, &wake, 1);
+ uint32_t value = *live_wake | 1u;
+ *live_wake = (uint8_t)value;
+ (void)r1_qma_write_retry(0x2c, value);
+ uint8_t id = ((const volatile struct r1_qma_sensor_prefix *)&r1_qma_sensor_state)->id;
+ if (id == 0x90 || id == 0xfa)
+  (void)r1_qma_write_retry(0x2e, 0x10);
+ (void)r1_qma_write_retry(0x2f, 0);
+ (void)r1_qma_write_retry(0x30, 0xff);
+ uint32_t bits = *control;
+ uint32_t route = *live_a;
+ if (enabled != 0) {
+  bits |= 7u;
+  *control = (uint8_t)bits;
+  *live_a = (uint8_t)(route | 1u);
+  *live_b = (uint8_t)(*live_b | 1u);
+  (void)r1_qma_write_retry(0x18, bits);
+  if (axis == 0)
+   (void)r1_qma_write_retry(0x1a, *live_a);
+  else if (axis == 1)
+   (void)r1_qma_write_retry(0x1c, *live_b);
+ } else {
+  bits &= ~UINT32_C(7);
+  *control = (uint8_t)bits;
+  *live_a = (uint8_t)(route & ~UINT32_C(1));
+  *live_b = (uint8_t)(*live_b & ~UINT32_C(1));
+  (void)r1_qma_write_retry(0x18, bits);
+  (void)r1_qma_write_retry(0x1a, *live_a);
+  (void)r1_qma_write_retry(0x1c, *live_b);
+ }
+ uint64_t low = *(const volatile uint32_t *)&axis_word;
+ uint64_t high = *(const volatile uint32_t *)&enabled_word;
+ return low | (high << 32);
+}
+
+uint32_t r1_qma_reset(void)
+{
+ uint8_t power = 0;
+ uint8_t ready = 0;
+ const volatile uint8_t *live_power = &power;
+ const volatile uint8_t *live_ready = &ready;
+ (void)r1_qma_write_retry(0x36, 0xb6);
+ (void)r1_qma_delay_units(5);
+ (void)r1_qma_write_retry(0x36, 0);
+ (void)r1_qma_delay_units(100);
+ uint32_t attempt = 0;
+ while (*live_power != 0x80) {
+  (void)r1_qma_write_retry(0x11, 0x80);
+  (void)r1_qma_delay_units(2);
+  (void)r1_qma_read_retry(0x11, &power, 1);
+  uint32_t before = attempt++;
+  if (before > 100)
+   break;
+ }
+ (void)r1_qma_write_retry(0x33, 8);
+ (void)r1_qma_delay_units(5);
+ attempt = 0;
+ while (*live_ready != 5) {
+  (void)r1_qma_read_retry(0x33, &ready, 1);
+  (void)r1_qma_delay_units(10);
+  uint32_t before = attempt++;
+  if (before > 100)
+   break;
+ }
+ return 0;
+}
+
+/* Unwritten register bytes start at zero instead of private stack history. */
+uint32_t r1_qma_tap(uint32_t axes,uint32_t route,uint32_t enabled)
+{
+ volatile uint8_t scratch[20]={0};
+ uint32_t mask = (uint8_t)axes;
+ (void)r1_qma_read_retry(0x16, (uint8_t *)(uintptr_t)scratch, 1);
+ (void)r1_qma_read_retry(0x19, (uint8_t *)(uintptr_t)(scratch+4), 1);
+ (void)r1_qma_read_retry(0x1a, (uint8_t *)(uintptr_t)(scratch+8), 1);
+ (void)r1_qma_read_retry(0x1b, (uint8_t *)(uintptr_t)(scratch+12), 1);
+ (void)r1_qma_read_retry(0x1c, (uint8_t *)(uintptr_t)(scratch+16), 1);
+ (void)r1_qma_write_retry(0x1e, 3);
+ (void)r1_qma_write_retry(0x2a, 0x86);
+ (void)r1_qma_write_retry(0x2b, 0x85);
+ uint32_t value = scratch[0];
+ value = enabled != 0 ? value | mask : value & ~mask;
+ scratch[0] = (uint8_t)value;
+ uint32_t status = r1_qma_write_retry(0x16, value);
+ if (route != 0 && route != 1)
+  return status;
+ if ((axes & 1u) != 0) {
+  uint32_t offset = route == 0 ? 8 : 16;
+  value = scratch[offset];
+  value = enabled != 0 ? value | 2u : value & ~UINT32_C(2);
+  scratch[offset] = (uint8_t)value;
+  (void)r1_qma_write_retry(route == 0 ? 0x1a : 0x1c, value);
+ }
+ uint32_t offset = route == 0 ? 4 : 12;
+ value = scratch[offset];
+ value = enabled != 0 ? value | mask : value & ~mask;
+ scratch[offset] = (uint8_t)value;
+ return r1_qma_write_retry(route == 0 ? 0x19 : 0x1b, value);
+}

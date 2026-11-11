@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "normal_report": "build/sources-goal-r1-touch-request-pure-c/report.json",
+  "requests": {
+    "paired_sequences": 6912,
+    "invocations_per_sequence": 3,
+    "paired_invocations": 20736,
+    "private_frame_identity_required": false,
+    "actual_existing_bus_owner_linked": true,
+    "native_scatter_initialized_request_bytes_match": true,
+    "ordered_request_writes": true,
+    "caller_R4_R11_preserved": true,
+    "provider_R4_R11_match": true,
+    "provider_frame": 8,
+    "retained_fields_null_clears_and_raw_statuses": true,
+    "limitations": [
+      "Registry dispatcher boundary modeled; actual I2C traffic, faults, arbitrary aliases and concurrency unproven.",
+      "Caller-clobbered registers/flags except R0 excluded."
+    ]
+  },
+  "identity": {
+    "ready_reader_pairs": 928,
+    "full_probe_pairs": 2592,
+    "actual_C_ready_and_request_chain": true,
+    "counter_100_to_minus1_and_100_poll_limit": true,
+    "late_ID_buffer_mutations_and_full_R3_restore": true,
+    "native_body_size_corrected": {
+      "prior_frontier": 124,
+      "complete_through_pop": 126
+    },
+    "frames": {
+      "ready_native": 8,
+      "ready_C": 16,
+      "probe_native": 16,
+      "probe_C": 24
+    },
+    "limitations": [
+      "Private buffer locations normalized and frame depths differ; initial stack write order not compared.",
+      "GPIO/power/delay and final registry providers modeled; electrical/timing/arbitrary alias/fault/concurrency behavior unproven.",
+      "Caller-clobbered registers/flags except R0 and restored R3 excluded."
+    ]
+  },
+  "audit": {
+    "changed": [
+      "r1/src/application/board/native_touch_transport.c"
+    ],
+    "ready_reader_code_unchanged": true,
+    "request_initializer_unchanged": true,
+    "unchanged_other_unique_source_entries": 698,
+    "unchanged_other_objects": 719,
+    "changed_payload_sources": [
+      [
+        "r1-application",
+        "r1/src/application/board/native_touch_transport.c"
+      ]
+    ]
+  },
+  "read_write_assembly_constraints_removed": true,
+  "ready_R3_assembly_adapter_retained": true,
+  "hardware_tested": false,
+  "sha256": {
+    "build/sources-goal-r1-touch-request-pure-c/report.json": "932f84e9ec1d6296889714b25d55fb1926b8474e97b270b112affa8a3d92c4a9",
+    "r1/src/application/board/native_touch_transport.c": "968c987d0dd6b39ff90cbd48cfcb130ac4072e8a7565f73d6be8bdc1c61e4d60",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-touch-request-pure-c/r1/r1-application/r1__src__application__board__native_touch_transport.c.o": "732e99b8a644c85518e24c71034fd23a97013ac6821c8cb39e381fffb16b8ac1",
+    "r1/src/sources.json": "b65461bbf09b0f4a25b7f8806a713bfec93128175a8e084e5447fbeef6b3b1b2",
+    "tools/build/source-plan.json": "43281e3850f6c7b83c5616e5968c4939993501810057ca3deaeea85eaae351ba",
+    "build/goal-r1-touch-request-pure-c/verify.py": "761c75ef039d238d9ebbe48c7a6b54b8818e9a60bc91b3e2f78a85962ea105f3",
+    "build/goal-r1-touch-request-pure-c/identity.py": "7905e1a2c39e493c2b069df6a8485273fb3fa00b40840d21847db6f90d00e88b",
+    "build/goal-r1-touch-request-pure-c/scatter-results.json": "d2b9ff8db5b53334833690637dcf9a134a3e4c8041ddd662724a030dcd118677",
+    "build/goal-r1-touch-request-pure-c/audit.json": "695eb212bc1a788d4b5085e3bdc63fb1a21dc91bef271da56baf8f22f5a4b9d7",
+    "build/goal-r1-touch-request-pure-c/rea-read.json": "325d1bb501e80f4a5a1ffc0ba516e7547c7a869b8062eee3cf8cb81508f1b2e3",
+    "build/goal-r1-touch-request-pure-c/rea-write.json": "c986644ac3fb0bd41168402422ee01ed9e733c27d811ad933ef19b61225f6eaf",
+    "build/goal-r1-touch-request-pure-c/rea-lifecycle-next.json": "9160d812bc02b3ed88c2260315c6e833d9a442d8b08389daf50fe5b84bd42621",
+    "build/goal-r1-touch-request-pure-c/sources-check.log": "68bd5b24495ea6e77f19cd8135f9ec26986881653ba17c60e5f1c724ba415fa7"
+  }
+}

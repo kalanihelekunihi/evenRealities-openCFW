@@ -1,136 +1,61 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_callback_319890\n"
-".type opencfw_em9305_callback_319890,@function\n"
-"opencfw_em9305_callback_319890:\n"
-"L319890:\n"
-"enter_s [r13-r15,blink]\n"
-"L319892:\n"
-"ldb r2,[0x805a94]\n"
-"L31989a:\n"
-"mov_s r13,r0\n"
-"L31989c:\n"
-"bbit1.d.nt r2,0x4,L3198a6\n"
-"L3198a0:\n"
-"mov_s r14,0\n"
-"L3198a2:\n"
-"mov_s r0,r14\n"
-"L3198a4:\n"
-"leave_s [r13-r15,blink,pcl]\n"
-"L3198a6:\n"
-"cmp_s r1,0x70\n"
-"L3198a8:\n"
-"beq_s L3198d4\n"
-"L3198aa:\n"
-"cmp_s r1,0x53\n"
-"L3198ac:\n"
-"beq_s L3198ea\n"
-"L3198ae:\n"
-"cmp_s r1,0x54\n"
-"L3198b0:\n"
-"beq_s L3198ee\n"
-"L3198b2:\n"
-"brne.t r1,0xc,L3198a2\n"
-"L3198b6:\n"
-"mov_s r1,0x802810\n"
-"L3198bc:\n"
-"ldb_s r0,[r1,0x8]\n"
-"L3198be:\n"
-"breq.nt r0,0x13,L3198d0\n"
-"L3198c2:\n"
-"breq.nt r0,0x12,L31994c\n"
-"L3198c6:\n"
-"brne.t r0,0x7,L3198a2\n"
-"L3198ca:\n"
-"ldb_s r0,[r1,0xc]\n"
-"L3198cc:\n"
-"brne.t r0,0x12,L3198a2\n"
-"L3198d0:\n"
-"mov_s r1,2\n"
-"L3198d2:\n"
-"b_s L3198f0\n"
-"L3198d4:\n"
-"ld.as r0,[r13,161]\n"
-"L3198d8:\n"
-"bbit0.d.t r0,0x14,L3198a2\n"
-"L3198dc:\n"
-"bclr_s r0,r0,0x14\n"
-"L3198de:\n"
-"mov_s r1,0\n"
-"L3198e0:\n"
-"st.as r14,[r13,162]\n"
-"L3198e4:\n"
-"st.as r0,[r13,161]\n"
-"L3198e8:\n"
-"b_s L3198f0\n"
-"L3198ea:\n"
-"mov_s r1,3\n"
-"L3198ec:\n"
-"b_s L3198f0\n"
-"L3198ee:\n"
-"mov_s r1,4\n"
-"L3198f0:\n"
-"mov_s r15,r13\n"
-"L3198f2:\n"
-"add r15,r15,635\n"
-"L3198f6:\n"
-"ldb r0,[r15,-15]\n"
-"L3198fa:\n"
-"breq.d.nt r0,0x1,L31991c\n"
-"L3198fe:\n"
-"mov_s r14,1\n"
-"L319900:\n"
-"brne_s r0,0,L3198a2\n"
-"L319902:\n"
-"bl.d opencfw_em9305_child_324d6c\n"
-"L319906:\n"
-"mov_s r0,r13\n"
-"L319908:\n"
-"ldb r0,[r15,-13]\n"
-"L31990c:\n"
-"breq_s r0,0,L3198a2\n"
-"L31990e:\n"
-"add r13,r13,635\n"
-"L319912:\n"
-"stb 1,[r15,-15]\n"
-"L319916:\n"
-"stb 20,[r13]\n"
-"L31991a:\n"
-"b_s L3198a2\n"
-"L31991c:\n"
-"ldb_s r0,[r15,0]\n"
-"L31991e:\n"
-"brne.d.nt r0,0x14,L319940\n"
-"L319922:\n"
-"mov_s r0,r13\n"
-"L319924:\n"
-"bl opencfw_em9305_child_324d6c\n"
-"L319928:\n"
-"ldb r0,[r15,-13]\n"
-"L31992c:\n"
-"brne.d.t r0,0,L3198a2\n"
-"L319930:\n"
-"mov_s r0,r13\n"
-"L319932:\n"
-"stb 0,[r15,-15]\n"
-"L319936:\n"
-"bl.d opencfw_em9305_phy_finish_32c810\n"
-"L31993a:\n"
-"stb -1,[r15]\n"
-"L31993e:\n"
-"b_s L3198a2\n"
-"L319940:\n"
-"ld.as r0,[r13,161]\n"
-"L319944:\n"
-"bset_s r0,r0,0x14\n"
-"L319946:\n"
-"st.as r0,[r13,161]\n"
-"L31994a:\n"
-"b_s L3198a2\n"
-"L31994c:\n"
-"mov_s r1,1\n"
-"L31994e:\n"
-"b_s L3198f0\n"
-".size opencfw_em9305_callback_319890,.-opencfw_em9305_callback_319890\n"
-);
+#include <stdint.h>
+
+/* Native 0x319890..0x319950: PHY-update procedure hook for LL control
+ * opcodes, active only while bit 4 of 0x805a94 is set (else returns 0).
+ * Opcode 0x70 consumes the deferred bit 20 of +644 (mode 0), 0x53/0x54
+ * select modes 3/4, and an unknown-response (0x0c) for the rejected
+ * opcode at 0x802818 (0x13, 0x12, or 7 rejecting 0x12) selects 2 or 1.
+ * Idle (+620 = 0): start through 324d6c and, unless +622 is set, enter
+ * state 1 with timer code 20 at +635. Running: on code 20 finish through
+ * 324d6c and 32c810 unless +622 is set; otherwise defer by setting bit
+ * 20 of +644. Returns 1 when a mode was selected. */
+extern uint32_t opencfw_em9305_child_324d6c(uintptr_t record, uint32_t mode);
+extern uint32_t opencfw_em9305_phy_finish_32c810(uintptr_t record);
+
+uint32_t opencfw_em9305_callback_319890(uintptr_t record, uint32_t opcode)
+{
+    uint32_t mode;
+    if((*(volatile uint8_t *)(uintptr_t)0x805a94u&0x10u)==0u)return 0u;
+    volatile uint32_t *deferred=(volatile uint32_t *)(record+644u);
+    if(opcode==0x70u){
+        uint32_t word=*deferred;
+        if((word&(1u<<20))==0u)return 0u;
+        *(volatile uint32_t *)(record+648u)=0u;
+        *deferred=word&~(1u<<20);
+        mode=0u;
+    }else if(opcode==0x53u){
+        mode=3u;
+    }else if(opcode==0x54u){
+        mode=4u;
+    }else if(opcode==0x0cu){
+        uint32_t rejected=*(volatile uint8_t *)(uintptr_t)0x802818u;
+        if(rejected==0x13u)mode=2u;
+        else if(rejected==0x12u)mode=1u;
+        else if(rejected==7u&&*(volatile uint8_t *)(uintptr_t)0x80281cu==0x12u)mode=2u;
+        else return 0u;
+    }else{
+        return 0u;
+    }
+    volatile uint8_t *state=(volatile uint8_t *)(record+620u);
+    volatile uint8_t *code=(volatile uint8_t *)(record+635u);
+    uint32_t current=*state;
+    if(current==0u){
+        (void)opencfw_em9305_child_324d6c(record,mode);
+        if(*(volatile uint8_t *)(record+622u)!=0u){
+            *state=1u;
+            *code=20u;
+        }
+    }else if(current==1u){
+        if(*code!=20u){
+            *deferred|=1u<<20;
+        }else{
+            (void)opencfw_em9305_child_324d6c(record,mode);
+            if(*(volatile uint8_t *)(record+622u)==0u){
+                *state=0u;
+                *code=0xffu;
+                (void)opencfw_em9305_phy_finish_32c810(record);
+            }
+        }
+    }
+    return 1u;
+}

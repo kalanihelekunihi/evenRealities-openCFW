@@ -1,50 +1,23 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_32c650\n"
-".type opencfw_em9305_child_32c650,@function\n"
-"opencfw_em9305_child_32c650:\n"
-"L32c650:\n"
-"enter_s [r13-r15,blink]\n"
-"L32c652:\n"
-"ld_s r13,[r0,0x24]\n"
-"L32c654:\n"
-"ld.as r0,[r13,207]\n"
-"L32c658:\n"
-"breq_s r0,0,L32c69a\n"
-"L32c65a:\n"
-"ldb r0,[r13,0xae1]\n"
-"L32c662:\n"
-"breq_s r0,0,L32c69a\n"
-"L32c664:\n"
-"add r14,r13,0x9ac\n"
-"L32c66c:\n"
-"bl.d opencfw_em9305_auxiliary_elapsed_303f8c\n"
-"L32c670:\n"
-"ld r0,[r14,0]\n"
-"L32c672:\n"
-"ld r3,[r14,-168]\n"
-"L32c676:\n"
-"mov_s r15,r0\n"
-"L32c678:\n"
-"ldb r1,[r14,-150]\n"
-"L32c67c:\n"
-"ldb r2,[r3,124]\n"
-"L32c680:\n"
-"bl.d opencfw_em9305_radio_duration_piece_312b88\n"
-"L32c684:\n"
-"ldb_s r0,[r3,0xc]\n"
-"L32c686:\n"
-"ldb r2,[r13,0xae0]\n"
-"L32c68e:\n"
-"ld.as r3,[r13,207]\n"
-"L32c692:\n"
-"mov_s r0,r13\n"
-"L32c694:\n"
-"bl.d opencfw_em9305_child_323bac\n"
-"L32c698:\n"
-"mov_s r1,r15\n"
-"L32c69a:\n"
-"leave_s [r13-r15,blink,pcl]\n"
-".size opencfw_em9305_child_32c650,.-opencfw_em9305_child_32c650\n"
-);
+#include <stdint.h>
+
+/* Native 0x32c650..0x32c69c: for an associated record (object+0x24) with a
+ * pending output (+828) and the sync flag (+0xae1) set, measure the time
+ * since the anchor (+0x9ac), run the duration piece for its PHY, and fill
+ * the sync info through 323bac. Returns 0 if nothing was pending. */
+extern uint32_t opencfw_em9305_auxiliary_elapsed_303f8c(uint32_t,uint32_t);
+extern uint32_t opencfw_em9305_radio_duration_piece_312b88(uint32_t,uint32_t,uint32_t);
+extern uint32_t opencfw_em9305_child_323bac(uintptr_t,uint32_t,uint32_t,uintptr_t);
+
+uint32_t opencfw_em9305_child_32c650(uintptr_t object,uint32_t now)
+{
+    uintptr_t record=*(volatile uint32_t *)(object+0x24u);
+    if(*(volatile uint32_t *)(record+828u)==0u) return 0u;
+    if(*(volatile uint8_t *)(record+0xae1u)==0u) return 0u;
+    uint32_t elapsed=opencfw_em9305_auxiliary_elapsed_303f8c(
+        *(volatile uint32_t *)(record+0x9acu),now);
+    uintptr_t phy=*(volatile uint32_t *)(record+0x904u);
+    (void)opencfw_em9305_radio_duration_piece_312b88(*(volatile uint8_t *)(phy+12u),
+        *(volatile uint8_t *)(record+0x916u),*(volatile uint8_t *)(phy+124u));
+    return opencfw_em9305_child_323bac(record,elapsed,*(volatile uint8_t *)(record+0xae0u),
+                                       *(volatile uint32_t *)(record+828u));
+}

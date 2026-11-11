@@ -1,0 +1,99 @@
+{
+  "creation_with_actual_locks": {
+    "passed_traces": 1932,
+    "paired_constructor_operations": 2508,
+    "actual_scheduler_suspend_resume_and_port_critical": true,
+    "critical_contexts": 3,
+    "initial_xpsr_word_values": 4,
+    "initial_xpsr_native_word": "0x0009c4cc",
+    "reports": [
+      "build/sources-goal-r1-task-heap-ready-c/report.json"
+    ],
+    "actual_allocator_constructor_list_item_stack_and_ready_handoff": true,
+    "actual_stock_and_C_memory_fill": true,
+    "whole_heap_compared": 51200,
+    "static_control_and_stack_regions_compared": 4,
+    "source_path_forbids_stock_instruction_execution": true,
+    "fault_paths": {
+      "first_allocation": 24,
+      "second_allocation": 36,
+      "priority_assertion": 24
+    },
+    "limits": [
+      "No function stubs in stock/C creation path; mapped core registers and instruction execution do not establish asynchronous scheduling; pending ticks/ready-drain branches not exercised",
+      "Allocation caller words normalized only after validating each against its actual malloc-entry LR; task-exit LR normalized only after checking source-specific function address",
+      "Fixed stock RAM placement in fixture only; production link placement unverified",
+      "Stable names, valid ordinary pointers; malformed metadata, private frames, caller-clobbered words/flags and complete exception state excluded",
+      "No byte qualification"
+    ]
+  },
+  "pending_tick_replay": {
+    "time_slice_traces": 12,
+    "passed_traces": 144,
+    "paired_constructor_operations": 432,
+    "paired_actual_tick_calls": 324,
+    "actual_scheduler_resume_tick_replay_critical_and_creation": true,
+    "no_function_stubs": true,
+    "limits": [
+      "Seeded pending tick counter and stopped scheduler; pending-ready task drain and delayed-task wakeup branches remain separate",
+      "Core registers mapped without asynchronous delivery; no context-switch or physical proof",
+      "Same checked caller/exit-word normalization and fixed RAM fixture as main creation probe"
+    ]
+  },
+  "negative_controls": {
+    "retain-mask": true,
+    "omit-suspend": true,
+    "omit-tick-replay": true
+  },
+  "ownership_repaired": [
+    "vTaskSuspendAll",
+    "xTaskResumeAll",
+    "vPortEnterCritical",
+    "vPortExitCritical",
+    "xTaskIncrementTick"
+  ],
+  "firmware_sources_and_manifest_unchanged": true,
+  "normal_report_reused": true,
+  "normal_build": {
+    "compiled": 573,
+    "application_imports": 179,
+    "bootloader_imports": 34,
+    "failures": 0,
+    "duplicate_strong_symbols": 0
+  },
+  "qualification": {
+    "source_units": 3,
+    "compiled_profiles": 15,
+    "selected_regions": 0,
+    "new_function_byte_identity": false
+  },
+  "source_plan_unchanged": true,
+  "source_built_bytes": 3857,
+  "binary_pull_through_bytes": 642303,
+  "hybrid_equals_locked_application": true,
+  "source_completeness_proven": false,
+  "evidence": {
+    "build/sources-goal-r1-task-heap-ready-c/report.json": "76a8aac20cdb24cc1e111c931633e5bc84f379d44a002409729a21c238b47b20",
+    "tools/build/source-plan.json": "969af3130987be89dcdc8777d86b4c891d596b4ecef5cccfd763861f05a12d31",
+    "r1/docs/reference/task-heap-ready-c-review.json": "a194e9c46eb29c1efc42fa09e1da99670e27d56aa606ae9bcc13d0cd2e3ca28c",
+    "r1/src/sources.json": "e4c2161f5a94ed8f60f515c71ed7f323fa68daecf30f6a35feb8327e77cfec3e",
+    "r1/symbols/function-frontier.csv": "23292951e7dadd633f50041dd714e033baee0ae2aada246af5ade1e613d3d4e9",
+    "r1/src/config/rtos/scheduler_contract.h": "f1d650127117c2f03875da5614a28bb60fa3ff39ebe77b5ed6f312e3e302a425",
+    "r1/src/config/rtos/scheduler_tick_contract.h": "9935496def06c161f05fa2ceba1f57909802594e40bff8f0db65c89379c0515d",
+    "r1/src/config/rtos/port_start_contract.h": "993d3e4b20aa180ce45dac53d3ac1baf03d958650c8696b67ac8ae959341873f",
+    "build/hybrid-goal-r1-task-locks-c/build-report.json": "2f52977c97e45cb6005614259ec857443a47decc89c58b30dd9cb2d06f5aa616",
+    "r1/src/application/rtos/scheduler-resume/scheduler.c": "b039c4f960b3c4488b0f7c30cb4dbbc29aab828fe40357decd9a366d3365ca3b",
+    "r1/src/application/rtos/scheduler-tick/scheduler-tick.c": "9e8ce61a54431af2e3c465b51d39617ef2658bcffcd660d9ae786aadf8cb9ed6",
+    "r1/src/application/rtos/port-start/port.c": "f7b5db8c0134e7b9a07ce837f4c16a0592c223f0139fd3740fb0913bd2604fb0",
+    "build/goal-r1-task-locks-c/REA.json": "a7e7d66eb47dd2f2b0a1ce8210573eb70a2229cbce4e71435218394f95c3eae9",
+    "build/goal-r1-task-locks-c/layout.ld": "6348b8eea731be05dba18ffa106360dab23e944ecf4f198b7ccbe9e32e717d00",
+    "build/goal-r1-task-locks-c/verify.py": "e799b15865ea2cdb6be0a6d9597bca313b3ed704a9d1c1c8ba7c0e399d7ef062",
+    "build/goal-r1-task-locks-c/results.json": "fb8e4fb8406daabe59696ac5ec912a6aaf063e9daac9c228f1e40a7200547d75",
+    "build/goal-r1-task-locks-c/verify-pending.py": "10481b8e179fdbea268baae629ee0daa161c8ce98413c819e8993cd13272869c",
+    "build/goal-r1-task-locks-c/pending-results.json": "baff3e5080493e17c24e64c8b27cc8787b459dfb3389c1f22b2b2b15b9ad4d16",
+    "build/goal-r1-task-locks-c/negative.py": "c282a9a3eb0333a6b4b291a4724e61633494dad9059bb777d56e46d9a8858a52",
+    "build/goal-r1-task-locks-c/negative-results.json": "585d45d3c7fea8a040956a324940c759c2feb27a2838d10bccb72caa65c17398",
+    "build/goal-r1-task-locks-c/qualify.py": "d436e0c0b1d8bedbc87de8ddea46f763bf5608461c6707b3ce4b3d926df85279",
+    "build/goal-r1-task-locks-c/qualified/qualification.json": "a0705f353b7d12fa454a7a5155857a003305eebf9e5745e1db8a3331c7c2fd5d"
+  }
+}

@@ -4,11 +4,11 @@
 extern volatile uint8_t r1_structured_log_mode;
 struct r1_log_cache_state { uint8_t *buffer; uint32_t capacity, read, write; };
 uint8_t r1_structured_log_cache_buffer[8192]
-    __attribute__((section(".r1.log.cache_buffer"),aligned(4)));
+    __attribute__((section(".bss.r1.log.cache_buffer"),aligned(4)));
 struct r1_log_cache_state r1_structured_log_cache
     __attribute__((section(".r1.log.cache"),aligned(4))) = { r1_structured_log_cache_buffer,8192,0,0 };
 uint8_t r1_structured_log_export_buffer[236]
-    __attribute__((section(".r1.log.export_buffer"),aligned(4)));
+    __attribute__((section(".bss.r1.log.export_buffer"),aligned(4)));
 extern uint32_t r1_structured_log_cache_copy(uint32_t peek,void *buffer,uint32_t bytes);
 extern uint32_t r1_conn_field6_get(void);
 extern int32_t r1_ble_tx_queue_dispatch_type2(uint32_t connection,const void *buffer,uint32_t bytes);

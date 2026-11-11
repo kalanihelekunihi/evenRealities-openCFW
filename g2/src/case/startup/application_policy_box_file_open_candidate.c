@@ -20,6 +20,9 @@ static volatile uint8_t *const box=(volatile uint8_t *)(uintptr_t)0x2000087cu;
 static uint32_t rd32(uint32_t a){return *(volatile uint32_t *)(uintptr_t)a;}
 static void wr32(uint32_t a,uint32_t v){*(volatile uint32_t *)(uintptr_t)a=v;}
 static void logline(uint32_t a){(void)case_policy_log(a);(void)case_policy_log(CASE_STRING_ADDR(08001794));}
+/* Boot-test fix: stock 0x080015f6/0x0800175a pass the running bank and the
+ * total error count (sp+36) for the %d fields; the reduction dropped them. */
+static void logline1(uint32_t a,uint32_t value){(void)case_policy_log(a,value);(void)case_policy_log(CASE_STRING_ADDR(08001794));}
 /* Stock 0x08001574 (case_ota_execute) */
 uint32_t case_policy_box_file_open(void)
 {
@@ -36,7 +39,7 @@ uint32_t case_policy_box_file_open(void)
     uint32_t bank=case_policy_box_running_bank();
     box[0x18u]=(uint8_t)bank;
     if(bank==0u){if(*quiet==0u)logline(CASE_STRING_ADDR(080017dc));return 0u;}
-    if(*quiet==0u)logline(CASE_STRING_ADDR(08001800));
+    if(*quiet==0u)logline1(CASE_STRING_ADDR(08001800),bank);
     if(case_policy_box_erase_bank()==0u){if(*quiet==0u)logline(CASE_STRING_ADDR(0800181c));return 0u;}
     if(*quiet==0u)logline(CASE_STRING_ADDR(08001838));
     if(case_policy_box_copy_sn()==0u){if(*quiet==0u)logline(CASE_STRING_ADDR(08001868));return 0u;}
@@ -48,7 +51,7 @@ uint32_t case_policy_box_file_open(void)
     for(;;){
         uint32_t size=rd32((uint32_t)(uintptr_t)box+0x20u);
         if(size<=offset){
-            if(*quiet==0u)logline(CASE_STRING_ADDR(080018b0));
+            if(*quiet==0u)logline1(CASE_STRING_ADDR(080018b0),retries);
             *box_lock=0u;
             return case_policy_box_apply_file();
         }

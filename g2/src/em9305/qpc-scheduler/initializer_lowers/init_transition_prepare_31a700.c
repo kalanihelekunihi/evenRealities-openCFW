@@ -18,17 +18,9 @@ extern uint32_t opencfw_em9305_init_transition_finish_325eb4(uintptr_t,uint32_t)
 struct native_product_pair { uint32_t low, high; };
 static struct native_product_pair native_mpydu(uint32_t left,uint32_t right)
 {
-#ifdef __arc__
-    register uint32_t low __asm__("r4");
-    register uint32_t high __asm__("r5");
-    __asm__ volatile("mpydu r4,%2,%3":"=r"(low),"=r"(high):
-        "r"(left),"r"(right));
-    struct native_product_pair result={low,high};
-#else
     uint64_t product=(uint64_t)left*right;
     struct native_product_pair result={(uint32_t)product,
         (uint32_t)(product>>32u)};
-#endif
     return result;
 }
 

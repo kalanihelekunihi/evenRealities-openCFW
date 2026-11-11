@@ -1,0 +1,101 @@
+{
+  "schema_version": 1,
+  "entries": {
+    "0x4b6c0": [
+      "r1_temperature_once_enable",
+      62
+    ]
+  },
+  "report": "build/sources-goal-r1-temperature-once-c/report.json",
+  "report_sha256": "961e0fb5ed64ac2359399859bb7c6f7216161d4effd024a08f46e7c4301fb1b5",
+  "unit": {
+    "source": "r1/src/application/runtime/native_temperature_once.c",
+    "source_sha256": "674c5389809196953c52a576b96486bcfc945262cf37c7a9a72fcc7e95133101",
+    "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-temperature-once-c/r1/r1-application/r1__src__application__runtime__native_temperature_once.c.o",
+    "object_sha256": "b0535d5a198a7fc0c7b5cbbceeb4939dae25bfa596abdb5fc619bf6a51aaaefa"
+  },
+  "behavior": {
+    "pairs": 700,
+    "digest": "9a09604154b680ae4085cea2684679c69f48877dfd02f4293478d08be2ec580d",
+    "actual_C": "temperature once control",
+    "actual_adapter": "Existing assembly event gate executes unchanged",
+    "modeled_boundaries": [
+      "__aeabi_memclr",
+      "r1_sensor_stream_register_by_name",
+      "r1_sensor_stream_unregister_by_name",
+      "r1_structured_log_mode_get",
+      "r1_structured_log_format",
+      "nrf_log_frontend_std_1"
+    ],
+    "limits": [
+      "Registration callback identity checked, callback and sensor delivery not executed",
+      "Stream allocation/release, memory clear and logs modeled",
+      "Private stack, caller-clobbered registers and void return excluded"
+    ]
+  },
+  "negative_controls": {
+    "normalized-low-byte": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": ", 14], '000000001415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f'), ('register', ['temp', 'once', 'sample callback', 1, 1], '000000001415161718191a1b1c1d1e1f00000000000000000000000001002e2f')], 'state': '000102030405060708090a0b0c0d0e0f000000001415161718191a1b1c1d1e1f00000000000000000000000001002e2f303132333435363738393a3b3c3d3e3f'}, {'trace': [], 'state': '000102030405060708090a0b0c0d0e0f000000001415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f'})\n"
+    },
+    "wrong-handle-slot": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "ntry': 'direct', 'value': 0, 'length': 0, 'handle': 0, 'created': 0, 'modes': (0,)}, {'trace': [], 'state': '000102030405060708090a0b0c0d0e0f000000001415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f'}, {'trace': [('unregister', ['temp', 387323156], '000000001415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f')], 'state': '000102030405060708090a0b0c0d0e0f000000001415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f'})\n"
+    },
+    "missing-existing-gate": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "30405060708090a0b0c0d0e0f550500001415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f'}, {'trace': [('clear', [536994780, 14], '550500001415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f'), ('register', ['temp', 'once', 'sample callback', 1, 1], '550500001415161718191a1b1c1d1e1f00000000000000000000000001002e2f')], 'state': '000102030405060708090a0b0c0d0e0f000000001415161718191a1b1c1d1e1f00000000000000000000000001002e2f303132333435363738393a3b3c3d3e3f'})\n"
+    },
+    "wrong-clear-size": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "gs, **kwargs)\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 1063, in __hook_code_cb\n    callback(uc, address, size, user_data)\n    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-temperature-once-c/verify.py\", line 35, in hook\n    if n=='clear':assert r0==RECORD and r1==14;out=[r0,r1]\n                         ^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    "wrong-record-flag": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "30405060708090a0b0c0d0e0f000000001415161718191a1b1c1d1e1f00000000000000000000000001002e2f303132333435363738393a3b3c3d3e3f'}, {'trace': [('clear', [536994780, 14], '000000001415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f'), ('register', ['temp', 'once', 'sample callback', 1, 1], '000000001415161718191a1b1c1d1e1f00000000000000000000000100002e2f')], 'state': '000102030405060708090a0b0c0d0e0f000000001415161718191a1b1c1d1e1f00000000000000000000000100002e2f303132333435363738393a3b3c3d3e3f'})\n"
+    },
+    "wrong-stream-mode": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": ", in __hook_code_cb\n    callback(uc, address, size, user_data)\n    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-temperature-once-c/verify.py\", line 37, in hook\n    fifth=struct.unpack('<I',v.mem_read(sp,4))[0];assert text(r0)=='temp' and text(r1)=='once' and r2==0x4b921 and r3==1 and fifth==1\n                                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    "early-handle-clear": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": ": [('unregister', ['temp', 1365], '550500001415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f')], 'state': '000102030405060708090a0b0c0d0e0f000000001415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f'}, {'trace': [('unregister', ['temp', 1365], '000000001415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f')], 'state': '000102030405060708090a0b0c0d0e0f000000001415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f'})\n"
+    },
+    "missing-handle-clear": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": ": [('unregister', ['temp', 1365], '550500001415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f')], 'state': '000102030405060708090a0b0c0d0e0f000000001415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f'}, {'trace': [('unregister', ['temp', 1365], '550500001415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f')], 'state': '000102030405060708090a0b0c0d0e0f550500001415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f'})\n"
+    }
+  },
+  "audit": {
+    "unchanged_prior_objects": 759,
+    "new_units": 1,
+    "imports": {
+      "r1-application": {
+        "added": [],
+        "removed": [
+          "r1_event_service_0004b6c0"
+        ]
+      },
+      "r1-bootloader": {
+        "added": [],
+        "removed": []
+      }
+    },
+    "reused_owners": [
+      "existing temperature handles and shared measurement record; no new state"
+    ]
+  },
+  "source_check": "R1 passes: 760 units, 564 source files, 0 not built. Global check flags existing G2 resident_rom_thumb_set.S absent from manifest.",
+  "rea": "temperature-once-c-rea.json",
+  "instruction_identity_proven": false,
+  "image_integration_proven": false
+}

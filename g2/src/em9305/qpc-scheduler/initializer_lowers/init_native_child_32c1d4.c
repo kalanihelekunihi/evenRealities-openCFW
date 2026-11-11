@@ -1,56 +1,25 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_32c1d4\n"
-".type opencfw_em9305_child_32c1d4,@function\n"
-"opencfw_em9305_child_32c1d4:\n"
-"L32c1d4:\n"
-"enter_s [r13,blink]\n"
-"L32c1d6:\n"
-"ld_s r1,[r0,0x2c]\n"
-"L32c1d8:\n"
-"add2 r2,r1,0x20\n"
-"L32c1dc:\n"
-"ldb_s r1,[r2,0x14]\n"
-"L32c1de:\n"
-"breq.d.nt r1,0x5,L32c1f4\n"
-"L32c1e2:\n"
-"mov r12,840\n"
-"L32c1e6:\n"
-"brne.nt r1,0x3,L32c1f2\n"
-"L32c1ea:\n"
-"ldb_s r1,[r2,0x18]\n"
-"L32c1ec:\n"
-"breq_s r1,0,L32c1f2\n"
-"L32c1ee:\n"
-"bl opencfw_em9305_child_32c21c\n"
-"L32c1f2:\n"
-"leave_s [r13,blink,pcl]\n"
-"L32c1f4:\n"
-"ld_s r3,[r0,0x24]\n"
-"L32c1f6:\n"
-"ld r0,[r2,0]\n"
-"L32c1f8:\n"
-"mov_s r1,0x8019fd\n"
-"L32c1fe:\n"
-"add3 r13,r0,0x2c\n"
-"L32c202:\n"
-"ldb_s r1,[r1,0]\n"
-"L32c204:\n"
-"ldb_s r0,[r3,r12]\n"
-"L32c206:\n"
-"add r2,r3,0x8d0\n"
-"L32c20e:\n"
-"setne r1,r1,0\n"
-"L32c212:\n"
-"lsr_s r0,r0,0x5\n"
-"L32c214:\n"
-"and_s r0,r0,r1\n"
-"L32c216:\n"
-"st_s r13,[r2,0]\n"
-"L32c218:\n"
-"stb_s r0,[r2,0x5]\n"
-"L32c21a:\n"
-"leave_s [r13,blink,pcl]\n"
-".size opencfw_em9305_child_32c1d4,.-opencfw_em9305_child_32c1d4\n"
-);
+#include <stdint.h>
+
+/* Native 0x32c1d4..0x32c21c: per-event follow-up on the object's packet
+ * descriptor (*(object+0x2c)+128). Kind 5: point the record's (+0x24)
+ * output slot (+0x8d0) at the descriptor buffer + 352 and store bit 5 of
+ * record byte 840, gated by the flag at 0x8019fd, at +0x8d5. Kind 3 with
+ * a nonzero byte at +0x18: run 32c21c on the object. */
+extern uint32_t opencfw_em9305_child_32c21c(uintptr_t);
+
+void opencfw_em9305_child_32c1d4(uintptr_t object)
+{
+    uintptr_t descriptor=*(volatile uint32_t *)(object+0x2cu)+128u;
+    uint32_t kind=*(volatile uint8_t *)(descriptor+0x14u);
+    if(kind==5u) {
+        uintptr_t record=*(volatile uint32_t *)(object+0x24u);
+        uintptr_t buffer=*(volatile uint32_t *)descriptor;
+        uint32_t enabled=*(volatile uint8_t *)(uintptr_t)0x8019fdu!=0u;
+        uint32_t bit=(uint32_t)*(volatile uint8_t *)(record+840u)>>5;
+        *(volatile uint32_t *)(record+0x8d0u)=buffer+352u;
+        *(volatile uint8_t *)(record+0x8d5u)=(uint8_t)(bit&enabled);
+        return;
+    }
+    if(kind==3u&&*(volatile uint8_t *)(descriptor+0x18u)!=0u)
+        (void)opencfw_em9305_child_32c21c(object);
+}

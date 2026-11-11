@@ -1,0 +1,68 @@
+{
+  "promotion": {
+    "old_plan_sha256": "eb04e4bf2c082d88801a99f173e0a4b58eba788ec05539d87b5ed02081002423",
+    "new_plan_sha256": "0c889650bf8ea03def83ea1ea29730b3ccfe84bb70609c1972a500f02ba4ea2d",
+    "added_symbol": "r1_touch_ready_irq_callback",
+    "added_bytes": 6,
+    "source_built_bytes": 3833,
+    "binary_pull_through_bytes": 642327,
+    "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "source_completeness_proven": false,
+    "tested_source_unchanged": true
+  },
+  "scope_sources": [
+    "r1/src/application/board/native_peripheral_bindings.c",
+    "r1/src/application/board/native_touch_board.c",
+    "r1/src/application/board/native_yhm_transport.c",
+    "r1/src/application/runtime/native_bma_interface.c",
+    "r1/src/application/runtime/native_bma_reads.c",
+    "r1/src/application/runtime/native_lis_aux.c",
+    "r1/src/application/runtime/native_lis_setup.c",
+    "r1/src/application/runtime/native_qma_configuration.c"
+  ],
+  "candidate_compilations": 40,
+  "compiled": 40,
+  "selected_regions": 5,
+  "already_covered_regions": 4,
+  "new_regions": 1,
+  "behavior_evidence": "r1/docs/reference/touch-ready-c-snapshot-review.json",
+  "normal_build": {
+    "units": 573,
+    "application_imports": 197,
+    "bootloader_imports": 34,
+    "report": "build/sources-goal-r1-bma-direct-read-native/report.json"
+  },
+  "limitations": [
+    "Only the six-byte IRQ callback newly qualified; other source bodies remain unqualified",
+    "Callback target remains a native-address binding in the hybrid; full source integration not proven",
+    "Physical IRQ entry and RTOS/electrical behavior unverified",
+    "No G2 workflow gate advanced"
+  ],
+  "evidence": {
+    "build/goal-r1-hardware-c-followup/scope.json": "30ee7d27033952f453dca1f0d2ad45cbef66663a07b40d7a4dd8ff8735ef8e45",
+    "build/goal-r1-hardware-c-followup/qualify.py": "0b91367894b97a63d9686ce7ae5c914939c48abb59c09f9b2e75790a372c554a",
+    "build/goal-r1-hardware-c-followup/qualified/qualification.json": "2590358dd532e563f1de638b4fe0f964b3397cd50606e0d0ee3c33961a603565",
+    "build/goal-r1-hardware-c-followup/qualified/source-plan.json": "5db2d7f740953ec90e1966eb5c3a174f0f0fc0659dc0f664edb85d0280fa3d2e",
+    "build/goal-r1-hardware-c-followup/merge.py": "1fcdfc64c40658d3fd5686065611a601d85395c2186eb58d89fef5b1f9947eb0",
+    "build/goal-r1-hardware-c-followup/merged-source-plan.json": "0c889650bf8ea03def83ea1ea29730b3ccfe84bb70609c1972a500f02ba4ea2d",
+    "build/goal-r1-hardware-c-followup/merge-results.json": "e47a4845ffc21ecaa94659ab8981c97460f6f7e890c1934766426812ffe4957b",
+    "build/goal-r1-hardware-c-followup/promote.py": "1ae8180fa05117a7e8492b1b9e7d2c700295deb036313aee878b6e3cd5fc1134",
+    "build/goal-r1-hardware-c-followup/promotion-results.json": "777c19a37770d7b554fb7cac48271e8ea2ccb81f551f93d710c2aca67f0b5d16",
+    "build/goal-r1-hardware-c-followup/sources-check.log": "bd60965367f10bcc604039941b628ee9282d683344509ab9faf85d501a53a26c",
+    "tools/build/qualify_sources.py": "c959bf278e8876aa0ca5a02f405f84d581914f7d17fbe79fd0583f313cba9521",
+    "tools/build/source-plan.json": "0c889650bf8ea03def83ea1ea29730b3ccfe84bb70609c1972a500f02ba4ea2d",
+    "build/hybrid-goal-r1-hardware-c-followup/build-report.json": "1f8f70d38cf4a0116ef8a58ad3bd4f69a31e2a189d1a624eab1f1eb999f7a235",
+    "r1/src/application/board/native_touch_board.c": "37ff5cb7ef784a51c71518ad171de508d88c2a58ff609b92041347568b75eb40",
+    "r1/src/application/runtime/native_touch_services.c": "838ff73a88388d0d4b079204b2df6acea4dbf7f9a894e226a4cb17da5135bcd8",
+    "r1/docs/reference/touch-ready-c-snapshot-review.json": "5fa63309a91a0303b269da68b5ce7773180669cbdb9ac11faf26000f9b347c4c",
+    "build/sources-goal-r1-bma-direct-read-native/report.json": "9d7a81814dde7f5add01d3e9fb46479ab1d87551c88ab88537a3829a7bd6e16d",
+    "r1/src/sources.json": "6fa37d8afe1e50453bc47962bcfe463cd5163fb4f1b3d2a8033b02adbb77c9d3",
+    "r1/src/application/board/native_peripheral_bindings.c": "2c06b2853cb7c3ff346b277e80becaf6a82239f44f45748364508dbda19c42fc",
+    "r1/src/application/board/native_yhm_transport.c": "7e686ec02f4709ee478e191a3c6da4c33998808dc3a899d5f02efd6ceda0eb17",
+    "r1/src/application/runtime/native_bma_interface.c": "9d9cf0bca6e436e2852347bbbb8601bc18190ac31bb268a493d0417ab9805bd3",
+    "r1/src/application/runtime/native_bma_reads.c": "aea51821bec3152bd0c55d1fa380f6fa62449a64152c10a7ace2264bcf8208bf",
+    "r1/src/application/runtime/native_lis_aux.c": "84f6163a701d209c8da3629e65b9116a55a9abaaa774f56e97fa67db49a62ca1",
+    "r1/src/application/runtime/native_lis_setup.c": "d6234fc527e1c8e560434d280c045706ba3936d1b6b2ee70cf926080b088d7a4",
+    "r1/src/application/runtime/native_qma_configuration.c": "8522c6b25069d0ed0009676300c1427e839bc96412965ec0221d83dc0cddaa90"
+  }
+}

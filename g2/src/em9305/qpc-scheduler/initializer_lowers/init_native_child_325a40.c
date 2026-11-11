@@ -1,38 +1,19 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_325a40\n"
-".type opencfw_em9305_child_325a40,@function\n"
-"opencfw_em9305_child_325a40:\n"
-"L325a40:\n"
-"enter_s [r13-r14,blink]\n"
-"L325a42:\n"
-"mov_s r14,r0\n"
-"L325a44:\n"
-"mov_s r0,4\n"
-"L325a46:\n"
-"bl.d opencfw_em9305_wsf_event_allocate\n"
-"L325a4a:\n"
-"mov_s r13,r1\n"
-"L325a4c:\n"
-"mov_s r1,r0\n"
-"L325a4e:\n"
-"breq_s r0,0,L325a66\n"
-"L325a50:\n"
-"mov_s r0,0x805b18\n"
-"L325a56:\n"
-"ldb_s r2,[r14,0x1]\n"
-"L325a58:\n"
-"ldb_s r0,[r0,0]\n"
-"L325a5a:\n"
-"stb_s r13,[r1,0x3]\n"
-"L325a5c:\n"
-"sth_s r2,[r1,0]\n"
-"L325a5e:\n"
-"bl.d opencfw_em9305_wsf_task_message_send\n"
-"L325a62:\n"
-"stb 8,[r1,2]\n"
-"L325a66:\n"
-"leave_s [r13-r14,blink,pcl]\n"
-".size opencfw_em9305_child_325a40,.-opencfw_em9305_child_325a40\n"
-);
+#include <stdint.h>
+
+/* Native 0x325a40..0x325a68: allocate a 4-byte message {u16 handle,
+ * u8 8, u8 status} for the record's handle byte and send it to the task
+ * at 0x805b18. Returns 0 if allocation fails. */
+extern uintptr_t opencfw_em9305_wsf_event_allocate(uint32_t length);
+extern uint32_t opencfw_em9305_wsf_task_message_send(uint32_t task, uintptr_t message);
+
+uint32_t opencfw_em9305_child_325a40(uintptr_t record, uint32_t status)
+{
+    uintptr_t message=opencfw_em9305_wsf_event_allocate(4u);
+    if(message==0u)return 0u;
+    uint32_t task=*(volatile uint8_t *)(uintptr_t)0x805b18u;
+    uint32_t handle=*(volatile uint8_t *)(record+1u);
+    *(volatile uint8_t *)(message+3u)=(uint8_t)status;
+    *(volatile uint16_t *)message=(uint16_t)handle;
+    *(volatile uint8_t *)(message+2u)=8u;
+    return opencfw_em9305_wsf_task_message_send(task,message);
+}

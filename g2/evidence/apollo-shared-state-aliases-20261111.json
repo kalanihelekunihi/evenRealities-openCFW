@@ -1,0 +1,71 @@
+{
+  "schema": 1,
+  "target": "Apollo main shared C storage for five stock-address state groups",
+  "implementation": "Three named 32-bit state words now alias the first word of their existing C state arrays. The case reconnect flags at stock 0x20075010, 0x20075011, and 0x20075012 now access bytes 0, 1, and 2 of one C array. The case nonce's four bytes now alias the initialized first word of the C radio/data array; the separate nonce initializer and reconnect flag unit were removed from sources.json.",
+  "source_files": [
+    "g2/src/apollo-main/system/stock-ram/stock_ram_cells.c",
+    "g2/src/apollo-main/ble/ble-hci/display_ble_hci_error_cells.c",
+    "g2/src/apollo-main/ble/ble-hci/display_ble_hci_radio_result_cells.c",
+    "g2/src/apollo-main/graphics/nema-vg/display_nema_vg_reinit.c",
+    "g2/src/apollo-main/app/case-reconnect/case_reconnect_state.h",
+    "g2/src/apollo-main/app/case-reconnect/display_case_reconnect_4ac19c_20261017.c",
+    "g2/src/apollo-main/drivers/power/box-detect/service_box_detect.c",
+    "g2/src/apollo-main/app/case-force/display_case_force_out_4ac5a2_20261017.c",
+    "g2/src/apollo-main/app/case-sync/display_case_sync_response_4ac890_20261017.c",
+    "g2/src/apollo-main/app/case-status/case_status_source.c",
+    "g2/src/sources.json"
+  ],
+  "key_source_sha256": {
+    "g2/src/apollo-main/system/stock-ram/stock_ram_cells.c": "c8eac753c925d47464f27a1cfc2bc71ab5704e59dc5a058b165d4d9753d77d6c",
+    "g2/src/apollo-main/app/case-reconnect/case_reconnect_state.h": "5a235d4d9f40d53a17d2d529ce8a03391626c27ae7ab36c4141489b25872207c",
+    "g2/src/sources.json": "8c54a11dcdd17338e279d6f4712768d4e7804016eb2a2d24d6462ece6f8d8020"
+  },
+  "stock_address_evidence": {
+    "source": "g2/src/apollo-main/system/stock-ram/stock_ram_cells.c and the address-named candidate declarations",
+    "nonce_initial_word": "0x0202ffff",
+    "nonce_initial_bytes_little_endian": "ff ff 02 02",
+    "nonce_bytes_match_previous_dedicated_initializer": true
+  },
+  "before_and_after_elf": {
+    "before": "build/g2-apollo-logger-shared-state-full-link-20261111/g2-apollo-main/g2-apollo-main.elf",
+    "after": "build/g2-apollo-state-nonce-full-link-20261111/g2-apollo-main/g2-apollo-main.elf",
+    "radio_detect_word": ["0x2009944c", "0x200b4e68"],
+    "hci_error_value": ["0x20099420", "0x200b4f18"],
+    "nema_framebuffer_context": ["0x200a2654", "0x200b52d0"],
+    "case_reconnect_block": ["0x200b53e0", "0x200b53a0"],
+    "case_reconnect_suppressed": ["0x2000381b", "block + 0"],
+    "case_reconnect_pending": ["0x2000381c", "block + 1"],
+    "case_force_out_disabled": ["0x20003827", "block + 2"],
+    "case_nonce": ["0x20003813", "0x200035d8"],
+    "initialized_radio_data_base": ["0x200035d8", "0x200035d8"],
+    "final_nonce_elf_bytes": "ff ff 02 02",
+    "bounded_same-stock-address_named_symbol_split_groups_after": 0,
+    "bounded_audit_scope": "ELF BSS/data symbols whose names encode the same 0x200xxxxx address; other anonymous objects and literal address uses are outside this check"
+  },
+  "verification": {
+    "sources_check": "make -C g2 sources-check passed: 4886 manifest units, 4547 source files, 1 existing source not built",
+    "focused_source_report": "build/g2-apollo-state-nonce-source-20261111/report.json",
+    "focused_source_report_sha256": "d8cb8dee78f2fe1de2cb9b21b4b181093d31ff96681d3fbfe863a729ef1cd322",
+    "focused_compiled_units": 2717,
+    "focused_compile_failures": 0,
+    "focused_duplicate_strong_symbols": 0,
+    "focused_link_report": "build/g2-apollo-state-nonce-link-20261111/link-report.json",
+    "focused_link_report_sha256": "1f3b3753f1a29eae9e9665b6228f6e259dab48669adb3d456990cc03f3ec0083",
+    "focused_apollo_binary_bytes": 3819008,
+    "focused_apollo_binary_sha256": "49d2a068d942133de6cb9e0b80bb26cbf293dc37ca264b3d045130f3fc885d8b",
+    "focused_binary_equals_full_binary": true
+  },
+  "full_g2_verification": {
+    "source_report": "build/g2-apollo-state-nonce-full-source-20261111/report.json",
+    "source_report_sha256": "f5eaac08aa193e36355c701cb887716cd507ff5940de663db516ad853f15e138",
+    "compiled_units": 4881,
+    "compile_failures": 0,
+    "duplicate_strong_symbols": 0,
+    "strict_link_report": "build/g2-apollo-state-nonce-full-link-20261111/link-report.json",
+    "strict_link_report_sha256": "055e763662ffcd51185d4c951a242d76c5bb2349d3aaca1f1b407e5a087ade43",
+    "linked_payloads": ["g2-apollo-bootloader", "g2-apollo-main", "g2-case", "g2-codec-a", "g2-codec-b", "g2-em9305", "g2-touch"],
+    "strict_link_passed": true,
+    "source_completeness_proven": false
+  },
+  "qualification": "These overlapping state groups now share C storage in the linked Apollo main image. This bounded source integration check does not establish stock address placement, all RAM alias correctness, firmware source completeness, byte identity, or hardware behavior."
+}

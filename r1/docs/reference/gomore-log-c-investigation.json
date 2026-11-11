@@ -1,0 +1,41 @@
+{
+  "status": "experimental_not_integrated",
+  "direct_replay": {
+    "pairs": 4390,
+    "independent_gate_and_message_cases": 4390,
+    "buffer_offset": -292,
+    "varargs_offset": -4,
+    "digest": "8e14be2cc2f4288f82448abccc1159c27b3bc2ecbe86c2ba42a460e8daae9068",
+    "limits": [
+      "Formatter/callback modeled; stock clear/strcat execute",
+      "Compiler-private saved-register frame excluded; void R0 excluded",
+      "No actual formatter integration, cold config owner, physical or byte identity proof"
+    ]
+  },
+  "cold_configuration": {
+    "address": "0x20007cec",
+    "size": 12,
+    "bytes_hex": "000000000000000000000000",
+    "native_RW_handler": true,
+    "independent_decoder": true,
+    "region_guards_unchanged": true
+  },
+  "artifacts": {
+    "build/goal-r1-gomore-log-c/candidate.c": "c1e789b52f0ebbdeb2ba601ba0a03a3102609e2b2a6ac261c0617cfe21fcf12a",
+    "build/goal-r1-gomore-log-c/candidate.o": "7e0171b3dee2284a821b746565c1558bbd30bde8e330bc0f30e6fabf69c1531f",
+    "build/goal-r1-gomore-log-c/verify.py": "6443541d2bf764ebfd26b12eed223b57dccf2b56fabb59dfc5d2bad2fd7d18a1",
+    "build/goal-r1-gomore-log-c/results.json": "12a13f1b4d77532194fa538efd8081cb7dead14ff83d792234a1c6e4772440cc",
+    "build/goal-r1-gomore-log-c/rea.json": "867ad2016ff26f4d150032e77888b1f793d41c9d259cc7121b24ccef81168cd9",
+    "build/goal-r1-gomore-log-c/decompile.json": "c7a024db1c9ca592d9ee448e0fe52ca3e4dac9cbfda3e515a410da78a5439150",
+    "build/goal-r1-gomore-log-c/initialization.py": "95b7a29a76428679e9f704508fa36a54cf0ad0567f27d1409b40dc3b86f7756e",
+    "build/goal-r1-gomore-log-c/initialization-results.json": "9d8c2cc7e918bb3cefcaf4f14165ecb0b573a41b45315f4402b8ebf29bc8c514",
+    "build/goal-r1-gomore-log-c/compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "remaining": [
+    "Actual formatter and host integration",
+    "Independent rejected defect controls",
+    "Consolidate existing generic log helper ownership",
+    "Production configuration owner and source build/qualification",
+    "Private saved-register/frame alias behavior not established"
+  ]
+}

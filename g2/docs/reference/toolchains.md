@@ -39,6 +39,11 @@ Those images were nevertheless built with IAR.
 `g2/docs/research/apollo-embedded-source-path-census.md:8-13`). The same root
 appears in the Cordio `__FILE__` strings
 (`g2/docs/research/cordio-ble-stack-identity-audit.md:21-24`).
+Six generated LVGL source units used to embed their temporary build directory
+through `__FILE__`. Their manifest flags now map those paths to the six exact
+strings present in the locked Apollo payload. All six object files reproduce
+across two output directories; this does not establish byte identity for the
+application (`g2/evidence/apollo-lvgl-file-path-reproducibility-20261110.json`).
 
 **No release string** (Proven). The image contains no IAR, ICCARM, EWARM, or
 DLIB version string (`g2/docs/research/iar-dlib-runtime-census.md:10-12`).
@@ -401,7 +406,9 @@ The toolchain is GNU Arm GCC with newlib (Strong)
    - the prebuilt SDK driver, speech, decoder, and DSP libraries;
    - the private `lvp_kws`-derived application;
    - the U-Boot-derived stage-1 CLI source;
-   - the trained KWS model: 9,164-byte command stream and 120,800 weights.
+   - the trained KWS model weights (120,800 bytes); field-level C source now
+     emits the byte-exact 9,164-byte command stream, but its control semantics
+     and integration into a complete source image remain incomplete.
 7. **Touch.** The build depends on several unknowns:
    - the GCC and newlib versions;
    - whether ModusToolbox/PDL was used;

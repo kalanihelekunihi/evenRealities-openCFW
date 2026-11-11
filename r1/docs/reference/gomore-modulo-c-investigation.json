@@ -1,0 +1,1012 @@
+{
+  "status": "experimental_not_integrated",
+  "stock_entry": "0x94938",
+  "stock_size": 110,
+  "parent_stage": "0x60680 respiratory-rate update",
+  "direct_replay": {
+    "pairs": 12544,
+    "independent_byte_oracle_cases": 12544,
+    "digest": "d1c9254610f08f3dbec76022e25c5abd4d8c7cacf26678a6069a23d7885bc1e3",
+    "limits": [
+      "Valid 112-byte guarded memory region; no fault/negative-control/production proof"
+    ]
+  },
+  "artifacts": {
+    "build/goal-r1-gomore-modulo-c/candidate.c": "5a7f6e4da270ecdecaeaf9747a269199106ee36b919adb633a2b8065b27e476b",
+    "build/goal-r1-gomore-modulo-c/candidate.o": "63ddc302671d8d3fcc4fc1b30c127a7bc8dcf16358a4df66618517a7de9a4e7a",
+    "build/goal-r1-gomore-modulo-c/compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/goal-r1-gomore-modulo-c/verify.py": "00b5a9d81be0dec5580bea9556f730b08a8d2200af3dee33608aaae5950eb86c",
+    "build/goal-r1-gomore-modulo-c/results.json": "10233fa6a014be543c5184ed2d201b9e42e12cd45bcd9726d031b4044e494e1a",
+    "build/goal-r1-gomore-modulo-c/rea.json": "98b1b1b0587b2bfff7c3e19cc5398d490eaea09da686c42f9e350658709a7e78",
+    "build/goal-r1-gomore-modulo-c/respiratory-rea.json": "c06bf05462ebec4327be5d8992804f75e135877b803f7b5cfdee31df2e5f0d95",
+    "build/goal-r1-gomore-modulo-c/negative.py": "3a6168e562a089e3bda8f834e6e0cc6b8d5e961aaf7cec14af91d16621e29049",
+    "build/goal-r1-gomore-modulo-c/negative-results.json": "610bd0e4cf8813642758856b05a31f8341c148afb9b8500eb9763ca787d869cd",
+    "build/goal-r1-gomore-modulo-c/faults.py": "c3bb667a97621a651e3b910862c2e7ae2fe69592c6890083228e234cf34a77ee",
+    "build/goal-r1-gomore-modulo-c/fault-results.json": "88f794a4ea4b4d8c8af6b1333f49bcf9af2b733b6fe1d1b89568bbe46b0099b7",
+    "build/goal-r1-gomore-modulo-c/caller.py": "908a773ea7e8c0911adefe7a1135261ce88f1f20fd40a73e37e21548c1c9a611",
+    "build/goal-r1-gomore-modulo-c/caller-results.json": "5f5f080731ff4e4992fb83e35dae25e1a9c243fceb34e3668fe2b0fa56380e88",
+    "build/goal-r1-gomore-modulo-c/byte-sentinel.c": "a448b5ab3c3addb1bdab558d4a1071e50e68f10a68ac7c70cca829b4188b7aee",
+    "build/goal-r1-gomore-modulo-c/byte-sentinel.o": "65ebb8663f1015462d220f2880542cbf8b010843b3b78112e4f61c36307fb73a",
+    "build/goal-r1-gomore-modulo-c/byte-sentinel.compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/goal-r1-gomore-modulo-c/byte-sentinel.log": "1f0e0248f92e12fd14bddd394d2c6d4fb613d42439a6e50e7e7485a088d6c2e2",
+    "build/goal-r1-gomore-modulo-c/early-byte-wrap.c": "305d09b160a0fb27bbd37a3b553c3c0b7add86bf977400bc7cd7a71f461d452c",
+    "build/goal-r1-gomore-modulo-c/early-byte-wrap.o": "0ca35d0a42bd84e681580fad81ff29dae3c71fabf03c7050935c4ff494f53d1e",
+    "build/goal-r1-gomore-modulo-c/early-byte-wrap.compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/goal-r1-gomore-modulo-c/early-byte-wrap.log": "1f0e0248f92e12fd14bddd394d2c6d4fb613d42439a6e50e7e7485a088d6c2e2",
+    "build/goal-r1-gomore-modulo-c/guard-counter.c": "54a90ccb732aa6c7fb2970873f39baf98949fe373b6f606cb5a03b0f6f724dce",
+    "build/goal-r1-gomore-modulo-c/guard-counter.o": "c6620d469bb4f9d271ee45281d426ac08f95f45b5cfc3a207abcffa73a3524fc",
+    "build/goal-r1-gomore-modulo-c/guard-counter.compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/goal-r1-gomore-modulo-c/guard-counter.log": "1f0e0248f92e12fd14bddd394d2c6d4fb613d42439a6e50e7e7485a088d6c2e2",
+    "build/goal-r1-gomore-modulo-c/wrong-primary-slot.c": "dd6e69b2fc41c91701e2804359680d64014486d2fb80f5539b88c4eb6a81b7d1",
+    "build/goal-r1-gomore-modulo-c/wrong-primary-slot.o": "35532ab9a569613f54dcc76503fdf10723b8bf1dc5c0c969e34d0dd781ca9bfd",
+    "build/goal-r1-gomore-modulo-c/wrong-primary-slot.compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/goal-r1-gomore-modulo-c/wrong-primary-slot.log": "1f0e0248f92e12fd14bddd394d2c6d4fb613d42439a6e50e7e7485a088d6c2e2",
+    "build/goal-r1-gomore-modulo-c/wrong-secondary-slot.c": "0f72165e3e16468321847122d79d7ced97254d5936924ce5f56b2e9acefe117b",
+    "build/goal-r1-gomore-modulo-c/wrong-secondary-slot.o": "0aa89223feee2a3c63909901fe0293382b2d3797878567cdd2471353eb1a60ca",
+    "build/goal-r1-gomore-modulo-c/wrong-secondary-slot.compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/goal-r1-gomore-modulo-c/wrong-secondary-slot.log": "1f0e0248f92e12fd14bddd394d2c6d4fb613d42439a6e50e7e7485a088d6c2e2",
+    "build/goal-r1-gomore-modulo-c/wrong-return.c": "363cc3835d4cb662ab3a2ff1f8f0fef422dee39b62094b4b496453f47b90c39d",
+    "build/goal-r1-gomore-modulo-c/wrong-return.o": "dac5c019e55bf6bdf0b63afd1d35906009629a63fff6a6682eb55b89235df3d8",
+    "build/goal-r1-gomore-modulo-c/wrong-return.compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/goal-r1-gomore-modulo-c/wrong-return.log": "1f0e0248f92e12fd14bddd394d2c6d4fb613d42439a6e50e7e7485a088d6c2e2"
+  },
+  "remaining": [
+    "Consolidate generic checked helper ownership",
+    "Normal production-object build/replay and qualification",
+    "Full respiratory stage reconstruction and integration"
+  ],
+  "negative_controls": [
+    {
+      "name": "byte-sentinel",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "early-byte-wrap",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "guard-counter",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "wrong-primary-slot",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "wrong-secondary-slot",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "wrong-return",
+      "compiled": true,
+      "rejected": true
+    }
+  ],
+  "boundary_replay": {
+    "pairs": 42,
+    "faults": 28,
+    "observations": [
+      {
+        "state": "0x0",
+        "counter": 0,
+        "observation": {
+          "error": 6,
+          "invalids": [
+            [
+              19,
+              40,
+              1
+            ]
+          ],
+          "writes": [],
+          "tail": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e4f505152535455565758595a5b5c5d5e5f606162636465666768696a6b6c6d6e6f707172737475767778797a7b7c7d7e7f",
+          "result": null
+        }
+      },
+      {
+        "state": "0x0",
+        "counter": 1,
+        "observation": {
+          "error": 6,
+          "invalids": [
+            [
+              19,
+              40,
+              1
+            ]
+          ],
+          "writes": [],
+          "tail": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e4f505152535455565758595a5b5c5d5e5f606162636465666768696a6b6c6d6e6f707172737475767778797a7b7c7d7e7f",
+          "result": null
+        }
+      },
+      {
+        "state": "0x0",
+        "counter": 5,
+        "observation": {
+          "error": 6,
+          "invalids": [
+            [
+              19,
+              40,
+              1
+            ]
+          ],
+          "writes": [],
+          "tail": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e4f505152535455565758595a5b5c5d5e5f606162636465666768696a6b6c6d6e6f707172737475767778797a7b7c7d7e7f",
+          "result": null
+        }
+      },
+      {
+        "state": "0x0",
+        "counter": 20,
+        "observation": {
+          "error": 6,
+          "invalids": [
+            [
+              19,
+              40,
+              1
+            ]
+          ],
+          "writes": [],
+          "tail": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e4f505152535455565758595a5b5c5d5e5f606162636465666768696a6b6c6d6e6f707172737475767778797a7b7c7d7e7f",
+          "result": null
+        }
+      },
+      {
+        "state": "0x0",
+        "counter": 25,
+        "observation": {
+          "error": 6,
+          "invalids": [
+            [
+              19,
+              40,
+              1
+            ]
+          ],
+          "writes": [],
+          "tail": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e4f505152535455565758595a5b5c5d5e5f606162636465666768696a6b6c6d6e6f707172737475767778797a7b7c7d7e7f",
+          "result": null
+        }
+      },
+      {
+        "state": "0x0",
+        "counter": 250,
+        "observation": {
+          "error": 6,
+          "invalids": [
+            [
+              19,
+              40,
+              1
+            ]
+          ],
+          "writes": [],
+          "tail": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e4f505152535455565758595a5b5c5d5e5f606162636465666768696a6b6c6d6e6f707172737475767778797a7b7c7d7e7f",
+          "result": null
+        }
+      },
+      {
+        "state": "0x0",
+        "counter": 255,
+        "observation": {
+          "error": 6,
+          "invalids": [
+            [
+              19,
+              40,
+              1
+            ]
+          ],
+          "writes": [],
+          "tail": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e4f505152535455565758595a5b5c5d5e5f606162636465666768696a6b6c6d6e6f707172737475767778797a7b7c7d7e7f",
+          "result": null
+        }
+      },
+      {
+        "state": "0xffffffff",
+        "counter": 0,
+        "observation": {
+          "error": 6,
+          "invalids": [
+            [
+              19,
+              39,
+              1
+            ]
+          ],
+          "writes": [],
+          "tail": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e4f505152535455565758595a5b5c5d5e5f606162636465666768696a6b6c6d6e6f707172737475767778797a7b7c7d7e7f",
+          "result": null
+        }
+      },
+      {
+        "state": "0xffffffff",
+        "counter": 1,
+        "observation": {
+          "error": 6,
+          "invalids": [
+            [
+              19,
+              39,
+              1
+            ]
+          ],
+          "writes": [],
+          "tail": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e4f505152535455565758595a5b5c5d5e5f606162636465666768696a6b6c6d6e6f707172737475767778797a7b7c7d7e7f",
+          "result": null
+        }
+      },
+      {
+        "state": "0xffffffff",
+        "counter": 5,
+        "observation": {
+          "error": 6,
+          "invalids": [
+            [
+              19,
+              39,
+              1
+            ]
+          ],
+          "writes": [],
+          "tail": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e4f505152535455565758595a5b5c5d5e5f606162636465666768696a6b6c6d6e6f707172737475767778797a7b7c7d7e7f",
+          "result": null
+        }
+      },
+      {
+        "state": "0xffffffff",
+        "counter": 20,
+        "observation": {
+          "error": 6,
+          "invalids": [
+            [
+              19,
+              39,
+              1
+            ]
+          ],
+          "writes": [],
+          "tail": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e4f505152535455565758595a5b5c5d5e5f606162636465666768696a6b6c6d6e6f707172737475767778797a7b7c7d7e7f",
+          "result": null
+        }
+      },
+      {
+        "state": "0xffffffff",
+        "counter": 25,
+        "observation": {
+          "error": 6,
+          "invalids": [
+            [
+              19,
+              39,
+              1
+            ]
+          ],
+          "writes": [],
+          "tail": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e4f505152535455565758595a5b5c5d5e5f606162636465666768696a6b6c6d6e6f707172737475767778797a7b7c7d7e7f",
+          "result": null
+        }
+      },
+      {
+        "state": "0xffffffff",
+        "counter": 250,
+        "observation": {
+          "error": 6,
+          "invalids": [
+            [
+              19,
+              39,
+              1
+            ]
+          ],
+          "writes": [],
+          "tail": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e4f505152535455565758595a5b5c5d5e5f606162636465666768696a6b6c6d6e6f707172737475767778797a7b7c7d7e7f",
+          "result": null
+        }
+      },
+      {
+        "state": "0xffffffff",
+        "counter": 255,
+        "observation": {
+          "error": 6,
+          "invalids": [
+            [
+              19,
+              39,
+              1
+            ]
+          ],
+          "writes": [],
+          "tail": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e4f505152535455565758595a5b5c5d5e5f606162636465666768696a6b6c6d6e6f707172737475767778797a7b7c7d7e7f",
+          "result": null
+        }
+      },
+      {
+        "state": "0x2003ffd7",
+        "counter": 0,
+        "observation": {
+          "error": 7,
+          "invalids": [
+            [
+              20,
+              537133056,
+              1
+            ]
+          ],
+          "writes": [
+            [
+              537133056,
+              1,
+              1
+            ]
+          ],
+          "tail": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e4f505152535455565758595a5b5c5d5e5f606162636465666768696a6b6c6d6e6f707172737475767778797a7b7c7d7e00",
+          "result": null
+        }
+      },
+      {
+        "state": "0x2003ffd7",
+        "counter": 1,
+        "observation": {
+          "error": null,
+          "invalids": [],
+          "writes": [
+            [
+              537133055,
+              1,
+              2
+            ]
+          ],
+          "tail": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e4f505152535455565758595a5b5c5d5e5f606162636465666768696a6b6c6d6e6f707172737475767778797a7b7c7d7e02",
+          "result": 537133055
+        }
+      },
+      {
+        "state": "0x2003ffd7",
+        "counter": 5,
+        "observation": {
+          "error": 7,
+          "invalids": [
+            [
+              20,
+              537133057,
+              1
+            ]
+          ],
+          "writes": [
+            [
+              537133057,
+              1,
+              1
+            ]
+          ],
+          "tail": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e4f505152535455565758595a5b5c5d5e5f606162636465666768696a6b6c6d6e6f707172737475767778797a7b7c7d7e05",
+          "result": null
+        }
+      },
+      {
+        "state": "0x2003ffd7",
+        "counter": 20,
+        "observation": {
+          "error": 7,
+          "invalids": [
+            [
+              20,
+              537133060,
+              1
+            ]
+          ],
+          "writes": [
+            [
+              537133060,
+              1,
+              1
+            ]
+          ],
+          "tail": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e4f505152535455565758595a5b5c5d5e5f606162636465666768696a6b6c6d6e6f707172737475767778797a7b7c7d7e14",
+          "result": null
+        }
+      },
+      {
+        "state": "0x2003ffd7",
+        "counter": 25,
+        "observation": {
+          "error": 7,
+          "invalids": [
+            [
+              20,
+              537133061,
+              1
+            ]
+          ],
+          "writes": [
+            [
+              537133061,
+              1,
+              1
+            ]
+          ],
+          "tail": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e4f505152535455565758595a5b5c5d5e5f606162636465666768696a6b6c6d6e6f707172737475767778797a7b7c7d7e19",
+          "result": null
+        }
+      },
+      {
+        "state": "0x2003ffd7",
+        "counter": 250,
+        "observation": {
+          "error": 7,
+          "invalids": [
+            [
+              20,
+              537133106,
+              1
+            ]
+          ],
+          "writes": [
+            [
+              537133106,
+              1,
+              1
+            ]
+          ],
+          "tail": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e4f505152535455565758595a5b5c5d5e5f606162636465666768696a6b6c6d6e6f707172737475767778797a7b7c7d7efa",
+          "result": null
+        }
+      },
+      {
+        "state": "0x2003ffd7",
+        "counter": 255,
+        "observation": {
+          "error": 7,
+          "invalids": [
+            [
+              20,
+              537133107,
+              1
+            ]
+          ],
+          "writes": [
+            [
+              537133107,
+              1,
+              1
+            ]
+          ],
+          "tail": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e4f505152535455565758595a5b5c5d5e5f606162636465666768696a6b6c6d6e6f707172737475767778797a7b7c7d7eff",
+          "result": null
+        }
+      },
+      {
+        "state": "0x2003ffd3",
+        "counter": 0,
+        "observation": {
+          "error": 7,
+          "invalids": [
+            [
+              20,
+              537133056,
+              1
+            ]
+          ],
+          "writes": [
+            [
+              537133052,
+              1,
+              1
+            ],
+            [
+              537133056,
+              1,
+              511
+            ]
+          ],
+          "tail": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e4f505152535455565758595a5b5c5d5e5f606162636465666768696a6b6c6d6e6f707172737475767778797a00017d7e7f",
+          "result": null
+        }
+      },
+      {
+        "state": "0x2003ffd3",
+        "counter": 1,
+        "observation": {
+          "error": null,
+          "invalids": [],
+          "writes": [
+            [
+              537133051,
+              1,
+              2
+            ]
+          ],
+          "tail": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e4f505152535455565758595a5b5c5d5e5f606162636465666768696a6b6c6d6e6f707172737475767778797a027c7d7e7f",
+          "result": 537133051
+        }
+      },
+      {
+        "state": "0x2003ffd3",
+        "counter": 5,
+        "observation": {
+          "error": 7,
+          "invalids": [
+            [
+              20,
+              537133057,
+              1
+            ]
+          ],
+          "writes": [
+            [
+              537133053,
+              1,
+              1
+            ],
+            [
+              537133057,
+              1,
+              511
+            ]
+          ],
+          "tail": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e4f505152535455565758595a5b5c5d5e5f606162636465666768696a6b6c6d6e6f707172737475767778797a057c017e7f",
+          "result": null
+        }
+      },
+      {
+        "state": "0x2003ffd3",
+        "counter": 20,
+        "observation": {
+          "error": 7,
+          "invalids": [
+            [
+              20,
+              537133056,
+              1
+            ]
+          ],
+          "writes": [
+            [
+              537133056,
+              1,
+              1
+            ]
+          ],
+          "tail": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e4f505152535455565758595a5b5c5d5e5f606162636465666768696a6b6c6d6e6f707172737475767778797a147c7d7e7f",
+          "result": null
+        }
+      },
+      {
+        "state": "0x2003ffd3",
+        "counter": 25,
+        "observation": {
+          "error": 7,
+          "invalids": [
+            [
+              20,
+              537133057,
+              1
+            ]
+          ],
+          "writes": [
+            [
+              537133057,
+              1,
+              1
+            ]
+          ],
+          "tail": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e4f505152535455565758595a5b5c5d5e5f606162636465666768696a6b6c6d6e6f707172737475767778797a197c7d7e7f",
+          "result": null
+        }
+      },
+      {
+        "state": "0x2003ffd3",
+        "counter": 250,
+        "observation": {
+          "error": 7,
+          "invalids": [
+            [
+              20,
+              537133102,
+              1
+            ]
+          ],
+          "writes": [
+            [
+              537133102,
+              1,
+              1
+            ]
+          ],
+          "tail": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e4f505152535455565758595a5b5c5d5e5f606162636465666768696a6b6c6d6e6f707172737475767778797afa7c7d7e7f",
+          "result": null
+        }
+      },
+      {
+        "state": "0x2003ffd3",
+        "counter": 255,
+        "observation": {
+          "error": 7,
+          "invalids": [
+            [
+              20,
+              537133103,
+              1
+            ]
+          ],
+          "writes": [
+            [
+              537133103,
+              1,
+              1
+            ]
+          ],
+          "tail": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e4f505152535455565758595a5b5c5d5e5f606162636465666768696a6b6c6d6e6f707172737475767778797aff7c7d7e7f",
+          "result": null
+        }
+      },
+      {
+        "state": "0x2003ffd1",
+        "counter": 0,
+        "observation": {
+          "error": null,
+          "invalids": [],
+          "writes": [
+            [
+              537133050,
+              1,
+              1
+            ],
+            [
+              537133054,
+              1,
+              511
+            ],
+            [
+              537133049,
+              1,
+              1
+            ]
+          ],
+          "tail": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e4f505152535455565758595a5b5c5d5e5f606162636465666768696a6b6c6d6e6f70717273747576777801017b7c7dff7f",
+          "result": 537133049
+        }
+      },
+      {
+        "state": "0x2003ffd1",
+        "counter": 1,
+        "observation": {
+          "error": null,
+          "invalids": [],
+          "writes": [
+            [
+              537133049,
+              1,
+              2
+            ]
+          ],
+          "tail": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e4f505152535455565758595a5b5c5d5e5f606162636465666768696a6b6c6d6e6f707172737475767778027a7b7c7d7e7f",
+          "result": 537133049
+        }
+      },
+      {
+        "state": "0x2003ffd1",
+        "counter": 5,
+        "observation": {
+          "error": null,
+          "invalids": [],
+          "writes": [
+            [
+              537133051,
+              1,
+              1
+            ],
+            [
+              537133055,
+              1,
+              511
+            ],
+            [
+              537133049,
+              1,
+              6
+            ]
+          ],
+          "tail": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e4f505152535455565758595a5b5c5d5e5f606162636465666768696a6b6c6d6e6f707172737475767778067a017c7d7eff",
+          "result": 537133049
+        }
+      },
+      {
+        "state": "0x2003ffd1",
+        "counter": 20,
+        "observation": {
+          "error": null,
+          "invalids": [],
+          "writes": [
+            [
+              537133054,
+              1,
+              1
+            ],
+            [
+              537133054,
+              1,
+              511
+            ],
+            [
+              537133049,
+              1,
+              1
+            ]
+          ],
+          "tail": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e4f505152535455565758595a5b5c5d5e5f606162636465666768696a6b6c6d6e6f707172737475767778017a7b7c7dff7f",
+          "result": 537133049
+        }
+      },
+      {
+        "state": "0x2003ffd1",
+        "counter": 25,
+        "observation": {
+          "error": null,
+          "invalids": [],
+          "writes": [
+            [
+              537133055,
+              1,
+              1
+            ],
+            [
+              537133055,
+              1,
+              511
+            ],
+            [
+              537133049,
+              1,
+              6
+            ]
+          ],
+          "tail": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e4f505152535455565758595a5b5c5d5e5f606162636465666768696a6b6c6d6e6f707172737475767778067a7b7c7d7eff",
+          "result": 537133049
+        }
+      },
+      {
+        "state": "0x2003ffd1",
+        "counter": 250,
+        "observation": {
+          "error": 7,
+          "invalids": [
+            [
+              20,
+              537133100,
+              1
+            ]
+          ],
+          "writes": [
+            [
+              537133100,
+              1,
+              1
+            ]
+          ],
+          "tail": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e4f505152535455565758595a5b5c5d5e5f606162636465666768696a6b6c6d6e6f707172737475767778fa7a7b7c7d7e7f",
+          "result": null
+        }
+      },
+      {
+        "state": "0x2003ffd1",
+        "counter": 255,
+        "observation": {
+          "error": 7,
+          "invalids": [
+            [
+              20,
+              537133101,
+              1
+            ]
+          ],
+          "writes": [
+            [
+              537133101,
+              1,
+              1
+            ]
+          ],
+          "tail": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e4f505152535455565758595a5b5c5d5e5f606162636465666768696a6b6c6d6e6f707172737475767778ff7a7b7c7d7e7f",
+          "result": null
+        }
+      },
+      {
+        "state": "0x2003ff9c",
+        "counter": 0,
+        "observation": {
+          "error": null,
+          "invalids": [],
+          "writes": [
+            [
+              537132997,
+              1,
+              1
+            ],
+            [
+              537133001,
+              1,
+              511
+            ],
+            [
+              537132996,
+              1,
+              1
+            ]
+          ],
+          "tail": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142430101464748ff4a4b4c4d4e4f505152535455565758595a5b5c5d5e5f606162636465666768696a6b6c6d6e6f707172737475767778797a7b7c7d7e7f",
+          "result": 537132996
+        }
+      },
+      {
+        "state": "0x2003ff9c",
+        "counter": 1,
+        "observation": {
+          "error": null,
+          "invalids": [],
+          "writes": [
+            [
+              537132996,
+              1,
+              2
+            ]
+          ],
+          "tail": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142430245464748494a4b4c4d4e4f505152535455565758595a5b5c5d5e5f606162636465666768696a6b6c6d6e6f707172737475767778797a7b7c7d7e7f",
+          "result": 537132996
+        }
+      },
+      {
+        "state": "0x2003ff9c",
+        "counter": 5,
+        "observation": {
+          "error": null,
+          "invalids": [],
+          "writes": [
+            [
+              537132998,
+              1,
+              1
+            ],
+            [
+              537133002,
+              1,
+              511
+            ],
+            [
+              537132996,
+              1,
+              6
+            ]
+          ],
+          "tail": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f40414243064501474849ff4b4c4d4e4f505152535455565758595a5b5c5d5e5f606162636465666768696a6b6c6d6e6f707172737475767778797a7b7c7d7e7f",
+          "result": 537132996
+        }
+      },
+      {
+        "state": "0x2003ff9c",
+        "counter": 20,
+        "observation": {
+          "error": null,
+          "invalids": [],
+          "writes": [
+            [
+              537133001,
+              1,
+              1
+            ],
+            [
+              537133001,
+              1,
+              511
+            ],
+            [
+              537132996,
+              1,
+              1
+            ]
+          ],
+          "tail": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142430145464748ff4a4b4c4d4e4f505152535455565758595a5b5c5d5e5f606162636465666768696a6b6c6d6e6f707172737475767778797a7b7c7d7e7f",
+          "result": 537132996
+        }
+      },
+      {
+        "state": "0x2003ff9c",
+        "counter": 25,
+        "observation": {
+          "error": null,
+          "invalids": [],
+          "writes": [
+            [
+              537133002,
+              1,
+              1
+            ],
+            [
+              537133002,
+              1,
+              511
+            ],
+            [
+              537132996,
+              1,
+              6
+            ]
+          ],
+          "tail": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f40414243064546474849ff4b4c4d4e4f505152535455565758595a5b5c5d5e5f606162636465666768696a6b6c6d6e6f707172737475767778797a7b7c7d7e7f",
+          "result": 537132996
+        }
+      },
+      {
+        "state": "0x2003ff9c",
+        "counter": 250,
+        "observation": {
+          "error": null,
+          "invalids": [],
+          "writes": [
+            [
+              537133047,
+              1,
+              1
+            ],
+            [
+              537133001,
+              1,
+              511
+            ],
+            [
+              537132996,
+              1,
+              11
+            ]
+          ],
+          "tail": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142430b45464748ff4a4b4c4d4e4f505152535455565758595a5b5c5d5e5f606162636465666768696a6b6c6d6e6f707172737475760178797a7b7c7d7e7f",
+          "result": 537132996
+        }
+      },
+      {
+        "state": "0x2003ff9c",
+        "counter": 255,
+        "observation": {
+          "error": null,
+          "invalids": [],
+          "writes": [
+            [
+              537133048,
+              1,
+              1
+            ],
+            [
+              537133002,
+              1,
+              511
+            ],
+            [
+              537132996,
+              1,
+              16
+            ]
+          ],
+          "tail": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f40414243104546474849ff4b4c4d4e4f505152535455565758595a5b5c5d5e5f606162636465666768696a6b6c6d6e6f707172737475767701797a7b7c7d7e7f",
+          "result": 537132996
+        }
+      }
+    ]
+  },
+  "respiratory_prefix_replay": {
+    "pairs": 3884,
+    "digest": "6b9e1600e9ca79464fda97337c1145aebfd0372abdeb2935c662e94a2a5b3f5d",
+    "limits": [
+      "Actual native respiratory caller prefix; only helper replaced by C; stops at estimator entry",
+      "No remainder of respiratory algorithm, estimator behavior, faults or physical execution proof"
+    ]
+  }
+}

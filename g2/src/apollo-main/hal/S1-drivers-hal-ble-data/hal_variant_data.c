@@ -3,8 +3,7 @@
  *
  * The AmbiqSuite files below declare these objects static; the stock Apollo
  * main image is linked from older/variant revisions that this tree
- * reconstructs by hand (hal/a-12-stimer, hal/p-14-spotmgr pcm0_7 and pcm2_0,
- * hal/a-03-sysctrl), so no upstream unit defines them. If a later segment
+ * reconstructs by hand (hal/a-12-stimer, hal/a-03-sysctrl), so no upstream unit defines them. If a later segment
  * builds one of those files from the pinned upstream (or a generated patch of
  * it), retire the matching block here.
  *
@@ -27,38 +26,10 @@ uint32_t g2_stimer_last_compare_20000318[8] = {
     0xfffffffeu, 0xfffffffeu, 0xfffffffeu, 0xfffffffeu,
 };
 
-/* ---- am_hal_spotmgr_pcm0_7.c (variant) ---------------------------------- */
-
-volatile uint32_t g2_spotmgr_pcm0_7_cur_coreldotempcotrim_ldo; /* RAM 0x200742b4 */
-volatile uint32_t g2_spotmgr_pcm0_7_cur_memldoactivetrim_ldo;  /* RAM 0x200742b8 */
-
-/* RAM 0x2000453a..0x2000453f (.data): 0d 0d 0b 0b 12 19, the SDK defaults. */
-volatile uint8_t g2_spotmgr_vddc_act_low_ton_trim = 0x0du;    /* g_ui8VddcActLowTonTrim */
-volatile uint8_t g2_spotmgr_vddc_act_high_ton_trim = 0x0du;   /* g_ui8VddcActHighTonTrim */
-volatile uint8_t g2_spotmgr_vddclv_act_low_ton_trim = 0x0bu;  /* g_ui8VddcLvActLowTonTrim */
-volatile uint8_t g2_spotmgr_vddclv_act_high_ton_trim = 0x0bu; /* g_ui8VddcLvActHighTonTrim */
-volatile uint8_t g2_spotmgr_vddf_act_low_ton_trim = 0x12u;    /* g_ui8VddfActLowTonTrim */
-volatile uint8_t g2_spotmgr_vddf_act_high_ton_trim = 0x19u;   /* g_ui8VddfActHighTonTrim */
-
-/* ROM 0x789fe0: ui8TonActiveConfig[GPU state][CPU state],
- * 01 01 02 | 01 01 02 | 01 02 02 (1 = TON level low). */
-const uint8_t g2_spotmgr_ton_active_config[3][3] = {
-    {0x01u, 0x01u, 0x02u},
-    {0x01u, 0x01u, 0x02u},
-    {0x01u, 0x02u, 0x02u},
-};
-
-/* ---- am_hal_spotmgr_pcm2_0.c (variant) ---------------------------------- */
-
-volatile uint8_t g2_spotmgr_pcm2_0_is_b0_pcm1p0;          /* RAM 0x20074f6e, g_bIsB0Pcm1p0 */
-volatile uint8_t g2_spotmgr_pcm2_0_is_pcm1p0_or_1p1;      /* RAM 0x20074f6f, g_bIsPCM1p0Or1p1 */
-volatile uint8_t g2_spotmgr_pcm2_0_is_pcm2p0_unscreened;  /* RAM 0x20074f70, g_bIsPCM2p0Unscreened */
-volatile uint8_t g2_spotmgr_pcm2_0_postpone_tempco;       /* RAM 0x20074f71, g_bPostponeTempco */
-volatile uint8_t g2_spotmgr_pcm2_0_tempco_pending;        /* RAM 0x20074f72, g_bTempcoPending */
-volatile uint8_t g2_spotmgr_pcm2_0_tempco_range;          /* RAM 0x20074f74, g_eTempCoRange (LOW = 0) */
-volatile uint32_t g2_spotmgr_pcm2_0_cur_coreldotempcotrim_ldo;  /* RAM 0x200742bc */
-volatile uint32_t g2_spotmgr_pcm2_0_cur_coreldotempcotrim_buck; /* RAM 0x200742c0 */
-volatile uint32_t g2_spotmgr_pcm2_0_cur_memldoactivetrim_ldo;   /* RAM 0x200742c4 */
+/* ---- am_hal_spotmgr*.c ---------------------------------------------------
+ * Retired 2026-10-30: SPOTMGR is the upstream SDK 5.0.0 + 66185cb text
+ * ({gen}/ambiqhal-apollo510-boot/am_hal_spotmgr*.c), which defines its own
+ * statics (TON trims, PCM2.0 flags, trim snapshots). */
 
 /* ---- am_hal_sysctrl.c sleep variant ------------------------------------- */
 

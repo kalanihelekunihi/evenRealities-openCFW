@@ -1,7 +1,7 @@
 /* Apollo LV object state bit wrappers, native 0x43e046..0x43e0c7. */
 #include <stdint.h>
 
-extern void audio_uart_lvgl_log(uint32_t, const char *, uint32_t,
+extern void lv_log_add(uint32_t, const char *, uint32_t,
                                const char *, const char *, ...);
 extern void audio_uart_lv_obj_state_apply_43ebec(void *, uint32_t);
 

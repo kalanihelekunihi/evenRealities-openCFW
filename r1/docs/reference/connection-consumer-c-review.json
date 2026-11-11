@@ -1,0 +1,225 @@
+{
+  "schema_version": 1,
+  "sources": [
+    "r1/src/application/runtime/native_ble_connection_control.c",
+    "r1/src/application/runtime/native_ble_connection_control.h"
+  ],
+  "native_roots": [
+    "0x45184",
+    "0x4e1e2"
+  ],
+  "report": "build/sources-goal-r1-connection-consumer-shared-c/report.json",
+  "compiled_units": 843,
+  "verification": {
+    "stock_C_pairs": {
+      "event_role_log_occupancy": 2304,
+      "target_lengths_matches": 84,
+      "security_target_status": 45,
+      "queue_ownership_null_failure": 6,
+      "live_provider_mutations": 144,
+      "op8_byte_length_domain": 1024,
+      "live_queue_handle_reload": 2,
+      "seeded_multi_message_drains": 384
+    },
+    "total_pairs": 3993,
+    "actual_C_memcmp_memory": true,
+    "actual_C_parameter_helpers": false,
+    "REA_bytes_match": true,
+    "no_new_state_owner": true,
+    "queue_null_stops_without_free": true,
+    "ordinary_void_AAPCS_only": true,
+    "callee_saved_integer_FP_stack_guards_masks": true,
+    "device_execution": false
+  },
+  "actual_parameter_integration": {
+    "stock_C_pairs": {
+      "event_role_log_occupancy": 2304,
+      "target_lengths_matches": 84,
+      "security_target_status": 45,
+      "queue_ownership_null_failure": 6,
+      "live_provider_mutations": 144,
+      "op8_byte_length_domain": 1024,
+      "live_queue_handle_reload": 2,
+      "seeded_multi_message_drains": 384
+    },
+    "total_pairs": 3993,
+    "actual_C_memcmp_memory": true,
+    "actual_C_parameter_helpers": true,
+    "REA_bytes_match": true,
+    "no_new_state_owner": true,
+    "queue_null_stops_without_free": true,
+    "ordinary_void_AAPCS_only": true,
+    "callee_saved_integer_FP_stack_guards_masks": true,
+    "device_execution": false
+  },
+  "actual_encoder_queue_consumer_integration": {
+    "stock_C_pairs": {
+      "encoder_queue_consumer_parameters": 128,
+      "encoder_failure_ownership": 16
+    },
+    "total_pairs": 144,
+    "actual_C_encoder_memory_move_consumer": true,
+    "actual_C_parameter_helpers": true,
+    "prepared_FIFO_allocator_backend": true,
+    "producer_return_words_checked": true,
+    "callee_saved_integer_FP_stack_guards_masks": true,
+    "device_execution": false
+  },
+  "mutants": [
+    {
+      "name": "null_dequeue",
+      "rejected": true
+    },
+    {
+      "name": "missing_free",
+      "rejected": true
+    },
+    {
+      "name": "clear_queue_output",
+      "rejected": true
+    },
+    {
+      "name": "event64_mode",
+      "rejected": true
+    },
+    {
+      "name": "role_selection",
+      "rejected": true
+    },
+    {
+      "name": "busy_security_status",
+      "rejected": true
+    },
+    {
+      "name": "security_timeout_argument",
+      "rejected": true
+    },
+    {
+      "name": "security_notify_delay",
+      "rejected": true
+    },
+    {
+      "name": "target_length",
+      "rejected": true
+    },
+    {
+      "name": "target_compare",
+      "rejected": true
+    },
+    {
+      "name": "target_order",
+      "rejected": true
+    },
+    {
+      "name": "same_target_alias",
+      "rejected": true
+    },
+    {
+      "name": "cached_glasses",
+      "rejected": true
+    },
+    {
+      "name": "disconnect_delay",
+      "rejected": true
+    },
+    {
+      "name": "op8_length",
+      "rejected": true
+    },
+    {
+      "name": "op8_byte",
+      "rejected": true
+    },
+    {
+      "name": "diagnostic_target",
+      "rejected": true
+    }
+  ],
+  "legacy_callback_exported_once": true,
+  "prior_nongenerated_objects_unchanged": 832,
+  "unchanged_generated_objects": [
+    "{gen}/r1_cmsis_os2_rtc.c",
+    "{gen}/fal_partition_r1_lookup.c",
+    "{gen}/fdb_utils_r1.c",
+    "{gen}/gh_demo_r1.c",
+    "{gen}/gh_demo_hook_r1.c",
+    "{gen}/gh_demo_user_r1.c",
+    "{gen}/app_error_handler_gcc_clang.c",
+    "{gen}/gh_ppg_timestamp_hooks_r1.c"
+  ],
+  "changed_generated_objects": [
+    "{gen}/r1_startup_vectors.S",
+    "{gen}/r1_uecc.c"
+  ],
+  "added_objects": [
+    "r1/src/application/runtime/native_ble_connection_control.c"
+  ],
+  "new_state_owners": [],
+  "legacy_callback_C_bytes_match_native": true,
+  "removed_imports": [
+    "r1_ble_connection_control_event_consumer"
+  ],
+  "added_imports": [
+    "r1_charge_state_cache_update",
+    "r1_connection_control_plan_adv_start",
+    "r1_ear_worn_state_notify",
+    "r1_glasses_tx_power_set",
+    "r1_peer_address_from_slots",
+    "r1_peer_address_record_update",
+    "r1_peer_is_target_glasses",
+    "r1_phone_cmd_send_op8"
+  ],
+  "application_imports": 79,
+  "contract": [
+    "Drain pointer messages from the existing BLE queue with timeout0 and no priority output. A successful null dequeue returns immediately without free; every processed nonnull item, including unknown events, is freed once before reloading the live queue handle. The passed output pointer cell is cleared between receives as stock does.",
+    "Event2 cancels the exact empty legacy callback and time callback, schedules slow parameters, then reads the live role byte. Phone role uses the existing control byte and Nordic pm_conn_secure(false), tolerates success/busy17 and preserves the distinct follow-up arguments/delays. Glasses role preserves target gating, cached state/status reports, transmit-power and unbind scheduling.",
+    "Events16/32/64 call the existing parameter adapter with modes1/2/0. Event8 forwards one byte when the full uint32 length word is nonzero, with argument length1 and trailing0.",
+    "Event200 retains the cached glasses handle, freshly checked length and cleared8-byte address query span. It accepts a match against either six-byte target, schedules a mismatch disconnect at raw0x5000, stores both targets regardless of query result/length gate, then selects advertising from mismatch and role occupancy.",
+    "Event4000 logs and supplies the same target pointer to both store arguments. Diagnostics preserve the native event200 second-target read despite its right-target label. Message words/bytes are reloaded at their observed logging/provider boundaries.",
+    "The empty callback at0x4e1e2 is a literal two-byte BX LR function in stock. The shared exported C empty function compiles to those two bytes and supplies one canonical scheduler key; no timeout work is invented."
+  ],
+  "limits": [
+    "The broad consumer import closes, exposing eight real lower hardware/service dependencies instead of supplying fake success implementations. Application imports therefore rise from72 to79; this is not a final application link.",
+    "Replay buffers have readable native header and route-specific payload extents: pair/op8 need one byte, event200 twelve bytes and event4000 six. Header-length edge cases are compared only with sufficiently backed buffers. Native faults/overreads from short allocated or invalid pointers are not a supported C contract.",
+    "The parameter integration executes actual C mode/slow/control helpers, GAP table/profile ownership and SDK SVC gateway instructions. Supervisor results, security/provider services, logging, scheduler, target/state/advertising backends and queue-get are models.",
+    "The producer integration executes the existing C encoder, memory movement, consumer and parameter helpers with a prepared allocator/FIFO/notification backend. It checks successful allocation/queueing and failed allocation/queue insertion ownership; it does not execute the RTOS allocator/queue kernel or physical radio.",
+    "The empty callback is passed to cancellation by identity in these consumer replays. Its two-byte code equality is a narrow body observation, not final image integration or a reconstruction-wide byte-identity claim.",
+    "Ordinary void AAPCS behavior, callee-saved integer/FP registers, masks, stack guards, observable passed buffers and callback tokens are checked. Private stack addresses, incidental caller-clobbered returns, aliases/concurrency, arbitrary malformed allocations and physical timing are excluded.",
+    "R1 manifest check passes. Global sources-check retains the unrelated unlisted G2 resident_rom_thumb_set.S. Final placement and device boot remain unverified. Byte identity and a paid compiler are not requirements."
+  ],
+  "evidence_files": {
+    "build/sources-goal-r1-connection-consumer-shared-c/report.json": "472cc8217120d6530bd24d05c35117fcb10deb8e7df0a7d86eef88234a469d84",
+    "r1/src/sources.json": "c0f12f6981e56cafb71db991ff438d00c5c36389b793ecc975f7ccd16d072e69",
+    "r1/src/application/runtime/native_ble_connection_control.c": "8d3dd8d57661b3bea485587722137d54fd908ab33580216dbfffe184d05b3928",
+    "r1/src/application/runtime/native_ble_connection_control.h": "153275f1b8cd4009de372d2f093cc755aeb7c197917a51676eca921c7bce45ac",
+    "r1/src/application/runtime/native_ble_message.c": "2155e44d418d1dd7cd8ebd2d98202acd063ddbafd001eaa37b01c9b18323aeb2",
+    "r1/src/application/runtime/native_memory_compare.c": "be5716143db40ad8eaeb24ff52f63cc99dfab2cbf8ea08eced56a236b84f785a",
+    "r1/src/application/runtime/native_memory_move.c": "26614e927758f8c0d0a9eb294d919a0062665a3d2cb822faa139271c564aec9e",
+    "r1/src/application/board/native_connection_parameters.c": "8a58564e5dbdcaad3be5eb3d10e2bcc55f6b1be61aa0ecf17a4e080fdf8e13a6",
+    "r1/src/application/board/native_gap_identity.c": "c0d9fbcd06d975c6d64cc68ad1ce89217cb9266dfc644179985aed198db0aa01",
+    "r1/docs/correlation/CONNECTION-CONTROL-CORRELATION.md": "2f4914a45bd625948809955cfcc090d9ee51937ff885bfc80ce2bc04086356f0",
+    "build/goal-r1-connection-consumer-c/verify.py": "47a7b8020f922b45d2e52c4cb8f907e06a8e01bb00e176dceaef69b23c3cc584",
+    "build/goal-r1-connection-consumer-c/verification.json": "ae3a4a931e2e6226f4e4f9d2a2e8983c5b3957cd248bb6bccf8f4261313efed7",
+    "build/goal-r1-connection-consumer-c/verification.log": "4d4f2e4bb3a4e8d57c098c704ee45787bae57731cc3cc47dea274c0c0128923c",
+    "build/goal-r1-connection-consumer-c/integration.json": "18fab8bc09e048577d65d7099fc50c81ba0bb96e5d0f526845ec94dfe43cf7f5",
+    "build/goal-r1-connection-consumer-c/integration.log": "a10d817da0459842828d94f96554a8866bbeb494775dfee5bd41f93b705c9df6",
+    "build/goal-r1-connection-consumer-c/make-producer.py": "fe77686906c594e88373fb9aedfe6afb6603201d07f77a679c8d0dcbccd36376",
+    "build/goal-r1-connection-consumer-c/producer-integration.py": "6b36fd8774753de82fa9df14d07daccdd64e3f896eea96fb514f4e05ef0cdecb",
+    "build/goal-r1-connection-consumer-c/producer-integration.json": "85e4c1e538a6d6115c2e3165e3629f38a61c37e7e9d2b6e775924b8580c3d4a3",
+    "build/goal-r1-connection-consumer-c/producer-integration.log": "4e992b42bfd70e4d2ff4c8d8f6c80d40ac801d3fcc20c78a8cacffd81fa37300",
+    "build/goal-r1-connection-consumer-c/final-verify.py": "54f65e5cbc39f60ae2894445ef3ae3d46cdab332cac077b413fbd14f7b62978a",
+    "build/goal-r1-connection-consumer-c/final-verify.log": "ce7d7abce153d746b9309a38de0dc8f369f782cce80dc91f4689bcd8a46cbd1d",
+    "build/goal-r1-connection-consumer-c/rea.json": "bc3d63417a3f3eb38470569ea8ccaa5e963ad8eab03be96f64634f5dd1b8d3a0",
+    "build/goal-r1-connection-consumer-c/strings.py": "0e07a5847623393067fa5540fc868cb03c82bbb9e57832c0e62783c2a95d68de",
+    "build/goal-r1-connection-consumer-c/strings.json": "99f171164d278376696678476fd0915c65e1279a2921d2095eddcb03ca15fa6b",
+    "build/goal-r1-connection-consumer-c/stock.asm": "b454d2f5b92897d6919bbd5843508bb9fa6f715db0e3c4785faa3ad1dc1b26c6",
+    "build/goal-r1-connection-consumer-c/annotated.asm": "d5acfeb16d4b424878b555e3fa4942db72121e4888d1f522ffe77c7c06ef580c",
+    "build/goal-r1-connection-consumer-c/mutants.py": "6a961c06aae890004a38f51a6a5fafc7b78c294e19d56ce50f260193dec1e99f",
+    "build/goal-r1-connection-consumer-c/mutants.json": "26ca941d0d74766527b74f42adf7fccc64df03bde616756238955423fa27ec28",
+    "build/goal-r1-connection-consumer-c/mutants.log": "f83318fa75f537290b49578cee933ceaa715d21c5e6c861c391e70f0d27c47e2",
+    "build/goal-r1-connection-consumer-c/audit.py": "8b7fa93a41394ff035c9159056a7524fe5496f6dca6bf28fe4f5c51cb862befd",
+    "build/goal-r1-connection-consumer-c/object-audit.json": "b38f5920c0bd60c919049417c9264dc3cf425497dfb7e21e715bdb6887f9fece",
+    "build/goal-r1-connection-consumer-c/r1-check.log": "ea053266a701185c4ca3e6d5c1ff02b7f71be491b34ae5845ecef6f4853b5781",
+    "build/goal-r1-connection-consumer-c/sources-check.log": "c9e715ad7b4ff994baeb534674b0205e390b9a292cc38c2e41428b65da76c81b"
+  }
+}

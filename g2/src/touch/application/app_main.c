@@ -18,7 +18,6 @@
 #include "application.h"
 #include "../calibration/calibration.h"
 #include "../config-bootstrap/bootstrap.h"
-#include "../pm-callbacks/callbacks.h"
 
 typedef void (*g2_touch_isr)(void);
 
@@ -91,7 +90,7 @@ static void wait_scan(int deep)
 
     while (Cy_CapSense_IsBusy(CTX) != 0u) {
         if (deep) {
-            (void)touch_pm_deep_sleep();
+            (void)Cy_SysPm_CpuEnterDeepSleep();
         } else {
             (void)Cy_SysPm_CpuEnterSleep();
         }

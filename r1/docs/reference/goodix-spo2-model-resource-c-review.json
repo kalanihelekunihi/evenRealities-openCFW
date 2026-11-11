@@ -1,0 +1,414 @@
+{
+  "schema_version": 1,
+  "scope": "R1 SpO2 readonly model data, native weights getter and checked forwarding adapter",
+  "report": "build/sources-goal-r1-goodix-spo2-model-resource-c/report.json",
+  "comparison_report": "build/sources-goal-r1-goodix-spo2-session-c/report.json",
+  "acceptance_target": "Complete license-free C firmware with hardware support first; byte identity waived",
+  "stock_entries": [
+    {
+      "symbol": "r1_goodix_spo2_weights_get",
+      "entry": "0x6a018",
+      "size": 4
+    },
+    {
+      "symbol": "r1_goodix_spo2_model_create",
+      "entry": "0x36c26",
+      "size": 12
+    }
+  ],
+  "native_instruction_bytes": 16,
+  "model_resource": {
+    "stock_start": "0xad1ac",
+    "stock_end_exclusive": "0xb0efc",
+    "words": 3924,
+    "bytes": 15696,
+    "sha256": "2d98b0528b0e3d98d9465dd5aa848d7ac18112069ad0ec188d15c57a1277e990",
+    "source_section": ".r1.goodix.spo2.model.words",
+    "representation": "Readonly aligned uint32_t numeric data, not executable code"
+  },
+  "remaining_boundary": {
+    "symbol": "r1_goodix_spo2_generated_model_create",
+    "entry": "0x99014",
+    "implemented": false
+  },
+  "audit": {
+    "compiled_units": 883,
+    "new_units": [
+      "r1/src/application/goodix/native_spo2_model_resource.c"
+    ],
+    "unchanged_prior_nongenerated_sources_and_objects": 872,
+    "differing_existing_generated_objects": [
+      "{gen}/r1_startup_vectors.S",
+      "{gen}/r1_uecc.c"
+    ],
+    "tested_object_equals_normal_build": true,
+    "application_imports": 63,
+    "bootloader_imports": 22,
+    "removed_imports": [
+      "r1_goodix_spo2_model_create",
+      "r1_goodix_spo2_weights_get"
+    ],
+    "added_imports": [
+      "r1_goodix_spo2_generated_model_create"
+    ],
+    "new_writable_state_bytes": 0,
+    "readonly_model_bytes": 15696,
+    "resource_sha256": "2d98b0528b0e3d98d9465dd5aa848d7ac18112069ad0ec188d15c57a1277e990",
+    "resource_is_nonexecuting_readonly_object": true,
+    "native_model_cursor_and_two_rebases_verified": true,
+    "native_function_entries_verified": 2,
+    "source_plan_and_cache_layout_unchanged": true
+  },
+  "direct": {
+    "paired_cases": 546,
+    "native_instruction_bytes_executed": [
+      4,
+      12
+    ],
+    "all_15696_resource_bytes_match": true,
+    "independent_null_forwarding_read_and_return_oracles": true,
+    "parameter_mutation_does_not_change_forwarded_weight_or_result": true,
+    "generated_constructor_modeled": true,
+    "source_cannot_execute_stock": true,
+    "BX_LR_provider_return": true,
+    "source_object_sha256": "81303b701afe087562e89a85cc2759e26ee10add4ac10776e707193f7aa464c8"
+  },
+  "actual_C_constructor": {
+    "source_object_sha256": "81303b701afe087562e89a85cc2759e26ee10add4ac10776e707193f7aa464c8",
+    "paired_cases": 582,
+    "native_instruction_bytes_executed": [
+      128,
+      38,
+      28,
+      52,
+      62,
+      32,
+      52,
+      98,
+      50,
+      28,
+      48,
+      26,
+      26
+    ],
+    "actual_C_constructor_session_queues_weights_getter_and_forwarding_adapter_execute": true,
+    "allocation_and_generated_constructor_modeled": [
+      "goodix_mem_malloc",
+      "r1_goodix_spo2_generated_model_create"
+    ],
+    "complete_public_state_and_allocated_arena_match": true,
+    "independent_validation_and_helper_return_oracles": true,
+    "source_cannot_execute_stock": true,
+    "BX_LR_port_returns": true,
+    "active_FP_context_with_exact_FPSCR_and_saved_registers": true,
+    "broad_copy_memory_hook_avoided_after_independent_probe": true,
+    "null_allocation_checks_are_logical_access_shape_only": true
+  },
+  "actual_C_heap_lifecycle": {
+    "lifecycle_cases": 128,
+    "constructor_and_complete_C_teardown_and_actual_C_heap_execute": true,
+    "generated_model_constructor_only_remains_modeled": true,
+    "actual_session_short_pair_weights_getter_adapter_execute_and_generated_model_is_null": true,
+    "complete_heap_and_owner_and_provider_snapshots_match": true,
+    "all_recovered_allocations_released_to_prior_top": true,
+    "broad_memory_write_hook_disabled_after_independent_copy_probe": true,
+    "source_object_sha256": "81303b701afe087562e89a85cc2759e26ee10add4ac10776e707193f7aa464c8"
+  },
+  "native_cursor_and_rebase_proof": {
+    "model_words": 3924,
+    "model_bytes": 15696,
+    "stock_RAM_rebase_and_compiled_C_resource_build_identical_after_pointer_normalization": true,
+    "runs": [
+      {
+        "model_resource_unchanged": true,
+        "base": "0xad1ac",
+        "allocation_sizes": [
+          836,
+          64
+        ],
+        "cursor_byte_offsets": [
+          1756,
+          3512,
+          7384,
+          7492,
+          14828,
+          15644,
+          15696
+        ],
+        "model_data_bytes_read": 48,
+        "max_model_read_offset": 2819,
+        "model_resource_never_executed": true,
+        "constructor_instruction_addresses": 558
+      },
+      {
+        "model_resource_unchanged": true,
+        "base": "0x20008000",
+        "allocation_sizes": [
+          836,
+          64
+        ],
+        "cursor_byte_offsets": [
+          1756,
+          3512,
+          7384,
+          7492,
+          14828,
+          15644,
+          15696
+        ],
+        "model_data_bytes_read": 48,
+        "max_model_read_offset": 2819,
+        "model_resource_never_executed": true,
+        "constructor_instruction_addresses": 558
+      },
+      {
+        "model_resource_unchanged": true,
+        "base": "0x100018",
+        "allocation_sizes": [
+          836,
+          64
+        ],
+        "cursor_byte_offsets": [
+          1756,
+          3512,
+          7384,
+          7492,
+          14828,
+          15644,
+          15696
+        ],
+        "model_data_bytes_read": 48,
+        "max_model_read_offset": 2819,
+        "model_resource_never_executed": true,
+        "constructor_instruction_addresses": 558
+      }
+    ]
+  },
+  "compiled_defects_rejected": [
+    {
+      "name": "read_wrong_parameter_word",
+      "compiled": true,
+      "rejected": true,
+      "case": {},
+      "structural_resource_check": false
+    },
+    {
+      "name": "ignore_null_weights",
+      "compiled": true,
+      "rejected": true,
+      "case": {
+        "weights": 0
+      },
+      "structural_resource_check": false
+    },
+    {
+      "name": "discard_generated_result",
+      "compiled": true,
+      "rejected": true,
+      "case": {},
+      "structural_resource_check": false
+    },
+    {
+      "name": "truncate_return_pointer",
+      "compiled": true,
+      "rejected": true,
+      "case": {
+        "result": 2147483648
+      },
+      "structural_resource_check": false
+    },
+    {
+      "name": "wrong_getter_offset",
+      "compiled": true,
+      "rejected": true,
+      "case": {
+        "getter": true
+      },
+      "structural_resource_check": false
+    },
+    {
+      "name": "corrupt_first_resource_word",
+      "compiled": true,
+      "rejected": true,
+      "case": {
+        "getter": true
+      },
+      "structural_resource_check": false
+    },
+    {
+      "name": "corrupt_last_resource_word",
+      "compiled": true,
+      "rejected": true,
+      "case": {
+        "getter": true
+      },
+      "structural_resource_check": false
+    },
+    {
+      "name": "mutable_resource",
+      "compiled": true,
+      "rejected": true,
+      "case": {
+        "getter": true
+      },
+      "structural_resource_check": true
+    },
+    {
+      "name": "gate_on_low_bit_only",
+      "compiled": true,
+      "rejected": true,
+      "case": {
+        "weights": 2147483648
+      },
+      "structural_resource_check": false
+    },
+    {
+      "name": "truncate_weight_pointer",
+      "compiled": true,
+      "rejected": true,
+      "case": {},
+      "structural_resource_check": false
+    }
+  ],
+  "contract": [
+    "Getter returns a stable aligned readonly3924-word model resource. Every compiled resource byte matches the pinned reference; the resource section is nonwritable/nonexecuting and its symbol is an object.",
+    "Forwarding head reads only parameter word1. Null weights return null without a call; nonnull weights pass the full pointer to the generated constructor and forward its complete returned pointer, even after parameter mutation. No invented null-parameter guard.",
+    "The generated native constructor consumes the model stream through cursor byte offsets1756,3512,7384,7492,14828,15644,15696 and allocates836+64 bytes. Stock placement, a RAM rebase and the compiled C readonly resource yield identical constructed records after resource-pointer normalization, and resource bytes remain unchanged."
+  ],
+  "limits": [
+    "Only the4-byte getter and12-byte forwarding head are C function admissions. The252-byte generated constructor at99014 and its graph/tensor/executor dependencies remain unimplemented. The native constructor is executed separately as an analysis reference, never retained as executable data in C.",
+    "Construction directly reads only48 model bytes and carries references over the other coefficients; inference-time coefficient use and numerical output are not proven. Cursor consumption establishes the data extent, and full-byte comparison establishes resource identity.",
+    "The546 direct comparisons include null/non-null/extreme pointers, word offsets, mutation, buffer seeds and masks. All16 native head/accessor instruction bytes execute, with independent read/call/return oracles; generated construction is modeled.",
+    "The582-case SpO2 constructor replay executes actual C session/queue code, getter and forwarding head, modeling allocation and generated construction only. The128 actual-C heap/complete-teardown cases model only generated construction, which returns null and therefore excludes its allocations. All allocations made by recovered C code coalesce to the prior top.",
+    "Source tests cannot execute stock; modeled ports return via BX LR. Source resource data is compared by contents rather than absolute pointer address. Saved registers, SP, masks and guards checked; invalid parameter addresses, caller scratch, APSR, private frames, cold FP activation, concurrency and physical hardware remain outside proof.",
+    "Initial probes used a broader compiler profile; all final corpora and negative controls were rerun with the exact normal unit argv, and the tested object equals the normal object. No firmware edits were required by that probe correction.",
+    "No new writable state. All872 prior nongenerated source/object pairs unchanged; generated startup/uecc differ. The883-unit build replaces two imports with one generated-constructor import, reducing application imports64 to63; boot remains22. Source-plan/cache layout unchanged.",
+    "The data is a source initializer for model parameters, not an opcode array or retained executable region. Byte equality of this data does not establish instruction/image identity or a bootable firmware build.",
+    "Generated model construction/inference, other algorithm/hardware dependencies, final executable linking/startup, physical sensors and device boot remain open."
+  ],
+  "evidence_files": {
+    "build/sources-goal-r1-goodix-spo2-model-resource-c/report.json": "99dd46e8c0d343abbb953237d316fae884e2145f95530fd9c924e55e0bf1e4b7",
+    "build/sources-goal-r1-goodix-spo2-session-c/report.json": "8991d34b90d57d9b15926020f6fb4bf41a30952b641d5e0df1eda481ab1bd282",
+    "r1/src/application/goodix/native_spo2_model_resource.c": "8fbf32d3095eb99085ed94f0fe4e500cc1cfae88a1df653af7a4f35834ef92f5",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-spo2-model-resource-c/r1/r1-application/r1__src__application__goodix__native_spo2_model_resource.c.o": "81303b701afe087562e89a85cc2759e26ee10add4ac10776e707193f7aa464c8",
+    "r1/src/sources.json": "08969e42c8e387e174af680efdf7f46fc0ebbf759cd3e313fac7e18da7e05edc",
+    "tools/build/source-plan.json": "eeb516e31b3310fb0718f36908977f8125723f7c5e0e86cd6744395826259a4d",
+    "r1/src/config/runtime/native_health_cache.ld": "eb8f131c489cd818d4e36718718fa1989719ca0170f164541a1a5bf56dfc1ec3",
+    "r1/docs/reference/FUNCTION-OWNERSHIP.csv": "ca3c60d6284d43693be9583da10c4109330c83f6cc95f164944783f95718d3d2",
+    "r1/symbols/function-frontier.csv": "bb536b0abf5cd9176167641dcd57a02cbe913f830e5b4ad405554b1ae59f8289",
+    "r1/docs/reference/goodix-spo2-session-c-review.md": "aa5d0d21b86330d00b05ee713444591f498202578cf228a6ef0d36c6bff782ce",
+    "build/goal-r1-goodix-native-heap-init-c/fill.o": "5b9881f48c6329da35510eb6b3f4be65d3c31bab24e2f6ab7d5713597d06c391",
+    "r1/src/vendor/goodix_primitives/goodix_primitives.c": "6ba3fff7701c90db05c8700e5b27d9cdbca327887deb92a9cef2bda03c5bf75b",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-spo2-model-resource-c/r1/r1-application/r1__src__vendor__goodix_primitives__goodix_primitives.c.o": "a3721ecc5551d066cba889dc052bc3c2c2343c69683909c89ddc9a1f3b0a84b5",
+    "third-party/upstream/musl-memmove-1.2.5/memmove.c": "1304f9ddfc18594f5d9a84691892b9fdaf3be8ecc6d7f365c691abb138eaf74e",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-spo2-model-resource-c/r1/r1-application/third-party__upstream__musl-memmove-1.2.5__memmove.c.o": "4a6ccefb180ef4af2cfe631f54df4d6f629d1b3a2d374911c00b25c107bcb723",
+    "third-party/upstream/musl-memory-1.2.5/memcpy.c": "1664d565f968b053ac33c5ac615c057a255a5821c8fa510fba61d4f63dee08e9",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-spo2-model-resource-c/r1/r1-application/third-party__upstream__musl-memory-1.2.5__memcpy.c.o": "a4b54c7315f7ca2f8097e3f9afb4a9bcd7860c75649fc9e185d951c3ea0696cf",
+    "third-party/upstream/musl-memory-1.2.5/memset.c": "2a74d9e7f988945e0d691d480b78d77a228da0d2be401c1000637cc879b2c0be",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-spo2-model-resource-c/r1/r1-application/third-party__upstream__musl-memory-1.2.5__memset.c.o": "6c2f1a8f480c27d5bc20f79ac535dac28fbbdcaec12e69bad96721f724ec9057",
+    "third-party/upstream/musl-memory-1.2.5/strcmp.c": "3e1793ea2dd358e5c884c4dd232083605d0f6775f7ebe19d03d64fe97068a78f",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-spo2-model-resource-c/r1/r1-application/third-party__upstream__musl-memory-1.2.5__strcmp.c.o": "d2d1444d824aed4070fa9271ff54cbd83bd5390686232894dbad3c3a36189e3d",
+    "r1/src/application/goodix/native_heap_init.c": "c3085064866b23d603697918b6dfdd29f66ab68c7e82cb1f3e10443c80e3f8b6",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-spo2-model-resource-c/r1/r1-application/r1__src__application__goodix__native_heap_init.c.o": "d25f87d5c62ab05f6d5e4d73cc1de5afacf8300a5f1286735b75c9715c30063c",
+    "r1/src/application/goodix/native_heap_free.c": "175cf893ee4b475bee0a886d69522782ac879dd0b29c43285d957c03fb4dc7c4",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-spo2-model-resource-c/r1/r1-application/r1__src__application__goodix__native_heap_free.c.o": "bc333928ee0e42aaf0a0446eb69f4ff0528fd2f27737d5ed1744ed750b807022",
+    "r1/src/application/goodix/native_heap_allocate.c": "2806f3ca4f9074b157b390edf8bd03815a46b31f1661e1ed238a0938c666d8c9",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-spo2-model-resource-c/r1/r1-application/r1__src__application__goodix__native_heap_allocate.c.o": "129b40a4930e85990e0ba9503f83bbc867460580ef323f2a6dfa2476e7dad685",
+    "r1/src/application/goodix/native_heap_malloc.c": "1b827deb8981088d68fae260af0aa442a7315d4aaaa7f2ed8a248c859878a0c3",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-spo2-model-resource-c/r1/r1-application/r1__src__application__goodix__native_heap_malloc.c.o": "977cb669d0ca7b16102f67629d38c362cd2c47fba05cb890577e367a4f9d0138",
+    "r1/src/application/goodix/native_record_teardown.c": "b7cea98e79bac3f8c5d80bc58c59e81840d7e9b8b9267429e83c4ebb981bbf45",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-spo2-model-resource-c/r1/r1-application/r1__src__application__goodix__native_record_teardown.c.o": "785df1baa1e96a2723aa03debb90b5dc7bfa44a1e76283a79645968876cec4de",
+    "r1/src/application/goodix/native_spo2_teardown.c": "9ae3cfae4ef6fd1cfcdaa5a0bc1dda0ff036c336436e5b2217d217fff632003f",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-spo2-model-resource-c/r1/r1-application/r1__src__application__goodix__native_spo2_teardown.c.o": "2df10a24911f72ece7ad1da5bc944e9994cfcfaa1357c3404f19ba13e503ecab",
+    "r1/src/application/goodix/native_spo2_initialize.c": "41e6290e411795ade2bb7b0c9b3aa3b30678483bfb7b3b2c86e3e25d79908c82",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-spo2-model-resource-c/r1/r1-application/r1__src__application__goodix__native_spo2_initialize.c.o": "416f2e823ae3edd838065709e40b06eaa5b9648ad2462237656ffdf5b212b129",
+    "r1/src/application/goodix/native_spo2_session_initialize.c": "30127da0d135b26a6459f6af4a85a96b1d08a55d6bec6ff09fdfbdf8522dfeae",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-spo2-model-resource-c/r1/r1-application/r1__src__application__goodix__native_spo2_session_initialize.c.o": "507f8e0db602ee67008460fc2f485d84fa340bef6bbf23a09bd035d1f9b629d5",
+    "build/goal-r1-goodix-spo2-model-resource-c/verify-final.log": "4663ef13718dc396ea5e025fef79b3cf95380dd21a4f71d4fa494128afb50a7d",
+    "build/goal-r1-goodix-spo2-model-resource-c/audit.json": "feb76a9337ed92b2e8fd13798b48bd742deaad595e23ffe8146930510c323e91",
+    "build/goal-r1-goodix-spo2-model-resource-c/heap.py": "ab79ff0ff2eb9c18f26ed317024af79c7785b9ef13abf64eeaf57a73881a2ca1",
+    "build/goal-r1-goodix-spo2-model-resource-c/audit.py": "ba6ab0f1380b1cef16a075dc1e597f33af294d5895f18aa9ab8307b43503173f",
+    "build/goal-r1-goodix-spo2-model-resource-c/constructor.py": "2f0d0be453037cc11016f13d9d754361cdab4015debcfe2b23e817f13f0dc2a0",
+    "build/goal-r1-goodix-spo2-model-resource-c/source.elf": "3c6ec0117585f111ba183e33c972d488d50fb94e64d2d984238c336088727dfa",
+    "build/goal-r1-goodix-spo2-model-resource-c/inspect-native-final.log": "e0965cacebdfce2449150b90a3cc60f92060420bd1b999fee1a622fb2bcab3f7",
+    "build/goal-r1-goodix-spo2-model-resource-c/negative.py": "720e8c62e8bb0509687aa2886f8575abb8033f0eb2fee8259d965fc7f153a362",
+    "build/goal-r1-goodix-spo2-model-resource-c/negative-results.json": "e30c09b234bde9bbaa867301c8e938cde74673c266c5db9f428dfa42db5c861c",
+    "build/goal-r1-goodix-spo2-model-resource-c/source.o": "81303b701afe087562e89a85cc2759e26ee10add4ac10776e707193f7aa464c8",
+    "build/goal-r1-goodix-spo2-model-resource-c/results.json": "43b3d6b9fc563630c89a7b7f8b73a0546f1a7861d423716baadfa44cdef1b4b9",
+    "build/goal-r1-goodix-spo2-model-resource-c/rea.json": "84bc29d0e38692a2fe03823b0cab5b5f00659245fd26f8a6e80330b3c260b470",
+    "build/goal-r1-goodix-spo2-model-resource-c/compile-argv.json": "d8a31b7405433ce0efdeb407e0acfb2c0debed3c0a2be6cdd6160c2f1d61cbda",
+    "build/goal-r1-goodix-spo2-model-resource-c/manifest-before.json": "536d44301b84a981dbd36c00876b96963294cdb91d4a2db2d29f599e4bc9375e",
+    "build/goal-r1-goodix-spo2-model-resource-c/source.d": "2229b920f1905079e2ab9453d7fdb7aa69805ce180f60cfc7d8226d662c3a0e2",
+    "build/goal-r1-goodix-spo2-model-resource-c/verify.py": "7d3bf583d148caca7c90c61b94fb3cae24649d5c30c061011358b8c92decce10",
+    "build/goal-r1-goodix-spo2-model-resource-c/inspect_native.py": "779a6cb4f72e8304789c15cc7e5c8e6b0dc4055554860831b79ccf10ab0521cb",
+    "build/goal-r1-goodix-spo2-model-resource-c/native-model-cursor-review.json": "703bc89d711dde7d99fc418a128a5e370d4677450afc7ff8a4b39e351c563ec5",
+    "build/goal-r1-goodix-spo2-model-resource-c/build.log": "259ca348e139fad56b04ef8f56833007d6b196a7c8d66de0a8da7fa03bca8845",
+    "build/goal-r1-goodix-spo2-model-resource-c/constructor/verify-final.log": "5a884c4e15c8c6953d489ae2b6e82456bc36424e698914e798f04a93a53841af",
+    "build/goal-r1-goodix-spo2-model-resource-c/constructor/test.ld": "e1fabde4096b019fc49bc372fb86cc3b392c05e05ec07090cda86f8153a6063b",
+    "build/goal-r1-goodix-spo2-model-resource-c/constructor/source.elf": "488d4afac6c99bd10b331719a4890437132f3245fb1ba904e7a0c9fc97a6afb5",
+    "build/goal-r1-goodix-spo2-model-resource-c/constructor/results.json": "05cf0c15a90ff0b0abb4d069f578ffc8540a0677804a507df13b888d9e15f9cd",
+    "build/goal-r1-goodix-spo2-model-resource-c/heap/verify-final.log": "9d7c7bd42cd0a1c04e89c7fb8b7ee7afcf980a0a6fb2d04e8a2accf8191e2038",
+    "build/goal-r1-goodix-spo2-model-resource-c/heap/test.ld": "f1169785ba906d75bb7f54716784a141fa1f843b5737d8893234059a8ff2ea58",
+    "build/goal-r1-goodix-spo2-model-resource-c/heap/source.elf": "87d736483a58e51cd4335b82e968da23825d19c0b7e06e280d5929b3b429903f",
+    "build/goal-r1-goodix-spo2-model-resource-c/heap/results.json": "d367145deedac7499d66c3ea3a2b7a58d362d7c621a35a08bd526fc76bf4b92e",
+    "build/goal-r1-goodix-spo2-model-resource-c/negative-read_wrong_parameter_word/candidate.c": "d43bbd05f8f9dba8de499aec3c0e12f5ff7d611d9a210e815464fa53fff108f5",
+    "build/goal-r1-goodix-spo2-model-resource-c/negative-read_wrong_parameter_word/verify.log": "69807f08f99dd45ad494c93fb0d1a1c3dc231b2e7e3652a46bc851ab6d32c467",
+    "build/goal-r1-goodix-spo2-model-resource-c/negative-read_wrong_parameter_word/source.elf": "467d27fad3bc7be0c54d49a75daa6b1c9a75e5397da31b8fe3970cec21bb8a57",
+    "build/goal-r1-goodix-spo2-model-resource-c/negative-read_wrong_parameter_word/source.o": "0c39f533521b2b94ad019d75d27e7a34581d5604b799aca3ab9a3aa5afaaaf12",
+    "build/goal-r1-goodix-spo2-model-resource-c/negative-read_wrong_parameter_word/compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/goal-r1-goodix-spo2-model-resource-c/negative-read_wrong_parameter_word/source.d": "8d8758a7464ad8700972ceb30f42602d0cde28f9215bd06a163133ef1e5c1016",
+    "build/goal-r1-goodix-spo2-model-resource-c/negative-ignore_null_weights/candidate.c": "786fe188cc5719278b8fef77dfe2ceb5ebb4618de329b90ca6c4d613ebe6160c",
+    "build/goal-r1-goodix-spo2-model-resource-c/negative-ignore_null_weights/verify.log": "69807f08f99dd45ad494c93fb0d1a1c3dc231b2e7e3652a46bc851ab6d32c467",
+    "build/goal-r1-goodix-spo2-model-resource-c/negative-ignore_null_weights/source.elf": "d2f890443fd3a87bc0e72be4b74904aaa57a9cfd5084a8b8cfeab19e516d4b53",
+    "build/goal-r1-goodix-spo2-model-resource-c/negative-ignore_null_weights/source.o": "6783218316c2a6fa9e998bc92294547b731beeeb7f7c8e4836b75bbd16a09b9e",
+    "build/goal-r1-goodix-spo2-model-resource-c/negative-ignore_null_weights/compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/goal-r1-goodix-spo2-model-resource-c/negative-ignore_null_weights/source.d": "685b124697f7a902d67138f28bb76c886d81214fefd91f90851d3c180a0d875b",
+    "build/goal-r1-goodix-spo2-model-resource-c/negative-discard_generated_result/candidate.c": "7f0dc6bd8f93c16fbe1e7002e6d2566835ec41ee77778ecb4d46f9c59481c7d6",
+    "build/goal-r1-goodix-spo2-model-resource-c/negative-discard_generated_result/verify.log": "69807f08f99dd45ad494c93fb0d1a1c3dc231b2e7e3652a46bc851ab6d32c467",
+    "build/goal-r1-goodix-spo2-model-resource-c/negative-discard_generated_result/source.elf": "f4fa69225c313ef6b4bd55e0872b13fa9d68f8aaa09ec47fe2cbaefdc397fb49",
+    "build/goal-r1-goodix-spo2-model-resource-c/negative-discard_generated_result/source.o": "aa93687e0e18e305ac19996bb9a526474ef1d7fe5f1d3a7085980b8313dcc1f4",
+    "build/goal-r1-goodix-spo2-model-resource-c/negative-discard_generated_result/compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/goal-r1-goodix-spo2-model-resource-c/negative-discard_generated_result/source.d": "138770fdfe961d7d8831928edca916de647f00a0dad34c591c0cc48c534dcb67",
+    "build/goal-r1-goodix-spo2-model-resource-c/negative-truncate_return_pointer/candidate.c": "dad42d2a2c04d3bbbb13e079e0b80bb9b1c18d1dcd157fc49a973dbe9e39f530",
+    "build/goal-r1-goodix-spo2-model-resource-c/negative-truncate_return_pointer/verify.log": "69807f08f99dd45ad494c93fb0d1a1c3dc231b2e7e3652a46bc851ab6d32c467",
+    "build/goal-r1-goodix-spo2-model-resource-c/negative-truncate_return_pointer/source.elf": "9c88c00189d184934b891527822cb1017657f4be4ed49918427e4bb0e0d3321c",
+    "build/goal-r1-goodix-spo2-model-resource-c/negative-truncate_return_pointer/source.o": "30ee52090b1be883c2304e38494f420e5ab094ab6f87a7c4baa68e960e9c5307",
+    "build/goal-r1-goodix-spo2-model-resource-c/negative-truncate_return_pointer/compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/goal-r1-goodix-spo2-model-resource-c/negative-truncate_return_pointer/source.d": "25725ddd897011a5ef40b0d8e2879e0cca0da527d6c48bdbae430e73f3a1a087",
+    "build/goal-r1-goodix-spo2-model-resource-c/negative-wrong_getter_offset/candidate.c": "340a845d5cfb3b3ce0b3069955f69e9a557ab3f2b0983dd25cead202c03599ac",
+    "build/goal-r1-goodix-spo2-model-resource-c/negative-wrong_getter_offset/verify.log": "53199df6bb0d3aec3728b12526b2e16eff2b6291fa0a84808d770c11840d5617",
+    "build/goal-r1-goodix-spo2-model-resource-c/negative-wrong_getter_offset/source.elf": "b827d419fd9e3fc4a170c07002da9f4fc1aebf32e293df0d49d1dcb30a503b51",
+    "build/goal-r1-goodix-spo2-model-resource-c/negative-wrong_getter_offset/source.o": "aec9805070b44b7d62463468515786af51d1761bd3ca87108b8677c6eed64310",
+    "build/goal-r1-goodix-spo2-model-resource-c/negative-wrong_getter_offset/compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/goal-r1-goodix-spo2-model-resource-c/negative-wrong_getter_offset/source.d": "96db2667428b533f2fdc63fb69eb44792055ea7484d9b9581ebd6cf173e576c1",
+    "build/goal-r1-goodix-spo2-model-resource-c/negative-corrupt_first_resource_word/candidate.c": "3bb25d53a3272ea65ab763cc246cfbbd549c07bf0c63cc5131338bbf29067f88",
+    "build/goal-r1-goodix-spo2-model-resource-c/negative-corrupt_first_resource_word/verify.log": "87f703d543585729c5a14b5a7e52ab6f9261f7a7b715eb423dcadbbc27154816",
+    "build/goal-r1-goodix-spo2-model-resource-c/negative-corrupt_first_resource_word/source.elf": "83b6e2677dc5888f65d7c6981a9d77f1a84de782073b515f97a98cd3e11b1e8a",
+    "build/goal-r1-goodix-spo2-model-resource-c/negative-corrupt_first_resource_word/source.o": "fae9d58c6736e628cc95113e3c12cf9da5210a56cd667625e16e94bb8cda11d8",
+    "build/goal-r1-goodix-spo2-model-resource-c/negative-corrupt_first_resource_word/compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/goal-r1-goodix-spo2-model-resource-c/negative-corrupt_first_resource_word/source.d": "e9bf7955b5aa065015f77674ec6ea12d378f4f42abfdae4862a5c8ba33299352",
+    "build/goal-r1-goodix-spo2-model-resource-c/negative-corrupt_last_resource_word/candidate.c": "2d9380f2c7c8bdbd1b16d092214165d6f57fd54d25b83495029174d1cc08157b",
+    "build/goal-r1-goodix-spo2-model-resource-c/negative-corrupt_last_resource_word/verify.log": "87f703d543585729c5a14b5a7e52ab6f9261f7a7b715eb423dcadbbc27154816",
+    "build/goal-r1-goodix-spo2-model-resource-c/negative-corrupt_last_resource_word/source.elf": "8ebbb53ca93d041b79f74d14eb5662855efc17e037f18342ecec6f8a47d6d37e",
+    "build/goal-r1-goodix-spo2-model-resource-c/negative-corrupt_last_resource_word/source.o": "d51278d9227117b77cce4b33138e8be088d20cbbaa3fe7a404e8042ea9bd1305",
+    "build/goal-r1-goodix-spo2-model-resource-c/negative-corrupt_last_resource_word/compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/goal-r1-goodix-spo2-model-resource-c/negative-corrupt_last_resource_word/source.d": "360b5a77c8794daa4a83b46048141bbf83ec9f05c958f66f0c4a38c3b1b96d46",
+    "build/goal-r1-goodix-spo2-model-resource-c/negative-mutable_resource/candidate.c": "214107482218da30b50f2ad3e27882d18545c2a5c9e011ded72e646b500e6b3a",
+    "build/goal-r1-goodix-spo2-model-resource-c/negative-mutable_resource/verify.log": "148ae84a6990d2af0adf5cbfec61fcee4e6589aa414d16ad6c3ecc658422743f",
+    "build/goal-r1-goodix-spo2-model-resource-c/negative-mutable_resource/source.o": "5bce46c56907ce82f952244bccbbf95a074492a0bb453714faa9003a66d566a8",
+    "build/goal-r1-goodix-spo2-model-resource-c/negative-mutable_resource/compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/goal-r1-goodix-spo2-model-resource-c/negative-mutable_resource/source.d": "ef1a28af8c2ecf0b765f07b098e5dfd3d38e919668800c8eb15442db2b6af1ee",
+    "build/goal-r1-goodix-spo2-model-resource-c/negative-gate_on_low_bit_only/candidate.c": "ce82b73d4c3aeb7016292203bd1eb07b190c6991cbff30f18b824a02e99776ed",
+    "build/goal-r1-goodix-spo2-model-resource-c/negative-gate_on_low_bit_only/verify.log": "69807f08f99dd45ad494c93fb0d1a1c3dc231b2e7e3652a46bc851ab6d32c467",
+    "build/goal-r1-goodix-spo2-model-resource-c/negative-gate_on_low_bit_only/source.elf": "a1c7990cd9d18d20d5664963cc424a67c910f63380dda278959a7eb9b8414b6c",
+    "build/goal-r1-goodix-spo2-model-resource-c/negative-gate_on_low_bit_only/source.o": "08c2a79630bf6f2b3c812eb607b0ce396845b4eca9789c080d2f389516786c02",
+    "build/goal-r1-goodix-spo2-model-resource-c/negative-gate_on_low_bit_only/compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/goal-r1-goodix-spo2-model-resource-c/negative-gate_on_low_bit_only/source.d": "b757d990197681407ce7c445b189f59c61ef15832effe9fd22ed5fcc4994d06a",
+    "build/goal-r1-goodix-spo2-model-resource-c/negative-truncate_weight_pointer/candidate.c": "fa50c867774ec5d0b96d8512c8d80282972e33c6e429c930baefec26e3b0c5c7",
+    "build/goal-r1-goodix-spo2-model-resource-c/negative-truncate_weight_pointer/verify.log": "12e904a63874f5d192311ffe5ee03e9dc55dfa89e9609b6e482b7d6c1df01f14",
+    "build/goal-r1-goodix-spo2-model-resource-c/negative-truncate_weight_pointer/source.elf": "682237b309605988c078a95250bd6589a8589d570b5788a9e87532ac5a556e06",
+    "build/goal-r1-goodix-spo2-model-resource-c/negative-truncate_weight_pointer/source.o": "4d3e1f39045792bddc942b218971e7a892777fa320ee2c81272e64c1d86a1211",
+    "build/goal-r1-goodix-spo2-model-resource-c/negative-truncate_weight_pointer/compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/goal-r1-goodix-spo2-model-resource-c/negative-truncate_weight_pointer/source.d": "2cfbb2f84926ca7fd7cba0e21e8562ea205672749a8d9aad167a56f4f6e8d298"
+  }
+}

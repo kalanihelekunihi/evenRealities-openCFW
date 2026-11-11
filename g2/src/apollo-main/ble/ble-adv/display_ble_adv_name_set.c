@@ -31,7 +31,7 @@ void audio_ble_adv_name_set(void) {
     if(audio_ble_slave_mode_context==0) {
       (void)audio_wsf_interrupt_mask_set();
       *(volatile uint32_t *)(uintptr_t)UINT32_MAX=0u;
-      for(;;) { __asm volatile("" ::: "memory"); }
+      for(;;) { }
     }
     uint8_t *ctx=audio_ble_slave_mode_context;
     (void)audio_queue_copy_bytes(ctx+15u,number,6u);

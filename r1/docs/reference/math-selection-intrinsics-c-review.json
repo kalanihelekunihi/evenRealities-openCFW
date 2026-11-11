@@ -1,0 +1,284 @@
+{
+  "schema_version": 1,
+  "scope": "Hardware math and flag interfaces through C arithmetic/compiler intrinsics",
+  "acceptance_target": "Hardware-first license-free C firmware; byte identity waived",
+  "report": "build/sources-goal-r1-spectral-parent-math-intrinsics-c/report.json",
+  "comparison_report": "build/sources-goal-r1-goodix-spectral-parent-c/report.json",
+  "stock_entries": [
+    {
+      "symbol": "r1_native_ceilf",
+      "entry": "0x389f0",
+      "instruction_bytes": 98,
+      "source": "r1/src/application/runtime/native_math_selection.c"
+    },
+    {
+      "symbol": "r1_native_floorf",
+      "entry": "0x39220",
+      "instruction_bytes": 98,
+      "source": "r1/src/application/runtime/native_math_selection.c"
+    },
+    {
+      "symbol": "r1_native_compare_absf",
+      "entry": "0x98eca",
+      "instruction_bytes": 16,
+      "source": "r1/src/application/runtime/native_math_selection.c"
+    },
+    {
+      "symbol": "r1_binary32_compare_flags",
+      "entry": "0x28364",
+      "instruction_bytes": 54,
+      "source": "r1/src/application/runtime/native_math_selection.c"
+    }
+  ],
+  "audit": {
+    "compiled_units": 915,
+    "application_imports": 86,
+    "bootloader_imports": 22,
+    "unchanged_prior_nongenerated_sources_and_objects": 904,
+    "tested_object_matches_normal_build_except_source_filename": true,
+    "inline_assembly_blocks_removed": 3,
+    "remaining_ABI_assembly_bridges": 1,
+    "differential_calls": 295104,
+    "independent_value_oracle_calls": 12268,
+    "positive_control_baseline_calls": 84,
+    "APSR_interface_calls": 8704,
+    "actual_parent_operand_calls": 96,
+    "total_verified_calls": 316256,
+    "compiled_defects_rejected": 6,
+    "FP_control_status_combinations": 32,
+    "source_plan_and_cache_layout_unchanged": true,
+    "new_owned_state_bytes": 0
+  },
+  "arithmetic_matrix": {
+    "paired_entry_calls": 295104,
+    "input_bit_patterns": 3074,
+    "FP_control_status_combinations": 32,
+    "source_object_sha256": "4ed16c5a899b34400bf0bf21b2dc7a3aaa52ba85fc8e4703e8ee5b94f6aec022",
+    "source_cannot_execute_stock": true,
+    "compared": [
+      "S0",
+      "FPSCR",
+      "saved_registers",
+      "SP",
+      "masks",
+      "public_RAM"
+    ]
+  },
+  "independent_oracles": {
+    "independent_value_oracle_calls": 12268,
+    "ceil_floor": "Python integer ceil/floor with original sign on zero",
+    "compare_abs": "Independent encoding rule including unordered-retention and FZ denormal retention"
+  },
+  "compiled_controls": {
+    "positive_baseline_cases": 84,
+    "compiled_deviations": [
+      {
+        "name": "omit-inexact-add",
+        "rejected": true,
+        "symbol": "r1_native_ceilf",
+        "input_bits": "0x1",
+        "fpscr": "0x0",
+        "native": [
+          1065353216,
+          536870928
+        ],
+        "defect": [
+          1065353216,
+          536870912
+        ],
+        "object_sha256": "2d7d15ce43937cdadceaa442020bbd4d752b5cb271a2ade81e34e91a91443dd4"
+      },
+      {
+        "name": "omit-denormal-flush",
+        "rejected": true,
+        "symbol": "r1_native_compare_absf",
+        "input_bits": "0x1",
+        "fpscr": "0x1000000",
+        "native": [
+          1,
+          1627390080
+        ],
+        "defect": [
+          1,
+          553648128
+        ],
+        "object_sha256": "6bc0d480dbaea93e8c790231428b149c3357174c9719f43a884b59b599d8e988"
+      },
+      {
+        "name": "omit-input-denormal-flag",
+        "rejected": true,
+        "symbol": "r1_native_compare_absf",
+        "input_bits": "0x1",
+        "fpscr": "0x1000000",
+        "native": [
+          1,
+          1627390080
+        ],
+        "defect": [
+          1,
+          1627389952
+        ],
+        "object_sha256": "770dc8a9aecbef39e0ee1a095f1825114701ad968043a15b86b9e91d69d76692"
+      },
+      {
+        "name": "omit-invalid-flag",
+        "rejected": true,
+        "symbol": "r1_native_compare_absf",
+        "input_bits": "0x7fc00001",
+        "fpscr": "0x0",
+        "native": [
+          2143289345,
+          805306369
+        ],
+        "defect": [
+          2143289345,
+          805306368
+        ],
+        "object_sha256": "c607673d3fd52a0c5ae065f4fe09fd7325e2cd4fc7fc0c5d9a9945ac533084e9"
+      },
+      {
+        "name": "wrong-zero-flags",
+        "rejected": true,
+        "symbol": "r1_native_compare_absf",
+        "input_bits": "0x0",
+        "fpscr": "0x0",
+        "native": [
+          0,
+          1610612736
+        ],
+        "defect": [
+          0,
+          536870912
+        ],
+        "object_sha256": "59dee40c048d9de511204fc5075d03d22009d9af30b0bb06154357bb2ecab406"
+      },
+      {
+        "name": "clear-prior-FP-status",
+        "rejected": true,
+        "symbol": "r1_native_ceilf",
+        "input_bits": "0x0",
+        "fpscr": "0x1000000",
+        "native": [
+          0,
+          553648128
+        ],
+        "defect": [
+          0,
+          536870912
+        ],
+        "object_sha256": "853a88c722530c4b8dbe260c84f228042ffd9b4e803b68ff20e7573fa3d6154d"
+      }
+    ]
+  },
+  "parent_operands": {
+    "actual_parent_operand_calls": 96,
+    "operands": [
+      {
+        "symbol": "r1_native_ceilf",
+        "bits": "0x4250cccd"
+      },
+      {
+        "symbol": "r1_native_floorf",
+        "bits": "0x401d4952"
+      },
+      {
+        "symbol": "r1_native_floorf",
+        "bits": "0x40a3d70a"
+      }
+    ],
+    "all_32_FP_modes": true
+  },
+  "APSR_interface": {
+    "native_C_and_independent_integer_oracle_calls": 8704,
+    "Q_cleared": true,
+    "GE_dynamic_check_available": false,
+    "GE_limitation": "Unicorn APSR register API cannot seed GE; unchanged MSR APSR_nzcvq instruction preserves it architecturally",
+    "NZCV_and_R0_match": true,
+    "source_object_identical_to_tested_arithmetic_candidate": true
+  },
+  "contract": [
+    "Replace add_huge VADD assembly with ordinary C addition to a volatile float. Retain the addition on integral early-return paths, including its inexact/input-denormal status effects.",
+    "Replace VCMPE-zero/VMRS assembly with encoded float classification and FPSCR compiler builtins. Set IOC for every NaN, honor FZ input-denormal flushing/IDC, set exact NZCV outcomes and preserve existing low FPSCR control/status bits. NaN and FZ-denormal absolute-value inputs retain their original encodings because the native carry predicate is set.",
+    "Replace MSR APSR_nzcvq assembly with __builtin_arm_wsr. It emits exactly the same object as the already tested arithmetic candidate. R0/NZCV and clearingQ are checked against native plus independent integer-ordering expectations in8704 calls. GE could not be seeded through the Unicorn register API; the unchanged architectural MSR instruction supplies that preservation evidence.",
+    "One assembly bridge remains: r1_native_fabs_core_bits exposes the result in both core registers andD0. Removing it requires a separate caller/interface proof. No writable state or coefficient ownership changes.",
+    "The normal product has identical sections, relocations and symbol contracts to the tested probe, except its nonallocated source-file name string.904 prior nongenerated source/object pairs from the intermediate spectral-parent build are unchanged. Compared with the previous accepted harmonic build, the combined parent/math changes leave902 other pairs unchanged and one caller interface-only source change with an unchanged object."
+  ],
+  "limits": [
+    "295104 native/C arithmetic entry calls cover3074 input encodings across32 rounding/FZ/DN/status combinations for ceiling, floor and compare-absolute helpers. An additional12268 independent value-oracle calls check Python integer ceil/floor with signed-zero handling and independent encoding rules for absolute-value behavior.84 positive control cases and8704 native/C/integer-oracle flag-interface calls plus96 checks of the three actual parent operands bring the verified total to316256.",
+    "Six compiled defects are rejected: omitted inexact addition, missing denormal flush/IDC, missing invalid flag, wrong zero flags and clearing previous FPSCR state. Full S0/FPSCR, saved registers, SP/masks and public RAM match in the arithmetic differential fixture. APSR is caller-clobbered and outside that arithmetic proof; the flag-returning integer helper has a separate explicit APSR proof.",
+    "REA supplies ceiling/floor dossiers. The current Ghidra inventory lacks an absolute-value procedure at0x98eca; its complete16-byte REA read matches stock and is independently disassembled. This limitation is retained rather than inventing a dossier.",
+    "915 units compile and compose without failures/duplicate strong symbols; imports remain86 application/22 boot. Source-plan/cache layout are unchanged. Compilation/relocatable composition is not a bootable firmware or physical-device proof.",
+    "Malformed/faulting pointers, enabled traps, cold FPU, physical timing, final layout/startup and boot remain unverified. Byte identity and paid compilers are not required."
+  ],
+  "evidence_files": {
+    "build/sources-goal-r1-spectral-parent-math-intrinsics-c/report.json": "0f2eb2c5a19213bd2d2ad87781eadbc378b87746f8a2bf4aaa10ad2d6364be26",
+    "build/sources-goal-r1-goodix-spectral-parent-c/report.json": "81103a76b2e1448e735f1cf157346939e1976fed56d2ea2ba778823e5da89816",
+    "r1/src/application/runtime/native_math_selection.c": "c845f7dac8a174a6dec7c61857b0df3e8d5223649a9549cd0457dc2ab1912dcf",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-spectral-parent-math-intrinsics-c/r1/r1-application/r1__src__application__runtime__native_math_selection.c.o": "9f68162d2f46b731df7ae13be48185ce6e641383d4c348aeb544a24b8d055a21",
+    "r1/src/sources.json": "d557a98d93aa30914de8ae8bfa02d9c6e134be975babc7307f1096b242ff0221",
+    "tools/build/source-plan.json": "eeb516e31b3310fb0718f36908977f8125723f7c5e0e86cd6744395826259a4d",
+    "r1/src/config/runtime/native_health_cache.ld": "eb8f131c489cd818d4e36718718fa1989719ca0170f164541a1a5bf56dfc1ec3",
+    "r1/docs/reference/FUNCTION-OWNERSHIP.csv": "74b4249d7017854a3cec6d00b2b0ede5f4cd5b297a790b59e0facef38f970777",
+    "r1/symbols/function-frontier.csv": "aeddedc2b267eeee219381d615d72ce7acd70bfbb8b50737c93ab59e53c40a6e",
+    "build/goal-r1-math-selection-intrinsics-c/controls.log": "f12f0ae779b988b2056ef5124894d2deab259169b1a626fc4a5fa2f538dead26",
+    "build/goal-r1-math-selection-intrinsics-c/oracles.py": "f46d4af5c425f005bde6919fd6e36ec4df37820522e281e36d84288a5d128332",
+    "build/goal-r1-math-selection-intrinsics-c/parent-operand-results.json": "d44fd21f14d095e3f4175b358e58b3ba923129258e40713ce2cc9596b8b74abe",
+    "build/goal-r1-math-selection-intrinsics-c/controls.py": "b609e68be3f0e35512876d8206da4f03bf50ce56f5c9b5499a7f56db26979349",
+    "build/goal-r1-math-selection-intrinsics-c/audit.json": "397a902862ea37cd6833524c55496dc475fb578691473afa9d1e532110cc548d",
+    "build/goal-r1-math-selection-intrinsics-c/rea-floor.json": "ff801ab42bdaa5908026e325a57fb8e7f01032fa0d6c1193f5d23d6cfb8ac606",
+    "build/goal-r1-math-selection-intrinsics-c/candidate.c": "c845f7dac8a174a6dec7c61857b0df3e8d5223649a9549cd0457dc2ab1912dcf",
+    "build/goal-r1-math-selection-intrinsics-c/verify.log": "aaa63816849a66c6acfaac80a33b631ff72add5350d5d4463ce7027b101624ae",
+    "build/goal-r1-math-selection-intrinsics-c/test.ld": "b2ff9ac27a31674636716d033098cceafafc2f782e6660e4dd431dc3e9dc449d",
+    "build/goal-r1-math-selection-intrinsics-c/audit.py": "76fcadcb45300977901d277cfc15d1b1bae4291a49054ffce1c6556f7ebba7b0",
+    "build/goal-r1-math-selection-intrinsics-c/abs-disassembly.json": "5f12388e5092a1d0b289626d2bd332203ca581d099373a06be76b7645ece880e",
+    "build/goal-r1-math-selection-intrinsics-c/source.elf": "0461643766756549ad50a7246ad77d0d93752996b7a292097af83e80a85101a9",
+    "build/goal-r1-math-selection-intrinsics-c/source.o": "4ed16c5a899b34400bf0bf21b2dc7a3aaa52ba85fc8e4703e8ee5b94f6aec022",
+    "build/goal-r1-math-selection-intrinsics-c/results.json": "71e919da9cdc1f9c29c0ed4cee4f87f09569c863223adec8149686da1950cddc",
+    "build/goal-r1-math-selection-intrinsics-c/rea-abs-bytes.json": "6cfdb1b29983acdd837babb9976f4a4bf66869f5e47c5dd2dc54291f37794353",
+    "build/goal-r1-math-selection-intrinsics-c/oracles.log": "9716f28d28b3ac9beee88c14a54b560f9f4f7bf44fb2ac3f8a9444436073a8c1",
+    "build/goal-r1-math-selection-intrinsics-c/control-results.json": "60cc1987d4cebaad56ed0c9ac826f52fe12434b129c5b3167c7e9b4bc4299d4d",
+    "build/goal-r1-math-selection-intrinsics-c/candidate-before-APSR-intrinsic.c": "8fb0e823428c94e784f154d9bb625d6950f467c9df543b7e1f51bf0106b1c11c",
+    "build/goal-r1-math-selection-intrinsics-c/record.py": "193094019e8051362a6c85ca17bc5bdb059f4c1a7a7dc54c19133156c7c80190",
+    "build/goal-r1-math-selection-intrinsics-c/oracles-initial-unordered-rule.log": "aa1b63741abbeebeb41d7c76c13bba58ac770c9161785e0769d7d6e83e634680",
+    "build/goal-r1-math-selection-intrinsics-c/compile-argv.json": "c7c6d7bf0fcffcd200a0ebb8180a715e15e7a2c407fa05dad43247b7a4713a51",
+    "build/goal-r1-math-selection-intrinsics-c/source.d": "1c0d3ab420c9103d01b58f53ac397ab37d7222e140d6bcd2ae88a2b1b48eb3f5",
+    "build/goal-r1-math-selection-intrinsics-c/oracle-results.json": "54f8016b2fdedbffc269f68dbebb656041c051f5de46f8a3402b11e77b91e5a9",
+    "build/goal-r1-math-selection-intrinsics-c/rea-ceil.json": "5775f1ca10bf7c98c2a46360e9c1b82b43ab03047c55febccdab2ad3f586f465",
+    "build/goal-r1-math-selection-intrinsics-c/verify.py": "92cade67c91efbe3e7a899bb4c463b9df4548d1c181cbbe47980467252371d07",
+    "build/goal-r1-math-selection-intrinsics-c/production-before.c": "0f3f3f48e2a613cf14ba63b46ff245edc9fac4363d291e0009afe28246355220",
+    "build/goal-r1-math-selection-intrinsics-c/build.log": "3c095a42fa99d8e1a5eb5bedb07875f08ad3cdda4310d96446e1c072461615d8",
+    "build/goal-r1-math-selection-intrinsics-c/control-omit-invalid-flag/candidate.c": "aee105b9f6a6df171ece6e31ea9dd8f83b77756327c1d9c8d26663a9720dc111",
+    "build/goal-r1-math-selection-intrinsics-c/control-omit-invalid-flag/source.elf": "df55c436dd61ce02677ca79e4c6605622935020408defc2a28828e4db9b15d3d",
+    "build/goal-r1-math-selection-intrinsics-c/control-omit-invalid-flag/source.o": "c607673d3fd52a0c5ae065f4fe09fd7325e2cd4fc7fc0c5d9a9945ac533084e9",
+    "build/goal-r1-math-selection-intrinsics-c/control-omit-invalid-flag/source.d": "5b06d23e1ecd4f72b9a428d101b3c98e32ccf1f3f2c910178f07b433f4d78149",
+    "build/goal-r1-math-selection-intrinsics-c/control-omit-denormal-flush/candidate.c": "2cd54b48a420373fb23eb4b51bc76d752b1cde6bc05369b517500ed39595b4cf",
+    "build/goal-r1-math-selection-intrinsics-c/control-omit-denormal-flush/source.elf": "84a7b71898aa265da1d6ba85fd3d5cd5c43bf96d07184514e675e9d6954a60cf",
+    "build/goal-r1-math-selection-intrinsics-c/control-omit-denormal-flush/source.o": "6bc0d480dbaea93e8c790231428b149c3357174c9719f43a884b59b599d8e988",
+    "build/goal-r1-math-selection-intrinsics-c/control-omit-denormal-flush/source.d": "3ce47bbb920a7a2c8f278994f463e5516b8ce68f5b797644c0b272fa861a9708",
+    "build/goal-r1-math-selection-intrinsics-c/control-wrong-zero-flags/candidate.c": "0b088dca6d4d08e0ca20659bbca86758e6fa757ebee8c0c11b57dbd5ef64b1c0",
+    "build/goal-r1-math-selection-intrinsics-c/control-wrong-zero-flags/source.elf": "43a2df2bd00feedfebcc8ec7d5bb40491f598a1ea279e88bc885d75f52535f75",
+    "build/goal-r1-math-selection-intrinsics-c/control-wrong-zero-flags/source.o": "59dee40c048d9de511204fc5075d03d22009d9af30b0bb06154357bb2ecab406",
+    "build/goal-r1-math-selection-intrinsics-c/control-wrong-zero-flags/source.d": "37b9f3233d3397b4998a3a0052e009bdd6ae080cfe8506e3a57b2aa1c38b389f",
+    "build/goal-r1-math-selection-intrinsics-c/control-clear-prior-FP-status/candidate.c": "3d1a1778249b72cb2aca924ec96849bc6d6b7c01ed30c00b0740ef83999ef7df",
+    "build/goal-r1-math-selection-intrinsics-c/control-clear-prior-FP-status/source.elf": "ea6d2357fcc34b27c58e1633d79abce87268b0acda0e6c32383f655b87381c03",
+    "build/goal-r1-math-selection-intrinsics-c/control-clear-prior-FP-status/source.o": "853a88c722530c4b8dbe260c84f228042ffd9b4e803b68ff20e7573fa3d6154d",
+    "build/goal-r1-math-selection-intrinsics-c/control-clear-prior-FP-status/source.d": "96eac28b46badb208ba0866edfdd750f7706f8f310a4bac6790c331c57c7aa5d",
+    "build/goal-r1-math-selection-intrinsics-c/control-omit-inexact-add/candidate.c": "cd054b9daeeeb51bbac17eb859fa8edc818a7a1ae84b1d735b2e3389d294e3ff",
+    "build/goal-r1-math-selection-intrinsics-c/control-omit-inexact-add/source.elf": "62d37fa9ffd2dfb368a5921fd1d848f7099a2c77201c6b7f3cee3f2f7c70a482",
+    "build/goal-r1-math-selection-intrinsics-c/control-omit-inexact-add/source.o": "2d7d15ce43937cdadceaa442020bbd4d752b5cb271a2ade81e34e91a91443dd4",
+    "build/goal-r1-math-selection-intrinsics-c/control-omit-inexact-add/source.d": "d61750fdf7e19c809baaf33465255268a0b9a0344fbad47cecefff8501ff180b",
+    "build/goal-r1-math-selection-intrinsics-c/control-omit-input-denormal-flag/candidate.c": "6371156c2272507436a456ddf826c6a718f1506e540831962da34e3b778d0406",
+    "build/goal-r1-math-selection-intrinsics-c/control-omit-input-denormal-flag/source.elf": "771c47d2cedaf8e97655214db56cd89bc2aa1de7545ab700e341384750265d33",
+    "build/goal-r1-math-selection-intrinsics-c/control-omit-input-denormal-flag/source.o": "770dc8a9aecbef39e0ee1a095f1825114701ad968043a15b86b9e91d69d76692",
+    "build/goal-r1-math-selection-intrinsics-c/control-omit-input-denormal-flag/source.d": "28bca37fb281534febac782391010ccfe49fff2bf86ab05b2df8c79209506c8c",
+    "build/goal-r1-math-APSR-intrinsic-c/candidate.c": "c845f7dac8a174a6dec7c61857b0df3e8d5223649a9549cd0457dc2ab1912dcf",
+    "build/goal-r1-math-APSR-intrinsic-c/verify.log": "c05f049da827dcbdc11053a6933ecafc8930c78f261e2884cab0c66f8399a451",
+    "build/goal-r1-math-APSR-intrinsic-c/source.o": "4ed16c5a899b34400bf0bf21b2dc7a3aaa52ba85fc8e4703e8ee5b94f6aec022",
+    "build/goal-r1-math-APSR-intrinsic-c/results.json": "2eb0923b526add7a46f8797943d3a709e6cd171dc0e4537930086739459f3c8d",
+    "build/goal-r1-math-APSR-intrinsic-c/comparison.json": "9f3bc60a20a515107c6bf0b13a1a0cf24dbabd5ce2c000916bd71d435f815d3d",
+    "build/goal-r1-math-APSR-intrinsic-c/compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/goal-r1-math-APSR-intrinsic-c/compile-argv.json": "745aee77f71462b1092eac2af01e28304708b11e54268e9cbba57f9467d6e471",
+    "build/goal-r1-math-APSR-intrinsic-c/source.d": "3acb52c8553e8848a8ae61f68053c22a9a4374d9d7e08dc98cc2dc4ebd7aa026",
+    "build/goal-r1-math-APSR-intrinsic-c/verify.py": "55b43586e6f013aeef68f278680b77969ec88b1044e4ec86309b1a2490f74fc3"
+  }
+}

@@ -1,0 +1,112 @@
+{
+  "schema_version": 1,
+  "scope": "Complete R1 FlashDB control routine assembly replaced by C",
+  "native_application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "native_entry": "0x63694",
+  "native_body": {
+    "available": true,
+    "provenance": "ghidra-function-body-address-set",
+    "ranges": [
+      {
+        "start": "0x63694",
+        "end": "0x636a1"
+      },
+      {
+        "start": "0x636ae",
+        "end": "0x63791"
+      }
+    ],
+    "total_bytes": 242,
+    "span_bytes": 254,
+    "non_contiguous": true,
+    "contains_entry": true
+  },
+  "execution": {
+    "paired_cases": 2568,
+    "executions": 5136,
+    "source_report": "build/sources-goal-r1-flash-control-c/report.json",
+    "actual_C_db_path": true,
+    "modeled": [
+      "printf diagnostics with volatile-word mutation and caller-register clobbering"
+    ],
+    "checks": [
+      "all selectors 0 through 13 plus UINT32_MAX",
+      "full-byte initialization equality and assertions",
+      "unaligned and aliased parameter/database fields",
+      "ordered 32-bit and byte accesses, callback-pointer storage and native R0 results",
+      "diagnostic text, late database/name/mode reloads and printf return propagation",
+      "null database/argument faults and nonreturning assertion routes",
+      "guards, successful return SP, saved registers, masks, clean XPSR per invocation"
+    ],
+    "limits": [
+      "No physical flash, concurrency or arbitrary corrupt pointers",
+      "Assertion loops observed with bounded instruction budget",
+      "Private stack traffic and caller-clobbered registers/flags excluded"
+    ]
+  },
+  "negative_controls": [
+    {
+      "mutation": "boolean-init-only",
+      "rejected": true
+    },
+    {
+      "mutation": "wrong-lock-slot",
+      "rejected": true
+    }
+  ],
+  "audit": {
+    "control_function_fully_C": true,
+    "other_object_bytes_unchanged": true,
+    "sector_candidate_not_retained": true,
+    "import_sets_unchanged": true
+  },
+  "normal_build": {
+    "compiled": 573,
+    "application_imports": 176,
+    "bootloader_imports": 34,
+    "failures": 0,
+    "duplicate_strong_symbols": 0
+  },
+  "qualification": {
+    "compiled_profiles": 5,
+    "new_C_regions": 0
+  },
+  "source_plan_unchanged": true,
+  "source_built_bytes": 3881,
+  "binary_pull_through_bytes": 642279,
+  "resource_bytes": 248,
+  "fresh_hybrid_equals_locked_application": true,
+  "source_completeness_proven": false,
+  "sector_investigation": {
+    "candidate_not_retained": true,
+    "outer_raw_view_from_sector_caller_SP": -128,
+    "nested_log_raw_view_from_sector_caller_SP": -176,
+    "reason": "Outer scratch preservation alone does not retain nested partially-unwritten read frames and their intervening call effects"
+  },
+  "evidence": {
+    "build/sources-goal-r1-flash-control-c/report.json": "ac9cb9bb0ad9dfd059a2c208c9cdf6085a560da0fdffda9aeeb4d9f360266ad7",
+    "r1/src/application/runtime/native_flashdb_control.c": "134830a67d60d76c51675b90046b6db4a8b85b9282549433d3f04f4bcc946791",
+    "r1/src/application/runtime/native_flashdb_sector_read.c": "9c21e61be878ea01df1e02dd0b68c8f820a68b17acc534a6a7bd34fec7577815",
+    "r1/src/application/runtime/native_flashdb_query_count.c": "6cd0d3d3a1e2c9ebbde2249ead5c4f628473bdccd544265476c573c62c02ff6a",
+    "r1/src/sources.json": "e4c2161f5a94ed8f60f515c71ed7f323fa68daecf30f6a35feb8327e77cfec3e",
+    "r1/symbols/function-frontier.csv": "cca9d869e1b0f020f638d81b9a11ba63c06755c50fea988f0d1ef03ebb61b57f",
+    "tools/build/source-plan.json": "716cf17b8cf2bed8ad6a99a672b1856af4c5380842c95cb14b9a263a7bb42bc8",
+    "build/hybrid-goal-r1-flash-control-c/build-report.json": "12d614e3954b8ccb845ff7fc1a8c60dda4b018a8e4e6c4efb690e1d7d9004c97",
+    "build/hybrid-goal-r1-flash-control-c/payloads/application.bin": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "r1/docs/reference/source-composition-review.json": "c0ebca3d88db9ef164f782ad6dbd249ca5502f5943387286751119718c35c25f",
+    "build/goal-r1-flash-sector-c/before.c": "9c21e61be878ea01df1e02dd0b68c8f820a68b17acc534a6a7bd34fec7577815",
+    "build/goal-r1-flash-sector-c/candidate-not-retained.c": "f484456679a0418baff0f5087ecc26fda6d0e4c2a62ad87adbfc9e179601e641",
+    "build/goal-r1-flash-control-c/before.c": "2403d79ca599149248e01dcce9defdfef125fe38e8558d8774d4189f6ddd766b",
+    "build/goal-r1-flash-control-c/REA.json": "f9c69de00cf39b788e94ccc96b247b631628e686336b0e788968ec117c52cc77",
+    "build/goal-r1-flash-control-c/verify.py": "bc7bb873e3a4860117d18b0cbe3431c5f4ee6ceb9d69f03bfa863f34c39d542b",
+    "build/goal-r1-flash-control-c/results.json": "9861575ab5bece7181eb71a820328e56d2ab0333ba2b3f4b8c008d5d501af92c",
+    "build/goal-r1-flash-control-c/negative.py": "4ff2a3e39774f2931ff10f42b82b72a4acaccd7697d3441f63ae754c80da4e97",
+    "build/goal-r1-flash-control-c/negative-results.json": "cc05a9c402eef940106b48268f56d0bb2b847080fc3fd55754f3c750389109e7",
+    "build/goal-r1-flash-control-c/audit.py": "bf8131d212ad007b16faf8ecfa3841c91ffefa48b8bb1c16aaf9a6cef1d1dedd",
+    "build/goal-r1-flash-control-c/audit-results.json": "0cbb3e7829f9ea985b9363493e0e21c6254dccc40110d1e326b1fca61538de3a",
+    "build/goal-r1-flash-control-c/qualify.py": "4c2707e0b33f536baeeb7fec266f1b760f94aa16d8e07dc539e971cd46225eb1",
+    "build/goal-r1-flash-control-c/qualified/qualification.json": "433f3117f105e3046c6a9975cd3ce51249ac186338c0433d790c6d44b2dcab63",
+    "build/goal-r1-flash-control-c/qualified/source-plan.json": "3da40e3d766877c0b3059bee372f651c1f56681157782eba12ee3076f1834a0f",
+    "build/goal-r1-flash-control-c/sources-check.log": "bd60965367f10bcc604039941b628ee9282d683344509ab9faf85d501a53a26c"
+  }
+}

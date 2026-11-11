@@ -1,48 +1,24 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_329064\n"
-".type opencfw_em9305_child_329064,@function\n"
-"opencfw_em9305_child_329064:\n"
-"L329064:\n"
-"enter_s [r13-r14,blink]\n"
-"L329066:\n"
-"mov_s r14,r0\n"
-"L329068:\n"
-"ld r0,[r0,180]\n"
-"L32906c:\n"
-"mov_s r13,r1\n"
-"L32906e:\n"
-"breq_s r0,0,L329098\n"
-"L329070:\n"
-"bl.d opencfw_em9305_wsf_event_allocate\n"
-"L329074:\n"
-"mov_s r0,6\n"
-"L329076:\n"
-"mov_s r1,r0\n"
-"L329078:\n"
-"breq_s r0,0,L329098\n"
-"L32907a:\n"
-"ld r2,[r14,180]\n"
-"L32907e:\n"
-"mov_s r0,0x805b18\n"
-"L329084:\n"
-"ldb_s r3,[r14,0x2]\n"
-"L329086:\n"
-"ldb_s r0,[r0,0]\n"
-"L329088:\n"
-"ldb_s r2,[r2,0x1]\n"
-"L32908a:\n"
-"stb_s r13,[r1,0x3]\n"
-"L32908c:\n"
-"stb_s r3,[r1,0x4]\n"
-"L32908e:\n"
-"sth_s r2,[r1,0]\n"
-"L329090:\n"
-"bl.d opencfw_em9305_wsf_task_message_send\n"
-"L329094:\n"
-"stb 14,[r1,2]\n"
-"L329098:\n"
-"leave_s [r13-r14,blink,pcl]\n"
-".size opencfw_em9305_child_329064,.-opencfw_em9305_child_329064\n"
-);
+#include <stdint.h>
+
+/* Native 0x329064..0x32909a: when the record has an attached object
+ * (+180), send a 6-byte message 14 to the task at 0x805b18 carrying the
+ * object's id byte (+1) as a halfword, the status and the record byte +2. */
+extern uintptr_t opencfw_em9305_wsf_event_allocate(uint32_t bytes);
+extern uint32_t opencfw_em9305_wsf_task_message_send(uint32_t handler,
+                                                     uintptr_t message);
+
+uint32_t opencfw_em9305_child_329064(uintptr_t record,uint32_t status)
+{
+    if(*(volatile uint32_t *)(record+180u)==0u)return 0u;
+    uintptr_t message=opencfw_em9305_wsf_event_allocate(6u);
+    if(message==0u)return 0u;
+    uintptr_t object=*(volatile uint32_t *)(record+180u);
+    uint32_t handler=*(volatile uint8_t *)0x805b18u;
+    uint32_t kind=*(volatile uint8_t *)(record+2u);
+    uint32_t id=*(volatile uint8_t *)(object+1u);
+    *(volatile uint8_t *)(message+3u)=(uint8_t)status;
+    *(volatile uint8_t *)(message+4u)=(uint8_t)kind;
+    *(volatile uint16_t *)message=(uint16_t)id;
+    *(volatile uint8_t *)(message+2u)=14u;
+    return opencfw_em9305_wsf_task_message_send(handler,message);
+}

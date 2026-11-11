@@ -1,0 +1,135 @@
+{
+  "schema_version": 1,
+  "entries": {
+    "0x8359e": "r1_event_post_module1",
+    "0x83792": "r1_event_post_module2",
+    "0x8362c": "r1_event_post_module4",
+    "0x83510": "r1_event_post_module5",
+    "0x8acfc": "r1_sync_block_field_get",
+    "0x82f48": "r1_ack_record_register_typed",
+    "0x82ee8": "r1_ack_record_remove_type2",
+    "0x83820": "r1_protocol_payload_copy_send",
+    "0x82ef4": "r1_protocol_health_sample_send"
+  },
+  "report": "build/sources-goal-r1-health-event-post-reviewed-c/report.json",
+  "report_sha256": "fefbfdcd2519cb986d5102a08c3f664e137cf886603a9048484b61aa33769087",
+  "units": [
+    {
+      "source": "r1/src/application/runtime/native_health_get_encoders.c",
+      "source_sha256": "ed9047eaad16973741959e5a891e1ec8a6375c053c53190c62a6ea8e535bd164",
+      "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-health-event-post-reviewed-c/r1/r1-application/r1__src__application__runtime__native_health_get_encoders.c.o",
+      "object_sha256": "02e18c7f98530fa24815000de6f0200fcd09213ae0c7b56345b58f8900e1dac3"
+    },
+    {
+      "source": "r1/src/application/runtime/native_health_event_post.c",
+      "source_sha256": "6ab0e804ea5beec746e0df2a70d8b779c771da13d4ecff5c0e8e7b5e2ee573fd",
+      "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-health-event-post-reviewed-c/r1/r1-application/r1__src__application__runtime__native_health_event_post.c.o",
+      "object_sha256": "f5d552e957d287a73e84b00e4a877bc6560d1c923c9949190fb823e72f203886"
+    }
+  ],
+  "behavior": {
+    "pairs": 956,
+    "digest": "68c1fe7899584c1050d88f1701e56afed445bcfe33e8ba7945c33adf743e8e49",
+    "actual_C": [
+      "four event post wrappers",
+      "typed ACK registration/removal adapters",
+      "payload copy and response header sender",
+      "phone-handle accessor/flag helper",
+      "sync field getter/owner"
+    ],
+    "modeled_boundaries": [
+      "ACK registry core",
+      "protocol response backend",
+      "allocator/free"
+    ],
+    "limits": [
+      "Mapped payload/copy/context buffers and sufficient allocation capacity; wrapped large lengths tested only on failure",
+      "Registry and response internals/physical delivery remain unfinished",
+      "No asynchronous IRQ or complete firmware linkage"
+    ]
+  },
+  "integration": {
+    "pairs": 870,
+    "source_sends": 350,
+    "digest": "2f75fefae4afcdaa57ed9da6cf26d576ed9f740f6ab434e0aa9121b09765dbb3",
+    "actual_C": [
+      "four flushes and builder resets",
+      "four event wrappers",
+      "typed ACK adapters",
+      "payload copy and protocol header sender",
+      "sync field and phone accessor"
+    ],
+    "modeled_boundaries": [
+      "clock/logging",
+      "live cache getter",
+      "ACK registry core",
+      "protocol response backend",
+      "allocator/free"
+    ],
+    "limits": [
+      "Valid mapped builders and bounded allocations",
+      "Registry core and physical delivery not executed"
+    ]
+  },
+  "negative_controls": {
+    "lost-ack-failure-free": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "=run(False,**kw);b=run(True,**kw);assert a==b,(kw,[k for k in a if a[k]!=b[k]],a['trace'],b['trace']);digest.update(json.dumps([kw,a]).encode());pairs+=1\n                                              ^^^^\nAssertionError: ({'entry': 'r1_event_post_module1', 'payload': 537001984, 'length': 8, 'timestamp': 1, 'context': 0, 'register_result': 0, 'response_result': 0, 'allocate': False}, ['trace'], [('register', ['0002010101800000', 1, 0]), ('free', [0])], [('register', ['0002010101800000', 1, 0])])\n"
+    },
+    "lost-send-failure-remove": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "'trace'],b['trace']);digest.update(json.dumps([kw,a]).encode());pairs+=1\n                                              ^^^^\nAssertionError: ({'entry': 'r1_event_post_module1', 'payload': 537001984, 'length': 8, 'timestamp': 1, 'context': 0, 'register_result': 1, 'response_result': 0, 'allocate': False}, ['trace'], [('register', ['0002010101800000', 1, 0]), ('malloc', [12]), ('remove', [2, 1, 1, 48879]), ('free', [0])], [('register', ['0002010101800000', 1, 0]), ('malloc', [12]), ('free', [0])])\n"
+    },
+    "wrong-remove-high-byte": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "e \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-health-event-post-c/verify.py\", line 58, in pair\n    a=run(False,**kw);b=run(True,**kw);assert a==b,(kw,[k for k in a if a[k]!=b[k]],a['trace'],b['trace']);digest.update(json.dumps([kw,a]).encode());pairs+=1\n                                              ^^^^\nAssertionError: ({'entry': 'r1_ack_record_remove_type2', 'opcode': 4294967295, 'sequence': 0}, ['trace'], [('remove', [2, 16777215, 255, 48879])], [('remove', [2, 255, 255, 48879])])\n"
+    },
+    "wrong-field-offset": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "                                        ^^^^\nAssertionError: ({'entry': 'r1_event_post_module1', 'payload': 537001984, 'length': 8, 'timestamp': 0, 'context': 0, 'register_result': 0, 'response_result': 0, 'allocate': True}, ['trace', 'copy'], [('malloc', [12]), ('response', [4660, '0202010101800000', 537018368, 12, '031425364758697aefcdab89']), ('free', [537018368])], [('malloc', [12]), ('response', [4660, '0202010101800000', 537018368, 12, '031425364758697aa5efcdab']), ('free', [537018368])])\n"
+    },
+    "wrong-allocation-length": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "/goal-r1-health-event-post-c/verify.py\", line 58, in pair\n    a=run(False,**kw);b=run(True,**kw);assert a==b,(kw,[k for k in a if a[k]!=b[k]],a['trace'],b['trace']);digest.update(json.dumps([kw,a]).encode());pairs+=1\n                                              ^^^^\nAssertionError: ({'entry': 'r1_event_post_module1', 'payload': 537001984, 'length': 8, 'timestamp': 0, 'context': 0, 'register_result': 0, 'response_result': 0, 'allocate': False}, ['trace'], [('malloc', [12])], [('malloc', [13])])\n"
+    },
+    "wrong-ack-sequence": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": ");b=run(True,**kw);assert a==b,(kw,[k for k in a if a[k]!=b[k]],a['trace'],b['trace']);digest.update(json.dumps([kw,a]).encode());pairs+=1\n                                              ^^^^\nAssertionError: ({'entry': 'r1_event_post_module1', 'payload': 537001984, 'length': 8, 'timestamp': 1, 'context': 0, 'register_result': 0, 'response_result': 0, 'allocate': False}, ['trace'], [('register', ['0002010101800000', 1, 0]), ('free', [0])], [('register', ['0002010102800000', 1, 0]), ('free', [0])])\n"
+    }
+  },
+  "audit": {
+    "unchanged_prior_objects": 741,
+    "changed_objects": [
+      "r1/src/application/runtime/native_health_get_encoders.c"
+    ],
+    "preserved_encoder_sections": [
+      ".text.r1_health_get_hr_encode",
+      ".text.r1_health_get_hrv_encode",
+      ".text.r1_health_get_spo2_encode"
+    ],
+    "new_units": 1,
+    "removed_application_imports": [
+      "r1_event_post_module1",
+      "r1_event_post_module2",
+      "r1_event_post_module4",
+      "r1_event_post_module5",
+      "r1_sync_block_field_get"
+    ],
+    "added_application_imports": [
+      "r1_ack_record_register",
+      "r1_ack_record_remove"
+    ],
+    "bootloader_imports_unchanged": true
+  },
+  "rea": "health-event-post-rea-review.json",
+  "initialization": "health-sync-field-initialization.json",
+  "instruction_identity_proven": false,
+  "image_integration_proven": false,
+  "source_check": "python3 tools/build/sources.py check --device r1: PASS (743 units, 547 source files, 0 not built). Global make sources-check flags concurrent unrelated G2 manifest gaps."
+}

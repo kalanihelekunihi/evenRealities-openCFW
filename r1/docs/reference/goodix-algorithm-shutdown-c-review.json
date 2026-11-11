@@ -1,0 +1,317 @@
+{
+  "schema_version": 1,
+  "scope": "Native top-level algorithm shutdown controller with actual C callback and caller integration",
+  "report": "build/sources-goal-r1-goodix-algorithm-shutdown-c/report.json",
+  "comparison_report": "build/sources-goal-r1-goodix-native-nadt-reset-c/report.json",
+  "stock_entry": "0x29f9c",
+  "native_instruction_size": 96,
+  "stock_callback_table": "0x9d404",
+  "deinit_slots": [
+    0,
+    1,
+    2,
+    6,
+    9,
+    15
+  ],
+  "canonical_state": {
+    "frame_owner": {
+      "symbol": "r1_goodix_algorithm_frame_table",
+      "native_address": "0x20007bc8",
+      "reused": true
+    },
+    "started": {
+      "symbol": "r1_goodix_algorithm_started",
+      "native_address": "0x20007bcc",
+      "size": 4
+    },
+    "initialized": {
+      "symbol": "r1_goodix_algorithm_initialized",
+      "native_address": "0x200301f0",
+      "size": 20
+    }
+  },
+  "audit": {
+    "compiled_units": 877,
+    "unchanged_prior_nongenerated_objects": 866,
+    "new_units": [
+      "r1/src/application/goodix/native_algorithm_shutdown.c"
+    ],
+    "differing_existing_generated_objects": [
+      "{gen}/r1_startup_vectors.S",
+      "{gen}/r1_uecc.c"
+    ],
+    "application_imports": 61,
+    "bootloader_imports": 22,
+    "added_imports": [],
+    "removed_imports": [
+      "GH3X2X_AlgoDeinit"
+    ],
+    "new_writable_state_bytes": 24,
+    "existing_frame_owner_reused": true,
+    "source_plan_and_cache_layout_unchanged": true,
+    "tested_object_equals_normal_build": true,
+    "only_manifest_change_is_one_new_unit": true,
+    "all_prior_native_portable_and_allocator_objects_unchanged": true
+  },
+  "direct": {
+    "all_six_request_and_init_mask_comparisons": 16384,
+    "signed_byte_failure_matrix_comparisons": 3072,
+    "live_callback_mutation_comparisons": 148,
+    "initial_null_owner_comparisons": 8,
+    "zero_frame_forwarding_comparisons": 12,
+    "late_null_frame_access_cases": 2,
+    "native_instruction_bytes_executed": 96,
+    "read_write_order_callback_arguments_state_and_status_match": true,
+    "independent_normal_and_failure_oracle": true,
+    "callbacks_modeled": true,
+    "source_cannot_execute_stock": true
+  },
+  "actual_C_pipeline": {
+    "actual_C_shutdown_comparisons": 512,
+    "actual_C_memory_config_caller_comparisons": 16,
+    "all_64_callable_init_masks": true,
+    "all_five_distinct_public_callbacks_and_descendants_execute": true,
+    "soft_dual_slot_fixture_uses_null_allocation_to_avoid_double_release": true,
+    "full_RAM_state_and_heap_writes_match_excluding_private_stack": true,
+    "frame_read_order_checked_by_direct_fixture": true,
+    "source_pipeline_cannot_execute_stock": true,
+    "native_controller_instruction_bytes": [
+      96
+    ],
+    "FP_context_primed_before_fixtures": true
+  },
+  "compiled_defects_rejected": [
+    {
+      "defect": "null-owner-status",
+      "rejected": true
+    },
+    {
+      "defect": "started-mask",
+      "rejected": true
+    },
+    {
+      "defect": "late-started-write",
+      "rejected": true
+    },
+    {
+      "defect": "late-frame-read",
+      "rejected": true
+    },
+    {
+      "defect": "unit-init-flag",
+      "rejected": true
+    },
+    {
+      "defect": "retain-init-flag",
+      "rejected": true
+    },
+    {
+      "defect": "clear-before-callback",
+      "rejected": true
+    },
+    {
+      "defect": "continue-after-failure",
+      "rejected": true
+    },
+    {
+      "defect": "missing-soft-ir",
+      "rejected": true
+    },
+    {
+      "defect": "wrong-HRV-provider",
+      "rejected": true
+    },
+    {
+      "defect": "cached-frame-owner",
+      "rejected": true
+    },
+    {
+      "defect": "clear-on-failure",
+      "rejected": true
+    },
+    {
+      "defect": "skip-last-slot",
+      "rejected": true
+    },
+    {
+      "defect": "preserve-high-started-bits",
+      "rejected": true
+    },
+    {
+      "defect": "normalize-callback-result",
+      "rejected": true
+    },
+    {
+      "defect": "skip-null-frame",
+      "rejected": true
+    },
+    {
+      "defect": "remove-owner-guard",
+      "rejected": true
+    }
+  ],
+  "contract": [
+    "Null initial frame owner returns0 without bitmap/flag writes. Otherwise clear all requested started bits before visiting slots, including bits above the20-slot table.",
+    "For each requested slot in ascending order, reload the frame owner and read its selected frame word before inspecting the init byte. Call its C deinit provider only when initialized and nonnull; null table slots preserve init bytes.",
+    "Stop at the first nonzero signed-byte callback status and return it without clearing that flag. Clear each successful callback flag only after the callback. Honor callback changes to the frame owner/table, init flags and started bitmap.",
+    "Project only the deinit column of the locked three-column20-row table into C pointers. The shared soft ADT callback occupies slots9 and15."
+  ],
+  "limits": [
+    "All96 native controller instruction bytes execute. Direct callbacks are modeled with all valid signed-byte statuses, exhaustive six-bit request/init combinations, noncallable/high mask bits and live state mutations. Read/write order and callback-boundary snapshots match.",
+    "Actual C integration covers all64 callable-init masks and executes every public callback/descendant with the C allocator. Sixteen additional cases execute the real GH3X2X_AlgoMemConfig caller, controller and memory initializer. No source execution enters stock code.",
+    "The dual-soft-slot actual fixture uses a null saved allocation to avoid assuming a valid double release of a shared live allocation. Unrequested initialized algorithms retain their owned allocations and flags.",
+    "Initial null owner is supported. A callback-induced late null frame owner reads address4 before the next zero init flag; this is an unmapped emulator access shape, not a physical MCU fault claim. Null frame arguments are forwarded unchanged.",
+    "Saved integer/FP registers, SP, masks, FPSCR and caller guards checked. Caller scratch/APSR/private frames excluded. Full RAM comparisons omit the private stack region. Integration primes an active FP context; cold FP activation remains outside proof.",
+    "Only the deinit graph is closed. Native algorithm initialization/calculation, physical sensors, concurrency, final executable linking/startup and boot remain open. Relocatable composition is not bootable firmware."
+  ],
+  "evidence_files": {
+    "build/sources-goal-r1-goodix-algorithm-shutdown-c/report.json": "de04beb8daf1288807bb5c327efffe1fc2e4fc789a53ecdd285ce91b4a8b0134",
+    "build/sources-goal-r1-goodix-native-nadt-reset-c/report.json": "d10f1782ead2428ba8e18db0f5eaac7360dea73f7deb52fb214dcc22a93a1ec5",
+    "r1/src/application/goodix/native_algorithm_shutdown.c": "cdb3a46d52f5f6b669a8b351f2af44d871235b4074399c6ed7fa19154c683b2f",
+    "r1/src/application/goodix/native_algorithm_state.h": "24d02e2f42feeacf0acf9196bd35947098fa41cc0ce7d7e1db46b8dfdff9543b",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-algorithm-shutdown-c/r1/r1-application/r1__src__application__goodix__native_algorithm_shutdown.c.o": "47ad9b3187c30082288f6c6842806b26b7aebf77c708ee17ba8177b7f7838eb6",
+    "r1/src/sources.json": "acdb89888bb7f2c5841b8a23518b8caefe5203bf20e92f49eec72f0fcd71efd1",
+    "tools/build/source-plan.json": "eeb516e31b3310fb0718f36908977f8125723f7c5e0e86cd6744395826259a4d",
+    "r1/src/config/runtime/native_health_cache.ld": "eb8f131c489cd818d4e36718718fa1989719ca0170f164541a1a5bf56dfc1ec3",
+    "r1/docs/reference/FUNCTION-OWNERSHIP.csv": "3519a1ba102f013e2c53a504b42f4fcfa8c64a02b7cf2bec57fb37ce52f667a4",
+    "r1/symbols/function-frontier.csv": "5b567f86615d396f100e158d8055fa4f1dfe4c865cfbd673dab3c082665c08a0",
+    "r1/docs/correlation/GOODIX-PRIMITIVES-REDUCTION-CORRELATION.md": "852b7db66e47313f0d832d0b6d251f1cd8475068845970b5cc97940860cdd134",
+    "r1/docs/reference/goodix-shutdown-dependencies.md": "f7c4e9578b40e134b654e77352a5b1ac0bf5ec9a21b9a39849ceccc3923a5150",
+    "r1/docs/reference/goodix-shutdown-dependencies.json": "b41212d34ca1ca3e220d364c113e9f17b1fa8589b45c0aaa0dcab31572c26baa",
+    "build/goal-r1-goodix-native-heap-init-c/fill.o": "5b9881f48c6329da35510eb6b3f4be65d3c31bab24e2f6ab7d5713597d06c391",
+    "build/goal-r1-goodix-native-heap-init-c/fill-body.json": "9bf851f3f2cb56510504f22b5d435b9a6db08019815db0e446543e23e3a17c13",
+    "r1/src/application/goodix/native_algorithm_config.c": "b8455589dcb3449592bffe09f57f533f5360e0cd55f1e371bd6e0800b6a415ab",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-algorithm-shutdown-c/r1/r1-application/r1__src__application__goodix__native_algorithm_config.c.o": "ffaeb592c1c7f4584f79c5dc0a808886223dc111fa5acf2e2110f304494fe42d",
+    "r1/src/application/goodix/native_nadt_reset.c": "71d6eac7c051948f7dc879b841391549a69c5a84d335ee16995e774404269234",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-algorithm-shutdown-c/r1/r1-application/r1__src__application__goodix__native_nadt_reset.c.o": "6ab92f33a97f0c1b35e13021722cd554b61642a0dd6db0a09efafd4df93a4c79",
+    "r1/src/application/goodix/native_adt_teardown.c": "9cb72fba3a48c0abe74bc4490335cd5a86f41d96d026130800dddf35f846af16",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-algorithm-shutdown-c/r1/r1-application/r1__src__application__goodix__native_adt_teardown.c.o": "94edc8fcfeeb70298d15acf72b1ff4912689950e50e2699d3872bc8911c9a72d",
+    "r1/src/application/goodix/native_shutdown_adapters.c": "480963232b0aaed8394b3c27e7319b21783da6b0a4256039f4dfd7622ae521eb",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-algorithm-shutdown-c/r1/r1-application/r1__src__application__goodix__native_shutdown_adapters.c.o": "bbc71b035df0c8f45b56f5bf928e102be972ff019eb46a11a34b45ab5e152ff9",
+    "r1/src/application/goodix/native_spo2_teardown.c": "9ae3cfae4ef6fd1cfcdaa5a0bc1dda0ff036c336436e5b2217d217fff632003f",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-algorithm-shutdown-c/r1/r1-application/r1__src__application__goodix__native_spo2_teardown.c.o": "2df10a24911f72ece7ad1da5bc944e9994cfcfaa1357c3404f19ba13e503ecab",
+    "r1/src/application/goodix/native_hrv_teardown.c": "74c35c824e0ba0c9f9c782fb1a42ec140d569c509b18a9552733dbead271048c",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-algorithm-shutdown-c/r1/r1-application/r1__src__application__goodix__native_hrv_teardown.c.o": "ca3a52d81d15c956a94f6b435fec18f166a48edb385883436b4ae3eaa9738ca6",
+    "r1/src/application/goodix/native_processing_teardown.c": "fecf0c172a3e1bd85b0ac23e49121b841d83d966a5cb26c7613303f966a48096",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-algorithm-shutdown-c/r1/r1-application/r1__src__application__goodix__native_processing_teardown.c.o": "33d663721e6ec3fb795e33bf70e28bbc2c5f59b31e3923402e345f2531ffa475",
+    "r1/src/application/goodix/native_workspace_teardown.c": "518d7d7a9a9b5fe931622a9111dbeee24f66bee47bdb46220d460c02ae39c5dc",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-algorithm-shutdown-c/r1/r1-application/r1__src__application__goodix__native_workspace_teardown.c.o": "6d8fc89dcbc992288e6f9440279aaedad452d0ae358696930327689d8ef13c04",
+    "r1/src/application/goodix/native_record_teardown.c": "b7cea98e79bac3f8c5d80bc58c59e81840d7e9b8b9267429e83c4ebb981bbf45",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-algorithm-shutdown-c/r1/r1-application/r1__src__application__goodix__native_record_teardown.c.o": "785df1baa1e96a2723aa03debb90b5dc7bfa44a1e76283a79645968876cec4de",
+    "r1/src/application/goodix/native_heap_init.c": "c3085064866b23d603697918b6dfdd29f66ab68c7e82cb1f3e10443c80e3f8b6",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-algorithm-shutdown-c/r1/r1-application/r1__src__application__goodix__native_heap_init.c.o": "d25f87d5c62ab05f6d5e4d73cc1de5afacf8300a5f1286735b75c9715c30063c",
+    "r1/src/application/goodix/native_heap_free.c": "175cf893ee4b475bee0a886d69522782ac879dd0b29c43285d957c03fb4dc7c4",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-algorithm-shutdown-c/r1/r1-application/r1__src__application__goodix__native_heap_free.c.o": "bc333928ee0e42aaf0a0446eb69f4ff0528fd2f27737d5ed1744ed750b807022",
+    "r1/src/application/goodix/native_heap_allocate.c": "2806f3ca4f9074b157b390edf8bd03815a46b31f1661e1ed238a0938c666d8c9",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-algorithm-shutdown-c/r1/r1-application/r1__src__application__goodix__native_heap_allocate.c.o": "129b40a4930e85990e0ba9503f83bbc867460580ef323f2a6dfa2476e7dad685",
+    "r1/src/application/goodix/native_heap_malloc.c": "1b827deb8981088d68fae260af0aa442a7315d4aaaa7f2ed8a248c859878a0c3",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-algorithm-shutdown-c/r1/r1-application/r1__src__application__goodix__native_heap_malloc.c.o": "977cb669d0ca7b16102f67629d38c362cd2c47fba05cb890577e367a4f9d0138",
+    "r1/src/application/goodix/native_heap_reallocate.c": "078156cbb3d160046b3c181313a362885f3d41884692698469ad86543458832c",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-algorithm-shutdown-c/r1/r1-application/r1__src__application__goodix__native_heap_reallocate.c.o": "c3d17d3ed20d125190f1f64675f13c50395568ac749375e85f56bf2e61a1663b",
+    "build/goal-r1-goodix-algorithm-shutdown-c/audit.json": "8059d0c71409a64847525ff9774868ab3b9abd413ea2b52a29c56652a8e3e76f",
+    "build/goal-r1-goodix-algorithm-shutdown-c/verify.log": "a74290642ca3984d463207a200ea3efd9e20806bf6b6031c76dda9a13f2b49cf",
+    "build/goal-r1-goodix-algorithm-shutdown-c/negative.json": "dfe06b634ab2df9dc823cf2415b0b763954546ea7ccb72e7b7ba7dac5efb3239",
+    "build/goal-r1-goodix-algorithm-shutdown-c/test.ld": "4a623e3aed9bf27949d8966da7358c0f7c28e4006b69468001db9279e23a1c0b",
+    "build/goal-r1-goodix-algorithm-shutdown-c/audit.py": "be30928caecfbca964ff0b6a14499f4157d5191956119d141c013069cf22c5c8",
+    "build/goal-r1-goodix-algorithm-shutdown-c/source.elf": "22f9bf897e82ae70cd64ded68a3ee350e272e6f05077fbf31c462c82617e24ab",
+    "build/goal-r1-goodix-algorithm-shutdown-c/negative.py": "a74ea73c50ca8992661978b78a15169f79ba2d5bc37af51336e4b78b935c32d2",
+    "build/goal-r1-goodix-algorithm-shutdown-c/negative.log": "85f6c201445ba5f76769ed09c125a6fae4260ff2ef5647f65cbbf42bbc329a31",
+    "build/goal-r1-goodix-algorithm-shutdown-c/source.o": "47ad9b3187c30082288f6c6842806b26b7aebf77c708ee17ba8177b7f7838eb6",
+    "build/goal-r1-goodix-algorithm-shutdown-c/results.json": "710ddfa9f646c9cbcb94e75861326f554930b99f30430395c3f69f295faad635",
+    "build/goal-r1-goodix-algorithm-shutdown-c/pipeline.log": "ee75e7a2a845a2be0d2d3c3da1f787623252ae23149d5d6413a009c861c25296",
+    "build/goal-r1-goodix-algorithm-shutdown-c/pipeline.py": "daf4ff4079efd0b696983cdd64351f4be0ec09e3d0d7650668c783a31bfb3160",
+    "build/goal-r1-goodix-algorithm-shutdown-c/rea-bytes.json": "a0f8d1952a5f2cdfa4e476a6ebf9cbf46c524c8625446cac78ea8ba3375ed0b8",
+    "build/goal-r1-goodix-algorithm-shutdown-c/manifest-before.json": "fc962d45a10a53393d79484b59aa46f611e3577cc132cd1111701bdfc565ac6b",
+    "build/goal-r1-goodix-algorithm-shutdown-c/verify.py": "672bbbf8d13e5576749d9b9ed8a68a3e0b7564298b0c55b15a889ab3f07830e7",
+    "build/goal-r1-goodix-algorithm-shutdown-c/build.log": "7f043a4846e79291b0537253169799051a685fd90096a7e4435d9f8700630db3",
+    "build/goal-r1-goodix-algorithm-shutdown-c/pipeline/test.ld": "39ec450c057d7300d1e21ab0474770f29949f42993c124285a2f7e322e323db9",
+    "build/goal-r1-goodix-algorithm-shutdown-c/pipeline/source.elf": "de47f82d4532fbfe20208435a0753ace730d002c4766dad9d476344467d1d88f",
+    "build/goal-r1-goodix-algorithm-shutdown-c/pipeline/results.json": "6f605a197258d2c9c7471ef465e5e8ea650cc56c686af2894bc758797b599670",
+    "build/goal-r1-goodix-algorithm-shutdown-c/negative-normalize-callback-result/test.ld": "4a623e3aed9bf27949d8966da7358c0f7c28e4006b69468001db9279e23a1c0b",
+    "build/goal-r1-goodix-algorithm-shutdown-c/negative-normalize-callback-result/source.elf": "b65ea97630b39fcc123f4c5e54739e06a6521e072f55807a2a9ae9174acad643",
+    "build/goal-r1-goodix-algorithm-shutdown-c/negative-normalize-callback-result/source.o": "72d7cefdf5e7a54b12a8dbb995f51809bded6c3458a5a49739bf7d99cf1abc0f",
+    "build/goal-r1-goodix-algorithm-shutdown-c/negative-normalize-callback-result/log": "586bbea34428a53f3851377cb8640cb8de53646db053d2c25f32da84cd67b9e8",
+    "build/goal-r1-goodix-algorithm-shutdown-c/negative-normalize-callback-result/source.c": "b3734c4301c2f7b81c2ada3932f981f505b6c83733eb1990a8a9adcfa775b4af",
+    "build/goal-r1-goodix-algorithm-shutdown-c/negative-preserve-high-started-bits/test.ld": "4a623e3aed9bf27949d8966da7358c0f7c28e4006b69468001db9279e23a1c0b",
+    "build/goal-r1-goodix-algorithm-shutdown-c/negative-preserve-high-started-bits/source.elf": "527cb51be84a326b76c1eff29e4c500c162ebbce8b6a293709aeeb779cefc7db",
+    "build/goal-r1-goodix-algorithm-shutdown-c/negative-preserve-high-started-bits/source.o": "a9c6f4ea40f660d4821bdb1dee7c3fd8e99cce414cb126e5942a14608ab4625f",
+    "build/goal-r1-goodix-algorithm-shutdown-c/negative-preserve-high-started-bits/log": "97f979279b92adc6b7a776448c1044131579f654e08d55caacbcda6dd9440184",
+    "build/goal-r1-goodix-algorithm-shutdown-c/negative-preserve-high-started-bits/source.c": "09db444b5c5a4c731429354b7406c4f80b0186ae48daefec1ad0707033006bea",
+    "build/goal-r1-goodix-algorithm-shutdown-c/negative-missing-soft-ir/test.ld": "4a623e3aed9bf27949d8966da7358c0f7c28e4006b69468001db9279e23a1c0b",
+    "build/goal-r1-goodix-algorithm-shutdown-c/negative-missing-soft-ir/source.elf": "e82d41e050b03d3ff2f5c2463838be1fa492f870f97fc970eb5e729149b0a0ac",
+    "build/goal-r1-goodix-algorithm-shutdown-c/negative-missing-soft-ir/source.o": "a1976a92db0ab8239296976382caff525e522445ef6f0215f66b0a5dfe99006a",
+    "build/goal-r1-goodix-algorithm-shutdown-c/negative-missing-soft-ir/log": "8d73161095f70259e0a3f6ab0d3b9ee3f33a728660d26b97f3721d7d14392a7a",
+    "build/goal-r1-goodix-algorithm-shutdown-c/negative-missing-soft-ir/source.c": "12ae67ccb33c5d6639ace3db1d13f4bf919f589e8b187ee1d5234ca6ec3fa656",
+    "build/goal-r1-goodix-algorithm-shutdown-c/negative-late-frame-read/test.ld": "4a623e3aed9bf27949d8966da7358c0f7c28e4006b69468001db9279e23a1c0b",
+    "build/goal-r1-goodix-algorithm-shutdown-c/negative-late-frame-read/source.elf": "0c39cf96396760a9745fed800cd34a5ecf180bede25be6ab0b3449b8750cbe1b",
+    "build/goal-r1-goodix-algorithm-shutdown-c/negative-late-frame-read/source.o": "846a24b91dba155e0370618aab604f8ab4b4707babca2cec4763fdbbbfa788e9",
+    "build/goal-r1-goodix-algorithm-shutdown-c/negative-late-frame-read/log": "ca5230656b0ade9969bf7b68f2207de45393e8b8e51e393455535530adbe5930",
+    "build/goal-r1-goodix-algorithm-shutdown-c/negative-late-frame-read/source.c": "1dede4383215c9c02a013c06b4703347d51534e2a03fbf0476f0f84569bc92fd",
+    "build/goal-r1-goodix-algorithm-shutdown-c/negative-unit-init-flag/test.ld": "4a623e3aed9bf27949d8966da7358c0f7c28e4006b69468001db9279e23a1c0b",
+    "build/goal-r1-goodix-algorithm-shutdown-c/negative-unit-init-flag/source.elf": "1f48fac64d3dad22b50ec520a14da50ab252813e2e85aba7e59a69abc85da734",
+    "build/goal-r1-goodix-algorithm-shutdown-c/negative-unit-init-flag/source.o": "b24af20dc90ceaa5d5386e93e2941a1ada49691aa98111a206fcc8721411f9a0",
+    "build/goal-r1-goodix-algorithm-shutdown-c/negative-unit-init-flag/log": "8d73161095f70259e0a3f6ab0d3b9ee3f33a728660d26b97f3721d7d14392a7a",
+    "build/goal-r1-goodix-algorithm-shutdown-c/negative-unit-init-flag/source.c": "655d5171500dccc3dfedfe1505d517f7a0876584051289bb4301d52472ce6720",
+    "build/goal-r1-goodix-algorithm-shutdown-c/negative-continue-after-failure/test.ld": "4a623e3aed9bf27949d8966da7358c0f7c28e4006b69468001db9279e23a1c0b",
+    "build/goal-r1-goodix-algorithm-shutdown-c/negative-continue-after-failure/source.elf": "0e15ae0899f6a57bcd4ff6255d887b3ae8fd79f7df302b6bc916d0a966fb81ee",
+    "build/goal-r1-goodix-algorithm-shutdown-c/negative-continue-after-failure/source.o": "429055453ad35a584610a953f9d7cc9e16523d377b179f1d988845554b8f4b6f",
+    "build/goal-r1-goodix-algorithm-shutdown-c/negative-continue-after-failure/log": "8d73161095f70259e0a3f6ab0d3b9ee3f33a728660d26b97f3721d7d14392a7a",
+    "build/goal-r1-goodix-algorithm-shutdown-c/negative-continue-after-failure/source.c": "c9be807752f362c6ddc9ef8733b6216d44b9a7571ac598dd5a3659e9702ccfab",
+    "build/goal-r1-goodix-algorithm-shutdown-c/negative-clear-before-callback/test.ld": "4a623e3aed9bf27949d8966da7358c0f7c28e4006b69468001db9279e23a1c0b",
+    "build/goal-r1-goodix-algorithm-shutdown-c/negative-clear-before-callback/source.elf": "890c2483a515d84e8b8e14129d42619c8ecba800c9232d2fb810d65ce1c31904",
+    "build/goal-r1-goodix-algorithm-shutdown-c/negative-clear-before-callback/source.o": "a022ae76e8b79bcdc3509a5f4a05cff9b6d6393689d2870161d6d424903a4ed1",
+    "build/goal-r1-goodix-algorithm-shutdown-c/negative-clear-before-callback/log": "6c77a98c315b961160a8542378d5adc77cd4b03ae9c1624ffec67b091155e4fb",
+    "build/goal-r1-goodix-algorithm-shutdown-c/negative-clear-before-callback/source.c": "f9ef588421cdf675e2bce5a3032417c43f58eaac126d674a8a970f888df613bf",
+    "build/goal-r1-goodix-algorithm-shutdown-c/negative-skip-last-slot/test.ld": "4a623e3aed9bf27949d8966da7358c0f7c28e4006b69468001db9279e23a1c0b",
+    "build/goal-r1-goodix-algorithm-shutdown-c/negative-skip-last-slot/source.elf": "b2343ad60fd30fcabfb72ea5297df7ae3c63af4fd87c50d7ea7166b631a23376",
+    "build/goal-r1-goodix-algorithm-shutdown-c/negative-skip-last-slot/source.o": "8ac4d178a5353f188776e6a31541457c5a133455ccd26d99bf63f0b5573f3143",
+    "build/goal-r1-goodix-algorithm-shutdown-c/negative-skip-last-slot/log": "34fee64ea88ee428aab61c14f541e009a68e290875a0a735a34736914d08b09e",
+    "build/goal-r1-goodix-algorithm-shutdown-c/negative-skip-last-slot/source.c": "dcd1e340df417fd740606f6fae246c2c5477a025bd39774a4c43f4a6742668bf",
+    "build/goal-r1-goodix-algorithm-shutdown-c/negative-retain-init-flag/test.ld": "4a623e3aed9bf27949d8966da7358c0f7c28e4006b69468001db9279e23a1c0b",
+    "build/goal-r1-goodix-algorithm-shutdown-c/negative-retain-init-flag/source.elf": "c61d1e91e6ca74b1b9fe64813b0c0db2d141453c5dba6125e8db4b62583508d1",
+    "build/goal-r1-goodix-algorithm-shutdown-c/negative-retain-init-flag/source.o": "0f54ee4eef059b0b819313a525ec39b94a64b2501f53f8dd9257e4ca83a3a607",
+    "build/goal-r1-goodix-algorithm-shutdown-c/negative-retain-init-flag/log": "97f979279b92adc6b7a776448c1044131579f654e08d55caacbcda6dd9440184",
+    "build/goal-r1-goodix-algorithm-shutdown-c/negative-retain-init-flag/source.c": "475c5c4c16d35fad547087eecac65ba1fc9deb9ad3fe14e6e45a475cc154553b",
+    "build/goal-r1-goodix-algorithm-shutdown-c/negative-remove-owner-guard/test.ld": "4a623e3aed9bf27949d8966da7358c0f7c28e4006b69468001db9279e23a1c0b",
+    "build/goal-r1-goodix-algorithm-shutdown-c/negative-remove-owner-guard/source.elf": "c2417b81f3b4d4252e77bf16d12dbf641702f8b66b9695d33ed7e004f0f20084",
+    "build/goal-r1-goodix-algorithm-shutdown-c/negative-remove-owner-guard/source.o": "1a5b053c03723dc515399dd9e14119b64effbd79fa52a63acb296bb4efb942ce",
+    "build/goal-r1-goodix-algorithm-shutdown-c/negative-remove-owner-guard/log": "55a647bef336928d9d65d2641dbd650b543e56f302a360130b73a31282b350c9",
+    "build/goal-r1-goodix-algorithm-shutdown-c/negative-remove-owner-guard/source.c": "985b08d6dfdc36d975288c84f89af250018ab799dcd3800ceb5ac5dc65caac56",
+    "build/goal-r1-goodix-algorithm-shutdown-c/negative-started-mask/test.ld": "4a623e3aed9bf27949d8966da7358c0f7c28e4006b69468001db9279e23a1c0b",
+    "build/goal-r1-goodix-algorithm-shutdown-c/negative-started-mask/source.elf": "4a7078983ec4d2acfee6b5054050bdfcd385ec7e3bd89f82a47708b1782f53a8",
+    "build/goal-r1-goodix-algorithm-shutdown-c/negative-started-mask/source.o": "c2d3dd05854f6b4b0db096495da8b080c7b704a37a6a3e514b34aab26f7c36ac",
+    "build/goal-r1-goodix-algorithm-shutdown-c/negative-started-mask/log": "97f979279b92adc6b7a776448c1044131579f654e08d55caacbcda6dd9440184",
+    "build/goal-r1-goodix-algorithm-shutdown-c/negative-started-mask/source.c": "65889414deb5f7314d2ae1b4ed0a3fafb12201fcfa5137bed4105843e46da594",
+    "build/goal-r1-goodix-algorithm-shutdown-c/negative-wrong-HRV-provider/test.ld": "4a623e3aed9bf27949d8966da7358c0f7c28e4006b69468001db9279e23a1c0b",
+    "build/goal-r1-goodix-algorithm-shutdown-c/negative-wrong-HRV-provider/source.elf": "4b0f9d664d3e12ba8450106dd6a867746000e942205974d988d421a5dcb3bf15",
+    "build/goal-r1-goodix-algorithm-shutdown-c/negative-wrong-HRV-provider/source.o": "fbee6ac891fad070747b0669ebeb9f7e4a217f4beeeac86f99837d5b2c650abc",
+    "build/goal-r1-goodix-algorithm-shutdown-c/negative-wrong-HRV-provider/log": "8d73161095f70259e0a3f6ab0d3b9ee3f33a728660d26b97f3721d7d14392a7a",
+    "build/goal-r1-goodix-algorithm-shutdown-c/negative-wrong-HRV-provider/source.c": "22ed120cfc51e27559799b690dea5016e504bf8f5def496b031c76f2f42e580a",
+    "build/goal-r1-goodix-algorithm-shutdown-c/negative-skip-null-frame/test.ld": "4a623e3aed9bf27949d8966da7358c0f7c28e4006b69468001db9279e23a1c0b",
+    "build/goal-r1-goodix-algorithm-shutdown-c/negative-skip-null-frame/source.elf": "f769416586a84afdf2c82a9fe72ca321ac8ba9bde34331f7cbf56aa086fc4d7f",
+    "build/goal-r1-goodix-algorithm-shutdown-c/negative-skip-null-frame/source.o": "8894211b5cffd38be1c794fa15f264ae7b3fae15b8869f062c2e40ebe2255cb4",
+    "build/goal-r1-goodix-algorithm-shutdown-c/negative-skip-null-frame/log": "8d73161095f70259e0a3f6ab0d3b9ee3f33a728660d26b97f3721d7d14392a7a",
+    "build/goal-r1-goodix-algorithm-shutdown-c/negative-skip-null-frame/source.c": "0ad07aada584f36bee004e1a26aac97bf10ecd8db2ea741505347a65ac885c52",
+    "build/goal-r1-goodix-algorithm-shutdown-c/negative-null-owner-status/test.ld": "4a623e3aed9bf27949d8966da7358c0f7c28e4006b69468001db9279e23a1c0b",
+    "build/goal-r1-goodix-algorithm-shutdown-c/negative-null-owner-status/source.elf": "68ebd0ab9ec6abb47267054ea4d307b17a0a82c3ed40506db94c19bd02304a0e",
+    "build/goal-r1-goodix-algorithm-shutdown-c/negative-null-owner-status/source.o": "15b201c124ca565841e11990a2b2e22c7df94e1065f787d17da60d6783b19c7a",
+    "build/goal-r1-goodix-algorithm-shutdown-c/negative-null-owner-status/log": "586bbea34428a53f3851377cb8640cb8de53646db053d2c25f32da84cd67b9e8",
+    "build/goal-r1-goodix-algorithm-shutdown-c/negative-null-owner-status/source.c": "b3a23d8564cddef43af82b61d7c8288745b7c5410b931cc0f97e770362e7cc52",
+    "build/goal-r1-goodix-algorithm-shutdown-c/negative-cached-frame-owner/test.ld": "4a623e3aed9bf27949d8966da7358c0f7c28e4006b69468001db9279e23a1c0b",
+    "build/goal-r1-goodix-algorithm-shutdown-c/negative-cached-frame-owner/source.elf": "d0685e33e01315595a4db2a41f56c2f3fe71fec7772d32d6f4a884200b71d33f",
+    "build/goal-r1-goodix-algorithm-shutdown-c/negative-cached-frame-owner/source.o": "11840443471440bf1c75d72a024aff9443029f4e192fc156736887dfa9e86dda",
+    "build/goal-r1-goodix-algorithm-shutdown-c/negative-cached-frame-owner/log": "446e3ba847f4ce63676564cb033f10f7a0148e8beaa94a40350e4fbaee01e61e",
+    "build/goal-r1-goodix-algorithm-shutdown-c/negative-cached-frame-owner/source.c": "850ae24c18ba8f6247bf6c8d44a5f03b39c5cc3321b6630378139412257cd0a1",
+    "build/goal-r1-goodix-algorithm-shutdown-c/negative-late-started-write/test.ld": "4a623e3aed9bf27949d8966da7358c0f7c28e4006b69468001db9279e23a1c0b",
+    "build/goal-r1-goodix-algorithm-shutdown-c/negative-late-started-write/source.elf": "d7faf36e73c5a39f42337f8579e76b82d218063233e2bd61fe56af393a31155d",
+    "build/goal-r1-goodix-algorithm-shutdown-c/negative-late-started-write/source.o": "c5c1d4c897dce77bd5eee23d1403db3403b653b11b3f5d2a0f80bafe5b3ca595",
+    "build/goal-r1-goodix-algorithm-shutdown-c/negative-late-started-write/log": "6c77a98c315b961160a8542378d5adc77cd4b03ae9c1624ffec67b091155e4fb",
+    "build/goal-r1-goodix-algorithm-shutdown-c/negative-late-started-write/source.c": "c37aa62d9d0ff245517580a20187cf65aad4c790344573c84c7eb11cc4488496",
+    "build/goal-r1-goodix-algorithm-shutdown-c/negative-clear-on-failure/test.ld": "4a623e3aed9bf27949d8966da7358c0f7c28e4006b69468001db9279e23a1c0b",
+    "build/goal-r1-goodix-algorithm-shutdown-c/negative-clear-on-failure/source.elf": "6481cf521c5f7abbff64e9d1e034d1eacad48ba4efa0176de032092c13f1e09c",
+    "build/goal-r1-goodix-algorithm-shutdown-c/negative-clear-on-failure/source.o": "14cdd33905324ae899e27ec5cfeebddb17f493991f57dd5cd13ab32a947320b4",
+    "build/goal-r1-goodix-algorithm-shutdown-c/negative-clear-on-failure/log": "97f979279b92adc6b7a776448c1044131579f654e08d55caacbcda6dd9440184",
+    "build/goal-r1-goodix-algorithm-shutdown-c/negative-clear-on-failure/source.c": "d4f8f22afd687dbec8cdb9dd0da3f7b4dc428bc64f253ed0bf6910d3289c4670"
+  }
+}

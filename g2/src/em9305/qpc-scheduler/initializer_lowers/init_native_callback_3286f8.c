@@ -1,26 +1,12 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_callback_3286f8\n"
-".type opencfw_em9305_callback_3286f8,@function\n"
-"opencfw_em9305_callback_3286f8:\n"
-"L3286f8:\n"
-"enter_s [r13,blink]\n"
-"L3286fa:\n"
-"mov_s r13,r0\n"
-"L3286fc:\n"
-"mov_s r0,0x80542c\n"
-"L328702:\n"
-"mov_s r1,0\n"
-"L328704:\n"
-"bl.d opencfw_em9305_memset\n"
-"L328708:\n"
-"mov_s r2,0x1c\n"
-"L32870a:\n"
-"bl.d opencfw_em9305_callback_328dd4\n"
-"L32870e:\n"
-"mov_s r0,r13\n"
-"L328710:\n"
-"leave_s [r13,blink,pcl]\n"
-".size opencfw_em9305_callback_3286f8,.-opencfw_em9305_callback_3286f8\n"
-);
+#include <stdint.h>
+
+/* Native 0x3286f8..0x328712: clear the 28-byte state block at 0x80542c,
+ * then run the 328dd4 callback on the incoming argument. */
+extern void *opencfw_em9305_memset(void *,uint32_t,uint32_t);
+extern uint32_t opencfw_em9305_callback_328dd4(uint32_t);
+
+uint32_t opencfw_em9305_callback_3286f8(uint32_t argument)
+{
+    (void)opencfw_em9305_memset((void *)(uintptr_t)0x80542cu,0u,0x1cu);
+    return opencfw_em9305_callback_328dd4(argument);
+}

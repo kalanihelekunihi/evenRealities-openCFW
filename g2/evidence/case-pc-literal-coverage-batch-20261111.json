@@ -1,0 +1,38 @@
+{
+  "schema": 1,
+  "date": "2026-11-11",
+  "reference": {
+    "artifact": "g2/blobs/official/g2-2.2.6.10/firmware_box.raw.bin",
+    "sha256": "773b6d4cfdaf0a5a74a557e3babe8222a0ae813436b76a7437c1096d2c60d677",
+    "flash_base": "0x08000000"
+  },
+  "method": "For each listed frontier span, every 4-byte word is the target of a Thumb PC-relative LDR inside a function interval in g2/symbols/case.tsv. Each instruction target and word value was checked against the locked raw image; all original frontier content hashes were retained and revalidated.",
+  "closed_spans": [
+    {"span": "0x0800041C..0x08000420", "words": ["0x2000007C"], "load_sites": ["0x0800031A"]},
+    {"span": "0x08000568..0x0800056C", "words": ["0x2000007C"], "load_sites": ["0x080004CA"]},
+    {"span": "0x08000730..0x08000734", "words": ["0x7FFFFFE8"], "load_sites": ["0x080006EE"]},
+    {"span": "0x0800091C..0x08000928", "words": ["0x2000010A", "0x2000087C", "0x20000974"], "load_sites": ["0x0800085E", "0x08000866", "0x08000872"]},
+    {"span": "0x080028B0..0x080028B4", "words": ["0x50000400"], "load_sites": ["0x080028A2"]},
+    {"span": "0x080029FC..0x08002A00", "words": ["0x20000114"], "load_sites": ["0x080029AC"]},
+    {"span": "0x08002A58..0x08002A5C", "words": ["0x20000114"], "load_sites": ["0x08002A08"]},
+    {"span": "0x08002F24..0x08002F28", "words": ["0x200008E4"], "load_sites": ["0x08002EDE", "0x08002EE6", "0x08002EF4", "0x08002F10"]}
+  ],
+  "coverage_delta": {
+    "inventory": "g2/tools/manifests/g2-case-final-gap-frontier.tsv",
+    "unsupported_rows_before": 194,
+    "unsupported_rows_after": 186,
+    "literal_rows_after": 12,
+    "newly_classified_literal_bytes": 40,
+    "total_classified_literal_bytes": 64
+  },
+  "verification": {
+    "all_230_frontier_row_hashes_match_reference": true,
+    "frontier_rows_are_nonoverlapping": true,
+    "sources_check": "pass: 4883 units, one final-link-only C helper",
+    "diff_check": "pass"
+  },
+  "limits": [
+    "Other candidate PC-relative literals were not promoted without review.",
+    "This is code/data coverage evidence, not a new C implementation, full case completeness, bundle byte equality, or physical hardware validation."
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "cases": 1536,
+  "passed": 1536,
+  "failures": [],
+  "stock_entry": "0x54440",
+  "stock_body_bytes": 62,
+  "source_body_bytes": 66,
+  "callback_stack_depth_pairs": [
+    [
+      [
+        -16
+      ],
+      [
+        -24
+      ]
+    ],
+    [
+      [
+        -16,
+        -16
+      ],
+      [
+        -24,
+        -24
+      ]
+    ]
+  ],
+  "unchanged_functions": [
+    "r1_bma_fifo_read_bytes",
+    "r1_bma456w_fifo_read"
+  ],
+  "report": "build/sources-goal-r1-bma-fifo-length/report.json",
+  "report_sha256": "5274d10abdedee10363717d294ea4047c1d13f592e9196e841032a656956bdac",
+  "source_sha256": "6ca5708ff7e1a125426b812bb6b1f0ee254d659946b8b12e7493fe09721658b6",
+  "manifest_sha256": "be76bf00509f1551b53a08edbc5515ed3a3dcb9b1721ff4481fdf60b77d82eb8",
+  "stock_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "native_span_sha256": "31f6906746bd606d7a9b3b6b8806d755d4ac556251ea7403c2d074afbec232e8",
+  "rea": {
+    "completed": true,
+    "procedure": "0x54440",
+    "path": "build/goal-r1-bma-fifo-length/REA.json",
+    "sha256": "684c1b5578d4efc8bd55d18ead3f73207fa61e7b0cee1d71f866bb013b4d787e"
+  },
+  "probe_artifacts": {
+    "build/goal-r1-bma-fifo-length/verify.py": "f63646859118c53a03a9de11ca7fb16bf1ab7ced33a6381debaca06f98ffe4e2",
+    "build/goal-r1-bma-fifo-length/before.c": "d06048640a1bf162e2ccbde1cacab0277b20bc9a348f57176b2645cd20324f62",
+    "build/goal-r1-bma-fifo-length/source.elf": "d0b00770cfa480012c4aea446c6e65a69b14ba51e4fd5bfd3eb51556dbf11406",
+    "build/goal-r1-bma-fifo-length/stock.elf": "3f07009c0b41c601da44a7b4185d9ebe5bb0118ff0f408981bdddbb83aa32c84",
+    "build/goal-r1-bma-fifo-length/rea-snapshot.json": "93de6f869630dd0b583e319e8b43c3785eb31bd8b975e85c8d3d1f693382aa69"
+  },
+  "limits": [
+    "Checker and read transport are mocked and clobber caller-saved registers.",
+    "Private stack frames differ: native callbacks at SP-16, candidate SP-24.",
+    "No physical sensor operation, timing, complete fault-state, final firmware link, source qualification or byte-identity claim."
+  ]
+}

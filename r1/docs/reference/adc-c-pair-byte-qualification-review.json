@@ -1,0 +1,196 @@
+{
+  "candidate_units": 15,
+  "compiled_units": 15,
+  "selected_regions": [
+    {
+      "payload": "r1-application",
+      "symbol": "r1_temperature_pair_read",
+      "start": 171306,
+      "end": 171324,
+      "sha256": "71a08b9d39573b1e85bccea116a8d174e62b6bcda2c5a87eb503a5056a2a36b9",
+      "evidence": "r1/symbols/function-frontier.csv",
+      "bindings": {
+        "r1_adc_channel_read_averaged": 330897,
+        "r1_battery_raw_to_percent": 331009
+      },
+      "address": 331050,
+      "binding_evidence": "r1/symbols/function-frontier.csv"
+    }
+  ],
+  "source_bytes_added": 18,
+  "added_C_instruction_bytes": 18,
+  "added_literal_bytes": 0,
+  "canonical_source_plan_promoted": true,
+  "hybrid_complete_source": false,
+  "hybrid_totals": {
+    "binary-pull-through": 642381,
+    "source-built": 3779,
+    "resource-file": 248
+  },
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "application_equals_official": true,
+  "qualification_method": "Official qualify_sources.py with input-only source filter; unchanged anchored matching, scalar binding and full linked equality",
+  "candidate_results": [
+    {
+      "source": "r1/src/application/goodix/stock_client_release.c",
+      "compiled": true,
+      "selected": [],
+      "rejections": {
+        "anchored_relocation_pattern_not_exact": 9
+      }
+    },
+    {
+      "source": "r1/src/application/goodix/stock_client_release.c",
+      "compiled": true,
+      "selected": [],
+      "rejections": {
+        "anchored_relocation_pattern_not_exact": 9
+      }
+    },
+    {
+      "source": "r1/src/application/goodix/stock_client_release.c",
+      "compiled": true,
+      "selected": [],
+      "rejections": {
+        "anchored_relocation_pattern_not_exact": 9
+      }
+    },
+    {
+      "source": "r1/src/application/goodix/stock_client_release.c",
+      "compiled": true,
+      "selected": [],
+      "rejections": {
+        "native_symbol_anchor_missing": 1,
+        "anchored_relocation_pattern_not_exact": 9
+      }
+    },
+    {
+      "source": "r1/src/application/goodix/stock_client_release.c",
+      "compiled": true,
+      "selected": [],
+      "rejections": {
+        "anchored_relocation_pattern_not_exact": 9
+      }
+    },
+    {
+      "source": "r1/src/application/adc/stock_battery_average.c",
+      "compiled": true,
+      "selected": [],
+      "rejections": {
+        "native_symbol_anchor_missing": 1,
+        "compiled_bytes_differ": 2
+      }
+    },
+    {
+      "source": "r1/src/application/adc/stock_battery_average.c",
+      "compiled": true,
+      "selected": [],
+      "rejections": {
+        "native_symbol_anchor_missing": 1,
+        "compiled_bytes_differ": 1,
+        "anchored_relocation_pattern_not_exact": 1
+      }
+    },
+    {
+      "source": "r1/src/application/adc/stock_battery_average.c",
+      "compiled": true,
+      "selected": [],
+      "rejections": {
+        "native_symbol_anchor_missing": 1,
+        "compiled_bytes_differ": 2
+      }
+    },
+    {
+      "source": "r1/src/application/adc/stock_battery_average.c",
+      "compiled": true,
+      "selected": [
+        {
+          "payload": "r1-application",
+          "symbol": "r1_temperature_pair_read",
+          "start": 171306,
+          "end": 171324,
+          "sha256": "71a08b9d39573b1e85bccea116a8d174e62b6bcda2c5a87eb503a5056a2a36b9",
+          "evidence": "r1/symbols/function-frontier.csv",
+          "bindings": {
+            "r1_adc_channel_read_averaged": 330897,
+            "r1_battery_raw_to_percent": 331009
+          },
+          "address": 331050,
+          "binding_evidence": "r1/symbols/function-frontier.csv"
+        }
+      ],
+      "rejections": {
+        "native_symbol_anchor_missing": 1,
+        "compiled_bytes_differ": 1
+      }
+    },
+    {
+      "source": "r1/src/application/adc/stock_battery_average.c",
+      "compiled": true,
+      "selected": [],
+      "rejections": {
+        "native_symbol_anchor_missing": 1,
+        "compiled_bytes_differ": 1,
+        "anchored_relocation_pattern_not_exact": 1
+      }
+    },
+    {
+      "source": "r1/src/application/adc/stock_battery_average_frame.c",
+      "compiled": true,
+      "selected": [],
+      "rejections": {
+        "anchored_relocation_pattern_not_exact": 1
+      }
+    },
+    {
+      "source": "r1/src/application/adc/stock_battery_average_frame.c",
+      "compiled": true,
+      "selected": [],
+      "rejections": {
+        "anchored_relocation_pattern_not_exact": 1
+      }
+    },
+    {
+      "source": "r1/src/application/adc/stock_battery_average_frame.c",
+      "compiled": true,
+      "selected": [],
+      "rejections": {
+        "anchored_relocation_pattern_not_exact": 1
+      }
+    },
+    {
+      "source": "r1/src/application/adc/stock_battery_average_frame.c",
+      "compiled": true,
+      "selected": [],
+      "rejections": {
+        "anchored_relocation_pattern_not_exact": 1
+      }
+    },
+    {
+      "source": "r1/src/application/adc/stock_battery_average_frame.c",
+      "compiled": true,
+      "selected": [],
+      "rejections": {
+        "anchored_relocation_pattern_not_exact": 1
+      }
+    }
+  ],
+  "evidence": {
+    "build/goal-r1-analog-qualification/qualify.py": "628d89ce921c1e9b5f4c75617af3b73cef46f12658c8c872ae8cb9d2937985db",
+    "build/goal-r1-analog-qualification/scope.json": "267741b44ef744809e791a831599a86096f7a228157498788b2bb188bf7a7a21",
+    "build/goal-r1-analog-qualification/qualified/qualification.json": "a1e80fa5a3668d4c7721d671a9aa99f9353096fcdddae609f07d1ee5f2de2e71",
+    "build/goal-r1-analog-qualification/qualified/source-plan.json": "d8079aa6c56df2ece7fa210e6bab5dea8014d9e725adc2a3520a9c47c18dd0ca",
+    "build/goal-r1-analog-qualification/source-plan-before.json": "b056107b9773e0eaac8d64015682a68020b1b3e145310f7d399aaa078bd96e91",
+    "build/goal-r1-analog-qualification/merged-source-plan.json": "5fb8ec6a98698030b2c083e4f1eb882337124272718a723b1bf9e7c54339067a",
+    "build/goal-r1-analog-qualification/merge-audit.json": "bc422b82d5c55f995e7f324a057a33ff8aac3f1cdfb25b9575b93e264189f7bb",
+    "build/hybrid-goal-r1-analog-qualification/build-report.json": "355927660007c4971ab4499194e75587d6890e352a03dca87116cd09d1bbaccb",
+    "build/hybrid-goal-r1-analog-qualification/coverage.json": "ddf3c0420dced91def0a0e4bcbac6a05c8ed8ff1ced0fb4871bf18c1b99e58ad",
+    "build/hybrid-goal-r1-analog-qualification/payloads/application.bin": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "r1/src/application/adc/stock_battery_average.c": "e321f318f5000d851e666c8f9c62b933055be9f74c421c43104c68c57065a2e6",
+    "r1/src/application/adc/stock_battery_average_frame.c": "29823ae0e5ab72bbc5192a62b23d3098626f2f115fb92d233dc9d16597f84cb2",
+    "r1/src/application/goodix/stock_client_release.c": "609921a0df3465dd0f877de495a1d4c933ec924a6c4093bbc3b24052421fd9c6",
+    "r1/src/sources.json": "e32450af0ad855a39e15e9c4029af6bc1b267b6f8d10085ad7714c4130b94bcc",
+    "r1/symbols/function-frontier.csv": "c164b2fd0467da423da4d9798462882b3ea1eff452ae3f1a63ed99fd4f4cf050",
+    "tools/build/source-plan.json": "5fb8ec6a98698030b2c083e4f1eb882337124272718a723b1bf9e7c54339067a"
+  }
+}

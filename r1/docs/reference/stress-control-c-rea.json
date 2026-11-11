@@ -1,0 +1,29 @@
+{
+  "evidence_id": "ev_026d4bb7075b9d91e8b018e9bc8e7717ef5bd31df439f2642a344dae7c3a4132",
+  "subject": {
+    "name": "stock.elf",
+    "digest": {
+      "sha256": "25b4a29af80ec8edab5bd861ba9b74a6e22eab29dc3d7a809a16869e8a140f04"
+    },
+    "local_path": "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-queue-reset-c/stock.elf",
+    "format": "elf",
+    "architecture": "arm"
+  },
+  "normalized_result": {
+    "address": "0x4b348",
+    "requested_bytes": 168,
+    "returned_bytes": 168,
+    "bytes_hex": "70b50e462849294a891ac908032202eb0144b04217d146f0c5f8c00703d146f0c1f8400705d522a221a14ff0406046f05ff946f0b7f8800735d52046bde8704022a12ef019bb264d012805d1686818b13ff012f800206860012e24d16868002821d100221f4920483ef0aeff686046f099f8c0074ff4616503d146f093f8400706d52b4619a219a14ff0446046f030f946f088f8800706d520462a46bde870401ea12ef0edba70bd",
+    "complete": true
+  },
+  "limitations": [
+    "The session serves operations only after Ghidra reports default auto-analysis complete; incomplete analysis does not expose partial results.",
+    "The imported Program and temporary project are ephemeral and deleted on close. Annotation operations edit session database metadata; original executable bytes are never written.",
+    "Cancelling an active Ghidra request terminates its ephemeral database and discards session annotations. The selected target remains open; the next provider query imports the original artifact again.",
+    "Default-space addresses use lowercase 0x-prefixed hexadecimal; other address spaces use <percent-encoded-space>:0x<hex>.",
+    "Bytes reflect Ghidra's initialized memory, including loader fixups. Reads stop at an unmapped or uninitialized byte and report completeness explicitly.",
+    "macOS sessions require a matching executable Ghidra native decompiler; REA checks for it but does not build native components or change Gatekeeper quarantine state."
+  ],
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "raw_artifact_match": true
+}

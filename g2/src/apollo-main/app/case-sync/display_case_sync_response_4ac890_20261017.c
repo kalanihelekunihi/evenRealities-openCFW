@@ -6,7 +6,7 @@ extern volatile uint8_t audio_uart_case_soc_cell_2007418c;
 extern volatile uint8_t audio_uart_case_charge_cell_2007418d;
 extern volatile uint8_t audio_uart_case_sensor_b;
 extern volatile uint8_t audio_uart_case_sensor_a;
-extern volatile uint8_t audio_uart_case_status_disabled;
+#include "../case-reconnect/case_reconnect_state.h"
 extern void audio_uart_buffer_zero(void *,uint32_t,uint32_t);
 extern uint32_t audio_uart_service_nonce(uint8_t out[4]);
 extern void audio_uart_case_display_refresh_4abf86(void);

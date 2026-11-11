@@ -1,0 +1,580 @@
+{
+  "schema_version": 1,
+  "entries": {
+    "0x000739a8": "r1_goodix_native_model_recurrent"
+  },
+  "native_instruction_bytes": 1120,
+  "direct_case_or_sequence_pairs": 13232,
+  "normal_case_or_sequence_pairs": 552,
+  "constructor_callback_pairs": 4720,
+  "total_case_or_sequence_pairs": 18504,
+  "paired_callback_invocations": 20604,
+  "verification": {
+    "verify": {
+      "native_candidate_pairs": 11520,
+      "FP_settings": 32,
+      "actual_C_support_and_math_providers": true,
+      "source_has_no_stock_mapping": true
+    },
+    "edge": {
+      "native_candidate_pairs": 1248,
+      "paired_callback_invocations": 2880,
+      "FP_settings": 32,
+      "early_error_public_RAM_unchanged": true,
+      "state_and_output_trace_each_frame": true,
+      "live_aliases": 9,
+      "signed_input_columns": true,
+      "input_batches_ignored": true
+    },
+    "oracle": {
+      "native_candidate_pairs": 64,
+      "paired_callback_invocations": 288,
+      "FP_settings": 32,
+      "independent_GRU_state_and_output_recurrence": true,
+      "zero_candidate_exact": true,
+      "finite_tanh_oracle_tolerance": 2e-06
+    },
+    "coverage": {
+      "native_candidate_pairs": 383,
+      "paired_callback_invocations": 401,
+      "native_instruction_bytes": 1120,
+      "expected_bytes": 1120,
+      "instruction_starts": 365,
+      "missing": []
+    }
+  },
+  "normal_verification": {
+    "native_candidate_pairs": 552,
+    "paired_callback_invocations": 774,
+    "FP_settings": [
+      0,
+      1,
+      2,
+      3,
+      15,
+      31
+    ],
+    "actual_normal_C_providers": true,
+    "source_has_no_stock_mapping": true
+  },
+  "constructor_verification": {
+    "constructor": {
+      "native_candidate_pairs": 3840,
+      "FP_settings": 32,
+      "actual_C_constructor_heap_init_malloc_and_callback": true,
+      "only_callback_word_normalized": true,
+      "function_identity_verified": true,
+      "unexecuted_fatal_boundaries_guarded": true,
+      "source_has_no_stock_mapping": true
+    },
+    "constructor-oracle": {
+      "native_candidate_pairs": 160,
+      "FP_settings": 32,
+      "independent_descriptor_cursor_heap_pointer_and_zero_state_output_oracles": true
+    },
+    "normal-constructor": {
+      "native_candidate_pairs": 720,
+      "FP_settings": 6,
+      "actual_C_constructor_heap_init_malloc_and_callback": true,
+      "only_callback_word_normalized": true,
+      "function_identity_verified": true,
+      "unexecuted_fatal_boundaries_guarded": true,
+      "source_has_no_stock_mapping": true
+    }
+  },
+  "compiled_defect_controls": [
+    {
+      "name": "wrong-eligibility-combination",
+      "rejected": true,
+      "positive_baseline": true,
+      "witness": {
+        "case": 1,
+        "mode": 0,
+        "options": {
+          "units": 2,
+          "columns": 3,
+          "input_range": [
+            0,
+            1065353216
+          ],
+          "expect_early_error": true
+        }
+      }
+    },
+    {
+      "name": "wrong-input-dimension",
+      "rejected": true,
+      "positive_baseline": true,
+      "witness": {
+        "case": 1,
+        "mode": 0,
+        "options": {
+          "units": 3,
+          "columns": -1
+        }
+      }
+    },
+    {
+      "name": "lost-state-byte-alignment",
+      "rejected": true,
+      "positive_baseline": true,
+      "witness": {
+        "case": 1,
+        "mode": 0,
+        "options": {
+          "units": 3,
+          "columns": -1
+        }
+      }
+    },
+    {
+      "name": "wrong-recurrent-coefficients",
+      "rejected": true,
+      "positive_baseline": true,
+      "witness": {
+        "case": 1,
+        "mode": 0,
+        "options": {
+          "units": 3,
+          "columns": -1
+        }
+      }
+    },
+    {
+      "name": "wrong-recurrent-factor",
+      "rejected": true,
+      "positive_baseline": true,
+      "witness": {
+        "case": 1,
+        "mode": 0,
+        "options": {
+          "units": 3,
+          "columns": -1
+        }
+      }
+    },
+    {
+      "name": "lost-range-adjustment",
+      "rejected": true,
+      "positive_baseline": true,
+      "witness": {
+        "case": 9,
+        "mode": 0,
+        "options": null
+      }
+    },
+    {
+      "name": "wrong-step-clamp",
+      "rejected": true,
+      "positive_baseline": true,
+      "witness": {
+        "case": 1,
+        "mode": 0,
+        "options": {
+          "units": 3,
+          "columns": -1
+        }
+      }
+    },
+    {
+      "name": "lost-input-zero-point",
+      "rejected": true,
+      "positive_baseline": true,
+      "witness": {
+        "case": 1,
+        "mode": 0,
+        "options": {
+          "units": 4,
+          "columns": 5,
+          "alias": "state-forward",
+          "frames": 3
+        }
+      }
+    },
+    {
+      "name": "signed-saturation",
+      "rejected": true,
+      "positive_baseline": true,
+      "witness": {
+        "case": 1,
+        "mode": 0,
+        "options": {
+          "units": 3,
+          "columns": -1
+        }
+      }
+    },
+    {
+      "name": "wrong-input-candidate-weights",
+      "rejected": true,
+      "positive_baseline": true,
+      "witness": {
+        "case": 1,
+        "mode": 0,
+        "options": {
+          "units": 4,
+          "columns": 5,
+          "alias": "state-forward",
+          "frames": 3
+        }
+      }
+    },
+    {
+      "name": "wrong-recurrent-candidate-bias",
+      "rejected": true,
+      "positive_baseline": true,
+      "witness": {
+        "case": 1,
+        "mode": 0,
+        "options": {
+          "units": 3,
+          "columns": -1
+        }
+      }
+    },
+    {
+      "name": "wrong-reset-gate",
+      "rejected": true,
+      "positive_baseline": true,
+      "witness": {
+        "case": 1,
+        "mode": 0,
+        "options": {
+          "units": 3,
+          "columns": -1
+        }
+      }
+    },
+    {
+      "name": "lost-candidate-tanh",
+      "rejected": true,
+      "positive_baseline": true,
+      "witness": {
+        "case": 1,
+        "mode": 0,
+        "options": {
+          "units": 3,
+          "columns": -1
+        }
+      }
+    },
+    {
+      "name": "wrong-state-complement",
+      "rejected": true,
+      "positive_baseline": true,
+      "witness": {
+        "case": 1,
+        "mode": 0,
+        "options": {
+          "units": 3,
+          "columns": -1
+        }
+      }
+    },
+    {
+      "name": "lost-persistent-state",
+      "rejected": true,
+      "positive_baseline": true,
+      "witness": {
+        "case": 1,
+        "mode": 0,
+        "options": {
+          "units": 3,
+          "columns": -1
+        }
+      }
+    },
+    {
+      "name": "lost-output",
+      "rejected": true,
+      "positive_baseline": true,
+      "witness": {
+        "case": 1,
+        "mode": 0,
+        "options": {
+          "units": 3,
+          "columns": -1
+        }
+      }
+    },
+    {
+      "name": "reversed-input-bias-operands",
+      "rejected": true,
+      "positive_baseline": true,
+      "witness": {
+        "case": 264,
+        "mode": 0,
+        "options": null
+      }
+    }
+  ],
+  "normal_build": {
+    "normal_report": "build/sources-goal-r1-model-recurrent-c/report.json",
+    "units": 932,
+    "unchanged_source_object_pairs": 921,
+    "generated_sources_excluded": [
+      "{gen}/r1_cmsis_os2_rtc.c",
+      "{gen}/fal_partition_r1_lookup.c",
+      "{gen}/fdb_utils_r1.c",
+      "{gen}/gh_demo_r1.c",
+      "{gen}/gh_demo_hook_r1.c",
+      "{gen}/gh_demo_user_r1.c",
+      "{gen}/app_error_handler_gcc_clang.c",
+      "{gen}/r1_startup_vectors.S",
+      "{gen}/gh_ppg_timestamp_hooks_r1.c",
+      "{gen}/r1_uecc.c"
+    ],
+    "new_sources": [
+      "r1/src/application/goodix/native_model_recurrent.c"
+    ],
+    "normal_provider_matches_tested_sections_and_decoded_symbols": true,
+    "no_new_assembly_or_writable_sections": true,
+    "removed_imports": [
+      "r1_goodix_model_recurrent_executor_address"
+    ],
+    "imports": {
+      "r1-application": [
+        "GH3X2X_GetVersion",
+        "GH3X2X_UprotocolPacketFormat",
+        "Gh3x2xDemoSendProtocolData",
+        "__data_start__",
+        "gh3x2x_print_fmt",
+        "goodix_hba_calc",
+        "goodix_hba_essential_info_print",
+        "goodix_hrv_calc",
+        "goodix_nadt_calc",
+        "r1_cmb_code_end",
+        "r1_cmb_code_start",
+        "r1_cmb_stack_end",
+        "r1_cmb_stack_start",
+        "r1_eat_command_dispatch",
+        "r1_eat_core_init",
+        "r1_export_plan_command",
+        "r1_factory_input_record_plan_dispatch",
+        "r1_glasses_role_conflict_fault",
+        "r1_gomore_final_sleep_record_publish_native",
+        "r1_gomore_interval_statistics_native",
+        "r1_gomore_sleep_interval_select_native",
+        "r1_gomore_sleep_score_native",
+        "r1_gomore_sleep_stage_refine_native",
+        "r1_gomore_stage_5ef1c_native",
+        "r1_gomore_stage_5f264_native",
+        "r1_gomore_stage_5f3d8_native",
+        "r1_gomore_stage_5f4b6_native",
+        "r1_gomore_stage_5f56c_native",
+        "r1_gomore_stage_5feb8_native",
+        "r1_gomore_stage_605dc_native",
+        "r1_gomore_stage_60af4_native",
+        "r1_gomore_stage_60b80_native",
+        "r1_gomore_stage_60dc4_native",
+        "r1_gomore_stage_610c8_native",
+        "r1_gomore_stage_61198_native",
+        "r1_gomore_stage_61274_native",
+        "r1_gomore_stage_6138c_native",
+        "r1_gomore_stage_statistics_native",
+        "r1_gomore_table_record11_native",
+        "r1_goodix_graph_aligned_executor_address",
+        "r1_goodix_spo2_confidence",
+        "r1_goodix_spo2_infer",
+        "r1_goodix_spo2_output",
+        "r1_goodix_spo2_output_quality",
+        "r1_goodix_spo2_select",
+        "r1_health_auth_parameters_set",
+        "r1_health_lifecycle_engine_initialize_native",
+        "r1_health_settings_plan_command",
+        "r1_health_sync_provider_0003c0d8",
+        "r1_health_sync_provider_0003c304",
+        "r1_health_sync_provider_0003c958",
+        "r1_health_sync_provider_0003fcec",
+        "r1_health_sync_provider_0003fef4",
+        "r1_health_sync_provider_00040508",
+        "r1_health_sync_provider_00040bd4",
+        "r1_health_sync_provider_00040de0",
+        "r1_health_sync_provider_00041438",
+        "r1_health_sync_provider_00043eb0",
+        "r1_health_sync_provider_000440c4",
+        "r1_health_sync_provider_000446b4",
+        "r1_health_sync_provider_0005b39c",
+        "r1_health_sync_provider_0008f954",
+        "r1_legacy_command_route_frame",
+        "r1_manager_assertion_stack_transfer",
+        "r1_manager_logging_start_91504",
+        "r1_phone_role_assertion_stack_transfer",
+        "r1_structured_log_typed",
+        "r1_user_profile_handler"
+      ],
+      "r1-bootloader": [
+        "__bss_end__",
+        "__bss_start__",
+        "__data_start__",
+        "__etext",
+        "__start_crypto_data",
+        "__start_dfu_trans",
+        "__start_fs_data",
+        "__start_sdh_ble_observers",
+        "__start_sdh_req_observers",
+        "__start_sdh_soc_observers",
+        "__start_sdh_stack_observers",
+        "__start_sdh_state_observers",
+        "__start_svc_data",
+        "__stop_crypto_data",
+        "__stop_dfu_trans",
+        "__stop_fs_data",
+        "__stop_sdh_ble_observers",
+        "__stop_sdh_req_observers",
+        "__stop_sdh_soc_observers",
+        "__stop_sdh_stack_observers",
+        "__stop_sdh_state_observers",
+        "__stop_svc_data"
+      ]
+    }
+  },
+  "remaining_callback_bindings": [
+    "r1_goodix_graph_aligned_executor_address"
+  ],
+  "semantics": [
+    "Operation words are units,state,input-byte weights,recurrent-byte weights,parameter table. Input descriptor rows word supplies vector length and data word16 supplies vector start; output data cached. Exactly one frame runs per call regardless of descriptor batch/column/element fields. Both weight zero points must be128 or returnf000000e without public writes. Recompute state zero point from recurrent bounds after eligibility.",
+    "Parameter table contains4N bias floats,6 metadata float words(two input bounds,two recurrent bounds,two unused),3N input coefficients and3N recurrent coefficients. Caller-backed scratch starts input+M*4:3N input scale floats,3N recurrent scale floats,2N integer dots,2N gate floats,align4(N) state bytes,N candidate floats,M input bytes. All native address/count arithmetic wraps32 bits; traversal counts are signed.",
+    "Recurrent scale factor is (1/127)*(recurrent-width/255), then coefficient. Input range starts at+0, lower selects signaling-compare carry-clear and upper orderedGT. Call actual C range-adjust policy3, clamp step with signed raw bits to1e-6, derive rounded zero point and input-step*input-weight-step before coefficients. Quantize current input and state with actual C round and native USAT8; state conversion uses signed integer zero point plus state*127.",
+    "Four actual C unsigned-byte matrix calls compute2N input/recurrent gate dots thenN candidate input/recurrent dots. Bias is accumulator first and dot*scale product added with separate rounding. Gate sigmoid negates raw sign bits, uses signed raw-bit clamp88, actual C expf, add(exp,1), divide(1,sum). Candidate recurrent term is bias+dot*scale, multiplied by reset gate and added to candidate input term before actual C tanhf.",
+    "Final blend separately rounds update-gate*current-state, subtract(1,gate), its product with candidate, then accumulator+product. Store state before output per unit. State, output and scratch aliases remain live, including effects on later units/frames. New input data can be supplied between calls while retaining state and sticky FPSCR.",
+    "Actual C constructor, heap initialization, malloc, clearing, memory and callback execute. Callback identity guarded; only operation+20 callback word is normalized after execution. Independent descriptor/cursor/pool/payload-address and zero-state/output oracles pass. Fatal/OS boundary link placeholders are guarded to fail if invoked; positive allocation suites never reach them. Source maps no stock code and uses no algorithm/math/memory/allocator models.",
+    "Complete REA function-manager dossier and raw1120-byte body,36-byte literal pool and callback binding authenticate against locked stock. Body0x739a8..0x73e07, literal0x74a98=Thumb0x739a9. No assembly or writable global state is added. Actual normal C support, quantization, classifier and math objects execute in normal tests."
+  ],
+  "limitations": [
+    "Valid aligned descriptors and sufficient mapped caller-owned backing capacity for input-adjacent scratch are required. Tests cover units0..4, ordinary and negative input lengths where effective accesses remain mapped. Invalid enormous buffers or concurrent descriptor mutation have no invented fallback.",
+    "Public RAM/full FPSCR, saved R4-R11/S16-S31, SP/masks and scalarR0 are checked.8192 private stack bytes below incoming SP and caller scratch/APSR excluded. Constructor normalization affects only a guarded callback pointer word. All1120 bytes/365 instruction starts execute, not all inputs or interleavings.",
+    "Independent GRU finite-state/output recurrence checks cover repeated calls; zero-candidate recurrence is exact and finite tanhf oracle tolerance2e-6 is confined to that independent numerical check. Direct stock/C comparisons remain exact, including per-frame state/output/FPSCR traces.",
+    "Constructor tests use a fresh16384-byte heap, units0..4 and valid nonnegative input lengths; zero-unit minimum allocation remains native. Allocation failure/fatal routes are outside this integration proof and were separately reconstructed. Enum-size/absolute-Thumb linker warnings retained; tested interfaces use integer/pointer/float types.",
+    "Normal932-unit relocatable composition has68 application/22 boot imports. Quantized convolution is the remaining model callback. Parent SpO2 stages, other hardware dependencies, startup, interrupts, timing, concurrency, cold FPU and physical boot remain unresolved or unverified."
+  ],
+  "evidence_sha256": {
+    "r1/src/application/goodix/native_model_recurrent.c": "9944ef6caaaaca3426f57cd94d10c4d8e5a377d039055688d4b268d1a1e10bdf",
+    "r1/src/application/goodix/native_model_recurrent_support.c": "41c9a4f9b341240e1d719afda9ead0b1034f475ebab83a125e189efbbccea8b8",
+    "r1/src/application/goodix/native_model_recurrent_support.h": "a0c0bb730d5bb6c9ccd39d225f9a3f1c8095ad9f116c9eec03224c567d2dcb18",
+    "r1/src/application/goodix/native_spo2_generated_model.c": "9ed40f8a8878b5b074087dadbc37ac5ba2b17197f2ba9ca512e9e4fb190bd584",
+    "r1/src/application/runtime/native_expf_tanhf.c": "6b20f74db24eb1471381722262279c5a6ce0e3c89a8adad48d27aff90b51efb3",
+    "r1/src/sources.json": "042d44df7f9d82362c6159f2c96ca2fce7b655780d897356b4cd6b12e96485ce",
+    "r1/docs/reference/FUNCTION-OWNERSHIP.csv": "4461a05b501fba8938ddbcd6b20029e6c849c94c7430c108913c7f7c0506f10b",
+    "build/sources-goal-r1-model-recurrent-c/report.json": "1a293ad4a497542b7b264829ba7db4443b445917826cb23ecd19b0a6a3cd9763",
+    "build/sources-goal-r1-recurrent-support-c/report.json": "02210ac4d0b44b8072d04ac674824c7e5c3ab9d6f2b2f7912cffcb69df4e08f7",
+    "tools/build/source-plan.json": "eeb516e31b3310fb0718f36908977f8125723f7c5e0e86cd6744395826259a4d",
+    "r1/src/config/runtime/native_health_cache.ld": "eb8f131c489cd818d4e36718718fa1989719ca0170f164541a1a5bf56dfc1ec3",
+    "r1/blobs/official/r1-2.2.6.0009/application.bin": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "build/goal-r1-queue-reset-c/stock.elf": "25b4a29af80ec8edab5bd861ba9b74a6e22eab29dc3d7a809a16869e8a140f04",
+    "build/goal-r1-recurrent-support-c/candidate.o": "c4cb2d758de264bcfdd59af04d7075698dc4083889b086d180efb05a866b88c1",
+    "build/goal-r1-spo2-infer-support-c/normal-dependencies.a": "7e62b43a34fcf2b0ae34045a276bf4d564be5dde2ddb636dd0f69169c8843637",
+    "build/goal-r1-model-recurrent-c/NOTES.txt": "e3b5d76aff03a40b15debc70655485b17c3e4e2734841c3388826b3ac83deb85",
+    "build/goal-r1-model-recurrent-c/audit.json": "afab95e164d9f8cfdd3f4337a7f35b0e6d0a56a688338a1563425e4f87f02a0d",
+    "build/goal-r1-model-recurrent-c/audit.py": "57eaa14263a98164fec5ef1ef851a725dcaae5753e659a96f5b0d710f6b4d2ec",
+    "build/goal-r1-model-recurrent-c/authenticate.py": "043d5e5fd2cf83c244a6ad187b4b04947dbe0f1b702073206de18b1ff8edd0e3",
+    "build/goal-r1-model-recurrent-c/candidate.c": "9944ef6caaaaca3426f57cd94d10c4d8e5a377d039055688d4b268d1a1e10bdf",
+    "build/goal-r1-model-recurrent-c/candidate.elf": "56d706eac7f89a9235822268e16fe76853c2c626263ab22e3ddf0752e59daef4",
+    "build/goal-r1-model-recurrent-c/candidate.o": "86b5d4e7ae112f5c52531c7c29011dd23240f6a562dd6cd21bc27be91df36289",
+    "build/goal-r1-model-recurrent-c/compile-argv.json": "74de395536d80b4d1ddc69579965141f84d837be3b0c8c32e6b72c9aaa1d6a92",
+    "build/goal-r1-model-recurrent-c/constructor-link.json": "dfaf1b55f8865542193163e1fa458afb70c24b8fde6e37028f7c8d3d802eb8ea",
+    "build/goal-r1-model-recurrent-c/constructor-oracle-results.json": "0cd17cf42a84035a9d5d426fcc0129b80a7ba29c956420d4379a3d4422503ff0",
+    "build/goal-r1-model-recurrent-c/constructor-oracles.log": "39524fc264931e30c17ff7a8a7091636a6c2768679b1ee679b9e16531dd0c26a",
+    "build/goal-r1-model-recurrent-c/constructor-prepare.log": "8522a7ebd213dfe73dd1b4c70d65341260d07981a64ac12ab9e6155570a458b6",
+    "build/goal-r1-model-recurrent-c/constructor-results.json": "47cff12e769e2ed66d11ba6e963967eaff199f620054e0013ed5bb43a21b10a8",
+    "build/goal-r1-model-recurrent-c/constructor.elf": "b2689410ef7b1e99baa3f8678c4be676a3026a28738c97e78b51fa969acd7a9d",
+    "build/goal-r1-model-recurrent-c/constructor_fixture.py": "983a5fa9cfefb5d8407c36872c009b0288c7562d45ccbcb91c156716ed9a0f4e",
+    "build/goal-r1-model-recurrent-c/constructor_oracles.py": "db373db81467ba690c746c8a8c9d7580cdde1b76576b82480b38d725c1f1c197",
+    "build/goal-r1-model-recurrent-c/constructor_prepare.py": "1169b5ec77bbc6b6e5be7fcbaf95317bed21409ade40b3d373410da01f80338d",
+    "build/goal-r1-model-recurrent-c/constructor_probe.c": "bc28a6142e80b55e37b8058c74f02705cd847745f91d1317dd3631dd7417f045",
+    "build/goal-r1-model-recurrent-c/constructor_probe.o": "93cb0a137b9791f7bce2635ff37a3cf5041ee2ac0f54d03f84cde36e1ecfcabe",
+    "build/goal-r1-model-recurrent-c/constructors.log": "d4a0984f44305c9b43c0ade763a037a25a539a65448058131931f26948889847",
+    "build/goal-r1-model-recurrent-c/constructors.py": "f2727670f6c11912ccd3d42dce4c67f7c3e0f97540c6a447bc7ca5ef374b8d51",
+    "build/goal-r1-model-recurrent-c/control-lost-candidate-tanh.c": "49779c70a2452f487e29109d3e2025acd15bd87cc9b7a17542968a0f554b26f4",
+    "build/goal-r1-model-recurrent-c/control-lost-candidate-tanh.elf": "e4e45407f10a0ce086d0a92f1e2a72f7b8081d07f5a2f364cb91d08c2c4b227b",
+    "build/goal-r1-model-recurrent-c/control-lost-candidate-tanh.o": "73ed617fe16ad230c6fbbc40e90dda457aab25eb437d01aa468aa64a8c019deb",
+    "build/goal-r1-model-recurrent-c/control-lost-input-zero-point.c": "8d552a92f8de1bb384b58a910e4a09f9e92c739147c3b34b7d7012a6d0e6d8ae",
+    "build/goal-r1-model-recurrent-c/control-lost-input-zero-point.elf": "5ae03c398006c77ea4da52022f5a9b6905c7bd0b350fbd9f330436e43e84be70",
+    "build/goal-r1-model-recurrent-c/control-lost-input-zero-point.o": "869348a2009e68064deb6352eacb03a75b6c47ebba92e6fe8a382aac4c3f7352",
+    "build/goal-r1-model-recurrent-c/control-lost-output.c": "581030a092c8a9f369b98c7d08e8af132884c265a3ea3b864f726a8cd4d0f997",
+    "build/goal-r1-model-recurrent-c/control-lost-output.elf": "5ddb1de87ac4636c7d7411b32f83483d263cd3eb67a40435544e08df543e5503",
+    "build/goal-r1-model-recurrent-c/control-lost-output.o": "6eebcb22c9947d9b4378fce2ad46aabb560649f081b57fcc7570d12f7fca36c6",
+    "build/goal-r1-model-recurrent-c/control-lost-persistent-state.c": "d6ed7bcc7400a03dbb4f21bd5c5420b78f468a47a52e81a285bcbd69a43d44e2",
+    "build/goal-r1-model-recurrent-c/control-lost-persistent-state.elf": "b6f6874ef6ba1af56a973eb3e8ce38560d182f6acd2aec5bb28274f083908dd1",
+    "build/goal-r1-model-recurrent-c/control-lost-persistent-state.o": "c6c37640382efb821de0f4df8a4b022cf29b48eb46e689384fc616e317fb2438",
+    "build/goal-r1-model-recurrent-c/control-lost-range-adjustment.c": "a7a58f941c5eeab31f5c891dc22e9c0c02e212bdff30359ee032e09c53a52df2",
+    "build/goal-r1-model-recurrent-c/control-lost-range-adjustment.elf": "579d045ab877f62fa75588aedfa45db8c7737227ee0ed4547c0cae81bcabea34",
+    "build/goal-r1-model-recurrent-c/control-lost-range-adjustment.o": "8367af2eaba4b1f44f0b75b98b30897d51586d4adfd3acc5b22af04e25b000fb",
+    "build/goal-r1-model-recurrent-c/control-lost-state-byte-alignment.c": "c06591fc24255faa2272fb8b8ffae043f5557a30b8997c4e99c072e476280bc2",
+    "build/goal-r1-model-recurrent-c/control-lost-state-byte-alignment.elf": "005264f2a06c1c1447df9030d92de840f1363de575caab165898cec09387c703",
+    "build/goal-r1-model-recurrent-c/control-lost-state-byte-alignment.o": "72e7f360c0744cbc9ff7e08515eeacfaf73bdb37ef61e06bc267fbfc02d8f2c9",
+    "build/goal-r1-model-recurrent-c/control-reversed-input-bias-operands.c": "5cde16022f4c09f3585e67c809e63f42741f30dca72df04e8fd64396c46c5fa7",
+    "build/goal-r1-model-recurrent-c/control-reversed-input-bias-operands.elf": "2fe3f2bb7f0fee44e62d3136af7e1684b6e05305ac29748e1e84ad12209fdab4",
+    "build/goal-r1-model-recurrent-c/control-reversed-input-bias-operands.o": "2eadc66369a2f6210ebe20d3a6b7974012cf8e5a8918578ae153d7aeb612df51",
+    "build/goal-r1-model-recurrent-c/control-signed-saturation.c": "b51590cdc9e70e998e5d5d0d17178b5b1e8e4146d9afb3d77c13e0a1bde11843",
+    "build/goal-r1-model-recurrent-c/control-signed-saturation.elf": "146506eb2a5201f6af8a1eaadfbcf65c2351bcacb480dcdd534c333bf034b8a0",
+    "build/goal-r1-model-recurrent-c/control-signed-saturation.o": "f883f9c6648335b79dc11449b32dbc037b4582856b64a2d2b2fdfd0e188535ec",
+    "build/goal-r1-model-recurrent-c/control-wrong-eligibility-combination.c": "86fe5d88eccfcda51ed7b6751d41747afd9e2cb113d8de2503603865befbaff9",
+    "build/goal-r1-model-recurrent-c/control-wrong-eligibility-combination.elf": "1bb7181ed26b45b5e6c6bc80c011ceef7d10d5193aeb19c91817f7a05c694e2c",
+    "build/goal-r1-model-recurrent-c/control-wrong-eligibility-combination.o": "34eddbae6ddfcbb044d1d1b9c6599a99ee3996645144a84dfd1006ec40127698",
+    "build/goal-r1-model-recurrent-c/control-wrong-input-candidate-weights.c": "9c38013298b8bfb85b168b88d2fbfd6517a27ab58c9c27fb782e5011abd207cf",
+    "build/goal-r1-model-recurrent-c/control-wrong-input-candidate-weights.elf": "c4391eb4e3004e1a08a7c4236f35a759f52caac9006a9b1d7584e6f25237ca75",
+    "build/goal-r1-model-recurrent-c/control-wrong-input-candidate-weights.o": "7d779dafc90f234e5b90b50e9f6cfbf538e12ab513e2d6d310c17834ffada685",
+    "build/goal-r1-model-recurrent-c/control-wrong-input-dimension.c": "2b48a5e83cdbd3aaa030e3d1b3499f15cc0f7a2bf36992393e765335088dedb2",
+    "build/goal-r1-model-recurrent-c/control-wrong-input-dimension.elf": "3ebca68e2ec28a361fc25d227b8f23a0ee46eba1d36698aebdcd4d499f1ae07f",
+    "build/goal-r1-model-recurrent-c/control-wrong-input-dimension.o": "61b2c83e31d4b9a129dd1bbe5952b0aa5293154e50edc0ccd20ae6746957b881",
+    "build/goal-r1-model-recurrent-c/control-wrong-recurrent-candidate-bias.c": "1f89d5b02fa657a626078168ed0d65408f550fd7299bb2b4b748acfba3199752",
+    "build/goal-r1-model-recurrent-c/control-wrong-recurrent-candidate-bias.elf": "30f87a5bdeae5106930a0d88fe8108c7e7827044d66da13aa3bf8b309f694187",
+    "build/goal-r1-model-recurrent-c/control-wrong-recurrent-candidate-bias.o": "9347be755f1f74d9533b1707a40ffe3845cde293e4438626d543734478f2fc7f",
+    "build/goal-r1-model-recurrent-c/control-wrong-recurrent-coefficients.c": "51557f9cb99ecafb916929e84f982a78d4783668ea659de9ab66e068c5e428ed",
+    "build/goal-r1-model-recurrent-c/control-wrong-recurrent-coefficients.elf": "65f96f5662306af9b4bd9c84325a7c7dda1aee6bfbb1a259a9732fd6fc2af23a",
+    "build/goal-r1-model-recurrent-c/control-wrong-recurrent-coefficients.o": "9c832296fac8a1feee70a207578aa82fa7641af15748175612e6383ad66ec2ad",
+    "build/goal-r1-model-recurrent-c/control-wrong-recurrent-factor.c": "a607ddb381ba82ce1eded6aedecb2a5af0ffec77f3bfb27042875c09dc014640",
+    "build/goal-r1-model-recurrent-c/control-wrong-recurrent-factor.elf": "80f9d80f0167e51b4c8d012cbd678a59acb77779e3fd5356afcba6ad85b0a36f",
+    "build/goal-r1-model-recurrent-c/control-wrong-recurrent-factor.o": "c3a0050915593c3c90627d63b45d1bc2eb5ca28326748aa952e4fa1b95980576",
+    "build/goal-r1-model-recurrent-c/control-wrong-reset-gate.c": "148c295278d4450acfac307d062082a9fcae7bd5eb16da2d862332858d275615",
+    "build/goal-r1-model-recurrent-c/control-wrong-reset-gate.elf": "00c8f350490cfcaa78bea576d775420644647c42e145af752f2e54603adad70b",
+    "build/goal-r1-model-recurrent-c/control-wrong-reset-gate.o": "d46541352011519a69a46e9074418d0c9779947e23847f8ae7b0bdc67a539d67",
+    "build/goal-r1-model-recurrent-c/control-wrong-state-complement.c": "b5f71096cb1d77a69065330ab22ac06b38eba6efc1659da4d871424f43594df0",
+    "build/goal-r1-model-recurrent-c/control-wrong-state-complement.elf": "6bb4f122f80078cc7b08dfee5a4ca3296c6d84a70b66e38970bfd32831d957cf",
+    "build/goal-r1-model-recurrent-c/control-wrong-state-complement.o": "db25fce1a20866f0125eeb167bc3c4d67d20bd30826b3fdc00fe35fc8b36d6b5",
+    "build/goal-r1-model-recurrent-c/control-wrong-step-clamp.c": "0de6f72bb585bd764db10528c897266afff93bc034cc0e7b20e2b226b37abd9a",
+    "build/goal-r1-model-recurrent-c/control-wrong-step-clamp.elf": "010c7189118e258fe69f2ef31beb4f4fecc495af1b188422c265f9c59dd83311",
+    "build/goal-r1-model-recurrent-c/control-wrong-step-clamp.o": "61919cc745f4c76266969868988d33836775a8d559bc9ba979791eb6c2afc6c2",
+    "build/goal-r1-model-recurrent-c/controls-results.json": "54c37df0514279b660631eecb280dff35163d3900d083370c6d9d2fbb83b904e",
+    "build/goal-r1-model-recurrent-c/controls.log": "3dcd56f120f09f8683523bc321e7eccaaacffa0c00d791d7be3ece38fd9fb8e3",
+    "build/goal-r1-model-recurrent-c/controls.py": "3eae3c71ebd4d976d121f33f84f5b36ce1dd39cc21ac7a18a18076e6a4dd74de",
+    "build/goal-r1-model-recurrent-c/coverage-results.json": "782bb1e09ec322969bfd11d184ced7c7c93dde7a40ddb53169c28059c67d1e02",
+    "build/goal-r1-model-recurrent-c/coverage.log": "f84aeba90be681faca080f8dbdece1e56503c4f854973645f46d53480889a337",
+    "build/goal-r1-model-recurrent-c/coverage.py": "2f9177d320b6db569fd6c355652ddfdf9b5cf6cd0e6f7294be6ef8a50f03225c",
+    "build/goal-r1-model-recurrent-c/document.py": "a7a0c15b8fe103f8fe9ee339ec882b3da39f1f87319b5f5fa9d9471111557bad",
+    "build/goal-r1-model-recurrent-c/edge-results.json": "c3f7482c79c983c3bf573fd181bb83f4c778cc7a4ded7ed54a6370adfce07334",
+    "build/goal-r1-model-recurrent-c/edges.log": "d4a0984f44305c9b43c0ade763a037a25a539a65448058131931f26948889847",
+    "build/goal-r1-model-recurrent-c/edges.py": "d752a629d39651ae1c1efd69d04940bb58e70957833fc116cb207a08398fe7f2",
+    "build/goal-r1-model-recurrent-c/fixture.py": "8b8c2f749828b8473c0200d85b3b7a17b23504b1686b6b3b2130fdfcf24771f3",
+    "build/goal-r1-model-recurrent-c/link-argv.json": "5181e3f5996cde48650996fbce98af24074fbc08f7f37adf6387174545e1fa7c",
+    "build/goal-r1-model-recurrent-c/native_model_recurrent_support.h": "a0c0bb730d5bb6c9ccd39d225f9a3f1c8095ad9f116c9eec03224c567d2dcb18",
+    "build/goal-r1-model-recurrent-c/normal-build.log": "4426bb22355ec43fbf873febe4e9fc01d4f489feaf37bb6ae5ea8a368a531727",
+    "build/goal-r1-model-recurrent-c/normal-constructor-link.json": "74f68e1d175b31399ab707ce1d054fa354ab28d9b69c97534138fa9ae4dcd56b",
+    "build/goal-r1-model-recurrent-c/normal-constructor-results.json": "89be045e26277ee3e88e573535f70118158045e1f72a2e58da69ff08b51e6225",
+    "build/goal-r1-model-recurrent-c/normal-constructor.elf": "8ee45cc2472e907cd170f58cded440b3e0346b5bc48759c30e2d6c30c5732c0d",
+    "build/goal-r1-model-recurrent-c/normal-constructors.log": "40b195a8cc95ad13ea6b3008ec9fec471335763eab768559de293ddf1d4db215",
+    "build/goal-r1-model-recurrent-c/normal-direct-link.json": "34a2137e32fec78003ddd61166b4e1b040cda5ecd872134165b25ec3e9762a92",
+    "build/goal-r1-model-recurrent-c/normal-prepare.log": "4787a7c1c6f1bc852efcb71e597be8654b554833d9e5c912798d04d960ee24f1",
+    "build/goal-r1-model-recurrent-c/normal-results.json": "5ae30bee14ce1a1452410be5ea084ea781b36525150b2dd2fab3b15cca44c135",
+    "build/goal-r1-model-recurrent-c/normal-verify.log": "40b195a8cc95ad13ea6b3008ec9fec471335763eab768559de293ddf1d4db215",
+    "build/goal-r1-model-recurrent-c/normal.elf": "1dcbd57598b2f4b6912751ad88dc20884878e73260176dbeb1e588e32a569bc6",
+    "build/goal-r1-model-recurrent-c/normal_constructor_fixture.py": "dab0252d54deeac8a3a8e73a4aa62799181891cd4964b28850b6626428f7066f",
+    "build/goal-r1-model-recurrent-c/normal_constructors.py": "0a91321e8cb3175b4edc13ad09d407a4d60904f30f8c70d6d7835ce4c3ee7b0b",
+    "build/goal-r1-model-recurrent-c/normal_fixture.py": "0a5a4de28ca0c634d5fa33a5a842ad048cda0fdfe097385bded88f5d637db507",
+    "build/goal-r1-model-recurrent-c/normal_prepare.py": "149c423adbf5c9290b6daa4ffa6b657eef18e23b154c09edf399d7d8ae1b4c95",
+    "build/goal-r1-model-recurrent-c/normal_verify.py": "2da72d4edc5af3c9bb1189b8e23143e762b8e104b21398ee373d0a35bc090c51",
+    "build/goal-r1-model-recurrent-c/oracle-results.json": "054edbd0b963202707b35db5a3cc03d9900c3c01dc663df5f4c12cec308e5e1d",
+    "build/goal-r1-model-recurrent-c/oracles.log": "1b452d0013236a188c3a7ca3c685b81b6fab00a0e7f0a9f9e0f90c39c310e8e0",
+    "build/goal-r1-model-recurrent-c/oracles.py": "4195c90181df6b8a02341587c6110e9b8e0481b3d0aafdfd5b4b32d73ef8262c",
+    "build/goal-r1-model-recurrent-c/raw-authentication.json": "c4499fcf052234ec2c6f190e789ab2ff50d4d15d38cfc9f85875f12b8315ea16",
+    "build/goal-r1-model-recurrent-c/rea-binding.json": "f9441e6186c64bc5b1b0a58750315b54d6e494aceff63b1394d0ddb9b6a93b4b",
+    "build/goal-r1-model-recurrent-c/rea-body.json": "8347c2a0c4c16639846f79b67b7433be5d1c69416ac93bc1661d643878f8bfb8",
+    "build/goal-r1-model-recurrent-c/rea-dossier.json": "defe1f2ca614fc78fc9b513e92b78297415aae7d7596dd18af421ee916b5e763",
+    "build/goal-r1-model-recurrent-c/rea-literals.json": "fcaf79efafa9fab0186705060997ae379f9993626067436d47e8a9590c0149f3",
+    "build/goal-r1-model-recurrent-c/sources-check.log": "eeacb0e5b1d11e2fdb71e69bd2865578854d31c5b41c3cdefced4e5e8eeb3bda",
+    "build/goal-r1-model-recurrent-c/verify-results.json": "0b501c6418baa39db69bd06d55e160d2bfe63a15d38eae86230a482e6141a524",
+    "build/goal-r1-model-recurrent-c/verify.log": "d4a0984f44305c9b43c0ade763a037a25a539a65448058131931f26948889847",
+    "build/goal-r1-model-recurrent-c/verify.py": "c6be90eba980352d18c51ba16b4f0ef685e6fe3599ec7fa6ce126e3ba31218ee"
+  }
+}

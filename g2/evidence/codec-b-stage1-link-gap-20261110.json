@@ -1,0 +1,27 @@
+{
+  "schema": 1,
+  "target": "s200_v2.2.6.10 codec BINH B stage-1 source coverage",
+  "registered_stage1_c_units": 11,
+  "source_units": [
+    "g2/src/codec/image-b-stage1/backup_stage1_boot_setup.c",
+    "g2/src/codec/image-b-stage1/backup_stage1_clock_gate.c",
+    "g2/src/codec/image-b-stage1/backup_stage1_flash_chunk.c",
+    "g2/src/codec/image-b-stage1/backup_stage1_flash_initialize.c",
+    "g2/src/codec/image-b-stage1/backup_stage1_flash_reader.c",
+    "g2/src/codec/image-b-stage1/backup_stage1_flash_transaction.c",
+    "g2/src/codec/image-b-stage1/backup_stage1_flash_write_transaction.c",
+    "g2/src/codec/image-b-stage1/backup_stage1_loader.c",
+    "g2/src/codec/image-b-stage1/backup_stage1_runtime_data.c",
+    "g2/src/codec/image-b-stage1/backup_stage1_startup.c",
+    "g2/src/codec/image-b-stage1/backup_stage1_timer.c"
+  ],
+  "inspected_elf": "build/g2-all-codec-uart-entries-link-20261110/g2-codec-b/g2-codec-b.elf",
+  "inspected_elf_sha256": "36838fa039112a17e2530dc0fc36be74c6bfa1c78e7d6da55c4380582b2a88c8",
+  "stage1_reset_symbol_in_elf": false,
+  "stage1_vector_section_in_elf": false,
+  "stock_binh_b_stage1_bytes": 12288,
+  "conclusion": "All 11 BINH B stage-1 C units compile with link:false, so the composed codec B object and final ELF omit their vector/reset and loader code. They require an explicit stage-1 link and package placement.",
+  "manifest_link_flags": {
+    "all_eleven_link_false": true
+  }
+}

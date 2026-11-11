@@ -22,3 +22,6 @@ uint32_t opencfw_boot_context_retry(uint32_t index)
     }
     return status?4u:0u;
 }
+
+/* Stock entry names that branch straight to the provider above. */
+__typeof__(opencfw_boot_context_retry) opencfw_bl_config_retry __attribute__((alias("opencfw_boot_context_retry")));

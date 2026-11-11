@@ -1,0 +1,103 @@
+{
+  "normal_report": "build/sources-goal-r1-battery-filter-pure-c/report.json",
+  "report_sha256": "cf325ea09faeabf864cc5cc19f8d65a5a653c6639ef0f06aa36d2b78773ffa2e",
+  "unit": {
+    "source": "r1/src/application/board/native_battery_filter.c",
+    "payload": "r1-application",
+    "role": "candidate",
+    "toolchain": "clang",
+    "link": true,
+    "expect": "compile",
+    "returncode": 0,
+    "argv": [
+      "/usr/bin/clang",
+      "--target=arm-none-eabi",
+      "-mcpu=cortex-m4",
+      "-mthumb",
+      "-munaligned-access",
+      "-mfpu=fpv4-sp-d16",
+      "-mfloat-abi=hard",
+      "-std=c11",
+      "-Os",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-fshort-enums",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-fno-delete-null-pointer-checks",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/r1/src/vendor",
+      "-isystem",
+      "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
+      "-MD",
+      "-MF",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-battery-filter-pure-c/r1/r1-application/r1__src__application__board__native_battery_filter.c.d",
+      "-c",
+      "/Users/kalani/Repo/evenRealities-openCFW/r1/src/application/board/native_battery_filter.c",
+      "-o",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-battery-filter-pure-c/r1/r1-application/r1__src__application__board__native_battery_filter.c.o"
+    ],
+    "source_sha256": "eca97fe269bd4888d5298e8acb76dde06fc0e592e72f4cfd36c9edc29855a828",
+    "object_sha256": "6b76e292477bc162c3450f4936a83b69da7a65d37804d772d7c3a54a62c0271d",
+    "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-battery-filter-pure-c/r1/r1-application/r1__src__application__board__native_battery_filter.c.o",
+    "strong": [
+      "r1_battery_five_sample_filter_and_conversion"
+    ],
+    "weak": [],
+    "undefined": [
+      "nrf_delay_ms",
+      "osDelay",
+      "r1_battery_runtime_storage",
+      "r1_stock_dispatch_08",
+      "r1_stock_dispatch_0c",
+      "r1_stock_dispatch_10"
+    ]
+  },
+  "direct": {
+    "paired_cases": 2816,
+    "digest": "0d0e1f0067a8121bf2053d3e0f970bfe44a7e85eb2ade3971ddb9760982e7530",
+    "participants": [
+      "r1_battery_five_sample_filter_and_conversion"
+    ],
+    "limits": [
+      "ADC, delay and registry boundaries modeled",
+      "Private pointers normalized; upper unused sample bytes and scratch registers excluded",
+      "Physical ADC calibration, timing and concurrency unverified"
+    ]
+  },
+  "negative": {
+    "wrong-trim": {
+      "rejected": true,
+      "diagnostic": "Traceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-battery-filter-pure-c/verify.py\", line 55, in <module>\n    if x!=y:(p/'failure.json').write_text(json.dumps(dict(args=c,stock=x,C=y),indent=2));raise AssertionError('stock/C mismatch')\n                                                                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: stock/C mismatch\n"
+    },
+    "wrong-calibration-scale": {
+      "rejected": true,
+      "diagnostic": "Traceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-battery-filter-pure-c/verify.py\", line 55, in <module>\n    if x!=y:(p/'failure.json').write_text(json.dumps(dict(args=c,stock=x,C=y),indent=2));raise AssertionError('stock/C mismatch')\n                                                                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: stock/C mismatch\n"
+    },
+    "uncleared-sample": {
+      "rejected": true,
+      "diagnostic": "Traceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-battery-filter-pure-c/verify.py\", line 55, in <module>\n    if x!=y:(p/'failure.json').write_text(json.dumps(dict(args=c,stock=x,C=y),indent=2));raise AssertionError('stock/C mismatch')\n                                                                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: stock/C mismatch\n"
+    },
+    "wrong-delay": {
+      "rejected": true,
+      "diagnostic": "al-r1-battery-filter-pure-c/verify.py\", line 54, in <module>\n    x=a(*c);y=b(*c)\n              ~^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-battery-filter-pure-c/verify.py\", line 45, in run\n    v.emu_start(syms[ROOT] if source else 0x91185,STOP,count=10000)\n    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 769, in emu_start\n    raise self._hook_exception\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 363, in wrapper\n    return func(uc, *args, **kwargs)\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 1063, in __hook_code_cb\n    callback(uc, address, size, user_data)\n    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-battery-filter-pure-c/verify.py\", line 33, in hook\n    assert args[0]==2;state['delays']+=1;obs=[args[0]]\n           ^^^^^^^^^^\nAssertionError\n"
+    }
+  },
+  "audit": {
+    "changed": [
+      "r1/src/application/board/native_battery_filter.c"
+    ],
+    "unchanged_objects": 726
+  },
+  "rea": {
+    "path": "build/goal-r1-battery-filter-pure-c/rea.json",
+    "sha256": "d85c6d4625c00924837da84cad69681b1cc10bbf7ec5b9b43d4348d76190e96d"
+  },
+  "limits": [
+    "ADC, delay and registry boundaries modeled",
+    "Private pointers normalized; unused upper sample bytes and scratch-register returns excluded",
+    "Physical ADC calibration, timing and concurrency unverified"
+  ]
+}

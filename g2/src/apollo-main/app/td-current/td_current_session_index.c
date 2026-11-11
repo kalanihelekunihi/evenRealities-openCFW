@@ -9,12 +9,10 @@ static uint32_t load_u32(const uint8_t *p) {
            ((uint32_t)p[2]<<16)|((uint32_t)p[3]<<24);
 }
 
-uint32_t audio_td_active_record_count(void) {
-    const uint8_t *active=audio_td_active_session();
-    if(active==0) return 0;
-    uint32_t count=load_u32(active+8u);
-    return count>10u?10u:count;
-}
+/* Stock 0x5ECA48 (active record count, capped at 10): single body
+ * audio_terminal_session_count_5eca48 in
+ * app/terminal-session/terminal_session_select_5ecc1a.c, aliased there. */
+extern uint32_t audio_td_active_record_count(void);
 
 /* Stock 0x5ECAAC (current_session_index_signed) */
 int32_t audio_td_current_session_index_signed(void) {
@@ -29,6 +27,11 @@ int32_t audio_td_current_session_index_signed(void) {
     return audio_td_has_active_session()!=0u?-1:-2;
 }
 
+/* Stock 0x5ECAFA (current_session_index, unsigned) */
 uint16_t audio_td_current_session_index(void) {
     return (uint16_t)(int16_t)audio_td_current_session_index_signed();
 }
+/* The terminal display fallback name is the same 0x5ecafa entry (the uint16_t
+ * result is zero-extended in r0 by the callee, as the former wrapper did). */
+__typeof__(audio_td_current_session_index) audio_terminal_display_fallback_5ecafa
+    __attribute__((alias("audio_td_current_session_index")));

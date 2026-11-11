@@ -1,38 +1,19 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_32909c\n"
-".type opencfw_em9305_child_32909c,@function\n"
-"opencfw_em9305_child_32909c:\n"
-"L32909c:\n"
-"enter_s [r13-r14,blink]\n"
-"L32909e:\n"
-"mov_s r14,r0\n"
-"L3290a0:\n"
-"mov_s r0,4\n"
-"L3290a2:\n"
-"bl.d opencfw_em9305_wsf_event_allocate\n"
-"L3290a6:\n"
-"mov_s r13,r1\n"
-"L3290a8:\n"
-"mov_s r1,r0\n"
-"L3290aa:\n"
-"breq_s r0,0,L3290c2\n"
-"L3290ac:\n"
-"mov_s r0,0x805b18\n"
-"L3290b2:\n"
-"ldb_s r2,[r14,0x2]\n"
-"L3290b4:\n"
-"ldb_s r0,[r0,0]\n"
-"L3290b6:\n"
-"stb_s r13,[r1,0x3]\n"
-"L3290b8:\n"
-"sth_s r2,[r1,0]\n"
-"L3290ba:\n"
-"bl.d opencfw_em9305_wsf_task_message_send\n"
-"L3290be:\n"
-"stb 16,[r1,2]\n"
-"L3290c2:\n"
-"leave_s [r13-r14,blink,pcl]\n"
-".size opencfw_em9305_child_32909c,.-opencfw_em9305_child_32909c\n"
-);
+#include <stdint.h>
+
+/* Native 0x32909c..0x3290c4: send a 4-byte WSF message {handle, 16, value}
+ * for the packet's handle (byte +2) to the handler at 0x805b18. Returns 0
+ * when no message buffer is available. */
+extern uintptr_t opencfw_em9305_wsf_event_allocate(uint32_t);
+extern uint32_t opencfw_em9305_wsf_task_message_send(uint32_t,uintptr_t);
+
+uint32_t opencfw_em9305_child_32909c(uintptr_t packet, uint32_t value)
+{
+    uintptr_t message = opencfw_em9305_wsf_event_allocate(4u);
+    if (message == 0u) return 0u;
+    uint32_t handle = *(volatile uint8_t *)(packet + 2u);
+    uint32_t handler = *(volatile uint8_t *)(uintptr_t)0x805b18u;
+    *(volatile uint8_t *)(message + 3u) = (uint8_t)value;
+    *(volatile uint16_t *)message = (uint16_t)handle;
+    *(volatile uint8_t *)(message + 2u) = 16u;
+    return opencfw_em9305_wsf_task_message_send(handler, message);
+}

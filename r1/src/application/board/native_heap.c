@@ -9,13 +9,13 @@ typedef struct block { struct block *next; uint32_t size,caller; } block;
 _Static_assert(sizeof(block)==12,"native sentinel; allocated header reserves 16 bytes");
 typedef struct {block *end;uint32_t free_bytes,minimum,allocations,frees;} heap_state;
 _Static_assert(sizeof(heap_state)==20,"native heap state");
-__attribute__((section(".r1.heap.storage"),aligned(8))) uint8_t r1_heap_storage[51200];
+__attribute__((section(".bss.r1.heap.storage"),aligned(8))) uint8_t r1_heap_storage[51200];
 __attribute__((section(".r1.heap.start"),aligned(8))) block r1_heap_start;
 __attribute__((section(".r1.heap.state"),aligned(4))) heap_state r1_heap_state;
 extern void vTaskSuspendAll(void);
 extern int32_t xTaskResumeAll(void);
 __attribute__((noreturn)) void r1_malloc_failed_hook(void){
- __asm volatile("msr basepri, %0"::"r"(64):"memory");
+ __builtin_arm_wsr("basepri",UINT32_C(64));
  *(volatile uint32_t *)(uintptr_t)UINT32_MAX=0;
  for(;;){}
 }

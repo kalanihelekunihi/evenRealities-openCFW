@@ -31,9 +31,10 @@ static uint64_t number(unsigned address){return (uint64_t)word(address)|((uint64
 #define sub r1_binary64_subtract_bits
 #define reverse_sub r1_binary64_reverse_subtract_bits
 static uint32_t equal(uint64_t a,uint64_t b){
- register uint32_t r0 __asm__("r0")=(uint32_t)a,r1 __asm__("r1")=(uint32_t)(a>>32);
- register uint32_t r2 __asm__("r2")=(uint32_t)b,r3 __asm__("r3")=(uint32_t)(b>>32);uint32_t status;
- __asm__ volatile("bl r1_binary64_compare_reverse_flags\n\tmrs %[status],APSR":[status]"=r"(status),"+r"(r0),"+r"(r1),"+r"(r2),"+r"(r3)::"lr","cc","memory");return(status>>30)&1u;
+ /* The reverse compare tests equality of the integer keys. That transform
+  * aliases only the two encodings of zero; every other bit pattern is unique.
+  * This comparison does not perform floating point arithmetic or raise flags. */
+ return a==b || ((a<<1)==0 && (b<<1)==0);
 }
 double r1_native_log(double input)
 {

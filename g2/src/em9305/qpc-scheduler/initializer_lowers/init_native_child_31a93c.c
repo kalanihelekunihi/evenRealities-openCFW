@@ -1,52 +1,24 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_31a93c\n"
-".type opencfw_em9305_child_31a93c,@function\n"
-"opencfw_em9305_child_31a93c:\n"
-"L31a93c:\n"
-"push_s blink\n"
-"L31a93e:\n"
-"ldb_s r1,[r0,0x10]\n"
-"L31a940:\n"
-"mov_s r3,0x8019f8\n"
-"L31a946:\n"
-"ldb_s r12,[r3,0x1]\n"
-"L31a948:\n"
-"seteq r1,r1,0x2\n"
-"L31a94c:\n"
-"asl_s r2,r1\n"
-"L31a94e:\n"
-"brne.d.nt r2,r12,L31a962\n"
-"L31a952:\n"
-"stb 1,[r0,2]\n"
-"L31a956:\n"
-"ldb r1,[r0,241]\n"
-"L31a95a:\n"
-"breq_s r1,0,L31a972\n"
-"L31a95c:\n"
-"add r0,r0,484\n"
-"L31a960:\n"
-"b_s L31a976\n"
-"L31a962:\n"
-"ldb_s r1,[r3,0]\n"
-"L31a964:\n"
-"bclr r1,r1,r2\n"
-"L31a968:\n"
-"stb_s r1,[r3,0]\n"
-"L31a96a:\n"
-"bl.d opencfw_em9305_child_325edc\n"
-"L31a96e:\n"
-"mov_s r1,3\n"
-"L31a970:\n"
-"b_s L31a97a\n"
-"L31a972:\n"
-"add2 r0,r0,0x3d\n"
-"L31a976:\n"
-"bl opencfw_em9305_ll_schedule_notify_313354\n"
-"L31a97a:\n"
-"pop_s blink\n"
-"L31a97c:\n"
-"j_s [blink]\n"
-".size opencfw_em9305_child_31a93c,.-opencfw_em9305_child_31a93c\n"
-);
+#include <stdint.h>
+
+/* Native 0x31a93c..0x31a97e: mark the record pending (+2 = 1). When the
+ * role bit for the record (2 if its role byte +16 is 2, else 0) matches
+ * the byte at 0x8019f9, notify the scheduler with the record's +484 block
+ * (if byte +241 is set) or +244 block; otherwise clear that bit in the
+ * mask at 0x8019f8 and run child 325edc with value 3. */
+extern uint32_t opencfw_em9305_child_325edc(uintptr_t record,uint32_t value);
+extern uint32_t opencfw_em9305_ll_schedule_notify_313354(uintptr_t object);
+
+uint32_t opencfw_em9305_child_31a93c(uintptr_t record)
+{
+    uint32_t bit=(*(volatile uint8_t *)(record+16u)==2u)?2u:0u;
+    uint32_t current=*(volatile uint8_t *)0x8019f9u;
+    *(volatile uint8_t *)(record+2u)=1u;
+    if(bit!=current){
+        uint32_t mask=*(volatile uint8_t *)0x8019f8u;
+        *(volatile uint8_t *)0x8019f8u=(uint8_t)(mask&~(1u<<bit));
+        return opencfw_em9305_child_325edc(record,3u);
+    }
+    if(*(volatile uint8_t *)(record+241u)!=0u)
+        return opencfw_em9305_ll_schedule_notify_313354(record+484u);
+    return opencfw_em9305_ll_schedule_notify_313354(record+244u);
+}

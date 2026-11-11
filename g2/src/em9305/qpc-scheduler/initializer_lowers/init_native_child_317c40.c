@@ -1,72 +1,28 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_317c40\n"
-".type opencfw_em9305_child_317c40,@function\n"
-"opencfw_em9305_child_317c40:\n"
-"L317c40:\n"
-"enter_s [r13-r14,blink]\n"
-"L317c42:\n"
-"mov_s r14,r0\n"
-"L317c44:\n"
-"mov_s r2,r0\n"
-"L317c46:\n"
-"add1 r13,r14,0x2a\n"
-"L317c4a:\n"
-"add r0,r0,405\n"
-"L317c4e:\n"
-"add r2,r2,421\n"
-"L317c52:\n"
-"bl.d opencfw_em9305_radio_cipher_30ff0c\n"
-"L317c56:\n"
-"mov_s r1,r13\n"
-"L317c58:\n"
-"mov_s r1,r14\n"
-"L317c5a:\n"
-"add r1,r1,437\n"
-"L317c5e:\n"
-"add1 r0,r14,0x32\n"
-"L317c62:\n"
-"bl.d opencfw_em9305_memcpy\n"
-"L317c66:\n"
-"mov_s r2,0x8\n"
-"L317c68:\n"
-"ldb_s r1,[r14,0x2]\n"
-"L317c6a:\n"
-"ld r3,[0x8028c0]\n"
-"L317c72:\n"
-"mov_s r0,0\n"
-"L317c74:\n"
-"seteq r2,r1,0\n"
-"L317c78:\n"
-"st.as r0,[r14,114]\n"
-"L317c7c:\n"
-"stb r0,[r14,125]\n"
-"L317c80:\n"
-"st.as r0,[r14,115]\n"
-"L317c84:\n"
-"st.as r0,[r14,116]\n"
-"L317c88:\n"
-"st.as r0,[r14,117]\n"
-"L317c8c:\n"
-"stb r2,[r14,124]\n"
-"L317c90:\n"
-"breq_s r3,0,L317ca6\n"
-"L317c92:\n"
-"mov_s r0,0x805c70\n"
-"L317c98:\n"
-"ld r0,[r0,0]\n"
-"L317c9a:\n"
-"sub_s r0,r14,r0\n"
-"L317c9c:\n"
-"div r0,r0,912\n"
-"L317ca0:\n"
-"extb_s r1,r0\n"
-"L317ca2:\n"
-"jl_s.d [r3]\n"
-"L317ca4:\n"
-"mov_s r0,r13\n"
-"L317ca6:\n"
-"leave_s [r13-r14,blink,pcl]\n"
-".size opencfw_em9305_child_317c40,.-opencfw_em9305_child_317c40\n"
-);
+#include <stdint.h>
+
+/* Native 0x317c40..0x317ca8: derive the session key into +84 (cipher of
+ * +421 under +405), copy the 8-byte IV from +437 to +100, reset the packet
+ * counters (+456..+471, +125), set +124 when the role byte +2 is 0, and
+ * notify the optional key hook at 0x8028c0 with the key and the connection
+ * index (912-byte entries from *0x805c70). Returns the hook result or 0. */
+extern uint32_t opencfw_em9305_radio_cipher_30ff0c(uintptr_t key,uintptr_t output,uintptr_t input);
+extern void *opencfw_em9305_memcpy(void *destination, const void *source, uint32_t bytes);
+
+uint32_t opencfw_em9305_child_317c40(uintptr_t record)
+{
+    uintptr_t session_key = record + 84u;
+    (void)opencfw_em9305_radio_cipher_30ff0c(record + 405u, session_key, record + 421u);
+    (void)opencfw_em9305_memcpy((void *)(record + 100u), (const void *)(record + 437u), 8u);
+    uint32_t role = *(volatile uint8_t *)(record + 2u);
+    uintptr_t hook = *(volatile uint32_t *)(uintptr_t)0x8028c0u;
+    *(volatile uint32_t *)(record + 456u) = 0u;
+    *(volatile uint8_t *)(record + 125u) = 0u;
+    *(volatile uint32_t *)(record + 460u) = 0u;
+    *(volatile uint32_t *)(record + 464u) = 0u;
+    *(volatile uint32_t *)(record + 468u) = 0u;
+    *(volatile uint8_t *)(record + 124u) = role == 0u;
+    if (hook == 0u) return 0u;
+    uintptr_t base = *(volatile uint32_t *)(uintptr_t)0x805c70u;
+    uint8_t index = (uint8_t)((int32_t)(record - base) / 912);
+    return ((uint32_t (*)(uintptr_t, uint32_t))hook)(session_key, index);
+}

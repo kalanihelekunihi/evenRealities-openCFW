@@ -4,6 +4,7 @@
  * is a genuine imported 0x102038f4 C body until reduced separately.
  */
 #include <stdint.h>
+#include "../csky_ops.h"
 
 extern int32_t gx8002_xip_dma_configure_102038f4(
     uint32_t source, uint32_t target, uint32_t length,
@@ -23,8 +24,7 @@ int32_t gx8002_xip_dma_transfer_10203b78(
         *(volatile uint32_t *)(void *)(state + 0u);
     volatile uint8_t *registers =
         (volatile uint8_t *)(uintptr_t)register_base;
-    uint32_t mask = UINT32_C(0x101);
-    __asm__ volatile("lsl %0, %1" : "+r"(mask) : "r"(channel) : "cc");
+    const uint32_t mask = csky_lsl(UINT32_C(0x101), channel);
     *(volatile uint32_t *)(void *)(registers + 0x310u) = mask;
     uint32_t descriptor_address =
         *(volatile uint32_t *)(void *)(state + 0x368u + channel * 4u);

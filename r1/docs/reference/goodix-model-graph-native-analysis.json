@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "scope": "Next R1 generated graph dependency analysis; no new implementation admission",
+  "entry": "0x4387c",
+  "instruction_bytes": 686,
+  "rea_read_bytes": 720,
+  "rea_evidence_id": "ev_6ead2de011b5b27b307c3060eccc44b2816788543bdf42d1c3f1c0eea5536f7b",
+  "stock_calls": [
+    "0x2775c",
+    "0x74aac",
+    "0x74b44",
+    "0x74c6c",
+    "0x74c90",
+    "0x74c98",
+    "0x74cb4",
+    "0x74ce4"
+  ],
+  "observations": [
+    "Native ABI: graph destination R0, input cursor R1, returned advanced cursor R0. No length argument or boolean result.",
+    "Native constructs352 output bytes by ordered local-record copies. It has no whole-destination memset, no null/length/alignment guard and no consumed-count validation. The portable boolean API is not a native ABI replacement.",
+    "Seven aligned convolution records at offsets0x0c,0x2c,0x44,0x5c,0x8c,0xa4,0xbc; four nonaligned records at0x108,0x120,0x138,0xf0, in this order. Do not sort the final four calls by destination offset.",
+    "Helpers use hard-float S0 for scale and explicit stack arguments. Quantizer and pair helpers copy raw model words and advance cursor by8. Packed pool outputs8 bytes, operator outputs16.",
+    "Descriptor builders74aac/74b44 use unsigned full-width division before byte truncation; native graph supplies nonzero divisors. Native record-copy primitive2775c is already C memmove.",
+    "Next implementation should admit native graph and its helper contracts together, preserve cursor read/write timing and avoid importing portable guards or executable-address constants. Executor identities remain explicit unresolved data bindings until implementations exist."
+  ],
+  "evidence_files": {
+    "r1/blobs/official/r1-2.2.6.0009/application.bin": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "r1/src/vendor/quantized_runtime/quantized_runtime.c": "a4b0cd518c7d3caff6fa00796261fb3a0f91fd78d388645ce24ca1d5e1b52875",
+    "build/goal-r1-goodix-model-graph-c/rea.json": "3a9a39230dd7a026b7f4a9c32b8b29afcfcc4139f305c121cedf91f486af15d8",
+    "build/goal-r1-goodix-model-graph-c/disassembly.txt": "e51ca734636d0554e7c74001e1d4e5ea04b0546c9d7d236b758573b5c1faa57c",
+    "build/goal-r1-goodix-model-graph-c/helper-disassembly.txt": "a168a6aaf754dde5f21543721ff9d5c9da008f4ad69c77a1aaac4e7fdcddb1e9"
+  }
+}

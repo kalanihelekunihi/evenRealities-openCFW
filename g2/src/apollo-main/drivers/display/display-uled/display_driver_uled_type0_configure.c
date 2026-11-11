@@ -1,5 +1,9 @@
 /* Apollo S200 JBD4010 configure command sequence at 0x5927ca. */
 #include <stdint.h>
+/* Stock-RAM literals rewritten to named objects (sim-test wave 2026-10-26,
+ * .waves/sim-fix/apply.py): g2ref_X is the linker symbol X. */
+#include <stdint.h>
+extern unsigned char g2ref_display_driver_ratio_cells_20003994[] __asm__("display_driver_ratio_cells_20003994");
 
 extern uint32_t display_driver_uled_type0_context_46bfe8(void);
 extern void display_driver_uled_type0_context_snapshot_46c410(uint32_t,
@@ -30,15 +34,15 @@ uint32_t display_driver_uled_type0_step_5927ca(void) {
     (void)display_driver_uled_command_5926ee(0x01u,command_data,1u);
     (void)display_driver_uled_type0_frame_start_5931c0();
     if ((g2_flashdb_candidate_flags()&2u)!=0u)
-        g2_flashdb_candidate_log(3u,(const char *)(uintptr_t)0x785c90u,
-            (const char *)(uintptr_t)0x6f313cu,
-            (const char *)(uintptr_t)0x753c78u,0x114u,
-            (const char *)(uintptr_t)0x75f7f0u,12u,10u);
+        g2_flashdb_candidate_log(3u,"driver.jbd4010" /* stock 0x785c90 */,
+            "D:\\01_workspace\\s200_ap510b_iar_git\\driver\\uled\\jbd4010\\drv_mspi_jbd4010.c" /* stock 0x6f313c */,
+            "am_devices_mspi_jbd4010_configure" /* stock 0x753c78 */,0x114u,
+            "canvas_x = %d, canvas_y = %d" /* stock 0x75f7f0 */,12u,10u);
     if ((g2_flashdb_candidate_flags()&1u)!=0u ||
         (g2_flashdb_candidate_flags()&4u)!=0u)
         (void)audio_log_simple(0x0c800000u,
-            (const char *)(uintptr_t)0x7336a4u,
-            (const char *)(uintptr_t)0x7336a4u,12u,10u);
+            "[driver.jbd4010]canvas_x = %d, canvas_y = %d" /* stock 0x7336a4 */,
+            "[driver.jbd4010]canvas_x = %d, canvas_y = %d" /* stock 0x7336a4 */,12u,10u);
     const uint8_t clear_positions[5][2]={{0u,0u},{0u,20u},
         {24u,0u},{24u,20u},{12u,10u}};
     for (uint32_t i=0;i<5u;i++) {
@@ -62,7 +66,7 @@ uint32_t display_driver_uled_type0_step_5927ca(void) {
     (void)display_driver_uled_command_5926ee(0xa3u,&empty,0u);
     (void)display_driver_uled_command_5926ee(0x97u,&empty,0u);
     audio_ble_hci_radio_reset_4910f4(1u);
-    const volatile uint8_t *settings=(const volatile uint8_t *)(uintptr_t)0x20003994u;
+    const volatile uint8_t *settings=(const volatile uint8_t *)(uintptr_t)((uint32_t)(uintptr_t)g2ref_display_driver_ratio_cells_20003994);
     (void)display_driver_uled_type0_set_offset_592aa8(settings[0x2cu],
                                                          settings[0x2du]);
     return 0u;

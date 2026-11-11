@@ -1,5 +1,9 @@
 /* Apollo S200 Ambiq buffer callback table at 0x53d5da. */
 #include <stdint.h>
+/* Stock-RAM literals rewritten to named objects (sim-test wave 2026-10-26,
+ * .waves/sim-fix/apply.py): g2ref_X is the linker symbol X. */
+#include <stdint.h>
+extern unsigned char g2ref_audio_uart_display_lv_root[] __asm__("audio_uart_display_lv_root");
 
 extern uint32_t audio_uart_ambiq_buffer_base_53cf78(uint32_t,uint32_t,
                                                       uint32_t);
@@ -41,7 +45,7 @@ void audio_uart_ambiq_buffer_call_layout2_53d5cc(uint32_t a,uint32_t b) {
 
 void audio_uart_ambiq_buffer_handlers_53d5da(void) {
     volatile uint32_t *const state =
-        (volatile uint32_t *)(uintptr_t)0x2006f548u;
+        (volatile uint32_t *)(uintptr_t)((uint32_t)(uintptr_t)g2ref_audio_uart_display_lv_root);
     state[0xc8u/4u] = (uint32_t)(uintptr_t)
         audio_uart_ambiq_buffer_call_base_53d56a;
     state[0xccu/4u] = (uint32_t)(uintptr_t)

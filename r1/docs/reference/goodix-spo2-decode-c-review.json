@@ -1,0 +1,942 @@
+{
+  "schema_version": 1,
+  "scope": "SpO2 numeric sample decoding and nominal TIA calibration in C",
+  "acceptance_target": "Hardware-first license-free C firmware; byte identity waived",
+  "report": "build/sources-goal-r1-goodix-spo2-decode-c/report.json",
+  "comparison_report": "build/sources-goal-r1-goodix-spo2-assemble-c/report.json",
+  "stock_entries": [
+    {
+      "symbol": "r1_goodix_spo2_decode",
+      "entry": "0x335b4",
+      "instruction_bytes": 522
+    }
+  ],
+  "audit": {
+    "compiled_units": 903,
+    "application_imports": 90,
+    "bootloader_imports": 22,
+    "unchanged_prior_nongenerated_sources_and_objects": 892,
+    "tested_object_equals_normal_build": true,
+    "new_owned_state_bytes": 120,
+    "new_native_instruction_bytes": 522,
+    "paired_cases": 5127,
+    "compiled_defects_rejected": 14,
+    "removed_imports": [
+      "r1_goodix_spo2_decode"
+    ],
+    "added_imports": [],
+    "numeric_decoder_C": true,
+    "actual_C_arithmetic_helpers": true,
+    "nominal_TIA_RW_initializers_match": true,
+    "reserved_gain_SRAM_reads_preserved": true,
+    "fixed_pow_calls_verified": 96,
+    "remaining_core_processing_stages": 13,
+    "source_plan_and_cache_layout_unchanged": true
+  },
+  "direct": {
+    "paired_cases": 2758,
+    "matched_faults": 21,
+    "native_instruction_bytes_executed": 522,
+    "source_object_sha256": "f6359dad9290ac13fd0ca47b919a4d66d8a3343b1b891c3ee1c1ed3992db0242",
+    "actual_C_native_arithmetic_helpers_no_mocks": true,
+    "independent_Fraction_float32_and_float64_oracle": true,
+    "canonical_nominal_gains_and_reserved_SRAM_reads_checked": true,
+    "output_input_and_gain_state_aliases_checked": true,
+    "full_public_RAM_FPSCR_saved_registers_stack_and_masks_match": true,
+    "source_cannot_execute_stock": true
+  },
+  "core_integration": {
+    "decoder_native_instruction_bytes_executed": 522,
+    "decoder_source_object_sha256": "f6359dad9290ac13fd0ca47b919a4d66d8a3343b1b891c3ee1c1ed3992db0242",
+    "actual_numeric_decoder_and_arithmetic_helpers": true,
+    "remaining_stages_and_allocator_modeled": true,
+    "assembler_native_instruction_bytes_executed": [
+      334,
+      20,
+      54
+    ],
+    "assembler_source_object_sha256": "2c880ae46ce6f24917b0feb861a2187908e89ce8efbc58ada54eaf90590a901d",
+    "actual_native_C_assembler_and_integrity_helpers": true,
+    "paired_cases": 2047,
+    "native_instruction_bytes_executed": 682,
+    "source_object_sha256": "0d1e2ddeeefd0ad393d0933a15bf7185e395422378e50e2c584b449fa1cff367",
+    "processing_stages_and_allocator_modeled": true,
+    "independent_call_order_status_packet_and_allocation_oracles": true,
+    "actual_native_C_polynomial": true,
+    "full_FPSCR_and_public_RAM_snapshots_match": true,
+    "source_cannot_execute_stock": true
+  },
+  "frame_integration": {
+    "frame_native_instruction_bytes_executed": [
+      378,
+      2,
+      74
+    ],
+    "actual_frame_core_assembler_decoder_and_arithmetic": true,
+    "clear_helpers_actual": true,
+    "decoder_native_instruction_bytes_executed": 288,
+    "decoder_source_object_sha256": "f6359dad9290ac13fd0ca47b919a4d66d8a3343b1b891c3ee1c1ed3992db0242",
+    "actual_numeric_decoder_and_arithmetic_helpers": true,
+    "remaining_stages_and_allocator_modeled": true,
+    "assembler_native_instruction_bytes_executed": [
+      334,
+      20,
+      54
+    ],
+    "assembler_source_object_sha256": "2c880ae46ce6f24917b0feb861a2187908e89ce8efbc58ada54eaf90590a901d",
+    "actual_native_C_assembler_and_integrity_helpers": true,
+    "paired_cases": 322,
+    "native_instruction_bytes_executed": 576,
+    "source_object_sha256": "0d1e2ddeeefd0ad393d0933a15bf7185e395422378e50e2c584b449fa1cff367",
+    "processing_stages_and_allocator_modeled": true,
+    "independent_call_order_status_packet_and_allocation_oracles": true,
+    "actual_native_C_polynomial": true,
+    "full_FPSCR_and_public_RAM_snapshots_match": true,
+    "source_cannot_execute_stock": true
+  },
+  "initialization": {
+    "native_RW_handler_replayed_on_two_poison_patterns": true,
+    "independent_decoder_matches": true,
+    "whole_RW_region_guards_intact": true,
+    "owned_bytes": 120,
+    "symbol": "r1_goodix_nominal_tia_gain_words",
+    "start": "0x20007d10",
+    "exclusive_end": "0x20007d88",
+    "nominal_words": [
+      10000,
+      25000,
+      50000,
+      75000,
+      100000,
+      250000,
+      500000,
+      750000,
+      1000000,
+      1250000,
+      1500000,
+      1750000,
+      2000000,
+      7812,
+      15625,
+      31250,
+      62500,
+      125000,
+      250000,
+      500000,
+      1000000,
+      2000000,
+      100000,
+      200000,
+      380000,
+      700000,
+      1000000,
+      1480000,
+      1960000,
+      2440000
+    ],
+    "neighboring_state_not_owned": true,
+    "full_source_startup_and_final_placement_unverified": true
+  },
+  "pow_constant_replay": {
+    "stock_entry": "0x399d0",
+    "calls": 96,
+    "all_four_rounding_and_FZ_DN_combinations": true,
+    "results": [
+      {
+        "base": 10.0,
+        "exponent": 3.0,
+        "result_bits": "0x408f400000000000",
+        "FPSCR": "0xa0000000"
+      },
+      {
+        "base": 10.0,
+        "exponent": 3.0,
+        "result_bits": "0x408f400000000000",
+        "FPSCR": "0xa1000000"
+      },
+      {
+        "base": 10.0,
+        "exponent": 3.0,
+        "result_bits": "0x408f400000000000",
+        "FPSCR": "0xa2000000"
+      },
+      {
+        "base": 10.0,
+        "exponent": 3.0,
+        "result_bits": "0x408f400000000000",
+        "FPSCR": "0xa3000000"
+      },
+      {
+        "base": 10.0,
+        "exponent": 3.0,
+        "result_bits": "0x408f400000000000",
+        "FPSCR": "0xa000009f"
+      },
+      {
+        "base": 10.0,
+        "exponent": 3.0,
+        "result_bits": "0x408f400000000000",
+        "FPSCR": "0xa100009f"
+      },
+      {
+        "base": 10.0,
+        "exponent": 3.0,
+        "result_bits": "0x408f400000000000",
+        "FPSCR": "0xa200009f"
+      },
+      {
+        "base": 10.0,
+        "exponent": 3.0,
+        "result_bits": "0x408f400000000000",
+        "FPSCR": "0xa300009f"
+      },
+      {
+        "base": 10.0,
+        "exponent": 3.0,
+        "result_bits": "0x408f400000000000",
+        "FPSCR": "0xa0400000"
+      },
+      {
+        "base": 10.0,
+        "exponent": 3.0,
+        "result_bits": "0x408f400000000000",
+        "FPSCR": "0xa1400000"
+      },
+      {
+        "base": 10.0,
+        "exponent": 3.0,
+        "result_bits": "0x408f400000000000",
+        "FPSCR": "0xa2400000"
+      },
+      {
+        "base": 10.0,
+        "exponent": 3.0,
+        "result_bits": "0x408f400000000000",
+        "FPSCR": "0xa3400000"
+      },
+      {
+        "base": 10.0,
+        "exponent": 3.0,
+        "result_bits": "0x408f400000000000",
+        "FPSCR": "0xa040009f"
+      },
+      {
+        "base": 10.0,
+        "exponent": 3.0,
+        "result_bits": "0x408f400000000000",
+        "FPSCR": "0xa140009f"
+      },
+      {
+        "base": 10.0,
+        "exponent": 3.0,
+        "result_bits": "0x408f400000000000",
+        "FPSCR": "0xa240009f"
+      },
+      {
+        "base": 10.0,
+        "exponent": 3.0,
+        "result_bits": "0x408f400000000000",
+        "FPSCR": "0xa340009f"
+      },
+      {
+        "base": 10.0,
+        "exponent": 3.0,
+        "result_bits": "0x408f400000000000",
+        "FPSCR": "0xa0800000"
+      },
+      {
+        "base": 10.0,
+        "exponent": 3.0,
+        "result_bits": "0x408f400000000000",
+        "FPSCR": "0xa1800000"
+      },
+      {
+        "base": 10.0,
+        "exponent": 3.0,
+        "result_bits": "0x408f400000000000",
+        "FPSCR": "0xa2800000"
+      },
+      {
+        "base": 10.0,
+        "exponent": 3.0,
+        "result_bits": "0x408f400000000000",
+        "FPSCR": "0xa3800000"
+      },
+      {
+        "base": 10.0,
+        "exponent": 3.0,
+        "result_bits": "0x408f400000000000",
+        "FPSCR": "0xa080009f"
+      },
+      {
+        "base": 10.0,
+        "exponent": 3.0,
+        "result_bits": "0x408f400000000000",
+        "FPSCR": "0xa180009f"
+      },
+      {
+        "base": 10.0,
+        "exponent": 3.0,
+        "result_bits": "0x408f400000000000",
+        "FPSCR": "0xa280009f"
+      },
+      {
+        "base": 10.0,
+        "exponent": 3.0,
+        "result_bits": "0x408f400000000000",
+        "FPSCR": "0xa380009f"
+      },
+      {
+        "base": 10.0,
+        "exponent": 3.0,
+        "result_bits": "0x408f400000000000",
+        "FPSCR": "0xa0c00000"
+      },
+      {
+        "base": 10.0,
+        "exponent": 3.0,
+        "result_bits": "0x408f400000000000",
+        "FPSCR": "0xa1c00000"
+      },
+      {
+        "base": 10.0,
+        "exponent": 3.0,
+        "result_bits": "0x408f400000000000",
+        "FPSCR": "0xa2c00000"
+      },
+      {
+        "base": 10.0,
+        "exponent": 3.0,
+        "result_bits": "0x408f400000000000",
+        "FPSCR": "0xa3c00000"
+      },
+      {
+        "base": 10.0,
+        "exponent": 3.0,
+        "result_bits": "0x408f400000000000",
+        "FPSCR": "0xa0c0009f"
+      },
+      {
+        "base": 10.0,
+        "exponent": 3.0,
+        "result_bits": "0x408f400000000000",
+        "FPSCR": "0xa1c0009f"
+      },
+      {
+        "base": 10.0,
+        "exponent": 3.0,
+        "result_bits": "0x408f400000000000",
+        "FPSCR": "0xa2c0009f"
+      },
+      {
+        "base": 10.0,
+        "exponent": 3.0,
+        "result_bits": "0x408f400000000000",
+        "FPSCR": "0xa3c0009f"
+      },
+      {
+        "base": 10.0,
+        "exponent": 9.0,
+        "result_bits": "0x41cdcd6500000000",
+        "FPSCR": "0xa0000000"
+      },
+      {
+        "base": 10.0,
+        "exponent": 9.0,
+        "result_bits": "0x41cdcd6500000000",
+        "FPSCR": "0xa1000000"
+      },
+      {
+        "base": 10.0,
+        "exponent": 9.0,
+        "result_bits": "0x41cdcd6500000000",
+        "FPSCR": "0xa2000000"
+      },
+      {
+        "base": 10.0,
+        "exponent": 9.0,
+        "result_bits": "0x41cdcd6500000000",
+        "FPSCR": "0xa3000000"
+      },
+      {
+        "base": 10.0,
+        "exponent": 9.0,
+        "result_bits": "0x41cdcd6500000000",
+        "FPSCR": "0xa000009f"
+      },
+      {
+        "base": 10.0,
+        "exponent": 9.0,
+        "result_bits": "0x41cdcd6500000000",
+        "FPSCR": "0xa100009f"
+      },
+      {
+        "base": 10.0,
+        "exponent": 9.0,
+        "result_bits": "0x41cdcd6500000000",
+        "FPSCR": "0xa200009f"
+      },
+      {
+        "base": 10.0,
+        "exponent": 9.0,
+        "result_bits": "0x41cdcd6500000000",
+        "FPSCR": "0xa300009f"
+      },
+      {
+        "base": 10.0,
+        "exponent": 9.0,
+        "result_bits": "0x41cdcd6500000000",
+        "FPSCR": "0xa0400000"
+      },
+      {
+        "base": 10.0,
+        "exponent": 9.0,
+        "result_bits": "0x41cdcd6500000000",
+        "FPSCR": "0xa1400000"
+      },
+      {
+        "base": 10.0,
+        "exponent": 9.0,
+        "result_bits": "0x41cdcd6500000000",
+        "FPSCR": "0xa2400000"
+      },
+      {
+        "base": 10.0,
+        "exponent": 9.0,
+        "result_bits": "0x41cdcd6500000000",
+        "FPSCR": "0xa3400000"
+      },
+      {
+        "base": 10.0,
+        "exponent": 9.0,
+        "result_bits": "0x41cdcd6500000000",
+        "FPSCR": "0xa040009f"
+      },
+      {
+        "base": 10.0,
+        "exponent": 9.0,
+        "result_bits": "0x41cdcd6500000000",
+        "FPSCR": "0xa140009f"
+      },
+      {
+        "base": 10.0,
+        "exponent": 9.0,
+        "result_bits": "0x41cdcd6500000000",
+        "FPSCR": "0xa240009f"
+      },
+      {
+        "base": 10.0,
+        "exponent": 9.0,
+        "result_bits": "0x41cdcd6500000000",
+        "FPSCR": "0xa340009f"
+      },
+      {
+        "base": 10.0,
+        "exponent": 9.0,
+        "result_bits": "0x41cdcd6500000000",
+        "FPSCR": "0xa0800000"
+      },
+      {
+        "base": 10.0,
+        "exponent": 9.0,
+        "result_bits": "0x41cdcd6500000000",
+        "FPSCR": "0xa1800000"
+      },
+      {
+        "base": 10.0,
+        "exponent": 9.0,
+        "result_bits": "0x41cdcd6500000000",
+        "FPSCR": "0xa2800000"
+      },
+      {
+        "base": 10.0,
+        "exponent": 9.0,
+        "result_bits": "0x41cdcd6500000000",
+        "FPSCR": "0xa3800000"
+      },
+      {
+        "base": 10.0,
+        "exponent": 9.0,
+        "result_bits": "0x41cdcd6500000000",
+        "FPSCR": "0xa080009f"
+      },
+      {
+        "base": 10.0,
+        "exponent": 9.0,
+        "result_bits": "0x41cdcd6500000000",
+        "FPSCR": "0xa180009f"
+      },
+      {
+        "base": 10.0,
+        "exponent": 9.0,
+        "result_bits": "0x41cdcd6500000000",
+        "FPSCR": "0xa280009f"
+      },
+      {
+        "base": 10.0,
+        "exponent": 9.0,
+        "result_bits": "0x41cdcd6500000000",
+        "FPSCR": "0xa380009f"
+      },
+      {
+        "base": 10.0,
+        "exponent": 9.0,
+        "result_bits": "0x41cdcd6500000000",
+        "FPSCR": "0xa0c00000"
+      },
+      {
+        "base": 10.0,
+        "exponent": 9.0,
+        "result_bits": "0x41cdcd6500000000",
+        "FPSCR": "0xa1c00000"
+      },
+      {
+        "base": 10.0,
+        "exponent": 9.0,
+        "result_bits": "0x41cdcd6500000000",
+        "FPSCR": "0xa2c00000"
+      },
+      {
+        "base": 10.0,
+        "exponent": 9.0,
+        "result_bits": "0x41cdcd6500000000",
+        "FPSCR": "0xa3c00000"
+      },
+      {
+        "base": 10.0,
+        "exponent": 9.0,
+        "result_bits": "0x41cdcd6500000000",
+        "FPSCR": "0xa0c0009f"
+      },
+      {
+        "base": 10.0,
+        "exponent": 9.0,
+        "result_bits": "0x41cdcd6500000000",
+        "FPSCR": "0xa1c0009f"
+      },
+      {
+        "base": 10.0,
+        "exponent": 9.0,
+        "result_bits": "0x41cdcd6500000000",
+        "FPSCR": "0xa2c0009f"
+      },
+      {
+        "base": 10.0,
+        "exponent": 9.0,
+        "result_bits": "0x41cdcd6500000000",
+        "FPSCR": "0xa3c0009f"
+      },
+      {
+        "base": 2.0,
+        "exponent": 17.0,
+        "result_bits": "0x4100000000000000",
+        "FPSCR": "0xa0000000"
+      },
+      {
+        "base": 2.0,
+        "exponent": 17.0,
+        "result_bits": "0x4100000000000000",
+        "FPSCR": "0xa1000000"
+      },
+      {
+        "base": 2.0,
+        "exponent": 17.0,
+        "result_bits": "0x4100000000000000",
+        "FPSCR": "0xa2000000"
+      },
+      {
+        "base": 2.0,
+        "exponent": 17.0,
+        "result_bits": "0x4100000000000000",
+        "FPSCR": "0xa3000000"
+      },
+      {
+        "base": 2.0,
+        "exponent": 17.0,
+        "result_bits": "0x4100000000000000",
+        "FPSCR": "0xa000009f"
+      },
+      {
+        "base": 2.0,
+        "exponent": 17.0,
+        "result_bits": "0x4100000000000000",
+        "FPSCR": "0xa100009f"
+      },
+      {
+        "base": 2.0,
+        "exponent": 17.0,
+        "result_bits": "0x4100000000000000",
+        "FPSCR": "0xa200009f"
+      },
+      {
+        "base": 2.0,
+        "exponent": 17.0,
+        "result_bits": "0x4100000000000000",
+        "FPSCR": "0xa300009f"
+      },
+      {
+        "base": 2.0,
+        "exponent": 17.0,
+        "result_bits": "0x4100000000000000",
+        "FPSCR": "0xa0400000"
+      },
+      {
+        "base": 2.0,
+        "exponent": 17.0,
+        "result_bits": "0x4100000000000000",
+        "FPSCR": "0xa1400000"
+      },
+      {
+        "base": 2.0,
+        "exponent": 17.0,
+        "result_bits": "0x4100000000000000",
+        "FPSCR": "0xa2400000"
+      },
+      {
+        "base": 2.0,
+        "exponent": 17.0,
+        "result_bits": "0x4100000000000000",
+        "FPSCR": "0xa3400000"
+      },
+      {
+        "base": 2.0,
+        "exponent": 17.0,
+        "result_bits": "0x4100000000000000",
+        "FPSCR": "0xa040009f"
+      },
+      {
+        "base": 2.0,
+        "exponent": 17.0,
+        "result_bits": "0x4100000000000000",
+        "FPSCR": "0xa140009f"
+      },
+      {
+        "base": 2.0,
+        "exponent": 17.0,
+        "result_bits": "0x4100000000000000",
+        "FPSCR": "0xa240009f"
+      },
+      {
+        "base": 2.0,
+        "exponent": 17.0,
+        "result_bits": "0x4100000000000000",
+        "FPSCR": "0xa340009f"
+      },
+      {
+        "base": 2.0,
+        "exponent": 17.0,
+        "result_bits": "0x4100000000000000",
+        "FPSCR": "0xa0800000"
+      },
+      {
+        "base": 2.0,
+        "exponent": 17.0,
+        "result_bits": "0x4100000000000000",
+        "FPSCR": "0xa1800000"
+      },
+      {
+        "base": 2.0,
+        "exponent": 17.0,
+        "result_bits": "0x4100000000000000",
+        "FPSCR": "0xa2800000"
+      },
+      {
+        "base": 2.0,
+        "exponent": 17.0,
+        "result_bits": "0x4100000000000000",
+        "FPSCR": "0xa3800000"
+      },
+      {
+        "base": 2.0,
+        "exponent": 17.0,
+        "result_bits": "0x4100000000000000",
+        "FPSCR": "0xa080009f"
+      },
+      {
+        "base": 2.0,
+        "exponent": 17.0,
+        "result_bits": "0x4100000000000000",
+        "FPSCR": "0xa180009f"
+      },
+      {
+        "base": 2.0,
+        "exponent": 17.0,
+        "result_bits": "0x4100000000000000",
+        "FPSCR": "0xa280009f"
+      },
+      {
+        "base": 2.0,
+        "exponent": 17.0,
+        "result_bits": "0x4100000000000000",
+        "FPSCR": "0xa380009f"
+      },
+      {
+        "base": 2.0,
+        "exponent": 17.0,
+        "result_bits": "0x4100000000000000",
+        "FPSCR": "0xa0c00000"
+      },
+      {
+        "base": 2.0,
+        "exponent": 17.0,
+        "result_bits": "0x4100000000000000",
+        "FPSCR": "0xa1c00000"
+      },
+      {
+        "base": 2.0,
+        "exponent": 17.0,
+        "result_bits": "0x4100000000000000",
+        "FPSCR": "0xa2c00000"
+      },
+      {
+        "base": 2.0,
+        "exponent": 17.0,
+        "result_bits": "0x4100000000000000",
+        "FPSCR": "0xa3c00000"
+      },
+      {
+        "base": 2.0,
+        "exponent": 17.0,
+        "result_bits": "0x4100000000000000",
+        "FPSCR": "0xa0c0009f"
+      },
+      {
+        "base": 2.0,
+        "exponent": 17.0,
+        "result_bits": "0x4100000000000000",
+        "FPSCR": "0xa1c0009f"
+      },
+      {
+        "base": 2.0,
+        "exponent": 17.0,
+        "result_bits": "0x4100000000000000",
+        "FPSCR": "0xa2c0009f"
+      },
+      {
+        "base": 2.0,
+        "exponent": 17.0,
+        "result_bits": "0x4100000000000000",
+        "FPSCR": "0xa3c0009f"
+      }
+    ],
+    "actual_entire_stock_pow_executed": true,
+    "public_RAM_and_FPSCR_unchanged": true,
+    "constant_replacement_supported_only_for_these_arguments": true
+  },
+  "compiled_defects_rejected": [
+    {
+      "name": "unsigned-drive",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "register-left-shift",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "logical-right-shift",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "group-sign",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "raw-mask",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "sample-sign",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "unknown-type",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "chip0-scale",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "chip12-scale",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "double-divisor",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "reserved-gain-read",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "nominal-initializer",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "chip0-offset",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "drive-zero-gain-read",
+      "compiled": true,
+      "rejected": true
+    }
+  ],
+  "contract": [
+    "Data type1 converts signed32 samples to float32, stores first output, reloads unsigned16 drive and divides by1000 then drive. Zero drive writes positive zero. Other nonzero types leave both outputs unchanged.",
+    "Type0 preserves register-shift semantics for byte counts through255 and signed low16 group multiplication with32-bit channel/address wrap. First-output store precedes live drive/chip/gain reloads. Drive is unsigned16, contrary to the decompiler short declaration.",
+    "Nominal calibration is one writable30-word object at the native20007d10..20007d88 range:13 chip1,9 chip2 and8 chip0 words. Cross-table indices inside these30 words remain live. Reserved indices beyond it retain direct reads of surrounding native SRAM; no neighboring state is duplicated or initialized by this owner.",
+    "Chip0 preserves float32 *2 *800 *1000, then native encoded double /131072 *1000 /gain /drive. Chips1/2 preserve encoded double *1.8 /131072 /gain /drive *1e9. Reuse actual C native i2d,f2d,double multiply/divide,d2f and shift helpers; do not replace native encoded semantics with a generic cast/library.",
+    "Full stock pow replay for10^3,10^9,2^17 proves exact constants1000,1e9,131072 under all rounding/FZ/DN combinations with clear and set exception flags. All96 calls preserve public RAM and FPSCR. This admits constant substitution for these arguments only."
+  ],
+  "limits": [
+    "5127 pairs comprise2758 direct,2047 core-integrated and322 frame-integrated cases. Direct cases include21 matching selected faults. The direct/core fixtures execute all522 new native instruction bytes; frame cases exercise288 decoder bytes reachable in the R1 fixed chip1/type0 path, plus all380 frame/report bytes and74 round-helper bytes. Its core coverage is576 bytes; the separate core fixture covers all682.",
+    "All numeric helpers are real C/native bodies, with no math mocks. Frame integration also executes real clear helpers. Thirteen later processing stages and allocator/free ports remain modeled. This is not a complete SpO2 engine, inference executor, actual allocator lifecycle or bootable image.",
+    "Independent Fraction oracles cover float32 and float64 rounding, operation order and full active FPSCR. Tests cover signed samples, unsigned drives through65535, boundary and randomly sampled byte bit-count/gain values, nominal/reserved gain reads, aliased output/header/gain state, group sign/wrap and unspecified data types. Physical interrupts, concurrent data changes, arbitrary private aliases and cold FPU remain unverified.",
+    "The120-byte initializer matches the native RW handler on two poison patterns and an independent decompressor, with whole-region guards. Only these30 words are newly owned; the adjacent callback table is not calibration and is neither declared nor initialized by this source owner. Reserved physical-SRAM reads and final source initialization/placement remain hardware-layout obligations.",
+    "903 units compile/compose without failures or duplicate strong symbols.892 prior nongenerated source/object pairs and source-plan/cache files remain unchanged. Decoder import removed with no added imports:90 application/22 boot. Relocatable composition is not a bootable image."
+  ],
+  "evidence_files": {
+    "build/sources-goal-r1-goodix-spo2-decode-c/report.json": "3e7320ba628bf942e88d62d7e05de13f116c56bf8d9dc040aad4b7d0eb78081f",
+    "build/sources-goal-r1-goodix-spo2-assemble-c/report.json": "4811dfe9ca1624328869edfec45087ee4fc2a31c937ed056bf1084834f53b1af",
+    "r1/src/application/goodix/native_spo2_decode.c": "0cab638b8ad6ff555bb868d39c8a87c8fc4cdd5bb952f48d4e005a47aa25237e",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-spo2-decode-c/r1/r1-application/r1__src__application__goodix__native_spo2_decode.c.o": "f6359dad9290ac13fd0ca47b919a4d66d8a3343b1b891c3ee1c1ed3992db0242",
+    "r1/src/sources.json": "b869b75a820d476fa8eb26a1add67a6044451da4dd1885a40f570a415a89a212",
+    "tools/build/source-plan.json": "eeb516e31b3310fb0718f36908977f8125723f7c5e0e86cd6744395826259a4d",
+    "r1/src/config/runtime/native_health_cache.ld": "eb8f131c489cd818d4e36718718fa1989719ca0170f164541a1a5bf56dfc1ec3",
+    "r1/docs/reference/FUNCTION-OWNERSHIP.csv": "9dc6491798e84cd98ed76eca6063ad0ac408eb423b6e87dfd7388b97b74452b5",
+    "r1/symbols/function-frontier.csv": "9ac620b0f210e1256f1eeac07c05163346c411eb46484dcdb85bb7e68c71f273",
+    "r1/docs/reference/goodix-spo2-assemble-c-review.md": "85ffd69fd312a9a31da9843a74f7f9aa524d1768a9f188344de01156a5ba0c23",
+    "r1/docs/reference/goodix-spo2-calculate-c-review.md": "6ad9b4a42182c8bdf2a122ee9a7be511f556bf28a36c0b55c6c7628a24a2eca7",
+    "r1/docs/reference/goodix-spo2-packet-layout-c-review.md": "aca9085887eddd068b4cdcb7917dd9bd7f235252ab6e349aef3ce2b477290fed",
+    "third-party/upstream/goodix-gh3x2x/gh3x2x/demo_code/demo_kernel_code/driver/inc/gh_drv.h": "e572d0c79b1607e4c0391b1d44068a2b93da004dc5ae9aeb6a18006904912c6c",
+    "third-party/upstream/goodix-gh3x2x/gh3x2x/demo_code/demo_kernel_code/driver/inc/gh_drv_registers.h": "28d2e112db793c104ca9b34e3cac8874aadd716885cd3dd0939efeb3d2f532e9",
+    "build/goal-r1-goodix-soft-adt-execute-c/expanded-rw.bin": "87fdee392022fdbe23dd0daf3e859fb14f3ce26ba3e8403aab56dc9d9a913317",
+    "r1/src/application/board/structured_float.c": "1658c1f1c41b2b5c36e764b9e1cd7a016c6e3e23162db0235dcf888bb62b3585",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-spo2-decode-c/r1/r1-application/r1__src__application__board__structured_float.c.o": "b7294d21d28fd98f2876ff96cae07a8d6f056f25e000eedb24e5cb4f59be7745",
+    "r1/src/application/runtime/integer_eabi.c": "fdb5e89a036f5733fbd4cc12b6bb970dd9ba9d2823c8b87d9d71af2d681dc656",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-spo2-decode-c/r1/r1-application/r1__src__application__runtime__integer_eabi.c.o": "42f4d74a7fff9042ab7dbc0fc7ba84bb3d2f944d9be6dae815340aaddfcd482e",
+    "r1/src/application/runtime/memory_eabi.c": "e89f73174230a5111606f175a2429695c62f178ace0b44478ab93497a9ebacff",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-spo2-decode-c/r1/r1-application/r1__src__application__runtime__memory_eabi.c.o": "e26f26d06a6113b53a70667703a46d09ccdd26875e58d267c6242504f683ecc6",
+    "r1/src/application/runtime/native_float_bits.c": "fd1440ba0bf0a769bffd34dff5c757b2e5b311d16ceba967cf79654af0af5559",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-spo2-decode-c/r1/r1-application/r1__src__application__runtime__native_float_bits.c.o": "b00e7776dff412aa35a312811041a7a9e993ad6cf6090a5ff239946c82632bec",
+    "r1/src/application/runtime/native_formatter_add.c": "b8fda556bdefef03a7ad30574ece6397c9cc01ec25a9299b43dbeb329b0c967b",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-spo2-decode-c/r1/r1-application/r1__src__application__runtime__native_formatter_add.c.o": "af857655ec439a31541154632f02eb8e8ebbc256b19bd4c96aeb97588f931eac",
+    "r1/src/application/runtime/native_formatter_product.c": "a7e147c59ef41db4cb4a512ea98f1790170b89097cb40628e9bf8008c5253e18",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-spo2-decode-c/r1/r1-application/r1__src__application__runtime__native_formatter_product.c.o": "78e6239a90dc439618d277cc81d2526fd1c316ceab6a302773e6db54ff8a9e97",
+    "third-party/upstream/goodix-gh3x2x/gh3x2x/demo_code/demo_algo_code/goodix_algo_application/src/gh3x2x_demo_algo_config.c": "65345b49ac1d9818fcc6f5dff3a33dbdd89c4e2182e6fe35480543b0a803a861",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-spo2-decode-c/r1/r1-application/third-party__upstream__goodix-gh3x2x__gh3x2x__demo_code__demo_algo_code__goodix_algo_application__src__gh3x2x_demo_algo_config.c.o": "6a65ddb671429ddab29014c4e028d634b5e4159d720ecc05d1f7f53e8c0f3789",
+    "third-party/upstream/musl-memory-1.2.5/memset.c": "2a74d9e7f988945e0d691d480b78d77a228da0d2be401c1000637cc879b2c0be",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-spo2-decode-c/r1/r1-application/third-party__upstream__musl-memory-1.2.5__memset.c.o": "6c2f1a8f480c27d5bc20f79ac535dac28fbbdcaec12e69bad96721f724ec9057",
+    "r1/src/application/goodix/native_algorithm_version.c": "ed915ecacce415d7fcbfd606f483034413767062e4b26043fb9a38727611c499",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-spo2-decode-c/r1/r1-application/r1__src__application__goodix__native_algorithm_version.c.o": "12b8b262fdab4e52dc5cfeeded44302509048a0f999c8ad9798e0715ae17675a",
+    "r1/src/application/goodix/native_spo2_execute.c": "d96cdeacee0d801f5b71c7e9624a37aa7d1b9df7013679dd5237e2a650f5e26b",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-spo2-decode-c/r1/r1-application/r1__src__application__goodix__native_spo2_execute.c.o": "84b4dcfe37930f518f0fac2e831761a54abdb458f3057ded4fc994435dd6444a",
+    "r1/src/application/goodix/native_spo2_math.c": "ffee2e1ee1d93a3c3d3b2b7ee68e52b572a9df88a5c5e1dc5058c3221be990b9",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-spo2-decode-c/r1/r1-application/r1__src__application__goodix__native_spo2_math.c.o": "265990bd7f6c22c801d820280faeccc977bbacff30e719a4ad3f08414b33dfc5",
+    "r1/src/application/goodix/native_spo2_calculate.c": "91c85a7620b5a78a5954247ff0af4df5f4e82ceb472a6d81402951cadb8977e0",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-spo2-decode-c/r1/r1-application/r1__src__application__goodix__native_spo2_calculate.c.o": "0d1e2ddeeefd0ad393d0933a15bf7185e395422378e50e2c584b449fa1cff367",
+    "r1/src/application/goodix/native_spo2_assemble.c": "9bde6b09747ac21892af866228595b63d6e54b98bd0df9bc360fb879878ca18a",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-spo2-decode-c/r1/r1-application/r1__src__application__goodix__native_spo2_assemble.c.o": "2c880ae46ce6f24917b0feb861a2187908e89ce8efbc58ada54eaf90590a901d",
+    "build/goal-r1-goodix-spo2-decode-c/negative-logical-right-shift.log": "22b583cc9750aaea8073d4d520dc8170f956d984e6f3bd41a4e75e2651a1ea78",
+    "build/goal-r1-goodix-spo2-decode-c/frame.log": "0ae0f201cdac63184a8ef5999492eef03d9c410567d091201394e3d752d7269c",
+    "build/goal-r1-goodix-spo2-decode-c/negative-unknown-type.c": "acabec934eec6a0a703881688a45e5227e36860c71f2ac45d4826c02cafdfe78",
+    "build/goal-r1-goodix-spo2-decode-c/integration-coverage.json": "c15d419d6ee6b8738a3d4349e4148978a2144d992b24e6a7a5c36dfcba68fef3",
+    "build/goal-r1-goodix-spo2-decode-c/negative-register-left-shift.log": "cb1f3c564a8a5c4250107f66a864d216c73390d7f37cdfb8bfa0c9ebee1de786",
+    "build/goal-r1-goodix-spo2-decode-c/negative-nominal-initializer.log": "ec1e9fe30eedac903fbcea428d594973a24314173d57df4d78f9a4c7f46a0d0e",
+    "build/goal-r1-goodix-spo2-decode-c/negative-reserved-gain-read.c": "780cbe07869d242e1bf767bf50054dc624d9c8b4e51095aa3db600b9f01a42fd",
+    "build/goal-r1-goodix-spo2-decode-c/negative-chip12-scale.c": "b8aeb2474ccb8621ce32867d7822c6e55646b4e43928f7a6d18e7a191018d276",
+    "build/goal-r1-goodix-spo2-decode-c/expanded-rw.bin": "87fdee392022fdbe23dd0daf3e859fb14f3ce26ba3e8403aab56dc9d9a913317",
+    "build/goal-r1-goodix-spo2-decode-c/negative-register-left-shift.o": "d35e35fd26171fc98d3e255a2674a824c05362b5d9f657bcaae2f8f118cd6174",
+    "build/goal-r1-goodix-spo2-decode-c/negative-group-sign.log": "a005ad157da615060a18fd9af7818226da1f5f667b445e84c6bd56f21e70692d",
+    "build/goal-r1-goodix-spo2-decode-c/negative-double-divisor.o": "f785a5ed6a4b58a8f05b05cb6820382701479d341dbabcdfd4d4e416283b8223",
+    "build/goal-r1-goodix-spo2-decode-c/audit.json": "d3700f0417f342f1831b2b822918c05e143cc77c2e434011db31e4af7c1c3ca1",
+    "build/goal-r1-goodix-spo2-decode-c/negative-chip0-offset.o": "340dc21831680677b653b5e5695293ced9aa0fe66406295d6c967ef732da81cf",
+    "build/goal-r1-goodix-spo2-decode-c/candidate.d": "c21c83b82da5ca4af90ddf1d46567e3667c85180e8d28497b7a0367a1e7b4c93",
+    "build/goal-r1-goodix-spo2-decode-c/candidate.c": "0cab638b8ad6ff555bb868d39c8a87c8fc4cdd5bb952f48d4e005a47aa25237e",
+    "build/goal-r1-goodix-spo2-decode-c/verify.log": "78c8877af25cd9ed8b6c6508099660771412547e6ea0956dfac6fe639d685c50",
+    "build/goal-r1-goodix-spo2-decode-c/rea-calibration-xrefs.json": "39c57a237f5fd7ae4ced1bd022fb94bc1ae71f87bdaae606faf6412d87ce60ab",
+    "build/goal-r1-goodix-spo2-decode-c/checkpoint.json": "70d0fd5cc60b7270c8e5e987b9f9f1e5052d51c7d98d4c3c914744f263799d2d",
+    "build/goal-r1-goodix-spo2-decode-c/negative-unsigned-drive.c": "c464ab22aae523db7d2a05a685488894e86f21cfec243bb148199000d3f42e78",
+    "build/goal-r1-goodix-spo2-decode-c/test.ld": "2350ba2fb2e7248af3c8af70dc23e325296eed9c7a318dfa25fd40df8383437a",
+    "build/goal-r1-goodix-spo2-decode-c/audit.py": "4240ad4a4042478fb108b7a48856de7d010a06ebc8b8c822646978ad88f8113b",
+    "build/goal-r1-goodix-spo2-decode-c/negative-nominal-initializer.o": "e0b609564a165f928bfd71782b7f539b932522a563e78dfa325baa270a63368c",
+    "build/goal-r1-goodix-spo2-decode-c/rea-decoder-bytes.json": "50dd4413079f623ab317532744acb679cd37829b5cc81612222d30cfdd2d348d",
+    "build/goal-r1-goodix-spo2-decode-c/integration.elf": "407d757330a2640e4cd3a228003794adc918b64adb245565e565f355dcfb3f52",
+    "build/goal-r1-goodix-spo2-decode-c/source.elf": "073a5da3b8bf3f3e48e553ce9d3468c4367074cac17cd9f47256b94f018aed7c",
+    "build/goal-r1-goodix-spo2-decode-c/negative-raw-mask.log": "73c464ab202b1febbcc418413563f87d7d5c32918e7c08ff52b82d5cb9506b19",
+    "build/goal-r1-goodix-spo2-decode-c/negative.py": "d37f1e3aba7709c87f45a1ec7ca7d95fee22070b56ee204ae883f7eedc5c72b8",
+    "build/goal-r1-goodix-spo2-decode-c/production-compile-argv.json": "cfb926b723383aac7c533b81ffaf250cd957c61def07bfd9be132e705ab346ac",
+    "build/goal-r1-goodix-spo2-decode-c/integration-results.json": "a2c305bb0b6334bb4c469aea57d846f73f344514d3e0cf49b89e48d0f34db4d7",
+    "build/goal-r1-goodix-spo2-decode-c/frame.elf": "3b1e386fc1a0c35d02a80ad149cc52b368ac25c4e17630414a6f6b17a9cbb626",
+    "build/goal-r1-goodix-spo2-decode-c/negative-sample-sign.o": "625320765d3d8adeb64441c5853028602151a446f5f57467658dd27648f0e798",
+    "build/goal-r1-goodix-spo2-decode-c/frame-results.json": "6617976dc80cb52d26dcceccb5b6287ecfff1a8c8eaa66373c4117991ead84c5",
+    "build/goal-r1-goodix-spo2-decode-c/negative.log": "21e618184ed8fb3bd27b46492f19b72fd2965c5eb09894d9520a9a8a9b0a1031",
+    "build/goal-r1-goodix-spo2-decode-c/negative-results.json": "26af966cceae4b516d8188ed4e6a25cb7a993e995cc8ac09978414a18edb255a",
+    "build/goal-r1-goodix-spo2-decode-c/negative-double-divisor.log": "9813534f5dae907a670182103c4e90482958a4fce9a3ada521dfb45563fa6a93",
+    "build/goal-r1-goodix-spo2-decode-c/source.o": "f6359dad9290ac13fd0ca47b919a4d66d8a3343b1b891c3ee1c1ed3992db0242",
+    "build/goal-r1-goodix-spo2-decode-c/results.json": "d56c3dc503d9ef0f3cd469b30287e8e4252c83d768ff7b3a7efd0a1ac6ee5f0e",
+    "build/goal-r1-goodix-spo2-decode-c/frame-core-coverage.json": "f7cf95978d8af39bbc7a7b61abeb6516ff9b704c20967e9a1d18b6913ad53a94",
+    "build/goal-r1-goodix-spo2-decode-c/negative-sample-sign.log": "9295a92f31aa79a97bce7a93ce2a5b1784cde7948a76617716024dc752f369b9",
+    "build/goal-r1-goodix-spo2-decode-c/negative-group-sign.o": "f9316d2cd927d92a7b8b5730699f0160f228afc350e4edaea732f4c385906755",
+    "build/goal-r1-goodix-spo2-decode-c/negative-logical-right-shift.c": "4504eae67d22327b57ce5773fc14dca92bbd4c1e478264cfa15ee22481b9627b",
+    "build/goal-r1-goodix-spo2-decode-c/pow-constants.py": "111b0b703bd35f07fd01f61b54a27128aca66515162a9f40e9ee2e7485195d4b",
+    "build/goal-r1-goodix-spo2-decode-c/make-integration.py": "215e1bf5595a79a065437450ea34173a4eb48e763d5299faf06d0dac92b0fb35",
+    "build/goal-r1-goodix-spo2-decode-c/negative-drive-zero-gain-read.o": "f99a0d2917e8fe95a57c4c21d1ae585d13576779a061826e8d6ff155aee2da97",
+    "build/goal-r1-goodix-spo2-decode-c/negative-chip0-offset.log": "f9af9660f66239a34c220a4ca2ea652085e7ecad0d8a246b6f5245f43ff890c1",
+    "build/goal-r1-goodix-spo2-decode-c/negative-raw-mask.o": "f0153fab3cbbf5780f56410c7954a637b31207ae0f4e1677f173d3d6d337f08f",
+    "build/goal-r1-goodix-spo2-decode-c/integration.log": "c7c66de96489233246a589ae2e8820eeb35e22b91cca6a6a380c85cf15ba87e7",
+    "build/goal-r1-goodix-spo2-decode-c/negative-chip0-scale.o": "bda6ed939716e3f82517662c41847c6ce77b0f7e8aff94205c2e7c03d173d513",
+    "build/goal-r1-goodix-spo2-decode-c/integration.py": "9cf005744692292f96fd4a5125d675fadda629d1c34afb1cab315637c716e332",
+    "build/goal-r1-goodix-spo2-decode-c/compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/goal-r1-goodix-spo2-decode-c/make-frame.py": "020ed321db72a948c1143906c58af94a7e9daa1eea5871c6597d051b87a26a40",
+    "build/goal-r1-goodix-spo2-decode-c/negative-chip0-offset.c": "52cc6b157c0418f75fafdcf4696c67edc7b58b6db50e63f501731fa95edf6fd7",
+    "build/goal-r1-goodix-spo2-decode-c/initialization.py": "2811c871a31048fd60931c900f0d1f96580e4b64530b0b43fc458756619fa5f8",
+    "build/goal-r1-goodix-spo2-decode-c/negative-register-left-shift.c": "8fa30cc185d813566858b5909ec1a2a1a713a2d968d320751d3aa38fc8648021",
+    "build/goal-r1-goodix-spo2-decode-c/negative-double-divisor.c": "8bc0ee39bbf1eb989df00f46dfd380b0245b39c17362a481227eb711ff6860c8",
+    "build/goal-r1-goodix-spo2-decode-c/negative-chip12-scale.o": "d45d01749ca6960838953a0ac6a009b12181ed32e0c3d3a4e69c3d0a58b4392d",
+    "build/goal-r1-goodix-spo2-decode-c/negative-reserved-gain-read.o": "30acad7776c66ce9c7623a49c34ffe30ca5b1aee8f3aeb961ae9ef04766372b6",
+    "build/goal-r1-goodix-spo2-decode-c/negative-chip0-scale.log": "f05bb88aca92a7442a8e7747aaf4c6fd06ffc7e48b4e1f1a4dbdea39a93f32fe",
+    "build/goal-r1-goodix-spo2-decode-c/rea-adjacent-xrefs.json": "06ec5a43d85446d93d43fcae3fe83c59960f664948d510df6d39a7fdb0394028",
+    "build/goal-r1-goodix-spo2-decode-c/rea-decoder-analysis.json": "eddad820fe943d30c8e7ce66733fd91980078ff947bd155c0940ec9687006dd5",
+    "build/goal-r1-goodix-spo2-decode-c/negative-unknown-type.o": "ebfcaeef0a410b686430cbf3fdcb52daf0728ed6b61ce5d3fb3df3269610a5d2",
+    "build/goal-r1-goodix-spo2-decode-c/frame.py": "942d99d6d77940ac71065596b13d546123f90689f7e3bc06a107e0d17b28804e",
+    "build/goal-r1-goodix-spo2-decode-c/negative-reserved-gain-read.log": "091b443e8ec3614e323c842459a87284ce9f22beaf9daf976e1df695e9ddc5a6",
+    "build/goal-r1-goodix-spo2-decode-c/record.py": "b5fdde4255d509c29e7823ff7434cd52761a20b3b97875b5137416aa48f380eb",
+    "build/goal-r1-goodix-spo2-decode-c/negative-unsigned-drive.o": "b2064861f9143e62b3fb9222febdf6cfd64e791f21ce58ccb7607973275cf79a",
+    "build/goal-r1-goodix-spo2-decode-c/negative-nominal-initializer.c": "1b676d5a7835ef5ce57108f415b76fcf1fbfca42c2a855ff2abb4f497f06ddfb",
+    "build/goal-r1-goodix-spo2-decode-c/next-steps.md": "7dcbcce0254c895e560e8d94b4324491c7355fef758d654cc9b48b161ca2bf97",
+    "build/goal-r1-goodix-spo2-decode-c/compile-argv.json": "933db0ea6fd96234ce9a2d5522247a08bc5488a8b8778a2dabe67f0572368b19",
+    "build/goal-r1-goodix-spo2-decode-c/manifest-before.json": "615fc2a757f9dc4a501dde4140ba6cda08394bd66bea79c7541c46582e5eb646",
+    "build/goal-r1-goodix-spo2-decode-c/negative-group-sign.c": "64f0c34315a4f9ae422078ca121192cb5480d06ff74019c4188ce602be66c791",
+    "build/goal-r1-goodix-spo2-decode-c/verify.py": "769fccb00d977b7097a36128dcf05f4d981e7c355b583f863c84b5e0974c6a45",
+    "build/goal-r1-goodix-spo2-decode-c/negative-chip12-scale.log": "a81f38abfda98ba4b70fefba94352486b139270ebfdda556ddfa8048fae92097",
+    "build/goal-r1-goodix-spo2-decode-c/negative-unsigned-drive.log": "007941e378356e9b0704a1c0d726590dcd74fba09977e9ad1c411b7df6411155",
+    "build/goal-r1-goodix-spo2-decode-c/negative-sample-sign.c": "d46c15ebea200d1cf0bf40f80a1b00dd0b5e73f67b73c31264b09fcfcf00b264",
+    "build/goal-r1-goodix-spo2-decode-c/initialization-results.json": "f5e0c687f7b323c6afcb2d74c95c3d5bf4358bfea4407240804db272b5134d51",
+    "build/goal-r1-goodix-spo2-decode-c/negative-unknown-type.log": "9eaed02d35de105a71ddfbdb360c8021d20ff83cf2596fefd853d291dc439aec",
+    "build/goal-r1-goodix-spo2-decode-c/integration.ld": "2350ba2fb2e7248af3c8af70dc23e325296eed9c7a318dfa25fd40df8383437a",
+    "build/goal-r1-goodix-spo2-decode-c/negative-drive-zero-gain-read.log": "fafb3ecb56a97fa5beb17cfe8fe6c7f3b1042809fad0c2862d35e68bf95c369a",
+    "build/goal-r1-goodix-spo2-decode-c/negative-raw-mask.c": "6a6d73b802dabfe338b90675d27d701c0a18a20cc99aa63cdbdd5fe77002d1a4",
+    "build/goal-r1-goodix-spo2-decode-c/pow-constants-results.json": "32092eacb42a9024259b997bca4d579b78ba6d9cd408d7b2c415df8546f26d75",
+    "build/goal-r1-goodix-spo2-decode-c/negative-chip0-scale.c": "747f6dff2ed7c65595df7a57416068f7dbf12f9ca8662d9bfe254a265e430a16",
+    "build/goal-r1-goodix-spo2-decode-c/negative-drive-zero-gain-read.c": "4b1db0c6b11a3ce349cf144a0eacdc3570a536f80c09a0ed6aa37e9c4ff44187",
+    "build/goal-r1-goodix-spo2-decode-c/frame.ld": "baf9eda599773653994d22856daa785cf71549f5cd34d10707afb33106ba6109",
+    "build/goal-r1-goodix-spo2-decode-c/negative-logical-right-shift.o": "e4097f163a8f36018c941209f6a32a3346e64b6bb408c4d9172ebd1845016b5c",
+    "build/goal-r1-goodix-spo2-decode-c/negative-init.json": "f5e0c687f7b323c6afcb2d74c95c3d5bf4358bfea4407240804db272b5134d51",
+    "build/goal-r1-goodix-spo2-decode-c/build.log": "282e5c984debf6e0c941fc8e355edf234641ebfc4ad915f10e23cb8ed9e06749"
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "cases": 2176,
+  "passed": 2176,
+  "failures": [],
+  "callback_stack_depth_pairs": [
+    [
+      [
+        -8
+      ],
+      [
+        -8
+      ]
+    ]
+  ],
+  "unchanged_functions": [
+    "r1_bma_delay_us",
+    "r1_bma_interface_initialize"
+  ],
+  "source_body_sizes": {
+    "r1_bma_default_read": 30,
+    "r1_bma_default_write": 30
+  },
+  "stock_body_sizes": {
+    "r1_bma_default_read": 28,
+    "r1_bma_default_write": 28
+  },
+  "report": "build/sources-goal-r1-bma-bus-adapters/report.json",
+  "report_sha256": "317f20c1a142722cd14b245dd59f09e75910d0c321108614720cb6fc0c4c524d",
+  "source_sha256": "2031217ff3dff6c662b3c26d5520eb01fd763cda3a7e8fd34848ac4e0b346e66",
+  "manifest_sha256": "be76bf00509f1551b53a08edbc5515ed3a3dcb9b1721ff4481fdf60b77d82eb8",
+  "stock_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "native_spans": {
+    "0x53ab4": {
+      "bytes": 28,
+      "sha256": "c435045bc637a872664f1a26b3e320916bffa296c24882157d7d7b69ff410b27"
+    },
+    "0x53ad0": {
+      "bytes": 28,
+      "sha256": "38c0475f8d369413e75488c7da252c6d5294da5c0fe7d9b0b79cc975f24642a2"
+    }
+  },
+  "rea": {
+    "completed": true,
+    "procedures": [
+      "0x53ab4",
+      "0x53ad0"
+    ],
+    "path": "build/goal-r1-bma-bus-adapters/REA.json",
+    "sha256": "6384733a83ab9f8cc538e799d89f98b3fec014340f3f2f27078c3ddbca79d18a"
+  },
+  "probe_artifacts": {
+    "build/goal-r1-bma-bus-adapters/verify.py": "9e63dfecee9ecdcfe6fec0230c3b74fa2a2f1fcf3f68e19fb04ab29794c6e6f5",
+    "build/goal-r1-bma-bus-adapters/before.c": "d920e7869da8576a2a7dfa64f87efd1a27baa0eeac2105f3b63e7a3ff6ed0f7d",
+    "build/goal-r1-bma-bus-adapters/source.elf": "230ab1a5355f31547de6073ad9eabe6b4fd50c5c88a7a3e8d7138d11accefc22",
+    "build/goal-r1-bma-bus-adapters/stock.elf": "a10a4af0b2b1ee5cee61088c07cbad879032b659b65c393e1b078e44f3b20f0d",
+    "build/goal-r1-bma-bus-adapters/rea-snapshot.json": "4a74f4ced83d6c1ee46473c9b5c190072217ae267cf6d628cca803f2b68fa03f"
+  },
+  "limits": [
+    "Underlying bus request is mocked and clobbers caller-saved registers; physical sensor/bus execution is not verified.",
+    "No timing, complete fault-state, private spill, final firmware link, source qualification or whole-image byte-identity claim."
+  ]
+}

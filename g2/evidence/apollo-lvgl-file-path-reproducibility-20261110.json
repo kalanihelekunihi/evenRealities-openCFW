@@ -1,0 +1,58 @@
+{
+  "schema": 1,
+  "target": "locked G2 2.2.6.10 Apollo-main LVGL __FILE__ strings",
+  "stock": {
+    "firmware": "g2/blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin",
+    "sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863"
+  },
+  "change": {
+    "manifest": "g2/src/sources.json",
+    "unit_mappings": [
+      {
+        "source": "{gen}/lvgl-g2/lv_font_g2.c",
+        "stock_file_string": "D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\lvgl_v9.3\\LVGL\\src\\font\\lv_font.c",
+        "object_sha256": "444ff69998a283551c22e9a7f63e66f0537ef7472d7851ae75f721fbecb0dbbc"
+      },
+      {
+        "source": "{gen}/lvgl-g2/lv_init_g2.c",
+        "stock_file_string": "D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\lvgl_v9.3\\LVGL\\src\\lv_init.c",
+        "object_sha256": "75eb89b9852eac794d77a58ff2e3102a4d5a41fcbb32800c7e0ebd66056a0a39"
+      },
+      {
+        "source": "{gen}/U2/lvgl-pre8070/lv_draw_arc.c",
+        "stock_file_string": "D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\lvgl_v9.3\\LVGL\\src\\draw\\lv_draw_arc.c",
+        "object_sha256": "a5f47cd5a41201bf17de0adb1420c72934ecf3951511ff62aa4ed6dae7eae109"
+      },
+      {
+        "source": "{gen}/U2/lvgl-pre8070/lv_draw_line.c",
+        "stock_file_string": "D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\lvgl_v9.3\\LVGL\\src\\draw\\lv_draw_line.c",
+        "object_sha256": "b285d260b2858393e7990f05141c84a3e62ab9237126dce439586b8ae8939674"
+      },
+      {
+        "source": "{gen}/U2/lvgl-pre8070/lv_draw_label.c",
+        "stock_file_string": "D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\lvgl_v9.3\\LVGL\\src\\draw\\lv_draw_label.c",
+        "object_sha256": "067d511dfb27f0c658abf93ab61b6df25a521136bd77f46b4bfaa665884c27d9"
+      },
+      {
+        "source": "{gen}/U2/lvgl/lv_chart.c",
+        "stock_file_string": "D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\lvgl_v9.3\\LVGL\\src\\widgets\\chart\\lv_chart.c",
+        "object_sha256": "291be6058a81b79a3a611179c6643aa41417729d8b55dc5c06584d0cd3b087d7"
+      }
+    ],
+    "reason": "Six generated LVGL objects embedded output-directory-specific __FILE__ strings. Exact source file mappings now emit the strings present in the locked firmware."
+  },
+  "verification": {
+    "unmapped_objects_equal_across_two_output_directories": 0,
+    "mapped_objects_equal_across_two_output_directories": 6,
+    "full_build_objects_match_independent_probe": 6,
+    "exact_stock_paths_present_in_final_binary": 6,
+    "previous_apollo_source_binary_bytes": 3819228,
+    "new_apollo_source_binary_bytes": 3819028,
+    "full_source_report": "build/g2-all-c-npu-paths-20261110/report.json",
+    "full_source_report_sha256": "28b2bff17047a27761a79435b42ae0eb5d962d545a000ae172d58f2faa9ef892",
+    "strict_link_report": "build/g2-all-c-npu-paths-link-20261110/link-report.json",
+    "strict_link_report_sha256": "79261af91266d672805f280d8e18b307a523f4ff848ef1be72c749d3d3785136",
+    "payloads_linked": 7
+  },
+  "qualification": "The six path strings are exact and their objects reproduce across output directories. Other code/data differ from stock; this does not establish Apollo-main byte identity or hardware behavior."
+}

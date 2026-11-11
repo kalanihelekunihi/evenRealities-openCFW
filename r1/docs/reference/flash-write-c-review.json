@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "report": "build/sources-goal-r1-flash-write-c/report.json",
+  "audit": {
+    "unchanged_nongenerated_objects": 842,
+    "changed_generated_objects": [
+      "{gen}/fdb_utils_r1.c",
+      "{gen}/r1_startup_vectors.S",
+      "{gen}/r1_uecc.c"
+    ],
+    "other_utility_function_bodies_unchanged": 10,
+    "data_bytes_unchanged": true,
+    "compiled_units": 852,
+    "application_imports": 66,
+    "bootloader_imports": 22,
+    "import_sets_unchanged": true,
+    "assembly_removed": true
+  },
+  "verification": {
+    "native_instruction_bytes_covered": 28,
+    "paired_cases": 3282,
+    "source_report": "build/sources-goal-r1-flash-write-c/report.json",
+    "partition_write_modeled": true,
+    "caller_private_stack_alias_excluded": true,
+    "null_db_fault_address_checked": true,
+    "provider_mutations_checked": true,
+    "assembly_removed": true
+  },
+  "integration": {
+    "paired_cases": 1728,
+    "executions": 3456,
+    "source_report": "build/sources-goal-r1-flash-write-c/report.json",
+    "actual_C_write_adapter_partition_and_cache_lookup": true,
+    "modeled": [
+      "flash driver read",
+      "printf diagnostics"
+    ],
+    "checks": [
+      "FILE_MODE short circuit",
+      "actual FAL wrapping bounds and cache lookup",
+      "driver offset, immutable payload bytes and argument forwarding",
+      "negative driver/lookup/bounds errors map to native write code 3; file mode stays 2",
+      "ordered DB/partition/cache reads, diagnostics, output memory and preserved ABI"
+    ],
+    "limits": [
+      "Seeded private partition table/cache; initialization not executed",
+      "Flash driver and printf modeled; no physical flash or concurrency",
+      "Private frames and caller-clobbered registers/flags excluded"
+    ]
+  },
+  "negative_controls": [
+    {
+      "name": "wrong_mode_error",
+      "rejected": true
+    },
+    {
+      "name": "positive_result_is_error",
+      "rejected": true
+    }
+  ],
+  "contract": "Read volatile file-mode before the partition pointer; nonzero mode returns2 without FAL. Otherwise forward full partition/address/buffer/size; negative signed result maps3, nonnegative maps0. Sync remains ignored.",
+  "limits": [
+    "Native full28-byte body covered in3282 compatible cases. Private callee-stack aliases/frame words and incidental provider-entry register values deliberately excluded; callee-saved integer registers, return SP, masks, caller-owned sync and shared output checked.",
+    "1728 integration comparisons execute actual C adapter/FAL write/cache lookup. Final flash device and diagnostics modeled; table/cache seeded. No electrical write, erase, fstorage completion, startup or boot proof.",
+    "Read path now owns initialized scratch, so no current read contract requires reproducing saved private stack bytes. This supersedes old write-frame evidence for the changed implementation; it does not claim identical private memory.",
+    "852 units compile/compose.66 application and22 bootloader imports remain. No new persistent state, manifests or source qualification selections."
+  ],
+  "evidence_files": {
+    "build/sources-goal-r1-flash-write-c/report.json": "abb2aecfe5a45c1a1c4ef4b45cc71d1c20a36b59656d4e7e00886ad3ecfcbc1e",
+    "build/sources-goal-r1-flash-iterator-reviewed-c/report.json": "c6a68e4aa5466f89316c9009021479b30c9e6316b3711606ab187745ef7efae5",
+    "r1/src/application/board/fal-native/native_flash_write.h": "fed14e824120caaf50daaa5c7fa05801d9ffe8188744acae6cf633e701ee1cdd",
+    "build/goal-r1-flash-write-c/rea.json": "2030212a1bae97181a5adb099513df5f2c90c95c2a3032c7c9674ea15d7b757c",
+    "build/goal-r1-flash-write-c/verify.py": "0000a430b85c992f475df30e637df185a5f82805cdc6c06a98cf4e33225a47b4",
+    "build/goal-r1-flash-write-c/verification.json": "483fe926b3688b839ae7fcba638aa8a5c4f396a5127ed8aa58373bb6b3b2fbab",
+    "build/goal-r1-flash-write-c/verification.log": "f9a2a05b173ba138abf31bbb437deadf8c9f2e18e73b81c22df8dae3e312e444",
+    "build/goal-r1-flash-write-c/integrated.py": "dc1bcb01d7eebe1fd4104244ee01dd7ea0051daa4b0f22b3045f68e0892e5906",
+    "build/goal-r1-flash-write-c/integrated-results.json": "4d1b87cfb41bfe33188224812045eff296fa222c6705a25f4405642b690ecca1",
+    "build/goal-r1-flash-write-c/integrated.log": "dc1ad4f8451e5e4678bd1d560211c7922f46cd5320fea53cc415146f2d7d61b7",
+    "build/goal-r1-flash-write-c/negative.py": "e4b7bfaaab2356541e88e48e4ef0eeaf0b9ab3772ba4d96a307e03b058d37b65",
+    "build/goal-r1-flash-write-c/negative.json": "4875a12909a42560a7e5ecadaf5ca3cf88369367bf30d079e3fd05c79c2c715f",
+    "build/goal-r1-flash-write-c/negative.log": "a4651c19abb39243a5be76ba28ced30b890bf26726710f3ad7ad5859fe315a47",
+    "build/goal-r1-flash-write-c/r1-check.log": "ff00837ff85e19cf04a893c77e51ce602c362675651960cf956f13903b124dc6",
+    "build/goal-r1-flash-write-c/wrong_mode_error/native_flash_write.h": "d84f2c5c6a4a5e766dc6c77b0ef6d0037b624f44da3eaf810a2f4ed2508a3476",
+    "build/goal-r1-flash-write-c/wrong_mode_error/result.log": "fe978396444817b34a9d0f65ba214ef0065de59d8bfbf14596cb5327229d6064",
+    "build/goal-r1-flash-write-c/positive_result_is_error/native_flash_write.h": "92748116e92f3f6d0eca6e27f8d824abc875e9de9e87056738c020b6e6ca19ad",
+    "build/goal-r1-flash-write-c/positive_result_is_error/result.log": "fe978396444817b34a9d0f65ba214ef0065de59d8bfbf14596cb5327229d6064"
+  }
+}

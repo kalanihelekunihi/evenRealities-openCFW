@@ -1,0 +1,247 @@
+{
+  "schema_version": 1,
+  "source": "r1/src/application/board/native_glasses_status.c",
+  "native_roots": {
+    "r1_factory_status_timeout_6a668": {
+      "entry": "0x6a668",
+      "instruction_bytes": 64
+    },
+    "r1_factory_status_timeout_6a988": {
+      "entry": "0x6a988",
+      "instruction_bytes": 136
+    },
+    "r1_glasses_status_plan_command": {
+      "entry": "0x6a714",
+      "instruction_bytes": 348
+    },
+    "r1_touch_set_fast_mode": {
+      "entry": "0x4e070",
+      "instruction_bytes": 118
+    }
+  },
+  "report": "build/sources-goal-r1-glasses-status-c/report.json",
+  "compiled_units": 849,
+  "verification": {
+    "pairs": 10519,
+    "groups": {
+      "root_seeds": 5,
+      "status_edge_seeds": 8,
+      "deferred_wear_byte_modes": 5120,
+      "deferred_DCDC": 48,
+      "status_byte_and_edges": 4608,
+      "status_command_guard": 256,
+      "reply_handle_and_narrowing": 30,
+      "fast_mode_packing": 30,
+      "touch_client_ownership": 40,
+      "live_backend_mutations": 195,
+      "deferred_decision_and_signed_reload": 25,
+      "status_deferred_reset_lifecycle": 4,
+      "seeded_mixed_state": 150
+    },
+    "native_instruction_bytes_covered": 666,
+    "native_instruction_bytes_expected": 666,
+    "native_uncovered_byte_addresses": [],
+    "actual_C": [
+      "four new hardware policy roots",
+      "existing factory reset/state",
+      "existing touch service/client state",
+      "existing KV bit getter",
+      "existing bounded reply and glasses handle getter",
+      "existing parameter flag owner"
+    ],
+    "modeled": [
+      "logging",
+      "scheduler",
+      "slow-mode adapter",
+      "KV class read backend writing52 bytes",
+      "transport queue",
+      "RTOS flags",
+      "synthetic release",
+      "DC/DC supervisor service"
+    ]
+  },
+  "gap_integration": {
+    "native_uncovered_byte_addresses": [],
+    "native_instruction_bytes_covered": 1910,
+    "native_instruction_bytes_expected": 1910,
+    "pairs": 1696,
+    "groups": {
+      "ACK_seeds": 1,
+      "advertising_seeds": 1,
+      "event_seeds": 7,
+      "event_routing_keys_logs": 600,
+      "QWR_factory_connect": 64,
+      "disconnect_roles_advertising": 192,
+      "PHY_capture_completion": 150,
+      "PHY_completion_log_branches": 60,
+      "ACK_each_slot_and_occupied_byte": 128,
+      "ACK_live_backend_mutations": 18,
+      "ACK_scan_preserves_inactive": 4,
+      "live_backend_mutations": 264,
+      "connected_writer_actual_reader": 5,
+      "seeded_mixed_state": 200,
+      "supplemental_helpers": 2
+    },
+    "actual_C": [
+      "GAP event observer",
+      "ACK clear and canonical table",
+      "PHY helper and S140 gateway",
+      "SDK QWR assignment and three existing contexts",
+      "factory reset and existing state owner",
+      "control setter and existing byte",
+      "peer-address lookup and shared21-byte cache"
+    ],
+    "modeled": [
+      "logging",
+      "scheduler",
+      "connection-state query/count",
+      "status publisher",
+      "touch close",
+      "advertising query/start",
+      "SVC radio result",
+      "heap free",
+      "ACK mutex"
+    ]
+  },
+  "mutants": [
+    {
+      "name": "DCDC_enable",
+      "rejected": true
+    },
+    {
+      "name": "deferred_close_guard",
+      "rejected": true
+    },
+    {
+      "name": "signed_diagnostic",
+      "rejected": true
+    },
+    {
+      "name": "wear_bit",
+      "rejected": true
+    },
+    {
+      "name": "packet_ack",
+      "rejected": true
+    },
+    {
+      "name": "command_guard",
+      "rejected": true
+    },
+    {
+      "name": "touch_delay",
+      "rejected": true
+    },
+    {
+      "name": "DCDC_delay",
+      "rejected": true
+    },
+    {
+      "name": "configured_DCDC_guard",
+      "rejected": true
+    },
+    {
+      "name": "fast_flag_byte",
+      "rejected": true
+    },
+    {
+      "name": "packed_cancel",
+      "rejected": true
+    },
+    {
+      "name": "packed_schedule",
+      "rejected": true
+    },
+    {
+      "name": "reply_length",
+      "rejected": true
+    },
+    {
+      "name": "wear_edge_guard",
+      "rejected": true
+    },
+    {
+      "name": "DCDC_immediate_disable",
+      "rejected": true
+    },
+    {
+      "name": "display_edge_store",
+      "rejected": true
+    }
+  ],
+  "audit": {
+    "unchanged_prior_nongenerated_objects": 838,
+    "changed_prior_nongenerated_objects": [],
+    "changed_generated_objects": [
+      "{gen}/r1_startup_vectors.S",
+      "{gen}/r1_uecc.c"
+    ],
+    "added_objects": [
+      "r1/src/application/board/native_glasses_status.c"
+    ],
+    "removed_imports": [
+      "r1_factory_status_timeout_6a668",
+      "r1_factory_status_timeout_6a988"
+    ],
+    "added_imports": [],
+    "application_imports": 70,
+    "new_mutable_state": false,
+    "existing_state_owners": [
+      "r1_factory_mode_state",
+      "r1_connection_parameter_flags",
+      "r1_touch_client_bits",
+      "r1_connection_field10",
+      "r1_device_info_record_kv_handle"
+    ],
+    "assembly_added": false
+  },
+  "contract": [
+    "The deferred DC/DC callback ignores its scheduled argument, preserves repeated logging-mode reads, then calls typed S140 sd_power_dcdc_mode_set(1). The stock SVC number is0x3f and its result is ignored.",
+    "The deferred touch-close callback captures the zero/nonzero decision from existing factory state offset3 before diagnostics. Zero closes touch source0 even if a logging backend changes the byte meanwhile. Nonzero skips close and diagnostics reload the signed byte after their mode reads.",
+    "The status command ignores its connection argument and only interprets subcommand byte3 equal1. It captures wear/display from original packet byte4 bits7/6 and sets packet byte4 to1 before diagnostics. Other subcommands forward the unchanged seven-byte record.",
+    "On wear change it stores offset3, obtains the existing device-info configuration bit, and cancels the same exact deferred-close callback. Wear-on opens touch and, when the configuration bit is zero, cancels deferred DC/DC and immediately requests DC/DC0. Wear-off schedules deferred close at0x96000 and, when the configuration bit is zero, cancels and schedules deferred DC/DC at0x7800. The configuration output remains live across the subsequent service boundaries.",
+    "Display changes store existing factory offset4 before reading the glasses handle. Display-on calls the actual C fast-mode helper. Display-off forwards the handle and zero through the existing slow-mode adapter. The same seven-byte mutable packet is sent through the existing bounded-reply helper, preserving its invalid-handle guard and low-byte transport result.",
+    "Fast mode clears existing parameter observer flag1 at0x200064bf, logs the full handle, cancels the delayed parameter callback for (handle<<16)|0/1/2 in order, then schedules the same callback with (handle<<16)|2 and delay0. No parameter, factory, touch or connection state is duplicated."
+  ],
+  "limits": [
+    "The actual new C bodies, existing factory reset/state, touch open/close/client state, KV bit getter, bounded reply/glasses handle getter and parameter flag owner execute together. Slow-mode policy is modeled at its previously verified API boundary. Logging, scheduler, cached KV backend, transmit queue, RTOS flags, synthetic release and DC/DC supervisor service are modeled. No physical sensor, regulator or peer connection is exercised.",
+    "The KV read backend always supplies all52 requested bytes. These cases validate the configuration bit and its live output but do not establish malformed cached-class-size behavior, real flash persistence or power-failure recovery. The pre-existing KV getter assembly bridge remains unchanged; no assembly is added by this source.",
+    "All666 native instruction bytes across the four roots execute in the controlled replay. All scalar results, seven-byte reply records, existing state, provider ordering, masks, callee-saved integer/FP registers, SP and stack/input guards are compared. Private scratch registers and stack addresses are excluded.",
+    "The GAP integration executes the actual new C callback identities during its reset-cancel path, retaining all1696 prior stock/C comparisons and1910 native instruction-byte coverage. It does not run the real delayed queue or physically deliver a wear/display message. The four explicit lifecycle cases invoke the actual status/deferred/reset bodies in order without pretending their time delays elapsed.",
+    "Source execution cannot enter stock executable addresses. Fixed-address controlled linker fixtures validate aliases but do not establish final firmware placement, complete linking, boot or radio timing. No new mutable state is introduced.",
+    "The normal source build compiles849 units, resolves both factory callback imports and adds no new imports, leaving70 application imports and22 bootloader linker imports. R1 manifest checking passes; global checking retains the unrelated unlisted G2 resident_rom_thumb_set.S issue. Byte identity and paid compiler availability are not requirements."
+  ],
+  "evidence_files": {
+    "r1/src/application/board/native_glasses_status.c": "1d55c59b30971b9bba3be44f9f562136670529a2720162e744af8b535f032e6a",
+    "build/sources-goal-r1-glasses-status-c/report.json": "a0a2b02cc0c9996ad1ef43810fb1d74e2d062f5058bdc6a639383e10c32b0225",
+    "build/sources-goal-r1-gap-event-c/report.json": "0973282f7106676425df80e975b01a178ee62155925ff2d2537575c33a897269",
+    "r1/src/sources.json": "72fcd8e2539d77536cee773e6f04c572f6e6e06ad60a308dbc1c908565cd3c4a",
+    "r1/src/application/runtime/native_factory_mode.c": "bb2b2f81288471ca12d1cfcb2ea41a9e7b86aea6fe47eff85f45f2ffc9ee82b9",
+    "r1/src/application/runtime/native_factory_mode.h": "d824aa69a66a0a7ce73a7f3e71e69d13a3efa3cd359cb72b6ae8a2489523e6d3",
+    "r1/src/application/board/native_gap_events.c": "38ef4140c3e9b4b0929af0173b0005171c1cd50949a677fcbedae9cc64f6a185",
+    "r1/src/application/board/native_connection_parameters.c": "8a58564e5dbdcaad3be5eb3d10e2bcc55f6b1be61aa0ecf17a4e080fdf8e13a6",
+    "r1/src/application/runtime/native_touch_services.c": "838ff73a88388d0d4b079204b2df6acea4dbf7f9a894e226a4cb17da5135bcd8",
+    "r1/src/application/runtime/native_system_settings.c": "b0636b9e9e1d6aab8e103e1caa99b406b6e5561da9fa0b6c5ba5173e81cbcba2",
+    "r1/src/application/runtime/native_battery_kv_config.c": "16b0aa9ca3cc92340178e94ef332241e38a6ae2393c230f6e4bf950039396ebb",
+    "r1/src/application/board/native_legacy_reply.c": "66a54d9d5dc0e12cdf225a79d1282185d67a3bce299833b0e25e8c8ede2bee69",
+    "r1/src/application/board/connection_handle.c": "a4039c569b5178850ba3b05990521ea21d966debd447fd50487c62859ae0122b",
+    "build/goal-r1-factory-callbacks-c/rea.json": "0b2ab1560d1fec1af09ace3b94c71f002dd039a6b2aab72ca6d39ca7371dde95",
+    "build/goal-r1-factory-callbacks-c/0x6a668.asm": "a85766c3c0b29ba899f471760bb472fd5e7c6e895e82613d3fc83f707e405981",
+    "build/goal-r1-factory-callbacks-c/0x6a988.asm": "953e8f76b9040d34f35ace2f19a0d6e2a2f4c1ed9c2264ca4beb26691cbbf84e",
+    "build/goal-r1-factory-callbacks-c/strings.py": "2a82e9688b1cc12059ec6b1330a8e20df3f9f396259045202d699a191f079ae0",
+    "build/goal-r1-factory-callbacks-c/strings.json": "554c3f13995ffd64d9aad2f5f3c682970d3a4a9259936713f1c1bc5838e05ede",
+    "build/goal-r1-factory-callbacks-c/verify.py": "6e17292266d248216616f650c838fb260b4818093320983c2a5d1ce84578b269",
+    "build/goal-r1-factory-callbacks-c/verification.json": "b79983c05545b23c144c8b4762cb00bb6e4ab623510563f25f47e3bcd43873a6",
+    "build/goal-r1-factory-callbacks-c/verification.log": "d36a78874aa55922e8f1e54ebec0e63f320d3fe77b6c0a284a9d6db222747ad8",
+    "build/goal-r1-factory-callbacks-c/mutants.py": "b43ef1b69b88e4d177f46139551b69f0fb6a81a229f713873d0967ca636bb261",
+    "build/goal-r1-factory-callbacks-c/mutants.json": "10ec9f5ed5fde8764ec3a080568ff78264af5e5bbee37f33e9fa9cf4b9045aaf",
+    "build/goal-r1-factory-callbacks-c/mutants.log": "0b5ab936c61a8d6fdf9f28063bc6ae3809adaea01bd4edf75b8be96fc67a2e71",
+    "build/goal-r1-factory-callbacks-c/audit.py": "c30bf4d9d1a44435e4d4502da12323a850566c0beb435fdcfcb87547eddab315",
+    "build/goal-r1-factory-callbacks-c/object-audit.json": "7615ad954411eea3b8fffd08cd55f6aa7f81276c8f5b404a68c64ff26c9c2c27",
+    "build/goal-r1-factory-callbacks-c/r1-check.log": "8cd5dde4f2d8bb3dc19881eacd27d2f514ea2b0bf3533ebdcea53a40d23467a6",
+    "build/goal-r1-factory-callbacks-c/sources-check.log": "cff39a872a24be05eba76f0805d9b30b126d1f44c40a30d9175024f99a3c9f7c",
+    "build/goal-r1-factory-callbacks-c/gap-integration/verify.py": "552ea2f14a8ac02c06b82c033fdca30b0a0af30ab7fa2d24e88d525c2ef3f662",
+    "build/goal-r1-factory-callbacks-c/gap-integration/verification.json": "ff9849b4cbe462d63f190d0aea75f7889728705a44489a555ba0ae68070f4974",
+    "build/goal-r1-factory-callbacks-c/gap-integration/verification.log": "c6ab08fe2d2b1939131d690cef42457876babf2ed8c3e1673abfafbaba4bff93"
+  }
+}

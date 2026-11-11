@@ -1,0 +1,136 @@
+{
+  "schema_version": 1,
+  "source": "r1/src/application/board/native_gap_identity.c",
+  "native_roots": [
+    "0x66c4c",
+    "0x4e48c"
+  ],
+  "report": "build/sources-goal-r1-gap-identity-c/report.json",
+  "compiled_units": 830,
+  "application_imports": 74,
+  "added_imports": [],
+  "removed_imports": [
+    "r1_nordic_gap_identity_configuration"
+  ],
+  "prior_objects_unchanged": 827,
+  "changed_generated_objects": [
+    [
+      "r1-bootloader",
+      "{gen}/r1_startup_vectors.S"
+    ],
+    [
+      "r1-bootloader",
+      "{gen}/r1_uecc.c"
+    ]
+  ],
+  "added_units": [
+    [
+      "r1-application",
+      "r1/src/application/board/native_gap_identity.c"
+    ]
+  ],
+  "verification": {
+    "identity_pairs": 960,
+    "ppcp_pairs": 1024,
+    "defined_partial_failure_cases": 21,
+    "actual_formatter_and_sdk_state_init": false
+  },
+  "actual_formatter_SDK_state_integration": {
+    "identity_pairs": 120,
+    "ppcp_pairs": 12,
+    "defined_partial_failure_cases": 21,
+    "actual_formatter_and_sdk_state_init": true
+  },
+  "mutants": {
+    "rejected": [
+      "address_copy",
+      "phone_clear",
+      "factory_config",
+      "name_order",
+      "security",
+      "appearance",
+      "glasses_clear",
+      "preferred_latency",
+      "init_after_error",
+      "ppcp_return"
+    ]
+  },
+  "rea_receipts": "r1/docs/reference/gap-identity-rea-bytes.json",
+  "rea_bytes_match_pinned_stock": true,
+  "new_owners": [
+    {
+      "symbol": "r1_connection_parameter_profile",
+      "stock_address": "0x200064c0",
+      "size": 1,
+      "cold_rw": "01"
+    },
+    {
+      "symbol": "r1_ble_controller_address",
+      "stock_address": "0x200064c1",
+      "size": 7,
+      "cold_rw": "00000000000000"
+    },
+    {
+      "symbol": "r1_ble_phone_peer_address",
+      "stock_address": "0x200064c8",
+      "size": 7,
+      "cold_rw": "00000000000000"
+    },
+    {
+      "symbol": "r1_ble_glasses_peer_address",
+      "stock_address": "0x200064cf",
+      "size": 7,
+      "cold_rw": "00000000000000"
+    },
+    {
+      "symbol": "r1_ble_device_name",
+      "stock_address": "0x200064d6",
+      "size": 32,
+      "cold_rw": "4556454e20523100000000000000000000000000000000000000000000000000"
+    }
+  ],
+  "contract": {
+    "name": "EVEN R1_%02X%02X%02X of addr[2],addr[1],addr[0]; append _FAC for full config value 0x55",
+    "peer_address_records": "both seven-byte records zeroed before controller address snapshot and configuration getter",
+    "security_mode": "0x11 open",
+    "appearance": "0x240",
+    "preferred_profiles": [
+      [
+        12,
+        24,
+        4,
+        600
+      ],
+      [
+        12,
+        24,
+        4,
+        600
+      ]
+    ],
+    "preferred_select": "live profile byte zero/nonzero",
+    "checked_errors": "log and continue; PPCP returns original status",
+    "final_step": "ble_conn_state_init even after earlier errors",
+    "defined_failure_fallback": "controller query buffer is zero-initialized; native private stack garbage is intentionally not reproduced"
+  },
+  "limitations": [
+    "Primary stock/C comparisons cover controller query outputs that fill all seven bytes, including nonzero reported status.",
+    "Partial/unwritten-output tests validate the new C zero fallback separately, without claiming equality to native uninitialized private stack.",
+    "Primary probe models formatter and SDK connection-state reset; deeper probe executes the actual formatter and SDK reset body. Controller services and error/configuration providers remain modeled.",
+    "RAM store width/order inside uninterrupted copies is not an identity claim; logical state at external calls is checked.",
+    "No physical radio, final linker placement, final application link or boot proof; byte identity is not required by current user instruction."
+  ],
+  "evidence_files": {
+    "build/sources-goal-r1-gap-identity-c/report.json": "530fac9419be4f1c56d80b320b6a62e84e8bbace4462289979a0d8c0ad94cef7",
+    "r1/src/sources.json": "200671e285a7d3038026bc422c04d4005748fcc84729626ab6e1f22714ab2142",
+    "r1/src/application/board/native_gap_identity.c": "c0d9fbcd06d975c6d64cc68ad1ce89217cb9266dfc644179985aed198db0aa01",
+    "r1/src/application/board/native_ble_identity.h": "aecd74b3ca29dc3e566ff536d710e9e61635a01065da9c6e535d0d48dff1b78f",
+    "build/goal-r1-fstorage-registry/expanded-rw.bin": "87fdee392022fdbe23dd0daf3e859fb14f3ce26ba3e8403aab56dc9d9a913317",
+    "build/goal-r1-gap-identity-c/verify.py": "c60dab6808142794db6700351d3e0bfd69e97c408e99529944c5844ed80246f9",
+    "build/goal-r1-gap-identity-c/verification.json": "34206a8e947eb8ccab9e2cbe13765ededbb236d453785068bb0bee617163e8a6",
+    "build/goal-r1-gap-identity-c/integration.json": "466dc2291b29faf8a7c1c26f7f4d3744157604ec480f3bda42907d608ebba257",
+    "build/goal-r1-gap-identity-c/mutants.py": "aacf49b14e2530205bca44f561d79b3572cf00c56e58a00b8d20ed511681f398",
+    "build/goal-r1-gap-identity-c/mutants.json": "0b0c72b951d2b3c423e38d187f44858451ecb0c37278e5be23f75f94d2a29975",
+    "r1/docs/reference/gap-identity-rea-bytes.json": "81ae877e77c62260a532e9deb1b89ff0bb69cc37f6e5f069a07f7f2f9b238f8f"
+  }
+}

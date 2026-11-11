@@ -241,3 +241,167 @@
             mtCOVERAGE_TEST_MARKER();
         }
     }
+
+/* Stock 0x96314: priority changes retain inheritance and ready-list rules. */
+#define prvGetTCBFromHandle(handle) (((handle) == NULL) ? pxCurrentTCB : (TCB_t *)(handle))
+#define taskYIELD_IF_USING_PREEMPTION() portYIELD_WITHIN_API()
+void vTaskPrioritySet( TaskHandle_t xTask,
+                           UBaseType_t uxNewPriority )
+    {
+        TCB_t * pxTCB;
+        UBaseType_t uxCurrentBasePriority, uxPriorityUsedOnEntry;
+        BaseType_t xYieldRequired = pdFALSE;
+
+        configASSERT( uxNewPriority < configMAX_PRIORITIES );
+
+        /* Ensure the new priority is valid. */
+        if( uxNewPriority >= ( UBaseType_t ) configMAX_PRIORITIES )
+        {
+            uxNewPriority = ( UBaseType_t ) configMAX_PRIORITIES - ( UBaseType_t ) 1U;
+        }
+        else
+        {
+            mtCOVERAGE_TEST_MARKER();
+        }
+
+        taskENTER_CRITICAL();
+        {
+            /* If null is passed in here then it is the priority of the calling
+             * task that is being changed. */
+            pxTCB = prvGetTCBFromHandle( xTask );
+
+            traceTASK_PRIORITY_SET( pxTCB, uxNewPriority );
+
+            #if ( configUSE_MUTEXES == 1 )
+            {
+                uxCurrentBasePriority = pxTCB->uxBasePriority;
+            }
+            #else
+            {
+                uxCurrentBasePriority = pxTCB->uxPriority;
+            }
+            #endif
+
+            if( uxCurrentBasePriority != uxNewPriority )
+            {
+                /* The priority change may have readied a task of higher
+                 * priority than the calling task. */
+                if( uxNewPriority > uxCurrentBasePriority )
+                {
+                    if( pxTCB != pxCurrentTCB )
+                    {
+                        /* The priority of a task other than the currently
+                         * running task is being raised.  Is the priority being
+                         * raised above that of the running task? */
+                        if( uxNewPriority >= pxCurrentTCB->uxPriority )
+                        {
+                            xYieldRequired = pdTRUE;
+                        }
+                        else
+                        {
+                            mtCOVERAGE_TEST_MARKER();
+                        }
+                    }
+                    else
+                    {
+                        /* The priority of the running task is being raised,
+                         * but the running task must already be the highest
+                         * priority task able to run so no yield is required. */
+                    }
+                }
+                else if( pxTCB == pxCurrentTCB )
+                {
+                    /* Setting the priority of the running task down means
+                     * there may now be another task of higher priority that
+                     * is ready to execute. */
+                    xYieldRequired = pdTRUE;
+                }
+                else
+                {
+                    /* Setting the priority of any other task down does not
+                     * require a yield as the running task must be above the
+                     * new priority of the task being modified. */
+                }
+
+                /* Remember the ready list the task might be referenced from
+                 * before its uxPriority member is changed so the
+                 * taskRESET_READY_PRIORITY() macro can function correctly. */
+                uxPriorityUsedOnEntry = pxTCB->uxPriority;
+
+                #if ( configUSE_MUTEXES == 1 )
+                {
+                    /* Only change the priority being used if the task is not
+                     * currently using an inherited priority. */
+                    if( pxTCB->uxBasePriority == pxTCB->uxPriority )
+                    {
+                        pxTCB->uxPriority = uxNewPriority;
+                    }
+                    else
+                    {
+                        mtCOVERAGE_TEST_MARKER();
+                    }
+
+                    /* The base priority gets set whatever. */
+                    pxTCB->uxBasePriority = uxNewPriority;
+                }
+                #else /* if ( configUSE_MUTEXES == 1 ) */
+                {
+                    pxTCB->uxPriority = uxNewPriority;
+                }
+                #endif /* if ( configUSE_MUTEXES == 1 ) */
+
+                /* Only reset the event list item value if the value is not
+                 * being used for anything else. */
+                if( ( listGET_LIST_ITEM_VALUE( &( pxTCB->xEventListItem ) ) & taskEVENT_LIST_ITEM_VALUE_IN_USE ) == 0UL )
+                {
+                    listSET_LIST_ITEM_VALUE( &( pxTCB->xEventListItem ), ( ( TickType_t ) configMAX_PRIORITIES - ( TickType_t ) uxNewPriority ) ); /*lint !e961 MISRA exception as the casts are only redundant for some ports. */
+                }
+                else
+                {
+                    mtCOVERAGE_TEST_MARKER();
+                }
+
+                /* If the task is in the blocked or suspended list we need do
+                 * nothing more than change its priority variable. However, if
+                 * the task is in a ready list it needs to be removed and placed
+                 * in the list appropriate to its new priority. */
+                if( listIS_CONTAINED_WITHIN( &( pxReadyTasksLists[ uxPriorityUsedOnEntry ] ), &( pxTCB->xStateListItem ) ) != pdFALSE )
+                {
+                    /* The task is currently in its ready list - remove before
+                     * adding it to its new ready list.  As we are in a critical
+                     * section we can do this even if the scheduler is suspended. */
+                    if( uxListRemove( &( pxTCB->xStateListItem ) ) == ( UBaseType_t ) 0 )
+                    {
+                        /* It is known that the task is in its ready list so
+                         * there is no need to check again and the port level
+                         * reset macro can be called directly. */
+                        portRESET_READY_PRIORITY( uxPriorityUsedOnEntry, uxTopReadyPriority );
+                    }
+                    else
+                    {
+                        mtCOVERAGE_TEST_MARKER();
+                    }
+
+                    prvAddTaskToReadyList( pxTCB );
+                }
+                else
+                {
+                    mtCOVERAGE_TEST_MARKER();
+                }
+
+                if( xYieldRequired != pdFALSE )
+                {
+                    taskYIELD_IF_USING_PREEMPTION();
+                }
+                else
+                {
+                    mtCOVERAGE_TEST_MARKER();
+                }
+
+                /* Remove compiler warning about unused variables when the port
+                 * optimised task selection is not being used. */
+                ( void ) uxPriorityUsedOnEntry;
+            }
+        }
+        taskEXIT_CRITICAL();
+    }

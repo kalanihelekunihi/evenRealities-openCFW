@@ -26,7 +26,7 @@ uint32_t opencfw_bl_scheduler_resume(void) {
     uint32_t switched=0;uintptr_t moved=0;
     if (!WORD(0x2002716c)) {
         (void)opencfw_bl_mask_interrupts();WORD(UINT32_MAX)=0;
-        for (;;)__asm__ volatile("b .":::"memory");
+        for (;;){ }
     }
     opencfw_bl_kernel_enter();WORD(0x2002716c)--;
     if (!WORD(0x2002716c) && WORD(0x20027144)) {
@@ -56,3 +56,7 @@ uint32_t opencfw_bl_scheduler_resume(void) {
     }
     opencfw_bl_kernel_exit();return switched;
 }
+
+/* Stock entry names that branch straight to the provider above. */
+__typeof__(opencfw_bl_scheduler_resume) resume_scheduler __attribute__((alias("opencfw_bl_scheduler_resume")));
+__typeof__(opencfw_bl_scheduler_suspend) suspend_scheduler __attribute__((alias("opencfw_bl_scheduler_suspend")));

@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "report": "build/sources-goal-r1-rtt-read-final-c/report.json",
+  "report_sha256": "ff5d7f5e812e05eb870c60fa7af50325282018cea306d216395cf1dc31b0ecf6",
+  "manifest_sha256": "50a23109fd5a5a4c84a12152aabeeb0c989e033932399ff35604edc91bf8a3f6",
+  "verification": {
+    "warm_pairs": 7792,
+    "cold_pairs": 1024,
+    "total_pairs": 8816,
+    "actual_read_copy_init_code": true,
+    "host_write_offset_mutated_at_copy_boundary": true,
+    "cold_host_feed_after_initialization": true,
+    "all_64_byte_ring_offset_pairs": true,
+    "caller_sp_saved_registers_masks_and_guards": true,
+    "no_second_initializer_or_buffers": true,
+    "limits": [
+      "Configured channels zero/one and valid ring offsets only",
+      "Stable configuration; asynchronous observation inside a multiword snapshot is not modeled",
+      "No physical J-Link/debugger transport or fault delivery proof"
+    ]
+  },
+  "defects": [
+    {
+      "defect": "incomplete-signature-check",
+      "compiled": true,
+      "behavioral_assertion_rejected": true
+    },
+    {
+      "defect": "wrong-critical-mask",
+      "compiled": true,
+      "behavioral_assertion_rejected": true
+    },
+    {
+      "defect": "missing-wrap",
+      "compiled": true,
+      "behavioral_assertion_rejected": true
+    },
+    {
+      "defect": "reload-host-write-offset",
+      "compiled": true,
+      "behavioral_assertion_rejected": true
+    }
+  ],
+  "audit": {
+    "unchanged_prior_object_hashes": 801,
+    "generated_boot_allocated_bytes_and_relocations_unchanged": true,
+    "imports_unchanged": true,
+    "one_initializer_control_block_and_buffer_pair": true,
+    "existing_write_graph_unchanged": true,
+    "only_manifest_change_new_read_unit": true
+  },
+  "rea_evidence_id": "ev_cd06b7d668fb95f45b8cf1cae78874b3314485820d4f035fc7884074df683cad",
+  "rea_read_wrapper_and_no_lock_match_raw": true,
+  "evidence_files": {
+    "build/goal-r1-rtt-read-c/verify.py": "c7f42e4416e7c020ea922cd5fce85d08fc327caa33df7118e95bf7d4912f4fce",
+    "build/goal-r1-rtt-read-c/defects.py": "49197faa983be2cc9cb83167aae30b8d75d0fba1eeb7797135213c7c27a77686",
+    "build/goal-r1-rtt-read-c/audit.py": "8df42d550faacb5692390bea71408d5a0ee32ab71d710414aee0ec7c40bb67f6",
+    "build/goal-r1-rtt-read-c/document.py": "f3552f9db02a62833322603a04a98c31c23160adb3f656e5ed20099d8494043e",
+    "build/goal-r1-rtt-read-c/verification.json": "392f8746a500be4e71e835462eb87b3676b3f9b2458044c645c61f201c4bbc90",
+    "build/goal-r1-rtt-read-c/defects.json": "287e1c6404587f98c7aa660405b2cba3552afb25f36c4c0fec9404cfd173bf9d",
+    "build/goal-r1-rtt-read-c/audit.json": "4fce76e41445096a371caa5656a3764b4f5e4e1d0795b02e31930ea99d0ce296",
+    "build/goal-r1-rtt-read-c/source.elf": "e1606bb625032f218f9d902931c391f087a54e63d7970988820fe4a9a5ad0e0d",
+    "build/goal-r1-rtt-read-c/rea-read.json": "c2fb8a9abe64ff8d3cfb1e2678f72c708f8d6d792ed37a6f85b219de03cf85ad",
+    "build/goal-r1-rtt-read-c/verify-final.log": "c1e8ab19f7f0e11bbea8e1e27820d53568c82c5918c423a0eea52aef12bb4770",
+    "build/goal-r1-rtt-read-c/r1-sources-check.log": "967e2bcd64e37397bb458dc3d0c8e0510fb6062543a85335c5c2da2386a49dcd",
+    "build/goal-r1-rtt-read-c/sources-check.log": "ef097ffeb2c92255f75ea5acb7a2316787ac0896b72863d5f7682de346e98977",
+    "build/goal-r1-rtt-read-c/boot-link/report.json": "cfae20e3fbcad2c13864eb1b30a946e0a84fe768002ac3e0f27cfa748e535591"
+  },
+  "source_and_header_inputs": {
+    "r1/src/application/runtime/native_rtt_read.c": "0a4cc8db1451d549f81f85356b575818d4e4249e8285e584ee6c12f61a1b447d",
+    "r1/src/application/board/native_segger_rtt_initialize.c": "f5c8724fa98eae4e31b2d715a597accd9ae5330722b2c678974e735845ce080f",
+    "vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/external/segger_rtt/SEGGER_RTT.h": "333204a987dc46f3ab4446dd6d9620311e28a31b8ac9ccaca70964d773213354",
+    "vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/external/segger_rtt/SEGGER_RTT.c": "52f9a10baa6cea801134e7eb87848631fd03232540366c407c2a9183641c9088"
+  },
+  "limitations": [
+    "Actual native/C reader, copy routines and initializer execute in Unicorn.",
+    "Host changes modeled only after initialization and at copy entry; no physical debugger timing or multiword-snapshot atomicity proof.",
+    "Valid configured channels, nonoverlapping destinations and valid ring geometry; no new invalid-input recovery policy.",
+    "Manager worker, console tokenizer/dispatch, startup placement and full application final link remain incomplete.",
+    "No source-plan selection changes."
+  ]
+}

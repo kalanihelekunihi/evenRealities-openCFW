@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "source": "r1/src/application/board/native_connection_phy.c",
+  "native_entry": "0x4d2f4",
+  "native_code_bytes": 224,
+  "report": "build/sources-goal-r1-phy-c/report.json",
+  "compiled_units": 846,
+  "verification": {
+    "pairs": 55440,
+    "passed": true
+  },
+  "targeted_smoke_pairs": 5,
+  "mutants": [
+    {
+      "name": "invalid_handle",
+      "rejected": true
+    },
+    {
+      "name": "connected_state",
+      "rejected": true
+    },
+    {
+      "name": "phy_order",
+      "rejected": true
+    },
+    {
+      "name": "error_return",
+      "rejected": true
+    },
+    {
+      "name": "invalid_return",
+      "rejected": true
+    },
+    {
+      "name": "request_marker",
+      "rejected": true
+    }
+  ],
+  "object_audit": {
+    "unchanged_prior_objects": 843,
+    "unchanged_nongenerated": 835,
+    "changed_prior_nongenerated": [],
+    "changed_generated_objects": [
+      "{gen}/r1_startup_vectors.S",
+      "{gen}/r1_uecc.c"
+    ],
+    "added_objects": [
+      "r1/src/application/board/native_connection_phy.c"
+    ],
+    "import_set_unchanged": true,
+    "new_mutable_state": false
+  },
+  "contract": [
+    "Reject exact full-word handle0xffff or any nonconnected result and return8. Connection-state lookup uses the typed uint16 SDK key.",
+    "Capture low-byte TX and RX settings before diagnostics; preserve full input words in request logs and full handle in invalid/request logs. Repeated mode reads preserve stock short-circuit behavior.",
+    "Execute the pinned S140 sd_ble_gap_phy_update gateway SVC0x8f with uint16 handle and TX/RX bytes in that order. Return the full SDK status; log nonzero failures without invoking the fatal/error handler."
+  ],
+  "limits": [
+    "Connection-state, logging and supervisor-call service results are modeled; the actual C policy and S140 SVC instructions execute. No radio or physical connection is exercised.",
+    "All scalar results, log calls/arguments, callee-saved integer/FP registers, masks, stack position and guards are compared. Private scratch-register restoration and stack addresses are outside the C contract.",
+    "Adds no mutable state or assembly. The broad GAP event writer remains open, so the application import set is unchanged at71. This is a tested lower dependency, not a final firmware link or boot proof.",
+    "Byte identity and a paid compiler are not requirements. Global sources-check retains the pre-existing unrelated unlisted G2 resident_rom_thumb_set.S entry."
+  ],
+  "evidence_files": {
+    "r1/src/application/board/native_connection_phy.c": "e9b5b4feb9ad78e4a11201fce3e72fc8c278f4df97e56d516b15973214c5c1a6",
+    "r1/src/sources.json": "fa9d9e266d0b3ca0227d2a5ce0362b7759b5179420ebc7956b564f4edead3777",
+    "build/sources-goal-r1-phy-c/report.json": "1e6d38cf38a7ef8042f2fb8f685d892eea0c6db122a1634f22359cbf1f360ac7",
+    "build/goal-r1-phy-c/rea.json": "78ffcdc23f4e22902e87d919f88d30958915cc097975716e1dbcaba8ac787f3f",
+    "build/goal-r1-phy-c/verify.py": "c8fec5166a74994ba6faa4dc1b4f4d8781a0c78d23f6752c8699b9de8e143f8a",
+    "build/goal-r1-phy-c/verification.json": "9923582f03cd9c5d4fd5be3de418ab3cc69f539fcace9e35fb10ff73023984f7",
+    "build/goal-r1-phy-c/verification.log": "b43e0d0842d53705908b12b480d9721d56ffb4d45a9ae1c988d0cf37c5f12129",
+    "build/goal-r1-phy-c/mutants.py": "e5b3cc55ed9bbb68c7d780bb5e96b9699bc78c06634b36e0c8a41f8b802a8ac9",
+    "build/goal-r1-phy-c/mutants.json": "e4d82ca0e7e627fb3dc46c002df932604638bb4accb846d201406580668876bc",
+    "build/goal-r1-phy-c/mutants.log": "8fc2d139f8dc39dd647553e1482a56b3106b6d2619c74f05e3a2c26f5766e464",
+    "build/goal-r1-phy-c/final-smoke.log": "9d3c0ccf54be8a9becfab543483fda4e49b6f26ed8cb433744384ebc7aec07de",
+    "build/goal-r1-phy-c/object-audit.json": "d2d87fcba0bf651bf843c2b4a5285d13627cd95bb885fe83674deb27f36859f5",
+    "build/goal-r1-phy-c/r1-check.log": "c172fc94c6a6544fbdeeebeb66ca5890cd92295c79ee305b52866669f720350e",
+    "build/goal-r1-phy-c/sources-check.log": "c260859c9bbaed0ea450abf2c3312c6f2c30378ef002f0df371e9e3d78cf11f4"
+  }
+}

@@ -2,35 +2,19 @@
 
 /* Native 0x325a68..0x325b12. This callback composes already selected
  * queue-count, capacity, timing, allocator, and sender providers. Native
- * MPYWHUL/MPYW are retained as named ARC ISA, with test-only host models. */
+ * MPYWHUL/MPYW are 32 x 16 / 16 x 16 products written in C. */
 extern uint32_t opencfw_em9305_phy_packet_alloc_32d2f0(uint32_t);
 extern uint32_t opencfw_em9305_phy_queue_count_314114(uintptr_t);
 extern uint32_t opencfw_em9305_ll_event_mode_32d4b0(uintptr_t);
 extern uint32_t opencfw_em9305_radio_record_timing_30c40c(uint32_t,uint32_t);
 extern uint32_t opencfw_em9305_phy_packet_send_32d32c(uintptr_t,uintptr_t);
-#ifndef __arc__
-extern uint32_t opencfw_em9305_test_mpywhul(uint32_t,uint32_t);
-extern uint32_t opencfw_em9305_test_mpyw(uint32_t,uint32_t);
-#endif
 static uint32_t multiply_whul(uint32_t a,uint32_t b)
 {
-#ifdef __arc__
-    uint32_t result;
-    __asm__ volatile("mpywhul %0,%1,%2":"=r"(result):"r"(a),"r"(b));
-    return result;
-#else
-    return opencfw_em9305_test_mpywhul(a,b);
-#endif
+    return (uint32_t)a*(uint16_t)b;
 }
 static uint32_t multiply_w(uint32_t a,uint32_t b)
 {
-#ifdef __arc__
-    uint32_t result;
-    __asm__ volatile("mpyw %0,%1,%2":"=r"(result):"r"(a),"r"(b));
-    return result;
-#else
-    return opencfw_em9305_test_mpyw(a,b);
-#endif
+    return (uint32_t)((int32_t)(int16_t)a*(int16_t)b);
 }
 uint32_t opencfw_em9305_mode_callback_325a68(uintptr_t context,
                                                uintptr_t callback_identity)

@@ -1,22 +1,16 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_31fb98\n"
-".type opencfw_em9305_child_31fb98,@function\n"
-"opencfw_em9305_child_31fb98:\n"
-"L31fb98:\n"
-"push_s blink\n"
-"L31fb9a:\n"
-"ld_s r0,[r0,0x24]\n"
-"L31fb9c:\n"
-"bl.d opencfw_em9305_auxiliary_signal_304394\n"
-"L31fba0:\n"
-"stb 1,[r0,1]\n"
-"L31fba4:\n"
-"pop_s blink\n"
-"L31fba6:\n"
-"j_s.d [blink]\n"
-"L31fba8:\n"
-"mov_s r0,0\n"
-".size opencfw_em9305_child_31fb98,.-opencfw_em9305_child_31fb98\n"
-);
+/* Stock 0x31fb98: p = word[a+0x24]; sets byte p+1 to 1; auxiliary_signal_304394(p); returns 0.
+ * Converted from the lowered ARC asm; compiled with the g2-em9305-1 profile (-Os) and the
+ * disassembly diffed against the stock lowering: identical, or differing only in delay-slot
+ * scheduling / a redundant zero-extension / absolute-address ld/st forms (reviewed by hand). */
+#include <stdint.h>
+#define B8(a)  (*(volatile uint8_t  *)(uintptr_t)(a))
+#define H16(a) (*(volatile uint16_t *)(uintptr_t)(a))
+#define W32(a) (*(volatile uint32_t *)(uintptr_t)(a))
+extern uint32_t opencfw_em9305_auxiliary_signal_304394(uint32_t);
+uint32_t opencfw_em9305_child_31fb98(uint32_t a)
+{
+  uint32_t p = W32(a + 0x24u);
+  B8(p + 1u) = 1u;
+  (void)opencfw_em9305_auxiliary_signal_304394(p);
+  return 0u;
+}

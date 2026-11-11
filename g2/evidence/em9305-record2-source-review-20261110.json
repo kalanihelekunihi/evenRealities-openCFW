@@ -1,0 +1,43 @@
+{
+  "date": "2026-11-10",
+  "stock_package": "g2/blobs/official/g2-2.2.6.10/firmware_ble_em9305.bin",
+  "stock_package_sha256": "91a38f7fc05555f86181ecb22b363e3239bfcaaa2ff6171e98524ae64821eca9",
+  "stock_record2_sha256": "fd94baffbf73433a951033ca0c44a5c60c3771af503eeb455a1b4941519d4f6f",
+  "layout_basis": {
+    "sdk_header": "third-party/local-vendor/sources/em9305-v4.6/EM9305_SDK/EM9305_EM_BLEU_SDK_v4.6/libs/firmware_header/includes/firmware_header.h",
+    "sdk_header_sha256": "3e3e3086936577e4f7ec9e990123946af59b08395fbea9c332cfda17789ec068",
+    "header_address": "0x00302000",
+    "header_bytes": 40,
+    "nvm_entry_address": "0x00302028",
+    "nvm_entry_instructions_bytes": 10,
+    "erased_padding_bytes": 6,
+    "stock_stack_top": "0x0080f978",
+    "stock_branch_target": "0x0030ed80",
+    "stock_firmware_crc32": "0xceb7f4f3",
+    "stock_header_crc32": "0x87303b94",
+    "crc_rule": "standard CRC-32; header first 34 bytes; firmware from 0x302028 to record 3 end with unrecorded gap filled 0xff",
+    "stock_record2_round_trip_exact": true
+  },
+  "source": {
+    "c_unit": "g2/src/em9305/boot-header/nvm_header_entry.c",
+    "c_unit_sha256": "00c54eb461bd7cf7790ad7bb8d38c52989a7b70cc479cc17b7f727fbe32e1337",
+    "crc_finalizer": "tools/build/em9305_record2.py",
+    "crc_finalizer_sha256": "c84843b64cf6b820e41d039ebff641f5e5fe3f1e183b85c076c9ac832be76f12",
+    "source_report": "build/g2-em9305-record2-source-20261110/report.json",
+    "source_report_sha256": "e4fd29439a9af83afae7e35ce7c45325a11b9f75dc8d6917374c46545eb195d3",
+    "compiled_units": 774,
+    "compile_failures": 0,
+    "duplicate_strong_symbols": 0,
+    "link_report": "build/g2-em9305-record2-link-20261110/link-report.json",
+    "link_report_sha256": "18d2abc8f3f054f4c9f299bdfc122b43b9d83390c24efafa47dfef5866c75ad4",
+    "record2_sha256": "dcefbd74fd1518ab844483298523ba58f74a1fef9916c5170365225410ed4362",
+    "record2_bytes": 56,
+    "application_bytes": 247364,
+    "application_identical_to_previous_source_link": true,
+    "linked_entry_address": "0x00302028",
+    "linked_boot_loop_address": "0x00338fe8",
+    "stock_entry_stack_instruction_matches": true,
+    "stock_entry_branch_bytes_match": false
+  },
+  "qualification": "Record 2 is source-produced and structurally validated. The branch changes because the C boot loop has a different linked address. The separate NVM bootloader records 0 and 1 have no C producers; no physical EM9305 execution or whole-artifact byte identity is claimed."
+}

@@ -1,28 +1,17 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_326a48\n"
-".type opencfw_em9305_child_326a48,@function\n"
-"opencfw_em9305_child_326a48:\n"
-"L326a48:\n"
-"enter_s [r13,blink]\n"
-"L326a4a:\n"
-"mov_s r13,r0\n"
-"L326a4c:\n"
-"bl.d opencfw_em9305_phy_packet_alloc_32d2f0\n"
-"L326a50:\n"
-"mov_s r0,1\n"
-"L326a52:\n"
-"mov_s r1,r0\n"
-"L326a54:\n"
-"breq_s r0,0,L326a60\n"
-"L326a56:\n"
-"mov_s r0,r13\n"
-"L326a58:\n"
-"bl.d opencfw_em9305_phy_packet_send_32d32c\n"
-"L326a5c:\n"
-"stb 6,[r1]\n"
-"L326a60:\n"
-"leave_s [r13,blink,pcl]\n"
-".size opencfw_em9305_child_326a48,.-opencfw_em9305_child_326a48\n"
-);
+/* Stock 0x326a48: p = phy_packet_alloc_32d2f0(1); if p: byte p[0] = 6; return phy_packet_send_32d32c(a, p); else return 0.
+ * Converted from the lowered ARC asm; compiled with the g2-em9305-1 profile (-Os) and the
+ * disassembly diffed against the stock lowering: identical, or differing only in delay-slot
+ * scheduling / a redundant zero-extension / absolute-address ld/st forms (reviewed by hand). */
+#include <stdint.h>
+#define B8(a)  (*(volatile uint8_t  *)(uintptr_t)(a))
+#define H16(a) (*(volatile uint16_t *)(uintptr_t)(a))
+#define W32(a) (*(volatile uint32_t *)(uintptr_t)(a))
+extern uint32_t opencfw_em9305_phy_packet_alloc_32d2f0(uint32_t);
+extern uint32_t opencfw_em9305_phy_packet_send_32d32c(uint32_t,uint32_t);
+uint32_t opencfw_em9305_child_326a48(uint32_t a)
+{
+  uint32_t p = opencfw_em9305_phy_packet_alloc_32d2f0(1u);
+  if(p == 0u) return p;
+  B8(p) = 6u;
+  return opencfw_em9305_phy_packet_send_32d32c(a, p);
+}

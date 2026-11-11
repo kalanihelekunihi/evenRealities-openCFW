@@ -1,0 +1,84 @@
+{
+  "report": "build/sources-goal-r1-dock-advertisement-c/report.json",
+  "units": 819,
+  "application_imports": 70,
+  "added_imports": [],
+  "removed_imports": [
+    "r1_st25dvxxkc_dock_advertisement_send"
+  ],
+  "verification": {
+    "direct_stock_C_pairs": 1232,
+    "actual_ST25_mailbox_write_provider": true
+  },
+  "actual_parser_integration": {
+    "actual_parser_sender_SDK_pairs": 216
+  },
+  "compiled_defects": [
+    {
+      "defect": "wrong-command",
+      "rejected": true
+    },
+    {
+      "defect": "wrong-write-size",
+      "rejected": true
+    },
+    {
+      "defect": "truncate-log-flag",
+      "rejected": true
+    },
+    {
+      "defect": "ignore-write-failure",
+      "rejected": true
+    },
+    {
+      "defect": "log-mutated-packet",
+      "rejected": true
+    },
+    {
+      "defect": "wrong-SDK-gate",
+      "rejected": true
+    },
+    {
+      "defect": "drop-parser-phase",
+      "rejected": true
+    }
+  ],
+  "caller_ABI_audit": {
+    "changed_allocated_sections": [
+      ".text.r1_st25dvxxkc_dock_frame_policy"
+    ],
+    "other_allocated_sections_identical": 26,
+    "previous_source_sha256": "fa3ede91760ce1461a1dc8e4f7b169ff42fecb13d9786393c479e043a0b755b1",
+    "current_source_sha256": "b55385dbac6184c12dde276ccce58a7ec448ad940a8cf95bb33b2bc546f691bf"
+  },
+  "prior_objects_identical": 815,
+  "changed_prior_sources": [
+    "r1/src/application/st25/native_dock_policy.c"
+  ],
+  "rea_evidence_id": "ev_03cef54f5bda488a5f9f8c3872d1c269e02c00035c6b85385bf455a56f36ec90",
+  "evidence_files": {
+    "build/goal-r1-dock-advertisement-c/verify.py": "f54d877107d1a52bf1992167cf4ffdaf8a022f89665fb4c972ea63268c34945f",
+    "build/goal-r1-dock-advertisement-c/verification.json": "549a56d6da77fce67f97c516a67d2f7145e9188596be09112b6328f1e11b1ca5",
+    "build/goal-r1-dock-advertisement-c/verify-final.log": "23b487dc01c27c00c4ccaa1f6d90a7378423d2ed25bb7a8cd27f1432296bd557",
+    "build/goal-r1-dock-advertisement-c/integration.py": "38670182c000ff2f7a7bac5a44206210952615f38072e9d37305a0092a39e9f0",
+    "build/goal-r1-dock-advertisement-c/integration/verification.json": "e068993010a80f7b5fda280ad27681dc197d411b1d6fcde89b4d0daf346a6d20",
+    "build/goal-r1-dock-advertisement-c/integration-final.log": "b97f9aa3591056ad88e2120323f3907cf400ca624652f6e7d600f21258367b11",
+    "build/goal-r1-dock-advertisement-c/defects.py": "07266b94a6c66e527f6db6be641d46f5d1d25c69e5c11f5d4c800b94dd741043",
+    "build/goal-r1-dock-advertisement-c/defects.json": "3cdc62b48c80a0b5e3da522f9f0f332f94ce9ab25f453387e3c49199ba5ea0d4",
+    "build/goal-r1-dock-advertisement-c/audit.py": "54440f1dbe5acb9c32fd215046cc140b18afdeea2302af37b57f506b1df420c4",
+    "build/goal-r1-dock-advertisement-c/caller-audit.json": "421c5cccef0395192aac498085ab78db1b88cce6601f82c6bc5ef737868824c7",
+    "build/goal-r1-dock-advertisement-c/caller.diff": "466a7b4c8e4fd93bf5d1a6c4d3b36c66b5c413ddd30efa2f7f0750f039d187ba",
+    "build/goal-r1-dock-advertisement-c/rea.json": "cbb0a440a3af59cf091c2c03b3d4d46074e7906bc4cae8ddbb151feb56f2cc88",
+    "build/goal-r1-dock-advertisement-c/document.py": "d50000a84c1bd40e0f0ae9f1570886ae9fc7550a854ca55d3839b3af5a02e647",
+    "build/sources-goal-r1-dock-advertisement-c/report.json": "be4b46f34c933ce779099528c4f2682b76e8626114b6a882342f16ef08669b73",
+    "r1/src/sources.json": "3c8c59dd31877945223722d343813970b2d71102790569d337406f4e4b8057b7",
+    "r1/src/application/st25/native_dock_advertisement.c": "b09459d0308135b22c91194177475291d41b55c06a2276d909b9751d1060ddbf",
+    "r1/src/application/st25/native_dock_policy.c": "b55385dbac6184c12dde276ccce58a7ec448ad940a8cf95bb33b2bc546f691bf"
+  },
+  "limitations": [
+    "Packet must expose at least 24 readable/writable bytes; exactly 23 are transmitted.",
+    "Actual SDK write and parser/sender execute with prepared IO/context objects; I2C and logging leaves modeled.",
+    "Formatter, scheduling and other parser leaves modeled in integration; actual formatter separately covered by preceding receipt.",
+    "Final application linking, startup storage, electrical timing and device boot remain unverified."
+  ]
+}

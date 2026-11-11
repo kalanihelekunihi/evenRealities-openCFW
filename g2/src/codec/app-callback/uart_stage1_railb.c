@@ -1,55 +1,59 @@
 /* SPDX-License-Identifier: MIT
- * UART stage-1 rail-B field programmer at stock 0x10000a30.
- * Based on authenticated stage-1 decompilation and descriptor data.
+ * UART stage-1 _clk_set_div (clk_priv.h, NationalChip lvp_kws 8bf9ee5c) at
+ * stock 0x10000a30. The divider is a 16-bit value; 0 clears the field.
  */
 #include <stdint.h>
 #include <stddef.h>
 #include "uart_stage1_pmu.h"
 
+/* Stock 0x10000A30 */
 void gx8002_uart_stage1_railb(uint32_t selector, uint32_t setting)
 {
+    const uint32_t div = setting & 0xffffu;
     struct stage1_pmu_view view;
-    if (gx8002_uart_stage1_pmu_fill_desc(selector, &view) != 0) return;
-    const volatile struct stage1_pmu_entry *entry =
+    if (gx8002_uart_stage1_pmu_fill_desc(selector, &view) != 0)
+        return;
+    const volatile struct stage1_pmu_entry *const entry =
         (const volatile struct stage1_pmu_entry *)view.entry;
-    const volatile struct stage1_pmu_aux_field *aux = entry->aux;
-    if (aux == NULL || aux->register_offset == 0) return;
-
-    const uint32_t shift = aux->shift & 31u;
-    const uint32_t field_mask = aux->mask;
-    volatile uint32_t *reg = (volatile uint32_t *)
-        ((uintptr_t)view.base + aux->register_offset);
-    uint32_t current = (*reg >> shift) & field_mask;
-    if (current != 0) ++current;
-    if ((setting & UINT32_C(0x7fff)) == current) return;
+    const struct stage1_pmu_aux_field *const field = entry->aux;
+    if (field == NULL || field->register_offset == 0u)
+        return;
+    volatile uint32_t *const reg =
+        (volatile uint32_t *)((uintptr_t)view.base + field->register_offset);
+    const uint32_t offs = field->shift;
+    const uint32_t mask = field->mask;
+    uint32_t current = (*reg >> offs) & mask;    /* __module_get_div */
+    if (current != 0u)
+        ++current;
+    if (div == current)
+        return;
 
     uint32_t width = 0;
-    for (uint32_t bits = field_mask; bits != 0; bits >>= 1) ++width;
-    const int32_t power_bit = (int8_t)entry->power_bit;
-    const uint32_t gate_bit = entry->gate_bit & 31u;
-    uint32_t was_powered = 0;
-    if (power_bit >= 0) {
-        const uint32_t power_mask = UINT32_C(1) << (unsigned)power_bit;
-        was_powered = (*view.status & power_mask) != 0;
-        if (was_powered) *view.enable = power_mask;
-    }
-    const uint32_t gate_mask = UINT32_C(1) << gate_bit;
-    const uint32_t was_gated = (*view.status & gate_mask) != 0;
-    if (was_gated && (selector == 6u || selector > 9u))
-        *view.status &= ~gate_mask;
+    while ((mask >> width) != 0u)
+        ++width;
 
-    const uint32_t latch_high = UINT32_C(1) << ((shift + width + 1u) & 31u);
-    *reg &= ~latch_high;
-    *reg |= latch_high;
-    *reg &= ~(field_mask << shift);
-    const uint32_t field = (setting & UINT32_C(0xffff)) != 0
-        ? ((setting & UINT32_C(0x7fff)) - 1u) << shift : 0u;
-    *reg |= field;
-    const uint32_t latch_low = UINT32_C(1) << ((shift + width) & 31u);
-    *reg &= ~latch_low;
-    *reg |= latch_low;
-    if (was_gated && (selector == 6u || selector > 9u))
-        *view.status = (*view.status & ~gate_mask) | gate_mask;
-    if (was_powered)
-        *view.clear = UINT32_C(1) << (unsigned)power_bit;
+    const int32_t gate_high = (int8_t)entry->power_bit;
+    const int32_t clk_offs = (int8_t)entry->gate_bit;
+    const uint32_t gate = gate_high < 0 ? 0u : gx8002_uart_stage1_bit(*view.set, gate_high);
+    if (gate != 0u)
+        *view.enable = gx8002_uart_stage1_mask(gate_high);
+    const uint32_t clk_mask = gx8002_uart_stage1_mask(clk_offs);
+    const uint32_t clk = gx8002_uart_stage1_bit(*view.status, clk_offs) != 0u &&
+        (selector == 6u || selector >= 10u);    /* SRAM or >= SCPU */
+    if (clk)
+        *view.status &= ~clk_mask;
+
+    const uint32_t rst = gx8002_uart_stage1_mask((int32_t)(offs + width + 1u));
+    const uint32_t load = gx8002_uart_stage1_mask((int32_t)(offs + width));
+    *reg &= ~rst;
+    *reg |= rst;
+    *reg &= ~(mask << offs);
+    *reg |= div == 0u ? 0u : (div - 1u) << offs;
+    *reg &= ~load;
+    *reg |= load;
+
+    if (clk)
+        *view.status = (*view.status & ~clk_mask) | clk_mask;
+    if (gate != 0u)
+        *view.clear = gx8002_uart_stage1_mask(gate_high);
 }

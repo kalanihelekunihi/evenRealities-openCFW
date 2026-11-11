@@ -1,54 +1,26 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_315bc8\n"
-".type opencfw_em9305_child_315bc8,@function\n"
-"opencfw_em9305_child_315bc8:\n"
-"L315bc8:\n"
-"enter_s [r13-r14,blink]\n"
-"L315bca:\n"
-"mov_s r13,r0\n"
-"L315bcc:\n"
-"ld.as r0,[r0,159]\n"
-"L315bd0:\n"
-"mov_s r14,0\n"
-"L315bd2:\n"
-"st.as r14,[r13,160]\n"
-"L315bd6:\n"
-"and.f r0,r0,0x20000\n"
-"L315bde:\n"
-"st.as r0,[r13,159]\n"
-"L315be2:\n"
-"beq_s L315bf4\n"
-"L315be4:\n"
-"mov_s r1,0x3b\n"
-"L315be6:\n"
-"mov_s r0,r13\n"
-"L315be8:\n"
-"st.as r14,[r13,160]\n"
-"L315bec:\n"
-"bl.d opencfw_em9305_mode_event_322fdc\n"
-"L315bf0:\n"
-"st.as r14,[r13,159]\n"
-"L315bf4:\n"
-"mov_s r0,r13\n"
-"L315bf6:\n"
-"add r0,r0,627\n"
-"L315bfa:\n"
-"ldb_s r1,[r0,0]\n"
-"L315bfc:\n"
-"breq_s r1,0,L315c0a\n"
-"L315bfe:\n"
-"stb_s r14,[r0,0]\n"
-"L315c00:\n"
-"mov_s r1,0x3b\n"
-"L315c02:\n"
-"mov_s r2,1\n"
-"L315c04:\n"
-"bl.d opencfw_em9305_phy_reject_32698c\n"
-"L315c08:\n"
-"mov_s r0,r13\n"
-"L315c0a:\n"
-"leave_s [r13-r14,blink,pcl]\n"
-".size opencfw_em9305_child_315bc8,.-opencfw_em9305_child_315bc8\n"
-);
+#include <stdint.h>
+
+/* Native 0x315bc8..0x315c0c: clear the record's pending word (+640) and
+ * keep only bit 17 of the flag word (+636); if that bit was set, clear
+ * both words and report mode event 0x3b. If the reject byte (+627) is set,
+ * clear it and send PHY reject 0x3b (extended). */
+extern uint32_t opencfw_em9305_mode_event_322fdc(uintptr_t context,uint32_t status);
+extern uint32_t opencfw_em9305_phy_reject_32698c(uintptr_t record,uint32_t reason,
+                                                 uint32_t extended);
+
+void opencfw_em9305_child_315bc8(uintptr_t record)
+{
+    uint32_t flags=*(volatile uint32_t *)(record+636u);
+    *(volatile uint32_t *)(record+640u)=0u;
+    flags&=0x20000u;
+    *(volatile uint32_t *)(record+636u)=flags;
+    if(flags!=0u){
+        *(volatile uint32_t *)(record+640u)=0u;
+        *(volatile uint32_t *)(record+636u)=0u;
+        (void)opencfw_em9305_mode_event_322fdc(record,0x3bu);
+    }
+    if(*(volatile uint8_t *)(record+627u)!=0u){
+        *(volatile uint8_t *)(record+627u)=0u;
+        (void)opencfw_em9305_phy_reject_32698c(record,0x3bu,1u);
+    }
+}

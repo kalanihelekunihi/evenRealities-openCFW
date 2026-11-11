@@ -1,43 +1,34 @@
-/* Complete native 3257f4 channel-state refresh, preserving child ABI. */
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_dispatch_child_3257f4\n"
-".type opencfw_em9305_dispatch_child_3257f4,@function\n"
-"opencfw_em9305_dispatch_child_3257f4:\n"
-"L3257f4: enter_s [r13-r16,blink]\n"
-"L3257f6: ldb r1,[r0,52]\n"
-"L3257fa: mov_s r13,r0\n"
-"L3257fc: breq_s r1,0,L325826\n"
-"L3257fe: mov_s r14,0\n"
-"L325800: add r16,r13,0x38\n"
-"L325804: ld.ab r15,[r16,4]\n"
-"L325808: breq_s r15,0,L325820\n"
-"L32580a: ldh_s r1,[r13,0x20]\n"
-"L32580c: add1 r0,r15,0x3c\n"
-"L325810: mov_s r2,0\n"
-"L325812: bl.d opencfw_em9305_dispatch_child_30e5a4\n"
-"L325816: mov_s r3,1\n"
-"L325818: ldb r1,[r13,52]\n"
-"L32581c: stb r0,[r15,177]\n"
-"L325820: add_s r14,r14,1\n"
-/* ARC GAS reverses the source hint for this backward BBIT branch. */
-"L325822: brlo.t r14,r1,L325804\n"
-"L325826: ldh_s r1,[r13,0x20]\n"
-"L325828: add3 r0,r13,0x2c\n"
-"L32582c: mov_s r2,0\n"
-"L32582e: bl.d opencfw_em9305_dispatch_child_30e5a4\n"
-"L325832: mov_s r3,1\n"
-"L325834: ldb_s r2,[r13,0x3]\n"
-"L325836: mov_s r1,r13\n"
-"L325838: add r1,r1,409\n"
-"L32583c: stb_s r0,[r1,0]\n"
-"L32583e: brne.d.nt r2,0x1,L325848\n"
-"L325842: add3 r0,r13,0x20\n"
-"L325846: add_s r0,r13,0x38\n"
-"L325848: ld r0,[r0,0]\n"
-"L32584a: ldb r0,[r0,177]\n"
-"L32584e: stb r0,[r13,73]\n"
-"L325852: leave_s [r13-r16,blink,pcl]\n"
-".size opencfw_em9305_dispatch_child_3257f4,.-opencfw_em9305_dispatch_child_3257f4\n"
-);
+#include <stdint.h>
+
+/* Native 0x3257f4..0x325854: refresh the channel state of a scan context.
+ * Each of the byte(+52) sub-records listed from +56 gets its state byte
+ * +177 from native 0x30e5a4 on its block +120; the context block +352 then
+ * yields byte +409. Byte +73 mirrors the state of the first sub-record
+ * (role byte +3 == 1) or of the record at +256, and is returned. */
+extern uint32_t opencfw_em9305_dispatch_child_30e5a4(uintptr_t,uint32_t,uint32_t,uint32_t);
+
+uint32_t opencfw_em9305_dispatch_child_3257f4(uintptr_t context)
+{
+    uint32_t count = *(volatile uint8_t *)(context + 52u);
+    if (count != 0u) {
+        volatile uint32_t *slot = (volatile uint32_t *)(context + 56u);
+        uint32_t index = 0u;
+        do {
+            uintptr_t sub = *slot++;
+            if (sub != 0u) {
+                uint32_t state = opencfw_em9305_dispatch_child_30e5a4(
+                    sub + 120u, *(volatile uint16_t *)(context + 0x20u), 0u, 1u);
+                count = *(volatile uint8_t *)(context + 52u);
+                *(volatile uint8_t *)(sub + 177u) = (uint8_t)state;
+            }
+        } while (++index < count);
+    }
+    uint32_t state = opencfw_em9305_dispatch_child_30e5a4(
+        context + 352u, *(volatile uint16_t *)(context + 0x20u), 0u, 1u);
+    uint32_t role = *(volatile uint8_t *)(context + 3u);
+    *(volatile uint8_t *)(context + 409u) = (uint8_t)state;
+    uintptr_t source = *(volatile uint32_t *)(context + (role == 1u ? 56u : 256u));
+    uint32_t mirrored = *(volatile uint8_t *)(source + 177u);
+    *(volatile uint8_t *)(context + 73u) = (uint8_t)mirrored;
+    return mirrored;
+}

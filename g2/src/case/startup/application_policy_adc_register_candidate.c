@@ -2,8 +2,8 @@
  * Native CASE 0x4eac, 0x678a, 0x6792 register readers.
  */
 #include <stdint.h>
-uint32_t case_policy_adc_tick(void)
-{return *(volatile uint32_t *)(uintptr_t)0x20000120u;}
+/* Dedup (0x08004eac): case_policy_adc_tick is an alias of case_tick_word2 (glue/tick_word_provider.c). */
+extern uint32_t case_policy_adc_tick(void);
 /* Stock 0x0800678A (case_status_word2_bit2) */
 uint32_t case_policy_adc_ready(uint32_t base)
 {return (*(volatile uint32_t *)(uintptr_t)(base+8u)>>2)&1u;}

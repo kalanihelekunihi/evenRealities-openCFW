@@ -1,13 +1,10 @@
-/* Native scan status action; tail-call with native delay-slot status. */
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_scan_action_325540\n"
-".type opencfw_em9305_scan_action_325540,@function\n"
-"opencfw_em9305_scan_action_325540:\n"
-"L325540:\n"
-"b.d opencfw_em9305_command_status_30e8c0\n"
-"L325544:\n"
-"mov_s r0,0xc\n"
-".size opencfw_em9305_scan_action_325540,.-opencfw_em9305_scan_action_325540\n"
-);
+/* Stock 0x325540: tail call command_status_30e8c0(0xc).
+ * Converted from the lowered ARC asm; compiled with the g2-em9305-1 profile (-Os) and the
+ * disassembly diffed against the stock lowering: identical, or differing only in delay-slot
+ * scheduling / a redundant zero-extension / absolute-address ld/st forms (reviewed by hand). */
+#include <stdint.h>
+#define B8(a)  (*(volatile uint8_t  *)(uintptr_t)(a))
+#define W32(a) (*(volatile uint32_t *)(uintptr_t)(a))
+extern uint32_t opencfw_em9305_command_status_30e8c0(uint32_t);
+uint32_t opencfw_em9305_scan_action_325540(void)
+{ return opencfw_em9305_command_status_30e8c0(0xcu); }

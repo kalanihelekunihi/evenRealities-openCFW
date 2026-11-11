@@ -5,7 +5,7 @@
 extern void *audio_uart_lv_heap_alloc(uint32_t);
 extern void audio_uart_lv_render_layer_init_4847c4(void *, void *,
                                                     uint32_t, const void *);
-extern void audio_uart_lvgl_log(uint32_t, const char *, uint32_t,
+extern void lv_log_add(uint32_t, const char *, uint32_t,
                                 const char *, const char *, ...);
 
 static const char source[] =
@@ -21,7 +21,7 @@ void *audio_uart_lv_draw_layer_create_48475e(void *parent_arg,
 {
     uint8_t *const child = (uint8_t *)audio_uart_lv_heap_alloc(0x58u);
     if (child == 0) {
-        audio_uart_lvgl_log(3u, source, 0x18fu, function, format,
+        lv_log_add(3u, source, 0x18fu, function, format,
                             expression, detail);
         for (;;) *(volatile uint32_t *)(uintptr_t)0xffffffffu = 0u;
     }

@@ -1,6 +1,8 @@
 /* SPDX-License-Identifier: MIT
- * Full image-B audio preparation 0x100051ec..0x10005327. Ghidra stopped
- * at the bit-8 wait; native branch 0x10005284 resumes at 0x10005288.
+ * Full image-B audio preparation 0x100051ec..0x10005327.
+ * Evidence: corpus codec/ghidra/open-2026-09-29/image_b_sram/functions-000.jsonl
+ * FUN_100051ec @ 0x100051ec (316 B sha cdcb7e06…); headless decomp stopped at
+ * bit-8 wait — native branch 0x10005284 resumes at 0x10005288 (disasm check).
  */
 #include <stdint.h>
 

@@ -10,7 +10,7 @@
 
 /* One menu row; same layout as the kvMenuConfigureValue mirror. */
 typedef struct {
-    const void *icon;      /* +0x00 lv_image_dsc_t *, NULL draws a 20x20 placeholder */
+    const void *icon;      /* +0x00 lv_image_dsc_t *, NULL draws a 20x20 empty icon */
     char text[32];         /* +0x04 i18n key (or literal name when app_type != 0) */
     uint32_t text_res;     /* +0x24 action id 1..8, 0xffe = external (Evenhub) app */
     uint8_t app_type;      /* +0x28 non-zero: text is a literal, not an i18n key */

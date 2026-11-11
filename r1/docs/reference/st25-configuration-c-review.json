@@ -1,0 +1,136 @@
+{
+  "schema_version": 1,
+  "report": "build/sources-goal-r1-st25-config-final-c/report.json",
+  "evidence_files": {
+    "build/sources-goal-r1-st25-config-final-c/report.json": "0ce1b5a562cef4cee09ac195927be5848e9cf702314732856aa11697712ee802",
+    "r1/src/sources.json": "30923560756bc3bec5bfd6a5f4b7e7445890e220ad02f0b0bf9fc01df0412c00",
+    "r1/src/application/st25/native_configuration.c": "7ab0b114b8da952feaf769895778bb9a80ce7a33b364ac7e15810f1e8432c65f",
+    "r1/src/application/runtime/native_nfc_late_setup.c": "52b993822a06c82e6f67b62545cd15b0002a0465422fcfe48b30e48d4469c63a",
+    "r1/src/application/st25/stock_bus_bindings.c": "366698b5a6b68af20affe3c2729bdbbd515401715b2771060a7cdcd26584aaf3",
+    "r1/src/application/st25/stock_bus_bindings.h": "0daf72385dbe918c7df9871aad672929c2a86f9eb4495afb5c0ff19dc5ca3f33",
+    "build/goal-r1-fstorage-registry/expanded-rw.bin": "87fdee392022fdbe23dd0daf3e859fb14f3ce26ba3e8403aab56dc9d9a913317",
+    "third-party/upstream/st-fp-sns-stbox1/Drivers/BSP/Components/st25dvxxkc/st25dvxxkc.c": "00469629a6b6cf76127a82dd0ab198855d8c794320df7f2d2f41509a289146e9",
+    "third-party/upstream/st-fp-sns-stbox1/Drivers/BSP/Components/st25dvxxkc/st25dvxxkc.h": "c86f94ec2bef76e3de59d2520abca7f6bf9067f4ec316bdedc3db9091a930d76",
+    "third-party/upstream/st-fp-sns-stbox1/Drivers/BSP/Components/st25dvxxkc/st25dvxxkc_reg.c": "dff34273b0656f8d45acb751cc576bf55add248d3f02b5c6e6dde0d679463106",
+    "third-party/upstream/st-fp-sns-stbox1/Drivers/BSP/Components/st25dvxxkc/st25dvxxkc_reg.h": "1923438b4ae90693a32e0c6247ca64f1c880ea7db088c77d2ecee6584e69bd47",
+    "build/goal-r1-st25-config-c/manifest-before.json": "fe3e76ea9530975cc50f793dc8e512bb0b1ed45aeae2eff867883229de8321e1",
+    "build/goal-r1-st25-config-c/late-before.c": "7f9bab32ab5fffb64e5ccdc616535c75c660ad2c2c0caeabbce3d25b8db86187",
+    "build/goal-r1-st25-config-c/verify.py": "bb7e1e888406fa67567dfe6098ffa37a46fb9a6ba321837398c886f17d86b9eb",
+    "build/goal-r1-st25-config-c/verification.json": "9b10a73034996b4e0b3c3f0e1a81f0e44d8121e8e4bbef7b3e35632c25cddd05",
+    "build/goal-r1-st25-config-c/verify-final.log": "09360c702285f27f4ad1ee99c062b24df52596e62c80af0b192c0b06e21f4ffe",
+    "build/goal-r1-st25-config-c/audit.py": "20a393965e6d87f190c0e0defd3672f0dfa4670fcbe5cfc913c0748ebc70395f",
+    "build/goal-r1-st25-config-c/audit.json": "9ba9ead86afef22d12ddcd9b1ef0505bc14e2fbc2b71592ac163f762e70906dc",
+    "build/goal-r1-st25-config-c/defects.py": "1e17af5ae4f9f14cb15f2f3de38403dfb83da2f90034dc58929097dc96f559a6",
+    "build/goal-r1-st25-config-c/defects.json": "68546894125f11b9c44090070fb40d994fbdb7339d1469686422c4dcf9afa2ac",
+    "build/goal-r1-st25-config-c/rea.json": "04281d8d61901644ffb835c0a28648bc9b2c7235e5ce977e72b707c3fd91afcc",
+    "build/goal-r1-st25-config-c/source.elf": "b735a50dd3f2437e2ff78c4f8b9a144050ea8a4459c547fa8f6983d1ccfad525",
+    "build/goal-r1-st25-config-c/sdk.elf": "92d262bf55bee234dd5162a6e8fe7aa1495c3df6f203de4284f042527e83cbc6",
+    "build/goal-r1-st25-config-c/r1-sources-check.log": "6d940982933d0034caaf5a3694f413da89954e3e4f683a15c9a16a56f4d21f2c",
+    "build/goal-r1-st25-config-c/sources-check.log": "c4192d3cfb65de477b7413059e8a2f4c6f41f10b51615e4ca5aae342d7e819f0",
+    "build/goal-r1-st25-config-c/boot-link/report.json": "d2ffedc4f83bca161e607f4dc2585f2762f34355a85f101ca0a5e6c071b0de4f"
+  },
+  "stock_application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "rea_windows": [
+    {
+      "address": "0x77764",
+      "length": 1152
+    },
+    {
+      "address": "0x44c90",
+      "length": 88
+    },
+    {
+      "address": "0x44ce8",
+      "length": 436
+    },
+    {
+      "address": "0x5d1d8",
+      "length": 28
+    }
+  ],
+  "verification": {
+    "direct_stock_C_pairs": 1440,
+    "escaped_byte_log_mutation_pairs": 36,
+    "actual_ST25_provider_pairs": 16,
+    "SDK_context_source_offset": 28,
+    "stock_context_offset": 24,
+    "actual_provider_IO_callbacks_checked": true,
+    "registration_board_IO_native_mailbox_RMW_delay_and_logging_modeled": true,
+    "ordinary_C_ABI_private_frames_and_void_init_outputs_excluded": true
+  },
+  "audit": {
+    "unchanged_prior_object_hashes": 809,
+    "generated_boot_allocated_bytes_and_relocations_unchanged": true,
+    "added_application_imports": [
+      "r1_st25_mailbox_mode_enable_native"
+    ],
+    "removed_application_imports": [
+      "r1_st25dvxxkc_initialize_configuration"
+    ],
+    "only_manifest_change_one_new_unit": true,
+    "no_handwritten_assembly_in_configuration": true,
+    "one_existing_battery_thread_handle_owner": true,
+    "existing_I2C5_and_YHM_owners_reused": true,
+    "ignored_init_return_declaration_only_change": true,
+    "late_setup_object_unchanged": true
+  },
+  "defects": [
+    {
+      "defect": "short-registration-retry",
+      "compiled": true,
+      "behavioral_assertion_rejected": true
+    },
+    {
+      "defect": "wrong-configured-byte",
+      "compiled": true,
+      "behavioral_assertion_rejected": true
+    },
+    {
+      "defect": "failed-registration-is-configured",
+      "compiled": true,
+      "behavioral_assertion_rejected": true
+    },
+    {
+      "defect": "wrong-closing-password",
+      "compiled": true,
+      "behavioral_assertion_rejected": true
+    },
+    {
+      "defect": "wrong-GPO2-mask",
+      "compiled": true,
+      "behavioral_assertion_rejected": true
+    },
+    {
+      "defect": "short-GPO-retries",
+      "compiled": true,
+      "behavioral_assertion_rejected": true
+    },
+    {
+      "defect": "wrong-mailbox-address",
+      "compiled": true,
+      "behavioral_assertion_rejected": true
+    },
+    {
+      "defect": "unconditional-first-enable",
+      "compiled": true,
+      "behavioral_assertion_rejected": true
+    },
+    {
+      "defect": "cached-mailbox-log-byte",
+      "compiled": true,
+      "behavioral_assertion_rejected": true
+    },
+    {
+      "defect": "leave-security-open",
+      "compiled": true,
+      "behavioral_assertion_rejected": true
+    }
+  ],
+  "limitations": [
+    "Native mailbox bit-zero read/modify/write at 0x5d1f4 remains an unresolved boundary; no success stub is supplied.",
+    "Bus registration, board mailbox read, native mailbox RMW, delays and logging are modeled; pinned ST25 providers execute with prepared valid object/IO contexts in integration.",
+    "The SDK source context offset is 28 versus stock 24; source APIs and callback I/O are compared, not private object byte identity.",
+    "The initializer has a void C API because its existing caller discards the result; incidental return registers/private frames are excluded.",
+    "Full BSP registration, physical NFC/electrical timing, final application layout/linking and device boot remain open."
+  ]
+}

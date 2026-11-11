@@ -1,0 +1,50 @@
+{
+  "passed": 2765,
+  "executions": 5530,
+  "ordered_state_reads": true,
+  "assertion_text_and_nonreturn_checked": true,
+  "unaligned_interior_partition_values": true,
+  "source_report": "build/sources-goal-r1-fal-c-cache-owned/report.json",
+  "source_size": 118,
+  "shared_private_table_and_cache": true,
+  "source_sha256": {
+    "{gen}/fal_partition_r1_lookup.c": "99727c51706218416126735c1c6f4e9c9edf2158c8fdc74e908b64e1fcb27297"
+  },
+  "limitations": [
+    "Private state is seeded directly; full partition initialization and physical flash behavior unverified",
+    "Valid cache-index ranges sampled, including zero-state underflow cases; arbitrary corrupted table spans excluded",
+    "Diagnostic output modeled; private stack bytes and caller-clobbered registers/flags excluded",
+    "No byte qualification"
+  ],
+  "negative_control": {
+    "mutation": "Widen upper bound from last partition start through its final byte",
+    "rejected": true,
+    "case": {
+      "base": "0x20010000",
+      "count": 1,
+      "address": "0x20010001"
+    },
+    "stderr": "arm-none-eabi-ld: warning: (strlen): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-fal-c-cache/bad.o\narm-none-eabi-ld: warning: (strlen): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-fal-c-cache/bad.o\narm-none-eabi-ld: warning: (strlen): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-fal-c-cache/bad.o\narm-none-eabi-ld: warning: (strlen): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-fal-c-cache/bad.o\narm-none-eabi-ld: warning: (strlen): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-fal-c-cache/bad.o\narm-none-eabi-ld: warning: (strlen): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-fal-c-cache/bad.o\narm-none-eabi-ld: warning: (fal_flash_device_find): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-fal-c-cache/bad.o\narm-none-eabi-ld: warning: (strcmp): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-fal-c-cache/bad.o\narm-none-eabi-ld: warning: (r1_native_printf): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-fal-c-cache/bad.o\narm-none-eabi-ld: warning: (r1_native_printf): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-fal-c-cache/bad.o\nTraceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-fal-c-cache/reject-widened-bound.py\", line 54, in <module>\n    for c in [(0x20010000,1,0x20010001)]:assert a(*c)==b(*c),c\n                                                       ~^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-fal-c-cache/reject-widened-bound.py\", line 41, in run\n    assert u.reg_read(UC_ARM_REG_PC)!=STOP and state['diagnostics']==[['(%s) has assert failed at %s.\\n',failure,'flash_device_find_by_part']]\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+  },
+  "native_state": {
+    "table": "0x200077b8",
+    "length": "0x200077bc",
+    "cache": "0x2001e544"
+  },
+  "evidence": {
+    "build/goal-r1-fal-c-cache/stock.elf": "6e7615de152ec45816bc768f81ec0403fb992586b2eb4343f8ea7c856cc7df63",
+    "build/goal-r1-fal-c-cache/REA.snapshot.json": "68e9a083a25359f223537c260b8b7c170c5d991a7d85eef5fc1e5d1d480f8fde",
+    "build/goal-r1-fal-c-cache/verify.py": "7a81b671678450a4be3405cdb3c85fa40ac75e10eea2179acfbf7602cfcd93a9",
+    "build/goal-r1-fal-c-cache/source.elf": "f4fb017c56464a5b2fb401a2eab8f664bd41d2c55597f4af72797c71bb43a5eb",
+    "build/goal-r1-fal-c-cache/bad-header/native_lookup.h": "e661bba8d560e47087fe79e36e7d945c860b85e787100f0ab0c851faf710092f",
+    "build/goal-r1-fal-c-cache/reject-widened-bound.py": "d1162763933de819cbfd09a7d737ca97d93801e590f0134438799a3b723083f0",
+    "r1/src/application/board/fal-native/native_lookup.h": "769640b415ca5e89625a297f84f78a221fc191bf5bbbcd0e3719848c64a41ffc",
+    "build/sources-goal-r1-fal-c-cache-owned/generated/r1/fal_partition_r1_lookup.c": "99727c51706218416126735c1c6f4e9c9edf2158c8fdc74e908b64e1fcb27297",
+    "third-party/upstream/flashdb-2.0.0/port/fal/src/fal_partition.c": "25b7ade441576561e5ebee1ef43c92c9e03c494e0a459588d82a1ebccc7c498c",
+    "build/sources-goal-r1-fal-c-cache-owned/report.json": "584b4cc04d28322a6af5d0226dcb8be4c9ebc83cd43583a1fb9191905846929b",
+    "r1/src/sources.json": "475594eebad1014088cd2894b10548688dc90179c5d9afd753afe82b44dedf12",
+    "r1/symbols/function-frontier.csv": "782606e74d14f03509284f77f7af6a11708f664af23e4efd73f986db7e3803e9",
+    "tools/build/source-plan.json": "4d46e8c038db79a174a2d719086fd0be80503ca7cdbfc2c51e5ed3d30d293064"
+  },
+  "source_plan_changed": false
+}

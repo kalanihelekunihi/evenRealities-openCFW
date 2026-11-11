@@ -132,3 +132,5 @@ void audio_display_driver_thread_entry(void *argument) {
     (void)argument;
     display_driver_event_loop();
 }
+/* Stock 0x200744ec is a single cell (literal pool 0x4744a8); alias so all users share it (Fix 31). */
+extern uint32_t audio_display_hw_initialized_200744ec __attribute__((alias("display_driver_enabled")));

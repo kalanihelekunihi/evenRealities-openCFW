@@ -1,15 +1,12 @@
-/* Native31cb8c..31cb9b full body and genuine selected children. */
-__asm__(
-    ".text\n"
-    ".balign 4\n"
-    ".global opencfw_em9305_dispatch_leaf_31cb8c\n"
-    ".type opencfw_em9305_dispatch_leaf_31cb8c,@function\n"
-    "opencfw_em9305_dispatch_leaf_31cb8c:\n"
-    "push_s blink\n"
-    "bl.d opencfw_em9305_common_request_30455c\n"
-    "mov_s r0,1\n"
-    "bl opencfw_em9305_command_count_30e4bc\n"
-    "pop_s blink\n"
-    "j_s [blink]\n"
-    ".size opencfw_em9305_dispatch_leaf_31cb8c,.-opencfw_em9305_dispatch_leaf_31cb8c\n"
-);
+#include <stdint.h>
+
+/* Native 0x31cb8c..0x31cb9c: issue common request 1, then return the
+ * command count. */
+extern uint32_t opencfw_em9305_common_request_30455c(uint32_t index);
+extern uint32_t opencfw_em9305_command_count_30e4bc(void);
+
+uint32_t opencfw_em9305_dispatch_leaf_31cb8c(void)
+{
+    (void)opencfw_em9305_common_request_30455c(1u);
+    return opencfw_em9305_command_count_30e4bc();
+}

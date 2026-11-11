@@ -1,48 +1,23 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_31c78c\n"
-".type opencfw_em9305_child_31c78c,@function\n"
-"opencfw_em9305_child_31c78c:\n"
-"L31c78c:\n"
-"ld_s r0,[r0,0x24]\n"
-"L31c78e:\n"
-"mov_s r2,0x8019f8\n"
-"L31c794:\n"
-"ldb_s r1,[r0,0x10]\n"
-"L31c796:\n"
-"ldb_s r3,[r0,0x2]\n"
-"L31c798:\n"
-"seteq r1,r1,0x2\n"
-"L31c79c:\n"
-"cmp_s r3,0\n"
-"L31c79e:\n"
-"asl_s r3,r1\n"
-"L31c7a0:\n"
-"bne_s L31c7a6\n"
-"L31c7a2:\n"
-"ldb_s r1,[r0,0x1]\n"
-"L31c7a4:\n"
-"breq_s r1,0,L31c7b4\n"
-"L31c7a6:\n"
-"ldb_s r1,[r2,0]\n"
-"L31c7a8:\n"
-"bclr r1,r1,r3\n"
-"L31c7ac:\n"
-"stb_s r1,[r2,0]\n"
-"L31c7ae:\n"
-"b.d opencfw_em9305_child_325edc\n"
-"L31c7b2:\n"
-"mov_s r1,3\n"
-"L31c7b4:\n"
-"ldb_s r1,[r2,0x2]\n"
-"L31c7b6:\n"
-"stb 0,[r0,241]\n"
-"L31c7ba:\n"
-"bclr r1,r1,r3\n"
-"L31c7be:\n"
-"b.d opencfw_em9305_child_31fe38\n"
-"L31c7c2:\n"
-"stb_s r1,[r2,0x2]\n"
-".size opencfw_em9305_child_31c78c,.-opencfw_em9305_child_31c78c\n"
-);
+#include <stdint.h>
+
+/* Native 0x31c78c..0x31c7c4: clear the link's pending bit (bit 2 for
+ * role 2, else bit 0). Active links clear it in 0x8019f8 and notify
+ * 325edc with status 3; idle links clear it in 0x8019fa, reset +241 and
+ * pass the new mask to 31fe38. */
+extern uint32_t opencfw_em9305_child_325edc(uintptr_t link, uint32_t status);
+extern uint32_t opencfw_em9305_child_31fe38(uintptr_t link, uint32_t mask);
+
+uint32_t opencfw_em9305_child_31c78c(uintptr_t owner)
+{
+    uintptr_t link=*(volatile uint32_t *)(owner+36u);
+    uint32_t bit=(*(volatile uint8_t *)(link+16u)==2u)?2u:0u;
+    if(*(volatile uint8_t *)(link+2u)!=0u||*(volatile uint8_t *)(link+1u)!=0u){
+        volatile uint8_t *pending=(volatile uint8_t *)(uintptr_t)0x8019f8u;
+        *pending=(uint8_t)(*pending&~(1u<<bit));
+        return opencfw_em9305_child_325edc(link,3u);
+    }
+    uint32_t mask=*(volatile uint8_t *)(uintptr_t)0x8019fau&~(1u<<bit);
+    *(volatile uint8_t *)(link+241u)=0u;
+    *(volatile uint8_t *)(uintptr_t)0x8019fau=(uint8_t)mask;
+    return opencfw_em9305_child_31fe38(link,mask);
+}

@@ -1,248 +1,121 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_32b82c\n"
-".type opencfw_em9305_child_32b82c,@function\n"
-"opencfw_em9305_child_32b82c:\n"
-"L32b82c:\n"
-"enter_s [r13-r19,blink]\n"
-"L32b82e:\n"
-"ld r18,[r1,44]\n"
-"L32b832:\n"
-"mov_s r13,r0\n"
-"L32b834:\n"
-"mov_s r14,r1\n"
-"L32b836:\n"
-"mov_s r16,r0\n"
-"L32b838:\n"
-"add r13,r13,788\n"
-"L32b83c:\n"
-"bl.d opencfw_em9305_associated_time_alias_30fd34\n"
-"L32b840:\n"
-"sth 0,[r18,224]\n"
-"L32b844:\n"
-"mov_s r1,0x805c38\n"
-"L32b84a:\n"
-"ld r1,[r1,0]\n"
-"L32b84c:\n"
-"mov_s r19,0xb08\n"
-"L32b852:\n"
-"mov_s r15,r0\n"
-"L32b854:\n"
-"rsub r1,r1,r16\n"
-"L32b858:\n"
-"div r1,r1,r19\n"
-"L32b85c:\n"
-"ld.as r0,[r16,198]\n"
-"L32b860:\n"
-"mov_s r3,0\n"
-"L32b862:\n"
-"mov_s r4,0\n"
-"L32b864:\n"
-"mov_s r2,r15\n"
-"L32b866:\n"
-"add_s r1,r1,4\n"
-"L32b868:\n"
-"bl.d opencfw_em9305_radio_schedule_313424\n"
-"L32b86c:\n"
-"extb_s r1,r1\n"
-"L32b86e:\n"
-"add_s r15,r15,r0\n"
-"L32b870:\n"
-"st_s r15,[r14,0x8]\n"
-"L32b872:\n"
-"bl.d opencfw_em9305_scan_random_30c478\n"
-"L32b876:\n"
-"st.as r15,[r16,200]\n"
-"L32b87a:\n"
-"mov_s r1,0\n"
-"L32b87c:\n"
-"bl.d opencfw_em9305_crc_update_304678\n"
-"L32b880:\n"
-"mov_s r2,0\n"
-"L32b882:\n"
-"add r17,r16,0xafc\n"
-"L32b88a:\n"
-"ld r1,[r17,0xfffff98c]\n"
-"L32b892:\n"
-"bset r19,r19,0xa\n"
-"L32b896:\n"
-"sth r0,[r13,-82]\n"
-"L32b89a:\n"
-"add r0,r1,r19\n"
-"L32b89e:\n"
-"ld_s r2,[r17,0]\n"
-"L32b8a0:\n"
-"ld r1,[r0,0]\n"
-"L32b8a2:\n"
-"ld r0,[r0,-4]\n"
-"L32b8a6:\n"
-"bl.d opencfw_em9305_ll_mask_count_30c414\n"
-"L32b8aa:\n"
-"stb 0,[r2,78]\n"
-"L32b8ae:\n"
-"ldb_s r2,[r13,0]\n"
-"L32b8b0:\n"
-"brhs.nt r0,r2,L32b8c6\n"
-"L32b8b4:\n"
-"ld.as r0,[r13,93]\n"
-"L32b8b8:\n"
-"add_s r0,r0,r19\n"
-"L32b8ba:\n"
-"ld r1,[r0,0]\n"
-"L32b8bc:\n"
-"bl.d opencfw_em9305_ll_mask_count_30c414\n"
-"L32b8c0:\n"
-"ld r0,[r0,-4]\n"
-"L32b8c4:\n"
-"mov_s r2,r0\n"
-"L32b8c6:\n"
-"ld_s r3,[r17,0]\n"
-"L32b8c8:\n"
-"ldb r0,[r16,1]\n"
-"L32b8cc:\n"
-"stb r2,[r3,79]\n"
-"L32b8d0:\n"
-"bl.d opencfw_em9305_child_30e858\n"
-"L32b8d4:\n"
-"ldb r1,[r3,78]\n"
-"L32b8d8:\n"
-"mov r19,r16\n"
-"L32b8dc:\n"
-"add r19,r19,720\n"
-"L32b8e0:\n"
-"mov_s r1,0\n"
-"L32b8e2:\n"
-"bl.d opencfw_em9305_associated_schedule_insert_312da4\n"
-"L32b8e6:\n"
-"mov_s r0,r14\n"
-"L32b8e8:\n"
-"ldb_s r2,[r13,0xb]\n"
-"L32b8ea:\n"
-"brne_s r0,0,L32b950\n"
-"L32b8ec:\n"
-"ldb_s r0,[r13,0]\n"
-"L32b8ee:\n"
-"add_s r1,r2,0x1\n"
-"L32b8f0:\n"
-"extb_s r2,r1\n"
-"L32b8f2:\n"
-"brne.d.nt r2,r0,L32b90a\n"
-"L32b8f6:\n"
-"stb_s r1,[r13,0xb]\n"
-"L32b8f8:\n"
-"ldh.as r0,[r16,188]\n"
-"L32b8fc:\n"
-"mov_s r1,0\n"
-"L32b8fe:\n"
-"stb 0,[r13,11]\n"
-"L32b902:\n"
-"add_s r0,r0,1\n"
-"L32b904:\n"
-"sth.as r0,[r16,188]\n"
-"L32b908:\n"
-"b_s L32b90e\n"
-"L32b90a:\n"
-"ldh.as r0,[r16,188]\n"
-"L32b90e:\n"
-"extb_s r1,r1\n"
-"L32b910:\n"
-"xor_s r0,r0,r1\n"
-"L32b912:\n"
-"exth_s r1,r0\n"
-"L32b914:\n"
-"bl.d opencfw_em9305_associated_channel_seed_324c98\n"
-"L32b918:\n"
-"mov_s r0,r19\n"
-"L32b91a:\n"
-"ldh.as r2,[r16,188]\n"
-"L32b91e:\n"
-"ld.as r1,[r16,175]\n"
-"L32b922:\n"
-"ldb_s r12,[r13,0xb]\n"
-"L32b924:\n"
-"ld.as r3,[r16,198]\n"
-"L32b928:\n"
-"mpyd 0,r1,r2\n"
-"L32b92c:\n"
-"stb r0,[r13,-91]\n"
-"L32b930:\n"
-"mov_s r0,5\n"
-"L32b932:\n"
-"bl.d opencfw_em9305_mode_callback_child_317ea4\n"
-"L32b936:\n"
-"mac r17,r3,r12\n"
-"L32b93a:\n"
-"mov_s r1,r0\n"
-"L32b93c:\n"
-"bl.d opencfw_em9305_init_secondary_time_317ebc\n"
-"L32b940:\n"
-"mov_s r0,r17\n"
-"L32b942:\n"
-"ld r2,[r14,0xc]\n"
-"L32b944:\n"
-"sub_s r1,r15,r0\n"
-"L32b946:\n"
-"add_s r1,r1,r17\n"
-"L32b948:\n"
-"add_s r0,r0,r2\n"
-"L32b94a:\n"
-"st_s r1,[r14,0x8]\n"
-"L32b94c:\n"
-"st_s r0,[r14,0xc]\n"
-"L32b94e:\n"
-"b_s L32b8e0\n"
-"L32b950:\n"
-"ld.as r1,[r13,93]\n"
-"L32b954:\n"
-"bmsk_s r2,r2,0x6\n"
-"L32b956:\n"
-"ldh r14,[r13,-82]\n"
-"L32b95a:\n"
-"add_s r0,r1,r2\n"
-"L32b95c:\n"
-"ldb r0,[r0,0xf0c]\n"
-"L32b964:\n"
-"add r18,r18,261\n"
-"L32b968:\n"
-"stb 0,[r18]\n"
-"L32b96c:\n"
-"cmp r0,255\n"
-"L32b970:\n"
-"beq_s L32b978\n"
-"L32b972:\n"
-"asl_s r0,r0,0x8\n"
-"L32b974:\n"
-"ldb_s r0,[r1,r0]\n"
-"L32b976:\n"
-"brne_s r0,0,L32b9a2\n"
-"L32b978:\n"
-"bmsk r14,r14,0xb\n"
-"L32b97c:\n"
-"sth.as 0,[r13,178]\n"
-"L32b980:\n"
-"bl opencfw_em9305_scan_random_30c478\n"
-"L32b984:\n"
-"mov_s r1,0\n"
-"L32b986:\n"
-"bl.d opencfw_em9305_crc_update_304678\n"
-"L32b98a:\n"
-"mov_s r2,0\n"
-"L32b98c:\n"
-"ldh r2,[r16,64]\n"
-"L32b990:\n"
-"bmsk r1,r0,0xb\n"
-"L32b994:\n"
-"sth r0,[r13,-82]\n"
-"L32b998:\n"
-"bmsk_s r2,r2,0xb\n"
-"L32b99a:\n"
-"cmp_s r1,r2\n"
-"L32b99c:\n"
-"cmp.ne r1,r14\n"
-"L32b9a0:\n"
-"beq_s L32b980\n"
-"L32b9a2:\n"
-"leave_s [r13-r19,blink,pcl]\n"
-".size opencfw_em9305_child_32b82c,.-opencfw_em9305_child_32b82c\n"
-);
+#include <stdint.h>
+
+/* Native 0x32b82c..0x32b9a4: start an associated (periodic) cycle for the
+ * record. Stamp the object (+8) and record (+800) with the scheduled
+ * start, seed the channel CRC (+706), count the usable channels of the
+ * channel map (+1160 table, limited by +788) for event 30e858, then insert
+ * the schedule entry, advancing the event index (+799, wrapping into the
+ * counter +376) and re-timing the object (+8/+12) until it fits. Returns
+ * the admissible byte of the selected channel or, when there is none, a
+ * fresh 12-bit CRC seed that differs from the record's (+64) and the
+ * previous one. The multiply-accumulate keeps only its low 32 bits. */
+extern uint32_t opencfw_em9305_associated_time_alias_30fd34(void);
+extern uint32_t opencfw_em9305_radio_schedule_313424(uint32_t incoming,
+    uint32_t index,uint32_t timestamp,uint32_t existing,uint32_t action);
+extern uint32_t opencfw_em9305_scan_random_30c478(void);
+extern uint32_t opencfw_em9305_crc_update_304678(uint32_t state,uint32_t count,
+                                                 uintptr_t input);
+extern uint32_t opencfw_em9305_ll_mask_count_30c414(uint32_t low,uint32_t high);
+extern uint32_t opencfw_em9305_child_30e858(uint32_t value0,uint32_t value1,
+                                            uint32_t value2);
+extern uint32_t opencfw_em9305_associated_schedule_insert_312da4(uintptr_t object,
+                                                                 uintptr_t tie);
+extern uint32_t opencfw_em9305_associated_channel_seed_324c98(uintptr_t channels,
+                                                              uint32_t seed);
+extern uint32_t opencfw_em9305_mode_callback_child_317ea4(uint32_t selector);
+extern uint32_t opencfw_em9305_init_secondary_time_317ebc(uint32_t first,
+                                                          uint32_t second);
+
+static inline uint32_t r32(uintptr_t a){return *(volatile uint32_t *)a;}
+static inline uint32_t r16(uintptr_t a){return *(volatile uint16_t *)a;}
+static inline uint32_t r8(uintptr_t a){return *(volatile uint8_t *)a;}
+static inline void w32(uintptr_t a,uint32_t v){*(volatile uint32_t *)a=v;}
+static inline void w16(uintptr_t a,uint32_t v){*(volatile uint16_t *)a=(uint16_t)v;}
+static inline void w8(uintptr_t a,uint32_t v){*(volatile uint8_t *)a=(uint8_t)v;}
+
+uint32_t opencfw_em9305_child_32b82c(uintptr_t record,uintptr_t object)
+{
+    uintptr_t packet=r32(object+44u);
+    w16(packet+224u,0u);
+    uint32_t now=opencfw_em9305_associated_time_alias_30fd34();
+    int32_t offset=(int32_t)(record-r32(0x805c38u));
+    uint32_t row=(uint8_t)((uint32_t)(offset/2824)+4u);
+    uint32_t elapsed=opencfw_em9305_radio_schedule_313424(r32(record+792u),row,
+                                                          now,0u,0u);
+    uint32_t stamp=now+elapsed;
+    w32(object+8u,stamp);
+    w32(record+800u,stamp);
+    uint32_t crc=opencfw_em9305_crc_update_304678(
+        opencfw_em9305_scan_random_30c478(),0u,0u);
+    uintptr_t map=r32(record+1160u)+0xf08u;
+    w16(record+706u,crc);
+    uintptr_t destination=r32(record+2812u);
+    uint32_t high=r32(map),low=r32(map-4u);
+    w8(destination+78u,0u);
+    uint32_t count=opencfw_em9305_ll_mask_count_30c414(low,high);
+    uint32_t channels=r8(record+788u);
+    if(count<channels){
+        map=r32(record+1160u)+0xf08u;
+        high=r32(map);
+        low=r32(map-4u);
+        channels=opencfw_em9305_ll_mask_count_30c414(low,high);
+    }
+    destination=r32(record+2812u);
+    uint32_t id=r8(record+1u);
+    w8(destination+79u,channels);
+    (void)opencfw_em9305_child_30e858(id,r8(destination+78u),channels);
+    for(;;){
+        uint32_t inserted=opencfw_em9305_associated_schedule_insert_312da4(object,0u);
+        uint32_t index=r8(record+799u);
+        if(inserted!=0u){
+            uintptr_t table=r32(record+1160u);
+            uint32_t previous=r16(record+706u);
+            uint32_t selected=r8(table+(index&0x7fu)+0xf0cu);
+            w8(packet+261u,0u);
+            if(selected!=255u){
+                uint32_t admissible=r8(table+(selected<<8));
+                if(admissible!=0u)return admissible;
+            }
+            previous&=0xfffu;
+            w16(record+1144u,0u);
+            for(;;){
+                crc=opencfw_em9305_crc_update_304678(
+                    opencfw_em9305_scan_random_30c478(),0u,0u);
+                uint32_t reference=r16(record+64u)&0xfffu;
+                w16(record+706u,crc);
+                if((crc&0xfffu)!=reference&&(crc&0xfffu)!=previous)return crc;
+            }
+        }
+        uint32_t width=r8(record+788u);
+        uint32_t next=index+1u;
+        w8(record+799u,next);
+        uint32_t counter;
+        if((uint8_t)next==width){
+            counter=r16(record+376u)+1u;
+            next=0u;
+            w8(record+799u,0u);
+            w16(record+376u,counter);
+        }else{
+            counter=r16(record+376u);
+        }
+        uint32_t chosen=opencfw_em9305_associated_channel_seed_324c98(
+            record+720u,(uint16_t)(counter^(uint8_t)next));
+        uint32_t events=r16(record+376u);
+        uint32_t interval=r32(record+700u);
+        uint32_t local=r8(record+799u);
+        uint32_t scaled=r32(record+792u);
+        w8(record+697u,chosen);
+        uint32_t product=interval*events+scaled*local;
+        uint32_t factor=opencfw_em9305_mode_callback_child_317ea4(5u);
+        uint32_t phase=opencfw_em9305_init_secondary_time_317ebc(product,factor);
+        uint32_t old=r32(object+12u);
+        w32(object+8u,stamp-phase+product);
+        w32(object+12u,phase+old);
+    }
+}
+
+/* Same stock function 0x32b82c; the former separate copy
+ * (init_associated_cycle_start_32b82c.c) seeded the channel with the old
+ * counter on index wrap, where stock uses counter+1. */
+__typeof__(opencfw_em9305_child_32b82c) opencfw_em9305_associated_cycle_start_32b82c
+    __attribute__((alias("opencfw_em9305_child_32b82c")));

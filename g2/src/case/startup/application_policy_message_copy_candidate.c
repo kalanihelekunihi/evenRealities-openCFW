@@ -33,3 +33,5 @@ uint32_t case_policy_message_copy(uint32_t queue,const uint32_t *args,uint32_t m
     wr(queue+56u,count+1u);
     return result;
 }
+/* Dedup (0x0800ad48): case_queue_copy_in (was legacy-default/kernel_queue_copy_candidate.c). */
+uint32_t case_queue_copy_in(uint32_t queue,const void *item,uint32_t mode) __attribute__((alias("case_policy_message_copy")));

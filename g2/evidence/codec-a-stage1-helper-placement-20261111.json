@@ -1,0 +1,50 @@
+{
+  "schema": 1,
+  "target": "locked GX8002 BINH A stage-1 helper placement",
+  "source": "g2/src/codec/link/g2-codec-a-binh-stage1.ld",
+  "source_sha256": "9d58d406ff9c03e83f61247f1d074ba4fd344a6bf9324d61ccc863db6c13345d",
+  "helpers": [
+    {
+      "name": "__reg_set_val",
+      "address": "0x10000138",
+      "bytes": 18,
+      "stock_and_source_sha256": "e2046581f41222befb24ceaa43d1781b3656b996b9ad822fcb8b778994f331a7",
+      "byte_identical_at_stock_address": true
+    },
+    {
+      "name": "__module_get_div.isra.1",
+      "address": "0x10000204",
+      "bytes": 28,
+      "stock_and_source_sha256": "12ef96242448f65f16211ffa85d455f2beba409320f72f8e2f2779d277470c4a",
+      "byte_identical_at_stock_address": true
+    }
+  ],
+  "source_stage1": {
+    "bytes": 4756,
+    "sha256": "7718b0d992ab5ed09ea7a6ee79e36f8741d41664b1ca0fa9c3c8959ab9a583cf",
+    "vectors_match_stock": true,
+    "initialized_data_match_stock": true,
+    "same_offset_equal_bytes_before": 1140,
+    "same_offset_equal_bytes_after": 1156,
+    "module_get_info_in_intervening_source_slot_stock_identical": false
+  },
+  "verification": {
+    "fresh_source_report": "build/g2-stage1-helper-placement-source-20261111/report.json",
+    "fresh_source_report_sha256": "9d97e56fa80a8ff525a861cd73dc09d505fe3545d6203bb7374a65de71514c55",
+    "fresh_compile_enabled_units": 4884,
+    "fresh_compile_failures": 0,
+    "fresh_duplicate_strong_symbols": 0,
+    "fresh_manifest_changed_during_build": false,
+    "fresh_link_report": "build/g2-stage1-helper-placement-fresh-link-20261111/link-report.json",
+    "fresh_link_report_sha256": "ca1bd066666584ea21248e5f7a3af59001913d69bbade6e48ac5a5da90a50ca3",
+    "full_link_report": "build/g2-all-stage1-helper-placement-20261111/link-report.json",
+    "full_link_report_sha256": "29a3ab3207c65e8738378000caf1ad1850bf2bda59d1ec9e5dc8c346aace33e6",
+    "payloads_linked": 7,
+    "source_bundle_candidate_sha256": "3b367a9950f273b3db440f2e309485eab82ccb305219d2999284a44918a05325",
+    "component_comparison": "build/g2-stage1-helper-placement-comparison-20261111/report.json",
+    "component_comparison_sha256": "d5e68069d5478e615982057138f9e7466975aef31bc255a596775ef87bc6ee8b",
+    "sources_check": "4889 units, 4550 source files, 1 not built",
+    "non_codec_payload_hashes_unchanged": true
+  },
+  "qualification": "Two existing C-compiled SDK helper sections now occupy their stock addresses and match exact function bytes. Other stage-1 code, the complete BINH A and FWPK, model behavior, bundle identity, and hardware startup remain unverified."
+}

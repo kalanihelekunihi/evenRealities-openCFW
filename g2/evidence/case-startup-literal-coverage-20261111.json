@@ -1,0 +1,70 @@
+{
+  "schema": 1,
+  "date": "2026-11-11",
+  "reference": {
+    "artifact": "g2/blobs/official/g2-2.2.6.10/firmware_box.raw.bin",
+    "sha256": "773b6d4cfdaf0a5a74a557e3babe8222a0ae813436b76a7437c1096d2c60d677",
+    "flash_base": "0x08000000"
+  },
+  "closed_gaps": [
+    {
+      "start": "0x080000C4",
+      "end_exclusive": "0x080000CC",
+      "bytes": "99a50008882c0020",
+      "content_sha256": "53509fecea0d6f07ef505ad899ac2bf545177e7a8401bed35b4ed07ae24e53ec",
+      "classification": "PC-relative literal data",
+      "loads": [
+        "0x080000C0 LDR r0, [pc, #0] reads 0x0800A599 at 0x080000C4; the following BX enters application code at 0x0800A598 in Thumb state",
+        "0x080000B8 LDR r0, [pc, #12] reads 0x20002C88 at 0x080000C8; the following MOV SP, r0 sets the stack top"
+      ]
+    },
+    {
+      "start": "0x080000EE",
+      "end_exclusive": "0x080000F0",
+      "bytes": "0000",
+      "content_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "classification": "zero alignment or data",
+      "reason": "Zero halfword after BX at 0x080000EC aligns the following word literal."
+    },
+    {
+      "start": "0x080000F0",
+      "end_exclusive": "0x080000F4",
+      "bytes": "28010020",
+      "content_sha256": "8b21c33cfee0449829e17428cb4b9f354e5960933c8bbf20c0fd17611ca5e882",
+      "classification": "PC-relative literal data",
+      "load": "0x080000CC LDR r3, [pc, #32] reads scheduler context address 0x20000128 from 0x080000F0"
+    },
+    {
+      "start": "0x08000140",
+      "end_exclusive": "0x08000144",
+      "bytes": "28010020",
+      "content_sha256": "8b21c33cfee0449829e17428cb4b9f354e5960933c8bbf20c0fd17611ca5e882",
+      "classification": "PC-relative literal data",
+      "load": "0x08000106 LDR r3, [pc, #56] reads scheduler context address 0x20000128 from 0x08000140"
+    },
+    {
+      "start": "0x08000158",
+      "end_exclusive": "0x08000160",
+      "bytes": "af840008b9000008",
+      "content_sha256": "d1dd59c8b0435e511dbb2d0ed1b3064408025ca2374e1f113c80a56c2ccbd4b8",
+      "classification": "PC-relative literal data",
+      "loads": [
+        "0x08000144 LDR r0, [pc, #16] reads Thumb early hook 0x080084AF from 0x08000158",
+        "0x08000148 LDR r0, [pc, #16] reads Thumb startup entry 0x080000B9 from 0x0800015C"
+      ]
+    }
+  ],
+  "coverage_delta": {
+    "inventory": "g2/tools/manifests/g2-case-final-gap-frontier.tsv",
+    "unsupported_rows_before": 198,
+    "unsupported_rows_after": 194,
+    "literal_rows_after": 4,
+    "bytes_now_classified_as_literal_data": 24,
+    "zero_alignment_bytes_classified": 2,
+    "row_content_hashes_verified_against_reference": true
+  },
+  "limits": [
+    "The remaining unsupported interfunction spans are not classified by this review.",
+    "Classifying these bytes as literal data does not prove whole-case or whole-G2 source completeness, byte equality, or physical behavior."
+  ]
+}

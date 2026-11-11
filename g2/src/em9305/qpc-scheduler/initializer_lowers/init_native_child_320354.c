@@ -1,114 +1,66 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_320354\n"
-".type opencfw_em9305_child_320354,@function\n"
-"opencfw_em9305_child_320354:\n"
-"L320354:\n"
-"enter_s [r13-r18,blink]\n"
-"L320356:\n"
-"add2 r15,r0,0x3f\n"
-"L32035a:\n"
-"ld r16,[r15,36]\n"
-"L32035e:\n"
-"bl.d opencfw_em9305_scan_current_303f80\n"
-"L320362:\n"
-"mov_s r13,r0\n"
-"L320364:\n"
-"ldh_s r2,[r13,0x16]\n"
-"L320366:\n"
-"ldh_s r1,[r13,0x14]\n"
-"L320368:\n"
-"ld_s r3,[r13,0x5c]\n"
-"L32036a:\n"
-"add2 r18,r13,0x3d\n"
-"L32036e:\n"
-"add r0,r0,1228\n"
-"L320372:\n"
-"st_s r0,[r15,0x4]\n"
-"L320374:\n"
-"breq.d.nt r1,r2,L32039e\n"
-"L320378:\n"
-"st_s r3,[r15,0]\n"
-"L32037a:\n"
-"ld r1,[r16,164]\n"
-"L32037e:\n"
-"mpyuw r2,r2,625\n"
-"L320382:\n"
-"add_s r0,r0,r1\n"
-"L320384:\n"
-"brhs.d.nt r0,r2,L32039e\n"
-"L320388:\n"
-"mov_s r0,r18\n"
-"L32038a:\n"
-"bl opencfw_em9305_init_schedule_adjust_312f88\n"
-"L32038e:\n"
-"breq_s r0,0,L32039e\n"
-"L320390:\n"
-"ld_s r1,[r13,0x5c]\n"
-"L320392:\n"
-"bl.d opencfw_em9305_auxiliary_elapsed_303f8c\n"
-"L320396:\n"
-"ld r0,[r15,0]\n"
-"L320398:\n"
-"st r0,[r16,164]\n"
-"L32039c:\n"
-"leave_s [r13-r18,blink,pcl]\n"
-"L32039e:\n"
-"ldb r1,[r16,151]\n"
-"L3203a2:\n"
-"ldb r0,[r16,1]\n"
-"L3203a6:\n"
-"bl.d opencfw_em9305_init_channel_next_325720\n"
-"L3203aa:\n"
-"st 0,[r16,164]\n"
-"L3203ae:\n"
-"stb r0,[r16,1]\n"
-"L3203b2:\n"
-"ldh_s r0,[r13,0x16]\n"
-"L3203b4:\n"
-"ldh_s r14,[r13,0x14]\n"
-"L3203b6:\n"
-"brne.d.nt r14,r0,L3203c8\n"
-"L3203ba:\n"
-"mov_s r17,r0\n"
-"L3203bc:\n"
-"bl.d opencfw_em9305_auxiliary_insert_313220\n"
-"L3203c0:\n"
-"mov_s r0,r18\n"
-"L3203c2:\n"
-"ld r0,[r15,0]\n"
-"L3203c4:\n"
-"st_s r0,[r13,0x5c]\n"
-"L3203c6:\n"
-"leave_s [r13-r18,blink,pcl]\n"
-"L3203c8:\n"
-"mpyuw r14,r14,625\n"
-"L3203cc:\n"
-"mpyuw r17,r17,625\n"
-"L3203d0:\n"
-"ld r1,[r15]\n"
-"L3203d4:\n"
-"add r17,r17,r14\n"
-"L3203d8:\n"
-"add_s r1,r1,r14\n"
-"L3203da:\n"
-"st_s r1,[r13,0x5c]\n"
-"L3203dc:\n"
-"mov_s r0,r18\n"
-"L3203de:\n"
-"mov_s r1,r14\n"
-"L3203e0:\n"
-"bl.d opencfw_em9305_init_schedule_adjust_312f88\n"
-"L3203e4:\n"
-"mov_s r2,r17\n"
-"L3203e6:\n"
-"ld_s r1,[r13,0x5c]\n"
-"L3203e8:\n"
-"brne_s r0,0,L320392\n"
-"L3203ea:\n"
-"st_s r1,[r15,0]\n"
-"L3203ec:\n"
-"b_s L3203d8\n"
-".size opencfw_em9305_child_320354,.-opencfw_em9305_child_320354\n"
-);
+#include <stdint.h>
+
+/* Native 0x320354..0x3203ee: reschedule a link's next connection event.
+ * Store the scan-time deadline (now + 1228) at +256 and the previous anchor
+ * (+0x5c) at +252. While a latency window is open (+0x14 != +0x16) and the
+ * accumulated delay (session +164) still fits in it (+0x16 * 625 us), try to
+ * keep the slot. Otherwise clear the delay, hop the channel (session +1,
+ * mask +151) and either re-insert the node (+244) or step the anchor by the
+ * interval (+0x14 * 625 us) until the schedule accepts it. The elapsed time
+ * since the anchor becomes the new session delay. */
+extern uint32_t opencfw_em9305_scan_current_303f80(void);
+extern uint32_t opencfw_em9305_init_schedule_adjust_312f88(uintptr_t,uint32_t,uint32_t);
+extern uint32_t opencfw_em9305_auxiliary_elapsed_303f8c(uint32_t,uint32_t);
+extern uint32_t opencfw_em9305_init_channel_next_325720(uint32_t,uint32_t);
+extern uint32_t opencfw_em9305_auxiliary_insert_313220(uintptr_t);
+
+uint32_t opencfw_em9305_child_320354(uintptr_t link)
+{
+    volatile uint32_t *previous = (volatile uint32_t *)(link + 252u);
+    volatile uint32_t *anchor = (volatile uint32_t *)(link + 0x5cu);
+    uintptr_t session = *(volatile uint32_t *)(link + 288u);
+    uintptr_t node = link + 244u;
+    uint32_t now = opencfw_em9305_scan_current_303f80();
+    uint32_t window = *(volatile uint16_t *)(link + 0x16u);
+    uint32_t interval = *(volatile uint16_t *)(link + 0x14u);
+    uint32_t last = *anchor;
+    *(volatile uint32_t *)(link + 256u) = now + 1228u;
+    *previous = last;
+    if (interval != window) {
+        uint32_t delay = *(volatile uint32_t *)(session + 164u);
+        uint32_t limit = window * 625u;
+        if (now + 1228u + delay < limit &&
+            opencfw_em9305_init_schedule_adjust_312f88(node, delay, limit) != 0u) {
+            uint32_t elapsed = opencfw_em9305_auxiliary_elapsed_303f8c(*previous, *anchor);
+            *(volatile uint32_t *)(session + 164u) = elapsed;
+            return elapsed;
+        }
+    }
+    uint32_t mask = *(volatile uint8_t *)(session + 151u);
+    *(volatile uint32_t *)(session + 164u) = 0u;
+    *(volatile uint8_t *)(session + 1u) =
+        (uint8_t)opencfw_em9305_init_channel_next_325720(*(volatile uint8_t *)(session + 1u), mask);
+    window = *(volatile uint16_t *)(link + 0x16u);
+    interval = *(volatile uint16_t *)(link + 0x14u);
+    if (interval == window) {
+        (void)opencfw_em9305_auxiliary_insert_313220(node);
+        uint32_t value = *previous;
+        *anchor = value;
+        return value;
+    }
+    uint32_t step = interval * 625u;
+    uint32_t span = window * 625u + step;
+    uint32_t time = *previous;
+    for (;;) {
+        time += step;
+        *anchor = time;
+        uint32_t accepted = opencfw_em9305_init_schedule_adjust_312f88(node, step, span);
+        time = *anchor;
+        if (accepted != 0u) {
+            uint32_t elapsed = opencfw_em9305_auxiliary_elapsed_303f8c(*previous, time);
+            *(volatile uint32_t *)(session + 164u) = elapsed;
+            return elapsed;
+        }
+        *previous = time;
+    }
+}

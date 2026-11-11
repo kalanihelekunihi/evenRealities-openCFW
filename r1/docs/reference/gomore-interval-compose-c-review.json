@@ -1,0 +1,381 @@
+{
+  "source": {
+    "source": "r1/src/application/runtime/native_gomore_interval_compose.c",
+    "payload": "r1-application",
+    "role": "candidate",
+    "toolchain": "clang",
+    "link": true,
+    "expect": "compile",
+    "returncode": 0,
+    "argv": [
+      "/usr/bin/clang",
+      "--target=arm-none-eabi",
+      "-mcpu=cortex-m4",
+      "-mthumb",
+      "-mfpu=fpv4-sp-d16",
+      "-mfloat-abi=hard",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-fno-strict-aliasing",
+      "-fshort-enums",
+      "-std=c11",
+      "-Os",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-DNRF52840_XXAA",
+      "-DFLOAT_ABI_HARD",
+      "-DNRF_SD_BLE_API_VERSION=7",
+      "-DNRF_DFU_SVCI_ENABLED",
+      "-DNRF_DFU_TRANSPORT_BLE=1",
+      "-DS140",
+      "-DSOFTDEVICE_PRESENT",
+      "-DFREERTOS",
+      "-DCONFIG_NFCT_PINS_AS_GPIOS",
+      "-DCONFIG_GPIO_AS_PINRESET",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/r1/src/config/sdk",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-interval-compose-c-final/generated/r1",
+      "-include",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-interval-compose-c-final/generated/r1/nrf_svci_clang.h",
+      "-isystem",
+      "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/external/freertos/portable/GCC/nrf52",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/external/freertos/portable/CMSIS/nrf52",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/external/segger_rtt",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/ble/common",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/ble/ble_advertising",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/ble/peer_manager",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/ble/nrf_ble_gatt",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/atomic",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/atomic_flags",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/atomic_fifo",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/delay",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/fds",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/fstorage",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/mutex",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/sortlist",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/timer",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/experimental_section_vars",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/log",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/log/src",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/strerror",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/util",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/softdevice/common",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/softdevice/s140/headers",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/softdevice/s140/headers/nrf52",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/toolchain/cmsis/include",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/integration/nrfx",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/integration/nrfx/legacy",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx/drivers/include",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx/hal",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx/soc",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx/mdk",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/ble/ble_link_ctx_manager",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/ble/ble_services/ble_dfu",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/ble/nrf_ble_qwr",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/balloc",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/bootloader/dfu",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/memobj",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/pwr_mgmt",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/ringbuf",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/external/fprintf",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx/drivers/src",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/bootloader",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/bootloader/ble_dfu",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/svc",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/stack_info",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/mem_manager",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/queue",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/scheduler",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/r1/src/config/rtos",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/third-party/upstream/freertos-kernel/include",
+      "-munaligned-access",
+      "-MD",
+      "-MF",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-interval-compose-c-final/r1/r1-application/r1__src__application__runtime__native_gomore_interval_compose.c.d",
+      "-c",
+      "/Users/kalani/Repo/evenRealities-openCFW/r1/src/application/runtime/native_gomore_interval_compose.c",
+      "-o",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-interval-compose-c-final/r1/r1-application/r1__src__application__runtime__native_gomore_interval_compose.c.o"
+    ],
+    "source_sha256": "2b8b1a47ee2d291f28b3f5157015bb1d18c2b5d9404ecff4aa7c916e2c7c8f8e",
+    "object_sha256": "31e0d0534bb83a5d56aab968f3f92e4d7eabdd2f65cbc18637382846cc71e52f",
+    "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-interval-compose-c-final/r1/r1-application/r1__src__application__runtime__native_gomore_interval_compose.c.o",
+    "strong": [
+      "r1_gomore_sleep_interval_compose_native"
+    ],
+    "weak": [],
+    "undefined": [
+      "r1_gomore_sleep_interval_build_native",
+      "r1_gomore_sleep_interval_refine_native",
+      "r1_native_memory_move"
+    ]
+  },
+  "stock_REA": {
+    "evidence_id": "ev_da710c3328d216858a0d02f75f4e08092224833cf22278f784af37f8fbea9c3b",
+    "subject": {
+      "name": "stock.elf",
+      "digest": {
+        "sha256": "25b4a29af80ec8edab5bd861ba9b74a6e22eab29dc3d7a809a16869e8a140f04"
+      },
+      "local_path": "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-queue-reset-c/stock.elf",
+      "format": "elf",
+      "architecture": "arm"
+    },
+    "provider": {
+      "id": "ghidra",
+      "name": "Ghidra",
+      "version": "12.1.4"
+    },
+    "analysis_profile": {
+      "provider": {
+        "id": "ghidra",
+        "name": "Ghidra",
+        "version": "12.1.4"
+      },
+      "parameters": {
+        "target_kind": "executable",
+        "target_format": "elf",
+        "architecture": "arm",
+        "available_architectures": [
+          "arm"
+        ],
+        "import_mode": "ephemeral-source-immutable",
+        "annotation_policy": "atomic-function-entry-metadata-v1",
+        "load_image_observations": "source-mappings-entry-context-v2",
+        "function_body_evidence": "complete-inclusive-ranges-v1",
+        "function_references": "complete-body-and-entry-reference-manager-v2",
+        "call_relationship_coverage": "function-body-call-coverage-v5",
+        "function_dossier_coverage": "observed-facets-and-call-relationships-v1",
+        "string_inventory_evidence": "defined-data-coverage-v1",
+        "location_resolution": "explicit-address-exact-entry-symbol-first-v3",
+        "procedure_file_offset_resolution": "address-first-unique-target-source-mapping-v2",
+        "instruction_flow_evidence": "decoded-return-pcode-v1",
+        "instruction_references": "exact-address-incoming-v1",
+        "function_boundary_observations": "ghidra-function-boundary-limitations-v3",
+        "no_return_repair": "returning-imports-decoded-return-v2",
+        "process_launch": "inspected-jvm-launch-support-v1",
+        "jump_table_evidence": "typed-case-default-blocks-v1",
+        "decompiler_jump_loads": true,
+        "loader": "auto-from-header",
+        "language_id": "auto-from-header",
+        "compiler_spec_id": "auto-default",
+        "analyzer_preset": "ghidra-default"
+      },
+      "digest": "7e46711069eea041af1b9b99e34115c13332795e5cda76e584a722f529ec70de"
+    },
+    "predicate_type": "rea.analysis",
+    "operation": "read_bytes",
+    "parameters": {
+      "address": "0x67558",
+      "length": 130
+    },
+    "raw_result": {
+      "address": "0x67558",
+      "requested_bytes": 130,
+      "returned_bytes": 130,
+      "bytes_hex": "2de9f04f95b0824620a88b46914661c8dde91e211c4602af4b4661c7cde90041594605a801f0b2fe202205a90da8c0f7e9f8119fddf84880cde900560dab4a46594605a80294f1f7e7fa202205a90da8c0f7d8f81197cdf84880dde90d10401a1e21b0fbf1f1c1eb01100d9901eb40000e9020220da95046c0f7c4f815b0bde8f08f",
+      "complete": true
+    },
+    "normalized_result": {
+      "address": "0x67558",
+      "requested_bytes": 130,
+      "returned_bytes": 130,
+      "bytes_hex": "2de9f04f95b0824620a88b46914661c8dde91e211c4602af4b4661c7cde90041594605a801f0b2fe202205a90da8c0f7e9f8119fddf84880cde900560dab4a46594605a80294f1f7e7fa202205a90da8c0f7d8f81197cdf84880dde90d10401a1e21b0fbf1f1c1eb01100d9901eb40000e9020220da95046c0f7c4f815b0bde8f08f",
+      "complete": true
+    },
+    "confidence": "observed",
+    "authority": "shipped-artifact",
+    "environment": null,
+    "limitations": [
+      "The session serves operations only after Ghidra reports default auto-analysis complete; incomplete analysis does not expose partial results.",
+      "The imported Program and temporary project are ephemeral and deleted on close. Annotation operations edit session database metadata; original executable bytes are never written.",
+      "Cancelling an active Ghidra request terminates its ephemeral database and discards session annotations. The selected target remains open; the next provider query imports the original artifact again.",
+      "Default-space addresses use lowercase 0x-prefixed hexadecimal; other address spaces use <percent-encoded-space>:0x<hex>.",
+      "Bytes reflect Ghidra's initialized memory, including loader fixups. Reads stop at an unmapped or uninitialized byte and report completeness explicitly.",
+      "macOS sessions require a matching executable Ghidra native decompiler; REA checks for it but does not build native components or change Gatekeeper quarantine state."
+    ],
+    "relationship_coverage": null,
+    "locations": [],
+    "evidence_links": []
+  },
+  "direct_replay": {
+    "paired_cases": 1698,
+    "fault_cases": 2,
+    "source_object_sha256": "31e0d0534bb83a5d56aab968f3f92e4d7eabdd2f65cbc18637382846cc71e52f",
+    "dependency_objects": {
+      "r1/src/application/runtime/native_memory_move.c": "6a3110da0b585640a02ef5168c86a8279f50e50c8f4695846cd8aa14425777ed",
+      "third-party/upstream/musl-memmove-1.2.5/memmove.c": "4a6ccefb180ef4af2cfe631f54df4d6f629d1b3a2d374911c00b25c107bcb723",
+      "third-party/upstream/musl-memory-1.2.5/memcpy.c": "a4b54c7315f7ca2f8097e3f9afb4a9bcd7860c75649fc9e185d951c3ea0696cf"
+    },
+    "actual_C_native_memory_move": true,
+    "limits": [
+      "Build/refine providers modeled, each writing all32 output bytes as observed native return-copy contract",
+      "Actual C native-memory-move provider and upstream memmove/memcpy versus native movement; private stack/preserved caller-clobbered state excluded",
+      "No physical/concurrent/final-link or instruction-identity proof"
+    ]
+  },
+  "engine_integration": {
+    "paired_cases": 2152,
+    "source_object_sha256": "80b943fa31c97a04ffc010ad1967eaa2c2fe99e6406410b167143f92cc85a107",
+    "dependency_objects": {
+      "r1/src/application/runtime/native_gomore_stage.c": "fc6cdb18b78e1f14436f056344f771419efdb9a28e197f8c739825ac20c84d51",
+      "third-party/upstream/musl-memory-1.2.5/memcpy.c": "a4b54c7315f7ca2f8097e3f9afb4a9bcd7860c75649fc9e185d951c3ea0696cf",
+      "r1/src/application/runtime/native_gomore_descriptor_merge.c": "845a1f9850717fce5eab3884fa4d4e4d89815c4c6ce59e262f6e8af4bc7d3032",
+      "r1/src/application/runtime/memory_eabi.c": "e7e21f3a870f58f3f737670140ae73fdcb6219d2abbef954d6ed8fe7644c817f",
+      "third-party/upstream/musl-memory-1.2.5/memset.c": "6c2f1a8f480c27d5bc20f79ac535dac28fbbdcaec12e69bad96721f724ec9057",
+      "r1/src/application/runtime/native_gomore_interval_compose.c": "31e0d0534bb83a5d56aab968f3f92e4d7eabdd2f65cbc18637382846cc71e52f",
+      "r1/src/application/runtime/native_memory_move.c": "6a3110da0b585640a02ef5168c86a8279f50e50c8f4695846cd8aa14425777ed",
+      "third-party/upstream/musl-memmove-1.2.5/memmove.c": "4a6ccefb180ef4af2cfe631f54df4d6f629d1b3a2d374911c00b25c107bcb723"
+    },
+    "actual_C_compose": true,
+    "actual_C_descriptor_merge": true,
+    "actual_C_setter_and_memcpy": true,
+    "fault_cases": 32,
+    "completed_returns": 2120,
+    "mutation_configurations": 72,
+    "activated_mutations": 66,
+    "clamped_cases": 708,
+    "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "limits": [
+      "Actual production C interval engine compared to stock",
+      "Build/refine modeled; actual C compose, engine, descriptor merge, second-word setter and memory routines execute",
+      "Private-frame offsets recorded as observations, not a requirement for C unless lower reads depend on them",
+      "No physical/concurrent/final-link or byte-identity proof"
+    ]
+  },
+  "negative_controls": [
+    {
+      "name": "wrong-metadata16",
+      "rejected": true
+    },
+    {
+      "name": "lost-metadata20",
+      "rejected": true
+    },
+    {
+      "name": "capture-work-before-copy",
+      "rejected": true
+    },
+    {
+      "name": "absolute-rounding",
+      "rejected": true
+    },
+    {
+      "name": "signed-span",
+      "rejected": true
+    },
+    {
+      "name": "ceiling-round",
+      "rejected": true
+    },
+    {
+      "name": "wrong-build-mode",
+      "rejected": true
+    },
+    {
+      "name": "wrong-refine-policy",
+      "rejected": true
+    },
+    {
+      "name": "short-copy",
+      "rejected": true
+    },
+    {
+      "name": "wrong-return",
+      "rejected": true
+    }
+  ],
+  "qualification": {
+    "candidate_units": 1,
+    "compiled_units": 1,
+    "units": [
+      {
+        "source": "r1/src/application/runtime/native_gomore_interval_compose.c",
+        "payload": "r1-application",
+        "evidence": "r1/symbols/function-frontier.csv",
+        "selected": [],
+        "compiled": true,
+        "rejections": {
+          "anchored_relocation_pattern_not_exact": 1
+        },
+        "source_implementation_completeness": "not established by compilation or byte matching",
+        "reason": "no exact anchored body under tested production bindings; integration remains unfinished"
+      }
+    ]
+  },
+  "composition": {
+    "report": "build/sources-goal-r1-interval-compose-c-final/report.json",
+    "sha256": "7f12557e0ae590a6d832b8636f782ac0e6d6834cf90766914ccfc9002fb77e92",
+    "units": 669,
+    "unchanged_prior_objects": 668,
+    "application_imports": 165,
+    "bootloader_imports": 34,
+    "resolved_import": "r1_gomore_sleep_interval_compose_native",
+    "new_native_imports": [
+      "r1_gomore_sleep_interval_build_native",
+      "r1_gomore_sleep_interval_refine_native"
+    ]
+  },
+  "hybrid": {
+    "report": "build/hybrid-goal-r1-interval-compose-c/build-report.json",
+    "sha256": "d5dc95eb16d20256c6484364729d0a282d0f75740fa509a4fa9dedfead04cc9d",
+    "totals": {
+      "binary-pull-through": 641791,
+      "source-built": 4369,
+      "resource-file": 248
+    },
+    "canonical_plan_unchanged": true
+  },
+  "artifacts": {
+    "build/goal-r1-interval-compose-c/verify.py": "a9d81697b0b185b00b7a0253514c6ff5f59d3296a226987491d9cafe5da677d1",
+    "build/goal-r1-interval-compose-c/engine.py": "881598c1bf3608ae0447a3fbb142635a597127e24381c1bf2e8c0443b2442d3a",
+    "build/goal-r1-interval-compose-c/make_engine.py": "eb24632424753abbb92f2a6f18f122dd6862bed65beb6a9586e540bb3411cde6",
+    "build/goal-r1-interval-compose-c/negative.py": "0b3869457730ef4cf8f56ee7116e136c11f7ff4429adcb882d6274d45880125b",
+    "build/goal-r1-interval-compose-c/qualify.py": "603df7373b4a8729a59e32d11621d41490b2692c13beeed62bd3c6ee2db644bd",
+    "build/goal-r1-interval-compose-c/finalize.py": "100c08c9f84c5e3ee4314bb591a0d5b532202b001bd4e714e5ee7ebbdc781ce4",
+    "build/goal-r1-interval-compose-c/source.elf": "d8d35474f27044e375a15bd78c4bd464da32b36ef2ada92518c8ec53a4ddf30f",
+    "build/goal-r1-interval-compose-c/engine.elf": "64ac8ed87b7cc648502f0c3a653424637cc16a51610ee4d0c2aa12369a5b3a4b",
+    "build/goal-r1-interval-compose-c/results.json": "10a7c7cb78d2d2c3bce1a1c729a2c21cd26767a1357564305bace3ce24b7aabc",
+    "build/goal-r1-interval-compose-c/engine-results.json": "7da4019cae9ccf29624e3d9a205f6f0a46bca330aa6b0e67fa87b32d6e5b3747",
+    "build/goal-r1-interval-compose-c/instructions.json": "c90c0791956927ff004db04c78e9a51cff2f7c30204a0f6ca10292f1396b0886",
+    "build/goal-r1-interval-compose-c/build-instructions.json": "b5ed5141dab621e0dc825bbe9f70b92e408d216e627ee8ecb76a72e2da50420e",
+    "build/goal-r1-interval-compose-c/refine-instructions.json": "ad2446c0a58bf86448fe0e20e4055959c35e08456c3303dbc81bedac847fb450",
+    "build/goal-r1-interval-compose-c/wrong-metadata16.c": "38a0fc756cdfe89722009e44f52d0e94919c4e54c6aec3d83f773ca1ce252bb0",
+    "build/goal-r1-interval-compose-c/wrong-metadata16.o": "4a2c6e8b93dbe24e6d40750b760910d6922cd7c1065d3d0058159588589794d6",
+    "build/goal-r1-interval-compose-c/wrong-metadata16.log": "656d2e6230c80dbd15b2690ddd8f9037114e49ce2dbdab8a0af763b8d3217561",
+    "build/goal-r1-interval-compose-c/lost-metadata20.c": "0fa4e2cafdfcce770cd4fb91d7982fa6822d480b14f926fc7cb32bf5b93828f1",
+    "build/goal-r1-interval-compose-c/lost-metadata20.o": "739d102da4d28f3bfc06509f5de151a6db9610661f20dd29303caa38411309cd",
+    "build/goal-r1-interval-compose-c/lost-metadata20.log": "656d2e6230c80dbd15b2690ddd8f9037114e49ce2dbdab8a0af763b8d3217561",
+    "build/goal-r1-interval-compose-c/capture-work-before-copy.c": "c4a464dcc7343fb0708a18407a863ca7b19ae0006cab53f2f1cf21e4c7f6aae6",
+    "build/goal-r1-interval-compose-c/capture-work-before-copy.o": "5c6dad8f92953f668fdc2cf572b7d0743be83e336f30cbf4a52ce8195c54e806",
+    "build/goal-r1-interval-compose-c/capture-work-before-copy.log": "656d2e6230c80dbd15b2690ddd8f9037114e49ce2dbdab8a0af763b8d3217561",
+    "build/goal-r1-interval-compose-c/absolute-rounding.c": "0ebfd5f630936444bcdca945edef1500bd1cd86146ce353e08aea48f0be254ba",
+    "build/goal-r1-interval-compose-c/absolute-rounding.o": "59e46e0069412bcb3ea0d68a6fd4b84814948fa52b04b9b8371bb4f71cdbc3ff",
+    "build/goal-r1-interval-compose-c/absolute-rounding.log": "656d2e6230c80dbd15b2690ddd8f9037114e49ce2dbdab8a0af763b8d3217561",
+    "build/goal-r1-interval-compose-c/signed-span.c": "a8d2eaf23fa7e72d794e942bed9065cee2bf20ebe995ef151d6a2ba4e0af2aff",
+    "build/goal-r1-interval-compose-c/signed-span.o": "58cb3e06d57e69b174ec4a0ed1bb2f182e0d1bc2b226d48e8394f0434516d1a1",
+    "build/goal-r1-interval-compose-c/signed-span.log": "656d2e6230c80dbd15b2690ddd8f9037114e49ce2dbdab8a0af763b8d3217561",
+    "build/goal-r1-interval-compose-c/ceiling-round.c": "84002282aae9afe87e35f4eaf9719c8bc97f1aef93f4333500bc25199108f1f5",
+    "build/goal-r1-interval-compose-c/ceiling-round.o": "227576cf5f46c7bca6db6a4515b1006145b96c83aef7cd6fc74411250f7380ab",
+    "build/goal-r1-interval-compose-c/ceiling-round.log": "656d2e6230c80dbd15b2690ddd8f9037114e49ce2dbdab8a0af763b8d3217561",
+    "build/goal-r1-interval-compose-c/wrong-build-mode.c": "62a00eff4529997b2bdf4891046141d3f9755abaadea31fcb6b4f5537ff4e580",
+    "build/goal-r1-interval-compose-c/wrong-build-mode.o": "6262e4e764ad579f509db12bd32545fee6fda4621eacccc704deae680d488e28",
+    "build/goal-r1-interval-compose-c/wrong-build-mode.log": "fe74c9941e6dab1e6a49c5d06d8b5586fd6ef3f736e0acc62f19c1d8bf88a46c",
+    "build/goal-r1-interval-compose-c/wrong-refine-policy.c": "616fbf8e55135fd91bafe323ec997e898538fd32dd0df13f90fe8e2281d06b60",
+    "build/goal-r1-interval-compose-c/wrong-refine-policy.o": "13bb1c01889be23a8495954116ed06c8e05a055c99d6bbcbc579641620b4f576",
+    "build/goal-r1-interval-compose-c/wrong-refine-policy.log": "822a0937d090310ad8201e0d3e26d35bd79c8394b7de04e7c069d394b776a8b0",
+    "build/goal-r1-interval-compose-c/short-copy.c": "e709fe6baabb47ae998792fc5aaa7c94afb71871ce6d27ca2a65589f11494a7f",
+    "build/goal-r1-interval-compose-c/short-copy.o": "23868fa8d2fd4ce1fd19309657d05710b5e33b5e49c58a71414eda408bf4bf99",
+    "build/goal-r1-interval-compose-c/short-copy.log": "745ab6d38f66e739952cef62b7544c89062f604750ca636e4aec4c047ddf8545",
+    "build/goal-r1-interval-compose-c/wrong-return.c": "d53702054f94bf610094d8c9105ba3cd7e76c550b09ea1f82f5a7b424044ff06",
+    "build/goal-r1-interval-compose-c/wrong-return.o": "21ab399c0df1a77140f7e5c16441986cad6adf242c5a1ec23a3a8504c3a47ba6",
+    "build/goal-r1-interval-compose-c/wrong-return.log": "1717329137350b04fee09b59471adda58e5f33591f25c4e9a934aa27ecae336b"
+  },
+  "limits": [
+    "No added assembly or RAM; existing C native memory-move provider preserves final R0",
+    "Actual C compose, engine, merge, setters and memory routines execute; build/refine remain modeled",
+    "No private-stack identity or physical/concurrent/final-link proof; no new instruction-qualified bytes"
+  ]
+}

@@ -1,0 +1,193 @@
+{
+  "schema_version": 1,
+  "scope": "R1 HRV sample storage in C; complete sample-storage translation unit has no assembly",
+  "report": "build/sources-goal-r1-hrv-store-reviewed-c/report.json",
+  "comparison_report": "build/sources-goal-r1-hr-store-pure-c/report.json",
+  "stock_entry": "0x5af60",
+  "stock_instruction_size": 226,
+  "audit": {
+    "compiled_units": 862,
+    "unchanged_prior_nongenerated_objects": 851,
+    "changed_prior_nongenerated_objects": [
+      "r1/src/application/runtime/native_health_sample_storage.c"
+    ],
+    "application_imports": 63,
+    "bootloader_imports": 22,
+    "manifest_change": "only explicit -munaligned-access for sample-storage unit",
+    "source_plan_and_cache_layout_unchanged": true,
+    "new_state_definitions": 0,
+    "all_other_C_writer_source_unchanged": true,
+    "whole_sample_storage_unit_has_no_inline_assembly": true,
+    "final_sample_object_equals_tested_object": true,
+    "implicit_and_explicit_M4_unaligned_profiles_produce_same_object": true,
+    "unchanged_storage_sections": {
+      ".r1.health.storage.hr": "5b6fb58e61fa475939767d68a446f97f1bff02c0e5935a3ea8bb51e6515783d8",
+      ".r1.health.storage.hrv": "f1663cceeb67ba35c5a5cbf58b56050ddbe5ec5680ea9e55837b57524f29b876",
+      ".r1.health.storage.spo2": "5b6fb58e61fa475939767d68a446f97f1bff02c0e5935a3ea8bb51e6515783d8",
+      ".r1.health.storage.temperature": "5b6fb58e61fa475939767d68a446f97f1bff02c0e5935a3ea8bb51e6515783d8",
+      ".r1.health.storage.stress_text": "e6aee38e3738d213e9168a0854134b04af4c87362bc5cbb4123d77cffb051ca4"
+    },
+    "hrv_C_section_alignment": 4
+  },
+  "direct": {
+    "stock_C_comparisons": 51866,
+    "native_instruction_bytes_executed": 226,
+    "exact_cache_sample_memory_access_width_order_and_values": true,
+    "all_logging_branches_live_provider_mutations_and_sample_aliases": true,
+    "null_sample_all_hours_and_min_max_zero_edges": true,
+    "void_return_caller_scratch_private_frames_and_physical_sensors_excluded": true
+  },
+  "cache_writer_reader_reset_pipeline": {
+    "activity_reset_comparisons": 12,
+    "stock_C_writer_accessor_latest_reset_comparisons": 864,
+    "linked_normal_objects_and_production_layout_used": true,
+    "shared_prefix_and_timestamp_addresses_match": true,
+    "writer_and_latest_and_reset_execute": true,
+    "hour_average_and_disabled_logging_modeled": true,
+    "private_frames_caller_scratch_APSR_and_physical_behavior_excluded": true
+  },
+  "other_C_writer_regressions": {
+    "hr": {
+      "stock_C_comparisons": 34586,
+      "native_instruction_bytes_executed": 220,
+      "all_logging_branches_live_provider_mutations_and_sample_aliases": true,
+      "null_sample_all_hours_and_min_max_zero_edges": true,
+      "void_return_caller_scratch_private_frames_and_physical_sensors_excluded": true
+    },
+    "spo2": {
+      "stock_C_comparisons": 34586,
+      "native_instruction_bytes_executed": 222,
+      "all_logging_branches_live_provider_mutations_and_sample_aliases": true,
+      "null_sample_all_hours_and_min_max_zero_edges": true,
+      "void_return_caller_scratch_private_frames_and_physical_sensors_excluded": true
+    },
+    "temperature": {
+      "stock_C_comparisons": 43226,
+      "native_instruction_bytes_executed": 244,
+      "all_logging_branches_live_provider_mutations_and_sample_aliases": true,
+      "null_sample_all_hours_and_min_max_zero_edges": true,
+      "void_return_caller_scratch_private_frames_and_physical_sensors_excluded": true
+    },
+    "stress": {
+      "stock_C_comparisons": 25946,
+      "native_instruction_bytes_executed": 220,
+      "all_logging_branches_live_provider_mutations_and_sample_aliases": true,
+      "null_sample_all_hours_and_min_max_zero_edges": true,
+      "void_return_caller_scratch_private_frames_and_physical_sensors_excluded": true
+    }
+  },
+  "compiled_defects_rejected": [
+    {
+      "defect": "kind",
+      "rejected": true
+    },
+    {
+      "defect": "stride",
+      "rejected": true
+    },
+    {
+      "defect": "metadata",
+      "rejected": true
+    },
+    {
+      "defect": "min-zero",
+      "rejected": true
+    },
+    {
+      "defect": "average-width",
+      "rejected": true
+    },
+    {
+      "defect": "log-average",
+      "rejected": true
+    },
+    {
+      "defect": "sample-width",
+      "rejected": true
+    },
+    {
+      "defect": "live-hour",
+      "rejected": true
+    },
+    {
+      "defect": "forced-byte-access-profile",
+      "rejected": true
+    }
+  ],
+  "contract": [
+    "Null sample is inert. Capture hour from timestamp at2, then reload halfword sample and timestamp for average kind5.",
+    "Use six-byte rows, unsigned16 extrema with zero-minimum sentinel, low16-bit stored average, and six-byte latest metadata at147/151. Preserve overlapping aliases and live log reads/full32-bit diagnostic average.",
+    "All five sample writers now use ordinary C. Shared cache owners, storage bytes and other four C writer bodies remain unchanged.",
+    "Explicit -munaligned-access on this unit records the SRAM-helper contract. The pinned M4 compiler default already produces the same object; do not infer a prior byte-access fault. A forced -mno-unaligned-access control is rejected."
+  ],
+  "limits": [
+    "REA226 bytes match locked raw, all226 instruction bytes execute. Exact observed read/write widths, order and values match for cache/sample SRAM in51866 cases. Hour/average/log providers are modeled, with high-bit samples, partial extrema, odd-address aliases and provider mutations.",
+    "864 HR/HRV/SpO2 chain and12 activity-reset comparisons execute actual C writers, accessors, latest readers, resets and memory clear with modeled hour/average and disabled logging. No sample-writer assembly alignment is forced in these probes.",
+    "138344 stock comparisons for the other four C writers pass using the explicit profile.",
+    "Initial serial build lost one unrelated GCC invocation with137. The reviewed serial build compiles all862 units, and its sample object matches the separately compiled probe.",
+    "Void return, caller scratch, private frames and APSR excluded; saved integer/FP state, SP, masks and guards checked. Physical atomicity/concurrency, hardware faults, full application linking, final startup/scatter integration, physical sensors and boot remain unverified."
+  ],
+  "evidence_files": {
+    "build/sources-goal-r1-hrv-store-reviewed-c/report.json": "a8fdbff4a23fc39171a322b364f048918f68d6ca14340ad4ec779c7558e30475",
+    "build/sources-goal-r1-hr-store-pure-c/report.json": "43f7681d4a509cba6e775026dc256efee25a2ea154016d3cc17a841cd83e6002",
+    "build/sources-goal-r1-hrv-store-pure-c/report.json": "d0dab3f8fd5366c78745b18a81844c5c3845ecb05a6ecd167d0d595ba681d041",
+    "r1/src/application/runtime/native_health_sample_storage.c": "7543c9dbb477ceab6e0415a82e3ad2964ce570ba9e17dbcaaf39944592b4c0b8",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-hrv-store-reviewed-c/r1/r1-application/r1__src__application__runtime__native_health_sample_storage.c.o": "cf0bbedefedb49284f67666daa740562ac5aa421111ade6020410385d8af129b",
+    "r1/src/sources.json": "c641a01569c9d39f05bc4bce48d9b5ca6ba6bf8f501b0eabae9dbbbd61b01efb",
+    "tools/build/source-plan.json": "eeb516e31b3310fb0718f36908977f8125723f7c5e0e86cd6744395826259a4d",
+    "r1/src/config/runtime/native_health_cache.ld": "eb8f131c489cd818d4e36718718fa1989719ca0170f164541a1a5bf56dfc1ec3",
+    "r1/src/application/board/native_battery_memory.h": "e646c981681787c87d8088f663239c9006beb4e4c1827e95854093f0628528b6",
+    "r1/src/application/runtime/native_hourly_state.h": "a3a6d8776279f85039202414b3dbd493777feab2825d7102daf0289b8a11e49b",
+    "build/goal-r1-hrv-store-pure-c/audit.json": "c7b9087006c8c461586ebce62778833eb902eb2fab4c880d5df76e4e8e8b8a51",
+    "build/goal-r1-hrv-store-pure-c/negative.json": "98b8848418684efaba661ade03f3850c7736a65ce874200cf0cd809435f41c9c",
+    "build/goal-r1-hrv-store-pure-c/test.ld": "29933c3898097d3ce0072508af97b3e4a4cd8d48a41618e216f33f3bf66d3458",
+    "build/goal-r1-hrv-store-pure-c/temperature-regression.log": "ec095f74f2f58470544961567117bcdc524b6d4b7a07b6b28775117efb3e3423",
+    "build/goal-r1-hrv-store-pure-c/audit.py": "44021da19ce9ed48a69db8d39e94409a3a13ebc3f0e5c3a7cf93e94da2129aaf",
+    "build/goal-r1-hrv-store-pure-c/stress-regression.py": "0a9d39ee4f972dc925eed6e5de27c59e05872e17d8d66de7fa803a25bd3774c5",
+    "build/goal-r1-hrv-store-pure-c/cache.ld": "3cc131364b839c5f2be3f73838f4ce405560cd6fad3b2c7ee0d97b546b8889a4",
+    "build/goal-r1-hrv-store-pure-c/hr-regression.log": "2eee38142cfa1b2921d39afe5a6ac15137b11006fe8b0e1b86599327615ff9cd",
+    "build/goal-r1-hrv-store-pure-c/source.elf": "de92bd543fb1ccb19699f6321f826e8a659a9a38301ad0b873518a0100d55568",
+    "build/goal-r1-hrv-store-pure-c/negative.py": "5b7dd8ff4fbd9a511f8148417474b986ae5c69404582894624358082bce73f99",
+    "build/goal-r1-hrv-store-pure-c/spo2-regression.py": "8a8fa9e8fa2bac90ed7da360b9ccd0ae38b3586aa71f694b6f41a37a7359fb8f",
+    "build/goal-r1-hrv-store-pure-c/negative.log": "efb676aa730d721207c3d677c5153279aa5d9ea7843467707e8971af42b84d53",
+    "build/goal-r1-hrv-store-pure-c/source.o": "cf0bbedefedb49284f67666daa740562ac5aa421111ade6020410385d8af129b",
+    "build/goal-r1-hrv-store-pure-c/results.json": "96e1b0d63471628ff0fec36b9d990ad02b7ec991ea9c7a8f3c4d983e3e180666",
+    "build/goal-r1-hrv-store-pure-c/reviewed-build.log": "8c6499a59bacee277cf6e51b3a86936750ebe5e3c28b0a6341b6ad172616b841",
+    "build/goal-r1-hrv-store-pure-c/pipeline.log": "783a7bd966f6473edd2bac8321d9eb98355fb19a29b44f7f55883f63d9a87f81",
+    "build/goal-r1-hrv-store-pure-c/hr-regression.py": "2c7b0a5ccedeae66844dccc963db0b8f4612ab7a49cc0f58189fd026b95db3e9",
+    "build/goal-r1-hrv-store-pure-c/spo2-regression.log": "c39809eed2d9bc6e03247d5b251ffa0eb3997e4c5271706ead7e5261f6d83a3d",
+    "build/goal-r1-hrv-store-pure-c/pipeline.py": "614450f0d0a6228577029bb70c178bbe56c051a35e1082bf48f2abc6a15f90b9",
+    "build/goal-r1-hrv-store-pure-c/implicit-profile.o": "cf0bbedefedb49284f67666daa740562ac5aa421111ade6020410385d8af129b",
+    "build/goal-r1-hrv-store-pure-c/sources-check.log": "b6ab468f43815a75634eab2762e209dbee8ab94c4cc3d601fded4210b6833f2a",
+    "build/goal-r1-hrv-store-pure-c/record.py": "ce08c7ed8895b398f1927fe5ce2ebf391848732250a03791c64fd0ccf42cef5e",
+    "build/goal-r1-hrv-store-pure-c/manifest-before.json": "35403e8211b5696a8f5c39a07598f6554ed8cc3563a3d29ff5538609eb4c09a6",
+    "build/goal-r1-hrv-store-pure-c/rea-writer.json": "fadd663e91779ec7cc1439676064212d15afa5c75f605bb6cf471bdbf682809f",
+    "build/goal-r1-hrv-store-pure-c/verify.py": "2a7c93076351048b9165bf971ea6289a8bf09e89d433f72be899301fcd6f7a94",
+    "build/goal-r1-hrv-store-pure-c/logic-before-width-profile.json": "5ef772c44b0e05c35b1248264acb11e4d7b10972dca95ae407ca1ed60a8945f9",
+    "build/goal-r1-hrv-store-pure-c/verification.log": "1ac15b79f7a44c9b724570204508d311fc4747cda42b34c470e99c1ec97e6346",
+    "build/goal-r1-hrv-store-pure-c/temperature-regression.py": "ec272411e4845232895e94e1ffc33f5b30526e5aa5f5930e0769c838cd5b9f20",
+    "build/goal-r1-hrv-store-pure-c/stress-regression.log": "594374b75c1cec1294d8b8ca5df680be5da60f4c5cd86defa223374bdfe83a84",
+    "build/goal-r1-hrv-store-pure-c/source-before.c": "a0e235dca2cc3a51bf09fcd06ebe39b87944e870e9cbb97759c7ef27076b0fe4",
+    "build/goal-r1-hrv-store-pure-c/build.log": "ac7465b9f37acce4899cd56aa7796424a9dd714f28c9839e2f85628b75bceb92",
+    "build/goal-r1-hrv-store-pure-c/spo2-regression/test.ld": "29933c3898097d3ce0072508af97b3e4a4cd8d48a41618e216f33f3bf66d3458",
+    "build/goal-r1-hrv-store-pure-c/spo2-regression/cache.ld": "3cc131364b839c5f2be3f73838f4ce405560cd6fad3b2c7ee0d97b546b8889a4",
+    "build/goal-r1-hrv-store-pure-c/spo2-regression/source.elf": "de92bd543fb1ccb19699f6321f826e8a659a9a38301ad0b873518a0100d55568",
+    "build/goal-r1-hrv-store-pure-c/spo2-regression/results.json": "785be553658edbfc2334762e4bf238571911587d9748bd2dbfd8821785363d0a",
+    "build/goal-r1-hrv-store-pure-c/pipeline/test.ld": "29933c3898097d3ce0072508af97b3e4a4cd8d48a41618e216f33f3bf66d3458",
+    "build/goal-r1-hrv-store-pure-c/pipeline/cache.ld": "3cc131364b839c5f2be3f73838f4ce405560cd6fad3b2c7ee0d97b546b8889a4",
+    "build/goal-r1-hrv-store-pure-c/pipeline/source.elf": "69215cbf759cc8b0551b3f7b416b439715797839dfe1d894c0627a04f3772826",
+    "build/goal-r1-hrv-store-pure-c/pipeline/results.json": "33c4396f4d2ba8b12e59446d62c6d6a4895f0937f77c221c1c96039703c86ed6",
+    "build/goal-r1-hrv-store-pure-c/temperature-regression/test.ld": "29933c3898097d3ce0072508af97b3e4a4cd8d48a41618e216f33f3bf66d3458",
+    "build/goal-r1-hrv-store-pure-c/temperature-regression/cache.ld": "795f24c58112948b802dbd69792230e6deda67f40a0349919c0342b0e48c1642",
+    "build/goal-r1-hrv-store-pure-c/temperature-regression/source.elf": "7a0c31ddba4a107b532dd1f7ec8971241d741b72d25e287e016ce852b65c2e80",
+    "build/goal-r1-hrv-store-pure-c/temperature-regression/results.json": "639b037faffb8b5c1ea574f94fdb024c4908ba065248cc45aa7c179d2dfaeaf9",
+    "build/goal-r1-hrv-store-pure-c/stress-regression/test.ld": "29933c3898097d3ce0072508af97b3e4a4cd8d48a41618e216f33f3bf66d3458",
+    "build/goal-r1-hrv-store-pure-c/stress-regression/cache.ld": "795f24c58112948b802dbd69792230e6deda67f40a0349919c0342b0e48c1642",
+    "build/goal-r1-hrv-store-pure-c/stress-regression/source.elf": "7a0c31ddba4a107b532dd1f7ec8971241d741b72d25e287e016ce852b65c2e80",
+    "build/goal-r1-hrv-store-pure-c/stress-regression/results.json": "9f2d9bd69ecb92cdfbe4146aebaba63022a5dcc4ee4df0e813bb9e64fb55837e",
+    "build/goal-r1-hrv-store-pure-c/hr-regression/test.ld": "29933c3898097d3ce0072508af97b3e4a4cd8d48a41618e216f33f3bf66d3458",
+    "build/goal-r1-hrv-store-pure-c/hr-regression/cache.ld": "3cc131364b839c5f2be3f73838f4ce405560cd6fad3b2c7ee0d97b546b8889a4",
+    "build/goal-r1-hrv-store-pure-c/hr-regression/source.elf": "de92bd543fb1ccb19699f6321f826e8a659a9a38301ad0b873518a0100d55568",
+    "build/goal-r1-hrv-store-pure-c/hr-regression/results.json": "9b5f53d47f3612a25bbf6ea4326a249212cfc80a8287f5eecf95da603682db17"
+  }
+}

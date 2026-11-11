@@ -1,0 +1,218 @@
+{
+  "stock_entry": "0x64380",
+  "candidate": "r1_gomore_peak_candidate_match_native",
+  "source_unit": {
+    "source": "r1/src/application/runtime/native_gomore_peak_match.c",
+    "payload": "r1-application",
+    "role": "candidate",
+    "toolchain": "gcc9",
+    "link": true,
+    "expect": "compile",
+    "returncode": 0,
+    "argv": [
+      "/opt/homebrew/bin/python3",
+      "/Users/kalani/Repo/evenRealities-openCFW/tools/build/linux_gcc.py",
+      "--compiler",
+      "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/bin/arm-none-eabi-gcc",
+      "--read-root",
+      "/Users/kalani/Repo/evenRealities-openCFW/r1",
+      "--read-root",
+      "/Users/kalani/Repo/evenRealities-openCFW/third-party/upstream",
+      "--read-root",
+      "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1",
+      "--read-root",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-peak-match-final-c/generated/r1",
+      "--",
+      "-mcpu=cortex-m4",
+      "-mthumb",
+      "-munaligned-access",
+      "-mfpu=fpv4-sp-d16",
+      "-mfloat-abi=hard",
+      "-std=c11",
+      "-Os",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-fshort-enums",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-fno-delete-null-pointer-checks",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/r1/src/vendor",
+      "-isystem",
+      "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
+      "-fno-strict-aliasing",
+      "-ffp-contract=off",
+      "-fsignaling-nans",
+      "-frounding-math",
+      "-ftrapping-math",
+      "-fno-if-conversion",
+      "-fno-if-conversion2",
+      "-MD",
+      "-MF",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-peak-match-final-c/r1/r1-application/r1__src__application__runtime__native_gomore_peak_match.c.d",
+      "-c",
+      "/Users/kalani/Repo/evenRealities-openCFW/r1/src/application/runtime/native_gomore_peak_match.c",
+      "-o",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-peak-match-final-c/r1/r1-application/r1__src__application__runtime__native_gomore_peak_match.c.o"
+    ],
+    "source_sha256": "04b9186a1336db827fb3f4cf00f287455216a0831a39ee2dd94c2604dcc7d117",
+    "object_sha256": "ed0e9a64bbcf8fb3bd26262916a826073f4683d42282756bfcd13d0ac9b39f63",
+    "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-peak-match-final-c/r1/r1-application/r1__src__application__runtime__native_gomore_peak_match.c.o",
+    "strong": [
+      "r1_gomore_peak_candidate_match_native"
+    ],
+    "weak": [],
+    "undefined": [
+      "__aeabi_memclr",
+      "r1_binary32_to_binary64_bits",
+      "r1_binary64_to_signed32_bits",
+      "r1_format_double_multiply_bits",
+      "r1_gomore_deviation_native",
+      "r1_gomore_mean_native",
+      "r1_gomore_median_native",
+      "r1_gomore_quantized_argmin_native",
+      "r1_gomore_sort_float_subrange_native",
+      "r1_native_memory_move",
+      "r1_signed32_to_binary64_bits",
+      "r1_unsigned32_to_binary64_bits"
+    ]
+  },
+  "direct": {
+    "pairs": 1656,
+    "incoming_argument_aliases": 3,
+    "fault_pairs": 7,
+    "random_successes": 465,
+    "alias_pairs": 1333,
+    "provider_counts": {
+      "stock": {
+        "0x64380": 1666,
+        "0x4ec9c": 558,
+        "0x87600": 870,
+        "0x62000": 2528,
+        "0x62034": 1681,
+        "0x6208c": 1264,
+        "0x58a40": 81409
+      },
+      "C": {
+        "0x64380": 1666,
+        "0x4ec9c": 558,
+        "0x87600": 870,
+        "0x62000": 2528,
+        "0x62034": 1681,
+        "0x6208c": 1264,
+        "0x58a40": 81409
+      }
+    }
+  },
+  "modeled": {
+    "pairs": 456,
+    "incoming_argument_aliases": 3,
+    "fault_pairs": 7,
+    "random_successes": 71,
+    "alias_pairs": 333,
+    "provider_counts": {
+      "stock": {
+        "0x64380": 466,
+        "0x4ec9c": 16,
+        "0x87600": 164,
+        "0x62000": 368,
+        "0x62034": 332,
+        "0x6208c": 368,
+        "0x58a40": 0
+      },
+      "C": {
+        "0x64380": 466,
+        "0x4ec9c": 16,
+        "0x87600": 164,
+        "0x62000": 368,
+        "0x62034": 332,
+        "0x6208c": 368,
+        "0x58a40": 0
+      }
+    }
+  },
+  "carry": {
+    "raw64_pairs": 5144
+  },
+  "defect_controls": [
+    {
+      "control": "early-count-bound",
+      "rejected": true
+    },
+    {
+      "control": "wrong-quartile",
+      "rejected": true
+    },
+    {
+      "control": "wrong-threshold",
+      "rejected": true
+    },
+    {
+      "control": "inverted-carry",
+      "rejected": true
+    },
+    {
+      "control": "wrong-spacing-upper",
+      "rejected": true
+    },
+    {
+      "control": "wrong-tail-upper",
+      "rejected": true
+    },
+    {
+      "control": "wrong-failure-order",
+      "rejected": true
+    },
+    {
+      "control": "late-workspace-capture",
+      "rejected": true
+    },
+    {
+      "control": "wrong-final-median-count",
+      "rejected": true
+    }
+  ],
+  "qualification": {
+    "candidate_units": 1,
+    "selected_units": 0,
+    "selected_regions": 0
+  },
+  "prior_objects_unchanged_excluding_checked_api_owner": 698,
+  "stack_bytes": {
+    "native": 128,
+    "C": 120
+  },
+  "limitations": [
+    "Private stack writes/layout excluded",
+    "Counts above twenty not established safe",
+    "Native soft-double, qsort, EABI memory, pow and sqrt execute in fixtures",
+    "No full source-only link, whole executable identity or hardware validation"
+  ],
+  "artifacts": {
+    "r1/src/application/runtime/native_gomore_peak_match.c": "04b9186a1336db827fb3f4cf00f287455216a0831a39ee2dd94c2604dcc7d117",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-peak-match-final-c/r1/r1-application/r1__src__application__runtime__native_gomore_peak_match.c.o": "ed0e9a64bbcf8fb3bd26262916a826073f4683d42282756bfcd13d0ac9b39f63",
+    "build/sources-goal-r1-gomore-peak-match-final-c/report.json": "7bee9cf57e4ff4b0ce55bc956080331b703180be4046e9b0b6d2b2f2e137cc29",
+    "r1/src/sources.json": "e55d62d0798b80a917caed0733e6a8bc75e55d85ac9a5ac79a29c7baa0176c2d",
+    "r1/symbols/function-frontier.csv": "46af3122e092b0ab0db0cabf525afc642a97a55fc6d83121703a38d508158461",
+    "tools/build/source-plan.json": "43281e3850f6c7b83c5616e5968c4939993501810057ca3deaeea85eaae351ba",
+    "build/goal-r1-gomore-peak-match-c/rea.json": "a1590db34d76360581c614f749c02f67c0fe259d6596d33292081c1fd567f4be",
+    "build/goal-r1-gomore-peak-match-c/rea-refresh.json": "a1590db34d76360581c614f749c02f67c0fe259d6596d33292081c1fd567f4be",
+    "build/goal-r1-gomore-peak-match-c/instructions.txt": "126b27c40a5c686105c4f81fb08ae2ffb27ec67dda2a1fde03c45679a3a991b0",
+    "build/goal-r1-gomore-peak-match-c/verify.py": "efc639e21c81e14e27fcc51b8389cb2c868a2d4b0b35c7e2e535866e0ee56306",
+    "build/goal-r1-gomore-peak-match-c/matcher-results.json": "34f415d8a04717bd6e2aebdf9e5d20745b1027d31c8b1143480416da0ad6e019",
+    "build/goal-r1-gomore-peak-match-c/modeled-results.json": "8c09af1d9ad0b15f7c3481c765b9fb75e6298ca6d751af2cfd1e699250370dd9",
+    "build/goal-r1-gomore-peak-match-c/negative.py": "1f178b1673e6c70251020c346f82992344501f2fc4770251d46f5d804f81cebd",
+    "build/goal-r1-gomore-peak-match-c/negative.json": "9e0e5fadcafcaf63559b2e2e9ab6a7bb3d32d61f58e57f2b33c9a0e8d587332f",
+    "build/goal-r1-gomore-peak-match-c/carry.py": "a7f9b163fbf3ab64b087f06f9550f8529654c78c323b071cc8278eb2bbd30769",
+    "build/goal-r1-gomore-peak-match-c/carry-probe.c": "a05142e8e4d6abe2207537346b7b92757ff9dae9188b9014b5707f73c00358d2",
+    "build/goal-r1-gomore-peak-match-c/carry-probe.o": "ec8ef8b8d9e1ef325c3fdf385cc48748eba723ccab8338fedd2b0057e7e5a00e",
+    "build/goal-r1-gomore-peak-match-c/carry-results.json": "dea20bd0ae63bacf1e0aed954f22fd9df15ca0b618300e2e2a2d1ef1d8449444",
+    "build/goal-r1-gomore-peak-match-c/integration.py": "a58124ac4aa5a8157a3c881bf097c0f19b7b586abf466de00bf64c9c93528640",
+    "build/goal-r1-gomore-peak-match-c/integration-results.json": "1b9744c9052976001c36292f3752004af7ab935898edc92873c12424569d3cef",
+    "build/goal-r1-gomore-peak-match-c/qualify.py": "9e4f7baf4f1af49c0f92397e9873dc2e1e0a7bdfb6be9054098ec2a69d0db013",
+    "build/goal-r1-gomore-peak-match-c/qualified/qualification.json": "95db58f91ed432fb8f4f2eaf2708c2f0d09fedb873eb5590efe894796d29606d",
+    "build/goal-r1-gomore-peak-match-c/qualified/source-plan.json": "3da40e3d766877c0b3059bee372f651c1f56681157782eba12ee3076f1834a0f"
+  }
+}

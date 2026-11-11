@@ -20,7 +20,7 @@ uint32_t opencfw_bl_tick_increment(void) {
         uint32_t *list=(uint32_t *)(uintptr_t)WORD(0x20027138);
         if (list[0]) {
             (void)opencfw_bl_mask_interrupts();WORD(UINT32_MAX)=0;
-            for (;;)__asm__ volatile("b .":::"memory");
+            for (;;){ }
         }
         uint32_t old=WORD(0x20027138);WORD(0x20027138)=WORD(0x2002713c);
         WORD(0x2002713c)=old;WORD(0x2002715c)++;

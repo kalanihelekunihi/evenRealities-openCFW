@@ -85,7 +85,10 @@ __attribute__((used,noinline)) static uint32_t gesture_kernel(const volatile uin
  handle=r1_glasses_connection_handle_get();
  return r1_ble_tx_queue_dispatch_type0(handle,(const void *)(uintptr_t)frame,size);
 }
-/* Native frame stores packet bytes over saved r1/r2/r3 and restores their
- * actual contents. The C kernel's private footprint remains separately gated. */
-__attribute__((naked,noinline)) uint32_t r1_touch_gesture_dispatch_boundary(const void *record __attribute__((unused)))
-{__asm__ volatile("push {r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,lr}\nmov r1,sp\nbl gesture_kernel\npop {r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,pc}");}
+/* Ordinary AAPCS entry. The packet is owned by this C call and consumed
+ * synchronously; saved caller-clobbered registers are not API outputs. */
+uint32_t r1_touch_gesture_dispatch_boundary(const void *record)
+{
+ _Alignas(4) uint8_t frame[12]={0};
+ return gesture_kernel(record,frame);
+}

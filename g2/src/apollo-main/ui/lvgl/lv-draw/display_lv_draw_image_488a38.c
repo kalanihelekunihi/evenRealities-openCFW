@@ -2,7 +2,7 @@
  * Layout and branches are grounded in the pinned payload and upstream lv_draw_image.c. */
 #include <stdint.h>
 
-extern void audio_uart_lvgl_log(uint32_t, const char *, uint32_t,
+extern void lv_log_add(uint32_t, const char *, uint32_t,
                                 const char *, const char *, ...);
 extern void *audio_uart_lv_malloc(uint32_t);
 extern void audio_uart_lv_heap_free(void *);
@@ -57,7 +57,7 @@ void audio_uart_lv_draw_image_488a38(void *layer_arg, const void *dsc_arg,
     const uint8_t *dsc = (const uint8_t *)dsc_arg;
     const uint8_t *coords = (const uint8_t *)coords_arg;
     if (rd(dsc, 0x1cu) == 0u) {
-        audio_uart_lvgl_log(2u, source_path, 0x69u, source_func, null_src);
+        lv_log_add(2u, source_path, 0x69u, source_func, null_src);
         return;
     }
     if (dsc[0x50u] <= 2u || (int32_t)rd(dsc, 0x34u) < 1 ||
@@ -66,7 +66,7 @@ void audio_uart_lv_draw_image_488a38(void *layer_arg, const void *dsc_arg,
 
     uint8_t *task_dsc = (uint8_t *)audio_uart_lv_malloc(0x6cu);
     if (task_dsc == 0) {
-        audio_uart_lvgl_log(3u, source_path, 0x76u, source_func,
+        lv_log_add(3u, source_path, 0x76u, source_func,
                             assert_format, alloc_assert, alloc_failed);
         *(volatile uint32_t *)(uintptr_t)0xffffffffu = 0u;
         for (;;) { }
@@ -74,7 +74,7 @@ void audio_uart_lv_draw_image_488a38(void *layer_arg, const void *dsc_arg,
     (void)audio_uart_lv_grid_copy_454738(task_dsc, dsc, 0x6cu);
     if (audio_uart_lv_image_header_488f6a((const void *)(uintptr_t)rd(task_dsc, 0x1cu),
                                          task_dsc + 0x20u) != 1u) {
-        audio_uart_lvgl_log(2u, source_path, 0x7au, source_func, info_failed);
+        lv_log_add(2u, source_path, 0x7au, source_func, info_failed);
         audio_uart_lv_heap_free(task_dsc);
         return;
     }
@@ -92,7 +92,7 @@ void audio_uart_lv_draw_image_488a38(void *layer_arg, const void *dsc_arg,
     uint8_t decoder[0x4cu];
     if (audio_uart_lv_image_decoder_open_488f9c(decoder,
             (const void *)(uintptr_t)rd(task_dsc, 0x1cu), 0) != 1u) {
-        audio_uart_lvgl_log(3u, source_path, 0x97u, source_func, open_failed);
+        lv_log_add(3u, source_path, 0x97u, source_func, open_failed);
         return;
     }
     uint32_t decoder_ptr = rd(decoder, 0u);

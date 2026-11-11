@@ -1,0 +1,396 @@
+{
+  "schema_version": 1,
+  "entries": {
+    "0x00085b9c": "r1_goodix_native_model_dense"
+  },
+  "native_instruction_bytes": 252,
+  "direct_native_candidate_pairs": 10346,
+  "constructor_callback_pairs": 9728,
+  "total_pairs": 20074,
+  "verification": {
+    "verify": {
+      "native_candidate_pairs": 8768,
+      "FP_settings": 32
+    },
+    "edge": {
+      "native_candidate_pairs": 1120,
+      "FP_settings": 32,
+      "wrapped_spans": true,
+      "negative_counts": true,
+      "live_output_geometry": true,
+      "NaN_and_subnormal_slope": true
+    },
+    "oracle": {
+      "native_candidate_pairs": 160,
+      "independent_output_oracles": 320,
+      "FP_settings": 32
+    },
+    "coverage": {
+      "native_candidate_pairs": 288,
+      "native_instruction_bytes": 252,
+      "instruction_starts": 85,
+      "missing": []
+    }
+  },
+  "constructor_verification": {
+    "constructor": {
+      "native_candidate_pairs": 8192,
+      "FP_settings": 32,
+      "actual_C_constructor_and_indirect_callback": true,
+      "function_identity_verified": true,
+      "only_callback_word_normalized": true,
+      "source_has_no_stock_mapping": true
+    },
+    "normal-constructor": {
+      "native_candidate_pairs": 1536,
+      "FP_settings": 6,
+      "actual_C_constructor_and_indirect_callback": true,
+      "function_identity_verified": true,
+      "only_callback_word_normalized": true,
+      "source_has_no_stock_mapping": true
+    }
+  },
+  "compiled_defect_controls": [
+    {
+      "name": "wrong-span",
+      "rejected": true,
+      "positive_baseline": true,
+      "witness": {
+        "case": 20,
+        "mode": 0,
+        "options": null
+      }
+    },
+    {
+      "name": "wrong-unit-owner",
+      "rejected": true,
+      "positive_baseline": true,
+      "witness": {
+        "case": 0,
+        "mode": 0,
+        "options": null
+      }
+    },
+    {
+      "name": "wrong-weight-stride",
+      "rejected": true,
+      "positive_baseline": true,
+      "witness": {
+        "case": 38,
+        "mode": 0,
+        "options": null
+      }
+    },
+    {
+      "name": "lost-bias",
+      "rejected": true,
+      "positive_baseline": true,
+      "witness": {
+        "case": 16,
+        "mode": 0,
+        "options": null
+      }
+    },
+    {
+      "name": "reversed-bias-operands",
+      "rejected": true,
+      "positive_baseline": true,
+      "witness": {
+        "case": 54,
+        "mode": 0,
+        "options": null
+      }
+    },
+    {
+      "name": "lost-slope",
+      "rejected": true,
+      "positive_baseline": true,
+      "witness": {
+        "case": 81,
+        "mode": 0,
+        "options": null
+      }
+    },
+    {
+      "name": "unordered-activation",
+      "rejected": true,
+      "positive_baseline": true,
+      "witness": {
+        "case": 1,
+        "mode": 0,
+        "options": {
+          "units": 0,
+          "activation": 1,
+          "output_count": 1,
+          "alias": "input",
+          "data": [
+            2139099700
+          ],
+          "slope": 2143311480
+        }
+      }
+    },
+    {
+      "name": "lost-exp-clamp",
+      "rejected": true,
+      "positive_baseline": true,
+      "witness": {
+        "case": 150,
+        "mode": 0,
+        "options": null
+      }
+    },
+    {
+      "name": "wrong-negative-sign",
+      "rejected": true,
+      "positive_baseline": true,
+      "witness": {
+        "case": 145,
+        "mode": 0,
+        "options": null
+      }
+    },
+    {
+      "name": "cached-output-count",
+      "rejected": true,
+      "positive_baseline": true,
+      "witness": {
+        "case": 64,
+        "mode": 0,
+        "options": null
+      }
+    }
+  ],
+  "normal_build": {
+    "normal_report": "build/sources-goal-r1-model-dense-c/report.json",
+    "units": 929,
+    "unchanged_source_object_pairs": 918,
+    "generated_sources_excluded": [
+      "{gen}/r1_cmsis_os2_rtc.c",
+      "{gen}/fal_partition_r1_lookup.c",
+      "{gen}/fdb_utils_r1.c",
+      "{gen}/gh_demo_r1.c",
+      "{gen}/gh_demo_hook_r1.c",
+      "{gen}/gh_demo_user_r1.c",
+      "{gen}/app_error_handler_gcc_clang.c",
+      "{gen}/r1_startup_vectors.S",
+      "{gen}/gh_ppg_timestamp_hooks_r1.c",
+      "{gen}/r1_uecc.c"
+    ],
+    "new_sources": [
+      "r1/src/application/goodix/native_model_dense.c"
+    ],
+    "normal_provider_matches_tested_sections_and_decoded_symbols": true,
+    "no_new_assembly_or_writable_sections": true,
+    "removed_imports": [
+      "r1_goodix_model_dense_executor_address"
+    ],
+    "imports": {
+      "r1-application": [
+        "GH3X2X_GetVersion",
+        "GH3X2X_UprotocolPacketFormat",
+        "Gh3x2xDemoSendProtocolData",
+        "__data_start__",
+        "gh3x2x_print_fmt",
+        "goodix_hba_calc",
+        "goodix_hba_essential_info_print",
+        "goodix_hrv_calc",
+        "goodix_nadt_calc",
+        "r1_cmb_code_end",
+        "r1_cmb_code_start",
+        "r1_cmb_stack_end",
+        "r1_cmb_stack_start",
+        "r1_eat_command_dispatch",
+        "r1_eat_core_init",
+        "r1_export_plan_command",
+        "r1_factory_input_record_plan_dispatch",
+        "r1_glasses_role_conflict_fault",
+        "r1_gomore_final_sleep_record_publish_native",
+        "r1_gomore_interval_statistics_native",
+        "r1_gomore_sleep_interval_select_native",
+        "r1_gomore_sleep_score_native",
+        "r1_gomore_sleep_stage_refine_native",
+        "r1_gomore_stage_5ef1c_native",
+        "r1_gomore_stage_5f264_native",
+        "r1_gomore_stage_5f3d8_native",
+        "r1_gomore_stage_5f4b6_native",
+        "r1_gomore_stage_5f56c_native",
+        "r1_gomore_stage_5feb8_native",
+        "r1_gomore_stage_605dc_native",
+        "r1_gomore_stage_60af4_native",
+        "r1_gomore_stage_60b80_native",
+        "r1_gomore_stage_60dc4_native",
+        "r1_gomore_stage_610c8_native",
+        "r1_gomore_stage_61198_native",
+        "r1_gomore_stage_61274_native",
+        "r1_gomore_stage_6138c_native",
+        "r1_gomore_stage_statistics_native",
+        "r1_gomore_table_record11_native",
+        "r1_goodix_graph_aligned_executor_address",
+        "r1_goodix_graph_convolution_executor_address",
+        "r1_goodix_model_recurrent_executor_address",
+        "r1_goodix_spo2_confidence",
+        "r1_goodix_spo2_infer",
+        "r1_goodix_spo2_output",
+        "r1_goodix_spo2_output_quality",
+        "r1_goodix_spo2_select",
+        "r1_health_auth_parameters_set",
+        "r1_health_lifecycle_engine_initialize_native",
+        "r1_health_settings_plan_command",
+        "r1_health_sync_provider_0003c0d8",
+        "r1_health_sync_provider_0003c304",
+        "r1_health_sync_provider_0003c958",
+        "r1_health_sync_provider_0003fcec",
+        "r1_health_sync_provider_0003fef4",
+        "r1_health_sync_provider_00040508",
+        "r1_health_sync_provider_00040bd4",
+        "r1_health_sync_provider_00040de0",
+        "r1_health_sync_provider_00041438",
+        "r1_health_sync_provider_00043eb0",
+        "r1_health_sync_provider_000440c4",
+        "r1_health_sync_provider_000446b4",
+        "r1_health_sync_provider_0005b39c",
+        "r1_health_sync_provider_0008f954",
+        "r1_legacy_command_route_frame",
+        "r1_manager_assertion_stack_transfer",
+        "r1_manager_logging_start_91504",
+        "r1_phone_role_assertion_stack_transfer",
+        "r1_structured_log_typed",
+        "r1_user_profile_handler"
+      ],
+      "r1-bootloader": [
+        "__bss_end__",
+        "__bss_start__",
+        "__data_start__",
+        "__etext",
+        "__start_crypto_data",
+        "__start_dfu_trans",
+        "__start_fs_data",
+        "__start_sdh_ble_observers",
+        "__start_sdh_req_observers",
+        "__start_sdh_soc_observers",
+        "__start_sdh_stack_observers",
+        "__start_sdh_state_observers",
+        "__start_svc_data",
+        "__stop_crypto_data",
+        "__stop_dfu_trans",
+        "__stop_fs_data",
+        "__stop_sdh_ble_observers",
+        "__stop_sdh_req_observers",
+        "__stop_sdh_soc_observers",
+        "__stop_sdh_stack_observers",
+        "__stop_sdh_state_observers",
+        "__stop_svc_data"
+      ]
+    }
+  },
+  "remaining_callback_bindings": [
+    "r1_goodix_graph_aligned_executor_address",
+    "r1_goodix_graph_convolution_executor_address",
+    "r1_goodix_model_recurrent_executor_address"
+  ],
+  "semantics": [
+    "Cache input rows*columns (32-bit wrapped), input data, output descriptor, weight/bias pointers, operation unit count and output data in native order. Input batch count is unused. Unit and inner span loops are signed. For each unit start +0, load live input and unit-major weight, multiply then add separately rounded, and add bias as first operand before storing.",
+    "Activation selector byte at operation+5 is read after dense writes. Selector1 caches slope at+8, but reloads output descriptor and batch*rows*columns each loop test. Signaling compare carry-clear selects strictly negative values, excluding unordered; multiply negative by slope then store, retaining zero/NaN payloads otherwise.",
+    "Selector byte is read again before sigmoid; earlier alias writes can change it. Selector2 negates raw sign bits, compares signed bits against0x42b00000 and substitutes88 at or above it; calls actual C expf, adds1 as second operand and divides1 by the result. Output count remains live on every loop test. No fused arithmetic or numeric-float clamp substitutes.",
+    "Actual C dense descriptor constructor writes real C callback relocation and indirect probe invokes it. Callback identity is guarded; only the callback pointer word is normalized for stock/C RAM comparison. All weight/bias/cursor and output memory is compared. Source maps no stock code and uses no expf/memory models.",
+    "REA raw252-byte body,12 literal bytes and binding0x74c44 match locked stock. Current Ghidra has no function record at0x85b9c; no fresh pseudocode is claimed. Capstone/native replay establish ordering."
+  ],
+  "limitations": [
+    "Valid aligned pointers and mapped effective spans required; wrapped spans tested only when effective storage is mapped. Signed negative counts skip relevant loops but initial cached descriptor reads remain required. Large invalid buffers have no invented fallback.",
+    "Public RAM/full FPSCR, saved R4-R11/S16-S31, SP/masks and R0 checked;8192 private stack bytes below incoming SP and caller scratch/APSR excluded. Coverage includes all252 body bytes/85 instruction starts and32 FP settings, not every input or interleaving.",
+    "Probe linker enum-size warnings are retained; called interfaces use integers/pointers/floats rather than enums. Timing, concurrency, interrupts, cold FPU and physical hardware unverified.",
+    "Three model callbacks, parent SpO2 stages, hardware imports and startup remain.929-unit relocatable composition with70 application/22 boot imports is not a bootable firmware proof."
+  ],
+  "evidence_sha256": {
+    "r1/src/application/goodix/native_model_dense.c": "2909add33586878359c04ec8f489a9e6b944b7a5be6db90c9a956f839a8ac0c7",
+    "r1/src/application/goodix/native_spo2_generated_model.c": "9ed40f8a8878b5b074087dadbc37ac5ba2b17197f2ba9ca512e9e4fb190bd584",
+    "r1/src/application/runtime/native_expf_tanhf.c": "6b20f74db24eb1471381722262279c5a6ce0e3c89a8adad48d27aff90b51efb3",
+    "r1/src/sources.json": "c4317e774003d277ec37a84645e066db0fca9a4b1ff00b9157027e2a59526a7d",
+    "r1/docs/reference/FUNCTION-OWNERSHIP.csv": "9640fc2394cf76bbef2b5c7e942a144bbfb4bb11ffbaf22fddeb2505d5b045d6",
+    "build/sources-goal-r1-model-dense-c/report.json": "52a67a9e85a876360a9de15934057a3e8221ec54221f0a773dfb341fb47d9d2e",
+    "build/sources-goal-r1-model-merge-c/report.json": "333cde5c9c0ee7043bad679d63a15f7e6015a231dd188c45057e097dcea6bb83",
+    "tools/build/source-plan.json": "eeb516e31b3310fb0718f36908977f8125723f7c5e0e86cd6744395826259a4d",
+    "r1/src/config/runtime/native_health_cache.ld": "eb8f131c489cd818d4e36718718fa1989719ca0170f164541a1a5bf56dfc1ec3",
+    "r1/blobs/official/r1-2.2.6.0009/application.bin": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "build/goal-r1-queue-reset-c/stock.elf": "25b4a29af80ec8edab5bd861ba9b74a6e22eab29dc3d7a809a16869e8a140f04",
+    "build/goal-r1-spo2-infer-support-c/normal-dependencies.a": "7e62b43a34fcf2b0ae34045a276bf4d564be5dde2ddb636dd0f69169c8843637",
+    "build/goal-r1-model-dense-c/audit.json": "8cea70f3cf4f4f8f0905f1db9c4698cc0a12734496a837f657c8116dd74ea4e1",
+    "build/goal-r1-model-dense-c/audit.py": "58c8ebdb75bcf4616cc71ea0f32f76bd641d5a1ed5621f1df6e7be8bbfd7c5fb",
+    "build/goal-r1-model-dense-c/authenticate.py": "f8d7bbbefaaa0ae7dce42aab8f9d25b58edd443ca6c0a346b88c9326345ae594",
+    "build/goal-r1-model-dense-c/candidate.c": "2909add33586878359c04ec8f489a9e6b944b7a5be6db90c9a956f839a8ac0c7",
+    "build/goal-r1-model-dense-c/candidate.elf": "64420e7371777c26312711145e44e7621361652a371d784c409470ee73002f3c",
+    "build/goal-r1-model-dense-c/candidate.o": "7d428eae5c529fe91f877984f34c75bfef0405f4c7554a917286badcdc809d34",
+    "build/goal-r1-model-dense-c/compile-argv.json": "e0567b647eefa2ca545515a2c4d2d34a4a935e472683efe0b86f81f12dd9a193",
+    "build/goal-r1-model-dense-c/constructor-link.json": "179402c7da9dcf2c66b8075e22cdefdc3756f08a182004352bcfeb1f8a1710ae",
+    "build/goal-r1-model-dense-c/constructor-prepare.log": "1515df829519ed6f2575c637410577a3a5530868eba7d64eb30ae2be6003eecf",
+    "build/goal-r1-model-dense-c/constructor-results.json": "d85e1e886485fa6867207cb376f51133b5460bfe8f210f7f35026fd9d42a3ec0",
+    "build/goal-r1-model-dense-c/constructor.elf": "bb8bc1a8e9b165afb31b8b52988684bdc3dc1b8e6223d76d9b5a49b1ab85db3e",
+    "build/goal-r1-model-dense-c/constructor_fixture.py": "76aae3ef8296387a0f0aab5d744580853b22b0f0e152a62c00fcd521eb929105",
+    "build/goal-r1-model-dense-c/constructor_prepare.py": "36448b8899b734d6621721bd6db798f24cbadb7ff46e78f1e191e2135e80504d",
+    "build/goal-r1-model-dense-c/constructor_probe.c": "e2d21e0b5f157fe0631165268bc08603b35b6b2c09fcb4b6c42857e8b023dbe9",
+    "build/goal-r1-model-dense-c/constructor_probe.o": "f9ca3c3155bc1c553f93ff5d8c9f30ffdd4a54e1ad68f299a7e25da87c4f3808",
+    "build/goal-r1-model-dense-c/constructors.log": "d4a0984f44305c9b43c0ade763a037a25a539a65448058131931f26948889847",
+    "build/goal-r1-model-dense-c/constructors.py": "6cc201ba9cf81c9b917262fdac3c5c2def8557254908a85faa78f331b197f3f5",
+    "build/goal-r1-model-dense-c/control-cached-output-count.c": "47ff0f04ee00983189b503848e4cedc7221d78b015fd85dcf984eb19acf775ab",
+    "build/goal-r1-model-dense-c/control-cached-output-count.elf": "46fa29459ab86e749a631ef1e87eeab59111ed05acc60b3d409a3f7e55090582",
+    "build/goal-r1-model-dense-c/control-cached-output-count.o": "02e41ed8bfe194c826d07135d263f5e6ed4e7a15b576b86db4fdf4bebf2d2c8e",
+    "build/goal-r1-model-dense-c/control-lost-bias.c": "4cc2593cafd50f5be44a4a85fd87ea68ee8878d79ea51fb9cce0c12add0d8e49",
+    "build/goal-r1-model-dense-c/control-lost-bias.elf": "bfc30165103ebb032e9e38f44a216e54f589bca3e992eaec0609216d6df6bbe1",
+    "build/goal-r1-model-dense-c/control-lost-bias.o": "a3ade35d2192b6e89a3c6d496d2ee49565395427ca12db73bf786729fa073971",
+    "build/goal-r1-model-dense-c/control-lost-exp-clamp.c": "dad8e59d4428aea36cad90026b7be8f8ab20d3b6d5839d7b04b21c2ecada0197",
+    "build/goal-r1-model-dense-c/control-lost-exp-clamp.elf": "d010e29c481fb72857cc1a9ad6e109b0d83a2f37cd011a62d148b168d642c85b",
+    "build/goal-r1-model-dense-c/control-lost-exp-clamp.o": "f84bdf373cbfbaa5f82d14af92b284380b5d5dccf7d2b697a9ebaf4bef05a083",
+    "build/goal-r1-model-dense-c/control-lost-slope.c": "3e967e3ffb4f93f4cf4716c7a393ceb7ab7d1fe4ba9ac88a40acc07fc8666a73",
+    "build/goal-r1-model-dense-c/control-lost-slope.elf": "4d5bda131d0f134d05f869ff84c0cabaf56008b1045e785c622e064338c65c51",
+    "build/goal-r1-model-dense-c/control-lost-slope.o": "5fdd70b9eba551ef06e28e2280ba28a438a8bb5a950c304b2620293444485633",
+    "build/goal-r1-model-dense-c/control-reversed-bias-operands.c": "3e5d3ab856444b81731aff1edac74cdc1b15557252df617537ce752a4812876c",
+    "build/goal-r1-model-dense-c/control-reversed-bias-operands.elf": "8dfe5e9ea48d3a86b154839d516a43620e9b1ce23b8af035af579599b8fe7909",
+    "build/goal-r1-model-dense-c/control-reversed-bias-operands.o": "9072f0bb834e7ee928eab9da73a6d496d77e2184c6711682cd0fdb85a9f053e8",
+    "build/goal-r1-model-dense-c/control-unordered-activation.c": "c7aec3aa7cebae7b2bcbe3c48176ffc7ad651764713a9492d8da90f10d5dfd5c",
+    "build/goal-r1-model-dense-c/control-unordered-activation.elf": "6afd974214346d6c6cbb3615a003465a9077eac53bd8e13df88a2cc8b7a1af01",
+    "build/goal-r1-model-dense-c/control-unordered-activation.o": "228805394bc0972bf3a0f4c739239611abd98a89d6f022a2476c7ccf7b95080a",
+    "build/goal-r1-model-dense-c/control-wrong-negative-sign.c": "36dc8c5bd43d93a6fd5c1c4a285601cbdfb4b5105c29c1ea4912818fbffb3f0b",
+    "build/goal-r1-model-dense-c/control-wrong-negative-sign.elf": "39120cf28cd68db598bbd2298e44fc907d3e54f064901f8ef6293134cd46cc71",
+    "build/goal-r1-model-dense-c/control-wrong-negative-sign.o": "2c4ed337ea6a7dc57114e45ad8b1fb285aa21d7356da2e4fd4dde93a5defea02",
+    "build/goal-r1-model-dense-c/control-wrong-span.c": "6c7f1e442a9ea37c250ee5cd238fbbe6d37498056463f279309233d3a2eb229e",
+    "build/goal-r1-model-dense-c/control-wrong-span.elf": "888b0387b3d941db8caf17ffc9a8360a60403b8f79f0ee72ac6f4904eac00174",
+    "build/goal-r1-model-dense-c/control-wrong-span.o": "9514e198ddf3ab8701410c71b44cb135991d64aa535fc4552c38e00b82aec6bc",
+    "build/goal-r1-model-dense-c/control-wrong-unit-owner.c": "980b602a071f8cb73a7998d76a85590f08cf6f61e789d87acc77f76aea694af8",
+    "build/goal-r1-model-dense-c/control-wrong-unit-owner.elf": "5d07b36526e1602781b0c4ed108a768ed68e4c0a19ab365a6393f7529f0c24e8",
+    "build/goal-r1-model-dense-c/control-wrong-unit-owner.o": "880ff600ee61df480ab85f434ddf8dc8811cff27aea2afad6e3e31c5da918962",
+    "build/goal-r1-model-dense-c/control-wrong-weight-stride.c": "971b221f5f7b902a53a30e4eb0ac7c2afec7a0389e7bfb887d43affd9f7535a0",
+    "build/goal-r1-model-dense-c/control-wrong-weight-stride.elf": "5533d79dbcd5bd4abf7e3b6a9c5065845f9c0dade0dd233ab59b487db9b9270c",
+    "build/goal-r1-model-dense-c/control-wrong-weight-stride.o": "2f65c087d2c73b1bdf9b8686c95ea83bf17aea44b1ce617d63b6e5e1426f64e6",
+    "build/goal-r1-model-dense-c/controls-results.json": "b8a2bc70b796efafdacb014aa75f7575d8560280dc7a966a367a2240e9204c35",
+    "build/goal-r1-model-dense-c/controls.log": "967216dffd0217070f79403694693faa2dad45c33b307bb97de139f09a343802",
+    "build/goal-r1-model-dense-c/controls.py": "2d9d4ee18992b6d0436a64bda7d9f399b01dd5eafc739d9d886197860b6e83df",
+    "build/goal-r1-model-dense-c/coverage-results.json": "6a881eadc49af3850503dc2b83a377cd52d7f15f4e197b6fd90c210b9619eac8",
+    "build/goal-r1-model-dense-c/coverage.py": "7da855901ab8a64c10639e3be0f55dac783fa392ef3705be7657c560ed06cbe1",
+    "build/goal-r1-model-dense-c/document.py": "a3c34527e6dfc20ae0f36629df8feb11061c4ce23169a3755914e01a1996a246",
+    "build/goal-r1-model-dense-c/edge-results.json": "d3e81b5573e7c2834241861ac67348c80666324272b6bda3584e413be7f471ec",
+    "build/goal-r1-model-dense-c/edges.log": "b3cb478a7548e4003fa9f0b4387f58ba33612fe804e69272ba4a2866feab3bb3",
+    "build/goal-r1-model-dense-c/edges.py": "b5854fd2d890aae5bf51751bebbcefefd77999b35446ccd7cb51b42304791515",
+    "build/goal-r1-model-dense-c/fixture.py": "ea06187e5cce58084d43faca2c1394d849b0e4e682b594cd049cfd9654932be6",
+    "build/goal-r1-model-dense-c/link-argv.json": "f51e48f677ab79c318ab1526cfe7019322406b85c75b3625a582c029a2038dee",
+    "build/goal-r1-model-dense-c/normal-build.log": "a87898682612203feb76004aa2e71c0938b952a50a6e7303e46d56724d4c234a",
+    "build/goal-r1-model-dense-c/normal-constructor-link.json": "a94cf7f191eba61a64f0c9a26cd592a6b491d14db4e2589dbdea300a9dfe48b2",
+    "build/goal-r1-model-dense-c/normal-constructor-results.json": "93056d4aff4ee5f37013f63edad71017eba10153ec80a34429869adb7cf6d3fe",
+    "build/goal-r1-model-dense-c/normal-constructor.elf": "2c5c4cc35b2b17f4a08cfe4df2553e86b827172a9333d1d7e7d549889bd806a4",
+    "build/goal-r1-model-dense-c/normal-constructors.log": "3f126b2b2980e7aecb76ff9768558780f6e18275de494b5fbeaa42a2f0b1ee10",
+    "build/goal-r1-model-dense-c/normal-prepare.log": "9fb48f627f91e769937592f2de0a503cfaab9a7107d2e0877fb9e1670c6b7207",
+    "build/goal-r1-model-dense-c/normal_constructor_fixture.py": "30f4c52032a73659ff864ca8e92a433dbb2c233493cef9393653d32b00cb37a6",
+    "build/goal-r1-model-dense-c/normal_constructors.py": "231d8b246b5aa27810f5fdfa01230fc3517e98d98744f85ee9b37e735210f95d",
+    "build/goal-r1-model-dense-c/normal_prepare.py": "a2f91af7efa5b1517d208d1849b2ec407b2da8cbd4a3de65a14396c98cc4f3e2",
+    "build/goal-r1-model-dense-c/oracle-results.json": "2364efc4406f9937416f59547869d1446af243e9be011858c4915196459b3916",
+    "build/goal-r1-model-dense-c/oracles.py": "2b2d492b4481751ee6d0595dc5f342f7a3dfb400618393c32471500e3af9ef7a",
+    "build/goal-r1-model-dense-c/prepare_fixture.py": "6ce38b4ada420b6c44f8eb019034566d4e4f210cb382878f5390e301620a80fa",
+    "build/goal-r1-model-dense-c/raw-authentication.json": "cd72d36edd08f6ffaf55d196073ecd5d46024caf49064c6feb1174eb8cbef09f",
+    "build/goal-r1-model-dense-c/rea-binding.json": "a6e0873fd9f727d219fe1dd43644ebf14d461e59c2375ea824c06d15ce6159d1",
+    "build/goal-r1-model-dense-c/rea-body.json": "d7d12f85e9d1df983289366a30b850563595354c13b533d3d05aec7cfb22046f",
+    "build/goal-r1-model-dense-c/sources-check.log": "233e46abec55abffa4e017e29237b3356d37a27cf1008dd3d23febca0a027452",
+    "build/goal-r1-model-dense-c/verify-results.json": "61686b791fc837064931779ce778d78115082052602b6dd6efc206c3271fd8df",
+    "build/goal-r1-model-dense-c/verify.log": "d4a0984f44305c9b43c0ade763a037a25a539a65448058131931f26948889847",
+    "build/goal-r1-model-dense-c/verify.py": "3b5a7492c9d18b02fd3916cd1b88a343ae51ca7bda236b6921aed44116655498"
+  }
+}

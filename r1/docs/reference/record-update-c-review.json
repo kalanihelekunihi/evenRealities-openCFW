@@ -1,0 +1,45 @@
+{
+  "schema": 1,
+  "report": "build/sources-goal-r1-record-update-c/report.json",
+  "report_sha256": "b19bc85e1ad8a7fdf71b560c0e6224ad21d63caa2337a3ff2b0cc52b4bc198e9",
+  "manifest_sha256": "3f6ee52ac3e4f451142c833e9e6ed542b5be8c149610a0a8de9106f84d8c08f6",
+  "behavior": {
+    "modeled_provider_cases": 360,
+    "real_validate_compare_cases": 512,
+    "callback_cases": 256
+  },
+  "defects": [
+    "skip-validation",
+    "short-comparison",
+    "skip-compare",
+    "reverse-order"
+  ],
+  "audit": {
+    "unchanged_prior_object_hashes": 775,
+    "changed_object_hashes": [
+      [
+        "r1-application",
+        "r1/src/application/runtime/native_record_update.c"
+      ],
+      [
+        "r1-bootloader",
+        "{gen}/r1_uecc.c"
+      ]
+    ],
+    "generated_boot_crypto_allocated_bytes_and_relocations_unchanged": true,
+    "import_sets_unchanged": true
+  },
+  "rea_evidence_id": "ev_610c041b62e190f1857b8a78e75590f85cc78fc4270f28bfc67b25fd2f791f71",
+  "strict_boot_link_report": "build/goal-r1-record-update-c/boot-link/report.json",
+  "image_integration_proven": false,
+  "physical_flash_verified": false,
+  "void_return_register_excluded": true,
+  "evidence_sha256": {
+    "build/goal-r1-record-update-c/verify.py": "cc9a9fd733ca8dfda5a70f4deab6d0d6c7e7b5dec59dfbe2fbc1f27631fafe94",
+    "build/goal-r1-record-update-c/defects.py": "ef5f364d5769c14e152cab252d65f28542523aeac582dc28309d910a7a511b1f",
+    "build/goal-r1-record-update-c/verification.json": "d91c93edda6332b86b7c500d6713f00e487d66e82c50b00e4a8c0496a590d39b",
+    "build/goal-r1-record-update-c/defects.json": "9fd62cf9fae56f15773395071caa99cc1d839eed8a4434cba1a338f5de3c5dd9",
+    "build/goal-r1-record-update-c/audit.json": "ff1178b79f2c48c86038a6ece15a70733b398a62adfb42a842ef4be6fa5ca6da",
+    "build/goal-r1-record-update-c/rea.json": "e1071910e9d1f4513f911f994d8b4284f9c9695767c199d2a708b1b0cd3b8a54"
+  }
+}

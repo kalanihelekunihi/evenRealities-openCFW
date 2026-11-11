@@ -1,39 +1,19 @@
-/* Full native event sender; genuine selected allocator/queue children. */
-__asm__(
-    ".text\n"
-    ".balign 4\n"
-    ".global opencfw_em9305_dispatch_event_send_31d128\n"
-    ".type opencfw_em9305_dispatch_event_send_31d128,@function\n"
-    "opencfw_em9305_dispatch_event_send_31d128:\n"
-    "L31d128:\n"
-    "enter_s [r13-r14,blink]\n"
-    "L31d12a:\n"
-    "mov_s r14,r0\n"
-    "L31d12c:\n"
-    "mov_s r0,4\n"
-    "L31d12e:\n"
-    "bl.d opencfw_em9305_wsf_event_allocate\n"
-    "L31d132:\n"
-    "mov_s r13,r1\n"
-    "L31d134:\n"
-    "mov_s r1,r0\n"
-    "L31d136:\n"
-    "breq_s r0,0,L31d14e\n"
-    "L31d138:\n"
-    "mov_s r0,0x805b18\n"
-    "L31d13e:\n"
-    "ldb_s r2,[r14,0x2]\n"
-    "L31d140:\n"
-    "ldb_s r0,[r0,0]\n"
-    "L31d142:\n"
-    "stb_s r13,[r1,0x3]\n"
-    "L31d144:\n"
-    "sth_s r2,[r1,0]\n"
-    "L31d146:\n"
-    "bl.d opencfw_em9305_wsf_task_message_send\n"
-    "L31d14a:\n"
-    "stb 17,[r1,2]\n"
-    "L31d14e:\n"
-    "leave_s [r13-r14,blink,pcl]\n"
-    ".size opencfw_em9305_dispatch_event_send_31d128,.-opencfw_em9305_dispatch_event_send_31d128\n"
-);
+#include <stdint.h>
+
+/* Native 0x31d128..0x31d150: send event 17 for the record's id (+2) with
+ * one status byte to the task at 0x805b18. Returns 0 when no 4-byte
+ * message could be allocated. */
+extern uintptr_t opencfw_em9305_wsf_event_allocate(uint32_t);
+extern uint32_t opencfw_em9305_wsf_task_message_send(uint32_t,uintptr_t);
+
+uint32_t opencfw_em9305_dispatch_event_send_31d128(uintptr_t record,uint32_t status)
+{
+    uintptr_t message=opencfw_em9305_wsf_event_allocate(4u);
+    if(message==0u) return 0u;
+    uint32_t task=*(volatile uint8_t *)(uintptr_t)0x805b18u;
+    uint32_t id=*(volatile uint8_t *)(record+2u);
+    *(volatile uint8_t *)(message+3u)=(uint8_t)status;
+    *(volatile uint16_t *)message=(uint16_t)id;
+    *(volatile uint8_t *)(message+2u)=17u;
+    return opencfw_em9305_wsf_task_message_send(task,message);
+}

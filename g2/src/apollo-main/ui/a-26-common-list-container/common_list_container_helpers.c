@@ -32,10 +32,10 @@ static const uint32_t list_gray_colors[LIST_COLOR_COUNT] = {
 };
 
 /* LVGL style setters (stock copies). */
-extern void audio_uart_page_44120e(void *obj, int32_t v, uint32_t sel); /* pad_top */
-extern void audio_uart_page_44121c(void *obj, int32_t v, uint32_t sel); /* pad_bottom */
-extern void audio_uart_page_44122a(void *obj, int32_t v, uint32_t sel); /* pad_left */
-extern void audio_uart_page_441238(void *obj, int32_t v, uint32_t sel); /* pad_right */
+extern void lv_obj_set_style_pad_top(void *obj, int32_t v, uint32_t sel); /* pad_top */
+extern void lv_obj_set_style_pad_bottom(void *obj, int32_t v, uint32_t sel); /* pad_bottom */
+extern void lv_obj_set_style_pad_left(void *obj, int32_t v, uint32_t sel); /* pad_left */
+extern void lv_obj_set_style_pad_right(void *obj, int32_t v, uint32_t sel); /* pad_right */
 
 /* Logging. */
 extern uint32_t audio_log_flags(void); /* 0x43d0ce */
@@ -55,10 +55,10 @@ static const char s_bad_color_s[] =
 /* lv_obj_set_style_pad_all (file-local copy; same body as 0x4935cc / 0x4dbeac). */
 void list_obj_set_style_pad_all_4dccd8(void *obj, int32_t value, uint32_t selector)
 {
-    audio_uart_page_44122a(obj, value, selector);
-    audio_uart_page_441238(obj, value, selector);
-    audio_uart_page_44120e(obj, value, selector);
-    audio_uart_page_44121c(obj, value, selector);
+    lv_obj_set_style_pad_left(obj, value, selector);
+    lv_obj_set_style_pad_right(obj, value, selector);
+    lv_obj_set_style_pad_top(obj, value, selector);
+    lv_obj_set_style_pad_bottom(obj, value, selector);
 }
 
 /* Y position of item `index`; when the items fit they are centred in the visible height. */

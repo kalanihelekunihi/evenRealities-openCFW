@@ -27,7 +27,7 @@ static uint32_t load32(const uint8_t *p)
 static void store32(uint8_t *p,uint32_t v)
 { for(unsigned i=0;i<4u;i++)p[i]=(uint8_t)(v>>(i*8u)); }
 
-/* Native 0x327b60..0x327dba. The ARC entry allocates the original 24-byte
+/* Native 0x327b60..0x327dba. The entry below allocates the original 24-byte
  * frame; only fields actually written by native branches are initialized.
  * Child 3239b8's input R3 is captured before its call. */
 uint32_t opencfw_em9305_init_transition_start_327b60_body(uint8_t *frame)
@@ -178,19 +178,8 @@ uint32_t opencfw_em9305_init_transition_start_327b60_body(uint8_t *frame)
     return opencfw_em9305_auxiliary_insert_313220(active);
 }
 
-#ifdef __arc__
-__asm__(
-".text\n.balign 4\n.global opencfw_em9305_init_transition_start_327b60\n"
-".type opencfw_em9305_init_transition_start_327b60,@function\n"
-"opencfw_em9305_init_transition_start_327b60:\n"
-"enter_s [r13-r22,fp,blink]\nsub_s sp,sp,0x18\n"
-"mov r0,sp\nbl opencfw_em9305_init_transition_start_327b60_body\n"
-"leave_s [r13-r22,fp,blink,pcl]\n"
-".size opencfw_em9305_init_transition_start_327b60,. - opencfw_em9305_init_transition_start_327b60\n");
-#else
 uint32_t opencfw_em9305_init_transition_start_327b60(void)
 {
     uint8_t frame[24] __attribute__((aligned(4)));
     return opencfw_em9305_init_transition_start_327b60_body(frame);
 }
-#endif

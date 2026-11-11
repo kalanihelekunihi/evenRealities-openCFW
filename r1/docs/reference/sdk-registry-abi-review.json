@@ -1,0 +1,136 @@
+{
+  "schema_version": 1,
+  "report": "build/sources-goal-r1-sdk-registry-abi/report.json",
+  "report_sha256": "3953577c41fd91d8d39fc859fa86530cfd809fb3a92ba5095fe084d65951112a",
+  "manifest_sha256": "8679eda6927f0a26ec6a65f01237cf2db743c38aeed16b8c83ee112bb20a8d8d",
+  "verification": {
+    "iterator_masks": 40,
+    "notify_scenarios": 40,
+    "stack_poll_scenarios": 36,
+    "registry_records": {
+      "sdh_ble_observers": 12,
+      "sdh_req_observers": 1,
+      "sdh_state_observers": 2,
+      "sdh_stack_observers": 2,
+      "sdh_soc_observers": 3,
+      "pwr_mgmt_data": 0
+    },
+    "actual_sdk_users_and_shared_iterator": true,
+    "clock_before_fstorage": true,
+    "svc_and_callbacks_modeled": true,
+    "power_handlers_absent": true
+  },
+  "old_abi_reproduction": {
+    "first_state_observer_repeats_instead_of_advancing": true,
+    "calls_before_guard_stop": 3,
+    "expected_source_owned_records": 2,
+    "callback_trace": [
+      [
+        16778507,
+        0
+      ],
+      [
+        16778507,
+        0
+      ],
+      [
+        16778507,
+        0
+      ]
+    ]
+  },
+  "audit": {
+    "unchanged_prior_object_hashes": 797,
+    "changed_sdk_units": [
+      "vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/pwr_mgmt/nrf_pwr_mgmt.c",
+      "vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/softdevice/common/nrf_sdh.c",
+      "vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/softdevice/common/nrf_sdh_soc.c"
+    ],
+    "sdk_sources_and_public_definitions_unchanged": true,
+    "sdk_registration_sections_unchanged": {
+      "vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/pwr_mgmt/nrf_pwr_mgmt.c": [],
+      "vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/softdevice/common/nrf_sdh.c": [],
+      "vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/softdevice/common/nrf_sdh_soc.c": [
+        ".sdh_stack_observers0"
+      ]
+    },
+    "ble_registry_data_and_relocations_unchanged": true,
+    "removed_application_imports": [
+      "__start_pwr_mgmt_data",
+      "__start_sdh_req_observers",
+      "__start_sdh_soc_observers",
+      "__start_sdh_stack_observers",
+      "__start_sdh_state_observers",
+      "__stop_pwr_mgmt_data",
+      "__stop_sdh_req_observers",
+      "__stop_sdh_soc_observers",
+      "__stop_sdh_stack_observers",
+      "__stop_sdh_state_observers"
+    ],
+    "generated_boot_allocated_bytes_and_relocations_unchanged": true,
+    "only_manifest_changes_abi_header_and_layout": true
+  },
+  "defects": [
+    {
+      "defect": "fstorage-before-clock",
+      "both_probe_links_succeeded": true,
+      "observer_order_assertion_rejected": true
+    }
+  ],
+  "rea_evidence_id": "ev_278f1dacf98acb7b0406fb9bc8a79a2b65d954c1371b4f3c76ddb49bddd210bc",
+  "stock_soc_order": [
+    "0x907fd",
+    "0x78d09",
+    "0x52279"
+  ],
+  "evidence_files": {
+    "build/goal-r1-sdk-registry-abi/verify.py": "84ea5b89d44231a2710e9b06c5331e9060b2f74395d506fc1051788a201d5aeb",
+    "build/goal-r1-sdk-registry-abi/audit.py": "ca5e13c6c24c9e66aacd2f35d6f187fcfc634f736f1f4683b33178798c381354",
+    "build/goal-r1-sdk-registry-abi/defects.py": "dad835b139e74ffa2bf9e587c447b9ff0ed74877c6e1fef1e05b9b4820c80925",
+    "build/goal-r1-sdk-registry-abi/document.py": "ff54d587c89b7f654d72b52b6bb397520bd02067e3a18779e5b0d1aade8eca5b",
+    "build/goal-r1-sdk-registry-abi/reproduce_before.py": "6cd4cefde7b8fb3e257c184611de938a0a2dbac4bf6a303f93735392c75d15d7",
+    "build/goal-r1-sdk-registry-abi/verification.json": "7dd535e879a6c6ed95c761e1ef578abb12e4d046878e5d0e22e6f71dd31a0be9",
+    "build/goal-r1-sdk-registry-abi/before-abi.json": "6d1991b47fa50a071c47f29368d6b1d272a4640e14619c85628103170660d424",
+    "build/goal-r1-sdk-registry-abi/audit.json": "0f5ba591d7f3edcd7f6d402a22dc9c584199e8066bb82ce2c8511e16ec7829e2",
+    "build/goal-r1-sdk-registry-abi/defects.json": "dce92ee8ed3702032c40d550cb28f5bc0e7c489a60603afda9d524b7e0b3f8df",
+    "build/goal-r1-sdk-registry-abi/before.elf": "eaeca4915dd939a31373b124daa915f5f5aa2775b923835d8b69ba3cacfbaac8",
+    "build/goal-r1-sdk-registry-abi/source.elf": "a76b89248e924232c53ad5ad6867f8e8b33484d986f4c16cff6525472d946033",
+    "build/goal-r1-sdk-registry-abi/probe.o": "392344e7860d7db00352759c6c7a69414a9e2ecb79ed9f0f307c1bcdf217182e",
+    "build/goal-r1-sdk-registry-abi/rea-soc-order.json": "9910452bb9dcbe07792f5af631914a9123f778ffb1aae400cd01834d080e959b",
+    "build/goal-r1-sdk-registry-abi/before-abi.log": "98d80e1cbd5a2c0b8b71b9fda3f607a0ec8cef9fc21d6d974a7e9e6ae687d36a",
+    "build/goal-r1-sdk-registry-abi/verify-final.log": "9c8abd3436457dc1a30e205f320101980947cb234849fd20e0734afb15e5a99b",
+    "build/goal-r1-sdk-registry-abi/r1-sources-check.log": "5e11e4875b7438d11bbef8d4e6a9ea5b4081f51b98d07ce16e216ec5be46d46c",
+    "build/goal-r1-sdk-registry-abi/sources-check.log": "8c6106f31795d747b5656cd65fe1f38ce4ad1cf5ad16dd2acf1d77f1c9a667c3",
+    "build/goal-r1-sdk-registry-abi/boot-link/report.json": "a60aea079e18b60ed99e051d3ccbcaf812e72aa1ee1508eb50af213ace7dfd9b"
+  },
+  "layout_and_header_inputs": {
+    "r1/src/config/sdk/section_legacy_abi.h": "b33ebd4283f130372cf2d1386fbd65922d15746ce9fcd2fe5540ed74c8583c02",
+    "r1/src/config/sdk/section_users_contract.h": "62025c64d0bd714b171c9dd66eec396038c1165582cdfe224a23496f43a83a45",
+    "r1/src/config/runtime/native_sdk_observers.ld": "1db40ad1a61e1f22d7a7cd247374792aef6bf9a67c7ac2ab97733bae2a1fd4d0",
+    "r1/src/config/runtime/native_ble_observers.ld": "96cec5cd8f6181a1a118d582ff5b81f1630becb241294d1b6c0c3544812d297d"
+  },
+  "changed_sdk_units": [
+    {
+      "source": "vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/pwr_mgmt/nrf_pwr_mgmt.c",
+      "source_sha256": "2a42026e49d3d14b27c360d454edbaba3021b9994a0fe5d73470a818974303b7",
+      "object_sha256": "72a62d7c2452d8b0edb525efbf5f1ce403840e1972921b571eba8c5f7d2142c6"
+    },
+    {
+      "source": "vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/softdevice/common/nrf_sdh.c",
+      "source_sha256": "8f485109ea71b3f7c4455fdd2d24a820e75bcfb959e7e37fad6a62a302dbf856",
+      "object_sha256": "c096d999d738343c4b6baf7626dcb7309a71d0b39c69064230968e7518af9382"
+    },
+    {
+      "source": "vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/softdevice/common/nrf_sdh_soc.c",
+      "source_sha256": "e1188748a1d94c9e8803106207e3fad6b27a0296f93efdf251d3b64ea3c2c25b",
+      "object_sha256": "fb525b42d652143f8c7e8b4e034ababca961ffe4c1511066867db7f0bbea0d26"
+    }
+  ],
+  "limitations": [
+    "Actual SDK notifier/poller/iterator code executes; event SVCs and leaf observers modeled.",
+    "Power set has no registered handlers; iterator interoperability is tested, not shutdown support.",
+    "Only existing participating SDK registries are linked; excluded product-specific state observers are not added.",
+    "Startup, physical radio/flash/power behavior, asynchronous effects and complete application final link remain unverified.",
+    "No source-plan selection changes."
+  ]
+}

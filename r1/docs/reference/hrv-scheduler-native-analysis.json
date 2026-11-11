@@ -1,0 +1,320 @@
+{
+  "native_cases": 2064,
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "stock_elf_sha256": "25b4a29af80ec8edab5bd861ba9b74a6e22eab29dc3d7a809a16869e8a140f04",
+  "probe_sha256": "ecd3c8ae9fe537bf4e52677bdd6df8eed33edefd0f280d1881549409501df33b",
+  "REA": {
+    "evidence_id": "ev_33823025628224df32efd987363c6c52726309f8ffe68f81ab2eb9aca6881192",
+    "subject": {
+      "name": "stock.elf",
+      "digest": {
+        "sha256": "25b4a29af80ec8edab5bd861ba9b74a6e22eab29dc3d7a809a16869e8a140f04"
+      },
+      "local_path": "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-queue-reset-c/stock.elf",
+      "format": "elf",
+      "architecture": "arm"
+    },
+    "provider": {
+      "id": "ghidra",
+      "name": "Ghidra",
+      "version": "12.1.4"
+    },
+    "analysis_profile": {
+      "provider": {
+        "id": "ghidra",
+        "name": "Ghidra",
+        "version": "12.1.4"
+      },
+      "parameters": {
+        "target_kind": "executable",
+        "target_format": "elf",
+        "architecture": "arm",
+        "available_architectures": [
+          "arm"
+        ],
+        "import_mode": "ephemeral-source-immutable",
+        "annotation_policy": "atomic-function-entry-metadata-v1",
+        "load_image_observations": "source-mappings-entry-context-v2",
+        "function_body_evidence": "complete-inclusive-ranges-v1",
+        "function_references": "complete-body-and-entry-reference-manager-v2",
+        "call_relationship_coverage": "function-body-call-coverage-v5",
+        "function_dossier_coverage": "observed-facets-and-call-relationships-v1",
+        "string_inventory_evidence": "defined-data-coverage-v1",
+        "location_resolution": "explicit-address-exact-entry-symbol-first-v3",
+        "procedure_file_offset_resolution": "address-first-unique-target-source-mapping-v2",
+        "instruction_flow_evidence": "decoded-return-pcode-v1",
+        "instruction_references": "exact-address-incoming-v1",
+        "function_boundary_observations": "ghidra-function-boundary-limitations-v3",
+        "no_return_repair": "returning-imports-decoded-return-v2",
+        "process_launch": "inspected-jvm-launch-support-v1",
+        "jump_table_evidence": "typed-case-default-blocks-v1",
+        "decompiler_jump_loads": true,
+        "loader": "auto-from-header",
+        "language_id": "auto-from-header",
+        "compiler_spec_id": "auto-default",
+        "analyzer_preset": "ghidra-default"
+      },
+      "digest": "7e46711069eea041af1b9b99e34115c13332795e5cda76e584a722f529ec70de"
+    },
+    "predicate_type": "rea.analysis",
+    "operation": "read_bytes",
+    "parameters": {
+      "address": "0x49f0c",
+      "length": 784
+    },
+    "raw_result": {
+      "address": "0x49f0c",
+      "requested_bytes": 784,
+      "returned_bytes": 784,
+      "bytes_hex": "2de9f8435e4d07466878a97808437dd1287801287ad1fff769fa010059485a4a4ff04068a0eb02004fead0004ff0030202eb00460dd002f039fb002866d02869002863d16868002860d17824002f25d113e047f0c5fac00703d147f0c1fa400704d54aa249a1404647f060fb47f0b8fa80074bd5304650a141e040f0dbfe4ff46161b0fbf1f201fb1200c0f56160962873d91e38782801d204006ed04ff47a7004fb00f100224e4840f0acf9286198b1d0214c48ddf7f3fb0120034600904a4a4aa14ca03ff00afc686000281bd047f087fac00736d131e047f082fac00703d147f07efa400704d543a243a1404647f01dfb47f075fa80073fd530464ba1bde8f8432ff0d7bc47f06bfa00e035e0c00703d147f065fa400704d550a24fa1404647f004fb47f05cfa800703d5304655a12ff0c0fcbde8f843fff756bf47f050fa40070ad500940fb156a300e057a359a258a14ff0486047f0e9fa47f041fa80070bd50fb14fa200e050a201b030462346bde8f0435ba12ff0a8bcbde8f8830000846d0020fc440c001c440c005b52494e475d6865616c74682064697361626c65642c20736b6970206872762074696d696e67206d6f6465006865616c74682064697361626c65642c20736b6970206872762074696d696e67206d6f64650000005d9e040000a301204da20400616c676f00000000687276005b52494e475d616c676f206872762074696d696e672074696d656f75742068616e646c657220637265617465206661696c656400616c676f206872762074696d696e672074696d656f75742068616e646c657220637265617465206661696c65640000005b52494e475d616c676f206872762074696d696e67207265676973746572206661696c6564000000616c676f206872762074696d696e67207265676973746572206661696c656400686f75726c79000063617463687570005b52494e475d616c676f206872762074696d696e672073746172742c2025732c2074696d656f75743a25642073656300616c676f206872762074696d696e672073746172742c2025732c2074696d656f75743a256420736563000000",
+      "complete": true
+    },
+    "normalized_result": {
+      "address": "0x49f0c",
+      "requested_bytes": 784,
+      "returned_bytes": 784,
+      "bytes_hex": "2de9f8435e4d07466878a97808437dd1287801287ad1fff769fa010059485a4a4ff04068a0eb02004fead0004ff0030202eb00460dd002f039fb002866d02869002863d16868002860d17824002f25d113e047f0c5fac00703d147f0c1fa400704d54aa249a1404647f060fb47f0b8fa80074bd5304650a141e040f0dbfe4ff46161b0fbf1f201fb1200c0f56160962873d91e38782801d204006ed04ff47a7004fb00f100224e4840f0acf9286198b1d0214c48ddf7f3fb0120034600904a4a4aa14ca03ff00afc686000281bd047f087fac00736d131e047f082fac00703d147f07efa400704d543a243a1404647f01dfb47f075fa80073fd530464ba1bde8f8432ff0d7bc47f06bfa00e035e0c00703d147f065fa400704d550a24fa1404647f004fb47f05cfa800703d5304655a12ff0c0fcbde8f843fff756bf47f050fa40070ad500940fb156a300e057a359a258a14ff0486047f0e9fa47f041fa80070bd50fb14fa200e050a201b030462346bde8f0435ba12ff0a8bcbde8f8830000846d0020fc440c001c440c005b52494e475d6865616c74682064697361626c65642c20736b6970206872762074696d696e67206d6f6465006865616c74682064697361626c65642c20736b6970206872762074696d696e67206d6f64650000005d9e040000a301204da20400616c676f00000000687276005b52494e475d616c676f206872762074696d696e672074696d656f75742068616e646c657220637265617465206661696c656400616c676f206872762074696d696e672074696d656f75742068616e646c657220637265617465206661696c65640000005b52494e475d616c676f206872762074696d696e67207265676973746572206661696c6564000000616c676f206872762074696d696e67207265676973746572206661696c656400686f75726c79000063617463687570005b52494e475d616c676f206872762074696d696e672073746172742c2025732c2074696d656f75743a25642073656300616c676f206872762074696d696e672073746172742c2025732c2074696d656f75743a256420736563000000",
+      "complete": true
+    },
+    "confidence": "observed",
+    "authority": "shipped-artifact",
+    "environment": null,
+    "limitations": [
+      "The session serves operations only after Ghidra reports default auto-analysis complete; incomplete analysis does not expose partial results.",
+      "The imported Program and temporary project are ephemeral and deleted on close. Annotation operations edit session database metadata; original executable bytes are never written.",
+      "Cancelling an active Ghidra request terminates its ephemeral database and discards session annotations. The selected target remains open; the next provider query imports the original artifact again.",
+      "Default-space addresses use lowercase 0x-prefixed hexadecimal; other address spaces use <percent-encoded-space>:0x<hex>.",
+      "Bytes reflect Ghidra's initialized memory, including loader fixups. Reads stop at an unmapped or uninitialized byte and report completeness explicitly.",
+      "macOS sessions require a matching executable Ghidra native decompiler; REA checks for it but does not build native components or change Gatekeeper quarantine state."
+    ],
+    "relationship_coverage": null,
+    "locations": [],
+    "evidence_links": []
+  },
+  "limits": [
+    "Native-only boundary analysis, not C equivalence or implementation",
+    "Peripheral/providers modeled except native flag getter and record reader in 640 raw-stack cases",
+    "Failed/partial NV read consumes raw stack; scheduler frame32 and record offset104 are required evidence for a subsequent C caller",
+    "No final source link or physical device proof"
+  ],
+  "provider_depths": {
+    "flag": [
+      32
+    ],
+    "log-mode": [
+      32
+    ],
+    "ring-log": [
+      32
+    ],
+    "sdk0": [
+      0,
+      32
+    ],
+    "wear-mode": [
+      32
+    ],
+    "time": [
+      32
+    ],
+    "timer-create": [
+      32
+    ],
+    "clear": [
+      32
+    ],
+    "register": [
+      32
+    ],
+    "timer-release": [
+      8
+    ],
+    "sdk2": [
+      0
+    ],
+    "nv-read": [
+      104
+    ]
+  },
+  "absent_NV_flag_by_seed": {
+    "0": 0,
+    "1": 1,
+    "2": 0,
+    "3": 0,
+    "4": 0,
+    "5": 1,
+    "6": 1,
+    "7": 1,
+    "8": 0,
+    "9": 0,
+    "10": 1,
+    "11": 1,
+    "12": 0,
+    "13": 0,
+    "14": 0,
+    "15": 0
+  },
+  "samples": [
+    {
+      "case": {
+        "arg": 0,
+        "time": 3449,
+        "timer_result": 536875008,
+        "stream_result": 536879104,
+        "health": 1,
+        "log_mode": 7,
+        "mutate": "none"
+      },
+      "depths": {
+        "flag": [
+          32
+        ],
+        "wear-mode": [
+          32
+        ],
+        "time": [
+          32
+        ],
+        "timer-create": [
+          32
+        ],
+        "clear": [
+          32
+        ],
+        "register": [
+          32
+        ],
+        "log-mode": [
+          32
+        ],
+        "ring-log": [
+          32
+        ],
+        "sdk2": [
+          0
+        ]
+      },
+      "record": null,
+      "health": 1,
+      "trace": [
+        [
+          "flag",
+          []
+        ],
+        [
+          "wear-mode",
+          []
+        ],
+        [
+          "time",
+          []
+        ],
+        [
+          "timer-create",
+          [
+            302685,
+            120000,
+            0
+          ]
+        ],
+        [
+          "clear",
+          [
+            536978176,
+            208
+          ]
+        ],
+        [
+          "register",
+          [
+            "hrv",
+            "algo",
+            303693,
+            1,
+            1
+          ]
+        ],
+        [
+          "log-mode",
+          []
+        ],
+        [
+          "ring-log",
+          [
+            209715200,
+            "[RING]algo hrv timing start, %s, timeout:%d sec",
+            "[RING]algo hrv timing start, %s, timeout:%d sec",
+            "catchup",
+            120
+          ]
+        ],
+        [
+          "log-mode",
+          []
+        ],
+        [
+          "sdk2",
+          [
+            1835011,
+            "algo hrv timing start, %s, timeout:%d sec",
+            "catchup",
+            120
+          ]
+        ]
+      ]
+    },
+    {
+      "case": {
+        "arg": 0,
+        "time": 3450,
+        "timer_result": 536875008,
+        "stream_result": 536879104,
+        "health": 1,
+        "log_mode": 7,
+        "mutate": "none"
+      },
+      "depths": {
+        "flag": [
+          32
+        ],
+        "wear-mode": [
+          32
+        ],
+        "time": [
+          32
+        ]
+      },
+      "record": null,
+      "health": 1,
+      "trace": [
+        [
+          "flag",
+          []
+        ],
+        [
+          "wear-mode",
+          []
+        ],
+        [
+          "time",
+          []
+        ]
+      ]
+    }
+  ],
+  "artifacts": {
+    "build/goal-r1-hrv-scheduler-analysis/probe.py": "ecd3c8ae9fe537bf4e52677bdd6df8eed33edefd0f280d1881549409501df33b",
+    "build/goal-r1-hrv-scheduler-analysis/results.json": "e2e15f97e1f7fa1037d8f5b5205208c47eb5118e0b76774685b50dc9c1ba6db7",
+    "build/goal-r1-hrv-scheduler-analysis/rea.json": "41054cf28c4603614e56e553e523a2848ab21e3e0863d5373e3c9aacc8db083e"
+  },
+  "findings": [
+    "Distinct scheduler code body382 at49f0c; tail-return callee inclusion in REA callback dossier does not imply a single function",
+    "All three initial preconditions captured before settings getter; later mode is not rechecked",
+    "Nonzero input includingffffffff skips local clock read; success label hourly. Zero input reads local time; success label catchup",
+    "Unsigned remaining=3600-(timestamp%3600); remaining<=150 skips; accepted duration always120 seconds, 120000 milliseconds",
+    "Timer create callback49e5d arg0, late timer publication; successful create clears208 bytes then register hrv/algo producer4a24d priority1 flag1 with late stream publication",
+    "Failed stream registration logs then releases fresh timer field and late clears it; timer create failure logs without clearing session buffer",
+    "Existing saved-word flag getter retains8byte frame; record reader64byte frame; caller32 -> record offset104; absent-read flags differ across poison seeds",
+    "Subsequent source conversion must prove record offset and raw-data behavior using actual getter/reader and failed/partial NV reads, not a mocked boolean flag"
+  ]
+}

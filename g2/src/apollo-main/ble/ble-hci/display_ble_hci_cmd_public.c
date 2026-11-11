@@ -1,10 +1,11 @@
-/* Native hciCmdAlloc 0x52ae38 and canonical hciCmdSend 0x52ae5e entry.
- * The send body is already source-defined as audio_ble_hci_cmd_send with
- * actual ARM C/native PASS5; this branch preserves its four entry registers. */
+/* Native canonical hciCmdSend 0x52ae5e entry. The send body is
+ * audio_ble_hci_cmd_send_body in display_ble_hci_cmd_send.c (sources.json
+ * aliases audio_ble_hci_cmd_send -> hciCmdSend). The stock entry left the
+ * caller's R1-R3 in place; the body ignores R1/R3 and uses R2 only as the high
+ * word of its return value, which no hciCmdSend caller reads. */
 #include <stdint.h>
-extern uint8_t *WsfMsgAlloc(uint16_t length);
-extern void audio_ble_hci_cmd_send(void *message);
-__attribute__((naked)) void hciCmdSend(uint8_t *message __attribute__((unused)))
+extern uint64_t audio_ble_hci_cmd_send_body(void *,uint32_t,uint32_t,uint32_t);
+void hciCmdSend(uint8_t *message)
 {
-    __asm volatile("b audio_ble_hci_cmd_send");
+    (void)audio_ble_hci_cmd_send_body(message,0u,0u,0u);
 }

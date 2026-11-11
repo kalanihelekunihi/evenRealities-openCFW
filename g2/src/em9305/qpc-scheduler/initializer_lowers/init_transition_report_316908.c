@@ -1,18 +1,20 @@
 #include <stdint.h>
 
+/* Native 0x316908..0x316948: report LL event 5 (address resolution
+ * transition) in a 40-byte frame: bytes 0..35 cleared, {5, status,
+ * status} at +2, fresh flag at +9, the 48-bit address serialised at +10,
+ * identity at +35 and a 0xffff sentinel at +36. Bytes 38..39 are not
+ * written (ambient stack contents, as in the native frame). */
 extern uintptr_t opencfw_em9305_radio_address_write_3045e8(
     uintptr_t,uint32_t,uint32_t);
 extern uint32_t opencfw_em9305_ll_event_callback_30e79c(uintptr_t);
 extern void *opencfw_em9305_memset(void *,uint32_t,uint32_t);
 
-/* Entire native 0x316908..0x316948. The first 36 bytes are cleared;
- * the native two-byte sentinel at offset 36 belongs to the 40-byte frame.
- * Bytes 38..39 retain native ambient stack contents through the ARC entry
- * frame below. The serializer writes six bytes at offset 10. */
-uint32_t opencfw_em9305_init_transition_report_316908_body(
+uint32_t opencfw_em9305_init_transition_report_316908(
     uint32_t identity,uint32_t status,uint32_t fresh,
-    uint32_t address_low,uint32_t address_high,uint8_t *frame)
+    uint32_t address_low,uint32_t address_high)
 {
+    uint8_t frame[40] __attribute__((aligned(4)));
     (void)opencfw_em9305_memset(frame,0u,36u);
     frame[36]=0xffu;
     frame[37]=0xffu;
@@ -25,23 +27,3 @@ uint32_t opencfw_em9305_init_transition_report_316908_body(
         (uintptr_t)(frame+10u),address_low,address_high);
     return opencfw_em9305_ll_event_callback_30e79c((uintptr_t)frame);
 }
-
-#ifdef __arc__
-__asm__(
-".text\n.balign 4\n.global opencfw_em9305_init_transition_report_316908\n"
-".type opencfw_em9305_init_transition_report_316908,@function\n"
-"opencfw_em9305_init_transition_report_316908:\n"
-"enter_s [r13-r17,fp,blink]\nsub_s sp,sp,0x28\n"
-"mov r5,sp\nbl opencfw_em9305_init_transition_report_316908_body\n"
-"leave_s [r13-r17,fp,blink,pcl]\n"
-".size opencfw_em9305_init_transition_report_316908,. - opencfw_em9305_init_transition_report_316908\n");
-#else
-uint32_t opencfw_em9305_init_transition_report_316908(
-    uint32_t identity,uint32_t status,uint32_t fresh,
-    uint32_t address_low,uint32_t address_high)
-{
-    uint8_t frame[40] __attribute__((aligned(4)));
-    return opencfw_em9305_init_transition_report_316908_body(
-        identity,status,fresh,address_low,address_high,frame);
-}
-#endif

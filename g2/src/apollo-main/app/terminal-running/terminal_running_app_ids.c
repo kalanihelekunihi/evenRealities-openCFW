@@ -54,3 +54,5 @@ uint32_t audio_get_running_app_ids(uint32_t *background, uint32_t *foreground) {
     }
     return 0u;
 }
+__typeof__(audio_get_running_app_ids) audio_system_close_active_app_get_443504
+    __attribute__((alias("audio_get_running_app_ids")));

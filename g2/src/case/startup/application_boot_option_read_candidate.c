@@ -26,3 +26,5 @@ void case_boot_read_option_words(uint32_t *words)
     words[6]=case_boot_option_status_b();
     words[5]=0x077f6000u;
 }
+/* Dedup (0x08004a00): case_flash_mode_registers (was legacy-default/flash_snapshot_candidate.c). */
+void case_flash_mode_registers(uint32_t snapshot[7]) __attribute__((alias("case_boot_read_option_words")));

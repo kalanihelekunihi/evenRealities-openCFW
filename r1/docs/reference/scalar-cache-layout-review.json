@@ -1,0 +1,107 @@
+{
+  "schema_version": 1,
+  "scope": "Complete temperature/stress relative cache and timestamp layout",
+  "report": "build/sources-goal-r1-scalar-cache-layout/report.json",
+  "comparison_report": "build/sources-goal-r1-cache-ownership-reviewed/report.json",
+  "audit": {
+    "compiled_units": 862,
+    "application_imports": 63,
+    "bootloader_imports": 22,
+    "unchanged_prior_nongenerated_objects": 852,
+    "changed_C_objects": [],
+    "manifest_unchanged": true,
+    "source_plan_unchanged": true,
+    "new_state_definitions": 0,
+    "normal_composition_layout": {
+      "temperature": {
+        "section": ".r1.health.cache.temperature",
+        "size": 84,
+        "prefix_offset": 0,
+        "timestamp_offset_from_owner": 80,
+        "timestamp_offset_from_cache": 80
+      },
+      "stress": {
+        "section": ".r1.health.cache.stress",
+        "size": 124,
+        "prefix_offset": 40,
+        "timestamp_offset_from_owner": 120,
+        "timestamp_offset_from_cache": 80
+      }
+    }
+  },
+  "writer_accessor_reader_reset": {
+    "stock_C_writer_accessor_reader_reset_comparisons": 576,
+    "linked_normal_objects_and_production_layout_used": true,
+    "shared_prefix_and_timestamp_addresses_match": true,
+    "writer_reader_reset_execute": true,
+    "hour_average_enabled_time_status_and_disabled_logging_modeled": true
+  },
+  "prior_cache_regression": {
+    "activity_reset_comparisons": 12,
+    "stock_C_writer_accessor_latest_reset_comparisons": 864,
+    "linked_normal_objects_and_production_layout_used": true,
+    "shared_prefix_and_timestamp_addresses_match": true,
+    "writer_and_latest_and_reset_execute": true,
+    "hour_average_and_disabled_logging_modeled": true,
+    "private_frames_caller_scratch_APSR_and_physical_behavior_excluded": true
+  },
+  "layout_defects_rejected": [
+    {
+      "defect": "old-layout",
+      "rejected": true
+    },
+    {
+      "defect": "temperature-order",
+      "rejected": true
+    },
+    {
+      "defect": "stress-order",
+      "rejected": true
+    }
+  ],
+  "contract": [
+    "Keep the existing80-byte temperature prefix followed by timestamp80.",
+    "Keep the existing hourly/stress120-byte owner, with five8-byte hourly rows followed by80-byte stress prefix and timestamp120. Preserve kind5 overlap.",
+    "Use the already-admitted cache layout script; no C/state definitions or manifest entries change."
+  ],
+  "limits": [
+    "576 paired comparisons execute unchanged sample-writer assembly plus actual C accessors, hourly readers, resets and memory clear. Hour/average, nonzero time status and disabled logging are modeled. Unreached timestamp backend bound but cannot execute.",
+    "The fixture checks full40-byte hourly rows after each chain; the existing kind5 alias is preserved structurally but hourly arithmetic is not exercised by this fixture.",
+    "Regression uses prior identical normal objects and the expanded production layout;864 HR/HRV/SpO2 chain and12 activity reset comparisons pass.",
+    "Sample-writer text is aligned4 in the fixture; unchanged assembly conversion/alignment in a complete final image remains separate work.",
+    "Normal relocatable ELF proves relative layout; controlled final probe binds native addresses. Startup/scatter integration, complete application linking, concurrency, physical sensors and device boot remain unverified.",
+    "Private frames, caller scratch and APSR are excluded."
+  ],
+  "evidence_files": {
+    "build/sources-goal-r1-scalar-cache-layout/report.json": "8f8481ee559fac6311dd4d3b7946ba8cc73a28caf29a5c30ba780739a3e930f9",
+    "build/sources-goal-r1-cache-ownership-reviewed/report.json": "c681a0fb45885b43b67d9d8ecb4d7ce1bff32e0a905fecf012db61693e124e56",
+    "r1/src/config/runtime/native_health_cache.ld": "eb8f131c489cd818d4e36718718fa1989719ca0170f164541a1a5bf56dfc1ec3",
+    "r1/src/sources.json": "35403e8211b5696a8f5c39a07598f6554ed8cc3563a3d29ff5538609eb4c09a6",
+    "tools/build/source-plan.json": "eeb516e31b3310fb0718f36908977f8125723f7c5e0e86cd6744395826259a4d",
+    "r1/src/application/runtime/native_hourly_state.h": "a3a6d8776279f85039202414b3dbd493777feab2825d7102daf0289b8a11e49b",
+    "r1/src/application/runtime/native_hourly_state.c": "e2916643cbd9afec93f50b827c9000fcaefcead547ea26acc6a0300326ad7660",
+    "r1/src/application/runtime/native_daily_metadata.c": "5f6728a0084db84e0e3f0189107c7cc5991cb7e079135e132b4ccb15d4c77dbd",
+    "r1/src/application/runtime/native_health_hour_storage.c": "9a8a14a4699303757f09f5a4208cabfc2c5d70d5179840e4f323e0a33d8f4b4f",
+    "r1/src/application/runtime/native_health_sample_storage.c": "c095438edd04c0ce2cfd4678496ec91cd0a72058c310e00593b64135d1e028b9",
+    "build/goal-r1-scalar-cache-layout/regression.log": "9ac19e2e5aa1cca74c3ec6403b309a41adea9a7f7764360c73de0f1596be7de7",
+    "build/goal-r1-scalar-cache-layout/regression.py": "edafd74f2660420a090711607b914c45e686b2af54328e05a94ec45e00130a8f",
+    "build/goal-r1-scalar-cache-layout/negative.json": "5818680626df7f7ede0442ae4d76209d89efa8b4f90a7a6ee4504412a82950c7",
+    "build/goal-r1-scalar-cache-layout/test.ld": "521cd475983120edf4dcba9267b80675fd4dc03ca17c59de71f55adce1705edc",
+    "build/goal-r1-scalar-cache-layout/cache.ld": "795f24c58112948b802dbd69792230e6deda67f40a0349919c0342b0e48c1642",
+    "build/goal-r1-scalar-cache-layout/source.elf": "496fc26a53247ed4378dd48ddd9b1ffe58aebffac79802ecf12e5a2792ad3e2e",
+    "build/goal-r1-scalar-cache-layout/negative.py": "1a37ef371064783c3ebd98facb660a7bf9e3a06bcaada151628a387ad2f9cb62",
+    "build/goal-r1-scalar-cache-layout/layout-before.ld": "4610732522d5b32cdf8da64105e0501581ec4f2bb3946b8b3aa6aa625bbc0eb4",
+    "build/goal-r1-scalar-cache-layout/negative.log": "e5d37e8cea6d27e362c160ff149056a1ab750bc224bb7cd7163b09a421aba1d3",
+    "build/goal-r1-scalar-cache-layout/results.json": "9e08219e46d238657d7bed8439b0410e10a666c8445212e524ad7c64e1ad2e42",
+    "build/goal-r1-scalar-cache-layout/rea.json": "f712ecc6e50c3156e03d4f41aded5f9cf5caea6beb920a010ea057499282f83f",
+    "build/goal-r1-scalar-cache-layout/sources-check.log": "b6ab468f43815a75634eab2762e209dbee8ab94c4cc3d601fded4210b6833f2a",
+    "build/goal-r1-scalar-cache-layout/record.py": "e06ffa5b3ec5681ba0b0b67d74bf5acce6d6378d7b84338793e6de653d54d6f9",
+    "build/goal-r1-scalar-cache-layout/verify.py": "f6e86fe742f5e50f6e8b65061092910875cc6b28e03256c9f03c8efc941fa39c",
+    "build/goal-r1-scalar-cache-layout/verification.log": "758ebb32e97c4d189e25b2536256897ea3607e246635743d9aa42480a85b6389",
+    "build/goal-r1-scalar-cache-layout/build.log": "10003e4e18a910d7b72d5805efc94df3f1240286940209e45d0c9173e11cbac7",
+    "build/goal-r1-scalar-cache-layout/regression/test.ld": "6578d3a7ae4daa3b09bf4406e73cba578eec42a4d6d2046eb7a1222fed8d8640",
+    "build/goal-r1-scalar-cache-layout/regression/cache.ld": "6b9de2ebdcdf5af412913493bd31c3da34009ff6101b55534afd1600a515f9c6",
+    "build/goal-r1-scalar-cache-layout/regression/source.elf": "750ea7d8a7d578e88bdf80ca0517ba599cc0e47cbc134a1c92806a5f2d6b4c93",
+    "build/goal-r1-scalar-cache-layout/regression/results.json": "33c4396f4d2ba8b12e59446d62c6d6a4895f0937f77c221c1c96039703c86ed6"
+  }
+}

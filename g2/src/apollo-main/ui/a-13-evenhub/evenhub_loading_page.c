@@ -49,10 +49,10 @@ extern uint32_t g2_evenhub_loading_startup_widget_id; /* RAM 0x200745a4 ext_app_
 extern uint32_t audio_uart_ring_primary_head_cell;  /* RAM 0x200746dc: active lv_font_t * */
 extern uint8_t audio_uart_registry_context_20000b1c; /* UI registry context: +4 page root object */
 
-extern void audio_uart_page_44120e(void *obj, int32_t value, uint32_t selector); /* style pad_top */
-extern void audio_uart_page_44121c(void *obj, int32_t value, uint32_t selector); /* style pad_bottom */
-extern void audio_uart_page_44122a(void *obj, int32_t value, uint32_t selector); /* style pad_left */
-extern void audio_uart_page_441238(void *obj, int32_t value, uint32_t selector); /* style pad_right */
+extern void lv_obj_set_style_pad_top(void *obj, int32_t value, uint32_t selector); /* style pad_top */
+extern void lv_obj_set_style_pad_bottom(void *obj, int32_t value, uint32_t selector); /* style pad_bottom */
+extern void lv_obj_set_style_pad_left(void *obj, int32_t value, uint32_t selector); /* style pad_left */
+extern void lv_obj_set_style_pad_right(void *obj, int32_t value, uint32_t selector); /* style pad_right */
 extern void *audio_uart_page_43de82(void *parent);                               /* lv_obj_create */
 extern int32_t lv_pct_4515d2(int32_t percent);
 extern void audio_uart_page_43f506(void *obj, int32_t width);                    /* lv_obj_set_width */
@@ -61,10 +61,10 @@ extern void audio_uart_page_43f6ac(void *obj, uint32_t align);                  
 extern void audio_uart_page_43dfa4(void *obj, uint32_t flag);                    /* lv_obj_remove_flag */
 extern void audio_uart_page_43f66c(void *obj);                                   /* lv_obj_invalidate */
 extern void audio_uart_page_44129e(void *obj, uint32_t value, uint32_t selector); /* style bg_opa */
-extern void audio_uart_page_44131c(void *obj, uint32_t value, uint32_t selector); /* style setter */
-extern void audio_uart_page_44133a(void *obj, uint32_t value, uint32_t selector); /* style setter */
-extern void audio_uart_page_441386(void *obj, uint32_t value, uint32_t selector); /* style setter */
-extern void audio_uart_page_44146a(void *obj, uint32_t value, uint32_t selector); /* style setter */
+extern void lv_obj_set_style_border_width(void *obj, uint32_t value, uint32_t selector); /* style setter */
+extern void lv_obj_set_style_outline_width(void *obj, uint32_t value, uint32_t selector); /* style setter */
+extern void lv_obj_set_style_shadow_width(void *obj, uint32_t value, uint32_t selector); /* style setter */
+extern void lv_obj_set_style_radius(void *obj, uint32_t value, uint32_t selector); /* style setter */
 extern void audio_uart_page_48ba78(void *obj, uint32_t value);
 extern void audio_uart_page_48ba92(void *obj, uint32_t a, uint32_t b, uint32_t c);
 extern uint32_t audio_uart_page_44104c(uint32_t rgb);                             /* lv_color_hex */
@@ -159,10 +159,10 @@ static const char ui_unknown_s[] =
 /* Out-of-line instance of LVGL's static inline lv_obj_set_style_pad_all in this TU. */
 void evenhub_loading_obj_set_style_pad_all_492cb4(void *obj, int32_t value, uint32_t selector)
 {
-    audio_uart_page_44122a(obj, value, selector);
-    audio_uart_page_441238(obj, value, selector);
-    audio_uart_page_44120e(obj, value, selector);
-    audio_uart_page_44121c(obj, value, selector);
+    lv_obj_set_style_pad_left(obj, value, selector);
+    lv_obj_set_style_pad_right(obj, value, selector);
+    lv_obj_set_style_pad_top(obj, value, selector);
+    lv_obj_set_style_pad_bottom(obj, value, selector);
 }
 
 uint32_t evenhub_loading_widget_id_492ce6(void)
@@ -251,10 +251,10 @@ uint32_t evenhub_loading_page_ui_event_handler_492fdc(uint32_t event, const uint
         audio_uart_page_43f6ac(g2_evenhub_loading_root_obj, LV_ALIGN_CENTER);
         audio_uart_page_43dfa4(g2_evenhub_loading_root_obj, LV_OBJ_FLAG_SCROLLABLE);
         audio_uart_page_44129e(g2_evenhub_loading_root_obj, 0u, 0u);
-        audio_uart_page_44131c(g2_evenhub_loading_root_obj, 0u, 0u);
-        audio_uart_page_44133a(g2_evenhub_loading_root_obj, 0u, 0u);
-        audio_uart_page_441386(g2_evenhub_loading_root_obj, 0u, 0u);
-        audio_uart_page_44146a(g2_evenhub_loading_root_obj, 0u, 0u);
+        lv_obj_set_style_border_width(g2_evenhub_loading_root_obj, 0u, 0u);
+        lv_obj_set_style_outline_width(g2_evenhub_loading_root_obj, 0u, 0u);
+        lv_obj_set_style_shadow_width(g2_evenhub_loading_root_obj, 0u, 0u);
+        lv_obj_set_style_radius(g2_evenhub_loading_root_obj, 0u, 0u);
         evenhub_loading_obj_set_style_pad_all_492cb4(g2_evenhub_loading_root_obj, 0, 0u);
         audio_uart_page_48ba78(g2_evenhub_loading_root_obj, 1u);
         audio_uart_page_48ba92(g2_evenhub_loading_root_obj, 2u, 2u, 2u);

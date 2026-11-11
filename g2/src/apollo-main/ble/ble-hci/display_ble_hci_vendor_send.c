@@ -34,8 +34,10 @@ int32_t audio_ble_vendor_send_55cf40(uint8_t *row,uint8_t *descriptor) {
     uint32_t unit=get(descriptor+4u);
     uint32_t receive_remaining=get(descriptor+16u);
     uint32_t transmit_remaining=receive_remaining;
-    uint32_t type=get(descriptor+20u);
-    uint32_t option=get(descriptor+32u);
+    uint32_t type=descriptor[20u]; /* stock ldrb.w r0,[r9,#20] at 0x55cfae */
+    /* bContinue is a byte (stock ldrb [desc,#32] at 0x55cc92 / 0x55cfb4); +34 is the
+     * priority byte, so a word read set CONT on every I2C transfer (all nPM1300 reads = 0). */
+    uint32_t option=descriptor[32u];
     uint8_t *input=(uint8_t *)(uintptr_t)get(descriptor+28u);
     const uint8_t *output=(const uint8_t *)(uintptr_t)get(descriptor+24u);
     uint32_t timer=get(row+0x860u);

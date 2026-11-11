@@ -8,7 +8,7 @@
  * (lv_anim on the content object plus a proportional scrollbar), the page
  * refresh entry, the non-expanded widget (up to three events of title /
  * optional location / time, or a disconnected / no-event / default
- * placeholder) and the forwarding of UI events to the dashboard app. */
+ * default content) and the forwarding of UI events to the dashboard app. */
 #include <stdint.h>
 #include <stddef.h>
 
@@ -165,33 +165,33 @@ extern void audio_uart_page_43f568(void *obj, int32_t height);                  
 extern void lv_obj_align_43f6b8(void *obj, uint32_t align, int32_t x, int32_t y);  /* lv_obj_align */
 extern int32_t audio_uart_lv_obj_height_43fdda(void *obj);                        /* lv_obj_get_height */
 extern uint32_t audio_lv_color_44104c(uint32_t rgb);                              /* lv_color_hex */
-extern void audio_uart_page_44120e(void *obj, int32_t v, uint32_t selector);      /* pad_top */
-extern void audio_uart_page_44121c(void *obj, int32_t v, uint32_t selector);      /* pad_bottom */
-extern void audio_uart_page_44122a(void *obj, int32_t v, uint32_t selector);      /* pad_left */
-extern void audio_uart_page_441238(void *obj, int32_t v, uint32_t selector);      /* pad_right */
+extern void lv_obj_set_style_pad_top(void *obj, int32_t v, uint32_t selector);      /* pad_top */
+extern void lv_obj_set_style_pad_bottom(void *obj, int32_t v, uint32_t selector);      /* pad_bottom */
+extern void lv_obj_set_style_pad_left(void *obj, int32_t v, uint32_t selector);      /* pad_left */
+extern void lv_obj_set_style_pad_right(void *obj, int32_t v, uint32_t selector);      /* pad_right */
 extern void audio_uart_page_441246(void *obj, int32_t v, uint32_t selector);      /* pad_row */
 extern void audio_uart_page_441254(void *obj, int32_t v, uint32_t selector);      /* pad_column */
 extern void audio_uart_page_44127e(void *obj, uint32_t color, uint32_t selector); /* bg_color */
 extern void audio_uart_page_44129e(void *obj, uint32_t opa, uint32_t selector);   /* bg_opa */
 extern void audio_uart_page_4412ec(void *obj, uint32_t color, uint32_t selector); /* border_color */
-extern void audio_uart_page_44131c(void *obj, int32_t v, uint32_t selector);      /* border_width */
-extern void audio_uart_page_44133a(void *obj, int32_t v, uint32_t selector);      /* outline_width */
-extern void audio_uart_page_441378(void *obj, int32_t v, uint32_t selector);      /* outline_pad */
-extern void audio_uart_page_441386(void *obj, int32_t v, uint32_t selector);      /* shadow_width */
-extern void audio_uart_page_441394(void *obj, int32_t v, uint32_t selector);      /* shadow_offset_x */
-extern void audio_uart_page_4413a2(void *obj, int32_t v, uint32_t selector);      /* shadow_offset_y */
-extern void audio_uart_page_4413b0(void *obj, int32_t v, uint32_t selector);      /* shadow_spread */
+extern void lv_obj_set_style_border_width(void *obj, int32_t v, uint32_t selector);      /* border_width */
+extern void lv_obj_set_style_outline_width(void *obj, int32_t v, uint32_t selector);      /* outline_width */
+extern void lv_obj_set_style_outline_pad(void *obj, int32_t v, uint32_t selector);      /* outline_pad */
+extern void lv_obj_set_style_shadow_width(void *obj, int32_t v, uint32_t selector);      /* shadow_width */
+extern void lv_obj_set_style_shadow_offset_x(void *obj, int32_t v, uint32_t selector);      /* shadow_offset_x */
+extern void lv_obj_set_style_shadow_offset_y(void *obj, int32_t v, uint32_t selector);      /* shadow_offset_y */
+extern void lv_obj_set_style_shadow_spread(void *obj, int32_t v, uint32_t selector);      /* shadow_spread */
 extern void audio_lv_style_color_44140e(void *obj, uint32_t color, uint32_t selector); /* text_color */
 extern void audio_lv_style_alpha_44142e(void *obj, uint32_t opa, uint32_t selector);   /* text_opa */
 extern void audio_lv_style_font_44143e(void *obj, const void *font, uint32_t selector); /* text_font */
 extern void audio_uart_page_44145a(void *obj, uint32_t align, uint32_t selector);  /* text_align */
-extern void audio_uart_page_44146a(void *obj, int32_t radius, uint32_t selector);  /* radius */
+extern void lv_obj_set_style_radius(void *obj, int32_t radius, uint32_t selector);  /* radius */
 extern void audio_uart_page_44d878(void *obj);                                     /* lv_obj_clean */
 extern void audio_uart_page_44e368(void *obj, uint32_t mode);                      /* scrollbar_mode */
 extern void audio_uart_lv_anim_init_4503d6(g2_lv_anim_t *anim);                    /* lv_anim_init */
 extern void *audio_uart_lv_anim_start_450408(const g2_lv_anim_t *anim);            /* lv_anim_start */
 extern uint32_t audio_uart_anim_delete_450500(void *var, void (*exec_cb)(void *, int32_t)); /* lv_anim_delete */
-extern int32_t audio_uart_lv_anim_path_450672(void *anim);                         /* anim path */
+extern int32_t lv_anim_path_ease_out(void *anim);                         /* anim path */
 extern void audio_uart_lv_anim_values_4506ce(g2_lv_anim_t *anim, int32_t start, int32_t end); /* lv_anim_set_values */
 extern uint32_t audio_uart_page_460084(const char *key);                           /* i18n index of key */
 extern const char *audio_uart_page_45fffe(const char *key, uint32_t index);        /* localized text */
@@ -248,10 +248,10 @@ static const char key_default_2[] = "ID_DASHBOARD_CALENDAR_DEFAULT_2"; /* ROM 0x
 /* Out-of-line lv_obj_set_style_pad_all (this TU's copy). */
 void calendar_obj_set_style_pad_all_4ed7d8(void *obj, int32_t value, uint32_t selector)
 {
-    audio_uart_page_44122a(obj, value, selector);
-    audio_uart_page_441238(obj, value, selector);
-    audio_uart_page_44120e(obj, value, selector);
-    audio_uart_page_44121c(obj, value, selector);
+    lv_obj_set_style_pad_left(obj, value, selector);
+    lv_obj_set_style_pad_right(obj, value, selector);
+    lv_obj_set_style_pad_top(obj, value, selector);
+    lv_obj_set_style_pad_bottom(obj, value, selector);
 }
 
 void calendar_page_reset_4ed80a(void)
@@ -327,7 +327,7 @@ void calendar_ext_scroll_by_4ed882(int32_t direction, int32_t speed, int32_t dis
     anim.exec_cb = calendar_ext_scroll_anim_exec_4ed868;
     audio_uart_lv_anim_values_4506ce(&anim, g2_calendar_ext_scroll_y_20074b7c, new_y);
     anim.duration = SCROLL_ANIM_MS;
-    anim.path_cb = audio_uart_lv_anim_path_450672;
+    anim.path_cb = lv_anim_path_ease_out;
     anim.completed_cb = calendar_ext_scroll_anim_completed_4ed81c;
     g2_calendar_scroll_anim_running_20074b20 = 1u;
     (void)audio_uart_lv_anim_start_450408(&anim);
@@ -375,19 +375,19 @@ static void *create_frame(void *parent)
     audio_uart_page_43f568(frame, FRAME_H);
     audio_uart_page_44127e(frame, audio_lv_color_44104c(CAL_BLACK), 0u);
     audio_uart_page_44129e(frame, LV_OPA_TRANSP, 0u);
-    audio_uart_page_44131c(frame, 0, 0u);
-    audio_uart_page_44133a(frame, 0, 0u);
-    audio_uart_page_441378(frame, 0, 0u);
-    audio_uart_page_441386(frame, 0, 0u);
-    audio_uart_page_4413b0(frame, 0, 0u);
-    audio_uart_page_441394(frame, 0, 0u);
-    audio_uart_page_4413a2(frame, 0, 0u);
+    lv_obj_set_style_border_width(frame, 0, 0u);
+    lv_obj_set_style_outline_width(frame, 0, 0u);
+    lv_obj_set_style_outline_pad(frame, 0, 0u);
+    lv_obj_set_style_shadow_width(frame, 0, 0u);
+    lv_obj_set_style_shadow_spread(frame, 0, 0u);
+    lv_obj_set_style_shadow_offset_x(frame, 0, 0u);
+    lv_obj_set_style_shadow_offset_y(frame, 0, 0u);
     calendar_obj_set_style_pad_all_4ed7d8(frame, 0, 0u);
-    audio_uart_page_44120e(frame, 0, 0u);
-    audio_uart_page_44121c(frame, 0, 0u);
-    audio_uart_page_44122a(frame, 0, 0u);
-    audio_uart_page_441238(frame, 0, 0u);
-    audio_uart_page_44146a(frame, 0, 0u);
+    lv_obj_set_style_pad_top(frame, 0, 0u);
+    lv_obj_set_style_pad_bottom(frame, 0, 0u);
+    lv_obj_set_style_pad_left(frame, 0, 0u);
+    lv_obj_set_style_pad_right(frame, 0, 0u);
+    lv_obj_set_style_radius(frame, 0, 0u);
     audio_uart_page_4412ec(frame, audio_lv_color_44104c(CAL_BLACK), 0u);
     audio_lv_style_color_44140e(frame, audio_lv_color_44104c(CAL_WHITE), 0u);
     audio_lv_style_alpha_44142e(frame, LV_OPA_COVER, 0u);
@@ -400,14 +400,14 @@ static void *create_flex_box(void *parent, uint32_t flow)
     void *box = audio_uart_page_43de82(parent);
     audio_lv_object_size_call_43f4c0(box, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
     audio_uart_page_44129e(box, LV_OPA_TRANSP, 0u);
-    audio_uart_page_44131c(box, 0, 0u);
+    lv_obj_set_style_border_width(box, 0, 0u);
     calendar_obj_set_style_pad_all_4ed7d8(box, 0, 0u);
     audio_uart_page_48ba78(box, flow);
     audio_uart_page_48ba92(box, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER);
     return box;
 }
 
-/* Placeholder row [calendar icon][line1] inside `column`, optional line2 below. */
+/* default row [calendar icon][line1] inside `column`, optional line2 below. */
 static void create_placeholder(void *column, const char *key1, const char *key2)
 {
     void *row = create_flex_box(column, LV_FLEX_FLOW_ROW);

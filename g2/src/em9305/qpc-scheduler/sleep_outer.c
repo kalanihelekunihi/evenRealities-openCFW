@@ -10,14 +10,15 @@ extern uint32_t opencfw_em9305_sleep_state_query(uint32_t r0); /* 0x302de4 */
 extern uint32_t opencfw_em9305_sleep_ready_query(uint32_t r0); /* 0x30f568 */
 extern uint32_t opencfw_em9305_sleep_mode_branch(uint32_t mode);
 /* Child composes actual metadata query0x3125a4 and state-dependent branch;
- * requires preserving stack-output/callback/MMIO/IRQ behavior. No stub body.
+ * requires preserving stack-output/callback/MMIO/IRQ behavior. No fabricated body.
  */
 extern uint32_t opencfw_em9305_sleep_controller_branch(void);
-static uint32_t save_irq(void) { uint32_t state; __asm__ volatile("clri %0\n\tsync" : "=r"(state) :: "memory"); return state; }
+static uint32_t save_irq(void) { uint32_t state; state=(uint32_t)__builtin_arc_clri(); __builtin_arc_sync(); return state; }
 uint32_t opencfw_em9305_sleep_lower(uint32_t incoming_irq,uint32_t incoming_link)
 {
+    /* ILINK (r29) is a core register with no C or builtin access; asm stays. */
     __asm__ volatile("mov ilink,0" ::: "r29","memory");
-    __asm__ volatile("seti %0" :: "r"(incoming_irq) : "memory");
+    __builtin_arc_seti((int)incoming_irq);
     const uint32_t mode = opencfw_em9305_sleep_mode_query(incoming_irq,incoming_link);
     uint32_t result, shallow = 0;
     if (mode != 0 && mode != 1) return opencfw_em9305_sleep_mode_branch(mode);
@@ -38,9 +39,9 @@ uint32_t opencfw_em9305_sleep_lower(uint32_t incoming_irq,uint32_t incoming_link
         __asm__ volatile("mov %0,ilink" : "=r"(link) :: "memory");
         if (link == 0) {
             const uint32_t sleep_state = shallow != 0 ? irq & 31u : irq | 32u;
-            __asm__ volatile("sleep %0" :: "r"(sleep_state) : "memory");
+            __builtin_arc_sleep((int)sleep_state);
         } else {
-            __asm__ volatile("seti %0" :: "r"(irq) : "memory");
+            __builtin_arc_seti((int)irq);
         }
     }
     return save_irq();

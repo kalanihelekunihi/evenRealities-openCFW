@@ -10,21 +10,26 @@ extern void audio_event_loop_push_delayed(void (*)(void),uint32_t,uint32_t); /* 
 extern void *audio_queue_copy_bytes(void *,const void *,uint32_t); /* 0x439be4 */
 extern void audio_uart_buffer_zero(void *,uint32_t,uint32_t); /* 0x43c0e4 */
 extern uint32_t audio_log_level(void);
+extern uint32_t audio_log_flags(void);
 extern void audio_log_extended(uint8_t,const char *,const char *,const char *,uint32_t,const char *,...);
 extern uint32_t compressed_log_output(uint32_t,const char *,const char *,...);
 static const char module[]="ble.master";
 static const char source[]="D:\\01_workspace\\s200_ap510b_iar_git\\platform\\ble\\app_ble_central.c";
 static const char function[]="APP_MasterSetTargetAddrName";
-void audio_ble_master_set_target(const uint8_t *address,const char *name,uint8_t name_length) {
+/* Stock APP_MasterSetTargetAddrName 0x4a2068 (single implementation; gates
+ * on the 0x43d0ce log flags as stock). name_length arrives as a word and is
+ * narrowed here. */
+void audio_ble_master_set_target(const uint8_t *address,const char *name,uint32_t name_length_word) {
+    uint8_t name_length=(uint8_t)name_length_word;
     if(address!=0) {
         (void)audio_queue_copy_bytes(audio_ble_master_target_address,address,6u);
-        if(audio_log_level()&2u)
+        if(audio_log_flags()&2u)
             audio_log_extended(4u,module,source,function,0x478u,
                 "_g_targetAddr = %02x:%02x:%02x:%02x:%02x:%02x",
                 audio_ble_master_target_address[5],audio_ble_master_target_address[4],
                 audio_ble_master_target_address[3],audio_ble_master_target_address[2],
                 audio_ble_master_target_address[1],audio_ble_master_target_address[0]);
-        if((audio_log_level()&1u)||(audio_log_level()&4u))
+        if((audio_log_flags()&1u)||(audio_log_flags()&4u))
             (void)compressed_log_output(0x11800000u,
                 "[ble.master]_g_targetAddr = %02x:%02x:%02x:%02x:%02x:%02x",
                 "[ble.master]_g_targetAddr = %02x:%02x:%02x:%02x:%02x:%02x",
@@ -35,15 +40,17 @@ void audio_ble_master_set_target(const uint8_t *address,const char *name,uint8_t
     if(name!=0) {
         audio_uart_buffer_zero(audio_ble_master_target_name,15u,0u);
         (void)audio_queue_copy_bytes(audio_ble_master_target_name,name,name_length);
-        if(audio_log_level()&2u)
+        if(audio_log_flags()&2u)
             audio_log_extended(4u,module,source,function,0x47eu,
                 "_g_targetName : %s",audio_ble_master_target_name);
-        if((audio_log_level()&1u)||(audio_log_level()&4u))
+        if((audio_log_flags()&1u)||(audio_log_flags()&4u))
             (void)compressed_log_output(0x10400000u,
                 "[ble.master]_g_targetName : %s",
                 "[ble.master]_g_targetName : %s",audio_ble_master_target_name);
     }
 }
+__typeof__(audio_ble_master_set_target) audio_ble_master_set_target_hand_4a2068
+    __attribute__((alias("audio_ble_master_set_target")));
 /* Stock 0x004A2168 (auth_mode_set) */
 uint32_t audio_ble_master_auth_mode_set(uint8_t mode) {
     if(mode<0x5au) audio_ble_master_auth_mode=mode;

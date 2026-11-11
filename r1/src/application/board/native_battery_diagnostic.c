@@ -1,6 +1,6 @@
 #include <stdint.h>
+#include "native_battery_context.h"
 #include "native_battery_memory.h"
-extern volatile uint8_t r1_battery_device_context[];
 extern uint32_t r1_batcfg_byte0_get(void),r1_batcfg_word1_signed_get(void),r1_structured_log_mode_get(void);
 extern void r1_structured_log_format(uint32_t,const char *,...);
 extern void nrf_log_frontend_std_1(uint32_t,const char *,uint32_t);

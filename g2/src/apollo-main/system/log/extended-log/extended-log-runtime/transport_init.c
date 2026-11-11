@@ -2,6 +2,16 @@
  * Product RAM literals are authenticated from the locked Apollo image. */
 #include <stdint.h>
 #include <stddef.h>
+/* Stock-RAM literals rewritten to named objects (sim-test wave 2026-10-26,
+ * .waves/sim-fix/apply.py): g2ref_X is the linker symbol X. */
+#include <stdint.h>
+extern unsigned char g2ref_g2_elog_async_enabled[] __asm__("g2_elog_async_enabled");
+extern unsigned char g2ref_g2_elog_default_level[] __asm__("g2_elog_default_level");
+extern unsigned char g2ref_g2_elog_pending_head[] __asm__("g2_elog_pending_head");
+extern unsigned char g2ref_g2_elog_pending_tail[] __asm__("g2_elog_pending_tail");
+extern unsigned char g2ref_g2_elog_stats[] __asm__("g2_elog_stats");
+extern unsigned char g2ref_g2_stock_ram_20074570[] __asm__("g2_stock_ram_20074570");
+extern unsigned char g2ref_g2_stock_ram_202d3fc8[] __asm__("g2_stock_ram_202d3fc8");
 
 typedef struct LogInitNode {
     struct LogInitNode *next;
@@ -11,13 +21,13 @@ typedef struct LogInitNode {
 } LogInitNode;
 _Static_assert(sizeof(LogInitNode)==272 && offsetof(LogInitNode,payload)==13,
                "stock logger pool stride");
-static LogInitNode *const pool=(LogInitNode *)(uintptr_t)0x202d3fc8u;
-static LogInitNode *volatile *const free_head=(LogInitNode *volatile *)(uintptr_t)0x20074574u;
-static LogInitNode *volatile *const pending_head=(LogInitNode *volatile *)(uintptr_t)0x20074138u;
-static LogInitNode *volatile *const pending_tail=(LogInitNode *volatile *)(uintptr_t)0x2007413cu;
-static volatile uint8_t *const enabled=(volatile uint8_t *)(uintptr_t)0x20074fc0u;
-static volatile uint8_t *const default_level=(volatile uint8_t *)(uintptr_t)0x20004546u;
-static volatile uint8_t *const stats=(volatile uint8_t *)(uintptr_t)0x2007342cu;
+static LogInitNode *const pool=(LogInitNode *)(uintptr_t)((uint32_t)(uintptr_t)g2ref_g2_stock_ram_202d3fc8);
+static LogInitNode *volatile *const free_head=(LogInitNode *volatile *)(uintptr_t)((uint32_t)(uintptr_t)g2ref_g2_stock_ram_20074570+0x4u);
+static LogInitNode *volatile *const pending_head=(LogInitNode *volatile *)(uintptr_t)((uint32_t)(uintptr_t)g2ref_g2_elog_pending_head);
+static LogInitNode *volatile *const pending_tail=(LogInitNode *volatile *)(uintptr_t)((uint32_t)(uintptr_t)g2ref_g2_elog_pending_tail);
+static volatile uint8_t *const enabled=(volatile uint8_t *)(uintptr_t)((uint32_t)(uintptr_t)g2ref_g2_elog_async_enabled);
+static volatile uint8_t *const default_level=(volatile uint8_t *)(uintptr_t)((uint32_t)(uintptr_t)g2ref_g2_elog_default_level);
+static volatile uint8_t *const stats=(volatile uint8_t *)(uintptr_t)((uint32_t)(uintptr_t)g2ref_g2_elog_stats);
 
 static void publish_word(volatile uint32_t *word,uint32_t value) {
     *word=value;

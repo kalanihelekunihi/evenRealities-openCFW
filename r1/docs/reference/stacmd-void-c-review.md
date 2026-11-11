@@ -1,0 +1,13 @@
+# C STACMD GPIO dispatcher and void transmit interfaces
+
+The GPIO dispatcher in `r1/src/application/board/native_stacmd_transmit.c` is now a normal C function calling the correctly typed void callback. Its historical `r1_stacmd_gpio_result` symbol is retained. Transmit-bit, transmit-byte, idle and recovery functions and their header declarations now use void results, matching their C callers. The frame, retry and registry callers consume effects and explicit ACK/data results, rather than callback R0 residue.
+
+The compiler emits exactly the old two-byte `BX R1` for the C dispatcher. Pulse-driver, idle, parity, local helpers and recovery function bytes, relocations and alignment remain unchanged. The only instruction-byte change in the transmit object is at byte 26 of `r1_stacmd_write_bits_native`: `ADDS R1,R5,#1` becomes `ADDS R0,R5,#1`. The instruction width, flags operation, location, function size, alignment and relocations remain the same. R0 is no longer a result in this void API. A raw direct-call scan finds three stock callers, each overwriting R0 immediately; indirect references are not proved complete.
+
+REA bytes match the official stock entries. **479 stock/previous/C frame cases (1,437 executions)** pass using actual frame, transmit, receive, recovery and delay implementations with C GPIO models. GPIO calls and NOP counts agree, including successful transfers, parity failures, first/last-edge timeouts, partial outputs, unaligned bit outputs and signed-length boundaries. Caller stack/register restoration and interrupt masks are checked; recovery's incidental void R0 is excluded.
+
+Four compiled defects are rejected: skipped GPIO call, repeated GPIO call, wrong pin and shortened one-bit pulse. The fixture observes GPIO operations and NOP positions, not a cycle-accurate electrical waveform. Physical timing, GPIO behavior, final application linking/startup, private-frame aliases, caller scratch residues and faults/concurrency remain unverified. The four-NOP pulse blocks and exact recovery-delay primitive remain assembly and unchanged.
+
+The open-toolchain report `build/sources-goal-r1-stacmd-void-reviewed-c/report.json` compiles all **855 units** and completes both relocatable compositions. All **844 other nongenerated objects**, including the recovery object, remain identical despite the source API changes. Imports remain **61 application / 22 bootloader**. R1 manifest validation passes; manifest/source-plan selections remain unchanged. No persistent state is introduced and byte identity is not claimed.
+
+[Machine receipt](stacmd-void-c-review.json) binds source, code-generation audit, REA and ignored probes under `build/goal-r1-stacmd-void-c/`.

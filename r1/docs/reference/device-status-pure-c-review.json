@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "scope": "R1 C charger predicates, status route and phone operation-one wrapper",
+  "report": "build/sources-goal-r1-device-status-pure-c/report.json",
+  "comparison_report": "build/sources-goal-r1-bma-callbacks-pure-c/report.json",
+  "audit": {
+    "compiled_units": 855,
+    "application_imports": 61,
+    "bootloader_imports": 22,
+    "unchanged_prior_nongenerated_objects": 843,
+    "changed_nongenerated_objects": [
+      "r1/src/application/board/native_phone_operation.c",
+      "r1/src/application/board/native_protocol_device_status.c"
+    ],
+    "import_sets_unchanged": true,
+    "normal_objects_equal_direct_probe_objects": true,
+    "module_table_object_unchanged": true,
+    "default_record_unchanged": true,
+    "no_new_persistent_state": true,
+    "manifest_unchanged": true
+  },
+  "direct": {
+    "stock_C_comparisons": 25336,
+    "actual_C_predicates_phone_and_header": true,
+    "separate_hardware_queries_verified": true,
+    "full_wire_header_and_payload_verified": true,
+    "late_sequence_read_verified": true,
+    "modeled_hardware_phone_and_response_backend": true,
+    "private_frames_and_scratch_R1_R2_R3_excluded": true
+  },
+  "table_hardware_pipeline": {
+    "stock_C_table_charger_and_header_pipeline_cases": 49152,
+    "actual_C_status_byte_YHM_decoder_and_charger_mapper": true,
+    "actual_C_table_route_predicates_phone_and_header": true,
+    "independent_live_hardware_queries": true,
+    "full_payload_and_battery_context_verified": true,
+    "hardware_reads_ADC_update_and_send_backend_modeled": true
+  },
+  "compiled_defects_rejected": [
+    {
+      "name": "full_priority",
+      "rejected": true
+    },
+    {
+      "name": "active_state",
+      "rejected": true
+    },
+    {
+      "name": "sequence",
+      "rejected": true
+    },
+    {
+      "name": "phone_operation",
+      "rejected": true
+    },
+    {
+      "name": "payload_extent",
+      "rejected": true
+    }
+  ],
+  "public_contract": [
+    "Separate charge-byte, active-state and full-state queries remain ordered; full takes priority in the status code.",
+    "Packet sequence is read after hardware queries and before querying the phone handle.",
+    "Phone wrapper retains null rejection, fixed operation one, seven-byte payload and response result.",
+    "Device-status table callback now has the explicit four-argument C callback signature."
+  ],
+  "limits": [
+    "Physical charger/ADC behavior, radio transmission and final application linking/startup unverified.",
+    "Direct hardware/phone/send backends modeled; pipeline executes actual C byte getter, YHM decoder, state mapper, table and wire helpers.",
+    "Private frame aliases, caller scratch residues R1-R3, faults/concurrency and byte identity excluded.",
+    "Only complete readable packet fixtures are used."
+  ],
+  "evidence_files": {
+    "build/sources-goal-r1-device-status-pure-c/report.json": "1f10e11afeb8bf0811fdfb210bd77324d781ec1427f987334e6ea2aaa843414d",
+    "build/sources-goal-r1-bma-callbacks-pure-c/report.json": "b285c4f68d98f558bec11687d19337a119b20cbb0b2ebc954f1eeb2bb9932ef6",
+    "r1/src/application/board/native_protocol_device_status.c": "3339bd944e22853ad610913797b28d2ffdce948205757a6097bd072c7b694033",
+    "r1/src/application/board/native_phone_operation.c": "9c7be96c5eedfd4e0ff3bd53241b5be31e55f0a4594ae9f89e5196712f3d1cf4",
+    "r1/src/application/board/native_protocol_modules.c": "d260c51f0b8e838795114b380dd448db86e2dee87b17bf20859728480842f5fa",
+    "r1/src/application/board/native_protocol_response_header.c": "8954fe0a123357cd1a22b02a681ebf244265e3a6bde772398bc81b5a7addcbed",
+    "r1/src/application/board/native_status_record.c": "169a6968defe650809b4502faf27e36b8ec67f063059c18829c7d752c02758a5",
+    "r1/src/application/board/native_charger_state.c": "57975ec8f459059359eb043cb0b59223a9bc455407bb2ce7f33dd73c978ff35d",
+    "r1/src/application/board/native_yhm_status.c": "0593b3f66b857cb7e8cb3e69c8b712a0803c8f34a1328698c06084dc0484a075",
+    "r1/src/application/runtime/native_battery_context_config.c": "2f286ba3158db295a53c5bf5d776bfafc5afaafe6705163298cb091bdbc584b5",
+    "r1/src/application/board/native_battery_protocol.c": "f2bb6b08ae7c7f3f7432dcb00b5fc3f032ca7deb9ebb0dedeb69e51833331edd",
+    "r1/src/application/runtime/native_charge_notification.c": "272bf950263e4f7799bea4c193f75150c65a7d2e27c03c8b271c08504a2f024c",
+    "r1/src/application/runtime/native_ble_state_reports.c": "c2124e2ab3f2da90c7b11fb8cb36780a38bb001460818e405ce02920d7aaab22",
+    "r1/src/sources.json": "f74aa01d5bac1e3a8786b1052791cbd6344c1fd57ce26a11f1d65de93506ad72",
+    "tools/build/source-plan.json": "eeb516e31b3310fb0718f36908977f8125723f7c5e0e86cd6744395826259a4d",
+    "build/goal-r1-device-status-pure-c/rea.json": "a35758a71a4ca4d548eb3dc2f01fd37032415c34e06bfd620d27134c01f3846c",
+    "build/goal-r1-device-status-pure-c/verify.py": "3545a7d4aec7249d436a397d5ac40b7eea5c7c6097dc0f1e4cec07a6ff07c0ad",
+    "build/goal-r1-device-status-pure-c/results.json": "8be54b9b906cc242494e1bc0b80afc1f375ded716cdeb5a7402023276c850904",
+    "build/goal-r1-device-status-pure-c/verification.log": "7c589a5bbcf03cbdedec4e1c825c43c9124fa55b2a0f772eb414a5447bd1244a",
+    "build/goal-r1-device-status-pure-c/pipeline.py": "7bd0f8c4c9fcbb0f62e291fe9809510a6eb41f3e4d681891cd291682f5565b3e",
+    "build/goal-r1-device-status-pure-c/pipeline/results.json": "e319945085b3ac77b05eaf6134e8293023ea857c44187d95596e6cae372c8689",
+    "build/goal-r1-device-status-pure-c/pipeline.log": "36816410fb55d402f66b81361195470e4f10e714ee0791bcacad9eb0c9e2f7d5",
+    "build/goal-r1-device-status-pure-c/negative.py": "129be74ab9bd573bff644ebf246064bc60877b024b03cb6fce36e5172697ad9a",
+    "build/goal-r1-device-status-pure-c/negative.json": "a723159c3364992c0b1dcb0005d6676b9d1f89d5fbc135b4563c2448ac2fb458",
+    "build/goal-r1-device-status-pure-c/negative.log": "17737b9b871c4e142a2fc2f5c2195e10f263ef66a338de8837da504c4e6dd3cc",
+    "build/goal-r1-device-status-pure-c/build.log": "abf1034db3804379afe42b2d63a7da6803d63ac1d9ef096705e0e7e57b7ec287",
+    "build/goal-r1-device-status-pure-c/sources-check.log": "f610d186f791ebf717d9fd6eed6c4f28612779fff34b885bcf8dc8a49c9ae80c"
+  }
+}

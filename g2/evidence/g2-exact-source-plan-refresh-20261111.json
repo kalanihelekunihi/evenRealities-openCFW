@@ -1,0 +1,54 @@
+{
+  "schema": 1,
+  "target": "Refresh exact G2 source providers against the authenticated 2.2.6.10 artifact",
+  "method": "Ran tools/build/qualify_sources.py with the fingerprinted ARM GNU 12.2 -Og touch PDL profile and exact anchored function matching. Audited every selected G2 provider in the existing plan by fresh compilation, isolated relocation linking when needed, and stored-byte SHA-256 comparison. Requalified the moved case scheduler primitive with the same selector. Only selector results enter the updated source plan.",
+  "touch_qualification": {
+    "command": "python3 tools/build/qualify_sources.py --profile touch-gcc --out build/g2-touch-gcc-qualification-20261111 --link-functions --match-functions",
+    "qualification_report": "build/g2-touch-gcc-qualification-20261111/qualification.json",
+    "qualification_report_sha256": "2396ec8e34250819f6a061603ab31c74ca96ce9842d1a9add3748e297f78fcb2",
+    "candidate_units": 63,
+    "selected_units": 11,
+    "selected_regions": 36,
+    "previous_regions_retained": 23,
+    "new_exact_regions": 13,
+    "new_exact_bytes": 534,
+    "new_function_groups": ["SCB I2C slave buffers", "high-frequency and pump clocks", "system interrupt vectors", "system delays", "sleep and deep sleep leaves", "SysTick control"]
+  },
+  "stale_g2_selections_removed": [
+    {"symbol": "DmDevVsInit", "reason": "current C body is 2 bytes; old exact selection required 10"},
+    {"symbol": "audio_uart_lv_area_copy_43ee94", "reason": "selected function no longer defined in the selected source"},
+    {"symbol": "audio_uart_lv_flex_rect_copy_48b8f8", "reason": "selected source file was removed"},
+    {"symbol": "audio_uart_lv_grid_box_copy_48c7fc", "reason": "selected source file was removed"},
+    {"symbol": "audio_uart_lv_area_copy_4530fc", "reason": "selected source file was removed"},
+    {"symbol": "case_enter_critical", "reason": "selected source file was removed; its 24-byte stock function was requalified from the consolidated scheduler source"}
+  ],
+  "g2_plan_audit": "build/g2-touch-gcc-qualification-20261111/plan-audit.json",
+  "g2_plan_audit_sha256": "60b6c96d970df15ddf0d553cf032cdbbc08f22a7289e3b00650e873e191c5e8e",
+  "case_requalification": {
+    "source": "g2/src/case/startup/application_policy_scheduler_primitives_candidate.c",
+    "symbol": "case_policy_scheduler_lock",
+    "stock_alias": "case_enter_critical",
+    "exact_bytes": 24,
+    "qualification_report": "build/g2-case-critical-qualification-20261111/qualification.json",
+    "qualification_report_sha256": "a44fb3a9a09799e3cd61e8b86164bc9e5cbe6415ee8849bb084c254f5acbb104"
+  },
+  "updated_source_plan": "tools/build/source-plan.json",
+  "updated_source_plan_sha256": "67241451449f00d2fcf28a7b51c3291edc916d9e70d403bd85574c6a6670dffe",
+  "r1_selections_unchanged": true,
+  "verification": {
+    "sources_check": "make -C g2 sources-check passed: 4885 manifest units, 4546 source files, 1 existing final-link-only C helper",
+    "default_g2_hybrid_command": "python3 tools/build/build_firmware.py --device g2 --out build/g2-verified-touch-case-plan-20261111",
+    "default_g2_hybrid_report": "build/g2-verified-touch-case-plan-20261111/build-report.json",
+    "default_g2_hybrid_report_sha256": "6a4c26302ea5fdd849d0d20a05aee90f609e06703a23493f6b87c38c84b5090c",
+    "selected_g2_regions": 54,
+    "selected_g2_exact_bytes": 2440,
+    "g2_apollo_main_exact_bytes": 94,
+    "g2_case_exact_bytes": 24,
+    "g2_touch_exact_bytes": 2322,
+    "hybrid_bundle_bytes": 4301227,
+    "hybrid_bundle_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+    "hybrid_bundle_byte_identical_to_locked": true,
+    "source_completeness_proven": false
+  },
+  "qualification": "The hybrid build pulls through the remaining locked bytes; its byte equality does not establish a complete source rebuild. The separate all-C source candidate still differs from the locked firmware, and runtime behavior remains unverified."
+}

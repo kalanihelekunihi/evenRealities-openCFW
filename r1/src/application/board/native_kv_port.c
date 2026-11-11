@@ -11,7 +11,7 @@ struct r1_kv_port_view *volatile r1_kv_port __attribute__((section(".r1.kv.port_
 void *volatile r1_kv_mutex __attribute__((section(".r1.kv.mutex")));
 volatile uint8_t r1_kv_block_cursor __attribute__((section(".r1.kv.block_cursor")));
 uint32_t r1_kv_port_zero_4(void) { return 0; }
-uint32_t r1_kv_port_zero_8(void) { return 0; }
+uint32_t r1_kv_port_zero_8(const char *mode) { (void)mode;return 0; }
 uint32_t r1_kv_port_zero_12(void) { return 0; }
 void r1_kv_port_lock(void)
 { void *mutex=r1_kv_mutex;if (mutex) (void)osMutexAcquire(mutex,UINT32_MAX); }
@@ -28,7 +28,9 @@ uint32_t r1_kv_port_control(uint32_t operation,uint32_t *result)
     return 0;
 }
 struct r1_kv_port_record {
-    uint32_t (*initialize)(void),(*slot4)(void),(*slot8)(void),(*slot12)(void);
+    uint32_t (*initialize)(void),(*slot4)(void);
+    uint32_t (*slot8)(const char *);
+    uint32_t (*slot12)(void);
     uint32_t (*get)(uint32_t,void *,uint32_t);
     uint32_t (*put)(uint32_t,const void *,uint32_t);
     uint32_t (*control)(uint32_t,uint32_t *);

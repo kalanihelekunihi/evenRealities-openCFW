@@ -2,8 +2,8 @@
  * Image-B UART DMA preparation 0x100040e8..0x10004183.
  * Native source: binh_b_stage2.bin SHA256 d23fb40126b434e3c47a605997d25210a3cb80302bad7d6c302aaf790627a941.
  * For an out-of-domain port selector the native 12-word stack descriptor's
- * direction word is unwritten. Preserve that ambient input as an explicit
- * contract; the two hardware port values have exact native values 7 and 5.
+ * direction word is unwritten; the entry (backup_uart_dma_apply_ambient_entry.c)
+ * passes 0 for it. The two hardware port values have exact native values 7 and 5.
  */
 #include <stdint.h>
 

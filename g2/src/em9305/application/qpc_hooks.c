@@ -5,7 +5,7 @@
  */
 #include <stdint.h>
 
-extern void wsfOsRunIdleTasks(void);                      /* 0x333d7c */
+extern uint32_t wsfOsRunIdleTasks(void);                      /* 0x333d7c */
 extern void volt_monitor_measure_zero_3119a8(void);       /* VoltMon_DoMeasurement(0) veneer */
 extern uint32_t opencfw_em9305_pal_hook_two(uint32_t value);  /* 0x3101e8 */
 extern uint32_t opencfw_em9305_pal_resume_dispatch(void); /* PalUartResume 0x310798 */

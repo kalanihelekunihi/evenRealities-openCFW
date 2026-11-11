@@ -7,6 +7,10 @@ suffix or a `/* Stock 0x... */` anchor) is classified here:
 - `upstream-map.tsv` — rows identical to (or an out-of-line inline copy from) a
   pinned upstream source; the C is compiled from `third-party/upstream`, not
   rewritten. Several files still need a `sources.json` unit (see follow-ups).
+- `bootloader-ambiq-hal-map.tsv` — Even bootloader functions attributed to the
+  AmbiqSuite 5.1.0 HAL pinned for apollo-main, with a confidence per row; the
+  SYSPLL rows are differential-verified and now built from upstream (see
+  `../untagged-upstream-dependencies.md`).
 - `data-map.tsv` — rows that are literal pools, rodata, or labels inside
   another function (inventory artefacts).
 - `blocked-map.tsv` — rows identified as licence-restricted vendor libraries

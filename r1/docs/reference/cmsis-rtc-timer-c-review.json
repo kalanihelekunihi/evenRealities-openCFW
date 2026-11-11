@@ -1,0 +1,63 @@
+{
+  "schema": 1,
+  "report": "build/sources-goal-r1-cmsis-rtc-timer-c/report.json",
+  "report_sha256": "9d6a0cb6f1ddd889cd882a614d97bf5415aa7bfc8dca4ea9ae08f4c132b4521a",
+  "manifest_sha256": "aa19b9e207abf60761b21bb5346a815281fb0675541cf66ecd62eca737142283",
+  "behavior": {
+    "counter_snapshot_cases": 7208,
+    "irq_catchup_scenarios": 288,
+    "irq_handler_invocations": 576,
+    "calls": 8944,
+    "frequency_hz": 1024,
+    "actual_kernel_getter": true,
+    "RTC_tick_increment_modeled": true,
+    "physical_clock_verified": false
+  },
+  "defects": [
+    "wrong-frequency",
+    "lost-epoch",
+    "wrong-wrap",
+    "unprotected-snapshot",
+    "lost-mask"
+  ],
+  "configuration_rejections": [
+    "different-tick-rate",
+    "different-lf-clock",
+    "different-tick-source"
+  ],
+  "audit": {
+    "unchanged_prior_object_hashes": 776,
+    "generated_boot_allocated_bytes_and_relocations_unchanged": true,
+    "unchanged_CMSIS_allocated_sections": 154,
+    "removed_CMSIS_sections": [
+      ".ARM.exidx.text.osKernelGetSysTimerCount",
+      ".ARM.exidx.text.osKernelGetSysTimerFreq",
+      ".text.osKernelGetSysTimerCount",
+      ".text.osKernelGetSysTimerFreq"
+    ],
+    "removed_application_imports": [
+      "OS_Tick_GetCount",
+      "OS_Tick_GetInterval"
+    ],
+    "new_timer_imports": [
+      "xTaskGetTickCount"
+    ],
+    "physical_timer_verified": false
+  },
+  "strict_boot_link_report": "build/goal-r1-cmsis-rtc-timer-c/boot-link/report.json",
+  "counter_resolution_hz": 1024,
+  "stock_entry_address_identity_claimed": false,
+  "physical_clock_verified": false,
+  "evidence_sha256": {
+    "build/goal-r1-cmsis-rtc-timer-c/verify.py": "0f72ba2b948e4bce7de05129c0ddd10a265a3bd82b94dd9b41570b350fc486a1",
+    "build/goal-r1-cmsis-rtc-timer-c/defects.py": "bae5b17c19a4be325566142d947a35bfcbac0bccb3eee9f1ced39638ca1c70e9",
+    "build/goal-r1-cmsis-rtc-timer-c/config-guards.py": "c39da75c74ae06e042b36d6a788f141cfab526610895913e0212bbd5022e2f52",
+    "build/goal-r1-cmsis-rtc-timer-c/audit.py": "af753aaeaa978bc175c0a8f57d9419baaff6b2f84aca606abbfb6faa5b717510",
+    "build/goal-r1-cmsis-rtc-timer-c/verification.json": "90d87fd5fe239dd8033d3ab63e1a31b3fdd45d3e75f7058d981fd612a629a084",
+    "build/goal-r1-cmsis-rtc-timer-c/defects.json": "2bafb7b16388464e8bb0dd395b8613724a3b908e963f04384f381731d8d279a4",
+    "build/goal-r1-cmsis-rtc-timer-c/config-guards.json": "270c45b5d5870d98fc79c1c4ae4da83971cfd4982c14b87dda40c3056d363fba",
+    "build/goal-r1-cmsis-rtc-timer-c/audit.json": "6464f1bfcbf4410c305caaa407c065656ba20e3fda97563614d7bcbe59add873",
+    "r1/src/application/rtos/system_timer.c": "4f3aa5b00bcbed744bb63c59a9b574ad9879192adfd0d52ee1ddd10f3bf2d571",
+    "r1/src/config/rtos/FreeRTOSConfig.h": "bebe1124e0c274853580f8589a9f3f104164acd1a28a6bdc67e47e531be0f0d4"
+  }
+}

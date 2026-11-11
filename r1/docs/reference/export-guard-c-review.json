@@ -1,0 +1,120 @@
+{
+  "schema_version": 1,
+  "entries": {
+    "0x3ed34": [
+      "r1_ep_export_guard",
+      142
+    ],
+    "0x5e0de": [
+      "r1_event_service_0005e0de",
+      6
+    ],
+    "0x5e0e4": [
+      "r1_ep_export_force_flush",
+      6
+    ]
+  },
+  "report": "build/sources-goal-r1-export-guard-final-c/report.json",
+  "report_sha256": "39636f8805a4834c610fafd13c337a66f32b2729800d74a7c6474ff2cfe02e92",
+  "unit": {
+    "source": "r1/src/application/runtime/native_export_guard.c",
+    "source_sha256": "efe60b9a55a5611f14175b414fe1e001b385eb829cc64284aeae1ad8889a2301",
+    "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-export-guard-final-c/r1/r1-application/r1__src__application__runtime__native_export_guard.c.o",
+    "object_sha256": "971b01d663c7a55eab62cd12b888fcddeda0848f5f4b0c6aa6e782cab01f6a75"
+  },
+  "behavior": {
+    "pairs": 1668,
+    "digest": "cfa5bb2cc21b11a0d1cf76a58c9b15d850731427832ed9345d9c71367afeb568",
+    "actual_C": "EP export guard and poll/force entry points",
+    "actual_adapter": "Existing persistence-then-poll assembly adapter",
+    "modeled_boundaries": [
+      "xTaskGetTickCount",
+      "r1_ep_plan_initialization",
+      "xQueueSemaphoreTake",
+      "r1_ep_export_ring_flush",
+      "xQueueGenericSend",
+      "r1_structured_log_mode_get",
+      "r1_structured_log_format",
+      "nrf_log_frontend_std_0",
+      "r1_event_service_000914a0"
+    ],
+    "limits": [
+      "Initializer, ring flush, semaphore/queue, clock, persistence and logs modeled",
+      "Reconstructed path prohibited from executing stock instructions",
+      "Private scratch, caller-clobbered registers and void returns excluded",
+      "No real queue contention, flash export or asynchronous RTOS scheduling proof"
+    ]
+  },
+  "negative_controls": {
+    "lost-force-bypass": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "b7b7b7b7b7b7b7b7b7b7b'), ('mode', [0], '7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b00017b7b7b7b00000000000000007b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b'), ('initialize', [], '7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b01007b7b7b7b89674523000000007b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b'), ('take', [591751049, 1024], '7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b01007b7b7b7b89674523000000007b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b')], 'state': '7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b01007b7b7b7b89674523000000007b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b'})\n"
+    },
+    "wrong-timeout-boundary": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "b7b7b7b7b'), ('take', [305419896, 1024], '7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b01007b7b7b7b78563412000000007b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b'), ('flush', [], '7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b01007b7b7b7b78563412000000007b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b'), ('give', [305419896, 0, 0, 0], '7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b01007b7b7b7b78563412000000007b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b')], 'state': '7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b01007b7b7b7b78563412000000007b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b'})\n"
+    },
+    "signed-elapsed": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "b7b7b7b'), ('give', [305419896, 0, 0, 0], '7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b01007b7b7b7b78563412000000007b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b')], 'state': '7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b01007b7b7b7b78563412000000007b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b'}, {'trace': [('tick', [4294967295], '7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b01017b7b7b7b78563412000000007b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b')], 'state': '7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b01017b7b7b7b78563412000000007b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b'})\n"
+    },
+    "early-pause-clear": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "b7b7b7b7b7b7b7b7b7b7b'), ('mode', [0], '7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b00007b7b7b7b00000000000000007b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b'), ('initialize', [], '7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b01007b7b7b7b89674523000000007b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b'), ('take', [591751049, 1024], '7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b01007b7b7b7b89674523000000007b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b')], 'state': '7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b01007b7b7b7b89674523000000007b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b'})\n"
+    },
+    "lost-active-recheck": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "7b7b7b7b'), ('take', [591751049, 1024], '7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b00007b7b7b7b89674523000000007b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b'), ('flush', [], '7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b02017b7b7b7b21436587ffffffff7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b'), ('give', [2271560481, 0, 0, 0], '7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b02017b7b7b7b21436587ffffffff7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b')], 'state': '7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b02017b7b7b7b21436587ffffffff7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b'})\n"
+    },
+    "broad-take-success": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "b7b7b7b7b'), ('take', [591751049, 1024], '7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b01007b7b7b7b89674523000000007b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b'), ('flush', [], '7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b01007b7b7b7b89674523000000007b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b'), ('give', [591751049, 0, 0, 0], '7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b01007b7b7b7b89674523000000007b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b')], 'state': '7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b01007b7b7b7b89674523000000007b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b'})\n"
+    },
+    "cached-release-handle": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "b7b7b7b7b'), ('take', [591751049, 1024], '7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b01007b7b7b7b89674523000000007b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b'), ('flush', [], '7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b02017b7b7b7b21436587ffffffff7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b'), ('give', [591751049, 0, 0, 0], '7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b02017b7b7b7b21436587ffffffff7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b')], 'state': '7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b02017b7b7b7b21436587ffffffff7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b'})\n"
+    },
+    "wrong-release-order": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "b7b7b7b7b'), ('take', [591751049, 1024], '7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b01007b7b7b7b89674523000000007b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b'), ('give', [591751049, 0, 0, 0], '7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b01007b7b7b7b89674523000000007b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b'), ('flush', [], '7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b01007b7b7b7b89674523000000007b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b')], 'state': '7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b01007b7b7b7b89674523000000007b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b'})\n"
+    }
+  },
+  "audit": {
+    "unchanged_prior_objects": 765,
+    "new_units": 1,
+    "imports": {
+      "r1-application": {
+        "added": [
+          "r1_ep_export_ring_flush",
+          "r1_ep_plan_initialization"
+        ],
+        "removed": [
+          "r1_event_service_0005e0de"
+        ]
+      },
+      "r1-bootloader": {
+        "added": [],
+        "removed": []
+      }
+    },
+    "reused_owners": [
+      "new narrow EP active/paused/mutex/timestamp cells; existing ring owners excluded"
+    ]
+  },
+  "source_check": "R1 passes: 766 units, 570 source files, 0 not built. Global check flags existing G2 resident_rom_thumb_set.S absent from manifest.",
+  "initialization": "export-guard-initialization.json",
+  "rea": [
+    "export-guard-c-rea.json",
+    "export-guard-entries-c-rea.json"
+  ],
+  "instruction_identity_proven": false,
+  "image_integration_proven": false
+}

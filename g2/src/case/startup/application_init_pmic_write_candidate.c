@@ -49,3 +49,5 @@ uint32_t case_init_pmic_write(uint32_t reg,uint32_t value)
 /* Stock 0x080039E4 (right_channel_transaction_guard) */
 uint32_t case_init_pmic_reset(uint32_t reg,uint32_t value)
 {return guarded_write(reg,value,case_init_pmic_device_reset);}
+/* Dedup (0x080039e4): case_legacy_pmic_set (was legacy-default/guarded_frame_candidates.c). */
+__typeof__(case_init_pmic_reset) case_legacy_pmic_set __attribute__((alias("case_init_pmic_reset")));

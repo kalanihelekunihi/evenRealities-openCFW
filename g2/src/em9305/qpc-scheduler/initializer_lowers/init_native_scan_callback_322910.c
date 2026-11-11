@@ -1,203 +1,75 @@
-/* Native scan response callback and adaptive interval update; no invented input guards. */
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_scan_callback_322910\n"
-".type opencfw_em9305_scan_callback_322910,@function\n"
-"opencfw_em9305_scan_callback_322910:\n"
-"L322910:\n"
-"enter_s [r13-r17,blink]\n"
-"L322912:\n"
-"mov_s r15,0x805166\n"
-"L322918:\n"
-"breq.nt r1,0,L3229fe\n"
-"L32291c:\n"
-"ld_s r14,[r0,0x2c]\n"
-"L32291e:\n"
-"add2 r13,r14,0x26\n"
-"L322922:\n"
-"ldb r0,[r13,32]\n"
-"L322926:\n"
-"brne.nt r0,0x4,L3229dc\n"
-"L32292a:\n"
-"mov_s r16,0x805000\n"
-"L322930:\n"
-"ld r3,[r13,0x14]\n"
-"L322932:\n"
-"ld r0,[r13,0x10]\n"
-"L322934:\n"
-"ld r1,[r16,104]\n"
-"L322938:\n"
-"ld r2,[r16,100]\n"
-"L32293c:\n"
-"xor_s r1,r1,r3\n"
-"L32293e:\n"
-"xor_s r0,r0,r2\n"
-"L322940:\n"
-"or.f 0,r0,r1\n"
-"L322944:\n"
-"bne_s L3229dc\n"
-"L322946:\n"
-"mov_s r0,0x805cac\n"
-"L32294c:\n"
-"ld r0,[r0,0]\n"
-"L32294e:\n"
-"ldb r1,[0x805b01]\n"
-"L322956:\n"
-"ldb_s r0,[r0,0xe]\n"
-"L322958:\n"
-"brhs.d.nt r1,r0,L3229dc\n"
-"L32295c:\n"
-"mov_s r0,0x2d\n"
-"L32295e:\n"
-"bl opencfw_em9305_wsf_event_allocate\n"
-"L322962:\n"
-"mov_s r17,r0\n"
-"L322964:\n"
-"breq.nt r0,0,L3229dc\n"
-"L322966:\n"
-"ld_s r1,[r14,0x6c]\n"
-"L322968:\n"
-"ldb_s r0,[r13,0]\n"
-"L32296a:\n"
-"stb r0,[r1,39]\n"
-"L32296e:\n"
-"ldb r0,[r14,187]\n"
-"L322972:\n"
-"ldb r1,[r14,186]\n"
-"L322976:\n"
-"cmp_s r0,r1\n"
-"L322978:\n"
-"mov_s r0,0\n"
-"L32297a:\n"
-"beq_s L32298e\n"
-"L32297c:\n"
-"ld r1,[r13,0x14]\n"
-"L32297e:\n"
-"ld r0,[r13,0x1c]\n"
-"L322980:\n"
-"ld r3,[r13,0x10]\n"
-"L322982:\n"
-"ld r2,[r13,0x18]\n"
-"L322984:\n"
-"xor_s r0,r0,r1\n"
-"L322986:\n"
-"xor_s r2,r2,r3\n"
-"L322988:\n"
-"or_s r0,r0,r2\n"
-"L32298a:\n"
-"setne r0,r0,0\n"
-"L32298e:\n"
-"ld_s r1,[r14,0x6c]\n"
-"L322990:\n"
-"stb r0,[r1,40]\n"
-"L322994:\n"
-"ld r0,[r13,0x4]\n"
-"L322996:\n"
-"ld_s r1,[r14,0x64]\n"
-"L322998:\n"
-"stb r0,[r1,41]\n"
-"L32299c:\n"
-"ld r0,[r13,0x4]\n"
-"L32299e:\n"
-"ld_s r1,[r14,0x64]\n"
-"L3229a0:\n"
-"lsr_s r0,r0,0x8\n"
-"L3229a2:\n"
-"stb r0,[r1,42]\n"
-"L3229a6:\n"
-"ldh r0,[r14,158]\n"
-"L3229aa:\n"
-"ld_s r1,[r14,0x64]\n"
-"L3229ac:\n"
-"stb r0,[r1,43]\n"
-"L3229b0:\n"
-"ldb r0,[r14,159]\n"
-"L3229b4:\n"
-"ld_s r1,[r14,0x64]\n"
-"L3229b6:\n"
-"stb r0,[r1,44]\n"
-"L3229ba:\n"
-"ld_s r2,[r14,0x6c]\n"
-"L3229bc:\n"
-"mov_s r1,0\n"
-"L3229be:\n"
-"bl.d opencfw_em9305_ll_event_enqueue\n"
-"L3229c2:\n"
-"mov_s r0,r16\n"
-"L3229c4:\n"
-"ldb r0,[0x805b18]\n"
-"L3229cc:\n"
-"bl.d opencfw_em9305_wsf_event_post\n"
-"L3229d0:\n"
-"mov r1,256\n"
-"L3229d4:\n"
-"bl opencfw_em9305_scan_counter_up_316968\n"
-"L3229d8:\n"
-"st r17,[r14,108]\n"
-"L3229dc:\n"
-"ldb_s r0,[r15,0x3]\n"
-"L3229de:\n"
-"add_s r0,r0,1\n"
-"L3229e0:\n"
-"extb_s r1,r0\n"
-"L3229e2:\n"
-"brlo.d.nt r1,0x2,L3229f8\n"
-"L3229e6:\n"
-"stb_s r0,[r15,0x3]\n"
-"L3229e8:\n"
-"ldh_s r0,[r15,0]\n"
-"L3229ea:\n"
-"stb 0,[r15,3]\n"
-"L3229ee:\n"
-"lsr.f r0,r0\n"
-"L3229f2:\n"
-"mov.eq r0,0x1\n"
-"L3229f6:\n"
-"sth_s r0,[r15,0]\n"
-"L3229f8:\n"
-"stb 0,[r15,4]\n"
-"L3229fc:\n"
-"b_s L322a1e\n"
-"L3229fe:\n"
-"ldb_s r0,[r15,0x4]\n"
-"L322a00:\n"
-"add_s r0,r0,1\n"
-"L322a02:\n"
-"extb_s r1,r0\n"
-"L322a04:\n"
-"brlo.d.nt r1,0x2,L322a1a\n"
-"L322a08:\n"
-"stb_s r0,[r15,0x4]\n"
-"L322a0a:\n"
-"ldh_s r0,[r15,0]\n"
-"L322a0c:\n"
-"stb 0,[r15,4]\n"
-"L322a10:\n"
-"asl_s r0,r0\n"
-"L322a12:\n"
-"exth_s r0,r0\n"
-"L322a14:\n"
-"min r0,r0,256\n"
-"L322a18:\n"
-"sth_s r0,[r15,0]\n"
-"L322a1a:\n"
-"stb 0,[r15,3]\n"
-"L322a1e:\n"
-"bl opencfw_em9305_scan_random_30c478\n"
-"L322a22:\n"
-"ldh_s r1,[r15,0]\n"
-"L322a24:\n"
-"add_s r1,r1,-1\n"
-"L322a26:\n"
-"and_s r0,r0,r1\n"
-"L322a28:\n"
-"add_s r1,r0,0x1\n"
-"L322a2a:\n"
-"mov_s r0,0\n"
-"L322a2c:\n"
-"stb_s r1,[r15,0x2]\n"
-"L322a2e:\n"
-"leave_s [r13-r17,blink,pcl]\n"
-".size opencfw_em9305_scan_callback_322910,.-opencfw_em9305_scan_callback_322910\n"
-);
+#include <stdint.h>
+
+/* Native 0x322910..0x322a30: scan request/response outcome. On a received
+ * response from the device being scanned (state 4 at +184 of the scanner
+ * +0x2c, address +168/+172 equal to 0x805064) and while the report budget
+ * (0x805b01 below config byte 14) allows, complete the pending report
+ * (+108: channel, address-changed flag, rssi/phy/type bytes into +100),
+ * queue it, signal the task and stage a fresh 45-byte report. Then
+ * update the backoff (0x805166): two successes halve the window (min 1),
+ * two failures double it (max 256); pick a random count in 1..window. */
+extern uintptr_t opencfw_em9305_wsf_event_allocate(uint32_t);
+extern uint32_t opencfw_em9305_ll_event_enqueue(uintptr_t,uint32_t,uintptr_t);
+extern uint32_t opencfw_em9305_wsf_event_post(uint32_t,uint32_t);
+extern void opencfw_em9305_scan_counter_up_316968(void);
+extern uint32_t opencfw_em9305_scan_random_30c478(void);
+
+static uint32_t r32(uintptr_t a){return *(volatile uint32_t *)a;}
+static uint32_t r16(uintptr_t a){return *(volatile uint16_t *)a;}
+static uint32_t r8(uintptr_t a){return *(volatile uint8_t *)a;}
+static void w16(uintptr_t a,uint32_t v){*(volatile uint16_t *)a=(uint16_t)v;}
+static void w8(uintptr_t a,uint32_t v){*(volatile uint8_t *)a=(uint8_t)v;}
+
+uint32_t opencfw_em9305_scan_callback_322910(uintptr_t object,uint32_t success)
+{
+    const uintptr_t backoff=(uintptr_t)0x805166u;
+    if(success!=0u) {
+        uintptr_t scanner=r32(object+0x2cu);
+        uintptr_t peer=scanner+152u;
+        if(r8(peer+32u)==4u&&
+           ((r32(peer+0x10u)^r32(0x805064u))|(r32(0x805068u)^r32(peer+0x14u)))==0u&&
+           r8(0x805b01u)<r8(r32(0x805cacu)+0xeu)) {
+            uintptr_t fresh=opencfw_em9305_wsf_event_allocate(0x2du);
+            if(fresh!=0u) {
+                w8(r32(scanner+0x6cu)+39u,r8(peer));
+                uint32_t changed=0u;
+                if(r8(scanner+187u)!=r8(scanner+186u))
+                    changed=((r32(peer+0x1cu)^r32(peer+0x14u))|
+                             (r32(peer+0x18u)^r32(peer+0x10u)))!=0u;
+                w8(r32(scanner+0x6cu)+40u,changed);
+                w8(r32(scanner+0x64u)+41u,r32(peer+4u));
+                w8(r32(scanner+0x64u)+42u,r32(peer+4u)>>8);
+                w8(r32(scanner+0x64u)+43u,r16(scanner+158u));
+                w8(r32(scanner+0x64u)+44u,r8(scanner+159u));
+                (void)opencfw_em9305_ll_event_enqueue((uintptr_t)0x805000u,0u,r32(scanner+0x6cu));
+                (void)opencfw_em9305_wsf_event_post(r8(0x805b18u),256u);
+                opencfw_em9305_scan_counter_up_316968();
+                *(volatile uint32_t *)(scanner+108u)=(uint32_t)fresh;
+            }
+        }
+        uint32_t count=r8(backoff+3u)+1u;
+        w8(backoff+3u,count);
+        if((uint8_t)count>=2u) {
+            uint32_t window=r16(backoff);
+            w8(backoff+3u,0u);
+            window>>=1;
+            if(window==0u) window=1u;
+            w16(backoff,window);
+        }
+        w8(backoff+4u,0u);
+    } else {
+        uint32_t count=r8(backoff+4u)+1u;
+        w8(backoff+4u,count);
+        if((uint8_t)count>=2u) {
+            uint32_t window=r16(backoff);
+            w8(backoff+4u,0u);
+            window=(uint16_t)(window<<1);
+            if(window>256u) window=256u;
+            w16(backoff,window);
+        }
+        w8(backoff+3u,0u);
+    }
+    uint32_t random=opencfw_em9305_scan_random_30c478();
+    w8(backoff+2u,(random&(r16(backoff)-1u))+1u);
+    return 0u;
+}

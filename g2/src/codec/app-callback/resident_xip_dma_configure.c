@@ -1,10 +1,13 @@
 /* SPDX-License-Identifier: MIT
  * Native image-A XIP DMA descriptor graph: 0x10203828..0x10203a47 and
- * 0x10203c60..0x10203c73. Retained Ghidra bodies, pinned GX8002 DMA
- * layout, and 0x10203a48 literal (0x2002e93c) are the attribution inputs.
- * Hardware/runtime equality and final source data placement remain open.
+ * 0x10203c60..0x10203c73.
+ * Evidence: corpus codec/ghidra/open-2026-09-29/image_a_xip/functions-000.jsonl
+ * gx8002_dma_descriptors @ 0x10203828 (202 B sha 413fb033…),
+ * virt_to_dma @ 0x10203c60 (20 B sha 5fbc1188…); pinned GX8002 DMA layout
+ * and 0x10203a48 literal (0x2002e93c). Hardware/runtime equality open.
  */
 #include <stdint.h>
+#include "../csky_ops.h"
 
 extern void gx8002_xip_dma_clear_10203804(uint32_t channel);
 
@@ -85,9 +88,7 @@ int32_t gx8002_xip_dma_configure_102038f4(
         (volatile const uint32_t *)(const void *)state;
     uint32_t *const descriptors =
         (uint32_t *)(uintptr_t)state_words[0xda + channel];
-    uint32_t width = 1u;
-    uint32_t width_shift = input[0] & 0x3fu;
-    __asm__ volatile("lsl %0, %1" : "+r"(width) : "r"(width_shift) : "cc");
+    const uint32_t width = csky_lsl(1u, input[0] & 0x3fu);
     gx8002_xip_dma_descriptors_10203828(
         initial, descriptors, count, signed_length, (uint8_t)width);
     *(volatile uint32_t *)(void *)(registers + 0x10u) =

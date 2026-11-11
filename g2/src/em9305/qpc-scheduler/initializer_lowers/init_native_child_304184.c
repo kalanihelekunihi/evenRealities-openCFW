@@ -1,70 +1,30 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_304184\n"
-".type opencfw_em9305_child_304184,@function\n"
-"opencfw_em9305_child_304184:\n"
-"L304184:\n"
-"enter_s [r13-r15,fp,blink]\n"
-"L304186:\n"
-"sub_s sp,sp,0x14\n"
-"L304188:\n"
-"ld_s r13,[r0,0x2c]\n"
-"L30418a:\n"
-"mov_s r15,r0\n"
-"L30418c:\n"
-"bl.d opencfw_em9305_common_radio_prepare_30fb4c\n"
-"L304190:\n"
-"mov_s r0,r1\n"
-"L304192:\n"
-"ld r0,[r13,128]\n"
-"L304196:\n"
-"mov_s r14,0x8015c4\n"
-"L30419c:\n"
-"st_s r0,[r14,0x14]\n"
-"L30419e:\n"
-"ld r1,[r15,0x8]\n"
-"L3041a0:\n"
-"add_s r0,r14,0x8\n"
-"L3041a2:\n"
-"bl.d opencfw_em9305_common_radio_bind_30fc10\n"
-"L3041a6:\n"
-"st_s r1,[r14,0x10]\n"
-"L3041a8:\n"
-"stb 0,[r14]\n"
-"L3041ac:\n"
-"ld_s r0,[r13,0x64]\n"
-"L3041ae:\n"
-"breq_s r0,0,L3041c0\n"
-"L3041b0:\n"
-"add_s r0,sp,0\n"
-"L3041b2:\n"
-"mov_s r1,opencfw_em9305_radio_template_3343f8\n"
-"L3041b8:\n"
-"bl.d opencfw_em9305_memcpy\n"
-"L3041bc:\n"
-"mov_s r2,0x14\n"
-"L3041be:\n"
-"b_s L3041ca\n"
-"L3041c0:\n"
-"add_s r0,sp,0\n"
-"L3041c2:\n"
-"mov_s r1,0\n"
-"L3041c4:\n"
-"bl.d opencfw_em9305_memset\n"
-"L3041c8:\n"
-"mov_s r2,0x14\n"
-"L3041ca:\n"
-"bl.d opencfw_em9305_radio_record_30fc28\n"
-"L3041ce:\n"
-"add_s r0,sp,0\n"
-"L3041d0:\n"
-"mov_s r0,0x8013f0\n"
-"L3041d6:\n"
-"bl.d opencfw_em9305_radio_request_30faec\n"
-"L3041da:\n"
-"mov r1,257\n"
-"L3041de:\n"
-"leave_s [r13-r15,fp,blink,pcl]\n"
-".size opencfw_em9305_child_304184,.-opencfw_em9305_child_304184\n"
-);
+#include <stdint.h>
+
+/* Native 0x304184..0x3041d8: prepare and bind the radio for a context, store
+ * the session word +128 and context word +8 in the radio block at 0x8015c4,
+ * load a 20-byte radio record (ROM template 0x3343f8 when the session word
+ * +100 is set, zeros otherwise) and issue radio request 257 on 0x8013f0. */
+extern uint32_t opencfw_em9305_common_radio_prepare_30fb4c(uintptr_t);
+extern uint32_t opencfw_em9305_common_radio_bind_30fc10(uintptr_t);
+extern const uint8_t opencfw_em9305_radio_template_3343f8[20];
+extern void *opencfw_em9305_memcpy(void *destination, const void *source, uint32_t bytes);
+extern void *opencfw_em9305_memset(void *,uint32_t,uint32_t);
+extern uint32_t opencfw_em9305_radio_record_30fc28(uintptr_t);
+extern uint32_t opencfw_em9305_radio_request_30faec(uintptr_t,uint32_t);
+
+uint32_t opencfw_em9305_child_304184(uintptr_t context, uintptr_t radio)
+{
+    uint32_t frame[5];
+    uintptr_t session = *(volatile uint32_t *)(context + 0x2cu);
+    (void)opencfw_em9305_common_radio_prepare_30fb4c(radio);
+    *(volatile uint32_t *)(uintptr_t)(0x8015c4u + 0x14u) = *(volatile uint32_t *)(session + 128u);
+    *(volatile uint32_t *)(uintptr_t)(0x8015c4u + 0x10u) = *(volatile uint32_t *)(context + 8u);
+    (void)opencfw_em9305_common_radio_bind_30fc10(0x8015c4u + 8u);
+    *(volatile uint8_t *)(uintptr_t)0x8015c4u = 0u;
+    if (*(volatile uint32_t *)(session + 0x64u) != 0u)
+        (void)opencfw_em9305_memcpy(frame, opencfw_em9305_radio_template_3343f8, 20u);
+    else
+        (void)opencfw_em9305_memset(frame, 0u, 20u);
+    (void)opencfw_em9305_radio_record_30fc28((uintptr_t)frame);
+    return opencfw_em9305_radio_request_30faec(0x8013f0u, 257u);
+}

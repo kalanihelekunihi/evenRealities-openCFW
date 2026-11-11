@@ -1,31 +1,15 @@
-/* Native PAwR release: clear each owned slot before releasing its prior pointer. */
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_pawr_release_322884\n"
-".type opencfw_em9305_pawr_release_322884,@function\n"
-"opencfw_em9305_pawr_release_322884:\n"
-"L322884:\n"
-"enter_s [r13,blink]\n"
-"L322886:\n"
-"mov_s r13,r0\n"
-"L322888:\n"
-"ld.as r0,[r0,75]\n"
-"L32288c:\n"
-"st.as 0,[r13,75]\n"
-"L322890:\n"
-"breq_s r0,0,L322896\n"
-"L322892:\n"
-"bl opencfw_em9305_wsf_event_release\n"
-"L322896:\n"
-"ld.as r0,[r13,77]\n"
-"L32289a:\n"
-"st.as 0,[r13,77]\n"
-"L32289e:\n"
-"breq_s r0,0,L3228a4\n"
-"L3228a0:\n"
-"bl opencfw_em9305_wsf_event_release\n"
-"L3228a4:\n"
-"leave_s [r13,blink,pcl]\n"
-".size opencfw_em9305_pawr_release_322884,.-opencfw_em9305_pawr_release_322884\n"
-);
+#include <stdint.h>
+
+/* Native 0x322884..0x3228a6: detach and release the two PAwR event buffers
+ * held at record+300 and record+308; each slot is cleared before release. */
+extern uint32_t opencfw_em9305_wsf_event_release(uintptr_t);
+
+void opencfw_em9305_pawr_release_322884(uintptr_t record)
+{
+    uintptr_t event=*(volatile uint32_t *)(record+300u);
+    *(volatile uint32_t *)(record+300u)=0u;
+    if(event!=0u) (void)opencfw_em9305_wsf_event_release(event);
+    event=*(volatile uint32_t *)(record+308u);
+    *(volatile uint32_t *)(record+308u)=0u;
+    if(event!=0u) (void)opencfw_em9305_wsf_event_release(event);
+}

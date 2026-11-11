@@ -1,5 +1,5 @@
-/* Native 0x30f57c..0x30f60c. Retain XB FU and conditional carry
- * selection as native operations instead of guessing bitfield semantics. */
+/* Native 0x30f57c..0x30f60c: earliest armed timer (XBFU mask bits 16..19,
+ * CMP/MOV.C unsigned minimum) against the requested sleep time. */
 #include <stdint.h>
 extern uint64_t opencfw_em9305_sleep_sync_convert(uint32_t,uint32_t);
 uint32_t opencfw_em9305_sleep_mode_ready(uint32_t low,uint32_t high)
@@ -10,12 +10,12 @@ uint32_t opencfw_em9305_sleep_mode_ready(uint32_t low,uint32_t high)
  if(first!=second) first=(*status>>1u)&1u;
  if(first==0) return 1;
  uint32_t mask=*(volatile uint32_t *)(uintptr_t)0xf00464u;
- __asm__ volatile("xbfu %0,%0,112" : "+r"(mask));
+ mask=((uint32_t)mask>>16u)&0xfu;
  uint32_t earliest=UINT32_MAX;
  if(mask!=0) {
   for(uint32_t bit=0;bit<4;bit++) if((mask&(1u<<bit))!=0) {
    uint32_t value=*(volatile uint32_t *)(uintptr_t)(0xf00468u+4u*bit);
-   __asm__ volatile("cmp %1,%0\n\tmov.c %0,%1" : "+r"(earliest) : "r"(value) : "cc");
+   if(value<earliest) earliest=value;
   }
   volatile uint32_t *timer=(volatile uint32_t *)(uintptr_t)0xf0045cu;
   uint32_t now,again; do {now=*timer;again=*timer;} while(now!=again);

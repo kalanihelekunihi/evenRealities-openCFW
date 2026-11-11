@@ -1,18 +1,16 @@
 #include "../semantic-strings/case_semantic_strings.h"
 /* SPDX-License-Identifier: MIT
  * Native CASE 0x38e0 option-bit update for box activation.
- * The option selector is read from the actual native stack slot at SP+4
- * after the exact four-register push and 32-byte local frame allocation.
- * This models the architectural ambient word without inventing a default.
+ * The stock option selector is an ambient stack word; the entry passes 0.
  */
 #include <stdint.h>
 extern void case_boot_read_option_words(uint32_t *words); /* 0x4a00 */
 extern uint32_t case_boot_option_write(const uint32_t *words); /* 0x4a6c */
-extern void case_boot_option_prepare(void); /* 0x4bf4 */
-extern void case_boot_option_unlock(void); /* 0x4b6c */
-extern void case_boot_option_commit_a(void); /* 0x4b3c */
-extern void case_boot_option_commit_b(void); /* 0x4b50 */
-extern void case_boot_option_commit_c(void); /* 0x4b20 */
+extern uint32_t case_boot_option_prepare(void); /* 0x4bf4 */
+extern uint32_t case_boot_option_unlock(void); /* 0x4b6c */
+extern uint32_t case_boot_option_commit_a(void); /* 0x4b3c */
+extern uint32_t case_boot_option_commit_b(void); /* 0x4b50 */
+extern uint32_t case_boot_option_commit_c(void); /* 0x4b20 */
 extern uint32_t case_legacy_logger(const char *format,...); /* 0x9170 */
 extern void case_policy_sensor_delay(uint32_t ticks); /* 0xa7b0 */
 /* Stock 0x080038E0 (option_byte_bank_swap) */
@@ -36,14 +34,10 @@ __attribute__((noinline,used)) void case_policy_box_begin_with_native_words(uint
     case_boot_option_commit_a();case_boot_option_commit_b();case_boot_option_commit_c();
 }
 
-__attribute__((naked,noinline)) void case_policy_box_begin(void)
+/* Stock 0x080038E0 entry: the selector is an uninitialised stack word in the
+ * stock frame (words[1] is then filled by case_boot_read_option_words); pass 0. */
+void case_policy_box_begin(void)
 {
-    __asm__ volatile(
-        "push {r4, r5, r6, lr}\n"
-        "sub sp, #32\n"
-        "mov r0, sp\n"
-        "ldr r1, [sp, #4]\n"
-        "bl case_policy_box_begin_with_native_words\n"
-        "add sp, #32\n"
-        "pop {r4, r5, r6, pc}\n");
+    uint32_t words[8];
+    case_policy_box_begin_with_native_words(words,0u);
 }

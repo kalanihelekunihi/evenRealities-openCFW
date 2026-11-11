@@ -1,0 +1,70 @@
+{
+  "cases": 275,
+  "passed": 275,
+  "failures": [],
+  "categories": {
+    "modeled": 135,
+    "actual": 5,
+    "handoff": 135
+  },
+  "callback_depths": [
+    [
+      [],
+      []
+    ],
+    [
+      [
+        -24
+      ],
+      [
+        -8
+      ]
+    ]
+  ],
+  "actual_primitive_bytes": "0338fdd87047",
+  "source_size": 26,
+  "other_sections_unchanged": [
+    ".r1.log.mode",
+    ".rodata.str1.1",
+    ".text.r1_adc_error",
+    ".text.r1_structured_log_mode_get"
+  ],
+  "other_source_units_unchanged": 561,
+  "imports_unchanged": true,
+  "application_imports": 211,
+  "bootloader_imports": 34,
+  "integrated_sources": [
+    "r1/src/application/board/stock_seams.c",
+    "r1/src/application/board/native_rtt_delay.c"
+  ],
+  "report": "build/sources-goal-r1-st25-delay/report.json",
+  "report_sha256": "61c8f09aac3f669a878627188eda3db95b68aa96dfa3672005f90b1346938cf9",
+  "manifest_sha256": "9c5b7ae5c0e7493eb22e1fb4df9f0c928c2a9aa70530254aff89b55213bef2e2",
+  "stock_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "rea": {
+    "path": "build/goal-r1-st25-delay/REA.json",
+    "sha256": "f24c01c4eea758d9fa0e4c2604d3acc4a6ed5db577bd6e1a34d3a524d82dc5ab",
+    "procedure": "0x784f0"
+  },
+  "source_sha256": {
+    "r1/src/application/board/stock_seams.c": "1e24d23cc31d26ee47d51b06cfd3983c1bf2a96e2b1a275be9cc0d252dc51234",
+    "r1/src/application/board/native_rtt_delay.c": "e614166951aa96b4de91200ad9d67e71434f9bb759faab1fbf6f9225cb4576c7"
+  },
+  "probe_artifacts": {
+    "build/goal-r1-st25-delay/before.c": "325a55f12c8d2467699a0ffdc5314536656e85d54bca0165ed43edbd10a39082",
+    "build/goal-r1-st25-delay/stock.s": "a5b993227581f2173d6dc27b2d26586d274dcd558bf8834d585a2cb5a813f56e",
+    "build/goal-r1-st25-delay/stock.elf": "25c7ab2ade0901385293a13f914662ac0190349870b5c5ea319a94c5c03d8b67",
+    "build/goal-r1-st25-delay/REA.json": "f24c01c4eea758d9fa0e4c2604d3acc4a6ed5db577bd6e1a34d3a524d82dc5ab",
+    "build/goal-r1-st25-delay/rea-snapshot.json": "3e365274f833003f2a1d01d4e2edfd91f22283121f54f2d816c45bbf2df5ac3b",
+    "build/goal-r1-st25-delay/verify.py": "4b6c6ff147febdd33c7db65eae8d5a4db21bfc7a9cf406ef662a591efe10a30f",
+    "build/goal-r1-st25-delay/results.json": "9f7b03fb38e0baaa0168b45626c4970eb3c29adc7e0fc3625e7c4425a602d155",
+    "build/goal-r1-st25-delay/source.elf": "65e2316af3667395663a9f4078a9c38b67755b6e3a4f46b3f288f7b0ccf9a959"
+  },
+  "limits": [
+    "C millisecond body is 26 bytes versus 28 native instruction bytes; only the six-byte primitive matches exactly. No wrapper qualification or whole-image identity.",
+    "135 bounded modeled cases check full call counts. Five cases for 0 through 4 ms execute the actual native/source primitive. 135 first-handoff cases check full-width inputs but do not establish completion of huge countdowns.",
+    "Native callback depth is caller SP-24 and C depth is SP-8. R0 is unowned under the void API; callee-saved registers, SP/masks and data-write bounds are checked. Private frame, timing, faults and exception identity are unproven.",
+    "Actual CPU frequency, elapsed delay and physical ST25/wire behavior are unproven. The remaining r1_twi_delay_busy import is still consumed by software-TWI records.",
+    "Other public seam code, source eligibility and import sets are unchanged. No G2 gate/source-plan change; final firmware linking, boot integration and full source/byte gates remain open."
+  ]
+}

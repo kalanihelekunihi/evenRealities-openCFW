@@ -21,7 +21,7 @@ static _Noreturn void queue_send_fatal(void)
     (void)opencfw_bl_mask_interrupts();
     WORD(UINT32_MAX) = 0u;
     for (;;)
-        __asm__ volatile("b ." ::: "memory");
+        { }
 }
 
 static void byte_copy(void *destination, const void *source, uint32_t count)

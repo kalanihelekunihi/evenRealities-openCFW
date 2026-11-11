@@ -1,58 +1,30 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_323528\n"
-".type opencfw_em9305_child_323528,@function\n"
-"opencfw_em9305_child_323528:\n"
-"L323528:\n"
-"enter_s [r13,blink]\n"
-"L32352a:\n"
-"ld.as r3,[r0,159]\n"
-"L32352e:\n"
-"bbit0.d.nt r3,r1,L323572\n"
-"L323532:\n"
-"mov_s r2,1\n"
-"L323534:\n"
-"cmp_s r1,0x1c\n"
-"L323536:\n"
-"asl r1,r2,r1\n"
-"L32353a:\n"
-"bic_s r3,r3,r1\n"
-"L32353c:\n"
-"st.as 0,[r0,160]\n"
-"L323540:\n"
-"st.as r3,[r0,159]\n"
-"L323544:\n"
-"bne_s L323572\n"
-"L323546:\n"
-"mov_s r13,r0\n"
-"L323548:\n"
-"add r13,r13,764\n"
-"L32354c:\n"
-"ldb r1,[r13,-19]\n"
-"L323550:\n"
-"breq_s r1,0,L323572\n"
-"L323552:\n"
-"ldb_s r3,[r13,0x2]\n"
-"L323554:\n"
-"ldb.x r6,[r13]\n"
-"L323558:\n"
-"mov_s r2,2\n"
-"L32355a:\n"
-"add_s r1,r0,r3\n"
-"L32355c:\n"
-"add r1,r1,557\n"
-"L323560:\n"
-"ldb r5,[r1]\n"
-"L323564:\n"
-"ldb.x r4,[r1,-4]\n"
-"L323568:\n"
-"bl.d opencfw_em9305_callback_323620\n"
-"L32356c:\n"
-"mov_s r1,0\n"
-"L32356e:\n"
-"stb 0,[r13,-19]\n"
-"L323572:\n"
-"leave_s [r13,blink,pcl]\n"
-".size opencfw_em9305_child_323528,.-opencfw_em9305_child_323528\n"
-);
+#include <stdint.h>
+
+/* Native 0x323528..0x323574: clear a pending-procedure bit in the record
+ * mask at +636 (and the word at +640). Clearing bit 28 while the report
+ * byte at +745 is set reports the PHY update through 323620 and clears
+ * the report byte. Returns the record unless the report runs. */
+extern uint32_t opencfw_em9305_callback_323620(uintptr_t record, uint32_t status,
+                                               uint32_t kind, uint32_t index,
+                                               int32_t previous, uint32_t current,
+                                               int32_t phy);
+
+uint32_t opencfw_em9305_child_323528(uintptr_t record, uint32_t bit)
+{
+    volatile uint32_t *mask=(volatile uint32_t *)(record+636u);
+    uint32_t pending=*mask;
+    if(((pending>>(bit&31u))&1u)==0u)return (uint32_t)record;
+    *(volatile uint32_t *)(record+640u)=0u;
+    *mask=pending&~(1u<<(bit&31u));
+    if(bit!=28u)return (uint32_t)record;
+    volatile uint8_t *report=(volatile uint8_t *)(record+745u);
+    if(*report==0u)return (uint32_t)record;
+    uint32_t index=*(volatile uint8_t *)(record+766u);
+    int32_t phy=*(volatile int8_t *)(record+764u);
+    uintptr_t slot=record+index+557u;
+    uint32_t current=*(volatile uint8_t *)slot;
+    int32_t previous=*(volatile int8_t *)(slot-4u);
+    uint32_t status=opencfw_em9305_callback_323620(record,0u,2u,index,previous,current,phy);
+    *report=0u;
+    return status;
+}

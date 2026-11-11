@@ -15,7 +15,7 @@ extern uint32_t opencfw_boot_gpio_irq_status(uint32_t, uint32_t, uint32_t *);
 extern uint32_t opencfw_boot_gpio_irq_clear(uint32_t, uint32_t);
 extern uint32_t opencfw_boot_gpio_irq_service(uint32_t, uint32_t);
 extern const int16_t opencfw_boot_gpio_irqnums[4];
-extern void boost_service(void);
+extern void am_hal_spotmgr_boost_timer_interrupt_service(void); /* 0x41cdb8 */
 
 void opencfw_boot_uart_irq1(void)
 {
@@ -42,7 +42,7 @@ void opencfw_boot_mspi_irq(void)
 }
 void opencfw_boot_spot_timer_irq(void)
 {
-    boost_service();
+    am_hal_spotmgr_boost_timer_interrupt_service();
 }
 static void gpio_irq(uint32_t row)
 {

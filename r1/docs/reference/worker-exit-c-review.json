@@ -1,0 +1,142 @@
+{
+  "schema_version": 1,
+  "scope": "R1 live worker exit broadcast, group acknowledgment and ordered persistence",
+  "report": "build/sources-goal-r1-worker-exit-c/report.json",
+  "comparison_report": "build/sources-goal-r1-manager-events-reviewed-c/report.json",
+  "audit": {
+    "compiled_units": 861,
+    "application_imports": 66,
+    "bootloader_imports": 22,
+    "unchanged_prior_nongenerated_objects": 850,
+    "changed_prior_nongenerated_objects": [],
+    "new_nongenerated_sources": [
+      "r1/src/application/runtime/native_worker_exit.c"
+    ],
+    "normal_worker_object_equals_direct_probe": true,
+    "normal_parent_and_reset_objects_equal_pipeline_probes": true,
+    "manifest_change": "one worker-exit C unit using existing task-barrier profile",
+    "source_plan_unchanged": true,
+    "new_mutable_persistent_bytes": 0,
+    "closed_import": "r1_manager_workers_exit_46bac",
+    "new_import": "r1_previous_state_append_native"
+  },
+  "direct": {
+    "stock_C_cases": {
+      "r1_manager_workers_exit_46bac": 4320,
+      "r1_task_suspend_broadcast_plan_build": 72,
+      "r1_manager_persist_exit_state_6ad64": 48
+    },
+    "total": 4440,
+    "native_instruction_bytes_executed": {
+      "r1_manager_workers_exit_46bac": 216,
+      "r1_task_suspend_broadcast_plan_build": 148,
+      "r1_manager_persist_exit_state_6ad64": 28
+    },
+    "ordered_live_worker_reads_and_notification_mask": true,
+    "exact_wait_status_comparison_and_flush_after_failure": true,
+    "logging_mode_and_partial_halfword_output_cases": true,
+    "helper_providers_modeled": true,
+    "void_R0_private_frame_APSR_excluded": true
+  },
+  "actual_parent_chain": {
+    "stock_C_dispatch_cases": 576,
+    "checked_peer_cases": 0,
+    "native_dispatch_instruction_bytes_executed": 252,
+    "actual_CMSIS_reset_AIRCR_write_and_barriers": true,
+    "all_relevant_event_combinations_and_priority": true,
+    "ordered_status_worker_exit_reset_tags_delays_and_cleanup": true,
+    "retained_assertion_logs_and_architecture_gate_observed": true,
+    "actual_manager_dispatch_worker_exit_status_ring_payload_getter_and_reset": true,
+    "remaining_helpers_modeled": true,
+    "private_reset_PC_LR_and_stack_register_residue_excluded": true
+  },
+  "compiled_defects_rejected": [
+    {
+      "defect": "wrong-factory-admission",
+      "rejected": true,
+      "log": "build/goal-r1-worker-exit-c/wrong-factory-admission/test.log"
+    },
+    {
+      "defect": "omitted-protocol-worker",
+      "rejected": true,
+      "log": "build/goal-r1-worker-exit-c/omitted-protocol-worker/test.log"
+    },
+    {
+      "defect": "wrong-worker-signal",
+      "rejected": true,
+      "log": "build/goal-r1-worker-exit-c/wrong-worker-signal/test.log"
+    },
+    {
+      "defect": "weak-wait-comparison",
+      "rejected": true,
+      "log": "build/goal-r1-worker-exit-c/weak-wait-comparison/test.log"
+    },
+    {
+      "defect": "skipped-flush-on-wait-error",
+      "rejected": true,
+      "log": "build/goal-r1-worker-exit-c/skipped-flush-on-wait-error/test.log"
+    },
+    {
+      "defect": "wrong-wait-timeout",
+      "rejected": true,
+      "log": "build/goal-r1-worker-exit-c/wrong-wait-timeout/test.log"
+    },
+    {
+      "defect": "truncated-state-length",
+      "rejected": true,
+      "log": "build/goal-r1-worker-exit-c/truncated-state-length/test.log"
+    },
+    {
+      "defect": "inverted-payload-admission",
+      "rejected": true,
+      "log": "build/goal-r1-worker-exit-c/inverted-payload-admission/test.log"
+    }
+  ],
+  "all_392_native_instruction_bytes_executed": true,
+  "public_contract": [
+    "Select factory worker only for config==0x55; otherwise select system worker. Signal selected, storage, sensor, battery, touch, BAE8 RX, TX1, shared TX and protocol-service handles in that order with0x800000.",
+    "Always return combined acknowledgment mask0x6df(factory) or0x6bf(normal), ignoring individual set statuses.",
+    "Read live sync event owner after broadcast; waitAll with timeout0x1400. Log failure on exact result != expected mask, including extra-bit results.",
+    "Regardless of wait status, perform NV idle/flush check, query halfword-length payload and append nonnull payload, then export force-flush and end diagnostics.",
+    "Native append requires a two-argument adapter; do not call the standalone seven-argument GoMore primitive with the native ABI."
+  ],
+  "limits": [
+    "Direct RTOS, logging, persistence and payload getter boundaries modeled with explicit-pointer mutations and partial halfword writes.",
+    "Parent chain executes manager dispatch, worker exit, status publisher/ring, actual payload getter and CMSIS reset; other services and native append modeled.",
+    "The actual getter advertises736 bytes. Its payload producer lifecycle and native append binding remain separate work; no vendor state bytes added.",
+    "SP/saved registers/FP registers/masks/caller-stack guards checked on normal returns; private frames, incidental void registers, APSR and concurrency/faults excluded.",
+    "Physical task acknowledgment, storage writes, reset, final application linking and boot unverified."
+  ],
+  "evidence_files": {
+    "build/sources-goal-r1-worker-exit-c/report.json": "a8944dc7862c3705272677b9c9382847d3e22c8d1d8de88d3e45443016a72f32",
+    "build/sources-goal-r1-manager-events-reviewed-c/report.json": "f4fcb3f8d13e484a0d260ff88f5b5fe3559428de7fcd0f78902b3d11f985ea48",
+    "r1/src/application/runtime/native_worker_exit.c": "4acbf77f422b8011519d4392551e96e2d20ea06b1e46b14022b30781b2f821f4",
+    "r1/src/application/board/native_task_contexts.h": "4063c122a5fa6be340150c068ca9a8c70f8d9e538036efab4dde30feedaeaa7c",
+    "r1/src/application/runtime/native_task_suspend.h": "57d6379d4363e5b1c4d03da00702e23d1931f190e96bce0694199182233d1530",
+    "r1/src/application/runtime/native_manager_events.c": "ccd02437f0c23af9fd1cfb03f791a6449dd288eaf7c5940972dd326dbf527d57",
+    "r1/src/application/board/native_manager_reset.c": "9d7a6c9ae87cd61cd7772932da71f144e9f180795396164b367f652d899168a1",
+    "r1/src/application/board/native_status_record.c": "169a6968defe650809b4502faf27e36b8ec67f063059c18829c7d752c02758a5",
+    "r1/src/application/runtime/native_status_ring.c": "5ad9da6da3d7289e158b47b07220cfa4299a8ccfa83da20be1a282187a7355cf",
+    "r1/src/application/runtime/native_crash_payload.c": "7ab0879f97c375157f34233caee9f97ad7ee89430289728112e1d50e954e2dec",
+    "r1/src/vendor/gomore_primitives/gomore_primitives.h": "2fab5a230a2dad0feb7f95aa62da8e8bf7a8fe9cdc122e918ca9ce3793c22039",
+    "r1/src/sources.json": "8768e2e6e137fb10d496bc5a354134efbf6c9d90f246fcd1c73d6d6fc0b7cc08",
+    "tools/build/source-plan.json": "eeb516e31b3310fb0718f36908977f8125723f7c5e0e86cd6744395826259a4d",
+    "build/goal-r1-worker-exit-c/manifest-before.json": "e9b26ee4fcaa17b4b8645a6990a549dc13cb5e5117cee4564dc57e0cb2cc79c2",
+    "build/goal-r1-worker-exit-c/record.py": "debbc427fb2c856f35d4da83f6b476de1600ef001500d7f8e7fac610f58e53b1",
+    "build/goal-r1-worker-exit-c/rea.json": "4cefef5c7113c327181fdf7f29fada5ab96f13300b851be11b99efa52536f5c7",
+    "build/goal-r1-worker-exit-c/rea-persist.json": "6973ec70ac0f13e0fbee4de3a7e61caa2044abce3e44ae225fd151768cf57667",
+    "build/goal-r1-worker-exit-c/verify.py": "501148bbe85fdaba2ab2ccadeac6f4075632bfc83c2bb23bd0d56b89df6ebf45",
+    "build/goal-r1-worker-exit-c/results.json": "8ace37e11d22a374181ff516f1007cb3e1f644df76c8b6b61b8066d3d87e037f",
+    "build/goal-r1-worker-exit-c/verification.log": "20ca14cbe20f5c09d4ea3be8eee142df644cede20350d4ca97bd2cf752703b72",
+    "build/goal-r1-worker-exit-c/source.elf": "7ad0e0188e07448e8f851432892df7a4c1327f5a030cb518f6164786bae80f75",
+    "build/goal-r1-worker-exit-c/pipeline/verify.py": "dab4ae8e69d408e2098da4ec5177880adfe939a0be0cc17e796b3d34260c6bbe",
+    "build/goal-r1-worker-exit-c/pipeline/results.json": "c0e5dea20a04a36ea47c157fc91db2ec218ee37043e2ff4a1e69174179924b18",
+    "build/goal-r1-worker-exit-c/pipeline/verification.log": "532c490d13a799e47b3f1bd633a435898ab19eb06209f07d544dc2e0bc48e8df",
+    "build/goal-r1-worker-exit-c/pipeline/source.elf": "384d72dbdbe098af677cd5050ac1dcfd22a788306030319116f7fc41179051bf",
+    "build/goal-r1-worker-exit-c/negative.py": "0ec74af6ab39458d905f5fed3e3a3d4d537edc6a237bbb16b2870d8ce1f8f40c",
+    "build/goal-r1-worker-exit-c/negative.json": "15ec5d593cb34246c0579dba50b528b56964d152cdc50dee64839cc66f3187ee",
+    "build/goal-r1-worker-exit-c/negative.log": "e212702db35979c52808e6631ec87041beb78041fc3a43f95dfa33aafe2ac3c8",
+    "build/goal-r1-worker-exit-c/build.log": "61d1b582d61567bffd8e7d8df7fcb67c0d24e3d88af96b1c2078952f4c235b82",
+    "build/goal-r1-worker-exit-c/sources-check.log": "b36ce16705afe06375532b872666bd2ac5070fd1d4521ae69a7bab14fa853097"
+  }
+}

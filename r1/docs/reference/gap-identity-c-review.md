@@ -1,0 +1,15 @@
+# R1 GAP identity in C
+
+`r1/src/application/board/native_gap_identity.c` implements GAP identity setup `0x66c4c` and checked preferred connection parameters `0x4e48c`. `native_ble_identity.h` defines narrow shared storage owners for the live parameter-profile byte, controller address, two peer address records and 32-byte name. Their initial bytes match authenticated cold RW; final linker placement remains a separate gate.
+
+The policy queries the controller address, clears both seven-byte peer records, publishes the address snapshot, clears the name buffer, and reads the configuration byte. The name uses address bytes 2, 1 and 0 as uppercase two-digit hex after `EVEN R1_`, adding `_FAC` only for configuration `0x55`. It sets open security mode `0x11`, appearance `0x240`, preferred parameters, then resets SDK connection state. Errors log and continue. The checked parameter setter returns the original controller status after error logging.
+
+The zero/nonzero profile selects two stock parameter records that currently contain identical values: minimum interval 12, maximum 24, latency 4 and timeout 600. Both records and the live selection are retained. Controller gateways use the pinned SDK declarations; no product inline assembly is added.
+
+Native address-query failure can leave private stack bytes uninitialized. The C query buffer starts at zero, defining all bytes that a failed or partial controller response leaves unwritten. This deliberate fallback is tested separately; equality to native stack garbage is not claimed. Complete seven-byte output preserves native behavior, including when the controller returns an error status.
+
+All 1,984 direct stock/C comparisons pass: 960 identity/error/configuration/live-state combinations and 1,024 parameter-profile/status cases. A further 132 pairs use the actual formatter and SDK connection-state reset. Both passes validate 21 defined C partial-failure cases. Tests check logical storage at external calls, address/name ordering, parameter bytes, error continuation, result retention, callback order, guard memory, preserved registers and interrupt masks. Ten compiled defects are rejected, followed by an unmodified-source rerun. REA byte receipts match the pinned artifact.
+
+The normal build compiles 830 units (748 application, 82 bootloader) without duplicate strong symbols. GAP identity closes one import, reducing application dependencies from 75 to 74 with no additions. All 827 prior non-generated objects are unchanged; two generated bootloader objects differ. R1 source validation passes for 830 units and 616 sources. The known unrelated G2 manifest omission remains outside this change.
+
+Controller services and error/configuration providers remain modeled. These checks do not prove physical RF behavior, timing, final application linking or device boot. Byte identity is not required under the current user instruction. [Review receipt](gap-identity-c-review.json); experiments are under `build/goal-r1-gap-identity-c/`.

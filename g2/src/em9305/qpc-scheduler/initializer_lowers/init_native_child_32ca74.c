@@ -1,26 +1,14 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_32ca74\n"
-".type opencfw_em9305_child_32ca74,@function\n"
-"opencfw_em9305_child_32ca74:\n"
-"L32ca74:\n"
-"mov_s r1,0x805c6c\n"
-"L32ca7a:\n"
-"ld r1,[r1,0]\n"
-"L32ca7c:\n"
-"ld r2,[r1,0x4]\n"
-"L32ca7e:\n"
-"ld r3,[r1,0x8]\n"
-"L32ca80:\n"
-"st.as r2,[r0,165]\n"
-"L32ca84:\n"
-"ld r1,[r1,0xc]\n"
-"L32ca86:\n"
-"st.as r3,[r0,166]\n"
-"L32ca8a:\n"
-"j_s.d [blink]\n"
-"L32ca8c:\n"
-"st.as r1,[r0,167]\n"
-".size opencfw_em9305_child_32ca74,.-opencfw_em9305_child_32ca74\n"
-);
+#include <stdint.h>
+
+/* Native 0x32ca74..0x32ca8e: copy the three parameter words at +4..+12
+ * of the current command (0x805c6c) into the record at +660..+668. */
+void opencfw_em9305_child_32ca74(uintptr_t record)
+{
+    uintptr_t command=*(volatile uint32_t *)(uintptr_t)0x805c6cu;
+    uint32_t first=*(volatile uint32_t *)(command+4u);
+    uint32_t second=*(volatile uint32_t *)(command+8u);
+    *(volatile uint32_t *)(record+660u)=first;
+    uint32_t third=*(volatile uint32_t *)(command+12u);
+    *(volatile uint32_t *)(record+664u)=second;
+    *(volatile uint32_t *)(record+668u)=third;
+}

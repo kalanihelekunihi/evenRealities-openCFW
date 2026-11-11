@@ -9,7 +9,12 @@ extern uint32_t audio_log_level(void);
 extern void audio_log_extended(uint8_t, const char *, const char *,
                                const char *, uint32_t, const char *, ...);
 extern uint32_t compressed_log_output(uint32_t, const char *, const char *, ...);
-extern volatile uint32_t audio_uart_display_manager_queue_cell;
+/* Fix 59: stock reads the display-manager queue as [0x20000658,#12]
+ * (0x473b74, 0x473bea, 0x4740a8, 0x4741fc, 0x4743ce ...); it is the .queue field
+ * written by display_driver_callbacks.c (audio_queue_new), not a separate cell. */
+extern unsigned char g2ref_audio_display_driver_manager[] __asm__("audio_display_driver_manager"); /* RAM 0x20000658 */
+#define audio_uart_display_manager_queue_cell \
+    (*(volatile uint32_t *)(void *)(g2ref_audio_display_driver_manager + 0xcu)) /* RAM 0x20000664 */
 
 static const char module[] = "task.displaydrvmgr";
 static const char path[] = "D:\\01_workspace\\s200_ap510b_iar_git\\platform\\display_mgr\\displaydrv_manager.c";

@@ -1,0 +1,185 @@
+{
+  "schema_version": 1,
+  "scope": "R1 subscriber synchronization/consumer C extraction and duplicate thread-ID bridge removal",
+  "native_application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "native_entries": {
+    "lock": "0x5dcb0",
+    "unlock": "0x5dcd4",
+    "thread": "0x7d814",
+    "consumer": "0x8b0fc"
+  },
+  "execution": {
+    "paired_cases": 3034,
+    "executions": 6068,
+    "groups": {
+      "lock": 270,
+      "unlock": 270,
+      "thread": 270,
+      "consume": 2224
+    },
+    "source_report": "build/sources-goal-r1-subscriber-c-verified/report.json",
+    "actual_C_CMSIS_thread_ID_and_current_task_getter": true,
+    "modeled": [
+      "CMSIS mutex creation/acquire/release",
+      "opaque subscriber callback"
+    ],
+    "checks": [
+      "native 16-byte CMSIS attributes and 80-byte control backing",
+      "zero mutex creation still acquired; new result overwrites callback mutation",
+      "current thread captured before lock; head loaded after acquire",
+      "null callbacks skip owner reads, matching owners invoke raw R0/R1 gateway",
+      "fresh event head and next after callbacks, including native null-head fault",
+      "late mutex reload on unlock, no-op/null status and full return words",
+      "aliased/unaligned record views, guards, R0, return SP, saved registers, masks and clean XPSR"
+    ],
+    "limits": [
+      "No actual mutex scheduling, queue routing, physical sensors or concurrency",
+      "Opaque callbacks use a retained two-byte ARM gateway; their C signatures remain unproven",
+      "Private frames and caller-clobbered registers/flags excluded"
+    ]
+  },
+  "initialization": {
+    "source_report": "build/sources-goal-r1-subscriber-c-verified/report.json",
+    "stock_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "native_RW_and_ZI_handlers_executed": true,
+    "independent_RW_decoder_matches": true,
+    "region_guards_unchanged": true,
+    "cells": {
+      "r1_subscriber_mutex": {
+        "address": "0x20006794",
+        "size": 4,
+        "section": ".r1.subscriber.mutex",
+        "sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119"
+      },
+      "r1_subscriber_mutex_control": {
+        "address": "0x2001571c",
+        "size": 80,
+        "section": ".r1.subscriber.control",
+        "sha256": "5b6fb58e61fa475939767d68a446f97f1bff02c0e5935a3ea8bb51e6515783d8"
+      }
+    },
+    "owned_bytes": 84,
+    "limits": [
+      "Only these cells are owned; full firmware startup placement and physical execution are not established"
+    ]
+  },
+  "negative_controls": [
+    {
+      "mutation": "late-thread-sample",
+      "rejected": true
+    },
+    {
+      "mutation": "stale-event-head",
+      "rejected": true
+    }
+  ],
+  "audit": {
+    "legacy_thread_bridge_equals_canonical_C_body_and_relocation": true,
+    "duplicate_thread_bridge_removed": true,
+    "multicast_instruction_bytes_unchanged_only_thread_relocation_renamed": true,
+    "data_owner_bytes_alignment_flags_and_relocations_unchanged": true,
+    "remaining_gateway_bytes": 2,
+    "other_object_bytes_unchanged": true,
+    "manifest_two_profile_changes_and_one_new_profile_only": true,
+    "import_sets_unchanged": true
+  },
+  "normal_build": {
+    "compiled": 575,
+    "application_imports": 175,
+    "bootloader_imports": 34,
+    "failures": 0,
+    "duplicate_strong_symbols": 0
+  },
+  "qualification": {
+    "compiled_candidates": 15,
+    "profiles_per_unit": 5,
+    "selected_symbols": [
+      "r1_event_service_0008b028"
+    ],
+    "new_C_regions": 0,
+    "unchanged_multicast_promoted": false,
+    "existing_canonical_C_thread_region_preserved": true
+  },
+  "remaining_callback_gateway_bytes": 2,
+  "source_plan_unchanged": true,
+  "source_built_bytes": 3881,
+  "binary_pull_through_bytes": 642279,
+  "resource_bytes": 248,
+  "fresh_hybrid_equals_locked_application": true,
+  "source_completeness_proven": false,
+  "rea": {
+    "mutex_and_thread_bodies_observed": true,
+    "consumer_missing_from_default_analysis": true,
+    "missing_entry_coverage_credit": false
+  },
+  "units": [
+    {
+      "source": "r1/src/application/runtime/native_subscriber_sync.c",
+      "source_sha256": "fdaca2ffe1e658e30161738cf97f2e7ee7814c33dc80bed633a94dabe38ad178",
+      "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-subscriber-c-verified/r1/r1-application/r1__src__application__runtime__native_subscriber_sync.c.o",
+      "object_sha256": "ee6bf1c0c754ac241066b8f62250c8616e8d12393edf48d1abb8b023e8fc3ef1"
+    },
+    {
+      "source": "r1/src/application/runtime/native_subscriber_consume.c",
+      "source_sha256": "168912732a346cc1edae7493adb58c80fabce607d12299c907feebb79e1dc7fc",
+      "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-subscriber-c-verified/r1/r1-application/r1__src__application__runtime__native_subscriber_consume.c.o",
+      "object_sha256": "c2f206e0820e02d822faf61c73ab9eb734177554397b0efc0f4950b413616ec0"
+    },
+    {
+      "source": "r1/src/application/runtime/native_event_multicast.c",
+      "source_sha256": "0b3f148a25b9d943a754d78a0d36d63b62796a83ad73bf1a43c0b3bb6f267ea5",
+      "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-subscriber-c-verified/r1/r1-application/r1__src__application__runtime__native_event_multicast.c.o",
+      "object_sha256": "feda848f0d7b935c25449c32b91a16e8563a025545655c43e55055566cf26f51"
+    },
+    {
+      "source": "third-party/upstream/cmsis-freertos/CMSIS/RTOS2/FreeRTOS/Source/cmsis_os2.c",
+      "source_sha256": "8a0d60b56ad30c4f7957f64fa581158017b6812ec94b832d974c773ae4f2bc36",
+      "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-subscriber-c-verified/r1/r1-application/third-party__upstream__cmsis-freertos__CMSIS__RTOS2__FreeRTOS__Source__cmsis_os2.c.o",
+      "object_sha256": "fd7cb95a0b7294f2b388365d7c4719e393ea02cdc417f587029e9209d39b126e"
+    },
+    {
+      "source": "r1/src/application/rtos/task-count/task-count.c",
+      "source_sha256": "24e1556535baeaa953cf41a95bb294c72c5c097963e8a0110e86946d6c3ed3d4",
+      "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-subscriber-c-verified/r1/r1-application/r1__src__application__rtos__task-count__task-count.c.o",
+      "object_sha256": "f11607fbe0cdca76b46010b3784e29015c8ccbfa5f01ce1fd0d32bb211f7988a"
+    }
+  ],
+  "evidence": {
+    "build/sources-goal-r1-subscriber-c-verified/report.json": "65d79ba2d76e2679592d8967ee4b3f0c3d2cdc7d98d1594c2a5f555a17d78f30",
+    "r1/src/application/runtime/native_subscriber_sync.c": "fdaca2ffe1e658e30161738cf97f2e7ee7814c33dc80bed633a94dabe38ad178",
+    "r1/src/application/runtime/native_subscriber_consume.c": "168912732a346cc1edae7493adb58c80fabce607d12299c907feebb79e1dc7fc",
+    "r1/src/application/runtime/native_event_multicast.c": "0b3f148a25b9d943a754d78a0d36d63b62796a83ad73bf1a43c0b3bb6f267ea5",
+    "third-party/upstream/cmsis-freertos/CMSIS/RTOS2/FreeRTOS/Source/cmsis_os2.c": "8a0d60b56ad30c4f7957f64fa581158017b6812ec94b832d974c773ae4f2bc36",
+    "r1/src/application/rtos/task-count/task-count.c": "24e1556535baeaa953cf41a95bb294c72c5c097963e8a0110e86946d6c3ed3d4",
+    "r1/src/application/runtime/native_subscriber.h": "8e673a0e4c410be8d8375f072169537b371cb7c092ed0e2f5b1a762944b49669",
+    "r1/src/sources.json": "dac7c1f630943d161d4ddc6c9d9db390d202db6e4c0a753217a2c94e95e3c2d9",
+    "r1/symbols/function-frontier.csv": "22a65ff056f3bbe9c8f700c9e59c36dcbc781eb08b8608a91605d004682bd6e8",
+    "tools/build/source-plan.json": "716cf17b8cf2bed8ad6a99a672b1856af4c5380842c95cb14b9a263a7bb42bc8",
+    "build/hybrid-goal-r1-subscriber-c/build-report.json": "ae5c6de58d937073b78749aa80d67474f4a09e01760bea5090d2e8542554cc2a",
+    "build/hybrid-goal-r1-subscriber-c/payloads/application.bin": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "r1/docs/reference/source-composition-review.json": "210074805bfba002a1beb9204d86a2ecbdc4b6ab512531123fd9015e82a8d7a9",
+    "build/goal-r1-subscriber-c/sources-before.json": "ae0d15d47a372a5e180792893c146b0c5339a1e9cb94b86e69ccd8ad174b10f1",
+    "build/goal-r1-subscriber-c/sync-before.c": "5a11a10e035d496456265f2ae5535b8a54b37e35cc951a205157b78b93217975",
+    "build/goal-r1-subscriber-c/consume-before.c": "36ba9943752cb33183eed49b77a315ebeada2b808aea51fc6e4c4e75b38e27b9",
+    "build/goal-r1-subscriber-c/multicast-before.c": "40f71ba2792abba6b15cb09d96ce2015fa6df6a3b12735082eb9373719c524f1",
+    "build/goal-r1-subscriber-c/REA.json": "c2f3953734270dbe4d80b2770f8895521c4b592267796988fc1ffa77e50cc461",
+    "build/goal-r1-subscriber-c/native-lock.dis": "409a8aba56181b24aadcf6a51b97fe61b8bb9abb38607af7160a059d38b01f3e",
+    "build/goal-r1-subscriber-c/native-unlock.dis": "75fdfd7655f32ecd6ec94d48834421694f53a5d72e8bc5280f4f8d87880fbcb9",
+    "build/goal-r1-subscriber-c/native-thread.dis": "f9fb940a3d03479ab8b1e98d5af253ecb42b5fc4095c9e496ef93f26eaa254e5",
+    "build/goal-r1-subscriber-c/native-consume.dis": "faddc667d8f3a2403bb28aa64c23c1c80166d89dfdd59737c747a5de4204311d",
+    "build/goal-r1-subscriber-c/verify.py": "4b9468e198239ba817d08dbf597a2d55f18f5ed844df3be9aeaccd16cf3b7292",
+    "build/goal-r1-subscriber-c/test.ld": "7e54379f83a7ed4ed89ddc80a03531dfc055765dce2fa3c7e5bfdbb4565020a0",
+    "build/goal-r1-subscriber-c/results.json": "ac93531ec2f9f9a7f95419025d6189bc139564c198a8e8a18f7b860fbea824fb",
+    "build/goal-r1-subscriber-c/initialization.py": "c69a3379e21af6ee46d662f98cb3350a3ee3def3d7839f70340622a48e15be25",
+    "build/goal-r1-subscriber-c/initialization-results.json": "b941c8fbc4022e974fd2bd0d41a6cd3c9615ff5adc4fef27452fbfb77a65fb35",
+    "build/goal-r1-subscriber-c/expanded-rw.bin": "87fdee392022fdbe23dd0daf3e859fb14f3ce26ba3e8403aab56dc9d9a913317",
+    "build/goal-r1-subscriber-c/negative.py": "3efd11a1b395a8643a29787d3fdbd5c8b0b67a3e10ad8dd2e3a71306396855ec",
+    "build/goal-r1-subscriber-c/negative-results.json": "e862814bce819a10222748dcfb9d22a7eb91550e6fbca86b1b0e69fe32be1774",
+    "build/goal-r1-subscriber-c/audit.py": "56b3b21495e4599933145d16864f8ca941e7b1983bfc0c6259099ddf0acc87aa",
+    "build/goal-r1-subscriber-c/audit-results.json": "d5f17c5189aa3cda860db9ba2a7616a1399b798e35650e7c4b69bfa7f7c1d9b2",
+    "build/goal-r1-subscriber-c/qualify.py": "510718c3dc162b9fc37419c6c65381cf7a1943f5a621d0222462e25924360840",
+    "build/goal-r1-subscriber-c/qualified/qualification.json": "db546878f1bd605030bf5524fe5546281dbd9dcf9bae8064f7296507e1529fbf",
+    "build/goal-r1-subscriber-c/qualified/source-plan.json": "225163c60cdf431cde1c16eee3f655457552711ef2dbaeae7de430d5961369b5",
+    "build/goal-r1-subscriber-c/sources-check.log": "0ed8139da4ca1d57a56242c3f04524ad9d4ab63edfffbff0ac609dc3cad66778"
+  }
+}

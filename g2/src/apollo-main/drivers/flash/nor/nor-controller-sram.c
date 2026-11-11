@@ -7,5 +7,8 @@
 
 _Static_assert(sizeof(uint32_t) == 4, "Apollo controller handle width");
 
-__asm__(".global g2_norflash_controller_handle_20074544\n"
-        ".set g2_norflash_controller_handle_20074544, 0x20074544\n");
+/* sim15: stock 0x20074544 is past the 17752-byte stock .data init image
+ * (.waves/init_20000000.bin), i.e. zero-initialized .bss, so an own zeroed
+ * word is equivalent; the raw address aliased an unrelated object here. */
+/* g2_norflash_controller_handle_20074544: stock 0x20074544 is one cell; defined as an alias of audio_uart_font_flash_device (Fix 31). */
+extern uint32_t g2_norflash_controller_handle_20074544;

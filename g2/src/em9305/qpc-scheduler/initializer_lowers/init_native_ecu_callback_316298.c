@@ -1,127 +1,50 @@
-/* Native ECU callback; arithmetic ISA and all error/return paths retained. */
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_ecu_callback_316298\n"
-".type opencfw_em9305_ecu_callback_316298,@function\n"
-"opencfw_em9305_ecu_callback_316298:\n"
-"L316298:\n"
-"enter_s [r13-r15,blink]\n"
-"L31629a:\n"
-"mov_s r13,0x802810\n"
-"L3162a0:\n"
-"ldh_s r14,[r13,0x12]\n"
-"L3162a2:\n"
-"ldh r11,[r13,16]\n"
-"L3162a6:\n"
-"ldh_s r12,[r13,0xc]\n"
-"L3162a8:\n"
-"ldh_s r3,[r13,0x14]\n"
-"L3162aa:\n"
-"cmp r14,500\n"
-"L3162ae:\n"
-"mov_s r8,r0\n"
-"L3162b0:\n"
-"blo_s L3162b6\n"
-"L3162b2:\n"
-"mov_s r2,0\n"
-"L3162b4:\n"
-"b_s L3162c6\n"
-"L3162b6:\n"
-"sub_s r1,r12,0x1\n"
-"L3162b8:\n"
-"mov_s r0,r11\n"
-"L3162ba:\n"
-"exth_s r2,r1\n"
-"L3162bc:\n"
-"setlo r0,r0,500\n"
-"L3162c0:\n"
-"setlo r2,r2,500\n"
-"L3162c4:\n"
-"and_s r2,r2,r0\n"
-"L3162c6:\n"
-"add r0,r11,0x1\n"
-"L3162ca:\n"
-"mpywhul r15,r0,r12\n"
-"L3162ce:\n"
-"mpyuw r9,r3,0xa\n"
-"L3162d2:\n"
-"cmp r15,501\n"
-"L3162d6:\n"
-"blt_s L3162dc\n"
-"L3162d8:\n"
-"mov_s r0,0\n"
-"L3162da:\n"
-"b_s L3162f6\n"
-"L3162dc:\n"
-"add r1,r3,0xfffff37f\n"
-"L3162e4:\n"
-"exth_s r1,r1\n"
-"L3162e6:\n"
-"setlo r0,r14,r12\n"
-"L3162ea:\n"
-"setlo r1,0xf388,r1\n"
-"L3162f2:\n"
-"and_s r0,r0,r1\n"
-"L3162f4:\n"
-"and_s r0,r0,r2\n"
-"L3162f6:\n"
-"ldh.as r1,[r8,133]\n"
-"L3162fa:\n"
-"lsr r2,r1,0x2\n"
-"L3162fe:\n"
-"bmsk.f 0,r1,0x1\n"
-"L316302:\n"
-"add_s r1,r1,r2\n"
-"L316304:\n"
-"add.ne r1,r1,0x1\n"
-"L316308:\n"
-"mpy_s r1,r1,r15\n"
-"L31630a:\n"
-"asl_s r1,r1\n"
-"L31630c:\n"
-"brlo.nt r9,r1,L316336\n"
-"L316310:\n"
-"breq_s r0,0,L316336\n"
-"L316312:\n"
-"ld.as r1,[r8,159]\n"
-"L316316:\n"
-"ldh_s r2,[r13,0xe]\n"
-"L316318:\n"
-"mov_s r0,r8\n"
-"L31631a:\n"
-"add r0,r0,846\n"
-"L31631e:\n"
-"bset_s r1,r1,0x1d\n"
-"L316320:\n"
-"sth.as r11,[r8,130]\n"
-"L316324:\n"
-"sth.as r9,[r8,191]\n"
-"L316328:\n"
-"sth_s r12,[r0,0]\n"
-"L31632a:\n"
-"sth_s r14,[r0,0x4]\n"
-"L31632c:\n"
-"sth_s r3,[r0,0x6]\n"
-"L31632e:\n"
-"sth_s r2,[r0,0x2]\n"
-"L316330:\n"
-"st.as r1,[r8,159]\n"
-"L316334:\n"
-"leave_s [r13-r15,blink,pcl]\n"
-"L316336:\n"
-"mov_s r0,0x805a86\n"
-"L31633c:\n"
-"ldb_s r0,[r0,0]\n"
-"L31633e:\n"
-"bbit0.d.t r0,0x5,L316334\n"
-"L316342:\n"
-"mov_s r1,0x73\n"
-"L316344:\n"
-"bl.d opencfw_em9305_receive_terminate_325c08\n"
-"L316348:\n"
-"mov_s r0,r8\n"
-"L31634a:\n"
-"leave_s [r13-r15,blink,pcl]\n"
-".size opencfw_em9305_ecu_callback_316298,.-opencfw_em9305_ecu_callback_316298\n"
-);
+#include <stdint.h>
+
+/* Native 0x316298..0x31634c: accept a pending connection-update request
+ * (0x80281c: interval min, +2 max, +4 latency, +6 timeout) when the
+ * latency and intervals are below 500, (latency+1) * interval is at most
+ * 500, the timeout (x10) lies in 10..3200 and exceeds twice the scaled
+ * interval budget of the record (+266 * 1.25, rounded up). An accepted
+ * request is stored at +846, +260 and +382 and flag bit 29 is set at +636;
+ * otherwise the link is terminated (0x73) when option bit 5 of 0x805a86 is
+ * set. */
+extern uint32_t opencfw_em9305_receive_terminate_325c08(uintptr_t source,
+                                                        uint32_t reason);
+
+static inline uint32_t r16(uintptr_t a){return *(volatile uint16_t *)a;}
+static inline void w16(uintptr_t a,uint32_t v){*(volatile uint16_t *)a=(uint16_t)v;}
+
+void opencfw_em9305_ecu_callback_316298(uintptr_t record)
+{
+    uint32_t latency=r16(0x802822u);
+    uint32_t maximum=r16(0x802820u);
+    uint32_t minimum=r16(0x80281cu);
+    uint32_t timeout=r16(0x802824u);
+    uint32_t ranges_ok;
+    if(latency>=500u)ranges_ok=0u;
+    else ranges_ok=((uint16_t)(minimum-1u)<500u)&(maximum<500u);
+    uint32_t span=(maximum+1u)*minimum;
+    uint32_t scaled_timeout=timeout*10u;
+    uint32_t accept;
+    if((int32_t)span>=501)accept=0u;
+    else accept=(latency<minimum)
+                &(0xf388u<(uint16_t)(timeout+0xfffff37fu))&ranges_ok;
+    uint32_t budget=r16(record+266u);
+    budget=budget+(budget>>2)+((budget&3u)!=0u?1u:0u);
+    budget=budget*span*2u;
+    if(scaled_timeout>=budget&&accept!=0u){
+        uint32_t flags=*(volatile uint32_t *)(record+636u);
+        uint32_t preferred=r16(0x80281eu);
+        uintptr_t update=record+846u;
+        w16(record+260u,maximum);
+        w16(record+382u,scaled_timeout);
+        w16(update,minimum);
+        w16(update+4u,latency);
+        w16(update+6u,timeout);
+        w16(update+2u,preferred);
+        *(volatile uint32_t *)(record+636u)=flags|0x20000000u;
+        return;
+    }
+    if((*(volatile uint8_t *)0x805a86u&0x20u)==0u)return;
+    (void)opencfw_em9305_receive_terminate_325c08(record,0x73u);
+}

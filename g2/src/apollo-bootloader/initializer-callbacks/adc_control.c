@@ -1,19 +1,15 @@
-/* Instruction-derived locked ADC control42ec0c..42ed60. Explicit scalar
- * FP operations retain original rounding, exception and lazy-cache ordering. */
+/* Instruction-derived locked ADC control42ec0c..42ed60. Each scalar FP
+ * operation is a separate C operation (VADD/VMUL, quiet VCMP for ==), so the
+ * stock per-operation rounding is kept; no multiply-add is formed. */
 #include "adc_control.h"
 #define R(a) (*(volatile uint32_t *)(uintptr_t)(a))
 #define B(a) (*(volatile uint8_t *)(uintptr_t)(a))
 static float as_float(uint32_t bits) {union {uint32_t bits;float value;} x={.bits=bits};return x.value;}
 static uint32_t as_bits(float value) {union {uint32_t bits;float value;} x={.value=value};return x.bits;}
-static float single_add(float left,float right) {
-    float result;__asm__ volatile("vadd.f32 %0, %1, %2" : "=t"(result) : "t"(left),"t"(right));return result;
-}
-static float single_multiply(float left,float right) {
-    float result;__asm__ volatile("vmul.f32 %0, %1, %2" : "=t"(result) : "t"(left),"t"(right));return result;
-}
-static uint32_t single_equal(float left,float right) {
-    uint32_t flags;__asm__ volatile("vcmp.f32 %1, %2\n\tvmrs APSR_nzcv, FPSCR\n\tmrs %0, APSR" : "=r"(flags) : "t"(left),"t"(right) : "cc");return (flags>>30)&1u;
-}
+static float single_add(float left,float right) {return left+right;}
+static float single_multiply(float left,float right) {return left*right;}
+/* Stock: VCMP then the APSR Z flag; Z is set only for ordered equality. */
+static uint32_t single_equal(float left,float right) {return left==right;}
 /* Stock 0x42EC0C (hw_config_dispatch_42ec0c; am_hal_adc_control) */
 __attribute__((noinline))
 uint32_t opencfw_bl_adc_configure(uint32_t context,uint32_t request,void *arguments) {

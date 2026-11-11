@@ -1,0 +1,439 @@
+{
+  "schema_version": 1,
+  "scope": "R1 SpO2 session, short-pair, session-channel and extended s16 queue initialization in C",
+  "report": "build/sources-goal-r1-goodix-spo2-session-c/report.json",
+  "comparison_report": "build/sources-goal-r1-goodix-spo2-initialize-c-final/report.json",
+  "acceptance_target": "Complete license-free C firmware with hardware support first; byte identity waived",
+  "stock_entries": [
+    {
+      "symbol": "r1_goodix_spo2_session_initialize",
+      "entry": "0x5cd90",
+      "size": 102
+    },
+    {
+      "symbol": "r1_goodix_spo2_short_pair_initialize",
+      "entry": "0x31914",
+      "size": 48
+    },
+    {
+      "symbol": "r1_goodix_spo2_initialize_session_channel",
+      "entry": "0x3df18",
+      "size": 104
+    },
+    {
+      "symbol": "r1_goodix_native_extended_s16_queue_initialize",
+      "entry": "0x6633a",
+      "size": 34
+    }
+  ],
+  "native_instruction_bytes": 288,
+  "audit": {
+    "compiled_units": 882,
+    "new_units": [
+      "r1/src/application/goodix/native_spo2_session_initialize.c"
+    ],
+    "shared_header": "r1/src/application/goodix/native_spo2_initialize.h",
+    "caller_declarations_corrected_without_machine_object_change": true,
+    "unchanged_other_prior_nongenerated_sources_and_objects": 870,
+    "differing_existing_generated_objects": [
+      "{gen}/r1_startup_vectors.S",
+      "{gen}/r1_uecc.c"
+    ],
+    "tested_object_equals_normal_build": true,
+    "application_imports": 64,
+    "bootloader_imports": 22,
+    "removed_imports": [
+      "r1_goodix_spo2_session_initialize",
+      "r1_goodix_spo2_short_pair_initialize"
+    ],
+    "added_imports": [],
+    "new_writable_state_bytes": 0,
+    "native_entries_verified": 4,
+    "actual_C_session_and_short_pair_and_queue_graph_execute": true,
+    "source_plan_and_cache_layout_unchanged": true
+  },
+  "direct": {
+    "source_object_sha256": "507f8e0db602ee67008460fc2f485d84fa340bef6bbf23a09bd035d1f9b629d5",
+    "paired_cases": 670,
+    "native_instruction_bytes_executed": [
+      102,
+      48,
+      104,
+      34
+    ],
+    "actual_C_float_and_base_s16_queue_providers_execute": true,
+    "allocator_modeled": true,
+    "all_allocation_words_and_record_images_and_divisor_read_order_match": true,
+    "independent_allocation_sequence_oracles": true,
+    "nonzero_signed_divisor_domain_only": true,
+    "source_cannot_execute_stock": true,
+    "BX_LR_allocator_returns": true,
+    "active_context_FPSCR_saved_registers_SP_masks_and_guards_checked": true
+  },
+  "actual_C_constructor": {
+    "source_object_sha256": "507f8e0db602ee67008460fc2f485d84fa340bef6bbf23a09bd035d1f9b629d5",
+    "paired_cases": 614,
+    "native_instruction_bytes_executed": [
+      128,
+      38,
+      28,
+      52,
+      62,
+      32,
+      52,
+      98,
+      50,
+      28,
+      48,
+      26,
+      26
+    ],
+    "actual_C_constructor_all_session_short_pair_and_queue_providers_execute": true,
+    "allocation_and_two_remaining_ports_modeled": [
+      "goodix_mem_malloc",
+      "r1_goodix_spo2_weights_get",
+      "r1_goodix_spo2_model_create"
+    ],
+    "complete_public_state_and_allocated_arena_match": true,
+    "independent_validation_and_helper_return_oracles": true,
+    "source_cannot_execute_stock": true,
+    "BX_LR_port_returns": true,
+    "active_FP_context_with_exact_FPSCR_and_saved_registers": true,
+    "model_owner_return_reloads_mutated_template_word": true,
+    "broad_copy_memory_hook_avoided_after_independent_probe": true,
+    "null_allocation_checks_are_logical_access_shape_only": true
+  },
+  "actual_C_heap_lifecycle": {
+    "lifecycle_cases": 128,
+    "constructor_and_complete_C_teardown_and_actual_C_heap_execute": true,
+    "remaining_two_model_resource_ports_modeled": true,
+    "actual_session_and_short_pair_allocate_all_buffers_and_model_is_null": true,
+    "complete_heap_and_owner_and_provider_snapshots_match": true,
+    "all_recovered_allocations_released_to_prior_top": true,
+    "broad_memory_write_hook_disabled_after_independent_copy_probe": true,
+    "source_object_sha256": "507f8e0db602ee67008460fc2f485d84fa340bef6bbf23a09bd035d1f9b629d5"
+  },
+  "compiled_defects_rejected": [
+    {
+      "name": "unsigned_division",
+      "compiled": true,
+      "rejected": true,
+      "case": {
+        "root": 2,
+        "window": 4294967295
+      }
+    },
+    {
+      "name": "missing_short_count_truncation",
+      "compiled": true,
+      "rejected": true,
+      "case": {
+        "root": 1,
+        "short_period": 4294967295
+      }
+    },
+    {
+      "name": "wrong_short_divisor",
+      "compiled": true,
+      "rejected": true,
+      "case": {
+        "root": 1,
+        "short_period": 5,
+        "period": 25
+      }
+    },
+    {
+      "name": "wrong_first_short_capacity",
+      "compiled": true,
+      "rejected": true,
+      "case": {
+        "root": 1
+      }
+    },
+    {
+      "name": "wrong_second_channel_offset",
+      "compiled": true,
+      "rejected": true,
+      "case": {
+        "root": 0
+      }
+    },
+    {
+      "name": "wrong_channel_window_extension",
+      "compiled": true,
+      "rejected": true,
+      "case": {
+        "root": 2
+      }
+    },
+    {
+      "name": "swap_last_channel_divisor",
+      "compiled": true,
+      "rejected": true,
+      "case": {
+        "root": 2,
+        "window": 5,
+        "period": 25
+      }
+    },
+    {
+      "name": "wrong_channel_first_capacity",
+      "compiled": true,
+      "rejected": true,
+      "case": {
+        "root": 2
+      }
+    },
+    {
+      "name": "wrong_last_session_element_size",
+      "compiled": true,
+      "rejected": true,
+      "case": {
+        "root": 0
+      }
+    },
+    {
+      "name": "wrong_extended_allocation_size",
+      "compiled": true,
+      "rejected": true,
+      "case": {
+        "root": 3
+      }
+    },
+    {
+      "name": "truncate_extended_alloc_count",
+      "compiled": true,
+      "rejected": true,
+      "case": {
+        "root": 3,
+        "length": 65536
+      }
+    },
+    {
+      "name": "missing_extended_mode",
+      "compiled": true,
+      "rejected": true,
+      "case": {
+        "root": 3,
+        "mode": 255
+      }
+    },
+    {
+      "name": "wrong_extended_index",
+      "compiled": true,
+      "rejected": true,
+      "case": {
+        "root": 3,
+        "provided": true
+      }
+    },
+    {
+      "name": "overwrite_short_reserved_gap",
+      "compiled": true,
+      "rejected": true,
+      "case": {
+        "root": 1
+      }
+    },
+    {
+      "name": "cache_window_before_allocator",
+      "compiled": true,
+      "rejected": true,
+      "case": {
+        "root": 2,
+        "mutation": 1,
+        "at": 1,
+        "replacement": 7
+      }
+    },
+    {
+      "name": "cache_short_divisor_before_allocator",
+      "compiled": true,
+      "rejected": true,
+      "case": {
+        "root": 1,
+        "mutation": 3,
+        "at": 1,
+        "replacement": 7
+      }
+    }
+  ],
+  "contract": [
+    "Initialize two100-byte channel groups at offsets0 and100, three125-element float records at200/216/232 and one125-element extended s16 record at248. Preserve reserved gaps.",
+    "Each channel initializes capacities25, live window+12,25,1, signed125/window and signed125/period at0/16/32/48/64/84. Allocation receives full32-bit quotient/count; metadata fields truncate to16 bits.",
+    "Short pair writes zero header, initializes125 s16 elements at+4, then reads the live divisor and truncates signed125/divisor to16 bits before passing it to the second s16 queue at+16.",
+    "Extended queue allocates count*2 with32-bit wrapping only when buffer is null, then writes pointer/index/capacity/flags and low-byte mode in native order; returns0.",
+    "A shared header corrects the caller declarations to the verified word-return API without changing its machine object. No duplicate native implementation or new state owner."
+  ],
+  "limits": [
+    "The670 direct comparisons execute all288 native instruction bytes and actual C float/base-s16 queue providers. Allocator is modeled; complete allocation words, public record images, provider snapshots and divisor read order compare, with independent mathematical allocation-sequence oracles.",
+    "Only nonzero signed divisors are admitted. The existing descriptor builder unconditionally supplies5/25/25 for the known constructor path. Zero-divisor malformed descriptors and CCR divide-trap behavior are outside this API proof; no fallback behavior is asserted.",
+    "Signed extreme nonzero divisors and full-width counts are symbolic allocation-boundary checks, not proof that large/negative allocations are physically valid. Null allocation models verify resulting metadata behavior; real allocator failure is nonreturning and remains governed by its separate receipt.",
+    "The614-case constructor replay executes the actual new session/short-pair graph with only allocation, weights getter and model creation modeled. The128 real-C-heap lifecycle cases execute all recovered session and short-pair allocations, constructor and complete teardown; only weights/model resource ports remain modeled and model creation returns null. All recovered allocations coalesce back to the prior top.",
+    "Prior same-ELF copy-probe evidence governs instrumentation: scoped owner observation and full memory comparisons avoid the broad Unicorn write-hook discrepancy. No new broad write trace is claimed. Active FP context is primed; exact FPSCR, saved integer/FP registers, SP, masks and guards compare. Cold activation, concurrency, invalid pointers, caller scratch/APSR/private frames are excluded.",
+    "Source cannot execute stock; modeled ports return through BX LR. No executable opcode arrays or firmware traps are added to C.",
+    "All870 other prior nongenerated source/object pairs remain unchanged, and the corrected caller machine object is also unchanged. Tested new/constructor objects equal the normal882-unit build; no new writable state or imports. Application imports fall66 to64; boot remains22.",
+    "Weights getter and model construction, other algorithm constructors and hardware dependencies, final executable linking/startup, physical sensors and boot remain open. Relocatable composition is not bootable firmware; no instruction or image identity is claimed."
+  ],
+  "evidence_files": {
+    "build/sources-goal-r1-goodix-spo2-session-c/report.json": "8991d34b90d57d9b15926020f6fb4bf41a30952b641d5e0df1eda481ab1bd282",
+    "build/sources-goal-r1-goodix-spo2-initialize-c-final/report.json": "176ea97b789cfa4a1355248611fccd515a12a488c9547cb8613cb00126ba9769",
+    "r1/src/application/goodix/native_spo2_session_initialize.c": "30127da0d135b26a6459f6af4a85a96b1d08a55d6bec6ff09fdfbdf8522dfeae",
+    "r1/src/application/goodix/native_spo2_initialize.c": "41e6290e411795ade2bb7b0c9b3aa3b30678483bfb7b3b2c86e3e25d79908c82",
+    "r1/src/application/goodix/native_spo2_initialize.h": "21dac989f4904e1c1924e0fe994b482c3ed5987fd9dacc8a8b0daf2b655456a4",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-spo2-session-c/r1/r1-application/r1__src__application__goodix__native_spo2_session_initialize.c.o": "507f8e0db602ee67008460fc2f485d84fa340bef6bbf23a09bd035d1f9b629d5",
+    "r1/src/sources.json": "536d44301b84a981dbd36c00876b96963294cdb91d4a2db2d29f599e4bc9375e",
+    "tools/build/source-plan.json": "eeb516e31b3310fb0718f36908977f8125723f7c5e0e86cd6744395826259a4d",
+    "r1/src/config/runtime/native_health_cache.ld": "eb8f131c489cd818d4e36718718fa1989719ca0170f164541a1a5bf56dfc1ec3",
+    "r1/docs/reference/FUNCTION-OWNERSHIP.csv": "8e6dd6df949bb0b5fffa78b4439c311ad474176279164f3524f9c5d15426d867",
+    "r1/symbols/function-frontier.csv": "aab5c6c09f83ba4da2ddd85f1422531800ad82442ddf9c1b184519d6e5d37bc3",
+    "r1/docs/reference/goodix-spo2-initialize-c-review.md": "aed68d083e34f49f85efdb88e0f59aefa34c6f71ed90bef1dd1f406b86c38f25",
+    "build/goal-r1-goodix-native-heap-init-c/fill.o": "5b9881f48c6329da35510eb6b3f4be65d3c31bab24e2f6ab7d5713597d06c391",
+    "r1/src/vendor/goodix_primitives/goodix_primitives.c": "6ba3fff7701c90db05c8700e5b27d9cdbca327887deb92a9cef2bda03c5bf75b",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-spo2-session-c/r1/r1-application/r1__src__vendor__goodix_primitives__goodix_primitives.c.o": "a3721ecc5551d066cba889dc052bc3c2c2343c69683909c89ddc9a1f3b0a84b5",
+    "third-party/upstream/musl-memmove-1.2.5/memmove.c": "1304f9ddfc18594f5d9a84691892b9fdaf3be8ecc6d7f365c691abb138eaf74e",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-spo2-session-c/r1/r1-application/third-party__upstream__musl-memmove-1.2.5__memmove.c.o": "4a6ccefb180ef4af2cfe631f54df4d6f629d1b3a2d374911c00b25c107bcb723",
+    "third-party/upstream/musl-memory-1.2.5/memcpy.c": "1664d565f968b053ac33c5ac615c057a255a5821c8fa510fba61d4f63dee08e9",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-spo2-session-c/r1/r1-application/third-party__upstream__musl-memory-1.2.5__memcpy.c.o": "a4b54c7315f7ca2f8097e3f9afb4a9bcd7860c75649fc9e185d951c3ea0696cf",
+    "third-party/upstream/musl-memory-1.2.5/memset.c": "2a74d9e7f988945e0d691d480b78d77a228da0d2be401c1000637cc879b2c0be",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-spo2-session-c/r1/r1-application/third-party__upstream__musl-memory-1.2.5__memset.c.o": "6c2f1a8f480c27d5bc20f79ac535dac28fbbdcaec12e69bad96721f724ec9057",
+    "third-party/upstream/musl-memory-1.2.5/strcmp.c": "3e1793ea2dd358e5c884c4dd232083605d0f6775f7ebe19d03d64fe97068a78f",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-spo2-session-c/r1/r1-application/third-party__upstream__musl-memory-1.2.5__strcmp.c.o": "d2d1444d824aed4070fa9271ff54cbd83bd5390686232894dbad3c3a36189e3d",
+    "r1/src/application/goodix/native_heap_init.c": "c3085064866b23d603697918b6dfdd29f66ab68c7e82cb1f3e10443c80e3f8b6",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-spo2-session-c/r1/r1-application/r1__src__application__goodix__native_heap_init.c.o": "d25f87d5c62ab05f6d5e4d73cc1de5afacf8300a5f1286735b75c9715c30063c",
+    "r1/src/application/goodix/native_heap_free.c": "175cf893ee4b475bee0a886d69522782ac879dd0b29c43285d957c03fb4dc7c4",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-spo2-session-c/r1/r1-application/r1__src__application__goodix__native_heap_free.c.o": "bc333928ee0e42aaf0a0446eb69f4ff0528fd2f27737d5ed1744ed750b807022",
+    "r1/src/application/goodix/native_heap_allocate.c": "2806f3ca4f9074b157b390edf8bd03815a46b31f1661e1ed238a0938c666d8c9",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-spo2-session-c/r1/r1-application/r1__src__application__goodix__native_heap_allocate.c.o": "129b40a4930e85990e0ba9503f83bbc867460580ef323f2a6dfa2476e7dad685",
+    "r1/src/application/goodix/native_heap_malloc.c": "1b827deb8981088d68fae260af0aa442a7315d4aaaa7f2ed8a248c859878a0c3",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-spo2-session-c/r1/r1-application/r1__src__application__goodix__native_heap_malloc.c.o": "977cb669d0ca7b16102f67629d38c362cd2c47fba05cb890577e367a4f9d0138",
+    "r1/src/application/goodix/native_record_teardown.c": "b7cea98e79bac3f8c5d80bc58c59e81840d7e9b8b9267429e83c4ebb981bbf45",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-spo2-session-c/r1/r1-application/r1__src__application__goodix__native_record_teardown.c.o": "785df1baa1e96a2723aa03debb90b5dc7bfa44a1e76283a79645968876cec4de",
+    "r1/src/application/goodix/native_spo2_teardown.c": "9ae3cfae4ef6fd1cfcdaa5a0bc1dda0ff036c336436e5b2217d217fff632003f",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-spo2-session-c/r1/r1-application/r1__src__application__goodix__native_spo2_teardown.c.o": "2df10a24911f72ece7ad1da5bc944e9994cfcfaa1357c3404f19ba13e503ecab",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-spo2-session-c/r1/r1-application/r1__src__application__goodix__native_spo2_initialize.c.o": "416f2e823ae3edd838065709e40b06eaa5b9648ad2462237656ffdf5b212b129",
+    "build/goal-r1-goodix-spo2-session-c/audit.json": "c88b68dae154588cf6f17acce203ad4fef6e4f80d777d929d5abef0fbd87619e",
+    "build/goal-r1-goodix-spo2-session-c/heap.py": "d9007598b079377b04f85b00355807373cf95e977be0f2dbcf19f8e33bad2c1a",
+    "build/goal-r1-goodix-spo2-session-c/verify.log": "45de2138e4086899f9810d5e648c9959a12ed0e77f17ba98b7aaa18aa352d657",
+    "build/goal-r1-goodix-spo2-session-c/initializer.d": "30182ae3bc40c56638f91434a62dbb6c51917871ac49edba7eb88c14b94d8039",
+    "build/goal-r1-goodix-spo2-session-c/audit.py": "34a3b4d63294d1dc31f7ab5eb450e0115a284ec030ff573e2a48f1b6c5417a57",
+    "build/goal-r1-goodix-spo2-session-c/entries.json": "b98849fe31e6675cec1da9f017291611189114aa116e5be8a30bb4d7f15b5276",
+    "build/goal-r1-goodix-spo2-session-c/constructor.py": "ac227be121ea4503df9fc2eca5923e171afeafe8e8fa2b2c3a6c8c0502827f4d",
+    "build/goal-r1-goodix-spo2-session-c/source.elf": "74c4e044c7802e9bffb6f31bb8c3e8b8c55aece764ccd2a3f5357b6c54d2d2c3",
+    "build/goal-r1-goodix-spo2-session-c/negative.py": "52311daaa29f2a09a83fb61adb479d61d2116f1603340af6fbae0dc2f9a0c8ff",
+    "build/goal-r1-goodix-spo2-session-c/negative-results.json": "cc856a92c316ae066caf152cf14d75a796f17931b8b7eac805c21563fc3b79fc",
+    "build/goal-r1-goodix-spo2-session-c/source.o": "507f8e0db602ee67008460fc2f485d84fa340bef6bbf23a09bd035d1f9b629d5",
+    "build/goal-r1-goodix-spo2-session-c/results.json": "dc74755494d33fb16182746df50ef9faf7acd57c76a2b169f16dd3df44a1bd1c",
+    "build/goal-r1-goodix-spo2-session-c/initializer.o": "416f2e823ae3edd838065709e40b06eaa5b9648ad2462237656ffdf5b212b129",
+    "build/goal-r1-goodix-spo2-session-c/compile-argv.json": "40743ba473c9490df4b87cbbd6dffa0d3681a76793cbe07d7b4f567fcde3feb8",
+    "build/goal-r1-goodix-spo2-session-c/manifest-before.json": "df0d796e1ed5381b10b2a843611665f86f5a0588329429b239038a908f3329f8",
+    "build/goal-r1-goodix-spo2-session-c/source.d": "b45d3d6c483e2ee70471889aa11974ec3c52d772ebb198ff08e7894945df5c6c",
+    "build/goal-r1-goodix-spo2-session-c/verify.py": "e26b98722fee5bca7048c974d1e7acbe793defc557f8376f1975e622481fc180",
+    "build/goal-r1-goodix-spo2-session-c/initialize-before.c": "4853d8de0da09156ffaa5d22940152f88ac6e215a0c31d84290ab33e1f7e176b",
+    "build/goal-r1-goodix-spo2-session-c/build.log": "a07ef9ba28ebed3c48268fd2bc1a3520406bff941588e9802d42329bfcafe8e9",
+    "build/goal-r1-goodix-spo2-session-c/constructor/verify.log": "01fdfd6f17b740b645573237bbc6bf49f967c9e0e830d19aea8a201f9679dd35",
+    "build/goal-r1-goodix-spo2-session-c/constructor/test.ld": "e1fabde4096b019fc49bc372fb86cc3b392c05e05ec07090cda86f8153a6063b",
+    "build/goal-r1-goodix-spo2-session-c/constructor/source.elf": "02066a305cace2ce4e8713bf900086aa7651b27b127ff7510c18fb08d8ffd9bc",
+    "build/goal-r1-goodix-spo2-session-c/constructor/results.json": "1b3e3ee52c4cfc990dbdcd0d698887b6e632c0670a3252fdce73c5c83ac55202",
+    "build/goal-r1-goodix-spo2-session-c/heap/verify.log": "c809bcf3cf9ab3a4b70c575fdc9efe36fe71e7a30392bdf75e4ec17079c207e1",
+    "build/goal-r1-goodix-spo2-session-c/heap/test.ld": "f1169785ba906d75bb7f54716784a141fa1f843b5737d8893234059a8ff2ea58",
+    "build/goal-r1-goodix-spo2-session-c/heap/source.elf": "a5fb39a33d269b25aa10694628fedcec62b90e9822ba90354a8fd4d620110a13",
+    "build/goal-r1-goodix-spo2-session-c/heap/results.json": "e4e9da62eb3a73d98c270085f0546eda0569a8615ac8d2bdf850ff07821492a6",
+    "build/goal-r1-goodix-spo2-session-c/negative-unsigned_division/candidate.c": "f32d291351129ae2dd636476c1cbd96ee0d3a95ac5050697f0f97b5e7672117b",
+    "build/goal-r1-goodix-spo2-session-c/negative-unsigned_division/verify.log": "6553a449f1fd35518aaee9fce9859c97c9e861255d856ed41f8d1d920f59befa",
+    "build/goal-r1-goodix-spo2-session-c/negative-unsigned_division/source.elf": "d978c1aa015929e151ba067727c453752055deb38f02a2b0be1e87d6e83ff7ea",
+    "build/goal-r1-goodix-spo2-session-c/negative-unsigned_division/source.o": "6214ed1632e3353739fa53fbc8af0306d6b80cb096a6f2b323358efeb4f179fe",
+    "build/goal-r1-goodix-spo2-session-c/negative-unsigned_division/compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/goal-r1-goodix-spo2-session-c/negative-unsigned_division/source.d": "d0174d1ea98290777e53413d1174a252117c41b34ae89dc19aa340644487ebb0",
+    "build/goal-r1-goodix-spo2-session-c/negative-missing_short_count_truncation/candidate.c": "163f4bb211bc8d5250b287cfc5e70c9605dc25017779bb3fd495426850ad7d2c",
+    "build/goal-r1-goodix-spo2-session-c/negative-missing_short_count_truncation/verify.log": "6553a449f1fd35518aaee9fce9859c97c9e861255d856ed41f8d1d920f59befa",
+    "build/goal-r1-goodix-spo2-session-c/negative-missing_short_count_truncation/source.elf": "6ace073fdc84d4598291fa962d6c1b724899a91c04dc512af6f5e5dbdc80f153",
+    "build/goal-r1-goodix-spo2-session-c/negative-missing_short_count_truncation/source.o": "531cd3458b301ae223d3b7d427aa48b0c9609b6eb9b028a7434788720e38c7d5",
+    "build/goal-r1-goodix-spo2-session-c/negative-missing_short_count_truncation/compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/goal-r1-goodix-spo2-session-c/negative-missing_short_count_truncation/source.d": "9111777aa3af113cac4f9b596a89fd3a2e7614d50fa8eafe9f60d9d354e09b89",
+    "build/goal-r1-goodix-spo2-session-c/negative-wrong_short_divisor/candidate.c": "bb061a4bbfe18a9a93fe9248c8dde83d3b95d56aea9beaabdaf1cdf2241e7399",
+    "build/goal-r1-goodix-spo2-session-c/negative-wrong_short_divisor/verify.log": "6553a449f1fd35518aaee9fce9859c97c9e861255d856ed41f8d1d920f59befa",
+    "build/goal-r1-goodix-spo2-session-c/negative-wrong_short_divisor/source.elf": "5fe6234d45716a43c51f470a93c2dcebae86346367a0c16e50545d771230e381",
+    "build/goal-r1-goodix-spo2-session-c/negative-wrong_short_divisor/source.o": "72e9317f088b5943e71d049e07aae211dbfa58a16e29b3dff94688bbc7da09df",
+    "build/goal-r1-goodix-spo2-session-c/negative-wrong_short_divisor/compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/goal-r1-goodix-spo2-session-c/negative-wrong_short_divisor/source.d": "5552448d0f1a4a5e72e9c4b8cc4490a5359c5b4c58f5bffbb6cc7e1743ecb2c4",
+    "build/goal-r1-goodix-spo2-session-c/negative-wrong_first_short_capacity/candidate.c": "2be5ca6ffda7fa0d7e3287afbb8ca8700b89644cf160976b5fa11df108520c8c",
+    "build/goal-r1-goodix-spo2-session-c/negative-wrong_first_short_capacity/verify.log": "6553a449f1fd35518aaee9fce9859c97c9e861255d856ed41f8d1d920f59befa",
+    "build/goal-r1-goodix-spo2-session-c/negative-wrong_first_short_capacity/source.elf": "9ce05f7490df1b27195e0cce316673d5144ca12a995deb03882da3d22174760b",
+    "build/goal-r1-goodix-spo2-session-c/negative-wrong_first_short_capacity/source.o": "875fa310345863357567d8293e8fe7b71e4ea691ea47455483fd9adf67b569ff",
+    "build/goal-r1-goodix-spo2-session-c/negative-wrong_first_short_capacity/compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/goal-r1-goodix-spo2-session-c/negative-wrong_first_short_capacity/source.d": "9c689c900d1ff77fe1103527d198ba7ba97356788a411d71e6a9940ee0a9624c",
+    "build/goal-r1-goodix-spo2-session-c/negative-wrong_second_channel_offset/candidate.c": "e36d153001ca33b26d70dcddd6f0d5646a8c5bdf8baf3f8aee1a68f319d0b215",
+    "build/goal-r1-goodix-spo2-session-c/negative-wrong_second_channel_offset/verify.log": "495098e1fdf07f25e745dfc16ec74d989fde3d41d1519d03e874ddce7de999bb",
+    "build/goal-r1-goodix-spo2-session-c/negative-wrong_second_channel_offset/source.elf": "60be68ed6b9e70d0d8dba5090ee2042740c73ec5ea87e736cda5ee8b1ce29915",
+    "build/goal-r1-goodix-spo2-session-c/negative-wrong_second_channel_offset/source.o": "6885ab30e03bf617b5005ebc716a87cd0d61dc850d0d4ca50bb28dc9178a5930",
+    "build/goal-r1-goodix-spo2-session-c/negative-wrong_second_channel_offset/compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/goal-r1-goodix-spo2-session-c/negative-wrong_second_channel_offset/source.d": "2868c5d355680a131c6cef9807d905cf55d8b41a696055fdc450d28cc3ccc8b0",
+    "build/goal-r1-goodix-spo2-session-c/negative-wrong_channel_window_extension/candidate.c": "6bf4ffb7fc9e4ac05b4fe911a531b82faae4689b5190ab6b3d6fd58ad36139d3",
+    "build/goal-r1-goodix-spo2-session-c/negative-wrong_channel_window_extension/verify.log": "6553a449f1fd35518aaee9fce9859c97c9e861255d856ed41f8d1d920f59befa",
+    "build/goal-r1-goodix-spo2-session-c/negative-wrong_channel_window_extension/source.elf": "e696b64c7247affdafc3d5a1244c77c8678f0237c0886f83dedc03d7d9357a30",
+    "build/goal-r1-goodix-spo2-session-c/negative-wrong_channel_window_extension/source.o": "93941e397b6c4e58c21f819d7bb4f421079b5dd42eb68b8f84570d7bdd06c9ca",
+    "build/goal-r1-goodix-spo2-session-c/negative-wrong_channel_window_extension/compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/goal-r1-goodix-spo2-session-c/negative-wrong_channel_window_extension/source.d": "1a711af36e1dee39d8423aaf3888449bad7ebdcab62d56c8011ce79ed7e699dc",
+    "build/goal-r1-goodix-spo2-session-c/negative-swap_last_channel_divisor/candidate.c": "628598691c4277773156d63a955d846213c9734e43274cd0c8f73929b3ce4415",
+    "build/goal-r1-goodix-spo2-session-c/negative-swap_last_channel_divisor/verify.log": "6553a449f1fd35518aaee9fce9859c97c9e861255d856ed41f8d1d920f59befa",
+    "build/goal-r1-goodix-spo2-session-c/negative-swap_last_channel_divisor/source.elf": "4355c106295fa946fd37173a8ce2be4c36dd4efae376410a8d629c1104b91db0",
+    "build/goal-r1-goodix-spo2-session-c/negative-swap_last_channel_divisor/source.o": "4fbcbaec384af13c216ada1e7b871cbf8693d7dc4d57f9dddce8cc7eab845978",
+    "build/goal-r1-goodix-spo2-session-c/negative-swap_last_channel_divisor/compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/goal-r1-goodix-spo2-session-c/negative-swap_last_channel_divisor/source.d": "2e836b4ee566e4dbfcd91357e44f31e829533756e64cf8cd2cfc5ba875fdd835",
+    "build/goal-r1-goodix-spo2-session-c/negative-wrong_channel_first_capacity/candidate.c": "a6165c7a552219db06245f833659bfd4def5f675b008afeef98bca04cbef4599",
+    "build/goal-r1-goodix-spo2-session-c/negative-wrong_channel_first_capacity/verify.log": "6553a449f1fd35518aaee9fce9859c97c9e861255d856ed41f8d1d920f59befa",
+    "build/goal-r1-goodix-spo2-session-c/negative-wrong_channel_first_capacity/source.elf": "5fe144491c59798630a6065c7085133632b28543e8dcdf2e2aea4078351259a6",
+    "build/goal-r1-goodix-spo2-session-c/negative-wrong_channel_first_capacity/source.o": "7c9b05b2235113dfcb2e236873ec87e18dd3f0bdfa0988e81842e982cfe4ccff",
+    "build/goal-r1-goodix-spo2-session-c/negative-wrong_channel_first_capacity/compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/goal-r1-goodix-spo2-session-c/negative-wrong_channel_first_capacity/source.d": "2dfd4b44bea4a68dab4e880166b5c79d78b443583361a1d7714dd1921e5e1faa",
+    "build/goal-r1-goodix-spo2-session-c/negative-wrong_last_session_element_size/candidate.c": "d6a2deb32f1390c8bd54af340ba6e10f0ae142d046bf71ac0171ae5e90f300b9",
+    "build/goal-r1-goodix-spo2-session-c/negative-wrong_last_session_element_size/verify.log": "c23eac8e678015bd8ad8a0e4890e33f80a88996486444616ba46a665a53c2c79",
+    "build/goal-r1-goodix-spo2-session-c/negative-wrong_last_session_element_size/source.elf": "0d96359ab5dc9f48e92b82f16613b0a06192e3d73f023a3db8890f7f3f1b7671",
+    "build/goal-r1-goodix-spo2-session-c/negative-wrong_last_session_element_size/source.o": "3eccafc347daa7103393469fdb81d8d7ff9af49367e7720249f7b4e0b31fe60f",
+    "build/goal-r1-goodix-spo2-session-c/negative-wrong_last_session_element_size/compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/goal-r1-goodix-spo2-session-c/negative-wrong_last_session_element_size/source.d": "97a44b8a2d27455af9ccdb444ef50b2bbd90d8f06ebd1a5de68c50d01b5a9414",
+    "build/goal-r1-goodix-spo2-session-c/negative-wrong_extended_allocation_size/candidate.c": "b563116e89645823927c5528ef49d02b7699bbf17cd3a026737ea843d8922c11",
+    "build/goal-r1-goodix-spo2-session-c/negative-wrong_extended_allocation_size/verify.log": "6553a449f1fd35518aaee9fce9859c97c9e861255d856ed41f8d1d920f59befa",
+    "build/goal-r1-goodix-spo2-session-c/negative-wrong_extended_allocation_size/source.elf": "6360ec3ab4595093a2abeb685800a95f4c057cd04b5dba8b7a9f462416aee05e",
+    "build/goal-r1-goodix-spo2-session-c/negative-wrong_extended_allocation_size/source.o": "1ab8ff2a4ed031bd69962fc04ec657783303f4d98f0b350e631da4cb8e9096fe",
+    "build/goal-r1-goodix-spo2-session-c/negative-wrong_extended_allocation_size/compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/goal-r1-goodix-spo2-session-c/negative-wrong_extended_allocation_size/source.d": "e5dce9a652b653c742a7b88e7e4edd8457354820d9f401d91246756a59e630f2",
+    "build/goal-r1-goodix-spo2-session-c/negative-truncate_extended_alloc_count/candidate.c": "5a631afd23e2aad1035f47958f78627a6a7d185dcb6d1c0215278898244c3b5d",
+    "build/goal-r1-goodix-spo2-session-c/negative-truncate_extended_alloc_count/verify.log": "6553a449f1fd35518aaee9fce9859c97c9e861255d856ed41f8d1d920f59befa",
+    "build/goal-r1-goodix-spo2-session-c/negative-truncate_extended_alloc_count/source.elf": "6a6d34b2eb7aa2f9d24890673c697193f4b6a6fca81c466e519980d7541502a2",
+    "build/goal-r1-goodix-spo2-session-c/negative-truncate_extended_alloc_count/source.o": "dc32a9414d79a5e125d5056f876dc7712c6cfe7dfd870cfcf318b80a2d1c5efd",
+    "build/goal-r1-goodix-spo2-session-c/negative-truncate_extended_alloc_count/compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/goal-r1-goodix-spo2-session-c/negative-truncate_extended_alloc_count/source.d": "0d7660a22594c132040b2ec03a82b32bbecafb4a31574494ea22382fea1aed74",
+    "build/goal-r1-goodix-spo2-session-c/negative-missing_extended_mode/candidate.c": "cfc15c6a482335f0b977144a51f01b165e0dd52769bf8efd38b2590aceba37ae",
+    "build/goal-r1-goodix-spo2-session-c/negative-missing_extended_mode/verify.log": "955b6dac954d8b7f7bc811ac28f6752e05c72275b8e2420eb69b02a83fb0e327",
+    "build/goal-r1-goodix-spo2-session-c/negative-missing_extended_mode/source.elf": "b2781a41fecf96e57b4bac63d6337416b900e4c4623b12303d118c3fb42da796",
+    "build/goal-r1-goodix-spo2-session-c/negative-missing_extended_mode/source.o": "465ab90ae00e0744f723b2d0b85b367dbb80ff607d293f540b8a676944272824",
+    "build/goal-r1-goodix-spo2-session-c/negative-missing_extended_mode/compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/goal-r1-goodix-spo2-session-c/negative-missing_extended_mode/source.d": "8244785f2925ab72785d844721aaa92cb634e20934f69206c1ef48de77677854",
+    "build/goal-r1-goodix-spo2-session-c/negative-wrong_extended_index/candidate.c": "a34392ee223da58355ff3f8a404f3c3bcd9ff32dbd66d831d81e5247d60246be",
+    "build/goal-r1-goodix-spo2-session-c/negative-wrong_extended_index/verify.log": "7b6e7e6aa6ce65438cf5213c511cff22cf3b8f897b53ac48de0f690d9e77aac4",
+    "build/goal-r1-goodix-spo2-session-c/negative-wrong_extended_index/source.elf": "a41f3a2ed67a50ac87f7c8ba9c4d6eda6f1002d4dc1e311f89cee9e8f7b16a5c",
+    "build/goal-r1-goodix-spo2-session-c/negative-wrong_extended_index/source.o": "6d786a1546f049c123ceba71d6578fa2051ec81fb6d5e4dbb2a3a64f2725f50e",
+    "build/goal-r1-goodix-spo2-session-c/negative-wrong_extended_index/compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/goal-r1-goodix-spo2-session-c/negative-wrong_extended_index/source.d": "4e05b1cbe3dcd1acf7c00dce4db9aec079f82456936239e9d87c22558e7bc6f4",
+    "build/goal-r1-goodix-spo2-session-c/negative-overwrite_short_reserved_gap/candidate.c": "322a94a9a376834af90386c500d8c422dbbd5d47fae96331dfb85d15de4240e1",
+    "build/goal-r1-goodix-spo2-session-c/negative-overwrite_short_reserved_gap/verify.log": "1f2b8a111ea08d897071dec9230179da0d77c4f7f2424b8497d1febb53173afc",
+    "build/goal-r1-goodix-spo2-session-c/negative-overwrite_short_reserved_gap/source.elf": "756bfad91dd18c886c7702226f2c88c70470201fc8880fff36eb35fadd305d75",
+    "build/goal-r1-goodix-spo2-session-c/negative-overwrite_short_reserved_gap/source.o": "cbb8d35763f0333ef0d9c80ba32521ec252232c9591c01a1fee508e2779ce9cc",
+    "build/goal-r1-goodix-spo2-session-c/negative-overwrite_short_reserved_gap/compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/goal-r1-goodix-spo2-session-c/negative-overwrite_short_reserved_gap/source.d": "b3eb2c46626c52326d17635f16dece7494a8763ca6689f8ad005e7c88c44cc6f",
+    "build/goal-r1-goodix-spo2-session-c/negative-cache_window_before_allocator/candidate.c": "a947ab56c599ec138593f372fe68a33e4efb7590e77c188225e54fabde7c13e2",
+    "build/goal-r1-goodix-spo2-session-c/negative-cache_window_before_allocator/verify.log": "4850fa5b27155a19fdbf6d5178648716ca421370f0a4a8aa026cf15c84ef4c07",
+    "build/goal-r1-goodix-spo2-session-c/negative-cache_window_before_allocator/source.elf": "211886ca6ad4dbbfb9d86ab2d5487766ea623ed8636e6d48a6e7e9bdaa5db55f",
+    "build/goal-r1-goodix-spo2-session-c/negative-cache_window_before_allocator/source.o": "6e66cbbcc5d53aa62a6f995ee37e9672ce97404497f8eef66afcded9ed595c18",
+    "build/goal-r1-goodix-spo2-session-c/negative-cache_window_before_allocator/compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/goal-r1-goodix-spo2-session-c/negative-cache_window_before_allocator/source.d": "bcbe5834bdefb298ae83fe0b7135a5573432ea44a8a04a23adaf1922ea6f56e8",
+    "build/goal-r1-goodix-spo2-session-c/negative-cache_short_divisor_before_allocator/candidate.c": "856477b02ebffe175cf6fdf021e71dae32efa23d03babfa62278987389d6a7b4",
+    "build/goal-r1-goodix-spo2-session-c/negative-cache_short_divisor_before_allocator/verify.log": "2e32a08121e9cdfb75d7ea798391bbc576236b939b2a7018b85dba08425ee8a6",
+    "build/goal-r1-goodix-spo2-session-c/negative-cache_short_divisor_before_allocator/source.elf": "cb07fc658a9fa633f1b12e93969d2d9135da8183c376a998fe724fcbb87247ba",
+    "build/goal-r1-goodix-spo2-session-c/negative-cache_short_divisor_before_allocator/source.o": "94b6feb7a67be68d7f68880c9da9ba92813664d2562e17144d05d741da443bad",
+    "build/goal-r1-goodix-spo2-session-c/negative-cache_short_divisor_before_allocator/compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/goal-r1-goodix-spo2-session-c/negative-cache_short_divisor_before_allocator/source.d": "42d9d796df9d64f761713e1b04ca1d33cca07804978fc171941c207fac414400"
+  }
+}

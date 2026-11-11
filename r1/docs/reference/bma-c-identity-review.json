@@ -1,0 +1,127 @@
+{
+  "cases": 2562,
+  "passed": 2562,
+  "failures": [],
+  "stock_entry": "0x53b2c",
+  "stock_body_bytes": 160,
+  "source_body_bytes": 162,
+  "callback_stack_depth_pairs": [
+    [
+      [
+        -24
+      ],
+      [
+        -24
+      ]
+    ],
+    [
+      [
+        -24,
+        -24
+      ],
+      [
+        -24,
+        -24
+      ]
+    ],
+    [
+      [
+        -24,
+        -24,
+        -24,
+        -24
+      ],
+      [
+        -24,
+        -24,
+        -24,
+        -24
+      ]
+    ],
+    [
+      [
+        -24,
+        -24,
+        -24,
+        -24,
+        -24
+      ],
+      [
+        -24,
+        -24,
+        -24,
+        -24,
+        -24
+      ]
+    ],
+    [
+      [
+        -24,
+        -24,
+        -24,
+        -24,
+        -24,
+        -24
+      ],
+      [
+        -24,
+        -24,
+        -24,
+        -24,
+        -24,
+        -24
+      ]
+    ],
+    [
+      [
+        -24,
+        -24,
+        -24,
+        -24,
+        -24,
+        -24,
+        -24
+      ],
+      [
+        -24,
+        -24,
+        -24,
+        -24,
+        -24,
+        -24,
+        -24
+      ]
+    ]
+  ],
+  "unchanged_functions": [
+    "r1_bma4_read_regs_direct",
+    "r1_bma4_read_regs_boundary",
+    "r1_bma4_get_advance_power_save"
+  ],
+  "report": "build/sources-goal-r1-bma-identity-verified/report.json",
+  "report_sha256": "91f00dbacd6f8c3deaf54a4507f996472d28c72b1dd3459c78a6bb5cc07c2502",
+  "source_sha256": "036c3b2d3f7de745573fc59ec3012345ce03dbed460c2e2d87b3da0b5030dbea",
+  "manifest_sha256": "be76bf00509f1551b53a08edbc5515ed3a3dcb9b1721ff4481fdf60b77d82eb8",
+  "application_imports": 227,
+  "bootloader_imports": 34,
+  "stock_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "native_span_sha256": "8b0ea97ac81b571d08b893ae611784902a8f9a62b4a421802b8f7e40fadcde4d",
+  "rea": {
+    "completed": true,
+    "procedure": "0x53b2c",
+    "evidence_path": "build/goal-r1-bma-identity/REA.json",
+    "sha256": "4eab6abb50e5f8e5bb764c184956855cf69b03d3baa949906a6d89e935da6d54"
+  },
+  "probe_artifacts": {
+    "build/goal-r1-bma-identity/verify.py": "d943d861b90fd4784249b0bd2fe999677f0c16fd2f2ec08ac13b4266d892ce96",
+    "build/goal-r1-bma-identity/before.c": "285e56afb97f804d018900c79adbd4c73c3d3904f8d4b1b3337fc81652f7a86d",
+    "build/goal-r1-bma-identity/source.elf": "9184e102565d43706afa1e27ed5237bdfbb2f68ae9d8f8ec758b29a19d64084c",
+    "build/goal-r1-bma-identity/stock.elf": "36ed520ff4d6adc643d8b95db6bf83004323e8d40e6505f2ea17c74767627352",
+    "build/goal-r1-bma-identity/rea-snapshot.json": "f10be10a371b2a07b83fb98a8eae3bf2ad4fc4b74eccd8732c0ba1b3ea2019c8"
+  },
+  "boundaries": [
+    "Bus-read, initialization and logging callbacks are modeled, including caller-saved register clobbering; physical sensor/bus execution is unverified.",
+    "Only the one-byte public read output contract is covered; private scratch upper bytes and stack layout are not equivalent.",
+    "No native timing, complete fault state, final firmware link, byte identity or source-plan qualification claim."
+  ]
+}

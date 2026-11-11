@@ -1,0 +1,105 @@
+{
+  "schema_version": 1,
+  "entries": {
+    "0x499e0": "r1_hr_value_plausible",
+    "0x499f0": "r1_hr_once_result_plan"
+  },
+  "report": "build/sources-goal-r1-hr-result-c/report.json",
+  "report_sha256": "0203bdd4f689cf52733a823be6ba1a5d74dd4b37abe36303a8e93232549283ad",
+  "unit": {
+    "source": "r1/src/application/runtime/native_health_hr_result.c",
+    "source_sha256": "dffff6d905b3e8c320cb8adbdbfc47d159c6a1794444d5d720a3c48a1f6dee5b",
+    "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-hr-result-c/r1/r1-application/r1__src__application__runtime__native_health_hr_result.c.o",
+    "object_sha256": "00c308f77bc65c3727a6c418432b487cf1939e5e652d06652b9867ff37cdeb1a"
+  },
+  "behavior": {
+    "pairs": 2790,
+    "digest": "445b07dfda4c6692dd644ed6969eaa0f5b49321f93143b9d14648d769385d514",
+    "actual_C": [
+      "HR plausible-range helper and once-result callback",
+      "HR once controller and shared HR/HRV data owners"
+    ],
+    "modeled_boundaries": [
+      "r1_sensor_stream_register_by_name",
+      "r1_sensor_stream_unregister_by_name",
+      "r1_health_mode_is_2",
+      "r1_time_backend_timestamp",
+      "r1_event_publish",
+      "r1_structured_log_mode_get",
+      "r1_structured_log_format",
+      "nrf_log_frontend_std_3"
+    ],
+    "limits": [
+      "Mapped non-null sample regardless of ignored length",
+      "Registered HRV producer checked by identity, not invoked",
+      "Stream registry/logging/clock/mode/event delivery modeled; no hardware/async proof",
+      "Private packet addresses normalized by contents; caller-clobbered registers excluded"
+    ]
+  },
+  "negative_controls": {
+    "wrong-upper-bound": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "5, in <module>\n    for hr in range(256):pair(entry='valid',hr=hr)\n                         ~~~~^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-hr-result-c/verify.py\", line 64, in pair\n    a=run(False,**kw);b=run(True,**kw);assert a==b,(kw,[k for k in a if a[k]!=b[k]],a['trace'],b['trace']);digest.update(json.dumps([kw,a]).encode());pairs+=1\n                                              ^^^^\nAssertionError: ({'entry': 'valid', 'hr': 221}, ['returns'], [], [])\n"
+    },
+    "wrong-lower-bound": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "65, in <module>\n    for hr in range(256):pair(entry='valid',hr=hr)\n                         ~~~~^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-hr-result-c/verify.py\", line 64, in pair\n    a=run(False,**kw);b=run(True,**kw);assert a==b,(kw,[k for k in a if a[k]!=b[k]],a['trace'],b['trace']);digest.update(json.dumps([kw,a]).encode());pairs+=1\n                                              ^^^^\nAssertionError: ({'entry': 'valid', 'hr': 39}, ['returns'], [], [])\n"
+    },
+    "wrong-mode-normalization": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "07000088080000'), ('event', [6, '28000000efcdab89', 8], '285678', '34120000660600007707000088080000'), ('unregister', ['hr', 4660], '285678', '34120000660600007707000088080000')], [('mode', [0], '285678', '34120000660600007707000088080000'), ('mode', [0], '285678', '34120000660600007707000088080000'), ('mode', [0], '285678', '34120000660600007707000088080000'), ('is2', [], '285678', '34120000660600007707000088080000'), ('unregister', ['hr', 4660], '285678', '34120000660600007707000088080000')])\n"
+    },
+    "wrong-event-size": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "ni/Repo/evenRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 1063, in __hook_code_cb\n    callback(uc, address, size, user_data)\n    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-hr-result-c/verify.py\", line 42, in hook\n    assert r0==6 and r2==8;out=[r0,bytes(v.mem_read(r1,r2)).hex(),r2];v.mem_write(r1,b'\\x83'*8);result=state['posted']\n           ^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    "late-sample-capture": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "0000660600007707000088080000'), ('mode', [7], '285678', '34120000660600007707000088080000'), ('log3', [1835011, 'algo hr once result: hr:%d, con:%d, sig:%d', 40, 86, 120], '285678', '34120000660600007707000088080000'), ('is2', [], '285678', '34120000660600007707000088080000'), ('time', [], '285678', '34120000660600007707000088080000'), ('event', [6, '27000000efcdab89', 8], '279192', '21436587660600007707000088080000'), ('unregister', ['hr', 4660], '279192', '21436587660600007707000088080000')])\n"
+    },
+    "lost-invalid-cleanup": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "': 0, 'is2': 0, 'modes': (0,)}, ['trace', 'streams'], [('mode', [0], '005678', '34120000660600007707000088080000'), ('mode', [0], '005678', '34120000660600007707000088080000'), ('mode', [0], '005678', '34120000660600007707000088080000'), ('unregister', ['hr', 4660], '005678', '34120000660600007707000088080000')], [('mode', [0], '005678', '34120000660600007707000088080000'), ('mode', [0], '005678', '34120000660600007707000088080000'), ('mode', [0], '005678', '34120000660600007707000088080000')])\n"
+    },
+    "wrong-cleanup-handle": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "587660600007707000088080000')], [('mode', [7], '005678', '34120000660600007707000088080000'), ('ring', [213909504, '[RING]algo hr once result: hr:%d, con:%d, sig:%d', 39, 145, 146], '279192', '21436587660600007707000088080000'), ('mode', [7], '279192', '21436587660600007707000088080000'), ('log3', [1835011, 'algo hr once result: hr:%d, con:%d, sig:%d', 39, 145, 146], '279192', '21436587660600007707000088080000'), ('unregister', ['hr', 2271560481], '279192', '21436587660600007707000088080000')])\n"
+    },
+    "lost-final-clear": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "', '34120000660600007707000088080000'), ('mode', [0], '005678', '34120000660600007707000088080000'), ('mode', [0], '005678', '34120000660600007707000088080000'), ('unregister', ['hr', 4660], '005678', '34120000660600007707000088080000')], [('mode', [0], '005678', '34120000660600007707000088080000'), ('mode', [0], '005678', '34120000660600007707000088080000'), ('mode', [0], '005678', '34120000660600007707000088080000'), ('unregister', ['hr', 4660], '005678', '34120000660600007707000088080000')])\n"
+    }
+  },
+  "audit": {
+    "unchanged_prior_objects": 752,
+    "new_units": 1,
+    "imports": {
+      "r1-application": {
+        "added": [],
+        "removed": [
+          "r1_hr_once_result_plan"
+        ]
+      },
+      "r1-bootloader": {
+        "added": [],
+        "removed": []
+      }
+    },
+    "reused_owners": [
+      "r1_health_hr_streams",
+      "r1_hrv_timing_state; no new data ownership"
+    ]
+  },
+  "source_check": "R1 check passes: 753 units, 557 source files, 0 not built. Global check flagged concurrent G2 resident_rom_thumb_set.S absent from manifest.",
+  "rea": "hr-once-result-c-rea.json",
+  "instruction_identity_proven": false,
+  "image_integration_proven": false
+}

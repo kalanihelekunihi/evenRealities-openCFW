@@ -1,0 +1,364 @@
+{
+  "schema_version": 1,
+  "scope": "R1 native graph-constructor dispatch and mode0/1/2 allocation wrappers in C",
+  "acceptance_target": "License-free C firmware with hardware support first; byte identity waived",
+  "report": "build/sources-goal-r1-goodix-graph-dispatch-c/report.json",
+  "comparison_report": "build/sources-goal-r1-goodix-hba-workspace-c-final/report.json",
+  "stock_entries": [
+    {
+      "symbol": "r1_goodix_native_graph_record_create",
+      "entry": "0x3ddf4",
+      "size": 40
+    },
+    {
+      "symbol": "r1_goodix_native_graph_mode0_create",
+      "entry": "0x72be0",
+      "size": 104
+    },
+    {
+      "symbol": "r1_goodix_native_graph_mode1_create",
+      "entry": "0x48d22",
+      "size": 36
+    },
+    {
+      "symbol": "r1_goodix_native_graph_mode2_create",
+      "entry": "0x28b8a",
+      "size": 36
+    }
+  ],
+  "audit": {
+    "compiled_units": 888,
+    "new_units": [
+      "r1/src/application/goodix/native_graph_construct.c"
+    ],
+    "unchanged_prior_nongenerated_sources_and_objects": 877,
+    "differing_existing_generated_objects": [
+      "{gen}/r1_startup_vectors.S",
+      "{gen}/r1_uecc.c"
+    ],
+    "tested_object_equals_normal_build": true,
+    "application_imports": 74,
+    "bootloader_imports": 22,
+    "removed_imports": [
+      "r1_goodix_native_graph_record_create"
+    ],
+    "added_imports": [
+      "r1_goodix_native_graph_initialize",
+      "r1_goodix_native_graph_mode6_create"
+    ],
+    "new_writable_state_bytes": 0,
+    "native_function_entries_verified": 4,
+    "native_instruction_bytes": 216,
+    "native_executed_instruction_bytes": 216,
+    "source_plan_and_cache_layout_unchanged": true
+  },
+  "direct": {
+    "paired_cases": 408,
+    "native_instruction_bytes_executed": [
+      40,
+      104,
+      36,
+      36
+    ],
+    "source_object_sha256": "16584beef078418e6aa5e280ecb14859250fe60a0e12cfaceacc16bee455cfde",
+    "independent_allocation_type_zeroing_remap_and_return_oracles": true,
+    "zero_weight_early_return_reads_only_weight_word": true,
+    "actual_C_memory_primitives_execute": true,
+    "graph_initialize_and_mode6_constructor_and_malloc_modeled": true,
+    "allocator_and_initializer_parameter_mutation_and_alias_cases": true,
+    "source_cannot_execute_stock": true,
+    "valid_nonnull_dispatch_selectors": [
+      0,
+      1,
+      2,
+      6
+    ]
+  },
+  "actual_C_heap_lifecycle": {
+    "lifecycle_cases": 128,
+    "constructor_complete_C_teardown_and_actual_C_heap_execute": true,
+    "dispatch_mode0_mode1_workspace_and_resource_getters_execute_in_C": true,
+    "only_deeper_graph_initialize_and_mode6_constructor_modeled": true,
+    "only_mode6_record_preallocated_with_real_C_allocator_and_transferred": true,
+    "mode0_and_mode1_records_allocated_by_actual_C_wrappers": true,
+    "all_primary_workspace_filter_graph_and_queue_allocations_released_to_prior_top": true,
+    "readonly_filter_resource_unchanged": true,
+    "canonical_resource_pointers_normalized_only_for_complete_heap_and_provider_trace_comparison": true,
+    "workspace_four_word_owner_state_and_guard_match": true,
+    "broad_memory_write_hook_disabled_after_independent_copy_probe": true,
+    "source_object_sha256": "16584beef078418e6aa5e280ecb14859250fe60a0e12cfaceacc16bee455cfde"
+  },
+  "compiled_defects_rejected": [
+    {
+      "name": "wrong_dispatch_zero_slot",
+      "compiled": true,
+      "rejected": true,
+      "case": {}
+    },
+    {
+      "name": "wrong_mode0_size",
+      "compiled": true,
+      "rejected": true,
+      "case": {}
+    },
+    {
+      "name": "omit_mode0_zeroing",
+      "compiled": true,
+      "rejected": true,
+      "case": {}
+    },
+    {
+      "name": "wrong_mode1_size",
+      "compiled": true,
+      "rejected": true,
+      "case": {
+        "selector": 1
+      }
+    },
+    {
+      "name": "clear_mode1_allocation",
+      "compiled": true,
+      "rejected": true,
+      "case": {
+        "selector": 1
+      }
+    },
+    {
+      "name": "wrong_mode2_type",
+      "compiled": true,
+      "rejected": true,
+      "case": {
+        "root": 3
+      }
+    },
+    {
+      "name": "wrong_copy_source",
+      "compiled": true,
+      "rejected": true,
+      "case": {
+        "root": 1,
+        "alias": true
+      }
+    },
+    {
+      "name": "wrong_copy_target",
+      "compiled": true,
+      "rejected": true,
+      "case": {
+        "root": 1,
+        "alias": true
+      }
+    },
+    {
+      "name": "wrong_remap_word",
+      "compiled": true,
+      "rejected": true,
+      "case": {}
+    },
+    {
+      "name": "wrong_stride_shift",
+      "compiled": true,
+      "rejected": true,
+      "case": {}
+    },
+    {
+      "name": "wrong_stride_subtraction",
+      "compiled": true,
+      "rejected": true,
+      "case": {
+        "groups": 2,
+        "stride": 3,
+        "code_override": 32
+      }
+    },
+    {
+      "name": "wrong_remap_target",
+      "compiled": true,
+      "rejected": true,
+      "case": {}
+    },
+    {
+      "name": "wrong_remap_value",
+      "compiled": true,
+      "rejected": true,
+      "case": {}
+    },
+    {
+      "name": "wrong_parameter_tail",
+      "compiled": true,
+      "rejected": true,
+      "case": {}
+    },
+    {
+      "name": "wrong_mode6_provider",
+      "compiled": true,
+      "rejected": true,
+      "case": {
+        "selector": 6
+      }
+    },
+    {
+      "name": "wrong_null_weight_result",
+      "compiled": true,
+      "rejected": true,
+      "case": {
+        "weights": 0
+      }
+    }
+  ],
+  "contract": [
+    "A zero resource word returns null before reading the selector, even for an otherwise invalid selector. Nonzero resources require selector0/1/2/6; dispatch forwards resource and pointer to record word2 and propagates the full returned pointer. Native null slots3/4/5 are retained as null table entries, not invented replacements.",
+    "Mode0 allocates732 bytes, returns null on allocation failure, clears the entire allocation, stores type0, calls graph initialization, copies word1e0 to238 and applies optional remapping from live parameters after callbacks.",
+    "Remap stride is wrapping ((code>>2)-1)/groups. Zero groups execute no loop, matching native UDIV-zero/zero-iteration behavior without C division-by-zero. Each iteration reads its current target index and stores its payload pointer at context238+target*4. Remap aliasing and repeated targets preserve native order.",
+    "Modes1/2 allocate568/572 bytes and store types1/2 before calling graph initialization. They do not clear allocations, consume parameter records, inspect initializer returns or invent failure cleanup.",
+    "408 direct comparisons execute all216 native instruction bytes with independent allocation/type/zeroing/remap/return oracles, exact parameter-word read traces and provider snapshots. Cases include allocator/initializer mutation, remap aliases within allocated state, quotient boundaries, repeated targets, null resources and all allocation branches.",
+    "128 complete HR constructor/allocator/teardown cases execute C dispatch, mode0/1 allocation wrappers, workspace, resource getters and queues. All primary/workspace/filter/graph/queue allocations release to the prior heap top."
+  ],
+  "limits": [
+    "The deeper graph initializer at340a0 and mode6 constructor5d01c remain unresolved. Their calling conventions are derived from observed providers; full graph construction, internal allocations and inference remain unproven.",
+    "The mode6 record alone is preallocated through each real allocator and transferred through modeled mode6 returns. Modes0/1 allocate in C at native call points; the modeled deeper initializer leaves owned child allocations empty. Five external system/logging bindings remain in the fixture; ordinary successful lifecycles exercise graph ports only.",
+    "Canonical resource pointers are normalized only in heap comparison and provider traces. Actual memory is not rewritten. Readonly resource spans remain unchanged.",
+    "Selectors3/4/5/out-of-range with nonzero resources, invalid pointers, oversized/unmapped remap tables, physical faults, concurrency, cold floating-point activation, caller scratch and private frames remain outside proof. Zero-resource early returns are independently covered for those selector values.",
+    "A subtraction defect initially escaped the first negative corpus because grouped division masked it. The final direct corpus adds18 exact quotient-boundary cases; all16 compiled defects are rejected by the strengthened final fixtures.",
+    "The888-unit ld-r composition passes without failures or duplicate strong symbols.877 prior nongenerated source/object pairs unchanged, tested object equals normal object, and no writable state added. One dispatch import replaced by two deeper imports, application73 to74; boot22.",
+    "Source-plan/cache layout unchanged. Final executable linking/startup, complete graph dependencies, physical sensor delivery and boot remain open. Byte identity is waived; this build is relocatable composition rather than a bootable firmware image."
+  ],
+  "evidence_files": {
+    "build/sources-goal-r1-goodix-graph-dispatch-c/report.json": "2a1cdd3fb584f3e3b1d71d4f0b15973c0c73887ce65571035802a61e0d0e867b",
+    "build/sources-goal-r1-goodix-hba-workspace-c-final/report.json": "17b82bab6fcfec837ae24df620a2430543cbcbc049346db133f1d4a4d3bb5f1f",
+    "r1/src/application/goodix/native_graph_construct.c": "8559f26ff9ba0977de96545df0f975bd3df5034235d86c7d4bb9e2fc56356f98",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-graph-dispatch-c/r1/r1-application/r1__src__application__goodix__native_graph_construct.c.o": "16584beef078418e6aa5e280ecb14859250fe60a0e12cfaceacc16bee455cfde",
+    "r1/src/sources.json": "14f1a93dd58b9e24fafe9121e90d516fa6be7d08ec61cc320c07aa0150088f9f",
+    "tools/build/source-plan.json": "eeb516e31b3310fb0718f36908977f8125723f7c5e0e86cd6744395826259a4d",
+    "r1/src/config/runtime/native_health_cache.ld": "eb8f131c489cd818d4e36718718fa1989719ca0170f164541a1a5bf56dfc1ec3",
+    "r1/docs/reference/FUNCTION-OWNERSHIP.csv": "d7c8531b8d7a23e31661fde47c264a81a57887a15d2f666396f79b5339a51ffd",
+    "r1/symbols/function-frontier.csv": "fc663c30541f6a0d507a89a8e96eaa2c949d8e160af484b5543ed774acb9570d",
+    "r1/docs/reference/goodix-hba-workspace-c-review.md": "683a31d0faf437fb3ef491fc69419299dfb0574b20bbddc2bf65b96f61980037",
+    "build/goal-r1-goodix-native-heap-init-c/fill.o": "5b9881f48c6329da35510eb6b3f4be65d3c31bab24e2f6ab7d5713597d06c391",
+    "r1/src/vendor/goodix_primitives/goodix_primitives.c": "6ba3fff7701c90db05c8700e5b27d9cdbca327887deb92a9cef2bda03c5bf75b",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-graph-dispatch-c/r1/r1-application/r1__src__vendor__goodix_primitives__goodix_primitives.c.o": "a3721ecc5551d066cba889dc052bc3c2c2343c69683909c89ddc9a1f3b0a84b5",
+    "r1/src/vendor/model_data/r1_model_data.c": "927096c22e8b55d1911e4e9b630b798e1988d0279d65c9533d9e228d3cb8071d",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-graph-dispatch-c/r1/r1-application/r1__src__vendor__model_data__r1_model_data.c.o": "811f33962c43ad6e9a6110a53aa3e50c9ab5477ca28fa64fb344b00e714bd9a8",
+    "third-party/upstream/musl-memmove-1.2.5/memmove.c": "1304f9ddfc18594f5d9a84691892b9fdaf3be8ecc6d7f365c691abb138eaf74e",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-graph-dispatch-c/r1/r1-application/third-party__upstream__musl-memmove-1.2.5__memmove.c.o": "4a6ccefb180ef4af2cfe631f54df4d6f629d1b3a2d374911c00b25c107bcb723",
+    "third-party/upstream/musl-memory-1.2.5/memcpy.c": "1664d565f968b053ac33c5ac615c057a255a5821c8fa510fba61d4f63dee08e9",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-graph-dispatch-c/r1/r1-application/third-party__upstream__musl-memory-1.2.5__memcpy.c.o": "a4b54c7315f7ca2f8097e3f9afb4a9bcd7860c75649fc9e185d951c3ea0696cf",
+    "third-party/upstream/musl-memory-1.2.5/memset.c": "2a74d9e7f988945e0d691d480b78d77a228da0d2be401c1000637cc879b2c0be",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-graph-dispatch-c/r1/r1-application/third-party__upstream__musl-memory-1.2.5__memset.c.o": "6c2f1a8f480c27d5bc20f79ac535dac28fbbdcaec12e69bad96721f724ec9057",
+    "third-party/upstream/musl-memory-1.2.5/strcmp.c": "3e1793ea2dd358e5c884c4dd232083605d0f6775f7ebe19d03d64fe97068a78f",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-graph-dispatch-c/r1/r1-application/third-party__upstream__musl-memory-1.2.5__strcmp.c.o": "d2d1444d824aed4070fa9271ff54cbd83bd5390686232894dbad3c3a36189e3d",
+    "r1/src/application/goodix/native_heap_init.c": "c3085064866b23d603697918b6dfdd29f66ab68c7e82cb1f3e10443c80e3f8b6",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-graph-dispatch-c/r1/r1-application/r1__src__application__goodix__native_heap_init.c.o": "d25f87d5c62ab05f6d5e4d73cc1de5afacf8300a5f1286735b75c9715c30063c",
+    "r1/src/application/goodix/native_heap_free.c": "175cf893ee4b475bee0a886d69522782ac879dd0b29c43285d957c03fb4dc7c4",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-graph-dispatch-c/r1/r1-application/r1__src__application__goodix__native_heap_free.c.o": "bc333928ee0e42aaf0a0446eb69f4ff0528fd2f27737d5ed1744ed750b807022",
+    "r1/src/application/goodix/native_heap_allocate.c": "2806f3ca4f9074b157b390edf8bd03815a46b31f1661e1ed238a0938c666d8c9",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-graph-dispatch-c/r1/r1-application/r1__src__application__goodix__native_heap_allocate.c.o": "129b40a4930e85990e0ba9503f83bbc867460580ef323f2a6dfa2476e7dad685",
+    "r1/src/application/goodix/native_heap_malloc.c": "1b827deb8981088d68fae260af0aa442a7315d4aaaa7f2ed8a248c859878a0c3",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-graph-dispatch-c/r1/r1-application/r1__src__application__goodix__native_heap_malloc.c.o": "977cb669d0ca7b16102f67629d38c362cd2c47fba05cb890577e367a4f9d0138",
+    "r1/src/application/goodix/native_record_teardown.c": "b7cea98e79bac3f8c5d80bc58c59e81840d7e9b8b9267429e83c4ebb981bbf45",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-graph-dispatch-c/r1/r1-application/r1__src__application__goodix__native_record_teardown.c.o": "785df1baa1e96a2723aa03debb90b5dc7bfa44a1e76283a79645968876cec4de",
+    "r1/src/application/goodix/native_processing_teardown.c": "77235d34263525d27a549a67a76d71552051fea81a2260c8d6a3bb0b736991cf",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-graph-dispatch-c/r1/r1-application/r1__src__application__goodix__native_processing_teardown.c.o": "1bd4699810d6f77a4624794f7c07eeed142ab7ac01f48e018304f2988b05f607",
+    "r1/src/application/goodix/native_spo2_initialize.c": "41e6290e411795ade2bb7b0c9b3aa3b30678483bfb7b3b2c86e3e25d79908c82",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-graph-dispatch-c/r1/r1-application/r1__src__application__goodix__native_spo2_initialize.c.o": "416f2e823ae3edd838065709e40b06eaa5b9648ad2462237656ffdf5b212b129",
+    "r1/src/application/goodix/native_hba_initialize.c": "d899be6399bdca24bf32650299e5816e81dba1d56a2036e8d7886710fbf7dfed",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-graph-dispatch-c/r1/r1-application/r1__src__application__goodix__native_hba_initialize.c.o": "857aa996883c104ae5eb5d6b17e1a818be85bccf28434ba7fa1af23bcd914562",
+    "r1/src/application/goodix/native_hba_workspace.c": "5b829228465a90a13db41d9a2e53fd263c19a65741133290f94024e6ce8abb96",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-graph-dispatch-c/r1/r1-application/r1__src__application__goodix__native_hba_workspace.c.o": "d7d6410239635dbee2c23bf78a2f391d63922a6d7ce345419f4a447abc6f428f",
+    "r1/src/vendor/model_data/r1_model_data.h": "5eb0f6d48c3dbe8104b42a1d90481f91ce6639f084745dee12069fabf908588f",
+    "r1/src/vendor/model_data/r1_goodix_hba_generated.inc": "eb40a4366c318ed68bc2f5dcb060028f3a1c3d5d6504551959fcf9d25d6fcdf4",
+    "build/goal-r1-goodix-graph-dispatch-c/verify-final.log": "79b7dc681ffe9dd5cf4275881024859c2c99d654ad79674062330a69585f9279",
+    "build/goal-r1-goodix-graph-dispatch-c/audit.json": "e3940c1464eb4ee70c5e3663d7830c8d6cafeef5ad86b9fbef84abbe42ab14bd",
+    "build/goal-r1-goodix-graph-dispatch-c/heap.py": "1256d1ee71f3e99d83d6a848d7c1b04b7fee6e54320e49f1c62e9998b0448c7b",
+    "build/goal-r1-goodix-graph-dispatch-c/verify.log": "79b7dc681ffe9dd5cf4275881024859c2c99d654ad79674062330a69585f9279",
+    "build/goal-r1-goodix-graph-dispatch-c/audit.py": "29c4c8cb7f771f4b2e685be2817ed0960f0fb4f4dd196826357da91a5cf531ad",
+    "build/goal-r1-goodix-graph-dispatch-c/entries.json": "9e29ba37a7fa6fbbcf0af9121d04beda625816d12b0b068076c291557e592e21",
+    "build/goal-r1-goodix-graph-dispatch-c/source.elf": "1d2d6a3254cf058699958cc0abe6bacc56684073345522c7da6c5f6c1f2a15a9",
+    "build/goal-r1-goodix-graph-dispatch-c/negative.py": "aeaa51a0cd7545b13d530b01430671cf34db1a1e71b09320a6a47a9938022e77",
+    "build/goal-r1-goodix-graph-dispatch-c/negative.log": "bae8c78f7b92f3fa7fe93574b9f6f675004f23c677dedf4096f51f75ba35d320",
+    "build/goal-r1-goodix-graph-dispatch-c/negative-results.json": "54da42bf5f1675b90c8df21af0da19c561474d23b9371576ce827de165b9a175",
+    "build/goal-r1-goodix-graph-dispatch-c/source.o": "16584beef078418e6aa5e280ecb14859250fe60a0e12cfaceacc16bee455cfde",
+    "build/goal-r1-goodix-graph-dispatch-c/results.json": "96c675bad865a1fdb5203dc12430f0dc8137c2a784271dbd58199c238f0c3572",
+    "build/goal-r1-goodix-graph-dispatch-c/heap.log": "5eafa61cf92e9c952692b53ba51416a47e71d7a3e28880536a7ec381bcabeb23",
+    "build/goal-r1-goodix-graph-dispatch-c/provider-28b8a.txt": "c3fc719dc1bd294b8d90809f71086b34c58c98808bbbe88a04ef5679a9ed7ded",
+    "build/goal-r1-goodix-graph-dispatch-c/provider-48d22.txt": "db319e128549bb8983275953f97f75dcc4afcc4993d705d16f8a0dc638bf5a46",
+    "build/goal-r1-goodix-graph-dispatch-c/verify-complete-final.log": "7cd684d075190bdfaedbe2368ad2f4a6a68bd9c7f8add4d1c74a8e48d09e6663",
+    "build/goal-r1-goodix-graph-dispatch-c/table-rea.json": "dd6b1ee95fd651253f49f2a87de7886218e05ba84d5b03b627818109b135b2f5",
+    "build/goal-r1-goodix-graph-dispatch-c/provider-72be0.txt": "c723fadb6fa3ea05a2c97951a1185f06348898277c95fde3a6037f8443d6bb19",
+    "build/goal-r1-goodix-graph-dispatch-c/record.py": "bc06422fd18c07d5c4abb20ea532d916d731fec249d6c70796dad33c1a36e979",
+    "build/goal-r1-goodix-graph-dispatch-c/compile-argv.json": "5ae1f9c2a0bae7d2e1aad59a466956396198663d4cd86ff3ffaae3525ddf8aee",
+    "build/goal-r1-goodix-graph-dispatch-c/manifest-before.json": "f8df55161065582c4671d27a302d1735efc06b6e3d2a533583671661bf188d67",
+    "build/goal-r1-goodix-graph-dispatch-c/source.d": "cc83d270ee8b51a5997a63d0e5f5dcbf39add57af552dd76a67cf53234e164f1",
+    "build/goal-r1-goodix-graph-dispatch-c/provider-5d01c.txt": "c3b92798d24c8e1d279bb6cb50b6d52c50c47fdb1a6bcd2eace5b6bc633bb998",
+    "build/goal-r1-goodix-graph-dispatch-c/verify.py": "cc14d6cd1b0c83a15e4e4fe515b6005210fdc595dc2b72c5cbb7f02edd01d66d",
+    "build/goal-r1-goodix-graph-dispatch-c/negative-final.log": "9d8e321a7c5063a31eb5b1b0f882baca8042d058f747d96c4c0926754fdd5eab",
+    "build/goal-r1-goodix-graph-dispatch-c/build.log": "51dc30eb9c0053f3f0fa6993aa12f3623d6821272902e214ee0c55a2f663fca1",
+    "build/goal-r1-goodix-graph-dispatch-c/heap/test.ld": "f1169785ba906d75bb7f54716784a141fa1f843b5737d8893234059a8ff2ea58",
+    "build/goal-r1-goodix-graph-dispatch-c/heap/source.elf": "5117201e8a54455bc18165be235729a6c337226fc3d7b8acade4267079efdf01",
+    "build/goal-r1-goodix-graph-dispatch-c/heap/results.json": "3cc867d6357e3e4bd2de444e4a06103c62953ec5070260bc3a33cb5e05dd1817",
+    "build/goal-r1-goodix-graph-dispatch-c/negative-wrong_dispatch_zero_slot/source.elf": "b6e05ae5639f40c6100c731fa851f8233c0ab8b1d98c578c75bb27726be1b692",
+    "build/goal-r1-goodix-graph-dispatch-c/negative-wrong_dispatch_zero_slot/source.o": "4a4a19178d6f3a51c6eafe2e8beac0a58b201f2f9537312e82e1ac1201b667d3",
+    "build/goal-r1-goodix-graph-dispatch-c/negative-wrong_dispatch_zero_slot/source.d": "c15c143bac3685cbaee16fc663dcf152e5e8d1f1d55ecb359ce60720830415d0",
+    "build/goal-r1-goodix-graph-dispatch-c/negative-wrong_dispatch_zero_slot/source.c": "1caf198c1b0d5528a9d2dcb2a5e7045a76537154e66921abca1f6b5c0c238c18",
+    "build/goal-r1-goodix-graph-dispatch-c/negative-wrong_mode0_size/source.elf": "45d138ba9d3a27a41edd4cc4fd920a360aa4e1fcb650009554279e1de437e54b",
+    "build/goal-r1-goodix-graph-dispatch-c/negative-wrong_mode0_size/source.o": "6ca35b054b1cb56b392f5e32330e07396425777c238d4828aef7785c52ba614e",
+    "build/goal-r1-goodix-graph-dispatch-c/negative-wrong_mode0_size/source.d": "ad48290a34cf9df43fb5e58b60fad749293cf9bba3a2228e5133354f7814210d",
+    "build/goal-r1-goodix-graph-dispatch-c/negative-wrong_mode0_size/source.c": "16f43e4cf75d3784ec6cd67045ad0ac66ee1887c15f2ca01b039dd73539f461f",
+    "build/goal-r1-goodix-graph-dispatch-c/negative-omit_mode0_zeroing/source.elf": "0aaba80d6fdffbd592a23ff6f99401143e16e0ff704deaac285ccbc584b3fefe",
+    "build/goal-r1-goodix-graph-dispatch-c/negative-omit_mode0_zeroing/source.o": "ef642d0c7bd8db1486a38aacde0e996fbe0fbf032116204d4257b230783ff2d4",
+    "build/goal-r1-goodix-graph-dispatch-c/negative-omit_mode0_zeroing/source.d": "16be23a70949f9b4a6a54d312d9410727ac6158e3fc3aabe2d1029312104af78",
+    "build/goal-r1-goodix-graph-dispatch-c/negative-omit_mode0_zeroing/source.c": "7abcf18e45a6c207048d7ecb271b880e09f34d79cb7dca20ee78cbb181d51303",
+    "build/goal-r1-goodix-graph-dispatch-c/negative-wrong_mode1_size/source.elf": "550e127049f80450f9206f391f06b65cbf43288cc39f1e844c00c2d0359d4186",
+    "build/goal-r1-goodix-graph-dispatch-c/negative-wrong_mode1_size/source.o": "5733363e9d76ace79620b23a3bbd2112aa63d2701ede3e659979cd878d924c0d",
+    "build/goal-r1-goodix-graph-dispatch-c/negative-wrong_mode1_size/source.d": "f6611cbfed5d5b3b67106eeb2897dd63b6e7f75ba073241dc2b367207fcc8c06",
+    "build/goal-r1-goodix-graph-dispatch-c/negative-wrong_mode1_size/source.c": "b9e5d822aeacee97a650547aa9faaf4506f40e818690616bb91949dc82a76792",
+    "build/goal-r1-goodix-graph-dispatch-c/negative-clear_mode1_allocation/source.elf": "7f7dbe93b18580e8082bd56d0b341544998476cbc1c9c1a712202cc7820129f7",
+    "build/goal-r1-goodix-graph-dispatch-c/negative-clear_mode1_allocation/source.o": "53553f2a4a595a45bbaf467b1d799c0cbb703e2912882ff80d75bc5b71f383ff",
+    "build/goal-r1-goodix-graph-dispatch-c/negative-clear_mode1_allocation/source.d": "f66b2a840c41d67a5d7d8cd8096906cf67084b1e355c82862c8b24eb650cbdee",
+    "build/goal-r1-goodix-graph-dispatch-c/negative-clear_mode1_allocation/source.c": "636e28e8f591218233bb2a699e06231531399b51614509384423072510d7d63d",
+    "build/goal-r1-goodix-graph-dispatch-c/negative-wrong_mode2_type/source.elf": "012536440f936d8585a340afb52d2cfbca2d928f59d3f3e19be0cb1f9cf397d1",
+    "build/goal-r1-goodix-graph-dispatch-c/negative-wrong_mode2_type/source.o": "bcf62a48e4e05773b907bba335207a2f1826b67f5265b48a2150e90b29b4226c",
+    "build/goal-r1-goodix-graph-dispatch-c/negative-wrong_mode2_type/source.d": "dec2253468acc1a469b21b0211f49b90822db70b70699a230b035e1a9e1bbfdd",
+    "build/goal-r1-goodix-graph-dispatch-c/negative-wrong_mode2_type/source.c": "3ca72bb4115b77a72e418d955910a76d1f77e449aac10b47577fcc9468aa780f",
+    "build/goal-r1-goodix-graph-dispatch-c/negative-wrong_copy_source/source.elf": "45b1d1ebd84a4b3e332e5eef4dc19c475672200c329bc492273f05f4eb210ab5",
+    "build/goal-r1-goodix-graph-dispatch-c/negative-wrong_copy_source/source.o": "da94ac1b01333adf333d4e117a1fd2e134f97c90822e293dc433410773d19918",
+    "build/goal-r1-goodix-graph-dispatch-c/negative-wrong_copy_source/source.d": "39d0a9238ba22e449a8db6f5596be238723b9d41a4a6f9a4859267b88ab8285f",
+    "build/goal-r1-goodix-graph-dispatch-c/negative-wrong_copy_source/source.c": "1e212e2a5b0efb103eadaaecdae2e0902c535a0f30fbfe291507a90b6a9407b5",
+    "build/goal-r1-goodix-graph-dispatch-c/negative-wrong_copy_target/source.elf": "e4b69e8d9917b3d60b10a55492616d3b03e70b3d121bd5987d5ddfbfb2b9e3bc",
+    "build/goal-r1-goodix-graph-dispatch-c/negative-wrong_copy_target/source.o": "99fa67f207423d27b5cfc88a9c61f9363565d4e423d3a5b549cf0c23d62c955a",
+    "build/goal-r1-goodix-graph-dispatch-c/negative-wrong_copy_target/source.d": "83dbac447bae3510ae8048e4118dc7ce86d767bc1381c268823c4f2211d02ef9",
+    "build/goal-r1-goodix-graph-dispatch-c/negative-wrong_copy_target/source.c": "01591d57f69bea6dbb34f225179cc5dc2d3f830c7bb415db044bb9fbd7ff0b88",
+    "build/goal-r1-goodix-graph-dispatch-c/negative-wrong_remap_word/source.elf": "3d35352243c762b50a25e45821ce63e9ec29ecd40a159cf658fea96fd285ef98",
+    "build/goal-r1-goodix-graph-dispatch-c/negative-wrong_remap_word/source.o": "4e7d6ae4e7b395ceaa928c565e691e646f5abe5d800f85d08210cba590206b4e",
+    "build/goal-r1-goodix-graph-dispatch-c/negative-wrong_remap_word/source.d": "0887b8e862783e8668cb8aee4a99047731d7dff932c76ceac661499a337c7466",
+    "build/goal-r1-goodix-graph-dispatch-c/negative-wrong_remap_word/source.c": "10d4408dffcf859b0b74f17409357f30da5bbe1ccddb17763ac981359e9058de",
+    "build/goal-r1-goodix-graph-dispatch-c/negative-wrong_stride_shift/source.elf": "ea00648ca567021b9aa9cc3407ec8bf6c8ec96c8a213f5d9ce21d559354e6ebc",
+    "build/goal-r1-goodix-graph-dispatch-c/negative-wrong_stride_shift/source.o": "60c54d87590e16f888ab431684d59a2622d7f1e501293e0f89781f696c6d8fed",
+    "build/goal-r1-goodix-graph-dispatch-c/negative-wrong_stride_shift/source.d": "d7e61726c205c3f2fd68c8592da443989bc10febbc7c69b6703c5d2b1825ae25",
+    "build/goal-r1-goodix-graph-dispatch-c/negative-wrong_stride_shift/source.c": "460934375214d162eb16f2792dc9ae5d5bfc4bbd42273aeb0a17a24e792f866c",
+    "build/goal-r1-goodix-graph-dispatch-c/negative-wrong_stride_subtraction/source.elf": "e00f589f11aee6069b1f758bd5af41c6c1cc86eb4e669d329b74e13461477024",
+    "build/goal-r1-goodix-graph-dispatch-c/negative-wrong_stride_subtraction/source.o": "45e3433bfe0990088865ab253355064b60028a089628cca8de0fe45373b38e6a",
+    "build/goal-r1-goodix-graph-dispatch-c/negative-wrong_stride_subtraction/source.d": "a5d55f1c901b9b081cfe63257920a70aa584ef18e44fa057ef3ef8767df65d44",
+    "build/goal-r1-goodix-graph-dispatch-c/negative-wrong_stride_subtraction/source.c": "cacd47f5ddddc796875b9492443ec079931a49ede2b823bac2229a76d9cdc71b",
+    "build/goal-r1-goodix-graph-dispatch-c/negative-wrong_remap_target/source.elf": "0ca05f16ea2bd4c2ce570dd13f64535c13fd3ea5c2b66c2020920980586cc214",
+    "build/goal-r1-goodix-graph-dispatch-c/negative-wrong_remap_target/source.o": "bf47805a42499327cb5627d0cfd57deb7c8f885c29bb3e16e9710733696076cd",
+    "build/goal-r1-goodix-graph-dispatch-c/negative-wrong_remap_target/source.d": "7c6fe352938301ac205e151717cf602120bc7a25a0af4f9fa6fe241db3e005cf",
+    "build/goal-r1-goodix-graph-dispatch-c/negative-wrong_remap_target/source.c": "c83692573302701a5db79c89c451187aa38d7ffb35e20dcfbebc50deabea4b2f",
+    "build/goal-r1-goodix-graph-dispatch-c/negative-wrong_remap_value/source.elf": "a5afabca3beb7fe7cc0d6ed9dc2292255ee53329d25e74dd3f0ee88ba229806f",
+    "build/goal-r1-goodix-graph-dispatch-c/negative-wrong_remap_value/source.o": "3d940f55cb79614b9ea33ef60a8a261d27c19b62179cacaafe0a972ea801660b",
+    "build/goal-r1-goodix-graph-dispatch-c/negative-wrong_remap_value/source.d": "567e0eb888d0c46f806060bd790888dfebec667399257ba226e920a30effe1fc",
+    "build/goal-r1-goodix-graph-dispatch-c/negative-wrong_remap_value/source.c": "57e53685e8c0d74606b00cb5fb1775054a5ab50ac90021c3dcbc46999fb14a38",
+    "build/goal-r1-goodix-graph-dispatch-c/negative-wrong_parameter_tail/source.elf": "4bd46d6c4511646da1b6b081e8c72fd8a6e09ebbe4503cd339b46c8381f5c873",
+    "build/goal-r1-goodix-graph-dispatch-c/negative-wrong_parameter_tail/source.o": "0217a79d7a29881aabc3028d3beaae415d45bf5e6092b0fb105e5f05a204c01f",
+    "build/goal-r1-goodix-graph-dispatch-c/negative-wrong_parameter_tail/source.d": "7ffcbd556661e6b4fa0468878031e6a4c76cd52c8dcc009a4c71c3b5417c9516",
+    "build/goal-r1-goodix-graph-dispatch-c/negative-wrong_parameter_tail/source.c": "6ec3ae28804fd171a0aa9ab20991ecbd7e6978a9d00ebb83b78ea9d2bbad8c89",
+    "build/goal-r1-goodix-graph-dispatch-c/negative-wrong_mode6_provider/source.elf": "2f51bc792a7dfaf01dd5360fa340d9e6c155740ec85c7a8b1164bb99ea6a8c63",
+    "build/goal-r1-goodix-graph-dispatch-c/negative-wrong_mode6_provider/source.o": "ced420154378210c708696fa0c287755371eb39a9f9fae7e92c312d361d41870",
+    "build/goal-r1-goodix-graph-dispatch-c/negative-wrong_mode6_provider/source.d": "98aff590dd1f6b90e2d063670864e653567c181d25287b4e8a922413fa92a87d",
+    "build/goal-r1-goodix-graph-dispatch-c/negative-wrong_mode6_provider/source.c": "f0f58af0c33411e802aadc41e8ccc37113f303d9af22df4eaf7bb71d90cf28d6",
+    "build/goal-r1-goodix-graph-dispatch-c/negative-wrong_null_weight_result/source.elf": "d3bac38187a308d76f97ec0f32bae18db4e758a634c30681b99e7b6c3de12eea",
+    "build/goal-r1-goodix-graph-dispatch-c/negative-wrong_null_weight_result/source.o": "4794301b2787813c8f56e332a1c21f18a49ede9d1eeddbcd40629d6f2223e855",
+    "build/goal-r1-goodix-graph-dispatch-c/negative-wrong_null_weight_result/source.d": "c4b2143c2fff43bbb064396c8754bab2ce819161f08e2ea3cc9c386947a0087a",
+    "build/goal-r1-goodix-graph-dispatch-c/negative-wrong_null_weight_result/source.c": "0c4333816ac060f933f41c6dda9f9083181f84e651c253bfbae7e9e08e493e99"
+  }
+}

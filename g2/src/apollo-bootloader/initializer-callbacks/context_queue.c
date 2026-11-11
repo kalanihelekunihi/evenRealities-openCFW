@@ -1,15 +1,16 @@
 /* SPDX-License-Identifier: MIT. Stock42c3e2,42c420,42c44e IOM CQ adapters. */
 #include "context_claim.h"
-#include "../nor-mspi-queue/nor_mspi_queue.h"
+#include <stdbool.h>
+#include "am_hal_cmdq.h" /* AmbiqSuite 5.1.0; stock 0x427754..0x427c72 */
 #define WORD(h,o) (*(volatile uint32_t *)((uintptr_t)(h)+(o)))
 /* Stock 0x42c3e2 (cmdq_adapter_init_42c3e2) */
 uint32_t opencfw_boot_iom_cq_initialize(void *handle,uint32_t words,uint32_t buffer)
 {
     struct opencfw_iom_context *h=handle;
-    struct {uint32_t half_units,buffer;uint8_t option,pad[3];} config;
+    am_hal_cmdq_cfg_t config;
     WORD(h,0x828u)=0u;WORD(h,0x20u)=0u;WORD(h,0x85cu)=0u;
-    config.half_units=words>>1;config.buffer=buffer;config.option=1u;
-    uint32_t status=opencfw_provider_427794((uint8_t)h->module,&config,
+    config.cmdQSize=words>>1;config.pCmdQBuf=(uint32_t *)(uintptr_t)buffer;config.priority=AM_HAL_CMDQ_PRIO_HI;
+    uint32_t status=am_hal_cmdq_init((am_hal_cmdq_if_e)(uint8_t)h->module,&config,
                                          (void **)(uintptr_t)((uintptr_t)h+0x828u));
     if (!status) WORD(h,0x20u)=256u;
     return status;
@@ -24,10 +25,10 @@ uint32_t opencfw_boot_iom_cq_enable(void *handle)
         *(volatile uint32_t *)(uintptr_t)buffer=(uint32_t)reg;
         *(volatile uint32_t *)(uintptr_t)(buffer+4u)=buffer;
     }
-    return opencfw_provider_427878((uint32_t *)(uintptr_t)WORD(h,0x828u));
+    return am_hal_cmdq_enable((void *)(uintptr_t)WORD(h,0x828u));
 }
 /* Stock 0x42c44e (cmdq_adapter_disable_42c44e) */
 uint32_t opencfw_boot_iom_cq_disable(void *handle)
 {
-    return opencfw_provider_4278c8((uint32_t *)(uintptr_t)WORD(handle,0x828u));
+    return am_hal_cmdq_disable((void *)(uintptr_t)WORD(handle,0x828u));
 }

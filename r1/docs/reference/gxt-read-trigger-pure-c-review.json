@@ -1,0 +1,218 @@
+{
+  "normal_report": "build/sources-goal-r1-gxt-read-trigger-pure-c/report.json",
+  "report_sha256": "45cc6351c2f2bca14d30326917e94a29d335e73f88053c34084baeefd4da9de7",
+  "unit": {
+    "source": "r1/src/application/runtime/native_temperature.c",
+    "payload": "r1-application",
+    "role": "candidate",
+    "toolchain": "clang",
+    "link": true,
+    "expect": "compile",
+    "returncode": 0,
+    "argv": [
+      "/usr/bin/clang",
+      "--target=arm-none-eabi",
+      "-mcpu=cortex-m4",
+      "-mthumb",
+      "-munaligned-access",
+      "-mfloat-abi=hard",
+      "-mfpu=fpv4-sp-d16",
+      "-std=c11",
+      "-Os",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-fshort-enums",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-MD",
+      "-MF",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gxt-read-trigger-pure-c/r1/r1-application/r1__src__application__runtime__native_temperature.c.d",
+      "-c",
+      "/Users/kalani/Repo/evenRealities-openCFW/r1/src/application/runtime/native_temperature.c",
+      "-o",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gxt-read-trigger-pure-c/r1/r1-application/r1__src__application__runtime__native_temperature.c.o"
+    ],
+    "source_sha256": "dcd1617b85a56660fcb839b2b4c7e7435e3f9b885c662643a424641ea093bb1e",
+    "object_sha256": "5cdf66d58f2fd24bc53199b151d739031e72f6a5cb5eb0c0df33ade13aca89d3",
+    "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gxt-read-trigger-pure-c/r1/r1-application/r1__src__application__runtime__native_temperature.c.o",
+    "strong": [
+      "r1_gxt310_one_shot",
+      "r1_gxt310_one_shot_body",
+      "r1_gxt310_one_shot_channel0",
+      "r1_gxt310_one_shot_channel2",
+      "r1_gxt310_temperature_channel0",
+      "r1_gxt310_temperature_channel2",
+      "r1_gxt310_temperature_read",
+      "r1_gxt310_temperature_read_body",
+      "r1_temp_text_6f798",
+      "r1_temp_text_6f7d4",
+      "r1_temperature_calibration",
+      "r1_temperature_calibration_read",
+      "r1_temperature_calibration_read_body",
+      "r1_temperature_pair_read_calibrated"
+    ],
+    "weak": [],
+    "undefined": [
+      "nrf_log_frontend_std_1",
+      "osDelay",
+      "r1_device_info_kv_handle",
+      "r1_gxt310_bus_acquire",
+      "r1_gxt310_bus_release",
+      "r1_gxt310_disable_pair_native",
+      "r1_gxt310_enable_pair_native",
+      "r1_gxt310_transfer_read_native",
+      "r1_gxt310_transfer_write_native",
+      "r1_kv_class_read",
+      "r1_structured_log_format",
+      "r1_structured_log_mode_get"
+    ]
+  },
+  "rea": [
+    {
+      "evidence_id": "ev_ffa33dcfeec9d7a9eba254e4b622d3d5fff8d6cd945f31e62bc0d17b25f6589e",
+      "subject": {
+        "name": "stock.elf",
+        "digest": {
+          "sha256": "25b4a29af80ec8edab5bd861ba9b74a6e22eab29dc3d7a809a16869e8a140f04"
+        },
+        "local_path": "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-queue-reset-c/stock.elf",
+        "format": "elf",
+        "architecture": "arm"
+      },
+      "pseudocode": "\nint FUN_0006f80c(void)\n\n{\n  uint in_fpscr;\n  float fVar1;\n  undefined4 local_8;\n  \n  local_8 = 0;\n  thunk_FUN_00050f34(0x90,0,&local_8,2);\n  fVar1 = (float)VectorSignedToFloat((int)(short)((ushort)local_8 << 8 | (ushort)local_8 >> 8),\n                                     (byte)(in_fpscr >> 0x16) & 3);\n  return (int)(fVar1 * 0.0078125 * 1000.0);\n}\n\n",
+      "assembly": [
+        "0x6f600: push {r3,lr}",
+        "0x6f602: movs r1, #0x0",
+        "0x6f604: movs r3, #0x2",
+        "0x6f606: mov r2, sp",
+        "0x6f608: str r1, [sp,#0x0]",
+        "0x6f60a: bl 0x0006f640",
+        "0x6f60e: ldrh.w r0, [sp,#0x0]",
+        "0x6f612: vldr.32 s1, [pc,#0x24]",
+        "0x6f616: rev16 r0, r0",
+        "0x6f618: sxth r0, r0",
+        "0x6f61a: vmov s0, r0",
+        "0x6f61e: vcvt.f32.s32 s0, s0",
+        "0x6f622: vmul.f32 s0, s0, s1",
+        "0x6f626: vldr.32 s1, [pc,#0x14]",
+        "0x6f62a: vmul.f32 s0, s0, s1",
+        "0x6f62e: vcvt.s32.f32 s0, s0",
+        "0x6f632: vmov r0, s0",
+        "0x6f636: pop {r3,pc}",
+        "0x6f80c: movs r0, #0x90",
+        "0x6f80e: b.w 0x0006f600"
+      ]
+    },
+    {
+      "evidence_id": "ev_61afd15cf19d70be2436665f32344ca206bf5bb1ca4201c2518e50e23fb9d79b",
+      "subject": {
+        "name": "stock.elf",
+        "digest": {
+          "sha256": "25b4a29af80ec8edab5bd861ba9b74a6e22eab29dc3d7a809a16869e8a140f04"
+        },
+        "local_path": "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-queue-reset-c/stock.elf",
+        "format": "elf",
+        "architecture": "arm"
+      },
+      "pseudocode": "\nundefined4 FUN_0006f818(void)\n\n{\n  int iVar1;\n  uint uVar2;\n  undefined4 local_10;\n  \n  local_10 = 0xc101;\n  iVar1 = thunk_FUN_00050f5c(0x90,1,&local_10,2);\n  if (iVar1 != 0) {\n    return 1;\n  }\n  uVar2 = FUN_000914ec();\n  if ((uVar2 & 1) == 0) {\n    iVar1 = FUN_000914ec();\n    if (-1 < iVar1 << 0x1d) goto LAB_0006f772;\n  }\n  FUN_00091638(0x4400000,\"[RING][GXT310] Trigger one-shot failed, addr=0x%02X\",\n               \"[RING][GXT310] Trigger one-shot failed, addr=0x%02X\",0x90);\nLAB_0006f772:\n  iVar1 = FUN_000914ec();\n  if (iVar1 << 0x1e < 0) {\n    FUN_000799c8(0x1c0001,\"[GXT310] Trigger one-shot failed, addr=0x%02X\",0x90);\n  }\n  return 0;\n}\n\n",
+      "assembly": [
+        "0x6f738: push {r3,r4,r5,lr}",
+        "0x6f73a: mov r4, r0",
+        "0x6f73c: adr r0, [0x6f794]",
+        "0x6f73e: movs r3, #0x2",
+        "0x6f740: ldr r0, [r0,#0x0]",
+        "0x6f742: str r0, [sp,#0x0]",
+        "0x6f744: mov r2, sp",
+        "0x6f746: movs r1, #0x1",
+        "0x6f748: mov r0, r4",
+        "0x6f74a: bl 0x0006f644",
+        "0x6f74e: cbz r0, 0x0006f754",
+        "0x6f750: movs r0, #0x1",
+        "0x6f752: pop {r3,r4,r5,pc}",
+        "0x6f754: bl 0x000914ec",
+        "0x6f758: lsls r0, r0, #0x1f",
+        "0x6f75a: bne 0x0006f764",
+        "0x6f75c: bl 0x000914ec",
+        "0x6f760: lsls r0, r0, #0x1d",
+        "0x6f762: bpl 0x0006f772",
+        "0x6f764: mov r3, r4",
+        "0x6f766: adr r2, [0x6f798]",
+        "0x6f768: adr r1, [0x6f798]",
+        "0x6f76a: mov.w r0, #0x4400000",
+        "0x6f76e: bl 0x00091638",
+        "0x6f772: bl 0x000914ec",
+        "0x6f776: lsls r0, r0, #0x1e",
+        "0x6f778: bpl 0x0006f790",
+        "0x6f77a: ldr r0, [0x0006f7cc]",
+        "0x6f77c: ldr r1, [0x0006f7d0]",
+        "0x6f77e: mov r2, r4",
+        "0x6f780: subs r0, r0, r1",
+        "0x6f782: lsrs r0, r0, #0x3",
+        "0x6f784: movs r1, #0x1",
+        "0x6f786: add.w r0, r1, r0, lsl #0x10",
+        "0x6f78a: adr r1, [0x6f7d4]",
+        "0x6f78c: bl 0x000799c8",
+        "0x6f790: movs r0, #0x0",
+        "0x6f792: pop {r3,r4,r5,pc}",
+        "0x6f818: movs r0, #0x90",
+        "0x6f81a: b.w 0x0006f738"
+      ]
+    }
+  ],
+  "read": {
+    "cases": 66208,
+    "exhaustive_halfwords": 65536,
+    "fpscr_mode_cases": 160,
+    "partial_and_full_word_cases": 512,
+    "ordinary_C_ABI": true
+  },
+  "trigger": {
+    "cases": 8448,
+    "ordinary_C_ABI": true,
+    "command_word": 49409
+  },
+  "negative": {
+    "nonzero-read-buffer": {
+      "rejected": true,
+      "diagnostic": "CFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 769, in emu_start\n    raise self._hook_exception\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 363, in wrapper\n    return func(uc, *args, **kwargs)\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 1063, in __hook_code_cb\n    callback(uc, address, size, user_data)\n    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-gxt-read-trigger-pure-c/read.py\", line 22, in call\n    got=tuple(u.reg_read(reg) for reg in regs);assert got[:2]==(state['address'],0) and got[3]==2,got;frame=got[2];assert bytes(u.mem_read(frame,4))==bytes(4);assert u.reg_read(UC_ARM_REG_SP)%8==0;trace.append((got[0],got[1],got[3]));depth.append(u.reg_read(UC_ARM_REG_SP)-SP);u.mem_write(frame,state['payload'])\n                                                                                                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    "wrong-read-scale": {
+      "rejected": true,
+      "diagnostic": "e (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-gxt-read-trigger-pure-c/wrong-read-scale.o\nTraceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-gxt-read-trigger-pure-c/read.py\", line 41, in <module>\n    for word in range(65536):check(0x90 if word&1 else 0x94,struct.pack('<H',word),word&3,0,0xdeadbeef)\n                             ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-gxt-read-trigger-pure-c/read.py\", line 40, in check\n    a=native(*case);b=source(*case);assert a[:3]==b[:3],(case,a,b);depths.add((tuple(a[3]),tuple(b[3])));count+=1\n                      ~~~~~~^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-gxt-read-trigger-pure-c/read.py\", line 34, in run\n    expected=payload+bytes(4-len(payload));sample=int.from_bytes(expected[:2],'big',signed=True);assert u.reg_read(UC_ARM_REG_R0)==(int(sample*125/16)&0xffffffff)\n                                                                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    "wrong-trigger-command": {
+      "rejected": true,
+      "diagnostic": "/Repo/evenRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 769, in emu_start\n    raise self._hook_exception\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 363, in wrapper\n    return func(uc, *args, **kwargs)\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 1063, in __hook_code_cb\n    callback(uc, address, size, user_data)\n    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-gxt-read-trigger-pure-c/trigger.py\", line 24, in hook\n    if n=='r1_gxt310_transfer_write_native':assert args[:2]==(state['address'],1) and args[3]==2;state['frame']=args[2];assert bytes(u.mem_read(state['frame'],4))==struct.pack('<I',0xc101);trace.append((n,(args[0],args[1],args[3])));result=state['status']\n                                                                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    "reversed-trigger-status": {
+      "rejected": true,
+      "diagnostic": "-trigger-status.o\narm-none-eabi-ld: warning: (nrf_log_frontend_std_1): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-gxt-read-trigger-pure-c/reversed-trigger-status.o\nTraceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-gxt-read-trigger-pure-c/trigger.py\", line 46, in <module>\n    a=native_run(*case);b=source_run(*case);assert a[:2]==b[:2],(case,a,b);depths.add((tuple(a[2]),tuple(b[2])))\n                          ~~~~~~~~~~^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-gxt-read-trigger-pure-c/trigger.py\", line 37, in run\n    assert u.reg_read(UC_ARM_REG_PC)==STOP and u.reg_read(UC_ARM_REG_SP)==SP;assert [u.reg_read(reg) for reg in saved]==sent;assert u.reg_read(UC_ARM_REG_PRIMASK)==1 and u.reg_read(UC_ARM_REG_BASEPRI)==0x40;assert u.reg_read(UC_ARM_REG_R0)==int(status!=0)\n                                                                                                                                                                                                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    }
+  },
+  "audit": {
+    "changed": [
+      "r1/src/application/runtime/native_temperature.c"
+    ],
+    "unchanged_objects": 730,
+    "exports_imports_unchanged": true,
+    "read_trigger_bridges_removed": true,
+    "calibration_bridge_unchanged": true,
+    "changed_functions": [
+      ".text.r1_gxt310_one_shot",
+      ".text.r1_gxt310_temperature_read"
+    ]
+  },
+  "harness_sha256": {
+    "read.py": "88a8489e50ee20077286be13ab653055c4fc4d6b45fb973b218495769fde0b43",
+    "trigger.py": "98da81b2861942260bebf19d0f2a39896661319061e331f57ece6cb37b15ca7d",
+    "negative.py": "8d2650908bd0e0bde146df7eebc8f89610cbd527ee03318326cb7f4c2e16d1b9"
+  },
+  "limits": [
+    "Transfer/log providers modeled; ordinary C ABI excludes scratch R3 and private frame layout",
+    "Calibration reader bridge remains unchanged",
+    "No electrical/timing, fault/concurrency or complete firmware link proof"
+  ]
+}

@@ -5,12 +5,12 @@
  */
 #include <stdint.h>
 
-extern uint32_t opencfw_boot_uart_rx_fifo(uint32_t context, uint32_t destination,
+extern uint32_t am_hal_uart_fifo_read(uint32_t context, uint32_t destination,
                                           uint32_t maximum, uint32_t *received);
-extern uint32_t opencfw_boot_uart_interrupt_status(uint32_t context,
+extern uint32_t am_hal_uart_interrupt_status_get(uint32_t context,
                                                    uint32_t *status, uint8_t enabled);
-extern uint32_t opencfw_boot_uart_interrupt_clear(uint32_t context, uint32_t status);
-extern uint32_t opencfw_boot_uart_irq_dispatch(uint32_t context, uint32_t status);
+extern uint32_t am_hal_uart_interrupt_clear(uint32_t context, uint32_t status);
+extern uint32_t am_hal_uart_interrupt_service(uint32_t context, uint32_t status);
 
 #define WORD(a) (*(volatile uint32_t *)(uintptr_t)(a))
 
@@ -21,7 +21,7 @@ uint32_t opencfw_boot_uart_irq_rx_drain(uint32_t row_index,
     const uintptr_t row = UINT32_C(0x20000454) + row_index * 0x1cu;
     const uintptr_t state = WORD(row + 0x10u);
     uint32_t received = 0u;
-    (void)opencfw_boot_uart_rx_fifo(WORD(row + 4u),
+    (void)am_hal_uart_fifo_read(WORD(row + 4u),
                                     WORD(state + 0x0cu) + WORD(state + 8u),
                                     maximum, &received);
     WORD(state + 8u) += received;
@@ -44,9 +44,9 @@ uint32_t opencfw_boot_uart_irq_row(uint32_t row_index)
     const uintptr_t row = UINT32_C(0x20000454) + row_index * 0x1cu;
     const uint32_t context = WORD(row + 4u);
     uint32_t status = 0u;
-    (void)opencfw_boot_uart_interrupt_status(context, &status, 1u);
-    (void)opencfw_boot_uart_interrupt_clear(context, status);
-    (void)opencfw_boot_uart_irq_dispatch(context, status);
+    (void)am_hal_uart_interrupt_status_get(context, &status, 1u);
+    (void)am_hal_uart_interrupt_clear(context, status);
+    (void)am_hal_uart_interrupt_service(context, status);
     if (status & 0x10u)
         (void)opencfw_boot_uart_irq_rx_drain(row_index, 0x0fu, 0u);
     if (status & 0x40u)

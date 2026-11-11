@@ -1,0 +1,110 @@
+{
+  "report": "build/sources-goal-r1-nfc-dispatch-sole-c/report.json",
+  "units": 821,
+  "application_imports": 69,
+  "added_imports": [],
+  "removed_imports": [
+    "r1_nfc_charge_task_plan_build"
+  ],
+  "verification": {
+    "flag_combination_pairs": 6144,
+    "live_mutation_pairs": 8,
+    "adapter_pairs": 19,
+    "seeded_pairs": 256,
+    "actual_C_worker_park_helper": true
+  },
+  "actual_worker_dispatch": {
+    "actual_worker_dispatch_pairs": 30
+  },
+  "compiled_defects": [
+    {
+      "defect": "exclusive-flags",
+      "rejected": true
+    },
+    {
+      "defect": "short-ID-retry",
+      "rejected": true
+    },
+    {
+      "defect": "skip-final-ID-delay",
+      "rejected": true
+    },
+    {
+      "defect": "wrong-IRQ-payload",
+      "rejected": true
+    },
+    {
+      "defect": "wrong-ID-value",
+      "rejected": true
+    },
+    {
+      "defect": "wrong-YHM-mask",
+      "rejected": true
+    },
+    {
+      "defect": "wrong-worker-event",
+      "rejected": true
+    },
+    {
+      "defect": "wrong-park-group",
+      "rejected": true
+    },
+    {
+      "defect": "short-battery-resample",
+      "rejected": true
+    },
+    {
+      "defect": "cached-queue",
+      "rejected": true
+    }
+  ],
+  "retirement_audit": {
+    "retired_symbol": "yhm2710_set_charging_event",
+    "prior_consumers": 0,
+    "other_C_definitions_unchanged": true,
+    "remaining_function_sizes_identical": 39,
+    "remaining_rodata_identical": true,
+    "object_layout_changed_due_function_removal": true
+  },
+  "prior_objects_identical": 817,
+  "changed_prior_sources": [
+    "r1/src/vendor/yhm2710/yhm2710.c"
+  ],
+  "dispatcher_object_unchanged_after_vendor_retirement": true,
+  "rea_evidence_ids": [
+    "ev_4b4fc6937beebf4239b2dbd98ebed1d9f29343d6bc79d8794c654503b67ccd47",
+    "ev_cded0a52f3b2d1d4263e16ea4ab112c67ee85e834e98f38691a1ca89cc701b3f",
+    "ev_84183d58243439d459f694642458b3bd5dd5c21c590b974a65a213de82760c9d"
+  ],
+  "evidence_files": {
+    "build/goal-r1-nfc-dispatch-c/verify.py": "07c261ed30fa3c3e4b8fb5910fa79de7bdb83217be75f9ae3bf11c31f911d06d",
+    "build/goal-r1-nfc-dispatch-c/verification.json": "79f59e30848aa76b4a150801cf0eecd4fb51a7a5995de785efb4d398c0798003",
+    "build/goal-r1-nfc-dispatch-c/verify-final.log": "0268295974953e25baa5ec33384bd9050ba9ad2b5b405ed9f044c3e5cf69f128",
+    "build/goal-r1-nfc-dispatch-c/worker.py": "fd68942cc56fa98c72c36b0ece6a5a7b844d3b0c72102b5a6bf3e71833c9603e",
+    "build/goal-r1-nfc-dispatch-c/worker/verification.json": "b1df87afdf049fd0d8c4d5de7b5442dc5b33a51937d55e2ebef7318ae2aaabce",
+    "build/goal-r1-nfc-dispatch-c/worker-final.log": "b9cb478249ac55bb6cb1806211d5835088e8818b4ecce43f33aebcddc1f5f419",
+    "build/goal-r1-nfc-dispatch-c/defects.py": "f173699d86a7c95fce42ccde8f10da6532199eb370546197479d636f12bf7a30",
+    "build/goal-r1-nfc-dispatch-c/defects.json": "15c588046bcb93e48d2e2e6f20b75bd635940ed70bf489692b1799e26e1a77b2",
+    "build/goal-r1-nfc-dispatch-c/audit.py": "817eb852a091b8e62775fd4cb96d1ef5a4c264597343018abba0c11b9db13cef",
+    "build/goal-r1-nfc-dispatch-c/retirement-audit.json": "8dce559c5f57cdfbf8bb6dc49cfc814c40a275f79f37692eda5947eb94e9f3ab",
+    "build/goal-r1-nfc-dispatch-c/retirement.c.diff": "806bf94e652938bb0a0241adf07c9ad737585a23e22e43d0e92f3f0900c6bc33",
+    "build/goal-r1-nfc-dispatch-c/retirement.h.diff": "3d3586b3ad9d8e87cca76b3eb7827b0c0366632430cb192b44efe848679eec0c",
+    "build/goal-r1-nfc-dispatch-c/yhm-before.c": "d201181594aa5a08483df1d1dd75799fdb379f9b038bc01f54477683a48a8f0a",
+    "build/goal-r1-nfc-dispatch-c/yhm-before.h": "6d50a84f8d9d16e9fbd82ee7c16c0375011e3a3b0dd06271f7dc5fc9301812d6",
+    "build/goal-r1-nfc-dispatch-c/rea.json": "742f4f3c91322c7f12a5b4473e8d6acf91d0add15c48d5bbaa8444d059c83b9b",
+    "build/goal-r1-nfc-dispatch-c/document.py": "10dbd37847650ab587f759f713bb26c2d1ef9e6920a22671fdc247369c56b378",
+    "build/sources-goal-r1-nfc-dispatch-sole-c/report.json": "d11e7ada2d8b523689bec666c99f958a4f09cd173c7609c39b6d5b51ee78ecfd",
+    "r1/src/sources.json": "3eda54d488f7269985d5fa6367678f0478e749bcb062033642de58d168110b4f",
+    "r1/src/application/runtime/native_nfc_charge_dispatch.c": "6a282beffa8163492cfafe214eece0b0743c51add5268aa2b84d38a8c21d303d",
+    "r1/src/vendor/yhm2710/yhm2710.c": "d3266708655f7946d97694d17087dc5920950fb6897c42234d30452c96992b2b",
+    "r1/src/vendor/yhm2710/yhm2710.h": "e8b237ffe9be1bfd87bc6ebc41d8cf07d19906936ed5dd6a1ddc9fcb089ede45",
+    "r1/src/application/runtime/native_nfc_charge_task.c": "eddb50ffc97301479c6d88bf16c89c581573dfd60c369bbf9223a2cc397b209f",
+    "r1/src/application/board/native_sync.c": "4d3dea4208f4b8a302f46571d5026a66d172452ecfd93191889d9f9789edb569"
+  },
+  "limitations": [
+    "PMIC, battery, sensor, protocol/event and service children modeled in direct dispatcher comparisons.",
+    "Actual C worker/dispatcher and parking helper execute in integration; startup/sync/RTOS/watchdog/event and hardware leaves modeled.",
+    "Successful GXT ID provider supplies all three bytes; C private ID fallback is zero-initialized rather than native stack residue.",
+    "Final application linking, startup storage placement, electrical timing and device boot remain unverified."
+  ]
+}

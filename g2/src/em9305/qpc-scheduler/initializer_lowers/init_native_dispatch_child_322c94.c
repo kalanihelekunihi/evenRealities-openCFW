@@ -1,86 +1,83 @@
-/* Complete native 322c94 body; all BL operands name their source providers. */
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_dispatch_child_322c94\n"
-".type opencfw_em9305_dispatch_child_322c94,@function\n"
-"opencfw_em9305_dispatch_child_322c94:\n"
-"L322c94: enter_s [r13-r15,blink]\n"
-"L322c96: mov_s r14,r1\n"
-"L322c98: mov_s r13,r0\n"
-"L322c9a: ldh_s r2,[r1,0x22]\n"
-"L322c9c: ldh_s r1,[r1,0x2c]\n"
-"L322c9e: ld_s r0,[r14,0x24]\n"
-"L322ca0: ldb r3,[r14,32]\n"
-"L322ca4: sth_s r1,[r13,0x6]\n"
-"L322ca6: st.as r0,[r13,86]\n"
-"L322caa: ldh_s r1,[r14,0x2e]\n"
-"L322cac: ldb_s r0,[r14,0x11]\n"
-"L322cae: sth_s r2,[r13,0x4]\n"
-"L322cb0: sth.as r1,[r13,174]\n"
-"L322cb4: stb_s r0,[r13,0x19]\n"
-"L322cb6: ldb_s r1,[r14,0x18]\n"
-"L322cb8: ldb r0,[r14,68]\n"
-"L322cbc: ldb_s r2,[r14,0x12]\n"
-"L322cbe: stb_s r1,[r13,0x1a]\n"
-"L322cc0: stb_s r0,[r13,0x1e]\n"
-"L322cc2: ld_s r0,[r14,0x3c]\n"
-"L322cc4: ld_s r1,[r14,0x40]\n"
-"L322cc6: stb_s r3,[r13,0x1b]\n"
-"L322cc8: mov_s r3,0\n"
-"L322cca: bl.d opencfw_em9305_sleep_sync_divide\n"
-"L322cce: stb_s r2,[r13,0x18]\n"
-"L322cd0: ld r3,[r14,0x14]\n"
-"L322cd2: ld r2,[r14,0x1c]\n"
-"L322cd4: st_s r1,[r13,0x24]\n"
-"L322cd6: brhs.d.nt r2,r3,L322ce6\n"
-"L322cda: st_s r0,[r13,0x20]\n"
-"L322cdc: stb 1,[r13,31]\n"
-"L322ce0: ldb_s r1,[r14,0x10]\n"
-"L322ce2: ld r0,[r14,0x14]\n"
-"L322ce4: b_s L322cee\n"
-"L322ce6: stb 0,[r13,31]\n"
-"L322cea: ldb_s r1,[r14,0x10]\n"
-"L322cec: ld r0,[r14,0x1c]\n"
-"L322cee: mpywhl r1,r0,r1\n"
-"L322cf2: mov_s r0,r13\n"
-"L322cf4: add r0,r0,274\n"
-"L322cf8: add r1,r1,-150\n"
-"L322cfc: st_s r1,[r13,0x28]\n"
-"L322cfe: ldb r2,[r14,69]\n"
-"L322d02: ldb r1,[r14,56]\n"
-"L322d06: stb -1,[r0]\n"
-"L322d0a: stb_s r1,[r0,0x12]\n"
-"L322d0c: setne r1,r2,0\n"
-"L322d10: stb r1,[r0,210]\n"
-"L322d14: breq_s r2,0,L322d46\n"
-"L322d16: mov_s r0,r13\n"
-"L322d18: add r0,r0,485\n"
-"L322d1c: add1 r1,r14,0x23\n"
-"L322d20: bl.d opencfw_em9305_memcpy\n"
-"L322d24: mov_s r2,0x8\n"
-"L322d26: mov_s r15,r13\n"
-"L322d28: add r15,r15,493\n"
-"L322d2c: add1 r1,r14,0x27\n"
-"L322d30: mov_s r2,0x10\n"
-"L322d32: bl.d opencfw_em9305_memcpy\n"
-"L322d36: mov_s r0,r15\n"
-"L322d38: add2 r1,r13,0x39\n"
-"L322d3c: add1 r2,r13,0x2e\n"
-"L322d40: bl.d opencfw_em9305_radio_encrypt_seed_317334\n"
-"L322d44: mov_s r0,r15\n"
-"L322d46: ldh_s r1,[r14,0xe]\n"
-"L322d48: ld_s r12,[r14,0x1c]\n"
-"L322d4a: ld r3,[r14,0x14]\n"
-"L322d4c: ld_s r2,[r14,0x28]\n"
-"L322d4e: ldb_s r0,[r14,0x8]\n"
-"L322d50: mpyuw r1,r1,1250\n"
-"L322d54: st_s r12,[r13,0xc]\n"
-"L322d56: st_s r3,[r13,0x30]\n"
-"L322d58: st_s r2,[r13,0x8]\n"
-"L322d5a: bl.d opencfw_em9305_mode_callback_child_317ea4\n"
-"L322d5e: st_s r1,[r13,0x10]\n"
-"L322d60: sth r0,[r13,244]\n"
-"L322d64: leave_s [r13-r15,blink,pcl]\n"
-".size opencfw_em9305_dispatch_child_322c94,.-opencfw_em9305_dispatch_child_322c94\n"
-);
+#include <stdint.h>
+
+/* Native 0x322c94..0x322d66: load BIG/CIS stream parameters into the
+ * record: handles, counts and options bytes, the SDU interval divided by
+ * the framing count (sleep_sync_divide), the larger of the two latency
+ * words (+20/+28, flag at +31 when +20 is larger) times the byte +16 minus
+ * 150, the optional encryption block (8 + 16 bytes and the seed derived
+ * from it), the ISO interval in microseconds (+14 * 1250) and the PHY
+ * timing from 317ea4. */
+extern uint64_t opencfw_em9305_sleep_sync_divide(uint32_t low,uint32_t high,
+    uint32_t denominator_low,uint32_t denominator_high);
+extern void *opencfw_em9305_memcpy(void *destination,const void *source,
+                                   uint32_t bytes);
+extern void opencfw_em9305_radio_encrypt_seed_317334(uintptr_t key,
+    uintptr_t input,uintptr_t output);
+extern uint32_t opencfw_em9305_mode_callback_child_317ea4(uint32_t selector);
+
+static inline uint32_t r8(uintptr_t a){return *(volatile uint8_t *)a;}
+static inline uint32_t r16(uintptr_t a){return *(volatile uint16_t *)a;}
+static inline uint32_t r32(uintptr_t a){return *(volatile uint32_t *)a;}
+static inline void w8(uintptr_t a,uint32_t v){*(volatile uint8_t *)a=(uint8_t)v;}
+static inline void w16(uintptr_t a,uint32_t v){*(volatile uint16_t *)a=(uint16_t)v;}
+static inline void w32(uintptr_t a,uint32_t v){*(volatile uint32_t *)a=v;}
+
+uint32_t opencfw_em9305_dispatch_child_322c94(uintptr_t record,uintptr_t params)
+{
+    uint32_t handle=r16(params+34u);
+    uint32_t count=r16(params+44u);
+    uint32_t interval=r32(params+36u);
+    uint32_t options=r8(params+32u);
+    w16(record+6u,count);
+    w32(record+344u,interval);
+    uint32_t max_pdu=r16(params+46u);
+    uint32_t phy=r8(params+17u);
+    w16(record+4u,handle);
+    w16(record+348u,max_pdu);
+    w8(record+25u,phy);
+    uint32_t packing=r8(params+24u);
+    uint32_t framing=r8(params+68u);
+    uint32_t divisor=r8(params+18u);
+    w8(record+26u,packing);
+    w8(record+30u,framing);
+    uint32_t low=r32(params+60u),high=r32(params+64u);
+    w8(record+27u,options);
+    w8(record+24u,divisor);
+    uint64_t quotient=opencfw_em9305_sleep_sync_divide(low,high,divisor,0u);
+    uint32_t first=r32(params+20u);
+    uint32_t second=r32(params+28u);
+    w32(record+36u,(uint32_t)(quotient>>32));
+    w32(record+32u,(uint32_t)quotient);
+    uint32_t latency;
+    if(second>=first){
+        w8(record+31u,0u);
+        latency=r32(params+28u);
+    }else{
+        w8(record+31u,1u);
+        latency=r32(params+20u);
+    }
+    latency*=r8(params+16u);
+    w32(record+40u,latency-150u);
+    uint32_t encrypted=r8(params+69u);
+    uint32_t number=r8(params+56u);
+    w8(record+274u,0xffu);
+    w8(record+292u,number);
+    w8(record+484u,encrypted!=0u);
+    if(encrypted!=0u){
+        (void)opencfw_em9305_memcpy((void *)(record+485u),(const void *)(params+70u),8u);
+        (void)opencfw_em9305_memcpy((void *)(record+493u),(const void *)(params+78u),16u);
+        opencfw_em9305_radio_encrypt_seed_317334(record+493u,record+228u,record+92u);
+    }
+    uint32_t iso=r16(params+14u);
+    uint32_t sdu=r32(params+28u);
+    uint32_t transport=r32(params+20u);
+    uint32_t offset=r32(params+40u);
+    uint32_t selector=r8(params+8u);
+    w32(record+12u,sdu);
+    w32(record+48u,transport);
+    w32(record+8u,offset);
+    w32(record+16u,iso*1250u);
+    uint32_t timing=opencfw_em9305_mode_callback_child_317ea4(selector);
+    w16(record+244u,timing);
+    return timing;
+}

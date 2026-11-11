@@ -1,0 +1,15 @@
+# C charger predicates and device-status route
+
+`r1/src/application/board/native_protocol_device_status.c` and `native_phone_operation.c` now use ordinary C. Fixed-register constraints, private scratch capture/restoration, the device-status naked entry and worker are removed. The status table declaration now matches its explicit four-argument callback. The module object and table remain byte-identical.
+
+The status path still queries charge byte, active state and full state separately and in order. A changing charger therefore remains observable between queries; full state takes priority when encoding the status byte. The default eight-byte record is retained, with seven bytes published. Packet sequence is read after the hardware queries, before the phone handle query. The incoming dispatcher handle is not substituted for the phone handle. The phone wrapper retains null-payload rejection, operation one, length seven and the response result.
+
+REA bytes match the stock entries. Direct execution passes **25,336 stock/C comparisons** across all charge bytes, changing state pairs, predicate inputs, invalid/full-word handles, backend errors, flag/sequence words, null payloads and callback sequence mutations. Actual C predicates, phone wrapper and header writer execute. Tests compare exact headers, payloads and return values, plus caller stack, callee-saved integer/FP registers, SP and interrupt masks. Modeled callees overwrite caller-saved registers.
+
+A further **49,152 stock/C comparisons** execute the actual command table/lookup, C battery-byte getter, YHM status decoder and charger-state mapper. Tests cover every pair of status nibbles, readiness changes between queries, read buffers filled despite error status, conditional ADC-refresh behavior, zero-byte fallback to one, wire results and the complete battery context. Physical reads, ADC refresh, phone handle and final response backend are modeled. This establishes the C integration, not hardware electrical or radio behavior.
+
+Five compiled defects are rejected using a reduced matrix: wrong full-state priority, wrong active-state predicate, wrong sequence offset, wrong operation and wrong payload extent. Private-frame aliases, saved R1–R3 residue, incomplete packet buffers, faults/concurrency and byte identity are excluded.
+
+The open-toolchain report `build/sources-goal-r1-device-status-pure-c/report.json` compiles all **855 units** and completes both relocatable compositions. All **843 other nongenerated objects** remain unchanged. Both changed normal objects equal the directly executed probe objects. Default record data, module table object and persistent state are unchanged. Imports remain **61 application / 22 bootloader**. R1 manifest validation passes and manifest/source-plan selections remain unchanged.
+
+[Machine receipt](device-status-pure-c-review.json) binds sources, REA, reports and ignored probe evidence under `build/goal-r1-device-status-pure-c/`. Physical charger/ADC behavior, transmission and final application linking/startup remain unverified.

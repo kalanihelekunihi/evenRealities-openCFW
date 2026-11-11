@@ -1,0 +1,71 @@
+{
+  "packed_accessor_probe": {
+    "passed": 1290,
+    "executions": 2580,
+    "source_report": "build/sources-goal-r1-ppg-packed-c/report.json",
+    "actual_expanded_wrappers_and_packed_leaves": true,
+    "ordered_memory_accesses_checked": true,
+    "output_aliasing_checked": true,
+    "wrapper_r2_r3_observations_checked": true,
+    "limits": [
+      "Private stack accesses excluded from trace; caller-clobbered registers/flags excluded",
+      "Stable cache state; concurrent interrupt updates, faults from malformed pointers and physical sensor operation unverified",
+      "No byte qualification"
+    ]
+  },
+  "audit": {
+    "unchanged_expanded_wrappers": [
+      "r1_hr_latest_sample",
+      "r1_hrv_latest_sample",
+      "r1_spo2_latest_sample"
+    ],
+    "other_object_bytes_unchanged": true,
+    "removed_assembly_leaves": 3,
+    "import_sets_unchanged": true
+  },
+  "negative_controls": {
+    "truncate-hrv-flag": true,
+    "preload-tail": true
+  },
+  "REA_limitation": "Default Ghidra session has no procedures at the three native leaf entries; recorded errors do not establish coverage. Direct Thumb disassembly and execution supply local evidence.",
+  "normal_build": {
+    "compiled": 573,
+    "application_imports": 179,
+    "bootloader_imports": 34,
+    "failures": 0,
+    "duplicate_strong_symbols": 0
+  },
+  "qualification": {
+    "compiled_profiles": 5,
+    "unchanged_assembly_wrapper_regions": 3,
+    "new_C_leaf_regions": 0,
+    "unchanged_wrapper_candidates_promoted": false
+  },
+  "source_plan_unchanged": true,
+  "source_built_bytes": 3857,
+  "binary_pull_through_bytes": 642303,
+  "hybrid_equals_locked_application": true,
+  "source_completeness_proven": false,
+  "evidence": {
+    "build/sources-goal-r1-ppg-packed-c/report.json": "caadaca29782978185415c66533b7136bd59dab5a4e28739af7dcc82b4081b87",
+    "tools/build/source-plan.json": "969af3130987be89dcdc8777d86b4c891d596b4ecef5cccfd763861f05a12d31",
+    "r1/src/application/runtime/native_health_latest_samples.c": "e582ce0bc0e95cee8ed6e7ee5d582eb98fcafed8637938ed7f201f34925d1ef0",
+    "r1/src/application/runtime/native_health_sample_storage.c": "967e4e3c4791ee9943d2e6366d43844027e16f9a3b657e420248f58c81b2d030",
+    "r1/src/sources.json": "e4c2161f5a94ed8f60f515c71ed7f323fa68daecf30f6a35feb8327e77cfec3e",
+    "r1/symbols/function-frontier.csv": "68355ff9b91a8b2f2a3167193ffe4fbadca3c10938c4716530b9606a560c1d13",
+    "build/hybrid-goal-r1-ppg-packed-c/build-report.json": "a1384f4435e7696f41bf84be95deb29686177ca641292a49af7a96b9df93b466",
+    "build/goal-r1-ppg-packed-c/before.c": "81202a8158956395d095a2490ebbc3b8bc4ef11890f551c288f96c0f312209fa",
+    "build/goal-r1-ppg-packed-c/REA.json": "e580c735e4454c6f59e3342df0f78ca9235c356852095ba3e73392a2e0a5785c",
+    "build/goal-r1-ppg-packed-c/native-hr.dis": "ac64ceae5d311c6c781b55607acb92a9157041f87bc218255d39b7a43f463c9b",
+    "build/goal-r1-ppg-packed-c/native-hrv.dis": "5b691ffb5fbf8de902a5bd1cebe67cfc53222a58c5b386f028aecddd929681a9",
+    "build/goal-r1-ppg-packed-c/native-spo2.dis": "802e7124240db094bd4820d2b8aaf665b209840dcf2e277d70876aaef097b535",
+    "build/goal-r1-ppg-packed-c/verify.py": "70c5a8e42fd01bbe4f9ed1eb6e1ea467a167794f2f2127c9596cc73f2e088059",
+    "build/goal-r1-ppg-packed-c/results.json": "3e503f1f46d9bc1347d7e2d2a5987da3390c8232ef3c18319184d153a88b4086",
+    "build/goal-r1-ppg-packed-c/negative.py": "cf7eadde8aacf35a977762a7cc9f6b50a43d034fc759d8951e36a4d5d18c51f4",
+    "build/goal-r1-ppg-packed-c/negative-results.json": "f5ff29c05f064dc34e313ee105b32fce1f60024586ed26bbae5c4024667ecf69",
+    "build/goal-r1-ppg-packed-c/audit.py": "fdcd95b0473aa82cf28a4c559d315562dde099bbd4a132808a5ad980b6db4bc5",
+    "build/goal-r1-ppg-packed-c/audit-results.json": "af890369ff036184963452bfe947cec35103028a5f6e06c7ffb2068b8f6d2faf",
+    "build/goal-r1-ppg-packed-c/qualify.py": "fdc6f2699eedec402e5aa89a3591a1dd1c28358e221e2666f75a81e85c48dd36",
+    "build/goal-r1-ppg-packed-c/qualified/qualification.json": "294168228e472c2f8a78074e13499dd7b8002748d14f96206206a74a1c47f7bf"
+  }
+}

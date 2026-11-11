@@ -35,15 +35,15 @@ void display_driver_uled_type1_set_brightness_5bc6ae(int32_t level,
         (20u - reduction) * ((base * (uint32_t)mapped) / 100u) / 20u;
     if (g2_flashdb_candidate_flags() & 2u)
         g2_flashdb_candidate_log(4u,
-            (const char *)(uintptr_t)0x785c80u,
-            (const char *)(uintptr_t)0x6ecca8u,
-            (const char *)(uintptr_t)0x749754u,0x271u,
-            (const char *)(uintptr_t)0x73e3ccu,level,current);
+            "driver.a6n-g" /* stock 0x785c80 */,
+            "D:\\01_workspace\\s200_ap510b_iar_git\\driver\\uled\\hongshi_a6ng\\drv_mspi_a6ng.c" /* stock 0x6ecca8 */,
+            "am_devices_mspi_hongshi_setBrightness" /* stock 0x749754 */,0x271u,
+            "hongshi Brightness level %d, reg val %d\r\n" /* stock 0x73e3cc */,level,current);
     if ((g2_flashdb_candidate_flags() & 1u) ||
         (g2_flashdb_candidate_flags() & 4u))
         (void)audio_log_simple(0x10800000u,
-            (const char *)(uintptr_t)0x71e220u,
-            (const char *)(uintptr_t)0x71e220u,level,current);
+            "[driver.a6n-g]hongshi Brightness level %d, reg val %d\r\n" /* stock 0x71e220 */,
+            "[driver.a6n-g]hongshi Brightness level %d, reg val %d\r\n" /* stock 0x71e220 */,level,current);
     (void)display_driver_uled_type1_write_register_5bbdf0(
         0xe2u,current & 0xffu,0u);
     audio_ble_hci_radio_reset_4910f4(1u);

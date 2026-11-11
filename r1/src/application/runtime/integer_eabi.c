@@ -1,4 +1,4 @@
-#include <stdint.h>
+#include "integer_eabi.h"
 
 /* Nonzero arithmetic is the unchanged pinned LLVM compiler-rt C provider.
  * Stock Arm runtime zero-divisor results are deliberately supplied here. */
@@ -19,36 +19,6 @@ uint64_t r1_runtime_sdivmod(uint64_t numerator,uint64_t denominator,uint64_t *re
     uint64_t rest,quotient=r1_runtime_udivmod(magnitude_n,magnitude_d,&rest);
     if (remainder) *remainder=negative_n ? UINT64_C(0)-rest : rest;
     return negative_n!=negative_d ? UINT64_C(0)-quotient : quotient;
-}
-
-/* EABI returns quotient in r0:r1 and remainder in r2:r3, unlike a normal C
- * aggregate return. This C-compilable inline-assembly glue marshals only that
- * register/stack interface; it contains no original firmware instructions. */
-__attribute__((naked)) void __aeabi_uldivmod(void)
-{
-    __asm__ volatile (
-        "push {r4, r5, r12, lr}\n"
-        "sub sp, sp, #16\n"
-        "add r4, sp, #8\n"
-        "str r4, [sp]\n"
-        "bl r1_runtime_udivmod\n"
-        "ldrd r2, r3, [sp, #8]\n"
-        "add sp, sp, #16\n"
-        "pop {r4, r5, r12, pc}\n");
-}
-__attribute__((naked)) void __aeabi_ldivmod(void)
-{
-    __asm__ volatile (
-        "push {r4, lr}\n"
-        "sub sp, sp, #16\n"
-        "add r4, sp, #8\n"
-        "str r4, [sp]\n"
-        "bl r1_runtime_sdivmod\n"
-        "ldrd r2, r3, [sp, #8]\n"
-        "mov r12, r3\n"
-        "mov lr, r0\n"
-        "add sp, sp, #16\n"
-        "pop {r4, pc}\n");
 }
 
 static uint32_t arm_lsl(uint32_t value,uint32_t count)

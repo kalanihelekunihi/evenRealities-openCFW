@@ -1,0 +1,1267 @@
+{
+  "schema_version": 1,
+  "status": "Bounded instruction-backed review; not independent pseudocode admission or a workflow gate.",
+  "input": {
+    "path": "g2/blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin",
+    "sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+    "file_offset_to_va": "0x437fe0"
+  },
+  "records": [
+    {
+      "evidence_id": "ev_8db33faad09cdb0598fe7ed0d38262837c11b6cd49a7c1c23899642dda3d5ac4",
+      "subject": {
+        "name": "stock.elf",
+        "digest": {
+          "sha256": "022af9df64319d11aae255a936da969b476ae7a47dcef895b33bbd3828317693"
+        },
+        "local_path": "/Users/kalani/Repo/evenRealities-openCFW/build/goal-flash-guard/stock.elf",
+        "format": "elf",
+        "architecture": "arm"
+      },
+      "provider": {
+        "id": "ghidra",
+        "name": "Ghidra",
+        "version": "12.1.4"
+      },
+      "analysis_profile": {
+        "provider": {
+          "id": "ghidra",
+          "name": "Ghidra",
+          "version": "12.1.4"
+        },
+        "parameters": {
+          "target_kind": "executable",
+          "target_format": "elf",
+          "architecture": "arm",
+          "available_architectures": [
+            "arm"
+          ],
+          "import_mode": "ephemeral-source-immutable",
+          "annotation_policy": "atomic-function-entry-metadata-v1",
+          "load_image_observations": "source-mappings-entry-context-v2",
+          "function_body_evidence": "complete-inclusive-ranges-v1",
+          "function_references": "complete-body-and-entry-reference-manager-v2",
+          "call_relationship_coverage": "function-body-call-coverage-v5",
+          "function_dossier_coverage": "observed-facets-and-call-relationships-v1",
+          "string_inventory_evidence": "defined-data-coverage-v1",
+          "location_resolution": "explicit-address-exact-entry-symbol-first-v3",
+          "procedure_file_offset_resolution": "address-first-unique-target-source-mapping-v2",
+          "instruction_flow_evidence": "decoded-return-pcode-v1",
+          "instruction_references": "exact-address-incoming-v1",
+          "function_boundary_observations": "ghidra-function-boundary-limitations-v3",
+          "no_return_repair": "returning-imports-decoded-return-v2",
+          "process_launch": "inspected-jvm-launch-support-v1",
+          "jump_table_evidence": "typed-case-default-blocks-v1",
+          "decompiler_jump_loads": true,
+          "loader": "auto-from-header",
+          "language_id": "auto-from-header",
+          "compiler_spec_id": "auto-default",
+          "analyzer_preset": "ghidra-default"
+        },
+        "digest": "7e46711069eea041af1b9b99e34115c13332795e5cda76e584a722f529ec70de"
+      },
+      "relationship_coverage": {
+        "status": "partial",
+        "limitations": [
+          "Ghidra's callee inventory omits targets of 1 call reference(s) or decoded call(s) without destinations."
+        ],
+        "limited_directions": [
+          "callees"
+        ],
+        "diagnostics": [
+          "Only resolved Ghidra call references are returned; unresolved computed or indirect calls remain unknown, while function classifications distinguish thunks and externals."
+        ]
+      },
+      "limitations": [
+        "The session serves operations only after Ghidra reports default auto-analysis complete; incomplete analysis does not expose partial results.",
+        "The imported Program and temporary project are ephemeral and deleted on close. Annotation operations edit session database metadata; original executable bytes are never written.",
+        "Cancelling an active Ghidra request terminates its ephemeral database and discards session annotations. The selected target remains open; the next provider query imports the original artifact again.",
+        "Default-space addresses use lowercase 0x-prefixed hexadecimal; other address spaces use <percent-encoded-space>:0x<hex>.",
+        "References cover the complete Ghidra function-body AddressSet and exact entry. Dossier incoming edges omit sources owned by that function; procedure_references also retains those internal edges.",
+        "The dossier combines Ghidra FunctionManager, Listing, ReferenceManager, BasicBlockModel, and decompiler observations; provider-specific pseudocode and assembly are not cross-provider text invariants.",
+        "Resolved reference metadata identifies computed, indirect, external, call, jump, and data edges; unresolved targetless flows remain unknown, and function classifications distinguish thunks and externals.",
+        "Synthetic Ghidra entry-point references without actionable memory sources are omitted.",
+        "The Java bridge serializes one function request per Program and lets each decompilation run until it completes or the caller cancels.",
+        "macOS sessions require a matching executable Ghidra native decompiler; REA checks for it but does not build native components or change Gatekeeper quarantine state."
+      ],
+      "observation": {
+        "procedure": {
+          "address": "0x46f50c",
+          "name": "flash_sleep",
+          "classification": {
+            "external": false,
+            "thunk": false,
+            "thunk_target": null,
+            "provenance": "ghidra-function-manager"
+          },
+          "body": {
+            "available": true,
+            "provenance": "ghidra-function-body-address-set",
+            "ranges": [
+              {
+                "start": "0x46f50c",
+                "end": "0x46f52b"
+              }
+            ],
+            "total_bytes": 32,
+            "span_bytes": 32,
+            "non_contiguous": false,
+            "contains_entry": true
+          },
+          "signature": "undefined flash_sleep()",
+          "locals": []
+        },
+        "assembly": [
+          "0x46f50c: push {r4,lr}",
+          "0x46f50e: ldr.w r4, [0x00470018]",
+          "0x46f512: ldrb r0, [r4,#0x0]",
+          "0x46f514: cmp r0, #0x1",
+          "0x46f516: beq 0x0046f52a",
+          "0x46f518: movs r2, #0x1",
+          "0x46f51a: movs r1, #0x2",
+          "0x46f51c: ldr.w r0, [0x00470014]",
+          "0x46f520: ldr r0, [r0,#0x0]",
+          "0x46f522: bl 0x004c26e0",
+          "0x46f526: movs r0, #0x1",
+          "0x46f528: strb r0, [r4,#0x0]",
+          "0x46f52a: pop {r4,pc}"
+        ],
+        "pseudocode": "\n/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */\n\nvoid flash_sleep(void)\n\n{\n  if (DAT_20074fb9 != '\\x01') {\n    func_0x004c26e0(_DAT_20074544,2,1);\n    DAT_20074fb9 = '\\x01';\n  }\n  return;\n}\n\n",
+        "unresolved_calls": [
+          {
+            "address": "0x46f522",
+            "reason": "A call destination has no known containing Ghidra procedure"
+          }
+        ]
+      }
+    },
+    {
+      "evidence_id": "ev_2a7b707ccbe1892bc7f4c0ab7502271794e5ead281ac76b796f9840fd4bcc9e1",
+      "subject": {
+        "name": "stock.elf",
+        "digest": {
+          "sha256": "022af9df64319d11aae255a936da969b476ae7a47dcef895b33bbd3828317693"
+        },
+        "local_path": "/Users/kalani/Repo/evenRealities-openCFW/build/goal-flash-guard/stock.elf",
+        "format": "elf",
+        "architecture": "arm"
+      },
+      "provider": {
+        "id": "ghidra",
+        "name": "Ghidra",
+        "version": "12.1.4"
+      },
+      "analysis_profile": {
+        "provider": {
+          "id": "ghidra",
+          "name": "Ghidra",
+          "version": "12.1.4"
+        },
+        "parameters": {
+          "target_kind": "executable",
+          "target_format": "elf",
+          "architecture": "arm",
+          "available_architectures": [
+            "arm"
+          ],
+          "import_mode": "ephemeral-source-immutable",
+          "annotation_policy": "atomic-function-entry-metadata-v1",
+          "load_image_observations": "source-mappings-entry-context-v2",
+          "function_body_evidence": "complete-inclusive-ranges-v1",
+          "function_references": "complete-body-and-entry-reference-manager-v2",
+          "call_relationship_coverage": "function-body-call-coverage-v5",
+          "function_dossier_coverage": "observed-facets-and-call-relationships-v1",
+          "string_inventory_evidence": "defined-data-coverage-v1",
+          "location_resolution": "explicit-address-exact-entry-symbol-first-v3",
+          "procedure_file_offset_resolution": "address-first-unique-target-source-mapping-v2",
+          "instruction_flow_evidence": "decoded-return-pcode-v1",
+          "instruction_references": "exact-address-incoming-v1",
+          "function_boundary_observations": "ghidra-function-boundary-limitations-v3",
+          "no_return_repair": "returning-imports-decoded-return-v2",
+          "process_launch": "inspected-jvm-launch-support-v1",
+          "jump_table_evidence": "typed-case-default-blocks-v1",
+          "decompiler_jump_loads": true,
+          "loader": "auto-from-header",
+          "language_id": "auto-from-header",
+          "compiler_spec_id": "auto-default",
+          "analyzer_preset": "ghidra-default"
+        },
+        "digest": "7e46711069eea041af1b9b99e34115c13332795e5cda76e584a722f529ec70de"
+      },
+      "relationship_coverage": {
+        "status": "partial",
+        "limitations": [
+          "Ghidra's callee inventory omits targets of 1 call reference(s) or decoded call(s) without destinations."
+        ],
+        "limited_directions": [
+          "callees"
+        ],
+        "diagnostics": [
+          "Only resolved Ghidra call references are returned; unresolved computed or indirect calls remain unknown, while function classifications distinguish thunks and externals."
+        ]
+      },
+      "limitations": [
+        "The session serves operations only after Ghidra reports default auto-analysis complete; incomplete analysis does not expose partial results.",
+        "The imported Program and temporary project are ephemeral and deleted on close. Annotation operations edit session database metadata; original executable bytes are never written.",
+        "Cancelling an active Ghidra request terminates its ephemeral database and discards session annotations. The selected target remains open; the next provider query imports the original artifact again.",
+        "Default-space addresses use lowercase 0x-prefixed hexadecimal; other address spaces use <percent-encoded-space>:0x<hex>.",
+        "References cover the complete Ghidra function-body AddressSet and exact entry. Dossier incoming edges omit sources owned by that function; procedure_references also retains those internal edges.",
+        "The dossier combines Ghidra FunctionManager, Listing, ReferenceManager, BasicBlockModel, and decompiler observations; provider-specific pseudocode and assembly are not cross-provider text invariants.",
+        "Resolved reference metadata identifies computed, indirect, external, call, jump, and data edges; unresolved targetless flows remain unknown, and function classifications distinguish thunks and externals.",
+        "Synthetic Ghidra entry-point references without actionable memory sources are omitted.",
+        "The Java bridge serializes one function request per Program and lets each decompilation run until it completes or the caller cancels.",
+        "macOS sessions require a matching executable Ghidra native decompiler; REA checks for it but does not build native components or change Gatekeeper quarantine state."
+      ],
+      "observation": {
+        "procedure": {
+          "address": "0x46f52c",
+          "name": "flash_wake",
+          "classification": {
+            "external": false,
+            "thunk": false,
+            "thunk_target": null,
+            "provenance": "ghidra-function-manager"
+          },
+          "body": {
+            "available": true,
+            "provenance": "ghidra-function-body-address-set",
+            "ranges": [
+              {
+                "start": "0x46f52c",
+                "end": "0x46f545"
+              }
+            ],
+            "total_bytes": 26,
+            "span_bytes": 26,
+            "non_contiguous": false,
+            "contains_entry": true
+          },
+          "signature": "undefined flash_wake()",
+          "locals": []
+        },
+        "assembly": [
+          "0x46f52c: push {r7,lr}",
+          "0x46f52e: movs r2, #0x1",
+          "0x46f530: movs r1, #0x0",
+          "0x46f532: ldr.w r0, [0x00470014]",
+          "0x46f536: ldr r0, [r0,#0x0]",
+          "0x46f538: bl 0x004c26e0",
+          "0x46f53c: movs r0, #0x0",
+          "0x46f53e: ldr.w r1, [0x00470018]",
+          "0x46f542: strb r0, [r1,#0x0]",
+          "0x46f544: pop {r0,pc}"
+        ],
+        "pseudocode": "\n/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */\n\nundefined4 flash_wake(void)\n\n{\n  undefined4 unaff_r7;\n  \n  func_0x004c26e0(_DAT_20074544,0,1);\n  DAT_20074fb9 = 0;\n  return unaff_r7;\n}\n\n",
+        "unresolved_calls": [
+          {
+            "address": "0x46f538",
+            "reason": "A call destination has no known containing Ghidra procedure"
+          }
+        ]
+      }
+    },
+    {
+      "evidence_id": "ev_13c342ddcb261729f5faf966cf7cee5cd6b5311586ddf9227283c43b9f451171",
+      "subject": {
+        "name": "stock.elf",
+        "digest": {
+          "sha256": "022af9df64319d11aae255a936da969b476ae7a47dcef895b33bbd3828317693"
+        },
+        "local_path": "/Users/kalani/Repo/evenRealities-openCFW/build/goal-flash-guard/stock.elf",
+        "format": "elf",
+        "architecture": "arm"
+      },
+      "provider": {
+        "id": "ghidra",
+        "name": "Ghidra",
+        "version": "12.1.4"
+      },
+      "analysis_profile": {
+        "provider": {
+          "id": "ghidra",
+          "name": "Ghidra",
+          "version": "12.1.4"
+        },
+        "parameters": {
+          "target_kind": "executable",
+          "target_format": "elf",
+          "architecture": "arm",
+          "available_architectures": [
+            "arm"
+          ],
+          "import_mode": "ephemeral-source-immutable",
+          "annotation_policy": "atomic-function-entry-metadata-v1",
+          "load_image_observations": "source-mappings-entry-context-v2",
+          "function_body_evidence": "complete-inclusive-ranges-v1",
+          "function_references": "complete-body-and-entry-reference-manager-v2",
+          "call_relationship_coverage": "function-body-call-coverage-v5",
+          "function_dossier_coverage": "observed-facets-and-call-relationships-v1",
+          "string_inventory_evidence": "defined-data-coverage-v1",
+          "location_resolution": "explicit-address-exact-entry-symbol-first-v3",
+          "procedure_file_offset_resolution": "address-first-unique-target-source-mapping-v2",
+          "instruction_flow_evidence": "decoded-return-pcode-v1",
+          "instruction_references": "exact-address-incoming-v1",
+          "function_boundary_observations": "ghidra-function-boundary-limitations-v3",
+          "no_return_repair": "returning-imports-decoded-return-v2",
+          "process_launch": "inspected-jvm-launch-support-v1",
+          "jump_table_evidence": "typed-case-default-blocks-v1",
+          "decompiler_jump_loads": true,
+          "loader": "auto-from-header",
+          "language_id": "auto-from-header",
+          "compiler_spec_id": "auto-default",
+          "analyzer_preset": "ghidra-default"
+        },
+        "digest": "7e46711069eea041af1b9b99e34115c13332795e5cda76e584a722f529ec70de"
+      },
+      "relationship_coverage": {
+        "status": "partial",
+        "limitations": [
+          "Ghidra's callee inventory omits targets of 6 call reference(s) or decoded call(s) without destinations."
+        ],
+        "limited_directions": [
+          "callees"
+        ],
+        "diagnostics": [
+          "Only resolved Ghidra call references are returned; unresolved computed or indirect calls remain unknown, while function classifications distinguish thunks and externals."
+        ]
+      },
+      "limitations": [
+        "The session serves operations only after Ghidra reports default auto-analysis complete; incomplete analysis does not expose partial results.",
+        "The imported Program and temporary project are ephemeral and deleted on close. Annotation operations edit session database metadata; original executable bytes are never written.",
+        "Cancelling an active Ghidra request terminates its ephemeral database and discards session annotations. The selected target remains open; the next provider query imports the original artifact again.",
+        "Default-space addresses use lowercase 0x-prefixed hexadecimal; other address spaces use <percent-encoded-space>:0x<hex>.",
+        "References cover the complete Ghidra function-body AddressSet and exact entry. Dossier incoming edges omit sources owned by that function; procedure_references also retains those internal edges.",
+        "The dossier combines Ghidra FunctionManager, Listing, ReferenceManager, BasicBlockModel, and decompiler observations; provider-specific pseudocode and assembly are not cross-provider text invariants.",
+        "Resolved reference metadata identifies computed, indirect, external, call, jump, and data edges; unresolved targetless flows remain unknown, and function classifications distinguish thunks and externals.",
+        "Synthetic Ghidra entry-point references without actionable memory sources are omitted.",
+        "The Java bridge serializes one function request per Program and lets each decompilation run until it completes or the caller cancels.",
+        "macOS sessions require a matching executable Ghidra native decompiler; REA checks for it but does not build native components or change Gatekeeper quarantine state."
+      ],
+      "observation": {
+        "procedure": {
+          "address": "0x46f5a6",
+          "name": "mutex_lock",
+          "classification": {
+            "external": false,
+            "thunk": false,
+            "thunk_target": null,
+            "provenance": "ghidra-function-manager"
+          },
+          "body": {
+            "available": true,
+            "provenance": "ghidra-function-body-address-set",
+            "ranges": [
+              {
+                "start": "0x46f5a6",
+                "end": "0x46f603"
+              }
+            ],
+            "total_bytes": 94,
+            "span_bytes": 94,
+            "non_contiguous": false,
+            "contains_entry": true
+          },
+          "signature": "undefined mutex_lock()",
+          "locals": [
+            {
+              "description": "undefined4 local_10 @ Stack[-0x10]:4",
+              "provenance": "ghidra-function-database"
+            },
+            {
+              "description": "undefined4 local_c @ Stack[-0xc]:4",
+              "provenance": "ghidra-function-database"
+            }
+          ]
+        },
+        "assembly": [
+          "0x46f5a6: push {r5,r6,r7,lr}",
+          "0x46f5a8: ldr.w r2, [0x0047001c]",
+          "0x46f5ac: ldr r0, [r2,#0x0]",
+          "0x46f5ae: cmp r0, #0x0",
+          "0x46f5b0: beq 0x0046f602",
+          "0x46f5b2: movs.w r1, #0xffffffff",
+          "0x46f5b6: ldr r0, [r2,#0x0]",
+          "0x46f5b8: bl 0x004497b6",
+          "0x46f5bc: cmp r0, #0x0",
+          "0x46f5be: beq 0x0046f602",
+          "0x46f5c0: bl 0x0043d0ce",
+          "0x46f5c4: lsls r0, r0, #0x1e",
+          "0x46f5c6: bpl 0x0046f5e4",
+          "0x46f5c8: ldr.w r0, [0x004700ac]",
+          "0x46f5cc: str r0, [sp,#0x4]",
+          "0x46f5ce: movs r0, #0xc3",
+          "0x46f5d0: str r0, [sp,#0x0]",
+          "0x46f5d2: ldr.w r3, [0x004700b0]",
+          "0x46f5d6: ldr.w r2, [0x004700a4]",
+          "0x46f5da: ldr.w r1, [0x004700a8]",
+          "0x46f5de: movs r0, #0x1",
+          "0x46f5e0: bl 0x0043d574",
+          "0x46f5e4: bl 0x0043d0ce",
+          "0x46f5e8: lsls r0, r0, #0x1f",
+          "0x46f5ea: bmi 0x0046f5f4",
+          "0x46f5ec: bl 0x0043d0ce",
+          "0x46f5f0: lsls r0, r0, #0x1d",
+          "0x46f5f2: bpl 0x0046f602",
+          "0x46f5f4: ldr.w r1, [0x004702cc]",
+          "0x46f5f8: movs r2, r1",
+          "0x46f5fa: movs.w r0, #0x4000000",
+          "0x46f5fe: bl 0x0043ce9e",
+          "0x46f602: pop {r0,r1,r2,pc}"
+        ],
+        "pseudocode": "\n/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */\n\nundefined8 mutex_lock(void)\n\n{\n  int iVar1;\n  undefined4 unaff_r5;\n  undefined4 unaff_r6;\n  \n  if ((_DAT_20074548 != 0) && (iVar1 = func_0x004497b6(_DAT_20074548,0xffffffff), iVar1 != 0)) {\n    iVar1 = func_0x0043d0ce();\n    if (iVar1 << 0x1e < 0) {\n      unaff_r6 = 0x753e28;\n      unaff_r5 = 0xc3;\n      func_0x0043d574(1,0x785cd0,0x70258c,0x776ea4);\n    }\n    iVar1 = func_0x0043d0ce();\n    if ((iVar1 << 0x1f < 0) || (iVar1 = func_0x0043d0ce(), iVar1 << 0x1d < 0)) {\n      func_0x0043ce9e(0x4000000,0x729114,0x729114);\n    }\n  }\n  return CONCAT44(unaff_r6,unaff_r5);\n}\n\n",
+        "unresolved_calls": [
+          {
+            "address": "0x46f5b8",
+            "reason": "A call destination has no known containing Ghidra procedure"
+          },
+          {
+            "address": "0x46f5c0",
+            "reason": "A call destination has no known containing Ghidra procedure"
+          },
+          {
+            "address": "0x46f5e0",
+            "reason": "A call destination has no known containing Ghidra procedure"
+          },
+          {
+            "address": "0x46f5e4",
+            "reason": "A call destination has no known containing Ghidra procedure"
+          },
+          {
+            "address": "0x46f5ec",
+            "reason": "A call destination has no known containing Ghidra procedure"
+          },
+          {
+            "address": "0x46f5fe",
+            "reason": "A call destination has no known containing Ghidra procedure"
+          }
+        ]
+      }
+    },
+    {
+      "evidence_id": "ev_cd090bf974489231db7a108ecfa761d8ed5586eebdf3bc2017350e9adbc0ea8e",
+      "subject": {
+        "name": "stock.elf",
+        "digest": {
+          "sha256": "022af9df64319d11aae255a936da969b476ae7a47dcef895b33bbd3828317693"
+        },
+        "local_path": "/Users/kalani/Repo/evenRealities-openCFW/build/goal-flash-guard/stock.elf",
+        "format": "elf",
+        "architecture": "arm"
+      },
+      "provider": {
+        "id": "ghidra",
+        "name": "Ghidra",
+        "version": "12.1.4"
+      },
+      "analysis_profile": {
+        "provider": {
+          "id": "ghidra",
+          "name": "Ghidra",
+          "version": "12.1.4"
+        },
+        "parameters": {
+          "target_kind": "executable",
+          "target_format": "elf",
+          "architecture": "arm",
+          "available_architectures": [
+            "arm"
+          ],
+          "import_mode": "ephemeral-source-immutable",
+          "annotation_policy": "atomic-function-entry-metadata-v1",
+          "load_image_observations": "source-mappings-entry-context-v2",
+          "function_body_evidence": "complete-inclusive-ranges-v1",
+          "function_references": "complete-body-and-entry-reference-manager-v2",
+          "call_relationship_coverage": "function-body-call-coverage-v5",
+          "function_dossier_coverage": "observed-facets-and-call-relationships-v1",
+          "string_inventory_evidence": "defined-data-coverage-v1",
+          "location_resolution": "explicit-address-exact-entry-symbol-first-v3",
+          "procedure_file_offset_resolution": "address-first-unique-target-source-mapping-v2",
+          "instruction_flow_evidence": "decoded-return-pcode-v1",
+          "instruction_references": "exact-address-incoming-v1",
+          "function_boundary_observations": "ghidra-function-boundary-limitations-v3",
+          "no_return_repair": "returning-imports-decoded-return-v2",
+          "process_launch": "inspected-jvm-launch-support-v1",
+          "jump_table_evidence": "typed-case-default-blocks-v1",
+          "decompiler_jump_loads": true,
+          "loader": "auto-from-header",
+          "language_id": "auto-from-header",
+          "compiler_spec_id": "auto-default",
+          "analyzer_preset": "ghidra-default"
+        },
+        "digest": "7e46711069eea041af1b9b99e34115c13332795e5cda76e584a722f529ec70de"
+      },
+      "relationship_coverage": {
+        "status": "partial",
+        "limitations": [
+          "Ghidra's callee inventory omits targets of 6 call reference(s) or decoded call(s) without destinations."
+        ],
+        "limited_directions": [
+          "callees"
+        ],
+        "diagnostics": [
+          "Only resolved Ghidra call references are returned; unresolved computed or indirect calls remain unknown, while function classifications distinguish thunks and externals."
+        ]
+      },
+      "limitations": [
+        "The session serves operations only after Ghidra reports default auto-analysis complete; incomplete analysis does not expose partial results.",
+        "The imported Program and temporary project are ephemeral and deleted on close. Annotation operations edit session database metadata; original executable bytes are never written.",
+        "Cancelling an active Ghidra request terminates its ephemeral database and discards session annotations. The selected target remains open; the next provider query imports the original artifact again.",
+        "Default-space addresses use lowercase 0x-prefixed hexadecimal; other address spaces use <percent-encoded-space>:0x<hex>.",
+        "References cover the complete Ghidra function-body AddressSet and exact entry. Dossier incoming edges omit sources owned by that function; procedure_references also retains those internal edges.",
+        "The dossier combines Ghidra FunctionManager, Listing, ReferenceManager, BasicBlockModel, and decompiler observations; provider-specific pseudocode and assembly are not cross-provider text invariants.",
+        "Resolved reference metadata identifies computed, indirect, external, call, jump, and data edges; unresolved targetless flows remain unknown, and function classifications distinguish thunks and externals.",
+        "Synthetic Ghidra entry-point references without actionable memory sources are omitted.",
+        "The Java bridge serializes one function request per Program and lets each decompilation run until it completes or the caller cancels.",
+        "macOS sessions require a matching executable Ghidra native decompiler; REA checks for it but does not build native components or change Gatekeeper quarantine state."
+      ],
+      "observation": {
+        "procedure": {
+          "address": "0x46f604",
+          "name": "mutex_unlock",
+          "classification": {
+            "external": false,
+            "thunk": false,
+            "thunk_target": null,
+            "provenance": "ghidra-function-manager"
+          },
+          "body": {
+            "available": true,
+            "provenance": "ghidra-function-body-address-set",
+            "ranges": [
+              {
+                "start": "0x46f604",
+                "end": "0x46f65d"
+              }
+            ],
+            "total_bytes": 90,
+            "span_bytes": 90,
+            "non_contiguous": false,
+            "contains_entry": true
+          },
+          "signature": "undefined mutex_unlock()",
+          "locals": [
+            {
+              "description": "undefined4 local_10 @ Stack[-0x10]:4",
+              "provenance": "ghidra-function-database"
+            },
+            {
+              "description": "undefined4 local_c @ Stack[-0xc]:4",
+              "provenance": "ghidra-function-database"
+            }
+          ]
+        },
+        "assembly": [
+          "0x46f604: push {r5,r6,r7,lr}",
+          "0x46f606: ldr.w r1, [0x0047001c]",
+          "0x46f60a: ldr r0, [r1,#0x0]",
+          "0x46f60c: cmp r0, #0x0",
+          "0x46f60e: beq 0x0046f65c",
+          "0x46f610: ldr r0, [r1,#0x0]",
+          "0x46f612: bl 0x0044981c",
+          "0x46f616: cmp r0, #0x0",
+          "0x46f618: beq 0x0046f65c",
+          "0x46f61a: bl 0x0043d0ce",
+          "0x46f61e: lsls r0, r0, #0x1e",
+          "0x46f620: bpl 0x0046f63e",
+          "0x46f622: ldr.w r0, [0x00470160]",
+          "0x46f626: str r0, [sp,#0x4]",
+          "0x46f628: movs r0, #0xcc",
+          "0x46f62a: str r0, [sp,#0x0]",
+          "0x46f62c: ldr.w r3, [0x00470164]",
+          "0x46f630: ldr.w r2, [0x004700a4]",
+          "0x46f634: ldr.w r1, [0x004700a8]",
+          "0x46f638: movs r0, #0x1",
+          "0x46f63a: bl 0x0043d574",
+          "0x46f63e: bl 0x0043d0ce",
+          "0x46f642: lsls r0, r0, #0x1f",
+          "0x46f644: bmi 0x0046f64e",
+          "0x46f646: bl 0x0043d0ce",
+          "0x46f64a: lsls r0, r0, #0x1d",
+          "0x46f64c: bpl 0x0046f65c",
+          "0x46f64e: ldr.w r1, [0x004702d0]",
+          "0x46f652: movs r2, r1",
+          "0x46f654: movs.w r0, #0x4000000",
+          "0x46f658: bl 0x0043ce9e",
+          "0x46f65c: pop {r0,r1,r2,pc}"
+        ],
+        "pseudocode": "\n/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */\n\nundefined8 mutex_unlock(void)\n\n{\n  int iVar1;\n  undefined4 unaff_r5;\n  undefined4 unaff_r6;\n  \n  if ((_DAT_20074548 != 0) && (iVar1 = func_0x0044981c(_DAT_20074548), iVar1 != 0)) {\n    iVar1 = func_0x0043d0ce();\n    if (iVar1 << 0x1e < 0) {\n      unaff_r6 = 0x749a74;\n      unaff_r5 = 0xcc;\n      func_0x0043d574(1,0x785cd0,0x70258c,0x776ebc);\n    }\n    iVar1 = func_0x0043d0ce();\n    if ((iVar1 << 0x1f < 0) || (iVar1 = func_0x0043d0ce(), iVar1 << 0x1d < 0)) {\n      func_0x0043ce9e(0x4000000,0x729148,0x729148);\n    }\n  }\n  return CONCAT44(unaff_r6,unaff_r5);\n}\n\n",
+        "unresolved_calls": [
+          {
+            "address": "0x46f612",
+            "reason": "A call destination has no known containing Ghidra procedure"
+          },
+          {
+            "address": "0x46f61a",
+            "reason": "A call destination has no known containing Ghidra procedure"
+          },
+          {
+            "address": "0x46f63a",
+            "reason": "A call destination has no known containing Ghidra procedure"
+          },
+          {
+            "address": "0x46f63e",
+            "reason": "A call destination has no known containing Ghidra procedure"
+          },
+          {
+            "address": "0x46f646",
+            "reason": "A call destination has no known containing Ghidra procedure"
+          },
+          {
+            "address": "0x46f658",
+            "reason": "A call destination has no known containing Ghidra procedure"
+          }
+        ]
+      }
+    },
+    {
+      "evidence_id": "ev_2b111d840eed2714229c073a3175476539d54a2da025314c3b48350df6b03125",
+      "subject": {
+        "name": "stock.elf",
+        "digest": {
+          "sha256": "022af9df64319d11aae255a936da969b476ae7a47dcef895b33bbd3828317693"
+        },
+        "local_path": "/Users/kalani/Repo/evenRealities-openCFW/build/goal-flash-guard/stock.elf",
+        "format": "elf",
+        "architecture": "arm"
+      },
+      "provider": {
+        "id": "ghidra",
+        "name": "Ghidra",
+        "version": "12.1.4"
+      },
+      "analysis_profile": {
+        "provider": {
+          "id": "ghidra",
+          "name": "Ghidra",
+          "version": "12.1.4"
+        },
+        "parameters": {
+          "target_kind": "executable",
+          "target_format": "elf",
+          "architecture": "arm",
+          "available_architectures": [
+            "arm"
+          ],
+          "import_mode": "ephemeral-source-immutable",
+          "annotation_policy": "atomic-function-entry-metadata-v1",
+          "load_image_observations": "source-mappings-entry-context-v2",
+          "function_body_evidence": "complete-inclusive-ranges-v1",
+          "function_references": "complete-body-and-entry-reference-manager-v2",
+          "call_relationship_coverage": "function-body-call-coverage-v5",
+          "function_dossier_coverage": "observed-facets-and-call-relationships-v1",
+          "string_inventory_evidence": "defined-data-coverage-v1",
+          "location_resolution": "explicit-address-exact-entry-symbol-first-v3",
+          "procedure_file_offset_resolution": "address-first-unique-target-source-mapping-v2",
+          "instruction_flow_evidence": "decoded-return-pcode-v1",
+          "instruction_references": "exact-address-incoming-v1",
+          "function_boundary_observations": "ghidra-function-boundary-limitations-v3",
+          "no_return_repair": "returning-imports-decoded-return-v2",
+          "process_launch": "inspected-jvm-launch-support-v1",
+          "jump_table_evidence": "typed-case-default-blocks-v1",
+          "decompiler_jump_loads": true,
+          "loader": "auto-from-header",
+          "language_id": "auto-from-header",
+          "compiler_spec_id": "auto-default",
+          "analyzer_preset": "ghidra-default"
+        },
+        "digest": "7e46711069eea041af1b9b99e34115c13332795e5cda76e584a722f529ec70de"
+      },
+      "relationship_coverage": {
+        "status": "complete",
+        "diagnostics": [
+          "Only resolved Ghidra call references are returned; unresolved computed or indirect calls remain unknown, while function classifications distinguish thunks and externals."
+        ]
+      },
+      "limitations": [
+        "The session serves operations only after Ghidra reports default auto-analysis complete; incomplete analysis does not expose partial results.",
+        "The imported Program and temporary project are ephemeral and deleted on close. Annotation operations edit session database metadata; original executable bytes are never written.",
+        "Cancelling an active Ghidra request terminates its ephemeral database and discards session annotations. The selected target remains open; the next provider query imports the original artifact again.",
+        "Default-space addresses use lowercase 0x-prefixed hexadecimal; other address spaces use <percent-encoded-space>:0x<hex>.",
+        "References cover the complete Ghidra function-body AddressSet and exact entry. Dossier incoming edges omit sources owned by that function; procedure_references also retains those internal edges.",
+        "The dossier combines Ghidra FunctionManager, Listing, ReferenceManager, BasicBlockModel, and decompiler observations; provider-specific pseudocode and assembly are not cross-provider text invariants.",
+        "Resolved reference metadata identifies computed, indirect, external, call, jump, and data edges; unresolved targetless flows remain unknown, and function classifications distinguish thunks and externals.",
+        "Synthetic Ghidra entry-point references without actionable memory sources are omitted.",
+        "The Java bridge serializes one function request per Program and lets each decompilation run until it completes or the caller cancels.",
+        "macOS sessions require a matching executable Ghidra native decompiler; REA checks for it but does not build native components or change Gatekeeper quarantine state."
+      ],
+      "observation": {
+        "procedure": {
+          "address": "0x46f65e",
+          "name": "flash_lock",
+          "classification": {
+            "external": false,
+            "thunk": false,
+            "thunk_target": null,
+            "provenance": "ghidra-function-manager"
+          },
+          "body": {
+            "available": true,
+            "provenance": "ghidra-function-body-address-set",
+            "ranges": [
+              {
+                "start": "0x46f65e",
+                "end": "0x46f673"
+              }
+            ],
+            "total_bytes": 22,
+            "span_bytes": 22,
+            "non_contiguous": false,
+            "contains_entry": true
+          },
+          "signature": "undefined flash_lock()",
+          "locals": []
+        },
+        "assembly": [
+          "0x46f65e: push {r7,lr}",
+          "0x46f660: bl 0x0046f5a6",
+          "0x46f664: ldr.w r0, [0x004702d4]",
+          "0x46f668: ldrb r0, [r0,#0x0]",
+          "0x46f66a: cmp r0, #0x1",
+          "0x46f66c: beq 0x0046f672",
+          "0x46f66e: bl 0x0046f52c",
+          "0x46f672: pop {r0,pc}"
+        ],
+        "pseudocode": "\nundefined4 flash_lock(void)\n\n{\n  undefined4 unaff_r7;\n  \n  mutex_lock();\n  if (DAT_20074fb8 != '\\x01') {\n    flash_wake();\n  }\n  return unaff_r7;\n}\n\n",
+        "unresolved_calls": []
+      }
+    },
+    {
+      "evidence_id": "ev_64b66969d1796b06f01fb855397b5d05d1b07d1dd3ced496eb2b07ad2dcbea53",
+      "subject": {
+        "name": "stock.elf",
+        "digest": {
+          "sha256": "022af9df64319d11aae255a936da969b476ae7a47dcef895b33bbd3828317693"
+        },
+        "local_path": "/Users/kalani/Repo/evenRealities-openCFW/build/goal-flash-guard/stock.elf",
+        "format": "elf",
+        "architecture": "arm"
+      },
+      "provider": {
+        "id": "ghidra",
+        "name": "Ghidra",
+        "version": "12.1.4"
+      },
+      "analysis_profile": {
+        "provider": {
+          "id": "ghidra",
+          "name": "Ghidra",
+          "version": "12.1.4"
+        },
+        "parameters": {
+          "target_kind": "executable",
+          "target_format": "elf",
+          "architecture": "arm",
+          "available_architectures": [
+            "arm"
+          ],
+          "import_mode": "ephemeral-source-immutable",
+          "annotation_policy": "atomic-function-entry-metadata-v1",
+          "load_image_observations": "source-mappings-entry-context-v2",
+          "function_body_evidence": "complete-inclusive-ranges-v1",
+          "function_references": "complete-body-and-entry-reference-manager-v2",
+          "call_relationship_coverage": "function-body-call-coverage-v5",
+          "function_dossier_coverage": "observed-facets-and-call-relationships-v1",
+          "string_inventory_evidence": "defined-data-coverage-v1",
+          "location_resolution": "explicit-address-exact-entry-symbol-first-v3",
+          "procedure_file_offset_resolution": "address-first-unique-target-source-mapping-v2",
+          "instruction_flow_evidence": "decoded-return-pcode-v1",
+          "instruction_references": "exact-address-incoming-v1",
+          "function_boundary_observations": "ghidra-function-boundary-limitations-v3",
+          "no_return_repair": "returning-imports-decoded-return-v2",
+          "process_launch": "inspected-jvm-launch-support-v1",
+          "jump_table_evidence": "typed-case-default-blocks-v1",
+          "decompiler_jump_loads": true,
+          "loader": "auto-from-header",
+          "language_id": "auto-from-header",
+          "compiler_spec_id": "auto-default",
+          "analyzer_preset": "ghidra-default"
+        },
+        "digest": "7e46711069eea041af1b9b99e34115c13332795e5cda76e584a722f529ec70de"
+      },
+      "relationship_coverage": {
+        "status": "complete",
+        "diagnostics": [
+          "Only resolved Ghidra call references are returned; unresolved computed or indirect calls remain unknown, while function classifications distinguish thunks and externals."
+        ]
+      },
+      "limitations": [
+        "The session serves operations only after Ghidra reports default auto-analysis complete; incomplete analysis does not expose partial results.",
+        "The imported Program and temporary project are ephemeral and deleted on close. Annotation operations edit session database metadata; original executable bytes are never written.",
+        "Cancelling an active Ghidra request terminates its ephemeral database and discards session annotations. The selected target remains open; the next provider query imports the original artifact again.",
+        "Default-space addresses use lowercase 0x-prefixed hexadecimal; other address spaces use <percent-encoded-space>:0x<hex>.",
+        "References cover the complete Ghidra function-body AddressSet and exact entry. Dossier incoming edges omit sources owned by that function; procedure_references also retains those internal edges.",
+        "The dossier combines Ghidra FunctionManager, Listing, ReferenceManager, BasicBlockModel, and decompiler observations; provider-specific pseudocode and assembly are not cross-provider text invariants.",
+        "Resolved reference metadata identifies computed, indirect, external, call, jump, and data edges; unresolved targetless flows remain unknown, and function classifications distinguish thunks and externals.",
+        "Synthetic Ghidra entry-point references without actionable memory sources are omitted.",
+        "The Java bridge serializes one function request per Program and lets each decompilation run until it completes or the caller cancels.",
+        "macOS sessions require a matching executable Ghidra native decompiler; REA checks for it but does not build native components or change Gatekeeper quarantine state."
+      ],
+      "observation": {
+        "procedure": {
+          "address": "0x46f674",
+          "name": "flash_unlock",
+          "classification": {
+            "external": false,
+            "thunk": false,
+            "thunk_target": null,
+            "provenance": "ghidra-function-manager"
+          },
+          "body": {
+            "available": true,
+            "provenance": "ghidra-function-body-address-set",
+            "ranges": [
+              {
+                "start": "0x46f674",
+                "end": "0x46f689"
+              }
+            ],
+            "total_bytes": 22,
+            "span_bytes": 22,
+            "non_contiguous": false,
+            "contains_entry": true
+          },
+          "signature": "undefined flash_unlock()",
+          "locals": []
+        },
+        "assembly": [
+          "0x46f674: push {r7,lr}",
+          "0x46f676: ldr.w r0, [0x004702d4]",
+          "0x46f67a: ldrb r0, [r0,#0x0]",
+          "0x46f67c: cmp r0, #0x1",
+          "0x46f67e: beq 0x0046f684",
+          "0x46f680: bl 0x0046f50c",
+          "0x46f684: bl 0x0046f604",
+          "0x46f688: pop {r0,pc}"
+        ],
+        "pseudocode": "\nundefined4 flash_unlock(void)\n\n{\n  undefined4 unaff_r7;\n  \n  if (DAT_20074fb8 != '\\x01') {\n    flash_sleep();\n  }\n  mutex_unlock();\n  return unaff_r7;\n}\n\n",
+        "unresolved_calls": []
+      }
+    },
+    {
+      "evidence_id": "ev_54a48e966ab2124815ee77337a24cbf88512173a10f3868b3ed801b08f04f914",
+      "subject": {
+        "name": "stock-init.elf",
+        "digest": {
+          "sha256": "43b578a20bdf9349d9d19b249999ef3fb7d82028b129693d48cded549c2440eb"
+        },
+        "local_path": "/Users/kalani/Repo/evenRealities-openCFW/build/goal-flash-guard/stock-init.elf",
+        "format": "elf",
+        "architecture": "arm"
+      },
+      "provider": {
+        "id": "ghidra",
+        "name": "Ghidra",
+        "version": "12.1.4"
+      },
+      "analysis_profile": {
+        "provider": {
+          "id": "ghidra",
+          "name": "Ghidra",
+          "version": "12.1.4"
+        },
+        "parameters": {
+          "target_kind": "executable",
+          "target_format": "elf",
+          "architecture": "arm",
+          "available_architectures": [
+            "arm"
+          ],
+          "import_mode": "ephemeral-source-immutable",
+          "annotation_policy": "atomic-function-entry-metadata-v1",
+          "load_image_observations": "source-mappings-entry-context-v2",
+          "function_body_evidence": "complete-inclusive-ranges-v1",
+          "function_references": "complete-body-and-entry-reference-manager-v2",
+          "call_relationship_coverage": "function-body-call-coverage-v5",
+          "function_dossier_coverage": "observed-facets-and-call-relationships-v1",
+          "string_inventory_evidence": "defined-data-coverage-v1",
+          "location_resolution": "explicit-address-exact-entry-symbol-first-v3",
+          "procedure_file_offset_resolution": "address-first-unique-target-source-mapping-v2",
+          "instruction_flow_evidence": "decoded-return-pcode-v1",
+          "instruction_references": "exact-address-incoming-v1",
+          "function_boundary_observations": "ghidra-function-boundary-limitations-v3",
+          "no_return_repair": "returning-imports-decoded-return-v2",
+          "process_launch": "inspected-jvm-launch-support-v1",
+          "jump_table_evidence": "typed-case-default-blocks-v1",
+          "decompiler_jump_loads": true,
+          "loader": "auto-from-header",
+          "language_id": "auto-from-header",
+          "compiler_spec_id": "auto-default",
+          "analyzer_preset": "ghidra-default"
+        },
+        "digest": "7e46711069eea041af1b9b99e34115c13332795e5cda76e584a722f529ec70de"
+      },
+      "relationship_coverage": {
+        "status": "partial",
+        "limitations": [
+          "Ghidra's callee inventory omits targets of 6 call reference(s) or decoded call(s) without destinations."
+        ],
+        "limited_directions": [
+          "callees"
+        ],
+        "diagnostics": [
+          "Only resolved Ghidra call references are returned; unresolved computed or indirect calls remain unknown, while function classifications distinguish thunks and externals."
+        ]
+      },
+      "limitations": [
+        "The session serves operations only after Ghidra reports default auto-analysis complete; incomplete analysis does not expose partial results.",
+        "The imported Program and temporary project are ephemeral and deleted on close. Annotation operations edit session database metadata; original executable bytes are never written.",
+        "Cancelling an active Ghidra request terminates its ephemeral database and discards session annotations. The selected target remains open; the next provider query imports the original artifact again.",
+        "Default-space addresses use lowercase 0x-prefixed hexadecimal; other address spaces use <percent-encoded-space>:0x<hex>.",
+        "References cover the complete Ghidra function-body AddressSet and exact entry. Dossier incoming edges omit sources owned by that function; procedure_references also retains those internal edges.",
+        "The dossier combines Ghidra FunctionManager, Listing, ReferenceManager, BasicBlockModel, and decompiler observations; provider-specific pseudocode and assembly are not cross-provider text invariants.",
+        "Resolved reference metadata identifies computed, indirect, external, call, jump, and data edges; unresolved targetless flows remain unknown, and function classifications distinguish thunks and externals.",
+        "Synthetic Ghidra entry-point references without actionable memory sources are omitted.",
+        "The Java bridge serializes one function request per Program and lets each decompilation run until it completes or the caller cancels.",
+        "macOS sessions require a matching executable Ghidra native decompiler; REA checks for it but does not build native components or change Gatekeeper quarantine state."
+      ],
+      "observation": {
+        "procedure": {
+          "address": "0x46f546",
+          "name": "mutex_init",
+          "classification": {
+            "external": false,
+            "thunk": false,
+            "thunk_target": null,
+            "provenance": "ghidra-function-manager"
+          },
+          "body": {
+            "available": true,
+            "provenance": "ghidra-function-body-address-set",
+            "ranges": [
+              {
+                "start": "0x46f546",
+                "end": "0x46f5a5"
+              }
+            ],
+            "total_bytes": 96,
+            "span_bytes": 96,
+            "non_contiguous": false,
+            "contains_entry": true
+          },
+          "signature": "undefined mutex_init()",
+          "locals": [
+            {
+              "description": "undefined4 local_10 @ Stack[-0x10]:4",
+              "provenance": "ghidra-function-database"
+            },
+            {
+              "description": "undefined4 local_c @ Stack[-0xc]:4",
+              "provenance": "ghidra-function-database"
+            }
+          ]
+        },
+        "assembly": [
+          "0x46f546: push {r2,r3,r4,lr}",
+          "0x46f548: ldr.w r4, [0x0047001c]",
+          "0x46f54c: ldr r0, [r4,#0x0]",
+          "0x46f54e: cmp r0, #0x0",
+          "0x46f550: bne 0x0046f5a4",
+          "0x46f552: ldr.w r0, [0x00470020]",
+          "0x46f556: bl 0x0044971c",
+          "0x46f55a: str r0, [r4,#0x0]",
+          "0x46f55c: ldr r0, [r4,#0x0]",
+          "0x46f55e: cmp r0, #0x0",
+          "0x46f560: bne 0x0046f5a4",
+          "0x46f562: bl 0x0043d0ce",
+          "0x46f566: lsls r0, r0, #0x1e",
+          "0x46f568: bpl 0x0046f586",
+          "0x46f56a: ldr.w r0, [0x00470024]",
+          "0x46f56e: str r0, [sp,#0x4]",
+          "0x46f570: movs r0, #0xba",
+          "0x46f572: str r0, [sp,#0x0]",
+          "0x46f574: ldr.w r3, [0x004700a0]",
+          "0x46f578: ldr.w r2, [0x004700a4]",
+          "0x46f57c: ldr.w r1, [0x004700a8]",
+          "0x46f580: movs r0, #0x1",
+          "0x46f582: bl 0x0043d574",
+          "0x46f586: bl 0x0043d0ce",
+          "0x46f58a: lsls r0, r0, #0x1f",
+          "0x46f58c: bmi 0x0046f596",
+          "0x46f58e: bl 0x0043d0ce",
+          "0x46f592: lsls r0, r0, #0x1d",
+          "0x46f594: bpl 0x0046f5a4",
+          "0x46f596: ldr.w r1, [0x00470214]",
+          "0x46f59a: movs r2, r1",
+          "0x46f59c: movs.w r0, #0x4000000",
+          "0x46f5a0: bl 0x0043ce9e",
+          "0x46f5a4: pop {r0,r1,r4,pc}"
+        ],
+        "pseudocode": "\n/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */\n\nundefined8 mutex_init(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)\n\n{\n  int iVar1;\n  undefined4 local_10;\n  undefined4 local_c;\n  \n  local_10 = param_3;\n  local_c = param_4;\n  if (_DAT_20074548 == 0) {\n    _DAT_20074548 = func_0x0044971c(0x785cf0);\n    if (_DAT_20074548 == 0) {\n      iVar1 = func_0x0043d0ce();\n      if (iVar1 << 0x1e < 0) {\n        local_c = 0x749a4c;\n        local_10 = 0xba;\n        func_0x0043d574(1,0x785cd0,0x70258c,0x776e8c);\n      }\n      iVar1 = func_0x0043d0ce();\n      if ((iVar1 << 0x1f < 0) || (iVar1 = func_0x0043d0ce(), iVar1 << 0x1d < 0)) {\n        func_0x0043ce9e(0x4000000,0x7290e0,0x7290e0);\n      }\n    }\n  }\n  return CONCAT44(local_c,local_10);\n}\n\n",
+        "unresolved_calls": [
+          {
+            "address": "0x46f556",
+            "reason": "A call destination has no known containing Ghidra procedure"
+          },
+          {
+            "address": "0x46f562",
+            "reason": "A call destination has no known containing Ghidra procedure"
+          },
+          {
+            "address": "0x46f582",
+            "reason": "A call destination has no known containing Ghidra procedure"
+          },
+          {
+            "address": "0x46f586",
+            "reason": "A call destination has no known containing Ghidra procedure"
+          },
+          {
+            "address": "0x46f58e",
+            "reason": "A call destination has no known containing Ghidra procedure"
+          },
+          {
+            "address": "0x46f5a0",
+            "reason": "A call destination has no known containing Ghidra procedure"
+          }
+        ]
+      }
+    }
+  ],
+  "comparisons": {
+    "scope": "Unicorn 2.1.4, Cortex-M55 Clang hard-float -Oz; RTOS, power and logging helpers mocked. Ordered mutex-cell reads, sleep flag writes, helper arguments/order and log string contents compared; void return registers excluded. No peripheral timing, real concurrency or compiled byte identity claimed.",
+    "guard": {
+      "cases": 1232,
+      "before_matched": 608,
+      "after_matched": 1232,
+      "cases_by_entry": {
+        "lock": 580,
+        "unlock": 580,
+        "mutex_lock": 36,
+        "mutex_unlock": 36
+      },
+      "grid": "Lock/unlock: mode 0/1/2, sleep 0/1/2, NULL/nonNULL mutex, mutex success/failure, 8 flags, power success/failure. Mutex wrappers: NULL/nonNULL, success/failure, 8 flags. Additional mutation cases.",
+      "stale_handle_counterexamples": [
+        {
+          "kind": "lock",
+          "case": {
+            "mutate_mutex_read": 1
+          },
+          "match": false,
+          "stock": {
+            "events": [
+              [
+                "mutex_read",
+                536888097
+              ],
+              [
+                "mutex_read",
+                536914893
+              ],
+              [
+                "acquire",
+                536914893,
+                4294967295
+              ],
+              [
+                "power",
+                536875572,
+                0,
+                1
+              ],
+              [
+                "write",
+                537350073,
+                1,
+                0
+              ]
+            ],
+            "mode_sleep": "0000"
+          },
+          "candidate": {
+            "events": [
+              [
+                "mutex_read",
+                536888097
+              ],
+              [
+                "acquire",
+                536888097,
+                4294967295
+              ],
+              [
+                "power",
+                536875572,
+                0,
+                1
+              ],
+              [
+                "write",
+                537350073,
+                1,
+                0
+              ]
+            ],
+            "mode_sleep": "0000"
+          }
+        },
+        {
+          "kind": "unlock",
+          "case": {
+            "mutate_mutex_read": 1
+          },
+          "match": false,
+          "stock": {
+            "events": [
+              [
+                "power",
+                536875572,
+                2,
+                1
+              ],
+              [
+                "write",
+                537350073,
+                1,
+                1
+              ],
+              [
+                "mutex_read",
+                536888097
+              ],
+              [
+                "mutex_read",
+                536914893
+              ],
+              [
+                "release",
+                536914893
+              ]
+            ],
+            "mode_sleep": "0001"
+          },
+          "candidate": {
+            "events": [
+              [
+                "power",
+                536875572,
+                2,
+                1
+              ],
+              [
+                "write",
+                537350073,
+                1,
+                1
+              ],
+              [
+                "mutex_read",
+                536888097
+              ],
+              [
+                "release",
+                536888097
+              ]
+            ],
+            "mode_sleep": "0001"
+          }
+        },
+        {
+          "kind": "mutex_lock",
+          "case": {
+            "mutate_mutex_read": 1
+          },
+          "match": false,
+          "stock": {
+            "events": [
+              [
+                "mutex_read",
+                536888097
+              ],
+              [
+                "mutex_read",
+                536914893
+              ],
+              [
+                "acquire",
+                536914893,
+                4294967295
+              ]
+            ],
+            "mode_sleep": "0000"
+          },
+          "candidate": {
+            "events": [
+              [
+                "mutex_read",
+                536888097
+              ],
+              [
+                "acquire",
+                536888097,
+                4294967295
+              ]
+            ],
+            "mode_sleep": "0000"
+          }
+        },
+        {
+          "kind": "mutex_unlock",
+          "case": {
+            "mutate_mutex_read": 1
+          },
+          "match": false,
+          "stock": {
+            "events": [
+              [
+                "mutex_read",
+                536888097
+              ],
+              [
+                "mutex_read",
+                536914893
+              ],
+              [
+                "release",
+                536914893
+              ]
+            ],
+            "mode_sleep": "0000"
+          },
+          "candidate": {
+            "events": [
+              [
+                "mutex_read",
+                536888097
+              ],
+              [
+                "release",
+                536888097
+              ]
+            ],
+            "mode_sleep": "0000"
+          }
+        }
+      ]
+    },
+    "initialization": {
+      "mutex-init-before": {
+        "cases": 34,
+        "matched": 16
+      },
+      "mutex-init-after": {
+        "cases": 34,
+        "matched": 34
+      }
+    },
+    "trace_hashes": {
+      "before-comparison.json": "de5cbad5c38329659045bdbd81d8f36513bc833537e8567a10f8c4176ee0d7ca",
+      "after-comparison.json": "e7780e50f8ee886ec2d43bdb9f6aaed77a9800d1400511154c3b38ccb71d2c48",
+      "mutex-init-comparison.json": "703a930121a414ab65baca42ccfc3d5ba9bf1861a74faa2054eb309db702745b"
+    },
+    "probe_hashes": {
+      "compare.py": "5fe84a55a50b24cd1d9b788e89214f7113d942b2a459d87f7a53158212a3b1d1",
+      "compare_mutex_init.py": "f063960cd81826e832037ae8c48a42300733fd4871b2a65c2b3abd8e8739eaf5"
+    }
+  },
+  "source_changes": [
+    "Preserve stock mutex-handle rereads with consistently volatile pointer object declaration/definition in three TUs.",
+    "Remove two forwarding-only files; caller names now resolve directly to existing guard implementations through linker aliases."
+  ],
+  "validation": {
+    "report": "build/sources-goal-flash-verified/report.json",
+    "compiled": 2834,
+    "object_unresolved_symbols": 1455,
+    "composed_unresolved_symbols": 131,
+    "composed_frontier_matches_baseline": true,
+    "regression_tests": 21
+  }
+}

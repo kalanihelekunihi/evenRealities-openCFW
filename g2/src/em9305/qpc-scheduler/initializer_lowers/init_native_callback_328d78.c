@@ -1,74 +1,30 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_callback_328d78\n"
-".type opencfw_em9305_callback_328d78,@function\n"
-"opencfw_em9305_callback_328d78:\n"
-"L328d78:\n"
-"enter_s [r13-r16,blink]\n"
-"L328d7a:\n"
-"mov_s r13,r0\n"
-"L328d7c:\n"
-"ldb_s r0,[r0,0x2]\n"
-"L328d7e:\n"
-"cmp r0,255\n"
-"L328d82:\n"
-"beq_s L328d94\n"
-"L328d84:\n"
-"bl.d opencfw_em9305_ll_record_find_31aa98\n"
-"L328d88:\n"
-"ldb_s r0,[r13,0]\n"
-"L328d8a:\n"
-"breq_s r0,0,L328d92\n"
-"L328d8c:\n"
-"bl.d opencfw_em9305_child_329034\n"
-"L328d90:\n"
-"ldb_s r1,[r13,0x3]\n"
-"L328d92:\n"
-"leave_s [r13-r16,blink,pcl]\n"
-"L328d94:\n"
-"mov_s r15,0x805cac\n"
-"L328d9a:\n"
-"ld r1,[r15,0]\n"
-"L328d9c:\n"
-"mov_s r16,0\n"
-"L328d9e:\n"
-"mov_s r14,0x805c3c\n"
-"L328da4:\n"
-"ldb r0,[r1,57]\n"
-"L328da8:\n"
-"brhs.d.t r16,r0,L328d92\n"
-"L328dac:\n"
-"asl r2,r16,0x9\n"
-"L328db0:\n"
-"ld r0,[r14,0]\n"
-"L328db2:\n"
-"add_s r0,r0,r2\n"
-"L328db4:\n"
-"ldb_s r3,[r0,0]\n"
-"L328db6:\n"
-"breq_s r3,0,L328dce\n"
-"L328db8:\n"
-"ldb_s r3,[r0,0x3]\n"
-"L328dba:\n"
-"brne.nt r3,0x1,L328dce\n"
-"L328dbe:\n"
-"ldb_s r0,[r0,0x2]\n"
-"L328dc0:\n"
-"ldb_s r1,[r13,0x3]\n"
-"L328dc2:\n"
-"sth_s r0,[r13,0]\n"
-"L328dc4:\n"
-"ld r0,[r14,0]\n"
-"L328dc6:\n"
-"bl.d opencfw_em9305_child_329034\n"
-"L328dca:\n"
-"add_s r0,r0,r2\n"
-"L328dcc:\n"
-"ld r1,[r15,0]\n"
-"L328dce:\n"
-"add_s r16,r16,1\n"
-"L328dd0:\n"
-"b_s L328da4\n"
-".size opencfw_em9305_callback_328d78,.-opencfw_em9305_callback_328d78\n"
-);
+#include <stdint.h>
+
+/* Native 0x328d78..0x328dd2: deliver an LL control event. For a specific
+ * record id (byte 2 != 255) pass the event byte +3 to native 0x329034 for
+ * that record; otherwise do so for every active entry in state 1 (512-byte
+ * stride from *0x805c3c, count at config +57), stamping the message with the
+ * entry's handle byte +2 first. */
+extern uintptr_t opencfw_em9305_ll_record_find_31aa98(uint32_t);
+extern uint32_t opencfw_em9305_child_329034(uintptr_t,uint32_t);
+
+void opencfw_em9305_callback_328d78(uintptr_t message)
+{
+    if (*(volatile uint8_t *)(message + 2u) != 255u) {
+        uintptr_t record = opencfw_em9305_ll_record_find_31aa98(*(volatile uint8_t *)message);
+        if (record != 0u)
+            (void)opencfw_em9305_child_329034(record, *(volatile uint8_t *)(message + 3u));
+        return;
+    }
+    for (uint32_t index = 0u;; ++index) {
+        uintptr_t config = *(volatile uint32_t *)(uintptr_t)0x805cacu;
+        if (index >= *(volatile uint8_t *)(config + 57u)) return;
+        uintptr_t entry = *(volatile uint32_t *)(uintptr_t)0x805c3cu + index * 512u;
+        if (*(volatile uint8_t *)entry == 0u || *(volatile uint8_t *)(entry + 3u) != 1u) continue;
+        uint32_t handle = *(volatile uint8_t *)(entry + 2u);
+        uint32_t event = *(volatile uint8_t *)(message + 3u);
+        *(volatile uint16_t *)message = (uint16_t)handle;
+        (void)opencfw_em9305_child_329034(*(volatile uint32_t *)(uintptr_t)0x805c3cu + index * 512u,
+                                          event);
+    }
+}

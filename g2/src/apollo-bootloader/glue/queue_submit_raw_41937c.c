@@ -20,7 +20,7 @@ __attribute__((noreturn)) static void invalid_event(void)
 {
     (void)opencfw_bl_mask_interrupts();
     *(volatile uint32_t *)(uintptr_t)UINT32_MAX = 0u;
-    for (;;) __asm__ volatile("b ." ::: "memory");
+    for (;;) { }
 }
 
 uint32_t opencfw_boot_queue_submit_raw(uint32_t event, int32_t event_class,

@@ -1,6 +1,11 @@
 /* Native 0x52f442: load and parse the EM9305 firmware file into live staging
  * cells.  File contents, heap allocation and device RAM are runtime inputs. */
 #include <stdint.h>
+/* Stock-RAM literals rewritten to named objects (sim-test wave 2026-10-26,
+ * .waves/sim-fix/apply.py): g2ref_X is the linker symbol X. */
+#include <stdint.h>
+extern unsigned char g2ref_audio_ble_hci_radio_revision_cell[] __asm__("audio_ble_hci_radio_revision_cell");
+extern unsigned char g2ref_g2_stock_ram_20074948[] __asm__("g2_stock_ram_20074948");
 extern const char *audio_ble_radio_file_mode_52f3a0(uint32_t);
 extern int32_t audio_ble_radio_file_size_52f3f8(void *);
 extern void *audio_file_open(const char *,const char *);
@@ -40,14 +45,14 @@ static const char data_error[]="Failed to read image data";
 static const char data_compact[]="[srv.em9305]Failed to read image data";
 #define W(a) (*(volatile uint32_t *)(uintptr_t)(a))
 static void close_file(void) {
-    if(W(0x20074948u)!=0u) {
-        (void)audio_file_close((void *)(uintptr_t)W(0x20074948u));
-        W(0x20074948u)=0u;
+    if(W(((uint32_t)(uintptr_t)g2ref_g2_stock_ram_20074948))!=0u) {
+        (void)audio_file_close((void *)(uintptr_t)W(((uint32_t)(uintptr_t)g2ref_g2_stock_ram_20074948)));
+        W(((uint32_t)(uintptr_t)g2ref_g2_stock_ram_20074948))=0u;
     }
 }
 static void free_buffer(void) {
-    audio_file_heap_free((void *)(uintptr_t)W(0x2007494cu));
-    W(0x2007494cu)=0u;
+    audio_file_heap_free((void *)(uintptr_t)W(((uint32_t)(uintptr_t)g2ref_g2_stock_ram_20074948+0x4u)));
+    W(((uint32_t)(uintptr_t)g2ref_g2_stock_ram_20074948+0x4u))=0u;
 }
 static void error0(uint32_t line,const char *message,const char *compact) {
     if(audio_log_flags()&2u)audio_log_extended(1u,module,source_path,function,line,message);
@@ -57,7 +62,7 @@ static void error0(uint32_t line,const char *message,const char *compact) {
 uint32_t audio_ble_radio_image_load_52f442(void) {
     const char *mode=audio_ble_radio_file_mode_52f3a0(1u);
     void *file=audio_file_open(path,mode);
-    W(0x20074948u)=(uint32_t)(uintptr_t)file;
+    W(((uint32_t)(uintptr_t)g2ref_g2_stock_ram_20074948))=(uint32_t)(uintptr_t)file;
     if(file==0) {
         if(audio_log_flags()&2u)audio_log_extended(1u,module,source_path,function,0x96u,open_error,path,-1);
         if((audio_log_flags()&1u)||(audio_log_flags()&4u))
@@ -74,9 +79,9 @@ uint32_t audio_ble_radio_image_load_52f442(void) {
     if((audio_log_flags()&1u)||(audio_log_flags()&4u))
         (void)compressed_log_output(0x10400000u,size_info_compact,size_info_compact,size);
     uint32_t rounded=((uint32_t)size+3u)&~3u;
-    W(0x20074950u)=rounded;
+    W(((uint32_t)(uintptr_t)g2ref_g2_stock_ram_20074948+0x8u))=rounded;
     uint8_t *buffer=(uint8_t *)file_heap_allocate(rounded);
-    W(0x2007494cu)=(uint32_t)(uintptr_t)buffer;
+    W(((uint32_t)(uintptr_t)g2ref_g2_stock_ram_20074948+0x4u))=(uint32_t)(uintptr_t)buffer;
     if(buffer==0) {
         if(audio_log_flags()&2u)
             audio_log_extended(1u,module,source_path,function,0xa8u,alloc_error,rounded);
@@ -99,9 +104,9 @@ uint32_t audio_ble_radio_image_load_52f442(void) {
         error0(0xbeu,header_error,header_compact);
         free_buffer();return 0u;
     }
-    W(0x20074954u)=header[0];
-    W(0x20074970u)=header[1];
-    W(0x20074968u)=header[3];
+    W(((uint32_t)(uintptr_t)g2ref_audio_ble_hci_radio_revision_cell))=header[0];
+    W(((uint32_t)(uintptr_t)g2ref_g2_stock_ram_20074948+0x28u))=header[1];
+    W(((uint32_t)(uintptr_t)g2ref_g2_stock_ram_20074948+0x20u))=header[3];
     if(audio_log_flags()&2u)
         audio_log_extended(4u,module,source_path,function,0xcau,header_info,
                            header[0],header[1],header[2],header[3]);
@@ -117,7 +122,7 @@ uint32_t audio_ble_radio_image_load_52f442(void) {
     if((audio_log_flags()&1u)||(audio_log_flags()&4u))
         (void)compressed_log_output(0x10400000u,page_info_compact,page_info_compact,header[3]);
     if(header[3]!=0u)
-        W(0x2007496cu)=(uint32_t)(uintptr_t)(buffer+16u+header[2]*12u);
+        W(((uint32_t)(uintptr_t)g2ref_g2_stock_ram_20074948+0x24u))=(uint32_t)(uintptr_t)(buffer+16u+header[2]*12u);
     if(audio_ble_radio_record_data_52f99e(buffer,header[2])==0u) {
         error0(0xe1u,data_error,data_compact);
         free_buffer();return 0u;

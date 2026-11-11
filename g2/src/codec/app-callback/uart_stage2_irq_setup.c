@@ -1,7 +1,7 @@
 /* SPDX-License-Identifier: MIT
  * Stage-2 VIC registration 0x100030cc/0x100030e8 and CPU interrupt
- * save/restore 0x10003110/0x1000311c. Native instruction bytes for
- * the latter are mfcr r0,cr<0,0>; psrclr ie and mtcr r0,cr<0,0>.
+ * save/restore 0x10003110/0x1000311c (mfcr r0,cr<0,0>; psrclr ie and
+ * mtcr r0,cr<0,0>), written as the CSI csi_irq_save/csi_irq_restore.
  */
 #include <stdint.h>
 
@@ -25,18 +25,18 @@ void gx8002_uart_stage2_irq_register_30e8(uint32_t irq,
     *(volatile uint32_t *)(uintptr_t)UINT32_C(0xe000e100) = 1u << irq;
 }
 
-__attribute__((naked)) uint32_t gx8002_uart_stage2_irq_save_3110(void)
+/* csi_irq_save()/csi_irq_restore() from the pinned NationalChip CSI
+ * core_ck804.h: return PSR and clear PSR.IE; write PSR back. */
+uint32_t gx8002_uart_stage2_irq_save_3110(void)
 {
-    __asm__ volatile("mfcr r0, cr<0, 0>\n"
-                     "psrclr ie\n"
-                     "jmp r15\n");
+    uint32_t psr;
+    __asm__ volatile("mfcr %0, cr<0, 0>\n\tpsrclr ie" : "=r"(psr) : : "memory");
+    return psr;
 }
 
-__attribute__((naked)) void gx8002_uart_stage2_irq_restore_311c(
-    uint32_t state __attribute__((unused)))
+void gx8002_uart_stage2_irq_restore_311c(uint32_t state)
 {
-    __asm__ volatile("mtcr r0, cr<0, 0>\n"
-                     "jmp r15\n");
+    __asm__ volatile("mtcr %0, cr<0, 0>" : : "r"(state) : "memory");
 }
 
 /* The native branch to 0x10003024 retains original r1/r2 at the call.

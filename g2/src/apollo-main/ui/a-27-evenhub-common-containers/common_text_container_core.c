@@ -84,10 +84,10 @@ void common_text_update_scroll_state_4df858(common_text_t *text);
 
 void common_text_set_style_pad_all_4dee64(void *obj, int32_t value, uint32_t selector)
 {
-    audio_uart_page_44122a(obj, value, selector);
-    audio_uart_page_441238(obj, value, selector);
-    audio_uart_page_44120e(obj, value, selector);
-    audio_uart_page_44121c(obj, value, selector);
+    lv_obj_set_style_pad_left(obj, value, selector);
+    lv_obj_set_style_pad_right(obj, value, selector);
+    lv_obj_set_style_pad_top(obj, value, selector);
+    lv_obj_set_style_pad_bottom(obj, value, selector);
 }
 
 /* common_text_create: a scrollable window (scrollbar on demand, 4 px white scrollbar at 180 opa)
@@ -172,19 +172,19 @@ common_text_t *common_text_container_create_4dee96(void *parent, const common_te
     audio_uart_page_44e368(text->scroll_container, LV_SCROLLBAR_MODE_AUTO);
     audio_uart_page_44e3ca(text->scroll_container, LV_DIR_VER);
     audio_uart_page_44129e(text->scroll_container, 0u, 0);
-    audio_uart_page_44146a(text->scroll_container, cfg.border_radius, 0);
+    lv_obj_set_style_radius(text->scroll_container, cfg.border_radius, 0);
     if (cfg.border_width == 0u) {
-        audio_uart_page_44131c(text->scroll_container, 0, 0);
+        lv_obj_set_style_border_width(text->scroll_container, 0, 0);
     } else {
-        audio_uart_page_44131c(text->scroll_container, cfg.border_width, 0);
+        lv_obj_set_style_border_width(text->scroll_container, cfg.border_width, 0);
         color = common_text_get_color_from_index_4df7f2(cfg.border_color);
         audio_uart_page_4412ec(text->scroll_container, audio_uart_page_44104c(color), 0);
         CC_LOG(4, fn_create, 0xddu, 0x10800000u, cr_border, cr_border_s, cfg.border_width, color);
     }
-    audio_uart_page_44120e(text->scroll_container, cfg.padding, 0);
-    audio_uart_page_44121c(text->scroll_container, cfg.padding, 0);
-    audio_uart_page_44122a(text->scroll_container, cfg.padding, 0);
-    audio_uart_page_441238(text->scroll_container, cfg.padding, 0);
+    lv_obj_set_style_pad_top(text->scroll_container, cfg.padding, 0);
+    lv_obj_set_style_pad_bottom(text->scroll_container, cfg.padding, 0);
+    lv_obj_set_style_pad_left(text->scroll_container, cfg.padding, 0);
+    lv_obj_set_style_pad_right(text->scroll_container, cfg.padding, 0);
     audio_uart_page_44127e(text->scroll_container, audio_uart_page_44104c(0xffffffu),
                            LV_PART_SCROLLBAR);
     audio_uart_page_44129e(text->scroll_container, 0xb4u, LV_PART_SCROLLBAR);
@@ -203,7 +203,7 @@ common_text_t *common_text_container_create_4dee96(void *parent, const common_te
     audio_uart_page_43f0e0(text->content_container, 0);
     audio_uart_page_43f142(text->content_container, 0);
     audio_uart_page_44129e(text->content_container, 0u, 0);
-    audio_uart_page_44131c(text->content_container, 0, 0);
+    lv_obj_set_style_border_width(text->content_container, 0, 0);
     common_text_set_style_pad_all_4dee64(text->content_container, 0, 0);
     audio_uart_page_43dfa4(text->content_container, LV_OBJ_FLAG_SCROLLABLE);
 

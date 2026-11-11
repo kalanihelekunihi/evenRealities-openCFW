@@ -1,68 +1,31 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_callback_327a54\n"
-".type opencfw_em9305_callback_327a54,@function\n"
-"opencfw_em9305_callback_327a54:\n"
-"L327a54:\n"
-"enter_s [r13-r15,blink]\n"
-"L327a56:\n"
-"mov_s r12,r0\n"
-"L327a58:\n"
-"ldb_s r0,[r0,0x2]\n"
-"L327a5a:\n"
-"cmp r0,255\n"
-"L327a5e:\n"
-"beq_s L327a78\n"
-"L327a60:\n"
-"bl.d opencfw_em9305_radio_record_find_31aa64\n"
-"L327a64:\n"
-"ldb_s r0,[r12,0]\n"
-"L327a66:\n"
-"breq_s r0,0,L327aa8\n"
-"L327a68:\n"
-"st r12,[0x805c34]\n"
-"L327a70:\n"
-"bl.d opencfw_em9305_associated_channel_state_327aac\n"
-"L327a74:\n"
-"ldb_s r1,[r12,0x3]\n"
-"L327a76:\n"
-"b_s L327aa8\n"
-"L327a78:\n"
-"mov_s r0,0x805cac\n"
-"L327a7e:\n"
-"ld_s r13,[r0,0]\n"
-"L327a80:\n"
-"ldb_s r12,[r13,0xc]\n"
-"L327a82:\n"
-"breq_s r12,0,L327aa8\n"
-"L327a84:\n"
-"mov_s r14,0\n"
-"L327a86:\n"
-"mov_s r15,0\n"
-"L327a88:\n"
-"bl.d opencfw_em9305_radio_record_find_31aa64\n"
-"L327a8c:\n"
-"extb_s r0,r14\n"
-"L327a8e:\n"
-"breq_s r0,0,L327aa0\n"
-"L327a90:\n"
-"add1 r0,r0,0x28\n"
-"L327a94:\n"
-"mov_s r1,0\n"
-"L327a96:\n"
-"bl.d opencfw_em9305_memset\n"
-"L327a9a:\n"
-"mov r2,288\n"
-"L327a9e:\n"
-"ldb_s r12,[r13,0xc]\n"
-"L327aa0:\n"
-"add_s r15,r15,1\n"
-"L327aa2:\n"
-"brlo.d.t r15,r12,L327a88\n"
-"L327aa6:\n"
-"add_s r14,r14,1\n"
-"L327aa8:\n"
-"leave_s [r13-r15,blink,pcl]\n"
-".size opencfw_em9305_callback_327a54,.-opencfw_em9305_callback_327a54\n"
-);
+#include <stdint.h>
+
+/* Native 0x327a54..0x327aaa: associated-channel event callback. For a
+ * specific handle (+2 != 0xff) make the event current (0x805c34) and
+ * update the record's channel state with the selector at +3; for the
+ * broadcast handle clear the 288-byte channel block (+80) of every
+ * record up to the configured count (+12 of 0x805cac). */
+extern uintptr_t opencfw_em9305_radio_record_find_31aa64(uint32_t handle);
+extern uint32_t opencfw_em9305_associated_channel_state_327aac(uintptr_t record, uint32_t selector);
+extern void *opencfw_em9305_memset(void *destination, uint32_t value, uint32_t bytes);
+
+void opencfw_em9305_callback_327a54(uintptr_t event)
+{
+    if(*(volatile uint8_t *)(event+2u)!=255u){
+        uintptr_t record=opencfw_em9305_radio_record_find_31aa64(*(volatile uint8_t *)event);
+        if(record==0u)return;
+        *(volatile uint32_t *)(uintptr_t)0x805c34u=(uint32_t)event;
+        (void)opencfw_em9305_associated_channel_state_327aac(record,*(volatile uint8_t *)(event+3u));
+        return;
+    }
+    uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+    uint32_t count=*(volatile uint8_t *)(config+12u);
+    if(count==0u)return;
+    for(uint32_t index=0u;index<count;++index){
+        uintptr_t record=opencfw_em9305_radio_record_find_31aa64((uint8_t)index);
+        if(record!=0u){
+            (void)opencfw_em9305_memset((void *)(record+80u),0u,288u);
+            count=*(volatile uint8_t *)(config+12u);
+        }
+    }
+}

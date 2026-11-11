@@ -4,4 +4,3 @@
 #include <stdint.h>
 
 volatile uint32_t audio_ble_hci_radio_revision_word_20074224;
-volatile uint32_t audio_ble_hci_radio_detect_word_20074228;

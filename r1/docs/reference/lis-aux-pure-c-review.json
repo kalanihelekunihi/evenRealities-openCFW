@@ -1,0 +1,104 @@
+{
+  "schema_version": 1,
+  "scope": "R1 C LIS interrupt routing and tap policies",
+  "report": "build/sources-goal-r1-lis-aux-reviewed-c/report.json",
+  "comparison_report": "build/sources-goal-r1-lis-config-pure-c/report.json",
+  "audit": {
+    "compiled_units": 855,
+    "application_imports": 61,
+    "bootloader_imports": 22,
+    "unchanged_prior_nongenerated_objects": 844,
+    "changed_nongenerated_objects": [
+      "r1/src/application/runtime/native_lis_aux.c"
+    ],
+    "import_sets_unchanged": true,
+    "normal_object_equals_executed_probe_object": true,
+    "log_sections_unchanged": true,
+    "motion_selection_object_and_tables_unchanged": true,
+    "no_new_persistent_state": true,
+    "manifest_unchanged": true,
+    "assembly_entry_bridges_removed": 3,
+    "seven_native_LIS_runtime_units_have_no_inline_assembly": true
+  },
+  "direct": {
+    "stock_C_comparisons": 136808,
+    "C_only_nonwriting_cases": 108,
+    "actual_C_route_field_register_and_tap_graph": true,
+    "transport_statuses_and_bank_bytes_compared": true,
+    "live_context_and_logging_modes": true,
+    "one_byte_buffer_contract": true,
+    "private_frames_R2_R3_and_APSR_excluded": true,
+    "linked_units": [
+      "r1/src/application/runtime/native_lis_aux.c",
+      "r1/src/application/board/sensor-kernels/lis-aux/st-route-byte.c",
+      "r1/src/application/runtime/native_lis_call_frames.c",
+      "r1/src/application/runtime/native_lis_fifo.c",
+      "r1/src/application/runtime/native_lis_registers.c",
+      "r1/src/application/board/sensor-kernels/lis-call-frames/st-field-updates.c",
+      "r1/src/application/board/sensor-kernels/lis-setup/st-setup-frames.c",
+      "r1/src/application/runtime/native_lis_setup.c"
+    ]
+  },
+  "compiled_defects_rejected": [
+    {
+      "name": "wrong_route_register",
+      "rejected": true
+    },
+    {
+      "name": "read_error_ignored",
+      "rejected": true
+    },
+    {
+      "name": "disable_mask",
+      "rejected": true
+    },
+    {
+      "name": "enable_mode",
+      "rejected": true
+    },
+    {
+      "name": "route_fallback",
+      "rejected": true
+    }
+  ],
+  "public_contract": [
+    "Route setup retains its two-read/two-write sequence and early transport-error returns.",
+    "Tap enable/disable retain register ordering and continue after helper errors.",
+    "Read providers which write nothing use initialized zero scratch/route bytes.",
+    "Motion table auxiliary slots and prototypes now consistently return uint32_t with no arguments."
+  ],
+  "limits": [
+    "Physical sensor routing/tap behavior, timing, reset electrical behavior and final linking/startup unverified.",
+    "Actual C register/field and read/write helper graph executes with modeled byte transport and logging.",
+    "Controlled shared-context address is a fixture placement, not final image integration.",
+    "Provider overruns, private stack aliases, incidental R2/R3/APSR, faults/concurrency and byte identity excluded."
+  ],
+  "evidence_files": {
+    "build/sources-goal-r1-lis-aux-reviewed-c/report.json": "2ca846bf5f2ff37c489d41f4a1c72b2d3cc0da15887da384ff8e4b6c419932c3",
+    "build/sources-goal-r1-lis-config-pure-c/report.json": "5372cee0228daff66bd59713ae1571a24f14dc575e310a2e19df657eed71f003",
+    "r1/src/application/runtime/native_lis_aux.c": "6130ca7e52ce8b3a1cc554dd6202cc49404f484a8a26dc0ed07d1e44ce69550f",
+    "r1/src/application/runtime/native_motion_operations.h": "8d74df5cbaf351683951596bff10f7257877ea7c78cd213c8d137278eb7f0ffa",
+    "r1/src/application/runtime/native_motion_selection.c": "cdb900e8c5ba49e0d4bc4ac49b713bb2ae96c3c3d060f29ed7d0d7a3d08e24f7",
+    "r1/src/application/runtime/native_lis_call_frames.c": "7baa52fbae28db3ccb7b52be25b8acda4f994a7062b6ab5de43519140664aa0f",
+    "r1/src/application/runtime/native_lis_configure.c": "a33e6ad26bcc8c157612b60775ea921fa77f4a2424b3698a4d395e54f13cfdad",
+    "r1/src/application/runtime/native_lis_fifo.c": "d7c14b45179e6c9a46a6641074f3fabde3ee4df3701fc64f50333a5911133314",
+    "r1/src/application/runtime/native_lis_identity.c": "96c8bb69045ae5facc663b31a27d5e6a0008c84085a029ca054ba3552572bffe",
+    "r1/src/application/runtime/native_lis_registers.c": "630862b4a317e123795a77ff2b8a8b92a02877fa0f7c62e9fd89d658790a0a78",
+    "r1/src/application/runtime/native_lis_setup.c": "d6234fc527e1c8e560434d280c045706ba3936d1b6b2ee70cf926080b088d7a4",
+    "r1/src/application/board/sensor-kernels/lis-aux/st-route-byte.c": "283d653e7a4ca16ef6917dc0199b41641a7d2983c9620ca4b88812457d0b792e",
+    "r1/src/application/board/sensor-kernels/lis-call-frames/st-field-updates.c": "06efd7a8af4005c34c17ce20ba31c11c693f6cca4d89abb123b4685be3d0b1c3",
+    "r1/src/application/board/sensor-kernels/lis-setup/st-setup-frames.c": "135849687e3d0a346381f225ad42e9bbd95212aff91ae0fe051f4b38b7d95dbc",
+    "r1/src/sources.json": "f74aa01d5bac1e3a8786b1052791cbd6344c1fd57ce26a11f1d65de93506ad72",
+    "tools/build/source-plan.json": "eeb516e31b3310fb0718f36908977f8125723f7c5e0e86cd6744395826259a4d",
+    "build/goal-r1-lis-aux-pure-c/rea.json": "8513576783aa11715d62f009eb9a014109fe03e1dd50180c07f1bdb971e2661b",
+    "build/goal-r1-lis-aux-pure-c/verify.py": "bf22945372d3d269a940d9cd3d65eb71166fec8b692886bfcfea80c9f2213e58",
+    "build/goal-r1-lis-aux-pure-c/results.json": "4ca95277336646325267147605a27616f98056b70c9d4f421a8f40f61dcffee7",
+    "build/goal-r1-lis-aux-pure-c/verification.log": "a467829146194ac1e0dd4a2b15ad927d98163b5eea664dfe70c81d9a751879d6",
+    "build/goal-r1-lis-aux-pure-c/source.elf": "6ecb54b698abc4f7f937eb958ac2b47f6e3249c08293ddc38c428f4e956494bd",
+    "build/goal-r1-lis-aux-pure-c/negative.py": "2543432d0de725df8aa642b0a8cffb2644d16504a92ea4a4737955709cb1e5bc",
+    "build/goal-r1-lis-aux-pure-c/negative.json": "bc58932317808d1ce3167280f611874e00ef1a93148123be2c1114eb7a85c3de",
+    "build/goal-r1-lis-aux-pure-c/negative.log": "af230f52bb1e01d5a0b18ef958cf79887fbcf97be10a2af13b92add3966a91e5",
+    "build/goal-r1-lis-aux-pure-c/reviewed-build.log": "4a670ec2c58fc7a8c364b184a1fd9271920097af656e1e9e5f036e04a41ceace",
+    "build/goal-r1-lis-aux-pure-c/sources-check.log": "f610d186f791ebf717d9fd6eed6c4f28612779fff34b885bcf8dc8a49c9ae80c"
+  }
+}

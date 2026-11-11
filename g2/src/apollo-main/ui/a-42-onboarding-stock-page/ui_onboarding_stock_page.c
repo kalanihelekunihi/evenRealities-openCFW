@@ -120,7 +120,7 @@ extern void audio_uart_page_43f568(void *obj, int32_t h);                       
 extern uint32_t audio_uart_page_44104c(uint32_t rgb);                           /* lv_color_hex */
 extern void audio_uart_page_44127e(void *obj, uint32_t color, uint32_t sel);    /* bg_color */
 extern void audio_uart_page_44129e(void *obj, uint32_t opa, uint32_t sel);      /* bg_opa */
-extern void audio_uart_page_44131c(void *obj, int32_t v, uint32_t sel);         /* border_width */
+extern void lv_obj_set_style_border_width(void *obj, int32_t v, uint32_t sel);         /* border_width */
 extern void audio_uart_page_44140e(void *obj, uint32_t color, uint32_t sel);    /* text_color */
 extern void audio_uart_page_44143e(void *obj, const void *font, uint32_t sel);  /* text_font */
 extern void audio_uart_page_44145a(void *obj, uint32_t align, uint32_t sel);    /* text_align */
@@ -376,7 +376,7 @@ static void *create_image(void *parent, int32_t w, int32_t h, int32_t x, int32_t
     audio_uart_page_43f0e0(img, x);
     audio_uart_page_43f142(img, y);
     audio_uart_page_44129e(img, 0u, 0u);
-    audio_uart_page_44131c(img, 0, 0u);
+    lv_obj_set_style_border_width(img, 0, 0u);
     audio_uart_page_43ded4(img, LV_OBJ_FLAG_ADV_HITTEST);
     audio_uart_page_43dfa4(img, LV_OBJ_FLAG_SCROLLABLE);
     return img;
@@ -403,7 +403,7 @@ static void *create_separator(void *parent, int32_t w, int32_t y)
     audio_uart_page_43f142(line, y);
     audio_uart_page_44127e(line, audio_uart_page_44104c(COLOR_SEPARATOR), 0u);
     audio_uart_page_44129e(line, 0xffu, 0u);
-    audio_uart_page_44131c(line, 0, 0u);
+    lv_obj_set_style_border_width(line, 0, 0u);
     ui_onboarding_stock_sub_0050CA24(line, 0, 0u);
     return line;
 }
@@ -429,7 +429,7 @@ void ui_onboarding_stock_sub_0050CB30(g2_onboarding_stock_container_t *c, void *
     audio_uart_page_43f0e0(c->root, 0);
     audio_uart_page_43f142(c->root, position_y);
     audio_uart_page_44129e(c->root, 0u, 0u);
-    audio_uart_page_44131c(c->root, 0, 0u);
+    lv_obj_set_style_border_width(c->root, 0, 0u);
     ui_onboarding_stock_sub_0050CA24(c->root, 0, 0u);
 
     for (r = 0; r < STOCK_ROWS; r++) {
@@ -442,14 +442,14 @@ void ui_onboarding_stock_sub_0050CB30(g2_onboarding_stock_container_t *c, void *
         audio_uart_page_44143e(row->name, audio_uart_ring_primary_head_cell, 0u);
         audio_uart_page_44140e(row->name, audio_uart_page_44104c(COLOR_WHITE), 0u);
         audio_uart_page_44129e(row->name, 0u, 0u);
-        audio_uart_page_44131c(row->name, 0, 0u);
+        lv_obj_set_style_border_width(row->name, 0, 0u);
         audio_uart_page_layout_499678(row->name, LV_LABEL_LONG_MODE_DOTS);
         audio_uart_page_49942e(row->name, empty_text);
 
         row->symbol = create_label(c->root, 0xfc, 0x1c, 0, y + 0x22);
         audio_uart_page_44143e(row->symbol, audio_uart_ring_primary_head_cell, 0u);
         audio_uart_page_44129e(row->symbol, 0u, 0u);
-        audio_uart_page_44131c(row->symbol, 0, 0u);
+        lv_obj_set_style_border_width(row->symbol, 0, 0u);
         audio_uart_page_44140e(row->symbol, audio_uart_page_44104c(COLOR_WHITE), 0u);
         audio_uart_page_layout_499678(row->symbol, LV_LABEL_LONG_MODE_DOTS);
         audio_uart_page_49942e(row->symbol, empty_text);
@@ -461,7 +461,7 @@ void ui_onboarding_stock_sub_0050CB30(g2_onboarding_stock_container_t *c, void *
         audio_uart_page_44143e(row->price, audio_uart_ring_primary_head_cell, 0u);
         audio_uart_page_44140e(row->price, audio_uart_page_44104c(COLOR_WHITE), 0u);
         audio_uart_page_44129e(row->price, 0u, 0u);
-        audio_uart_page_44131c(row->price, 0, 0u);
+        lv_obj_set_style_border_width(row->price, 0, 0u);
         audio_uart_page_49942e(row->price, empty_text);
 
         row->change = create_label(c->root, 0x5d, 0x1c, 0x1be, y + 0x22);
@@ -469,7 +469,7 @@ void ui_onboarding_stock_sub_0050CB30(g2_onboarding_stock_container_t *c, void *
         audio_uart_page_44143e(row->change, audio_uart_ring_primary_head_cell, 0u);
         audio_uart_page_44140e(row->change, audio_uart_page_44104c(COLOR_WHITE), 0u);
         audio_uart_page_44129e(row->change, 0u, 0u);
-        audio_uart_page_44131c(row->change, 0, 0u);
+        lv_obj_set_style_border_width(row->change, 0, 0u);
         audio_uart_page_49942e(row->change, empty_text);
     }
     c->separator[0] = create_separator(c->root, 0x218, 0x4f);
@@ -605,7 +605,7 @@ int32_t ui_onboarding_stock_sub_0050D894(void *parent)
     audio_uart_page_43f4c0(frame, CONTAINER_W, FRAME_H);
     audio_uart_page_44129e(frame, 0u, 0u);
     audio_uart_page_44129e(frame, 0u, 0u);
-    audio_uart_page_44131c(frame, 0, 0u);
+    lv_obj_set_style_border_width(frame, 0, 0u);
     ui_onboarding_stock_sub_0050CA24(frame, 0, 0u);
     audio_uart_page_44e368(frame, LV_SCROLLBAR_MODE_OFF);
     base = -CONTAINER_H * g2_onboarding_stock_container_index_20074dcc; /* ROM 0x50dc50 = -288 */
@@ -714,7 +714,7 @@ int32_t ui_onboarding_stock_sub_0050DCBC(uint32_t tile_index)
     audio_uart_page_43f09a(frame, 0x14, 0x10);
     audio_uart_page_43f4c0(frame, WIDGET_W, FRAME_H);
     audio_uart_page_44129e(frame, 0u, 0u);
-    audio_uart_page_44131c(frame, 0, 0u);
+    lv_obj_set_style_border_width(frame, 0, 0u);
     ui_onboarding_stock_sub_0050CA24(frame, 0, 0u);
     audio_uart_page_44e368(frame, LV_SCROLLBAR_MODE_OFF);
 

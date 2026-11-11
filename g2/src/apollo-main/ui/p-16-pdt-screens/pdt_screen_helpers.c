@@ -7,18 +7,18 @@
 
 /* LVGL 9.3 lv_obj_set_style_pad_{left,right,top,bottom} (props 0x12, 0x13,
  * 0x10, 0x11), native 0x44122a/0x441238/0x44120e/0x44121c. */
-extern void audio_uart_page_44122a(void *object, uint32_t value, uint32_t selector);
-extern void audio_uart_page_441238(void *object, uint32_t value, uint32_t selector);
-extern void audio_uart_page_44120e(void *object, uint32_t value, uint32_t selector);
-extern void audio_uart_page_44121c(void *object, uint32_t value, uint32_t selector);
+extern void lv_obj_set_style_pad_left(void *object, uint32_t value, uint32_t selector);
+extern void lv_obj_set_style_pad_right(void *object, uint32_t value, uint32_t selector);
+extern void lv_obj_set_style_pad_top(void *object, uint32_t value, uint32_t selector);
+extern void lv_obj_set_style_pad_bottom(void *object, uint32_t value, uint32_t selector);
 
 /* Out-of-line copy of LVGL's static inline lv_obj_set_style_pad_all emitted
  * in the distortion-test unit (same body as 0x45ec7c). */
 void semantic_zero_four_object_styles(void *object, uint32_t value, uint32_t selector) {
-    audio_uart_page_44122a(object, value, selector);
-    audio_uart_page_441238(object, value, selector);
-    audio_uart_page_44120e(object, value, selector);
-    audio_uart_page_44121c(object, value, selector);
+    lv_obj_set_style_pad_left(object, value, selector);
+    lv_obj_set_style_pad_right(object, value, selector);
+    lv_obj_set_style_pad_top(object, value, selector);
+    lv_obj_set_style_pad_bottom(object, value, selector);
 }
 
 /* Page-registry "available" callbacks: each PDT page is always enabled.

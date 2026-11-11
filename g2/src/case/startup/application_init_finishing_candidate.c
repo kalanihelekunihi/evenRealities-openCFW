@@ -41,3 +41,5 @@ void case_init_sensor_finish(void)
         case_init_wait(2u);
     }
 }
+/* Dedup (0x0800502c): case_legacy_reset_first (was legacy-default/reset_child_502c.c). */
+uint32_t case_legacy_reset_first(uint32_t prior) __attribute__((alias("case_init_display_reset")));

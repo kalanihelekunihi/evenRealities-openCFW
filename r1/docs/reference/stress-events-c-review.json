@@ -1,0 +1,152 @@
+{
+  "schema_version": 1,
+  "entries": {
+    "0x422c8": [
+      "r1_event_callback_000422c8",
+      80
+    ],
+    "0x42474": [
+      "r1_event_callback_00042474",
+      86
+    ]
+  },
+  "report": "build/sources-goal-r1-stress-events-c/report.json",
+  "report_sha256": "aa151ff7cf03b557314a754fb24cf70289f4ae3a887bdbba2a09f71cccbdac72",
+  "unit": {
+    "source": "r1/src/application/board/native_event_callbacks.c",
+    "source_sha256": "4af2318334064fe99432a1277da92514d44d3066dc4f6f3fe2804914aa9b83e7",
+    "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-stress-events-c/r1/r1-application/r1__src__application__board__native_event_callbacks.c.o",
+    "object_sha256": "30de3edb4064d2ec37b76cd906cb0bb3368f149b7d453ba6bbfe5583e7d2b234"
+  },
+  "behavior": {
+    "pairs": 2772,
+    "digest": "e37efe74d78f96c04d7d862f23074c7003c67f98b0b6a8a380bc588d663f0aaf",
+    "actual_C": [
+      "stress enable/transition/setter/timer callback",
+      "authenticated eight-byte mode owner"
+    ],
+    "actual_adapters": "C stress mode and enable event adapters",
+    "modeled_boundaries": [
+      "r1_gomore_authorization_dispatch_native",
+      "r1_stream_timer_release",
+      "r1_stream_timer_create_front",
+      "r1_structured_log_mode_get",
+      "r1_structured_log_format",
+      "nrf_log_frontend_std_0",
+      "nrf_log_frontend_std_1"
+    ],
+    "limits": [
+      "Timer checked by callback identity and executed as a direct/mixed root, not asynchronously",
+      "Authorization, timers and logs modeled; no physical sensing or scheduling proof",
+      "Private stack and caller-clobbered registers excluded"
+    ]
+  },
+  "negative_controls": {
+    "000422c8-wrong-length-gate": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "ert a==b,(kw,[k for k in a if a[k]!=b[k]],a['trace'],b['trace']);digest.update(json.dumps([kw,a]).encode());pairs+=1\n                                              ^^^^\nAssertionError: ({'entry': 'mode_adapter', 'old': 0, 'new': 0, 'timer': 0, 'created': 0, 'modes': (0,)}, ['trace'], [('mode', [0], '0012345600000000'), ('mode', [0], '0012345600000000'), ('mode', [0], '0012345600000000'), ('mode', [0], '0012345600000000'), ('mode', [0], '0012345600000000'), ('mode', [0], '0012345600000000')], [])\n"
+    },
+    "000422c8-wrong-ring-bit": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "ring', [205520896, '[RING]set stress mode: %d', 0], '0012345600000000'), ('mode', [1], '0012345600000000'), ('mode', [1], '0012345600000000'), ('ring', [201326592, '[RING]stress mode is same'], '0012345600000000'), ('mode', [1], '0012345600000000')], [('mode', [1], '0012345600000000'), ('mode', [1], '0012345600000000'), ('mode', [1], '0012345600000000'), ('mode', [1], '0012345600000000'), ('ring', [201326592, '[RING]stress mode is same'], '0012345600000000'), ('mode', [1], '0012345600000000')])\n"
+    },
+    "000422c8-wrong-ring-id": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "12345600000000'), ('log0', [1835011, 'stress mode is same'], '0012345600000000')], [('mode', [7], '0012345600000000'), ('ring', [201326592, '[RING]set stress mode: %d'], '0012345600000000'), ('mode', [7], '0012345600000000'), ('log1', [1835011, 'set stress mode: %d', 0], '0012345600000000'), ('mode', [7], '0012345600000000'), ('ring', [201326592, '[RING]stress mode is same'], '0012345600000000'), ('mode', [7], '0012345600000000'), ('log0', [1835011, 'stress mode is same'], '0012345600000000')])\n"
+    },
+    "000422c8-wrong-sdk-id": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "45600000000'), ('log0', [1835011, 'stress mode is same'], '0012345600000000')], [('mode', [7], '0012345600000000'), ('ring', [205520896, '[RING]set stress mode: %d', 0], '0012345600000000'), ('mode', [7], '0012345600000000'), ('log1', [1769475, 'set stress mode: %d', 0], '0012345600000000'), ('mode', [7], '0012345600000000'), ('ring', [201326592, '[RING]stress mode is same'], '0012345600000000'), ('mode', [7], '0012345600000000'), ('log0', [1835011, 'stress mode is same'], '0012345600000000')])\n"
+    },
+    "000422c8-wrong-sdk-gate": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "00000000'), ('mode', [2], '0012345600000000'), ('log0', [1835011, 'stress mode is same'], '0012345600000000')], [('mode', [0], '0012345600000000'), ('mode', [4], '0012345600000000'), ('ring', [205520896, '[RING]set stress mode: %d', 0], '0012345600000000'), ('mode', [2], '0012345600000000'), ('mode', [1], '0012345600000000'), ('ring', [201326592, '[RING]stress mode is same'], '0012345600000000'), ('mode', [2], '0012345600000000'), ('log0', [1835011, 'stress mode is same'], '0012345600000000')])\n"
+    },
+    "000422c8-wrong-byte-conversion": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "mer': 0, 'created': 0, 'modes': (7,)}, ['trace'], [('mode', [7], '0012345600000000'), ('ring', [205520896, '[RING]set stress mode: %d', 255], '0012345600000000'), ('mode', [7], '0012345600000000'), ('log1', [1835011, 'set stress mode: %d', 255], '0012345600000000')], [('mode', [7], '0012345600000000'), ('ring', [205520896, '[RING]set stress mode: %d', 4294967295], '0012345600000000'), ('mode', [7], '0012345600000000'), ('log1', [1835011, 'set stress mode: %d', 4294967295], '0012345600000000')])\n"
+    },
+    "000422c8-wrong-boolean-mode": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "ionError: ({'entry': 'mode_adapter', 'old': 0, 'new': 2, 'timer': 0, 'created': 0, 'modes': (0,)}, ['trace', 'state'], [('mode', [0], '0012345600000000'), ('mode', [0], '0012345600000000'), ('mode', [0], '0012345600000000')], [('mode', [0], '0012345600000000'), ('mode', [0], '0012345600000000'), ('mode', [0], '0012345600000000'), ('create', ['stress timer', 3600000, 0], '0012345600000000'), ('mode', [0], '0012345600000000'), ('mode', [0], '0012345600000000'), ('mode', [0], '0012345600000000')])\n"
+    },
+    "000422c8-wrong-service-value": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "e', 'state'], [('mode', [0], '0012345600000000'), ('mode', [0], '0012345600000000'), ('mode', [0], '0012345600000000'), ('mode', [0], '0012345600000000'), ('mode', [0], '0012345600000000'), ('mode', [0], '0012345600000000')], [('mode', [0], '0012345600000000'), ('mode', [0], '0012345600000000'), ('mode', [0], '0012345600000000'), ('create', ['stress timer', 3600000, 0], '0012345600000000'), ('mode', [0], '0012345600000000'), ('mode', [0], '0012345600000000'), ('mode', [0], '0012345600000000')])\n"
+    },
+    "00042474-wrong-length-gate": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": " line 61, in pair\n    a=run(False,**kw);b=run(True,**kw);assert a==b,(kw,[k for k in a if a[k]!=b[k]],a['trace'],b['trace']);digest.update(json.dumps([kw,a]).encode());pairs+=1\n                                              ^^^^\nAssertionError: ({'entry': 'enable_adapter', 'old': 0, 'new': 0, 'timer': 0, 'created': 0, 'modes': (0,)}, ['trace'], [('mode', [0], '0012345600000000'), ('mode', [0], '0012345600000000'), ('mode', [0], '0012345600000000'), ('authorize', [1, 1], '0012345600000000')], [])\n"
+    },
+    "00042474-wrong-ring-bit": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "                              ^^^^\nAssertionError: ({'entry': 'enable_adapter', 'old': 0, 'new': 0, 'timer': 0, 'created': 0, 'modes': (1,)}, ['trace'], [('mode', [1], '0012345600000000'), ('ring', [205520896, '[RING]stress measure control: %d', 1], '0012345600000000'), ('mode', [1], '0012345600000000'), ('authorize', [1, 1], '0012345600000000')], [('mode', [1], '0012345600000000'), ('mode', [1], '0012345600000000'), ('mode', [1], '0012345600000000'), ('authorize', [1, 1], '0012345600000000')])\n"
+    },
+    "00042474-wrong-ring-id": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "ing', [205520896, '[RING]stress measure control: %d', 1], '0012345600000000'), ('mode', [7], '0012345600000000'), ('log1', [1835011, 'stress measure control: %d', 1], '0012345600000000'), ('authorize', [1, 1], '0012345600000000')], [('mode', [7], '0012345600000000'), ('ring', [201326592, '[RING]stress measure control: %d'], '0012345600000000'), ('mode', [7], '0012345600000000'), ('log1', [1835011, 'stress measure control: %d', 1], '0012345600000000'), ('authorize', [1, 1], '0012345600000000')])\n"
+    },
+    "00042474-wrong-sdk-id": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "', [205520896, '[RING]stress measure control: %d', 1], '0012345600000000'), ('mode', [7], '0012345600000000'), ('log1', [1835011, 'stress measure control: %d', 1], '0012345600000000'), ('authorize', [1, 1], '0012345600000000')], [('mode', [7], '0012345600000000'), ('ring', [205520896, '[RING]stress measure control: %d', 1], '0012345600000000'), ('mode', [7], '0012345600000000'), ('log1', [1769475, 'stress measure control: %d', 1], '0012345600000000'), ('authorize', [1, 1], '0012345600000000')])\n"
+    },
+    "00042474-wrong-sdk-gate": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "mode', [4], '0012345600000000'), ('ring', [205520896, '[RING]stress measure control: %d', 1], '0012345600000000'), ('mode', [2], '0012345600000000'), ('log1', [1835011, 'stress measure control: %d', 1], '0012345600000000'), ('authorize', [1, 1], '0012345600000000')], [('mode', [0], '0012345600000000'), ('mode', [4], '0012345600000000'), ('ring', [205520896, '[RING]stress measure control: %d', 1], '0012345600000000'), ('mode', [2], '0012345600000000'), ('authorize', [1, 1], '0012345600000000')])\n"
+    },
+    "00042474-wrong-byte-conversion": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "', [205520896, '[RING]stress measure control: %d', 1], '0212345600000000'), ('mode', [7], '0212345600000000'), ('log1', [1835011, 'stress measure control: %d', 1], '0212345600000000'), ('authorize', [1, 1], '0212345600000000')], [('mode', [7], '0212345600000000'), ('ring', [205520896, '[RING]stress measure control: %d', 0], '0212345600000000'), ('mode', [7], '0212345600000000'), ('log1', [1835011, 'stress measure control: %d', 0], '0212345600000000'), ('authorize', [1, 0], '0212345600000000')])\n"
+    },
+    "00042474-wrong-raw-enable": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "', [205520896, '[RING]stress measure control: %d', 1], '0212345600000000'), ('mode', [7], '0212345600000000'), ('log1', [1835011, 'stress measure control: %d', 1], '0212345600000000'), ('authorize', [1, 1], '0212345600000000')], [('mode', [7], '0212345600000000'), ('ring', [205520896, '[RING]stress measure control: %d', 2], '0212345600000000'), ('mode', [7], '0212345600000000'), ('log1', [1835011, 'stress measure control: %d', 2], '0212345600000000'), ('authorize', [1, 2], '0212345600000000')])\n"
+    },
+    "00042474-wrong-service-value": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "mps([kw,a]).encode());pairs+=1\n                                              ^^^^\nAssertionError: ({'entry': 'enable_adapter', 'old': 0, 'new': 0, 'timer': 0, 'created': 0, 'modes': (0,)}, ['trace'], [('mode', [0], '0012345600000000'), ('mode', [0], '0012345600000000'), ('mode', [0], '0012345600000000'), ('authorize', [1, 1], '0012345600000000')], [('mode', [0], '0012345600000000'), ('mode', [0], '0012345600000000'), ('mode', [0], '0012345600000000'), ('authorize', [1, 0], '0012345600000000')])\n"
+    }
+  },
+  "audit": {
+    "unchanged_prior_objects": 759,
+    "changed_objects": [
+      [
+        "r1-application",
+        "r1/src/application/board/native_event_callbacks.c"
+      ]
+    ],
+    "changed_allocated_sections": [
+      ".text.r1_event_callback_000422c8",
+      ".text.r1_event_callback_00042474"
+    ],
+    "changed_relocation_sections": [
+      ".text.r1_event_callback_000422c8",
+      ".text.r1_event_callback_00042474"
+    ],
+    "imports_unchanged": true,
+    "new_state": false
+  },
+  "source_check": "R1 passes: 760 units, 564 source files, 0 not built. Global check flags existing G2 resident_rom_thumb_set.S absent from manifest.",
+  "rea": [
+    "stress-event-422c8-c-rea.json",
+    "stress-event-42474-c-rea.json"
+  ],
+  "instruction_identity_proven": false,
+  "image_integration_proven": false
+}

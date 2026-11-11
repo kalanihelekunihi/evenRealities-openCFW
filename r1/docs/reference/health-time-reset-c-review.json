@@ -1,0 +1,118 @@
+{
+  "schema_version": 1,
+  "normal_report": "build/sources-goal-r1-health-lifecycle-final-b-c/report.json",
+  "replay": {
+    "pairs": 653,
+    "entry_counts": {
+      "init": 376,
+      "reset": 36,
+      "event": 241
+    },
+    "digest": "72c872fceca1281d7bad4e60aef766cae3c8039be7162d3cb8e2282b257b8ffe",
+    "native_branch_hits": {
+      "0x4bee2": 88,
+      "0x4bef8": 87,
+      "0x4bf00": 3,
+      "0x4bf84": 192,
+      "0x4bfde": 96
+    },
+    "lower_bindings": {
+      "gomore_primitives_size_736": 427808,
+      "gomore_primitives_size_14816": 427034,
+      "r1_health_lifecycle_authorize_native": 438908,
+      "r1_health_lifecycle_restore_native": 438192,
+      "r1_health_lifecycle_profile_native": 437240,
+      "r1_health_lifecycle_engine_initialize_native": 458400,
+      "r1_health_lifecycle_profile_apply_native": 595656,
+      "r1_health_lifecycle_mode_native": 584828,
+      "gomore_primitives_noop_91080": 594048,
+      "r1_gomore_authorization_dispatch_native": 300048,
+      "r1_time_backend_timestamp": 568740,
+      "r1_subscriber_register": 569228,
+      "r1_structured_log_mode_get": 595180,
+      "r1_structured_log_format": 595512,
+      "nrf_log_frontend_std_0": 498112,
+      "nrf_log_frontend_std_1": 498120,
+      "nrf_log_frontend_std_2": 498134,
+      "r1_native_memory_move": 161628
+    },
+    "elf": "build/goal-r1-health-lifecycle-c/source-57608.elf",
+    "elf_sha256": "529ed74f9d7198abdf4fbf716bdccc4ee9827ba8d3ace8aa603d027ef55e30c8",
+    "void_return": true
+  },
+  "negative_controls": [
+    {
+      "control": "wrong-recovery-admission",
+      "compiled": true,
+      "rejected": true,
+      "source_sha256": "8985dd21fe087108824304787c90c4d009348466b2475cca2fefb61f7189a17d"
+    },
+    {
+      "control": "wrong-retry-status",
+      "compiled": true,
+      "rejected": true,
+      "source_sha256": "5ecdbb2dd3a04f75d8b63b2b1d33dc35a3b866e9f4230872b59220f59cd34902"
+    },
+    {
+      "control": "wrong-mode-clear",
+      "compiled": true,
+      "rejected": true,
+      "source_sha256": "e61d93e4b6dbc4bfc5268364e677e7385220cd18aa75bbe5635ac46507bd9dcd"
+    },
+    {
+      "control": "exclusive-180",
+      "compiled": true,
+      "rejected": true,
+      "source_sha256": "c6cb124cc4749e1f932514a8d87cd79b8455120300a602871f707d7f9c5697d3"
+    },
+    {
+      "control": "signed-time-order",
+      "compiled": true,
+      "rejected": true,
+      "source_sha256": "f80000cadea130ea86ec99be5e53b6177b513d9fba73f70070e5d90cd11b4610"
+    },
+    {
+      "control": "wrong-disable-mask",
+      "compiled": true,
+      "rejected": true,
+      "source_sha256": "bdc792e0ad03b77d9495189083331aebb29db1219536049871e785167b103393"
+    }
+  ],
+  "audit": {
+    "changed_payload_sources": [
+      [
+        "r1-application",
+        "r1/src/application/runtime/native_health_lifecycle.c"
+      ]
+    ],
+    "unchanged_other_objects": 721,
+    "default_profile_matches": true,
+    "shared_authorization_owner": "r1_gomore_authorization_state",
+    "authorization_flag_offset": 100
+  },
+  "data_binding": {
+    "r1_gomore_authorization_state": "0x20006da0"
+  },
+  "published_callback_code_identity_mapped": true,
+  "void_returns": true,
+  "source_only_engine_link": false,
+  "hardware_tested": false,
+  "removed_application_imports": [
+    "r1_gomore_time_transition_adapter"
+  ],
+  "sha256": {
+    "build/sources-goal-r1-health-lifecycle-final-b-c/report.json": "3a8da7179fdebfa969e0c7eb1de8188b6c936f9235d307ad596926535cf88d0c",
+    "r1/src/application/runtime/native_health_lifecycle.c": "d59bd6b51bb66aaae79dfbab282f366c8e8fc53016579676ea6d3b6f2692584d",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-health-lifecycle-final-b-c/r1/r1-application/r1__src__application__runtime__native_health_lifecycle.c.o": "b10f89b83beea85fc40b219a3674fa71ae24b4729c73434f2ece22b86860c0db",
+    "r1/src/application/runtime/native_health_lifecycle.h": "ba5e0cdbb5b09cd1d4442458655b44396ba8c4e7499087b3fcc8b6c4c8b94cb9",
+    "r1/src/application/runtime/native_gomore_authorization.h": "3a6732abe7e5c4a296ceb1db73d7b9949540a1f7d2d311b61fc3d58d35812270",
+    "r1/src/sources.json": "64239205d2a1bf3f97aef257bbe3cb7497efdc639327fbcc48ae6f916542781b",
+    "tools/build/source-plan.json": "43281e3850f6c7b83c5616e5968c4939993501810057ca3deaeea85eaae351ba",
+    "build/goal-r1-touch-request-pure-c/rea-lifecycle-next.json": "9160d812bc02b3ed88c2260315c6e833d9a442d8b08389daf50fe5b84bd42621",
+    "build/goal-r1-health-lifecycle-c/verify.py": "222c7a0a10145a9c387d7ebf3d4b3ca3563d239e5a895ff8d5fc4670b9da4c37",
+    "build/goal-r1-health-lifecycle-c/negative.py": "381d0dfbcde1a5def28dcd7b34987f4fdc31bd16a568793aa59c46fb5a4f5135",
+    "build/goal-r1-health-lifecycle-c/chain-audit.json": "518203595396fa7b815021ba2e7fefa10abbaaa412a34ef7a38bb8140a67c2ea",
+    "build/goal-r1-health-lifecycle-c/stock-time-adapter.dis": "ec49a2af045344a3ffcf631c5930d566ac37fc532203617d545b3853ed107aba",
+    "build/goal-r1-health-lifecycle-c/sources-check-chain.log": "935eacc596911ae66aee12864fb33a2272c0bb18dc00b42801dfa4573072c3af"
+  }
+}

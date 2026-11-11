@@ -1,0 +1,143 @@
+{
+  "normal_report": "build/sources-goal-r1-stack-watermark-c/report.json",
+  "report_sha256": "d7225fc2a7c43b82426f9043ee844abb2472fe3518c7dfd1e03ef08f8c219cfd",
+  "unit": {
+    "source": "r1/src/application/rtos/task-query/task-query.c",
+    "payload": "r1-application",
+    "role": "candidate",
+    "toolchain": "clang",
+    "link": true,
+    "expect": "compile",
+    "returncode": 0,
+    "argv": [
+      "/usr/bin/clang",
+      "--target=arm-none-eabi",
+      "-mcpu=cortex-m4",
+      "-mthumb",
+      "-mfpu=fpv4-sp-d16",
+      "-mfloat-abi=hard",
+      "-ffreestanding",
+      "-fno-strict-aliasing",
+      "-std=c11",
+      "-Os",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-DNRF52840_XXAA",
+      "-DSOFTDEVICE_PRESENT",
+      "-DNRF_SD_BLE_API_VERSION=7",
+      "-DS140",
+      "-DFREERTOS",
+      "-DFLOAT_ABI_HARD",
+      "-isystem",
+      "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/r1/src/config/rtos",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/r1/config-recovered",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/third-party/upstream/freertos-kernel/include",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/external/freertos/portable/GCC/nrf52",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/external/freertos/portable/CMSIS/nrf52",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/third-party/upstream/cmsis-freertos/CMSIS/RTOS2/FreeRTOS/Include",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/toolchain/cmsis/include",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/softdevice/common",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/experimental_section_vars",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/util",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/delay",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/atomic",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx/mdk",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx/hal",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx/drivers/include",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/integration/nrfx",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/integration/nrfx/legacy",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/softdevice/s140/headers",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/softdevice/s140/headers/nrf52",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/third-party/upstream/cmsis-5-590/CMSIS/RTOS2/Include",
+      "-fshort-enums",
+      "-fwrapv",
+      "-O0",
+      "-fno-inline",
+      "-I",
+      "/Users/kalani/Repo/evenRealities-openCFW/r1/src/config/rtos",
+      "-include",
+      "/Users/kalani/Repo/evenRealities-openCFW/r1/src/config/rtos/native_port_assert.h",
+      "-MD",
+      "-MF",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-stack-watermark-c/r1/r1-application/r1__src__application__rtos__task-query__task-query.c.d",
+      "-c",
+      "/Users/kalani/Repo/evenRealities-openCFW/r1/src/application/rtos/task-query/task-query.c",
+      "-o",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-stack-watermark-c/r1/r1-application/r1__src__application__rtos__task-query__task-query.c.o"
+    ],
+    "source_sha256": "63deaa9dadca110918e55c5f9ceb21a4c4e72211731a2d09539d7299ac149fc3",
+    "object_sha256": "fce53321e23d437ba9ac8b5101c62efbe5b49a9e61146094fa87d425523e8943",
+    "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-stack-watermark-c/r1/r1-application/r1__src__application__rtos__task-query__task-query.c.o",
+    "strong": [
+      "pcTaskGetName",
+      "uxTaskGetStackHighWaterMark",
+      "uxTaskPriorityGet"
+    ],
+    "weak": [],
+    "undefined": [
+      "pxCurrentTCB",
+      "vPortEnterCritical",
+      "vPortExitCritical"
+    ]
+  },
+  "upstream": {
+    "source": "third-party/upstream/freertos-kernel/tasks.c",
+    "sha256": "14020d617b96dd2814e1211f6e3b645bcf5e2bd3179c23fe7dd16bc666fe9463"
+  },
+  "direct": {
+    "total": 12624,
+    "digest": "44fb65e9be24c02be70a1db6afb426b611221e440d8fb9805a20b96826a27710",
+    "no_executable_bindings": true,
+    "limits": [
+      "Valid TCB and terminated stack-fill scan assumed, as in pinned kernel",
+      "No physical scheduler or complete firmware proof"
+    ]
+  },
+  "negative": {
+    "wrong-fill-byte": {
+      "rejected": true,
+      "diagnostic": "Traceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-stack-watermark-c/verify.py\", line 19, in <module>\n    v.emu_start(syms[ROOT]|1,STOP,count=50000);assert v.reg_read(UC_ARM_REG_PC)==STOP and v.reg_read(UC_ARM_REG_SP)==SP;assert v.reg_read(UC_ARM_REG_R0)==length//4,(length,offset,terminal,handle,v.reg_read(UC_ARM_REG_R0));assert [v.reg_read(rr) for rr in saved]==list(range(0x44444440,0x44444448));assert v.reg_read(UC_ARM_REG_BASEPRI)==mask[0] and v.reg_read(UC_ARM_REG_PRIMASK)==mask[1];assert bytes(v.mem_read(CURRENT,0xc000))==before;digest.update(struct.pack('<IIIII',length,offset,terminal,handle,length//4));total+=1\n                                                                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: (4, 0, 0, False, 0)\n"
+    },
+    "word-stride": {
+      "rejected": true,
+      "diagnostic": "Traceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-stack-watermark-c/verify.py\", line 19, in <module>\n    v.emu_start(syms[ROOT]|1,STOP,count=50000);assert v.reg_read(UC_ARM_REG_PC)==STOP and v.reg_read(UC_ARM_REG_SP)==SP;assert v.reg_read(UC_ARM_REG_R0)==length//4,(length,offset,terminal,handle,v.reg_read(UC_ARM_REG_R0));assert [v.reg_read(rr) for rr in saved]==list(range(0x44444440,0x44444448));assert v.reg_read(UC_ARM_REG_BASEPRI)==mask[0] and v.reg_read(UC_ARM_REG_PRIMASK)==mask[1];assert bytes(v.mem_read(CURRENT,0xc000))==before;digest.update(struct.pack('<IIIII',length,offset,terminal,handle,length//4));total+=1\n                                                                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: (1, 0, 0, False, 1)\n"
+    },
+    "byte-count-result": {
+      "rejected": true,
+      "diagnostic": "Traceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-stack-watermark-c/verify.py\", line 19, in <module>\n    v.emu_start(syms[ROOT]|1,STOP,count=50000);assert v.reg_read(UC_ARM_REG_PC)==STOP and v.reg_read(UC_ARM_REG_SP)==SP;assert v.reg_read(UC_ARM_REG_R0)==length//4,(length,offset,terminal,handle,v.reg_read(UC_ARM_REG_R0));assert [v.reg_read(rr) for rr in saved]==list(range(0x44444440,0x44444448));assert v.reg_read(UC_ARM_REG_BASEPRI)==mask[0] and v.reg_read(UC_ARM_REG_PRIMASK)==mask[1];assert bytes(v.mem_read(CURRENT,0xc000))==before;digest.update(struct.pack('<IIIII',length,offset,terminal,handle,length//4));total+=1\n                                                                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: (1, 0, 0, False, 1)\n"
+    },
+    "wrong-stack-field": {
+      "rejected": true,
+      "diagnostic": "Traceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-stack-watermark-c/verify.py\", line 19, in <module>\n    v.emu_start(syms[ROOT]|1,STOP,count=50000);assert v.reg_read(UC_ARM_REG_PC)==STOP and v.reg_read(UC_ARM_REG_SP)==SP;assert v.reg_read(UC_ARM_REG_R0)==length//4,(length,offset,terminal,handle,v.reg_read(UC_ARM_REG_R0));assert [v.reg_read(rr) for rr in saved]==list(range(0x44444440,0x44444448));assert v.reg_read(UC_ARM_REG_BASEPRI)==mask[0] and v.reg_read(UC_ARM_REG_PRIMASK)==mask[1];assert bytes(v.mem_read(CURRENT,0xc000))==before;digest.update(struct.pack('<IIIII',length,offset,terminal,handle,length//4));total+=1\n                                                                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: (0, 0, 0, False, 8)\n"
+    }
+  },
+  "audit": {
+    "changed": [
+      "r1/src/application/rtos/task-query/task-query.c"
+    ],
+    "unchanged_objects": 728,
+    "modules": {
+      "r1/src/application/rtos/task-query/task-query.c": {
+        "unchanged_existing_text_sections": [
+          ".text.pcTaskGetName",
+          ".text.uxTaskPriorityGet"
+        ],
+        "new_text_sections": [
+          ".text.prvTaskCheckFreeStackSpace",
+          ".text.uxTaskGetStackHighWaterMark"
+        ],
+        "source_prefix_preserved": true
+      }
+    }
+  },
+  "resolved_imports": [
+    "uxTaskGetStackHighWaterMark"
+  ],
+  "limits": [
+    "Pinned upstream semantics and existing native TCB prefix; no stock API identity claim",
+    "Valid task storage and scan termination assumed as in pinned kernel",
+    "No physical scheduler or complete firmware link proof"
+  ]
+}

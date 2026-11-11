@@ -1,20 +1,22 @@
-/* Full native 323574 callback encoder; selected 30e79c child stays a BL. */
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_dispatch_child_323574\n"
-".type opencfw_em9305_dispatch_child_323574,@function\n"
-"opencfw_em9305_dispatch_child_323574:\n"
-"st.aw blink,[sp,-12]\n"
-"stb r1,[sp,9]\n"
-"stb_s r0,[sp,0x8]\n"
-"mov_s r1,0x2d\n"
-"mov_s r2,sp\n"
-"sth_s r0,[r2,0x4]\n"
-"add_s r0,sp,0x4\n"
-"bl.d opencfw_em9305_ll_event_callback_30e79c\n"
-"sth_s r1,[r2,0x6]\n"
-"ld.ab blink,[sp,12]\n"
-"j_s [blink]\n"
-".size opencfw_em9305_dispatch_child_323574,.-opencfw_em9305_dispatch_child_323574\n"
-);
+#include <stdint.h>
+
+/* Native 0x323574..0x323592: report LL event 0x2d for a handle, carrying
+ * the handle low byte and a status byte. */
+extern uint32_t opencfw_em9305_ll_event_callback_30e79c(uintptr_t);
+
+struct ll_event_2d {
+    uint16_t handle;
+    uint16_t code;
+    uint8_t handle_low;
+    uint8_t status;
+};
+
+uint32_t opencfw_em9305_dispatch_child_323574(uint32_t handle, uint32_t status)
+{
+    struct ll_event_2d event;
+    event.handle = (uint16_t)handle;
+    event.code = 0x2du;
+    event.handle_low = (uint8_t)handle;
+    event.status = (uint8_t)status;
+    return opencfw_em9305_ll_event_callback_30e79c((uintptr_t)&event);
+}

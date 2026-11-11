@@ -1,7 +1,7 @@
 #include <stdint.h>
 
 /* Source-owned cells whose native byte addresses are recorded in their callers. */
-uint8_t audio_ble_flash_mode __attribute__((section(".g2_ram_20074f62")));
+/* 0x20074f62 is g_eCurROMPwrMode, owned by upstream SDK 5.0.0 am_hal_pwrctrl.c. */
 uint8_t audio_ble_profile_handler_id __attribute__((section(".g2_ram_20074f8a")));
 extern uint8_t audio_ble_discovery_handler_id_20074f8a
     __attribute__((alias("audio_ble_profile_handler_id")));

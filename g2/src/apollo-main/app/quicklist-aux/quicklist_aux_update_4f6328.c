@@ -2,6 +2,10 @@
  * Packet fields and RAM addresses are bound to the authenticated Main image.
  */
 #include <stdint.h>
+/* Stock-RAM literals rewritten to named objects (sim-test wave 2026-10-26,
+ * .waves/sim-fix/apply.py): g2ref_X is the linker symbol X. */
+#include <stdint.h>
+extern unsigned char g2ref_g2_quicklist_completed_201303cc[] __asm__("g2_quicklist_completed_201303cc");
 
 extern void audio_uart_buffer_zero(void *, uint32_t, uint32_t); /* 0x43c0e4 */
 extern uint32_t audio_quicklist_send_completed_5591b0(uint32_t, const void *);
@@ -23,8 +27,8 @@ static const char done_message[] = "Successfully sent completed UIDs batch %d (%
 static const char done_compact[] = "[quicklist.page]Successfully sent completed UIDs batch %d (%d items)";
 
 uint32_t audio_quicklist_aux_update_4f6328(void) {
-    uint8_t *const completed = (uint8_t *)(uintptr_t)0x201303ccu;
-    const uint32_t count = *(volatile uint16_t *)(uintptr_t)0x2013064cu;
+    uint8_t *const completed = (uint8_t *)(uintptr_t)((uint32_t)(uintptr_t)g2ref_g2_quicklist_completed_201303cc);
+    const uint32_t count = *(volatile uint16_t *)(uintptr_t)((uint32_t)(uintptr_t)g2ref_g2_quicklist_completed_201303cc+0x280u);
     if (count == 0u) {
         if ((audio_log_flags() & 2u) != 0u)
             audio_log_extended(4u, module, path, function, 1218u, empty_message);

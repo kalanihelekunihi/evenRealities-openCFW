@@ -6,6 +6,10 @@
 #include <string.h>
 extern volatile uint8_t r1_structured_log_mode;
 volatile uint8_t r1_structured_log_level __attribute__((section(".r1.log.level"),aligned(1)))=3;
+/* Stock 0x91494: the diagnostic threshold is stored as one byte. */
+void r1_structured_log_threshold_set(uint32_t level) {
+    r1_structured_log_level=(uint8_t)level;
+}
 volatile uint8_t r1_structured_log_sequence __attribute__((section(".r1.log.sequence"),aligned(1)));
 extern uint32_t osKernelGetTickCount(void);
 extern uint32_t r1_structured_log_clock_available(void);
@@ -71,4 +75,60 @@ void r1_structured_log_encode_format(uint32_t header,const char *text,va_list ar
     }
     record.header=(header & UINT32_C(0xfc3fffff)) | (processed<<22);
     r1_structured_log_cache_append(&record,12+used);
+}
+
+/* Stock 0x41d30 packs typed arguments without parsing the descriptor text.
+ * Header bits 31..29 select the payload shape and bits 25..22 its item count.
+ * The caller owns the va_list's lifetime. */
+void r1_structured_log_encode_typed(uint32_t header,va_list arguments)
+{
+    struct { uint32_t prefix,time,header;uint8_t payload[32]; } record={0};
+    uint32_t severity=(header>>26)&7u;
+    if (r1_structured_log_mode & 4u) { if (severity>5u) return; }
+    else if ((r1_structured_log_mode & 1u) && r1_structured_log_level<severity) return;
+
+    uint8_t sequence=r1_structured_log_sequence;
+    r1_structured_log_sequence=(uint8_t)(sequence+1u);
+    record.prefix=UINT32_C(0xdc000000)+((osKernelGetTickCount()%1000u)<<16)+
+                  ((uint32_t)sequence<<8)+0x7bu;
+    record.time=r1_structured_log_clock_available() ?
+                r1_structured_log_local_timestamp() : r1_structured_log_timestamp_adapter();
+    record.header=header;
+
+    uint32_t requested=(header>>22)&15u;
+    if (requested>8u) requested=8u;
+    uint32_t used=0;
+    switch (header>>29) {
+    case 4u:
+        for (uint32_t i=0;i<requested && i<2u;++i) {
+            const char *value=va_arg(arguments,const char *);
+            size_t length=strlen(value);
+            if (length>16u) length=16u;
+            memcpy(record.payload+used,value,length);
+            used+=16u;
+        }
+        break;
+    case 6u:
+        if (requested) {
+            const char *value=va_arg(arguments,const char *);
+            size_t length=strlen(value);
+            if (length>16u) length=16u;
+            memcpy(record.payload,value,length);
+            used=16u;
+            for (uint32_t i=1;i<requested && i<5u;++i) {
+                uint32_t word=va_arg(arguments,uint32_t);
+                memcpy(record.payload+used,&word,sizeof(word));
+                used+=sizeof(word);
+            }
+        }
+        break;
+    default:
+        for (uint32_t i=0;i<requested;++i) {
+            uint32_t word=va_arg(arguments,uint32_t);
+            memcpy(record.payload+used,&word,sizeof(word));
+            used+=sizeof(word);
+        }
+        break;
+    }
+    r1_structured_log_cache_append(&record,12u+used);
 }

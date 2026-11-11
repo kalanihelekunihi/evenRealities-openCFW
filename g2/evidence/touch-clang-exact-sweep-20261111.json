@@ -1,0 +1,86 @@
+{
+  "schema": 1,
+  "target": "Promote already-linked stock-exact touch C functions from the complete clang-source sweep",
+  "sweep_compiled_units": 81,
+  "new_sources": [
+    "g2/src/touch/cycfg/cycfg.c",
+    "g2/src/touch/glue/touch_runtime_0164_reset_entry.c",
+    "g2/src/touch/glue/touch_syslib_cycles.c"
+  ],
+  "new_regions": [
+    {
+      "source": "g2/src/touch/cycfg/cycfg.c",
+      "symbol": "touch_runtime_12a6_fault",
+      "start": 4806,
+      "end": 4810,
+      "sha256": "1262b54900d7c03b982e9985409063fac8226d831429b16fcf3d3f95e0f88802"
+    },
+    {
+      "source": "g2/src/touch/cycfg/cycfg.c",
+      "symbol": "touch_leaf_1226_passthrough",
+      "start": 4678,
+      "end": 4680,
+      "sha256": "c7dfbb7d02759eacb64dbc916c1bb6f21eabaff1c1032ea5c9176abf7fd28df8"
+    },
+    {
+      "source": "g2/src/touch/cycfg/cycfg.c",
+      "symbol": "touch_leaf_1236_passthrough",
+      "start": 4694,
+      "end": 4696,
+      "sha256": "c7dfbb7d02759eacb64dbc916c1bb6f21eabaff1c1032ea5c9176abf7fd28df8"
+    },
+    {
+      "source": "g2/src/touch/cycfg/cycfg.c",
+      "symbol": "touch_leaf_12a4_passthrough",
+      "start": 4804,
+      "end": 4806,
+      "sha256": "c7dfbb7d02759eacb64dbc916c1bb6f21eabaff1c1032ea5c9176abf7fd28df8"
+    },
+    {
+      "source": "g2/src/touch/glue/touch_runtime_0164_reset_entry.c",
+      "symbol": "_exit_halt",
+      "start": 30560,
+      "end": 30562,
+      "sha256": "575fc8fa9e92ffe7d57a6aef6f1168f39da04f07d6bcd5b5e17883bff7b33165"
+    },
+    {
+      "source": "g2/src/touch/glue/touch_syslib_cycles.c",
+      "symbol": "Cy_SysLib_EnterCriticalSection",
+      "start": 4530,
+      "end": 4538,
+      "sha256": "720733fcf19a5635fcab0791fcc2b007294712bb27536443ff79490821c168cf"
+    },
+    {
+      "source": "g2/src/touch/glue/touch_syslib_cycles.c",
+      "symbol": "Cy_SysLib_ExitCriticalSection",
+      "start": 4538,
+      "end": 4544,
+      "sha256": "379ef840451b3bf5f9903b215cd3fe49e26244e0b6b8afe47b9e5c37a1ee1ca2"
+    }
+  ],
+  "g2_exact_regions": 73,
+  "g2_exact_bytes": 3784,
+  "touch_exact_regions": 55,
+  "touch_exact_bytes": 3666,
+  "full_source_report": "build/g2-touch-crt-full-20261111/report.json",
+  "strict_link_report": "build/g2-touch-crt-bundle-20261111/link-report.json",
+  "hybrid_touch_totals": {
+    "resource-file": 32,
+    "binary-pull-through": 30766,
+    "source-built": 3666
+  },
+  "hybrid_bundle_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "source_only_bundle_sha256": "b7f00ac20ebf27524e55819d5124b5f6dc6eb85c396d5e493e9ede0fb627fd86",
+  "file_sha256": {
+    "tools/build/source-plan.json": "060e734b9a0e8b18874d3e9d500fb2820c1a15e944ef4414aa0f0ef1d8685987",
+    "build/g2-touch-clang-sweep-20261111/qualification.json": "46c15f5e0b8055b8082cebd6ca569ec44660994c6cd80b58a74b6705155b3ff2",
+    "build/g2-touch-clang-sweep-20261111/source-plan.json": "32e2f25b2e0469f3cb7633a8f701794c591bacab3aa070f01d8d4f9283858f86",
+    "build/g2-touch-clang-hybrid-20261111/build-report.json": "0038ddab0cc67ae10ad271a06dc5211eaa019597ef0719be026580efdaad948b",
+    "build/g2-touch-crt-full-20261111/report.json": "dfa9b5349b5821fc32e4816b3a340bb5b422b8cba8dd2ba66a6a7f5f8b5cb75a",
+    "build/g2-touch-crt-bundle-20261111/link-report.json": "eea026eb1ee30b01aa4d0354732488245be3369060c0d44824b84c435f20d601",
+    "g2/src/touch/cycfg/cycfg.c": "858aa14271dc8811351f9da30b17d5f4aa68b07833d1623e97be94d9041b37e6",
+    "g2/src/touch/glue/touch_runtime_0164_reset_entry.c": "8a22c213cb54876dbc2c641daeb9b1cbdf7d59074b038b22d34614dcbaa9ba91",
+    "g2/src/touch/glue/touch_syslib_cycles.c": "5cef4ecb8ca4725c744e70b683e67747bfefd3bf240659c0230a916af56d47e3"
+  },
+  "limits": "These 26 exact bytes are already-linked C bodies; source-only firmware remains nonidentical and hardware behavior is untested."
+}

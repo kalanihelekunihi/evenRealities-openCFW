@@ -1,0 +1,11 @@
+# Ship-control startup uses ordinary C
+
+`r1_analog_init_delay` in `native_yhm_initialize.c` now uses a C loop and direct calls instead of fixed-register variables, empty assembly and manual Thumb-pointer arithmetic. The complete unit has no inline assembly or register bindings. Its historical name does not imply ADC initialization.
+
+The sequence still opens the ship-mode handle at YHM context offset eight, reloads that handle, dispatches operation `(1,0)`, and calls `r1_rtt_delay_cycles(64000)` exactly 200 times. Provider errors do not abort the sequence. The separate handle initializer's `(0,0)` operation is unchanged. The calibrated delay primitive remains architectural assembly and its compiled object is unchanged.
+
+The [receipt](ship-init-pure-c-review.json) records 384 paired stock/C cases for direct startup and its thunk. Cases vary handle values, statuses, register seeds, masks and handle mutations after open, after operation or during delays. Every run makes 202 provider calls, including 200 delays. Returned handles/operation arguments, delay arguments/order/count, final context bytes, stack balance, callee-saved registers and masks agree. Four controls with 199 delays, a wrong cycle argument, a wrong operation or a stale prefetched handle are rejected.
+
+REA raw-byte observations identify stock entries `0x80e74` and `0x50754`. Registry and calibrated-delay boundaries are modeled, with code/write hooks and no memory-read hooks. The replay verifies delay calls rather than elapsed electrical or RTOS timing. Loop overhead/private frames and void-return scratch registers are not stock contracts reproduced by this C API. Physical power sequencing, arbitrary aliases/faults and concurrency remain unverified.
+
+The normal report is `build/sources-goal-r1-ship-init-pure-c/report.json`: all 727 units compile without failures or duplicate strong symbols. Imports remain 178 application and 34 bootloader. Only the YHM initializer object changed; 726 objects remain unchanged, including the calibrated delay primitive. The handle initializer instruction section is byte unchanged. Both source manifests pass `make sources-check`. No byte identity or completed firmware build is claimed.

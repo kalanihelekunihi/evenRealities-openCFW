@@ -12,8 +12,5 @@ struct touch_pm_callback {
  touch_pm_callback *prev,*next;
  uint8_t order;
 };
-bool touch_pm_register(touch_pm_callback *handler);
-/* type0/1, mode1/2/4/8; mode8 requires a nonempty coherent list. */
-uint32_t touch_pm_execute(uint32_t type,uint32_t mode);
-uint32_t touch_pm_deep_sleep(void);
+/* Reset-copy descriptors use the upstream PDL callback ABI. */
 #endif

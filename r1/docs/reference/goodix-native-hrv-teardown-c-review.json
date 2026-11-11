@@ -1,0 +1,175 @@
+{
+  "schema_version": 1,
+  "scope": "Native HRV teardown and release-cell/status adapters in ordinary C",
+  "report": "build/sources-goal-r1-goodix-native-hrv-teardown-c/report.json",
+  "comparison_report": "build/sources-goal-r1-goodix-native-reallocate-c/report.json",
+  "stock_entries": [
+    {
+      "entry": "0x6dad0",
+      "size": 126,
+      "symbol": "goodix_hrv_deinit"
+    },
+    {
+      "entry": "0x6db58",
+      "size": 4,
+      "symbol": "goodix_hrv_deinit_func"
+    },
+    {
+      "entry": "0x2cac6",
+      "size": 18,
+      "symbol": "GH3x2xHrvAlgoDeinit"
+    },
+    {
+      "entry": "0x56860",
+      "size": 20,
+      "symbol": "r1_goodix_native_release_cell"
+    }
+  ],
+  "audit": {
+    "compiled_units": 869,
+    "unchanged_prior_nongenerated_objects": 858,
+    "new_units": [
+      "r1/src/application/goodix/native_hrv_teardown.c"
+    ],
+    "differing_existing_generated_objects": [
+      "{gen}/r1_startup_vectors.S",
+      "{gen}/r1_uecc.c"
+    ],
+    "application_imports": 62,
+    "bootloader_imports": 22,
+    "removed_imports": [],
+    "added_imports": [],
+    "new_writable_state_bytes": 4,
+    "source_plan_and_cache_layout_unchanged": true,
+    "tested_object_equals_normal_build": true,
+    "only_manifest_change_is_one_new_unit": true,
+    "portable_heap_and_existing_byte_fill_objects_unchanged": true
+  },
+  "direct": {
+    "direct_teardown_comparisons": 49152,
+    "live_context_and_return_mutation_comparisons": 120,
+    "release_cell_comparisons": 18,
+    "initial_null_fault_shape_cases": 4,
+    "native_instruction_bytes_executed": [
+      126,
+      4,
+      18,
+      20
+    ],
+    "full_context_bytes_release_sequence_and_write_width_order_values_match": true,
+    "caller_guards_saved_integer_FP_SP_masks_checked": true,
+    "allocator_release_modeled": true,
+    "public_thunk_alias_shares_one_C_body": true
+  },
+  "actual_heap": {
+    "actual_C_heap_teardown_comparisons": 1440,
+    "actual_initializer_malloc_release_and_HRV_deinit_execute": true,
+    "typed_context_preparation_not_algorithm_initialization": true,
+    "root_before_or_after_children_optional_live_guard": true,
+    "entire_heap_context_cell_and_write_width_order_values_match": true,
+    "source_pipeline_cannot_execute_stock": true,
+    "external_hardware_ports_present_but_no_fatal_expected": true,
+    "native_teardown_instruction_bytes": [
+      122,
+      4,
+      18
+    ]
+  },
+  "compiled_defects_rejected": [
+    {
+      "defect": "field-order",
+      "rejected": true
+    },
+    {
+      "defect": "missing-field",
+      "rejected": true
+    },
+    {
+      "defect": "clear-before-release",
+      "rejected": true
+    },
+    {
+      "defect": "cached-context",
+      "rejected": true
+    },
+    {
+      "defect": "late-null-abort",
+      "rejected": true
+    },
+    {
+      "defect": "final-owner",
+      "rejected": true
+    },
+    {
+      "defect": "second-direct-buffer",
+      "rejected": true
+    },
+    {
+      "defect": "release-null-cell",
+      "rejected": true
+    },
+    {
+      "defect": "status-normalization",
+      "rejected": true
+    },
+    {
+      "defect": "initial-null-guard",
+      "rejected": true
+    }
+  ],
+  "contract": [
+    "Release eleven nullable cells at offsets94,a8,b8,c8,1c,2c,3c,4c,5c,74,84 in that order. Each nonzero cell is cleared only after release. Reload the canonical owner for every field.",
+    "Release buffers at6c and70 even when zero, without clearing those slots. Reload the owner again; if nonnull release it then clear the owner and return0, otherwise return0x10000005.",
+    "Public thunk aliases the destructor. The HRV frame-status adapter ignores its frame argument and returns0 for success or-1 for nonzero status. The cell helper always returns0 when it returns."
+  ],
+  "limits": [
+    "All168 native instruction bytes execute in49152 field-mask comparisons,120 live-owner/result mutations and18 direct cell-helper comparisons. Callback snapshots establish clear-after-free timing.",
+    "1440 comparisons execute the actual C initializer/malloc/free and new HRV teardown. Typed contexts are fixture preparation, not a recovered HRV initializer. Context-before/after-children layouts, optional unrelated guard allocations, and full heap/context writes are checked.",
+    "Initial-null parent access at0x94 and null cell-helper access at0 are checked as unmapped reads in the emulator. This is an access-shape check, not a claim about MCU flash mapping or physical fault behavior. The initial context must be valid for supported teardown.",
+    "Direct tests model free and caller-scratch clobbers; actual-heap integration has no source stock-code fallback. Saved integer/FP registers, SP, masks, FPSCR and guards are checked. Caller scratch/private frames/APSR excluded.",
+    "One canonical four-byte HRV context owner added, with no new imports. Source plan/cache layout and prior portable API utilities unchanged. Future native HRV initialization must share this owner.",
+    "No allocator deinit body is inferred solely from SDK declarations. Observed pool-cell xrefs are not proof of exhaustive indirect-reference coverage. Remaining algorithm initialization/computation/teardown, concurrency, physical memory, final linking/startup and boot remain open."
+  ],
+  "evidence_files": {
+    "build/sources-goal-r1-goodix-native-hrv-teardown-c/report.json": "cac05e79d02186826ef4c7cc48e9a07a1b0d3e04e0f9ed5f79fbf917188e38a5",
+    "build/sources-goal-r1-goodix-native-reallocate-c/report.json": "c556c55af2b659aae8e77a5cec602dca136c4630c16951303557b72d83357919",
+    "r1/src/application/goodix/native_hrv_teardown.c": "74c35c824e0ba0c9f9c782fb1a42ec140d569c509b18a9552733dbead271048c",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-native-hrv-teardown-c/r1/r1-application/r1__src__application__goodix__native_hrv_teardown.c.o": "ca3a52d81d15c956a94f6b435fec18f166a48edb385883436b4ae3eaa9738ca6",
+    "r1/src/sources.json": "33ea1b3c8bd98c7d8b1e747d972a2cff8f2c09e5207eed67839f06a37a9bc0f3",
+    "tools/build/source-plan.json": "eeb516e31b3310fb0718f36908977f8125723f7c5e0e86cd6744395826259a4d",
+    "r1/src/config/runtime/native_health_cache.ld": "eb8f131c489cd818d4e36718718fa1989719ca0170f164541a1a5bf56dfc1ec3",
+    "r1/src/application/goodix/native_heap_init.c": "c3085064866b23d603697918b6dfdd29f66ab68c7e82cb1f3e10443c80e3f8b6",
+    "r1/src/application/goodix/native_heap_free.c": "175cf893ee4b475bee0a886d69522782ac879dd0b29c43285d957c03fb4dc7c4",
+    "r1/src/application/goodix/native_heap_malloc.c": "1b827deb8981088d68fae260af0aa442a7315d4aaaa7f2ed8a248c859878a0c3",
+    "r1/src/application/goodix/native_heap_allocate.c": "2806f3ca4f9074b157b390edf8bd03815a46b31f1661e1ed238a0938c666d8c9",
+    "r1/src/application/goodix/native_heap_reallocate.c": "078156cbb3d160046b3c181313a362885f3d41884692698469ad86543458832c",
+    "r1/docs/reference/FUNCTION-OWNERSHIP.csv": "d461b61095d6ab53d19c3a6f4174e9d2abab515f4dfe24d63201fb7c3af5207c",
+    "r1/symbols/function-frontier.csv": "d5d2702835dd793d478d71d10241e87ad2d2f1bece622a0347b49dd0d3c0da08",
+    "r1/docs/correlation/GOODIX-HEAP-REDUCTION-CORRELATION.md": "39a859c5be5ac588ba09d107e76635114f0485defbcbc525e5ea17a187c41bad",
+    "build/goal-r1-goodix-native-malloc-c/manager-flags-rea.json": "998b6d6379dc9b01cf79f886517b215bf829ac93b3d29ea6846c21b8d553ba00",
+    "build/goal-r1-goodix-native-heap-init-c/fill.o": "5b9881f48c6329da35510eb6b3f4be65d3c31bab24e2f6ab7d5713597d06c391",
+    "build/goal-r1-goodix-native-heap-init-c/fill-body.json": "9bf851f3f2cb56510504f22b5d435b9a6db08019815db0e446543e23e3a17c13",
+    "build/goal-r1-goodix-native-hrv-teardown-c/audit.json": "bbf6af49f1c7a694409689795d9db97415752f660f0c1e03fb515f8e26c6872c",
+    "build/goal-r1-goodix-native-hrv-teardown-c/verify.log": "cac92f286b894dfea54b5b773f4fe8d911377c3b7dd8769281a6d01c84b03c6a",
+    "build/goal-r1-goodix-native-hrv-teardown-c/negative.json": "eeb849eaff10a67d4883eeb54065795e0e374c1f9ed4f5f1c18c7f1a591b85fb",
+    "build/goal-r1-goodix-native-hrv-teardown-c/test.ld": "b0291aeb8ada607ed7dabb82677fc0a3ffa514eecfb2f6387cc1bb2ef864ebf7",
+    "build/goal-r1-goodix-native-hrv-teardown-c/audit.py": "08d4729365a7c351fdab1d7a39fce9a71c83a84ee033971c2fc2354ea85e8b69",
+    "build/goal-r1-goodix-native-hrv-teardown-c/source.elf": "5ae6be8dc3f0df4a25864523125e3c3ef2be380b413ff2c1ecb44d6db70b6882",
+    "build/goal-r1-goodix-native-hrv-teardown-c/negative.py": "b539e64d10125e7b79b115b179a834c6392f507a5b8362a4322c1fbc1b762a1f",
+    "build/goal-r1-goodix-native-hrv-teardown-c/negative.log": "0874405bde5db1cc9fb3f9e368cfd08c7bcc470b2f2eed8be36a20f4b72e9786",
+    "build/goal-r1-goodix-native-hrv-teardown-c/source.o": "ca3a52d81d15c956a94f6b435fec18f166a48edb385883436b4ae3eaa9738ca6",
+    "build/goal-r1-goodix-native-hrv-teardown-c/results.json": "627961cbd611839a01289bcad01bbc2e38fe2c1b458387c70dad97a9479ecdd7",
+    "build/goal-r1-goodix-native-hrv-teardown-c/pipeline.log": "bba53339b2df6db900a5db145835dfa5620412a01770d805eea9bf2c64ce9c30",
+    "build/goal-r1-goodix-native-hrv-teardown-c/pipeline.py": "162041bc007d6728717cda11b1da8060face26c0faf98c3f6a79e6349b340412",
+    "build/goal-r1-goodix-native-hrv-teardown-c/sources-check.log": "e1ef64d77a819c96eb371a2a0afee2e644ee4ee32c6a5455036f1fe6e422e022",
+    "build/goal-r1-goodix-native-hrv-teardown-c/record.py": "4fdb5ef80e8bc2d83c8e46862987abe594b7af1f39106bd63bff57b9a5d774c0",
+    "build/goal-r1-goodix-native-hrv-teardown-c/rea-bytes.json": "e6d8a87c88c028f03a50597e825091b58f381a7a799d600d8ae7080d04046a21",
+    "build/goal-r1-goodix-native-hrv-teardown-c/manifest-before.json": "df24d61b0122f93ecfecd9757ba1282059ec1d51109b8a48f88c36ae6ff09f5f",
+    "build/goal-r1-goodix-native-hrv-teardown-c/verify.py": "3d337e8ddc62d41700bc26bcc08deacbe359e9058efd40135bd67684bba96d18",
+    "build/goal-r1-goodix-native-hrv-teardown-c/pool-cell-xrefs.json": "df1cc5f190207fdb9e732a71801b5107c33b9f771dbaf63fc07b11869c831e49",
+    "build/goal-r1-goodix-native-hrv-teardown-c/build.log": "79e33e44c3c4cce47eee08c5d1c2f6fdf3f4d54ea4e4c59f2fdfab34610d0936",
+    "build/goal-r1-goodix-native-hrv-teardown-c/pipeline/test.ld": "006166e723e913b6917e1d48557f5023f0960d09b0f04f46bca7d7aeb9f88815",
+    "build/goal-r1-goodix-native-hrv-teardown-c/pipeline/source.elf": "feb345a4a899e1b86faf97c4dd83c37965a4ccdae957c66231efb3a8f89afac5",
+    "build/goal-r1-goodix-native-hrv-teardown-c/pipeline/results.json": "864414e135e759b9cb2ec83b1362d0895ee85f645cd1d66c18315f190aceebd4"
+  }
+}

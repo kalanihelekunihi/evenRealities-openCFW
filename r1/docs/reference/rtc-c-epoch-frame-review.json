@@ -1,0 +1,87 @@
+{
+  "cases": 936,
+  "passed": 936,
+  "integrated_actual_calendar_cases": 20,
+  "source_sha256": "a0b07d245cc37b2108491a05ada83842e4d73cb48943f901d03601b5712d3d84",
+  "report": "build/sources-goal-r1-rtc-epoch-frame/report.json",
+  "old_regression": {
+    "native_status": 0,
+    "old_status": 17,
+    "native_reads": [
+      [
+        536973312,
+        4
+      ],
+      [
+        536900484,
+        4
+      ]
+    ],
+    "old_reads": [
+      [
+        536900484,
+        4
+      ],
+      [
+        536973312,
+        4
+      ]
+    ]
+  },
+  "other_units_unchanged": 561,
+  "application_imports": 211,
+  "bootloader_imports": 34,
+  "limitations": [
+    "Converter modeled in direct cases and actual in integrated cases; strcmp modeled",
+    "Controlled name mutation is not production race evidence",
+    "No physical RTC, complete fault/concurrency or native byte proof"
+  ],
+  "unchanged_functions": [
+    "r1_native_rtc_epoch_to_calendar",
+    "r1_native_rtc_gmtime",
+    "r1_native_rtc_open",
+    "r1_native_rtc_register",
+    "r1_native_rtc_tick",
+    "rtc_open_body",
+    "rtc_tick_body"
+  ],
+  "bridge_bytes": 18,
+  "evidence": [
+    {
+      "path": "build/goal-r1-rtc-epoch-frame/before.c",
+      "sha256": "5b8e98e429de4b05d226bc5aa6a64558aecee4ebfa2809895a08c88aa32e3ff1"
+    },
+    {
+      "path": "build/goal-r1-rtc-epoch-frame/verify.py",
+      "sha256": "13483cb3fbe426b9289041946e6763a46b63293247b248450a6450750f99db7a"
+    },
+    {
+      "path": "build/sources-goal-r1-rtc-epoch-frame/report.json",
+      "sha256": "712257e51d34440addbf04cbc01edbbed682acde09293b7e4bae74eaee74d1d1"
+    },
+    {
+      "path": "build/goal-r1-rtc-epoch/rea.json",
+      "sha256": "4dd15948292294d5cab80418b7a47ab98bccce2515a9b5562ecfc8cb4e3ad396"
+    },
+    {
+      "path": "build/goal-r1-rtc-epoch/rea-snapshot.json",
+      "sha256": "9d36cbd0b804209470379cf12b4b8837f337054b0d18897f8c585dec448ed0c7"
+    },
+    {
+      "path": "build/goal-r1-twi-packet-c/stock.elf",
+      "sha256": "0a73bd084a4ccf8cdd579852b46deda970b701b2c22e9aecf423166f949350e4"
+    },
+    {
+      "path": "r1/src/application/board/native_rtc_lifecycle.c",
+      "sha256": "a0b07d245cc37b2108491a05ada83842e4d73cb48943f901d03601b5712d3d84"
+    },
+    {
+      "path": "r1/src/sources.json",
+      "sha256": "9c5b7ae5c0e7493eb22e1fb4df9f0c928c2a9aa70530254aff89b55213bef2e2"
+    },
+    {
+      "path": "tools/build/source-plan.json",
+      "sha256": "964cbd3af9f4ea7ed207bb4b480d18a9529060dc3801663d296389472982aa7c"
+    }
+  ]
+}

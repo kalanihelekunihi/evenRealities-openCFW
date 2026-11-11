@@ -1,0 +1,167 @@
+{
+  "counting_semaphores": {
+    "passed": 6144,
+    "executions": 12288,
+    "source_report": "build/sources-goal-r1-counting-semaphore-c/report.json",
+    "actual_queue_initialization_reset_lists": true,
+    "initial_count_after_reset": true,
+    "allocation_and_critical_boundaries_modeled": true,
+    "logical_assert_fault_checked": true,
+    "callback_stack_depths": {
+      "stock": [
+        -80,
+        -40
+      ],
+      "C": [
+        -80,
+        -64,
+        -32
+      ]
+    },
+    "sizes": {
+      "xQueueCreateCountingSemaphore": 42,
+      "xQueueCreateCountingSemaphoreStatic": 58
+    },
+    "limitations": [
+      "Heap and critical entry/exit modeled; actual constructors, reset and list initialization execute",
+      "Private frames, caller-clobbered outputs/flags and every ordinary internal access excluded",
+      "Logical assertion checks mask/address/width/value without full fault/exception proof",
+      "Physical semaphore scheduling and concurrency unverified",
+      "No byte qualification"
+    ]
+  },
+  "queue_creation_regression": {
+    "passed": 8248,
+    "executions": 16496,
+    "source_report": "build/sources-goal-r1-counting-semaphore-c/report.json",
+    "actual_initialization_reset_and_lists": true,
+    "allocation_and_critical_boundaries_modeled": true,
+    "logical_assert_fault_checked": true,
+    "queue_and_storage_guards": true,
+    "callback_stack_depths": {
+      "stock": [
+        -72,
+        -64,
+        -32
+      ],
+      "C": [
+        -56,
+        -24
+      ]
+    },
+    "sizes": {
+      "xQueueGenericCreate": 82,
+      "xQueueGenericCreateStatic": 98,
+      "prvInitialiseNewQueue": 32
+    },
+    "limitations": [
+      "Heap and critical boundaries modeled; actual native/C initialization, reset and list routines execute",
+      "State and boundary snapshots compared; private frames and internal ordinary memory access order excluded",
+      "Logical assertion mask/address/width/value checked; full fault/exception state unverified",
+      "Heap metadata, allocation fragmentation, physical scheduling and concurrency unverified",
+      "No byte qualification"
+    ]
+  },
+  "negative_controls": {
+    "strict-upper-bound": {
+      "rejected": true,
+      "case": [
+        false,
+        8,
+        8
+      ],
+      "stderr": "arm-none-eabi-ld: warning: /Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-counting-semaphore-c/r1/r1-application/third-party__upstream__freertos-kernel__list.c.o uses 32-bit enums yet the output is to use variable-size enums; use of enum values across objects may fail\narm-none-eabi-ld: warning: (pvPortMalloc): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-counting-semaphore-c/strict-upper-bound.o\narm-none-eabi-ld: warning: (vPortEnterCritical): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-counting-semaphore-c/strict-upper-bound.o\narm-none-eabi-ld: warning: (vPortExitCritical): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-counting-semaphore-c/strict-upper-bound.o\narm-none-eabi-ld: warning: (xTaskRemoveFromEventList): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-counting-semaphore-c/strict-upper-bound.o\nTraceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-counting-semaphore-c/reject-strict-upper-bound.py\", line 66, in <module>\n    assert a(*case)==b(*case)\n                     ~^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-counting-semaphore-c/reject-strict-upper-bound.py\", line 56, in run\n    assert state['fault'] is None and u.reg_read(UC_ARM_REG_PC)==STOP and u.reg_read(UC_ARM_REG_SP)==SP\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    "zero-initial": {
+      "rejected": true,
+      "case": [
+        true,
+        8,
+        2
+      ],
+      "stderr": "arm-none-eabi-ld: warning: /Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-counting-semaphore-c/r1/r1-application/third-party__upstream__freertos-kernel__list.c.o uses 32-bit enums yet the output is to use variable-size enums; use of enum values across objects may fail\narm-none-eabi-ld: warning: (pvPortMalloc): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-counting-semaphore-c/zero-initial.o\narm-none-eabi-ld: warning: (vPortEnterCritical): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-counting-semaphore-c/zero-initial.o\narm-none-eabi-ld: warning: (vPortExitCritical): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-counting-semaphore-c/zero-initial.o\narm-none-eabi-ld: warning: (xTaskRemoveFromEventList): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-counting-semaphore-c/zero-initial.o\nTraceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-counting-semaphore-c/reject-zero-initial.py\", line 66, in <module>\n    assert a(*case)==b(*case)\n                     ~^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-counting-semaphore-c/reject-zero-initial.py\", line 59, in run\n    if static or not fail:assert u.mem_read(Q+70,1)==bytes([static]) and u.mem_read(Q+76,1)==bytes([kind]) and int.from_bytes(u.mem_read(Q+56,4),'little')==initial\n                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    "write-after-allocation-failure": {
+      "rejected": true,
+      "case": [
+        false,
+        8,
+        2,
+        true
+      ],
+      "stderr": "arm-none-eabi-ld: warning: /Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-counting-semaphore-c/r1/r1-application/third-party__upstream__freertos-kernel__list.c.o uses 32-bit enums yet the output is to use variable-size enums; use of enum values across objects may fail\narm-none-eabi-ld: warning: (pvPortMalloc): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-counting-semaphore-c/write-after-allocation-failure.o\narm-none-eabi-ld: warning: (vPortEnterCritical): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-counting-semaphore-c/write-after-allocation-failure.o\narm-none-eabi-ld: warning: (vPortExitCritical): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-counting-semaphore-c/write-after-allocation-failure.o\narm-none-eabi-ld: warning: (xTaskRemoveFromEventList): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-counting-semaphore-c/write-after-allocation-failure.o\nTraceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-counting-semaphore-c/reject-write-after-allocation-failure.py\", line 66, in <module>\n    assert a(*case)==b(*case)\n                     ~^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-counting-semaphore-c/reject-write-after-allocation-failure.py\", line 56, in run\n    assert state['fault'] is None and u.reg_read(UC_ARM_REG_PC)==STOP and u.reg_read(UC_ARM_REG_SP)==SP\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    }
+  },
+  "audit": {
+    "unchanged_existing_function_bodies": [
+      "prvGetDisinheritPriorityAfterTimeout",
+      "prvInitialiseMutex",
+      "prvInitialiseNewQueue",
+      "prvIsQueueEmpty",
+      "prvUnlockQueue",
+      "ulPortRaiseBASEPRI",
+      "xQueueCreateMutex",
+      "xQueueCreateMutexStatic",
+      "xQueueGenericCreate",
+      "xQueueGenericCreateStatic",
+      "xQueueGenericReset",
+      "xQueueGiveFromISR",
+      "xQueueGiveMutexRecursive",
+      "xQueueSemaphoreTake",
+      "xQueueTakeMutexRecursive"
+    ],
+    "new_strong_symbols": [
+      "xQueueCreateCountingSemaphore",
+      "xQueueCreateCountingSemaphoreStatic"
+    ],
+    "removed_imports": [
+      "xQueueCreateCountingSemaphore",
+      "xQueueCreateCountingSemaphoreStatic"
+    ],
+    "added_imports": []
+  },
+  "normal_build": {
+    "units": 573,
+    "application_imports": 192,
+    "bootloader_imports": 34,
+    "failures": 0,
+    "duplicate_strong_symbols": 0
+  },
+  "qualification": {
+    "compiled": 5,
+    "selected_regions": 2,
+    "already_covered": 2,
+    "new_functions_byte_qualified": false
+  },
+  "source_plan_unchanged": true,
+  "source_built_bytes": 3833,
+  "binary_pull_through_bytes": 642327,
+  "source_completeness_proven": false,
+  "evidence": {
+    "build/sources-goal-r1-counting-semaphore-c/report.json": "1b050c544b7dfb2e2bb2e5877ae93b77d2a6e8e80f2bdbcd2e3330efca9908f9",
+    "tools/build/source-plan.json": "0c889650bf8ea03def83ea1ea29730b3ccfe84bb70609c1972a500f02ba4ea2d",
+    "r1/src/application/rtos/mutex-kernel/mutex-kernel.c": "ce399981b672da3cfaae5c47712e17bf38e814214c0aa60205ba838455e4d364",
+    "third-party/upstream/freertos-kernel/queue.c": "5cdf4fa35fe059446effff5bf20deaf83ddffb08921bc198fda106b1d17dd894",
+    "r1/src/config/rtos/mutex_kernel_contract.h": "d940797ff263975ba00fd355c3b3535a002c97f3e1ada8419492efb84ed8de81",
+    "r1/src/config/rtos/queue_operations_contract.h": "bca8311a67d844386ea0066c486ffd4ac127696a914adf4cd5514f4c841a3b8e",
+    "r1/src/config/rtos/native_port_assert.h": "efee8118f24a53756b6f14a666524b3d59561f005e1e87ed71309ccab9c4fc9f",
+    "r1/src/sources.json": "6fa37d8afe1e50453bc47962bcfe463cd5163fb4f1b3d2a8033b02adbb77c9d3",
+    "build/hybrid-goal-r1-counting-semaphore-c/build-report.json": "c5e425f2539143f7ee63ce295239841b4fb6b25b3533518cc0b2e878c1aa7743",
+    "build/goal-r1-counting-semaphore-c/before.c": "064576c832c2dbf60801c37b4fa47ca1e0bb2b61cdd8227ea049a10bd9051fb3",
+    "build/goal-r1-counting-semaphore-c/selected-upstream.c": "3dad8a2ff52de12631071812389b45354f177a6004c67f72907e3e34063fa0f2",
+    "build/goal-r1-counting-semaphore-c/REA-dynamic.json": "81995b13be07fde91a320aefa5f0c4e89c3eda33453003aca0c9260021be3042",
+    "build/goal-r1-counting-semaphore-c/REA-static.json": "c7a356ddb26d5abe5b2e1981c32f6565ca3c6697b385cab02639f31517157eec",
+    "build/goal-r1-counting-semaphore-c/REA.snapshot.json": "7593f45ebff28f6b1e0d7203f5564b405e42c55fbd1264726533bcf5bc4bbc10",
+    "build/goal-r1-counting-semaphore-c/verify.py": "ff4e3fd827e4b9de625f8b34afffa528db624c25476a86084ad178ef32abcb51",
+    "build/goal-r1-counting-semaphore-c/results.json": "233438202dda6657328381f2fa97a9ebc1d6c77f24ad92f0986e86746417e38d",
+    "build/goal-r1-counting-semaphore-c/negative.py": "fa8aa65b89489117b6c6b30a178be50d9697c2af6fc40de9cecf5f8490c882e9",
+    "build/goal-r1-counting-semaphore-c/negative-results.json": "cca3a7edb0723b13f55c1799147c04292329342472dc4d630d50b2b71b4f678d",
+    "build/goal-r1-counting-semaphore-c/audit.py": "c4de45eb83eeb0aa35a97ef7fd3ddc775e91da022f252cdfc584cd7e283fc4b5",
+    "build/goal-r1-counting-semaphore-c/audit-results.json": "f1f6504da9af9ae71f6ebf115ee455791887b43ba2fe610a0988219411c3f64d",
+    "build/goal-r1-counting-semaphore-c/qualify.py": "ecc4718f5202c524898e359d862492684dc90efcdb0822416fe173f563c24327",
+    "build/goal-r1-counting-semaphore-c/qualified/qualification.json": "65531d31f18ff4c2bd2ccf1ff6f683d95587dc706dd79af6d52a11f1bdbe3a43",
+    "build/goal-r1-counting-semaphore-c/qualified/source-plan.json": "c82d566eec0b9864b0b0fd13157557e5bb7aeaa3e596514f5ad0c6dcdb751634",
+    "build/goal-r1-counting-semaphore-c/queue/verify.py": "fbbabf8636c3951247c1bdfb06afbf73f3bc97223d943f49527849159bb8d7a1",
+    "build/goal-r1-counting-semaphore-c/queue/results.json": "4716195f7fd5cccc34aba1bb892a6bc34f55b532b5b84698a962881b6cf04495"
+  }
+}

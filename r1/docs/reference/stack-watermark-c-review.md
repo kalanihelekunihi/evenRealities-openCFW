@@ -1,0 +1,11 @@
+# FreeRTOS stack-watermark API in C
+
+`uxTaskGetStackHighWaterMark` and its private scan helper now use the pinned FreeRTOS kernel bodies in the existing `rtos/task-query/task-query.c` owner. No second TCB owner, stack allocator, manifest unit or critical-section implementation is added. A compile-time assertion fixes the existing native stack pointer at offset 48, four-byte stack words and downward growth. Null handles select the current task; explicit handles select that task. The scan starts at `pxStack`, counts consecutive `0xa5` bytes upward and returns complete four-byte words.
+
+The normal compiled function links into the probe without executable bindings. All 12,624 ARM-emulated cases pass. Coverage includes every fill length from zero through 257 bytes, larger 511/512/1023/1024/4095-byte runs, three aligned stack positions, four distinct non-fill terminators, explicit/current task selection and two interrupt-mask states. Decoy stack pointers distinguish the TCB fields and handle paths. Checks require the byte-count floor division, unchanged task/stack storage, preserved R4-R11, restored SP and unchanged interrupt masks.
+
+Four compiled defects fail runtime assertions: wrong fill byte, word-sized scan stride, returning bytes instead of words and scanning `pxTopOfStack` rather than `pxStack`. The original source prefix, previous task-query instruction sections and named relocations remain unchanged. The other 728 object hashes are unchanged.
+
+`build/sources-goal-r1-stack-watermark-c/report.json` compiles all 729 R1 units and composes both payloads without failures or duplicate strong symbols. The CMSIS stack-space import resolves, reducing application imports from 167 to 166; bootloader imports remain 34. `make sources-check` passes for both devices. [Machine-readable evidence](stack-watermark-c-review.json) records pinned provenance, build hashes, test digest, defects and audit. Probes and the positive subset ELF live under ignored `build/goal-r1-stack-watermark-c/`.
+
+This validates pinned semantics with existing native layout contracts, not stock byte identity. As in upstream, valid task storage and a terminating non-fill byte are preconditions; an entirely fill-valued unbounded memory region is outside the contract. Physical scheduler behavior and a complete firmware link remain unverified.

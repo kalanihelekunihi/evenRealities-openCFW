@@ -14,12 +14,12 @@ extern void case_boot_sensor_initialize(void);   /* 0x08006c00 */
 extern void case_boot_console_initialize(void);  /* 0x080068f0 */
 extern void case_boot_read_option_words(uint32_t *words); /* 0x08004a00 */
 extern void case_boot_log(uint32_t message,uint32_t a,uint32_t b); /* 0x08009170; product strings external */
-extern void case_boot_option_prepare(void);      /* 0x08004bf4 */
-extern void case_boot_option_unlock(void);       /* 0x08004b6c */
+extern uint32_t case_boot_option_prepare(void);      /* 0x08004bf4 */
+extern uint32_t case_boot_option_unlock(void);       /* 0x08004b6c */
 extern uint32_t case_boot_option_write(const uint32_t *words); /* 0x08004a6c */
-extern void case_boot_option_commit_a(void);     /* 0x08004b3c */
-extern void case_boot_option_commit_b(void);     /* 0x08004b50 */
-extern void case_boot_option_commit_c(void);     /* 0x08004b20 */
+extern uint32_t case_boot_option_commit_a(void);     /* 0x08004b3c */
+extern uint32_t case_boot_option_commit_b(void);     /* 0x08004b50 */
+extern uint32_t case_boot_option_commit_c(void);     /* 0x08004b20 */
 extern void case_application_initialize_2fc8(void);
 extern int32_t case_boot_service_start(void);    /* 0x0800a8d8 */
 extern void case_boot_transport_start(void);     /* 0x08006968 */
@@ -57,5 +57,10 @@ __attribute__((noreturn)) void case_application_entry_a598(void)
     }else logline(CASE_STRING_ADDR(0800a788),0u,0u);
     case_application_initialize_2fc8();(void)case_boot_service_start();
     case_boot_transport_start();case_boot_scheduler_start();
-    for(;;)__asm__ volatile("" ::: "memory");
+    for(;;){ }
 }
+
+/* Stock 0x080000C0 (case_boot_application_veneer_00c0): branch veneer to the
+ * application entry above. */
+__typeof__(case_application_entry_a598) case_boot_application_veneer_00c0
+    __attribute__((alias("case_application_entry_a598")));

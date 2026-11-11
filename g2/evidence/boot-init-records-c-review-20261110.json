@@ -1,0 +1,83 @@
+{
+  "build": {
+    "compiled": 224,
+    "duplicate_strong_symbols": 0,
+    "final_undefined_symbols": 0,
+    "units": 224
+  },
+  "change": "Bootloader fixed startup scatter records are now read-only C descriptors with direct adapter calls; the superseded self-relative assembly table was removed.",
+  "date": "2026-11-10",
+  "dispatch_comparison": {
+    "calls": [
+      {
+        "kind": "zero",
+        "words": [
+          158828,
+          536872284,
+          475392,
+          537399296,
+          0
+        ]
+      },
+      {
+        "kind": "expand",
+        "words": [
+          0,
+          44,
+          64
+        ]
+      },
+      {
+        "kind": "expand",
+        "words": [
+          0,
+          1250,
+          536870912
+        ]
+      },
+      {
+        "kind": "expand",
+        "words": [
+          0,
+          96,
+          537395200
+        ]
+      }
+    ],
+    "harness": "build/g2-boot-init-c-20261110/compare_dispatch.py",
+    "identical": true,
+    "method": "Unicorn ran the old and new linked dispatch functions. Adapter entry hooks captured descriptor words and returned the next record pointer; adapter bodies were not emulated."
+  },
+  "full_memory_emulation_attempt": {
+    "harness": "build/g2-boot-init-c-20261110/compare_init_effects.py",
+    "reason": "Unicorn 2.1.4 rejects the Cortex-M55 low-overhead LE instruction at old ELF PC 0x422aea in opencfw_boot_zero_table; no memory-equality claim was made.",
+    "result": "unavailable"
+  },
+  "limits": "The adapter call comparison does not validate the downstream memory initialization or physical boot. The bootloader still contains architecture-specific assembly.",
+  "link_report_sha256": "9da34020f4d843bb0a78c518c4c20dd6c811c7184f127f0bf5e3befc5198d646",
+  "new_elf_sha256": "7fb3aa5f7faa9ce7808e2cf0400a3179b38c5782534d90993b14b3f5b9aca4b1",
+  "old_elf_sha256": "f3d755bffe9ed17771fdcc301af23404ae9761a12a5722429210dbffef739c43",
+  "renode_boot_comparison": {
+    "hci_sequences_identical": true,
+    "new": {
+      "advertising_enable": true,
+      "final_pc": "0x44d706",
+      "hci_packets": 56,
+      "hci_sequence_sha256": "f0284c1238a1d3c0ef2aa540ad45a433369a70138015b9637ac520eb92384dcf",
+      "log_sha256": "4bb44d540ba792bbe7b4209a9951f2a14bbdd0ed2c8582d61e3fc5704975b379",
+      "path": "build/g2-boot-init-c-20261110/new-bootloader-renode-2s.log"
+    },
+    "old": {
+      "advertising_enable": true,
+      "final_pc": "0x44d706",
+      "hci_packets": 56,
+      "hci_sequence_sha256": "f0284c1238a1d3c0ef2aa540ad45a433369a70138015b9637ac520eb92384dcf",
+      "log_sha256": "d47170a7561db4aa22f893b3933227318904a743190ec9ae634f9a36a247422b",
+      "path": "build/g2-boot-init-c-20261110/old-bootloader-renode-2s.log"
+    },
+    "qualification": "Both ran through the reconstructed bootloader into the same application with lenient Renode peripheral fixtures. This does not prove physical-device boot.",
+    "virtual_seconds": 2.0
+  },
+  "schema_version": 1,
+  "source_report_sha256": "ff269cd1499ae741e9713d5a26df7e8acd8cec15acd9dd4aaf21b76c0f2b7409"
+}

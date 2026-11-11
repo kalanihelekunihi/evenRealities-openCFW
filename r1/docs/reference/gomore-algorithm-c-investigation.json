@@ -1,0 +1,487 @@
+{
+  "status": "experimental_not_integrated",
+  "direct_replay": {
+    "pairs": 4512,
+    "independent_ordered_call_and_state_cases": 4512,
+    "digest": "17329f922f039c23e141cf09f309d501ee9ae6988ef044c38fc90d8d430569e2",
+    "limits": [
+      "All sixteen stage providers modeled; stock no-op marker executes",
+      "Caller-clobbered marker arguments excluded because exact leaf has no effects",
+      "No fault/private stack/provider-SP/physical/byte identity proof"
+    ]
+  },
+  "stock_entry": "0x5ff94",
+  "stock_size": 1606,
+  "stage_count": 16,
+  "marker": "0x578c8 native leaf executes",
+  "activity_float_abi": {
+    "float_argument": "S0 unsigned-delta conversion",
+    "integer_registers": [
+      "R0 state+0x33d8",
+      "R1 context+0x88",
+      "R2 context+0x38",
+      "R3 context+0x1c0"
+    ]
+  },
+  "generic_descriptor_mismatch": {
+    "existing_activity_source_offset": "0x30",
+    "native_activity_source_offset": "0x88",
+    "generic_source_changed": false
+  },
+  "artifacts": {
+    "build/goal-r1-gomore-algorithm-c/candidate.c": "1c458479dfd6eb2271ddab943e307b98efe31fc91816d91c1834d5ffda93992e",
+    "build/goal-r1-gomore-algorithm-c/candidate.o": "f38b0cbb382d82d40afb7fb4f244d41d116dd149c536956e883974be23ef597a",
+    "build/goal-r1-gomore-algorithm-c/generate.py": "82a6e62e5b721613b046d7edba669e250c681cd2dde692be3e99d1fc8d759036",
+    "build/goal-r1-gomore-algorithm-c/compile.py": "d670817fceb6e0323c7f4e8a50cc6d938e2843eb8c1757d73c652b4ab262f318",
+    "build/goal-r1-gomore-algorithm-c/verify.py": "8ad6f740eb578aa51a9e71bece5f0cfcaf8e051828a35e5deb84d545bc1e5e86",
+    "build/goal-r1-gomore-algorithm-c/results.json": "21e85e342488d92aec3c7512305c206174ee8f5c91efc728c17104fa372ede33",
+    "build/goal-r1-gomore-algorithm-c/stages.json": "e6f0f4d2d414e405a343b38122c0444cbd87e17508aee84ea0157a442b8eb423",
+    "build/goal-r1-gomore-algorithm-c/rea.json": "4b743ac1f0b8cb02b24aec266b17dbe88a8083b2f4fc2f197ee8e5cee7780751",
+    "build/goal-r1-gomore-algorithm-c/bytes-rea.json": "3354af9cd0db3dad6be946ff950a2f536923d955bdba822820cdced01dc2aaf8",
+    "build/goal-r1-gomore-algorithm-c/instructions.txt": "e3ab99b9597f6ca2a8259dab269a20c32e307d8fa552d717cd4781703999910b",
+    "build/goal-r1-gomore-algorithm-c/tail-instructions.txt": "cc1239345c4560b191f3dbe47c21ec59c982ae682ee9f34c35531fb0a20f02b9",
+    "build/goal-r1-gomore-algorithm-c/negative.py": "e632897cba143b7c9ea5b6dd76f550f370b5563011be6a21a3db2f5ca3eef145",
+    "build/goal-r1-gomore-algorithm-c/negative-results.json": "42170132517954f0b90fc3f56afe936a7d103e49d37af6a8d7179377e80fd036",
+    "build/goal-r1-gomore-algorithm-c/faults.py": "c42fe14cea1ca9978caad4353fa75c49f59a689ee27f5a34c631db3152a3f14e",
+    "build/goal-r1-gomore-algorithm-c/fault-results.json": "b65ce31083afda395d1e401178a3624124db830a4f05aac52bd19d4250d1948b",
+    "build/goal-r1-gomore-algorithm-c/integration.py": "1d9bc5fd290e2045b12dc743c19a82b79ea7df0f777fe1c2d6c8c7edde546070",
+    "build/goal-r1-gomore-algorithm-c/integration-results.json": "739b4739f13c2bcfd05a14c2a42150529882c25293a59a6ce425a1922602a5e4",
+    "build/goal-r1-gomore-algorithm-c/integration.log": "f03b353a111228c37749964d5bc9b2f78a29b9a9a520581cbf76e86b268266ab",
+    "build/goal-r1-gomore-algorithm-c/wrong-activity-input.c": "5b797a1587af6e9145603e6e77a2c26959d4b4e6510b552b84aa28ed254b8d44",
+    "build/goal-r1-gomore-algorithm-c/wrong-activity-input.o": "814addd42119ee4ec7882df980ab31631036b8751a442a05245f71dd1f15ac90",
+    "build/goal-r1-gomore-algorithm-c/wrong-activity-input.gcc.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/goal-r1-gomore-algorithm-c/wrong-activity-input.log": "ac32d2505553b216aa64e7a63c6150e3682bfa9e171bedca1f7b17249e3308fd",
+    "build/goal-r1-gomore-algorithm-c/force-all-deltas-one.c": "78d94ffe4aa3617913f1d5cc3bcee58ba123a8708eb7de8d0a16860a4ae303a7",
+    "build/goal-r1-gomore-algorithm-c/force-all-deltas-one.o": "df46bd2964f6c05864a3ca7843f8fa22d8eac8759bd7c715a9373c183f369e42",
+    "build/goal-r1-gomore-algorithm-c/force-all-deltas-one.gcc.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/goal-r1-gomore-algorithm-c/force-all-deltas-one.log": "52ed501bfca9270f424c26fe9d8ca233d4b0e3ac55af28dad10fc4474de90e3a",
+    "build/goal-r1-gomore-algorithm-c/dispatch-state-two.c": "b65f740b969e82a4ba34e6653845f1b86dbf6aaa5024ad862d4760aaa3d7c5ea",
+    "build/goal-r1-gomore-algorithm-c/dispatch-state-two.o": "aae09ffaa9bfd3bfac5dee546b45371d74f8162b86adb32e5a92cdde9fe1b2ec",
+    "build/goal-r1-gomore-algorithm-c/dispatch-state-two.gcc.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/goal-r1-gomore-algorithm-c/dispatch-state-two.log": "01812ff24e6a9b051cedbe29daba6777c2aef0042663c0db7598495bb6192e26",
+    "build/goal-r1-gomore-algorithm-c/preserve-state-two.c": "a9980a29de3706e232e24183b9cc91ddceb7a5f29f3b11a390e89a1414b62adb",
+    "build/goal-r1-gomore-algorithm-c/preserve-state-two.o": "f68f218faa60850343c3b8925e5ada8cb0a9365c0871e2d3a8629874080a9ce0",
+    "build/goal-r1-gomore-algorithm-c/preserve-state-two.gcc.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/goal-r1-gomore-algorithm-c/preserve-state-two.log": "f757f7841baa0718191ae679fe53495bf9a8837fba19a52308631f5195b7350a",
+    "build/goal-r1-gomore-algorithm-c/reread-current-control.c": "0f53d438468e456eeba01f7c55676289655197341798b1900df5d637629c69b2",
+    "build/goal-r1-gomore-algorithm-c/reread-current-control.o": "af2f91c57595e1da264b7b5417ad673fee09a6272e5206b69c85efb798d2b72b",
+    "build/goal-r1-gomore-algorithm-c/reread-current-control.gcc.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/goal-r1-gomore-algorithm-c/reread-current-control.log": "f757f7841baa0718191ae679fe53495bf9a8837fba19a52308631f5195b7350a",
+    "build/goal-r1-gomore-algorithm-c/wrong-status-byte.c": "e6cb881f4ecf6432dc89edfa7a41c256033e6396a9cdec35d9cc8536949bbfbd",
+    "build/goal-r1-gomore-algorithm-c/wrong-status-byte.o": "72e9887171e1abcbda7c6f1d24fa4ce089c5a43c77c8e040936125a9c9ee4a2c",
+    "build/goal-r1-gomore-algorithm-c/wrong-status-byte.gcc.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/goal-r1-gomore-algorithm-c/wrong-status-byte.log": "f757f7841baa0718191ae679fe53495bf9a8837fba19a52308631f5195b7350a",
+    "build/goal-r1-gomore-algorithm-c/signed-activity-delta.c": "a71bd6d6ec43081f1dcf95316e27e02bf74abb3c252a2594fe11cce876930cf4",
+    "build/goal-r1-gomore-algorithm-c/signed-activity-delta.o": "1f6c2544e7e96225536a2fd4373d89c45da22f47e57a2cabc2b77804252c8996",
+    "build/goal-r1-gomore-algorithm-c/signed-activity-delta.gcc.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/goal-r1-gomore-algorithm-c/signed-activity-delta.log": "45f573574b0979b2e66f919022cf1d9e9245b832ffcbd510841b4ba3471d1c91",
+    "build/goal-r1-gomore-algorithm-c/wrong-return.c": "36c8a7114894282795c5c4837a444716ef627322ee670e5681fb8a32a8ac31d8",
+    "build/goal-r1-gomore-algorithm-c/wrong-return.o": "e59d1d8c7b742854e95f2dc32574141874e8b9c39dd95550111f40a4b29bde74",
+    "build/goal-r1-gomore-algorithm-c/wrong-return.gcc.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/goal-r1-gomore-algorithm-c/wrong-return.log": "d633124fb36076d4e7a7f48688cbf56e55bc32e5139172dbce9dcb7c3b3ec16b"
+  },
+  "remaining": [
+    "Consolidate generic owner and define shared native interfaces",
+    "Normal production-object build/replay and qualification",
+    "Lower sixteen provider reconstruction and physical/final-link/byte-identity gates",
+    "Private stack and provider-SP equality not established"
+  ],
+  "negative_controls": [
+    {
+      "name": "wrong-activity-input",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "force-all-deltas-one",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "dispatch-state-two",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "preserve-state-two",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "reread-current-control",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "wrong-status-byte",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "signed-activity-delta",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "wrong-return",
+      "compiled": true,
+      "rejected": true
+    }
+  ],
+  "boundary_replay": {
+    "pairs": 9,
+    "faults": 8,
+    "observations": [
+      {
+        "context": "0x0",
+        "observation": {
+          "error": 6,
+          "invalids": [
+            [
+              19,
+              14408,
+              1
+            ]
+          ],
+          "writes": [],
+          "result": null
+        }
+      },
+      {
+        "context": "0xffffffff",
+        "observation": {
+          "error": 6,
+          "invalids": [
+            [
+              19,
+              14407,
+              1
+            ]
+          ],
+          "writes": [],
+          "result": null
+        }
+      },
+      {
+        "context": "0xffffc7b8",
+        "observation": {
+          "error": 6,
+          "invalids": [
+            [
+              19,
+              0,
+              1
+            ]
+          ],
+          "writes": [],
+          "result": null
+        }
+      },
+      {
+        "context": "0x2003c7b7",
+        "observation": {
+          "error": 6,
+          "invalids": [
+            [
+              19,
+              537133059,
+              1
+            ]
+          ],
+          "writes": [
+            [
+              537132983,
+              1,
+              0
+            ]
+          ],
+          "result": null
+        }
+      },
+      {
+        "context": "0x2003c7b3",
+        "observation": {
+          "error": 6,
+          "invalids": [
+            [
+              19,
+              537133056,
+              1
+            ]
+          ],
+          "writes": [
+            [
+              537132979,
+              1,
+              0
+            ],
+            [
+              537132983,
+              1,
+              0
+            ]
+          ],
+          "result": null
+        }
+      },
+      {
+        "context": "0x2003c7ad",
+        "observation": {
+          "error": 6,
+          "invalids": [
+            [
+              19,
+              537133060,
+              1
+            ]
+          ],
+          "writes": [
+            [
+              537132973,
+              1,
+              0
+            ],
+            [
+              537132977,
+              1,
+              0
+            ],
+            [
+              537132978,
+              1,
+              0
+            ],
+            [
+              537132979,
+              1,
+              0
+            ],
+            [
+              537132980,
+              1,
+              0
+            ],
+            [
+              537132981,
+              1,
+              0
+            ]
+          ],
+          "result": null
+        }
+      },
+      {
+        "context": "0x2003c77e",
+        "observation": {
+          "error": 6,
+          "invalids": [
+            [
+              19,
+              537133060,
+              1
+            ]
+          ],
+          "writes": [
+            [
+              537132926,
+              1,
+              0
+            ],
+            [
+              537132930,
+              1,
+              0
+            ],
+            [
+              537132931,
+              1,
+              0
+            ],
+            [
+              537132932,
+              1,
+              0
+            ],
+            [
+              537132933,
+              1,
+              0
+            ],
+            [
+              537132934,
+              1,
+              0
+            ],
+            [
+              537132941,
+              1,
+              0
+            ],
+            [
+              537132943,
+              1,
+              0
+            ],
+            [
+              537132946,
+              1,
+              0
+            ],
+            [
+              537132958,
+              1,
+              0
+            ],
+            [
+              537132951,
+              1,
+              0
+            ],
+            [
+              537132953,
+              1,
+              0
+            ],
+            [
+              537132955,
+              1,
+              0
+            ],
+            [
+              537132973,
+              1,
+              0
+            ],
+            [
+              537132983,
+              1,
+              0
+            ]
+          ],
+          "result": null
+        }
+      },
+      {
+        "context": "0x2003c779",
+        "observation": {
+          "error": null,
+          "invalids": [],
+          "writes": [
+            [
+              537132921,
+              1,
+              0
+            ],
+            [
+              537132925,
+              1,
+              0
+            ],
+            [
+              537132926,
+              1,
+              0
+            ],
+            [
+              537132927,
+              1,
+              0
+            ],
+            [
+              537132928,
+              1,
+              0
+            ],
+            [
+              537132929,
+              1,
+              0
+            ],
+            [
+              537132936,
+              1,
+              0
+            ],
+            [
+              537132938,
+              1,
+              0
+            ],
+            [
+              537132941,
+              1,
+              0
+            ],
+            [
+              537132953,
+              1,
+              0
+            ],
+            [
+              537132946,
+              1,
+              0
+            ],
+            [
+              537132948,
+              1,
+              0
+            ],
+            [
+              537132950,
+              1,
+              0
+            ],
+            [
+              537132968,
+              1,
+              0
+            ],
+            [
+              537132978,
+              1,
+              0
+            ],
+            [
+              537132983,
+              1,
+              0
+            ]
+          ],
+          "result": 537132918
+        }
+      },
+      {
+        "context": "0x2003c7b8",
+        "observation": {
+          "error": 6,
+          "invalids": [
+            [
+              19,
+              537133056,
+              1
+            ]
+          ],
+          "writes": [],
+          "result": null
+        }
+      }
+    ],
+    "limits": [
+      "Unmapped control reads and earlier status writes; stage work providers not reached",
+      "Private frame writes excluded; emulator access behavior only"
+    ]
+  },
+  "host_integration": {
+    "paired_cases": 334,
+    "fault_cases": 9,
+    "provider_calls": 3259,
+    "observations_sha256": "ef17df542be2b634ad6e096fb3f2fa9eaf4d8a9ff1ba2be4355122d577f89b42",
+    "limits": [
+      "Actual native/C host, resamplers and kernel wrappers; stock memory-clear executes on both paths",
+      "Only logger and sixteen stage providers modeled; actual coordinator/interpolation/filter execute; stock clear/move/marker execute on both paths",
+      "ACC provider SP excluded; PPG scratch numeric addresses compared without normalization",
+      "No outer sensor-update caller or physical device proof"
+    ]
+  }
+}

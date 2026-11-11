@@ -1,0 +1,198 @@
+{
+  "status": "probe_only_not_admitted",
+  "native_entry": "0x36f88",
+  "native_span_bytes": 744,
+  "native_literal_bytes": 12,
+  "total_stock_c_pairs": 303776,
+  "verification_counts": {
+    "results": 204800,
+    "alias-results": 61440,
+    "edge-results": 32768,
+    "oracle-results": 4096,
+    "caller-results": 384
+  },
+  "additional_coverage_pairs": 288,
+  "coverage": {
+    "native_coverage_calls": 7712,
+    "additional_pairs": 288,
+    "instruction_bytes": 734,
+    "instruction_starts": 276,
+    "span_bytes": 744,
+    "missing": [
+      {
+        "address": "0x37236",
+        "size": 2,
+        "mnemonic": "b",
+        "operands": "#0x3723c"
+      },
+      {
+        "address": "0x37238",
+        "size": 2,
+        "mnemonic": "movs",
+        "operands": "r0, #0x64"
+      },
+      {
+        "address": "0x3723a",
+        "size": 2,
+        "mnemonic": "b",
+        "operands": "#0x37242"
+      },
+      {
+        "address": "0x37240",
+        "size": 2,
+        "mnemonic": "movs",
+        "operands": "r0, #0x41"
+      },
+      {
+        "address": "0x3726e",
+        "size": 2,
+        "mnemonic": "b",
+        "operands": "#0x37238"
+      }
+    ],
+    "unreachable_proof": "The signed remainder value%4 lies in[-3,3], so adding97 lies in[94,100]. Thus lower65/upper100 fallback-clamp blocks at37236/37238/3723a/37240/3726e cannot execute. C retains the clamp; no trap or code blob. All other734 instruction bytes execute."
+  },
+  "compiled_defects": [
+    {
+      "defect": "aux-conversion",
+      "detected": true,
+      "detection_case": "1",
+      "diagnostic": ""
+    },
+    {
+      "defect": "parity-scale",
+      "detected": true,
+      "detection_case": "67",
+      "diagnostic": ""
+    },
+    {
+      "defect": "remainder",
+      "detected": true,
+      "detection_case": "28",
+      "diagnostic": ""
+    },
+    {
+      "defect": "decrement",
+      "detected": true,
+      "detection_case": "348",
+      "diagnostic": ""
+    },
+    {
+      "defect": "wrong-flags",
+      "detected": true,
+      "detection_case": "8",
+      "diagnostic": ""
+    },
+    {
+      "defect": "warmup-equality",
+      "detected": true,
+      "detection_case": "0",
+      "diagnostic": ""
+    },
+    {
+      "defect": "signed-iteration",
+      "detected": true,
+      "detection_case": "6400",
+      "diagnostic": ""
+    },
+    {
+      "defect": "missing-cache-update",
+      "detected": true,
+      "detection_case": "0",
+      "diagnostic": ""
+    },
+    {
+      "defect": "fallback-offset",
+      "detected": true,
+      "detection_case": "112",
+      "diagnostic": ""
+    },
+    {
+      "defect": "unknown-mode",
+      "detected": true,
+      "detection_case": "5",
+      "diagnostic": ""
+    }
+  ],
+  "limitations": [
+    "No source unit/import binding or normal build admission yet.",
+    "734 native instruction bytes execute; the remaining10 bytes are mathematically unreachable final-clamp blocks because signed remainder4 plus97 lies in[94,100]. The C clamp remains.",
+    "Valid mapped owner/window descriptors and at least one history element are assumed; selected public aliases are tested but invalid pointer/count aliases are not assigned recovery.",
+    "Full public RAM excludes8192 private stack bytes; FPSCR, saved GP/FP registers, SP and masks are checked. Incidental restored R0/R1 and caller scratch/APSR are outside the void C ABI.",
+    "Caller tests use real C calculate/inference/model/quality/selection; earlier processing and confidence/output remain explicit boundaries.",
+    "Hardware, timing and concurrency unverified."
+  ],
+  "evidence_sha256": {
+    "build/goal-r1-spo2-infer-support-c/normal-dependencies.a": "7e62b43a34fcf2b0ae34045a276bf4d564be5dde2ddb636dd0f69169c8843637",
+    "build/goal-r1-spo2-ratio-c/normal-stream-test.ld": "808ff9c64adde68933158791e9d115c75817ae1840e2bdcbcfa42c7a39314cc6",
+    "build/goal-r1-spo2-select-c/alias-results.json": "67189198daccd8ac0729dc52f4103b441752bf0536abe6fabd20621897cc5292",
+    "build/goal-r1-spo2-select-c/aliases.log": "b6c22806b22818b3506505947e6fdd743b49ba2cd25cf71f01ec590f662556fe",
+    "build/goal-r1-spo2-select-c/aliases.py": "5e623d17e900f522cda8df060d106cc14dc1b2c6351694959374eeafb849ddee",
+    "build/goal-r1-spo2-select-c/caller-link.json": "f6e13ae2a46dfb80c69ff5759f95a7cb6a1963d3f2fac1cd925a871d99bed164",
+    "build/goal-r1-spo2-select-c/caller-link.log": "ac9f08248cddd2e89de46acb3387830a6e32aec6c745cb9780160c9d7143ff6d",
+    "build/goal-r1-spo2-select-c/caller-matrix.log": "29dff1ff83e18d484ab43c7037edb0161f164918fe402c098636c707b94c0b38",
+    "build/goal-r1-spo2-select-c/caller-results.json": "d2a6d7bf4a33a60ae436d9eb15e31e2530b8d4fd6fe51f624c76974b6ca7d94c",
+    "build/goal-r1-spo2-select-c/caller.elf": "3ae9a3a32ac2dd2759131a91a7c1c8cde55a4b443590cfebc6aa09969cbf433a",
+    "build/goal-r1-spo2-select-c/caller.py": "71f38f9a2017b0472e05078f811e2402fbbf9baf4ea9094fc645f2099e707e26",
+    "build/goal-r1-spo2-select-c/caller_fixture.py": "4322f395a618e1a74d17527d4360efa1cb635c3d160879d3c993b943c03e9077",
+    "build/goal-r1-spo2-select-c/caller_matrix.py": "7c5297bd03582d5b3d8df339c90d34c5750e0cecf0b3069ed8599f85edcdb5f6",
+    "build/goal-r1-spo2-select-c/candidate.c": "5ac290447ab7f43ddbfaaef2ba78b83796b697a6f5f7d4be30daf5551a68c9e1",
+    "build/goal-r1-spo2-select-c/candidate.elf": "7f9a4a106f1e2ce681af0b3319d8124751c7b96c62237f9202d27677de5c380d",
+    "build/goal-r1-spo2-select-c/candidate.o": "bb6a3aa8acee8ed4114375515b5e105f78a0e2e0d5a2154f67303ab1ab05e1e2",
+    "build/goal-r1-spo2-select-c/compile-argv.json": "91ec532a869f9bb4ad0a5c33e17c7514ccbede69923f372a05eff736a14ae5bf",
+    "build/goal-r1-spo2-select-c/controls-results.json": "007e2d4bfa4b4e63d4d782d262b654a080f065251d204aa449036f160f039974",
+    "build/goal-r1-spo2-select-c/controls.log": "9b4df8a63e0a6dc34cc0961bcb1cfc5c9f27933c3162ee8d8487461d2d07ce7a",
+    "build/goal-r1-spo2-select-c/controls.py": "ee097b0b4614fe6020f2b0f49e70a7d1d7ca4c91c0f2ba3780cd02972df499c6",
+    "build/goal-r1-spo2-select-c/coverage-results.json": "f06483d561e22bd11a9997ff837411376edf548eb6934a63c7c8cf3216b73e6c",
+    "build/goal-r1-spo2-select-c/coverage.py": "f86054ed7731040d0ea8a51fb43b2ce0dce3f481146e8b778aaa4bb83e2779c6",
+    "build/goal-r1-spo2-select-c/defect.c": "19e4c2ef979b6123a2295d2dc6bd4a549472359a3e572d9ead04a74140c51d50",
+    "build/goal-r1-spo2-select-c/defect.elf": "f2610847d6224330165a961a6eabae16d5ddcd717a76e01567e42ce10f2237bd",
+    "build/goal-r1-spo2-select-c/defect.o": "7df27e2d9b34d90bacf122aa8a9b3715e1d9cfd92d37f0fd069c4fb0b4bd4c81",
+    "build/goal-r1-spo2-select-c/defect_fixture.py": "a5e3748dbc97d339432570ef60c912d7e68157d72824d515da0e1f2c35e7225b",
+    "build/goal-r1-spo2-select-c/defect_verify.py": "4fc46e8c460c39d2fd596e00fc03954a1f1dbe3875aef46e798b1abf46352c6a",
+    "build/goal-r1-spo2-select-c/edge-results.json": "f0888e319fc596dd1dda68e90c5869c1648c1ffa454b357a4bcb398d8e152109",
+    "build/goal-r1-spo2-select-c/edges.log": "20b81449a035c836325b084479a8c3c7eca8cca83701524f08f081160fc9ce9a",
+    "build/goal-r1-spo2-select-c/edges.py": "7d1c8814a6ce3021ccde70128f601f993d8463dbcb7d149bd6dce2a8cf910e08",
+    "build/goal-r1-spo2-select-c/fixture.py": "33e317adf2e1777421a17c357aeec7fa69ce6ebc0adc814f3d313ba95282b876",
+    "build/goal-r1-spo2-select-c/link-argv.json": "40d099b4d08ca602f5f8d0a08a9c7a4d25e715666ae85b7c8a20892477c763b7",
+    "build/goal-r1-spo2-select-c/link.log": "6a9fe6ef38bc0d3ebe7e3d63525a771e1c135bf423a7f39c93d0aa91ca5191d7",
+    "build/goal-r1-spo2-select-c/oracle-results.json": "a5826990716d14a4449b919164c46415095c9a274e445a82a158fe6f3a389fa9",
+    "build/goal-r1-spo2-select-c/oracles.py": "ab3f4af9d16c962c9a54fe38b034287244da68fc31f187ca297e35ba63fe979d",
+    "build/goal-r1-spo2-select-c/rea-bytes.json": "207c978b2e85c941f01081b904ec564cd3e51d55cbbfb9886dbd753612837fe5",
+    "build/goal-r1-spo2-select-c/rea-dossier.json": "70c76058bb401f810375154a795ed18f60b394dcf46582fc148011c89458e297",
+    "build/goal-r1-spo2-select-c/rea-literals.json": "5a45975e3568b4a4b8a66ee453378a2f5743a4010a2344fe1e3a1b3ed6320cac",
+    "build/goal-r1-spo2-select-c/results.json": "79aecc46e4a9c5f92fd86be2c271b8a9bbd3d64f7b3a4b06150be535de4685e3",
+    "build/goal-r1-spo2-select-c/verify.log": "a390a8bf81fe2d15ecea0e90a0c0fd7e88cd94639c855465e467bb15bc09f450",
+    "build/goal-r1-spo2-select-c/verify.py": "ca987031a3df31bca50119955d5d3ae798786ac04312d63a965aca213ead6068",
+    "build/sources-goal-r1-spo2-infer-c/r1/r1-application/r1__src__application__runtime__native_float_bits.c.o": "cc448df0a2076c6dd5ee05a700f3221fb9d253ae9ae0cb7b591a0ea3a474c154",
+    "build/sources-goal-r1-spo2-output-quality-c/r1/r1-application/r1__src__application__goodix__native_model_concatenate.c.o": "6f80a63fefdad83c8cf73df17d40caf691c382ed676a0aae82f28bed9f636689",
+    "build/sources-goal-r1-spo2-output-quality-c/r1/r1-application/r1__src__application__goodix__native_model_convolution.c.o": "5c211d9e5cf520e4fef7121843440b89fd956ede5526e2b8db0e48f500747f02",
+    "build/sources-goal-r1-spo2-output-quality-c/r1/r1-application/r1__src__application__goodix__native_model_dense.c.o": "a5baaa994ed42a49be6aaf395a00671963a6c1b6b5d8583777c6305ee05bd1bd",
+    "build/sources-goal-r1-spo2-output-quality-c/r1/r1-application/r1__src__application__goodix__native_model_float_pool.c.o": "17c92a4b130dda0281e7a897dc114fb0450d44b91b380e1dd49f5a2090c2e7ec",
+    "build/sources-goal-r1-spo2-output-quality-c/r1/r1-application/r1__src__application__goodix__native_model_graph_execute.c.o": "4c0c63c859caf0fd22f1320b45136d908f8abbb84d4b0a2e3e2e20a8edc5dd7a",
+    "build/sources-goal-r1-spo2-output-quality-c/r1/r1-application/r1__src__application__goodix__native_model_i8_convolution.c.o": "2657a7199915d67c47531fc0fc9ffbfbe865f4b95534abd1dbdafa390e0ba767",
+    "build/sources-goal-r1-spo2-output-quality-c/r1/r1-application/r1__src__application__goodix__native_model_merge.c.o": "33a43b8fe5af49f578e7ebaf13ebcca37e457e06c19432fbb93762fa6c1024e4",
+    "build/sources-goal-r1-spo2-output-quality-c/r1/r1-application/r1__src__application__goodix__native_model_pool_add.c.o": "73969bf6f08d01ca962bc9a8d85d5696ef178591ae9b5530e89af713b96b8474",
+    "build/sources-goal-r1-spo2-output-quality-c/r1/r1-application/r1__src__application__goodix__native_model_quantization.c.o": "e317ed0e53906a7020f44905fb697f421b021e1d221f9da3f6e78435bcfef649",
+    "build/sources-goal-r1-spo2-output-quality-c/r1/r1-application/r1__src__application__goodix__native_model_recurrent.c.o": "a9f03474c4391045cceb74e33a1aa0031387d459054add0966cbcd300bc9b513",
+    "build/sources-goal-r1-spo2-output-quality-c/r1/r1-application/r1__src__application__goodix__native_model_recurrent_support.c.o": "d9da585a816de8b36c1a8a255860a168d8ba685233e4baf53ed695609bf9b129",
+    "build/sources-goal-r1-spo2-output-quality-c/r1/r1-application/r1__src__application__goodix__native_model_scale.c.o": "70c03a7ad29fde9d634eaae50e201f9b9648d9ce173e72e04289113dedefb7f3",
+    "build/sources-goal-r1-spo2-output-quality-c/r1/r1-application/r1__src__application__goodix__native_model_softmax.c.o": "9e00e9077ae03eb4c80bf06e81f6356747499337da700fd8ba7b3cd79b645fc2",
+    "build/sources-goal-r1-spo2-output-quality-c/r1/r1-application/r1__src__application__goodix__native_model_transform.c.o": "c9d2e209373e9696eee3f03cd6b5dc0a5d47503d7d8b769a368158e5fcd3fad0",
+    "build/sources-goal-r1-spo2-output-quality-c/r1/r1-application/r1__src__application__goodix__native_spo2_calculate.c.o": "0d1e2ddeeefd0ad393d0933a15bf7185e395422378e50e2c584b449fa1cff367",
+    "build/sources-goal-r1-spo2-output-quality-c/r1/r1-application/r1__src__application__goodix__native_spo2_generated_model.c.o": "14f0da4eff0d75d6014f40d928a6bd58dcc44b79b1a4c6ed695c9dbdf87ee210",
+    "build/sources-goal-r1-spo2-output-quality-c/r1/r1-application/r1__src__application__goodix__native_spo2_infer.c.o": "0b447e494745412c299b3839c8bef24cffc7960b638a3d189bb553045d5ed7ab",
+    "build/sources-goal-r1-spo2-output-quality-c/r1/r1-application/r1__src__application__goodix__native_spo2_infer_support.c.o": "ebea499ddab2b91f3bf531f7301ac0cdf5bd5eb051c923a0cbae29e0ac3bdb5c",
+    "build/sources-goal-r1-spo2-output-quality-c/r1/r1-application/r1__src__application__goodix__native_spo2_math.c.o": "265990bd7f6c22c801d820280faeccc977bbacff30e719a4ad3f08414b33dfc5",
+    "build/sources-goal-r1-spo2-output-quality-c/r1/r1-application/r1__src__application__goodix__native_spo2_model_graph.c.o": "ede8398723a208a4ee7336b6004b9189576cd36520f3222c84be227cc166473b",
+    "build/sources-goal-r1-spo2-output-quality-c/r1/r1-application/r1__src__application__goodix__native_spo2_output_quality.c.o": "45f124497678c47d01f0b15a4af23575b2be8cdd9921cf8254f73cfb73067d8f",
+    "build/sources-goal-r1-spo2-output-quality-c/r1/r1-application/r1__src__application__runtime__native_expf_tanhf.c.o": "1b2a1142fd859ed7e67a172be060968c238a5a942afbee379d2318896b946b45",
+    "build/sources-goal-r1-spo2-output-quality-c/r1/r1-application/r1__src__application__runtime__native_float_bits.c.o": "cc448df0a2076c6dd5ee05a700f3221fb9d253ae9ae0cb7b591a0ea3a474c154",
+    "build/sources-goal-r1-spo2-output-quality-c/r1/r1-application/r1__src__application__runtime__native_math_selection.c.o": "8af75876c6bb312a8daeeed99f72214e4afa4afb080649df66a4cbd5a05f2afc",
+    "r1/blobs/official/r1-2.2.6.0009/application.bin": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "r1/src/application/goodix/native_spo2_calculate.c": "bf498503f05c09f4f6c25fbc95aac6e7ccff47ae4386440dbbf0bd33eb147b0b",
+    "r1/src/application/goodix/native_spo2_output_quality.c": "5c13b381a75594788f280dfd3c964a90b273931b768e9a1e1be1cb5baf6799c2",
+    "r1/src/application/runtime/native_f32_integer.h": "239b6c7dc2bd398d8abf541979a85039a7a5391d4ea37e4bd9dad0503420c741",
+    "r1/src/sources.json": "e2d5d7cf580a3fc56966b15c4abffc2f04673ce49b38e0bdd4986f94fc8dde19"
+  }
+}

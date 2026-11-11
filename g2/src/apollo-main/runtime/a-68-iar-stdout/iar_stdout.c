@@ -8,12 +8,12 @@
 #include <stddef.h>
 #include "g2_segger_rtt.h" /* segger_rtt_write_5d9b28 = SEGGER_RTT_Write */
 
-/* Two link-time weak references compared PC-relatively (pool words
+/* Two link-time optional references compared PC-relatively (pool words
  * 0xffa06024/0xffa06020 + 0x30/0x2e). Both are undefined in the stock link and
  * resolve to 0, so the direct __write path is always taken. */
 extern const char g2_iar_putchar_select_a __attribute__((weak));
 extern const char g2_iar_putchar_select_b __attribute__((weak));
-/* Buffered fallback: fputc(c, stdout). Weak and undefined in the stock link,
+/* Buffered fallback: fputc(c, stdout). Optional and undefined in the stock link,
  * where its BL was relaxed to NOP.W (0x5f9fb8), so c is returned unchanged. */
 extern int g2_iar_fputc_weak(int c, void *stream) __attribute__((weak));
 extern uint8_t g2_iar_stdout_200043f8[]; /* RAM 0x200043f8 IAR __iar_Stdout FILE */

@@ -1,6 +1,8 @@
 #include <stdint.h>
 
-/* Local transaction protocol inferred from stock 0x57d024. The transport,
+/* Local transaction protocol transcribed from stock 0x57d024 (wave22 verified:
+ * ghidra/open-2026-09-29 decomp/0057d024.c: code 0xf, family 0x100, 1-byte arg,
+ * memset 0x1a, log lines 0x290/0x29a/0x29f, data ptr at +14). The transport,
  * release and logger bodies remain separate providers.
  */
 extern int32_t audio_send_transaction(uint32_t code, uint32_t family,

@@ -10,6 +10,8 @@ uint8_t *audio_ble_hci_radio_mode_state_50938e(uint32_t mode) {
     return audio_ble_hci_radio_mode_cells_20074368;
 }
 
-__attribute__((naked)) uint32_t audio_ble_hci_radio_state_prepare_5118e0(void) {
-    __asm volatile("push {r7, lr}\n\tbl audio_ble_npmx_kick_watchdog_5118e8\n\tpop {r7, lr}\n\tmov r0, r7\n\tbx lr");
+/* Stock returns a stale register here (its body is void upstream); no caller reads it. */
+uint32_t audio_ble_hci_radio_state_prepare_5118e0(void) {
+    audio_ble_npmx_kick_watchdog_5118e8();
+    return 0u;
 }

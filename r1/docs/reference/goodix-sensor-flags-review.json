@@ -1,0 +1,182 @@
+{
+  "schema": 1,
+  "scope": "R1 sensor flag identity consolidation and exact zero-getter qualification",
+  "native_entries": {
+    "GH3X2X_AlgoSensorEnable": {
+      "entry": "0x2a0e4",
+      "code_bytes": 10,
+      "following_padding_bytes": 2,
+      "following_literal_bytes": 4
+    },
+    "GH3X2X_GetCapEnableFlag": {
+      "entry": "0x2a54c",
+      "code_bytes": 4
+    },
+    "GH3X2X_GetTempEnableFlag": {
+      "entry": "0x2a610",
+      "code_bytes": 4
+    }
+  },
+  "stock_target_evidence": "r1/docs/reference/goodix-config-stop-order-review.json",
+  "normal_build": {
+    "report": "build/sources-goal-r1-goodix-sensor-flags/report.json",
+    "compiled_units": 576,
+    "application_imports": 165,
+    "bootloader_imports": 34,
+    "manifest_unchanged": true
+  },
+  "GCC9_getters": {
+    "paired_cases": 384,
+    "executions": 768,
+    "checks": [
+      "two disabled-sensor getters return zero through LR",
+      "all registers and interrupt masks preserved except R0=0 and MOVS N/Z flags",
+      "no data reads or writes; only the exact one- or two-instruction body executes"
+    ],
+    "limits": [
+      "No physical timing or sensor sampling validation",
+      "No board capability inferred beyond these two stock getters returning zero"
+    ]
+  },
+  "Clang_getters": {
+    "paired_cases": 384,
+    "executions": 768,
+    "checks": [
+      "two disabled-sensor getters return zero through LR",
+      "all registers and interrupt masks preserved except R0=0 and MOVS N/Z flags",
+      "no data reads or writes; only the exact one- or two-instruction body executes"
+    ],
+    "limits": [
+      "No physical timing or sensor sampling validation",
+      "No board capability inferred beyond these two stock getters returning zero"
+    ]
+  },
+  "consolidation": {
+    "other_575_objects_unchanged": true,
+    "retired_generic_functions": [
+      "goodix_primitives_zero_a",
+      "goodix_primitives_zero_b"
+    ],
+    "retained_function_count": 318,
+    "retained_changed": [
+      "goodix_primitives_hr_extrema_tracker_update"
+    ],
+    "application_imports": 165,
+    "bootloader_imports": 34,
+    "normal_manifest_unchanged": true,
+    "retained_changes_explained_by_local_BL_retargeting": [
+      {
+        "site_offset": 510,
+        "before_target": "21064",
+        "after_target": "2105c",
+        "symbol": "goodix_primitives_hr_extrema_refine"
+      },
+      {
+        "site_offset": 594,
+        "before_target": "21064",
+        "after_target": "2105c",
+        "symbol": "goodix_primitives_hr_extrema_refine"
+      }
+    ],
+    "all_other_function_bytes_and_relocations_unchanged": true
+  },
+  "native_disassembly": {
+    "GH3X2X_AlgoSensorEnable": "\nbuild/goal-r1-queue-reset-c/stock.elf:     file format elf32-littlearm\n\n\nDisassembly of section .text:\n\n0002a0e4 <start+0x30e4>:\n   2a0e4:\t4b02      \tldr\tr3, [pc, #8]\t@ (2a0f0 <start+0x30f0>)\n   2a0e6:\t7098      \tstrb\tr0, [r3, #2]\n   2a0e8:\t70d9      \tstrb\tr1, [r3, #3]\n   2a0ea:\t711a      \tstrb\tr2, [r3, #4]\n   2a0ec:\t4770      \tbx\tlr\n",
+    "GH3X2X_GetCapEnableFlag": "\nbuild/goal-r1-queue-reset-c/stock.elf:     file format elf32-littlearm\n\n\nDisassembly of section .text:\n\n0002a54c <start+0x354c>:\n   2a54c:\t2000      \tmovs\tr0, #0\n   2a54e:\t4770      \tbx\tlr\n",
+    "GH3X2X_GetTempEnableFlag": "\nbuild/goal-r1-queue-reset-c/stock.elf:     file format elf32-littlearm\n\n\nDisassembly of section .text:\n\n0002a610 <start+0x3610>:\n   2a610:\t2000      \tmovs\tr0, #0\n   2a612:\t4770      \tbx\tlr\n"
+  },
+  "qualification": {
+    "report": "build/goal-r1-goodix-sensor-flags/qualified-r1-gcc/qualification.json",
+    "candidates": 24,
+    "compiled": 24,
+    "selected_symbols": [
+      "GH3X2X_GetCapEnableFlag",
+      "GH3X2X_GetTempEnableFlag"
+    ],
+    "canonical_regions": [
+      {
+        "payload": "r1-application",
+        "symbol": "GH3X2X_GetCapEnableFlag",
+        "start": 13644,
+        "end": 13648,
+        "sha256": "a7ddd513d149ea16fdd4db3f82267f83087aeaddd06b5dde5468adb704205fc4",
+        "evidence": "r1/symbols/function-frontier.csv"
+      },
+      {
+        "payload": "r1-application",
+        "symbol": "GH3X2X_GetTempEnableFlag",
+        "start": 13840,
+        "end": 13844,
+        "sha256": "a7ddd513d149ea16fdd4db3f82267f83087aeaddd06b5dde5468adb704205fc4",
+        "evidence": "r1/symbols/function-frontier.csv"
+      }
+    ],
+    "exact_qualifier_unit_admitted_unchanged": true
+  },
+  "setter_probe": {
+    "no_exact_region_selected": true,
+    "GCC_no_data_sections_offsets": [
+      1,
+      2,
+      3
+    ],
+    "native_offsets": [
+      2,
+      3,
+      4
+    ],
+    "literal_alignment_gap_not_proven_identical": true,
+    "incompatible_profile_probe": {
+      "candidate_units": 2,
+      "compiled_units": 0,
+      "units": [
+        {
+          "source": "third-party/upstream/goodix-gh3x2x/gh3x2x/demo_code/demo_algo_code/goodix_algo_application/src/gh3x2x_demo_algo_config.c",
+          "payload": "r1-application",
+          "evidence": "r1/symbols/function-frontier.csv",
+          "selected": [],
+          "compiled": false,
+          "reason": "dependency discovery failed: cc1: error: section anchors must be disabled when toplevel reorder is disabled\n"
+        },
+        {
+          "source": "third-party/upstream/goodix-gh3x2x/gh3x2x/demo_code/demo_algo_code/goodix_algo_application/src/gh3x2x_demo_algo_config.c",
+          "payload": "r1-application",
+          "evidence": "r1/symbols/function-frontier.csv",
+          "selected": [],
+          "compiled": false,
+          "reason": "dependency discovery failed: cc1: error: section anchors must be disabled when toplevel reorder is disabled\n"
+        }
+      ]
+    },
+    "next_proof_boundary": "Source data layout and compiler literal placement remain unresolved; no opcode/padding patches, false ABI or executable byte retention admitted."
+  },
+  "canonical_hybrid": {
+    "report": "build/hybrid-goal-r1-goodix-sensor-flags-final/build-report.json",
+    "sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "source_bytes": 3961,
+    "fallback_bytes": 642199,
+    "resources": 248,
+    "source_completeness_proven": false
+  },
+  "metadata": "Existing getter rows merged, not duplicated; the sensor-state setter adds only a manual entry supplement, without global pseudocode/freeze credit.",
+  "limits": [
+    "No physical capacitance/temperature capability inferred from disabled getters",
+    "Sensor state setter and gsensor getter remain unqualified; normal C setter void-return boundary remains documented",
+    "No final source-only image or device execution; no G2 gate advanced"
+  ],
+  "hashes": {
+    "r1/src/vendor/goodix_primitives/goodix_primitives.c": "6ba3fff7701c90db05c8700e5b27d9cdbca327887deb92a9cef2bda03c5bf75b",
+    "r1/src/vendor/goodix_primitives/goodix_primitives.h": "07087ccd97a3b7467c77c48957152ed30db9601b2461c87b66c73f4669ec124c",
+    "r1/src/sources.json": "d95865ffb28be68fde0f78dc85afa2ee5ab5c9819becd4be66bbfa68dd79f2bf",
+    "tools/build/source-plan.json": "1bdde95d655ef3d75fdfd2141448a7e582db82cc8ad28a4396a8f7dc5ab05cb5",
+    "build/sources-goal-r1-goodix-sensor-flags/report.json": "ec2ddc0081a57b27a12903e21e4d51cb56abdb370dbaffc9609767211c6c82ba",
+    "build/hybrid-goal-r1-goodix-sensor-flags-final/build-report.json": "4bd7654808b7387ec277e8928c708b0cf8c53e9e2333444e32f4569b3e9adc4c",
+    "build/goal-r1-goodix-sensor-flags/qualified-r1-gcc/qualification.json": "0294a004a9c53fc1485f43039376da96e7557d4efeff8b3e0aa0879e22100936",
+    "build/goal-r1-goodix-sensor-flags/qualified-r1-gcc/source-plan.json": "70d8d45af4058e9ab879d51413ae6ce27645ca6f719f72db92cdc07cd8077493",
+    "build/goal-r1-goodix-sensor-flags/verify.py": "2719d5ff60359be72a857186fbed847f55c1162a856983087adb313fb99e9baa",
+    "build/goal-r1-goodix-sensor-flags/audit.py": "7bd47b6f8acdb0cff71efd4a8ddafdec3efc957eeca5700e21309fb95d09bb82",
+    "build/goal-r1-goodix-sensor-flags/native-disassembly.json": "a3b4c9c7384949efae60973138814e889c62cade14144ff3f55786b462c7d668",
+    "build/goal-r1-goodix-sensor-flags/gcc-setter-disassembly.txt": "a3480c5873d62aee573e8c41d181dcc540893420a98b7e849ef1ef0cdf5049b7",
+    "build/goal-r1-goodix-sensor-flags/qualified-ordered/qualification.json": "f747a8d210de16adf8254d799010bc8c266bede5ca300dea70b3f3f63564047b"
+  }
+}

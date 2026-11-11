@@ -1,12 +1,7 @@
-# EM9305 QP/C queue initializer candidate
+# EM9305 QP/C queue initializer
 
-`qequeue_init.c` isolates the official QP/C v6.5.1 `QEQueue_init` source body,
-with the retained QP/C source and license attribution in the C file. The
-32-bit layout assertions match the authenticated stock ARC body at
-`0x310f5c..0x310f74`. This is a candidate for an ARC port, not a production
-provider. The queue counter is one byte as observed. An ARCv2 EM/EM7D
-product QP port/config and stock/source execution oracle are still needed
-before admission into a complete image. The pinned ARC GNU compiler now builds
-this unit for ARC EM; its existence does not identify the producing EM7D
-compiler profile. The optional scheduler candidate adds recovered control flow
-with two explicit vendor port imports.
+The standalone `qequeue_init.c` candidate was removed in wave 27: `QEQueue_init` is now the unmodified upstream
+`third-party/upstream/qpc/src/qf/qf_qeq.c` (QP/C v6.5.1, commit 416dcec8) compiled through
+`../qpc-port/qf_qeq_unit.c`, and was verified equivalent to the stock body at `0x310f5c..0x310f74` on the
+QEMU-ARC harness (300 random tests, `g2/docs/em9305-arc-harness.md`). The remaining `QEQueue_*` functions are not
+in the stock image and are discarded by `g2/src/em9305/link/g2-em9305.ld`.

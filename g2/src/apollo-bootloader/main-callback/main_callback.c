@@ -38,7 +38,6 @@ static void allocation_failure(void)
     opencfw_provider_41b2f8();
     *(volatile uint32_t *)(uintptr_t)UINT32_MAX = 0;
     for (;;) {
-        __asm__ volatile("b ." ::: "memory");
     }
 }
 

@@ -1,6 +1,5 @@
-/* Diagnostic codec control at 0x53ca11 is the already reconstructed
- * type-0 watchdog message emitter. Preserve its entry and publisher call. */
+/* Builds drivers/power/watchdog-callback/watchdog.c (audio_watchdog_tick, stock
+ * 0x53C2A4). The diagnostic codec control at 0x53ca11 is the type-0 message
+ * emitter 0x53ca10; audio_codec_control is now an alias of
+ * audio_app_stream_enable_53ca10 in audio/audio-app/audio_app_setup_children_20261016.c. */
 #include "../../drivers/power/watchdog-callback/watchdog.c"
-
-__asm__(".global audio_codec_control\n"
-        ".set audio_codec_control, audio_watchdog_emit_type0\n");

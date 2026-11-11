@@ -1,7 +1,9 @@
 /* SPDX-License-Identifier: MIT. Clockmux-specific source ABI adapters. */
 #include <stdint.h>
 #include "../clock-manager/clock_class_provider2.h"
-#include "../clock-manager/clock_class_provider6.h"
+/* Stock 0x41ca5c/0x41caa2: upstream SDK 5.0.0 am_hal_pwrctrl_syspll_enable/disable. */
+extern uint32_t am_hal_pwrctrl_syspll_enable(void);
+extern uint32_t am_hal_pwrctrl_syspll_disable(void);
 uint64_t opencfw_legacy_gpio_mode(uint32_t mode,uint8_t *state)
 {
     /* Clockmux reaches only selectors2/4; their original paths do not consume
@@ -10,11 +12,11 @@ uint64_t opencfw_legacy_gpio_mode(uint32_t mode,uint8_t *state)
 }
 uint64_t opencfw_low_power_prepare(void)
 {
-    opencfw_boot_syspll_power_initialize_for_clockmux();
+    (void)am_hal_pwrctrl_syspll_enable();
     return 0; /* Ignored by this caller; no standalone original return claim. */
 }
 uint64_t opencfw_low_power_finish(void)
 {
-    opencfw_boot_syspll_power_restore_for_clockmux();
+    (void)am_hal_pwrctrl_syspll_disable();
     return 0; /* Ignored by this caller; no standalone original return claim. */
 }

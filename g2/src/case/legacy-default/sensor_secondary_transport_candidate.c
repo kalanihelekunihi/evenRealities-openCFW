@@ -58,3 +58,5 @@ uint32_t case_legacy_pmic_transport(uint32_t selector,uint32_t value)
     case_binary_sensor_stop();
     return 0u;
 }
+/* Dedup (0x0800292c): case_init_pmic_device_read (was startup/application_boot_pmic_read_candidate.c). */
+uint32_t case_init_pmic_device_read(uint32_t selector,uint8_t *out,uint32_t count) __attribute__((alias("case_legacy_ee_transport")));

@@ -1,0 +1,2254 @@
+{
+  "schema_version": 1,
+  "report": "build/sources-goal-r1-eus-range-c/report.json",
+  "baseline_report": "build/sources-goal-r1-rx-reassembly-reviewed-c/report.json",
+  "verification": {
+    "pairs": 1355,
+    "groups": {
+      "complete_seed": 13,
+      "complete_payload_domains": 120,
+      "initial_counter_all_values": 1016,
+      "short_frame_guards": 40,
+      "CRC_mismatch_ack_and_cleanup": 9,
+      "same_counter_retry_rollback": 8,
+      "actual_transmit_receive": 8,
+      "callback_words_and_ignored_results": 30,
+      "live_backend_mutation_scenarios": 108,
+      "transmit_oversize_guard": 3
+    },
+    "full_range_lengths": [
+      4063,
+      4064,
+      4065,
+      4066,
+      4067,
+      4068,
+      4069,
+      4070,
+      4071,
+      4072,
+      4073,
+      4074,
+      4075,
+      4076,
+      4077,
+      4078,
+      4079,
+      4080,
+      4081,
+      4082,
+      4083,
+      4084,
+      4085,
+      4086,
+      4087,
+      4088,
+      4089,
+      4090,
+      4091,
+      4092,
+      4093,
+      4094,
+      4095,
+      4096
+    ],
+    "safety": [
+      {
+        "name": "null_readable_length",
+        "results": [
+          4294967295
+        ],
+        "ack_guard_preserved": true,
+        "capacity": 0
+      },
+      {
+        "name": "oversized_wire",
+        "results": [
+          4294967295
+        ],
+        "ack_guard_preserved": true,
+        "capacity": 0
+      },
+      {
+        "name": "short_bad_CRC_0",
+        "results": [
+          0
+        ],
+        "ack_guard_preserved": true,
+        "capacity": 0
+      },
+      {
+        "name": "short_bad_CRC_1",
+        "results": [
+          0
+        ],
+        "ack_guard_preserved": true,
+        "capacity": 0
+      },
+      {
+        "name": "short_bad_CRC_2",
+        "results": [
+          0
+        ],
+        "ack_guard_preserved": true,
+        "capacity": 0
+      },
+      {
+        "name": "short_bad_CRC_3",
+        "results": [
+          0
+        ],
+        "ack_guard_preserved": true,
+        "capacity": 0
+      },
+      {
+        "name": "short_bad_CRC_4",
+        "results": [
+          0
+        ],
+        "ack_guard_preserved": true,
+        "capacity": 0
+      },
+      {
+        "name": "static_stream_overflow",
+        "results": [
+          0,
+          0,
+          4294967295
+        ],
+        "ack_guard_preserved": true,
+        "capacity": 0
+      },
+      {
+        "name": "heap_stream_overflow",
+        "results": [
+          0,
+          0,
+          0,
+          4294967295
+        ],
+        "ack_guard_preserved": true,
+        "capacity": 0
+      },
+      {
+        "name": "retry_length_underflow",
+        "results": [
+          0,
+          4294967295
+        ],
+        "ack_guard_preserved": true,
+        "capacity": 0
+      },
+      {
+        "name": "retry_used_underflow",
+        "results": [
+          0,
+          4294967295
+        ],
+        "ack_guard_preserved": true,
+        "capacity": 0
+      },
+      {
+        "name": "used_over_capacity",
+        "results": [
+          0,
+          4294967295
+        ],
+        "ack_guard_preserved": true,
+        "capacity": 0
+      },
+      {
+        "name": "overflow_then_recover",
+        "results": [
+          0,
+          0,
+          4294967295,
+          0
+        ],
+        "ack_guard_preserved": true,
+        "capacity": 0
+      },
+      {
+        "name": "over_message_limit_4097",
+        "results": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          4294967295
+        ],
+        "ack_guard_preserved": true,
+        "capacity": 0
+      },
+      {
+        "name": "over_message_limit_4183",
+        "results": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          4294967295
+        ],
+        "ack_guard_preserved": true,
+        "capacity": 0
+      },
+      {
+        "name": "over_message_limit_4302",
+        "results": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          4294967295
+        ],
+        "ack_guard_preserved": true,
+        "capacity": 0
+      }
+    ],
+    "native_overflow_changes_ACK_table": "5858585858585858585858585858585858585858585858585858585858585858584e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e",
+    "native_instruction_bytes_covered": 422,
+    "native_instruction_bytes_expected": 424,
+    "native_uncovered_byte_addresses": [
+      "0x32210",
+      "0x32211"
+    ]
+  },
+  "queue_integration": {
+    "stock_queue_comparisons": 36,
+    "extended_queue_cases": 272,
+    "allocation_failure_cases": 5,
+    "extended_lengths": [
+      4063,
+      4064,
+      4065,
+      4066,
+      4067,
+      4068,
+      4069,
+      4070,
+      4071,
+      4072,
+      4073,
+      4074,
+      4075,
+      4076,
+      4077,
+      4078,
+      4079,
+      4080,
+      4081,
+      4082,
+      4083,
+      4084,
+      4085,
+      4086,
+      4087,
+      4088,
+      4089,
+      4090,
+      4091,
+      4092,
+      4093,
+      4094,
+      4095,
+      4096
+    ],
+    "actual": [
+      "C fragment sender",
+      "bounded C receiver",
+      "existing C RX queue encoder",
+      "source CRC and memory routines"
+    ],
+    "modeled": [
+      "heap allocator/free with free poisoning",
+      "RTOS queue functions and thread flags",
+      "logging"
+    ],
+    "owned_queue_buffers_survive_parent_free": true,
+    "extended_cases": [
+      {
+        "size": 4063,
+        "queue": true,
+        "put": 0,
+        "fail_at": 0,
+        "queued": 1
+      },
+      {
+        "size": 4063,
+        "queue": true,
+        "put": 0,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4063,
+        "queue": true,
+        "put": 8,
+        "fail_at": 0,
+        "queued": 0
+      },
+      {
+        "size": 4063,
+        "queue": true,
+        "put": 8,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4063,
+        "queue": false,
+        "put": 0,
+        "fail_at": 0,
+        "queued": 0
+      },
+      {
+        "size": 4063,
+        "queue": false,
+        "put": 0,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4063,
+        "queue": false,
+        "put": 8,
+        "fail_at": 0,
+        "queued": 0
+      },
+      {
+        "size": 4063,
+        "queue": false,
+        "put": 8,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4064,
+        "queue": true,
+        "put": 0,
+        "fail_at": 0,
+        "queued": 1
+      },
+      {
+        "size": 4064,
+        "queue": true,
+        "put": 0,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4064,
+        "queue": true,
+        "put": 8,
+        "fail_at": 0,
+        "queued": 0
+      },
+      {
+        "size": 4064,
+        "queue": true,
+        "put": 8,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4064,
+        "queue": false,
+        "put": 0,
+        "fail_at": 0,
+        "queued": 0
+      },
+      {
+        "size": 4064,
+        "queue": false,
+        "put": 0,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4064,
+        "queue": false,
+        "put": 8,
+        "fail_at": 0,
+        "queued": 0
+      },
+      {
+        "size": 4064,
+        "queue": false,
+        "put": 8,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4065,
+        "queue": true,
+        "put": 0,
+        "fail_at": 0,
+        "queued": 1
+      },
+      {
+        "size": 4065,
+        "queue": true,
+        "put": 0,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4065,
+        "queue": true,
+        "put": 8,
+        "fail_at": 0,
+        "queued": 0
+      },
+      {
+        "size": 4065,
+        "queue": true,
+        "put": 8,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4065,
+        "queue": false,
+        "put": 0,
+        "fail_at": 0,
+        "queued": 0
+      },
+      {
+        "size": 4065,
+        "queue": false,
+        "put": 0,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4065,
+        "queue": false,
+        "put": 8,
+        "fail_at": 0,
+        "queued": 0
+      },
+      {
+        "size": 4065,
+        "queue": false,
+        "put": 8,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4066,
+        "queue": true,
+        "put": 0,
+        "fail_at": 0,
+        "queued": 1
+      },
+      {
+        "size": 4066,
+        "queue": true,
+        "put": 0,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4066,
+        "queue": true,
+        "put": 8,
+        "fail_at": 0,
+        "queued": 0
+      },
+      {
+        "size": 4066,
+        "queue": true,
+        "put": 8,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4066,
+        "queue": false,
+        "put": 0,
+        "fail_at": 0,
+        "queued": 0
+      },
+      {
+        "size": 4066,
+        "queue": false,
+        "put": 0,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4066,
+        "queue": false,
+        "put": 8,
+        "fail_at": 0,
+        "queued": 0
+      },
+      {
+        "size": 4066,
+        "queue": false,
+        "put": 8,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4067,
+        "queue": true,
+        "put": 0,
+        "fail_at": 0,
+        "queued": 1
+      },
+      {
+        "size": 4067,
+        "queue": true,
+        "put": 0,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4067,
+        "queue": true,
+        "put": 8,
+        "fail_at": 0,
+        "queued": 0
+      },
+      {
+        "size": 4067,
+        "queue": true,
+        "put": 8,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4067,
+        "queue": false,
+        "put": 0,
+        "fail_at": 0,
+        "queued": 0
+      },
+      {
+        "size": 4067,
+        "queue": false,
+        "put": 0,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4067,
+        "queue": false,
+        "put": 8,
+        "fail_at": 0,
+        "queued": 0
+      },
+      {
+        "size": 4067,
+        "queue": false,
+        "put": 8,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4068,
+        "queue": true,
+        "put": 0,
+        "fail_at": 0,
+        "queued": 1
+      },
+      {
+        "size": 4068,
+        "queue": true,
+        "put": 0,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4068,
+        "queue": true,
+        "put": 8,
+        "fail_at": 0,
+        "queued": 0
+      },
+      {
+        "size": 4068,
+        "queue": true,
+        "put": 8,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4068,
+        "queue": false,
+        "put": 0,
+        "fail_at": 0,
+        "queued": 0
+      },
+      {
+        "size": 4068,
+        "queue": false,
+        "put": 0,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4068,
+        "queue": false,
+        "put": 8,
+        "fail_at": 0,
+        "queued": 0
+      },
+      {
+        "size": 4068,
+        "queue": false,
+        "put": 8,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4069,
+        "queue": true,
+        "put": 0,
+        "fail_at": 0,
+        "queued": 1
+      },
+      {
+        "size": 4069,
+        "queue": true,
+        "put": 0,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4069,
+        "queue": true,
+        "put": 8,
+        "fail_at": 0,
+        "queued": 0
+      },
+      {
+        "size": 4069,
+        "queue": true,
+        "put": 8,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4069,
+        "queue": false,
+        "put": 0,
+        "fail_at": 0,
+        "queued": 0
+      },
+      {
+        "size": 4069,
+        "queue": false,
+        "put": 0,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4069,
+        "queue": false,
+        "put": 8,
+        "fail_at": 0,
+        "queued": 0
+      },
+      {
+        "size": 4069,
+        "queue": false,
+        "put": 8,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4070,
+        "queue": true,
+        "put": 0,
+        "fail_at": 0,
+        "queued": 1
+      },
+      {
+        "size": 4070,
+        "queue": true,
+        "put": 0,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4070,
+        "queue": true,
+        "put": 8,
+        "fail_at": 0,
+        "queued": 0
+      },
+      {
+        "size": 4070,
+        "queue": true,
+        "put": 8,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4070,
+        "queue": false,
+        "put": 0,
+        "fail_at": 0,
+        "queued": 0
+      },
+      {
+        "size": 4070,
+        "queue": false,
+        "put": 0,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4070,
+        "queue": false,
+        "put": 8,
+        "fail_at": 0,
+        "queued": 0
+      },
+      {
+        "size": 4070,
+        "queue": false,
+        "put": 8,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4071,
+        "queue": true,
+        "put": 0,
+        "fail_at": 0,
+        "queued": 1
+      },
+      {
+        "size": 4071,
+        "queue": true,
+        "put": 0,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4071,
+        "queue": true,
+        "put": 8,
+        "fail_at": 0,
+        "queued": 0
+      },
+      {
+        "size": 4071,
+        "queue": true,
+        "put": 8,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4071,
+        "queue": false,
+        "put": 0,
+        "fail_at": 0,
+        "queued": 0
+      },
+      {
+        "size": 4071,
+        "queue": false,
+        "put": 0,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4071,
+        "queue": false,
+        "put": 8,
+        "fail_at": 0,
+        "queued": 0
+      },
+      {
+        "size": 4071,
+        "queue": false,
+        "put": 8,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4072,
+        "queue": true,
+        "put": 0,
+        "fail_at": 0,
+        "queued": 1
+      },
+      {
+        "size": 4072,
+        "queue": true,
+        "put": 0,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4072,
+        "queue": true,
+        "put": 8,
+        "fail_at": 0,
+        "queued": 0
+      },
+      {
+        "size": 4072,
+        "queue": true,
+        "put": 8,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4072,
+        "queue": false,
+        "put": 0,
+        "fail_at": 0,
+        "queued": 0
+      },
+      {
+        "size": 4072,
+        "queue": false,
+        "put": 0,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4072,
+        "queue": false,
+        "put": 8,
+        "fail_at": 0,
+        "queued": 0
+      },
+      {
+        "size": 4072,
+        "queue": false,
+        "put": 8,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4073,
+        "queue": true,
+        "put": 0,
+        "fail_at": 0,
+        "queued": 1
+      },
+      {
+        "size": 4073,
+        "queue": true,
+        "put": 0,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4073,
+        "queue": true,
+        "put": 8,
+        "fail_at": 0,
+        "queued": 0
+      },
+      {
+        "size": 4073,
+        "queue": true,
+        "put": 8,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4073,
+        "queue": false,
+        "put": 0,
+        "fail_at": 0,
+        "queued": 0
+      },
+      {
+        "size": 4073,
+        "queue": false,
+        "put": 0,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4073,
+        "queue": false,
+        "put": 8,
+        "fail_at": 0,
+        "queued": 0
+      },
+      {
+        "size": 4073,
+        "queue": false,
+        "put": 8,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4074,
+        "queue": true,
+        "put": 0,
+        "fail_at": 0,
+        "queued": 1
+      },
+      {
+        "size": 4074,
+        "queue": true,
+        "put": 0,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4074,
+        "queue": true,
+        "put": 8,
+        "fail_at": 0,
+        "queued": 0
+      },
+      {
+        "size": 4074,
+        "queue": true,
+        "put": 8,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4074,
+        "queue": false,
+        "put": 0,
+        "fail_at": 0,
+        "queued": 0
+      },
+      {
+        "size": 4074,
+        "queue": false,
+        "put": 0,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4074,
+        "queue": false,
+        "put": 8,
+        "fail_at": 0,
+        "queued": 0
+      },
+      {
+        "size": 4074,
+        "queue": false,
+        "put": 8,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4075,
+        "queue": true,
+        "put": 0,
+        "fail_at": 0,
+        "queued": 1
+      },
+      {
+        "size": 4075,
+        "queue": true,
+        "put": 0,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4075,
+        "queue": true,
+        "put": 8,
+        "fail_at": 0,
+        "queued": 0
+      },
+      {
+        "size": 4075,
+        "queue": true,
+        "put": 8,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4075,
+        "queue": false,
+        "put": 0,
+        "fail_at": 0,
+        "queued": 0
+      },
+      {
+        "size": 4075,
+        "queue": false,
+        "put": 0,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4075,
+        "queue": false,
+        "put": 8,
+        "fail_at": 0,
+        "queued": 0
+      },
+      {
+        "size": 4075,
+        "queue": false,
+        "put": 8,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4076,
+        "queue": true,
+        "put": 0,
+        "fail_at": 0,
+        "queued": 1
+      },
+      {
+        "size": 4076,
+        "queue": true,
+        "put": 0,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4076,
+        "queue": true,
+        "put": 8,
+        "fail_at": 0,
+        "queued": 0
+      },
+      {
+        "size": 4076,
+        "queue": true,
+        "put": 8,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4076,
+        "queue": false,
+        "put": 0,
+        "fail_at": 0,
+        "queued": 0
+      },
+      {
+        "size": 4076,
+        "queue": false,
+        "put": 0,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4076,
+        "queue": false,
+        "put": 8,
+        "fail_at": 0,
+        "queued": 0
+      },
+      {
+        "size": 4076,
+        "queue": false,
+        "put": 8,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4077,
+        "queue": true,
+        "put": 0,
+        "fail_at": 0,
+        "queued": 1
+      },
+      {
+        "size": 4077,
+        "queue": true,
+        "put": 0,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4077,
+        "queue": true,
+        "put": 8,
+        "fail_at": 0,
+        "queued": 0
+      },
+      {
+        "size": 4077,
+        "queue": true,
+        "put": 8,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4077,
+        "queue": false,
+        "put": 0,
+        "fail_at": 0,
+        "queued": 0
+      },
+      {
+        "size": 4077,
+        "queue": false,
+        "put": 0,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4077,
+        "queue": false,
+        "put": 8,
+        "fail_at": 0,
+        "queued": 0
+      },
+      {
+        "size": 4077,
+        "queue": false,
+        "put": 8,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4078,
+        "queue": true,
+        "put": 0,
+        "fail_at": 0,
+        "queued": 1
+      },
+      {
+        "size": 4078,
+        "queue": true,
+        "put": 0,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4078,
+        "queue": true,
+        "put": 8,
+        "fail_at": 0,
+        "queued": 0
+      },
+      {
+        "size": 4078,
+        "queue": true,
+        "put": 8,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4078,
+        "queue": false,
+        "put": 0,
+        "fail_at": 0,
+        "queued": 0
+      },
+      {
+        "size": 4078,
+        "queue": false,
+        "put": 0,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4078,
+        "queue": false,
+        "put": 8,
+        "fail_at": 0,
+        "queued": 0
+      },
+      {
+        "size": 4078,
+        "queue": false,
+        "put": 8,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4079,
+        "queue": true,
+        "put": 0,
+        "fail_at": 0,
+        "queued": 1
+      },
+      {
+        "size": 4079,
+        "queue": true,
+        "put": 0,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4079,
+        "queue": true,
+        "put": 8,
+        "fail_at": 0,
+        "queued": 0
+      },
+      {
+        "size": 4079,
+        "queue": true,
+        "put": 8,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4079,
+        "queue": false,
+        "put": 0,
+        "fail_at": 0,
+        "queued": 0
+      },
+      {
+        "size": 4079,
+        "queue": false,
+        "put": 0,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4079,
+        "queue": false,
+        "put": 8,
+        "fail_at": 0,
+        "queued": 0
+      },
+      {
+        "size": 4079,
+        "queue": false,
+        "put": 8,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4080,
+        "queue": true,
+        "put": 0,
+        "fail_at": 0,
+        "queued": 1
+      },
+      {
+        "size": 4080,
+        "queue": true,
+        "put": 0,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4080,
+        "queue": true,
+        "put": 8,
+        "fail_at": 0,
+        "queued": 0
+      },
+      {
+        "size": 4080,
+        "queue": true,
+        "put": 8,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4080,
+        "queue": false,
+        "put": 0,
+        "fail_at": 0,
+        "queued": 0
+      },
+      {
+        "size": 4080,
+        "queue": false,
+        "put": 0,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4080,
+        "queue": false,
+        "put": 8,
+        "fail_at": 0,
+        "queued": 0
+      },
+      {
+        "size": 4080,
+        "queue": false,
+        "put": 8,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4081,
+        "queue": true,
+        "put": 0,
+        "fail_at": 0,
+        "queued": 1
+      },
+      {
+        "size": 4081,
+        "queue": true,
+        "put": 0,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4081,
+        "queue": true,
+        "put": 8,
+        "fail_at": 0,
+        "queued": 0
+      },
+      {
+        "size": 4081,
+        "queue": true,
+        "put": 8,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4081,
+        "queue": false,
+        "put": 0,
+        "fail_at": 0,
+        "queued": 0
+      },
+      {
+        "size": 4081,
+        "queue": false,
+        "put": 0,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4081,
+        "queue": false,
+        "put": 8,
+        "fail_at": 0,
+        "queued": 0
+      },
+      {
+        "size": 4081,
+        "queue": false,
+        "put": 8,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4082,
+        "queue": true,
+        "put": 0,
+        "fail_at": 0,
+        "queued": 1
+      },
+      {
+        "size": 4082,
+        "queue": true,
+        "put": 0,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4082,
+        "queue": true,
+        "put": 8,
+        "fail_at": 0,
+        "queued": 0
+      },
+      {
+        "size": 4082,
+        "queue": true,
+        "put": 8,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4082,
+        "queue": false,
+        "put": 0,
+        "fail_at": 0,
+        "queued": 0
+      },
+      {
+        "size": 4082,
+        "queue": false,
+        "put": 0,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4082,
+        "queue": false,
+        "put": 8,
+        "fail_at": 0,
+        "queued": 0
+      },
+      {
+        "size": 4082,
+        "queue": false,
+        "put": 8,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4083,
+        "queue": true,
+        "put": 0,
+        "fail_at": 0,
+        "queued": 1
+      },
+      {
+        "size": 4083,
+        "queue": true,
+        "put": 0,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4083,
+        "queue": true,
+        "put": 8,
+        "fail_at": 0,
+        "queued": 0
+      },
+      {
+        "size": 4083,
+        "queue": true,
+        "put": 8,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4083,
+        "queue": false,
+        "put": 0,
+        "fail_at": 0,
+        "queued": 0
+      },
+      {
+        "size": 4083,
+        "queue": false,
+        "put": 0,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4083,
+        "queue": false,
+        "put": 8,
+        "fail_at": 0,
+        "queued": 0
+      },
+      {
+        "size": 4083,
+        "queue": false,
+        "put": 8,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4084,
+        "queue": true,
+        "put": 0,
+        "fail_at": 0,
+        "queued": 1
+      },
+      {
+        "size": 4084,
+        "queue": true,
+        "put": 0,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4084,
+        "queue": true,
+        "put": 8,
+        "fail_at": 0,
+        "queued": 0
+      },
+      {
+        "size": 4084,
+        "queue": true,
+        "put": 8,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4084,
+        "queue": false,
+        "put": 0,
+        "fail_at": 0,
+        "queued": 0
+      },
+      {
+        "size": 4084,
+        "queue": false,
+        "put": 0,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4084,
+        "queue": false,
+        "put": 8,
+        "fail_at": 0,
+        "queued": 0
+      },
+      {
+        "size": 4084,
+        "queue": false,
+        "put": 8,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4085,
+        "queue": true,
+        "put": 0,
+        "fail_at": 0,
+        "queued": 1
+      },
+      {
+        "size": 4085,
+        "queue": true,
+        "put": 0,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4085,
+        "queue": true,
+        "put": 8,
+        "fail_at": 0,
+        "queued": 0
+      },
+      {
+        "size": 4085,
+        "queue": true,
+        "put": 8,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4085,
+        "queue": false,
+        "put": 0,
+        "fail_at": 0,
+        "queued": 0
+      },
+      {
+        "size": 4085,
+        "queue": false,
+        "put": 0,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4085,
+        "queue": false,
+        "put": 8,
+        "fail_at": 0,
+        "queued": 0
+      },
+      {
+        "size": 4085,
+        "queue": false,
+        "put": 8,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4086,
+        "queue": true,
+        "put": 0,
+        "fail_at": 0,
+        "queued": 1
+      },
+      {
+        "size": 4086,
+        "queue": true,
+        "put": 0,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4086,
+        "queue": true,
+        "put": 8,
+        "fail_at": 0,
+        "queued": 0
+      },
+      {
+        "size": 4086,
+        "queue": true,
+        "put": 8,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4086,
+        "queue": false,
+        "put": 0,
+        "fail_at": 0,
+        "queued": 0
+      },
+      {
+        "size": 4086,
+        "queue": false,
+        "put": 0,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4086,
+        "queue": false,
+        "put": 8,
+        "fail_at": 0,
+        "queued": 0
+      },
+      {
+        "size": 4086,
+        "queue": false,
+        "put": 8,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4087,
+        "queue": true,
+        "put": 0,
+        "fail_at": 0,
+        "queued": 1
+      },
+      {
+        "size": 4087,
+        "queue": true,
+        "put": 0,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4087,
+        "queue": true,
+        "put": 8,
+        "fail_at": 0,
+        "queued": 0
+      },
+      {
+        "size": 4087,
+        "queue": true,
+        "put": 8,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4087,
+        "queue": false,
+        "put": 0,
+        "fail_at": 0,
+        "queued": 0
+      },
+      {
+        "size": 4087,
+        "queue": false,
+        "put": 0,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4087,
+        "queue": false,
+        "put": 8,
+        "fail_at": 0,
+        "queued": 0
+      },
+      {
+        "size": 4087,
+        "queue": false,
+        "put": 8,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4088,
+        "queue": true,
+        "put": 0,
+        "fail_at": 0,
+        "queued": 1
+      },
+      {
+        "size": 4088,
+        "queue": true,
+        "put": 0,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4088,
+        "queue": true,
+        "put": 8,
+        "fail_at": 0,
+        "queued": 0
+      },
+      {
+        "size": 4088,
+        "queue": true,
+        "put": 8,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4088,
+        "queue": false,
+        "put": 0,
+        "fail_at": 0,
+        "queued": 0
+      },
+      {
+        "size": 4088,
+        "queue": false,
+        "put": 0,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4088,
+        "queue": false,
+        "put": 8,
+        "fail_at": 0,
+        "queued": 0
+      },
+      {
+        "size": 4088,
+        "queue": false,
+        "put": 8,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4089,
+        "queue": true,
+        "put": 0,
+        "fail_at": 0,
+        "queued": 1
+      },
+      {
+        "size": 4089,
+        "queue": true,
+        "put": 0,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4089,
+        "queue": true,
+        "put": 8,
+        "fail_at": 0,
+        "queued": 0
+      },
+      {
+        "size": 4089,
+        "queue": true,
+        "put": 8,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4089,
+        "queue": false,
+        "put": 0,
+        "fail_at": 0,
+        "queued": 0
+      },
+      {
+        "size": 4089,
+        "queue": false,
+        "put": 0,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4089,
+        "queue": false,
+        "put": 8,
+        "fail_at": 0,
+        "queued": 0
+      },
+      {
+        "size": 4089,
+        "queue": false,
+        "put": 8,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4090,
+        "queue": true,
+        "put": 0,
+        "fail_at": 0,
+        "queued": 1
+      },
+      {
+        "size": 4090,
+        "queue": true,
+        "put": 0,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4090,
+        "queue": true,
+        "put": 8,
+        "fail_at": 0,
+        "queued": 0
+      },
+      {
+        "size": 4090,
+        "queue": true,
+        "put": 8,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4090,
+        "queue": false,
+        "put": 0,
+        "fail_at": 0,
+        "queued": 0
+      },
+      {
+        "size": 4090,
+        "queue": false,
+        "put": 0,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4090,
+        "queue": false,
+        "put": 8,
+        "fail_at": 0,
+        "queued": 0
+      },
+      {
+        "size": 4090,
+        "queue": false,
+        "put": 8,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4091,
+        "queue": true,
+        "put": 0,
+        "fail_at": 0,
+        "queued": 1
+      },
+      {
+        "size": 4091,
+        "queue": true,
+        "put": 0,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4091,
+        "queue": true,
+        "put": 8,
+        "fail_at": 0,
+        "queued": 0
+      },
+      {
+        "size": 4091,
+        "queue": true,
+        "put": 8,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4091,
+        "queue": false,
+        "put": 0,
+        "fail_at": 0,
+        "queued": 0
+      },
+      {
+        "size": 4091,
+        "queue": false,
+        "put": 0,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4091,
+        "queue": false,
+        "put": 8,
+        "fail_at": 0,
+        "queued": 0
+      },
+      {
+        "size": 4091,
+        "queue": false,
+        "put": 8,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4092,
+        "queue": true,
+        "put": 0,
+        "fail_at": 0,
+        "queued": 1
+      },
+      {
+        "size": 4092,
+        "queue": true,
+        "put": 0,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4092,
+        "queue": true,
+        "put": 8,
+        "fail_at": 0,
+        "queued": 0
+      },
+      {
+        "size": 4092,
+        "queue": true,
+        "put": 8,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4092,
+        "queue": false,
+        "put": 0,
+        "fail_at": 0,
+        "queued": 0
+      },
+      {
+        "size": 4092,
+        "queue": false,
+        "put": 0,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4092,
+        "queue": false,
+        "put": 8,
+        "fail_at": 0,
+        "queued": 0
+      },
+      {
+        "size": 4092,
+        "queue": false,
+        "put": 8,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4093,
+        "queue": true,
+        "put": 0,
+        "fail_at": 0,
+        "queued": 1
+      },
+      {
+        "size": 4093,
+        "queue": true,
+        "put": 0,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4093,
+        "queue": true,
+        "put": 8,
+        "fail_at": 0,
+        "queued": 0
+      },
+      {
+        "size": 4093,
+        "queue": true,
+        "put": 8,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4093,
+        "queue": false,
+        "put": 0,
+        "fail_at": 0,
+        "queued": 0
+      },
+      {
+        "size": 4093,
+        "queue": false,
+        "put": 0,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4093,
+        "queue": false,
+        "put": 8,
+        "fail_at": 0,
+        "queued": 0
+      },
+      {
+        "size": 4093,
+        "queue": false,
+        "put": 8,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4094,
+        "queue": true,
+        "put": 0,
+        "fail_at": 0,
+        "queued": 1
+      },
+      {
+        "size": 4094,
+        "queue": true,
+        "put": 0,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4094,
+        "queue": true,
+        "put": 8,
+        "fail_at": 0,
+        "queued": 0
+      },
+      {
+        "size": 4094,
+        "queue": true,
+        "put": 8,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4094,
+        "queue": false,
+        "put": 0,
+        "fail_at": 0,
+        "queued": 0
+      },
+      {
+        "size": 4094,
+        "queue": false,
+        "put": 0,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4094,
+        "queue": false,
+        "put": 8,
+        "fail_at": 0,
+        "queued": 0
+      },
+      {
+        "size": 4094,
+        "queue": false,
+        "put": 8,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4095,
+        "queue": true,
+        "put": 0,
+        "fail_at": 0,
+        "queued": 1
+      },
+      {
+        "size": 4095,
+        "queue": true,
+        "put": 0,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4095,
+        "queue": true,
+        "put": 8,
+        "fail_at": 0,
+        "queued": 0
+      },
+      {
+        "size": 4095,
+        "queue": true,
+        "put": 8,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4095,
+        "queue": false,
+        "put": 0,
+        "fail_at": 0,
+        "queued": 0
+      },
+      {
+        "size": 4095,
+        "queue": false,
+        "put": 0,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4095,
+        "queue": false,
+        "put": 8,
+        "fail_at": 0,
+        "queued": 0
+      },
+      {
+        "size": 4095,
+        "queue": false,
+        "put": 8,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4096,
+        "queue": true,
+        "put": 0,
+        "fail_at": 0,
+        "queued": 1
+      },
+      {
+        "size": 4096,
+        "queue": true,
+        "put": 0,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4096,
+        "queue": true,
+        "put": 8,
+        "fail_at": 0,
+        "queued": 0
+      },
+      {
+        "size": 4096,
+        "queue": true,
+        "put": 8,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4096,
+        "queue": false,
+        "put": 0,
+        "fail_at": 0,
+        "queued": 0
+      },
+      {
+        "size": 4096,
+        "queue": false,
+        "put": 0,
+        "fail_at": 2,
+        "queued": 0
+      },
+      {
+        "size": 4096,
+        "queue": false,
+        "put": 8,
+        "fail_at": 0,
+        "queued": 0
+      },
+      {
+        "size": 4096,
+        "queue": false,
+        "put": 8,
+        "fail_at": 2,
+        "queued": 0
+      }
+    ]
+  },
+  "audit": {
+    "unchanged_nongenerated_objects": 841,
+    "changed_nongenerated_objects": [
+      "r1/src/application/board/native_eus_reassembly.c"
+    ],
+    "changed_generated_objects": [
+      "{gen}/r1_startup_vectors.S",
+      "{gen}/r1_uecc.c"
+    ],
+    "added_imports": [],
+    "removed_imports": [],
+    "compiled_units": 852,
+    "application_imports": 66,
+    "bootloader_imports": 22
+  },
+  "intentional_behavior_change": "Stock TX accepts 4096 bytes but RX rejects initial counter17. C now accepts counter17 and caps its assembly allocation at4096; oversized assembled payloads are rejected. Wire format is unchanged.",
+  "shared_contract": "Five-byte header,239-byte fragment,244-byte maximum wire frame,4096-byte message cap,17 maximum initial counter. Shared three-argument int32 callback matches the existing TX1 target.",
+  "proof_limits": [
+    "New4063..4096 delivery is intentional C behavior, not asserted equivalent to the stock RX rejection.",
+    "Actual C sender, CRC, memory movement, receiver and RX queue encoder execute. Allocator, RTOS queue/services and radio are modeled; queued bytes survive poisoning the freed assembly buffer.",
+    "Global stream and synchronous borrowed callback semantics remain. Connection isolation and reentrancy are not established.",
+    "852 translation units compile and relocatable composition succeeds.66 application and22 bootloader imports remain. Final firmware link, boot and hardware delivery remain unverified. Paid compilers and byte identity are not required."
+  ],
+  "evidence_files": {
+    "build/sources-goal-r1-eus-range-c/report.json": "41c95be91c6a00fc9ca3750338ebfea6db15d995d9eb17ec17b8d81ff5c602f3",
+    "build/sources-goal-r1-rx-reassembly-reviewed-c/report.json": "15e63a164547c2d5138ab18e8ee4202f87c95039b721c9a9e7520e76f0e5afba",
+    "r1/src/include/r1_eus_transport.h": "954387e6b5232ce158ecf1c0484445ce4ab98336981bcbaba7dd94a66a9b42d4",
+    "r1/src/application/board/native_protocol_fragment.c": "2a689674bac9b68dace33f659cc3f6e28795c2bd8999f9542443d3fd0b25e4a6",
+    "r1/src/application/board/native_eus_reassembly.c": "52eb42671a7b5959ad6576958efa60eaa72eae9d0f3fdd0a1a5a6c29e6dac610",
+    "build/goal-r1-eus-range-c/rea.json": "2703fee88c06a86195adbb2a944926350759276573b25a45fc772e20be842063",
+    "build/goal-r1-eus-range-c/verify.py": "3fe2f9e5f5e8dcfebaa92ad1b89a46182d64fb7f91f89f4f4c640d6cdf49aa4e",
+    "build/goal-r1-eus-range-c/verification.json": "63da328271a4df3d17911dd489a2927fb0e6b6df5b9a45472342c23e5cf2967f",
+    "build/goal-r1-eus-range-c/verification.log": "36730685c3cc3cbbbc879466a69c4b7b85cd41b296a58d6ad7fbdca73155ea01",
+    "build/goal-r1-eus-range-c/make-queue.py": "3c02d50c4aaa09c6add2fade5bed69b2285185b91ad0eb9ca8828c8a0d7ed8fd",
+    "build/goal-r1-eus-range-c/queue/verify.py": "deda05f02a0c1c827b8a75d605fb4cd9a27c0a80e1f02512d7ad68330c32ac8a",
+    "build/goal-r1-eus-range-c/queue/verification.json": "9c7d6ddf5ccedf07203849c4a2081565d5247cc0b1ad2e4d5808eae592db2f9b",
+    "build/goal-r1-eus-range-c/queue/verification.log": "d034b3a23f5c25a7cc225c040a60c9c9bc102f6c7101e73c21ac75943038e3b4",
+    "build/goal-r1-eus-range-c/object-audit.json": "66a2a4c7dda7b3daf751b59cb7e72591f8e97f5868c660041fc88a65c2b3f0bf",
+    "build/goal-r1-eus-range-c/r1-check.log": "ff00837ff85e19cf04a893c77e51ce602c362675651960cf956f13903b124dc6"
+  }
+}

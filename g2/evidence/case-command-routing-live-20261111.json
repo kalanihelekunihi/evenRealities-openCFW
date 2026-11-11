@@ -1,0 +1,76 @@
+{
+  "schema": "opencfw.g2.case.command-routing-live.v1",
+  "date": "2026-11-11",
+  "reference": {
+    "payload": "g2/blobs/official/g2-2.2.6.10/firmware_box.bin",
+    "header_bytes": 32,
+    "stock_legacy_entry": "0x08000928",
+    "stock_binary_entry": "0x08000e1c"
+  },
+  "source": {
+    "live_legacy_entry": "g2/src/case/legacy-default/full_command_candidate.c",
+    "live_binary_forward": "g2/src/case/legacy-default/binary_forward_candidate.c",
+    "removed_discarded_unit": "g2/src/case/binary-forward/forward.c",
+    "reason": "The offline prefix duplicated the nonlocal binary forwarding route and its section was discarded at address zero by the strict CASE link."
+  },
+  "differential_emulation": {
+    "engine": "Unicorn 2.1.4, ARM Thumb M-class",
+    "default_legacy_cases_matched": 708,
+    "default_legacy_cases_total": 708,
+    "default_legacy_scope": "236 no-action opcode values times three initial log-quiet states; compared return value and the first 8 KiB of RAM",
+    "state_legacy_cases_matched": 72,
+    "state_legacy_cases_total": 72,
+    "state_legacy_scope": "0xAF, 0xD1, 0xDD and 0xDF with lengths 1/2/4, quiet 0/1 and argument 0/1/127; compared return value, state RAM and consumed logger format/arguments with logger return controlled",
+    "binary_forward_cases_matched": 288,
+    "binary_forward_cases_total": 288,
+    "binary_forward_scope": "Nonlocal destination 0/1/3; modes 0/1, lengths 1/4/5/6/7/10, direction 0/1 and advertised length 0/1/2/4; compared return, forwarded 32-byte RAM window and event handle/mask with event return controlled",
+    "local_binary_cases_matched": 240,
+    "local_binary_cases_total": 240,
+    "local_binary_scope": "Destination-2 opcodes 0x50, 0x5C, 0x5D and 0x68 with lengths 1/4/5/6/7, quiet 0/1, status 0/1 and argument 0/1/127; compared return, state RAM, reply bytes, ACK opcode and GPIO lower calls with lower returns controlled",
+    "aging_3e_cases_matched": 144,
+    "aging_3e_cases_total": 144,
+    "aging_3e_scope": "Destination-2 0x3E with lengths 1/4/5/6, prior and incoming states 0/1/2, connected 0/1 and quiet 0/1; compared return, aging state RAM, event mask, logger strings and ACK boundary with lower returns controlled",
+    "sensor_14_cases_matched": 523,
+    "sensor_14_cases_total": 523,
+    "sensor_14_scope": "Destination-2 0x14 with 11 signed and unsigned edge triples and 512 seeded 32-bit reading triples (seed 0x14); sensor-reading lowers supplied identical values, stock and source signed scaling executed, and return plus 11 reply bytes were compared at the send boundary",
+    "aging_3d_cases_matched": 192,
+    "aging_3d_cases_total": 192,
+    "aging_3d_scope": "Nonlocal 0x3D with both framing modes, lengths 1/5/6/7, advertised length 0/1, destinations 0/1/3, aging flag 0/1 and quiet 0/1; compared return, copied bytes, event handles/masks and log strings with event and logger returns controlled",
+    "ota_56_cases_matched": 144,
+    "ota_56_cases_total": 144,
+    "ota_56_scope": "Destination-2 0x56 with lengths 1/5/6/7, exit and side bytes 0/1/127, quiet 0/1 and two prior OTA states; compared return, OTA state bytes and logger/exit/ACK calls with lower returns controlled",
+    "harnesses": [
+      "build/case-command-20261111/compare_default.py",
+      "build/case-command-20261111/compare_state.py",
+      "build/case-command-20261111/compare_forward.py",
+      "build/case-command-20261111/compare_local_four.py",
+      "build/case-command-20261111/compare_aging_3e.py",
+      "build/case-command-20261111/compare_sensor_14.py",
+      "build/case-command-20261111/compare_aging_3d.py",
+      "build/case-command-20261111/compare_ota_56.py"
+    ]
+  },
+  "verification": {
+    "manifest_check": "g2: 4883 units, 4544 source files, 1 final-link-only unit",
+    "case_compile": "359/359; zero duplicate strong symbols and zero unresolved",
+    "all_compile": "4878/4878 enabled C units; zero failures and zero duplicate strong symbols",
+    "all_strict_links": 7,
+    "all_seven_payload_binary_hashes_unchanged": true,
+    "case_strict_link_bytes": 60184,
+    "case_binary_sha256": "f7135f3a8254111949f55deb2bd092ff9b7ec2e61fada299c0fe2f0916676a84",
+    "case_binary_unchanged": true,
+    "source_bundle_bytes": 4638028,
+    "source_bundle_sha256": "4ded84cd623fd0dafd0633e71481cab92ac2845f8a64dbb3bde7eea8ddf29990",
+    "source_bundle_matches_locked_target": false,
+    "source_completeness_proven": false,
+    "case_build_report": "build/case-command-20261111/sources/report.json",
+    "case_link_report": "build/case-command-20261111/link/link-report.json",
+    "all_build_report": "build/case-command-20261111/all/report.json",
+    "all_link_report": "build/case-command-20261111/bundle/link-report.json"
+  },
+  "limits": [
+    "Controlled logger and event calls verify the command boundary, not physical UART or event-delivery behavior.",
+    "Other active legacy and local binary commands were outside this comparison.",
+    "Overall G2 source completeness remains unverified."
+  ]
+}

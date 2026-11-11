@@ -5,7 +5,7 @@
  * 0x4ea7e4..0x4ea7ff, 0x4eac50..0x4eac5f, 0x4eacb8..0x4eacbf, 0x4eacf0..0x4ead0f,
  * 0x4eb31c..0x4eb33b, 0x4eb494..0x4eb4a3, 0x4eb740..0x4eb7b7, 0x4ebdd4..0x4ebdfb and
  * 0x4ebf1c..0x4ebf1f (shared with 0x4ebf20.. ). The inline "" at 0x4ea254 is the
- * placeholder label text.
+ * default label text.
  *
  * Up to 9 stock records (0x428 bytes each) are pushed by
  * dashboard_async_update_data. The expanded page is a 539x254 vertically
@@ -143,13 +143,13 @@ extern void audio_uart_page_43dfa4(void *obj, uint32_t flag);                   
 extern void audio_uart_page_43f09a(void *obj, int32_t x, int32_t y);            /* lv_obj_set_pos */
 extern void audio_uart_page_43f4c0(void *obj, int32_t w, int32_t h);            /* lv_obj_set_size */
 extern uint32_t audio_uart_page_44104c(uint32_t rgb);                           /* lv_color_hex */
-extern void audio_uart_page_44120e(void *obj, int32_t v, uint32_t sel);         /* pad_top */
-extern void audio_uart_page_44121c(void *obj, int32_t v, uint32_t sel);         /* pad_bottom */
-extern void audio_uart_page_44122a(void *obj, int32_t v, uint32_t sel);         /* pad_left */
-extern void audio_uart_page_441238(void *obj, int32_t v, uint32_t sel);         /* pad_right */
+extern void lv_obj_set_style_pad_top(void *obj, int32_t v, uint32_t sel);         /* pad_top */
+extern void lv_obj_set_style_pad_bottom(void *obj, int32_t v, uint32_t sel);         /* pad_bottom */
+extern void lv_obj_set_style_pad_left(void *obj, int32_t v, uint32_t sel);         /* pad_left */
+extern void lv_obj_set_style_pad_right(void *obj, int32_t v, uint32_t sel);         /* pad_right */
 extern void audio_uart_page_44127e(void *obj, uint32_t color, uint32_t sel);    /* bg_color */
 extern void audio_uart_page_44129e(void *obj, uint32_t opa, uint32_t sel);      /* bg_opa */
-extern void audio_uart_page_44131c(void *obj, int32_t v, uint32_t sel);         /* border_width */
+extern void lv_obj_set_style_border_width(void *obj, int32_t v, uint32_t sel);         /* border_width */
 extern void audio_uart_page_44140e(void *obj, uint32_t color, uint32_t sel);    /* text_color */
 extern void audio_uart_page_44143e(void *obj, const void *font, uint32_t sel);  /* text_font */
 extern void audio_uart_page_44145a(void *obj, uint32_t align, uint32_t sel);    /* text_align */
@@ -165,7 +165,7 @@ extern void audio_terminal_display_status_44ea04(void *obj, int32_t y, uint32_t 
 extern void audio_uart_lv_anim_init_4503d6(g2_lv_anim_t *a);                    /* lv_anim_init */
 extern void audio_uart_lv_anim_values_4506ce(g2_lv_anim_t *a, int32_t start, int32_t end);
 extern void *audio_uart_lv_anim_start_450408(const g2_lv_anim_t *a);            /* lv_anim_start */
-extern int32_t audio_uart_lv_anim_path_450672(const void *a);                   /* lv_anim_path_ease_out */
+extern int32_t lv_anim_path_ease_out(const void *a);                   /* lv_anim_path_ease_out */
 extern void audio_uart_page_event_calculate_489546(g2_lv_point_t *size, const char *text, const void *font,
                                                    int32_t letter_space, int32_t line_space, int32_t max_width,
                                                    uint32_t flag);              /* lv_text_get_size */
@@ -386,10 +386,10 @@ static void log4(uint8_t level, const char *fn, uint32_t line, const char *msg, 
 /* lv_obj_set_style_pad_all, instantiated in this TU. */
 void stock_obj_set_style_pad_all_4e9dd4(void *obj, int32_t v, uint32_t sel)
 {
-    audio_uart_page_44122a(obj, v, sel);
-    audio_uart_page_441238(obj, v, sel);
-    audio_uart_page_44120e(obj, v, sel);
-    audio_uart_page_44121c(obj, v, sel);
+    lv_obj_set_style_pad_left(obj, v, sel);
+    lv_obj_set_style_pad_right(obj, v, sel);
+    lv_obj_set_style_pad_top(obj, v, sel);
+    lv_obj_set_style_pad_bottom(obj, v, sel);
 }
 
 void stock_page_reset_4e9e06(void)
@@ -456,7 +456,7 @@ static void *create_plain_image(void *parent, int32_t w, int32_t h, int32_t x, i
     audio_uart_page_43f4c0(img, w, h);
     audio_uart_page_43f09a(img, x, y);
     audio_uart_page_44129e(img, 0u, 0u);
-    audio_uart_page_44131c(img, 0, 0u);
+    lv_obj_set_style_border_width(img, 0, 0u);
     audio_uart_page_43ded4(img, LV_OBJ_FLAG_ADV_HITTEST);
     audio_uart_page_43dfa4(img, LV_OBJ_FLAG_SCROLLABLE);
     return img;
@@ -481,7 +481,7 @@ void stock_scroll_create_container_4ea00c(g2_stock_container_t *c, void *parent,
     audio_uart_page_43f4c0(c->root, CONTAINER_W, CONTAINER_H);
     audio_uart_page_43f09a(c->root, 0, position_y);
     audio_uart_page_44129e(c->root, 0u, 0u);
-    audio_uart_page_44131c(c->root, 0, 0u);
+    lv_obj_set_style_border_width(c->root, 0, 0u);
     stock_obj_set_style_pad_all_4e9dd4(c->root, 0, 0u);
 
     for (r = 0; r < STOCK_ROWS; r++) {
@@ -494,13 +494,13 @@ void stock_scroll_create_container_4ea00c(g2_stock_container_t *c, void *parent,
         audio_uart_page_44143e(row->name, audio_uart_ring_primary_head_cell, 0u);
         audio_uart_page_44140e(row->name, audio_uart_page_44104c(0xffffffu), 0u);
         audio_uart_page_44129e(row->name, 0u, 0u);
-        audio_uart_page_44131c(row->name, 0, 0u);
+        lv_obj_set_style_border_width(row->name, 0, 0u);
         audio_uart_page_49942e(row->name, empty_text);
 
         row->symbol = create_label(c->root, LV_SIZE_CONTENT, 0x1c, 0, y + 0x22);
         audio_uart_page_44143e(row->symbol, audio_uart_ring_primary_head_cell, 0u);
         audio_uart_page_44129e(row->symbol, 0u, 0u);
-        audio_uart_page_44131c(row->symbol, 0, 0u);
+        lv_obj_set_style_border_width(row->symbol, 0, 0u);
         audio_uart_page_44140e(row->symbol, audio_uart_page_44104c(0xffffffu), 0u);
         audio_uart_page_49942e(row->symbol, empty_text);
 
@@ -516,7 +516,7 @@ void stock_scroll_create_container_4ea00c(g2_stock_container_t *c, void *parent,
         audio_uart_page_44143e(row->price, audio_uart_ring_primary_head_cell, 0u);
         audio_uart_page_44140e(row->price, audio_uart_page_44104c(0xffffffu), 0u);
         audio_uart_page_44129e(row->price, 0u, 0u);
-        audio_uart_page_44131c(row->price, 0, 0u);
+        lv_obj_set_style_border_width(row->price, 0, 0u);
         audio_uart_page_49942e(row->price, empty_text);
 
         row->change = audio_uart_page_499416(c->root);
@@ -529,7 +529,7 @@ void stock_scroll_create_container_4ea00c(g2_stock_container_t *c, void *parent,
         audio_uart_page_44143e(row->change, audio_uart_ring_primary_head_cell, 0u);
         audio_uart_page_44140e(row->change, audio_uart_page_44104c(0xffffffu), 0u);
         audio_uart_page_44129e(row->change, 0u, 0u);
-        audio_uart_page_44131c(row->change, 0, 0u);
+        lv_obj_set_style_border_width(row->change, 0, 0u);
         audio_uart_page_49942e(row->change, empty_text);
     }
 
@@ -539,7 +539,7 @@ void stock_scroll_create_container_4ea00c(g2_stock_container_t *c, void *parent,
         audio_uart_page_43f09a(c->separator[r], 0, r == 0u ? 0x4f : 0xaf);
         audio_uart_page_44127e(c->separator[r], audio_uart_page_44104c(0x222222u), 0u);
         audio_uart_page_44129e(c->separator[r], 0xffu, 0u);
-        audio_uart_page_44131c(c->separator[r], 0, 0u);
+        lv_obj_set_style_border_width(c->separator[r], 0, 0u);
         stock_obj_set_style_pad_all_4e9dd4(c->separator[r], 0, 0u);
     }
     c->data_loaded = 0u;
@@ -774,7 +774,7 @@ void stock_container_move_with_anim_4eb1c0(void *obj, int32_t target_y, int32_t 
     audio_uart_lv_anim_values_4506ce(&a, current, target_y);
     a.exec_cb = stock_scroll_anim_exec_cb_4eb1b2;
     a.completed_cb = stock_container_switch_anim_ready_cb_4eaf76;
-    a.path_cb = audio_uart_lv_anim_path_450672;
+    a.path_cb = lv_anim_path_ease_out;
     g2_stock_scroll.is_animating = 1u;
     a.duration = time_ms;
     (void)audio_uart_lv_anim_start_450408(&a);
@@ -921,7 +921,7 @@ int32_t stock_ext_WidgetPage_Create_4eb7b8(void *parent)
     audio_uart_page_44e3ca(g2_stock_ext_container_frame, LV_DIR_VER);
     audio_uart_page_44e368(g2_stock_ext_container_frame, LV_SCROLLBAR_MODE_OFF);
     audio_uart_page_44129e(g2_stock_ext_container_frame, 0u, 0u);
-    audio_uart_page_44131c(g2_stock_ext_container_frame, 0, 0u);
+    lv_obj_set_style_border_width(g2_stock_ext_container_frame, 0, 0u);
     stock_obj_set_style_pad_all_4e9dd4(g2_stock_ext_container_frame, 0, 0u);
     stock_create_page_dots_4ed12c(parent);
     stock_scroll_create_container_4ea00c(c0, g2_stock_ext_container_frame, 0, 0u);

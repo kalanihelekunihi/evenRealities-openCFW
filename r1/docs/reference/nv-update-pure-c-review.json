@@ -1,0 +1,103 @@
+{
+  "report": "build/sources-goal-r1-nv-update-pure-c/report.json",
+  "units": 821,
+  "application_imports": 69,
+  "import_set_unchanged": true,
+  "manifest_unchanged": true,
+  "verification": {
+    "stock_previous_C_current_C_triples": 432,
+    "null_alias_command_triples": 48,
+    "initialized_short_read_fallbacks": 72,
+    "all_byte_mask_triples": 1024
+  },
+  "actual_cache_integration": {
+    "actual_cached_read_write_dirty_scan_triples": 128
+  },
+  "compiled_defects": [
+    {
+      "defect": "wrong-enable-bit",
+      "rejected": true
+    },
+    {
+      "defect": "wrong-preserve-mask",
+      "rejected": true
+    },
+    {
+      "defect": "wrong-peer-offset",
+      "rejected": true
+    },
+    {
+      "defect": "wrong-peer-marker",
+      "rejected": true
+    },
+    {
+      "defect": "wrong-ack-code",
+      "rejected": true
+    },
+    {
+      "defect": "erase-upper-field-word",
+      "rejected": true
+    },
+    {
+      "defect": "wrong-zero-fallback",
+      "rejected": true
+    },
+    {
+      "defect": "cached-write-handle",
+      "rejected": true
+    }
+  ],
+  "assembly_removal_audit": {
+    "inline_assembly_wrappers_removed": 4,
+    "public_strong_symbols_unchanged": true,
+    "untouched_registry_sections_identical": [
+      ".text.r1_native_nv_dirty_scan",
+      ".text.r1_nv_modules_idle_check",
+      ".rodata.nv_handles",
+      ".r1.nv.sync.ring",
+      ".r1.nv.sync.sdk"
+    ]
+  },
+  "prior_objects_identical": 817,
+  "changed_prior_sources": [
+    "r1/src/application/board/native_kv_device_fields.c",
+    "r1/src/application/runtime/native_nv_update.c"
+  ],
+  "rea_evidence_ids": [
+    "ev_6b4673e85858a03885f67e3432797256acbef9006c66350ca8c6d30e2a2e101e",
+    "ev_4cae1e2f09a08de0b385a81063eb90cab546b737bd93f1b6abb88cb3a31fd9ad",
+    "ev_bb680c16c074faf9b6dae23212c7c6c6dc3c693b426985990abeb387c4ae6328",
+    "ev_2affba4003830fdf2c78d0d1e7f39fdedc099b58b67988f011044a80da80650e"
+  ],
+  "evidence_files": {
+    "build/goal-r1-nv-update-pure-c/verify.py": "0fb52793435de97443040da877b9b3b2fe6c8d366cf4ee94dd1ed59c56835f14",
+    "build/goal-r1-nv-update-pure-c/verification.json": "c7e3dce32adf3446f693e9a4cb820751a1720bf0987dcae1ecf6d71bee5efa0d",
+    "build/goal-r1-nv-update-pure-c/verify-final.log": "4f2252dcd55f6e15e6ae2928ccf588f8a4349b8ea87bee0fae59a12fc8c3f1a8",
+    "build/goal-r1-nv-update-pure-c/cache.py": "cec76408ee576add430944da5249ad20f4caba6fb259c7b559946478edd11f46",
+    "build/goal-r1-nv-update-pure-c/cache.log": "1dae4d183d97f5380a5b3f2861f652e4e3c50f7d5187abd0e9a1ee90d3fad5e5",
+    "build/goal-r1-nv-update-pure-c/cache/verification.json": "37ed33709eb5c453c569a2a9f2bc659d10bcc57dc5dc38803407727cccf9c6a7",
+    "build/goal-r1-nv-update-pure-c/defects.py": "ff004b35163e42a579e40a012467569894cf5a6ba12508159724b9a64b47e88f",
+    "build/goal-r1-nv-update-pure-c/defects.json": "93fdd9ce70fc22de917c83287a1b02520dec72bc1e256ed16022bc174fe630a4",
+    "build/goal-r1-nv-update-pure-c/audit.py": "12d87ea740151e319814d0925550e71414fbcc3b0792eacc39842015534a05f7",
+    "build/goal-r1-nv-update-pure-c/audit.json": "ae7f08e41aadd7519e194b4932e9d78c3212395298398b661028ed4d48495463",
+    "build/goal-r1-nv-update-pure-c/update-before.c": "18886304e6d8c34dad9f4b96fa0e219fdcfc1faa4fce8390c7ae53d860114a5e",
+    "build/goal-r1-nv-update-pure-c/fields-before.c": "a0167526020280b75427469cc987ff61c91dae0ba923fe7e94ad8afd4c8c8ec0",
+    "build/goal-r1-nv-update-pure-c/native_nv_update.c.diff": "fcbb1dc70f311e5448ed2d9327c5ba96b0eeee9c280fe48bd2d1b9b1f8d9187d",
+    "build/goal-r1-nv-update-pure-c/native_kv_device_fields.c.diff": "1cc336bee759c538a68399432f2c4eee5c9232f5cddffb39594c8d684f893414",
+    "build/goal-r1-nv-update-pure-c/rea.json": "42a2006918ce8aa1ff5a018e930c061cbe281ef284fd1ab23fb1e20138bef9a4",
+    "build/goal-r1-nv-update-pure-c/document.py": "b5dfac36d79a13341ef826bbaad6dfb2b12f83e8a37670202b7504767bd4bb8a",
+    "build/sources-goal-r1-nv-update-pure-c/report.json": "29a12ed122824d318101270aac14d63042ca5db510a3232e0df7dcc068e78983",
+    "r1/src/sources.json": "3eda54d488f7269985d5fa6367678f0478e749bcb062033642de58d168110b4f",
+    "r1/src/application/runtime/native_nv_update.c": "50b61bfecb66e026fc5879b0d3a41b1d8bfca774a4a132f28e8636d769c876cc",
+    "r1/src/application/board/native_kv_device_fields.c": "91e7386cb6703a972330a45e95a2b1e188d88f01c88b3d0c9d9986e2895533ee",
+    "r1/src/application/board/native_kv_class.c": "e9791d39b7a9b5380b1dbce3c7422be921131abbd0e09c3387ea3d4b9930bf6e"
+  },
+  "deliberate_change": "Failed or short read output retains initialized zero bytes instead of native private stack residue.",
+  "limitations": [
+    "Ordinary C API; private stack addresses and incidental caller-saved argument registers excluded.",
+    "Input objects cannot designate a callee-private stack frame. Public peer-address aliases and null views are exercised.",
+    "Direct tests model cached read/write and dirty scan at its proven constant return one; native previous/current C compared.",
+    "Integration executes actual cached read/write, memcpy and dirty scan; port critical callbacks, persistence writes/flush and protocol reply modeled.",
+    "No physical flash persistence, final application link, startup placement or device boot proof."
+  ]
+}

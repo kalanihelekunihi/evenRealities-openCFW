@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "report": "build/sources-goal-r1-record-read-consolidation-c/report.json",
+  "report_sha256": "b2ee411a64bc90f2d27ea3cc8bd4498a19492f690fac4b1b51ae1566960215af",
+  "manifest_sha256": "d8dcfc89dfe3cb8c669f92ec5b193e38988960a270c3b7b402dcac78ef3b2c67",
+  "verification": {
+    "cases": {
+      "modeled_direct": 520,
+      "actual_kv_direct": 80,
+      "actual_callback": 384,
+      "canonical": 128,
+      "profile": 128
+    },
+    "stock_c_match": true,
+    "explicit_three_fallback_words": true,
+    "actual_kv_memcpy_and_existing_callback_executed": true,
+    "canonical_getter_and_profile_feature_consumer_stock_compared": true,
+    "getter_algorithm_shared": true,
+    "unaligned_destinations_null_partial_and_nonwriting_reads": true,
+    "void_return_caller_clobbered_outputs_and_private_frames_excluded": true,
+    "physical_flash_unverified": true
+  },
+  "defects": {
+    "detected": [
+      "wrong-wrapper-fallback",
+      "zero-canonical-fallback",
+      "short-canonical-read",
+      "wrong-last-word",
+      "wrong-upper-return"
+    ]
+  },
+  "audit": {
+    "unchanged_prior_object_hashes": 796,
+    "changed_objects": [
+      [
+        "r1-bootloader",
+        "{gen}/r1_startup_vectors.S"
+      ],
+      [
+        "r1-bootloader",
+        "{gen}/r1_uecc.c"
+      ],
+      [
+        "r1-application",
+        "r1/src/application/runtime/native_record_read.c"
+      ]
+    ],
+    "canonical_profile_object_unchanged": true,
+    "void_wrapper_only_references_canonical_getter": true,
+    "generated_boot_allocated_bytes_and_relocations_unchanged": true,
+    "imports_unchanged": true
+  },
+  "rea_bytes": [
+    {
+      "name": "getter",
+      "evidence_id": "ev_cd7c09449b914e9088f5706ebf645e224cb8c6358b7869abf1f90178f880b3c9",
+      "address": "0x735e0",
+      "length": 36,
+      "bytes_sha256": "6954c41d8ab4d58343d861120dedb309489405f5cdebd780e74e7315f303d789",
+      "matches_locked_raw": true
+    },
+    {
+      "name": "profile",
+      "evidence_id": "ev_0f4acce0fc280fc76486ae88228aef1941098e9dd58378b87e9c37b84ab35e2c",
+      "address": "0x6abf8",
+      "length": 172,
+      "bytes_sha256": "34baef6e13d111b9a6cfd104654509647411fb75ec69a3a66ec39d91d5437c97",
+      "matches_locked_raw": true
+    }
+  ],
+  "raw_application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "strict_bootloader_link_report": "build/goal-r1-record-read-consolidation-c/boot-link/report.json",
+  "strict_bootloader_link_report_sha256": "3e46ed925ce60ce202e6fd55d0eb5295754df5a53f6f278d8aae51daeb41110e",
+  "evidence_files": {
+    "build/goal-r1-record-read-consolidation-c/verify.py": "88179d5574620406e0a5c19ca8f145dd01c4bac57877abd77c4a88bc995d9f12",
+    "build/goal-r1-record-read-consolidation-c/defects.py": "3050e4c8c57c752ca461cd0618d705c06f2170975ee593eb1f0dd5d6965e9b49",
+    "build/goal-r1-record-read-consolidation-c/audit.py": "70110aa0655e88869723f81e5bb4bccdecb20e3d142a1c205d5ea474d34e6c46",
+    "build/goal-r1-record-read-consolidation-c/probe.elf": "cda8d56bccd73bad1fd95ef3bc26ad20bd485a7e64a605ed70ca67d3a2bfd05d",
+    "build/goal-r1-record-read-consolidation-c/verify-final.log": "1161ea8f5acbc7149e3ccee6f1c51d622fda3674a05c91a8ab1065247417ce40",
+    "build/goal-r1-record-read-consolidation-c/verification.json": "ac8514d061529d41a49d4dcf8f1408c7cff7c052039e0ccd80ef25ec9341a166",
+    "build/goal-r1-record-read-consolidation-c/defects.json": "f22ce71493a2abd955d4e90c267abb35f5bf01d8af5c6ec417b86fb257c209ef",
+    "build/goal-r1-record-read-consolidation-c/rea-getter.json": "066852a59b976acfd5afed069b68d387eafc53a2b1fa3784f1f7381f8285b1c5",
+    "build/goal-r1-record-read-consolidation-c/rea-profile.json": "245ffa046170b2da5986ada63c63bc7e213bef0f97e33830304734bff1c80f80"
+  },
+  "limitations": [
+    "Cached KV/memcpy execute; critical-section callbacks modeled.",
+    "Settings callback logging disabled and later update boundary modeled.",
+    "Warm FP with default FPSCR; selected ARM unaligned-output behavior only.",
+    "Private frames/aliases, void-entry incidental outputs, faults/concurrency excluded.",
+    "No full application link or physical persistence validation.",
+    "Global source check retains unrelated G2 manifest failure."
+  ]
+}

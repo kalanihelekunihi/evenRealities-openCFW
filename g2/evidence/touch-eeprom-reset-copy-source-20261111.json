@@ -1,0 +1,49 @@
+{
+  "schema": 1,
+  "target": "G2 touch EEPROM reset-copy C ownership",
+  "stock_component": "g2/blobs/official/g2-2.2.6.10/firmware_touch.bin",
+  "stock_component_sha256": "0d13d8bb1337bf22989dc16143e3d5eca29a31cc1ed753ff624668750ea9470d",
+  "stock_ram_address": "0x200004c0",
+  "stock_flash_address": "0x0000b58c",
+  "stock_bytes_hex": "000100000002010100000000",
+  "source_object": "g2/src/touch/reset-layout/reset_owned_data.c",
+  "source_object_sha256": "e636c88031c023e07046b13aa2aefb68a5f2059d74d0e574a84e863078a3343c",
+  "typed_object": "touch_reset_eeprom_configuration",
+  "typed_object_bytes": 12,
+  "source_manifest": "g2/src/sources.json",
+  "source_manifest_sha256": "b36f7d452ff94e95ac2abc2be2a2c6a63ef6d0457e04a03ba75bb7ba9d585f9f",
+  "verified_link": {
+    "focused_source_report": "build/g2-touch-eeprom-owned-source-20261111/report.json",
+    "focused_source_report_sha256": "8bd10afa1549229bcfdecc576c5a7741b8a4ad121c1b18eb6f07ef6d0f926559",
+    "compiled_units": 101,
+    "compile_failures": 0,
+    "duplicate_strong_symbols": 0,
+    "focused_link_report": "build/g2-touch-eeprom-owned-link-20261111/link-report.json",
+    "focused_link_report_sha256": "e4fc9632f52e9c3950a4e50487f82696dcc7001cf6c6c7525986b2242b95e754",
+    "touch_binary_bytes": 28844,
+    "touch_binary_sha256": "802148f0cd99218d5d66387e1fc6cdf844229aef4170006373679cb1c7e47b63",
+    "touch_binary_identical_to_previous_candidate": true,
+    "reset_copy_bytes_match_stock": true
+  },
+  "qualification": "The typed mutable EEPROM configuration now owns the first 12 reset-copied bytes in the linked touch image. The whole touch application remains nonidentical to stock; this does not prove firmware completeness or hardware behavior.",
+  "full_g2_verification": {
+    "source_report": "build/g2-touch-eeprom-owned-full-source-20261111/report.json",
+    "source_report_sha256": "de4030a1163e32016055a27b506862a753f0422ee08eb78ffe3472604b1da478",
+    "compiled_units": 4884,
+    "compile_failures": 0,
+    "duplicate_strong_symbols": 0,
+    "strict_link_report": "build/g2-touch-eeprom-owned-full-link-20261111/link-report.json",
+    "strict_link_report_sha256": "464564ed052c4b85510ed547cfd779bbf5c4a0e144a65759879d0e64aba6263d",
+    "linked_payloads": [
+      "g2-apollo-bootloader",
+      "g2-apollo-main",
+      "g2-case",
+      "g2-codec-a",
+      "g2-codec-b",
+      "g2-em9305",
+      "g2-touch"
+    ],
+    "strict_link_passed": true,
+    "source_completeness_proven": false
+  }
+}

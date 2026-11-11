@@ -1,0 +1,161 @@
+{
+  "schema_version": 1,
+  "scope": "R1 sleep header occupancy scan and delete-all using the existing C erase core",
+  "report": "build/sources-goal-r1-sleep-delete-c/report.json",
+  "comparison_report": "build/sources-goal-r1-sleep-erase-c/report.json",
+  "audit": {
+    "compiled_units": 863,
+    "application_imports": 63,
+    "bootloader_imports": 22,
+    "unchanged_prior_nongenerated_objects": 852,
+    "changed_prior_nongenerated_objects": [
+      "r1/src/application/runtime/native_sleep_record.c"
+    ],
+    "normal_object_equals_direct_partial_and_parent_probes": true,
+    "manifest_and_source_plan_unchanged": true,
+    "new_mutable_persistent_bytes": 0,
+    "closed_import": "r1_sleep_storage_delete_all",
+    "prior_sections": {
+      "prior_allocated_sections_and_normalized_relocations_identical": [
+        ".text.r1_sleep_record_store",
+        ".ARM.exidx.text.r1_sleep_record_store",
+        ".text.r1_event_service_0008dc94",
+        ".ARM.exidx.text.r1_event_service_0008dc94",
+        ".text.r1_sleep_sector_count",
+        ".ARM.exidx.text.r1_sleep_sector_count",
+        ".text.r1_sleep_erase_all",
+        ".ARM.exidx.text.r1_sleep_erase_all",
+        ".text.r1_event_service_0008dd88",
+        ".ARM.exidx.text.r1_event_service_0008dd88"
+      ],
+      "prior_empty_text_section_only_growth": true,
+      "prior_source_text_unchanged": true,
+      "manifest_unchanged": true
+    }
+  },
+  "direct": {
+    "stock_C_comparisons": 14680,
+    "native_instruction_bytes_executed": {
+      "r1_sleep_storage_valid_count": 106,
+      "r1_sleep_storage_delete_all": 80
+    },
+    "valid_count_extent108_reachable106_unreachable_alignment_NOP2": true,
+    "all_256_sector_counts_byte_record_count_wrap_and_two_empty_markers": true,
+    "partial_failed_reads_retain_header_and_match_stock": true,
+    "actual_memory_clear_and_erase_core_execute": true,
+    "live_partition_device_base_and_size_mutations": true,
+    "private_frame_void_registers_APSR_and_physical_NOR_unverified": true
+  },
+  "variable_partial_reads": {
+    "variable_partial_read_stock_C_comparisons": 480,
+    "per_call_prefix_sequence": [
+      24,
+      8,
+      12,
+      0,
+      16,
+      1
+    ],
+    "header_carry_and_partial_failure_behavior_match": true
+  },
+  "actual_clear_all_chain": {
+    "stock_C_clear_all_sleep_scan_and_erase_comparisons": 972,
+    "actual_cache_accessors_database_owner_memclear_sleep_scan_and_erase": true,
+    "FAL_time_logging_sync_record_and_FlashDB_clean_modeled": true
+  },
+  "compiled_defects_rejected": [
+    {
+      "defect": "short-slot-scan",
+      "rejected": true,
+      "log": "build/goal-r1-sleep-delete-c/short-slot-scan/test.log"
+    },
+    {
+      "defect": "wrong-header-stride",
+      "rejected": true,
+      "log": "build/goal-r1-sleep-delete-c/wrong-header-stride/test.log"
+    },
+    {
+      "defect": "wide-record-count",
+      "rejected": true,
+      "log": "build/goal-r1-sleep-delete-c/wide-record-count/test.log"
+    },
+    {
+      "defect": "wrong-empty-condition",
+      "rejected": true,
+      "log": "build/goal-r1-sleep-delete-c/wrong-empty-condition/test.log"
+    },
+    {
+      "defect": "clear-header-per-read",
+      "rejected": true,
+      "log": "build/goal-r1-sleep-delete-c/clear-header-per-read/test.log"
+    },
+    {
+      "defect": "reload-latched-sector-base",
+      "rejected": true,
+      "log": "build/goal-r1-sleep-delete-c/reload-latched-sector-base/test.log"
+    },
+    {
+      "defect": "abort-on-read-error",
+      "rejected": true,
+      "log": "build/goal-r1-sleep-delete-c/abort-on-read-error/test.log"
+    },
+    {
+      "defect": "unconditional-erase",
+      "rejected": true,
+      "log": "build/goal-r1-sleep-delete-c/unconditional-erase/test.log"
+    }
+  ],
+  "contract": [
+    "Snapshot byte-truncated sector count; zero24-byte header once; for each sector snapshot live base+sector*4096+16, then read up to eight headers with stride24. Reload device/read callback for every record.",
+    "Stop the current sector when either word8 or word12 is FFFFFFFF, then continue next sector. No CRC/content validation is implied.",
+    "Count accepted headers modulo256; header contents persist across full/partial/failed reads, whose return statuses are ignored as stock.",
+    "Delete-all scans, erases all sectors only for a nonzero byte count, then logs captured count. Erase uses a fresh sector-count snapshot.",
+    "Reuse existing sleep context, C erase loop, actual EABI clear and upstream memset; no duplicate persistent state."
+  ],
+  "limits": [
+    "The scan extent is108 bytes with106 reachable instruction bytes; the two-byte alignment NOP at0x5b34a has no reachable predecessor from the entry. Delete-all covers80 bytes.",
+    "Direct FAL/logging boundaries modeled. Actual-chain fixture executes clear-all, six cache accessors, database getter/owner, memory clear, sleep scan/delete and erase core; FlashDB cleaning, FAL, time/logging and sync-record writes modeled.",
+    "Preserved stock failed-read/stale-header and count-wrap behavior is compatibility evidence, not a reliability guarantee.",
+    "Saved integer/FP registers, masks and caller-stack guards checked; private frames, incidental void registers, APSR, concurrency/faults excluded.",
+    "Physical NOR reads/erase, power-loss behavior, final source linking and boot remain unverified. Other sleep-storage assembly remains separate work."
+  ],
+  "evidence_files": {
+    "build/sources-goal-r1-sleep-delete-c/report.json": "a996207229be8fb382960d66083c9a59138759de1a9750a63abfb398e44216b1",
+    "build/sources-goal-r1-sleep-erase-c/report.json": "e2ffcf91165367c8e980645e3394a72facafa3e92d91f623be97ef3dab22e8c3",
+    "r1/src/application/runtime/native_sleep_record.c": "3c45ef686b843a7645336643f82b6440612b101d2a2907891c9353f1ffd5e2d6",
+    "r1/src/application/board/native_battery_memory.h": "e646c981681787c87d8088f663239c9006beb4e4c1827e95854093f0628528b6",
+    "r1/src/application/runtime/native_health_clear.c": "f4c2857da65b3e77e1b3906c0959399f3f0cb28a56c164e67232fb03111bcc01",
+    "r1/src/sources.json": "6ea6ab6f16e97b34b73ee1fb683c7c49eb7228bf29fdbdb21f5aded6d4d13380",
+    "tools/build/source-plan.json": "eeb516e31b3310fb0718f36908977f8125723f7c5e0e86cd6744395826259a4d",
+    "build/goal-r1-sleep-delete-c/manifest-before.json": "6ea6ab6f16e97b34b73ee1fb683c7c49eb7228bf29fdbdb21f5aded6d4d13380",
+    "build/goal-r1-sleep-delete-c/source-before.c": "db25b5f7fdd9976ad4d31c537f400803c08db4239614a237c09330686b612049",
+    "build/goal-r1-sleep-delete-c/audit.py": "0a613f3ce43bf9017b1497f6594239724319ff29c51129364557d987899f99b5",
+    "build/goal-r1-sleep-delete-c/object-audit.json": "de985a7f88c2549ab823a662094ae36bfc1aa17f3d382fa777d7e1434f7e2f0a",
+    "build/goal-r1-sleep-delete-c/record.py": "54b0061af33253233caa98bf0767594e59c7f44698bb7f632e57b4fe8684d5c2",
+    "build/goal-r1-sleep-delete-c/rea-valid.json": "dfe8a276641b9608a77fc1a6f98e10172eb67d42e4523014660aa94d826ad6e0",
+    "build/goal-r1-sleep-delete-c/rea-delete.json": "7f93444fb9877e44c5cddcd1143edd3be53a8d270a233267d38ae401044bfb6a",
+    "build/goal-r1-sleep-delete-c/verify.py": "83bbeefe57d7b55d60ce2efff866f6876e58b2b7c0821e977e170dc39355b06b",
+    "build/goal-r1-sleep-delete-c/results.json": "45e122f69cb2bac5247bdd5656a676550f1ff61ff83e7c00303c0ecb15c5f5b0",
+    "build/goal-r1-sleep-delete-c/verification.log": "76f1962193a4480f44146962421eb8354440e64f8847c1a1c590f247bb2b5e2b",
+    "build/goal-r1-sleep-delete-c/source.o": "9a2e7e78474a0b63bcb6ec1c246fc869289bf2af3413646e76b159aa319c5906",
+    "build/goal-r1-sleep-delete-c/source.elf": "39aa7e222b6386389ec4e40d9b2a8801f6d964502a2afee71833598fae844626",
+    "build/goal-r1-sleep-delete-c/make_partial.py": "70cd4076ad6e176c4a10385c2c9490a7a2c8f4b950968910a1038d608a18216f",
+    "build/goal-r1-sleep-delete-c/partial.py": "3fc1c1978e8c13e463247bdc10eec4784d7ce9492954d02be6932768c6d4e2c5",
+    "build/goal-r1-sleep-delete-c/partial/results.json": "b62dfe992288cdfc74b42805ad3734ae7910d7f5d04875eb9af860050c11a94a",
+    "build/goal-r1-sleep-delete-c/partial.log": "491d8b7db65380e7d50c5db2cd85e374795728fcf4179a2ba3c49ab51a8301f2",
+    "build/goal-r1-sleep-delete-c/partial/source.elf": "39aa7e222b6386389ec4e40d9b2a8801f6d964502a2afee71833598fae844626",
+    "build/goal-r1-sleep-delete-c/make_pipeline.py": "fadb2130b9384c2f6443ff544435145154ed7510689def3fcd76803907b90062",
+    "build/goal-r1-sleep-delete-c/pipeline.py": "8b045a26de446faf0cb97a84612b58dcdbeb558812505f5e2237880cc90a43cd",
+    "build/goal-r1-sleep-delete-c/pipeline/results.json": "7b7fe338f273af901d13c83952c51f0ceafde9224a0fd519781dccd8f65265c9",
+    "build/goal-r1-sleep-delete-c/pipeline.log": "f227fe544c7fd3941de62ee65e1ccde6e5dd1e31c9b88d1e2d55cf5ce0674505",
+    "build/goal-r1-sleep-delete-c/pipeline/source.o": "75b9797d7181f8b4dbfe74d518673f6f951392314b5567379fcbdd90715517be",
+    "build/goal-r1-sleep-delete-c/pipeline/sleep.o": "9a2e7e78474a0b63bcb6ec1c246fc869289bf2af3413646e76b159aa319c5906",
+    "build/goal-r1-sleep-delete-c/pipeline/source.elf": "c00318fe7d7f7d9919b7612ca8e71bd59bf7f8136df8e3fd4bcba873b8e7fadf",
+    "build/goal-r1-sleep-delete-c/negative.py": "bdab5b16b241d323e01fc683cc68ea32e1db3a8c54fc0ee3c51c689ab9808a86",
+    "build/goal-r1-sleep-delete-c/negative-verify.py": "65feb09a7ee60b23289924ba71587b8db3ed7521ac56d24ea89ce5d7429d906d",
+    "build/goal-r1-sleep-delete-c/negative.json": "83910fefc596bd14dabe2b8ed988ffed2691bdd338f575e240599400a54404d6",
+    "build/goal-r1-sleep-delete-c/negative.log": "d935d3f8dc9512f382beb0f95c81e65d4f5f86174e3cd0e4f05e6f3bc618860b",
+    "build/goal-r1-sleep-delete-c/build.log": "6e9faa4914c55eb305b143c4d93504d51c8b8b811daab0509a36dd3e9e0756e8",
+    "build/goal-r1-sleep-delete-c/sources-check.log": "c56719af1d0b2d08393a257d3e2022d40896a70239925ecc83fc942850eca238"
+  }
+}

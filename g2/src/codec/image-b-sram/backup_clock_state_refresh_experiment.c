@@ -4,6 +4,7 @@
  * invented null default or hardware result is supplied here.
  */
 #include <stdint.h>
+#include "../csky_ops.h"
 
 void gx8002_image_b_clock_state_refresh_10003b08(void *state)
 {
@@ -49,7 +50,7 @@ void gx8002_image_b_clock_state_refresh_10003b08(void *state)
     }
 
     uint32_t state_word;
-    __asm__ volatile ("ld.w %0, (%1, 0)" : "=r"(state_word) : "r"(state) : "memory");
+    state_word = *csky_word_ptr((uintptr_t)state);   /* also when state is NULL, as stock */
     if (state_word == 1u) {
         while ((reg[0x98u / 4u] & 8u) == 0u) { }
     }

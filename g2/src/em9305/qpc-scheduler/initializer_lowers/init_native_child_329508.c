@@ -1,20 +1,9 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_329508\n"
-".type opencfw_em9305_child_329508,@function\n"
-"opencfw_em9305_child_329508:\n"
-"L329508:\n"
-"add r0,r0,635\n"
-"L32950c:\n"
-"ldb_s r0,[r0,0]\n"
-"L32950e:\n"
-"sub r0,r0,0x2\n"
-"L329510:\n"
-"extb_s r0,r0\n"
-"L329512:\n"
-"j_s.d [blink]\n"
-"L329514:\n"
-"setlo r0,r0,0x3\n"
-".size opencfw_em9305_child_329508,.-opencfw_em9305_child_329508\n"
-);
+/* Stock 0x329508: returns (uint8_t)(byte[r0+635] - 2) < 3.
+ * Converted from the lowered ARC asm; compiled with the g2-em9305-1 profile (-Os) and the
+ * disassembly diffed against the stock lowering: identical, or differing only in delay-slot
+ * scheduling / a redundant zero-extension / absolute-address ld/st forms (reviewed by hand). */
+#include <stdint.h>
+#define B8(a)  (*(volatile uint8_t  *)(uintptr_t)(a))
+#define W32(a) (*(volatile uint32_t *)(uintptr_t)(a))
+uint32_t opencfw_em9305_child_329508(uint32_t a)
+{ return (uint8_t)(B8(a + 635u) - 2u) < 3u; }

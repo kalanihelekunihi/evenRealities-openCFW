@@ -1,27 +1,14 @@
-/* Complete native helper; DSP accumulator and delay slot effects preserved. */
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_dispatch_child_317a84\n"
-".type opencfw_em9305_dispatch_child_317a84,@function\n"
-"opencfw_em9305_dispatch_child_317a84:\n"
-"L317a84:\n"
-"ldb_s r3,[r2,0x1]\n"
-"L317a86:\n"
-"stb_s r3,[r0,0]\n"
-"L317a88:\n"
-"ldb_s r3,[r2,0x2]\n"
-"L317a8a:\n"
-"ldb_s r0,[r2,0x3]\n"
-"L317a8c:\n"
-"asl_s r0,r0,0x8\n"
-"L317a8e:\n"
-"add_s r2,r0,r3\n"
-"L317a90:\n"
-"mov_s r0,4\n"
-"L317a92:\n"
-"j_s.d [blink]\n"
-"L317a94:\n"
-"sth_s r2,[r1,0]\n"
-".size opencfw_em9305_dispatch_child_317a84,.-opencfw_em9305_dispatch_child_317a84\n"
-);
+/* Stock 0x317a84: copies byte c[1] to a[0] and the little-endian halfword c[2..3] to *b; returns 4.
+ * Converted from the lowered ARC asm; compiled with the g2-em9305-1 profile (-Os) and the
+ * disassembly diffed against the stock lowering: identical, or differing only in delay-slot
+ * scheduling / a redundant zero-extension / absolute-address ld/st forms (reviewed by hand). */
+#include <stdint.h>
+#define B8(a)  (*(volatile uint8_t  *)(uintptr_t)(a))
+#define H16(a) (*(volatile uint16_t *)(uintptr_t)(a))
+#define W32(a) (*(volatile uint32_t *)(uintptr_t)(a))
+uint32_t opencfw_em9305_dispatch_child_317a84(uint32_t a,uint32_t b,uint32_t c)
+{
+  B8(a) = B8(c + 1u);
+  H16(b) = (uint16_t)((B8(c + 3u) << 8) + B8(c + 2u));
+  return 4u;
+}

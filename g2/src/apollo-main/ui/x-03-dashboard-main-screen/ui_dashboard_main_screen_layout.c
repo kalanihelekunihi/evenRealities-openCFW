@@ -41,10 +41,10 @@ extern int32_t g2_dashboard_tile_index_20074bac;                       /* RAM 0x
 extern uint32_t g2_dashboard_ext_index_20074bb0;                       /* RAM 0x20074bb0 */
 extern int32_t g2_dashboard_last_saved_tile;                           /* RAM 0x20074bb4 */
 
-extern void audio_uart_page_44120e(void *obj, int32_t v, uint32_t sel); /* pad_top */
-extern void audio_uart_page_44121c(void *obj, int32_t v, uint32_t sel); /* pad_bottom */
-extern void audio_uart_page_44122a(void *obj, int32_t v, uint32_t sel); /* pad_left */
-extern void audio_uart_page_441238(void *obj, int32_t v, uint32_t sel); /* pad_right */
+extern void lv_obj_set_style_pad_top(void *obj, int32_t v, uint32_t sel); /* pad_top */
+extern void lv_obj_set_style_pad_bottom(void *obj, int32_t v, uint32_t sel); /* pad_bottom */
+extern void lv_obj_set_style_pad_left(void *obj, int32_t v, uint32_t sel); /* pad_left */
+extern void lv_obj_set_style_pad_right(void *obj, int32_t v, uint32_t sel); /* pad_right */
 extern void *aeabi_memset_43c0e4(void *dst, uint32_t len, int32_t value);
 extern uint32_t audio_log_flags(void); /* 0x43d0ce */
 extern void audio_log_extended(uint8_t, const char *, const char *, const char *, uint32_t,
@@ -67,10 +67,10 @@ static const char geo_short[] =
 /* lv_obj_set_style_pad_all, inlined copy in this file. */
 void dashboard_obj_set_style_pad_all_4e75b0(void *obj, int32_t v, uint32_t sel)
 {
-    audio_uart_page_44122a(obj, v, sel);
-    audio_uart_page_441238(obj, v, sel);
-    audio_uart_page_44120e(obj, v, sel);
-    audio_uart_page_44121c(obj, v, sel);
+    lv_obj_set_style_pad_left(obj, v, sel);
+    lv_obj_set_style_pad_right(obj, v, sel);
+    lv_obj_set_style_pad_top(obj, v, sel);
+    lv_obj_set_style_pad_bottom(obj, v, sel);
 }
 
 void dashboard_apply_layout_4e75e2(const g2_dashboard_layout_t *layout)

@@ -29,14 +29,7 @@ static void wh(uintptr_t p,uint16_t v){*(volatile uint16_t *)p=v;}
 static void wb(uintptr_t p,uint8_t v){*(volatile uint8_t *)p=v;}
 static uint32_t mpywhl_327de8(uint32_t a,uint32_t b)
 {
-#ifdef __arc__
-    uint32_t result;
-    __asm__ volatile("mpywhl %0,%1,%2":"=r"(result):"r"(a),"r"(b):
-        "r58","r59","memory");
-    return result;
-#else
-    return a*(uint32_t)(int32_t)(int16_t)b;
-#endif
+    return (uint32_t)a*(uint32_t)(int32_t)(int16_t)b;
 }
 
 /* Native 0x327de8..0x327fe0. The stock frame contains one 8-byte

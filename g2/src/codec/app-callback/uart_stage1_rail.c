@@ -16,10 +16,7 @@ void gx8002_uart_stage1_railcfg(void)
     clock[0x10 / 4] = 0;
     clock[0x20 / 4] = 1;
     const int32_t rate = gx8002_uart_stage1_pmu_clock_rate(0x17u);
-    int32_t quotient;
-    const int32_t million = 1000000;
-    __asm__ volatile("divs %0, %1, %2" : "=r"(quotient)
-                     : "r"(rate), "r"(million) : "cc");
+    const int32_t quotient = rate / 1000000;  /* divs: signed, divisor constant */
     clock[0x24 / 4] = (uint32_t)(quotient - 1);
     clock[0x28 / 4] = 0;
     clock[0x10 / 4] = 2;

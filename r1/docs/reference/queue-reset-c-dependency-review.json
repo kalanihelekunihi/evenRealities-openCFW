@@ -1,0 +1,133 @@
+{
+  "execution": {
+    "passed": 6944,
+    "executions": 13888,
+    "actual_list_initialization": true,
+    "critical_and_scheduler_boundaries_modeled": true,
+    "pendSV_sev_dsb_isb_order": true,
+    "logical_assert_fault_checked": true,
+    "source_report": "build/sources-goal-r1-queue-reset-c/report.json",
+    "callback_stack_depths": {
+      "stock": [
+        -24
+      ],
+      "C": [
+        -16
+      ]
+    },
+    "source_bytes": 166,
+    "limitations": [
+      "Critical entry/exit and event-list removal modeled; actual native/C list initialization executes",
+      "Queue state and boundary snapshots compared; ordinary internal memory access order and private frames excluded",
+      "Assertion checks mask/address/width/value only; full processor fault and exception state unverified",
+      "Physical scheduling, interrupts, sleep/wake and concurrency unverified",
+      "No byte qualification"
+    ]
+  },
+  "negative_controls": {
+    "skip-yield": {
+      "rejected": true,
+      "case": [
+        8,
+        4,
+        0,
+        1,
+        1,
+        0
+      ],
+      "stderr": "arm-none-eabi-ld: warning: /Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-queue-reset-c/r1/r1-application/third-party__upstream__freertos-kernel__list.c.o uses 32-bit enums yet the output is to use variable-size enums; use of enum values across objects may fail\narm-none-eabi-ld: warning: (vPortEnterCritical): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-reset-c/skip-yield.o\narm-none-eabi-ld: warning: (xTaskRemoveFromEventList): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-reset-c/skip-yield.o\narm-none-eabi-ld: warning: (vPortExitCritical): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-reset-c/skip-yield.o\nTraceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-queue-reset-c/reject-skip-yield.py\", line 62, in <module>\n    assert a(*case)==b(*case)\n                     ~^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-queue-reset-c/reject-skip-yield.py\", line 57, in run\n    assert events==([['PendSV',0x10000000,64],['SEV',64],['DSB',64],['ISB',64]] if expected else []),events\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: []\n"
+    },
+    "new-queue-lists": {
+      "rejected": true,
+      "case": [
+        8,
+        4,
+        0,
+        0,
+        0,
+        0
+      ],
+      "stderr": "arm-none-eabi-ld: warning: /Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-queue-reset-c/r1/r1-application/third-party__upstream__freertos-kernel__list.c.o uses 32-bit enums yet the output is to use variable-size enums; use of enum values across objects may fail\narm-none-eabi-ld: warning: (vPortEnterCritical): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-reset-c/new-queue-lists.o\narm-none-eabi-ld: warning: (xTaskRemoveFromEventList): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-reset-c/new-queue-lists.o\narm-none-eabi-ld: warning: (vPortExitCritical): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-reset-c/new-queue-lists.o\nTraceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-queue-reset-c/reject-new-queue-lists.py\", line 62, in <module>\n    assert a(*case)==b(*case)\n           ^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    "missing-counter-clear": {
+      "rejected": true,
+      "case": [
+        8,
+        4,
+        1,
+        0,
+        0,
+        0
+      ],
+      "stderr": "arm-none-eabi-ld: warning: /Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-queue-reset-c/r1/r1-application/third-party__upstream__freertos-kernel__list.c.o uses 32-bit enums yet the output is to use variable-size enums; use of enum values across objects may fail\narm-none-eabi-ld: warning: (vPortEnterCritical): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-reset-c/missing-counter-clear.o\narm-none-eabi-ld: warning: (vPortExitCritical): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-reset-c/missing-counter-clear.o\narm-none-eabi-ld: warning: (xTaskRemoveFromEventList): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-reset-c/missing-counter-clear.o\nTraceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-queue-reset-c/reject-missing-counter-clear.py\", line 62, in <module>\n    assert a(*case)==b(*case)\n           ^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    }
+  },
+  "audit": {
+    "unchanged_existing_function_bodies": [
+      "prvGetDisinheritPriorityAfterTimeout",
+      "prvInitialiseMutex",
+      "prvIsQueueEmpty",
+      "prvUnlockQueue",
+      "ulPortRaiseBASEPRI",
+      "xQueueCreateMutex",
+      "xQueueCreateMutexStatic",
+      "xQueueGiveFromISR",
+      "xQueueGiveMutexRecursive",
+      "xQueueSemaphoreTake",
+      "xQueueTakeMutexRecursive"
+    ],
+    "new_strong_symbol": "xQueueGenericReset",
+    "removed_imports": [
+      "xQueueGenericReset"
+    ],
+    "added_imports": []
+  },
+  "normal_build": {
+    "units": 573,
+    "application_imports": 196,
+    "bootloader_imports": 34,
+    "failures": 0,
+    "duplicate_strong_symbols": 0
+  },
+  "qualification": {
+    "compiled": 5,
+    "selected_regions": 2,
+    "already_covered": 2,
+    "reset_byte_qualified": false
+  },
+  "REA": {
+    "decompilation": "failed with provider range construction error",
+    "instruction_view": "complete 168-byte function obtained; raw bytes additionally disassembled and executed"
+  },
+  "source_plan_unchanged": true,
+  "source_built_bytes": 3833,
+  "binary_pull_through_bytes": 642327,
+  "source_completeness_proven": false,
+  "evidence": {
+    "build/sources-goal-r1-queue-reset-c/report.json": "c6149c132970e890b8ea0e52fddb8c0782daa065fa421431fa30195c0a518fc5",
+    "tools/build/source-plan.json": "0c889650bf8ea03def83ea1ea29730b3ccfe84bb70609c1972a500f02ba4ea2d",
+    "r1/src/application/rtos/mutex-kernel/mutex-kernel.c": "54a234dd56ce1ae839e013e436c95d1c977601dc49ffae9dc84cd9b860c0ac16",
+    "third-party/upstream/freertos-kernel/queue.c": "5cdf4fa35fe059446effff5bf20deaf83ddffb08921bc198fda106b1d17dd894",
+    "r1/src/config/rtos/mutex_kernel_contract.h": "d940797ff263975ba00fd355c3b3535a002c97f3e1ada8419492efb84ed8de81",
+    "r1/src/config/rtos/queue_operations_contract.h": "bca8311a67d844386ea0066c486ffd4ac127696a914adf4cd5514f4c841a3b8e",
+    "r1/src/config/rtos/native_port_assert.h": "efee8118f24a53756b6f14a666524b3d59561f005e1e87ed71309ccab9c4fc9f",
+    "r1/src/sources.json": "6fa37d8afe1e50453bc47962bcfe463cd5163fb4f1b3d2a8033b02adbb77c9d3",
+    "build/hybrid-goal-r1-queue-reset-c/build-report.json": "ec2708c2e2999c38c39ee0fb32e6fda519a99fe1a602b44ce74746d4cb4d72c8",
+    "build/goal-r1-queue-reset-c/before.c": "09d8adaa11569ae5dc060b4c4cea72f338916844576737ffcfccaf2d74ed0699",
+    "build/goal-r1-queue-reset-c/selected-upstream.c": "d7b795a1c88a4188da135714c1e179478b86b4e2a7b06f46a00605dd37e08d50",
+    "build/goal-r1-queue-reset-c/stock.elf": "25b4a29af80ec8edab5bd861ba9b74a6e22eab29dc3d7a809a16869e8a140f04",
+    "build/goal-r1-queue-reset-c/stock.s": "87671979e4027e5f3757786179628bbbec9242ccf807bc76927445864775b580",
+    "build/goal-r1-queue-reset-c/REA.json": "8d52fdf35b7a9c82b7a0af806b900c9b46fa306c5fc92b359685b685e9d8fd09",
+    "build/goal-r1-queue-reset-c/REA-instructions.json": "70381efa04d4929ee6ec97481b41e4a7bea75150ccb5a7c69f02cd1dbc11711f",
+    "build/goal-r1-queue-reset-c/REA.snapshot.json": "edc4bcff1bd285162811f183ba99b83b3accade4476e3c2c28bb3866d90110ed",
+    "build/goal-r1-queue-reset-c/verify.py": "bbece4373e883d318deda1a1bea9f93001c0ff1d5e4dc5ccc1f7285f0739be57",
+    "build/goal-r1-queue-reset-c/results.json": "c20b564273aad710b1d73d6482c1117c1c9ff4018a3bfe3e2d1d4903bc67a804",
+    "build/goal-r1-queue-reset-c/negative.py": "0fad74b6eba09e46123777b3632259758086c3631eaaf6a50061d95c0deb84e8",
+    "build/goal-r1-queue-reset-c/negative-results.json": "6871481b726a702e5d1ec3aaf062175e8ad1667190d362a18b3d74f6adc32936",
+    "build/goal-r1-queue-reset-c/audit.py": "d07a7e687d296470e841c3be0cdcac258cd415005991c5c3ea77117ddcd0c849",
+    "build/goal-r1-queue-reset-c/audit-results.json": "8ba4a0f61fca24c1539d2278dcc09d3c0344b8dabac8efc4244b8e40ef81021e",
+    "build/goal-r1-queue-reset-c/qualify.py": "589f4c74b1e434b4c40b97d9aec68e0a1322d770727e0b9afb31d11ea7e8eacc",
+    "build/goal-r1-queue-reset-c/qualified/qualification.json": "6bd1d1c8b72d4497135e9f1fa504d62fcd6e5d62e96ec6d86b5aed0c1d650ae1",
+    "build/goal-r1-queue-reset-c/qualified/source-plan.json": "c82d566eec0b9864b0b0fd13157557e5bb7aeaa3e596514f5ad0c6dcdb751634"
+  }
+}

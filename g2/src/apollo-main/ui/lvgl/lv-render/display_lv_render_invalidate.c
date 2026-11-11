@@ -10,6 +10,6 @@ extern uint32_t audio_uart_lv_area_intersect_450bcc(int32_t *,const int32_t *,co
 extern uint32_t audio_uart_lv_area_contains_450f28(const int32_t *,const int32_t *,uint32_t);
 extern void audio_uart_lv_area_copy_4530fc(int32_t *,const int32_t *);
 extern uint32_t audio_uart_lv_display_event_44fdbe(void *,uint32_t,void *);
-extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,const char *,...);
+extern void lv_log_add(uint32_t,const char *,uint32_t,const char *,const char *,...);
 static const char path[]="D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\lvgl_v9.3\\LVGL\\src\\core\\lv_refr.c";
 

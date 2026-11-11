@@ -1,0 +1,91 @@
+{
+  "cases": 1024,
+  "passed": 1024,
+  "failures": [],
+  "stock_entry": "0x53aec",
+  "stock_body_bytes": 48,
+  "source_body_bytes": 70,
+  "ordered_fields": [
+    [
+      8,
+      1,
+      1
+    ],
+    [
+      36,
+      4,
+      "read"
+    ],
+    [
+      40,
+      4,
+      "write"
+    ],
+    [
+      4,
+      4,
+      "address"
+    ],
+    [
+      44,
+      4,
+      "delay"
+    ],
+    [
+      20,
+      2,
+      64
+    ],
+    [
+      13,
+      1,
+      3
+    ],
+    [
+      50,
+      1,
+      0
+    ]
+  ],
+  "stock_pointer_values": {
+    "read": 342709,
+    "write": 342737,
+    "address": 536901312,
+    "delay": 342693
+  },
+  "probe_pointer_values": {
+    "read": 16777217,
+    "write": 16777247,
+    "address": 16781468,
+    "delay": 16777277
+  },
+  "unchanged_functions": [
+    "r1_bma_default_read",
+    "r1_bma_default_write",
+    "r1_bma_delay_us"
+  ],
+  "report": "build/sources-goal-r1-bma-interface-init-final/report.json",
+  "report_sha256": "2ed09783f30c420c1aa02a86e82bcd9c531917cc6724a41a32b342da6ca64188",
+  "source_sha256": "4fe087f837a3e6fd7abd960967e4ebb09c8807f826633b2cfbc06f456d4acb5c",
+  "manifest_sha256": "be76bf00509f1551b53a08edbc5515ed3a3dcb9b1721ff4481fdf60b77d82eb8",
+  "stock_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "native_span_sha256": "fb8995e127c925da3b22fd0bbe9dbec23dad1095c31ee384a4b860f8d83a1f6c",
+  "rea": {
+    "completed": true,
+    "procedure": "0x53aec",
+    "path": "build/goal-r1-bma-interface-init/REA.json",
+    "sha256": "6d8c8b30775f51cbd46b06abbac6f74d667b6c9bc50d2a4366385245ad19e067"
+  },
+  "probe_artifacts": {
+    "build/goal-r1-bma-interface-init/verify.py": "7e7899bb03feba5f112aacfef230fd202e309b1138f61d519a8ce7ac8443a660",
+    "build/goal-r1-bma-interface-init/before.c": "2031217ff3dff6c662b3c26d5520eb01fd763cda3a7e8fd34848ac4e0b346e66",
+    "build/goal-r1-bma-interface-init/source.elf": "76a5ecde66b0ba2d109a8635e30fc7fd5daee4c7142e45e6cee62babe0ffe4f4",
+    "build/goal-r1-bma-interface-init/stock.elf": "a046650d1c3b72888fbb2c5cb54594fe07a8a849801751e75f9fffa243e673df",
+    "build/goal-r1-bma-interface-init/rea-snapshot.json": "91b6f9ac6aac0431623b10b844f7a7f2ac039b6f1249ffc4e4f939cab91270ae"
+  },
+  "limits": [
+    "Function/data pointer values normalized by symbol role; final placement not established.",
+    "Callback declarations bind pinned API types to existing native symbols without adding an implementation or forwarding function.",
+    "No physical hardware execution, timing, complete fault-state, source qualification or whole-image byte-identity claim."
+  ]
+}

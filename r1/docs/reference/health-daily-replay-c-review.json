@@ -1,0 +1,98 @@
+{
+  "schema_version": 1,
+  "stock_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "entries": {
+    "0x88170": "r1_health_daily_record_replay",
+    "0x706a4": "r1_heart_rate_daily_cache_write",
+    "0x90e4c": "r1_spo2_daily_cache_write",
+    "0x91954": "r1_temperature_daily_cache_write",
+    "0x91158": "r1_stress_daily_cache_write",
+    "0x4832c": "r1_activity_daily_cache_write",
+    "0x7073c": "r1_hrv_daily_cache_write",
+    "0x5bccc": "r1_stress_daily_cache_accessor",
+    "0x5be5c": "r1_temperature_daily_cache_accessor"
+  },
+  "units": [
+    {
+      "source": "r1/src/application/runtime/native_health_daily_replay.c",
+      "source_sha256": "96971fe8cfb3735dd43724ee536f03187484a9cef2ad87e82c2fce739cdd72a1",
+      "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-health-replay-final-c/r1/r1-application/r1__src__application__runtime__native_health_daily_replay.c.o",
+      "object_sha256": "4a60f7cfc29b9a098dbb3241451435c8bc53460b9c5b58ac8b2a3e1017912e39"
+    },
+    {
+      "source": "r1/src/application/runtime/native_health_daily_fixture.c",
+      "source_sha256": "36ae90090df2e165a6c9e1e8845eeba4975f1eb2513a5ab34f3feac5ec15aee1",
+      "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-health-replay-final-c/r1/r1-application/r1__src__application__runtime__native_health_daily_fixture.c.o",
+      "object_sha256": "6faae7d873dfd2625f745ebaf9f25e4bdc97c12e3121a9d1761036c739d07f6c"
+    }
+  ],
+  "report": "build/sources-goal-r1-health-replay-final-c/report.json",
+  "report_sha256": "a8d2a618540f9a88935116384ee91ec1f941dc17a2862aa553456ec0df8c5761",
+  "behavior": {
+    "pairs": 1620,
+    "digest": "d7159237c106bebbb8443f771414ff4a5d8f74db6eee22394dec8a3d875e3595",
+    "actual_C_cache_writers_accessors_and_owners": true,
+    "modeled_boundaries": [
+      "fdb_blob_make",
+      "fdb_tsl_to_blob",
+      "fdb_blob_read",
+      "hour index"
+    ],
+    "synthetic_fixtures": [
+      "Descriptor callback masks and post-callback size mutations exercise stock branches; no physical flash mutation claim"
+    ],
+    "limits": [
+      "Valid mapped SRAM; direct cache slots 0..23",
+      "No physical database IO, interrupts or complete firmware link"
+    ]
+  },
+  "startup_integration": {
+    "pairs": 417,
+    "actual_C_execution": {
+      "C_replay": 123,
+      "C_cache_writes": 738
+    },
+    "digest": "c0d66676a9a66ca84f822b59742f876c2b554bece27321930e190d9390257a99",
+    "limits": [
+      "Query iterator boundary dispatches actual stock/C replay; blob/time providers modeled explicitly",
+      "Crash marker/accessor/clear, CRC, replay, six writers and cache accessors/owners execute actual C; stock route executes locked bytes",
+      "Event context thread address is a linker binding; metadata uses actual C owner",
+      "Valid mapped storage; no physical flash, scheduler, concurrent IRQ or whole-firmware proof"
+    ]
+  },
+  "negative_controls": {
+    "lost-length-truncation": {
+      "rejected": true,
+      "diagnostic": "5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a505101b26214365875d68737e89949faab5c0cbd6e1ecf7020d18232e39444f5a65707b86919ca7b2bdc8d3dee9f4ff0a15202b36414c57626d78838e99a4afbac5d0dbe6f1fc07121d28333e49545f6a75808b96a1acb7c2cdd8e3eef9040f1a25303b46515c67727d88939ea9b4bfcad5e0ebf6010c17222d38434e59646f7aa5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5', 'result': 0}, {'trace': [('make', 537001984, 128), ('view', 537006080), ('read', 65664)], 'caches': 'fa3ea53a3e09fa2c1dcbdfd5f5a764bb01fedf3866bfc635f4be9182171e6c96', 'buffer': 'a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a505101b26214365875d68737e89949faab5c0cbd6e1ecf7020d18232e39444f5a65707b86919ca7b2bdc8d3dee9f4ff0a15202b36414c57626d78838e99a4afbac5d0dbe6f1fc07121d28333e49545f6a75808b96a1acb7c2cdd8e3eef9040f1a25303b46515c67727d88939ea9b4bfcad5e0ebf6010c17222d38434e59646f7aa5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5', 'result': 1})\n"
+    },
+    "wrong-midnight-slot": {
+      "rejected": true,
+      "diagnostic": "737e89949faab5c0cbd6e1ecf7020d18232e39444f5a65707b86919ca7b2bdc8d3dee9f4ff0a15202b36414c57626d78838e99a4afbac5d0dbe6f1fc07121d28333e49545f6a75808b96a1acb7c2cdd8e3eef9040f1a25303b46515c67727d88939ea9b4bfcad5e0ebf6010c17222d38434e59646f7aa5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5', 'result': 0}, {'trace': [('make', 537001984, 128), ('view', 537006080), ('read', 128), ('hour', 2271560481, 0), ('write', 0, 0, 537001992, '5d6873')], 'caches': 'f871f522bbac9863853770d7850bce3767145fcaadad761edbabf4ca99ed6c45', 'buffer': 'a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a505101b26214365875d68737e89949faab5c0cbd6e1ecf7020d18232e39444f5a65707b86919ca7b2bdc8d3dee9f4ff0a15202b36414c57626d78838e99a4afbac5d0dbe6f1fc07121d28333e49545f6a75808b96a1acb7c2cdd8e3eef9040f1a25303b46515c67727d88939ea9b4bfcad5e0ebf6010c17222d38434e59646f7aa5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5', 'result': 0})\n"
+    },
+    "wrong-null-callback-advance": {
+      "rejected": true,
+      "diagnostic": "7121d28333e49545f6a75808b96a1acb7c2cdd8e3eef9040f1a25303b46515c67727d88939ea9b4bfcad5e0ebf6010c17222d38434e59646f7aa5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5', 'result': 0}, {'trace': [('make', 537001984, 128), ('view', 537006080), ('read', 128), ('hour', 2271560481, 0), ('write', 0, 23, 537001992, '5d6873'), ('write', 2, 23, 537001998, '9faab5'), ('write', 4, 23, 537002004, 'e1ecf7020d18232e39444f5a65707b86919ca7b2bdc8d3de')], 'caches': 'bc433e82a3ee7c1c3b2f824dc16347816bb461d86c494aae06a6f010ee279d74', 'buffer': 'a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a505101b26214365875d68737e89949faab5c0cbd6e1ecf7020d18232e39444f5a65707b86919ca7b2bdc8d3dee9f4ff0a15202b36414c57626d78838e99a4afbac5d0dbe6f1fc07121d28333e49545f6a75808b96a1acb7c2cdd8e3eef9040f1a25303b46515c67727d88939ea9b4bfcad5e0ebf6010c17222d38434e59646f7aa5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5', 'result': 0})\n"
+    },
+    "lost-overlap-backward-copy": {
+      "rejected": true,
+      "diagnostic": "5a5a5a5a5a5a5a5a5a505101b26214365875d68737e89949faab5c0cbd6e1ecf7020d18232e39444f5a65707b86919ca7b2bdc8d3dee9f4ff0a15202b36414c57626d78838e99a4afbac5d0dbe6f1fc07121d28333e49545f6a75808b96a1acb7c2cdd8e3eef9040f1a25303b46515c67727d88939ea9b4bfcad5e0ebf6010c17222d38434e59646f7aa5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5', 'result': None}, {'trace': [('write', 4, 2, 536962800, 'f30415263748596a7b8c9daebfd0e1f2031425364758697a')], 'caches': 'a77b65205ae42271e01e7d9953cd072c5b3d4acd6a8086741ccb8c8dbf325a16', 'buffer': 'a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a505101b26214365875d68737e89949faab5c0cbd6e1ecf7020d18232e39444f5a65707b86919ca7b2bdc8d3dee9f4ff0a15202b36414c57626d78838e99a4afbac5d0dbe6f1fc07121d28333e49545f6a75808b96a1acb7c2cdd8e3eef9040f1a25303b46515c67727d88939ea9b4bfcad5e0ebf6010c17222d38434e59646f7aa5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5', 'result': None})\n"
+    }
+  },
+  "audit": {
+    "unchanged_prior_objects": 732,
+    "changed_objects": [
+      "r1/src/application/runtime/native_health_daily_fixture.c"
+    ],
+    "unchanged_fixture_other_allocated_sections_and_named_relocations": true,
+    "new_units": 1,
+    "removed_application_imports": [
+      "r1_health_daily_record_replay"
+    ],
+    "added_application_imports": [],
+    "bootloader_imports_unchanged": true
+  },
+  "source_check": "python3 tools/build/sources.py check\ng2: 5029 units, 4726 source files, 0 not built\nr1: 734 units, 538 source files, 0 not built",
+  "rea": "health-daily-replay-c-rea.json",
+  "instruction_identity_proven": false,
+  "image_integration_proven": false
+}

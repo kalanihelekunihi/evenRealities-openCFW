@@ -1,0 +1,210 @@
+{
+  "schema_version": 1,
+  "scope": "Native Goodix processing parent and typed record dispatch in ordinary C",
+  "report": "build/sources-goal-r1-goodix-native-processing-teardown-c/report.json",
+  "comparison_report": "build/sources-goal-r1-goodix-native-record-teardown-c/report.json",
+  "stock_entries": [
+    {
+      "entry": "0x6cc60",
+      "size": 88,
+      "symbol": "r1_goodix_native_processing_destroy",
+      "provider": "r1/src/application/goodix/native_processing_teardown.c"
+    },
+    {
+      "entry": "0x29c74",
+      "size": 30,
+      "symbol": "r1_goodix_native_record_dispatch_destroy",
+      "provider": "r1/src/application/goodix/native_processing_teardown.c"
+    },
+    {
+      "entry": "0x6629e",
+      "size": 20,
+      "symbol": "r1_goodix_native_release_cell",
+      "provider": "r1/src/application/goodix/native_hrv_teardown.c"
+    }
+  ],
+  "stock_dispatch_entries": [
+    "0x3e6b1",
+    "0x5a629",
+    "0x34a39",
+    "0",
+    "0",
+    "0",
+    "0x3757d"
+  ],
+  "supported_record_types": [
+    0,
+    1,
+    2,
+    6
+  ],
+  "native_owners": {
+    "r1_goodix_native_processing_context": "0x20007c68",
+    "r1_goodix_native_processing_workspace": "0x200377a4"
+  },
+  "audit": {
+    "compiled_units": 872,
+    "unchanged_prior_nongenerated_objects": 861,
+    "new_units": [
+      "r1/src/application/goodix/native_processing_teardown.c"
+    ],
+    "differing_existing_generated_objects": [
+      "{gen}/r1_startup_vectors.S",
+      "{gen}/r1_uecc.c"
+    ],
+    "application_imports": 62,
+    "bootloader_imports": 22,
+    "removed_imports": [],
+    "added_imports": [],
+    "new_writable_state_bytes": 8,
+    "source_plan_and_cache_layout_unchanged": true,
+    "tested_object_equals_normal_build": true,
+    "only_manifest_change_is_one_new_unit": true,
+    "portable_heap_and_existing_byte_fill_objects_unchanged": true
+  },
+  "direct": {
+    "parent_type_mask_comparisons": 2048,
+    "parent_single_field_comparisons": 328,
+    "live_owner_field_mutation_comparisons": 368,
+    "dispatch_comparisons": 256,
+    "shared_helper_comparisons": 8,
+    "initial_null_access_cases": 4,
+    "native_instruction_bytes_executed": [
+      88,
+      30,
+      20
+    ],
+    "release_arguments_call_time_snapshots_and_writes_match": true,
+    "independent_normal_release_sequence_oracle": true,
+    "actual_C_workspace_record_and_cell_providers": true,
+    "allocator_release_modeled": true,
+    "source_cannot_execute_stock": true
+  },
+  "actual_heap": {
+    "actual_C_heap_processing_comparisons": 2048,
+    "all_64_supported_record_type_triples": true,
+    "actual_C_initializer_allocator_workspace_record_cell_and_parent_execute": true,
+    "root_before_or_after_children_optional_live_guard": true,
+    "canonical_owner_cells_remain_uncleared": true,
+    "entire_heap_and_write_width_order_values_match": true,
+    "source_pipeline_cannot_execute_stock": true,
+    "native_instruction_bytes": [
+      88,
+      30,
+      20
+    ]
+  },
+  "compiled_defects_rejected": [
+    {
+      "defect": "cached-workspace",
+      "rejected": true
+    },
+    {
+      "defect": "cached-processing-owner",
+      "rejected": true
+    },
+    {
+      "defect": "clear-workspace-owner",
+      "rejected": true
+    },
+    {
+      "defect": "clear-processing-owner",
+      "rejected": true
+    },
+    {
+      "defect": "record-order",
+      "rejected": true
+    },
+    {
+      "defect": "wrong-record-cell",
+      "rejected": true
+    },
+    {
+      "defect": "missing-clear-cell",
+      "rejected": true
+    },
+    {
+      "defect": "retain-workspace",
+      "rejected": true
+    },
+    {
+      "defect": "dispatch-extended-provider",
+      "rejected": true
+    },
+    {
+      "defect": "dispatch-type6-provider",
+      "rejected": true
+    },
+    {
+      "defect": "parent-status",
+      "rejected": true
+    },
+    {
+      "defect": "parent-null-guard",
+      "rejected": true
+    }
+  ],
+  "contract": [
+    "Destroy current workspace then free the reloaded workspace owner. Do not clear that owner.",
+    "Reload the processing owner before each record dispatch at6c,70,84 and each release-clear cell atb0,bc,cc,d8. Free the final live context and return0 without clearing its owner.",
+    "Dispatch reads record type and invokes the ordinary C provider corresponding to the stock seven-entry table. Types0,1,2,6 supported;3,4,5 are stock null entries and out-of-range indices are outside the defined contract.",
+    "Reuse canonical C workspace/record/nullable/cell providers. The newly mapped6629e helper has release-then-clear semantics; no duplicate provider body added."
+  ],
+  "limits": [
+    "All138 native entry instruction bytes execute. Direct free is modeled with snapshots and caller-scratch clobbers; actual-heap integration executes the C initializer/allocator and every teardown descendant without stock-code fallback.",
+    "Fixtures vary all64 supported record type triples, field masks, allocation order and unrelated live allocations. Live owner mutations test re-reads and clear-after-release timing.",
+    "Initial null workspace access8, null record/type read0, null cell read0 and null processing context access6c are emulator access-shape checks, not physical MCU fault claims.",
+    "Saved integer/FP registers, SP, interrupt masks, FPSCR and caller guards checked. Caller scratch, APSR and private stack frames excluded. The stock transient ROM-table copy has no externally visible effect in the supported immutable-table contract.",
+    "Typed context/workspace setup is a fixture rather than recovered initialization. Future processing initialization must use the two canonical owner cells. No initialization, concurrency, physical memory, final executable placement/startup or boot claim. Relocatable composition is not bootable firmware."
+  ],
+  "evidence_files": {
+    "build/sources-goal-r1-goodix-native-processing-teardown-c/report.json": "cbdebbe193f6e3aaf3b77d0a6fdd4841944629e856eac5d51b1dadc6c47f8739",
+    "build/sources-goal-r1-goodix-native-record-teardown-c/report.json": "1c91ecf9ef7cc8ba9317fdec17f515c5ad27b704b47e701b59dfd39fb8f541d4",
+    "r1/src/application/goodix/native_processing_teardown.c": "fecf0c172a3e1bd85b0ac23e49121b841d83d966a5cb26c7613303f966a48096",
+    "r1/src/application/goodix/native_processing_teardown.h": "cd6886306d59cae1467039abb4a57cdfc3b6f8a374f7ee7f12f112e959be7458",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-native-processing-teardown-c/r1/r1-application/r1__src__application__goodix__native_processing_teardown.c.o": "33d663721e6ec3fb795e33bf70e28bbc2c5f59b31e3923402e345f2531ffa475",
+    "r1/src/sources.json": "241e96fd121ce4de13175875f7ac4a53ac0b8d7a0516ea39407da482bbe74970",
+    "tools/build/source-plan.json": "eeb516e31b3310fb0718f36908977f8125723f7c5e0e86cd6744395826259a4d",
+    "r1/src/config/runtime/native_health_cache.ld": "eb8f131c489cd818d4e36718718fa1989719ca0170f164541a1a5bf56dfc1ec3",
+    "r1/docs/reference/FUNCTION-OWNERSHIP.csv": "fe44fc7d1957f119a24fc7ddc323c623f573a2a1c818c8cce24d3b85607d8621",
+    "r1/symbols/function-frontier.csv": "0d0566cdac27843fe1951068d85fd80fe8fbeef2c3a780b02c7c1fbb4123f416",
+    "r1/docs/correlation/GOODIX-PRIMITIVES-REDUCTION-CORRELATION.md": "74c870478505a1879fa08ca99033f0c998fa3eb6f88dd72ee1bc577c5ef88adb",
+    "build/goal-r1-goodix-native-heap-init-c/fill.o": "5b9881f48c6329da35510eb6b3f4be65d3c31bab24e2f6ab7d5713597d06c391",
+    "build/goal-r1-goodix-native-heap-init-c/fill-body.json": "9bf851f3f2cb56510504f22b5d435b9a6db08019815db0e446543e23e3a17c13",
+    "r1/src/application/goodix/native_record_teardown.c": "b7cea98e79bac3f8c5d80bc58c59e81840d7e9b8b9267429e83c4ebb981bbf45",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-native-processing-teardown-c/r1/r1-application/r1__src__application__goodix__native_record_teardown.c.o": "785df1baa1e96a2723aa03debb90b5dc7bfa44a1e76283a79645968876cec4de",
+    "r1/src/application/goodix/native_workspace_teardown.c": "518d7d7a9a9b5fe931622a9111dbeee24f66bee47bdb46220d460c02ae39c5dc",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-native-processing-teardown-c/r1/r1-application/r1__src__application__goodix__native_workspace_teardown.c.o": "6d8fc89dcbc992288e6f9440279aaedad452d0ae358696930327689d8ef13c04",
+    "r1/src/application/goodix/native_hrv_teardown.c": "74c35c824e0ba0c9f9c782fb1a42ec140d569c509b18a9552733dbead271048c",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-native-processing-teardown-c/r1/r1-application/r1__src__application__goodix__native_hrv_teardown.c.o": "ca3a52d81d15c956a94f6b435fec18f166a48edb385883436b4ae3eaa9738ca6",
+    "r1/src/application/goodix/native_heap_init.c": "c3085064866b23d603697918b6dfdd29f66ab68c7e82cb1f3e10443c80e3f8b6",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-native-processing-teardown-c/r1/r1-application/r1__src__application__goodix__native_heap_init.c.o": "d25f87d5c62ab05f6d5e4d73cc1de5afacf8300a5f1286735b75c9715c30063c",
+    "r1/src/application/goodix/native_heap_free.c": "175cf893ee4b475bee0a886d69522782ac879dd0b29c43285d957c03fb4dc7c4",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-native-processing-teardown-c/r1/r1-application/r1__src__application__goodix__native_heap_free.c.o": "bc333928ee0e42aaf0a0446eb69f4ff0528fd2f27737d5ed1744ed750b807022",
+    "r1/src/application/goodix/native_heap_allocate.c": "2806f3ca4f9074b157b390edf8bd03815a46b31f1661e1ed238a0938c666d8c9",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-native-processing-teardown-c/r1/r1-application/r1__src__application__goodix__native_heap_allocate.c.o": "129b40a4930e85990e0ba9503f83bbc867460580ef323f2a6dfa2476e7dad685",
+    "r1/src/application/goodix/native_heap_malloc.c": "1b827deb8981088d68fae260af0aa442a7315d4aaaa7f2ed8a248c859878a0c3",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-native-processing-teardown-c/r1/r1-application/r1__src__application__goodix__native_heap_malloc.c.o": "977cb669d0ca7b16102f67629d38c362cd2c47fba05cb890577e367a4f9d0138",
+    "r1/src/application/goodix/native_heap_reallocate.c": "078156cbb3d160046b3c181313a362885f3d41884692698469ad86543458832c",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-native-processing-teardown-c/r1/r1-application/r1__src__application__goodix__native_heap_reallocate.c.o": "c3d17d3ed20d125190f1f64675f13c50395568ac749375e85f56bf2e61a1663b",
+    "build/goal-r1-goodix-native-processing-teardown-c/audit.json": "8bd9dad41ab652dd312eb89e30ea4d0ed62ba2b4e85bd8c918da3a43a29e5f58",
+    "build/goal-r1-goodix-native-processing-teardown-c/verify.log": "a93c7f545972a79077d1364163e6845636dde15f828fb0e30a8144db13fcf631",
+    "build/goal-r1-goodix-native-processing-teardown-c/negative.json": "497feaa0167f2f645a3cfbfb9b430e32ae19dfd19552b6c60138be1b7b4d6ba8",
+    "build/goal-r1-goodix-native-processing-teardown-c/test.ld": "8fe6cfa6d0e46caec36af81024061e5bd6435f0f4346811ff6dfe8d5f8eb72db",
+    "build/goal-r1-goodix-native-processing-teardown-c/audit.py": "f422086b8ffc249a90884a36808fca91e5136fb15e204800f1cabdf735a655be",
+    "build/goal-r1-goodix-native-processing-teardown-c/source.elf": "b885700e09ff79b12b2f7628e14831dda383a6a7ac0cf8d689a61454d9b40088",
+    "build/goal-r1-goodix-native-processing-teardown-c/negative.py": "45187b651b4fa4ae53451924a56dd95a9cb98d884b6f94c7b374f7dcfaf267d3",
+    "build/goal-r1-goodix-native-processing-teardown-c/negative.log": "e1ca453a14433c9934313631a41ada4940942c8653f01cae711c766a9d461b75",
+    "build/goal-r1-goodix-native-processing-teardown-c/source.o": "33d663721e6ec3fb795e33bf70e28bbc2c5f59b31e3923402e345f2531ffa475",
+    "build/goal-r1-goodix-native-processing-teardown-c/results.json": "594192ae1c51e2dfda8f771f03e728732d55ee00e071b95e3199205ee080827d",
+    "build/goal-r1-goodix-native-processing-teardown-c/pipeline.log": "3c03a2e221ddf6390f523c95e39619d7ff7724aeca8b57e9dfc2235f9abe53c3",
+    "build/goal-r1-goodix-native-processing-teardown-c/pipeline.py": "9cbb4c38d8ca0d149543eb89654ecdf0964e32dfea994966e52552fc0f56f847",
+    "build/goal-r1-goodix-native-processing-teardown-c/rea-bytes.json": "d79ada816b796c6cc9fdb0b08fd0ed9901b78897aff0585f93df511025d218bc",
+    "build/goal-r1-goodix-native-processing-teardown-c/manifest-before.json": "fb3a6fb5484091a41d019575a772173e2880c4049d4b24d445c46706e0152d42",
+    "build/goal-r1-goodix-native-processing-teardown-c/verify.py": "d842ca85ae69a83c089ae314d8de012c74eaaf6d49917123f6d6742ce17490d6",
+    "build/goal-r1-goodix-native-processing-teardown-c/build.log": "04bc39ff6605a90f1a75f8735865b9c4db303c289661a24ea82bff5428aa3726",
+    "build/goal-r1-goodix-native-processing-teardown-c/pipeline/test.ld": "3fa8bdaf16b3ee41645fd1c4e8961865eba7ddb9eaa3744ad7b65463c3307e58",
+    "build/goal-r1-goodix-native-processing-teardown-c/pipeline/source.elf": "05a5607105785e5a3d50ab6d8ade7d683bc3886d4cf50ab4777ea86315db0408",
+    "build/goal-r1-goodix-native-processing-teardown-c/pipeline/results.json": "86589a17809e318ac62df985229fad89255aad0db661b625e768d9a583d52ec6"
+  }
+}

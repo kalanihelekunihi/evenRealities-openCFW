@@ -1,325 +1,173 @@
-/* Whole framed SDU body, including out-of-line loop after native return. */
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_dispatch_child_316f70\n"
-".type opencfw_em9305_dispatch_child_316f70,@function\n"
-"opencfw_em9305_dispatch_child_316f70:\n"
-"L316f70:\n"
-"enter_s [r13-r24,fp,blink]\n"
-"L316f72:\n"
-"sub_s sp,sp,0x20\n"
-"L316f74:\n"
-"mov_s r13,r0\n"
-"L316f76:\n"
-"ldb_s r0,[r0,0x6]\n"
-"L316f78:\n"
-"mov r23,r6\n"
-"L316f7c:\n"
-"mov r22,r5\n"
-"L316f80:\n"
-"mov r16,r4\n"
-"L316f84:\n"
-"mov_s r21,r2\n"
-"L316f86:\n"
-"mov_s r24,r1\n"
-"L316f88:\n"
-"mov_s r15,0\n"
-"L316f8a:\n"
-"breq_s r0,0,L316f9a\n"
-"L316f8c:\n"
-"ld r0,[r13,0]\n"
-"L316f8e:\n"
-"stb_s r15,[r13,0x6]\n"
-"L316f90:\n"
-"breq_s r0,0,L316f9a\n"
-"L316f92:\n"
-"bl opencfw_em9305_wsf_event_release\n"
-"L316f96:\n"
-"st_s r15,[r13,0]\n"
-"L316f98:\n"
-"b_s L3170d2\n"
-"L316f9a:\n"
-"cmp_s r16,0\n"
-"L316f9c:\n"
-"st_s r15,[sp,0x4]\n"
-"L316f9e:\n"
-"st_s r15,[sp,0]\n"
-"L316fa0:\n"
-"beq_s L3170d2\n"
-"L316fa2:\n"
-"add_s r14,r3,0x2\n"
-"L316fa4:\n"
-"mov r18,0\n"
-"L316fa8:\n"
-"add_s r0,sp,0\n"
-"L316faa:\n"
-"bl.d opencfw_em9305_dispatch_child_31bd18\n"
-"L316fae:\n"
-"mov_s r1,r14\n"
-"L316fb0:\n"
-"ldb_s r1,[sp,0]\n"
-"L316fb2:\n"
-"mov_s r17,r0\n"
-"L316fb4:\n"
-"brne_s r1,0,L316fc0\n"
-"L316fb6:\n"
-"ldb r0,[sp,2]\n"
-"L316fba:\n"
-"sub r0,r0,0x3\n"
-"L316fbc:\n"
-"stb r0,[sp,2]\n"
-"L316fc0:\n"
-"ldb_s r0,[r13,0x7]\n"
-"L316fc2:\n"
-"breq.d.nt r0,0x1,L317000\n"
-"L316fc6:\n"
-"add_s r14,r14,r17\n"
-"L316fc8:\n"
-"brne_s r0,0,L317014\n"
-"L316fca:\n"
-"bl opencfw_em9305_dispatch_child_32543c\n"
-"L316fce:\n"
-"st_s r0,[r13,0]\n"
-"L316fd0:\n"
-"breq_s r0,0,L31702a\n"
-"L316fd2:\n"
-"bl opencfw_em9305_wsf_critical_enter\n"
-"L316fd6:\n"
-"mov_s r0,0x805add\n"
-"L316fdc:\n"
-"ldb_s r1,[r0,0]\n"
-"L316fde:\n"
-"add_s r1,r1,-1\n"
-"L316fe0:\n"
-"bl.d opencfw_em9305_wsf_critical_exit\n"
-"L316fe4:\n"
-"stb_s r1,[r0,0]\n"
-"L316fe6:\n"
-"ldb_s r0,[sp,0]\n"
-"L316fe8:\n"
-"ld r20,[r13]\n"
-"L316fec:\n"
-"sth 12,[r13,4]\n"
-"L316ff0:\n"
-"breq_s r0,0,L31703c\n"
-"L316ff2:\n"
-"bl.d opencfw_em9305_wsf_event_release\n"
-"L316ff6:\n"
-"mov_s r0,r20\n"
-"L316ff8:\n"
-"ldb r0,[sp,2]\n"
-"L316ffc:\n"
-"st_s r15,[r13,0]\n"
-"L316ffe:\n"
-"b_s L317022\n"
-"L317000:\n"
-"breq.d.nt r1,0x1,L317032\n"
-"L317004:\n"
-"ld r0,[r13,0]\n"
-"L317006:\n"
-"bl opencfw_em9305_wsf_event_release\n"
-"L31700a:\n"
-"ldb r0,[sp,2]\n"
-"L31700e:\n"
-"st_s r15,[r13,0]\n"
-"L317010:\n"
-"stb_s r15,[r13,0x7]\n"
-"L317012:\n"
-"b_s L317022\n"
-"L317014:\n"
-"ld r0,[r13,0]\n"
-"L317016:\n"
-"breq_s r0,0,L31701e\n"
-"L317018:\n"
-"bl opencfw_em9305_wsf_event_release\n"
-"L31701c:\n"
-"st_s r15,[r13,0]\n"
-"L31701e:\n"
-"ldb r0,[sp,2]\n"
-"L317022:\n"
-"add_s r14,r14,r0\n"
-"L317024:\n"
-"add_s r0,r0,r17\n"
-"L317026:\n"
-"sub r16,r16,r0\n"
-"L31702a:\n"
-"extb.f 0,r16\n"
-"L31702e:\n"
-"bne_s L316fa8\n"
-"L317030:\n"
-"b_s L3170d4\n"
-"L317032:\n"
-"ldh_s r1,[r13,0x4]\n"
-"L317034:\n"
-"ldb r2,[sp,2]\n"
-"L317038:\n"
-"add_s r0,r0,r1\n"
-"L31703a:\n"
-"b_s L317050\n"
-"L31703c:\n"
-"ldb r2,[sp,2]\n"
-"L317040:\n"
-"ld r19,[sp,4]\n"
-"L317044:\n"
-"brlo.d.nt r23,r2,L3170e0\n"
-"L317048:\n"
-"st r19,[r13,16]\n"
-"L31704c:\n"
-"add r0,r20,0xc\n"
-"L317050:\n"
-"bl.d opencfw_em9305_memcpy\n"
-"L317054:\n"
-"mov_s r1,r14\n"
-"L317056:\n"
-"ldh_s r1,[r13,0x4]\n"
-"L317058:\n"
-"ldb r20,[sp,2]\n"
-"L31705c:\n"
-"ldb r0,[sp,1]\n"
-"L317060:\n"
-"add_s r1,r1,r20\n"
-"L317062:\n"
-"mov_s r19,r1\n"
-"L317064:\n"
-"sth_s r1,[r13,0x4]\n"
-"L317066:\n"
-"breq_s r0,0,L3170da\n"
-"L317068:\n"
-"add_s r0,sp,0xc\n"
-"L31706a:\n"
-"mov_s r1,0\n"
-"L31706c:\n"
-"bl.d opencfw_em9305_memset\n"
-"L317070:\n"
-"mov_s r2,0x14\n"
-"L317072:\n"
-"ldh_s r12,[r13,0x8]\n"
-"L317074:\n"
-"mov r1,258\n"
-"L317078:\n"
-"ld r3,[r13,0x10]\n"
-"L31707a:\n"
-"sth r1,[sp,10]\n"
-"L31707e:\n"
-"sub r1,r19,0xc\n"
-"L317082:\n"
-"ld r0,[r13,0]\n"
-"L317084:\n"
-"exth_s r2,r1\n"
-"L317086:\n"
-"setlo r2,r23,r2\n"
-"L31708a:\n"
-"sth r1,[sp,12]\n"
-"L31708e:\n"
-"sth r1,[sp,22]\n"
-"L317092:\n"
-"add_s r1,r12,0x1\n"
-"L317094:\n"
-"stb_s r2,[sp,0x18]\n"
-"L317096:\n"
-"sub r2,r22,r3\n"
-"L31709a:\n"
-"sth_s r1,[r13,0x8]\n"
-"L31709c:\n"
-"add_s r1,sp,0x8\n"
-"L31709e:\n"
-"sth r12,[sp,20]\n"
-"L3170a2:\n"
-"st_s r2,[sp,0x10]\n"
-"L3170a4:\n"
-"bl.d opencfw_em9305_dispatch_child_31b9ac\n"
-"L3170a8:\n"
-"sth r21,[sp,8]\n"
-"L3170ac:\n"
-"ld r2,[r13,0]\n"
-"L3170ae:\n"
-"extb r1,r21\n"
-"L3170b2:\n"
-"bl.d opencfw_em9305_ll_event_enqueue\n"
-"L3170b6:\n"
-"mov_s r0,r24\n"
-"L3170b8:\n"
-"ldb r0,[sp,2]\n"
-"L3170bc:\n"
-"add_s r14,r14,r20\n"
-"L3170be:\n"
-"add_s r18,r18,1\n"
-"L3170c0:\n"
-"add_s r0,r0,r17\n"
-"L3170c2:\n"
-"sub r16,r16,r0\n"
-"L3170c6:\n"
-"extb.f 0,r16\n"
-"L3170ca:\n"
-"st_s r15,[r13,0]\n"
-"L3170cc:\n"
-"stb_s r15,[r13,0x7]\n"
-"L3170ce:\n"
-"bne_s L316fa8\n"
-"L3170d0:\n"
-"b_s L3170d4\n"
-"L3170d2:\n"
-"mov_s r18,0\n"
-"L3170d4:\n"
-"extb r0,r18\n"
-"L3170d8:\n"
-"leave_s [r13-r24,fp,blink,pcl]\n"
-"L3170da:\n"
-"stb 1,[r13,7]\n"
-"L3170de:\n"
-"b_s L3170d4\n"
-"L3170e0:\n"
-"add_s r0,sp,0xc\n"
-"L3170e2:\n"
-"mov_s r1,0\n"
-"L3170e4:\n"
-"bl.d opencfw_em9305_memset\n"
-"L3170e8:\n"
-"mov_s r2,0x14\n"
-"L3170ea:\n"
-"ldh_s r0,[r13,0x8]\n"
-"L3170ec:\n"
-"mov r1,258\n"
-"L3170f0:\n"
-"mov_s r3,sp\n"
-"L3170f2:\n"
-"sth_s r1,[r3,0xa]\n"
-"L3170f4:\n"
-"add_s r1,r0,0x1\n"
-"L3170f6:\n"
-"sub r2,r22,r19\n"
-"L3170fa:\n"
-"sth_s r0,[r3,0x14]\n"
-"L3170fc:\n"
-"sth_s r1,[r13,0x8]\n"
-"L3170fe:\n"
-"add_s r1,sp,0x8\n"
-"L317100:\n"
-"mov_s r0,r20\n"
-"L317102:\n"
-"stb 2,[sp,24]\n"
-"L317106:\n"
-"sth r21,[sp,8]\n"
-"L31710a:\n"
-"bl.d opencfw_em9305_dispatch_child_31b9ac\n"
-"L31710e:\n"
-"st_s r2,[sp,0x10]\n"
-"L317110:\n"
-"ld r2,[r13,0]\n"
-"L317112:\n"
-"extb r1,r21\n"
-"L317116:\n"
-"bl.d opencfw_em9305_ll_event_enqueue\n"
-"L31711a:\n"
-"mov_s r0,r24\n"
-"L31711c:\n"
-"stb_s r15,[r13,0x7]\n"
-"L31711e:\n"
-"st_s r15,[r13,0]\n"
-"L317120:\n"
-"add_s r18,r18,1\n"
-"L317122:\n"
-"b_s L3170d4\n"
-".size opencfw_em9305_dispatch_child_316f70,.-opencfw_em9305_dispatch_child_316f70\n"
-);
+#include <stdint.h>
+
+/* Native 0x316f70..0x317110: reassemble ISO SDUs from a received BIS/CIS
+ * payload (data + 2, length bytes) into the context's SDU buffer (+0, write
+ * offset +4, sequence +8, time stamp +16, state +7, flush flag +6). Each
+ * segment header (native 0x31bd18: start/continuation +0, complete +1,
+ * length +2, time offset +4; start segments carry 3 header bytes) either
+ * starts a new SDU (buffer from native 0x32543c, counted at 0x805add),
+ * continues the current one, or drops it. A completed SDU gets a 20-byte
+ * ISO header (native 0x31b9ac: handle, 0x102, SDU length, time stamp,
+ * sequence, status 1 when longer than max) and is queued for the handler
+ * (ll_event_enqueue); a start segment longer than max is reported with
+ * status 2. Returns the number of SDUs queued. */
+extern uint32_t opencfw_em9305_wsf_event_release(uintptr_t);
+extern uint32_t opencfw_em9305_dispatch_child_31bd18(uintptr_t,uintptr_t);
+extern uintptr_t opencfw_em9305_dispatch_child_32543c(void);
+extern uint32_t opencfw_em9305_wsf_critical_enter(void);
+extern uint32_t opencfw_em9305_wsf_critical_exit(void);
+extern void *opencfw_em9305_memcpy(void *destination, const void *source, uint32_t bytes);
+extern void *opencfw_em9305_memset(void *,uint32_t,uint32_t);
+extern uint32_t opencfw_em9305_dispatch_child_31b9ac(uintptr_t,uintptr_t);
+extern uint32_t opencfw_em9305_ll_event_enqueue(uintptr_t,uint32_t,uintptr_t);
+
+struct iso_segment {
+    uint8_t start;
+    uint8_t complete;
+    uint8_t length;
+    uint8_t reserved;
+    uint32_t time_offset;
+};
+
+struct iso_sdu_header {
+    uint16_t handle;
+    uint16_t kind;
+    uint16_t sdu_length;
+    uint16_t reserved;
+    uint32_t time_stamp;
+    uint16_t sequence;
+    uint16_t length;
+    uint8_t status;
+    uint8_t reserved2[7];
+};
+
+struct iso_frame {
+    struct iso_segment segment;
+    struct iso_sdu_header header;
+} __attribute__((aligned(4)));
+
+#define ISO_U8(a) (*(volatile uint8_t *)(a))
+#define ISO_U16(a) (*(volatile uint16_t *)(a))
+#define ISO_U32(a) (*(volatile uint32_t *)(a))
+
+static void iso_report(uintptr_t queue, uint32_t handle, uintptr_t sdu, struct iso_frame *frame)
+{
+    (void)opencfw_em9305_dispatch_child_31b9ac(sdu, (uintptr_t)&frame->header);
+    (void)opencfw_em9305_ll_event_enqueue(queue, (uint8_t)handle, sdu);
+}
+
+uint32_t opencfw_em9305_dispatch_child_316f70(uintptr_t context, uintptr_t queue, uint32_t handle,
+                                              uintptr_t data, uint32_t length, uint32_t now, uint32_t max)
+{
+    struct iso_frame frame;
+    uint32_t queued = 0u;
+    if (ISO_U8(context + 6u) != 0u) {
+        uintptr_t pending = ISO_U32(context);
+        ISO_U8(context + 6u) = 0u;
+        if (pending != 0u) {
+            (void)opencfw_em9305_wsf_event_release(pending);
+            ISO_U32(context) = 0u;
+            return 0u;
+        }
+    }
+    frame.segment.time_offset = 0u;
+    *(uint32_t *)(void *)&frame.segment = 0u;
+    if (length == 0u) return 0u;
+    uintptr_t cursor = data + 2u;
+    do {
+        uint32_t used = opencfw_em9305_dispatch_child_31bd18((uintptr_t)&frame.segment, cursor);
+        uint32_t start = frame.segment.start;
+        if (start == 0u) frame.segment.length = (uint8_t)(frame.segment.length - 3u);
+        uint32_t state = ISO_U8(context + 7u);
+        cursor += used;
+        uintptr_t sdu;
+        uintptr_t target;
+        uint32_t size;
+        if (state == 1u) {
+            sdu = ISO_U32(context);
+            if (start != 1u) {
+                (void)opencfw_em9305_wsf_event_release(sdu);
+                ISO_U32(context) = 0u;
+                ISO_U8(context + 7u) = 0u;
+                uint32_t skip = frame.segment.length;
+                cursor += skip;
+                length -= skip + used;
+                continue;
+            }
+            target = sdu + ISO_U16(context + 4u);
+            size = frame.segment.length;
+        } else if (state != 0u) {
+            uintptr_t pending = ISO_U32(context);
+            if (pending != 0u) {
+                (void)opencfw_em9305_wsf_event_release(pending);
+                ISO_U32(context) = 0u;
+            }
+            uint32_t skip = frame.segment.length;
+            cursor += skip;
+            length -= skip + used;
+            continue;
+        } else {
+            sdu = opencfw_em9305_dispatch_child_32543c();
+            ISO_U32(context) = (uint32_t)sdu;
+            if (sdu == 0u) continue;
+            (void)opencfw_em9305_wsf_critical_enter();
+            volatile uint8_t *buffers = (volatile uint8_t *)(uintptr_t)0x805addu;
+            *buffers = (uint8_t)(*buffers - 1u);
+            (void)opencfw_em9305_wsf_critical_exit();
+            sdu = ISO_U32(context);
+            ISO_U16(context + 4u) = 12u;
+            if (frame.segment.start != 0u) {
+                (void)opencfw_em9305_wsf_event_release(sdu);
+                uint32_t skip = frame.segment.length;
+                ISO_U32(context) = 0u;
+                cursor += skip;
+                length -= skip + used;
+                continue;
+            }
+            size = frame.segment.length;
+            uint32_t offset = frame.segment.time_offset;
+            ISO_U32(context + 16u) = offset;
+            if (max < size) {
+                (void)opencfw_em9305_memset(&frame.header.sdu_length, 0u, 0x14u);
+                uint32_t sequence = ISO_U16(context + 8u);
+                frame.header.kind = 258u;
+                frame.header.sequence = (uint16_t)sequence;
+                ISO_U16(context + 8u) = (uint16_t)(sequence + 1u);
+                frame.header.status = 2u;
+                frame.header.handle = (uint16_t)handle;
+                frame.header.time_stamp = now - offset;
+                iso_report(queue, handle, sdu, &frame);
+                ISO_U8(context + 7u) = 0u;
+                ISO_U32(context) = 0u;
+                return (uint8_t)(queued + 1u);
+            }
+            target = sdu + 12u;
+        }
+        (void)opencfw_em9305_memcpy((void *)target, (const void *)cursor, size);
+        uint32_t copied = frame.segment.length;
+        uint32_t total = ISO_U16(context + 4u) + copied;
+        ISO_U16(context + 4u) = (uint16_t)total;
+        if (frame.segment.complete == 0u) {
+            ISO_U8(context + 7u) = 1u;
+            return (uint8_t)queued;
+        }
+        (void)opencfw_em9305_memset(&frame.header.sdu_length, 0u, 0x14u);
+        uint32_t sequence = ISO_U16(context + 8u);
+        frame.header.kind = 258u;
+        uint32_t stamp = ISO_U32(context + 16u);
+        frame.header.sdu_length = (uint16_t)(total - 12u);
+        frame.header.length = (uint16_t)(total - 12u);
+        frame.header.status = max < (uint16_t)(total - 12u);
+        ISO_U16(context + 8u) = (uint16_t)(sequence + 1u);
+        frame.header.sequence = (uint16_t)sequence;
+        frame.header.time_stamp = now - stamp;
+        frame.header.handle = (uint16_t)handle;
+        iso_report(queue, handle, ISO_U32(context), &frame);
+        cursor += copied;
+        ++queued;
+        length -= frame.segment.length + used;
+        ISO_U32(context) = 0u;
+        ISO_U8(context + 7u) = 0u;
+    } while ((length & 0xffu) != 0u);
+    return (uint8_t)queued;
+}

@@ -176,10 +176,12 @@ void time_calendar_bind_backend(time_calendar *clock,
 
 /* 0x0005A7BC: Unix seconds -> broken-down Gregorian time.  Fills the
  * nine-word struct and returns it; a NULL output falls back to a shared
- * static buffer (stock 0x20016AE4) whose pointer is returned.  Input is the
- * full uint32 epoch domain (stock uses unsigned division throughout). */
+ * static buffer (stock 0x20016AE4) whose pointer is returned. Input is
+ * a pointer to the full uint32 epoch domain (unsigned division throughout).
+ * Stock rereads that word for weekday after storing earlier output fields;
+ * input/output overlap therefore remains observable. */
 time_calendar_broken_down *time_calendar_unix_to_broken_down(
-    uint32_t epoch_seconds, time_calendar_broken_down *out);
+    const uint32_t *epoch_seconds, time_calendar_broken_down *out);
 
 /* 0x0005A8AC: broken-down Gregorian time -> Unix seconds with hard range
  * validation; returns TIME_CALENDAR_CONVERSION_INVALID (-1) on NULL or

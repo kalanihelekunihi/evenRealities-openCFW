@@ -1,0 +1,192 @@
+{
+ "schema_version": 2,
+ "scope": "Bounded differential reviews of apollo-main AmbiqSuite HAL modules (PWRCTRL, MSPI) against verbatim AmbiqSuite SDK 5.0.0 sources, which now replace the generated 5.1.0 copies and their hand variants in g2-apollo-main. Not workflow coverage, not hardware proof, not byte identity.",
+ "date": "2026-10-30",
+ "stock": {
+  "path": "g2/blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin",
+  "sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+  "virtual_address": "file offset + 0x437fe0"
+ },
+ "pwrctrl": {
+  "upstream": {
+   "path": "third-party/upstream/ambiqhal-apollo510-sdk5.0.0/mcu/apollo510/hal/am_hal_pwrctrl.c",
+   "sha256": "4d353b82551111d3d17cb32718fd44d4fd3e67806ee26b7a989ec4a45bc8ac6a",
+   "revision": "release_sdk5p0p0-5f68a8286b (the revision the bootloader PWRCTRL matched, bootloader-hal-upstream-review.json)"
+  },
+  "identification": [
+   "Function layout matches the bootloader's 5.0.0 block in source order with equal sizes: am_get_pwrctrl 32, TrimVersionGet 60, mcu_hp_lp_switch_sequence 300, mcu_mode_select 104, gpu_mode_select 232, mcu_memory_config 450, rom_enable/disable 82/82, sram_config 260, crypto_quiesce 74, periph_enable 314, msk_check 188, periph_disable 350, periph_enabled 72, INFO1_populate 404, low_power_init 810, buck_ldo_override_init 90, buck_ldo_update_override 52, control 292, cpdlp_get 32, temp_update 48, syspll_enable/disable 70/70.",
+   "apollo-main keeps am_hal_pwrctrl_gpu_mode_status (0x47f108, 20 B) and am_hal_pwrctrl_pwrmodctl_cpdlp_config (0x47ffc4) and drops am_hal_pwrctrl_settings_restore; the bootloader linked the opposite subset. Both are dead-code elimination of the same source.",
+   "Every bl/b.w call site in the 24 paired functions targets the same callee in both images (36 callee pairs, e.g. 0x480312 = bootloader 0x41cd1a am_hal_spotmgr_power_state_update, 0x4807a0 = 0x41d1c0 am_hal_delay_us, 0x4c44bc = 0x4222f0 am_hal_clkmgr_clock_request).",
+   "Stock RAM cells from the literal pools: g_ui32TrimVer 0x200001e8, g_DefaultMcuMemCfg 0x200001ec, g_eCurMcuPwrMode 0x20004538, g_sINFO1regs 0x20071948, g_orig_* 0x2007426c..0x200742ab (16 words, declaration order), g_ui8TRCENAcount 0x20074f5e, g_eCurGpuPwrMode/g_ePreGpuPwrMode/g_eCurROMPwrMode/g_bOrigTrimsStored 0x20074f60..0x20074f63."
+  ],
+  "build": {
+   "unit": "third-party/upstream/ambiqhal-apollo510-sdk5.0.0/mcu/apollo510/hal/am_hal_pwrctrl.c, role upstream",
+   "profile": "g2-apollo-main-108: g2-apollo-main-76 flags (hard-float, -Oz, -fno-inline, -mcpu=cortex-m55+nomve like every apollo-main profile) with the SDK 5.0.0 include tree and -mno-global-merge (keeps one data section per global so the stock cells can be pinned). Before +nomve the SLP vectorizer emitted MVE vldrw/vstrw in pwrctrl_INFO1_populate; stock has none.",
+   "object_sha256": "358bfd833e53f04af424b7ac47b0ac48086a918435d0908a334213e66d8ecae7",
+   "payload": "g2-apollo-main 2863/2863 compiled, 0 duplicate strong symbols, 24 unresolved (the same 24 names as build/full-g2-1029 before the swap)",
+   "note": "The +nomve object links to the same .text bytes as the object the harness ran on."
+  },
+  "replaced_hand_copies": [
+   "g2/src/apollo-main/hal/x-03-pwrctrl/am_hal_pwrctrl_mcu_mode_variant.c (mcu_hp_lp_switch_sequence_47ef74, am_hal_pwrctrl_mcu_mode_select_47f0a0)",
+   "g2/src/apollo-main/hal/final-r1-pwrctrl/am_hal_pwrctrl_control_variant.c (am_hal_pwrctrl_control_47fea0)",
+   "g2/src/apollo-main/runtime/info-memory/memory.c/.h and system/glue/memory_config_aliases.c (mcu_memory_config 0x47f204, sram_config 0x47f46a)",
+   "g2/src/apollo-main/ble/ble-flash/display_ble_flash_mode.c (rom_enable/rom_disable 0x47f3c6/0x47f418)",
+   "g2/src/apollo-main/drivers/power/power-vendor/ (power.c periph_enable/disable 0x47f5b8/0x47f7ae, power.h, power_product_native.c, README)",
+   "the 27 replacements of the generated 5.1.0 am_hal_pwrctrl.c ({gen}/ambiqhal-apollo510/am_hal_pwrctrl.c and its sources.json generated entry)",
+   "the duplicate RAM cell audio_ble_flash_mode (.g2_ram_20074f62) in ble/ble-codec/ble_codec_byte_cells.c; the cell is g_eCurROMPwrMode"
+  ],
+  "bindings": {
+   "compose_defsym_added": {
+    "am_hal_pwrctrl_control_47fea0": "am_hal_pwrctrl_control",
+    "am_hal_pwrctrl_mcu_mode_select_47f0a0": "am_hal_pwrctrl_mcu_mode_select",
+    "stock_enable": "am_hal_pwrctrl_periph_enable",
+    "stock_peripheral_enable": "am_hal_pwrctrl_periph_enable",
+    "audio_power_peripheral_on": "am_hal_pwrctrl_periph_enable",
+    "stock_disable": "am_hal_pwrctrl_periph_disable",
+    "audio_power_peripheral_off": "am_hal_pwrctrl_periph_disable"
+   },
+   "compose_defsym_removed": [
+    "am_hal_pwrctrl_control",
+    "am_hal_pwrctrl_mcu_memory_config",
+    "am_hal_pwrctrl_mcu_mode_select",
+    "am_hal_pwrctrl_rom_disable",
+    "am_hal_pwrctrl_rom_enable",
+    "am_hal_pwrctrl_sram_config",
+    "crypto_quiesce_47f56e",
+    "g2_power_get_descriptor",
+    "g2_power_tempco_pending",
+    "g2_power_tempco_postpone"
+   ]
+  },
+  "method": {
+   "harness": "build/main-pwr/diff_main_pwrctrl.py (ignored): reuses build/boot-hal-diff/diff_pwrctrl.py case generation, stubs and comparison on the IT-safe Unicorn base diff_queue.py.",
+   "new_side": "The manifest object linked standalone (build/main-pwr/t.ld): text at 0x7a0000, every global at its stock cell, callees --defsym'd to their stock addresses, plus a test-only am_hal_interrupt_master_set (stock inlines it). The linked text is identical to the -mno-global-merge object first tested.",
+   "both_sides": "Run inside the same stock image. SPOTMGR wrappers, clock manager, delay and status polls, INFO1 read, debug trace disable and clock-mux reset are stubbed at their stock addresses; am_hal_interrupt_master_disable 0x473940 runs natively on both sides. Each step compares return value, every MMIO write in order, every stubbed call with arguments, the pinned RAM cells, the out-buffer and the PRIMASK trace.",
+   "direct_calls": "The 18 public functions. The six upstream statics (am_get_pwrctrl, TrimVersionGet, crypto_quiesce, pwrctrl_periph_disable_msk_check, pwrctrl_INFO1_populate, mcu_hp_lp_switch_sequence) are exercised through their callers only: clang specialises them (IPSCCP folds TrimVersionGet's pointer to &g_ui32TrimVer, unused returns are dropped), so a direct call is not the stock ABI.",
+   "harness_fixes": [
+    "The per-step PRIMASK trace was one list shared by all steps of a case, so a later divergence showed up at step 0; each step now gets its own list (also in the bootloader harness).",
+    "Half the peripheral arguments now come from the specially handled ones (GFX 20, CRYPTO 23, DEBUG 28, OTP 29, PDM0 30, last 33, MAX 34); before, the GFX clock-request path was too rare for a mutant there to be caught."
+   ]
+  },
+  "results": {
+   "main_pwrctrl": {
+    "cases": 1500,
+    "mismatches": 0,
+    "cases_with_fault_or_timeout": 145,
+    "note": "faults are NULL-pointer arguments that both sides dereference identically (sram_config, mcu_memory_config, temp_update, cpdlp_get)"
+   },
+   "bootloader_pwrctrl_rerun": {
+    "cases": 1500,
+    "mismatches": 0,
+    "image": "build/boot-final/link/g2-apollo-bootloader.elf",
+    "note": "re-run with the per-step trace and peripheral bias above"
+   }
+  },
+  "mutant_checks": {
+   "periph_enable_crypto_index": {
+    "site": "0x7a05de cmp r4,#23 -> #22",
+    "cases": 400,
+    "caught": 4
+   },
+   "mcu_memory_config_rom_auto_bit": {
+    "site": "0x7a0278 addeq r0,#128 -> #64",
+    "cases": 400,
+    "caught": 34
+   },
+   "periph_enable_gfx_clock_request": {
+    "site": "0x7a0604 movs r0,#4 -> #5",
+    "cases": 400,
+    "caught": 4,
+    "note": "0 of 400 before the peripheral bias"
+   }
+  },
+  "limitations": [
+   "Synthetic MMIO and RAM only; no hardware run, and apollo-main still has no linked image.",
+   "Callees outside PWRCTRL are stubbed identically on both sides; apollo-main's SPOTMGR, clock manager and delay reconstructions are not covered here.",
+   "The eleven write-only g_orig_* statics are dropped by clang (stock keeps their stores at 0x20074280..0x200742ab); nothing reads them. Their cells differ in 80 of 1500 cases.",
+   "am_hal_pwrctrl_settings_restore, the *_get/_status functions and status_get are not linked in stock main and are not compared.",
+   "Nothing pins the PWRCTRL globals to their stock cells yet (g2-apollo-main.ld has no RAM map for them); the compose aliases g2_pwrctrl_trim_version, g2_pwrctrl_info1_regs and g2_pwrctrl_cur_mcu_mode_20004538 already name the upstream globals."
+  ],
+  "scope": "apollo-main PWRCTRL block 0x47ef18..0x4800e4"
+ },
+ "mspi": {
+  "scope": "apollo-main MSPI block 0x4bfa10..0x4c2af6",
+  "upstream": {
+   "path": "third-party/upstream/ambiqhal-apollo510-sdk5.0.0/mcu/apollo510/hal/mcu/am_hal_mspi.c",
+   "sha256": "46a84febaa2493f7daf2c6c88edda509272bf0ee554a0d93321c9d106547adcb",
+   "revision": "release_sdk5p0p0-5f68a8286b (SDK 5.0.0 RTM, the bootloader MSPI revision)"
+  },
+  "identification": [
+   "A normalised disassembly (branch targets and pc-relative literal offsets masked) of all 27 stock MSPI functions the bootloader also links is identical instruction for instruction to the bootloader's verified 5.0.0 RTM block (e.g. am_hal_mspi_control 1627/1627, mspi_device_configure 685/685, am_hal_mspi_device_configure 478/478); only literal pools differ.",
+   "apollo-main additionally keeps build_dma_cmdlist 0x4bfa3c, mspi_cq_add_transaction 0x4bfcc0 and am_hal_mspi_nonblocking_transfer 0x4c2208, which the bootloader's linker dropped.",
+   "Paired callees: CMDQ init/enable/disable/get_status/term/error_resume = 0x538d58/0x538e3c/0x538e8c/0x53901a/0x53909a/0x5390fc, clock manager 0x4c44bc/0x4c4530/0x4c45a4, power domains 0x47f5b8/0x47f7ae, delay 0x4807a0, status check 0x480826. g_MSPIState is 0x200523d8 (bootloader 0x2001caa0); gAmHalCmdq 0x2006ef28.",
+   "The earlier note that apollo-main 'contains the post-RTM aperture table' does not apply to its MSPI code: the HAL text is RTM. Its callers (mx25u_mspi_init.c, drv_mx25u25643g.c, fal-norflash) already pass the stock 24-byte RTM dev-config bytes and stock request numbers, which the 5.1.0 copy did not match."
+  ],
+  "build": {
+   "unit": "third-party/upstream/ambiqhal-apollo510-sdk5.0.0/mcu/apollo510/hal/mcu/am_hal_mspi.c, role upstream",
+   "profile": "g2-apollo-main-108",
+   "object_sha256": "34e0aa93e8ef1e38baeb9eca1192cb802220997e5e5d1d7014792777cccd1a10",
+   "payload": "g2-apollo-main 2851/2851 compiled, 0 duplicate strong symbols, the same 24 unresolved names"
+  },
+  "replaced_hand_copies": [
+   "g2/src/apollo-main/drivers/flash/mspi/ (12 files: the hand split of am_hal_mspi_control 0x4c0f78, entry g2_norflash_config_transfer_4c0f78)",
+   "the generated 5.1.0 am_hal_mspi.c ({gen}/ambiqhal-apollo510/am_hal_mspi.c, 12 replacements: ten statics made external, control compiled out)"
+  ],
+  "bindings": {
+   "compose_defsym_added": {
+    "g2_norflash_config_transfer_4c0f78": "am_hal_mspi_control"
+   },
+   "compose_defsym_removed": [
+    "am_hal_mspi_control",
+    "g2_main_mspi_clock_route_4c0758",
+    "g2_main_mspi_configure_aux_4bfed6",
+    "g2_main_mspi_configure_finish_4c07d0",
+    "g2_main_mspi_mode_update_4c0644",
+    "g2_main_mspi_queue_activate_4bfe60",
+    "g2_main_mspi_queue_flags_4bfa10",
+    "g2_main_mspi_queue_start_4bfd44",
+    "g2_main_mspi_queue_terminate_4bfd6e"
+   ],
+   "note": "The removed aliases named upstream statics; only the retired hand split and not-linked files used them."
+  },
+  "method": {
+   "harness": "build/main-pwr/diff_main_mspi.py (ignored), reusing build/boot-hal-diff/diff_mspi.py case generation (13 public functions, 41 control requests, SDK 5.0.0 dev-config layout) and comparison.",
+   "new_side": "The manifest object linked standalone (build/main-pwr/tm.ld): text at 0x7a0000, g_MSPIState at 0x200523d8, callees --defsym'd to the stock addresses.",
+   "both_sides": "Run inside the same stock image; stock CMDQ and am_hal_interrupt_master_disable run natively on both sides, clock manager / power domains / delay / status check are stubbed at their stock addresses. Each step compares return value, MMIO writes in order, stub calls, g_MSPIState, gAmHalCmdq, buffers, TCBs and the module register block; code pointers stored in RAM are compared by name."
+  },
+  "results": {
+   "cases": 1500,
+   "mismatches": 0,
+   "emulation_budget": 10000000
+  },
+  "mutant_checks": {
+   "configure_xip_register_offset": {
+    "site": "0x7a01c0 str 0x9c -> 0x98",
+    "cases": 400,
+    "caught": 381
+   },
+   "blocking_transfer_store_offset": {
+    "site": "0x7a1658 str [r5,#8] -> [r5,#4]",
+    "cases": 400,
+    "caught": 139
+   },
+   "device_configure_clock_range": {
+    "site": "0x7a02d6 cmp r0,#20 -> #19",
+    "cases": 400,
+    "caught": 13
+   },
+   "equivalent_in_domain": "cmp r0,#20 -> #21 (clock index 24 is never generated) and interrupt_service tst 0x18c0 -> 0x1880 were not caught in 400 cases each"
+  },
+  "limitations": [
+   "Synthetic MMIO and RAM only; no hardware run, and apollo-main still has no linked image.",
+   "am_hal_mspi_nonblocking_transfer, highprio_transfer and the CQ/DMA paths with real completion callbacks are not exercised (as in the bootloader review).",
+   "Nothing pins g_MSPIState to 0x200523d8 in an apollo-main link yet."
+  ]
+ },
+ "apollo_main_mve": {
+  "finding": "Stock ota_s200_firmware_ota.bin contains no Helium/MVE instructions (0 dlstp/letp/vctp/vldr*/vstr*/vpst in a full-image disassembly). The g2-apollo-main build emitted 155 dlstp/letp loops, 13 vctp, 498 vldrw, 313 vstrw, 173 vldrb and 38 vpst across 258 objects.",
+  "cause": "clang lowers memcpy/memset and struct copies to MVE tail-predicated loops and q-register moves whenever MVE is available; -fno-vectorize/-fno-slp-vectorize do not stop that (tried: counts unchanged).",
+  "change": "All 38 apollo-main profiles use -mcpu=cortex-m55+nomve (FPv5 hard-float unchanged: __ARM_FP 0xe, __ARM_PCS_VFP; only __ARM_FEATURE_MVE goes away). Composed object: 0 MVE instructions; 2863/2863 compiled, 0 duplicates, the same 24 unresolved names.",
+  "bootloader": "build/boot-final/link/g2-apollo-bootloader.elf has 0 MVE instructions (profiles already -fno-vectorize, softfp)."
+ }
+}

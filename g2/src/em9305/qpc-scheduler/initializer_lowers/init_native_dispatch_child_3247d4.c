@@ -1,27 +1,16 @@
-/* Native report submission, conditional return and delayed event bit13. */
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_dispatch_child_3247d4\n"
-".type opencfw_em9305_dispatch_child_3247d4,@function\n"
-"opencfw_em9305_dispatch_child_3247d4:\n"
-"L3247d4:\n"
-"ld r1,[r0,0xafc]\n"
-"L3247dc:\n"
-"ldb r0,[r1,64]\n"
-"L3247e0:\n"
-"cmp_s r0,1\n"
-"L3247e2:\n"
-"jne_s [blink]\n"
-"L3247e4:\n"
-"ldb r0,[0x805b18]\n"
-"L3247ec:\n"
-"stb 2,[r1,64]\n"
-"L3247f0:\n"
-"mov_s r1,0\n"
-"L3247f2:\n"
-"b.d opencfw_em9305_wsf_event_post\n"
-"L3247f6:\n"
-"bset_s r1,r1,0xd\n"
-".size opencfw_em9305_dispatch_child_3247d4,.-opencfw_em9305_dispatch_child_3247d4\n"
-);
+#include <stdint.h>
+
+/* Native 0x3247d4..0x3247f6: when the nested state byte (+64) is 1, move it
+ * to 2 and post event 0x2000 to the WSF handler at 0x805b18. Otherwise the
+ * state byte is returned unchanged. */
+extern uint32_t opencfw_em9305_wsf_event_post(uint32_t,uint32_t);
+
+uint32_t opencfw_em9305_dispatch_child_3247d4(uintptr_t record)
+{
+    uintptr_t nested = *(volatile uint32_t *)(record + 0xafcu);
+    uint32_t state = *(volatile uint8_t *)(nested + 64u);
+    if (state != 1u) return state;
+    uint32_t handler = *(volatile uint8_t *)(uintptr_t)0x805b18u;
+    *(volatile uint8_t *)(nested + 64u) = 2u;
+    return opencfw_em9305_wsf_event_post(handler, 0x2000u);
+}

@@ -1,0 +1,197 @@
+{
+  "schema": 1,
+  "scope": "R1 event publisher 0x8d8fc, native body 202 bytes; explicit 48-byte frame/16-byte queue record",
+  "status": "native-frame fidelity repair in C control candidate; not instruction qualified",
+  "stock_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "behavior": {
+    "paired_cases": 2886,
+    "executions": 5772,
+    "source_report": "build/sources-goal-r1-event-publish-frame/report.json",
+    "checks": [
+      "all 16 queue record bytes including native leading stack word",
+      "entire native 48-byte frame after return",
+      "id boundaries and length branches",
+      "allocator failures and changing log gates",
+      "short payload aliasing native record fields",
+      "queue mutation of thread, payload pointer, leading word and length",
+      "queue status and post-failure wakeup/free behavior",
+      "native C publisher and enqueue, native movement adapter and musl execute",
+      "SP, saved registers, masks and heap/payload guards"
+    ],
+    "modeled": [
+      "allocator/free",
+      "CMSIS queue/flags",
+      "structured logging"
+    ],
+    "limits": [
+      "Private helper frames below native frame excluded",
+      "Physical queue scheduling/hardware unproven"
+    ]
+  },
+  "pipeline": {
+    "paired_pipeline_cases": 192,
+    "executions": 384,
+    "actual_C": [
+      "multicast dispatcher",
+      "native event publisher",
+      "event bus enqueue",
+      "consumer",
+      "mutex wrappers",
+      "thread/task getters",
+      "memory movement"
+    ],
+    "modeled": [
+      "allocator",
+      "CMSIS mutex/queue/flags APIs",
+      "opaque callbacks",
+      "release"
+    ],
+    "checks": [
+      "queued copy bytes and fields",
+      "successful queue wakes consumer",
+      "failed queue still wakes and releases its copy",
+      "multicast releases original copy",
+      "each successful queued descriptor executes consumer and native callbacks",
+      "uninitialized leading queue word excluded; all defined fields checked",
+      "SP, saved registers, masks, final shared state"
+    ],
+    "limits": [
+      "Queue scheduling and physical hardware modeled",
+      "Native publisher private stack residue excluded"
+    ]
+  },
+  "negative_controls": [
+    {
+      "mutation": "zero-leading-word",
+      "rejected": true
+    },
+    {
+      "mutation": "wrong-frame-record",
+      "rejected": true
+    }
+  ],
+  "object_audit": {
+    "other_574_objects_unchanged": true,
+    "enqueue_function_bytes_and_relocations_unchanged": true,
+    "three_context_owners_bytes_flags_alignment_relocations_unchanged": true,
+    "manifest_unchanged": true,
+    "composed_import_sets_unchanged": true,
+    "native_frame_bridge_bytes": 18,
+    "native_frame_bridge_relocation": [
+      [
+        8,
+        10,
+        "event_publish_body"
+      ]
+    ]
+  },
+  "normal_build": {
+    "units": 575,
+    "application_units": 501,
+    "bootloader_units": 74,
+    "application_imports": 175,
+    "bootloader_imports": 34,
+    "failures": 0,
+    "duplicate_strong_symbols": 0,
+    "import_delta": 0
+  },
+  "qualification": {
+    "compiled_candidates": 5,
+    "selected_regions": 0,
+    "canonical_plan_unchanged": true
+  },
+  "hybrid": {
+    "application_equals_stock": true,
+    "totals": {
+      "binary-pull-through": 642279,
+      "source-built": 3881,
+      "resource-file": 248
+    },
+    "source_completeness_proven": false
+  },
+  "retained_assembly": {
+    "native_frame_bridge_bytes": 18,
+    "reason": "Preserve existing queue leading word and externally writable record at caller SP-44 without an uninitialized C local"
+  },
+  "limits": [
+    "Direct entry checks all native frame/queue bytes; caller-specific stack history outside supplied frame is not reconstructed",
+    "Pipeline checks defined queue fields and cloned descriptors; leading word remains excluded there because the upstream C caller private frame is not stock-identical",
+    "Allocator/free, queue/flags and log APIs are modeled; physical hardware/scheduling unproven",
+    "Copy API/ordinary RAM results checked, internal access-size identity and MMIO targets excluded",
+    "No full source executable link or byte-identical full-source rebuild; no G2 gate advanced"
+  ],
+  "inputs": [
+    {
+      "path": "build/sources-goal-r1-event-publish-frame/report.json",
+      "sha256": "8836039c5d7b7be9bfa7aa64c82139d126e3816c98e3ef587a5ba44861aee112"
+    },
+    {
+      "path": "build/hybrid-goal-r1-event-publish-frame/build-report.json",
+      "sha256": "3d2a96d3656a0f41ad048d5f686d4c14d45712fefbb12a4e65529173152214db"
+    },
+    {
+      "path": "tools/build/source-plan.json",
+      "sha256": "716cf17b8cf2bed8ad6a99a672b1856af4c5380842c95cb14b9a263a7bb42bc8"
+    },
+    {
+      "path": "r1/src/application/board/native_events.c",
+      "sha256": "d5a450ea01982b60c752edda13e9999bc6de882475dc631a6d8dde0ecbb7d404"
+    },
+    {
+      "path": "r1/src/sources.json",
+      "sha256": "4b6d47de0b0e1626f5df3ee73725bc221c9e05373e2a098596abdf560fd5a0ca"
+    },
+    {
+      "path": "r1/symbols/function-frontier.csv",
+      "sha256": "f7cd1eb2cc3fa05d0135d2e21634e0aa09fa567865e013b3e1c43766324fd351"
+    },
+    {
+      "path": "build/goal-r1-event-publish-frame/before.c",
+      "sha256": "75497899bbf3b85a44323b3d2e09efad73ebdaf3ddcdc31a9382be7e61f9387b"
+    },
+    {
+      "path": "build/goal-r1-event-publish-frame/verify.py",
+      "sha256": "1ea78930a97110946e1906c462629a39b17c9498abee7d2b7018bc2a23fa4296"
+    },
+    {
+      "path": "build/goal-r1-event-publish-frame/results.json",
+      "sha256": "df65ad96257fb1200b10635d5674d4b56a32dd82323a294f41bf93a46ddbda5d"
+    },
+    {
+      "path": "build/goal-r1-event-publish-frame/pipeline.py",
+      "sha256": "d8300553dd2baf97859a3ce5088d0f39f42e3a39895ca5876e83b35462664cea"
+    },
+    {
+      "path": "build/goal-r1-event-publish-frame/pipeline-results.json",
+      "sha256": "212b928ecd625dfab4c3702b5ea47f8a0281c2c3bb3f609f86eb5fc76405a757"
+    },
+    {
+      "path": "build/goal-r1-event-publish-frame/negative.py",
+      "sha256": "4217688a3cdb4769b37d550cb5e221df0720256ec6a43f72df32634e3bc47063"
+    },
+    {
+      "path": "build/goal-r1-event-publish-frame/negative-results.json",
+      "sha256": "47856a2ea59e0e21862bc35cd8402363f1cf7781b2a03073d809d3494e8e768f"
+    },
+    {
+      "path": "build/goal-r1-event-publish-frame/audit.py",
+      "sha256": "3fcc9a941ac4714667df11f908023843fecbb11d16862206b637b5d24000fd73"
+    },
+    {
+      "path": "build/goal-r1-event-publish-frame/audit-results.json",
+      "sha256": "f51eb8d30f5ca476fccbd743ff4e5ff6eb3caaf033dfda09901b035d7074d540"
+    },
+    {
+      "path": "build/goal-r1-event-publish-frame/rea.json",
+      "sha256": "778685808a6b4b9e4910ca23bbe070bcb0ede680629c459a542517bb2dfdfa6f"
+    },
+    {
+      "path": "build/goal-r1-event-publish-frame/qualified/qualification.json",
+      "sha256": "82b70ac25b02435a8e2b4f540d7abdefdf7c8dd10ae987fb04cff41d004080eb"
+    },
+    {
+      "path": "build/goal-r1-event-publish-frame/qualified/source-plan.json",
+      "sha256": "3da40e3d766877c0b3059bee372f651c1f56681157782eba12ee3076f1834a0f"
+    }
+  ]
+}

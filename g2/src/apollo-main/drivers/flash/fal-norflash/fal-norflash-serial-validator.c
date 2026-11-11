@@ -3,6 +3,10 @@
  * Disable/configure/enable and final clock selection are hardware lowers.
  */
 #include <stdint.h>
+/* Stock-RAM literals rewritten to named objects (sim-test wave 2026-10-26,
+ * .waves/sim-fix/apply.py): g2ref_X is the linker symbol X. */
+#include <stdint.h>
+extern unsigned char g2ref_g2_norflash_device_context_20074540[] __asm__("g2_norflash_device_context_20074540");
 
 extern volatile uint32_t g2_norflash_controller_handle_20074544;
 extern uint32_t g2_norflash_disable_mspi_4c0ea8(uint32_t controller);
@@ -53,7 +57,7 @@ uint32_t g2_norflash_set_serial_470d7c(const void *configuration)
         report(1434u, configure_error, configure_error_short);
         return 1u;
     }
-    uint32_t clock_context = *(volatile uint32_t *)(uintptr_t)0x20074540u;
+    uint32_t clock_context = *(volatile uint32_t *)(uintptr_t)((uint32_t)(uintptr_t)g2ref_g2_norflash_device_context_20074540);
     uint32_t clock_handle = *(volatile uint32_t *)(uintptr_t)clock_context;
     uint32_t mode = ((const uint8_t *)configuration)[8];
     g2_norflash_clock_select_4c32b4(clock_handle, mode);

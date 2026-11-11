@@ -1,0 +1,168 @@
+{
+  "normal_report": "build/sources-goal-r1-rtos-unordered-wait-c/report.json",
+  "report_sha256": "876bccc5f40c9e9dbe2e1216196b267f643452b46c785e3155882c262dfe104f",
+  "unit": {
+    "source": "r1/src/application/rtos/task-wait/task-wait.c",
+    "payload": "r1-application",
+    "role": "candidate",
+    "toolchain": "clang",
+    "link": true,
+    "expect": "compile",
+    "returncode": 0,
+    "argv": [
+      "/usr/bin/clang",
+      "--target=arm-none-eabi",
+      "-mcpu=cortex-m4",
+      "-mthumb",
+      "-mfpu=fpv4-sp-d16",
+      "-mfloat-abi=hard",
+      "-ffreestanding",
+      "-fno-strict-aliasing",
+      "-std=c11",
+      "-Os",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-DNRF52840_XXAA",
+      "-DSOFTDEVICE_PRESENT",
+      "-DNRF_SD_BLE_API_VERSION=7",
+      "-DS140",
+      "-DFREERTOS",
+      "-DFLOAT_ABI_HARD",
+      "-isystem",
+      "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/r1/src/config/rtos",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/r1/config-recovered",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/third-party/upstream/freertos-kernel/include",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/external/freertos/portable/GCC/nrf52",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/external/freertos/portable/CMSIS/nrf52",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/third-party/upstream/cmsis-freertos/CMSIS/RTOS2/FreeRTOS/Include",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/toolchain/cmsis/include",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/softdevice/common",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/experimental_section_vars",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/util",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/delay",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/atomic",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx/mdk",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx/hal",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx/drivers/include",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/integration/nrfx",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/integration/nrfx/legacy",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/softdevice/s140/headers",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/softdevice/s140/headers/nrf52",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/third-party/upstream/cmsis-5-590/CMSIS/RTOS2/Include",
+      "-fshort-enums",
+      "-fwrapv",
+      "-O0",
+      "-fno-inline",
+      "-I",
+      "/Users/kalani/Repo/evenRealities-openCFW/r1/src/config/rtos",
+      "-include",
+      "/Users/kalani/Repo/evenRealities-openCFW/r1/src/config/rtos/native_port_assert.h",
+      "-MD",
+      "-MF",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-rtos-unordered-wait-c/r1/r1-application/r1__src__application__rtos__task-wait__task-wait.c.d",
+      "-c",
+      "/Users/kalani/Repo/evenRealities-openCFW/r1/src/application/rtos/task-wait/task-wait.c",
+      "-o",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-rtos-unordered-wait-c/r1/r1-application/r1__src__application__rtos__task-wait__task-wait.c.o"
+    ],
+    "source_sha256": "a9669099d70c563aae45b98775709a1ec6d24374f0ccd2a1d77794aff2fe3b76",
+    "object_sha256": "4ed508f60a802931a67df252c99c8997a21248101cbdd35fcb28c0535cb0c4f2",
+    "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-rtos-unordered-wait-c/r1/r1-application/r1__src__application__rtos__task-wait__task-wait.c.o",
+    "strong": [
+      "uxTopUsedPriority",
+      "vTaskInternalSetTimeOutState",
+      "vTaskMissedYield",
+      "vTaskPlaceOnEventList",
+      "vTaskPlaceOnUnorderedEventList",
+      "vTaskSetTimeOutState",
+      "xSuspendedTaskList",
+      "xTaskCheckForTimeOut",
+      "xTaskPriorityDisinherit"
+    ],
+    "weak": [],
+    "undefined": [
+      "pxCurrentTCB",
+      "pxDelayedTaskList",
+      "pxOverflowDelayedTaskList",
+      "pxReadyTasksLists",
+      "uxListRemove",
+      "uxTopReadyPriority",
+      "vListInsert",
+      "vPortEnterCritical",
+      "vPortExitCritical",
+      "xNextTaskUnblockTime",
+      "xNumOfOverflows",
+      "xYieldPending"
+    ]
+  },
+  "upstream": {
+    "path": "third-party/upstream/freertos-kernel/tasks.c",
+    "sha256": "14020d617b96dd2814e1211f6e3b645bcf5e2bd3179c23fe7dd16bc666fe9463"
+  },
+  "direct": {
+    "total": 7200,
+    "destinations": {
+      "delayed": 4608,
+      "suspended": 1440,
+      "overflow": 1152
+    },
+    "digest": "1eb88c2408eece901bc671d9be3330dd31c70962a60e4391b545ec60fdcbaf78",
+    "actual_C_lists": true,
+    "no_executable_bindings": true,
+    "limits": [
+      "Scheduler-suspended precondition is assumed and represented by the existing native word",
+      "No stock API identity, full event-group/scheduler runtime or hardware timing claim"
+    ]
+  },
+  "negative": {
+    "missing-reserved-bit": {
+      "rejected": true,
+      "diagnostic": "Traceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-rtos-unordered-wait-c/verify.py\", line 44, in <module>\n    destination,receipt=run(*c);label={DELAY:'delayed',OVER:'overflow',SUSPEND:'suspended'}[destination];counts[label]=counts.get(label,0)+1;digest.update(json.dumps([c,receipt]).encode());total+=1\n                        ~~~^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-rtos-unordered-wait-c/verify.py\", line 33, in run\n    assert word(EVENTITEM)==(value|0x80000000) and word(EVENTITEM+12)==TASK;event_nodes=[x[0] for x in event];position=len(event_nodes) if cursor==0 else cursor-1;event_nodes.insert(position,EVENTITEM);assert walk(EVENT)==event_nodes;assert word(EVENT+4)==(EVENT+8 if cursor==0 else event[cursor-1][0])\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    "sorted-event-insertion": {
+      "rejected": true,
+      "diagnostic": "Traceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-rtos-unordered-wait-c/verify.py\", line 44, in <module>\n    destination,receipt=run(*c);label={DELAY:'delayed',OVER:'overflow',SUSPEND:'suspended'}[destination];counts[label]=counts.get(label,0)+1;digest.update(json.dumps([c,receipt]).encode());total+=1\n                        ~~~^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-rtos-unordered-wait-c/verify.py\", line 33, in run\n    assert word(EVENTITEM)==(value|0x80000000) and word(EVENTITEM+12)==TASK;event_nodes=[x[0] for x in event];position=len(event_nodes) if cursor==0 else cursor-1;event_nodes.insert(position,EVENTITEM);assert walk(EVENT)==event_nodes;assert word(EVENT+4)==(EVENT+8 if cursor==0 else event[cursor-1][0])\n                                                                                                                                                                                                                 ^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    "disable-indefinite-wait": {
+      "rejected": true,
+      "diagnostic": "Traceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-rtos-unordered-wait-c/verify.py\", line 44, in <module>\n    destination,receipt=run(*c);label={DELAY:'delayed',OVER:'overflow',SUSPEND:'suspended'}[destination];counts[label]=counts.get(label,0)+1;digest.update(json.dumps([c,receipt]).encode());total+=1\n                        ~~~^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-rtos-unordered-wait-c/verify.py\", line 36, in run\n    if destination==SUSPEND:assert walk(SUSPEND)==[STATE] and word(STATE)==0x77\n                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    "shift-wake-time": {
+      "rejected": true,
+      "diagnostic": "Traceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-rtos-unordered-wait-c/verify.py\", line 44, in <module>\n    destination,receipt=run(*c);label={DELAY:'delayed',OVER:'overflow',SUSPEND:'suspended'}[destination];counts[label]=counts.get(label,0)+1;digest.update(json.dumps([c,receipt]).encode());total+=1\n                        ~~~^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-rtos-unordered-wait-c/verify.py\", line 38, in run\n    assert walk(SUSPEND)==[] and word(STATE)==wake;target=expected_over if destination==OVER else expected_delay;target.append((STATE,wake));target.sort(key=lambda x:x[1])\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    }
+  },
+  "audit": {
+    "changed": [
+      "r1/src/application/rtos/task-wait/task-wait.c"
+    ],
+    "unchanged_objects": 728,
+    "modules": {
+      "r1/src/application/rtos/task-wait/task-wait.c": {
+        "unchanged_existing_text_sections": [
+          ".text.prvAddCurrentTaskToDelayedList",
+          ".text.vTaskInternalSetTimeOutState",
+          ".text.vTaskMissedYield",
+          ".text.vTaskPlaceOnEventList",
+          ".text.vTaskSetTimeOutState",
+          ".text.xTaskCheckForTimeOut",
+          ".text.xTaskPriorityDisinherit"
+        ],
+        "new_text_sections": [
+          ".text.vTaskPlaceOnUnorderedEventList"
+        ],
+        "source_prefix_preserved": true
+      }
+    }
+  },
+  "resolved_imports": [
+    "vTaskPlaceOnUnorderedEventList"
+  ],
+  "limits": [
+    "Pinned upstream semantics and existing native layout contracts; no stock API identity claim",
+    "Scheduler-suspended precondition assumed; no complete scheduler or event-group runtime validation",
+    "No physical device, hardware timing or complete firmware image proof"
+  ]
+}

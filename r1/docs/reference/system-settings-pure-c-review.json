@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "scope": "R1 C settings cached accessors and table-routed regulator command",
+  "report": "build/sources-goal-r1-system-settings-pure-c/report.json",
+  "comparison_report": "build/sources-goal-r1-power-command-pure-c/report.json",
+  "audit": {
+    "compiled_units": 855,
+    "application_imports": 61,
+    "bootloader_imports": 22,
+    "unchanged_prior_nongenerated_objects": 844,
+    "changed_nongenerated_objects": [
+      "r1/src/application/runtime/native_system_settings.c"
+    ],
+    "removed_imports": [
+      "r1_system_settings_plan_command"
+    ],
+    "new_imports": [],
+    "module_table_object_unchanged": true,
+    "no_new_persistent_state": true
+  },
+  "direct": {
+    "stock_C_comparisons": 9912,
+    "C_only_failed_read_cases": 48,
+    "actual_C_getter_setter_handler_and_payload_getter": true,
+    "actual_SVC_63_executed": true,
+    "canonical_legacy_alias_same_body": true,
+    "KV_and_response_and_SVC_backend_modeled": true,
+    "private_frames_excluded": true
+  },
+  "table_cache_header_pipeline": {
+    "actual_C_table_cache_header_pipeline_cases": 25856,
+    "canonical_table_entry_verified": true,
+    "dirty_flags_and_complete_record_verified": true,
+    "critical_sections_balanced": true,
+    "actual_SVC_63": true,
+    "hardware_and_KV_flush_unverified": true
+  },
+  "compiled_defects_rejected": [
+    {
+      "name": "wrong_response_offset",
+      "rejected": true
+    },
+    {
+      "name": "raw_requested_equality",
+      "rejected": true
+    },
+    {
+      "name": "wrong_persisted_bit",
+      "rejected": true
+    },
+    {
+      "name": "failed_setter_read_ignored",
+      "rejected": true
+    },
+    {
+      "name": "failed_getter_read_ignored",
+      "rejected": true
+    }
+  ],
+  "intentional_C_policy": [
+    "Failed cached getter reads report zero with a destination, or the raw error without one.",
+    "Failed cached setter reads skip write and idle scan and return the error.",
+    "The handler still ignores setter status and applies the requested regulator state, matching its established control flow."
+  ],
+  "limits": [
+    "The SDK SVC 63 boundary remains architectural assembly; only the three private-frame wrappers are removed.",
+    "Backend sampling of the SVC result, critical sections, logging and final response are modeled.",
+    "Physical DCDC state and timing, KV flush/persistence, final application linking/startup unverified.",
+    "Private-frame aliases, scratch-register residues, faults/concurrency and incomplete packet buffers excluded.",
+    "Byte identity is not claimed."
+  ],
+  "evidence_files": {
+    "build/sources-goal-r1-system-settings-pure-c/report.json": "6140122e570e6ca2a18b3a4b50022341511af5665fe158a9691acef4e6a3abdd",
+    "build/sources-goal-r1-power-command-pure-c/report.json": "d3a5ce1eb0bb9fa1d1fab36fe5ac4ccbc2d05b1b667c70238dbf57e780211b5e",
+    "r1/src/application/runtime/native_system_settings.c": "0e8a18d5d48373c05c5414adb554b38275ad5814a9a341bfd4120c908b9fcb56",
+    "r1/src/application/board/native_protocol_modules.c": "9626749c041d1b49f6714658dd80ec03d7c2d0b657123907ee3ccd091c6ab92b",
+    "r1/src/application/board/native_kv_class.c": "e9791d39b7a9b5380b1dbce3c7422be921131abbd0e09c3387ea3d4b9930bf6e",
+    "r1/src/application/runtime/native_protocol_ack.c": "d03b6416838d3dd10e07c5cd005d732408b432d3447000f2cb94492af2c6247c",
+    "r1/src/application/runtime/native_protocol_serial.c": "86ba987541e0ff6286e73c55a08369fdee40cc22c9f5ae5b32f4d2b440e75420",
+    "r1/src/application/runtime/native_health_commands.c": "6ce01d2e42fbb9ad7c54e0f017eb51a6e90b9a0300eb559178be7609547bf5dc",
+    "r1/src/application/board/native_glasses_status.c": "1d55c59b30971b9bba3be44f9f562136670529a2720162e744af8b535f032e6a",
+    "r1/src/sources.json": "618e3f6056f74edee68027c82dddb1d2e8c53810e0c04e416f42841fc974e4ec",
+    "tools/build/source-plan.json": "eeb516e31b3310fb0718f36908977f8125723f7c5e0e86cd6744395826259a4d",
+    "build/goal-r1-system-settings-pure-c/rea.json": "62c6a4f73ce3d045cea39f9aba17d96eede4cd653afa8c76059257ceb8a618d4",
+    "build/goal-r1-system-settings-pure-c/verify.py": "8a663be8edc3fff999b909dea17b85ac24ff9aac7ffa353a208b2c25baba01c4",
+    "build/goal-r1-system-settings-pure-c/results.json": "a5ead414cc12ac5f3bf0ae2a2b9ec83f91248d4b9ec3409c0a66744265029012",
+    "build/goal-r1-system-settings-pure-c/verification.log": "c775f3f84fa98239dd37a19be085bf7f50b281a5c6408fc4676fa0d2da093f61",
+    "build/goal-r1-system-settings-pure-c/pipeline.py": "b49af878ce26bca33136fe0238ec1e804a37ba363e6e72b17c1f797caa84b0fd",
+    "build/goal-r1-system-settings-pure-c/pipeline/results.json": "f6fad9bf6f2850adff289a65cf874b7e537ee7c4ea695330c713ebfa86603f14",
+    "build/goal-r1-system-settings-pure-c/pipeline.log": "e2788e7773819e187461ecd28ea63e203c16a7870363b067097ee32f33621ed6",
+    "build/goal-r1-system-settings-pure-c/negative.py": "8a61867666860b71b7c7b925f105275786b52331652efaf8c2fbfb536b10e1b6",
+    "build/goal-r1-system-settings-pure-c/negative.json": "6efac29fd7c431cba60232c1a8d3e1f615acf4e3cdd340e5af014d0d7d2a1708",
+    "build/goal-r1-system-settings-pure-c/negative.log": "efe661a41e51f9eeba0dbbe30fc64bc9280936f4f7e494f65cfee95a6b803c46",
+    "build/goal-r1-system-settings-pure-c/build.log": "f37fcf91c270a1ea0f869a8bd9b57798984e8b9dbf277115148e94b7e95b6f6f",
+    "build/goal-r1-system-settings-pure-c/sources-check.log": "f610d186f791ebf717d9fd6eed6c4f28612779fff34b885bcf8dc8a49c9ae80c"
+  }
+}

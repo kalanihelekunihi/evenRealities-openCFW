@@ -1,0 +1,92 @@
+{
+  "schema_version": 1,
+  "report": "build/sources-goal-r1-eabi-conversions-final-c/report.json",
+  "report_sha256": "e48a2963e41709a4b295d6132a7f90bb3f2589e8928b42cb0987267ac9b49e79",
+  "manifest_sha256": "07d1d673a3a503de947c5a2336275e5281b759cb112b0562bb60cd07f9eb6853",
+  "verification": {
+    "calls": 32586,
+    "d2f_stock_vectors": 2060,
+    "f2d_stock_vectors": 2060,
+    "integer_vectors": 2245,
+    "comparison_pairs": 2192,
+    "Goodix_mean_cases": 120,
+    "Goodix_quantile_cases": 7,
+    "default_rounding_environment_only": true,
+    "exception_flags_claimed": false,
+    "Goodix_probe_source_recompiled_with_function_sections": true
+  },
+  "defect_controls": [
+    "wrong-PCS",
+    "wrong-narrow",
+    "wrong-zero-sign",
+    "signed-unsigned",
+    "unordered-accepted"
+  ],
+  "prior_unit_audit": {
+    "unchanged_prior_object_hashes": 778,
+    "changed_object_hashes": [
+      [
+        "r1-bootloader",
+        "{gen}/r1_startup_vectors.S"
+      ],
+      [
+        "r1-bootloader",
+        "{gen}/r1_uecc.c"
+      ]
+    ],
+    "generated_boot_crypto_and_vectors_allocated_bytes_and_relocations_unchanged": true,
+    "removed_application_imports": [
+      "__aeabi_d2f",
+      "__aeabi_dcmpge",
+      "__aeabi_f2d",
+      "__aeabi_l2f",
+      "__aeabi_ul2d",
+      "__aeabi_ul2f"
+    ]
+  },
+  "rea": [
+    {
+      "operation": "d2f",
+      "evidence_id": "ev_56682614415a0972bce9824b44558b67d09e3fb8ebf39a915d1306cd96782814",
+      "address": "0x27f6c",
+      "length": 56,
+      "bytes_sha256": "0137586b61da47e8d21630e2e10a9763d51f571c50ad30eafd36eae072da0483",
+      "matches_locked_raw": true,
+      "receipt_sha256": "7e2ec151e82b5f0c64acd0e87598cc5960735e0fb98eea0d64dd5364c5a46da1"
+    },
+    {
+      "operation": "f2d",
+      "evidence_id": "ev_0d4e5933180876e988cd11bf2961bafbf6616c70567f5b01a8647c4ce8572d08",
+      "address": "0x27ee4",
+      "length": 38,
+      "bytes_sha256": "c7729cb5e6e25cea09e8b8f937410cf3e9011a160735cf5db75ad6be4838aa96",
+      "matches_locked_raw": true,
+      "receipt_sha256": "b3fcd4dd27463285b278c63addce88f243b3a724cf479977c5db549f9a5a8f78"
+    },
+    {
+      "operation": "l2f",
+      "evidence_id": "ev_0c08ffb7772af231cc4af9dbc541d6e3a8a9dedaa55c27268c72812f13be9d07",
+      "address": "0x27e0c",
+      "length": 136,
+      "bytes_sha256": "6339906dfbe222c7b72dfb808abe725f90caa3b01ecf713981cbae1a7ea146a5",
+      "matches_locked_raw": true,
+      "receipt_sha256": "abcb3d56fa004822cd9bc00188ed444bfd899a6de09fc732b470a26185173caf"
+    }
+  ],
+  "raw_application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "strict_bootloader_link_report": "build/goal-r1-eabi-conversions-c/boot-link/report.json",
+  "strict_bootloader_link_report_sha256": "f8c611a3b0ff2e1a70486a4179053755578f0c5c673819ac7ad3ff4cca02172f",
+  "limitations": [
+    "Default floating-point rounding environment only; exception flags unclaimed.",
+    "Goodix unchanged source recompiled with function sections to isolate mean/quantile; not the normal monolithic object.",
+    "Relocatable application composition still has 114 imports; no full application link or physical hardware execution.",
+    "Global sources-check retains the unrelated unlisted G2 resident_rom_thumb_set.S failure."
+  ],
+  "evidence_files": {
+    "build/goal-r1-eabi-conversions-c/verify.py": "9cdb9c77b3ddd161e56791c17404bed431144b1b08de09e8f4d5807bc7210279",
+    "build/goal-r1-eabi-conversions-c/defects.py": "c61abf41ed730dafc6e40e0d22dde49854089b4f7c506de1d13ad92ff52fded8",
+    "build/goal-r1-eabi-conversions-c/verification.json": "78c4051667f94318dfafd3696b62752917743ef9fdab389f4d1bb42d1d18c1e7",
+    "build/goal-r1-eabi-conversions-c/defects.json": "56c937a75f2fc791027244a98055a6977303bee82025c88ad95a5e0e48eb60e9",
+    "third-party/upstream/llvm-compiler-rt-format-20.1.8/conversion-source-provenance.json": "dc8ff4caca031a9cfe4ac81e8d54195bd969b491d6f211a2d34430514836871d"
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "report": "build/sources-goal-r1-mailbox-receive-c/report.json",
+  "units": 817,
+  "application_imports": 71,
+  "added_imports": [
+    "r1_st25dvxxkc_dock_frame_policy"
+  ],
+  "removed_imports": [
+    "r1_st25dvxxkc_bounded_mailbox_receive"
+  ],
+  "verification": {
+    "normal_stock_sdk_C_sdk_pairs": 480,
+    "all_length_pairs": 512,
+    "initialized_fallback_cases": 16,
+    "error_output_pairs": 3,
+    "actual_ST25_mode_control_length_data_providers": true
+  },
+  "compiled_defects": [
+    {
+      "defect": "wrong-control",
+      "rejected": true
+    },
+    {
+      "defect": "short-read",
+      "rejected": true
+    },
+    {
+      "defect": "missing-clear",
+      "rejected": true
+    },
+    {
+      "defect": "parse-failed-read",
+      "rejected": true
+    },
+    {
+      "defect": "wrong-parser-length",
+      "rejected": true
+    },
+    {
+      "defect": "undersized-buffer",
+      "rejected": true
+    },
+    {
+      "defect": "ignore-control-error",
+      "rejected": true
+    }
+  ],
+  "prior_objects_identical": 814,
+  "generated_object_hash_changes": [
+    "{gen}/r1_startup_vectors.S",
+    "{gen}/r1_uecc.c"
+  ],
+  "rea_evidence_id": "ev_4192b5b32eea2445dc7d09c7c0feace051fd7762818ad7529e0a526cc62330a4",
+  "evidence_files": {
+    "build/goal-r1-mailbox-receive-c/verify.py": "691e213d36efd2efb502a4930bfe45b73822c32eb34e5d0d2b0bdb592e17e9fa",
+    "build/goal-r1-mailbox-receive-c/verification.json": "80957861ee80898ec0b391079429d20b031821d3355dddcad129a52630a6b044",
+    "build/goal-r1-mailbox-receive-c/verify-final.log": "65363403ba941ba7545ba4d32f57643af6c21602c9935f4f910b86b45b7babad",
+    "build/goal-r1-mailbox-receive-c/defects.py": "35e7525ac7ea31150822270365ab294c6d60f67c8896d8652fc3f5c575917abd",
+    "build/goal-r1-mailbox-receive-c/defects.json": "48a526f33a96a67d227be92c0c4c6a44710a3ea53b3a937268266f3bfda1d297",
+    "build/goal-r1-mailbox-receive-c/rea.json": "e435f836a2a9094e10d355e2fdaeae7ad8d2b80ab5c6272cd7e8a35cdc8c2e2b",
+    "build/goal-r1-mailbox-receive-c/document.py": "5acff8d80f2a6f333c1e6902a345a56d2fee6148ac674daba7cd3a5d734e13fe",
+    "build/sources-goal-r1-mailbox-receive-c/report.json": "7a798dc02ccd9bbad66d83d2b6afa74abea7fdbe85f633e259e61a4f8d433ebc",
+    "r1/src/sources.json": "0c3be00bfc146d39c4d02547279ca5b1bcaf98e064f677946299e6bda9467f89",
+    "r1/src/application/st25/native_mailbox_receive.c": "33617322a620424e4cec37c38908296b294b99947e547c9ed59feda1cc41c4bb",
+    "third-party/upstream/st-fp-sns-stbox1/Drivers/BSP/Components/st25dvxxkc/st25dvxxkc.c": "00469629a6b6cf76127a82dd0ab198855d8c794320df7f2d2f41509a289146e9",
+    "third-party/upstream/st-fp-sns-stbox1/Drivers/BSP/Components/st25dvxxkc/st25dvxxkc_reg.c": "dff34273b0656f8d45acb751cc576bf55add248d3f02b5c6e6dde0d679463106"
+  },
+  "deliberate_improvements": [
+    "Dedicated 257-byte C receive storage instead of overwriting state adjacent to the stock 20-byte scratch area.",
+    "Mode output initialized disabled when mode reading fails."
+  ],
+  "limitations": [
+    "Dock-frame parser remains an explicit unresolved boundary.",
+    "Actual stock/C SDK providers execute with prepared device IO/context objects; register callbacks and parser are modeled.",
+    "No BSP registration, electrical I2C transaction, final application link or device boot proof."
+  ]
+}

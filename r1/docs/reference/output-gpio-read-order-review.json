@@ -1,0 +1,99 @@
+{
+  "cases": 214,
+  "passed": 214,
+  "source_sha256": "676a7e640bc21c87d922bc5eb61dc87a95454ac9f655b75419be6b0b46c67225",
+  "report": "build/sources-goal-r1-output-read-order/report.json",
+  "old_regression": {
+    "native_comparisons": [
+      [
+        536973312,
+        536973312
+      ]
+    ],
+    "old_comparisons": [
+      [
+        536973312,
+        536973328
+      ],
+      [
+        536973328,
+        536973328
+      ]
+    ],
+    "native_reads": [
+      [
+        536969216,
+        4
+      ],
+      [
+        536900136,
+        4
+      ]
+    ],
+    "old_reads": [
+      [
+        536900136,
+        4
+      ],
+      [
+        536969216,
+        4
+      ],
+      [
+        536900192,
+        4
+      ],
+      [
+        536969216,
+        4
+      ]
+    ]
+  },
+  "other_units_unchanged": 561,
+  "application_imports": 211,
+  "bootloader_imports": 34,
+  "limitations": [
+    "strcmp modeled; Nordic port decoder and GPIO register accesses execute",
+    "GPIO registers ordinary emulator memory, not physical peripherals",
+    "Mutation is a controlled counterexample, not a claim of production race frequency",
+    "Not byte-qualified or final firmware proof"
+  ],
+  "evidence": [
+    {
+      "path": "build/goal-r1-output-read-order/before.c",
+      "sha256": "ff210c5aa6d0aa9133627687ca767fbcb6266c862bc6fc7c3b03c1c21d47c8fb"
+    },
+    {
+      "path": "build/goal-r1-output-read-order/verify.py",
+      "sha256": "26c6833dfb003e7919627f6349ed650b14c42168a619ca08bb45bbd5759d5c25"
+    },
+    {
+      "path": "build/goal-r1-output-read-order/REA.json",
+      "sha256": "edd8f66e9ce9b394d341e3d5aab43a3f7a4fb49a63e10473a6a93d53d3bb7e94"
+    },
+    {
+      "path": "build/goal-r1-output-read-order/rea-snapshot.json",
+      "sha256": "232313aa0178a7b943ee1ad67b0bbe5b1bf0d333ebf43cc2e0b46d50ce0e9d2a"
+    },
+    {
+      "path": "build/goal-r1-output-read-order/stock.elf",
+      "sha256": "b31f27add807aef5cff3a3fa4179963830608239aae8aaecede43e0f49fa8688"
+    },
+    {
+      "path": "build/sources-goal-r1-output-read-order/report.json",
+      "sha256": "74b80e4f243447d83aff9e22880f7a34ec7e366828226894b1aac3332c9c3bf3"
+    },
+    {
+      "path": "r1/src/application/gpio/native_output_gpio_operations.c",
+      "sha256": "676a7e640bc21c87d922bc5eb61dc87a95454ac9f655b75419be6b0b46c67225"
+    },
+    {
+      "path": "r1/src/sources.json",
+      "sha256": "9c5b7ae5c0e7493eb22e1fb4df9f0c928c2a9aa70530254aff89b55213bef2e2"
+    },
+    {
+      "path": "tools/build/source-plan.json",
+      "sha256": "964cbd3af9f4ea7ed207bb4b480d18a9529060dc3801663d296389472982aa7c"
+    }
+  ]
+}

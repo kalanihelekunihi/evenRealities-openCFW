@@ -30,9 +30,7 @@ uint32_t audio_ble_wsf_set_event_body(uint32_t handler,uint32_t mask,
     audio_wsf_set_os_event();
     return high;
 }
-__attribute__((naked)) uint32_t audio_ble_wsf_set_event(uint32_t handler,uint32_t mask) {
-    __asm volatile("b audio_ble_wsf_set_event_body");
-}
+uint32_t audio_ble_wsf_set_event(uint32_t handler,uint32_t mask) __attribute__((alias("audio_ble_wsf_set_event_body")));
 
 void audio_ble_hci_error_check_body(uint32_t code) {
     if(code!=0u) {
@@ -41,6 +39,8 @@ void audio_ble_hci_error_check_body(uint32_t code) {
         if(callback!=0u)((void (*)(uint32_t))(uintptr_t)callback)(code);
     }
 }
-__attribute__((naked)) uint32_t audio_ble_hci_error_check_4b47ae(uint32_t code) {
-    __asm volatile("push {r7, lr}\n\tbl audio_ble_hci_error_check_body\n\tpop {r7, lr}\n\tmov r0, r7\n\tbx lr");
+/* Stock returns a stale register here (its body is void upstream); no caller reads it. */
+uint32_t audio_ble_hci_error_check_4b47ae(uint32_t code) {
+    audio_ble_hci_error_check_body(code);
+    return 0u;
 }

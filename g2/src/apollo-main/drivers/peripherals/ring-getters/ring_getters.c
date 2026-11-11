@@ -11,3 +11,5 @@ uint8_t audio_uart_hand_side_get(void) {
 uint8_t audio_uart_device_role_get(void) {
     return audio_uart_device_role_cell;
 }
+__typeof__(audio_uart_device_role_get) audio_settings_device_role
+    __attribute__((alias("audio_uart_device_role_get"))); /* also stock 0x45a568 */

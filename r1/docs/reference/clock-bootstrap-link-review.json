@@ -1,0 +1,143 @@
+{
+  "schema_version": 1,
+  "report": "build/sources-goal-r1-clock-bootstrap-link/report.json",
+  "report_sha256": "722af800a06b186bd1b631acffadd3a8a0febf9899fd15e3321f00fd190d4d84",
+  "manifest_sha256": "ecf6f06b5deab25297733ec2d1c681da2f9732dd9cada9e61e20bc31472edbc5",
+  "constructor": {
+    "paired_cases": 4400,
+    "executions": 8800,
+    "checks": [
+      "actual native constructor and actual C snapshot/bind helpers",
+      "24-byte frame at init/update/tick/clear providers",
+      "callback mutation of exposed scratch ops/context and state words",
+      "null/default configuration, configuration aliases, raw registration flags and partial startup failure",
+      "ordered callback arguments, final shared state, status, saved registers and masks"
+    ],
+    "limits": [
+      "Backend callback and cache-clear models; default ops/second-change pointers normalized by role",
+      "Private stack saves, caller-clobbered registers/flags, provider scratch reads, concurrency and physical hardware excluded",
+      "Source getter may be folded to its constant backend; no getter call-boundary identity claim"
+    ]
+  },
+  "callback": {
+    "isolated_pairs": 128,
+    "integrated_pairs": 1152,
+    "actual_timestamp_rtc_request_memset_and_registry": true,
+    "provider_frame_depths": {
+      "native": [
+        8
+      ],
+      "C": [
+        16
+      ]
+    },
+    "event_payload_and_status_checked": true,
+    "leaf_rtc_operation_and_event_publisher_modeled": true,
+    "private_frame_aliases_and_void_outputs_excluded": true
+  },
+  "defects": [
+    {
+      "defect": "wrong-event-payload",
+      "compiled": true,
+      "behavioral_assertion_rejected": true
+    },
+    {
+      "defect": "wrong-event-length",
+      "compiled": true,
+      "behavioral_assertion_rejected": true
+    },
+    {
+      "defect": "suppress-zero-timestamp",
+      "compiled": true,
+      "behavioral_assertion_rejected": true
+    },
+    {
+      "defect": "stale-cached-epoch",
+      "compiled": true,
+      "behavioral_assertion_rejected": true
+    }
+  ],
+  "audit": {
+    "unchanged_prior_object_hashes": 801,
+    "clock_bootstrap_object_bytes_unchanged": true,
+    "one_existing_unit_enabled": true,
+    "imports_unchanged": true,
+    "generated_boot_allocated_bytes_and_relocations_unchanged": true,
+    "only_manifest_change_bootstrap_link_flag": true
+  },
+  "rea": [
+    {
+      "name": "callback",
+      "evidence_id": "ev_e89ff4dd5aba6348fce6cb3036ef02aae52dcc2a29821558b9716ac83672b0d3",
+      "address": "0x5a9d0",
+      "bytes": 40,
+      "matches_raw": true
+    },
+    {
+      "name": "constructor",
+      "evidence_id": "ev_deae16a640ba19b22d1b01b9ac6be8fca8d5327bff1e12f9c4ae384ac8acec14",
+      "address": "0x8adc0",
+      "bytes": 152,
+      "matches_raw": true
+    }
+  ],
+  "evidence_files": {
+    "build/goal-r1-clock-bootstrap-link/constructor.py": "c0a93fe15cbd26493306d480909e03d45a2ebb2b7f4e8bbb5f4263b943fb86d8",
+    "build/goal-r1-clock-bootstrap-link/callback.py": "74f047dddf56da2f1750ad274d6d5aad7e2c59629903a24cacdee5caf80ff9df",
+    "build/goal-r1-clock-bootstrap-link/defects.py": "1d7d5192b161294a920e949ed7fc6ac65e336ec15b02d98d28e233d7cc02b950",
+    "build/goal-r1-clock-bootstrap-link/audit.py": "0850056de84860ee887cf9051cb3c7a68ea7813ecbc5b3b1ba7fbf1939e83a48",
+    "build/goal-r1-clock-bootstrap-link/document.py": "76ff8d136b56c35894cd956cc7c2e996239558e5d36fc1b1113c76a83490f44e",
+    "build/goal-r1-clock-bootstrap-link/results.json": "839e9a51a2d6dbdce442e9bdc704c33c8979e99a4b1931af564ca23ba5cd16b6",
+    "build/goal-r1-clock-bootstrap-link/callback.json": "b4a0c970af9a20ace66f4e1896436ede842ec945c341cfa96a3b2fdff138a041",
+    "build/goal-r1-clock-bootstrap-link/defects.json": "3d3ca1b8565c098c2467de21f521db050877dd0ebc23d62a4237b2cef761bdb5",
+    "build/goal-r1-clock-bootstrap-link/audit.json": "7b43039210908d0184d830976cda9522defed72a1bb8564077e3ca7cec31b69c",
+    "build/goal-r1-clock-bootstrap-link/constructor.elf": "878794efccdda4f012e9e875e21c8a5725afbaef8a455ff9e8b1a0ff5433a087",
+    "build/goal-r1-clock-bootstrap-link/callback.elf": "b69ce5f22d583be151adef672a5043fa141136899fafba91522e8994c845a667",
+    "build/goal-r1-clock-bootstrap-link/constructor.log": "f57f434d98f80b317e6d82f8c3c7c58bd473540e8916483ae582f2b413fb43b2",
+    "build/goal-r1-clock-bootstrap-link/callback-final.log": "ff3b39c3d645fcb532f011bf8ef5efa9e02a18424c24ad03ea8ecbe5d971ed69",
+    "build/goal-r1-clock-bootstrap-link/rea-callback.json": "5d977a892697999e68bc57579f668c691f864dcaa6231d0c99cf3cba3720238d",
+    "build/goal-r1-clock-bootstrap-link/rea-constructor.json": "b26abde8646609c3bd2fc24ea1e1b98bcc9d6aa1958b93f40abcceb66ff7e5ab",
+    "build/goal-r1-clock-bootstrap-link/r1-sources-check.log": "6d283d66909cf175a4fc74dc87325857f9b068509f875eadf9e6e3f2e75c3f08",
+    "build/goal-r1-clock-bootstrap-link/sources-check.log": "f01c96afde688afb305d1140ee25c4bfe7c390a54aa8456a4b69860b5b65a651",
+    "build/goal-r1-clock-bootstrap-link/boot-link/report.json": "2c27cbb8f425f4a119b575575640ef15084e9421554ce0befc6035de444d9cd6"
+  },
+  "units": [
+    {
+      "source": "r1/src/application/board/native_clock_bootstrap.c",
+      "source_sha256": "ddf6cb0b7bdf28a7005bcbbb459550b928f824582ef1a5a193fcc1f4fc7d0513",
+      "object_sha256": "875cb60eae94a31e21b67361fb4c0d4133e0a833e6c18a8eaa11afc312cd010d"
+    },
+    {
+      "source": "r1/src/application/board/native_clock_binding.c",
+      "source_sha256": "1bfa7c44ac40681d5f4071f346958b22f00e1d9b7b74f79a502854c49b7fa234",
+      "object_sha256": "57ccd8529db850f30a0a9890246be53250923552aab38e0d9bd32882fa6ea701"
+    },
+    {
+      "source": "r1/src/application/board/native_clock_port.c",
+      "source_sha256": "80c30ac02423b40e32795275381951c0d3978751724cc5fa9da92eb4c254a55e",
+      "object_sha256": "a2b9c3a228688ba19839db4e7f434415ccc21b7505f77c30945a3810ebbb3fd8"
+    },
+    {
+      "source": "r1/src/application/board/structured_time.c",
+      "source_sha256": "819e05dd9f2b535ecf7fc9d595e8d35ee4751ead5025b104693d461a0fad3058",
+      "object_sha256": "b2770f07d0a51012d61773e2645a00d4288d2dc5718a9862ab6a9c1cfe3ac590"
+    },
+    {
+      "source": "r1/src/application/registry/stock_registry.c",
+      "source_sha256": "68c16fe9a2fcd328012b8613c9da9aa4cd31bd30df36a55e64e56e7b534246fa",
+      "object_sha256": "175d6466bae4ab8e9b27119821c03fa48218b94898bfe062722fc2b14315a025"
+    },
+    {
+      "source": "third-party/upstream/musl-memory-1.2.5/memset.c",
+      "source_sha256": "2a74d9e7f988945e0d691d480b78d77a228da0d2be401c1000637cc879b2c0be",
+      "object_sha256": "6c2f1a8f480c27d5bc20f79ac535dac28fbbdcaec12e69bad96721f724ec9057"
+    }
+  ],
+  "limitations": [
+    "C callback frame is sixteen bytes versus native eight; private frame aliases and incidental void/caller-clobbered outputs excluded.",
+    "Constructor exposed scratch behavior checked only for the recorded Clang profile.",
+    "Timestamp/RTC read/registry/memset code executes; leaf RTC operation and event publisher modeled.",
+    "No physical clock timing, asynchronous behavior, manager startup, full application link or boot proof.",
+    "No source-plan selections change."
+  ]
+}

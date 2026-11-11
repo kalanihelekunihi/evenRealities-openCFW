@@ -17,10 +17,10 @@ extern uint8_t teleprompt_file_request_busy_5897e0(void); /* list animation play
 extern void audio_conversate_report_5b02e4(uint32_t event, uint32_t value);
 extern void audio_conversate_enter_loading_5b57ac(void); /* conversate_ui_send_start_request */
 extern void system_close_page_factory_0046ae9c(uint32_t style, int32_t app_id);
-extern void audio_uart_page_44120e(void *obj, int32_t v, uint32_t sel); /* style pad_top */
-extern void audio_uart_page_44121c(void *obj, int32_t v, uint32_t sel); /* style pad_bottom */
-extern void audio_uart_page_44122a(void *obj, int32_t v, uint32_t sel); /* style pad_left */
-extern void audio_uart_page_441238(void *obj, int32_t v, uint32_t sel); /* style pad_right */
+extern void lv_obj_set_style_pad_top(void *obj, int32_t v, uint32_t sel); /* style pad_top */
+extern void lv_obj_set_style_pad_bottom(void *obj, int32_t v, uint32_t sel); /* style pad_bottom */
+extern void lv_obj_set_style_pad_left(void *obj, int32_t v, uint32_t sel); /* style pad_left */
+extern void lv_obj_set_style_pad_right(void *obj, int32_t v, uint32_t sel); /* style pad_right */
 
 uint32_t conversate_menu_scroll_up_value_get_5b5752(const g2_conversate_ui_t *ui,
                                                     const g2_conversate_reply_list_t *replies)
@@ -66,8 +66,8 @@ void conversate_ui_menu_input_handler(uint32_t code, const void *param)
 /* lv_obj_set_style_pad_all equivalent: left, right, top, bottom. */
 void conversate_ui_menu_apply_base_style(void *obj, int32_t value, uint32_t selector)
 {
-    audio_uart_page_44122a(obj, value, selector);
-    audio_uart_page_441238(obj, value, selector);
-    audio_uart_page_44120e(obj, value, selector);
-    audio_uart_page_44121c(obj, value, selector);
+    lv_obj_set_style_pad_left(obj, value, selector);
+    lv_obj_set_style_pad_right(obj, value, selector);
+    lv_obj_set_style_pad_top(obj, value, selector);
+    lv_obj_set_style_pad_bottom(obj, value, selector);
 }

@@ -100,11 +100,11 @@ static void map_child_flags(void *obj)
 /* Border / outline / shadow / padding / radius cleared, scrolling off. */
 static void layer_plain(void *obj)
 {
-    audio_uart_page_44131c(obj, 0, LV_PART_MAIN);
-    audio_uart_page_44133a(obj, 0, LV_PART_MAIN);
-    audio_uart_page_441386(obj, 0, LV_PART_MAIN);
+    lv_obj_set_style_border_width(obj, 0, LV_PART_MAIN);
+    lv_obj_set_style_outline_width(obj, 0, LV_PART_MAIN);
+    lv_obj_set_style_shadow_width(obj, 0, LV_PART_MAIN);
     lv_obj_set_style_pad_all_545594(obj, 0, LV_PART_MAIN);
-    audio_uart_page_44146a(obj, 0, LV_PART_MAIN);
+    lv_obj_set_style_radius(obj, 0, LV_PART_MAIN);
     audio_uart_page_43dfa4(obj, LV_OBJ_FLAG_SCROLLABLE);
 }
 
@@ -229,19 +229,19 @@ int32_t navigation_ui_startup_page_create_545d18(void *parent, const uint8_t *ms
     audio_uart_page_44140e(g2_navigation_page_root_20074718, audio_uart_page_44104c(0xffffffu), LV_PART_MAIN);
     audio_uart_page_44142e(g2_navigation_page_root_20074718, LV_OPA_COVER, LV_PART_MAIN);
     audio_uart_page_4412ec(g2_navigation_page_root_20074718, audio_uart_page_44104c(0u), LV_PART_MAIN);
-    audio_uart_page_44131c(g2_navigation_page_root_20074718, 0, LV_PART_MAIN);
-    audio_uart_page_44133a(g2_navigation_page_root_20074718, 0, LV_PART_MAIN);
-    audio_uart_page_441378(g2_navigation_page_root_20074718, 0, LV_PART_MAIN);
-    audio_uart_page_441386(g2_navigation_page_root_20074718, 0, LV_PART_MAIN);
-    audio_uart_page_4413b0(g2_navigation_page_root_20074718, 0, LV_PART_MAIN);
-    audio_uart_page_441394(g2_navigation_page_root_20074718, 0, LV_PART_MAIN);
-    audio_uart_page_4413a2(g2_navigation_page_root_20074718, 0, LV_PART_MAIN);
-    audio_uart_page_44146a(g2_navigation_page_root_20074718, 0, LV_PART_MAIN);
+    lv_obj_set_style_border_width(g2_navigation_page_root_20074718, 0, LV_PART_MAIN);
+    lv_obj_set_style_outline_width(g2_navigation_page_root_20074718, 0, LV_PART_MAIN);
+    lv_obj_set_style_outline_pad(g2_navigation_page_root_20074718, 0, LV_PART_MAIN);
+    lv_obj_set_style_shadow_width(g2_navigation_page_root_20074718, 0, LV_PART_MAIN);
+    lv_obj_set_style_shadow_spread(g2_navigation_page_root_20074718, 0, LV_PART_MAIN);
+    lv_obj_set_style_shadow_offset_x(g2_navigation_page_root_20074718, 0, LV_PART_MAIN);
+    lv_obj_set_style_shadow_offset_y(g2_navigation_page_root_20074718, 0, LV_PART_MAIN);
+    lv_obj_set_style_radius(g2_navigation_page_root_20074718, 0, LV_PART_MAIN);
     lv_obj_set_style_pad_all_545594(g2_navigation_page_root_20074718, 0, LV_PART_MAIN);
-    audio_uart_page_44120e(g2_navigation_page_root_20074718, 0, LV_PART_MAIN);
-    audio_uart_page_44121c(g2_navigation_page_root_20074718, 0, LV_PART_MAIN);
-    audio_uart_page_44122a(g2_navigation_page_root_20074718, 0, LV_PART_MAIN);
-    audio_uart_page_441238(g2_navigation_page_root_20074718, 0, LV_PART_MAIN);
+    lv_obj_set_style_pad_top(g2_navigation_page_root_20074718, 0, LV_PART_MAIN);
+    lv_obj_set_style_pad_bottom(g2_navigation_page_root_20074718, 0, LV_PART_MAIN);
+    lv_obj_set_style_pad_left(g2_navigation_page_root_20074718, 0, LV_PART_MAIN);
+    lv_obj_set_style_pad_right(g2_navigation_page_root_20074718, 0, LV_PART_MAIN);
 
     /* Startup layer: transparent, at the page offset. */
     g2_navigation_startup_obj_20074740 = audio_uart_page_43de82(g2_navigation_page_root_20074718);
@@ -251,19 +251,19 @@ int32_t navigation_ui_startup_page_create_545d18(void *parent, const uint8_t *ms
     audio_uart_page_43f09a(g2_navigation_startup_obj_20074740, x, y);
     audio_uart_page_44127e(g2_navigation_startup_obj_20074740, audio_uart_page_44104c(0u), LV_PART_MAIN);
     audio_uart_page_44129e(g2_navigation_startup_obj_20074740, LV_OPA_TRANSP, LV_PART_MAIN);
-    audio_uart_page_44131c(g2_navigation_startup_obj_20074740, 0, LV_PART_MAIN);
-    audio_uart_page_44133a(g2_navigation_startup_obj_20074740, 0, LV_PART_MAIN);
-    audio_uart_page_441378(g2_navigation_startup_obj_20074740, 0, LV_PART_MAIN);
-    audio_uart_page_441386(g2_navigation_startup_obj_20074740, 0, LV_PART_MAIN);
-    audio_uart_page_4413b0(g2_navigation_startup_obj_20074740, 0, LV_PART_MAIN);
-    audio_uart_page_441394(g2_navigation_startup_obj_20074740, 0, LV_PART_MAIN);
-    audio_uart_page_4413a2(g2_navigation_startup_obj_20074740, 0, LV_PART_MAIN);
+    lv_obj_set_style_border_width(g2_navigation_startup_obj_20074740, 0, LV_PART_MAIN);
+    lv_obj_set_style_outline_width(g2_navigation_startup_obj_20074740, 0, LV_PART_MAIN);
+    lv_obj_set_style_outline_pad(g2_navigation_startup_obj_20074740, 0, LV_PART_MAIN);
+    lv_obj_set_style_shadow_width(g2_navigation_startup_obj_20074740, 0, LV_PART_MAIN);
+    lv_obj_set_style_shadow_spread(g2_navigation_startup_obj_20074740, 0, LV_PART_MAIN);
+    lv_obj_set_style_shadow_offset_x(g2_navigation_startup_obj_20074740, 0, LV_PART_MAIN);
+    lv_obj_set_style_shadow_offset_y(g2_navigation_startup_obj_20074740, 0, LV_PART_MAIN);
     lv_obj_set_style_pad_all_545594(g2_navigation_startup_obj_20074740, 0, LV_PART_MAIN);
-    audio_uart_page_44120e(g2_navigation_startup_obj_20074740, 0, LV_PART_MAIN);
-    audio_uart_page_44121c(g2_navigation_startup_obj_20074740, 0, LV_PART_MAIN);
-    audio_uart_page_44122a(g2_navigation_startup_obj_20074740, 0, LV_PART_MAIN);
-    audio_uart_page_441238(g2_navigation_startup_obj_20074740, 0, LV_PART_MAIN);
-    audio_uart_page_44146a(g2_navigation_startup_obj_20074740, 0, LV_PART_MAIN);
+    lv_obj_set_style_pad_top(g2_navigation_startup_obj_20074740, 0, LV_PART_MAIN);
+    lv_obj_set_style_pad_bottom(g2_navigation_startup_obj_20074740, 0, LV_PART_MAIN);
+    lv_obj_set_style_pad_left(g2_navigation_startup_obj_20074740, 0, LV_PART_MAIN);
+    lv_obj_set_style_pad_right(g2_navigation_startup_obj_20074740, 0, LV_PART_MAIN);
+    lv_obj_set_style_radius(g2_navigation_startup_obj_20074740, 0, LV_PART_MAIN);
     audio_uart_page_4412ec(g2_navigation_startup_obj_20074740, audio_uart_page_44104c(0u), LV_PART_MAIN);
     audio_uart_page_44140e(g2_navigation_startup_obj_20074740, audio_uart_page_44104c(0xffffffu), LV_PART_MAIN);
     audio_uart_page_44142e(g2_navigation_startup_obj_20074740, LV_OPA_COVER, LV_PART_MAIN);

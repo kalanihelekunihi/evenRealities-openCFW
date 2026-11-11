@@ -1,0 +1,110 @@
+{
+  "schema_version": 1,
+  "scope": "Four R1 FlashDB forward/reverse sector/log-entry assembly leaves replaced by C",
+  "native_application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "native_entries": {
+    "last_sector": "0x6a158",
+    "last_tsl": "0x6a176",
+    "next_sector": "0x6a194",
+    "next_tsl": "0x6a1b2"
+  },
+  "native_body_sha256": {
+    "0x6a158": "af7988d9e85304f6f4ca091de640dd56a45f6940fdfd6012ce41a5aa4b933d12",
+    "0x6a176": "25b7a8aed4da289dc6cdf852078b4c0d098a130b17afb948f720cf23ac3b8bc6",
+    "0x6a194": "bfafe1f14cec4f3add686021b037d3d72d873d46f41446794d9d19c9f4c743e7",
+    "0x6a1b2": "2c3999b234c24b33b7021952aeb64b951c90aa727fc87e5383800d8109e23fb0"
+  },
+  "rea": {
+    "forward_helpers_observed": true,
+    "reverse_helpers_missing_from_default_analysis": true,
+    "reverse_coverage_credit": false
+  },
+  "execution": {
+    "paired_cases": 13944,
+    "executions": 27888,
+    "groups": {
+      "last_sector": 3568,
+      "last_tsl": 3404,
+      "next_sector": 3568,
+      "next_tsl": 3404
+    },
+    "source_report": "build/sources-goal-r1-flash-traversal-c/report.json",
+    "function_stubs": false,
+    "checks": [
+      "unsigned traversal budget and 32-bit wrap",
+      "forward sector wrap and reverse end-of-device wrap",
+      "entry status byte exact equality to one",
+      "112-byte first-entry boundary, 32-byte entry stride and inclusive forward end",
+      "ordered conditional byte/word reads, unaligned records and null-pointer short circuits/faults",
+      "read-only guards, R0, return SP, saved registers, masks and fresh XPSR"
+    ],
+    "limits": [
+      "Seeded records, not complete iterator or physical flash execution",
+      "Private stack traffic, caller-clobbered registers and flags excluded",
+      "Arbitrary corrupted pointers and asynchronous memory changes unverified"
+    ]
+  },
+  "negative_controls": [
+    {
+      "mutation": "exclusive-entry-end",
+      "rejected": true
+    },
+    {
+      "mutation": "wrong-traversal-bound",
+      "rejected": true
+    }
+  ],
+  "audit": {
+    "retained_outer_wrapper_body_unchanged": true,
+    "other_object_bytes_unchanged": true,
+    "replaced_assembly_functions": 4,
+    "import_sets_unchanged": true
+  },
+  "normal_build": {
+    "compiled": 573,
+    "application_imports": 176,
+    "bootloader_imports": 34,
+    "failures": 0,
+    "duplicate_strong_symbols": 0
+  },
+  "qualification": {
+    "compiled_profiles": 5,
+    "selected_symbols": [
+      "r1_health_sync_provider_00063ad8"
+    ],
+    "new_C_regions": 0,
+    "unchanged_assembly_iterator_promoted": false
+  },
+  "source_plan_unchanged": true,
+  "source_built_bytes": 3881,
+  "binary_pull_through_bytes": 642279,
+  "resource_bytes": 248,
+  "fresh_hybrid_equals_locked_application": true,
+  "source_completeness_proven": false,
+  "evidence": {
+    "build/sources-goal-r1-flash-traversal-c/report.json": "b1cd7a0a1c71cc18d331620fd45d5414d020267e52f29f268c49b96f197e91f0",
+    "r1/src/application/runtime/native_flashdb_iterator.c": "f3ef35ec6f317605cc1c82042f3b51454fd88213df386a4520af2d5103a5daa4",
+    "r1/src/sources.json": "e4c2161f5a94ed8f60f515c71ed7f323fa68daecf30f6a35feb8327e77cfec3e",
+    "r1/symbols/function-frontier.csv": "ab14abc11ac2ab8b727fd2c069ea99b28fb801abe26a8ff2e523d94eeb9497d5",
+    "tools/build/source-plan.json": "716cf17b8cf2bed8ad6a99a672b1856af4c5380842c95cb14b9a263a7bb42bc8",
+    "build/hybrid-goal-r1-flash-traversal-c/build-report.json": "1fee211fcf171f95843237e5aa255c15f99eb12f1d4afa9917dcc909a179befb",
+    "build/hybrid-goal-r1-flash-traversal-c/payloads/application.bin": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "r1/docs/reference/source-composition-review.json": "117d31098f8627e598cd808c8951160d4c0657e03da253859c78987c4f70e2ae",
+    "build/goal-r1-flash-traversal-c/before.c": "e3486e379981cb14c11340573193c5edf652b8fca71878734d7daa7c433eb5d7",
+    "build/goal-r1-flash-traversal-c/REA.json": "a181b829cfc153c598f8f02d2fcea0cfc007d904e85d82a2fc30463f31007480",
+    "build/goal-r1-flash-traversal-c/native-last-sector.dis": "66c11451772daa3b4f0b2fc78e52f2c0397888e43f459ac1aca05e868c4a611c",
+    "build/goal-r1-flash-traversal-c/native-last-tsl.dis": "acf7c7785ae33a57a7f18496282d6f19860f4e47a4f4984471dd6891db5c1ca7",
+    "build/goal-r1-flash-traversal-c/native-next-sector.dis": "2905b0aad9335706d4b211dcbbc11dcb1277939beee3700177bfd587f04c1333",
+    "build/goal-r1-flash-traversal-c/native-next-tsl.dis": "d8f7bfea27e49f157aeadbce4fc4c1a6f01a05ca60b9e5159c91c2968c399b0c",
+    "build/goal-r1-flash-traversal-c/verify.py": "a0e1257e388213a19cc85114a18c39afd74e4796293d38e3d46abf7e8287e8da",
+    "build/goal-r1-flash-traversal-c/results.json": "6a7538c55c7cf04c09569adc25064619fc0d0686907fc6f326deb053e2423af7",
+    "build/goal-r1-flash-traversal-c/negative.py": "e3b5fd795e7e6b141e93845a1d273f5d00d3109fa38a50fb44db4aab28eb2355",
+    "build/goal-r1-flash-traversal-c/negative-results.json": "35b4292908e1b6f7d9adb501b9c640246c58ac72b9ad5a265dddfb6e9d8be622",
+    "build/goal-r1-flash-traversal-c/audit.py": "eff08012ae501c4badb75fc7a85142406d49b506d908fb4503ef31db051821a7",
+    "build/goal-r1-flash-traversal-c/audit-results.json": "3b2b7d6a981e50dfe493b1b9a707a2ee4ef05cc6248ebbe5cc117328b1f90e07",
+    "build/goal-r1-flash-traversal-c/qualify.py": "81024f4d70a443eb463e1c0935e7a680ae8b28e26dbfbc7e952146058d04ae47",
+    "build/goal-r1-flash-traversal-c/qualified/qualification.json": "458d539f54ab64e25d4977e678f90a26e5b1257920604a9c98bcad8122564b00",
+    "build/goal-r1-flash-traversal-c/qualified/source-plan.json": "dc1a51ddc0106490156bebb728d795249637f9ad98489149b1a2f270449517d8",
+    "build/goal-r1-flash-traversal-c/sources-check.log": "bd60965367f10bcc604039941b628ee9282d683344509ab9faf85d501a53a26c"
+  }
+}

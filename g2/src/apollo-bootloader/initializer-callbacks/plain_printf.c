@@ -979,3 +979,14 @@ opencfw_boot_plain_printf(const char *pcFmt, ...)
     return ui32NumChars;
 }
 
+
+/* Stock 0x415fae (am_util_stdio_printf) has this one body. These stock entry
+ * names branch straight to it; the former second copy in
+ * glue/formatter_415fae_entry.c (same sink 0x200270cc / buffer 0x20024cd0 /
+ * vsprintf route) is retired. */
+__typeof__(opencfw_boot_plain_printf) opencfw_provider_415fae __attribute__((alias("opencfw_boot_plain_printf")));
+__typeof__(opencfw_boot_plain_printf) opencfw_boot_fs_printf __attribute__((alias("opencfw_boot_plain_printf")));
+__typeof__(opencfw_boot_plain_printf) opencfw_bl_generic_log __attribute__((alias("opencfw_boot_plain_printf")));
+__typeof__(opencfw_boot_plain_printf) opencfw_bl_printf __attribute__((alias("opencfw_boot_plain_printf")));
+__typeof__(opencfw_boot_plain_printf) printf __attribute__((alias("opencfw_boot_plain_printf")));
+__typeof__(opencfw_boot_plain_printf) opencfw_bl_transfer_error __attribute__((alias("opencfw_boot_plain_printf")));

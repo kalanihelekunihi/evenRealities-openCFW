@@ -1,5 +1,9 @@
 /* QuickList completed-UID nanopb sender at Apollo 0x5591b0..0x559369. */
 #include <stdint.h>
+/* Stock-RAM literals rewritten to named objects (sim-test wave 2026-10-26,
+ * .waves/sim-fix/apply.py): g2ref_X is the linker symbol X. */
+#include <stdint.h>
+extern unsigned char g2ref_g2_quicklist_notify_seq[] __asm__("g2_quicklist_notify_seq");
 
 struct quicklist_completed_ostream {
     void *callback;
@@ -54,8 +58,8 @@ uint32_t audio_quicklist_send_completed_5591b0(uint32_t unused, const void *mess
     audio_uart_checksum_copy(&stream, &initial, 20u);
     audio_uart_buffer_zero(audio_quicklist_tx_state, 0x1238u, 0u);
     audio_quicklist_tx_state[0] = 2u;
-    audio_quicklist_tx_state[1] = *(volatile uint8_t *)(uintptr_t)0x20074ffdu;
-    *(volatile uint8_t *)(uintptr_t)0x20074ffdu =
+    audio_quicklist_tx_state[1] = *(volatile uint8_t *)(uintptr_t)((uint32_t)(uintptr_t)g2ref_g2_quicklist_notify_seq);
+    *(volatile uint8_t *)(uintptr_t)((uint32_t)(uintptr_t)g2ref_g2_quicklist_notify_seq) =
         (uint8_t)(audio_quicklist_tx_state[1] + 1u);
     *(uint16_t *)(void *)(audio_quicklist_tx_state + 2u) = 4u;
     const uint8_t *const input = (const uint8_t *)message;

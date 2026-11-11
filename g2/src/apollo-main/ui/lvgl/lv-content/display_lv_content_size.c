@@ -1,6 +1,6 @@
 /* Native LV object content dimensions 0x43fe16 and 0x43fe70. */
 #include <stdint.h>
-extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,...);
+extern void lv_log_add(uint32_t,const char *,uint32_t,const char *,...);
 extern int32_t audio_uart_lv_obj_width_43fd9e(void *);
 extern int32_t audio_uart_lv_obj_height_43fdda(void *);
 extern int32_t audio_uart_lv_style_pad_left_43efc6(void *,uint32_t,uint32_t,uint32_t);

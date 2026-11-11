@@ -1,0 +1,42 @@
+{
+  "schema": 1,
+  "scope": "YHM recovery delay native 0x5c0fa..0x5c10d; rejected C increment experiment",
+  "stock_body_sha256": "5847783ae5f4aff2d959dbac785f58d651b06c1a17558bd25d000a53cf169411",
+  "candidate_body_sha256": "75116018c2893ff1132cb923f949c797968f33e6c2c74a0f6a52917fa3b1ba00",
+  "difference": {
+    "offset": 10,
+    "stock": "401c",
+    "candidate": "0130",
+    "meaning": "Different Thumb encodings of addition by one"
+  },
+  "qualification": {
+    "candidate_units": 5,
+    "compiled_units": 5,
+    "selected_regions": 0
+  },
+  "decision": "Retain byte-qualified production assembly increment; do not replace with the merely equivalent C increment. Four timing NOPs also remain.",
+  "production_source_restored_exactly": true,
+  "files": {
+    "r1/src/application/board/native_stacmd_delay.c": "a32a752c54def86d2abf1da657712875dd62c9feb2baf6badedbbe77742947c5",
+    "build/goal-r1-delay-increment-c/before.c": "a32a752c54def86d2abf1da657712875dd62c9feb2baf6badedbbe77742947c5",
+    "build/goal-r1-delay-increment-c/candidate.c": "77a9939f0bdef1eefa267117cc3818cb3752848a00b1c6dfdce072d394cf98a3",
+    "build/goal-r1-delay-increment-c/candidate/unit.o": "548871b7e997ef0105f56ee93a771a5cc11c15fb18f878512ff7fee08c312dd7",
+    "build/goal-r1-delay-increment-c/qualified/qualification.json": "e3bdd87be29f7489a2faad5a6f7edc2bf1f341e0557c832eb395c9de0f7933a9"
+  },
+  "limits": [
+    "No physical timing measurement",
+    "The rejected build report describes an experiment, not current production sources",
+    "No source-plan or firmware source changes retained"
+  ],
+  "restored_hybrid": {
+    "report": "build/hybrid-goal-r1-delay-retained/build-report.json",
+    "sha256": "584b31bd4c340de40a1bea831c20eeeaed01d6c5fbb021216e05c6ef84089379",
+    "payload_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "totals": {
+      "binary-pull-through": 642279,
+      "source-built": 3881,
+      "resource-file": 248
+    },
+    "source_completeness_proven": false
+  }
+}

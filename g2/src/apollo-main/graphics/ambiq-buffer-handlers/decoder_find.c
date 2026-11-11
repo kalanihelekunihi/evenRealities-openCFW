@@ -4,9 +4,9 @@
 extern uint8_t audio_uart_display_lv_root[];
 extern void audio_uart_lv_image_memzero_488f40(void *,uint32_t);
 extern uint32_t audio_uart_lv_cache_enabled_4d5104(void *);
-extern uint32_t audio_uart_lv_cache_lookup_4d4dca(uint32_t,const void *,uint32_t);
-extern uint32_t audio_uart_lv_cache_entry_4d5396(uint32_t);
-extern void audio_uart_lv_decoder_release_4d4e72(uint32_t,uint32_t,uint32_t);
+extern uint32_t lv_cache_acquire(uint32_t,const void *,uint32_t);
+extern uint32_t lv_cache_entry_get_data(uint32_t);
+extern void lv_cache_release(uint32_t,uint32_t,uint32_t);
 extern uint32_t audio_uart_lv_fs_file_open_4c6d9a(void *,const void *,uint32_t);
 extern uint32_t audio_uart_lv_fs_file_seek_4c6fba(void *,uint32_t,uint32_t);
 extern uint32_t audio_uart_lv_fs_file_close_4c6ee0(void *);
@@ -15,8 +15,8 @@ extern void *audio_uart_lv_list_next(void *,void *);
 extern uint32_t audio_uart_lv_color_bpp_440f44(uint32_t);
 extern char *audio_uart_font_path_duplicate(const char *);
 extern uint32_t audio_uart_lv_cache_add_4d4eea(uint32_t,const void *,uint32_t);
-extern void audio_uart_lv_free(void *);
-extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,
+extern void lv_free(void *);
+extern void lv_log_add(uint32_t,const char *,uint32_t,
                                 const char *,const char *,...);
 
 static const char decoder_find_path[] =
@@ -50,14 +50,14 @@ uint32_t audio_uart_lv_decoder_find_48925a(void *decoder_result,void *metadata) 
         *(uint32_t *)(void *)(audio_uart_display_lv_root+0x138u);
     if (header_cache_active!=0u && kind==1u) {
         uint32_t key[2]={source,1u};
-        const uint32_t entry=audio_uart_lv_cache_lookup_4d4dca(
+        const uint32_t entry=lv_cache_acquire(
             header_cache,key,0u);
         if (entry!=0u) {
-            const uint32_t data=audio_uart_lv_cache_entry_4d5396(entry);
+            const uint32_t data=lv_cache_entry_get_data(entry);
             const uint32_t *cached=(const uint32_t *)(uintptr_t)(data+8u);
             header[0]=cached[0];header[1]=cached[1];header[2]=cached[2];
             const uint32_t decoder=*(uint32_t *)(uintptr_t)(data+20u);
-            audio_uart_lv_decoder_release_4d4e72(header_cache,entry,0u);
+            lv_cache_release(header_cache,entry,0u);
             return decoder;
         }
     }
@@ -65,7 +65,7 @@ uint32_t audio_uart_lv_decoder_find_48925a(void *decoder_result,void *metadata) 
         const uint32_t opened=audio_uart_lv_fs_file_open_4c6d9a(
             out+20u,(const void *)(uintptr_t)source,2u)&0xffu;
         if (opened!=0u) {
-            audio_uart_lvgl_log(3u,decoder_find_path,336u,decoder_find_name,
+            lv_log_add(3u,decoder_find_path,336u,decoder_find_name,
                                 decoder_find_open_error,opened);
             return 0u;
         }
@@ -102,10 +102,10 @@ uint32_t audio_uart_lv_decoder_find_48925a(void *decoder_result,void *metadata) 
         const uint32_t entry=audio_uart_lv_cache_add_4d4eea(
             header_cache,key,0u);
         if (entry==0u) {
-            audio_uart_lv_free((void *)(uintptr_t)key[0]);
+            lv_free((void *)(uintptr_t)key[0]);
             return 0u;
         }
-        audio_uart_lv_decoder_release_4d4e72(header_cache,entry,0u);
+        lv_cache_release(header_cache,entry,0u);
     }
     return decoder;
 }

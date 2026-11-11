@@ -23,4 +23,5 @@ volatile uint8_t g2_sync_system_disp_status;         /* RAM 0x20075023 */
 
 /* ---- display_slave_send.c ----------------------------------------------- */
 
-void *g2_display_sender_mutex;                       /* RAM 0x200744e8 osMutexId_t */
+/* g2_display_sender_mutex: stock 0x200744e8 is one cell; defined as an alias of audio_uart_display_mutex (Fix 31). */
+extern void * g2_display_sender_mutex;

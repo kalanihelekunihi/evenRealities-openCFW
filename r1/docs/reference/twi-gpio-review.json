@@ -1,0 +1,142 @@
+{
+  "schema_version": 1,
+  "report": "build/sources-goal-r1-gpio-verified/report.json",
+  "report_sha256": "18018c1ac505d94c28160469411b9816a343fb746ea81013bd3147cc7d497a8b",
+  "manifest_sha256": "b6701fdf5d62e177159e32d19c6be652ff94dcb9013a60bec25128fdac8f8c27",
+  "stock_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "mmio_cases": 2112,
+  "mmio_passed": 2112,
+  "coverage": {
+    "pins": "0..47",
+    "input_pull_values": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "read_patterns": [
+      "0x00000000",
+      "0xffffffff",
+      "0xa5a55a5a"
+    ],
+    "stock_callbacks": [
+      {
+        "name": "i2c_2",
+        "callbacks": {
+          "drive_low": "0x79195",
+          "release_high": "0x7945d",
+          "set_output": "0x790bd",
+          "set_input": "0x79063",
+          "udelay": "0x7a6dd",
+          "read_pin": "0x793b1",
+          "pin_release": "0x78fe5"
+        }
+      },
+      {
+        "name": "i2c_3",
+        "callbacks": {
+          "drive_low": "0x791a9",
+          "release_high": "0x79471",
+          "set_output": "0x790d1",
+          "set_input": "0x79075",
+          "udelay": "0x7a6ed",
+          "read_pin": "0x793c7",
+          "pin_release": "0x78ff7"
+        }
+      },
+      {
+        "name": "i2c_4",
+        "callbacks": {
+          "drive_low": "0x791bd",
+          "release_high": "0x79485",
+          "set_output": "0x790e5",
+          "set_input": "0x79087",
+          "udelay": "0x7081d",
+          "read_pin": "0x793dd",
+          "pin_release": "0x79009"
+        }
+      },
+      {
+        "name": "i2c_5",
+        "callbacks": {
+          "drive_low": "0x791d1",
+          "release_high": "0x79499",
+          "set_output": "0x790f9",
+          "set_input": "0x79099",
+          "udelay": "0x54af1",
+          "read_pin": "0x793f3",
+          "pin_release": "0x7901b"
+        }
+      }
+    ]
+  },
+  "body_split": {
+    "function_count": 9,
+    "all_function_bytes_unchanged": true,
+    "function_bodies": {
+      "r1_twi_gpio_low": "00f01f01012202fa01f140f20c52c5f2000202f5407220283cbf40f20c52c5f2000211607047",
+      "r1_twi_gpio_high": "00f01f01012202fa01f140f20852c5f2000202f5407220283cbf40f20852c5f2000211607047",
+      "r1_twi_gpio_output": "40f20072c5f2000200f01f0102f5407220283cbf40f20072c5f2000242ea8100032101607047",
+      "r1_twi_gpio_input": "4ff47f7303ea810140f20073c5f2000300f01f0203f5407320283cbf40f20073c5f2000343ea820001607047",
+      "r1_twi_gpio_release": "40f20072c5f2000200f01f0102f5407220283cbf40f20072c5f2000242ea8100022101607047",
+      "r1_twi_gpio_read": "40f21051c5f2000101f5407120283cbf40f21051c5f20001096800f01f0021fa00f000f001007047",
+      "r1_twi_delay_busy": "38b181b080010090009803380090fbd801b07047",
+      "r1_twi_delay_noop": "7047",
+      "r1_twi_i2c5_delay_noop": "00bf00bf00bf00bf00bf7047"
+    },
+    "units": [
+      {
+        "source": "r1/src/application/software-twi/sdk_gpio.c",
+        "source_sha256": "635adbf4f03ba1ff0a10ec836f2242ee3c2a9660636f234a3c7f085d5cdec00e",
+        "object_sha256": "bc84afe1caa47a18d78dff72fd4239acb881fbee7be67c5a84eab3ad0ba724d9",
+        "link": true
+      },
+      {
+        "source": "r1/src/application/software-twi/sdk_delay.c",
+        "source_sha256": "9291bb7fdd34ca8808a7eef96980ed9fa7a56a19b3a80ba1787369b2cbba37c9",
+        "object_sha256": "25fe1b4c124645e5c6cca37aea0114537062b709d24ac8f947dd6e0244a284aa",
+        "link": false
+      }
+    ]
+  },
+  "composition": {
+    "application_unresolved": 248,
+    "bootloader_unresolved": 34,
+    "resolved": [
+      "r1_twi_gpio_high",
+      "r1_twi_gpio_input",
+      "r1_twi_gpio_low",
+      "r1_twi_gpio_output",
+      "r1_twi_gpio_read",
+      "r1_twi_gpio_release"
+    ],
+    "added": [],
+    "compiled_units": 561
+  },
+  "delay_recheck": {
+    "i2c5_callback_bytes": "00bf00bf00bf00bf00bf7047",
+    "i2c5_callback_byte_identical": true,
+    "busy_wrapper_comparisons": 186,
+    "noop_comparisons": 186,
+    "stock_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "source_sha256": "9291bb7fdd34ca8808a7eef96980ed9fa7a56a19b3a80ba1787369b2cbba37c9",
+    "limitations": [
+      "Instruction execution, not cycle timing or physical wire timing.",
+      "Large effective loop counts are bounded analytically, not exhaustively executed.",
+      "Only SP and r4 are explicitly checked as preserved registers; caller-saved residual r0 equality is observed, not a C void return contract."
+    ]
+  },
+  "hashes": {
+    "build/goal-r1-twi-gpio/compare.py": "a355b7f1a3352bfe989a43bf9f5360075beef44e9fe264154787f79ae6489ee1",
+    "build/goal-r1-twi-gpio/compare_delay.py": "e54f4ca83c0b18b424dd579af6457d54da33fc781a1592c1ee0b34c4a7c5df35",
+    "build/goal-r1-twi-gpio/results.json": "c5fe469c5b3a00bf800e0c878dc4056b3e9b1fc214be2f083faa806d433ae2de",
+    "build/goal-r1-twi-gpio/comparison.json": "4924756df051235b470237b2b3d787936d47a7c9cb2d9da76dc521a45a3aa21a",
+    "build/goal-r1-twi-gpio/source.elf": "0eb032ea5424eeb21d03c2fb7a3d6dee9044229340b99787061f04f7aeb722bd"
+  },
+  "limitations": [
+    "MMIO accesses are emulated, not physical pin behavior.",
+    "Callback addresses were located using historical scatter output; current scatter loading was not repeated.",
+    "No source qualification, final firmware link or complete firmware byte identity.",
+    "Delay provider remains excluded; arithmetic checks do not establish calibrated bus timing."
+  ]
+}

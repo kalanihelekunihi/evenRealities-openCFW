@@ -2,11 +2,7 @@
 
 static uint32_t extract_kind(uint32_t high)
 {
-#ifdef __arc__
- uint32_t out;__asm__ volatile("xbfu %0,%1,0x10":"=r"(out):"r"(high));return out;
-#else
- return (high>>16u)&1u;
-#endif
+ return ((uint32_t)high>>16u)&0x1u;
 }
 
 /* Complete native 0x31836c..0x3183d0. XBFU 0x10 extracts the single

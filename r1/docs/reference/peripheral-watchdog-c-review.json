@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "source": "r1/src/application/board/native_peripheral_watchdog.c",
+  "native_root": "0x4d024",
+  "report": "build/sources-goal-r1-peripheral-watchdog-c/report.json",
+  "compiled_units": 828,
+  "application_imports": 73,
+  "added_imports": [],
+  "removed_imports": [
+    "r1_peripheral_watchdog_plan_step"
+  ],
+  "prior_objects_unchanged": 825,
+  "changed_generated_objects": [
+    [
+      "r1-bootloader",
+      "{gen}/r1_startup_vectors.S"
+    ],
+    [
+      "r1-bootloader",
+      "{gen}/r1_uecc.c"
+    ]
+  ],
+  "added_units": [
+    [
+      "r1-application",
+      "r1/src/application/board/native_peripheral_watchdog.c"
+    ]
+  ],
+  "verification": {
+    "counter_count_pairs": 2048,
+    "edge_live_pairs": 720,
+    "sdk_state_pairs": 0,
+    "actual_sdk_count_and_C_availability": false,
+    "invalid_state_branch_verified": true
+  },
+  "actual_SDK_and_C_children_integration": {
+    "counter_count_pairs": 48,
+    "edge_live_pairs": 48,
+    "sdk_state_pairs": 48,
+    "actual_sdk_count_and_C_availability": true,
+    "invalid_state_branch_verified": true
+  },
+  "mutants": {
+    "rejected": [
+      "period",
+      "counter_boundary",
+      "count_gate",
+      "occupied_roles",
+      "assert_delay",
+      "assert_line",
+      "assert_fault",
+      "advertising_probe",
+      "restart_mode",
+      "retry_callback"
+    ]
+  },
+  "rea_receipts": "r1/docs/reference/peripheral-watchdog-rea-bytes.json",
+  "rea_bytes_match_pinned_stock": true,
+  "new_counter": {
+    "stock_address": "0x200064b1",
+    "source_symbol": "r1_ble_peripheral_check_counter",
+    "size": 1,
+    "cold_rw_value": 0
+  },
+  "contract": {
+    "count_capture": "one SDK peripheral count before counter read",
+    "log_period": "old byte modulo 60 equals zero",
+    "counter_update": "increment modulo 256, then reload after logs and clear if 255",
+    "recovery": "count below 2, either handle invalid, advertising unavailable -> cancel role-sync, start fast advertising, log result",
+    "rearm": "2000-flag callback, argument 0, delay 0x2800 on nonfatal paths",
+    "inconsistency": "count below 2 with both handles occupied -> log, osDelay(500), retained assertion details, even stack BLX invalid state",
+    "fault_implementation": "C call through even address of aligned stack object; no opcode blob or inline assembly"
+  },
+  "limitations": [
+    "Fatal probes establish even stack target with Thumb state clear and emulator invalid-instruction rejection, not physical exception delivery or reset.",
+    "Private stack addresses/contents, fault-site PC and callback scratch return registers are outside the C contract.",
+    "SDK state integration uses prepared connected/central masks; actual SDK atomic operation and flag-count body execute.",
+    "Logger, retained log sink, delayed scheduler, advertising start and RTOS delay are modeled; actual C advertising availability executes in the deeper integration.",
+    "No physical timing, final application link or boot proof; byte identity is not required by current user instruction."
+  ],
+  "evidence_files": {
+    "build/sources-goal-r1-peripheral-watchdog-c/report.json": "e8f83d3bea6e7d809c3e413d4cfcbd3414cde13c8989a1d904553a7f58b00f9f",
+    "r1/src/sources.json": "db558533003261cb4c55888063717004a9b6917e627232e473e01672c0585fee",
+    "r1/src/application/board/native_peripheral_watchdog.c": "a0f9e38a2c4dc2fef65f28e1755c99539e40be15d8a311e49f99000f23d4d838",
+    "build/goal-r1-fstorage-registry/expanded-rw.bin": "87fdee392022fdbe23dd0daf3e859fb14f3ce26ba3e8403aab56dc9d9a913317",
+    "build/goal-r1-peripheral-watchdog-c/verify.py": "a990536c5ee5ee9c475a207f20dd14d341bddb2e68c9727620180cc576abc371",
+    "build/goal-r1-peripheral-watchdog-c/verification.json": "9c8a8b31c71313e9ca3e298ea95a7898dc701062495d71376cfa3a95b29dd200",
+    "build/goal-r1-peripheral-watchdog-c/integration.json": "22ae300407462aa38cc319f10fcdaed1e93539a1e6ed983f3246bf4be34a6e96",
+    "build/goal-r1-peripheral-watchdog-c/mutants.py": "1ab37dd8f18c8c25cfadee4dc0b80354d946d2fd2d0ddf83fff5e38974e807f1",
+    "build/goal-r1-peripheral-watchdog-c/mutants.json": "ef5caf00ac74976d63b6df9dd318adb4d358efcfc6ab35635f8d7cbcf13a4a3f",
+    "r1/docs/reference/peripheral-watchdog-rea-bytes.json": "9ce65f771bf12f30fb67564ad9950dbad8cd6d133d22fc88aaccd84d4b4dd9c2"
+  }
+}

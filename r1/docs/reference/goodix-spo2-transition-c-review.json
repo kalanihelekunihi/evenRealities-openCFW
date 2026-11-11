@@ -1,0 +1,489 @@
+{
+  "schema_version": 1,
+  "entries": {
+    "0x00036282": "r1_goodix_spo2_transition",
+    "0x00036c32": "r1_goodix_native_spo2_channel_transition"
+  },
+  "native_instruction_bytes": 98,
+  "direct_routine_comparisons": 178266,
+  "independent_direct_state_oracles": 178266,
+  "constructor_and_stage_snapshot_pairs": 3724,
+  "total_routine_or_stage_comparisons": 181990,
+  "paired_push_invocations": 94848,
+  "independent_pipeline_transition_oracles": 912,
+  "verification": {
+    "verify": {
+      "native_candidate_pairs": 135168,
+      "independent_state_oracles": 135168,
+      "state_flag_cross_product": 65536,
+      "complete_counters_for_states": [
+        0,
+        1
+      ],
+      "flags_for_complete_counters": [
+        0,
+        1,
+        128,
+        255
+      ],
+      "FP_settings": 32,
+      "all_S0_S31_preserved": true,
+      "whole_public_RAM": true,
+      "private_stack_bytes_excluded": 8192
+    },
+    "boundary": {
+      "native_candidate_pairs": 43008,
+      "independent_state_oracles": 43008,
+      "FP_settings": 32,
+      "layouts": [
+        "quality_state",
+        "quality_counter",
+        "quality_gate",
+        "filter_counter",
+        "filter_state",
+        "shared",
+        "unaligned_owner"
+      ],
+      "preserves_S0_S31_and_FPSCR": true
+    },
+    "coverage": {
+      "native_candidate_pairs": 80,
+      "independent_state_oracles": 80,
+      "native_instruction_bytes": 98,
+      "instruction_starts": 41,
+      "all_REA_body_instructions_covered": true
+    }
+  },
+  "compiled_defect_controls": [
+    {
+      "name": "missing-state-copy",
+      "rejected": true,
+      "positive_baseline_passed": true,
+      "args": [
+        "channel",
+        1,
+        1,
+        5,
+        "separate"
+      ],
+      "public_RAM_differs": true
+    },
+    {
+      "name": "preloaded-quality",
+      "rejected": true,
+      "positive_baseline_passed": true,
+      "args": [
+        "channel",
+        0,
+        255,
+        5,
+        "quality_state"
+      ],
+      "public_RAM_differs": true
+    },
+    {
+      "name": "cleared-unknown-state",
+      "rejected": true,
+      "positive_baseline_passed": true,
+      "args": [
+        "channel",
+        2,
+        255,
+        5,
+        "separate"
+      ],
+      "public_RAM_differs": true
+    },
+    {
+      "name": "cleared-state-zero-counter",
+      "rejected": true,
+      "positive_baseline_passed": true,
+      "args": [
+        "channel",
+        0,
+        255,
+        255,
+        "separate"
+      ],
+      "public_RAM_differs": true
+    },
+    {
+      "name": "state-one-gate-retained",
+      "rejected": true,
+      "positive_baseline_passed": true,
+      "args": [
+        "channel",
+        1,
+        255,
+        5,
+        "separate"
+      ],
+      "public_RAM_differs": true
+    },
+    {
+      "name": "signed-flags",
+      "rejected": true,
+      "positive_baseline_passed": true,
+      "args": [
+        "channel",
+        1,
+        128,
+        5,
+        "separate"
+      ],
+      "public_RAM_differs": true
+    },
+    {
+      "name": "counter-saturation",
+      "rejected": true,
+      "positive_baseline_passed": true,
+      "args": [
+        "channel",
+        1,
+        1,
+        255,
+        "separate"
+      ],
+      "public_RAM_differs": true
+    },
+    {
+      "name": "missing-counter-reset",
+      "rejected": true,
+      "positive_baseline_passed": true,
+      "args": [
+        "channel",
+        1,
+        0,
+        255,
+        "separate"
+      ],
+      "public_RAM_differs": true
+    },
+    {
+      "name": "wrong-filter-byte",
+      "rejected": true,
+      "positive_baseline_passed": true,
+      "args": [
+        "channel",
+        0,
+        1,
+        5,
+        "separate"
+      ],
+      "public_RAM_differs": true
+    },
+    {
+      "name": "wrong-owner",
+      "rejected": true,
+      "positive_baseline_passed": true,
+      "args": [
+        "root",
+        0,
+        1,
+        5,
+        "separate"
+      ],
+      "public_RAM_differs": true
+    }
+  ],
+  "stream_verification": {
+    "stream": {
+      "constructor_streams": 64,
+      "constructor_and_stage_snapshot_pairs": 3136,
+      "paired_push_invocations": 79872,
+      "snapshots_after": [
+        "constructors",
+        "ratio",
+        "summary",
+        "quality",
+        "transition"
+      ],
+      "per_push_checks": [
+        "SP",
+        "saved R4-R11/S16-S31"
+      ],
+      "full_public_RAM_and_FPSCR_snapshot_after_each_push": false,
+      "FP_settings": 32,
+      "independent_transition_oracles": 768,
+      "prior_filter_classification_is_explicit_input": true,
+      "windows_per_stream": 12,
+      "dropout_recovery": true,
+      "history_capacity": 20,
+      "algorithm_boundary_models": false,
+      "source_stock_mapping": false
+    },
+    "normal-stream": {
+      "constructor_streams": 12,
+      "constructor_and_stage_snapshot_pairs": 588,
+      "paired_push_invocations": 14976,
+      "snapshots_after": [
+        "constructors",
+        "ratio",
+        "summary",
+        "quality",
+        "transition"
+      ],
+      "per_push_checks": [
+        "SP",
+        "saved R4-R11/S16-S31"
+      ],
+      "full_public_RAM_and_FPSCR_snapshot_after_each_push": false,
+      "FP_settings": 6,
+      "FP_seed_values": [
+        0,
+        3,
+        12,
+        15,
+        16,
+        31
+      ],
+      "independent_transition_oracles": 144,
+      "prior_filter_classification_is_explicit_input": true,
+      "windows_per_stream": 12,
+      "dropout_recovery": true,
+      "history_capacity": 20,
+      "algorithm_boundary_models": false,
+      "source_stock_mapping": false
+    }
+  },
+  "normal_build": {
+    "normal_report": "build/sources-goal-r1-spo2-transition-c/report.json",
+    "units": 919,
+    "unchanged_source_object_pairs": 907,
+    "generated_sources_excluded": [
+      "{gen}/r1_cmsis_os2_rtc.c",
+      "{gen}/fal_partition_r1_lookup.c",
+      "{gen}/fdb_utils_r1.c",
+      "{gen}/gh_demo_r1.c",
+      "{gen}/gh_demo_hook_r1.c",
+      "{gen}/gh_demo_user_r1.c",
+      "{gen}/app_error_handler_gcc_clang.c",
+      "{gen}/r1_startup_vectors.S",
+      "{gen}/gh_ppg_timestamp_hooks_r1.c",
+      "{gen}/r1_uecc.c"
+    ],
+    "changed_sources": [
+      "r1/src/application/goodix/native_spo2_calculate.c"
+    ],
+    "new_sources": [
+      "r1/src/application/goodix/native_spo2_transition.c"
+    ],
+    "typed_caller_object_unchanged": true,
+    "normal_provider_matches_tested_sections_and_decoded_symbols": true,
+    "no_new_assembly_or_writable_sections": true,
+    "imports": {
+      "r1-application": [
+        "GH3X2X_GetVersion",
+        "GH3X2X_UprotocolPacketFormat",
+        "Gh3x2xDemoSendProtocolData",
+        "__data_start__",
+        "gh3x2x_print_fmt",
+        "goodix_hba_calc",
+        "goodix_hba_essential_info_print",
+        "goodix_hrv_calc",
+        "goodix_nadt_calc",
+        "r1_cmb_code_end",
+        "r1_cmb_code_start",
+        "r1_cmb_stack_end",
+        "r1_cmb_stack_start",
+        "r1_eat_command_dispatch",
+        "r1_eat_core_init",
+        "r1_export_plan_command",
+        "r1_factory_input_record_plan_dispatch",
+        "r1_glasses_role_conflict_fault",
+        "r1_gomore_final_sleep_record_publish_native",
+        "r1_gomore_interval_statistics_native",
+        "r1_gomore_sleep_interval_select_native",
+        "r1_gomore_sleep_score_native",
+        "r1_gomore_sleep_stage_refine_native",
+        "r1_gomore_stage_5ef1c_native",
+        "r1_gomore_stage_5f264_native",
+        "r1_gomore_stage_5f3d8_native",
+        "r1_gomore_stage_5f4b6_native",
+        "r1_gomore_stage_5f56c_native",
+        "r1_gomore_stage_5feb8_native",
+        "r1_gomore_stage_605dc_native",
+        "r1_gomore_stage_60af4_native",
+        "r1_gomore_stage_60b80_native",
+        "r1_gomore_stage_60dc4_native",
+        "r1_gomore_stage_610c8_native",
+        "r1_gomore_stage_61198_native",
+        "r1_gomore_stage_61274_native",
+        "r1_gomore_stage_6138c_native",
+        "r1_gomore_stage_statistics_native",
+        "r1_gomore_table_record11_native",
+        "r1_goodix_graph_aligned_executor_address",
+        "r1_goodix_graph_alternate_pool_executor_address",
+        "r1_goodix_graph_convolution_executor_address",
+        "r1_goodix_graph_merge_executor_address",
+        "r1_goodix_graph_operator_executor_address",
+        "r1_goodix_graph_pair_executor_address",
+        "r1_goodix_graph_pool_executor_address",
+        "r1_goodix_graph_quantizer_executor_address",
+        "r1_goodix_graph_tail_vector_executor_address",
+        "r1_goodix_graph_transform_executor_address",
+        "r1_goodix_graph_vector_executor_address",
+        "r1_goodix_model_dense_executor_address",
+        "r1_goodix_model_recurrent_executor_address",
+        "r1_goodix_model_softmax_executor_address",
+        "r1_goodix_model_vector_executor_address",
+        "r1_goodix_spo2_confidence",
+        "r1_goodix_spo2_infer",
+        "r1_goodix_spo2_output",
+        "r1_goodix_spo2_output_quality",
+        "r1_goodix_spo2_select",
+        "r1_health_auth_parameters_set",
+        "r1_health_lifecycle_engine_initialize_native",
+        "r1_health_settings_plan_command",
+        "r1_health_sync_provider_0003c0d8",
+        "r1_health_sync_provider_0003c304",
+        "r1_health_sync_provider_0003c958",
+        "r1_health_sync_provider_0003fcec",
+        "r1_health_sync_provider_0003fef4",
+        "r1_health_sync_provider_00040508",
+        "r1_health_sync_provider_00040bd4",
+        "r1_health_sync_provider_00040de0",
+        "r1_health_sync_provider_00041438",
+        "r1_health_sync_provider_00043eb0",
+        "r1_health_sync_provider_000440c4",
+        "r1_health_sync_provider_000446b4",
+        "r1_health_sync_provider_0005b39c",
+        "r1_health_sync_provider_0008f954",
+        "r1_legacy_command_route_frame",
+        "r1_manager_assertion_stack_transfer",
+        "r1_manager_logging_start_91504",
+        "r1_phone_role_assertion_stack_transfer",
+        "r1_structured_log_typed",
+        "r1_user_profile_handler"
+      ],
+      "r1-bootloader": [
+        "__bss_end__",
+        "__bss_start__",
+        "__data_start__",
+        "__etext",
+        "__start_crypto_data",
+        "__start_dfu_trans",
+        "__start_fs_data",
+        "__start_sdh_ble_observers",
+        "__start_sdh_req_observers",
+        "__start_sdh_soc_observers",
+        "__start_sdh_stack_observers",
+        "__start_sdh_state_observers",
+        "__start_svc_data",
+        "__stop_crypto_data",
+        "__stop_dfu_trans",
+        "__stop_fs_data",
+        "__stop_sdh_ble_observers",
+        "__stop_sdh_req_observers",
+        "__stop_sdh_soc_observers",
+        "__stop_sdh_stack_observers",
+        "__stop_sdh_state_observers",
+        "__stop_svc_data"
+      ]
+    }
+  },
+  "semantics": [
+    "The wrapper processes exactly one channel. It loads filter-owner pointer, summary record pointer and state-owner pointer, ignores descriptor, then calls the channel update.",
+    "The channel reads classification byte22, stores it at state+4, then reads summary flag byte41. Classification0 writes bool(flags) at state+5 while preserving state+6.",
+    "Classification1 writes0 at state+5. Zero flags reset state+6; any nonzero byte increments it modulo256. Other classifications preserve bytes5/6.",
+    "Volatile byte accesses preserve store-before-quality-load order and later counter loads, including overlap cases. No allocation, global state, assembly or opaque code is added.",
+    "All S0-S31 and FPSCR are checked unchanged on direct tests, together with saved R4-R11, SP, interrupt masks and public RAM. Private stack bytes below incoming SP are excluded.",
+    "Pipeline tests use actual C descriptor/aggregate/owned/filter-buffer constructors, heap, queues, ratio, summary and quality. Prior filter classification is an explicit input; the missing filter selector is not modeled or claimed implemented."
+  ],
+  "limitations": [
+    "Relocatable composition with82 application and22 boot imports is not a complete bootable firmware image. Five SpO2 stages remain unresolved.",
+    "Physical sensors, interrupt concurrency, hardware trap configuration and timing equivalence are untested. Unaligned owner cases use the emulator default unaligned-access behavior.",
+    "Complete floating-point register checks cover S0-S31 and FPSCR, not separate FPU system/lazy-stacking configuration registers.",
+    "Direct tests compare full public RAM except8192 bytes below incoming SP. Pipeline full RAM/FPSCR snapshots are at constructors and ratio/summary/quality/transition boundaries; per-push checks cover saved registers/SP only.",
+    "Some preexisting transitive processing/math providers retain assembly; the new transition unit does not. All98 native body bytes execute, which does not establish exhaustive interleaving coverage.",
+    "REA analysis snapshots are retained as evidence; locked raw firmware bytes execute for native replay."
+  ],
+  "evidence_sha256": {
+    "r1/src/application/goodix/native_spo2_transition.c": "2a9a9af8304c2cfd63caa8fe4204a22bd1f42355f052a0a0858b13ada21f03e8",
+    "r1/src/application/goodix/native_spo2_transition.h": "c716b4412a7ad43a7cb6734cb62c810fc0b117436448c047e9d7c944e2715936",
+    "r1/src/application/goodix/native_spo2_calculate.c": "21eedb2449d66417dfe069f86d2dda6e6697d9abfefe473dc20b79e85ae577bc",
+    "r1/src/sources.json": "7d339b424e2ac9d5fbde5315e49b8b87e98166afd0b53042d79555ce13208bdb",
+    "r1/docs/reference/FUNCTION-OWNERSHIP.csv": "1ac0469c577352dfb60cea404dc9daaf4a541280b058a25d7fa6bd0c70d6379c",
+    "build/sources-goal-r1-spo2-transition-c/report.json": "817280d7e592182f28fd2fae98e3e3d7631d8309cd587d204e0f41271c947145",
+    "build/sources-goal-r1-spo2-summary-c/report.json": "f91606caf9731873b861f759034fc32c0da9efa554b32e51735cc6b88e6c2e09",
+    "tools/build/source-plan.json": "eeb516e31b3310fb0718f36908977f8125723f7c5e0e86cd6744395826259a4d",
+    "r1/src/config/runtime/native_health_cache.ld": "eb8f131c489cd818d4e36718718fa1989719ca0170f164541a1a5bf56dfc1ec3",
+    "r1/blobs/official/r1-2.2.6.0009/application.bin": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "build/goal-r1-queue-reset-c/stock.elf": "25b4a29af80ec8edab5bd861ba9b74a6e22eab29dc3d7a809a16869e8a140f04",
+    "build/goal-r1-spo2-summary-c/normal-dependencies.a": "4b350dc3f573e1f34d5a80766be85cc2351227f0f482f15272a809fc902612b9",
+    "build/goal-r1-spo2-summary-c/normal-archive-inputs.json": "991ff14ce0454633327984f79607d5db3f770fc0f686454154b3bae0c6917d5e",
+    "build/goal-r1-spo2-transition-c/audit.json": "d82a3f1bd2db424a0132112dc1d1299a8026c8ea0a8b57130cd8d505e338a9ea",
+    "build/goal-r1-spo2-transition-c/audit.py": "ca553bc1d0b0fe5c5a223c7ab1de3dde817e067abcf8fa6e6586b8478a6f191e",
+    "build/goal-r1-spo2-transition-c/boundary-results.json": "4f00928127b5154610ca76b286c16eea56eb40a0f01f2a29f56705a0ecac9695",
+    "build/goal-r1-spo2-transition-c/boundary.log": "d4a0984f44305c9b43c0ade763a037a25a539a65448058131931f26948889847",
+    "build/goal-r1-spo2-transition-c/boundary.py": "f360abe7ce887ed2d4636336addb3a1dbb0617c7033ea9d47b649472878b1402",
+    "build/goal-r1-spo2-transition-c/candidate.c": "2a9a9af8304c2cfd63caa8fe4204a22bd1f42355f052a0a0858b13ada21f03e8",
+    "build/goal-r1-spo2-transition-c/candidate.elf": "1f620e0806956ebe55c71162274c2652c041466b55db40c7681ce917d41478ba",
+    "build/goal-r1-spo2-transition-c/candidate.o": "19b29ffb5c389d2889433063a6e8e96f144df0f778be22652901af7808377478",
+    "build/goal-r1-spo2-transition-c/compile-argv.json": "60670e112da9f59b0d2bc83fc55d00847978a0021b0b6683029995a2d852a4c8",
+    "build/goal-r1-spo2-transition-c/control-cleared-state-zero-counter.c": "466fe7635cb092ba77a2c39c6854c8e688c6c0165b50ee2bf3428299b574ede6",
+    "build/goal-r1-spo2-transition-c/control-cleared-state-zero-counter.elf": "80c979154a2c16c90973cfb9679657869845c9452d3060e6ef7f2797214c6f32",
+    "build/goal-r1-spo2-transition-c/control-cleared-state-zero-counter.o": "201c18bd875f45f986b7e7fb878e0c91773c5ac210caa0fc054899ea202b5605",
+    "build/goal-r1-spo2-transition-c/control-cleared-unknown-state.c": "4076e4ea97f3a63cdf7cb9186ee693618197d5531981c926fa42792cfae1d703",
+    "build/goal-r1-spo2-transition-c/control-cleared-unknown-state.elf": "42811830311ea9e7aa4bf8dfb331b98ba91f836203490543dff3cc297d10d8eb",
+    "build/goal-r1-spo2-transition-c/control-cleared-unknown-state.o": "2aaa31014ec3baae6449395cd9948a4af4258f4dfbf9fb68993ec3306bae529a",
+    "build/goal-r1-spo2-transition-c/control-counter-saturation.c": "ddad987050d8922df93386d542ac9f7cf21484790cb7c44619e0dd1b0b780db1",
+    "build/goal-r1-spo2-transition-c/control-counter-saturation.elf": "fca2a52ce9e32e1505b2a8d4031b1626085740bf6bae0386470a6283c325dcf0",
+    "build/goal-r1-spo2-transition-c/control-counter-saturation.o": "63874ed5506647ca738c0f3308082fa6b12049c8e6ddeb2c1fd79acc2d4214fc",
+    "build/goal-r1-spo2-transition-c/control-missing-counter-reset.c": "1e0e7ab377e35d213ca186abdf5600ac36603ae0074f8afb1d2ead7d62933428",
+    "build/goal-r1-spo2-transition-c/control-missing-counter-reset.elf": "0dd6af561714f07c138b5209ef07e55e9211571040ec389aeaf5f0d8c0c34ebb",
+    "build/goal-r1-spo2-transition-c/control-missing-counter-reset.o": "5bb91cc813b452b9f667de72e1e91557481c233379b2e810f04fe42d51d17336",
+    "build/goal-r1-spo2-transition-c/control-missing-state-copy.c": "c4b0fe1e3ac1ac1d1cc52b85012563e9ab63e33bc6c98f8448e6fbd7056fdd03",
+    "build/goal-r1-spo2-transition-c/control-missing-state-copy.elf": "939abab3e5a7cca44421a4444a659cd56ae99beb262f8186171fc3b6e7408bce",
+    "build/goal-r1-spo2-transition-c/control-missing-state-copy.o": "7416a12ebc53f1bfbf6febb0fd1bbad2cf522acf0dda23bf6fc5a4433c56ffa8",
+    "build/goal-r1-spo2-transition-c/control-preloaded-quality.c": "a85bfff300e2715f0a92303fc55691aa699c9c451d84b5000af42863ae369e8d",
+    "build/goal-r1-spo2-transition-c/control-preloaded-quality.elf": "69151bbfc4224b117f80fb8ee14f78a9489b2aeb62b83fc94f7e1001f14f9f5a",
+    "build/goal-r1-spo2-transition-c/control-preloaded-quality.o": "f8eab857a529f000bcd70f784e450cda543f537c173e46b33089089a18d530fb",
+    "build/goal-r1-spo2-transition-c/control-signed-flags.c": "8f08dcbd7d430f08552c6e58ad3345c80b81b37610b2a05bc18763db927bcfca",
+    "build/goal-r1-spo2-transition-c/control-signed-flags.elf": "e5190af4e1f7c3dd64c63eacef64275c090bb40c8d9042599b018cb2f5982ad3",
+    "build/goal-r1-spo2-transition-c/control-signed-flags.o": "744d43f822e994a901a07e4ccfce9879ce8127f76cd8df5702adae3debf82ca7",
+    "build/goal-r1-spo2-transition-c/control-state-one-gate-retained.c": "2a6ac670840ce2d83b44acdb931e1e38c9f3899e943503912b41b496eadd67b6",
+    "build/goal-r1-spo2-transition-c/control-state-one-gate-retained.elf": "8acd057cee59164016fae324f8fd124e20450bf6bc56090b36b985fc70e49ae5",
+    "build/goal-r1-spo2-transition-c/control-state-one-gate-retained.o": "7604d1fe44388dc7510bf51af79c0554b2ad5bdd1b926485bff176280950d54c",
+    "build/goal-r1-spo2-transition-c/control-wrong-filter-byte.c": "a0cc23704146d438bb20b7db49a72dbd30bab1bc0c680095044299637144099d",
+    "build/goal-r1-spo2-transition-c/control-wrong-filter-byte.elf": "b0fbd46130e279fff66dab28e87f508e4c0e3fb3a508d6f3fa63a5585ff811c1",
+    "build/goal-r1-spo2-transition-c/control-wrong-filter-byte.o": "16cc08843cf3a0205030b8fca1144d5071b9c07aca8bdefe9939bee3a9672d8e",
+    "build/goal-r1-spo2-transition-c/control-wrong-owner.c": "1857e41b09b2af22d8dd036be2bdc89954829e0868cfa94b0b607adb05c6a0e5",
+    "build/goal-r1-spo2-transition-c/control-wrong-owner.elf": "76796da4cf8ed4d3a092db18b5b939295cd1b3aba1b47e461d181d27e7034f4e",
+    "build/goal-r1-spo2-transition-c/control-wrong-owner.o": "6bf4ba765b272409ee6569c1a9d3ef5478dd3fec62c5773d8836c9afce30185c",
+    "build/goal-r1-spo2-transition-c/controls-results.json": "9c1e7e07feb14ddbbb42a6ccd1aae7bef0fe2e04abcc2961d0bcfacff6277646",
+    "build/goal-r1-spo2-transition-c/controls.log": "2a2ee86cf8d182473d8071e250ee70163123bcde62a0ab57221e59634a5fd48f",
+    "build/goal-r1-spo2-transition-c/controls.py": "3f24122cb5bd4ee65ab9a7319b87589b4f8ab3f202e0d455b8663054aed3c75e",
+    "build/goal-r1-spo2-transition-c/coverage-results.json": "1f345665c93f448b9d61c6e33867da788f2c748b745e01b5cd42a8989bbf8a99",
+    "build/goal-r1-spo2-transition-c/coverage.log": "467eebf6a147845d19b05575f509a5b54784e8432a6eef0276969516593fba85",
+    "build/goal-r1-spo2-transition-c/coverage.py": "5f861d94fb56443fa9e4f2aace312d5e12e98dac04eb764bb39bc1949807d2a8",
+    "build/goal-r1-spo2-transition-c/fixture.py": "37eff3babb361ce19b02022a18904110d816d1eacf949044928d816c6e4fedd5",
+    "build/goal-r1-spo2-transition-c/link-argv.json": "1f85976e98eaab65e59101667d1b4ac018d7532602433301107b8ef69f0f4d82",
+    "build/goal-r1-spo2-transition-c/native_spo2_transition.h": "c716b4412a7ad43a7cb6734cb62c810fc0b117436448c047e9d7c944e2715936",
+    "build/goal-r1-spo2-transition-c/normal-archive-inputs.json": "26eb80683c0387058a0161e24b0452f6af287950e5b42b2d54b20941b98bf1de",
+    "build/goal-r1-spo2-transition-c/normal-build.log": "c5a85f497a1da5758d36f7577a268c28597eecd06cf5a798c85297e26f163597",
+    "build/goal-r1-spo2-transition-c/normal-dependencies.a": "a85359d68635bdfe61ddea0026b881efd92301291069bb06e680e502a5181149",
+    "build/goal-r1-spo2-transition-c/normal-stream-link.json": "0dfc6be582ad9174c429a6b8fd3b7fa8d67872a45f7e8ef405c0979f9b9e8df2",
+    "build/goal-r1-spo2-transition-c/normal-stream-results.json": "c154e1294d2b7194e793355d1d90f0cac22fad194582143b698605271f8d0584",
+    "build/goal-r1-spo2-transition-c/normal-stream.elf": "fbf196692dfdce9d0fe00a28c9c094008bb9817546903a2ec9c7567e071737d5",
+    "build/goal-r1-spo2-transition-c/normal-stream.log": "55baad2fb8f9e802f37ded97bf8ff7146f7baf8f1db154364a60cd5e3a9b776e",
+    "build/goal-r1-spo2-transition-c/normal_stream.py": "2fbc68cfa7d6e336c91da6fbc6cbc7d4bcc9e33db23ea32bd41fdd34fade6e29",
+    "build/goal-r1-spo2-transition-c/normal_stream_prepare.py": "bb53b3d2db480a51a152450680f75d8fb08db9ff2b2836cdfab131d1a6031a3f",
+    "build/goal-r1-spo2-transition-c/pipeline_fixture.py": "21e979fecb3f7a3ed437dbe6d0a5434ad5cb9bfaa593651c35d866babb0f0262",
+    "build/goal-r1-spo2-transition-c/rea-0.json": "3ac45d7f64dd4950d4d6f3728de17764a57dd703a44f39608bff6b7247470a47",
+    "build/goal-r1-spo2-transition-c/rea-1.json": "e04519564101ede5868e23e250b80a0971c262b15dd1ad7141eeb7bc828dc20b",
+    "build/goal-r1-spo2-transition-c/rea-next-infer-dep-0.json": "0e2e10539fa1f734ce264aae54bf7354c7673f4eac49b165cd3d65ebe2873f14",
+    "build/goal-r1-spo2-transition-c/rea-next-infer-dep-1.json": "350da222863ae6fa69234c218fd47a0118f2bbb1ca263e1c597ec900cd6e31bd",
+    "build/goal-r1-spo2-transition-c/rea-next-infer.json": "1fb64afb10b5480cbb9ef10aaab87627508989e7cef8912dfb198081b2349c16",
+    "build/goal-r1-spo2-transition-c/sources-check.log": "aac3aa18a400cfcd93e650fadfc29c29d3e747e5eb61f6e3ecc68589f454e5ac",
+    "build/goal-r1-spo2-transition-c/stream-link.json": "0e2b47441ddbcf29039e9794f192c6290350111e81f413c73640d660853baeff",
+    "build/goal-r1-spo2-transition-c/stream-results.json": "e30aaf952760f32ae5179d2bca60c40bbc8efb09a0f49437465ff81a0efcfbb6",
+    "build/goal-r1-spo2-transition-c/stream.elf": "adcd9e9e8858266e9ce0574765219b2835c031f0e2adb90591cb26003efeadcb",
+    "build/goal-r1-spo2-transition-c/stream.log": "547682c70c6b91e7254dbaa885ee4ee3a51201459454391670562006b8f33ca3",
+    "build/goal-r1-spo2-transition-c/stream.py": "20252b2bc2f1ab99580719c9a975b156474e7538d49a636dc4db4c942713a5de",
+    "build/goal-r1-spo2-transition-c/test.ld": "b2ff9ac27a31674636716d033098cceafafc2f782e6660e4dd431dc3e9dc449d",
+    "build/goal-r1-spo2-transition-c/verify-results.json": "567dbda8ba1f4949b7f8eb28cbfae348c0702a0997df0f368e9f8da88dfcf7c9",
+    "build/goal-r1-spo2-transition-c/verify.log": "f7eaed8d220e30ed61d571552d390de5a1bea13f8c7ae9f583dc821ef81c644a",
+    "build/goal-r1-spo2-transition-c/verify.py": "3d073fbc18da00ad52a636d71950be60583de3303ceecf3b5961d9386e1541c8"
+  }
+}

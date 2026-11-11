@@ -4,10 +4,19 @@
  * an infinite event loop require separate execution qualification. */
 #include <stdint.h>
 #include <stddef.h>
+/* Stock-RAM literals rewritten to named objects (sim-test wave 2026-10-26,
+ * .waves/sim-fix/apply.py): g2ref_X is the linker symbol X. */
+#include <stdint.h>
+extern unsigned char g2ref_g2_stock_ram_200738b8[] __asm__("g2_stock_ram_200738b8");
+extern unsigned char g2ref_g2_stock_ram_203195e0[] __asm__("g2_stock_ram_203195e0");
 extern void *g2_uart_thread_mutex; /* pointer cell 0x20074b18; osMutexNew */
 extern void *g2_uart_thread_event; /* pointer cell 0x20074b10; osEventFlagsNew */
 extern void *g2_uart_thread_transport; /* pointer cell 0x20074b14 */
-extern void (*g2_uart_thread_initialize_callback)(void); /* pointer cell 0x20000658 */
+/* Pointer cell 0x20000658 = +0 of the displaydrv_manager record (stock init
+ * 0x473953 Disp_ThreadInit; display_data.c). Sim-test fix 2026-10-26: was a
+ * separate zero-initialized cell, so the call below was blx 0. */
+extern struct { void (*thread_init)(void); } audio_display_driver_manager;
+#define g2_uart_thread_initialize_callback (audio_display_driver_manager.thread_init)
 extern uint8_t g2_uart_command[/* >= 11 */]; /* 0x20074080 */
 extern uint8_t g2_uart_rx_buffer[1024]; /* 0x2006c930 */
 extern const char g2_uart_log_module[],g2_uart_log_file[],g2_uart_log_function[];
@@ -54,7 +63,7 @@ void uart_thread_handler(void *argument)
     if (!g2_uart_thread_mutex) {failure_log(0x60,g2_uart_mutex_error,g2_uart_mutex_error_short);return;}
     g2_uart_thread_event=audio_uart_event_new(0);
     if (!g2_uart_thread_event) {failure_log(0x66,g2_uart_event_error,g2_uart_event_error_short);return;}
-    g2_uart_thread_transport=audio_uart_transport_new(0x6000u,1u,0u,(void *)(uintptr_t)0x203195e4u,(void *)(uintptr_t)0x200738b8u,0u,0u);
+    g2_uart_thread_transport=audio_uart_transport_new(0x6000u,1u,0u,(void *)(uintptr_t)((uint32_t)(uintptr_t)g2ref_g2_stock_ram_203195e0+0x4u),(void *)(uintptr_t)((uint32_t)(uintptr_t)g2ref_g2_stock_ram_200738b8),0u,0u);
     if (!g2_uart_thread_transport) {failure_log(0x71,g2_uart_transport_error,g2_uart_transport_error_short);return;}
     if (audio_uart_ready()!=0u) {failure_log(0x76,g2_uart_ready_error,g2_uart_ready_error_short);return;}
     g2_uart_thread_initialize_callback();

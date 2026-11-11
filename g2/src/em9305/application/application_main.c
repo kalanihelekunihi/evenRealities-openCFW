@@ -35,7 +35,8 @@ extern const uint16_t g2_em_hci_cmd_count_334ae0; /* ROM 0x334ae0 = 33 */
 extern const uint16_t g2_em_hci_cmd_count_334950; /* ROM 0x334950 = 12 */
 
 /* Optional product start callback, called (0xff, 1, &flag, 0). RAM 0x8010a4 */
-extern void (*g2_em_app_start_callback)(uint32_t, uint32_t, uint8_t *, uint32_t);
+extern void (*g2_em_app_start_callback)(uint32_t, uint32_t, uint8_t *, uint32_t)
+    __attribute__((section(".bss.opencfw_app_start_callback_8010a4"))); /* absolute, not gp-relative */
 
 extern void BSP_Init(void);                                      /* 0x302e80 */
 extern void irq_set_user_callback_3069b8(void (*callback)(uint32_t));
@@ -51,8 +52,8 @@ extern void wsf_os_init_only_veneer_30460c(void);   /* tail to WsfOsInitOnly 0x3
 extern void wsf_os_register_start_304610(void);     /* WsfOsRegisterTaskInitCback(0x302a20); WsfOsStartOnly() */
 extern void myapp_ctor_30ea08(void);
 extern void myapp_start_30eabc(void);
-extern uint32_t lhciCmdVsExtInterfaceEM(void);      /* 0x32e5a8, passed by address only */
-extern _Noreturn void opencfw_em9305_framework_run(void);    /* QF_run 0x311230 */
+extern uint32_t lhciCmdVsExtInterfaceEM(uint32_t type, uint32_t length, const void *payload, uintptr_t callback); /* 0x32e5a8, passed by address */
+extern _Noreturn void QF_run(void);    /* QF_run 0x311230 */
 extern _Noreturn void opencfw_em9305_framework_resume(void); /* QF_resume 0x311218 */
 
 _Noreturn void qf_resume_caller(void);
@@ -87,7 +88,7 @@ _Noreturn void application_main_30eb8c(void)
     uint8_t start_flag;
 
     BSP_Init();
-    __asm__ volatile("seti 0" ::: "memory");
+    __builtin_arc_seti(0);
     irq_set_user_callback_3069b8(application_gpio_wake_irq_306894);
     (void)opencfw_em9305_controller_rom_register_irq(6u, 1u, 1u, 1u);
     opencfw_em9305_sleep_controller_enable(0u, 0x40u, 1u);
@@ -116,7 +117,7 @@ _Noreturn void application_main_30eb8c(void)
     if (g2_em_app_start_callback != NULL)
         g2_em_app_start_callback(0xffu, 1u, &start_flag, 0u);
 
-    opencfw_em9305_framework_run(); /* stock follows with a KFLAG 1 halt loop */
+    QF_run(); /* stock follows with a KFLAG 1 halt loop */
 }
 
 /* Stock 0x0030EC92 (qf_resume_caller: warm-boot tail of the application entry) */

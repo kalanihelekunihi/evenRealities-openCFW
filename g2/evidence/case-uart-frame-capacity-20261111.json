@@ -1,0 +1,59 @@
+{
+  "schema": "opencfw.g2.case.uart-frame-capacity.v1",
+  "date": "2026-11-11",
+  "reference": {
+    "payload": "g2/blobs/official/g2-2.2.6.10/firmware_box.bin",
+    "header_bytes": 32,
+    "stock_frame_callback": "0x08006544",
+    "stock_blocking_receive": "0x080063ec",
+    "stock_uart_wait": "0x08008ec4",
+    "frame_buffer_start": "0x20000974",
+    "frame_buffer_bytes": 1200,
+    "adjacent_uart_handle_start": "0x20000e24"
+  },
+  "change": {
+    "source": "g2/src/case/startup/application_boot_sensor_callback_finish_candidate.c",
+    "summary": "Reject a 0xCF frame whose declared payload exceeds 1194 bytes before calling the blocking receive helper; reserve one byte after the five-byte header for the trailing frame byte.",
+    "stock_difference": "The locked stock callback forwards oversized 16-bit lengths to blocking receive. This source-only guard intentionally changes that behavior to prevent writes past the 1200-byte frame buffer.",
+    "maximum_accepted_0xcf_payload_bytes": 1194
+  },
+  "differential_emulation": {
+    "engine": "Unicorn 2.1.4, ARM Thumb M-class",
+    "inputs": "Authenticated stock CASE raw image and freshly linked source CASE raw image",
+    "controlled_lowers": "Frame callback: bind, blocking receive, DE probe, event signal, and resync. Blocking receive: tick and UART wait. UART wait: tick. The same lower returns and memory effects were supplied to each image.",
+    "compared_state": "Return code where applicable, lower call order and arguments, frame count and bytes, UART handle fields, peripheral registers, PRIMASK, and receive buffer bytes.",
+    "valid_callback_seed": "0x6544",
+    "valid_callback_cases_matched": 452,
+    "current_image_blocking_receive_cases_matched": 7,
+    "current_image_uart_wait_cases_matched": 10,
+    "capacity_boundary": {
+      "length_1194": "Stock and source both called blocking receive; source frame count became 1199 before the trailing byte.",
+      "length_1195": "Stock called blocking receive; source called resync and bind without blocking receive.",
+      "length_65535": "Stock called blocking receive; source called resync and bind without blocking receive."
+    },
+    "harnesses": [
+      "build/case-uart-oracle-20261111/compare_live_receive.py",
+      "build/case-uart-oracle-20261111/compare_live_callback.py",
+      "build/case-uart-oracle-20261111/compare_live_wait.py"
+    ]
+  },
+  "build": {
+    "manifest_check": "g2: 4885 units, 4546 source files, 1 final-link-only unit",
+    "case_compile": "361/361; zero duplicate strong symbols and zero unresolved",
+    "all_compile": "4880/4880 enabled C units; zero failures and zero duplicate strong symbols",
+    "all_strict_links": 7,
+    "case_link_bytes": 60184,
+    "case_link_sha256": "f7135f3a8254111949f55deb2bd092ff9b7ec2e61fada299c0fe2f0916676a84",
+    "source_bundle_bytes": 4638028,
+    "source_bundle_sha256": "4ded84cd623fd0dafd0633e71481cab92ac2845f8a64dbb3bde7eea8ddf29990",
+    "source_bundle_matches_locked_target": false,
+    "source_completeness_proven": false,
+    "build_report": "build/case-uart-capacity-20261111/all/report.json",
+    "link_report": "build/case-uart-capacity-20261111/bundle/link-report.json"
+  },
+  "limits": [
+    "Controlled lower emulation does not establish physical UART timing, DMA, or device boot.",
+    "The callback comparison covers bounded input frames; the oversized cases deliberately differ from stock.",
+    "Overall G2 source completeness remains unverified."
+  ]
+}

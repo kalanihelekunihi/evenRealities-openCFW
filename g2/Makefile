@@ -41,7 +41,7 @@ CORE_TESTS := test_open_cfw test_analyze_g2_codec_fwpk_segments \
 	test_recover_apollo_embedded_source_paths test_generate_apollo_ghidra_chunks \
 	test_run_ghidra_shard_batch test_assetgen_lvgl_font test_assetgen_lvgl_image \
 	test_assetgen_nanopb_descriptor test_assetgen_string_pool \
-	test_gxdnn_command_emitter test_gxdnn_quantize test_csky_macos_build \
+	test_gxdnn_command_emitter test_gxdnn_c_source test_gxdnn_quantize test_csky_macos_build \
 	test_preserve_l8_resources test_touch_scb test_touch_scb_mmio test_touch_scb_simulator test_touch_scb_tx test_touch_scb_fifo test_ambiq_mspi test_ambiq_mspi_lifecycle test_ambiq_mspi_cmdq test_ambiq_gpio test_radio_gpio test_wsf_radio test_ambiq_gpio_config test_wsf_timer_stop test_trace_inventory
 
 .PHONY: all help reference verify reference-verify test core-test research-corpus \
@@ -376,3 +376,23 @@ audio-registration-simulator:
 	$(MAKE) audio-notification-pcm-simulator AUDIO_PCM_SIM_DIR="$(AUDIO_REG_SIM_DIR)"
 	$(FOUNDATION_CC) $(GPIO_SIM_CFLAGS) -ffunction-sections -c src/apollo-common/audio-pcm-registration/registration.c -o "$(AUDIO_REG_SIM_DIR)/registration.o"
 	$(SCB_SIM_LD) --gc-sections -e opencfw_pcm_register_prefix -u opencfw_pcm_unregister_prefix -u opencfw_audio_consume_prefix -u opencfw_audio_notify_prefix -u opencfw_pcm_dispatch_prefix -u opencfw_audio_queue_get_task_nowait -u opencfw_audio_i2s_irq_prefix --defsym=xTaskRemoveFromEventList=0x455371 --defsym=xTaskPriorityDisinherit=0x45596f --defsym=opencfw_event_group_assert_failure=0x08002001 -T $(GPIO_CONFIG_SIMULATOR)/module.ld -o "$(AUDIO_REG_SIM_DIR)/registration.elf" "$(AUDIO_REG_SIM_DIR)/registration.o" "$(AUDIO_REG_SIM_DIR)/consumer.o" "$(AUDIO_REG_SIM_DIR)/rearm.o" "$(AUDIO_REG_SIM_DIR)/handoff.o" "$(AUDIO_REG_SIM_DIR)/cache.o" "$(AUDIO_REG_SIM_DIR)/queue.o" "$(AUDIO_REG_SIM_DIR)/queue_adapter.o" "$(AUDIO_REG_SIM_DIR)/receive.o" "$(AUDIO_REG_SIM_DIR)/receive_copy.o" "$(AUDIO_REG_SIM_DIR)/critical.o"
+
+# Compilable-C campaign: G2 only, no proprietary compiler invocation.
+.PHONY: sources sources-check source-link source-bundle kws-command-stream
+SOURCES_OUT ?= build/g2-c-wave
+SOURCE_LINK_OUT ?= build/g2-source-images
+SOURCE_LINK_FLAGS ?=
+SOURCE_BUNDLE_OUT ?= build/g2-source-bundle
+KWS_WEIGHTS ?= g2/src/codec/npu/kws_weights_2_2_6_10.bin
+KWS_WEIGHTS_PROVENANCE ?= g2/evidence/codec-a-kws-trained-weights-20261111.json
+KWS_COMMAND_OUT ?= ../build/g2-kws/commands.bin
+sources:
+	cd .. && $(PYTHON) tools/build/sources.py build --device g2 --out "$(SOURCES_OUT)"
+sources-check:
+	cd .. && $(PYTHON) tools/build/sources.py check --device g2
+source-link:
+	cd .. && $(PYTHON) tools/build/link_g2_sources.py --source-out "$(SOURCES_OUT)" --out "$(SOURCE_LINK_OUT)" $(SOURCE_LINK_FLAGS)
+source-bundle:
+	cd .. && $(PYTHON) tools/build/link_g2_sources.py --source-out "$(SOURCES_OUT)" --out "$(SOURCE_BUNDLE_OUT)" --codec-a-weights "$(KWS_WEIGHTS)" --codec-a-weights-provenance "$(KWS_WEIGHTS_PROVENANCE)" --bundle-candidate
+kws-command-stream:
+	$(PYTHON) tools/build_kws_command_stream.py --out "$(KWS_COMMAND_OUT)"

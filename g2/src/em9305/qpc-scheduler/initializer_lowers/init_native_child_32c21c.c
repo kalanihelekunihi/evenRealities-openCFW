@@ -1,50 +1,22 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_32c21c\n"
-".type opencfw_em9305_child_32c21c,@function\n"
-"opencfw_em9305_child_32c21c:\n"
-"L32c21c:\n"
-"enter_s [r13-r14,blink]\n"
-"L32c21e:\n"
-"ld_s r13,[r0,0x24]\n"
-"L32c220:\n"
-"ldb r1,[r13,67]\n"
-"L32c224:\n"
-"breq_s r1,0,L32c252\n"
-"L32c226:\n"
-"ld_s r0,[r0,0x2c]\n"
-"L32c228:\n"
-"add2 r12,r0,0x21\n"
-"L32c22c:\n"
-"ldb r1,[r0,151]\n"
-"L32c230:\n"
-"ldb r0,[r0,150]\n"
-"L32c234:\n"
-"ld r3,[r12,0xc]\n"
-"L32c236:\n"
-"brne.d.nt r1,r0,L32c24a\n"
-"L32c23a:\n"
-"ld r2,[r12,0x8]\n"
-"L32c23c:\n"
-"ld_s r14,[r12,0x4]\n"
-"L32c23e:\n"
-"ld r0,[r12,0]\n"
-"L32c240:\n"
-"xor_s r14,r14,r3\n"
-"L32c242:\n"
-"xor_s r0,r0,r2\n"
-"L32c244:\n"
-"or.f 0,r0,r14\n"
-"L32c248:\n"
-"beq_s L32c24c\n"
-"L32c24a:\n"
-"bset_s r1,r1,0x1\n"
-"L32c24c:\n"
-"bl.d opencfw_em9305_child_30e8dc\n"
-"L32c250:\n"
-"ldb_s r0,[r13,0x1]\n"
-"L32c252:\n"
-"leave_s [r13-r14,blink,pcl]\n"
-".size opencfw_em9305_child_32c21c,.-opencfw_em9305_child_32c21c\n"
-);
+#include <stdint.h>
+
+/* Native 0x32c21c..0x32c254: when the link (+0x24) is enabled (+67), report
+ * the PHY state byte +151 of the session (+0x2c) to native 0x30e8dc for the
+ * link id (+1), with bit 1 set when the state differs from +150 or the two
+ * 64-bit values at +132 and +140 differ. */
+extern uint32_t opencfw_em9305_child_30e8dc(uint32_t,uint32_t);
+
+void opencfw_em9305_child_32c21c(uintptr_t context)
+{
+    uintptr_t link = *(volatile uint32_t *)(context + 0x24u);
+    if (*(volatile uint8_t *)(link + 67u) == 0u) return;
+    uintptr_t session = *(volatile uint32_t *)(context + 0x2cu);
+    uint32_t state = *(volatile uint8_t *)(session + 151u);
+    uint32_t previous = *(volatile uint8_t *)(session + 150u);
+    volatile uint32_t *value = (volatile uint32_t *)(session + 132u);
+    uint32_t next_high = value[3];
+    uint32_t next_low = value[2];
+    if (state != previous || ((value[0] ^ next_low) | (value[1] ^ next_high)) != 0u)
+        state |= 2u;
+    (void)opencfw_em9305_child_30e8dc(*(volatile uint8_t *)(link + 1u), state);
+}

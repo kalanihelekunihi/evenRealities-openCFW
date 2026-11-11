@@ -7,14 +7,8 @@ extern uint8_t audio_ble_privacy_rows[10u*200u]; /* 0x20067a30 */
 uint8_t audio_ble_dm_adv_state(uint8_t index) {
     return index<2u?audio_ble_dm_adv_control[0x1du+index]:0u;
 }
-uint8_t audio_ble_pair_count(uint8_t type) {
-    uint8_t count=0u;
-    for(uint8_t i=0u;i<10u;i++) {
-        uint8_t *row=audio_ble_privacy_rows+(uint32_t)i*200u;
-        if(row[0x2fu] && row[0xc3u]==type)count++;
-    }
-    return count;
-}
+/* audio_ble_pair_count (stock 0x47a676) is an alias of
+ * app_db_paired_count_47a676 in ble/g2c-leaves/g2c_ble_leaves.c. */
 const uint8_t *audio_ble_dm_conn_peer_address(const uint8_t *record) {
     return record;
 }

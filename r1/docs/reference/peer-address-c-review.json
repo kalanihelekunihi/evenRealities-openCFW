@@ -1,0 +1,347 @@
+{
+  "schema_version": 1,
+  "sources": [
+    "r1/src/application/board/native_peer_address.c",
+    "r1/src/application/board/native_peer_address.h",
+    "r1/src/application/runtime/native_ble_state_reports.c",
+    "r1/src/application/runtime/native_ble_state_reports.h",
+    "r1/src/application/board/native_ble_tx_power.c",
+    "r1/src/application/board/native_protocol_response_header.c",
+    "r1/src/application/runtime/native_ble_connection_control.c"
+  ],
+  "native_roots": [
+    "0x4cae4",
+    "0x3d724",
+    "0x4cccc",
+    "0x4d9b0",
+    "0x4c948",
+    "0x42ee8",
+    "0x4cc60",
+    "0x913dc",
+    "0x4e21c",
+    "0x839da",
+    "0x84c0c"
+  ],
+  "report": "build/sources-goal-r1-peer-address-reviewed-c/report.json",
+  "compiled_units": 845,
+  "verification": {
+    "stock_C_pairs": {
+      "slot_lookup_guards_aliases": 40,
+      "address_valid_byte_domain": 3072,
+      "target_validity_matches_logs": 360,
+      "target_store_aliases_flags": 72,
+      "disconnect_power_status": 252,
+      "fresh_disconnect_status": 5,
+      "stored_flag_byte_domain": 256,
+      "invalid_cached_peer_disconnect": 2,
+      "cached_target_validity": 2,
+      "null_op8": 3,
+      "state_report_words": 72,
+      "pure_C_response_header": 720,
+      "live_provider_mutations": 126,
+      "seeded_mixed_paths": 512
+    },
+    "total_pairs": 5494,
+    "actual_C_peer_helpers_memcmp_frame_header": true,
+    "actual_SDK_SVC_gates": true,
+    "existing_GAP_battery_owners_reused": true,
+    "new_slot_owner_bytes": 21,
+    "ordinary_AAPCS_only": true,
+    "callee_saved_integer_FP_stack_guards_masks": true,
+    "device_execution": false
+  },
+  "consumer_integration": {
+    "stock_C_pairs": {
+      "event_role_log_occupancy": 2304,
+      "target_lengths_matches": 84,
+      "security_target_status": 45,
+      "queue_ownership_null_failure": 6,
+      "live_provider_mutations": 144,
+      "op8_byte_length_domain": 1024,
+      "live_queue_handle_reload": 2,
+      "physical_peer_slot_consumer": 648,
+      "seeded_multi_message_drains": 384
+    },
+    "total_pairs": 4641,
+    "actual_C_memcmp_memory": true,
+    "actual_C_parameter_helpers": true,
+    "actual_C_peer_power_reports_header": true,
+    "REA_bytes_match": true,
+    "consumer_adds_no_state": true,
+    "new_peer_slot_owner_bytes": 21,
+    "queue_null_stops_without_free": true,
+    "ordinary_void_AAPCS_only": true,
+    "callee_saved_integer_FP_stack_guards_masks": true,
+    "device_execution": false
+  },
+  "encoder_integration": {
+    "stock_C_pairs": {
+      "encoder_queue_consumer_parameters": 128,
+      "encoder_failure_ownership": 16
+    },
+    "total_pairs": 144,
+    "actual_C_encoder_memory_move_consumer": true,
+    "actual_C_parameter_helpers": true,
+    "actual_C_peer_power_reports_header": true,
+    "prepared_FIFO_allocator_backend": true,
+    "producer_return_words_checked": true,
+    "callee_saved_integer_FP_stack_guards_masks": true,
+    "device_execution": false
+  },
+  "mutants": [
+    {
+      "name": "slot_guard",
+      "source": "r1/src/application/board/native_peer_address.c",
+      "rejected": true
+    },
+    {
+      "name": "slot_byte_offset",
+      "source": "r1/src/application/board/native_peer_address.c",
+      "rejected": true
+    },
+    {
+      "name": "address_validity",
+      "source": "r1/src/application/board/native_peer_address.c",
+      "rejected": true
+    },
+    {
+      "name": "validity_cached",
+      "source": "r1/src/application/board/native_peer_address.c",
+      "rejected": true
+    },
+    {
+      "name": "missing_targets",
+      "source": "r1/src/application/board/native_peer_address.c",
+      "rejected": true
+    },
+    {
+      "name": "unavailable_peer",
+      "source": "r1/src/application/board/native_peer_address.c",
+      "rejected": true
+    },
+    {
+      "name": "stored_flags",
+      "source": "r1/src/application/board/native_peer_address.c",
+      "rejected": true
+    },
+    {
+      "name": "persist_null",
+      "source": "r1/src/application/board/native_peer_address.c",
+      "rejected": true
+    },
+    {
+      "name": "second_halfword",
+      "source": "r1/src/application/board/native_peer_address.c",
+      "rejected": true
+    },
+    {
+      "name": "connected_status",
+      "source": "r1/src/application/board/native_peer_address.c",
+      "rejected": true
+    },
+    {
+      "name": "policy_empty_mac",
+      "source": "r1/src/application/board/native_peer_address.c",
+      "rejected": true
+    },
+    {
+      "name": "packed_connection",
+      "source": "r1/src/application/board/native_peer_address.c",
+      "rejected": true
+    },
+    {
+      "name": "power_level",
+      "source": "r1/src/application/board/native_ble_tx_power.c",
+      "rejected": true
+    },
+    {
+      "name": "cache_byte",
+      "source": "r1/src/application/runtime/native_ble_state_reports.c",
+      "rejected": true
+    },
+    {
+      "name": "ear_worn_packet",
+      "source": "r1/src/application/runtime/native_ble_state_reports.c",
+      "rejected": true
+    },
+    {
+      "name": "ear_worn_guard",
+      "source": "r1/src/application/runtime/native_ble_state_reports.c",
+      "rejected": true
+    },
+    {
+      "name": "op8_operation",
+      "source": "r1/src/application/runtime/native_ble_state_reports.c",
+      "rejected": true
+    },
+    {
+      "name": "header_flag",
+      "source": "r1/src/application/board/native_protocol_response_header.c",
+      "rejected": true
+    },
+    {
+      "name": "header_sequence",
+      "source": "r1/src/application/board/native_protocol_response_header.c",
+      "rejected": true
+    },
+    {
+      "name": "header_success",
+      "source": "r1/src/application/board/native_protocol_response_header.c",
+      "rejected": true
+    }
+  ],
+  "response_header_caller_audit": {
+    "entry": "0x84c0c",
+    "result_contract": "R0 uint32; header and payload passed synchronously to lower response provider",
+    "statically_resolved_C_callers": [
+      {
+        "source": "r1/src/application/board/native_phone_operation.c",
+        "sha256": "d2b635a039883e81b24625c07c3dd6f362819bb0e073c45319df8404b460ffb5"
+      },
+      {
+        "source": "r1/src/application/runtime/native_system_event_commands.c",
+        "sha256": "2dacead0d84cfa60d44ade7870b9a1f91f6d8b213075bce1f046f94dc94434f6"
+      },
+      {
+        "source": "r1/src/application/board/native_protocol_device_info.c",
+        "sha256": "f2276f3357b513e32f59a500d9e6296f82a4aa8a49a7c4da2684a0ae503151cb"
+      },
+      {
+        "source": "r1/src/application/runtime/native_charge_notification.c",
+        "sha256": "272bf950263e4f7799bea4c193f75150c65a7d2e27c03c8b271c08504a2f024c"
+      },
+      {
+        "source": "r1/src/application/runtime/native_device_id_command.c",
+        "sha256": "1148fc4a1de9f00a89d6a5e7ae6b14abb6f455a3430e94f3088c0aab5439d368"
+      },
+      {
+        "source": "r1/src/application/runtime/native_ble_state_reports.c",
+        "sha256": "c2124e2ab3f2da90c7b11fb8cb36780a38bb001460818e405ce02920d7aaab22"
+      }
+    ],
+    "observations": [
+      "Current call sites consume or forward the scalar R0 result; no current call site captures r2/r3 outputs of this common helper.",
+      "The operation1/operation2/operation3 wrappers save their own incoming scratch words before the call and restore their own payload/length values afterward; those bodies are not changed.",
+      "The device-id caller directly returns the common scalar result; charge notification ignores it.",
+      "Only the common helper scratch-register restoration is removed. Existing charge predicate/register-dependent status workers are unchanged."
+    ],
+    "limits": [
+      "Static source caller audit is not proof of all hypothetical external or indirect consumers.",
+      "Native incidental saved r2/r3 outputs are excluded from the ordinary C ABI."
+    ]
+  },
+  "prior_nongenerated_objects_unchanged": 831,
+  "changed_existing_allocated_sections": {
+    "r1/src/application/board/native_protocol_response_header.c": [
+      ".text.r1_protocol_response_send_0x100"
+    ],
+    "r1/src/application/board/native_ble_tx_power.c": [
+      ".ARM.exidx.text.r1_glasses_tx_power_set",
+      ".rodata.r1_glasses_power_ring",
+      ".rodata.r1_glasses_power_sdk",
+      ".text.r1_glasses_tx_power_set"
+    ]
+  },
+  "added_objects": [
+    "r1/src/application/board/native_peer_address.c",
+    "r1/src/application/runtime/native_ble_state_reports.c"
+  ],
+  "changed_generated_objects": [
+    "{gen}/r1_startup_vectors.S",
+    "{gen}/r1_uecc.c"
+  ],
+  "unchanged_generated_objects": [
+    "{gen}/r1_cmsis_os2_rtc.c",
+    "{gen}/fal_partition_r1_lookup.c",
+    "{gen}/fdb_utils_r1.c",
+    "{gen}/gh_demo_r1.c",
+    "{gen}/gh_demo_hook_r1.c",
+    "{gen}/gh_demo_user_r1.c",
+    "{gen}/app_error_handler_gcc_clang.c",
+    "{gen}/gh_ppg_timestamp_hooks_r1.c"
+  ],
+  "removed_imports": [
+    "r1_charge_state_cache_update",
+    "r1_connection_control_plan_adv_start",
+    "r1_ear_worn_state_notify",
+    "r1_glasses_tx_power_set",
+    "r1_peer_address_from_slots",
+    "r1_peer_address_record_update",
+    "r1_peer_is_target_glasses",
+    "r1_phone_cmd_send_op8"
+  ],
+  "added_imports": [],
+  "application_imports": 71,
+  "new_state_owner": {
+    "symbol": "r1_ble_peer_address_slots",
+    "native_address": "0x20008298",
+    "size": 21,
+    "initializer": "000000000000000000000000000000000000000000",
+    "zero_descriptor_address": "0xc43fc",
+    "zero_region_start": "0x20007e04",
+    "zero_region_size": 213172,
+    "does_not_overlap_advertising_context": true
+  },
+  "existing_GAP_battery_owners_reused": true,
+  "consumer_object_identical_after_return_prototype_correction": true,
+  "contract": [
+    "Connection index0..2 copies six bytes after the seven-byte slot prefix. Null output or index>=3 returns0 without writes; prefix validity is not consulted. The sole21-byte cache owner is distinct from advertising contexts and lies in the authenticated stock zero region.",
+    "Address validity rejects exactly ff6 and zero6. Target selection captures validity of both existing GAP records before logging; no valid target or unavailable connection-slot query returns1. Successful query compares against each originally valid target using live bytes after diagnostics.",
+    "Target updates preserve only bit0 of each supplied record flag and add0x14, copy each six-byte address as word then halfword, forward the original nullable pointers to the existing persistent record writer, then unconditionally hexdump the live cached targets. Existing GAP owners are reused.",
+    "The deferred disconnect callback truncates its packed argument to16 bits, checks connected state, skips missing/zero/ff peer addresses, rechecks current target policy, then invokes the disconnect helper. That helper logs first, freshly checks connected state again, calls the typed S140 disconnect API with reason0x13 and logs any nonzero SDK status.",
+    "Glasses transmit power uses the typed S140 connection-role API with level6, preserves full input diagnostics while using the uint16 SDK key, logs failures and continues through the original diagnostic path.",
+    "Charge refresh stores the low byte in existing battery runtime byte0 before the active-state query and forwards the original full level/active words through the existing C glasses frame. Ear-worn notification ignores exact handleffff and sends the fully initialized four-byte record00019600.",
+    "The op8 wrapper returns0 for null payload, otherwise uses the live phone handle and existing response helper with operation8, caller-supplied first/second words and one payload byte. Its consumer declaration now matches the scalar return type without changing consumer object bytes.",
+    "The common0x100 response helper is pure C: packet/header transformation and R0 result are retained while incidental r2/r3 restoration is retired. Statically resolved C callers use the scalar result and upper wrappers retain their own independent saved-word behavior."
+  ],
+  "limits": [
+    "Replay executes actual C peer lookup/validity/matching/store policy, response header and frame paths and actual S140 SVC gateway instructions. Security, connection-state results, SDK service results, persistence, logging, scheduler and final transport backends are modeled. No real peer database, flash, radio or hardware key is accessed.",
+    "The composite path preloads the connection-slot cache. The separate GAP event writer remains open; the replay does not prove real connected-event population of these slots.",
+    "Provider mutations are applied at modeled backend or SDK boundaries. Internal helper calls may be inlined and are not treated as interchangeable mock-service boundaries. Interrupt concurrency and physical timing are not established.",
+    "MAC validity requires a readable six-byte input; native null/out-of-range allocation faults are not reproduced. Copy overlap and valid public-buffer aliases are checked.",
+    "Ordinary AAPCS results, emitted records, existing state, callee-saved integer/FP registers, masks and stack guards are checked. Common response private restored registers, private stack addresses and arbitrary external/indirect callers are excluded.",
+    "R1 manifest check passes. Global sources-check retains the unrelated unlisted G2 resident_rom_thumb_set.S failure. Relocatable composition is not a final image link, production placement or device boot proof. Byte identity and a paid compiler are not requirements."
+  ],
+  "evidence_files": {
+    "build/sources-goal-r1-peer-address-reviewed-c/report.json": "af852f72647390c73e6f268b9b42e66779dfb7f4aef28d3e3f28bfe6befc17f5",
+    "r1/src/sources.json": "8807b2aab3a316642bcdc8aa97299f6613e79db476b369e8b66eb57a043951c8",
+    "r1/src/application/board/native_peer_address.c": "f376a680079380ce10c87a808dfb04f22f794fb80e69c68b4d9dd5d4ec188fe1",
+    "r1/src/application/board/native_peer_address.h": "980c6a7e2a421a0c660161b6c1b7003354518ce40ec6e12215296a41860cfba4",
+    "r1/src/application/runtime/native_ble_state_reports.c": "c2124e2ab3f2da90c7b11fb8cb36780a38bb001460818e405ce02920d7aaab22",
+    "r1/src/application/runtime/native_ble_state_reports.h": "c600589d4f7ddbc751b8d7c18f51f43b9e407e63dd5da804af7503ded9ee7c61",
+    "r1/src/application/board/native_ble_tx_power.c": "c7bd5539c9ce5e7785b25d98fcccee5eb1fbd3098bcc73a712ef86b7ab4e62fd",
+    "r1/src/application/board/native_protocol_response_header.c": "8954fe0a123357cd1a22b02a681ebf244265e3a6bde772398bc81b5a7addcbed",
+    "r1/src/application/runtime/native_ble_connection_control.c": "f5587936d83d4688eaa420c6db3392269b0c0a152714f04492982f10d16306f5",
+    "r1/src/application/board/native_ble_identity.h": "9bc19f7e730a13d94f684ef0adbf2d01367740d5984320f2b48741560b32f58a",
+    "r1/src/application/board/native_gap_identity.c": "c0d9fbcd06d975c6d64cc68ad1ce89217cb9266dfc644179985aed198db0aa01",
+    "r1/src/application/board/native_battery_context.h": "6b338ba13d97fd1f2dc1823a2efb3fd4d903864e3521eb7b0bcab12bb2995282",
+    "r1/src/application/runtime/native_nv_update.c": "50b61bfecb66e026fc5879b0d3a41b1d8bfca774a4a132f28e8636d769c876cc",
+    "r1/src/application/runtime/native_scatter_data.c": "acc7d29a9252bf9612b68ff49fe7de84f654ca74454511a66910c1fcabdee367",
+    "r1/docs/reference/battery-context-closure-review.json": "459b57de9ed1dd85a3fb0602b272e6dacc3231147c4db5e52b0827ad52f05cc9",
+    "r1/docs/reference/radio-sdk-c-review.json": "4652af4bb1d43e128e61fc38cd6d9906569e0281d0dbfdc00e3e432cfce5fa38",
+    "build/goal-r1-peer-address-c/verify.py": "72984353908755fad924f68c3040922156877dfa9401bad7b8d51cfc012d1cb0",
+    "build/goal-r1-peer-address-c/verification.json": "bba915815a405bbf255ea3f4822d0ac6c81004ae86186c0e82e4932233d1133d",
+    "build/goal-r1-peer-address-c/verification.log": "56931531437d7e2f96f83014000995dcc53e5b3e0b883e0c53eeb4c777aee6ef",
+    "build/goal-r1-peer-address-c/make-consumer.py": "2376aecaafcb94815e21386251ca6869f84c09a8de75b2b340e34822a20e4cc7",
+    "build/goal-r1-peer-address-c/consumer-integration.py": "15d71ae0a3dfd6b81031d3024fcc15a47b699adcdfb68e1d3bb71bb8be6fcc1d",
+    "build/goal-r1-peer-address-c/consumer-integration.json": "30f03cc08f2d794913a55935500535bc641c414a7ca1a3c82a4970b6860cfc87",
+    "build/goal-r1-peer-address-c/consumer-integration.log": "c1ee4bbceefaad5431c7ab81211807173dc9f1c4a18b2554a60d553e65693ffe",
+    "build/goal-r1-peer-address-c/make-producer.py": "cc04720c9abb2835999e8bc7ad429bfa1c645175d1325f7c7cdea4f7230989ca",
+    "build/goal-r1-peer-address-c/producer-integration.py": "1e5d61e0d53ebbef172b803a68de2dae77cf372c7e46a0ae4a616ac79495da14",
+    "build/goal-r1-peer-address-c/producer-integration.json": "11db7c930d70fc30e5d95f1ccfd754f4ddd9dd0942efdf635770f0ec2046ab71",
+    "build/goal-r1-peer-address-c/producer-integration.log": "f7ab6e99e17d8da8814d63585e12a648d8de152ac4624cf60ee558af0ba60d55",
+    "build/goal-r1-peer-address-c/final-verify.py": "95960ab077846160df7e4d9ca2010e8a9f3f3ef9567668d2575b469fe35277c1",
+    "build/goal-r1-peer-address-c/final-verify.log": "3359e695c8b32b1fb78ccfec61e10d99a3d29cf90e4c1b133f1d137584bdb33f",
+    "build/goal-r1-peer-address-c/rea.json": "dc985ffdbd821dfb234129100d98b35a22faf02c6baba1114fd6160a538d7aa5",
+    "build/goal-r1-peer-address-c/strings.py": "a6b903f174dd9ab63083e5783f39a42a9bfc6a1eb3df0d4d2f2e0e5b821a9f3e",
+    "build/goal-r1-peer-address-c/strings.json": "9279244e47738d69b821a6394aec0b9e679c2a28c0a717d44ba622c61ef6e8b5",
+    "build/goal-r1-peer-address-c/mutants.py": "61c4282e6152a24000dbe31a8856fa5093f717b9638f17ed60517ba743d78328",
+    "build/goal-r1-peer-address-c/mutants.json": "b64395acf5a2416b27cc5b95c5d1f6a4e9947018f3f277a561daa40447f7c6e4",
+    "build/goal-r1-peer-address-c/mutants.log": "721f626622d64b10029fd88ef9fce4b0705c6a4e1a91e7feb73c9d527e144ddc",
+    "build/goal-r1-peer-address-c/caller-audit.json": "96d8969508aeea9b873028cb3f112a8969ca4fd1b757f9931c552850576f7c02",
+    "build/goal-r1-peer-address-c/audit.py": "2663ec444f1f85543d1bddc4bd4dd41d992c52d39ead74cc009715377744d5fe",
+    "build/goal-r1-peer-address-c/object-audit.json": "9aa17bc40bca2e74db7bedf274917180fdb8c43d5d8615d20748930285911f13",
+    "build/goal-r1-peer-address-c/r1-check.log": "d49d02112ec8724d5bcf41c34d7c5e8cecb718ee6d6b4b8c532627267f4c34e6",
+    "build/goal-r1-peer-address-c/sources-check.log": "6c7c7c96723a28bdf538f471314bad4f8551cb96006eb3638d6f1e00c2902d2c"
+  }
+}

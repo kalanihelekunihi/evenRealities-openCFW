@@ -8,10 +8,18 @@
  * module and path strings used here.
  *
  * Callees keep the audio_uart_page_<addr> names already used across g2/src. Their
- * LVGL meanings are inferred from the arguments: 0x43de82 obj_create(parent),
- * 0x43dfa4 obj flag op (flag 0x10), 0x43f506/0x43f568 set width/height,
- * 0x43f4c0 set_size, 0x43f09a set_pos, 0x44104c color_hex, 0x441068 color_make,
- * 0x44127e/0x44129e style bg_color/bg_opa, 0x4412ec/0x44131c other style setters. */
+ * LVGL v9.3 identities (wave22, verified against stock /tmp/apm.bin):
+ * - LV_ASSERT_NULL __func__ strings from each body's literal pool (file
+ *   ...\third_party\lvgl_v9.3\LVGL\src\core\lv_obj.c / lv_obj_pos.c):
+ *   0x43de82 lv_obj_create, 0x43dfa4 lv_obj_remove_flag (flag 0x10),
+ *   0x43f506 lv_obj_set_width, 0x43f568 lv_obj_set_height,
+ *   0x43f4c0 lv_obj_set_size, 0x43f09a lv_obj_set_pos.
+ * - Body match with upstream lvgl 9.3 src/misc/lv_color.c: 0x44104c lv_color_hex
+ *   (bytes c>>16, c>>8, c), 0x441068 lv_color_make(r,g,b).
+ * - Prop ids passed to 0x44be4c (lv_obj_set_local_style_prop), matched with
+ *   upstream lvgl 9.3 src/misc/lv_style.h: 0x44127e #28 LV_STYLE_BG_COLOR
+ *   (lv_obj_set_style_bg_color), 0x44129e #29 BG_OPA, 0x4412ec #49
+ *   BORDER_COLOR, 0x44131c #48 BORDER_WIDTH. */
 #include <stdint.h>
 
 extern uint32_t audio_log_flags(void);                                    /* 0x43d0ce */
@@ -32,7 +40,7 @@ extern uint32_t audio_uart_page_441068(uint32_t red, uint32_t green, uint32_t bl
 extern void audio_uart_page_44127e(uint32_t object, uint32_t color, uint32_t selector);
 extern void audio_uart_page_44129e(uint32_t object, uint32_t opa, uint32_t selector);
 extern void audio_uart_page_4412ec(uint32_t object, uint32_t color, uint32_t selector);
-extern void audio_uart_page_44131c(uint32_t object, uint32_t value, uint32_t selector);
+extern void lv_obj_set_style_border_width(uint32_t object, uint32_t value, uint32_t selector);
 
 /* Shared aging_test.c strings, defined in registry_callback_43c400.c. */
 extern const char audio_uart_registry_aging_module[]; /* ROM 0x789f80 "aging_test" */
@@ -185,7 +193,7 @@ void init_rectangle_system_43c5f6(void)
     audio_uart_page_43f09a(g2_aging_test_rect, 0u, 0u);
     audio_uart_page_44127e(g2_aging_test_rect, audio_uart_page_441068(0xffu, 0xffu, 0xffu),
                            0u);
-    audio_uart_page_44131c(g2_aging_test_rect, 0u, 0u);
+    lv_obj_set_style_border_width(g2_aging_test_rect, 0u, 0u);
     audio_uart_page_44129e(g2_aging_test_rect, 0xffu, 0u);
     g2_aging_test_rect_position = 0;
     g2_aging_test_rect_ready = 1u;

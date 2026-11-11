@@ -7,7 +7,7 @@ extern void r1_native_list_set_previous(struct r1_native_list *,void *,void *);
 extern uint32_t vPortFree(void *);
 typedef uint32_t (*timer_callback)(volatile uint32_t *);
 static __attribute__((noreturn,noinline)) void bad_timer(void)
-{uint32_t mask=64;__asm__ volatile("msr BASEPRI,%0"::"r"(mask):"memory");*(volatile uint32_t *)(uintptr_t)UINT32_MAX=0;for(;;){}}
+{uint32_t mask=64;__builtin_arm_wsr("basepri",mask);*(volatile uint32_t *)(uintptr_t)UINT32_MAX=0;for(;;){}}
 uint32_t r1_stream_ticks_elapsed(uint32_t before){return r1_stream_tick_now()-before;}
 uint32_t r1_stream_timer_remaining(volatile uint32_t *timer)
 {uint32_t elapsed=r1_stream_ticks_elapsed(timer[1]);uint32_t period=timer[0];return period<=elapsed?0:period-elapsed;}

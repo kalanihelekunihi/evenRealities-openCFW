@@ -1,50 +1,24 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_325688\n"
-".type opencfw_em9305_child_325688,@function\n"
-"opencfw_em9305_child_325688:\n"
-"L325688:\n"
-"enter_s [r13,blink]\n"
-"L32568a:\n"
-"mov_s r13,r0\n"
-"L32568c:\n"
-"ldb r0,[r0,102]\n"
-"L325690:\n"
-"add_s r0,r0,1\n"
-"L325692:\n"
-"extb_s r1,r0\n"
-"L325694:\n"
-"brlo.d.nt r1,0x2,L3256b0\n"
-"L325698:\n"
-"stb r0,[r13,102]\n"
-"L32569c:\n"
-"ldh r0,[r13,98]\n"
-"L3256a0:\n"
-"stb 0,[r13,102]\n"
-"L3256a4:\n"
-"asl_s r0,r0\n"
-"L3256a6:\n"
-"exth_s r0,r0\n"
-"L3256a8:\n"
-"min r0,r0,256\n"
-"L3256ac:\n"
-"sth r0,[r13,98]\n"
-"L3256b0:\n"
-"bl.d opencfw_em9305_scan_random_30c478\n"
-"L3256b4:\n"
-"stb 0,[r13,101]\n"
-"L3256b8:\n"
-"ldh r1,[r13,98]\n"
-"L3256bc:\n"
-"add_s r1,r1,-1\n"
-"L3256be:\n"
-"and_s r0,r0,r1\n"
-"L3256c0:\n"
-"add_s r0,r0,1\n"
-"L3256c2:\n"
-"stb r0,[r13,100]\n"
-"L3256c6:\n"
-"leave_s [r13,blink,pcl]\n"
-".size opencfw_em9305_child_325688,.-opencfw_em9305_child_325688\n"
-);
+#include <stdint.h>
+
+/* Native 0x325688..0x3256c8: scan backoff update. Every second call
+ * (counter at +102) doubles the backoff window (+98, capped at 256); then
+ * clear +101 and pick a random count in 1..window into +100. */
+extern uint32_t opencfw_em9305_scan_random_30c478(void);
+
+uint32_t opencfw_em9305_child_325688(uintptr_t record)
+{
+    uint32_t count=*(volatile uint8_t *)(record+102u)+1u;
+    *(volatile uint8_t *)(record+102u)=(uint8_t)count;
+    if((uint8_t)count>=2u) {
+        uint32_t window=*(volatile uint16_t *)(record+98u);
+        *(volatile uint8_t *)(record+102u)=0u;
+        window=(uint16_t)(window<<1);
+        if(window>256u) window=256u;
+        *(volatile uint16_t *)(record+98u)=(uint16_t)window;
+    }
+    *(volatile uint8_t *)(record+101u)=0u;
+    uint32_t random=opencfw_em9305_scan_random_30c478();
+    uint32_t pick=(random&(*(volatile uint16_t *)(record+98u)-1u))+1u;
+    *(volatile uint8_t *)(record+100u)=(uint8_t)pick;
+    return pick;
+}

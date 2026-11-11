@@ -6,7 +6,7 @@
 #include <stdint.h>
 
 extern void case_policy_wait(uint32_t ticks);       /* 0x0800a7b0 */
-extern void case_policy_service_idle(void);         /* 0x0800d154 */
+extern uint32_t case_policy_service_idle(void);     /* 0x0800d154 */
 extern void case_policy_service_update(void);       /* 0x0800ce34 */
 
 /* Return 0 at the 0x08007eda loop tail, 1 at the 0x080077e8 continuation.

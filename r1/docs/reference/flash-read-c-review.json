@@ -1,0 +1,136 @@
+{
+  "schema_version": 1,
+  "scope": "R1 FlashDB flash-read adapter and status scanner assembly replaced by C; raw scratch bridge retained",
+  "native_application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "native_entries": {
+    "r1_fdb_native_flash_read": "0x3f03e",
+    "r1_fdb_native_get_status": "0x3f076"
+  },
+  "native_body_sha256": {
+    "0x3f03e": "a3484fa939473ac465c24cb0c2e3a1784c6f13bffc5b9f5e19cc8fd9636bcfb3",
+    "0x3f076": "43806ea5941295030f237f11ba224b51c5130935978d23beccb7fe29a5ea4e21"
+  },
+  "execution": {
+    "paired_cases": 1246,
+    "executions": 2492,
+    "source_report": "build/sources-goal-r1-flash-read-c/report.json",
+    "groups": {
+      "adapter": 480,
+      "status": 262,
+      "outer": 504
+    },
+    "partition_IO_modeled": true,
+    "checks": [
+      "FILE_MODE byte rejects before partition read",
+      "signed result mapping and unchanged four callback arguments",
+      "descending status byte loads, early zero, count and shift wrap behavior",
+      "actual outer assembly bridge calls both C helpers",
+      "failed/partial/non-writing reads retain native scratch state",
+      "ordered visible memory accesses, output guards, R0, return SP, saved registers, masks"
+    ],
+    "limits": [
+      "Partition read is modeled; actual FAL/flash transport and physical flash not executed",
+      "Outer scratch bridge retained, not a complete C conversion",
+      "Private stack below native scratch, caller-clobbered registers and flags excluded"
+    ]
+  },
+  "actual_FAL_integration": {
+    "paired_cases": 1728,
+    "executions": 3456,
+    "source_report": "build/sources-goal-r1-flash-read-c/report.json",
+    "actual_C_adapter_partition_and_cache_lookup": true,
+    "modeled": [
+      "flash driver read",
+      "printf diagnostics"
+    ],
+    "checks": [
+      "FILE_MODE short circuit",
+      "actual FAL wrapping bounds and cache lookup",
+      "driver offset and argument forwarding",
+      "negative driver/lookup/bounds errors map to native read code",
+      "ordered DB/partition/cache reads, diagnostics, output memory and preserved ABI"
+    ],
+    "limits": [
+      "Seeded private partition table/cache; initialization not executed",
+      "Flash driver and printf modeled; no physical flash or concurrency",
+      "Private frames and caller-clobbered registers/flags excluded"
+    ]
+  },
+  "negative_controls": [
+    {
+      "mutation": "nonzero-read-failure",
+      "rejected": true
+    },
+    {
+      "mutation": "untruncated-status-offset",
+      "rejected": true
+    }
+  ],
+  "audit": {
+    "retained_outer_wrapper_body_unchanged": true,
+    "other_object_bytes_unchanged": true,
+    "replaced_assembly_functions": 2,
+    "import_sets_unchanged": true
+  },
+  "normal_build": {
+    "compiled": 573,
+    "application_imports": 176,
+    "bootloader_imports": 34,
+    "failures": 0,
+    "duplicate_strong_symbols": 0
+  },
+  "qualification": {
+    "compiled_profiles": 5,
+    "selected_symbols": [
+      "r1_fdb_native_read_tsl"
+    ],
+    "new_C_regions": 0,
+    "unchanged_wrapper_promoted": false
+  },
+  "source_plan_unchanged": true,
+  "source_built_bytes": 3881,
+  "binary_pull_through_bytes": 642279,
+  "resource_bytes": 248,
+  "fresh_hybrid_equals_locked_application": true,
+  "source_completeness_proven": false,
+  "integrated_units": [
+    {
+      "source": "r1/src/application/runtime/native_flashdb_log_read.c",
+      "source_sha256": "f349c9b7cc6daa6ecee7aa82edefa905f9b108d975830257c7ff5ad52cb53b83",
+      "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-flash-read-c/r1/r1-application/r1__src__application__runtime__native_flashdb_log_read.c.o",
+      "object_sha256": "7913133efeac02379d48e84d54c8b2254f2aac9f04d13989729a408bc6eb7ba8"
+    },
+    {
+      "source": "{gen}/fal_partition_r1_lookup.c",
+      "source_sha256": "f642a2b58748dfcd037a1e79cb2cab2ac7b3c1eea0998e7ee94e3c76306719a7",
+      "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-flash-read-c/r1/r1-application/generated__fal_partition_r1_lookup.c.o",
+      "object_sha256": "0297c13a4a7ee2470f7d0e78dec732d7397804ccd86c0f0550bd98b76f92b0c4"
+    }
+  ],
+  "evidence": {
+    "build/sources-goal-r1-flash-read-c/report.json": "cb86480d9d8050bd7022617dd89af7998efa9578262ca0e9d4d25f02eaaf1269",
+    "r1/src/application/runtime/native_flashdb_log_read.c": "f349c9b7cc6daa6ecee7aa82edefa905f9b108d975830257c7ff5ad52cb53b83",
+    "r1/src/application/board/fal-native/native_partition_read.h": "dd3891e749194f6c1c18584a295aa91966e4f859f1a07616401c4ae011176305",
+    "r1/src/sources.json": "e4c2161f5a94ed8f60f515c71ed7f323fa68daecf30f6a35feb8327e77cfec3e",
+    "r1/symbols/function-frontier.csv": "fcb998a8a6e7afc217b024b261e556e278cb0213fdd4cd6335be5a260adce2de",
+    "tools/build/source-plan.json": "716cf17b8cf2bed8ad6a99a672b1856af4c5380842c95cb14b9a263a7bb42bc8",
+    "build/hybrid-goal-r1-flash-read-c/build-report.json": "186920bb2177c2e0b8049bed60c2eabfd8b485440e21442e634430bef77ab7ca",
+    "build/hybrid-goal-r1-flash-read-c/payloads/application.bin": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "r1/docs/reference/source-composition-review.json": "721668070b323a9ae7e63bfb9b579e188b27b681c831faf4dbf7e7f6162a69a1",
+    "build/goal-r1-flash-read-c/before.c": "7bcb1a0b043319a669b929375b244024aa2dd2822ca1c123f37173814b4308d5",
+    "build/goal-r1-flash-read-c/REA.json": "693ec29725f23a22f7ef37a0492617fc6e5729bd1878345c8a318576a28aacef",
+    "build/goal-r1-flash-read-c/verify.py": "11a5e3a5a36b21198a4a2791d4874a2ea77fea30348768b89ca355054bf496cd",
+    "build/goal-r1-flash-read-c/results.json": "69125d9b363376a3c719d0a6027ff3723cd3e415b4642268fb1fe1542913b7d1",
+    "build/goal-r1-flash-read-c/negative.py": "e68ae11c06d638d2b7b63dd1f461ff730577953cf385cbabc03d8081c72b2c5b",
+    "build/goal-r1-flash-read-c/negative-results.json": "cfe2cb2a749f7cba956b990c8d149a10bfd791470a0cc647a299e94c498deb2a",
+    "build/goal-r1-flash-read-c/audit.py": "1a2b6d761fb5575f56da3c95b8218975180c0a8fd181a6cdfb7da2238dc9b0b6",
+    "build/goal-r1-flash-read-c/audit-results.json": "aa56e2c68c78d4b8908e41d4faaf6760e2f0d242f49c55fa512237e18d7dd1b1",
+    "build/goal-r1-flash-read-c/qualify.py": "86f3fb098a7908979086585b2b5d524974a5c8204e8d3ff9426a230080d41299",
+    "build/goal-r1-flash-read-c/qualified/qualification.json": "8e13d703647971fd4e66cbbc16e6a7671d2bee8487c89b94890ac1a543405044",
+    "build/goal-r1-flash-read-c/qualified/source-plan.json": "201f630ce7806b7748399c13ae6e56010f62030ce775be06431222d47b98b576",
+    "build/goal-r1-flash-read-c/integrated.py": "339eddae694f47cbf39a2eda366978762e35a39c9d80c4a7c23567fd2df2f2f6",
+    "build/goal-r1-flash-read-c/integrated-results.json": "5d916c57e267041a9906184ef097dfe1a9a19711a925e4c7d31be78e3c1105c9",
+    "build/goal-r1-flash-read-c/integrated.ld": "b4335ea0d01506273e58fc06c76cc5f98988f4dab368e6eb1851f946a6848570",
+    "build/goal-r1-flash-read-c/sources-check.log": "bd60965367f10bcc604039941b628ee9282d683344509ab9faf85d501a53a26c"
+  }
+}

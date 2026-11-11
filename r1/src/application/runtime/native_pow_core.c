@@ -50,9 +50,7 @@ static uint64_t number(unsigned a){return(uint64_t)word(a)|((uint64_t)word(a+4)<
 static uint64_t truncated(uint64_t x){return(x&UINT64_C(0xffffffff00000000))|(uint32_t)r1_pow_dispatch_zero[0];}
 static uint32_t right(uint32_t x,uint32_t n){n&=255u;return n<32 ? x>>n : 0;}
 static uint32_t compare_status(uint64_t a,uint64_t b){
- register uint32_t r0 __asm__("r0")=(uint32_t)a,r1 __asm__("r1")=(uint32_t)(a>>32);
- register uint32_t r2 __asm__("r2")=(uint32_t)b,r3 __asm__("r3")=(uint32_t)(b>>32);uint32_t status;
- __asm__ volatile("bl r1_binary64_compare_flags\n\tmrs %[status],APSR":[status]"=r"(status),"+r"(r0),"+r"(r1),"+r"(r2),"+r"(r3)::"lr","cc","memory");return status;
+ return r1_binary64_comparison_cz(a,b);
 }
 static double range_error(uint64_t sign,uint32_t overflow){r1_native_errno_set(2);uint64_t result=bits(overflow ? r1_math_high_square64() : r1_math_low_square64());return value((result&UINT64_C(0x7fffffffffffffff))|(sign&UINT64_C(0x8000000000000000)));}
 /* Raw encoded arguments are the internal source ABI, not the original
@@ -138,7 +136,7 @@ double r1_pow_reduced(uint64_t absolute,uint64_t exponent,uint64_t sign)
  if(((int32_t)scaled_high>>20)>0)result=(result&UINT64_C(0xffffffff))|((uint64_t)scaled_high<<32);
  else{
   uint64_t probe=r1_binary64_scale_power2_bits(result,(uint32_t)scale);
-  if(r1_binary64_classify_bits(probe,0,0)==4)(void)r1_math_low_square64();
+  if(r1_binary64_classify_bits(probe,0,0)[0]==4)(void)r1_math_low_square64();
   result=r1_binary64_scale_power2_bits(result,(uint32_t)scale);
  }
  return value(mul(sign,result));

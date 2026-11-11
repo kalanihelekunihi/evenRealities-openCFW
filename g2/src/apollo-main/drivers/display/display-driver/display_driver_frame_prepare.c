@@ -1,6 +1,6 @@
 /* Apollo buffer_sync_to_fb 0x46c73c..0x46c983. Candidate. */
 #include <stdint.h>
-extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,...);
+extern void lv_log_add(uint32_t,const char *,uint32_t,const char *,...);
 extern void audio_uart_lv_memzero_48949c(void *,uint32_t);
 extern void audio_uart_checksum_copy(void *,const void *,uint32_t);
 extern uint32_t audio_uart_ambiq_bind_buffer_4b092a(void *,const void *,uint32_t);
@@ -27,7 +27,7 @@ static const char module[]="display";
 static const char failed[]="GPU start failed, result = %d\r\n";
 static const char compact[]="[display]GPU start failed, result = %d\r\n";
 static void frame_assert(uint32_t line,const char *condition) {
-    audio_uart_lvgl_log(3u,path,line,function,assertion,condition);
+    lv_log_add(3u,path,line,function,assertion,condition);
     for(;;) *(volatile uint32_t *)(uintptr_t)UINT32_MAX=0u;
 }
 void display_driver_frame_prepare_46c73c(void *dest,void *src,uint32_t src_width,

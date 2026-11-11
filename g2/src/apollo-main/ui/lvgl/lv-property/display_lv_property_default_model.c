@@ -4,6 +4,7 @@
  * ABI model. The public entry bridge below preserves incoming R1 before any C
  * prologue can overwrite the high byte; all property logic remains C. */
 #include <stdint.h>
+extern const unsigned char lv_font_montserrat_14[]; /* Fix 50 */
 
 __attribute__((used))
 static uint32_t audio_uart_lv_property_default_model(uint32_t property,
@@ -17,16 +18,10 @@ static uint32_t audio_uart_lv_property_default_model(uint32_t property,
     case 0x24:case 0x25:case 0x29:case 0x32:case 0x3a:case 0x3e:
     case 0x44:case 0x4d:case 0x53:case 0x59:case 0x62:case 0x63:return 0xffu;
     case 0x34:return 0xfu;
-    case 0x5a:return 0x00755610u;
+    case 0x5a:return (uint32_t)(uintptr_t)lv_font_montserrat_14; /* stock 0x755610 = upstream lv_font_montserrat_14 (rom_fonts_data.c header) */
     case 0x6e:case 0x6f:case 0x76:return 0x100u;
     default:return 0u;
     }
 }
 
-/* The product call site passes only R0. ARM AAPCS leaves R1 live from the
- * preceding selector call, and stock preserves its high byte for select IDs.
- * A naked tail branch captures that authentic machine ABI without guessing
- * a C-level second argument at the call site. */
-__attribute__((naked)) uint32_t audio_uart_lv_property_default_48297c(uint32_t property) {
-    __asm volatile("b audio_uart_lv_property_default_model");
-}
+uint32_t audio_uart_lv_property_default_48297c(uint32_t property) __attribute__((alias("audio_uart_lv_property_default_model")));

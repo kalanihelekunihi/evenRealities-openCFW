@@ -1,44 +1,31 @@
 #include <stdint.h>
-/* Complete native guard303f80..3f8a and quantizer312c5c..c9e.
- * Named ISA preserves caller-observed registers and original DSP flags. */
-extern uint32_t opencfw_em9305_auxiliary_guard_interval(void);
-extern uint32_t opencfw_em9305_channel_timing_adjust_312c5c(uint32_t);
-__asm__(
-".section .text.opencfw_em9305_auxiliary_guard_interval,\"ax\",@progbits\n"
-".align 2\n"
-".global opencfw_em9305_auxiliary_guard_interval\n"
-".type opencfw_em9305_auxiliary_guard_interval,@function\n"
-"opencfw_em9305_auxiliary_guard_interval:\n"
-"mov_s r0,0x805c18\n"
-"ld r0,[r0,0]\n"
-"j_s.d [blink]\n"
-"ldh_s r0,[r0,6]\n"
-".size opencfw_em9305_auxiliary_guard_interval,.-opencfw_em9305_auxiliary_guard_interval\n"
-);
-__asm__(
-".section .text.opencfw_em9305_channel_timing_adjust_312c5c,\"ax\",@progbits\n"
-".align 2\n"
-".global opencfw_em9305_channel_timing_adjust_312c5c\n"
-".type opencfw_em9305_channel_timing_adjust_312c5c,@function\n"
-"opencfw_em9305_channel_timing_adjust_312c5c:\n"
-"mov_s r2,r0\n"
-"brhs r0,0x3bfc4,1f\n"
-"mpymu r0,r0,0x11111112\n"
-"lsr_s r0,r0\n"
-"mpyuw r0,r0,30\n"
-"cmp_s r0,r2\n"
-"jnc [blink]\n"
-"j_s.d [blink]\n"
-"add r0,r0,30\n"
-"1: mpymu r0,r0,0x69d0369e\n"
-"add1 r1,r2,r2\n"
-"mov r3,300\n"
-"add_s r1,r1,r0\n"
-"lsr_s r1,r1,10\n"
-"mpywhul r0,r3,r1\n"
-"cmp_s r0,r2\n"
-"jnc [blink]\n"
-"j_s.d [blink]\n"
-"add_s r0,r0,r3\n"
-".size opencfw_em9305_channel_timing_adjust_312c5c,.-opencfw_em9305_channel_timing_adjust_312c5c\n"
-);
+
+/* Native 0x303f80..0x303f8a: guard interval, the halfword at +6 of the
+ * timing configuration (*0x805c18). */
+uint32_t opencfw_em9305_auxiliary_guard_interval(void)
+{
+    uintptr_t timing=*(volatile uint32_t *)(uintptr_t)0x805c18u;
+    return *(volatile uint16_t *)(timing+6u);
+}
+
+static uint32_t mulhi_312c5c(uint32_t a,uint32_t b)
+{
+    return (uint32_t)(((uint64_t)a*b)>>32);
+}
+
+/* Native 0x312c5c..0x312c9e: round a duration (us) up to the sync-offset
+ * unit: 30 us below 0x3bfc4 us, 300 us above. The stock divisions are
+ * reciprocal multiplies and the 16-bit unit multiplies keep only the low
+ * halfword of the quotient. */
+uint32_t opencfw_em9305_channel_timing_adjust_312c5c(uint32_t duration)
+{
+    uint32_t rounded;
+    if(duration<0x3bfc4u) {
+        uint32_t units=mulhi_312c5c(duration,0x11111112u)>>1;
+        rounded=(units&0xffffu)*30u;
+        return rounded>=duration?rounded:rounded+30u;
+    }
+    uint32_t units=(duration*3u+mulhi_312c5c(duration,0x69d0369eu))>>10;
+    rounded=300u*(units&0xffffu);
+    return rounded>=duration?rounded:rounded+300u;
+}

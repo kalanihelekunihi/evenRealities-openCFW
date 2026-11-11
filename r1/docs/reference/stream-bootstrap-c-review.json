@@ -1,0 +1,140 @@
+{
+  "schema_version": 1,
+  "scope": "Four R1 sensor-stream dispatch/bootstrap assembly functions replaced by C",
+  "native_application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "native_entries": {
+    "tick": "0x8a1d0",
+    "wake": "0x8a540",
+    "enable": "0x8a3f0",
+    "initialize": "0x8a55c"
+  },
+  "native_body_sha256": {
+    "0x8a1d0": "7ac8dd812fdaa159fca9843eeb466207494679a3411caadc0ecf7c5817f613a8",
+    "0x8a540": "958d6ca092f7ff6895150039ef7f0258e958143b540f4d6482311f541399b46e",
+    "0x8a3f0": "f5de64f8d83c73893f191a4dd6569cdf41735e510218d0cedcd4acd81844f305",
+    "0x8a55c": "64998be5b4856e2127403c7ba086bfd043986402f886b38ac25524a86b1200f3"
+  },
+  "rea": {
+    "tick_and_wake_observed": true,
+    "enable_and_initializer_missing_from_default_analysis": true,
+    "missing_entry_coverage_credit": false
+  },
+  "execution": {
+    "paired_cases": 1536,
+    "executions": 3072,
+    "groups": {
+      "tick": 384,
+      "wake": 384,
+      "enable": 384,
+      "initialize": 192,
+      "create": 192
+    },
+    "source_report": "build/sources-goal-r1-stream-bootstrap-c/report.json",
+    "actual_C_list_initialize_and_prepend": true,
+    "modeled": [
+      "allocator return",
+      "kernel tick fallback",
+      "registered tick/wake callbacks"
+    ],
+    "normalization": "Initializer node callback validated against actual keepalive symbol before address normalization",
+    "checks": [
+      "fresh volatile tick/wake/context dispatch and callback return values",
+      "whole 32-bit enable decision with low byte store",
+      "actual list initialization/prepend and timer record creation order",
+      "callback mutation between initial wake, clock and second wake",
+      "OOM BASEPRI and native fault",
+      "shared accesses in bootstrap/timer functions, final list/node guards, R0, return SP, saved registers and masks"
+    ],
+    "limits": [
+      "List provider internals checked through final state/call graph, not instruction-for-instruction memory trace",
+      "Allocator and external callbacks modeled; no physical sensor scheduling or asynchronous execution",
+      "Private frames and caller-clobbered registers/flags excluded"
+    ]
+  },
+  "negative_controls": [
+    {
+      "mutation": "low-byte-enable-test",
+      "rejected": true
+    },
+    {
+      "mutation": "discard-wake-return",
+      "rejected": true
+    }
+  ],
+  "audit": {
+    "unchanged_function_bodies": [
+      "allocation_failure",
+      "r1_stream_keepalive"
+    ],
+    "changed_function_bodies": [
+      "r1_native_stream_initialize",
+      "r1_stream_enable",
+      "r1_stream_tick_now",
+      "r1_stream_timer_create_front",
+      "r1_stream_wake"
+    ],
+    "other_object_bytes_unchanged": true,
+    "assembly_dispatch_functions_replaced": 4,
+    "import_sets_unchanged": true
+  },
+  "normal_build": {
+    "compiled": 573,
+    "application_imports": 176,
+    "bootloader_imports": 34,
+    "failures": 0,
+    "duplicate_strong_symbols": 0
+  },
+  "qualification": {
+    "compiled_profiles": 5,
+    "new_C_regions": 0
+  },
+  "source_plan_unchanged": true,
+  "source_built_bytes": 3881,
+  "binary_pull_through_bytes": 642279,
+  "resource_bytes": 248,
+  "fresh_hybrid_equals_locked_application": true,
+  "source_completeness_proven": false,
+  "integrated_units": [
+    {
+      "source": "r1/src/application/board/native_watchdog.c",
+      "source_sha256": "4b3231d1a928045cabdb617a0021ead6f8fd2a20e44664c2366d7c59e6a63a66",
+      "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-stream-bootstrap-c/r1/r1-application/r1__src__application__board__native_watchdog.c.o",
+      "object_sha256": "bf59dfe0661e3c586bff71266654dd4c4e02f2273b1e7b1afeedac65ebe1a4dd"
+    },
+    {
+      "source": "r1/src/application/runtime/native_stream_bootstrap.c",
+      "source_sha256": "b2b73c2df033732feb541e4dd45fb9f4c1594f2da96c87498fa05f20d3292c50",
+      "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-stream-bootstrap-c/r1/r1-application/r1__src__application__runtime__native_stream_bootstrap.c.o",
+      "object_sha256": "b684065e7d3b56ff5955352440bdfadbc23f5586f0d7be40a3880eaac5de711e"
+    }
+  ],
+  "evidence": {
+    "build/sources-goal-r1-stream-bootstrap-c/report.json": "a7a1059b758d107bb9c5b28f90f80e71bd59dfefca1e71684d046026216cffbd",
+    "r1/src/application/runtime/native_stream_bootstrap.c": "b2b73c2df033732feb541e4dd45fb9f4c1594f2da96c87498fa05f20d3292c50",
+    "r1/src/application/board/native_watchdog.c": "4b3231d1a928045cabdb617a0021ead6f8fd2a20e44664c2366d7c59e6a63a66",
+    "r1/src/application/board/native_watchdog.h": "5c72778d939445d2e8642c7dfbdba7cb288eef81630ecca9337b5bbe34caa04e",
+    "r1/src/sources.json": "e4c2161f5a94ed8f60f515c71ed7f323fa68daecf30f6a35feb8327e77cfec3e",
+    "r1/symbols/function-frontier.csv": "00501fd19eec5ad4d59d2f686d04d12a97919b77ad62bd586d69ec958b4d38eb",
+    "tools/build/source-plan.json": "716cf17b8cf2bed8ad6a99a672b1856af4c5380842c95cb14b9a263a7bb42bc8",
+    "build/hybrid-goal-r1-stream-bootstrap-c/build-report.json": "6cb8fdd06c677574097d2864dd3f82e3d7b9e0b91aa455ae151d99344778e3e5",
+    "build/hybrid-goal-r1-stream-bootstrap-c/payloads/application.bin": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "r1/docs/reference/source-composition-review.json": "536c0358b76bf2081ed9407b3dc311f55c1a517cbf073183fc9fcbc9d01f105a",
+    "build/goal-r1-stream-bootstrap-c/before.c": "fa534598eed053c91f317d1ec29885f4d9028ef8df92e578574184e36d24d37f",
+    "build/goal-r1-stream-bootstrap-c/REA.json": "e36c7d441aa4e424872fab6581d2ffd85f3306273f83076db5bcf2a30025b950",
+    "build/goal-r1-stream-bootstrap-c/native-tick.dis": "ff14964b0ed08face7f6fccaa096188d5f55d94a3c5ef86bb47e5c16795af567",
+    "build/goal-r1-stream-bootstrap-c/native-wake.dis": "f09d8e43a6ca67056f209274f09923277822dcf29992990d934f7e68ee2febf2",
+    "build/goal-r1-stream-bootstrap-c/native-enable.dis": "270f4c0181d6cf60b2a1948c5339acfd00154ad3ffd85af7083e2abd87c0f1d7",
+    "build/goal-r1-stream-bootstrap-c/native-initialize.dis": "506406e80ce00145df10b249a88c41423e9bfed825d9d72cae7b823bbfa1248d",
+    "build/goal-r1-stream-bootstrap-c/verify.py": "26b0e8948531ab8215836bff849f9dcfeb3f2c033ae3ced4a66c1886aa23d6b4",
+    "build/goal-r1-stream-bootstrap-c/test.ld": "52464ecc658df7c0adf8910a97a7bd14ca005ef5c0c7a3538918a0abfcad92ce",
+    "build/goal-r1-stream-bootstrap-c/results.json": "37c895de080edb4231c9c0dbc91ec1f345f31cf54f94bc6b329c3316555cf849",
+    "build/goal-r1-stream-bootstrap-c/negative.py": "2dc08ed654d311030d0be918ec664078b148c89b679cd46a2779d3d90a9efd1b",
+    "build/goal-r1-stream-bootstrap-c/negative-results.json": "1d26fbf436ee1f3dd9c96e176e23871b07f4dacbea7aed69c0886b1a95914f33",
+    "build/goal-r1-stream-bootstrap-c/audit.py": "9dff6d6c17e4a32d9b016993c3606baf488945289e433e26052c51899d04c9b4",
+    "build/goal-r1-stream-bootstrap-c/audit-results.json": "8b75b52d004a8e9c0399d66d6f4a24cecf20eade3834984e2db51be2d980a08f",
+    "build/goal-r1-stream-bootstrap-c/qualify.py": "c099e315aa758cca2ebb1ccef4a9b6191c3179309dce58ab4db7878d0939d11f",
+    "build/goal-r1-stream-bootstrap-c/qualified/qualification.json": "6420774e88b17ba8e7c20f7136e81316d1b6cebdad29e56a7b708bf525384dc1",
+    "build/goal-r1-stream-bootstrap-c/qualified/source-plan.json": "3da40e3d766877c0b3059bee372f651c1f56681157782eba12ee3076f1834a0f",
+    "build/goal-r1-stream-bootstrap-c/sources-check.log": "bd60965367f10bcc604039941b628ee9282d683344509ab9faf85d501a53a26c"
+  }
+}

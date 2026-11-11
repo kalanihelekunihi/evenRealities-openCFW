@@ -11,17 +11,11 @@ extern uint32_t (*audio_ble_subsystem_callback_slot)(const uint8_t *); /* live 0
 extern uintptr_t audio_ble_ui_callback_cells[]; /* live 0x20073f60, reset callback at +8 */
 extern void DmReadRemoteFeatures(uint8_t); /* native 0x4b6cb0 */
 
-__attribute__((naked))
+/* Stock returns a stale register here (its body is void upstream); no caller reads it. */
 uint32_t audio_ble_app_reset_callback_4bda34(void){
-    __asm__ volatile(
-        "push {r7, lr}\n"
-        "ldr r1, =audio_ble_ui_callback_cells\n"
-        "ldr r0, [r1, #8]\n"
-        "cmp r0, #0\n"
-        "beq 1f\n"
-        "ldr r0, [r1, #8]\n"
-        "blx r0\n"
-        "1: pop {r0, pc}\n");
+    void (*reset)(void)=(void (*)(void))audio_ble_ui_callback_cells[2];
+    if(reset!=0)reset();
+    return 0u;
 }
 
 

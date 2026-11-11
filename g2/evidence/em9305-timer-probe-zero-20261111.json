@@ -1,0 +1,57 @@
+{
+  "schema": "opencfw.g2.em9305-timer-probe-zero.v1",
+  "date": "2026-11-11",
+  "locked_reference": {
+    "firmware_version": "2.2.6.10",
+    "component": "g2/blobs/official/g2-2.2.6.10/firmware_ble_em9305.bin",
+    "component_sha256": "91a38f7fc05555f86181ecb22b363e3239bfcaaa2ff6171e98524ae64821eca9",
+    "disassembly": "g2/research/corpus/em9305/objdump/open-2026-09-29/em9305-0x302400-0x335BC8.s",
+    "probe_a": {
+      "entry": "0x31398c",
+      "halfword_load": "0x3139a2",
+      "zero_branch": "0x3139aa -> 0x3139c2",
+      "nonzero_transform": "0x3139ae..0x3139b2: subtract 1, EXTH unsigned, add 1",
+      "rom_probe": "0x104ca4"
+    },
+    "probe_b": {
+      "entry": "0x3139cc",
+      "halfword_load": "0x3139e2",
+      "zero_branch": "0x3139ea -> 0x313a02",
+      "nonzero_transform": "0x3139ee..0x3139f2: subtract 1, EXTH unsigned, add 1",
+      "rom_probe": "0x104cb4"
+    },
+    "isa_reference": "https://docs.alexrp.com/arc/arc_em.pdf",
+    "isa_reference_note": "Synopsys ARCv2 ISA Programmer's Reference Manual for ARC EM Processors, section 4.5.3: EXTH is unsigned extension; SEXH is signed extension"
+  },
+  "source_change": {
+    "file": "g2/src/em9305/qpc-scheduler/controller_timer_helpers.c",
+    "previous_zero_case": "ROM probe received 0xffffffff",
+    "corrected_zero_case": "ROM probe receives 0",
+    "nonzero_case": "ROM probe and LP_COUNT receive the unchanged unsigned halfword count",
+    "all_65536_halfword_values_checked_against_stock_arithmetic": true,
+    "prior_object_disassembly": "build/em9305-timer-probe-zero-correct-20261111/prior_timer_helpers.dis",
+    "prior_object_zero_instruction": "mov.eq r0,0xffffffff",
+    "corrected_object_disassembly": "build/em9305-timer-probe-zero-correct-20261111/timer_helpers.dis",
+    "corrected_object_zero_flow": "exth.f r0,r0; beq_s skips LP; selected ROM probe receives r0",
+    "both_rom_probe_relocations_present": true
+  },
+  "verification": {
+    "sources_check": "passed; 4883 manifest units, 1 not built",
+    "enabled_c_units_compiled": 4878,
+    "compile_failures": 0,
+    "duplicate_strong_symbols": 0,
+    "strict_payload_links": 7,
+    "build_report": "build/em9305-timer-probe-zero-correct-20261111/all/report.json",
+    "build_report_sha256": "986569e6a5da31bdb5f45eb51134e21970fa6ff5b7014d41a1c4d560e834e428",
+    "link_report": "build/em9305-timer-probe-zero-correct-20261111/bundle/link-report.json",
+    "link_report_sha256": "44d26afa1c7233e292c2e4fd9eacadd12edf0f7fb648f9ec59a2bcc9d21d1a2e",
+    "em9305_binary_bytes": 247104,
+    "em9305_binary_sha256": "811a8cbcc64958336ed7d6f54b1b643da9741c3955f85e9152608cff320fb4f9",
+    "unchanged_other_payload_binaries": 6,
+    "source_only_ota_bytes": 4638060,
+    "source_only_ota_sha256": "30e5bc9aca683ad3707e63d5ae976fae3304dc176e388d76a2b74f034c364c4a",
+    "source_completeness_proven": false,
+    "hardware_tested": false,
+    "locked_bundle_match": false
+  }
+}

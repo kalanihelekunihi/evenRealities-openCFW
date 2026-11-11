@@ -1,34 +1,16 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_32e144\n"
-".type opencfw_em9305_child_32e144,@function\n"
-"opencfw_em9305_child_32e144:\n"
-"L32e144:\n"
-"enter_s [r13-r14,blink]\n"
-"L32e146:\n"
-"mov_s r13,r0\n"
-"L32e148:\n"
-"mov_s r0,r1\n"
-"L32e14a:\n"
-"bl.d opencfw_em9305_controller_pack_address\n"
-"L32e14e:\n"
-"mov_s r14,r1\n"
-"L32e150:\n"
-"st_s r0,[r13,0]\n"
-"L32e152:\n"
-"add_s r0,r14,0x6\n"
-"L32e154:\n"
-"bl.d opencfw_em9305_controller_pack_address\n"
-"L32e158:\n"
-"st_s r1,[r13,0x4]\n"
-"L32e15a:\n"
-"st_s r0,[r13,0x8]\n"
-"L32e15c:\n"
-"mov_s r0,0xc\n"
-"L32e15e:\n"
-"st_s r1,[r13,0xc]\n"
-"L32e160:\n"
-"leave_s [r13-r14,blink,pcl]\n"
-".size opencfw_em9305_child_32e144,.-opencfw_em9305_child_32e144\n"
-);
+#include <stdint.h>
+
+/* Native 0x32e144..0x32e162: pack two 6-byte addresses (at source and
+ * source + 6) into two 64-bit words at out. Returns the length 12. */
+extern uint64_t opencfw_em9305_controller_pack_address(uintptr_t address);
+
+uint32_t opencfw_em9305_child_32e144(uintptr_t out,uintptr_t source)
+{
+    uint64_t first=opencfw_em9305_controller_pack_address(source);
+    *(volatile uint32_t *)out=(uint32_t)first;
+    *(volatile uint32_t *)(out+4u)=(uint32_t)(first>>32);
+    uint64_t second=opencfw_em9305_controller_pack_address(source+6u);
+    *(volatile uint32_t *)(out+8u)=(uint32_t)second;
+    *(volatile uint32_t *)(out+12u)=(uint32_t)(second>>32);
+    return 12u;
+}

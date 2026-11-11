@@ -1,4 +1,13 @@
 #include <stdint.h>
+/* SEGGER_RTT's two fixed ID copies are the last application references that
+ * pulled an executable Newlib archive member into the strict source link. */
+__attribute__((noinline,optnone))
+char *strcpy(char *restrict destination,const char *restrict source)
+{
+ char *const start=destination;
+ do {*destination++=*source;} while (*source++);
+ return start;
+}
 typedef int32_t (*r1_comparator)(const void *,const void *);
 void r1_native_qsort(uint8_t *base,uint32_t count,uint32_t width,r1_comparator compare)
 {
@@ -27,22 +36,19 @@ uint8_t *r1_native_strncpy(uint8_t *destination,const uint8_t *source,uint32_t l
  while(length--){uint8_t ch=*source;*out++=ch;if(ch)++source;}
  return destination;
 }
-int32_t r1_native_memcmp(const uint8_t *a,const uint8_t *b,uint32_t length)
-{
- for(uint32_t i=0;i<length;++i){int32_t difference=(int32_t)a[i]-(int32_t)b[i];if(difference)return difference;}
- return 0;
-}
+
 /* Native continuation remains at the terminator after exhaustion. */
-static uint8_t *volatile *const token_cursor=(uint8_t *volatile *)0x20007db4u;
+uint8_t *volatile r1_strtok_cursor
+ __attribute__((section(".bss.r1.libc.strtok.cursor"),aligned(4)));
 uint8_t *r1_native_strtok(uint8_t *input,const uint8_t *delimiters)
 {
- if(!input)input=*token_cursor;
+ if(!input)input=r1_strtok_cursor;
  uint8_t *start=0;
  while(*input){
   const uint8_t *d=delimiters;while(*d && *d!=*input)++d;
   if(!*d && !start)start=input;
-  else if(*d && start){*input++=0;*token_cursor=input;return start;}
+  else if(*d && start){*input++=0;r1_strtok_cursor=input;return start;}
   ++input;
  }
- *token_cursor=input;return start;
+ r1_strtok_cursor=input;return start;
 }

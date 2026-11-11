@@ -1,0 +1,15 @@
+# Touch request wrappers without assembly constraints
+
+The read/write request wrappers at stock `0x9338c` and `0x933b4` now use ordinary C. Removed the fixed-R4 variables and empty inline-assembly barriers from `board/native_touch_transport.c`. These constraints only forced the former stack/register layout; REA confirms stock saves R4 without consuming its value in either local body. The compiler preserves caller registers according to the C ABI.
+
+The wrappers retain the existing shared request owner, cold initializer, ordered volatile halfword/pointer stores, bus-handle reload, registry operation arguments and raw-zero status conversion. The production compiler emits an eight-byte provider frame and preserves live R4–R11 at provider entry. The saved private register changes from R4 to R7; private stack byte identity is not a requirement.
+
+Replay against the locked stock application passes 6,912 three-call sequences: 20,736 paired wrapper invocations. Cases include alternating operations, null/self pointers, 16-bit narrowing, raw word statuses, seeded retained fields and provider mutations of request bytes and bus handle. Comparisons check ordered request writes, provider arguments, complete owner/guard bytes, raw return, SP, interrupt masks, caller-preserved registers and provider-visible R4–R11. The old fixture's memory-read hook was removed; memory-read order and saved-frame access identity are not claimed. The prior authenticated scatter-decoder result is reused to check the unchanged 20-byte cold initializer.
+
+The existing identity-chain fixture also passes 928 ready-reader pairs and 2,592 complete identity-probe pairs using the new production transport object. It checks the readiness polling limit, delays, ID transfer, late buffer mutations, full R3 restoration and cleanup sequence against modeled GPIO/power/registry providers. As in the original review, private pointer locations are normalized and the reader/probe frame depths differ. Registry and physical I2C/electrical/timing behavior are not device-tested.
+
+The separate ready reader still has inline assembly for its unusual incoming/outgoing R3 contract. Its generated instruction body is unchanged, as is the complete request initializer. The identity probe and other 719 normal-build objects are byte unchanged. This is removal of assembly constraints from the two request wrappers, not a claim that the whole transport unit is assembly-free.
+
+All 720 R1 units compile and compose without failures or duplicate strong symbols. Application / bootloader imports remain 177 / 34; both manifests pass `make sources-check`. The source plan is unchanged. No flashing, commit or publication occurred. [The receipt](touch-request-pure-c-review.json) binds the current source, objects, REA evidence and tests.
+
+The lifecycle initializer remains separate: REA currently groups `0x4bd98` with `0x4c37c` and generates pseudocode for the latter entry, pruning branches reachable from the former. Its instruction-level reconstruction must account for that distinction before implementation.

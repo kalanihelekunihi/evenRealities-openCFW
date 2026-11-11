@@ -1,0 +1,189 @@
+{
+  "schema": 1,
+  "target": "Use pinned Arm GCC 14.2 for seven more linked touch CAPSENSE units and qualify exact C bodies",
+  "compiler": "Arm GNU 14.2.Rel1",
+  "compiler_sha256": "2e6d1fc0b7709d2fc08278a06bbcbfadb6fafcf5837e13cde01a1fbd07ad6db1",
+  "units": [
+    {
+      "source": "third-party/reference/infineon-capsense-v5/cy_capsense_control.c",
+      "source_sha256": "a3caaf796bcc91945ba166fa8789a81a337c2b64ccb4cb29efa6671fe2250393",
+      "new_regions": [
+        {
+          "symbol": "Cy_CapSense_Initialize",
+          "start": 6110,
+          "end": 6162,
+          "sha256": "83b634b39e6cf1f6136626647cc7fef59c1fa1e2df5945589fa2e643e328e580"
+        },
+        {
+          "symbol": "Cy_CapSense_Restore_V3Lp",
+          "start": 6500,
+          "end": 6546,
+          "sha256": "3461246ba6213d31f876fbb96cb91eb0d314495f8d01248b9c45085901e16188"
+        }
+      ]
+    },
+    {
+      "source": "third-party/reference/infineon-capsense-v5/cy_capsense_tuner.c",
+      "source_sha256": "b3841db62b922ed4847510f6f5dc55f20fd8bb20b545ca495064cd006cf4197d",
+      "new_regions": [
+        {
+          "symbol": "Cy_CapSense_TuInitialize",
+          "start": 19236,
+          "end": 19252,
+          "sha256": "f70ee582797134cef238fbfc65c959c65794400cb5f8a2901f64e4750ed6a61f"
+        }
+      ]
+    },
+    {
+      "source": "third-party/reference/infineon-capsense-v5/cy_capsense_structure.c",
+      "source_sha256": "1834546b0d0ff441a77deb93e97eb91c5de93b4df7b9b0dc908ad9a88809db93",
+      "new_regions": [
+        {
+          "symbol": "Cy_CapSense_CheckConfigIntegrity",
+          "start": 19122,
+          "end": 19198,
+          "sha256": "305059b8256a3c4645a944b46d59cb48a7a0b2c6f146cd4c43fdd6a96f565e5a"
+        }
+      ]
+    },
+    {
+      "source": "third-party/reference/infineon-capsense-v5/cy_capsense_sensing.c",
+      "source_sha256": "af533ad33903e4627d5ad78667aa2684643382c405998e6c49dffc37f81c3220",
+      "new_regions": [
+        {
+          "symbol": "Cy_CapSense_InitializeMaxRaw",
+          "start": 10700,
+          "end": 10776,
+          "sha256": "89eb6a9f655fefd192bff32ec22ac62deddac8ca71913a3123ec88fbaefd56b1"
+        }
+      ]
+    },
+    {
+      "source": "third-party/reference/infineon-capsense-v5/cy_capsense_processing.c",
+      "source_sha256": "396b5765f827cd3287a11995373e460c1659f333e8ba35a40cad967002861b51",
+      "new_regions": [
+        {
+          "symbol": "Cy_CapSense_DpUpdateDifferences",
+          "start": 9792,
+          "end": 9816,
+          "sha256": "4185e2f22b2527f596c4a4592a3072c232f7b8e151d08397d7cfc1c4214ed51f"
+        },
+        {
+          "symbol": "Cy_CapSense_PreProcessWidgetLimitRaw",
+          "start": 10464,
+          "end": 10530,
+          "sha256": "579982044fd40866091ff3fb450aa68b35570ecf15f471a2ff588c03de9cb0a7"
+        },
+        {
+          "symbol": "Cy_CapSense_PreProcessWidget",
+          "start": 10530,
+          "end": 10558,
+          "sha256": "3bc5ecfd4603fc037688ec466e5bbdff4ed365058d58ea1e6aeec6536c2552ab"
+        },
+        {
+          "symbol": "Cy_CapSense_PreProcessSensorLimitRaw",
+          "start": 10558,
+          "end": 10614,
+          "sha256": "126f969a8e8081fcd3c50ce1a79199a64f1691488c9fbd65172ae1133264bb9c"
+        },
+        {
+          "symbol": "Cy_CapSense_PreProcessSensor",
+          "start": 10614,
+          "end": 10642,
+          "sha256": "bf3b2e7e2107a00105fe08681502e160870253262eb82e49eafb99f1b22ad350"
+        }
+      ]
+    },
+    {
+      "source": "third-party/reference/infineon-capsense-v5/cy_capsense_filter.c",
+      "source_sha256": "8cc36550d08eeae8fbdc0875e80ca7c110580caf3ec60c51b3729bee2a1c5934",
+      "new_regions": [
+        {
+          "symbol": "Cy_CapSense_InitializeSensorBaseline",
+          "start": 6884,
+          "end": 6924,
+          "sha256": "892fbfae62b35fa243a50e046a6887d36a049f983297dd7c330f39b276843af2"
+        },
+        {
+          "symbol": "Cy_CapSense_InitializeWidgetBaseline",
+          "start": 6924,
+          "end": 6972,
+          "sha256": "9c13d76bd7dbd393a547ea4dd7b3cf58da054cb63e728e260b35555b78903d3d"
+        },
+        {
+          "symbol": "Cy_CapSense_FtIIR1stOrder",
+          "start": 7422,
+          "end": 7438,
+          "sha256": "8d04d1554038e11a05f1f51845cc106bb27eb6a73a1af0ca0bf16b5ace4bb0b8"
+        }
+      ]
+    },
+    {
+      "source": "third-party/reference/infineon-capsense-v5/cy_capsense_generator_lp.c",
+      "source_sha256": "3f987bf7cae0f05065e24e9dd8d9dc65b1ff492cae9fe591b6ed838cc47e756b",
+      "new_regions": [
+        {
+          "symbol": "Cy_CapSense_CalculateMaskRegisters",
+          "start": 7848,
+          "end": 7900,
+          "sha256": "c16a701b09172349dcf86a72c5fa02de3ccf88039423055c345cc59db28f650b"
+        },
+        {
+          "symbol": "Cy_CapSense_GenerateModeConfig",
+          "start": 8156,
+          "end": 8344,
+          "sha256": "b1e33e80224a2c5d0419d64ada54456f429018d34e884b72be7090a33c2d5b1d"
+        },
+        {
+          "symbol": "Cy_CapSense_AdjustSnsClkDivider",
+          "start": 8776,
+          "end": 8808,
+          "sha256": "ce6737a477fc2b56e4299a0451ba05b0890de8e432730fa204c6b8366076a323"
+        }
+      ]
+    }
+  ],
+  "new_region_count": 16,
+  "new_region_bytes": 844,
+  "g2_exact_regions": 105,
+  "g2_exact_bytes": 5640,
+  "touch_exact_regions": 87,
+  "touch_exact_bytes": 5522,
+  "qualification": "All 16 regions are nonoverlapping with the existing plan and their symbols appear in the focused strict-link map. The qualifier checks unique native entries and full linked equality.",
+  "focused_touch_build": "build/touch-capsense-gcc14-campaign-20261111/focused/report.json",
+  "full_build": {
+    "path": "build/touch-capsense-gcc14-campaign-20261111/all/report.json",
+    "compiled_units": 4885,
+    "source_completeness": false
+  },
+  "strict_link": {
+    "path": "build/touch-capsense-gcc14-campaign-20261111/bundle/link-report.json",
+    "payloads": [
+      "g2-apollo-bootloader",
+      "g2-apollo-main",
+      "g2-case",
+      "g2-codec-a",
+      "g2-codec-b",
+      "g2-em9305",
+      "g2-touch"
+    ],
+    "source_only_bundle_bytes": 4638064,
+    "source_only_bundle_sha256": "1076b59448131b3f5940221a3cc779201028a62f4d66beda82cecddb40dba6dc",
+    "matches_locked_target": false
+  },
+  "hybrid": {
+    "path": "build/touch-capsense-gcc14-campaign-20261111/hybrid/build-report.json",
+    "touch_source_bytes": 5522,
+    "touch_binary_pull_through_bytes": 28910,
+    "bundle_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa"
+  },
+  "file_sha256": {
+    "g2/src/sources.json": "6c141ed4c4364156e1b7855ad93e7a3dbc75ecb93679e2f6724cdafb2ad00ec5",
+    "tools/build/source-plan.json": "6e79cb21f15efae00d326f9d047de837bf2f5f23ab6a7a09363dfaff14eda27f",
+    "build/touch-capsense-gcc14-campaign-20261111/qualification/source-plan.json": "9818c972a8500ba95c2bb90ac918b58f45d1cf7cac0215abf3fab690b4ba1844",
+    "build/touch-capsense-gcc14-campaign-20261111/all/report.json": "09a44bb5c5fa005b036764e2c1b34a3112a7eedf1ce69a895785d9c58b17d107",
+    "build/touch-capsense-gcc14-campaign-20261111/bundle/link-report.json": "95f1344b2618a2e12af327b54477a9830346653e4447c665e972228bb40ed4da",
+    "build/touch-capsense-gcc14-campaign-20261111/hybrid/build-report.json": "d2d69c5b4e0977def30c381316d40550b26c4253b6d94dffc569508427caa8bb"
+  },
+  "limits": "This qualifies selected C function bodies, not the complete touch application. The hybrid still pulls through 28,910 touch bytes. The source-only OTA differs from stock and physical device behavior remains unverified."
+}

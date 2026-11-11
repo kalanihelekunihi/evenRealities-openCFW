@@ -1,0 +1,120 @@
+{
+  "schema_version": 1,
+  "source": "r1/src/application/board/native_ble_initialize.c",
+  "native_roots": [
+    "0x4df18",
+    "0x4e4b4",
+    "0x4c92c"
+  ],
+  "report": "build/sources-goal-r1-ble-initialize-c-final/report.json",
+  "compiled_units": 829,
+  "application_imports": 75,
+  "added_imports": [
+    "r1_buttonless_dfu_event_policy",
+    "r1_nordic_gap_identity_configuration",
+    "r1_peer_manager_event_policy"
+  ],
+  "removed_imports": [
+    "r1_nordic_ble_bootstrap_configuration"
+  ],
+  "prior_objects_unchanged": 826,
+  "changed_generated_objects": [
+    [
+      "r1-bootloader",
+      "{gen}/r1_startup_vectors.S"
+    ],
+    [
+      "r1-bootloader",
+      "{gen}/r1_uecc.c"
+    ]
+  ],
+  "added_units": [
+    [
+      "r1-application",
+      "r1/src/application/board/native_ble_initialize.c"
+    ]
+  ],
+  "verification": {
+    "bootstrap_pairs": 1536,
+    "log_mode_pairs": 512,
+    "seeded_partial_service_pairs": 256,
+    "adapter_pairs": 16,
+    "actual_gatt_qwr": false
+  },
+  "actual_GATT_QWR_integration": {
+    "bootstrap_pairs": 18,
+    "log_mode_pairs": 3,
+    "seeded_partial_service_pairs": 16,
+    "adapter_pairs": 16,
+    "actual_gatt_qwr": true
+  },
+  "mutants": {
+    "rejected": [
+      "gatt_handler",
+      "qwr_count",
+      "qwr_order",
+      "security_bond",
+      "security_key_min",
+      "key_distribution",
+      "dcdc_mode",
+      "version_order",
+      "error_continuation",
+      "return_value"
+    ]
+  },
+  "rea_receipts": "r1/docs/reference/ble-initialize-rea-bytes.json",
+  "rea_bytes_match_pinned_stock": true,
+  "new_version_owner": {
+    "stock_address": "0x200064b2",
+    "source_symbol": "r1_ble_controller_version",
+    "size": 6,
+    "cold_rw_value": "000000000000"
+  },
+  "contract": {
+    "ordered_init": [
+      "gap identity",
+      "GATT with null handler",
+      "advertising",
+      "QWR a",
+      "QWR b",
+      "QWR c",
+      "BAE8 transport",
+      "buttonless DFU",
+      "peer manager",
+      "DC/DC enable",
+      "controller version",
+      "gated version logs"
+    ],
+    "errors": "checked GATT/QWR/DFU/PM errors log and continue; DCDC and version statuses discarded",
+    "security_bytes": "3107100303",
+    "SDK_security_size": 5,
+    "private_native_security_frame_size": 8,
+    "callbacks": {
+      "qwr": "r1_adc_error, semantically equivalent to native 0x79dc8 tail trampoline",
+      "dfu": "r1_buttonless_dfu_event_policy",
+      "pm": "r1_peer_manager_event_policy"
+    },
+    "version_reads": "subversion, company, version separately for ring and SDK logs",
+    "bootstrap_return": 0
+  },
+  "limitations": [
+    "GAP identity and PM/DFU event policies remain real unresolved imports.",
+    "Primary probe models lower SDK initialization, transport, error/logging and S140 services. The deeper probe executes actual GATT and QWR bodies and compares initialized contexts.",
+    "QWR error callback is normalized across the native tail trampoline and existing C error owner. No duplicate trampoline body is introduced.",
+    "C security object is the SDK five-byte type. Native private stack padding is not an API contract.",
+    "No physical BLE, final application linking or boot proof; byte identity is not required by the current user instruction."
+  ],
+  "evidence_files": {
+    "build/sources-goal-r1-ble-initialize-c-final/report.json": "d0d9804a5189f8daab5488ee1f4155d6bf04851aff4aff4043f66e601bf7a870",
+    "r1/src/sources.json": "f6a5c5ed670daf23a121316157a16e833653490f40b066d5e4e6464447569151",
+    "r1/src/application/board/native_ble_initialize.c": "f60833454dac9c56614ee77237ed18237dd28bc55efb7e2134d0230db7f208bf",
+    "r1/src/application/runtime/native_ble_io_worker.c": "c2eb7bb14bbb1f3e5018d29add39c8c8ff5c26870286832b97a177aa83f8cff1",
+    "build/goal-r1-fstorage-registry/expanded-rw.bin": "87fdee392022fdbe23dd0daf3e859fb14f3ce26ba3e8403aab56dc9d9a913317",
+    "build/goal-r1-ble-initialize-c/verify.py": "732f2dc1bf5792871032eee6d3a5fc3466c669482bed17bd5593718271d2162c",
+    "build/goal-r1-ble-initialize-c/verification.json": "b1ced32352a9786548adf3c19677067ae2cb075938f7740f8b35f9560926598d",
+    "build/goal-r1-ble-initialize-c/integration.json": "528489f39e036e36f59acb568a84439f4fc19c78f884fa290c1d9701e314a10f",
+    "build/goal-r1-ble-initialize-c/mutants.py": "4ec9ef785d7c8fe24e3d7f0cdd4db05f11211a9fdf4801cb4497852a1b79eb1d",
+    "build/goal-r1-ble-initialize-c/mutants.json": "c40fbb9b5a0f0388d9d33f561b43ace0c3ef9a709df90079b0a7c75f76180be3",
+    "r1/docs/reference/ble-initialize-rea-bytes.json": "1ffe49fd490bee3d67714b373a125e26bbf3ab3ade2ed4cd61172bdb5630d749"
+  }
+}

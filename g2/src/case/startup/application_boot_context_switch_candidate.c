@@ -4,6 +4,7 @@
  */
 #include <stdint.h>
 /* Stock 0x080000CC (vPortStartFirstTask) */
+/* Kept as asm: switches to PSP/CONTROL and pops the first task frame. */
 __attribute__((naked,noreturn)) void case_boot_context_switch(void)
 {
     __asm__ volatile(

@@ -5,9 +5,7 @@ extern uint32_t nrf_log_frontend_std_1(uint32_t,const char *,uint32_t),nrf_log_f
 extern int32_t osDelay(uint32_t);
 extern uint32_t r1_status_record_ring_publish(uint32_t,uint32_t,uint32_t,uint32_t);
 extern uint32_t r1_retained_log_printf_sink(const char *,...);
-/* Unresolved exact native transfer: store 0xe7f00000 in local stack word and
- * BLX its even address. No substitute trap or executable byte array supplied. */
-extern __attribute__((noreturn)) void r1_phone_role_assertion_stack_transfer(void);
+/* The stock conflicting-handle path logs its assertion before a fault. */
 const char r1_phone_role_text0[] __attribute__((section(".r1.phone.role.text0")))="[RING]app_ble_set_phone_conn_handle: old=%d, new=%d, glasses_conn_handle=%d";
 const char r1_phone_role_text1[] __attribute__((section(".r1.phone.role.text1")))="app_ble_set_phone_conn_handle: old=%d, new=%d, glasses_conn_handle=%d";
 const char r1_phone_role_text2[] __attribute__((section(".r1.phone.role.text2")))="[RING]Invalid conn_handle for phone: 0x%x";
@@ -57,7 +55,7 @@ uint32_t r1_phone_connection_role_assign(uint32_t handle)
   (void)r1_retained_log_printf_sink(r1_phone_role_text9,964);
   (void)r1_retained_log_printf_sink(r1_phone_role_text11,r1_phone_role_text10);
   (void)r1_retained_log_printf_sink(r1_phone_role_text13,r1_phone_role_text12);
-  r1_phone_role_assertion_stack_transfer();
+  __builtin_trap();
  }
  if(r1_connection_field8==UINT16_MAX){
   r1_connection_field8=(uint16_t)handle;

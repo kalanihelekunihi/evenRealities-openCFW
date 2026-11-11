@@ -1,299 +1,128 @@
-/* Full native dispatch callback and exact child call cut boundaries. */
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_dispatch_callback_31d43c\n"
-".type opencfw_em9305_dispatch_callback_31d43c,@function\n"
-"opencfw_em9305_dispatch_callback_31d43c:\n"
-"L31d43c:\n"
-"enter_s [r13-r18,fp,blink]\n"
-"L31d43e:\n"
-"sub_s sp,sp,0x8\n"
-"L31d440:\n"
-"ld_s r15,[r0,0x24]\n"
-"L31d442:\n"
-"add_s r0,sp,0\n"
-"L31d444:\n"
-"mov_s r18,r2\n"
-"L31d446:\n"
-"mov_s r17,r1\n"
-"L31d448:\n"
-"bl.d opencfw_em9305_dispatch_child_317a98\n"
-"L31d44c:\n"
-"stb 0,[sp,7]\n"
-"L31d450:\n"
-"mov_s r16,0x8029ac\n"
-"L31d456:\n"
-"brne.nt r18,0,L31d478\n"
-"L31d45a:\n"
-"ldb r1,[r16]\n"
-"L31d45e:\n"
-"ldb r2,[r16,5]\n"
-"L31d462:\n"
-"add_s r1,r1,r16\n"
-"L31d464:\n"
-"ldb r3,[r1,120]\n"
-"L31d468:\n"
-"add_s r0,r2,0x1\n"
-"L31d46a:\n"
-"stb r0,[r16,5]\n"
-"L31d46e:\n"
-"add_s r0,r3,0x1\n"
-"L31d470:\n"
-"stb r0,[r1,120]\n"
-"L31d474:\n"
-"sth 0,[r15,246]\n"
-"L31d478:\n"
-"ldb_s r0,[r15,0x1]\n"
-"L31d47a:\n"
-"cmp_s r0,2\n"
-"L31d47c:\n"
-"bne_s L31d590\n"
-"L31d47e:\n"
-"sub r0,r18,0x1\n"
-"L31d482:\n"
-"cmp_s r0,2\n"
-"L31d484:\n"
-"bc L31d590\n"
-"L31d488:\n"
-"brne.d.nt r18,0x6,L31d496\n"
-"L31d48c:\n"
-"mov_s r1,6\n"
-"L31d48e:\n"
-"bl.d opencfw_em9305_dispatch_event_send_31d128\n"
-"L31d492:\n"
-"mov_s r0,r15\n"
-"L31d494:\n"
-"b_s L31d590\n"
-"L31d496:\n"
-"ldb r0,[r16,6]\n"
-"L31d49a:\n"
-"add2 r13,r15,0x2b\n"
-"L31d49e:\n"
-"brne_s r0,0,L31d4b4\n"
-"L31d4a0:\n"
-"bset r0,r18,0x2\n"
-"L31d4a4:\n"
-"brne.d.nt r0,0x4,L31d4b4\n"
-"L31d4a8:\n"
-"stb 1,[r16,6]\n"
-"L31d4ac:\n"
-"ld_s r1,[r13,0x5c]\n"
-"L31d4ae:\n"
-"ld r0,[r13,0x10]\n"
-"L31d4b0:\n"
-"sub_s r0,r0,r1\n"
-"L31d4b2:\n"
-"st_s r0,[r13,0x50]\n"
-"L31d4b4:\n"
-"breq.nt r18,0,L31d4f8\n"
-"L31d4b8:\n"
-"breq.nt r18,0x4,L31d538\n"
-"L31d4bc:\n"
-"brne.nt r18,0x3,L31d53c\n"
-"L31d4c0:\n"
-"ld_s r2,[r13,0x50]\n"
-"L31d4c2:\n"
-"ld_s r0,[r13,0x5c]\n"
-"L31d4c4:\n"
-"ld r14,[r16,12]\n"
-"L31d4c8:\n"
-"ld_s r3,[r13,0x4c]\n"
-"L31d4ca:\n"
-"ldh r12,[r15,246]\n"
-"L31d4ce:\n"
-"add_s r0,r0,r2\n"
-"L31d4d0:\n"
-"ldh r1,[r13,72]\n"
-"L31d4d4:\n"
-"add_s r14,r14,r0\n"
-"L31d4d6:\n"
-"sub_s r0,r14,r3\n"
-"L31d4d8:\n"
-"bl.d opencfw_em9305_init_secondary_time_317ebc\n"
-"L31d4dc:\n"
-"add_s r0,r0,r12\n"
-"L31d4de:\n"
-"ldh r3,[r15,246]\n"
-"L31d4e2:\n"
-"ld_s r2,[r16,0x10]\n"
-"L31d4e4:\n"
-"mov_s r1,r0\n"
-"L31d4e6:\n"
-"sub_s r0,r14,r0\n"
-"L31d4e8:\n"
-"add1 r1,r3,r1\n"
-"L31d4ec:\n"
-"bl.d opencfw_em9305_dispatch_child_302f4c\n"
-"L31d4f0:\n"
-"st_s r1,[r13,0]\n"
-"L31d4f2:\n"
-"stb 1,[sp,7]\n"
-"L31d4f6:\n"
-"b_s L31d53c\n"
-"L31d4f8:\n"
-"ldb_s r0,[sp,0]\n"
-"L31d4fa:\n"
-"ldb r2,[sp,2]\n"
-"L31d4fe:\n"
-"ldb r1,[sp,1]\n"
-"L31d502:\n"
-"stb r2,[r16,7]\n"
-"L31d506:\n"
-"breq.d.nt r0,0x3,L31d538\n"
-"L31d50a:\n"
-"stb r1,[r16,8]\n"
-"L31d50e:\n"
-"brne.nt r0,0x1,L31d518\n"
-"L31d512:\n"
-"ldb r0,[sp,3]\n"
-"L31d516:\n"
-"breq_s r0,0,L31d538\n"
-"L31d518:\n"
-"ldb r0,[r16]\n"
-"L31d51c:\n"
-"ldb r1,[r16,1]\n"
-"L31d520:\n"
-"mpyuw r0,r0,0x18\n"
-"L31d524:\n"
-"add2_s r0,r0,r1\n"
-"L31d526:\n"
-"add_s r0,r0,r16\n"
-"L31d528:\n"
-"ld r1,[r0,0x18]\n"
-"L31d52a:\n"
-"brne_s r1,0,L31d538\n"
-"L31d52c:\n"
-"ldb r1,[r16,3]\n"
-"L31d530:\n"
-"brne_s r1,0,L31d538\n"
-"L31d532:\n"
-"st r17,[r0,24]\n"
-"L31d536:\n"
-"mov_s r17,0\n"
-"L31d538:\n"
-"ld r0,[r13,0x10]\n"
-"L31d53a:\n"
-"st_s r0,[r13,0x4c]\n"
-"L31d53c:\n"
-"ldb r0,[r16]\n"
-"L31d540:\n"
-"ldb r1,[r15,52]\n"
-"L31d544:\n"
-"brhs.nt r0,r1,L31d572\n"
-"L31d548:\n"
-"breq.nt r18,0x4,L31d55e\n"
-"L31d54c:\n"
-"brne.d.nt r18,0,L31d572\n"
-"L31d550:\n"
-"add2 r0,r15,r0\n"
-"L31d554:\n"
-"ldb_s r1,[r13,0x14]\n"
-"L31d556:\n"
-"ld_s r0,[r0,0x38]\n"
-"L31d558:\n"
-"stb r1,[r0,100]\n"
-"L31d55c:\n"
-"b_s L31d572\n"
-"L31d55e:\n"
-"add2 r0,r15,r0\n"
-"L31d562:\n"
-"ldb_s r2,[r13,0x14]\n"
-"L31d564:\n"
-"ld_s r1,[r0,0x38]\n"
-"L31d566:\n"
-"stb r2,[r1,100]\n"
-"L31d56a:\n"
-"ld_s r0,[r0,0x38]\n"
-"L31d56c:\n"
-"ld_s r1,[r0,0x4c]\n"
-"L31d56e:\n"
-"add_s r1,r1,1\n"
-"L31d570:\n"
-"st_s r1,[r0,0x4c]\n"
-"L31d572:\n"
-"ldb_s r0,[r15,0x1f]\n"
-"L31d574:\n"
-"brne.d.nt r0,0x1,L31d584\n"
-"L31d578:\n"
-"add r1,sp,0x7\n"
-"L31d57c:\n"
-"bl.d opencfw_em9305_dispatch_child_31d150\n"
-"L31d580:\n"
-"mov_s r0,r15\n"
-"L31d582:\n"
-"b_s L31d58a\n"
-"L31d584:\n"
-"bl.d opencfw_em9305_dispatch_child_31d2bc\n"
-"L31d588:\n"
-"mov_s r0,r15\n"
-"L31d58a:\n"
-"breq_s r0,0,L31d590\n"
-"L31d58c:\n"
-"mov_s r0,1\n"
-"L31d58e:\n"
-"b_s L31d596\n"
-"L31d590:\n"
-"bl opencfw_em9305_auxiliary_signal_304394\n"
-"L31d594:\n"
-"mov_s r0,0\n"
-"L31d596:\n"
-"breq_s r0,0,L31d5a2\n"
-"L31d598:\n"
-"brne.nt r18,0,L31d5a2\n"
-"L31d59c:\n"
-"ldb_s r1,[sp,0]\n"
-"L31d59e:\n"
-"breq.nt r1,0x3,L31d5b6\n"
-"L31d5a2:\n"
-"breq_s r0,0,L31d5ba\n"
-"L31d5a4:\n"
-"ldb r1,[sp,7]\n"
-"L31d5a8:\n"
-"mov_s r0,r15\n"
-"L31d5aa:\n"
-"bl.d opencfw_em9305_dispatch_child_31d5e8\n"
-"L31d5ae:\n"
-"mov_s r2,r17\n"
-"L31d5b0:\n"
-"cmp_s r0,0\n"
-"L31d5b2:\n"
-"mov_s r0,0\n"
-"L31d5b4:\n"
-"bne_s L31d5bc\n"
-"L31d5b6:\n"
-"bl opencfw_em9305_auxiliary_signal_304394\n"
-"L31d5ba:\n"
-"mov_s r0,r17\n"
-"L31d5bc:\n"
-"breq.nt r18,0,L31d5c8\n"
-"L31d5c0:\n"
-"breq_s r0,0,L31d5c6\n"
-"L31d5c2:\n"
-"bl opencfw_em9305_ll_receive_buffer_release_31761c\n"
-"L31d5c6:\n"
-"leave_s [r13-r18,fp,blink,pcl]\n"
-"L31d5c8:\n"
-"ldb_s r1,[sp,0]\n"
-"L31d5ca:\n"
-"brne.t r1,0x3,L31d5c0\n"
-"L31d5ce:\n"
-"ld_s r1,[r16,0x14]\n"
-"L31d5d0:\n"
-"brne_s r1,0,L31d5c0\n"
-"L31d5d2:\n"
-"add r15,r15,274\n"
-"L31d5d6:\n"
-"ldb r1,[sp,1]\n"
-"L31d5da:\n"
-"ldb_s r2,[r15,0]\n"
-"L31d5dc:\n"
-"breq.t r1,r2,L31d5c0\n"
-"L31d5e0:\n"
-"st r0,[r16,20]\n"
-"L31d5e4:\n"
-"stb_s r1,[r15,0]\n"
-"L31d5e6:\n"
-"leave_s [r13-r18,fp,blink,pcl]\n"
-".size opencfw_em9305_dispatch_callback_31d43c,.-opencfw_em9305_dispatch_callback_31d43c\n"
-);
+#include <stdint.h>
+
+/* Native 0x31d43c..0x31d5e8: periodic-advertising-with-responses receive
+ * completion for the owner's advertising set (+36). The response header
+ * is decoded (317a98). Status 0 counts the event (0x8029ac +5 and the
+ * per-subevent counter at +120) and resets +246. Only a role-2 set with
+ * status 0, 3, 4 or 5 continues (6 reports event 6): the first such
+ * event latches the response timing (+252), status 3 reschedules the
+ * next anchor (317ebc/302f4c) and sets the done flag, status 0 records
+ * the response filter and parks the buffer in a free slot, statuses 0/4
+ * refresh the subevent's RSSI (+100; 4 also counts +76). Then the train
+ * is advanced (31d150 or 31d2bc per +31) and the report produced
+ * (31d5e8); failures signal the auxiliary hook. Status 0 keeps a new
+ * response buffer at 0x8029c0 (filter +274); any other buffer is
+ * released. */
+extern uint32_t opencfw_em9305_dispatch_child_317a98(uintptr_t out, uintptr_t in);
+extern uint32_t opencfw_em9305_dispatch_event_send_31d128(uintptr_t set, uint32_t event);
+extern uint32_t opencfw_em9305_init_secondary_time_317ebc(uint32_t,uint32_t);
+extern uint32_t opencfw_em9305_dispatch_child_302f4c(uint32_t start, uint32_t window, uintptr_t channel);
+extern uint32_t opencfw_em9305_dispatch_child_31d150(uintptr_t set, uintptr_t done);
+extern uint32_t opencfw_em9305_dispatch_child_31d2bc(uintptr_t set, uintptr_t done);
+extern uint32_t opencfw_em9305_dispatch_child_31d5e8(uintptr_t set, uint32_t done, uintptr_t buffer);
+extern uint32_t opencfw_em9305_auxiliary_signal_304394(void);
+extern uint32_t opencfw_em9305_ll_receive_buffer_release_31761c(uintptr_t buffer);
+
+void opencfw_em9305_dispatch_callback_31d43c(uintptr_t owner, uintptr_t buffer, uint32_t status)
+{
+    const uintptr_t state=0x8029acu;
+    volatile uint8_t *s8=(volatile uint8_t *)state;
+    volatile uint32_t *s32=(volatile uint32_t *)state;
+    uint8_t header[8] __attribute__((aligned(4)));
+    uintptr_t set=*(volatile uint32_t *)(owner+36u);
+    volatile uint8_t *a=(volatile uint8_t *)set;
+    header[7]=0u;
+    (void)opencfw_em9305_dispatch_child_317a98((uintptr_t)header,buffer);
+    if(status==0u){
+        uint32_t index=s8[0];
+        uint32_t events=s8[5];
+        volatile uint8_t *counter=(volatile uint8_t *)(state+index+120u);
+        uint32_t count=*counter;
+        s8[5]=(uint8_t)(events+1u);
+        *counter=(uint8_t)(count+1u);
+        *(volatile uint16_t *)(set+246u)=0u;
+    }
+    uint32_t ok=0u;
+    if(a[1]!=2u||status-1u<2u)goto finish;
+    if(status==6u){
+        (void)opencfw_em9305_dispatch_event_send_31d128(set,6u);
+        goto finish;
+    }
+    if(s8[6]==0u){
+        s8[6]=1u;
+        if((status|4u)==4u)
+            *(volatile uint32_t *)(set+252u)=*(volatile uint32_t *)(set+188u)-
+                                             *(volatile uint32_t *)(set+264u);
+    }
+    if(status==3u){
+        uint32_t latched=*(volatile uint32_t *)(set+252u);
+        uint32_t anchor=*(volatile uint32_t *)(set+264u);
+        uint32_t time=s32[3];
+        uint32_t reference=*(volatile uint32_t *)(set+248u);
+        uint32_t skew=*(volatile uint16_t *)(set+246u);
+        uint32_t window=*(volatile uint16_t *)(set+244u);
+        uint32_t start=time+anchor+latched;
+        uint32_t widening=opencfw_em9305_init_secondary_time_317ebc(start-reference+skew,window);
+        uint32_t span=*(volatile uint16_t *)(set+246u)+(widening<<1);
+        uintptr_t channel=s32[4];
+        *(volatile uint32_t *)(set+172u)=span;
+        (void)opencfw_em9305_dispatch_child_302f4c(start-widening,span,channel);
+        header[7]=1u;
+    }else if(status==0u||status==4u){
+        if(status==0u){
+            uint32_t kind=header[0];
+            uint32_t filter=header[2];
+            uint32_t subevent=header[1];
+            s8[7]=(uint8_t)filter;
+            s8[8]=(uint8_t)subevent;
+            if(kind!=3u&&(kind!=1u||header[3]!=0u)){
+                volatile uint32_t *entry=(volatile uint32_t *)(state+24u+s8[0]*24u+s8[1]*4u);
+                if(*entry==0u&&s8[3]==0u){
+                    *entry=(uint32_t)buffer;
+                    buffer=0u;
+                }
+            }
+        }
+        *(volatile uint32_t *)(set+248u)=*(volatile uint32_t *)(set+188u);
+    }
+    {
+        uint32_t index=s8[0];
+        if(index<a[52]){
+            if(status==4u){
+                volatile uint32_t *slot=(volatile uint32_t *)(set+56u+index*4u);
+                *(volatile uint8_t *)(*slot+100u)=a[192];
+                *(volatile uint32_t *)(*slot+76u)+=1u;
+            }else if(status==0u){
+                *(volatile uint8_t *)(*(volatile uint32_t *)(set+56u+index*4u)+100u)=a[192];
+            }
+        }
+    }
+    if(a[31]==1u)ok=opencfw_em9305_dispatch_child_31d150(set,(uintptr_t)&header[7]);
+    else ok=opencfw_em9305_dispatch_child_31d2bc(set,(uintptr_t)&header[7]);
+    if(ok!=0u){
+        ok=1u;
+        goto report;
+    }
+finish:
+    (void)opencfw_em9305_auxiliary_signal_304394();
+    ok=0u;
+report:
+    {
+        uintptr_t keep=buffer;
+        if(ok!=0u){
+            if(status==0u&&header[0]==3u){
+                (void)opencfw_em9305_auxiliary_signal_304394();
+            }else if(opencfw_em9305_dispatch_child_31d5e8(set,header[7],buffer)!=0u){
+                keep=0u;
+            }else{
+                (void)opencfw_em9305_auxiliary_signal_304394();
+            }
+        }
+        if(status==0u&&header[0]==3u&&s32[5]==0u&&header[1]!=a[274]){
+            s32[5]=(uint32_t)keep;
+            a[274]=header[1];
+            return;
+        }
+        if(keep!=0u)(void)opencfw_em9305_ll_receive_buffer_release_31761c(keep);
+    }
+}

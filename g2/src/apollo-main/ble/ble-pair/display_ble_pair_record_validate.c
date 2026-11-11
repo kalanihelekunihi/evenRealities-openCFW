@@ -89,3 +89,6 @@ uint8_t audio_ble_pair_record_validate(uint8_t *record) {
             "[ble.smpdb]AppDbVerifyMramWrite: Verification failed - this may cause DH key check failures");
     return valid;
 }
+/* Single implementation of stock AppDbVerifyMramWrite 0x47b730. */
+__typeof__(audio_ble_pair_record_validate) audio_ble_master_close_child_47b730
+    __attribute__((alias("audio_ble_pair_record_validate")));

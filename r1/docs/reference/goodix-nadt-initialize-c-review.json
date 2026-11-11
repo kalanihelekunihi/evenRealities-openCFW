@@ -1,0 +1,227 @@
+{
+  "schema_version": 1,
+  "scope": "R1 NADT constructor and separate configuration tail in C",
+  "acceptance_target": "License-free C firmware; hardware first; byte identity waived",
+  "report": "build/sources-goal-r1-goodix-nadt-initialize-c/report.json",
+  "comparison_report": "build/sources-goal-r1-goodix-hrv-initialize-c/report.json",
+  "stock_entries": [
+    {
+      "symbol": "goodix_nadt_init",
+      "entry": "0x6e664",
+      "size": 250
+    },
+    {
+      "symbol": "r1_goodix_native_nadt_configure",
+      "entry": "0x73e2c",
+      "size": 462
+    }
+  ],
+  "audit": {
+    "compiled_units": 893,
+    "application_imports": 74,
+    "bootloader_imports": 22,
+    "unchanged_prior_nongenerated_sources_and_objects": 881,
+    "modified_prior_units": [
+      "native_nadt_reset.c"
+    ],
+    "new_units": [
+      "native_nadt_initialize.c"
+    ],
+    "tested_objects_equal_normal_build": true,
+    "added_native_configuration_bytes": 120,
+    "canonical_state_and_workspace_reused": true,
+    "source_plan_and_cache_layout_unchanged": true,
+    "removed_imports": [
+      "goodix_nadt_init"
+    ],
+    "added_imports": [],
+    "new_native_instruction_bytes": 712
+  },
+  "configuration": {
+    "comparisons": 3072,
+    "native_instruction_bytes_executed": 462,
+    "all_four_rounding_modes": true,
+    "negative_unsigned_saturation_and_IOC": true,
+    "configuration_alias_cases": true,
+    "full_output_and_guards_and_FPSCR_match": true,
+    "source_cannot_execute_stock": true
+  },
+  "constructor_reset": {
+    "paired_cases": 512,
+    "native_instruction_bytes_executed": [
+      250,
+      462,
+      210
+    ],
+    "constructor_and_deinit_full_nonstack_RAM_and_FPSCR_match": true,
+    "allocator_and_free_boundary_snapshots_match": true,
+    "invalid_guards_and_configuration_aliases": true,
+    "all_rounding_modes": true,
+    "source_cannot_execute_stock": true,
+    "allocator_returns_modeled": true,
+    "actual_C_fill_and_strcmp": true
+  },
+  "actual_C_heap_lifecycle": {
+    "paired_cases": 512,
+    "native_instruction_bytes_executed": [
+      244,
+      462,
+      210
+    ],
+    "constructor_and_deinit_full_nonstack_RAM_and_FPSCR_match": true,
+    "allocator_and_free_boundary_snapshots_match": true,
+    "invalid_guards_and_configuration_aliases": true,
+    "all_rounding_modes": true,
+    "source_cannot_execute_stock": true,
+    "allocator_returns_modeled": false,
+    "full_actual_C_heap_lifecycle": true,
+    "successful_function_port_calls": 0,
+    "actual_C_fill_and_strcmp": true
+  },
+  "compiled_defects_rejected": [
+    {
+      "name": "rate",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "mode",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "IOC",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "reload",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "half",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "threshold",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "hole",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "size",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "allocation",
+      "compiled": true,
+      "rejected": true
+    }
+  ],
+  "contract": [
+    "Null configuration, size other than60 or version other thanpv_v1.0.0 returns3 before allocation/reset. No already-initialized guard and no allocation-null guard are invented.",
+    "Allocate52bytes and reset the canonical native state/workspace. Initialization also replaces the allocation, resets values2/3 to0/255, then sets flags0 tobf. Deinit shares field reset and frees the live allocation without clearing it.",
+    "Rates25/50/100/200 and modes1..3 are accepted. Invalid values fall back to25/1 and return 3 after allocation/reset; no rollback occurs. Padding, reserved bytes and native live-input reloads are preserved, including aliases.",
+    "Float scale follows int32-to-float, rounded multiplication and rounded division by1000. Signed conversion truncates. Negative out-of-range unsigned conversion saturates to0 and raises IOC through volatile C 0/0 without inline assembly or undefined unsigned conversion.",
+    "All4096 pairs compare full relevant RAM and FPSCR; direct guards and aliases, negative scaling and rounding modes, and actual native/C heap lifecycles are covered. Nine compiled defects are rejected."
+  ],
+  "limits": [
+    "This is an893-unit relocatable ld-r composition, not an executable firmware image or physical boot proof. Final linking/startup, remaining74 application/22 boot imports, hardware execution and sensor calculation remain open.",
+    "Direct malloc/free returns are modeled ABI boundaries. A separate512-case lifecycle uses the actual C allocator/free and actual native heap; successful lifecycles call zero function ports and restore free capacity. Allocation exhaustion is nonreturning in the public allocator; a modeled NULL return is not evidence that real exhaustion returns.",
+    "Active Cortex-M4 FPU status and all four rounding modes are replayed. Cold FPU activation, physical exception delivery, invalid pointers, concurrency and compiler-private stack bytes are not proven.",
+    "The new120-byte source configuration owner corresponds to native0x20037e10. Existing92-byte state and1588-byte workspace are reused. A final executable linker mapping and target startup remain to be established.",
+    "No byte identity is required. REA confirms two discontiguous executable ranges totaling712bytes; the previous combined CSV hint is replaced by separate250-byte head and462-byte tail rows. Existing portable API model remains separate."
+  ],
+  "evidence_files": {
+    "build/sources-goal-r1-goodix-nadt-initialize-c/report.json": "33618ef2f3805215e8b8bae68996b7cd37da12f3827c581760a6239bb82cd996",
+    "build/sources-goal-r1-goodix-hrv-initialize-c/report.json": "ab87569f8c68ccd7c0d3a3744064404cda3d4be4ebb707ab06db647456dc2328",
+    "r1/src/application/goodix/native_nadt_initialize.c": "8d18533bbbcdc8196e6145d137485de9166e6a12c501e9706aadbfb461777121",
+    "r1/src/application/goodix/native_nadt_reset.c": "71a50e058244e411b1ac59829a6128f921f72c794e3cd273cf748699f88759fd",
+    "r1/src/application/goodix/native_nadt_state.h": "cc2b8200314243bca442398297b1a6aa83f9da5df2b558ca3b0309ed30c75cd3",
+    "r1/src/sources.json": "e807f5d1469b9c135db8eae3ab908228922fdc8c37c6a7f4be247dffc0eb622c",
+    "tools/build/source-plan.json": "eeb516e31b3310fb0718f36908977f8125723f7c5e0e86cd6744395826259a4d",
+    "r1/src/config/runtime/native_health_cache.ld": "eb8f131c489cd818d4e36718718fa1989719ca0170f164541a1a5bf56dfc1ec3",
+    "r1/docs/reference/FUNCTION-OWNERSHIP.csv": "40c7f64471ace7ad52113be55cf66b15690b677802843fc6b45f3dfdd8d23d45",
+    "r1/symbols/function-frontier.csv": "bd017446226866ab8b8b6b15d6acabce84e79272f74817ac3aea182747aa7e71",
+    "r1/docs/reference/goodix-native-nadt-reset-c-review.md": "7491da8452464cfe11f7424db1863777ee7c853b9ac6494acf85ce2f2debdddf",
+    "r1/docs/reference/goodix-engine-setup-c-review.md": "0d0affbe55c79c58c7677a5ca206b00b47c5a03f93bc19b1522898d34a4a9a5a",
+    "third-party/upstream/musl-memory-1.2.5/strcmp.c": "3e1793ea2dd358e5c884c4dd232083605d0f6775f7ebe19d03d64fe97068a78f",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-nadt-initialize-c/r1/r1-application/third-party__upstream__musl-memory-1.2.5__strcmp.c.o": "d2d1444d824aed4070fa9271ff54cbd83bd5390686232894dbad3c3a36189e3d",
+    "r1/src/application/goodix/native_heap_init.c": "c3085064866b23d603697918b6dfdd29f66ab68c7e82cb1f3e10443c80e3f8b6",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-nadt-initialize-c/r1/r1-application/r1__src__application__goodix__native_heap_init.c.o": "d25f87d5c62ab05f6d5e4d73cc1de5afacf8300a5f1286735b75c9715c30063c",
+    "r1/src/application/goodix/native_heap_free.c": "175cf893ee4b475bee0a886d69522782ac879dd0b29c43285d957c03fb4dc7c4",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-nadt-initialize-c/r1/r1-application/r1__src__application__goodix__native_heap_free.c.o": "bc333928ee0e42aaf0a0446eb69f4ff0528fd2f27737d5ed1744ed750b807022",
+    "r1/src/application/goodix/native_heap_malloc.c": "1b827deb8981088d68fae260af0aa442a7315d4aaaa7f2ed8a248c859878a0c3",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-nadt-initialize-c/r1/r1-application/r1__src__application__goodix__native_heap_malloc.c.o": "977cb669d0ca7b16102f67629d38c362cd2c47fba05cb890577e367a4f9d0138",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-nadt-initialize-c/r1/r1-application/r1__src__application__goodix__native_nadt_reset.c.o": "e84469967fff3b6e04f7c797aa4dc0fe5ea3d9e5dd188cf3b073df517ea0c076",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-nadt-initialize-c/r1/r1-application/r1__src__application__goodix__native_nadt_initialize.c.o": "b766eabc702b623cd7ecadee9bdac2ebd625655037fc38804448ed0091a2b7fb",
+    "build/goal-r1-goodix-nadt-initialize-c/configure.elf": "690786f41b578f4356277032be6635cec978b0bb83c1fc1c5092d3c5cee34f72",
+    "build/goal-r1-goodix-nadt-initialize-c/helper-73e2c.txt": "3793e1b199e9a90dd13471aeebbabe449c79aa13ce5fea14684bff4816c90b34",
+    "build/goal-r1-goodix-nadt-initialize-c/negative-rate.c": "d025195de565d137bc999fc28756223706eced4a6ee7aea39d25075d4f1f674f",
+    "build/goal-r1-goodix-nadt-initialize-c/negative-threshold.o": "96f8823c42f8ddb270c6d39a5f8d8bc88d5902e649853afdf43c8ae3bda132ca",
+    "build/goal-r1-goodix-nadt-initialize-c/negative-reload.o": "c94a2d1a01a56369c93f64da4d16e701e3b1df3aacc99c248ab77841badb68f6",
+    "build/goal-r1-goodix-nadt-initialize-c/audit.json": "fac19dcc7fabfbb939009567e0952dd1c7569facf77050b50c0ddc8bc609c7b4",
+    "build/goal-r1-goodix-nadt-initialize-c/negative-hole.c": "8bd4202526220160cbaf3fc35141d458751ac68372de811777d89055296b28db",
+    "build/goal-r1-goodix-nadt-initialize-c/native_nadt_reset.o": "e84469967fff3b6e04f7c797aa4dc0fe5ea3d9e5dd188cf3b073df517ea0c076",
+    "build/goal-r1-goodix-nadt-initialize-c/negative-half.o": "2b1e27ac6b4d31d5a724597f28b700fe0198882b372eeaa1618e28f2e597d32d",
+    "build/goal-r1-goodix-nadt-initialize-c/negative-mode.c": "7bb65ca2a9d46218213646cef23c4f2a88d86c0fe5a7eaea04d4f080578f4861",
+    "build/goal-r1-goodix-nadt-initialize-c/audit.py": "166eb9778b65443c03522ca66dcfd9937f7db82c0412a2617eb8db3fe1cc5bc6",
+    "build/goal-r1-goodix-nadt-initialize-c/negative-size.o": "efc99521c663a28c2cd1d825cfda73776b307f5d04667999a264096d2376a20e",
+    "build/goal-r1-goodix-nadt-initialize-c/make-heap.py": "872e82d8883d4ae84ffa51de42d4a77d7cd4f0a3d7cef927c4c4da4cabe4c1fa",
+    "build/goal-r1-goodix-nadt-initialize-c/initialize-results.json": "3b1050cd3c7a842039bc13ae392b401fa0e06d1824742b1bc6291f91871d3e8a",
+    "build/goal-r1-goodix-nadt-initialize-c/native_nadt_state.h.before": "e291549bcc194f4074b8e792b4c41f71b506bf938341e7642a54b132625c718a",
+    "build/goal-r1-goodix-nadt-initialize-c/negative-mode.log": "6ab93c520546f926053894bac94642e34d433f247609a48cb0f186d08626fe6a",
+    "build/goal-r1-goodix-nadt-initialize-c/heap.elf": "3934ee7375be05e4914c81c3672f518710074e406d4186323d7845789e26492b",
+    "build/goal-r1-goodix-nadt-initialize-c/negative-size.log": "4ccfbe94ba74f4e45a2d0282ea76e0e1d88ee5f10555fbf92b5762255295918d",
+    "build/goal-r1-goodix-nadt-initialize-c/negative.py": "ffb5a462913691bc288fa97c996cdeacef310058e8949c824ee339813fb65fc3",
+    "build/goal-r1-goodix-nadt-initialize-c/negative-hole.log": "fd01f2dc494f276fa70da423501402b512cdf22465aad0c3b01c2891c5c41f71",
+    "build/goal-r1-goodix-nadt-initialize-c/negative-allocation.o": "fb9c2e05888247941665aa09a42a473ee740f1be487c4cec4f647485c46e7000",
+    "build/goal-r1-goodix-nadt-initialize-c/negative-results.json": "fa2e68d137ef968b0a7cd4962e6fd3c580e3b4cfd43ccb5cfc93f7579be8df41",
+    "build/goal-r1-goodix-nadt-initialize-c/initialize-verify.py": "5d22e84e05c6a71d1c55b0e7f82c388da0e8fa81db674fe763ffbf089dddb5df",
+    "build/goal-r1-goodix-nadt-initialize-c/initialize.ld": "160c956201513446413c6ed32ff56c930196254aaf91e077b368ae0419b8aa4e",
+    "build/goal-r1-goodix-nadt-initialize-c/configure.o": "096d1072df2954c209929a8b96bb8624eacc3a6ac5317c8d96df53028d85672a",
+    "build/goal-r1-goodix-nadt-initialize-c/initialize.elf": "72c0d78707183126c5871c7b315819e7edb00506298f2bf05182a7a514123642",
+    "build/goal-r1-goodix-nadt-initialize-c/configure.ld": "d2f4c428e031fa9ee5df30a5e91515cc3dc3ff6ebb005137c5789f593e274bf0",
+    "build/goal-r1-goodix-nadt-initialize-c/integrate.py": "0c4a8be7a508da3fcd2467d2e5dd405eae483f7579299a719cb525acfc21b01b",
+    "build/goal-r1-goodix-nadt-initialize-c/heap.ld": "daa3324d5e6cf41bcd8e1c2778add1883e2b75b499be43ec120e248fc062dceb",
+    "build/goal-r1-goodix-nadt-initialize-c/negative-IOC.c": "871f9d31c4897c622f26b20136a68e93f907618dff33c993dd0486c3b182159f",
+    "build/goal-r1-goodix-nadt-initialize-c/negative-reload.c": "994937739aba37b6944e491821e7d1b6f0cc949cc5fdc8ab6ca6c9baa2ddd2d1",
+    "build/goal-r1-goodix-nadt-initialize-c/negative-threshold.log": "672212f67702a89191fbd08e307d52094692af2f2fc06c4574fe1b4fba82c17b",
+    "build/goal-r1-goodix-nadt-initialize-c/negative-hole.o": "e99f0315c165bde40b43972f1fe9ca8377ad27e71917068381c1afa8f2f3c984",
+    "build/goal-r1-goodix-nadt-initialize-c/native_nadt_reset-argv.json": "72acd4be4a087f123941f5e868f13db4ba92b2adb070f42b521e087064997dcd",
+    "build/goal-r1-goodix-nadt-initialize-c/negative-rate.o": "4779262a0a39cb487a875ef0b9255e3edb6510c587a7744a257dc37034f62cdf",
+    "build/goal-r1-goodix-nadt-initialize-c/heap-results.json": "85da8cc4427112803470b096f204da52d515980176842a4d406e2f87341c952f",
+    "build/goal-r1-goodix-nadt-initialize-c/negative-threshold.c": "f533ad40246dffd8b05fab947cb39bf72b47bde78192d489e65131baaba952ea",
+    "build/goal-r1-goodix-nadt-initialize-c/native_nadt_initialize.o": "b766eabc702b623cd7ecadee9bdac2ebd625655037fc38804448ed0091a2b7fb",
+    "build/goal-r1-goodix-nadt-initialize-c/heap-verify.py": "c89e5916f84fd3944f9d492e57b57ba9f8b4b4b353faa08a29a2296a1ca8a46b",
+    "build/goal-r1-goodix-nadt-initialize-c/rea-bytes.json": "e831a5cf6fa4262ae786ca31dbf781cddba703d43d2e68eb7d80959264d02326",
+    "build/goal-r1-goodix-nadt-initialize-c/negative-mode.o": "e74b510ee0b32ac198a77848a7443edd7b9b2d02c20fd2383c6ecb2788c18015",
+    "build/goal-r1-goodix-nadt-initialize-c/negative-half.log": "636ba1d57f1d39744b72613785f5b29d986cd921d575c848e2ef821656d2792f",
+    "build/goal-r1-goodix-nadt-initialize-c/configure-verify.py": "a26324df925414cf3f3e8307405b43bfac76aba8b5fe0292db4556463667025b",
+    "build/goal-r1-goodix-nadt-initialize-c/negative-size.c": "b0a184c773f017c31f4b4e5eca46a94ddedbd14d88b10b13e359e68090afb53d",
+    "build/goal-r1-goodix-nadt-initialize-c/negative-half.c": "28c94a291047b04246ff4a7fe84a0c2ce786f92283d12cbe891d3fa727a4afc4",
+    "build/goal-r1-goodix-nadt-initialize-c/disassembly.txt": "44008ed66f421b575fc95aec248dc21bbb2d81a9c80fd19f84951f5fd9503163",
+    "build/goal-r1-goodix-nadt-initialize-c/negative-rate.log": "fefa18b767c59a6bb59269d0bd773f42cca9c0d66ffe51d7a8c0d40747fc8420",
+    "build/goal-r1-goodix-nadt-initialize-c/manifest-before.json": "33581332c91119c10181902036793b220e51ebe38450f04ffbe21d5686a150b2",
+    "build/goal-r1-goodix-nadt-initialize-c/helper-5683c.txt": "9d71975eb9dbca08db02774282cd3a2f66ae6f7bba8bab8d19744f187de9e601",
+    "build/goal-r1-goodix-nadt-initialize-c/native_nadt_initialize-argv.json": "cd0d818c9d7d3cde295af9b8c5f9e8581c60e5b98462d49327acf66197cba5c3",
+    "build/goal-r1-goodix-nadt-initialize-c/negative-IOC.log": "58507bc2dab1dcf2b02b1720e2ef69e7fb8085cc8bdf3a9dc1d630f08afb97d8",
+    "build/goal-r1-goodix-nadt-initialize-c/configure-argv.json": "b80f68d55e84586bc3607e09ce0569a542188f4ac503d0e6256c6fc26770b9a1",
+    "build/goal-r1-goodix-nadt-initialize-c/negative-allocation.c": "c5dc29d6f97d91f247ab1a39ca4e94a2eb2816af9528333c7971f31cc1aad4e6",
+    "build/goal-r1-goodix-nadt-initialize-c/native_nadt_reset.c.before": "71d6eac7c051948f7dc879b841391549a69c5a84d335ee16995e774404269234",
+    "build/goal-r1-goodix-nadt-initialize-c/negative-IOC.o": "9212a723751b03d22879576212d7902dd95273f14bc472de6b421088dea03dbc",
+    "build/goal-r1-goodix-nadt-initialize-c/negative-reload.log": "663f77fe3c77071186bd55350e09b229c1203be4c246a8a3e5c1f60b69f9a4df",
+    "build/goal-r1-goodix-nadt-initialize-c/negative-allocation.log": "2bf82db082449ac6d0931259ea60700f9dd36af298733127b1bdce8fd3b992f6",
+    "build/goal-r1-goodix-nadt-initialize-c/configure-results.json": "6ef5ce4ec30f6b70c3a23f317f19587f2cbf8657bed1bd11f85d16321fde11c1",
+    "build/goal-r1-goodix-nadt-initialize-c/configure.c": "a0a5ef7853ae8ffa94b09b567b76ae8d74fbfa3a121a54da4ac98ca578f73daf",
+    "build/goal-r1-goodix-nadt-initialize-c/build.log": "c10f96163b6e9ce76f0f493546d21a5ea51b50dc996df80a60ff0a799472ca3a",
+    "build/goal-r1-goodix-nadt-initialize-c/record.py": "51bbafc5560acc06c99f16492cb533f9dc191db52762ae1e039533c5ae92265d"
+  }
+}

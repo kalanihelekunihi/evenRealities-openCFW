@@ -1,0 +1,43 @@
+{
+  "schema": 1,
+  "target": "One source implementation of the stock EM9305 PML_Init function at 0x30f4b0",
+  "finding": "The older opencfw_em9305_controller_init body in qpc-scheduler/controller_init.c duplicated the stock PML_Init behavior already represented by application/PML_Init.c. No G2 source referenced the older symbol, but it was retained in the source-linked EM9305 image.",
+  "change": "Removed the duplicate function and its two unused local write helpers. Kept the separately recovered application/PML_Init.c body and the other controller support routines.",
+  "source_files_sha256": {
+    "g2/src/em9305/qpc-scheduler/controller_init.c": "c9069b85e08f0dd84681ffe0cfa11962c1e092e7af778e9e98e400ad4c9c7464",
+    "g2/src/em9305/application/PML_Init.c": "0f2c46418257b41345b4049ad353ce1806a5a099db74f55ff70a2d97d75e78f1",
+    "g2/src/sources.json": "273ae5e18ce3aeb67e0464e81a6f0b016e32707fa5bc84894fa425f90fe5ecdd"
+  },
+  "verification": {
+    "sources_check": "make -C g2 sources-check passed: 4885 manifest units, 4546 source files, 1 existing not-built helper",
+    "focused_report": "build/g2-em9305-single-pml-20261111/report.json",
+    "focused_report_sha256": "acd91aa4863b4f431baed7c0a8c20fe905ed8eae7a66b328ea1132025ae59995",
+    "focused_compiled_units": 775,
+    "focused_compile_failures": 0,
+    "focused_duplicate_strong_symbols": 0,
+    "focused_strict_link_image": "build/g2-em9305-single-pml-link-20261111/g2-em9305.bin",
+    "focused_strict_link_image_sha256": "7c9e8c347cdbb4a505f7b404dbcd10cf1d371cbb9c4105a89b73ab3efbf0fe94",
+    "linked_map": "build/g2-em9305-single-pml-link-20261111/g2-em9305.map",
+    "linked_map_has_stock_30f4b0": true,
+    "linked_map_has_controller_init_duplicate": false,
+    "full_source_report": "build/g2-single-pml-full-20261111/report.json",
+    "full_source_report_sha256": "de0a70a15eef649cce171f34eb036cf110825b462f03c8caf954189abee7499e",
+    "full_compiled_units": 4880,
+    "full_compile_failures": 0,
+    "full_duplicate_strong_symbols": 0,
+    "strict_bundle_link_report": "build/g2-single-pml-bundle-20261111/link-report.json",
+    "strict_bundle_link_report_sha256": "796253df09659fc94b1fb0946088452602fcf44c35ecd0ba85f04e6c2b2caebd",
+    "linked_payloads": 7,
+    "authenticated_comparison": "build/g2-single-pml-bundle-20261111/comparison.json",
+    "authenticated_comparison_sha256": "8aa6c9f5d2a27b662cd7bce0d92ed129e909f7760fd0044c5ca9ff0cae3f79c8",
+    "changed_components_vs_prior_bundle": ["ble_em9305"],
+    "prior_em9305_package_bytes": 248696,
+    "new_em9305_package_bytes": 248444,
+    "candidate_bundle": "build/g2-single-pml-bundle-20261111/g2-source-candidate.evenota.bin",
+    "candidate_bundle_bytes": 4637792,
+    "candidate_bundle_sha256": "b3a80ac258d9725433753ab8dfb75d13e85bbd0a6534e416ecf6433e3cc891c1",
+    "bundle_byte_identical_to_locked": false,
+    "source_completeness_proven": false
+  },
+  "qualification": "This removes an extraneous source-linked duplicate; it does not establish EM9305 functional equivalence, complete firmware source coverage, byte identity, or hardware behavior."
+}

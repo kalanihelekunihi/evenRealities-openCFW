@@ -1,0 +1,115 @@
+{
+  "schema_version": 1,
+  "report": "build/sources-goal-r1-nv-default-c/report.json",
+  "native_entry": "0x7c52c",
+  "audit": {
+    "unchanged_prior_nongenerated_objects": 842,
+    "changed_nongenerated_objects": [],
+    "changed_generated_objects": [
+      "{gen}/r1_startup_vectors.S",
+      "{gen}/r1_uecc.c"
+    ],
+    "added_objects": [
+      "r1/src/application/runtime/native_nv_default_restore.c"
+    ],
+    "compiled_units": 853,
+    "application_imports": 65,
+    "bootloader_imports": 22,
+    "removed_imports": [
+      "r1_event_service_0007c52c"
+    ],
+    "new_imports": [],
+    "new_persistent_state": false,
+    "readonly_calibration_bytes": 826,
+    "calibration_records": 59,
+    "distinct_addresses": 56,
+    "source_alias": "r1_event_service_0007c52c"
+  },
+  "verification": {
+    "stock_C_comparisons": 2829,
+    "C_only_initialized_failed_read_cases": 9,
+    "native_instruction_bytes_covered": 494,
+    "native_uncovered_bytes": [],
+    "all59_calibration_rows_verified": true,
+    "table_bytes": 826,
+    "actual_C_memcmp": true,
+    "S140_SVC_executed": true,
+    "KV_format_and_logging_modeled": true
+  },
+  "actual_cached_class_integration": {
+    "distinct_MAC_keys": 56,
+    "first_duplicate_match_preserved": true,
+    "actual_cached_class_cases": 724,
+    "actual_C_battery_getter_memcmp_and_KV": true,
+    "actual_C_copy_and_clear": true,
+    "critical_sections_balanced": true,
+    "dirty_flags_and_reserved_byte_checked": true,
+    "KV_persistence_and_radio_modeled": true
+  },
+  "negative_controls": [
+    {
+      "name": "unsigned_ADC",
+      "rejected": true
+    },
+    {
+      "name": "ring_nibble",
+      "rejected": true
+    },
+    {
+      "name": "reserved_byte",
+      "rejected": true
+    },
+    {
+      "name": "skip_first_duplicate",
+      "rejected": true
+    }
+  ],
+  "contract": [
+    "Only batcfg byte0 equal0 or255 admits restore; other words returnffffffff before the controller query.",
+    "Execute pinned S140 address-get gateway. Format six bytes in reverse address order as12 uppercase hex digits; compare exactly12 bytes against59 immutable14-byte records and select first match.",
+    "SVC failure or missing address returnsfffffffe after native diagnostics. No cached writes occur.",
+    "For a match, perform the native ring-size and battery reads even though their return statuses are ignored. Preserve battery byte1, update ring size from low nibble and battery type from high nibble, sign-extend ADC byte into little-endian int16. Reload existing live handles before writes and invoke existing NV idle/check boundary. Return0 regardless of modeled KV statuses."
+  ],
+  "intentional_C_safety": [
+    "Initialize controller/local buffers. Failed non-writing cached battery read gives a defined reserved byte0 instead of consuming private stack memory; nine C-only poison cases check this difference."
+  ],
+  "limits": [
+    "All494 native instruction bytes execute in2829 comparisons, covering all59 row inputs including duplicates, modes/statuses, live handle replacement, reserved bytes and guards. Controller SVC executes with modeled results; formatting, logging and KV boundaries are modeled. Actual C memcmp executes.",
+    "724 integration cases execute actual C battery getter, cached KV reads/writes, comparison, copies and clears. They verify payloads, dirty flags, preserved reserved byte and critical-section balance, with callbacks and persistence modeled.",
+    "Table bytes are non-executable calibration data, authenticated against stock and REA, not instruction arrays or a retained firmware implementation. There are56 distinct keys; three later duplicate rows are not independently selectable because first match wins.",
+    "No physical flash persistence, radio or device calibration measurement is established. Fixed controlled replay addresses do not prove final layout or boot.",
+    "853 units compile/compose;65 application and22 bootloader imports remain. No new persistent state. Paid compiler and byte identity are not requirements."
+  ],
+  "evidence_files": {
+    "build/sources-goal-r1-nv-default-c/report.json": "9aeb64ba80299b330acbf5ac642a005876d5fec75170354d0fd039bd356d14fa",
+    "build/sources-goal-r1-fal-bounds-c/report.json": "506ffb726b6d4d508e0955679a8cc9298db63ac3eda25f7adf4341abea4f150e",
+    "r1/src/application/runtime/native_nv_default_restore.c": "ee687204167d235b36f21cadcc480aee0632db1ecf3d336b39f3e5a33137fb44",
+    "r1/src/application/runtime/native_nv_restore_table.inc": "8406e17d3b5cadb2905e1525dc4dc57ce62845526764c1d85696a000f3e83e2d",
+    "r1/src/sources.json": "dc1dc130a8c4c5ceb1d3ccb5cb1e7d718315df2f71cd66e903d9658cca4e3e96",
+    "r1/src/application/board/native_event_callbacks.c": "5f24f7494fd2de78b934052a8b03291f4019cdeb52642ed8ef5f2ef04d6dd56b",
+    "r1/src/application/board/native_kv_class.c": "e9791d39b7a9b5380b1dbce3c7422be921131abbd0e09c3387ea3d4b9930bf6e",
+    "r1/src/application/board/native_battery_configuration.c": "0f50934ceeaf79232453fbc466e22cd50c25949b39c4882227225cc918c29c44",
+    "r1/src/application/runtime/native_memory_compare.c": "be5716143db40ad8eaeb24ff52f63cc99dfab2cbf8ea08eced56a236b84f785a",
+    "build/goal-r1-nv-default-c/rea.json": "13ac50f0a7ca7039a5573e272c5ac59959fcb7005dc35b7fb16edb4a5c8799ff",
+    "build/goal-r1-nv-default-c/table-rea.json": "1215568d147c80e091c0672ccdccec0de9555ee80687dadfcb3bfed45ca1c8e2",
+    "build/goal-r1-nv-default-c/verify.py": "025226f45a2bb5143a7ab0e4d305323adf5934e2b9503ab2d7a4a9f6d84c6203",
+    "build/goal-r1-nv-default-c/verification.json": "4dc27b36b8d9d7eec712c2e7e939bc050bb329a5d56cc2bb2cd871918210b27f",
+    "build/goal-r1-nv-default-c/verification.log": "b90f7d889a6a58567532b6e97db6d1eae577a299e2545ed42193f809cc50e645",
+    "build/goal-r1-nv-default-c/make-integration.py": "e03d4530315bef42e1166d89bc392a283c3d1fe83a9397e979c72d69c994dfbc",
+    "build/goal-r1-nv-default-c/integration/verify.py": "df0875676d7708fb9a31a421f5da66823bd7eda877f2d53720398a1fb13337f9",
+    "build/goal-r1-nv-default-c/integration/verification.json": "5cfd44e480072451e42c5f83ca7603391302b8c0235a3a40280ebee2ea946511",
+    "build/goal-r1-nv-default-c/integration/verification.log": "f9593f060fe6348a30f7b96663c147a0b305e72fc94d4b1a85ca6652659acc5b",
+    "build/goal-r1-nv-default-c/negative.py": "6ad231590133f48afe34cea55a4d180f460e7cb8b247caa15a2cd0c5e750c1cf",
+    "build/goal-r1-nv-default-c/negative.json": "1db77b44474bbe57b5779291858dc10c11ba175d21552e8c6cf5a20d9b1ef1fb",
+    "build/goal-r1-nv-default-c/negative.log": "2ccbc338829437751f4ff7d03a768294ca285b73608bd43aa626b786ee94af23",
+    "build/goal-r1-nv-default-c/r1-check.log": "c6337eac26d070f69b11649c87d0113e87bc618a32b4b419c131ca921de23432",
+    "build/goal-r1-nv-default-c/unsigned_ADC/mutant.c": "1e5fc82957e55d290f646567686e02cb5eaac3f008f477ad1bea2ee9ca86b56e",
+    "build/goal-r1-nv-default-c/unsigned_ADC/result.log": "d582b8c0bb0e710ad6ab58f6fb6bfbecd03ee06310272537d6854a8d173ed7de",
+    "build/goal-r1-nv-default-c/ring_nibble/mutant.c": "7f7c1513a8fea2f7a740e3202ad0d4d514e7531f020db80f5bf5f6de9a813af8",
+    "build/goal-r1-nv-default-c/ring_nibble/result.log": "9b04fd4ed169f2364471dc47a45feaabc08b0909438decf48c05dcca303de47e",
+    "build/goal-r1-nv-default-c/reserved_byte/mutant.c": "4b6561500b2380453595222e9912e80bb022459b54df7a385c7ac235e0e99fe3",
+    "build/goal-r1-nv-default-c/reserved_byte/result.log": "7eccf7dd03ea8b3e46c8c073a91d28edc54141e91d28e31aa92d715e8bf6b053",
+    "build/goal-r1-nv-default-c/skip_first_duplicate/mutant.c": "1406448199c65fbc00728fe1bd3cb6e2552a42c5cbe5dfaebc1bf61baf69b434",
+    "build/goal-r1-nv-default-c/skip_first_duplicate/result.log": "552c78c9d924e0722196722d3f62cd603771f289f05bb634eb8f16c1d6b6b384"
+  }
+}

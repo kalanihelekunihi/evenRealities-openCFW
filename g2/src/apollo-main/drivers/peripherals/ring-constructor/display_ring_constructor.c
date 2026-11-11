@@ -71,7 +71,6 @@ static void ring_node_add(ring_list *list,void *item,uint8_t type) {
     node->type=type;
     node->next=list->head;
     list->head=(uint32_t)(uintptr_t)node;
-    list->count=(uint8_t)(list->count+1u);
 }
 /* Stock 0x46CFA6 (create_single_font) */
 static void *ring_element(const uint8_t *description) {
@@ -166,6 +165,7 @@ ring_list *audio_uart_display_ring_construct(const uint8_t *descriptions,
         file_heap_free(list);return 0;
     }
     for(uint8_t i=0;i<count;++i) items[i]=0;
+    uint8_t added_count=0u;
     for(uint8_t i=0;i<count;++i) {
         const uint8_t *d=descriptions+(uint32_t)i*12u;
         void *item=ring_element(d);
@@ -175,16 +175,16 @@ ring_list *audio_uart_display_ring_construct(const uint8_t *descriptions,
                      0x08000000u,audio_uart_ring_text_0046d5a0);
             continue;
         }
-        uint8_t old_count=list->count;
+        uint32_t old_head=list->head;
         ring_node_add(list,item,d[0]);
-        if(list->count==old_count) {
+        if(list->head==old_head) {
             ring_log(1u,0x86u,audio_uart_ring_ctor_fn,audio_uart_ring_text_0046d5a4,
                      0x04000000u,audio_uart_ring_text_0046d5a8);
             ring_element_release(item,d[0]);
             items[i]=0;
-        }
+        } else added_count=(uint8_t)(added_count+1u);
     }
-    if(list->count==0u) {
+    if(added_count==0u) {
         ring_log(1u,0x91u,audio_uart_ring_ctor_fn,audio_uart_ring_text_0046d5ac,
                  0x04000000u,audio_uart_ring_text_0046d5b0);
         for(uint8_t i=0;i<count;++i)
@@ -202,6 +202,7 @@ ring_list *audio_uart_display_ring_construct(const uint8_t *descriptions,
     for(uint8_t i=0;i<count;++i) {
         if(items[i]==0) continue;
         list->first=(uint32_t)(uintptr_t)items[i];
+        list->count=added_count;
         file_heap_free(items);
         ring_log(3u,0xb9u,audio_uart_ring_ctor_fn,audio_uart_ring_text_0046d5b4,
                  0x0c000000u,audio_uart_ring_text_0046d5b8);

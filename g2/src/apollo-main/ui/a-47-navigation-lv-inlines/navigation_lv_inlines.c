@@ -13,10 +13,10 @@
 
 extern uint32_t audio_uart_lv_style_property_44bdea(void *object, uint32_t selector,
                                                     uint32_t property); /* lv_obj_get_style_prop */
-extern void audio_uart_page_44120e(void *obj, int32_t v, uint32_t sel); /* pad_top */
-extern void audio_uart_page_44121c(void *obj, int32_t v, uint32_t sel); /* pad_bottom */
-extern void audio_uart_page_44122a(void *obj, int32_t v, uint32_t sel); /* pad_left */
-extern void audio_uart_page_441238(void *obj, int32_t v, uint32_t sel); /* pad_right */
+extern void lv_obj_set_style_pad_top(void *obj, int32_t v, uint32_t sel); /* pad_top */
+extern void lv_obj_set_style_pad_bottom(void *obj, int32_t v, uint32_t sel); /* pad_bottom */
+extern void lv_obj_set_style_pad_left(void *obj, int32_t v, uint32_t sel); /* pad_left */
+extern void lv_obj_set_style_pad_right(void *obj, int32_t v, uint32_t sel); /* pad_right */
 extern void lv_obj_set_style_transform_scale_x_4411f2(void *obj, int32_t value, uint32_t selector);
 extern void lv_obj_set_style_transform_scale_y_441200(void *obj, int32_t value, uint32_t selector);
 
@@ -31,10 +31,10 @@ uint8_t lv_obj_get_style_opa_545588(void *obj, uint32_t part)
 
 void lv_obj_set_style_pad_all_545594(void *obj, int32_t value, uint32_t selector)
 {
-    audio_uart_page_44122a(obj, value, selector);
-    audio_uart_page_441238(obj, value, selector);
-    audio_uart_page_44120e(obj, value, selector);
-    audio_uart_page_44121c(obj, value, selector);
+    lv_obj_set_style_pad_left(obj, value, selector);
+    lv_obj_set_style_pad_right(obj, value, selector);
+    lv_obj_set_style_pad_top(obj, value, selector);
+    lv_obj_set_style_pad_bottom(obj, value, selector);
 }
 
 void lv_obj_set_style_transform_scale_5455c6(void *obj, int32_t value, uint32_t selector)

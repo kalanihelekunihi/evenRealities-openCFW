@@ -1,0 +1,143 @@
+{
+  "schema_version": 1,
+  "scope": "R1 sleep-sector selection and erase fallback in ordinary C",
+  "report": "build/sources-goal-r1-sleep-select-c/report.json",
+  "comparison_report": "build/sources-goal-r1-sleep-finalize-c/report.json",
+  "audit": {
+    "compiled_units": 863,
+    "application_imports": 63,
+    "bootloader_imports": 22,
+    "unchanged_prior_nongenerated_objects": 852,
+    "changed_prior_nongenerated_objects": [
+      "r1/src/application/runtime/native_sleep_sector_select.c"
+    ],
+    "normal_object_equals_direct_and_parent_probes": true,
+    "manifest_and_source_plan_unchanged": true,
+    "new_mutable_persistent_bytes": 0,
+    "assembly_entries_replaced_with_C": 2,
+    "object_audit": {
+      "strong_symbol_set_unchanged": true,
+      "no_allocated_writable_data": true,
+      "assembly_entries_replaced_with_C": 2,
+      "manifest_unchanged": true,
+      "legacy_parent_object_section_alignment": 2,
+      "legacy_parent_fixture_entry": "0x1000461",
+      "fixture_explicitly_aligns_legacy_parent_to_four_bytes": true,
+      "legacy_parent_literal_alignment_remains_final_link_or_C_conversion_requirement": true
+    }
+  },
+  "direct": {
+    "stock_C_comparisons": 17200,
+    "native_instruction_bytes_executed": {
+      "r1_sleep_sector_select": 100,
+      "r1_sleep_sector_fallback": 246
+    },
+    "actual_sector_count_core_executes": true,
+    "signed_byte_indices_all_selectable_indices_and_header_predicates": true,
+    "unsigned_minimum_first_tie_and_live_second_count": true,
+    "partial_read_carry_live_providers_and_post_erase_diagnostics": true,
+    "erase_status_ignored_and_zero_count_sector0_erase_native": true,
+    "private_frame_APSR_and_physical_NOR_unverified": true
+  },
+  "full_record_store_flash_model": {
+    "stock_C_full_record_store_flash_model_comparisons": 1728,
+    "actual_parent_C_selection_fallback_write_finalize_count_erase_CRC_and_clear": true,
+    "flash_bytes_and_all_provider_calls_logs_match": true,
+    "only_FAL_and_logging_modeled": true
+  },
+  "compiled_defects_rejected": [
+    {
+      "defect": "unsigned-selected-index",
+      "rejected": true,
+      "log": "build/goal-r1-sleep-select-c/unsigned-selected-index/test.log"
+    },
+    {
+      "defect": "reversed-completion-marker",
+      "rejected": true,
+      "log": "build/goal-r1-sleep-select-c/reversed-completion-marker/test.log"
+    },
+    {
+      "defect": "overstrict-first-empty-word",
+      "rejected": true,
+      "log": "build/goal-r1-sleep-select-c/overstrict-first-empty-word/test.log"
+    },
+    {
+      "defect": "loose-double-empty-test",
+      "rejected": true,
+      "log": "build/goal-r1-sleep-select-c/loose-double-empty-test/test.log"
+    },
+    {
+      "defect": "last-minimum-tie",
+      "rejected": true,
+      "log": "build/goal-r1-sleep-select-c/last-minimum-tie/test.log"
+    },
+    {
+      "defect": "signed-minimum-order",
+      "rejected": true,
+      "log": "build/goal-r1-sleep-select-c/signed-minimum-order/test.log"
+    },
+    {
+      "defect": "missing-live-count-query",
+      "rejected": true,
+      "log": "build/goal-r1-sleep-select-c/missing-live-count-query/test.log"
+    },
+    {
+      "defect": "stale-post-erase-offset",
+      "rejected": true,
+      "log": "build/goal-r1-sleep-select-c/stale-post-erase-offset/test.log"
+    },
+    {
+      "defect": "abort-on-erase-error",
+      "rejected": true,
+      "log": "build/goal-r1-sleep-select-c/abort-on-erase-error/test.log"
+    }
+  ],
+  "contract": [
+    "Select the first sector whose word0 is FFFFFFFF, or whose word1/word2 are both FFFFFFFF, or whose word0 is CCFFAABB but word1 is not66889977. Otherwise return FFFFFFFF.",
+    "Return selected indices sign-extended from a byte, including indices128..254. Snapshot byte-truncated sector count once and retain16-byte header scratch across partial/failed reads.",
+    "Fallback chooses first strictly smallest unsigned word2 without validating magic. Use sector0 if no candidate, convert chosen index to byte, then query count again. If index is out of range log and use0.",
+    "Fallback erases4096 bytes even for count0 and ignores erase status. Read current partition/device after range diagnostics. Post-erase messages reload the live base independently after logging callbacks."
+  ],
+  "limits": [
+    "Direct FAL/logging modeled; actual C sector-count core executes. All346 native instruction bytes across both roots execute.",
+    "Full-chain fixture executes retained record-store assembly plus C selection/fallback/write/finalize/count/erase, CRC and memory clear. Only FAL and logging modeled; the bytearray flash model does not establish physical NOR programming behavior.",
+    "The retained parent assembly section advertises alignment2 but its PC-relative literal loads require entry alignment4. The integration linker explicitly supplies and asserts alignment4. Final-link alignment or conversion of that separate legacy caller remains required.",
+    "Saved integer/FP registers, masks and caller-stack guards checked; private frames, APSR, concurrency/faults excluded.",
+    "Partial-read scratch carry, signed-byte results and zero-count fallback erase preserve native behavior, not a safety guarantee. Physical NOR behavior, power loss, final linking and boot remain unverified."
+  ],
+  "evidence_files": {
+    "build/sources-goal-r1-sleep-select-c/report.json": "93ad7ab4ed3316fa6f3d74c2a4bce0a74b4c1b0bf9fb95cfe7bf8a0a7084f78e",
+    "build/sources-goal-r1-sleep-finalize-c/report.json": "81245b1258d6fc99540da4880afe617bd273683843246bca59699b036e9869ef",
+    "r1/src/application/runtime/native_sleep_sector_select.c": "94b40df8a13800bf317ebe50ecba6a1ed2f97526866c7ea9398f058e33542299",
+    "r1/src/application/board/native_battery_memory.h": "e646c981681787c87d8088f663239c9006beb4e4c1827e95854093f0628528b6",
+    "r1/src/application/runtime/native_sleep_record.c": "3c45ef686b843a7645336643f82b6440612b101d2a2907891c9353f1ffd5e2d6",
+    "r1/src/application/runtime/native_sleep_sector_write.c": "0a3a17161b5d27255ede805eecb81ab3fe668e495d69fa960f6232e94852a021",
+    "r1/src/application/runtime/native_sleep_sector_finalize.c": "04cf449316a0c0e1cf233d4da7af9ccfffa67bc08c72093b120f47e4ba69e547",
+    "r1/src/sources.json": "6ea6ab6f16e97b34b73ee1fb683c7c49eb7228bf29fdbdb21f5aded6d4d13380",
+    "tools/build/source-plan.json": "eeb516e31b3310fb0718f36908977f8125723f7c5e0e86cd6744395826259a4d",
+    "build/goal-r1-sleep-select-c/manifest-before.json": "6ea6ab6f16e97b34b73ee1fb683c7c49eb7228bf29fdbdb21f5aded6d4d13380",
+    "build/goal-r1-sleep-select-c/source-before.c": "529eec577a00e04183870628b716b327e4c2f6e4e7f29e722ffb5f62d5cbb11c",
+    "build/goal-r1-sleep-select-c/audit.py": "a906d323b76d583a970d499ca407588a11c0c8a675697fa37a8cc927eba0981d",
+    "build/goal-r1-sleep-select-c/object-audit.json": "6e1fcf5da3064c1b8a3706c887bec9be822128747c548b14be816141f3f96de6",
+    "build/goal-r1-sleep-select-c/record.py": "5f8820514b4b74af11795ab72c5fabe1379224b921b37a979474d21815f37921",
+    "build/goal-r1-sleep-select-c/rea-select.json": "f2724386b1565dce8c6d063f4933d0bd0b61d2a2fc523ddadaa19bf2fd54844f",
+    "build/goal-r1-sleep-select-c/rea-fallback.json": "3aedc970209f00f25d6b2dcc60e2ebb72e419ec3a9a8695df39f3d20c850c767",
+    "build/goal-r1-sleep-select-c/verify.py": "9291048ed78dd9d3788acdd69620b81ec354a7b07d88fc152a4a8787b63b369f",
+    "build/goal-r1-sleep-select-c/results.json": "42c32fd4dee2d8d1242b0b50551f3f6f5696b9ce1048bb2d95ceb1c67cbba65f",
+    "build/goal-r1-sleep-select-c/verification.log": "4a42e3b8ad47e089f1e78b430670bb0f8a114dcdce2d566d8922a621b40b6074",
+    "build/goal-r1-sleep-select-c/source.o": "209640f78f59243178b42563e45feacc60f56fe929c752f795107902e1773e03",
+    "build/goal-r1-sleep-select-c/source.elf": "3f33dd40ddb334a324ffc6aea4ad98e7d65a180c03e522c94da66e1f35fa1608",
+    "build/goal-r1-sleep-select-c/pipeline.py": "ebf54a1bf286ff6169002f04ec740c232a2d9ae06877b3134cface750fc79fb2",
+    "build/goal-r1-sleep-select-c/pipeline/link.ld": "ffecce65de005c8635372e7586527f1093024ce4c722fa48f6ddd49c08836242",
+    "build/goal-r1-sleep-select-c/pipeline/results.json": "6f161bd476bf72d46ea156eb83551ba14d6b9b7915c4b6e6f0add2a63c614bfc",
+    "build/goal-r1-sleep-select-c/pipeline.log": "cf72e767fa4d50fda7fab4aa716bb30ff8379c80554650b9726b522f26bd3d01",
+    "build/goal-r1-sleep-select-c/pipeline/select.o": "209640f78f59243178b42563e45feacc60f56fe929c752f795107902e1773e03",
+    "build/goal-r1-sleep-select-c/pipeline/source.elf": "694dbad62584c3f3fe6edcaab8025c99ddbdffebf1986dbd4466de735724067f",
+    "build/goal-r1-sleep-select-c/negative.py": "2c86e4821c3f8a3139217f97dd6ad76aa4276c58f2a31b313b93a6928fcb5db7",
+    "build/goal-r1-sleep-select-c/negative-verify.py": "d76c845455f72f437f24f0c442faec67174816b5c23a5ca4290effca5c136152",
+    "build/goal-r1-sleep-select-c/negative.json": "67b433a1a3940f755812bdfac729047596a594d8003562f90503cbde67ce7251",
+    "build/goal-r1-sleep-select-c/negative.log": "bb06d95d9a03c3f487c2e20fb55afc800d021b7987e8c19e41cccc9c6f26ee11",
+    "build/goal-r1-sleep-select-c/build.log": "cd8a665edca9d2db1d5f878fcd50431c1388a40eafd6ef3da88c9e77537f44bf",
+    "build/goal-r1-sleep-select-c/sources-check.log": "c56719af1d0b2d08393a257d3e2022d40896a70239925ecc83fc942850eca238"
+  }
+}

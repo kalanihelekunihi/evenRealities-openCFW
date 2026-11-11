@@ -1,33 +1,15 @@
-/* Native scan prepare: serialize two six-byte addresses, return 12. */
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_scan_prepare_3243c0\n"
-".type opencfw_em9305_scan_prepare_3243c0,@function\n"
-"opencfw_em9305_scan_prepare_3243c0:\n"
-"L3243c0:\n"
-"enter_s [r13-r14,blink]\n"
-"L3243c2:\n"
-"mov_s r13,r1\n"
-"L3243c4:\n"
-"ld r2,[r1,0x4]\n"
-"L3243c6:\n"
-"ld r1,[r1,0]\n"
-"L3243c8:\n"
-"bl.d opencfw_em9305_radio_address_write_3045e8\n"
-"L3243cc:\n"
-"mov_s r14,r0\n"
-"L3243ce:\n"
-"ld r2,[r13,0xc]\n"
-"L3243d0:\n"
-"ld r1,[r13,0x8]\n"
-"L3243d2:\n"
-"bl.d opencfw_em9305_radio_address_write_3045e8\n"
-"L3243d6:\n"
-"add_s r0,r14,0x6\n"
-"L3243d8:\n"
-"mov_s r0,0xc\n"
-"L3243da:\n"
-"leave_s [r13-r14,blink,pcl]\n"
-".size opencfw_em9305_scan_prepare_3243c0,.-opencfw_em9305_scan_prepare_3243c0\n"
-);
+#include <stdint.h>
+
+/* Native 0x3243c0..0x3243dc: serialize the two six-byte addresses held as
+ * {low,high} word pairs at source+0 and source+8 into output+0 and
+ * output+6; returns the 12 bytes written. */
+extern uintptr_t opencfw_em9305_radio_address_write_3045e8(uintptr_t,uint32_t,uint32_t);
+
+uint32_t opencfw_em9305_scan_prepare_3243c0(uintptr_t output,uintptr_t source)
+{
+    (void)opencfw_em9305_radio_address_write_3045e8(output,
+        *(volatile uint32_t *)source,*(volatile uint32_t *)(source+4u));
+    (void)opencfw_em9305_radio_address_write_3045e8(output+6u,
+        *(volatile uint32_t *)(source+8u),*(volatile uint32_t *)(source+12u));
+    return 12u;
+}

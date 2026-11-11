@@ -1,0 +1,53 @@
+{
+  "passed": 72,
+  "executions": 144,
+  "live_stop_slot_read": true,
+  "tail_callback_original_sp_lr": true,
+  "source_size": 16,
+  "source_report": "build/sources-goal-r1-goodix-gsensor-stop/report.json",
+  "limitations": [
+    "Callback modeled with void ABI; caller-clobbered argument registers and flags excluded",
+    "No arbitrary target faults, concurrency, source-plan qualification or physical hardware validation"
+  ],
+  "registration_regression": {
+    "passed": 1029,
+    "executions": 2058,
+    "ordered_word_stores": true,
+    "rejected_table_unchanged": true,
+    "source_size": 38,
+    "source_report": "build/sources-goal-r1-goodix-gsensor-stop/report.json",
+    "limitations": [
+      "Seeded callback state; startup placement not proven",
+      "Interrupt interleavings, callback invocation ABI and physical accelerometer unverified",
+      "Caller-clobbered registers and flags excluded; no byte qualification"
+    ]
+  },
+  "negative_control": {
+    "mutation": "Read start slot instead of stop slot",
+    "rejected": true,
+    "controlled_start_target": "mapped callback A",
+    "expected_stop_target": "null in first counterexample",
+    "stderr": "Traceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-goodix-gsensor-stop/reject-wrong-slot.py\", line 39, in <module>\n    for c in cases:assert a(*c)==b(*c),c\n                                 ~^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-goodix-gsensor-stop/reject-wrong-slot.py\", line 35, in run\n    assert reads==[[4,4,target]] and not writes;assert calls==([target-STOP-1] if target else [])\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+  },
+  "evidence": {
+    "build/goal-r1-goodix-gsensor-stop/REA.json": "7ae0b7f60a712d501da3dbe0dbf8eae793fbbe2c8182fde990840b5e0c3e8ec9",
+    "build/goal-r1-goodix-gsensor-stop/REA.snapshot.json": "2072a3fdd2fde7391b0de39706bc16abec5fb24714abf9341df4244f6a05de24",
+    "build/goal-r1-goodix-gsensor-stop/verify.py": "551883ea897dfc1522904f0b63666b69d283007c35461689ef59b14825e01e9f",
+    "build/goal-r1-goodix-gsensor-stop/results.json": "6ec2ac1cf776d2270a037cdf350212143cc6bb9662281e230e4c3cd20e4fa3e3",
+    "build/goal-r1-goodix-gsensor-stop/source.elf": "df83ffbdbaddf196d6f8f250dd874e4a428412aebce2cef3dba03c95efe28876",
+    "build/goal-r1-goodix-gsensor-stop/registration/verify.py": "1d623547c1e888813fce60c3a2084e544db3ec66d32622e1df73159346f08c06",
+    "build/goal-r1-goodix-gsensor-stop/registration/results.json": "0e722e77eb863f0eb3a601f26ba0dc8d706ee0103b91e9cb3b717975343941e8",
+    "build/goal-r1-goodix-gsensor-stop/bad.c": "4d32e0d89ef0f0aae44a1ad400a64f8b41ee25c7adf615d16bbac3ce5036bd79",
+    "build/goal-r1-goodix-gsensor-stop/reject-wrong-slot.py": "34fd372d33fad54734a1bc623848cee85018d489682b52fbabf5d7ecffdc351e",
+    "build/goal-r1-goodix-gsensor-stop/negative-result.json": "6e5771a144fca54d78ec4c87d93d362af178f99b9d91e66840badc5e1ad7fd1f",
+    "r1/src/application/goodix/stock_gsensor_callbacks.c": "7d22ba99735779597a734846ddff0437b5cce67889bcf2e8f3c39d52b6ba723c",
+    "r1/src/application/goodix/stock_gsensor_callbacks.h": "3fb5d701b02c54ca2b3ddb057de4cefbab5c7258eeb9dc24587a70a30f7ba03d",
+    "r1/src/vendor/goodix_primitives/goodix_primitives.c": "c60cc6e9be027b52490d99b87f2cf8c1a8db12dd96291ffc0126cc603b427986",
+    "r1/src/vendor/goodix_primitives/goodix_primitives.h": "7d660881df66a68afa2fdd918f46a59361700370e3f3904467e84d1430b0c659",
+    "build/sources-goal-r1-goodix-gsensor-stop/report.json": "b39110f3b915baba1e0a3ed573b950bd0fafc01c1723ae3818ae745d0a2cbdce",
+    "r1/src/sources.json": "209e4c6075b5f5eb494505a54f32ca5e2ea7ffa2d08408775e9176e434161c9e",
+    "r1/symbols/function-frontier.csv": "e709064d4d19aaacd746bd2aea7b0e0a3c6c455139371e74012db7788c8b3afb",
+    "tools/build/source-plan.json": "4d46e8c038db79a174a2d719086fd0be80503ca7cdbfc2c51e5ed3d30d293064"
+  },
+  "source_plan_changed": false
+}

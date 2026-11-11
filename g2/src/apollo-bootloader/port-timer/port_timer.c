@@ -2,6 +2,7 @@
  * Constants are pinned to the authenticated image's literal pools. */
 #include "port_timer.h"
 
+#include <stdbool.h>
 #include <stddef.h>
 
 enum {
@@ -34,13 +35,12 @@ static inline volatile uint32_t *reg32(uint32_t address)
     return (volatile uint32_t *)(uintptr_t)address;
 }
 
-static inline uint32_t primask_save_disable(void)
-{
-    uint32_t saved;
-    __asm volatile("mrs %0, primask\n\tcpsid i"
-                   : "=r"(saved) :: "memory");
-    return saved;
-}
+/* am_hal_interrupt_master_disable (stock 0x41b8ec, upstream am_hal_interrupt.c)
+ * and the PRIMASK triple read (stock 0x422aac, runtime-memory/
+ * boot_triple_snapshot.c) are the single providers stock calls here. */
+extern uint32_t am_hal_interrupt_master_disable(void);
+extern void opencfw_boot_triple_snapshot(const volatile uint32_t *source,
+                                         uint32_t output[3]);
 
 static inline void primask_restore(uint32_t saved)
 {
@@ -127,11 +127,7 @@ __attribute__((noinline))
 uint32_t opencfw_bl_port_timer_read_counter(void)
 {
     uint32_t samples[3];
-    const uint32_t saved = primask_save_disable();
-    samples[0] = *reg32(PORT_STIMER_COUNTER);
-    samples[1] = *reg32(PORT_STIMER_COUNTER);
-    samples[2] = *reg32(PORT_STIMER_COUNTER);
-    primask_restore(saved);
+    opencfw_boot_triple_snapshot(reg32(PORT_STIMER_COUNTER), samples);
     return samples[0] == samples[1] ? samples[1] : samples[2];
 }
 
@@ -153,7 +149,7 @@ uint32_t opencfw_bl_port_timer_compare_set(uint32_t compare_id,
     while (probe == *software_compare || probe == *software_compare + 1u)
         probe = opencfw_bl_port_timer_read_counter();
 
-    saved = primask_save_disable();
+    saved = am_hal_interrupt_master_disable();
     now = opencfw_bl_port_timer_read_counter();
     if ((now - start) + 3u < delta) {
         compare_value = start + (delta - now) - 3u;
@@ -168,12 +164,12 @@ uint32_t opencfw_bl_port_timer_compare_set(uint32_t compare_id,
     return status;
 }
 
+/* Stock returns the ambient incoming R3 in R0; its only caller
+ * (port_start.c) declares it void and ignores R0, so 0 is returned. */
 uint32_t opencfw_bl_port_timer_configure(void)
 {
-    uint32_t incoming_r3;
     uint32_t old_clock;
     volatile uint32_t *const interval = reg32(PORT_TIMER_INTERVAL);
-    __asm volatile("mov %0, r3" : "=r"(incoming_r3));
 
     *interval = PORT_TIMER_CONFIGURED_VALUE;
     *reg32(PORT_TIMER_MAX_INTERVAL) = 0xffffffffu / *interval - 4u;
@@ -185,5 +181,16 @@ uint32_t opencfw_bl_port_timer_configure(void)
     (void)opencfw_bl_port_timer_compare_set(0u, *interval);
     (void)opencfw_bl_port_timer_clock_configure(
         (old_clock & 0x7ffffff0u) | 0x103u);
-    return incoming_r3;
+    return 0u;
+}
+
+/* Stock 0x41f3f0, AmbiqSuite am_hal_stimer_is_running: configured (0x200271bf,
+ * set by the timer configuration above), a clock selected, not frozen and not
+ * held in clear. Called by upstream am_hal_spotmgr_pcm2_1/2_2.c. */
+bool am_hal_stimer_is_running(void)
+{
+    const uint32_t config = *reg32(PORT_STIMER_BASE);
+    return *(volatile uint8_t *)(uintptr_t)PORT_TIMER_READY != 0u &&
+           (config & 0xfu) != 0u && (config >> 31) == 0u &&
+           ((config >> 30) & 1u) == 0u;
 }

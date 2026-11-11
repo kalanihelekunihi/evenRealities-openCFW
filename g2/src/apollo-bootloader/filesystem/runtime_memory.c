@@ -4,11 +4,16 @@
 #include <stddef.h>
 #include <stdint.h>
 void *memcpy(void *out,const void *in,size_t size) {uint8_t *d=out;const uint8_t *s=in;for(size_t i=0;i<size;i++)d[i]=s[i];return out;}
-/* Stock 0x426C10 (memset_wrapper_426c10; stock calls IAR fill 0x41560C as (dst,n,c) and returns dst) */
-void *memset(void *out,int value,size_t size) {uint8_t *d=out;for(size_t i=0;i<size;i++)d[i]=(uint8_t)value;return out;}
+/* Stock 0x426C10 (memset_wrapper_426c10; stock calls IAR fill 0x41560C as (dst,n,c) and returns dst).
+ * The fill has one body: opencfw_iar_fill_native (initializer-callbacks/iar_memory_native/memory.c). */
+extern void *opencfw_iar_fill_native(void *out,uint32_t count,uint32_t value);
+void *memset(void *out,int value,size_t size) {(void)opencfw_iar_fill_native(out,(uint32_t)size,(uint32_t)value);return out;}
 int memcmp(const void *left,const void *right,size_t size) {const uint8_t *a=left,*b=right;for(size_t i=0;i<size;i++)if(a[i]!=b[i])return (int)a[i]-(int)b[i];return 0;}
 size_t strlen(const char *text) {size_t i=0;while(text[i])i++;return i;}
 char *strcpy(char *out,const char *in) {size_t i=0;do {out[i]=in[i];}while(in[i++]);return out;}
 char *strchr(const char *text,int character) {uint8_t c=(uint8_t)character;do {if((uint8_t)*text==c)return (char *)text;}while(*text++);return 0;}
 size_t strspn(const char *text,const char *set) {size_t i=0;for(;text[i];i++)if(!strchr(set,text[i]))break;return i;}
 size_t strcspn(const char *text,const char *set) {size_t i=0;for(;text[i];i++)if(strchr(set,text[i]))break;return i;}
+
+/* Stock entry names that branch straight to the provider above. */
+__typeof__(memset) opencfw_bl_clear __attribute__((alias("memset")));

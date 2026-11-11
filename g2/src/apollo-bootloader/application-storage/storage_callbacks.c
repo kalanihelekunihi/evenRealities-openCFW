@@ -16,7 +16,7 @@ const uint16_t opencfw_boot_storage_range_limits[4] = {
     0x0400u, 0x0800u, 0x0c00u, 0x1000u,
 };
 
-extern uint32_t opencfw_boot_control_critical_save(void);
+extern uint32_t am_hal_interrupt_master_disable(void);
 extern uint32_t opencfw_boot_mram_dispatch(uint32_t key, const void *source,
                                           uint32_t destination,
                                           uint32_t words);
@@ -68,7 +68,7 @@ static uint32_t program_with_critical_state(uint32_t destination,
                                            const void *source,
                                            uint32_t size)
 {
-    const uint32_t previous = opencfw_boot_control_critical_save();
+    const uint32_t previous = am_hal_interrupt_master_disable();
     (void)opencfw_boot_mram_dispatch(PROGRAM_KEY, source, destination,
                                      (size + 3u) >> 2);
     __asm__ volatile("msr primask, %0" :: "r"(previous) : "memory");
@@ -92,3 +92,11 @@ uint32_t opencfw_boot_storage_erase_validate_impl(uint32_t destination)
     return opencfw_boot_storage_range_valid(destination, 4u) != 0u
         ? 0u : UINT32_MAX;
 }
+
+/* Stock storage callback entries (0x41xxxx veneers) are the implementations. */
+__typeof__(opencfw_boot_storage_read_impl) opencfw_boot_storage_read
+    __attribute__((alias("opencfw_boot_storage_read_impl")));
+__typeof__(opencfw_boot_storage_program_impl) opencfw_boot_storage_program
+    __attribute__((alias("opencfw_boot_storage_program_impl")));
+__typeof__(opencfw_boot_storage_erase_validate_impl) opencfw_boot_storage_erase_validate
+    __attribute__((alias("opencfw_boot_storage_erase_validate_impl")));

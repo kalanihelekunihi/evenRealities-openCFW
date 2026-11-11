@@ -1,0 +1,65 @@
+{
+  "cases": 66208,
+  "passed": 66208,
+  "failures": [],
+  "exhaustive_halfwords": 65536,
+  "fpscr_mode_cases": 160,
+  "partial_and_full_word_cases": 512,
+  "callback_depths": [
+    [
+      [
+        -8
+      ],
+      [
+        -16
+      ]
+    ]
+  ],
+  "source_bridge_size": 10,
+  "source_body_size": 80,
+  "other_function_and_data_sections_unchanged": [
+    ".r1.temp.calibration",
+    ".r1.temp.s6f798",
+    ".r1.temp.s6f7d4",
+    ".text.r1_gxt310_one_shot",
+    ".text.r1_gxt310_one_shot_channel0",
+    ".text.r1_gxt310_one_shot_channel2",
+    ".text.r1_gxt310_temperature_channel0",
+    ".text.r1_gxt310_temperature_channel2",
+    ".text.r1_temperature_calibration_read",
+    ".text.r1_temperature_pair_read_calibrated"
+  ],
+  "other_source_units_unchanged": 561,
+  "imports_unchanged": true,
+  "application_imports": 214,
+  "bootloader_imports": 34,
+  "report": "build/sources-goal-r1-temp-convert/report.json",
+  "report_sha256": "aa9f3b81a161e205d889b76e6c499397242ff61f7a605594b23a1462c2b36df3",
+  "manifest_sha256": "853798d70673de8cb97ab199ed0346162136e023b446e79a90de6af63a1b5be8",
+  "stock_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "rea": {
+    "path": "build/goal-r1-temp-convert/REA.json",
+    "sha256": "08cb9f49358835c3fb1b6dea7aa533a8a95be3a77ceaaa7741bb41612ab2ef04",
+    "procedure": "0x6f600"
+  },
+  "source_sha256": {
+    "r1/src/application/runtime/native_temperature.c": "2760fe104055776b02739b299b8073ea5e23c93a0489885c796e7c8ab08b3df3"
+  },
+  "probe_artifacts": {
+    "build/goal-r1-temp-convert/before.c": "18ab83a20b4ff6e73c6bbfb4aec284d68cd7a19017140028371343eed47ba272",
+    "build/goal-r1-temp-convert/stock.s": "e516309913cb7f8698360ac77788a6de1924ad53753b9f20e3a4e88539b8ff94",
+    "build/goal-r1-temp-convert/stock.elf": "0bee58bb18df92a64e400411f91271e571c96ab54b278b383d8a52affc570290",
+    "build/goal-r1-temp-convert/REA.json": "08cb9f49358835c3fb1b6dea7aa533a8a95be3a77ceaaa7741bb41612ab2ef04",
+    "build/goal-r1-temp-convert/rea-snapshot.json": "1953f7027458e96ea17d07de1140ebd652fd93e1078a31b9c648d9d2d38a243d",
+    "build/goal-r1-temp-convert/verify.py": "ea1fd59806ff796aa8896a04a98c91ade6fe05e98d58b65fe93940bd935371df",
+    "build/goal-r1-temp-convert/results.json": "d1a5b0a47cc39430cb74ac365ffbb22fe097badb3b6f8275ebcf968040b2584e",
+    "build/goal-r1-temp-convert/source.elf": "ffee8d3e1a6f8dc1323ddcef694ac377a19b2b412dbee60b4e8f6452c6fd8712"
+  },
+  "limits": [
+    "Native 56-byte instruction body plus eight bytes of constants is replaced by an 80-byte C body and ten-byte frame bridge; no byte identity or provider qualification.",
+    "Only the transfer callback is modeled. Native and compiled C floating-point instructions execute in Cortex-M4 emulation. No physical sensor, FPU, bus timing, or calibration accuracy claim.",
+    "Native scratch at caller SP-8 and full-word R3 restore are retained; transfer callback SP is SP-8 in native and SP-16 in C. Private C frame, faults, exception/lazy-FPU stacking and timing identity are not established.",
+    "All 65536 input halfwords are tested under default FPSCR. Other rounding/flag modes cover selected edge values, not the complete cross product.",
+    "Manifest eligibility and imports are unchanged. Full firmware linking, boot integration, source completeness and whole-image byte identity remain open; no G2 gate or source-plan change."
+  ]
+}

@@ -1,0 +1,262 @@
+{
+  "schema_version": 1,
+  "sources": [
+    "r1/src/application/runtime/native_iqs_audit.c",
+    "r1/src/application/runtime/native_formatter_wrappers.c",
+    "r1/src/application/runtime/native_retained_log.c"
+  ],
+  "native_roots": [
+    "0x41a40",
+    "0x38080",
+    "0x380dc",
+    "0x7f030"
+  ],
+  "report": "build/sources-goal-r1-iqs-audit-final-c/report.json",
+  "tested_report": "build/sources-goal-r1-iqs-audit-c/report.json",
+  "tested_provider_objects_match_final_report": true,
+  "compiled_units": 839,
+  "application_imports": 75,
+  "added_imports": [],
+  "removed_imports": [
+    "r1_iqs7211e_ati_error_audit_policy"
+  ],
+  "prior_objects_unchanged": 834,
+  "changed_generated_objects": [
+    [
+      "r1-bootloader",
+      "{gen}/r1_startup_vectors.S"
+    ],
+    [
+      "r1-bootloader",
+      "{gen}/r1_uecc.c"
+    ]
+  ],
+  "changed_existing_allocated_sections": {
+    "r1/src/application/runtime/native_formatter_wrappers.c": [
+      ".text.snprintf",
+      ".text.vsnprintf"
+    ],
+    "r1/src/application/runtime/native_retained_log.c": [
+      ".text.r1_retained_log_body"
+    ]
+  },
+  "verification": {
+    "stock_C_pairs": {
+      "throttle_wrap_boundaries": 400,
+      "channel_masks": 16,
+      "sample_position_boundaries": 270,
+      "live_log_modes": 256,
+      "live_provider_mutations": 96,
+      "cleared_partial_reads": 54,
+      "formatter_return_guard": 6,
+      "seeded_audit": 256
+    },
+    "total_pairs": 1354,
+    "C_only_empty_list_sink_checks": 14,
+    "independent_statistics_oracle_cases": 6,
+    "actual_C_formatter_ports_transport_registry": false,
+    "standard_copy_fill_modeled": true,
+    "provider_sources": [
+      "r1/src/application/runtime/native_iqs_audit.c",
+      "r1/src/application/runtime/memory_eabi.c"
+    ],
+    "REA_bytes_match": true,
+    "callee_saved_integer_FP_stack_guards_masks": true,
+    "device_execution": false
+  },
+  "actual_formatter_ports_transport_registry_integration": {
+    "stock_C_pairs": {
+      "throttle_wrap_boundaries": 400,
+      "channel_masks": 16,
+      "sample_position_boundaries": 270,
+      "live_log_modes": 256,
+      "live_provider_mutations": 96,
+      "cleared_partial_reads": 54,
+      "seeded_audit": 16
+    },
+    "total_pairs": 1108,
+    "C_only_empty_list_sink_checks": 14,
+    "independent_statistics_oracle_cases": 6,
+    "actual_C_formatter_ports_transport_registry": true,
+    "standard_copy_fill_modeled": true,
+    "provider_sources": [
+      "r1/src/application/runtime/native_iqs_audit.c",
+      "r1/src/application/runtime/native_formatter_wrappers.c",
+      "r1/src/application/runtime/native_formatter_core.c",
+      "r1/src/application/runtime/integer_eabi.c",
+      "third-party/upstream/llvm-compiler-rt-format-20.1.8/udivmoddi4.c",
+      "r1/src/application/runtime/native_formatter_output.c",
+      "r1/src/application/runtime/native_formatter_decimal.c",
+      "r1/src/application/runtime/native_formatter_unsigned.c",
+      "r1/src/application/runtime/native_formatter_product.c",
+      "r1/src/application/runtime/native_formatter_add.c",
+      "r1/src/application/board/native_touch_transport.c",
+      "r1/src/application/board/native_peripheral_bindings.c",
+      "r1/src/application/registry/stock_registry.c",
+      "third-party/upstream/musl-memory-1.2.5/strcmp.c",
+      "r1/src/application/runtime/memory_eabi.c"
+    ],
+    "REA_bytes_match": true,
+    "callee_saved_integer_FP_stack_guards_masks": true,
+    "device_execution": false
+  },
+  "formatter_variadic_verification": {
+    "stock_C_pairs": {
+      "literal": 60,
+      "integer_stream": 2016,
+      "aligned_mixed_stream": 60,
+      "aligned_first_wide": 60,
+      "star_stream": 180,
+      "strings_char_count": 108,
+      "binary64_stream": 432
+    },
+    "total_pairs": 2916,
+    "actual_C_formatter_core": true,
+    "standard_copy_fill_modeled": true,
+    "provider_sources": [
+      "r1/src/application/runtime/native_formatter_wrappers.c",
+      "r1/src/application/runtime/native_formatter_core.c",
+      "r1/src/application/runtime/integer_eabi.c",
+      "third-party/upstream/llvm-compiler-rt-format-20.1.8/udivmoddi4.c",
+      "r1/src/application/runtime/native_formatter_output.c",
+      "r1/src/application/runtime/native_formatter_decimal.c",
+      "r1/src/application/runtime/native_formatter_unsigned.c",
+      "r1/src/application/runtime/native_formatter_product.c",
+      "r1/src/application/runtime/native_formatter_add.c"
+    ],
+    "ordinary_AAPCS_outputs_only": true,
+    "device_execution": false
+  },
+  "retained_logger_typed_va_list_integration": {
+    "stock_C_pairs": 224,
+    "actual_C_retained_body_and_formatter": true,
+    "standard_copy_fill_and_crash_stdout_callbacks_modeled": true,
+    "ordinary_AAPCS_outputs_only": true,
+    "device_execution": false
+  },
+  "mutants": [
+    {
+      "name": "first_sequence",
+      "source": "r1/src/application/runtime/native_iqs_audit.c",
+      "rejected": true
+    },
+    {
+      "name": "throttle_boundary",
+      "source": "r1/src/application/runtime/native_iqs_audit.c",
+      "rejected": true
+    },
+    {
+      "name": "report_stamp",
+      "source": "r1/src/application/runtime/native_iqs_audit.c",
+      "rejected": true
+    },
+    {
+      "name": "read_register",
+      "source": "r1/src/application/runtime/native_iqs_audit.c",
+      "rejected": true
+    },
+    {
+      "name": "disabled_channel",
+      "source": "r1/src/application/runtime/native_iqs_audit.c",
+      "rejected": true
+    },
+    {
+      "name": "minimum",
+      "source": "r1/src/application/runtime/native_iqs_audit.c",
+      "rejected": true
+    },
+    {
+      "name": "maximum",
+      "source": "r1/src/application/runtime/native_iqs_audit.c",
+      "rejected": true
+    },
+    {
+      "name": "geometry",
+      "source": "r1/src/application/runtime/native_iqs_audit.c",
+      "rejected": true
+    },
+    {
+      "name": "format_limit",
+      "source": "r1/src/application/runtime/native_iqs_audit.c",
+      "rejected": true
+    },
+    {
+      "name": "sequence_live",
+      "source": "r1/src/application/runtime/native_iqs_audit.c",
+      "rejected": true
+    },
+    {
+      "name": "va_stream",
+      "source": "r1/src/application/runtime/native_formatter_wrappers.c",
+      "rejected": true
+    },
+    {
+      "name": "termination",
+      "source": "r1/src/application/runtime/native_formatter_wrappers.c",
+      "rejected": true
+    },
+    {
+      "name": "capacity",
+      "source": "r1/src/application/runtime/native_formatter_wrappers.c",
+      "rejected": true
+    }
+  ],
+  "new_owners": [
+    {
+      "symbol": "r1_iqs_ati_error_sequence",
+      "stock_address": "0x2000773c",
+      "cold_rw": "00000000"
+    },
+    {
+      "symbol": "r1_iqs_ati_last_report_tick",
+      "stock_address": "0x20007740",
+      "cold_rw": "00000000"
+    }
+  ],
+  "reused_model_configuration_owner": "r1_iqs_model_configuration",
+  "assembly_entry_bridges_removed": 2,
+  "contract": [
+    "Increment unsigned 32-bit sequence on every call, read ticks, then reload sequence; only sequence1 or unsigned tick delta >=10000 proceeds.",
+    "Store report tick before channel/provider calls. Clear 48 sample bytes and read E3 for 42 or48 bytes through the IQS port, ignoring status.",
+    "Capture model pointer before the read. Skip channels with captured configuration[5+i]==ff; null configuration activates every channel.",
+    "Compute active count/min/max and append unsigned channel values while the signed output offset is below152; zero active sets minimum0.",
+    "Read log modes live. Each enabled header sink decodes SN afresh, reads captured configuration halfword, and reloads sequence. Geometry is8x3 only for24 channels.",
+    "snprintf/vsnprintf use ordinary C variadic entries over the selected Arm AAPCS single-pointer va_list representation, retaining the existing C core and bounded-output worker.",
+    "Retained log converts its saved raw argument stream to that typed va_list representation before calling the C wrapper."
+  ],
+  "limits": [
+    "Direct audit tests model ticks, channel count, SN decode, read/formatter/log providers. Deeper tests execute actual C formatter core, IQS ports, transport and registry against prepared device callbacks.",
+    "The new empty-list output when all channels are masked is defined C behavior. The native unwritten private list bytes are excluded from comparison; fourteen C sink checks per audit pass verify an empty string.",
+    "Sample buffers are cleared in both stock and C, so partial reads are compared directly. Formatter-return guard probes are controlled-provider tests; normal channel strings fit within160 bytes.",
+    "Formatter comparisons cover ordinary AAPCS outputs, destination/count writes, 32/64-bit stream alignment and sampled binary64 formats. They do not assert private saved-register/frame identity or exhaustive formatting semantics.",
+    "Retained logger tests execute actual C body/formatter with cold and warm contexts; crash initialization, stdout, and standard memory operations are modeled. Other existing variadic bridges remain outside this change.",
+    "Standard copy/fill are modeled due to the previously recorded Unicorn return/IT-state diagnostic. No firmware memory implementation is changed or physical memory-fault claim made.",
+    "The final retained caller was built and tested separately. All earlier-tested audit/formatter/provider objects are hash-identical in the final build.",
+    "Cold RW checks do not establish final runtime placement. Global sources-check still fails for pre-existing unlisted G2 resident_rom_thumb_set.S; R1 passes.",
+    "No final application link, physical bus timing, full call-chain stack budget or device boot proof; byte identity is not required."
+  ],
+  "evidence_files": {
+    "build/sources-goal-r1-iqs-audit-final-c/report.json": "9ac2b7d4ea1c72f6f761f1c8d10bc593ca245743670251d6b574b636787fa8eb",
+    "build/sources-goal-r1-iqs-audit-c/report.json": "3b0d4e805d998ad741de5b517d1540ca9a4a4dca070abbee99f967ee1137df17",
+    "r1/src/sources.json": "1ae465039bfba32aaaa54f7d6cadcd302c66b5b24939d59a081310827d15f5d2",
+    "r1/src/application/runtime/native_iqs_audit.c": "3b2c5f1ce4601b98b4a21f4ffabaf44268e0956830bec5c2bfb65c313ed35dc9",
+    "r1/src/application/runtime/native_formatter_wrappers.c": "f4d77dfd7dce77ef45b76ac8ac96c2615b9307fb8279ac6e554712f8a1aec3ea",
+    "r1/src/application/runtime/native_retained_log.c": "b9fd54945ad16e6e04743c2753f1c14b1019c63201241428d88e3c1e613562ed",
+    "r1/src/application/board/native_iqs_state.h": "352eae0140e2e168e18ce3556c539baf1ec12aa60ea93157aecd46f45fdec207",
+    "build/goal-r1-fstorage-registry/expanded-rw.bin": "87fdee392022fdbe23dd0daf3e859fb14f3ce26ba3e8403aab56dc9d9a913317",
+    "build/goal-r1-iqs-audit-c/support.py": "009cfef1a5c7b9a809acaf300347eee13fe1d49f29d53e7effce2aaf45add346",
+    "build/goal-r1-iqs-audit-c/verify.py": "5bdae246a4110b9655ddaf38c7784880462d2e7d73f6add6a84b6e849abc7e87",
+    "build/goal-r1-iqs-audit-c/audit/verification.json": "f56b53e4fbda88f0a24bd1ece061000a94774586236ed7115f587254c920b0c2",
+    "build/goal-r1-iqs-audit-c/audit/integration.json": "52c7ddefc46c7bbfe8d1d2f69556eee942208dcac7512286c90809833dc419ab",
+    "build/goal-r1-iqs-audit-c/formatter.py": "4c2d81638b90d5004a54b7b4baf6a707dd0fa08f88b0115e109cf85d10505d41",
+    "build/goal-r1-iqs-audit-c/formatter/verification.json": "8c9fe030ad2125a28c403e72f983a1c51b74bf9e9584502ff1a33ad1b70d6f7a",
+    "build/goal-r1-iqs-audit-c/retained.py": "655fc3d3e45384fb210113c79afa06c5e9d01a1b31bc0775b65a43b7c8cdb84e",
+    "build/goal-r1-iqs-audit-c/retained/verification.json": "303d4ceb6ca27ec1e2074db8f20a226e5c805ccdc0fbb6b574e38def42f27203",
+    "build/goal-r1-iqs-audit-c/mutants.py": "681f5ead72396a8d03b4859bac5c9604a1e872adb73607dc1a22b73d653315c2",
+    "build/goal-r1-iqs-audit-c/mutant-audit.py": "a46b569dc107b55a25e9b8efbe35e14f8b889c8955fa2845f332f23177e95d88",
+    "build/goal-r1-iqs-audit-c/mutant-formatter.py": "8b3243e5ace94b229b5da6a3b3750bfb918772f6ff706721191dfd32cd62610b",
+    "build/goal-r1-iqs-audit-c/mutants.json": "ee3df506cf603ac1403594ef4f9c0164178ed1b92faf8b3abd1caed9504377ac",
+    "build/goal-r1-iqs-audit-c/sources-check.log": "93bdc689c679e9eb564c9466131413ca45803cebfc25cfbaca2b743d9fe8e7c7",
+    "r1/docs/reference/iqs-audit-rea-review.json": "8f2592cdf5a59ce34725ef2961ccf10a374fa0c9dcde11ba7e4e62f70d3a1986"
+  }
+}

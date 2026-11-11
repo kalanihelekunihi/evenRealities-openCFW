@@ -1,0 +1,13 @@
+# R1 C response headers, serial accessor and time providers
+
+The ordinary C implementation replaces seven naked assembly entry bridges: ACK header, inverse flag header, checked send, product serial, serial response, recovery-needed query and timeout callback. Advertising and touch now share one typed serial getter; its legacy advertising name aliases the same body. The stock getter at `0x7ba78` has one implementation.
+
+The normal open-toolchain report is `build/sources-goal-r1-serial-final-c/report.json`: 855 compiled units and successful application/bootloader relocatable compositions. Imports remain 62 and 22. Only three nongenerated objects change from the preceding route build: protocol serial, advertising configuration and time providers. Documentation and typed declarations also change. No new persistent state is introduced.
+
+Direct execution compares 24,844 stock/C cases and covers all 310 bytes across six stock entries. Exact packed response headers, full-word handle rejection, sequence reads, serial bytes and optional length aliases are checked. The C native memory-move adapter retains its destination-end return convention. There are 108 explicit failed-read cases: failed serial reads yield erased bytes/zero length, while failed advertising reads return zero. These are deliberate C policies, not stock equivalence claims.
+
+Another 8,592 cases execute the actual cached-class accessor, serial getter, advertising flag and touch model decoder. Class records remain unchanged and critical sections balance. The touch route regression passes 6,378 pairs through the actual command table, C checked-send and response headers.
+
+REA authenticates the stock recovery query at `0x7bb20` and timeout callback at `0x84c82`. All 3,376 successful-read/timeout comparisons pass, covering 54 stock instruction bytes. The timeout passes only the low argument byte to event 8; the existing BLE encoder copies that byte into its owned allocation before returning. Public callback semantics are void. Unavailable cached ring size now requests recovery instead of consuming saved caller scratch state; 771 failed-read cases check this policy. Nine compiled defects across the fixtures are rejected.
+
+The machine receipt [protocol-serial-c-review.json](protocol-serial-c-review.json) binds source, reports and ignored probe evidence. Direct tests model KV reads and the final response backend; cached consumers are tested separately with real C KV routines. Private stack aliases, scratch-register residue and incidental callback return values are excluded. Final linking/startup, physical flash, radio and touch electrical behavior remain unverified. This work does not establish a bootable complete firmware or byte identity.

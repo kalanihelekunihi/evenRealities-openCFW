@@ -1,56 +1,25 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_320314\n"
-".type opencfw_em9305_child_320314,@function\n"
-"opencfw_em9305_child_320314:\n"
-"L320314:\n"
-"push_s blink\n"
-"L320316:\n"
-"ld_s r0,[r0,0x24]\n"
-"L320318:\n"
-"ldb_s r1,[r0,0x2]\n"
-"L32031a:\n"
-"brne_s r1,0,L320320\n"
-"L32031c:\n"
-"ldb_s r1,[r0,0x1]\n"
-"L32031e:\n"
-"breq_s r1,0,L320348\n"
-"L320320:\n"
-"ldb r1,[r0,242]\n"
-"L320324:\n"
-"ldb r3,[r0,241]\n"
-"L320328:\n"
-"add_s r1,r1,1\n"
-"L32032a:\n"
-"stb r1,[r0,242]\n"
-"L32032e:\n"
-"breq_s r3,0,L320336\n"
-"L320330:\n"
-"extb_s r2,r1\n"
-"L320332:\n"
-"brhs.nt r2,0x2,L32033e\n"
-"L320336:\n"
-"brne_s r3,0,L320344\n"
-"L320338:\n"
-"extb.f 0,r1\n"
-"L32033c:\n"
-"beq_s L320344\n"
-"L32033e:\n"
-"bl.d opencfw_em9305_child_325e84\n"
-"L320342:\n"
-"mov_s r1,3\n"
-"L320344:\n"
-"pop_s blink\n"
-"L320346:\n"
-"j_s [blink]\n"
-"L320348:\n"
-"ldb r1,[r0,241]\n"
-"L32034c:\n"
-"brne_s r1,0,L320344\n"
-"L32034e:\n"
-"bl opencfw_em9305_child_320354\n"
-"L320352:\n"
-"b_s L320344\n"
-".size opencfw_em9305_child_320314,.-opencfw_em9305_child_320314\n"
-);
+#include <stdint.h>
+
+/* Native 0x320314..0x320356: advance the link's retry counter (+242) while
+ * either request byte (+1/+2) is set: with the hold flag (+241) the abort
+ * (native 0x325e84, reason 3) is raised from the second retry on, without
+ * it on any non-zero count. With no request and no hold, run native
+ * 0x320354 instead. */
+extern uint32_t opencfw_em9305_child_325e84(uintptr_t,uint32_t);
+extern uint32_t opencfw_em9305_child_320354(uintptr_t);
+
+void opencfw_em9305_child_320314(uintptr_t context)
+{
+    uintptr_t link = *(volatile uint32_t *)(context + 0x24u);
+    if (*(volatile uint8_t *)(link + 2u) != 0u || *(volatile uint8_t *)(link + 1u) != 0u) {
+        uint32_t count = *(volatile uint8_t *)(link + 242u) + 1u;
+        uint32_t hold = *(volatile uint8_t *)(link + 241u);
+        *(volatile uint8_t *)(link + 242u) = (uint8_t)count;
+        count &= 0xffu;
+        if (hold != 0u ? count >= 2u : count != 0u)
+            (void)opencfw_em9305_child_325e84(link, 3u);
+        return;
+    }
+    if (*(volatile uint8_t *)(link + 241u) == 0u)
+        (void)opencfw_em9305_child_320354(link);
+}

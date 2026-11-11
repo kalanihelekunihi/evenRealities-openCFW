@@ -14,10 +14,7 @@ extern uint32_t gx8002_xip_tws_context_gap_10206f80(void);
 
 static int32_t native_signed_divide(uint32_t numerator, uint32_t denominator)
 {
-    int32_t quotient;
-    __asm__ volatile("divs %0, %1, %2" : "=r"(quotient)
-                     : "r"(numerator), "r"(denominator) : "cc");
-    return quotient;
+    return (int32_t)numerator / (int32_t)denominator;   /* divs */
 }
 
 /* Stock 0x10026214 (gx8002_audio_record_callback) */

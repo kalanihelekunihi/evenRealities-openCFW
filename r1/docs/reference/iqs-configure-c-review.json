@@ -1,0 +1,297 @@
+{
+  "schema_version": 1,
+  "source": "r1/src/application/board/native_iqs_configure.c",
+  "native_roots": [
+    "0x2f880",
+    "0x728b4"
+  ],
+  "configuration_body_ranges": [
+    [
+      "0x2f880",
+      "0x2fc86"
+    ],
+    [
+      "0x2fcd4",
+      "0x2fdc8"
+    ]
+  ],
+  "report": "build/sources-goal-r1-iqs-configure-reviewed-c/report.json",
+  "compiled_units": 837,
+  "application_imports": 79,
+  "added_imports": [
+    "r1_batcfg_word_4c_get",
+    "r1_product_sn_letter_decode",
+    "r1_touch_slider_calibration"
+  ],
+  "removed_imports": [
+    "r1_iqs7211e_configure"
+  ],
+  "prior_objects_unchanged": 834,
+  "changed_generated_objects": [
+    [
+      "r1-bootloader",
+      "{gen}/r1_startup_vectors.S"
+    ],
+    [
+      "r1-bootloader",
+      "{gen}/r1_uecc.c"
+    ]
+  ],
+  "verification": {
+    "stock_C_pairs": {
+      "table_selector": 60,
+      "stock_configuration_tables": 320,
+      "configuration_byte_domain": 512,
+      "live_provider_mutations": 240,
+      "live_log_modes": 256,
+      "seeded_live_configuration": 256
+    },
+    "total_pairs": 1644,
+    "actual_C_ports_transport_registry": false,
+    "REA_bytes_match": true,
+    "stock_model_pointer_entries": 20,
+    "nonnull_model_records": 20,
+    "null_model_entries": 0,
+    "transfers_per_successful_configuration": 10,
+    "callee_saves_stack_guards_masks": true,
+    "device_execution": false
+  },
+  "actual_port_transport_registry_integration": {
+    "stock_C_pairs": {
+      "table_selector": 60,
+      "stock_configuration_tables": 320,
+      "configuration_byte_domain": 10,
+      "live_provider_mutations": 144,
+      "live_log_modes": 256,
+      "seeded_live_configuration": 16
+    },
+    "total_pairs": 806,
+    "actual_C_ports_transport_registry": true,
+    "REA_bytes_match": true,
+    "stock_model_pointer_entries": 20,
+    "nonnull_model_records": 20,
+    "null_model_entries": 0,
+    "transfers_per_successful_configuration": 10,
+    "callee_saves_stack_guards_masks": true,
+    "device_execution": false
+  },
+  "actual_IRQ_reset_configuration_model_port_transport_registry_integration": {
+    "worker_policy_pairs": 384,
+    "raw_selection_pairs": 32,
+    "float_callback_pairs": 104,
+    "adapter_pairs": 40,
+    "seeded_live_pairs": 16,
+    "actual_C_average_and_event_dispatch": true,
+    "average_oracle_pairs": 4,
+    "retained_or_cleared_partial_read_pairs": 32,
+    "defined_private_buffer_fallback_cases": 12,
+    "callee_saved_integer_and_FP_registers_checked": true,
+    "actual_C_ports_transport_registry": true
+  },
+  "mutants": [
+    {
+      "name": "divider_max",
+      "rejected": true
+    },
+    {
+      "name": "divider_zero",
+      "rejected": true
+    },
+    {
+      "name": "divider_full_word",
+      "rejected": true
+    },
+    {
+      "name": "late_configuration",
+      "rejected": true
+    },
+    {
+      "name": "table_index_mask",
+      "rejected": true
+    },
+    {
+      "name": "table_family",
+      "rejected": true
+    },
+    {
+      "name": "model_mode",
+      "rejected": true
+    },
+    {
+      "name": "channel_source",
+      "rejected": true
+    },
+    {
+      "name": "channel_tail",
+      "rejected": true
+    },
+    {
+      "name": "final_word",
+      "rejected": true
+    },
+    {
+      "name": "write_order",
+      "rejected": true
+    },
+    {
+      "name": "log_halfword",
+      "rejected": true
+    }
+  ],
+  "new_owners": [
+    {
+      "symbol": "r1_iqs_model_configuration",
+      "stock_address": "0x20007738",
+      "cold_rw": "00000000"
+    },
+    {
+      "symbol": "r1_iqs_model_table_b210a",
+      "stock_address": "0x20007760",
+      "entries": 10
+    },
+    {
+      "symbol": "r1_iqs_model_table_other",
+      "stock_address": "0x20007788",
+      "entries": 10
+    }
+  ],
+  "model_records": [
+    {
+      "index": 0,
+      "stock_address": "0x9bb40",
+      "bytes_hex": "0a00080307ffffffffffffffffff090a0b0c0d0e0f101112131415161700"
+    },
+    {
+      "index": 1,
+      "stock_address": "0x9bb5e",
+      "bytes_hex": "0a00080307ffffffffffffffffff090a0b0c0d0e0f101112131415161700"
+    },
+    {
+      "index": 2,
+      "stock_address": "0x9bb7c",
+      "bytes_hex": "0c00090207ffffffffffff060708090a0b0c0d0e0f101112131415161700"
+    },
+    {
+      "index": 3,
+      "stock_address": "0x9bb9a",
+      "bytes_hex": "0c00090207ffffffffffff060708090a0b0c0d0e0f101112131415161700"
+    },
+    {
+      "index": 4,
+      "stock_address": "0x9bbb8",
+      "bytes_hex": "0c00090107ffffff030405060708090a0b0c0d0e0f101112131415161700"
+    },
+    {
+      "index": 5,
+      "stock_address": "0x9bbd6",
+      "bytes_hex": "0b00090107ffffff030405060708090a0b0c0d0e0f101112131415161700"
+    },
+    {
+      "index": 6,
+      "stock_address": "0x9bbf4",
+      "bytes_hex": "0b00070107ffffff030405060708090a0b0c0d0e0f101112131415161700"
+    },
+    {
+      "index": 7,
+      "stock_address": "0x9bc12",
+      "bytes_hex": "0a00070007000102030405060708090a0b0c0d0e0f101112131415161700"
+    },
+    {
+      "index": 8,
+      "stock_address": "0x9bc30",
+      "bytes_hex": "0a00070007000102030405060708090a0b0c0d0e0f101112131415161700"
+    },
+    {
+      "index": 9,
+      "stock_address": "0x9bc4e",
+      "bytes_hex": "0a00070007000102030405060708090a0b0c0d0e0f101112131415161700"
+    },
+    {
+      "index": 10,
+      "stock_address": "0x9bc6c",
+      "bytes_hex": "0a00080306ffffffffffffffffff090a0b0c0d0e0f1011121314ffffff00"
+    },
+    {
+      "index": 11,
+      "stock_address": "0x9bc8a",
+      "bytes_hex": "0a00080306ffffffffffffffffff090a0b0c0d0e0f1011121314ffffff00"
+    },
+    {
+      "index": 12,
+      "stock_address": "0x9bca8",
+      "bytes_hex": "0c00090206ffffffffffff060708090a0b0c0d0e0f1011121314ffffff00"
+    },
+    {
+      "index": 13,
+      "stock_address": "0x9bcc6",
+      "bytes_hex": "0c00090206ffffffffffff060708090a0b0c0d0e0f1011121314ffffff00"
+    },
+    {
+      "index": 14,
+      "stock_address": "0x9bce4",
+      "bytes_hex": "0c00090105ffffff030405060708090a0b0c0d0e0f1011ffffffffffff00"
+    },
+    {
+      "index": 15,
+      "stock_address": "0x9bd02",
+      "bytes_hex": "0b00090105ffffff030405060708090a0b0c0d0e0f1011ffffffffffff00"
+    },
+    {
+      "index": 16,
+      "stock_address": "0x9bd20",
+      "bytes_hex": "0b00070105ffffff030405060708090a0b0c0d0e0f1011ffffffffffff00"
+    },
+    {
+      "index": 17,
+      "stock_address": "0x9bd3e",
+      "bytes_hex": "0a00070005000102030405060708090a0b0c0d0e0f1011ffffffffffff00"
+    },
+    {
+      "index": 18,
+      "stock_address": "0x9bd5c",
+      "bytes_hex": "0a00070005000102030405060708090a0b0c0d0e0f1011ffffffffffff00"
+    },
+    {
+      "index": 19,
+      "stock_address": "0x9bd7a",
+      "bytes_hex": "0a00070005000102030405060708090a0b0c0d0e0f1011ffffffffffff00"
+    }
+  ],
+  "all_model_bytes_and_table_relocations_verified": true,
+  "contract": [
+    "Decode product SN, select model table and publish its pointer, then calibrate; reload configuration after calibration.",
+    "Capture model choice once after calibration; get persisted full-word divider; only 1..31 overrides the configuration byte.",
+    "Logging modes and configuration halfword are loaded at native sink boundaries.",
+    "Send ten register blocks in stock order, lengths and byte contents; all port return statuses are ignored.",
+    "Configuration bytes for each block are read at their native transfer boundaries; the captured pointer is retained even if the context pointer later changes.",
+    "Table getter uses low-byte decoded-6 index and chooses the live family table after its model-check call."
+  ],
+  "limits": [
+    "The product-SN decoder, slider calibration and persisted word accessor remain real unresolved dependencies and are modeled.",
+    "Direct probes execute the actual C configuration/table selector; deeper probes add actual C IQS ports, transport and registry against prepared device callbacks.",
+    "IRQ probes also execute actual C recovery, detector, model/count/average/event paths; BSN accessor, error audit and new lower helpers are modeled.",
+    "Selector comparisons cover decoded 6..15 and low-byte-equivalent input words. Out-of-range table indices are not claimed safe.",
+    "Twenty aligned 30-byte data records match stock ROM, and twenty pointer relocations match the authenticated cold RW mapping. This does not prove final runtime placement or dynamic startup initialization.",
+    "An earlier draft used an incorrect table base; stock comparison rejected it. Only the reviewed build/report is current.",
+    "A replay diagnostic shows callback PC-redirection falling through under Unicorn after a conditional instruction. The passing harness executes real Thumb BX LR callback returns with an explicit Cortex-M4 CPU; firmware C was unchanged by that harness repair. This is not a physical fault claim.",
+    "Global sources-check still fails for the pre-existing unlisted G2 resident_rom_thumb_set.S; R1 passes.",
+    "No final application link, physical bus timing or device boot proof; byte identity is not required."
+  ],
+  "evidence_files": {
+    "build/sources-goal-r1-iqs-configure-reviewed-c/report.json": "c8a03aa9d1e44df85922bece86cfcfdb5eea82cfba842f2901cd9696c3adcbe8",
+    "r1/src/sources.json": "86c1a6682744232454787b2a098e5457b2272a919c750f9e9b33aba6fd8b4a8d",
+    "r1/src/application/board/native_iqs_configure.c": "6ce69d529b46e297bee1761420c787480b19285fdcf30b8b189e219d683bcf08",
+    "build/goal-r1-fstorage-registry/expanded-rw.bin": "87fdee392022fdbe23dd0daf3e859fb14f3ce26ba3e8403aab56dc9d9a913317",
+    "build/goal-r1-iqs-configure-c/verify.py": "46f3adca3f48d581e66b260ffeeb374a1b17c02b2415ad2968e9f6eae230cb8a",
+    "build/goal-r1-iqs-configure-c/verification.json": "0b9dd5479ab74c6d292d32c813f8d0a77eb62494a4b837339bf44bde302301c9",
+    "build/goal-r1-iqs-configure-c/integration.json": "0f4f95c34266ba0d585cf4c91a65d017cb1b18104cdc5136b69acd9c487b02db",
+    "build/goal-r1-iqs-configure-c/mutants.py": "d237f0cdc439cccad8b4ba4673a38088887b28220505036d13a06a43a46d543f",
+    "build/goal-r1-iqs-configure-c/mutants.json": "74aed0869012153cb1c39f77a9859e83338edede17a5451465965112f97bd581",
+    "build/goal-r1-iqs-configure-c/irq.py": "040dac8545d48dd06fd49260a7b4d8e9418cb12e98e77307be74da193d60aba6",
+    "build/goal-r1-iqs-configure-c/irq-integration.json": "211ea084515c86f0c692bdd4baa6973cf62671358f55d6914638d64e8edfc3f4",
+    "build/goal-r1-iqs-configure-c/sources-check.log": "c4c34356b0043e001cdaaba78287fe2bede93544536a1d2c38ba3c7057267052",
+    "build/goal-r1-iqs-configure-c/debug.py": "1dce65b6ef06d2cf1784eec54404092f46c356541dc256cd945d3beacafb80ad",
+    "build/goal-r1-iqs-configure-c/debug.log": "bafe3d2744fd8682ea7bfe0e0797abca52673113ce42613cb29fc77d23561633",
+    "r1/docs/reference/iqs-configure-rea-review.json": "478588be1eb4805fa2c59fc0f56db60b239800158f5351200721d22e86234b50"
+  }
+}

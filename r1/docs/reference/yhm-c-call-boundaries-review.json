@@ -1,0 +1,219 @@
+{
+  "source_change": "Only three noinline attributes; policy/state accesses unchanged",
+  "audit": {
+    "unchanged_executable_sections": [
+      ".text.r1_yhm_block_word_set",
+      ".text.r1_yhm_irq_register",
+      ".text.r1_yhm_register_write_native",
+      ".text.r1_yhm_transport_acquire",
+      ".text.r1_yhm_transport_complete",
+      ".text.r1_yhm_transport_release"
+    ],
+    "transaction_sizes_before_after": {
+      ".text.r1_yhm_register_read_record": [
+        80,
+        56
+      ],
+      ".text.r1_yhm_register_write_record": [
+        80,
+        56
+      ]
+    },
+    "native_helper_call_boundaries": {
+      "r1_yhm_register_read_record": [
+        [
+          "r1_yhm_transport_release",
+          10
+        ],
+        [
+          "r1_yhm_transport_acquire",
+          10
+        ],
+        [
+          "r1_yhm_request",
+          47
+        ],
+        [
+          "r1_yhm_request",
+          48
+        ],
+        [
+          "r1_yhm_transport_context",
+          47
+        ],
+        [
+          "r1_yhm_transport_context",
+          48
+        ],
+        [
+          "r1_stock_dispatch_10",
+          10
+        ],
+        [
+          "r1_yhm_transport_complete",
+          30
+        ]
+      ],
+      "r1_yhm_register_write_record": [
+        [
+          "r1_yhm_transport_release",
+          10
+        ],
+        [
+          "r1_yhm_transport_acquire",
+          10
+        ],
+        [
+          "r1_yhm_request",
+          47
+        ],
+        [
+          "r1_yhm_request",
+          48
+        ],
+        [
+          "r1_yhm_transport_context",
+          47
+        ],
+        [
+          "r1_yhm_transport_context",
+          48
+        ],
+        [
+          "r1_stock_dispatch_14",
+          10
+        ],
+        [
+          "r1_yhm_transport_complete",
+          30
+        ]
+      ]
+    },
+    "import_sets_unchanged": true
+  },
+  "source_report": "build/sources-goal-r1-yhm-boundaries/report.json",
+  "tests": {
+    "transactions": {
+      "passed": 7680,
+      "executions": 15360,
+      "actual_native_and_C_registry_lifecycle_completion": true,
+      "persistent_request_fields": true,
+      "ordered_context_request_accesses": true,
+      "driver_effects_survive_errors": true,
+      "tail_callback_original_sp_lr": true,
+      "source_report": "build/sources-goal-r1-yhm-boundaries/report.json",
+      "source_sizes": {
+        "r1_yhm_register_read_record": 56,
+        "r1_yhm_register_write_record": 56
+      },
+      "limitations": [
+        "Device methods/callbacks modeled; actual lifecycle/registry/completion bodies execute",
+        "Private frames/caller-clobbered registers/flags excluded",
+        "Null data is modeled as driver-defined behavior; no physical null-pointer claim",
+        "Concrete callbacks, arbitrary aliases/concurrency, electrical bus behavior and byte qualification unverified"
+      ]
+    },
+    "public": {
+      "passed": 3840,
+      "executions": 7680,
+      "actual_native_and_C_registry_lifecycle_completion": true,
+      "persistent_request_fields": true,
+      "ordered_context_request_accesses": true,
+      "driver_effects_survive_errors": true,
+      "tail_callback_original_sp_lr": true,
+      "source_report": "build/sources-goal-r1-yhm-boundaries/report.json",
+      "public_write_size": 6,
+      "limitations": [
+        "Device methods/callbacks modeled; actual lifecycle/registry/completion bodies execute",
+        "Private frames/caller-clobbered registers/flags excluded",
+        "Null data is modeled as driver-defined behavior; no physical null-pointer claim",
+        "Concrete callbacks, arbitrary aliases/concurrency, electrical bus behavior and byte qualification unverified"
+      ]
+    },
+    "complete": {
+      "passed": 1152,
+      "executions": 2304,
+      "actual_setter_complete_and_registry": true,
+      "post_close_callback_reload": true,
+      "raw_return_words": true,
+      "tail_callback_original_sp_lr": true,
+      "source_size": 30,
+      "source_report": "build/sources-goal-r1-yhm-boundaries/report.json",
+      "limitations": [
+        "Device close and callback targets modeled",
+        "Private frames/caller-clobbered registers/flags excluded",
+        "Concurrency, physical completion/IRQ behavior and byte qualification unverified"
+      ]
+    },
+    "callbacks": {
+      "passed": 1176,
+      "executions": 2352,
+      "actual_native_and_C_registry_dispatch": true,
+      "ordered_context_accesses": true,
+      "post_open_device_reload": true,
+      "shared_callback_word": true,
+      "source_sizes": {
+        "r1_yhm_irq_register": 34,
+        "r1_yhm_block_word_set": 16
+      },
+      "source_report": "build/sources-goal-r1-yhm-boundaries/report.json",
+      "limitations": [
+        "Device methods modeled; actual registry dispatch executes",
+        "Private frames/caller-clobbered registers/flags excluded",
+        "Concrete callbacks, concurrency, physical IRQ/power and byte qualification unverified"
+      ]
+    }
+  },
+  "qualification": {
+    "clang": {
+      "candidate_units": 5,
+      "compiled_units": 5,
+      "selected_symbols": [
+        "r1_yhm_register_write_native",
+        "r1_yhm_transport_acquire",
+        "r1_yhm_transport_release",
+        "r1_yhm_block_word_set"
+      ]
+    },
+    "gcc9": {
+      "candidate_units": 4,
+      "compiled_units": 4,
+      "selected_symbols": [
+        "r1_yhm_register_write_native"
+      ]
+    }
+  },
+  "source_plan_changed": false,
+  "hybrid_application_equals_official": true,
+  "hybrid_totals": {
+    "binary-pull-through": 642339,
+    "source-built": 3821,
+    "resource-file": 248
+  },
+  "source_completeness_proven": false,
+  "evidence": {
+    "build/goal-r1-yhm-boundaries/before.c": "e1f4650f8b44dbcf91a91e90c2396a6eeccd8a9562322f7d1d0179756867b50f",
+    "build/goal-r1-yhm-boundaries/audit.py": "f6df7106575e10f97333a655b0c51ff203ce855c5266c3ea8b651346407c8fd7",
+    "build/goal-r1-yhm-boundaries/audit.json": "e6049e992b5f40179164016e97a0b813f015d28e8622855031056132e8f890cc",
+    "build/goal-r1-yhm-boundaries/qualify.py": "58baa63dee70c2bd736ab5a115f67df472ff54ad1c97d810050bb35db7509e3e",
+    "build/goal-r1-yhm-boundaries/qualify-gcc.py": "64daa1eb7884dfd6beaee37b5b0ad71523b8a0bf85751b56accda073c987b735",
+    "build/goal-r1-yhm-boundaries/qualified/qualification.json": "60da24458c307f70d1aa8d14bef2794bc7a7d902a868b60066fff52860f08c65",
+    "build/goal-r1-yhm-boundaries/qualified/source-plan.json": "1df68839ac280d87b8a91e75261d4919e3653f108b4d364bb32482804989bd20",
+    "build/goal-r1-yhm-boundaries/gcc-qualified/qualification.json": "e005570e1ce5574f39bf8348208557efc1d4e2b1e7b39c032ff82abac959124a",
+    "build/goal-r1-yhm-boundaries/gcc-qualified/source-plan.json": "725254ee6ed96202cb1370623f7913769508f5047ff8feb65153cf4ddb469e85",
+    "build/goal-r1-yhm-boundaries/transactions/verify.py": "3360446cd4e3893fded1c8d54bc6d8f906c0419b5d881514de96e43389a16c86",
+    "build/goal-r1-yhm-boundaries/transactions/results.json": "b3187ada4f944efb262ce183a51069b2f7a38f6fca70f3b0897824704fe3473c",
+    "build/goal-r1-yhm-boundaries/public/verify.py": "88a807c24e60573085d51212a06e4f2fd5511e033f973679d5c7aceea057ffd3",
+    "build/goal-r1-yhm-boundaries/public/results.json": "98e8a763745dd04ebcfd6bb4ef6d5335d13b004067a082a7a9cde06b40e3a29b",
+    "build/goal-r1-yhm-boundaries/complete/verify.py": "4b486ce32adfe4b03cf58388ffdede760f325fbb7b4cf9c27563fa0a21da9c60",
+    "build/goal-r1-yhm-boundaries/complete/results.json": "a08312dd3d46a13eb0a8dc3cb323a04c84ce77b030b2430935950f25f7c2582d",
+    "build/goal-r1-yhm-boundaries/callbacks/verify.py": "022613b44044538d117b017994edde495f18e68e9fd5a79f391457f9e70721dc",
+    "build/goal-r1-yhm-boundaries/callbacks/results.json": "feaf6b1aa355fc404b0e7d674d23c77f3c5b39cab0878a7207edd8402bf0b2ef",
+    "build/hybrid-goal-r1-yhm-boundaries/build-report.json": "52261b580eb45ef6c9081d5a44650239fb413ae875d6a27fd28d4d186dfdaa97",
+    "build/hybrid-goal-r1-yhm-boundaries/payloads/application.bin": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "r1/src/application/board/native_yhm_transport.c": "7e686ec02f4709ee478e191a3c6da4c33998808dc3a899d5f02efd6ceda0eb17",
+    "build/sources-goal-r1-yhm-boundaries/report.json": "3ce82d3e1d312725efc4cce3e842f215042c97976b720fc971bfd683c3abf400",
+    "r1/src/sources.json": "e32450af0ad855a39e15e9c4029af6bc1b267b6f8d10085ad7714c4130b94bcc",
+    "tools/build/source-plan.json": "c9466961ae2b5ca59e30580d7aaa1d9ac7cb1d7872e190d4ca2127cc1c07e98a"
+  }
+}

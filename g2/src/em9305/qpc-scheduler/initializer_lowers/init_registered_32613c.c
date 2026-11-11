@@ -1,7 +1,7 @@
 #include <stdint.h>
 
 /* Native 0x32613c..0x3263ea: complete first connection packet constructor.
- * The ARC DSP operations are preserved as named instructions. Resident radio
+ * The ARC DSP operations are written as C arithmetic. Resident radio
  * effects remain in the selected child providers. */
 extern uintptr_t opencfw_em9305_radio_record_find_31aa64(uint32_t);
 extern uint32_t opencfw_em9305_phy_packet_alloc_32d2f0(uint32_t);
@@ -14,65 +14,39 @@ extern uintptr_t opencfw_em9305_radio_address_write_3045e8(uintptr_t,uint32_t,ui
 
 static uint32_t native_mpywhl(uint32_t left,uint32_t right)
 {
-#ifdef __arc__
-uint32_t result;__asm__ volatile("mpywhl %0,%1,%2":"=r"(result):"r"(left),"r"(right):"r58","r59","memory");return result;
-#else
-return (uint32_t)((int64_t)(int32_t)left*(int16_t)right);
-#endif
+return (uint32_t)left*(uint32_t)(int32_t)(int16_t)right;
 }
 static uint32_t native_mpywhul(uint32_t left,uint32_t right)
 {
-#ifdef __arc__
-uint32_t result;__asm__ volatile("mpywhul %0,%1,%2":"=r"(result):"r"(left),"r"(right):"r58","r59","memory");return result;
-#else
-return (uint32_t)((uint64_t)left*(uint16_t)right);
-#endif
+return (uint32_t)left*(uint16_t)right;
 }
 struct native_mac_div_result {uint32_t quotient,low;};
-/* Preserve the stock MOV R58 -> DIVU -> MACWHUL instruction order. On a
- * radix-2 DSP divider DIVU may update ACC0_LO, so moving R58 after division
- * would change the native low-word result. The host fallback models the
- * non-radix-2 case only; hardware selection remains an explicit gate. */
+/* Stock MOV r58,prior / DIVU / ADD / MACWHUL: quotient and
+ * prior + denominator*(q+1)[15:0].
+ * A zero divisor traps: stock sets STATUS32.DZ at startup (0x302b1a) and the
+ * EV_DivZero handler 0x30f170 resets the chip; C division emits the same DIVU.
+ * MetaWare scheduled the accumulator load before the DIVU, so DIVU does not
+ * disturb ACC0 on this core; the C uses that reading. */
 static struct native_mac_div_result native_divu_macwhul(
     uint32_t numerator,uint32_t denominator,uint32_t prior)
 {
-#ifdef __arc__
-    uint32_t quotient=prior,iteration,low;
-    __asm__ volatile("mov r58,%3\n\tdivu %0,%4,%5\n\tadd %1,%0,1\n\tmacwhul %2,%5,%1"
-        : "+&r"(quotient),"=&r"(iteration),"=&r"(low)
-        : "r"(prior),"r"(numerator),"r"(denominator)
-        : "r58","r59","memory");
-    struct native_mac_div_result result={quotient,low};return result;
-#else
-    uint32_t quotient=denominator==0u?prior:numerator/denominator;
+    uint32_t quotient=numerator/denominator;
     struct native_mac_div_result result={quotient,prior+(uint32_t)((uint64_t)denominator*(uint16_t)(quotient+1u))};
     return result;
-#endif
 }
+/* prior: register stock DIVU leaves only for a zero divisor with DZ clear. */
 static uint32_t native_divu_prior(uint32_t numerator,uint32_t denominator,uint32_t prior)
 {
-#ifdef __arc__
-__asm__ volatile("divu %0,%1,%2":"+r"(prior):"r"(numerator),"r"(denominator):"memory");return prior;
-#else
-return denominator==0u?prior:numerator/denominator;
-#endif
+(void)prior;return numerator/denominator;
 }
 static uint32_t native_mpymu(uint32_t left,uint32_t right)
 {
-#ifdef __arc__
-uint32_t result;__asm__ volatile("mpymu %0,%1,%2":"=r"(result):"r"(left),"r"(right):"r58","r59","memory");return result;
-#else
-return (uint32_t)(((uint64_t)left*right)>>32u);
-#endif
+return (uint32_t)(((uint64_t)left*(uint32_t)right)>>32);
 }
 struct product_pair {uint32_t low,high;};
 static struct product_pair native_mpydu(uint32_t left,uint32_t right)
 {
-#ifdef __arc__
-register uint32_t low __asm__("r4"),high __asm__("r5");__asm__ volatile("mpydu r4,%2,%3":"=r"(low),"=r"(high):"r"(left),"r"(right):"r58","r59","memory");struct product_pair p={low,high};return p;
-#else
 uint64_t product=(uint64_t)left*right;struct product_pair p={(uint32_t)product,(uint32_t)(product>>32u)};return p;
-#endif
 }
 
 uint32_t opencfw_em9305_init_registered_32613c(uintptr_t root)
@@ -180,11 +154,7 @@ uint32_t opencfw_em9305_init_registered_32613c(uintptr_t root)
     flag=0u;
     if(mode==2u) {
         uint32_t bits=*(volatile uint32_t *)(record+20u)&0xc000u;
-#ifdef __arc__
-        __asm__ volatile("bxor.f 0,%1,14\n\tmov.eq %0,16":"+r"(flag):"r"(bits):"cc","memory");
-#else
         if(bits==0x4000u)flag=16u;
-#endif
     }
 flag_ready:
     uint32_t channel=*(volatile uint8_t *)(record+66u);

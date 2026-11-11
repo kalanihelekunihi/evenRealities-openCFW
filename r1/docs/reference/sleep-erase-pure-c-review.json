@@ -1,0 +1,135 @@
+{
+  "schema_version": 1,
+  "scope": "R1 sleep-sector count, erase-all and registered erase event in ordinary C",
+  "report": "build/sources-goal-r1-sleep-erase-c/report.json",
+  "comparison_report": "build/sources-goal-r1-health-clear-final-c/report.json",
+  "audit": {
+    "compiled_units": 863,
+    "application_imports": 64,
+    "bootloader_imports": 22,
+    "unchanged_prior_nongenerated_objects": 852,
+    "changed_prior_nongenerated_objects": [
+      "r1/src/application/runtime/native_sleep_record.c"
+    ],
+    "normal_object_equals_direct_and_parent_probes": true,
+    "manifest_and_source_plan_unchanged": true,
+    "new_mutable_persistent_bytes": 0,
+    "assembly_entries_replaced_with_C": 3,
+    "preserved_parent_sections": {
+      "unchanged_parent_sections_and_normalized_relocations": [
+        ".text.r1_sleep_record_store",
+        ".text.r1_event_service_0008dc94"
+      ],
+      "untouched_assembly_source_text": true,
+      "assembly_entries_replaced_with_C": 3,
+      "manifest_unchanged": true
+    }
+  },
+  "direct": {
+    "stock_C_comparisons": 18651,
+    "native_instruction_bytes_executed": {
+      "r1_sleep_erase_all": 48,
+      "r1_sleep_sector_count": 14,
+      "r1_event_service_0008dd88": 4
+    },
+    "all_256_byte_counts_and_partial_sector_sizes": true,
+    "live_partition_device_base_and_size_mutations": true,
+    "erase_status_ignored_as_stock": true,
+    "no_new_persistent_state": true,
+    "private_frame_void_registers_APSR_and_physical_NOR_unverified": true
+  },
+  "actual_record_store_recovery": {
+    "stock_C_record_store_recovery_comparisons": 2880,
+    "actual_parent_and_C_sector_count_erase_chain": true,
+    "FAL_selection_write_and_logging_modeled": true
+  },
+  "compiled_defects_rejected": [
+    {
+      "defect": "wide-sector-count",
+      "rejected": true,
+      "execution_failure": "AssertionError",
+      "log": "build/goal-r1-sleep-erase-c/wide-sector-count/test.log"
+    },
+    {
+      "defect": "wrong-size-shift",
+      "rejected": true,
+      "execution_failure": "AssertionError",
+      "log": "build/goal-r1-sleep-erase-c/wrong-size-shift/test.log"
+    },
+    {
+      "defect": "wrong-sector-stride",
+      "rejected": true,
+      "execution_failure": "AssertionError",
+      "log": "build/goal-r1-sleep-erase-c/wrong-sector-stride/test.log"
+    },
+    {
+      "defect": "skipped-last-sector",
+      "rejected": true,
+      "execution_failure": "AssertionError",
+      "log": "build/goal-r1-sleep-erase-c/skipped-last-sector/test.log"
+    },
+    {
+      "defect": "abort-on-erase-error",
+      "rejected": true,
+      "execution_failure": "AssertionError",
+      "log": "build/goal-r1-sleep-erase-c/abort-on-erase-error/test.log"
+    },
+    {
+      "defect": "wrong-erase-length",
+      "rejected": true,
+      "execution_failure": "AssertionError",
+      "log": "build/goal-r1-sleep-erase-c/wrong-erase-length/test.log"
+    },
+    {
+      "defect": "wrong-device-operation",
+      "rejected": true,
+      "execution_failure": "UcError",
+      "log": "build/goal-r1-sleep-erase-c/wrong-device-operation/test.log"
+    }
+  ],
+  "contract": [
+    "Partition null yields count0; otherwise count=(partition.length>>12)&255. Partial sectors discarded and count deliberately truncated to a byte.",
+    "Snapshot count before first command. For each index issue erase(partition.offset+(index<<12),4096), reloading live context partition/device and callback before each command.",
+    "Continue through all sectors regardless of erase return status, as stock. Registered event calls the same erase implementation.",
+    "No additional null guard is inferred for positive-count provider loss; valid live partition/device callbacks are required."
+  ],
+  "limits": [
+    "FAL callbacks modeled, including negative/success return values and live offset/partition/device/size mutations; count256 and larger sizes exercise native byte truncation.",
+    "Actual record-store parent assembly executes with the C count/erase functions; selection, fallback, writes and logging modeled.",
+    "Saved integer/FP registers, masks and caller stack guards checked. Private frames, incidental void registers and APSR excluded.",
+    "Physical NOR erase, failures, concurrency, power-loss behavior, final application linking and boot remain unverified.",
+    "This changes three entries in a partially assembly-based unit; other sleep storage assembly remains separate work."
+  ],
+  "evidence_files": {
+    "build/sources-goal-r1-sleep-erase-c/report.json": "e2ffcf91165367c8e980645e3394a72facafa3e92d91f623be97ef3dab22e8c3",
+    "build/sources-goal-r1-health-clear-final-c/report.json": "8a0955545ffd80c398acde26d988e4edbeb98995cf1b1081923e64a207b6b38c",
+    "r1/src/application/runtime/native_sleep_record.c": "db25b5f7fdd9976ad4d31c537f400803c08db4239614a237c09330686b612049",
+    "r1/src/application/board/native_battery_memory.h": "e646c981681787c87d8088f663239c9006beb4e4c1827e95854093f0628528b6",
+    "r1/src/sources.json": "6ea6ab6f16e97b34b73ee1fb683c7c49eb7228bf29fdbdb21f5aded6d4d13380",
+    "tools/build/source-plan.json": "eeb516e31b3310fb0718f36908977f8125723f7c5e0e86cd6744395826259a4d",
+    "build/goal-r1-sleep-erase-c/manifest-before.json": "6ea6ab6f16e97b34b73ee1fb683c7c49eb7228bf29fdbdb21f5aded6d4d13380",
+    "build/goal-r1-sleep-erase-c/source-before.c": "0098c3c5049d1780459c52199858878516085ed3f0b817ad9ed7469016b38c5d",
+    "build/goal-r1-sleep-erase-c/audit.py": "40bfe7e6d440a894478b62e71e7b31e0379976cf54d4299a760d3ce58cefcee5",
+    "build/goal-r1-sleep-erase-c/object-audit.json": "a17ddb5fbd1898e7cf94e7949a79eb1b83c2432691a36715bd44be3ae5b549a8",
+    "build/goal-r1-sleep-erase-c/record.py": "59ff73c04249fd837a8450815de3d8d28a723bff01605305907eb7e0ebb8b6c0",
+    "build/goal-r1-sleep-erase-c/rea-erase.json": "f7f2adb7f186dad1fff6def88097808b5da98282cef8830fdbbb6413ccde8d16",
+    "build/goal-r1-sleep-erase-c/rea-count.json": "8e3c087c5176d91ad9a505287bb14e77a9b52de5839f885fbc8b67dcd98ed0ab",
+    "build/goal-r1-sleep-erase-c/rea-event.json": "e6fc324e018184e0dd1018c7ed0db5c8e12fbb991f10ee485ee00955446b7476",
+    "build/goal-r1-sleep-erase-c/verify.py": "376143df80a290140bdb53c60db1d502f82e23eff14cc71e40e3702cd3a29ebe",
+    "build/goal-r1-sleep-erase-c/results.json": "fe81452660d9e790af16dbbae5f5a80fc5b40fb46f5144d4c0284b1a4dfed7c0",
+    "build/goal-r1-sleep-erase-c/verification.log": "60bd7ea1bee5689b3ac5a019b1cfda93c6103b6cbc577be1e554439f48316b77",
+    "build/goal-r1-sleep-erase-c/source.o": "8ca41c1419f44798f1609c60b9ac95637677d9b254744b0ee4872a98815e98e4",
+    "build/goal-r1-sleep-erase-c/source.elf": "22498ee8ff3a7851e3aca6b38acf3d575fcf4ff9853d48f7e42fdfe2a793ae8e",
+    "build/goal-r1-sleep-erase-c/make_pipeline.py": "ca9e81e7fb9987abad308d508cf9121fcb9a43b428e44a946b26f62b74736de5",
+    "build/goal-r1-sleep-erase-c/pipeline.py": "006880c4abfa366728d85b860a4d8590d0811e2eac97b31a68eae376f3dbe2d2",
+    "build/goal-r1-sleep-erase-c/pipeline/results.json": "2de31549dd59f8ded1dd4fa0b845acd5c6b053fc61062d6e652fe7fcbedee6a6",
+    "build/goal-r1-sleep-erase-c/pipeline.log": "97b409c09947ce717e2455dfb2b3d26ceb5cf4a5ed0234881428c67febdc3100",
+    "build/goal-r1-sleep-erase-c/pipeline/source.elf": "3a8cad8bdab729d40c5a8b3fa25b5793652301d655e3ffa4a35278576ebca959",
+    "build/goal-r1-sleep-erase-c/negative.py": "f200b1e31d13daeebb13486a7df86b6e2c96dbca17f5c98e8ea11c7fcc124752",
+    "build/goal-r1-sleep-erase-c/negative-verify.py": "c57cbef587df4e6f79b15ac1f25c1a6566b6078818463c73d70b472a4de6fa62",
+    "build/goal-r1-sleep-erase-c/negative.json": "d6680993ffe1b8bd3aa883e00d915110297d67dd48cf97ab1437fb00cc8b59b0",
+    "build/goal-r1-sleep-erase-c/negative.log": "d0f94c2adbe5e66bf519f5e0f245f7dfd5fc67c1fc1581f64d1bd930c1eba800",
+    "build/goal-r1-sleep-erase-c/build.log": "664d8c3264c24491aa3852455c68cb7c51375e62fda749c3a8434fae089b5021",
+    "build/goal-r1-sleep-erase-c/sources-check.log": "c56719af1d0b2d08393a257d3e2022d40896a70239925ecc83fc942850eca238"
+  }
+}

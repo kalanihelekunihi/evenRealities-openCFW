@@ -1,38 +1,13 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_316a68\n"
-".type opencfw_em9305_child_316a68,@function\n"
-"opencfw_em9305_child_316a68:\n"
-"L316a68:\n"
-"bmsk_s r1,r1,0x1\n"
-"L316a6a:\n"
-"bmsk_s r3,r3,0x8\n"
-"L316a6c:\n"
-"bmsk r12,r4,0x4\n"
-"L316a70:\n"
-"asl_s r1,r1,0x9\n"
-"L316a72:\n"
-"st_s r2,[r0,0]\n"
-"L316a74:\n"
-"bmsk r2,r5,0x3\n"
-"L316a78:\n"
-"asl_s r12,r12,0xb\n"
-"L316a7a:\n"
-"add_s r1,r1,r3\n"
-"L316a7c:\n"
-"asl_s r2,r2,0x10\n"
-"L316a7e:\n"
-"add_s r1,r1,r12\n"
-"L316a80:\n"
-"asl r6,r6,0x14\n"
-"L316a84:\n"
-"add_s r1,r1,r2\n"
-"L316a86:\n"
-"add_s r1,r1,r6\n"
-"L316a88:\n"
-"j_s.d [blink]\n"
-"L316a8a:\n"
-"st_s r1,[r0,0x4]\n"
-".size opencfw_em9305_child_316a68,.-opencfw_em9305_child_316a68\n"
-);
+#include <stdint.h>
+
+/* Native 0x316a68..0x316a8c: store the first word and a packed field word
+ * (bits 0..8 low, 9..10 kind, 11..15 a, 16..19 b, 20.. top). */
+void opencfw_em9305_child_316a68(uintptr_t out,uint32_t kind,uint32_t first,
+                                 uint32_t low,uint32_t a,uint32_t b,
+                                 uint32_t top)
+{
+    *(volatile uint32_t *)out=first;
+    uint32_t packed=((kind&3u)<<9)+(low&0x1ffu)+((a&0x1fu)<<11)
+                   +((b&0xfu)<<16)+(top<<20);
+    *(volatile uint32_t *)(out+4u)=packed;
+}

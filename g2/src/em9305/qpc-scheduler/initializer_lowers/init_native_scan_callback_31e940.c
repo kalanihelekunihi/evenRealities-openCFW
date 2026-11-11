@@ -1,133 +1,60 @@
-/* Native scan callback; packet fields, counters and all early-return paths retained. */
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_scan_callback_31e940\n"
-".type opencfw_em9305_scan_callback_31e940,@function\n"
-"opencfw_em9305_scan_callback_31e940:\n"
-"L31e940:\n"
-"enter_s [r13-r18,fp,blink]\n"
-"L31e942:\n"
-"ld_s r13,[r0,0x2c]\n"
-"L31e944:\n"
-"mov_s r17,0\n"
-"L31e946:\n"
-"ld_s r0,[r13,0x68]\n"
-"L31e948:\n"
-"breq.d.nt r0,0,L31e9f2\n"
-"L31e94c:\n"
-"sub_s sp,sp,0x8\n"
-"L31e94e:\n"
-"add2 r15,r13,0x2a\n"
-"L31e952:\n"
-"ldb_s r0,[r15,0x10]\n"
-"L31e954:\n"
-"breq.nt r0,0x6,L31e95c\n"
-"L31e958:\n"
-"brne.nt r0,0,L31e9f2\n"
-"L31e95c:\n"
-"ldb_s r0,[r15,0x14]\n"
-"L31e95e:\n"
-"breq.nt r0,0,L31e9f2\n"
-"L31e962:\n"
-"ld r2,[r15,0x4]\n"
-"L31e964:\n"
-"ld r1,[r15,0]\n"
-"L31e966:\n"
-"mov_s r16,0x804fd8\n"
-"L31e96c:\n"
-"add r0,r16,0x8\n"
-"L31e970:\n"
-"bl.d opencfw_em9305_radio_address_write_3045e8\n"
-"L31e974:\n"
-"mov_s r18,r0\n"
-"L31e976:\n"
-"ldb r0,[r18,57]\n"
-"L31e97a:\n"
-"ld r3,[r15,0x4]\n"
-"L31e97c:\n"
-"ld r2,[r15,0]\n"
-"L31e97e:\n"
-"ldb r1,[r13,186]\n"
-"L31e982:\n"
-"mov_s r14,0x805162\n"
-"L31e988:\n"
-"st r3,[r18,136]\n"
-"L31e98c:\n"
-"st r2,[r18,132]\n"
-"L31e990:\n"
-"bbit0.d.nt r0,0x1,L31e9cc\n"
-"L31e994:\n"
-"stb_s r1,[r14,0x1]\n"
-"L31e996:\n"
-"ld_s r3,[r13,0x54]\n"
-"L31e998:\n"
-"ld_s r12,[r13,0x58]\n"
-"L31e99a:\n"
-"ld r2,[r15,0xc]\n"
-"L31e99c:\n"
-"ld r1,[r15,0x8]\n"
-"L31e99e:\n"
-"ldb r0,[r13,187]\n"
-"L31e9a2:\n"
-"ldb r18,[r13,80]\n"
-"L31e9a6:\n"
-"st_s r3,[sp,0]\n"
-"L31e9a8:\n"
-"add_s r3,sp,0\n"
-"L31e9aa:\n"
-"bl.d opencfw_em9305_radio_peer_pair_303a40\n"
-"L31e9ae:\n"
-"st_s r12,[sp,0x4]\n"
-"L31e9b0:\n"
-"ld r2,[sp,0x4]\n"
-"L31e9b2:\n"
-"ld r1,[sp,0]\n"
-"L31e9b4:\n"
-"mov_s r13,r0\n"
-"L31e9b6:\n"
-"bl.d opencfw_em9305_radio_address_write_3045e8\n"
-"L31e9ba:\n"
-"add r0,r16,0x2\n"
-"L31e9be:\n"
-"lsr r0,r18\n"
-"L31e9c2:\n"
-"cmp_s r13,0\n"
-"L31e9c4:\n"
-"bmsk_s r0,r0,0\n"
-"L31e9c6:\n"
-"mov.ne r0,0x1\n"
-"L31e9ca:\n"
-"stb_s r0,[r14,0]\n"
-"L31e9cc:\n"
-"add3 r1,r16,0x31\n"
-"L31e9d0:\n"
-"bl.d opencfw_em9305_radio_encode_3239d4\n"
-"L31e9d4:\n"
-"mov_s r0,r16\n"
-"L31e9d6:\n"
-"mov_s r0,0x805a8b\n"
-"L31e9dc:\n"
-"ldb_s r0,[r0,0]\n"
-"L31e9de:\n"
-"bbit0.nt r0,0x2,L31e9f0\n"
-"L31e9e2:\n"
-"ldb_s r0,[r14,0x6]\n"
-"L31e9e4:\n"
-"breq_s r0,0,L31e9f0\n"
-"L31e9e6:\n"
-"add_s r0,r0,-1\n"
-"L31e9e8:\n"
-"extb.f 0,r0\n"
-"L31e9ec:\n"
-"stb_s r0,[r14,0x6]\n"
-"L31e9ee:\n"
-"bne_s L31e9f2\n"
-"L31e9f0:\n"
-"mov_s r17,1\n"
-"L31e9f2:\n"
-"mov_s r0,r17\n"
-"L31e9f4:\n"
-"leave_s [r13-r18,fp,blink,pcl]\n"
-".size opencfw_em9305_scan_callback_31e940,.-opencfw_em9305_scan_callback_31e940\n"
-);
+#include <stdint.h>
+
+/* Native 0x31e940..0x31e9f6: build the scan/advertising report block at
+ * 0x804fd8 from the active scanner (object +44, set +104) when its state
+ * (+184) is 0 or 6 and it has an address type (+188): write the advertiser
+ * address (+168/+172) at 0x804fe0 and mirror it at 0x805064, store the
+ * address type (+186) at 0x805163 and, when the report requests it (bit 1
+ * of 0x805019), resolve the peer pair (+176/+180, kind +187, current
+ * +84/+88) into 0x804fda with the resolved flag at 0x805162. Encode the
+ * report (0x805160). Returns 1 unless the limited report counter at
+ * 0x805168 (enabled by bit 2 of 0x805a8b) is still non-zero after its
+ * decrement; returns 0 when nothing was reported. */
+extern uintptr_t opencfw_em9305_radio_address_write_3045e8(uintptr_t output,
+    uint32_t low,uint32_t high);
+extern uint32_t opencfw_em9305_radio_peer_pair_303a40(uint32_t kind,
+    uint32_t low,uint32_t high,uintptr_t output);
+extern uint32_t opencfw_em9305_radio_encode_3239d4(uintptr_t output,
+                                                   uintptr_t input);
+
+static inline uint32_t r8(uintptr_t a){return *(volatile uint8_t *)a;}
+static inline uint32_t r32(uintptr_t a){return *(volatile uint32_t *)a;}
+
+uint32_t opencfw_em9305_scan_callback_31e940(uintptr_t object)
+{
+    uintptr_t scanner=r32(object+44u);
+    if(r32(scanner+104u)==0u)return 0u;
+    uint32_t state=r8(scanner+184u);
+    if(state!=6u&&state!=0u)return 0u;
+    if(r8(scanner+188u)==0u)return 0u;
+    (void)opencfw_em9305_radio_address_write_3045e8(0x804fe0u,r32(scanner+168u),
+                                                   r32(scanner+172u));
+    uint32_t request=r8(0x805019u);
+    uint32_t high=r32(scanner+172u),low=r32(scanner+168u);
+    uint32_t type=r8(scanner+186u);
+    *(volatile uint32_t *)0x805068u=high;
+    *(volatile uint32_t *)0x805064u=low;
+    *(volatile uint8_t *)0x805163u=(uint8_t)type;
+    if((request&2u)!=0u){
+        uint32_t pair[2];
+        uint32_t current_low=r32(scanner+84u),current_high=r32(scanner+88u);
+        uint32_t peer_high=r32(scanner+180u),peer_low=r32(scanner+176u);
+        uint32_t kind=r8(scanner+187u);
+        uint32_t options=r8(scanner+80u);
+        pair[0]=current_low;
+        pair[1]=current_high;
+        uint32_t resolved=opencfw_em9305_radio_peer_pair_303a40(kind,peer_low,
+                                                               peer_high,(uintptr_t)pair);
+        (void)opencfw_em9305_radio_address_write_3045e8(0x804fdau,pair[0],pair[1]);
+        uint32_t flag=(options>>1)&1u;
+        if(resolved!=0u)flag=1u;
+        *(volatile uint8_t *)0x805162u=(uint8_t)flag;
+    }
+    (void)opencfw_em9305_radio_encode_3239d4(0x804fd8u,0x805160u);
+    if((r8(0x805a8bu)&4u)==0u)return 1u;
+    uint32_t remaining=r8(0x805168u);
+    if(remaining==0u)return 1u;
+    remaining-=1u;
+    *(volatile uint8_t *)0x805168u=(uint8_t)remaining;
+    return (uint8_t)remaining!=0u?0u:1u;
+}

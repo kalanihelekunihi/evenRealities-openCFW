@@ -1,0 +1,156 @@
+{
+  "schema_version": 1,
+  "entries": {
+    "0x42bb0": [
+      "r1_event_callback_00042bb0",
+      14
+    ]
+  },
+  "report": "build/sources-goal-r1-persist-event-c/report.json",
+  "report_sha256": "4b7ff3605462241dc1bcf5a0ce9a8ef3c47745a50dd0f4bdf77ec2c116c211a8",
+  "unit": {
+    "source": "r1/src/application/board/native_event_callbacks.c",
+    "source_sha256": "f3033990bbdce679dd0140823fc8a70064d8ffc0f1791e4a35d3c8f007fcbc57",
+    "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-persist-event-c/r1/r1-application/r1__src__application__board__native_event_callbacks.c.o",
+    "object_sha256": "54f896d2756bbeeb8dfe6ad493c979212202d1eb25aeb314bc2e273679e405c4"
+  },
+  "behavior": {
+    "log": {
+      "pairs": 924,
+      "digest": "ae26f84d59a15d9387c42408a55119b2b4af5265dc4a094db467151043ee7b00",
+      "actual_C": [
+        "r1/src/application/runtime/native_log_persist.c",
+        "r1/src/application/runtime/native_log_bin_write.c",
+        "r1/src/application/runtime/native_log_bin_initialize.c",
+        "r1/src/application/board/native_event_callbacks.c",
+        "r1/src/application/board/structured_cache.c",
+        "r1/src/application/board/structured_cache_copy.c",
+        "r1/src/application/board/structured_log.c",
+        "third-party/upstream/musl-memory-1.2.5/memcpy.c"
+      ],
+      "modeled_boundaries": [
+        "fal_partition_find",
+        "fal_flash_device_find",
+        "r1_structured_log_mode_get",
+        "r1_structured_log_format",
+        "nrf_log_frontend_std_0",
+        "nrf_log_frontend_std_1",
+        "nrf_log_frontend_std_2",
+        "nrf_log_frontend_std_3",
+        "osKernelGetTickCount",
+        "osDelay",
+        "vPortEnterCritical",
+        "vPortExitCritical",
+        "r1_event_service_0005e0de",
+        "flash read/write/erase callbacks"
+      ],
+      "limits": [
+        "FAL finders, clock, delay, critical entry/exit, log sinks and post-event service modeled",
+        "Actual C cache extraction, memcpy, export flag access, persistence controller, initializer and writer execute together",
+        "Flash byte model allows successful full write/erase or failure with unchanged bytes; no physical NOR timing/programming proof",
+        "Thread-mode execution only; asynchronous IRQ/concurrency not covered",
+        "Private scratch, caller-clobbered registers and void returns excluded"
+      ]
+    },
+    "ep": {
+      "pairs": 1024,
+      "digest": "ed57bbc1652ebe68abd7e0d77d91411928c3ce588d3afbb8229d51828f6e7023",
+      "actual_C": "EP FAL initialization, scan and ensure with actual storage/flush/guard paths",
+      "modeled_boundaries": [
+        "xTaskGetTickCount",
+        "xQueueSemaphoreTake",
+        "xQueueGenericSend",
+        "r1_structured_log_mode_get",
+        "r1_structured_log_format",
+        "nrf_log_frontend_std_0",
+        "r1_event_service_000914a0",
+        "vPortEnterCritical",
+        "vPortExitCritical",
+        "nrf_log_frontend_std_2",
+        "nrf_log_frontend_std_1",
+        "fal_partition_find",
+        "fal_flash_device_find",
+        "xQueueCreateMutex",
+        "pvPortMalloc",
+        "vPortFree",
+        "indirect flash callbacks"
+      ],
+      "limits": [
+        "FAL lookup, heap/mutex allocation, queue/critical sections, clock, persistence and logging modeled",
+        "Flash reads fill a modeled 8 KiB sector image or retain existing scan buffer bytes",
+        "Reconstructed path prohibited from entering stock instructions",
+        "Private scratch, caller-clobbered registers and void returns excluded; storage-initializer return compared",
+        "No physical flash, heap behavior, real semaphore contention or async scheduling proof"
+      ]
+    }
+  },
+  "negative_controls": {
+    "missing-persistence": {
+      "compiled": true,
+      "rejected": true,
+      "probe": "log",
+      "diagnostic": "7b7b7b7b7b7b7b7b7b7b7b', '0000400000300000', '018fefb96994fc5540dac4b6ac6b74e664366a9887c60dc05f2177e4d413a7fd', '7f62c8679283a811d948b70a5d7238a0166a0d5da60e92108b3fb05a0e1b30c4'])], 'state': ['7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b55c30000c86b0120002000000010000000100000017b00027b7b7b7b0020022000210220001000007b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b', '0000400000300000', '018fefb96994fc5540dac4b6ac6b74e664366a9887c60dc05f2177e4d413a7fd', '7f62c8679283a811d948b70a5d7238a0166a0d5da60e92108b3fb05a0e1b30c4']})\n"
+    },
+    "missing-poll": {
+      "compiled": true,
+      "rejected": true,
+      "probe": "ep",
+      "diagnostic": "04006587050034120500658706003412060065870700341207006587080034120800658709003412090065870a0034120a0065870b0034120b0065870c0034120c0065870d0034120d0065870e0034120e0065870f0034120f00658769696969696969696969696969696969', '555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555', 'f6d2c578def4d657ebb2deccc0a50f9c69d1dfafe531de754956cf462dffb7dd'], 'returns': []})\n"
+    },
+    "reversed-order": {
+      "compiled": true,
+      "rejected": true,
+      "probe": "log",
+      "diagnostic": "7b7b7b7b7b7b7b7b7b7b7b', '0000400000300000', '018fefb96994fc5540dac4b6ac6b74e664366a9887c60dc05f2177e4d413a7fd', 'e312ca10a9b7e70689caa01e37cb370c58ce29fefb86112bb2c1b7a9d18ca6df'])], 'state': ['7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b55c30000c86b0120002000000010000000100000017b00017b7b7b7b0020022000210220001000007b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b', '0000400000300000', '018fefb96994fc5540dac4b6ac6b74e664366a9887c60dc05f2177e4d413a7fd', 'e312ca10a9b7e70689caa01e37cb370c58ce29fefb86112bb2c1b7a9d18ca6df']})\n"
+    },
+    "double-persistence": {
+      "compiled": true,
+      "rejected": true,
+      "probe": "log",
+      "diagnostic": "7b7b7b7b7b7b7b7b7b7b7b', '0000400000300000', '446bb54e4e73d76c39c596d7350ee9b74ee6d75eb7b9aaa0dee93356ddf6114e', 'af4ef0ec24db4ba287699344ad52acd45d7d482436dc9d959a4b9376610c618b'])], 'state': ['7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b11270000c86b0120002000000000000000000000017b00007b7b7b7b0020022000210220001000007b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b', '0000400000300000', '446bb54e4e73d76c39c596d7350ee9b74ee6d75eb7b9aaa0dee93356ddf6114e', 'af4ef0ec24db4ba287699344ad52acd45d7d482436dc9d959a4b9376610c618b']})\n"
+    },
+    "double-poll": {
+      "compiled": true,
+      "rejected": true,
+      "probe": "ep",
+      "diagnostic": "04006587050034120500658706003412060065870700341207006587080034120800658709003412090065870a0034120a0065870b0034120b0065870c0034120c0065870d0034120d0065870e0034120e0065870f0034120f00658769696969696969696969696969696969', '555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555', 'f6d2c578def4d657ebb2deccc0a50f9c69d1dfafe531de754956cf462dffb7dd'], 'returns': []})\n"
+    },
+    "added-length-gate": {
+      "compiled": true,
+      "rejected": true,
+      "probe": "log",
+      "diagnostic": "7b7b7b7b7b7b7b7b7b7b7b', '0000400000300000', '018fefb96994fc5540dac4b6ac6b74e664366a9887c60dc05f2177e4d413a7fd', '7f62c8679283a811d948b70a5d7238a0166a0d5da60e92108b3fb05a0e1b30c4'])], 'state': ['7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b55c30000c86b0120002000000010000000100000017b00027b7b7b7b0020022000210220001000007b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b', '0000400000300000', '018fefb96994fc5540dac4b6ac6b74e664366a9887c60dc05f2177e4d413a7fd', '7f62c8679283a811d948b70a5d7238a0166a0d5da60e92108b3fb05a0e1b30c4']})\n"
+    },
+    "added-payload-gate": {
+      "compiled": true,
+      "rejected": true,
+      "probe": "log",
+      "diagnostic": "7b7b7b7b7b7b7b7b7b7b7b', '0000400000300000', '018fefb96994fc5540dac4b6ac6b74e664366a9887c60dc05f2177e4d413a7fd', '7f62c8679283a811d948b70a5d7238a0166a0d5da60e92108b3fb05a0e1b30c4'])], 'state': ['7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b55c30000c86b0120002000000010000000100000017b00027b7b7b7b0020022000210220001000007b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b', '0000400000300000', '018fefb96994fc5540dac4b6ac6b74e664366a9887c60dc05f2177e4d413a7fd', '7f62c8679283a811d948b70a5d7238a0166a0d5da60e92108b3fb05a0e1b30c4']})\n"
+    },
+    "forced-instead-poll": {
+      "compiled": true,
+      "rejected": true,
+      "probe": "ep",
+      "diagnostic": "04006587050034120500658706003412060065870700341207006587080034120800658709003412090065870a0034120a0065870b0034120b0065870c0034120c0065870d0034120d0065870e0034120e0065870f0034120f00658769696969696969696969696969696969', '555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555', 'f6d2c578def4d657ebb2deccc0a50f9c69d1dfafe531de754956cf462dffb7dd'], 'returns': []})\n"
+    }
+  },
+  "audit": {
+    "unchanged_prior_objects": 768,
+    "changed_objects": [
+      [
+        "r1-application",
+        "r1/src/application/board/native_event_callbacks.c"
+      ]
+    ],
+    "changed_allocated_sections": [
+      ".text.r1_event_callback_00042bb0"
+    ],
+    "changed_relocation_sections": [],
+    "imports_unchanged": true,
+    "new_state": false
+  },
+  "source_check": "R1 passes: 769 units, 573 source files, 0 not built. Global check flags existing G2 resident_rom_thumb_set.S absent from manifest.",
+  "rea": "persist-event-c-rea.json",
+  "instruction_identity_proven": false,
+  "image_integration_proven": false
+}

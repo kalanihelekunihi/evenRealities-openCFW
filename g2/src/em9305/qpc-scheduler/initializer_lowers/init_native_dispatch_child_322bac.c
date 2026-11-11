@@ -1,153 +1,55 @@
-/* Full native setup; preserve callback and direct-child ARC register ABI. */
-__asm__(
-    ".text\n"
-    ".balign 4\n"
-    ".global opencfw_em9305_dispatch_child_322bac\n"
-    ".type opencfw_em9305_dispatch_child_322bac,@function\n"
-    "opencfw_em9305_dispatch_child_322bac:\n"
-    "L322bac:\n"
-    "enter_s [r13-r16,blink]\n"
-    "L322bae:\n"
-    "mov_s r15,r1\n"
-    "L322bb0:\n"
-    "mov_s r13,r0\n"
-    "L322bb2:\n"
-    "add3 r1,r0,0x33\n"
-    "L322bb6:\n"
-    "ld_s r0,[r15,0x24]\n"
-    "L322bb8:\n"
-    "stb 12,[r1]\n"
-    "L322bbc:\n"
-    "mov_s r14,r13\n"
-    "L322bbe:\n"
-    "mov_s r1,0\n"
-    "L322bc0:\n"
-    "bl.d opencfw_em9305_radio_access_mix_3188b8\n"
-    "L322bc4:\n"
-    "add r14,r14,398\n"
-    "L322bc8:\n"
-    "ld_s r3,[r15,0x34]\n"
-    "L322bca:\n"
-    "ld_s r2,[r15,0x30]\n"
-    "L322bcc:\n"
-    "lsr r1,r0,0x10\n"
-    "L322bd0:\n"
-    "st.as r0,[r13,103]\n"
-    "L322bd4:\n"
-    "xor_s r0,r0,r1\n"
-    "L322bd6:\n"
-    "sth.as r0,[r13,200]\n"
-    "L322bda:\n"
-    "add3 r0,r13,0x2c\n"
-    "L322bde:\n"
-    "stb 1,[r14]\n"
-    "L322be2:\n"
-    "st.as r3,[r13,89]\n"
-    "L322be6:\n"
-    "bl.d opencfw_em9305_radio_channel_transform_30e3fc\n"
-    "L322bea:\n"
-    "st.as r2,[r13,88]\n"
-    "L322bee:\n"
-    "ldh.as r0,[r13,174]\n"
-    "L322bf2:\n"
-    "ldb r2,[r14,86]\n"
-    "L322bf6:\n"
-    "ldb r1,[r14,-106]\n"
-    "L322bfa:\n"
-    "asl_s r0,r0,0x8\n"
-    "L322bfc:\n"
-    "stb_s r1,[r14,0x17]\n"
-    "L322bfe:\n"
-    "breq.d.nt r2,0,L322c92\n"
-    "L322c02:\n"
-    "st.as r0,[r13,104]\n"
-    "L322c06:\n"
-    "mov_s r0,r13\n"
-    "L322c08:\n"
-    "mov_s r1,r13\n"
-    "L322c0a:\n"
-    "mov r16,513\n"
-    "L322c0e:\n"
-    "add r0,r0,444\n"
-    "L322c12:\n"
-    "add r1,r1,485\n"
-    "L322c16:\n"
-    "mov_s r2,0x8\n"
-    "L322c18:\n"
-    "stb 1,[r14,55]\n"
-    "L322c1c:\n"
-    "bl.d opencfw_em9305_memcpy\n"
-    "L322c20:\n"
-    "sth.as r16,[r13,227]\n"
-    "L322c24:\n"
-    "ldb r2,[r14,46]\n"
-    "L322c28:\n"
-    "ld.as r0,[r13,103]\n"
-    "L322c2c:\n"
-    "ldb r12,[r14,47]\n"
-    "L322c30:\n"
-    "ldb r15,[r14,48]\n"
-    "L322c34:\n"
-    "ldb r11,[r14,49]\n"
-    "L322c38:\n"
-    "xor_s r2,r2,r0\n"
-    "L322c3a:\n"
-    "lsr r1,r0,0x8\n"
-    "L322c3e:\n"
-    "lsr r3,r0,0x10\n"
-    "L322c42:\n"
-    "lsr_s r0,r0,0x18\n"
-    "L322c44:\n"
-    "xor_s r1,r1,r12\n"
-    "L322c46:\n"
-    "xor_s r3,r3,r15\n"
-    "L322c48:\n"
-    "xor r0,r0,r11\n"
-    "L322c4c:\n"
-    "stb r2,[r14,46]\n"
-    "L322c50:\n"
-    "stb r1,[r14,47]\n"
-    "L322c54:\n"
-    "stb r3,[r14,48]\n"
-    "L322c58:\n"
-    "stb r0,[r14,49]\n"
-    "L322c5c:\n"
-    "mov_s r14,r13\n"
-    "L322c5e:\n"
-    "add r14,r14,428\n"
-    "L322c62:\n"
-    "add1 r1,r13,0x2e\n"
-    "L322c66:\n"
-    "mov_s r2,0x10\n"
-    "L322c68:\n"
-    "bl.d opencfw_em9305_memcpy\n"
-    "L322c6c:\n"
-    "mov_s r0,r14\n"
-    "L322c6e:\n"
-    "ld r3,[0x8028c0]\n"
-    "L322c76:\n"
-    "sth.as r16,[r13,234]\n"
-    "L322c7a:\n"
-    "breq_s r3,0,L322c92\n"
-    "L322c7c:\n"
-    "mov_s r0,0x805c3c\n"
-    "L322c82:\n"
-    "ld r0,[r0,0]\n"
-    "L322c84:\n"
-    "mov_s r2,1\n"
-    "L322c86:\n"
-    "sub_s r0,r13,r0\n"
-    "L322c88:\n"
-    "lsr_s r0,r0,0x9\n"
-    "L322c8a:\n"
-    "add_s r0,r0,6\n"
-    "L322c8c:\n"
-    "extb_s r1,r0\n"
-    "L322c8e:\n"
-    "jl_s.d [r3]\n"
-    "L322c90:\n"
-    "mov_s r0,r14\n"
-    "L322c92:\n"
-    "leave_s [r13-r16,blink,pcl]\n"
-    ".size opencfw_em9305_dispatch_child_322bac,.-opencfw_em9305_dispatch_child_322bac\n"
-);
+#include <stdint.h>
+
+/* Native 0x322bac..0x322c94: set up a new connection record from the
+ * connect parameters: mark the procedure (+408 = 12), derive the access
+ * address (+412) and its folded CRC seed (+400), copy and transform the
+ * channel map (+352/+356), store the interval (+416 = +348 << 8) and the
+ * hop byte. When encryption is resumed (+484), copy the stored SKD/IV
+ * material (+485 -> +444 with the access address mixed into bytes 0..3,
+ * +92 -> +428), set both 0x201 lengths and notify the key hook at
+ * *0x8028c0 with the record's 512-byte slot id + 6. */
+extern uint32_t opencfw_em9305_radio_access_mix_3188b8(uint32_t,uint32_t);
+extern uint32_t opencfw_em9305_radio_channel_transform_30e3fc(uintptr_t);
+extern void *opencfw_em9305_memcpy(void *,const void *,uint32_t);
+
+static uint32_t r32(uintptr_t a){return *(volatile uint32_t *)a;}
+static uint32_t r16(uintptr_t a){return *(volatile uint16_t *)a;}
+static uint32_t r8(uintptr_t a){return *(volatile uint8_t *)a;}
+static void w32(uintptr_t a,uint32_t v){*(volatile uint32_t *)a=v;}
+static void w16(uintptr_t a,uint32_t v){*(volatile uint16_t *)a=(uint16_t)v;}
+static void w8(uintptr_t a,uint32_t v){*(volatile uint8_t *)a=(uint8_t)v;}
+
+void opencfw_em9305_dispatch_child_322bac(uintptr_t record,uintptr_t parameters)
+{
+    w8(record+408u,12u);
+    uint32_t access=opencfw_em9305_radio_access_mix_3188b8(r32(parameters+0x24u),0u);
+    uint32_t high=r32(parameters+0x34u);
+    uint32_t low=r32(parameters+0x30u);
+    w32(record+412u,access);
+    w16(record+400u,access^(access>>16));
+    w8(record+398u,1u);
+    w32(record+356u,high);
+    w32(record+352u,low);
+    (void)opencfw_em9305_radio_channel_transform_30e3fc(record+352u);
+    uint32_t interval=r16(record+348u);
+    uint32_t resumed=r8(record+484u);
+    w8(record+421u,r8(record+292u));
+    w32(record+416u,interval<<8);
+    if(resumed==0u) return;
+    w8(record+453u,1u);
+    w16(record+454u,513u);
+    (void)opencfw_em9305_memcpy((void *)(record+444u),(const void *)(record+485u),8u);
+    uint32_t b0=r8(record+444u);
+    access=r32(record+412u);
+    uint32_t b1=r8(record+445u),b2=r8(record+446u),b3=r8(record+447u);
+    w8(record+444u,b0^access);
+    w8(record+445u,(access>>8)^b1);
+    w8(record+446u,(access>>16)^b2);
+    w8(record+447u,(access>>24)^b3);
+    (void)opencfw_em9305_memcpy((void *)(record+428u),(const void *)(record+92u),16u);
+    uintptr_t hook=r32(0x8028c0u);
+    w16(record+468u,513u);
+    if(hook==0u) return;
+    uint32_t slot=(uint8_t)((((uint32_t)record-r32(0x805c3cu))>>9)+6u);
+    ((void (*)(uintptr_t,uint32_t,uint32_t))hook)(record+428u,slot,1u);
+}

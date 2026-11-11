@@ -49,3 +49,6 @@ void opencfw_boot_init_table_default(void)
         opencfw_boot_initializer_callback_records,
         opencfw_boot_initializer_callback_records + 4);
 }
+
+/* Stock entry names that branch straight to the provider above. */
+__typeof__(opencfw_boot_init_table_default) opencfw_provider_41f9f8 __attribute__((alias("opencfw_boot_init_table_default")));

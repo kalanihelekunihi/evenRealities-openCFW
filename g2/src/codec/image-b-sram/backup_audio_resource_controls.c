@@ -2,6 +2,7 @@
  * Image-B resource accounting and audio MMIO control leaves.
  */
 #include <stdint.h>
+#include "../csky_ops.h"
 
 extern int32_t gx8002_image_b_audio_update_mask_10005cbc(
     uint32_t mask, int32_t enable);
@@ -48,9 +49,7 @@ uint32_t gx8002_image_b_audio_resource_mark_1000a898(int32_t resource)
 {
     volatile uint32_t *const state =
         (volatile uint32_t *)(uintptr_t)UINT32_C(0x2002cb88);
-    uint32_t bit = 1u;
-    uint32_t shift = (uint32_t)resource - 1u;
-    __asm__ volatile ("lsl %0, %1" : "+r"(bit) : "r"(shift));
+    const uint32_t bit = csky_lsl(1u, (uint32_t)resource - 1u);
     if ((state[1] & bit) == 0u || resource >= 33) return UINT32_MAX;
     state[0] |= bit;
     return 0u;
@@ -61,9 +60,7 @@ uint32_t gx8002_image_b_audio_resource_unmark_1000a8c4(int32_t resource)
     if (resource >= 33) return UINT32_MAX;
     volatile uint32_t *const state =
         (volatile uint32_t *)(uintptr_t)UINT32_C(0x2002cb88);
-    uint32_t mask = UINT32_C(0xfffffffe);
-    uint32_t shift = (uint32_t)resource - 1u;
-    __asm__ volatile ("rotl %0, %1, %2" : "=r"(mask) : "r"(mask), "r"(shift));
+    const uint32_t mask = csky_rotl(UINT32_C(0xfffffffe), (uint32_t)resource - 1u);
     state[0] &= mask;
     return 0u;
 }

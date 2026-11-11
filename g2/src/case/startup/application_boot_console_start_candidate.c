@@ -2,7 +2,10 @@
  * CASE native 0x08003fd0 ADC-backed console start and calibration.
  */
 #include <stdint.h>
-extern uint32_t case_policy_adc_open_config(uint32_t descriptor); /* 0x0734 */
+/* Boot-test fix: stock 0x08003fea calls 0x0734 (ADC disable,
+ * case_policy_adc_close_config), not 0x07a8 (ADC enable). Calling the enable
+ * left ADEN set, so calibration was skipped as "ADC still enabled". */
+extern uint32_t case_policy_adc_close_config(uint32_t descriptor); /* 0x0734 */
 extern uint32_t case_policy_sensor_divide(uint32_t value,uint32_t divisor); /* 0x0160 */
 extern uint32_t case_policy_adc_tick(void); /* 0x4eac */
 static uint32_t rd(uint32_t a){return *(volatile uint32_t *)(uintptr_t)a;}
@@ -16,7 +19,7 @@ uint32_t case_boot_console_start(uint32_t descriptor)
     uint32_t hw=rd(descriptor);
     if(rb(descriptor+84u)==1u)return 2u;
     wb(descriptor+84u,1u);
-    uint32_t opened=case_policy_adc_open_config(descriptor);
+    uint32_t opened=case_policy_adc_close_config(descriptor);
     if(ready(hw)!=0u){
         wr(descriptor+88u,rd(descriptor+88u)|16u);
         wb(descriptor+84u,0u);

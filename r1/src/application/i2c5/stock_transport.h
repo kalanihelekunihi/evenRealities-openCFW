@@ -10,7 +10,7 @@ typedef struct {
     generic_device_registry_request_block request;
 } r1_i2c5_stock_state;
 extern r1_i2c5_stock_state r1_i2c5_state;
-extern generic_device_registry_device *r1_vnfc_rect_adc_device;
+extern generic_device_registry_device *volatile r1_vnfc_rect_adc_device;
 void r1_vnfc_rect_adc_handle_cache(void);
 void r1_i2c5_nfc_resource_registration(void);
 #endif

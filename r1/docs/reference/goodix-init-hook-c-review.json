@@ -1,0 +1,270 @@
+{
+  "schema_version": 1,
+  "scope": "Goodix initialization hook missing watermark reset and corrected algorithm entry ownership",
+  "report": "build/sources-goal-r1-goodix-init-hook-c-body/report.json",
+  "comparison_report": "build/sources-goal-r1-notification-throttle-pure-c-abi/report.json",
+  "audit": {
+    "compiled_units": 862,
+    "unchanged_prior_nongenerated_objects": 852,
+    "changed_generated_sources": [
+      "{gen}/gh_demo_hook_r1.c"
+    ],
+    "application_imports": 63,
+    "bootloader_imports": 22,
+    "only_manifest_change_is_init_hook_body_replacement": true,
+    "new_state_definitions": 1,
+    "new_state_bytes": 2,
+    "source_plan_and_cache_layout_unchanged": true,
+    "normal_build_object_equals_tested_object": true
+  },
+  "direct": {
+    "stock_C_comparisons": 8960,
+    "native_hook_instruction_bytes_executed": 32,
+    "all_uint8_config_and_recovery_edges": true,
+    "clear_halfword_before_gate_and_live_index_reload": true,
+    "provider_mutations_and_void_return_preserved": true,
+    "gate_and_algorithm_configuration_modeled": true
+  },
+  "real_reset_getter": {
+    "stock_C_comparisons": 8192,
+    "native_hook_instruction_bytes_executed": 32,
+    "all_uint8_config_and_recovery_edges": true,
+    "clear_halfword_before_gate_and_live_index_reload": true,
+    "provider_mutations_and_void_return_preserved": true,
+    "gate_and_algorithm_configuration_modeled": true
+  },
+  "compiled_defects_rejected": [
+    {
+      "defect": "missing-clear",
+      "rejected": true
+    },
+    {
+      "defect": "wide-clear",
+      "rejected": true
+    },
+    {
+      "defect": "inverted-gate",
+      "rejected": true
+    },
+    {
+      "defect": "fixed-index",
+      "rejected": true
+    },
+    {
+      "defect": "stale-index",
+      "rejected": true
+    },
+    {
+      "defect": "previous-normal-build-missing-clear",
+      "rejected": true
+    }
+  ],
+  "boundaries": {
+    "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "hook_and_algorithm_configuration_are_distinct": true,
+    "hook_code_bytes": 32,
+    "algorithm_configuration_code_bytes": 38,
+    "algorithm_configuration_still_unimplemented": true,
+    "disassembly": [
+      {
+        "entry": "0x6a500",
+        "instruction_bytes": 32,
+        "instructions": [
+          {
+            "address": "0x6a500",
+            "mnemonic": "ldr",
+            "operands": "r1, [pc, #0x1c]"
+          },
+          {
+            "address": "0x6a502",
+            "mnemonic": "push",
+            "operands": "{r4, lr}"
+          },
+          {
+            "address": "0x6a504",
+            "mnemonic": "movs",
+            "operands": "r0, #0"
+          },
+          {
+            "address": "0x6a506",
+            "mnemonic": "strh",
+            "operands": "r0, [r1]"
+          },
+          {
+            "address": "0x6a508",
+            "mnemonic": "bl",
+            "operands": "#0x2d348"
+          },
+          {
+            "address": "0x6a50c",
+            "mnemonic": "cmp",
+            "operands": "r0, #0"
+          },
+          {
+            "address": "0x6a50e",
+            "mnemonic": "bne",
+            "operands": "#0x6a51e"
+          },
+          {
+            "address": "0x6a510",
+            "mnemonic": "ldr",
+            "operands": "r0, [pc, #0x10]"
+          },
+          {
+            "address": "0x6a512",
+            "mnemonic": "ldrb",
+            "operands": "r1, [r0]"
+          },
+          {
+            "address": "0x6a514",
+            "mnemonic": "pop.w",
+            "operands": "{r4, lr}"
+          },
+          {
+            "address": "0x6a518",
+            "mnemonic": "ldr",
+            "operands": "r0, [pc, #0xc]"
+          },
+          {
+            "address": "0x6a51a",
+            "mnemonic": "b.w",
+            "operands": "#0x29f58"
+          },
+          {
+            "address": "0x6a51e",
+            "mnemonic": "pop",
+            "operands": "{r4, pc}"
+          }
+        ]
+      },
+      {
+        "entry": "0x29f58",
+        "instruction_bytes": 38,
+        "instructions": [
+          {
+            "address": "0x29f58",
+            "mnemonic": "push",
+            "operands": "{r4, lr}"
+          },
+          {
+            "address": "0x29f5a",
+            "mnemonic": "mov",
+            "operands": "r4, r1"
+          },
+          {
+            "address": "0x29f5c",
+            "mnemonic": "cbz",
+            "operands": "r0, #0x29f62"
+          },
+          {
+            "address": "0x29f5e",
+            "mnemonic": "ldr",
+            "operands": "r1, [pc, #0x20]"
+          },
+          {
+            "address": "0x29f60",
+            "mnemonic": "str",
+            "operands": "r0, [r1]"
+          },
+          {
+            "address": "0x29f62",
+            "mnemonic": "movw",
+            "operands": "r0, #0x7540"
+          },
+          {
+            "address": "0x29f66",
+            "mnemonic": "bl",
+            "operands": "#0x2a090"
+          },
+          {
+            "address": "0x29f6a",
+            "mnemonic": "cmp",
+            "operands": "r4, #4"
+          },
+          {
+            "address": "0x29f6c",
+            "mnemonic": "bhs",
+            "operands": "#0x29f7c"
+          },
+          {
+            "address": "0x29f6e",
+            "mnemonic": "ldr",
+            "operands": "r0, [pc, #0x14]"
+          },
+          {
+            "address": "0x29f70",
+            "mnemonic": "add.w",
+            "operands": "r0, r0, r4, lsl #3"
+          },
+          {
+            "address": "0x29f74",
+            "mnemonic": "pop.w",
+            "operands": "{r4, lr}"
+          },
+          {
+            "address": "0x29f78",
+            "mnemonic": "b.w",
+            "operands": "#0x2a8b4"
+          },
+          {
+            "address": "0x29f7c",
+            "mnemonic": "pop",
+            "operands": "{r4, pc}"
+          }
+        ]
+      }
+    ]
+  },
+  "contract": [
+    "Clear the existing native FIFO watermark backup as a 16-bit store before querying reset recovery, including skipped reconfiguration.",
+    "Reset flag zero calls the existing algorithm configuration import with the frame-info table and live uint8 configuration index. Preserve callback mutations of the backup word after its initial clear.",
+    "Generated hook remains the sole implementation. One canonical two-byte backup definition is added because the upstream optional policy omitted it. The global ADT policy remains unchanged."
+  ],
+  "limits": [
+    "All32 native hook instruction bytes execute. Direct fixture models reset getter and algorithm config; integration executes actual getter with a prepared reset byte and models algorithm config only.",
+    "The previous normal-build hook fails the clear-before-gate check; five compiled defects also fail. Caller/state guards, saved integer/FP registers, SP, masks and FPSCR are checked.",
+    "The algorithm configuration function at0x29f58 remains unimplemented; its38 instruction bytes are boundary evidence, not C behavior coverage. Memory configuration and native four-list data still need recovery/binding.",
+    "Void return, caller scratch, private frames and APSR excluded. Fixed native data addresses are probe-only placement. Final image layout, physical watermark/sensor behavior, reset concurrency, full application linking and boot remain unverified.",
+    "The superseded probe build was stopped after a replacement matched a documentation signature; the corrected body replacement is validated by final build and object equality."
+  ],
+  "evidence_files": {
+    "build/sources-goal-r1-goodix-init-hook-c-body/report.json": "7759c20961b60dfdd48ddb1354c7f22fb5b0dd86ae1bc03a45d364acb69e4a58",
+    "build/sources-goal-r1-notification-throttle-pure-c-abi/report.json": "b764c31e3d2b46613b706632295dac1a4ea80246957365bce18dd5529a9e5e8c",
+    "r1/src/application/goodix/native_init_hook.h": "08bcb5526780ff75932590123fdc5e183a476526e010da4434451dbbfb22f42d",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-init-hook-c-body/r1/r1-application/generated__gh_demo_hook_r1.c.o": "cffc16e99afb4258747ec63526c8c68d8a7864748eb22e7692d2fd2a2b2450b9",
+    "r1/src/sources.json": "67fa5561415254750bce5b837253dd2e89e69ab1aa6c9834fb0832336dc156e1",
+    "tools/build/source-plan.json": "eeb516e31b3310fb0718f36908977f8125723f7c5e0e86cd6744395826259a4d",
+    "r1/src/config/runtime/native_health_cache.ld": "eb8f131c489cd818d4e36718718fa1989719ca0170f164541a1a5bf56dfc1ec3",
+    "r1/docs/reference/FUNCTION-OWNERSHIP.csv": "9d1bb23eb95d1e2fe36b879ad805c0aacb83c1cd67e1eaa2e6239f42f0b01fea",
+    "r1/symbols/function-frontier.csv": "35dc73367a69ae36cac9c08b229aefd6487564ef71fcfc25d50c0d1187d1d9ff",
+    "r1/docs/boundaries/GOODIX-DEMO-DRIVER-MAPPING-2026-08.md": "abd90042c74434fcef8895e12b9c0b7afecdc7afd30bcc895d5b1ad7fc7da859",
+    "third-party/upstream/goodix-gh3x2x/gh3x2x/demo_code/demo_kernel_code/kernel/gh_demo_hook.c": "6c4ea0cfe71ee674a3ee7bba66d2880276f666a9162383a8e2dbd23c5a84f990",
+    "third-party/upstream/goodix-gh3x2x/gh3x2x/demo_code/demo_kernel_code/driver/src/gh_drv_control.c": "8cf1dbd049598242ca0517819afe9bfe7af8c6714f8941fb10922263be98a949",
+    "build/goal-r1-goodix-init-hook-c/audit.json": "68d4d7f55f4f1f9fb4f60bee80e64db3a5d355dc4ab688ca383633f1c5fb8c9d",
+    "build/goal-r1-goodix-init-hook-c/verify.log": "5ada22294702de69bff0343d472b4cb54a80c7abcf8fa40cdcc1b498bbd4d794",
+    "build/goal-r1-goodix-init-hook-c/boundaries.json": "5e2c87759ae6ee8b84414237f8bfacc36e375a9c67720c675df70e27317334ec",
+    "build/goal-r1-goodix-init-hook-c/negative.json": "fda9d09dd0bac13d17a24644b2eb1b1dd0df96c97a5b65df295e5cf610816896",
+    "build/goal-r1-goodix-init-hook-c/test.ld": "670e2ecae2955c61b88c98a194a6110d580d3184aea5c9bc9718bf7d5084b7aa",
+    "build/goal-r1-goodix-init-hook-c/audit.py": "64d8dac8bba43a6ca8a6776d6e88d0a97e4100c1ca493eee5f9ed0fdcb89b771",
+    "build/goal-r1-goodix-init-hook-c/build-body.log": "038761e5c18b1594f82084f7d8fe9bf92b4f30ab3292e58abebbd12411b2fa3a",
+    "build/goal-r1-goodix-init-hook-c/boundaries.py": "1c05270f8a032456eb76b5e11921b6d7fe2c24c5ba9ed145722d4b3b840d2dc7",
+    "build/goal-r1-goodix-init-hook-c/source.elf": "5deae57ad6b4330e30820a1f5052e6e40fa844eac017fdc0f203cca7fd14f074",
+    "build/goal-r1-goodix-init-hook-c/negative.py": "76ebf99ad28829b0239655d8a8056ae8fffbdce2773eb5802a6a4ec19d954edd",
+    "build/goal-r1-goodix-init-hook-c/negative.log": "0a03b0bb0ef9ab3eaf406a699f123bbd699a3d1e0372c8c88ee0c7b0f040461d",
+    "build/goal-r1-goodix-init-hook-c/source.o": "cffc16e99afb4258747ec63526c8c68d8a7864748eb22e7692d2fd2a2b2450b9",
+    "build/goal-r1-goodix-init-hook-c/results.json": "405b294aaa4f743d443e0608f2a0c204f411deab104ca9b305bbef043dab6507",
+    "build/goal-r1-goodix-init-hook-c/pipeline.log": "9038c83cc350672afb849eea494e4d6c5e5cc6eebb90bc600a5cbb980249053f",
+    "build/goal-r1-goodix-init-hook-c/upstream-hook.c": "a6b40c9404cb5d2be2f873349e7b503ba6a0220b1773f89bdd36a7ebb23bd50e",
+    "build/goal-r1-goodix-init-hook-c/sources-check.log": "b6ab468f43815a75634eab2762e209dbee8ab94c4cc3d601fded4210b6833f2a",
+    "build/goal-r1-goodix-init-hook-c/record.py": "52d12939b988b40b0d0c039ba6106c3110d6d49b22bf184741b55ad0d14c313c",
+    "build/goal-r1-goodix-init-hook-c/rea-bytes.json": "f008aa2a04cf2a9271fc40979ee1011729dcc2ff71d2c5072cd814dceb7c9fa1",
+    "build/goal-r1-goodix-init-hook-c/manifest-before.json": "ac403598295564e9a4af5013cd797a60793cf6c47dfac150c902be6d400a7093",
+    "build/goal-r1-goodix-init-hook-c/verify.py": "63eb0ac3ed5da434d4cfc2a0022cdcd422e8e42e9d84f0807574877ce5d731ab",
+    "build/goal-r1-goodix-init-hook-c/build.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/goal-r1-goodix-init-hook-c/pipeline/test.ld": "670e2ecae2955c61b88c98a194a6110d580d3184aea5c9bc9718bf7d5084b7aa",
+    "build/goal-r1-goodix-init-hook-c/pipeline/source.elf": "7695b7142465bdb5093ffc304e49ac7496be01ea52ac39336ed74c7ff0cee814",
+    "build/goal-r1-goodix-init-hook-c/pipeline/pipeline-results.json": "59f5a73073a1f80e4b5beae211bbe58d63a5db57774d829dcf91455a57775ff0",
+    "build/goal-r1-goodix-init-hook-c/baseline-rejection/test.ld": "670e2ecae2955c61b88c98a194a6110d580d3184aea5c9bc9718bf7d5084b7aa",
+    "build/goal-r1-goodix-init-hook-c/baseline-rejection/source.elf": "8ce27507610b9d34ae65799e3d809a7cc12a3516e23e75ce3f17b6e48a27532d"
+  }
+}

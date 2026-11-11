@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "report": "build/sources-goal-r1-twi-leaf-closure/report.json",
+  "report_sha256": "28fc3dd96c10a5a9d2ca89a17358faba766034e6e8b29e50bbcbd16caa045c48",
+  "manifest_sha256": "be76bf00509f1551b53a08edbc5515ed3a3dcb9b1721ff4481fdf60b77d82eb8",
+  "stock_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "sources": [
+    {
+      "source": "r1/src/application/software-twi/sdk_delay.c",
+      "source_sha256": "588f8479c73c47f6e51a37e4b034a8a31757c22aed47602ace8591087a72dd94",
+      "object_sha256": "ebd1ee469ada496afc9b250048f3ab9d16985803b52f3a48de34aea265a47377",
+      "link": true
+    },
+    {
+      "source": "r1/src/application/software-twi/sdk_delay_busy.c",
+      "source_sha256": "fcf1ffd0d1153db9479bb7e8d653cfe4487fea4ed68baea0758b09ddce5461f5",
+      "object_sha256": "68176a1fcf4cc995409bebc462945a93c6db8b0b064569ea0f3610ecf19e671c",
+      "link": false
+    }
+  ],
+  "all_three_function_bodies_unchanged": true,
+  "bodies": [
+    {
+      "function": "r1_twi_delay_noop",
+      "stock_entry": "0x7081c",
+      "size": 2,
+      "bytes": "7047",
+      "byte_identical": true
+    },
+    {
+      "function": "r1_twi_i2c5_delay_noop",
+      "stock_entry": "0x54af0",
+      "size": 12,
+      "bytes": "00bf00bf00bf00bf00bf7047",
+      "byte_identical": true
+    }
+  ],
+  "busy_body_sha256": "6dfbca9d5f13abb973bdbcbdcec10ca9f03254a0cb19d4bd7f0fc462e4047c23",
+  "verification": {
+    "cases": 912,
+    "passed": 912,
+    "failures": [],
+    "argument_count": 114
+  },
+  "prior_rea_review": "r1/docs/reference/twi-delay-review.json",
+  "prior_rea_review_sha256": "ae32da9b8a4ceb3cd4b41f70527ccd02b037f5cc64d312612efecaa15b54f48c",
+  "prior_rea_snapshot_sha256": "0a5f640a2e41898e4ba709a0c047e4d493bc857fbb4d1d828172a6b747c24886",
+  "composition": {
+    "compiled_units": 562,
+    "application_units": 488,
+    "bootloader_units": 74,
+    "application_unresolved_before": 235,
+    "application_unresolved_after": 233,
+    "bootloader_unresolved": 34,
+    "resolved": [
+      "r1_twi_delay_noop",
+      "r1_twi_i2c5_delay_noop"
+    ],
+    "added": [],
+    "busy_import_retained": true
+  },
+  "hashes": {
+    "build/goal-r1-twi-leaf-closure/delay-before.c": "9291bb7fdd34ca8808a7eef96980ed9fa7a56a19b3a80ba1787369b2cbba37c9",
+    "build/goal-r1-twi-leaf-closure/manifest-before.json": "f86dd8b447adf4e23f2a3acfccaaef1c568e21d9d4acf21976c353d7ae3f2447",
+    "build/goal-r1-twi-leaf-closure/verify.py": "0e21fcd7177961dd016b0b886059ef3af35b59edae7d30a32a3fabcc6fd444a2",
+    "build/goal-r1-twi-leaf-closure/results.json": "36af7fbc7ec726b8a82567e0f2535a807f82057970799fab38898903d3d7652f",
+    "build/goal-r1-twi-leaf-closure/source.elf": "590b5ad147b47b691faa772704d0939fd06e541680808a654e287001b2369e31"
+  },
+  "limitations": [
+    "Leaf instruction identity does not prove calibrated software-TWI clock or complete bus timing.",
+    "Busy countdown remains excluded; moving it changes neither its instructions nor its unverified timing status.",
+    "Execution checks include observed r0-r12/SP/LR and APSR preservation, memory silence and instruction count, not physical bus behavior.",
+    "Two functions matching stock bytes do not establish whole-image byte identity or source qualification.",
+    "No source-plan selection or workflow gate advanced."
+  ]
+}

@@ -1,0 +1,98 @@
+{
+  "schema_version": 1,
+  "scope": "R1 QMA tap configuration ordinary C entry",
+  "report": "build/sources-goal-r1-qma-tap-pure-c/report.json",
+  "comparison_report": "build/sources-goal-r1-lis-aux-reviewed-c/report.json",
+  "audit": {
+    "compiled_units": 855,
+    "application_imports": 61,
+    "bootloader_imports": 22,
+    "unchanged_prior_nongenerated_objects": 844,
+    "changed_nongenerated_objects": [
+      "r1/src/application/runtime/native_qma_configuration.c"
+    ],
+    "import_sets_unchanged": true,
+    "normal_object_equals_both_probe_objects": true,
+    "unchanged_other_functions": [
+      "r1_qma6100_configure_boundary",
+      "r1_qma_any_motion",
+      "r1_qma_range",
+      "r1_qma_reset",
+      "r1_qma_setup",
+      "r1_qma_steps"
+    ],
+    "unchanged_other_function_bytes_and_relocations": true,
+    "cold_state_and_axis_defaults_unchanged": true,
+    "no_new_persistent_state": true,
+    "manifest_unchanged": true,
+    "both_native_QMA_runtime_units_have_no_inline_assembly": true
+  },
+  "direct": {
+    "stock_C_comparisons": 37134,
+    "C_only_nonwriting_cases": 72,
+    "actual_C_tap_algorithm": true,
+    "live_explicit_read_buffer_mutations": true,
+    "modeled_retry_provider_results": true,
+    "private_frame_aliases_and_APSR_excluded": true
+  },
+  "retry_graph": {
+    "stock_C_actual_retry_transport_comparisons": 846,
+    "C_only_nonwriting_cases": 72,
+    "actual_C_tap_and_retry_delay_graph": true,
+    "live_explicit_read_buffer_mutations": true,
+    "modeled_bus_results": true,
+    "private_frame_aliases_and_APSR_excluded": true
+  },
+  "compiled_defects_rejected": [
+    {
+      "name": "axes_mask",
+      "rejected": true
+    },
+    {
+      "name": "x_gate",
+      "rejected": true
+    },
+    {
+      "name": "route_one",
+      "rejected": true
+    },
+    {
+      "name": "enable_polarity",
+      "rejected": true
+    },
+    {
+      "name": "scratch_fallback",
+      "rejected": true
+    }
+  ],
+  "intentional_C_policy": "Five unwritten register bytes start at zero rather than private stack history.",
+  "limits": [
+    "Physical sensor/tap operation, bus timing and final application linking/startup unverified.",
+    "Direct tests model retry results; integrated tests run actual retry/delay logic with modeled bus/cycle-delay primitives.",
+    "Mutations use explicitly supplied read-buffer pointers during their lifetime; arbitrary private stack aliases remain excluded.",
+    "Provider overruns, APSR, faults/concurrency and byte identity excluded.",
+    "Architecture-specific cycle-delay primitive remains assembly."
+  ],
+  "evidence_files": {
+    "build/sources-goal-r1-qma-tap-pure-c/report.json": "d8b4ad9864522e2d19b034b9bfe7ab8686b77cebd9d6e29b40a71df863a40c86",
+    "build/sources-goal-r1-lis-aux-reviewed-c/report.json": "2ca846bf5f2ff37c489d41f4a1c72b2d3cc0da15887da384ff8e4b6c419932c3",
+    "r1/src/application/runtime/native_qma_configuration.c": "2cfaaad39279f8997283dce6873f8d21136f3c5da1ca93a0386944d3e6ad67e5",
+    "r1/src/application/runtime/native_qma_transport.c": "34aaa01d868ad95d195f59166b186fa1f3c528db2a146086040b583169da005c",
+    "r1/src/application/board/native_rtt_delay.c": "e614166951aa96b4de91200ad9d67e71434f9bb759faab1fbf6f9225cb4576c7",
+    "r1/src/sources.json": "f74aa01d5bac1e3a8786b1052791cbd6344c1fd57ce26a11f1d65de93506ad72",
+    "tools/build/source-plan.json": "eeb516e31b3310fb0718f36908977f8125723f7c5e0e86cd6744395826259a4d",
+    "build/goal-r1-qma-tap-pure-c/rea.json": "79a4357615538ac2f96693d76ed4dba95f86491cd2d168c6fd7483179efe5d7c",
+    "build/goal-r1-qma-tap-pure-c/verify.py": "c3a7b6484620bdb8aa8af68cb7ca64051022e1e1462f2f7df85322ede5bd6ec2",
+    "build/goal-r1-qma-tap-pure-c/results.json": "fd7187070d31250b67f985a8b50f34bbdcc8270055a8de589d3a8a48dd89d1a7",
+    "build/goal-r1-qma-tap-pure-c/verification.log": "8bd98cb43f23488ed98ad9da901ca10f453dd92075b73fe9cb34fad4d45a6f34",
+    "build/goal-r1-qma-tap-pure-c/make-integrated.py": "b7708529ff996a1f0fb494bd22b0d4e42b52473e4ce96a7de5eeee67cf91c21d",
+    "build/goal-r1-qma-tap-pure-c/integrated/verify.py": "c634412738e3e5087f2e9063000401f4e799a1ce4609f98307e32f17ad00ee6a",
+    "build/goal-r1-qma-tap-pure-c/integrated/results.json": "9ec9473525d4f3950bc8c13dbd906d4427e67915a7352f268d77c8b799ce1e8c",
+    "build/goal-r1-qma-tap-pure-c/integrated/verification.log": "895cdcb68a950d435b727a24c3fa55b66ff969256f99748fe1cf5f9a7d885d3e",
+    "build/goal-r1-qma-tap-pure-c/negative.py": "4e935de90c38b4216193d26e41d611294bf4ac45912e4d483ab0e3331568feb5",
+    "build/goal-r1-qma-tap-pure-c/negative.json": "c2abf326c60b6e8b90d9733a7880f9a94d596e9954b0d993cfb6d25bf7fa7eb0",
+    "build/goal-r1-qma-tap-pure-c/negative.log": "557a0cdf87d95f216097448af06bac1e2cf60803f1f32facc502290e3929c866",
+    "build/goal-r1-qma-tap-pure-c/build.log": "00fd0091a0424468f6772cddeba8d0904360a0bc4356df188fab0d3364bf6b79",
+    "build/goal-r1-qma-tap-pure-c/sources-check.log": "f610d186f791ebf717d9fd6eed6c4f28612779fff34b885bcf8dc8a49c9ae80c"
+  }
+}

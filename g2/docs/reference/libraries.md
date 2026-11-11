@@ -349,6 +349,30 @@ All entries are ⚑: no submodule exists for any GX8002 library.
 
 - Identity: a trained model: 9,164-byte command stream and 120,800 weights.
 - Licence: proprietary.
+- All 212 command records (12 ReLU/sigmoid, 152 copy/tensor, 18 batch norm,
+  14 transpose, three other opcode-1 operations, and 13 fully connected or
+  convolution operations) are represented by field-level C source in
+  `g2/src/codec/npu/`. The C encoders reproduce the complete 9,164-byte
+  locked command stream, with each record and the assembled stream compared
+  directly against the authenticated codec firmware. The
+  `make -C g2 kws-command-stream` target writes this stream from C without
+  reading the official firmware. The pinned upstream
+  cmodel corroborates the parser field layouts. Some header, geometry, and
+  control-bit meanings remain unresolved. The 120,800-byte trained weight
+  block is preserved as a declared, non-executable data asset at
+  `g2/src/codec/npu/kws_weights_2_2_6_10.bin`, with its authenticated
+  extraction recorded in `g2/evidence/codec-a-kws-trained-weights-20261111.json`.
+  This supplies trained bytes for source-candidate packaging; it does not
+  reconstruct the model's architecture, training, or behavior. None of the 17 checked
+  upstream `model.h` command/weight size pairs matches this model, so those
+  example weights cannot substitute for it.
+- The activation comparison, pinned cmodel archive, and remaining command
+  counts are recorded in
+  `g2/evidence/codec-a-kws-activation-source-20261110.json` and
+  `g2/evidence/codec-a-kws-general-source-20261110.json`, and
+  `g2/evidence/codec-a-kws-batch-norm-source-20261110.json`, and
+  `g2/evidence/codec-a-kws-transpose-source-20261110.json`, and
+  `g2/evidence/codec-a-kws-command-corpus-20261110.json`.
 - Evidence: `g2/docs/research/g2-codec-stage2-sections-recovery.md:79-95`.
 
 ## 5. Touch (PSoC 4000T)

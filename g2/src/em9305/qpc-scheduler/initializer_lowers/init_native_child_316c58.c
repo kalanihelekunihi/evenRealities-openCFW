@@ -1,312 +1,127 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_316c58\n"
-".type opencfw_em9305_child_316c58,@function\n"
-"opencfw_em9305_child_316c58:\n"
-"L316c58:\n"
-"enter_s [r13-r19,blink]\n"
-"L316c5a:\n"
-"mov_s r18,0x805cac\n"
-"L316c60:\n"
-"ld_s r0,[r18,0]\n"
-"L316c62:\n"
-"ldb r1,[r0,34]\n"
-"L316c66:\n"
-"mov_s r0,0\n"
-"L316c68:\n"
-"sub.f lp_count,r1,0\n"
-"L316c6c:\n"
-"beq_s L316c90\n"
-"L316c6e:\n"
-"ld r19,[0x805c70]\n"
-"L316c76:\n"
-"mov_s r17,0\n"
-"L316c78:\n"
-"lp L316c90\n"
-"L316c7c:\n"
-"mpywhl r16,r17,0x390\n"
-"L316c84:\n"
-"add r16,r16,r19\n"
-"L316c88:\n"
-"ldb r1,[r16]\n"
-"L316c8c:\n"
-"breq_s r1,0,L316c92\n"
-"L316c8e:\n"
-"add_s r17,r17,1\n"
-"L316c90:\n"
-"leave_s [r13-r19,blink,pcl]\n"
-"L316c92:\n"
-"mov_s r1,0\n"
-"L316c94:\n"
-"mov r2,912\n"
-"L316c98:\n"
-"add r13,r16,0x220\n"
-"L316ca0:\n"
-"bl.d opencfw_em9305_memset\n"
-"L316ca4:\n"
-"mov_s r0,r16\n"
-"L316ca6:\n"
-"mov_s r3,0x805b18\n"
-"L316cac:\n"
-"mov_s r15,0x805a70\n"
-"L316cb2:\n"
-"mov_s r0,0x5401\n"
-"L316cb8:\n"
-"ldb r6,[r3]\n"
-"L316cbc:\n"
-"ld r9,[r15,36]\n"
-"L316cc0:\n"
-"ld r8,[r15,40]\n"
-"L316cc4:\n"
-"ld_s r12,[r15,0x14]\n"
-"L316cc6:\n"
-"ld r3,[r15,0x18]\n"
-"L316cc8:\n"
-"sth.as r0,[r16,251]\n"
-"L316ccc:\n"
-"sub3 r0,r0,0x20\n"
-"L316cd0:\n"
-"mov_s r11,0x4701\n"
-"L316cd6:\n"
-"sth.as r0,[r16,241]\n"
-"L316cda:\n"
-"bclr_s r0,r0,0x9\n"
-"L316cdc:\n"
-"sth.as r11,[r16,195]\n"
-"L316ce0:\n"
-"sth r0,[r13,190]\n"
-"L316ce4:\n"
-"ld_s r0,[r18,0]\n"
-"L316ce6:\n"
-"mov_s r14,0x805ab4\n"
-"L316cec:\n"
-"mov r2,328\n"
-"L316cf0:\n"
-"sth_s r2,[r13,0x24]\n"
-"L316cf2:\n"
-"ldh_s r0,[r0,0x26]\n"
-"L316cf4:\n"
-"sth_s r2,[r13,0x20]\n"
-"L316cf6:\n"
-"st r3,[r16,8]\n"
-"L316cfa:\n"
-"min r0,r0,251\n"
-"L316cfe:\n"
-"ldh_s r3,[r14,0x2]\n"
-"L316d00:\n"
-"ldh_s r2,[r14,0x4]\n"
-"L316d02:\n"
-"sth_s r0,[r13,0x16]\n"
-"L316d04:\n"
-"asl r0,r0,0x6\n"
-"L316d06:\n"
-"mov_s r1,r16\n"
-"L316d08:\n"
-"add r0,r0,976\n"
-"L316d0c:\n"
-"add3 r7,r16,0x3d\n"
-"L316d10:\n"
-"mov r4,257\n"
-"L316d14:\n"
-"add r1,r1,574\n"
-"L316d18:\n"
-"sth_s r0,[r13,0x18]\n"
-"L316d1a:\n"
-"mov_s r0,r16\n"
-"L316d1c:\n"
-"stb 1,[r16]\n"
-"L316d20:\n"
-"sth.as r17,[r16,194]\n"
-"L316d24:\n"
-"sth.as r17,[r16,240]\n"
-"L316d28:\n"
-"sth.as r17,[r16,250]\n"
-"L316d2c:\n"
-"sth r17,[r13,188]\n"
-"L316d30:\n"
-"sth 27,[r13,34]\n"
-"L316d34:\n"
-"sth 27,[r13,30]\n"
-"L316d38:\n"
-"st r12,[r16,4]\n"
-"L316d3c:\n"
-"st.as r8,[r16,137]\n"
-"L316d40:\n"
-"st.as r9,[r16,136]\n"
-"L316d44:\n"
-"st.as r8,[r16,135]\n"
-"L316d48:\n"
-"st.as r9,[r16,134]\n"
-"L316d4c:\n"
-"stb r6,[r13,-148]\n"
-"L316d50:\n"
-"stb r6,[r13,196]\n"
-"L316d54:\n"
-"stb r6,[r7]\n"
-"L316d58:\n"
-"stb r6,[r13,-36]\n"
-"L316d5c:\n"
-"sth_s r3,[r13,0x1a]\n"
-"L316d5e:\n"
-"sth_s r2,[r13,0x1c]\n"
-"L316d60:\n"
-"bl.d opencfw_em9305_radio_limit_317b10\n"
-"L316d64:\n"
-"sth r4,[r16,76]\n"
-"L316d68:\n"
-"mov_s r1,r16\n"
-"L316d6a:\n"
-"sth_s r0,[r13,0x30]\n"
-"L316d6c:\n"
-"add r1,r1,566\n"
-"L316d70:\n"
-"bl.d opencfw_em9305_radio_limit_317b10\n"
-"L316d74:\n"
-"mov_s r0,r16\n"
-"L316d76:\n"
-"ld r2,[r14,0x18]\n"
-"L316d78:\n"
-"ldh_s r1,[r14,0x14]\n"
-"L316d7a:\n"
-"mov_s r11,2\n"
-"L316d7c:\n"
-"ldb_s r12,[r14,0x17]\n"
-"L316d7e:\n"
-"ldb r8,[r15,56]\n"
-"L316d82:\n"
-"ldb_s r3,[r14,0x16]\n"
-"L316d84:\n"
-"sth_s r0,[r13,0x2e]\n"
-"L316d86:\n"
-"mov_s r0,0x805cd8\n"
-"L316d8c:\n"
-"stb r11,[r13,54]\n"
-"L316d90:\n"
-"stb r11,[r13,55]\n"
-"L316d94:\n"
-"stb r11,[r13,56]\n"
-"L316d98:\n"
-"sth_s r1,[r13,0x32]\n"
-"L316d9a:\n"
-"st.as r2,[r16,154]\n"
-"L316d9e:\n"
-"ld r0,[r0,0]\n"
-"L316da0:\n"
-"stb 6,[r13,-142]\n"
-"L316da4:\n"
-"stb r3,[r13,52]\n"
-"L316da8:\n"
-"stb r8,[r13,202]\n"
-"L316dac:\n"
-"stb r12,[r13,70]\n"
-"L316db0:\n"
-"breq_s r0,0,L316dbc\n"
-"L316db2:\n"
-"ld r1,[r0,0]\n"
-"L316db4:\n"
-"breq_s r1,0,L316dbc\n"
-"L316db6:\n"
-"jl_s.d [r1]\n"
-"L316db8:\n"
-"exth r0,r17\n"
-"L316dbc:\n"
-"ldb_s r0,[r13,0x4]\n"
-"L316dbe:\n"
-"bbit0.nt r0,0x1,L316e1c\n"
-"L316dc2:\n"
-"ldb_s r0,[r15,0x15]\n"
-"L316dc4:\n"
-"bbit0.d.nt r0,0x7,L316e1c\n"
-"L316dc8:\n"
-"mov_s r3,r17\n"
-"L316dca:\n"
-"ld r12,[r18]\n"
-"L316dce:\n"
-"mpywhl r3,r3,912\n"
-"L316dd2:\n"
-"mov_s r1,0\n"
-"L316dd4:\n"
-"mov_s r2,0xff\n"
-"L316dd6:\n"
-"add_s r3,r3,r19\n"
-"L316dd8:\n"
-"ldb r12,[r12,66]\n"
-"L316ddc:\n"
-"mov_s r0,r3\n"
-"L316dde:\n"
-"add r0,r0,778\n"
-"L316de2:\n"
-"stb_s r12,[r0,0]\n"
-"L316de4:\n"
-"ld r12,[r18]\n"
-"L316de8:\n"
-"st.as r1,[r3,206]\n"
-"L316dec:\n"
-"stb 1,[r0,-8]\n"
-"L316df0:\n"
-"stb r1,[r0,-9]\n"
-"L316df4:\n"
-"ldb r12,[r12,67]\n"
-"L316df8:\n"
-"stb r1,[r0,55]\n"
-"L316dfc:\n"
-"sth_s r1,[r0,0x2c]\n"
-"L316dfe:\n"
-"stb r2,[r0,-214]\n"
-"L316e02:\n"
-"stb r2,[r0,-215]\n"
-"L316e06:\n"
-"stb r2,[r0,-216]\n"
-"L316e0a:\n"
-"stb r2,[r0,-217]\n"
-"L316e0e:\n"
-"sth r1,[r0,-2]\n"
-"L316e12:\n"
-"st.as r1,[r3,196]\n"
-"L316e16:\n"
-"stb_s r1,[r0,0xf]\n"
-"L316e18:\n"
-"sth_s r1,[r0,0x2]\n"
-"L316e1a:\n"
-"stb_s r12,[r0,0x1]\n"
-"L316e1c:\n"
-"mpywhl r17,r17,912\n"
-"L316e20:\n"
-"ld r0,[r14,0x1c]\n"
-"L316e22:\n"
-"add r19,r19,r17\n"
-"L316e26:\n"
-"st.as r0,[r19,209]\n"
-"L316e2a:\n"
-"ld_s r0,[r14,0x20]\n"
-"L316e2c:\n"
-"st.as r0,[r19,210]\n"
-"L316e30:\n"
-"ldh_s r0,[r14,0x24]\n"
-"L316e32:\n"
-"add r19,r19,846\n"
-"L316e36:\n"
-"sth 1,[r19]\n"
-"L316e3a:\n"
-"bl.d opencfw_em9305_command_count_30e4bc\n"
-"L316e3e:\n"
-"sth r0,[r19,-2]\n"
-"L316e42:\n"
-"ldb_s r0,[r15,0]\n"
-"L316e44:\n"
-"add_s r0,r0,1\n"
-"L316e46:\n"
-"stb_s r0,[r15,0]\n"
-"L316e48:\n"
-"bl.d opencfw_em9305_common_request_30455c\n"
-"L316e4c:\n"
-"mov_s r0,1\n"
-"L316e4e:\n"
-"ld r0,[0x805c70]\n"
-"L316e56:\n"
-"add_s r0,r0,r17\n"
-"L316e58:\n"
-"b_s L316c90\n"
-".size opencfw_em9305_child_316c58,.-opencfw_em9305_child_316c58\n"
-);
+#include <stdint.h>
+
+/* Native 0x316c58..0x316e5a: allocate a connection record. Take the first
+ * free 912-byte record (byte 0 clear) of the config byte 34 records at
+ * *0x805c70, clear it and load the link-layer defaults: feature masks
+ * (0x805a84..0x805a98), handle-tagged procedure words, PHY 1M/257 octets
+ * and the data length limits (config +0x26, 0x805ab4..), radio limits,
+ * the task id 0x805b18, power/control defaults, the per-record allocation
+ * hook (*0x805cd8 -> word 0), optional power-control state (+548 bit 1 and
+ * 0x805a85 bit 7), the channel classification words and the command
+ * counters. Returns the record, or 0 when none is free. The stock hook
+ * call leaves the hook address in r1. */
+extern void *opencfw_em9305_memset(void *,uint32_t,uint32_t);
+extern uint32_t opencfw_em9305_radio_limit_317b10(uintptr_t,uintptr_t);
+extern uint32_t opencfw_em9305_command_count_30e4bc(void);
+extern uint32_t opencfw_em9305_common_request_30455c(uint32_t);
+
+static uint32_t r32(uintptr_t a){return *(volatile uint32_t *)a;}
+static uint32_t r16(uintptr_t a){return *(volatile uint16_t *)a;}
+static uint32_t r8(uintptr_t a){return *(volatile uint8_t *)a;}
+static void w32(uintptr_t a,uint32_t v){*(volatile uint32_t *)a=v;}
+static void w16(uintptr_t a,uint32_t v){*(volatile uint16_t *)a=(uint16_t)v;}
+static void w8(uintptr_t a,uint32_t v){*(volatile uint8_t *)a=(uint8_t)v;}
+
+uintptr_t opencfw_em9305_child_316c58(void)
+{
+    uint32_t count=r8(r32(0x805cacu)+34u);
+    if(count==0u) return 0u;
+    uintptr_t base=r32(0x805c70u);
+    uint32_t index=0u;
+    uintptr_t rec;
+    for(;;) {
+        rec=base+index*912u;
+        if(r8(rec)==0u) break;
+        ++index;
+        if(--count==0u) return 0u;
+    }
+    (void)opencfw_em9305_memset((void *)rec,0u,912u);
+    uint32_t task=r8(0x805b18u);
+    uint32_t features_low=r32(0x805a94u);
+    uint32_t features_high=r32(0x805a98u);
+    uint32_t local_low=r32(0x805a84u);
+    uint32_t local_high=r32(0x805a88u);
+    w16(rec+502u,0x5401u);
+    w16(rec+482u,0x5301u);
+    w16(rec+390u,0x4701u);
+    w16(rec+734u,0x5101u);
+    w16(rec+580u,328u);
+    uint32_t octets=r16(r32(0x805cacu)+0x26u);
+    w16(rec+576u,328u);
+    w32(rec+8u,local_high);
+    if((int32_t)octets>251) octets=251u;
+    uint32_t rx_octets=r16(0x805ab6u);
+    uint32_t rx_time=r16(0x805ab8u);
+    w16(rec+566u,octets);
+    w16(rec+568u,(octets<<6)+976u);
+    w8(rec,1u);
+    w16(rec+388u,index);
+    w16(rec+480u,index);
+    w16(rec+500u,index);
+    w16(rec+732u,index);
+    w16(rec+578u,27u);
+    w16(rec+574u,27u);
+    w32(rec+4u,local_low);
+    w32(rec+548u,features_high);
+    w32(rec+544u,features_low);
+    w32(rec+540u,features_high);
+    w32(rec+536u,features_low);
+    w8(rec+396u,task);
+    w8(rec+740u,task);
+    w8(rec+488u,task);
+    w8(rec+508u,task);
+    w16(rec+570u,rx_octets);
+    w16(rec+572u,rx_time);
+    w16(rec+76u,257u);
+    w16(rec+592u,opencfw_em9305_radio_limit_317b10(rec,rec+574u));
+    uint32_t limit=opencfw_em9305_radio_limit_317b10(rec,rec+566u);
+    uint32_t map_high=r32(0x805accu);
+    uint32_t map_count=r16(0x805ac8u);
+    uint32_t value_b=r8(0x805acbu);
+    uint32_t value_aa8=r8(0x805aa8u);
+    uint32_t value_a=r8(0x805acau);
+    w16(rec+590u,limit);
+    w8(rec+598u,2u);
+    w8(rec+599u,2u);
+    w8(rec+600u,2u);
+    w16(rec+594u,map_count);
+    w32(rec+616u,map_high);
+    uintptr_t hooks=r32(0x805cd8u);
+    w8(rec+402u,6u);
+    w8(rec+596u,value_a);
+    w8(rec+746u,value_aa8);
+    w8(rec+614u,value_b);
+    if(hooks!=0u) {
+        uintptr_t hook=r32(hooks);
+        if(hook!=0u) ((void (*)(uint32_t,uintptr_t))hook)((uint16_t)index,hook);
+    }
+    if((r8(rec+548u)&2u)&&(r8(0x805a85u)&0x80u)) {
+        uintptr_t power=base+index*912u;
+        w8(power+778u,r8(r32(0x805cacu)+66u));
+        uint32_t step=r8(r32(0x805cacu)+67u);
+        w32(power+824u,0u);
+        w8(power+770u,1u);
+        w8(power+769u,0u);
+        w8(power+833u,0u);
+        w16(power+822u,0u);
+        w8(power+564u,0xffu);
+        w8(power+563u,0xffu);
+        w8(power+562u,0xffu);
+        w8(power+561u,0xffu);
+        w16(power+776u,0u);
+        w32(power+784u,0u);
+        w8(power+793u,0u);
+        w16(power+780u,0u);
+        w8(power+779u,step);
+    }
+    uintptr_t entry=base+index*912u;
+    w32(entry+836u,r32(0x805ad0u));
+    w32(entry+840u,r32(0x805ad4u));
+    uint32_t instant=r16(0x805ad8u);
+    w16(entry+846u,1u);
+    w16(entry+844u,instant);
+    (void)opencfw_em9305_command_count_30e4bc();
+    w8(0x805a70u,r8(0x805a70u)+1u);
+    (void)opencfw_em9305_common_request_30455c(1u);
+    return r32(0x805c70u)+index*912u;
+}

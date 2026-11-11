@@ -1,0 +1,462 @@
+{
+  "schema_version": 1,
+  "scope": "R1 native family0/nonzero graph builders and packed helpers in C",
+  "acceptance_target": "License-free C firmware with hardware support first; byte identity waived",
+  "report": "build/sources-goal-r1-goodix-graph-families-c/report.json",
+  "comparison_report": "build/sources-goal-r1-goodix-graph-initialize-c/report.json",
+  "stock_entries": [
+    {
+      "symbol": "r1_goodix_native_graph_family_zero_build",
+      "entry": "0x2874c",
+      "size": 892
+    },
+    {
+      "symbol": "r1_goodix_native_graph_family_nonzero_build",
+      "entry": "0x2966c",
+      "size": 884
+    },
+    {
+      "symbol": "r1_goodix_graph_packed_transform_descriptor",
+      "entry": "0x33330",
+      "size": 28
+    },
+    {
+      "symbol": "r1_goodix_graph_alternate_pool_descriptor",
+      "entry": "0x74c48",
+      "size": 30
+    },
+    {
+      "symbol": "r1_goodix_graph_tail_vector_get",
+      "entry": "0x74a9c",
+      "size": 4
+    }
+  ],
+  "audit": {
+    "compiled_units": 890,
+    "new_units": [
+      "r1/src/application/goodix/native_graph_families.c"
+    ],
+    "unchanged_prior_nongenerated_sources_and_objects": 879,
+    "differing_existing_generated_objects": [
+      "{gen}/r1_startup_vectors.S",
+      "{gen}/r1_uecc.c"
+    ],
+    "tested_object_equals_normal_build": true,
+    "application_imports": 76,
+    "bootloader_imports": 22,
+    "removed_imports": [
+      "r1_goodix_native_graph_family_nonzero_build",
+      "r1_goodix_native_graph_family_zero_build"
+    ],
+    "added_imports": [
+      "r1_goodix_graph_alternate_pool_executor_address",
+      "r1_goodix_graph_tail_vector_executor_address",
+      "r1_goodix_graph_transform_executor_address"
+    ],
+    "new_writable_state_bytes": 0,
+    "readonly_width_table_bytes": 8,
+    "native_function_entries_verified": 5,
+    "native_instruction_bytes": 1838,
+    "native_executed_instruction_bytes": 1838,
+    "mode0_full_resource_words": 6660,
+    "mode1_full_resource_words": 2979,
+    "scalar_pointer_collision_handled_by_typed_normalization": true,
+    "source_plan_and_cache_layout_unchanged": true
+  },
+  "direct": {
+    "paired_cases": 710,
+    "native_instruction_bytes_executed": [
+      892,
+      884,
+      28,
+      30,
+      4
+    ],
+    "source_object_sha256": "e8731e3aa24830f569f2e5ba137dbc62a581c4da9a51d8aa73e73ef3ddef526e",
+    "independent_complete_graph_cursor_hole_preservation_and_packed_field_oracles": true,
+    "all_descriptor_and_memory_primitives_execute_in_C": true,
+    "no_function_ports_modeled": true,
+    "executor_identity_bindings": {
+      "r1_goodix_graph_convolution_executor_address": 486365,
+      "r1_goodix_graph_aligned_executor_address": 548293,
+      "r1_goodix_graph_pool_executor_address": 268311,
+      "r1_goodix_graph_vector_executor_address": 197941,
+      "r1_goodix_graph_operator_executor_address": 626397,
+      "r1_goodix_graph_pair_executor_address": 224381,
+      "r1_goodix_graph_quantizer_executor_address": 168957,
+      "r1_goodix_graph_transform_executor_address": 220435,
+      "r1_goodix_graph_alternate_pool_executor_address": 510613,
+      "r1_goodix_graph_tail_vector_executor_address": 613153
+    },
+    "nonzero_builder_table_domain": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "native_cursor_advances": {
+      "zero": 6856,
+      "nonzero_four_outputs": 3808,
+      "nonzero_eight_outputs": 4368,
+      "nonzero_zero_outputs": 3248
+    },
+    "source_cannot_execute_stock": true,
+    "wrap_cases_are_layout_proof_not_physical_resource_validity": true
+  },
+  "actual_C_heap_lifecycle": {
+    "lifecycle_cases": 128,
+    "packed_scalar_overlap_values_preserved": [
+      "0x1010101",
+      "0x1010103",
+      "0x1010120",
+      "0x1010220",
+      "0x101071b",
+      "0x1010b1b",
+      "0x1010c0c",
+      "0x1010e1b"
+    ],
+    "constructor_complete_C_teardown_and_actual_C_heap_execute": true,
+    "dispatch_mode0_mode1_workspace_and_resource_getters_execute_in_C": true,
+    "graph_initializer_and_existing_C_descriptors_execute": true,
+    "both_family_builders_execute_in_C_and_only_mode6_constructor_modeled": true,
+    "independent_mode0_and_mode1_full_resource_cursor_extents_verified": true,
+    "only_mode6_record_preallocated_with_real_C_allocator_and_transferred": true,
+    "mode0_and_mode1_records_allocated_by_actual_C_wrappers": true,
+    "all_primary_workspace_filter_graph_and_queue_allocations_released_to_prior_top": true,
+    "readonly_filter_resource_unchanged": true,
+    "only_typed_resource_pointer_fields_normalized_for_complete_heap_comparison": true,
+    "packed_dimension_flag_and_scale_words_preserved_by_comparison": true,
+    "workspace_four_word_owner_state_and_guard_match": true,
+    "broad_memory_write_hook_disabled_after_independent_copy_probe": true,
+    "source_object_sha256": "e8731e3aa24830f569f2e5ba137dbc62a581c4da9a51d8aa73e73ef3ddef526e"
+  },
+  "compiled_defects_rejected": [
+    {
+      "name": "wrong_zero_initial_dimensions",
+      "compiled": true,
+      "rejected": true,
+      "case": {}
+    },
+    {
+      "name": "wrong_nonzero_depthwise_groups",
+      "compiled": true,
+      "rejected": true,
+      "case": {
+        "root": 1,
+        "family": 1
+      }
+    },
+    {
+      "name": "consume_zero_quantizer_weights",
+      "compiled": true,
+      "rejected": true,
+      "case": {}
+    },
+    {
+      "name": "default_nonzero_quantizer",
+      "compiled": true,
+      "rejected": true,
+      "case": {
+        "root": 1,
+        "family": 1
+      }
+    },
+    {
+      "name": "zero_preserved_graph_holes",
+      "compiled": true,
+      "rejected": true,
+      "case": {}
+    },
+    {
+      "name": "wrong_first_pair_slot",
+      "compiled": true,
+      "rejected": true,
+      "case": {}
+    },
+    {
+      "name": "wrong_second_pair_slot",
+      "compiled": true,
+      "rejected": true,
+      "case": {}
+    },
+    {
+      "name": "omit_pool_dimension",
+      "compiled": true,
+      "rejected": true,
+      "case": {}
+    },
+    {
+      "name": "wrong_alternate_pool_header",
+      "compiled": true,
+      "rejected": true,
+      "case": {}
+    },
+    {
+      "name": "wrong_transform_shift",
+      "compiled": true,
+      "rejected": true,
+      "case": {}
+    },
+    {
+      "name": "wrong_transform_executor",
+      "compiled": true,
+      "rejected": true,
+      "case": {}
+    },
+    {
+      "name": "wrong_alternate_pool_byte",
+      "compiled": true,
+      "rejected": true,
+      "case": {
+        "root": 3,
+        "dims": [
+          291,
+          564,
+          837,
+          1110
+        ]
+      }
+    },
+    {
+      "name": "wrong_vector_getter",
+      "compiled": true,
+      "rejected": true,
+      "case": {}
+    },
+    {
+      "name": "wrong_family_table",
+      "compiled": true,
+      "rejected": true,
+      "case": {
+        "root": 1,
+        "family": 1
+      }
+    },
+    {
+      "name": "invent_nonzero_output_minimum",
+      "compiled": true,
+      "rejected": true,
+      "case": {
+        "root": 1,
+        "family": 3
+      }
+    },
+    {
+      "name": "wrong_second_convolution_flag",
+      "compiled": true,
+      "rejected": true,
+      "case": {}
+    },
+    {
+      "name": "wrong_tail_width",
+      "compiled": true,
+      "rejected": true,
+      "case": {
+        "root": 1,
+        "family": 1
+      }
+    },
+    {
+      "name": "wrong_tail_order",
+      "compiled": true,
+      "rejected": true,
+      "case": {}
+    },
+    {
+      "name": "wrong_final_operator_offset",
+      "compiled": true,
+      "rejected": true,
+      "case": {}
+    },
+    {
+      "name": "wrong_return_cursor",
+      "compiled": true,
+      "rejected": true,
+      "case": {}
+    }
+  ],
+  "contract": [
+    "Use existing actual C aligned/convolution, quantizer, pair, pool, operator and vector helpers to construct440 graph bytes. Preserve four-byte gaps74/dc/1a4 rather than importing the portable model whole-buffer clear. Packed pool fields include both native dimension bytes.",
+    "Family0 uses the exact immutable private quantizer constants0.0/1.0 without consuming the model cursor. The C quantizer default is equivalent to that private constant pair. Nonzero builder consumes the first model pair and indexes the complete eight-byte width table8/4/8/0/0/0/0/0 for family0..7.",
+    "Three additional helpers pack exactly three input bytes, pack four truncated argument bytes with the alternate-pool identity, and return the tail-vector identity. Executor words remain explicit opaque data bindings; no calling ABI or executor body invented.",
+    "Native cursor advances are6856 for family0,3808 for four-output nonzero,4368 for eight-output nonzero and3248 for zero-output nonzero. Late tail records preserve native call order15c/174/18c/144.",
+    "710 stock/C comparisons cover all1838 native instruction bytes with independent complete graph/cursor/hole/packed-field oracles. All helpers and memory primitives execute as C; no function port is modeled. Cases include all eight width-table indices, input/output overlap with live modified model headers, packed-helper aliases, flags/dimension truncation, active FPSCR and wrapping cursors.",
+    "128 complete HR constructor/actual allocator/teardown cases execute both family builders. Mode0/1 completed graph records independently reach the exact ends of6660-word and2979-word canonical resources. All primary/workspace/filter/graph/queue/state allocations return to prior heap top."
+  ],
+  "limits": [
+    "Mode6 construction remains the only modeled constructor function below the ordinary HR lifecycle. Its record is preallocated through each real allocator and transferred. Five external system/logging bindings remain in the fixture; ordinary successful cases exercise mode6 only. Fourteen executor identity data imports remain unresolved, so numerical inference is unproven.",
+    "The broad resource-range normalizer initially misclassified packed scalar01010e1b as a relocated pointer, producing a false heap difference. The final fixture normalizes only explicitly typed descriptor/remap/coefficient pointer fields, leaves all packed dimension/flag/scale words unchanged, and asserts that eight real scalar/resource-range collisions are preserved. No firmware source changes were made for that instrumentation issue.",
+    "Source model resource pointers are normalized only for comparison output/provider traces, never rewritten during execution. Raw graph scalar words and all other memory remain exact comparisons. Readonly resource data is unchanged.",
+    "Nonzero family indices outside0..7, invalid pointers, unaligned/fault behavior, concurrency, cold FP activation, caller scratch and private frames remain unproven. High-address wrap cases establish logical record layout rather than a physically valid entire model resource.",
+    "The890-unit ld-r composition passes without failures or duplicate strong symbols.879 prior nongenerated source/object pairs unchanged, tested object equals normal object, no writable state added. Eight readonly width-table bytes plus ordinary C shape metadata are data, not executable blobs.",
+    "Two family-builder imports are replaced by three deeper opaque executor identity data imports, application75 to76; boot22. Source-plan/cache layout unchanged. Final executable linking/startup, full executor/inference implementation, physical sensor delivery and boot remain open."
+  ],
+  "evidence_files": {
+    "build/sources-goal-r1-goodix-graph-families-c/report.json": "a201f5d132ca7a00fa7f65e2e5049b5113dd71ee13d4d5ad8fb353ce028d066b",
+    "build/sources-goal-r1-goodix-graph-initialize-c/report.json": "cc9e6f36c0a2d38274a2d84f8efeeac3e5af01a2ef2ce1cac05e546b94a6ecba",
+    "r1/src/application/goodix/native_graph_families.c": "869f2fe92f383ed67c5e0076ff6391c8e557cb2953cfac150dffdb223b026fda",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-graph-families-c/r1/r1-application/r1__src__application__goodix__native_graph_families.c.o": "e8731e3aa24830f569f2e5ba137dbc62a581c4da9a51d8aa73e73ef3ddef526e",
+    "r1/src/sources.json": "a63664aed6045d17ca644939dce24060556190a5d0adf70376db48e68ac9b8d5",
+    "tools/build/source-plan.json": "eeb516e31b3310fb0718f36908977f8125723f7c5e0e86cd6744395826259a4d",
+    "r1/src/config/runtime/native_health_cache.ld": "eb8f131c489cd818d4e36718718fa1989719ca0170f164541a1a5bf56dfc1ec3",
+    "r1/docs/reference/FUNCTION-OWNERSHIP.csv": "16b470149fc754fe185e40bcc83a40fd8c53123d935481c66c7b3d5a7a379d43",
+    "r1/symbols/function-frontier.csv": "8cc2fbba9a502e7b8656eee3753849d9b3aa8e88e8d1d87d390712a79e3cad80",
+    "r1/docs/reference/goodix-graph-initialize-c-review.md": "5f08b1dafc87d95e95e026bfe71961c38fdad496d02058c41dcae8033e0cb202",
+    "build/goal-r1-goodix-native-heap-init-c/fill.o": "5b9881f48c6329da35510eb6b3f4be65d3c31bab24e2f6ab7d5713597d06c391",
+    "build/goal-r1-goodix-graph-initialize-c/expanded-rw.bin": "87fdee392022fdbe23dd0daf3e859fb14f3ce26ba3e8403aab56dc9d9a913317",
+    "build/goal-r1-goodix-graph-initialize-c/initialization.json": "2d7fef150e37dc4603ffb232bdd8f18948874e3db98abeec6f1ac7233f122cf1",
+    "r1/src/vendor/goodix_primitives/goodix_primitives.c": "6ba3fff7701c90db05c8700e5b27d9cdbca327887deb92a9cef2bda03c5bf75b",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-graph-families-c/r1/r1-application/r1__src__vendor__goodix_primitives__goodix_primitives.c.o": "a3721ecc5551d066cba889dc052bc3c2c2343c69683909c89ddc9a1f3b0a84b5",
+    "r1/src/vendor/model_data/r1_model_data.c": "927096c22e8b55d1911e4e9b630b798e1988d0279d65c9533d9e228d3cb8071d",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-graph-families-c/r1/r1-application/r1__src__vendor__model_data__r1_model_data.c.o": "811f33962c43ad6e9a6110a53aa3e50c9ab5477ca28fa64fb344b00e714bd9a8",
+    "third-party/upstream/musl-memmove-1.2.5/memmove.c": "1304f9ddfc18594f5d9a84691892b9fdaf3be8ecc6d7f365c691abb138eaf74e",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-graph-families-c/r1/r1-application/third-party__upstream__musl-memmove-1.2.5__memmove.c.o": "4a6ccefb180ef4af2cfe631f54df4d6f629d1b3a2d374911c00b25c107bcb723",
+    "third-party/upstream/musl-memory-1.2.5/memcpy.c": "1664d565f968b053ac33c5ac615c057a255a5821c8fa510fba61d4f63dee08e9",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-graph-families-c/r1/r1-application/third-party__upstream__musl-memory-1.2.5__memcpy.c.o": "a4b54c7315f7ca2f8097e3f9afb4a9bcd7860c75649fc9e185d951c3ea0696cf",
+    "third-party/upstream/musl-memory-1.2.5/memset.c": "2a74d9e7f988945e0d691d480b78d77a228da0d2be401c1000637cc879b2c0be",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-graph-families-c/r1/r1-application/third-party__upstream__musl-memory-1.2.5__memset.c.o": "6c2f1a8f480c27d5bc20f79ac535dac28fbbdcaec12e69bad96721f724ec9057",
+    "third-party/upstream/musl-memory-1.2.5/strcmp.c": "3e1793ea2dd358e5c884c4dd232083605d0f6775f7ebe19d03d64fe97068a78f",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-graph-families-c/r1/r1-application/third-party__upstream__musl-memory-1.2.5__strcmp.c.o": "d2d1444d824aed4070fa9271ff54cbd83bd5390686232894dbad3c3a36189e3d",
+    "r1/src/application/goodix/native_heap_init.c": "c3085064866b23d603697918b6dfdd29f66ab68c7e82cb1f3e10443c80e3f8b6",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-graph-families-c/r1/r1-application/r1__src__application__goodix__native_heap_init.c.o": "d25f87d5c62ab05f6d5e4d73cc1de5afacf8300a5f1286735b75c9715c30063c",
+    "r1/src/application/goodix/native_heap_free.c": "175cf893ee4b475bee0a886d69522782ac879dd0b29c43285d957c03fb4dc7c4",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-graph-families-c/r1/r1-application/r1__src__application__goodix__native_heap_free.c.o": "bc333928ee0e42aaf0a0446eb69f4ff0528fd2f27737d5ed1744ed750b807022",
+    "r1/src/application/goodix/native_heap_allocate.c": "2806f3ca4f9074b157b390edf8bd03815a46b31f1661e1ed238a0938c666d8c9",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-graph-families-c/r1/r1-application/r1__src__application__goodix__native_heap_allocate.c.o": "129b40a4930e85990e0ba9503f83bbc867460580ef323f2a6dfa2476e7dad685",
+    "r1/src/application/goodix/native_heap_malloc.c": "1b827deb8981088d68fae260af0aa442a7315d4aaaa7f2ed8a248c859878a0c3",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-graph-families-c/r1/r1-application/r1__src__application__goodix__native_heap_malloc.c.o": "977cb669d0ca7b16102f67629d38c362cd2c47fba05cb890577e367a4f9d0138",
+    "r1/src/application/goodix/native_record_teardown.c": "b7cea98e79bac3f8c5d80bc58c59e81840d7e9b8b9267429e83c4ebb981bbf45",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-graph-families-c/r1/r1-application/r1__src__application__goodix__native_record_teardown.c.o": "785df1baa1e96a2723aa03debb90b5dc7bfa44a1e76283a79645968876cec4de",
+    "r1/src/application/goodix/native_processing_teardown.c": "77235d34263525d27a549a67a76d71552051fea81a2260c8d6a3bb0b736991cf",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-graph-families-c/r1/r1-application/r1__src__application__goodix__native_processing_teardown.c.o": "1bd4699810d6f77a4624794f7c07eeed142ab7ac01f48e018304f2988b05f607",
+    "r1/src/application/goodix/native_spo2_initialize.c": "41e6290e411795ade2bb7b0c9b3aa3b30678483bfb7b3b2c86e3e25d79908c82",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-graph-families-c/r1/r1-application/r1__src__application__goodix__native_spo2_initialize.c.o": "416f2e823ae3edd838065709e40b06eaa5b9648ad2462237656ffdf5b212b129",
+    "r1/src/application/goodix/native_spo2_generated_model.c": "9ed40f8a8878b5b074087dadbc37ac5ba2b17197f2ba9ca512e9e4fb190bd584",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-graph-families-c/r1/r1-application/r1__src__application__goodix__native_spo2_generated_model.c.o": "14f0da4eff0d75d6014f40d928a6bd58dcc44b79b1a4c6ed695c9dbdf87ee210",
+    "r1/src/application/goodix/native_spo2_model_graph.c": "7099eb945658be2d7d5cad6b337de2f1afa15d57161266455268d3c25481b6ef",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-graph-families-c/r1/r1-application/r1__src__application__goodix__native_spo2_model_graph.c.o": "ede8398723a208a4ee7336b6004b9189576cd36520f3222c84be227cc166473b",
+    "r1/src/application/goodix/native_hba_initialize.c": "d899be6399bdca24bf32650299e5816e81dba1d56a2036e8d7886710fbf7dfed",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-graph-families-c/r1/r1-application/r1__src__application__goodix__native_hba_initialize.c.o": "857aa996883c104ae5eb5d6b17e1a818be85bccf28434ba7fa1af23bcd914562",
+    "r1/src/application/goodix/native_hba_workspace.c": "5b829228465a90a13db41d9a2e53fd263c19a65741133290f94024e6ce8abb96",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-graph-families-c/r1/r1-application/r1__src__application__goodix__native_hba_workspace.c.o": "d7d6410239635dbee2c23bf78a2f391d63922a6d7ce345419f4a447abc6f428f",
+    "r1/src/application/goodix/native_graph_construct.c": "7a3d70c554c802b7fa4327233c40558530d9879c849edd4200829fcccea5d523",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-graph-families-c/r1/r1-application/r1__src__application__goodix__native_graph_construct.c.o": "16584beef078418e6aa5e280ecb14859250fe60a0e12cfaceacc16bee455cfde",
+    "r1/src/application/goodix/native_graph_initialize.c": "fe2a014dcbcaf72aadaa571fafd2f59f8dc911d865609bed11c2a2cf19821a2b",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-graph-families-c/r1/r1-application/r1__src__application__goodix__native_graph_initialize.c.o": "424ec65ea3632c256248bfa49d406d2a4741971307eb30df7582e0472d74c2c5",
+    "r1/src/vendor/model_data/r1_model_data.h": "5eb0f6d48c3dbe8104b42a1d90481f91ce6639f084745dee12069fabf908588f",
+    "r1/src/vendor/model_data/r1_goodix_hba_generated.inc": "eb40a4366c318ed68bc2f5dcb060028f3a1c3d5d6504551959fcf9d25d6fcdf4",
+    "r1/src/vendor/model_data/r1_goodix_hba_schema_generated.inc": "c7405823cdc55da71d41be3a82844323cfbb25faa6c7a4362236e28aa942d48e",
+    "build/goal-r1-goodix-graph-families-c/verify-final.log": "ecdeb5a2817d550ca341370e63f2eb63a39a1d6704e4ef70c0130d0f4f88a975",
+    "build/goal-r1-goodix-graph-families-c/heap-complete-final.log": "f3b373617c0b280a821430c8565d3d5278f379efa044f53ecd9fdd46ce6442d5",
+    "build/goal-r1-goodix-graph-families-c/audit.json": "6d682d730d9c8e1752053051b849e92a3ac7e6a6aaa645d306132efcc2ca8c33",
+    "build/goal-r1-goodix-graph-families-c/2966c.txt": "e6278304ff24b59766db200189be9113a3f7dbd185f391beaa84fc217f0ffeb9",
+    "build/goal-r1-goodix-graph-families-c/2874c.txt": "f7303fc99b8399f23b9bccf51f967e3a168816b50029d12dc90ef950d49c4f3c",
+    "build/goal-r1-goodix-graph-families-c/heap.py": "29ae4eea6e734f00999f7bf88f3f7e6bbe27bd32bf1e55a2e976010a76ece55e",
+    "build/goal-r1-goodix-graph-families-c/verify.log": "3e9318f32a31366a9c8fe76e21c6ce109e10a6864b02676686a38b5fbd7f8faa",
+    "build/goal-r1-goodix-graph-families-c/audit.py": "8a796979c7b1554ee10989f72b5be953a6932c63a88c10390a759f51296df9b2",
+    "build/goal-r1-goodix-graph-families-c/entries.json": "eaafbdfe548aa15825d8f5a5b48eebd85d3e4f51f20fc6df34d277933526cbe5",
+    "build/goal-r1-goodix-graph-families-c/source.elf": "848bd76de890d1c6bb4cb844b07191f7dd428a560b44551393bb61001a04c6f0",
+    "build/goal-r1-goodix-graph-families-c/negative.py": "6e5234ce7bb9e863e199e1c665221e0c939dcc262a808968fff8c54b97c38b0a",
+    "build/goal-r1-goodix-graph-families-c/negative.log": "3219e8b320fec417a56c33f4edcad85662e31217186ea785505ac5b79365015d",
+    "build/goal-r1-goodix-graph-families-c/negative-results.json": "dcbb39aaa17141a80fe194b1e7eb033f0650123881f9562c455fcbc509f284de",
+    "build/goal-r1-goodix-graph-families-c/source.o": "e8731e3aa24830f569f2e5ba137dbc62a581c4da9a51d8aa73e73ef3ddef526e",
+    "build/goal-r1-goodix-graph-families-c/results.json": "9dcfc41830b506b77040c76679466232e7f7b87a30203c8da731f67f7b179c31",
+    "build/goal-r1-goodix-graph-families-c/heap.log": "9f83b4762a7ee6346c546023c1b5a666c512f611557ec6d6723df802e6c55979",
+    "build/goal-r1-goodix-graph-families-c/schema-rea.json": "1dd2f2e9d8e2cf9d994b3d3d6e5250db37b1c28331e2f5e4701b2fce1904945c",
+    "build/goal-r1-goodix-graph-families-c/record.py": "3f164d68bf6099020e8b9ed87ea04b130e69ef1e7884de4777fb79cf5af24760",
+    "build/goal-r1-goodix-graph-families-c/compile-argv.json": "3295cfe21d8b8f2669d8311e141c2b66e9c4f3d811f4bd36e860bdc68f0f857a",
+    "build/goal-r1-goodix-graph-families-c/manifest-before.json": "d6149b04309e80b91fdafd54da38c121610a8934d2347312c9d69d6457eb2bd5",
+    "build/goal-r1-goodix-graph-families-c/source.d": "171fae6d41439819334a3381058a3344802deff3177e54d195139cfd9d9b567e",
+    "build/goal-r1-goodix-graph-families-c/verify.py": "89ebf3f381e9d43f1f8f34b2a9d6a95631ea92e5530c056961ac4c5a21f02b4a",
+    "build/goal-r1-goodix-graph-families-c/heap-typed-final.log": "490940a294235948ba88a1b17676f15c7b5e0ceaf033b906ffb52191c89bf2d4",
+    "build/goal-r1-goodix-graph-families-c/negative-final.log": "3219e8b320fec417a56c33f4edcad85662e31217186ea785505ac5b79365015d",
+    "build/goal-r1-goodix-graph-families-c/build.log": "a19e598216475ad3951436129e76ed298b5448eba76959ee7f9271fd8ee9019e",
+    "build/goal-r1-goodix-graph-families-c/heap/test.ld": "f1169785ba906d75bb7f54716784a141fa1f843b5737d8893234059a8ff2ea58",
+    "build/goal-r1-goodix-graph-families-c/heap/source.elf": "4701118336666f56e8a4176a7cb3542a0db22643b27c4339f2ceaea65e109390",
+    "build/goal-r1-goodix-graph-families-c/heap/results.json": "a6b042ae99f499ea007f696e0d329e56d512f18309504f7245dd584b66eb6f32",
+    "build/goal-r1-goodix-graph-families-c/negative-wrong_zero_initial_dimensions/source.elf": "ec6f65357be187f3268eca23bed790373ab5d32ab1bf0719b0ab6bc8f0e30ce8",
+    "build/goal-r1-goodix-graph-families-c/negative-wrong_zero_initial_dimensions/source.o": "8a4396220f50750141556e8a8f7621a88a4c39ba79a0785ee75aa87171366f04",
+    "build/goal-r1-goodix-graph-families-c/negative-wrong_zero_initial_dimensions/source.d": "fb5fc8cf2cffa4bfad3baa5593586fa818bd581fd0beeea4769c2caab89d2270",
+    "build/goal-r1-goodix-graph-families-c/negative-wrong_zero_initial_dimensions/source.c": "ca536e84822efe1612e32f7ef89b47641f71b7517647361ef83ec74614b8bdda",
+    "build/goal-r1-goodix-graph-families-c/negative-wrong_nonzero_depthwise_groups/source.elf": "83b69d6cef6aff5dde735bba95a43fbb9088c5db4913a6a2dd198edc48ae9d9a",
+    "build/goal-r1-goodix-graph-families-c/negative-wrong_nonzero_depthwise_groups/source.o": "b84d3594e684d3f6c648aa987d40215a7316dc45024681e4bf323e00d561b554",
+    "build/goal-r1-goodix-graph-families-c/negative-wrong_nonzero_depthwise_groups/source.d": "51fa9f3ea6fcef1b7ab15c40d832f0829dc1841a6350e5c4334a8c4fd2238f6c",
+    "build/goal-r1-goodix-graph-families-c/negative-wrong_nonzero_depthwise_groups/source.c": "60811fe616ca2c46e75adb40a819a8ef52ef0f67040c2f0da93c05c322107b4d",
+    "build/goal-r1-goodix-graph-families-c/negative-consume_zero_quantizer_weights/source.elf": "7d3ba5fcab8e32dfbd1e484cea27be0331f609161e484ae813cb3c15387438ba",
+    "build/goal-r1-goodix-graph-families-c/negative-consume_zero_quantizer_weights/source.o": "4be23c7e76e5af9de7ad809c9cb905b86d5729de56ccd98c48a3aff0cecfa471",
+    "build/goal-r1-goodix-graph-families-c/negative-consume_zero_quantizer_weights/source.d": "d85635dcdee325033df59b000366b9d874edb2739241f799fc826d7c529c4c6c",
+    "build/goal-r1-goodix-graph-families-c/negative-consume_zero_quantizer_weights/source.c": "e13258ca186e642f07d9174dc2c37c91226e8f8dd355990f3b56a907dd767852",
+    "build/goal-r1-goodix-graph-families-c/negative-default_nonzero_quantizer/source.elf": "12cce08e6a39fc2e68f3b1396ade5165d28b59c3e8233d674f86c77f98e9ede0",
+    "build/goal-r1-goodix-graph-families-c/negative-default_nonzero_quantizer/source.o": "0e649a5358af75b375e0e586a2be430dc6b3f62599065436c98cf1a998099ef9",
+    "build/goal-r1-goodix-graph-families-c/negative-default_nonzero_quantizer/source.d": "19f5d6a3706b1a757b86657fe126eb8f1f65dce34b124302f0a716c3f6cbaa0b",
+    "build/goal-r1-goodix-graph-families-c/negative-default_nonzero_quantizer/source.c": "ce27daf16d054e6c526b1700e7505330519f9d5485392e0655a2deb2f7cb710e",
+    "build/goal-r1-goodix-graph-families-c/negative-zero_preserved_graph_holes/source.elf": "70c980ceed1e60348ad1932b48eed960c23b199a987ac4d0daade395aabff5a5",
+    "build/goal-r1-goodix-graph-families-c/negative-zero_preserved_graph_holes/source.o": "cb49ecd3af9f43b9e2b6024e5f52f5f05aed7c5d652fd024d1789d6c84c99a85",
+    "build/goal-r1-goodix-graph-families-c/negative-zero_preserved_graph_holes/source.d": "8b431c3f4a8c9138f67b74d311285bb184227e8889df04531f7abb54a920bc5f",
+    "build/goal-r1-goodix-graph-families-c/negative-zero_preserved_graph_holes/source.c": "a16b000d4ccefd0af37191237afb875a04378c990015c2e218cf720cfb276e75",
+    "build/goal-r1-goodix-graph-families-c/negative-wrong_first_pair_slot/source.elf": "bbfdae8ca9e19c9994b5a6c6d6c4662815a4d9849de8efb33430ea858a409389",
+    "build/goal-r1-goodix-graph-families-c/negative-wrong_first_pair_slot/source.o": "5634d884de2422ad3a30642e7177a7e99f9807f7f4fd41297acf7f4f9275e89c",
+    "build/goal-r1-goodix-graph-families-c/negative-wrong_first_pair_slot/source.d": "4ba189c4e70e01cabc9a5393fe6789e8ac03385778c05a835ed61a5fd65eff53",
+    "build/goal-r1-goodix-graph-families-c/negative-wrong_first_pair_slot/source.c": "19869b0a401dfdc129ea00a103a5fa72ac3b58991036c454ccb21a93e6050466",
+    "build/goal-r1-goodix-graph-families-c/negative-wrong_second_pair_slot/source.elf": "4476877a44a059784c0547e399ffaf6f9c0f36361d34c1b9108e27a594dfa3de",
+    "build/goal-r1-goodix-graph-families-c/negative-wrong_second_pair_slot/source.o": "918368fba3aab48f3e8a688fd297335f0a090b892365d4cf40736c73854b0f1e",
+    "build/goal-r1-goodix-graph-families-c/negative-wrong_second_pair_slot/source.d": "58d2f8aacda8dda58804405456671868fb943089d8e81b8818e1fdf751903b32",
+    "build/goal-r1-goodix-graph-families-c/negative-wrong_second_pair_slot/source.c": "de8ef9d05c708bc993ed372abeb90fabc40784034410cd9667c5e6130acdef82",
+    "build/goal-r1-goodix-graph-families-c/negative-omit_pool_dimension/source.elf": "883ba867dfc7c9d7791ff0dda3606cd0a6691e4f3c541e0c92de26c96230fd9f",
+    "build/goal-r1-goodix-graph-families-c/negative-omit_pool_dimension/source.o": "dfafce0c1fa642376bcf726350995a0b7a04b84072e59817e5cc641e387eff94",
+    "build/goal-r1-goodix-graph-families-c/negative-omit_pool_dimension/source.d": "5f0fa82d64ebb01317548e976266f13b6693e639c2a9b329e0a269f23e7e7c57",
+    "build/goal-r1-goodix-graph-families-c/negative-omit_pool_dimension/source.c": "2d2d6a36abece43051e07fa6991f5df7c7d7f6c19e85a21323532821ec30e13c",
+    "build/goal-r1-goodix-graph-families-c/negative-wrong_alternate_pool_header/source.elf": "6c29b64a81997afffb99884d0c11dd63ac9c0e6e816707f2f71a3289f94220ff",
+    "build/goal-r1-goodix-graph-families-c/negative-wrong_alternate_pool_header/source.o": "f1908d86eaaa31d7fb262e9a68eb0cb257696fe5769f87f61941be0932a5ac6b",
+    "build/goal-r1-goodix-graph-families-c/negative-wrong_alternate_pool_header/source.d": "8e74c5558e3e322b5bdf5770def77d6eafe059ecc4539addbf731679186ddff6",
+    "build/goal-r1-goodix-graph-families-c/negative-wrong_alternate_pool_header/source.c": "ebb542242a708bd5bbbf94b49d993f148924d529d13e6efc1ccf858dea9b7131",
+    "build/goal-r1-goodix-graph-families-c/negative-wrong_transform_shift/source.elf": "2a48d45ab1eeda0a65893645454a6e5257c0f324fd5fdeee4eba5db7889619ed",
+    "build/goal-r1-goodix-graph-families-c/negative-wrong_transform_shift/source.o": "6e058b28f3c2babec105ee1d38b52057e8336f523095211aa2c050036b37dcf1",
+    "build/goal-r1-goodix-graph-families-c/negative-wrong_transform_shift/source.d": "cde2f30caafec09c264da46595c0c52d763254fbb10ebdd7a03a151c7d0d4181",
+    "build/goal-r1-goodix-graph-families-c/negative-wrong_transform_shift/source.c": "e7fa59004de46405dd831fb21729b34020da04b61aa0aee9caf3d083cea594f5",
+    "build/goal-r1-goodix-graph-families-c/negative-wrong_transform_executor/source.elf": "fa0ab8a8691f883089e3d0a2e46e8a06380ec32041ea63e4c069cd654c5aa654",
+    "build/goal-r1-goodix-graph-families-c/negative-wrong_transform_executor/source.o": "67f90f16d72b7f5346eda0bf86c1c2d3696dc5e90d7f2ca2cd82178c658b05f5",
+    "build/goal-r1-goodix-graph-families-c/negative-wrong_transform_executor/source.d": "13895e51b64122e993ab4911dc1ee7e363ad5ce037534a8f3318ae63d14a5b80",
+    "build/goal-r1-goodix-graph-families-c/negative-wrong_transform_executor/source.c": "8f9f0a50f103489906a36d176b6f12eac582d0eee31f957e748cbedeb37584fe",
+    "build/goal-r1-goodix-graph-families-c/negative-wrong_alternate_pool_byte/source.elf": "4cb4dd66630c8502192d825c489db161582b7382ad75178a9edb3dbc6207b63e",
+    "build/goal-r1-goodix-graph-families-c/negative-wrong_alternate_pool_byte/source.o": "177df70772edf1799b0f8af149c8aaf0865092c0ac67f88ae11aa185e0e76f2e",
+    "build/goal-r1-goodix-graph-families-c/negative-wrong_alternate_pool_byte/source.d": "943174c07f254d9df82bb668eb5b11f0650d0e5d3a80863e0e9670bba05c1a8b",
+    "build/goal-r1-goodix-graph-families-c/negative-wrong_alternate_pool_byte/source.c": "438b3930649f66caeeef1ed956e2175e3344ec504c28a973ca4a16dd60c0235f",
+    "build/goal-r1-goodix-graph-families-c/negative-wrong_vector_getter/source.elf": "48fab26647858df7fd8771af225d2370004e294a73b6810af22b4137d06ec542",
+    "build/goal-r1-goodix-graph-families-c/negative-wrong_vector_getter/source.o": "fdfbcad2677effa712031d499e23976ddc2695ca4135137c823daed15a3115cc",
+    "build/goal-r1-goodix-graph-families-c/negative-wrong_vector_getter/source.d": "1d70024961ceb369940c181167ebe2babad9db865f29848f5e15206136b27468",
+    "build/goal-r1-goodix-graph-families-c/negative-wrong_vector_getter/source.c": "bb0ba36b2d78b416c345a7beb1605ae3f1a43bcfb71d728d60bc539d9841de60",
+    "build/goal-r1-goodix-graph-families-c/negative-wrong_family_table/source.elf": "17d0592960be89039a2054e78be1497369031b627f22eafa23fcc84c31fb21ab",
+    "build/goal-r1-goodix-graph-families-c/negative-wrong_family_table/source.o": "2d0551b6b0db860585da365c3e809efe59f25dcd55742a969082534ba6c15b04",
+    "build/goal-r1-goodix-graph-families-c/negative-wrong_family_table/source.d": "e76cace509228dc08770c7d8bd126c07a8ba1facd61cd42909cd83a78867161c",
+    "build/goal-r1-goodix-graph-families-c/negative-wrong_family_table/source.c": "6249d6fa42f1f05f772c1b4122a76c4a65f6df239d2b06e274aa82e24aff1bdc",
+    "build/goal-r1-goodix-graph-families-c/negative-invent_nonzero_output_minimum/source.elf": "613a1427b027709b5a419475cd00ae9864a94031cf3b225e2e147b6bf7ddfd26",
+    "build/goal-r1-goodix-graph-families-c/negative-invent_nonzero_output_minimum/source.o": "2f8eb1c6bef94dcd7dd15eaf7e31abc574f9ee7d7146f8f04d9a07ff271efda8",
+    "build/goal-r1-goodix-graph-families-c/negative-invent_nonzero_output_minimum/source.d": "d23b73f47d0dc5655b24275f0ece88bd711290de81366e1d60b4c764244824db",
+    "build/goal-r1-goodix-graph-families-c/negative-invent_nonzero_output_minimum/source.c": "cdd2518205eff71f704c2f5692819326faeab427007d80e7822742a0d0418719",
+    "build/goal-r1-goodix-graph-families-c/negative-wrong_second_convolution_flag/source.elf": "c16ac1936c3d4550040687f5aa48856ab9346399f21b01b93489b13b7f56b028",
+    "build/goal-r1-goodix-graph-families-c/negative-wrong_second_convolution_flag/source.o": "1441ea4fe6d0fc169e4662d69a0125a704c8d145aecb126d844b98277f1f3c2f",
+    "build/goal-r1-goodix-graph-families-c/negative-wrong_second_convolution_flag/source.d": "ebc58714fe8a3608b4fb7a11048acd6181f1190e5a138d6ced28c5f9b0cc9e2c",
+    "build/goal-r1-goodix-graph-families-c/negative-wrong_second_convolution_flag/source.c": "731f3f95770435deca8a2dc2d61889d7ac9f4a785591747e6dae560b5c10c8ed",
+    "build/goal-r1-goodix-graph-families-c/negative-wrong_tail_width/source.elf": "d6d13b286903d8587347d49cec52725dc1d8721c014d943f91470d27262abc15",
+    "build/goal-r1-goodix-graph-families-c/negative-wrong_tail_width/source.o": "d885e0b45c011a04da9371da49e57b56a24385723bff04b84eed27ca0e99f3db",
+    "build/goal-r1-goodix-graph-families-c/negative-wrong_tail_width/source.d": "28c132b5a9a351ad9ba625c2de7cdfe63a891e2c84cb22772f46bbad0ad10db4",
+    "build/goal-r1-goodix-graph-families-c/negative-wrong_tail_width/source.c": "05331d88cca55ff8e73f89928210831f485fdaa0de5e6058f31ea68439336d48",
+    "build/goal-r1-goodix-graph-families-c/negative-wrong_tail_order/source.elf": "368e78e1ea3011fd0dde0eb28c628e146540ab61e4eda139c9ba0316b6b22a83",
+    "build/goal-r1-goodix-graph-families-c/negative-wrong_tail_order/source.o": "b1f824aa75497fb297dd95c1b78026061b3407dbdfa6c3a80b402e9e4b02f539",
+    "build/goal-r1-goodix-graph-families-c/negative-wrong_tail_order/source.d": "e2bebb8f8c52195ae68056ae73f1047cbc38abb4338bb43bb6abb9cb66a8a107",
+    "build/goal-r1-goodix-graph-families-c/negative-wrong_tail_order/source.c": "749cdcfd734de366521eadb4cfd68bdac24cae208a8b6077602b21deb42b8ca3",
+    "build/goal-r1-goodix-graph-families-c/negative-wrong_final_operator_offset/source.elf": "53acadf084f5f3b1c2894927afe76acc9e2f4975d9899a46a2dc5df2df601369",
+    "build/goal-r1-goodix-graph-families-c/negative-wrong_final_operator_offset/source.o": "239bac942207a9aedd2e40b65532a8b003795cce771d0e1aa9533f67c816a60a",
+    "build/goal-r1-goodix-graph-families-c/negative-wrong_final_operator_offset/source.d": "484e407a2f5f00d281edc23e66455022c6b2ac87b104d32e9f113147a479257d",
+    "build/goal-r1-goodix-graph-families-c/negative-wrong_final_operator_offset/source.c": "2069540ddc8c25ccbac6ed9299b92211657bcf7c5a1220a34ec6293b7b4d9d62",
+    "build/goal-r1-goodix-graph-families-c/negative-wrong_return_cursor/source.elf": "79e97474c5d87de2b9ad8c9e60fa67ae3c6bf5c7355d3ee9166e741b2dfd012f",
+    "build/goal-r1-goodix-graph-families-c/negative-wrong_return_cursor/source.o": "e56cd347235b02735332453445ca9b0b07186d158ca44fd4393ff9b42c407621",
+    "build/goal-r1-goodix-graph-families-c/negative-wrong_return_cursor/source.d": "a44971c76e27ffd02d81e3368835e0716f309ca82666686cdb5927410de4653c",
+    "build/goal-r1-goodix-graph-families-c/negative-wrong_return_cursor/source.c": "c22069ef8fe983f2b66b1589e706a115f1971228604e6d58222bdbef0604e7a1"
+  }
+}

@@ -1,0 +1,123 @@
+{
+  "stock_integration": {
+    "passed_traces": 1288,
+    "paired_constructor_operations": 1672,
+    "initial_xpsr_word_values": 4,
+    "initial_xpsr_native_word": "0x0009c4cc",
+    "reports": [
+      "build/sources-goal-r1-task-heap-ready-c/report.json"
+    ],
+    "actual_allocator_constructor_list_item_stack_and_ready_handoff": true,
+    "actual_stock_and_C_memory_fill": true,
+    "whole_heap_compared": 51200,
+    "static_control_and_stack_regions_compared": 4,
+    "source_path_forbids_stock_instruction_execution": true,
+    "fault_paths": {
+      "first_allocation": 16,
+      "second_allocation": 24,
+      "priority_assertion": 16
+    },
+    "limits": [
+      "Scheduler suspend/resume and critical boundaries modeled; no asynchronous scheduling proof",
+      "Allocation caller words normalized only after validating each against its actual malloc-entry LR; task-exit LR normalized only after checking source-specific function address",
+      "Fixed stock RAM placement in fixture only; production link placement unverified",
+      "Stable names, valid ordinary pointers; malformed metadata, private frames, caller-clobbered words/flags and complete exception state excluded",
+      "No byte qualification"
+    ]
+  },
+  "CMSIS_integration": {
+    "passed_traces": 576,
+    "constructor_operations": 704,
+    "initial_xpsr_word_values": 4,
+    "actual_CMSIS_allocator_constructor_memory_fill_list_stack_ready_path": true,
+    "limits": [
+      "Source-only integration; stock comparisons are separate",
+      "Scheduler-state reads, suspend/resume and critical boundaries modeled in stopped-scheduler setup",
+      "Fixed stock RAM placement in fixture only; allocator caller words and task-exit LR checked before normalization",
+      "No full source link or physical scheduling proof"
+    ]
+  },
+  "audit": {
+    "changed_objects": [
+      "r1/src/application/rtos/task-construction/stack.c"
+    ],
+    "other_object_bytes_unchanged": true,
+    "unchanged_private_exit_body": true,
+    "stack_init_bytes": {
+      "before": 90,
+      "after": 96
+    },
+    "import_sets_unchanged": true
+  },
+  "negative_controls": {
+    "caller-tracking": true,
+    "hardcoded-xpsr": true,
+    "initial-xpsr": true,
+    "task-number": true
+  },
+  "prior_component_receipts": [
+    "r1/docs/reference/native-heap-c-integration-review.json",
+    "r1/docs/reference/task-create-api-c-review.json",
+    "r1/docs/reference/task-ready-handoff-c-review.json"
+  ],
+  "xpsr_dependency": {
+    "native_word": "0x0009c4cc",
+    "initial_value": "0x01000000",
+    "source_symbol": "r1_native_initial_xpsr",
+    "change": "Read existing source-owned word through volatile typed C access rather than hard-coding its initial value",
+    "scope": "Emulated data-word variants; original artifacts unchanged"
+  },
+  "ownership_repair": {
+    "native_entry": "0x856c0",
+    "candidate_source": "r1/src/application/rtos/task-construction/stack.c",
+    "candidate_symbol": "pxPortInitialiseStack"
+  },
+  "normal_build": {
+    "compiled": 573,
+    "application_imports": 179,
+    "bootloader_imports": 34,
+    "failures": 0,
+    "duplicate_strong_symbols": 0
+  },
+  "qualification": {
+    "compiled_profiles": 5,
+    "selected_regions": 0,
+    "new_function_byte_identity": false
+  },
+  "source_plan_unchanged": true,
+  "source_built_bytes": 3857,
+  "binary_pull_through_bytes": 642303,
+  "hybrid_equals_locked_application": true,
+  "source_completeness_proven": false,
+  "evidence": {
+    "build/sources-goal-r1-task-heap-ready-c/report.json": "76a8aac20cdb24cc1e111c931633e5bc84f379d44a002409729a21c238b47b20",
+    "tools/build/source-plan.json": "969af3130987be89dcdc8777d86b4c891d596b4ecef5cccfd763861f05a12d31",
+    "r1/src/config/rtos/task_stack_contract.h": "200d7d6fe8c9441a91605d03fe9db90c7a4607189700e28cf5b92ad8a2a076ba",
+    "r1/src/application/board/native_task_construction.c": "c7ae411d43ba0750b07afc52aceb7ca2ec18b3d6ce57ccaa163b37c8dbd4231b",
+    "r1/src/application/board/native_heap.c": "83cbdb53b836d594cd67c51b97b38c04a1e062e95a04df4af51d6d0e0713c719",
+    "r1/src/application/rtos/task-construction/ready.c": "74cf8d26001e2506733ef75b93f0382a07046d2646947f929b3b435026cf5176",
+    "r1/src/application/rtos/task-construction/stack.c": "253ebae1aa7f586a30b898e33adc7a6c337840e63c8784a8f2bdbe62f9037474",
+    "third-party/upstream/freertos-kernel/list.c": "db5c169cf3efd68da1c6a923ac84eebc724d602c940bde0b9b5f01f05028fde4",
+    "third-party/upstream/musl-memory-1.2.5/memset.c": "2a74d9e7f988945e0d691d480b78d77a228da0d2be401c1000637cc879b2c0be",
+    "r1/src/sources.json": "e4c2161f5a94ed8f60f515c71ed7f323fa68daecf30f6a35feb8327e77cfec3e",
+    "r1/symbols/function-frontier.csv": "cb7a85ba1156ba2befd83e5d57c4766df58fa2b2124a8cbc4424b042b9763f9a",
+    "build/hybrid-goal-r1-task-heap-ready-xpsr/build-report.json": "0b1d018bf8f1244a664f2f7e72e0f7a8ab9f55845d441fc96c2ab68ccf2a0bb3",
+    "r1/docs/reference/native-heap-c-integration-review.json": "1a90b8afa0db6535e433cc1b648a4ae6f2aac29756d50e9c5bfe86af8aee7a9e",
+    "r1/docs/reference/task-create-api-c-review.json": "2e2c41d9a0dc0391eec2c830421913367fc8039095ac45df8c51b0d1acec2b19",
+    "r1/docs/reference/task-ready-handoff-c-review.json": "7682ac13d123452f399a9c45bada41710681d1f7c26cdfcb1ae1521fc1958639",
+    "build/goal-r1-task-heap-ready-c/REA-stack.json": "d754221179a978360cf4db32e8829146c7b024d9e170e2097a7c38558d9cb798",
+    "build/goal-r1-task-heap-ready-c/before-task_stack_contract.h": "e1493530b76de1fbd7f10f4e7aa1e70627610aa6765468c860baad2f1757b530",
+    "build/goal-r1-task-heap-ready-c/layout.ld": "74b29d3b4a02ee4947a69c8174e6bae51bf837c0c722ebfcbb7cba8932f9a845",
+    "build/goal-r1-task-heap-ready-c/verify.py": "7d3f534ff2a1c087484edfeb538910c5007e145cc905614b416cd05ab765b70f",
+    "build/goal-r1-task-heap-ready-c/results.json": "6ad3b0c131fcc33a4b3d8ad1596644155ed43ffa794aafd0afff9060e8b9bd5c",
+    "build/goal-r1-task-heap-ready-c/make-cmsis.py": "7f85ccac124a949eed75442756e3fdb58a229ea6b07a041072f26b07d65bb201",
+    "build/goal-r1-task-heap-ready-c/verify-cmsis.py": "fb3eb799deb0cd82e69c6053abc9d558646f3a5055178c731d6109591c8c16bc",
+    "build/goal-r1-task-heap-ready-c/cmsis-results.json": "2fdbc0f924bb30adc0cab0544b7b0aaba98a39785f7f6eddf07420828c2b8d5b",
+    "build/goal-r1-task-heap-ready-c/negative.py": "ab88271c8017336e8624377fa43d939df339398bd3af154f240657c6750922b3",
+    "build/goal-r1-task-heap-ready-c/negative-results.json": "a155db6427634b1e87aec3a133265686835b0046a09c134e14b4f3a36b299745",
+    "build/goal-r1-task-heap-ready-c/audit.py": "2dd9262d3e2db1ab200349d8ef9a44e7f9479d0287d2d7295b89333cd1dc3e85",
+    "build/goal-r1-task-heap-ready-c/audit-results.json": "48f61689cb6aafb7d8903b29cae9188c25a592583dd4af991734dcd24995c58c",
+    "build/goal-r1-task-heap-ready-c/qualify-xpsr.py": "20ad456a547c12dd93af8fcc5179d8bdb50ca70305e445d526f4d01f29f56024",
+    "build/goal-r1-task-heap-ready-c/qualified-xpsr/qualification.json": "0a4cf74073ace9eecc51bce2449db0249f4affddfd5935640b60451de0048cb1"
+  }
+}

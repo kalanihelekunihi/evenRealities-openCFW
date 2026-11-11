@@ -1,0 +1,19 @@
+# R1 native graph dispatch and allocation wrappers in C
+
+The [graph initializer review](goodix-graph-initialize-c-review.md) supplies `0x340a0` as C using existing descriptors and the authenticated startup schema. The constructor now uses its shared unsigned-return declaration, with unchanged compiled constructor bytes. Two family builders and mode6 construction remain open.
+
+The graph-record dispatcher (`0x3ddf4`) and mode 0/1/2 constructors (`0x72be0`, `0x48d22`, `0x28b8a`) now use C in `r1/src/application/goodix/native_graph_construct.c`. The [receipt](goodix-graph-dispatch-c-review.json) pins REA body/table reads, sources, normal/tested objects, fixtures and results.
+
+Zero weights return null before reading the selector. Nonzero weights require native selectors 0, 1, 2 or 6. Dispatch passes the weights and the address of record word two to the selected provider and forwards its full pointer result. The C table retains native null slots 3/4/5; no replacement provider is invented.
+
+Mode 0 allocates 732 bytes, returns null on failure, clears the allocation, writes type zero and calls the deeper graph initializer. It then copies context word `0x1e0` to `0x238` and reads live remap parameters. The wrapping stride is `((code >> 2) - 1) / groups`. Zero groups perform no iterations; C avoids division by zero while matching native behavior. Each iteration reads its current target and stores the corresponding payload pointer. Tests cover allocator/initializer mutations, repeated targets, remap tables within the allocated state and exact quotient boundaries.
+
+Modes 1 and 2 allocate 568 and 572 bytes, write the corresponding type and invoke the initializer. They preserve other allocated bytes and ignore initializer return values. No allocation cleanup or clearing behavior is added.
+
+All 408 direct comparisons pass with independent allocation/type/zeroing/remap/return oracles, exact parameter-word read traces, provider snapshots and full guarded memory comparison. Every one of the 216 native instruction bytes executes. Existing C memory primitives execute; malloc, the deeper initializer and mode 6 construction are modeled. Sixteen compiled defects are rejected. A subtraction defect escaped the first negative corpus because grouped division masked it; eighteen additional quotient-boundary cases detect it in the final corpus.
+
+All 128 full HR constructor/real-allocator/complete-teardown lifecycles pass. Dispatch and mode 0/1 allocation wrappers execute in C at the native call points, together with the workspace, resource getters and queues. Only the mode 6 record is preallocated through each real allocator and transferred through modeled returns. The deeper initializer leaves owned child allocations empty. All primary, workspace, filter, graph and queue allocations coalesce back to the prior heap top. Canonical resource pointers are normalized only for comparisons and provider traces; actual memory is not rewritten.
+
+The 888-unit build passes without duplicate strong symbols. The tested object equals the normal object, 877 prior nongenerated source/object pairs are unchanged, and no writable state is added. One dispatch import is replaced by the deeper initializer and mode 6 constructor: application imports rise from 73 to 74; boot imports remain 22. Source-plan and cache layout remain unchanged.
+
+The deeper initializer at `0x340a0`, mode 6 constructor at `0x5d01c`, their internal allocations and numerical inference remain open. Invalid nonzero selectors, unmapped remap tables, invalid pointers, concurrency, physical faults, cold floating-point activation, caller scratch and private frames are outside proof. Final executable linking/startup and hardware boot remain unverified. The build is an `ld -r` composition, not a bootable firmware image; byte identity is waived for this goal.

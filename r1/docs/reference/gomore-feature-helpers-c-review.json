@@ -1,0 +1,355 @@
+{
+  "stock_entries": [
+    "0x64274",
+    "0x7ed30",
+    "0x56c54"
+  ],
+  "source_unit": {
+    "source": "r1/src/application/runtime/native_gomore_feature_helpers.c",
+    "payload": "r1-application",
+    "role": "candidate",
+    "toolchain": "gcc9",
+    "link": true,
+    "expect": "compile",
+    "returncode": 0,
+    "argv": [
+      "/opt/homebrew/bin/python3",
+      "/Users/kalani/Repo/evenRealities-openCFW/tools/build/linux_gcc.py",
+      "--compiler",
+      "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/bin/arm-none-eabi-gcc",
+      "--read-root",
+      "/Users/kalani/Repo/evenRealities-openCFW/r1",
+      "--read-root",
+      "/Users/kalani/Repo/evenRealities-openCFW/third-party/upstream",
+      "--read-root",
+      "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1",
+      "--read-root",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-feature-helpers-final-c/generated/r1",
+      "--",
+      "-mcpu=cortex-m4",
+      "-mthumb",
+      "-munaligned-access",
+      "-mfpu=fpv4-sp-d16",
+      "-mfloat-abi=hard",
+      "-std=c11",
+      "-Os",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-fshort-enums",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-fno-delete-null-pointer-checks",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/r1/src/vendor",
+      "-isystem",
+      "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
+      "-fno-strict-aliasing",
+      "-ffp-contract=off",
+      "-fsignaling-nans",
+      "-frounding-math",
+      "-ftrapping-math",
+      "-fno-if-conversion",
+      "-fno-if-conversion2",
+      "-MD",
+      "-MF",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-feature-helpers-final-c/r1/r1-application/r1__src__application__runtime__native_gomore_feature_helpers.c.d",
+      "-c",
+      "/Users/kalani/Repo/evenRealities-openCFW/r1/src/application/runtime/native_gomore_feature_helpers.c",
+      "-o",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-feature-helpers-final-c/r1/r1-application/r1__src__application__runtime__native_gomore_feature_helpers.c.o"
+    ],
+    "source_sha256": "ac553e337b368878ff2a1236d3cd6b1a20d0acb6591e066fc01bfadb27343207",
+    "object_sha256": "abc1e9f743b7ee619aa1d1d1b49d88bcd1c641a362534ca49dcc151270a4b34a",
+    "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-feature-helpers-final-c/r1/r1-application/r1__src__application__runtime__native_gomore_feature_helpers.c.o",
+    "strong": [
+      "r1_gomore_bounded_linear_complement_native",
+      "r1_gomore_sleep_iir2_filter_native",
+      "r1_gomore_sorted_percentile_native"
+    ],
+    "weak": [],
+    "undefined": [
+      "r1_binary32_to_binary64_bits",
+      "r1_binary64_reverse_subtract_bits",
+      "r1_format_double_add_bits",
+      "r1_format_double_divide_bits",
+      "r1_format_double_multiply_bits",
+      "r1_gomore_sort_float_subrange_native",
+      "r1_log_double_to_float_bits",
+      "r1_math_invalid32"
+    ]
+  },
+  "direct": {
+    "pairs": {
+      "iir": 442,
+      "percentile": 500,
+      "confidence": 2823,
+      "modeled_percentile": 64,
+      "faults": 21
+    },
+    "provider_stack_depths": {
+      "stock": {
+        "soft": [
+          24,
+          104
+        ],
+        "qsort": [
+          16,
+          56,
+          96,
+          136,
+          176,
+          216,
+          256,
+          296,
+          336,
+          376,
+          416,
+          456,
+          496,
+          536,
+          576,
+          616,
+          656,
+          696,
+          736,
+          776
+        ]
+      },
+      "C": {
+        "soft": [
+          16,
+          64
+        ],
+        "qsort": [
+          40,
+          80,
+          120,
+          160,
+          200,
+          240,
+          280,
+          320,
+          360,
+          400,
+          440,
+          480,
+          520,
+          560,
+          600,
+          640,
+          680,
+          720,
+          760,
+          800
+        ]
+      }
+    },
+    "objects": {
+      "build/sources-goal-r1-gomore-feature-helpers-final-c/r1/r1-application/r1__src__application__runtime__native_gomore_feature_helpers.c.o": "abc1e9f743b7ee619aa1d1d1b49d88bcd1c641a362534ca49dcc151270a4b34a",
+      "build/sources-goal-r1-gomore-feature-helpers-final-c/r1/r1-application/r1__src__application__runtime__native_gomore_statistics.c.o": "5b6d17c4af9f895d4a630b07b41d2bda0d06cbe51ba6511091a2709a7f79011f",
+      "build/sources-goal-r1-gomore-feature-helpers-final-c/r1/r1-application/r1__src__application__runtime__native_gomore_sort_subrange.c.o": "ac3cae1a119d506dc48d9f99700588ac2eaadaf90967a14aa01061faea0a160f",
+      "build/sources-goal-r1-gomore-feature-helpers-final-c/r1/r1-application/r1__src__application__runtime__native_math_special32.c.o": "e04c85a8aeec467a732c78e015a24f7bf9bd2f9f081efa5fcb94754a9678ff8b"
+    }
+  },
+  "feature": {
+    "pairs": 90,
+    "targeted_fallback_vectors": 0,
+    "fault_pairs": 6,
+    "incoming_argument_aliases": 4,
+    "provider_counts": {
+      "stock": {
+        "0x62000": 327,
+        "0x6208c": 163,
+        "0x64274": 99,
+        "0x647c4": 99,
+        "0x87600": 384,
+        "0x7ed30": 192,
+        "0x58a40": 4379,
+        "0x399d0": 415,
+        "0x3af94": 61,
+        "0x56c54": 61
+      },
+      "C": {
+        "0x62000": 327,
+        "0x6208c": 163,
+        "0x64274": 99,
+        "0x647c4": 99,
+        "0x87600": 384,
+        "0x7ed30": 192,
+        "0x58a40": 4379,
+        "0x399d0": 415,
+        "0x3af94": 61,
+        "0x56c54": 61
+      }
+    },
+    "extrema_stack_depths": {
+      "stock": [
+        96
+      ],
+      "C": [
+        96
+      ]
+    }
+  },
+  "modeled_feature": {
+    "pairs": 180,
+    "targeted_fallback_vectors": 3,
+    "fault_pairs": 0,
+    "incoming_argument_aliases": 4,
+    "provider_counts": {
+      "stock": {
+        "0x62000": 321,
+        "0x6208c": 254,
+        "0x64274": 187,
+        "0x647c4": 187,
+        "0x87600": 748,
+        "0x58a40": 38681,
+        "0x7ed30": 374,
+        "0x399d0": 171,
+        "0x3af94": 40,
+        "0x56c54": 40
+      },
+      "C": {
+        "0x62000": 321,
+        "0x6208c": 254,
+        "0x64274": 187,
+        "0x647c4": 187,
+        "0x87600": 748,
+        "0x58a40": 38681,
+        "0x7ed30": 374,
+        "0x399d0": 171,
+        "0x3af94": 40,
+        "0x56c54": 40
+      }
+    },
+    "extrema_stack_depths": {
+      "stock": [
+        96
+      ],
+      "C": [
+        96
+      ]
+    }
+  },
+  "defect_controls": [
+    {
+      "control": "iir-feedforward",
+      "rejected": true,
+      "source_sha256": "38579535488d1e6a7d307da3d54a84ce7b556737100ea3ac0e50e88a64e500ac",
+      "object_sha256": "84d1597de1806c265d614916ce1134b617592265432a10b7962dd2554b8b7bae"
+    },
+    {
+      "control": "iir-feedback",
+      "rejected": true,
+      "source_sha256": "8f658d6cfa1a38aee9a7cef5d7b576e7016e694ae06081c2214744ef274afaab",
+      "object_sha256": "b55f0f88bb1d108746a1d750163e7083ce3da00787607be81a5be247294b92d2"
+    },
+    {
+      "control": "iir-history",
+      "rejected": true,
+      "source_sha256": "3d98bf40e63e81eb4e739d07d62daa56324bb1d305a561fdebe19f5027c7a82b",
+      "object_sha256": "005e9b6befe7495e6cb4b2fc2c3eb4b1d4adcdbeddaba9ed02b5087be3170d7c"
+    },
+    {
+      "control": "iir-zero-term",
+      "rejected": true,
+      "source_sha256": "6dd4a5ba069c52da5aa0c06f859a8626b7306d5382b46f2acfb6f084ace5ebc2",
+      "object_sha256": "ac400e257aa75a7fe8f94b56cf5e5b32ba2512c1f6c46e810411667d16d1d02d"
+    },
+    {
+      "control": "iir-return",
+      "rejected": true,
+      "source_sha256": "c61f91c77aa31d90cec65c185a41b4e21a8363219a1d7e0ab187d5f518c9820b",
+      "object_sha256": "9e9426176c78b935d8b957238c2a76d094e1153758c17c207edd7ca1954d861d"
+    },
+    {
+      "control": "percentile-step",
+      "rejected": true,
+      "source_sha256": "6317a8eb5339ef3a71d6397e6b164275e4775aaf1ceb6e241ef953c9f34cfa9b",
+      "object_sha256": "79f07f783f01d334b9c0d59162d142d2f2345f365b7f04a2be8d4bb2d2aa0d86"
+    },
+    {
+      "control": "percentile-singleton",
+      "rejected": true,
+      "source_sha256": "79925b5a034551f90d339e5bca4691e108921d340aa4bdec5fee743bc9a5e211",
+      "object_sha256": "187116802971137d0968f2b876f234475d48e24832146f0e0dbf1e688aa002a6"
+    },
+    {
+      "control": "percentile-remainder-sign",
+      "rejected": true,
+      "source_sha256": "4ed0d068c738f127cd39fb8c7bd585bb1494a85cb8a428789ab1bc436ec37db5",
+      "object_sha256": "f77022d24e7f7e5b5bcc7437f358c5399fdaf1cbfc90f5a0e833a7071303e1ba"
+    },
+    {
+      "control": "percentile-upper-load",
+      "rejected": true,
+      "source_sha256": "8a1374bd789002ce53cd359abf08249e55a8ba771bbe0f3226bc194afef82066",
+      "object_sha256": "a5e89c34c0082ddcb0f325800b6338fb3e9d564dca479df3400af9157e919946"
+    },
+    {
+      "control": "percentile-saturation",
+      "rejected": true,
+      "source_sha256": "8f79df3b2cb266788e6eedb0a64a0113b4890237f28a972f783071a77cb45918",
+      "object_sha256": "f513a381450d9241e54cab296b15e45944a55a163d9099557644a14fcc102c64"
+    },
+    {
+      "control": "confidence-bound",
+      "rejected": true,
+      "source_sha256": "bd9fd4c57a21873bf9554db3b35c21d03e0a9740f0f52ed4c73a374c563217ed",
+      "object_sha256": "2404e1784140c8b2e40ca596ed559405e0decefefd5c13e2a7bdc21a9c933e08"
+    },
+    {
+      "control": "confidence-signed-gate",
+      "rejected": true,
+      "source_sha256": "738dbb9e8b2bd571f6514dec2576c47efd89db7ffa814d3b3ebb9cf4ff0e6c2f",
+      "object_sha256": "7650c186415e92be147dc367161bd35c18857b4cf730e7f65e3567e56ec31a9d"
+    },
+    {
+      "control": "confidence-factor",
+      "rejected": true,
+      "source_sha256": "7c2437c8a525161309728cc1bfee1c2b74475f57d36c74bfdcc48cb29bfad3fb",
+      "object_sha256": "94b1293d9ccef38ad06ed9011b4300316475bfe2e4592af6c02defa6488cbf0f"
+    }
+  ],
+  "qualification": {
+    "candidate_units": 1,
+    "selected_units": 0,
+    "selected_regions": 0
+  },
+  "prior_objects_unchanged_excluding_checked_api_owner": 702,
+  "probe_final_identical_objects_excluding_checked_api_owner": 703,
+  "resolved_imports": [
+    "r1_gomore_sleep_iir2_filter_native",
+    "r1_gomore_sorted_percentile_native",
+    "r1_gomore_bounded_linear_complement_native"
+  ],
+  "added_imports": [],
+  "artifacts": {
+    "r1/src/application/runtime/native_gomore_feature_helpers.c": "ac553e337b368878ff2a1236d3cd6b1a20d0acb6591e066fc01bfadb27343207",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-feature-helpers-final-c/r1/r1-application/r1__src__application__runtime__native_gomore_feature_helpers.c.o": "abc1e9f743b7ee619aa1d1d1b49d88bcd1c641a362534ca49dcc151270a4b34a",
+    "build/sources-goal-r1-gomore-feature-helpers-final-c/report.json": "68bd89110555053e380642e4ea481c8bf40bc93cb2f4046abd88c3ac3a28e590",
+    "r1/src/sources.json": "553c882784c42a49fa32ea1ae3ecc58994f7b9533d7c7d2a0894fe9f538d60f5",
+    "r1/src/application/runtime/native_gomore_feature_reduce.c": "b0405269472d31d3f03d0cc33780738380a3b3434575236992cdeb61b19f6598",
+    "r1/symbols/function-frontier.csv": "e39a1359252317b7c570dab0a2a1288da4d574e46ae9366ac39e287a9243886a",
+    "tools/build/source-plan.json": "43281e3850f6c7b83c5616e5968c4939993501810057ca3deaeea85eaae351ba",
+    "build/sources-goal-r1-gomore-feature-helpers-probe-c/report.json": "3c757e9baf515f27a888abd9916fa29235355e7ba62bd38d7053e09ab62a5e05",
+    "build/goal-r1-gomore-feature-helpers-c/iir-instructions.json": "66cc8d8ffc58675e74625f1842ce33a504bf26fb6a1865eb645226d5f30be776",
+    "build/goal-r1-gomore-feature-helpers-c/percentile-instructions.json": "edfad17600e40717ba5efe04664b857e22ffa1342fddab6f54d4b8dd39a2f5a5",
+    "build/goal-r1-gomore-feature-helpers-c/confidence-instructions.json": "6ea21c3e4c8dcc5c4d3a5c6ea87c9cafde824440ccc7116b2ea91865719fd891",
+    "build/goal-r1-gomore-feature-helpers-c/coefficient-proof.json": "726575f9e1349626888a0510176d06a9925d03b857f1cea61af4aef49f3606fd",
+    "build/goal-r1-gomore-feature-helpers-c/verify.py": "eafcbe840f756d8c6853be3c0b96ef37a2c19938ef0f1ac87b593daf4cfa6751",
+    "build/goal-r1-gomore-feature-helpers-c/results.json": "f9419e02de30aa598a78b4bccd91b6e59ec935b0dd8ada9d607430fb5fe2b662",
+    "build/goal-r1-gomore-feature-helpers-c/feature.py": "129b65b2ef30af2627b67951fd861ba8ea442a0e8300be5184655638f8080ecb",
+    "build/goal-r1-gomore-feature-helpers-c/feature-results.json": "de40a5c78df4c4dfbd45fe0d877e66c206e7e67f59cdbec44c81a24c7c880213",
+    "build/goal-r1-gomore-feature-helpers-c/feature-modeled-results.json": "d7a62372b70ea59002e335f01040578464d41d883c8e5157b11ba914337e6e7c",
+    "build/goal-r1-gomore-feature-helpers-c/negative.py": "5ad61788b1f74a8f708742609549fa4ad10403f2c843d23ef9fc86948f27f4e1",
+    "build/goal-r1-gomore-feature-helpers-c/negative.json": "63975670944637edac956d6f4744e8ca48439223fbba87b05f58703c21057366",
+    "build/goal-r1-gomore-feature-helpers-c/integration.py": "eefcf52bb72ae1faeebcca73ac83e14ac25a6d43d261292ef2114ae0efa9f70c",
+    "build/goal-r1-gomore-feature-helpers-c/integration-results.json": "00087e173b2eeef729a7c40dfa5a62d1ed1524fa1a7fbed652861f0b5fc474d6",
+    "build/goal-r1-gomore-feature-helpers-c/qualify.py": "330ac568b3c746d212b4bd05f7a2e4cd1be45fdb8bf4a7f954d305a597ecb617",
+    "build/goal-r1-gomore-feature-helpers-c/qualified/qualification.json": "1169aa7b3f8451928fd6fa67fc478edd7e11fcefbf9d462eede82dcea5b07d06",
+    "build/goal-r1-gomore-feature-helpers-c/qualified/source-plan.json": "3da40e3d766877c0b3059bee372f651c1f56681157782eba12ee3076f1834a0f"
+  }
+}

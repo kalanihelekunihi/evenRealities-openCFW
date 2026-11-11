@@ -1,4 +1,21 @@
-# Roadmap: full decompilation, then byte-identical C
+# Roadmap: reviewed reconstruction and a license-free C firmware build
+
+
+## Current completion target — 2026-10-26
+
+The user has explicitly removed byte identity and paid compilers as completion
+requirements. The current target is complete firmware compiled from C using a
+license-free toolchain, with hardware support first and stock behavior checked
+against evidence. Retained executable stock regions, unresolved hardware
+providers and untested device behavior must remain visible; a hybrid build does
+not establish source completeness. Instruction matching remains useful evidence,
+but does not gate implementation or require a licensed compiler. Locked stock
+artifacts remain analysis references. Existing G2 corpus review and freeze gates
+still govern the order of G2 implementation.
+
+The phase descriptions below retain the original byte-matching campaign as a
+reference. Their paid-compiler and byte-equality requirements are superseded by
+this completion target; they are optional comparison work, not blockers.
 
 The work has two goals, pursued in order.
 

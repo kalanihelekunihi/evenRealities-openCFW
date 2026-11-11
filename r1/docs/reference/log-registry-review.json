@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "report": "build/sources-goal-r1-log-registry/report.json",
+  "report_sha256": "2f990b8c4186950a754822777eb9f8573fecba8deddb6f7b6cea78e0093f7923",
+  "manifest_sha256": "725740e591d6b5ce79c4ad74e9cc7904e2a514f2cae4a860591d7174b5e9e2ce",
+  "verification": {
+    "total_getter_executions": 2233,
+    "stock_c_color_pairs": 448,
+    "constant_modules": 34,
+    "native_ids_preserved": 32,
+    "extra_modules": [
+      "peer_manager_ast",
+      "sortlist"
+    ],
+    "all_direct_and_ordered_names_checked": true,
+    "all_aliases_section_relative_after_final_relocation": true,
+    "dynamic_order_map_checked": true,
+    "sdk_module_id_macro_routes_checked": 34,
+    "no_backend_or_hardware_execution": true
+  },
+  "audit": {
+    "unchanged_prior_object_hashes": 799,
+    "native_constant_records_names_and_relocations_unchanged": true,
+    "discarded_duplicate_sdk_records": 26,
+    "extra_sdk_records_preserved": 2,
+    "all_other_composed_bytes_and_relocations_unchanged": true,
+    "sdk_aliases_section_relative": true,
+    "dynamic_records": 34,
+    "generated_boot_allocated_bytes_and_relocations_unchanged": true,
+    "removed_application_imports": [
+      "__start_log_const_data",
+      "__start_log_dynamic_data",
+      "__stop_log_const_data"
+    ],
+    "only_manifest_change_log_layout": true
+  },
+  "defects": [
+    {
+      "defect": "wrong-app-id",
+      "sdk_id_shim_compiled_and_probe_linked": true,
+      "alias_assertion_rejected": true
+    },
+    {
+      "defect": "absolute-app-alias",
+      "sdk_id_shim_compiled_and_probe_linked": true,
+      "alias_assertion_rejected": true
+    }
+  ],
+  "rea_evidence_id": "ev_33b0b32a17e1ba9a313c70e1d15b017bf40d20929743d5e4b2ad8ddbbce088e2",
+  "rea_native_32_records_match_raw": true,
+  "evidence_files": {
+    "build/goal-r1-log-registry/verify.py": "4fdc29e0fb592a148e661ee418f552e58e383551e5d56e9eee60aa661bd42fcf",
+    "build/goal-r1-log-registry/audit.py": "80d9b6b142bfcdea14e98af94292c836c2c4e5ef9a366900c8b7deb1e09365a4",
+    "build/goal-r1-log-registry/defects.py": "0f969dc2889a91afcfc6193b360275a09bc43ac0871e97c6c115a3e89316dfa1",
+    "build/goal-r1-log-registry/document.py": "e1293930a8925742772478cdf7e3b801fe305fe3734f97235b38510a97b37de0",
+    "build/goal-r1-log-registry/verification.json": "0ac6f08db07f14bb60ec2ccde22af4465287015defbc57c97131cca559f7cf71",
+    "build/goal-r1-log-registry/audit.json": "e8b8becbc913f5af7f037dc16371b10eb6a85ed8256b7c46b4c1d26a9a97b28a",
+    "build/goal-r1-log-registry/defects.json": "9a16fb1e8fd3b9e5e48f590e9580233f264a771a0969c19f1f6226eec7a4447f",
+    "build/goal-r1-log-registry/source.elf": "c9220cb57388c694b29330e2d4e160cfb17cd7ab791871f1c3465bd58384866b",
+    "build/goal-r1-log-registry/sdk-id.c": "96b4f923e6aaae32d453499782c0ba7096c94a380819fed1860c6ff993310a3b",
+    "build/goal-r1-log-registry/sdk-id.o": "be4feb61722331eddc5a25aff0f468223dd5e415fbcce11b9a12b4e7e4546b0b",
+    "build/goal-r1-log-registry/rea-const.json": "b0744a241fc0ee8c1fa913400e1abd620d56721fbbd6efd22b8d91959e8fa71c",
+    "build/goal-r1-log-registry/names.json": "2647f1a312b2b469cdb167a11e1b42e502346f01957dc564f70ba2f84e0bb1df",
+    "build/goal-r1-log-registry/verify-final.log": "94603f05b8e412b1ada69e2fd31cbc93073a032da566ff46dc4c54e25530abe1",
+    "build/goal-r1-log-registry/r1-sources-check.log": "5e11e4875b7438d11bbef8d4e6a9ea5b4081f51b98d07ce16e216ec5be46d46c",
+    "build/goal-r1-log-registry/sources-check.log": "8c6106f31795d747b5656cd65fe1f38ce4ad1cf5ad16dd2acf1d77f1c9a667c3",
+    "build/goal-r1-log-registry/boot-link/report.json": "ff2596d5580d373768cf5417c516da852c3855636f8375e305f0c00a90cf9462"
+  },
+  "source_and_layout_inputs": {
+    "r1/src/application/board/native_log_modules.c": "30447be32e6afea5a9de4cc959a3c0c00eaa8529e029bca861fded5b2b6cf77c",
+    "r1/src/config/runtime/native_log_registry.ld": "0adddb70648127bf03b7bb431bdd33a55cb78377866244d1da66cca5c383f079",
+    "vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/log/src/nrf_log_frontend.c": "2ff3b08586b574db42d24e3f6f9e586f64d2a42535b077b9f0d484b2e8e034d9",
+    "vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/log/src/nrf_log_internal.h": "e132ad5332c21eafcf00aaa2ca489b1d00dc57ffe622df36e0217dbd8f9ec7be",
+    "vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/log/nrf_log_types.h": "3b3b4758cf909b37e1e7664e1374cbc9a67d8e640da9c119b85d8265d949f3ef"
+  },
+  "limitations": [
+    "Actual SDK getter code and module-ID macro execute; logger backend, message rendering and physical output do not.",
+    "Dynamic ordering is source-owned initialization, not a claimed stock dynamic arena.",
+    "Final startup copying of initialized dynamic records remains unverified.",
+    "Full application linking remains unfinished; no source-plan selections change."
+  ]
+}

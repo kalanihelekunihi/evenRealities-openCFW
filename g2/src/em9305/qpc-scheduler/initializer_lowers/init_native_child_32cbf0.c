@@ -1,174 +1,62 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_32cbf0\n"
-".type opencfw_em9305_child_32cbf0,@function\n"
-"opencfw_em9305_child_32cbf0:\n"
-"L32cbf0:\n"
-"enter_s [r13-r19,blink]\n"
-"L32cbf2:\n"
-"mov_s r16,0x802810\n"
-"L32cbf8:\n"
-"ldb r3,[r16,12]\n"
-"L32cbfc:\n"
-"ldb.x r15,[r16,14]\n"
-"L32cc00:\n"
-"mov lp_count,0x4\n"
-"L32cc04:\n"
-"mov_s r18,r0\n"
-"L32cc06:\n"
-"mov_s r19,r0\n"
-"L32cc08:\n"
-"add r18,r18,768\n"
-"L32cc0c:\n"
-"mov_s r2,1\n"
-"L32cc0e:\n"
-"mov_s r14,1\n"
-"L32cc10:\n"
-"mov r0,0x1\n"
-"L32cc14:\n"
-"stb 0,[r18,-21]\n"
-"L32cc18:\n"
-"lp L32cc2a\n"
-"L32cc1c:\n"
-"sub_s r1,r0,0x1\n"
-"L32cc1e:\n"
-"asl r1,r2,r1\n"
-"L32cc22:\n"
-"breq.d.nt r1,r3,L32cc2c\n"
-"L32cc26:\n"
-"add_s r0,r0,1\n"
-"L32cc28:\n"
-"add_s r14,r14,1\n"
-"L32cc2a:\n"
-"mov_s r14,0xff\n"
-"L32cc2c:\n"
-"extb_s r0,r14\n"
-"L32cc2e:\n"
-"cmp r0,255\n"
-"L32cc32:\n"
-"mov_s r17,r0\n"
-"L32cc34:\n"
-"beq_s L32cc48\n"
-"L32cc36:\n"
-"bl.d opencfw_em9305_command_kind_valid_31b768\n"
-"L32cc3a:\n"
-"mov_s r0,r17\n"
-"L32cc3c:\n"
-"breq_s r0,0,L32cc48\n"
-"L32cc3e:\n"
-"cmp_s r15,0x7e\n"
-"L32cc40:\n"
-"bne_s L32cc50\n"
-"L32cc42:\n"
-"stb 30,[r18,-21]\n"
-"L32cc46:\n"
-"leave_s [r13-r19,blink,pcl]\n"
-"L32cc48:\n"
-"mov_s r0,0x20\n"
-"L32cc4a:\n"
-"stb r0,[r18,-21]\n"
-"L32cc4e:\n"
-"leave_s [r13-r19,blink,pcl]\n"
-"L32cc50:\n"
-"ldb r0,[r18]\n"
-"L32cc54:\n"
-"add r13,r19,r17\n"
-"L32cc58:\n"
-"add r13,r13,553\n"
-"L32cc5c:\n"
-"breq_s r0,0,L32cc84\n"
-"L32cc5e:\n"
-"ldb_s r1,[r13,0]\n"
-"L32cc60:\n"
-"extb_s r0,r15\n"
-"L32cc62:\n"
-"breq.d.nt r1,r0,L32cc84\n"
-"L32cc66:\n"
-"mov_s r0,r15\n"
-"L32cc68:\n"
-"bl opencfw_em9305_ll_signed_classify_31b374\n"
-"L32cc6c:\n"
-"ldb_s r1,[r13,0]\n"
-"L32cc6e:\n"
-"mov_s r5,r0\n"
-"L32cc70:\n"
-"mov_s r2,1\n"
-"L32cc72:\n"
-"sub_s r0,r15,r1\n"
-"L32cc74:\n"
-"sexb r6,r0\n"
-"L32cc78:\n"
-"mov_s r1,0\n"
-"L32cc7a:\n"
-"mov_s r0,r19\n"
-"L32cc7c:\n"
-"mov_s r3,r17\n"
-"L32cc7e:\n"
-"bl.d opencfw_em9305_callback_323620\n"
-"L32cc82:\n"
-"mov_s r4,r15\n"
-"L32cc84:\n"
-"stb_s r15,[r13,0]\n"
-"L32cc86:\n"
-"ldb.x r2,[r16,13]\n"
-"L32cc8a:\n"
-"mov_s r0,r19\n"
-"L32cc8c:\n"
-"bl.d opencfw_em9305_child_317214\n"
-"L32cc90:\n"
-"mov_s r1,r17\n"
-"L32cc92:\n"
-"stb r14,[r18,-2]\n"
-"L32cc96:\n"
-"stb r0,[r18,-4]\n"
-"L32cc9a:\n"
-"breq_s r0,0,L32cc46\n"
-"L32cc9c:\n"
-"ldb r0,[r18,-1]\n"
-"L32cca0:\n"
-"breq_s r0,0,L32cc46\n"
-"L32cca2:\n"
-"cmp_s r17,4\n"
-"L32cca4:\n"
-"mov.eq r14,0x3\n"
-"L32cca8:\n"
-"extb_s r1,r14\n"
-"L32ccaa:\n"
-"setne r2,r17,0x4\n"
-"L32ccae:\n"
-"setne r0,r1,0x3\n"
-"L32ccb2:\n"
-"or_s r0,r0,r2\n"
-"L32ccb4:\n"
-"sub_s r0,r1,r0\n"
-"L32ccb6:\n"
-"add_s r0,r0,r19\n"
-"L32ccb8:\n"
-"add r0,r0,332\n"
-"L32ccbc:\n"
-"ldb.x r13,[r0]\n"
-"L32ccc0:\n"
-"bl.d opencfw_em9305_ll_signed_classify_31b374\n"
-"L32ccc4:\n"
-"mov_s r0,r13\n"
-"L32ccc6:\n"
-"ldb.x r6,[r18,-4]\n"
-"L32ccca:\n"
-"mov_s r5,r0\n"
-"L32cccc:\n"
-"mov_s r1,0\n"
-"L32ccce:\n"
-"mov_s r2,0\n"
-"L32ccd0:\n"
-"mov_s r0,r19\n"
-"L32ccd2:\n"
-"mov_s r3,r17\n"
-"L32ccd4:\n"
-"bl.d opencfw_em9305_callback_323620\n"
-"L32ccd8:\n"
-"mov_s r4,r13\n"
-"L32ccda:\n"
-"leave_s [r13-r19,blink,pcl]\n"
-".size opencfw_em9305_child_32cbf0,.-opencfw_em9305_child_32cbf0\n"
-);
+#include <stdint.h>
+
+/* Native 0x32cbf0..0x32ccdc: power-control request handler. The PHY bit
+ * (0x80281c) selects PHY index 1..4 (255 when not a single known bit);
+ * an invalid PHY sets status 0x20 (+747) and a power of 0x7e (0x80281e)
+ * sets status 30. Otherwise a changed remote power for that PHY (+553 +
+ * index) is reported through 323620 when reporting is on (+768), the new
+ * power is stored, the local adjustment (317214, delta 0x80281d) is kept
+ * at +764 with the PHY index at +766 and, when non-zero with local
+ * reporting on (+767), the local power for the current PHY (+332 table;
+ * index 4 uses the coded entry) is reported as well. */
+extern uint32_t opencfw_em9305_command_kind_valid_31b768(uint32_t kind);
+extern uint32_t opencfw_em9305_ll_signed_classify_31b374(uint32_t value);
+extern uint32_t opencfw_em9305_callback_323620(uintptr_t record,uint32_t status,
+    uint32_t kind,uint32_t index,int32_t previous,uint32_t current,int32_t phy);
+extern int32_t opencfw_em9305_child_317214(uintptr_t record,uint32_t phy,
+                                           int32_t delta);
+
+static inline uint32_t r8(uintptr_t a){return *(volatile uint8_t *)a;}
+static inline void w8(uintptr_t a,uint32_t v){*(volatile uint8_t *)a=(uint8_t)v;}
+
+void opencfw_em9305_child_32cbf0(uintptr_t record)
+{
+    uintptr_t status=record+747u;
+    uint32_t bit=r8(0x80281cu);
+    int32_t power=*(volatile int8_t *)0x80281eu;
+    w8(status,0u);
+    uint32_t phy=0xffu;
+    for(uint32_t candidate=1u;candidate<=4u;++candidate){
+        if((1u<<(candidate-1u))==bit){
+            phy=candidate;
+            break;
+        }
+    }
+    uint32_t index=(uint8_t)phy;
+    if(index==255u||opencfw_em9305_command_kind_valid_31b768(index)==0u){
+        w8(status,0x20u);
+        return;
+    }
+    if(power==0x7e){
+        w8(status,30u);
+        return;
+    }
+    uintptr_t remote=record+index+553u;
+    if(r8(record+768u)!=0u&&r8(remote)!=(uint8_t)power){
+        uint32_t level=opencfw_em9305_ll_signed_classify_31b374((uint32_t)power);
+        int32_t change=(int8_t)((uint32_t)power-r8(remote));
+        (void)opencfw_em9305_callback_323620(record,0u,1u,index,power,level,change);
+    }
+    w8(remote,(uint32_t)power);
+    int32_t delta=*(volatile int8_t *)0x80281du;
+    int32_t adjust=opencfw_em9305_child_317214(record,index,delta);
+    w8(record+766u,phy);
+    w8(record+764u,(uint32_t)adjust);
+    if(adjust==0||r8(record+767u)==0u)return;
+    uint32_t mode=index==4u?3u:phy;
+    uint32_t slot=(uint8_t)mode-(((uint8_t)mode!=3u)|(index!=4u));
+    int32_t local=*(volatile int8_t *)(record+332u+slot);
+    uint32_t level=opencfw_em9305_ll_signed_classify_31b374((uint32_t)local);
+    (void)opencfw_em9305_callback_323620(record,0u,0u,index,local,level,
+                                         *(volatile int8_t *)(record+764u));
+}

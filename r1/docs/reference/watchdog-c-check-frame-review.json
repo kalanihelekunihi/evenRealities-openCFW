@@ -1,0 +1,68 @@
+{
+  "cases": 6912,
+  "passed": 6912,
+  "source_sha256": "361cb1a455eed324663cfab4dd20fb8cf63125e1989da63125346aec86262ce5",
+  "report": "build/sources-goal-r1-watchdog-check/report.json",
+  "old_regression": {
+    "native_r3": 100,
+    "old_r3": 2881486851,
+    "no_write_native_fault": null,
+    "no_write_old_fault": [
+      4294967295,
+      4,
+      0
+    ]
+  },
+  "other_units_unchanged": 561,
+  "application_imports": 211,
+  "bootloader_imports": 34,
+  "limitations": [
+    "Lock/list/sample providers modeled",
+    "Fault run stops at attempted invalid write; no physical reset or exception handler proof",
+    "Not byte qualified or final firmware build"
+  ],
+  "evidence": [
+    {
+      "path": "build/goal-r1-watchdog-check/before.c",
+      "sha256": "0aeb6e1f214e4228c2b846a84c83925ae4cc6296f8e1395018b200149b947a32"
+    },
+    {
+      "path": "build/goal-r1-watchdog-check/verify.py",
+      "sha256": "7732ea11fc387fc95eeccf5e1f7a40800e4b6c33127e5c573e8a7a7e790781e2"
+    },
+    {
+      "path": "build/sources-goal-r1-watchdog-check/report.json",
+      "sha256": "24ce04325eaf3a1ee52e8ef82c64f6f6d56c9798eb0d0e75aceb7ba05099ea91"
+    },
+    {
+      "path": "build/goal-r1-twi-packet-c/stock.elf",
+      "sha256": "0a73bd084a4ccf8cdd579852b46deda970b701b2c22e9aecf423166f949350e4"
+    },
+    {
+      "path": "r1/src/application/board/native_watchdog_manager.c",
+      "sha256": "361cb1a455eed324663cfab4dd20fb8cf63125e1989da63125346aec86262ce5"
+    },
+    {
+      "path": "r1/src/application/board/native_watchdog.h",
+      "sha256": "5c72778d939445d2e8642c7dfbdba7cb288eef81630ecca9337b5bbe34caa04e"
+    },
+    {
+      "path": "r1/src/sources.json",
+      "sha256": "9c5b7ae5c0e7493eb22e1fb4df9f0c928c2a9aa70530254aff89b55213bef2e2"
+    },
+    {
+      "path": "tools/build/source-plan.json",
+      "sha256": "964cbd3af9f4ea7ed207bb4b480d18a9529060dc3801663d296389472982aa7c"
+    }
+  ],
+  "native_check": "0x5da4c",
+  "bridge_bytes": 10,
+  "saved_timestamp_word": "entry SP -16, saved R3",
+  "comparison_scope": [
+    "normal-return R3 and provider trace",
+    "explicit sample pointer, zero/partial/full writes",
+    "node flags and fault record state",
+    "invalid write address/size/value and BASEPRI at fault attempt",
+    "normal-return R4-R11, SP and interrupt masks; callback alignment"
+  ]
+}

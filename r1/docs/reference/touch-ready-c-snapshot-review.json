@@ -1,0 +1,88 @@
+{
+  "board": {
+    "passed": 12800,
+    "executions": 25600,
+    "actual_setter_board_registry_irq_event_post": true,
+    "device_and_rtos_boundaries_modeled": true,
+    "live_input_callback_reload": true,
+    "active_state_order": true,
+    "source_report": "build/sources-goal-r1-touch-snapshot/report.json",
+    "source_sizes": {
+      "r1_touch_ready_callback_setter": 22,
+      "r1_touch_board_open": 100,
+      "r1_touch_pending_flag_consume": 36,
+      "r1_touch_power_on_step": 14,
+      "r1_touch_ready_irq_callback": 6
+    },
+    "limitations": [
+      "Existing device/line helpers and OS calls modeled; actual registry and event-forwarder execute",
+      "Private frames/caller-clobbered registers/flags excluded",
+      "Stock and C paired reads execute in one LDRD; bus atomicity and concurrent writers unverified",
+      "Cold startup placement, actual IRQ exception behavior and electrical/timing behavior unverified",
+      "No byte qualification"
+    ]
+  },
+  "device_operations": {
+    "passed": 2016,
+    "executions": 4032,
+    "actual_native_and_C_registry": true,
+    "existing_shared_handle_owners": true,
+    "post_open_close_reload": true,
+    "tail_methods_original_sp_lr": true,
+    "source_report": "build/sources-goal-r1-touch-snapshot/report.json",
+    "source_sizes": {
+      "r1_touch_record_op_0c_b": 14,
+      "r1_touch_record_op_08": 14,
+      "r1_touch_device_op_stop": 30,
+      "delayed_touch_release": 6,
+      "r1_touch_record_op_0c": 14,
+      "r1_touch_device_op_lock1": 30,
+      "r1_touch_device_op_unlock": 30
+    },
+    "limitations": [
+      "Device methods and shared-power release boundary modeled",
+      "Private frames/caller-clobbered registers/flags excluded",
+      "Concrete line semantics, initial placement, concurrency and electrical/timing behavior unverified",
+      "No byte qualification"
+    ]
+  },
+  "cache_producer": {
+    "passed": 64,
+    "input_store_four_bytes": true,
+    "callback_preserved": true,
+    "zero_initialized_pair": true,
+    "boundary": "registry lookup modeled; actual C cache producer executes"
+  },
+  "negative_control": {
+    "split_load_rejected": true,
+    "stderr": "arm-none-eabi-ld: warning: (osThreadFlagsSet): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-touch-snapshot/r1/r1-application/r1__src__application__runtime__native_touch_services.c.o\narm-none-eabi-ld: warning: (r1_touch_bus_acquire_on): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-snapshot/split.o\narm-none-eabi-ld: warning: (osDelay): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-snapshot/split.o\narm-none-eabi-ld: warning: (r1_touch_device_op_stop): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-snapshot/split.o\narm-none-eabi-ld: warning: (r1_touch_device_op_lock1): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-snapshot/split.o\narm-none-eabi-ld: warning: (r1_touch_device_op_unlock): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-snapshot/split.o\narm-none-eabi-ld: warning: (osDelay): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-snapshot/split.o\narm-none-eabi-ld: warning: (r1_touch_device_op_lock1): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-snapshot/split.o\narm-none-eabi-ld: warning: (osDelay): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-snapshot/split.o\narm-none-eabi-ld: warning: (r1_touch_record_op_0c): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-snapshot/split.o\narm-none-eabi-ld: warning: (osDelay): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-snapshot/split.o\narm-none-eabi-ld: warning: (osDelay): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-snapshot/split.o\narm-none-eabi-ld: warning: (r1_touch_bus_enable_on): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-snapshot/split.o\narm-none-eabi-ld: warning: (r1_touch_device_op_unlock): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-snapshot/split.o\narm-none-eabi-ld: warning: (r1_touch_device_op_stop): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-snapshot/split.o\narm-none-eabi-ld: warning: (r1_touch_bus_enable_on): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-snapshot/split.o\narm-none-eabi-ld: warning: (r1_touch_device_op_unlock): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-snapshot/split.o\nTraceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-touch-snapshot/reject-split.py\", line 98, in <module>\n    for c in cases:assert a(*c)==b(*c),c\n                                 ~^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-touch-snapshot/reject-split.py\", line 87, in run\n    assert lo[:2]==(0,4) and hi[:2]==(4,4) and lo[2]==hi[2],('split snapshot',stock,lo,hi)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: ('split snapshot', False, (0, 4, 16777376), (4, 4, 16777378))\n"
+  },
+  "evidence": {
+    "r1/src/application/board/native_touch_ready_state.h": "62ac76a0b08d06896e68411ec77ab73728eb59ebebf885999a8c2ba7acb59416",
+    "r1/src/application/board/native_touch_board.c": "37ff5cb7ef784a51c71518ad171de508d88c2a58ff609b92041347568b75eb40",
+    "r1/src/application/board/native_touch_board.h": "eef48c041e36041d1eb3f8dd6f07a520a4f2593871cb97ce73c5c4131916fed7",
+    "r1/src/application/board/native_peripheral_bindings.c": "2c06b2853cb7c3ff346b277e80becaf6a82239f44f45748364508dbda19c42fc",
+    "r1/src/application/board/native_touch_device_ops.c": "c1a2c0b5c07e955fa9e9269208d00e71a9a9148154f777d59b9e7cf65e349e7a",
+    "build/sources-goal-r1-touch-snapshot/report.json": "e88908552e7e1901eb7fde12e712116ca6746184879dcd268ca9b9a99cec828b",
+    "tools/build/source-plan.json": "eb04e4bf2c082d88801a99f173e0a4b58eba788ec05539d87b5ed02081002423",
+    "build/hybrid-goal-r1-touch-snapshot/build-report.json": "8f518604ae1ef8b0a43f5b71fb2a2459a0cf248fab2856dacf36c4ccb54c9ac9",
+    "build/goal-r1-touch-snapshot/verify.py": "2fc82d02ca8b068d895aea70764dc9301cbeadc346307ff1ea89a52825b8ba91",
+    "build/goal-r1-touch-snapshot/results.json": "7848da4780196243349f70bec29eba859520ad401660e04db0280b4898bdabcc",
+    "build/goal-r1-touch-snapshot/negative.py": "69b8bc2f699f4fad158bb2ff0142eb46fbaab6da975d84b428133172b69b20d2",
+    "build/goal-r1-touch-snapshot/negative-results.json": "381efbc45b2312fae5c64e5bbfcef6da680e4fb43f4dec6f6ecfec980a2dcf47",
+    "build/goal-r1-touch-snapshot/producer.py": "c4aa48bffc2f3edfa05bdab83d99fe5b4faaba09a3720062ba7736391e12848b",
+    "build/goal-r1-touch-snapshot/producer-results.json": "2221e44a93bdbcbcb1d68d52a2ee201a228eabf3e8f4a4b988af0f9689ede0f9",
+    "build/goal-r1-touch-snapshot/device/verify.py": "bf13b427d039f42868909d77c9db50b7b1dd4bd8bb4729676a8b16f5337e26ae",
+    "build/goal-r1-touch-snapshot/device/results.json": "0b511d316d9e9123af8a3fb5605a25bcf5db52e0642cf76b0376f566ae9720de"
+  },
+  "source_plan_unchanged": true,
+  "source_built_bytes": 3827,
+  "new_byte_qualification": false,
+  "native_evidence": "r1/docs/reference/touch-board-c-sequencing-review.json",
+  "limitations": [
+    "Compiler-specific LDRD instruction grouping checked; not C11 atomicity or bus atomicity",
+    "Cache producer lookup is modeled; actual C producer executes",
+    "Physical IRQ, reset placement, electrical behavior and concurrent writers unverified",
+    "Hybrid retains 642333 unclassified binary-pull-through bytes; source completeness not proven"
+  ]
+}

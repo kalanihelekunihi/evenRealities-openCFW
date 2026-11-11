@@ -4,9 +4,9 @@
  * Native CASE 0x08002d48 erase inactive OTA bank with four attempts.
  */
 #include <stdint.h>
-extern void case_boot_option_prepare(void); /* 0x4bf4 */
+extern uint32_t case_boot_option_prepare(void); /* 0x4bf4 */
 extern uint32_t case_boot_option_erase_execute(uint32_t,uint32_t *); /* 0x497c */
-extern void case_boot_option_commit_c(void); /* 0x4b20 */
+extern uint32_t case_boot_option_commit_c(void); /* 0x4b20 */
 extern void case_policy_wait(uint32_t); /* 0xa7b0 */
 /* Stock 0x08002D48 (case_policy_box_erase_bank) */
 uint32_t case_policy_box_erase_bank(void)

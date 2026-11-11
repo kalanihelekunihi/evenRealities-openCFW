@@ -1,40 +1,21 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_32ad38\n"
-".type opencfw_em9305_child_32ad38,@function\n"
-"opencfw_em9305_child_32ad38:\n"
-"L32ad38:\n"
-"enter_s [r13-r14,blink]\n"
-"L32ad3a:\n"
-"ldb_s r2,[r0,0x2]\n"
-"L32ad3c:\n"
-"mov_s r13,r0\n"
-"L32ad3e:\n"
-"mov_s r14,r1\n"
-"L32ad40:\n"
-"mpyuw r0,r2,0x18\n"
-"L32ad44:\n"
-"add2_s r0,r0,r1\n"
-"L32ad46:\n"
-"ld r1,[r0,opencfw_em9305_ext_adv_actions_334db8]\n"
-"L32ad4e:\n"
-"breq_s r1,0,L32ad56\n"
-"L32ad50:\n"
-"jl_s.d [r1]\n"
-"L32ad52:\n"
-"mov_s r0,r13\n"
-"L32ad54:\n"
-"ldb_s r2,[r13,0x2]\n"
-"L32ad56:\n"
-"mpyuw r0,r2,0x6\n"
-"L32ad5a:\n"
-"add_s r0,r0,r14\n"
-"L32ad5c:\n"
-"ldb r0,[r0,opencfw_em9305_ext_adv_transitions_334e18]\n"
-"L32ad64:\n"
-"stb_s r0,[r13,0x2]\n"
-"L32ad66:\n"
-"leave_s [r13-r14,blink,pcl]\n"
-".size opencfw_em9305_child_32ad38,.-opencfw_em9305_child_32ad38\n"
-);
+#include <stdint.h>
+
+/* Native 0x32ad38..0x32ad64: extended-advertising state machine step. The
+ * state byte lives at +2; run the action for (state, event) from the ROM
+ * table at 0x334db8 (six events per state) if present, then move the state
+ * to the table entry at 0x334e18 and return it. */
+extern void (*const opencfw_em9305_ext_adv_actions_334db8[24])(void);
+extern const uint8_t opencfw_em9305_ext_adv_transitions_334e18[24];
+
+uint32_t opencfw_em9305_child_32ad38(uintptr_t machine, uint32_t event)
+{
+    uint32_t state = *(volatile uint8_t *)(machine + 2u);
+    uintptr_t action = (uintptr_t)opencfw_em9305_ext_adv_actions_334db8[state * 6u + event];
+    if (action != 0u) {
+        ((void (*)(uintptr_t, uintptr_t, uint32_t))action)(machine, action, state);
+        state = *(volatile uint8_t *)(machine + 2u);
+    }
+    uint32_t next = opencfw_em9305_ext_adv_transitions_334e18[state * 6u + event];
+    *(volatile uint8_t *)(machine + 2u) = (uint8_t)next;
+    return next;
+}

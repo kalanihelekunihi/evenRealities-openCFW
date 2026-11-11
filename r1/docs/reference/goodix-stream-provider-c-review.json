@@ -1,0 +1,169 @@
+{
+  "schema_version": 1,
+  "scope": "R1 Goodix stream open/close/read provider and registration in C",
+  "native_application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "native_entries": {
+    "open": "0x8165c",
+    "close": "0x815c0",
+    "read": "0x81744",
+    "register": "0x89eec"
+  },
+  "provider_table": "0x9a59c",
+  "execution": {
+    "paired_cases": 4088,
+    "executions": 8176,
+    "groups": {
+      "open": 280,
+      "close": 280,
+      "read": 3424,
+      "register": 32,
+      "lifecycle": 72
+    },
+    "source_report": "build/sources-goal-r1-goodix-stream-provider-c-final2/report.json",
+    "actual_C_callbacks_setters_and_object_flag_update": true,
+    "modeled": [
+      "Goodix initialize/acquire/release",
+      "clock and I2C open/close",
+      "interrupt processing dispatcher invoking actual callbacks",
+      "memory clear/move",
+      "object creation",
+      "logging"
+    ],
+    "normalization": "Callback slot and operation table addresses validated against actual native/source symbols before canonical naming",
+    "checks": [
+      "full argument zero then low-byte selector; exact log getter short circuit",
+      "selector cache clears and native acquire/release returns",
+      "native absolute wrapped refresh comparison and update-after-processing order",
+      "actual result callbacks through registered slots, overlap-safe copy and interleaved field copies",
+      "ignored length, fixed return formats, HR boundaries, wear flag consumption",
+      "registration callback order, object names/sizes/contexts, failed creations and real flag-set returns",
+      "shared memory order, guards, R0, return SP, saved registers and interrupt masks"
+    ],
+    "limits": [
+      "Real Goodix interrupt algorithm, transport, allocator and object constructor not executed",
+      "No physical sensor output, concurrency or arbitrary corrupted pointers",
+      "Private frames and caller-clobbered registers/flags excluded"
+    ]
+  },
+  "initialization": {
+    "source_report": "build/sources-goal-r1-goodix-stream-provider-c-final2/report.json",
+    "stock_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "native_RW_and_ZI_handlers_executed": true,
+    "independent_RW_decoder_matches": true,
+    "region_guards_unchanged": true,
+    "cells": {
+      "r1_goodix_stream_last_poll": {
+        "address": "0x20006d80",
+        "size": 4,
+        "section": ".r1.goodix.stream.last_poll",
+        "sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119"
+      }
+    },
+    "owned_bytes": 4,
+    "limits": [
+      "Only these cells are owned; full firmware startup placement and physical execution are not established"
+    ]
+  },
+  "negative_controls": [
+    {
+      "mutation": "elapsed-refresh-substitution",
+      "rejected": true
+    },
+    {
+      "mutation": "invented-length-guard",
+      "rejected": true
+    }
+  ],
+  "audit": {
+    "all_prior_object_bytes_unchanged": true,
+    "task_prototype_repairs_preserve_object": true,
+    "one_new_manifest_unit": true,
+    "other_manifest_semantics_unchanged": true,
+    "new_native_entry_points": 4,
+    "removed_imports": [
+      "r1_native_stream_register"
+    ],
+    "added_imports": []
+  },
+  "normal_build": {
+    "compiled": 575,
+    "application_imports": 175,
+    "bootloader_imports": 34,
+    "failures": 0,
+    "duplicate_strong_symbols": 0
+  },
+  "qualification": {
+    "compiled_profiles": 5,
+    "new_C_regions": 0
+  },
+  "source_plan_unchanged": true,
+  "source_built_bytes": 3881,
+  "binary_pull_through_bytes": 642279,
+  "resource_bytes": 248,
+  "fresh_hybrid_equals_locked_application": true,
+  "source_completeness_proven": false,
+  "registration_and_provider_adapters_implemented": true,
+  "physical_sensor_and_full_Goodix_algorithm_validated": false,
+  "rea": {
+    "read_body_observed": true,
+    "read_body": {
+      "available": true,
+      "provenance": "ghidra-function-body-address-set",
+      "ranges": [
+        {
+          "start": "0x81744",
+          "end": "0x81797"
+        },
+        {
+          "start": "0x817a2",
+          "end": "0x81853"
+        }
+      ],
+      "total_bytes": 262,
+      "span_bytes": 272,
+      "non_contiguous": true,
+      "contains_entry": true
+    },
+    "open_and_registration_missing_from_default_analysis": true,
+    "missing_entry_coverage_credit": false
+  },
+  "evidence": {
+    "build/sources-goal-r1-goodix-stream-provider-c-final2/report.json": "b89ffcf060aac5553671a49b50a3dd4eed0f7ce358f5afc3e05882710dc52ff7",
+    "r1/src/application/goodix/native_stream_provider.c": "875c4c398825d3e8410941fa0de43085a0a71f80110f58e0c40ed17835ead537",
+    "r1/src/application/goodix/native_stream_callbacks.h": "1db5fef315a1f92baa7e29dfe27eef3c7c55c00fca2450816a8c5a0153417c6e",
+    "r1/src/application/goodix/native_stream_callbacks.c": "7ec4e195d83e7b44073137c57846c539abafe56d39e15647bc6f80503f682c18",
+    "r1/src/application/board/native_tasks.c": "1e8d57002ad4c1d5eb37f4b246d1783bd070e556f388e7af7a5b318e6fbf8d1b",
+    "r1/src/application/runtime/native_stream_bootstrap.c": "b2b73c2df033732feb541e4dd45fb9f4c1594f2da96c87498fa05f20d3292c50",
+    "r1/src/application/runtime/native_motion_stream.c": "f7f2c297f9f737a9f48ac681152328bb9dfaabf7d334fec6708983b898dad9c0",
+    "r1/src/application/runtime/native_stream_singletons.c": "3c2559e7d2d4cf38a2bb875e7c217030067131402562dcf2d7c3e5ac036b299c",
+    "r1/src/sources.json": "ae0d15d47a372a5e180792893c146b0c5339a1e9cb94b86e69ccd8ad174b10f1",
+    "r1/symbols/function-frontier.csv": "ed845871ab6e8d954a2100086afc3ebb924b933dc2a97c7c6038e4d31f2c4133",
+    "tools/build/source-plan.json": "716cf17b8cf2bed8ad6a99a672b1856af4c5380842c95cb14b9a263a7bb42bc8",
+    "build/hybrid-goal-r1-goodix-stream-provider-c-final/build-report.json": "17471bea525ca092d9e7e6f54e018135294d33c400234b225e7e601725e5c638",
+    "build/hybrid-goal-r1-goodix-stream-provider-c-final/payloads/application.bin": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "r1/docs/reference/source-composition-review.json": "865d1822d522fadc052fbde34cd2914a4c98b1175d43a5b86d7f7dd7acfe90f8",
+    "build/goal-r1-goodix-stream-provider-c/sources-before.json": "0d22ce6a1db375f80276c3c779c82d914b8859227222e7845a9926d6bca96ced",
+    "build/goal-r1-goodix-stream-provider-c/native-tasks-before.c": "56a6c8c3a27903721be20542e3aceb36cb4d9ba72c682e48fc150cb615ea0fd2",
+    "build/goal-r1-goodix-stream-provider-c/REA.json": "b339b41ea6dabaf7afe5281cc972e14bcb2db37c7cb9ffc8593a9fbebc834fbe",
+    "build/goal-r1-goodix-stream-provider-c/native-close.dis": "b3aeae5b20e4674ab5e8bf0e84b14fc7d5eb5db2177a86c3981e959bd93aca0b",
+    "build/goal-r1-goodix-stream-provider-c/native-open.dis": "cda69cb8e435fbc78f469e907d12e3423962520be2d22f75cdbdbfdc0922b414",
+    "build/goal-r1-goodix-stream-provider-c/native-read.dis": "9244475e9aa75a789aa69ffa06f0a2d04124e0603da23ae8fd2d0d186e47a3f8",
+    "build/goal-r1-goodix-stream-provider-c/native-register.dis": "b24b79616e635d3752eb8bc98ad16cb9a779b229c914662c78269304d48691ee",
+    "build/goal-r1-goodix-stream-provider-c/native-provider-table.dis": "e88cd8f1fb0eef1c4c3788f311185371baed71ff341eb41c840859f621125e93",
+    "build/goal-r1-goodix-stream-provider-c/native-sensor-startup.dis": "798487558ba11bd600da5e4760636e9580b2d5cec09d19b3cd03bda22e23ffb1",
+    "build/goal-r1-goodix-stream-provider-c/verify.py": "d87909983879202b3cd1806b87c4e11575065029cbb09e905a4847b97d50f8d6",
+    "build/goal-r1-goodix-stream-provider-c/test.ld": "6438b926bff7d00955691c680bb10463d4a638b7199d092f0a31a75595ca2241",
+    "build/goal-r1-goodix-stream-provider-c/results.json": "9633e49ff568a1e0c1ab343c942dbf6477fa8118abb97350b755a8bd53d4c4a3",
+    "build/goal-r1-goodix-stream-provider-c/initialization.py": "8a6113111dfdd672daae9cf1a74bdb1b67b4ff565528db61a824c94d6efef47d",
+    "build/goal-r1-goodix-stream-provider-c/initialization-results.json": "0423e03dac185c65fd7b43f55585696b44b664b91cff2117761b58017e67db77",
+    "build/goal-r1-goodix-stream-provider-c/expanded-rw.bin": "87fdee392022fdbe23dd0daf3e859fb14f3ce26ba3e8403aab56dc9d9a913317",
+    "build/goal-r1-goodix-stream-provider-c/negative.py": "066de07c62d06842081ee607c2820ee3ab7abe96950e16ff25cd191ab2d43bbc",
+    "build/goal-r1-goodix-stream-provider-c/negative-results.json": "4bea42c1dcf065c6d19f35197eef3f3be7c366fbdd84bd10f68ae0a19e8d59fd",
+    "build/goal-r1-goodix-stream-provider-c/audit.py": "76053ff19131c5122976b3b98eaa7b4d32549d3056855e63650bc77971214146",
+    "build/goal-r1-goodix-stream-provider-c/audit-results.json": "ee11576c3fdedbd6008d840cf6b0429a8a89f31c98a4e4c83dc18e0299505d97",
+    "build/goal-r1-goodix-stream-provider-c/qualify.py": "9283ad24f0bd3adfb67931e73e4bd9b47f64e7f0cca31869f1de901a71a8894d",
+    "build/goal-r1-goodix-stream-provider-c/qualified-final/qualification.json": "e5111f6acb3aa3af676f9d97c43eac399e84f2cf36d2caa1974fb1e6f78b2972",
+    "build/goal-r1-goodix-stream-provider-c/qualified-final/source-plan.json": "3da40e3d766877c0b3059bee372f651c1f56681157782eba12ee3076f1834a0f",
+    "build/goal-r1-goodix-stream-provider-c/sources-check.log": "0ed8139da4ca1d57a56242c3f04524ad9d4ab63edfffbff0ac609dc3cad66778"
+  }
+}

@@ -92,6 +92,19 @@ static const g2_attc_disc_char_t g2_ancc_ctrl_pt_char = {g2_ancs_ctrl_pt_uuid, 3
 static const g2_attc_disc_char_t g2_ancc_data_src_char = {g2_ancs_data_src_uuid, 3u};
 static const g2_attc_disc_char_t g2_ancc_data_src_ccc = {attCliChCfgUuid, 6u};
 
+/* Fix 50: stock-address names for the ROM descriptors (same objects). */
+extern const g2_attc_disc_char_t g2_attc_disc_char_78df94 __attribute__((alias("g2_ancc_notif_src_char")));
+extern const g2_attc_disc_char_t g2_attc_disc_char_78df9c __attribute__((alias("g2_ancc_notif_src_ccc")));
+extern const g2_attc_disc_char_t g2_attc_disc_char_78dfa4 __attribute__((alias("g2_ancc_ctrl_pt_char")));
+extern const g2_attc_disc_char_t g2_attc_disc_char_78dfac __attribute__((alias("g2_ancc_data_src_char")));
+extern const g2_attc_disc_char_t g2_attc_disc_char_78dfb4 __attribute__((alias("g2_ancc_data_src_ccc")));
+/* Fix 50: ROM 0x78dfbc / 0x78dfc4, stock gatt_main.c gattSc / gattScCcc. Stock bytes:
+ * {0x78f546 = attScChUuid (0x2a05), 0} and {0x78f540 = attCliChCfgUuid, 4}. Our generated
+ * gatt_main.c keeps its own statics; these back the stock RAM init words at 0x200030d0/d4. */
+extern const uint8_t attScChUuid[2];
+const g2_attc_disc_char_t g2_attc_disc_char_78dfbc = {attScChUuid, 0u};
+const g2_attc_disc_char_t g2_attc_disc_char_78dfc4 = {attCliChCfgUuid, 4u};
+
 /* RAM 0x200030bc (.data): 0x78df94 0x78df9c 0x78dfa4 0x78dfac 0x78dfb4. */
 void *g2_ancc_disc_char_list[5] = {
     (void *)&g2_ancc_notif_src_char,
@@ -121,6 +134,10 @@ static const uint8_t g2_ring_char_11_uuid[16] = {
 static const g2_attc_disc_char_t g2_ring_char_10 = {g2_ring_char_10_uuid, 3u};
 static const g2_attc_disc_char_t g2_ring_char_11 = {g2_ring_char_11_uuid, 3u};
 static const g2_attc_disc_char_t g2_ring_char_11_ccc = {attCliChCfgUuid, 6u};
+
+extern const g2_attc_disc_char_t g2_attc_disc_char_78dfcc __attribute__((alias("g2_ring_char_10")));
+extern const g2_attc_disc_char_t g2_attc_disc_char_78dfd4 __attribute__((alias("g2_ring_char_11")));
+extern const g2_attc_disc_char_t g2_attc_disc_char_78dfdc __attribute__((alias("g2_ring_char_11_ccc")));
 
 /* RAM 0x200030d8 (.data): 0x78dfcc 0x78dfd4 0x78dfdc. */
 void *g2_ring_disc_char_list[3] = {

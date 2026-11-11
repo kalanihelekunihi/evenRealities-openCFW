@@ -1,0 +1,215 @@
+{
+  "stock_REA": {
+    "evidence_id": "ev_33b95cdb6041133a5164656b588ee96ac40fac12b9e471e83c74a5bf4ac0d803",
+    "subject": {
+      "name": "stock.elf",
+      "digest": {
+        "sha256": "25b4a29af80ec8edab5bd861ba9b74a6e22eab29dc3d7a809a16869e8a140f04"
+      },
+      "local_path": "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-queue-reset-c/stock.elf",
+      "format": "elf",
+      "architecture": "arm"
+    },
+    "provider": {
+      "id": "ghidra",
+      "name": "Ghidra",
+      "version": "12.1.4"
+    },
+    "analysis_profile": {
+      "provider": {
+        "id": "ghidra",
+        "name": "Ghidra",
+        "version": "12.1.4"
+      },
+      "parameters": {
+        "target_kind": "executable",
+        "target_format": "elf",
+        "architecture": "arm",
+        "available_architectures": [
+          "arm"
+        ],
+        "import_mode": "ephemeral-source-immutable",
+        "annotation_policy": "atomic-function-entry-metadata-v1",
+        "load_image_observations": "source-mappings-entry-context-v2",
+        "function_body_evidence": "complete-inclusive-ranges-v1",
+        "function_references": "complete-body-and-entry-reference-manager-v2",
+        "call_relationship_coverage": "function-body-call-coverage-v5",
+        "function_dossier_coverage": "observed-facets-and-call-relationships-v1",
+        "string_inventory_evidence": "defined-data-coverage-v1",
+        "location_resolution": "explicit-address-exact-entry-symbol-first-v3",
+        "procedure_file_offset_resolution": "address-first-unique-target-source-mapping-v2",
+        "instruction_flow_evidence": "decoded-return-pcode-v1",
+        "instruction_references": "exact-address-incoming-v1",
+        "function_boundary_observations": "ghidra-function-boundary-limitations-v3",
+        "no_return_repair": "returning-imports-decoded-return-v2",
+        "process_launch": "inspected-jvm-launch-support-v1",
+        "jump_table_evidence": "typed-case-default-blocks-v1",
+        "decompiler_jump_loads": true,
+        "loader": "auto-from-header",
+        "language_id": "auto-from-header",
+        "compiler_spec_id": "auto-default",
+        "analyzer_preset": "ghidra-default"
+      },
+      "digest": "7e46711069eea041af1b9b99e34115c13332795e5cda76e584a722f529ec70de"
+    },
+    "predicate_type": "rea.analysis",
+    "operation": "read_bytes",
+    "parameters": {
+      "address": "0x58b70",
+      "length": 208
+    },
+    "raw_result": {
+      "address": "0x58b70",
+      "requested_bytes": 208,
+      "returned_bytes": 208,
+      "bytes_hex": "2de9f04188b08046dde90e6715461c46202221466846cef7e9fda07e00074bd5616828680a1a21686b68cb1ab16881b196ed050af8eec00a00ee101ab8eec01a80ee810aac7e240706d402208df81d0032e09fed1d0af5e74af6c004a24203dd01208df81d0027e0b7f90240c4eb0414b3eb840f03dd03208df81d001ce04ff4e165a9420adb10ee101a104ca14205ddab4203dd05208df81d000de0009042f63020824205db9df81a0040f010008df81a0000208df81d00202269464046cef795fd08b0bde8f081000000000ad7a33e",
+      "complete": true
+    },
+    "normalized_result": {
+      "address": "0x58b70",
+      "requested_bytes": 208,
+      "returned_bytes": 208,
+      "bytes_hex": "2de9f04188b08046dde90e6715461c46202221466846cef7e9fda07e00074bd5616828680a1a21686b68cb1ab16881b196ed050af8eec00a00ee101ab8eec01a80ee810aac7e240706d402208df81d0032e09fed1d0af5e74af6c004a24203dd01208df81d0027e0b7f90240c4eb0414b3eb840f03dd03208df81d001ce04ff4e165a9420adb10ee101a104ca14205ddab4203dd05208df81d000de0009042f63020824205db9df81a0040f010008df81a0000208df81d00202269464046cef795fd08b0bde8f081000000000ad7a33e",
+      "complete": true
+    },
+    "confidence": "observed",
+    "authority": "shipped-artifact",
+    "environment": null,
+    "limitations": [
+      "The session serves operations only after Ghidra reports default auto-analysis complete; incomplete analysis does not expose partial results.",
+      "The imported Program and temporary project are ephemeral and deleted on close. Annotation operations edit session database metadata; original executable bytes are never written.",
+      "Cancelling an active Ghidra request terminates its ephemeral database and discards session annotations. The selected target remains open; the next provider query imports the original artifact again.",
+      "Default-space addresses use lowercase 0x-prefixed hexadecimal; other address spaces use <percent-encoded-space>:0x<hex>.",
+      "Bytes reflect Ghidra's initialized memory, including loader fixups. Reads stop at an unmapped or uninitialized byte and report completeness explicitly.",
+      "macOS sessions require a matching executable Ghidra native decompiler; REA checks for it but does not build native components or change Gatekeeper quarantine state."
+    ],
+    "relationship_coverage": null,
+    "locations": [],
+    "evidence_links": []
+  },
+  "native_replay": {
+    "native_cases": 3192,
+    "fault_cases": 47,
+    "ratio_oracle_cases": 2942,
+    "fp_computed_cases": 2270,
+    "mutation_cases": 200,
+    "statuses": [
+      0,
+      1,
+      2,
+      3,
+      5
+    ],
+    "limits": [
+      "Native refinement and actual native memory movement; no compiled replacement here",
+      "Independent scalar/status and exact-rational binary32 ratio/FPSCR-IXC oracle",
+      "Private stack identity/caller-clobbered registers excluded; no physical/concurrent/final-link or byte identity proof"
+    ]
+  },
+  "rejected_cases_with_new_FP_flags": 554,
+  "rounding_sensitive_threshold": [
+    {
+      "case": {
+        "span": 10800,
+        "gap": 1801,
+        "count": 1800,
+        "sum": 576,
+        "limit": 32767,
+        "current_flags": 8,
+        "previous_flags": 8,
+        "output": "normal",
+        "fpscr": 0
+      },
+      "status": 0,
+      "ratio_bits": 1050924810,
+      "fpscr": 16
+    },
+    {
+      "case": {
+        "span": 10800,
+        "gap": 1801,
+        "count": 1800,
+        "sum": 576,
+        "limit": 32767,
+        "current_flags": 8,
+        "previous_flags": 8,
+        "output": "normal",
+        "fpscr": 4194304
+      },
+      "status": 5,
+      "ratio_bits": 1050924811,
+      "fpscr": 4194320
+    },
+    {
+      "case": {
+        "span": 10800,
+        "gap": 1801,
+        "count": 1800,
+        "sum": 576,
+        "limit": 32767,
+        "current_flags": 8,
+        "previous_flags": 8,
+        "output": "normal",
+        "fpscr": 8388608
+      },
+      "status": 0,
+      "ratio_bits": 1050924810,
+      "fpscr": 8388624
+    },
+    {
+      "case": {
+        "span": 10800,
+        "gap": 1801,
+        "count": 1800,
+        "sum": 576,
+        "limit": 32767,
+        "current_flags": 8,
+        "previous_flags": 8,
+        "output": "normal",
+        "fpscr": 12582912
+      },
+      "status": 0,
+      "ratio_bits": 1050924810,
+      "fpscr": 12582928
+    }
+  ],
+  "composition": {
+    "report": "build/sources-goal-r1-interval-compose-c-final/report.json",
+    "sha256": "7f12557e0ae590a6d832b8636f782ac0e6d6834cf90766914ccfc9002fb77e92",
+    "unchanged_units": 669,
+    "application_imports": 165,
+    "bootloader_imports": 34,
+    "manifest_unchanged": true,
+    "canonical_plan_unchanged": true
+  },
+  "frontier": {
+    "image": "application",
+    "inventory_source": "ghidra_functions_csv",
+    "entry": "0x00058b70",
+    "size": "200",
+    "provider_family": "gomore_health_algorithm_candidate",
+    "source_symbol": "gomore_primitives_sleep_interval_refine",
+    "candidate_symbol": "r1_gomore_sleep_interval_refine_native",
+    "status": "unresolved_source_route",
+    "candidate_sources": "",
+    "candidate_objects": "",
+    "candidate_reports": "",
+    "behavior_receipt": "r1/docs/reference/gomore-interval-refine-native-analysis.json",
+    "instruction_identity_proven": "false",
+    "image_integration_proven": "false"
+  },
+  "artifacts": {
+    "build/goal-r1-interval-refine-analysis/probe.py": "bc52adaf588496913a709a22bb4d65a8ff6af22677a944a4f847687c77ecbf3e",
+    "build/goal-r1-interval-refine-analysis/probe.log": "cf7e25583a0e7f410664ac4e4eba0d6cbb062899405777a519473d2c2fc75de0",
+    "build/goal-r1-interval-refine-analysis/results.json": "b3cf8439c79311071f40344317dac8ece6399cc74ff42d8d264ab21707490dd5",
+    "build/goal-r1-interval-refine-analysis/finalize.py": "9ad3b650c9429e07ee345db14d092abdc5b95342fc2b252bcc83b9db0f4a522e",
+    "build/goal-r1-interval-refine-analysis/instructions.json": "ad2446c0a58bf86448fe0e20e4055959c35e08456c3303dbc81bedac847fb450",
+    "build/goal-r1-descriptor-merge-analysis/probe.py": "77945df1a1864cce7723bf9f10f357c7ffebb9bf4ce93a72a93d0c201d95612c"
+  },
+  "limits": [
+    "Native refinement and actual native memory movement; no compiled replacement here",
+    "Independent scalar/status and exact-rational binary32 ratio/FPSCR-IXC oracle",
+    "Private stack identity/caller-clobbered registers excluded; no physical/concurrent/final-link or byte identity proof",
+    "Portable refinement has a different ABI/return and unsigned-span/FP-evaluation assumptions; native route remains unresolved"
+  ]
+}

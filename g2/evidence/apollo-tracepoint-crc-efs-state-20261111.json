@@ -1,0 +1,56 @@
+{
+  "schema": 1,
+  "date": "2026-11-11",
+  "reference": {
+    "artifact": "g2/blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin",
+    "sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+    "installed_image_offset": 32,
+    "installed_image_base": "0x438000",
+    "tracepoint_crc_helper": "0x47ddfe calls 0x4d34c4 with length 12 and null seed",
+    "tracepoint_state_writer_call": "0x47df4a calls 0x47ddfe",
+    "tracepoint_state_reader_call": "0x47dfc2 calls 0x47ddfe",
+    "efs_clear_sites": [
+      "0x456d64", "0x4577a4", "0x457952", "0x458246",
+      "0x458a34", "0x458b38", "0x458d16"
+    ],
+    "efs_clear_length_bytes": 120
+  },
+  "changes": [
+    "Both TPS1 state read and write C paths call the already existing stock state CRC wrapper instead of the TPF1 packet CRC helper.",
+    "The backing EFS transfer-state array is 0x78 bytes, matching the typed state object and seven stock reset lengths."
+  ],
+  "verification": {
+    "crc_equivalence": "4096 generated TPS1 state records produced equal results from the two C CRC implementations; host harness under build/tracepoint-state-crc-20261111/",
+    "old_efs_linked_layout": {
+      "efs_symbol": "0x202028ec size 0x76",
+      "next_symbol": "audio_even_ai_notify_sequence_20074ff9 at 0x20202962",
+      "risk": "A 0x78-byte EFS clear reached two bytes past the former EFS symbol, including the next one-byte state cell."
+    },
+    "new_efs_linked_layout": {
+      "efs_symbol": "0x202028ec size 0x78",
+      "next_symbol": "audio_even_ai_notify_sequence_20074ff9 at 0x20202964",
+      "result": "The 0x78-byte clear ends exactly at the next symbol."
+    },
+    "new_linked_tracepoint_calls": [
+      "audio_tracepoint_write_state_47df28 calls tracepoint_state_crc_47ddfe at 0x539248",
+      "audio_tracepoint_read_state_47df8a calls tracepoint_state_crc_47ddfe at 0x539248"
+    ],
+    "sources_check": "pass: 4883 manifest units, 1 final-link-only C helper",
+    "full_source_build": "build/tracepoint-efs-state-20261111/full/report.json: 4878/4878 enabled C units compiled, no failures or duplicate strong symbols",
+    "strict_link": "build/tracepoint-efs-state-20261111/bundle/link-report.json: all seven payloads linked, no external binary archive",
+    "payload_delta_vs_previous_bundle": "Only g2-apollo-main changed; the other six payload binary hashes match build/em9305-timer-probe-zero-correct-20261111/bundle/link-report.json.",
+    "apollo_main_binary": {
+      "bytes": 3819048,
+      "sha256": "1488a221ed0035191635c51e8d20cd472e533cb29cfac2b4b8549e3fbb479458"
+    },
+    "source_candidate_ota": {
+      "bytes": 4638060,
+      "sha256": "11b10a0af91729cc51e7be43ffa6e82488374d6bd42c8f55dddf0bb1b908cb52"
+    },
+    "diff_check": "pass"
+  },
+  "limits": [
+    "The tracepoint call correction preserves CRC bytes on the tested records; it restores stock call ownership rather than proving all tracepoint behavior.",
+    "The source-only OTA differs from the locked artifact; overall source completeness and physical G2 behavior remain unproven."
+  ]
+}

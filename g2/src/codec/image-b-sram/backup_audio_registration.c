@@ -22,13 +22,15 @@ extern int32_t gx8002_image_b_audio_init_10005ce8(audio_config);
 extern int32_t gx8002_image_b_audio_record_10015bc8(uint32_t, uint32_t *);
 extern int32_t gx8002_image_b_audio_configure_1000a2a0(void);
 
-/* The native entry at 0x1000a030 consists solely of an instruction returning
- * to the caller. The audio-init path stores this callback without calling it. */
-__attribute__((naked)) int32_t gx8002_image_b_audio_update_1000a030(
-    uint32_t ignored __attribute__((unused)),
-    uint32_t *unused __attribute__((unused)))
+/* Stock 0x1000a030 is an empty update callback (upstream
+ * _LvpAudioInUpdateCallback). Native returns with r0 untouched; the audio
+ * IRQ stream dispatcher ignores the result, so it returns 0. */
+int32_t gx8002_image_b_audio_update_1000a030(uint32_t channel,
+                                             uint32_t *saved_address)
 {
-    __asm__ volatile ("jmp r15");
+    (void)channel;
+    (void)saved_address;
+    return 0;
 }
 
 int32_t gx8002_image_b_audio_register_1000a418(uint32_t input)

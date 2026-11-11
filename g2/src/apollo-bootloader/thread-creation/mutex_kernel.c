@@ -21,7 +21,7 @@ extern uint32_t opencfw_bl_queue_runtime_mode(void);
 extern uint32_t opencfw_bl_remove_event_waiter(uint32_t *);
 static _Noreturn void fail(void) {
     (void)opencfw_bl_mask_interrupts();W(UINT32_MAX)=0;
-    for (;;) __asm__ volatile("b .":::"memory");
+    for (;;) { }
 }
 uint32_t opencfw_boot_current_task(void) {return W(CURRENT);}
 uint32_t opencfw_boot_mutex_claim_current(void) {

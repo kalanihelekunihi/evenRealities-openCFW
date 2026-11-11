@@ -58,7 +58,5 @@ uint64_t audio_ble_vendor_clock_divider_body(uint32_t frequency,uint32_t mode,
     }
     return ((uint64_t)actual<<32)|result;
 }
-__attribute__((naked)) uint64_t audio_ble_vendor_clock_divider_55bf64(uint32_t frequency,
-                                                                          uint32_t mode) {
-    __asm volatile("b audio_ble_vendor_clock_divider_body");
-}
+uint64_t audio_ble_vendor_clock_divider_55bf64(uint32_t frequency,
+                                                                          uint32_t mode) __attribute__((alias("audio_ble_vendor_clock_divider_body")));

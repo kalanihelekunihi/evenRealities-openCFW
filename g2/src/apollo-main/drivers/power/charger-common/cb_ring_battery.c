@@ -29,7 +29,11 @@ static const char invalid_cb[] = "Invalid ring callback function"; /* ROM 0x75e5
 static const char invalid_cb_short[] = "[cb.ring_bat]Invalid ring callback function"; /* ROM 0x73c820 */
 
 /* Sits directly before CB_RING_BAT_Init with no log strings of its own, so
- * its stock file is inferred; called once from UI init at 0x49e706. */
+ * its stock file is inferred; called once from UI init at 0x49e706.
+ * wave22 recheck: the literal pool that ends at 0x500378 belongs to page_state_sync.c
+ * (strings "page_state_sync_*" at pool 0x500300..0x500374). The 8-byte body has no pool
+ * of its own, so it could be the tail of page_state_sync.c or the head of
+ * cb_ring_battery.c. Still unresolved. */
 void cb_ring_battery_forwarder(void *context) {
     dashboard_main_screen_4e93e4(context);
 }

@@ -1,0 +1,123 @@
+{
+  "schema_version": 1,
+  "report": "build/sources-goal-r1-nv-merge-reviewed-c/report.json",
+  "native_entry": "0x7bd68",
+  "audit": {
+    "unchanged_prior_nongenerated_objects": 844,
+    "changed_nongenerated_objects": [],
+    "changed_generated_objects": [
+      "{gen}/r1_startup_vectors.S",
+      "{gen}/r1_uecc.c"
+    ],
+    "added_objects": [
+      "r1/src/application/runtime/native_nv_recovery_merge.c"
+    ],
+    "compiled_units": 855,
+    "application_imports": 63,
+    "bootloader_imports": 22,
+    "removed_imports": [
+      "r1_native_nv_recovery_merge_boundary"
+    ],
+    "new_imports": [],
+    "new_persistent_state": false
+  },
+  "verification": {
+    "stock_C_trace_comparisons": 3666,
+    "native_instruction_bytes_covered": 984,
+    "native_uncovered": [],
+    "C_only_fail_closed_cases": 14,
+    "all128_dirty_field_combinations": true,
+    "independent_CRC_and_fill_only_oracle": true,
+    "actual_C_CRC_and_memory": true,
+    "read_write_and_log_callbacks_modeled": true,
+    "return_words_normalized": true
+  },
+  "actual_cached_class_integration": {
+    "actual_cached_class_cases": 440,
+    "all128_field_combinations": true,
+    "actual_C_KV_CRC_and_memory": true,
+    "dirty_flags_and_unchanged_bytes_checked": true,
+    "critical_sections_balanced": true,
+    "actual_class_size_mismatch_fail_closed": true,
+    "physical_persistence_not_executed": true
+  },
+  "negative_controls": [
+    {
+      "name": "overwrite_valid_battery",
+      "rejected": true
+    },
+    {
+      "name": "keep_zero_ADC",
+      "rejected": true
+    },
+    {
+      "name": "replace_zero_length_serial",
+      "rejected": true
+    },
+    {
+      "name": "missing_accel_write",
+      "rejected": true
+    },
+    {
+      "name": "CRC_bypass",
+      "rejected": true
+    },
+    {
+      "name": "ignore_read_failure",
+      "rejected": true
+    }
+  ],
+  "contract": [
+    "Verify Modbus CRC against the complete expected32-bit word. On mismatch/null input preserve diagnostics and skip class access.",
+    "Preserve valid local battery type1..4, nonzero/non-minus-one ADC within-500..500 and ring size6..15. Fill only invalid local fields when incoming values meet their respective rules. ADC zero is missing here although report construction permits it.",
+    "Fill each local serial string only when its length byte is255 and incoming length is1..30. Copy exactly the admitted length, preserve trailing local bytes and reload the stored incoming length after the copy.",
+    "Fill temperature calibration only when local byte62 is255 and incoming byte62 is not255; copy all six bytes. Fill accelerometer calibration when its local first signed halfword is-1 and incoming first halfword is not-1; copy all six bytes and force serial-class write.",
+    "Write changed serial124, battery4 and ring1 classes in that order using reloaded existing live handles. Preserve all unrelated bytes, including the battery reserved byte and serial tail74..123. No persistence flush is added."
+  ],
+  "intentional_C_changes": [
+    "Accept only the116-byte record admitted by the existing command dispatcher, avoiding unbounded direct-entry CRC reads.",
+    "Initialize scratch and require all three cached reads to succeed before constructing any writes. Failed reads now leave all cached records unchanged instead of merging unknown private stack bytes.",
+    "Define completion return0 rather than expose incidental logger or cached-write results. Native/C comparison explicitly normalizes return words."
+  ],
+  "limits": [
+    "3666 comparisons cover all984 native instruction bytes, all128 dirty-field combinations, scalar boundaries, modes, handle changes, CRC mismatch, null input and four input alignments. Actual C CRC and memory routines execute with independent CRC/fill-only oracles; KV/log callbacks are modeled.",
+    "440 cases execute actual cached-class read/write and memory code. They verify payloads, dirty flags, unchanged bytes, balanced critical sections and actual class-size mismatch rejection. Fourteen C-only cases cover failed reads/stack poison and incorrect input lengths.",
+    "Private stack memory, return words and incidental caller-saved registers are excluded from equality. Preserved integer/FP registers, SP, masks, input guards, diagnostics and writes are checked.",
+    "No arbitrary asynchronous mutation, invalid pointer aliasing, transactional physical persistence, radio operation, final linking or boot is established. Successful cached writes still rely on the existing persistence worker.",
+    "855 units compile/compose;63 application and22 bootloader imports remain. No new persistent state or imports."
+  ],
+  "evidence_files": {
+    "build/sources-goal-r1-nv-merge-reviewed-c/report.json": "5a211c8e76eb62de3fa49afffb32a33fc6e72b5ed2b80b7b5ac44c969bc2ee37",
+    "build/sources-goal-r1-nv-report-reviewed-c/report.json": "9b028d285ab21afb706aba55d27a9706d2e9df3f9753bd559a62469bd31f267c",
+    "r1/src/application/runtime/native_nv_recovery_merge.c": "f0f3331f70e7e298f8396d9cbcdf4cc29e03bb5b5836e2d24ac53ee3cc31f4d1",
+    "r1/src/sources.json": "618e3f6056f74edee68027c82dddb1d2e8c53810e0c04e416f42841fc974e4ec",
+    "r1/src/application/runtime/native_nv_recovery_dispatch.c": "4b1037ac0d56ecf0fd7ad83aa046aa5bb699b25bda4baefe23bde298eaf4418b",
+    "r1/src/application/board/native_kv_class.c": "e9791d39b7a9b5380b1dbce3c7422be921131abbd0e09c3387ea3d4b9930bf6e",
+    "r1/src/application/checksums/stock_checksums.c": "63f78e208048b5bd4b91c00f97e1260a5a53f5bee50dc51aa5ce4aaa1cdfe898",
+    "r1/src/include/r1_stock_checksums.h": "af730ecb8d2e2cc5656016b269678e7f1ac6c7e48fe32401fdfb9b7206886ef9",
+    "build/goal-r1-nv-merge-c/rea.json": "98d073906814ac60c308b82eb2f948c19a5810d87a9bd0f452060731b0ede3f7",
+    "build/goal-r1-nv-merge-c/verify.py": "c63384f4f7b5771a0f5d59f7c9ecfb9af19b7a38d0d6302723ba32def119ddbc",
+    "build/goal-r1-nv-merge-c/verification.json": "3431c6a3534dddd258dcbac4dd3959ccf0d34a68a9f7c15ec2f3850a2fee3816",
+    "build/goal-r1-nv-merge-c/verification.log": "1cd2e789531aa7704e96d65b8e7e993d73c9491661e7d6e98e8875703a3fec4b",
+    "build/goal-r1-nv-merge-c/make-integration.py": "8bc401ac7a0f828f303243965af09fbf20eb387c6321a881f584884a12e26052",
+    "build/goal-r1-nv-merge-c/integration/verify.py": "558160db9c466dc27fce8ccd872fa79d7897409815e465f4b49697d1131f69e8",
+    "build/goal-r1-nv-merge-c/integration/verification.json": "1804c83a86bba4f38a10b91360a7c2ceb4b4bebeec9b867c4eac8437d31395b5",
+    "build/goal-r1-nv-merge-c/integration/verification.log": "51dbca012526bc5ef68f48c70111ffe6689350720e51647acf4be612dc1163f9",
+    "build/goal-r1-nv-merge-c/negative.py": "e2b993f259ffa50de42e17483ef55aadd1fb098cd369f6120d439c958f1dde14",
+    "build/goal-r1-nv-merge-c/negative.json": "aa2c9a9e965b5f5e8d3a7c15607907c5482e7109654a87da16ac89ea17ab4fa4",
+    "build/goal-r1-nv-merge-c/negative.log": "f36e92d1bf0eb69cfa7fc106e8404a2becd1a53aba0ec5c108c8db53f6ebac81",
+    "build/goal-r1-nv-merge-c/r1-check.log": "f610d186f791ebf717d9fd6eed6c4f28612779fff34b885bcf8dc8a49c9ae80c",
+    "build/goal-r1-nv-merge-c/overwrite_valid_battery/mutant.c": "dbb7a938213fb18cbb267b3dcd4333d72632fab4aceecbb6a1da215c3b227648",
+    "build/goal-r1-nv-merge-c/overwrite_valid_battery/result.log": "3afb37e8b21a09aa53bb558a4d1e2dbc6d80df2abc1211f1b539e43d72c39ff6",
+    "build/goal-r1-nv-merge-c/keep_zero_ADC/mutant.c": "e0da54fa66dd835d62a177c214d1b460d680d19f9a3104de76f819d8b1197877",
+    "build/goal-r1-nv-merge-c/keep_zero_ADC/result.log": "9a42b30c4b335830c8eab916542627372b0ce7e4a26d706211a39e4635e8c8a1",
+    "build/goal-r1-nv-merge-c/replace_zero_length_serial/mutant.c": "6d1e33874a1d9064d0a0a16104848e45ad28d118d6263c201cdad1a57b53dd54",
+    "build/goal-r1-nv-merge-c/replace_zero_length_serial/result.log": "4c4c3db7714b20367884f9d30f2cf05701d61071e6b508dbcc3e1f51c085f2f3",
+    "build/goal-r1-nv-merge-c/missing_accel_write/mutant.c": "a20d0d02cb0268bdd4e7be4fcd64ce6461df3d6e82769c9ea6e62c91d0d98379",
+    "build/goal-r1-nv-merge-c/missing_accel_write/result.log": "3afb37e8b21a09aa53bb558a4d1e2dbc6d80df2abc1211f1b539e43d72c39ff6",
+    "build/goal-r1-nv-merge-c/CRC_bypass/mutant.c": "56abe5f30fce552b69c8486efe053223280fbb32d4ea1027c62c7e8160ff3390",
+    "build/goal-r1-nv-merge-c/CRC_bypass/result.log": "d56b1271c032ab2aed7c2f7f9428bd8dc1ab57516074bf319d279d248d781966",
+    "build/goal-r1-nv-merge-c/ignore_read_failure/mutant.c": "71d60fb4d32a46ea5b3f98130d8a14287fd2dfdd028f2c42a5706b283c5e4998",
+    "build/goal-r1-nv-merge-c/ignore_read_failure/result.log": "034befbebf8df1443bae94fd610559a2e7ea354995edd6419e24022e4e3a2d2b"
+  }
+}

@@ -1,0 +1,191 @@
+{
+  "schema_version": 1,
+  "entries": {
+    "0x4a7f4": [
+      "r1_algo_sleep_result_report",
+      "native_algo_sleep_report.c"
+    ],
+    "0x4a8bc": [
+      "r1_activity_mode_byte_get",
+      "native_activity_mode.c"
+    ],
+    "0x4aa64": [
+      "r1_native_health_default_mode_callback",
+      "native_health_default_mode.c"
+    ],
+    "0x4a4b4": [
+      "r1_algo_sleep_force_awake",
+      "native_sleep_wake.c"
+    ]
+  },
+  "report": "build/sources-goal-r1-sleep-report-c/report.json",
+  "report_sha256": "9552b7f34d2bea351b2503fb747f778e72064a907334a464e723be7921402f5f",
+  "units": [
+    {
+      "source": "r1/src/application/runtime/native_sleep_wake.c",
+      "source_sha256": "9b4f061dedfa5d9a5aeb9de0f227ba02cb1292cd0fd93f8c5fc204d601966b6d",
+      "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-sleep-report-c/r1/r1-application/r1__src__application__runtime__native_sleep_wake.c.o",
+      "object_sha256": "9c6a99c700c7e64579629d312b1273f9b5b23d3275e9250f4664c11e931408aa"
+    },
+    {
+      "source": "r1/src/application/runtime/native_activity_mode.c",
+      "source_sha256": "adb7e0432baa297e672684a499d2d0d3eb1260f906afd3334902663299ac9348",
+      "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-sleep-report-c/r1/r1-application/r1__src__application__runtime__native_activity_mode.c.o",
+      "object_sha256": "c02ba119a10c0571f9fdb3c6779bea08157fab823c3bdf33aba9c46e565bb9c0"
+    },
+    {
+      "source": "r1/src/application/runtime/native_health_default_mode.c",
+      "source_sha256": "3a3cff593b9065681053746c8f269600a24ccf19c85ffbeea78cae892e382fc5",
+      "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-sleep-report-c/r1/r1-application/r1__src__application__runtime__native_health_default_mode.c.o",
+      "object_sha256": "cb4bffb10840f475e11807c7c2de259cb6e53c993ec0904d07dc6ba22e84f6c7"
+    },
+    {
+      "source": "r1/src/application/runtime/native_algo_sleep_report.c",
+      "source_sha256": "ab61b4826d7a7183cef26ebd6cb1846a4bd69ee5abb4ca627b395fe8a30e4764",
+      "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-sleep-report-c/r1/r1-application/r1__src__application__runtime__native_algo_sleep_report.c.o",
+      "object_sha256": "843c7e41233ef6fbd3f091728d5b770e9cc11fe35e7fbccffa8435e67b4b36b1"
+    }
+  ],
+  "behavior": {
+    "pairs": 744,
+    "digest": "0a9dc60d40df413ce2e55e0894a2df8a16b5c8048cba87cf342206a12922ac38",
+    "actual_C": [
+      "sleep report",
+      "activity mode getter",
+      "default-mode callback",
+      "force-wake callback",
+      "single shared sleep control owner"
+    ],
+    "modeled_boundaries": [
+      "r1_structured_log_mode_get",
+      "r1_structured_log_format",
+      "nrf_log_frontend_std_1",
+      "nrf_log_frontend_std_0",
+      "r1_event_publish",
+      "r1_event_service_0008b028",
+      "r1_algo_sleep_vivo_probe_start",
+      "r1_temp_sleep_status_report",
+      "r1_gomore_sleep_force_wake_native",
+      "r1_stream_timer_create_front",
+      "r1_stream_timer_release"
+    ],
+    "limits": [
+      "No asynchronous IRQ/concurrency",
+      "Private status pointer normalized by one-byte contents",
+      "Vivo probe, multicast, force-wake internals and physical delivery modeled"
+    ]
+  },
+  "output_integration": {
+    "pairs": 1264,
+    "digest": "5cde295e8f516e3b77e7555fba8c3b6a8cad343de83261a7719600df21ae9643",
+    "actual_C": [
+      "sensor output dispatcher plus activity accumulator, sleep report/getter and canonical sleep state owner"
+    ],
+    "modeled_boundaries": [
+      "r1_gomore_sensor_stamp_time",
+      "r1_gomore_sensor_update_native",
+      "r1_gomore_sensor_failure_update",
+      "r1_gomore_sensor_update_complete",
+      "gomore_primitives_noop_49e58",
+      "r1_gomore_authorization_dispatch_native",
+      "r1_gomore_sleep_interval_dispatch_native",
+      "r1_gomore_final_sleep_record_publish_native",
+      "pvPortMalloc",
+      "vPortFree",
+      "__aeabi_memclr",
+      "r1_structured_log_mode_get",
+      "r1_structured_log_format",
+      "nrf_log_frontend_std_0",
+      "nrf_log_frontend_std_1",
+      "r1_time_backend_timestamp",
+      "r1_time_local_day_start",
+      "r1_health_mode_get",
+      "r1_health_mode_is_2",
+      "r1_event_publish",
+      "r1_event_service_0008b028",
+      "r1_algo_sleep_vivo_probe_start"
+    ],
+    "limits": [
+      "Synchronous mapped workspace and payload; no asynchronous IRQ/concurrency",
+      "Private local addresses normalized by contents; called providers may not retain them",
+      "No physical sensor output or complete firmware link"
+    ]
+  },
+  "negative_controls": {
+    "wrong-status-width": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "257, 'active': 0, 'modes': (0,), 'mutate': None}, ['trace'], [('mode', [0], '0012345600000000'), ('mode', [0], '0012345600000000'), ('mode', [0], '0012345600000000'), ('event', [12, '01', 1], '0112345600000000'), ('multicast', [3, '01', 1], '0112345600000000'), ('probe', [], '0112345600000000')], [('mode', [0], '0012345600000000'), ('mode', [0], '0012345600000000'), ('mode', [0], '0012345600000000'), ('event', [12, '01', 1], '0112345600000000'), ('multicast', [3, '01', 1], '0112345600000000')])\n"
+    },
+    "wrong-active-guard": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "1, 'active': 0, 'modes': (0,), 'mutate': 'mode'}, ['trace'], [('mode', [0], '0012345600000000'), ('mode', [0], '8112345600000000'), ('mode', [0], '8112345600000000'), ('event', [12, '01', 1], '0112345600000000'), ('multicast', [3, '01', 1], '0112345600000000')], [('mode', [0], '0012345600000000'), ('mode', [0], '8112345600000000'), ('mode', [0], '8112345600000000'), ('event', [12, '01', 1], '0112345600000000'), ('multicast', [3, '01', 1], '0112345600000000'), ('probe', [], '0112345600000000')])\n"
+    },
+    "lost-state-write": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "sertionError: ({'status': 0, 'active': 0, 'modes': (0,), 'mutate': 'mode'}, ['trace', 'state'], [('mode', [0], '0012345600000000'), ('mode', [0], '8112345600000000'), ('mode', [0], '8112345600000000'), ('event', [12, '00', 1], '0012345600000000'), ('multicast', [3, '00', 1], '0012345600000000')], [('mode', [0], '0012345600000000'), ('mode', [0], '8112345600000000'), ('mode', [0], '8112345600000000'), ('event', [12, '00', 1], '8112345600000000'), ('multicast', [3, '00', 1], '8112345600000000')])\n"
+    },
+    "lost-probe-start": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": ": 1, 'active': 0, 'modes': (0,), 'mutate': None}, ['trace'], [('mode', [0], '0012345600000000'), ('mode', [0], '0012345600000000'), ('mode', [0], '0012345600000000'), ('event', [12, '01', 1], '0112345600000000'), ('multicast', [3, '01', 1], '0112345600000000'), ('probe', [], '0112345600000000')], [('mode', [0], '0012345600000000'), ('mode', [0], '0012345600000000'), ('mode', [0], '0012345600000000'), ('event', [12, '01', 1], '0112345600000000'), ('multicast', [3, '01', 1], '0112345600000000')])\n"
+    },
+    "wrong-publish-topic": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "    ^^^^\nAssertionError: ({'status': 0, 'active': 0, 'modes': (0,), 'mutate': None}, ['trace'], [('mode', [0], '0012345600000000'), ('mode', [0], '0012345600000000'), ('mode', [0], '0012345600000000'), ('event', [12, '00', 1], '0012345600000000'), ('multicast', [3, '00', 1], '0012345600000000')], [('mode', [0], '0012345600000000'), ('mode', [0], '0012345600000000'), ('mode', [0], '0012345600000000'), ('event', [13, '00', 1], '0012345600000000'), ('multicast', [3, '00', 1], '0012345600000000')])\n"
+    },
+    "wrong-multicast-kind": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "    ^^^^\nAssertionError: ({'status': 0, 'active': 0, 'modes': (0,), 'mutate': None}, ['trace'], [('mode', [0], '0012345600000000'), ('mode', [0], '0012345600000000'), ('mode', [0], '0012345600000000'), ('event', [12, '00', 1], '0012345600000000'), ('multicast', [3, '00', 1], '0012345600000000')], [('mode', [0], '0012345600000000'), ('mode', [0], '0012345600000000'), ('mode', [0], '0012345600000000'), ('event', [12, '00', 1], '0012345600000000'), ('multicast', [4, '00', 1], '0012345600000000')])\n"
+    },
+    "lost-payload-mutation": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": " ^^^^\nAssertionError: ({'status': 0, 'active': 0, 'modes': (0,), 'mutate': 'event'}, ['trace'], [('mode', [0], '0012345600000000'), ('mode', [0], '0012345600000000'), ('mode', [0], '0012345600000000'), ('event', [12, '00', 1], '0012345600000000'), ('multicast', [3, '82', 1], '0012345600000000')], [('mode', [0], '0012345600000000'), ('mode', [0], '0012345600000000'), ('mode', [0], '0012345600000000'), ('event', [12, '00', 1], '0012345600000000'), ('multicast', [3, '00', 1], '0012345600000000')])\n"
+    },
+    "late-state-write": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "ertionError: ({'status': 0, 'active': 0, 'modes': (0,), 'mutate': 'event'}, ['trace', 'state'], [('mode', [0], '0012345600000000'), ('mode', [0], '0012345600000000'), ('mode', [0], '0012345600000000'), ('event', [12, '00', 1], '0012345600000000'), ('multicast', [3, '82', 1], '0012345600000000')], [('mode', [0], '0012345600000000'), ('mode', [0], '0012345600000000'), ('mode', [0], '0012345600000000'), ('event', [12, '00', 1], '0012345600000000'), ('multicast', [3, '82', 1], '8212345600000000')])\n"
+    }
+  },
+  "audit": {
+    "unchanged_prior_objects": 744,
+    "changed_objects": {
+      "r1/src/application/runtime/native_activity_mode.c": {
+        "allocated_instruction_bytes_unchanged": true,
+        "renamed_relocations": 2
+      },
+      "r1/src/application/runtime/native_health_default_mode.c": {
+        "allocated_instruction_bytes_unchanged": true,
+        "renamed_relocations": 2
+      }
+    },
+    "duplicate_state_bytes_removed": 1,
+    "new_units": 1,
+    "imports": {
+      "r1-application": {
+        "added": [
+          "r1_algo_sleep_vivo_probe_start"
+        ],
+        "removed": [
+          "r1_algo_sleep_result_report"
+        ]
+      },
+      "r1-bootloader": {
+        "added": [],
+        "removed": []
+      }
+    },
+    "canonical_owner": "r1_sleep_wake_control.active at native 0x20006ed4",
+    "shared_header_sha256": "99fa96b7ccd66101a45807f6ae90e424a4603388fc1a9faf76280117f044e03a"
+  },
+  "source_check": "make sources-check: PASS; G2 5058 units, 4738 source files; R1 747 units, 551 source files; 0 not built in both",
+  "rea": "algo-sleep-report-c-rea.json",
+  "instruction_identity_proven": false,
+  "image_integration_proven": false
+}

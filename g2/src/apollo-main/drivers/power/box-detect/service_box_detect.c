@@ -40,9 +40,7 @@ extern struct npmx_instance g2_npmx_instance;         /* RAM 0x20070f78 */
 extern void *audio_box_detect_timer;                   /* RAM 0x20074920 box_detect_out_timer */
 extern void *audio_box_reconnect_timer;                /* RAM 0x20074924 ring_reconnect_timer */
 extern uint8_t g2_box_case_state[4];                   /* RAM 0x20074928 */
-extern volatile uint8_t audio_box_reconnect_suppressed_20075010; /* RAM 0x20075010 */
-extern volatile uint8_t audio_box_reconnect_pending_20075011;    /* RAM 0x20075011 */
-extern volatile uint8_t audio_uart_case_status_disabled; /* RAM 0x20075012 force-out-box flag */
+#include "../../../app/case-reconnect/case_reconnect_state.h"
 
 extern int32_t osTimerStop(void *timer);
 extern int32_t osTimerDelete(void *timer);

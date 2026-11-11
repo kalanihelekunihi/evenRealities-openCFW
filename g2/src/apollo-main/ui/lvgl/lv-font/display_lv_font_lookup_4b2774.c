@@ -59,3 +59,6 @@ int32_t audio_uart_lv_font_lookup_4b2774(const void *font, uint32_t codepoint) {
     }
     return 0;
 }
+/* Single implementation of stock glyph-id lookup 0x4b2774 (bsearch via 0x52a284 as stock). */
+__typeof__(audio_uart_lv_font_lookup_4b2774) audio_uart_font_glyph_index
+    __attribute__((alias("audio_uart_lv_font_lookup_4b2774")));

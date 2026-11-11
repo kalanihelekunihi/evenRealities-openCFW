@@ -1,153 +1,63 @@
-/* Complete native timing commit child; native register effects preserved. */
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_associated_child_32a4c0\n"
-".type opencfw_em9305_associated_child_32a4c0,@function\n"
-"opencfw_em9305_associated_child_32a4c0:\n"
-"L32a4c0:\n"
-"enter_s [r13-r20,blink]\n"
-"L32a4c2:\n"
-"mov_s r13,r0\n"
-"L32a4c4:\n"
-"ldh.as r0,[r0,131]\n"
-"L32a4c8:\n"
-"ldh r12,[r13,202]\n"
-"L32a4cc:\n"
-"ldh.as r16,[r13,133]\n"
-"L32a4d0:\n"
-"add r11,r0,0x1\n"
-"L32a4d4:\n"
-"sub r0,r11,r12\n"
-"L32a4d8:\n"
-"mpyuw r0,r16,r0\n"
-"L32a4dc:\n"
-"mov_s r15,r13\n"
-"L32a4de:\n"
-"add2 r14,r13,0x29\n"
-"L32a4e2:\n"
-"add r15,r15,628\n"
-"L32a4e6:\n"
-"mpywhl r0,r0,1250\n"
-"L32a4ea:\n"
-"ldh_s r2,[r15,0x36]\n"
-"L32a4ec:\n"
-"ld_s r3,[r14,0x2c]\n"
-"L32a4ee:\n"
-"add_s r3,r3,r0\n"
-"L32a4f0:\n"
-"breq.d.nt r2,r12,L32a4f8\n"
-"L32a4f4:\n"
-"st_s r3,[r14,0x2c]\n"
-"L32a4f6:\n"
-"st_s r0,[r14,0x30]\n"
-"L32a4f8:\n"
-"ldh_s r0,[r15,0x34]\n"
-"L32a4fa:\n"
-"ldh_s r3,[r15,0x30]\n"
-"L32a4fc:\n"
-"ldh_s r2,[r15,0x32]\n"
-"L32a4fe:\n"
-"mpyuw r9,r0,0xa\n"
-"L32a502:\n"
-"ldh.as r20,[r13,191]\n"
-"L32a506:\n"
-"ldh r19,[r14,96]\n"
-"L32a50a:\n"
-"sth r11,[r13,202]\n"
-"L32a50e:\n"
-"sth.as r3,[r13,133]\n"
-"L32a512:\n"
-"sth r2,[r14,96]\n"
-"L32a516:\n"
-"sth.as r9,[r13,191]\n"
-"L32a51a:\n"
-"brne_s r1,0,L32a562\n"
-"L32a51c:\n"
-"ldh r17,[r15,46]\n"
-"L32a520:\n"
-"ldb r18,[r15,44]\n"
-"L32a524:\n"
-"ldh_s r1,[r14,0x24]\n"
-"L32a526:\n"
-"mpyuw r17,r17,1250\n"
-"L32a52a:\n"
-"mpyuw r18,r18,1250\n"
-"L32a52e:\n"
-"bl.d opencfw_em9305_init_secondary_time_317ebc\n"
-"L32a532:\n"
-"add r0,r18,r17\n"
-"L32a536:\n"
-"ld_s r1,[r14,0x2c]\n"
-"L32a538:\n"
-"ld r2,[r13,0x18]\n"
-"L32a53a:\n"
-"ld r11,[r13,28]\n"
-"L32a53e:\n"
-"ld r8,[r14]\n"
-"L32a542:\n"
-"ldh.as r9,[r13,191]\n"
-"L32a546:\n"
-"sub r3,r17,r0\n"
-"L32a54a:\n"
-"add1 r12,r18,r0\n"
-"L32a54e:\n"
-"add_s r1,r1,r17\n"
-"L32a550:\n"
-"add_s r2,r2,r3\n"
-"L32a552:\n"
-"add_s r0,r0,r11\n"
-"L32a554:\n"
-"add_s r12,r12,r8\n"
-"L32a556:\n"
-"st r18,[r14,40]\n"
-"L32a55a:\n"
-"st_s r1,[r14,0x2c]\n"
-"L32a55c:\n"
-"st_s r2,[r13,0x18]\n"
-"L32a55e:\n"
-"st_s r0,[r13,0x1c]\n"
-"L32a560:\n"
-"st_s r12,[r14,0]\n"
-"L32a562:\n"
-"lsr r0,r16,0x2\n"
-"L32a566:\n"
-"bmsk.f 0,r16,0x1\n"
-"L32a56a:\n"
-"add_s r0,r0,r16\n"
-"L32a56c:\n"
-"add.ne r0,r0,0x1\n"
-"L32a570:\n"
-"exth r1,r9\n"
-"L32a574:\n"
-"add_s r1,r1,r0\n"
-"L32a576:\n"
-"bl.d opencfw_em9305_wsf_timer_start_ms\n"
-"L32a57a:\n"
-"add3 r0,r13,0x30\n"
-"L32a57e:\n"
-"ldh.as r0,[r13,133]\n"
-"L32a582:\n"
-"brne.nt r16,r0,L32a596\n"
-"L32a586:\n"
-"ldh r0,[r14,96]\n"
-"L32a58a:\n"
-"brne.nt r19,r0,L32a596\n"
-"L32a58e:\n"
-"ldh.as r0,[r13,191]\n"
-"L32a592:\n"
-"breq.nt r20,r0,L32a5a0\n"
-"L32a596:\n"
-"ld.as r0,[r14,118]\n"
-"L32a59a:\n"
-"bset_s r0,r0,0x11\n"
-"L32a59c:\n"
-"st.as r0,[r14,118]\n"
-"L32a5a0:\n"
-"stb 0,[r14,52]\n"
-"L32a5a4:\n"
-"stb 1,[r15]\n"
-"L32a5a8:\n"
-"leave_s [r13-r20,blink,pcl]\n"
-".size opencfw_em9305_associated_child_32a4c0,.-opencfw_em9305_associated_child_32a4c0\n"
-);
+#include <stdint.h>
+
+/* Native 0x32a4c0..0x32a5aa: apply a pending connection-parameter update at
+ * its instant. Advance the anchor (+208) by the events elapsed since the
+ * last update (+262 + 1 - +202) times the old interval (+266, 1250 us units),
+ * also recording that delta at +212 unless the instant (+682) matches; take
+ * over interval (+676), latency (+678) and supervision timeout (+680, 10 ms
+ * units) into +266/+260/+382 and the instant counter +202. Unless keep is
+ * set, apply the transmit window offset/size (+674/+672) and the extra
+ * window widening (native 0x317ebc) to the timing words. Restart the
+ * supervision timer (+384) for timeout + 1.25 * old interval ms, flag a
+ * parameter change in +636 bit 17, and clear +216 / set +628. */
+extern uint32_t opencfw_em9305_init_secondary_time_317ebc(uint32_t,uint32_t);
+extern uint32_t opencfw_em9305_wsf_timer_start_ms(uintptr_t timer, uint32_t milliseconds);
+
+void opencfw_em9305_associated_child_32a4c0(uintptr_t record, uint32_t keep)
+{
+    uint32_t counter = *(volatile uint16_t *)(record + 262u);
+    uint32_t last = *(volatile uint16_t *)(record + 202u);
+    uint32_t interval = *(volatile uint16_t *)(record + 266u);
+    uint32_t next = counter + 1u;
+    uint32_t delta = interval * ((next - last) & 0xffffu) * 1250u;
+    uint32_t instant = *(volatile uint16_t *)(record + 682u);
+    volatile uint32_t *anchor = (volatile uint32_t *)(record + 208u);
+    *anchor = *anchor + delta;
+    if (instant != last) *(volatile uint32_t *)(record + 212u) = delta;
+    uint32_t timeout = *(volatile uint16_t *)(record + 680u);
+    uint32_t new_interval = *(volatile uint16_t *)(record + 676u);
+    uint32_t new_latency = *(volatile uint16_t *)(record + 678u);
+    uint32_t supervision = timeout * 10u;
+    uint32_t old_supervision = *(volatile uint16_t *)(record + 382u);
+    uint32_t old_latency = *(volatile uint16_t *)(record + 260u);
+    *(volatile uint16_t *)(record + 202u) = (uint16_t)next;
+    *(volatile uint16_t *)(record + 266u) = (uint16_t)new_interval;
+    *(volatile uint16_t *)(record + 260u) = (uint16_t)new_latency;
+    *(volatile uint16_t *)(record + 382u) = (uint16_t)supervision;
+    if (keep == 0u) {
+        uint32_t offset = *(volatile uint16_t *)(record + 674u) * 1250u;
+        uint32_t size = *(volatile uint8_t *)(record + 672u) * 1250u;
+        uint32_t widening = opencfw_em9305_init_secondary_time_317ebc(
+            size + offset, *(volatile uint16_t *)(record + 200u));
+        uint32_t start = *anchor;
+        uint32_t window_start = *(volatile uint32_t *)(record + 0x18u);
+        uint32_t window_end = *(volatile uint32_t *)(record + 28u);
+        uint32_t widen = *(volatile uint32_t *)(record + 164u);
+        supervision = *(volatile uint16_t *)(record + 382u);
+        *(volatile uint32_t *)(record + 204u) = size;
+        *anchor = start + offset;
+        *(volatile uint32_t *)(record + 0x18u) = window_start + (offset - widening);
+        *(volatile uint32_t *)(record + 28u) = widening + window_end;
+        *(volatile uint32_t *)(record + 164u) = size + widening * 2u + widen;
+    }
+    uint32_t grace = interval + (interval >> 2) + ((interval & 3u) != 0u ? 1u : 0u);
+    (void)opencfw_em9305_wsf_timer_start_ms(record + 384u, (supervision & 0xffffu) + grace);
+    if (*(volatile uint16_t *)(record + 266u) != interval ||
+        *(volatile uint16_t *)(record + 260u) != old_latency ||
+        *(volatile uint16_t *)(record + 382u) != old_supervision) {
+        volatile uint32_t *flags = (volatile uint32_t *)(record + 636u);
+        *flags = *flags | (1u << 17);
+    }
+    *(volatile uint8_t *)(record + 216u) = 0u;
+    *(volatile uint8_t *)(record + 628u) = 1u;
+}

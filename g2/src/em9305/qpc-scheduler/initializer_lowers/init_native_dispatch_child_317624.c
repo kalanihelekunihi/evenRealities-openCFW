@@ -1,41 +1,16 @@
-/* Whole native receive queue body with ordered delayed effects. */
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_dispatch_child_317624\n"
-".type opencfw_em9305_dispatch_child_317624,@function\n"
-"opencfw_em9305_dispatch_child_317624:\n"
-"L317624:\n"
-"st.aw blink,[sp,-8]\n"
-"L317628:\n"
-"ldb r1,[r0,108]\n"
-"L31762c:\n"
-"breq_s r1,0,L317642\n"
-"L31762e:\n"
-"add r0,r0,0x30\n"
-"L317630:\n"
-"bl.d opencfw_em9305_wsf_event_remove\n"
-"L317634:\n"
-"add r1,sp,0x7\n"
-"L317638:\n"
-"mov_s r1,r0\n"
-"L31763a:\n"
-"ld.ab blink,[sp,8]\n"
-"L31763e:\n"
-"j_s.d [blink]\n"
-"L317640:\n"
-"mov_s r0,r1\n"
-"L317642:\n"
-"ldb r1,[r0,44]\n"
-"L317646:\n"
-"breq.d.t r1,0x1,L31762e\n"
-"L31764a:\n"
-"cmp_s r1,0\n"
-"L31764c:\n"
-"mov_s r1,0\n"
-"L31764e:\n"
-"beq_s L31762e\n"
-"L317650:\n"
-"b_s L31763a\n"
-".size opencfw_em9305_dispatch_child_317624,.-opencfw_em9305_dispatch_child_317624\n"
-);
+#include <stdint.h>
+
+/* Native 0x317624..0x317652: take the next event from the record's receive
+ * queue (+0x30) when the queue is enabled (+108 nonzero) or the mode byte
+ * (+44) is 0 or 1; otherwise return 0. */
+extern uintptr_t opencfw_em9305_wsf_event_remove(uintptr_t,uintptr_t);
+
+uintptr_t opencfw_em9305_dispatch_child_317624(uintptr_t record)
+{
+    uint8_t handler_id;
+    if(*(volatile uint8_t *)(record+108u)==0u) {
+        uint32_t mode=*(volatile uint8_t *)(record+44u);
+        if(mode!=1u&&mode!=0u) return 0u;
+    }
+    return opencfw_em9305_wsf_event_remove(record+0x30u,(uintptr_t)&handler_id);
+}

@@ -1,60 +1,27 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_callback_32a5ac\n"
-".type opencfw_em9305_callback_32a5ac,@function\n"
-"opencfw_em9305_callback_32a5ac:\n"
-"L32a5ac:\n"
-"enter_s [r13-r16,blink]\n"
-"L32a5ae:\n"
-"mov_s r13,r0\n"
-"L32a5b0:\n"
-"ldb_s r0,[r0,0]\n"
-"L32a5b2:\n"
-"mov_s r16,r1\n"
-"L32a5b4:\n"
-"breq_s r0,0,L32a5f0\n"
-"L32a5b6:\n"
-"ldb_s r2,[r13,0x2]\n"
-"L32a5b8:\n"
-"mov_s r0,0x802810\n"
-"L32a5be:\n"
-"bl.d opencfw_em9305_child_3191dc\n"
-"L32a5c2:\n"
-"mov_s r1,r16\n"
-"L32a5c4:\n"
-"mov_s r14,r0\n"
-"L32a5c6:\n"
-"breq_s r0,0,L32a5e4\n"
-"L32a5c8:\n"
-"ldb_s r2,[r13,0x2]\n"
-"L32a5ca:\n"
-"mov_s r0,0x802810\n"
-"L32a5d0:\n"
-"bl.d opencfw_em9305_child_319714\n"
-"L32a5d4:\n"
-"mov_s r1,r16\n"
-"L32a5d6:\n"
-"breq_s r0,0,L32a5e4\n"
-"L32a5d8:\n"
-"breq.nt r14,0x1e,L32a5e8\n"
-"L32a5dc:\n"
-"breq.d.nt r0,0x1e,L32a5e8\n"
-"L32a5e0:\n"
-"mov_s r1,0xd\n"
-"L32a5e2:\n"
-"b_s L32a5ea\n"
-"L32a5e4:\n"
-"mov_s r1,0xc\n"
-"L32a5e6:\n"
-"b_s L32a5ea\n"
-"L32a5e8:\n"
-"mov_s r1,0xe\n"
-"L32a5ea:\n"
-"bl.d opencfw_em9305_child_32a000\n"
-"L32a5ee:\n"
-"mov_s r0,r13\n"
-"L32a5f0:\n"
-"leave_s [r13-r16,blink,pcl]\n"
-".size opencfw_em9305_callback_32a5ac,.-opencfw_em9305_callback_32a5ac\n"
-);
+#include <stdint.h>
+
+/* Native 0x32a5ac..0x32a5f2: classify a packet against the context at
+ * 0x802810 with natives 0x3191dc and 0x319714 and pass the result code to
+ * native 0x32a000: 12 when either check fails, 14 when either returns 0x1e,
+ * otherwise 13. Inactive packets (byte 0 clear) return 0. */
+extern uint32_t opencfw_em9305_child_3191dc(uint32_t,uint32_t,uint32_t);
+extern uint32_t opencfw_em9305_child_319714(uint32_t,uint32_t,uint32_t);
+extern uint32_t opencfw_em9305_child_32a000(uint32_t,uint32_t);
+
+uint32_t opencfw_em9305_callback_32a5ac(uintptr_t packet, uint32_t argument)
+{
+    uint32_t code;
+    if (*(volatile uint8_t *)packet == 0u) return 0u;
+    uint32_t first = opencfw_em9305_child_3191dc(0x802810u, argument,
+                                                 *(volatile uint8_t *)(packet + 2u));
+    if (first == 0u) {
+        code = 12u;
+    } else {
+        uint32_t second = opencfw_em9305_child_319714(0x802810u, argument,
+                                                      *(volatile uint8_t *)(packet + 2u));
+        if (second == 0u) code = 12u;
+        else if (first == 0x1eu || second == 0x1eu) code = 14u;
+        else code = 13u;
+    }
+    return opencfw_em9305_child_32a000((uint32_t)packet, code);
+}

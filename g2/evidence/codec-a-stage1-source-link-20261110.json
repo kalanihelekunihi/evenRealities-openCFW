@@ -1,0 +1,97 @@
+{
+  "schema": 1,
+  "target": "s200_v2.2.6.10 GX8002 BINH A stage-1 C source link",
+  "stock": {
+    "stage1_load_bytes": 12260,
+    "stage1_load_sha256": "65775a0feea148f5e1582693160c06204d5183fee717ba75706ce1cb4d40f605",
+    "vectors_sha256": "328d3b985051f93c8159432d043fbcbedc07bf903169996aa7ee625f2dbe9494",
+    "initialized_data_address": "0x20001028..0x20001294",
+    "initialized_data_bytes": 620,
+    "initialized_data_sha256": "da1c34af1cb2d69320f92ff98edf797243ceeb4414605983611c35e32a756c3a"
+  },
+  "source": {
+    "unit_count": 9,
+    "units": [
+      {
+        "source": "g2/src/codec/image-a-stage1/main_stage1_runtime_data.c",
+        "source_sha256": "d13042c8ab3c6df9bdaf8bf26457d3c406a4665dbac945a57b34a1a65a2c64ad",
+        "object_sha256": "6ffa18d42cf122864ae1a8a6a0d67915435ed2ea2024be30606fd1e9b4418103"
+      },
+      {
+        "source": "g2/src/codec/image-a-stage1/main_stage1_timer.c",
+        "source_sha256": "4882deaef12f1471266f7ef40d42f7bb965c2707b4e56e691b5cbb915120589a",
+        "object_sha256": "af507b32c8d37f910c3e832036770608b9767a94e6779e604c46568110d2b1a1"
+      },
+      {
+        "source": "g2/src/codec/image-a-stage1/main_stage1_boot_helpers.c",
+        "source_sha256": "8779c7334e433e7b2144584276e7a78164663e411c76630ee834036a65af2526",
+        "object_sha256": "674b265f2782652ccc84762d21dbce68a001a5ac9045fc344edc8fd96eec4ca8"
+      },
+      {
+        "source": "g2/src/codec/image-a-stage1/main_stage1_startup.c",
+        "source_sha256": "c4d6d83840af271f5dfd2b8711ba3bf626441821d20ac064c8393945aba05dc3",
+        "object_sha256": "503a5cec8be3613dd481d882b0136afc7642835c923b67bb9cdeba0a157f10f8"
+      },
+      {
+        "source": "g2/src/codec/image-a-stage1/main_stage1_boot_setup.c",
+        "source_sha256": "da356ece6b1204f73251e721fd24a79beeae2214c40d1a90185313043f5b193e",
+        "object_sha256": "a486185beab1f66f6bc203d87d2d0e97ef8c27e8808664f8003ebdf61271e66e"
+      },
+      {
+        "source": "g2/src/codec/image-a-stage1/main_stage1_clock_gate.c",
+        "source_sha256": "ba9e4a4a1ef1162842a2bf39ab0cd61c2ed0d2960f8c386b8cd8636c747b497f",
+        "object_sha256": "714d300ea0aa876c5d4aa57afa4fddbabe2af93d41f3f8b434be62f2da9c9962"
+      },
+      {
+        "source": "g2/src/codec/image-a-stage1/main_stage1_spi_transactions.c",
+        "source_sha256": "1a5645fd741905e3e8bc99c72a1dd7d42e5c356cc09328c0d4fe295bb98c1d77",
+        "object_sha256": "28a2d1924ffad0e5a232c1c02a1a17435cc7ee111ff8956ef1b4da76aef82024"
+      },
+      {
+        "source": "g2/src/codec/image-a-stage1/main_stage1_flash_reader.c",
+        "source_sha256": "67e070a4cf66f9864f97126f185e71563be5c5392472538baea40f182d895365",
+        "object_sha256": "1c97d06b70fde40eef89c8e017a7327af9ff2d32147ecc11cc75d12a09b6c598"
+      },
+      {
+        "source": "g2/src/codec/image-a-stage1/main_stage1_loader.c",
+        "source_sha256": "249ecc4a405c33c53efdc3b37382cecd2d474f4a33b51a2a97914fe1706a7322",
+        "object_sha256": "93bdc5d708a0f1682dc14c36d8c60ad361c43b5495474c0fd027b7ae19074214"
+      }
+    ],
+    "elf_sha256": "3c56a3d136292d752fbd0cf074b33d4ee75b9f71aa992b3eda0622571659bbd1",
+    "load_bytes": 4756,
+    "load_sha256": "23902370d90a7ca0f1a256b54149c4f3689e6702af93fcd7d5168d66b60f7847",
+    "undefined_symbols": [],
+    "vectors_stock_exact": true,
+    "initialized_data_stock_exact": true,
+    "different_bytes_within_source_load": 3616,
+    "code_stock_identical": false,
+    "linked_into_uart_codec_a_elf": false,
+    "resident_reset_source_symbol_address": "0x10023500"
+  },
+  "full_g2_gate": {
+    "source_report": "build/g2-all-binh-a-stage1-link-20261110/report.json",
+    "source_report_sha256": "8436bcc9bc2ad447b78c51658c20a5749d7445d26d05fd6adb7905a49026de4a",
+    "built_units": 4877,
+    "failed_units": 0,
+    "duplicate_strong_symbols": 0,
+    "manifest_changed_during_build": false,
+    "link_report": "build/g2-all-binh-a-stage1-link-final-20261110/link-report.json",
+    "link_report_sha256": "a0edfe34218f0f9c1916f08d1ab1164ea73a1e24d9894dca78b3e6bd676366cf",
+    "linked_payloads": 7,
+    "external_binary_archive_used": false,
+    "codec_a_uart_image_unchanged": true
+  },
+  "remaining_boundaries": {
+    "xip_source_bytes": 46764,
+    "xip_stock_limit": 36484,
+    "sram_source_bytes": 14940,
+    "sram_stock_limit": 14716,
+    "npu_command_source": false,
+    "npu_weight_source": false,
+    "full_binh_a_package_from_source": false,
+    "full_fwpk_from_source": false,
+    "hardware_boot_verified": false
+  },
+  "qualification": "The standalone stage-1 image is source linked with no undefined symbols and exact stock vectors and initialized data. Its code differs from stock; this does not establish byte identity or hardware behavior. BINH A stage 2 exceeds stock limits and NPU source payloads are missing."
+}

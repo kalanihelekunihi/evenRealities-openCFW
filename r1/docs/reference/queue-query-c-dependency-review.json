@@ -1,0 +1,112 @@
+{
+  "queries": {
+    "passed": 3272,
+    "executions": 6544,
+    "source_report": "build/sources-goal-r1-queue-query-c/report.json",
+    "critical_boundary_mutations_checked": true,
+    "queue_load_mask_checked": true,
+    "source_sizes": {
+      "uxQueueMessagesWaiting": 38,
+      "uxQueueMessagesWaitingFromISR": 22
+    },
+    "limitations": [
+      "Critical boundaries modeled; actual query routines and assertion instructions execute",
+      "Logical assertion mask/address/width/value compared; complete exception state excluded",
+      "Caller-clobbered registers and flags excluded; physical interrupt concurrency unverified",
+      "No byte qualification"
+    ]
+  },
+  "audit": {
+    "unchanged_existing_function_bodies": [
+      "prvCopyDataFromQueue",
+      "prvCopyDataToQueue",
+      "prvGetDisinheritPriorityAfterTimeout",
+      "prvInitialiseMutex",
+      "prvInitialiseNewQueue",
+      "prvIsQueueEmpty",
+      "prvIsQueueFull",
+      "prvUnlockQueue",
+      "ulPortRaiseBASEPRI",
+      "vQueueDelete",
+      "xQueueCreateCountingSemaphore",
+      "xQueueCreateCountingSemaphoreStatic",
+      "xQueueCreateMutex",
+      "xQueueCreateMutexStatic",
+      "xQueueGenericCreate",
+      "xQueueGenericCreateStatic",
+      "xQueueGenericReset",
+      "xQueueGenericSend",
+      "xQueueGenericSendFromISR",
+      "xQueueGiveFromISR",
+      "xQueueGiveMutexRecursive",
+      "xQueueReceive",
+      "xQueueReceiveFromISR",
+      "xQueueSemaphoreTake",
+      "xQueueTakeMutexRecursive"
+    ],
+    "new_strong_symbols": [
+      "uxQueueMessagesWaiting",
+      "uxQueueMessagesWaitingFromISR"
+    ],
+    "removed_imports": [
+      "uxQueueMessagesWaiting",
+      "uxQueueMessagesWaitingFromISR"
+    ],
+    "added_imports": []
+  },
+  "negative_controls": {
+    "wrong-field": true,
+    "omit-critical": true
+  },
+  "entry_evidence": {
+    "uxQueueMessagesWaiting": {
+      "start": "0x95634",
+      "end_exclusive": "0x95656"
+    },
+    "uxQueueMessagesWaitingFromISR": {
+      "start": "0x95656",
+      "end_exclusive": "0x9566a"
+    },
+    "limitation": "REA/Ghidra groups both with 0x7d5e8; manual entry supplements supported by tail branches, raw instructions and execution; no inventory coverage credit"
+  },
+  "normal_build": {
+    "compiled": 573,
+    "application_imports": 184,
+    "bootloader_imports": 34,
+    "failures": 0,
+    "duplicate_strong_symbols": 0
+  },
+  "qualification": {
+    "compiled_profiles": 5,
+    "unique_selected_regions": 2,
+    "already_covered": 2,
+    "new_query_byte_identity": false
+  },
+  "source_plan_unchanged": true,
+  "hybrid_equals_locked_application": true,
+  "source_built_bytes": 3833,
+  "binary_pull_through_bytes": 642327,
+  "source_completeness_proven": false,
+  "evidence": {
+    "build/sources-goal-r1-queue-query-c/report.json": "973fed2ff907ee456b0f6c1ddd2ea719bf6c2f6131f61f6693e2be14de839689",
+    "tools/build/source-plan.json": "0c889650bf8ea03def83ea1ea29730b3ccfe84bb70609c1972a500f02ba4ea2d",
+    "r1/src/application/rtos/mutex-kernel/mutex-kernel.c": "92d281628fc4c19168ba2e4286682116d78dfca20db8dea00d6423af3d656454",
+    "third-party/upstream/freertos-kernel/queue.c": "5cdf4fa35fe059446effff5bf20deaf83ddffb08921bc198fda106b1d17dd894",
+    "r1/src/config/rtos/mutex_kernel_contract.h": "d940797ff263975ba00fd355c3b3535a002c97f3e1ada8419492efb84ed8de81",
+    "r1/src/config/rtos/native_port_assert.h": "efee8118f24a53756b6f14a666524b3d59561f005e1e87ed71309ccab9c4fc9f",
+    "r1/src/sources.json": "73c3fb03932b37db089ff50fdae47f8b7e73914b6b1fb99ddf99467302ff84ad",
+    "r1/symbols/function-frontier.csv": "a7d96c62cf98ed3dc1bba315f2d256db843aca104b0a850bc841200ae9f37849",
+    "build/hybrid-goal-r1-queue-query-c/build-report.json": "5d5a4829e818a57336da61b602bcb421dbed5af36d64014b56a22f2e9184ec5d",
+    "build/goal-r1-queue-query-c/REA.json": "2717d90fa9db5fd880aebb86800bdd5c764543c89927b62326f6d7bae1be56b4",
+    "build/goal-r1-queue-query-c/before.c": "2339dfd389e33020d0ff5a7ba9d06b6802d9d0e40ee199eedb59c612b418ac2d",
+    "build/goal-r1-queue-query-c/selected-upstream.c": "fa936b1729882404a4012f6061d3e664868dcd5345e3bc6364225a32c7cf1229",
+    "build/goal-r1-queue-query-c/verify.py": "b4f047eab728e60a33f569b281fee46632b1600610c5206ab3a02e720544999d",
+    "build/goal-r1-queue-query-c/results.json": "b38d7bbdb5c96e6bba5e423cd9cc9ed77107b32d5df49fff3e3aeebeab1f9d07",
+    "build/goal-r1-queue-query-c/negative.py": "0b8ee3ff786452e68e7f3e972d94ab2fb0ccc3057a36bef5873b43c97b442195",
+    "build/goal-r1-queue-query-c/negative-results.json": "cbb560b23d610e1effdbd78fea195fb9c4276fe07ae56955fe4655d15b0b9187",
+    "build/goal-r1-queue-query-c/audit.py": "1683b4c417b1b5c01f6a8f582ece81e4902bbbc444cce7d8a38c152f6e06ed3a",
+    "build/goal-r1-queue-query-c/audit-results.json": "f1c398e3649b61b4e6bf8c7f050792fae71a5888ea5978a1a779e87a872d9af7",
+    "build/goal-r1-queue-query-c/qualify.py": "536d35646a62960d400316946f8259084b773d563be8581e9e217a0b9df9e595",
+    "build/goal-r1-queue-query-c/qualified/qualification.json": "a365abea2748e12f6486731fa2d7a66f7a5151af922a1750ade336bac90eeb01"
+  }
+}

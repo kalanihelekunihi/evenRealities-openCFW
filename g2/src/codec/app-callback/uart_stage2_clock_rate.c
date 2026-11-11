@@ -9,10 +9,7 @@
 
 static uint32_t native_divu(uint32_t numerator, uint32_t denominator)
 {
-    uint32_t result;
-    __asm__ volatile("divu %0, %1, %2" : "=r"(result)
-                     : "r"(numerator), "r"(denominator) : "cc");
-    return result;
+    return numerator / denominator;   /* divu */
 }
 
 int32_t gx8002_uart_stage2_clock_rate_4b50(uint32_t selector)

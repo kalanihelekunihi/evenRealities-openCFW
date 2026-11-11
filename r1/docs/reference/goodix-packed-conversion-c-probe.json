@@ -1,0 +1,144 @@
+{
+  "schema_version": 1,
+  "status": "stock-validated typed C candidate; source admission pending",
+  "entries": {
+    "0x28dd4": "native_pack5",
+    "0x28dda": "native_pack6",
+    "0x28de0": "native_unpack5",
+    "0x28de6": "native_unpack6"
+  },
+  "verification": {
+    "pairs": 421888,
+    "exhaustive_unpack_values": 65536,
+    "unpack_fp_modes": [
+      0,
+      31
+    ],
+    "pack_values": 13312,
+    "pack_fp_modes": [
+      0,
+      1,
+      2,
+      3,
+      15,
+      31
+    ],
+    "elapsed_seconds": 74.50852137501352,
+    "scope": "Native typed S0/R0 ABI wrappers using actual portable bit backends; exact scalar result,FPSCR and saved core/FP ABI. All packed encodings and binary32 exponent/sign/rounding boundaries."
+  },
+  "coverage": {
+    "instruction_bytes": 282,
+    "instruction_starts": 98,
+    "entries": 4
+  },
+  "compiled_defect_controls": [
+    {
+      "defect": "unpack5-width",
+      "detected": true,
+      "expected": [
+        1065353216,
+        2684354560
+      ],
+      "actual": [
+        1056964608,
+        2684354560
+      ]
+    },
+    {
+      "defect": "unpack6-width",
+      "detected": true,
+      "expected": [
+        1056964608,
+        2684354560
+      ],
+      "actual": [
+        1065353216,
+        2684354560
+      ]
+    },
+    {
+      "defect": "pack5-width",
+      "detected": true,
+      "expected": [
+        15360,
+        2684354560
+      ],
+      "actual": [
+        15872,
+        2684354560
+      ]
+    },
+    {
+      "defect": "pack6-width",
+      "detected": true,
+      "expected": [
+        15872,
+        2684354560
+      ],
+      "actual": [
+        15360,
+        2684354560
+      ]
+    },
+    {
+      "defect": "unpack-return-ABI",
+      "detected": true,
+      "expected": [
+        1065353216,
+        2684354560
+      ],
+      "actual": [
+        305419896,
+        2684354560
+      ]
+    },
+    {
+      "defect": "pack-input-ABI",
+      "detected": true,
+      "expected": [
+        15360,
+        2684354560
+      ],
+      "actual": [
+        0,
+        2684354560
+      ]
+    }
+  ],
+  "limitations": [
+    "Probe only; no native provider has yet been admitted to sources.json. The actual portable bit backends are linked through typed wrappers,not renamed or blindly aliased. Generic variable exponent-width kernel entries and array callback28dec remain separate work.",
+    "All65536 packed encodings are compared for each format in FP modes0/31. Pack tests use13312 binary32 inputs per format in6 modes. Exact result,FPSCR,saved R4-R11/S16-S31 and SP are checked;public-memory effects,caller scratch/APSR,interrupt masks,timing and physical hardware are outside this scalar probe.",
+    "REA returns a width6 thunk for generic kernel requests362f4 and4fdf8. The assembly and disjoint ranges,not specialized pseudocode,establish the hard-float S0/core-register ABI. The stock unpack operation does not map maximum packed exponent to IEEE infinity;the portable bit backend preserves the stock bit construction."
+  ],
+  "evidence_sha256": {
+    "build/goal-r1-model-i8-convolution-c/stock-entry.elf": "8faf5ed5a7e99752b781c1118086f6ada13458b084bd14e8fbb9a2eb58a05e76",
+    "build/goal-r1-packed-conversion-c/candidate.c": "751fa36581a1c05b58ba405e17885b10d5eb1ed9b14173df2d216d5b426508e8",
+    "build/goal-r1-packed-conversion-c/candidate.elf": "502b15fc48d897c9f20e2aaba471db9118333fd144b2b1fa718c57bbf09c0b08",
+    "build/goal-r1-packed-conversion-c/candidate.o": "160da6673220733cf43100829ff756553bdfacec1854ec9c539b41790488af10",
+    "build/goal-r1-packed-conversion-c/compile-argv.json": "2cea15f3bfdf42612894a064a765138c26f536a44e79b31eb885386e0242a251",
+    "build/goal-r1-packed-conversion-c/controls-results.json": "8316b3bc1f65e7482894f4daff692b943959cb551605682c3ea41c2a32e0c7e0",
+    "build/goal-r1-packed-conversion-c/controls.log": "dffca6bff2ef2a73f559d530a47493132699deefba6618de5a6ae417ddec441a",
+    "build/goal-r1-packed-conversion-c/controls.py": "c6b958ce22589a6ab5da58668fa002a456a71d85d328ebc8101273ef4b47d538",
+    "build/goal-r1-packed-conversion-c/coverage-results.json": "524791d5d406235e8bd1a18aa429beaaf5c9eed3322730706589b82778fab45e",
+    "build/goal-r1-packed-conversion-c/coverage.py": "52ef4b326c191dea1ed15130b048ba7bd2329f2361abb9219a91f76c3a46c362",
+    "build/goal-r1-packed-conversion-c/defect.c": "445ecd33499f455de40b788974fa21a107688097a93e6bb20be3ec8b99a72c98",
+    "build/goal-r1-packed-conversion-c/defect.elf": "39ed0ac0a211fbb47b2b32c8a7a667cf9bb2ee1199cf945b48399c38f767f4d0",
+    "build/goal-r1-packed-conversion-c/defect.o": "3283aab7f267d6516ec2fc2614827af08bc40f70d874b3a47a7fb90ef1b90b00",
+    "build/goal-r1-packed-conversion-c/defect_fixture.py": "768198a58191726c674bfc720e0dee8c3ea0a7447bc89eae1d9be74ec0cd2dbb",
+    "build/goal-r1-packed-conversion-c/document.py": "95946137911fc12efb5ed0427f97b9a026add367f72886960827ea6a943c70cd",
+    "build/goal-r1-packed-conversion-c/fixture.py": "45c6b6c79e8cb865bece8df4031cde3314cb5b967f3099237228d6099726767f",
+    "build/goal-r1-packed-conversion-c/link-argv.json": "d1861758917cacaadf8124f843e3863eb13a9ec133a0a0f4f1f302cf4955ee0b",
+    "build/goal-r1-packed-conversion-c/link.log": "a92fdce44188a37293847482f7261b3d76598970dc5c3dad3d657267d588a3c2",
+    "build/goal-r1-packed-conversion-c/rea-28dec.json": "58e0d7ee072270583c15d40c373756a601bb4f9be14f08425a18ae90584b9849",
+    "build/goal-r1-packed-conversion-c/rea-362f4.json": "6d625be0656b4613088d350ed986acb8b3d6f3fb8672601b4aa61ba89f447932",
+    "build/goal-r1-packed-conversion-c/rea-4fdf8.json": "a20796eb5cec47b360a2611a25e9598f21b0bed64143f224a49878a5d789ba9a",
+    "build/goal-r1-packed-conversion-c/rea-bytes.json": "9bb8991d402bcfa6a78b3ec4a38762e36731109d15879947b8be6d0c8129b2ba",
+    "build/goal-r1-packed-conversion-c/results.json": "16dd82b083413793838f50f323746e49ff6cf7c1697862bff6983fca4809ffee",
+    "build/goal-r1-packed-conversion-c/verify.log": "23772b4c2cec51f70f62e600b8a92a16061850b98219c6c66e2ca0abc98579d8",
+    "build/goal-r1-packed-conversion-c/verify.py": "bdeb38ad6b9a393f34e981d2be7a6eed663775e119414c0840e8ce391dc06ec4",
+    "build/goal-r1-spo2-infer-support-c/normal-dependencies.a": "7e62b43a34fcf2b0ae34045a276bf4d564be5dde2ddb636dd0f69169c8843637",
+    "build/goal-r1-spo2-ratio-c/normal-stream-test.ld": "808ff9c64adde68933158791e9d115c75817ae1840e2bdcbcfa42c7a39314cc6",
+    "r1/blobs/official/r1-2.2.6.0009/application.bin": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "r1/src/vendor/goodix_primitives/goodix_primitives.c": "6ba3fff7701c90db05c8700e5b27d9cdbca327887deb92a9cef2bda03c5bf75b"
+  }
+}

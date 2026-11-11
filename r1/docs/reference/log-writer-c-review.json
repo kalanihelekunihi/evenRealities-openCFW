@@ -1,0 +1,119 @@
+{
+  "schema_version": 1,
+  "entries": {
+    "0x59670": [
+      "r1_log_bin_write",
+      604
+    ],
+    "0x5908c": [
+      "r1_log_bin_sector_count",
+      14
+    ]
+  },
+  "report": "build/sources-goal-r1-log-writer-c/report.json",
+  "report_sha256": "dd6d18408b8ed8a8717cf368753c39d515affedc0fc16c27d8618382ff86a292",
+  "unit": {
+    "source": "r1/src/application/runtime/native_log_bin_write.c",
+    "source_sha256": "348b9fa856d2f388b783181ad710f1909fecee3a968e38fe289c3322a47435e7",
+    "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-log-writer-c/r1/r1-application/r1__src__application__runtime__native_log_bin_write.c.o",
+    "object_sha256": "632956689e21f7f9666b54a349b409d29b7c2ac0f67a75339e22891dc84bf3b2"
+  },
+  "behavior": {
+    "pairs": 1972,
+    "digest": "ad71056c4d4b0ef66562d249271cbe9531d709e14d3961e69e72c20c0887030b",
+    "actual_C": "sector-ring writer and sector-count accessor",
+    "modeled_boundaries": [
+      "r1_log_bin_initialize",
+      "r1_structured_log_mode_get",
+      "r1_structured_log_format",
+      "nrf_log_frontend_std_0",
+      "nrf_log_frontend_std_1",
+      "nrf_log_frontend_std_2",
+      "flash read/write/erase callbacks"
+    ],
+    "limits": [
+      "Flash callback return values modeled; marker reads can fail while still writing the marker word",
+      "No physical flash mutation or storage initialization execution",
+      "Private scratch, caller-clobbered registers and writer return excluded; sector-count return compared",
+      "Zero-divisor native UDIV tested with default DIV_0_TRP clear"
+    ]
+  },
+  "negative_controls": {
+    "wrong-rotation-boundary": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "839985a056ec28ffe174601d690fc407a2ceffca'], ['7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b017b7b017b7b7b7b0020022000210220000000007b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b', '0000400000300000']), ('read', [4202500, 4, 0, 4294967295], ['7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b017b7b017b7b7b7b0020022000210220001000007b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b', '0000400000300000'])], 'state': ['7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b017b7b017b7b7b7b0020022000210220001000007b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b', '0000400000300000'], 'returns': []})\n"
+    },
+    "wrong-sector-advance": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "bb780a2c78901d3fb33738768511a30617afa01d'], ['7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b017b7b007b7b7b7b0020022000210220000000007b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b', '0000400000300000']), ('read', [4202500, 4, 0, 4294967295], ['7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b017b7b007b7b7b7b0020022000210220010000007b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b', '0000400000300000'])], 'state': ['7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b017b7b007b7b7b7b0020022000210220010000007b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b', '0000400000300000'], 'returns': []})\n"
+    },
+    "missing-rotation-reset": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "b7b7b7b7b7b7b7b7b7b7b7b7b7b7b', '0000400000000000']), ('mode', [0], ['7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b017b7b017b7b7b7b0020022000210220010000007b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b', '0000400000000000']), ('mode', [0], ['7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b017b7b017b7b7b7b0020022000210220010000007b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b', '0000400000000000'])], 'state': ['7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b017b7b017b7b7b7b0020022000210220010000007b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b', '0000400000000000'], 'returns': []})\n"
+    },
+    "wrong-max-length": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "b7b7b7b7b7b7b7b7b7b7b7b7b7b7b', '0000400000300000']), ('mode', [0], ['7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b017b7b007b7b7b7b0020022000210220000000007b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b', '0000400000300000']), ('mode', [0], ['7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b017b7b007b7b7b7b0020022000210220000000007b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b', '0000400000300000'])], 'state': ['7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b017b7b007b7b7b7b0020022000210220000000007b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b', '0000400000300000'], 'returns': []})\n"
+    },
+    "wrong-preerase-marker": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "t sector erase offset: %08X, len: %d', 4194304, 4096], ['7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b017b7b007b7b7b7b0020022000210220001000007b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b', '0000400000100000']), ('erase', [4194304, 4096], ['7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b017b7b007b7b7b7b0020022000210220001000007b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b', '0000400000100000'])], 'state': ['7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b017b7b007b7b7b7b0020022000210220001000007b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b', '0000400000100000'], 'returns': []})\n"
+    },
+    "missing-offset-advance": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "bb780a2c78901d3fb33738768511a30617afa01d'], ['7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b017b7b007b7b7b7b0020022000210220000000007b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b', '0000400000300000']), ('read', [4198404, 4, 0, 4294967295], ['7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b017b7b007b7b7b7b0020022000210220000000007b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b', '0000400000300000'])], 'state': ['7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b017b7b007b7b7b7b0020022000210220000000007b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b', '0000400000300000'], 'returns': []})\n"
+    },
+    "lost-write-boundary": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "b7b7b7b7b7b7b7b7b7b7b7b7b7b7b', '0000400000000000']), ('mode', [0], ['7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b017b7b007b7b7b7b0020022000210220010000007b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b', '0000400000000000']), ('mode', [0], ['7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b017b7b007b7b7b7b0020022000210220010000007b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b', '0000400000000000'])], 'state': ['7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b017b7b007b7b7b7b0020022000210220010000007b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b', '0000400000000000'], 'returns': []})\n"
+    },
+    "wrong-next-marker": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "t sector erase offset: %08X, len: %d', 4198400, 4096], ['7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b017b7b007b7b7b7b0020022000210220010000007b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b', '0000400000300000']), ('erase', [4198400, 4096], ['7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b017b7b007b7b7b7b0020022000210220010000007b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b', '0000400000300000'])], 'state': ['7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b017b7b007b7b7b7b0020022000210220010000007b7b7b7b7b7b7b7b7b7b7b7b7b7b7b7b', '0000400000300000'], 'returns': []})\n"
+    }
+  },
+  "audit": {
+    "unchanged_prior_objects": 763,
+    "new_units": 1,
+    "imports": {
+      "r1-application": {
+        "added": [
+          "r1_log_bin_initialize"
+        ],
+        "removed": [
+          "r1_log_bin_write"
+        ]
+      },
+      "r1-bootloader": {
+        "added": [],
+        "removed": []
+      }
+    },
+    "reused_owners": [
+      "narrow initialized/sector/partition/flash/offset owners; existing export byte excluded"
+    ]
+  },
+  "source_check": "R1 passes: 764 units, 568 source files, 0 not built. Global check flags existing G2 resident_rom_thumb_set.S absent from manifest.",
+  "initialization": "log-writer-initialization.json",
+  "header": {
+    "path": "r1/src/application/runtime/native_log_bin.h",
+    "sha256": "2d4b9b25d69a9520d51c4fbad747aa7e19203ce9d06f9ae675f0c1767e9fe54e"
+  },
+  "rea": [
+    "log-writer-c-rea.json",
+    "log-sector-count-c-rea.json"
+  ],
+  "instruction_identity_proven": false,
+  "image_integration_proven": false,
+  "integration_receipts": [
+    "r1/docs/reference/log-chain-review.json"
+  ]
+}

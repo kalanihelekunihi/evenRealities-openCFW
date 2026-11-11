@@ -8,8 +8,8 @@ extern void audio_lv_delete_44d7b8(uint32_t);
 extern uint32_t audio_uart_page_43de82(uint32_t);
 extern void audio_uart_buffer_zero(void *, uint32_t, uint32_t);
 extern void audio_uart_page_44129e(uint32_t, uint32_t, uint32_t);
-extern void audio_uart_page_44131c(uint32_t, uint32_t, uint32_t);
-extern void audio_uart_page_44146a(uint32_t, uint32_t, uint32_t);
+extern void lv_obj_set_style_border_width(uint32_t, uint32_t, uint32_t);
+extern void lv_obj_set_style_radius(uint32_t, uint32_t, uint32_t);
 extern void audio_conversate_ui_style_5b0ac4(uint32_t, uint32_t, uint32_t);
 extern void audio_uart_page_43dfa4(uint32_t, uint32_t);
 extern void audio_uart_page_43f09a(uint32_t, uint32_t, uint32_t);
@@ -38,8 +38,8 @@ void audio_conversate_ui_main_list_layout_5b0d86(void) {
     put_word(ui, 0x68u, root);
     audio_uart_buffer_zero((void *)(ui + 0x6cu), 0x10u, 0u);
     audio_uart_page_44129e(root, 0u, 0u);
-    audio_uart_page_44131c(root, 0u, 0u);
-    audio_uart_page_44146a(root, 0u, 0u);
+    lv_obj_set_style_border_width(root, 0u, 0u);
+    lv_obj_set_style_radius(root, 0u, 0u);
     audio_conversate_ui_style_5b0ac4(root, 0u, 0u);
     audio_uart_page_43dfa4(root, 0x12u);
     for (uint32_t i = 0u; i < 4u; ++i) {
@@ -49,8 +49,8 @@ void audio_conversate_ui_main_list_layout_5b0d86(void) {
         audio_uart_page_43f4c0(row, 0x1b8u, 0x28u);
         audio_uart_page_44127e(row, audio_uart_page_44104c(0u), 0u);
         audio_uart_page_44129e(row, 0xffu, 0u);
-        audio_uart_page_44131c(row, 0u, 0u);
-        audio_uart_page_44146a(row, 0u, 0u);
+        lv_obj_set_style_border_width(row, 0u, 0u);
+        lv_obj_set_style_radius(row, 0u, 0u);
         audio_conversate_ui_style_5b0ac4(row, 0u, 0u);
         audio_uart_page_43dfa4(row, 0x12u);
     }

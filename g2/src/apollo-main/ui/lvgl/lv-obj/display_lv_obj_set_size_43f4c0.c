@@ -1,7 +1,7 @@
 /* LVGL lv_obj_set_size/width/height and size-style setters in Apollo Main. */
 #include <stdint.h>
 
-extern void audio_uart_lvgl_log(uint32_t, const char *, uint32_t,
+extern void lv_log_add(uint32_t, const char *, uint32_t,
                                 const char *, ...);
 extern uint32_t audio_uart_page_style_get_44beaa(uint32_t, uint32_t,
                                                   uint32_t *, uint32_t);

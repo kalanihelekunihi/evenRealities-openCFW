@@ -1,18 +1,18 @@
 /* Apollo session selector leaf helpers, stock 0x5eca00 and 0x5ecc74. */
 #include <stdint.h>
 
-extern void audio_uart_page_44122a(void *,uint32_t,uint32_t);
-extern void audio_uart_page_441238(void *,uint32_t,uint32_t);
-extern void audio_uart_page_44120e(void *,uint32_t,uint32_t);
-extern void audio_uart_page_44121c(void *,uint32_t,uint32_t);
+extern void lv_obj_set_style_pad_left(void *,uint32_t,uint32_t);
+extern void lv_obj_set_style_pad_right(void *,uint32_t,uint32_t);
+extern void lv_obj_set_style_pad_top(void *,uint32_t,uint32_t);
+extern void lv_obj_set_style_pad_bottom(void *,uint32_t,uint32_t);
 extern int32_t g2_audio_dump_snprintf(char *,uint32_t,const char *,...);
 
 void audio_terminal_session_four_margins_5eca00(void *object,uint32_t value,
                                                 uint32_t selector) {
-    audio_uart_page_44122a(object,value,selector);
-    audio_uart_page_441238(object,value,selector);
-    audio_uart_page_44120e(object,value,selector);
-    audio_uart_page_44121c(object,value,selector);
+    lv_obj_set_style_pad_left(object,value,selector);
+    lv_obj_set_style_pad_right(object,value,selector);
+    lv_obj_set_style_pad_top(object,value,selector);
+    lv_obj_set_style_pad_bottom(object,value,selector);
 }
 
 void audio_terminal_session_row_text_5ecc74(char *destination,uint32_t capacity,

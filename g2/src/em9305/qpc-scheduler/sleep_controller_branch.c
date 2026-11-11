@@ -7,8 +7,9 @@ extern uint32_t opencfw_em9305_sleep_metadata_action(uint32_t,uint32_t,uint32_t,
 extern void opencfw_em9305_sleep_controller_enable(uint32_t,uint32_t,uint32_t); /* 0x30f6ec */
 extern void opencfw_em9305_controller_sleep_mode(uint32_t); /* 0x30f374 */
 extern uint32_t opencfw_em9305_sleep_ready_query(uint32_t); /* 0x30f568 */
-static uint32_t save_irq(void) { uint32_t s; __asm__ volatile("clri %0\n\tsync" : "=r"(s) :: "memory"); return s; }
-static void restore_irq(uint32_t s) { __asm__ volatile("seti %0" :: "r"(s) : "memory"); }
+static uint32_t save_irq(void) { uint32_t s; s=(uint32_t)__builtin_arc_clri(); __builtin_arc_sync(); return s; }
+static void restore_irq(uint32_t s) { __builtin_arc_seti((int)s); }
+/* ILINK (r29) is a core register with no C or builtin access; asm stays. */
 static uint32_t link_state(void) { uint32_t s; __asm__ volatile("mov %0,ilink" : "=r"(s) :: "memory"); return s; }
 static uintptr_t object(void) { return *(volatile uint32_t *)(uintptr_t)0x801090u; }
 static uintptr_t callback(uintptr_t o,uint32_t offset) { return *(volatile uint32_t *)(o+offset); }
@@ -55,7 +56,7 @@ restart_notify:
    if(transient==0 && opencfw_em9305_sleep_ready_query(state)!=0) {
     uint32_t irq=save_irq();
     if(link_state()!=0) restore_irq(irq);
-    else { uint32_t sleep_state=irq&31u; __asm__ volatile("sleep %0" :: "r"(sleep_state) : "memory"); }
+    else { uint32_t sleep_state=irq&31u; __builtin_arc_sleep((int)sleep_state); }
    }
  }
  return save_irq();

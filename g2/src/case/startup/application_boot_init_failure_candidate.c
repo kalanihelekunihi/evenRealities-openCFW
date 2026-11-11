@@ -5,6 +5,5 @@
 /* Stock 0x08003E90 (case_fail_stop) */
 __attribute__((noreturn)) void case_boot_init_failure(void)
 {
-    __asm__ volatile("cpsid i\n1: b 1b" ::: "memory");
-    __builtin_unreachable();
+    __asm__ volatile("cpsid i" ::: "memory");for(;;){}
 }

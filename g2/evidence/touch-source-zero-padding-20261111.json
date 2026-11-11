@@ -1,0 +1,43 @@
+{
+  "schema": 1,
+  "target": "G2 touch reset-copy zero alignment padding from the linker, without a stock-byte C unit",
+  "stock_component": "g2/blobs/official/g2-2.2.6.10/firmware_touch.bin",
+  "stock_component_sha256": "0d13d8bb1337bf22989dc16143e3d5eca29a31cc1ed753ff624668750ea9470d",
+  "padding_ram_ranges": [
+    {"start": "0x200004ea", "bytes": 2},
+    {"start": "0x20000806", "bytes": 2},
+    {"start": "0x20000871", "bytes": 3}
+  ],
+  "implementation": "The .touchdata output section explicitly fills these three alignment gaps with zero. The superseded touch_stock_reset_gaps.c file and its manifest unit were removed. All other typed reset-copy sources remain in place.",
+  "source_files_sha256": {
+    "g2/src/touch/link/g2-touch-stockram.ld.inc": "fe05182b71e9e6558f41041759707c4f5365caf53c43d203e30642b298d333c7",
+    "g2/src/sources.json": "273ae5e18ce3aeb67e0464e81a6f0b016e32707fa5bc84894fa425f90fe5ecdd"
+  },
+  "verification": {
+    "sources_check": "make -C g2 sources-check passed: 4885 manifest units, 4546 source files, 1 existing source not built",
+    "focused_source_report": "build/g2-touch-source-owned-padding-20261111/report.json",
+    "focused_source_report_sha256": "5d24b189d2ca43884ea64563ba91cb0d135f905e599814ede81d0f94c7e9ea07",
+    "focused_compiled_units": 99,
+    "focused_compile_failures": 0,
+    "focused_duplicate_strong_symbols": 0,
+    "focused_link_report": "build/g2-touch-source-owned-padding-link-20261111/link-report.json",
+    "focused_link_report_sha256": "6c66454499247f3084bf441b969087e3dd0abedb2eb98e04ca7fd0d02852190d",
+    "touch_binary_bytes": 28804,
+    "touch_binary_sha256": "dc6214393914cf5ce5e75aebb459a83d6f8b82ae3470d53abc2c1c30a308272a",
+    "byte_identical_to_previous_source_candidate": true,
+    "previous_source_candidate": "build/g2-apollo-state-nonce-full-link-20261111/g2-touch/g2-touch.bin"
+  },
+  "full_g2_verification": {
+    "source_report": "build/g2-touch-padding-trained-kws-full-source-20261111/report.json",
+    "source_report_sha256": "e36bcdeee311ebc3446bea478d76c8a9166158ceb0a1ebe0647c3c41743f24d2",
+    "compiled_units": 4880,
+    "compile_failures": 0,
+    "duplicate_strong_symbols": 0,
+    "strict_link_report": "build/g2-trained-kws-make-bundle-20261111/link-report.json",
+    "strict_link_report_sha256": "0e205dc41532a8c96a471df11cd89d3f82505215c044056dc59695a214c10dca",
+    "linked_payloads": ["g2-apollo-bootloader", "g2-apollo-main", "g2-case", "g2-codec-a", "g2-codec-b", "g2-em9305", "g2-touch"],
+    "strict_link_passed": true,
+    "source_completeness_proven": false
+  },
+  "qualification": "The reset-copy padding is source-linker-defined and leaves the candidate touch binary unchanged. The touch candidate remains smaller than the locked component; this does not establish all code coverage, byte identity, or hardware behavior."
+}

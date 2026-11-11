@@ -1,0 +1,374 @@
+{
+  "schema": 1,
+  "scope": "Replace the native 0x91184 five-sample battery filter bridge and separately framed body with one direct C root",
+  "source": {
+    "source": "r1/src/application/board/native_battery_filter.c",
+    "payload": "r1-application",
+    "role": "candidate",
+    "toolchain": "clang",
+    "link": true,
+    "expect": "compile",
+    "returncode": 0,
+    "argv": [
+      "/usr/bin/clang",
+      "--target=arm-none-eabi",
+      "-mcpu=cortex-m4",
+      "-mthumb",
+      "-munaligned-access",
+      "-mfpu=fpv4-sp-d16",
+      "-mfloat-abi=hard",
+      "-std=c11",
+      "-Os",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-fshort-enums",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-fno-delete-null-pointer-checks",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/r1/src/vendor",
+      "-isystem",
+      "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
+      "-MD",
+      "-MF",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-filter-root-c-final/r1/r1-application/r1__src__application__board__native_battery_filter.c.d",
+      "-c",
+      "/Users/kalani/Repo/evenRealities-openCFW/r1/src/application/board/native_battery_filter.c",
+      "-o",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-filter-root-c-final/r1/r1-application/r1__src__application__board__native_battery_filter.c.o"
+    ],
+    "source_sha256": "4c414c263775dacf286fd464c33c5e9163ff5ba6e9d4c089ba199975f5020d30",
+    "object_sha256": "92dd74b08a293861d86035c7635defefb19668bf89f06489c1714ee81ae523e5",
+    "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-filter-root-c-final/r1/r1-application/r1__src__application__board__native_battery_filter.c.o",
+    "strong": [
+      "r1_battery_five_sample_filter_and_conversion"
+    ],
+    "weak": [],
+    "undefined": [
+      "nrf_delay_ms",
+      "osDelay",
+      "r1_battery_runtime_storage",
+      "r1_stock_dispatch_08",
+      "r1_stock_dispatch_0c",
+      "r1_stock_dispatch_10"
+    ]
+  },
+  "normal_report": "build/sources-goal-r1-filter-root-c-final/report.json",
+  "validation": {
+    "paired_cases": 4620,
+    "executions": 9240,
+    "provider_frame": 48,
+    "scratch_memory_access_oracle": true,
+    "all_live_R4_R11": true,
+    "distinct_YHM_context_untouched": true,
+    "limits": [
+      "Registry/ADC/scheduler/delay providers modeled; physical timing and voltage accuracy unproven",
+      "APSR and other caller-clobbered registers, private-frame aliases, faults and concurrency excluded"
+    ]
+  },
+  "negative_controls_and_GCC": {
+    "whole-word-clear": {
+      "compiled": true,
+      "behavior_rejected": true
+    },
+    "distinct-minima": {
+      "compiled": true,
+      "behavior_rejected": true
+    },
+    "fixed-delay-path": {
+      "compiled": true,
+      "behavior_rejected": true
+    },
+    "wrong-scaling": {
+      "compiled": true,
+      "behavior_rejected": true
+    },
+    "old-bridge": {
+      "behavior_rejected": true,
+      "assertion": "(True, 'open', 80)"
+    },
+    "gcc": {
+      "strict_compilation": true,
+      "behavior_passed": false,
+      "assertion": ", 0], [17, 6, 2, 0], [17, 0, 2, 0], [16, 0, 2, 0], [17, 8, 2, 0], [17, 0, 2, 0], [16, 0, 2, 0], [17, 10, 2, 0], [17, 0, 2, 0], [16, 0, 2, 0], [17, 12, 2, 0], [17, 0, 2, 0], [16, 4, 2, 0], [16, 6, 2, 0], [16, 8, 2, 0], [16, 10, 2, 0], [16, 12, 2, 0]])"
+    }
+  },
+  "GCC_memory_counterexample": {
+    "first_memory_difference": 4,
+    "actual_prefix": [
+      [
+        17,
+        0,
+        4,
+        2864434397
+      ],
+      [
+        17,
+        4,
+        4,
+        286331153
+      ],
+      [
+        17,
+        8,
+        4,
+        572662306
+      ],
+      [
+        17,
+        12,
+        4,
+        858993459
+      ],
+      [
+        17,
+        0,
+        4,
+        2864434397
+      ],
+      [
+        17,
+        4,
+        4,
+        286331153
+      ],
+      [
+        17,
+        8,
+        4,
+        572662306
+      ],
+      [
+        17,
+        12,
+        4,
+        858993459
+      ],
+      [
+        17,
+        0,
+        2,
+        0
+      ]
+    ],
+    "expected_prefix": [
+      [
+        17,
+        0,
+        4,
+        2864434397
+      ],
+      [
+        17,
+        4,
+        4,
+        286331153
+      ],
+      [
+        17,
+        8,
+        4,
+        572662306
+      ],
+      [
+        17,
+        12,
+        4,
+        858993459
+      ],
+      [
+        17,
+        0,
+        2,
+        0
+      ]
+    ],
+    "extra_identical_initial_word_stores": true,
+    "remaining_trace_matches_in_retained_case": true
+  },
+  "audit": {
+    "units_compiled": 579,
+    "unrelated_objects_identical": 578,
+    "removed_strong_symbol": "r1_battery_five_sample_body",
+    "source": {
+      "source": "r1/src/application/board/native_battery_filter.c",
+      "payload": "r1-application",
+      "role": "candidate",
+      "toolchain": "clang",
+      "link": true,
+      "expect": "compile",
+      "returncode": 0,
+      "argv": [
+        "/usr/bin/clang",
+        "--target=arm-none-eabi",
+        "-mcpu=cortex-m4",
+        "-mthumb",
+        "-munaligned-access",
+        "-mfpu=fpv4-sp-d16",
+        "-mfloat-abi=hard",
+        "-std=c11",
+        "-Os",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-fshort-enums",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-fno-delete-null-pointer-checks",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/r1/src/vendor",
+        "-isystem",
+        "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
+        "-MD",
+        "-MF",
+        "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-filter-root-c-final/r1/r1-application/r1__src__application__board__native_battery_filter.c.d",
+        "-c",
+        "/Users/kalani/Repo/evenRealities-openCFW/r1/src/application/board/native_battery_filter.c",
+        "-o",
+        "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-filter-root-c-final/r1/r1-application/r1__src__application__board__native_battery_filter.c.o"
+      ],
+      "source_sha256": "4c414c263775dacf286fd464c33c5e9163ff5ba6e9d4c089ba199975f5020d30",
+      "object_sha256": "92dd74b08a293861d86035c7635defefb19668bf89f06489c1714ee81ae523e5",
+      "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-filter-root-c-final/r1/r1-application/r1__src__application__board__native_battery_filter.c.o",
+      "strong": [
+        "r1_battery_five_sample_filter_and_conversion"
+      ],
+      "weak": [],
+      "undefined": [
+        "nrf_delay_ms",
+        "osDelay",
+        "r1_battery_runtime_storage",
+        "r1_stock_dispatch_08",
+        "r1_stock_dispatch_0c",
+        "r1_stock_dispatch_10"
+      ]
+    },
+    "normal_report": "build/sources-goal-r1-filter-root-c-final/report.json",
+    "imports_unchanged": {
+      "application": 164,
+      "bootloader": 34
+    },
+    "manifest_unchanged": true,
+    "source_plan_unchanged": true,
+    "new_exact_bytes": 0,
+    "hybrid": {
+      "report": "build/hybrid-goal-r1-filter-root-c/build-report.json",
+      "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+      "totals": {
+        "binary-pull-through": 642117,
+        "source-built": 4043,
+        "resource-file": 248
+      },
+      "source_completeness_proven": false
+    }
+  },
+  "REA": {
+    "evidence_id": "ev_3ba4b2ca5b8795a9c90146e8c70f79b26cc4341418e3a082ea059de3968bad9b",
+    "subject": {
+      "name": "stock.elf",
+      "digest": {
+        "sha256": "25b4a29af80ec8edab5bd861ba9b74a6e22eab29dc3d7a809a16869e8a140f04"
+      },
+      "local_path": "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-queue-reset-c/stock.elf",
+      "format": "elf",
+      "architecture": "arm"
+    },
+    "provider": {
+      "id": "ghidra",
+      "name": "Ghidra",
+      "version": "12.1.4"
+    },
+    "analysis_profile": {
+      "provider": {
+        "id": "ghidra",
+        "name": "Ghidra",
+        "version": "12.1.4"
+      },
+      "parameters": {
+        "target_kind": "executable",
+        "target_format": "elf",
+        "architecture": "arm",
+        "available_architectures": [
+          "arm"
+        ],
+        "import_mode": "ephemeral-source-immutable",
+        "annotation_policy": "atomic-function-entry-metadata-v1",
+        "load_image_observations": "source-mappings-entry-context-v2",
+        "function_body_evidence": "complete-inclusive-ranges-v1",
+        "function_references": "complete-body-and-entry-reference-manager-v2",
+        "call_relationship_coverage": "function-body-call-coverage-v5",
+        "function_dossier_coverage": "observed-facets-and-call-relationships-v1",
+        "string_inventory_evidence": "defined-data-coverage-v1",
+        "location_resolution": "explicit-address-exact-entry-symbol-first-v3",
+        "procedure_file_offset_resolution": "address-first-unique-target-source-mapping-v2",
+        "instruction_flow_evidence": "decoded-return-pcode-v1",
+        "instruction_references": "exact-address-incoming-v1",
+        "function_boundary_observations": "ghidra-function-boundary-limitations-v3",
+        "no_return_repair": "returning-imports-decoded-return-v2",
+        "process_launch": "inspected-jvm-launch-support-v1",
+        "jump_table_evidence": "typed-case-default-blocks-v1",
+        "decompiler_jump_loads": true,
+        "loader": "auto-from-header",
+        "language_id": "auto-from-header",
+        "compiler_spec_id": "auto-default",
+        "analyzer_preset": "ghidra-default"
+      },
+      "digest": "7e46711069eea041af1b9b99e34115c13332795e5cda76e584a722f529ec70de"
+    },
+    "predicate_type": "rea.analysis",
+    "operation": "read_bytes",
+    "parameters": {
+      "address": "0x91184",
+      "length": 192
+    },
+    "raw_result": {
+      "address": "0x91184",
+      "requested_bytes": 192,
+      "returned_bytes": 192,
+      "bytes_hex": "2de9ff470027dff8b090adf80070019702974ff6ff740397b8462546d9f81000f4f7b9fdc246c84600260df1040901236a460021d8f81000f4f7b6fdbdf8000029f816000744adf800a098f8010000284ff0020002d0ebf7bbff01e0e7f7b6f9761cf6b2052ee2d3d8f81000f4f763fd00204a4632f81010a14202d225460c4602e0a94200d20d46401cc0b20528f1d3381b401b0321b0fbf1f080b24ff49271484340f6ad314843044904b0b0fbf1f080b2bde8f087000090680020389d0700",
+      "complete": true
+    },
+    "normalized_result": {
+      "address": "0x91184",
+      "requested_bytes": 192,
+      "returned_bytes": 192,
+      "bytes_hex": "2de9ff470027dff8b090adf80070019702974ff6ff740397b8462546d9f81000f4f7b9fdc246c84600260df1040901236a460021d8f81000f4f7b6fdbdf8000029f816000744adf800a098f8010000284ff0020002d0ebf7bbff01e0e7f7b6f9761cf6b2052ee2d3d8f81000f4f763fd00204a4632f81010a14202d225460c4602e0a94200d20d46401cc0b20528f1d3381b401b0321b0fbf1f080b24ff49271484340f6ad314843044904b0b0fbf1f080b2bde8f087000090680020389d0700",
+      "complete": true
+    },
+    "confidence": "observed",
+    "authority": "shipped-artifact",
+    "environment": null,
+    "limitations": [
+      "The session serves operations only after Ghidra reports default auto-analysis complete; incomplete analysis does not expose partial results.",
+      "The imported Program and temporary project are ephemeral and deleted on close. Annotation operations edit session database metadata; original executable bytes are never written.",
+      "Cancelling an active Ghidra request terminates its ephemeral database and discards session annotations. The selected target remains open; the next provider query imports the original artifact again.",
+      "Default-space addresses use lowercase 0x-prefixed hexadecimal; other address spaces use <percent-encoded-space>:0x<hex>.",
+      "Bytes reflect Ghidra's initialized memory, including loader fixups. Reads stop at an unmapped or uninitialized byte and report completeness explicitly.",
+      "macOS sessions require a matching executable Ghidra native decompiler; REA checks for it but does not build native components or change Gatekeeper quarantine state."
+    ],
+    "relationship_coverage": null,
+    "locations": [],
+    "evidence_links": []
+  },
+  "qualification": "build/goal-r1-filter-root-c/qualified-final/qualification.json",
+  "probe_hashes": {
+    "build/goal-r1-filter-root-c/verify.py": "2748cb0202900e4352876f43c1a6794d0e9668f4c149f867a0569c86884f162c",
+    "build/goal-r1-filter-root-c/negatives.py": "e36453df815126b5d66dff5b1e736e68102adfe2c6c5bb4d9528b63a2949ae56",
+    "build/goal-r1-filter-root-c/audit.py": "05abcd890da1041f7b17942af12f281d71594dcaf0014f4c2f938723801fe01e",
+    "build/goal-r1-filter-root-c/product-final.elf": "24014ce18211893f136f653a62874280c185753b466de6e350960ab8f952c1df",
+    "build/goal-r1-filter-root-c/gcc.o": "5fb56fdace580df3a4cf7b3f05895cc700eab851227bc620e36f5a3555be9622"
+  },
+  "limitations": [
+    "Registry/ADC/scheduler/delay providers modeled; physical timing and voltage accuracy unproven",
+    "APSR and other caller-clobbered registers, private-frame aliases, faults and concurrency excluded",
+    "Only empty register/memory constraints and the shared read-only SP observation remain; this unit has no executed inline assembly.",
+    "The prior bridge reaches its first open provider with 80 bytes versus native 48 and is rejected by the stricter fixture.",
+    "GCC compiles without warning overrides after using existing alias-safe halfword helpers, but duplicates the four initial saved-word writes. It fails the strict memory trace and is not fully qualified.",
+    "The native battery runtime at 0x20006890 is kept distinct from YHM at 0x2000687c; no context relocation masks source ownership.",
+    "Normal source qualification selects no exact root. The source plan and 4043 selected bytes remain unchanged.",
+    "Original Arm Compiler 5 is unavailable; final source-only completeness, byte identity and physical hardware remain unproven."
+  ]
+}

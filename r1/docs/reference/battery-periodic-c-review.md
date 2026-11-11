@@ -1,0 +1,19 @@
+# R1 recurring battery task notification in C
+
+`native_battery_periodic.c` supplies stock 0x91174 registration and its callback at 0x3d818. Registration passes the source-owned callback, argument zero and raw delay 0x7800 to the existing delayed-event scheduler. The callback ignores its incoming argument, sends battery task flag 0x20 through the existing C flag wrapper, then registers itself again even if signalling failed. No numeric executable address or handwritten assembly is introduced.
+
+The normal build compiles 809 units (727 application, 82 bootloader). This closes `r1_battery_periodic_schedule_00091174`, reducing application imports from 73 to 72 with none added. R1 source checking and strict bootloader linking pass. Global checking retains the unrelated G2 unlisted `resident_rom_thumb_set.S` failure. Three NFC/charging task hardware dependencies remain: battery acquisition initialization, PMIC late initialization and the task flag dispatcher.
+
+Direct raw-stock/C comparisons pass 288 pairs across null/non-null/full-word thread handles, zero/error signalling statuses, incoming callback arguments, handle mutations and masks. They verify that flag 0x20 precedes scheduling, the incoming callback argument is ignored, the next event argument is zero and the delay is exactly 0x7800. The actual C battery flag wrapper and its existing shared thread owner execute.
+
+Sixty-four additional registration pairs execute the actual delayed schedule/reschedule code and source-owned tables. Cases cover empty, first-occupied, last-free and full tables, readiness handoff, mutex errors, wrapped tick multiplication and masks. The callback and zero argument enter the first free slot with the expected countdown; a full table retains the existing scheduler's behavior. RTOS time, locks and timer operations are modeled, with log mode zero.
+
+Sixty-four full roundtrips each execute registration, expiry and queue dispatch/rearm as three phases. The actual rescheduler retires the slot before pushing the two-word record. The actual queue-push and delayed-worker code deliver that callback, which signals the existing battery thread owner and re-registers for 0x7800. This covers failed flag signals, timer-start errors, null task handles and wrapped ticks. Records and all 64 callback/argument/deadline slots are compared after each phase. These are software scheduling proofs; the literal is not converted into a claimed wall-clock interval.
+
+A separate consumer probe runs the actual NFC/charging worker with this registration implementation in place: 32 lifecycle pairs, 528 worker pairs and 176 actual startup-sync pairs pass. The scheduler boundary is modeled in that consumer probe; the complete scheduler graph is exercised by the roundtrip probe above. The other three hardware children and watchdog/RTOS leaves remain modeled. This does not establish a complete running charging task.
+
+Six compiled defects are rejected: wrong task flag, wrong delay, forwarding the callback argument, suppressing rearm after a signal failure, omitting the signal and scheduling before signalling. The final normal probe passes after all mutants. REA windows at 0x91174 (16 bytes including its callback literal) and 0x3d818 (28 bytes including its literal) match the locked application.
+
+The audit preserves 806 prior object hashes, including the NFC/charging worker, battery owner/flag wrapper and delayed-event implementations. Generated boot objects retain allocated bytes and normalized relocations. The manifest only adds the new unit. There is one application definition of the shared battery thread handle. No source qualification plan or G2 source is changed.
+
+Physical timer/IRQ behavior, scheduler concurrency, the remaining hardware children, manager wiring, final application layout/link and device boot remain open. Probe sources, results and hashes are in [battery-periodic-c-review.json](battery-periodic-c-review.json).

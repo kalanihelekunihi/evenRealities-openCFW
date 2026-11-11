@@ -1,403 +1,172 @@
-/* Complete native callback; preserve true calls, flags and delayed instructions. */
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_dispatch_callback_31ceb4\n"
-".type opencfw_em9305_dispatch_callback_31ceb4,@function\n"
-"opencfw_em9305_dispatch_callback_31ceb4:\n"
-"L31ceb4:\n"
-"enter_s [r13-r25,fp,blink]\n"
-"L31ceb6:\n"
-"sub_s sp,sp,0x8\n"
-"L31ceb8:\n"
-"ld_s r13,[r0,0x24]\n"
-"L31ceba:\n"
-"mov_s r17,r0\n"
-"L31cebc:\n"
-"mov_s r14,0x8029ac\n"
-"L31cec2:\n"
-"add2 r15,r13,0x2b\n"
-"L31cec6:\n"
-"ld_s r0,[r15,0x50]\n"
-"L31cec8:\n"
-"ld_s r1,[r13,0x28]\n"
-"L31ceca:\n"
-"ld r25,[r13,32]\n"
-"L31cece:\n"
-"mov_s r22,0\n"
-"L31ced0:\n"
-"mov r18,0\n"
-"L31ced4:\n"
-"add r16,r14,0x18\n"
-"L31ced8:\n"
-"add r24,r1,r0\n"
-"L31cedc:\n"
-"ldb r0,[r13,52]\n"
-"L31cee0:\n"
-"brhs.d.nt r18,r0,L31cf24\n"
-"L31cee4:\n"
-"add2 r21,r13,r18\n"
-"L31cee8:\n"
-"mov_s r20,0\n"
-"L31ceea:\n"
-"mov r23,r16\n"
-"L31ceee:\n"
-"mov_s r19,0\n"
-"L31cef0:\n"
-"ldb_s r0,[r13,0x18]\n"
-"L31cef2:\n"
-"brhs.nt r19,r0,L31cf1c\n"
-"L31cef6:\n"
-"ld.ab r1,[r23,4]\n"
-"L31cefa:\n"
-"breq_s r1,0,L31cf16\n"
-"L31cefc:\n"
-"ld r0,[r21,56]\n"
-"L31cf00:\n"
-"breq_s r0,0,L31cf10\n"
-"L31cf02:\n"
-"bl.d opencfw_em9305_dispatch_child_317524\n"
-"L31cf06:\n"
-"extb r2,r20\n"
-"L31cf0a:\n"
-"st 0,[r23,-4]\n"
-"L31cf0e:\n"
-"b_s L31cf16\n"
-"L31cf10:\n"
-"bl.d opencfw_em9305_ll_receive_buffer_release_31761c\n"
-"L31cf14:\n"
-"mov_s r0,r1\n"
-"L31cf16:\n"
-"add_s r20,r20,1\n"
-"L31cf18:\n"
-"add_s r19,r19,1\n"
-"L31cf1a:\n"
-"b_s L31cef0\n"
-"L31cf1c:\n"
-"add r16,r16,0x18\n"
-"L31cf20:\n"
-"add_s r18,r18,1\n"
-"L31cf22:\n"
-"b_s L31cedc\n"
-"L31cf24:\n"
-"ldb_s r0,[r13,0x1]\n"
-"L31cf26:\n"
-"brne.d.nt r0,0x2,L31cfb0\n"
-"L31cf2a:\n"
-"mov_s r1,0x7\n"
-"L31cf2c:\n"
-"ld r1,[r14,0x14]\n"
-"L31cf2e:\n"
-"cmp_s r1,0\n"
-"L31cf30:\n"
-"beq_s L31d028\n"
-"L31cf32:\n"
-"mov r0,484\n"
-"L31cf36:\n"
-"ldb_s r0,[r13,r0]\n"
-"L31cf38:\n"
-"breq_s r0,0,L31cf72\n"
-"L31cf3a:\n"
-"mov_s r0,0x8051dc\n"
-"L31cf40:\n"
-"ld r2,[r0,0]\n"
-"L31cf42:\n"
-"mov_s r16,r2\n"
-"L31cf44:\n"
-"breq_s r2,0,L31cf72\n"
-"L31cf46:\n"
-"ldb_s r3,[r13,0x18]\n"
-"L31cf48:\n"
-"ld_s r2,[r13,0x20]\n"
-"L31cf4a:\n"
-"ld_s r12,[r13,0x24]\n"
-"L31cf4c:\n"
-"mov_s r0,r13\n"
-"L31cf4e:\n"
-"mpydu r4,r2,r3\n"
-"L31cf52:\n"
-"mpywhl r2,r12,r3\n"
-"L31cf56:\n"
-"add r11,sp,0\n"
-"L31cf5a:\n"
-"add r0,r0,428\n"
-"L31cf5e:\n"
-"add_s r2,r2,r5\n"
-"L31cf60:\n"
-"st.as r11,[r15,73]\n"
-"L31cf64:\n"
-"st r4,[sp]\n"
-"L31cf68:\n"
-"jl.d [r16]\n"
-"L31cf6c:\n"
-"st_s r2,[sp,0x4]\n"
-"L31cf6e:\n"
-"ld r1,[r14,0x14]\n"
-"L31cf70:\n"
-"breq_s r0,0,L31cfcc\n"
-"L31cf72:\n"
-"add3 r16,r13,0x22\n"
-"L31cf76:\n"
-"ldb r0,[r16]\n"
-"L31cf7a:\n"
-"brne.d.nt r0,0,L31d01c\n"
-"L31cf7e:\n"
-"add_s r2,r1,0x2\n"
-"L31cf80:\n"
-"ldb_s r0,[r2,0]\n"
-"L31cf82:\n"
-"cmp_s r0,1\n"
-"L31cf84:\n"
-"bhi.d L31d01c\n"
-"L31cf88:\n"
-"mov_s r18,r0\n"
-"L31cf8a:\n"
-"beq_s L31cfe2\n"
-"L31cf8c:\n"
-"brne.d.nt r18,0,L31d01c\n"
-"L31cf90:\n"
-"mov_s r1,r13\n"
-"L31cf92:\n"
-"add r1,r1,276\n"
-"L31cf96:\n"
-"bl.d opencfw_em9305_dispatch_child_317a44\n"
-"L31cf9a:\n"
-"add3 r0,r13,0x23\n"
-"L31cf9e:\n"
-"ldh_s r1,[r13,0x20]\n"
-"L31cfa0:\n"
-"ldh r0,[r15,104]\n"
-"L31cfa4:\n"
-"sub_s r0,r0,r1\n"
-"L31cfa6:\n"
-"sexh.f 0,r0\n"
-"L31cfaa:\n"
-"bp L31d004\n"
-"L31cfae:\n"
-"b_s L31d01c\n"
-"L31cfb0:\n"
-"bl.d opencfw_em9305_dispatch_event_send_31d128\n"
-"L31cfb4:\n"
-"mov_s r0,r13\n"
-"L31cfb6:\n"
-"bl.d opencfw_em9305_wsf_timer_stop\n"
-"L31cfba:\n"
-"add2 r0,r13,0x34\n"
-"L31cfbe:\n"
-"ld r0,[r14,0x14]\n"
-"L31cfc0:\n"
-"breq_s r0,0,L31cfca\n"
-"L31cfc2:\n"
-"bl opencfw_em9305_ll_receive_buffer_release_31761c\n"
-"L31cfc6:\n"
-"st 0,[r14,20]\n"
-"L31cfca:\n"
-"leave_s [r13-r25,fp,blink,pcl]\n"
-"L31cfcc:\n"
-"bl.d opencfw_em9305_ll_receive_buffer_release_31761c\n"
-"L31cfd0:\n"
-"mov_s r0,r1\n"
-"L31cfd2:\n"
-"mov_s r1,6\n"
-"L31cfd4:\n"
-"mov_s r0,r13\n"
-"L31cfd6:\n"
-"bl.d opencfw_em9305_dispatch_event_send_31d128\n"
-"L31cfda:\n"
-"st 0,[r14,20]\n"
-"L31cfde:\n"
-"mov_s r22,1\n"
-"L31cfe0:\n"
-"b_s L31d028\n"
-"L31cfe2:\n"
-"mov_s r19,r13\n"
-"L31cfe4:\n"
-"add r19,r19,290\n"
-"L31cfe8:\n"
-"add3 r1,r13,0x24\n"
-"L31cfec:\n"
-"bl.d opencfw_em9305_dispatch_child_317a84\n"
-"L31cff0:\n"
-"mov_s r0,r19\n"
-"L31cff2:\n"
-"ldh_s r1,[r13,0x20]\n"
-"L31cff4:\n"
-"ldh r0,[r15,116]\n"
-"L31cff8:\n"
-"sub_s r0,r0,r1\n"
-"L31cffa:\n"
-"sexh.f 0,r0\n"
-"L31cffe:\n"
-"bn.d L31d012\n"
-"L31d002:\n"
-"mov_s r1,4\n"
-"L31d004:\n"
-"ldb r0,[r16]\n"
-"L31d008:\n"
-"bset r0,r0,r18\n"
-"L31d00c:\n"
-"stb r0,[r16]\n"
-"L31d010:\n"
-"b_s L31d01c\n"
-"L31d012:\n"
-"mov_s r0,r13\n"
-"L31d014:\n"
-"bl.d opencfw_em9305_dispatch_event_send_31d128\n"
-"L31d018:\n"
-"stb 30,[r19]\n"
-"L31d01c:\n"
-"bl.d opencfw_em9305_ll_receive_buffer_release_31761c\n"
-"L31d020:\n"
-"ld r0,[r14,0x14]\n"
-"L31d022:\n"
-"mov_s r22,0\n"
-"L31d024:\n"
-"st 0,[r14,20]\n"
-"L31d028:\n"
-"brne.nt r22,0,L31d03c\n"
-"L31d02c:\n"
-"ldb_s r0,[r14,0x5]\n"
-"L31d02e:\n"
-"breq_s r0,0,L31d03c\n"
-"L31d030:\n"
-"ld r1,[r15,52]\n"
-"L31d034:\n"
-"bl.d opencfw_em9305_wsf_timer_start_ms\n"
-"L31d038:\n"
-"add2 r0,r13,0x34\n"
-"L31d03c:\n"
-"brne.d.nt r22,0,L31d0dc\n"
-"L31d040:\n"
-"add3 r16,r13,0x22\n"
-"L31d044:\n"
-"ld r2,[r13,0x10]\n"
-"L31d046:\n"
-"ld_s r0,[r15,0x50]\n"
-"L31d048:\n"
-"ld_s r12,[r15,0x5c]\n"
-"L31d04a:\n"
-"ld_s r14,[r13,0x20]\n"
-"L31d04c:\n"
-"ld_s r3,[r15,0x4c]\n"
-"L31d04e:\n"
-"ld r8,[r13,36]\n"
-"L31d052:\n"
-"ldh r9,[r13,246]\n"
-"L31d056:\n"
-"add_s r2,r2,r0\n"
-"L31d058:\n"
-"ldh r1,[r15,72]\n"
-"L31d05c:\n"
-"add_s r12,r12,r2\n"
-"L31d05e:\n"
-"sub_s r0,r12,r3\n"
-"L31d060:\n"
-"add.f r12,r14,0x1\n"
-"L31d064:\n"
-"adc.f r3,r8,0\n"
-"L31d068:\n"
-"add_s r0,r0,r9\n"
-"L31d06a:\n"
-"st_s r3,[r13,0x24]\n"
-"L31d06c:\n"
-"st_s r12,[r13,0x20]\n"
-"L31d06e:\n"
-"bl.d opencfw_em9305_init_secondary_time_317ebc\n"
-"L31d072:\n"
-"st_s r2,[r15,0x50]\n"
-"L31d074:\n"
-"ld r1,[r13,0x10]\n"
-"L31d076:\n"
-"ld_s r2,[r15,0x50]\n"
-"L31d078:\n"
-"ld_s r3,[r15,0x5c]\n"
-"L31d07a:\n"
-"st r1,[r17,20]\n"
-"L31d07e:\n"
-"sub_s r1,r2,r0\n"
-"L31d080:\n"
-"add_s r1,r1,r3\n"
-"L31d082:\n"
-"st r1,[r17,8]\n"
-"L31d086:\n"
-"ldh r1,[r13,246]\n"
-"L31d08a:\n"
-"add1_s r1,r1,r0\n"
-"L31d08c:\n"
-"mov_s r0,r13\n"
-"L31d08e:\n"
-"bl.d opencfw_em9305_dispatch_child_3257f4\n"
-"L31d092:\n"
-"st_s r1,[r15,0]\n"
-"L31d094:\n"
-"ldb r0,[r16]\n"
-"L31d098:\n"
-"breq_s r0,0,L31d0d0\n"
-"L31d09a:\n"
-"bbit0.nt r0,0,L31d0c4\n"
-"L31d09e:\n"
-"ldh_s r1,[r13,0x20]\n"
-"L31d0a0:\n"
-"ldh r2,[r15,104]\n"
-"L31d0a4:\n"
-"add_s r1,r1,1\n"
-"L31d0a6:\n"
-"exth_s r1,r1\n"
-"L31d0a8:\n"
-"brne.nt r1,r2,L31d0c4\n"
-"L31d0ac:\n"
-"ld.as r2,[r13,71]\n"
-"L31d0b0:\n"
-"ld.as r1,[r13,70]\n"
-"L31d0b4:\n"
-"bclr_s r0,r0,0\n"
-"L31d0b6:\n"
-"stb r0,[r16]\n"
-"L31d0ba:\n"
-"bl.d opencfw_em9305_dispatch_child_32520c\n"
-"L31d0be:\n"
-"mov_s r0,r13\n"
-"L31d0c0:\n"
-"ldb r0,[r16]\n"
-"L31d0c4:\n"
-"bbit0.d.nt r0,0x1,L31d0d0\n"
-"L31d0c8:\n"
-"mov_s r1,4\n"
-"L31d0ca:\n"
-"bl.d opencfw_em9305_dispatch_event_send_31d128\n"
-"L31d0ce:\n"
-"mov_s r0,r13\n"
-"L31d0d0:\n"
-"mov_s r1,0\n"
-"L31d0d2:\n"
-"bl.d opencfw_em9305_associated_schedule_insert_312da4\n"
-"L31d0d6:\n"
-"mov_s r0,r17\n"
-"L31d0d8:\n"
-"breq.t r0,0,L31d044\n"
-"L31d0dc:\n"
-"mov_s r0,r13\n"
-"L31d0de:\n"
-"mov_s r1,r25\n"
-"L31d0e0:\n"
-"bl.d opencfw_em9305_dispatch_child_31d6a4\n"
-"L31d0e4:\n"
-"mov_s r2,r24\n"
-"L31d0e6:\n"
-"mov_s r0,0x805aaf\n"
-"L31d0ec:\n"
-"ldb_s r0,[r0,0]\n"
-"L31d0ee:\n"
-"cmp_s r0,0\n"
-"L31d0f0:\n"
-"beq_s L31cfca\n"
-"L31d0f2:\n"
-"ld_s r1,[r13,0x20]\n"
-"L31d0f4:\n"
-"bl.d opencfw_em9305_dispatch_child_32324c\n"
-"L31d0f8:\n"
-"ldb_s r0,[r13,0x2]\n"
-"L31d0fa:\n"
-"leave_s [r13-r25,fp,blink,pcl]\n"
-".size opencfw_em9305_dispatch_callback_31ceb4,.-opencfw_em9305_dispatch_callback_31ceb4\n"
-);
+#include <stdint.h>
+
+/* Native 0x31ceb4..0x31d0fc: BIG/CIG receive event completion for the
+ * group (object +36). Received PDUs left in the per-stream buffer table
+ * (0x8029ac + 24 + 24 i + 4 j, streams +52, subevents +24) are handed to
+ * live streams (317524, slot cleared) or released. Outside state 2 the
+ * group reports status 7 (31d128), stops its timer (+208) and drops the
+ * control PDU (0x8029ac +20). In state 2 a received control PDU is first
+ * checked by the MIC hook (*0x8051dc, with the 64-bit event counter
+ * +32/+36 times +24 published through +464) when encryption is on (+484);
+ * a rejected PDU is released with status 6 and ends the event. Otherwise
+ * an unhandled channel-map (0) or terminate (1) BIG control PDU is parsed
+ * (317a44 / 317a84) and its instant (+276 / +288) recorded in the pending
+ * mask +272 unless already past (a past terminate reports status 4 and
+ * state 30 at +290), the PDU is released, and the timeout timer restarted
+ * when 0x8029b1 is set. Then the group advances event by event (counter
+ * +32/+36, anchor +252, object timing +8/+20, offset +172), applying a
+ * due channel map (32520c) and reporting a pending terminate, until the
+ * schedule insert succeeds; finally 31d6a4 runs and, when enabled
+ * (0x805aaf), the event counter is reported (32324c). */
+extern uint32_t opencfw_em9305_dispatch_child_317524(uint32_t a,uint32_t b,uint32_t c);
+extern uint32_t opencfw_em9305_ll_receive_buffer_release_31761c(uintptr_t buffer);
+extern uint32_t opencfw_em9305_dispatch_event_send_31d128(uintptr_t record,
+                                                          uint32_t status);
+extern uint32_t opencfw_em9305_wsf_timer_stop(uintptr_t timer);
+extern uint32_t opencfw_em9305_wsf_timer_start_ms(uintptr_t timer,
+                                                  uint32_t milliseconds);
+extern uint32_t opencfw_em9305_dispatch_child_317a44(uintptr_t value_out,
+    uintptr_t half_out,uintptr_t in);
+extern uint32_t opencfw_em9305_dispatch_child_317a84(uint32_t a,uint32_t b,uint32_t c);
+extern uint32_t opencfw_em9305_init_secondary_time_317ebc(uint32_t first,
+                                                          uint32_t second);
+extern uint32_t opencfw_em9305_dispatch_child_3257f4(uintptr_t context);
+extern uint32_t opencfw_em9305_dispatch_child_32520c(uintptr_t object,
+    uint32_t first,uint32_t second);
+extern uint32_t opencfw_em9305_associated_schedule_insert_312da4(uintptr_t object,
+                                                                 uintptr_t tie);
+extern uint32_t opencfw_em9305_dispatch_child_31d6a4(uintptr_t group,
+    uint32_t counter,uint32_t anchor);
+extern uint32_t opencfw_em9305_dispatch_child_32324c(uint32_t handle,uint32_t value);
+typedef uint32_t (*opencfw_em9305_mic_hook_t)(uintptr_t context,uintptr_t packet);
+
+static inline uint32_t r8(uintptr_t a){return *(volatile uint8_t *)a;}
+static inline uint32_t r16(uintptr_t a){return *(volatile uint16_t *)a;}
+static inline uint32_t r32(uintptr_t a){return *(volatile uint32_t *)a;}
+static inline void w8(uintptr_t a,uint32_t v){*(volatile uint8_t *)a=(uint8_t)v;}
+static inline void w32(uintptr_t a,uint32_t v){*(volatile uint32_t *)a=v;}
+
+#define RX 0x8029acu
+
+void opencfw_em9305_dispatch_callback_31ceb4(uintptr_t object)
+{
+    uintptr_t group=r32(object+36u);
+    uint32_t first_counter=r32(group+32u);
+    uint32_t anchor=r32(group+40u)+r32(group+252u);
+    uint32_t done=0u;
+    for(uint32_t stream=0u;stream<r8(group+52u);++stream){
+        uintptr_t slot=RX+24u+stream*24u;
+        for(uint32_t sub=0u;sub<r8(group+24u);++sub,slot+=4u){
+            uintptr_t buffer=r32(slot);
+            if(buffer==0u)continue;
+            uintptr_t target=r32(group+stream*4u+56u);
+            if(target!=0u){
+                (void)opencfw_em9305_dispatch_child_317524(target,buffer,(uint8_t)sub);
+                w32(slot,0u);
+            }else{
+                (void)opencfw_em9305_ll_receive_buffer_release_31761c(buffer);
+            }
+        }
+    }
+    if(r8(group+1u)!=2u){
+        (void)opencfw_em9305_dispatch_event_send_31d128(group,7u);
+        (void)opencfw_em9305_wsf_timer_stop(group+208u);
+        uintptr_t control=r32(RX+20u);
+        if(control!=0u){
+            (void)opencfw_em9305_ll_receive_buffer_release_31761c(control);
+            w32(RX+20u,0u);
+        }
+        return;
+    }
+    uintptr_t control=r32(RX+20u);
+    uintptr_t pending=group+272u;
+    if(control!=0u){
+        uint32_t rejected=0u;
+        if(r8(group+484u)!=0u){
+            uintptr_t hook=r32(0x8051dcu);
+            if(hook!=0u){
+                uint32_t burst=r8(group+24u);
+                uint64_t counter=((uint64_t)r32(group+36u)<<32|r32(group+32u))*burst;
+                uint32_t value[2];
+                w32(group+464u,(uint32_t)(uintptr_t)value);
+                value[0]=(uint32_t)counter;
+                value[1]=(uint32_t)(counter>>32);
+                uint32_t accepted=((opencfw_em9305_mic_hook_t)hook)(group+428u,control);
+                control=r32(RX+20u);
+                if(accepted==0u){
+                    (void)opencfw_em9305_ll_receive_buffer_release_31761c(control);
+                    w32(RX+20u,0u);
+                    (void)opencfw_em9305_dispatch_event_send_31d128(group,6u);
+                    done=1u;
+                    rejected=1u;
+                }
+            }
+        }
+        if(!rejected){
+            if(r8(pending)==0u){
+                uint32_t opcode=r8(control+2u);
+                if(opcode==0u){
+                    (void)opencfw_em9305_dispatch_child_317a44(group+280u,group+276u,
+                                                               control+2u);
+                    if((int16_t)(r16(group+276u)-r16(group+32u))>=0)
+                        w8(pending,r8(pending)|1u);
+                }else if(opcode==1u){
+                    (void)opencfw_em9305_dispatch_child_317a84(group+290u,group+288u,
+                                                               control+2u);
+                    if((int16_t)(r16(group+288u)-r16(group+32u))<0){
+                        w8(group+290u,30u);
+                        (void)opencfw_em9305_dispatch_event_send_31d128(group,4u);
+                    }else{
+                        w8(pending,r8(pending)|2u);
+                    }
+                }
+            }
+            (void)opencfw_em9305_ll_receive_buffer_release_31761c(r32(RX+20u));
+            done=0u;
+            w32(RX+20u,0u);
+        }
+    }
+    if(done==0u){
+        if(r8(RX+5u)!=0u)
+            (void)opencfw_em9305_wsf_timer_start_ms(group+208u,r32(group+224u));
+        for(;;){
+            uint32_t interval=r32(group+16u);
+            uint32_t base=r32(group+252u)+interval;
+            uint32_t offset=r32(group+264u);
+            uint32_t low=r32(group+32u);
+            uint32_t start=r32(group+248u);
+            uint32_t high=r32(group+36u);
+            uint32_t extra=r16(group+246u);
+            uint32_t selector=r16(group+244u);
+            uint64_t next=((uint64_t)high<<32|low)+1u;
+            w32(group+36u,(uint32_t)(next>>32));
+            w32(group+32u,(uint32_t)next);
+            w32(group+252u,base);
+            uint32_t time=opencfw_em9305_init_secondary_time_317ebc(
+                offset+base-start+extra,selector);
+            uint32_t period=r32(group+16u);
+            uint32_t current=r32(group+252u);
+            uint32_t window=r32(group+264u);
+            w32(object+20u,period);
+            w32(object+8u,current-time+window);
+            w32(group+172u,r16(group+246u)+time*2u);
+            (void)opencfw_em9305_dispatch_child_3257f4(group);
+            uint32_t flags=r8(pending);
+            if(flags!=0u){
+                if((flags&1u)!=0u
+                   &&(uint16_t)(r16(group+32u)+1u)==r16(group+276u)){
+                    uint32_t map_high=r32(group+284u),map_low=r32(group+280u);
+                    w8(pending,flags&~1u);
+                    (void)opencfw_em9305_dispatch_child_32520c(group,map_low,map_high);
+                    flags=r8(pending);
+                }
+                if((flags&2u)!=0u)
+                    (void)opencfw_em9305_dispatch_event_send_31d128(group,4u);
+            }
+            if(opencfw_em9305_associated_schedule_insert_312da4(object,0u)!=0u)break;
+        }
+    }
+    (void)opencfw_em9305_dispatch_child_31d6a4(group,first_counter,anchor);
+    if(r8(0x805aafu)!=0u)
+        (void)opencfw_em9305_dispatch_child_32324c(r8(group+2u),r32(group+32u));
+}

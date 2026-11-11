@@ -54,12 +54,6 @@ static uint64_t float_to_double_bits(float value)
     return sign | ((uint64_t)(unbiased + 1023) << 52) | normalized;
 }
 
-static void compare_float(float left, float right)
-{
-    __asm__ volatile("vcmp.f32 %0, %1\n\tvmrs APSR_nzcv, FPSCR"
-                     :: "t"(left), "t"(right) : "cc");
-}
-
 /* Reconstructed ADC bringup body 0x430000..0x4301d5. The ready bit and ADC
  * samples are peripheral fixtures; this code does not model ADC timing.
  */
@@ -125,12 +119,10 @@ void opencfw_bl_platform_bringup(void)
         const float measured = (float)scaled;
         const float low = float_from_bits(0x44610001u);
         const float high = float_from_bits(0x447a0000u);
-        compare_float(measured, low);
         if (measured < low) {
             ADC_RESULT[0] = 0u;
             *(volatile uint16_t *)(void *)(ADC_RESULT + 2) = 3u;
         } else {
-            compare_float(measured, high);
             if (measured < high) {
                 ADC_RESULT[0] = 1u;
                 *(volatile uint16_t *)(void *)(ADC_RESULT + 2) = 1u;

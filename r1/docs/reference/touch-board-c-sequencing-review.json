@@ -1,0 +1,97 @@
+{
+  "passed": 12800,
+  "executions": 25600,
+  "actual_setter_board_registry_irq_event_post": true,
+  "device_and_rtos_boundaries_modeled": true,
+  "live_input_callback_reload": true,
+  "active_state_order": true,
+  "source_report": "build/sources-goal-r1-touch-board/report.json",
+  "source_sizes": {
+    "r1_touch_ready_callback_setter": 22,
+    "r1_touch_board_open": 108,
+    "r1_touch_pending_flag_consume": 36,
+    "r1_touch_power_on_step": 14,
+    "r1_touch_ready_irq_callback": 6
+  },
+  "limitations": [
+    "Existing device/line helpers and OS calls modeled; actual registry and event-forwarder execute",
+    "Private frames/caller-clobbered registers/flags excluded",
+    "Native LDRD input/callback grouping not guaranteed by separate C loads; concurrent updates unverified",
+    "Cold startup placement, actual IRQ exception behavior and electrical/timing behavior unverified",
+    "No byte qualification"
+  ],
+  "negative_controls": {
+    "null-clears": {
+      "rejected": true,
+      "case": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        false
+      ],
+      "stderr": "arm-none-eabi-ld: warning: (osThreadFlagsSet): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-touch-board/r1/r1-application/r1__src__application__runtime__native_touch_services.c.o\narm-none-eabi-ld: warning: (r1_touch_bus_acquire_on): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-board/null-clears.o\narm-none-eabi-ld: warning: (osDelay): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-board/null-clears.o\narm-none-eabi-ld: warning: (r1_touch_device_op_stop): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-board/null-clears.o\narm-none-eabi-ld: warning: (r1_touch_device_op_lock1): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-board/null-clears.o\narm-none-eabi-ld: warning: (r1_touch_device_op_unlock): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-board/null-clears.o\narm-none-eabi-ld: warning: (osDelay): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-board/null-clears.o\narm-none-eabi-ld: warning: (r1_touch_device_op_lock1): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-board/null-clears.o\narm-none-eabi-ld: warning: (osDelay): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-board/null-clears.o\narm-none-eabi-ld: warning: (r1_touch_record_op_0c): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-board/null-clears.o\narm-none-eabi-ld: warning: (osDelay): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-board/null-clears.o\narm-none-eabi-ld: warning: (osDelay): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-board/null-clears.o\narm-none-eabi-ld: warning: (r1_touch_bus_enable_on): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-board/null-clears.o\narm-none-eabi-ld: warning: (r1_touch_device_op_unlock): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-board/null-clears.o\narm-none-eabi-ld: warning: (r1_touch_device_op_stop): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-board/null-clears.o\narm-none-eabi-ld: warning: (r1_touch_bus_enable_on): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-board/null-clears.o\narm-none-eabi-ld: warning: (r1_touch_device_op_unlock): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-board/null-clears.o\nTraceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-touch-board/reject-null-clears.py\", line 93, in <module>\n    for c in cases:assert a(*c)==b(*c),c\n                                 ~^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-touch-board/reject-null-clears.py\", line 88, in run\n    assert int.from_bytes(u.mem_read(active,1),'little')==expected_active and int.from_bytes(u.mem_read(callback,4),'little')==cb and int.from_bytes(u.mem_read(input_cell,4),'little')==expected_input\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    "early-active": {
+      "rejected": true,
+      "case": [
+        1,
+        0,
+        1,
+        0,
+        0,
+        0,
+        536969216,
+        true
+      ],
+      "stderr": "arm-none-eabi-ld: warning: (osThreadFlagsSet): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-touch-board/r1/r1-application/r1__src__application__runtime__native_touch_services.c.o\narm-none-eabi-ld: warning: (r1_touch_bus_acquire_on): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-board/early-active.o\narm-none-eabi-ld: warning: (osDelay): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-board/early-active.o\narm-none-eabi-ld: warning: (r1_touch_device_op_stop): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-board/early-active.o\narm-none-eabi-ld: warning: (r1_touch_device_op_lock1): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-board/early-active.o\narm-none-eabi-ld: warning: (r1_touch_device_op_unlock): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-board/early-active.o\narm-none-eabi-ld: warning: (osDelay): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-board/early-active.o\narm-none-eabi-ld: warning: (r1_touch_device_op_lock1): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-board/early-active.o\narm-none-eabi-ld: warning: (osDelay): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-board/early-active.o\narm-none-eabi-ld: warning: (r1_touch_record_op_0c): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-board/early-active.o\narm-none-eabi-ld: warning: (osDelay): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-board/early-active.o\narm-none-eabi-ld: warning: (osDelay): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-board/early-active.o\narm-none-eabi-ld: warning: (r1_touch_bus_enable_on): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-board/early-active.o\narm-none-eabi-ld: warning: (r1_touch_device_op_unlock): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-board/early-active.o\narm-none-eabi-ld: warning: (r1_touch_device_op_stop): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-board/early-active.o\narm-none-eabi-ld: warning: (r1_touch_bus_enable_on): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-board/early-active.o\narm-none-eabi-ld: warning: (r1_touch_device_op_unlock): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-board/early-active.o\nTraceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-touch-board/reject-early-active.py\", line 93, in <module>\n    for c in cases:assert a(*c)==b(*c),c\n                          ^^^^^^^^^^^^\nAssertionError: (1, 0, 1, 0, 0, 0, 536969216, True)\n"
+    },
+    "callback-hoist": {
+      "rejected": true,
+      "case": [
+        1,
+        0,
+        2,
+        2,
+        0,
+        0,
+        536969216,
+        true
+      ],
+      "stderr": "arm-none-eabi-ld: warning: (osThreadFlagsSet): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-touch-board/r1/r1-application/r1__src__application__runtime__native_touch_services.c.o\narm-none-eabi-ld: warning: (r1_touch_bus_acquire_on): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-board/callback-hoist.o\narm-none-eabi-ld: warning: (osDelay): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-board/callback-hoist.o\narm-none-eabi-ld: warning: (r1_touch_device_op_stop): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-board/callback-hoist.o\narm-none-eabi-ld: warning: (r1_touch_device_op_lock1): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-board/callback-hoist.o\narm-none-eabi-ld: warning: (r1_touch_device_op_unlock): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-board/callback-hoist.o\narm-none-eabi-ld: warning: (osDelay): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-board/callback-hoist.o\narm-none-eabi-ld: warning: (r1_touch_device_op_lock1): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-board/callback-hoist.o\narm-none-eabi-ld: warning: (osDelay): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-board/callback-hoist.o\narm-none-eabi-ld: warning: (r1_touch_record_op_0c): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-board/callback-hoist.o\narm-none-eabi-ld: warning: (osDelay): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-board/callback-hoist.o\narm-none-eabi-ld: warning: (osDelay): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-board/callback-hoist.o\narm-none-eabi-ld: warning: (r1_touch_bus_enable_on): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-board/callback-hoist.o\narm-none-eabi-ld: warning: (r1_touch_device_op_unlock): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-board/callback-hoist.o\narm-none-eabi-ld: warning: (r1_touch_device_op_stop): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-board/callback-hoist.o\narm-none-eabi-ld: warning: (r1_touch_bus_enable_on): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-board/callback-hoist.o\narm-none-eabi-ld: warning: (r1_touch_device_op_unlock): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-board/callback-hoist.o\nTraceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-touch-board/reject-callback-hoist.py\", line 93, in <module>\n    for c in cases:assert a(*c)==b(*c),c\n                                 ~^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-touch-board/reject-callback-hoist.py\", line 87, in run\n    assert state['registered']==registered and state['calls']==calls,(stock,function,initial,cb_kind,mode,state,calls)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: (False, 1, 0, 2, 2, {'function': 1, 'mode': 2, 'thread': 0, 'status': 0, 'calls': [['ldo_acquire'], ['delay', 10], ['stop'], ['high'], ['low'], ['delay', 130], ['high'], ['delay', 10], ['output_close'], ['delay', 20], ['input_open', 536969216], ['register', 536969728, 1, 17838337], ['delay', 20], ['flags', 0, 1]], 'access': [['callback', 'write', 4, 17838337], ['active', 'read', 1, 0], ['callback', 'read', 4, 17838337], ['input', 'read', 4, 536969216], ['input', 'read', 4, 536969728], ['active', 'write', 1, 1]], 'registered': 17838337}, [['ldo_acquire'], ['delay', 10], ['stop'], ['high'], ['low'], ['delay', 130], ['high'], ['delay', 10], ['output_close'], ['delay', 20], ['input_open', 536969216], ['register', 536969728, 1, 'ready_irq'], ['delay', 20], ['flags', 0, 1]])\n"
+    }
+  },
+  "source_plan_changed": false,
+  "evidence": {
+    "build/goal-r1-touch-board/stock.elf": "dfc237f59735d84382bacc4c218f27aae3c1df8c042dff224fc02acdb6dec340",
+    "build/goal-r1-touch-board/REA.snapshot.json": "a5e870427789212281bedc5a1217a94a8880a08ba73478c68bcbb8a1707a8656",
+    "build/goal-r1-touch-board/verify.py": "9667e5b23c83a8f1fda1afc932e143499441eb82dfd732f5dfd4d52f85ef0f7b",
+    "build/goal-r1-touch-board/source.elf": "2ace82a20d1b3642557e3f7e8c96e069366de3406b957d9f6b36e16db92f42d1",
+    "build/goal-r1-touch-board/results.json": "4e551603a1a689ca856479cbd164e40a621b63d13ba728685799cc06011bfb1d",
+    "build/goal-r1-touch-board/negative.py": "cc250a1fe318d682c9cc0081226f9e36b133ef90018aed9ce83b6873ffe2e42e",
+    "build/goal-r1-touch-board/negative-results.json": "a9e0b3ac171e454f6791eb060baa28632bde5b7a8e79b7d55329fc08644200ce",
+    "build/goal-r1-touch-board/null-clears.c": "730ab505c88fa0e143716a972f8629183ad2ec96aa3f7c86cbf4e9215afdbb66",
+    "build/goal-r1-touch-board/early-active.c": "6d11cb9d6d05348d149aacdcee5c7b9ced2418bfa751e6e94f6ab106d829aa09",
+    "build/goal-r1-touch-board/callback-hoist.c": "b733cb83625fdc5d40d5ee774afc4eea2980c2095191107dd8ad4c1f247d9d0e",
+    "build/goal-r1-touch-board/reject-null-clears.py": "9462e1125696c9b6952849c31860169e4d8fc53ea08492d45e5e588910e545d7",
+    "build/goal-r1-touch-board/reject-early-active.py": "d64e85b89567bd8f349d326e887d179b0daac760be836b219fef2963b59f001c",
+    "build/goal-r1-touch-board/reject-callback-hoist.py": "2fce6b0effe165790d5aebd6bedb320ed075094ae9aa274f996652e4a46c85cb",
+    "build/goal-r1-touch-board/REA-0x4eb60.json": "29e230bc4f0048ea9256740acc2f742b7bd07c42066864ce4a3e94d40bac836f",
+    "build/goal-r1-touch-board/REA-0x4eb80.json": "214059d8cdd89890f92424acd14ef95402d9c2eb08a18c4a6b503a487892711f",
+    "build/goal-r1-touch-board/REA-0x4ebdc.json": "aac30912be64b94e386562e7f829b1999e43e85c90d2ee69920da5de5e3a97b3",
+    "build/goal-r1-touch-board/REA-0x933fc.json": "a1aa729c9728bb53dacd44f9cefdbdaf3714af6f560dd4974bc7af99d699733e",
+    "build/goal-r1-touch-board/REA-0x93404.json": "f28cc8db0ef02a654f23e76cbc4bda849f0ed7d3c5a8613896b6e3f0fd9adc71",
+    "r1/src/application/board/native_touch_board.c": "e8f40d668ebff3503b264ce3a0de96c3abfbf323249fad896eed33c58cd3a5a2",
+    "r1/src/application/board/native_touch_board.h": "9fd02a1a1e05dc15f5a61cf27c3a39dd999ec6a97c55b9d86859e7c9b8c1a000",
+    "r1/src/application/board/native_peripheral_bindings.c": "c2b283e25857766ad1046bdd837e859bd9baad5cccca5de057d019cce813a1e6",
+    "r1/src/application/runtime/native_touch_services.c": "838ff73a88388d0d4b079204b2df6acea4dbf7f9a894e226a4cb17da5135bcd8",
+    "r1/src/application/registry/stock_registry.c": "68c16fe9a2fcd328012b8613c9da9aa4cd31bd30df36a55e64e56e7b534246fa",
+    "build/sources-goal-r1-touch-board/report.json": "8672e3121de935ba1f9bce9c782233ae319b904fc816c32ce4d6e0fb16d7aac3",
+    "r1/src/sources.json": "6fa37d8afe1e50453bc47962bcfe463cd5163fb4f1b3d2a8033b02adbb77c9d3",
+    "r1/symbols/function-frontier.csv": "ec8a90223b0534812ac7fe4e8f0ed0fc5d4a1531cfc17614120f65437ba340d1",
+    "tools/build/source-plan.json": "eb04e4bf2c082d88801a99f173e0a4b58eba788ec05539d87b5ed02081002423"
+  }
+}

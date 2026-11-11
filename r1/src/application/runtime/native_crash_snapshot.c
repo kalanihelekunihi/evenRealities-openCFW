@@ -7,10 +7,13 @@ extern volatile uint8_t *r1_hr_daily_cache_accessor(void);
 extern volatile uint8_t *r1_spo2_daily_cache_accessor(void);
 extern volatile uint8_t *r1_hrv_daily_cache_accessor(void);
 extern uint32_t r1_hr_hour_query(uint32_t,uint32_t,volatile uint32_t *,volatile uint16_t *);
-/* Native5a324 plus shared tail3f47c. Provider state and private frame history
- * remain separate gates. The two query output pointers retain native offsets. */
-__attribute__((used,noinline)) uint32_t r1_crash_snapshot_body(volatile uint8_t *out,uint32_t timestamp,uint32_t offset,volatile uint32_t *frame)
+/* Stock 0x5a324 plus shared tail 0x3f47c. Query outputs are C locals;
+ * only their four-byte separation and initialized values are contractual. */
+uint32_t r1_health_crash_snapshot_builder(void *destination,uint32_t timestamp,uint32_t offset)
 {
+ volatile uint8_t *out=destination;
+ struct query_output {uint32_t sum;uint16_t count;};
+ _Static_assert(offsetof(struct query_output,count)==4,"native query output spacing");
  __aeabi_memclr((void *)(uintptr_t)out,52);
  int32_t minutes=(int16_t)offset;
  if(minutes>720)minutes=720;
@@ -39,9 +42,9 @@ __attribute__((used,noinline)) uint32_t r1_crash_snapshot_body(volatile uint8_t 
   uint32_t at=hour*3;
   if(cache[at]){
    out[46]=cache[at];out[47]=cache[at+1];out[48]=cache[at+2];
-   frame[0]=0;*(volatile uint16_t *)(frame+1)=0;
-   (void)r1_hr_hour_query(0,hour,frame,(volatile uint16_t *)(frame+1));
-   write32(out+4,frame[0]);write16(out+40,*(volatile uint16_t *)(frame+1));out[45]|=1;
+   volatile struct query_output query;query.sum=0;query.count=0;
+   (void)r1_hr_hour_query(0,hour,&query.sum,&query.count);
+   write32(out+4,query.sum);write16(out+40,query.count);out[45]|=1;
   }
  }
  cache=r1_spo2_daily_cache_accessor();
@@ -52,11 +55,4 @@ __attribute__((used,noinline)) uint32_t r1_crash_snapshot_body(volatile uint8_t 
  if(!count)return (uint32_t)(uintptr_t)cache;
  write16(out+42,count);write32(out+12,read32(cache+149));
  uint32_t flags=out[45]|4u;out[45]=(uint8_t)flags;return flags;
-}
-__attribute__((naked)) uint32_t r1_health_crash_snapshot_builder(void *out __attribute__((unused)),uint32_t timestamp __attribute__((unused)),uint32_t offset __attribute__((unused)))
-{
- __asm__ volatile("push {r2,r3,r4,r5,r6,lr}\n"
-                  "mov r3,sp\n"
-                  "bl r1_crash_snapshot_body\n"
-                  "pop {r2,r3,r4,r5,r6,pc}\n");
 }

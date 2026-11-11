@@ -5,8 +5,8 @@ extern uint32_t audio_system_alert_child_200749f0;
 extern uint32_t audio_system_alert_page_id_20003bcc;
 extern uint8_t audio_system_alert_active_20075025;
 extern uint32_t audio_system_alert_message_notify; /* native RAM 0x200749f4 */
-uint32_t audio_system_alert_font_200746e0
-    __attribute__((section(".g2.ram.system_alert_font"),used,aligned(4)));
+/* audio_system_alert_font_200746e0: stock 0x200746e0 is one cell; defined as an alias of audio_uart_ring_secondary_head_cell (Fix 31). */
+extern uint32_t audio_system_alert_font_200746e0;
 extern const uint8_t audio_system_alert_icon_disconnect_7747e4[];
 extern const uint8_t audio_system_alert_icon_connect_772928[];
 extern void audio_uart_page_44d878(uint32_t);

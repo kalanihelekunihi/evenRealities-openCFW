@@ -1,6 +1,6 @@
 /* Locked42f020 profile snapshot/restore and42ea68 config; native power/clock dependencies. */
 #include "adc_profile.h"
-#include "../platform-control/power_domains.h"
+#include "../platform-control/am_hal_pwrctrl_api.h"
 #include "../clock-manager/clock_manager.h"
 #define R(a) (*(volatile uint32_t *)(uintptr_t)(a))
 #define B(a) (*(volatile uint8_t *)(uintptr_t)(a))
@@ -13,7 +13,7 @@ uint32_t opencfw_bl_adc_profile_transfer(uint32_t context,uint32_t operation,uin
     uint32_t op=(uint8_t)operation;uint32_t save=(uint8_t)save_restore;
     if(op==0) {
         if(save&&!B(context+0xcu))return 7;
-        (void)opencfw_bl_mspi_mode_enter(15u);
+        (void)am_hal_pwrctrl_periph_enable(15u);
         if(!save)return 0;
         uint32_t status=clock_request(4u,15u);if(status)return status;
         for(uint32_t i=0;i<11;i++)R(profile_registers[i])=R(context+0x14u+4*i);
@@ -31,7 +31,7 @@ uint32_t opencfw_bl_adc_profile_transfer(uint32_t context,uint32_t operation,uin
             B(context+0xcu)=1;
         }
         (void)clock_release(4u,15u);
-        (void)opencfw_bl_mspi_mode_leave(15u);return 0;
+        (void)am_hal_pwrctrl_periph_disable(15u);return 0;
     }
     return 6;
 }

@@ -28,7 +28,7 @@ static const uint32_t attributes[9]={(uintptr_t)opencfw_boot_dfu_thread_name,0,0
 static void allocation_failure(void) {
     opencfw_boot_dfu_panic();
     *(volatile uint32_t *)(uintptr_t)UINT32_MAX=0;
-    for(;;)__asm__ volatile("":::"memory");
+    for(;;){ }
 }
 /* Stock 0x42dd70 (runtime_queue_context_init_42dd70) */
 void opencfw_boot_dfu_queue_init(void) {
@@ -72,3 +72,6 @@ void opencfw_boot_dfu_orchestrator(void) {
         else opencfw_boot_dfu_log(1,0x199u);
     }
 }
+
+/* Stock entry names that branch straight to the provider above. */
+__typeof__(opencfw_boot_dfu_send) opencfw_provider_42dca2 __attribute__((alias("opencfw_boot_dfu_send")));

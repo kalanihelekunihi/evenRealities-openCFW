@@ -526,15 +526,6 @@ bool yhm2710_clear_system_track(yhm2710_device *device) {
     return yhm2710_register_write_byte(device, UINT8_C(1), value);
 }
 
-bool yhm2710_set_charging_event(yhm2710_device *device) {
-    uint8_t value = 0u;
-    if (!yhm2710_register_read_byte(device, UINT8_C(3), &value)) {
-        return false;
-    }
-    value = (uint8_t)(value | UINT8_C(0x08));
-    return yhm2710_register_write_byte(device, UINT8_C(3), value);
-}
-
 void yhm2710_delay_209(void) {
     volatile uint32_t count = 0u;
     while (count < UINT32_C(209)) {

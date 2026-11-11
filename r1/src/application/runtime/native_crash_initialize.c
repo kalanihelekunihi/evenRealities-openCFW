@@ -1,42 +1,40 @@
+/* Stock R1 0x5a2b8: retained record metadata, snapshot, then checksum. */
 #include <stdint.h>
 #include <stddef.h>
+#include <string.h>
+#include "../board/native_battery_memory.h"
+#include "../../include/r1_stock_checksums.h"
+#include "../../vendor/time_calendar/time_calendar.h"
 extern volatile uint32_t r1_reset_trace_context[6];
+extern time_calendar_state r1_time_state;
 extern int32_t r1_time_utc_offset_get(void);
 extern uint32_t r1_time_backend_timestamp(void);
-extern volatile uint8_t r1_time_state[];
-uint32_t r1_time_status_get(void){return r1_time_state[11];}
-/* Native6abe4 reports736 bytes; initializer accepts896. Preserve both
- * contracts. Its payload ownership and snapshot builder remain providers. */
-extern void *r1_crash_record_marker_set(volatile uint16_t *length);
-extern void *memcpy(void *,const void *,size_t);
-extern void r1_health_crash_snapshot_builder(void *,uint32_t,uint32_t);
-extern uint32_t r1_stock_crc16_modbus(const void *,uint32_t);
-__attribute__((used,noinline)) uint32_t r1_crash_initialize_body(volatile uint16_t *frame)
+extern void *r1_crash_record_marker_set(volatile uint16_t *);
+extern uint32_t r1_health_crash_snapshot_builder(void *,uint32_t,uint32_t);
+uint32_t r1_time_status_get(void)
+{
+ _Static_assert(offsetof(time_calendar_state,time_update_pending)==11,"native status byte");
+ return ((const volatile time_calendar_state *)&r1_time_state)->time_update_pending;
+}
+uint32_t r1_health_crash_record_initializer(void)
 {
  uint32_t base=r1_reset_trace_context[2];
- volatile uint32_t *words=(volatile uint32_t *)(uintptr_t)base;
- volatile uint16_t *halves=(volatile uint16_t *)(uintptr_t)base;
- words[0]=UINT32_C(0x5a5a5a5a);
- halves[3]=(uint16_t)r1_time_utc_offset_get();
- words[2]=r1_time_backend_timestamp();
+ volatile uint8_t *record=(volatile uint8_t *)(uintptr_t)base;
+ write32(record,UINT32_C(0x5a5a5a5a));
+ write16(record+6,(uint16_t)r1_time_utc_offset_get());
+ write32(record+8,r1_time_backend_timestamp());
  uint32_t valid=r1_time_status_get();
- halves[2]=(uint16_t)((halves[2]&0xfffeu)|(valid&1u));
- frame[0]=0;
- void *blob=r1_crash_record_marker_set(frame);
- if(blob && frame[0]==896){
+ write16(record+4,(read16(record+4)&0xfffeu)|(valid&1u));
+ volatile uint16_t length=0;
+ void *blob=r1_crash_record_marker_set(&length);
+ /* The actual getter advertises736 bytes; stock admits only896 here.
+  * Preserve the distinct contracts and do not fabricate a producer payload. */
+ if(blob && length==896){
   (void)memcpy((void *)(uintptr_t)(base+12),blob,896);
-  *(volatile uint32_t *)(uintptr_t)(base+908)=UINT32_C(0x5a5a5a5a);
+  write32(record+908,UINT32_C(0x5a5a5a5a));
  }
- uint32_t offset=halves[3];
- r1_health_crash_snapshot_builder((void *)(uintptr_t)(base+912),words[2],offset);
- uint32_t crc=r1_stock_crc16_modbus((const void *)(uintptr_t)base,964);
- *(volatile uint16_t *)(uintptr_t)(base+964)=(uint16_t)crc;
+ (void)r1_health_crash_snapshot_builder((void *)(uintptr_t)(base+912),read32(record+8),read16(record+6));
+ uint32_t crc=r1_stock_crc16_modbus((const uint8_t *)(uintptr_t)record,964);
+ write16(record+964,crc);
  return crc;
-}
-__attribute__((naked)) uint32_t r1_health_crash_record_initializer(void)
-{
- __asm__ volatile("push {r3,r4,r5,r6,r7,lr}\n"
-                  "mov r0,sp\n"
-                  "bl r1_crash_initialize_body\n"
-                  "pop {r3,r4,r5,r6,r7,pc}\n");
 }

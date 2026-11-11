@@ -16,9 +16,12 @@ void audio_system_alert_close_464c36(uint32_t application_id,uint32_t payload,
     const uint16_t id=(uint16_t)application_id;
     const uint16_t bytes=(uint16_t)length;
     if((audio_log_flags()&2u)!=0u)
-        audio_log_extended(4u,module,path,function,0x7fu,message,id,bytes,context);
+        audio_log_extended(4u,module,path,function,0x7fu,message,id,bytes);
     if((audio_log_flags()&1u)!=0u||(audio_log_flags()&4u)!=0u)
         (void)compressed_log_output(0x10800000u,compact,compact,id,bytes);
     (void)audio_uart_master_request_core_464772(id,(const void *)(uintptr_t)payload,
                                                    bytes,context,5u,2u,0u);
 }
+/* Single implementation of stock RequestDisplayStop 0x464c36. */
+__typeof__(audio_system_alert_close_464c36) audio_uart_master_display_stop
+    __attribute__((alias("audio_system_alert_close_464c36")));

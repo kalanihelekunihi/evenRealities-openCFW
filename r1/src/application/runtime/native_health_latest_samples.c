@@ -1,7 +1,49 @@
-/* Native calendar frames; symbolic instructions and typed literals only. */
-__attribute__((naked,section(".text.r1_hr_latest_sample"))) void r1_hr_latest_sample(void) { __asm__ volatile("NCF_8d6ac:\npush\t{r2, r3, r4, lr}\nNCF_8d6ae:\nmovs\tr4, r0\nNCF_8d6b0:\nmov.w\tr0, #0\nNCF_8d6b4:\nbeq.n NCF_8d6d4\nNCF_8d6b6:\nstr\tr0, [r4, #0]\nNCF_8d6b8:\nstr\tr0, [r4, #4]\nNCF_8d6ba:\nstr\tr0, [sp, #0]\nNCF_8d6bc:\nstr\tr0, [sp, #4]\nNCF_8d6be:\nmov\tr0, sp\nNCF_8d6c0:\nbl r1_hr_latest_packed\nNCF_8d6c4:\ncmp\tr0, #0\nNCF_8d6c6:\nbeq.n NCF_8d6d4\nNCF_8d6c8:\nldrb.w\tr1, [sp]\nNCF_8d6cc:\nstrb\tr1, [r4, #0]\nNCF_8d6ce:\nldr.w\tr1, [sp, #1]\nNCF_8d6d2:\nstr\tr1, [r4, #4]\nNCF_8d6d4:\npop\t{r2, r3, r4, pc}\n.space 2,0\n"); }
-__attribute__((naked,section(".text.r1_hrv_latest_sample"))) void r1_hrv_latest_sample(void) { __asm__ volatile("NCF_8d858:\npush\t{r2, r3, r4, lr}\nNCF_8d85a:\nmovs\tr4, r0\nNCF_8d85c:\nmov.w\tr0, #0\nNCF_8d860:\nbeq.n NCF_8d882\nNCF_8d862:\nstrh\tr0, [r4, #0]\nNCF_8d864:\nstrh\tr0, [r4, #2]\nNCF_8d866:\nstr\tr0, [r4, #4]\nNCF_8d868:\nstr\tr0, [sp, #0]\nNCF_8d86a:\nstr\tr0, [sp, #4]\nNCF_8d86c:\nmov\tr0, sp\nNCF_8d86e:\nbl r1_hrv_latest_packed\nNCF_8d872:\ncmp\tr0, #0\nNCF_8d874:\nbeq.n NCF_8d882\nNCF_8d876:\nldrh.w\tr1, [sp]\nNCF_8d87a:\nstrh\tr1, [r4, #0]\nNCF_8d87c:\nldr.w\tr1, [sp, #2]\nNCF_8d880:\nstr\tr1, [r4, #4]\nNCF_8d882:\npop\t{r2, r3, r4, pc}\n"); }
-__attribute__((naked,section(".text.r1_spo2_latest_sample"))) void r1_spo2_latest_sample(void) { __asm__ volatile("NCF_8e524:\npush\t{r2, r3, r4, lr}\nNCF_8e526:\nmovs\tr4, r0\nNCF_8e528:\nmov.w\tr0, #0\nNCF_8e52c:\nbeq.n NCF_8e54c\nNCF_8e52e:\nstrb\tr0, [r4, #0]\nNCF_8e530:\nstr\tr0, [r4, #4]\nNCF_8e532:\nstr\tr0, [sp, #0]\nNCF_8e534:\nstr\tr0, [sp, #4]\nNCF_8e536:\nmov\tr0, sp\nNCF_8e538:\nbl r1_spo2_latest_packed\nNCF_8e53c:\ncmp\tr0, #0\nNCF_8e53e:\nbeq.n NCF_8e54c\nNCF_8e540:\nldrb.w\tr1, [sp]\nNCF_8e544:\nstrb\tr1, [r4, #0]\nNCF_8e546:\nldr.w\tr1, [sp, #1]\nNCF_8e54a:\nstr\tr1, [r4, #4]\nNCF_8e54c:\npop\t{r2, r3, r4, pc}\n"); }
-__attribute__((naked,section(".text.r1_hr_latest_packed"))) void r1_hr_latest_packed(void) { __asm__ volatile("NCF_5ace8:\ncbz r0, NCF_5ad00\nNCF_5acea:\nldr r1, NCF_5ad04\nNCF_5acec:\nldrb.w\tr2, [r1, #75]\nNCF_5acf0:\ncbz r2, NCF_5ad00\nNCF_5acf2:\nldr.w\tr2, [r1, #75]!\nNCF_5acf6:\nstr\tr2, [r0, #0]\nNCF_5acf8:\nldrb\tr1, [r1, #4]\nNCF_5acfa:\nstrb\tr1, [r0, #4]\nNCF_5acfc:\nmovs\tr0, #1\nNCF_5acfe:\nbx\tlr\nNCF_5ad00:\nmovs\tr0, #0\nNCF_5ad02:\nbx\tlr\nNCF_5ad04:\n.word r1_health_storage_hr_prefix\n"); }
-__attribute__((naked,section(".text.r1_hrv_latest_packed"))) void r1_hrv_latest_packed(void) { __asm__ volatile("NCF_5af20:\ncbz r0, NCF_5af3c\nNCF_5af22:\nldr r1, NCF_5af40\nNCF_5af24:\nldrh.w\tr1, [r1, #147]\nNCF_5af28:\ncbz r1, NCF_5af3c\nNCF_5af2a:\nldr r1, NCF_5af40\nNCF_5af2c:\nadds\tr1, #128\nNCF_5af2e:\nldr.w\tr2, [r1, #19]!\nNCF_5af32:\nstr\tr2, [r0, #0]\nNCF_5af34:\nldrh\tr1, [r1, #4]\nNCF_5af36:\nstrh\tr1, [r0, #4]\nNCF_5af38:\nmovs\tr0, #1\nNCF_5af3a:\nbx\tlr\nNCF_5af3c:\nmovs\tr0, #0\nNCF_5af3e:\nbx\tlr\nNCF_5af40:\n.word r1_health_storage_hrv_prefix\n"); }
-__attribute__((naked,section(".text.r1_spo2_latest_packed"))) void r1_spo2_latest_packed(void) { __asm__ volatile("NCF_5baf4:\ncbz r0, NCF_5bb0c\nNCF_5baf6:\nldr r1, NCF_5bb10\nNCF_5baf8:\nldrb.w\tr2, [r1, #75]\nNCF_5bafc:\ncbz r2, NCF_5bb0c\nNCF_5bafe:\nldr.w\tr2, [r1, #75]!\nNCF_5bb02:\nstr\tr2, [r0, #0]\nNCF_5bb04:\nldrb\tr1, [r1, #4]\nNCF_5bb06:\nstrb\tr1, [r0, #4]\nNCF_5bb08:\nmovs\tr0, #1\nNCF_5bb0a:\nbx\tlr\nNCF_5bb0c:\nmovs\tr0, #0\nNCF_5bb0e:\nbx\tlr\nNCF_5bb10:\n.word r1_health_storage_spo2_prefix\n"); }
+#include <stdint.h>
+#include <stddef.h>
+/* Packed volatile fields retain native unaligned access widths and order. */
+typedef struct __attribute__((packed,may_alias)) { uint32_t value; } wire32;
+typedef struct __attribute__((packed,may_alias)) { uint16_t value; } wire16;
+_Static_assert(sizeof(wire32)==4 && _Alignof(wire32)==1 && sizeof(wire16)==2 && _Alignof(wire16)==1,"wire access ABI");
+extern uint8_t r1_health_storage_hr_prefix[],r1_health_storage_hrv_prefix[],r1_health_storage_spo2_prefix[];
+uint32_t r1_hr_latest_packed(void *),r1_hrv_latest_packed(void *),r1_spo2_latest_packed(void *);
+
+__attribute__((noinline,used)) static uint32_t
+latest_sample_body(volatile uint8_t *output,volatile uint32_t *frame,uint32_t kind)
+{
+    if (!output) return 0;
+    if (kind==0) {
+        ((volatile wire32 *)output)->value=0;
+        ((volatile wire32 *)(output+4))->value=0;
+    } else if (kind==1) {
+        ((volatile wire16 *)output)->value=0;
+        ((volatile wire16 *)(output+2))->value=0;
+        ((volatile wire32 *)(output+4))->value=0;
+    } else {
+        output[0]=0;
+        ((volatile wire32 *)(output+4))->value=0;
+    }
+    frame[0]=0;frame[1]=0;
+    uint32_t result=kind==0 ? r1_hr_latest_packed((void *)frame) :
+        (kind==1 ? r1_hrv_latest_packed((void *)frame) : r1_spo2_latest_packed((void *)frame));
+    if (result) {
+        const volatile uint8_t *source=(const volatile uint8_t *)frame;
+        if (kind==1) {
+            ((volatile wire16 *)output)->value=((const volatile wire16 *)source)->value;
+            ((volatile wire32 *)(output+4))->value=((const volatile wire32 *)(source+2))->value;
+        } else {
+            output[0]=source[0];
+            ((volatile wire32 *)(output+4))->value=((const volatile wire32 *)(source+1))->value;
+        }
+    }
+    return result;
+}
+
+/* Ordinary C owns the initialized provider scratch. Caller-scratch register
+ * values and the private frame address are outside the public C interface. */
+#define LATEST_ENTRY(name,kind) \
+uint32_t name(void *output) \
+{ volatile uint32_t frame[2];return latest_sample_body(output,frame,kind); }
+LATEST_ENTRY(r1_hr_latest_sample,0)
+LATEST_ENTRY(r1_hrv_latest_sample,1)
+LATEST_ENTRY(r1_spo2_latest_sample,2)
+#undef LATEST_ENTRY

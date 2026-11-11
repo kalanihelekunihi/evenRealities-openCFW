@@ -1,0 +1,425 @@
+{
+  "source": {
+    "source": "r1/src/application/runtime/native_wear_living.c",
+    "payload": "r1-application",
+    "role": "candidate",
+    "toolchain": "clang",
+    "link": true,
+    "expect": "compile",
+    "returncode": 0,
+    "argv": [
+      "/usr/bin/clang",
+      "--target=arm-none-eabi",
+      "-mcpu=cortex-m4",
+      "-mthumb",
+      "-mfpu=fpv4-sp-d16",
+      "-mfloat-abi=hard",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-fno-strict-aliasing",
+      "-fshort-enums",
+      "-std=c11",
+      "-Os",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-DNRF52840_XXAA",
+      "-DFLOAT_ABI_HARD",
+      "-DNRF_SD_BLE_API_VERSION=7",
+      "-DNRF_DFU_SVCI_ENABLED",
+      "-DNRF_DFU_TRANSPORT_BLE=1",
+      "-DS140",
+      "-DSOFTDEVICE_PRESENT",
+      "-DFREERTOS",
+      "-DCONFIG_NFCT_PINS_AS_GPIOS",
+      "-DCONFIG_GPIO_AS_PINRESET",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/r1/src/config/sdk",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-wear-living-c/generated/r1",
+      "-include",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-wear-living-c/generated/r1/nrf_svci_clang.h",
+      "-isystem",
+      "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/external/freertos/portable/GCC/nrf52",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/external/freertos/portable/CMSIS/nrf52",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/external/segger_rtt",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/ble/common",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/ble/ble_advertising",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/ble/peer_manager",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/ble/nrf_ble_gatt",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/atomic",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/atomic_flags",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/atomic_fifo",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/delay",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/fds",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/fstorage",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/mutex",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/sortlist",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/timer",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/experimental_section_vars",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/log",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/log/src",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/strerror",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/util",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/softdevice/common",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/softdevice/s140/headers",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/softdevice/s140/headers/nrf52",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/toolchain/cmsis/include",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/integration/nrfx",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/integration/nrfx/legacy",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx/drivers/include",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx/hal",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx/soc",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx/mdk",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/ble/ble_link_ctx_manager",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/ble/ble_services/ble_dfu",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/ble/nrf_ble_qwr",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/balloc",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/bootloader/dfu",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/memobj",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/pwr_mgmt",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/ringbuf",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/external/fprintf",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx/drivers/src",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/bootloader",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/bootloader/ble_dfu",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/svc",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/stack_info",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/mem_manager",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/queue",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/scheduler",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/r1/src/config/rtos",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/third-party/upstream/freertos-kernel/include",
+      "-MD",
+      "-MF",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-wear-living-c/r1/r1-application/r1__src__application__runtime__native_wear_living.c.d",
+      "-c",
+      "/Users/kalani/Repo/evenRealities-openCFW/r1/src/application/runtime/native_wear_living.c",
+      "-o",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-wear-living-c/r1/r1-application/r1__src__application__runtime__native_wear_living.c.o"
+    ],
+    "source_sha256": "5c5d2ca7d16d848d2652df10833581b14c737d174cab894a7bd411840bda69b5",
+    "object_sha256": "7532adee33898d7d2c8215b5e153d010ae60913443f4dd6f901fe2d686afd02f",
+    "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-wear-living-c/r1/r1-application/r1__src__application__runtime__native_wear_living.c.o",
+    "strong": [
+      "r1_wear_living_topic_callback"
+    ],
+    "weak": [],
+    "undefined": [
+      "nrf_log_frontend_std_1",
+      "osKernelGetTickCount",
+      "r1_sensor_stream_unregister_by_name",
+      "r1_structured_log_format",
+      "r1_structured_log_mode_get",
+      "r1_wear_living_status",
+      "r1_wear_living_stream",
+      "r1_wear_living_timestamp"
+    ]
+  },
+  "stock_REA": {
+    "evidence_id": "ev_e6a962c6313e900b90e41c169bcceb3af987342ad0f4a48ed1280ff9aa946164",
+    "subject": {
+      "name": "stock.elf",
+      "digest": {
+        "sha256": "25b4a29af80ec8edab5bd861ba9b74a6e22eab29dc3d7a809a16869e8a140f04"
+      },
+      "local_path": "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-queue-reset-c/stock.elf",
+      "format": "elf",
+      "architecture": "arm"
+    },
+    "provider": {
+      "id": "ghidra",
+      "name": "Ghidra",
+      "version": "12.1.4"
+    },
+    "analysis_profile": {
+      "provider": {
+        "id": "ghidra",
+        "name": "Ghidra",
+        "version": "12.1.4"
+      },
+      "parameters": {
+        "target_kind": "executable",
+        "target_format": "elf",
+        "architecture": "arm",
+        "available_architectures": [
+          "arm"
+        ],
+        "import_mode": "ephemeral-source-immutable",
+        "annotation_policy": "atomic-function-entry-metadata-v1",
+        "load_image_observations": "source-mappings-entry-context-v2",
+        "function_body_evidence": "complete-inclusive-ranges-v1",
+        "function_references": "complete-body-and-entry-reference-manager-v2",
+        "call_relationship_coverage": "function-body-call-coverage-v5",
+        "function_dossier_coverage": "observed-facets-and-call-relationships-v1",
+        "string_inventory_evidence": "defined-data-coverage-v1",
+        "location_resolution": "explicit-address-exact-entry-symbol-first-v3",
+        "procedure_file_offset_resolution": "address-first-unique-target-source-mapping-v2",
+        "instruction_flow_evidence": "decoded-return-pcode-v1",
+        "instruction_references": "exact-address-incoming-v1",
+        "function_boundary_observations": "ghidra-function-boundary-limitations-v3",
+        "no_return_repair": "returning-imports-decoded-return-v2",
+        "process_launch": "inspected-jvm-launch-support-v1",
+        "jump_table_evidence": "typed-case-default-blocks-v1",
+        "decompiler_jump_loads": true,
+        "loader": "auto-from-header",
+        "language_id": "auto-from-header",
+        "compiler_spec_id": "auto-default",
+        "analyzer_preset": "ghidra-default"
+      },
+      "digest": "7e46711069eea041af1b9b99e34115c13332795e5cda76e584a722f529ec70de"
+    },
+    "predicate_type": "rea.analysis",
+    "operation": "read_bytes",
+    "parameters": {
+      "address": "0x3ce44",
+      "length": 168
+    },
+    "raw_result": {
+      "address": "0x3ce44",
+      "requested_bytes": 168,
+      "returned_bytes": 168,
+      "bytes_hex": "10b5174c4878207740f01efa206254f04bfbc00703d154f047fb400706d5237f10a210a14ff0446054f0e4fb54f03cfb80070ad512481349227f401ac008032101eb004010a13cf09dfd144ce168002904d013a04cf036fe0020e06010bd000054e401205b52494e475d616c676f2077656172207669766f3a20256400000000fc440c001c440c00616c676f2077656172207669766f3a2025640000946e00207765617200000000",
+      "complete": true
+    },
+    "normalized_result": {
+      "address": "0x3ce44",
+      "requested_bytes": 168,
+      "returned_bytes": 168,
+      "bytes_hex": "10b5174c4878207740f01efa206254f04bfbc00703d154f047fb400706d5237f10a210a14ff0446054f0e4fb54f03cfb80070ad512481349227f401ac008032101eb004010a13cf09dfd144ce168002904d013a04cf036fe0020e06010bd000054e401205b52494e475d616c676f2077656172207669766f3a20256400000000fc440c001c440c00616c676f2077656172207669766f3a2025640000946e00207765617200000000",
+      "complete": true
+    },
+    "confidence": "observed",
+    "authority": "shipped-artifact",
+    "environment": null,
+    "limitations": [
+      "The session serves operations only after Ghidra reports default auto-analysis complete; incomplete analysis does not expose partial results.",
+      "The imported Program and temporary project are ephemeral and deleted on close. Annotation operations edit session database metadata; original executable bytes are never written.",
+      "Cancelling an active Ghidra request terminates its ephemeral database and discards session annotations. The selected target remains open; the next provider query imports the original artifact again.",
+      "Default-space addresses use lowercase 0x-prefixed hexadecimal; other address spaces use <percent-encoded-space>:0x<hex>.",
+      "Bytes reflect Ghidra's initialized memory, including loader fixups. Reads stop at an unmapped or uninitialized byte and report completeness explicitly.",
+      "macOS sessions require a matching executable Ghidra native decompiler; REA checks for it but does not build native components or change Gatekeeper quarantine state."
+    ],
+    "relationship_coverage": null,
+    "locations": [],
+    "evidence_links": []
+  },
+  "replay": {
+    "paired_cases": 5380,
+    "source_object_sha256": "7532adee33898d7d2c8215b5e153d010ae60913443f4dd6f901fe2d686afd02f",
+    "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "provider_frames": {
+      "native": {
+        "osKernelGetTickCount": [
+          8
+        ],
+        "r1_structured_log_mode_get": [
+          8
+        ],
+        "r1_sensor_stream_unregister_by_name": [
+          8
+        ],
+        "r1_structured_log_format": [
+          8
+        ],
+        "nrf_log_frontend_std_1": [
+          8
+        ]
+      },
+      "C": {
+        "osKernelGetTickCount": [
+          8
+        ],
+        "r1_structured_log_mode_get": [
+          8
+        ],
+        "r1_sensor_stream_unregister_by_name": [
+          8
+        ],
+        "r1_structured_log_format": [
+          8
+        ],
+        "nrf_log_frontend_std_1": [
+          8
+        ]
+      }
+    },
+    "limits": [
+      "Tick/mode/log/unregister providers modeled with status, stamp, handle and payload mutation",
+      "Aliased payloads, wrapped address fault, ignored context/length and fresh post-log handle covered",
+      "Public state/write widths/args/faults compared; preserved registers/SP checked on normal return; masks/FPSCR checked",
+      "No FP instructions in either callback; void R0/fault PC/caller-clobbered registers/APSR/private stack excluded",
+      "No physical/concurrent execution proof"
+    ]
+  },
+  "probe_integration": {
+    "actual_C_living_and_off_executed": true,
+    "living_object_sha256": "7532adee33898d7d2c8215b5e153d010ae60913443f4dd6f901fe2d686afd02f",
+    "phases_per_case": 3,
+    "paired_cases": 384,
+    "source_object_sha256": "1d6e2ec2333252d43a8d229fdad83e07e8d98ee37bfeaa1083cd167eefbc0beb",
+    "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "FP_context_initialized_before_FPSCR": true,
+    "provider_frames": {
+      "native": {
+        "osKernelGetTickCount": [
+          8,
+          40
+        ],
+        "r1_sensor_stream_register_by_name": [
+          40
+        ],
+        "r1_structured_log_mode_get": [
+          8
+        ],
+        "r1_structured_log_format": [
+          8
+        ],
+        "nrf_log_frontend_std_1": [
+          8
+        ],
+        "r1_sensor_stream_unregister_by_name": [
+          8
+        ]
+      },
+      "C": {
+        "osKernelGetTickCount": [
+          8,
+          24
+        ],
+        "r1_sensor_stream_register_by_name": [
+          24
+        ],
+        "r1_structured_log_mode_get": [
+          8
+        ],
+        "r1_structured_log_format": [
+          8
+        ],
+        "nrf_log_frontend_std_1": [
+          8
+        ],
+        "r1_sensor_stream_unregister_by_name": [
+          8
+        ]
+      }
+    },
+    "limits": [
+      "Actual C wear-off, living callback and wear-off execute sequentially; tick/register/unregister/mode/log providers modeled",
+      "Unsigned tick wrap, fresh timestamp, strict optical/float thresholds, byte counter wrap and signaling compare/conversion tested",
+      "Public memory/args/faults/FPSCR compared; preserved regs/SP checked on normal return; masks checked",
+      "Void R0/fault PC/caller-clobbered registers/APSR/private stack excluded",
+      "No physical/concurrent execution proof"
+    ]
+  },
+  "actual_C_off": {
+    "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-wear-living-c/r1/r1-application/r1__src__application__runtime__native_wear_off_decision.c.o",
+    "sha256": "1d6e2ec2333252d43a8d229fdad83e07e8d98ee37bfeaa1083cd167eefbc0beb"
+  },
+  "negative_controls": [
+    {
+      "name": "wrong-payload-byte",
+      "rejected": true
+    },
+    {
+      "name": "truncated-timestamp",
+      "rejected": true
+    },
+    {
+      "name": "stale-log-status",
+      "rejected": true
+    },
+    {
+      "name": "early-handle-clear",
+      "rejected": true
+    },
+    {
+      "name": "wrong-tag",
+      "rejected": true
+    },
+    {
+      "name": "null-guard",
+      "rejected": true
+    },
+    {
+      "name": "stale-handle",
+      "rejected": true
+    }
+  ],
+  "qualification": {
+    "candidate_units": 1,
+    "compiled_units": 1,
+    "units": [
+      {
+        "source": "r1/src/application/runtime/native_wear_living.c",
+        "payload": "r1-application",
+        "evidence": "r1/symbols/function-frontier.csv",
+        "selected": [],
+        "compiled": true,
+        "rejections": {
+          "anchored_relocation_pattern_not_exact": 1
+        },
+        "source_implementation_completeness": "not established by compilation or byte matching",
+        "reason": "no exact anchored body under tested production bindings; integration remains unfinished"
+      }
+    ]
+  },
+  "composition": {
+    "report": "build/sources-goal-r1-wear-living-c/report.json",
+    "sha256": "74da99b3359e01bd4a9b28f2fc87563b7e18a82b7fe90bd9752835445e10b55c",
+    "units": 650,
+    "unchanged_prior_objects": 649,
+    "prototype_updated_sources": [
+      "r1/src/application/runtime/native_wear_off_decision.c"
+    ],
+    "application_imports": 171,
+    "bootloader_imports": 34,
+    "resolved_import": "r1_wear_living_topic_callback",
+    "new_native_imports": []
+  },
+  "hybrid": {
+    "report": "build/hybrid-goal-r1-wear-living-c/build-report.json",
+    "sha256": "b8467bb9ba93ebc368b3d97f20381aaaf3c5767c476198cd44c01484625429aa",
+    "totals": {
+      "binary-pull-through": 641815,
+      "source-built": 4345,
+      "resource-file": 248
+    },
+    "canonical_plan_unchanged": true
+  },
+  "artifacts": {
+    "build/goal-r1-wear-living-c/verify.py": "ecaaec288411176b672d3c106f4aa8b56823b280956c49ed07cd98f966f1bfe4",
+    "build/goal-r1-wear-living-c/negative.py": "6798feadcb6cd89abff6fadf1dd619037c0f33a488eecfb1fa9d1e639c67f814",
+    "build/goal-r1-wear-living-c/finalize.py": "4bbe4788e2a4de33e4865592d870caa87cf7cfda40567bb816fbc3ee9b7c2a8c",
+    "build/goal-r1-wear-living-c/source.elf": "ba0658be34b97b6c376e4f873a8f63a84cacc032997e992cd15fd46d51b35aed",
+    "build/goal-r1-wear-living-c/probe-chain/verify.py": "35212617df8481cdbfc0d9bf01a4fc87798effd68f3967e5d7894f5ab206ab74",
+    "build/goal-r1-wear-living-c/probe-chain/source.elf": "46edf856316dc23b14ad9f2d983f5c1367a3f9c7d1b7f4bce9b814d8077a997e",
+    "build/goal-r1-wear-living-c/wrong-payload-byte.c": "30c916a47dff39ec1c5a255916c381275a24570324ea086a27b2e1b3f6cfe5d7",
+    "build/goal-r1-wear-living-c/wrong-payload-byte.o": "4ed38ba72713f118ad931564aa8a794e1607f22d8041fc70e57fb64f4e3e0eaa",
+    "build/goal-r1-wear-living-c/wrong-payload-byte.log": "a767028a0303942c316b39c2806cf22c7b5109f9af05a31ada770202053e6b12",
+    "build/goal-r1-wear-living-c/truncated-timestamp.c": "ebbdb0c7d34692e624de300e737a297664e9cd9a8a3e7a57e0c85acc491a20a4",
+    "build/goal-r1-wear-living-c/truncated-timestamp.o": "71195450e5ef99ef93a3edda061c8e05f2a7c25805a65a3510b3b99463a85787",
+    "build/goal-r1-wear-living-c/truncated-timestamp.log": "0c2cb14647d1c35ebd76e052f6aad0aef108b7af0838d64a59132dfcd2379f7c",
+    "build/goal-r1-wear-living-c/stale-log-status.c": "0d24ed76f0d9b5cd37459e861b6550a8f83bc3fc079561f6b0240d89839e16d8",
+    "build/goal-r1-wear-living-c/stale-log-status.o": "d0eb01ebb7a005f805ebec573cbe1fa74808dcee931c04d3ea3007a05e2ec99d",
+    "build/goal-r1-wear-living-c/stale-log-status.log": "21c7eaf3a89a15904731829780f00f0a08cd6596c61df7bf9411a9ef54652b9d",
+    "build/goal-r1-wear-living-c/early-handle-clear.c": "f841520c6b38ad8aa5bb3432f2f72e46fc3d9c9c973e9e9371468745681f40e5",
+    "build/goal-r1-wear-living-c/early-handle-clear.o": "5c0458e73facb6b5a4e54d0abd42bba0143b28bb65162be5478c5d218b85cf8d",
+    "build/goal-r1-wear-living-c/early-handle-clear.log": "f83ca9821c87f99108bd957939e3362f229e83b08b437b2d73ca5a5b965bd04e",
+    "build/goal-r1-wear-living-c/wrong-tag.c": "30f0b408d84e5279218a37699218f8c1f546dbf818bf87172cfedc238ad04ff7",
+    "build/goal-r1-wear-living-c/wrong-tag.o": "23e0dc5eff90ccd24688b8a7ca76097018a8e68b59185a22f427417e6b3eb79f",
+    "build/goal-r1-wear-living-c/wrong-tag.log": "fd417b180b78157523e58f3e86e5d1b86bb4a2993253fda7f7365da5b51a4875",
+    "build/goal-r1-wear-living-c/null-guard.c": "e9413112234162fbe5fb714f0219442d993c39fc94308971012fedebd3eda500",
+    "build/goal-r1-wear-living-c/null-guard.o": "a2b5f1eb7f61861b948cb82af2df4379851e71c4593d85d23bad987eb381205c",
+    "build/goal-r1-wear-living-c/null-guard.log": "c7d348a91ef76879848498aec39df711f7f59f6a7ffc70513b6db4735be5208a",
+    "build/goal-r1-wear-living-c/stale-handle.c": "0e58e1c72de472fe6ecea5d150defd9261704c335b2a82d9c627e3e2b4dd09ab",
+    "build/goal-r1-wear-living-c/stale-handle.o": "92c134053e7b1dfd6095cf2e9053ad9ca3f8486fccd52364641c14c656a7292c",
+    "build/goal-r1-wear-living-c/stale-handle.log": "467452973e15fd652ffb13b6459a2d1fd334e0344edca5e6adc2811aa721fc83"
+  },
+  "limits": [
+    "Ordinary C callback; existing off unit owns status/timestamp/handle; no new RAM",
+    "Actual C off/callback/off sequence; tick/register/unregister/mode/log providers modeled",
+    "Native and C direct callback provider frames both eight bytes; void R0/fault PC/caller-clobbered registers/APSR/private stack excluded",
+    "No new exact-qualified bytes, complete source-only link, physical hardware or concurrent execution proof"
+  ]
+}

@@ -120,11 +120,11 @@ extern void audio_uart_page_441246(void *obj, int32_t v, uint32_t sel);  /* styl
 extern void audio_uart_page_441254(void *obj, int32_t v, uint32_t sel);  /* style pad_column */
 extern void audio_uart_page_44127e(void *obj, uint32_t c, uint32_t sel); /* style bg_color */
 extern void audio_uart_page_44129e(void *obj, uint32_t v, uint32_t sel); /* style bg_opa */
-extern void audio_uart_page_44131c(void *obj, int32_t v, uint32_t sel);  /* style border_width */
+extern void lv_obj_set_style_border_width(void *obj, int32_t v, uint32_t sel);  /* style border_width */
 extern void audio_lv_style_color_44140e(void *obj, uint32_t c, uint32_t sel); /* style text_color */
 extern void audio_lv_style_font_44143e(void *obj, uint32_t font, uint32_t sel); /* style text_font */
 extern void audio_lv_style_a_44145a(void *obj, uint32_t v, uint32_t sel); /* style text_align */
-extern void audio_uart_page_44146a(void *obj, int32_t v, uint32_t sel);  /* style radius */
+extern void lv_obj_set_style_radius(void *obj, int32_t v, uint32_t sel);  /* style radius */
 extern void style_prop_2d_441478(void *obj, uint32_t v, uint32_t sel);   /* style clip_corner */
 extern void audio_lv_delete_44d7b8(void *obj);                  /* lv_obj_delete */
 extern void audio_uart_page_44d878(void *obj);                  /* lv_obj_clean */
@@ -332,7 +332,7 @@ static void *status_icon_row(void *parent)
     void *row = audio_uart_page_43de82(parent);
     audio_lv_object_size_call_43f4c0(row, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
     audio_uart_page_44129e(row, 0u, LV_PART_MAIN);
-    audio_uart_page_44131c(row, 0, LV_PART_MAIN);
+    lv_obj_set_style_border_width(row, 0, LV_PART_MAIN);
     calendar_obj_set_style_pad_all_4ed7d8(row, 0, LV_PART_MAIN);
     audio_uart_page_48ba78(row, LV_FLEX_FLOW_ROW);
     audio_uart_page_48ba92(row, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER);
@@ -346,7 +346,7 @@ static void *status_icon_row(void *parent)
     return row;
 }
 
-/* Two-line placeholder (icon + line 1, then centred line 2) under `column`. */
+/* Two-line default (icon + line 1, then centred line 2) under `column`. */
 static void status_two_lines(void *column, const char *key1, const char *key2)
 {
     void *row = status_icon_row(column);
@@ -385,7 +385,7 @@ static void *item_label(void *parent, int32_t y)
     return label;
 }
 
-/* Builds the expanded calendar page under `parent`: either a placeholder
+/* Builds the expanded calendar page under `parent`: either a default
  * (BLE disconnected / no events / default) or the scrolling event list with a
  * proportional scrollbar when the content is taller than 256 px. */
 void calendar_ext_page_create_4eef7c(void *parent)
@@ -397,7 +397,7 @@ void calendar_ext_page_create_4eef7c(void *parent)
         audio_uart_page_44e3ca(box, LV_DIR_VER);
         audio_uart_page_44e368(box, LV_SCROLLBAR_MODE_AUTO);
         calendar_obj_set_style_pad_all_4ed7d8(box, 0, LV_PART_MAIN);
-        audio_uart_page_44131c(box, 0, LV_PART_MAIN);
+        lv_obj_set_style_border_width(box, 0, LV_PART_MAIN);
         audio_uart_page_44129e(box, 0u, LV_PART_MAIN);
         audio_uart_page_44127e(box, audio_lv_color_44104c(COLOR_WHITE), LV_PART_SCROLLBAR);
         audio_uart_page_44129e(box, 200u, LV_PART_SCROLLBAR);
@@ -405,7 +405,7 @@ void calendar_ext_page_create_4eef7c(void *parent)
         void *column = audio_uart_page_43de82(box);
         audio_lv_object_size_call_43f4c0(column, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
         audio_uart_page_44129e(column, 0u, LV_PART_MAIN);
-        audio_uart_page_44131c(column, 0, LV_PART_MAIN);
+        lv_obj_set_style_border_width(column, 0, LV_PART_MAIN);
         calendar_obj_set_style_pad_all_4ed7d8(column, 0, LV_PART_MAIN);
         audio_uart_page_48ba78(column, LV_FLEX_FLOW_COLUMN);
         audio_uart_page_48ba92(column, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER);
@@ -436,9 +436,9 @@ void calendar_ext_page_create_4eef7c(void *parent)
     audio_lv_object_size_call_43f4c0(g2_calendar_ext_root_20074b6c, 0x240, 0x100);
     audio_lv_object_position_43f09a(g2_calendar_ext_root_20074b6c, 0, 0x10);
     calendar_obj_set_style_pad_all_4ed7d8(g2_calendar_ext_root_20074b6c, 0, LV_PART_MAIN);
-    audio_uart_page_44131c(g2_calendar_ext_root_20074b6c, 0, LV_PART_MAIN);
+    lv_obj_set_style_border_width(g2_calendar_ext_root_20074b6c, 0, LV_PART_MAIN);
     audio_uart_page_44129e(g2_calendar_ext_root_20074b6c, 0u, LV_PART_MAIN);
-    audio_uart_page_44146a(g2_calendar_ext_root_20074b6c, 0, LV_PART_MAIN);
+    lv_obj_set_style_radius(g2_calendar_ext_root_20074b6c, 0, LV_PART_MAIN);
     style_prop_2d_441478(g2_calendar_ext_root_20074b6c, 1u, LV_PART_MAIN);
     audio_lv_object_clear_flag_43dfa4(g2_calendar_ext_root_20074b6c, LV_OBJ_FLAG_SCROLLABLE);
 
@@ -446,9 +446,9 @@ void calendar_ext_page_create_4eef7c(void *parent)
     audio_lv_width_43f506(g2_calendar_ext_content_20074b70, 0x240);
     audio_lv_object_position_43f09a(g2_calendar_ext_content_20074b70, 0, 0);
     calendar_obj_set_style_pad_all_4ed7d8(g2_calendar_ext_content_20074b70, 0, LV_PART_MAIN);
-    audio_uart_page_44131c(g2_calendar_ext_content_20074b70, 0, LV_PART_MAIN);
+    lv_obj_set_style_border_width(g2_calendar_ext_content_20074b70, 0, LV_PART_MAIN);
     audio_uart_page_44129e(g2_calendar_ext_content_20074b70, 0u, LV_PART_MAIN);
-    audio_uart_page_44146a(g2_calendar_ext_content_20074b70, 0, LV_PART_MAIN);
+    lv_obj_set_style_radius(g2_calendar_ext_content_20074b70, 0, LV_PART_MAIN);
     audio_lv_object_clear_flag_43dfa4(g2_calendar_ext_content_20074b70, LV_OBJ_FLAG_SCROLLABLE);
     g2_calendar_ext_scroll_y_20074b7c = 0;
     g2_calendar_ext_target_y_20074b80 = 0;
@@ -502,8 +502,8 @@ void calendar_ext_page_create_4eef7c(void *parent)
             audio_lv_object_position_43f09a(bar, 0x234, 0);
             audio_uart_page_44127e(bar, audio_lv_color_44104c(COLOR_SCROLLBAR), LV_PART_MAIN);
             audio_uart_page_44129e(bar, 0x7fu, LV_PART_MAIN);
-            audio_uart_page_44131c(bar, 0, LV_PART_MAIN);
-            audio_uart_page_44146a(bar, 1, LV_PART_MAIN);
+            lv_obj_set_style_border_width(bar, 0, LV_PART_MAIN);
+            lv_obj_set_style_radius(bar, 1, LV_PART_MAIN);
             calendar_obj_set_style_pad_all_4ed7d8(bar, 0, LV_PART_MAIN);
             audio_lv_object_clear_flag_43dfa4(bar, LV_OBJ_FLAG_SCROLLABLE);
         }

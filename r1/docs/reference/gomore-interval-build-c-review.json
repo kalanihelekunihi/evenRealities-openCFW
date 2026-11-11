@@ -1,0 +1,659 @@
+{
+  "source": {
+    "source": "r1/src/application/runtime/native_gomore_interval_build.c",
+    "payload": "r1-application",
+    "role": "candidate",
+    "toolchain": "gcc9",
+    "link": true,
+    "expect": "compile",
+    "returncode": 0,
+    "argv": [
+      "/opt/homebrew/bin/python3",
+      "/Users/kalani/Repo/evenRealities-openCFW/tools/build/linux_gcc.py",
+      "--compiler",
+      "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/bin/arm-none-eabi-gcc",
+      "--read-root",
+      "/Users/kalani/Repo/evenRealities-openCFW/r1",
+      "--read-root",
+      "/Users/kalani/Repo/evenRealities-openCFW/third-party/upstream",
+      "--read-root",
+      "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1",
+      "--read-root",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-interval-build-gcc-c-final/generated/r1",
+      "--",
+      "-mcpu=cortex-m4",
+      "-mthumb",
+      "-munaligned-access",
+      "-mfpu=fpv4-sp-d16",
+      "-mfloat-abi=hard",
+      "-std=c11",
+      "-Os",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-fshort-enums",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-fno-delete-null-pointer-checks",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/r1/src/vendor",
+      "-isystem",
+      "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
+      "-fno-strict-aliasing",
+      "-ffp-contract=off",
+      "-fsignaling-nans",
+      "-frounding-math",
+      "-ftrapping-math",
+      "-MD",
+      "-MF",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-interval-build-gcc-c-final/r1/r1-application/r1__src__application__runtime__native_gomore_interval_build.c.d",
+      "-c",
+      "/Users/kalani/Repo/evenRealities-openCFW/r1/src/application/runtime/native_gomore_interval_build.c",
+      "-o",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-interval-build-gcc-c-final/r1/r1-application/r1__src__application__runtime__native_gomore_interval_build.c.o"
+    ],
+    "source_sha256": "d9442e9942d1c08f283c783a3e028598e62db570c950cd3e9efa788bb09df102",
+    "object_sha256": "34c7a98b1b90d53802ffa8eee9768864cd8fffd41d43a1cdf77df004fbaba6de",
+    "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-interval-build-gcc-c-final/r1/r1-application/r1__src__application__runtime__native_gomore_interval_build.c.o",
+    "strong": [
+      "r1_gomore_sleep_interval_build_native"
+    ],
+    "weak": [],
+    "undefined": [
+      "__aeabi_memclr",
+      "r1_gomore_epoch_to_civil_native",
+      "r1_native_memory_move"
+    ]
+  },
+  "stock_REA": {
+    "evidence_id": "ev_658749cd0677eba71c770593c804b00b63fab1bf09631a8b5d5e0877514271a9",
+    "subject": {
+      "name": "stock.elf",
+      "digest": {
+        "sha256": "25b4a29af80ec8edab5bd861ba9b74a6e22eab29dc3d7a809a16869e8a140f04"
+      },
+      "local_path": "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-queue-reset-c/stock.elf",
+      "format": "elf",
+      "architecture": "arm"
+    },
+    "provider": {
+      "id": "ghidra",
+      "name": "Ghidra",
+      "version": "12.1.4"
+    },
+    "analysis_profile": {
+      "provider": {
+        "id": "ghidra",
+        "name": "Ghidra",
+        "version": "12.1.4"
+      },
+      "parameters": {
+        "target_kind": "executable",
+        "target_format": "elf",
+        "architecture": "arm",
+        "available_architectures": [
+          "arm"
+        ],
+        "import_mode": "ephemeral-source-immutable",
+        "annotation_policy": "atomic-function-entry-metadata-v1",
+        "load_image_observations": "source-mappings-entry-context-v2",
+        "function_body_evidence": "complete-inclusive-ranges-v1",
+        "function_references": "complete-body-and-entry-reference-manager-v2",
+        "call_relationship_coverage": "function-body-call-coverage-v5",
+        "function_dossier_coverage": "observed-facets-and-call-relationships-v1",
+        "string_inventory_evidence": "defined-data-coverage-v1",
+        "location_resolution": "explicit-address-exact-entry-symbol-first-v3",
+        "procedure_file_offset_resolution": "address-first-unique-target-source-mapping-v2",
+        "instruction_flow_evidence": "decoded-return-pcode-v1",
+        "instruction_references": "exact-address-incoming-v1",
+        "function_boundary_observations": "ghidra-function-boundary-limitations-v3",
+        "no_return_repair": "returning-imports-decoded-return-v2",
+        "process_launch": "inspected-jvm-launch-support-v1",
+        "jump_table_evidence": "typed-case-default-blocks-v1",
+        "decompiler_jump_loads": true,
+        "loader": "auto-from-header",
+        "language_id": "auto-from-header",
+        "compiler_spec_id": "auto-default",
+        "analyzer_preset": "ghidra-default"
+      },
+      "digest": "7e46711069eea041af1b9b99e34115c13332795e5cda76e584a722f529ec70de"
+    },
+    "predicate_type": "rea.analysis",
+    "operation": "read_bytes",
+    "parameters": {
+      "address": "0x692e4",
+      "length": 540
+    },
+    "raw_result": {
+      "address": "0x692e4",
+      "requested_bytes": 540,
+      "returned_bytes": 540,
+      "bytes_hex": "2de9ff4f8db00f46dde91b841e9d1646202105a8bef757fa04208df82e0094f826002168c0eb001001eb800007906068089094f82500022801d1287988b107980590d7f8ac0020b10599814200d90598059008984ff03c0a012e48d0297919b145e020680590ece7d8f8041041b1c1eb01118900002901dd084438e0084436e0a0f1010b002697f8b610012969d09fed5e0a00230f21a3eb03120beb8202b2fbfafc0afb1c2cbcf13b0f5dd0b2fbfafcbcfbf1f901fb19ccbcf1000f5bd0b2fbfaf2b2fbf1fc01fb1c22521e07eb8202d2ed000af4eec00af1ee10fa03dc761c5b1c0f2bd7dba6eb061100eb81000599814200d305980690d7f8a40020b10699814200d80698069010984068099005980a90dde90510401ab0fbfaf6b5f90090b4271a980599b0f90000c0eb001001eb800001a9f0f74afc9df80e00a979884202d2e979884200d2142798f802108df82f102e4ae16991420fdb01208df8300049e09fed2b0a94e7b2fbfaf2b2fbf1fc01fb1c22aae70e22a8e7b6f5617f17dba16891b194ed060af8eec00a00ee101ab8eec01a80ee810a1e4a10ee101a914206dd02208df8300025e09fed1b0af3e7be420bdb9df82e0040f0080040f010008df82e0000208df8300014e04e450fdba97988420cd2e979884209d39df82e0040f008008df82e0003208df8300002e004208df83000202205a90d98bef73cf911b0bde8f08f00003333333f0000c8429a99593f3d0a573e00000000",
+      "complete": true
+    },
+    "normalized_result": {
+      "address": "0x692e4",
+      "requested_bytes": 540,
+      "returned_bytes": 540,
+      "bytes_hex": "2de9ff4f8db00f46dde91b841e9d1646202105a8bef757fa04208df82e0094f826002168c0eb001001eb800007906068089094f82500022801d1287988b107980590d7f8ac0020b10599814200d90598059008984ff03c0a012e48d0297919b145e020680590ece7d8f8041041b1c1eb01118900002901dd084438e0084436e0a0f1010b002697f8b610012969d09fed5e0a00230f21a3eb03120beb8202b2fbfafc0afb1c2cbcf13b0f5dd0b2fbfafcbcfbf1f901fb19ccbcf1000f5bd0b2fbfaf2b2fbf1fc01fb1c22521e07eb8202d2ed000af4eec00af1ee10fa03dc761c5b1c0f2bd7dba6eb061100eb81000599814200d305980690d7f8a40020b10699814200d80698069010984068099005980a90dde90510401ab0fbfaf6b5f90090b4271a980599b0f90000c0eb001001eb800001a9f0f74afc9df80e00a979884202d2e979884200d2142798f802108df82f102e4ae16991420fdb01208df8300049e09fed2b0a94e7b2fbfaf2b2fbf1fc01fb1c22aae70e22a8e7b6f5617f17dba16891b194ed060af8eec00a00ee101ab8eec01a80ee810a1e4a10ee101a914206dd02208df8300025e09fed1b0af3e7be420bdb9df82e0040f0080040f010008df82e0000208df8300014e04e450fdba97988420cd2e979884209d39df82e0040f008008df82e0003208df8300002e004208df83000202205a90d98bef73cf911b0bde8f08f00003333333f0000c8429a99593f3d0a573e00000000",
+      "complete": true
+    },
+    "confidence": "observed",
+    "authority": "shipped-artifact",
+    "environment": null,
+    "limitations": [
+      "The session serves operations only after Ghidra reports default auto-analysis complete; incomplete analysis does not expose partial results.",
+      "The imported Program and temporary project are ephemeral and deleted on close. Annotation operations edit session database metadata; original executable bytes are never written.",
+      "Cancelling an active Ghidra request terminates its ephemeral database and discards session annotations. The selected target remains open; the next provider query imports the original artifact again.",
+      "Default-space addresses use lowercase 0x-prefixed hexadecimal; other address spaces use <percent-encoded-space>:0x<hex>.",
+      "Bytes reflect Ghidra's initialized memory, including loader fixups. Reads stop at an unmapped or uninitialized byte and report completeness explicitly.",
+      "macOS sessions require a matching executable Ghidra native decompiler; REA checks for it but does not build native components or change Gatekeeper quarantine state."
+    ],
+    "relationship_coverage": null,
+    "locations": [],
+    "evidence_links": []
+  },
+  "direct_replay": {
+    "paired_cases": 4936,
+    "source_object_sha256": "34c7a98b1b90d53802ffa8eee9768864cd8fffd41d43a1cdf77df004fbaba6de",
+    "dependency_objects": {
+      "r1/src/application/runtime/memory_eabi.c": "e7e21f3a870f58f3f737670140ae73fdcb6219d2abbef954d6ed8fe7644c817f",
+      "third-party/upstream/musl-memory-1.2.5/memset.c": "6c2f1a8f480c27d5bc20f79ac535dac28fbbdcaec12e69bad96721f724ec9057",
+      "r1/src/application/runtime/native_memory_move.c": "6a3110da0b585640a02ef5168c86a8279f50e50c8f4695846cd8aa14425777ed",
+      "third-party/upstream/musl-memmove-1.2.5/memmove.c": "4a6ccefb180ef4af2cfe631f54df4d6f629d1b3a2d374911c00b25c107bcb723",
+      "third-party/upstream/musl-memory-1.2.5/memcpy.c": "a4b54c7315f7ca2f8097e3f9afb4a9bcd7860c75649fc9e185d951c3ea0696cf"
+    },
+    "actual_C_clear_and_movement": true,
+    "fault_cases": 8,
+    "history_cases": 968,
+    "history_comparisons": 10284,
+    "ratio_oracle_cases": 1126,
+    "calendar_mutation_cases": 216,
+    "statuses": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "limits": [
+      "Actual C interval build, clear and native movement; calendar provider modeled with native13-byte output shape",
+      "Independent scalar record/history/FPSCR and rational ratio oracle; actual production C build compared with stock",
+      "No physical/concurrent/final-link or instruction-identity proof"
+    ]
+  },
+  "signaling_comparison_replay": {
+    "paired_cases": 18792,
+    "source_object_sha256": "34c7a98b1b90d53802ffa8eee9768864cd8fffd41d43a1cdf77df004fbaba6de",
+    "samples": 1044,
+    "thresholds": 2,
+    "fpscr_configs": 9,
+    "limits": [
+      "C positive-normal-threshold history comparator against native VCMPE, not a general arbitrary-threshold comparison API",
+      "Raw binary32 corpus and exact FPSCR/boolean comparisons; no physical/concurrent proof"
+    ]
+  },
+  "compose_integration": {
+    "paired_cases": 1698,
+    "fault_cases": 2,
+    "source_object_sha256": "31e0d0534bb83a5d56aab968f3f92e4d7eabdd2f65cbc18637382846cc71e52f",
+    "dependency_objects": {
+      "r1/src/application/runtime/native_memory_move.c": "6a3110da0b585640a02ef5168c86a8279f50e50c8f4695846cd8aa14425777ed",
+      "third-party/upstream/musl-memmove-1.2.5/memmove.c": "4a6ccefb180ef4af2cfe631f54df4d6f629d1b3a2d374911c00b25c107bcb723",
+      "third-party/upstream/musl-memory-1.2.5/memcpy.c": "a4b54c7315f7ca2f8097e3f9afb4a9bcd7860c75649fc9e185d951c3ea0696cf",
+      "r1/src/application/runtime/native_gomore_interval_refine.c": "b7970ae46f2ef9fec63a898dfabc40c87b43d551497bf234a37e894ecd4f57bb",
+      "r1/src/application/runtime/native_gomore_interval_build.c": "34c7a98b1b90d53802ffa8eee9768864cd8fffd41d43a1cdf77df004fbaba6de",
+      "r1/src/application/runtime/memory_eabi.c": "e7e21f3a870f58f3f737670140ae73fdcb6219d2abbef954d6ed8fe7644c817f",
+      "third-party/upstream/musl-memory-1.2.5/memset.c": "6c2f1a8f480c27d5bc20f79ac535dac28fbbdcaec12e69bad96721f724ec9057"
+    },
+    "actual_C_interval_build": true,
+    "actual_C_refinement": true,
+    "actual_C_native_memory_move": true,
+    "limits": [
+      "Calendar modeled; actual C interval build, compose, refinement and memory routines execute",
+      "Actual C native-memory-move provider and upstream memmove/memcpy versus native movement; private stack/preserved caller-clobbered state excluded",
+      "No physical/concurrent/final-link or instruction-identity proof"
+    ]
+  },
+  "engine_integration": {
+    "paired_cases": 2152,
+    "source_object_sha256": "80b943fa31c97a04ffc010ad1967eaa2c2fe99e6406410b167143f92cc85a107",
+    "dependency_objects": {
+      "r1/src/application/runtime/native_gomore_stage.c": "fc6cdb18b78e1f14436f056344f771419efdb9a28e197f8c739825ac20c84d51",
+      "third-party/upstream/musl-memory-1.2.5/memcpy.c": "a4b54c7315f7ca2f8097e3f9afb4a9bcd7860c75649fc9e185d951c3ea0696cf",
+      "r1/src/application/runtime/native_gomore_descriptor_merge.c": "845a1f9850717fce5eab3884fa4d4e4d89815c4c6ce59e262f6e8af4bc7d3032",
+      "r1/src/application/runtime/memory_eabi.c": "e7e21f3a870f58f3f737670140ae73fdcb6219d2abbef954d6ed8fe7644c817f",
+      "third-party/upstream/musl-memory-1.2.5/memset.c": "6c2f1a8f480c27d5bc20f79ac535dac28fbbdcaec12e69bad96721f724ec9057",
+      "r1/src/application/runtime/native_gomore_interval_compose.c": "31e0d0534bb83a5d56aab968f3f92e4d7eabdd2f65cbc18637382846cc71e52f",
+      "r1/src/application/runtime/native_memory_move.c": "6a3110da0b585640a02ef5168c86a8279f50e50c8f4695846cd8aa14425777ed",
+      "third-party/upstream/musl-memmove-1.2.5/memmove.c": "4a6ccefb180ef4af2cfe631f54df4d6f629d1b3a2d374911c00b25c107bcb723",
+      "r1/src/application/runtime/native_gomore_interval_refine.c": "b7970ae46f2ef9fec63a898dfabc40c87b43d551497bf234a37e894ecd4f57bb",
+      "r1/src/application/runtime/native_gomore_interval_build.c": "34c7a98b1b90d53802ffa8eee9768864cd8fffd41d43a1cdf77df004fbaba6de"
+    },
+    "actual_C_interval_build": true,
+    "actual_C_refinement": true,
+    "actual_C_compose": true,
+    "actual_C_descriptor_merge": true,
+    "actual_C_setter_and_memcpy": true,
+    "fault_cases": 32,
+    "completed_returns": 2120,
+    "mutation_configurations": 72,
+    "activated_mutations": 60,
+    "clamped_cases": 0,
+    "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "limits": [
+      "Actual production C interval engine compared to stock",
+      "Calendar modeled; actual C build, refinement, compose, engine, descriptor merge, setter and memory routines execute",
+      "Private-frame offsets recorded as observations, not a requirement for C unless lower reads depend on them",
+      "No physical/concurrent/final-link or byte-identity proof"
+    ]
+  },
+  "compiler_route": {
+    "toolchain": "gcc9",
+    "strict_FP_flags": [
+      "-fsignaling-nans",
+      "-frounding-math",
+      "-ftrapping-math",
+      "-ffp-contract=off"
+    ],
+    "native_VCMPE_emitted": true,
+    "new_inline_assembly": false,
+    "manual_FPSCR_writes": false
+  },
+  "negative_controls": [
+    {
+      "name": "quiet-nan",
+      "rejected": true,
+      "counterexample": {
+        "original_full_corpus_index": 3408,
+        "case": {
+          "duration": 180,
+          "mode": 0,
+          "count": 1800,
+          "sum": 378,
+          "metric": 0,
+          "minimum": 10,
+          "hour": 6,
+          "output": "normal",
+          "fpscr": 0,
+          "start": 0,
+          "end": 0,
+          "history": "qnan",
+          "high": 0
+        }
+      }
+    },
+    {
+      "name": "lost-idc",
+      "rejected": true,
+      "counterexample": {
+        "original_full_corpus_index": 3433,
+        "case": {
+          "duration": 180,
+          "mode": 0,
+          "count": 1800,
+          "sum": 378,
+          "metric": 0,
+          "minimum": 10,
+          "hour": 6,
+          "output": "normal",
+          "fpscr": 16777216,
+          "start": 0,
+          "end": 0,
+          "history": "subnormal",
+          "high": 0
+        }
+      }
+    },
+    {
+      "name": "inclusive-history",
+      "rejected": true,
+      "counterexample": {
+        "original_full_corpus_index": 3384,
+        "case": {
+          "duration": 180,
+          "mode": 0,
+          "count": 1800,
+          "sum": 378,
+          "metric": 0,
+          "minimum": 10,
+          "hour": 6,
+          "output": "normal",
+          "fpscr": 0,
+          "start": 0,
+          "end": 0,
+          "history": "equal",
+          "high": 0
+        }
+      }
+    },
+    {
+      "name": "boolean-high",
+      "rejected": true,
+      "counterexample": {
+        "original_full_corpus_index": 3392,
+        "case": {
+          "duration": 180,
+          "mode": 0,
+          "count": 1800,
+          "sum": 378,
+          "metric": 0,
+          "minimum": 10,
+          "hour": 6,
+          "output": "normal",
+          "fpscr": 0,
+          "start": 0,
+          "end": 0,
+          "history": "equal",
+          "high": 2
+        }
+      }
+    },
+    {
+      "name": "wrong-history-slot",
+      "rejected": true,
+      "counterexample": {
+        "original_full_corpus_index": 3456,
+        "case": {
+          "duration": 180,
+          "mode": 0,
+          "count": 1800,
+          "sum": 378,
+          "metric": 0,
+          "minimum": 10,
+          "hour": 6,
+          "output": "normal",
+          "fpscr": 0,
+          "start": 0,
+          "end": 1,
+          "history": "low",
+          "high": 0
+        }
+      }
+    },
+    {
+      "name": "wrong-class-byte",
+      "rejected": true,
+      "counterexample": {
+        "original_full_corpus_index": 0,
+        "case": {
+          "duration": 0,
+          "mode": 1,
+          "count": 0,
+          "sum": 0,
+          "metric": 1120403455,
+          "minimum": -1,
+          "hour": 0,
+          "output": "normal",
+          "fpscr": 0
+        }
+      }
+    },
+    {
+      "name": "late-minimum",
+      "rejected": true,
+      "counterexample": {
+        "original_full_corpus_index": 4472,
+        "case": {
+          "duration": 19,
+          "mode": 1,
+          "count": 1800,
+          "sum": 378,
+          "metric": 0,
+          "minimum": 10,
+          "hour": 6,
+          "output": "normal",
+          "fpscr": 50331807,
+          "mutation": "minimum"
+        }
+      }
+    },
+    {
+      "name": "cached-auxiliary",
+      "rejected": true,
+      "counterexample": {
+        "original_full_corpus_index": 4460,
+        "case": {
+          "duration": 19,
+          "mode": 1,
+          "count": 1800,
+          "sum": 378,
+          "metric": 0,
+          "minimum": 10,
+          "hour": 5,
+          "output": "normal",
+          "fpscr": 50331807,
+          "mutation": "auxiliary"
+        }
+      }
+    },
+    {
+      "name": "positive-shift-only",
+      "rejected": true,
+      "counterexample": {
+        "original_full_corpus_index": 4336,
+        "case": {
+          "duration": 180,
+          "mode": 0,
+          "count": 1800,
+          "sum": 378,
+          "metric": 0,
+          "minimum": 10,
+          "hour": 6,
+          "output": "normal",
+          "fpscr": 0,
+          "disable": 0,
+          "shift": 4294967295,
+          "type": 1,
+          "preceding": 0,
+          "clamp_start": 0,
+          "clamp_end": 1048575
+        }
+      }
+    },
+    {
+      "name": "floating-metric",
+      "rejected": true,
+      "counterexample": {
+        "original_full_corpus_index": 0,
+        "case": {
+          "duration": 0,
+          "mode": 1,
+          "count": 0,
+          "sum": 0,
+          "metric": 1120403455,
+          "minimum": -1,
+          "hour": 0,
+          "output": "normal",
+          "fpscr": 0
+        }
+      }
+    },
+    {
+      "name": "floating-ratio",
+      "rejected": true,
+      "counterexample": {
+        "original_full_corpus_index": 2523,
+        "case": {
+          "duration": 900,
+          "mode": 1,
+          "count": 1800,
+          "sum": 378,
+          "metric": 1120403455,
+          "minimum": -1,
+          "hour": 0,
+          "output": "normal",
+          "fpscr": 0
+        }
+      }
+    },
+    {
+      "name": "unsigned-numerator",
+      "rejected": true,
+      "counterexample": {
+        "original_full_corpus_index": 4685,
+        "case": {
+          "duration": 900,
+          "mode": 1,
+          "count": 1800,
+          "sum": 2814060415,
+          "metric": 1120403455,
+          "minimum": 32767,
+          "hour": 0,
+          "output": "context",
+          "fpscr": 3238002847,
+          "start": 2076260456,
+          "timezone": 1,
+          "preceding": 27,
+          "type": 2
+        }
+      }
+    },
+    {
+      "name": "normalized-return",
+      "rejected": true,
+      "counterexample": {
+        "original_full_corpus_index": 0,
+        "case": {
+          "duration": 0,
+          "mode": 1,
+          "count": 0,
+          "sum": 0,
+          "metric": 1120403455,
+          "minimum": -1,
+          "hour": 0,
+          "output": "normal",
+          "fpscr": 0
+        }
+      }
+    }
+  ],
+  "qualification": {
+    "candidate_units": 1,
+    "compiled_units": 1,
+    "units": [
+      {
+        "source": "r1/src/application/runtime/native_gomore_interval_build.c",
+        "payload": "r1-application",
+        "evidence": "r1/symbols/function-frontier.csv",
+        "selected": [],
+        "compiled": true,
+        "rejections": {
+          "anchored_relocation_pattern_not_exact": 1
+        },
+        "source_implementation_completeness": "not established by compilation or byte matching",
+        "reason": "no exact anchored body under tested production bindings; integration remains unfinished"
+      }
+    ]
+  },
+  "composition": {
+    "report": "build/sources-goal-r1-interval-build-gcc-c-final/report.json",
+    "sha256": "91cbe724b348a5fad7864354ccaee701d4624e663ae86c4c972b852250ccae21",
+    "units": 671,
+    "unchanged_prior_objects": 670,
+    "application_imports": 164,
+    "bootloader_imports": 34,
+    "resolved_import": "r1_gomore_sleep_interval_build_native",
+    "new_native_imports": [
+      "r1_gomore_epoch_to_civil_native"
+    ]
+  },
+  "hybrid": {
+    "report": "build/hybrid-goal-r1-interval-build-gcc-c-final/build-report.json",
+    "sha256": "b0206fe4dbdfc5968ffdae9f0fb5387298dc10b324d12c93e30bbeca55104b09",
+    "totals": {
+      "binary-pull-through": 641791,
+      "source-built": 4369,
+      "resource-file": 248
+    },
+    "canonical_plan_unchanged": true
+  },
+  "artifacts": {
+    "build/goal-r1-interval-build-c/verify.py": "d78f197d5fc33ac8e357aaf5d65c0110393b7247f096f79b51c4118cf43fc289",
+    "build/goal-r1-interval-build-c/make_verify.py": "9154aab232ff1b9fbc5e529a1498ff3f8caef68ad2aabaebfa3805f661f95f42",
+    "build/goal-r1-interval-build-c/compare_verify.py": "a720a2d00288fd57ba85803cbfb106b222c3c500ee4e484831d1a78735e2986d",
+    "build/goal-r1-interval-build-c/compose.py": "7c434003711a7499d8d0b1eea664e2c1d89412c1eca3e5e794dad1edcd876d32",
+    "build/goal-r1-interval-build-c/make_compose.py": "bef3600eec8d935c0b6e3c23f860b536e1b2714be161241eba812e4f302e354b",
+    "build/goal-r1-interval-build-c/engine.py": "b061a534a59abc5cb12fb404662eb67b344c1b505a2c2580a30c4b4b1a0b7eb8",
+    "build/goal-r1-interval-build-c/make_engine.py": "8919e04b791eb394519113d08fe758d6ec6e2b4b3921427b1cf4cfac02b2515b",
+    "build/goal-r1-interval-build-c/negative.py": "85226e8a5e453a4e72d4f0e762843369c5764a4e0ff510eeee5c23497c69b0fa",
+    "build/goal-r1-interval-build-c/negative-cases.json": "0e5491220fc408bc787bc4cd59d5ef59bc0ebe087f459d23ba2950c1ce2a24d9",
+    "build/goal-r1-interval-build-c/qualify.py": "e5dc5b02c0aff9fe61149fd9634b4fb1faa98ea7284dbf27f15e522fd3be7594",
+    "build/goal-r1-interval-build-c/finalize.py": "420bd827e4dacda11193d8fe497b9e2d2375c6dcb4189b6cabe0bd8b025893a3",
+    "build/goal-r1-interval-build-c/source.elf": "a53cbbd2bda3bb3f52164ff8693a47b7dd96ea94370080f4bf722aa3262908bf",
+    "build/goal-r1-interval-build-c/compare.elf": "a53cbbd2bda3bb3f52164ff8693a47b7dd96ea94370080f4bf722aa3262908bf",
+    "build/goal-r1-interval-build-c/compose.elf": "3cb86c4235440216ccaa4dfa62a50dac7926d2c19828791cbd55cabf6e20a8be",
+    "build/goal-r1-interval-build-c/engine.elf": "d0b5ab6dac146175cc0ce94d4fade68deeb78731441f847d7b2c967a5588fb5a",
+    "build/goal-r1-interval-build-c/results.json": "26eaca72c78e669077b4faf5e45bee4407afa16f3a09ab8a5589ff521b48fc3d",
+    "build/goal-r1-interval-build-c/compare-results.json": "c28c0d587b81af80ef8ba56fa4a4fc1690ed7824c43e23a17f0f2b10577a8e4e",
+    "build/goal-r1-interval-build-c/compose-results.json": "5385bff23fe327fff13702acb7ed6fff22ddc2766f65c41bb0a0395005e3fb6a",
+    "build/goal-r1-interval-build-c/engine-results.json": "bbd38df440e1c75d7990e990b3c915ff277eca2924c33857472f48cecd7020c1",
+    "build/goal-r1-interval-build-c/instructions.json": "b5ed5141dab621e0dc825bbe9f70b92e408d216e627ee8ecb76a72e2da50420e",
+    "build/goal-r1-interval-build-c/disassembly.txt": "ece2a525214afdf9da5e408ec8f37c24fe51afe756ffc99369d5e8c863d452aa",
+    "build/goal-r1-interval-build-c/compare-probe.c": "4e6ad8bc5df36172e888f1c870fb83013466fc234fc13b2f54afdf5c28f46864",
+    "build/goal-r1-interval-build-c/compare-probe.o": "64f0e6356ddfb3e55728c66736ccaacf854f72f20f6fd41a840981ac5df6c26d",
+    "build/goal-r1-interval-build-c/compare-strict.o": "64f0e6356ddfb3e55728c66736ccaacf854f72f20f6fd41a840981ac5df6c26d",
+    "build/goal-r1-interval-build-c/compare-gcc.o": "501f9a9ee41e6c6b7be40bfccd54955090fffe0fd7fda27e84517fe451299a7f",
+    "build/goal-r1-descriptor-merge-analysis/probe.py": "77945df1a1864cce7723bf9f10f357c7ffebb9bf4ce93a72a93d0c201d95612c",
+    "build/goal-r1-interval-build-c/quiet-nan.c": "e9fbbdd7605b4d67dd88bd09bf4e112e68043df91ecd59e0966eb6a42ad53dd8",
+    "build/goal-r1-interval-build-c/quiet-nan.o": "fd3c2ea18c5ad0c56069aa2388988fcddf9d00a07f100be2289ccd17378a2f89",
+    "build/goal-r1-interval-build-c/quiet-nan.log": "f8554b91ed75c833f55ff3204c3f3e29f54ec23a763ea715a35f2cc4bd9ca957",
+    "build/goal-r1-interval-build-c/quiet-nan.compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/goal-r1-interval-build-c/lost-idc.c": "f8402b8cae3889165e388ef72bfa6e2cd3dd56688df750f9ae93352b3bf78a6c",
+    "build/goal-r1-interval-build-c/lost-idc.o": "10e2c56011de6aff9c075895a779948feba87d563042e0aaca507a9d29ffae39",
+    "build/goal-r1-interval-build-c/lost-idc.log": "06991831e362d30b0661f9b2ce1cb3dff9c77f4e51479794acdaae90f0e0dfc3",
+    "build/goal-r1-interval-build-c/lost-idc.compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/goal-r1-interval-build-c/inclusive-history.c": "25a2ce6089ac7b07b9f022c02c28009e2e50371ab50e407d3f837cde1c2f58bc",
+    "build/goal-r1-interval-build-c/inclusive-history.o": "d544db55f0c0a24f11f7bdb9b8c17b9f1a7de81f8caf3578095e69e598f5c483",
+    "build/goal-r1-interval-build-c/inclusive-history.log": "2c3b0beefe13810bef47b70656ee174f8499ad6bfe60333999f0e28e86531ecc",
+    "build/goal-r1-interval-build-c/inclusive-history.compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/goal-r1-interval-build-c/boolean-high.c": "820113126f412ade7fc3c721f05b9c9d47cf3fc81b43c0d73dbe37e67022525f",
+    "build/goal-r1-interval-build-c/boolean-high.o": "0a9671d95a65e515ba7db275f758cdcc721f08d98223001df73361c7a30ceaec",
+    "build/goal-r1-interval-build-c/boolean-high.log": "869c7cb68166a8020e7d351a0380a8c8c5120ef0e0ce6745143877dcf2c5010f",
+    "build/goal-r1-interval-build-c/boolean-high.compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/goal-r1-interval-build-c/wrong-history-slot.c": "7c45986521d272f5ccca36be6015c41d785210f47f71ffeadceb9beda6406aba",
+    "build/goal-r1-interval-build-c/wrong-history-slot.o": "c180c2e4a2df91336a1bde02912aee1098cb0f5ab4fb3591c92a4c39c8faf6d3",
+    "build/goal-r1-interval-build-c/wrong-history-slot.log": "c62c5c446beaa4d6c8804a77b015d33118b9a7d6430455108d4f550c1e8df92d",
+    "build/goal-r1-interval-build-c/wrong-history-slot.compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/goal-r1-interval-build-c/wrong-class-byte.c": "4bfbd1a4d3fb0dce641b2aa985ba633381d6f25630ba1b1fb2e4bcb592ea364f",
+    "build/goal-r1-interval-build-c/wrong-class-byte.o": "fa461e7842bbbf41a77ad9ca9e1c99887650c88c36a3e1d0ccaae04c235cc573",
+    "build/goal-r1-interval-build-c/wrong-class-byte.log": "6aee150246ba91946d11ba5ef3b59855cbdb189f6242b46b4d6814bb744bd8ea",
+    "build/goal-r1-interval-build-c/wrong-class-byte.compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/goal-r1-interval-build-c/late-minimum.c": "1103db1f1d0032c68237fd49d77f866a79c9132366e9f679623c5fd961881c6e",
+    "build/goal-r1-interval-build-c/late-minimum.o": "005ae80cc4dbb344625ad5550a6c135570e6a0f2b414cab9eca667b982812592",
+    "build/goal-r1-interval-build-c/late-minimum.log": "b0b5cf6c7388d8db9a365d0c5e955996fc661b1a7e768fcc70fd8edf065587bd",
+    "build/goal-r1-interval-build-c/late-minimum.compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/goal-r1-interval-build-c/cached-auxiliary.c": "029d67b06bf9705ef41020818169f2003e462423dead311689fae3f6f673e135",
+    "build/goal-r1-interval-build-c/cached-auxiliary.o": "612dcbc2ef45b724470c3fff8755881af061b178ff5c1eaa833e661d2ccbec2b",
+    "build/goal-r1-interval-build-c/cached-auxiliary.log": "ffaa36c212984687ec0e9e88944e2c896bcf5351685ceadffc2763af2c1a7af3",
+    "build/goal-r1-interval-build-c/cached-auxiliary.compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/goal-r1-interval-build-c/positive-shift-only.c": "d2767b0676b0d81f1b4956873cd79e52e3dd189f022a8f027d80dcbb23171a28",
+    "build/goal-r1-interval-build-c/positive-shift-only.o": "39eaa7908bde418440a9697a870ab904ffad85a5c2f80677691e387e7df619b8",
+    "build/goal-r1-interval-build-c/positive-shift-only.log": "5c3fa155a606f75e55d4b85103a76f952215e9ce93ea847b8a2ba2e8061ead5d",
+    "build/goal-r1-interval-build-c/positive-shift-only.compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/goal-r1-interval-build-c/floating-metric.c": "6f3581a8cf3d8209df0f952afd3398f0880e48abdb418b9f011766bace2d7c3e",
+    "build/goal-r1-interval-build-c/floating-metric.o": "cc54cefd1e2457748899a6f57590f6ba9d0d367fd7518dcb487065ffc9153a92",
+    "build/goal-r1-interval-build-c/floating-metric.log": "ca6dd385f1a0df23609e9be5c87a267ce362f01c5027545f484d6efd554c1b55",
+    "build/goal-r1-interval-build-c/floating-metric.compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/goal-r1-interval-build-c/floating-ratio.c": "cf0d0aaacfb05a06323dc52613880cb4c0bf43c388f7787de54a8a9bd94f8bb6",
+    "build/goal-r1-interval-build-c/floating-ratio.o": "0a4a907ff93c686c875b644ed2d4703558a22c00a466f07694e88bf17fcb49e5",
+    "build/goal-r1-interval-build-c/floating-ratio.log": "42299ae20a245b5e2a28635cf684eeba074169dab3e26c417172a801d3cf48f8",
+    "build/goal-r1-interval-build-c/floating-ratio.compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/goal-r1-interval-build-c/unsigned-numerator.c": "bbf11b3343e877f323a52bc3f59d16cd9a574362239e781020c27e117e52cbca",
+    "build/goal-r1-interval-build-c/unsigned-numerator.o": "87ce4d5496b4b3b2d6d3058f0b6bf3816fb887b3fa962a9ec8c1fcb6eca59132",
+    "build/goal-r1-interval-build-c/unsigned-numerator.log": "86cccfc45702bf425197d7567c7b9c113cd60fcc8af9fbef93aef255d264bc5b",
+    "build/goal-r1-interval-build-c/unsigned-numerator.compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/goal-r1-interval-build-c/normalized-return.c": "2bd7a474318504892596658acf1c762692c8813dc0db4d76596467d6bc68609d",
+    "build/goal-r1-interval-build-c/normalized-return.o": "09e9bee3f9a071a7ad547614aba6de75177546e2a882d4d1e05a99dccc8567fd",
+    "build/goal-r1-interval-build-c/normalized-return.log": "f5d4c69b8b564bd1867ada61ae8bb191a2ee1d93477ad27ea644f6efef410cd7",
+    "build/goal-r1-interval-build-c/normalized-return.compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "limits": [
+    "No added assembly or RAM; strict GCC C comparisons emit native signaling VCMPE",
+    "Native calendar provider remains modeled with13-byte output and aligned destination",
+    "Actual C build, refinement, compose, engine, merge, setter and memory routines execute in paired fixtures",
+    "FP state warmed before tests; no cold-FPU/task-context, physical/concurrent/final-link proof",
+    "No new instruction-qualified bytes"
+  ]
+}

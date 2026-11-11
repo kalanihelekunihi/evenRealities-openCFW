@@ -1,0 +1,64 @@
+{
+  "schema": 1,
+  "target": "locked G2 2.2.6.10 GX8002 KWS NPU command stream",
+  "stock": {
+    "firmware": "g2/blobs/official/g2-2.2.6.10/firmware_codec.bin",
+    "command_file_window": ["0x18d90", "0x1b15c"],
+    "command_count": 212,
+    "command_bytes": 9164,
+    "command_sha256": "c38ed6d22c7c0b6178288678364acd10bd5730aa382c1e19a32f6cf2bd1430b9"
+  },
+  "source": {
+    "directory": "g2/src/codec/npu",
+    "manifest_payload": "g2-codec-a",
+    "manifest_link": false,
+    "command_groups": {
+      "activation_relu_sigmoid": 12,
+      "copy_and_tensor": 152,
+      "batch_normalization": 18,
+      "transpose": 14,
+      "reduce_activation_mode4_format": 3,
+      "fully_connected": 4,
+      "convolution": 5,
+      "depthwise_convolution": 4
+    },
+    "c_units": [
+      {"file": "kws_activation_commands.c", "sha256": "5d612bfda022f7d01ac2787cfbebc6b60b94e9069feccd3e5b2e8e4c8d4c15d1", "object_sha256": "fc5d46596328e3ef5056920c3ad0877239ab7cfb401429d1bbe53954b429407e"},
+      {"file": "kws_general_commands.c", "sha256": "4ebd3adfa5002c8896a1570e385b42cd1b28bc2eab1944c0a2f1afe2e8189724", "object_sha256": "33e843c569189ba6373b661b8e45589d9d41f3fd85f7e7a43a09ac334e005ef3"},
+      {"file": "kws_batch_norm_commands.c", "sha256": "422093f81f36c18e16831490cfe0a50d89f172e99ceabb2f21c67d64058b0e98", "object_sha256": "bf2b434eaa321d9222836abf4626970a5d0f4e0075c072a20de8fb189b9c99d3"},
+      {"file": "kws_transpose_commands.c", "sha256": "99d2960fd5923b2709469f89ce18b8d780106076bae1ec9ff8c55293e10e2e9e", "object_sha256": "e73336ef85fd42095d841a23567694ef0eb2a327a9a64c966f991f297e0bc00f"},
+      {"file": "kws_special_commands.c", "sha256": "7dea62a6014145ede76214f04522dd5681d91e0c6de299d2c1bda8ed5ac56542", "object_sha256": "5985821634738594c3e637548f4402f6b8d43da2942fc8e7da1b32b38418ef8c"},
+      {"file": "kws_fc_commands.c", "sha256": "a690042f35bbac18e41d30689f934903758ba80179b0ba0629a3a97ac930d68b", "object_sha256": "67f65262f2c184e3a9e4cc1e531f17bd2fe419705a607ab4b5b03de1b8521212"},
+      {"file": "kws_conv_commands.c", "sha256": "b529c1ea780483758e0c574e051aeb3fb6b6fbb3360e0a08ea9512dfb9157fc7", "object_sha256": "5a0e0dd14215e3db44fc45bdedb90eeee92e2c056da6be704d72880e49239cfa"}
+    ]
+  },
+  "verification": {
+    "host_c_oracle": "g2/tests/test_gxdnn_c_source.py compares the C-generated 9164-byte stream directly with authenticated stock bytes and checks it as the BINH A command input",
+    "source_asset_generator": "make -C g2 kws-command-stream writes build/g2-kws/commands.bin without reading official firmware",
+    "source_asset_generator_sha256": "db0be32c6d589fea27f2aeb54a29025be6cac991fa844721b18908413e1ffcc7",
+    "source_asset_bytes": 9164,
+    "source_asset_sha256": "c38ed6d22c7c0b6178288678364acd10bd5730aa382c1e19a32f6cf2bd1430b9",
+    "typed_decoder": "g2/tools/gxdnn_command_emitter.py classifies all 212 locked records as typed bodies; zero RawCommand bodies",
+    "focused_tests": "python3 -m unittest tests.test_gxdnn_command_emitter tests.test_gxdnn_c_source: 26 passed",
+    "sources_check": "make -C g2 sources-check: 4889 units, 4550 source files, 1 not built",
+    "full_source_report": "build/g2-all-c-kws-generator-20261110/report.json",
+    "full_source_report_sha256": "5e7ede768f39cbdfd38aa6eef27410126258453a51ae5267807a5aac83f5a1db",
+    "codec_a_units_compiled": "367/367",
+    "strict_link_report": "build/g2-all-c-kws-generator-link-20261110/link-report.json",
+    "strict_link_report_sha256": "59e1d8375e8602841f1c00d4ad1a37ea2ae7fd6b68dc452fc2aeb768b2a33acf",
+    "strict_link_tool_sha256": "e70415048c6ac631f00f153d287c873f8f7b6147e8f74fc7b1357a5acb7578d9",
+    "payloads_compiled_and_linked": 7,
+    "payload_binaries_unchanged_from_prior_link": true,
+    "manifest_changed_during_build": false
+  },
+  "remaining": {
+    "trained_weight_bytes_without_declared_source": 120800,
+    "full_control_bit_and_geometry_axis_semantics": "incomplete for some command families",
+    "codec_a_command_units_linked_into_executable": false,
+    "codec_a_command_region_emitted_by_source_link": true,
+    "complete_codec_a_binh_and_fwpk_from_source": false,
+    "bundle_byte_identity": false,
+    "hardware_behavior_verified": false
+  },
+  "qualification": "The complete command stream is field-level C source and byte-exact as an emitted source-link region. The seven C units remain outside the codec executable; trained weights and full codec image integration are incomplete. This evidence does not establish complete firmware source, executable byte identity, or device behavior."
+}

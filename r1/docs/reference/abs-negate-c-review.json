@@ -1,0 +1,330 @@
+{
+  "schema": 1,
+  "scope": "Replace explicit VNEG assembly in charger ladder compare-absolute dependency with C unary negation; preserve VCMPE/FPSCR observation",
+  "source": {
+    "source": "r1/src/application/runtime/native_math_selection.c",
+    "payload": "r1-application",
+    "role": "selected",
+    "toolchain": "clang",
+    "link": true,
+    "expect": "compile",
+    "returncode": 0,
+    "argv": [
+      "/usr/bin/clang",
+      "--target=arm-none-eabi",
+      "-mcpu=cortex-m4",
+      "-mthumb",
+      "-munaligned-access",
+      "-mfpu=fpv4-sp-d16",
+      "-mfloat-abi=hard",
+      "-std=c11",
+      "-Os",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-fshort-enums",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-fno-delete-null-pointer-checks",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/r1/src/vendor",
+      "-isystem",
+      "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
+      "-MD",
+      "-MF",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-abs-negate-c/r1/r1-application/r1__src__application__runtime__native_math_selection.c.d",
+      "-c",
+      "/Users/kalani/Repo/evenRealities-openCFW/r1/src/application/runtime/native_math_selection.c",
+      "-o",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-abs-negate-c/r1/r1-application/r1__src__application__runtime__native_math_selection.c.o"
+    ],
+    "source_sha256": "0f3f3f48e2a613cf14ba63b46ff245edc9fac4363d291e0009afe28246355220",
+    "object_sha256": "9f05ab2cc8d60e2c444c56b0e9ef35d31399ff50b49a94d08f02ca2703c38651",
+    "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-abs-negate-c/r1/r1-application/r1__src__application__runtime__native_math_selection.c.o",
+    "strong": [
+      "r1_binary32_compare_flags",
+      "r1_native_ceilf",
+      "r1_native_ceilf_data",
+      "r1_native_compare_absf",
+      "r1_native_fabs",
+      "r1_native_fabs_core_bits",
+      "r1_native_floorf",
+      "r1_native_floorf_data",
+      "r1_native_fmaxf",
+      "r1_native_fminf"
+    ],
+    "weak": [],
+    "undefined": []
+  },
+  "normal_report": "build/sources-goal-r1-abs-negate-c/report.json",
+  "Clang_isolated": {
+    "paired_cases": 66112,
+    "executions": 132224,
+    "input_bit_patterns": 2066,
+    "FPSCR_configurations": 32,
+    "checks": [
+      "exact returned S0 bits and complete FPSCR",
+      "subnormal/zero/NaN/infinity/sign and rounding/FZ/DN/sticky flags",
+      "R4-R11/S16-S31/SP/masks restored"
+    ],
+    "limits": [
+      "APSR and other caller-clobbered integer/floating registers excluded",
+      "No trap-enabled floating exceptions or physical processor timing proof"
+    ]
+  },
+  "GCC_isolated": {
+    "paired_cases": 66112,
+    "executions": 132224,
+    "input_bit_patterns": 2066,
+    "FPSCR_configurations": 32,
+    "checks": [
+      "exact returned S0 bits and complete FPSCR",
+      "subnormal/zero/NaN/infinity/sign and rounding/FZ/DN/sticky flags",
+      "R4-R11/S16-S31/SP/masks restored"
+    ],
+    "limits": [
+      "APSR and other caller-clobbered integer/floating registers excluded",
+      "No trap-enabled floating exceptions or physical processor timing proof"
+    ]
+  },
+  "Clang_actual_ladder_integration": {
+    "paired_cases": 23872,
+    "executions": 47744,
+    "float_inputs": 611,
+    "FPSCR_configurations": 32,
+    "actual_C_math_helper_executed": true,
+    "controlled_source_table_address": "0x9a678",
+    "checks": [
+      "40-byte frame at each abs/read/write provider",
+      "all live R4-R11 and S16-S31 at providers and final restoration",
+      "all eight abs operands and FPSCR snapshots including rounding/FZ/DN/NaN/overflow/underflow",
+      "partial/untouched/full-word reads, ignored raw transport errors, output bits and selected return index",
+      "initial stack bytes, final scratch words and write callback mutations, SP and interrupt masks"
+    ],
+    "limits": [
+      "Register transport modeled, no physical charger/single-wire proof",
+      "Table linked at controlled native address for ABI comparison; normal final placement unproven",
+      "APSR and other caller-clobbered registers, arbitrary private-frame aliases, faults and concurrency excluded"
+    ]
+  },
+  "negative_controls": {
+    "missing-negation": {
+      "compiled": true,
+      "rejected": true,
+      "assertion": "('0x80000001', '0x0', (1, 2147483648), (2147483649, 2147483648))"
+    },
+    "quiet-compare": {
+      "compiled": true,
+      "rejected": true,
+      "assertion": "('0x7fc00001', '0x0', (2143289345, 805306369), (2143289345, 805306368))"
+    },
+    "gcc": {
+      "strict_compilation": true,
+      "isolated_behavior_passed": true,
+      "results": {
+        "paired_cases": 66112,
+        "executions": 132224,
+        "input_bit_patterns": 2066,
+        "FPSCR_configurations": 32,
+        "checks": [
+          "exact returned S0 bits and complete FPSCR",
+          "subnormal/zero/NaN/infinity/sign and rounding/FZ/DN/sticky flags",
+          "R4-R11/S16-S31/SP/masks restored"
+        ],
+        "limits": [
+          "APSR and other caller-clobbered integer/floating registers excluded",
+          "No trap-enabled floating exceptions or physical processor timing proof"
+        ]
+      }
+    }
+  },
+  "audit": {
+    "units_compiled": 579,
+    "unrelated_objects_identical": 578,
+    "all_other_math_function_sections_and_relocations_unchanged": true,
+    "changed_section": ".text.r1_native_compare_absf",
+    "existing_12_byte_floor_data_selection_unchanged": true,
+    "strong_and_import_symbols_unchanged": true,
+    "source": {
+      "source": "r1/src/application/runtime/native_math_selection.c",
+      "payload": "r1-application",
+      "role": "selected",
+      "toolchain": "clang",
+      "link": true,
+      "expect": "compile",
+      "returncode": 0,
+      "argv": [
+        "/usr/bin/clang",
+        "--target=arm-none-eabi",
+        "-mcpu=cortex-m4",
+        "-mthumb",
+        "-munaligned-access",
+        "-mfpu=fpv4-sp-d16",
+        "-mfloat-abi=hard",
+        "-std=c11",
+        "-Os",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-fshort-enums",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-fno-delete-null-pointer-checks",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/r1/src/vendor",
+        "-isystem",
+        "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
+        "-MD",
+        "-MF",
+        "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-abs-negate-c/r1/r1-application/r1__src__application__runtime__native_math_selection.c.d",
+        "-c",
+        "/Users/kalani/Repo/evenRealities-openCFW/r1/src/application/runtime/native_math_selection.c",
+        "-o",
+        "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-abs-negate-c/r1/r1-application/r1__src__application__runtime__native_math_selection.c.o"
+      ],
+      "source_sha256": "0f3f3f48e2a613cf14ba63b46ff245edc9fac4363d291e0009afe28246355220",
+      "object_sha256": "9f05ab2cc8d60e2c444c56b0e9ef35d31399ff50b49a94d08f02ca2703c38651",
+      "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-abs-negate-c/r1/r1-application/r1__src__application__runtime__native_math_selection.c.o",
+      "strong": [
+        "r1_binary32_compare_flags",
+        "r1_native_ceilf",
+        "r1_native_ceilf_data",
+        "r1_native_compare_absf",
+        "r1_native_fabs",
+        "r1_native_fabs_core_bits",
+        "r1_native_floorf",
+        "r1_native_floorf_data",
+        "r1_native_fmaxf",
+        "r1_native_fminf"
+      ],
+      "weak": [],
+      "undefined": []
+    },
+    "normal_report": "build/sources-goal-r1-abs-negate-c/report.json",
+    "imports_unchanged": {
+      "application": 164,
+      "bootloader": 34
+    },
+    "manifest_unchanged": true,
+    "source_plan_unchanged": true,
+    "new_exact_bytes": 0,
+    "hybrid": {
+      "report": "build/hybrid-goal-r1-abs-negate-c/build-report.json",
+      "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+      "totals": {
+        "binary-pull-through": 642117,
+        "source-built": 4043,
+        "resource-file": 248
+      },
+      "source_completeness_proven": false
+    }
+  },
+  "REA_absolute": {
+    "evidence_id": "ev_9a940a902dee3dc7c1a53001f8e5786f03feefe5f469af4f119adcf9e21d6b8d",
+    "subject": {
+      "name": "stock.elf",
+      "digest": {
+        "sha256": "25b4a29af80ec8edab5bd861ba9b74a6e22eab29dc3d7a809a16869e8a140f04"
+      },
+      "local_path": "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-queue-reset-c/stock.elf",
+      "format": "elf",
+      "architecture": "arm"
+    },
+    "provider": {
+      "id": "ghidra",
+      "name": "Ghidra",
+      "version": "12.1.4"
+    },
+    "analysis_profile": {
+      "provider": {
+        "id": "ghidra",
+        "name": "Ghidra",
+        "version": "12.1.4"
+      },
+      "parameters": {
+        "target_kind": "executable",
+        "target_format": "elf",
+        "architecture": "arm",
+        "available_architectures": [
+          "arm"
+        ],
+        "import_mode": "ephemeral-source-immutable",
+        "annotation_policy": "atomic-function-entry-metadata-v1",
+        "load_image_observations": "source-mappings-entry-context-v2",
+        "function_body_evidence": "complete-inclusive-ranges-v1",
+        "function_references": "complete-body-and-entry-reference-manager-v2",
+        "call_relationship_coverage": "function-body-call-coverage-v5",
+        "function_dossier_coverage": "observed-facets-and-call-relationships-v1",
+        "string_inventory_evidence": "defined-data-coverage-v1",
+        "location_resolution": "explicit-address-exact-entry-symbol-first-v3",
+        "procedure_file_offset_resolution": "address-first-unique-target-source-mapping-v2",
+        "instruction_flow_evidence": "decoded-return-pcode-v1",
+        "instruction_references": "exact-address-incoming-v1",
+        "function_boundary_observations": "ghidra-function-boundary-limitations-v3",
+        "no_return_repair": "returning-imports-decoded-return-v2",
+        "process_launch": "inspected-jvm-launch-support-v1",
+        "jump_table_evidence": "typed-case-default-blocks-v1",
+        "decompiler_jump_loads": true,
+        "loader": "auto-from-header",
+        "language_id": "auto-from-header",
+        "compiler_spec_id": "auto-default",
+        "analyzer_preset": "ghidra-default"
+      },
+      "digest": "7e46711069eea041af1b9b99e34115c13332795e5cda76e584a722f529ec70de"
+    },
+    "predicate_type": "rea.analysis",
+    "operation": "read_bytes",
+    "parameters": {
+      "address": "0x98eca",
+      "length": 16
+    },
+    "raw_result": {
+      "address": "0x98eca",
+      "requested_bytes": 16,
+      "returned_bytes": 16,
+      "bytes_hex": "b5eec00af1ee10fa01d2b1ee400a7047",
+      "complete": true
+    },
+    "normalized_result": {
+      "address": "0x98eca",
+      "requested_bytes": 16,
+      "returned_bytes": 16,
+      "bytes_hex": "b5eec00af1ee10fa01d2b1ee400a7047",
+      "complete": true
+    },
+    "confidence": "observed",
+    "authority": "shipped-artifact",
+    "environment": null,
+    "limitations": [
+      "The session serves operations only after Ghidra reports default auto-analysis complete; incomplete analysis does not expose partial results.",
+      "The imported Program and temporary project are ephemeral and deleted on close. Annotation operations edit session database metadata; original executable bytes are never written.",
+      "Cancelling an active Ghidra request terminates its ephemeral database and discards session annotations. The selected target remains open; the next provider query imports the original artifact again.",
+      "Default-space addresses use lowercase 0x-prefixed hexadecimal; other address spaces use <percent-encoded-space>:0x<hex>.",
+      "Bytes reflect Ghidra's initialized memory, including loader fixups. Reads stop at an unmapped or uninitialized byte and report completeness explicitly.",
+      "macOS sessions require a matching executable Ghidra native decompiler; REA checks for it but does not build native components or change Gatekeeper quarantine state."
+    ],
+    "relationship_coverage": null,
+    "locations": [],
+    "evidence_links": []
+  },
+  "probe_hashes": {
+    "build/goal-r1-abs-negate-c/verify.py": "3ef141e6057cbe6316b3b16fd069787e3935bac241d9199cac8d82be49b2e98a",
+    "build/goal-r1-abs-negate-c/verify-ladder.py": "fa7950884c786409fb9cf1f5e4a011c19830e65260b0e501a561f67b31b2850f",
+    "build/goal-r1-abs-negate-c/negatives.py": "a0e01bd781c76415571e0ba60c2e7a6e7ab9878020a57ac58f51a9b59995e0bd",
+    "build/goal-r1-abs-negate-c/audit.py": "ae1900d0c27c3bf7c2abb36352ead0cd84ad767d192be7a935d2e37236d040b2",
+    "build/goal-r1-abs-negate-c/product.elf": "3b77804524238acb7a3c59470a560302c2730ccfe128bfaa3b10491dc321a2f3",
+    "build/goal-r1-abs-negate-c/ladder.elf": "bea6d0fed94c1f1240ed872cba92bdcb7452aa6a64befb9f19efe378c9d4e1c1",
+    "build/goal-r1-abs-negate-c/gcc.elf": "d142fb32866b47fe0099c0cfff9711b68979d3126d4731ba78865f798b11bed3"
+  },
+  "limitations": [
+    "APSR and other caller-clobbered integer/floating registers excluded",
+    "No trap-enabled floating exceptions or physical processor timing proof",
+    "Only negation is moved to C; architectural VCMPE and FPSCR read remain because quiet comparisons lose NaN invalid-operation behavior.",
+    "All other math sections and relocations, including selected 12-byte floor data, remain unchanged.",
+    "Ladder proof uses actual C providers with a controlled native table address; transport remains modeled.",
+    "The function does not qualify byte-for-byte; no new source-plan selections.",
+    "Original Arm Compiler 5 is unavailable; complete source-only, byte-identical firmware remains unproven."
+  ]
+}

@@ -1,0 +1,306 @@
+{
+  "schema": 1,
+  "recorded": {
+    "candidate_units": 3,
+    "compiled_units": 3,
+    "units": [
+      {
+        "source": "r1/src/application/board/native_hw_twi_completion.c",
+        "payload": "r1-application",
+        "evidence": "r1/symbols/function-frontier.csv",
+        "selected": [],
+        "compiled": true,
+        "rejections": {},
+        "source_implementation_completeness": "not established by compilation or byte matching",
+        "reason": "no exact anchored body under tested production bindings; integration remains unfinished"
+      },
+      {
+        "source": "r1/src/application/board/native_hw_twi_wait.c",
+        "payload": "r1-application",
+        "evidence": "r1/symbols/function-frontier.csv",
+        "selected": [],
+        "compiled": true,
+        "rejections": {},
+        "source_implementation_completeness": "not established by compilation or byte matching",
+        "reason": "no exact anchored body under tested production bindings; integration remains unfinished"
+      },
+      {
+        "source": "r1/src/application/board/native_stacmd_transmit.c",
+        "payload": "r1-application",
+        "evidence": "r1/symbols/function-frontier.csv",
+        "selected": [],
+        "compiled": true,
+        "rejections": {
+          "native_symbol_anchor_missing": 1,
+          "compiled_bytes_differ": 1
+        },
+        "source_implementation_completeness": "not established by compilation or byte matching",
+        "reason": "no exact anchored body under tested production bindings; integration remains unfinished"
+      }
+    ]
+  },
+  "matrix": {
+    "candidate_units": 15,
+    "compiled_units": 15,
+    "units": [
+      {
+        "source": "r1/src/application/board/native_hw_twi_completion.c",
+        "payload": "r1-application",
+        "evidence": "r1/symbols/function-frontier.csv",
+        "selected": [],
+        "compiled": true,
+        "rejections": {
+          "native_symbol_anchor_missing": 2,
+          "native_bindings_or_isolated_link_unresolved": 1
+        },
+        "source_implementation_completeness": "not established by compilation or byte matching",
+        "reason": "no exact anchored body under tested production bindings; integration remains unfinished"
+      },
+      {
+        "source": "r1/src/application/board/native_hw_twi_completion.c",
+        "payload": "r1-application",
+        "evidence": "r1/symbols/function-frontier.csv",
+        "selected": [],
+        "compiled": true,
+        "rejections": {
+          "native_bindings_or_isolated_link_unresolved": 1,
+          "native_symbol_anchor_missing": 1
+        },
+        "source_implementation_completeness": "not established by compilation or byte matching",
+        "reason": "no exact anchored body under tested production bindings; integration remains unfinished"
+      },
+      {
+        "source": "r1/src/application/board/native_hw_twi_completion.c",
+        "payload": "r1-application",
+        "evidence": "r1/symbols/function-frontier.csv",
+        "selected": [],
+        "compiled": true,
+        "rejections": {
+          "native_symbol_anchor_missing": 2,
+          "native_bindings_or_isolated_link_unresolved": 1
+        },
+        "source_implementation_completeness": "not established by compilation or byte matching",
+        "reason": "no exact anchored body under tested production bindings; integration remains unfinished"
+      },
+      {
+        "source": "r1/src/application/board/native_hw_twi_completion.c",
+        "payload": "r1-application",
+        "evidence": "r1/symbols/function-frontier.csv",
+        "selected": [],
+        "compiled": true,
+        "rejections": {
+          "native_symbol_anchor_missing": 2,
+          "native_bindings_or_isolated_link_unresolved": 1
+        },
+        "source_implementation_completeness": "not established by compilation or byte matching",
+        "reason": "no exact anchored body under tested production bindings; integration remains unfinished"
+      },
+      {
+        "source": "r1/src/application/board/native_hw_twi_completion.c",
+        "payload": "r1-application",
+        "evidence": "r1/symbols/function-frontier.csv",
+        "selected": [],
+        "compiled": true,
+        "rejections": {
+          "native_bindings_or_isolated_link_unresolved": 1,
+          "native_symbol_anchor_missing": 1
+        },
+        "source_implementation_completeness": "not established by compilation or byte matching",
+        "reason": "no exact anchored body under tested production bindings; integration remains unfinished"
+      },
+      {
+        "source": "r1/src/application/board/native_hw_twi_wait.c",
+        "payload": "r1-application",
+        "evidence": "r1/symbols/function-frontier.csv",
+        "selected": [],
+        "compiled": true,
+        "rejections": {
+          "native_symbol_anchor_missing": 1,
+          "native_bindings_or_isolated_link_unresolved": 2
+        },
+        "source_implementation_completeness": "not established by compilation or byte matching",
+        "reason": "no exact anchored body under tested production bindings; integration remains unfinished"
+      },
+      {
+        "source": "r1/src/application/board/native_hw_twi_wait.c",
+        "payload": "r1-application",
+        "evidence": "r1/symbols/function-frontier.csv",
+        "selected": [],
+        "compiled": true,
+        "rejections": {
+          "native_symbol_anchor_missing": 1,
+          "native_bindings_or_isolated_link_unresolved": 2
+        },
+        "source_implementation_completeness": "not established by compilation or byte matching",
+        "reason": "no exact anchored body under tested production bindings; integration remains unfinished"
+      },
+      {
+        "source": "r1/src/application/board/native_hw_twi_wait.c",
+        "payload": "r1-application",
+        "evidence": "r1/symbols/function-frontier.csv",
+        "selected": [],
+        "compiled": true,
+        "rejections": {
+          "native_symbol_anchor_missing": 1,
+          "native_bindings_or_isolated_link_unresolved": 2
+        },
+        "source_implementation_completeness": "not established by compilation or byte matching",
+        "reason": "no exact anchored body under tested production bindings; integration remains unfinished"
+      },
+      {
+        "source": "r1/src/application/board/native_hw_twi_wait.c",
+        "payload": "r1-application",
+        "evidence": "r1/symbols/function-frontier.csv",
+        "selected": [],
+        "compiled": true,
+        "rejections": {
+          "native_symbol_anchor_missing": 1,
+          "native_bindings_or_isolated_link_unresolved": 2
+        },
+        "source_implementation_completeness": "not established by compilation or byte matching",
+        "reason": "no exact anchored body under tested production bindings; integration remains unfinished"
+      },
+      {
+        "source": "r1/src/application/board/native_hw_twi_wait.c",
+        "payload": "r1-application",
+        "evidence": "r1/symbols/function-frontier.csv",
+        "selected": [],
+        "compiled": true,
+        "rejections": {
+          "native_symbol_anchor_missing": 1,
+          "native_bindings_or_isolated_link_unresolved": 2
+        },
+        "source_implementation_completeness": "not established by compilation or byte matching",
+        "reason": "no exact anchored body under tested production bindings; integration remains unfinished"
+      },
+      {
+        "source": "r1/src/application/board/native_stacmd_transmit.c",
+        "payload": "r1-application",
+        "evidence": "r1/symbols/function-frontier.csv",
+        "selected": [],
+        "compiled": true,
+        "rejections": {
+          "native_symbol_anchor_missing": 2,
+          "native_bindings_or_isolated_link_unresolved": 2,
+          "compiled_bytes_differ": 2
+        },
+        "source_implementation_completeness": "not established by compilation or byte matching",
+        "reason": "no exact anchored body under tested production bindings; integration remains unfinished"
+      },
+      {
+        "source": "r1/src/application/board/native_stacmd_transmit.c",
+        "payload": "r1-application",
+        "evidence": "r1/symbols/function-frontier.csv",
+        "selected": [],
+        "compiled": true,
+        "rejections": {
+          "native_symbol_anchor_missing": 1,
+          "native_bindings_or_isolated_link_unresolved": 3,
+          "compiled_bytes_differ": 1
+        },
+        "source_implementation_completeness": "not established by compilation or byte matching",
+        "reason": "no exact anchored body under tested production bindings; integration remains unfinished"
+      },
+      {
+        "source": "r1/src/application/board/native_stacmd_transmit.c",
+        "payload": "r1-application",
+        "evidence": "r1/symbols/function-frontier.csv",
+        "selected": [],
+        "compiled": true,
+        "rejections": {
+          "native_symbol_anchor_missing": 2,
+          "native_bindings_or_isolated_link_unresolved": 2,
+          "compiled_bytes_differ": 2
+        },
+        "source_implementation_completeness": "not established by compilation or byte matching",
+        "reason": "no exact anchored body under tested production bindings; integration remains unfinished"
+      },
+      {
+        "source": "r1/src/application/board/native_stacmd_transmit.c",
+        "payload": "r1-application",
+        "evidence": "r1/symbols/function-frontier.csv",
+        "selected": [],
+        "compiled": true,
+        "rejections": {
+          "native_symbol_anchor_missing": 3,
+          "native_bindings_or_isolated_link_unresolved": 2,
+          "compiled_bytes_differ": 2
+        },
+        "source_implementation_completeness": "not established by compilation or byte matching",
+        "reason": "no exact anchored body under tested production bindings; integration remains unfinished"
+      },
+      {
+        "source": "r1/src/application/board/native_stacmd_transmit.c",
+        "payload": "r1-application",
+        "evidence": "r1/symbols/function-frontier.csv",
+        "selected": [],
+        "compiled": true,
+        "rejections": {
+          "native_symbol_anchor_missing": 1,
+          "native_bindings_or_isolated_link_unresolved": 2,
+          "compiled_bytes_differ": 2
+        },
+        "source_implementation_completeness": "not established by compilation or byte matching",
+        "reason": "no exact anchored body under tested production bindings; integration remains unfinished"
+      }
+    ]
+  },
+  "evidence": [
+    {
+      "path": "build/goal-r1-hardware-qualification/qualify.py",
+      "sha256": "ed38388927ad7b9a626b7289cb9a0ec555a94c4fd6a00650556c3ec6eea62442"
+    },
+    {
+      "path": "build/goal-r1-hardware-qualification/matrix.py",
+      "sha256": "2ed00d76ce3863e92b0d81e0b3561c1687c2bae3ae4ff7807eb6d0a6eecb0a22"
+    },
+    {
+      "path": "build/goal-r1-hardware-qualification/qualification-scope.json",
+      "sha256": "ce1477eb3cca8db62f8aa59399b29b308256f23eeb33e85b6f6cb7e3d35cdd42"
+    },
+    {
+      "path": "build/goal-r1-hardware-qualification/qualified/qualification.json",
+      "sha256": "b5f2a7c5740e3044cab2f45ecbd897a83a9b9f97c11312e9dd0c21b05aac9e40"
+    },
+    {
+      "path": "build/goal-r1-hardware-qualification/matrix/qualification.json",
+      "sha256": "62bc9341475aea0dfd235da4517645371270ea8c683c203ea20e7a6d60296549"
+    },
+    {
+      "path": "build/goal-r1-hardware-qualification/matrix/source-plan.json",
+      "sha256": "3da40e3d766877c0b3059bee372f651c1f56681157782eba12ee3076f1834a0f"
+    },
+    {
+      "path": "tools/build/qualify_sources.py",
+      "sha256": "3bf8267a58268806ff06a60eb3440e29f95f08a31d265fd60651b5e638c64011"
+    },
+    {
+      "path": "tools/build/source-plan.json",
+      "sha256": "964cbd3af9f4ea7ed207bb4b480d18a9529060dc3801663d296389472982aa7c"
+    },
+    {
+      "path": "r1/src/application/board/native_stacmd_transmit.c",
+      "sha256": "26da88091528558fdf193f0a1e8ced7206e5e9967fd93f450830f1d10049a73c"
+    },
+    {
+      "path": "r1/src/application/board/native_hw_twi_completion.c",
+      "sha256": "8851c8efdadea5d9d50db26c32d443c6982f95bfa04d71a2799d3c41b7aff6bf"
+    },
+    {
+      "path": "r1/src/application/board/native_hw_twi_wait.c",
+      "sha256": "027c2cbb2dc13d61e208fd384151590ae2feda7be46c124666abfed4740a382f"
+    },
+    {
+      "path": "r1/symbols/function-frontier.csv",
+      "sha256": "3805656f89c3d43bf82781f644d45b3164bc6e8164c6866d316bf203220bca51"
+    }
+  ],
+  "selected_regions": 0,
+  "source_plan_sha256": "964cbd3af9f4ea7ed207bb4b480d18a9529060dc3801663d296389472982aa7c",
+  "limitations": [
+    "Negative result is limited to these sources and tested production compiler flags.",
+    "Scope filters candidate input; official symbol binding universe is correspondingly limited. Completion/wait failures do not prove an instruction mismatch under independently established bindings.",
+    "Unmapped writable globals and internal helper dependencies remain native-binding debt.",
+    "No source completeness, physical hardware or byte-equivalence gate advanced."
+  ]
+}

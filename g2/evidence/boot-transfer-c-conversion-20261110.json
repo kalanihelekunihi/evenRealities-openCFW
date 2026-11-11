@@ -1,0 +1,45 @@
+{
+  "schema": 1,
+  "target": "Apollo bootloader vector handoff and first-task transfer",
+  "change": {
+    "removed_assembly_units": [
+      "g2/src/apollo-bootloader/update-core/handoff.S",
+      "g2/src/apollo-bootloader/thread-creation/first_task_transfer.S"
+    ],
+    "c_units": [
+      "g2/src/apollo-bootloader/update-core/handoff.c",
+      "g2/src/apollo-bootloader/thread-creation/first_task_transfer.c"
+    ],
+    "manifest": "g2/src/sources.json",
+    "architecture_instructions": "Both naked C functions retain explicit Thumb instructions because vector handoff changes MSP and first-task transfer abandons its current stack before SVC."
+  },
+  "focused_verification": {
+    "handoff_source_report": "build/g2-boot-handoff-c-20261110/report.json",
+    "handoff_link_report": "build/g2-boot-handoff-c-link-20261110/link-report.json",
+    "handoff_bootloader_binary_unchanged": true,
+    "first_task_source_report": "build/g2-boot-first-task-c-20261110/report.json",
+    "first_task_link_report": "build/g2-boot-first-task-c-link-20261110/link-report.json",
+    "first_task_text_bytes": 32,
+    "first_task_old_and_new_text_sha256": "b64f7033a524e9f1fbf7601aaa078a8d9d13ff53e37a30d17bdca328b141fcf6",
+    "first_task_text_exact_match": true
+  },
+  "full_verification": {
+    "sources_check": "make -C g2 sources-check",
+    "source_report": "build/g2-all-boot-transfer-c-20261110/report.json",
+    "source_report_sha256": "cb0e9a14781ee0fa8ca011da8ebad429563e3439e2ccfaae1fcdad94b5528a4f",
+    "enabled_units_compiled": 4877,
+    "compile_failures": 0,
+    "duplicate_strong_symbols": 0,
+    "strict_link_report": "build/g2-all-boot-transfer-c-link-20261110/link-report.json",
+    "strict_link_report_sha256": "3e343f99d897e62f4fd9035b6bb8dc6c4278b53dbd959edff4d00e731fed8b1a",
+    "payloads_linked": 7,
+    "external_binary_archive_used": false,
+    "bootloader_binary_bytes": 154232,
+    "bootloader_binary_sha256": "cf8e93fc70bd70e6052215bf67acab62b2f7257ef5e0450e20416264eea818f0",
+    "prior_bootloader_binary_sha256": "d31bb0d23d43a815d6f0370bbaf2b2fc6545cc69c4c8e2c222a120a67d906247",
+    "bootloader_binary_difference": "One byte at file offset 0x25a04 changes from 0xe0 to 0xc0 in .ARM.exidx, because the compiler adds unwind coverage for the naked C first-task function. The 32-byte first-task .text body is identical.",
+    "remaining_assembly_units": 5,
+    "remaining_build_enabled_assembly_units": 4
+  },
+  "qualification": "The two bootloader transitions are now C-compiled and their instruction bodies are preserved. One unwind metadata byte differs, and four enabled assembler units, byte identity, and hardware behavior remain unresolved."
+}

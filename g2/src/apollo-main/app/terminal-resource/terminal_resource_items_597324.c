@@ -7,6 +7,9 @@ extern uint32_t audio_td_ring_index_wrap(uint8_t *ring, uint16_t logical_index);
 uint32_t audio_terminal_resource_597324(void) {
     return (uint32_t)(uintptr_t)(audio_td_state + 0x1054u); /* stock 0x20110d74 */
 }
+/* Same stock entry 0x597324 under the terminal-data (td) pointer-getter name. */
+__typeof__(audio_terminal_resource_597324) audio_td_ring_ptr
+    __attribute__((alias("audio_terminal_resource_597324")));
 
 uint32_t audio_terminal_item_59737c(uint32_t logical_index) {
     uint8_t *ring = audio_td_state + 0x1054u;

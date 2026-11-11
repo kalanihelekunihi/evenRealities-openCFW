@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "report": "build/sources-goal-r1-goodix-upload-final-c/report.json",
+  "report_sha256": "21de1f24ec14ccec672007b583d2dabadb6d46e273ad735cd6a2b444bddab99b",
+  "manifest_sha256": "71e053630b87389ced93919e8ce1d9d8f873ad8ae4e765ca8c23b88d43716186",
+  "source_sha256": "7076e2b62d7147923281940a4e7be8b65f0abb337783e9709208684a5c9a08f1",
+  "rea": [
+    {
+      "evidence_id": "ev_b0df0f819748e3c423efd2234ca59d4c8b42d5fe4a94b295abe16941b1eff737",
+      "address": "0x2d66c",
+      "length": 2,
+      "matches_raw": true
+    },
+    {
+      "evidence_id": "ev_294f8a5f70c904cd933d4cf2915b141b2bbfc588bf127b37e7e4698a3a711ba5",
+      "address": "0x2c5c2",
+      "length": 24,
+      "matches_raw": true
+    }
+  ],
+  "verification": {
+    "direct_pairs": 512,
+    "callsite_pairs": 90,
+    "executions": 1204,
+    "actual_stock_caller": "0x2c5c2..0x2c5fc",
+    "frame_processing_provider_modeled": true,
+    "upload_has_no_data_accesses": true,
+    "compiled_bytes": 2
+  },
+  "defects": [
+    {
+      "defect": "tag-write",
+      "compiled": true,
+      "behavioral_assertion_rejected": true
+    },
+    {
+      "defect": "frame-read",
+      "compiled": true,
+      "behavioral_assertion_rejected": true
+    }
+  ],
+  "audit": {
+    "unchanged_prior_object_hashes": 799,
+    "generated_boot_allocated_bytes_and_relocations_unchanged": true,
+    "new_units": [
+      [
+        "r1-application",
+        "r1/src/application/goodix/stock_upload.c"
+      ]
+    ],
+    "removed_application_imports": [
+      "Gh2x2xUploadDataToMaster"
+    ],
+    "only_manifest_change_new_unit": true
+  },
+  "complete_function_matches_stock_bytes": true,
+  "pinned_disabled_branch": {
+    "source": "third-party/upstream/goodix-gh3x2x/gh3x2x/demo_code/demo_kernel_code/module/gh_protocol/gh_uprotocol.c",
+    "sha256": "03d586160750f80a298b0a1f36261c2fc8cb5e3c37380ec945df1d881898a055",
+    "body": "void Gh2x2xUploadDataToMaster(const STGh3x2xFrameInfo * const pstFrameInfo, GU16 usFrameCnt, GU16 usFrameNum, GU8* puchTagArray)\n{\n    UNUSED_VAR(pstFrameInfo);\n    UNUSED_VAR(usFrameCnt);\n    UNUSED_VAR(usFrameNum);\n    UNUSED_VAR(puchTagArray);\n}"
+  },
+  "evidence_files": {
+    "build/goal-r1-goodix-upload-c/verify.py": "06a20da1c63d78adec5c42c234ccd3eee5398646f70c78030c3282eb2575eec8",
+    "build/goal-r1-goodix-upload-c/defects.py": "b191430e3b7ec7e6dbb83bbc44ddb2b622ca1898569debf435f0b4c2ceede4a3",
+    "build/goal-r1-goodix-upload-c/audit.py": "3f9b9ba57827ab70926de68ac716fe6786cb5c01ee4a4f15f6229ff94d5c1786",
+    "build/goal-r1-goodix-upload-c/document.py": "39b5d79b6fe836c019ed5a495344cc003121dba893fa704ecce5eb3c59601157",
+    "build/goal-r1-goodix-upload-c/verification.json": "29b92c1d76b9015c44a562dfd80516df3ed7382975134318a02594bc553d761b",
+    "build/goal-r1-goodix-upload-c/defects.json": "61c405255474b1ef59ff875bb6cc953c30914e191358c7368fc625c448e4aef3",
+    "build/goal-r1-goodix-upload-c/audit.json": "cfdef57dbb58cbdc58679f4a51b480a7c28a948b43b751fb1210b55cee2f4ca8",
+    "build/goal-r1-goodix-upload-c/source.elf": "f45d0b7b06fecbb1fedbaeaa2e77a3149f03bddff1f20ecdb9e52bd5731a14b5",
+    "build/goal-r1-goodix-upload-c/rea.json": "c3b5864456ccef981813326ac2599f08ce3bf79ee13b5bd0c277a411647c0ca3",
+    "build/goal-r1-goodix-upload-c/verify-final.log": "0b96585a063df5d0000e976f8ea05d44e84434cfc2cf39aad7d5619463017571",
+    "build/goal-r1-goodix-upload-c/r1-sources-check.log": "6d73923e632429783fdd3043a315b2a647116368870ec9e95e63f0704680537f",
+    "build/goal-r1-goodix-upload-c/sources-check.log": "e8b0996477ba0bd5089ff2f7782bffdda73a1800ca2334d26950bb72f1f263ff",
+    "build/goal-r1-goodix-upload-c/boot-link/report.json": "77f390572107816d197715505f75a1fd1e8a10610b1d44a97bd092312eac767a"
+  },
+  "limitations": [
+    "Call-site identity follows matched frame-processing source and exact arguments, not shared no-op bytes alone.",
+    "Frame-data processing provider modeled in the executed stock call-site fragment.",
+    "No PC-tool protocol, sensor timing or physical sampling behavior inferred.",
+    "Application remains relocatable; full application final link remains incomplete."
+  ]
+}

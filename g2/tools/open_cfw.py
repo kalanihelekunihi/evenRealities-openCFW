@@ -704,7 +704,9 @@ def validate_touch(data: bytes) -> None:
         raise OpenCFWError("touch FWPK span is invalid")
     if crc32c_reflected(data[offset:]) != expected_crc:
         raise OpenCFWError("touch application CRC-32C is invalid")
-    plausible_vector(data, vector_offset=offset, image_base=0, image_size=size)
+    if size < 8 or crc32c_reflected(data[offset:-4]) != u32le(data, len(data) - 4):
+        raise OpenCFWError("touch programmed-image CRC-32C is invalid")
+    plausible_vector(data, vector_offset=offset, image_base=0x3300, image_size=size)
 
 
 def case_additive_sum(raw_image: bytes) -> int:
@@ -2369,7 +2371,7 @@ def wrap_touch_image(raw_image: bytes) -> bytes:
     plausible_vector(
         raw_image,
         vector_offset=0,
-        image_base=0,
+        image_base=0x3300,
         image_size=len(raw_image),
     )
     header = bytearray(
@@ -2385,6 +2387,134 @@ def wrap_touch_image(raw_image: bytes) -> bytes:
         )
     )
     return bytes(header) + raw_image
+
+
+def wrap_touch_source_image(programmed_image: bytes) -> bytes:
+    """Add the touch DFU footer and FWPK wrapper to source-linked flash bytes."""
+    if len(programmed_image) + 4 > 0xCD00:
+        raise OpenCFWError("touch source image exceeds the application flash region")
+    footer = struct.pack("<I", crc32c_reflected(programmed_image))
+    payload = wrap_touch_image(programmed_image + footer)
+    validate_touch(payload)
+    return payload
+
+
+def wrap_codec_uart_boot(stage1: bytes, stage2: bytes) -> bytes:
+    """Build the GX8002 FWPK type-1 UART segment from linked stage images.
+
+    The wire format transmits fixed 0x2800/0x6D3C stages. Shorter source
+    images are zero-padded; this does not assert stock identity or bootability.
+    """
+    stage1_size, stage2_size = 0x2800, 0x6D3C
+    if not 0x100 <= len(stage1) <= stage1_size:
+        raise OpenCFWError("codec UART stage-1 image size is invalid")
+    if not 0x100 <= len(stage2) <= stage2_size:
+        raise OpenCFWError("codec UART stage-2 image size is invalid")
+    for image, base, reset, exception, irq in (
+        (stage1, 0x10000000, 0x10000100, 0x10000130, 0x10000134),
+        (stage2, 0x10002800, 0x10002900, 0x10002994, 0x10003124),
+    ):
+        vectors = struct.unpack_from("<64I", image)
+        if (vectors[0] != reset or set(vectors[1:32]) != {exception} or set(vectors[32:]) != {irq}):
+            raise OpenCFWError(f"codec UART vectors at {base:#x} do not match the locked layout")
+        if any(not base <= address < base + len(image) for address in vectors):
+            raise OpenCFWError(f"codec UART vectors at {base:#x} leave the linked image")
+    stage1 = stage1.ljust(stage1_size, b"\0")
+    stage2 = stage2.ljust(stage2_size, b"\0")
+    header = (
+        struct.pack("<HBBHBB", 0x8002, 1, 1, 0, 0, 0)
+        + struct.pack(">IIII", stage1_size, 1500000, stage2_size, sum(stage2) & 0xFFFFFFFF)
+        + b"\0" * 8
+    )
+    return header + stage1 + stage2
+
+
+def crc32_mpeg2(data: bytes) -> int:
+    """Non-reflected CRC-32/MPEG-2 used by GX8002 BINH stage-1 blocks."""
+    crc = 0xFFFFFFFF
+    for byte in data:
+        crc ^= byte << 24
+        for _ in range(8):
+            crc = ((crc << 1) ^ (0x04C11DB7 if crc & 0x80000000 else 0)) & 0xFFFFFFFF
+    return crc
+
+
+def wrap_codec_binh_b(stage1: bytes, stage2: bytes) -> bytes:
+    """Build a source BINH B image from its separately linked load regions.
+
+    Stage 1 starts with vectors at 0x10000000. The file-only BINH header and
+    CRC surround that image; the source stage-2 SRAM image follows xip_len=0.
+    Missing tail bytes are zero-padded to the locked wire lengths.
+    """
+    stage1_limit = 0x3000 - 24 - 4
+    stage2_limit = 0x1408C
+    if not 0x100 <= len(stage1) <= stage1_limit:
+        raise OpenCFWError("codec BINH B stage-1 load size is invalid")
+    if not 0x100 <= len(stage2) <= stage2_limit:
+        raise OpenCFWError("codec BINH B stage-2 load size is invalid")
+    v1 = struct.unpack_from("<64I", stage1)
+    v2 = struct.unpack_from("<64I", stage2)
+    if v1[0] != 0x10000100 or set(v1[1:]) != {0x10000130}:
+        raise OpenCFWError("codec BINH B stage-1 vectors are invalid")
+    if (v2[0] != 0x10003100 or len(set(v2[1:32])) != 1
+            or len(set(v2[32:])) != 1
+            or any(not 0x10003000 <= address < 0x10003000 + len(stage2) for address in v2)):
+        raise OpenCFWError("codec BINH B stage-2 vectors are invalid")
+    stage1 = stage1.ljust(stage1_limit, b"\0")
+    stage2 = stage2.ljust(stage2_limit, b"\0")
+    header = struct.pack("<4sIIIII", b"BINH", 0x55AA55AA, 0x203,
+                         stage2_limit, 0x3000, 0x20000000)
+    block = header + stage1 + struct.pack("<I", crc32_mpeg2(stage1))
+    return block + struct.pack("<I", 0) + stage2
+
+
+def wrap_codec_binh_a(stage1: bytes, xip: bytes, sram: bytes,
+                      npu_commands: bytes, npu_weights: bytes) -> bytes:
+    """Build BINH A from its boot, XIP, SRAM, and NPU source regions.
+
+    Only code/load regions may be padded. NPU content must be supplied at its
+    full locked length; keeping stock commands or weights is not a source build.
+    """
+    stage1_limit = 0x3000 - 24 - 4
+    xip_limit, sram_limit = 0x8E84, 0x397C
+    if not 0x100 <= len(stage1) <= stage1_limit:
+        raise OpenCFWError("codec BINH A stage-1 load size is invalid")
+    if not 0x100 <= len(xip) <= xip_limit:
+        raise OpenCFWError("codec BINH A XIP load size is invalid")
+    if not 0x100 <= len(sram) <= sram_limit:
+        raise OpenCFWError("codec BINH A SRAM load size is invalid")
+    if len(npu_commands) != 0x23CC or len(npu_weights) != 0x1D7E0:
+        raise OpenCFWError("codec BINH A NPU source regions have invalid sizes")
+    v1 = struct.unpack_from("<64I", stage1)
+    v2 = struct.unpack_from("<64I", sram)
+    if v1[0] != 0x10000100 or set(v1[1:]) != {0x10000130}:
+        raise OpenCFWError("codec BINH A stage-1 vectors are invalid")
+    if (v2[0] != 0x10023500 or set(v2[1:32]) != {0x10023640}
+            or set(v2[32:]) != {0x10025574}):
+        raise OpenCFWError("codec BINH A SRAM vectors are invalid")
+    stage1 = stage1.ljust(stage1_limit, b"\0")
+    xip = xip.ljust(xip_limit, b"\0")
+    sram = sram.ljust(sram_limit, b"\0")
+    header = struct.pack("<4sIIIII", b"BINH", 0x55AA55AA, 0x203,
+                         xip_limit + sram_limit, 0x3000, 0x20000000)
+    block = header + stage1 + struct.pack("<I", crc32_mpeg2(stage1))
+    return (block + struct.pack("<I", xip_limit) + xip + sram
+            + npu_commands + npu_weights)
+
+
+def wrap_codec_fwpk(uart_boot: bytes, binh_a: bytes, binh_b: bytes) -> bytes:
+    """Assemble the locked two-segment codec container from source segments."""
+    if len(uart_boot) != 38236 or len(binh_a) != 0x2F3B0 or len(binh_b) != 0x17090:
+        raise OpenCFWError("codec FWPK source segment lengths are invalid")
+    flash = binh_a + binh_b
+    header = struct.pack("<4sIII", b"FWPK", 0x203, 2, 0)
+    table = (struct.pack("<IIII", 1, len(uart_boot), 0x30,
+                         zlib.crc32(uart_boot) & 0xFFFFFFFF)
+             + struct.pack("<IIII", 2, len(flash), 0x30 + len(uart_boot),
+                           zlib.crc32(flash) & 0xFFFFFFFF))
+    package = header + table + uart_boot + flash
+    validate_codec(package)
+    return package
 
 
 def parse_version(value: str) -> tuple[int, int, int]:
@@ -2502,7 +2632,7 @@ def main(argv: list[str] | None = None) -> int:
         "wrap",
         help="wrap a future raw source-built controller image",
     )
-    wrap_parser.add_argument("kind", choices=("main", "case", "touch"))
+    wrap_parser.add_argument("kind", choices=("main", "case", "touch", "touch-source"))
     wrap_parser.add_argument("input", type=Path)
     wrap_parser.add_argument("output", type=Path)
     wrap_parser.add_argument(
@@ -2578,6 +2708,8 @@ def main(argv: list[str] | None = None) -> int:
         wrapped = wrap_main_image(raw)
     elif args.kind == "case":
         wrapped = wrap_case_image(raw, args.case_version)
+    elif args.kind == "touch-source":
+        wrapped = wrap_touch_source_image(raw)
     else:
         wrapped = wrap_touch_image(raw)
     atomic_write(args.output, wrapped)

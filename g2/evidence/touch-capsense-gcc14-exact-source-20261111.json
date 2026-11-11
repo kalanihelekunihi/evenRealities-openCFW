@@ -1,0 +1,149 @@
+{
+  "schema": 1,
+  "target": "Promote already-linked GCC 14.2 stock-exact CAPSENSE touch functions",
+  "source": "third-party/reference/infineon-capsense-v5/cy_capsense_sensing_lp.c",
+  "source_sha256": "17b6468dde45c16c8f63cef048d5d8b240cc4ee5f55b82d37bd8d77ace95c23f",
+  "compiler": "Arm GNU 14.2.Rel1",
+  "compiler_sha256": "2e6d1fc0b7709d2fc08278a06bbcbfadb6fafcf5837e13cde01a1fbd07ad6db1",
+  "qualification": "Unique inventoried native entries with full linked equality; two overlapping GPIO functions from the same unit were left with their existing source provider.",
+  "new_regions": [
+    {
+      "symbol": "Cy_CapSense_MsclpTimerCalcCycles",
+      "start": 10896,
+      "end": 10928,
+      "sha256": "7440beef256b1a0aba696469228987a4d9955329b9101992ccada5488476cd07"
+    },
+    {
+      "symbol": "Cy_CapSense_ConfigureMsclpTimer",
+      "start": 10928,
+      "end": 10998,
+      "sha256": "2b1473d6d32a1733d828e601cd2b4f1db5c59c2c3b29bac083c8730410d607c8"
+    },
+    {
+      "symbol": "Cy_CapSense_IloCompensate",
+      "start": 11000,
+      "end": 11140,
+      "sha256": "914a1f92b1671189dd18650fe66584d371be1d7b246d59dc19a1015ef4f85a33"
+    },
+    {
+      "symbol": "Cy_CapSense_MinRawSearch",
+      "start": 11348,
+      "end": 11390,
+      "sha256": "bc68abc2591b4bcdfe85f0b0df81354f2c09fa05df09ccd87da310eeb30340cb"
+    },
+    {
+      "symbol": "Cy_CapSense_WatchdogCyclesNum",
+      "start": 11460,
+      "end": 11482,
+      "sha256": "5b4ab633956e4b7b49d37ae01bc6084b9fd7eb84e63c9293224ffd883b1775fa"
+    },
+    {
+      "symbol": "Cy_CapSense_ClrBusyFlags",
+      "start": 11884,
+      "end": 11920,
+      "sha256": "abb33ee26468ac94a0894b3e75b695b36e8f1e09caa82b0fe0a8db6e63f2cba6"
+    },
+    {
+      "symbol": "Cy_CapSense_RunSSCAuto",
+      "start": 12048,
+      "end": 12096,
+      "sha256": "47b57878e485229118057ff10dde43c8b14892e0c2417fdd890ac7deb99e9126"
+    },
+    {
+      "symbol": "Cy_CapSense_GetPolySize",
+      "start": 12096,
+      "end": 12124,
+      "sha256": "5d5a8fb187665ecafea0db9b57a69902955f961aecd8bdb07cc4608849d0058c"
+    },
+    {
+      "symbol": "Cy_CapSense_GetClkSrcPRSAuto",
+      "start": 12124,
+      "end": 12162,
+      "sha256": "5d77837d970815950aa5195c2bb66512a4355c87069c9a80d84d0285e338bfcb"
+    },
+    {
+      "symbol": "Cy_CapSense_GetLfsrDitherLimit",
+      "start": 12176,
+      "end": 12210,
+      "sha256": "d5e81db2f8506baafef83ab8a06000de82e137d4352ac399c0cecc86c742ca9b"
+    },
+    {
+      "symbol": "Cy_CapSense_GetLfsrBitsNumber",
+      "start": 12368,
+      "end": 12402,
+      "sha256": "bdaf730080ef382a414ab9db2fe9e190145548b1850038b914479259e8be8173"
+    },
+    {
+      "symbol": "Cy_CapSense_GetLfsrBitsAuto",
+      "start": 12402,
+      "end": 12452,
+      "sha256": "b752aea3fa37fad8cde35b0f858146915326a8eacede44f1c9b02f6f5a7459df"
+    },
+    {
+      "symbol": "Cy_CapSense_TransferLpRawCounts",
+      "start": 12880,
+      "end": 13096,
+      "sha256": "0f118ab2d707b55b6b810e39722552e4e5fd47d9a16ff0499b9f4e4f80e7675d"
+    },
+    {
+      "symbol": "Cy_CapSense_WaitMrssStatusChange",
+      "start": 13096,
+      "end": 13162,
+      "sha256": "504465a9abd68f613257e10c8412382cd814ebf5c20a1541b6658c4b99536311"
+    },
+    {
+      "symbol": "Cy_CapSense_StartCpuScan",
+      "start": 13896,
+      "end": 13984,
+      "sha256": "19a465490c8ac158ac0ed33da92cb84b5d1b0d6b568c241c6d535c279d8d1c02"
+    },
+    {
+      "symbol": "Cy_CapSense_WaitEndOfCpuScan",
+      "start": 13984,
+      "end": 14052,
+      "sha256": "f889c1998fe704f7542cb944ea8266348dd0e48dad32033a70d3afd4cf693908"
+    }
+  ],
+  "new_region_count": 16,
+  "new_region_bytes": 1012,
+  "g2_exact_regions": 89,
+  "g2_exact_bytes": 4796,
+  "touch_exact_regions": 71,
+  "touch_exact_bytes": 4678,
+  "focused_touch_build": "build/g2-touch-capsense-gcc14-full-20261111/report.json",
+  "full_build": {
+    "path": "build/g2-touch-capsense-gcc14-all-20261111/report.json",
+    "compiled_units": 4885,
+    "source_completeness": false
+  },
+  "strict_link": {
+    "path": "build/g2-touch-capsense-gcc14-bundle-20261111/link-report.json",
+    "payloads": [
+      "g2-apollo-bootloader",
+      "g2-apollo-main",
+      "g2-case",
+      "g2-codec-a",
+      "g2-codec-b",
+      "g2-em9305",
+      "g2-touch"
+    ],
+    "source_only_bundle_bytes": 4638116,
+    "source_only_bundle_sha256": "0d3e1caf0b298ea70950a8284d30acb809f4163b0798c856db5e49e44f8d562f",
+    "matches_locked_target": false
+  },
+  "hybrid": {
+    "path": "build/g2-touch-capsense-gcc14-hybrid-20261111/build-report.json",
+    "touch_source_bytes": 4678,
+    "touch_binary_pull_through_bytes": 29754,
+    "bundle_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa"
+  },
+  "file_sha256": {
+    "g2/src/sources.json": "8f32f2838c488f1a8808dd4a18d081983bf497b1f975f7688b6abf9a708e3368",
+    "tools/build/source-plan.json": "bca03cb7a741705e56e44da2ef8361ffbd8713d121e18ac13c95ed8a344ac56e",
+    "build/g2-touch-capsense-gcc14-qual-20261111/source-plan.json": "e0622a53abc45825a14556f72ca8c7085e351d3c3ee34b58dce0c7adbaa60d2f",
+    "build/g2-touch-capsense-gcc14-all-20261111/report.json": "48abc6b5aa9b288f2e0f02c12fb81d335229f1399e58a4516460d44a2e6db274",
+    "build/g2-touch-capsense-gcc14-bundle-20261111/link-report.json": "7d1d8fc0f100929434138a3ea382fc652576391fc1b123c290681d9d60a06977",
+    "build/g2-touch-capsense-gcc14-hybrid-20261111/build-report.json": "e0b544758548254c6c130839dcc445ff94afdac318c53f3b52e6f8031fac9e77"
+  },
+  "limits": "Exact selected bodies are a small fraction of the touch application. The authenticated hybrid still uses binary pull-through; the source-only bundle differs from stock, and physical hardware behavior is unverified."
+}

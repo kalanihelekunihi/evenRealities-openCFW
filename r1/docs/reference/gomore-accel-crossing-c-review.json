@@ -1,0 +1,496 @@
+{
+  "stock_entries": {
+    "0x58aee": "r1_gomore_accel_positive_fill_native",
+    "0x56cf4": "r1_gomore_accel_crossing_native"
+  },
+  "stock_application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "production_unit": {
+    "source": "r1/src/application/runtime/native_gomore_accel_crossing.c",
+    "payload": "r1-application",
+    "role": "candidate",
+    "toolchain": "gcc9",
+    "link": true,
+    "expect": "compile",
+    "returncode": 0,
+    "argv": [
+      "/opt/homebrew/bin/python3",
+      "/Users/kalani/Repo/evenRealities-openCFW/tools/build/linux_gcc.py",
+      "--compiler",
+      "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/bin/arm-none-eabi-gcc",
+      "--read-root",
+      "/Users/kalani/Repo/evenRealities-openCFW/r1",
+      "--read-root",
+      "/Users/kalani/Repo/evenRealities-openCFW/third-party/upstream",
+      "--read-root",
+      "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1",
+      "--read-root",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-accel-crossing-final-b-c/generated/r1",
+      "--",
+      "-mcpu=cortex-m4",
+      "-mthumb",
+      "-munaligned-access",
+      "-mfpu=fpv4-sp-d16",
+      "-mfloat-abi=hard",
+      "-std=c11",
+      "-Os",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-fshort-enums",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-fno-delete-null-pointer-checks",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/r1/src/vendor",
+      "-isystem",
+      "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
+      "-fno-strict-aliasing",
+      "-ffp-contract=off",
+      "-fsignaling-nans",
+      "-frounding-math",
+      "-ftrapping-math",
+      "-fno-if-conversion",
+      "-fno-if-conversion2",
+      "-O1",
+      "-MD",
+      "-MF",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-accel-crossing-final-b-c/r1/r1-application/r1__src__application__runtime__native_gomore_accel_crossing.c.d",
+      "-c",
+      "/Users/kalani/Repo/evenRealities-openCFW/r1/src/application/runtime/native_gomore_accel_crossing.c",
+      "-o",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-accel-crossing-final-b-c/r1/r1-application/r1__src__application__runtime__native_gomore_accel_crossing.c.o"
+    ],
+    "source_sha256": "01a3bb2b46e2cd108e581a6f11dee61a1164c439ef060a4bab1fa4e4b0b0231c",
+    "object_sha256": "c497856faa1256f6b7005bbc7d27c92fe50b545230b155a7cbc7c83997be4ced",
+    "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-accel-crossing-final-b-c/r1/r1-application/r1__src__application__runtime__native_gomore_accel_crossing.c.o",
+    "strong": [
+      "r1_gomore_accel_crossing_native",
+      "r1_gomore_accel_positive_fill_native"
+    ],
+    "weak": [],
+    "undefined": [
+      "r1_gomore_accel_crossing_period_native"
+    ]
+  },
+  "baseline": {
+    "pairs": 19969,
+    "fault_pairs": 15,
+    "digest": "e37aafc91d4bc742cdd52bd0dfecc4424f9bf42f855526a4e110f8b5979ff519",
+    "production_unit": {
+      "source": "r1/src/application/runtime/native_gomore_accel_crossing.c",
+      "payload": "r1-application",
+      "role": "candidate",
+      "toolchain": "gcc9",
+      "link": true,
+      "expect": "compile",
+      "returncode": 0,
+      "argv": [
+        "/opt/homebrew/bin/python3",
+        "/Users/kalani/Repo/evenRealities-openCFW/tools/build/linux_gcc.py",
+        "--compiler",
+        "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/bin/arm-none-eabi-gcc",
+        "--read-root",
+        "/Users/kalani/Repo/evenRealities-openCFW/r1",
+        "--read-root",
+        "/Users/kalani/Repo/evenRealities-openCFW/third-party/upstream",
+        "--read-root",
+        "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1",
+        "--read-root",
+        "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-accel-crossing-final-b-c/generated/r1",
+        "--",
+        "-mcpu=cortex-m4",
+        "-mthumb",
+        "-munaligned-access",
+        "-mfpu=fpv4-sp-d16",
+        "-mfloat-abi=hard",
+        "-std=c11",
+        "-Os",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-fshort-enums",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-fno-delete-null-pointer-checks",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/r1/src/vendor",
+        "-isystem",
+        "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
+        "-fno-strict-aliasing",
+        "-ffp-contract=off",
+        "-fsignaling-nans",
+        "-frounding-math",
+        "-ftrapping-math",
+        "-fno-if-conversion",
+        "-fno-if-conversion2",
+        "-O1",
+        "-MD",
+        "-MF",
+        "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-accel-crossing-final-b-c/r1/r1-application/r1__src__application__runtime__native_gomore_accel_crossing.c.d",
+        "-c",
+        "/Users/kalani/Repo/evenRealities-openCFW/r1/src/application/runtime/native_gomore_accel_crossing.c",
+        "-o",
+        "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-accel-crossing-final-b-c/r1/r1-application/r1__src__application__runtime__native_gomore_accel_crossing.c.o"
+      ],
+      "source_sha256": "01a3bb2b46e2cd108e581a6f11dee61a1164c439ef060a4bab1fa4e4b0b0231c",
+      "object_sha256": "c497856faa1256f6b7005bbc7d27c92fe50b545230b155a7cbc7c83997be4ced",
+      "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-accel-crossing-final-b-c/r1/r1-application/r1__src__application__runtime__native_gomore_accel_crossing.c.o",
+      "strong": [
+        "r1_gomore_accel_crossing_native",
+        "r1_gomore_accel_positive_fill_native"
+      ],
+      "weak": [],
+      "undefined": [
+        "r1_gomore_accel_crossing_period_native"
+      ]
+    },
+    "limits": [
+      "Raw R0, complete external hashes, ordered public writes, logical faults, FPSCR, masks, SP and preserved registers compared.",
+      "Both descending passes, carried positives, wrapped signed division and halfword narrowing compared.",
+      "Private frame bytes, caller-clobbered register/APSR residue, concurrent changes and nonreturning wrap domains excluded.",
+      "No physical hardware, source-only link or C byte identity proof."
+    ]
+  },
+  "wrapper": {
+    "pairs": 411,
+    "controlled_pairs": 147,
+    "actual_period_pairs": 216,
+    "fault_pairs": 12,
+    "digest": "110a55b9085631130fed2b3d867f0827e1d59b16f4eec18260c11d7c96c9fe61",
+    "production_unit": {
+      "source": "r1/src/application/runtime/native_gomore_accel_crossing.c",
+      "payload": "r1-application",
+      "role": "candidate",
+      "toolchain": "gcc9",
+      "link": true,
+      "expect": "compile",
+      "returncode": 0,
+      "argv": [
+        "/opt/homebrew/bin/python3",
+        "/Users/kalani/Repo/evenRealities-openCFW/tools/build/linux_gcc.py",
+        "--compiler",
+        "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/bin/arm-none-eabi-gcc",
+        "--read-root",
+        "/Users/kalani/Repo/evenRealities-openCFW/r1",
+        "--read-root",
+        "/Users/kalani/Repo/evenRealities-openCFW/third-party/upstream",
+        "--read-root",
+        "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1",
+        "--read-root",
+        "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-accel-crossing-final-b-c/generated/r1",
+        "--",
+        "-mcpu=cortex-m4",
+        "-mthumb",
+        "-munaligned-access",
+        "-mfpu=fpv4-sp-d16",
+        "-mfloat-abi=hard",
+        "-std=c11",
+        "-Os",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-fshort-enums",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-fno-delete-null-pointer-checks",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/r1/src/vendor",
+        "-isystem",
+        "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
+        "-fno-strict-aliasing",
+        "-ffp-contract=off",
+        "-fsignaling-nans",
+        "-frounding-math",
+        "-ftrapping-math",
+        "-fno-if-conversion",
+        "-fno-if-conversion2",
+        "-O1",
+        "-MD",
+        "-MF",
+        "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-accel-crossing-final-b-c/r1/r1-application/r1__src__application__runtime__native_gomore_accel_crossing.c.d",
+        "-c",
+        "/Users/kalani/Repo/evenRealities-openCFW/r1/src/application/runtime/native_gomore_accel_crossing.c",
+        "-o",
+        "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-accel-crossing-final-b-c/r1/r1-application/r1__src__application__runtime__native_gomore_accel_crossing.c.o"
+      ],
+      "source_sha256": "01a3bb2b46e2cd108e581a6f11dee61a1164c439ef060a4bab1fa4e4b0b0231c",
+      "object_sha256": "c497856faa1256f6b7005bbc7d27c92fe50b545230b155a7cbc7c83997be4ced",
+      "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-accel-crossing-final-b-c/r1/r1-application/r1__src__application__runtime__native_gomore_accel_crossing.c.o",
+      "strong": [
+        "r1_gomore_accel_crossing_native",
+        "r1_gomore_accel_positive_fill_native"
+      ],
+      "weak": [],
+      "undefined": [
+        "r1_gomore_accel_crossing_period_native"
+      ]
+    },
+    "limits": [
+      "Actual native period estimator retained; controlled replay separately tests bit-range filters.",
+      "Raw R0, external hashes/writes, period arguments, scratch pointers, entry depths, FPSCR, logical faults, masks, SP and preserved registers compared.",
+      "Private frames, caller-clobbered registers/APSR and exact exception frames excluded.",
+      "No physical hardware, complete source link or byte identity proof."
+    ]
+  },
+  "integration": {
+    "pairs": 5816,
+    "fault_pairs": 66,
+    "provider_counts": {
+      "0x722ec": 14868,
+      "0x723b6": 14868,
+      "0x568f0": 3717,
+      "0x8f4b4": 14868,
+      "0x3b00e": 107793,
+      "0x56cf4": 0,
+      "0x56f94": 0,
+      "0x582c4": 2214,
+      "0x56a0c": 2214,
+      "0x569bc": 4428,
+      "0x56ba8": 2214,
+      "0x58256": 2214,
+      "0x583c8": 2214,
+      "0x56980": 8859,
+      "0x7eaf6": 0,
+      "0x56920": 0,
+      "0x67e4c": 2217,
+      "0x4834a": 3717,
+      "0x710d4": 156,
+      "0x58480": 3543,
+      "0x484fc": 12659,
+      "0x277aa": 15204
+    },
+    "digest": "e4bdc2a73bd9bc8c711e6600cb988cdbf97c17dc686c63c14faa2c5c481007cc",
+    "limits": [
+      "C accelerometer root executes with C collector, statistics, history/reset, conversion and sqrt providers.",
+      "Classifier remains stock with C nonzero mean, hysteresis and linear-sign helpers; other spectral dependencies and EABI clear remain stock.",
+      "Private stack bytes excluded except explicit output span; logical faults compare access/width and preceding public writes. No physical device or full-source proof.",
+      "Crossing wrapper and period are unvisited in this broad stage matrix; focused classifier replay covers them separately."
+    ]
+  },
+  "classifier": {
+    "pairs": 216,
+    "provider_counts": {
+      "0x722ec": 0,
+      "0x723b6": 0,
+      "0x568f0": 0,
+      "0x8f4b4": 0,
+      "0x3b00e": 432,
+      "0x56cf4": 216,
+      "0x56f94": 432,
+      "0x582c4": 216,
+      "0x56a0c": 216,
+      "0x569bc": 432,
+      "0x56ba8": 216,
+      "0x58256": 216,
+      "0x583c8": 216,
+      "0x56980": 864,
+      "0x7eaf6": 216,
+      "0x56920": 162,
+      "0x67e4c": 216,
+      "0x4834a": 0,
+      "0x710d4": 0,
+      "0x58480": 0,
+      "0x484fc": 0,
+      "0x277aa": 1080
+    },
+    "digest": "7bc058204e6bf250ace7ef0a7176e11283ce5bd9c6584b7aa425911fe23c9799",
+    "limits": [
+      "Actual native classifier with three C mean/hysteresis/linear helpers and existing C lower math/statistics where called.",
+      "Other spectral functions remain stock; memory/writes, helper arguments, FPSCR, return, preserved registers, SP and masks compared.",
+      "Parent/helper entry depths and caller-visible buffer addresses compared; unexposed internal C frames and private save bytes excluded.",
+      "C crossing wrapper uses its shared inlined C baseline; real native period body remains. Period scratch pointers and entry depths match without normalization."
+    ]
+  },
+  "checked": {
+    "pairs": 208,
+    "guard_cases": 6,
+    "limits": [
+      "Actual checked baseline object delegates to the shared native C implementation.",
+      "Other undefined utility imports bound to stop sentinel and not exercised.",
+      "General crossing wrapper/period interfaces retain caller-injected policy and are explicitly checked APIs."
+    ]
+  },
+  "negative_controls": [
+    {
+      "kind": "baseline",
+      "control": "omit-warm-pass",
+      "rejected": true,
+      "source_sha256": "b100fe71c830f6d712421f0acbd3dad6b4380e9044a0cb2c656dbb86a4427d62",
+      "object_sha256": "eea89e42036325ec312cdaf91192ec08db562500d47853ee76f126562ea2a700"
+    },
+    {
+      "kind": "baseline",
+      "control": "accept-zero",
+      "rejected": true,
+      "source_sha256": "11a27b6d1a77e47019f2b30dcd9f19807b2e08d4ad363743653bf97cb8ad4b46",
+      "object_sha256": "ae93295b1984cf06479cf9ba62410dd9e05743086024c0939870a886bad8abec"
+    },
+    {
+      "kind": "baseline",
+      "control": "wrong-denominator",
+      "rejected": true,
+      "source_sha256": "de8a2cfadfbec672a39a33b6cb0b8037b538b118fd5905cb983b73131b8444e7",
+      "object_sha256": "36a6d2b774bbda650be3c114430340f16424dd4c2e74a7bb3604d5edd0b7e583"
+    },
+    {
+      "kind": "baseline",
+      "control": "exclude-begin",
+      "rejected": true,
+      "source_sha256": "c23ff3a61e4203e79a3dc5eaf3962f60b9bfa3fea1c726af568a02faad064353",
+      "object_sha256": "e417129ab743487aaf4f2319162330a418504864074ac97d048e09bb9f389cf4"
+    },
+    {
+      "kind": "baseline",
+      "control": "missing-index-narrow",
+      "rejected": true,
+      "source_sha256": "7704eaa0a2d5f3bd78fa312694df43f333cc1aee0f81c23a1436aa4000348482",
+      "object_sha256": "78d83f5ef59116beac5825883d236cb68f2a8706d45fc94a34c48076ae7e0e81"
+    },
+    {
+      "kind": "baseline",
+      "control": "unsigned-division",
+      "rejected": true,
+      "source_sha256": "c9c1bad2540217eb9f6cd548c08be7ec6d21afe813d88053f7916e2f44704b38",
+      "object_sha256": "c9ea405ae4c81a28e83a8e4e38556ef958b6fe282e2bca4ca138e0c2a3d1e457"
+    },
+    {
+      "kind": "wrapper",
+      "control": "strict-upper-filter",
+      "rejected": true,
+      "source_sha256": "4e505c477da0c4b19e3eb34d29510a7ea38852c9ecdb7999a1fef45a89d7b4c7",
+      "object_sha256": "afef9ece5c6fccd198627f16068d288dd22b8529697e93dee82ad4d927b45b91"
+    },
+    {
+      "kind": "wrapper",
+      "control": "wrong-filter-offset",
+      "rejected": true,
+      "source_sha256": "183f197396d17a338ae51a98b059583fdf741a25aa2ba79a35ef156df21cb6c5",
+      "object_sha256": "d04a767b6d3e0e21478db6172931bd9f65aa72e3c2bedb64b52ef2fceeb8dc8f"
+    },
+    {
+      "kind": "wrapper",
+      "control": "wrong-mode2",
+      "rejected": true,
+      "source_sha256": "99d53cb42c1150daf31f8755594a6221922090b84edf05c7b543f54ddf838175",
+      "object_sha256": "95e8c7b893746d693482407c4e08cba3f322fb792ea8937efcfb7ed8bc694e35"
+    },
+    {
+      "kind": "wrapper",
+      "control": "wrong-seed",
+      "rejected": true,
+      "source_sha256": "3c5bf4fcce740e6a1a3a491697e1a29ae3e6d03a18111352462a6207e44a92ae",
+      "object_sha256": "dd3fe9301b6eab0de8738ba41feeaa4001c01001056ecbf738328a5260d5c367"
+    },
+    {
+      "kind": "wrapper",
+      "control": "remove-frame-word",
+      "rejected": true,
+      "source_sha256": "82836a95df455a04a6db026962a7697c7d0e882d45c8eceb6180283cb4bd147a",
+      "object_sha256": "27bd7cce2dfb83fe11bed22157dadb652bfae27075bfa94d6b4ab24132d9bd6a"
+    },
+    {
+      "kind": "wrapper",
+      "control": "missing-cursor-sign",
+      "rejected": true,
+      "source_sha256": "576cbbc35c309ebd6fd64b42caba0883805e54591dff31c600bf02b6803df88f",
+      "object_sha256": "7d0fb183aaa20481a1d4f1180d6e17811e9064c328c45b6df1ef05acc6bf7a63"
+    }
+  ],
+  "qualification": {
+    "candidate_units": 1,
+    "compiled_units": 1,
+    "units": [
+      {
+        "source": "r1/src/application/runtime/native_gomore_accel_crossing.c",
+        "payload": "r1-application",
+        "evidence": "r1/symbols/function-frontier.csv",
+        "selected": [],
+        "compiled": true,
+        "rejections": {
+          "compiled_bytes_differ": 1,
+          "anchored_relocation_pattern_not_exact": 1
+        },
+        "source_implementation_completeness": "not established by compilation or byte matching",
+        "reason": "no exact anchored body under tested production bindings; integration remains unfinished"
+      }
+    ]
+  },
+  "normal_build": {
+    "report": "build/sources-goal-r1-gomore-accel-crossing-final-b-c/report.json",
+    "units": 716,
+    "application_units": 642,
+    "bootloader_units": 74,
+    "application_imports": 179,
+    "bootloader_imports": 34,
+    "added_imports": [
+      "r1_gomore_accel_crossing_period_native"
+    ],
+    "removed_imports": []
+  },
+  "hybrid": "build/hybrid-goal-r1-gomore-accel-crossing-c",
+  "hybrid_application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "canonical_plan": {
+    "source_built_executable": 4381,
+    "stock_executable": 641779,
+    "resource": 248
+  },
+  "remaining_dependencies": {
+    "0x56f94": "r1_gomore_accel_crossing_period_native",
+    "0x56d78": "autocorrelation dispatch",
+    "0x5c5f0": "autocorrelation estimator"
+  },
+  "wrapper_frame": {
+    "bytes": 40,
+    "mode2_entry_sp_offset": -32,
+    "mode1_entry_sp_offset": -36,
+    "baseline_inlined": true,
+    "recorded_optimization": "GCC9 -O1",
+    "pointer_or_entry_depth_normalization": false
+  },
+  "limits": [
+    "Raw R0, complete external hashes, ordered public writes, logical faults, FPSCR, masks, SP and preserved registers compared.",
+    "Both descending passes, carried positives, wrapped signed division and halfword narrowing compared.",
+    "Private frame bytes, caller-clobbered register/APSR residue, concurrent changes and nonreturning wrap domains excluded.",
+    "No physical hardware, source-only link or C byte identity proof.",
+    "Actual native period estimator retained; controlled replay separately tests bit-range filters.",
+    "Raw R0, external hashes/writes, period arguments, scratch pointers, entry depths, FPSCR, logical faults, masks, SP and preserved registers compared.",
+    "Private frames, caller-clobbered registers/APSR and exact exception frames excluded.",
+    "No physical hardware, complete source link or byte identity proof.",
+    "Stage matrix supplies zero crossing coverage; focused classifier supplies actual lower-body replay.",
+    "Exact selection remains empty. Full source-only linking, physical validation and C byte identity remain unfinished."
+  ],
+  "sha256": {
+    "r1/src/application/runtime/native_gomore_accel_crossing.c": "01a3bb2b46e2cd108e581a6f11dee61a1164c439ef060a4bab1fa4e4b0b0231c",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-accel-crossing-final-b-c/r1/r1-application/r1__src__application__runtime__native_gomore_accel_crossing.c.o": "c497856faa1256f6b7005bbc7d27c92fe50b545230b155a7cbc7c83997be4ced",
+    "r1/src/application/runtime/native_gomore_accel_crossing.h": "f764d46554372d1e629cc25c8cd5c4d335943d963c581760f1ad218f61edd711",
+    "r1/src/application/runtime/native_gomore_accel_crossing_period.h": "28ab0d10239a452d3b46a627cd0ebd0f3241d00bee1c9d64b3ff074a13623cd2",
+    "r1/src/vendor/gomore_primitives/gomore_primitives.c": "4824b8fe9ec3d443acc32dfc3bbb186ebbf2dba95e4cb0d78b2247561d8b8b0b",
+    "r1/src/vendor/gomore_primitives/gomore_primitives.h": "1ea7d33e2b267b1ce39c6e45e16fb7c403ec0270d08ed1665a5ea45fd352d37f",
+    "r1/src/sources.json": "4e5d893c3814a7e93c2d9aa0f6c01e27cb04883ce48ad43bc969311e78d1babf",
+    "build/sources-goal-r1-gomore-accel-crossing-final-b-c/report.json": "84ba898f939fce1e6b80bb0f85205c2a6d4d1378331c517a832507b2ec8505cf",
+    "tools/build/source-plan.json": "43281e3850f6c7b83c5616e5968c4939993501810057ca3deaeea85eaae351ba",
+    "build/hybrid-goal-r1-gomore-accel-crossing-c/build-report.json": "3647e9dc77f5d6528f1c3993cfc55485511c493a41556d55927000f35ccbdd64",
+    "build/goal-r1-gomore-accel-crossing-c/rea-baseline.json": "fc1f8a014f3a209e3aa677673d361815649d28c6897b10ba5438563d8be990a5",
+    "build/goal-r1-gomore-accel-crossing-c/rea-wrapper.json": "6e08965d4fd7552d1cc1b89333f24d25e417322ecc4aaf9500d4ec22557c94e7",
+    "build/goal-r1-gomore-accel-crossing-c/rea-period.json": "29b8f0083e34fe9b5f3981a6ae8c71fdace6e01ade42cf16e10bd61a732e5d16",
+    "build/goal-r1-gomore-accel-crossing-c/final.dis": "ba0154c26c4a9b3b9042d71ef3845152eda1ae05c95fd9697473eaa0e9dd8df0",
+    "build/goal-r1-gomore-accel-crossing-c/baseline.py": "633d2bb8dae2802f5a8be529f84abaecbbb82e00035309e112a32f3a6645f8f6",
+    "build/goal-r1-gomore-accel-crossing-c/baseline-results.json": "fca86943f538244eec172c62981601bf988e711506708b85d3f5892bc9f1dba9",
+    "build/goal-r1-gomore-accel-crossing-c/wrapper.py": "6a42cebc0f6fd4f2794a9f7f8f66b0f8d4b061d63b600dfeaff3d00f66c2c206",
+    "build/goal-r1-gomore-accel-crossing-c/wrapper-results.json": "e40aca0b8d088098110c8f2c7cfcfd0eaffabb47466b20205343ee9e928211ba",
+    "build/goal-r1-gomore-accel-crossing-c/integration.py": "afffc33b6fe4b0570c35d86b26f3638da5e7a42c3adb661697217b4e6ca53db4",
+    "build/goal-r1-gomore-accel-crossing-c/integration/integration-results.json": "e023f5df931cb79dae5191978c1285fc499fbe9100a0205287ebe4695e1ec78c",
+    "build/goal-r1-gomore-accel-crossing-c/classifier.py": "d13839489dc9ca6a41623effd55fff8018d9e566f8066190b8f2f071d7ba1c62",
+    "build/goal-r1-gomore-accel-crossing-c/classifier/results.json": "75107cd5fb9f0eb79a0a7fa73deb15ebc99f9169271956277fcc910285fabd07",
+    "build/goal-r1-gomore-accel-crossing-c/checked.py": "97eced4bff65e87897fc05efcfa82a1799a359d5c188d8d1cac1935df9cf8439",
+    "build/goal-r1-gomore-accel-crossing-c/checked-results.json": "4cb6348aec958d7476e2e842211426ba73d6d84c28922cfe95b5f5a8e089b978",
+    "build/goal-r1-gomore-accel-crossing-c/negative.py": "872499aa60e6fdf3de83955133726d2107c9f05a71565856b6eaaacc14965074",
+    "build/goal-r1-gomore-accel-crossing-c/negative.json": "d04c887c2b740bda8230c8f737f3e280969c4f5bacea3c6e9915090e90cfe151",
+    "build/goal-r1-gomore-accel-crossing-c/qualify.py": "bde959a65f03caeaa0e196a83f2d160e51b02d161d063d57a93561997ea6f2f7",
+    "build/goal-r1-gomore-accel-crossing-c/qualified/qualification.json": "6a21b6047656b2c809f8cbf87e960ececf2c94f01124310bc7f65750f70ac54e",
+    "build/goal-r1-gomore-accel-crossing-c/sources-check.log": "9b739dd92f9e293e4c82007554067f2c6278fa7a098b2e5a21d9f5103fb4c9d3"
+  }
+}

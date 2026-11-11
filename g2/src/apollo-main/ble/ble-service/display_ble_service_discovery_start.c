@@ -12,16 +12,9 @@ extern void *audio_queue_copy_bytes(void *,const void *,uint32_t); /* selected 0
 extern void audio_ble_service_discovery_step_531bd4(uint8_t,uint8_t);
 extern void audio_ble_service_discovery_followup_5336e0(uint8_t);
 
-int32_t audio_ble_hci_vendor_compare_44b610(const void *left,const void *right,uint32_t size) {
-    const uint8_t *a=(const uint8_t *)left,*b=(const uint8_t *)right;
-    while(size!=0u) {
-        uint8_t x=*a,y=*b;
-        if(x!=y)return x<y?-1:1;
-        if(x==0u)return 0;
-        ++a;++b;--size;
-    }
-    return 0;
-}
+/* audio_ble_hci_vendor_compare_44b610 (strncmp 0x44b610) is an alias of
+ * audio_l2c_strncmp in ble/l2c-log/l2c_log_helpers.c. */
+int32_t audio_ble_hci_vendor_compare_44b610(const void *left,const void *right,uint32_t size);
 static void discovery_log(uint8_t level) {
     static const char module[]="APP";
     static const char source[]="D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\cordio\\ble-profiles\\sources\\apps\\app\\app_disc.c";

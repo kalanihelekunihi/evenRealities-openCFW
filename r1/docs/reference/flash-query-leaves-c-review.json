@@ -1,0 +1,103 @@
+{
+  "schema_version": 1,
+  "scope": "R1 FlashDB database-path and query-count callback assembly replaced by C; raw query frame retained",
+  "native_application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "native_entries": {
+    "r1_fdb_native_db_path": "0x3f014",
+    "r1_fdb_native_query_count_cb": "0x87428"
+  },
+  "native_body_sha256": {
+    "0x3f014": "1557f1359b30086a3ac71a771ca77acc7b78432a01688fac9e17a39ca2a27709",
+    "0x87428": "c2d3ab8bf5e3e823fbfe012cce4613e911c156788d125a069d7b78ac61668067"
+  },
+  "rea": {
+    "path_body_observed": true,
+    "callback_procedure_missing": true,
+    "callback_coverage_credit": false
+  },
+  "execution": {
+    "paired_cases": 1740,
+    "executions": 3480,
+    "groups": {
+      "path": 100,
+      "callback": 1280,
+      "query": 360
+    },
+    "source_report": "build/sources-goal-r1-flash-query-leaves-c/report.json",
+    "query_bridge_calls_actual_C_callback_and_path": true,
+    "checks": [
+      "whole mode byte and non-dereferenced wrapping partition +4",
+      "ordered status-byte loads before conditional unaligned counter read/write",
+      "aliased record/context/count bytes and unsigned counter wrap",
+      "actual outer query scratch words and restored R1/R2/R3",
+      "initialized callback iteration and uninitialized diagnostics",
+      "output guards, R0, SP, saved registers and masks"
+    ],
+    "limits": [
+      "Query iterator and printf are modeled; actual callback and path execute",
+      "No physical flash, asynchronous iteration or arbitrary invalid memory tested",
+      "Private frames and caller-clobbered registers/flags excluded except outer saved words"
+    ]
+  },
+  "negative_controls": [
+    {
+      "mutation": "mode-bit-only",
+      "rejected": true
+    },
+    {
+      "mutation": "halfword-counter",
+      "rejected": true
+    }
+  ],
+  "audit": {
+    "retained_outer_wrapper_body_unchanged": true,
+    "other_object_bytes_unchanged": true,
+    "replaced_assembly_functions": 2,
+    "import_sets_unchanged": true
+  },
+  "normal_build": {
+    "compiled": 573,
+    "application_imports": 176,
+    "bootloader_imports": 34,
+    "failures": 0,
+    "duplicate_strong_symbols": 0
+  },
+  "qualification": {
+    "compiled_profiles": 5,
+    "selected_symbols": [
+      "r1_health_sync_provider_00063cb4"
+    ],
+    "new_C_regions": 0,
+    "unchanged_wrapper_promoted": false
+  },
+  "source_plan_unchanged": true,
+  "source_built_bytes": 3881,
+  "binary_pull_through_bytes": 642279,
+  "resource_bytes": 248,
+  "fresh_hybrid_equals_locked_application": true,
+  "source_completeness_proven": false,
+  "evidence": {
+    "build/sources-goal-r1-flash-query-leaves-c/report.json": "f1e5f03da34085d64dedf3f821b4b795df2206d2733af5367da3f678649391c7",
+    "r1/src/application/runtime/native_flashdb_query_count.c": "6cd0d3d3a1e2c9ebbde2249ead5c4f628473bdccd544265476c573c62c02ff6a",
+    "r1/src/sources.json": "e4c2161f5a94ed8f60f515c71ed7f323fa68daecf30f6a35feb8327e77cfec3e",
+    "r1/symbols/function-frontier.csv": "d6cfe4b6de138ad6f1f09296211dcab8bdd9e09540b0f831d8e4fe8e29d69a6b",
+    "tools/build/source-plan.json": "716cf17b8cf2bed8ad6a99a672b1856af4c5380842c95cb14b9a263a7bb42bc8",
+    "build/hybrid-goal-r1-flash-query-leaves-c/build-report.json": "96392a935e4973760050db444934b23969949b8ee1f408d74a0cac1e47d7f61d",
+    "build/hybrid-goal-r1-flash-query-leaves-c/payloads/application.bin": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "r1/docs/reference/source-composition-review.json": "bffc45685438c63d802e393ffb53ad4fc0b83b93e9962d7da3f9616a31e5d98d",
+    "build/goal-r1-flash-query-leaves-c/before.c": "71cd95ee2a1f9faf71acf3452fd8b12a191b763b95f87b270e634a4c3c651394",
+    "build/goal-r1-flash-query-leaves-c/REA.json": "2c8b8dfa303842992ea3930d208076fd3be4a31e702c242ccb295539338e4deb",
+    "build/goal-r1-flash-query-leaves-c/native-callback.dis": "10c64058d4fca769368ccc9604c0ba1e548ab6a0897789eafbfd9b26f193ea44",
+    "build/goal-r1-flash-query-leaves-c/native-query.dis": "f88b2b69f7c1be98f2d90e4f4812f181390a611b19e64e88ac61b9c44e1e2e5e",
+    "build/goal-r1-flash-query-leaves-c/verify.py": "64b5a7d7e5066259df72e19bfffeec4015064721a6af21d1105dfdb8bc9a0b7b",
+    "build/goal-r1-flash-query-leaves-c/results.json": "b8522262df0aef619bc7658f6d693d33808940dd8892cd6e03bb5f5bbcffbcaa",
+    "build/goal-r1-flash-query-leaves-c/negative.py": "7d377021b0fb77dfe53ae7c012c6854496e061148cae12f47d0099eca6bb6f7d",
+    "build/goal-r1-flash-query-leaves-c/negative-results.json": "283b3d95eb37cd599e7d6819664d26dcaca7084d28c319a8d0c93bca19be56aa",
+    "build/goal-r1-flash-query-leaves-c/audit.py": "818e76741274f100dc9d93c49f028f23943986c7e2cc3b8acd6d0220c14b24f3",
+    "build/goal-r1-flash-query-leaves-c/audit-results.json": "aa56e2c68c78d4b8908e41d4faaf6760e2f0d242f49c55fa512237e18d7dd1b1",
+    "build/goal-r1-flash-query-leaves-c/qualify.py": "cc5e0c3577c9fbb55ea0f1a29ab99b0ee0baad498f49b6a052cb7646aac0f9ab",
+    "build/goal-r1-flash-query-leaves-c/qualified/qualification.json": "3d96292de4db20b5554fc4aae35b4eaa8030f147722dca2dbd60037499fbfda2",
+    "build/goal-r1-flash-query-leaves-c/qualified/source-plan.json": "db87a801df8d14ba90a41443363415b2b96e5563759035ab220bc4a96aceea6f",
+    "build/goal-r1-flash-query-leaves-c/sources-check.log": "bd60965367f10bcc604039941b628ee9282d683344509ab9faf85d501a53a26c"
+  }
+}

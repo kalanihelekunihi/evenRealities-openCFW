@@ -54,14 +54,18 @@ enum {
 #define OPENCFW_MSPI_TIMEOUT_USEC  UINT32_C(1000000)
 #define OPENCFW_ACTIVE_MSPI_SLOT   UINT32_C(0x200270dc)
 
-/* These aliases map to the exact local call destinations visible in the
- * locked image. In the bounded comparison they are intercepted stubs.
+/* Evidence: aliases map to stock call destinations in locked image
+ * (corpus apollo-bootloader/ghidra/open-2026-09-29/functions-000.jsonl):
+ * before 0x41FF08 (22 B sha 02963ef6…), configure 0x420E8C (128 B),
+ * delay 0x4207F4 (12 B), after 0x41FF1E (22 B), transfer 0x4262E0
+ * am_hal_mspi_blocking_transfer (364 B); parent FUN_00420f70 @ 0x420F70
+ * (130 B sha ce201805…).
  */
 extern void opencfw_bl_nor_read_before(void);       /* 0x0041FF08 */
 extern void opencfw_bl_nor_read_configure(void);    /* 0x00420E8C */
 extern void opencfw_bl_nor_read_delay(void);        /* 0x004207F4 */
 extern void opencfw_bl_nor_read_after(void);         /* 0x0041FF1E */
-extern uint32_t opencfw_bl_mspi_blocking_transfer(
+extern uint32_t am_hal_mspi_blocking_transfer(
     uint32_t handle, const opencfw_mspi_pio_transfer_t *transfer,
     uint32_t timeout_usec);                         /* 0x004262E0 */
 
@@ -95,7 +99,7 @@ uint32_t opencfw_boot_nor_read(uint32_t address, void *destination,
         .reserved = 0,
         .buffer = (uint32_t *)destination
     };
-    const uint32_t status = opencfw_bl_mspi_blocking_transfer(
+    const uint32_t status = am_hal_mspi_blocking_transfer(
         handle, &transfer, OPENCFW_MSPI_TIMEOUT_USEC);
     opencfw_bl_nor_read_after();
     return status;

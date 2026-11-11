@@ -1,0 +1,375 @@
+{
+  "sources": [
+    {
+      "source": "r1/src/application/board/native_touch_transport.c",
+      "payload": "r1-application",
+      "role": "candidate",
+      "toolchain": "clang",
+      "link": true,
+      "expect": "compile",
+      "returncode": 0,
+      "argv": [
+        "/usr/bin/clang",
+        "--target=arm-none-eabi",
+        "-mcpu=cortex-m4",
+        "-mthumb",
+        "-munaligned-access",
+        "-mfpu=fpv4-sp-d16",
+        "-mfloat-abi=hard",
+        "-std=c11",
+        "-Os",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-fshort-enums",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-fno-delete-null-pointer-checks",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/r1/src/vendor",
+        "-isystem",
+        "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
+        "-MD",
+        "-MF",
+        "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-touch-identity-c-product/r1/r1-application/r1__src__application__board__native_touch_transport.c.d",
+        "-c",
+        "/Users/kalani/Repo/evenRealities-openCFW/r1/src/application/board/native_touch_transport.c",
+        "-o",
+        "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-touch-identity-c-product/r1/r1-application/r1__src__application__board__native_touch_transport.c.o"
+      ],
+      "source_sha256": "ad87e10c49347374536a44fb7bfb57a1266616f0eab759975411d9aff677e3b0",
+      "object_sha256": "c4605ed74e5e3683428594eb444057fe5d65177f74f1658f5b135670d7c98929",
+      "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-touch-identity-c-product/r1/r1-application/r1__src__application__board__native_touch_transport.c.o",
+      "strong": [
+        "r1_touch_ready_level_read",
+        "r1_touch_request",
+        "r1_touch_request_read_native",
+        "r1_touch_request_write_native"
+      ],
+      "weak": [],
+      "undefined": [
+        "r1_stock_dispatch_10",
+        "r1_stock_dispatch_14",
+        "r1_touch_bus_device",
+        "r1_touch_ready_storage"
+      ]
+    },
+    {
+      "source": "r1/src/application/board/native_touch_identity.c",
+      "payload": "r1-application",
+      "role": "candidate",
+      "toolchain": "clang",
+      "link": true,
+      "expect": "compile",
+      "returncode": 0,
+      "argv": [
+        "/usr/bin/clang",
+        "--target=arm-none-eabi",
+        "-mcpu=cortex-m4",
+        "-mthumb",
+        "-munaligned-access",
+        "-mfpu=fpv4-sp-d16",
+        "-mfloat-abi=hard",
+        "-std=c11",
+        "-Os",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-fshort-enums",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-fno-delete-null-pointer-checks",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/r1/src/vendor",
+        "-isystem",
+        "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
+        "-MD",
+        "-MF",
+        "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-touch-identity-c-product/r1/r1-application/r1__src__application__board__native_touch_identity.c.d",
+        "-c",
+        "/Users/kalani/Repo/evenRealities-openCFW/r1/src/application/board/native_touch_identity.c",
+        "-o",
+        "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-touch-identity-c-product/r1/r1-application/r1__src__application__board__native_touch_identity.c.o"
+      ],
+      "source_sha256": "627705ad13c0d19aa677fef08d6209f1e0d1b1d4b41ff5ebc96a979c1411ca92",
+      "object_sha256": "802dc84f6076a7406e3614bdedd9b40023646f1a577588d792b66d667765fdca",
+      "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-touch-identity-c-product/r1/r1-application/r1__src__application__board__native_touch_identity.c.o",
+      "strong": [
+        "r1_touch_chip_id_probe"
+      ],
+      "weak": [],
+      "undefined": [
+        "osDelay",
+        "r1_stock_dispatch_08",
+        "r1_touch_bus_acquire_on",
+        "r1_touch_device_op_lock1",
+        "r1_touch_device_op_stop",
+        "r1_touch_device_op_unlock",
+        "r1_touch_power_on_step",
+        "r1_touch_ready_level_read",
+        "r1_touch_ready_storage",
+        "r1_touch_record_op_08",
+        "r1_touch_record_op_0c",
+        "r1_touch_request_read_native"
+      ]
+    }
+  ],
+  "normal_report": "build/sources-goal-r1-touch-identity-c-product/report.json",
+  "validation": {
+    "ready_reader_pairs": 928,
+    "full_probe_pairs": 2592,
+    "actual_C_ready_and_request_chain": true,
+    "counter_100_to_minus1_and_100_poll_limit": true,
+    "late_ID_buffer_mutations_and_full_R3_restore": true,
+    "native_body_size_corrected": {
+      "prior_frontier": 124,
+      "complete_through_pop": 126
+    },
+    "frames": {
+      "ready_native": 8,
+      "ready_C": 16,
+      "probe_native": 16,
+      "probe_C": 24
+    },
+    "limitations": [
+      "Private buffer locations normalized and frame depths differ; initial stack write order not compared.",
+      "GPIO/power/delay and final registry providers modeled; electrical/timing/arbitrary alias/fault/concurrency behavior unproven.",
+      "Caller-clobbered registers/flags except R0 and restored R3 excluded."
+    ]
+  },
+  "negative_controls": {
+    "wrong-input-owner": {
+      "rejected": true,
+      "stderr": "arm-none-eabi-ld: warning: (r1_stock_dispatch_10): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-identity-c/wrong-input-owner.o\narm-none-eabi-ld: warning: (r1_stock_dispatch_10): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-identity-c/wrong-input-owner.o\narm-none-eabi-ld: warning: (r1_touch_bus_acquire_on): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-touch-identity-c-product/r1/r1-application/r1__src__application__board__native_touch_identity.c.o\narm-none-eabi-ld: warning: (osDelay): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-touch-identity-c-product/r1/r1-application/r1__src__application__board__native_touch_identity.c.o\narm-none-eabi-ld: warning: (r1_touch_device_op_stop): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-touch-identity-c-product/r1/r1-application/r1__src__application__board__native_touch_identity.c.o\narm-none-eabi-ld: warning: (r1_touch_device_op_lock1): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-touch-identity-c-product/r1/r1-application/r1__src__application__board__native_touch_identity.c.o\narm-none-eabi-ld: warning: (r1_touch_device_op_unlock): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-touch-identity-c-product/r1/r1-application/r1__src__application__board__native_touch_identity.c.o\narm-none-eabi-ld: warning: (osDelay): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-touch-identity-c-product/r1/r1-application/r1__src__application__board__native_touch_identity.c.o\narm-none-eabi-ld: warning: (r1_touch_device_op_lock1): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-touch-identity-c-product/r1/r1-application/r1__src__application__board__native_touch_identity.c.o\narm-none-eabi-ld: warning: (osDelay): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-touch-identity-c-product/r1/r1-application/r1__src__application__board__native_touch_identity.c.o\narm-none-eabi-ld: warning: (r1_touch_record_op_0c): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-touch-identity-c-product/r1/r1-application/r1__src__application__board__native_touch_identity.c.o\narm-none-eabi-ld: warning: (osDelay): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-touch-identity-c-product/r1/r1-application/r1__src__application__board__native_touch_identity.c.o\narm-none-eabi-ld: warning: (r1_stock_dispatch_08): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-touch-identity-c-product/r1/r1-application/r1__src__application__board__native_touch_identity.c.o\narm-none-eabi-ld: warning: (osDelay): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-touch-identity-c-product/r1/r1-application/r1__src__application__board__native_touch_identity.c.o\narm-none-eabi-ld: warning: (osDelay): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-touch-identity-c-product/r1/r1-application/r1__src__application__board__native_touch_identity.c.o\narm-none-eabi-ld: warning: (r1_touch_record_op_08): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-touch-identity-c-product/r1/r1-application/r1__src__application__board__native_touch_identity.c.o\narm-none-eabi-ld: warning: (osDelay): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-touch-identity-c-product/r1/r1-application/r1__src__application__board__native_touch_identity.c.o\narm-none-eabi-ld: warning: (r1_touch_device_op_stop): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-touch-identity-c-product/r1/r1-application/r1__src__application__board__native_touch_identity.c.o\narm-none-eabi-ld: warning: (r1_touch_power_on_step): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-touch-identity-c-product/r1/r1-application/r1__src__application__board__native_touch_identity.c.o\nTraceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-touch-identity-c/reject-wrong-input-owner.py\", line 78, in <module>\n    c=(False,0,0x80,1,30,1,0x12345678,0x20018000);assert a(*c)==b(*c)\n                                                                ~^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-touch-identity-c/reject-wrong-input-owner.py\", line 65, in run\n    root=(0x5128c if outer else 0x933dc) if stock else syms['r1_touch_chip_id_probe' if outer else 'r1_touch_ready_level_read'];u.emu_start(root|1,STOP,count=30000)\n                                                                                                                                ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 769, in emu_start\n    raise self._hook_exception\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 363, in wrapper\n    return func(uc, *args, **kwargs)\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 1063, in __hook_code_cb\n    callback(uc, address, size, user_data)\n    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-touch-identity-c/reject-wrong-input-owner.py\", line 26, in code\n    assert r0==int.from_bytes(u.mem_read(INPUT,4),'little') and r1==0 and r3==0\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    "wide-ready-clear": {
+      "rejected": true,
+      "stderr": "arm-none-eabi-ld: warning: (r1_stock_dispatch_10): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-identity-c/wide-ready-clear.o\narm-none-eabi-ld: warning: (r1_stock_dispatch_10): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-identity-c/wide-ready-clear.o\narm-none-eabi-ld: warning: (r1_touch_bus_acquire_on): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-touch-identity-c-product/r1/r1-application/r1__src__application__board__native_touch_identity.c.o\narm-none-eabi-ld: warning: (osDelay): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-touch-identity-c-product/r1/r1-application/r1__src__application__board__native_touch_identity.c.o\narm-none-eabi-ld: warning: (r1_touch_device_op_stop): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-touch-identity-c-product/r1/r1-application/r1__src__application__board__native_touch_identity.c.o\narm-none-eabi-ld: warning: (r1_touch_device_op_lock1): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-touch-identity-c-product/r1/r1-application/r1__src__application__board__native_touch_identity.c.o\narm-none-eabi-ld: warning: (r1_touch_device_op_unlock): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-touch-identity-c-product/r1/r1-application/r1__src__application__board__native_touch_identity.c.o\narm-none-eabi-ld: warning: (osDelay): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-touch-identity-c-product/r1/r1-application/r1__src__application__board__native_touch_identity.c.o\narm-none-eabi-ld: warning: (r1_touch_device_op_lock1): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-touch-identity-c-product/r1/r1-application/r1__src__application__board__native_touch_identity.c.o\narm-none-eabi-ld: warning: (osDelay): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-touch-identity-c-product/r1/r1-application/r1__src__application__board__native_touch_identity.c.o\narm-none-eabi-ld: warning: (r1_touch_record_op_0c): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-touch-identity-c-product/r1/r1-application/r1__src__application__board__native_touch_identity.c.o\narm-none-eabi-ld: warning: (osDelay): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-touch-identity-c-product/r1/r1-application/r1__src__application__board__native_touch_identity.c.o\narm-none-eabi-ld: warning: (r1_stock_dispatch_08): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-touch-identity-c-product/r1/r1-application/r1__src__application__board__native_touch_identity.c.o\narm-none-eabi-ld: warning: (osDelay): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-touch-identity-c-product/r1/r1-application/r1__src__application__board__native_touch_identity.c.o\narm-none-eabi-ld: warning: (osDelay): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-touch-identity-c-product/r1/r1-application/r1__src__application__board__native_touch_identity.c.o\narm-none-eabi-ld: warning: (r1_touch_record_op_08): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-touch-identity-c-product/r1/r1-application/r1__src__application__board__native_touch_identity.c.o\narm-none-eabi-ld: warning: (osDelay): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-touch-identity-c-product/r1/r1-application/r1__src__application__board__native_touch_identity.c.o\narm-none-eabi-ld: warning: (r1_touch_device_op_stop): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-touch-identity-c-product/r1/r1-application/r1__src__application__board__native_touch_identity.c.o\narm-none-eabi-ld: warning: (r1_touch_power_on_step): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-touch-identity-c-product/r1/r1-application/r1__src__application__board__native_touch_identity.c.o\nTraceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-touch-identity-c/reject-wide-ready-clear.py\", line 78, in <module>\n    c=(False,0,0x80,1,30,1,0x12345678,0x20018000);assert a(*c)==b(*c)\n                                                         ^^^^^^^^^^^^\nAssertionError\n"
+    },
+    "boolean-ready": {
+      "rejected": true,
+      "stderr": "arm-none-eabi-ld: warning: (r1_stock_dispatch_10): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-identity-c/boolean-ready.o\narm-none-eabi-ld: warning: (r1_stock_dispatch_10): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-identity-c/boolean-ready.o\narm-none-eabi-ld: warning: (r1_touch_bus_acquire_on): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-touch-identity-c-product/r1/r1-application/r1__src__application__board__native_touch_identity.c.o\narm-none-eabi-ld: warning: (osDelay): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-touch-identity-c-product/r1/r1-application/r1__src__application__board__native_touch_identity.c.o\narm-none-eabi-ld: warning: (r1_touch_device_op_stop): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-touch-identity-c-product/r1/r1-application/r1__src__application__board__native_touch_identity.c.o\narm-none-eabi-ld: warning: (r1_touch_device_op_lock1): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-touch-identity-c-product/r1/r1-application/r1__src__application__board__native_touch_identity.c.o\narm-none-eabi-ld: warning: (r1_touch_device_op_unlock): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-touch-identity-c-product/r1/r1-application/r1__src__application__board__native_touch_identity.c.o\narm-none-eabi-ld: warning: (osDelay): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-touch-identity-c-product/r1/r1-application/r1__src__application__board__native_touch_identity.c.o\narm-none-eabi-ld: warning: (r1_touch_device_op_lock1): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-touch-identity-c-product/r1/r1-application/r1__src__application__board__native_touch_identity.c.o\narm-none-eabi-ld: warning: (osDelay): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-touch-identity-c-product/r1/r1-application/r1__src__application__board__native_touch_identity.c.o\narm-none-eabi-ld: warning: (r1_touch_record_op_0c): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-touch-identity-c-product/r1/r1-application/r1__src__application__board__native_touch_identity.c.o\narm-none-eabi-ld: warning: (osDelay): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-touch-identity-c-product/r1/r1-application/r1__src__application__board__native_touch_identity.c.o\narm-none-eabi-ld: warning: (r1_stock_dispatch_08): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-touch-identity-c-product/r1/r1-application/r1__src__application__board__native_touch_identity.c.o\narm-none-eabi-ld: warning: (osDelay): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-touch-identity-c-product/r1/r1-application/r1__src__application__board__native_touch_identity.c.o\narm-none-eabi-ld: warning: (osDelay): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-touch-identity-c-product/r1/r1-application/r1__src__application__board__native_touch_identity.c.o\narm-none-eabi-ld: warning: (r1_touch_record_op_08): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-touch-identity-c-product/r1/r1-application/r1__src__application__board__native_touch_identity.c.o\narm-none-eabi-ld: warning: (osDelay): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-touch-identity-c-product/r1/r1-application/r1__src__application__board__native_touch_identity.c.o\narm-none-eabi-ld: warning: (r1_touch_device_op_stop): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-touch-identity-c-product/r1/r1-application/r1__src__application__board__native_touch_identity.c.o\narm-none-eabi-ld: warning: (r1_touch_power_on_step): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-touch-identity-c-product/r1/r1-application/r1__src__application__board__native_touch_identity.c.o\nTraceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-touch-identity-c/reject-boolean-ready.py\", line 78, in <module>\n    c=(False,0,0x80,1,30,1,0x12345678,0x20018000);assert a(*c)==b(*c)\n                                                                ~^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-touch-identity-c/reject-boolean-ready.py\", line 73, in run\n    assert u.reg_read(UC_ARM_REG_R0)==expected&255 and u.reg_read(UC_ARM_REG_R3)==expected\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    "99-polls": {
+      "rejected": true,
+      "stderr": "arm-none-eabi-ld: warning: (r1_stock_dispatch_10): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-touch-identity-c-product/r1/r1-application/r1__src__application__board__native_touch_transport.c.o\narm-none-eabi-ld: warning: (r1_stock_dispatch_10): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-touch-identity-c-product/r1/r1-application/r1__src__application__board__native_touch_transport.c.o\narm-none-eabi-ld: warning: (r1_touch_bus_acquire_on): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-identity-c/99-polls.o\narm-none-eabi-ld: warning: (osDelay): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-identity-c/99-polls.o\narm-none-eabi-ld: warning: (r1_touch_device_op_stop): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-identity-c/99-polls.o\narm-none-eabi-ld: warning: (r1_touch_device_op_lock1): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-identity-c/99-polls.o\narm-none-eabi-ld: warning: (r1_touch_device_op_unlock): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-identity-c/99-polls.o\narm-none-eabi-ld: warning: (osDelay): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-identity-c/99-polls.o\narm-none-eabi-ld: warning: (r1_touch_device_op_lock1): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-identity-c/99-polls.o\narm-none-eabi-ld: warning: (osDelay): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-identity-c/99-polls.o\narm-none-eabi-ld: warning: (r1_touch_record_op_0c): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-identity-c/99-polls.o\narm-none-eabi-ld: warning: (osDelay): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-identity-c/99-polls.o\narm-none-eabi-ld: warning: (r1_stock_dispatch_08): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-identity-c/99-polls.o\narm-none-eabi-ld: warning: (osDelay): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-identity-c/99-polls.o\narm-none-eabi-ld: warning: (osDelay): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-identity-c/99-polls.o\narm-none-eabi-ld: warning: (r1_touch_record_op_08): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-identity-c/99-polls.o\narm-none-eabi-ld: warning: (osDelay): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-identity-c/99-polls.o\narm-none-eabi-ld: warning: (r1_touch_device_op_stop): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-identity-c/99-polls.o\narm-none-eabi-ld: warning: (r1_touch_power_on_step): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-identity-c/99-polls.o\nTraceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-touch-identity-c/reject-99-polls.py\", line 79, in <module>\n    c=(True,None,0x12345678,3,0xffffffff,2,0x12345678,0x20018000);assert a(*c)==b(*c)\n                                                                                ~^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-touch-identity-c/reject-99-polls.py\", line 65, in run\n    root=(0x5128c if outer else 0x933dc) if stock else syms['r1_touch_chip_id_probe' if outer else 'r1_touch_ready_level_read'];u.emu_start(root|1,STOP,count=30000)\n                                                                                                                                ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 769, in emu_start\n    raise self._hook_exception\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 363, in wrapper\n    return func(uc, *args, **kwargs)\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 1063, in __hook_code_cb\n    callback(uc, address, size, user_data)\n    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-touch-identity-c/reject-99-polls.py\", line 52, in code\n    assert state['polls']==(100 if state['until'] is None else state['until']+1)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    "wrong-first-wait": {
+      "rejected": true,
+      "stderr": "arm-none-eabi-ld: warning: (r1_stock_dispatch_10): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-touch-identity-c-product/r1/r1-application/r1__src__application__board__native_touch_transport.c.o\narm-none-eabi-ld: warning: (r1_stock_dispatch_10): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-touch-identity-c-product/r1/r1-application/r1__src__application__board__native_touch_transport.c.o\narm-none-eabi-ld: warning: (r1_touch_bus_acquire_on): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-identity-c/wrong-first-wait.o\narm-none-eabi-ld: warning: (osDelay): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-identity-c/wrong-first-wait.o\narm-none-eabi-ld: warning: (r1_touch_device_op_stop): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-identity-c/wrong-first-wait.o\narm-none-eabi-ld: warning: (r1_touch_device_op_lock1): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-identity-c/wrong-first-wait.o\narm-none-eabi-ld: warning: (r1_touch_device_op_unlock): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-identity-c/wrong-first-wait.o\narm-none-eabi-ld: warning: (osDelay): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-identity-c/wrong-first-wait.o\narm-none-eabi-ld: warning: (r1_touch_device_op_lock1): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-identity-c/wrong-first-wait.o\narm-none-eabi-ld: warning: (osDelay): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-identity-c/wrong-first-wait.o\narm-none-eabi-ld: warning: (r1_touch_record_op_0c): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-identity-c/wrong-first-wait.o\narm-none-eabi-ld: warning: (osDelay): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-identity-c/wrong-first-wait.o\narm-none-eabi-ld: warning: (r1_stock_dispatch_08): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-identity-c/wrong-first-wait.o\narm-none-eabi-ld: warning: (osDelay): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-identity-c/wrong-first-wait.o\narm-none-eabi-ld: warning: (osDelay): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-identity-c/wrong-first-wait.o\narm-none-eabi-ld: warning: (r1_touch_record_op_08): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-identity-c/wrong-first-wait.o\narm-none-eabi-ld: warning: (osDelay): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-identity-c/wrong-first-wait.o\narm-none-eabi-ld: warning: (r1_touch_device_op_stop): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-identity-c/wrong-first-wait.o\narm-none-eabi-ld: warning: (r1_touch_power_on_step): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-identity-c/wrong-first-wait.o\nTraceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-touch-identity-c/reject-wrong-first-wait.py\", line 79, in <module>\n    c=(True,None,0x12345678,3,0xffffffff,2,0x12345678,0x20018000);assert a(*c)==b(*c)\n                                                                                ~^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-touch-identity-c/reject-wrong-first-wait.py\", line 70, in run\n    assert state['delays']==[20,130,10,20,40]+[2]*nonzero+[10]\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    "wrong-ID-register": {
+      "rejected": true,
+      "stderr": "arm-none-eabi-ld: warning: (r1_stock_dispatch_10): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-touch-identity-c-product/r1/r1-application/r1__src__application__board__native_touch_transport.c.o\narm-none-eabi-ld: warning: (r1_stock_dispatch_10): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-touch-identity-c-product/r1/r1-application/r1__src__application__board__native_touch_transport.c.o\narm-none-eabi-ld: warning: (r1_touch_bus_acquire_on): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-identity-c/wrong-ID-register.o\narm-none-eabi-ld: warning: (osDelay): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-identity-c/wrong-ID-register.o\narm-none-eabi-ld: warning: (r1_touch_device_op_stop): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-identity-c/wrong-ID-register.o\narm-none-eabi-ld: warning: (r1_touch_device_op_lock1): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-identity-c/wrong-ID-register.o\narm-none-eabi-ld: warning: (r1_touch_device_op_unlock): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-identity-c/wrong-ID-register.o\narm-none-eabi-ld: warning: (osDelay): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-identity-c/wrong-ID-register.o\narm-none-eabi-ld: warning: (r1_touch_device_op_lock1): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-identity-c/wrong-ID-register.o\narm-none-eabi-ld: warning: (osDelay): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-identity-c/wrong-ID-register.o\narm-none-eabi-ld: warning: (r1_touch_record_op_0c): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-identity-c/wrong-ID-register.o\narm-none-eabi-ld: warning: (osDelay): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-identity-c/wrong-ID-register.o\narm-none-eabi-ld: warning: (r1_stock_dispatch_08): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-identity-c/wrong-ID-register.o\narm-none-eabi-ld: warning: (osDelay): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-identity-c/wrong-ID-register.o\narm-none-eabi-ld: warning: (osDelay): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-identity-c/wrong-ID-register.o\narm-none-eabi-ld: warning: (r1_touch_record_op_08): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-identity-c/wrong-ID-register.o\narm-none-eabi-ld: warning: (osDelay): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-identity-c/wrong-ID-register.o\narm-none-eabi-ld: warning: (r1_touch_device_op_stop): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-identity-c/wrong-ID-register.o\narm-none-eabi-ld: warning: (r1_touch_power_on_step): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-identity-c/wrong-ID-register.o\nTraceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-touch-identity-c/reject-wrong-ID-register.py\", line 79, in <module>\n    c=(True,None,0x12345678,3,0xffffffff,2,0x12345678,0x20018000);assert a(*c)==b(*c)\n                                                                                ~^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-touch-identity-c/reject-wrong-ID-register.py\", line 65, in run\n    root=(0x5128c if outer else 0x933dc) if stock else syms['r1_touch_chip_id_probe' if outer else 'r1_touch_ready_level_read'];u.emu_start(root|1,STOP,count=30000)\n                                                                                                                                ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 769, in emu_start\n    raise self._hook_exception\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 363, in wrapper\n    return func(uc, *args, **kwargs)\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 1063, in __hook_code_cb\n    callback(uc, address, size, user_data)\n    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-touch-identity-c/reject-wrong-ID-register.py\", line 38, in code\n    request=bytes(u.mem_read(REQUEST,20));assert int.from_bytes(request[2:4],'little')==0 and int.from_bytes(request[16:18],'little')==2\n                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    "missing-final-power": {
+      "rejected": true,
+      "stderr": "arm-none-eabi-ld: warning: (r1_stock_dispatch_10): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-touch-identity-c-product/r1/r1-application/r1__src__application__board__native_touch_transport.c.o\narm-none-eabi-ld: warning: (r1_stock_dispatch_10): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-touch-identity-c-product/r1/r1-application/r1__src__application__board__native_touch_transport.c.o\narm-none-eabi-ld: warning: (r1_touch_bus_acquire_on): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-identity-c/missing-final-power.o\narm-none-eabi-ld: warning: (osDelay): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-identity-c/missing-final-power.o\narm-none-eabi-ld: warning: (r1_touch_device_op_stop): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-identity-c/missing-final-power.o\narm-none-eabi-ld: warning: (r1_touch_device_op_lock1): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-identity-c/missing-final-power.o\narm-none-eabi-ld: warning: (r1_touch_device_op_unlock): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-identity-c/missing-final-power.o\narm-none-eabi-ld: warning: (osDelay): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-identity-c/missing-final-power.o\narm-none-eabi-ld: warning: (r1_touch_device_op_lock1): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-identity-c/missing-final-power.o\narm-none-eabi-ld: warning: (osDelay): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-identity-c/missing-final-power.o\narm-none-eabi-ld: warning: (r1_touch_record_op_0c): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-identity-c/missing-final-power.o\narm-none-eabi-ld: warning: (osDelay): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-identity-c/missing-final-power.o\narm-none-eabi-ld: warning: (r1_stock_dispatch_08): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-identity-c/missing-final-power.o\narm-none-eabi-ld: warning: (osDelay): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-identity-c/missing-final-power.o\narm-none-eabi-ld: warning: (osDelay): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-identity-c/missing-final-power.o\narm-none-eabi-ld: warning: (r1_touch_record_op_08): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-identity-c/missing-final-power.o\narm-none-eabi-ld: warning: (osDelay): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-identity-c/missing-final-power.o\narm-none-eabi-ld: warning: (r1_touch_device_op_stop): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-identity-c/missing-final-power.o\nTraceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-touch-identity-c/reject-missing-final-power.py\", line 79, in <module>\n    c=(True,None,0x12345678,3,0xffffffff,2,0x12345678,0x20018000);assert a(*c)==b(*c)\n                                                                                ~^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-touch-identity-c/reject-missing-final-power.py\", line 71, in run\n    assert [x[0] for x in state['calls']][-2:]==[names[1],names[6]]\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    }
+  },
+  "REA": [
+    {
+      "evidence_id": "ev_f1a7e10bd83efa392008ac90cdde196f6ae57c133655b2d0d70c8c546b09e87b",
+      "subject": {
+        "name": "stock.elf",
+        "digest": {
+          "sha256": "25b4a29af80ec8edab5bd861ba9b74a6e22eab29dc3d7a809a16869e8a140f04"
+        },
+        "local_path": "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-queue-reset-c/stock.elf",
+        "format": "elf",
+        "architecture": "arm"
+      },
+      "provider": {
+        "id": "ghidra",
+        "name": "Ghidra",
+        "version": "12.1.4"
+      },
+      "analysis_profile": {
+        "provider": {
+          "id": "ghidra",
+          "name": "Ghidra",
+          "version": "12.1.4"
+        },
+        "parameters": {
+          "target_kind": "executable",
+          "target_format": "elf",
+          "architecture": "arm",
+          "available_architectures": [
+            "arm"
+          ],
+          "import_mode": "ephemeral-source-immutable",
+          "annotation_policy": "atomic-function-entry-metadata-v1",
+          "load_image_observations": "source-mappings-entry-context-v2",
+          "function_body_evidence": "complete-inclusive-ranges-v1",
+          "function_references": "complete-body-and-entry-reference-manager-v2",
+          "call_relationship_coverage": "function-body-call-coverage-v5",
+          "function_dossier_coverage": "observed-facets-and-call-relationships-v1",
+          "string_inventory_evidence": "defined-data-coverage-v1",
+          "location_resolution": "explicit-address-exact-entry-symbol-first-v3",
+          "procedure_file_offset_resolution": "address-first-unique-target-source-mapping-v2",
+          "instruction_flow_evidence": "decoded-return-pcode-v1",
+          "instruction_references": "exact-address-incoming-v1",
+          "function_boundary_observations": "ghidra-function-boundary-limitations-v3",
+          "no_return_repair": "returning-imports-decoded-return-v2",
+          "process_launch": "inspected-jvm-launch-support-v1",
+          "jump_table_evidence": "typed-case-default-blocks-v1",
+          "decompiler_jump_loads": true,
+          "loader": "auto-from-header",
+          "language_id": "auto-from-header",
+          "compiler_spec_id": "auto-default",
+          "analyzer_preset": "ghidra-default"
+        },
+        "digest": "7e46711069eea041af1b9b99e34115c13332795e5cda76e584a722f529ec70de"
+      },
+      "predicate_type": "rea.analysis",
+      "operation": "read_bytes",
+      "parameters": {
+        "address": "0x5128c",
+        "length": 130
+      },
+      "raw_result": {
+        "address": "0x5128c",
+        "requested_bytes": 130,
+        "returned_bytes": 130,
+        "bytes_hex": "38b500206424adf80000fff772f814202bf05afff5f764fef5f77afef5f786fe82202bf051fff5f773fe0a202bf04cfff5f768fe14202bf047ff1148c06834f026fd282004e000bf42f082f828b102202bf03aff641e24b2f6d2f5f73bfe02226946002042f04cf80a202bf02dfff5f737fefdf76dfcbdf80000c0b238bd0000f867",
+        "complete": true
+      },
+      "normalized_result": {
+        "address": "0x5128c",
+        "requested_bytes": 130,
+        "returned_bytes": 130,
+        "bytes_hex": "38b500206424adf80000fff772f814202bf05afff5f764fef5f77afef5f786fe82202bf051fff5f773fe0a202bf04cfff5f768fe14202bf047ff1148c06834f026fd282004e000bf42f082f828b102202bf03aff641e24b2f6d2f5f73bfe02226946002042f04cf80a202bf02dfff5f737fefdf76dfcbdf80000c0b238bd0000f867",
+        "complete": true
+      },
+      "confidence": "observed",
+      "authority": "shipped-artifact",
+      "environment": null,
+      "limitations": [
+        "The session serves operations only after Ghidra reports default auto-analysis complete; incomplete analysis does not expose partial results.",
+        "The imported Program and temporary project are ephemeral and deleted on close. Annotation operations edit session database metadata; original executable bytes are never written.",
+        "Cancelling an active Ghidra request terminates its ephemeral database and discards session annotations. The selected target remains open; the next provider query imports the original artifact again.",
+        "Default-space addresses use lowercase 0x-prefixed hexadecimal; other address spaces use <percent-encoded-space>:0x<hex>.",
+        "Bytes reflect Ghidra's initialized memory, including loader fixups. Reads stop at an unmapped or uninitialized byte and report completeness explicitly.",
+        "macOS sessions require a matching executable Ghidra native decompiler; REA checks for it but does not build native components or change Gatekeeper quarantine state."
+      ],
+      "relationship_coverage": null,
+      "locations": [],
+      "evidence_links": []
+    },
+    {
+      "evidence_id": "ev_2b398f90d7b44278033514b7e8951c5d0a868ea0dad9b27294d6f73790ca9475",
+      "subject": {
+        "name": "stock.elf",
+        "digest": {
+          "sha256": "25b4a29af80ec8edab5bd861ba9b74a6e22eab29dc3d7a809a16869e8a140f04"
+        },
+        "local_path": "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-queue-reset-c/stock.elf",
+        "format": "elf",
+        "architecture": "arm"
+      },
+      "provider": {
+        "id": "ghidra",
+        "name": "Ghidra",
+        "version": "12.1.4"
+      },
+      "analysis_profile": {
+        "provider": {
+          "id": "ghidra",
+          "name": "Ghidra",
+          "version": "12.1.4"
+        },
+        "parameters": {
+          "target_kind": "executable",
+          "target_format": "elf",
+          "architecture": "arm",
+          "available_architectures": [
+            "arm"
+          ],
+          "import_mode": "ephemeral-source-immutable",
+          "annotation_policy": "atomic-function-entry-metadata-v1",
+          "load_image_observations": "source-mappings-entry-context-v2",
+          "function_body_evidence": "complete-inclusive-ranges-v1",
+          "function_references": "complete-body-and-entry-reference-manager-v2",
+          "call_relationship_coverage": "function-body-call-coverage-v5",
+          "function_dossier_coverage": "observed-facets-and-call-relationships-v1",
+          "string_inventory_evidence": "defined-data-coverage-v1",
+          "location_resolution": "explicit-address-exact-entry-symbol-first-v3",
+          "procedure_file_offset_resolution": "address-first-unique-target-source-mapping-v2",
+          "instruction_flow_evidence": "decoded-return-pcode-v1",
+          "instruction_references": "exact-address-incoming-v1",
+          "function_boundary_observations": "ghidra-function-boundary-limitations-v3",
+          "no_return_repair": "returning-imports-decoded-return-v2",
+          "process_launch": "inspected-jvm-launch-support-v1",
+          "jump_table_evidence": "typed-case-default-blocks-v1",
+          "decompiler_jump_loads": true,
+          "loader": "auto-from-header",
+          "language_id": "auto-from-header",
+          "compiler_spec_id": "auto-default",
+          "analyzer_preset": "ghidra-default"
+        },
+        "digest": "7e46711069eea041af1b9b99e34115c13332795e5cda76e584a722f529ec70de"
+      },
+      "predicate_type": "rea.analysis",
+      "operation": "read_bytes",
+      "parameters": {
+        "address": "0x933dc",
+        "length": 32
+      },
+      "raw_result": {
+        "address": "0x933dc",
+        "requested_bytes": 32,
+        "returned_bytes": 32,
+        "bytes_hex": "08b500208df800000346014603486a46c068f2f79dfc9df8000008bdf8670020",
+        "complete": true
+      },
+      "normalized_result": {
+        "address": "0x933dc",
+        "requested_bytes": 32,
+        "returned_bytes": 32,
+        "bytes_hex": "08b500208df800000346014603486a46c068f2f79dfc9df8000008bdf8670020",
+        "complete": true
+      },
+      "confidence": "observed",
+      "authority": "shipped-artifact",
+      "environment": null,
+      "limitations": [
+        "The session serves operations only after Ghidra reports default auto-analysis complete; incomplete analysis does not expose partial results.",
+        "The imported Program and temporary project are ephemeral and deleted on close. Annotation operations edit session database metadata; original executable bytes are never written.",
+        "Cancelling an active Ghidra request terminates its ephemeral database and discards session annotations. The selected target remains open; the next provider query imports the original artifact again.",
+        "Default-space addresses use lowercase 0x-prefixed hexadecimal; other address spaces use <percent-encoded-space>:0x<hex>.",
+        "Bytes reflect Ghidra's initialized memory, including loader fixups. Reads stop at an unmapped or uninitialized byte and report completeness explicitly.",
+        "macOS sessions require a matching executable Ghidra native decompiler; REA checks for it but does not build native components or change Gatekeeper quarantine state."
+      ],
+      "relationship_coverage": null,
+      "locations": [],
+      "evidence_links": []
+    }
+  ],
+  "prior_objects_identical": 586,
+  "previous_request_functions_relocations_and_data_unchanged": true,
+  "imports_unchanged": {
+    "application": 164,
+    "bootloader": 34
+  },
+  "qualification": "build/goal-r1-touch-identity-c/qualified-final/qualification.json",
+  "new_exact_bytes": 0,
+  "hybrid": {
+    "report": "build/hybrid-goal-r1-touch-identity-c/build-report.json",
+    "sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "totals": {
+      "binary-pull-through": 641915,
+      "source-built": 4245,
+      "resource-file": 248
+    },
+    "source_plan_unchanged": true,
+    "source_completeness_proven": false
+  },
+  "limitations": [
+    "Ready/probe C frame depths differ from stock and private buffer addresses are normalized.",
+    "GPIO/power/delay/final registry providers modeled; actual C ready/request chain executed.",
+    "Caller-clobbered registers/flags except R0/R3 excluded; electrical behavior, timing, arbitrary aliases/faults/concurrency unproven.",
+    "Complete source-only rebuilding remains incomplete."
+  ]
+}

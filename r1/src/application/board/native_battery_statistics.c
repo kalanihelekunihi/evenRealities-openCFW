@@ -1,6 +1,6 @@
 #include <stdint.h>
+#include "native_battery_context.h"
 #include "native_battery_memory.h"
-extern volatile uint8_t r1_battery_device_context[];
 extern uint32_t osKernelGetTickCount(void);
 extern void r1_shared_power_client_acquire(uint32_t),r1_battery_charging_progress_reset(void);
 uint32_t r1_battery_charged_state_refresh(uint32_t state,volatile void *start,volatile void *start_voltage,volatile void *stop,volatile void *stop_voltage)

@@ -1,0 +1,266 @@
+{
+  "schema_version": 1,
+  "entries": {
+    "0x42350": [
+      "r1_event_callback_00042350",
+      80
+    ]
+  },
+  "report": "build/sources-goal-r1-temperature-mode-event-c/report.json",
+  "report_sha256": "e182ba38d8e37a4cfee76372ebcb00e7eac1b82e78fa7711b08c035c62bec9b2",
+  "unit": {
+    "source": "r1/src/application/board/native_event_callbacks.c",
+    "source_sha256": "ef48ec6c45cd69152caaf6847995490fd37569eda9ac3e7c0503c2dc7c415618",
+    "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-temperature-mode-event-c/r1/r1-application/r1__src__application__board__native_event_callbacks.c.o",
+    "object_sha256": "89d7a247d6615b898bad1d864ca39c4c511bc8c9193086448f1e30c258eb50e3"
+  },
+  "behavior": {
+    "paired_cases": 4152,
+    "source_object_sha256": "9294ccbe5bc8cc53b3bdca41f168d54b2461b8a8c51d1ca3bb82ed19381c8688",
+    "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "provider_frames": {
+      "native": {
+        "set:r1_structured_log_mode_get": [
+          48
+        ],
+        "set:r1_structured_log_format": [
+          48
+        ],
+        "set:nrf_log_frontend_std_0": [
+          16
+        ],
+        "set:r1_stream_timer_create_front": [
+          48
+        ],
+        "set:nrf_log_frontend_std_2": [
+          48
+        ],
+        "set:nrf_log_frontend_std_1": [
+          16
+        ],
+        "set:r1_sensor_stream_unregister_by_name": [
+          48
+        ],
+        "set:r1_stream_timer_release": [
+          48
+        ],
+        "transition:r1_structured_log_mode_get": [
+          32
+        ],
+        "transition:r1_structured_log_format": [
+          32
+        ],
+        "transition:nrf_log_frontend_std_0": [
+          0
+        ],
+        "transition:r1_sensor_stream_unregister_by_name": [
+          32
+        ],
+        "transition:r1_stream_timer_create_front": [
+          32
+        ],
+        "transition:nrf_log_frontend_std_2": [
+          32
+        ],
+        "transition:nrf_log_frontend_std_1": [
+          0
+        ],
+        "timer:r1_health_mode_get": [
+          16
+        ],
+        "timer:__aeabi_memclr": [
+          16
+        ],
+        "timer:r1_sensor_stream_register_by_name": [
+          16
+        ],
+        "transition:r1_stream_timer_release": [
+          32
+        ],
+        "adapter:r1_structured_log_mode_get": [
+          8,
+          48
+        ],
+        "adapter:r1_structured_log_format": [
+          8,
+          48
+        ],
+        "adapter:nrf_log_frontend_std_1": [
+          8,
+          16
+        ],
+        "adapter:nrf_log_frontend_std_0": [
+          16
+        ],
+        "adapter:r1_sensor_stream_unregister_by_name": [
+          48
+        ],
+        "adapter:nrf_log_frontend_std_2": [
+          48
+        ],
+        "adapter:r1_stream_timer_release": [
+          48
+        ],
+        "adapter:r1_stream_timer_create_front": [
+          48
+        ]
+      },
+      "C": {
+        "set:r1_structured_log_mode_get": [
+          40
+        ],
+        "set:r1_structured_log_format": [
+          40
+        ],
+        "set:nrf_log_frontend_std_0": [
+          16
+        ],
+        "set:r1_stream_timer_create_front": [
+          40
+        ],
+        "set:nrf_log_frontend_std_2": [
+          40
+        ],
+        "set:nrf_log_frontend_std_1": [
+          16
+        ],
+        "set:r1_sensor_stream_unregister_by_name": [
+          40
+        ],
+        "set:r1_stream_timer_release": [
+          40
+        ],
+        "transition:r1_structured_log_mode_get": [
+          24
+        ],
+        "transition:r1_structured_log_format": [
+          24
+        ],
+        "transition:nrf_log_frontend_std_0": [
+          0
+        ],
+        "transition:r1_sensor_stream_unregister_by_name": [
+          24
+        ],
+        "transition:r1_stream_timer_create_front": [
+          24
+        ],
+        "transition:nrf_log_frontend_std_2": [
+          24
+        ],
+        "transition:nrf_log_frontend_std_1": [
+          0
+        ],
+        "timer:r1_health_mode_get": [
+          24
+        ],
+        "timer:__aeabi_memclr": [
+          24
+        ],
+        "timer:r1_sensor_stream_register_by_name": [
+          24
+        ],
+        "transition:r1_stream_timer_release": [
+          24
+        ],
+        "adapter:r1_structured_log_mode_get": [
+          8,
+          40
+        ],
+        "adapter:r1_structured_log_format": [
+          8,
+          40
+        ],
+        "adapter:nrf_log_frontend_std_1": [
+          8,
+          16
+        ],
+        "adapter:nrf_log_frontend_std_0": [
+          16
+        ],
+        "adapter:r1_sensor_stream_unregister_by_name": [
+          40
+        ],
+        "adapter:nrf_log_frontend_std_2": [
+          40
+        ],
+        "adapter:r1_stream_timer_release": [
+          40
+        ],
+        "adapter:r1_stream_timer_create_front": [
+          40
+        ]
+      }
+    },
+    "limits": [
+      "Logging, stream and timer providers modeled",
+      "Void return, caller-clobbered registers, APSR and private stack excluded",
+      "No memory observers; provider-boundary state and final state compared",
+      "Native old-mode indexed access is unchecked and retained",
+      "No physical temperature or timer concurrency proof"
+    ]
+  },
+  "negative_controls": {
+    "00042350-wrong-length-gate": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "dcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcd']))\n"
+    },
+    "00042350-wrong-ring-bit": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "dcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcd']))\n"
+    },
+    "00042350-wrong-ring-id": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "dcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcd']))\n"
+    },
+    "00042350-wrong-sdk-id": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "dcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcd']))\n"
+    },
+    "00042350-wrong-sdk-gate": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "dcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcd']))\n"
+    },
+    "00042350-wrong-byte-conversion": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "dcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcd']))\n"
+    },
+    "00042350-wrong-boolean-mode": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "dcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcd']))\n"
+    },
+    "00042350-wrong-service-value": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "dcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcd']))\n"
+    }
+  },
+  "audit": {
+    "unchanged_prior_objects": 759,
+    "changed_objects": [
+      [
+        "r1-application",
+        "r1/src/application/board/native_event_callbacks.c"
+      ]
+    ],
+    "changed_allocated_sections": [
+      ".text.r1_event_callback_00042350"
+    ],
+    "changed_relocation_sections": [
+      ".text.r1_event_callback_00042350"
+    ],
+    "imports_unchanged": true,
+    "new_state": false
+  },
+  "source_check": "R1 passes: 760 units, 564 source files, 0 not built. Global check flags existing G2 resident_rom_thumb_set.S absent from manifest.",
+  "rea": "temperature-mode-event-c-rea.json",
+  "instruction_identity_proven": false,
+  "image_integration_proven": false
+}

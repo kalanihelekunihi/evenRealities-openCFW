@@ -1,5 +1,10 @@
 /* Apollo S200 Hongshi configure sequence at 0x5bbff2. */
 #include <stdint.h>
+/* Stock-RAM literals rewritten to named objects (sim-test wave 2026-10-26,
+ * .waves/sim-fix/apply.py): g2ref_X is the linker symbol X. */
+#include <stdint.h>
+extern unsigned char g2ref_display_driver_ratio_cells_20003994[] __asm__("display_driver_ratio_cells_20003994");
+extern unsigned char g2ref_g2_stock_ram_20074518[] __asm__("g2_stock_ram_20074518");
 
 extern uint32_t display_driver_uled_type0_context_46bfe8(void);
 extern void display_driver_uled_type0_context_snapshot_46c410(
@@ -35,9 +40,9 @@ static void log_bank(uint32_t value, uint32_t line, uint32_t detail,
                      uint32_t compact_level) {
     if (g2_flashdb_candidate_flags() & 2u)
         g2_flashdb_candidate_log(level,
-            (const char *)(uintptr_t)0x785c80u,
-            (const char *)(uintptr_t)0x6ecca8u,
-            (const char *)(uintptr_t)0x753b58u,line,
+            "driver.a6n-g" /* stock 0x785c80 */,
+            "D:\\01_workspace\\s200_ap510b_iar_git\\driver\\uled\\hongshi_a6ng\\drv_mspi_a6ng.c" /* stock 0x6ecca8 */,
+            "am_devices_mspi_hongshi_configure" /* stock 0x753b58 */,line,
             (const char *)(uintptr_t)detail,value);
     if ((g2_flashdb_candidate_flags() & 1u) ||
         (g2_flashdb_candidate_flags() & 4u))
@@ -86,42 +91,42 @@ uint32_t display_driver_uled_type1_step_5bbff2(void) {
     audio_ble_hci_boot_delay_491102(100u);
     (void)display_driver_uled_type1_write_register_5bbdf0(0xf0u,0x28u,0u);
     audio_ble_hci_boot_delay_491102(100u);
-    read_and_log(0xf0u,0u,0x1aau,0x776c4cu,0x753b7cu,0u,0u,0u,0u);
+    read_and_log(0xf0u,0u,0x1aau,(uint32_t)(uintptr_t)"bank0 0xF0 : %02X \r\n" /* stock 0x776c4c */,(uint32_t)(uintptr_t)"[driver.a6n-g]bank0 0xF0 : %02X \r\n" /* stock 0x753b7c */,0u,0u,0u,0u);
     audio_ble_hci_boot_delay_491102(100u);
-    read_and_log(0xbeu,0u,0x1afu,0x776c64u,0x753ba0u,0u,0u,0u,0u);
+    read_and_log(0xbeu,0u,0x1afu,(uint32_t)(uintptr_t)"bank0 0xBE : %02X \r\n" /* stock 0x776c64 */,(uint32_t)(uintptr_t)"[driver.a6n-g]bank0 0xBE : %02X \r\n" /* stock 0x753ba0 */,0u,0u,0u,0u);
     audio_ble_hci_boot_delay_491102(100u);
-    read_and_log(0u,0u,0x1b3u,0x776c7cu,0x749614u,
-                 0x1b6u,0x714698u,0x6f9e24u,0x36u);
+    read_and_log(0u,0u,0x1b3u,(uint32_t)(uintptr_t)"bank0 reg[00] : %02X \r\n" /* stock 0x776c7c */,(uint32_t)(uintptr_t)"[driver.a6n-g]bank0 reg[00] : %02X \r\n" /* stock 0x749614 */,
+                 0x1b6u,(uint32_t)(uintptr_t)"Error - Failed to read bank0 reg[00], Erro number = %d\r\n" /* stock 0x714698 */,(uint32_t)(uintptr_t)"[driver.a6n-g]Error - Failed to read bank0 reg[00], Erro number = %d\r\n" /* stock 0x6f9e24 */,0x36u);
     audio_ble_hci_boot_delay_491102(100u);
-    read_and_log(0xf1u,0u,0x1bbu,0x776c94u,0x74963cu,
-                 0x1beu,0x7146d4u,0x6f9e6cu,0x3fu);
+    read_and_log(0xf1u,0u,0x1bbu,(uint32_t)(uintptr_t)"bank0 reg[F1] : %02X \r\n" /* stock 0x776c94 */,(uint32_t)(uintptr_t)"[driver.a6n-g]bank0 reg[F1] : %02X \r\n" /* stock 0x74963c */,
+                 0x1beu,(uint32_t)(uintptr_t)"Error - Failed to read bank0 reg[F1], Erro number = %d\r\n" /* stock 0x7146d4 */,(uint32_t)(uintptr_t)"[driver.a6n-g]Error - Failed to read bank0 reg[F1], Erro number = %d\r\n" /* stock 0x6f9e6c */,0x3fu);
     audio_ble_hci_boot_delay_491102(100u);
-    read_and_log(0x7eu,1u,0x1c3u,0x776cacu,0x749664u,
-                 0x1c6u,0x714710u,0x6f9eb4u,2u);
+    read_and_log(0x7eu,1u,0x1c3u,(uint32_t)(uintptr_t)"bank1 reg[7E] : %02X \r\n" /* stock 0x776cac */,(uint32_t)(uintptr_t)"[driver.a6n-g]bank1 reg[7E] : %02X \r\n" /* stock 0x749664 */,
+                 0x1c6u,(uint32_t)(uintptr_t)"Error - Failed to read bank1 reg[7E], Erro number = %d\r\n" /* stock 0x714710 */,(uint32_t)(uintptr_t)"[driver.a6n-g]Error - Failed to read bank1 reg[7E], Erro number = %d\r\n" /* stock 0x6f9eb4 */,2u);
     audio_ble_hci_boot_delay_491102(100u);
-    read_and_log(0xa5u,1u,0x1ccu,0x776cc4u,0x74968cu,0u,0u,0u,0u);
+    read_and_log(0xa5u,1u,0x1ccu,(uint32_t)(uintptr_t)"bank1 reg[A5] : %02X \r\n" /* stock 0x776cc4 */,(uint32_t)(uintptr_t)"[driver.a6n-g]bank1 reg[A5] : %02X \r\n" /* stock 0x74968c */,0u,0u,0u,0u);
     audio_ble_hci_boot_delay_491102(100u);
-    read_and_log(0xe2u,0u,0x1d1u,0x7496b4u,0x728da0u,0u,0u,0u,0u);
+    read_and_log(0xe2u,0u,0x1d1u,(uint32_t)(uintptr_t)"==bank0 reg[0xE2] bringtness: %02X \r\n" /* stock 0x7496b4 */,(uint32_t)(uintptr_t)"[driver.a6n-g]==bank0 reg[0xE2] bringtness: %02X \r\n" /* stock 0x728da0 */,0u,0u,0u,0u);
     audio_ble_hci_radio_reset_4910f4(1u);
     (void)display_driver_uled_type1_frame_start_5bcb28();
     if (g2_flashdb_candidate_flags() & 2u)
         g2_flashdb_candidate_log(3u,
-            (const char *)(uintptr_t)0x785c80u,
-            (const char *)(uintptr_t)0x6ecca8u,
-            (const char *)(uintptr_t)0x753b58u,0x1e6u,
-            (const char *)(uintptr_t)0x75f750u,8u,8u);
+            "driver.a6n-g" /* stock 0x785c80 */,
+            "D:\\01_workspace\\s200_ap510b_iar_git\\driver\\uled\\hongshi_a6ng\\drv_mspi_a6ng.c" /* stock 0x6ecca8 */,
+            "am_devices_mspi_hongshi_configure" /* stock 0x753b58 */,0x1e6u,
+            "canvas_x = %d, canvas_y = %d" /* stock 0x75f750 */,8u,8u);
     if ((g2_flashdb_candidate_flags() & 1u) ||
         (g2_flashdb_candidate_flags() & 4u))
         (void)audio_log_simple(0x0c800000u,
-            (const char *)(uintptr_t)0x73e374u,
-            (const char *)(uintptr_t)0x73e374u,8u,8u);
+            "[driver.a6n-g]canvas_x = %d, canvas_y = %d" /* stock 0x73e374 */,
+            "[driver.a6n-g]canvas_x = %d, canvas_y = %d" /* stock 0x73e374 */,8u,8u);
     const uint32_t brightness = display_driver_uled_type0_context_46bfe8();
-    *(volatile uint32_t *)(uintptr_t)0x20074520u = brightness;
+    *(volatile uint32_t *)(uintptr_t)((uint32_t)(uintptr_t)g2ref_g2_stock_ram_20074518+0x8u) = brightness;
     (void)display_driver_uled_type1_set_brightness_5bc6ae(
         brightness,0u,0u);
     audio_ble_hci_radio_reset_4910f4(2u);
     const volatile uint8_t *const offsets =
-        (const volatile uint8_t *)(uintptr_t)0x20003994u;
+        (const volatile uint8_t *)(uintptr_t)((uint32_t)(uintptr_t)g2ref_display_driver_ratio_cells_20003994);
     (void)display_driver_uled_type1_set_offset_5bc4c0(
         offsets[0x2c],offsets[0x2d]);
     return 0u;

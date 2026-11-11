@@ -65,3 +65,13 @@ uint32_t case_binary_sensor_ack(void)
     case_binary_sensor_line_a(0u); case_binary_sensor_delay();
     return sampled!=0u;
 }
+
+/* Dedup: the PMIC/fuel-gauge transaction code (formerly
+ * startup/application_pmic_bus_primitives_candidate.c, which inlined the line
+ * selectors and delay) uses these stock-structured bodies. */
+__typeof__(case_binary_sensor_interbyte_pulse) case_pmic_bus_ack_continue __attribute__((alias("case_binary_sensor_interbyte_pulse")));
+__typeof__(case_binary_sensor_final_pulse) case_pmic_bus_ack_last __attribute__((alias("case_binary_sensor_final_pulse")));
+__typeof__(case_binary_sensor_byte_input) case_pmic_bus_read_byte __attribute__((alias("case_binary_sensor_byte_input")));
+__typeof__(case_binary_sensor_byte_output) case_pmic_bus_write_byte __attribute__((alias("case_binary_sensor_byte_output")));
+__typeof__(case_binary_sensor_stop) case_pmic_bus_stop __attribute__((alias("case_binary_sensor_stop")));
+__typeof__(case_binary_sensor_ack) case_pmic_bus_ack __attribute__((alias("case_binary_sensor_ack")));

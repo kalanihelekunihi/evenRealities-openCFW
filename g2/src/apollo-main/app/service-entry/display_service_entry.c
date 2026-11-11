@@ -1,5 +1,9 @@
 /* Native display service start 0x44227e and framebuffer-base getter 0x46ca6e. */
 #include <stdint.h>
+/* Stock-RAM literals rewritten to named objects (sim-test wave 2026-10-26,
+ * .waves/sim-fix/apply.py): g2ref_X is the linker symbol X. */
+#include <stdint.h>
+extern unsigned char g2ref_g2_stock_ram_20080000[] __asm__("g2_stock_ram_20080000");
 extern void audio_uart_efs_service_init_458c48(void);
 extern void audio_uart_logger_cancel_ble_transmit_458e48(void);
 
@@ -14,5 +18,5 @@ void audio_uart_display_service_prepare(void)
 uintptr_t audio_uart_display_pixel_format(void)
 {
     /* Literal at 0x46cac4 is the authenticated external framebuffer base. */
-    return (uintptr_t)0x20080000u;
+    return (uintptr_t)((uint32_t)(uintptr_t)g2ref_g2_stock_ram_20080000);
 }

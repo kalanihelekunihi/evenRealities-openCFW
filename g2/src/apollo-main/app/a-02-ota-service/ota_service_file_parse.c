@@ -147,8 +147,6 @@ extern uint32_t g2_norflash_erase_lower_47075c(uint32_t address); /* 0x47075c 4 
 extern int32_t norflash_write_4709c0(int32_t address, const uint8_t *buffer, uint32_t size);
 extern int32_t g2_norflash_read_lower_4709c8(int32_t address, uint8_t *buffer, uint32_t size);
 extern void file_crc32c_update_47cbc4(const uint8_t *data, uint32_t length, uint32_t *crc);
-extern uint64_t audio_uart_ring_u64_div_47cc60(uint32_t low, uint32_t high,
-                                               uint32_t divisor_low, uint32_t divisor_high); /* __aeabi_uldivmod */
 extern void *aeabi_memset_43c0e4(void *dst, uint32_t len, int32_t value);
 extern void *audio_queue_copy_bytes(void *dst, const void *src, uint32_t len); /* 0x439be4 memcpy */
 extern uint32_t g2_log_module_length(const char *text);          /* 0x44a43c strlen */
@@ -193,8 +191,7 @@ static const char path_box[] = "firmware/box.bin";                /* ROM 0x78167
     _evenOtaReplyToAPP(OTA_CMD_RAW_DATA, 2u, 0u); \
     if ((xfer)->file_size != 0u) { \
         uint64_t scaled = (uint64_t)(xfer)->recv_total * 100u; \
-        (xfer)->progress = (uint8_t)audio_uart_ring_u64_div_47cc60((uint32_t)scaled, \
-            (uint32_t)(scaled >> 32), (xfer)->file_size, 0u); \
+        (xfer)->progress = (uint8_t)(scaled / (xfer)->file_size); \
     } \
 } while (0)
 

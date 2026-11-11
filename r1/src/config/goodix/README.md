@@ -17,7 +17,10 @@ retaining explicit unresolved algorithm dependencies. Its vendor-default
 branch selection and channel-map ABI are not automatically admitted as stock.
 No private algorithm body, archive implementation or PC-tool protocol source
 is supplied as a substitute. Remaining runtime, algorithm, upload-protocol and
-R1 HAL references are listed in the report and are not stubbed.
+R1 HAL references are listed in the report and are not stubbed. The normal
+source build now binds the three I2C HAL entries to checked native R1 C bodies;
+see `r1/docs/reference/goodix-hal-c-binding-review.md`. A generated copy omits
+only those superseded demo definitions and preserves the vendor kernel config.
 
 ## Stock calibration delta
 

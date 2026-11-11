@@ -1,0 +1,11 @@
+# R1 advertising stop/restart in C
+
+`r1/src/application/board/native_advertising_control.c` implements stock restart `0x4c81c` and stop guard `0x4c8f8` using the existing connection fields, advertising context, SDK start provider, address-availability adapter and status publisher. The product policy contains no inline assembly; the pinned SDK gateway performs the controller stop call.
+
+Restart returns early only when both connection handles are occupied. Otherwise it checks advertising availability, reloads the advertising handle, stops an existing set, starts the requested SDK mode, reports any start error, and performs live gated result logging. Stop status 0 or 8 is benign; other errors log and continue. The stop guard publishes `(0,0)` after a stop attempt, including reported failures, and does nothing when advertising is unavailable.
+
+The differential harness passes 1,728 restart combinations, 20 stop cases and 256 seeded cases. The same 2,004 cases pass with actual C address-availability and status-publication adapters. Checks cover connection short-circuit order, handle reloads after external mutations, stop/start order, error continuation, original status retention across logging calls, log gates, status publication, stack guards, callee-saved registers and interrupt masks. Eight compiled defects are rejected before an unmodified-source rerun. Modes cover the SDK's valid enum range 0 through 4; arbitrary out-of-domain uint32 values are outside this contract. REA byte receipts match the locked firmware image.
+
+The normal build compiles 827 units (745 application, 82 bootloader), with no duplicate strong symbols. Application imports fall from 76 to 74 without adding dependencies. All 824 prior non-generated objects are unchanged; two generated bootloader objects differ. R1 manifest validation passes (827 units, 613 sources).
+
+The SDK advertising-start body, error logger and status-ring backend remain modeled in this probe. Controller services execute SDK gateway instructions against modeled S140 services. Physical advertising, timing, final application linking and device boot are unverified. The current user goal does not require byte identity. [Review receipt](advertising-control-c-review.json); experiments are under `build/goal-r1-advertising-control-c/`.

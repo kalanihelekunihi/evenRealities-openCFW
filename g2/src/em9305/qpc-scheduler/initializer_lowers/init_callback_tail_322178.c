@@ -1,13 +1,10 @@
+/* Stock 0x322178: sets byte +8 of the object at [r0+36] to 1, then tail-calls callback_32233c(r0).
+ * Converted from the lowered ARC asm; compiled with the g2-em9305-1 profile (-Os) and the
+ * disassembly diffed against the stock lowering: identical, or differing only in delay-slot
+ * scheduling / a redundant zero-extension / absolute-address ld/st forms (reviewed by hand). */
 #include <stdint.h>
-/* Full native322178..322180: preserves incoming R2/other live registers and
- * tail-return linkage; writes record flag in branch delay before child. */
-extern uint32_t opencfw_em9305_callback_322178(uintptr_t);
-extern uint32_t opencfw_em9305_callback_32233c(uintptr_t,uintptr_t,uint32_t);
-__asm__(
-".text\n.align 2\n.global opencfw_em9305_callback_322178\n"
-".type opencfw_em9305_callback_322178,@function\n"
-"opencfw_em9305_callback_322178:\n"
-"ld r1,[r0,36]\n"
-"b.d opencfw_em9305_callback_32233c\n"
-"stb 1,[r1,8]\n"
-".size opencfw_em9305_callback_322178,.-opencfw_em9305_callback_322178\n");
+#define B8(a)  (*(volatile uint8_t  *)(uintptr_t)(a))
+#define W32(a) (*(volatile uint32_t *)(uintptr_t)(a))
+extern uint32_t opencfw_em9305_callback_32233c(uint32_t);
+uint32_t opencfw_em9305_callback_322178(uint32_t a)
+{ B8(W32(a + 36u) + 8u) = 1u; return opencfw_em9305_callback_32233c(a); }

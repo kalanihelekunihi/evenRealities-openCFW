@@ -1,0 +1,116 @@
+{
+  "schema_version": 1,
+  "scope": "Unify HR/HRV/SpO2 cache accessors, sample writers, latest readers and daily metadata ownership",
+  "report": "build/sources-goal-r1-cache-ownership-reviewed/report.json",
+  "comparison_report": "build/sources-goal-r1-multicast-entry-final-c/report.json",
+  "audit": {
+    "compiled_units": 862,
+    "application_imports": 63,
+    "bootloader_imports": 22,
+    "unchanged_prior_nongenerated_objects": 851,
+    "changed_prior_nongenerated_objects": [
+      "r1/src/application/runtime/native_health_cache.c"
+    ],
+    "removed_duplicate_storage_symbols": [
+      "r1_cache_hr",
+      "r1_cache_hr_gap",
+      "r1_cache_hrv",
+      "r1_cache_hrv_gap",
+      "r1_cache_spo2",
+      "r1_cache_spo2_gap"
+    ],
+    "removed_duplicate_storage_definition_bytes": 310,
+    "normal_composition_layout": {
+      "hr": {
+        "section": ".r1.health.cache.hr",
+        "size": 84,
+        "timestamp_offset": 80
+      },
+      "hrv": {
+        "section": ".r1.health.cache.hrv",
+        "size": 160,
+        "timestamp_offset": 156
+      },
+      "spo2": {
+        "section": ".r1.health.cache.spo2",
+        "size": 84,
+        "timestamp_offset": 80
+      },
+      "activity": {
+        "section": ".r1.health.cache.activity",
+        "size": 584,
+        "timestamp_offset": 580
+      }
+    },
+    "probe_object_equals_final_normal_object": true,
+    "manifest_change": "add existing cache layout script to normal application composition",
+    "source_plan_unchanged": true
+  },
+  "writer_accessor_latest_reset": {
+    "activity_reset_comparisons": 12,
+    "stock_C_writer_accessor_latest_reset_comparisons": 864,
+    "linked_normal_objects_and_production_layout_used": true,
+    "shared_prefix_and_timestamp_addresses_match": true,
+    "writer_and_latest_and_reset_execute": true,
+    "hour_average_and_disabled_logging_modeled": true,
+    "private_frames_caller_scratch_APSR_and_physical_behavior_excluded": true
+  },
+  "compiled_defects_rejected": [
+    {
+      "defect": "duplicate-owner",
+      "rejected": true
+    },
+    {
+      "defect": "wrong-prefix",
+      "rejected": true
+    },
+    {
+      "defect": "wrong-timestamp",
+      "rejected": true
+    },
+    {
+      "defect": "wrong-offset",
+      "rejected": true
+    }
+  ],
+  "contract": [
+    "Stock writers/accessors use the same HR2001654c, HRV200169c0 and SpO2200165a0 bases. Share the existing bounded prefixes, removing six duplicate arrays/gaps.",
+    "Normal composition now keeps complete cache groups under section garbage collection and uses the cache layout. HR/SpO2 timestamp at80 and HRV timestamp at156; activity timestamp580 is also contiguous with its existing cache.",
+    "Reset references timestamp owners explicitly, preventing unreferenced metadata collection during final-link garbage collection. Clear lengths, offset writes and return pointers remain native."
+  ],
+  "limits": [
+    "864 comparisons execute actual sample writers, shared accessors, packed latest readers and resets; hour/average and disabled logging boundaries modeled. Actual memory clear executes.",
+    "Twelve actual activity-reset comparisons cover the fourth reset changed by named timestamp references.",
+    "Probe uses final-normal-object-identical cache code plus normal source objects and production cache layout at controlled native addresses. Existing sample-writer assembly is aligned to4 in the probe; that unchanged assembly remains separate work.",
+    "Normal relocatable ELF proves relative section layout only. Final startup/scatter placement, other health-state ownership, complete application linking and physical sensor/reset behavior remain unverified.",
+    "Caller scratch, APSR, private frames, concurrency and physical RAM faults excluded. No claim of complete firmware or byte identity."
+  ],
+  "evidence_files": {
+    "build/sources-goal-r1-cache-ownership-reviewed/report.json": "c681a0fb45885b43b67d9d8ecb4d7ce1bff32e0a905fecf012db61693e124e56",
+    "build/sources-goal-r1-multicast-entry-final-c/report.json": "02ac248ade216894ac380d773dcf0aed03b4fd479b91ada2fe59eee11eba586a",
+    "r1/src/application/runtime/native_health_cache.c": "fd4beaada72daa1c80dcac909cf472b6ac8f4573ddcd6a65be5048aab70cdcec",
+    "r1/src/config/runtime/native_health_cache.ld": "4610732522d5b32cdf8da64105e0501581ec4f2bb3946b8b3aa6aa625bbc0eb4",
+    "r1/src/sources.json": "35403e8211b5696a8f5c39a07598f6554ed8cc3563a3d29ff5538609eb4c09a6",
+    "tools/build/source-plan.json": "eeb516e31b3310fb0718f36908977f8125723f7c5e0e86cd6744395826259a4d",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-cache-ownership-reviewed/r1/r1-application/r1__src__application__runtime__native_health_cache.c.o": "9f7dcb4cb585bd8e153b7cf54b0de14c74ceb9aa4a8369332102a75caf88f8e7",
+    "build/goal-r1-cache-ownership/negative.json": "7b9b3e9567ce8744559c2e9d27dfc86ace19f8202a00d74a5c84dda77597464e",
+    "build/goal-r1-cache-ownership/test.ld": "6578d3a7ae4daa3b09bf4406e73cba578eec42a4d6d2046eb7a1222fed8d8640",
+    "build/goal-r1-cache-ownership/cache.ld": "e0acbbf4f0f8766d2b0c605154292282bfe08624d6466d60311e031e195db80d",
+    "build/goal-r1-cache-ownership/source.elf": "efdd318d35b9acfbeab6530576b0b7b03cbab0b5a875e6c3de6de58bb2e7f026",
+    "build/goal-r1-cache-ownership/negative.py": "f35d97f4433d528f52ac9daa63f5dff0c5ca781e8af2c2d616ef1918a5cecf41",
+    "build/goal-r1-cache-ownership/layout-before.ld": "5fa68b84ef3bcb9a801157d51bf7f77cb446b87adce499f73820b18ceb919251",
+    "build/goal-r1-cache-ownership/negative.log": "7328715d3abb215ecdb8a0e18befcaa890be28b9a373a62257d08e5668b6bdfd",
+    "build/goal-r1-cache-ownership/source.o": "9f7dcb4cb585bd8e153b7cf54b0de14c74ceb9aa4a8369332102a75caf88f8e7",
+    "build/goal-r1-cache-ownership/results.json": "33c4396f4d2ba8b12e59446d62c6d6a4895f0937f77c221c1c96039703c86ed6",
+    "build/goal-r1-cache-ownership/reviewed-build.log": "ea1f38a07d1bd090c2058f8f87c5f9798a1593608bc7faf4f18ed73a8feb7fc4",
+    "build/goal-r1-cache-ownership/final-build.log": "20f5ad90b27f569e03115ea8d2ebc8e3d1318eb911818cd99da2e61156da0209",
+    "build/goal-r1-cache-ownership/rea.json": "a5040a7d7466fbfa3f0ae3a3c4f6011abbd9c494a0ce60a258684bc67e225fbf",
+    "build/goal-r1-cache-ownership/sources-check.log": "b6ab468f43815a75634eab2762e209dbee8ab94c4cc3d601fded4210b6833f2a",
+    "build/goal-r1-cache-ownership/record.py": "f16f13333c183f5056ea78152ae80c9468fd6988ab9d24d45709ff7a0d4f62d7",
+    "build/goal-r1-cache-ownership/manifest-before.json": "f28c024dc0cd0a3b3a18849dae57615da4716e182026d3a75c1591023b0cf445",
+    "build/goal-r1-cache-ownership/verify.py": "6f7d9c54329b1a718b180540d3a3712cf710eea06eb2d7ed6df3803207d11e93",
+    "build/goal-r1-cache-ownership/verification.log": "9ac19e2e5aa1cca74c3ec6403b309a41adea9a7f7764360c73de0f1596be7de7",
+    "build/goal-r1-cache-ownership/source-before.c": "f020918997c3f337fb0222f1e3047f9ee328deb6968b4985db25a1f5e12b6553",
+    "build/goal-r1-cache-ownership/build.log": "a9101904b0bb4769e33c9349b1ff69ab9a2650a7522536c58bdcb447cfe4cece"
+  }
+}

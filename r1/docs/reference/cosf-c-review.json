@@ -1,0 +1,736 @@
+{
+  "source": {
+    "source": "r1/src/application/runtime/native_cosf.c",
+    "payload": "r1-application",
+    "role": "selected",
+    "toolchain": "gcc9",
+    "link": true,
+    "expect": "compile",
+    "returncode": 0,
+    "argv": [
+      "/opt/homebrew/bin/python3",
+      "/Users/kalani/Repo/evenRealities-openCFW/tools/build/linux_gcc.py",
+      "--compiler",
+      "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/bin/arm-none-eabi-gcc",
+      "--read-root",
+      "/Users/kalani/Repo/evenRealities-openCFW/r1",
+      "--read-root",
+      "/Users/kalani/Repo/evenRealities-openCFW/third-party/upstream",
+      "--read-root",
+      "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1",
+      "--read-root",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-cosf-c/generated/r1",
+      "--",
+      "-mcpu=cortex-m4",
+      "-mthumb",
+      "-munaligned-access",
+      "-mfpu=fpv4-sp-d16",
+      "-mfloat-abi=hard",
+      "-std=c11",
+      "-Os",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-fshort-enums",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-fno-delete-null-pointer-checks",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/r1/src/vendor",
+      "-isystem",
+      "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
+      "-fno-strict-aliasing",
+      "-ffp-contract=off",
+      "-fsignaling-nans",
+      "-frounding-math",
+      "-ftrapping-math",
+      "-fno-if-conversion",
+      "-fno-if-conversion2",
+      "-MD",
+      "-MF",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-cosf-c/r1/r1-application/r1__src__application__runtime__native_cosf.c.d",
+      "-c",
+      "/Users/kalani/Repo/evenRealities-openCFW/r1/src/application/runtime/native_cosf.c",
+      "-o",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-cosf-c/r1/r1-application/r1__src__application__runtime__native_cosf.c.o"
+    ],
+    "source_sha256": "74a745019e65b698e8478af4ef23ed906168d194c9f9e93248c2f77b397cc499",
+    "object_sha256": "c04bd32120ad27102ef0b9088aeacda85c04b9bf75f9d18f4945b9ffc17aaef4",
+    "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-cosf-c/r1/r1-application/r1__src__application__runtime__native_cosf.c.o",
+    "strong": [
+      "r1_cosf_data",
+      "r1_native_cosf"
+    ],
+    "weak": [],
+    "undefined": [
+      "r1_math_invalid32",
+      "r1_math_self_add32",
+      "r1_native_errno_set",
+      "r1_native_trig_reduce32"
+    ]
+  },
+  "direct_replay": {
+    "pairs": 87710,
+    "modeled_reducer": false,
+    "object_sha256": "c04bd32120ad27102ef0b9088aeacda85c04b9bf75f9d18f4945b9ffc17aaef4",
+    "digest": "621c4bb2323f24f792733095f5290ee0ed9eca9667343a57a011f2ca081a9445",
+    "provider_frames": {
+      "stock": [
+        [
+          "0x3bac8",
+          0
+        ],
+        [
+          "0x3bad4",
+          0
+        ],
+        [
+          "0x3bc9c",
+          8
+        ],
+        [
+          "reduce",
+          8,
+          8
+        ]
+      ],
+      "C": [
+        [
+          "0x3bac8",
+          16
+        ],
+        [
+          "0x3bad4",
+          16
+        ],
+        [
+          "0x3bc9c",
+          16
+        ],
+        [
+          "reduce",
+          12,
+          16
+        ]
+      ]
+    },
+    "conversion_calls": 59122,
+    "conversion_extrema": [
+      -8192.0,
+      8192.0
+    ],
+    "limits": [
+      "Private frames excluded; provider pointer/SP differences recorded, not claimed equal",
+      "Actual reducer and errno/special math execute except separately modeled reducer run",
+      "No physical validation, complete source-only link or byte identity proof"
+    ]
+  },
+  "modeled_replay": {
+    "pairs": 3234,
+    "modeled_reducer": true,
+    "object_sha256": "c04bd32120ad27102ef0b9088aeacda85c04b9bf75f9d18f4945b9ffc17aaef4",
+    "digest": "7e8aad37207e86384a0449d0115feaecf20d4a8a3b8dd9d5b1c79f73075546c5",
+    "provider_frames": {
+      "stock": [
+        [
+          "0x3bac8",
+          0
+        ],
+        [
+          "0x3bad4",
+          0
+        ],
+        [
+          "0x3bc9c",
+          8
+        ],
+        [
+          "reduce",
+          8,
+          8
+        ]
+      ],
+      "C": [
+        [
+          "0x3bac8",
+          16
+        ],
+        [
+          "0x3bad4",
+          16
+        ],
+        [
+          "0x3bc9c",
+          16
+        ],
+        [
+          "reduce",
+          12,
+          16
+        ]
+      ]
+    },
+    "conversion_calls": 0,
+    "conversion_extrema": [
+      null,
+      null
+    ],
+    "limits": [
+      "Private frames excluded; provider pointer/SP differences recorded, not claimed equal",
+      "Actual reducer and errno/special math execute except separately modeled reducer run",
+      "No physical validation, complete source-only link or byte identity proof"
+    ]
+  },
+  "low_high_caller_replay": {
+    "pairs": 1376,
+    "faults": 15,
+    "modeled_math": false,
+    "object_sha256": "fd1e6d426fcc2a80e3043d7073e68e682970b9a1c5048d5171f6726190460d1e",
+    "digest": "564df80485ccb00d7ee2aaaca8572850fb7f9a94c233d0cf3fd51fb1c7b979ad",
+    "limits": [
+      "Private scratch excluded; nonpositive orders omit unused uninitialized private reads",
+      "Positive orders above four overflow native scratch and are outside this proof",
+      "No physical validation, complete source-only link or byte identity proof"
+    ]
+  },
+  "bandpass_caller_replay": {
+    "pairs": 1108,
+    "faults": 18,
+    "modeled_math": false,
+    "object_sha256": "5decd114d255fcfcaaa93ea8755129560a7a422c92205a87a809881b2a5e92a8",
+    "digest": "c413cad359aa87ca6f0790a5af0a0e71c9bec52662a2e24a58b6031d36db454c",
+    "limits": [
+      "Private scratch excluded; a 16-byte C reservation aligns native provider stack depth",
+      "Only orders zero, one, two and signed minus one covered; other orders may overflow native scratch or expose uninitialized private words",
+      "No physical validation, complete source-only link or byte identity proof"
+    ]
+  },
+  "optical_caller_replay": {
+    "pairs": 1344,
+    "substitution_counts": {
+      "0x71dd8": 384,
+      "0x8eeba": 5088,
+      "0x948d8": 5088
+    },
+    "production_units": [
+      {
+        "source": "r1/src/application/runtime/native_gomore_optical_compact.c",
+        "payload": "r1-application",
+        "role": "candidate",
+        "toolchain": "gcc9",
+        "link": true,
+        "expect": "compile",
+        "returncode": 0,
+        "argv": [
+          "/opt/homebrew/bin/python3",
+          "/Users/kalani/Repo/evenRealities-openCFW/tools/build/linux_gcc.py",
+          "--compiler",
+          "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/bin/arm-none-eabi-gcc",
+          "--read-root",
+          "/Users/kalani/Repo/evenRealities-openCFW/r1",
+          "--read-root",
+          "/Users/kalani/Repo/evenRealities-openCFW/third-party/upstream",
+          "--read-root",
+          "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1",
+          "--read-root",
+          "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-cosf-c/generated/r1",
+          "--",
+          "-mcpu=cortex-m4",
+          "-mthumb",
+          "-munaligned-access",
+          "-mfpu=fpv4-sp-d16",
+          "-mfloat-abi=hard",
+          "-std=c11",
+          "-Os",
+          "-ffreestanding",
+          "-fno-builtin",
+          "-fshort-enums",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-fno-delete-null-pointer-checks",
+          "-I/Users/kalani/Repo/evenRealities-openCFW/r1/src/vendor",
+          "-isystem",
+          "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
+          "-fno-strict-aliasing",
+          "-ffp-contract=off",
+          "-fsignaling-nans",
+          "-frounding-math",
+          "-ftrapping-math",
+          "-MD",
+          "-MF",
+          "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-cosf-c/r1/r1-application/r1__src__application__runtime__native_gomore_optical_compact.c.d",
+          "-c",
+          "/Users/kalani/Repo/evenRealities-openCFW/r1/src/application/runtime/native_gomore_optical_compact.c",
+          "-o",
+          "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-cosf-c/r1/r1-application/r1__src__application__runtime__native_gomore_optical_compact.c.o"
+        ],
+        "source_sha256": "fc772680bfc7ad1194a2613d9a0fdca162487f7310b8f9aa4ccf6ac804f4f1f1",
+        "object_sha256": "99673c2a877cf0601458cee36d167f4b5cb931b78e6caa3e44112bb5dc0a0ba7",
+        "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-cosf-c/r1/r1-application/r1__src__application__runtime__native_gomore_optical_compact.c.o",
+        "strong": [
+          "r1_gomore_optical_compact_native"
+        ],
+        "weak": [],
+        "undefined": []
+      },
+      {
+        "source": "r1/src/application/runtime/native_gomore_optical_append.c",
+        "payload": "r1-application",
+        "role": "candidate",
+        "toolchain": "gcc9",
+        "link": true,
+        "expect": "compile",
+        "returncode": 0,
+        "argv": [
+          "/opt/homebrew/bin/python3",
+          "/Users/kalani/Repo/evenRealities-openCFW/tools/build/linux_gcc.py",
+          "--compiler",
+          "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/bin/arm-none-eabi-gcc",
+          "--read-root",
+          "/Users/kalani/Repo/evenRealities-openCFW/r1",
+          "--read-root",
+          "/Users/kalani/Repo/evenRealities-openCFW/third-party/upstream",
+          "--read-root",
+          "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1",
+          "--read-root",
+          "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-cosf-c/generated/r1",
+          "--",
+          "-mcpu=cortex-m4",
+          "-mthumb",
+          "-munaligned-access",
+          "-mfpu=fpv4-sp-d16",
+          "-mfloat-abi=hard",
+          "-std=c11",
+          "-Os",
+          "-ffreestanding",
+          "-fno-builtin",
+          "-fshort-enums",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-fno-delete-null-pointer-checks",
+          "-I/Users/kalani/Repo/evenRealities-openCFW/r1/src/vendor",
+          "-isystem",
+          "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
+          "-fno-strict-aliasing",
+          "-ffp-contract=off",
+          "-fsignaling-nans",
+          "-frounding-math",
+          "-ftrapping-math",
+          "-MD",
+          "-MF",
+          "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-cosf-c/r1/r1-application/r1__src__application__runtime__native_gomore_optical_append.c.d",
+          "-c",
+          "/Users/kalani/Repo/evenRealities-openCFW/r1/src/application/runtime/native_gomore_optical_append.c",
+          "-o",
+          "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-cosf-c/r1/r1-application/r1__src__application__runtime__native_gomore_optical_append.c.o"
+        ],
+        "source_sha256": "3f08de85590cb43579bb60c829820279d018b4c9b91afa40f4685909e51acd99",
+        "object_sha256": "4844d59dbfe3721bd74779b297a242e69935407e89a0d115a452a9066864860b",
+        "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-cosf-c/r1/r1-application/r1__src__application__runtime__native_gomore_optical_append.c.o",
+        "strong": [
+          "r1_gomore_optical_append_native"
+        ],
+        "weak": [],
+        "undefined": [
+          "r1_gomore_filter_native"
+        ]
+      },
+      {
+        "source": "r1/src/application/runtime/native_gomore_optical_reset.c",
+        "payload": "r1-application",
+        "role": "candidate",
+        "toolchain": "gcc9",
+        "link": true,
+        "expect": "compile",
+        "returncode": 0,
+        "argv": [
+          "/opt/homebrew/bin/python3",
+          "/Users/kalani/Repo/evenRealities-openCFW/tools/build/linux_gcc.py",
+          "--compiler",
+          "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/bin/arm-none-eabi-gcc",
+          "--read-root",
+          "/Users/kalani/Repo/evenRealities-openCFW/r1",
+          "--read-root",
+          "/Users/kalani/Repo/evenRealities-openCFW/third-party/upstream",
+          "--read-root",
+          "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1",
+          "--read-root",
+          "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-cosf-c/generated/r1",
+          "--",
+          "-mcpu=cortex-m4",
+          "-mthumb",
+          "-munaligned-access",
+          "-mfpu=fpv4-sp-d16",
+          "-mfloat-abi=hard",
+          "-std=c11",
+          "-Os",
+          "-ffreestanding",
+          "-fno-builtin",
+          "-fshort-enums",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-fno-delete-null-pointer-checks",
+          "-I/Users/kalani/Repo/evenRealities-openCFW/r1/src/vendor",
+          "-isystem",
+          "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
+          "-fno-strict-aliasing",
+          "-ffp-contract=off",
+          "-fsignaling-nans",
+          "-frounding-math",
+          "-ftrapping-math",
+          "-MD",
+          "-MF",
+          "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-cosf-c/r1/r1-application/r1__src__application__runtime__native_gomore_optical_reset.c.d",
+          "-c",
+          "/Users/kalani/Repo/evenRealities-openCFW/r1/src/application/runtime/native_gomore_optical_reset.c",
+          "-o",
+          "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-cosf-c/r1/r1-application/r1__src__application__runtime__native_gomore_optical_reset.c.o"
+        ],
+        "source_sha256": "c773ab97cbfb50db3dd32ec56e9b8b93f01fc4dfde53e0d6c8364fc7a8939f19",
+        "object_sha256": "9ee917fe35ab81e21e2a3ad15d5dfa5918deef0f1cd725fdef0e55889ec01a6e",
+        "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-cosf-c/r1/r1-application/r1__src__application__runtime__native_gomore_optical_reset.c.o",
+        "strong": [
+          "r1_gomore_filter_configure_native",
+          "r1_gomore_optical_reset_native"
+        ],
+        "weak": [],
+        "undefined": [
+          "__aeabi_memclr",
+          "r1_gomore_coefficients_bandpass_native",
+          "r1_gomore_coefficients_low_high_native"
+        ]
+      },
+      {
+        "source": "r1/src/application/runtime/native_gomore_low_high.c",
+        "payload": "r1-application",
+        "role": "candidate",
+        "toolchain": "gcc9",
+        "link": true,
+        "expect": "compile",
+        "returncode": 0,
+        "argv": [
+          "/opt/homebrew/bin/python3",
+          "/Users/kalani/Repo/evenRealities-openCFW/tools/build/linux_gcc.py",
+          "--compiler",
+          "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/bin/arm-none-eabi-gcc",
+          "--read-root",
+          "/Users/kalani/Repo/evenRealities-openCFW/r1",
+          "--read-root",
+          "/Users/kalani/Repo/evenRealities-openCFW/third-party/upstream",
+          "--read-root",
+          "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1",
+          "--read-root",
+          "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-cosf-c/generated/r1",
+          "--",
+          "-mcpu=cortex-m4",
+          "-mthumb",
+          "-munaligned-access",
+          "-mfpu=fpv4-sp-d16",
+          "-mfloat-abi=hard",
+          "-std=c11",
+          "-Os",
+          "-ffreestanding",
+          "-fno-builtin",
+          "-fshort-enums",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-fno-delete-null-pointer-checks",
+          "-I/Users/kalani/Repo/evenRealities-openCFW/r1/src/vendor",
+          "-isystem",
+          "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
+          "-fno-strict-aliasing",
+          "-ffp-contract=off",
+          "-fsignaling-nans",
+          "-frounding-math",
+          "-ftrapping-math",
+          "-fno-if-conversion",
+          "-fno-if-conversion2",
+          "-MD",
+          "-MF",
+          "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-cosf-c/r1/r1-application/r1__src__application__runtime__native_gomore_low_high.c.d",
+          "-c",
+          "/Users/kalani/Repo/evenRealities-openCFW/r1/src/application/runtime/native_gomore_low_high.c",
+          "-o",
+          "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-cosf-c/r1/r1-application/r1__src__application__runtime__native_gomore_low_high.c.o"
+        ],
+        "source_sha256": "3bba8b3311fd85b0408104d0c7b27865e0a7b91988fb38874c825f39313fe3e9",
+        "object_sha256": "fd1e6d426fcc2a80e3043d7073e68e682970b9a1c5048d5171f6726190460d1e",
+        "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-cosf-c/r1/r1-application/r1__src__application__runtime__native_gomore_low_high.c.o",
+        "strong": [
+          "r1_gomore_coefficients_low_high_native"
+        ],
+        "weak": [],
+        "undefined": [
+          "r1_native_cosf",
+          "r1_native_powf",
+          "r1_native_sinf"
+        ]
+      },
+      {
+        "source": "r1/src/application/runtime/native_gomore_bandpass.c",
+        "payload": "r1-application",
+        "role": "candidate",
+        "toolchain": "gcc9",
+        "link": true,
+        "expect": "compile",
+        "returncode": 0,
+        "argv": [
+          "/opt/homebrew/bin/python3",
+          "/Users/kalani/Repo/evenRealities-openCFW/tools/build/linux_gcc.py",
+          "--compiler",
+          "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/bin/arm-none-eabi-gcc",
+          "--read-root",
+          "/Users/kalani/Repo/evenRealities-openCFW/r1",
+          "--read-root",
+          "/Users/kalani/Repo/evenRealities-openCFW/third-party/upstream",
+          "--read-root",
+          "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1",
+          "--read-root",
+          "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-cosf-c/generated/r1",
+          "--",
+          "-mcpu=cortex-m4",
+          "-mthumb",
+          "-munaligned-access",
+          "-mfpu=fpv4-sp-d16",
+          "-mfloat-abi=hard",
+          "-std=c11",
+          "-Os",
+          "-ffreestanding",
+          "-fno-builtin",
+          "-fshort-enums",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-fno-delete-null-pointer-checks",
+          "-I/Users/kalani/Repo/evenRealities-openCFW/r1/src/vendor",
+          "-isystem",
+          "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
+          "-fno-strict-aliasing",
+          "-ffp-contract=off",
+          "-fsignaling-nans",
+          "-frounding-math",
+          "-ftrapping-math",
+          "-fno-if-conversion",
+          "-fno-if-conversion2",
+          "-MD",
+          "-MF",
+          "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-cosf-c/r1/r1-application/r1__src__application__runtime__native_gomore_bandpass.c.d",
+          "-c",
+          "/Users/kalani/Repo/evenRealities-openCFW/r1/src/application/runtime/native_gomore_bandpass.c",
+          "-o",
+          "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-cosf-c/r1/r1-application/r1__src__application__runtime__native_gomore_bandpass.c.o"
+        ],
+        "source_sha256": "620767548e771c01e4b5adb03d3c11fb7b3beb608adcfa2b63028da5d78c3768",
+        "object_sha256": "5decd114d255fcfcaaa93ea8755129560a7a422c92205a87a809881b2a5e92a8",
+        "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-cosf-c/r1/r1-application/r1__src__application__runtime__native_gomore_bandpass.c.o",
+        "strong": [
+          "r1_gomore_coefficients_bandpass_native"
+        ],
+        "weak": [],
+        "undefined": [
+          "r1_native_cosf",
+          "r1_native_sinf",
+          "r1_native_tanf"
+        ]
+      },
+      {
+        "source": "r1/src/application/runtime/native_cosf.c",
+        "payload": "r1-application",
+        "role": "selected",
+        "toolchain": "gcc9",
+        "link": true,
+        "expect": "compile",
+        "returncode": 0,
+        "argv": [
+          "/opt/homebrew/bin/python3",
+          "/Users/kalani/Repo/evenRealities-openCFW/tools/build/linux_gcc.py",
+          "--compiler",
+          "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/bin/arm-none-eabi-gcc",
+          "--read-root",
+          "/Users/kalani/Repo/evenRealities-openCFW/r1",
+          "--read-root",
+          "/Users/kalani/Repo/evenRealities-openCFW/third-party/upstream",
+          "--read-root",
+          "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1",
+          "--read-root",
+          "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-cosf-c/generated/r1",
+          "--",
+          "-mcpu=cortex-m4",
+          "-mthumb",
+          "-munaligned-access",
+          "-mfpu=fpv4-sp-d16",
+          "-mfloat-abi=hard",
+          "-std=c11",
+          "-Os",
+          "-ffreestanding",
+          "-fno-builtin",
+          "-fshort-enums",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-fno-delete-null-pointer-checks",
+          "-I/Users/kalani/Repo/evenRealities-openCFW/r1/src/vendor",
+          "-isystem",
+          "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
+          "-fno-strict-aliasing",
+          "-ffp-contract=off",
+          "-fsignaling-nans",
+          "-frounding-math",
+          "-ftrapping-math",
+          "-fno-if-conversion",
+          "-fno-if-conversion2",
+          "-MD",
+          "-MF",
+          "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-cosf-c/r1/r1-application/r1__src__application__runtime__native_cosf.c.d",
+          "-c",
+          "/Users/kalani/Repo/evenRealities-openCFW/r1/src/application/runtime/native_cosf.c",
+          "-o",
+          "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-cosf-c/r1/r1-application/r1__src__application__runtime__native_cosf.c.o"
+        ],
+        "source_sha256": "74a745019e65b698e8478af4ef23ed906168d194c9f9e93248c2f77b397cc499",
+        "object_sha256": "c04bd32120ad27102ef0b9088aeacda85c04b9bf75f9d18f4945b9ffc17aaef4",
+        "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-cosf-c/r1/r1-application/r1__src__application__runtime__native_cosf.c.o",
+        "strong": [
+          "r1_cosf_data",
+          "r1_native_cosf"
+        ],
+        "weak": [],
+        "undefined": [
+          "r1_math_invalid32",
+          "r1_math_self_add32",
+          "r1_native_errno_set",
+          "r1_native_trig_reduce32"
+        ]
+      }
+    ],
+    "digest": "3aca8fd818ae92d79d557644e196a07310860b37cce592ca0828e94f37906577",
+    "limits": [
+      "Native optical root, filter and reset execute; C compact/append/reset/configure and both coefficient generators linked; native math and filter execute",
+      "Covers gap/reset/warmup paths; heavy estimator path not covered",
+      "Private scratch bytes excluded; no physical validation or byte identity proof"
+    ]
+  },
+  "negative_controls": [
+    {
+      "name": "fused",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "integer",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "sign",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "tiny",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "polynomial",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "threshold",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "reducer",
+      "compiled": true,
+      "rejected": true
+    }
+  ],
+  "qualification": {
+    "candidate_units": 1,
+    "compiled_units": 1,
+    "units": [
+      {
+        "source": "r1/src/application/runtime/native_cosf.c",
+        "payload": "r1-application",
+        "evidence": "r1/symbols/function-frontier.csv",
+        "selected": [],
+        "compiled": true,
+        "rejections": {
+          "anchored_relocation_pattern_not_exact": 1
+        },
+        "source_implementation_completeness": "not established by compilation or byte matching",
+        "reason": "no exact anchored body under tested production bindings; integration remains unfinished"
+      }
+    ]
+  },
+  "selected_data": {
+    "bytes": 56,
+    "sha256": "1441dfa482f489c00360c2dce8f0fcf2fade52d17e87543683ca25f5827c7ccd",
+    "selection": [
+      {
+        "payload": "r1-application",
+        "symbol": "r1_cosf_data",
+        "symbol_kind": "data",
+        "start": 72564,
+        "end": 72620,
+        "sha256": "1441dfa482f489c00360c2dce8f0fcf2fade52d17e87543683ca25f5827c7ccd",
+        "evidence": "pre-consolidation:r1/research/source-build/native-cosf/verification.json",
+        "placement_evidence": "Unique complete immutable data object in authenticated application; fresh compiler bytes equal original stored span"
+      }
+    ]
+  },
+  "composition": {
+    "report": "build/sources-goal-r1-cosf-c/report.json",
+    "units": 694,
+    "unchanged_prior_source_object_pairs": 693,
+    "application_imports": 179,
+    "bootloader_imports": 34
+  },
+  "artifacts": {
+    "build/goal-r1-cosf-c/rea.json": "3e40d374fd53e8ff4bc86510e7fdec9e4447ed2cc50aa8f35384c50b5749a878",
+    "build/goal-r1-cosf-c/before.c": "ecbda1993b95bce7c10213a2f1b28827069a389c3129ebaa8b14ee64db62ff21",
+    "build/goal-r1-cosf-c/candidate.c": "74a745019e65b698e8478af4ef23ed906168d194c9f9e93248c2f77b397cc499",
+    "build/goal-r1-cosf-c/verify.py": "206af32e9ab5bb7d5f40d38a2ffa963ff7eaa8331591e3b32693d9430d284d33",
+    "build/goal-r1-cosf-c/low-high-integration.py": "6bd064bea1b1a448d68047998a0689928cc2e4727a936779c7656890e3380cef",
+    "build/goal-r1-cosf-c/low-high/results.json": "eb7f87475132cac764800b8222119772856bb6c2c5842660d07fc3e17fe2d2aa",
+    "build/goal-r1-cosf-c/bandpass-integration.py": "69db4cf6bbefdd9a3a85ceafa20132af65e5d99017a0b4537cbafb19eb657c8b",
+    "build/goal-r1-cosf-c/bandpass/results.json": "b9fac97df171494762bd169611e83734f1a771dbefba245e2e0df51e59d35a3e",
+    "build/goal-r1-cosf-c/optical-integration.py": "ff5fdc4d2648c29231f6279a581849e5c56cbcc2842c4b4aa59ee492df76977c",
+    "build/goal-r1-cosf-c/integration-results.json": "86c074bae35b976f3581f6882214910aeefc97773a21cab0582c6f1b5d8ff23a",
+    "build/goal-r1-cosf-c/integration.elf": "4a69440509b36c0aae847f15353fadd8e3af477b9a490cfc406df2ca7cfe9260",
+    "build/goal-r1-cosf-c/negative.py": "35a1b5dd55f97b5dcc7733b220e4c9568712833526f59e2932c54b605c37e5ff",
+    "build/goal-r1-cosf-c/results.json": "51ede7c6c71d94350265fdd28ba8ab876cf50c53b42d712b5790e303711ab864",
+    "build/goal-r1-cosf-c/modeled-results.json": "1fc6326dac9082063b6af903936504c89786e5a557c7fbf38451c7e031ed369b",
+    "build/goal-r1-cosf-c/negative-results.json": "63951799d0550a4bface46de82feb51a07f559a9feee6c483f2253a3a2ef2bac",
+    "build/goal-r1-cosf-c/data-proof.json": "1b208b167345b7c018c2bfab683402bd0540f096027b49b483139f29cb2f0722",
+    "build/goal-r1-cosf-c/production-direct.log": "00b7df04188606c07ae70179a4d3a8176097ecaa1baf662ddd12f45d06246517",
+    "build/goal-r1-cosf-c/production-modeled.log": "35b21eda3375ef430d4e82c26863168fc2979caaa54e5bb398c3b398f83d122d",
+    "build/goal-r1-cosf-c/qualified/qualification.json": "a1c1a77cfd2a48dc4abd9ea1d101fc24d0619b7353bbe31cb7a1e7cd7a46f7d1"
+  },
+  "limits": [
+    "Only cosine arithmetic/conversion helpers converted; reducer, sine, tangent and special math still have separate reconstruction limits",
+    "Native cosine frame is 8 bytes; C frame is 16 bytes; reducer output pointer offsets are 8 and 12 bytes below entry respectively",
+    "Native error helper tail calls use restored frame; C error helper calls retain its 16-byte frame",
+    "Private frames excluded; FP result/status, errno, provider logical arguments and external writes compared",
+    "No physical validation, complete source-only final link or executable byte identity proof"
+  ]
+}

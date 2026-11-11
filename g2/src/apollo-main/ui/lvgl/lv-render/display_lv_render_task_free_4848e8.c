@@ -1,12 +1,16 @@
 /* Apollo LV render-task cleanup (lv_draw.c, 0x4848e8). The label-descriptor
  * accessor 0x489fc8 is upstream lv_draw_task_get_label_dsc (lv_draw_label.c). */
 #include <stdint.h>
+/* Stock-RAM literals rewritten to named objects (sim-test wave 2026-10-26,
+ * .waves/sim-fix/apply.py): g2ref_X is the linker symbol X. */
+#include <stdint.h>
+extern unsigned char g2ref_audio_uart_lv_tick_state[] __asm__("audio_uart_lv_tick_state");
 extern void *lv_draw_task_get_label_dsc(void *task);
 
 extern uint32_t audio_uart_lv_area_height_4515a4(const void *area);
 extern void audio_uart_font_bitmap_release(void *buffer);
 extern void audio_uart_lv_heap_free(void *pointer);
-extern void audio_uart_lvgl_log(uint32_t level, const char *source, uint32_t line,
+extern void lv_log_add(uint32_t level, const char *source, uint32_t line,
                                 const char *format, ...);
 
 
@@ -20,12 +24,12 @@ void audio_uart_lv_render_task_free_4848e8(void *task, void *display) {
             uint32_t height = audio_uart_lv_area_height_4515a4(cell + 4u);
             uint32_t width = *(uint32_t *)(uintptr_t)(buffer + 8u) & 0xffffu;
             uint32_t used = width * height;
-            volatile uint32_t *account = (volatile uint32_t *)(uintptr_t)0x2006f68cu;
+            volatile uint32_t *account = (volatile uint32_t *)(uintptr_t)((uint32_t)(uintptr_t)g2ref_audio_uart_lv_tick_state+0x8cu);
             if (*account < used) {
                 *account = 0u;
-                audio_uart_lvgl_log(2u, (const char *)(uintptr_t)0x6e859cu, 0x230u,
-                                    (const char *)(uintptr_t)0x786640u,
-                                    (const char *)(uintptr_t)0x74a834u);
+                lv_log_add(2u, "D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\lvgl_v9.3\\LVGL\\src\\draw\\lv_draw.c" /* stock 0x6e859c */, 0x230u,
+                                    "cleanup_task" /* stock 0x786640 */,
+                                    "More layers were freed than allocated" /* stock 0x74a834 */);
             } else {
                 *account -= used;
             }

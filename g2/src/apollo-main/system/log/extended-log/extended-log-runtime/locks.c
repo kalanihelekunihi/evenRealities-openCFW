@@ -1,9 +1,13 @@
 /* Stock Main 0x44aa98/0x44aaa0 wrappers through 0x44aa40/0x44aa56.
  * Mutex cell 0x20074578 is authenticated by literal at 0x44aafc. */
 #include <stdint.h>
+/* Stock-RAM literals rewritten to named objects (sim-test wave 2026-10-26,
+ * .waves/sim-fix/apply.py): g2ref_X is the linker symbol X. */
+#include <stdint.h>
+extern unsigned char g2ref_g2_elog_mutex[] __asm__("g2_elog_mutex");
 extern int32_t audio_mutex_acquire(uint32_t tagged_mutex,uint32_t wait_ticks);
 extern int32_t audio_mutex_release(uint32_t tagged_mutex);
-static volatile uint32_t *const logger_mutex = (volatile uint32_t *)(uintptr_t)0x20074578u;
+static volatile uint32_t *const logger_mutex = (volatile uint32_t *)(uintptr_t)((uint32_t)(uintptr_t)g2ref_g2_elog_mutex);
 /* Stock 0x0044AA40 (elog port lock) */
 void g2_log_lock_enter(void) {
     if (*logger_mutex != 0u) (void)audio_mutex_acquire(*logger_mutex,1000u);

@@ -1,0 +1,278 @@
+{
+  "schema": 1,
+  "scope": "Repair native clock constructor callback reloads, state-copy alias behavior and normal Clang frame",
+  "native": {
+    "entry": "0x8adc0",
+    "code_bytes": 136,
+    "literal_bytes": 16,
+    "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a"
+  },
+  "REA": {
+    "evidence_id": "ev_deae16a640ba19b22d1b01b9ac6be8fca8d5327bff1e12f9c4ae384ac8acec14",
+    "subject": {
+      "name": "stock.elf",
+      "digest": {
+        "sha256": "25b4a29af80ec8edab5bd861ba9b74a6e22eab29dc3d7a809a16869e8a140f04"
+      },
+      "local_path": "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-queue-reset-c/stock.elf",
+      "format": "elf",
+      "architecture": "arm"
+    },
+    "provider": {
+      "id": "ghidra",
+      "name": "Ghidra",
+      "version": "12.1.4"
+    },
+    "analysis_profile": {
+      "provider": {
+        "id": "ghidra",
+        "name": "Ghidra",
+        "version": "12.1.4"
+      },
+      "parameters": {
+        "target_kind": "executable",
+        "target_format": "elf",
+        "architecture": "arm",
+        "available_architectures": [
+          "arm"
+        ],
+        "import_mode": "ephemeral-source-immutable",
+        "annotation_policy": "atomic-function-entry-metadata-v1",
+        "load_image_observations": "source-mappings-entry-context-v2",
+        "function_body_evidence": "complete-inclusive-ranges-v1",
+        "function_references": "complete-body-and-entry-reference-manager-v2",
+        "call_relationship_coverage": "function-body-call-coverage-v5",
+        "function_dossier_coverage": "observed-facets-and-call-relationships-v1",
+        "string_inventory_evidence": "defined-data-coverage-v1",
+        "location_resolution": "explicit-address-exact-entry-symbol-first-v3",
+        "procedure_file_offset_resolution": "address-first-unique-target-source-mapping-v2",
+        "instruction_flow_evidence": "decoded-return-pcode-v1",
+        "instruction_references": "exact-address-incoming-v1",
+        "function_boundary_observations": "ghidra-function-boundary-limitations-v3",
+        "no_return_repair": "returning-imports-decoded-return-v2",
+        "process_launch": "inspected-jvm-launch-support-v1",
+        "jump_table_evidence": "typed-case-default-blocks-v1",
+        "decompiler_jump_loads": true,
+        "loader": "auto-from-header",
+        "language_id": "auto-from-header",
+        "compiler_spec_id": "auto-default",
+        "analyzer_preset": "ghidra-default"
+      },
+      "digest": "7e46711069eea041af1b9b99e34115c13332795e5cda76e584a722f529ec70de"
+    },
+    "predicate_type": "rea.analysis",
+    "operation": "read_bytes",
+    "parameters": {
+      "address": "0x8adc0",
+      "length": 152
+    },
+    "raw_result": {
+      "address": "0x8adc0",
+      "requested_bytes": 152,
+      "returned_bytes": 152,
+      "bytes_hex": "3eb5214ca17a09b101203ebd20b1d0e90010c4e9001004e01c49d1e90001c4e9000120882081694601a8cff7d1fd38b9cff7cafd01900028e7d00021cff7dafd0198b0b1016829b1009888470028dcd0019870b103692bb121886068009a9847019830b1c56925b10022094b11461046a847084901988860034814210c309cf7b4fc0120a072bfe7c46a0120549c0900d1a9050020680020",
+      "complete": true
+    },
+    "normalized_result": {
+      "address": "0x8adc0",
+      "requested_bytes": 152,
+      "returned_bytes": 152,
+      "bytes_hex": "3eb5214ca17a09b101203ebd20b1d0e90010c4e9001004e01c49d1e90001c4e9000120882081694601a8cff7d1fd38b9cff7cafd01900028e7d00021cff7dafd0198b0b1016829b1009888470028dcd0019870b103692bb121886068009a9847019830b1c56925b10022094b11461046a847084901988860034814210c309cf7b4fc0120a072bfe7c46a0120549c0900d1a9050020680020",
+      "complete": true
+    },
+    "confidence": "observed",
+    "authority": "shipped-artifact",
+    "environment": null,
+    "limitations": [
+      "The session serves operations only after Ghidra reports default auto-analysis complete; incomplete analysis does not expose partial results.",
+      "The imported Program and temporary project are ephemeral and deleted on close. Annotation operations edit session database metadata; original executable bytes are never written.",
+      "Cancelling an active Ghidra request terminates its ephemeral database and discards session annotations. The selected target remains open; the next provider query imports the original artifact again.",
+      "Default-space addresses use lowercase 0x-prefixed hexadecimal; other address spaces use <percent-encoded-space>:0x<hex>.",
+      "Bytes reflect Ghidra's initialized memory, including loader fixups. Reads stop at an unmapped or uninitialized byte and report completeness explicitly.",
+      "macOS sessions require a matching executable Ghidra native decompiler; REA checks for it but does not build native components or change Gatekeeper quarantine state."
+    ],
+    "relationship_coverage": null,
+    "locations": [],
+    "evidence_links": []
+  },
+  "normal_build": {
+    "report": "build/sources-goal-r1-clock-constructor-c/report.json",
+    "unit": {
+      "source": "r1/src/application/board/native_clock_bootstrap.c",
+      "payload": "r1-application",
+      "role": "candidate",
+      "toolchain": "clang",
+      "link": false,
+      "expect": "compile",
+      "returncode": 0,
+      "argv": [
+        "/usr/bin/clang",
+        "--target=arm-none-eabi",
+        "-mcpu=cortex-m4",
+        "-mthumb",
+        "-munaligned-access",
+        "-mfpu=fpv4-sp-d16",
+        "-mfloat-abi=hard",
+        "-std=c11",
+        "-Os",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-fshort-enums",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-fno-delete-null-pointer-checks",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/r1/src/vendor",
+        "-isystem",
+        "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
+        "-MD",
+        "-MF",
+        "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-clock-constructor-c/r1/r1-application/r1__src__application__board__native_clock_bootstrap.c.d",
+        "-c",
+        "/Users/kalani/Repo/evenRealities-openCFW/r1/src/application/board/native_clock_bootstrap.c",
+        "-o",
+        "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-clock-constructor-c/r1/r1-application/r1__src__application__board__native_clock_bootstrap.c.o"
+      ],
+      "source_sha256": "0280ca6742ae9d8288877da96ab89a6a6191722f6f19c96f374ea79d8038db68",
+      "object_sha256": "875cb60eae94a31e21b67361fb4c0d4133e0a833e6c18a8eaa11afc312cd010d",
+      "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-clock-constructor-c/r1/r1-application/r1__src__application__board__native_clock_bootstrap.c.o",
+      "strong": [
+        "r1_clock_boot_defaults",
+        "r1_clock_default_backend",
+        "r1_clock_default_backend_get",
+        "r1_clock_initialize",
+        "r1_clock_second_changed"
+      ],
+      "weak": [],
+      "undefined": [
+        "memset",
+        "r1_clock_backend_bind",
+        "r1_clock_backend_bind_tick",
+        "r1_clock_backend_slot12",
+        "r1_clock_backend_slot20",
+        "r1_clock_backend_slot24",
+        "r1_clock_backend_snapshot",
+        "r1_clock_backend_update",
+        "r1_event_publish",
+        "r1_structured_log_timestamp_adapter",
+        "r1_time_backend_timestamp",
+        "r1_time_registration",
+        "r1_time_state"
+      ]
+    }
+  },
+  "validation": {
+    "paired_cases": 4400,
+    "executions": 8800,
+    "checks": [
+      "actual native constructor and actual C snapshot/bind helpers",
+      "24-byte frame at init/update/tick/clear providers",
+      "callback mutation of exposed scratch ops/context and state words",
+      "null/default configuration, configuration aliases, raw registration flags and partial startup failure",
+      "ordered callback arguments, final shared state, status, saved registers and masks"
+    ],
+    "limits": [
+      "Backend callback and cache-clear models; default ops/second-change pointers normalized by role",
+      "Private stack saves, caller-clobbered registers/flags, provider scratch reads, concurrency and physical hardware excluded",
+      "Source getter may be folded to its constant backend; no getter call-boundary identity claim"
+    ]
+  },
+  "negative_controls": [
+    {
+      "mutation": "short-frame",
+      "rejected": true,
+      "evidence": "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-clock-constructor-c/short-frame/rejection.log"
+    },
+    {
+      "mutation": "signed-update-offset",
+      "rejected": true,
+      "evidence": "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-clock-constructor-c/signed-update-offset/rejection.log"
+    },
+    {
+      "mutation": "reread-input-offset",
+      "rejected": true,
+      "evidence": "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-clock-constructor-c/reread-input-offset/rejection.log"
+    }
+  ],
+  "audit": {
+    "units": 576,
+    "other_objects_unchanged": 575,
+    "manifest_unchanged": true,
+    "bootstrap_compile_only": true,
+    "composed_payloads_identical": true,
+    "application_imports": 164,
+    "bootloader_imports": 34,
+    "unchanged_bootstrap_functions": [
+      "default_init",
+      "default_deinit",
+      "default_get",
+      "default_read64",
+      "r1_clock_default_backend_get",
+      "r1_clock_second_changed"
+    ],
+    "new_assembly": false
+  },
+  "GCC": {
+    "compile_passed": true,
+    "argv": "build/goal-r1-clock-constructor-c/gcc-final-argv.json",
+    "frame_validation_passed": false,
+    "native_frame_bytes": 24,
+    "observed_frame_bytes": 32,
+    "evidence": "build/goal-r1-clock-constructor-c/gcc-final-rejection.log",
+    "scratch_context_offset": 4,
+    "scratch_ops_offset": 8,
+    "limitation": "GCC candidate is not ABI-validated; it cannot inherit normal Clang validation."
+  },
+  "qualification": {
+    "generic": {
+      "report": "build/goal-r1-clock-constructor-c/qualified-generic/qualification.json",
+      "compiled": 4,
+      "selected_symbols": [
+        "default_deinit",
+        "default_get",
+        "default_init",
+        "default_read64",
+        "r1_clock_backend_bind_tick",
+        "r1_clock_backend_update"
+      ],
+      "new_regions": 0
+    },
+    "gcc": {
+      "report": "build/goal-r1-clock-constructor-c/qualified-gcc/qualification.json",
+      "compiled": 12,
+      "selected_symbols": [
+        "default_deinit",
+        "default_get",
+        "default_init",
+        "default_read64",
+        "r1_clock_backend_bind_tick",
+        "r1_clock_backend_update"
+      ],
+      "new_regions": 0
+    }
+  },
+  "canonical_hybrid": {
+    "report": "build/hybrid-goal-r1-clock-constructor-c/build-report.json",
+    "source_plan_unchanged": true,
+    "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "source_built_bytes_including_assembly_and_data": 4023,
+    "binary_fallback_bytes": 642137,
+    "resource_bytes": 248,
+    "source_completeness_proven": false
+  },
+  "probe_hashes": {
+    "build/goal-r1-clock-constructor-c/verify.py": "c0ab5cb7920787a4d811b45f07c06357826f87b42bedee7b4ffaa37de3343370",
+    "build/goal-r1-clock-constructor-c/negative.py": "7e1be532f5f1faf772772c02c01d00a5ae1600c554a3189e2a26a022ab2726d5",
+    "build/goal-r1-clock-constructor-c/audit.py": "54905fb6267d8ed40a032b918b33094e0c614d2147df9799c1884b7a725a5bc2",
+    "build/goal-r1-clock-constructor-c/rea.json": "6e4cbf6183cffd9d295a1b439b9de8d2bf5cd5bdb16d11de656cd2b1260f7eb0"
+  },
+  "limitations": [
+    "Normal Clang proof only; GCC compiles but fails 24-byte frame contract.",
+    "Backend init/update/tick and cache-clear providers modeled; actual snapshot/bind execute.",
+    "Default backend and second-change pointers normalized by role; source getter may fold to constant, so no getter call-boundary identity proof.",
+    "Private saved-register aliases, raw caller-clobbered registers/flags, provider scratch reads, concurrency and physical RTC excluded.",
+    "Bootstrap remains compile-only pending second-change callback and final ABI/source qualification. No new exact source regions."
+  ]
+}

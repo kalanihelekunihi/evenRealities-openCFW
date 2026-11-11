@@ -1,5 +1,4 @@
-/* Native Cordio L2cSlaveHandler 0x536fa4 and l2cSlaveReqTimeout 0x536b40.
- * The handler returns the incoming R7, as the IAR pop {r0,pc} does. */
+/* Native Cordio L2cSlaveHandler 0x536fa4 and l2cSlaveReqTimeout 0x536b40. */
 #include <stdint.h>
 extern uint32_t audio_ble_hci_vendor_log_enabled_4c9c50(void);
 extern int32_t audio_l2c_strncmp(const char *,const char *,uint32_t);
@@ -25,17 +24,10 @@ void audio_ble_l2c_slave_req_timeout_536b40(const uint8_t *event){
     audio_ble_dm_l2c_conn_update_cnf_56e580((uint16_t)event[0]|((uint16_t)event[1]<<8),1u);
 }
 
-__attribute__((naked))
-uint32_t audio_ble_handler_536fa4(uint32_t ignored __attribute__((unused)),
-                                   const uint8_t *event __attribute__((unused))){
-    __asm__ volatile(
-        "push {r7, lr}\n"
-        "mov r0, r1\n"
-        "cmp r0, #0\n"
-        "beq 1f\n"
-        "ldrb r1, [r0, #2]\n"
-        "cmp r1, #1\n"
-        "bne 1f\n"
-        "bl audio_ble_l2c_slave_req_timeout_536b40\n"
-        "1: pop {r0, pc}\n");
+/* Stock 0x536FA4 (L2cSlaveHandler). The stock epilogue popped the caller's
+ * R7 into R0; it is installed as a WSF event handler, which returns void. */
+void audio_ble_handler_536fa4(uint32_t event_mask,const uint8_t *message){
+    (void)event_mask;
+    if(message!=0&&message[2]==1u)
+        audio_ble_l2c_slave_req_timeout_536b40(message);
 }

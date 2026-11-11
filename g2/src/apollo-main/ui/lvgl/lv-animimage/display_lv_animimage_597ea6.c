@@ -1,6 +1,6 @@
 /* LVGL animimage setters/start, Apollo Main 0x597ea6..0x597f81. */
 #include <stdint.h>
-extern void audio_uart_lvgl_log(uint32_t, const char *, uint32_t,
+extern void lv_log_add(uint32_t, const char *, uint32_t,
                                 const char *, const char *, ...);
 extern void audio_uart_lv_anim_values_4506ce(void *, uint32_t);
 extern void audio_uart_lv_anim_start_450408(void *);
@@ -14,7 +14,7 @@ static const char start[] = "lv_animimg_start";
 static const char set_duration[] = "lv_animimg_set_duration";
 static const char set_repeat_count[] = "lv_animimg_set_repeat_count";
 static void fatal(uint32_t line, const char *function) {
-    audio_uart_lvgl_log(3u, path, line, function, expression,
+    lv_log_add(3u, path, line, function, expression,
                         object_not_null, null_pointer);
     for (;;) *(volatile uint32_t *)(uintptr_t)0xffffffffu = 0u;
 }

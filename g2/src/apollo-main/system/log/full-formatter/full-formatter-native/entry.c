@@ -1,17 +1,10 @@
 /* Main 0x481836 candidate: adapted from pinned IAR Bootloader source;
  * identical 1270-instruction core topology except 23 relocated BL sites. */
-/* Preserve the stock232-byte entry frame so decimal digit scratch retains the
- * actual prior stack bytes on generation-budget overflow paths. No opcode array. */
+/* IAR formatter entry: a 192-byte scratch frame on the stack (digit buffers
+ * and record at fixed offsets, see engine.c) handed to the core. */
 #include "engine.h"
-__attribute__((naked)) int32_t g2_iar_general_format(g2_main_format_put put,void *context,const char *format,uint32_t **cursor,unsigned mode){__asm__ volatile(
- "push.w {r0,r4,r5,r6,r7,r8,r9,r10,r11,lr}\n"
- "sub sp,#192\n"
- "mov r4,sp\n"
- "ldr r5,[sp,#232]\n"
- "sub sp,#8\n"
- "str r5,[sp]\n"
- "str r4,[sp,#4]\n"
- "bl g2_main_iar_format_core\n"
- "add sp,#8\n"
- "add sp,#196\n"
- "pop.w {r4,r5,r6,r7,r8,r9,r10,r11,pc}\n");}
+int32_t g2_main_iar_format_core(g2_main_format_put callback,void *context,const char *format,uint32_t **cursor,unsigned mode,uint8_t *frame);
+int32_t g2_iar_general_format(g2_main_format_put put,void *context,const char *format,uint32_t **cursor,unsigned mode){
+ uint8_t frame[192] __attribute__((aligned(8)));
+ return g2_main_iar_format_core(put,context,format,cursor,mode,frame);
+}

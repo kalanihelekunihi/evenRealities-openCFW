@@ -1,178 +1,81 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_317124\n"
-".type opencfw_em9305_child_317124,@function\n"
-"opencfw_em9305_child_317124:\n"
-"L317124:\n"
-"enter_s [r13-r21,fp,blink]\n"
-"L317126:\n"
-"sub_s sp,sp,0x24\n"
-"L317128:\n"
-"mov_s r19,r2\n"
-"L31712a:\n"
-"mov_s r16,r0\n"
-"L31712c:\n"
-"mov_s r14,0\n"
-"L31712e:\n"
-"add r17,r1,0x8\n"
-"L317132:\n"
-"st_s r14,[sp,0x4]\n"
-"L317134:\n"
-"st r14,[sp]\n"
-"L317138:\n"
-"exth.f r20,r19\n"
-"L31713c:\n"
-"beq_s L31720e\n"
-"L31713e:\n"
-"add r1,sp,0x23\n"
-"L317142:\n"
-"bl.d opencfw_em9305_wsf_event_peek\n"
-"L317146:\n"
-"mov_s r0,r16\n"
-"L317148:\n"
-"breq.d.nt r0,0,L31720e\n"
-"L31714c:\n"
-"mov_s r15,r0\n"
-"L31714e:\n"
-"add_s r0,sp,0x8\n"
-"L317150:\n"
-"bl.d opencfw_em9305_ll_received_decode_31bc7c\n"
-"L317154:\n"
-"mov_s r1,r15\n"
-"L317156:\n"
-"ldb r0,[sp,11]\n"
-"L31715a:\n"
-"ldh r1,[r16,10]\n"
-"L31715e:\n"
-"ldh r13,[sp,22]\n"
-"L317162:\n"
-"setne r0,r0,0\n"
-"L317166:\n"
-"asl r0,r0,0x2\n"
-"L317168:\n"
-"add r0,r0,0x8\n"
-"L31716a:\n"
-"add_s r15,r15,r0\n"
-"L31716c:\n"
-"breq_s r1,0,L31717c\n"
-"L31716e:\n"
-"sub_s r13,r13,r1\n"
-"L317170:\n"
-"add_s r15,r15,r1\n"
-"L317172:\n"
-"mov_s r18,2\n"
-"L317174:\n"
-"mov_s r2,1\n"
-"L317176:\n"
-"sth r13,[sp,22]\n"
-"L31717a:\n"
-"b_s L317180\n"
-"L31717c:\n"
-"mov_s r18,5\n"
-"L31717e:\n"
-"mov_s r2,0\n"
-"L317180:\n"
-"exth_s r0,r13\n"
-"L317182:\n"
-"add_s r0,r0,r18\n"
-"L317184:\n"
-"brhs.d.nt r20,r0,L3171ac\n"
-"L317188:\n"
-"stb_s r2,[sp,0]\n"
-"L31718a:\n"
-"brhs.d.nt r18,r20,L31720e\n"
-"L31718e:\n"
-"mov_s r13,0\n"
-"L317190:\n"
-"sub r0,r19,r18\n"
-"L317194:\n"
-"stb r13,[sp,1]\n"
-"L317198:\n"
-"stb r0,[sp,2]\n"
-"L31719c:\n"
-"brne_s r1,0,L3171a0\n"
-"L31719e:\n"
-"st_s r13,[sp,0x4]\n"
-"L3171a0:\n"
-"extb_s r0,r0\n"
-"L3171a2:\n"
-"mov_s r21,0\n"
-"L3171a4:\n"
-"add_s r1,r1,r0\n"
-"L3171a6:\n"
-"sth r1,[r16,10]\n"
-"L3171aa:\n"
-"b_s L3171e0\n"
-"L3171ac:\n"
-"stb 1,[sp,1]\n"
-"L3171b0:\n"
-"stb r13,[sp,2]\n"
-"L3171b4:\n"
-"brne_s r1,0,L3171ba\n"
-"L3171b6:\n"
-"st 0,[sp,4]\n"
-"L3171ba:\n"
-"add r1,sp,0x23\n"
-"L3171be:\n"
-"mov_s r0,r16\n"
-"L3171c0:\n"
-"bl.d opencfw_em9305_wsf_event_remove\n"
-"L3171c4:\n"
-"sth 0,[r16,10]\n"
-"L3171c8:\n"
-"mov_s r21,r0\n"
-"L3171ca:\n"
-"ldb r0,[r16,8]\n"
-"L3171ce:\n"
-"extb_s r1,r13\n"
-"L3171d0:\n"
-"add_s r1,r1,r18\n"
-"L3171d2:\n"
-"add_s r0,r0,-1\n"
-"L3171d4:\n"
-"stb 1,[r16,12]\n"
-"L3171d8:\n"
-"sub r13,r19,r1\n"
-"L3171dc:\n"
-"stb r0,[r16,8]\n"
-"L3171e0:\n"
-"add_s r1,sp,0\n"
-"L3171e2:\n"
-"bl.d opencfw_em9305_child_31ba24\n"
-"L3171e6:\n"
-"mov_s r0,r17\n"
-"L3171e8:\n"
-"ldb r2,[sp,2]\n"
-"L3171ec:\n"
-"add_s r0,r0,r17\n"
-"L3171ee:\n"
-"mov_s r1,r15\n"
-"L3171f0:\n"
-"mov_s r17,r0\n"
-"L3171f2:\n"
-"bl.d opencfw_em9305_memcpy\n"
-"L3171f6:\n"
-"mov_s r20,r2\n"
-"L3171f8:\n"
-"breq.d.nt r21,0,L317202\n"
-"L3171fc:\n"
-"mov_s r0,r21\n"
-"L3171fe:\n"
-"bl opencfw_em9305_wsf_event_release\n"
-"L317202:\n"
-"add_s r14,r14,r18\n"
-"L317204:\n"
-"add r17,r17,r20\n"
-"L317208:\n"
-"mov_s r19,r13\n"
-"L31720a:\n"
-"add_s r14,r14,r20\n"
-"L31720c:\n"
-"b_s L317138\n"
-"L31720e:\n"
-"extb_s r0,r14\n"
-"L317210:\n"
-"leave_s [r13-r21,fp,blink,pcl]\n"
-".size opencfw_em9305_child_317124,.-opencfw_em9305_child_317124\n"
-);
+#include <stdint.h>
+
+/* Native 0x317124..0x317212: copy queued received PDUs into an output
+ * buffer (data from out+8) within a byte budget. Each step peeks the
+ * queue head, decodes its header and emits a descriptor (31ba24) plus
+ * payload: a PDU that fits (5-byte descriptor, or 2 for a continuation
+ * at offset +10) is removed, counted down (+8) and flagged (+12); one
+ * that does not fit is split, advancing the offset at +10. Returns the
+ * number of bytes produced (8 bits). */
+extern uintptr_t opencfw_em9305_wsf_event_peek(uintptr_t queue, uintptr_t handler_out);
+extern uint32_t opencfw_em9305_ll_received_decode_31bc7c(uintptr_t header, uintptr_t event);
+extern uintptr_t opencfw_em9305_wsf_event_remove(uintptr_t queue, uintptr_t handler_out);
+extern uint32_t opencfw_em9305_child_31ba24(uintptr_t out, uintptr_t descriptor);
+extern void *opencfw_em9305_memcpy(void *destination, const void *source, uint32_t length);
+extern uint32_t opencfw_em9305_wsf_event_release(uintptr_t event);
+
+struct opencfw_em9305_rx_descriptor {
+    uint8_t continuation;
+    uint8_t complete;
+    uint8_t length;
+    uint8_t reserved;
+    uint32_t value;
+};
+
+uint32_t opencfw_em9305_child_317124(uintptr_t queue, uintptr_t out, uint32_t budget)
+{
+    struct opencfw_em9305_rx_descriptor descriptor={0u,0u,0u,0u,0u};
+    uint8_t header[24] __attribute__((aligned(4)));
+    uint8_t handler;
+    uintptr_t destination=out+8u;
+    uint32_t total=0u;
+    for(;;){
+        uint32_t available=(uint16_t)budget;
+        if(available==0u)break;
+        uintptr_t event=opencfw_em9305_wsf_event_peek(queue,(uintptr_t)&handler);
+        if(event==0u)break;
+        (void)opencfw_em9305_ll_received_decode_31bc7c((uintptr_t)header,event);
+        volatile uint16_t *offset=(volatile uint16_t *)(queue+10u);
+        uint32_t consumed=*offset;
+        uint32_t remaining=*(volatile uint16_t *)&header[14];
+        uintptr_t source=event+(header[3]!=0u?12u:8u);
+        uint32_t overhead;
+        if(consumed!=0u){
+            remaining-=consumed;
+            source+=consumed;
+            overhead=2u;
+            descriptor.continuation=1u;
+        }else{
+            overhead=5u;
+            descriptor.continuation=0u;
+        }
+        uintptr_t removed=0u;
+        uint32_t next;
+        if(available>=(uint16_t)remaining+overhead){
+            descriptor.complete=1u;
+            descriptor.length=(uint8_t)remaining;
+            *offset=0u;
+            removed=opencfw_em9305_wsf_event_remove(queue,(uintptr_t)&handler);
+            uint32_t pending=*(volatile uint8_t *)(queue+8u);
+            next=budget-((uint8_t)remaining+overhead);
+            *(volatile uint8_t *)(queue+12u)=1u;
+            *(volatile uint8_t *)(queue+8u)=(uint8_t)(pending-1u);
+        }else{
+            if(overhead>=available)break;
+            uint32_t chunk=budget-overhead;
+            descriptor.complete=0u;
+            descriptor.length=(uint8_t)chunk;
+            *offset=(uint16_t)(consumed+(uint8_t)chunk);
+            next=0u;
+        }
+        uint32_t used=opencfw_em9305_child_31ba24(destination,(uintptr_t)&descriptor);
+        uint32_t length=*(volatile uint8_t *)&descriptor.length;
+        destination+=used;
+        (void)opencfw_em9305_memcpy((void *)destination,(const void *)source,length);
+        if(removed!=0u)(void)opencfw_em9305_wsf_event_release(removed);
+        total+=overhead+length;
+        destination+=length;
+        budget=next;
+    }
+    return (uint8_t)total;
+}

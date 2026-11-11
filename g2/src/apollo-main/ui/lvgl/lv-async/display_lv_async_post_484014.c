@@ -4,8 +4,7 @@
 extern void *audio_uart_lv_malloc(uint32_t);
 extern void audio_uart_lv_heap_free(void *);
 extern void *audio_uart_lv_timer_create_464466(void (*)(void *), uint32_t, void *);
-extern void audio_uart_lv_async_dispatch_4840ac(void *);
-extern void audio_uart_lvgl_log(uint32_t, const char *, uint32_t,
+extern void lv_log_add(uint32_t, const char *, uint32_t,
                                 const char *, const char *, ...);
 
 static const char timer_path[] =

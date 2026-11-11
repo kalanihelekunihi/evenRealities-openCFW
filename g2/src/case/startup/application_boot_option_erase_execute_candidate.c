@@ -33,3 +33,5 @@ uint32_t case_boot_option_erase_execute(uint32_t operation,uint32_t *error)
     *busy=0u;
     return result;
 }
+/* Dedup (0x0800497c): case_binary_5e_flash_read (was legacy-default/flash_operations_candidate.c). */
+uint32_t case_binary_5e_flash_read(void *configuration,uint32_t *error_page) __attribute__((alias("case_boot_option_erase_execute")));

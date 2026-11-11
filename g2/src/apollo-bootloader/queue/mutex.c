@@ -31,3 +31,9 @@ int32_t opencfw_boot_mutex_release(uint32_t tagged_handle)
         :opencfw_bl_kernel_queue_put_blocking((void *)(uintptr_t)handle,0,0,0);
     return result==1u ? 0 : -3;
 }
+
+/* Stock entry names that branch straight to the provider above. */
+__typeof__(opencfw_boot_mutex_acquire) opencfw_provider_4166aa __attribute__((alias("opencfw_boot_mutex_acquire")));
+__typeof__(opencfw_boot_mutex_release) opencfw_provider_416710 __attribute__((alias("opencfw_boot_mutex_release")));
+__typeof__(opencfw_boot_mutex_acquire) opencfw_boot_fs_mutex_acquire __attribute__((alias("opencfw_boot_mutex_acquire")));
+__typeof__(opencfw_boot_mutex_release) opencfw_boot_fs_mutex_release __attribute__((alias("opencfw_boot_mutex_release")));

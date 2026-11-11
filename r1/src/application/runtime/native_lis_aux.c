@@ -1,25 +1,84 @@
 #include <stdint.h>
-/* Native outer/provider frames keep stack-backed register requests attributable. */
-__attribute__((naked)) uint32_t lis2dw12_pin_int1_route_get(void)
-{ __asm__ volatile("push {r4,lr}\nmov r2,r1\nmovs r3,#1\nmovs r1,#35\nbl lis2dw12_read_reg\npop {r4,pc}\n"); }
-__attribute__((naked)) uint32_t lis2dw12_pin_int1_route_set(void)
+#include "native_lis_context.h"
+#include "native_motion_operations.h"
+/* Register requests use ordinary typed C interfaces. */
+__attribute__((noinline)) int32_t lis2dw12_pin_int1_route_get(const stmdev_ctx_t *ctx,
+                                  lis2dw12_ctrl4_int1_pad_ctrl_t *route)
 {
- __asm__ volatile("push {r2,r3,r4,r5,r6,lr}\nmov r4,r1\nmov r5,r0\nmovs r3,#1\nadd r2,sp,#4\nmovs r1,#36\nbl lis2dw12_read_reg\ncmp r0,#0\nbne 1f\nmovs r3,#1\nmov r2,sp\nmovs r1,#63\nmov r0,r5\nbl lis2dw12_read_reg\ncmp r0,#0\nbne 1f\nldrb r0,[r4]\nldrb r1,[sp,#4]\nldrb r2,[sp]\nbl r1_lis_int1_route_byte\nstrb r0,[sp]\nmovs r3,#1\nmov r2,r4\nmovs r1,#35\nmov r0,r5\nbl lis2dw12_write_reg\ncmp r0,#0\nbne 1f\nmovs r3,#1\nmov r2,sp\nmovs r1,#63\nmov r0,r5\nbl lis2dw12_write_reg\n1: pop {r2,r3,r4,r5,r6,pc}\n");
+ return lis2dw12_read_reg(ctx, 0x23, (uint8_t *)route, 1);
 }
-#define SETTER(name,value) "movs r1,#" #value "\nldr r0,=r1_lis_context\nbl " #name "\n"
-#define LOG_TAP(ring,sdk) "bl r1_structured_log_mode_get\nlsls r0,r0,#31\nbne 1f\nbl r1_structured_log_mode_get\nlsls r0,r0,#29\nbpl 2f\n1: ldr r2,=" #ring "\nldr r1,=" #ring "\nmov.w r0,#0xc000000\nbl r1_structured_log_format\n2: bl r1_structured_log_mode_get\nlsls r0,r0,#30\nbpl 3f\nldr r0,=0x1c0003\nldr r1,=" #sdk "\nbl nrf_log_frontend_std_0\n3: movs r0,#1\npop {r3,pc}\n"
-__attribute__((naked)) uint32_t r1_lis2dw12_aux20_boundary(void)
+extern uint32_t r1_lis_int1_route_byte(uint32_t, uint32_t, uint32_t);
+/* Preserve the two-read/two-write sequence; unwritten bytes start at zero. */
+int32_t lis2dw12_pin_int1_route_set(const stmdev_ctx_t *ctx,
+ lis2dw12_ctrl4_int1_pad_ctrl_t *route)
 {
- __asm__ volatile("push {r3,lr}\nmov r1,sp\nldr r0,=r1_lis_context\nbl lis2dw12_pin_int1_route_get\nldrb r0,[sp]\nmov r1,sp\nbic r0,r0,#8\nstrb r0,[sp]\nldr r0,=r1_lis_context\nbl lis2dw12_pin_int1_route_set\n"
- SETTER(lis2dw12_tap_detection_on_z_set,0) SETTER(lis2dw12_tap_detection_on_y_set,0) SETTER(lis2dw12_tap_detection_on_x_set,0) SETTER(lis2dw12_tap_mode_set,0) SETTER(lis2dw12_full_scale_set,2) SETTER(lis2dw12_data_rate_set,3)
- LOG_TAP(r1_lis_tap_disable_ring,r1_lis_tap_disable_sdk));
+ volatile uint8_t frame[8]={0};
+ int32_t status = lis2dw12_read_reg(ctx, 0x24,
+                                  (uint8_t *)(uintptr_t)(frame+4), 1);
+ if (status != 0)
+  return status;
+ status = lis2dw12_read_reg(ctx, 0x3f, (uint8_t *)(uintptr_t)frame, 1);
+ if (status != 0)
+  return status;
+ uint32_t ctrl4 = *(const volatile uint8_t *)route;
+ uint32_t ctrl5 = frame[4];
+ uint32_t ctrl7 = frame[0];
+ frame[0] = (uint8_t)r1_lis_int1_route_byte(ctrl4, ctrl5, ctrl7);
+ status = lis2dw12_write_reg(ctx, 0x23, (uint8_t *)route, 1);
+ if (status != 0)
+  return status;
+ return lis2dw12_write_reg(ctx, 0x3f,
+                          (uint8_t *)(uintptr_t)frame, 1);
 }
-__attribute__((naked)) uint32_t r1_lis2dw12_aux16_boundary(void)
+extern uint32_t r1_structured_log_mode_get(void);
+extern uint32_t r1_structured_log_format(uint32_t,const char *,...);
+extern void nrf_log_frontend_std_0(uint32_t,const char *);
+extern const char r1_lis_tap_disable_ring[36],r1_lis_tap_disable_sdk[28];
+extern const char r1_lis_tap_enable_ring[52],r1_lis_tap_enable_sdk[48];
+static uint32_t tap_log(const char *ring,const char *sdk)
 {
- __asm__ volatile("push {r3,lr}\n"
- SETTER(lis2dw12_tap_detection_on_z_set,1) SETTER(lis2dw12_tap_detection_on_y_set,1) SETTER(lis2dw12_tap_detection_on_x_set,1) SETTER(lis2dw12_tap_threshold_x_set,3) SETTER(lis2dw12_tap_threshold_y_set,3) SETTER(lis2dw12_tap_threshold_z_set,3) SETTER(lis2dw12_tap_dur_set,0) SETTER(lis2dw12_tap_quiet_set,0) SETTER(lis2dw12_tap_shock_set,0) SETTER(lis2dw12_tap_mode_set,1)
- "mov r1,sp\nldr r0,=r1_lis_context\nbl lis2dw12_pin_int1_route_get\nldrb r0,[sp]\nmov r1,sp\norr r0,r0,#8\nstrb r0,[sp]\nldr r0,=r1_lis_context\nbl lis2dw12_pin_int1_route_set\n"
- LOG_TAP(r1_lis_tap_enable_ring,r1_lis_tap_enable_sdk));
+ /* Each gate reloads the live mode, including the short-circuited second
+  * read. Sensor errors do not skip either the following settings or logs. */
+ if ((r1_structured_log_mode_get() & 1u) ||
+     (r1_structured_log_mode_get() & 4u))
+  (void)r1_structured_log_format(0x0c000000,ring,ring);
+ if (r1_structured_log_mode_get() & 2u)
+  nrf_log_frontend_std_0(0x001c0003,sdk);
+ return 1;
+}
+uint32_t r1_lis2dw12_aux20_boundary(void)
+{
+ volatile uint8_t route=0;
+ const stmdev_ctx_t *ctx=(const void *)&r1_lis_context;
+ (void)lis2dw12_pin_int1_route_get(ctx,(void *)(uintptr_t)&route);
+ route &= (uint8_t)~8u;
+ (void)lis2dw12_pin_int1_route_set(ctx,(void *)(uintptr_t)&route);
+ (void)lis2dw12_tap_detection_on_z_set(ctx,0);
+ (void)lis2dw12_tap_detection_on_y_set(ctx,0);
+ (void)lis2dw12_tap_detection_on_x_set(ctx,0);
+ (void)lis2dw12_tap_mode_set(ctx,0);
+ (void)lis2dw12_full_scale_set(ctx,2);
+ (void)lis2dw12_data_rate_set(ctx,3);
+ return tap_log(r1_lis_tap_disable_ring,r1_lis_tap_disable_sdk);
+}
+uint32_t r1_lis2dw12_aux16_boundary(void)
+{
+ volatile uint8_t route=0;
+ const stmdev_ctx_t *ctx=(const void *)&r1_lis_context;
+ (void)lis2dw12_tap_detection_on_z_set(ctx,1);
+ (void)lis2dw12_tap_detection_on_y_set(ctx,1);
+ (void)lis2dw12_tap_detection_on_x_set(ctx,1);
+ (void)lis2dw12_tap_threshold_x_set(ctx,3);
+ (void)lis2dw12_tap_threshold_y_set(ctx,3);
+ (void)lis2dw12_tap_threshold_z_set(ctx,3);
+ (void)lis2dw12_tap_dur_set(ctx,0);
+ (void)lis2dw12_tap_quiet_set(ctx,0);
+ (void)lis2dw12_tap_shock_set(ctx,0);
+ (void)lis2dw12_tap_mode_set(ctx,1);
+ (void)lis2dw12_pin_int1_route_get(ctx,(void *)(uintptr_t)&route);
+ route |= 8u;
+ (void)lis2dw12_pin_int1_route_set(ctx,(void *)(uintptr_t)&route);
+ return tap_log(r1_lis_tap_enable_ring,r1_lis_tap_enable_sdk);
 }
 const char r1_lis_tap_disable_ring[36] __attribute__((section(".r1.lis.tap.disable_ring")))="[RING]LIS2DOC double tap disabled";
 const char r1_lis_tap_disable_sdk[28] __attribute__((section(".r1.lis.tap.disable_sdk")))="LIS2DOC double tap disabled";

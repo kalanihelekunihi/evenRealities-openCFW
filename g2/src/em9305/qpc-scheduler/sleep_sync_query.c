@@ -10,7 +10,7 @@ uint32_t opencfw_em9305_sleep_sync_query(uint32_t incoming)
   volatile uint32_t *config=(volatile uint32_t *)(uintptr_t)0xf01804u;
   *config=*config|(1u<<17);
   *(volatile uint32_t *)(uintptr_t)0xf00820u=512;
-  __asm__ volatile("sync" ::: "memory");
+  __builtin_arc_sync();
   *(volatile uint32_t *)(uintptr_t)0xf00810u=512;
   *(volatile uint32_t *)(uintptr_t)0xf00804u=512;
   *(volatile uint32_t *)(uintptr_t)0xf01814u=*(volatile uint32_t *)(context()+4u);

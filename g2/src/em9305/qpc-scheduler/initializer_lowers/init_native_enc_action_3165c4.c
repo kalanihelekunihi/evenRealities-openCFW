@@ -1,42 +1,22 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_enc_action_3165c4\n"
-".type opencfw_em9305_enc_action_3165c4,@function\n"
-"opencfw_em9305_enc_action_3165c4:\n"
-"L3165c4:\n"
-"enter_s [r13,blink]\n"
-"L3165c6:\n"
-"bl.d opencfw_em9305_enc_action_3197d0\n"
-"L3165ca:\n"
-"mov_s r13,r0\n"
-"L3165cc:\n"
-"bl.d opencfw_em9305_child_3197c8\n"
-"L3165d0:\n"
-"mov_s r0,r13\n"
-"L3165d2:\n"
-"bl.d opencfw_em9305_child_31af80\n"
-"L3165d6:\n"
-"mov_s r0,r13\n"
-"L3165d8:\n"
-"bl.d opencfw_em9305_child_325e4c\n"
-"L3165dc:\n"
-"mov_s r0,r13\n"
-"L3165de:\n"
-"bl.d opencfw_em9305_phy_timer_start_32c7e4\n"
-"L3165e2:\n"
-"mov_s r0,r13\n"
-"L3165e4:\n"
-"ldb_s r0,[r13,0xd]\n"
-"L3165e6:\n"
-"bset_s r0,r0,0x1\n"
-"L3165e8:\n"
-"stb_s r0,[r13,0xd]\n"
-"L3165ea:\n"
-"bl.d opencfw_em9305_child_3197f8\n"
-"L3165ee:\n"
-"mov_s r0,r13\n"
-"L3165f0:\n"
-"leave_s [r13,blink,pcl]\n"
-".size opencfw_em9305_enc_action_3165c4,.-opencfw_em9305_enc_action_3165c4\n"
-);
+#include <stdint.h>
+
+/* Native 0x3165c4..0x3165f2: encryption start action. Runs the 3197d0,
+ * 3197c8, 31af80 and 325e4c steps, starts the PHY timer, sets bit 1 of
+ * the flag byte at +13 and reports through 3197f8. */
+extern uint32_t opencfw_em9305_enc_action_3197d0(uintptr_t record);
+extern uint32_t opencfw_em9305_child_3197c8(uintptr_t record);
+extern uint32_t opencfw_em9305_child_31af80(uintptr_t record);
+extern uint32_t opencfw_em9305_child_325e4c(uintptr_t record);
+extern uint32_t opencfw_em9305_phy_timer_start_32c7e4(uintptr_t record);
+extern uint32_t opencfw_em9305_child_3197f8(uintptr_t record);
+
+uint32_t opencfw_em9305_enc_action_3165c4(uintptr_t record)
+{
+    (void)opencfw_em9305_enc_action_3197d0(record);
+    (void)opencfw_em9305_child_3197c8(record);
+    (void)opencfw_em9305_child_31af80(record);
+    (void)opencfw_em9305_child_325e4c(record);
+    (void)opencfw_em9305_phy_timer_start_32c7e4(record);
+    *(volatile uint8_t *)(record+13u)|=2u;
+    return opencfw_em9305_child_3197f8(record);
+}

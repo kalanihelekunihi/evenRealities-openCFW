@@ -1,0 +1,157 @@
+{
+  "cases": 1728,
+  "passed": 1728,
+  "failures": [],
+  "cases_per_function": {
+    "r1_motion_selected_provider_initialize": 464,
+    "r1_motion_initialize_entry": 464,
+    "r1_motion_selected_fifo_read": 800
+  },
+  "functions": [
+    {
+      "name": "r1_motion_selected_provider_initialize",
+      "stock_entry": "0x50270",
+      "stock_bytes": 30,
+      "source_bytes": 36,
+      "native_span_sha256": "a0196d1ebe9f88bed57fbbcf05e6742bb4de088e27b043cecf59c11c8c974fa7"
+    },
+    {
+      "name": "r1_motion_initialize_entry",
+      "stock_entry": "0x6f400",
+      "stock_bytes": 4,
+      "source_bytes": 4,
+      "native_span_sha256": "725c6758590b54cfadcd4a159e37e23094cf213f42a5bfafc37acce2034afc05"
+    },
+    {
+      "name": "r1_motion_selected_fifo_read",
+      "stock_entry": "0x502ac",
+      "stock_bytes": 20,
+      "source_bytes": 24,
+      "native_span_sha256": "db293b28ed4764d75755f301ea522c9f98452dd80c49f7958e9a0b15fdeb0c21"
+    }
+  ],
+  "callback_stack_depth_pairs": [
+    [
+      "r1_motion_initialize_entry",
+      [],
+      []
+    ],
+    [
+      "r1_motion_initialize_entry",
+      [
+        -8
+      ],
+      [
+        -8
+      ]
+    ],
+    [
+      "r1_motion_initialize_entry",
+      [
+        -8,
+        0
+      ],
+      [
+        -8,
+        0
+      ]
+    ],
+    [
+      "r1_motion_initialize_entry",
+      [
+        0
+      ],
+      [
+        0
+      ]
+    ],
+    [
+      "r1_motion_selected_fifo_read",
+      [],
+      []
+    ],
+    [
+      "r1_motion_selected_fifo_read",
+      [
+        0
+      ],
+      [
+        0
+      ]
+    ],
+    [
+      "r1_motion_selected_provider_initialize",
+      [],
+      []
+    ],
+    [
+      "r1_motion_selected_provider_initialize",
+      [
+        -8
+      ],
+      [
+        -8
+      ]
+    ],
+    [
+      "r1_motion_selected_provider_initialize",
+      [
+        -8,
+        0
+      ],
+      [
+        -8,
+        0
+      ]
+    ],
+    [
+      "r1_motion_selected_provider_initialize",
+      [
+        0
+      ],
+      [
+        0
+      ]
+    ]
+  ],
+  "unchanged_functions": [
+    "r1_motion_adjust_samples",
+    "r1_motion_calibration_body",
+    "r1_motion_calibration_bypassed",
+    "r1_motion_calibration_read",
+    "r1_motion_stream_close_boundary",
+    "r1_motion_thirty_sample_batch_producer",
+    "r1_native_motion_interrupt"
+  ],
+  "report": "build/sources-goal-r1-motion-dispatch/report.json",
+  "report_sha256": "62f4084ad11b63ffc62fccd8ef935eca869e925fedd96ff28d5237a07256b934",
+  "source_sha256": "b027e049bfb8ade07462231bc8726863188cd9fa2dd5b863ab297796173251e5",
+  "header_sha256": "79568bea8e79f67fb559e9d66c1b5312bcc7806ee00de078548ba3a929af4d0a",
+  "manifest_sha256": "be76bf00509f1551b53a08edbc5515ed3a3dcb9b1721ff4481fdf60b77d82eb8",
+  "stock_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "rea": {
+    "completed": true,
+    "procedures": [
+      "0x50270",
+      "0x6f400",
+      "0x502ac"
+    ],
+    "path": "build/goal-r1-motion-dispatch/REA.json",
+    "sha256": "4ab353f4dae10bc074c820071ed7f34331ebf884e090f30d9a44a264b0106b29",
+    "limitation": "Decompiler omits FIFO argument types; native instructions and execution establish full R0/R1 forwarding."
+  },
+  "probe_artifacts": {
+    "build/goal-r1-motion-dispatch/verify.py": "a89c6c16d9b28ef26d7348d0ddbcf577d119c33b4495ab551b8a4b698843a889",
+    "build/goal-r1-motion-dispatch/before.c": "2e4173c065335ef645853d88dbe68fa275fd18d3e612980be45913f3def14c77",
+    "build/goal-r1-motion-dispatch/source.elf": "6af7ce3fa31daa9674f0e8b7b9063b755186240e6a65cede78733ce7aa809ab7",
+    "build/goal-r1-motion-dispatch/stock.elf": "914e9f881d121e9d97b0a560cf6b5dd01c3c5101e573aa01283c8e1cb514396f",
+    "build/goal-r1-motion-dispatch/rea-snapshot.json": "82d7aa3722af0e79ef02fdbccad06f1dfff6ef79f250cf9c34b4900e7b409505",
+    "build/goal-r1-motion-dispatch/entries.json": "df883c3635383b92c59fcdd2292f3949b71f7aa5b26dce9a5312560828145a31"
+  },
+  "limits": [
+    "Selection and operation callbacks are modeled, clobber caller-saved registers and preserve only defined arguments.",
+    "Selected cell at 0x200076ac is a controlled probe placement, not final layout proof.",
+    "Interrupt dispatch retains assembly because its mixed void/status slot does not yet have a uniform return contract.",
+    "No physical sensor operation, timing, complete fault-state, final linking, source qualification or byte-identity claim."
+  ]
+}

@@ -1,0 +1,104 @@
+{
+  "schema_version": 1,
+  "report": "build/sources-goal-r1-touch-release-c/report.json",
+  "evidence_files": {
+    "build/sources-goal-r1-touch-release-c/report.json": "01e23b7fb2c8724159d198483d3552aad3f427f92ac60ffa972b2ff23366f0db",
+    "r1/src/sources.json": "bbe0b8302b673e2cccd81e531b28261f9228cdc34c315e41f417067e4e157b35",
+    "r1/src/application/runtime/native_touch_release.c": "0653cf2beb68e42c7ee2fbe9cb65978f5a44e01efd8cd768b408765aa6e6572e",
+    "r1/src/application/runtime/native_touch_gesture.c": "5d9ba5137c05530d0345da6846763fc702d06ca1dc08caf4b368c8b8a8881b65",
+    "r1/src/application/runtime/native_touch_task_message.c": "3750961a2c1a9593137fc89dc59848dabe2eecf667feef5adcfca43a98ebfe03",
+    "r1/src/application/runtime/native_touch_services.c": "838ff73a88388d0d4b079204b2df6acea4dbf7f9a894e226a4cb17da5135bcd8",
+    "r1/src/application/board/native_delayed_worker.c": "f973a2ff34666a12070f96a0ca33cad584de2900ea13eaa9624a721038939881",
+    "r1/src/application/runtime/memory_eabi.c": "e89f73174230a5111606f175a2429695c62f178ace0b44478ab93497a9ebacff",
+    "build/goal-r1-fstorage-registry/expanded-rw.bin": "87fdee392022fdbe23dd0daf3e859fb14f3ce26ba3e8403aab56dc9d9a913317",
+    "build/goal-r1-touch-release-c/before.c": "71cfab6113135347c532ba15f2e8740f2144e56a3295940a743b49bc5bdd5505",
+    "build/goal-r1-touch-release-c/verify.py": "fdff0eaa2d1aeb00318e5ef4dc54c2fa04e0262626091e394f380a138045a8fe",
+    "build/goal-r1-touch-release-c/verification.json": "1d9e24f808343958485ef9052deb11852bd3ae55fda6c3d8368559d81c29bd23",
+    "build/goal-r1-touch-release-c/verify-final.log": "f330b882c136e580144ec8d0f852a18d813278b16aa99fc7052e10eb39bb3321",
+    "build/goal-r1-touch-release-c/audit.py": "5b42c76270cbead0d468a6b9a4351cb88a7fa1bf3aab8fcb14e276dc273d382c",
+    "build/goal-r1-touch-release-c/audit.json": "d41140a8b1dfab5aa988f2fac3f5c526db7f6eb681c45056b61114488a4972b7",
+    "build/goal-r1-touch-release-c/defects.py": "22d630dcab883818e1aea6877143518543fe5dc7d59c51512cf2536b72013676",
+    "build/goal-r1-touch-release-c/defects.json": "d7eea3bc52d4de728de7aa6e87e1cc3e0bf96bb93f8d1c166b521f1b62f32d8a",
+    "build/goal-r1-touch-release-c/rea.json": "344e3b168f0521dc10c6824a8c332fab31fa11292b6643a67fdf5b54cf2c9dc6",
+    "build/goal-r1-touch-release-c/source.elf": "eac1929ec96c8c9ffc6e683d6b964fc5e9c9773f4d33a218d00510c088412142",
+    "build/goal-r1-touch-release-c/r1-sources-check.log": "98979bc518b8ca923a890292418b7bb56d44bf86fe5381dc57bdda1a5745dc38",
+    "build/goal-r1-touch-release-c/sources-check.log": "d7d6634344db1597a98dba44fbd2ea3c2ecec1f9cf5fd032803de6e446dcbf7e",
+    "build/goal-r1-touch-release-c/boot-link/report.json": "210b781b38b96068d99e2811db7e0dd09ff6e932ed524b3b515b106cd7a2decf"
+  },
+  "stock_application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "rea_byte_windows": [
+    {
+      "address": "0x934e4",
+      "length": 30
+    },
+    {
+      "address": "0x93424",
+      "length": 180
+    },
+    {
+      "address": "0x3e938",
+      "length": 690
+    }
+  ],
+  "verification": {
+    "direct_pairs": 2400,
+    "mutation_pairs": 24,
+    "actual_gesture_integration_pairs": 240,
+    "actual_service_close_pairs": 160,
+    "actual_memclr_and_queue_frontend": true,
+    "all_emitted_message_bytes_checked": true,
+    "ordinary_C_ABI_private_frames_excluded": true
+  },
+  "audit": {
+    "unchanged_prior_object_hashes": 802,
+    "unchanged_synthetic_kernel_clear_result_and_state_sections": [
+      ".text.synthetic_release_kernel",
+      ".text.contact_clear_result",
+      ".r1.touch.contact",
+      ".r1.touch.timer_pending",
+      ".r1.touch.synthetic_flag"
+    ],
+    "generated_boot_allocated_bytes_and_relocations_unchanged": true,
+    "import_sets_unchanged": true,
+    "manifest_unchanged": true,
+    "release_translation_unit_has_no_inline_assembly": true
+  },
+  "defects": [
+    {
+      "defect": "partial-message-clear",
+      "compiled": true,
+      "behavioral_assertion_rejected": true
+    },
+    {
+      "defect": "wrong-message-type",
+      "compiled": true,
+      "behavioral_assertion_rejected": true
+    },
+    {
+      "defect": "inactive-dispatch",
+      "compiled": true,
+      "behavioral_assertion_rejected": true
+    },
+    {
+      "defect": "partial-contact-clear",
+      "compiled": true,
+      "behavioral_assertion_rejected": true
+    },
+    {
+      "defect": "reversed-slider",
+      "compiled": true,
+      "behavioral_assertion_rejected": true
+    },
+    {
+      "defect": "zero-velocity",
+      "compiled": true,
+      "behavioral_assertion_rejected": true
+    }
+  ],
+  "limitations": [
+    "Ordinary C ABI; incidental caller-clobbered registers and private stack addresses or bytes are excluded.",
+    "Gesture and queue frontends and memclr execute; queue, thread, delayed scheduling, logging and BLE providers are modeled.",
+    "No physical touch, RTOS scheduling, radio timing, final application link or device boot proof.",
+    "The shared task diagnostics name NFC/charge; the task is not asserted to be exclusively for touch."
+  ]
+}

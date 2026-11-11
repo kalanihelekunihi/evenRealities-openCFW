@@ -1,0 +1,118 @@
+{
+  "schema_version": 1,
+  "report": "build/sources-goal-r1-nv-report-reviewed-c/report.json",
+  "native_entries": [
+    "0x7b634",
+    "0x7bbe8",
+    "0x839b4"
+  ],
+  "audit": {
+    "unchanged_prior_nongenerated_objects": 843,
+    "changed_nongenerated_objects": [],
+    "changed_generated_objects": [
+      "{gen}/r1_startup_vectors.S",
+      "{gen}/r1_uecc.c"
+    ],
+    "added_objects": [
+      "r1/src/application/runtime/native_nv_recovery_report.c"
+    ],
+    "compiled_units": 854,
+    "application_imports": 64,
+    "bootloader_imports": 22,
+    "removed_imports": [
+      "r1_native_nv_recovery_report_boundary"
+    ],
+    "new_imports": [],
+    "new_persistent_state": false
+  },
+  "verification": {
+    "stock_C_comparisons": 1356,
+    "initialized_failed_read_cases": 2,
+    "native_code_coverage": {
+      "builder": 474,
+      "report": 174,
+      "outbound": 38
+    },
+    "native_uncovered": {
+      "builder": [],
+      "report": [],
+      "outbound": []
+    },
+    "actual_C_CRC_memory_builder_envelope_and_sender": true,
+    "independent_CRC_oracle": true,
+    "cleanup_return_normalized": true,
+    "allocator_KV_response_and_logs_modeled": true
+  },
+  "actual_cached_class_integration": {
+    "actual_cached_class_report_cases": 774,
+    "actual_C_KV_CRC_memory_and_report": true,
+    "critical_sections_balanced": true,
+    "size_mismatch_admission_checked": true,
+    "allocator_response_and_persistence_modeled": true
+  },
+  "negative_controls": [
+    {
+      "name": "ADC_minus_one_allowed",
+      "rejected": true
+    },
+    {
+      "name": "battery_five_allowed",
+      "rejected": true
+    },
+    {
+      "name": "wrong_CRC_span",
+      "rejected": true
+    },
+    {
+      "name": "missing_free",
+      "rejected": true
+    }
+  ],
+  "contract": [
+    "Builder zeroes116 output bytes, reads existing124-byte serial class, copies its first74 bytes with native field order and appends cached battery type at92, signed ADC at94 and ring size at96. Existing live class handles are reloaded; read results are ignored.",
+    "Report validity requires battery type1..4, signed ADC-500..500 except-1, ring size6..15, serial length1..30. All invalid-field diagnostics and null-output diagnostics are preserved.",
+    "Allocate121 bytes. A valid builder result emits command2, little-endian length116 and Modbus CRC16 over116 bytes; query live phone handle and call existing response API with17,1,0 and envelope length. Invalid local data skips send; all successful allocations are freed once.",
+    "Outbound helper skips null input and preserves16-bit length-plus-five wrapping. Payload remains synchronous borrowed storage through the response call."
+  ],
+  "intentional_C_changes": [
+    "Initialize all cached-read scratch rather than use private frame history after failed non-writing reads.",
+    "Define report API return0 on every completion path, including allocation failure, rather than expose incidental caller-saved values from void logging/free APIs. Report return words are explicitly normalized in stock comparison; builder and outbound return words are compared exactly."
+  ],
+  "limits": [
+    "1356 direct comparisons cover all686 native instruction bytes; actual C memory/CRC/report routines execute and sent CRC is independently recomputed. Allocator, KV, logging, phone and final response boundaries are modeled.",
+    "774 cases execute actual C cached-class reads plus report/CRC/memory routines and verify balanced critical sections and payload-size mismatch rejection. Two direct C-only failed-read cases check initialized invalid output and cleanup.",
+    "Stock equality excludes private stack addresses/contents, incidental caller-saved registers and reporter return words. It does not assert instruction identity. Callee-saved integer/FP registers, SP, masks, sent packets and heap guards are checked.",
+    "No asynchronous callback retention, arbitrary aliases/corruption, physical persistence, real radio delivery, final linking or boot is established.",
+    "854 units compile/compose;64 application and22 bootloader imports remain. No new persistent state or imports; NV merge remains unresolved."
+  ],
+  "evidence_files": {
+    "build/sources-goal-r1-nv-report-reviewed-c/report.json": "9b028d285ab21afb706aba55d27a9706d2e9df3f9753bd559a62469bd31f267c",
+    "build/sources-goal-r1-nv-default-c/report.json": "9aeb64ba80299b330acbf5ac642a005876d5fec75170354d0fd039bd356d14fa",
+    "r1/src/application/runtime/native_nv_recovery_report.c": "6f4483365232b0d8c0da08e752a794ad9167a7388b6df39e0e4fdefd3cf6fe62",
+    "r1/src/sources.json": "08e459c0b60ace8e70f9683a3b425017f82f21053a533d3cd24d55fe2fbcce11",
+    "r1/src/application/board/native_kv_class.c": "e9791d39b7a9b5380b1dbce3c7422be921131abbd0e09c3387ea3d4b9930bf6e",
+    "r1/src/application/checksums/stock_checksums.c": "63f78e208048b5bd4b91c00f97e1260a5a53f5bee50dc51aa5ce4aaa1cdfe898",
+    "r1/src/include/r1_stock_checksums.h": "af730ecb8d2e2cc5656016b269678e7f1ac6c7e48fe32401fdfb9b7206886ef9",
+    "build/goal-r1-nv-report-c/rea.json": "c39ce87744d486012b9154d791606a0b6ec1e979c8d0538f88c0c1f3cc5da5f7",
+    "build/goal-r1-nv-report-c/out-rea.json": "2cbb8cf33025d4ca802dfe57bbc53911bc15efd7c44b2fb99cfff02f59667897",
+    "build/goal-r1-nv-report-c/verify.py": "1cf2813c91a3624d532722e51beddeb5f253d636d746d0f70d5f25df228fe648",
+    "build/goal-r1-nv-report-c/verification.json": "006e0091f426fff7364c80afb4d3f60749b5fe27dfad35c9ce3a15731c183a78",
+    "build/goal-r1-nv-report-c/verification.log": "4f83fde3ee4b46a12daea22b7f3ccf611c688b31eaef1df147b54149ae89a07d",
+    "build/goal-r1-nv-report-c/make-integration.py": "ff3100f6602a9fc757000582f0038d4373cba87c231a9d8cdf65551739e7f605",
+    "build/goal-r1-nv-report-c/integration/verify.py": "55ca09e791e35344e2dde356e65a181675d5030976a7c014fe5319eab7b794b9",
+    "build/goal-r1-nv-report-c/integration/verification.json": "17a135a240787a2a446a7c75ea97d5b6019395e56244a61b1df7cdf7c5f1a93d",
+    "build/goal-r1-nv-report-c/integration/verification.log": "58df902cbf686f141f1074ca64236bb10b65784ce68053a205778699c61aa5fc",
+    "build/goal-r1-nv-report-c/negative.py": "1945306954eb5ea8fa4b9fec9c0be6d73f3225e4cefa94a3063823ecfea527e3",
+    "build/goal-r1-nv-report-c/negative.json": "2506d3e7e12c36103b5f45651ac4b6213562a739f16668fd2fd94b3c7249fd60",
+    "build/goal-r1-nv-report-c/negative.log": "5b6c122816dc65a7fb02810644d9597a8db878d467763da5fc134023c55ee5cd",
+    "build/goal-r1-nv-report-c/r1-check.log": "6a3b7112ba0f9408d00c36f80c98ecec6d3a1d883c54fa9d7ffca45cedcd33f4",
+    "build/goal-r1-nv-report-c/ADC_minus_one_allowed/mutant.c": "2402923e2828b075b325f8417c8cca909db5f5d6cb055a4c352ff1b019fa5c7a",
+    "build/goal-r1-nv-report-c/ADC_minus_one_allowed/result.log": "49094330519918816f0b728e1dbf27767c20ac3793054c139b0096a56f95455d",
+    "build/goal-r1-nv-report-c/battery_five_allowed/mutant.c": "c3dafcb7caab37da9c75c0a5aa4d6c2264e8a0e4da6a8994f4230a8598184c4b",
+    "build/goal-r1-nv-report-c/battery_five_allowed/result.log": "9e82f20c8b3c0187f85c2163f868ceb399f07cd19fec0cae7dc37c4fe1f75a9c",
+    "build/goal-r1-nv-report-c/wrong_CRC_span/mutant.c": "a888b300029be5f99ed3f51b51e42eb07863ec1f7c0f2c29b354b5deb439d72a",
+    "build/goal-r1-nv-report-c/wrong_CRC_span/result.log": "59f4d20dd52b3a02896404054c999d1032dd4c004169f196f06b6a3ba80e58c6",
+    "build/goal-r1-nv-report-c/missing_free/mutant.c": "7c38548c7e15f5c545e71daae7cd1684456851bb7c37375ed7219f788012d0a4",
+    "build/goal-r1-nv-report-c/missing_free/result.log": "e53c54d5ee084cb83268c5c6dd115c7806480611cd4222ecfeac9535f561ccf8"
+  }
+}

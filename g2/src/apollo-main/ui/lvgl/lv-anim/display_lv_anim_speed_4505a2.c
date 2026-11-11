@@ -1,7 +1,7 @@
 /* Apollo Main LVGL speed/time packing, native span 0x4505a2..0x450633. */
 #include <stdint.h>
 
-extern void audio_uart_lvgl_log(uint32_t, const char *, uint32_t,
+extern void lv_log_add(uint32_t, const char *, uint32_t,
                                 const char *, const char *, ...);
 
 static const char speed_source[] =

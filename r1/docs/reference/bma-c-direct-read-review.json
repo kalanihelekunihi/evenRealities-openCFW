@@ -1,0 +1,198 @@
+{
+  "direct": {
+    "passed": 6332,
+    "executions": 12664,
+    "actual_null_check_and_copy": true,
+    "raw_status_words": true,
+    "fixed_native_buffer": true,
+    "context_alias_and_dummy_reload": true,
+    "callback_stack_depths": {
+      "stock": [
+        -152
+      ],
+      "C": [
+        -192
+      ]
+    },
+    "bridge_bytes": 24,
+    "body_bytes": 90,
+    "source_report": "build/sources-goal-r1-bma-direct-read-native/report.json",
+    "limitations": [
+      "Transport callback modeled; actual null checker and byte-copy helper execute",
+      "Native buffer placement checked; private helper stack depth differs",
+      "Successful-copy cases bounded to 128-byte buffer; excessive lengths/wrap and corrupted-frame fault behavior unverified",
+      "Caller-clobbered registers/flags excluded; callee-saved registers and masks checked",
+      "No byte qualification or physical sensor/bus proof"
+    ]
+  },
+  "integrated": {
+    "passed": 6332,
+    "executions": 12664,
+    "actual_null_check_and_copy": true,
+    "actual_native_and_C_product_adapters": true,
+    "raw_status_words": true,
+    "fixed_native_buffer": true,
+    "context_alias_and_dummy_reload": true,
+    "callback_stack_depths": {
+      "stock": [
+        -160
+      ],
+      "C": [
+        -200
+      ]
+    },
+    "bridge_bytes": 24,
+    "body_bytes": 90,
+    "source_report": "build/sources-goal-r1-bma-direct-read-native/report.json",
+    "limitations": [
+      "Motion-bus request boundary modeled; actual product read adapters, null checker and byte-copy helper execute",
+      "Native buffer placement checked; private helper stack depth differs",
+      "Successful-copy cases bounded to 128-byte buffer; excessive lengths/wrap and corrupted-frame fault behavior unverified",
+      "Caller-clobbered registers/flags excluded; callee-saved registers and masks checked",
+      "No byte qualification or physical sensor/bus proof"
+    ]
+  },
+  "read_control": {
+    "cases": 1791,
+    "passed": 1791,
+    "failures": [],
+    "callback_stack_depth_pairs": [
+      [
+        [
+          -24
+        ],
+        [
+          -24
+        ]
+      ],
+      [
+        [
+          -24,
+          -24
+        ],
+        [
+          -24,
+          -24
+        ]
+      ],
+      [
+        [
+          -24,
+          -24
+        ],
+        [
+          -24,
+          0
+        ]
+      ],
+      [
+        [
+          -24,
+          -24,
+          -24
+        ],
+        [
+          -24,
+          -24,
+          -24
+        ]
+      ],
+      [
+        [
+          -24,
+          -24,
+          -24,
+          -24
+        ],
+        [
+          -24,
+          -24,
+          -24,
+          -24
+        ]
+      ],
+      [
+        [
+          -24,
+          -24,
+          -24,
+          -24,
+          -24
+        ],
+        [
+          -24,
+          -24,
+          -24,
+          -24,
+          -24
+        ]
+      ]
+    ]
+  },
+  "negative_controls": {
+    "byte-status": {
+      "rejected": true,
+      "case": [
+        18,
+        0,
+        256
+      ],
+      "stderr": "Traceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-bma-direct-read/reject-byte-status.py\", line 51, in <module>\n    assert a(*case)==b(*case)\n                     ~^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-bma-direct-read/reject-byte-status.py\", line 44, in run\n    assert u.reg_read(UC_ARM_REG_R0)==(0xffffffff if invalid else 0xfffffffe if status else 0)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    "byte-register": {
+      "rejected": true,
+      "case": [
+        305419896,
+        1,
+        0
+      ],
+      "stderr": "Traceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-bma-direct-read/reject-byte-register.py\", line 51, in <module>\n    assert a(*case)==b(*case)\n                     ~^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-bma-direct-read/reject-byte-register.py\", line 41, in run\n    u.emu_start((0x87bbc if stock else syms['r1_bma4_read_regs_direct'][0])|1,STOP,count=10000)\n    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 769, in emu_start\n    raise self._hook_exception\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 363, in wrapper\n    return func(uc, *args, **kwargs)\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 1063, in __hook_code_cb\n    callback(uc, address, size, user_data)\n    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-bma-direct-read/reject-byte-register.py\", line 26, in code\n    reg,length,dummy,fill,status,mutation=state['args'];args=[u.reg_read(rr) for rr in regs];assert args==[reg,BUFFER,(length+dummy)&0xffffffff,0x12345678],args;state['trace'].append(['read',*args])\n                                                                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: [120, 537067368, 7, 305419896]\n"
+    },
+    "zero-buffer": {
+      "rejected": true,
+      "case": [
+        18,
+        0,
+        0,
+        6,
+        1,
+        0
+      ],
+      "stderr": "Traceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-bma-direct-read/reject-zero-buffer.py\", line 51, in <module>\n    assert a(*case)==b(*case)\n           ^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    }
+  },
+  "normal_build": {
+    "units": 573,
+    "application_imports": 197,
+    "bootloader_imports": 34,
+    "failures": 0,
+    "duplicate_strong_symbols": 0
+  },
+  "source_plan_unchanged": true,
+  "source_built_bytes": 3827,
+  "binary_pull_through_bytes": 642333,
+  "new_byte_qualification": false,
+  "source_completeness_proven": false,
+  "evidence": {
+    "build/sources-goal-r1-bma-direct-read-native/report.json": "9d7a81814dde7f5add01d3e9fb46479ab1d87551c88ab88537a3829a7bd6e16d",
+    "tools/build/source-plan.json": "eb04e4bf2c082d88801a99f173e0a4b58eba788ec05539d87b5ed02081002423",
+    "r1/src/application/runtime/native_bma_reads.c": "aea51821bec3152bd0c55d1fa380f6fa62449a64152c10a7ace2264bcf8208bf",
+    "r1/src/application/runtime/native_bma_interface.c": "9d9cf0bca6e436e2852347bbbb8601bc18190ac31bb268a493d0417ab9805bd3",
+    "r1/src/application/board/sensor-kernels/bma-reads/bosch-read-copy.c": "ebce6926ae8a63f9bb96965eee992e685d1ce88019da238c3a14c7b9064f2ac7",
+    "r1/src/sources.json": "6fa37d8afe1e50453bc47962bcfe463cd5163fb4f1b3d2a8033b02adbb77c9d3",
+    "r1/blobs/official/r1-2.2.6.0009/application.bin": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "build/hybrid-goal-r1-bma-direct-read/build-report.json": "cef98c09486183963a2f3e5f860426da215135f567b6e8352f1caabe2e628608",
+    "build/goal-r1-bma-direct-read/before.c": "036c3b2d3f7de745573fc59ec3012345ce03dbed460c2e2d87b3da0b5030dbea",
+    "build/goal-r1-bma-direct-read/REA.json": "e403f211b50b534465d60f5ee4008e187e340721d1d7d7fe1beb23133013efc5",
+    "build/goal-r1-bma-direct-read/REA.snapshot.json": "a5a2778721f7eb809f88d676fed71bfb0be5d3b4ad06e0307a1843441a59a4c8",
+    "build/goal-r1-bma-direct-read/verify.py": "d88d3f21e5891adef3336846cc4a8e65a5b58a547143fb4fb3c4cacf909ab07f",
+    "build/goal-r1-bma-direct-read/source.elf": "732286d8ecb37b12fee20f8c4f59c18f2a127bf2d965d38bd350c5e36a83ea3c",
+    "build/goal-r1-bma-direct-read/results.json": "401da44a22468937a60164e37016e850979844bb372c96962b4308481ac87dcc",
+    "build/goal-r1-bma-direct-read/negative.py": "a964d40221fa6d07eb97db3576e6d28d8f5574a4ad67ce07732c5675109cf755",
+    "build/goal-r1-bma-direct-read/negative-results.json": "ffbca10599d021a5b9bb3c03d6d2be37626ed1ed066d1d982d01fc92d6d3014a",
+    "build/goal-r1-bma-direct-read/integrated/verify.py": "01637d7cba59d0658fe55f5616481736d1c1e94045c3518336721ad29fff4459",
+    "build/goal-r1-bma-direct-read/integrated/results.json": "e3f5b7fa2e6e8e6f8949d48bab4b4ef650ec4160bfa5aafc52cd5c6ad3aadac5",
+    "build/goal-r1-bma-direct-read/control/verify.py": "2621127ab916da2aff40b1473e3d214089876d304b69c6101a201d9b738577f9",
+    "build/goal-r1-bma-direct-read/control/results.json": "d2adef79b8310621c895092cd24b0c10ee75f1268acb6de71416abdea44815a9"
+  }
+}

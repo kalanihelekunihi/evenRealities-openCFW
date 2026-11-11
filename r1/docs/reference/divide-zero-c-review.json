@@ -1,0 +1,127 @@
+{
+  "schema_version": 1,
+  "report": "build/sources-goal-r1-divide-zero-c/report.json",
+  "report_sha256": "37e4f8c423d01242b5404f3440f3084890b421b5389ec3e02c21711adcb85022",
+  "manifest_sha256": "588e9d628d29f289550db20fd3097e9834e3d95eb959fe0a38c1bc41de0cabe1",
+  "paired_cases": 7224,
+  "executions": 14448,
+  "case_groups": {
+    "Bosch_loops": 1322,
+    "Bosch_integration": 636,
+    "stream_reduction": 2367,
+    "stream_registration": 2867,
+    "timer_period": 32
+  },
+  "defects": {
+    "wrong-remainder": {
+      "compiled": true,
+      "behavior_rejected": true
+    },
+    "wrong-quotient": {
+      "compiled": true,
+      "behavior_rejected": true
+    },
+    "missing-second-divide": {
+      "compiled": true,
+      "behavior_rejected": true
+    },
+    "wrong-zero-result": {
+      "compiled": true,
+      "behavior_rejected": true
+    },
+    "wrong-stream-clock": {
+      "compiled": true,
+      "behavior_rejected": true
+    }
+  },
+  "audit": {
+    "unchanged_prior_object_hashes": 797,
+    "changed_object_hashes": [
+      [
+        "r1-application",
+        "r1/src/application/runtime/native_bma_feature_io.c"
+      ],
+      [
+        "r1-bootloader",
+        "{gen}/r1_startup_vectors.S"
+      ],
+      [
+        "r1-bootloader",
+        "{gen}/r1_uecc.c"
+      ]
+    ],
+    "generated_boot_crypto_and_vectors_allocated_bytes_and_relocations_unchanged": true,
+    "removed_application_imports": [
+      "r1_stream_zero_divisor_result"
+    ],
+    "unchanged_other_bma_functions": [
+      "r1_bma4_feature_address_increment",
+      "r1_bma4_feature_address_reset",
+      "r1_bma4_set_advance_power_save_boundary",
+      "r1_bma4_write_regs_boundary",
+      "r1_bma4_write_regs_direct"
+    ]
+  },
+  "rea_bytes": [
+    {
+      "name": "bma",
+      "evidence_id": "ev_c3c08854c94f8377dd8b09abef0930577be9679dcd878bff3c4a5fece28b2c4c",
+      "address": "0x87e58",
+      "length": 120,
+      "matches_locked_raw": true,
+      "sha256": "264b998ef30a3abcdc0036ef885c0ea41429df1860de2b6135ec1f1bf231daf9"
+    },
+    {
+      "name": "rate",
+      "evidence_id": "ev_b85d98d5edd6f88ab15bbd12b9bc6420763bd664eb56a19f1336ab5844bdf690",
+      "address": "0x8a068",
+      "length": 400,
+      "matches_locked_raw": true,
+      "sha256": "298bf496905f4e36e9bb4707bdf575707c05cb3fb3dac489b25c0161fae71730"
+    },
+    {
+      "name": "register",
+      "evidence_id": "ev_197f21ab0da6b77daf159a63d235da75e8f559006a17855a3cec91397eb69554",
+      "address": "0x89890",
+      "length": 448,
+      "matches_locked_raw": true,
+      "sha256": "8fcb80c4c1559c8f6fb4a3d104db00cdbbb29c903f666e93948ba05162785054"
+    }
+  ],
+  "strict_bootloader_link_report_sha256": "1a51c90d9cc181d84c7670376c011c0e4ed27d346b2b3da6770a59d9d0ab7516",
+  "evidence_files": {
+    "build/goal-r1-divide-zero-c/audit.py": "56e22474afba808190d71659138e71279b60eab1590ffbca95fa971a21aa659c",
+    "build/goal-r1-divide-zero-c/audit.json": "f4a6f271eff78cdf3bbfa3901a723534a6f040fc7f600fa6c613b89778ce9cb4",
+    "build/goal-r1-divide-zero-c/defects.py": "072ddf8e3ee095ec92d0f83fdd66ea8f684a98a9dbdf8be1245e29d5d7b90230",
+    "build/goal-r1-divide-zero-c/defects.json": "dc22fd730c6ac2b866faf35698d995d431219a91f94b7c20f19f18c0c3105840",
+    "build/goal-r1-divide-zero-c/defects.log": "5d3ce6f93d814e3e9d603c96ab1c83bed2c76cb69f9db11ece066a3d8fd41ea6",
+    "build/goal-r1-divide-zero-c/primitive.dis": "ff1e1ac05433f1acd9dcf52b0c37259575bcda0902e2af78557f82910d96ed19",
+    "build/goal-r1-divide-zero-c/sources-check.log": "f631cce80ab62163bd75c18877fd360880eecbdf2d26ea1436a7dbedd3bf9234",
+    "build/goal-r1-divide-zero-c/rea-bma.json": "9d85f2011395bfde1b7ab8b8f793c4fcc4f37fd4fce39c761ced1df9a5ee9391",
+    "build/goal-r1-divide-zero-c/rea-rate.json": "3896eb6e9c4c2b911a988841ae2755894db3f77ec274c9aad2e1e66d65b46348",
+    "build/goal-r1-divide-zero-c/rea-register.json": "76cd20d25eac396f3eefcbdc323c4236b8d49291a331addd1443c474c448bed1",
+    "build/goal-r1-divide-zero-c/chunks/verify.py": "9eaf930620f6debbd2d8055696140507dad29e438d5506c98b94d0187df5903f",
+    "build/goal-r1-divide-zero-c/chunks/source.elf": "42874397081401451de46e16abdd26e12187d1c5792b5b5ae27310c335db0be1",
+    "build/goal-r1-divide-zero-c/chunks/results.json": "9850335d02925a009adec0fe128815d64127117bda2190329baed2543313090b",
+    "build/goal-r1-divide-zero-c/integrated/verify.py": "c1ecfdac60dbe56d0fa97533d7e4aa134d49c4fb7a5b4f8d2c0de3d29c14ceb5",
+    "build/goal-r1-divide-zero-c/integrated/source.elf": "ba8674586fde891190ac5662bb1d72395bcddf7ee588c1fb9c558012c08f9f1f",
+    "build/goal-r1-divide-zero-c/integrated/results.json": "d077de30d320557907e26dc9f8f6eb5d80841ea77e5fdc3898b3c687ac607daf",
+    "build/goal-r1-divide-zero-c/rate/verify.py": "12ce6453c26d110cf65d26e1ab014e03e1112e53be92255ae949381eb7630bbd",
+    "build/goal-r1-divide-zero-c/rate/source.elf": "1616494a53b7329fde8a437c11454b6189f2ef1bc7fa1e5281ece510014703c2",
+    "build/goal-r1-divide-zero-c/rate/results.json": "247346c1569e4c12e7cec2857b424f4a96c07b93d4c3f73c1830d357f88ba8ab",
+    "build/goal-r1-divide-zero-c/register/verify.py": "b1ebb4b9ff1380f19558c6820de34483ecfc304cff44f13af38959a26df7b635",
+    "build/goal-r1-divide-zero-c/register/source.elf": "bc1261781cdf241e69cc57ee517b7b70293813f1ce9bbffc2f2e8a9f49ebb964",
+    "build/goal-r1-divide-zero-c/register/results.json": "2ed24911ccb27178760aa653bdfce40c47556fe7fce566bc251e7b0f146ff2cb",
+    "build/goal-r1-divide-zero-c/chunks/verify-final.log": "a8d7cf3b2579561f79a92fd412a766bf873cdc354b7814fc78320fb917818496",
+    "build/goal-r1-divide-zero-c/rate/verify-final.log": "f2b12c4feec67d64ccc973ea6213398cc9ab3b7b8c12844963f23b5ee2517dfd",
+    "build/goal-r1-divide-zero-c/integrated/verify.log": "746d21ab9856098a8dd58c6f67930ccd284eaa2e2671a6c858cbac4839479f06",
+    "build/goal-r1-divide-zero-c/register/verify.log": "0179c370c82fd6a176d39dd427295119c7b6a24ba6d8ed5fd9a50316dfa5b3e9"
+  },
+  "source_plan_modified": false,
+  "limitations": [
+    "One shared zero-divisor UDIV assembly statement remains; enabled trapping/full fault state not tested.",
+    "Register I/O and stream services modeled; no physical silicon/electrical/timing proof.",
+    "Private frames, caller-clobbered registers/flags and asynchronous effects excluded.",
+    "No full application final link; unrelated G2 manifest check failure remains."
+  ]
+}

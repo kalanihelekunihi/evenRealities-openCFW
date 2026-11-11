@@ -1,0 +1,98 @@
+{
+  "restricted_wait": {
+    "passed": 6400,
+    "executions": 12800,
+    "source_report": "build/sources-goal-r1-queue-restricted-c/report.json",
+    "actual_queue_lock_unlock": true,
+    "source_bytes": 70,
+    "limitations": [
+      "Scheduler restricted placement, remove, missed-yield and critical boundaries modeled; actual queue wait/lock/unlock execute",
+      "ISR effects injected synchronously at restricted-placement boundary, not asynchronous execution",
+      "Void caller-clobbered words/flags and private stack frames excluded",
+      "Requires scheduler suspended and valid queue; malformed pointers and physical concurrency unverified",
+      "No byte qualification"
+    ]
+  },
+  "audit": {
+    "unchanged_existing_function_bodies": [
+      "prvCopyDataFromQueue",
+      "prvCopyDataToQueue",
+      "prvGetDisinheritPriorityAfterTimeout",
+      "prvInitialiseMutex",
+      "prvInitialiseNewQueue",
+      "prvIsQueueEmpty",
+      "prvIsQueueFull",
+      "prvUnlockQueue",
+      "ulPortRaiseBASEPRI",
+      "uxQueueMessagesWaiting",
+      "uxQueueMessagesWaitingFromISR",
+      "vQueueDelete",
+      "xQueueCreateCountingSemaphore",
+      "xQueueCreateCountingSemaphoreStatic",
+      "xQueueCreateMutex",
+      "xQueueCreateMutexStatic",
+      "xQueueGenericCreate",
+      "xQueueGenericCreateStatic",
+      "xQueueGenericReset",
+      "xQueueGenericSend",
+      "xQueueGenericSendFromISR",
+      "xQueueGiveFromISR",
+      "xQueueGiveMutexRecursive",
+      "xQueueReceive",
+      "xQueueReceiveFromISR",
+      "xQueueSemaphoreTake",
+      "xQueueTakeMutexRecursive"
+    ],
+    "changed_existing_function_bodies": {},
+    "new_strong_symbols": [
+      "vQueueWaitForMessageRestricted"
+    ],
+    "removed_imports": [
+      "vQueueWaitForMessageRestricted"
+    ],
+    "added_imports": []
+  },
+  "negative_controls": {
+    "omit-lock": true,
+    "ignore-count": true
+  },
+  "normal_build": {
+    "compiled": 573,
+    "application_imports": 183,
+    "bootloader_imports": 34,
+    "failures": 0,
+    "duplicate_strong_symbols": 0
+  },
+  "qualification": {
+    "compiled_profiles": 5,
+    "unique_selected_regions": 2,
+    "already_covered": 2,
+    "new_function_byte_identity": false
+  },
+  "source_plan_unchanged": true,
+  "hybrid_equals_locked_application": true,
+  "source_built_bytes": 3833,
+  "binary_pull_through_bytes": 642327,
+  "source_completeness_proven": false,
+  "evidence": {
+    "build/sources-goal-r1-queue-restricted-c/report.json": "0aa90805f4ef37d6494c8b2489d49b02728a2be24b354df78af5580a11ba8a85",
+    "tools/build/source-plan.json": "0c889650bf8ea03def83ea1ea29730b3ccfe84bb70609c1972a500f02ba4ea2d",
+    "r1/src/application/rtos/mutex-kernel/mutex-kernel.c": "2f90a566538be26c944e4dd7ed7c906465b7d85c407f30f78bad21469a34b203",
+    "third-party/upstream/freertos-kernel/queue.c": "5cdf4fa35fe059446effff5bf20deaf83ddffb08921bc198fda106b1d17dd894",
+    "r1/src/config/rtos/mutex_kernel_contract.h": "d940797ff263975ba00fd355c3b3535a002c97f3e1ada8419492efb84ed8de81",
+    "r1/src/sources.json": "73c3fb03932b37db089ff50fdae47f8b7e73914b6b1fb99ddf99467302ff84ad",
+    "r1/symbols/function-frontier.csv": "2d3a870c9155a0b294b27b6292e4d307c5302550e2b11fed02b77566af9336e9",
+    "build/hybrid-goal-r1-queue-restricted-c/build-report.json": "212a18a2f14a245f8e681bf13681cada9c3a23b73b2aff80f8033d1e5ea11098",
+    "build/goal-r1-queue-restricted-c/REA.json": "df1532047ebe69b90859f7bdcaf3f24d75a5f25b2c11cc3fe0ac0f3e3381c4cf",
+    "build/goal-r1-queue-restricted-c/before.c": "92d281628fc4c19168ba2e4286682116d78dfca20db8dea00d6423af3d656454",
+    "build/goal-r1-queue-restricted-c/selected-upstream.c": "da56194e98cf7b29023042d14b66d9796203cebd51cefbfcfc383ae77ad4763e",
+    "build/goal-r1-queue-restricted-c/verify.py": "81bc2cb024cb0947f4793a9425deda88c6d1d89facb2f06a3c92b12bec620267",
+    "build/goal-r1-queue-restricted-c/results.json": "77bb391474e91dfc5a97a9b4a808754c3fe0bf8ea093c26bfa8607e45f50d22c",
+    "build/goal-r1-queue-restricted-c/negative.py": "29b494e73eef070dce5ba3f9b43af4f71493933290b3b357c47bce9af725b959",
+    "build/goal-r1-queue-restricted-c/negative-results.json": "cbb3c8967729eea5acc599d8ca43accf3a4ffb9937cb019de722ed7b5dd0c24f",
+    "build/goal-r1-queue-restricted-c/audit.py": "84b7d43515672ff6819eaa38b521a76478d5463d926c4f7e774c955d77436103",
+    "build/goal-r1-queue-restricted-c/audit-results.json": "31e0a6d92f94e4f2fe084c0e9c22becce3cd2ca8295991167fe62e96147e8060",
+    "build/goal-r1-queue-restricted-c/qualify.py": "433ef801561547593ec49578166bb9bcb70d3cdf7040e8e664ce0ba7108c142f",
+    "build/goal-r1-queue-restricted-c/qualified/qualification.json": "cbc8e40abfec77aab2b6e14b806f2d459408712518ee20876b54a44b752c1458"
+  }
+}

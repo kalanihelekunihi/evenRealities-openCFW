@@ -39,18 +39,58 @@
  */
 
 /* R1 GATT adaptation: native event routing, unconditional data-length requests
- * and dual logging differ from the pinned Nordic module. Public ABI types and
- * initialization are supplied by unchanged attributable Nordic source. */
+ * and dual logging differ from the pinned Nordic module. Public ABI types
+ * come from that source; observed link defaults are supplied below. */
 #include <stdint.h>
 #include <string.h>
-#define SVCALL_AS_NORMAL_FUNCTION
 #include "nrf_ble_gatt.h"
 #include "nrf_strerror.h"
 extern uint32_t r1_structured_log_mode_get(void);
 extern uint32_t r1_structured_log_format(uint32_t,const char *,const char *,...);
 extern void nrf_log_frontend_std_1(uint32_t,const char *,uint32_t);
 extern void nrf_log_frontend_std_2(uint32_t,const char *,uint32_t,uint32_t);
-extern void r1_sdk_gatt_link_init(nrf_ble_gatt_link_t *);
+#include <stddef.h>
+_Static_assert(sizeof(nrf_ble_gatt_link_t)==8 &&
+ offsetof(nrf_ble_gatt_link_t,att_mtu_desired)==0 &&
+ offsetof(nrf_ble_gatt_link_t,att_mtu_effective)==2 &&
+ offsetof(nrf_ble_gatt_link_t,att_mtu_exchange_pending)==4 &&
+ offsetof(nrf_ble_gatt_link_t,att_mtu_exchange_requested)==5 &&
+ offsetof(nrf_ble_gatt_link_t,data_length_desired)==6 &&
+ offsetof(nrf_ble_gatt_link_t,data_length_effective)==7,"stock GATT link layout");
+/* Stock 0x74f20: ordered halfword/byte writes, including desired length 251.
+ * See r1/docs/reference/gatt-link-c-review.md. */
+__attribute__((noinline)) void r1_sdk_gatt_link_init(nrf_ble_gatt_link_t *p)
+{
+ volatile nrf_ble_gatt_link_t *link=p;
+ link->att_mtu_desired=247;
+ link->att_mtu_effective=23;
+ link->att_mtu_exchange_pending=false;
+ link->att_mtu_exchange_requested=false;
+ link->data_length_desired=251;
+ link->data_length_effective=27;
+}
+_Static_assert(sizeof(nrf_ble_gatt_t)==36 &&
+ offsetof(nrf_ble_gatt_t,att_mtu_desired_periph)==0 &&
+ offsetof(nrf_ble_gatt_t,att_mtu_desired_central)==2 &&
+ offsetof(nrf_ble_gatt_t,data_length)==4 &&
+ offsetof(nrf_ble_gatt_t,links)==6 &&
+ offsetof(nrf_ble_gatt_t,evt_handler)==32 && NRF_BLE_GATT_LINK_COUNT==3,
+ "stock GATT context layout");
+/* Stock 0x78186 stores the callback before resetting all three links.
+ * Padding is retained; no callback is invoked here.
+ * See r1/docs/reference/gatt-init-c-review.md. */
+ret_code_t nrf_ble_gatt_init(nrf_ble_gatt_t *p,nrf_ble_gatt_evt_handler_t handler)
+{
+ if(!p)return 14;
+ volatile nrf_ble_gatt_t *g=p;
+ g->evt_handler=handler;
+ g->att_mtu_desired_periph=247;
+ g->att_mtu_desired_central=247;
+ g->data_length=251;
+ for(uint32_t i=0;i<3;i++)
+  r1_sdk_gatt_link_init((nrf_ble_gatt_link_t *)&g->links[i]);
+ return 0;
+}
 #define TEXT(name,value) const char r1_gatt_##name[] __attribute__((section(".r1.gatt.log." #name),aligned(1)))=value
 TEXT(mtu_request_ring,"[RING]sd_ble_gattc_exchange_mtu_request() returned %s.");
 TEXT(mtu_request_sdk,"sd_ble_gattc_exchange_mtu_request() returned %s.");
@@ -62,11 +102,13 @@ TEXT(octets_ring,"[RING]The requested TX/RX packet length is too long by %u/%u o
 TEXT(octets_sdk,"The requested TX/RX packet length is too long by %u/%u octets.");
 TEXT(time_ring,"[RING]The requested combination of TX and RX packet lengths is too long by %u microseconds.");
 TEXT(time_sdk,"The requested combination of TX and RX packet lengths is too long by %u microseconds.");
-#define SVC2(name,number) __attribute__((naked)) uint32_t name(uint32_t a __attribute__((unused)),uint32_t b __attribute__((unused))) { __asm__ volatile("svc %0\nbx lr"::"I"(number):"r0","memory"); }
-SVC2(r1_gatt_sd_mtu_request,SD_BLE_GATTC_EXCHANGE_MTU_REQUEST)
-SVC2(r1_gatt_sd_mtu_reply,SD_BLE_GATTS_EXCHANGE_MTU_REPLY)
-__attribute__((naked)) uint32_t r1_gatt_sd_length_update(uint32_t a __attribute__((unused)),const ble_gap_data_length_params_t *b __attribute__((unused)),ble_gap_data_length_limitation_t *c __attribute__((unused)))
-{ __asm__ volatile("svc %0\nbx lr"::"I"(SD_BLE_GAP_DATA_LENGTH_UPDATE):"r0","memory"); }
+/* Pinned Nordic C declarations own the supervisor-call ABI. */
+__attribute__((noinline)) uint32_t r1_gatt_sd_mtu_request(uint32_t connection,uint32_t mtu)
+{return sd_ble_gattc_exchange_mtu_request((uint16_t)connection,(uint16_t)mtu);}
+__attribute__((noinline)) uint32_t r1_gatt_sd_mtu_reply(uint32_t connection,uint32_t mtu)
+{return sd_ble_gatts_exchange_mtu_reply((uint16_t)connection,(uint16_t)mtu);}
+__attribute__((noinline)) uint32_t r1_gatt_sd_length_update(uint32_t connection,const ble_gap_data_length_params_t *parameters,ble_gap_data_length_limitation_t *limits)
+{return sd_ble_gap_data_length_update((uint16_t)connection,parameters,limits);}
 _Static_assert(SD_BLE_GAP_DATA_LENGTH_UPDATE==144 && SD_BLE_GATTC_EXCHANGE_MTU_REQUEST==165 && SD_BLE_GATTS_EXCHANGE_MTU_REPLY==181,"native SVC contracts");
 _Static_assert(sizeof(ble_gap_data_length_params_t)==8 && sizeof(ble_gap_data_length_limitation_t)==6,"native length records");
 static void error_log(uint32_t status,const char *ring,const char *sdk)

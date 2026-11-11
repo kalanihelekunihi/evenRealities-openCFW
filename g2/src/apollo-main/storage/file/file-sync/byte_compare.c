@@ -29,8 +29,7 @@ int32_t g2_lfs_memcmp(const void *first,const void *second,uint32_t size) {
 }
 
 /* Public Cordio comparator binding. Nine authenticated SMP call sites invoke
- * canonical4751c8; Bda callers require standard memcmp equality/sign contract. */
+ * canonical4751c8; Bda callers require standard memcmp equality/sign contract,
+ * which the canonical body already provides, so memcmp is the same entry. */
 #include <stddef.h>
-int memcmp(const void *first,const void *second,size_t size) {
-    return (int)g2_lfs_memcmp(first,second,(uint32_t)size);
-}
+int memcmp(const void *first,const void *second,size_t size) __attribute__((alias("g2_lfs_memcmp")));

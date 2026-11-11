@@ -11,14 +11,12 @@ extern uint32_t audio_uart_lv_area_size_450b80(const void *);
 extern uint32_t audio_uart_lv_color_bpp_440f44(uint32_t);
 extern void *audio_uart_lv_malloc(uint32_t);
 extern void audio_uart_lv_heap_free(void *);
-extern void audio_uart_lv_area_set_450b5c(void *, uint32_t, uint32_t,
-                                          uint32_t, uint32_t);
 extern void audio_uart_lv_render_layer_init_4847c4(void *, uint32_t,
                                                     uint32_t, const void *);
 extern void audio_uart_lv_render_layer_453e10(void *);
 extern void audio_uart_lv_render_wait_484622(void);
 extern void audio_uart_lv_refresh_tasks_484548(void);
-extern void audio_uart_lvgl_log(uint32_t, const char *, uint32_t,
+extern void lv_log_add(uint32_t, const char *, uint32_t,
                                 const char *, const char *, ...);
 
 static const char source[] =

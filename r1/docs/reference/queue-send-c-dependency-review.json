@@ -1,0 +1,226 @@
+{
+  "task_send": {
+    "passed": 5268,
+    "executions": 10536,
+    "source_report": "build/sources-goal-r1-queue-send-c/report.json",
+    "actual_copy_memory_and_unlock_helpers": true,
+    "blocking_timeout_retry_paths": true,
+    "timeout_pointer_roles_normalized": true,
+    "pendSV_sev_barrier_order": true,
+    "callback_stack_depths": {
+      "stock": [
+        -88,
+        -64
+      ],
+      "C": [
+        -72,
+        -64,
+        -56,
+        -48
+      ]
+    },
+    "sizes": {
+      "xQueueGenericSend": 412,
+      "prvIsQueueFull": 28
+    },
+    "limitations": [
+      "Scheduler, critical, timeout, event and disinherit boundaries modeled; queue copy/unlock and memory providers execute",
+      "Timeout buffer addresses normalized by role; private frames and caller-clobbered outputs/flags excluded",
+      "Finite scripted scheduler scenarios do not prove physical task scheduling or concurrency",
+      "Logical assertion mask/address/width/value checked without complete processor fault state",
+      "No byte qualification"
+    ]
+  },
+  "ISR_send_regression": {
+    "passed": 9528,
+    "executions": 19056,
+    "source_report": "build/sources-goal-r1-queue-send-c/report.json",
+    "actual_native_and_C_copy_memory_move_memmove_memcpy": true,
+    "all_signed_tx_lock_bytes": true,
+    "back_front_overwrite": true,
+    "mask_restoration": true,
+    "woken_alias_and_buffer_overlap": true,
+    "callback_stack_depths": {
+      "stock": [
+        -64,
+        -40
+      ],
+      "C": [
+        -48,
+        -32
+      ]
+    },
+    "sizes": {
+      "xQueueGenericSendFromISR": 218,
+      "prvCopyDataToQueue": 120
+    },
+    "limitations": [
+      "Priority validator, task count, disinherit and event-list removal modeled; actual queue copy and memory providers execute",
+      "Mutex-shaped descriptor branch compared as observed behavior, without claiming ISR mutex use is safe",
+      "State and boundary snapshots compared; private frames and all internal access order excluded",
+      "Logical assertion mask/address/width/value checked without full fault/exception proof",
+      "Physical ISR nesting, priority validation, scheduling and concurrency unverified",
+      "No byte qualification"
+    ]
+  },
+  "mutex_integration": {
+    "passed": 8192,
+    "executions": 16384,
+    "actual_mutex_and_queue_creation": true,
+    "actual_reset_and_list_init": true,
+    "actual_task_context_send": true,
+    "disinherit_and_scheduler_getter_modeled": true,
+    "all_byte_queue_types": true,
+    "source_report": "build/sources-goal-r1-queue-send-c/report.json",
+    "limitations": [
+      "Heap, critical, scheduler getter and disinherit modeled; actual task send, queue copy, reset and complete initialization run",
+      "Private frames and caller-clobbered registers/flags excluded",
+      "No physical concurrency or complete fault-state proof"
+    ]
+  },
+  "negative_controls": {
+    "skip-timeout-init": {
+      "rejected": true,
+      "case": [
+        4,
+        4,
+        5,
+        0,
+        0,
+        0,
+        0,
+        2
+      ],
+      "stderr": "arm-none-eabi-ld: warning: (xTaskGetSchedulerState): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-send-c/skip-timeout-init.o\narm-none-eabi-ld: warning: (vPortEnterCritical): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-send-c/skip-timeout-init.o\narm-none-eabi-ld: warning: (vPortExitCritical): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-send-c/skip-timeout-init.o\narm-none-eabi-ld: warning: (vTaskSuspendAll): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-send-c/skip-timeout-init.o\narm-none-eabi-ld: warning: (vPortEnterCritical): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-send-c/skip-timeout-init.o\narm-none-eabi-ld: warning: (vPortExitCritical): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-send-c/skip-timeout-init.o\narm-none-eabi-ld: warning: (xTaskCheckForTimeOut): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-send-c/skip-timeout-init.o\narm-none-eabi-ld: warning: (vTaskPlaceOnEventList): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-send-c/skip-timeout-init.o\narm-none-eabi-ld: warning: (xTaskResumeAll): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-send-c/skip-timeout-init.o\narm-none-eabi-ld: warning: (xTaskResumeAll): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-send-c/skip-timeout-init.o\narm-none-eabi-ld: warning: (vPortEnterCritical): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-send-c/skip-timeout-init.o\narm-none-eabi-ld: warning: (xTaskRemoveFromEventList): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-send-c/skip-timeout-init.o\narm-none-eabi-ld: warning: (vPortExitCritical): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-send-c/skip-timeout-init.o\narm-none-eabi-ld: warning: (xTaskResumeAll): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-send-c/skip-timeout-init.o\narm-none-eabi-ld: warning: (vPortEnterCritical): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-send-c/skip-timeout-init.o\narm-none-eabi-ld: warning: (xTaskRemoveFromEventList): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-send-c/skip-timeout-init.o\narm-none-eabi-ld: warning: (vTaskMissedYield): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-send-c/skip-timeout-init.o\narm-none-eabi-ld: warning: (vPortExitCritical): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-send-c/skip-timeout-init.o\narm-none-eabi-ld: warning: (vPortEnterCritical): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-send-c/skip-timeout-init.o\narm-none-eabi-ld: warning: (xTaskRemoveFromEventList): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-send-c/skip-timeout-init.o\narm-none-eabi-ld: warning: (vTaskMissedYield): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-send-c/skip-timeout-init.o\narm-none-eabi-ld: warning: (vPortExitCritical): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-send-c/skip-timeout-init.o\narm-none-eabi-ld: warning: (xTaskPriorityDisinherit): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-send-c/skip-timeout-init.o\narm-none-eabi-ld: warning: (vPortEnterCritical): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-send-c/skip-timeout-init.o\narm-none-eabi-ld: warning: (vPortExitCritical): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-send-c/skip-timeout-init.o\nTraceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-queue-send-c/reject-skip-timeout-init.py\", line 77, in <module>\n    assert a(*case)==b(*case)\n                     ~^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-queue-send-c/reject-skip-timeout-init.py\", line 66, in run\n    try:u.emu_start((0x97c50 if stock else syms['xQueueGenericSend'][0])|1,STOP,count=50000)\n        ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 769, in emu_start\n    raise self._hook_exception\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 363, in wrapper\n    return func(uc, *args, **kwargs)\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 1063, in __hook_code_cb\n    callback(uc, address, size, user_data)\n    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-queue-send-c/reject-skip-timeout-init.py\", line 42, in code\n    assert v0==state['timeout'];i=state['checks'];state['checks']+=1;arg=[bytes(u.mem_read(v0,8)).hex(),read(v1)];word(v0+4,0x9abcdef1+i);word(v1,max(0,read(v1)-1));scenario=state['scenario'];value=int(scenario==2 or (scenario==5 and i>=1))\n           ^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    "repeat-timeout-init": {
+      "rejected": true,
+      "case": [
+        4,
+        4,
+        5,
+        0,
+        0,
+        0,
+        0,
+        5
+      ],
+      "stderr": "arm-none-eabi-ld: warning: (xTaskGetSchedulerState): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-send-c/repeat-timeout-init.o\narm-none-eabi-ld: warning: (vPortEnterCritical): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-send-c/repeat-timeout-init.o\narm-none-eabi-ld: warning: (vTaskInternalSetTimeOutState): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-send-c/repeat-timeout-init.o\narm-none-eabi-ld: warning: (vPortExitCritical): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-send-c/repeat-timeout-init.o\narm-none-eabi-ld: warning: (vTaskSuspendAll): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-send-c/repeat-timeout-init.o\narm-none-eabi-ld: warning: (vPortEnterCritical): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-send-c/repeat-timeout-init.o\narm-none-eabi-ld: warning: (vPortExitCritical): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-send-c/repeat-timeout-init.o\narm-none-eabi-ld: warning: (xTaskCheckForTimeOut): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-send-c/repeat-timeout-init.o\narm-none-eabi-ld: warning: (vTaskPlaceOnEventList): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-send-c/repeat-timeout-init.o\narm-none-eabi-ld: warning: (xTaskResumeAll): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-send-c/repeat-timeout-init.o\narm-none-eabi-ld: warning: (xTaskResumeAll): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-send-c/repeat-timeout-init.o\narm-none-eabi-ld: warning: (vPortEnterCritical): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-send-c/repeat-timeout-init.o\narm-none-eabi-ld: warning: (xTaskRemoveFromEventList): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-send-c/repeat-timeout-init.o\narm-none-eabi-ld: warning: (vPortExitCritical): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-send-c/repeat-timeout-init.o\narm-none-eabi-ld: warning: (vPortExitCritical): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-send-c/repeat-timeout-init.o\narm-none-eabi-ld: warning: (xTaskResumeAll): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-send-c/repeat-timeout-init.o\narm-none-eabi-ld: warning: (vPortEnterCritical): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-send-c/repeat-timeout-init.o\narm-none-eabi-ld: warning: (xTaskRemoveFromEventList): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-send-c/repeat-timeout-init.o\narm-none-eabi-ld: warning: (vTaskMissedYield): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-send-c/repeat-timeout-init.o\narm-none-eabi-ld: warning: (vPortExitCritical): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-send-c/repeat-timeout-init.o\narm-none-eabi-ld: warning: (vPortEnterCritical): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-send-c/repeat-timeout-init.o\narm-none-eabi-ld: warning: (xTaskRemoveFromEventList): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-send-c/repeat-timeout-init.o\narm-none-eabi-ld: warning: (vTaskMissedYield): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-send-c/repeat-timeout-init.o\narm-none-eabi-ld: warning: (vPortExitCritical): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-send-c/repeat-timeout-init.o\narm-none-eabi-ld: warning: (xTaskPriorityDisinherit): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-send-c/repeat-timeout-init.o\narm-none-eabi-ld: warning: (vPortEnterCritical): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-send-c/repeat-timeout-init.o\narm-none-eabi-ld: warning: (vPortExitCritical): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-send-c/repeat-timeout-init.o\nTraceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-queue-send-c/reject-repeat-timeout-init.py\", line 77, in <module>\n    assert a(*case)==b(*case)\n                     ~^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-queue-send-c/reject-repeat-timeout-init.py\", line 66, in run\n    try:u.emu_start((0x97c50 if stock else syms['xQueueGenericSend'][0])|1,STOP,count=50000)\n        ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 769, in emu_start\n    raise self._hook_exception\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 363, in wrapper\n    return func(uc, *args, **kwargs)\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 1063, in __hook_code_cb\n    callback(uc, address, size, user_data)\n    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-queue-send-c/reject-repeat-timeout-init.py\", line 40, in code\n    assert state['timeout'] is None;state['timeout']=v0;word(v0,0x12345678);word(v0+4,0x9abcdef0);arg='timeout'\n           ^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    "overfull-as-full": {
+      "rejected": true,
+      "case": [
+        4,
+        5,
+        5,
+        0,
+        0,
+        0,
+        0,
+        8
+      ],
+      "stderr": "arm-none-eabi-ld: warning: (xTaskGetSchedulerState): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-send-c/overfull-as-full.o\narm-none-eabi-ld: warning: (vPortEnterCritical): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-send-c/overfull-as-full.o\narm-none-eabi-ld: warning: (vTaskInternalSetTimeOutState): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-send-c/overfull-as-full.o\narm-none-eabi-ld: warning: (vPortExitCritical): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-send-c/overfull-as-full.o\narm-none-eabi-ld: warning: (vTaskSuspendAll): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-send-c/overfull-as-full.o\narm-none-eabi-ld: warning: (vPortEnterCritical): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-send-c/overfull-as-full.o\narm-none-eabi-ld: warning: (vPortExitCritical): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-send-c/overfull-as-full.o\narm-none-eabi-ld: warning: (xTaskCheckForTimeOut): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-send-c/overfull-as-full.o\narm-none-eabi-ld: warning: (vTaskPlaceOnEventList): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-send-c/overfull-as-full.o\narm-none-eabi-ld: warning: (xTaskResumeAll): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-send-c/overfull-as-full.o\narm-none-eabi-ld: warning: (xTaskResumeAll): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-send-c/overfull-as-full.o\narm-none-eabi-ld: warning: (vPortEnterCritical): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-send-c/overfull-as-full.o\narm-none-eabi-ld: warning: (xTaskRemoveFromEventList): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-send-c/overfull-as-full.o\narm-none-eabi-ld: warning: (vPortExitCritical): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-send-c/overfull-as-full.o\narm-none-eabi-ld: warning: (vPortExitCritical): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-send-c/overfull-as-full.o\narm-none-eabi-ld: warning: (xTaskResumeAll): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-send-c/overfull-as-full.o\narm-none-eabi-ld: warning: (vPortEnterCritical): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-send-c/overfull-as-full.o\narm-none-eabi-ld: warning: (xTaskRemoveFromEventList): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-send-c/overfull-as-full.o\narm-none-eabi-ld: warning: (vTaskMissedYield): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-send-c/overfull-as-full.o\narm-none-eabi-ld: warning: (vPortExitCritical): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-send-c/overfull-as-full.o\narm-none-eabi-ld: warning: (vPortEnterCritical): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-send-c/overfull-as-full.o\narm-none-eabi-ld: warning: (xTaskRemoveFromEventList): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-send-c/overfull-as-full.o\narm-none-eabi-ld: warning: (vTaskMissedYield): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-send-c/overfull-as-full.o\narm-none-eabi-ld: warning: (vPortExitCritical): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-send-c/overfull-as-full.o\narm-none-eabi-ld: warning: (xTaskPriorityDisinherit): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-send-c/overfull-as-full.o\narm-none-eabi-ld: warning: (vPortEnterCritical): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-send-c/overfull-as-full.o\narm-none-eabi-ld: warning: (vPortExitCritical): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-send-c/overfull-as-full.o\nTraceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-queue-send-c/reject-overfull-as-full.py\", line 77, in <module>\n    assert a(*case)==b(*case)\n           ^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    "omit-resume-yield": {
+      "rejected": true,
+      "case": [
+        4,
+        4,
+        5,
+        0,
+        0,
+        0,
+        0,
+        3,
+        0
+      ],
+      "stderr": "arm-none-eabi-ld: warning: (xTaskGetSchedulerState): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-send-c/omit-resume-yield.o\narm-none-eabi-ld: warning: (vPortEnterCritical): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-send-c/omit-resume-yield.o\narm-none-eabi-ld: warning: (vTaskInternalSetTimeOutState): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-send-c/omit-resume-yield.o\narm-none-eabi-ld: warning: (vPortExitCritical): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-send-c/omit-resume-yield.o\narm-none-eabi-ld: warning: (vTaskSuspendAll): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-send-c/omit-resume-yield.o\narm-none-eabi-ld: warning: (vPortEnterCritical): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-send-c/omit-resume-yield.o\narm-none-eabi-ld: warning: (vPortExitCritical): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-send-c/omit-resume-yield.o\narm-none-eabi-ld: warning: (xTaskCheckForTimeOut): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-send-c/omit-resume-yield.o\narm-none-eabi-ld: warning: (vTaskPlaceOnEventList): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-send-c/omit-resume-yield.o\narm-none-eabi-ld: warning: (xTaskResumeAll): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-send-c/omit-resume-yield.o\narm-none-eabi-ld: warning: (vPortEnterCritical): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-send-c/omit-resume-yield.o\narm-none-eabi-ld: warning: (xTaskRemoveFromEventList): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-send-c/omit-resume-yield.o\narm-none-eabi-ld: warning: (vPortExitCritical): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-send-c/omit-resume-yield.o\narm-none-eabi-ld: warning: (vPortExitCritical): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-send-c/omit-resume-yield.o\narm-none-eabi-ld: warning: (xTaskResumeAll): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-send-c/omit-resume-yield.o\narm-none-eabi-ld: warning: (vPortEnterCritical): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-send-c/omit-resume-yield.o\narm-none-eabi-ld: warning: (xTaskRemoveFromEventList): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-send-c/omit-resume-yield.o\narm-none-eabi-ld: warning: (vTaskMissedYield): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-send-c/omit-resume-yield.o\narm-none-eabi-ld: warning: (vPortExitCritical): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-send-c/omit-resume-yield.o\narm-none-eabi-ld: warning: (vPortEnterCritical): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-send-c/omit-resume-yield.o\narm-none-eabi-ld: warning: (xTaskRemoveFromEventList): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-send-c/omit-resume-yield.o\narm-none-eabi-ld: warning: (vTaskMissedYield): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-send-c/omit-resume-yield.o\narm-none-eabi-ld: warning: (vPortExitCritical): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-send-c/omit-resume-yield.o\narm-none-eabi-ld: warning: (xTaskPriorityDisinherit): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-send-c/omit-resume-yield.o\narm-none-eabi-ld: warning: (vPortEnterCritical): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-send-c/omit-resume-yield.o\narm-none-eabi-ld: warning: (vPortExitCritical): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-send-c/omit-resume-yield.o\nTraceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-queue-send-c/reject-omit-resume-yield.py\", line 77, in <module>\n    assert a(*case)==b(*case)\n           ^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    }
+  },
+  "audit": {
+    "unchanged_existing_function_bodies": [
+      "prvCopyDataFromQueue",
+      "prvGetDisinheritPriorityAfterTimeout",
+      "prvInitialiseMutex",
+      "prvInitialiseNewQueue",
+      "prvIsQueueEmpty",
+      "prvUnlockQueue",
+      "ulPortRaiseBASEPRI",
+      "xQueueCreateCountingSemaphore",
+      "xQueueCreateCountingSemaphoreStatic",
+      "xQueueCreateMutex",
+      "xQueueCreateMutexStatic",
+      "xQueueGenericCreate",
+      "xQueueGenericCreateStatic",
+      "xQueueGenericReset",
+      "xQueueGenericSendFromISR",
+      "xQueueGiveFromISR",
+      "xQueueGiveMutexRecursive",
+      "xQueueReceiveFromISR",
+      "xQueueSemaphoreTake",
+      "xQueueTakeMutexRecursive"
+    ],
+    "changed_existing_function_bodies": {
+      "prvCopyDataToQueue": {
+        "before_bytes": 114,
+        "after_bytes": 120,
+        "reason": "Task-context send consumes the private copy helper yield return; compiler now retains that result, covered by task/ISR/mutex comparisons"
+      }
+    },
+    "new_strong_symbols": [
+      "xQueueGenericSend"
+    ],
+    "removed_imports": [
+      "xQueueGenericSend"
+    ],
+    "added_imports": []
+  },
+  "normal_build": {
+    "units": 573,
+    "application_imports": 189,
+    "bootloader_imports": 34,
+    "failures": 0,
+    "duplicate_strong_symbols": 0
+  },
+  "qualification": {
+    "compiled": 5,
+    "selected_regions": 2,
+    "already_covered": 2,
+    "new_functions_byte_qualified": false
+  },
+  "source_plan_unchanged": true,
+  "source_built_bytes": 3833,
+  "binary_pull_through_bytes": 642327,
+  "source_completeness_proven": false,
+  "evidence": {
+    "build/sources-goal-r1-queue-send-c/report.json": "a244567c3ea91074b38d80b66155cf8372a911be2dac056c7714922299cf1f88",
+    "tools/build/source-plan.json": "0c889650bf8ea03def83ea1ea29730b3ccfe84bb70609c1972a500f02ba4ea2d",
+    "r1/src/application/rtos/mutex-kernel/mutex-kernel.c": "6d9cc3e50f18e1afd7736a91e5016f951dbea9753660b92873ce1d7579f68560",
+    "third-party/upstream/freertos-kernel/queue.c": "5cdf4fa35fe059446effff5bf20deaf83ddffb08921bc198fda106b1d17dd894",
+    "r1/src/application/runtime/native_memory_move.c": "26614e927758f8c0d0a9eb294d919a0062665a3d2cb822faa139271c564aec9e",
+    "third-party/upstream/musl-memmove-1.2.5/memmove.c": "1304f9ddfc18594f5d9a84691892b9fdaf3be8ecc6d7f365c691abb138eaf74e",
+    "third-party/upstream/musl-memory-1.2.5/memcpy.c": "1664d565f968b053ac33c5ac615c057a255a5821c8fa510fba61d4f63dee08e9",
+    "r1/src/config/rtos/mutex_kernel_contract.h": "d940797ff263975ba00fd355c3b3535a002c97f3e1ada8419492efb84ed8de81",
+    "r1/src/config/rtos/queue_operations_contract.h": "bca8311a67d844386ea0066c486ffd4ac127696a914adf4cd5514f4c841a3b8e",
+    "r1/src/config/rtos/native_port_assert.h": "efee8118f24a53756b6f14a666524b3d59561f005e1e87ed71309ccab9c4fc9f",
+    "r1/src/sources.json": "6fa37d8afe1e50453bc47962bcfe463cd5163fb4f1b3d2a8033b02adbb77c9d3",
+    "build/hybrid-goal-r1-queue-send-c/build-report.json": "7a9e98f420befbc034f9d35f9e87c7eb2cbf1b233d6c2098ead94241c87dbb7f",
+    "build/goal-r1-queue-send-c/before.c": "ed56ba0974c05f3a3ec3ee6eeb0d8daf9aaad8b366d236f008abe2937b021aaa",
+    "build/goal-r1-queue-send-c/selected-upstream.c": "9ce9e396a83712cd979a508915ca2eaf25b6c351b35476287d7a74a80e10edf7",
+    "build/goal-r1-queue-send-c/REA.json": "9f2a92e53eae97fa9a11d96ce38b46e7e5e57ff6f9fda76ed507ca2fbf946610",
+    "build/goal-r1-queue-send-c/REA.snapshot.json": "c0854630bcf5217dfd46d2d699ee11a299d53aa052c2206d0022108446917b56",
+    "build/goal-r1-queue-send-c/verify.py": "1504669f5c5a02cc5bbfc8df853570711b57b1bce5430f948b9a22bb2bd6fe14",
+    "build/goal-r1-queue-send-c/results.json": "1e97f503cd77a71179ddfef8ec9e4de59f841155f8d52dd60706b2c7db67b451",
+    "build/goal-r1-queue-send-c/negative.py": "d24bfcde6227345455a47bb312eb929e5c50e8f6680117d2dac99fa64fc73e54",
+    "build/goal-r1-queue-send-c/negative-results.json": "0dd9750a5b425e2d417f0770e78e346997dda3afd6355796b1c070cf06714b2d",
+    "build/goal-r1-queue-send-c/audit.py": "f7006a647b20e8ebf53293bb9789e9a8afeefb47ca034476f1040cfd851d1015",
+    "build/goal-r1-queue-send-c/audit-results.json": "ac8e0557ec1082f28549b56cc023a20064fed119bb3df595677fc7a9c8875594",
+    "build/goal-r1-queue-send-c/qualify.py": "07cff0eed5cbf29bdeb837fbd0fa9abfa644c582a827cd00bf6e520987ebae50",
+    "build/goal-r1-queue-send-c/qualified-final/qualification.json": "bcb27bcd4baaf48f37659bd475960dc90d0cdcf2bf3bb89cc7a57d96b1f6cd65",
+    "build/goal-r1-queue-send-c/qualified-final/source-plan.json": "c82d566eec0b9864b0b0fd13157557e5bb7aeaa3e596514f5ad0c6dcdb751634",
+    "build/goal-r1-queue-send-c/isr/verify.py": "110bd9725a7666a47cd1284362400bb2c379dc4c4b6161c289a71ddc771af49b",
+    "build/goal-r1-queue-send-c/isr/results.json": "e8f3a5e4fcefaa1948ce74af68652f03e4b3f27097e3762fae1c4e1431e60dbf",
+    "build/goal-r1-queue-send-c/mutex/verify.py": "f8c956ada8d6920bb893f8d1ab522f8c561c3136f74a64e195fb3e64bafdce2a",
+    "build/goal-r1-queue-send-c/mutex/results.json": "f71bc61fbced4510c4a1f8246ddc1a2f56675de688c124749c47910c9fce4f0a"
+  }
+}

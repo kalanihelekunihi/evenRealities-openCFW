@@ -1,5 +1,9 @@
 /* Native 0x52fb58 one-time firmware image initialization gate. */
 #include <stdint.h>
+/* Stock-RAM literals rewritten to named objects (sim-test wave 2026-10-26,
+ * .waves/sim-fix/apply.py): g2ref_X is the linker symbol X. */
+#include <stdint.h>
+extern unsigned char g2ref_g2_stock_ram_20075010[] __asm__("g2_stock_ram_20075010");
 extern uint32_t audio_ble_radio_image_load_52f442(void);
 extern uint32_t audio_log_flags(void);
 extern void audio_log_extended(uint8_t,const char *,const char *,const char *,
@@ -12,7 +16,7 @@ static const char fail[]="Failed to parse BLE firmware bin file";
 static const char fail_compact[]="[srv.em9305]Failed to parse BLE firmware bin file";
 static const char success[]="BLE firmware loaded from file successfully";
 static const char success_compact[]="[srv.em9305]BLE firmware loaded from file successfully";
-#define ACTIVE (*(volatile uint8_t *)(uintptr_t)0x20075016u)
+#define ACTIVE (*(volatile uint8_t *)(uintptr_t)((uint32_t)(uintptr_t)g2ref_g2_stock_ram_20075010+0x6u))
 uint32_t audio_ble_hci_radio_recover_52fb58(void) {
     if(ACTIVE!=0u) return 1u;
     if(audio_ble_radio_image_load_52f442()==0u) {

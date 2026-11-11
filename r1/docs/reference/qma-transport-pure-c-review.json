@@ -1,0 +1,101 @@
+{
+  "schema_version": 1,
+  "scope": "R1 QMA transport ordinary C chip ID, FIFO, delay and void callbacks",
+  "report": "build/sources-goal-r1-qma-transport-reviewed-c/report.json",
+  "comparison_report": "build/sources-goal-r1-system-settings-pure-c/report.json",
+  "audit": {
+    "compiled_units": 855,
+    "application_imports": 61,
+    "bootloader_imports": 22,
+    "unchanged_prior_nongenerated_objects": 844,
+    "changed_nongenerated_objects": [
+      "r1/src/application/runtime/native_qma_transport.c"
+    ],
+    "import_sets_unchanged": true,
+    "normal_object_equals_both_executed_probe_objects": true,
+    "runtime_and_log_sections_unchanged": true,
+    "no_new_persistent_state": true
+  },
+  "direct": {
+    "stock_C_comparisons": 16385,
+    "C_only_nonwriting_cases": 18,
+    "actual_C_retry_and_delay_logic": true,
+    "modeled": [
+      "bus read/write",
+      "cycle delay primitive",
+      "logging",
+      "void sensor callbacks"
+    ],
+    "incidental_void_callback_return_excluded": true,
+    "APSR_and_private_frame_aliases_excluded": true
+  },
+  "actual_bus_and_wrapper": {
+    "stock_C_actual_bus_request_comparisons": 16435,
+    "C_only_nonwriting_cases": 18,
+    "actual_C_retry_delay_bus_requests_and_motion_wrapper": true,
+    "modeled": [
+      "bus read/write",
+      "cycle delay primitive",
+      "logging",
+      "void sensor callbacks"
+    ],
+    "incidental_void_callback_return_excluded": true,
+    "APSR_and_private_frame_aliases_excluded": true
+  },
+  "compiled_defects_rejected": [
+    {
+      "name": "retry_count",
+      "rejected": true
+    },
+    {
+      "name": "fifo_depth_limit",
+      "rejected": true
+    },
+    {
+      "name": "fifo_capacity_clamp",
+      "rejected": true
+    },
+    {
+      "name": "tap_callback_slot",
+      "rejected": true
+    },
+    {
+      "name": "chip_fallback",
+      "rejected": true
+    }
+  ],
+  "intentional_C_policy": [
+    "An unwritten chip-ID/depth byte starts at zero instead of saved caller R3.",
+    "A void double-tap callback no longer leaks incidental R0; the IRQ path returns zero after it. The actual motion wrapper discards this return.",
+    "Delay zero-path APSR flags are outside the public C API; delay counts and returned words remain."
+  ],
+  "limits": [
+    "Physical bus and sensor operation, delay timing, IRQ electrical behavior and final linking/startup unverified.",
+    "Delay machine primitive remains architecture-specific assembly.",
+    "Registry device operations, delays, logging and sensor callbacks modeled.",
+    "Private-frame aliases, incidental callback return residue, APSR, faults and concurrency excluded."
+  ],
+  "evidence_files": {
+    "build/sources-goal-r1-qma-transport-reviewed-c/report.json": "9ecb6ee2b5a1ea8fc2ab84308c45ab9416b7042081c2046d79022aa0d36f88f5",
+    "build/sources-goal-r1-system-settings-pure-c/report.json": "6140122e570e6ca2a18b3a4b50022341511af5665fe158a9691acef4e6a3abdd",
+    "r1/src/application/runtime/native_qma_transport.c": "34aaa01d868ad95d195f59166b186fa1f3c528db2a146086040b583169da005c",
+    "r1/src/application/runtime/native_lis_identity.c": "96c8bb69045ae5facc663b31a27d5e6a0008c84085a029ca054ba3552572bffe",
+    "r1/src/application/runtime/native_motion_selection.c": "a899832c87b0f314705ab1e85ac88a1be26b591976e39323e7e1ba685978a06d",
+    "r1/src/application/board/native_rtt_delay.c": "e614166951aa96b4de91200ad9d67e71434f9bb759faab1fbf6f9225cb4576c7",
+    "r1/src/sources.json": "618e3f6056f74edee68027c82dddb1d2e8c53810e0c04e416f42841fc974e4ec",
+    "tools/build/source-plan.json": "eeb516e31b3310fb0718f36908977f8125723f7c5e0e86cd6744395826259a4d",
+    "build/goal-r1-qma-transport-pure-c/rea.json": "b812a28f1b9f2deb29d47913e5f3a6f885afe54439028124ea4c2a168049bc73",
+    "build/goal-r1-qma-transport-pure-c/verify.py": "4ae3d66b642f25f90fa58f7bb92326543c3acbefaed6e854dfb65137cc6e3df6",
+    "build/goal-r1-qma-transport-pure-c/results.json": "5c602a02fe06e61abd42cfbb05171fe8689d49db56a497781aebc6de2ea3df9e",
+    "build/goal-r1-qma-transport-pure-c/verification.log": "420786f570f510d6e7031ea5d046ff1927afa367d7daf41fcfe2318a655065c1",
+    "build/goal-r1-qma-transport-pure-c/make-integrated.py": "24051e349ea329825b78cb11fd200a0de93e4b20777e0f47f2249811898ae8bd",
+    "build/goal-r1-qma-transport-pure-c/integrated/verify.py": "bb360836db61f243ad8e6009619e89b9ab6200b9e14456ad91d229e58dffd3ad",
+    "build/goal-r1-qma-transport-pure-c/integrated/results.json": "9cc7be1c96ed7a16b2caeab61cccd4f919cf0cc394c007d51bea15be1549ee3c",
+    "build/goal-r1-qma-transport-pure-c/integrated/verification.log": "689af8dd38cfaab231c6df2dfc1a9a1f97927f0282e6f5ffefb14f4583f61aa6",
+    "build/goal-r1-qma-transport-pure-c/negative.py": "c7374c993b9e0d83f2fb217bfd532040692ab097090ab2fd884e95f9f59a6401",
+    "build/goal-r1-qma-transport-pure-c/negative.json": "f3692a9c33afd759f5bceb64efc9be095198f835bbcd0765fc4738ae067312c6",
+    "build/goal-r1-qma-transport-pure-c/negative.log": "bfc737ef52b148b211a316823fc38198968af98ed293a4c453af87292b6543f4",
+    "build/goal-r1-qma-transport-pure-c/reviewed-build.log": "9632e1d3297d11018b1bf304d622e7388005b7580540062e9cc9e3ff72b93447",
+    "build/goal-r1-qma-transport-pure-c/sources-check.log": "f610d186f791ebf717d9fd6eed6c4f28612779fff34b885bcf8dc8a49c9ae80c"
+  }
+}

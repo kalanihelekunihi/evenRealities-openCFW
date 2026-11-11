@@ -1,0 +1,69 @@
+{
+  "passed": 448,
+  "executions": 896,
+  "live_count_reads": true,
+  "zyx_signed_halfword_reads": true,
+  "board_r0_r1_compared": true,
+  "source_size": 72,
+  "sink_size": 2,
+  "source_report": "build/sources-goal-r1-goodix-gsensor-sample/report.json",
+  "limitations": [
+    "Board callback modeled; sink executes native/C return body with optional controlled count mutation",
+    "Private frames and caller-clobbered registers/flags excluded",
+    "Arbitrary pointer alias/faults, callback hidden conventions, concurrency and physical hardware unverified",
+    "No byte qualification"
+  ],
+  "negative_control": {
+    "mutation": "Snapshot count instead of reloading after each sample",
+    "rejected": true,
+    "counterexample": "Initial count 1; first sink changes count to 3; stock processes three samples, variant one",
+    "stderr": "Traceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-goodix-gsensor-sample/reject-count-snapshot.py\", line 53, in <module>\n    for c in cases:assert a(*c)==b(*c),c\n                                 ~^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-goodix-gsensor-sample/reject-count-snapshot.py\", line 47, in run\n    calls=state['calls'];sinks=[c for c in calls if c[0]=='sink'];assert len(sinks)==n\n                                                                         ^^^^^^^^^^^^^\nAssertionError\n"
+  },
+  "registration_regression": {
+    "passed": 1029,
+    "executions": 2058,
+    "ordered_word_stores": true,
+    "rejected_table_unchanged": true,
+    "source_size": 38,
+    "source_report": "build/sources-goal-r1-goodix-gsensor-sample/report.json",
+    "limitations": [
+      "Seeded callback state; startup placement not proven",
+      "Interrupt interleavings, callback invocation ABI and physical accelerometer unverified",
+      "Caller-clobbered registers and flags excluded; no byte qualification"
+    ]
+  },
+  "stop_regression": {
+    "passed": 72,
+    "executions": 144,
+    "live_stop_slot_read": true,
+    "tail_callback_original_sp_lr": true,
+    "source_size": 16,
+    "source_report": "build/sources-goal-r1-goodix-gsensor-sample/report.json",
+    "limitations": [
+      "Callback modeled with void ABI; caller-clobbered argument registers and flags excluded",
+      "No arbitrary target faults, concurrency, source-plan qualification or physical hardware validation"
+    ]
+  },
+  "evidence": {
+    "build/goal-r1-goodix-gsensor-sample/verify.py": "fb1c8e50f0bfb69c3282cc2de9223e45d0e35f502c13d1f57295728508a68c48",
+    "build/goal-r1-goodix-gsensor-sample/source.elf": "d1cc88df1da025e5c7a64edf90f1f5d52eded06910a2a55840df8a5242f39dd8",
+    "build/goal-r1-goodix-gsensor-sample/results.json": "a5baf4f94a0162abeb11d99903d6a458ea608b846002d1d5b5404140776be0ab",
+    "build/goal-r1-goodix-gsensor-sample/bad.c": "b9b770c897d55e32874e1e6c2330f0d8e32fcf0be5f84d4606a1b373a10e3624",
+    "build/goal-r1-goodix-gsensor-sample/reject-count-snapshot.py": "d7f361ab1daa97f850ceb58c5a5d47c9c74cf5aa075108c99790325a426e19ad",
+    "build/goal-r1-goodix-gsensor-sample/negative-result.json": "48b3b845b9fee4c703746536a4c3f3d2a9550256b7696e9d717a00ba699efbe4",
+    "build/goal-r1-goodix-gsensor-sample/registration/verify.py": "1f16cfade0ae08b0d631ae890f27490c35c2dcdd5b67baa5c96a743cd3eea44b",
+    "build/goal-r1-goodix-gsensor-sample/registration/results.json": "2397513dd75c1737e29d6e54ca81028c04c2872e5e2967b6203ea59ec398f3a7",
+    "build/goal-r1-goodix-gsensor-sample/stop/verify.py": "aacdfcb06df4a46e80e864a22f810d12fe6a6f5fffe693438b8901ead7f3451b",
+    "build/goal-r1-goodix-gsensor-sample/stop/results.json": "e35924db0beb34197e9d73fea85c379526e4cb91e1c8a3e624f6378bee8cbc95",
+    "build/goal-r1-goodix-gsensor/REA-0x6f920.json": "f57a8d6e49dd2ea6bf1cd7449786a41cc9e13051540eedd4aa27cc955151a909",
+    "build/goal-r1-goodix-gsensor/REA-producer-pre.snapshot.json": "6aff26c7d1dc0319c05b7406fb7df46410a112a5976d242cfc6ea23ef92dd3f6",
+    "r1/src/application/goodix/stock_gsensor_callbacks.c": "7368b0f580539ab70a51be71ba001a02f299f938c0d6598719c87fcdade6e165",
+    "r1/src/application/goodix/stock_gsensor_callbacks.h": "99c08eea1b0da0eea94e465c94aa461e0a3cab6ff665188531d73ac1b202d07b",
+    "r1/src/application/goodix/stock_gsensor_sink.c": "29e396cd05387d5f10c9b2d7aa60f0f68c123f0de48a2aedf51c8cec72c4fab5",
+    "build/sources-goal-r1-goodix-gsensor-sample/report.json": "5050692d3221115b4fee164df314e3943e0b9a0ecd86e2d7da44fcb247fa6901",
+    "r1/src/sources.json": "d4ee9ed7227b5d4cbd248cc7c56c5ef8480ae3f78ebc47404b683385cb9a1578",
+    "r1/symbols/function-frontier.csv": "627f52c351c05917a5d66c0ac364de29c84eb868409155dd998ef1f3dc81a4f9",
+    "tools/build/source-plan.json": "4d46e8c038db79a174a2d719086fd0be80503ca7cdbfc2c51e5ed3d30d293064"
+  },
+  "source_plan_changed": false
+}

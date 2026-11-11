@@ -1,0 +1,90 @@
+{
+  "schema_version": 1,
+  "report": "build/sources-goal-r1-qma-irq-pure-c/report.json",
+  "report_sha256": "2fa2fcc779f42e17b6bf36279a2686f4c7221d739f4ef45a469aac4471f089ce",
+  "manifest_sha256": "1931eabb7053c60df0282c35368aa8481a63982c6e3f5d41bf2c14088b71c79d",
+  "verification": {
+    "cases": 4278,
+    "executions": 8556,
+    "stock_entry": "0x86fa8",
+    "actual_read_retry_loops": true,
+    "independent_status_and_event_oracle": true,
+    "all_dispatch_bytes": true,
+    "all_50_bus_success_positions": true,
+    "partial_nonwriting_reads": true,
+    "live_address_and_callback_mutations": true,
+    "callback_result_and_final_status_match": true,
+    "callee_saved_SP_masks_and_callback_alignment": true,
+    "providers_modeled": true,
+    "private_frame_and_incidental_R3_excluded": true
+  },
+  "defects": {
+    "missing-zero": {
+      "compiled": true,
+      "behavior_rejected": true
+    },
+    "short-retries": {
+      "compiled": true,
+      "behavior_rejected": true
+    },
+    "wrong-motion-bits": {
+      "compiled": true,
+      "behavior_rejected": true
+    },
+    "stale-tap-byte": {
+      "compiled": true,
+      "behavior_rejected": true
+    },
+    "wrong-null-tap": {
+      "compiled": true,
+      "behavior_rejected": true
+    }
+  },
+  "audit": {
+    "unchanged_prior_object_hashes": 797,
+    "changed_object_hashes": [
+      [
+        "r1-application",
+        "r1/src/application/runtime/native_qma_transport.c"
+      ],
+      [
+        "r1-bootloader",
+        "{gen}/r1_startup_vectors.S"
+      ],
+      [
+        "r1-bootloader",
+        "{gen}/r1_uecc.c"
+      ]
+    ],
+    "generated_boot_crypto_and_vectors_allocated_bytes_and_relocations_unchanged": true,
+    "removed_application_imports": [],
+    "other_qma_allocated_sections_and_relocations_unchanged": true
+  },
+  "rea_bytes": {
+    "evidence_id": "ev_4e8602caae0b370639a8882e19dee0586fd6db1ee7e479bd004e18a729a686a0",
+    "address": "0x86fa8",
+    "length": 72,
+    "matches_locked_raw": true,
+    "sha256": "05cdb478b4f6fd9eaadd02811cdb387e54ee3e14c6cb978a7777586c9d4ac84c"
+  },
+  "strict_bootloader_link_report_sha256": "7c312696696684eca1362c09c1b7b85c551c446cc7170337c27a7081421f5d53",
+  "evidence_files": {
+    "build/goal-r1-qma-irq-pure-c/verify.py": "79f2d0f29aa5fbd767af3fbfdaa1c73562c5237304d020005d7d1a63a4568534",
+    "build/goal-r1-qma-irq-pure-c/defects.py": "c828dd0974060ca138c15aeddd3ed35d6bf744f6a142f788227ec8aef61ccb25",
+    "build/goal-r1-qma-irq-pure-c/audit.py": "5baee6414cc7678025e6c7d2cabfcd7d2c47f26aca8249c6e76f67750628ba0b",
+    "build/goal-r1-qma-irq-pure-c/source.elf": "cdbb163d8921b8ed82507876914c0588a322a67e73fd6cdcce1284384f3e1c3d",
+    "build/goal-r1-qma-irq-pure-c/verify-final.log": "81ad992df19110f231c0ede99e08118cd15bd9174b26aaeaada9d929ed66648f",
+    "build/goal-r1-qma-irq-pure-c/results.json": "18cdbfbc430942e07f9395a18dfb6297696545a6b876c175c2c6afb6f114bdf9",
+    "build/goal-r1-qma-irq-pure-c/defects.json": "5dcfab5dec136ad82e247bf82dd19c22b73451e42889963bf759618f0d297c66",
+    "build/goal-r1-qma-irq-pure-c/rea.json": "df9cde3c39a3daa8d59c7fe525b97b0c2e6d9d3ea229fb77b6c489e8bf89fcdb",
+    "build/goal-r1-qma-irq-pure-c/previous.c": "f6afdc7a04a3f40a9d9a753bbb0cc005a3aeb7a7e8b013db876b83177d9deca1",
+    "build/goal-r1-qma-irq-pure-c/sources-check.log": "7fdd3767a0eaab7b42e9bc800c6c284dda486cac1f67e2022c4dcc9b79aa1e67"
+  },
+  "source_plan_modified": false,
+  "limitations": [
+    "Bus, delay, event providers modeled; physical IRQ/electrical/timing unverified.",
+    "Private frames, incidental R3, faults, arbitrary aliases and concurrency excluded.",
+    "No full application final link.",
+    "Global check retains unrelated G2 manifest failure."
+  ]
+}

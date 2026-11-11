@@ -22,10 +22,12 @@ static uint64_t quotient_small(uint64_t value, uint32_t base, uint32_t *remainde
 uint32_t gx8002_uart_stage2_divide_65e4(uint64_t *value, uint32_t divisor)
 {
     if (divisor == 0) {
-        uint32_t exceptional;
+        /* Stock divides by the zero divisor anyway: the hardware divider
+         * raises the divide-by-zero exception. The volatile copy keeps the
+         * divu (a visible constant 0 would let the compiler drop it). */
+        volatile uint32_t zero = divisor;
         const uint32_t numerator = (uint32_t)*value;
-        __asm__ volatile("divu %0, %1, %2" : "=r"(exceptional)
-                         : "r"(numerator), "r"(divisor) : "cc");
+        const uint32_t exceptional = numerator / zero;
         *value = exceptional;
         return 0;
     }

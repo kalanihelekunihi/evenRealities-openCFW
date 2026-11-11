@@ -55,7 +55,7 @@ void r1_i2c5_nfc_resource_acquire(void) {
 }
 
 /* The ADC cache sits immediately after the shared request at stock 0x20006854. */
-generic_device_registry_device *r1_vnfc_rect_adc_device
+generic_device_registry_device *volatile r1_vnfc_rect_adc_device
     __attribute__((section(".r1.vnfc.adc"), aligned(4)));
 
 void r1_vnfc_rect_adc_handle_cache(void) {

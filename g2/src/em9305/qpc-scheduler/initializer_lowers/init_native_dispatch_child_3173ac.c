@@ -1,99 +1,40 @@
-/* Complete authenticated native helper; no fabricated alias or provider. */
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_dispatch_child_3173ac\n"
-".type opencfw_em9305_dispatch_child_3173ac,@function\n"
-"opencfw_em9305_dispatch_child_3173ac:\n"
-"L3173ac:\n"
-"enter_s [r13-r15]\n"
-"L3173ae:\n"
-"ldb_s r2,[r1,0]\n"
-"L3173b0:\n"
-"ldb r12,[r0,52]\n"
-"L3173b4:\n"
-"mov_s r11,1\n"
-"L3173b6:\n"
-"add_s r2,r2,1\n"
-"L3173b8:\n"
-"extb_s r3,r2\n"
-"L3173ba:\n"
-"brlo.d.nt r3,r12,L317414\n"
-"L3173be:\n"
-"stb_s r2,[r1,0]\n"
-"L3173c0:\n"
-"ldb_s r2,[r1,0x4]\n"
-"L3173c2:\n"
-"ldb_s r15,[r1,0x1]\n"
-"L3173c4:\n"
-"ldb_s r14,[r0,0x18]\n"
-"L3173c6:\n"
-"ldb_s r13,[r0,0x1b]\n"
-"L3173c8:\n"
-"add_s r3,r2,0x1\n"
-"L3173ca:\n"
-"add_s r2,r15,0x1\n"
-"L3173cc:\n"
-"mpyuw r15,r13,r14\n"
-"L3173d0:\n"
-"stb_s r3,[r1,0x4]\n"
-"L3173d2:\n"
-"extb_s r3,r3\n"
-"L3173d4:\n"
-"mov_s r12,0\n"
-"L3173d6:\n"
-"stb_s r2,[r1,0x1]\n"
-"L3173d8:\n"
-"extb_s r2,r2\n"
-"L3173da:\n"
-"brhs.d.nt r15,r3,L3173ee\n"
-"L3173de:\n"
-"stb_s r12,[r1,0]\n"
-"L3173e0:\n"
-"brlo.nt r2,r14,L31740c\n"
-"L3173e4:\n"
-"ldb_s r2,[r1,0x3]\n"
-"L3173e6:\n"
-"stb_s r12,[r1,0x1]\n"
-"L3173e8:\n"
-"add_s r2,r2,1\n"
-"L3173ea:\n"
-"stb_s r2,[r1,0x3]\n"
-"L3173ec:\n"
-"b_s L31740c\n"
-"L3173ee:\n"
-"brlo.nt r2,r14,L31740c\n"
-"L3173f2:\n"
-"ldb_s r2,[r1,0x2]\n"
-"L3173f4:\n"
-"stb_s r12,[r1,0x1]\n"
-"L3173f6:\n"
-"add_s r2,r2,1\n"
-"L3173f8:\n"
-"extb_s r14,r2\n"
-"L3173fa:\n"
-"brlo.d.nt r14,r13,L31740c\n"
-"L3173fe:\n"
-"stb_s r2,[r1,0x2]\n"
-"L317400:\n"
-"ldb_s r2,[r0,0x1a]\n"
-"L317402:\n"
-"stb_s r12,[r1,0x2]\n"
-"L317404:\n"
-"brne_s r2,0,L31740c\n"
-"L317406:\n"
-"ldb_s r1,[r0,0x19]\n"
-"L317408:\n"
-"brhs.nt r3,r1,L317412\n"
-"L31740c:\n"
-"ldb_s r1,[r0,0x19]\n"
-"L31740e:\n"
-"brlo.nt r3,r1,L317414\n"
-"L317412:\n"
-"mov_s r11,0\n"
-"L317414:\n"
-"mov_s r0,r11\n"
-"L317416:\n"
-"leave_s [r13-r15,pcl]\n"
-".size opencfw_em9305_dispatch_child_3173ac,.-opencfw_em9305_dispatch_child_3173ac\n"
-);
+#include <stdint.h>
+
+/* Native 0x3173ac..0x317418: advance the nested scan counters. counters[0]
+ * counts ticks up to config +52; each wrap advances the event count
+ * counters[4] and the sub-slot counters[1] (period config +24). A sub-slot
+ * wrap advances counters[3] while the event count exceeds the slot budget
+ * (config +27 * +24), otherwise the cycle counters[2] (period config +27).
+ * Returns 1 while ticking or while the event count is below config +25. */
+uint32_t opencfw_em9305_dispatch_child_3173ac(uintptr_t config, uintptr_t counters)
+{
+    const volatile uint8_t *limit = (const volatile uint8_t *)config;
+    volatile uint8_t *count = (volatile uint8_t *)counters;
+    uint32_t tick = count[0] + 1u;
+    uint32_t ticks = limit[52];
+    count[0] = (uint8_t)tick;
+    if ((uint8_t)tick < ticks) return 1u;
+    uint32_t events = count[4] + 1u;
+    uint32_t slot = count[1] + 1u;
+    uint32_t slots = limit[24];
+    uint32_t cycles = limit[27];
+    uint32_t budget = cycles * slots;
+    count[4] = (uint8_t)events;
+    events &= 0xffu;
+    count[1] = (uint8_t)slot;
+    slot &= 0xffu;
+    count[0] = 0u;
+    if (slot >= slots) {
+        if (budget < events) {
+            uint32_t overflow = count[3];
+            count[1] = 0u;
+            count[3] = (uint8_t)(overflow + 1u);
+        } else {
+            uint32_t cycle = count[2] + 1u;
+            count[1] = 0u;
+            count[2] = (uint8_t)cycle;
+            if ((uint8_t)cycle >= cycles) count[2] = 0u;
+        }
+    }
+    return events < limit[25] ? 1u : 0u;
+}

@@ -1,0 +1,47 @@
+{
+  "schema": 1,
+  "target": "GX8002 BINH A stage-1 SPI write/read transactions",
+  "source": "g2/src/codec/image-a-stage1/main_stage1_spi_transactions.c",
+  "stock_stage1_load_sha256": "65775a0feea148f5e1582693160c06204d5183fee717ba75706ce1cb4d40f605",
+  "direct_csky_compile": {
+    "passed": true,
+    "object_sha256": "28a2d1924ffad0e5a232c1c02a1a17435cc7ee111ff8956ef82024",
+    "write": {
+      "stock_address": "0x10000b5c",
+      "bytes": 96,
+      "stock_section_sha256": "91a2da5d219be5348f3a50da658da92a87f603db816f6cd2fa3eef3e65d74bd8",
+      "source_section_sha256": "07e3a0c11ffe25bc9f4a5e1c76f4ef70e5b9b813af03582809cea06da04eaff5",
+      "different_byte_offsets": [8, 9, 10, 11, 70, 71, 72, 73]
+    },
+    "read": {
+      "stock_address": "0x10000bbc",
+      "bytes": 96,
+      "stock_section_sha256": "3709c9c3439611f8c906ee506ceebc69d1003a92765424e5f4e294503ab289ea",
+      "source_section_sha256": "abe9975858e2065e9a8a1fb76a8a4ac2a12201957bdc0694447d0f1b0cc1da79",
+      "different_byte_offsets": [8, 9, 10, 11, 70, 71, 72, 73]
+    },
+    "relocations_in_each_function": [
+      "0x08 R_CKCORE_PCREL_IMM26BY2 gx8002_image_a_stage1_wait_bus_10000b4c",
+      "0x46 R_CKCORE_PCREL_IMM26BY2 gx8002_image_a_stage1_wait_bus_10000b4c"
+    ]
+  },
+  "source_composition": {
+    "loader_nor_reader_spi_references_resolved": true,
+    "remaining_external_stock_function_before_clock_gate_candidate": "gx8002_image_a_stage1_clock_gate_100005a4",
+    "linked_into_final_codec_a": false
+  },
+  "full_g2_gate": {
+    "source_report": "build/g2-all-binh-a-clock-20261110/report.json",
+    "source_report_sha256": "1f91e5ebe81fe7acbe62bf8db42c4e423508bb336c9195ce8c2a78b885c83aac",
+    "built_units": 4872,
+    "failed_units": 0,
+    "duplicate_strong_symbols": 0,
+    "manifest_changed_during_build": false,
+    "link_report": "build/g2-all-binh-a-clock-link-20261110/link-report.json",
+    "link_report_sha256": "d89e480055d427abe1a8333652f52e85e0feef17f55843399a8a0a9f8c847a62",
+    "linked_payloads": 7,
+    "external_binary_archive_used": false,
+    "codec_a_linked_binary_unchanged": true
+  },
+  "qualification": "Both 96-byte bodies match stock except two unresolved call relocations each. Final addresses, the whole stage-1 block, firmware packaging, and hardware behavior remain unverified."
+}

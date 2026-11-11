@@ -1,25 +1,14 @@
-/* True 28-byte ECU tail callback; signed division and delayed argument retained. */
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_ecu_callback_315f48\n"
-".type opencfw_em9305_ecu_callback_315f48,@function\n"
-"opencfw_em9305_ecu_callback_315f48:\n"
-"L315f48:\n"
-"mov_s r1,0x805c70\n"
-"L315f4e:\n"
-"ld r1,[r1,0]\n"
-"L315f50:\n"
-"sub_s r2,r0,r1\n"
-"L315f52:\n"
-"div r2,r2,912\n"
-"L315f56:\n"
-"mov_s r0,0x80281d\n"
-"L315f5c:\n"
-"ldb_s r1,[r0,0]\n"
-"L315f5e:\n"
-"b.d opencfw_em9305_dispatch_child_323498\n"
-"L315f62:\n"
-"extb_s r0,r2\n"
-".size opencfw_em9305_ecu_callback_315f48,.-opencfw_em9305_ecu_callback_315f48\n"
-);
+#include <stdint.h>
+
+/* Native 0x315f48..0x315f64: turn an ECU record pointer into its index in
+ * the 912-byte record table at *0x805c70 and forward it with the byte at
+ * 0x80281d. */
+extern uint32_t opencfw_em9305_dispatch_child_323498(uint32_t,uint32_t);
+
+uint32_t opencfw_em9305_ecu_callback_315f48(uintptr_t record)
+{
+    uint32_t base=*(volatile uint32_t *)(uintptr_t)0x805c70u;
+    int32_t index=(int32_t)((uint32_t)record-base)/912;
+    uint32_t value=*(volatile uint8_t *)(uintptr_t)0x80281du;
+    return opencfw_em9305_dispatch_child_323498((uint8_t)index,value);
+}

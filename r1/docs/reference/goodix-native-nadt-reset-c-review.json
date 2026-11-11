@@ -1,0 +1,366 @@
+{
+  "schema_version": 1,
+  "scope": "Native NADT state/workspace reset, filter initializer and public ADT shutdown in C",
+  "report": "build/sources-goal-r1-goodix-native-nadt-reset-c/report.json",
+  "comparison_report": "build/sources-goal-r1-goodix-native-spo2-teardown-c/report.json",
+  "stock_entries": [
+    {
+      "entry": "0x6e574",
+      "size": 210,
+      "symbol": "goodix_nadt_deinit",
+      "provider": "r1/src/application/goodix/native_nadt_reset.c"
+    },
+    {
+      "entry": "0x5683c",
+      "size": 36,
+      "symbol": "r1_goodix_native_filter_initialize",
+      "provider": "r1/src/application/goodix/native_nadt_reset.c"
+    },
+    {
+      "entry": "0x2b208",
+      "size": 12,
+      "symbol": "GH3x2xAdtAlgoDeinit",
+      "provider": "r1/src/application/goodix/native_adt_teardown.c"
+    },
+    {
+      "entry": "0x2cdbc",
+      "size": 20,
+      "symbol": "GH3x2xSoftAdtAlgoDeinit",
+      "provider": "r1/src/application/goodix/native_adt_teardown.c"
+    }
+  ],
+  "canonical_owners": {
+    "r1_goodix_native_nadt_state": {
+      "native_address": "0x20007c88",
+      "size": 92
+    },
+    "r1_goodix_native_nadt_workspace": {
+      "native_address": "0x200377dc",
+      "size": 1588
+    },
+    "r1_goodix_native_adt_flags": {
+      "native_address": "0x20007c24",
+      "size": 3
+    },
+    "r1_goodix_native_soft_adt_timeout": {
+      "native_address": "0x20007c44",
+      "size": 4
+    }
+  },
+  "audit": {
+    "compiled_units": 876,
+    "unchanged_prior_nongenerated_objects": 864,
+    "new_units": [
+      "r1/src/application/goodix/native_nadt_reset.c",
+      "r1/src/application/goodix/native_adt_teardown.c"
+    ],
+    "differing_existing_generated_objects": [
+      "{gen}/r1_startup_vectors.S",
+      "{gen}/r1_uecc.c"
+    ],
+    "application_imports": 62,
+    "bootloader_imports": 22,
+    "added_imports": [],
+    "removed_imports": [],
+    "new_writable_state_bytes": 1687,
+    "new_readonly_coefficient_bytes": 48,
+    "source_plan_and_cache_layout_unchanged": true,
+    "both_tested_objects_equal_normal_build": true,
+    "only_manifest_change_is_two_new_units": true,
+    "all_prior_native_portable_and_allocator_objects_unchanged": true
+  },
+  "direct": {
+    "parent_and_actual_soft_adapter_comparisons": 1024,
+    "filter_descriptor_comparisons": 4368,
+    "ADT_byte_reset_comparisons": 1536,
+    "callback_mutation_comparisons": 256,
+    "native_instruction_bytes_executed": [
+      210,
+      36,
+      12,
+      18
+    ],
+    "zero_and_free_boundaries_snapshots_and_writes_match": true,
+    "reserved_fields_and_dangling_allocation_preserved": true,
+    "source_cannot_execute_stock": true,
+    "zero_and_free_modeled": true
+  },
+  "status_adapter": {
+    "status_adapter_comparisons": 2080,
+    "native_instruction_bytes_executed": [
+      20
+    ],
+    "frame_not_dereferenced": true,
+    "timeout_cleared_after_parent_for_every_status": true,
+    "full_word_nonzero_status_normalized": true,
+    "parents_modeled": true
+  },
+  "actual_C_fill": {
+    "selected_comparisons": 784,
+    "actual_C_fill": true,
+    "native_instruction_bytes_executed": [
+      210,
+      36,
+      12,
+      18
+    ]
+  },
+  "actual_C_heap": {
+    "actual_C_heap_reset_comparisons": 256,
+    "actual_C_fill_initializer_malloc_free_filter_reset_and_soft_adapter_execute": true,
+    "allocation_retained_as_dangling_state_pointer": true,
+    "optional_live_guard_before_or_after_allocation": true,
+    "all_static_state_workspace_and_heap_writes_match": true,
+    "source_pipeline_cannot_execute_stock": true,
+    "native_instruction_bytes": [
+      210,
+      36,
+      18
+    ],
+    "FP_context_primed_before_fixtures": true
+  },
+  "compiled_defects_rejected": [
+    {
+      "defect": "short-first-buffer",
+      "rejected": true
+    },
+    {
+      "defect": "long-small-buffer",
+      "rejected": true
+    },
+    {
+      "defect": "missing-state-word",
+      "rejected": true
+    },
+    {
+      "defect": "early-status",
+      "rejected": true
+    },
+    {
+      "defect": "clear-allocation",
+      "rejected": true
+    },
+    {
+      "defect": "cached-allocation",
+      "rejected": true
+    },
+    {
+      "defect": "history-length",
+      "rejected": true
+    },
+    {
+      "defect": "scale-arithmetic",
+      "rejected": true
+    },
+    {
+      "defect": "coefficient-value",
+      "rejected": true
+    },
+    {
+      "defect": "history-clear-order",
+      "rejected": true
+    },
+    {
+      "defect": "late-flags-order",
+      "rejected": true
+    },
+    {
+      "defect": "reserved-byte",
+      "rejected": true
+    },
+    {
+      "defect": "final-status",
+      "rejected": true
+    },
+    {
+      "defect": "adt-order",
+      "rejected": true
+    },
+    {
+      "defect": "adt-reserved-byte",
+      "rejected": true
+    },
+    {
+      "defect": "soft-clear-before-call",
+      "rejected": true
+    },
+    {
+      "defect": "soft-clear-only-success",
+      "rejected": true
+    },
+    {
+      "defect": "soft-positive-failure",
+      "rejected": true
+    },
+    {
+      "defect": "soft-truncated-status",
+      "rejected": true
+    }
+  ],
+  "contract": [
+    "Clear five workspace buffers, initialize the dual-history filter descriptor and clear both histories, then reset the exact state fields and interleaved workspace history words. Preserve all other state bytes.",
+    "Load the saved allocation only when calling free, even for null, leave that pointer unchanged after free, then store status0xbf and return0.",
+    "Filter initializer stores six descriptor words in stock order and clears each history with32-bit wrapped count*4+4 length. Preserve floating-point scale bits without arithmetic.",
+    "Basic ADT resets bytes2 then0 and preserves byte1. Soft ADT resets the timeout after its parent returns, for both success and failure, and normalizes nonzero status to-1."
+  ],
+  "limits": [
+    "All278 native entry instruction bytes execute across the direct and modeled-status fixtures. Direct zero/free ports snapshot state and clobber caller scratch. Real C fill comparisons check actual byte writes; heap integration executes real C initialization/malloc/free and the reset/public soft adapter with no stock-code fallback.",
+    "Filter histories are valid caller-owned buffers for the wrapped byte lengths tested. Overlapping buffers, descriptor/history aliasing, four byte alignments, finite/infinite/NaN/signed-zero bits and selected wrapped counts are tested. Invalid null history behavior for positive lengths is outside the contract.",
+    "FP context is primed by an isolated fixture VMOV before setting per-call FP registers/FPSCR. An initial diagnostic observed lazy FP first-use reset FPSCR; cold FP activation and physical FP-context behavior are not proven. No FP setup instruction is added to firmware.",
+    "Saved integer/FP registers, SP, masks, FPSCR, guards, reserved bytes and write widths/order/values checked. Caller scratch, APSR and private frames excluded. Modeled status sweeps observe full-word nonzero normalization in the compiled callback.",
+    "Canonical writable state/workspace totals1687 bytes and coefficient arrays48 readonly bytes. Future initialization/calculation must reuse these owners. The descriptor coefficient labels do not establish the calculation algorithm.",
+    "The top-level shutdown controller, native algorithm initialization/calculation, physical sensors, concurrency, final executable linking/startup and boot remain open. Relocatable composition is not bootable firmware."
+  ],
+  "evidence_files": {
+    "build/sources-goal-r1-goodix-native-nadt-reset-c/report.json": "d10f1782ead2428ba8e18db0f5eaac7360dea73f7deb52fb214dcc22a93a1ec5",
+    "build/sources-goal-r1-goodix-native-spo2-teardown-c/report.json": "280604e2221374c4cb12d5071256465251c1686d445779c3408ac8ecdf3d4142",
+    "r1/src/application/goodix/native_nadt_reset.c": "71d6eac7c051948f7dc879b841391549a69c5a84d335ee16995e774404269234",
+    "r1/src/application/goodix/native_adt_teardown.c": "9cb72fba3a48c0abe74bc4490335cd5a86f41d96d026130800dddf35f846af16",
+    "r1/src/application/goodix/native_nadt_state.h": "e291549bcc194f4074b8e792b4c41f71b506bf938341e7642a54b132625c718a",
+    "r1/src/sources.json": "fc962d45a10a53393d79484b59aa46f611e3577cc132cd1111701bdfc565ac6b",
+    "tools/build/source-plan.json": "eeb516e31b3310fb0718f36908977f8125723f7c5e0e86cd6744395826259a4d",
+    "r1/src/config/runtime/native_health_cache.ld": "eb8f131c489cd818d4e36718718fa1989719ca0170f164541a1a5bf56dfc1ec3",
+    "r1/docs/reference/FUNCTION-OWNERSHIP.csv": "c73e139494f8b967c6e9d6944267d6a7855de7f29591b89897d5a900937e966e",
+    "r1/symbols/function-frontier.csv": "dc710a68fc60d5f54cbfb0911ad01a15afcfcd62be08175ec893a647b62d157d",
+    "r1/docs/correlation/GOODIX-PRIMITIVES-REDUCTION-CORRELATION.md": "fa241373cd9cc94652f376cc50403ec99b27eb44886184add00d0e9eed57be23",
+    "r1/docs/reference/goodix-shutdown-dependencies.md": "476c32473e916c37ea8bd7fa561457890fd8bc3b091d2a5021c31264b5af0264",
+    "r1/docs/reference/goodix-shutdown-dependencies.json": "420aaa4e54350309dcedc1476d131055a2a18e9eeb073d43a133ae8fd2533326",
+    "build/goal-r1-goodix-native-heap-init-c/fill.o": "5b9881f48c6329da35510eb6b3f4be65d3c31bab24e2f6ab7d5713597d06c391",
+    "build/goal-r1-goodix-native-heap-init-c/fill-body.json": "9bf851f3f2cb56510504f22b5d435b9a6db08019815db0e446543e23e3a17c13",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-native-nadt-reset-c/r1/r1-application/r1__src__application__goodix__native_nadt_reset.c.o": "6ab92f33a97f0c1b35e13021722cd554b61642a0dd6db0a09efafd4df93a4c79",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-native-nadt-reset-c/r1/r1-application/r1__src__application__goodix__native_adt_teardown.c.o": "94edc8fcfeeb70298d15acf72b1ff4912689950e50e2699d3872bc8911c9a72d",
+    "r1/src/application/goodix/native_heap_init.c": "c3085064866b23d603697918b6dfdd29f66ab68c7e82cb1f3e10443c80e3f8b6",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-native-nadt-reset-c/r1/r1-application/r1__src__application__goodix__native_heap_init.c.o": "d25f87d5c62ab05f6d5e4d73cc1de5afacf8300a5f1286735b75c9715c30063c",
+    "r1/src/application/goodix/native_heap_free.c": "175cf893ee4b475bee0a886d69522782ac879dd0b29c43285d957c03fb4dc7c4",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-native-nadt-reset-c/r1/r1-application/r1__src__application__goodix__native_heap_free.c.o": "bc333928ee0e42aaf0a0446eb69f4ff0528fd2f27737d5ed1744ed750b807022",
+    "r1/src/application/goodix/native_heap_allocate.c": "2806f3ca4f9074b157b390edf8bd03815a46b31f1661e1ed238a0938c666d8c9",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-native-nadt-reset-c/r1/r1-application/r1__src__application__goodix__native_heap_allocate.c.o": "129b40a4930e85990e0ba9503f83bbc867460580ef323f2a6dfa2476e7dad685",
+    "r1/src/application/goodix/native_heap_malloc.c": "1b827deb8981088d68fae260af0aa442a7315d4aaaa7f2ed8a248c859878a0c3",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-native-nadt-reset-c/r1/r1-application/r1__src__application__goodix__native_heap_malloc.c.o": "977cb669d0ca7b16102f67629d38c362cd2c47fba05cb890577e367a4f9d0138",
+    "r1/src/application/goodix/native_heap_reallocate.c": "078156cbb3d160046b3c181313a362885f3d41884692698469ad86543458832c",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-native-nadt-reset-c/r1/r1-application/r1__src__application__goodix__native_heap_reallocate.c.o": "c3d17d3ed20d125190f1f64675f13c50395568ac749375e85f56bf2e61a1663b",
+    "build/goal-r1-goodix-native-nadt-reset-c/adapters.o": "94edc8fcfeeb70298d15acf72b1ff4912689950e50e2699d3872bc8911c9a72d",
+    "build/goal-r1-goodix-native-nadt-reset-c/audit.json": "9bf9a40bb827ac85eac76adf4bde2295cc19b19dac536d27d7743d804bc6f29d",
+    "build/goal-r1-goodix-native-nadt-reset-c/real-fill.log": "5eac5b314e2a38bde6ed7b54552f557c049e0d78ca763f7219976b2024873a99",
+    "build/goal-r1-goodix-native-nadt-reset-c/verify.log": "84d7bcf9d19470347af7a5530c14a66ccbf2e11fdcd6370296ac19b768e5ab5f",
+    "build/goal-r1-goodix-native-nadt-reset-c/real-fill.py": "2402e1348d974ff20e768297ddbd9ba91d1473ebaff39e5da180ecb8b70213a0",
+    "build/goal-r1-goodix-native-nadt-reset-c/negative.json": "72f8cb639bd9bb0ef211d5d48302ed5e2511c6b030f8f1c1090cd5d81d37aa8e",
+    "build/goal-r1-goodix-native-nadt-reset-c/test.ld": "2406a8279629ea7f51b762e5c0ada9ba990b08017e8b669c23c5100f2f98c4eb",
+    "build/goal-r1-goodix-native-nadt-reset-c/audit.py": "70a24f04d9486f5ff751e8a5135288ebf870ad587404bc1a6be56364baaca453",
+    "build/goal-r1-goodix-native-nadt-reset-c/fp-debug.log": "c1b4ec11ef9e5a520e0757a5ade60f00f61cfcb94a68ab7a411baf089f0e68f2",
+    "build/goal-r1-goodix-native-nadt-reset-c/source.elf": "d8145b8b6f3ffcd885c441f7485362eef62a38e6c242dc94417a4dce1580224d",
+    "build/goal-r1-goodix-native-nadt-reset-c/negative.py": "1cd2d787b71ff4398b48768e0b82a636d5e96f0db35afddeae117956ed9dd383",
+    "build/goal-r1-goodix-native-nadt-reset-c/negative.log": "1cbc51628b84ab16270a8b2663d9564405baf5f65838a9f72edc7ea362cd2712",
+    "build/goal-r1-goodix-native-nadt-reset-c/source.o": "6ab92f33a97f0c1b35e13021722cd554b61642a0dd6db0a09efafd4df93a4c79",
+    "build/goal-r1-goodix-native-nadt-reset-c/results.json": "0416ff54cc10b7c56fddf2186fb628bedf1d630af25eeea40a8a0b5b94a57740",
+    "build/goal-r1-goodix-native-nadt-reset-c/pipeline.log": "02f9c046ba3031617cd04bf50f9a4a8a48702169468b08db259a63976c4fa706",
+    "build/goal-r1-goodix-native-nadt-reset-c/adapters.log": "e5ec7d11c3bc0f09a1284ef378b9501f53530bbc06b825d191584bf7cdd6929d",
+    "build/goal-r1-goodix-native-nadt-reset-c/pipeline.py": "f0cb70b9b54935ac093d09f27f96e1e28ebec75a3f4690798e1f79d10cf57cb5",
+    "build/goal-r1-goodix-native-nadt-reset-c/rea-bytes.json": "59fe7bd9c29c0d33f3f640d6a463a5ae9f7e824d8ec14caf8afdedd2c620dff0",
+    "build/goal-r1-goodix-native-nadt-reset-c/manifest-before.json": "a7a24ed60738f823e3a1992b535ac2792792031e3845ece310a9fa188ff38076",
+    "build/goal-r1-goodix-native-nadt-reset-c/verify.py": "ce56fd667c29d3a23e58c089093feacf4ac51a849e6e1790e6357911430716b9",
+    "build/goal-r1-goodix-native-nadt-reset-c/adapters.py": "130469f2cf27882342b0f9eb381f8ebeac0d67048b6aaf46e8ed0a955351e874",
+    "build/goal-r1-goodix-native-nadt-reset-c/build.log": "4babd0797cb2ef6cb53045b7b104f491dbd7bfaa482b902c60225c19c318d752",
+    "build/goal-r1-goodix-native-nadt-reset-c/negative-clear-allocation/test.ld": "2406a8279629ea7f51b762e5c0ada9ba990b08017e8b669c23c5100f2f98c4eb",
+    "build/goal-r1-goodix-native-nadt-reset-c/negative-clear-allocation/source.elf": "8563b091f0931d0fdeb20899484cc36340bbfd7065d63acda86ba919cc382a0d",
+    "build/goal-r1-goodix-native-nadt-reset-c/negative-clear-allocation/source.o": "1c19d5613db426ac99b75df9af83a8c40f72d75316a29ceefb1c9908b298716b",
+    "build/goal-r1-goodix-native-nadt-reset-c/negative-clear-allocation/log": "1f11ef0db53fb2f06cbe5b400d6c7f7d2df8a7da16e74f493af20ddc307819b6",
+    "build/goal-r1-goodix-native-nadt-reset-c/negative-clear-allocation/source.c": "a50484fb982a4254b6e38112bcd0d7aac9b93818b1a69afbda1634961b07c593",
+    "build/goal-r1-goodix-native-nadt-reset-c/pipeline/test.ld": "323cb4a6436d4c921277c590bf0ba6bec82c3c0bbaf12cd6d16f805a64084dc5",
+    "build/goal-r1-goodix-native-nadt-reset-c/pipeline/source.elf": "2468caf77db2b6e4d61374b4ffac307cfca0efdbd49ffa029df4cb180dc660bb",
+    "build/goal-r1-goodix-native-nadt-reset-c/pipeline/results.json": "cf23adb9ed01337c76aa3b3a4ed0962f039b295241f57f18128748b062c129e7",
+    "build/goal-r1-goodix-native-nadt-reset-c/negative-soft-clear-before-call/source.elf": "5cd09723bda9abbd752965b84b54a1def771a0c0fbdbc663de503b9535f39ee6",
+    "build/goal-r1-goodix-native-nadt-reset-c/negative-soft-clear-before-call/source.o": "085d6a061f88b5771a0a85233819d087786132f3f1073d54a5dc270df27714a8",
+    "build/goal-r1-goodix-native-nadt-reset-c/negative-soft-clear-before-call/log": "8171f86e41035c052c37e808234963efffa56983238a32f9d1221290efb07f5e",
+    "build/goal-r1-goodix-native-nadt-reset-c/negative-soft-clear-before-call/source.c": "189f9571f757b857d0ea1c67e61429bd56ebde100ffd73264bd2a7a044f93ef0",
+    "build/goal-r1-goodix-native-nadt-reset-c/negative-early-status/test.ld": "2406a8279629ea7f51b762e5c0ada9ba990b08017e8b669c23c5100f2f98c4eb",
+    "build/goal-r1-goodix-native-nadt-reset-c/negative-early-status/source.elf": "b9241afe63292f8877440e90eb433018af36d1b59bc4b5f5a2f80caa79cc411c",
+    "build/goal-r1-goodix-native-nadt-reset-c/negative-early-status/source.o": "9eefd2cc3a4af74258ce16e9fe07bb7509e98a571e2c3970c2fced46078beb50",
+    "build/goal-r1-goodix-native-nadt-reset-c/negative-early-status/log": "b70df22bfdab249fce60105ca731dacc6adbceb64da5738960ed9fd9bfb66860",
+    "build/goal-r1-goodix-native-nadt-reset-c/negative-early-status/source.c": "29f5e118a67fe18d1ec6fe3889122f20975181b7e00e1794f59aedd0498e89b1",
+    "build/goal-r1-goodix-native-nadt-reset-c/negative-late-flags-order/test.ld": "2406a8279629ea7f51b762e5c0ada9ba990b08017e8b669c23c5100f2f98c4eb",
+    "build/goal-r1-goodix-native-nadt-reset-c/negative-late-flags-order/source.elf": "dcb296385864d37d435747860e2a7389b46479432b68ec4f778a5e507bd74e51",
+    "build/goal-r1-goodix-native-nadt-reset-c/negative-late-flags-order/source.o": "c3d53e20ca0bd9d27e2b58c70adf7ff44e42487e2dd32a763d44243bca84882d",
+    "build/goal-r1-goodix-native-nadt-reset-c/negative-late-flags-order/log": "b70df22bfdab249fce60105ca731dacc6adbceb64da5738960ed9fd9bfb66860",
+    "build/goal-r1-goodix-native-nadt-reset-c/negative-late-flags-order/source.c": "ceac5225962b022ba16b27fa4a0080517c1179d7a1a4bdc7e09da7c708a50353",
+    "build/goal-r1-goodix-native-nadt-reset-c/negative-soft-positive-failure/source.elf": "6354f4bacccb8488e4eb40287f8c991183d404bbf3c718796e6818e53da36cff",
+    "build/goal-r1-goodix-native-nadt-reset-c/negative-soft-positive-failure/source.o": "28f0f13328559f2cf72e89e38af13dc65362fe9130aefdd63e197d01e544df30",
+    "build/goal-r1-goodix-native-nadt-reset-c/negative-soft-positive-failure/log": "934e29e2680c70f378a978215bb57db83690ea73b1889d69d694d1ece03ee273",
+    "build/goal-r1-goodix-native-nadt-reset-c/negative-soft-positive-failure/source.c": "2b5a285b48ba00e80088f919ee42ee4a45cd51c0ef7011a0d1e196607ba765b3",
+    "build/goal-r1-goodix-native-nadt-reset-c/negative-short-first-buffer/test.ld": "2406a8279629ea7f51b762e5c0ada9ba990b08017e8b669c23c5100f2f98c4eb",
+    "build/goal-r1-goodix-native-nadt-reset-c/negative-short-first-buffer/source.elf": "14098194a82254e5c7480293783efccc4f08d60897c7df5995a51b6c8f1d3bfe",
+    "build/goal-r1-goodix-native-nadt-reset-c/negative-short-first-buffer/source.o": "f95f9b0547b96b18beac2743c6a03108ecddf3a65172a0a2d4310583164344f2",
+    "build/goal-r1-goodix-native-nadt-reset-c/negative-short-first-buffer/log": "14f898cfc68f3f829b9c227d5a6614c41d55630a48418dec8c87c45115821ef8",
+    "build/goal-r1-goodix-native-nadt-reset-c/negative-short-first-buffer/source.c": "d0b3236d85d243be4ef85e159bb5771fe66b90b5dc34dbe9d427ee69535bca05",
+    "build/goal-r1-goodix-native-nadt-reset-c/negative-reserved-byte/test.ld": "2406a8279629ea7f51b762e5c0ada9ba990b08017e8b669c23c5100f2f98c4eb",
+    "build/goal-r1-goodix-native-nadt-reset-c/negative-reserved-byte/source.elf": "120e8b575497f61ad04da7136f8ad136879e1653eaf02d82439900eac29629a1",
+    "build/goal-r1-goodix-native-nadt-reset-c/negative-reserved-byte/source.o": "aadfcaf58d39fc537992d1d974ef7b96206971613e3c1609bd55a1506759f5f9",
+    "build/goal-r1-goodix-native-nadt-reset-c/negative-reserved-byte/log": "1f11ef0db53fb2f06cbe5b400d6c7f7d2df8a7da16e74f493af20ddc307819b6",
+    "build/goal-r1-goodix-native-nadt-reset-c/negative-reserved-byte/source.c": "5c2ea265e7b19ace8a975c502286af63a7ea5e543a49c7de39d1bee5853b9337",
+    "build/goal-r1-goodix-native-nadt-reset-c/negative-coefficient-value/test.ld": "2406a8279629ea7f51b762e5c0ada9ba990b08017e8b669c23c5100f2f98c4eb",
+    "build/goal-r1-goodix-native-nadt-reset-c/negative-coefficient-value/source.elf": "a9c67d4cd0946c16c759c0c02128bc3cf0f668cd424f729670671dd94435baef",
+    "build/goal-r1-goodix-native-nadt-reset-c/negative-coefficient-value/source.o": "1423dd25253ce26843a6797604acd171261fcc8c93e17db81ad6c83b1138b2f9",
+    "build/goal-r1-goodix-native-nadt-reset-c/negative-coefficient-value/log": "ba7823555ebbc9cdece78d5347b4401a91e224e1c59f1f2ec96c93c388d80162",
+    "build/goal-r1-goodix-native-nadt-reset-c/negative-coefficient-value/source.c": "90ff411208f7fa5b3152e4e12e55ba1c10ac155bb838349d27f2877432394ac5",
+    "build/goal-r1-goodix-native-nadt-reset-c/negative-cached-allocation/test.ld": "2406a8279629ea7f51b762e5c0ada9ba990b08017e8b669c23c5100f2f98c4eb",
+    "build/goal-r1-goodix-native-nadt-reset-c/negative-cached-allocation/source.elf": "cdabecbb3e328bca9f7ab73a12b90535ef44dada9f43c4c811b39d43a13c21d5",
+    "build/goal-r1-goodix-native-nadt-reset-c/negative-cached-allocation/source.o": "5c9d3e73751c98b90afd65ab1fc2d8b24aee9bbd53c9abef3dae901ec7b4b361",
+    "build/goal-r1-goodix-native-nadt-reset-c/negative-cached-allocation/log": "98edc2b39bdd87adf0fd15adbdf19028a6f8640866d8997db82d9bc0bff401bf",
+    "build/goal-r1-goodix-native-nadt-reset-c/negative-cached-allocation/source.c": "79c4da449f90bb64d353b8faa27e3dff2c6ba2d3f00c724e15019600d72aba65",
+    "build/goal-r1-goodix-native-nadt-reset-c/adapters/source.elf": "a2f3d548087bddede0ee06dff9a6e544d8636df076e756b3269e12d5d6d306ab",
+    "build/goal-r1-goodix-native-nadt-reset-c/adapters/results.json": "2e03db55c7f8068e3469eab38da0c8144b58fbbbefccc86b5968efbcd394857e",
+    "build/goal-r1-goodix-native-nadt-reset-c/negative-long-small-buffer/test.ld": "2406a8279629ea7f51b762e5c0ada9ba990b08017e8b669c23c5100f2f98c4eb",
+    "build/goal-r1-goodix-native-nadt-reset-c/negative-long-small-buffer/source.elf": "1bcf9f6990c7ca02879f40853e09bb84abb33fef425b505ef10c4c0a5c8f0cf4",
+    "build/goal-r1-goodix-native-nadt-reset-c/negative-long-small-buffer/source.o": "7099327884be6179e8ad30c1530a48feb4ae703947478ce83b62388f2c83e573",
+    "build/goal-r1-goodix-native-nadt-reset-c/negative-long-small-buffer/log": "14f898cfc68f3f829b9c227d5a6614c41d55630a48418dec8c87c45115821ef8",
+    "build/goal-r1-goodix-native-nadt-reset-c/negative-long-small-buffer/source.c": "f572bbdb31049062a56bf9d6b1289243e5a6b4ea655eaec19e679c510d2dac52",
+    "build/goal-r1-goodix-native-nadt-reset-c/negative-adt-order/test.ld": "2406a8279629ea7f51b762e5c0ada9ba990b08017e8b669c23c5100f2f98c4eb",
+    "build/goal-r1-goodix-native-nadt-reset-c/negative-adt-order/source.elf": "0914f93dbab3fd4aa348370ee3cb8e97552b68f85785b489a19b2be192f4cfa8",
+    "build/goal-r1-goodix-native-nadt-reset-c/negative-adt-order/source.o": "e6a2eeed2f742f0e4a6e9b0f4b5e1c41d68236fff7f1d85101ac05a84de4b041",
+    "build/goal-r1-goodix-native-nadt-reset-c/negative-adt-order/log": "ffba66318d291a1d388ae2330a56ca9a52febdb8bc9ecc1519e34b155494f0b7",
+    "build/goal-r1-goodix-native-nadt-reset-c/negative-adt-order/source.c": "824538642ba65677607b2812cf52b70c8f6ac2e8108c3b48eec0e5edbe1e17c6",
+    "build/goal-r1-goodix-native-nadt-reset-c/negative-soft-truncated-status/source.elf": "9e2f8f508145804ee2485694cb35877bf89617d70252dedf475f62f72a550fb1",
+    "build/goal-r1-goodix-native-nadt-reset-c/negative-soft-truncated-status/source.o": "d808505f9e814060275106ff64c5e5fbff912842f7bc860de98c9dd14cfd211b",
+    "build/goal-r1-goodix-native-nadt-reset-c/negative-soft-truncated-status/log": "934e29e2680c70f378a978215bb57db83690ea73b1889d69d694d1ece03ee273",
+    "build/goal-r1-goodix-native-nadt-reset-c/negative-soft-truncated-status/source.c": "34eac5b315d21d8127d030f56623bb8cc34e4b585c51e734337257b8468c7a79",
+    "build/goal-r1-goodix-native-nadt-reset-c/negative-scale-arithmetic/test.ld": "2406a8279629ea7f51b762e5c0ada9ba990b08017e8b669c23c5100f2f98c4eb",
+    "build/goal-r1-goodix-native-nadt-reset-c/negative-scale-arithmetic/source.elf": "0693dd56f15cb0f2112d18d506f9dd9176a398d64fa14a2a6eb6d703674fdb63",
+    "build/goal-r1-goodix-native-nadt-reset-c/negative-scale-arithmetic/source.o": "9bfaa9ea9def936b1236933bfc671d858674cdff429a440aebd397e6a587d907",
+    "build/goal-r1-goodix-native-nadt-reset-c/negative-scale-arithmetic/log": "a30357729f1c68f7f27af62787df178180f4827c8c458640eb1c082afd6fe5c6",
+    "build/goal-r1-goodix-native-nadt-reset-c/negative-scale-arithmetic/source.c": "930d2e3ebe49fd392b3e162ca2e21f647e4c865fb38c6837b6cdf243d345e420",
+    "build/goal-r1-goodix-native-nadt-reset-c/negative-soft-clear-only-success/source.elf": "45f355639669be7c3b20d40b8a3c122266b37fc2bb250ef5408c496694e19be7",
+    "build/goal-r1-goodix-native-nadt-reset-c/negative-soft-clear-only-success/source.o": "24957612ca7e11ef147e85bb6405ec038aff5715b922f5f9c47d6056237975e8",
+    "build/goal-r1-goodix-native-nadt-reset-c/negative-soft-clear-only-success/log": "8171f86e41035c052c37e808234963efffa56983238a32f9d1221290efb07f5e",
+    "build/goal-r1-goodix-native-nadt-reset-c/negative-soft-clear-only-success/source.c": "af9a3242048cea5f6c14269c3dd3378acb0560719540804e4c6819090b42ce61",
+    "build/goal-r1-goodix-native-nadt-reset-c/real-fill/test.ld": "2406a8279629ea7f51b762e5c0ada9ba990b08017e8b669c23c5100f2f98c4eb",
+    "build/goal-r1-goodix-native-nadt-reset-c/real-fill/source.elf": "b663420bbc4458bbf6f3ef7d1a45e956a095d66b4b91d4cb0be65ba32c401f9a",
+    "build/goal-r1-goodix-native-nadt-reset-c/real-fill/selected-results.json": "7ad832f201ed55780ab59f2f07f31546c25cbdffc29b845d6b4dcf17b7ed4365",
+    "build/goal-r1-goodix-native-nadt-reset-c/real-fill/cases.json": "75b2839415162f8ef45a1d212e59b556f9bf61ddc70bbd4a69a921837625018d",
+    "build/goal-r1-goodix-native-nadt-reset-c/real-fill/log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/goal-r1-goodix-native-nadt-reset-c/negative-missing-state-word/test.ld": "2406a8279629ea7f51b762e5c0ada9ba990b08017e8b669c23c5100f2f98c4eb",
+    "build/goal-r1-goodix-native-nadt-reset-c/negative-missing-state-word/source.elf": "e0d28db88e570bcf7546c392e0ef91f6309d0aba1485220bb702451bc0543d11",
+    "build/goal-r1-goodix-native-nadt-reset-c/negative-missing-state-word/source.o": "ab8685299d2e77075ea29c2da9e98aeb5839451eed625eb9f3d0d0ca15e93c78",
+    "build/goal-r1-goodix-native-nadt-reset-c/negative-missing-state-word/log": "b70df22bfdab249fce60105ca731dacc6adbceb64da5738960ed9fd9bfb66860",
+    "build/goal-r1-goodix-native-nadt-reset-c/negative-missing-state-word/source.c": "8cbd7aeaf09a24b57ca019579770c4b9fb65431a9c79a436e90ef37e01bb3a3d",
+    "build/goal-r1-goodix-native-nadt-reset-c/negative-final-status/test.ld": "2406a8279629ea7f51b762e5c0ada9ba990b08017e8b669c23c5100f2f98c4eb",
+    "build/goal-r1-goodix-native-nadt-reset-c/negative-final-status/source.elf": "9458adb9ae398d5701b779718de1be3fbcd7a29c9f7a03cd94e5d6e57421f59f",
+    "build/goal-r1-goodix-native-nadt-reset-c/negative-final-status/source.o": "f2e2761d21c7f6f8989e05e8a68a489f76f545dc75dffe0998a7dd7b3d784c31",
+    "build/goal-r1-goodix-native-nadt-reset-c/negative-final-status/log": "b70df22bfdab249fce60105ca731dacc6adbceb64da5738960ed9fd9bfb66860",
+    "build/goal-r1-goodix-native-nadt-reset-c/negative-final-status/source.c": "4bccd073acd5c42310b27317fa6d1e26e8b51cef607b6ee60470a7e853d7c27d",
+    "build/goal-r1-goodix-native-nadt-reset-c/negative-adt-reserved-byte/test.ld": "2406a8279629ea7f51b762e5c0ada9ba990b08017e8b669c23c5100f2f98c4eb",
+    "build/goal-r1-goodix-native-nadt-reset-c/negative-adt-reserved-byte/source.elf": "68608afe928e38cfd1dc48d5ebc4b393572d624beaa27527dca29905df1c5f7f",
+    "build/goal-r1-goodix-native-nadt-reset-c/negative-adt-reserved-byte/source.o": "806a638910d525acb7d1bc2084968394479ec3278d3bec82c5a1f1723ebf11e9",
+    "build/goal-r1-goodix-native-nadt-reset-c/negative-adt-reserved-byte/log": "ffba66318d291a1d388ae2330a56ca9a52febdb8bc9ecc1519e34b155494f0b7",
+    "build/goal-r1-goodix-native-nadt-reset-c/negative-adt-reserved-byte/source.c": "bd245f36f8d526b281729c906e548f945001a99cc640e2a58572a0c7051cf180",
+    "build/goal-r1-goodix-native-nadt-reset-c/negative-history-clear-order/test.ld": "2406a8279629ea7f51b762e5c0ada9ba990b08017e8b669c23c5100f2f98c4eb",
+    "build/goal-r1-goodix-native-nadt-reset-c/negative-history-clear-order/source.elf": "0d27353f25ac5fea1fd9f6fd250f36f65cc6d493f05b51d6c7ed32844f04601a",
+    "build/goal-r1-goodix-native-nadt-reset-c/negative-history-clear-order/source.o": "8a6468f254a82cf3892048423f1815a253b7615fee75262301cd7661b3e5f2a8",
+    "build/goal-r1-goodix-native-nadt-reset-c/negative-history-clear-order/log": "b70df22bfdab249fce60105ca731dacc6adbceb64da5738960ed9fd9bfb66860",
+    "build/goal-r1-goodix-native-nadt-reset-c/negative-history-clear-order/source.c": "808ba114cbca3a2708b6a59c0a2d45a1a372c3bcc018749c7c198083c49c5e2d",
+    "build/goal-r1-goodix-native-nadt-reset-c/negative-history-length/test.ld": "2406a8279629ea7f51b762e5c0ada9ba990b08017e8b669c23c5100f2f98c4eb",
+    "build/goal-r1-goodix-native-nadt-reset-c/negative-history-length/source.elf": "f71208e153834fb0568e5d99a540349bf84ce336ab922a1cf17c16d221f65b9d",
+    "build/goal-r1-goodix-native-nadt-reset-c/negative-history-length/source.o": "29af1b1e2e79e60850591fac191a1b63bfed0cc64a36c5c6f166cadde4caf307",
+    "build/goal-r1-goodix-native-nadt-reset-c/negative-history-length/log": "b231529e7f53e172cad3090edbf988e330ff4e9612121f7c7ba1983db37d915c",
+    "build/goal-r1-goodix-native-nadt-reset-c/negative-history-length/source.c": "298072e587d4e9671f37da0359223bee7233b2ab53347f927d7b703e4e89e781"
+  }
+}

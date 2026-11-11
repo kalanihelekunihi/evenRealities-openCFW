@@ -24,18 +24,3 @@ double r1_math_high_square64(void)
 { return as_double(r1_format_double_multiply_bits(UINT64_C(0x7000000000000000),UINT64_C(0x7000000000000000))); }
 double r1_math_low_square64(void)
 { return as_double(r1_format_double_multiply_bits(UINT64_C(0x1000000000000000),UINT64_C(0x1000000000000000))); }
-float r1_math_divzero32(void)
-{
-    union {uint32_t bits;float value;} one={.bits=0x3f800000u},zero={.bits=0};float result;
-    __asm__ volatile("vdiv.f32 %0,%1,%2" : "=t"(result) : "t"(one.value),"t"(zero.value));return result;
-}
-float r1_math_self_add32(float value)
-{ float result;__asm__ volatile("vadd.f32 %0,%1,%1" : "=t"(result) : "t"(value));return result; }
-float r1_math_add32(float a,float b)
-{ float result;__asm__ volatile("vadd.f32 %0,%1,%2" : "=t"(result) : "t"(a),"t"(b));return result; }
-float r1_math_invalid32(void)
-{ union {uint32_t bits;float value;} zero={.bits=0};float result;__asm__ volatile("vdiv.f32 %0,%1,%1" : "=t"(result) : "t"(zero.value));return result; }
-float r1_math_high_square32(void)
-{ union {uint32_t bits;float value;} high={.bits=0x70000000u};float result;__asm__ volatile("vmul.f32 %0,%1,%1" : "=t"(result) : "t"(high.value));return result; }
-float r1_math_low_square32(void)
-{ union {uint32_t bits;float value;} low={.bits=0x10000000u};float result;__asm__ volatile("vmul.f32 %0,%1,%1" : "=t"(result) : "t"(low.value));return result; }

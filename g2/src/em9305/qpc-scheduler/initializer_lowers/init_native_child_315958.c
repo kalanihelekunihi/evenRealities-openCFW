@@ -1,28 +1,14 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_315958\n"
-".type opencfw_em9305_child_315958,@function\n"
-"opencfw_em9305_child_315958:\n"
-"L315958:\n"
-"enter_s [r13,blink]\n"
-"L31595a:\n"
-"mov_s r13,r0\n"
-"L31595c:\n"
-"ld.as r0,[r0,159]\n"
-"L315960:\n"
-"bset_s r0,r0,0x11\n"
-"L315962:\n"
-"st.as r0,[r13,159]\n"
-"L315966:\n"
-"bl.d opencfw_em9305_child_32ca74\n"
-"L31596a:\n"
-"mov_s r0,r13\n"
-"L31596c:\n"
-"bl.d opencfw_em9305_child_31640c\n"
-"L315970:\n"
-"mov_s r0,r13\n"
-"L315972:\n"
-"leave_s [r13,blink,pcl]\n"
-".size opencfw_em9305_child_315958,.-opencfw_em9305_child_315958\n"
-);
+#include <stdint.h>
+
+/* Native 0x315958..0x315972: set bit 17 of the record's flag word (+636),
+ * then run native 0x32ca74 and 0x31640c on the record. */
+extern uint32_t opencfw_em9305_child_32ca74(uintptr_t);
+extern uint32_t opencfw_em9305_child_31640c(uintptr_t);
+
+uint32_t opencfw_em9305_child_315958(uintptr_t record)
+{
+    volatile uint32_t *flags = (volatile uint32_t *)(record + 636u);
+    *flags = *flags | (1u << 17);
+    (void)opencfw_em9305_child_32ca74(record);
+    return opencfw_em9305_child_31640c(record);
+}

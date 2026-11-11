@@ -1,117 +1,47 @@
-/* Complete native bounded byte counters; all register and store effects. */
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_dispatch_child_317418\n"
-".type opencfw_em9305_dispatch_child_317418,@function\n"
-"opencfw_em9305_dispatch_child_317418:\n"
-"L317418:\n"
-"enter_s [r13-r14]\n"
-"L31741a:\n"
-"ldb_s r12,[r0,0x18]\n"
-"L31741c:\n"
-"ldb_s r13,[r0,0x1b]\n"
-"L31741e:\n"
-"ldb_s r2,[r1,0x4]\n"
-"L317420:\n"
-"mpyuw r14,r13,r12\n"
-"L317424:\n"
-"add_s r2,r2,1\n"
-"L317426:\n"
-"extb_s r3,r2\n"
-"L317428:\n"
-"brhs.d.nt r3,r14,L317466\n"
-"L31742c:\n"
-"stb_s r2,[r1,0x4]\n"
-"L31742e:\n"
-"ldb_s r2,[r1,0x1]\n"
-"L317430:\n"
-"mov_s r11,1\n"
-"L317432:\n"
-"add_s r2,r2,1\n"
-"L317434:\n"
-"extb_s r14,r2\n"
-"L317436:\n"
-"brlo.d.nt r14,r12,L317492\n"
-"L31743a:\n"
-"stb_s r2,[r1,0x1]\n"
-"L31743c:\n"
-"ldb_s r2,[r1,0x2]\n"
-"L31743e:\n"
-"sub_s r14,r13,0x1\n"
-"L317440:\n"
-"mov_s r12,0\n"
-"L317442:\n"
-"add_s r2,r2,1\n"
-"L317444:\n"
-"extb_s r13,r2\n"
-"L317446:\n"
-"stb_s r12,[r1,0x1]\n"
-"L317448:\n"
-"brlt.d.nt r13,r14,L317492\n"
-"L31744c:\n"
-"stb_s r2,[r1,0x2]\n"
-"L31744e:\n"
-"ldb_s r2,[r0,0x1a]\n"
-"L317450:\n"
-"stb_s r12,[r1,0x2]\n"
-"L317452:\n"
-"brne_s r2,0,L317492\n"
-"L317454:\n"
-"ldb_s r2,[r0,0x19]\n"
-"L317456:\n"
-"brlo.nt r3,r2,L317492\n"
-"L31745a:\n"
-"ldb_s r2,[r1,0]\n"
-"L31745c:\n"
-"ldb r0,[r0,52]\n"
-"L317460:\n"
-"stb_s r12,[r1,0x4]\n"
-"L317462:\n"
-"add_s r2,r2,1\n"
-"L317464:\n"
-"b_s L317488\n"
-"L317466:\n"
-"ldb_s r13,[r1,0x3]\n"
-"L317468:\n"
-"ldb_s r14,[r0,0x19]\n"
-"L31746a:\n"
-"sub_s r2,r12,0x1\n"
-"L31746c:\n"
-"mov_s r11,1\n"
-"L31746e:\n"
-"stb_s r2,[r1,0x1]\n"
-"L317470:\n"
-"add_s r2,r13,0x1\n"
-"L317472:\n"
-"brlo.d.nt r3,r14,L317492\n"
-"L317476:\n"
-"stb_s r2,[r1,0x3]\n"
-"L317478:\n"
-"ldb_s r3,[r1,0]\n"
-"L31747a:\n"
-"ldb r0,[r0,52]\n"
-"L31747e:\n"
-"mov_s r2,0\n"
-"L317480:\n"
-"stb_s r2,[r1,0x4]\n"
-"L317482:\n"
-"stb_s r2,[r1,0x3]\n"
-"L317484:\n"
-"stb_s r2,[r1,0x1]\n"
-"L317486:\n"
-"add_s r2,r3,0x1\n"
-"L317488:\n"
-"extb_s r3,r2\n"
-"L31748a:\n"
-"brlo.d.nt r3,r0,L317492\n"
-"L31748e:\n"
-"stb_s r2,[r1,0]\n"
-"L317490:\n"
-"mov_s r11,0\n"
-"L317492:\n"
-"mov_s r0,r11\n"
-"L317494:\n"
-"leave_s [r13-r14,pcl]\n"
-".size opencfw_em9305_dispatch_child_317418,.-opencfw_em9305_dispatch_child_317418\n"
-);
+#include <stdint.h>
+
+/* Native 0x317418..0x317496: advance a nested event counter. The config
+ * gives per-slot ticks (+24), slots per round (+27), a final-round flag
+ * (+26), a threshold (+25) and a round limit (+52); the state bytes are
+ * {round, slot, sub-round, overflow, tick}. Returns 0 only when the
+ * round counter reaches the limit, 1 otherwise. */
+uint32_t opencfw_em9305_dispatch_child_317418(uintptr_t config, uintptr_t state)
+{
+    volatile const uint8_t *c=(volatile const uint8_t *)config;
+    volatile uint8_t *s=(volatile uint8_t *)state;
+    uint32_t per_slot=c[24];
+    uint32_t slots=c[27];
+    uint32_t next=s[4]+1u;
+    uint32_t tick=(uint8_t)next;
+    uint32_t round,limit;
+    s[4]=(uint8_t)next;
+    if(tick<per_slot*slots){
+        next=s[1]+1u;
+        s[1]=(uint8_t)next;
+        if((uint8_t)next<per_slot)return 1u;
+        next=s[2]+1u;
+        s[1]=0u;
+        s[2]=(uint8_t)next;
+        if((int32_t)(uint8_t)next<(int32_t)(slots-1u))return 1u;
+        uint32_t final=c[26];
+        s[2]=0u;
+        if(final!=0u)return 1u;
+        if(tick<c[25])return 1u;
+        round=s[0];
+        limit=c[52];
+        s[4]=0u;
+    }else{
+        uint32_t overflow=s[3];
+        uint32_t threshold=c[25];
+        s[1]=(uint8_t)(per_slot-1u);
+        s[3]=(uint8_t)(overflow+1u);
+        if(tick<threshold)return 1u;
+        round=s[0];
+        limit=c[52];
+        s[4]=0u;
+        s[3]=0u;
+        s[1]=0u;
+    }
+    s[0]=(uint8_t)(round+1u);
+    return (uint8_t)(round+1u)<limit;
+}

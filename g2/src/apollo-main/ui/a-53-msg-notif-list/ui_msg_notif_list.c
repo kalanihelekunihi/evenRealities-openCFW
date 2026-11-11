@@ -96,15 +96,15 @@ extern void audio_uart_page_44127e(void *obj, uint32_t color, uint32_t sel);    
 extern void audio_uart_page_44129e(void *obj, uint32_t opa, uint32_t sel);      /* bg_opa */
 extern void audio_uart_page_4412ec(void *obj, uint32_t color, uint32_t sel);    /* border_color */
 extern void audio_uart_page_44130c(void *obj, uint32_t opa, uint32_t sel);      /* border_opa */
-extern void audio_uart_page_44131c(void *obj, int32_t v, uint32_t sel);         /* border_width */
-extern void audio_uart_page_44133a(void *obj, int32_t v, uint32_t sel);         /* outline_width */
+extern void lv_obj_set_style_border_width(void *obj, int32_t v, uint32_t sel);         /* border_width */
+extern void lv_obj_set_style_outline_width(void *obj, int32_t v, uint32_t sel);         /* outline_width */
 extern void lv_obj_set_style_outline_color_441348(void *obj, uint32_t color, uint32_t sel);
 extern void lv_obj_set_style_outline_opa_441368(void *obj, uint32_t opa, uint32_t sel);
-extern void audio_uart_page_441378(void *obj, int32_t v, uint32_t sel);         /* outline_pad */
+extern void lv_obj_set_style_outline_pad(void *obj, int32_t v, uint32_t sel);         /* outline_pad */
 extern void audio_uart_page_44140e(void *obj, uint32_t color, uint32_t sel);    /* text_color */
 extern void audio_uart_page_44143e(void *obj, const void *font, uint32_t sel);  /* text_font */
 extern void audio_uart_page_44145a(void *obj, uint32_t align, uint32_t sel);    /* text_align */
-extern void audio_uart_page_44146a(void *obj, int32_t v, uint32_t sel);         /* radius */
+extern void lv_obj_set_style_radius(void *obj, int32_t v, uint32_t sel);         /* radius */
 extern void *audio_uart_page_499416(void *parent);                              /* lv_label_create */
 extern void audio_uart_page_49942e(void *label, const char *text);              /* lv_label_set_text */
 extern void *lv_tileview_create_50fef8(void *parent);
@@ -256,20 +256,20 @@ void message_notify_page_init_55225c(void *page)
     audio_uart_page_43ded4(page, 0x50000u);
     audio_uart_page_43dfa4(page, 0xb014u);
     audio_uart_page_44e368(page, 0u);
-    audio_uart_page_44146a(page, 0, 0u);
+    lv_obj_set_style_radius(page, 0, 0u);
     audio_uart_page_44127e(page, audio_uart_page_44104c(0u), 0u);
     audio_uart_page_44129e(page, 0u, 0u);
-    audio_uart_page_44131c(page, 0, 0u);
+    lv_obj_set_style_border_width(page, 0, 0u);
     lv_obj_set_style_pad_all_54fa24(page, 0, 0u);
 
     ui->root = audio_uart_page_43de82(page);
     audio_uart_page_43f506(ui->root, 0x240);
     audio_uart_page_43f568(ui->root, MSG_NOTIF_TILE_H);
     audio_uart_page_43f6b8(ui->root, LV_ALIGN_TOP_LEFT, 0, -16);
-    audio_uart_page_44131c(ui->root, 0, 0u);
+    lv_obj_set_style_border_width(ui->root, 0, 0u);
     audio_uart_page_44127e(ui->root, audio_uart_page_44104c(0u), 0u);
     audio_uart_page_44129e(ui->root, 0xffu, 0u);
-    audio_uart_page_44146a(ui->root, 0, 0u);
+    lv_obj_set_style_radius(ui->root, 0, 0u);
     lv_obj_set_style_pad_all_54fa24(ui->root, 0, 0u);
     audio_uart_page_43dfa4(ui->root, 0x12u);
 
@@ -284,8 +284,8 @@ void message_notify_page_init_55225c(void *page)
     audio_uart_page_43f6b8(ui->indicator, LV_ALIGN_LEFT_MID, (int16_t)(x_shift + 8), 0x10);
     audio_uart_page_44127e(ui->indicator, audio_uart_page_44104c(0u), 0u);
     audio_uart_page_44129e(ui->indicator, 0xffu, 0u);
-    audio_uart_page_44131c(ui->indicator, 0, 0u);
-    audio_uart_page_44146a(ui->indicator, 0, 0u);
+    lv_obj_set_style_border_width(ui->indicator, 0, 0u);
+    lv_obj_set_style_radius(ui->indicator, 0, 0u);
     lv_obj_set_style_pad_all_54fa24(ui->indicator, 0, 0u);
     audio_uart_page_43ded4(ui->indicator, LV_OBJ_FLAG_SCROLLABLE);
     audio_uart_page_44e368(ui->indicator, 0u);
@@ -299,8 +299,8 @@ void message_notify_page_init_55225c(void *page)
         audio_uart_page_43f6b8(ui->dots[i], LV_ALIGN_OUT_BOTTOM_LEFT, 0, (int32_t)i * 0xc);
         audio_uart_page_44127e(ui->dots[i], audio_uart_page_44104c(0x444444u), 0u);
         audio_uart_page_44129e(ui->dots[i], 0xffu, 0u);
-        audio_uart_page_44131c(ui->dots[i], 0, 0u);
-        audio_uart_page_44146a(ui->dots[i], 0, 0u);
+        lv_obj_set_style_border_width(ui->dots[i], 0, 0u);
+        lv_obj_set_style_radius(ui->dots[i], 0, 0u);
         lv_obj_set_style_pad_all_54fa24(ui->dots[i], 0, 0u);
         audio_uart_page_43dfa4(ui->dots[i], 0x12u);
     }
@@ -311,8 +311,8 @@ void message_notify_page_init_55225c(void *page)
     audio_uart_page_43f6d6(ui->indicator_edge, ui->indicator, LV_ALIGN_TOP_LEFT, 0, 0);
     audio_uart_page_44127e(ui->indicator_edge, audio_uart_page_44104c(0x444444u), 0u);
     audio_uart_page_44129e(ui->indicator_edge, 0xffu, 0u);
-    audio_uart_page_44131c(ui->indicator_edge, 0, 0u);
-    audio_uart_page_44146a(ui->indicator_edge, 0, 0u);
+    lv_obj_set_style_border_width(ui->indicator_edge, 0, 0u);
+    lv_obj_set_style_radius(ui->indicator_edge, 0, 0u);
     lv_obj_set_style_pad_all_54fa24(ui->indicator_edge, 0, 0u);
     audio_uart_page_43dfa4(ui->indicator_edge, 0x12u);
     audio_uart_page_43ded4(ui->indicator_edge, LV_OBJ_FLAG_HIDDEN);
@@ -323,10 +323,10 @@ void message_notify_page_init_55225c(void *page)
     audio_uart_page_43f6b8(ui->empty_label, LV_ALIGN_TOP_MID, (int16_t)(x_shift + 6), 0x10);
     audio_uart_page_44127e(ui->empty_label, audio_uart_page_44104c(0u), 0u);
     audio_uart_page_44129e(ui->empty_label, 0xffu, 0u);
-    audio_uart_page_44131c(ui->empty_label, 1, 0u);
+    lv_obj_set_style_border_width(ui->empty_label, 1, 0u);
     audio_uart_page_4412ec(ui->empty_label, audio_uart_page_44104c(0xffffffu), 0u);
     audio_uart_page_44130c(ui->empty_label, 0xffu, 0u);
-    audio_uart_page_44146a(ui->empty_label, 6, 0u);
+    lv_obj_set_style_radius(ui->empty_label, 6, 0u);
     lv_obj_set_style_pad_all_54fa24(ui->empty_label, 0, 0u);
     audio_uart_page_43dfa4(ui->empty_label, 0x12u);
 
@@ -341,7 +341,7 @@ void message_notify_page_init_55225c(void *page)
     audio_uart_page_44143e(ui->empty_text, (const void *)(uintptr_t)audio_system_alert_font_200746e0, 0u);
     audio_uart_page_44127e(ui->empty_text, audio_uart_page_44104c(0u), 0u);
     audio_uart_page_44129e(ui->empty_text, 0xffu, 0u);
-    audio_uart_page_44131c(ui->empty_text, 0, 0u);
+    lv_obj_set_style_border_width(ui->empty_text, 0, 0u);
     lv_obj_set_style_pad_all_54fa24(ui->empty_text, 0, 0u);
     audio_uart_page_43dfa4(ui->empty_text, 0x12u);
 
@@ -352,11 +352,11 @@ void message_notify_page_init_55225c(void *page)
     audio_uart_page_44127e(ui->tileview, audio_uart_page_44104c(0u), 0u);
     audio_uart_page_44129e(ui->tileview, 0xffu, 0u);
     lv_obj_set_style_pad_all_54fa24(ui->tileview, 0, 0u);
-    audio_uart_page_44146a(ui->tileview, 0, 0u);
+    lv_obj_set_style_radius(ui->tileview, 0, 0u);
     lv_obj_set_style_outline_color_441348(ui->tileview, audio_uart_page_44104c(0u), 0u);
     lv_obj_set_style_outline_opa_441368(ui->tileview, 0xffu, 0u);
-    audio_uart_page_44133a(ui->tileview, 0, 0u);
-    audio_uart_page_441378(ui->tileview, 0, 0u);
+    lv_obj_set_style_outline_width(ui->tileview, 0, 0u);
+    lv_obj_set_style_outline_pad(ui->tileview, 0, 0u);
     audio_uart_page_43ded4(ui->tileview, LV_OBJ_FLAG_SCROLLABLE);
     audio_uart_page_44e368(ui->tileview, 0u);
     audio_uart_page_44e3ca(ui->tileview, LV_DIR_VER);

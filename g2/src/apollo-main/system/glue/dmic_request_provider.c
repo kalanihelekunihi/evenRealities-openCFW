@@ -1,6 +1,8 @@
 #include <stdint.h>
 
-/* Local transaction protocol inferred from stock 0x57ce78. Driver transport,
+/* Local transaction protocol transcribed from stock 0x57ce78 (wave22 verified:
+ * ghidra/open-2026-09-29 decomp/0057ce78.c: codes 0xc/0xd, family 0x100, 3 tries,
+ * memset 0x1a, log lines 0x269/0x273/0x278, data ptr at +14, length at +18). Driver transport,
  * transaction release, flags and log emission remain explicit providers.
  */
 extern int32_t audio_send_transaction(uint32_t code, uint32_t family,

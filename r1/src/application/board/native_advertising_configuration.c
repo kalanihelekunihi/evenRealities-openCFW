@@ -1,6 +1,7 @@
 /* R1 product-owned configuration recovered from authenticated native bodies.
  * Persistent storage and the status-ring publisher remain explicit providers. */
 #include <stdint.h>
+#include "../../include/r1_product_serial.h"
 #include <string.h>
 #define SVCALL_AS_NORMAL_FUNCTION
 #include "ble_advertising.h"
@@ -19,16 +20,9 @@ TEXT(fast_ring,"[RING]Fast advertising.");TEXT(fast_sdk,"Fast advertising.");
 TEXT(slow_ring,"[RING]Slow advertising.");TEXT(slow_sdk,"Slow advertising.");
 uint32_t r1_advertising_configuration_byte_get(void)
 {
-    uint8_t record[124];
-    (void)r1_kv_class_read(r1_device_info_kv_handle,record,sizeof(record));
+    uint8_t record[124]={0};
+    if(r1_kv_class_read(r1_device_info_kv_handle,record,sizeof(record)))return 0;
     return record[112];
-}
-void r1_advertising_product_sn_read(uint8_t *destination,uint8_t *length)
-{
-    uint8_t record[124];
-    (void)r1_kv_class_read(r1_device_info_kv_handle,record,sizeof(record));
-    if (record[61]!=255) { memcpy(destination,record+31,15);if (length) *length=15; }
-    else { memset(destination,255,15);if (length) *length=0; }
 }
 void r1_advertising_params_init(ble_adv_modes_config_t *config)
 {
@@ -51,8 +45,8 @@ void r1_advertising_event_plan_build(ble_adv_evt_t event)
     if (r1_structured_log_mode_get()&2u) nrf_log_frontend_std_0(0x001c0003,sdk);
     r1_advertising_status_publish(1,event==BLE_ADV_EVT_FAST ? 1:2);
 }
-__attribute__((naked)) uint32_t r1_advertising_controller_address_get(ble_gap_addr_t *address __attribute__((unused)))
-{ __asm__ volatile("svc %0\nbx lr"::"I"(SD_BLE_GAP_ADDR_GET):"r0","memory"); }
+/* Supplied by the pinned Nordic SVCALL binding in sdk/nordic_gap_address.c. */
+extern uint32_t r1_advertising_controller_address_get(ble_gap_addr_t *address);
 void r1_nordic_advertising_configuration(void)
 {
     ble_advertising_init_t init;memset(&init,0,sizeof(init));

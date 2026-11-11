@@ -1,0 +1,276 @@
+{
+  "schema": 1,
+  "target": "Replace touch crtbegin no-op hooks with C whose four complete linked bodies equal locked stock",
+  "source": "g2/src/touch/glue/touch_crt_runtime.c",
+  "provenance": "Adapted from pinned GCC 14.2 crtstuff.c; g2/docs/reference/findings-touch-case.md",
+  "stock_crtbegin_object": "g2/analysis/touch-crtstuff-source-rebuild-2026-10-09/outputs/crtbegin.o",
+  "stock_crtbegin_object_sha256": "8ac3ab1c8860a91acd384f1029e1b0dbacc5acfb6dfc91d06eccf92ed38f9135",
+  "qualified_regions": [
+    {
+      "symbol": "deregister_tm_clones",
+      "start": 224,
+      "end": 256,
+      "sha256": "a8afbe9c07812e93c981ad82d5e287962dead9f850d117d86fc4ebc91075bdbe",
+      "bindings": {
+        ".tm_clone_table": 536873092,
+        "__TMC_END__": 536873092,
+        "_ITM_deregisterTMCloneTable": null
+      },
+      "match_evidence": {
+        "method": "independently named native entry and all unrelocated bytes, followed by full linked equality",
+        "fixed_bytes": 20,
+        "compiled_pattern_sha256": "8e6f43c53e353e943206fe14b721e377ae3b89e5ca5a9877e7a0fd8b0ab2af61",
+        "relocations": [
+          {
+            "symbol": ".tm_clone_table",
+            "offset": 20,
+            "relocation_type": 2,
+            "address": 536873092,
+            "role": "native_literal_symbol"
+          },
+          {
+            "symbol": "__TMC_END__",
+            "offset": 24,
+            "relocation_type": 2,
+            "address": 536873092,
+            "role": "native_literal_symbol"
+          },
+          {
+            "symbol": "_ITM_deregisterTMCloneTable",
+            "offset": 28,
+            "relocation_type": 2,
+            "address": null,
+            "role": "undefined_weak_literal"
+          }
+        ]
+      }
+    },
+    {
+      "symbol": "register_tm_clones",
+      "start": 256,
+      "end": 296,
+      "sha256": "9841581c74076db53c2cf2e82b202580a184c96cbc2bf77c039ca109e0357d89",
+      "bindings": {
+        ".tm_clone_table": 536873092,
+        "__TMC_END__": 536873092,
+        "_ITM_registerTMCloneTable": null
+      },
+      "match_evidence": {
+        "method": "independently named native entry and all unrelocated bytes, followed by full linked equality",
+        "fixed_bytes": 28,
+        "compiled_pattern_sha256": "83d9f3bdee00648c181daf5dc0906f2d1d6115204c14e67f5fa9323fda6be368",
+        "relocations": [
+          {
+            "symbol": ".tm_clone_table",
+            "offset": 28,
+            "relocation_type": 2,
+            "address": 536873092,
+            "role": "native_literal_symbol"
+          },
+          {
+            "symbol": "__TMC_END__",
+            "offset": 32,
+            "relocation_type": 2,
+            "address": 536873092,
+            "role": "native_literal_symbol"
+          },
+          {
+            "symbol": "_ITM_registerTMCloneTable",
+            "offset": 36,
+            "relocation_type": 2,
+            "address": null,
+            "role": "undefined_weak_literal"
+          }
+        ]
+      }
+    },
+    {
+      "symbol": "__do_global_dtors_aux",
+      "start": 296,
+      "end": 340,
+      "sha256": "d5ffeb516b9b4170d57694b0d2b07650705e9a341e5d93b1bd378b5b6211d60d",
+      "bindings": {
+        "deregister_tm_clones": 13249,
+        "__deregister_frame_info": null,
+        ".touch_bss.crt_completed": 536873128,
+        ".eh_frame": 46444,
+        ".tm_clone_table": 536873092,
+        "__TMC_END__": 536873092,
+        "_ITM_deregisterTMCloneTable": null
+      },
+      "match_evidence": {
+        "method": "independently named native entry and all unrelocated bytes, followed by full linked equality",
+        "fixed_bytes": 24,
+        "compiled_pattern_sha256": "296801ac95cf217f5b82c9deb875593017e2622175a27c2e97e07c18d784c5f7",
+        "relocations": [
+          {
+            "symbol": "deregister_tm_clones",
+            "offset": 10,
+            "relocation_type": 10,
+            "address": 13249,
+            "role": "native_function"
+          },
+          {
+            "symbol": "__deregister_frame_info",
+            "offset": 22,
+            "relocation_type": 10,
+            "address": null,
+            "role": "undefined_weak_function"
+          },
+          {
+            "symbol": ".touch_bss.crt_completed",
+            "offset": 32,
+            "relocation_type": 2,
+            "address": 536873128,
+            "role": "native_literal_symbol"
+          },
+          {
+            "symbol": "__deregister_frame_info",
+            "offset": 36,
+            "relocation_type": 2,
+            "address": null,
+            "role": "undefined_weak_literal"
+          },
+          {
+            "symbol": ".eh_frame",
+            "offset": 40,
+            "relocation_type": 2,
+            "address": 46444,
+            "role": "native_literal_symbol"
+          }
+        ]
+      }
+    },
+    {
+      "symbol": "frame_dummy",
+      "start": 340,
+      "end": 376,
+      "sha256": "51544932bd515c49abc1c50c0db93739c087774111e39ded3b2c922000805b68",
+      "bindings": {
+        "__register_frame_info": null,
+        "register_tm_clones": 13281,
+        ".touch_bss.crt_object": 536873132,
+        ".eh_frame": 46444,
+        ".tm_clone_table": 536873092,
+        "__TMC_END__": 536873092,
+        "_ITM_registerTMCloneTable": null
+      },
+      "match_evidence": {
+        "method": "independently named native entry and all unrelocated bytes, followed by full linked equality",
+        "fixed_bytes": 16,
+        "compiled_pattern_sha256": "355cefa0801c5cd055dbd3b4becfa277527087c2dcddee2028a85bb13f11d0d0",
+        "relocations": [
+          {
+            "symbol": "__register_frame_info",
+            "offset": 12,
+            "relocation_type": 10,
+            "address": null,
+            "role": "undefined_weak_function"
+          },
+          {
+            "symbol": "register_tm_clones",
+            "offset": 16,
+            "relocation_type": 10,
+            "address": 13281,
+            "role": "native_function"
+          },
+          {
+            "symbol": "__register_frame_info",
+            "offset": 24,
+            "relocation_type": 2,
+            "address": null,
+            "role": "undefined_weak_literal"
+          },
+          {
+            "symbol": ".touch_bss.crt_object",
+            "offset": 28,
+            "relocation_type": 2,
+            "address": 536873132,
+            "role": "native_literal_symbol"
+          },
+          {
+            "symbol": ".eh_frame",
+            "offset": 32,
+            "relocation_type": 2,
+            "address": 46444,
+            "role": "native_literal_symbol"
+          }
+        ]
+      }
+    }
+  ],
+  "g2_exact_regions": 66,
+  "g2_exact_bytes": 3758,
+  "touch_exact_regions": 48,
+  "touch_exact_bytes": 3640,
+  "source_manifest_compiled_units": 4885,
+  "all_seven_strict_links_passed": true,
+  "touch_source_binary_bytes": 29348,
+  "candidate_bundle": {
+    "bytes": 4638336,
+    "sha256": "b7f00ac20ebf27524e55819d5124b5f6dc6eb85c396d5e493e9ede0fb627fd86",
+    "source_completeness_proven": false,
+    "locked_target_bytes": 4301227,
+    "locked_target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+    "matches_locked_target": false,
+    "manifest_sha256": "1e6f7da11f63cf063098de2213a304e0a15fe99e9a932cdef9fedf32d2856c61",
+    "components": [
+      {
+        "name": "firmware/codec.bin",
+        "bytes": 326092,
+        "sha256": "4969af8f9756f06b8641b41b7f5eaad36f318e42ddd577473003ed702f056775"
+      },
+      {
+        "name": "firmware/ble_em9305.bin",
+        "bytes": 248444,
+        "sha256": "a184ba4d7ffd72ebadee53e420ed69393033abe645e5487cbf88b5ca47dd848e"
+      },
+      {
+        "name": "firmware/touch.bin",
+        "bytes": 29384,
+        "sha256": "c86e039bb8f7163e7fe4adccf20a93408ed02d6a906260658795ecbd5cc48d85"
+      },
+      {
+        "name": "firmware/box.bin",
+        "bytes": 60200,
+        "sha256": "4270ba88b6fa35b9c2c818b177643c539681728ab5b315c282fd9fb0f6cbf381"
+      },
+      {
+        "name": "ota/s200_bootloader.bin",
+        "bytes": 154232,
+        "sha256": "90094f1c7b9b1986c9576146f4b2aa866ab668011938a00048c7b031ff5cf5c1"
+      },
+      {
+        "name": "ota/s200_firmware_ota.bin",
+        "bytes": 3819040,
+        "sha256": "2e715acee0e9f711884f2dbab5f0510a9588d8d9ddd87988f3bb8e4894af882b"
+      }
+    ],
+    "qualification": "six-component source-candidate OTA using an externally declared codec weight asset; structure validated, source completeness and device behavior unproven"
+  },
+  "hybrid_touch_totals": {
+    "resource-file": 32,
+    "binary-pull-through": 30792,
+    "source-built": 3640
+  },
+  "hybrid_bundle_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "checks": "make -C g2 sources-check; 16 verifier unit tests passed",
+  "file_sha256": {
+    "g2/src/touch/glue/touch_crt_runtime.c": "455fabc9d9c0276b994daa8b68db18f03e9a5828b724cd5c5ff59012deb050b2",
+    "g2/src/touch/glue/touch_runtime_0164_reset_entry.c": "8a22c213cb54876dbc2c641daeb9b1cbdf7d59074b038b22d34614dcbaa9ba91",
+    "g2/src/touch/link/g2-touch.ld": "8297de013b6d88ebe8edcfa6922b8b4b0c22f6f1970c3960d151efb20c631b66",
+    "g2/src/touch/link/g2-touch-stockram.ld.inc": "9ac71103098122c5215d2c9aa642c932c9a6a0a979eed3e5aaa1a5031f0ff6bd",
+    "g2/src/sources.json": "cc237699a896d427df7733656bd742d2bd2eaaa90c365733ab34404ae22a49c3",
+    "g2/symbols/touch.tsv": "68c29e4557a9037457321fa3c686c58bb6c44c92a4aa3790c673e02443f8c745",
+    "tools/build/source_providers.py": "5de773315ba6719a1556f3152907ee59ab3e40cf6799ff898ed096aa4842018a",
+    "tools/build/qualify_sources.py": "b1a916e70d879e2f07cc1233aa368e217e22224e3268109cd480e33a3652f7b9",
+    "tools/build/source-plan.json": "b52705fb0e13e577784d600354d6923820328135ebf5e1b25e3ff7a11b61e062",
+    "build/g2-touch-crt-final-qualify-20261111/qualification.json": "0ebe322e0acf6bcd31424a25fe30d6d1cb98fd89354dc9c7591d5327aa43f9f4",
+    "build/g2-touch-crt-final-qualify-20261111/source-plan.json": "04d3e37cda2ef26f914eb48be230c6bd152ddf76a49241671aac619b6713552e",
+    "build/g2-touch-crt-full-20261111/report.json": "dfa9b5349b5821fc32e4816b3a340bb5b422b8cba8dd2ba66a6a7f5f8b5cb75a",
+    "build/g2-touch-crt-bundle-20261111/link-report.json": "eea026eb1ee30b01aa4d0354732488245be3369060c0d44824b84c435f20d601",
+    "build/g2-touch-crt-final-hybrid-20261111/build-report.json": "254d9b8a3045d2d30e4cd7cca82a5f864a402d43c13e014227a2f3e36bf93ebb",
+    "build/g2-touch-crt-tests-20261111.log": "b6729e9d03944603ba237ee30daf23a2e041daf15228eb4340e6b6565b74b981"
+  },
+  "limits": "Exact match of four CRT code-and-literal bodies does not prove source completeness or device behavior. Source-only OTA differs in size and SHA-256 from locked target; hybrid equality retains binary pull-through."
+}

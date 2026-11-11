@@ -1,0 +1,29 @@
+{
+  "evidence_id": "ev_cb564bc2d46ac445c9afee642e387f4e8c4aa010a498673ed1af96d8783da8c1",
+  "subject": {
+    "name": "stock.elf",
+    "digest": {
+      "sha256": "25b4a29af80ec8edab5bd861ba9b74a6e22eab29dc3d7a809a16869e8a140f04"
+    },
+    "local_path": "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-queue-reset-c/stock.elf",
+    "format": "elf",
+    "architecture": "arm"
+  },
+  "normalized_result": {
+    "address": "0x3ee34",
+    "requested_bytes": 264,
+    "returned_bytes": 264,
+    "bytes_hex": "2de9f84f4ff4805046f0b0fb06003e483e493f4fa0eb01004fead0081dd00025a946ab46aa462c4620034ff4805231461ff0cefa002839d000204ff4007c00bf06ebc00200eb4421137889b203f00f030a2b1ed0002d23d024e052f02dfbc00703d152f029fb400705d52aa229a14ff0806052f0c7fb52f01ffb800705d5012101eb08402ba13af081fd0020f880bde8f88f526832b15a4504d393468a4601e001258946401c80b26045c9d3641ce4b2022cb9d315b1a7f8069004e00af10100c0f30900f88052f0f7fac00703d152f0f3fa400707d50095fb881ca21ba14ff0486052f08ffb52f0e7fa800707d5032101eb08402b46fa8820a13af052fd3046bde8f84f56f006bf",
+    "complete": true
+  },
+  "limitations": [
+    "The session serves operations only after Ghidra reports default auto-analysis complete; incomplete analysis does not expose partial results.",
+    "The imported Program and temporary project are ephemeral and deleted on close. Annotation operations edit session database metadata; original executable bytes are never written.",
+    "Cancelling an active Ghidra request terminates its ephemeral database and discards session annotations. The selected target remains open; the next provider query imports the original artifact again.",
+    "Default-space addresses use lowercase 0x-prefixed hexadecimal; other address spaces use <percent-encoded-space>:0x<hex>.",
+    "Bytes reflect Ghidra's initialized memory, including loader fixups. Reads stop at an unmapped or uninitialized byte and report completeness explicitly.",
+    "macOS sessions require a matching executable Ghidra native decompiler; REA checks for it but does not build native components or change Gatekeeper quarantine state."
+  ],
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "raw_artifact_match": true
+}

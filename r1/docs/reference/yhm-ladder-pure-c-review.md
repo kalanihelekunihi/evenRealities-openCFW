@@ -1,0 +1,13 @@
+# YHM2710 charger ladder ordinary C entry
+
+`r1/src/application/board/native_yhm_ladder.c` now has one ordinary C implementation of stock entry `0x35508` and its charger dispatch. The naked wrapper, private worker and dependency on a scratch byte forty bytes below caller SP are removed. This supersedes the [earlier kernel review](yhm-ladder-kernel-c-review.md).
+
+The selector retains all eight compare-absolute calls, earlier-entry tie selection, multiply-then-subtract rounding, live multiplier-table reads and register-one update. The low five register bits are preserved when the provider supplies the requested byte. Read/write return words remain ignored and the selected index is returned regardless of those words. The existing architectural compare-absolute helper remains; assembly removal applies to the ladder unit.
+
+The local read byte starts at zero. A provider that writes nothing therefore yields zero low bits instead of old stack data. This is a deliberate C fallback, not proof that the read succeeded or that zero is a physical charger default. No new persistent state is introduced. Providers must honor the one-byte buffer contract; overwriting a saved stack word is excluded.
+
+REA bytes match the locked raw application. The probe executes the actual C math helper and passes **26,720 stock/C pairs**, covering 355 input encodings, 32 FPSCR configurations, all 256 register byte values and raw transport statuses. Inputs include NaNs, infinities, subnormals and neighboring tie values. It compares all eight math operands/FPSCR snapshots, register arguments and output byte, return index, final FPSCR, callee-saved integer/FP registers, SP and interrupt masks. Another **90 unwritten-read cases** check the defined zero fallback across incoming stack patterns. Four compiled defects are rejected: later ties, discarded low bits, aborting on raw read status and reassociated multiplication.
+
+The normal open-toolchain build `build/sources-goal-r1-yhm-ladder-pure-c/report.json` compiles all **855 units** and completes both relocatable compositions. All **844 other nongenerated objects** and the multiplier table remain unchanged. Imports remain **62 application / 22 bootloader**. R1 manifest validation passes. Source-plan selections are unchanged; no new byte-identity claim is made.
+
+[Machine receipt](yhm-ladder-pure-c-review.json) binds sources, REA and ignored probe evidence under `build/goal-r1-yhm-ladder-pure-c/`. Register transport is modeled; table placement is controlled for comparisons. Physical charger behavior, single-wire timing, private frames, incidental scratch-register outputs, faults/concurrency and final application linking/startup remain unverified.

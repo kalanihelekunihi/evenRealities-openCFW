@@ -1,0 +1,237 @@
+{
+  "schema_version": 1,
+  "acceptance_target": "License-free C firmware; byte identity waived",
+  "entries": {
+    "0x00071714": "r1_gomore_native_engine_header_initialize",
+    "0x00071db6": "r1_gomore_native_engine_state_initialize"
+  },
+  "total_stock_c_pairs": 8704,
+  "verification": {
+    "build/goal-r1-engine-state-c": {
+      "pairs": 8192,
+      "elapsed_seconds": 16.220765582984313,
+      "fpscr_modes": 32,
+      "scope": "Actual C memset/header initialization,all public RAM boundaries,FP status,saved core/FP ABI,SP/masks;poisoned buffers and previous-pointer values including self/tail aliases."
+    },
+    "build/goal-r1-engine-state-integration-c": {
+      "pairs": 512,
+      "elapsed_seconds": 1.0803569999989122,
+      "fpscr_modes": 2,
+      "scope": "Actual C memset/header initialization,all public RAM boundaries,FP status,saved core/FP ABI,SP/masks;poisoned buffers and previous-pointer values including self/tail aliases."
+    }
+  },
+  "compiled_defect_controls": [
+    {
+      "defect": "header-clear-span",
+      "detected": true
+    },
+    {
+      "defect": "engine-clear-span",
+      "detected": true
+    },
+    {
+      "defect": "previous-pointer-offset",
+      "detected": true
+    },
+    {
+      "defect": "float-sentinel",
+      "detected": true
+    },
+    {
+      "defect": "mode-byte",
+      "detected": true
+    },
+    {
+      "defect": "initial-bound",
+      "detected": true
+    },
+    {
+      "defect": "nested-header",
+      "detected": true
+    }
+  ],
+  "coverage": {
+    "instruction_bytes": 174,
+    "instruction_starts": 50,
+    "entries": 2
+  },
+  "normal_build": {
+    "normal_report": "build/sources-goal-r1-engine-state-c/report.json",
+    "units": 948,
+    "unchanged_source_object_pairs": 937,
+    "generated_sources_excluded": [
+      "{gen}/r1_cmsis_os2_rtc.c",
+      "{gen}/fal_partition_r1_lookup.c",
+      "{gen}/fdb_utils_r1.c",
+      "{gen}/gh_demo_r1.c",
+      "{gen}/gh_demo_hook_r1.c",
+      "{gen}/gh_demo_user_r1.c",
+      "{gen}/app_error_handler_gcc_clang.c",
+      "{gen}/r1_startup_vectors.S",
+      "{gen}/gh_ppg_timestamp_hooks_r1.c",
+      "{gen}/r1_uecc.c"
+    ],
+    "new_sources": [
+      "r1/src/application/runtime/native_gomore_engine_state.c"
+    ],
+    "normal_provider_matches_tested_sections_and_decoded_symbols": true,
+    "no_new_assembly_or_writable_sections": true,
+    "imports": {
+      "r1-application": [
+        "GH3X2X_GetVersion",
+        "GH3X2X_UprotocolPacketFormat",
+        "Gh3x2xDemoSendProtocolData",
+        "__data_start__",
+        "gh3x2x_print_fmt",
+        "goodix_hba_calc",
+        "goodix_hba_essential_info_print",
+        "goodix_hrv_calc",
+        "goodix_nadt_calc",
+        "r1_cmb_code_end",
+        "r1_cmb_code_start",
+        "r1_cmb_stack_end",
+        "r1_cmb_stack_start",
+        "r1_eat_command_dispatch",
+        "r1_eat_core_init",
+        "r1_export_plan_command",
+        "r1_factory_input_record_plan_dispatch",
+        "r1_glasses_role_conflict_fault",
+        "r1_gomore_final_sleep_record_publish_native",
+        "r1_gomore_interval_statistics_native",
+        "r1_gomore_sleep_interval_select_native",
+        "r1_gomore_sleep_score_native",
+        "r1_gomore_sleep_stage_refine_native",
+        "r1_gomore_stage_5ef1c_native",
+        "r1_gomore_stage_5f264_native",
+        "r1_gomore_stage_5f3d8_native",
+        "r1_gomore_stage_5f4b6_native",
+        "r1_gomore_stage_5f56c_native",
+        "r1_gomore_stage_5feb8_native",
+        "r1_gomore_stage_605dc_native",
+        "r1_gomore_stage_60af4_native",
+        "r1_gomore_stage_60b80_native",
+        "r1_gomore_stage_60dc4_native",
+        "r1_gomore_stage_610c8_native",
+        "r1_gomore_stage_61198_native",
+        "r1_gomore_stage_61274_native",
+        "r1_gomore_stage_6138c_native",
+        "r1_gomore_stage_statistics_native",
+        "r1_gomore_table_record11_native",
+        "r1_health_auth_parameters_set",
+        "r1_health_lifecycle_engine_initialize_native",
+        "r1_health_settings_plan_command",
+        "r1_health_sync_provider_0003c0d8",
+        "r1_health_sync_provider_0003c304",
+        "r1_health_sync_provider_0003c958",
+        "r1_health_sync_provider_0003fcec",
+        "r1_health_sync_provider_0003fef4",
+        "r1_health_sync_provider_00040508",
+        "r1_health_sync_provider_00040bd4",
+        "r1_health_sync_provider_00040de0",
+        "r1_health_sync_provider_00041438",
+        "r1_health_sync_provider_00043eb0",
+        "r1_health_sync_provider_000440c4",
+        "r1_health_sync_provider_000446b4",
+        "r1_health_sync_provider_0005b39c",
+        "r1_health_sync_provider_0008f954",
+        "r1_legacy_command_route_frame",
+        "r1_manager_assertion_stack_transfer",
+        "r1_manager_logging_start_91504",
+        "r1_phone_role_assertion_stack_transfer",
+        "r1_structured_log_typed",
+        "r1_user_profile_handler"
+      ],
+      "r1-bootloader": [
+        "__bss_end__",
+        "__bss_start__",
+        "__data_start__",
+        "__etext",
+        "__start_crypto_data",
+        "__start_dfu_trans",
+        "__start_fs_data",
+        "__start_sdh_ble_observers",
+        "__start_sdh_req_observers",
+        "__start_sdh_soc_observers",
+        "__start_sdh_stack_observers",
+        "__start_sdh_state_observers",
+        "__start_svc_data",
+        "__stop_crypto_data",
+        "__stop_dfu_trans",
+        "__stop_fs_data",
+        "__stop_sdh_ble_observers",
+        "__stop_sdh_req_observers",
+        "__stop_sdh_soc_observers",
+        "__stop_sdh_stack_observers",
+        "__stop_sdh_state_observers",
+        "__stop_svc_data"
+      ]
+    }
+  },
+  "semantics": [
+    "Header71714 clears exactly0x1f8 bytes,then writes native raw -1.0 sentinels,the eight-word140..15c history,ffffffff sentinels164/168,halfword180,mode bytes0c/34/94/1c0,and the exact initial bounds54/58/5c. Logical store order and untouched neighboring RAM are preserved. No FP arithmetic or writable global state is introduced.",
+    "State71db6 clears exactly0x3894 bytes,caches and stores the previous-state pointer word at3890,then calls the actual C header initializer. Pointer arguments may refer inside the cleared record because the pointer value is saved rather than dereferenced. Actual C memset executes;no opaque memory-provider fallback is used."
+  ],
+  "limitations": [
+    "Mapped,word-aligned ordinary RAM records are assumed. Four buffer positions,eight prior-pointer values andfour poison bytes are covered across all32 FP configurations;the normal object repeats two modes. Public RAM excludes8192 private stack bytes below SP;void caller scratch/APSR are excluded. Full FPSCR,saved core/FP ABI,SP and masks are checked. Physical hardware,timing,interrupt/concurrency and MMIO write transaction semantics remain unverified.",
+    "All948 normal units compile without new imports or duplicate strong symbols;937 previous source/object pairs are unchanged. Normal provider matches candidate sections and decoded symbols after source-file symbol normalization. Imports remain62 application/22 boot. The native lifecycle initializer6fea0 remains unresolved:filter coefficient construction,profile conversion,composite reset and authorization/runtime checks still need native integration. Portable scratch/bool APIs remain separate contracts.",
+    "This remains relocatable source composition,not complete bootable firmware. Source-plan selection and native health-cache layout are unchanged."
+  ],
+  "evidence_sha256": {
+    "build/goal-r1-engine-state-c/admit.py": "5e2022eb0d78fb67f976b54ea393e00c53c72565878c169d31684ffb3b6b344a",
+    "build/goal-r1-engine-state-c/candidate.c": "2910eba3f2ae9d32777fe6eae2b3d98f7538131a0b6130ad06d63801923f4b2d",
+    "build/goal-r1-engine-state-c/candidate.elf": "b133270b662a1256468e740c948cbeb67c2f719dca6369eeab8badb88cbe8780",
+    "build/goal-r1-engine-state-c/candidate.o": "3850f8a925b8aa947b9e9d24622ef7fed7ecead9aa1ea314b7fa5fb59381de48",
+    "build/goal-r1-engine-state-c/compile-argv.json": "6de07634c1a0085fc0d64b5ec108b33dae5c393523430a7b121130184e0af47e",
+    "build/goal-r1-engine-state-c/controls-results.json": "09c4ddf788d18cd94c27c2451162fac7925ac1fd06aa73e132cd2723fc16285b",
+    "build/goal-r1-engine-state-c/controls.log": "d97a859333a6d6edc3dd5e6cdd2f46eb4ae61f7fa9640e6284ab52437aed3984",
+    "build/goal-r1-engine-state-c/controls.py": "d432c632ce4de10485ad1ef4ac0435be64ed9f1156f56f656c68e9d5b843d6b1",
+    "build/goal-r1-engine-state-c/coverage-results.json": "1c5a59a31d9d2f39e2240daf77ab7ee61a57003e1b9a651171dfefbaf252767d",
+    "build/goal-r1-engine-state-c/coverage.py": "58589a45bfe3130cd09058cd4be3be83a6f4fe9cfeadcc24b4c2155f93616f0f",
+    "build/goal-r1-engine-state-c/defect.c": "2bd52341e436cff070c77e0e857bf6239706a38de199b0995cc753df0e65c6f9",
+    "build/goal-r1-engine-state-c/defect.elf": "374a623b01b6dbea21e984acd34799e50d7ee7a6166fb20a03ec982356bafc12",
+    "build/goal-r1-engine-state-c/defect.o": "cfc5279265601876e481fab99b978576e2d385598f61c39922ef521b0ff42d78",
+    "build/goal-r1-engine-state-c/fixture.py": "52a21e6f862ae5b044dd4915b4021ce18cc3496fb30623605229e03dbe624186",
+    "build/goal-r1-engine-state-c/link-argv.json": "1f656405df0314eb7412578862505df0f04dbaede7006f3346e23dff1a2e38dc",
+    "build/goal-r1-engine-state-c/link.log": "c29191ec7031fc33f1004badfd1484025ea727487f37e4e3d1f2aeb0b08d7793",
+    "build/goal-r1-engine-state-c/normal-build.log": "60e20f0fa849148ed9c09f22eb7b44465d17b0531249094cd0bdeb678471176e",
+    "build/goal-r1-engine-state-c/prepare.py": "1a80fbfdf9897fd6b2706638cf0f8e4f522a46e93a9d370c843fdc125aed581b",
+    "build/goal-r1-engine-state-c/rea-6fea0.json": "51bcd6fea098b21e1fc0256effa7d354c1e0559f1fbf89236125503bda756329",
+    "build/goal-r1-engine-state-c/rea-711b4.json": "899d0256447773613bac605a030b0a71c8ec51de747cae93b758895f41d7cde9",
+    "build/goal-r1-engine-state-c/rea-71714.json": "e2ff59f09e0410091097d6115d28b8e584aabf2fbb51c34967171167616406a1",
+    "build/goal-r1-engine-state-c/rea-717ac.json": "29dfcf04b198272938a5e15633715526df5771d6b4d2caecc1d8bf8e448ad245",
+    "build/goal-r1-engine-state-c/rea-71c38.json": "d794525bcd478410a2febe318c7dfc045d31609ced6b541bfe8ce8900452a2fe",
+    "build/goal-r1-engine-state-c/rea-71d62.json": "2ddd5a8b539d5c693b1cc7f97c3574734ad96ee96d64871dbc16ff568b1e6477",
+    "build/goal-r1-engine-state-c/rea-71db6.json": "3646bbe3611e9ecc52c957bb1387bd5b81e0b5783c2a67f35f5d9bfe2e38afd2",
+    "build/goal-r1-engine-state-c/rea-71e34.json": "60f6132ceb075c4e7d87135e42d3ad9a6806fc07d8a7349cd6bff753b40529de",
+    "build/goal-r1-engine-state-c/rea-967c8.json": "434de2f1a76b363b8d66a8d6ef6f10669ff5bb0ecd16d5b3f522d5e69c5c6fd5",
+    "build/goal-r1-engine-state-c/rea-bytes.json": "fb5924c08efe731f8ce918ed4cd04c1ddff9701764d003cbc4b738560f6fdd44",
+    "build/goal-r1-engine-state-c/results.json": "a23ce8f8393318d35b10e551f80cc6a4b1a31243368df6c90af79d9a7f3a5c4e",
+    "build/goal-r1-engine-state-c/statelib.py": "f19fcc1304606e00f165d8d2ece5bffad4da8a2d61bcd68c1e8634e38cde34a6",
+    "build/goal-r1-engine-state-c/verify.log": "131e490ede5d344e5a8539d4a5335ccc70db7eacb397b876cffc72578b1331bf",
+    "build/goal-r1-engine-state-c/verify.py": "3864cc42e86ac8b9642ed8209002066b1c9735d9d781c6025630516c9dfa474e",
+    "build/goal-r1-engine-state-integration-c/audit.json": "8508921d414bf202878d47091b6ed00d90a27ebb1aa5eb594968c9bbb4970274",
+    "build/goal-r1-engine-state-integration-c/audit.py": "fceba95edca8fc3561850d025e1d84e34121acf31bd0cf3701738d09cb7f4518",
+    "build/goal-r1-engine-state-integration-c/document.py": "40cbd10aac3c251650c15bde7c205621351c981b28787b06fdbd42c35445cd06",
+    "build/goal-r1-engine-state-integration-c/fixture.py": "56bf3e23e8d42305ab3077a81ae5ef2046ba597683ebad4e8252a1511937febd",
+    "build/goal-r1-engine-state-integration-c/link-argv.json": "676b30e7923bd1a9b51739f297f19b48c3b5ed6a868041c13c153bdda42ae5f4",
+    "build/goal-r1-engine-state-integration-c/link.log": "c29191ec7031fc33f1004badfd1484025ea727487f37e4e3d1f2aeb0b08d7793",
+    "build/goal-r1-engine-state-integration-c/normal.elf": "0bb2e75870d6f0a86d486c1a958dd4f50101dcc01cf4c56c0188938febfa32cf",
+    "build/goal-r1-engine-state-integration-c/prepare.py": "baa84d826330ab1b4dd2bd630b59666d3ed1616316d5d75e588fa09bacd5ea3b",
+    "build/goal-r1-engine-state-integration-c/results.json": "12c5c534000a7b80dcb5ac882289afeb1b07c7d9abb3a25b62cafbcf210134b2",
+    "build/goal-r1-engine-state-integration-c/verify.log": "240269e94afb4bbc4c643851e366bf4f0d870ff0753d250b854f748cf3516285",
+    "build/goal-r1-engine-state-integration-c/verify.py": "6fe259126698d83cbf19b16185079332a41a616fa0da4ca3a51d3d0b5aa1e070",
+    "build/goal-r1-model-i8-convolution-c/stock-entry.elf": "8faf5ed5a7e99752b781c1118086f6ada13458b084bd14e8fbb9a2eb58a05e76",
+    "build/goal-r1-spo2-infer-support-c/normal-dependencies.a": "7e62b43a34fcf2b0ae34045a276bf4d564be5dde2ddb636dd0f69169c8843637",
+    "build/goal-r1-spo2-ratio-c/normal-stream-test.ld": "808ff9c64adde68933158791e9d115c75817ae1840e2bdcbcfa42c7a39314cc6",
+    "build/sources-goal-r1-engine-state-c/r1/r1-application/r1__src__application__runtime__native_gomore_engine_state.c.o": "cb4ac6b31f1920a75c8b4c53a8cc932e2dc422ee8b278fe653998ef46dd1436d",
+    "build/sources-goal-r1-engine-state-c/report.json": "99ee4aacd83aa4c7cb534f01a32b5e3b1964249baa1ca65e2d9ef87184a2c3e8",
+    "build/sources-goal-r1-spo2-confidence-integration-c/report.json": "afef9bec0f151429a32f83e6a0340ea260a1b02134dccd7c891a13a0054834b7",
+    "r1/blobs/official/r1-2.2.6.0009/application.bin": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "r1/docs/reference/FUNCTION-OWNERSHIP.csv": "0b90db5c87c135fb7f1dee50c7b555c05d5b674b7d0624e6954a5c69fe2a09c0",
+    "r1/src/application/runtime/native_gomore_engine_state.c": "26a735b850c2ab99a6d8e5d026beb314c3fef4c34ca7bddeb137d3b0f7a91aa0",
+    "r1/src/application/runtime/native_gomore_engine_state.h": "a9c96835e95818cc03572d3c061df84f61f11d77eaccdfccbc9d17563bf5c775",
+    "r1/src/config/runtime/native_health_cache.ld": "eb8f131c489cd818d4e36718718fa1989719ca0170f164541a1a5bf56dfc1ec3",
+    "r1/src/sources.json": "62767c27e22822f40208af0812717566f0da57b669462032ebef33a805216905",
+    "tools/build/source-plan.json": "eeb516e31b3310fb0718f36908977f8125723f7c5e0e86cd6744395826259a4d"
+  }
+}

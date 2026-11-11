@@ -9,11 +9,9 @@ uint32_t opencfw_boot_dfu_runtime_context_get(void)
     return UINT32_C(0x00604000);
 }
 
-__attribute__((naked))
+/* Stock reads the context word and returns a stale register; the caller
+ * treats it as void. */
 void opencfw_boot_dfu_runtime_context(void)
 {
-    __asm volatile(
-        "push {r7, lr}\n"
-        "bl opencfw_boot_dfu_runtime_context_get\n"
-        "pop {r0, pc}\n");
+    (void)opencfw_boot_dfu_runtime_context_get();
 }

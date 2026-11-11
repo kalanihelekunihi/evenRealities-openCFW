@@ -1,0 +1,113 @@
+{
+  "normal_report": "build/sources-goal-r1-ship-init-pure-c/report.json",
+  "report_sha256": "92376aff631ed30f207d32df6410d6f7bfc0626b196c4411ada9ffe7a987447c",
+  "unit": {
+    "source": "r1/src/application/board/native_yhm_initialize.c",
+    "payload": "r1-application",
+    "role": "candidate",
+    "toolchain": "clang",
+    "link": true,
+    "expect": "compile",
+    "returncode": 0,
+    "argv": [
+      "/usr/bin/clang",
+      "--target=arm-none-eabi",
+      "-mcpu=cortex-m4",
+      "-mthumb",
+      "-munaligned-access",
+      "-mfpu=fpv4-sp-d16",
+      "-mfloat-abi=hard",
+      "-std=c11",
+      "-Os",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-fshort-enums",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-fno-delete-null-pointer-checks",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/r1/src/vendor",
+      "-isystem",
+      "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
+      "-MD",
+      "-MF",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-ship-init-pure-c/r1/r1-application/r1__src__application__board__native_yhm_initialize.c.d",
+      "-c",
+      "/Users/kalani/Repo/evenRealities-openCFW/r1/src/application/board/native_yhm_initialize.c",
+      "-o",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-ship-init-pure-c/r1/r1-application/r1__src__application__board__native_yhm_initialize.c.o"
+    ],
+    "source_sha256": "543627e078e446ffc4bcc5373040cd58ac90bb31a509a308c48180bb5294ff73",
+    "object_sha256": "5b2738f119de9baa99e52ee5e01f0fcdca9a58249320c508b9a2334096872bc9",
+    "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-ship-init-pure-c/r1/r1-application/r1__src__application__board__native_yhm_initialize.c.o",
+    "strong": [
+      "r1_analog_init_delay",
+      "r1_sysctl_op_sequence_thunk",
+      "r1_yhm_device_handles_initialize"
+    ],
+    "weak": [],
+    "undefined": [
+      "r1_rtt_delay_cycles",
+      "r1_stock_dispatch_08",
+      "r1_stock_dispatch_18",
+      "r1_stock_registry_find",
+      "r1_yhm_transport_context"
+    ]
+  },
+  "direct": {
+    "paired_cases": 384,
+    "provider_calls_per_case": 202,
+    "delay_calls_per_case": 200,
+    "handle_reload_observed_after_open": true,
+    "private_frames_and_provider_saved_registers_excluded": true,
+    "limitations": [
+      "Registry and calibrated delay boundaries modeled; actual electrical/RTOS timing unproven.",
+      "APSR and all void-return caller-clobbered registers excluded; arbitrary aliases/faults/concurrency unproven."
+    ]
+  },
+  "negative": {
+    "199-delays": {
+      "rejected": true,
+      "diagnostic": "lays.o\narm-none-eabi-ld: warning: (r1_stock_dispatch_18): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-ship-init-pure-c/199-delays.o\narm-none-eabi-ld: warning: (r1_rtt_delay_cycles): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-ship-init-pure-c/199-delays.o\nTraceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-ship-init-pure-c/verify.py\", line 49, in <module>\n    for c in itertools.product([False,True],[0,0x20018000,0xffffffff,SP-24],[0,8,0xffffffff],range(4),[0x12345678,0xabcdef00],[0,1]):assert a(*c)==b(*c);n+=1\n                                                                                                                                                   ~^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-ship-init-pure-c/verify.py\", line 42, in run\n    assert u.reg_read(UC_ARM_REG_PC)==STOP and u.reg_read(UC_ARM_REG_SP)==SP and state['delays']==200\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    "wrong-cycle-count": {
+      "rejected": true,
+      "diagnostic": "x50754 if thunk else 0x80e74) if stock else syms['r1_sysctl_op_sequence_thunk' if thunk else 'r1_analog_init_delay'];u.emu_start(root|1,STOP,count=5000)\n                                                                                                                                ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 769, in emu_start\n    raise self._hook_exception\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 363, in wrapper\n    return func(uc, *args, **kwargs)\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 1063, in __hook_code_cb\n    callback(uc, address, size, user_data)\n    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-ship-init-pure-c/verify.py\", line 30, in code\n    i=state['delays'];assert r0==64000;call=['delay',r0];state['delays']+=1\n                             ^^^^^^^^^\nAssertionError\n"
+    },
+    "wrong-operation": {
+      "rejected": true,
+      "diagnostic": "u_start(root|1,STOP,count=5000)\n                                                                                                                                ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 769, in emu_start\n    raise self._hook_exception\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 363, in wrapper\n    return func(uc, *args, **kwargs)\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 1063, in __hook_code_cb\n    callback(uc, address, size, user_data)\n    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-ship-init-pure-c/verify.py\", line 27, in code\n    expect=state['handle']^(0x180 if state['mutation']>=1 else 0);assert r0==expect and r1==1 and r2==0;call=['operation',r0,r1,r2]\n                                                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    "stale-handle": {
+      "rejected": true,
+      "diagnostic": "u_start(root|1,STOP,count=5000)\n                                                                                                                                ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 769, in emu_start\n    raise self._hook_exception\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 363, in wrapper\n    return func(uc, *args, **kwargs)\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 1063, in __hook_code_cb\n    callback(uc, address, size, user_data)\n    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-ship-init-pure-c/verify.py\", line 27, in code\n    expect=state['handle']^(0x180 if state['mutation']>=1 else 0);assert r0==expect and r1==1 and r2==0;call=['operation',r0,r1,r2]\n                                                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    }
+  },
+  "audit": {
+    "changed": [
+      "r1/src/application/board/native_yhm_initialize.c"
+    ],
+    "unchanged_objects": 726,
+    "unchanged_other_text_sections": [
+      ".text.r1_yhm_device_handles_initialize"
+    ]
+  },
+  "rea": [
+    {
+      "path": "build/goal-r1-ship-init-pure-c/rea-0x80e74.json",
+      "sha256": "27a8023ea25ca01cb52795868c0798d6282bfd9fabcffdfb5e1112608cae12da"
+    },
+    {
+      "path": "build/goal-r1-ship-init-pure-c/rea-0x50754.json",
+      "sha256": "b8228adc61678b084b05b035c43b25b51103cf66fdb96becef57fe3de89987f9"
+    }
+  ],
+  "limits": [
+    "Registry and calibrated-delay boundaries modeled",
+    "Architectural delay primitive object unchanged",
+    "Private frames and void-return caller-clobbered registers excluded",
+    "No physical power/timing or full firmware link proof"
+  ]
+}

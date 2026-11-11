@@ -1,38 +1,20 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_32003c\n"
-".type opencfw_em9305_child_32003c,@function\n"
-"opencfw_em9305_child_32003c:\n"
-"L32003c:\n"
-"enter_s [r13-r14,blink]\n"
-"L32003e:\n"
-"ldb_s r2,[r0,0]\n"
-"L320040:\n"
-"mov_s r13,r0\n"
-"L320042:\n"
-"mov_s r14,r1\n"
-"L320044:\n"
-"asl_s r0,r2,0x4\n"
-"L320046:\n"
-"add2_s r0,r0,r1\n"
-"L320048:\n"
-"ld r1,[r0,opencfw_em9305_ext_init_actions_334e30]\n"
-"L320050:\n"
-"breq_s r1,0,L320058\n"
-"L320052:\n"
-"jl_s.d [r1]\n"
-"L320054:\n"
-"mov_s r0,r13\n"
-"L320056:\n"
-"ldb_s r2,[r13,0]\n"
-"L320058:\n"
-"add2_s r14,r14,r2\n"
-"L32005a:\n"
-"ldb r0,[r14,opencfw_em9305_ext_init_transitions_334e70]\n"
-"L320062:\n"
-"stb_s r0,[r13,0]\n"
-"L320064:\n"
-"leave_s [r13-r14,blink,pcl]\n"
-".size opencfw_em9305_child_32003c,.-opencfw_em9305_child_32003c\n"
-);
+#include <stdint.h>
+
+/* Native 0x32003c..0x320064: extended-init state machine step. Run the
+ * action for (state, event) from the ROM table at 0x334e30 if present, then
+ * move the state byte to the table entry at 0x334e70 and return it. */
+extern void (*const opencfw_em9305_ext_init_actions_334e30[16])(void);
+extern const uint8_t opencfw_em9305_ext_init_transitions_334e70[16];
+
+uint32_t opencfw_em9305_child_32003c(uintptr_t machine, uint32_t event)
+{
+    uint32_t state = *(volatile uint8_t *)machine;
+    uintptr_t action = (uintptr_t)opencfw_em9305_ext_init_actions_334e30[state * 4u + event];
+    if (action != 0u) {
+        ((void (*)(uintptr_t, uintptr_t, uint32_t))action)(machine, action, state);
+        state = *(volatile uint8_t *)machine;
+    }
+    uint32_t next = opencfw_em9305_ext_init_transitions_334e70[state * 4u + event];
+    *(volatile uint8_t *)machine = (uint8_t)next;
+    return next;
+}

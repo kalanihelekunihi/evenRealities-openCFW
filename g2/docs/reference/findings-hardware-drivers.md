@@ -35,8 +35,9 @@ The later sections (board configuration onwards) merge the hardware-relevant res
   `audio_ble_radio_stack_option_55c7e8` = `power_ctrl`, `audio_ble_radio_stack_config_55ca94` =
   `configure`, `audio_ble_radio_stack_start_55c32e` = `enable`,
   `audio_ble_vendor_receive_55cc1c` = `blocking_transfer`). The I2C callers above confirm their
-  roles. Still missing as C: `interrupt_enable` 0x55C498, `interrupt_status_get` 0x55C4D0,
-  `interrupt_clear` 0x55C518, `interrupt_service` 0x55C558 and the helper at 0x55C174. Stock
+  roles. C for `interrupt_enable` 0x55C498, `interrupt_status_get` 0x55C4D0,
+  `interrupt_clear` 0x55C518, `interrupt_service` 0x55C558 and the helper at 0x55C174
+  now lives in `g2/src/apollo-main/hal/iom/am_hal_iom_interrupt.c`. Stock
   predates SDK 5.2, so compiling the pinned AmbiqSuite 5.1.0 `am_hal_iom.c` alongside the island
   would duplicate it rather than replace it.
 
@@ -126,7 +127,12 @@ The later sections (board configuration onwards) merge the hardware-relevant res
   | +0x83C | bHP |
   | +0x854 | HP entries, 32 B each |
 
-  After every write to INTCLR, the code reads INTSTAT back.
+  The standalone `interrupt_clear` reads INTSTAT after writing INTCLR
+  (0x55C536/0x55C53E). Its raw decompiler output incorrectly omits that read;
+  the C preserves it with a volatile access. This is not universal: the
+  service routine's queue-drain path writes INTEN=0, INTCLR=0xFFFFFFFF,
+  then restores user INTEN (0x55C7BE/0x55C7CA/0x55C7D4), without an INTSTAT
+  read between them. See [the bounded IOM review](iom-interrupt-review.md).
 
 ## Boot, reset, watchdog and power modes
 
@@ -501,7 +507,11 @@ The later sections (board configuration onwards) merge the hardware-relevant res
 - Quad enable is SR bit 6, written with mask 0xC3, which also clears BP0..3.
 - MSPI timing scan: 36 base settings × RxDQSDelay 0..31. The longest run of ID matches wins and is
   stored at RAM 0x20000820.
-- `flash_mutex` is at 0x20072A88.
+- The mutex handle cell is at 0x20074548; its 0x50-byte static control-block
+  storage is at 0x20072A88. The native guard rereads the handle after its
+  NULL check, and initialization rereads it after publication. See
+  [the flash guard review](norflash-guard-review.md) for the repaired C
+  qualifiers and 1,266 controlled stock/C execution cases.
 - Stock bug: a failed RST (0x99) logs "Write enable failed before sector erase".
 - Resource reads use 0x6C (4-byte quad-output read). littlefs starts at NOR 0x01400000.
 - XIP: firmware treats 0x80000000..0x81FFFFFF as the NOR window. The OTA storage type 1 check
@@ -755,14 +765,16 @@ Other licence notes:
 - **Upstream TDK driver.** Add `third-party/upstream/invensense-icm45608` sources as `upstream` units,
   then map the IMU glue's `inv_imu_*_<addr>` externs onto them, after reconciling the stock variants
   listed above.
-- **IOM HAL interrupt functions.** 0x55C174, 0x55C498, 0x55C4D0, 0x55C518 and 0x55C558 have no C
-  yet. The island's existing functions should be renamed from `audio_ble_*` to their `am_hal_iom_*`
-  roles.
+- **IOM HAL interrupt functions.** Existing C for 0x55C174, 0x55C498, 0x55C4D0,
+  0x55C518 and 0x55C558 passed the bounded comparisons in
+  [the IOM review](iom-interrupt-review.md). Whole-image pseudocode admission
+  and hardware validation remain open. The rest of the island still uses
+  older `audio_ble_*` names for some `am_hal_iom_*` roles.
+- **uLED MSPI duplicates resolved.** The duplicate implementations at
+  0x5926EE, 0x59C876, 0x59C980 and 0x59CA2C were consolidated after REA
+  analysis and 129 stock/canonical/superseded execution comparisons. See
+  [the consolidation review](uled-mspi-consolidation-review.md).
 - **Same stock function defined twice under different names** (pre-existing display units):
-  - 0x5926EE: `display_driver_uled_command_5926ee` and `display_driver_uled_type0_aux_reg_write_5926ee`.
-  - 0x59C876: `display_driver_uled_device_check_59c876` and `display_driver_uled_device_reconfigure_59c876`.
-  - 0x59C980: `display_driver_uled_packet_begin_59c980` and `display_driver_uled_serial_mode_59c980`.
-  - 0x59CA2C: `display_driver_uled_packet_end_59ca2c` and `display_driver_uled_quad_mode_59ca2c`.
   - 0x449376: `audio_delay` and `g2_norflash_scheduler_delay_449376`.
   - 0x464D1C: `audio_ble_send_status_message` and `audio_uart_input_event_send_464d1c`.
 - **Existing copies that keep a non-stock name and so cannot anchor.** Charger: `CHG_InitBatterySync`,

@@ -8,14 +8,19 @@ const uint32_t r1_cosf_data[14]={0x7e921fb6,0x394c6d33,0x3c0882da,0xbe2aaaa0,0x4
 typedef union {uint32_t bits;float value;} word_float;
 static float fbits(uint32_t bits){word_float x={.bits=bits};return x.value;}
 static uint32_t bits(float value){word_float x={.value=value};return x.bits;}
-#define BINARY(name,instruction) static float name(float a,float b){float r;__asm__ volatile(instruction " %0,%1,%2":"=t"(r):"t"(a),"t"(b));return r;}
-BINARY(add,"vadd.f32")
-BINARY(sub,"vsub.f32")
-BINARY(mul,"vmul.f32")
-static float madd(float accumulator,float a,float b){__asm__ volatile("vmla.f32 %0,%1,%2":"+t"(accumulator):"t"(a),"t"(b));return accumulator;}
-static float msub(float accumulator,float a,float b){__asm__ volatile("vmls.f32 %0,%1,%2":"+t"(accumulator):"t"(a),"t"(b));return accumulator;}
-static float negate(float value){__asm__ volatile("vneg.f32 %0,%0":"+t"(value));return value;}
-static uint32_t to_integer(float value){__asm__ volatile("vcvt.s32.f32 %0,%0":"+t"(value));return bits(value);}
+#if defined(__clang__)
+#define NATIVE_FP __attribute__((noinline))
+#else
+#define NATIVE_FP __attribute__((noinline,noclone))
+#endif
+static NATIVE_FP float add(float a,float b){return a+b;}
+static NATIVE_FP float sub(float a,float b){return a-b;}
+static NATIVE_FP float mul(float a,float b){return a*b;}
+static NATIVE_FP float madd(float accumulator,float a,float b){return accumulator+a*b;}
+static NATIVE_FP float msub(float accumulator,float a,float b){return accumulator-a*b;}
+static NATIVE_FP float negate(float value){return -value;}
+/* Only called after finite moderate-range bias reduction; magnitude < 2^15. */
+static NATIVE_FP uint32_t to_integer(float value){return (uint32_t)(int32_t)value;}
 float r1_native_cosf(float value)
 {
     uint32_t input=bits(value),doubled=input<<1,quadrant;

@@ -1,0 +1,334 @@
+{
+  "source": {
+    "source": "r1/src/application/runtime/native_temperature_reduce.c",
+    "payload": "r1-application",
+    "role": "candidate",
+    "toolchain": "clang",
+    "link": true,
+    "expect": "compile",
+    "returncode": 0,
+    "argv": [
+      "/usr/bin/clang",
+      "--target=arm-none-eabi",
+      "-mcpu=cortex-m4",
+      "-mthumb",
+      "-munaligned-access",
+      "-mfloat-abi=hard",
+      "-mfpu=fpv4-sp-d16",
+      "-std=c11",
+      "-Os",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-fshort-enums",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-MD",
+      "-MF",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-temp-reduce-c/r1/r1-application/r1__src__application__runtime__native_temperature_reduce.c.d",
+      "-c",
+      "/Users/kalani/Repo/evenRealities-openCFW/r1/src/application/runtime/native_temperature_reduce.c",
+      "-o",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-temp-reduce-c/r1/r1-application/r1__src__application__runtime__native_temperature_reduce.c.o"
+    ],
+    "source_sha256": "db9b5960aae7159c26819d3195551bb307500c99abe9eb2d8a2d3cbadeb35ddf",
+    "object_sha256": "d7aae0ec3f6b791ae1a67024d826bad6914e4cebf4a0f28f77f0fb11f7c46d14",
+    "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-temp-reduce-c/r1/r1-application/r1__src__application__runtime__native_temperature_reduce.c.o",
+    "strong": [
+      "r1_temp_reduce_ring",
+      "r1_temp_reduce_sdk",
+      "r1_temperature_pair_reduce"
+    ],
+    "weak": [],
+    "undefined": [
+      "nrf_log_frontend_std_6",
+      "osDelay",
+      "r1_gxt310_bus_acquire",
+      "r1_gxt310_bus_release",
+      "r1_gxt310_disable_pair_native",
+      "r1_gxt310_enable_pair_native",
+      "r1_gxt310_temperature_channel0",
+      "r1_gxt310_temperature_channel2",
+      "r1_structured_log_format",
+      "r1_structured_log_mode_get",
+      "r1_temperature_calibration_read"
+    ]
+  },
+  "normal_report": "build/sources-goal-r1-temp-reduce-c/report.json",
+  "main_validation": {
+    "paired_cases": 36720,
+    "frame": 72,
+    "all_provider_R4_R11_and_log_arguments": true,
+    "independent_trimmed_calibration_oracle": true,
+    "limitations": [
+      "Initial stack-save order and private scratch accesses excluded",
+      "All hardware/record/log providers modeled; no electrical, timing, arbitrary alias/fault or concurrency proof"
+    ]
+  },
+  "full_frame_and_calibration_alias_validation": {
+    "paired_cases": 6120,
+    "frame": 72,
+    "all_provider_R4_R11_and_log_arguments": true,
+    "independent_trimmed_calibration_oracle": true,
+    "limitations": [
+      "Initial stack-save order and private scratch accesses excluded",
+      "All hardware/record/log providers modeled; no electrical, timing, arbitrary alias/fault or concurrency proof"
+    ],
+    "full_72_byte_provider_snapshots_compared": true,
+    "output_aliases_calibration_offsets": [
+      19,
+      20,
+      21,
+      22
+    ]
+  },
+  "direct_product_smoke": {
+    "paired_cases": 120,
+    "frame": 72,
+    "all_provider_R4_R11_and_log_arguments": true,
+    "independent_trimmed_calibration_oracle": true,
+    "limitations": [
+      "Initial stack-save order and private scratch accesses excluded",
+      "All hardware/record/log providers modeled; no electrical, timing, arbitrary alias/fault or concurrency proof"
+    ]
+  },
+  "probe_to_product_code_data_relocation_equality": true,
+  "negative_controls": {
+    "wrong-sentinels": {
+      "rejected": true,
+      "stderr": "arm-none-eabi-ld: warning: (r1_gxt310_bus_acquire): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-temp-reduce-c/wrong-sentinels.o\narm-none-eabi-ld: warning: (r1_gxt310_enable_pair_native): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-temp-reduce-c/wrong-sentinels.o\narm-none-eabi-ld: warning: (osDelay): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-temp-reduce-c/wrong-sentinels.o\narm-none-eabi-ld: warning: (r1_gxt310_temperature_channel0): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-temp-reduce-c/wrong-sentinels.o\narm-none-eabi-ld: warning: (r1_gxt310_temperature_channel2): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-temp-reduce-c/wrong-sentinels.o\narm-none-eabi-ld: warning: (osDelay): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-temp-reduce-c/wrong-sentinels.o\narm-none-eabi-ld: warning: (r1_gxt310_disable_pair_native): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-temp-reduce-c/wrong-sentinels.o\narm-none-eabi-ld: warning: (r1_gxt310_bus_release): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-temp-reduce-c/wrong-sentinels.o\narm-none-eabi-ld: warning: (r1_temperature_calibration_read): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-temp-reduce-c/wrong-sentinels.o\narm-none-eabi-ld: warning: (r1_structured_log_mode_get): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-temp-reduce-c/wrong-sentinels.o\narm-none-eabi-ld: warning: (r1_structured_log_mode_get): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-temp-reduce-c/wrong-sentinels.o\narm-none-eabi-ld: warning: (r1_structured_log_format): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-temp-reduce-c/wrong-sentinels.o\narm-none-eabi-ld: warning: (r1_structured_log_mode_get): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-temp-reduce-c/wrong-sentinels.o\narm-none-eabi-ld: warning: (nrf_log_frontend_std_6): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-temp-reduce-c/wrong-sentinels.o\nTraceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-temp-reduce-c/reject-wrong-sentinels.py\", line 74, in <module>\n    c=(samples,cal,mode,status,offset);assert a(*c)==b(*c),c;n+=1\n                                              ^^^^^^^^^^^^\nAssertionError: ([(4294967295, 4294967293), (4294967294, 4294967291), (4294967293, 4294967289), (4294967292, 4294967287), (4294967291, 4294967285), (4294967290, 4294967283), (4294967289, 4294967281), (4294967288, 4294967279), (4294967287, 4294967277), (4294967286, 4294967275)], b'\\x00\\x01\\x00\\x01\\x02\\x00\\x00\\x00', (0, 4, 2), 0, 0)\n"
+    },
+    "unsigned-trim": {
+      "rejected": true,
+      "stderr": "arm-none-eabi-ld: warning: (r1_gxt310_bus_acquire): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-temp-reduce-c/unsigned-trim.o\narm-none-eabi-ld: warning: (r1_gxt310_enable_pair_native): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-temp-reduce-c/unsigned-trim.o\narm-none-eabi-ld: warning: (osDelay): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-temp-reduce-c/unsigned-trim.o\narm-none-eabi-ld: warning: (r1_gxt310_temperature_channel0): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-temp-reduce-c/unsigned-trim.o\narm-none-eabi-ld: warning: (r1_gxt310_temperature_channel2): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-temp-reduce-c/unsigned-trim.o\narm-none-eabi-ld: warning: (osDelay): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-temp-reduce-c/unsigned-trim.o\narm-none-eabi-ld: warning: (r1_gxt310_disable_pair_native): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-temp-reduce-c/unsigned-trim.o\narm-none-eabi-ld: warning: (r1_gxt310_bus_release): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-temp-reduce-c/unsigned-trim.o\narm-none-eabi-ld: warning: (r1_temperature_calibration_read): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-temp-reduce-c/unsigned-trim.o\narm-none-eabi-ld: warning: (r1_structured_log_mode_get): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-temp-reduce-c/unsigned-trim.o\narm-none-eabi-ld: warning: (r1_structured_log_mode_get): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-temp-reduce-c/unsigned-trim.o\narm-none-eabi-ld: warning: (r1_structured_log_format): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-temp-reduce-c/unsigned-trim.o\narm-none-eabi-ld: warning: (r1_structured_log_mode_get): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-temp-reduce-c/unsigned-trim.o\narm-none-eabi-ld: warning: (nrf_log_frontend_std_6): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-temp-reduce-c/unsigned-trim.o\nTraceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-temp-reduce-c/reject-unsigned-trim.py\", line 74, in <module>\n    c=(samples,cal,mode,status,offset);assert a(*c)==b(*c),c;n+=1\n                                                     ~^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-temp-reduce-c/reject-unsigned-trim.py\", line 68, in run\n    if offset>=0:assert output==oracle(samples,cal),(output,oracle(samples,cal))\n                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: (b'\\x02\\xf9\\xff\\xf6\\xff', b'\\x02\\xfa\\xff\\xf6\\xff')\n"
+    },
+    "wrong-calibration-mode": {
+      "rejected": true,
+      "stderr": "arm-none-eabi-ld: warning: (r1_gxt310_bus_acquire): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-temp-reduce-c/wrong-calibration-mode.o\narm-none-eabi-ld: warning: (r1_gxt310_enable_pair_native): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-temp-reduce-c/wrong-calibration-mode.o\narm-none-eabi-ld: warning: (osDelay): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-temp-reduce-c/wrong-calibration-mode.o\narm-none-eabi-ld: warning: (r1_gxt310_temperature_channel0): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-temp-reduce-c/wrong-calibration-mode.o\narm-none-eabi-ld: warning: (r1_gxt310_temperature_channel2): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-temp-reduce-c/wrong-calibration-mode.o\narm-none-eabi-ld: warning: (osDelay): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-temp-reduce-c/wrong-calibration-mode.o\narm-none-eabi-ld: warning: (r1_gxt310_disable_pair_native): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-temp-reduce-c/wrong-calibration-mode.o\narm-none-eabi-ld: warning: (r1_gxt310_bus_release): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-temp-reduce-c/wrong-calibration-mode.o\narm-none-eabi-ld: warning: (r1_temperature_calibration_read): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-temp-reduce-c/wrong-calibration-mode.o\narm-none-eabi-ld: warning: (r1_structured_log_mode_get): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-temp-reduce-c/wrong-calibration-mode.o\narm-none-eabi-ld: warning: (r1_structured_log_mode_get): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-temp-reduce-c/wrong-calibration-mode.o\narm-none-eabi-ld: warning: (r1_structured_log_format): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-temp-reduce-c/wrong-calibration-mode.o\narm-none-eabi-ld: warning: (r1_structured_log_mode_get): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-temp-reduce-c/wrong-calibration-mode.o\narm-none-eabi-ld: warning: (nrf_log_frontend_std_6): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-temp-reduce-c/wrong-calibration-mode.o\nTraceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-temp-reduce-c/reject-wrong-calibration-mode.py\", line 74, in <module>\n    c=(samples,cal,mode,status,offset);assert a(*c)==b(*c),c;n+=1\n                                                     ~^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-temp-reduce-c/reject-wrong-calibration-mode.py\", line 68, in run\n    if offset>=0:assert output==oracle(samples,cal),(output,oracle(samples,cal))\n                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: (b'\\x02\\xfa\\xff\\xf2\\xff', b'\\x02\\xfa\\xff\\xf6\\xff')\n"
+    },
+    "nine-samples": {
+      "rejected": true,
+      "stderr": "arm-none-eabi-ld: warning: (r1_gxt310_bus_acquire): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-temp-reduce-c/nine-samples.o\narm-none-eabi-ld: warning: (r1_gxt310_enable_pair_native): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-temp-reduce-c/nine-samples.o\narm-none-eabi-ld: warning: (osDelay): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-temp-reduce-c/nine-samples.o\narm-none-eabi-ld: warning: (r1_gxt310_temperature_channel0): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-temp-reduce-c/nine-samples.o\narm-none-eabi-ld: warning: (r1_gxt310_temperature_channel2): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-temp-reduce-c/nine-samples.o\narm-none-eabi-ld: warning: (osDelay): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-temp-reduce-c/nine-samples.o\narm-none-eabi-ld: warning: (r1_gxt310_disable_pair_native): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-temp-reduce-c/nine-samples.o\narm-none-eabi-ld: warning: (r1_gxt310_bus_release): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-temp-reduce-c/nine-samples.o\narm-none-eabi-ld: warning: (r1_temperature_calibration_read): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-temp-reduce-c/nine-samples.o\narm-none-eabi-ld: warning: (r1_structured_log_mode_get): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-temp-reduce-c/nine-samples.o\narm-none-eabi-ld: warning: (r1_structured_log_mode_get): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-temp-reduce-c/nine-samples.o\narm-none-eabi-ld: warning: (r1_structured_log_format): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-temp-reduce-c/nine-samples.o\narm-none-eabi-ld: warning: (r1_structured_log_mode_get): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-temp-reduce-c/nine-samples.o\narm-none-eabi-ld: warning: (nrf_log_frontend_std_6): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-temp-reduce-c/nine-samples.o\nTraceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-temp-reduce-c/reject-nine-samples.py\", line 74, in <module>\n    c=(samples,cal,mode,status,offset);assert a(*c)==b(*c),c;n+=1\n                                                     ~^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-temp-reduce-c/reject-nine-samples.py\", line 64, in run\n    u.emu_start((0x51108 if stock else root)|1,STOP,count=12000)\n    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 769, in emu_start\n    raise self._hook_exception\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 363, in wrapper\n    return func(uc, *args, **kwargs)\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 1063, in __hook_code_cb\n    callback(uc, address, size, user_data)\n    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-temp-reduce-c/reject-nine-samples.py\", line 46, in code\n    assert state['firsts']==state['seconds']==10 and state['delays']==11;assert r0==SP-52 and bytes(u.mem_read(r0,8))==b'\\0'*8\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    "collapsed-mode": {
+      "rejected": true,
+      "stderr": "arm-none-eabi-ld: warning: (r1_gxt310_bus_acquire): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-temp-reduce-c/collapsed-mode.o\narm-none-eabi-ld: warning: (r1_gxt310_enable_pair_native): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-temp-reduce-c/collapsed-mode.o\narm-none-eabi-ld: warning: (osDelay): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-temp-reduce-c/collapsed-mode.o\narm-none-eabi-ld: warning: (r1_gxt310_temperature_channel0): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-temp-reduce-c/collapsed-mode.o\narm-none-eabi-ld: warning: (r1_gxt310_temperature_channel2): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-temp-reduce-c/collapsed-mode.o\narm-none-eabi-ld: warning: (osDelay): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-temp-reduce-c/collapsed-mode.o\narm-none-eabi-ld: warning: (r1_gxt310_disable_pair_native): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-temp-reduce-c/collapsed-mode.o\narm-none-eabi-ld: warning: (r1_gxt310_bus_release): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-temp-reduce-c/collapsed-mode.o\narm-none-eabi-ld: warning: (r1_temperature_calibration_read): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-temp-reduce-c/collapsed-mode.o\narm-none-eabi-ld: warning: (r1_structured_log_mode_get): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-temp-reduce-c/collapsed-mode.o\narm-none-eabi-ld: warning: (r1_structured_log_format): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-temp-reduce-c/collapsed-mode.o\narm-none-eabi-ld: warning: (r1_structured_log_mode_get): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-temp-reduce-c/collapsed-mode.o\narm-none-eabi-ld: warning: (nrf_log_frontend_std_6): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-temp-reduce-c/collapsed-mode.o\nTraceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-temp-reduce-c/reject-collapsed-mode.py\", line 74, in <module>\n    c=(samples,cal,mode,status,offset);assert a(*c)==b(*c),c;n+=1\n                                              ^^^^^^^^^^^^\nAssertionError: ([(4294967295, 4294967293), (4294967294, 4294967291), (4294967293, 4294967289), (4294967292, 4294967287), (4294967291, 4294967285), (4294967290, 4294967283), (4294967289, 4294967281), (4294967288, 4294967279), (4294967287, 4294967277), (4294967286, 4294967275)], b'\\x00\\x01\\x00\\x01\\x02\\x00\\x00\\x00', (0, 4, 2), 0, 0)\n"
+    }
+  },
+  "strict_initial_save_order_counterexample": {
+    "native": [
+      [
+        -40,
+        4,
+        536969216
+      ],
+      [
+        -36,
+        4,
+        1145324608
+      ],
+      [
+        -32,
+        4,
+        1145324609
+      ],
+      [
+        -28,
+        4,
+        1145324610
+      ],
+      [
+        -24,
+        4,
+        1145324611
+      ],
+      [
+        -20,
+        4,
+        1145324612
+      ],
+      [
+        -16,
+        4,
+        1145324613
+      ],
+      [
+        -12,
+        4,
+        1145324614
+      ],
+      [
+        -8,
+        4,
+        1145324615
+      ],
+      [
+        -4,
+        4,
+        17825793
+      ]
+    ],
+    "C": [
+      [
+        -36,
+        4,
+        1145324608
+      ],
+      [
+        -32,
+        4,
+        1145324609
+      ],
+      [
+        -28,
+        4,
+        1145324610
+      ],
+      [
+        -24,
+        4,
+        1145324611
+      ],
+      [
+        -20,
+        4,
+        1145324612
+      ],
+      [
+        -16,
+        4,
+        1145324613
+      ],
+      [
+        -12,
+        4,
+        1145324614
+      ],
+      [
+        -8,
+        4,
+        1145324615
+      ],
+      [
+        -4,
+        4,
+        17825793
+      ]
+    ],
+    "strict_order_rejected": true
+  },
+  "REA": {
+    "evidence_id": "ev_08e7934ff066f0c5e23d95993e00a77d71111ae9fa91adc6b082bd0e03880be7",
+    "subject": {
+      "name": "stock.elf",
+      "digest": {
+        "sha256": "25b4a29af80ec8edab5bd861ba9b74a6e22eab29dc3d7a809a16869e8a140f04"
+      },
+      "local_path": "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-queue-reset-c/stock.elf",
+      "format": "elf",
+      "architecture": "arm"
+    },
+    "provider": {
+      "id": "ghidra",
+      "name": "Ghidra",
+      "version": "12.1.4"
+    },
+    "analysis_profile": {
+      "provider": {
+        "id": "ghidra",
+        "name": "Ghidra",
+        "version": "12.1.4"
+      },
+      "parameters": {
+        "target_kind": "executable",
+        "target_format": "elf",
+        "architecture": "arm",
+        "available_architectures": [
+          "arm"
+        ],
+        "import_mode": "ephemeral-source-immutable",
+        "annotation_policy": "atomic-function-entry-metadata-v1",
+        "load_image_observations": "source-mappings-entry-context-v2",
+        "function_body_evidence": "complete-inclusive-ranges-v1",
+        "function_references": "complete-body-and-entry-reference-manager-v2",
+        "call_relationship_coverage": "function-body-call-coverage-v5",
+        "function_dossier_coverage": "observed-facets-and-call-relationships-v1",
+        "string_inventory_evidence": "defined-data-coverage-v1",
+        "location_resolution": "explicit-address-exact-entry-symbol-first-v3",
+        "procedure_file_offset_resolution": "address-first-unique-target-source-mapping-v2",
+        "instruction_flow_evidence": "decoded-return-pcode-v1",
+        "instruction_references": "exact-address-incoming-v1",
+        "function_boundary_observations": "ghidra-function-boundary-limitations-v3",
+        "no_return_repair": "returning-imports-decoded-return-v2",
+        "process_launch": "inspected-jvm-launch-support-v1",
+        "jump_table_evidence": "typed-case-default-blocks-v1",
+        "decompiler_jump_loads": true,
+        "loader": "auto-from-header",
+        "language_id": "auto-from-header",
+        "compiler_spec_id": "auto-default",
+        "analyzer_preset": "ghidra-default"
+      },
+      "digest": "7e46711069eea041af1b9b99e34115c13332795e5cda76e584a722f529ec70de"
+    },
+    "predicate_type": "rea.analysis",
+    "operation": "read_bytes",
+    "parameters": {
+      "address": "0x51108",
+      "length": 344
+    },
+    "raw_result": {
+      "address": "0x51108",
+      "requested_bytes": 344,
+      "returned_bytes": 344,
+      "bytes_hex": "2de9f14f002088b04ff6ff752c04059082468346a946a0460690fff701fffff739ff50202cf012f85ff000071ef06afb06461ef074fbb24483444e4500dab146464500ddb046a84200da0546a04200dd044605202bf0faff7f1cffb20a2fe5d3fff70efffff7c6fe05a82af0b3fcaaeb0901a1eb0800c11700eb517040f3cf07abeb0500001bc11700eb517040f3cf06089805a9a0f801700898a0f8036000200a5cff2a09d0bdf91510bdf918009df8142032b1012a06d007e0401c0628efdb13e0791a00e039440fb20899a1f801709df8171011b1012902d003e0301a00e0304406b20898a0f8036008980221017040f078f9c00703d140f074f940070cd5cdf80880cde903540f4acde900693b4611464ff0586040f00bfa40f063f980070fd50a480a49cde90254401ac0080321cde9009801eb004033463a46054928f0effb09b0bde8f08fe4070c00fc440c001c440c0030080c00",
+      "complete": true
+    },
+    "normalized_result": {
+      "address": "0x51108",
+      "requested_bytes": 344,
+      "returned_bytes": 344,
+      "bytes_hex": "2de9f14f002088b04ff6ff752c04059082468346a946a0460690fff701fffff739ff50202cf012f85ff000071ef06afb06461ef074fbb24483444e4500dab146464500ddb046a84200da0546a04200dd044605202bf0faff7f1cffb20a2fe5d3fff70efffff7c6fe05a82af0b3fcaaeb0901a1eb0800c11700eb517040f3cf07abeb0500001bc11700eb517040f3cf06089805a9a0f801700898a0f8036000200a5cff2a09d0bdf91510bdf918009df8142032b1012a06d007e0401c0628efdb13e0791a00e039440fb20899a1f801709df8171011b1012902d003e0301a00e0304406b20898a0f8036008980221017040f078f9c00703d140f074f940070cd5cdf80880cde903540f4acde900693b4611464ff0586040f00bfa40f063f980070fd50a480a49cde90254401ac0080321cde9009801eb004033463a46054928f0effb09b0bde8f08fe4070c00fc440c001c440c0030080c00",
+      "complete": true
+    },
+    "confidence": "observed",
+    "authority": "shipped-artifact",
+    "environment": null,
+    "limitations": [
+      "The session serves operations only after Ghidra reports default auto-analysis complete; incomplete analysis does not expose partial results.",
+      "The imported Program and temporary project are ephemeral and deleted on close. Annotation operations edit session database metadata; original executable bytes are never written.",
+      "Cancelling an active Ghidra request terminates its ephemeral database and discards session annotations. The selected target remains open; the next provider query imports the original artifact again.",
+      "Default-space addresses use lowercase 0x-prefixed hexadecimal; other address spaces use <percent-encoded-space>:0x<hex>.",
+      "Bytes reflect Ghidra's initialized memory, including loader fixups. Reads stop at an unmapped or uninitialized byte and report completeness explicitly.",
+      "macOS sessions require a matching executable Ghidra native decompiler; REA checks for it but does not build native components or change Gatekeeper quarantine state."
+    ],
+    "relationship_coverage": null,
+    "locations": [],
+    "evidence_links": []
+  },
+  "unrelated_objects_identical": 585,
+  "imports_unchanged": {
+    "application": 164,
+    "bootloader": 34
+  },
+  "qualification": "build/goal-r1-temp-reduce-c/qualified/qualification.json",
+  "new_exact_bytes": 0,
+  "hybrid": {
+    "report": "build/hybrid-goal-r1-temp-reduce-c/build-report.json",
+    "sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "totals": {
+      "binary-pull-through": 641915,
+      "source-built": 4245,
+      "resource-file": 248
+    },
+    "source_plan_unchanged": true,
+    "source_completeness_proven": false
+  },
+  "limitations": [
+    "Initial save ordering is explicitly rejected; arbitrary private instruction/access order is not proven identical.",
+    "Registry/sensor/mode/delay/calibration/log providers modeled; electrical response and actual timing unproven.",
+    "Caller-clobbered registers/flags and return R0 of the void root are excluded.",
+    "Arbitrary control-frame aliases, faults, concurrency and complete source-only rebuilding unproven."
+  ]
+}

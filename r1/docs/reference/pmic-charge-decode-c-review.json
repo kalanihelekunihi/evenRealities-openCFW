@@ -1,0 +1,195 @@
+{
+  "scope": "C reconstruction of previously unowned PMIC 0x5061c and byte-write wrapper 0x35766",
+  "source": {
+    "source": "r1/src/application/board/native_pmic_charge_decode.c",
+    "payload": "r1-application",
+    "role": "candidate",
+    "toolchain": "clang",
+    "link": true,
+    "expect": "compile",
+    "returncode": 0,
+    "argv": [
+      "/usr/bin/clang",
+      "--target=arm-none-eabi",
+      "-mcpu=cortex-m4",
+      "-mthumb",
+      "-mfpu=fpv4-sp-d16",
+      "-mfloat-abi=hard",
+      "-std=c11",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-fno-strict-aliasing",
+      "-fshort-enums",
+      "-Os",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-fno-delete-null-pointer-checks",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/r1/src/vendor",
+      "-MD",
+      "-MF",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-pmic-charge-decode/r1/r1-application/r1__src__application__board__native_pmic_charge_decode.c.d",
+      "-c",
+      "/Users/kalani/Repo/evenRealities-openCFW/r1/src/application/board/native_pmic_charge_decode.c",
+      "-o",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-pmic-charge-decode/r1/r1-application/r1__src__application__board__native_pmic_charge_decode.c.o"
+    ],
+    "source_sha256": "e956761fb228ee73b64e1fb6cd12ac4b39f0e5b5dba8f1762f0cbc2e64c1c839",
+    "object_sha256": "18a1c1d2bcfd1951961601d3ee80da8ce0f503860a27fb537a9e8e01af93523a",
+    "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-pmic-charge-decode/r1/r1-application/r1__src__application__board__native_pmic_charge_decode.c.o",
+    "strong": [
+      "r1_pmic_charge_status_decode",
+      "r1_yhm_register_write_byte_native"
+    ],
+    "weak": [],
+    "undefined": [
+      "r1_yhm_register_read_byte_native",
+      "r1_yhm_register_write_native"
+    ]
+  },
+  "report": "build/sources-goal-r1-pmic-charge-decode/report.json",
+  "validation": {
+    "paired_cases": 48504,
+    "vectors": 2021,
+    "provider_frames": {
+      "read": 24,
+      "nested_write": 40
+    },
+    "limitations": [
+      "Initial stack save order differs and is excluded",
+      "Transport read/write boundaries modeled; electrical behavior unverified",
+      "No exact-byte qualification"
+    ]
+  },
+  "negative_controls": {
+    "wrong-nibble": {
+      "rejected": true,
+      "stderr": "arm-none-eabi-ld: warning: (r1_yhm_register_read_byte_native): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-pmic-charge-decode/wrong-nibble.o\narm-none-eabi-ld: warning: (r1_yhm_register_read_byte_native): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-pmic-charge-decode/wrong-nibble.o\narm-none-eabi-ld: warning: (r1_yhm_register_read_byte_native): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-pmic-charge-decode/wrong-nibble.o\narm-none-eabi-ld: warning: (r1_yhm_register_read_byte_native): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-pmic-charge-decode/wrong-nibble.o\narm-none-eabi-ld: warning: (r1_yhm_register_write_native): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-pmic-charge-decode/wrong-nibble.o\nTraceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-pmic-charge-decode/reject-wrong-nibble.py\", line 55, in <module>\n    x=a(*c);y=b(*c);assert x==y,(c,x,y);n+=1\n                           ^^^^\nAssertionError: (((160, 192, 0, 0), 0, 0, 305419896, False), (1, [['read', 5, -20, '785634120057341200583412005934124044444401001001'], ['read', 6, -16, '78563412a057341200583412005934124044444401001001'], ['read', 7, -12, '78563412a0573412c0583412005934124044444401001001'], ['read', 3, -24, '00563412a0573412c0583412005934124044444401001001'], ['write', 3, 1, -36, '40000000', '40563412a0573412c0583412005934124044444401001001']], b'@V4\\x12\\xa0W4\\x12\\xc0X4\\x12\\x00Y4\\x12@DDD\\x01\\x00\\x10\\x01'), (0, [['read', 5, -20, '785634120057341200583412005934124044444401001001'], ['read', 6, -16, '78563412a057341200583412005934124044444401001001'], ['read', 7, -12, '78563412a0573412c0583412005934124044444401001001']], b'xV4\\x12\\xa0W4\\x12\\xc0X4\\x12\\x00Y4\\x12@DDD\\x01\\x00\\x10\\x01'))\n"
+    },
+    "wrong-flag": {
+      "rejected": true,
+      "stderr": "arm-none-eabi-ld: warning: (r1_yhm_register_read_byte_native): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-pmic-charge-decode/wrong-flag.o\narm-none-eabi-ld: warning: (r1_yhm_register_read_byte_native): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-pmic-charge-decode/wrong-flag.o\narm-none-eabi-ld: warning: (r1_yhm_register_read_byte_native): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-pmic-charge-decode/wrong-flag.o\narm-none-eabi-ld: warning: (r1_yhm_register_read_byte_native): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-pmic-charge-decode/wrong-flag.o\narm-none-eabi-ld: warning: (r1_yhm_register_write_native): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-pmic-charge-decode/wrong-flag.o\nTraceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-pmic-charge-decode/reject-wrong-flag.py\", line 55, in <module>\n    x=a(*c);y=b(*c);assert x==y,(c,x,y);n+=1\n                           ^^^^\nAssertionError: (((160, 192, 0, 0), 0, 0, 305419896, False), (1, [['read', 5, -20, '785634120057341200583412005934124044444401001001'], ['read', 6, -16, '78563412a057341200583412005934124044444401001001'], ['read', 7, -12, '78563412a0573412c0583412005934124044444401001001'], ['read', 3, -24, '00563412a0573412c0583412005934124044444401001001'], ['write', 3, 1, -36, '40000000', '40563412a0573412c0583412005934124044444401001001']], b'@V4\\x12\\xa0W4\\x12\\xc0X4\\x12\\x00Y4\\x12@DDD\\x01\\x00\\x10\\x01'), (1, [['read', 5, -20, '785634120057341200583412005934124044444401001001'], ['read', 6, -16, '78563412a057341200583412005934124044444401001001'], ['read', 7, -12, '78563412a0573412c0583412005934124044444401001001'], ['read', 3, -24, '00563412a0573412c0583412005934124044444401001001'], ['write', 3, 1, -36, '20000000', '20563412a0573412c0583412005934124044444401001001']], b' V4\\x12\\xa0W4\\x12\\xc0X4\\x12\\x00Y4\\x12@DDD\\x01\\x00\\x10\\x01'))\n"
+    },
+    "wide-zero": {
+      "rejected": true,
+      "stderr": "arm-none-eabi-ld: warning: (r1_yhm_register_read_byte_native): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-pmic-charge-decode/wide-zero.o\narm-none-eabi-ld: warning: (r1_yhm_register_read_byte_native): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-pmic-charge-decode/wide-zero.o\narm-none-eabi-ld: warning: (r1_yhm_register_read_byte_native): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-pmic-charge-decode/wide-zero.o\narm-none-eabi-ld: warning: (r1_yhm_register_read_byte_native): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-pmic-charge-decode/wide-zero.o\narm-none-eabi-ld: warning: (r1_yhm_register_write_native): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-pmic-charge-decode/wide-zero.o\nTraceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-pmic-charge-decode/reject-wide-zero.py\", line 55, in <module>\n    x=a(*c);y=b(*c);assert x==y,(c,x,y);n+=1\n                           ^^^^\nAssertionError: (((160, 192, 0, 0), 0, 0, 305419896, False), (1, [['read', 5, -20, '785634120057341200583412005934124044444401001001'], ['read', 6, -16, '78563412a057341200583412005934124044444401001001'], ['read', 7, -12, '78563412a0573412c0583412005934124044444401001001'], ['read', 3, -24, '00563412a0573412c0583412005934124044444401001001'], ['write', 3, 1, -36, '40000000', '40563412a0573412c0583412005934124044444401001001']], b'@V4\\x12\\xa0W4\\x12\\xc0X4\\x12\\x00Y4\\x12@DDD\\x01\\x00\\x10\\x01'), (1, [['read', 5, -20, '785634120000000000583412005934124044444401001001'], ['read', 6, -16, '78563412a000000000583412005934124044444401001001'], ['read', 7, -12, '78563412a0000000c0583412005934124044444401001001'], ['read', 3, -24, '00563412a0000000c0583412005934124044444401001001'], ['write', 3, 1, -36, '40000000', '40563412a0000000c0583412005934124044444401001001']], b'@V4\\x12\\xa0\\x00\\x00\\x00\\xc0X4\\x12\\x00Y4\\x12@DDD\\x01\\x00\\x10\\x01'))\n"
+    }
+  },
+  "REA": {
+    "evidence_id": "ev_82f332277019a0903bffafac19d287af3e75e8801b8997b904198750c6ef898d",
+    "subject": {
+      "name": "stock.elf",
+      "digest": {
+        "sha256": "25b4a29af80ec8edab5bd861ba9b74a6e22eab29dc3d7a809a16869e8a140f04"
+      },
+      "local_path": "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-queue-reset-c/stock.elf",
+      "format": "elf",
+      "architecture": "arm"
+    },
+    "provider": {
+      "id": "ghidra",
+      "name": "Ghidra",
+      "version": "12.1.4"
+    },
+    "analysis_profile": {
+      "provider": {
+        "id": "ghidra",
+        "name": "Ghidra",
+        "version": "12.1.4"
+      },
+      "parameters": {
+        "target_kind": "executable",
+        "target_format": "elf",
+        "architecture": "arm",
+        "available_architectures": [
+          "arm"
+        ],
+        "import_mode": "ephemeral-source-immutable",
+        "annotation_policy": "atomic-function-entry-metadata-v1",
+        "load_image_observations": "source-mappings-entry-context-v2",
+        "function_body_evidence": "complete-inclusive-ranges-v1",
+        "function_references": "complete-body-and-entry-reference-manager-v2",
+        "call_relationship_coverage": "function-body-call-coverage-v5",
+        "function_dossier_coverage": "observed-facets-and-call-relationships-v1",
+        "string_inventory_evidence": "defined-data-coverage-v1",
+        "location_resolution": "explicit-address-exact-entry-symbol-first-v3",
+        "procedure_file_offset_resolution": "address-first-unique-target-source-mapping-v2",
+        "instruction_flow_evidence": "decoded-return-pcode-v1",
+        "instruction_references": "exact-address-incoming-v1",
+        "function_boundary_observations": "ghidra-function-boundary-limitations-v3",
+        "no_return_repair": "returning-imports-decoded-return-v2",
+        "process_launch": "inspected-jvm-launch-support-v1",
+        "jump_table_evidence": "typed-case-default-blocks-v1",
+        "decompiler_jump_loads": true,
+        "loader": "auto-from-header",
+        "language_id": "auto-from-header",
+        "compiler_spec_id": "auto-default",
+        "analyzer_preset": "ghidra-default"
+      },
+      "digest": "7e46711069eea041af1b9b99e34115c13332795e5cda76e584a722f529ec70de"
+    },
+    "predicate_type": "rea.analysis",
+    "operation": "read_bytes",
+    "parameters": {
+      "address": "0x5061c",
+      "length": 116
+    },
+    "raw_result": {
+      "address": "0x5061c",
+      "requested_bytes": 116,
+      "returned_bytes": 116,
+      "bytes_hex": "1fb500248df804408df808408df80c4001a90520e4f7effe02a90620e4f7ebfe03a90720e4f7e7fe9df808000c21b1eb101f1dd19df804000521b1eb501f17d19df80c00000613d48df8004069460320e4f7d1fe9df80000410606d440f040018df800100320e5f770f8012004b010bd0020fbe7",
+      "complete": true
+    },
+    "normalized_result": {
+      "address": "0x5061c",
+      "requested_bytes": 116,
+      "returned_bytes": 116,
+      "bytes_hex": "1fb500248df804408df808408df80c4001a90520e4f7effe02a90620e4f7ebfe03a90720e4f7e7fe9df808000c21b1eb101f1dd19df804000521b1eb501f17d19df80c00000613d48df8004069460320e4f7d1fe9df80000410606d440f040018df800100320e5f770f8012004b010bd0020fbe7",
+      "complete": true
+    },
+    "confidence": "observed",
+    "authority": "shipped-artifact",
+    "environment": null,
+    "limitations": [
+      "The session serves operations only after Ghidra reports default auto-analysis complete; incomplete analysis does not expose partial results.",
+      "The imported Program and temporary project are ephemeral and deleted on close. Annotation operations edit session database metadata; original executable bytes are never written.",
+      "Cancelling an active Ghidra request terminates its ephemeral database and discards session annotations. The selected target remains open; the next provider query imports the original artifact again.",
+      "Default-space addresses use lowercase 0x-prefixed hexadecimal; other address spaces use <percent-encoded-space>:0x<hex>.",
+      "Bytes reflect Ghidra's initialized memory, including loader fixups. Reads stop at an unmapped or uninitialized byte and report completeness explicitly.",
+      "macOS sessions require a matching executable Ghidra native decompiler; REA checks for it but does not build native components or change Gatekeeper quarantine state."
+    ],
+    "relationship_coverage": null,
+    "locations": [],
+    "evidence_links": []
+  },
+  "unrelated_objects_identical": 579,
+  "imports_unchanged": {
+    "application": 164,
+    "bootloader": 34
+  },
+  "source_plan_modified": false,
+  "limitations": [
+    "Initial save ordering differs; this candidate is not an exact-byte selection.",
+    "Read/write transport boundaries modeled. Byte-write wrapper validated only through decoder context.",
+    "Private nested return-address words excluded; root provider-visible saved frame and live R4-R11 compared.",
+    "No electrical, interrupt, fault or arbitrary alias/concurrency proof."
+  ],
+  "hybrid": {
+    "report": "build/hybrid-goal-r1-pmic-charge-decode/build-report.json",
+    "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "source_plan_unchanged": true,
+    "totals": {
+      "binary-pull-through": 642117,
+      "source-built": 4043,
+      "resource-file": 248
+    },
+    "source_completeness_proven": false
+  },
+  "subsequent_command_adapter": {
+    "review": "r1/docs/reference/yhm-command-c-review.json",
+    "existing_function_bytes_and_relocations_unchanged": true
+  }
+}

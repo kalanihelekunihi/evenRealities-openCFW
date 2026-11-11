@@ -1,0 +1,139 @@
+{
+  "schema_version": 1,
+  "scope": "R1 sleep-sector payload and slot-header programming in ordinary C",
+  "report": "build/sources-goal-r1-sleep-write-c/report.json",
+  "comparison_report": "build/sources-goal-r1-sleep-delete-c/report.json",
+  "audit": {
+    "compiled_units": 863,
+    "application_imports": 63,
+    "bootloader_imports": 22,
+    "unchanged_prior_nongenerated_objects": 852,
+    "changed_prior_nongenerated_objects": [
+      "r1/src/application/runtime/native_sleep_sector_write.c"
+    ],
+    "normal_object_equals_direct_live_and_parent_probes": true,
+    "manifest_and_source_plan_unchanged": true,
+    "new_mutable_persistent_bytes": 0,
+    "assembly_entries_replaced_with_C": 1,
+    "object_audit": {
+      "strong_symbol_set_unchanged": true,
+      "public_success_diagnostic_bytes_unchanged": true,
+      "no_allocated_writable_data": true,
+      "assembly_entries_replaced_with_C": 1,
+      "manifest_unchanged": true
+    }
+  },
+  "direct": {
+    "stock_C_comparisons": 9922,
+    "native_instruction_bytes_executed": 508,
+    "actual_CRC16_and_memory_clear_execute": true,
+    "payload_then_exact_20_byte_header_bytes_and_logs_match": true,
+    "all_slots_FAL_statuses_alignment_wrap_and_finalize_returns": true,
+    "live_partition_device_data_mutations_and_partial_reads": true,
+    "private_frame_APSR_and_physical_NOR_unverified": true
+  },
+  "distinct_callback_mutations": {
+    "stock_C_boundary_mutation_comparisons": 144,
+    "partition_device_and_input_change_at_distinct_read_payload_CRC_boundaries": true
+  },
+  "actual_record_store_chain": {
+    "stock_C_record_store_and_write_chain_comparisons": 648,
+    "actual_parent_C_write_CRC_clear_and_erase_core": true,
+    "selection_finalize_FAL_and_logging_modeled": true
+  },
+  "compiled_defects_rejected": [
+    {
+      "defect": "wide-alignment-mask",
+      "rejected": true,
+      "log": "build/goal-r1-sleep-write-c/wide-alignment-mask/test.log"
+    },
+    {
+      "defect": "wrong-free-marker-test",
+      "rejected": true,
+      "log": "build/goal-r1-sleep-write-c/wrong-free-marker-test/test.log"
+    },
+    {
+      "defect": "wrong-header-write-length",
+      "rejected": true,
+      "log": "build/goal-r1-sleep-write-c/wrong-header-write-length/test.log"
+    },
+    {
+      "defect": "wrong-CRC-field",
+      "rejected": true,
+      "log": "build/goal-r1-sleep-write-c/wrong-CRC-field/test.log"
+    },
+    {
+      "defect": "lost-header-padding",
+      "rejected": true,
+      "log": "build/goal-r1-sleep-write-c/lost-header-padding/test.log"
+    },
+    {
+      "defect": "accept-positive-payload-status",
+      "rejected": true,
+      "log": "build/goal-r1-sleep-write-c/accept-positive-payload-status/test.log"
+    },
+    {
+      "defect": "skip-final-slot-finalize",
+      "rejected": true,
+      "log": "build/goal-r1-sleep-write-c/skip-final-slot-finalize/test.log"
+    },
+    {
+      "defect": "stale-header-write-callback",
+      "rejected": true,
+      "log": "build/goal-r1-sleep-write-c/stale-header-write-callback/test.log"
+    }
+  ],
+  "contract": [
+    "Scan up to eight24-byte headers, reusing initialized scratch; a free slot requires both word8 and word12 equal FFFFFFFF. Other padding/header bytes retain the most recent read.",
+    "Snapshot initial header base and compute next payload from occupied header length/offset and live partition base. Reload device callbacks at each read/write boundary.",
+    "Aligned length=(length+3)&FFFC, including 16-bit wrap. Compare unsigned wrapped payload end against live sector end; overflow requests finalize but returns0.",
+    "Write aligned payload first; only zero status succeeds. Then read live input fields10/12/16, compute actual Modbus CRC over aligned bytes and program exactly20 header bytes.",
+    "On success log original length and slot+1; return1 except slot7 returns the full finalizer result. Nonzero payload/header status logs failure and returns0.",
+    "Caller must provide valid source extent of at least max(20,aligned length), and valid live partition/device providers. No new capacity or null contract is inferred."
+  ],
+  "limits": [
+    "Direct FAL and finalize/logging boundaries modeled; actual C CRC16/EABI clear/memset execute. Guarded source execution cannot enter stock.",
+    "Parent fixture executes retained record-store assembly, C sector write, CRC and erase/count core; selection, finalize, FAL and logging modeled.",
+    "Preserved native 16-bit length wrap, unsigned address arithmetic, failed/partial-read scratch carry and zero-only write-success rule are compatibility evidence, not physical reliability proof.",
+    "Saved integer/FP registers, masks, caller-stack and input guards checked. Private frames, APSR, incidental void provider returns, concurrency/faults excluded.",
+    "Physical NOR programming, finalization service, power-loss behavior, final application linking and boot remain unverified."
+  ],
+  "evidence_files": {
+    "build/sources-goal-r1-sleep-write-c/report.json": "6a19d64b40b7ee60ceed0434063ff6a84581cedac13464b4ac43da5039303d76",
+    "build/sources-goal-r1-sleep-delete-c/report.json": "a996207229be8fb382960d66083c9a59138759de1a9750a63abfb398e44216b1",
+    "r1/src/application/runtime/native_sleep_sector_write.c": "0a3a17161b5d27255ede805eecb81ab3fe668e495d69fa960f6232e94852a021",
+    "r1/src/application/board/native_battery_memory.h": "e646c981681787c87d8088f663239c9006beb4e4c1827e95854093f0628528b6",
+    "r1/src/include/r1_stock_checksums.h": "af730ecb8d2e2cc5656016b269678e7f1ac6c7e48fe32401fdfb9b7206886ef9",
+    "r1/src/application/checksums/stock_checksums.c": "63f78e208048b5bd4b91c00f97e1260a5a53f5bee50dc51aa5ce4aaa1cdfe898",
+    "r1/src/application/runtime/memory_eabi.c": "e89f73174230a5111606f175a2429695c62f178ace0b44478ab93497a9ebacff",
+    "r1/src/sources.json": "6ea6ab6f16e97b34b73ee1fb683c7c49eb7228bf29fdbdb21f5aded6d4d13380",
+    "tools/build/source-plan.json": "eeb516e31b3310fb0718f36908977f8125723f7c5e0e86cd6744395826259a4d",
+    "build/goal-r1-sleep-write-c/manifest-before.json": "6ea6ab6f16e97b34b73ee1fb683c7c49eb7228bf29fdbdb21f5aded6d4d13380",
+    "build/goal-r1-sleep-write-c/source-before.c": "079808c05fdf152dbb43bc7c73c46d1bc41ddf020334cbb931f11212c97fdf8c",
+    "build/goal-r1-sleep-write-c/audit.py": "d6c3e9e29e948929eab074bc7e3460010acb7a8f0cb52179fa4ec15000a0c16d",
+    "build/goal-r1-sleep-write-c/object-audit.json": "f20cda08a3088cf3e5fd2fe5e5ac75364837111a82f710521f8e9683e9029dc0",
+    "build/goal-r1-sleep-write-c/record.py": "601fca7b9b952140371d879a2d5179a03d17301bc3a9c482b627f6e1f2d5e5dc",
+    "build/goal-r1-sleep-write-c/rea.json": "0475932a07839cd0b1bd0b5a8abc6bb9beee432f9a942a94f30c43a95833a46a",
+    "build/goal-r1-sleep-write-c/verify.py": "d8dcf00ad9d440c7015eefa008c1abe6ee646893507716ce81bfc8177374fbfc",
+    "build/goal-r1-sleep-write-c/results.json": "c645a8ff5429017856ae7c7fb9c84c7bae155bc6062677164ade64392508e6ec",
+    "build/goal-r1-sleep-write-c/verification.log": "3009d1f8f4579954be0a6a293e105eae9ec9de005d14a34d09bd8deb81a40745",
+    "build/goal-r1-sleep-write-c/source.o": "e138877589264d492357ea818cca46b67ce839c560ca439ca9b2cefcc4b9d8bf",
+    "build/goal-r1-sleep-write-c/source.elf": "3af3761d3ca706c7b31a5bc95358dfa8d99f34b17e61a49c38bde03f8eb0df93",
+    "build/goal-r1-sleep-write-c/make_live.py": "1972ef67fcf43368df1ece651c5f51c27d419d0b0202dedfb0046068184c9828",
+    "build/goal-r1-sleep-write-c/live.py": "2094ff1bfd29c0ebac9e38afd09f8d56761f00f7418936aef7f907842042b7c8",
+    "build/goal-r1-sleep-write-c/live/results.json": "8176625d09b60f9ff0f3a8448a9cda0522b6b93d6658329de25d78ffd3bb3b0f",
+    "build/goal-r1-sleep-write-c/live.log": "2a5b518f48b191396f722bb72b7e134dcc3134ad3b4bf4bc21ccd25c9f336d76",
+    "build/goal-r1-sleep-write-c/live/source.elf": "3af3761d3ca706c7b31a5bc95358dfa8d99f34b17e61a49c38bde03f8eb0df93",
+    "build/goal-r1-sleep-write-c/make_pipeline.py": "db0cf50445154546b8bf4987303b2e127e4579b51dd33ed75c746398b59b4909",
+    "build/goal-r1-sleep-write-c/pipeline.py": "9c40a04d825eee804c46e100065c584d4695c44939eca0ba4c689cbf97c0827b",
+    "build/goal-r1-sleep-write-c/pipeline/results.json": "0623f46d2e92172cd08620744eb0f671222d92a13486727331964a683704b50f",
+    "build/goal-r1-sleep-write-c/pipeline.log": "a22af6aa3c722b7cddc0d21f12d92aec3c55990ccdec85e400b1b11f501b4625",
+    "build/goal-r1-sleep-write-c/pipeline/source.elf": "3811a9b91f1a42e741bb91041f5d61d533d6ff84ef6e4cfbd2b0a41341c9758e",
+    "build/goal-r1-sleep-write-c/negative.py": "907cddd7444a87bf126b937fbf8f9bdcfc5d6de85be952c9c609352de06c6099",
+    "build/goal-r1-sleep-write-c/negative-verify.py": "d78d954d94e9e1941a5638b2609960e2c525903415f503dd062c2309371db385",
+    "build/goal-r1-sleep-write-c/negative.json": "af97177ad32bf4a278afaf353b2791237c29b0da07ac1373a17f460e5939fb1e",
+    "build/goal-r1-sleep-write-c/negative.log": "bbbc9f408dd3cc0987741ea2913bbb7898b28afcfe03e2eb8fb5896d0390912e",
+    "build/goal-r1-sleep-write-c/build.log": "c31fafbba442e84ce4cab8cd8411ff27bbffe25069cadef20e700080b67b1ee1",
+    "build/goal-r1-sleep-write-c/sources-check.log": "c56719af1d0b2d08393a257d3e2022d40896a70239925ecc83fc942850eca238"
+  }
+}

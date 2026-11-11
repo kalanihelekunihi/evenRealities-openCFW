@@ -1,0 +1,842 @@
+{
+  "schema_version": 1,
+  "report": "build/sources-goal-r1-engine-profile-c/report.json",
+  "report_sha256": "645cf80ddd9418e6d7611945924014a897ea35392c8c92c971540906ed62a005",
+  "manifest_sha256": "d7faa510c5ded283250ebffae894a2d41de48ffe4211c35171e6eaf9d55fdd96",
+  "payloads": {
+    "r1-application": {
+      "units": 867,
+      "compiled": 867,
+      "participating_objects": 844,
+      "compose_returncode": 0,
+      "output_sha256": "addea93719be24507d8aed16cad9bb50bf2ba8141f1f02df688b41ddb471f129",
+      "unresolved": 62,
+      "unchanged_import_set": true,
+      "added_imports": [],
+      "removed_imports": [],
+      "imports_with_excluded_candidates": 0,
+      "imports": [
+        {
+          "symbol": "GH3X2X_GetVersion",
+          "consumers": [
+            "third-party/upstream/goodix-gh3x2x/gh3x2x/demo_code/demo_kernel_code/driver/src/gh_drv_control.c"
+          ],
+          "excluded_same_name_candidates": []
+        },
+        {
+          "symbol": "GH3X2X_UprotocolPacketFormat",
+          "consumers": [
+            "third-party/upstream/goodix-gh3x2x/gh3x2x/demo_code/demo_kernel_code/driver/src/gh_drv_control.c"
+          ],
+          "excluded_same_name_candidates": []
+        },
+        {
+          "symbol": "Gh3x2xDemoSendProtocolData",
+          "consumers": [
+            "third-party/upstream/goodix-gh3x2x/gh3x2x/demo_code/demo_kernel_code/driver/src/gh_drv_control.c"
+          ],
+          "excluded_same_name_candidates": []
+        },
+        {
+          "symbol": "__data_start__",
+          "consumers": [
+            "vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/softdevice/common/nrf_sdh_ble.c"
+          ],
+          "excluded_same_name_candidates": []
+        },
+        {
+          "symbol": "gh3x2x_print_fmt",
+          "consumers": [
+            "third-party/upstream/goodix-gh3x2x/gh3x2x/demo_code/demo_kernel_code/driver/src/gh_drv_control.c",
+            "third-party/upstream/goodix-gh3x2x/gh3x2x/demo_code/demo_kernel_code/module/gh_soft_adt/gh_multi_sen_pro.c",
+            "{gen}/gh_demo_hook_r1.c",
+            "{gen}/gh_demo_r1.c",
+            "{gen}/gh_demo_user_r1.c"
+          ],
+          "excluded_same_name_candidates": []
+        },
+        {
+          "symbol": "goodix_hba_calc",
+          "consumers": [
+            "r1/src/application/goodix/native_hr_execute.c"
+          ],
+          "excluded_same_name_candidates": []
+        },
+        {
+          "symbol": "goodix_hba_essential_info_print",
+          "consumers": [
+            "r1/src/application/goodix/native_hr_execute.c"
+          ],
+          "excluded_same_name_candidates": []
+        },
+        {
+          "symbol": "goodix_hrv_calc",
+          "consumers": [
+            "r1/src/application/goodix/native_hrv_execute.c"
+          ],
+          "excluded_same_name_candidates": []
+        },
+        {
+          "symbol": "goodix_nadt_calc",
+          "consumers": [
+            "r1/src/application/goodix/native_soft_adt_execute.c"
+          ],
+          "excluded_same_name_candidates": []
+        },
+        {
+          "symbol": "r1_cmb_code_end",
+          "consumers": [
+            "third-party/upstream/cmbacktrace/cm_backtrace/cm_backtrace.c"
+          ],
+          "excluded_same_name_candidates": []
+        },
+        {
+          "symbol": "r1_cmb_code_start",
+          "consumers": [
+            "third-party/upstream/cmbacktrace/cm_backtrace/cm_backtrace.c"
+          ],
+          "excluded_same_name_candidates": []
+        },
+        {
+          "symbol": "r1_cmb_stack_end",
+          "consumers": [
+            "third-party/upstream/cmbacktrace/cm_backtrace/cm_backtrace.c"
+          ],
+          "excluded_same_name_candidates": []
+        },
+        {
+          "symbol": "r1_cmb_stack_start",
+          "consumers": [
+            "third-party/upstream/cmbacktrace/cm_backtrace/cm_backtrace.c"
+          ],
+          "excluded_same_name_candidates": []
+        },
+        {
+          "symbol": "r1_eat_command_dispatch",
+          "consumers": [
+            "r1/src/application/runtime/native_console.c"
+          ],
+          "excluded_same_name_candidates": []
+        },
+        {
+          "symbol": "r1_eat_core_init",
+          "consumers": [
+            "r1/src/application/runtime/native_application_manager.c"
+          ],
+          "excluded_same_name_candidates": []
+        },
+        {
+          "symbol": "r1_export_plan_command",
+          "consumers": [
+            "r1/src/application/runtime/native_bae8_consumer.c"
+          ],
+          "excluded_same_name_candidates": []
+        },
+        {
+          "symbol": "r1_factory_input_record_plan_dispatch",
+          "consumers": [
+            "r1/src/application/runtime/native_factory_task.c"
+          ],
+          "excluded_same_name_candidates": []
+        },
+        {
+          "symbol": "r1_glasses_role_conflict_fault",
+          "consumers": [
+            "r1/src/application/board/native_glasses_role.c"
+          ],
+          "excluded_same_name_candidates": []
+        },
+        {
+          "symbol": "r1_gomore_final_sleep_record_publish_native",
+          "consumers": [
+            "r1/src/application/runtime/native_gomore_sensor_output.c",
+            "r1/src/application/runtime/native_gomore_wake.c"
+          ],
+          "excluded_same_name_candidates": []
+        },
+        {
+          "symbol": "r1_gomore_interval_statistics_native",
+          "consumers": [
+            "r1/src/application/runtime/native_gomore_score_flow.c"
+          ],
+          "excluded_same_name_candidates": []
+        },
+        {
+          "symbol": "r1_gomore_sleep_interval_select_native",
+          "consumers": [
+            "r1/src/application/runtime/native_gomore_dispatch.c"
+          ],
+          "excluded_same_name_candidates": []
+        },
+        {
+          "symbol": "r1_gomore_sleep_score_native",
+          "consumers": [
+            "r1/src/application/runtime/native_gomore_score_flow.c"
+          ],
+          "excluded_same_name_candidates": []
+        },
+        {
+          "symbol": "r1_gomore_sleep_stage_refine_native",
+          "consumers": [
+            "r1/src/application/runtime/native_gomore_consume.c"
+          ],
+          "excluded_same_name_candidates": []
+        },
+        {
+          "symbol": "r1_gomore_stage_5ef1c_native",
+          "consumers": [
+            "r1/src/application/runtime/native_gomore_algorithm.c"
+          ],
+          "excluded_same_name_candidates": []
+        },
+        {
+          "symbol": "r1_gomore_stage_5f264_native",
+          "consumers": [
+            "r1/src/application/runtime/native_gomore_algorithm.c"
+          ],
+          "excluded_same_name_candidates": []
+        },
+        {
+          "symbol": "r1_gomore_stage_5f3d8_native",
+          "consumers": [
+            "r1/src/application/runtime/native_gomore_algorithm.c"
+          ],
+          "excluded_same_name_candidates": []
+        },
+        {
+          "symbol": "r1_gomore_stage_5f4b6_native",
+          "consumers": [
+            "r1/src/application/runtime/native_gomore_algorithm.c"
+          ],
+          "excluded_same_name_candidates": []
+        },
+        {
+          "symbol": "r1_gomore_stage_5f56c_native",
+          "consumers": [
+            "r1/src/application/runtime/native_gomore_algorithm.c"
+          ],
+          "excluded_same_name_candidates": []
+        },
+        {
+          "symbol": "r1_gomore_stage_5feb8_native",
+          "consumers": [
+            "r1/src/application/runtime/native_gomore_algorithm.c"
+          ],
+          "excluded_same_name_candidates": []
+        },
+        {
+          "symbol": "r1_gomore_stage_605dc_native",
+          "consumers": [
+            "r1/src/application/runtime/native_gomore_algorithm.c"
+          ],
+          "excluded_same_name_candidates": []
+        },
+        {
+          "symbol": "r1_gomore_stage_60af4_native",
+          "consumers": [
+            "r1/src/application/runtime/native_gomore_algorithm.c"
+          ],
+          "excluded_same_name_candidates": []
+        },
+        {
+          "symbol": "r1_gomore_stage_60b80_native",
+          "consumers": [
+            "r1/src/application/runtime/native_gomore_algorithm.c"
+          ],
+          "excluded_same_name_candidates": []
+        },
+        {
+          "symbol": "r1_gomore_stage_60dc4_native",
+          "consumers": [
+            "r1/src/application/runtime/native_gomore_algorithm.c"
+          ],
+          "excluded_same_name_candidates": []
+        },
+        {
+          "symbol": "r1_gomore_stage_610c8_native",
+          "consumers": [
+            "r1/src/application/runtime/native_gomore_algorithm.c"
+          ],
+          "excluded_same_name_candidates": []
+        },
+        {
+          "symbol": "r1_gomore_stage_61198_native",
+          "consumers": [
+            "r1/src/application/runtime/native_gomore_algorithm.c"
+          ],
+          "excluded_same_name_candidates": []
+        },
+        {
+          "symbol": "r1_gomore_stage_61274_native",
+          "consumers": [
+            "r1/src/application/runtime/native_gomore_algorithm.c"
+          ],
+          "excluded_same_name_candidates": []
+        },
+        {
+          "symbol": "r1_gomore_stage_6138c_native",
+          "consumers": [
+            "r1/src/application/runtime/native_gomore_algorithm.c"
+          ],
+          "excluded_same_name_candidates": []
+        },
+        {
+          "symbol": "r1_gomore_stage_statistics_native",
+          "consumers": [
+            "r1/src/application/runtime/native_gomore_score_flow.c"
+          ],
+          "excluded_same_name_candidates": []
+        },
+        {
+          "symbol": "r1_gomore_table_record11_native",
+          "consumers": [
+            "r1/src/application/runtime/native_gomore_consume.c"
+          ],
+          "excluded_same_name_candidates": []
+        },
+        {
+          "symbol": "r1_health_auth_parameters_set",
+          "consumers": [
+            "r1/src/application/runtime/native_health_authorize.c"
+          ],
+          "excluded_same_name_candidates": []
+        },
+        {
+          "symbol": "r1_health_lifecycle_engine_initialize_native",
+          "consumers": [
+            "r1/src/application/runtime/native_health_lifecycle.c"
+          ],
+          "excluded_same_name_candidates": []
+        },
+        {
+          "symbol": "r1_health_settings_plan_command",
+          "consumers": [
+            "r1/src/application/board/native_protocol_modules.c"
+          ],
+          "excluded_same_name_candidates": []
+        },
+        {
+          "symbol": "r1_health_sync_provider_0003c0d8",
+          "consumers": [
+            "r1/src/application/runtime/native_health_notification_stages.c"
+          ],
+          "excluded_same_name_candidates": []
+        },
+        {
+          "symbol": "r1_health_sync_provider_0003c304",
+          "consumers": [
+            "r1/src/application/runtime/native_health_notification_stages.c"
+          ],
+          "excluded_same_name_candidates": []
+        },
+        {
+          "symbol": "r1_health_sync_provider_0003c958",
+          "consumers": [
+            "r1/src/application/runtime/native_health_notification_stages.c"
+          ],
+          "excluded_same_name_candidates": []
+        },
+        {
+          "symbol": "r1_health_sync_provider_0003fcec",
+          "consumers": [
+            "r1/src/application/runtime/native_health_notification_stages.c"
+          ],
+          "excluded_same_name_candidates": []
+        },
+        {
+          "symbol": "r1_health_sync_provider_0003fef4",
+          "consumers": [
+            "r1/src/application/runtime/native_health_notification_stages.c"
+          ],
+          "excluded_same_name_candidates": []
+        },
+        {
+          "symbol": "r1_health_sync_provider_00040508",
+          "consumers": [
+            "r1/src/application/runtime/native_health_notification_stages.c"
+          ],
+          "excluded_same_name_candidates": []
+        },
+        {
+          "symbol": "r1_health_sync_provider_00040bd4",
+          "consumers": [
+            "r1/src/application/runtime/native_health_notification_stages.c"
+          ],
+          "excluded_same_name_candidates": []
+        },
+        {
+          "symbol": "r1_health_sync_provider_00040de0",
+          "consumers": [
+            "r1/src/application/runtime/native_health_notification_stages.c"
+          ],
+          "excluded_same_name_candidates": []
+        },
+        {
+          "symbol": "r1_health_sync_provider_00041438",
+          "consumers": [
+            "r1/src/application/runtime/native_health_notification_stages.c"
+          ],
+          "excluded_same_name_candidates": []
+        },
+        {
+          "symbol": "r1_health_sync_provider_00043eb0",
+          "consumers": [
+            "r1/src/application/runtime/native_health_notification_stages.c"
+          ],
+          "excluded_same_name_candidates": []
+        },
+        {
+          "symbol": "r1_health_sync_provider_000440c4",
+          "consumers": [
+            "r1/src/application/runtime/native_health_notification_stages.c"
+          ],
+          "excluded_same_name_candidates": []
+        },
+        {
+          "symbol": "r1_health_sync_provider_000446b4",
+          "consumers": [
+            "r1/src/application/runtime/native_health_notification_stages.c"
+          ],
+          "excluded_same_name_candidates": []
+        },
+        {
+          "symbol": "r1_health_sync_provider_0005b39c",
+          "consumers": [
+            "r1/src/application/runtime/native_health_notification_stages.c"
+          ],
+          "excluded_same_name_candidates": []
+        },
+        {
+          "symbol": "r1_health_sync_provider_0008f954",
+          "consumers": [
+            "r1/src/application/runtime/native_health_notification_stages.c"
+          ],
+          "excluded_same_name_candidates": []
+        },
+        {
+          "symbol": "r1_legacy_command_route_frame",
+          "consumers": [
+            "r1/src/application/runtime/native_bae8_consumer.c"
+          ],
+          "excluded_same_name_candidates": []
+        },
+        {
+          "symbol": "r1_manager_assertion_stack_transfer",
+          "consumers": [
+            "r1/src/application/runtime/native_manager_events.c"
+          ],
+          "excluded_same_name_candidates": []
+        },
+        {
+          "symbol": "r1_manager_logging_start_91504",
+          "consumers": [
+            "r1/src/application/runtime/native_application_manager.c"
+          ],
+          "excluded_same_name_candidates": []
+        },
+        {
+          "symbol": "r1_phone_role_assertion_stack_transfer",
+          "consumers": [
+            "r1/src/application/runtime/native_phone_role.c"
+          ],
+          "excluded_same_name_candidates": []
+        },
+        {
+          "symbol": "r1_structured_log_typed",
+          "consumers": [
+            "r1/src/application/goodix/native_heap_malloc.c",
+            "r1/src/application/runtime/native_application_manager.c",
+            "r1/src/application/runtime/native_manager_events.c"
+          ],
+          "excluded_same_name_candidates": []
+        },
+        {
+          "symbol": "r1_user_profile_handler",
+          "consumers": [
+            "r1/src/application/board/native_protocol_modules.c"
+          ],
+          "excluded_same_name_candidates": []
+        }
+      ]
+    },
+    "r1-bootloader": {
+      "units": 82,
+      "compiled": 82,
+      "participating_objects": 82,
+      "compose_returncode": 0,
+      "output_sha256": "c54ce829dccdc9858aa47aaf9ee79620222c5d1300e461bf0a0f173033dea869",
+      "unresolved": 22,
+      "unchanged_import_set": true,
+      "added_imports": [],
+      "removed_imports": [],
+      "imports_with_excluded_candidates": 0,
+      "imports": [
+        {
+          "symbol": "__bss_end__",
+          "consumers": [
+            "r1/src/bootloader/runtime/start.c"
+          ],
+          "excluded_same_name_candidates": []
+        },
+        {
+          "symbol": "__bss_start__",
+          "consumers": [
+            "r1/src/bootloader/runtime/reset.c",
+            "r1/src/bootloader/runtime/start.c"
+          ],
+          "excluded_same_name_candidates": []
+        },
+        {
+          "symbol": "__data_start__",
+          "consumers": [
+            "r1/src/bootloader/runtime/reset.c",
+            "vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/softdevice/common/nrf_sdh_ble.c"
+          ],
+          "excluded_same_name_candidates": []
+        },
+        {
+          "symbol": "__etext",
+          "consumers": [
+            "r1/src/bootloader/runtime/reset.c"
+          ],
+          "excluded_same_name_candidates": []
+        },
+        {
+          "symbol": "__start_crypto_data",
+          "consumers": [
+            "vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/crypto/nrf_crypto_init.c"
+          ],
+          "excluded_same_name_candidates": []
+        },
+        {
+          "symbol": "__start_dfu_trans",
+          "consumers": [
+            "vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/bootloader/dfu/nrf_dfu_transport.c"
+          ],
+          "excluded_same_name_candidates": []
+        },
+        {
+          "symbol": "__start_fs_data",
+          "consumers": [
+            "vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/fstorage/nrf_fstorage.c"
+          ],
+          "excluded_same_name_candidates": []
+        },
+        {
+          "symbol": "__start_sdh_ble_observers",
+          "consumers": [
+            "vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/softdevice/common/nrf_sdh_ble.c"
+          ],
+          "excluded_same_name_candidates": []
+        },
+        {
+          "symbol": "__start_sdh_req_observers",
+          "consumers": [
+            "vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/softdevice/common/nrf_sdh.c"
+          ],
+          "excluded_same_name_candidates": []
+        },
+        {
+          "symbol": "__start_sdh_soc_observers",
+          "consumers": [
+            "vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/softdevice/common/nrf_sdh_soc.c"
+          ],
+          "excluded_same_name_candidates": []
+        },
+        {
+          "symbol": "__start_sdh_stack_observers",
+          "consumers": [
+            "vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/softdevice/common/nrf_sdh.c"
+          ],
+          "excluded_same_name_candidates": []
+        },
+        {
+          "symbol": "__start_sdh_state_observers",
+          "consumers": [
+            "vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/softdevice/common/nrf_sdh.c"
+          ],
+          "excluded_same_name_candidates": []
+        },
+        {
+          "symbol": "__start_svc_data",
+          "consumers": [
+            "vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/svc/nrf_svc_handler.c"
+          ],
+          "excluded_same_name_candidates": []
+        },
+        {
+          "symbol": "__stop_crypto_data",
+          "consumers": [
+            "vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/crypto/nrf_crypto_init.c"
+          ],
+          "excluded_same_name_candidates": []
+        },
+        {
+          "symbol": "__stop_dfu_trans",
+          "consumers": [
+            "vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/bootloader/dfu/nrf_dfu_transport.c"
+          ],
+          "excluded_same_name_candidates": []
+        },
+        {
+          "symbol": "__stop_fs_data",
+          "consumers": [
+            "vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/fstorage/nrf_fstorage.c"
+          ],
+          "excluded_same_name_candidates": []
+        },
+        {
+          "symbol": "__stop_sdh_ble_observers",
+          "consumers": [
+            "vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/softdevice/common/nrf_sdh_ble.c"
+          ],
+          "excluded_same_name_candidates": []
+        },
+        {
+          "symbol": "__stop_sdh_req_observers",
+          "consumers": [
+            "vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/softdevice/common/nrf_sdh.c"
+          ],
+          "excluded_same_name_candidates": []
+        },
+        {
+          "symbol": "__stop_sdh_soc_observers",
+          "consumers": [
+            "vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/softdevice/common/nrf_sdh_soc.c"
+          ],
+          "excluded_same_name_candidates": []
+        },
+        {
+          "symbol": "__stop_sdh_stack_observers",
+          "consumers": [
+            "vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/softdevice/common/nrf_sdh.c"
+          ],
+          "excluded_same_name_candidates": []
+        },
+        {
+          "symbol": "__stop_sdh_state_observers",
+          "consumers": [
+            "vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/softdevice/common/nrf_sdh.c"
+          ],
+          "excluded_same_name_candidates": []
+        },
+        {
+          "symbol": "__stop_svc_data",
+          "consumers": [
+            "vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/svc/nrf_svc_handler.c"
+          ],
+          "excluded_same_name_candidates": []
+        }
+      ]
+    }
+  },
+  "limitations": [
+    "Optical estimator modeled; software FP/sqrt/EABI byte clearing execute natively",
+    "Host replay also models logger and fifteen other stage providers",
+    "Coordinator adds private frame reservation/write; private bytes and outer sensor-update frame difference remain outside proof",
+    "No physical/full source-only final link or byte identity proof"
+  ],
+  "integration_receipts": [
+    "r1/docs/reference/gomore-engine-profile-c-review.json",
+    "r1/docs/reference/gomore-engine-state-c-review.json",
+    "r1/docs/reference/goodix-spo2-confidence-c-review.json",
+    "r1/docs/reference/goodix-dual-window-c-review.json",
+    "r1/docs/reference/goodix-peak-selection-c-review.json",
+    "r1/docs/reference/goodix-peak-rate-c-review.json",
+    "r1/docs/reference/goodix-packed-conversion-c-review.json",
+    "r1/docs/reference/goodix-autocorrelation-c-review.json",
+    "r1/docs/reference/goodix-peak-metrics-c-review.json",
+    "r1/docs/reference/goodix-spo2-statistics-c-review.json",
+    "r1/docs/reference/goodix-gaussian-interval-c-review.json",
+    "r1/docs/reference/goodix-spo2-output-c-review.json",
+    "r1/docs/reference/goodix-spo2-select-c-review.json",
+    "r1/docs/reference/goodix-spo2-output-quality-c-review.json",
+    "r1/docs/reference/goodix-spo2-infer-c-review.json",
+    "r1/docs/reference/goodix-model-graph-execute-c-review.json",
+    "r1/docs/reference/goodix-model-i8-convolution-c-review.json",
+    "r1/docs/reference/goodix-model-recurrent-c-review.json",
+    "r1/docs/reference/goodix-recurrent-support-c-review.json",
+    "r1/docs/reference/goodix-model-convolution-c-review.json",
+    "r1/docs/reference/goodix-model-dense-c-review.json",
+    "r1/docs/reference/goodix-model-merge-c-review.json",
+    "r1/docs/reference/classifier-container-c-review.json",
+    "r1/docs/reference/goodix-model-concatenate-c-review.json",
+    "r1/docs/reference/goodix-softmax-arithmetic-c-review.json",
+    "r1/docs/reference/goodix-model-float-pool-c-review.json",
+    "r1/docs/reference/goodix-model-scale-c-review.json",
+    "r1/docs/reference/goodix-model-transform-c-review.json",
+    "r1/docs/reference/goodix-model-quantization-c-review.json",
+    "r1/docs/reference/goodix-model-pool-add-c-review.json",
+    "r1/docs/reference/goodix-spo2-infer-support-c-review.json",
+    "r1/docs/reference/goodix-spo2-transition-c-review.json",
+    "r1/docs/reference/goodix-spo2-summary-c-review.json",
+    "r1/docs/reference/goodix-spo2-quality-c-review.json",
+    "r1/docs/reference/f32-integer-c-review.json",
+    "r1/docs/reference/goodix-spo2-ratio-c-review.json",
+    "r1/docs/reference/spectral-tail-dual-return-c-review.json",
+    "r1/docs/reference/math-selection-intrinsics-c-review.json",
+    "r1/docs/reference/goodix-spectral-parent-c-review.json",
+    "r1/docs/reference/goodix-spectral-harmonic-c-review.json",
+    "r1/docs/reference/goodix-spectral-peaks-c-review.json",
+    "r1/docs/reference/goodix-spectral-prepare-c-review.json",
+    "r1/docs/reference/goodix-spectral-fft-c-review.json",
+    "r1/docs/reference/goodix-spectral-quantile-c-review.json",
+    "r1/docs/reference/goodix-spectral-cleanup-c-review.json",
+    "r1/docs/reference/goodix-spo2-motion-c-review.json",
+    "r1/docs/reference/goodix-spo2-optical-c-review.json",
+    "r1/docs/reference/goodix-rolling-feature-c-review.json",
+    "r1/docs/reference/goodix-spo2-result-encode-c-review.json",
+    "r1/docs/reference/goodix-spo2-batch-c-review.json",
+    "r1/docs/reference/goodix-spo2-decode-c-review.json",
+    "r1/docs/reference/goodix-spo2-assemble-c-review.json",
+    "r1/docs/reference/goodix-spo2-packet-layout-c-review.json",
+    "r1/docs/reference/goodix-spo2-calculate-c-review.json",
+    "r1/docs/reference/goodix-spo2-math-c-review.json",
+    "r1/docs/reference/goodix-spo2-execute-c-review.json",
+    "r1/docs/reference/goodix-soft-adt-execute-c-review.json",
+    "r1/docs/reference/goodix-hr-execute-c-review.json",
+    "r1/docs/reference/goodix-hrv-execute-c-review.json",
+    "r1/docs/reference/goodix-adt-calculate-c-review.json",
+    "r1/docs/reference/goodix-algorithm-calculate-c-review.json",
+    "r1/docs/reference/time-update-pure-c-review.json",
+    "r1/docs/reference/goodix-nadt-initialize-c-review.json",
+    "r1/docs/reference/goodix-hrv-initialize-c-review.json",
+    "r1/docs/reference/goodix-mode6-c-review.json",
+    "r1/docs/reference/goodix-graph-families-c-review.json",
+    "r1/docs/reference/goodix-graph-initialize-c-review.json",
+    "r1/docs/reference/goodix-graph-dispatch-c-review.json",
+    "r1/docs/reference/goodix-hba-workspace-c-review.json",
+    "r1/docs/reference/goodix-hba-initialize-c-review.json",
+    "r1/docs/reference/goodix-model-graph-c-review.json",
+    "r1/docs/reference/goodix-generated-model-c-review.json",
+    "r1/docs/reference/goodix-spo2-model-resource-c-review.json",
+    "r1/docs/reference/goodix-spo2-session-c-review.json",
+    "r1/docs/reference/goodix-spo2-initialize-c-review.json",
+    "r1/docs/reference/goodix-engine-setup-c-review.json",
+    "r1/docs/reference/goodix-algorithm-init-c-review.json",
+    "r1/docs/reference/goodix-algorithm-version-c-review.json",
+    "r1/docs/reference/board-callbacks-pure-c-review.json",
+    "r1/docs/reference/wear-decisions-pure-c-review.json",
+    "r1/docs/reference/goodix-algorithm-shutdown-c-review.json",
+    "r1/docs/reference/goodix-native-nadt-reset-c-review.json",
+    "r1/docs/reference/goodix-native-spo2-teardown-c-review.json",
+    "r1/docs/reference/goodix-native-processing-teardown-c-review.json",
+    "r1/docs/reference/goodix-native-record-teardown-c-review.json",
+    "r1/docs/reference/goodix-native-workspace-teardown-c-review.json",
+    "r1/docs/reference/goodix-native-hrv-teardown-c-review.json",
+    "r1/docs/reference/goodix-native-reallocate-c-review.json",
+    "r1/docs/reference/goodix-native-malloc-c-review.json",
+    "r1/docs/reference/goodix-native-bin-allocate-c-review.json",
+    "r1/docs/reference/goodix-native-heap-free-c-review.json",
+    "r1/docs/reference/goodix-native-heap-init-c-review.json",
+    "r1/docs/reference/goodix-algorithm-config-c-review.json",
+    "r1/docs/reference/goodix-init-hook-c-review.json",
+    "r1/docs/reference/notification-throttle-pure-c-review.json",
+    "r1/docs/reference/health-init-entry-pure-c-review.json",
+    "r1/docs/reference/activity-store-pure-c-review.json",
+    "r1/docs/reference/activity-bucket-pure-c-review.json",
+    "r1/docs/reference/health-state-publish-pure-c-review.json",
+    "r1/docs/reference/latest-entry-pure-c-review.json",
+    "r1/docs/reference/hrv-store-pure-c-review.json",
+    "r1/docs/reference/hr-store-pure-c-review.json",
+    "r1/docs/reference/spo2-store-pure-c-review.json",
+    "r1/docs/reference/temperature-store-pure-c-review.json",
+    "r1/docs/reference/stress-sample-pure-c-review.json",
+    "r1/docs/reference/scalar-cache-layout-review.json",
+    "r1/docs/reference/health-cache-ownership-review.json",
+    "r1/docs/reference/multicast-entry-pure-c-review.json",
+    "r1/docs/reference/retained-log-sink-pure-c-review.json",
+    "r1/docs/reference/crash-snapshot-builder-pure-c-review.json",
+    "r1/docs/reference/crash-initializer-pure-c-review.json",
+    "r1/docs/reference/hour-index-pure-c-review.json",
+    "r1/docs/reference/sleep-sync-marker-pure-c-review.json",
+    "r1/docs/reference/sleep-record-pure-c-review.json",
+    "r1/docs/reference/sleep-sector-select-pure-c-review.json",
+    "r1/docs/reference/sleep-sector-finalize-pure-c-review.json",
+    "r1/docs/reference/sleep-sector-write-pure-c-review.json",
+    "r1/docs/reference/sleep-delete-c-review.json",
+    "r1/docs/reference/sleep-erase-pure-c-review.json",
+    "r1/docs/reference/health-clear-c-review.json",
+    "r1/docs/reference/state-append-c-review.json",
+    "r1/docs/reference/worker-exit-c-review.json",
+    "r1/docs/reference/manager-events-c-review.json",
+    "r1/docs/reference/nv-bootstrap-c-review.json",
+    "r1/docs/reference/nv-startup-c-review.json",
+    "r1/docs/reference/application-manager-c-review.json",
+    "r1/docs/reference/log-calendar-pure-c-review.json",
+    "r1/docs/reference/connection-gates-pure-c-review.json",
+    "r1/docs/reference/reset-decode-pure-c-review.json",
+    "r1/docs/reference/stacmd-void-c-review.json",
+    "r1/docs/reference/device-status-pure-c-review.json",
+    "r1/docs/reference/bma-callbacks-pure-c-review.json",
+    "r1/docs/reference/qma-tap-pure-c-review.json",
+    "r1/docs/reference/lis-aux-pure-c-review.json",
+    "r1/docs/reference/lis-config-pure-c-review.json",
+    "r1/docs/reference/lis-entries-pure-c-review.json",
+    "r1/docs/reference/qma-transport-pure-c-review.json",
+    "r1/docs/reference/system-settings-pure-c-review.json",
+    "r1/docs/reference/power-command-pure-c-review.json",
+    "r1/docs/reference/battery-low-pure-c-review.json",
+    "r1/docs/reference/yhm-status-pure-c-review.json",
+    "r1/docs/reference/yhm-ladder-pure-c-review.json",
+    "r1/docs/reference/protocol-serial-c-review.json",
+    "r1/docs/reference/nv-recovery-route-c-review.json",
+    "r1/docs/reference/nv-recovery-merge-c-review.json",
+    "r1/docs/reference/nv-recovery-report-c-review.json",
+    "r1/docs/reference/nv-default-restore-c-review.json",
+    "r1/docs/reference/fal-bounds-c-review.json",
+    "r1/docs/reference/flash-write-c-review.json",
+    "r1/docs/reference/flash-iterator-c-review.json",
+    "r1/docs/reference/flash-defined-c-review.json",
+    "r1/docs/reference/fal-read-completion-c-review.json",
+    "r1/docs/reference/send-hook-c-review.json",
+    "r1/docs/reference/send-registration-c-review.json",
+    "r1/docs/reference/eus-range-c-review.json",
+    "r1/docs/reference/rx-reassembly-c-review.json",
+    "r1/docs/reference/dfu-policy-c-review.json",
+    "r1/docs/reference/peer-policy-c-review.json",
+    "r1/docs/reference/touch-switch-c-review.json",
+    "r1/docs/reference/glasses-status-c-review.json",
+    "r1/docs/reference/gap-event-c-review.json",
+    "r1/docs/reference/connection-phy-c-review.json",
+    "r1/docs/reference/peer-address-c-review.json",
+    "r1/docs/reference/connection-consumer-c-review.json",
+    "r1/docs/reference/connection-mode-c-review.json",
+    "r1/docs/reference/slider-state-c-review.json",
+    "r1/docs/reference/slider-support-c-review.json",
+    "r1/docs/reference/touch-pending-c-review.json",
+    "r1/docs/reference/bsn-reader-c-review.json",
+    "r1/docs/reference/iqs-audit-c-review.json",
+    "r1/docs/reference/touch-calibration-c-review.json",
+    "r1/docs/reference/iqs-configure-c-review.json",
+    "r1/docs/reference/iqs-recovery-c-review.json",
+    "r1/docs/reference/hardware-variant-c-review.json",
+    "r1/docs/reference/iqs-irq-c-review.json",
+    "r1/docs/reference/iqs-port-c-review.json",
+    "r1/docs/reference/touch-dispatch-c-review.json",
+    "r1/docs/reference/touch-worker-c-review.json",
+    "r1/docs/reference/peer-restore-c-review.json",
+    "r1/docs/reference/gap-identity-c-review.json",
+    "r1/docs/reference/ble-initialize-c-review.json",
+    "r1/docs/reference/peripheral-watchdog-c-review.json",
+    "r1/docs/reference/advertising-control-c-review.json",
+    "r1/docs/reference/tx-power-c-review.json",
+    "r1/docs/reference/ble-worker-c-review.json",
+    "r1/docs/reference/task-startup-c-review.json",
+    "r1/docs/reference/task-barrier-c-review.json",
+    "r1/docs/reference/nv-update-pure-c-review.json",
+    "r1/docs/reference/nfc-dispatch-c-review.json",
+    "r1/docs/reference/pmic-charged-c-review.json",
+    "r1/docs/reference/dock-advertisement-c-review.json",
+    "r1/docs/reference/dock-policy-c-review.json",
+    "r1/docs/reference/mailbox-receive-c-review.json",
+    "r1/docs/reference/pmic-charge-policy-c-review.json",
+    "r1/docs/reference/pmic-retry-c-review.json",
+    "r1/docs/reference/battery-initialize-c-review.json",
+    "r1/docs/reference/st25-mailbox-c-review.json",
+    "r1/docs/reference/log-chain-review.json",
+    "r1/docs/reference/vendor-dfu-c-review.json",
+    "r1/docs/reference/app-timer-counter-c-review.json"
+  ],
+  "comparison_report": "build/sources-goal-r1-engine-state-c/report.json"
+}

@@ -1,6 +1,4 @@
-/* Native AppUiDisplayPasskey 0x4bd7fa and AppUiDisplayConfirmValue 0x4bd91e.
- * Their ARM entry frames carry the inherited fourth log argument and return
- * the outgoing IAR varargs words after a gated extended log. */
+/* Native AppUiDisplayPasskey 0x4bd7fa and AppUiDisplayConfirmValue 0x4bd91e. */
 #include <stdint.h>
 
 extern uint32_t audio_ble_hci_vendor_log_enabled_4c9c50(void);
@@ -16,15 +14,14 @@ static const char warn[] = "WARN";
 static const char app[] = "APP";
 static const char hci[] = "HCI";
 static const char path[] = "D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\cordio\\ble-profiles\\sources\\apps\\app\\common\\app_ui.c";
-static const char passkey_message[] __attribute__((used)) = ">>> Passkey: %d <<<";
-static const char confirm_message[] __attribute__((used)) = ">>> Confirm Value: %d <<<";
-static const char passkey_function[] __attribute__((used)) = "AppUiDisplayPasskey";
-static const char confirm_function[] __attribute__((used)) = "AppUiDisplayConfirmValue";
+static const char passkey_message[] = ">>> Passkey: %d <<<";
+static const char confirm_message[] = ">>> Confirm Value: %d <<<";
+static const char passkey_function[] = "AppUiDisplayPasskey";
+static const char confirm_function[] = "AppUiDisplayConfirmValue";
 
-void audio_ble_pair_ui_diagnostic_body(uint32_t *saved, const char *message,
-                                        const char *function, uint32_t line)
+static void pair_ui_diagnostic(uint32_t value, const char *message,
+                               const char *function, uint32_t line)
 {
-    const uint32_t value = saved[0];
     uint8_t level = 0u;
     if (audio_ble_hci_vendor_log_enabled_4c9c50() &&
         audio_l2c_strncmp(info, err, 3u) == 0) level = 1u;
@@ -37,42 +34,24 @@ void audio_ble_pair_ui_diagnostic_body(uint32_t *saved, const char *message,
              audio_l2c_strncmp(app, hci, 3u) != 0)
         audio_ble_wsf_trace(info, message, value);
 
-    if (level != 0u && (audio_log_level() & 2u)) {
-        saved[0] = line;
-        saved[1] = (uint32_t)(uintptr_t)message;
-        saved[2] = value;
-        if (level == 1u)
-            audio_log_extended(level, app, path, function, line, message, value, saved[3]);
-        else
-            audio_log_extended(level, app, path, function, line, message, value);
-    }
+    /* The stock level-1 call also passed the caller's R3 as an extra variadic
+     * word that the one-%d format never reads; it is not passed here. */
+    if (level != 0u && (audio_log_level() & 2u))
+        audio_log_extended(level, app, path, function, line, message, value);
     const uintptr_t callback = audio_ble_ui_callback_cells[1];
     if (callback != 0u)
         ((void (*)(uint32_t, uint32_t))callback)(line == 0xb7u ? 15u : 16u, value);
 }
 
-/* Stock 0x004BD7FA (FUN_004bd7fa, AppUiDisplayPasskey) */
-__attribute__((naked)) void audio_ble_pair_passkey_trace(uint32_t value __attribute__((unused)))
+/* Stock 0x004BD7FA (FUN_004bd7fa, AppUiDisplayPasskey). The stock epilogue
+ * popped spilled argument words into R0-R3; the function is void. */
+void audio_ble_pair_passkey_trace(uint32_t value)
 {
-    __asm__ volatile(
-        "push {r0, r1, r2, r3, r4, lr}\n"
-        "mov r0, sp\n"
-        "ldr r1, =passkey_message\n"
-        "ldr r2, =passkey_function\n"
-        "movs r3, #0xb7\n"
-        "bl audio_ble_pair_ui_diagnostic_body\n"
-        "pop {r0, r1, r2, r3, r4, pc}\n");
+    pair_ui_diagnostic(value, passkey_message, passkey_function, 0xb7u);
 }
 
 /* Stock 0x004BD91E (FUN_004bd91e, AppUiDisplayConfirmValue) */
-__attribute__((naked)) void audio_ble_pair_compare_trace(uint32_t value __attribute__((unused)))
+void audio_ble_pair_compare_trace(uint32_t value)
 {
-    __asm__ volatile(
-        "push {r0, r1, r2, r3, r4, lr}\n"
-        "mov r0, sp\n"
-        "ldr r1, =confirm_message\n"
-        "ldr r2, =confirm_function\n"
-        "movs r3, #0xca\n"
-        "bl audio_ble_pair_ui_diagnostic_body\n"
-        "pop {r0, r1, r2, r3, r4, pc}\n");
+    pair_ui_diagnostic(value, confirm_message, confirm_function, 0xcau);
 }

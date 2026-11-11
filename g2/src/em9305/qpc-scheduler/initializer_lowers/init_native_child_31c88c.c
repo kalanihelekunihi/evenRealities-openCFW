@@ -1,160 +1,81 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_31c88c\n"
-".type opencfw_em9305_child_31c88c,@function\n"
-"opencfw_em9305_child_31c88c:\n"
-"L31c88c:\n"
-"enter_s [r13-r17,blink]\n"
-"L31c88e:\n"
-"mov_s r13,r0\n"
-"L31c890:\n"
-"mov_s r16,r2\n"
-"L31c892:\n"
-"mov_s r14,r0\n"
-"L31c894:\n"
-"add r0,r0,484\n"
-"L31c898:\n"
-"mov_s r1,0\n"
-"L31c89a:\n"
-"mov_s r2,0xd8\n"
-"L31c89c:\n"
-"mov_s r15,r4\n"
-"L31c89e:\n"
-"mov_s r17,r3\n"
-"L31c8a0:\n"
-"bl.d opencfw_em9305_memset\n"
-"L31c8a4:\n"
-"add r14,r14,656\n"
-"L31c8a8:\n"
-"ldb r8,[r13,98]\n"
-"L31c8ac:\n"
-"mov_s r1,opencfw_em9305_child_31c990\n"
-"L31c8b2:\n"
-"mov_s r2,0x805a8c\n"
-"L31c8b8:\n"
-"st.as r1,[r13,129]\n"
-"L31c8bc:\n"
-"st.as r1,[r13,128]\n"
-"L31c8c0:\n"
-"ldb_s r1,[r2,0x10]\n"
-"L31c8c2:\n"
-"mov_s r0,r13\n"
-"L31c8c4:\n"
-"mov r3,384\n"
-"L31c8c8:\n"
-"mov_s r11,0x555555\n"
-"L31c8ce:\n"
-"mov_s r12,0x8e89bed6\n"
-"L31c8d4:\n"
-"add r0,r0,532\n"
-"L31c8d8:\n"
-"stb 1,[r14,-146]\n"
-"L31c8dc:\n"
-"stb 2,[r14,-148]\n"
-"L31c8e0:\n"
-"stb 6,[r14,-124]\n"
-"L31c8e4:\n"
-"st.as r13,[r13,130]\n"
-"L31c8e8:\n"
-"sth r3,[r14,-48]\n"
-"L31c8ec:\n"
-"st.as r11,[r13,135]\n"
-"L31c8f0:\n"
-"st.as r12,[r13,134]\n"
-"L31c8f4:\n"
-"st.as r0,[r13,132]\n"
-"L31c8f8:\n"
-"brhs.d.nt r8,0x5,L31c90a\n"
-"L31c8fc:\n"
-"stb r1,[r14,-122]\n"
-"L31c900:\n"
-"mov_s r0,0x1a\n"
-"L31c902:\n"
-"bbit0.nt r0,r8,L31c90a\n"
-"L31c906:\n"
-"sth r3,[r14,-46]\n"
-"L31c90a:\n"
-"ldb r0,[r13,99]\n"
-"L31c90e:\n"
-"st.as 0,[r13,160]\n"
-"L31c912:\n"
-"st.as opencfw_em9305_child_320b3c,[r13,159]\n"
-"L31c91a:\n"
-"and.f r0,r0,0x1\n"
-"L31c91e:\n"
-"asl_s r0,r0\n"
-"L31c920:\n"
-"stb 1,[r14,8]\n"
-"L31c924:\n"
-"bne_s L31c932\n"
-"L31c926:\n"
-"mov_s r1,0x805b40\n"
-"L31c92c:\n"
-"ld r3,[r1,0x4]\n"
-"L31c92e:\n"
-"ld r1,[r1,0]\n"
-"L31c930:\n"
-"b_s L31c936\n"
-"L31c932:\n"
-"ld r3,[r2,0x4]\n"
-"L31c934:\n"
-"ld r1,[r2,0]\n"
-"L31c936:\n"
-"ldb_s r2,[r2,0x11]\n"
-"L31c938:\n"
-"st.as r1,[r13,154]\n"
-"L31c93c:\n"
-"add_s r1,r0,0x1\n"
-"L31c93e:\n"
-"st.as r3,[r13,155]\n"
-"L31c942:\n"
-"st.as r1,[r13,153]\n"
-"L31c946:\n"
-"breq_s r2,0,L31c952\n"
-"L31c948:\n"
-"or r0,r0,81\n"
-"L31c94c:\n"
-"mov_s r1,r0\n"
-"L31c94e:\n"
-"st.as r0,[r13,153]\n"
-"L31c952:\n"
-"brne.d.nt r8,0,L31c96c\n"
-"L31c956:\n"
-"asl_s r0,r15,0x3\n"
-"L31c958:\n"
-"and r0,r0,0x8\n"
-"L31c95c:\n"
-"or_s r0,r0,r1\n"
-"L31c95e:\n"
-"bset_s r0,r0,0x2\n"
-"L31c960:\n"
-"st.as r16,[r13,156]\n"
-"L31c964:\n"
-"st.as r17,[r13,157]\n"
-"L31c968:\n"
-"st.as r0,[r13,153]\n"
-"L31c96c:\n"
-"mov_s r1,0\n"
-"L31c96e:\n"
-"mov_s r2,0x24\n"
-"L31c970:\n"
-"add1 r0,r13,0x38\n"
-"L31c974:\n"
-"st.as opencfw_em9305_child_320d68,[r13,161]\n"
-"L31c97c:\n"
-"stb r1,[r13,241]\n"
-"L31c980:\n"
-"stb_s r1,[r13,0x1]\n"
-"L31c982:\n"
-"stb_s r2,[r14,0]\n"
-"L31c984:\n"
-"st.as r0,[r13,158]\n"
-"L31c988:\n"
-"mov_s r0,0\n"
-"L31c98a:\n"
-"stb_s r1,[r13,0x2]\n"
-"L31c98c:\n"
-"leave_s [r13-r17,blink,pcl]\n"
-".size opencfw_em9305_child_31c88c,.-opencfw_em9305_child_31c88c\n"
-);
+#include <stdint.h>
+
+/* Native 0x31c88c..0x31c98e: initialise the link's advertising/initiating
+ * block (+484, 216 bytes): completion callbacks (31c990 twice, 320b3c,
+ * 320d68), owner, channel/access defaults (access address 0x8e89bed6,
+ * CRC init 0x555555, 384 us windows, the second one only for PHY modes
+ * 1, 3 and 4 of +98), the clock-accuracy byte (0x805a9c) and the own
+ * address: the static (0x805b40) or public (0x805a8c) one by bit 0 of
+ * +99, with address-type flags (+612) extended by 0x51 when resolution is
+ * enabled (0x805a9d) and, for PHY mode 0, by the peer address type and
+ * the peer address (+624/+628). Clears the state bytes and returns 0. */
+extern void *opencfw_em9305_memset(void *dst,uint32_t value,uint32_t count);
+extern uint32_t opencfw_em9305_child_31c990(uintptr_t object);
+extern uint32_t opencfw_em9305_child_320b3c(uintptr_t object);
+extern uint32_t opencfw_em9305_child_320d68(uintptr_t context,uintptr_t pdu);
+
+static inline uint32_t r8(uintptr_t a){return *(volatile uint8_t *)a;}
+static inline uint32_t r32(uintptr_t a){return *(volatile uint32_t *)a;}
+static inline void w8(uintptr_t a,uint32_t v){*(volatile uint8_t *)a=(uint8_t)v;}
+static inline void w16(uintptr_t a,uint32_t v){*(volatile uint16_t *)a=(uint16_t)v;}
+static inline void w32(uintptr_t a,uint32_t v){*(volatile uint32_t *)a=v;}
+
+uint32_t opencfw_em9305_child_31c88c(uintptr_t link,uint32_t unused,
+                                     uint32_t peer_low,uint32_t peer_high,
+                                     uint32_t peer_type)
+{
+    (void)unused;
+    (void)opencfw_em9305_memset((void *)(link+484u),0u,216u);
+    uint32_t mode=r8(link+98u);
+    uint32_t done=(uint32_t)(uintptr_t)opencfw_em9305_child_31c990;
+    w32(link+516u,done);
+    w32(link+512u,done);
+    uint32_t accuracy=r8(0x805a9cu);
+    w8(link+510u,1u);
+    w8(link+508u,2u);
+    w8(link+532u,6u);
+    w32(link+520u,link);
+    w16(link+608u,384u);
+    w32(link+540u,0x555555u);
+    w32(link+536u,0x8e89bed6u);
+    w32(link+528u,link+532u);
+    w8(link+534u,accuracy);
+    if(mode<5u&&((0x1au>>mode)&1u)!=0u)w16(link+610u,384u);
+    uint32_t options=r8(link+99u);
+    w32(link+640u,0u);
+    w32(link+636u,(uint32_t)(uintptr_t)opencfw_em9305_child_320b3c);
+    uint32_t random=options&1u;
+    uint32_t type=random<<1;
+    w8(link+664u,1u);
+    uint32_t low,high;
+    if(random==0u){
+        high=r32(0x805b44u);
+        low=r32(0x805b40u);
+    }else{
+        high=r32(0x805a90u);
+        low=r32(0x805a8cu);
+    }
+    uint32_t resolve=r8(0x805a9du);
+    w32(link+616u,low);
+    uint32_t flags=type+1u;
+    w32(link+620u,high);
+    w32(link+612u,flags);
+    if(resolve!=0u){
+        type|=0x51u;
+        flags=type;
+        w32(link+612u,type);
+    }
+    if(mode==0u){
+        uint32_t value=((peer_type<<3)&8u)|flags|4u;
+        w32(link+624u,peer_low);
+        w32(link+628u,peer_high);
+        w32(link+612u,value);
+    }
+    w32(link+644u,(uint32_t)(uintptr_t)opencfw_em9305_child_320d68);
+    w8(link+241u,0u);
+    w8(link+1u,0u);
+    w8(link+656u,0x24u);
+    w32(link+632u,link+112u);
+    w8(link+2u,0u);
+    return 0u;
+}

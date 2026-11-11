@@ -1,90 +1,78 @@
-/* Full native 31ca28 callback; BL operands remain genuine child symbols. */
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_dispatch_callback_31ca28\n"
-".type opencfw_em9305_dispatch_callback_31ca28,@function\n"
-"opencfw_em9305_dispatch_callback_31ca28:\n"
-"L31ca28: enter_s [r13-r22,blink]\n"
-"L31ca2a: mov_s r15,0x805c7c\n"
-"L31ca30: ld_s r13,[r15,0]\n"
-"L31ca32: mov_s r19,r0\n"
-"L31ca34: add_s r14,r13,0x4\n"
-"L31ca36: bl.d opencfw_em9305_dispatch_child_322c94\n"
-"L31ca3a: mov_s r1,r14\n"
-"L31ca3c: mov_s r0,r19\n"
-"L31ca3e: bl.d opencfw_em9305_dispatch_child_322bac\n"
-"L31ca42: mov_s r1,r14\n"
-"L31ca44: mov r18,r19\n"
-"L31ca48: mov r17,r19\n"
-"L31ca4c: mov r21,r19\n"
-"L31ca50: mov_s r22,0\n"
-"L31ca52: mov_s r14,0\n"
-"L31ca54: add r18,r18,269\n"
-"L31ca58: add r17,r17,268\n"
-"L31ca5c: add r21,r21,203\n"
-"L31ca60: ldb_s r0,[r13,0x14]\n"
-"L31ca62: brhs.d.nt r14,r0,L31caf4\n"
-"L31ca66: mov_s r16,0\n"
-"L31ca68: ldb r1,[r19,202]\n"
-"L31ca6c: sub.f lp_count,r1,0\n"
-"L31ca70: beq_s L31cad6\n"
-"L31ca72: add_s r0,r14,0x1\n"
-"L31ca74: mov r2,r21\n"
-"L31ca78: lp L31ca86\n"
-"L31ca7c: ldb.ab r3,[r2,1]\n"
-"L31ca80: breq.nt r0,r3,L31ca8a\n"
-"L31ca84: add_s r16,r16,1\n"
-"L31ca86: mov_s r16,r1\n"
-"L31ca88: b_s L31cad6\n"
-"L31ca8a: bl.d opencfw_em9305_radio_stream_allocate_316ad4\n"
-"L31ca8e: mov_s r0,r19\n"
-"L31ca90: breq.d.nt r0,0,L31cb0e\n"
-"L31ca94: mov_s r20,r0\n"
-"L31ca96: ld r4,[r13,56]\n"
-"L31ca9a: ld_s r3,[r13,0x34]\n"
-"L31ca9c: ldb r5,[r13,60]\n"
-"L31caa0: ldh_s r2,[r13,0x32]\n"
-"L31caa2: ld_s r1,[r13,0x28]\n"
-"L31caa4: bl.d opencfw_em9305_radio_stream_setup_327718\n"
-"L31caa8: mov_s r0,r20\n"
-"L31caaa: ld.as r0,[r19,64]\n"
-"L31caae: breq_s r0,0,L31cac6\n"
-"L31cab0: ld.as r0,[r19,65]\n"
-"L31cab4: brne_s r0,0,L31cad6\n"
-"L31cab6: ldb r0,[r17]\n"
-"L31caba: st.as r20,[r19,65]\n"
-"L31cabe: sub_s r0,r14,r0\n"
-"L31cac0: stb r0,[r18]\n"
-"L31cac4: b_s L31cad6\n"
-"L31cac6: ld_s r0,[r19,0xc]\n"
-"L31cac8: st.as r20,[r19,64]\n"
-"L31cacc: stb r14,[r17]\n"
-"L31cad0: mpy_s r0,r0,r14\n"
-"L31cad2: st.as r0,[r19,66]\n"
-"L31cad6: ldb r0,[r19,202]\n"
-"L31cada: brne.nt r16,r0,L31caf0\n"
-"L31cade: ldb r0,[r19,52]\n"
-"L31cae2: add_s r1,r0,0x1\n"
-"L31cae4: add2 r0,r19,r0\n"
-"L31cae8: stb r1,[r19,52]\n"
-"L31caec: st r22,[r0,56]\n"
-"L31caf0: add_s r14,r14,1\n"
-"L31caf2: b_s L31ca60\n"
-"L31caf4: ld r0,[r15,0]\n"
-"L31caf6: add_s r1,r0,0x4\n"
-"L31caf8: bl.d opencfw_em9305_dispatch_child_31ccf4\n"
-"L31cafc: mov_s r0,r19\n"
-"L31cafe: ld r1,[r19,224]\n"
-"L31cb02: bl.d opencfw_em9305_wsf_timer_start_ms\n"
-"L31cb06: add2 r0,r19,0x34\n"
-"L31cb0a: mov_s r1,0\n"
-"L31cb0c: b_s L31cb16\n"
-"L31cb0e: bl.d opencfw_em9305_dispatch_callback_31cb40\n"
-"L31cb12: mov_s r0,r19\n"
-"L31cb14: mov_s r1,0xd\n"
-"L31cb16: bl.d opencfw_em9305_dispatch_child_322e80\n"
-"L31cb1a: mov_s r0,r19\n"
-"L31cb1c: leave_s [r13-r22,blink,pcl]\n"
-".size opencfw_em9305_dispatch_callback_31ca28,.-opencfw_em9305_dispatch_callback_31ca28\n"
-);
+#include <stdint.h>
+
+/* Native 0x31ca28..0x31cb1e: create the BIG streams. Load the stream
+ * parameters (322c94/322bac) from the pending request (*0x805c7c + 4);
+ * for each stream number i+1 below the request count (+20) that is listed
+ * in the record's selection (count +202, list +203), allocate and set up
+ * a stream from the request's access address, CRC, channel words and PHY,
+ * keeping the first two allocated streams (+256/+260) with their index
+ * (+268) and spacing (+269) and the first offset (+264 = +12 * i). A
+ * stream number that is not listed gets a zero entry in the stream table
+ * (+56, count +52). Then finish the request (31ccf4), start the BIG timer
+ * (+208, +224 ms) and report status 0, or report 0x0d after 31cb40 when an
+ * allocation fails. */
+extern uint32_t opencfw_em9305_dispatch_child_322c94(uintptr_t record,
+                                                     uintptr_t params);
+extern void opencfw_em9305_dispatch_child_322bac(uintptr_t record,
+                                                 uintptr_t parameters);
+extern uintptr_t opencfw_em9305_radio_stream_allocate_316ad4(uintptr_t record);
+extern uintptr_t opencfw_em9305_radio_stream_setup_327718(uintptr_t stream,
+    uint32_t access,uint32_t crc,uint32_t lower,uint32_t upper,uint32_t phy);
+extern uint32_t opencfw_em9305_dispatch_child_31ccf4(uintptr_t record,
+                                                     uintptr_t params);
+extern uint32_t opencfw_em9305_wsf_timer_start_ms(uintptr_t timer,
+                                                  uint32_t milliseconds);
+extern uint32_t opencfw_em9305_dispatch_callback_31cb40(uintptr_t record);
+extern uint32_t opencfw_em9305_dispatch_child_322e80(uintptr_t big,
+                                                     uint32_t status);
+
+uint32_t opencfw_em9305_dispatch_callback_31ca28(uintptr_t record)
+{
+    uintptr_t request=*(volatile uint32_t *)0x805c7cu;
+    (void)opencfw_em9305_dispatch_child_322c94(record,request+4u);
+    opencfw_em9305_dispatch_child_322bac(record,request+4u);
+    for(uint32_t index=0u;index<*(volatile uint8_t *)(request+20u);++index){
+        uint32_t listed=*(volatile uint8_t *)(record+202u);
+        uint32_t position=0u;
+        if(listed!=0u){
+            for(;;){
+                if(position==listed)break;
+                if(index+1u==*(volatile uint8_t *)(record+203u+position))break;
+                ++position;
+            }
+            if(position!=listed){
+                uintptr_t stream=opencfw_em9305_radio_stream_allocate_316ad4(record);
+                if(stream==0u){
+                    (void)opencfw_em9305_dispatch_callback_31cb40(record);
+                    return opencfw_em9305_dispatch_child_322e80(record,0x0du);
+                }
+                (void)opencfw_em9305_radio_stream_setup_327718(stream,
+                    *(volatile uint32_t *)(request+40u),
+                    *(volatile uint16_t *)(request+50u),
+                    *(volatile uint32_t *)(request+52u),
+                    *(volatile uint32_t *)(request+56u),
+                    *(volatile uint8_t *)(request+60u));
+                if(*(volatile uint32_t *)(record+256u)==0u){
+                    uint32_t period=*(volatile uint32_t *)(record+12u);
+                    *(volatile uint32_t *)(record+256u)=stream;
+                    *(volatile uint8_t *)(record+268u)=(uint8_t)index;
+                    *(volatile uint32_t *)(record+264u)=period*index;
+                }else if(*(volatile uint32_t *)(record+260u)==0u){
+                    uint32_t first=*(volatile uint8_t *)(record+268u);
+                    *(volatile uint32_t *)(record+260u)=stream;
+                    *(volatile uint8_t *)(record+269u)=(uint8_t)(index-first);
+                }
+            }
+        }
+        if(position==*(volatile uint8_t *)(record+202u)){
+            uint32_t slot=*(volatile uint8_t *)(record+52u);
+            *(volatile uint8_t *)(record+52u)=(uint8_t)(slot+1u);
+            *(volatile uint32_t *)(record+slot*4u+56u)=0u;
+        }
+    }
+    (void)opencfw_em9305_dispatch_child_31ccf4(record,
+                                               *(volatile uint32_t *)0x805c7cu+4u);
+    (void)opencfw_em9305_wsf_timer_start_ms(record+208u,
+                                            *(volatile uint32_t *)(record+224u));
+    return opencfw_em9305_dispatch_child_322e80(record,0u);
+}

@@ -1,11 +1,11 @@
 #include <stdint.h>
-/* Product status publisher0x5e118. Only authenticated cells are typed here;
- * ownership/initialization of the ring and device-state roots remains gated. */
+#include "native_battery_context.h"
+/* Product status publisher 0x5e118. Ring storage is owned by
+ * runtime/native_status_ring.c; battery state uses its shared context. */
 extern volatile uint8_t r1_status_read_index,r1_status_write_index;
 extern volatile uint16_t r1_status_dropped;
 struct r1_status_record { uint32_t packed,timestamp; };
 extern struct r1_status_record r1_status_records[];
-extern volatile uint8_t r1_device_state_byte_2c,r1_device_state_byte_2d;
 extern volatile uint16_t r1_connection_field8,r1_connection_field10;
 extern uint32_t r1_advertising_configuration_byte_get(void);
 extern uint32_t r1_battery_runtime_update_service(void);

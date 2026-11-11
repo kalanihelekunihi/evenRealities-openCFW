@@ -2,7 +2,7 @@
  * D:\01_workspace\s200_ap510b_iar_git\app\gui\navigation\navigation_ui.c
  * (log tag "navigation.ui", stock function navigation_ui_reflash_page_handler,
  * source lines 0x845..0xb5c). Native 0x549c24..0x54c245 including its
- * interleaved literal pools, trailing pool 0x54c248..0x54c267. Ghidra splits the "unknown navigation_ui_state"
+ * interleaved literal pools, trailing pool 0x54c248..0x54c267. headless-decomp splits the "unknown navigation_ui_state"
  * tail (0x54c1f2) and the shared epilogue (0x54c240) into separate rows, both
  * are part of this function.
  *

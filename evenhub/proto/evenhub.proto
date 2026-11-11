@@ -1,0 +1,114 @@
+// Reconstructed from stock nanopb descriptors (fw 2.2.6.10 root @0x0077754C,
+// fw 2.3.2.14 root @0x007D3AE4). Field numbers/types are authoritative; names follow
+// the official SDK where matched. "inferred" = tag/type known, meaning guessed.
+syntax = "proto3";
+package evenhub;
+
+message EvenHub {                 // TPL service 0xE0
+  uint32 cmd = 1;                 // u8; see Cmd in src/schema.ts
+  uint32 magic_random = 2;        // u8; echoed in the reply
+  oneof msg {
+    CreateStartUpPage create = 3;           // cmd 0
+    Result create_result = 4;               // cmd 1
+    ImageRawData img_raw = 5;               // cmd 3
+    ImageRawData img_raw_result = 6;        // cmd 4 (tag 8 carries u8 status 4/5)
+    RebuildPage rebuild = 7;                // cmd 7
+    Result rebuild_result = 8;              // cmd 8
+    TextUpgrade text_upgrade = 9;           // cmd 5
+    Result text_result = 10;                // cmd 6
+    ShutDown shutdown = 11;                 // cmd 9
+    Result shutdown_result = 12;            // cmd 10
+    DeviceEvent device_event = 13;          // cmd 2, glasses->phone
+    U32 heartbeat = 14;                     // cmd 0x0C
+    HeartbeatResult heartbeat_result = 15;  // cmd 0x0C
+    PrivateEvent private_event = 16;        // cmd 0x0B, internal L<->R
+    SysTimeout sys_event = 17;              // cmd 0x0E, internal
+    U32 audio_ctrl = 18;                    // cmd 0x0F
+    Result audio_result = 19;               // cmd 0x10
+    U32 menu_startup = 20;                  // cmd 0x11, glasses->phone
+    MenuStartupFailed menu_startup_failed = 21; // cmd 0x12
+    ImuCtrl imu_ctrl = 22;                  // cmd 0x13
+    Result imu_result = 23;                 // cmd 0x14
+    U32 unknown24 = 24;                     // fw >= 2.3
+    U32x3 unknown25 = 25;                   // fw >= 2.3
+    U32x3 unknown26 = 26;                   // fw >= 2.3
+  }
+}
+message U32 { uint32 value = 1; }
+message U32x3 { uint32 a = 1; uint32 b = 2; uint32 c = 3; }
+message Result { uint32 code = 1; }
+message HeartbeatResult { uint32 value = 1; uint32 code = 2; }
+message ShutDown { uint32 exit_mode = 1; }
+message ImuCtrl { uint32 enable = 1; uint32 report_frq = 2; }
+message MenuStartupFailed { uint32 app_id = 1; string reason = 2; /* max 200 */ }
+message PrivateEvent { uint32 container_id = 1; string name = 2; uint32 event_code = 3; uint32 data = 4; }
+message SysTimeout { uint32 a = 1; uint32 b = 2; }
+
+message CreateStartUpPage {
+  uint32 container_total_num = 1;
+  repeated ListContainer list = 2;   // max 4
+  repeated TextContainer text = 3;   // max 8
+  repeated ImageContainer image = 4; // max 4
+  uint32 widget_id = 5;
+  Menu menu = 6;                     // fw >= 2.3
+  uint32 unknown7 = 7;               // fw >= 2.3
+}
+message RebuildPage {
+  uint32 container_total_num = 1;
+  repeated ListContainer list = 2;
+  repeated TextContainer text = 3;
+  repeated ImageContainer image = 4;
+  Menu menu = 5;                     // fw >= 2.3
+}
+message ListContainer {
+  uint32 x = 1; uint32 y = 2; uint32 width = 3; uint32 height = 4;
+  uint32 border_width = 5; uint32 border_color = 6; uint32 border_radius = 7; uint32 padding = 8;
+  uint32 container_id = 9; string container_name = 10; // max 16
+  ListItems item_container = 11;
+  uint32 is_event_capture = 12;
+  uint32 z_order_index = 13;         // inferred
+}
+message ListItems { uint32 item_count = 1; uint32 item_width = 2; uint32 is_item_select_border_en = 3; repeated string item_name = 4; /* 20 x 64 */ }
+message TextContainer {
+  uint32 x = 1; uint32 y = 2; uint32 width = 3; uint32 height = 4;
+  uint32 border_width = 5; uint32 border_color = 6; uint32 border_radius = 7; uint32 padding = 8;
+  uint32 container_id = 9; string container_name = 10;
+  uint32 is_event_capture = 11;
+  string content = 12;               // max 1000
+  uint32 z_order_index = 13;         // inferred
+  uint32 text_color = 14;            // fw >= 2.3
+}
+message ImageContainer { uint32 x = 1; uint32 y = 2; uint32 width = 3; uint32 height = 4; uint32 container_id = 5; string container_name = 6; uint32 z_order_index = 7; /* inferred */ }
+message Menu { repeated MenuItem item = 1; /* max 10 */ }
+message MenuItem { string item_name = 1; uint32 item_id = 2; uint32 unknown3 = 3; repeated SubItem sub = 4; /* max 5 */ uint32 unknown5 = 5; }
+message SubItem { string name = 1; uint32 id = 2; }
+message TextUpgrade { uint32 container_id = 1; string container_name = 2; uint32 content_offset = 3; uint32 content_length = 4; string content = 5; /* max 2000 */ uint32 text_color = 6; /* fw >= 2.3 */ }
+message ImageRawData {
+  uint32 container_id = 1; string container_name = 2; uint32 session_id = 3; uint32 total_size = 4;
+  uint32 compress_mode = 5;          // 0 none, 1 RLE {count,byte}, 2 LZ4 block
+  uint32 fragment_index = 6;         // 0-based, strictly sequential
+  uint32 fragment_packet_size = 7;
+  bytes data = 8;                    // <= 4096; in the result message tag 8 is a u8 status
+}
+message DeviceEvent { oneof ev { ListEvent list = 1; TextEvent text = 2; SysEvent sys = 3; } }
+message ListEvent { uint32 container_id = 1; string container_name = 2; string item_name = 3; uint32 item_index = 4; uint32 event_type = 5; }
+message TextEvent { uint32 container_id = 1; string container_name = 2; uint32 event_type = 3; }
+message SysEvent { uint32 event_type = 1; uint32 event_source = 2; Imu imu = 3; uint32 exit_reason = 4; }
+message Imu { float x = 1; float y = 2; float z = 3; }
+
+// ---- devcfg service 0x80 (descriptor 0x7766dc, 2.2.6.10) ----
+message DevCfgSecAuth { uint32 sec_auth = 1; uint32 phone_type = 2; uint32 f3 = 3; }
+message DevCfgPipeRole { uint32 as_cmd_role = 1; uint32 f2 = 2; }
+message DevCfgErrorCode { uint32 command = 1; uint32 code = 2; }
+message DevCfgTimeSync { uint32 utc = 1; int32 tz = 2; uint32 f3 = 3; }
+message DevCfgEmpty {}
+message DevCfgRoot {
+  uint32 cmd = 1; uint32 magic = 2;
+  oneof msg {
+    DevCfgSecAuth sec_auth = 3; DevCfgPipeRole pipe_role = 4; DevCfgErrorCode error = 9;
+    DevCfgEmpty heartbeat = 13; DevCfgTimeSync time_sync = 128;
+  }
+}
+// ---- setting service 0x09 (descriptor 0x77772c): full status subset ----
+message SettingFullStatus { string left_version = 5; string right_version = 6; }
+message SettingRoot { uint32 cmd = 1; uint32 magic = 2; oneof msg { SettingFullStatus full_status = 4; } }

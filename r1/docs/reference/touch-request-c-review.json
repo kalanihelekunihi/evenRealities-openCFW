@@ -1,0 +1,218 @@
+{
+  "source": {
+    "source": "r1/src/application/board/native_touch_transport.c",
+    "payload": "r1-application",
+    "role": "candidate",
+    "toolchain": "clang",
+    "link": true,
+    "expect": "compile",
+    "returncode": 0,
+    "argv": [
+      "/usr/bin/clang",
+      "--target=arm-none-eabi",
+      "-mcpu=cortex-m4",
+      "-mthumb",
+      "-munaligned-access",
+      "-mfpu=fpv4-sp-d16",
+      "-mfloat-abi=hard",
+      "-std=c11",
+      "-Os",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-fshort-enums",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-fno-delete-null-pointer-checks",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/r1/src/vendor",
+      "-isystem",
+      "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
+      "-MD",
+      "-MF",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-touch-request-c/r1/r1-application/r1__src__application__board__native_touch_transport.c.d",
+      "-c",
+      "/Users/kalani/Repo/evenRealities-openCFW/r1/src/application/board/native_touch_transport.c",
+      "-o",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-touch-request-c/r1/r1-application/r1__src__application__board__native_touch_transport.c.o"
+    ],
+    "source_sha256": "c79cd202b8c3fb6de1e9f07b5e69cbd1badcef5680437c1d1564a66931132cbe",
+    "object_sha256": "21fe6bc86ed023b1b8472ad5ddf6763f382769ce4d03584318f684ffef7d396b",
+    "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-touch-request-c/r1/r1-application/r1__src__application__board__native_touch_transport.c.o",
+    "strong": [
+      "r1_touch_request",
+      "r1_touch_request_read_native",
+      "r1_touch_request_write_native"
+    ],
+    "weak": [],
+    "undefined": [
+      "r1_stock_dispatch_10",
+      "r1_stock_dispatch_14",
+      "r1_touch_bus_device"
+    ]
+  },
+  "normal_report": "build/sources-goal-r1-touch-request-c/report.json",
+  "validation": {
+    "paired_sequences": 6912,
+    "invocations_per_sequence": 3,
+    "paired_invocations": 20736,
+    "native_provider_frame": 8,
+    "actual_existing_bus_owner_linked": true,
+    "native_scatter_initialized_request_bytes_match": true,
+    "ordered_request_handle_and_saved_frame_accesses": true,
+    "all_provider_R4_R11": true,
+    "retained_fields_null_clears_and_raw_statuses": true,
+    "limitations": [
+      "Registry dispatcher boundary modeled; actual I2C traffic, faults, arbitrary aliases and concurrency unproven.",
+      "Caller-clobbered registers/flags except R0 excluded."
+    ]
+  },
+  "native_scatter_initialization": {
+    "locked_application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "native_decoder": "0x286f4",
+    "source": "0xc4610",
+    "destination": "0x200064a8",
+    "length": 6492,
+    "request_address": "0x2000680c",
+    "initial_bytes": "5600000000000000010000000000000001000000",
+    "decoder_return_r0": "0x0"
+  },
+  "negative_controls": {
+    "wrong-cold-command": {
+      "rejected": true,
+      "stderr": "arm-none-eabi-ld: warning: (r1_stock_dispatch_10): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-request-c/wrong-cold-command.o\narm-none-eabi-ld: warning: (r1_stock_dispatch_14): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-request-c/wrong-cold-command.o\nTraceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-touch-request-c/reject-wrong-cold-command.py\", line 9, in <module>\n    e=ELFFile(f);segments=[(s['p_vaddr'],s.data()) for s in e.iter_segments() if s['p_type']=='PT_LOAD'];syms={s.name:s['st_value'] for s in e.get_section_by_name('.symtab').iter_symbols()};assert syms['r1_touch_request']==REQUEST and syms['r1_touch_bus_device']==BUS;assert e.get_section_by_name('.request').data().hex()==json.load(open(p/'scatter-results.json'))['initial_bytes']\n                                                                                                                                                                                                                                                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    "rewrite-command": {
+      "rejected": true,
+      "stderr": "arm-none-eabi-ld: warning: (r1_stock_dispatch_10): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-request-c/rewrite-command.o\narm-none-eabi-ld: warning: (r1_stock_dispatch_14): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-request-c/rewrite-command.o\nTraceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-touch-request-c/reject-rewrite-command.py\", line 47, in <module>\n    for c in itertools.product([0,1],[0,65535,65536,0x12345678],[0,1,65535,0x10000000],[0,0x20018000,REQUEST,REQUEST+12],[0,1,8,30,0x10000000,0xffffffff],range(3),range(3)):assert a(*c)==b(*c),c;n+=1\n                                                                                                                                                                                    ^^^^^^^^^^^^\nAssertionError: (0, 0, 0, 0, 0, 0, 0)\n"
+    },
+    "skip-null": {
+      "rejected": true,
+      "stderr": "arm-none-eabi-ld: warning: (r1_stock_dispatch_10): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-request-c/skip-null.o\narm-none-eabi-ld: warning: (r1_stock_dispatch_14): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-request-c/skip-null.o\nTraceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-touch-request-c/reject-skip-null.py\", line 47, in <module>\n    for c in itertools.product([0,1],[0,65535,65536,0x12345678],[0,1,65535,0x10000000],[0,0x20018000,REQUEST,REQUEST+12],[0,1,8,30,0x10000000,0xffffffff],range(3),range(3)):assert a(*c)==b(*c),c;n+=1\n                                                                                                                                                                                    ^^^^^^^^^^^^\nAssertionError: (0, 0, 0, 0, 0, 0, 0)\n"
+    },
+    "narrow-status": {
+      "rejected": true,
+      "stderr": "arm-none-eabi-ld: warning: (r1_stock_dispatch_10): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-request-c/narrow-status.o\narm-none-eabi-ld: warning: (r1_stock_dispatch_14): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-request-c/narrow-status.o\nTraceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-touch-request-c/reject-narrow-status.py\", line 47, in <module>\n    for c in itertools.product([0,1],[0,65535,65536,0x12345678],[0,1,65535,0x10000000],[0,0x20018000,REQUEST,REQUEST+12],[0,1,8,30,0x10000000,0xffffffff],range(3),range(3)):assert a(*c)==b(*c),c;n+=1\n                                                                                                                                                                                           ~^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-touch-request-c/reject-narrow-status.py\", line 42, in run\n    assert u.reg_read(UC_ARM_REG_R0)==(status==0);results.append(u.reg_read(UC_ARM_REG_R0))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    "wrong-device": {
+      "rejected": true,
+      "stderr": "arm-none-eabi-ld: warning: (r1_stock_dispatch_10): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-request-c/wrong-device.o\narm-none-eabi-ld: warning: (r1_stock_dispatch_14): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-touch-request-c/wrong-device.o\nTraceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-touch-request-c/reject-wrong-device.py\", line 47, in <module>\n    for c in itertools.product([0,1],[0,65535,65536,0x12345678],[0,1,65535,0x10000000],[0,0x20018000,REQUEST,REQUEST+12],[0,1,8,30,0x10000000,0xffffffff],range(3),range(3)):assert a(*c)==b(*c),c;n+=1\n                                                                                                                                                                                           ~^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-touch-request-c/reject-wrong-device.py\", line 40, in run\n    root=(0x9338c if read else 0x933b4) if stock else syms['r1_touch_request_read_native' if read else 'r1_touch_request_write_native'];u.emu_start(root|1,STOP,count=300)\n                                                                                                                                        ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 769, in emu_start\n    raise self._hook_exception\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 363, in wrapper\n    return func(uc, *args, **kwargs)\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 1063, in __hook_code_cb\n    callback(uc, address, size, user_data)\n    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-touch-request-c/reject-wrong-device.py\", line 26, in code\n    r0,r1,r2,r3=[u.reg_read(rr) for rr in [UC_ARM_REG_R0,UC_ARM_REG_R1,UC_ARM_REG_R2,UC_ARM_REG_R3]];assert r0==state['handle'] and r1==0 and r2==REQUEST and r3==0\n                                                                                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    }
+  },
+  "REA": {
+    "evidence_id": "ev_b60cda1f578a231ddcdb88769818474e0cae3cd812c4ba1e9b66465dfcd1aafd",
+    "subject": {
+      "name": "stock.elf",
+      "digest": {
+        "sha256": "25b4a29af80ec8edab5bd861ba9b74a6e22eab29dc3d7a809a16869e8a140f04"
+      },
+      "local_path": "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-queue-reset-c/stock.elf",
+      "format": "elf",
+      "architecture": "arm"
+    },
+    "provider": {
+      "id": "ghidra",
+      "name": "Ghidra",
+      "version": "12.1.4"
+    },
+    "analysis_profile": {
+      "provider": {
+        "id": "ghidra",
+        "name": "Ghidra",
+        "version": "12.1.4"
+      },
+      "parameters": {
+        "target_kind": "executable",
+        "target_format": "elf",
+        "architecture": "arm",
+        "available_architectures": [
+          "arm"
+        ],
+        "import_mode": "ephemeral-source-immutable",
+        "annotation_policy": "atomic-function-entry-metadata-v1",
+        "load_image_observations": "source-mappings-entry-context-v2",
+        "function_body_evidence": "complete-inclusive-ranges-v1",
+        "function_references": "complete-body-and-entry-reference-manager-v2",
+        "call_relationship_coverage": "function-body-call-coverage-v5",
+        "function_dossier_coverage": "observed-facets-and-call-relationships-v1",
+        "string_inventory_evidence": "defined-data-coverage-v1",
+        "location_resolution": "explicit-address-exact-entry-symbol-first-v3",
+        "procedure_file_offset_resolution": "address-first-unique-target-source-mapping-v2",
+        "instruction_flow_evidence": "decoded-return-pcode-v1",
+        "instruction_references": "exact-address-incoming-v1",
+        "function_boundary_observations": "ghidra-function-boundary-limitations-v3",
+        "no_return_repair": "returning-imports-decoded-return-v2",
+        "process_launch": "inspected-jvm-launch-support-v1",
+        "jump_table_evidence": "typed-case-default-blocks-v1",
+        "decompiler_jump_loads": true,
+        "loader": "auto-from-header",
+        "language_id": "auto-from-header",
+        "compiler_spec_id": "auto-default",
+        "analyzer_preset": "ghidra-default"
+      },
+      "digest": "7e46711069eea041af1b9b99e34115c13332795e5cda76e584a722f529ec70de"
+    },
+    "predicate_type": "rea.analysis",
+    "operation": "read_bytes",
+    "parameters": {
+      "address": "0x9338c",
+      "length": 80
+    },
+    "raw_result": {
+      "address": "0x9338c",
+      "requested_bytes": 80,
+      "returned_bytes": 80,
+      "bytes_hex": "084b10b558801a82064ad960a2f11400002319464068f2f7c3fc08b1002010bd012010bd0c680020084b10b558801a81064a5960a2f11400002319464068f2f7edfc08b1002010bd012010bd0c680020",
+      "complete": true
+    },
+    "normalized_result": {
+      "address": "0x9338c",
+      "requested_bytes": 80,
+      "returned_bytes": 80,
+      "bytes_hex": "084b10b558801a82064ad960a2f11400002319464068f2f7c3fc08b1002010bd012010bd0c680020084b10b558801a81064a5960a2f11400002319464068f2f7edfc08b1002010bd012010bd0c680020",
+      "complete": true
+    },
+    "confidence": "observed",
+    "authority": "shipped-artifact",
+    "environment": null,
+    "limitations": [
+      "The session serves operations only after Ghidra reports default auto-analysis complete; incomplete analysis does not expose partial results.",
+      "The imported Program and temporary project are ephemeral and deleted on close. Annotation operations edit session database metadata; original executable bytes are never written.",
+      "Cancelling an active Ghidra request terminates its ephemeral database and discards session annotations. The selected target remains open; the next provider query imports the original artifact again.",
+      "Default-space addresses use lowercase 0x-prefixed hexadecimal; other address spaces use <percent-encoded-space>:0x<hex>.",
+      "Bytes reflect Ghidra's initialized memory, including loader fixups. Reads stop at an unmapped or uninitialized byte and report completeness explicitly.",
+      "macOS sessions require a matching executable Ghidra native decompiler; REA checks for it but does not build native components or change Gatekeeper quarantine state."
+    ],
+    "relationship_coverage": null,
+    "locations": [],
+    "evidence_links": []
+  },
+  "unrelated_objects_identical": 586,
+  "imports_unchanged": {
+    "application": 164,
+    "bootloader": 34
+  },
+  "qualification": "build/goal-r1-touch-request-c/qualified/qualification.json",
+  "new_exact_bytes": 0,
+  "hybrid": {
+    "report": "build/hybrid-goal-r1-touch-request-c/build-report.json",
+    "sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "totals": {
+      "binary-pull-through": 641915,
+      "source-built": 4245,
+      "resource-file": 248
+    },
+    "source_plan_unchanged": true,
+    "source_completeness_proven": false
+  },
+  "limitations": [
+    "Registry dispatcher boundary modeled; actual I2C traffic/electrical behavior unproven.",
+    "Caller-clobbered registers/flags except R0 excluded; arbitrary aliases/faults/concurrency unproven.",
+    "No exact regions selected; complete source-only rebuilding remains incomplete."
+  ],
+  "subsequent_identity_chain": {
+    "review": "r1/docs/reference/touch-identity-c-review.json",
+    "request_functions_and_data_unchanged": true
+  }
+}

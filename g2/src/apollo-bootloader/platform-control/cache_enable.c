@@ -43,3 +43,10 @@ uint32_t opencfw_boot_dcache_enable(uint32_t clean_after) {
     }
     return 0u;
 }
+
+/* AmbiqSuite am_hal_cachectrl.c name (stock 0x41e1e8), called by upstream SPOTMGR. */
+uint32_t am_hal_cachectrl_icache_enable(void) __attribute__((alias("opencfw_boot_icache_enable")));
+
+/* Stock entry names that branch straight to the provider above. */
+__typeof__(opencfw_boot_dcache_enable) opencfw_provider_41e266 __attribute__((alias("opencfw_boot_dcache_enable")));
+__typeof__(opencfw_boot_icache_enable) opencfw_provider_41e1e8 __attribute__((alias("opencfw_boot_icache_enable")));

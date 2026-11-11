@@ -52,7 +52,7 @@ _Static_assert(offsetof(opencfw_mspi_pio_transfer_t,
 _Static_assert(offsetof(opencfw_mspi_pio_transfer_t, buffer) == 20,
                "buffer offset");
 
-extern uint32_t opencfw_bl_mspi_blocking_transfer(uint32_t handle,
+extern uint32_t am_hal_mspi_blocking_transfer(uint32_t handle,
     const opencfw_mspi_pio_transfer_t *transfer, uint32_t timeout_usec);
 extern void opencfw_bl_transfer_error(uint32_t module, uint16_t instruction,
     uint32_t address, uint32_t length, uint32_t status);
@@ -60,11 +60,11 @@ extern void opencfw_bl_delay(uint32_t raw_argument);
 extern void opencfw_bl_log(uint32_t level, const char *module,
     const char *file, const char *function, uint32_t line,
     const char *format, ...);
-extern uint32_t opencfw_hal_mspi_disable(uint32_t handle);
-extern uint32_t opencfw_hal_mspi_device_configure(uint32_t handle,
+extern uint32_t am_hal_mspi_disable(uint32_t handle);
+extern uint32_t am_hal_mspi_device_configure(uint32_t handle,
     const void *device_config);
-extern uint32_t opencfw_hal_mspi_enable(uint32_t handle);
-extern uint32_t opencfw_hal_mspi_control(uint32_t handle, uint32_t request,
+extern uint32_t am_hal_mspi_enable(uint32_t handle);
+extern uint32_t am_hal_mspi_control(uint32_t handle, uint32_t request,
     void *value);
 extern uint32_t opencfw_hal_mspi_control_latency(uint8_t enabled);
 extern uint32_t opencfw_publish_device_mode(uint32_t module, uint8_t mode);
@@ -122,7 +122,7 @@ uint32_t opencfw_provider_42069e(uint32_t instruction,
         .reserved_19 = 0u,
         .buffer = buffer
     };
-    const uint32_t status = opencfw_bl_mspi_blocking_transfer(
+    const uint32_t status = am_hal_mspi_blocking_transfer(
         handle, &transfer, OPENCFW_TRANSFER_TIMEOUT_USEC);
     if (status != 0u)
         opencfw_bl_transfer_error(OPENCFW_TRANSFER_ERROR_MODULE,
@@ -149,19 +149,19 @@ uint32_t opencfw_provider_420e08(const void *device_config)
 {
     const uint32_t handle = *(volatile const uint32_t *)(uintptr_t)
         OPENCFW_ACTIVE_HANDLE_SLOT;
-    uint32_t status = opencfw_hal_mspi_disable(handle);
+    uint32_t status = am_hal_mspi_disable(handle);
     if (status != 0u) {
         opencfw_bl_log(2u, nor_module, source_file,
             reconfigure_function, 0x58au, disable_failed);
         return 1u;
     }
-    status = opencfw_hal_mspi_device_configure(handle, device_config);
+    status = am_hal_mspi_device_configure(handle, device_config);
     if (status != 0u) {
         opencfw_bl_log(2u, nor_module, source_file,
             reconfigure_function, 0x592u, configure_failed);
         return 1u;
     }
-    status = opencfw_hal_mspi_enable(handle);
+    status = am_hal_mspi_enable(handle);
     if (status != 0u) {
         opencfw_bl_log(2u, nor_module, source_file,
             reconfigure_function, 0x59au, configure_failed);
@@ -191,7 +191,7 @@ void opencfw_provider_420f10(void)
     uint8_t control_value = 0u;
     const uint32_t handle = *(volatile const uint32_t *)(uintptr_t)
         OPENCFW_ACTIVE_HANDLE_SLOT;
-    if (opencfw_hal_mspi_control(handle, 0x18u, &control_value) != 0u)
+    if (am_hal_mspi_control(handle, 0x18u, &control_value) != 0u)
         opencfw_bl_log(2u, nor_module, source_file,
             reconfigure_function_name, 0x5c7u, control_failed);
 }

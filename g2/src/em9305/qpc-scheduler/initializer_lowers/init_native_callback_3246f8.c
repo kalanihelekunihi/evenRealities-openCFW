@@ -1,46 +1,22 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_callback_3246f8\n"
-".type opencfw_em9305_callback_3246f8,@function\n"
-"opencfw_em9305_callback_3246f8:\n"
-"L3246f8:\n"
-"enter_s [r13-r15,blink]\n"
-"L3246fa:\n"
-"ld r14,[0x805cac]\n"
-"L324702:\n"
-"add3 r13,r0,0x3f\n"
-"L324706:\n"
-"ldb_s r15,[r13,0]\n"
-"L324708:\n"
-"mov_s r12,r0\n"
-"L32470a:\n"
-"ldb_s r14,[r14,0x4]\n"
-"L32470c:\n"
-"add r12,r12,506\n"
-"L324710:\n"
-"add r0,r0,777\n"
-"L324714:\n"
-"stb_s r1,[r12,0]\n"
-"L324716:\n"
-"seths r1,r14,0xd\n"
-"L32471a:\n"
-"stb r2,[r12,-1]\n"
-"L32471e:\n"
-"stb_s r1,[r0,0]\n"
-"L324720:\n"
-"breq_s r15,0,L324724\n"
-"L324722:\n"
-"leave_s [r13-r15,blink,pcl]\n"
-"L324724:\n"
-"mov_s r0,r13\n"
-"L324726:\n"
-"mov_s r1,r3\n"
-"L324728:\n"
-"bl.d opencfw_em9305_child_32dab4\n"
-"L32472c:\n"
-"stb 1,[r13]\n"
-"L324730:\n"
-"leave_s [r13-r15,blink,pcl]\n"
-".size opencfw_em9305_callback_3246f8,.-opencfw_em9305_callback_3246f8\n"
-);
+#include <stdint.h>
+
+/* Native 0x3246f8..0x32472e: store the two parameter bytes at +506/+505 and
+ * whether the configured version byte (*0x805cac +4) is at least 13 at +777.
+ * If the procedure flag +504 was clear, set it and start native 0x32dab4 on
+ * it with the fourth argument. */
+extern uint32_t opencfw_em9305_child_32dab4(uintptr_t,uint32_t);
+
+void opencfw_em9305_callback_3246f8(uintptr_t record, uint32_t first, uint32_t second,
+                                    uint32_t argument)
+{
+    uintptr_t config = *(volatile uint32_t *)(uintptr_t)0x805cacu;
+    volatile uint8_t *active = (volatile uint8_t *)(record + 504u);
+    uint32_t was_active = *active;
+    int32_t version = *(volatile uint8_t *)(config + 4u);
+    *(volatile uint8_t *)(record + 506u) = (uint8_t)first;
+    *(volatile uint8_t *)(record + 505u) = (uint8_t)second;
+    *(volatile uint8_t *)(record + 777u) = version >= 13;
+    if (was_active != 0u) return;
+    *active = 1u;
+    (void)opencfw_em9305_child_32dab4((uintptr_t)active, argument);
+}

@@ -1,240 +1,99 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_callback_31fa44\n"
-".type opencfw_em9305_callback_31fa44,@function\n"
-"opencfw_em9305_callback_31fa44:\n"
-"L31fa44:\n"
-"enter_s [r13-r17,blink]\n"
-"L31fa46:\n"
-"mov_s r13,r0\n"
-"L31fa48:\n"
-"add r13,r13,621\n"
-"L31fa4c:\n"
-"mov_s r17,r0\n"
-"L31fa4e:\n"
-"ldb r0,[r13,-218]\n"
-"L31fa52:\n"
-"mov_s r14,r1\n"
-"L31fa54:\n"
-"breq_s r0,0,L31fa80\n"
-"L31fa56:\n"
-"sub r0,r14,0xd\n"
-"L31fa5a:\n"
-"brhs.d.nt r0,0x2,L31fa68\n"
-"L31fa5e:\n"
-"mov_s r0,r17\n"
-"L31fa60:\n"
-"bl opencfw_em9305_child_31b714\n"
-"L31fa64:\n"
-"mov_s r16,1\n"
-"L31fa66:\n"
-"b_s L31faaa\n"
-"L31fa68:\n"
-"brne.nt r14,0xc,L31fa80\n"
-"L31fa6c:\n"
-"mov_s r0,0x802818\n"
-"L31fa72:\n"
-"ldb_s r0,[r0,0]\n"
-"L31fa74:\n"
-"brhs.nt r0,0x12,L31fb1c\n"
-"L31fa78:\n"
-"bbit0.nt 0x228f4,r0,L31fb1c\n"
-"L31fa80:\n"
-"ldb r0,[r13,-1]\n"
-"L31fa84:\n"
-"breq.nt r0,0,L31faf8\n"
-"L31fa88:\n"
-"brne.nt r0,0x1,L31fa9c\n"
-"L31fa8c:\n"
-"brne.nt r14,0x18,L31fa9c\n"
-"L31fa90:\n"
-"ldb_s r0,[r13,0xe]\n"
-"L31fa92:\n"
-"breq.nt r0,0x13,L31fa9c\n"
-"L31fa96:\n"
-"bl.d opencfw_em9305_child_31af38\n"
-"L31fa9a:\n"
-"mov_s r0,r17\n"
-"L31fa9c:\n"
-"ldb r0,[0x805a94]\n"
-"L31faa4:\n"
-"bbit1.d.nt r0,0,L31faae\n"
-"L31faa8:\n"
-"mov_s r16,0\n"
-"L31faaa:\n"
-"mov_s r0,r16\n"
-"L31faac:\n"
-"leave_s [r13-r17,blink,pcl]\n"
-"L31faae:\n"
-"cmp_s r14,0x70\n"
-"L31fab0:\n"
-"beq_s L31fafe\n"
-"L31fab2:\n"
-"breq.d.nt r14,0x18,L31fb3a\n"
-"L31fab6:\n"
-"mov_s r1,0\n"
-"L31fab8:\n"
-"breq.d.nt r14,0x3e,L31fb14\n"
-"L31fabc:\n"
-"mov_s r1,5\n"
-"L31fabe:\n"
-"brne.t r14,0xc,L31faaa\n"
-"L31fac2:\n"
-"mov_s r2,0x802810\n"
-"L31fac8:\n"
-"ldb_s r0,[r2,0x8]\n"
-"L31faca:\n"
-"sub r0,r0,0x4\n"
-"L31facc:\n"
-"brhs.d.t r0,0xe,L31faaa\n"
-"L31fad0:\n"
-"mov_s r1,1\n"
-"L31fad2:\n"
-"bih [r0]\n"
-"L31fad6:\n"
-"b_s L31fb3a\n"
-"L31fad8:\n"
-"b_s L31fb26\n"
-"L31fada:\n"
-"b_s L31fb2a\n"
-"L31fadc:\n"
-"b_s L31faf2\n"
-"L31fade:\n"
-"b_s L31faaa\n"
-"L31fae0:\n"
-"b_s L31faaa\n"
-"L31fae2:\n"
-"b_s L31faaa\n"
-"L31fae4:\n"
-"b_s L31fb2e\n"
-"L31fae6:\n"
-"b_s L31faaa\n"
-"L31fae8:\n"
-"b_s L31fb32\n"
-"L31faea:\n"
-"b_s L31faaa\n"
-"L31faec:\n"
-"b_s L31faaa\n"
-"L31faee:\n"
-"b_s L31faaa\n"
-"L31faf0:\n"
-"b_s L31faf2\n"
-"L31faf2:\n"
-"ldb_s r0,[r2,0xc]\n"
-"L31faf4:\n"
-"cmp_s r0,3\n"
-"L31faf6:\n"
-"b_s L31fb36\n"
-"L31faf8:\n"
-"breq.t r14,0x18,L31fa96\n"
-"L31fafc:\n"
-"b_s L31fa9c\n"
-"L31fafe:\n"
-"ld.as r0,[r17,161]\n"
-"L31fb02:\n"
-"bbit0.d.t r0,0x13,L31faaa\n"
-"L31fb06:\n"
-"bclr_s r0,r0,0x13\n"
-"L31fb08:\n"
-"mov_s r1,0\n"
-"L31fb0a:\n"
-"st.as r16,[r17,162]\n"
-"L31fb0e:\n"
-"st.as r0,[r17,161]\n"
-"L31fb12:\n"
-"b_s L31fb3a\n"
-"L31fb14:\n"
-"ldb_s r0,[r13,0xe]\n"
-"L31fb16:\n"
-"brne.t r0,0x13,L31faaa\n"
-"L31fb1a:\n"
-"b_s L31fb3a\n"
-"L31fb1c:\n"
-"bl.d opencfw_em9305_child_31b714\n"
-"L31fb20:\n"
-"mov_s r0,r17\n"
-"L31fb22:\n"
-"mov_s r16,0\n"
-"L31fb24:\n"
-"b_s L31faaa\n"
-"L31fb26:\n"
-"mov_s r1,2\n"
-"L31fb28:\n"
-"b_s L31fb3a\n"
-"L31fb2a:\n"
-"mov_s r1,3\n"
-"L31fb2c:\n"
-"b_s L31fb3a\n"
-"L31fb2e:\n"
-"mov_s r1,4\n"
-"L31fb30:\n"
-"b_s L31fb3a\n"
-"L31fb32:\n"
-"ldb_s r0,[r13,0xe]\n"
-"L31fb34:\n"
-"cmp_s r0,0x13\n"
-"L31fb36:\n"
-"mov_s r1,6\n"
-"L31fb38:\n"
-"bne_s L31faaa\n"
-"L31fb3a:\n"
-"ldb r0,[r13,-1]\n"
-"L31fb3e:\n"
-"breq.d.nt r0,0x1,L31fb66\n"
-"L31fb42:\n"
-"mov_s r16,1\n"
-"L31fb44:\n"
-"brne.d.t r0,0,L31faaa\n"
-"L31fb48:\n"
-"mov_s r0,r17\n"
-"L31fb4a:\n"
-"bl opencfw_em9305_child_31fa10\n"
-"L31fb4e:\n"
-"ldb_s r0,[r13,0]\n"
-"L31fb50:\n"
-"breq.t r0,0,L31faaa\n"
-"L31fb54:\n"
-"breq.d.t r0,0x5,L31faaa\n"
-"L31fb58:\n"
-"add r17,r17,635\n"
-"L31fb5c:\n"
-"stb 1,[r13,-1]\n"
-"L31fb60:\n"
-"stb 19,[r17]\n"
-"L31fb64:\n"
-"b_s L31faaa\n"
-"L31fb66:\n"
-"ldb_s r0,[r13,0xe]\n"
-"L31fb68:\n"
-"brne.d.nt r0,0x13,L31fb8c\n"
-"L31fb6c:\n"
-"mov_s r0,r17\n"
-"L31fb6e:\n"
-"bl opencfw_em9305_child_31fa10\n"
-"L31fb72:\n"
-"ldb_s r0,[r13,0]\n"
-"L31fb74:\n"
-"breq.nt r0,0x5,L31fb7c\n"
-"L31fb78:\n"
-"brne.t r0,0,L31faaa\n"
-"L31fb7c:\n"
-"mov_s r0,r17\n"
-"L31fb7e:\n"
-"stb 0,[r13,-1]\n"
-"L31fb82:\n"
-"bl.d opencfw_em9305_phy_finish_32c810\n"
-"L31fb86:\n"
-"stb -1,[r13,14]\n"
-"L31fb8a:\n"
-"b_s L31faaa\n"
-"L31fb8c:\n"
-"ld.as r0,[r17,161]\n"
-"L31fb90:\n"
-"bset_s r0,r0,0x13\n"
-"L31fb92:\n"
-"st.as r0,[r17,161]\n"
-"L31fb96:\n"
-"b_s L31faaa\n"
-".size opencfw_em9305_callback_31fa44,.-opencfw_em9305_callback_31fa44\n"
-);
+#include <stdint.h>
+
+/* Native 0x31fa44..0x31fb98: LL control hook for the data-length/PHY
+ * procedure on a connection. While a request is outstanding (+403),
+ * opcodes 13/14 and unknown/reject responses for opcodes outside the
+ * 0x228f4 set finish it through 31b714. An LL 0x18 (or a pending
+ * response, +620) may start 31af38. With the feature bit 0 of 0x805a94
+ * the opcode selects a mode (0x70 consumes deferred bit 19 of +644,
+ * 0x18 -> 0, 0x3e -> 5, and an unknown response 0x0c maps the rejected
+ * opcode at 0x802818 to 1..6), which then starts (+620 = 0) or finishes
+ * (+620 = 1, timer code 0x13 at +635) the procedure through 31fa10;
+ * otherwise the request is deferred in bit 19. Returns 1 when the
+ * procedure was driven. */
+extern uint32_t opencfw_em9305_child_31b714(uintptr_t record);
+extern uint32_t opencfw_em9305_child_31af38(uintptr_t record);
+extern uint32_t opencfw_em9305_child_31fa10(uintptr_t record, uint32_t mode);
+extern uint32_t opencfw_em9305_phy_finish_32c810(uintptr_t record);
+
+static uint32_t opencfw_em9305_reject_mode_31fa44(uintptr_t record, uint32_t *mode)
+{
+    uint32_t rejected=*(volatile uint8_t *)(uintptr_t)0x802818u;
+    switch(rejected){
+    case 4u: *mode=1u; return 1u;
+    case 5u: *mode=2u; return 1u;
+    case 6u: *mode=3u; return 1u;
+    case 11u: *mode=4u; return 1u;
+    case 7u: case 17u:
+        *mode=6u;
+        return *(volatile uint8_t *)(uintptr_t)0x80281cu==3u;
+    case 13u:
+        *mode=6u;
+        return *(volatile uint8_t *)(record+635u)==0x13u;
+    default:
+        return 0u;
+    }
+}
+
+uint32_t opencfw_em9305_callback_31fa44(uintptr_t record, uint32_t opcode)
+{
+    volatile uint8_t *state=(volatile uint8_t *)(record+620u);
+    volatile uint8_t *code=(volatile uint8_t *)(record+635u);
+    volatile uint32_t *deferred=(volatile uint32_t *)(record+644u);
+    uint32_t mode;
+    if(*(volatile uint8_t *)(record+403u)!=0u){
+        if(opcode-13u<2u){
+            (void)opencfw_em9305_child_31b714(record);
+            return 1u;
+        }
+        if(opcode==12u){
+            uint32_t rejected=*(volatile uint8_t *)(uintptr_t)0x802818u;
+            if(rejected>=0x12u||((0x228f4u>>rejected)&1u)==0u){
+                (void)opencfw_em9305_child_31b714(record);
+                return 0u;
+            }
+        }
+    }
+    uint32_t current=*state;
+    if(opcode==0x18u&&(current==0u||(current==1u&&*code!=0x13u)))
+        (void)opencfw_em9305_child_31af38(record);
+    if((*(volatile uint8_t *)(uintptr_t)0x805a94u&1u)==0u)return 0u;
+    if(opcode==0x70u){
+        uint32_t word=*deferred;
+        if((word&(1u<<19))==0u)return 0u;
+        *(volatile uint32_t *)(record+648u)=0u;
+        *deferred=word&~(1u<<19);
+        mode=0u;
+    }else if(opcode==0x18u){
+        mode=0u;
+    }else if(opcode==0x3eu){
+        mode=5u;
+        if(*code!=0x13u)return 0u;
+    }else if(opcode==0x0cu){
+        if(opencfw_em9305_reject_mode_31fa44(record,&mode)==0u)return 0u;
+    }else{
+        return 0u;
+    }
+    current=*state;
+    if(current==1u){
+        if(*code!=0x13u){
+            *deferred|=1u<<19;
+            return 1u;
+        }
+        (void)opencfw_em9305_child_31fa10(record,mode);
+        uint32_t result=*(volatile uint8_t *)(record+621u);
+        if(result==5u||result==0u){
+            *state=0u;
+            *code=0xffu;
+            (void)opencfw_em9305_phy_finish_32c810(record);
+        }
+    }else if(current==0u){
+        (void)opencfw_em9305_child_31fa10(record,mode);
+        uint32_t result=*(volatile uint8_t *)(record+621u);
+        if(result!=0u&&result!=5u){
+            *state=1u;
+            *code=19u;
+        }
+    }
+    return 1u;
+}

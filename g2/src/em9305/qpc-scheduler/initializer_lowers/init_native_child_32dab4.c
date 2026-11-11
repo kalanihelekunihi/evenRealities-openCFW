@@ -1,54 +1,17 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_32dab4\n"
-".type opencfw_em9305_child_32dab4,@function\n"
-"opencfw_em9305_child_32dab4:\n"
-"L32dab4:\n"
-"enter_s [r13-r14]\n"
-"L32dab6:\n"
-"ldb_s r3,[r1,0x1]\n"
-"L32dab8:\n"
-"ldb_s r14,[r1,0x2]\n"
-"L32daba:\n"
-"ldb_s r12,[r1,0]\n"
-"L32dabc:\n"
-"ldb_s r13,[r1,0x3]\n"
-"L32dabe:\n"
-"asl_s r3,r3,0x8\n"
-"L32dac0:\n"
-"mov_s r2,r0\n"
-"L32dac2:\n"
-"asl_s r14,r14,0x10\n"
-"L32dac4:\n"
-"add_s r0,r3,r12\n"
-"L32dac6:\n"
-"asl_s r13,r13,0x18\n"
-"L32dac8:\n"
-"add_s r0,r0,r14\n"
-"L32daca:\n"
-"add_s r0,r0,r13\n"
-"L32dacc:\n"
-"st_s r0,[r2,0x4]\n"
-"L32dace:\n"
-"ldb_s r0,[r1,0x4]\n"
-"L32dad0:\n"
-"stb_s r0,[r2,0x8]\n"
-"L32dad2:\n"
-"ldb_s r0,[r1,0x5]\n"
-"L32dad4:\n"
-"stb_s r0,[r2,0x9]\n"
-"L32dad6:\n"
-"ldb_s r0,[r1,0x6]\n"
-"L32dad8:\n"
-"stb_s r0,[r2,0xa]\n"
-"L32dada:\n"
-"ldb_s r1,[r1,0x7]\n"
-"L32dadc:\n"
-"mov_s r0,0x8\n"
-"L32dade:\n"
-"stb_s r1,[r2,0xb]\n"
-"L32dae0:\n"
-"leave_s [r13-r14,pcl]\n"
-".size opencfw_em9305_child_32dab4,.-opencfw_em9305_child_32dab4\n"
-);
+#include <stdint.h>
+
+/* Native 0x32dab4..0x32dae2: copy an 8-byte little-endian field from the
+ * source into out+4 (one 32-bit word) and out+8..11 (four bytes);
+ * returns the 8 bytes consumed. */
+uint32_t opencfw_em9305_child_32dab4(uintptr_t out,uintptr_t source)
+{
+    volatile uint8_t *in=(volatile uint8_t *)source;
+    volatile uint8_t *field=(volatile uint8_t *)out;
+    uint32_t word=in[0]+((uint32_t)in[1]<<8)+((uint32_t)in[2]<<16)+((uint32_t)in[3]<<24);
+    *(volatile uint32_t *)(out+4u)=word;
+    field[8]=in[4];
+    field[9]=in[5];
+    field[10]=in[6];
+    field[11]=in[7];
+    return 8u;
+}

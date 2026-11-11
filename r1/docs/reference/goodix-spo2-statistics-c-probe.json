@@ -1,0 +1,153 @@
+{
+  "status": "probe_only_not_admitted",
+  "entries": {
+    "0x61fb4": "r1_goodix_native_array_sum",
+    "0x61f94": "r1_goodix_native_array_mean",
+    "0x92b68": "r1_goodix_native_array_mean_inline",
+    "0x7dcd8": "r1_goodix_native_array_variance",
+    "0x61fd4": "r1_goodix_native_array_standard_deviation",
+    "0x61f04": "r1_goodix_native_incremental_standard_deviation",
+    "0x66430": "r1_goodix_native_window_standard_deviation",
+    "0x66394": "r1_goodix_native_window_last",
+    "0x66490": "r1_goodix_native_window_count"
+  },
+  "native_instruction_bytes": 388,
+  "native_literal_bytes": 24,
+  "stock_c_pairs": 82688,
+  "independent_fraction_oracle_pairs": 3456,
+  "verification_counts": {
+    "results": 73728,
+    "edge-results": 5504,
+    "oracle-results": 3456
+  },
+  "coverage": {
+    "native_coverage_calls": 144,
+    "instruction_bytes": 388,
+    "instruction_starts": 129,
+    "entries": 9
+  },
+  "compiled_defects": [
+    {
+      "defect": "sum-nan-order",
+      "detected": true,
+      "detection_case": "('sum', 21)",
+      "diagnostic": ""
+    },
+    {
+      "defect": "empty-mean",
+      "detected": true,
+      "detection_case": "('mean', 0)",
+      "diagnostic": ""
+    },
+    {
+      "defect": "variance-one",
+      "detected": true,
+      "detection_case": "('variance', 1)",
+      "diagnostic": ""
+    },
+    {
+      "defect": "incremental-sign",
+      "detected": true,
+      "detection_case": "('incremental', 10)",
+      "diagnostic": ""
+    },
+    {
+      "defect": "incremental-scale",
+      "detected": true,
+      "detection_case": "('incremental', 1)",
+      "diagnostic": ""
+    },
+    {
+      "defect": "count-status",
+      "detected": true,
+      "detection_case": "('standard', 42)",
+      "diagnostic": ""
+    },
+    {
+      "defect": "stale-window-count",
+      "detected": true,
+      "detection_case": "('window_standard', 1)",
+      "diagnostic": ""
+    },
+    {
+      "defect": "empty-last",
+      "detected": true,
+      "detection_case": "('last', 0)",
+      "diagnostic": ""
+    },
+    {
+      "defect": "wrong-count",
+      "detected": true,
+      "detection_case": "('count', 0)",
+      "diagnostic": ""
+    }
+  ],
+  "limitations": [
+    "No manifest unit/shared header or normal-object admission yet. Confidence caller/feature extraction is not established by this helper probe.",
+    "Valid mapped samples/records are assumed. Counts cover0..125 for statistical arrays and full16-bit range for count getter; positive oversized float counts/invalid owner-pointer aliases are excluded.",
+    "Array variance special-cases one sample and returns0; incremental one-sample deviation yields NaN and native FP flags. Empty-window output remains untouched. These behaviors are deliberately not normalized into a generic statistics API.",
+    "Source uses actual C sqrtf and RTZ/FPSCR helper, maps no stock executable code and has no algorithm model fallback.",
+    "Full public RAM excluding8192 private stack bytes, scalar S0 or R0 as appropriate, FPSCR,saved registers/SP/masks are checked. Void window-output helper does not promise caller scratch S0; APSR/timing/interrupts/concurrency/physical hardware remain unverified.",
+    "Fraction oracles use tolerance2e-5 for rounded statistics and explicit native empty/one-sample rules; exact stock/C comparisons are separate evidence."
+  ],
+  "evidence_sha256": {
+    "build/goal-r1-spo2-infer-support-c/normal-dependencies.a": "7e62b43a34fcf2b0ae34045a276bf4d564be5dde2ddb636dd0f69169c8843637",
+    "build/goal-r1-spo2-ratio-c/normal-stream-test.ld": "808ff9c64adde68933158791e9d115c75817ae1840e2bdcbcfa42c7a39314cc6",
+    "build/goal-r1-spo2-statistics-c/bytes-61f04.json": "77153007ae95f47699ed6e237c9f4358410e3eb221625c17cceb274d83a9b148",
+    "build/goal-r1-spo2-statistics-c/bytes-61f90.json": "fab55cbd586a8db92f2e7b2d383ee5983fdda5f3de4973b6059cf99fce1eb2d2",
+    "build/goal-r1-spo2-statistics-c/bytes-61f94.json": "9bc3d6fedcb52a88b62c1df48d3a5879dc67a083e5706b2f7c6de1efb77ddf7f",
+    "build/goal-r1-spo2-statistics-c/bytes-61fb4.json": "b6216096752cb892d1baab57d01ec92c3d232692d1b4258d1df1fc57a7e1e28b",
+    "build/goal-r1-spo2-statistics-c/bytes-61fd0.json": "9b2de46a3af1f97cd7569428d465f2150a190f61769a7c690195445876a3fd27",
+    "build/goal-r1-spo2-statistics-c/bytes-61fd4.json": "be7f69605aef856ee1f326ba96ef4795041af784cdf9d8d6be6a2f4a51cd187c",
+    "build/goal-r1-spo2-statistics-c/bytes-66394.json": "707ee0bd6412be061ae44ef45315931079e6b549f13ccf09420bfee982773115",
+    "build/goal-r1-spo2-statistics-c/bytes-663b0.json": "2c92147dc599ab9a53eac8b2c5f5d70ca6e1f9e1a7e667e9ef5fabe8ae6df2a3",
+    "build/goal-r1-spo2-statistics-c/bytes-66430.json": "4012b0e535e36ccb8a1550d6d5e3d103128f99cc75eb44aebc72b91ec542e932",
+    "build/goal-r1-spo2-statistics-c/bytes-66454.json": "e4784baa0ac72abc9eb82929468ad3bbfcfc89ee2cae89ecc35085f7a0dbecd0",
+    "build/goal-r1-spo2-statistics-c/bytes-66490.json": "8205acdc8a6be13a96cb8dc565d457afc7e654f9de272265ef2c65bf4e61edf6",
+    "build/goal-r1-spo2-statistics-c/bytes-7dcd8.json": "ff503a1f189b1b3ecc79e49ea67cbbb89e042c35547d4d55c6e396ccee1b2ccb",
+    "build/goal-r1-spo2-statistics-c/bytes-7dd14.json": "4b1433107b839d40d23680f0332b82d191aa9bbd57a9f6480dd7ff45bc88362a",
+    "build/goal-r1-spo2-statistics-c/bytes-92b68.json": "b82a0d28f24bf9a1c751a73f30f8a1032de82058b4482ef54fb5b8f56bce5417",
+    "build/goal-r1-spo2-statistics-c/bytes-92b94.json": "c52f11101e56f01cadddbb37b457a81d61f0a485705fe2cd4fb3d039cadada05",
+    "build/goal-r1-spo2-statistics-c/candidate.c": "0cf17772d29d173a9d38592422b77b0ac259cfc0232a9372c0e7a656615416c4",
+    "build/goal-r1-spo2-statistics-c/candidate.elf": "917f079427627eec8a9c3fe256792e9bc31a2f528c049c6f73f28fddc138f90d",
+    "build/goal-r1-spo2-statistics-c/candidate.o": "dc3972defe92338966d1074f5bcbeee52a840444fd9aea14f68379e01793a9a3",
+    "build/goal-r1-spo2-statistics-c/compile-argv.json": "cb99993233ba09c766ff4b7df2a5e07aedfccebc921a5e16ea76f0550874263b",
+    "build/goal-r1-spo2-statistics-c/controls-results.json": "ec9bf59638627a57b1bb8ffeab3d4bed9cd13db5d2982ae56c4b011ded96465e",
+    "build/goal-r1-spo2-statistics-c/controls.log": "dcc7254b4f45d2f5c2a85dcd98ec8cb7e6004464b31d489a79182ffc2018cc8a",
+    "build/goal-r1-spo2-statistics-c/controls.py": "62db949a7c74a587735b16540f60cc2528c164fcac4e3449aab9866efe8b336f",
+    "build/goal-r1-spo2-statistics-c/coverage-results.json": "672627d6db5456ae15ca83090a89479620f65163627ded6b8189852bbbd4dfba",
+    "build/goal-r1-spo2-statistics-c/coverage.py": "0d11582fc1902ac42fd4995bbedc05d9b19aa2de478efc36c6bf25f46eaba8de",
+    "build/goal-r1-spo2-statistics-c/defect.c": "6307ebe8192d380343bfa32cf18a801d50c0f0911b11601f0da1df62050b7f33",
+    "build/goal-r1-spo2-statistics-c/defect.elf": "38302961082d355c3f905d2677301e2bd06947340c136c7cc399f53bc904af25",
+    "build/goal-r1-spo2-statistics-c/defect.o": "40e4989d6e197d57babde3a1e5be68ac669d4d5f1e9ef5e2ac9cc45dc1094b30",
+    "build/goal-r1-spo2-statistics-c/defect_fixture.py": "abcb2741ace3c4926716a7f76b45c53343de350a840a784085a51b7d19a2022d",
+    "build/goal-r1-spo2-statistics-c/defect_verify.py": "e1877b52a820b7c8ca57a8ce44c4d49e53e92eb70ff33685aadde618b34e0ea3",
+    "build/goal-r1-spo2-statistics-c/edge-results.json": "569f51791f4e9746c70619ab6af3fb47798e503ba10d04973a6e9f28966ea08a",
+    "build/goal-r1-spo2-statistics-c/edges.log": "17d5fb00e09abd18fe9e6f46aa318d08b52aabc22ba790393de08637f0dffdd8",
+    "build/goal-r1-spo2-statistics-c/edges.py": "9b2badb6b729b9a5bf036ac75993892c4054e72b1d21d5350e59545ad3d20114",
+    "build/goal-r1-spo2-statistics-c/fixture.py": "5c2c72a78727e9d28e4f7ce72d992618698ba2d99dd4950f748c1705da634a8b",
+    "build/goal-r1-spo2-statistics-c/link-argv.json": "9757105cfe4cb8e3a3ded2889a1320382e5d12a4c0fed70894b6b2e34b6089ab",
+    "build/goal-r1-spo2-statistics-c/link.log": "d9c01b9ca707bd38b71b4c2b2116425a280d01a62be277058e7f7be6839a085f",
+    "build/goal-r1-spo2-statistics-c/oracle-results.json": "cc067da00873da89ead6f60d932ae867c18903ec03e563e3f821e5c351936cf1",
+    "build/goal-r1-spo2-statistics-c/oracles.log": "7916880ce8816ad7b65e4b220c5a9645952a95c1afbffa4e59e6c4119dae8dd4",
+    "build/goal-r1-spo2-statistics-c/oracles.py": "fa24207c54987cbabe747b024f08c73dda59b3b15adc047cb8db96edc790ad58",
+    "build/goal-r1-spo2-statistics-c/rea-61f04.json": "f512f6042c2f82799464cf6abb5fd5f04f82ea54f7f5e5b2177ddd3b81cf400f",
+    "build/goal-r1-spo2-statistics-c/rea-61f94.json": "7f5530955607115f3f1216e974178eb3007cc0f11dd72f6e14d3445e9d9fac01",
+    "build/goal-r1-spo2-statistics-c/rea-61fb4.json": "afb1c3262f62e0b5737107d49b4f7cc5d637480a43161e2035e0182fc2d89cf4",
+    "build/goal-r1-spo2-statistics-c/rea-61fd4.json": "813cae1b9e544bcf742a1a3afcadc6a7360df51b5132e3d9885bd5140215d241",
+    "build/goal-r1-spo2-statistics-c/rea-66394.json": "18d36f8c98d8540c67af0b4fd962d330af308cf51d171767fa2857ba5a554a0f",
+    "build/goal-r1-spo2-statistics-c/rea-66430.json": "266e1a145b3ed9962a54cfc24df313506c06ff1f1cac83e16f3c93d9a6701704",
+    "build/goal-r1-spo2-statistics-c/rea-66490.json": "3d9fc5da0ec2a1769eaa6e51e1b39e0ae24cd76eec632b2b6909485b475f66de",
+    "build/goal-r1-spo2-statistics-c/rea-7dcd8.json": "0872280edda0546e97291310b6d648ee2f6d4fbb05d1cbad435bb7ac4ef7bb3f",
+    "build/goal-r1-spo2-statistics-c/rea-92b68.json": "2ece18c5386614e4df2eb7f185a3b0e880c8eb3dd9e500ea460e9af8cde3fad9",
+    "build/goal-r1-spo2-statistics-c/results.json": "2c9a697e36752d449421fa1026c7c8a9c045d8b94a07702c6bc667a521974073",
+    "build/goal-r1-spo2-statistics-c/verify.log": "a61fdbbb46386b8c5597511b654aab89c05250a68cd80e9e05da6949bff644c5",
+    "build/goal-r1-spo2-statistics-c/verify.py": "6d8836b918d4373bf447c6f6b3bd8b4cd9b2d303e8aea7fb25611fc70b49857e",
+    "build/sources-goal-r1-spo2-output-c/r1/r1-application/r1__src__application__runtime__native_float_bits.c.o": "cc448df0a2076c6dd5ee05a700f3221fb9d253ae9ae0cb7b591a0ea3a474c154",
+    "build/sources-goal-r1-spo2-output-c/r1/r1-application/r1__src__application__runtime__native_math_sqrt.c.o": "53639c4995bff2445646d84c928a0d3905d0309752af7ac9cda89b2c54364165",
+    "r1/blobs/official/r1-2.2.6.0009/application.bin": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "r1/src/application/runtime/native_f32_integer.h": "239b6c7dc2bd398d8abf541979a85039a7a5391d4ea37e4bd9dad0503420c741",
+    "r1/src/application/runtime/native_math_sqrt.c": "adf2fe6c10b35b43ddd3c3e7645c7bd88cc7a4234b26c64c1b501d2b7e07c118",
+    "r1/src/sources.json": "73e00892916fb657105979912efe054cc72730bb5835536dce261b54d2991b8a"
+  }
+}

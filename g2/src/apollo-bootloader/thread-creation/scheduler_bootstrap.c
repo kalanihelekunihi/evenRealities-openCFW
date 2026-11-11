@@ -28,7 +28,7 @@ uint32_t opencfw_bl_kernel_start(void) {
         opencfw_bl_port_start();
     } else if (success==UINT32_MAX) {
         (void)opencfw_bl_mask_interrupts();WORD(UINT32_MAX)=0;
-        for (;;)__asm__ volatile("b .":::"memory");
+        for (;;){ }
     }
     /* Stock return loads word200004c8; caller4160b0 ignores it. */
     return WORD(0x200004c8);

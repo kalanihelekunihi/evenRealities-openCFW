@@ -1,0 +1,167 @@
+{
+  "schema_version": 1,
+  "report": "build/sources-goal-r1-stacmd/report.json",
+  "report_sha256": "a232ae15c9b26878ec325f4834697e9ca4b396c1e9f49c8b343b02c7e3d0834f",
+  "manifest_sha256": "cf190257b3545e87af89a92a07d8108310732564b25e8331b7d18d99181db517",
+  "stock_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "source": {
+    "source": "r1/src/application/board/native_stacmd_registration.c",
+    "source_sha256": "6644abf36e643bc0879e6bb54c30baa00d7007ff1f964233aa2b52b983d26c38",
+    "object_sha256": "d9dfe24431c353f0d6259e28b16864d68c165193ccfc74c90d2516db4caf1aa4",
+    "link": true
+  },
+  "source_and_object_unchanged": true,
+  "scatter": {
+    "base": "0x200075c4",
+    "name": "device_stacmd",
+    "data": "c8070c00000000000500000021000000e5910700ad9407000d910700ab90070003000000fda60700099407002d90070000000000000000000000000000000000000000000000000000000000000000007d65050069650500916505000d660500000000000000000000000000",
+    "words": [
+      "0xc07c8",
+      "0x0",
+      "0x5",
+      "0x21",
+      "0x791e5",
+      "0x794ad",
+      "0x7910d",
+      "0x790ab",
+      "0x3",
+      "0x7a6fd",
+      "0x79409",
+      "0x7902d",
+      "0x0",
+      "0x0",
+      "0x0",
+      "0x0",
+      "0x0",
+      "0x0",
+      "0x0",
+      "0x0",
+      "0x5657d",
+      "0x56569",
+      "0x56591",
+      "0x5660d",
+      "0x0",
+      "0x0",
+      "0x0"
+    ]
+  },
+  "verification": {
+    "record_bytes": 108,
+    "record_identical_after_test_relocations": true,
+    "cases": 54,
+    "passed": 54
+  },
+  "rea": {
+    "evidence_id": "ev_2e85165cd68bca7485b0a7a0af7692733dee7acde34e0861dc701dfe3ebc82b4",
+    "analysis_profile": {
+      "provider": {
+        "id": "ghidra",
+        "name": "Ghidra",
+        "version": "12.1.4"
+      },
+      "parameters": {
+        "target_kind": "executable",
+        "target_format": "elf",
+        "architecture": "arm",
+        "available_architectures": [
+          "arm"
+        ],
+        "import_mode": "ephemeral-source-immutable",
+        "annotation_policy": "atomic-function-entry-metadata-v1",
+        "load_image_observations": "source-mappings-entry-context-v2",
+        "function_body_evidence": "complete-inclusive-ranges-v1",
+        "function_references": "complete-body-and-entry-reference-manager-v2",
+        "call_relationship_coverage": "function-body-call-coverage-v5",
+        "function_dossier_coverage": "observed-facets-and-call-relationships-v1",
+        "string_inventory_evidence": "defined-data-coverage-v1",
+        "location_resolution": "explicit-address-exact-entry-symbol-first-v3",
+        "procedure_file_offset_resolution": "address-first-unique-target-source-mapping-v2",
+        "instruction_flow_evidence": "decoded-return-pcode-v1",
+        "instruction_references": "exact-address-incoming-v1",
+        "function_boundary_observations": "ghidra-function-boundary-limitations-v3",
+        "no_return_repair": "returning-imports-decoded-return-v2",
+        "process_launch": "inspected-jvm-launch-support-v1",
+        "jump_table_evidence": "typed-case-default-blocks-v1",
+        "decompiler_jump_loads": true,
+        "loader": "auto-from-header",
+        "language_id": "auto-from-header",
+        "compiler_spec_id": "auto-default",
+        "analyzer_preset": "ghidra-default"
+      },
+      "digest": "7e46711069eea041af1b9b99e34115c13332795e5cda76e584a722f529ec70de"
+    },
+    "limitations": [
+      "The session serves operations only after Ghidra reports default auto-analysis complete; incomplete analysis does not expose partial results.",
+      "The imported Program and temporary project are ephemeral and deleted on close. Annotation operations edit session database metadata; original executable bytes are never written.",
+      "Cancelling an active Ghidra request terminates its ephemeral database and discards session annotations. The selected target remains open; the next provider query imports the original artifact again.",
+      "Default-space addresses use lowercase 0x-prefixed hexadecimal; other address spaces use <percent-encoded-space>:0x<hex>.",
+      "References cover the complete Ghidra function-body AddressSet and exact entry. Dossier incoming edges omit sources owned by that function; procedure_references also retains those internal edges.",
+      "The dossier combines Ghidra FunctionManager, Listing, ReferenceManager, BasicBlockModel, and decompiler observations; provider-specific pseudocode and assembly are not cross-provider text invariants.",
+      "Resolved reference metadata identifies computed, indirect, external, call, jump, and data edges; unresolved targetless flows remain unknown, and function classifications distinguish thunks and externals.",
+      "Synthetic Ghidra entry-point references without actionable memory sources are omitted.",
+      "The Java bridge serializes one function request per Program and lets each decompilation run until it completes or the caller cancels.",
+      "Ghidra Listing reports a terminal call at 0x56602 to 0x85d58 FUN_00085d58 (external=false, thunk=false, hasNoReturn=false); fallthrough is excluded by Ghidra's flow model. The reason for the terminal flow is not established by this observation.",
+      "macOS sessions require a matching executable Ghidra native decompiler; REA checks for it but does not build native components or change Gatekeeper quarantine state."
+    ],
+    "procedure": {
+      "address": "0x565f4",
+      "name": "stock_stacmd_register",
+      "classification": {
+        "external": false,
+        "thunk": false,
+        "thunk_target": null,
+        "provenance": "ghidra-function-manager"
+      },
+      "body": {
+        "available": true,
+        "provenance": "ghidra-function-body-address-set",
+        "ranges": [
+          {
+            "start": "0x565f4",
+            "end": "0x56605"
+          }
+        ],
+        "total_bytes": 18,
+        "span_bytes": 18,
+        "non_contiguous": false,
+        "contains_entry": true
+      },
+      "signature": "undefined stock_stacmd_register()",
+      "locals": []
+    },
+    "pseudocode": "\n/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */\n\nvoid stock_stacmd_register(void)\n\n{\n  _DAT_200075f4 = _DAT_200075c4;\n  _DAT_200075f8 = 0x2000760c;\n  FUN_00085d58(&DAT_200075f4);\n  return;\n}\n\n",
+    "assembly": [
+      "0x565f4: ldr r0, [0x00056608]",
+      "0x565f6: ldr r1, [r0,#0x0]",
+      "0x565f8: str r1, [r0,#0x30]",
+      "0x565fa: add.w r1, r0, #0x48",
+      "0x565fe: str r1, [r0,#0x34]",
+      "0x56600: adds r0, #0x30",
+      "0x56602: b.w 0x00085d58"
+    ]
+  },
+  "composition": {
+    "compiled_units": 562,
+    "application_unresolved": 240,
+    "bootloader_unresolved": 34,
+    "resolved": [
+      "r1_stacmd"
+    ],
+    "added": []
+  },
+  "hashes": {
+    "build/goal-r1-stacmd/check.py": "e1feafa7b607e642e485f3427264d42b92c750a9e063ab3507a8eb43d52dc072",
+    "build/goal-r1-stacmd/probe.ld": "a77afa3dee80308eb3a455e4c53148e058fb3131a6d25574538faa191193dd02",
+    "build/goal-r1-stacmd/source.elf": "7640ddfee5f5c5bb26d8e66b8ea32e5a64c0d6b48e7f346fb1dea454948a2d24",
+    "build/goal-r1-stacmd/stock.elf": "99e298f3684f00fe6a54c23e4b169ed46e3fb233ed7a728a5cc2ad8e07e323d9",
+    "build/goal-r1-stacmd/comparison.json": "a1fabb3a457391109147a1f9c9366ec3ddd47046c51784481255c54da3cff98f",
+    "build/goal-r1-stacmd/rea-snapshot.json": "b7a8a94b196962f4b4853a97ed8baa776f9083db217470a0bc9a4778d65d0658"
+  },
+  "limitations": [
+    "Native name, callback and delay-function locations are test-only relocation settings; no production absolute aliases or retained bytes were added.",
+    "The delay section is relocated only to compare its pointer in initial data; its body and timing are not qualified by that comparison.",
+    "Registry calls are mocked; operation, GPIO and delay callbacks are not executed in this review.",
+    "No PMIC command, physical GPIO action, wire timing or electrical behavior was tested.",
+    "No accepted pseudocode coverage, source-plan selection, final firmware link or whole-image byte identity is established."
+  ]
+}

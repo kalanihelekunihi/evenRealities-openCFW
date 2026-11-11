@@ -93,10 +93,10 @@ _Static_assert(sizeof(evenhub_build_entry_t) == 16u, "build entry");
 
 extern uint32_t g2_evenhub_startup_widget_id; /* RAM 0x200745cc */
 
-extern void audio_uart_page_44120e(void *obj, int32_t value, uint32_t selector); /* style pad_top */
-extern void audio_uart_page_44121c(void *obj, int32_t value, uint32_t selector); /* style pad_bottom */
-extern void audio_uart_page_44122a(void *obj, int32_t value, uint32_t selector); /* style pad_left */
-extern void audio_uart_page_441238(void *obj, int32_t value, uint32_t selector); /* style pad_right */
+extern void lv_obj_set_style_pad_top(void *obj, int32_t value, uint32_t selector); /* style pad_top */
+extern void lv_obj_set_style_pad_bottom(void *obj, int32_t value, uint32_t selector); /* style pad_bottom */
+extern void lv_obj_set_style_pad_left(void *obj, int32_t value, uint32_t selector); /* style pad_left */
+extern void lv_obj_set_style_pad_right(void *obj, int32_t value, uint32_t selector); /* style pad_right */
 extern void *file_heap_allocate(uint32_t size);                                   /* 0x474cd2 */
 extern void file_heap_free(void *buffer);                                         /* 0x474d16 */
 extern void *audio_queue_copy_bytes(void *, const void *, uint32_t);              /* memcpy 0x439be4 */
@@ -276,10 +276,10 @@ static const char unbind_done_s[] = "[evenhub.ui]evenhub_unbind_event_container:
 /* Out-of-line instance of LVGL's static inline lv_obj_set_style_pad_all in this TU. */
 void evenhub_obj_set_style_pad_all_4935cc(void *obj, int32_t value, uint32_t selector)
 {
-    audio_uart_page_44122a(obj, value, selector);
-    audio_uart_page_441238(obj, value, selector);
-    audio_uart_page_44120e(obj, value, selector);
-    audio_uart_page_44121c(obj, value, selector);
+    lv_obj_set_style_pad_left(obj, value, selector);
+    lv_obj_set_style_pad_right(obj, value, selector);
+    lv_obj_set_style_pad_top(obj, value, selector);
+    lv_obj_set_style_pad_bottom(obj, value, selector);
 }
 
 uint32_t evenhub_main_widget_id_4935fe(void)

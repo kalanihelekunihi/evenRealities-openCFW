@@ -9,6 +9,8 @@ extern uint32_t case_init_id0(void);                 /* 0x08004ed0 */
 extern uint32_t case_init_id1(void);                 /* 0x08004ec4 */
 extern uint32_t case_init_id2(void);                 /* 0x08004eb8 */
 extern void case_init_log(uint32_t message,uint32_t arg0,uint32_t arg1,uint32_t arg2);
+extern uint32_t case_legacy_logger(const char *format,...); /* 0x08009170 */
+static const char case_box_version_08003348[]="1.2.57";
 extern uint32_t case_init_pin_read(uint32_t base,uint32_t mask); /* 0x08004e94 */
 extern void case_init_sensor_prepare(void);         /* 0x08003a30 */
 extern void case_init_selfcheck_read(uint32_t selector,uint8_t *out,uint32_t count); /* 0x080035b8 */
@@ -50,7 +52,10 @@ void case_application_initialize_2fc8(void)
     volatile uint8_t *s=state();
     if(logs_enabled()){
         uint32_t id0=case_init_id0(),id1=case_init_id1(),id2=case_init_id2();
-        case_init_log(CASE_STRING_ADDR(08003350),id2,id1,id0);
+        /* Boot-test fix: stock 0x08002fe8 passes the "1.2.57" literal at
+         * 0x08003348 for the leading %s, then UID words 4/5/6 (four varargs).
+         * The reduction dropped the string, so %s dereferenced a UID word. */
+        (void)case_legacy_logger(case_string_08003350,case_box_version_08003348,id2,id1,id0);
         case_init_log(CASE_STRING_ADDR(08003374),0u,0u,0u);
     }
     for(uint32_t i=8u;i<16u;i++)s[i]=0u;
@@ -70,13 +75,13 @@ void case_application_initialize_2fc8(void)
         case_init_wait(100u);
         attempts++;
     }while(attempts!=3u);
-    if(received!=0xa0u){good=0u;log1(CASE_STRING_ADDR(0800337f),received);}
+    if(received!=0xa0u){good=0u;log1(CASE_STRING_ADDR(08003380),received);}
     case_init_pmic_prepare();
     attempts=0u;received=0u;
     for(;;){
         case_init_pmic_read(0x14u,&received,1u);
         if(received==0x14u)break;
-        log0(CASE_STRING_ADDR(080033cc));
+        log1(CASE_STRING_ADDR(080033cc),received); /* boot-test fix: stock 0x080030dc r1 = id for %x */
         if(received!=0u){log0(CASE_STRING_ADDR(080033e8));(void)case_init_pmic_reset(0x14u,0x14u);}
         case_init_wait(100u);attempts++;
         if(case_init_pin_read(0x50000400u,0x20u)==0u){
@@ -85,7 +90,7 @@ void case_application_initialize_2fc8(void)
     }
     if(received==0x14u && attempts!=3u){
         uint8_t pmic[8];
-        log0(CASE_STRING_ADDR(08003437));
+        log0(CASE_STRING_ADDR(08003438));
         for(uint32_t i=0;i<8u;i++)case_init_pmic_read(0x10u+i,&pmic[i],1u);
         if(logs_enabled())case_init_log(CASE_STRING_ADDR(08003450),0u,0u,0u);
         case_init_hex_log(pmic,8u);
@@ -107,15 +112,16 @@ void case_application_initialize_2fc8(void)
         volatile uint8_t *adjust=(volatile uint8_t *)(uintptr_t)0x20000106u;
         (void)case_init_secondary_config_read(0xa4u,1u,(uint8_t *)(uintptr_t)adjust);
         uint8_t value=*adjust;
-        *adjust=(uint8_t)(((value&7u)*2u)+((value&0x10u)!=0u?0x50u:0x60u));
-        log1(CASE_STRING_ADDR(0800347f),*adjust);
+        /* Boot-test fix: stock 0x0800322a tests bit 3 (lsls #28; bmi), not bit 4. */
+        *adjust=(uint8_t)(((value&7u)*2u)+((value&0x08u)!=0u?0x50u:0x60u));
+        log1(CASE_STRING_ADDR(08003480),*adjust);
     }else{good=0u;log1(CASE_STRING_ADDR(080034a0),received);}
     received=0u;
     case_init_motion_read(0u,1u,&received);
     if((received>>4)==9u){
         case_init_power_set(1u);log0(CASE_STRING_ADDR(080034d4));
         if(good!=0u)goto finish_checks;
-    }else log0(CASE_STRING_ADDR(080034ec));
+    }else log1(CASE_STRING_ADDR(080034ec),received); /* boot-test fix: stock 0x08003294 passes the id for %x */
     for(uint32_t i=0;i<5u;i++){
         log1(CASE_STRING_ADDR(08003520),5u-i);
         case_init_wait(1000u);

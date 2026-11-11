@@ -2,7 +2,7 @@
 #include "nrf_log_str_formatter.h"
 #include "nrf_log_ctrl.h"
 #include "nrf_fprintf.h"
-extern void r1_log_local_datetime_fill(uint8_t out[8]);
+extern uint32_t r1_log_local_datetime_fill(uint8_t out[8]);
 static const char *const severity_names[]={0,"E","W","I","D"};
 static const char *const colors[]={"\x1b[0m","\x1b[1;30m","\x1b[1;31m","\x1b[1;32m","\x1b[1;33m","\x1b[1;34m","\x1b[1;35m","\x1b[1;36m","\x1b[1;37m"};
 int r1_log_ascii_isprint(int value){return value>=32 && value<=126;}

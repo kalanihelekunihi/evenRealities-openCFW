@@ -39,8 +39,15 @@ uint32_t r1_reset_trace_reboot_caller_write(uint32_t value)
 {(void)r1_reset_trace_addresses_clear();return r1_reset_trace_byte_write(1,value);}
 uint32_t r1_reset_trace_persist_tag_write(uint32_t value)
 {if(value!=7u)(void)r1_reset_trace_addresses_clear();return r1_reset_trace_byte_write(0,value);}
-__attribute__((naked,noinline,section(".r1.reset.writer.probe")))
-uint32_t r1_reset_trace_program_counter_probe(void){__asm__ volatile("mov r0, pc\nbx lr");}
+/* The stock MOV PC reads this leaf's entry plus four. Keep that diagnostic
+ * address relative to the relocated C function, with no instruction bytes
+ * embedded in source. The alignment makes bit 2 of the entry address zero. */
+__attribute__((noinline,aligned(8),section(".r1.reset.writer.probe")))
+uint32_t r1_reset_trace_program_counter_probe(void)
+{
+    capture: return (uint32_t)(((uintptr_t)&&capture | (uintptr_t)4u) &
+                               ~(uintptr_t)1u);
+}
 void r1_reset_trace_capture_site_adapter(uintptr_t caller)
 {
  uint32_t pc=r1_reset_trace_program_counter_probe();

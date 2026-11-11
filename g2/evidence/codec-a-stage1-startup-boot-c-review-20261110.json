@@ -1,0 +1,188 @@
+{
+  "schema": 1,
+  "target": "GX8002 BINH A stage-1 reset, boot setup, and immediate helper functions",
+  "stock_stage1_load_sha256": "65775a0feea148f5e1582693160c06204d5183fee717ba75706ce1cb4d40f605",
+  "direct_csky_compile": {
+    "passed": true,
+    "object_sha256": {
+      "main_stage1_startup.o": "503a5cec8be3613dd481d882b0136afc7642835c923b67bb9cdeba0a157f10f8",
+      "main_stage1_boot_setup.o": "a486185beab1f66f6bc203d87d2d0e97ef8c27e8808664f8003ebdf61271e66e",
+      "main_stage1_boot_helpers.o": "3563d8bd266a67f47bc7a84aef839907e44271d5759c6d3f9cb8708c975ee323"
+    },
+    "functions": [
+      {
+        "name": "reset",
+        "source": "g2/src/codec/image-a-stage1/main_stage1_startup.c",
+        "stock_address": "0x10000100",
+        "bytes": 48,
+        "stock_sha256": "346db1d79554ebe557dae93b5520dc6587f400703098060f5a37cb853bf4a603",
+        "source_sha256": "065f26fe75be6efe13081b5f85882641146372e87c78177444af33ce9450b54d",
+        "different_byte_offsets": [
+          28,
+          29,
+          30,
+          32,
+          33,
+          43
+        ],
+        "call_or_address_relocation_offsets": [
+          26,
+          30,
+          40
+        ]
+      },
+      {
+        "name": "boot_setup",
+        "source": "g2/src/codec/image-a-stage1/main_stage1_boot_setup.c",
+        "stock_address": "0x10000acc",
+        "bytes": 44,
+        "stock_sha256": "a90988aa830e757300e3abc8b0c52cf6a266db292dbc0cfabda4e434b918dcef",
+        "source_sha256": "0fcbcdf1b5809ebe5a9da039a126424e8eb5ded933fac734cef1235a2d319b8c",
+        "different_byte_offsets": [
+          2,
+          3,
+          4,
+          5,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          24,
+          25,
+          34,
+          35,
+          36,
+          37
+        ],
+        "call_or_address_relocation_offsets": [
+          2,
+          6,
+          10,
+          14,
+          22,
+          34
+        ]
+      },
+      {
+        "name": "audio_gate",
+        "source": "g2/src/codec/image-a-stage1/main_stage1_boot_helpers.c",
+        "stock_address": "0x10000e58",
+        "bytes": 42,
+        "stock_sha256": "124166ec340b2d315c87ab9310b28fa6e1c331275337400a1880049d4f0ec2a9",
+        "source_sha256": "6c55e09d45a83dcb594db15ef7296bef179aa9ae98045f716c93e90b4d104840",
+        "different_byte_offsets": [
+          28,
+          29,
+          30,
+          31,
+          36,
+          37,
+          38,
+          39
+        ],
+        "call_or_address_relocation_offsets": [
+          28,
+          36
+        ]
+      },
+      {
+        "name": "boot_mode",
+        "source": "g2/src/codec/image-a-stage1/main_stage1_boot_helpers.c",
+        "stock_address": "0x10000a04",
+        "bytes": 40,
+        "stock_sha256": "fc2ce0828c94119e062b926003adb23947f66c8370e37eee7ba63b65c50a2a27",
+        "source_sha256": "93fcf7e8269301da6a9b8cd65ca795058157bfb516871817283fe37e4658884e",
+        "different_byte_offsets": [
+          4,
+          5
+        ],
+        "call_or_address_relocation_offsets": [
+          2
+        ]
+      },
+      {
+        "name": "clock_status",
+        "source": "g2/src/codec/image-a-stage1/main_stage1_boot_helpers.c",
+        "stock_address": "0x10000b40",
+        "bytes": 12,
+        "stock_sha256": "730f5b1f0ddabd5a6ee9d36ada3140d8546e71691ccd55d9676dfab7d9410562",
+        "source_sha256": "730f5b1f0ddabd5a6ee9d36ada3140d8546e71691ccd55d9676dfab7d9410562",
+        "different_byte_offsets": [],
+        "call_or_address_relocation_offsets": []
+      },
+      {
+        "name": "clock_setup",
+        "source": "g2/src/codec/image-a-stage1/main_stage1_boot_helpers.c",
+        "stock_address": "0x10000f14",
+        "bytes": 32,
+        "stock_sha256": "f774751b3068d8fa7e4f50142be383f7112306bf607e13f8d7fa6cda51c88291",
+        "source_sha256": "7ead143d45bb26a6f2a47e40ed6f303bc0d39cf0312fb0dfb7160362a58e1228",
+        "different_byte_offsets": [
+          2,
+          3,
+          4,
+          5
+        ],
+        "call_or_address_relocation_offsets": [
+          2
+        ]
+      },
+      {
+        "name": "timer_start",
+        "source": "g2/src/codec/image-a-stage1/main_stage1_boot_helpers.c",
+        "stock_address": "0x10000f04",
+        "bytes": 14,
+        "stock_sha256": "557ef3846196bd3befbf919b318fe7c96d2ed50a8183aa762e41ae5292a41a8e",
+        "source_sha256": "3fba3d202c201cbbb5fc968ea5d646f44be1b68425653b41fbdbec3ba0f34b7f",
+        "different_byte_offsets": [
+          8,
+          9,
+          10,
+          11
+        ],
+        "call_or_address_relocation_offsets": [
+          8
+        ]
+      }
+    ],
+    "default_handler_stock_exact_bytes": 2,
+    "return_leaf_stock_exact_bytes": 2,
+    "stock_vectors": {
+      "words": 64,
+      "reset": "0x10000100",
+      "default": "0x10000130"
+    }
+  },
+  "source_composition": {
+    "units": 7,
+    "relocatable_link_passed": true,
+    "undefined_symbols": [
+      "gx8002_image_a_stage1_clock_init_1000092c",
+      "gx8002_image_a_stage1_timer_config_10000e84",
+      "gx8002_resident_reset_entry_23500"
+    ],
+    "linked_into_final_codec_a": false
+  },
+  "qualification": "Measured function bodies match stock except call or address relocations. The vector source has the same 64-entry structure but is not final-address linked. The resident reset symbol exists in codec A but is outside this isolated stage-1 composition. Clock init, timer configuration, the complete stage-1 image, and hardware behavior remain unverified.",
+  "full_g2_gate": {
+    "source_report": "build/g2-all-binh-a-startup-final-20261110/report.json",
+    "source_report_sha256": "0ad2198329aec698d34100b3b90f005826be152801bee9d12e9475e59b922b7a",
+    "built_units": 4875,
+    "failed_units": 0,
+    "duplicate_strong_symbols": 0,
+    "manifest_changed_during_build": false,
+    "link_report": "build/g2-all-binh-a-startup-final-link-20261110/link-report.json",
+    "link_report_sha256": "c6ea7242f32e742bca6c3049aa61842ec4ab1a24a17086edd03b40b7c585ddaf",
+    "linked_payloads": 7,
+    "external_binary_archive_used": false,
+    "codec_a_linked_binary_unchanged": true
+  },
+  "later_source_link_review": "g2/evidence/codec-a-stage1-source-link-20261110.json",
+  "snapshot_scope": "This receipt records the source revision compiled at that point; the later source-link review covers the expanded current stage-1 units."
+}

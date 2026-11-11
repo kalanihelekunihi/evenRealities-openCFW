@@ -1,0 +1,155 @@
+{
+  "schema_version": 1,
+  "entries": {
+    "0x42244": [
+      "r1_event_callback_00042244",
+      80
+    ],
+    "0x423d8": [
+      "r1_event_callback_000423d8",
+      86
+    ]
+  },
+  "report": "build/sources-goal-r1-spo2-events-c/report.json",
+  "report_sha256": "690e7e4c582a38a6d435e25aee7d348ba21113ddd93a314a9ac2b205950ccf36",
+  "unit": {
+    "source": "r1/src/application/board/native_event_callbacks.c",
+    "source_sha256": "f9217bd1c10be0822edfa50e45dbcfb9a9a35a6ae34935127b7b0544b1dec3a9",
+    "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-spo2-events-c/r1/r1-application/r1__src__application__board__native_event_callbacks.c.o",
+    "object_sha256": "bc24bfa92430038ad33211bd526919e3582253645eac7947d633fb7b7e065dfd"
+  },
+  "behavior": {
+    "pairs": 2244,
+    "digest": "48f1419dd218aa80500ecffb1d614e451d5e071f1845f5a1ef0ea70d3f5f1cf8",
+    "actual_C": [
+      "SpO2 once control/mode transition/setter",
+      "canonical expanded three-slot streams and state",
+      "existing wear/tick/timer release helpers"
+    ],
+    "actual_adapters": "C oxygen mode and measurement event adapters",
+    "modeled_boundaries": [
+      "r1_sensor_stream_register_by_name",
+      "r1_sensor_stream_unregister_by_name",
+      "r1_stream_timer_release",
+      "r1_spo2_timing_start_plan",
+      "r1_structured_log_mode_get",
+      "r1_structured_log_format",
+      "nrf_log_frontend_std_0",
+      "nrf_log_frontend_std_1"
+    ],
+    "limits": [
+      "Mapped wrapped/outlying slot addresses only; no invalid-pointer recovery",
+      "Result callback checked by identity, not invoked",
+      "Physical streams, scheduler, timers, logging and async behavior not proven",
+      "Private stack and caller-clobbered registers excluded"
+    ]
+  },
+  "negative_controls": {
+    "00042244-wrong-length-gate": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "AssertionError: ({'entry': 'mode_adapter', 'old': 0, 'new': 0, 'handles': 0, 'timer': 0, 'modes': (0,)}, ['trace'], [('mode', [0], '0041424300000000', '000000000000000000000000'), ('mode', [0], '0041424300000000', '000000000000000000000000'), ('mode', [0], '0041424300000000', '000000000000000000000000'), ('mode', [0], '0041424300000000', '000000000000000000000000'), ('mode', [0], '0041424300000000', '000000000000000000000000'), ('mode', [0], '0041424300000000', '000000000000000000000000')], [])\n"
+    },
+    "00042244-wrong-ring-bit": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "00000000000000000'), ('mode', [1], '0041424300000000', '000000000000000000000000')], [('mode', [1], '0041424300000000', '000000000000000000000000'), ('mode', [1], '0041424300000000', '000000000000000000000000'), ('mode', [1], '0041424300000000', '000000000000000000000000'), ('mode', [1], '0041424300000000', '000000000000000000000000'), ('ring', [201326592, '[RING]spo2 mode is same'], '0041424300000000', '000000000000000000000000'), ('mode', [1], '0041424300000000', '000000000000000000000000')])\n"
+    },
+    "00042244-wrong-ring-id": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "'000000000000000000000000'), ('mode', [7], '0041424300000000', '000000000000000000000000'), ('log1', [1835011, 'set spo2 mode: %d', 0], '0041424300000000', '000000000000000000000000'), ('mode', [7], '0041424300000000', '000000000000000000000000'), ('ring', [201326592, '[RING]spo2 mode is same'], '0041424300000000', '000000000000000000000000'), ('mode', [7], '0041424300000000', '000000000000000000000000'), ('log0', [1835011, 'spo2 mode is same'], '0041424300000000', '000000000000000000000000')])\n"
+    },
+    "00042244-wrong-sdk-id": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "'000000000000000000000000'), ('mode', [7], '0041424300000000', '000000000000000000000000'), ('log1', [1769475, 'set spo2 mode: %d', 0], '0041424300000000', '000000000000000000000000'), ('mode', [7], '0041424300000000', '000000000000000000000000'), ('ring', [201326592, '[RING]spo2 mode is same'], '0041424300000000', '000000000000000000000000'), ('mode', [7], '0041424300000000', '000000000000000000000000'), ('log0', [1835011, 'spo2 mode is same'], '0041424300000000', '000000000000000000000000')])\n"
+    },
+    "00042244-wrong-sdk-gate": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "00000000000000000'), ('ring', [205520896, '[RING]set spo2 mode: %d', 0], '0041424300000000', '000000000000000000000000'), ('mode', [2], '0041424300000000', '000000000000000000000000'), ('mode', [1], '0041424300000000', '000000000000000000000000'), ('ring', [201326592, '[RING]spo2 mode is same'], '0041424300000000', '000000000000000000000000'), ('mode', [2], '0041424300000000', '000000000000000000000000'), ('log0', [1835011, 'spo2 mode is same'], '0041424300000000', '000000000000000000000000')])\n"
+    },
+    "00042244-wrong-byte-conversion": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": " ('mode', [7], '0041424300000000', '000000000000000000000000'), ('log1', [1835011, 'set spo2 mode: %d', 255], '0041424300000000', '000000000000000000000000')], [('mode', [7], '0041424300000000', '000000000000000000000000'), ('ring', [205520896, '[RING]set spo2 mode: %d', 4294967295], '0041424300000000', '000000000000000000000000'), ('mode', [7], '0041424300000000', '000000000000000000000000'), ('log1', [1835011, 'set spo2 mode: %d', 4294967295], '0041424300000000', '000000000000000000000000')])\n"
+    },
+    "00042244-wrong-boolean-mode": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "^\nAssertionError: ({'entry': 'mode_adapter', 'old': 0, 'new': 2, 'handles': 0, 'timer': 0, 'modes': (0,)}, ['state'], [('mode', [0], '0041424300000000', '000000000000000000000000'), ('mode', [0], '0041424300000000', '000000000000000000000000'), ('mode', [0], '0041424300000000', '000000000000000000000000')], [('mode', [0], '0041424300000000', '000000000000000000000000'), ('mode', [0], '0041424300000000', '000000000000000000000000'), ('mode', [0], '0041424300000000', '000000000000000000000000')])\n"
+    },
+    "00042244-wrong-service-value": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": ", [0], '0041424300000000', '000000000000000000000000'), ('mode', [0], '0041424300000000', '000000000000000000000000'), ('mode', [0], '0041424300000000', '000000000000000000000000'), ('mode', [0], '0041424300000000', '000000000000000000000000'), ('mode', [0], '0041424300000000', '000000000000000000000000')], [('mode', [0], '0041424300000000', '000000000000000000000000'), ('mode', [0], '0041424300000000', '000000000000000000000000'), ('mode', [0], '0041424300000000', '000000000000000000000000')])\n"
+    },
+    "000423d8-wrong-length-gate": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "                             ^^^^\nAssertionError: ({'entry': 'once_adapter', 'value': 0, 'length': 0, 'handles': 0, 'registered': 0, 'modes': (7,)}, ['trace'], [], [('mode', [7], '0241424355050000', '000000000000000000000000'), ('ring', [205520896, '[RING]spo2 measure control: %d', 0], '0241424355050000', '000000000000000000000000'), ('mode', [7], '0241424355050000', '000000000000000000000000'), ('log1', [1835011, 'spo2 measure control: %d', 0], '0241424355050000', '000000000000000000000000')])\n"
+    },
+    "000423d8-wrong-ring-bit": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "'[RING]spo2 measure control: %d', 0], '0241424355050000', '000100000101000002010000'), ('mode', [1], '0241424355050000', '000100000101000002010000'), ('unregister', ['spo2', 256], '0241424355050000', '000100000101000002010000')], [('mode', [1], '0241424355050000', '000100000101000002010000'), ('mode', [1], '0241424355050000', '000100000101000002010000'), ('mode', [1], '0241424355050000', '000100000101000002010000'), ('unregister', ['spo2', 256], '0241424355050000', '000100000101000002010000')])\n"
+    },
+    "000423d8-wrong-ring-id": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "), ('mode', [7], '0241424355050000', '000000000000000000000000'), ('log1', [1835011, 'spo2 measure control: %d', 0], '0241424355050000', '000000000000000000000000')], [('mode', [7], '0241424355050000', '000000000000000000000000'), ('ring', [201326592, '[RING]spo2 measure control: %d'], '0241424355050000', '000000000000000000000000'), ('mode', [7], '0241424355050000', '000000000000000000000000'), ('log1', [1835011, 'spo2 measure control: %d', 0], '0241424355050000', '000000000000000000000000')])\n"
+    },
+    "000423d8-wrong-sdk-id": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "('mode', [7], '0241424355050000', '000000000000000000000000'), ('log1', [1835011, 'spo2 measure control: %d', 0], '0241424355050000', '000000000000000000000000')], [('mode', [7], '0241424355050000', '000000000000000000000000'), ('ring', [205520896, '[RING]spo2 measure control: %d', 0], '0241424355050000', '000000000000000000000000'), ('mode', [7], '0241424355050000', '000000000000000000000000'), ('log1', [1769475, 'spo2 measure control: %d', 0], '0241424355050000', '000000000000000000000000')])\n"
+    },
+    "000423d8-wrong-sdk-gate": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": " '0241424355050000', '000100000101000002010000'), ('log1', [1835011, 'spo2 measure control: %d', 0], '0241424355050000', '000100000101000002010000'), ('unregister', ['spo2', 256], '0241424355050000', '000100000101000002010000')], [('mode', [2], '0241424355050000', '000100000101000002010000'), ('mode', [2], '0241424355050000', '000100000101000002010000'), ('mode', [2], '0241424355050000', '000100000101000002010000'), ('unregister', ['spo2', 256], '0241424355050000', '000100000101000002010000')])\n"
+    },
+    "000423d8-wrong-byte-conversion": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "ol: %d', 1], '0241424355050000', '000000000000000000000000'), ('register', ['spo2', 'once', 'once result', 1, 1], '0241424355050000', '000000000000000000000000')], [('mode', [7], '0241424355050000', '000000000000000000000000'), ('ring', [205520896, '[RING]spo2 measure control: %d', 0], '0241424355050000', '000000000000000000000000'), ('mode', [7], '0241424355050000', '000000000000000000000000'), ('log1', [1835011, 'spo2 measure control: %d', 0], '0241424355050000', '000000000000000000000000')])\n"
+    },
+    "000423d8-wrong-raw-enable": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "ult', 1, 1], '0241424355050000', '000000000000000000000000')], [('mode', [7], '0241424355050000', '000000000000000000000000'), ('ring', [205520896, '[RING]spo2 measure control: %d', 2], '0241424355050000', '000000000000000000000000'), ('mode', [7], '0241424355050000', '000000000000000000000000'), ('log1', [1835011, 'spo2 measure control: %d', 2], '0241424355050000', '000000000000000000000000'), ('register', ['spo2', 'once', 'once result', 1, 1], '0241424355050000', '000000000000000000000000')])\n"
+    },
+    "000423d8-wrong-service-value": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "ol: %d', 0], '0241424355050000', '000000000000000000000000')], [('mode', [7], '0241424355050000', '000000000000000000000000'), ('ring', [205520896, '[RING]spo2 measure control: %d', 0], '0241424355050000', '000000000000000000000000'), ('mode', [7], '0241424355050000', '000000000000000000000000'), ('log1', [1835011, 'spo2 measure control: %d', 0], '0241424355050000', '000000000000000000000000'), ('register', ['spo2', 'once', 'once result', 1, 1], '0241424355050000', '000000000000000000000000')])\n"
+    }
+  },
+  "audit": {
+    "unchanged_prior_objects": 759,
+    "changed_objects": [
+      [
+        "r1-application",
+        "r1/src/application/board/native_event_callbacks.c"
+      ]
+    ],
+    "changed_allocated_sections": [
+      ".text.r1_event_callback_00042244",
+      ".text.r1_event_callback_000423d8"
+    ],
+    "changed_relocation_sections": [
+      ".text.r1_event_callback_00042244",
+      ".text.r1_event_callback_000423d8"
+    ],
+    "imports_unchanged": true,
+    "new_state": false
+  },
+  "source_check": "R1 passes: 760 units, 564 source files, 0 not built. Global check flags existing G2 resident_rom_thumb_set.S absent from manifest.",
+  "rea": [
+    "spo2-event-42244-c-rea.json",
+    "spo2-event-423d8-c-rea.json"
+  ],
+  "instruction_identity_proven": false,
+  "image_integration_proven": false
+}

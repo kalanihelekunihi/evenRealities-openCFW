@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "target": "GX8002 image-A SRAM architectural trap entry",
+  "change": {
+    "removed_assembly_unit": "g2/src/codec/app-callback/resident_exception_entry.S",
+    "c_unit": "g2/src/codec/app-callback/resident_exception_entry.c",
+    "manifest": "g2/src/sources.json",
+    "architecture_instructions": "The naked C function uses inline C-SKY instructions to save the interrupted frame and switch to the trap stack before calling the C handler."
+  },
+  "verification": {
+    "sources_check": "make -C g2 sources-check",
+    "source_report": "build/g2-all-trap-c-20261110/report.json",
+    "source_report_sha256": "b686a7be5ea045f0bef4769aeae56ae01c572ee6122b96daa2dabd8f0269c6c8",
+    "enabled_units_compiled": 4877,
+    "compile_failures": 0,
+    "duplicate_strong_symbols": 0,
+    "strict_link_report": "build/g2-all-trap-c-link-20261110/link-report.json",
+    "strict_link_report_sha256": "8166fbd364c3a4185648f7ad435ce36ceb6155faf3845d77c2ce27dfdb51e083",
+    "payloads_linked": 7,
+    "external_binary_archive_used": false,
+    "codec_a_binary_sha256": "ca687828df5dfae70032a24c1ca51434807016b2b996b6cd4117cf5aac953cc5",
+    "codec_a_binary_unchanged": true,
+    "codec_a_sram_sha256": "f63c3f95978c6451bfec8f7197a1304b350ef9549f51948cd758c52f6583c7bf",
+    "codec_a_sram_unchanged": true,
+    "codec_a_xip_sha256": "90f18e803fd46a76999d9648357f85bd028e3a5bd8bb63d89a82fdb98935aa43",
+    "codec_a_xip_unchanged": true,
+    "codec_a_binh_stage1_sha256": "23902370d90a7ca0f1a256b54149c4f3689e6702af93fcd7d5168d66b60f7847",
+    "codec_a_binh_stage1_unchanged": true,
+    "remaining_build_enabled_assembly_units": 6
+  },
+  "qualification": "The trap entry is compiled as C and preserves the prior linked codec bytes. Other architecture assembly, incomplete BINH A source, byte identity, and hardware behavior remain unresolved."
+}

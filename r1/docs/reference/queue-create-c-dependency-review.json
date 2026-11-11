@@ -1,0 +1,188 @@
+{
+  "creation": {
+    "passed": 8248,
+    "executions": 16496,
+    "source_report": "build/sources-goal-r1-queue-create-c/report.json",
+    "actual_initialization_reset_and_lists": true,
+    "allocation_and_critical_boundaries_modeled": true,
+    "logical_assert_fault_checked": true,
+    "queue_and_storage_guards": true,
+    "callback_stack_depths": {
+      "stock": [
+        -72,
+        -64,
+        -32
+      ],
+      "C": [
+        -56,
+        -24
+      ]
+    },
+    "sizes": {
+      "xQueueGenericCreate": 82,
+      "xQueueGenericCreateStatic": 98,
+      "prvInitialiseNewQueue": 32
+    },
+    "limitations": [
+      "Heap and critical boundaries modeled; actual native/C initialization, reset and list routines execute",
+      "State and boundary snapshots compared; private frames and internal ordinary memory access order excluded",
+      "Logical assertion mask/address/width/value checked; full fault/exception state unverified",
+      "Heap metadata, allocation fragmentation, physical scheduling and concurrency unverified",
+      "No byte qualification"
+    ]
+  },
+  "mutex_integration": {
+    "passed": 12288,
+    "executions": 24576,
+    "actual_mutex_and_queue_creation": true,
+    "actual_reset_and_list_init": true,
+    "generic_send_modeled": true,
+    "all_byte_queue_types": true,
+    "source_report": "build/sources-goal-r1-queue-create-c/report.json",
+    "limitations": [
+      "Heap, critical and generic-send boundaries modeled; complete mutex/queue initialization runs",
+      "Private frames and caller-clobbered registers/flags excluded",
+      "No physical concurrency or complete fault-state proof"
+    ]
+  },
+  "reset_regression": {
+    "passed": 6944,
+    "executions": 13888,
+    "actual_list_initialization": true,
+    "critical_and_scheduler_boundaries_modeled": true,
+    "pendSV_sev_dsb_isb_order": true,
+    "logical_assert_fault_checked": true,
+    "source_report": "build/sources-goal-r1-queue-create-c/report.json",
+    "callback_stack_depths": {
+      "stock": [
+        -24
+      ],
+      "C": [
+        -16
+      ]
+    },
+    "source_bytes": 166,
+    "limitations": [
+      "Critical entry/exit and event-list removal modeled; actual native/C list initialization executes",
+      "Queue state and boundary snapshots compared; ordinary internal memory access order and private frames excluded",
+      "Assertion checks mask/address/width/value only; full processor fault and exception state unverified",
+      "Physical scheduling, interrupts, sleep/wake and concurrency unverified",
+      "No byte qualification"
+    ]
+  },
+  "negative_controls": {
+    "wrong-allocation": {
+      "rejected": true,
+      "case": [
+        false,
+        2,
+        4,
+        0
+      ],
+      "stderr": "arm-none-eabi-ld: warning: /Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-queue-create-c/r1/r1-application/third-party__upstream__freertos-kernel__list.c.o uses 32-bit enums yet the output is to use variable-size enums; use of enum values across objects may fail\narm-none-eabi-ld: warning: (pvPortMalloc): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-create-c/wrong-allocation.o\narm-none-eabi-ld: warning: (vPortEnterCritical): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-create-c/wrong-allocation.o\narm-none-eabi-ld: warning: (vPortExitCritical): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-create-c/wrong-allocation.o\narm-none-eabi-ld: warning: (xTaskRemoveFromEventList): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-create-c/wrong-allocation.o\nTraceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-queue-create-c/reject-wrong-allocation.py\", line 64, in <module>\n    assert a(*case)==b(*case)\n                     ~^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-queue-create-c/reject-wrong-allocation.py\", line 51, in run\n    try:u.emu_start(([0x97b0e,0x97b62][static] if stock else syms['xQueueGenericCreateStatic' if static else 'xQueueGenericCreate'][0])|1,STOP,count=10000)\n        ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 769, in emu_start\n    raise self._hook_exception\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 363, in wrapper\n    return func(uc, *args, **kwargs)\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 1063, in __hook_code_cb\n    callback(uc, address, size, user_data)\n    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-queue-create-c/reject-wrong-allocation.py\", line 29, in code\n    assert p==80+state['length']*state['size']\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    "static-flag": {
+      "rejected": true,
+      "case": [
+        true,
+        2,
+        4,
+        0
+      ],
+      "stderr": "arm-none-eabi-ld: warning: /Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-queue-create-c/r1/r1-application/third-party__upstream__freertos-kernel__list.c.o uses 32-bit enums yet the output is to use variable-size enums; use of enum values across objects may fail\narm-none-eabi-ld: warning: (pvPortMalloc): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-create-c/static-flag.o\narm-none-eabi-ld: warning: (vPortEnterCritical): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-create-c/static-flag.o\narm-none-eabi-ld: warning: (vPortExitCritical): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-create-c/static-flag.o\narm-none-eabi-ld: warning: (xTaskRemoveFromEventList): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-create-c/static-flag.o\nTraceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-queue-create-c/reject-static-flag.py\", line 64, in <module>\n    assert a(*case)==b(*case)\n                     ~^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-queue-create-c/reject-static-flag.py\", line 57, in run\n    if static or not fail:assert u.mem_read(Q+70,1)==bytes([static]) and u.mem_read(Q+76,1)==bytes([kind])\n                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    "early-type": {
+      "rejected": true,
+      "case": [
+        false,
+        2,
+        4,
+        0,
+        false,
+        true,
+        true,
+        0,
+        2
+      ],
+      "stderr": "arm-none-eabi-ld: warning: /Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-queue-create-c/r1/r1-application/third-party__upstream__freertos-kernel__list.c.o uses 32-bit enums yet the output is to use variable-size enums; use of enum values across objects may fail\narm-none-eabi-ld: warning: (pvPortMalloc): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-create-c/early-type.o\narm-none-eabi-ld: warning: (vPortEnterCritical): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-create-c/early-type.o\narm-none-eabi-ld: warning: (vPortExitCritical): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-create-c/early-type.o\narm-none-eabi-ld: warning: (xTaskRemoveFromEventList): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-queue-create-c/early-type.o\nTraceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-queue-create-c/reject-early-type.py\", line 64, in <module>\n    assert a(*case)==b(*case)\n                     ~^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-queue-create-c/reject-early-type.py\", line 57, in run\n    if static or not fail:assert u.mem_read(Q+70,1)==bytes([static]) and u.mem_read(Q+76,1)==bytes([kind])\n                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    }
+  },
+  "audit": {
+    "unchanged_existing_function_bodies": [
+      "prvGetDisinheritPriorityAfterTimeout",
+      "prvInitialiseMutex",
+      "prvIsQueueEmpty",
+      "prvUnlockQueue",
+      "ulPortRaiseBASEPRI",
+      "xQueueCreateMutex",
+      "xQueueGenericReset",
+      "xQueueGiveFromISR",
+      "xQueueGiveMutexRecursive",
+      "xQueueSemaphoreTake",
+      "xQueueTakeMutexRecursive"
+    ],
+    "changed_existing_function_bodies": {
+      "xQueueCreateMutexStatic": {
+        "before_bytes": 34,
+        "after_bytes": 36,
+        "reason": "Compiler infers that successful static creation returns the supplied descriptor; covered by integrated mutex wrapper comparison"
+      }
+    },
+    "new_strong_symbols": [
+      "xQueueGenericCreate",
+      "xQueueGenericCreateStatic"
+    ],
+    "removed_imports": [
+      "xQueueGenericCreate",
+      "xQueueGenericCreateStatic"
+    ],
+    "added_imports": []
+  },
+  "normal_build": {
+    "units": 573,
+    "application_imports": 194,
+    "bootloader_imports": 34,
+    "failures": 0,
+    "duplicate_strong_symbols": 0
+  },
+  "qualification": {
+    "compiled": 5,
+    "selected_regions": 2,
+    "already_covered": 2,
+    "new_functions_byte_qualified": false
+  },
+  "source_plan_unchanged": true,
+  "source_built_bytes": 3833,
+  "binary_pull_through_bytes": 642327,
+  "source_completeness_proven": false,
+  "evidence": {
+    "build/sources-goal-r1-queue-create-c/report.json": "147322cc9b3b5689fe490ccc4f57e5529c4aa662304a0e3f29d23ffe0beb7693",
+    "tools/build/source-plan.json": "0c889650bf8ea03def83ea1ea29730b3ccfe84bb70609c1972a500f02ba4ea2d",
+    "r1/src/application/rtos/mutex-kernel/mutex-kernel.c": "064576c832c2dbf60801c37b4fa47ca1e0bb2b61cdd8227ea049a10bd9051fb3",
+    "third-party/upstream/freertos-kernel/queue.c": "5cdf4fa35fe059446effff5bf20deaf83ddffb08921bc198fda106b1d17dd894",
+    "r1/src/config/rtos/mutex_kernel_contract.h": "d940797ff263975ba00fd355c3b3535a002c97f3e1ada8419492efb84ed8de81",
+    "r1/src/config/rtos/queue_operations_contract.h": "bca8311a67d844386ea0066c486ffd4ac127696a914adf4cd5514f4c841a3b8e",
+    "r1/src/config/rtos/native_port_assert.h": "efee8118f24a53756b6f14a666524b3d59561f005e1e87ed71309ccab9c4fc9f",
+    "r1/src/sources.json": "6fa37d8afe1e50453bc47962bcfe463cd5163fb4f1b3d2a8033b02adbb77c9d3",
+    "build/hybrid-goal-r1-queue-create-c/build-report.json": "1431535a256a5f9ae8e8a144dd637e20fc843c3a6c710f3d3bf9669a893f06a1",
+    "build/goal-r1-queue-create-c/before.c": "54a234dd56ce1ae839e013e436c95d1c977601dc49ffae9dc84cd9b860c0ac16",
+    "build/goal-r1-queue-create-c/selected-upstream.c": "99c8c9e23d7d843143db9054359564e65ecc2c8cebc0c3cd9e6844301e43343e",
+    "build/goal-r1-queue-create-c/REA-dynamic.json": "7a3e9fea25d9a7d751383a815910ca595cc79201355fb10e616b27f726900d90",
+    "build/goal-r1-queue-create-c/REA-static.json": "1e6af3aa85d27e96dd216c53d1464f296b618fdc5b22b964ce817d6a0c7848a8",
+    "build/goal-r1-queue-create-c/REA-initialize.json": "c38f27a1aae91efd3ac8a6f7c1ce99d3dcea299b056ff762f51fa25ce27775e8",
+    "build/goal-r1-queue-create-c/REA.snapshot.json": "6fc0a5741d04482d2c0ef820ce4de1e7d86ad996156ba0c29799ee886745d101",
+    "build/goal-r1-queue-create-c/verify.py": "a8665b066415f794e77ce79cd99811ec03480798c2fdfb25913a075b0ca8aef5",
+    "build/goal-r1-queue-create-c/results.json": "4f0b2fe1235e59e0db8324c43d8a82a263a521b0a41b5d868deda764cfa7f991",
+    "build/goal-r1-queue-create-c/negative.py": "c907c2f7a1179b1124e37ba36595c2ac6d3a50973dd82dd29711fbadd7011a92",
+    "build/goal-r1-queue-create-c/negative-results.json": "543c95d648ee1ae7d6cb37d971b47e23f9ba3ddb21ccabc9b7c51fd39e4d8208",
+    "build/goal-r1-queue-create-c/audit.py": "4e7e1935d6e1032b4610a73a8ea308451b6c043bce5d7f716c55b9232e52e36a",
+    "build/goal-r1-queue-create-c/audit-results.json": "1d59ed76bc500b4483226eecab6e1e65c7249b2abe0ab604ecccc5e65a81a293",
+    "build/goal-r1-queue-create-c/qualify.py": "1bbbfb9382372c65a6d4c76c20cbbf5b8abddcefe4265dcc34b6e723923fdb8d",
+    "build/goal-r1-queue-create-c/qualified-current/qualification.json": "731eba315d76b22ca9b373d57a23fada0ee56b6dd0336c0052eb972efd8ae564",
+    "build/goal-r1-queue-create-c/qualified-current/source-plan.json": "c82d566eec0b9864b0b0fd13157557e5bb7aeaa3e596514f5ad0c6dcdb751634",
+    "build/goal-r1-queue-create-c/reset/verify.py": "006d32d1cf649095a6634d9de67f7aed517b12acf78d3a5d6abfccf044a63d0a",
+    "build/goal-r1-queue-create-c/reset/results.json": "d89a0efad81ea35528478eaa98435142be4037ba6baca603330372594ce3dbf3",
+    "build/goal-r1-queue-create-c/mutex/verify.py": "563b18a99938e7381f3f7989ef1e7a0daec80d61cb5e56f3993fdd976eebc385",
+    "build/goal-r1-queue-create-c/mutex/results.json": "da1013ebc782fdd8047a6f710ec987d4d7fea27a74fe29adea46f9fe7ec7ff70"
+  }
+}

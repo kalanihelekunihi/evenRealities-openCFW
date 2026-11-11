@@ -1,40 +1,17 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_317f2c\n"
-".type opencfw_em9305_child_317f2c,@function\n"
-"opencfw_em9305_child_317f2c:\n"
-"L317f2c:\n"
-"enter_s [r13-r14,blink]\n"
-"L317f2e:\n"
-"mov_s r13,r0\n"
-"L317f30:\n"
-"mov r0,620\n"
-"L317f34:\n"
-"ldb_s r2,[r13,r0]\n"
-"L317f36:\n"
-"mov_s r0,0x334b98\n"
-"L317f3c:\n"
-"breq.d.nt r2,0x1,L317f44\n"
-"L317f40:\n"
-"mov_s r14,r1\n"
-"L317f42:\n"
-"brne_s r2,0,L317f5a\n"
-"L317f44:\n"
-"ld_s.as r1,[r0,r14]\n"
-"L317f46:\n"
-"breq_s r1,0,L317f4c\n"
-"L317f48:\n"
-"jl_s.d [r1]\n"
-"L317f4a:\n"
-"mov_s r0,r13\n"
-"L317f4c:\n"
-"ldb r0,[r14,0x334ba0]\n"
-"L317f54:\n"
-"add r13,r13,624\n"
-"L317f58:\n"
-"stb_s r0,[r13,0]\n"
-"L317f5a:\n"
-"leave_s [r13-r14,blink,pcl]\n"
-".size opencfw_em9305_child_317f2c,.-opencfw_em9305_child_317f2c\n"
-);
+#include <stdint.h>
+
+/* Native 0x317f2c..0x317f5c: subrate step for states 0 and 1 (+620): run
+ * the selected action from the 0x334b98 table (record, action) and copy
+ * the selected flag from 0x334ba0 into +624. Other states do nothing. */
+extern uint32_t (*const opencfw_em9305_subrate_actions_334b98[2])(uintptr_t);
+extern const uint8_t opencfw_em9305_subrate_flags_334ba0[4];
+
+void opencfw_em9305_child_317f2c(uintptr_t record, uint32_t selector)
+{
+    uint32_t state=*(volatile uint8_t *)(record+620u);
+    if(state>1u)return;
+    uintptr_t action=(uintptr_t)opencfw_em9305_subrate_actions_334b98[selector];
+    if(action!=0u)
+        (void)((uint32_t (*)(uintptr_t,uintptr_t,uint32_t))action)(record,action,state);
+    *(volatile uint8_t *)(record+624u)=opencfw_em9305_subrate_flags_334ba0[selector];
+}

@@ -23,7 +23,7 @@ void case_boot_transport_cb_9d70(uint32_t argument)
             (void)case_policy_log(CASE_STRING_ADDR(08009dc8));
         }
     }else if(shared[7u]==0u){
-        (void)case_policy_log(CASE_STRING_ADDR(08009dcc));
+        (void)case_policy_log(CASE_STRING_ADDR(08009dcc),mode); /* boot-test fix: stock 0x08009d76 r1 = led mode for %d */
         (void)case_policy_log(CASE_STRING_ADDR(08009dc8));
     }
 }

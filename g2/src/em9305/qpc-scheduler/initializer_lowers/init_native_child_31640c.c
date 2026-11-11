@@ -1,42 +1,20 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_31640c\n"
-".type opencfw_em9305_child_31640c,@function\n"
-"opencfw_em9305_child_31640c:\n"
-"L31640c:\n"
-"enter_s [r13,blink]\n"
-"L31640e:\n"
-"mov_s r13,r0\n"
-"L316410:\n"
-"mov r0,544\n"
-"L316414:\n"
-"ldb_s r0,[r13,r0]\n"
-"L316416:\n"
-"bbit1.d.nt r0,0x1,L31642c\n"
-"L31641a:\n"
-"mov_s r1,0x1a\n"
-"L31641c:\n"
-"bl.d opencfw_em9305_mode_event_322fdc\n"
-"L316420:\n"
-"mov_s r0,r13\n"
-"L316422:\n"
-"mov_s r1,0x6e\n"
-"L316424:\n"
-"bl.d opencfw_em9305_receive_terminate_325c08\n"
-"L316428:\n"
-"mov_s r0,r13\n"
-"L31642a:\n"
-"leave_s [r13,blink,pcl]\n"
-"L31642c:\n"
-"bl.d opencfw_em9305_child_325c9c\n"
-"L316430:\n"
-"mov_s r0,r13\n"
-"L316432:\n"
-"bl.d opencfw_em9305_phy_timer_start_32c7e4\n"
-"L316436:\n"
-"mov_s r0,r13\n"
-"L316438:\n"
-"leave_s [r13,blink,pcl]\n"
-".size opencfw_em9305_child_31640c,.-opencfw_em9305_child_31640c\n"
-);
+#include <stdint.h>
+
+/* Native 0x31640c..0x31643a: if bit 1 of the record's mode byte (+544) is
+ * set, run child 325c9c and start the PHY timer; otherwise report mode
+ * event 0x1a and terminate reception with reason 0x6e. */
+extern uint32_t opencfw_em9305_child_325c9c(uintptr_t record);
+extern uint32_t opencfw_em9305_phy_timer_start_32c7e4(uintptr_t record);
+extern uint32_t opencfw_em9305_mode_event_322fdc(uintptr_t context,uint32_t status);
+extern uint32_t opencfw_em9305_receive_terminate_325c08(uintptr_t source,
+                                                        uint32_t reason);
+
+uint32_t opencfw_em9305_child_31640c(uintptr_t record)
+{
+    if((*(volatile uint8_t *)(record+544u)&2u)!=0u){
+        (void)opencfw_em9305_child_325c9c(record);
+        return opencfw_em9305_phy_timer_start_32c7e4(record);
+    }
+    (void)opencfw_em9305_mode_event_322fdc(record,0x1au);
+    return opencfw_em9305_receive_terminate_325c08(record,0x6eu);
+}

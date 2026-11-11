@@ -1,0 +1,121 @@
+{
+  "schema_version": 1,
+  "source": "r1/src/application/board/native_ble_tx_power.c",
+  "native_roots": [
+    "0x4e150",
+    "0x41800"
+  ],
+  "report": "build/sources-goal-r1-tx-power-c/report.json",
+  "compiled_units": 826,
+  "application_imports": 76,
+  "added_imports": [],
+  "removed_imports": [
+    "r1_tx_power_plan"
+  ],
+  "prior_objects_unchanged": 823,
+  "changed_generated_objects": [
+    [
+      "r1-bootloader",
+      "{gen}/r1_startup_vectors.S"
+    ],
+    [
+      "r1-bootloader",
+      "{gen}/r1_uecc.c"
+    ]
+  ],
+  "added_units": [
+    [
+      "r1-application",
+      "r1/src/application/board/native_ble_tx_power.c"
+    ]
+  ],
+  "verification": {
+    "policy_pairs": 1728,
+    "random_pairs": 256,
+    "adapter_pairs": 16,
+    "actual_sdk_svc_gateways": true,
+    "actual_C_error_logger": false,
+    "actual_sdk_connection_state": false,
+    "state_pairs": 0
+  },
+  "actual_error_integration": {
+    "policy_pairs": 1728,
+    "random_pairs": 256,
+    "adapter_pairs": 16,
+    "actual_sdk_svc_gateways": true,
+    "actual_C_error_logger": true
+  },
+  "actual_state_and_error_integration": {
+    "policy_pairs": 12,
+    "random_pairs": 16,
+    "adapter_pairs": 16,
+    "actual_sdk_svc_gateways": true,
+    "actual_C_error_logger": true,
+    "actual_sdk_connection_state": true,
+    "state_pairs": 300
+  },
+  "mutants": {
+    "rejected": [
+      "phone_power",
+      "glasses_power",
+      "disabled_power",
+      "connection_state",
+      "glasses_handle",
+      "advertising_role",
+      "availability",
+      "stop_after_error"
+    ]
+  },
+  "rea_receipts": "r1/docs/reference/tx-power-rea-bytes.json",
+  "rea_bytes_match_pinned_stock": true,
+  "existing_advertising_owner": {
+    "stock_base": "0x20007e64",
+    "source": "r1_ble_advertising_context_a",
+    "handle_offset": 84,
+    "native_observer_record": "0xc4578"
+  },
+  "contract": {
+    "phone_power_dBm": [
+      -8,
+      0
+    ],
+    "glasses_power_dBm": [
+      -8,
+      6
+    ],
+    "advertising_power_dBm": [
+      -8,
+      0
+    ],
+    "enabled_test": "full uint32 nonzero",
+    "connection_status_required": 2,
+    "connection_role": 3,
+    "advertising_role": 1,
+    "SVC_numbers": [
+      "0x77",
+      "0x93"
+    ],
+    "reload_handles_after_external_calls": true,
+    "errors_log_and_continue": true
+  },
+  "limitations": [
+    "S140 supervisor calls are modeled; SDK SVC gateway code executes.",
+    "The deeper integration executes actual SDK connection-state/atomic-flag reads and actual C error logger, with prepared private flag words. It does not establish radio event production.",
+    "RTOS scheduling, RF output and physical timing remain unverified.",
+    "No final application link or boot proof; byte identity is not the current acceptance requirement.",
+    "The SDK supervisor-call boundary necessarily retains SDK assembly; the reconstructed product policy contains no inline assembly."
+  ],
+  "evidence_files": {
+    "build/sources-goal-r1-tx-power-c/report.json": "b88246096b24bff83d6e058717f50cd034e1290787f5b7ff2acbdc478002caa2",
+    "r1/src/sources.json": "ab8ce562294a7020744c4a85e871f6a9e03f3349a21ac0f868b7bea618230dcb",
+    "r1/src/application/board/native_ble_tx_power.c": "2086b7d6680835987d0673a3963aa2ef50a254977b05169cfb8e713f55678586",
+    "build/goal-r1-tx-power-c/verify.py": "42b442cb4f2b71ec4298a7b90826ffd241158df4f8f69cf0dbf7f8c84bc0b544",
+    "build/goal-r1-tx-power-c/verification.json": "2976c0b911f1d1d0bde8e92942cec03a91dd2a5962c7004f938e8d20a4950279",
+    "build/goal-r1-tx-power-c/integration.json": "dea5e1a468c7107db9a977674d43ca96819b41f8db2461dffb9b72c3302b1898",
+    "build/goal-r1-tx-power-c/state-integration.json": "fe79c5419fd5a70a5a8b30f976dfacec0d83544c0580e749565e0269150ecbef",
+    "build/goal-r1-tx-power-c/mutants.py": "e3d72dcff07eeadbab9d44270c106f24d675aea26a24906c03a910c682e445a2",
+    "build/goal-r1-tx-power-c/mutants.json": "5ff50f143534b12e4ba50d71d3cbd5648f02a0b0460585cad707474fda6e74c3",
+    "r1/docs/reference/tx-power-rea-bytes.json": "cf977ac1677d2fc8fa84a11e5eb50569e121f882680994f4e3f89fcaf1086c88",
+    "build/goal-r1-tx-power-c/sources-check.log": "53c269b4c1d7e09ddadb3c3b6484aab8cad7137627c079abe8a756a05e3b54ee"
+  }
+}

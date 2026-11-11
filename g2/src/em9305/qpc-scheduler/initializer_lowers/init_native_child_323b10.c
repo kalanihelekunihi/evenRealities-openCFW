@@ -1,114 +1,48 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_323b10\n"
-".type opencfw_em9305_child_323b10,@function\n"
-"opencfw_em9305_child_323b10:\n"
-"L323b10:\n"
-"enter_s [r13-r18,fp,blink]\n"
-"L323b12:\n"
-"sub_s sp,sp,0xc\n"
-"L323b14:\n"
-"mov_s r17,r2\n"
-"L323b16:\n"
-"mov_s r18,r1\n"
-"L323b18:\n"
-"mov_s r13,r0\n"
-"L323b1a:\n"
-"stb 0,[sp,8]\n"
-"L323b1e:\n"
-"st 0,[sp,4]\n"
-"L323b22:\n"
-"breq_s r0,0,L323b4e\n"
-"L323b24:\n"
-"add r14,r13,0xae4\n"
-"L323b2c:\n"
-"add r15,r13,0x9d4\n"
-"L323b34:\n"
-"mov_s r0,r14\n"
-"L323b36:\n"
-"mov_s r1,r15\n"
-"L323b38:\n"
-"mov_s r2,r13\n"
-"L323b3a:\n"
-"bl.d opencfw_em9305_child_318440\n"
-"L323b3e:\n"
-"stb 8,[r14]\n"
-"L323b42:\n"
-"mov_s r0,r14\n"
-"L323b44:\n"
-"mov_s r1,r15\n"
-"L323b46:\n"
-"bl.d opencfw_em9305_child_3184f4\n"
-"L323b4a:\n"
-"mov_s r2,r13\n"
-"L323b4c:\n"
-"b_s L323b84\n"
-"L323b4e:\n"
-"mov_s r14,0x805c60\n"
-"L323b54:\n"
-"ld r0,[r14,0]\n"
-"L323b56:\n"
-"breq_s r0,0,L323b84\n"
-"L323b58:\n"
-"mov_s r15,0x805c5c\n"
-"L323b5e:\n"
-"ld r0,[r15,0]\n"
-"L323b60:\n"
-"breq_s r0,0,L323b84\n"
-"L323b62:\n"
-"bl opencfw_em9305_auxiliary_ready_303f68\n"
-"L323b66:\n"
-"ld r3,[r14,0]\n"
-"L323b68:\n"
-"ld_s r14,[r0,0x24]\n"
-"L323b6a:\n"
-"ld_s r1,[r0,0x2c]\n"
-"L323b6c:\n"
-"mov_s r16,r0\n"
-"L323b6e:\n"
-"add_s r0,sp,0x4\n"
-"L323b70:\n"
-"mov_s r2,r14\n"
-"L323b72:\n"
-"jl_s.d [r3]\n"
-"L323b74:\n"
-"stb 8,[sp,4]\n"
-"L323b78:\n"
-"ld r1,[r16,44]\n"
-"L323b7c:\n"
-"ld r3,[r15,0]\n"
-"L323b7e:\n"
-"add_s r0,sp,0x4\n"
-"L323b80:\n"
-"jl_s.d [r3]\n"
-"L323b82:\n"
-"mov_s r2,r14\n"
-"L323b84:\n"
-"add r4,sp,0x4\n"
-"L323b88:\n"
-"breq_s r13,0,L323b92\n"
-"L323b8a:\n"
-"add r4,r13,0xae4\n"
-"L323b92:\n"
-"mov_s r1,3\n"
-"L323b94:\n"
-"mov_s r2,0\n"
-"L323b96:\n"
-"mov_s r3,0\n"
-"L323b98:\n"
-"mov_s r5,0\n"
-"L323b9a:\n"
-"mov_s r7,6\n"
-"L323b9c:\n"
-"mov r6,r18\n"
-"L323ba0:\n"
-"mov_s r0,r13\n"
-"L323ba2:\n"
-"bl.d opencfw_em9305_radio_compose_323dc0\n"
-"L323ba6:\n"
-"st r17,[sp]\n"
-"L323baa:\n"
-"leave_s [r13-r18,fp,blink,pcl]\n"
-".size opencfw_em9305_child_323b10,.-opencfw_em9305_child_323b10\n"
-);
+#include <stdint.h>
+
+/* Native 0x323b10..0x323bac: compose a type-6 PDU (forced 3) with an
+ * 8-byte header. For a set, the header lives at set+0xae4 (starting with
+ * 8) and is filled by 318440/3184f4 from the set's +0x9d4 data. Without a
+ * set, the stack header {8, 0, 0, 0, 0} is filled by the two registered
+ * hooks (*0x805c60 then *0x805c5c, both required) from the ready
+ * auxiliary object's +0x2c / +0x24 fields. */
+extern uint32_t opencfw_em9305_child_318440(uintptr_t,uintptr_t,uintptr_t);
+extern uint32_t opencfw_em9305_child_3184f4(uintptr_t,uintptr_t,uintptr_t);
+extern uintptr_t opencfw_em9305_auxiliary_ready_303f68(void);
+extern uint32_t opencfw_em9305_radio_compose_323dc0(uintptr_t,uint32_t,uint32_t,uint32_t,
+                                                    uintptr_t,uintptr_t,uintptr_t,uint32_t,
+                                                    uint32_t);
+
+struct init_header_323b10 {
+    uint32_t word;
+    uint8_t byte;
+};
+
+uint32_t opencfw_em9305_child_323b10(uintptr_t set,uintptr_t output,uint32_t count)
+{
+    struct init_header_323b10 local;
+    local.byte=0u;
+    local.word=0u;
+    uintptr_t header;
+    if(set!=0u) {
+        header=set+0xae4u;
+        *(volatile uint8_t *)header=8u;
+        (void)opencfw_em9305_child_318440(header,set+0x9d4u,set);
+        (void)opencfw_em9305_child_3184f4(header,set+0x9d4u,set);
+    } else {
+        header=(uintptr_t)&local;
+        volatile uint32_t *first_hook=(volatile uint32_t *)(uintptr_t)0x805c60u;
+        volatile uint32_t *second_hook=(volatile uint32_t *)(uintptr_t)0x805c5cu;
+        if(*first_hook!=0u&&*second_hook!=0u) {
+            uintptr_t object=opencfw_em9305_auxiliary_ready_303f68();
+            uintptr_t hook=*first_hook;
+            uint32_t data=*(volatile uint32_t *)(object+0x24u);
+            *(volatile uint8_t *)header=8u;
+            ((void (*)(uintptr_t,uint32_t,uint32_t))hook)(header,
+                *(volatile uint32_t *)(object+0x2cu),data);
+            ((void (*)(uintptr_t,uint32_t,uint32_t))*second_hook)(header,
+                *(volatile uint32_t *)(object+44u),data);
+        }
+    }
+    return opencfw_em9305_radio_compose_323dc0(set,3u,0u,0u,header,0u,output,6u,count);
+}

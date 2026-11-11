@@ -1,0 +1,424 @@
+{
+  "normal_report": "build/sources-goal-r1-health-key-reader-final/report.json",
+  "report_sha256": "9797f8ce5c76204f83c9f94b8bbcb8f555e5593402d9b465f3befd577720af29",
+  "direct": {
+    "pairs": 320,
+    "by_entry": {
+      "0x6ad28": 320
+    },
+    "outcomes": {
+      "0x6ad28/4294967294": 60,
+      "0x6ad28/64": 260
+    },
+    "digest": "1613e4e0ec17e42511db1f5fee3f89fdfcfcf2e04e309cd1cde96603c2134bd8",
+    "elf": "build/goal-r1-health-key-reader-c/source-86676.elf",
+    "elf_sha256": "3002e285824b89abb87d5221b16f429a135dd4142f533e87d56086861f18e5dc",
+    "provider_bindings": {
+      "r1_native_memory_move": 161628,
+      "fal_partition_find": 405840,
+      "fal_flash_device_find": 404980,
+      "r1_structured_log_mode_get": 595180,
+      "r1_structured_log_format": 595512,
+      "nrf_log_frontend_std_0": 498112,
+      "nrf_log_frontend_std_2": 498134
+    }
+  },
+  "lifecycle": {
+    "pairs": 692,
+    "entry_counts": {
+      "init": 415,
+      "reset": 36,
+      "event": 241
+    },
+    "flash_counts": {
+      "key_header": 986,
+      "key_body": 986,
+      "state_header": 1180,
+      "state_body": 192
+    },
+    "digest": "e1e9ae2896156fa7a52d71e473ef91d9ceffe6c976e8308f1105990708a5ba03",
+    "native_branch_hits": {
+      "0x4bee2": 103,
+      "0x4bef8": 102,
+      "0x4bf00": 3,
+      "0x4bf84": 204,
+      "0x4bfde": 96
+    },
+    "lower_bindings": {
+      "gomore_primitives_size_736": 427808,
+      "gomore_primitives_size_14816": 427034,
+      "r1_native_device_id_read_boundary": 437128,
+      "r1_health_auth_parameters_set": 584204,
+      "fal_partition_find": 405840,
+      "fal_flash_device_find": 404980,
+      "r1_health_lifecycle_engine_initialize_native": 458400,
+      "gomore_primitives_noop_91080": 594048,
+      "r1_gomore_authorization_dispatch_native": 300048,
+      "r1_time_backend_timestamp": 568740,
+      "r1_subscriber_register": 569228,
+      "r1_structured_log_mode_get": 595180,
+      "r1_structured_log_format": 595512,
+      "nrf_log_frontend_std_0": 498112,
+      "nrf_log_frontend_std_1": 498120,
+      "nrf_log_frontend_std_2": 498134,
+      "r1_native_memory_move": 161628
+    },
+    "elf": "build/goal-r1-health-key-reader-c/lifecycle/source-86625.elf",
+    "elf_sha256": "dbeac0fed3e23ee0cdaa09c370f50f298fc3a227d0e80a9dfe490165d19d9aca",
+    "void_return": true
+  },
+  "negative": {
+    "wrong-cache-flag": {
+      "args": {
+        "entry": 437544,
+        "cached": 1,
+        "ignored_length": 0,
+        "crc_valid": false,
+        "read_status": 0,
+        "logs": [
+          0
+        ]
+      },
+      "stock": {
+        "result": [
+          64,
+          null
+        ],
+        "calls": [],
+        "memory": [
+          "29144867b23ea9070c8c7cde2033c672c32f62f01eb338694dc67bf3282f28ac",
+          "300a665e4e578e5c1036b506015c516006d308dc3057fced0085640f26804342",
+          "a76c0b182c82708994873a4642d3c267418a45e831a0c7e46800d0aa9c553d05",
+          "843486bb4d18563576a3dfb5505245f41395ff6670a8b68703164ef6945506c7",
+          "84322ac926960763de9d305433bafb81783cdcc417627383a4ceb2df00498f33"
+        ],
+        "masks": [
+          1,
+          128,
+          0
+        ]
+      },
+      "C": {
+        "result": [
+          4294967294,
+          null
+        ],
+        "calls": [
+          [
+            "0x1100100",
+            [
+              "0x1100100",
+              "key_header",
+              256,
+              8,
+              "00600120e0020000",
+              "400000001175ad1e"
+            ],
+            0
+          ],
+          [
+            "0x1100100",
+            [
+              "0x1100100",
+              "key_payload",
+              264,
+              64,
+              "0718293a4b5c6d7e8fa0b1c2d3e4f5061728394a5b6c7d8e9fb0c1d2e3f405162738495a6b7c8d9eafc0d1e2f30415263748596a7b8c9daebfd0e1f203142536"
+            ],
+            0
+          ],
+          [
+            "0x914ec",
+            [],
+            0
+          ],
+          [
+            "0x914ec",
+            [],
+            0
+          ],
+          [
+            "0x914ec",
+            [],
+            0
+          ]
+        ],
+        "memory": [
+          "29144867b23ea9070c8c7cde2033c672c32f62f01eb338694dc67bf3282f28ac",
+          "300a665e4e578e5c1036b506015c516006d308dc3057fced0085640f26804342",
+          "58ff90ea7ba4fd42fda3c6badedaaa1bcfaac01ebf0d3e5cb587c026fd1a3a17",
+          "843486bb4d18563576a3dfb5505245f41395ff6670a8b68703164ef6945506c7",
+          "84322ac926960763de9d305433bafb81783cdcc417627383a4ceb2df00498f33"
+        ],
+        "masks": [
+          1,
+          128,
+          0
+        ]
+      }
+    },
+    "full64-status": {
+      "args": {
+        "entry": 437544,
+        "cached": 0,
+        "ignored_length": 0,
+        "crc_valid": false,
+        "read_status": 0,
+        "logs": [
+          0
+        ]
+      },
+      "stock": {
+        "result": [
+          4294967294,
+          null
+        ],
+        "calls": [
+          [
+            "0x1100100",
+            [
+              "0x1100100",
+              "key_header",
+              256,
+              8,
+              "00600120e0020000",
+              "400000001175ad1e"
+            ],
+            0
+          ],
+          [
+            "0x1100100",
+            [
+              "0x1100100",
+              "key_payload",
+              264,
+              64,
+              "0718293a4b5c6d7e8fa0b1c2d3e4f5061728394a5b6c7d8e9fb0c1d2e3f405162738495a6b7c8d9eafc0d1e2f30415263748596a7b8c9daebfd0e1f203142536"
+            ],
+            0
+          ],
+          [
+            "0x914ec",
+            [],
+            0
+          ],
+          [
+            "0x914ec",
+            [],
+            0
+          ],
+          [
+            "0x914ec",
+            [],
+            0
+          ]
+        ],
+        "memory": [
+          "29144867b23ea9070c8c7cde2033c672c32f62f01eb338694dc67bf3282f28ac",
+          "300a665e4e578e5c1036b506015c516006d308dc3057fced0085640f26804342",
+          "58ff90ea7ba4fd42fda3c6badedaaa1bcfaac01ebf0d3e5cb587c026fd1a3a17",
+          "843486bb4d18563576a3dfb5505245f41395ff6670a8b68703164ef6945506c7",
+          "84322ac926960763de9d305433bafb81783cdcc417627383a4ceb2df00498f33"
+        ],
+        "masks": [
+          1,
+          128,
+          0
+        ]
+      },
+      "C": {
+        "result": [
+          64,
+          null
+        ],
+        "calls": [
+          [
+            "0x1100100",
+            [
+              "0x1100100",
+              "key_header",
+              256,
+              8,
+              "00600120e0020000",
+              "400000001175ad1e"
+            ],
+            0
+          ],
+          [
+            "0x1100100",
+            [
+              "0x1100100",
+              "key_payload",
+              264,
+              64,
+              "0718293a4b5c6d7e8fa0b1c2d3e4f5061728394a5b6c7d8e9fb0c1d2e3f405162738495a6b7c8d9eafc0d1e2f30415263748596a7b8c9daebfd0e1f203142536"
+            ],
+            0
+          ],
+          [
+            "0x914ec",
+            [],
+            0
+          ],
+          [
+            "0x914ec",
+            [],
+            0
+          ],
+          [
+            "0x914ec",
+            [],
+            0
+          ]
+        ],
+        "memory": [
+          "29144867b23ea9070c8c7cde2033c672c32f62f01eb338694dc67bf3282f28ac",
+          "300a665e4e578e5c1036b506015c516006d308dc3057fced0085640f26804342",
+          "51468e0c6ed7cd1deeb46a6a065e19b0360bfd494218e758aae9a78c87450174",
+          "843486bb4d18563576a3dfb5505245f41395ff6670a8b68703164ef6945506c7",
+          "84322ac926960763de9d305433bafb81783cdcc417627383a4ceb2df00498f33"
+        ],
+        "masks": [
+          1,
+          128,
+          0
+        ]
+      }
+    },
+    "honor-ignored-length": {
+      "args": {
+        "entry": 437544,
+        "cached": 0,
+        "ignored_length": 0,
+        "crc_valid": true,
+        "read_status": 0,
+        "logs": [
+          0
+        ]
+      },
+      "stock": {
+        "result": [
+          64,
+          null
+        ],
+        "calls": [
+          [
+            "0x1100100",
+            [
+              "0x1100100",
+              "key_header",
+              256,
+              8,
+              "00600120e0020000",
+              "400000001075ad1e"
+            ],
+            0
+          ],
+          [
+            "0x1100100",
+            [
+              "0x1100100",
+              "key_payload",
+              264,
+              64,
+              "0718293a4b5c6d7e8fa0b1c2d3e4f5061728394a5b6c7d8e9fb0c1d2e3f405162738495a6b7c8d9eafc0d1e2f30415263748596a7b8c9daebfd0e1f203142536"
+            ],
+            0
+          ]
+        ],
+        "memory": [
+          "29144867b23ea9070c8c7cde2033c672c32f62f01eb338694dc67bf3282f28ac",
+          "300a665e4e578e5c1036b506015c516006d308dc3057fced0085640f26804342",
+          "51468e0c6ed7cd1deeb46a6a065e19b0360bfd494218e758aae9a78c87450174",
+          "843486bb4d18563576a3dfb5505245f41395ff6670a8b68703164ef6945506c7",
+          "84322ac926960763de9d305433bafb81783cdcc417627383a4ceb2df00498f33"
+        ],
+        "masks": [
+          1,
+          128,
+          0
+        ]
+      },
+      "C": {
+        "result": [
+          64,
+          null
+        ],
+        "calls": [
+          [
+            "0x1100100",
+            [
+              "0x1100100",
+              "key_header",
+              256,
+              8,
+              "00600120e0020000",
+              "400000001075ad1e"
+            ],
+            0
+          ],
+          [
+            "0x1100100",
+            [
+              "0x1100100",
+              "key_payload",
+              264,
+              64,
+              "0718293a4b5c6d7e8fa0b1c2d3e4f5061728394a5b6c7d8e9fb0c1d2e3f405162738495a6b7c8d9eafc0d1e2f30415263748596a7b8c9daebfd0e1f203142536"
+            ],
+            0
+          ]
+        ],
+        "memory": [
+          "29144867b23ea9070c8c7cde2033c672c32f62f01eb338694dc67bf3282f28ac",
+          "300a665e4e578e5c1036b506015c516006d308dc3057fced0085640f26804342",
+          "58ff90ea7ba4fd42fda3c6badedaaa1bcfaac01ebf0d3e5cb587c026fd1a3a17",
+          "843486bb4d18563576a3dfb5505245f41395ff6670a8b68703164ef6945506c7",
+          "84322ac926960763de9d305433bafb81783cdcc417627383a4ceb2df00498f33"
+        ],
+        "masks": [
+          1,
+          128,
+          0
+        ]
+      }
+    }
+  },
+  "scatter": {
+    "locked_application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "native_decoder": "0x286f4",
+    "source": "0xc4610",
+    "destination": "0x200064a8",
+    "length": 6492,
+    "owner_address": "0x20006e34",
+    "initial_bytes": "64060c00",
+    "decoder_return_r0": "0x0"
+  },
+  "resource": {
+    "native_address": "0xc0664",
+    "length": 65,
+    "sha256": "bf53c3b6e2272a1063f4f115ab15883bf809d6185c542bf01de31c23f8b5baba",
+    "linked_resource_matches": true
+  },
+  "audit": {
+    "added": [
+      "r1/src/application/runtime/native_health_key_reader.c"
+    ],
+    "changed": [
+      "r1/src/application/runtime/native_health_lifecycle.c",
+      "r1/src/application/runtime/native_health_authorize.c"
+    ],
+    "unchanged_objects": 724
+  },
+  "rea": {
+    "path": "build/goal-r1-health-key-reader-c/rea.json",
+    "sha256": "a20b58c78b9dff192f0afde5f80e0a694375f834f1c0eb83f0ae2a0c1d12aafa"
+  },
+  "limits": [
+    "Native memory move executes in replay; full source-only subset link is not claimed",
+    "Flash operations, FAL lookup, logging and lifecycle engine setters remain modeled",
+    "Accepted partial body reads with inherited scratch bytes and stack aliases are not covered",
+    "Explicit metadata seeds are zero in C authorization; direct reader tests match incoming R2/R3 seeds",
+    "No full firmware link or physical device execution"
+  ]
+}

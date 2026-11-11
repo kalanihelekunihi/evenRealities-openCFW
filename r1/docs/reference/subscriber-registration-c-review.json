@@ -1,0 +1,182 @@
+{
+  "schema": 1,
+  "scope": "R1 subscriber registration 0x8af8c, 146 native instruction bytes; existing data ownership preserved",
+  "status": "bounded C contract candidate; not instruction qualified",
+  "stock_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "behavior": {
+    "paired_cases": 2496,
+    "executions": 4992,
+    "registration_then_consumer_cases": 96,
+    "source_report": "build/sources-goal-r1-subscriber-register-c-verified/report.json",
+    "actual_C_lock_unlock_consumer_CMSIS_thread_and_task_getter": true,
+    "modeled": [
+      "allocator returns and mutations",
+      "CMSIS mutex APIs",
+      "opaque subscriber callback"
+    ],
+    "checks": [
+      "unsigned selector bound and null callback acceptance",
+      "12-byte root/entry allocations, callback-only duplicate detection",
+      "root initialization before publication and preserved root +8 on existing records",
+      "default thread-cell address rather than its current value",
+      "late root head/tail reload after allocation, captured root pointer despite table mutation",
+      "allocation failures retain partial state/lock then BASEPRI=64/native write fault",
+      "real C registration-to-consumer descriptor path",
+      "ordered shared byte/word accesses, null-tail faults, guards, R0, SP, saved registers and masks"
+    ],
+    "limits": [
+      "Allocator, actual mutex scheduling and callbacks modeled; no physical sensors/concurrency",
+      "Raw callback gateway and BASEPRI primitive remain assembly",
+      "Private frames, arbitrary corrupted pointers and overlapping heap allocations excluded"
+    ]
+  },
+  "negative_controls": [
+    {
+      "mutation": "owner-aware-duplicates",
+      "rejected": true
+    },
+    {
+      "mutation": "default-thread-value",
+      "rejected": true
+    }
+  ],
+  "object_audit": {
+    "unchanged_roots_routes_bytes_flags_alignment_relocations": true,
+    "other_574_objects_unchanged": true,
+    "import_sets_unchanged": true,
+    "one_existing_unit_profile_changed_only": true,
+    "prior_source_hash_matches_backup": true
+  },
+  "startup": {
+    "source_report": "build/sources-goal-r1-subscriber-register-c-verified/report.json",
+    "stock_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "native_RW_and_ZI_handlers_executed": true,
+    "independent_RW_decoder_matches": true,
+    "region_guards_unchanged": true,
+    "cells": {
+      "r1_subscriber_roots": {
+        "address": "0x20015708",
+        "size": 20,
+        "section": ".r1.subscriber.roots",
+        "sha256": "de47c9b27eb8d300dbb5f2c353e632c393262cf06340c4fa7f1b40c4cbd36f90"
+      }
+    },
+    "owned_bytes": 20,
+    "limits": [
+      "Only these cells are owned; full firmware startup placement and physical execution are not established"
+    ]
+  },
+  "normal_build": {
+    "units": 575,
+    "application_units": 501,
+    "bootloader_units": 74,
+    "application_imports": 175,
+    "bootloader_imports": 34,
+    "failed": 0,
+    "known_failures": 0,
+    "duplicate_strong_symbols": 0,
+    "import_delta": 0
+  },
+  "qualification": {
+    "compiled_candidates": 5,
+    "selected_regions": 0,
+    "canonical_plan_unchanged": true
+  },
+  "hybrid": {
+    "application_bytes_equal_stock": true,
+    "totals": {
+      "binary-pull-through": 642279,
+      "source-built": 3881,
+      "resource-file": 248
+    },
+    "source_completeness_proven": false
+  },
+  "retained_assembly": [
+    "Architectural BASEPRI MSR on native allocation failure",
+    "Existing two-byte opaque callback BX gateway in consumer"
+  ],
+  "limits": [
+    "Allocator and CMSIS mutex APIs are modeled; scheduling and physical sensors not validated",
+    "Private frames, corrupt-pointer behavior outside tested null-tail fault, arbitrary overlapping allocations excluded",
+    "Whole source executable link and full source byte equality remain unproven",
+    "G2 pseudocode/freeze/implementation gates not advanced"
+  ],
+  "inputs": [
+    {
+      "path": "build/sources-goal-r1-subscriber-register-c-verified/report.json",
+      "sha256": "bf0af6b76737bd70a4245d3f6a04037927a355cd0e41c1ecf05a2e5050dfcfc5"
+    },
+    {
+      "path": "build/hybrid-goal-r1-subscriber-register-c/build-report.json",
+      "sha256": "cf632ca8fb4c39fdb29a1d3db338faceacadf2e158722a298282f767bb083d51"
+    },
+    {
+      "path": "tools/build/source-plan.json",
+      "sha256": "716cf17b8cf2bed8ad6a99a672b1856af4c5380842c95cb14b9a263a7bb42bc8"
+    },
+    {
+      "path": "r1/src/application/runtime/native_subscriber_registration.c",
+      "sha256": "2cf60677943b9385fc6735497e82fcb0a37a049d3c6c9db37dd970fa14efa438"
+    },
+    {
+      "path": "r1/src/application/runtime/native_subscriber.h",
+      "sha256": "6227cdc407faab80e4b4b387a3f06c5fa7a19111d7008eb58192fa44239b046b"
+    },
+    {
+      "path": "r1/src/sources.json",
+      "sha256": "a76665f68ec78ad4d7f46317fb5507c5fe5dd6eb8d4a56a55d75f3c2277d43a2"
+    },
+    {
+      "path": "r1/symbols/function-frontier.csv",
+      "sha256": "c6b6cdf354db3dc1fc3343462dbecda9187c2f9856949cd709ac82d17dea90d5"
+    },
+    {
+      "path": "build/goal-r1-subscriber-register-c/before.c",
+      "sha256": "f4e4b152e647f2bfeb89d41f51f4ceaf23f168a95bf8dd64ff80249abd92e2da"
+    },
+    {
+      "path": "build/goal-r1-subscriber-register-c/verify.py",
+      "sha256": "89a9be39adad9be7c01ff312cb596809cab6bf8e2c9b23f8dc82b837ba7ae143"
+    },
+    {
+      "path": "build/goal-r1-subscriber-register-c/results.json",
+      "sha256": "c5b95811e9cbc9871b1c21dbec1f7d69da95c134ed04c8cd0199971ba03f3701"
+    },
+    {
+      "path": "build/goal-r1-subscriber-register-c/negative.py",
+      "sha256": "ef4c72b20d5d919c257e20e4a0f97b1dfbd7d94800da1599a5ac1b588b367157"
+    },
+    {
+      "path": "build/goal-r1-subscriber-register-c/negative-results.json",
+      "sha256": "a6259401edc1fab2de1d18109cf8e40996b4ad29689b10a5de83b4a23157b593"
+    },
+    {
+      "path": "build/goal-r1-subscriber-register-c/audit.py",
+      "sha256": "baa250224a50772ec9de63bf02e737bae0b1f21ef5400faa077b41e8b7fdad9a"
+    },
+    {
+      "path": "build/goal-r1-subscriber-register-c/audit-results.json",
+      "sha256": "4d5c65b4655450a54f5f1c391ea019470ef4c62534cde5e81b48e438487dc6f6"
+    },
+    {
+      "path": "build/goal-r1-subscriber-register-c/initialization.py",
+      "sha256": "bd1ec9d2680b8d9d4aad18470775efe005d3035c3d99650b0bbdbcc374d39bf7"
+    },
+    {
+      "path": "build/goal-r1-subscriber-register-c/initialization-results.json",
+      "sha256": "9cb8317604ee4f24b8a611c3c64fb57f807134049740811153e86062702355df"
+    },
+    {
+      "path": "build/goal-r1-subscriber-register-c/rea.json",
+      "sha256": "ccbc37e416aa7f441de9903b593e72c205f490d378cac16ec0f639855b427e86"
+    },
+    {
+      "path": "build/goal-r1-subscriber-register-c/qualified/qualification.json",
+      "sha256": "a98a3aea4b9aa8903429986de3a3959ce1483f1a01e8b7f4be5b90a542ece6b7"
+    },
+    {
+      "path": "build/goal-r1-subscriber-register-c/qualified/source-plan.json",
+      "sha256": "3da40e3d766877c0b3059bee372f651c1f56681157782eba12ee3076f1834a0f"
+    }
+  ]
+}

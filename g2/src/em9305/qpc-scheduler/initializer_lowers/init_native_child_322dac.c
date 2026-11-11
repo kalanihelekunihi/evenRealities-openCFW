@@ -1,36 +1,22 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_322dac\n"
-".type opencfw_em9305_child_322dac,@function\n"
-"opencfw_em9305_child_322dac:\n"
-"L322dac:\n"
-"st.aw blink,[sp,-12]\n"
-"L322db0:\n"
-"mov_s r1,0x805c70\n"
-"L322db6:\n"
-"ld r1,[r1,0]\n"
-"L322db8:\n"
-"sth 17,[sp,6]\n"
-"L322dbc:\n"
-"sub_s r0,r0,r1\n"
-"L322dbe:\n"
-"div r0,r0,912\n"
-"L322dc2:\n"
-"extb_s r0,r0\n"
-"L322dc4:\n"
-"mov_s r1,sp\n"
-"L322dc6:\n"
-"sth_s r0,[r1,0x8]\n"
-"L322dc8:\n"
-"sth_s r0,[r1,0x4]\n"
-"L322dca:\n"
-"bl.d opencfw_em9305_ll_event_callback_30e79c\n"
-"L322dce:\n"
-"add_s r0,sp,0x4\n"
-"L322dd0:\n"
-"ld.ab blink,[sp,12]\n"
-"L322dd4:\n"
-"j_s [blink]\n"
-".size opencfw_em9305_child_322dac,.-opencfw_em9305_child_322dac\n"
-);
+#include <stdint.h>
+
+/* Native 0x322dac..0x322dd6: report LL event 17 for a 912-byte connection
+ * entry, identified by its index in the table at *0x805c70. */
+extern uint32_t opencfw_em9305_ll_event_callback_30e79c(uintptr_t);
+
+struct ll_event_17 {
+    uint16_t handle;
+    uint16_t code;
+    uint16_t handle_again;
+};
+
+uint32_t opencfw_em9305_child_322dac(uintptr_t entry)
+{
+    uintptr_t base = *(volatile uint32_t *)(uintptr_t)0x805c70u;
+    uint8_t index = (uint8_t)((int32_t)(entry - base) / 912);
+    struct ll_event_17 event;
+    event.code = 17u;
+    event.handle_again = index;
+    event.handle = index;
+    return opencfw_em9305_ll_event_callback_30e79c((uintptr_t)&event);
+}

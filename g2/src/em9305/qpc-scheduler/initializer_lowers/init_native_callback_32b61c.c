@@ -1,312 +1,124 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_callback_32b61c\n"
-".type opencfw_em9305_callback_32b61c,@function\n"
-"opencfw_em9305_callback_32b61c:\n"
-"L32b61c:\n"
-"enter_s [r13-r20,fp,blink]\n"
-"L32b61e:\n"
-"sub_s sp,sp,0x4\n"
-"L32b620:\n"
-"mov_s r18,r0\n"
-"L32b622:\n"
-"add r18,r18,380\n"
-"L32b626:\n"
-"mov_s r14,r0\n"
-"L32b628:\n"
-"mov_s r17,r0\n"
-"L32b62a:\n"
-"mov_s r1,0\n"
-"L32b62c:\n"
-"mov_s r2,0x94\n"
-"L32b62e:\n"
-"mov_s r0,r18\n"
-"L32b630:\n"
-"bl.d opencfw_em9305_memset\n"
-"L32b634:\n"
-"add r14,r14,430\n"
-"L32b638:\n"
-"mov r16,r17\n"
-"L32b63c:\n"
-"mov r20,r17\n"
-"L32b640:\n"
-"mov_s r13,r17\n"
-"L32b642:\n"
-"add r16,r16,428\n"
-"L32b646:\n"
-"add r20,r20,1144\n"
-"L32b64a:\n"
-"stb 1,[r14,-24]\n"
-"L32b64e:\n"
-"stb 1,[r14,-26]\n"
-"L32b652:\n"
-"st.as opencfw_em9305_child_32b618,[r17,103]\n"
-"L32b65a:\n"
-"st.as opencfw_em9305_child_32b9a4,[r17,102]\n"
-"L32b662:\n"
-"st.as r17,[r17,104]\n"
-"L32b666:\n"
-"add r13,r13,696\n"
-"L32b66a:\n"
-"add2 r15,r16,0x23\n"
-"L32b66e:\n"
-"st.as r16,[r17,106]\n"
-"L32b672:\n"
-"bl.d opencfw_em9305_associated_random_31896c\n"
-"L32b676:\n"
-"st.as r20,[r17,105]\n"
-"L32b67a:\n"
-"ldb.x r1,[r17,60]\n"
-"L32b67e:\n"
-"ldb_s r2,[r13,0x1]\n"
-"L32b680:\n"
-"stb_s r0,[r13,0]\n"
-"L32b682:\n"
-"cmp_s r1,0x7f\n"
-"L32b684:\n"
-"stb 8,[r14,-2]\n"
-"L32b688:\n"
-"stb r2,[r14,-1]\n"
-"L32b68c:\n"
-"bne_s L32b696\n"
-"L32b68e:\n"
-"ldb r1,[0x805a9c]\n"
-"L32b696:\n"
-"ld.as r2,[r17,93]\n"
-"L32b69a:\n"
-"ld.as r0,[r17,196]\n"
-"L32b69e:\n"
-"stb_s r1,[r14,0]\n"
-"L32b6a0:\n"
-"st.as r2,[r17,108]\n"
-"L32b6a4:\n"
-"bl.d opencfw_em9305_radio_crc_seed_318960\n"
-"L32b6a8:\n"
-"st.as r0,[r17,125]\n"
-"L32b6ac:\n"
-"st.as r0,[r17,109]\n"
-"L32b6b0:\n"
-"mov_s r0,r17\n"
-"L32b6b2:\n"
-"mov_s r19,0x805cac\n"
-"L32b6b8:\n"
-"add r0,r0,1077\n"
-"L32b6bc:\n"
-"ldb r1,[r17,63]\n"
-"L32b6c0:\n"
-"ldb r2,[0x805bed]\n"
-"L32b6c8:\n"
-"st_s r0,[r15,0]\n"
-"L32b6ca:\n"
-"st r0,[r16,104]\n"
-"L32b6ce:\n"
-"ld_s r0,[r19,0]\n"
-"L32b6d0:\n"
-"mov_s r13,r17\n"
-"L32b6d2:\n"
-"add3 r3,r17,0x37\n"
-"L32b6d6:\n"
-"add r13,r13,796\n"
-"L32b6da:\n"
-"stb_s r1,[r3,0]\n"
-"L32b6dc:\n"
-"stb_s r1,[r14,0xb]\n"
-"L32b6de:\n"
-"stb_s r2,[r14,0xc]\n"
-"L32b6e0:\n"
-"ldb_s r2,[r13,0]\n"
-"L32b6e2:\n"
-"ldb_s r1,[r13,0x1]\n"
-"L32b6e4:\n"
-"ldb_s r0,[r0,0x18]\n"
-"L32b6e6:\n"
-"ld r12,[0x805cc8]\n"
-"L32b6ee:\n"
-"ld r8,[0x805ccc]\n"
-"L32b6f6:\n"
-"ld r9,[0x805ca0]\n"
-"L32b6fe:\n"
-"ld r11,[0x805ca4]\n"
-"L32b706:\n"
-"ld r6,[0x805c28]\n"
-"L32b70e:\n"
-"mpyuw r2,r2,1250\n"
-"L32b712:\n"
-"mpyuw r1,r1,125\n"
-"L32b716:\n"
-"mov r7,r17\n"
-"L32b71a:\n"
-"min r0,r0,0xa\n"
-"L32b71e:\n"
-"add r7,r7,1154\n"
-"L32b722:\n"
-"stb r0,[r14,224]\n"
-"L32b726:\n"
-"mov_s r0,5\n"
-"L32b728:\n"
-"st opencfw_em9305_associated_packet_callback_32c69c,[r16,160]\n"
-"L32b730:\n"
-"sth 0,[r7]\n"
-"L32b734:\n"
-"st_s r12,[r15,0xc]\n"
-"L32b736:\n"
-"st r8,[r15,24]\n"
-"L32b73a:\n"
-"st r9,[r15,28]\n"
-"L32b73e:\n"
-"st r11,[r15,32]\n"
-"L32b742:\n"
-"st r6,[r15,92]\n"
-"L32b746:\n"
-"st r2,[r13,-124]\n"
-"L32b74a:\n"
-"bl.d opencfw_em9305_mode_callback_child_317ea4\n"
-"L32b74e:\n"
-"st r1,[r13,-120]\n"
-"L32b752:\n"
-"mov_s r15,r0\n"
-"L32b754:\n"
-"ld r0,[r13,-124]\n"
-"L32b758:\n"
-"bl.d opencfw_em9305_init_secondary_time_317ebc\n"
-"L32b75c:\n"
-"mov_s r1,r15\n"
-"L32b75e:\n"
-"st r0,[r13,-116]\n"
-"L32b762:\n"
-"ld r0,[r13,-120]\n"
-"L32b766:\n"
-"bl.d opencfw_em9305_init_secondary_time_317ebc\n"
-"L32b76a:\n"
-"mov_s r1,r15\n"
-"L32b76c:\n"
-"ldb_s r1,[r13,0x2]\n"
-"L32b76e:\n"
-"st r0,[r13,-112]\n"
-"L32b772:\n"
-"mov_s r0,r16\n"
-"L32b774:\n"
-"bl.d opencfw_em9305_init_callback_child_3246c0\n"
-"L32b778:\n"
-"stb r1,[r14,226]\n"
-"L32b77c:\n"
-"mov_s r1,0\n"
-"L32b77e:\n"
-"bl.d opencfw_em9305_associated_object_init_312918\n"
-"L32b782:\n"
-"mov_s r0,r18\n"
-"L32b784:\n"
-"ld_s r0,[r19,0]\n"
-"L32b786:\n"
-"ld r1,[r17,72]\n"
-"L32b78a:\n"
-"ld.as r16,[r17,178]\n"
-"L32b78e:\n"
-"ld.as r15,[r17,177]\n"
-"L32b792:\n"
-"ldh_s r14,[r0,0x14]\n"
-"L32b794:\n"
-"ldb_s r0,[r13,0x8]\n"
-"L32b796:\n"
-"cmp_s r1,r14\n"
-"L32b798:\n"
-"mov.hi r14,r1\n"
-"L32b79c:\n"
-"breq_s r0,0,L32b7ae\n"
-"L32b79e:\n"
-"mov_s r0,0x801a14\n"
-"L32b7a4:\n"
-"ld_s r13,[r0,0]\n"
-"L32b7a6:\n"
-"breq_s r13,0,L32b7ae\n"
-"L32b7a8:\n"
-"jl_s [r13]\n"
-"L32b7aa:\n"
-"mov_s r2,r0\n"
-"L32b7ac:\n"
-"b_s L32b7b0\n"
-"L32b7ae:\n"
-"mov_s r2,0\n"
-"L32b7b0:\n"
-"ldh r4,[r20]\n"
-"L32b7b4:\n"
-"ldb r0,[r17,63]\n"
-"L32b7b8:\n"
-"exth_s r3,r14\n"
-"L32b7ba:\n"
-"mov_s r1,0\n"
-"L32b7bc:\n"
-"mov_s r5,0\n"
-"L32b7be:\n"
-"mov_s r6,2\n"
-"L32b7c0:\n"
-"bl.d opencfw_em9305_radio_duration_312be4\n"
-"L32b7c4:\n"
-"mov_s r7,5\n"
-"L32b7c6:\n"
-"ld.as r4,[r17,98]\n"
-"L32b7ca:\n"
-"mov_s r1,r0\n"
-"L32b7cc:\n"
-"mov_s r0,0x45\n"
-"L32b7ce:\n"
-"cmp_s r1,r4\n"
-"L32b7d0:\n"
-"mov.hi r4,r1\n"
-"L32b7d4:\n"
-"brlo.d.nt r16,r1,L32b828\n"
-"L32b7d8:\n"
-"st.as r4,[r17,98]\n"
-"L32b7dc:\n"
-"mov_s r0,0x805c38\n"
-"L32b7e2:\n"
-"ld r0,[r0,0]\n"
-"L32b7e4:\n"
-"cmp_s r1,r15\n"
-"L32b7e6:\n"
-"mov.hi r15,r1\n"
-"L32b7ea:\n"
-"rsub r0,r0,r17\n"
-"L32b7ee:\n"
-"div r0,r0,0xb08\n"
-"L32b7f6:\n"
-"add r5,sp,0\n"
-"L32b7fa:\n"
-"mov_s r1,1\n"
-"L32b7fc:\n"
-"mov_s r6,opencfw_em9305_associated_slot_query_31b2fc\n"
-"L32b802:\n"
-"mov_s r2,r15\n"
-"L32b804:\n"
-"add_s r0,r0,4\n"
-"L32b806:\n"
-"extb_s r0,r0\n"
-"L32b808:\n"
-"bl.d opencfw_em9305_associated_slot_allocate_3133b4\n"
-"L32b80c:\n"
-"mov_s r3,r16\n"
-"L32b80e:\n"
-"cmp_s r0,0\n"
-"L32b810:\n"
-"mov_s r0,0x43\n"
-"L32b812:\n"
-"beq_s L32b828\n"
-"L32b814:\n"
-"ld r0,[sp,0]\n"
-"L32b816:\n"
-"mov_s r1,r18\n"
-"L32b818:\n"
-"st.as r0,[r17,175]\n"
-"L32b81c:\n"
-"st.as r0,[r17,100]\n"
-"L32b820:\n"
-"bl.d opencfw_em9305_child_32b82c\n"
-"L32b824:\n"
-"mov_s r0,r17\n"
-"L32b826:\n"
-"mov_s r0,0\n"
-"L32b828:\n"
-"leave_s [r13-r20,fp,blink,pcl]\n"
-".size opencfw_em9305_callback_32b61c,.-opencfw_em9305_callback_32b61c\n"
-);
+#include <stdint.h>
+
+/* Native 0x32b61c..0x32b82a: create the BIG (broadcast isochronous group)
+ * of an advertising set. Clear the 148-byte group object (+380) and set up
+ * its event descriptor (+428: callbacks 0x32b618/0x32b9a4, owner, header 8,
+ * random seed +696, TX power +60 or default 0x805a9c, access address from
+ * +372, CRC init from native 0x318960, PHY +63, ISO payload callback
+ * 0x32c69c, timing words 0x805cc8/0x805ccc/0x805ca0/0x805ca4/0x805c28, max
+ * retransmissions min(config +24, 10)); derive the subevent/BIS spacing
+ * (+796 * 1250 us, +797 * 125 us) and their window widening for SCA 5 and
+ * initialise the scheduler object. Compute the event duration (native
+ * 0x312be4, optional extra time from the hook at 0x801a14 when +804 is set)
+ * and reserve a slot (native 0x3133b4, id = set index + 4) within the
+ * group's interval limits (+708/+712); fail with 0x45 when the event does
+ * not fit, 0x43 when no slot is free. On success store the anchor
+ * (+700/+400), start the group (native 0x32b82c) and return 0. */
+extern void *opencfw_em9305_memset(void *,uint32_t,uint32_t);
+extern uint32_t opencfw_em9305_associated_random_31896c(void);
+extern uint32_t opencfw_em9305_radio_crc_seed_318960(void);
+extern uint32_t opencfw_em9305_mode_callback_child_317ea4(uint32_t);
+extern uint32_t opencfw_em9305_init_secondary_time_317ebc(uint32_t,uint32_t);
+extern uint32_t opencfw_em9305_init_callback_child_3246c0(uintptr_t);
+extern uint32_t opencfw_em9305_associated_object_init_312918(uintptr_t,uint32_t);
+extern uint32_t opencfw_em9305_radio_duration_312be4(uint32_t,uint32_t,uint32_t,uint32_t,uint32_t,uint32_t,uint32_t,uint32_t);
+extern uint32_t opencfw_em9305_associated_slot_allocate_3133b4(uint32_t,uint32_t,uint32_t,uint32_t,uint32_t,uintptr_t,uintptr_t);
+extern uint32_t opencfw_em9305_associated_slot_query_31b2fc(uint32_t,uintptr_t);
+extern uint32_t opencfw_em9305_child_32b82c(uintptr_t,uintptr_t);
+extern uint32_t opencfw_em9305_child_32b618(void);
+extern void opencfw_em9305_child_32b9a4(uintptr_t);
+extern uint32_t opencfw_em9305_associated_packet_callback_32c69c(uintptr_t,uint32_t);
+
+#define BIG_U8(a) (*(volatile uint8_t *)(a))
+#define BIG_U16(a) (*(volatile uint16_t *)(a))
+#define BIG_U32(a) (*(volatile uint32_t *)(a))
+
+uint32_t opencfw_em9305_callback_32b61c(uintptr_t set)
+{
+    uint32_t anchor;
+    uintptr_t object = set + 380u;
+    uintptr_t event = set + 428u;
+    (void)opencfw_em9305_memset((void *)object, 0u, 0x94u);
+    BIG_U8(set + 406u) = 1u;
+    BIG_U8(set + 404u) = 1u;
+    BIG_U32(set + 412u) = (uint32_t)(uintptr_t)opencfw_em9305_child_32b618;
+    BIG_U32(set + 408u) = (uint32_t)(uintptr_t)opencfw_em9305_child_32b9a4;
+    BIG_U32(set + 416u) = (uint32_t)set;
+    BIG_U32(set + 424u) = (uint32_t)event;
+    BIG_U32(set + 420u) = (uint32_t)(set + 1144u);
+    uint32_t seed = opencfw_em9305_associated_random_31896c();
+    uint32_t power = (uint32_t)(int32_t)BIG_U8(set + 60u);
+    power = (uint32_t)(int32_t)(int8_t)power;
+    uint32_t count = BIG_U8(set + 697u);
+    BIG_U8(set + 696u) = (uint8_t)seed;
+    BIG_U8(set + 428u) = 8u;
+    BIG_U8(set + 429u) = (uint8_t)count;
+    if (power == 0x7fu) power = BIG_U8(0x805a9cu);
+    uint32_t access = BIG_U32(set + 372u);
+    uint32_t base_crc = BIG_U32(set + 784u);
+    BIG_U8(set + 430u) = (uint8_t)power;
+    BIG_U32(set + 432u) = access;
+    BIG_U32(set + 500u) = base_crc;
+    BIG_U32(set + 436u) = opencfw_em9305_radio_crc_seed_318960();
+    uint32_t phy = BIG_U8(set + 63u);
+    uint32_t default_phy = BIG_U8(0x805bedu);
+    BIG_U32(set + 568u) = (uint32_t)(set + 1077u);
+    BIG_U32(set + 532u) = (uint32_t)(set + 1077u);
+    uintptr_t config = BIG_U32(0x805cacu);
+    BIG_U8(set + 440u) = (uint8_t)phy;
+    BIG_U8(set + 441u) = (uint8_t)phy;
+    BIG_U8(set + 442u) = (uint8_t)default_phy;
+    uint32_t spacing = BIG_U8(set + 796u);
+    uint32_t bis_spacing = BIG_U8(set + 797u);
+    int32_t retries = (int32_t)BIG_U8(config + 0x18u);
+    uint32_t timing0 = BIG_U32(0x805cc8u);
+    uint32_t timing1 = BIG_U32(0x805cccu);
+    uint32_t timing2 = BIG_U32(0x805ca0u);
+    uint32_t timing3 = BIG_U32(0x805ca4u);
+    uint32_t timing4 = BIG_U32(0x805c28u);
+    BIG_U8(set + 654u) = (uint8_t)(retries < 10 ? retries : 10);
+    BIG_U32(set + 588u) = (uint32_t)(uintptr_t)opencfw_em9305_associated_packet_callback_32c69c;
+    BIG_U16(set + 1154u) = 0u;
+    BIG_U32(set + 580u) = timing0;
+    BIG_U32(set + 592u) = timing1;
+    BIG_U32(set + 596u) = timing2;
+    BIG_U32(set + 600u) = timing3;
+    BIG_U32(set + 660u) = timing4;
+    BIG_U32(set + 672u) = spacing * 1250u;
+    BIG_U32(set + 676u) = bis_spacing * 125u;
+    uint32_t accuracy = opencfw_em9305_mode_callback_child_317ea4(5u);
+    BIG_U32(set + 680u) = opencfw_em9305_init_secondary_time_317ebc(BIG_U32(set + 672u), accuracy);
+    uint32_t widening = opencfw_em9305_init_secondary_time_317ebc(BIG_U32(set + 676u), accuracy);
+    uint32_t phases = BIG_U8(set + 798u);
+    BIG_U32(set + 684u) = widening;
+    BIG_U8(set + 656u) = (uint8_t)phases;
+    (void)opencfw_em9305_init_callback_child_3246c0(event);
+    (void)opencfw_em9305_associated_object_init_312918(object, 0u);
+    config = BIG_U32(0x805cacu);
+    uint32_t requested = BIG_U32(set + 72u);
+    uint32_t maximum = BIG_U32(set + 712u);
+    uint32_t minimum = BIG_U32(set + 708u);
+    uint32_t length = BIG_U16(config + 0x14u);
+    if (requested > length) length = requested;
+    uint32_t extra = 0u;
+    if (BIG_U8(set + 804u) != 0u) {
+        uintptr_t hook = BIG_U32(0x801a14u);
+        if (hook != 0u) extra = ((uint32_t (*)(void))hook)();
+    }
+    uint32_t duration = opencfw_em9305_radio_duration_312be4(BIG_U8(set + 63u), 0u, extra, (uint16_t)length,
+                                                             BIG_U16(set + 1144u), 0u, 2u, 5u);
+    uint32_t reserved = BIG_U32(set + 392u);
+    if (duration > reserved) reserved = duration;
+    BIG_U32(set + 392u) = reserved;
+    if (maximum < duration) return 0x45u;
+    if (duration > minimum) minimum = duration;
+    uint32_t index = (uint32_t)((int32_t)(set - BIG_U32(0x805c38u)) / 0xb08);
+    if (opencfw_em9305_associated_slot_allocate_3133b4((uint8_t)(index + 4u), 1u, minimum, maximum, reserved,
+                                                       (uintptr_t)&anchor,
+                                                       (uintptr_t)opencfw_em9305_associated_slot_query_31b2fc) == 0u)
+        return 0x43u;
+    BIG_U32(set + 700u) = anchor;
+    BIG_U32(set + 400u) = anchor;
+    (void)opencfw_em9305_child_32b82c(set, object);
+    return 0u;
+}

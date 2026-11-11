@@ -1,0 +1,40 @@
+{
+  "selector": {
+    "passed": 2168,
+    "executions": 4336,
+    "source_report": "build/sources-goal-r1-task-heap-ready-c/report.json",
+    "normal_selection_without_function_stubs": true,
+    "overflow_routing_only": true,
+    "limits": [
+      "Overflow hook observed at entry then emulation stops; terminal logger/loop not executed",
+      "Actual C selector only; SVC/PendSV architectural frame handling and asynchronous scheduling remain separate",
+      "Seeded ready-list state; private frames, caller-clobbered words/flags and complete exception state excluded"
+    ]
+  },
+  "negative_controls": {
+    "no-round-robin": true,
+    "omit-guard": true
+  },
+  "qualification": {
+    "compiled_profiles": 5,
+    "selected_regions": 0
+  },
+  "firmware_sources_and_manifest_unchanged": true,
+  "normal_report_reused": true,
+  "source_completeness_proven": false,
+  "evidence": {
+    "build/sources-goal-r1-task-heap-ready-c/report.json": "76a8aac20cdb24cc1e111c931633e5bc84f379d44a002409729a21c238b47b20",
+    "r1/src/application/rtos/context-port/selection.c": "afc0584d095e17036056b0be7d2876c0e45720636ea71e41a52ae55efbeb9189",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-task-heap-ready-c/r1/r1-application/r1__src__application__rtos__context-port__selection.c.o": "99274e9736f1e4052929592f28e6f2fb82dd303ca058594cc4d5a221f385d304",
+    "r1/src/config/rtos/context_contract.h": "44daeb92800ea90a92bc1443d8a35063330f29bd2b3884241957e7d8da4971d5",
+    "third-party/upstream/freertos-kernel/include/stack_macros.h": "3cddf2b3d47ae387e376ac75eb468f9d8ffb575d68c143e08d54af4087474cce",
+    "r1/symbols/function-frontier.csv": "a9aff7f821df5e186dbb0acb44c7cf2cacf94f449925f6e57e6c429827fbd04e",
+    "tools/build/source-plan.json": "969af3130987be89dcdc8777d86b4c891d596b4ecef5cccfd763861f05a12d31",
+    "build/goal-r1-context-select-c/verify.py": "d5f9f68bd5bb42f2403827dfbed81a5201d3c212a8c0ea0ab903489272d82a02",
+    "build/goal-r1-context-select-c/results.json": "7b8a9dfde6f19e1124553330cc54900d3bfd647dc9fef776dc975c9464122449",
+    "build/goal-r1-context-select-c/negative.py": "617ccb3d52801bb4336c4d66100ad810fbabef0502bf17f99e2e8ca421607be7",
+    "build/goal-r1-context-select-c/negative-results.json": "4fbf0051f407f492df9c964560fd2c46f76971b935a024f58294af54ce82455b",
+    "build/goal-r1-context-select-c/qualify.py": "631386e8fb5519de6106a0622981cfea385a5fb5f3d0352494c3e6250219d334",
+    "build/goal-r1-context-select-c/qualified/qualification.json": "6c1648be02124b76dc3abb57ed2287ab75c306e1f7932f42cac25c3e4bed29be"
+  }
+}

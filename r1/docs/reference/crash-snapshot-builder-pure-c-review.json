@@ -1,0 +1,119 @@
+{
+  "schema_version": 1,
+  "scope": "R1 retained crash snapshot builder in ordinary C",
+  "report": "build/sources-goal-r1-crash-builder-c/report.json",
+  "comparison_report": "build/sources-goal-r1-crash-initialize-reviewed-c/report.json",
+  "stock_ranges": [
+    {
+      "entry": "0x5a324",
+      "size": 170
+    },
+    {
+      "entry": "0x3f47c",
+      "size": 180
+    }
+  ],
+  "audit": {
+    "compiled_units": 862,
+    "application_imports": 63,
+    "bootloader_imports": 22,
+    "unchanged_prior_nongenerated_objects": 851,
+    "changed_prior_nongenerated_objects": [
+      "r1/src/application/runtime/native_crash_snapshot.c"
+    ],
+    "manifest_unchanged": true,
+    "source_plan_unchanged": true,
+    "new_mutable_persistent_bytes": 0,
+    "normal_object_equals_direct_and_pipeline_probes": true
+  },
+  "direct": {
+    "stock_C_comparisons": 17088,
+    "native_instruction_bytes_executed": {
+      "head": 170,
+      "tail": 180
+    },
+    "all_hours_nullable_cache_sets_and_flags": true,
+    "clamped_signed_offset_unsigned_time_wrap_and_output_aliases": true,
+    "initialized_query_fields_partial_outputs_and_four_byte_spacing": true,
+    "exact_52_byte_snapshot_scalar_return_and_live_providers_match": true,
+    "private_frame_caller_scratch_APSR_and_physical_retention_unverified": true
+  },
+  "actual_initializer_snapshot_chain": {
+    "stock_C_full_initializer_snapshot_CRC_comparisons": 216,
+    "actual_C_initializer_builder_payload_getter_caches_hourly_query_CRC_and_state_owners": true,
+    "no_snapshot_or_initializer_inline_assembly": true,
+    "retained_payload_copy_region_unchanged_for_actual_736_getter": true,
+    "only_backend_timestamp_and_unreached_logging_modeled": true
+  },
+  "compiled_defects_rejected": [
+    {
+      "defect": "clear",
+      "rejected": true
+    },
+    {
+      "defect": "query-init",
+      "rejected": true
+    },
+    {
+      "defect": "query-kind",
+      "rejected": true
+    },
+    {
+      "defect": "query-count",
+      "rejected": true
+    },
+    {
+      "defect": "clamp",
+      "rejected": true
+    },
+    {
+      "defect": "activity",
+      "rejected": true
+    },
+    {
+      "defect": "spo2-flag",
+      "rejected": true
+    },
+    {
+      "defect": "hrv-return",
+      "rejected": true
+    }
+  ],
+  "contract": [
+    "Clear52 bytes; clamp signed16 offset to +/-720 minutes and wrap adjusted timestamp as uint32 before calculating hour.",
+    "Preserve ordered overlapping activity packing, live cache accesses, nullable providers, metadata and flags.",
+    "Use initialized uint32 sum and uint16 count locals with count at offset4; preserve partial query writes and pointer separation.",
+    "Preserve scalar return domain: null HRV gives0, empty HRV gives its pointer, populated HRV gives flags. Remove private helper and assembly frame adapter."
+  ],
+  "limits": [
+    "Both REA ranges match locked raw bytes; all350 instruction bytes execute. Only identified direct caller is initializer; head-to-tail branch is internal. Indirect callers are not exhaustively proven.",
+    "Direct fixtures model cache/query boundaries and execute actual memory clear. Integration executes actual initializer, getter, cache/query/state owners, snapshot and CRC; backend timestamp and unreached logging are modeled.",
+    "Actual payload getter reports736 and does not satisfy initializer896-byte admission; producer lifecycle remains unresolved.",
+    "Callee-saved integer/FP registers, masks, SP and guards checked. Private frame addresses, caller scratch, APSR, concurrency and faults excluded.",
+    "Physical retention, final linking and boot remain unverified. Relocatable composition is not a bootable image."
+  ],
+  "evidence_files": {
+    "build/sources-goal-r1-crash-builder-c/report.json": "c2780e9b738294aa886962aa712b1143450d3ba5c8face4b9556cf8de2d02366",
+    "build/sources-goal-r1-crash-initialize-reviewed-c/report.json": "b5fc472ba1ec22d5f7eeff036f2f2dc61d3e775e9ceaa403e6669818231464c2",
+    "r1/src/application/runtime/native_crash_snapshot.c": "93d5208668a2939e6444652baab44b33f4445e670dec2814d05ab07983525bce",
+    "r1/src/sources.json": "f28c024dc0cd0a3b3a18849dae57615da4716e182026d3a75c1591023b0cf445",
+    "tools/build/source-plan.json": "eeb516e31b3310fb0718f36908977f8125723f7c5e0e86cd6744395826259a4d",
+    "build/goal-r1-crash-builder-c/caller-scan.json": "ae7886c3b7828edb36fa2c390bec9322d5fbcdedfb53cda7b063991c77fff520",
+    "build/goal-r1-crash-builder-c/negative.json": "46c56b6350fb96af55035edec1cd606549df7ec6c65acc45a71bad027cc7f424",
+    "build/goal-r1-crash-builder-c/source.elf": "ec55f1eec0da158c2df9b77c132e3ea4c6427a5fc4397da56fc9d380d90263c7",
+    "build/goal-r1-crash-builder-c/negative.py": "d73f23c86e14f849618928b78743dac6eb3624b3062e538ab30baa2a3c6027ab",
+    "build/goal-r1-crash-builder-c/source.o": "b14f6376455dad798b6eb0e60062e37b5c2f161c05afca8c5668f11e389c22d4",
+    "build/goal-r1-crash-builder-c/results.json": "1cd5114bb330336dd5889431488cf6200a6c35efa091ab87c563d3f223fffa6f",
+    "build/goal-r1-crash-builder-c/make_pipeline.py": "e08e00832ad890d12936be801db5a8f06f5872a3e55bd6c8205ce62361978a1d",
+    "build/goal-r1-crash-builder-c/pipeline.py": "98fe8cecc0a4fdadd7e54b8fc634217dde0332e43d94c77ea2033e16739dd933",
+    "build/goal-r1-crash-builder-c/record.py": "5180ca0c74e8c8c800d631ac9745ca07eb9c0e2b264aeb41f5f42b83c5ca0b7a",
+    "build/goal-r1-crash-builder-c/manifest-before.json": "f28c024dc0cd0a3b3a18849dae57615da4716e182026d3a75c1591023b0cf445",
+    "build/goal-r1-crash-builder-c/rea-tail.json": "205703a57c3d1f48718778971c34478739c5e15de22e253bcdc51781a584905a",
+    "build/goal-r1-crash-builder-c/verify.py": "e1ad726967e4a4068e91374f9877789d026fef26a698fb5bb0654769da6a9ab2",
+    "build/goal-r1-crash-builder-c/rea-head.json": "a491998f444486b2f26b528bbf7a3189e80b2634d5f752c1d73bb1e227679217",
+    "build/goal-r1-crash-builder-c/source-before.c": "eb24387edcb2780c61104a74ec7ab3873af9a1624516ed19ae4eb45eef6f4194",
+    "build/goal-r1-crash-builder-c/pipeline/source.elf": "367fe11a8ac765dd8a1cca482b28016dea81d981f3bb690849f883fa104b3904",
+    "build/goal-r1-crash-builder-c/pipeline/source.o": "b14f6376455dad798b6eb0e60062e37b5c2f161c05afca8c5668f11e389c22d4",
+    "build/goal-r1-crash-builder-c/pipeline/results.json": "807465c1547c50405aa9506c80b971914f45fa56fc40031f58b7ea53d7d6b9ea"
+  }
+}

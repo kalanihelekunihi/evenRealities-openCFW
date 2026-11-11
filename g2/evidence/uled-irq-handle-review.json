@@ -1,0 +1,3184 @@
+{
+  "schema_version": 1,
+  "status": "Bounded instruction-backed analysis; not independent review or a workflow receipt.",
+  "input": {
+    "path": "g2/blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin",
+    "sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+    "file_offset_to_va": "0x437fe0"
+  },
+  "wrapper": {
+    "path": "build/goal-uled-irq/fullslice.elf",
+    "start": "0x592600",
+    "end_exclusive": "0x5bc890",
+    "notes": "Analysis-only stock slice with analyst-supplied Thumb symbols; never a firmware source input."
+  },
+  "records": [
+    {
+      "evidence_id": "ev_552b8989fb3f5509d52bc88f8b178d232023db95f3113763539f543af787db5a",
+      "subject": {
+        "name": "fullslice.elf",
+        "digest": {
+          "sha256": "93efabfef548b2847804b593cfb854bebb075a9843b357efb19b6d6382298fa9"
+        },
+        "local_path": "/Users/kalani/Repo/evenRealities-openCFW/build/goal-uled-irq/fullslice.elf",
+        "format": "elf",
+        "architecture": "arm"
+      },
+      "provider": {
+        "id": "ghidra",
+        "name": "Ghidra",
+        "version": "12.1.4"
+      },
+      "analysis_profile": {
+        "provider": {
+          "id": "ghidra",
+          "name": "Ghidra",
+          "version": "12.1.4"
+        },
+        "parameters": {
+          "target_kind": "executable",
+          "target_format": "elf",
+          "architecture": "arm",
+          "available_architectures": [
+            "arm"
+          ],
+          "import_mode": "ephemeral-source-immutable",
+          "annotation_policy": "atomic-function-entry-metadata-v1",
+          "load_image_observations": "source-mappings-entry-context-v2",
+          "function_body_evidence": "complete-inclusive-ranges-v1",
+          "function_references": "complete-body-and-entry-reference-manager-v2",
+          "call_relationship_coverage": "function-body-call-coverage-v5",
+          "function_dossier_coverage": "observed-facets-and-call-relationships-v1",
+          "string_inventory_evidence": "defined-data-coverage-v1",
+          "location_resolution": "explicit-address-exact-entry-symbol-first-v3",
+          "procedure_file_offset_resolution": "address-first-unique-target-source-mapping-v2",
+          "instruction_flow_evidence": "decoded-return-pcode-v1",
+          "instruction_references": "exact-address-incoming-v1",
+          "function_boundary_observations": "ghidra-function-boundary-limitations-v3",
+          "no_return_repair": "returning-imports-decoded-return-v2",
+          "process_launch": "inspected-jvm-launch-support-v1",
+          "jump_table_evidence": "typed-case-default-blocks-v1",
+          "decompiler_jump_loads": true,
+          "loader": "auto-from-header",
+          "language_id": "auto-from-header",
+          "compiler_spec_id": "auto-default",
+          "analyzer_preset": "ghidra-default"
+        },
+        "digest": "7e46711069eea041af1b9b99e34115c13332795e5cda76e584a722f529ec70de"
+      },
+      "relationship_coverage": {
+        "status": "partial",
+        "limitations": [
+          "Ghidra's callee inventory omits targets of 3 call reference(s) or decoded call(s) without destinations."
+        ],
+        "limited_directions": [
+          "callees"
+        ],
+        "diagnostics": [
+          "Only resolved Ghidra call references are returned; unresolved computed or indirect calls remain unknown, while function classifications distinguish thunks and externals."
+        ]
+      },
+      "limitations": [
+        "The session serves operations only after Ghidra reports default auto-analysis complete; incomplete analysis does not expose partial results.",
+        "The imported Program and temporary project are ephemeral and deleted on close. Annotation operations edit session database metadata; original executable bytes are never written.",
+        "Cancelling an active Ghidra request terminates its ephemeral database and discards session annotations. The selected target remains open; the next provider query imports the original artifact again.",
+        "Default-space addresses use lowercase 0x-prefixed hexadecimal; other address spaces use <percent-encoded-space>:0x<hex>.",
+        "References cover the complete Ghidra function-body AddressSet and exact entry. Dossier incoming edges omit sources owned by that function; procedure_references also retains those internal edges.",
+        "The dossier combines Ghidra FunctionManager, Listing, ReferenceManager, BasicBlockModel, and decompiler observations; provider-specific pseudocode and assembly are not cross-provider text invariants.",
+        "Resolved reference metadata identifies computed, indirect, external, call, jump, and data edges; unresolved targetless flows remain unknown, and function classifications distinguish thunks and externals.",
+        "Synthetic Ghidra entry-point references without actionable memory sources are omitted.",
+        "The Java bridge serializes one function request per Program and lets each decompilation run until it completes or the caller cancels.",
+        "macOS sessions require a matching executable Ghidra native decompiler; REA checks for it but does not build native components or change Gatekeeper quarantine state."
+      ],
+      "observation": {
+        "procedure": {
+          "address": "0x592658",
+          "name": "irq0",
+          "classification": {
+            "external": false,
+            "thunk": false,
+            "thunk_target": null,
+            "provenance": "ghidra-function-manager"
+          },
+          "body": {
+            "available": true,
+            "provenance": "ghidra-function-body-address-set",
+            "ranges": [
+              {
+                "start": "0x592658",
+                "end": "0x59267f"
+              }
+            ],
+            "total_bytes": 40,
+            "span_bytes": 40,
+            "non_contiguous": false,
+            "contains_entry": true
+          },
+          "signature": "undefined irq0()",
+          "locals": [
+            {
+              "description": "undefined4 local_10 @ Stack[-0x10]:4",
+              "provenance": "ghidra-function-database"
+            }
+          ]
+        },
+        "assembly": [
+          "0x592658: push {r2,r3,r4,lr}",
+          "0x59265a: ldr.w r4, [0x005932f8]",
+          "0x59265e: ldr r0, [r4,#0x0]",
+          "0x592660: cmp r0, #0x0",
+          "0x592662: beq 0x0059267e",
+          "0x592664: movs r2, #0x0",
+          "0x592666: mov r1, sp",
+          "0x592668: ldr r0, [r4,#0x0]",
+          "0x59266a: bl 0x004c2392",
+          "0x59266e: ldr r1, [sp,#0x0]",
+          "0x592670: ldr r0, [r4,#0x0]",
+          "0x592672: bl 0x004c23de",
+          "0x592676: ldr r1, [sp,#0x0]",
+          "0x592678: ldr r0, [r4,#0x0]",
+          "0x59267a: bl 0x004c240e",
+          "0x59267e: pop {r0,r1,r4,pc}"
+        ],
+        "pseudocode": "\n/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */\n\nundefined8 irq0(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)\n\n{\n  undefined4 local_10;\n  undefined4 uStack_c;\n  \n  local_10 = param_3;\n  uStack_c = param_4;\n  if (_DAT_20074524 != 0) {\n    func_0x004c2392(_DAT_20074524,&local_10,0);\n    func_0x004c23de(_DAT_20074524,local_10);\n    func_0x004c240e(_DAT_20074524,local_10);\n  }\n  return CONCAT44(uStack_c,local_10);\n}\n\n",
+        "unresolved_calls": [
+          {
+            "address": "0x59266a",
+            "reason": "A call destination has no known containing Ghidra procedure"
+          },
+          {
+            "address": "0x592672",
+            "reason": "A call destination has no known containing Ghidra procedure"
+          },
+          {
+            "address": "0x59267a",
+            "reason": "A call destination has no known containing Ghidra procedure"
+          }
+        ]
+      }
+    },
+    {
+      "evidence_id": "ev_d2eb9ab0b826193b968847037ea90c6a4599337fd81f0404da0dbebb699ae161",
+      "subject": {
+        "name": "fullslice.elf",
+        "digest": {
+          "sha256": "93efabfef548b2847804b593cfb854bebb075a9843b357efb19b6d6382298fa9"
+        },
+        "local_path": "/Users/kalani/Repo/evenRealities-openCFW/build/goal-uled-irq/fullslice.elf",
+        "format": "elf",
+        "architecture": "arm"
+      },
+      "provider": {
+        "id": "ghidra",
+        "name": "Ghidra",
+        "version": "12.1.4"
+      },
+      "analysis_profile": {
+        "provider": {
+          "id": "ghidra",
+          "name": "Ghidra",
+          "version": "12.1.4"
+        },
+        "parameters": {
+          "target_kind": "executable",
+          "target_format": "elf",
+          "architecture": "arm",
+          "available_architectures": [
+            "arm"
+          ],
+          "import_mode": "ephemeral-source-immutable",
+          "annotation_policy": "atomic-function-entry-metadata-v1",
+          "load_image_observations": "source-mappings-entry-context-v2",
+          "function_body_evidence": "complete-inclusive-ranges-v1",
+          "function_references": "complete-body-and-entry-reference-manager-v2",
+          "call_relationship_coverage": "function-body-call-coverage-v5",
+          "function_dossier_coverage": "observed-facets-and-call-relationships-v1",
+          "string_inventory_evidence": "defined-data-coverage-v1",
+          "location_resolution": "explicit-address-exact-entry-symbol-first-v3",
+          "procedure_file_offset_resolution": "address-first-unique-target-source-mapping-v2",
+          "instruction_flow_evidence": "decoded-return-pcode-v1",
+          "instruction_references": "exact-address-incoming-v1",
+          "function_boundary_observations": "ghidra-function-boundary-limitations-v3",
+          "no_return_repair": "returning-imports-decoded-return-v2",
+          "process_launch": "inspected-jvm-launch-support-v1",
+          "jump_table_evidence": "typed-case-default-blocks-v1",
+          "decompiler_jump_loads": true,
+          "loader": "auto-from-header",
+          "language_id": "auto-from-header",
+          "compiler_spec_id": "auto-default",
+          "analyzer_preset": "ghidra-default"
+        },
+        "digest": "7e46711069eea041af1b9b99e34115c13332795e5cda76e584a722f529ec70de"
+      },
+      "relationship_coverage": {
+        "status": "partial",
+        "limitations": [
+          "Ghidra's callee inventory omits targets of 3 call reference(s) or decoded call(s) without destinations."
+        ],
+        "limited_directions": [
+          "callees"
+        ],
+        "diagnostics": [
+          "Only resolved Ghidra call references are returned; unresolved computed or indirect calls remain unknown, while function classifications distinguish thunks and externals."
+        ]
+      },
+      "limitations": [
+        "The session serves operations only after Ghidra reports default auto-analysis complete; incomplete analysis does not expose partial results.",
+        "The imported Program and temporary project are ephemeral and deleted on close. Annotation operations edit session database metadata; original executable bytes are never written.",
+        "Cancelling an active Ghidra request terminates its ephemeral database and discards session annotations. The selected target remains open; the next provider query imports the original artifact again.",
+        "Default-space addresses use lowercase 0x-prefixed hexadecimal; other address spaces use <percent-encoded-space>:0x<hex>.",
+        "References cover the complete Ghidra function-body AddressSet and exact entry. Dossier incoming edges omit sources owned by that function; procedure_references also retains those internal edges.",
+        "The dossier combines Ghidra FunctionManager, Listing, ReferenceManager, BasicBlockModel, and decompiler observations; provider-specific pseudocode and assembly are not cross-provider text invariants.",
+        "Resolved reference metadata identifies computed, indirect, external, call, jump, and data edges; unresolved targetless flows remain unknown, and function classifications distinguish thunks and externals.",
+        "Synthetic Ghidra entry-point references without actionable memory sources are omitted.",
+        "The Java bridge serializes one function request per Program and lets each decompilation run until it completes or the caller cancels.",
+        "macOS sessions require a matching executable Ghidra native decompiler; REA checks for it but does not build native components or change Gatekeeper quarantine state."
+      ],
+      "observation": {
+        "procedure": {
+          "address": "0x5bbd48",
+          "name": "irq1",
+          "classification": {
+            "external": false,
+            "thunk": false,
+            "thunk_target": null,
+            "provenance": "ghidra-function-manager"
+          },
+          "body": {
+            "available": true,
+            "provenance": "ghidra-function-body-address-set",
+            "ranges": [
+              {
+                "start": "0x5bbd48",
+                "end": "0x5bbd6f"
+              }
+            ],
+            "total_bytes": 40,
+            "span_bytes": 40,
+            "non_contiguous": false,
+            "contains_entry": true
+          },
+          "signature": "undefined irq1()",
+          "locals": [
+            {
+              "description": "undefined4 local_10 @ Stack[-0x10]:4",
+              "provenance": "ghidra-function-database"
+            }
+          ]
+        },
+        "assembly": [
+          "0x5bbd48: push {r2,r3,r4,lr}",
+          "0x5bbd4a: ldr.w r4, [0x005bc87c]",
+          "0x5bbd4e: ldr r0, [r4,#0x0]",
+          "0x5bbd50: cmp r0, #0x0",
+          "0x5bbd52: beq 0x005bbd6e",
+          "0x5bbd54: movs r2, #0x0",
+          "0x5bbd56: mov r1, sp",
+          "0x5bbd58: ldr r0, [r4,#0x0]",
+          "0x5bbd5a: bl 0x004c2392",
+          "0x5bbd5e: ldr r1, [sp,#0x0]",
+          "0x5bbd60: ldr r0, [r4,#0x0]",
+          "0x5bbd62: bl 0x004c23de",
+          "0x5bbd66: ldr r1, [sp,#0x0]",
+          "0x5bbd68: ldr r0, [r4,#0x0]",
+          "0x5bbd6a: bl 0x004c240e",
+          "0x5bbd6e: pop {r0,r1,r4,pc}"
+        ],
+        "pseudocode": "\n/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */\n\nundefined8 irq1(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)\n\n{\n  undefined4 local_10;\n  undefined4 uStack_c;\n  \n  local_10 = param_3;\n  uStack_c = param_4;\n  if (_DAT_20074510 != 0) {\n    func_0x004c2392(_DAT_20074510,&local_10,0);\n    func_0x004c23de(_DAT_20074510,local_10);\n    func_0x004c240e(_DAT_20074510,local_10);\n  }\n  return CONCAT44(uStack_c,local_10);\n}\n\n",
+        "unresolved_calls": [
+          {
+            "address": "0x5bbd5a",
+            "reason": "A call destination has no known containing Ghidra procedure"
+          },
+          {
+            "address": "0x5bbd62",
+            "reason": "A call destination has no known containing Ghidra procedure"
+          },
+          {
+            "address": "0x5bbd6a",
+            "reason": "A call destination has no known containing Ghidra procedure"
+          }
+        ]
+      }
+    }
+  ],
+  "execution": {
+    "before": {
+      "cases": 18,
+      "matched": 2,
+      "rows": [
+        {
+          "panel": 0,
+          "case": {
+            "initial": 0
+          },
+          "match": true,
+          "native": {
+            "events": [
+              [
+                "read_cell",
+                0
+              ]
+            ],
+            "cell": 0
+          },
+          "candidate": {
+            "events": [
+              [
+                "read_cell",
+                0
+              ]
+            ],
+            "cell": 0
+          }
+        },
+        {
+          "panel": 0,
+          "case": {},
+          "match": false,
+          "native": {
+            "events": [
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "status",
+                536875008,
+                0
+              ],
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "clear",
+                536875008,
+                2864434397
+              ],
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "service",
+                536875008,
+                2864434397
+              ]
+            ],
+            "cell": 536875008
+          },
+          "candidate": {
+            "events": [
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "status",
+                536875008,
+                0
+              ],
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "clear",
+                536875008,
+                2864434397
+              ],
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "service",
+                536875008,
+                2864434397
+              ]
+            ],
+            "cell": 536875008
+          }
+        },
+        {
+          "panel": 0,
+          "case": {
+            "status": 0
+          },
+          "match": false,
+          "native": {
+            "events": [
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "status",
+                536875008,
+                0
+              ],
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "clear",
+                536875008,
+                0
+              ],
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "service",
+                536875008,
+                0
+              ]
+            ],
+            "cell": 536875008
+          },
+          "candidate": {
+            "events": [
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "status",
+                536875008,
+                0
+              ],
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "clear",
+                536875008,
+                0
+              ],
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "service",
+                536875008,
+                0
+              ]
+            ],
+            "cell": 536875008
+          }
+        },
+        {
+          "panel": 0,
+          "case": {
+            "status": 4294967295
+          },
+          "match": false,
+          "native": {
+            "events": [
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "status",
+                536875008,
+                0
+              ],
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "clear",
+                536875008,
+                4294967295
+              ],
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "service",
+                536875008,
+                4294967295
+              ]
+            ],
+            "cell": 536875008
+          },
+          "candidate": {
+            "events": [
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "status",
+                536875008,
+                0
+              ],
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "clear",
+                536875008,
+                4294967295
+              ],
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "service",
+                536875008,
+                4294967295
+              ]
+            ],
+            "cell": 536875008
+          }
+        },
+        {
+          "panel": 0,
+          "case": {
+            "mutate_read": 1
+          },
+          "match": false,
+          "native": {
+            "events": [
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "read_cell",
+                536879104
+              ],
+              [
+                "status",
+                536879104,
+                0
+              ],
+              [
+                "read_cell",
+                536879104
+              ],
+              [
+                "clear",
+                536879104,
+                2864434397
+              ],
+              [
+                "read_cell",
+                536879104
+              ],
+              [
+                "service",
+                536879104,
+                2864434397
+              ]
+            ],
+            "cell": 536879104
+          },
+          "candidate": {
+            "events": [
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "status",
+                536875008,
+                0
+              ],
+              [
+                "read_cell",
+                536879104
+              ],
+              [
+                "clear",
+                536879104,
+                2864434397
+              ],
+              [
+                "read_cell",
+                536879104
+              ],
+              [
+                "service",
+                536879104,
+                2864434397
+              ]
+            ],
+            "cell": 536879104
+          }
+        },
+        {
+          "panel": 0,
+          "case": {
+            "mutate_read": 2
+          },
+          "match": false,
+          "native": {
+            "events": [
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "status",
+                536875008,
+                0
+              ],
+              [
+                "read_cell",
+                536879104
+              ],
+              [
+                "clear",
+                536879104,
+                2864434397
+              ],
+              [
+                "read_cell",
+                536879104
+              ],
+              [
+                "service",
+                536879104,
+                2864434397
+              ]
+            ],
+            "cell": 536879104
+          },
+          "candidate": {
+            "events": [
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "status",
+                536875008,
+                0
+              ],
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "clear",
+                536875008,
+                2864434397
+              ],
+              [
+                "read_cell",
+                536879104
+              ],
+              [
+                "service",
+                536879104,
+                2864434397
+              ]
+            ],
+            "cell": 536879104
+          }
+        },
+        {
+          "panel": 0,
+          "case": {
+            "mutate_read": 3
+          },
+          "match": false,
+          "native": {
+            "events": [
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "status",
+                536875008,
+                0
+              ],
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "clear",
+                536875008,
+                2864434397
+              ],
+              [
+                "read_cell",
+                536879104
+              ],
+              [
+                "service",
+                536879104,
+                2864434397
+              ]
+            ],
+            "cell": 536879104
+          },
+          "candidate": {
+            "events": [
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "status",
+                536875008,
+                0
+              ],
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "clear",
+                536875008,
+                2864434397
+              ],
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "service",
+                536875008,
+                2864434397
+              ]
+            ],
+            "cell": 536879104
+          }
+        },
+        {
+          "panel": 0,
+          "case": {
+            "mutate_helper": "status"
+          },
+          "match": false,
+          "native": {
+            "events": [
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "status",
+                536875008,
+                0
+              ],
+              [
+                "read_cell",
+                536883200
+              ],
+              [
+                "clear",
+                536883200,
+                2864434397
+              ],
+              [
+                "read_cell",
+                536883200
+              ],
+              [
+                "service",
+                536883200,
+                2864434397
+              ]
+            ],
+            "cell": 536883200
+          },
+          "candidate": {
+            "events": [
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "status",
+                536875008,
+                0
+              ],
+              [
+                "read_cell",
+                536883200
+              ],
+              [
+                "clear",
+                536883200,
+                2864434397
+              ],
+              [
+                "read_cell",
+                536883200
+              ],
+              [
+                "service",
+                536883200,
+                2864434397
+              ]
+            ],
+            "cell": 536883200
+          }
+        },
+        {
+          "panel": 0,
+          "case": {
+            "mutate_helper": "clear"
+          },
+          "match": false,
+          "native": {
+            "events": [
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "status",
+                536875008,
+                0
+              ],
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "clear",
+                536875008,
+                2864434397
+              ],
+              [
+                "read_cell",
+                536883200
+              ],
+              [
+                "service",
+                536883200,
+                2864434397
+              ]
+            ],
+            "cell": 536883200
+          },
+          "candidate": {
+            "events": [
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "status",
+                536875008,
+                0
+              ],
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "clear",
+                536875008,
+                2864434397
+              ],
+              [
+                "read_cell",
+                536883200
+              ],
+              [
+                "service",
+                536883200,
+                2864434397
+              ]
+            ],
+            "cell": 536883200
+          }
+        },
+        {
+          "panel": 1,
+          "case": {
+            "initial": 0
+          },
+          "match": true,
+          "native": {
+            "events": [
+              [
+                "read_cell",
+                0
+              ]
+            ],
+            "cell": 0
+          },
+          "candidate": {
+            "events": [
+              [
+                "read_cell",
+                0
+              ]
+            ],
+            "cell": 0
+          }
+        },
+        {
+          "panel": 1,
+          "case": {},
+          "match": false,
+          "native": {
+            "events": [
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "status",
+                536875008,
+                0
+              ],
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "clear",
+                536875008,
+                2864434397
+              ],
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "service",
+                536875008,
+                2864434397
+              ]
+            ],
+            "cell": 536875008
+          },
+          "candidate": {
+            "events": [
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "status",
+                536875008,
+                0
+              ],
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "clear",
+                536875008,
+                2864434397
+              ],
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "service",
+                536875008,
+                2864434397
+              ]
+            ],
+            "cell": 536875008
+          }
+        },
+        {
+          "panel": 1,
+          "case": {
+            "status": 0
+          },
+          "match": false,
+          "native": {
+            "events": [
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "status",
+                536875008,
+                0
+              ],
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "clear",
+                536875008,
+                0
+              ],
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "service",
+                536875008,
+                0
+              ]
+            ],
+            "cell": 536875008
+          },
+          "candidate": {
+            "events": [
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "status",
+                536875008,
+                0
+              ],
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "clear",
+                536875008,
+                0
+              ],
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "service",
+                536875008,
+                0
+              ]
+            ],
+            "cell": 536875008
+          }
+        },
+        {
+          "panel": 1,
+          "case": {
+            "status": 4294967295
+          },
+          "match": false,
+          "native": {
+            "events": [
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "status",
+                536875008,
+                0
+              ],
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "clear",
+                536875008,
+                4294967295
+              ],
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "service",
+                536875008,
+                4294967295
+              ]
+            ],
+            "cell": 536875008
+          },
+          "candidate": {
+            "events": [
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "status",
+                536875008,
+                0
+              ],
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "clear",
+                536875008,
+                4294967295
+              ],
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "service",
+                536875008,
+                4294967295
+              ]
+            ],
+            "cell": 536875008
+          }
+        },
+        {
+          "panel": 1,
+          "case": {
+            "mutate_read": 1
+          },
+          "match": false,
+          "native": {
+            "events": [
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "read_cell",
+                536879104
+              ],
+              [
+                "status",
+                536879104,
+                0
+              ],
+              [
+                "read_cell",
+                536879104
+              ],
+              [
+                "clear",
+                536879104,
+                2864434397
+              ],
+              [
+                "read_cell",
+                536879104
+              ],
+              [
+                "service",
+                536879104,
+                2864434397
+              ]
+            ],
+            "cell": 536879104
+          },
+          "candidate": {
+            "events": [
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "status",
+                536875008,
+                0
+              ],
+              [
+                "read_cell",
+                536879104
+              ],
+              [
+                "clear",
+                536879104,
+                2864434397
+              ],
+              [
+                "read_cell",
+                536879104
+              ],
+              [
+                "service",
+                536879104,
+                2864434397
+              ]
+            ],
+            "cell": 536879104
+          }
+        },
+        {
+          "panel": 1,
+          "case": {
+            "mutate_read": 2
+          },
+          "match": false,
+          "native": {
+            "events": [
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "status",
+                536875008,
+                0
+              ],
+              [
+                "read_cell",
+                536879104
+              ],
+              [
+                "clear",
+                536879104,
+                2864434397
+              ],
+              [
+                "read_cell",
+                536879104
+              ],
+              [
+                "service",
+                536879104,
+                2864434397
+              ]
+            ],
+            "cell": 536879104
+          },
+          "candidate": {
+            "events": [
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "status",
+                536875008,
+                0
+              ],
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "clear",
+                536875008,
+                2864434397
+              ],
+              [
+                "read_cell",
+                536879104
+              ],
+              [
+                "service",
+                536879104,
+                2864434397
+              ]
+            ],
+            "cell": 536879104
+          }
+        },
+        {
+          "panel": 1,
+          "case": {
+            "mutate_read": 3
+          },
+          "match": false,
+          "native": {
+            "events": [
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "status",
+                536875008,
+                0
+              ],
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "clear",
+                536875008,
+                2864434397
+              ],
+              [
+                "read_cell",
+                536879104
+              ],
+              [
+                "service",
+                536879104,
+                2864434397
+              ]
+            ],
+            "cell": 536879104
+          },
+          "candidate": {
+            "events": [
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "status",
+                536875008,
+                0
+              ],
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "clear",
+                536875008,
+                2864434397
+              ],
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "service",
+                536875008,
+                2864434397
+              ]
+            ],
+            "cell": 536879104
+          }
+        },
+        {
+          "panel": 1,
+          "case": {
+            "mutate_helper": "status"
+          },
+          "match": false,
+          "native": {
+            "events": [
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "status",
+                536875008,
+                0
+              ],
+              [
+                "read_cell",
+                536883200
+              ],
+              [
+                "clear",
+                536883200,
+                2864434397
+              ],
+              [
+                "read_cell",
+                536883200
+              ],
+              [
+                "service",
+                536883200,
+                2864434397
+              ]
+            ],
+            "cell": 536883200
+          },
+          "candidate": {
+            "events": [
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "status",
+                536875008,
+                0
+              ],
+              [
+                "read_cell",
+                536883200
+              ],
+              [
+                "clear",
+                536883200,
+                2864434397
+              ],
+              [
+                "read_cell",
+                536883200
+              ],
+              [
+                "service",
+                536883200,
+                2864434397
+              ]
+            ],
+            "cell": 536883200
+          }
+        },
+        {
+          "panel": 1,
+          "case": {
+            "mutate_helper": "clear"
+          },
+          "match": false,
+          "native": {
+            "events": [
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "status",
+                536875008,
+                0
+              ],
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "clear",
+                536875008,
+                2864434397
+              ],
+              [
+                "read_cell",
+                536883200
+              ],
+              [
+                "service",
+                536883200,
+                2864434397
+              ]
+            ],
+            "cell": 536883200
+          },
+          "candidate": {
+            "events": [
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "status",
+                536875008,
+                0
+              ],
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "clear",
+                536875008,
+                2864434397
+              ],
+              [
+                "read_cell",
+                536883200
+              ],
+              [
+                "service",
+                536883200,
+                2864434397
+              ]
+            ],
+            "cell": 536883200
+          }
+        }
+      ]
+    },
+    "after": {
+      "cases": 18,
+      "matched": 18,
+      "rows": [
+        {
+          "panel": 0,
+          "case": {
+            "initial": 0
+          },
+          "match": true,
+          "native": {
+            "events": [
+              [
+                "read_cell",
+                0
+              ]
+            ],
+            "cell": 0
+          },
+          "candidate": {
+            "events": [
+              [
+                "read_cell",
+                0
+              ]
+            ],
+            "cell": 0
+          }
+        },
+        {
+          "panel": 0,
+          "case": {},
+          "match": true,
+          "native": {
+            "events": [
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "status",
+                536875008,
+                0
+              ],
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "clear",
+                536875008,
+                2864434397
+              ],
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "service",
+                536875008,
+                2864434397
+              ]
+            ],
+            "cell": 536875008
+          },
+          "candidate": {
+            "events": [
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "status",
+                536875008,
+                0
+              ],
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "clear",
+                536875008,
+                2864434397
+              ],
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "service",
+                536875008,
+                2864434397
+              ]
+            ],
+            "cell": 536875008
+          }
+        },
+        {
+          "panel": 0,
+          "case": {
+            "status": 0
+          },
+          "match": true,
+          "native": {
+            "events": [
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "status",
+                536875008,
+                0
+              ],
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "clear",
+                536875008,
+                0
+              ],
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "service",
+                536875008,
+                0
+              ]
+            ],
+            "cell": 536875008
+          },
+          "candidate": {
+            "events": [
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "status",
+                536875008,
+                0
+              ],
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "clear",
+                536875008,
+                0
+              ],
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "service",
+                536875008,
+                0
+              ]
+            ],
+            "cell": 536875008
+          }
+        },
+        {
+          "panel": 0,
+          "case": {
+            "status": 4294967295
+          },
+          "match": true,
+          "native": {
+            "events": [
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "status",
+                536875008,
+                0
+              ],
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "clear",
+                536875008,
+                4294967295
+              ],
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "service",
+                536875008,
+                4294967295
+              ]
+            ],
+            "cell": 536875008
+          },
+          "candidate": {
+            "events": [
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "status",
+                536875008,
+                0
+              ],
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "clear",
+                536875008,
+                4294967295
+              ],
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "service",
+                536875008,
+                4294967295
+              ]
+            ],
+            "cell": 536875008
+          }
+        },
+        {
+          "panel": 0,
+          "case": {
+            "mutate_read": 1
+          },
+          "match": true,
+          "native": {
+            "events": [
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "read_cell",
+                536879104
+              ],
+              [
+                "status",
+                536879104,
+                0
+              ],
+              [
+                "read_cell",
+                536879104
+              ],
+              [
+                "clear",
+                536879104,
+                2864434397
+              ],
+              [
+                "read_cell",
+                536879104
+              ],
+              [
+                "service",
+                536879104,
+                2864434397
+              ]
+            ],
+            "cell": 536879104
+          },
+          "candidate": {
+            "events": [
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "read_cell",
+                536879104
+              ],
+              [
+                "status",
+                536879104,
+                0
+              ],
+              [
+                "read_cell",
+                536879104
+              ],
+              [
+                "clear",
+                536879104,
+                2864434397
+              ],
+              [
+                "read_cell",
+                536879104
+              ],
+              [
+                "service",
+                536879104,
+                2864434397
+              ]
+            ],
+            "cell": 536879104
+          }
+        },
+        {
+          "panel": 0,
+          "case": {
+            "mutate_read": 2
+          },
+          "match": true,
+          "native": {
+            "events": [
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "status",
+                536875008,
+                0
+              ],
+              [
+                "read_cell",
+                536879104
+              ],
+              [
+                "clear",
+                536879104,
+                2864434397
+              ],
+              [
+                "read_cell",
+                536879104
+              ],
+              [
+                "service",
+                536879104,
+                2864434397
+              ]
+            ],
+            "cell": 536879104
+          },
+          "candidate": {
+            "events": [
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "status",
+                536875008,
+                0
+              ],
+              [
+                "read_cell",
+                536879104
+              ],
+              [
+                "clear",
+                536879104,
+                2864434397
+              ],
+              [
+                "read_cell",
+                536879104
+              ],
+              [
+                "service",
+                536879104,
+                2864434397
+              ]
+            ],
+            "cell": 536879104
+          }
+        },
+        {
+          "panel": 0,
+          "case": {
+            "mutate_read": 3
+          },
+          "match": true,
+          "native": {
+            "events": [
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "status",
+                536875008,
+                0
+              ],
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "clear",
+                536875008,
+                2864434397
+              ],
+              [
+                "read_cell",
+                536879104
+              ],
+              [
+                "service",
+                536879104,
+                2864434397
+              ]
+            ],
+            "cell": 536879104
+          },
+          "candidate": {
+            "events": [
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "status",
+                536875008,
+                0
+              ],
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "clear",
+                536875008,
+                2864434397
+              ],
+              [
+                "read_cell",
+                536879104
+              ],
+              [
+                "service",
+                536879104,
+                2864434397
+              ]
+            ],
+            "cell": 536879104
+          }
+        },
+        {
+          "panel": 0,
+          "case": {
+            "mutate_helper": "status"
+          },
+          "match": true,
+          "native": {
+            "events": [
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "status",
+                536875008,
+                0
+              ],
+              [
+                "read_cell",
+                536883200
+              ],
+              [
+                "clear",
+                536883200,
+                2864434397
+              ],
+              [
+                "read_cell",
+                536883200
+              ],
+              [
+                "service",
+                536883200,
+                2864434397
+              ]
+            ],
+            "cell": 536883200
+          },
+          "candidate": {
+            "events": [
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "status",
+                536875008,
+                0
+              ],
+              [
+                "read_cell",
+                536883200
+              ],
+              [
+                "clear",
+                536883200,
+                2864434397
+              ],
+              [
+                "read_cell",
+                536883200
+              ],
+              [
+                "service",
+                536883200,
+                2864434397
+              ]
+            ],
+            "cell": 536883200
+          }
+        },
+        {
+          "panel": 0,
+          "case": {
+            "mutate_helper": "clear"
+          },
+          "match": true,
+          "native": {
+            "events": [
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "status",
+                536875008,
+                0
+              ],
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "clear",
+                536875008,
+                2864434397
+              ],
+              [
+                "read_cell",
+                536883200
+              ],
+              [
+                "service",
+                536883200,
+                2864434397
+              ]
+            ],
+            "cell": 536883200
+          },
+          "candidate": {
+            "events": [
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "status",
+                536875008,
+                0
+              ],
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "clear",
+                536875008,
+                2864434397
+              ],
+              [
+                "read_cell",
+                536883200
+              ],
+              [
+                "service",
+                536883200,
+                2864434397
+              ]
+            ],
+            "cell": 536883200
+          }
+        },
+        {
+          "panel": 1,
+          "case": {
+            "initial": 0
+          },
+          "match": true,
+          "native": {
+            "events": [
+              [
+                "read_cell",
+                0
+              ]
+            ],
+            "cell": 0
+          },
+          "candidate": {
+            "events": [
+              [
+                "read_cell",
+                0
+              ]
+            ],
+            "cell": 0
+          }
+        },
+        {
+          "panel": 1,
+          "case": {},
+          "match": true,
+          "native": {
+            "events": [
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "status",
+                536875008,
+                0
+              ],
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "clear",
+                536875008,
+                2864434397
+              ],
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "service",
+                536875008,
+                2864434397
+              ]
+            ],
+            "cell": 536875008
+          },
+          "candidate": {
+            "events": [
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "status",
+                536875008,
+                0
+              ],
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "clear",
+                536875008,
+                2864434397
+              ],
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "service",
+                536875008,
+                2864434397
+              ]
+            ],
+            "cell": 536875008
+          }
+        },
+        {
+          "panel": 1,
+          "case": {
+            "status": 0
+          },
+          "match": true,
+          "native": {
+            "events": [
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "status",
+                536875008,
+                0
+              ],
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "clear",
+                536875008,
+                0
+              ],
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "service",
+                536875008,
+                0
+              ]
+            ],
+            "cell": 536875008
+          },
+          "candidate": {
+            "events": [
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "status",
+                536875008,
+                0
+              ],
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "clear",
+                536875008,
+                0
+              ],
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "service",
+                536875008,
+                0
+              ]
+            ],
+            "cell": 536875008
+          }
+        },
+        {
+          "panel": 1,
+          "case": {
+            "status": 4294967295
+          },
+          "match": true,
+          "native": {
+            "events": [
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "status",
+                536875008,
+                0
+              ],
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "clear",
+                536875008,
+                4294967295
+              ],
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "service",
+                536875008,
+                4294967295
+              ]
+            ],
+            "cell": 536875008
+          },
+          "candidate": {
+            "events": [
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "status",
+                536875008,
+                0
+              ],
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "clear",
+                536875008,
+                4294967295
+              ],
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "service",
+                536875008,
+                4294967295
+              ]
+            ],
+            "cell": 536875008
+          }
+        },
+        {
+          "panel": 1,
+          "case": {
+            "mutate_read": 1
+          },
+          "match": true,
+          "native": {
+            "events": [
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "read_cell",
+                536879104
+              ],
+              [
+                "status",
+                536879104,
+                0
+              ],
+              [
+                "read_cell",
+                536879104
+              ],
+              [
+                "clear",
+                536879104,
+                2864434397
+              ],
+              [
+                "read_cell",
+                536879104
+              ],
+              [
+                "service",
+                536879104,
+                2864434397
+              ]
+            ],
+            "cell": 536879104
+          },
+          "candidate": {
+            "events": [
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "read_cell",
+                536879104
+              ],
+              [
+                "status",
+                536879104,
+                0
+              ],
+              [
+                "read_cell",
+                536879104
+              ],
+              [
+                "clear",
+                536879104,
+                2864434397
+              ],
+              [
+                "read_cell",
+                536879104
+              ],
+              [
+                "service",
+                536879104,
+                2864434397
+              ]
+            ],
+            "cell": 536879104
+          }
+        },
+        {
+          "panel": 1,
+          "case": {
+            "mutate_read": 2
+          },
+          "match": true,
+          "native": {
+            "events": [
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "status",
+                536875008,
+                0
+              ],
+              [
+                "read_cell",
+                536879104
+              ],
+              [
+                "clear",
+                536879104,
+                2864434397
+              ],
+              [
+                "read_cell",
+                536879104
+              ],
+              [
+                "service",
+                536879104,
+                2864434397
+              ]
+            ],
+            "cell": 536879104
+          },
+          "candidate": {
+            "events": [
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "status",
+                536875008,
+                0
+              ],
+              [
+                "read_cell",
+                536879104
+              ],
+              [
+                "clear",
+                536879104,
+                2864434397
+              ],
+              [
+                "read_cell",
+                536879104
+              ],
+              [
+                "service",
+                536879104,
+                2864434397
+              ]
+            ],
+            "cell": 536879104
+          }
+        },
+        {
+          "panel": 1,
+          "case": {
+            "mutate_read": 3
+          },
+          "match": true,
+          "native": {
+            "events": [
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "status",
+                536875008,
+                0
+              ],
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "clear",
+                536875008,
+                2864434397
+              ],
+              [
+                "read_cell",
+                536879104
+              ],
+              [
+                "service",
+                536879104,
+                2864434397
+              ]
+            ],
+            "cell": 536879104
+          },
+          "candidate": {
+            "events": [
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "status",
+                536875008,
+                0
+              ],
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "clear",
+                536875008,
+                2864434397
+              ],
+              [
+                "read_cell",
+                536879104
+              ],
+              [
+                "service",
+                536879104,
+                2864434397
+              ]
+            ],
+            "cell": 536879104
+          }
+        },
+        {
+          "panel": 1,
+          "case": {
+            "mutate_helper": "status"
+          },
+          "match": true,
+          "native": {
+            "events": [
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "status",
+                536875008,
+                0
+              ],
+              [
+                "read_cell",
+                536883200
+              ],
+              [
+                "clear",
+                536883200,
+                2864434397
+              ],
+              [
+                "read_cell",
+                536883200
+              ],
+              [
+                "service",
+                536883200,
+                2864434397
+              ]
+            ],
+            "cell": 536883200
+          },
+          "candidate": {
+            "events": [
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "status",
+                536875008,
+                0
+              ],
+              [
+                "read_cell",
+                536883200
+              ],
+              [
+                "clear",
+                536883200,
+                2864434397
+              ],
+              [
+                "read_cell",
+                536883200
+              ],
+              [
+                "service",
+                536883200,
+                2864434397
+              ]
+            ],
+            "cell": 536883200
+          }
+        },
+        {
+          "panel": 1,
+          "case": {
+            "mutate_helper": "clear"
+          },
+          "match": true,
+          "native": {
+            "events": [
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "status",
+                536875008,
+                0
+              ],
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "clear",
+                536875008,
+                2864434397
+              ],
+              [
+                "read_cell",
+                536883200
+              ],
+              [
+                "service",
+                536883200,
+                2864434397
+              ]
+            ],
+            "cell": 536883200
+          },
+          "candidate": {
+            "events": [
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "status",
+                536875008,
+                0
+              ],
+              [
+                "read_cell",
+                536875008
+              ],
+              [
+                "clear",
+                536875008,
+                2864434397
+              ],
+              [
+                "read_cell",
+                536883200
+              ],
+              [
+                "service",
+                536883200,
+                2864434397
+              ]
+            ],
+            "cell": 536883200
+          }
+        }
+      ]
+    },
+    "counterexamples": [
+      {
+        "panel": 0,
+        "label": "status helper leaves inherited stack value",
+        "case": {
+          "status_failure": true
+        },
+        "stock": {
+          "events": [
+            [
+              "read_cell",
+              536875008
+            ],
+            [
+              "read_cell",
+              536875008
+            ],
+            [
+              "status",
+              536875008,
+              0
+            ],
+            [
+              "read_cell",
+              536875008
+            ],
+            [
+              "clear",
+              536875008,
+              287454020
+            ],
+            [
+              "read_cell",
+              536875008
+            ],
+            [
+              "service",
+              536875008,
+              287454020
+            ]
+          ],
+          "cell": 536875008
+        },
+        "candidate": {
+          "events": [
+            [
+              "read_cell",
+              536875008
+            ],
+            [
+              "read_cell",
+              536875008
+            ],
+            [
+              "status",
+              536875008,
+              0
+            ],
+            [
+              "read_cell",
+              536875008
+            ],
+            [
+              "clear",
+              536875008,
+              0
+            ],
+            [
+              "read_cell",
+              536875008
+            ],
+            [
+              "service",
+              536875008,
+              0
+            ]
+          ],
+          "cell": 536875008
+        }
+      },
+      {
+        "panel": 0,
+        "label": "superseded candidate caches handle",
+        "case": {
+          "mutate_helper": "status"
+        },
+        "stock": {
+          "events": [
+            [
+              "read_cell",
+              536875008
+            ],
+            [
+              "read_cell",
+              536875008
+            ],
+            [
+              "status",
+              536875008,
+              0
+            ],
+            [
+              "read_cell",
+              536883200
+            ],
+            [
+              "clear",
+              536883200,
+              2864434397
+            ],
+            [
+              "read_cell",
+              536883200
+            ],
+            [
+              "service",
+              536883200,
+              2864434397
+            ]
+          ],
+          "cell": 536883200
+        },
+        "candidate": {
+          "events": [
+            [
+              "read_cell",
+              536875008
+            ],
+            [
+              "status",
+              536875008,
+              0
+            ],
+            [
+              "clear",
+              536875008,
+              2864434397
+            ],
+            [
+              "service",
+              536875008,
+              2864434397
+            ]
+          ],
+          "cell": 536883200
+        }
+      },
+      {
+        "panel": 1,
+        "label": "status helper leaves inherited stack value",
+        "case": {
+          "status_failure": true
+        },
+        "stock": {
+          "events": [
+            [
+              "read_cell",
+              536875008
+            ],
+            [
+              "read_cell",
+              536875008
+            ],
+            [
+              "status",
+              536875008,
+              0
+            ],
+            [
+              "read_cell",
+              536875008
+            ],
+            [
+              "clear",
+              536875008,
+              287454020
+            ],
+            [
+              "read_cell",
+              536875008
+            ],
+            [
+              "service",
+              536875008,
+              287454020
+            ]
+          ],
+          "cell": 536875008
+        },
+        "candidate": {
+          "events": [
+            [
+              "read_cell",
+              536875008
+            ],
+            [
+              "read_cell",
+              536875008
+            ],
+            [
+              "status",
+              536875008,
+              0
+            ],
+            [
+              "read_cell",
+              536875008
+            ],
+            [
+              "clear",
+              536875008,
+              0
+            ],
+            [
+              "read_cell",
+              536875008
+            ],
+            [
+              "service",
+              536875008,
+              0
+            ]
+          ],
+          "cell": 536875008
+        }
+      },
+      {
+        "panel": 1,
+        "label": "superseded candidate caches handle",
+        "case": {
+          "mutate_helper": "status"
+        },
+        "stock": {
+          "events": [
+            [
+              "read_cell",
+              536875008
+            ],
+            [
+              "read_cell",
+              536875008
+            ],
+            [
+              "status",
+              536875008,
+              0
+            ],
+            [
+              "read_cell",
+              536883200
+            ],
+            [
+              "clear",
+              536883200,
+              2864434397
+            ],
+            [
+              "read_cell",
+              536883200
+            ],
+            [
+              "service",
+              536883200,
+              2864434397
+            ]
+          ],
+          "cell": 536883200
+        },
+        "candidate": {
+          "events": [
+            [
+              "read_cell",
+              536875008
+            ],
+            [
+              "status",
+              536875008,
+              0
+            ],
+            [
+              "clear",
+              536875008,
+              2864434397
+            ],
+            [
+              "service",
+              536875008,
+              2864434397
+            ]
+          ],
+          "cell": 536883200
+        }
+      }
+    ],
+    "scope": "Unicorn 2.1.4; Cortex-M55 Clang -Oz hard-float; controlled status/clear/service mocks; status successful-write contract only. Stock return registers excluded for void candidate. No hardware timing, concurrency proof, independent review or byte identity.",
+    "source_hashes": {
+      "before_irq": "7483eee0c83d43f7ae66a0a3eeda83f4f915a05ad3f29ba268f50255a088060f",
+      "after_irq": "2c7f3aa941fa68268ce88c832b8020cf6529106f648df8cc372776cf78224754",
+      "superseded_shutdown": "c9459c24a40b30d5d9b9c3bb7cc048610177d08ed4516a35db8364031801b907",
+      "probe": "91b8126ca43bc50562693f5956f0fa271be250e69aa5e58e93ef71e05b994cfe"
+    }
+  },
+  "validation": {
+    "main_build_report": "build/sources-goal-uled-init/report.json",
+    "compiled": 2836,
+    "duplicate_strong_symbols": 0,
+    "relocatable_link": "passed",
+    "object_unresolved_symbols": 1456,
+    "current_count_summary": "g2/evidence/source-build-goal-validation.json"
+  }
+}

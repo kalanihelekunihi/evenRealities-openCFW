@@ -1,0 +1,57 @@
+{
+  "schema": 1,
+  "target": "One source implementation of the touch SysLib delay for PDL and application callers",
+  "stock": {
+    "component": "g2/blobs/official/g2-2.2.6.10/firmware_touch.bin",
+    "component_sha256": "0d13d8bb1337bf22989dc16143e3d5eca29a31cc1ed753ff624668750ea9470d",
+    "entry": "0x4480",
+    "bytes": 18,
+    "body_hex": "0230800803d001300238fcd1c046c0467047",
+    "body_sha256": "a8b62136d338c6dc91e6f900f19cb30344601be2bc97b168940ca57281293760"
+  },
+  "previous_source": {
+    "image": "build/touch-capsense-gcc14-campaign-20261111/bundle/g2-touch/g2-touch.bin",
+    "entry": "0x9a60",
+    "body_hex": "002805d000bf401efcd10020c0437047401e7047",
+    "issue": "Two linked bodies for the same stock function; PDL body looped on the unscaled requested cycle count, while the application body used a stack-resident divided count."
+  },
+  "current_source": {
+    "file": "g2/src/touch/glue/touch_syslib_cycles.c",
+    "image": "build/touch-delay-unify-20261111/bundle/g2-touch/g2-touch.bin",
+    "entry": "0x9a2c",
+    "body_hex": "801c800803d0401c801efcd100bf002000bf7047",
+    "body_sha256": "d7fbe22054382f16e0d483bd0ece73ce5f3abf248c4154e03db499b1645a132a",
+    "duplicate_symbol_absent": "touch_bootstrap_cycles",
+    "observed_callers": "Application delay, MRSS wait, and PDL callers all branch to Cy_SysLib_DelayCycles in the linked touch ELF."
+  },
+  "comparison": "Both stock and source add 2, shift right 2, then execute an add-1/subtract-2 loop and two NOP instructions. The source has one extra movs r0,#0 after the loop and uses the equivalent Thumb NOP encoding bf00 rather than 46c0. Branch/count behavior is equivalent for uint32_t inputs; physical cycle timing remains unmeasured.",
+  "source_plan_exact_regions": 105,
+  "source_plan_exact_bytes": 5640,
+  "qualification": {
+    "path": "build/touch-delay-unify-20261111/qualification/source-plan.json",
+    "note": "Requalified and retained both existing exact critical-section helpers after changing the same C unit; the delay itself is not exact."
+  },
+  "build": {
+    "focused_touch": "build/touch-delay-unify-20261111/focused/report.json",
+    "full_report": "build/touch-delay-unify-20261111/all/report.json",
+    "compiled_units": 4885,
+    "strict_link_report": "build/touch-delay-unify-20261111/bundle/link-report.json",
+    "seven_payloads_linked": true,
+    "source_touch_binary_bytes": 29024,
+    "source_only_bundle_bytes": 4638012,
+    "source_only_bundle_sha256": "0b0c80e436802a68d1e64a7472b5d526e320f2727ba9ff8b6c92bb2baf3ddad0",
+    "source_completeness_proven": false,
+    "hybrid_report": "build/touch-delay-unify-20261111/hybrid/build-report.json",
+    "hybrid_bundle_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa"
+  },
+  "file_sha256": {
+    "g2/src/touch/glue/touch_syslib_cycles.c": "5f8209446ff3bf1e3eb550515beb099faf4b34f6698f3641544496c37ad29234",
+    "g2/src/touch/config-bootstrap/bootstrap.c": "521fb0be5f61ba69701bf81802a4cba3d1303442c6813bef4fb7e2a40594e14f",
+    "g2/src/touch/mode/cpu.c": "82961228165be3243655a2ecf55dd8de4ae30b9563eb4ad9b4e6afbbec0b0667",
+    "tools/build/source-plan.json": "6e79cb21f15efae00d326f9d047de837bf2f5f23ab6a7a09363dfaff14eda27f",
+    "build/touch-delay-unify-20261111/all/report.json": "a2c0722afca39bcd19c832c9895c603da323c89a95903f22150f2f69bfff173c",
+    "build/touch-delay-unify-20261111/bundle/link-report.json": "183a6f87b41c65c42014860f67bca00d18f5a76170482010427dbe963b7cb026",
+    "build/touch-delay-unify-20261111/hybrid/build-report.json": "f9ac6b40bccddfdc4fd429a2b75c0ca75c96cad8b411d6be908bccada45ee5eb"
+  },
+  "limits": "The delay source is not instruction-identical and has one extra instruction per call. Its behavior on physical PSoC timing, the rest of the touch firmware, and complete G2 source equivalence remain unverified."
+}

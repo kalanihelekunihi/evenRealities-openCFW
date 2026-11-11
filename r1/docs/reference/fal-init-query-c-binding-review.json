@@ -1,0 +1,68 @@
+{
+  "query_cases": 256,
+  "initialization_state_cases": 32,
+  "passed": 288,
+  "source_report": "build/sources-goal-r1-fal-init-query/report.json",
+  "state_address": "0x200077b1",
+  "shared_init_state": true,
+  "source_sha256": {
+    "third-party/upstream/flashdb-2.0.0/port/fal/src/fal.c": "75a2066ba14315c17d18adce087163fa482478c290a105879fecf6b5712db0bb"
+  },
+  "limitations": [
+    "Flash/partition initialization modeled; no physical flash operation",
+    "Init transitions use valid native states zero/one; getter tests all 256 byte values",
+    "Diagnostic printf effects not compared; existing generic FAL logging configuration remains separate debt",
+    "Private frames and caller-clobbered registers/flags on init excluded",
+    "No byte qualification"
+  ],
+  "qualification": {
+    "candidate_units": 2,
+    "compiled_units": 2,
+    "units": [
+      {
+        "source": "third-party/upstream/flashdb-2.0.0/port/fal/src/fal.c",
+        "payload": "r1-application",
+        "evidence": "r1/symbols/function-frontier.csv",
+        "selected": [],
+        "compiled": true,
+        "rejections": {
+          "anchored_relocation_pattern_not_exact": 2
+        },
+        "source_implementation_completeness": "not established by compilation or byte matching",
+        "reason": "no exact anchored body under tested production bindings; integration remains unfinished"
+      },
+      {
+        "source": "third-party/upstream/flashdb-2.0.0/port/fal/src/fal.c",
+        "payload": "r1-application",
+        "evidence": "r1/symbols/function-frontier.csv",
+        "selected": [],
+        "compiled": true,
+        "rejections": {
+          "anchored_relocation_pattern_not_exact": 2
+        },
+        "source_implementation_completeness": "not established by compilation or byte matching",
+        "reason": "no exact anchored body under tested production bindings; integration remains unfinished"
+      }
+    ]
+  },
+  "native_caller": {
+    "entry": "0x94e3c",
+    "getter_call": "0x94e4c",
+    "getter": "0x62fe8",
+    "conditional_init_call": "0x94e52"
+  },
+  "evidence": {
+    "build/goal-r1-fal-init-query/stock.elf": "5b961ea233fe8784074b6d31fb78420bf2835acbb862d32ff860c0e89ef62d92",
+    "build/goal-r1-fal-init-query/REA.snapshot.json": "34336a3df1b6d077c98331941b671a1864e9b70a0ce29859af64621b15639f29",
+    "build/goal-r1-fal-init-query/verify.py": "fea3a732dbf985bcdbbd4c080eb03b0107be9c9f618cf79037db91898827b1d8",
+    "build/goal-r1-fal-init-query/source.elf": "08c34d126918950266c7252a36a8a7fa69bdb09d7681940b0b4bdb6b8409a216",
+    "build/goal-r1-fal-init-query/qualify.py": "fb314a65aa240f48b5ba7246ec358830e41b59fe8091ae90df46119be77f4f3e",
+    "build/goal-r1-fal-init-query/qualified/qualification.json": "9ef64b6019098779afcb8cfc3d7dc6e2fa2bc498b68be9ecacb54ea8f17f1ad1",
+    "build/sources-goal-r1-fal-init-query/report.json": "2b3123c7e61297168dd78982a14a4c4bb33bfc5ec434463d1f95e5133266fb5f",
+    "r1/src/application/board/native_kv_initialize.c": "95a7883dd51ce6ce0345e1fb157b49be1e80b8fbd81f356f2647dff70272fde1",
+    "r1/src/sources.json": "1320e1e351a2a70a27db0d495a5d02d308ae1223f943cd9655fbc7071b2d9976",
+    "r1/symbols/function-frontier.csv": "2ab9e21ce717580d6df06ac473dbc9064fc6412411884941411ba1e88b6081f3",
+    "tools/build/source-plan.json": "4d46e8c038db79a174a2d719086fd0be80503ca7cdbfc2c51e5ed3d30d293064"
+  },
+  "source_plan_changed": false
+}

@@ -16,3 +16,7 @@ void WsfTaskSetReady(uint8_t handler,uint8_t bit) {
     WsfCsExit();
     WsfSetOsSpecificEvent();
 }
+
+/* Former duplicate bodies (ble/wsf-msg/display_wsf_msg_children.c) now bind here. */
+__typeof__(WsfTaskMsgQueue) audio_wsf_task_msg_queue __attribute__((alias("WsfTaskMsgQueue")));
+__typeof__(WsfTaskSetReady) audio_wsf_task_set_ready __attribute__((alias("WsfTaskSetReady")));

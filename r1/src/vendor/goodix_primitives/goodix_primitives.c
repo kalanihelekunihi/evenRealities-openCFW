@@ -7,6 +7,7 @@
 
 #include "goodix_primitives/goodix_primitives.h"
 #include "model_data/r1_model_data.h"
+#include "../../application/runtime/integer_eabi.h"
 
 static uint32_t goodix_primitives_float_bits(float value);
 static float goodix_primitives_float_from_bits(uint32_t bits);
@@ -93,6 +94,17 @@ _Static_assert(offsetof(goodix_primitives_nadt_runtime_configuration,
 #if UINTPTR_MAX == UINT32_MAX
 _Static_assert(sizeof(goodix_primitives_hr_primary_context) == 0x150u,
                "recovered GH_HR primary context is 0x150 bytes");
+_Static_assert(sizeof(goodix_primitives_hr_secondary_context) == 0x158u,
+               "recovered GH_HR secondary context is 0x158 bytes");
+_Static_assert(offsetof(goodix_primitives_hr_secondary_context,
+                        pair_buffers) == 0x04u,
+               "GH_HR filter descriptors begin at +0x04");
+_Static_assert(offsetof(goodix_primitives_hr_secondary_context,
+                        i16_buffers) == 0x94u,
+               "GH_HR packed histories begin at +0x94");
+_Static_assert(offsetof(goodix_primitives_hr_secondary_context,
+                        float_histories) == 0xDCu,
+               "GH_HR float histories begin at +0xDC");
 _Static_assert(offsetof(goodix_primitives_hr_primary_context,
                         configuration_selector) == 0x13u,
                "GH_HR configuration selector remains at +0x13");
@@ -239,13 +251,6 @@ bool goodix_primitives_clear_state_flags(uint8_t *record, size_t length) {
     return true;
 }
 
-bool goodix_primitives_call_hook(goodix_primitives_hook_fn hook) {
-    if (hook == NULL) {
-        return false;
-    }
-    hook();
-    return true;
-}
 
 uint32_t goodix_primitives_library_code(void) {
     return UINT32_C(0x12F9);
@@ -256,10 +261,6 @@ uint32_t goodix_primitives_constant_four(void) {
 }
 
 uint32_t goodix_primitives_constant_one_a(void) {
-    return 1u;
-}
-
-uint32_t goodix_primitives_constant_one_b(void) {
     return 1u;
 }
 
@@ -4373,14 +4374,6 @@ void goodix_primitives_noop_a(void) {}
 
 void goodix_primitives_noop_b(void) {}
 
-int32_t goodix_primitives_zero_a(void) {
-    return 0;
-}
-
-int32_t goodix_primitives_zero_b(void) {
-    return 0;
-}
-
 uint32_t goodix_primitives_second_word(const uint32_t *words) {
     return words == NULL ? 0u : words[1];
 }
@@ -7364,8 +7357,9 @@ bool goodix_primitives_nadt_primary_signal_classify(
                                 workspace->phase_gaps[index]));
                     }
                 }
-                interval_variation = (int32_t)(
-                    variation_sum / (int64_t)(phase_count - 1u));
+                interval_variation = (int32_t)r1_runtime_sdivmod(
+                    (uint64_t)variation_sum, (uint64_t)(phase_count - 1u),
+                    NULL);
                 const float mean_gap =
                     (float)gap_sum / (float)phase_count;
                 if (mean_gap > 0.0f &&
@@ -9136,7 +9130,8 @@ bool goodix_primitives_hba_runtime_bind(
     for (size_t lane = 0u; lane < 4u; ++lane) {
         goodix_primitives_hba_cascade_bind(
             &runtime->stream_state.channel_filters[lane],
-            &secondary->pair_buffers[lane], runtime->filter_coefficients);
+            &secondary->pair_buffers[lane].buffer,
+            runtime->filter_coefficients);
         goodix_primitives_hba_i16_window_bind(
             &runtime->stream_state.channel_packed[lane],
             &secondary->i16_buffers[lane]);
@@ -9146,7 +9141,7 @@ bool goodix_primitives_hba_runtime_bind(
     for (size_t lane = 0u; lane < 3u; ++lane) {
         goodix_primitives_hba_cascade_bind(
             &runtime->stream_state.motion_filters[lane],
-            &secondary->pair_buffers[4u + lane],
+            &secondary->pair_buffers[4u + lane].buffer,
             runtime->filter_coefficients);
         goodix_primitives_hba_i16_window_bind(
             &runtime->stream_state.motion_packed[lane],
@@ -9154,13 +9149,15 @@ bool goodix_primitives_hba_runtime_bind(
     }
     goodix_primitives_hba_cascade_bind(
         &runtime->stream_state.residual_filter,
-        &secondary->pair_buffers[7], runtime->filter_coefficients);
+        &secondary->pair_buffers[7].buffer,
+        runtime->filter_coefficients);
     goodix_primitives_hba_i16_window_bind(
         &runtime->stream_state.residual_packed,
         &secondary->i16_buffers[8]);
     goodix_primitives_hba_cascade_bind(
         &runtime->stream_state.motion_filters[3],
-        &secondary->pair_buffers[8], runtime->filter_coefficients);
+        &secondary->pair_buffers[8].buffer,
+        runtime->filter_coefficients);
     goodix_primitives_hba_i16_window_bind(
         &runtime->stream_state.motion_packed[3],
         &secondary->i16_buffers[7]);
@@ -9959,6 +9956,11 @@ bool goodix_primitives_nadt_sample_prepare(
             input->direct_values[0]);
         output[1] = input->direct_values[second];
         output[2] = input->direct_values[third];
+        if (input->prepared_values != NULL && input->direct_value_count >= 3u) {
+            input->prepared_values[0] = output[0];
+            input->prepared_values[1] = output[1];
+            input->prepared_values[2] = output[2];
+        }
         return true;
     }
 
@@ -9972,6 +9974,11 @@ bool goodix_primitives_nadt_sample_prepare(
         output[0] = INT32_C(9000000);
         output[1] = INT32_C(9000000);
         output[2] = INT32_C(9000000);
+        if (input->prepared_values != NULL && input->direct_value_count >= 3u) {
+            input->prepared_values[0] = output[0];
+            input->prepared_values[1] = output[1];
+            input->prepared_values[2] = output[2];
+        }
         return false;
     }
 
@@ -9982,6 +9989,11 @@ bool goodix_primitives_nadt_sample_prepare(
         input->calibration_values[second], input->scale_codes[second]);
     output[2] = goodix_primitives_nadt_calibrated_sample(
         input->calibration_values[third], input->scale_codes[third]);
+    if (input->prepared_values != NULL && input->direct_value_count >= 3u) {
+        input->prepared_values[0] = output[0];
+        input->prepared_values[1] = output[1];
+        input->prepared_values[2] = output[2];
+    }
     return true;
 }
 
@@ -9991,6 +10003,8 @@ static void goodix_primitives_nadt_stream_reset_batch(
     state->low_primary_count = 0u;
     state->primary_average = 0;
     state->secondary_average = 0;
+    state->classifier.axis_ratio_outside_band_windows = 0u;
+    state->classifier.inactive_windows = 0;
     for (size_t index = 0u; index < 4u; ++index) {
         state->classifier.trigger_windows[index] = 0u;
     }
@@ -10001,12 +10015,13 @@ static int32_t goodix_primitives_nadt_stream_mean_update(
     const uint32_t divisor = ordinal == 0u ? UINT32_C(1) : ordinal;
     const int64_t accumulated =
         (int64_t)mean * (int64_t)(divisor - UINT32_C(1)) + sample;
-    return (int32_t)(accumulated / (int64_t)divisor);
+    return (int32_t)r1_runtime_sdivmod(
+        (uint64_t)accumulated, (uint64_t)divisor, NULL);
 }
 
 static void goodix_primitives_nadt_stream_compact(
     goodix_primitives_nadt_stream_state *state,
-    goodix_primitives_nadt_stream_workspace *workspace) {
+    const goodix_primitives_nadt_stream_workspace_view *workspace) {
     if (state->primary_history_count >=
             GOODIX_PRIMITIVES_NADT_PRIMARY_MAX_SAMPLES) {
         const size_t retained =
@@ -10033,22 +10048,32 @@ static void goodix_primitives_nadt_stream_compact(
     }
 }
 
-bool goodix_primitives_nadt_stream_process(
+bool goodix_primitives_nadt_stream_process_view(
     const goodix_primitives_nadt_stream_input *input,
     const goodix_primitives_nadt_stream_plan *plan,
     goodix_primitives_nadt_stream_state *state,
-    goodix_primitives_nadt_stream_workspace *workspace,
+    const goodix_primitives_nadt_stream_workspace_view *workspace,
     goodix_primitives_nadt_window_diagnostics *window_diagnostics,
     goodix_primitives_nadt_stream_output *output) {
     if (input == NULL || input->sample == NULL || plan == NULL ||
             state == NULL || workspace == NULL || output == NULL ||
+            workspace->primary_raw == NULL ||
+            workspace->primary_filtered == NULL ||
+            workspace->configuration_markers == NULL ||
+            workspace->secondary_history == NULL ||
+            workspace->primary_capacity < GOODIX_PRIMITIVES_NADT_PRIMARY_MAX_SAMPLES ||
+            workspace->secondary_capacity < 200u ||
             plan->sample_rate < 25u || plan->window_configuration == NULL ||
+            plan->window_configuration->window_count >
+                GOODIX_PRIMITIVES_NADT_WINDOW_METRIC_COUNT ||
             plan->window_plan == NULL || plan->preparation_state == NULL ||
             plan->optical_transform == NULL || plan->round_provider == NULL ||
             plan->square_root == NULL) {
         return false;
     }
     output->window_ready = false;
+    output->sample_prepared = false;
+    output->history_ordinal = 0u;
     output->configuration_changed = 0u;
     output->classification = (uint8_t)(
         (uint8_t)(uint32_t)state->classifier.current_result |
@@ -10077,9 +10102,19 @@ bool goodix_primitives_nadt_stream_process(
     const bool prepared = goodix_primitives_nadt_sample_prepare(
         plan->preparation_state, input->sample, lanes,
         &configuration_changed);
+    output->sample_prepared = prepared;
     output->configuration_changed = configuration_changed;
-    state->classifier.profile = input->profile;
+    state->classifier.classification_mode = input->profile;
     state->classifier.classifier_suppressed = input->classifier_suppressed;
+    if (state->classifier.profile == 2u) {
+        if (state->batch_count == 10u &&
+                state->classifier.profile_counter < 100) {
+            state->classifier.profile_counter = (int32_t)(
+                (uint32_t)state->classifier.profile_counter + 1u);
+        }
+    } else if (state->classifier.profile == 0u) {
+        state->classifier.profile_counter = 0;
+    }
 
     const int32_t shifted_x = input->axis_x >> 5;
     const int32_t shifted_y = input->axis_y >> 5;
@@ -10127,6 +10162,7 @@ bool goodix_primitives_nadt_stream_process(
     ++state->batch_count;
     state->batch_sample_count = goodix_primitives_nadt_increment_u8(
         state->batch_sample_count);
+    output->history_ordinal = state->batch_sample_count;
     const size_t primary_index = state->primary_history_count <
             GOODIX_PRIMITIVES_NADT_PRIMARY_MAX_SAMPLES
         ? state->primary_history_count
@@ -10165,7 +10201,7 @@ bool goodix_primitives_nadt_stream_process(
             lanes[2], plan->primary_baseline);
         workspace->secondary_history[state->secondary_history_count++] =
             goodix_primitives_u16_bits_to_i16((uint16_t)(
-                (uint32_t)centered >> 8u));
+                centered / INT32_C(256)));
     }
 
     const int64_t magnitude_square =
@@ -10178,7 +10214,33 @@ bool goodix_primitives_nadt_stream_process(
         return false;
     }
     const int32_t magnitude = (int32_t)(magnitude_value + 0.5);
-    const size_t activity_lane = state->activity_lane & UINT8_C(3);
+    /* Stock 0x6E360 shifts the four running-statistics banks immediately
+     * before the first sample after a full fourth window. The rotating
+     * activity_lane is a different native state byte and does not select
+     * these four chronological statistic slots. */
+    if (plan->window_configuration->window_count ==
+            GOODIX_PRIMITIVES_NADT_WINDOW_METRIC_COUNT) {
+        for (size_t index = 0u;
+                index + 1u < GOODIX_PRIMITIVES_NADT_WINDOW_METRIC_COUNT;
+                ++index) {
+            state->activity_mean[index] = state->activity_mean[index + 1u];
+            state->activity_squared_deviation_sum[index] =
+                state->activity_squared_deviation_sum[index + 1u];
+            state->activity_maximum[index] =
+                state->activity_maximum[index + 1u];
+            state->activity_minimum[index] =
+                state->activity_minimum[index + 1u];
+            plan->window_configuration->window_metrics[index] =
+                plan->window_configuration->window_metrics[index + 1u];
+            plan->window_configuration->window_maxima[index] =
+                plan->window_configuration->window_maxima[index + 1u];
+            plan->window_configuration->window_minima[index] =
+                plan->window_configuration->window_minima[index + 1u];
+        }
+        plan->window_configuration->window_count =
+            GOODIX_PRIMITIVES_NADT_WINDOW_METRIC_COUNT - 1u;
+    }
+    const size_t activity_lane = plan->window_configuration->window_count;
     goodix_primitives_running_i32_statistics activity = {
         .mean = state->activity_mean[activity_lane],
         .squared_deviation_sum =
@@ -10211,7 +10273,8 @@ bool goodix_primitives_nadt_stream_process(
     plan->window_configuration->window_minima[activity_lane] =
         activity.minimum;
     if (activity_ordinal == 24u) {
-        state->activity_lane = (uint8_t)((activity_lane + 1u) & 3u);
+        ++plan->window_configuration->window_count;
+        state->activity_lane = (uint8_t)((state->activity_lane + 1u) & 3u);
     }
 
     if (state->batch_count % 25u == 0u) {
@@ -10236,6 +10299,10 @@ bool goodix_primitives_nadt_stream_process(
                 window_diagnostics, &classified)) {
             return false;
         }
+        /* Stock result bit two and the first classifier transient counter
+         * alias the same native byte (+0x05). Observe classifier writes from
+         * this window before packing the public result. */
+        state->result_flag = state->classifier.transient_counters[0] != 0u;
         state->classifier.current_result = classified & INT32_C(3);
         output->window_ready = true;
         output->classification = (uint8_t)(
@@ -10251,11 +10318,28 @@ bool goodix_primitives_nadt_stream_process(
     if (!prepared) {
         output->quality = 50u;
     }
-    if (output->classification == 2u || output->classification == 3u) {
-        state->classifier.current_result = 0;
-    }
     output->status = state->status;
     return true;
+}
+
+bool goodix_primitives_nadt_stream_process(
+    const goodix_primitives_nadt_stream_input *input,
+    const goodix_primitives_nadt_stream_plan *plan,
+    goodix_primitives_nadt_stream_state *state,
+    goodix_primitives_nadt_stream_workspace *workspace,
+    goodix_primitives_nadt_window_diagnostics *window_diagnostics,
+    goodix_primitives_nadt_stream_output *output) {
+    if (workspace == NULL) return false;
+    const goodix_primitives_nadt_stream_workspace_view view = {
+        .primary_raw = workspace->primary_raw,
+        .primary_filtered = workspace->primary_filtered,
+        .configuration_markers = workspace->configuration_markers,
+        .secondary_history = workspace->secondary_history,
+        .primary_capacity = GOODIX_PRIMITIVES_NADT_PRIMARY_MAX_SAMPLES,
+        .secondary_capacity = 200u,
+    };
+    return goodix_primitives_nadt_stream_process_view(
+        input, plan, state, &view, window_diagnostics, output);
 }
 
 bool goodix_primitives_command_status_poll(
@@ -10574,20 +10658,6 @@ bool goodix_primitives_i32_autocorrelation_transform(
     goodix_primitives_autocorrelation_state *state) {
     return goodix_primitives_autocorrelation_transform(
         samples, true, output, count, mean, scale, state);
-}
-
-bool goodix_primitives_reset_register_fields(
-    const goodix_primitives_register_configuration_ops *operations) {
-    if (operations == NULL || operations->write_register == NULL ||
-            operations->write_bit_field == NULL) {
-        return false;
-    }
-    operations->write_register(
-        UINT16_C(0x0502), UINT16_C(0), operations->context);
-    operations->write_bit_field(
-        UINT16_C(0), UINT8_C(10), UINT8_C(10), UINT16_C(0),
-        operations->context);
-    return true;
 }
 
 bool goodix_primitives_dispatch_word_copy(
@@ -12922,8 +12992,9 @@ bool goodix_primitives_hr_secondary_context_release(
         return false;
     }
     for (size_t index = 0u; index < 9u; ++index) {
-        if (context->pair_buffers[index].records != NULL) {
-            release(release_context, context->pair_buffers[index].records);
+        if (context->pair_buffers[index].buffer.records != NULL) {
+            release(release_context,
+                context->pair_buffers[index].buffer.records);
         }
         if (context->i16_buffers[index].data != NULL) {
             release(release_context, context->i16_buffers[index].data);
@@ -12954,7 +13025,7 @@ bool goodix_primitives_hr_secondary_context_initialize(
     bool ok = true;
     for (size_t index = 0u; ok && index < 9u; ++index) {
         ok = goodix_primitives_pair_buffer_initialize(
-            &context->pair_buffers[index], 8u, coefficient_record,
+            &context->pair_buffers[index].buffer, 8u, coefficient_record,
             allocate, provider_context);
     }
     for (size_t index = 0u; ok && index < 9u; ++index) {

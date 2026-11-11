@@ -20,3 +20,9 @@ uint32_t opencfw_read_mspi_register_id(uint32_t register_id,
         (REGISTER_BLOCK_BASE + register_id * sizeof(uint32_t));
     return 0u;
 }
+
+/* Stock 0x41d90e has this one body. The same getter was also reconstructed as
+ * opencfw_bl_power_register_read (initializer-callbacks/
+ * startup_power_register_read.c, now retired); its names alias the body here. */
+__typeof__(opencfw_read_mspi_register_id) opencfw_bl_power_register_read __attribute__((alias("opencfw_read_mspi_register_id")));
+__typeof__(opencfw_read_mspi_register_id) opencfw_power_register_read __attribute__((alias("opencfw_read_mspi_register_id")));

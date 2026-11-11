@@ -1,0 +1,152 @@
+{
+  "cases": 2112,
+  "passed": 2112,
+  "failures": [],
+  "stock_entry": "0x86d40",
+  "stock_body_bytes": 238,
+  "source_body_bytes": 256,
+  "result_registers": [
+    "R0",
+    "R1"
+  ],
+  "callback_stack_depth_pairs": [
+    [
+      [
+        -32,
+        -32,
+        -32,
+        -32,
+        -32,
+        -32,
+        -32,
+        -32
+      ],
+      [
+        -32,
+        -32,
+        -32,
+        -32,
+        -32,
+        -32,
+        -32,
+        -32
+      ]
+    ],
+    [
+      [
+        -32,
+        -32,
+        -32,
+        -32,
+        -32,
+        -32,
+        -32,
+        -32,
+        -32
+      ],
+      [
+        -32,
+        -32,
+        -32,
+        -32,
+        -32,
+        -32,
+        -32,
+        -32,
+        -32
+      ]
+    ],
+    [
+      [
+        -32,
+        -32,
+        -32,
+        -32,
+        -32,
+        -32,
+        -32,
+        -32,
+        -32,
+        -32
+      ],
+      [
+        -32,
+        -32,
+        -32,
+        -32,
+        -32,
+        -32,
+        -32,
+        -32,
+        -32,
+        -32
+      ]
+    ],
+    [
+      [
+        -32,
+        -32,
+        -32,
+        -32,
+        -32,
+        -32,
+        -32,
+        -32,
+        -32,
+        -32,
+        -32
+      ],
+      [
+        -32,
+        -32,
+        -32,
+        -32,
+        -32,
+        -32,
+        -32,
+        -32,
+        -32,
+        -32,
+        -32
+      ]
+    ]
+  ],
+  "unchanged_functions": [
+    "r1_qma6100_configure_boundary",
+    "r1_qma_range",
+    "r1_qma_reset",
+    "r1_qma_setup",
+    "r1_qma_steps",
+    "r1_qma_tap"
+  ],
+  "report": "build/sources-goal-r1-qma-motion-verified/report.json",
+  "report_sha256": "57e9a365cb9c914e6086b4a50bccdc9727a8516dc57ec264237701ca06716fa2",
+  "source_sha256": "55bae914cd4b0ba237b04615caf603d6315d451448093d01814b5adbadbe01f6",
+  "manifest_sha256": "be76bf00509f1551b53a08edbc5515ed3a3dcb9b1721ff4481fdf60b77d82eb8",
+  "stock_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "native_span_sha256": "936861ba9a194a2a34bc8d2dfcbf810771e279edabca38842b74914256b41562",
+  "rea": {
+    "completed": true,
+    "procedure": "0x86d40",
+    "path": "build/goal-r1-qma-motion/REA.json",
+    "sha256": "ee2bf825a5c502f6eb47efc20b2d9145dbdb0cc29aceffeaf8e3ab919bb3b727",
+    "limitation": "Saved R2/R3 words appear as additional parameters; their upper bytes and restored caller-saved results remain unowned."
+  },
+  "probe_artifacts": {
+    "build/goal-r1-qma-motion/verify.py": "f383f23a498d27e41f95eba3945fdef2700680cd50cace14fabe654e4db3e007",
+    "build/goal-r1-qma-motion/before.c": "25468a4481a8fff3389376b67b4d91b7a3474e6d45da745e29c68284bcd4d8e3",
+    "build/goal-r1-qma-motion/source.elf": "e902a232a1978f177df796d9ef0e4661ef37d55764b529a20af045472582fde9",
+    "build/goal-r1-qma-motion/stock.elf": "1de5cc1d037ea3465f727ac793a8c18bd5cbe869cbc820fd2b1cda3f8437c3d1",
+    "build/goal-r1-qma-motion/rea-snapshot.json": "a5289054e13b51eb6ef04119ce9f56cb8efee0d4f4956719aa0d1ecddabcf457"
+  },
+  "return_words": {
+    "R0": "(axis & 0xffffff00) | final register-0x18 scratch byte",
+    "R1": "(enabled & 0xffffff00) | final register-0x1a scratch byte"
+  },
+  "limits": [
+    "Read/write wrappers are modeled and clobber caller-saved registers/flags.",
+    "C uint64 result reproduces the two restored parameter words; no original source-language return type or R2/R3 return contract is inferred.",
+    "Only four initialized output bytes and two fully initialized parameter words are owned, not surrounding frame layout.",
+    "No physical motion-event operation, timing, complete fault-state, final linking, source qualification or byte-identity claim."
+  ]
+}

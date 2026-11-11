@@ -1,0 +1,185 @@
+{
+  "schema": 1,
+  "scope": "R1 FlashDB TSL reader 0x87e14, 68-byte native body; C read/decode/update control with native 48-byte frame",
+  "status": "bounded C control candidate; not instruction qualified",
+  "stock_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "behavior": {
+    "paired_cases": 9310,
+    "executions": 18620,
+    "source_report": "build/sources-goal-r1-flash-tsl-c-final/report.json",
+    "groups": {
+      "adapter": 480,
+      "status": 262,
+      "outer": 8568
+    },
+    "partition_IO_modeled": true,
+    "checks": [
+      "FILE_MODE byte rejects before partition read",
+      "signed result mapping and unchanged four callback arguments",
+      "descending status byte loads, early zero, count and shift wrap behavior",
+      "actual C outer control uses read adapter and status scanner",
+      "failed/partial/non-writing reads retain native scratch state",
+      "ordered visible memory accesses, output guards, complete native frame, overlapping database/TSL/scratch views, R0, return SP, saved registers, masks"
+    ],
+    "limits": [
+      "Partition read is modeled; actual FAL/flash transport and physical flash not executed",
+      "Native frame bridge retained; outer read/decode/update control is C",
+      "Private stack below native scratch, caller-clobbered registers and flags excluded"
+    ]
+  },
+  "integrated": {
+    "paired_cases": 10368,
+    "executions": 20736,
+    "source_report": "build/sources-goal-r1-flash-tsl-c-final/report.json",
+    "actual_C_TSL_control_read_adapter_status_FAL_partition_and_cache_lookup": true,
+    "modeled": [
+      "flash driver read",
+      "printf diagnostics"
+    ],
+    "checks": [
+      "32-byte request at exact native scratch address",
+      "partial and non-writing driver failures retain seeded scratch",
+      "real FAL bounds, cache lookup and signed driver result mapping",
+      "outer status and record fields, complete native frame, diagnostics, preserved ABI"
+    ],
+    "limits": [
+      "Seeded partition table/cache; initialization not executed",
+      "Final flash driver and diagnostics modeled; physical flash and concurrency unproven",
+      "Helper-private frames and caller-clobbered registers/flags excluded"
+    ]
+  },
+  "negative_controls": [
+    {
+      "mutation": "zero-read-scratch",
+      "rejected": true
+    },
+    {
+      "mutation": "stale-metadata-snapshot",
+      "rejected": true
+    }
+  ],
+  "object_audit": {
+    "other_574_objects_unchanged": true,
+    "read_adapter_and_status_scanner_bytes_and_relocations_unchanged": true,
+    "no_data_owner_added_or_changed": true,
+    "manifest_unchanged": true,
+    "composed_import_sets_unchanged": true,
+    "native_48_byte_frame_bridge_instruction_bytes": 14,
+    "native_frame_bridge_relocation": [
+      [
+        6,
+        10,
+        "read_tsl_body"
+      ]
+    ]
+  },
+  "normal_build": {
+    "units": 575,
+    "application_units": 501,
+    "bootloader_units": 74,
+    "application_imports": 175,
+    "bootloader_imports": 34,
+    "failures": 0,
+    "duplicate_strong_symbols": 0,
+    "import_delta": 0
+  },
+  "qualification": {
+    "compiled_candidates": 5,
+    "selected_regions": 0,
+    "canonical_plan_unchanged": true
+  },
+  "hybrid": {
+    "application_equals_stock": true,
+    "totals": {
+      "binary-pull-through": 642279,
+      "source-built": 3881,
+      "resource-file": 248
+    },
+    "source_completeness_proven": false
+  },
+  "retained_assembly": {
+    "native_frame_bridge_bytes": 14,
+    "reason": "Preserve exact 32-byte read destination at caller SP-48, 36 local bytes and three saved words; no C zero-fill or indeterminate scratch local"
+  },
+  "limits": [
+    "Direct read/status/outer cases model partition IO; integrated cases execute C FAL partition/cache path and model final flash driver and diagnostics",
+    "Helper-private frames below native scratch, caller-clobbered registers and flags excluded",
+    "Mapped alias cases are bounded, not proof for all corrupt pointers",
+    "Seeded partition table/cache; full startup/placement and physical flash/concurrency unproven",
+    "No complete source executable link or full source byte identity; G2 gates not advanced"
+  ],
+  "inputs": [
+    {
+      "path": "build/sources-goal-r1-flash-tsl-c-final/report.json",
+      "sha256": "34907406a65d20384457310f274c5c47715cc81ba36604c90422471c33d59e9a"
+    },
+    {
+      "path": "build/hybrid-goal-r1-flash-tsl-c-final/build-report.json",
+      "sha256": "a1dfaa24742654eb44e6da129b8994db94fa72f94c62ce3587ed4aae9b9f9a9f"
+    },
+    {
+      "path": "tools/build/source-plan.json",
+      "sha256": "716cf17b8cf2bed8ad6a99a672b1856af4c5380842c95cb14b9a263a7bb42bc8"
+    },
+    {
+      "path": "r1/src/application/runtime/native_flashdb_log_read.c",
+      "sha256": "d538c7903b41bab8a8917aca079ab87545e468f41d15c4e7d9e8700bda5057e6"
+    },
+    {
+      "path": "r1/src/sources.json",
+      "sha256": "4b6d47de0b0e1626f5df3ee73725bc221c9e05373e2a098596abdf560fd5a0ca"
+    },
+    {
+      "path": "r1/symbols/function-frontier.csv",
+      "sha256": "efc2288bb511f900af28ccb081f6fe3ab521f2ae3c35cd805df3d4168979c02d"
+    },
+    {
+      "path": "build/goal-r1-flash-tsl-c/before.c",
+      "sha256": "f349c9b7cc6daa6ecee7aa82edefa905f9b108d975830257c7ff5ad52cb53b83"
+    },
+    {
+      "path": "build/goal-r1-flash-tsl-c/verify.py",
+      "sha256": "2c12fa2ef7af4c7fa0504255ade23cb6d5eb12713b229f0887403b9276391038"
+    },
+    {
+      "path": "build/goal-r1-flash-tsl-c/results.json",
+      "sha256": "4ed854cb72fe119c54506fea59f84acfcf795375894a5d335db5541bc82c30de"
+    },
+    {
+      "path": "build/goal-r1-flash-tsl-c/integrated.py",
+      "sha256": "a38cbe45076f9f04e220fb36df3ed4626fe562605909b15c17da0f5c033b97c6"
+    },
+    {
+      "path": "build/goal-r1-flash-tsl-c/integrated-results.json",
+      "sha256": "c8a99cf2fe2e7a6a0ab258171801123beb68ab11bf538b013cefb29b157100b4"
+    },
+    {
+      "path": "build/goal-r1-flash-tsl-c/negative.py",
+      "sha256": "269e6c60e70d5ecccd79efbfb0db7a7a384ffce4326d4be29396b8e9b8a0da78"
+    },
+    {
+      "path": "build/goal-r1-flash-tsl-c/negative-results.json",
+      "sha256": "0c4ebccc88be37a96128f54b3bf46ef56c3a8812d2f0f86ed3d929f16de9a934"
+    },
+    {
+      "path": "build/goal-r1-flash-tsl-c/audit.py",
+      "sha256": "be42a56b8cad8d96f0c24810d6a097922480299496e3ed82f0e43abc2e79388c"
+    },
+    {
+      "path": "build/goal-r1-flash-tsl-c/audit-results.json",
+      "sha256": "e16c1e0d3782580fdc889edbb6b2921fe0a85adeb839dd0fe85932e728c9dde9"
+    },
+    {
+      "path": "build/goal-r1-flash-tsl-c/rea.json",
+      "sha256": "71137ab939297476b54b54426660dc8cac2068d84b0bfe3000518586dee2a765"
+    },
+    {
+      "path": "build/goal-r1-flash-tsl-c/qualified-final/qualification.json",
+      "sha256": "a80c6f145809a7e6a9bd0683b3de6ed987056415396092329caee3d3f8d289a2"
+    },
+    {
+      "path": "build/goal-r1-flash-tsl-c/qualified-final/source-plan.json",
+      "sha256": "3da40e3d766877c0b3059bee372f651c1f56681157782eba12ee3076f1834a0f"
+    }
+  ]
+}

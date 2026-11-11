@@ -1,80 +1,44 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_callback_324dd4\n"
-".type opencfw_em9305_callback_324dd4,@function\n"
-"opencfw_em9305_callback_324dd4:\n"
-"L324dd4:\n"
-"push_s blink\n"
-"L324dd6:\n"
-"ldb_s r1,[r0,0x3]\n"
-"L324dd8:\n"
-"breq.nt r1,0x3,L324df0\n"
-"L324ddc:\n"
-"breq.d.nt r1,0x2,L324e02\n"
-"L324de0:\n"
-"add_s r2,r0,0x5\n"
-"L324de2:\n"
-"brne.nt r1,0x1,L324e36\n"
-"L324de6:\n"
-"bl opencfw_em9305_child_303a80\n"
-"L324dea:\n"
-"bl opencfw_em9305_command_timer_325268\n"
-"L324dee:\n"
-"b_s L324e36\n"
-"L324df0:\n"
-"ld r2,[r0,0xc]\n"
-"L324df2:\n"
-"ld r1,[r0,0x8]\n"
-"L324df4:\n"
-"or.f 0,r1,r2\n"
-"L324df8:\n"
-"beq_s L324e18\n"
-"L324dfa:\n"
-"bl.d opencfw_em9305_child_303ad8\n"
-"L324dfe:\n"
-"ldb_s r0,[r0,0x5]\n"
-"L324e00:\n"
-"b_s L324e36\n"
-"L324e02:\n"
-"ldb_s r3,[r0,0x4]\n"
-"L324e04:\n"
-"ld_s r12,[r0,0x10]\n"
-"L324e06:\n"
-"ld r1,[r0,0x14]\n"
-"L324e08:\n"
-"cmp_s r3,0\n"
-"L324e0a:\n"
-"add r3,r0,0x8\n"
-"L324e0e:\n"
-"mov_s r0,r12\n"
-"L324e10:\n"
-"beq_s L324e1e\n"
-"L324e12:\n"
-"bl opencfw_em9305_radio_resolve_303bdc\n"
-"L324e16:\n"
-"b_s L324e22\n"
-"L324e18:\n"
-"bl opencfw_em9305_child_303a80\n"
-"L324e1c:\n"
-"b_s L324e36\n"
-"L324e1e:\n"
-"bl opencfw_em9305_radio_address_project_303b7c\n"
-"L324e22:\n"
-"bl opencfw_em9305_wsf_critical_enter\n"
-"L324e26:\n"
-"mov_s r0,0x805b5c\n"
-"L324e2c:\n"
-"ldb_s r1,[r0,0]\n"
-"L324e2e:\n"
-"add_s r1,r1,-1\n"
-"L324e30:\n"
-"bl.d opencfw_em9305_wsf_critical_exit\n"
-"L324e34:\n"
-"stb_s r1,[r0,0]\n"
-"L324e36:\n"
-"pop_s blink\n"
-"L324e38:\n"
-"j_s [blink]\n"
-".size opencfw_em9305_callback_324dd4,.-opencfw_em9305_callback_324dd4\n"
-);
+#include <stdint.h>
+
+/* Native 0x324dd4..0x324e3a: privacy work-item callback. Kind 1 refreshes
+ * every resolving-list address and restarts the command timer; kind 3
+ * refreshes all entries (zero identity) or the matching one; kind 2
+ * resolves (+4 set) or projects an address from {+16, +20, +5, +8} and
+ * then retires one outstanding item (0x805b5c) in a critical section. */
+extern void opencfw_em9305_child_303a80(void);
+extern uint32_t opencfw_em9305_command_timer_325268(void);
+extern void opencfw_em9305_child_303ad8(uint32_t type, uint32_t low, uint32_t high);
+extern uint32_t opencfw_em9305_radio_resolve_303bdc(uint32_t,uint32_t,uintptr_t,uintptr_t);
+extern uint32_t opencfw_em9305_radio_address_project_303b7c(uint32_t,uint32_t,uintptr_t,uintptr_t);
+extern void opencfw_em9305_wsf_critical_enter(void);
+extern void opencfw_em9305_wsf_critical_exit(void);
+
+void opencfw_em9305_callback_324dd4(uintptr_t item)
+{
+    uint32_t kind=*(volatile uint8_t *)(item+3u);
+    if(kind==3u){
+        uint32_t low=*(volatile uint32_t *)(item+8u);
+        uint32_t high=*(volatile uint32_t *)(item+12u);
+        if((low|high)==0u)opencfw_em9305_child_303a80();
+        else opencfw_em9305_child_303ad8(*(volatile uint8_t *)(item+5u),low,high);
+        return;
+    }
+    if(kind==2u){
+        uint32_t resolve=*(volatile uint8_t *)(item+4u);
+        uint32_t first=*(volatile uint32_t *)(item+16u);
+        uint32_t second=*(volatile uint32_t *)(item+20u);
+        if(resolve!=0u)
+            (void)opencfw_em9305_radio_resolve_303bdc(first,second,item+5u,item+8u);
+        else
+            (void)opencfw_em9305_radio_address_project_303b7c(first,second,item+5u,item+8u);
+        opencfw_em9305_wsf_critical_enter();
+        volatile uint8_t *outstanding=(volatile uint8_t *)(uintptr_t)0x805b5cu;
+        *outstanding=(uint8_t)(*outstanding-1u);
+        opencfw_em9305_wsf_critical_exit();
+        return;
+    }
+    if(kind==1u){
+        opencfw_em9305_child_303a80();
+        (void)opencfw_em9305_command_timer_325268();
+    }
+}

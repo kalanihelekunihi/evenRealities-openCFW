@@ -1,0 +1,182 @@
+{
+  "status": "analysis_only",
+  "source_implementation_proven": false,
+  "stock_probe": {
+    "passed": 12,
+    "stock_only": true,
+    "cases": [
+      {
+        "initial": 0,
+        "board_hook": false,
+        "after_hook": 0,
+        "after_first": null,
+        "samples": 0,
+        "returns": true,
+        "axis_read_order": [
+          4,
+          2,
+          0
+        ]
+      },
+      {
+        "initial": 0,
+        "board_hook": true,
+        "after_hook": 0,
+        "after_first": null,
+        "samples": 0,
+        "returns": true,
+        "axis_read_order": [
+          4,
+          2,
+          0
+        ]
+      },
+      {
+        "initial": 0,
+        "board_hook": false,
+        "after_hook": 1,
+        "after_first": null,
+        "samples": 0,
+        "returns": true,
+        "axis_read_order": [
+          4,
+          2,
+          0
+        ]
+      },
+      {
+        "initial": 0,
+        "board_hook": true,
+        "after_hook": 1,
+        "after_first": null,
+        "samples": 1,
+        "returns": true,
+        "axis_read_order": [
+          4,
+          2,
+          0
+        ]
+      },
+      {
+        "initial": 3,
+        "board_hook": false,
+        "after_hook": 3,
+        "after_first": 1,
+        "samples": 1,
+        "returns": true,
+        "axis_read_order": [
+          4,
+          2,
+          0
+        ]
+      },
+      {
+        "initial": 3,
+        "board_hook": true,
+        "after_hook": 3,
+        "after_first": 1,
+        "samples": 1,
+        "returns": true,
+        "axis_read_order": [
+          4,
+          2,
+          0
+        ]
+      },
+      {
+        "initial": 1,
+        "board_hook": false,
+        "after_hook": 1,
+        "after_first": 3,
+        "samples": 3,
+        "returns": true,
+        "axis_read_order": [
+          4,
+          2,
+          0
+        ]
+      },
+      {
+        "initial": 1,
+        "board_hook": true,
+        "after_hook": 1,
+        "after_first": 3,
+        "samples": 3,
+        "returns": true,
+        "axis_read_order": [
+          4,
+          2,
+          0
+        ]
+      },
+      {
+        "initial": 100,
+        "board_hook": false,
+        "after_hook": 100,
+        "after_first": null,
+        "samples": 100,
+        "returns": true,
+        "axis_read_order": [
+          4,
+          2,
+          0
+        ]
+      },
+      {
+        "initial": 100,
+        "board_hook": true,
+        "after_hook": 100,
+        "after_first": null,
+        "samples": 100,
+        "returns": true,
+        "axis_read_order": [
+          4,
+          2,
+          0
+        ]
+      },
+      {
+        "initial": 101,
+        "board_hook": false,
+        "after_hook": 101,
+        "after_first": null,
+        "samples": 101,
+        "returns": false,
+        "axis_read_order": [
+          4,
+          2,
+          0
+        ]
+      },
+      {
+        "initial": 101,
+        "board_hook": true,
+        "after_hook": 101,
+        "after_first": null,
+        "samples": 101,
+        "returns": false,
+        "axis_read_order": [
+          4,
+          2,
+          0
+        ]
+      }
+    ],
+    "limitations": [
+      "Board callback and sample sink are controlled boundaries",
+      "Does not prove source equivalence or physical accelerometer behavior",
+      "Second argument register retains count pointer in this sampled caller state; only R0 is explicitly prepared by stock"
+    ]
+  },
+  "evidence": {
+    "build/goal-r1-goodix-gsensor/stock.elf": "ed61f4fab9abb4c8f279d473882d143e966461c408e76a8c1f23a06fba71e2b4",
+    "build/goal-r1-goodix-gsensor/REA-0x6f920.json": "f57a8d6e49dd2ea6bf1cd7449786a41cc9e13051540eedd4aa27cc955151a909",
+    "build/goal-r1-goodix-gsensor/REA-0x6f964.json": "3507cd13da3725855873c674bcff1cc9d8c34c676d2af1ff50cdb934bbf6b6fd",
+    "build/goal-r1-goodix-gsensor/REA.snapshot.json": "4d960fb6ebb6c9fec56439e996d22a6b173a5f2a4ef83871d2014179918605dd",
+    "build/goal-r1-goodix-gsensor/probe.py": "04499ae1e857df7ed91de94f5ae90b1541f90c819451daf9723b4508734ed18b",
+    "build/goal-r1-goodix-gsensor/probe-results.json": "7037b20a668c52d68690d6da6a5dbbfd4f7f7224ea255db7fe01a046834550e0",
+    "r1/blobs/official/r1-2.2.6.0009/application.bin": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "r1/src/sources.json": "6be47d54d1fe22b5921fe919af11162d49403518059750808394c20d626735ab",
+    "tools/build/source-plan.json": "4d46e8c038db79a174a2d719086fd0be80503ca7cdbfc2c51e5ed3d30d293064"
+  }
+}

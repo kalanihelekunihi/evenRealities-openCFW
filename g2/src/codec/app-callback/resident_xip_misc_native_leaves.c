@@ -4,6 +4,7 @@
  * 0x10208c60, 0x10203598, 0x102077d4. RAM allocation/layout is open.
  */
 #include <stdint.h>
+#include "../csky_ops.h"
 
 extern void gx8002_xip_dma_deallocate_10203a98(uint32_t channel);
 extern uint32_t gx8002_xip_tws_publish_10206c24(const char *, ...);
@@ -22,9 +23,7 @@ int32_t gx8002_xip_aout_get_mute_10204cd4(const void *configuration)
 uint32_t gx8002_xip_register_get_bit_102055c0(
     volatile const uint32_t *register_word, uint32_t bit)
 {
-    uint32_t value = *register_word;
-    __asm__ volatile("lsr %0, %1" : "+r"(value) : "r"(bit) : "cc");
-    return value & 1u;
+    return csky_lsr(*register_word, bit) & 1u;
 }
 
 uint32_t gx8002_xip_gsensor_workstate_10206908(void)
@@ -59,9 +58,7 @@ uint32_t gx8002_xip_power_unlock_102077d4(int32_t token)
     if (token >= 33) return UINT32_MAX;
     volatile uint32_t *const flags =
         (volatile uint32_t *)(uintptr_t)UINT32_C(0x2002dfbc);
-    uint32_t mask = UINT32_C(0xfffffffe);
-    uint32_t rotation = (uint32_t)token - 1u;
-    __asm__ volatile("rotl %0, %1" : "+r"(mask) : "r"(rotation) : "cc");
+    const uint32_t mask = csky_rotl(UINT32_C(0xfffffffe), (uint32_t)token - 1u);
     *flags = *flags & mask;
     return 0u;
 }

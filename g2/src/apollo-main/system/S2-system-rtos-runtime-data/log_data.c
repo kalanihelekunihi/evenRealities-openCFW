@@ -18,10 +18,15 @@ volatile uint8_t g2_elog_default_level = 0x01u;
 
 /* EasyLogger async transport (elog_async_transport.c). */
 volatile uint8_t g2_elog_async_enabled;                                  /* RAM 0x20074fc0 */
-uint8_t g2_elog_dummy_node[0x110] __attribute__((aligned(4)));           /* RAM 0x202e4eb8 */
+/* RAM 0x202e4eb8. Fix 39: in stock this is node 255 of the elog async pool at 0x202d3fc8
+ * (0x202d3fc8 + 255*272; stock 0x4489e8 uses it as the pending sentinel; pool word 0x448fb4).
+ * It is now an alias of that node, so elog_async_transport.c `out == &g2_elog_dummy_node`
+ * matches the sentinel transport_init.c installs (&pool[255]). */
+/* alias defined in stock-ram/stock_ram_cells.c next to the pool (same-TU .set). */
 void *volatile g2_elog_pending_head;                                     /* RAM 0x20074138 */
 void *volatile g2_elog_pending_tail;                                     /* RAM 0x2007413c */
-uint8_t g2_elog_sink[8] __attribute__((aligned(4)));                     /* RAM 0x20073b90 */
+/* g2_elog_sink: stock 0x20073b90 is one cell; defined as an alias of
+ * audio_uart_ble_logger_descriptor in logger_ble_state.c (Fix 33). */
 uint8_t g2_elog_stats[0x30] __attribute__((aligned(4)));                 /* RAM 0x2007342c */
 
 /* Compressed-log core (compress_log_core.c). */

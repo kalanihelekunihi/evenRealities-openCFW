@@ -1,0 +1,609 @@
+{
+  "normal_report": "build/sources-goal-r1-battery-report-pure-c/report.json",
+  "report_sha256": "d6756264bce1e95a3c3d7d9172fc16b6f8e080d6ee50e67473cb173a9cebdd5f",
+  "units": [
+    {
+      "source": "r1/src/application/board/native_battery_frame.c",
+      "payload": "r1-application",
+      "role": "candidate",
+      "toolchain": "clang",
+      "link": true,
+      "expect": "compile",
+      "returncode": 0,
+      "argv": [
+        "/usr/bin/clang",
+        "--target=arm-none-eabi",
+        "-mcpu=cortex-m4",
+        "-mthumb",
+        "-munaligned-access",
+        "-mfpu=fpv4-sp-d16",
+        "-mfloat-abi=hard",
+        "-std=c11",
+        "-Os",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-fshort-enums",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-fno-delete-null-pointer-checks",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/r1/src/vendor",
+        "-isystem",
+        "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
+        "-MD",
+        "-MF",
+        "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-battery-report-pure-c/r1/r1-application/r1__src__application__board__native_battery_frame.c.d",
+        "-c",
+        "/Users/kalani/Repo/evenRealities-openCFW/r1/src/application/board/native_battery_frame.c",
+        "-o",
+        "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-battery-report-pure-c/r1/r1-application/r1__src__application__board__native_battery_frame.c.o"
+      ],
+      "source_sha256": "3ffdf9bd674dbf6f0759f0f2d1876c3a68dd157109a71a3aa28c128b8a6d85fc",
+      "object_sha256": "fcf12de73a89add1b498aab91de704d7d89fec4025ea1b97acc262ae7f965cee",
+      "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-battery-report-pure-c/r1/r1-application/r1__src__application__board__native_battery_frame.c.o",
+      "strong": [
+        "r1_glasses_tag_frame_send"
+      ],
+      "weak": [],
+      "undefined": [
+        "r1_ble_tx_queue_dispatch_type0",
+        "r1_glasses_connection_handle_get"
+      ]
+    },
+    {
+      "source": "r1/src/application/board/native_battery_protocol.c",
+      "payload": "r1-application",
+      "role": "candidate",
+      "toolchain": "clang",
+      "link": true,
+      "expect": "compile",
+      "returncode": 0,
+      "argv": [
+        "/usr/bin/clang",
+        "--target=arm-none-eabi",
+        "-mcpu=cortex-m4",
+        "-mthumb",
+        "-munaligned-access",
+        "-mfpu=fpv4-sp-d16",
+        "-mfloat-abi=hard",
+        "-std=c11",
+        "-Os",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-fshort-enums",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-fno-delete-null-pointer-checks",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/r1/src/vendor",
+        "-isystem",
+        "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
+        "-MD",
+        "-MF",
+        "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-battery-report-pure-c/r1/r1-application/r1__src__application__board__native_battery_protocol.c.d",
+        "-c",
+        "/Users/kalani/Repo/evenRealities-openCFW/r1/src/application/board/native_battery_protocol.c",
+        "-o",
+        "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-battery-report-pure-c/r1/r1-application/r1__src__application__board__native_battery_protocol.c.o"
+      ],
+      "source_sha256": "f2bb6b08ae7c7f3f7432dcb00b5fc3f032ca7deb9ebb0dedeb69e51833331edd",
+      "object_sha256": "e4e26a696060ecde036d50cff910fa26fff0c427f243d5db694dd324b89e36ae",
+      "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-battery-report-pure-c/r1/r1-application/r1__src__application__board__native_battery_protocol.c.o",
+      "strong": [
+        "r1_battery_protocol_ring",
+        "r1_battery_protocol_sdk",
+        "r1_proto_report_battery_status"
+      ],
+      "weak": [],
+      "undefined": [
+        "nrf_log_frontend_std_2",
+        "r1_phone_cmd_send_op1",
+        "r1_structured_log_format",
+        "r1_structured_log_mode_get"
+      ]
+    },
+    {
+      "source": "r1/src/application/board/native_battery_voltage.c",
+      "payload": "r1-application",
+      "role": "candidate",
+      "toolchain": "clang",
+      "link": true,
+      "expect": "compile",
+      "returncode": 0,
+      "argv": [
+        "/usr/bin/clang",
+        "--target=arm-none-eabi",
+        "-mcpu=cortex-m4",
+        "-mthumb",
+        "-munaligned-access",
+        "-mfpu=fpv4-sp-d16",
+        "-mfloat-abi=hard",
+        "-std=c11",
+        "-Os",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-fshort-enums",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-fno-delete-null-pointer-checks",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/r1/src/vendor",
+        "-isystem",
+        "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
+        "-MD",
+        "-MF",
+        "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-battery-report-pure-c/r1/r1-application/r1__src__application__board__native_battery_voltage.c.d",
+        "-c",
+        "/Users/kalani/Repo/evenRealities-openCFW/r1/src/application/board/native_battery_voltage.c",
+        "-o",
+        "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-battery-report-pure-c/r1/r1-application/r1__src__application__board__native_battery_voltage.c.o"
+      ],
+      "source_sha256": "bd9578ec2da2476dbd1a3ef0f3356bd8b4acb4388b8479239b0dd6ef717b1074",
+      "object_sha256": "62899e0af62b5444b24976823c52e6f4d6a94edb7aa195b8b65fbf1a59585a91",
+      "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-battery-report-pure-c/r1/r1-application/r1__src__application__board__native_battery_voltage.c.o",
+      "strong": [
+        "r1_battery_runtime_service",
+        "r1_battery_voltage_get"
+      ],
+      "weak": [],
+      "undefined": [
+        "r1_advertising_configuration_byte_get",
+        "r1_battery_device_storage",
+        "r1_battery_runtime_update_service"
+      ]
+    }
+  ],
+  "rea": [
+    {
+      "evidence_id": "ev_94c6ce306071a211fdaa2bfc62b2f0f1bf50cb640cbd13a3d433a5b9b4230967",
+      "subject": {
+        "name": "stock.elf",
+        "digest": {
+          "sha256": "25b4a29af80ec8edab5bd861ba9b74a6e22eab29dc3d7a809a16869e8a140f04"
+        },
+        "local_path": "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-queue-reset-c/stock.elf",
+        "format": "elf",
+        "architecture": "arm"
+      },
+      "procedure": {
+        "address": "0x31fcc",
+        "name": "FUN_00031fcc",
+        "classification": {
+          "external": false,
+          "thunk": false,
+          "thunk_target": null,
+          "provenance": "ghidra-function-manager"
+        },
+        "body": {
+          "available": true,
+          "provenance": "ghidra-function-body-address-set",
+          "ranges": [
+            {
+              "start": "0x31fcc",
+              "end": "0x31fcf"
+            }
+          ],
+          "total_bytes": 4,
+          "span_bytes": 4,
+          "non_contiguous": false,
+          "contains_entry": true
+        },
+        "signature": "undefined FUN_00031fcc()",
+        "locals": []
+      },
+      "pseudocode": "\n/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */\n\nbyte FUN_00031fcc(void)\n\n{\n  undefined1 uVar1;\n  byte bVar2;\n  short sVar3;\n  int iVar4;\n  int iVar5;\n  int iVar6;\n  uint uVar7;\n  undefined4 in_r3;\n  uint in_fpscr;\n  float fVar8;\n  \n  iVar4 = thunk_FUN_00035272();\n  if (iVar4 == 0) {\n    if ((DAT_20016bb1 != '\\0') || (DAT_20016bb2 != '\\0')) {\n      FUN_00077240(8);\n    }\n  }\n  else if (((iVar4 == 1) && (DAT_20016bb1 == '\\0')) && (DAT_20016bb2 == '\\0')) {\n    thunk_FUN_000355bc();\n  }\n  iVar5 = FUN_0003dd0c(iVar4,&DAT_200068b4,&DAT_2000689c,&DAT_200068b8,&DAT_2000689e,in_r3);\n  if ((iVar5 != 0) && (_DAT_200068b4 == 0)) {\n    _DAT_200068b4 = FUN_0007d28c();\n    if (_DAT_200068b4 == 0) {\n      _DAT_200068b4 = 1;\n    }\n    _DAT_2000689c = _DAT_20016bae;\n    if (_DAT_20016bb5 == 0) {\n      _DAT_20016bb5 = _DAT_20016bae;\n    }\n    if ((DAT_20016bb4 == 0) && (DAT_20016bb4 = DAT_20016bb0, DAT_20016bb0 == 0)) {\n      DAT_20016bb4 = 1;\n    }\n    FUN_0004fe5c();\n  }\n  sVar3 = FUN_00091184();\n  iVar6 = FUN_0007bb7c();\n  if (iVar6 + 299U < 599) {\n    sVar3 = (short)iVar6 + sVar3;\n  }\n  if (iVar5 != 0) {\n    fVar8 = (float)VectorUnsignedToFloat((int)sVar3,(byte)(in_fpscr >> 0x16) & 3);\n    sVar3 = (ushort)(0.0 < fVar8 / 1.053) * (short)(int)(fVar8 / 1.053);\n  }\n  *(short *)((uint)(DAT_20016b84 >> 4) * 2 + 0x20016b96) = sVar3;\n  DAT_20016b84 = DAT_20016b84 & 0xf | ((DAT_20016b84 >> 4) + 1 & 7) << 4;\n  FUN_000277aa(0x20016b86,0x10);\n  DAT_20016b84 = DAT_20016b84 & 0xf0;\n  FUN_0003dda0();\n  FUN_0003db70(iVar4,&DAT_200068b4);\n  if (DAT_20016bb1 == '\\0') {\n    uVar1 = FUN_00050004(_DAT_20016bae,_DAT_200068b4);\n  }\n  else {\n    uVar1 = FUN_0004fe70();\n  }\n  *(undefined1 *)(DAT_20016b85 + 0x20016ba6) = uVar1;\n  DAT_20016b85 = DAT_20016b85 + 1 & 7;\n  uVar7 = FUN_0003d834();\n  if ((((DAT_20006891 == '\\0') || (iVar4 != 0)) || (DAT_20016bb0 == 0)) ||\n     ((uVar7 <= DAT_20016bb0 || (0x5e < uVar7)))) {\n    if (uVar7 == 0) {\n      uVar7 = 1;\n    }\n    DAT_20016bb0 = (byte)uVar7;\n  }\n  FUN_0003d9b8(0x20006895,_DAT_200068b4,_DAT_2000689c,_DAT_200068b8,_DAT_2000689e,iVar4);\n  FUN_0003d88c();\n  if (iVar4 == 1) {\n    FUN_0008345c(DAT_20016bb0,1);\n  }\n  else {\n    FUN_00050758(0);\n  }\n  if (DAT_20016bb0 != DAT_20006890) {\n    DAT_20006890 = DAT_20016bb0;\n    FUN_000913fc(DAT_20016bb0,iVar4 == 1);\n  }\n  bVar2 = DAT_20016bb0;\n  if (DAT_20016bb0 == 0) {\n    bVar2 = 1;\n  }\n  return bVar2;\n}\n\n",
+      "assembly": [
+        "0x31fcc: nop.w"
+      ],
+      "callees": []
+    },
+    {
+      "evidence_id": "ev_d7a5340c6d287ffb7d89ae5c3441c2aa3d857dcf20128704fea0bf1ed84cc6b5",
+      "subject": {
+        "name": "stock.elf",
+        "digest": {
+          "sha256": "25b4a29af80ec8edab5bd861ba9b74a6e22eab29dc3d7a809a16869e8a140f04"
+        },
+        "local_path": "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-queue-reset-c/stock.elf",
+        "format": "elf",
+        "architecture": "arm"
+      },
+      "procedure": {
+        "address": "0x913fc",
+        "name": "FUN_000913fc",
+        "classification": {
+          "external": false,
+          "thunk": false,
+          "thunk_target": null,
+          "provenance": "ghidra-function-manager"
+        },
+        "body": {
+          "available": true,
+          "provenance": "ghidra-function-body-address-set",
+          "ranges": [
+            {
+              "start": "0x913fc",
+              "end": "0x91439"
+            }
+          ],
+          "total_bytes": 62,
+          "span_bytes": 62,
+          "non_contiguous": false,
+          "contains_entry": true
+        },
+        "signature": "undefined FUN_000913fc()",
+        "locals": [
+          {
+            "description": "undefined4 local_10 @ Stack[-0x10]:4",
+            "provenance": "ghidra-function-database"
+          },
+          {
+            "description": "undefined4 local_14 @ Stack[-0x14]:4",
+            "provenance": "ghidra-function-database"
+          },
+          {
+            "description": "undefined4 local_18 @ Stack[-0x18]:4",
+            "provenance": "ghidra-function-database"
+          }
+        ]
+      },
+      "pseudocode": "\nvoid FUN_000913fc(undefined1 param_1,undefined1 param_2)\n\n{\n  int iVar1;\n  undefined4 uVar2;\n  undefined4 local_18;\n  undefined4 local_14;\n  undefined4 local_10;\n  \n  local_10 = 0;\n  local_18 = 0x8b0900;\n  local_14 = (uint)CONCAT11(param_2,param_1);\n  iVar1 = FUN_0004cb34();\n  if (iVar1 != 0xffff) {\n    uVar2 = FUN_0004cb34();\n    FUN_00034064(uVar2,&local_18,6);\n  }\n  return;\n}\n\n",
+      "assembly": [
+        "0x913fc: push {r1,r2,r3,r4,r5,lr}",
+        "0x913fe: movs r2, #0x0",
+        "0x91400: str r2, [sp,#0x0]",
+        "0x91402: movs r3, #0x8b",
+        "0x91404: strb.w r3, [sp,#0x2]",
+        "0x91408: str r2, [sp,#0x4]",
+        "0x9140a: movs r3, #0x9",
+        "0x9140c: strb.w r3, [sp,#0x1]",
+        "0x91410: strb.w r0, [sp,#0x4]",
+        "0x91414: str r2, [sp,#0x8]",
+        "0x91416: strb.w r2, [sp,#0x3]",
+        "0x9141a: strb.w r1, [sp,#0x5]",
+        "0x9141e: movs r4, #0x6",
+        "0x91420: bl 0x0004cb34",
+        "0x91424: sub.w r1, r0, #0xff00",
+        "0x91428: subs r1, #0xff",
+        "0x9142a: beq 0x00091438",
+        "0x9142c: bl 0x0004cb34",
+        "0x91430: mov r2, r4",
+        "0x91432: mov r1, sp",
+        "0x91434: bl 0x00034064",
+        "0x91438: pop {r1,r2,r3,r4,r5,pc}"
+      ],
+      "callees": [
+        {
+          "address": "0x34064",
+          "name": "FUN_00034064",
+          "classification": {
+            "external": false,
+            "thunk": false,
+            "thunk_target": null,
+            "provenance": "ghidra-function-manager"
+          },
+          "body": {
+            "available": true,
+            "provenance": "ghidra-function-body-address-set",
+            "ranges": [
+              {
+                "start": "0x34064",
+                "end": "0x3406f"
+              }
+            ],
+            "total_bytes": 12,
+            "span_bytes": 12,
+            "non_contiguous": false,
+            "contains_entry": true
+          }
+        },
+        {
+          "address": "0x4cb34",
+          "name": "FUN_0004cb34",
+          "classification": {
+            "external": false,
+            "thunk": false,
+            "thunk_target": null,
+            "provenance": "ghidra-function-manager"
+          },
+          "body": {
+            "available": true,
+            "provenance": "ghidra-function-body-address-set",
+            "ranges": [
+              {
+                "start": "0x4cb34",
+                "end": "0x4cb39"
+              }
+            ],
+            "total_bytes": 6,
+            "span_bytes": 6,
+            "non_contiguous": false,
+            "contains_entry": true
+          }
+        }
+      ]
+    },
+    {
+      "evidence_id": "ev_a789371aa9565297812b61324533b4e572477e30c042aeb651626e0ef02e3d1f",
+      "subject": {
+        "name": "stock.elf",
+        "digest": {
+          "sha256": "25b4a29af80ec8edab5bd861ba9b74a6e22eab29dc3d7a809a16869e8a140f04"
+        },
+        "local_path": "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-queue-reset-c/stock.elf",
+        "format": "elf",
+        "architecture": "arm"
+      },
+      "procedure": {
+        "address": "0x8345c",
+        "name": "FUN_0008345c",
+        "classification": {
+          "external": false,
+          "thunk": false,
+          "thunk_target": null,
+          "provenance": "ghidra-function-manager"
+        },
+        "body": {
+          "available": true,
+          "provenance": "ghidra-function-body-address-set",
+          "ranges": [
+            {
+              "start": "0x8345c",
+              "end": "0x834c7"
+            }
+          ],
+          "total_bytes": 108,
+          "span_bytes": 108,
+          "non_contiguous": false,
+          "contains_entry": true
+        },
+        "signature": "undefined FUN_0008345c()",
+        "locals": [
+          {
+            "description": "undefined4 local_10 @ Stack[-0x10]:4",
+            "provenance": "ghidra-function-database"
+          },
+          {
+            "description": "undefined4 local_14 @ Stack[-0x14]:4",
+            "provenance": "ghidra-function-database"
+          },
+          {
+            "description": "undefined4 local_18 @ Stack[-0x18]:4",
+            "provenance": "ghidra-function-database"
+          }
+        ]
+      },
+      "pseudocode": "\nvoid FUN_0008345c(undefined4 param_1,uint param_2)\n\n{\n  undefined1 uVar1;\n  uint uVar2;\n  int iVar3;\n  undefined4 local_14;\n  undefined4 local_10;\n  \n  local_10 = 0;\n  if (param_2 == 0) {\n    uVar1 = 2;\n  }\n  else {\n    uVar1 = 1;\n  }\n  local_14 = (uint)CONCAT11(uVar1,(char)param_1);\n  uVar2 = FUN_000914ec();\n  if ((uVar2 & 1) == 0) {\n    iVar3 = FUN_000914ec();\n    if (-1 < iVar3 << 0x1d) goto LAB_0008349a;\n  }\n  param_2 = local_14 >> 8 & 0xff;\n  FUN_00091638(0xc800000,\"[RING]proto report battery status, percent: %d, charge status: %d\",\n               \"[RING]proto report battery status, percent: %d, charge status: %d\",param_1,param_2);\nLAB_0008349a:\n  iVar3 = FUN_000914ec();\n  if (iVar3 << 0x1e < 0) {\n    FUN_000799d6(0x1c0003,\"proto report battery status, percent: %d, charge status: %d\",param_1,\n                 local_14._1_1_,param_2);\n  }\n  FUN_00083896(&local_14,1,0);\n  return;\n}\n\n",
+      "assembly": [
+        "0x8345c: push {r1,r2,r3,r4,r5,lr}",
+        "0x8345e: mov r4, r0",
+        "0x83460: movs r0, #0x0",
+        "0x83462: str r0, [sp,#0x4]",
+        "0x83464: str r0, [sp,#0x8]",
+        "0x83466: strb.w r4, [sp,#0x4]",
+        "0x8346a: cbz r1, 0x00083470",
+        "0x8346c: movs r0, #0x1",
+        "0x8346e: b 0x00083472",
+        "0x83470: movs r0, #0x2",
+        "0x83472: strb.w r0, [sp,#0x5]",
+        "0x83476: bl 0x000914ec",
+        "0x8347a: lsls r0, r0, #0x1f",
+        "0x8347c: bne 0x00083486",
+        "0x8347e: bl 0x000914ec",
+        "0x83482: lsls r0, r0, #0x1d",
+        "0x83484: bpl 0x0008349a",
+        "0x83486: ldrb.w r0, [sp,#0x5]",
+        "0x8348a: ldr r2, [0x000834c8]",
+        "0x8348c: str r0, [sp,#0x0]",
+        "0x8348e: mov r3, r4",
+        "0x83490: mov r1, r2",
+        "0x83492: mov.w r0, #0xc800000",
+        "0x83496: bl 0x00091638",
+        "0x8349a: bl 0x000914ec",
+        "0x8349e: lsls r0, r0, #0x1e",
+        "0x834a0: bpl 0x000834bc",
+        "0x834a2: ldr r0, [0x000834cc]",
+        "0x834a4: ldr r1, [0x000834d0]",
+        "0x834a6: ldrb.w r3, [sp,#0x5]",
+        "0x834aa: subs r0, r0, r1",
+        "0x834ac: lsrs r0, r0, #0x3",
+        "0x834ae: movs r1, #0x3",
+        "0x834b0: add.w r0, r1, r0, lsl #0x10",
+        "0x834b4: mov r2, r4",
+        "0x834b6: adr r1, [0x834d4]",
+        "0x834b8: bl 0x000799d6",
+        "0x834bc: movs r2, #0x0",
+        "0x834be: movs r1, #0x1",
+        "0x834c0: add r0, sp,#0x4",
+        "0x834c2: bl 0x00083896",
+        "0x834c6: pop {r1,r2,r3,r4,r5,pc}"
+      ],
+      "callees": [
+        {
+          "address": "0x799d6",
+          "name": "FUN_000799d6",
+          "classification": {
+            "external": false,
+            "thunk": false,
+            "thunk_target": null,
+            "provenance": "ghidra-function-manager"
+          },
+          "body": {
+            "available": true,
+            "provenance": "ghidra-function-body-address-set",
+            "ranges": [
+              {
+                "start": "0x799d6",
+                "end": "0x799e5"
+              }
+            ],
+            "total_bytes": 16,
+            "span_bytes": 16,
+            "non_contiguous": false,
+            "contains_entry": true
+          }
+        },
+        {
+          "address": "0x83896",
+          "name": "FUN_00083896",
+          "classification": {
+            "external": false,
+            "thunk": false,
+            "thunk_target": null,
+            "provenance": "ghidra-function-manager"
+          },
+          "body": {
+            "available": true,
+            "provenance": "ghidra-function-body-address-set",
+            "ranges": [
+              {
+                "start": "0x83896",
+                "end": "0x838b9"
+              }
+            ],
+            "total_bytes": 36,
+            "span_bytes": 36,
+            "non_contiguous": false,
+            "contains_entry": true
+          }
+        },
+        {
+          "address": "0x914ec",
+          "name": "FUN_000914ec",
+          "classification": {
+            "external": false,
+            "thunk": false,
+            "thunk_target": null,
+            "provenance": "ghidra-function-manager"
+          },
+          "body": {
+            "available": true,
+            "provenance": "ghidra-function-body-address-set",
+            "ranges": [
+              {
+                "start": "0x914ec",
+                "end": "0x914f1"
+              }
+            ],
+            "total_bytes": 6,
+            "span_bytes": 6,
+            "non_contiguous": false,
+            "contains_entry": true
+          }
+        },
+        {
+          "address": "0x91638",
+          "name": "FUN_00091638",
+          "classification": {
+            "external": false,
+            "thunk": false,
+            "thunk_target": null,
+            "provenance": "ghidra-function-manager"
+          },
+          "body": {
+            "available": true,
+            "provenance": "ghidra-function-body-address-set",
+            "ranges": [
+              {
+                "start": "0x91638",
+                "end": "0x916c1"
+              }
+            ],
+            "total_bytes": 138,
+            "span_bytes": 138,
+            "non_contiguous": false,
+            "contains_entry": true
+          }
+        }
+      ]
+    },
+    {
+      "evidence_id": "ev_32cee49c468851e95950c9064fe097c38500f301f14cc0ed96e592c229b25a7c",
+      "subject": {
+        "name": "stock.elf",
+        "digest": {
+          "sha256": "25b4a29af80ec8edab5bd861ba9b74a6e22eab29dc3d7a809a16869e8a140f04"
+        },
+        "local_path": "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-queue-reset-c/stock.elf",
+        "format": "elf",
+        "architecture": "arm"
+      },
+      "assembly": [
+        "0x91290: push {r4,lr}",
+        "0x91292: bl 0x0007ba24",
+        "0x91296: cmp r0, #0x55",
+        "0x91298: bne 0x0009129e",
+        "0x9129a: bl 0x00031fcc",
+        "0x9129e: ldr r0, [0x000912a4]",
+        "0x912a0: ldrh r0, [r0,#0x2a]",
+        "0x912a2: pop {r4,pc}"
+      ],
+      "pseudocode": "\n/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */\n\nundefined2 FUN_00091290(void)\n\n{\n  int iVar1;\n  \n  iVar1 = FUN_0007ba24();\n  if (iVar1 == 0x55) {\n    FUN_00031fcc();\n  }\n  return _DAT_20016bae;\n}\n\n"
+    }
+  ],
+  "direct": {
+    "counts": {
+      "voltage": 162,
+      "service": 9,
+      "frame": 504,
+      "protocol": 756
+    },
+    "paired_cases": 1431,
+    "digest": "4cda7c40c6d088b317f3f5bbd4515d88321b91bd823018663546fa5c1507ceeb",
+    "ordinary_C_ABI": true,
+    "modeled_providers": [
+      "nrf_log_frontend_std_2",
+      "r1_advertising_configuration_byte_get",
+      "r1_battery_runtime_update_service",
+      "r1_ble_tx_queue_dispatch_type0",
+      "r1_glasses_connection_handle_get",
+      "r1_phone_cmd_send_op1",
+      "r1_structured_log_format",
+      "r1_structured_log_mode_get"
+    ],
+    "limits": [
+      "Incidental scratch registers and private provider stack aliases excluded",
+      "No radio, full runtime or physical device timing proof"
+    ]
+  },
+  "negative": {
+    "skip-refresh": {
+      "rejected": true,
+      "diagnostic": "[0,0x54,0x55,0x56,0x155,0xffffffff],[0,3350,65535],[1,3200,65535],[0,1,0xffffffff]):check('voltage',config=config,voltage=voltage,updated=updated,result=result)\n                                                                                                                                               ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-battery-report-pure-c/verify.py\", line 48, in check\n    x=a(root,**kw);y=b(root,**kw);assert x==y,(root,kw,x,y);counts[root]=counts.get(root,0)+1;digest.update(json.dumps([root,kw,x]).encode())\n                                         ^^^^\nAssertionError: ('voltage', {'config': 85, 'voltage': 0, 'updated': 1, 'result': 0}, (1, [('r1_advertising_configuration_byte_get', []), ('r1_battery_runtime_update_service', [])], '0000000000000000000000000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000'), (0, [('r1_advertising_configuration_byte_get', [])], '0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000'))\n"
+    },
+    "stale-handle": {
+      "rejected": true,
+      "diagnostic": "                                                                                                                                                                         ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-battery-report-pure-c/verify.py\", line 48, in check\n    x=a(root,**kw);y=b(root,**kw);assert x==y,(root,kw,x,y);counts[root]=counts.get(root,0)+1;digest.update(json.dumps([root,kw,x]).encode())\n                                         ^^^^\nAssertionError: ('frame', {'level': 0, 'charge': 0, 'handles': (0, 65535), 'result': 0}, (0, [('r1_glasses_connection_handle_get', []), ('r1_glasses_connection_handle_get', []), ('r1_ble_tx_queue_dispatch_type0', [65535, '00098b000000000000000000', 6])], '0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000'), (0, [('r1_glasses_connection_handle_get', []), ('r1_ble_tx_queue_dispatch_type0', [0, '00098b000000000000000000', 6])], '0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000'))\n"
+    },
+    "wrong-wire-state": {
+      "rejected": true,
+      "diagnostic": "                                                                                                                      ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-battery-report-pure-c/verify.py\", line 48, in check\n    x=a(root,**kw);y=b(root,**kw);assert x==y,(root,kw,x,y);counts[root]=counts.get(root,0)+1;digest.update(json.dumps([root,kw,x]).encode())\n                                         ^^^^\nAssertionError: ('protocol', {'level': 0, 'charge': 0, 'modes': (0, 0, 0), 'result': 0}, (0, [('r1_structured_log_mode_get', []), ('r1_structured_log_mode_get', []), ('r1_structured_log_mode_get', []), ('r1_phone_cmd_send_op1', ['0002000000000000', 1, 0])], '0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000'), (0, [('r1_structured_log_mode_get', []), ('r1_structured_log_mode_get', []), ('r1_structured_log_mode_get', []), ('r1_phone_cmd_send_op1', ['0001000000000000', 1, 0])], '0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000'))\n"
+    },
+    "wrong-wire-length": {
+      "rejected": true,
+      "diagnostic": "                                                                                                                           ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-battery-report-pure-c/verify.py\", line 48, in check\n    x=a(root,**kw);y=b(root,**kw);assert x==y,(root,kw,x,y);counts[root]=counts.get(root,0)+1;digest.update(json.dumps([root,kw,x]).encode())\n                                         ^^^^\nAssertionError: ('frame', {'level': 0, 'charge': 0, 'handles': (0, 65535), 'result': 0}, (0, [('r1_glasses_connection_handle_get', []), ('r1_glasses_connection_handle_get', []), ('r1_ble_tx_queue_dispatch_type0', [65535, '00098b000000000000000000', 6])], '0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000'), (0, [('r1_glasses_connection_handle_get', []), ('r1_glasses_connection_handle_get', []), ('r1_ble_tx_queue_dispatch_type0', [65535, '00098b000000000000000000', 5])], '0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000'))\n"
+    }
+  },
+  "audit": {
+    "changed": [
+      "r1/src/application/board/native_battery_frame.c",
+      "r1/src/application/board/native_battery_protocol.c",
+      "r1/src/application/board/native_battery_voltage.c"
+    ],
+    "unchanged_objects": 726,
+    "strong_exports_unchanged": true,
+    "imports_unchanged": true,
+    "ordinary_C": true
+  },
+  "limits": [
+    "NOP layout padding and incidental scratch R1-R3 restoration deliberately retired",
+    "Configuration/runtime-update/handle/log/dispatch providers are modeled",
+    "Not a complete firmware link or physical hardware/radio proof"
+  ]
+}

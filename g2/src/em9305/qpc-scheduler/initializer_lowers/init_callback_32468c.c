@@ -1,10 +1,10 @@
+/* Stock 0x32468c: tail call wsf_queue_remove(queue at SRAM 0x805194).
+ * Converted from the lowered ARC asm; compiled with the g2-em9305-1 profile (-Os) and the
+ * disassembly diffed against the stock lowering: identical, or differing only in delay-slot
+ * scheduling / a redundant zero-extension / absolute-address ld/st forms (reviewed by hand). */
 #include <stdint.h>
-
-/* Native 0x32468c..0x324696: load fixed queue 0x805194 into R0,
- * then unconditional branch to the already selected 0x314134 remover. */
-extern uintptr_t opencfw_em9305_wsf_queue_remove(uintptr_t);
-uint32_t opencfw_em9305_init_callback_32468c(uint32_t ignored)
-{
-    (void)ignored;
-    return (uint32_t)opencfw_em9305_wsf_queue_remove(0x805194u);
-}
+#define B8(a)  (*(volatile uint8_t  *)(uintptr_t)(a))
+#define W32(a) (*(volatile uint32_t *)(uintptr_t)(a))
+extern uint32_t opencfw_em9305_wsf_queue_remove(uint32_t);
+uint32_t opencfw_em9305_init_callback_32468c(void)
+{ return opencfw_em9305_wsf_queue_remove(0x805194u); }

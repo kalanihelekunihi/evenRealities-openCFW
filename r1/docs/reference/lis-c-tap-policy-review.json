@@ -1,0 +1,188 @@
+{
+  "policy": {
+    "passed": 49152,
+    "executions": 98304,
+    "source_report": "build/sources-goal-r1-lis-tap-boundaries/report.json",
+    "live_mode_sequences": 512,
+    "scratch_seed_preserved": true,
+    "helper_errors_ignored": true,
+    "remaining_bridge_bytes": {
+      "r1_lis2dw12_aux20_boundary": 10,
+      "r1_lis2dw12_aux16_boundary": 10
+    },
+    "source_sizes": {
+      "tap_enable_body": 140,
+      "tap_disable_body": 108,
+      "tap_log": 60
+    },
+    "limitations": [
+      "Sensor route/setter and logging helpers modeled; exact helper order, arguments, strings and dynamic gates compared",
+      "Native scratch word retained through 10-byte bridge; C kernel changes private stack depth",
+      "Caller-clobbered registers other than stock-restored R3 and APSR flags excluded",
+      "No byte qualification or physical sensor/IRQ proof"
+    ]
+  },
+  "route_get": {
+    "cases": 2096,
+    "passed": 2096,
+    "failures": [],
+    "callback_stack_depth_pairs": [
+      [
+        -8,
+        0
+      ]
+    ]
+  },
+  "route_set": {
+    "cases": 1728,
+    "passed": 1728,
+    "failures": [],
+    "stock_entry": "0x756da",
+    "stock_body_bytes": 128,
+    "bridge_bytes": 10,
+    "c_body_bytes": 78,
+    "callback_stack_depth_pairs": [
+      [
+        [
+          -24
+        ],
+        [
+          -40
+        ]
+      ],
+      [
+        [
+          -24,
+          -24
+        ],
+        [
+          -40,
+          -40
+        ]
+      ],
+      [
+        [
+          -24,
+          -24,
+          -24
+        ],
+        [
+          -40,
+          -40,
+          -40
+        ]
+      ],
+      [
+        [
+          -24,
+          -24,
+          -24,
+          -24
+        ],
+        [
+          -40,
+          -40,
+          -40,
+          -24
+        ]
+      ]
+    ],
+    "unchanged_functions": [
+      "r1_lis_int1_route_body",
+      "lis2dw12_pin_int1_route_set"
+    ],
+    "integrated_sources": [
+      "r1/src/application/runtime/native_lis_aux.c",
+      "r1/src/application/board/sensor-kernels/lis-aux/st-route-byte.c",
+      "r1/src/application/runtime/native_lis_fifo.c",
+      "r1/src/application/runtime/native_lis_registers.c"
+    ],
+    "report": "build/sources-goal-r1-lis-tap-boundaries/report.json",
+    "report_sha256": "4d6eea176acf7851dec42a09e02c53d7ea9a2feeefaffd0b8c5fc5833d1732e2",
+    "source_sha256": "84f6163a701d209c8da3629e65b9116a55a9abaaa774f56e97fa67db49a62ca1",
+    "manifest_sha256": "6fa37d8afe1e50453bc47962bcfe463cd5163fb4f1b3d2a8033b02adbb77c9d3",
+    "stock_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a"
+  },
+  "negative_controls": {
+    "cached-mode": {
+      "rejected": true,
+      "case": [
+        0,
+        305419896,
+        0,
+        0,
+        [
+          0,
+          4,
+          2
+        ]
+      ],
+      "stderr": "arm-none-eabi-ld: warning: (lis2dw12_tap_detection_on_z_set): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-lis-tap/cached-mode.o\narm-none-eabi-ld: warning: (lis2dw12_tap_detection_on_y_set): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-lis-tap/cached-mode.o\narm-none-eabi-ld: warning: (lis2dw12_tap_detection_on_x_set): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-lis-tap/cached-mode.o\narm-none-eabi-ld: warning: (lis2dw12_tap_mode_set): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-lis-tap/cached-mode.o\narm-none-eabi-ld: warning: (lis2dw12_full_scale_set): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-lis-tap/cached-mode.o\narm-none-eabi-ld: warning: (lis2dw12_data_rate_set): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-lis-tap/cached-mode.o\narm-none-eabi-ld: warning: (r1_structured_log_mode_get): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-lis-tap/cached-mode.o\narm-none-eabi-ld: warning: (r1_structured_log_format): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-lis-tap/cached-mode.o\narm-none-eabi-ld: warning: (nrf_log_frontend_std_0): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-lis-tap/cached-mode.o\narm-none-eabi-ld: warning: (lis2dw12_tap_detection_on_z_set): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-lis-tap/cached-mode.o\narm-none-eabi-ld: warning: (lis2dw12_tap_detection_on_y_set): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-lis-tap/cached-mode.o\narm-none-eabi-ld: warning: (lis2dw12_tap_detection_on_x_set): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-lis-tap/cached-mode.o\narm-none-eabi-ld: warning: (lis2dw12_tap_threshold_x_set): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-lis-tap/cached-mode.o\narm-none-eabi-ld: warning: (lis2dw12_tap_threshold_y_set): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-lis-tap/cached-mode.o\narm-none-eabi-ld: warning: (lis2dw12_tap_threshold_z_set): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-lis-tap/cached-mode.o\narm-none-eabi-ld: warning: (lis2dw12_tap_dur_set): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-lis-tap/cached-mode.o\narm-none-eabi-ld: warning: (lis2dw12_tap_quiet_set): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-lis-tap/cached-mode.o\narm-none-eabi-ld: warning: (lis2dw12_tap_shock_set): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-lis-tap/cached-mode.o\narm-none-eabi-ld: warning: (lis2dw12_tap_mode_set): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-lis-tap/cached-mode.o\nTraceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-lis-tap/reject-cached-mode.py\", line 66, in <module>\n    for c in cases:assert a(*c)==b(*c),c;count+=1\n                          ^^^^^^^^^^^^\nAssertionError: (0, 305419896, 0, 0, (0, 4, 2))\n"
+    },
+    "zero-route": {
+      "rejected": true,
+      "case": [
+        0,
+        305419896,
+        0,
+        0,
+        [
+          0,
+          0,
+          0
+        ]
+      ],
+      "stderr": "arm-none-eabi-ld: warning: (lis2dw12_tap_detection_on_z_set): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-lis-tap/zero-route.o\narm-none-eabi-ld: warning: (lis2dw12_tap_detection_on_y_set): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-lis-tap/zero-route.o\narm-none-eabi-ld: warning: (lis2dw12_tap_detection_on_x_set): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-lis-tap/zero-route.o\narm-none-eabi-ld: warning: (lis2dw12_tap_mode_set): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-lis-tap/zero-route.o\narm-none-eabi-ld: warning: (lis2dw12_full_scale_set): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-lis-tap/zero-route.o\narm-none-eabi-ld: warning: (lis2dw12_data_rate_set): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-lis-tap/zero-route.o\narm-none-eabi-ld: warning: (r1_structured_log_mode_get): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-lis-tap/zero-route.o\narm-none-eabi-ld: warning: (r1_structured_log_mode_get): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-lis-tap/zero-route.o\narm-none-eabi-ld: warning: (r1_structured_log_format): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-lis-tap/zero-route.o\narm-none-eabi-ld: warning: (r1_structured_log_mode_get): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-lis-tap/zero-route.o\narm-none-eabi-ld: warning: (nrf_log_frontend_std_0): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-lis-tap/zero-route.o\narm-none-eabi-ld: warning: (lis2dw12_tap_detection_on_z_set): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-lis-tap/zero-route.o\narm-none-eabi-ld: warning: (lis2dw12_tap_detection_on_y_set): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-lis-tap/zero-route.o\narm-none-eabi-ld: warning: (lis2dw12_tap_detection_on_x_set): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-lis-tap/zero-route.o\narm-none-eabi-ld: warning: (lis2dw12_tap_threshold_x_set): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-lis-tap/zero-route.o\narm-none-eabi-ld: warning: (lis2dw12_tap_threshold_y_set): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-lis-tap/zero-route.o\narm-none-eabi-ld: warning: (lis2dw12_tap_threshold_z_set): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-lis-tap/zero-route.o\narm-none-eabi-ld: warning: (lis2dw12_tap_dur_set): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-lis-tap/zero-route.o\narm-none-eabi-ld: warning: (lis2dw12_tap_quiet_set): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-lis-tap/zero-route.o\narm-none-eabi-ld: warning: (lis2dw12_tap_shock_set): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-lis-tap/zero-route.o\narm-none-eabi-ld: warning: (lis2dw12_tap_mode_set): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-lis-tap/zero-route.o\nTraceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-lis-tap/reject-zero-route.py\", line 66, in <module>\n    for c in cases:assert a(*c)==b(*c),c;count+=1\n                                 ~^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-lis-tap/reject-zero-route.py\", line 62, in run\n    expected[0]=routebyte;expected[1]=0x66;assert frame==bytes(expected)\n                                                  ^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    "abort-error": {
+      "rejected": true,
+      "case": [
+        0,
+        305419896,
+        0,
+        1,
+        [
+          0,
+          0,
+          0
+        ]
+      ],
+      "stderr": "arm-none-eabi-ld: warning: (lis2dw12_tap_detection_on_z_set): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-lis-tap/abort-error.o\narm-none-eabi-ld: warning: (lis2dw12_tap_detection_on_y_set): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-lis-tap/abort-error.o\narm-none-eabi-ld: warning: (lis2dw12_tap_detection_on_x_set): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-lis-tap/abort-error.o\narm-none-eabi-ld: warning: (lis2dw12_tap_mode_set): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-lis-tap/abort-error.o\narm-none-eabi-ld: warning: (lis2dw12_full_scale_set): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-lis-tap/abort-error.o\narm-none-eabi-ld: warning: (lis2dw12_data_rate_set): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-lis-tap/abort-error.o\narm-none-eabi-ld: warning: (r1_structured_log_mode_get): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-lis-tap/abort-error.o\narm-none-eabi-ld: warning: (r1_structured_log_mode_get): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-lis-tap/abort-error.o\narm-none-eabi-ld: warning: (r1_structured_log_format): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-lis-tap/abort-error.o\narm-none-eabi-ld: warning: (r1_structured_log_mode_get): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-lis-tap/abort-error.o\narm-none-eabi-ld: warning: (nrf_log_frontend_std_0): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-lis-tap/abort-error.o\narm-none-eabi-ld: warning: (lis2dw12_tap_detection_on_z_set): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-lis-tap/abort-error.o\narm-none-eabi-ld: warning: (lis2dw12_tap_detection_on_y_set): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-lis-tap/abort-error.o\narm-none-eabi-ld: warning: (lis2dw12_tap_detection_on_x_set): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-lis-tap/abort-error.o\narm-none-eabi-ld: warning: (lis2dw12_tap_threshold_x_set): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-lis-tap/abort-error.o\narm-none-eabi-ld: warning: (lis2dw12_tap_threshold_y_set): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-lis-tap/abort-error.o\narm-none-eabi-ld: warning: (lis2dw12_tap_threshold_z_set): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-lis-tap/abort-error.o\narm-none-eabi-ld: warning: (lis2dw12_tap_dur_set): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-lis-tap/abort-error.o\narm-none-eabi-ld: warning: (lis2dw12_tap_quiet_set): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-lis-tap/abort-error.o\narm-none-eabi-ld: warning: (lis2dw12_tap_shock_set): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-lis-tap/abort-error.o\narm-none-eabi-ld: warning: (lis2dw12_tap_mode_set): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-lis-tap/abort-error.o\nTraceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-lis-tap/reject-abort-error.py\", line 66, in <module>\n    for c in cases:assert a(*c)==b(*c),c;count+=1\n                                 ~^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-lis-tap/reject-abort-error.py\", line 54, in run\n    assert u.reg_read(UC_ARM_REG_PC)==STOP and u.reg_read(UC_ARM_REG_SP)==SP and u.reg_read(UC_ARM_REG_R0)==1\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    }
+  },
+  "normal_build": {
+    "units": 573,
+    "application_imports": 197,
+    "bootloader_imports": 34,
+    "failures": 0,
+    "duplicate_strong_symbols": 0
+  },
+  "source_plan_unchanged": true,
+  "source_built_bytes": 3827,
+  "binary_pull_through_bytes": 642333,
+  "new_byte_qualification": false,
+  "source_completeness_proven": false,
+  "evidence": {
+    "build/sources-goal-r1-lis-tap-boundaries/report.json": "4d6eea176acf7851dec42a09e02c53d7ea9a2feeefaffd0b8c5fc5833d1732e2",
+    "tools/build/source-plan.json": "eb04e4bf2c082d88801a99f173e0a4b58eba788ec05539d87b5ed02081002423",
+    "r1/src/application/runtime/native_lis_aux.c": "84f6163a701d209c8da3629e65b9116a55a9abaaa774f56e97fa67db49a62ca1",
+    "r1/src/sources.json": "6fa37d8afe1e50453bc47962bcfe463cd5163fb4f1b3d2a8033b02adbb77c9d3",
+    "r1/blobs/official/r1-2.2.6.0009/application.bin": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "build/hybrid-goal-r1-lis-tap/build-report.json": "3295f2c055856284922d8bd6ef29fc8c907b4b1ff56d3eef9507c61a0e56c409",
+    "build/goal-r1-lis-tap/stock.elf": "4cc5c5ca415403b95c742abc4a8c9d96f7dbb23155a79524fe32806849909721",
+    "build/goal-r1-lis-tap/stock.s": "e9269211d9b5fa693346055946550155b3b33e4db6e154a45831b294a9dd0613",
+    "build/goal-r1-lis-tap/before.c": "f26cd85e5c9f735b99fa78a0df60dee382408ad6f848c1ebfcb8e81751d9791b",
+    "build/goal-r1-lis-tap/REA-0x751b8.json": "5e3fbde72847c9d4fb476cadfb0a66bef00093bb6ddcab955697637846fcd2ff",
+    "build/goal-r1-lis-tap/REA-0x75290.json": "f6e5e8f82fe1ed602611f87b9eea270788d9aef9df9b103bdc21224608617299",
+    "build/goal-r1-lis-tap/REA.snapshot.json": "b2d7883f967e69b477649a841bca6923cedbff14f95e3e81bd0fcaf1fcbf2cf1",
+    "build/goal-r1-lis-tap/verify.py": "3aad064d5f6b08fa57b12d335da6c2077fe488d1f116326d18023377abfa3653",
+    "build/goal-r1-lis-tap/source.elf": "26da9e5046cceb5708c9b6bb8fb01cbcecbab364d9042505615a0ec7b5b15db2",
+    "build/goal-r1-lis-tap/results.json": "73b6b1bf19e7564abed8b3e58b0b718dd5ab1099f7edcdb7bef8e9f380cdc2c5",
+    "build/goal-r1-lis-tap/negative.py": "bc185186edf06ca573e813ac6864eff745ec9e1dc079898f0c3a6509eecc1c40",
+    "build/goal-r1-lis-tap/negative-results.json": "3918d367d1249f384241e9d2f6088ab0d0bc5f7b7d1db7a329184540563ca4b9",
+    "build/goal-r1-lis-tap/route/verify.py": "96085efc717991339a4185a30faa62a2ba72eb6fbf18931be925472a32d7b5c0",
+    "build/goal-r1-lis-tap/route/results.json": "7110c2b7c8d97d0a96385dfc88f70dc89dd10a1c107358e1bfa08428d784dfb3",
+    "build/goal-r1-lis-tap/get/verify.py": "d50c97cf5cae751c60e4120fa994a529c3f6f6aed2be2abedfe5e683c2bdfc0c",
+    "build/goal-r1-lis-tap/get/results.json": "1f4999d15f9ffb1c2990dea1749cac31e551cb5213530326b5b585eb9569b386"
+  }
+}

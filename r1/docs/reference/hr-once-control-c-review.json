@@ -1,0 +1,107 @@
+{
+  "schema_version": 1,
+  "entries": {
+    "0x497cc": "r1_hr_once_measurement_control"
+  },
+  "report": "build/sources-goal-r1-hr-control-c/report.json",
+  "report_sha256": "5b127c74e288d04a2958e4ac53ec3083886e38cbc91d181fc42c45f19ec87b24",
+  "unit": {
+    "source": "r1/src/application/runtime/native_health_hr_control.c",
+    "source_sha256": "ee67f84c39cb0177f3b216546053ec8f7929bcb09ead4857537094bc3d069807",
+    "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-hr-control-c/r1/r1-application/r1__src__application__runtime__native_health_hr_control.c.o",
+    "object_sha256": "6c2efa5d079655d11b035e70f5d68af8d9c22be981b7edc42f7d0b529efe8b98"
+  },
+  "behavior": {
+    "pairs": 1512,
+    "digest": "e1de73cdd9ef1d68094f39528ba12936c0f5b7abc1ab7eb24c969a488612a7cd",
+    "actual_C": [
+      "HR once control",
+      "shared HR streams and HRV timing/session owners",
+      "HR/HRV release and teardown helpers"
+    ],
+    "actual_adapter": "existing native event callback including its assembly gate/logging",
+    "modeled_boundaries": [
+      "r1_sensor_stream_register_by_name",
+      "r1_sensor_stream_unregister_by_name",
+      "r1_stream_timer_release",
+      "__aeabi_memclr",
+      "r1_structured_log_mode_get",
+      "r1_structured_log_format",
+      "nrf_log_frontend_std_1"
+    ],
+    "limits": [
+      "Registered producer/result callbacks checked by identity, not invoked",
+      "No physical streams/timer scheduling or asynchronous IRQ/concurrency",
+      "Stream registry, logs and memory clear modeled; private stack/caller-clobbered registers excluded"
+    ]
+  },
+  "negative_controls": {
+    "lost-existing-hr-guard": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "encode());pairs+=1\n                                              ^^^^\nAssertionError: ({'entry': 'control', 'value': 1, 'length': 0, 'hr': 291, 'hrv': 0, 'hr_result': 0, 'hrv_result': 0, 'modes': (0,)}, ['trace', 'streams'], [], [('register', ['hrv', 'algo', 'hrv callback', 1, 1], '0401020300000000330300004404000055050000', '23010000660600007707000088080000'), ('register', ['hr', 'once', 'hr once callback', 1, 1], '0401020300000000330300004404000055050000', '23010000660600007707000088080000')])\n"
+    },
+    "wrong-hr-handle-index": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "k', 1, 1], '0401020300000000330300004404000055050000', '00000000660600007707000088080000'), ('register', ['hr', 'once', 'hr once callback', 1, 1], '0401020300000000330300004404000055050000', '00000000660600007707000088080000')], [('register', ['hrv', 'algo', 'hrv callback', 1, 1], '0401020300000000330300004404000055050000', '00000000660600007707000088080000'), ('register', ['hr', 'once', 'hr once callback', 1, 1], '0401020300000000330300004404000055050000', '00000000660600007707000088080000')])\n"
+    },
+    "wrong-hrv-failure-gate": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": ", 'length': 0, 'hr': 0, 'hrv': 0, 'hr_result': 0, 'hrv_result': 0, 'modes': (0,)}, ['trace'], [('register', ['hrv', 'algo', 'hrv callback', 1, 1], '0401020300000000330300004404000055050000', '00000000660600007707000088080000'), ('register', ['hr', 'once', 'hr once callback', 1, 1], '0401020300000000330300004404000055050000', '00000000660600007707000088080000')], [('register', ['hrv', 'algo', 'hrv callback', 1, 1], '0401020300000000330300004404000055050000', '00000000660600007707000088080000')])\n"
+    },
+    "wrong-producer-callback": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "ne 1063, in __hook_code_cb\n    callback(uc, address, size, user_data)\n    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-hr-mode-c/verify.py\", line 37, in hook\n    assert (name=='hrv' and user=='algo' and r2 in [0x4a24d,0x1030081]) or (name=='hr' and user=='once' and r2 in [0x499f1,0x1030085])\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    "wrong-unregister-name": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "=b[k]],a['trace'],b['trace']);digest.update(json.dumps([kw,a]).encode());pairs+=1\n                                              ^^^^\nAssertionError: ({'entry': 'control', 'value': 0, 'length': 0, 'hr': 291, 'hrv': 0, 'hr_result': 0, 'hrv_result': 0, 'modes': (0,)}, ['trace'], [('unregister', ['hr', 291], '0401020300000000330300004404000055050000', '23010000660600007707000088080000')], [('unregister', ['hrv', 291], '0401020300000000330300004404000055050000', '23010000660600007707000088080000')])\n"
+    },
+    "wrong-shared-hrv-clear": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "[k]],a['trace'],b['trace']);digest.update(json.dumps([kw,a]).encode());pairs+=1\n                                              ^^^^\nAssertionError: ({'entry': 'control', 'value': 0, 'length': 0, 'hr': 291, 'hrv': 1110, 'hr_result': 0, 'hrv_result': 0, 'modes': (0,)}, ['state'], [('unregister', ['hr', 291], '0401020356040000330300004404000055050000', '23010000660600007707000088080000')], [('unregister', ['hr', 291], '0401020356040000330300004404000055050000', '23010000660600007707000088080000')])\n"
+    },
+    "wrong-direct-length-gate": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "\", line 62, in pair\n    a=run(False,**kw);b=run(True,**kw);assert a==b,(kw,[k for k in a if a[k]!=b[k]],a['trace'],b['trace']);digest.update(json.dumps([kw,a]).encode());pairs+=1\n                                              ^^^^\nAssertionError: ({'entry': 'control', 'value': 0, 'length': 0, 'hr': 291, 'hrv': 0, 'hr_result': 0, 'hrv_result': 0, 'modes': (0,)}, ['trace', 'streams'], [('unregister', ['hr', 291], '0401020300000000330300004404000055050000', '23010000660600007707000088080000')], [])\n"
+    },
+    "wrong-hrv-client": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "ne 1063, in __hook_code_cb\n    callback(uc, address, size, user_data)\n    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-hr-mode-c/verify.py\", line 37, in hook\n    assert (name=='hrv' and user=='algo' and r2 in [0x4a24d,0x1030081]) or (name=='hr' and user=='once' and r2 in [0x499f1,0x1030085])\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    }
+  },
+  "audit": {
+    "unchanged_prior_objects": 751,
+    "new_units": 1,
+    "imports": {
+      "r1-application": {
+        "added": [
+          "r1_hr_once_result_plan"
+        ],
+        "removed": [
+          "r1_event_service_000497cc"
+        ]
+      },
+      "r1-bootloader": {
+        "added": [],
+        "removed": []
+      }
+    },
+    "reused_owners": [
+      "r1_health_hr_streams",
+      "r1_hrv_timing_state",
+      "r1_hrv_session_buffer"
+    ]
+  },
+  "source_check": "R1 check passes: 752 units, 556 source files, 0 not built. Global check flagged concurrent G2 resident_rom_thumb_set.S absent from manifest.",
+  "rea": "hr-once-control-c-rea.json",
+  "instruction_identity_proven": false,
+  "image_integration_proven": false
+}

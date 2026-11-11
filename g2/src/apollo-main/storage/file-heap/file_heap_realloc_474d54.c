@@ -16,9 +16,9 @@ void *audio_file_heap_realloc(void *old_buffer, uint32_t bytes) {
         result = g2_tlsf_reallocate_4d0868(g2_codec_heap_pool, old_buffer, bytes);
         (void)audio_file_mutex_release(g2_codec_heap_mutex);
     } else {
-        g2_file_heap_error_log((const char *)(uintptr_t)0x764730u);
-        g2_file_close_error((const char *)(uintptr_t)0x474e40u,
-                            (const char *)(uintptr_t)0x6fc7c4u, 0x449u);
+        g2_file_heap_error_log("get realloc semaphore failed.\r\n" /* stock 0x764730 */);
+        g2_file_close_error("0" /* stock 0x474e40 */,
+                            "D:\\01_workspace\\s200_ap510b_iar_git\\product\\s200\\app\\config\\redirect.c" /* stock 0x6fc7c4 */, 0x449u);
     }
     return result;
 }

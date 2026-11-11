@@ -1,0 +1,17 @@
+# Ordinary C QMA6100 transport
+
+`r1/src/application/runtime/native_qma_transport.c` is now ordinary C throughout. Chip-ID and FIFO saved-R3 entry bridges, the raw-return gateway for void callbacks and the delay `asm goto` are removed. The chip/FIFO workers are consolidated into their canonical entries. The existing runtime and four log sections remain byte-identical; no new persistent state is introduced.
+
+The transport retains five-attempt retries, five delay units after each failed read, live sensor-address reloads, chip-ID output, FIFO depth mask/limit/capacity clamp, six-byte samples and FIFO reset write. IRQ status starts at zero and persists through partial reads and retry groups. Any-motion dispatch precedes the live tap-status/callback reload, including callback changes to the status word or tap pointer. The architectural cycle-delay primitive remains assembly and is unchanged.
+
+Two formerly implicit behaviors are explicit C policies. Chip-ID and FIFO depth locals start at zero when a provider writes no byte. A void tap callback no longer leaks incidental R0; the IRQ entry returns zero after it. The actual motion interrupt wrapper ignores that result. Delay zero-path APSR residue is outside the C contract; delay calls and result words are retained.
+
+REA bytes match the official application. Direct execution passes **16,385 stock/C comparisons**, excluding the incidental void-callback result where a tap callback executes. Coverage includes every chip/depth byte, retry exhaustion and late success, capacity boundaries, null FIFO output, logging modes, IRQ partial-byte masks, absent/present callbacks, callback status/pointer mutation, live sensor address changes and delay counts. Another **18 unwritten-byte cases** check the zero fallback independently of caller scratch seeds.
+
+An additional **16,435 comparisons** execute the actual C bus-request adapters and memory-clearing routines, including **50 actual motion interrupt wrapper cases**. The adapters' full 20-byte request records are checked: device, address, register, data pointers/lengths and reserved zeros. Registry success/failure conversion, retry calls, callback order, FIFO bytes and resulting runtime agree. Another 18 unwritten-byte cases pass through this adapter path. Both fixtures verify caller stack, callee-saved integer/FP registers, SP, interrupt masks and output guards while modeled callees overwrite caller-saved registers.
+
+Five compiled defects are rejected: shortened retries, depth limit 63, missing capacity clamp, wrong tap callback slot and wrong unwritten chip-ID fallback. Bus/device operations, delay primitive, logs and callbacks are modeled; physical timing, electrical IRQ behavior and sensor operation remain unverified. Private-frame aliases, APSR, faults/concurrency and incidental void-callback residue are excluded.
+
+The open-toolchain report `build/sources-goal-r1-qma-transport-reviewed-c/report.json` compiles all **855 units** and completes both relocatable compositions. All **844 other nongenerated objects** remain unchanged. The normal QMA object exactly equals both executed probe objects. Imports remain **61 application / 22 bootloader**. R1 manifest validation passes and source-plan selections are unchanged. Final application linking/startup and byte identity are not established.
+
+[Machine receipt](qma-transport-pure-c-review.json) binds source, REA and ignored probes under `build/goal-r1-qma-transport-pure-c/`.

@@ -66,3 +66,44 @@ const nrf_log_module_const_data_t r1_log_module_records[32] __attribute__((secti
     {r1_log_module_name_30,0,0,3,3},
     {r1_log_module_name_31,0,0,3,3},
 };
+
+/* Stable name order for SDK ordered queries while runtime filters are off.
+ * Constant IDs 0..31 remain native; the two extra SDK modules occupy 32/33. */
+_Static_assert(sizeof(nrf_log_module_dynamic_data_t)==4,"SDK dynamic module record");
+nrf_log_module_dynamic_data_t r1_log_module_dynamic_records[34]
+ __attribute__((section(".r1.log.dynamic"),aligned(4)))={
+    {.order_idx=24,.filter=0}, /* peer_manager_gcm */
+    {.order_idx=25,.filter=0}, /* peer_manager_gscm */
+    {.order_idx=27,.filter=0}, /* peer_manager_im */
+    {.order_idx=17,.filter=0}, /* nrf_ble_gatt */
+    {.order_idx=29,.filter=0}, /* peer_manager_pds */
+    {.order_idx=28,.filter=0}, /* peer_manager_pdb */
+    {.order_idx=22,.filter=0}, /* peer_manager */
+    {.order_idx=26,.filter=0}, /* peer_manager_handler */
+    {.order_idx=31,.filter=0}, /* peer_manager_smd */
+    {.order_idx=30,.filter=0}, /* peer_manager_sm */
+    {.order_idx=16,.filter=0}, /* clock */
+    {.order_idx=0,.filter=0}, /* CLOCK */
+    {.order_idx=1,.filter=0}, /* GPIOTE */
+    {.order_idx=4,.filter=0}, /* PRS */
+    {.order_idx=11,.filter=0}, /* UART */
+    {.order_idx=12,.filter=0}, /* UARTE */
+    {.order_idx=10,.filter=0}, /* TWIM */
+    {.order_idx=13,.filter=0}, /* WDT */
+    {.order_idx=6,.filter=0}, /* RTC */
+    {.order_idx=7,.filter=0}, /* SAADC */
+    {.order_idx=8,.filter=0}, /* SPIM */
+    {.order_idx=9,.filter=0}, /* TIMER */
+    {.order_idx=2,.filter=0}, /* NFCT */
+    {.order_idx=3,.filter=0}, /* PDM */
+    {.order_idx=5,.filter=0}, /* PWM */
+    {.order_idx=15,.filter=0}, /* app_button */
+    {.order_idx=18,.filter=0}, /* nrf_fstorage */
+    {.order_idx=32,.filter=0}, /* pwr_mgmt */
+    {.order_idx=14,.filter=0}, /* app */
+    {.order_idx=19,.filter=0}, /* nrf_sdh */
+    {.order_idx=20,.filter=0}, /* nrf_sdh_ble */
+    {.order_idx=21,.filter=0}, /* nrf_sdh_soc */
+    {.order_idx=23,.filter=0}, /* peer_manager_ast */
+    {.order_idx=33,.filter=0}, /* sortlist */
+};

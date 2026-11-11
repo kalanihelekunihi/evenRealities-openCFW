@@ -1,37 +1,18 @@
-/* Native scan action: exact sparse configuration and ordered calls. */
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_scan_action_325618\n"
-".type opencfw_em9305_scan_action_325618,@function\n"
-"opencfw_em9305_scan_action_325618:\n"
-"L325618:\n"
-"push_s blink\n"
-"L32561a:\n"
-"mov_s r0,0x805c78\n"
-"L325620:\n"
-"ld r1,[r0,0]\n"
-"L325622:\n"
-"mov_s r0,0x80505c\n"
-"L325628:\n"
-"ldb_s r0,[r0,0]\n"
-"L32562a:\n"
-"ldb_s r1,[r1,0x4]\n"
-"L32562c:\n"
-"breq.d.nt r0,r1,L32563e\n"
-"L325630:\n"
-"setne r1,r1,0\n"
-"L325634:\n"
-"mov_s r0,0x80501c\n"
-"L32563a:\n"
-"bl opencfw_em9305_scan_ring_init_316a54\n"
-"L32563e:\n"
-"bl.d opencfw_em9305_command_status_30e8c0\n"
-"L325642:\n"
-"mov_s r0,0\n"
-"L325644:\n"
-"pop_s blink\n"
-"L325646:\n"
-"j_s [blink]\n"
-".size opencfw_em9305_scan_action_325618,.-opencfw_em9305_scan_action_325618\n"
-);
+#include <stdint.h>
+
+/* Native 0x325618..0x325648: when the scan ring's filter byte (0x80505c)
+ * differs from the configured one (+4 of the config at 0x805c78),
+ * reinitialise the ring at 0x80501c with the new enable state; then
+ * report command status 0. */
+extern uint32_t opencfw_em9305_scan_ring_init_316a54(uintptr_t ring, uint32_t enable);
+extern uint32_t opencfw_em9305_command_status_30e8c0(uint32_t status);
+
+uint32_t opencfw_em9305_scan_action_325618(void)
+{
+    uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805c78u;
+    uint32_t current=*(volatile uint8_t *)(uintptr_t)0x80505cu;
+    uint32_t wanted=*(volatile uint8_t *)(config+4u);
+    if(current!=wanted)
+        (void)opencfw_em9305_scan_ring_init_316a54(0x80501cu,wanted!=0u);
+    return opencfw_em9305_command_status_30e8c0(0u);
+}

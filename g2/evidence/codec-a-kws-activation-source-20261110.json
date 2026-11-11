@@ -1,0 +1,61 @@
+{
+  "schema": 1,
+  "target": "locked G2 2.2.6.10 GX8002 KWS NPU command stream",
+  "stock": {
+    "firmware": "g2/blobs/official/g2-2.2.6.10/firmware_codec.bin",
+    "command_file_window": [
+      "0x18d90",
+      "0x1b15c"
+    ],
+    "command_bytes": 9164,
+    "command_sha256": "c38ed6d22c7c0b6178288678364acd10bd5730aa382c1e19a32f6cf2bd1430b9",
+    "command_count": 212
+  },
+  "evidence": {
+    "upstream_cmodel_archive": "third-party/upstream/nationalchip-gxdnn/grus/lib/libcmodel.a",
+    "upstream_cmodel_archive_sha256": "70a18015d1eaa07870a9635db0b442a1a350170aabe14367ed61f4ea188f8653",
+    "parser": "cmd_parse.o:parse_op_active_cmd reads source/destination, extents, and strides",
+    "executor": "calc.o:calc_op_active dispatches mode 1 to active_relu and mode 2 to active_sigmoid",
+    "example_model_header_pairs_checked": 17,
+    "example_model_exact_size_pair_matches": 0
+  },
+  "source": {
+    "c_file": "g2/src/codec/npu/kws_activation_commands.c",
+    "c_sha256": "5d612bfda022f7d01ac2787cfbebc6b60b94e9069feccd3e5b2e8e4c8d4c15d1",
+    "c_object_sha256": "fc5d46596328e3ef5056920c3ad0877239ab7cfb401429d1bbe53954b429407e",
+    "c_manifest_link": false,
+    "activation_program_indices": [
+      7,
+      8,
+      16,
+      17,
+      23,
+      48,
+      54,
+      82,
+      88,
+      118,
+      124,
+      149
+    ],
+    "activation_bytes_matched": 528,
+    "activation_concatenated_sha256": "895c620724aab81d2744df9dd326acbe7ed4ea702774c32404f6dd9485b87402",
+    "semantic_command_counts": {
+      "TensorOpCommand": 29,
+      "RawCommand": 48,
+      "ActivationCommand": 12,
+      "CopyCommand": 123
+    }
+  },
+  "verification": {
+    "host_c_emitter": "12 of 12 typed C activation records matched the authenticated instruction records byte for byte",
+    "gxdnn_emitter_tests": "18 passed",
+    "sources_check": "make -C g2 sources-check",
+    "full_source_report": "build/g2-all-c-npu-paths-20261110/report.json",
+    "full_source_report_sha256": "28b2bff17047a27761a79435b42ae0eb5d962d545a000ae172d58f2faa9ef892",
+    "strict_link_report": "build/g2-all-c-npu-paths-link-20261110/link-report.json",
+    "strict_link_report_sha256": "79261af91266d672805f280d8e18b307a523f4ff848ef1be72c749d3d3785136",
+    "payloads_linked": 7
+  },
+  "qualification": "The C unit reconstructs twelve activation commands semantically and is compile-only until the complete NPU program is source-authored. Forty-eight commands remain opaque and the proprietary weights lack a declared source. No complete source NPU model, byte-identical firmware, or hardware behavior is claimed."
+}

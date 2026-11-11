@@ -8,6 +8,12 @@ __attribute__((noreturn)) void gx8002_uart_stage1_traps(void)
     for (;;) { }
 }
 
+/* Stock IRQ vectors all enter the second self-branch at 0x10000134. */
+__attribute__((noreturn)) void gx8002_uart_stage1_irq_traps(void)
+{
+    for (;;) { }
+}
+
 void gx8002_uart_stage1_clear_bss(void)
 {
 }

@@ -1,45 +1,25 @@
-/* Native scan dispatcher: callback, state reread, then transition lookup. */
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_callback_3228a8\n"
-".type opencfw_em9305_callback_3228a8,@function\n"
-"opencfw_em9305_callback_3228a8:\n"
-"L3228a8:\n"
-"b.d L3228b0\n"
-"L3228ac:\n"
-"ldb_s r0,[r0,0x3]\n"
-"L3228ae:\n"
-"nop_s\n"
-"L3228b0:\n"
-"enter_s [r13-r14,blink]\n"
-"L3228b2:\n"
-"mov_s r14,0x804ffc\n"
-"L3228b8:\n"
-"ldb_s r2,[r14,0]\n"
-"L3228ba:\n"
-"mov_s r13,r0\n"
-"L3228bc:\n"
-"mpyuw r1,r2,0x14\n"
-"L3228c0:\n"
-"add2_s r1,r1,r0\n"
-"L3228c2:\n"
-"ld r0,[r1,opencfw_em9305_scan_callbacks_3353fc]\n"
-"L3228ca:\n"
-"breq_s r0,0,L3228d0\n"
-"L3228cc:\n"
-"jl_s [r0]\n"
-"L3228ce:\n"
-"ldb_s r2,[r14,0]\n"
-"L3228d0:\n"
-"mpyuw r0,r2,0x5\n"
-"L3228d4:\n"
-"add_s r0,r0,r13\n"
-"L3228d6:\n"
-"ldb r0,[r0,opencfw_em9305_scan_transitions_33544c]\n"
-"L3228de:\n"
-"stb_s r0,[r14,0]\n"
-"L3228e0:\n"
-"leave_s [r13-r14,blink,pcl]\n"
-".size opencfw_em9305_callback_3228a8,.-opencfw_em9305_callback_3228a8\n"
-);
+#include <stdint.h>
+
+/* Native 0x3228a8..0x3228e2: scan state machine step. The scan state byte
+ * at 0x804ffc and the event's selector byte (+3) pick an entry of the 4x5
+ * callback/transition tables at 0x3353fc/0x33544c. The callback (if any)
+ * sees its own address, the table offset and the state in r0..r2, as in
+ * the native call. Returns the new state. */
+extern void (*const opencfw_em9305_scan_callbacks_3353fc[20])(void);
+extern const uint8_t opencfw_em9305_scan_transitions_33544c[20];
+
+uint32_t opencfw_em9305_callback_3228a8(uintptr_t event)
+{
+    volatile uint8_t *state=(volatile uint8_t *)(uintptr_t)0x804ffcu;
+    uint32_t selector=*(volatile uint8_t *)(event+3u);
+    uint32_t current=*state;
+    uint32_t offset=current*20u+selector*4u;
+    uintptr_t callback=*(const uintptr_t *)((uintptr_t)opencfw_em9305_scan_callbacks_3353fc+offset);
+    if(callback!=0u){
+        ((void (*)(uintptr_t,uint32_t,uint32_t))callback)(callback,offset,current);
+        current=*state;
+    }
+    uint32_t next=opencfw_em9305_scan_transitions_33544c[current*5u+selector];
+    *state=(uint8_t)next;
+    return next;
+}

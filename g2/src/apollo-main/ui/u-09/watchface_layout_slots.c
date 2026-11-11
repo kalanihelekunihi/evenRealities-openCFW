@@ -43,10 +43,10 @@ extern void audio_uart_page_43f6d6(uint32_t, uint32_t, uint32_t,
 extern void audio_uart_page_43ded4(uint32_t, uint32_t);                 /* lv_obj_add_flag */
 extern void audio_uart_page_43dfa4(void *, uint32_t);                   /* lv_obj_remove_flag */
 extern void audio_uart_page_44129e(uint32_t, uint32_t, uint32_t);       /* set_style_bg_opa */
-extern void audio_uart_page_44131c(uint32_t, uint32_t, uint32_t);       /* set_style_border_width */
-extern void audio_uart_page_44133a(uint32_t, uint32_t, uint32_t);       /* set_style_outline_width */
-extern void audio_uart_page_441386(uint32_t, uint32_t, uint32_t);       /* set_style_shadow_width */
-extern void audio_uart_page_44146a(uint32_t, uint32_t, uint32_t);       /* set_style_radius */
+extern void lv_obj_set_style_border_width(uint32_t, uint32_t, uint32_t);       /* set_style_border_width */
+extern void lv_obj_set_style_outline_width(uint32_t, uint32_t, uint32_t);       /* set_style_outline_width */
+extern void lv_obj_set_style_shadow_width(uint32_t, uint32_t, uint32_t);       /* set_style_shadow_width */
+extern void lv_obj_set_style_radius(uint32_t, uint32_t, uint32_t);       /* set_style_radius */
 extern uint32_t audio_uart_page_44104c(uint32_t);                       /* lv_color_hex */
 extern void audio_uart_page_44140e(uint32_t, uint32_t, uint32_t);       /* set_style_text_color */
 extern void audio_uart_page_44142e(uint32_t, uint32_t, uint32_t);       /* set_style_text_opa */
@@ -122,11 +122,11 @@ void layout2_slot_create_5b8f18(uint32_t slot, uint8_t kind)
     cont = audio_uart_page_43de82((uint32_t)(uintptr_t)g2_layout2_parent);
     audio_uart_page_43f4c0(cont, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
     audio_uart_page_44129e(cont, 0u, 0u);
-    audio_uart_page_44131c(cont, 0u, 0u);
-    audio_uart_page_44133a(cont, 0u, 0u);
-    audio_uart_page_441386(cont, 0u, 0u);
+    lv_obj_set_style_border_width(cont, 0u, 0u);
+    lv_obj_set_style_outline_width(cont, 0u, 0u);
+    lv_obj_set_style_shadow_width(cont, 0u, 0u);
     lv_obj_set_style_pad_all_5b8dd0(cont, 0u, 0u);
-    audio_uart_page_44146a(cont, 0u, 0u);
+    lv_obj_set_style_radius(cont, 0u, 0u);
     audio_uart_page_44140e(cont, audio_uart_page_44104c(0xffffffu), 0u);
     audio_uart_page_44142e(cont, 0xffu, 0u);
     audio_uart_page_43dfa4((void *)(uintptr_t)cont, LV_OBJ_FLAG_SCROLLABLE);

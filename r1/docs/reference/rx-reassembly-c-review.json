@@ -1,0 +1,318 @@
+{
+  "schema_version": 1,
+  "source": "r1/src/application/board/native_eus_reassembly.c",
+  "native_entry": "0x32198",
+  "decoded_native_instruction_bytes": 424,
+  "report": "build/sources-goal-r1-rx-reassembly-reviewed-c/report.json",
+  "compiled_units": 852,
+  "verification": {
+    "pairs": 1358,
+    "groups": {
+      "complete_seed": 13,
+      "complete_payload_domains": 120,
+      "initial_counter_all_values": 1020,
+      "short_frame_guards": 40,
+      "CRC_mismatch_ack_and_cleanup": 9,
+      "same_counter_retry_rollback": 8,
+      "actual_transmit_receive": 10,
+      "callback_words_and_ignored_results": 30,
+      "live_backend_mutation_scenarios": 108
+    },
+    "safety": [
+      {
+        "name": "null_readable_length",
+        "results": [
+          4294967295
+        ],
+        "ack_guard_preserved": true,
+        "capacity": 0
+      },
+      {
+        "name": "oversized_wire",
+        "results": [
+          4294967295
+        ],
+        "ack_guard_preserved": true,
+        "capacity": 0
+      },
+      {
+        "name": "short_bad_CRC_0",
+        "results": [
+          0
+        ],
+        "ack_guard_preserved": true,
+        "capacity": 0
+      },
+      {
+        "name": "short_bad_CRC_1",
+        "results": [
+          0
+        ],
+        "ack_guard_preserved": true,
+        "capacity": 0
+      },
+      {
+        "name": "short_bad_CRC_2",
+        "results": [
+          0
+        ],
+        "ack_guard_preserved": true,
+        "capacity": 0
+      },
+      {
+        "name": "short_bad_CRC_3",
+        "results": [
+          0
+        ],
+        "ack_guard_preserved": true,
+        "capacity": 0
+      },
+      {
+        "name": "short_bad_CRC_4",
+        "results": [
+          0
+        ],
+        "ack_guard_preserved": true,
+        "capacity": 0
+      },
+      {
+        "name": "static_stream_overflow",
+        "results": [
+          0,
+          0,
+          4294967295
+        ],
+        "ack_guard_preserved": true,
+        "capacity": 0
+      },
+      {
+        "name": "heap_stream_overflow",
+        "results": [
+          0,
+          0,
+          0,
+          4294967295
+        ],
+        "ack_guard_preserved": true,
+        "capacity": 0
+      },
+      {
+        "name": "retry_length_underflow",
+        "results": [
+          0,
+          4294967295
+        ],
+        "ack_guard_preserved": true,
+        "capacity": 0
+      },
+      {
+        "name": "retry_used_underflow",
+        "results": [
+          0,
+          4294967295
+        ],
+        "ack_guard_preserved": true,
+        "capacity": 0
+      },
+      {
+        "name": "used_over_capacity",
+        "results": [
+          0,
+          4294967295
+        ],
+        "ack_guard_preserved": true,
+        "capacity": 0
+      },
+      {
+        "name": "overflow_then_recover",
+        "results": [
+          0,
+          0,
+          4294967295,
+          0
+        ],
+        "ack_guard_preserved": true,
+        "capacity": 0
+      }
+    ],
+    "native_overflow_changes_ACK_table": "5858585858585858585858585858585858585858585858585858585858585858584e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e",
+    "native_instruction_bytes_covered": 422,
+    "native_instruction_bytes_expected": 424,
+    "native_uncovered_byte_addresses": [
+      "0x32210",
+      "0x32211"
+    ]
+  },
+  "control_flow": {
+    "decoded_native_instruction_bytes": 424,
+    "reachable_native_instruction_bytes": 422,
+    "dynamic_uncovered": [
+      "0x32210",
+      "0x32211"
+    ],
+    "unreachable_instruction": "0x32210: b #0x32288",
+    "proof": [
+      "LDR at0x321f0 loads fixed scratch pointer0x20019c48 into r9.",
+      "The counter1 path reaches MOVS r0,r9 at0x32208 without a call or r9 write. The nonzero pointer sets Z=0.",
+      "STR at0x3220c preserves flags; BNE at0x3220e therefore always targets0x32258. Its fallthrough0x32210 has no direct incoming branch."
+    ],
+    "literal_address": "0x3238c",
+    "literal_value": "0x20019c48",
+    "limits": [
+      "Ordinary entry and ABI-preserving callees/interrupts only; no arbitrary external interior jump or debugger/register corruption."
+    ]
+  },
+  "mutants": [
+    {
+      "name": "short_guard",
+      "rejected": true
+    },
+    {
+      "name": "counter_limit",
+      "rejected": true
+    },
+    {
+      "name": "allocation_size",
+      "rejected": true
+    },
+    {
+      "name": "retry_rollback",
+      "rejected": true
+    },
+    {
+      "name": "length_accumulation",
+      "rejected": true
+    },
+    {
+      "name": "CRC_match",
+      "rejected": true
+    },
+    {
+      "name": "delivery_channel",
+      "rejected": true
+    },
+    {
+      "name": "ACK_reference",
+      "rejected": true
+    },
+    {
+      "name": "ACK_status",
+      "rejected": true
+    },
+    {
+      "name": "heap_release",
+      "rejected": true
+    },
+    {
+      "name": "wire_capacity",
+      "rejected": true
+    },
+    {
+      "name": "capacity_guard",
+      "rejected": true
+    },
+    {
+      "name": "retry_length_guard",
+      "rejected": true
+    },
+    {
+      "name": "short_ACK_bound",
+      "rejected": true
+    },
+    {
+      "name": "cleanup_used",
+      "rejected": true
+    }
+  ],
+  "audit": {
+    "unchanged_prior_nongenerated_objects": 841,
+    "changed_prior_nongenerated_objects": [],
+    "changed_generated_objects": [
+      "{gen}/r1_startup_vectors.S",
+      "{gen}/r1_uecc.c"
+    ],
+    "added_objects": [
+      "r1/src/application/board/native_eus_reassembly.c"
+    ],
+    "removed_imports": [
+      "r1_eus_rx_reassembly"
+    ],
+    "added_imports": [],
+    "application_imports": 66,
+    "state_prefix": {
+      "native_address": "0x20006954",
+      "size": 12,
+      "initializer": "000000000000000000000000"
+    },
+    "scratch": {
+      "native_base": "0x20019c48",
+      "compatible_C_capacity": 478,
+      "original_object_size_not_claimed": true,
+      "zero_region_verified": true,
+      "does_not_overlap_ACK_registry": true
+    },
+    "receive_callback": {
+      "native_slot": "0x2000696c",
+      "native_pointer": "0x33dbd",
+      "source_relocation": "r1_bae8_bc_rx_enqueue"
+    },
+    "new_C_only_capacity_bytes": 4,
+    "existing_transmit_callback_owner_reused": true,
+    "assembly_added": false
+  },
+  "contract": [
+    "Preserve one global receive stream. Short packets below5 report native errors without clearing a pending stream. A new nonzero counter clears used length; counter1 uses shared scratch, counters2..16 allocate(counter+1)*239, and counters>=17 report an invalid counter. Allocation failure preserves the native error path.",
+    "For an active stream, a repeated nonzero counter rolls used length back by the previous wire length minus5 before replacing that fragment. Payload bytes after the five-byte header are moved through the actual C memmove routine; current counter and wire length are stored afterward. Nonzero counters return0 without delivery.",
+    "Counter0 captures the expected little-endian CRC, clears retry metadata, chooses either the assembled buffer or direct packet payload and runs the actual source stock CRC routine with zero initial state. Matching CRC invokes the live completion slot with original full connection/channel and narrowed16-bit data size. Results are ignored.",
+    "CRC mismatch uses the existing fragment-send slot and sends six bytes with low16 connection, byte0=0, bytes1..4 copied from message bytes1..4 and byte5=1. A null callback skips its corresponding action. Cleanup reloads the pending buffer, frees it unless it is the static scratch (including the native free(NULL) call), clears buffer/used length and returns0.",
+    "The12-byte receive prefix at0x20006954 has authenticated zero initialization. The separate completion slot at0x2000696c has authenticated stock pointer0x33dbd and a source relocation to existing r1_bae8_bc_rx_enqueue. The existing0x20006960 fragment-send owner is reused. The new scratch capacity478 supports two239-byte payloads for initial counter1; no exact original scratch-object size is claimed."
+  ],
+  "intentional_C_safety_changes": [
+    "Reject null data with declared length>=5 and wire lengths above244, matching the pinned247-byte ATT MTU and239-byte fragment publisher. These requests returnffffffff before reads/copies.",
+    "Track allocation capacity in four private C bytes with no claimed native address. Before a copy, reject retry underflow, corrupted used length or payload beyond capacity. Free an owned heap buffer once, clear stream/retry/capacity state and returnffffffff; static storage is never freed.",
+    "On CRC mismatch with fewer than5 logical message bytes, copy only available reference bytes and zero the unavailable bytes. This avoids the stock word read past the logical message; poisoned trailing-memory tests verify it.",
+    "A three-fragment nondecreasing-counter sequence starting with1 overwrites the adjacent native ACK table in controlled stock execution. The C guard rejects the third copy, preserves all64 guard bytes and accepts a subsequent valid message. Heap overflow and corrupted retry/used state receive separate rejection tests."
+  ],
+  "limits": [
+    "1358 stock/C sequence comparisons cover complete/retried messages, all255 nonzero first counters, allocation failures, callback words/results, CRC rejection and live backend mutation scenarios. Actual C memmove/memcpy and CRC bodies execute. Ten sequences use the actual C fragment sender and then the actual C receiver; generated frames also match an independent polynomial implementation. Heap allocation/free, logging and final transmit/receive callbacks are modeled. The actual receive queue, ingress consumer, RTOS and physical radio are not executed here; their existing objects remain unchanged.",
+    "Thirteen C-only safety scenarios are intentionally not asserted equal to unsafe stock execution. The native ACK-table overwrite is reproduced only in emulated SRAM. No firmware or device memory is changed.",
+    "All422 reachable native instruction bytes execute. The other two decoded bytes at0x32210 are unreachable after MOVS of fixed nonzero scratch pointer0x20019c48 and a flag-preserving STR followed by BNE. The proof assumes ordinary entry and ABI-preserving calls/interrupts, not arbitrary interior entry or register corruption.",
+    "The stock sender accepts up to4096 bytes, but counters17 and above are rejected by the stock receiver. The4063/4096 sender cases preserve that observed failure behavior rather than falsely claiming delivery. This existing framing asymmetry remains open.",
+    "Callbacks are synchronous borrowed-buffer interfaces and their results do not affect the native completion return. One global stream is preserved; connection isolation, reentrancy and asynchronous concurrency are not established. Incidental scratch registers/private stack addresses are excluded; callee-saved integer/FP registers, masks, SP, state, heap/scratch content, emitted records and guards are checked. Source execution into stock code is rejected.",
+    "478 is a compatible C scratch bound backed by the authenticated zero region and valid two-fragment capacity, not proof of the original object extent. The new four-byte capacity field is C-only. Fixed-address replay establishes controlled aliases, not final source layout, complete linking or boot.",
+    "The normal build compiles852 units, closes one transport import and adds no imports. It leaves66 application imports and22 bootloader linker imports; all841 prior nongenerated objects are unchanged. R1 manifest check passes. Global sources-check retains the unrelated unlisted G2 resident_rom_thumb_set.S issue. No assembly is added. Paid compilers and byte identity are not requirements."
+  ],
+  "evidence_files": {
+    "r1/src/application/board/native_eus_reassembly.c": "49d56f17f8ff788deedaf8e1f4922c8968856f93f28a39d17fffa989a85e0218",
+    "build/sources-goal-r1-rx-reassembly-reviewed-c/report.json": "15e63a164547c2d5138ab18e8ee4202f87c95039b721c9a9e7520e76f0e5afba",
+    "build/sources-goal-r1-dfu-policy-c/report.json": "cdca7a2513d90b31d5c145c2281fe00e4b693fa6232ec0f369b58d6d45ce5e2a",
+    "r1/src/sources.json": "8d6ac095f9ec92e6760906494d54f243ccd9742bc0568bebe3fe494900874113",
+    "r1/src/application/board/native_bae8_route.c": "7059ce46daf5b3cb90c010389d0a2a7a6321c22d56b7b211db388b285855e8fa",
+    "r1/src/application/board/native_protocol_fragment.c": "2ca459c09b2d7416267a3a06e61412eaf7d3f5284469998e449b0d95fc19ab98",
+    "r1/src/application/board/native_protocol_fragment_state.c": "f5e7ffdc7b16c94b7dcf5bc19fcfed39e5d18d4c5a7fcf1babc9f50093d9f7e1",
+    "r1/src/application/runtime/native_bae8_rx.c": "5573f4a7b554ac9f69cc90a2547eb6a58790543b8f143f57c33ccf828699c864",
+    "r1/src/application/checksums/stock_checksums.c": "63f78e208048b5bd4b91c00f97e1260a5a53f5bee50dc51aa5ce4aaa1cdfe898",
+    "r1/src/application/checksums/stock_checksum_tables.inc": "dc151d3a2d07b2b9f0b87579981d5bce1ca24f9bb1ab27edbd88636766ff163f",
+    "r1/src/include/r1_stock_checksums.h": "af730ecb8d2e2cc5656016b269678e7f1ac6c7e48fe32401fdfb9b7206886ef9",
+    "r1/config-recovered/sdk_config.h": "d7dd86c6ed2885df8bd7f1d99b6c4fb911fddd00c90f791b03385623c959920c",
+    "r1/src/config/sdk/gatt_contract.h": "19436a91c2f585a2639c60b16363d5b088c74a8475fa4156ea479c3deac070c8",
+    "build/goal-r1-fstorage-registry/expanded-rw.bin": "87fdee392022fdbe23dd0daf3e859fb14f3ce26ba3e8403aab56dc9d9a913317",
+    "r1/docs/reference/fstorage-registry-review.json": "3ee2a79fb2b3f866e118d86e0361b8dc1499a92460f5e6a49370418eac1dbb5c",
+    "build/goal-r1-rx-reassembly-c/rea.json": "103ac4d4560a9323254f2190b39b71ef62622c1a5174e5e0988248fae2054001",
+    "build/goal-r1-rx-reassembly-c/stock.asm": "2611b11d53fce1ae1d1bf4ca2084a0bae7f27d0a1b8b527053f7b06264a1e41c",
+    "build/goal-r1-rx-reassembly-c/strings.py": "f22e8083406a660636cd0cc815a32f9fd24c02a988b7533fabb31f68093f2d15",
+    "build/goal-r1-rx-reassembly-c/strings.json": "42f878c61754b9cb520de1b604bfe4c834eda1907fefc4e172981ba4b6e19ebd",
+    "build/goal-r1-rx-reassembly-c/verify.py": "7f0a6b1eccfbf7afd2d9f3a4be6e5648183002aaf3675fcc38c6e59ffee2f172",
+    "build/goal-r1-rx-reassembly-c/verification.json": "04cfcb87dd4a0965004affd1882c7c9791c7dd2a7fe7aaf9af9cf0e0ac365cae",
+    "build/goal-r1-rx-reassembly-c/verification.log": "cff352f8f70ca9d6a433ee8c30726c7de7c66384715514c306c03aa365c7826a",
+    "build/goal-r1-rx-reassembly-c/control_flow.py": "63c50fcc217058f02aaa5742fc70aeaa9dd205b3b85cb462365bcd82bc813aa2",
+    "build/goal-r1-rx-reassembly-c/control-flow.json": "07411505a2d4e9edde53bc40707825f017f22b2a37f7176072c4cdecff7e1ab2",
+    "build/goal-r1-rx-reassembly-c/mutants.py": "49f36a566e6822a86e3e1a6591591341244520d4f0d2c07561e1ad1dac9219c9",
+    "build/goal-r1-rx-reassembly-c/mutants.json": "679834ea9e75b6ffe01d6e8e70485d1c0028c29f876013e2d464c8a944b82bf8",
+    "build/goal-r1-rx-reassembly-c/mutants.log": "6a70b9273cefabe03ab4076e70476fc4a6f3936f5f0fe0d34a31865273d60115",
+    "build/goal-r1-rx-reassembly-c/audit.py": "414301cc58388c617a90cf330008aa8dcf13fd7262220a970094a56624b2677b",
+    "build/goal-r1-rx-reassembly-c/object-audit.json": "7559f178801c17d5a10947a93e816fb06c2beb78be12ae47e334c54ded065af0",
+    "build/goal-r1-rx-reassembly-c/r1-check.log": "ff00837ff85e19cf04a893c77e51ce602c362675651960cf956f13903b124dc6",
+    "build/goal-r1-rx-reassembly-c/sources-check.log": "ef41ebf7bca3ab1497178f3e662a5cf1cd3cbe718f6555dce90731598dcb727f"
+  }
+}

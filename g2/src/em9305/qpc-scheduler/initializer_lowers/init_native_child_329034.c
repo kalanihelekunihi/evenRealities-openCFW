@@ -1,40 +1,21 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_329034\n"
-".type opencfw_em9305_child_329034,@function\n"
-"opencfw_em9305_child_329034:\n"
-"L329034:\n"
-"enter_s [r13-r14,blink]\n"
-"L329036:\n"
-"ldb_s r2,[r0,0x1]\n"
-"L329038:\n"
-"mov_s r13,r0\n"
-"L32903a:\n"
-"mov_s r14,r1\n"
-"L32903c:\n"
-"mpyuw r0,r2,0x14\n"
-"L329040:\n"
-"add2_s r0,r0,r1\n"
-"L329042:\n"
-"ld r1,[r0,opencfw_em9305_slave_big_actions_335460]\n"
-"L32904a:\n"
-"breq_s r1,0,L329052\n"
-"L32904c:\n"
-"jl_s.d [r1]\n"
-"L32904e:\n"
-"mov_s r0,r13\n"
-"L329050:\n"
-"ldb_s r2,[r13,0x1]\n"
-"L329052:\n"
-"mpyuw r0,r2,0x5\n"
-"L329056:\n"
-"add_s r0,r0,r14\n"
-"L329058:\n"
-"ldb r0,[r0,opencfw_em9305_slave_big_transitions_3354b0]\n"
-"L329060:\n"
-"stb_s r0,[r13,0x1]\n"
-"L329062:\n"
-"leave_s [r13-r14,blink,pcl]\n"
-".size opencfw_em9305_child_329034,.-opencfw_em9305_child_329034\n"
-);
+#include <stdint.h>
+
+/* Native 0x329034..0x329064: slave BIG state machine step. Run the
+ * optional action for (state, event) from the 4x5 table at 0x335460,
+ * then load the next state (byte +1) from the byte table at 0x3354b0. */
+extern const uintptr_t opencfw_em9305_slave_big_actions_335460[20];
+extern const uint8_t opencfw_em9305_slave_big_transitions_3354b0[20];
+
+uint32_t opencfw_em9305_child_329034(uintptr_t machine,uint32_t event)
+{
+    uint32_t state=*(volatile uint8_t *)(machine+1u);
+    uintptr_t action=opencfw_em9305_slave_big_actions_335460[state*5u+event];
+    if(action!=0u){
+        (void)((uint32_t (*)(uintptr_t,uintptr_t,uint32_t))action)
+            (machine,action,state);
+        state=*(volatile uint8_t *)(machine+1u);
+    }
+    uint32_t next=opencfw_em9305_slave_big_transitions_3354b0[state*5u+event];
+    *(volatile uint8_t *)(machine+1u)=(uint8_t)next;
+    return next;
+}

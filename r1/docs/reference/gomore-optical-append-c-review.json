@@ -1,0 +1,161 @@
+{
+  "source": {
+    "source": "r1/src/application/runtime/native_gomore_optical_append.c",
+    "payload": "r1-application",
+    "role": "candidate",
+    "toolchain": "gcc9",
+    "link": true,
+    "expect": "compile",
+    "returncode": 0,
+    "argv": [
+      "/opt/homebrew/bin/python3",
+      "/Users/kalani/Repo/evenRealities-openCFW/tools/build/linux_gcc.py",
+      "--compiler",
+      "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/bin/arm-none-eabi-gcc",
+      "--read-root",
+      "/Users/kalani/Repo/evenRealities-openCFW/r1",
+      "--read-root",
+      "/Users/kalani/Repo/evenRealities-openCFW/third-party/upstream",
+      "--read-root",
+      "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1",
+      "--read-root",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-optical-append-c/generated/r1",
+      "--",
+      "-mcpu=cortex-m4",
+      "-mthumb",
+      "-munaligned-access",
+      "-mfpu=fpv4-sp-d16",
+      "-mfloat-abi=hard",
+      "-std=c11",
+      "-Os",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-fshort-enums",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-fno-delete-null-pointer-checks",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/r1/src/vendor",
+      "-isystem",
+      "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
+      "-fno-strict-aliasing",
+      "-ffp-contract=off",
+      "-fsignaling-nans",
+      "-frounding-math",
+      "-ftrapping-math",
+      "-MD",
+      "-MF",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-optical-append-c/r1/r1-application/r1__src__application__runtime__native_gomore_optical_append.c.d",
+      "-c",
+      "/Users/kalani/Repo/evenRealities-openCFW/r1/src/application/runtime/native_gomore_optical_append.c",
+      "-o",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-optical-append-c/r1/r1-application/r1__src__application__runtime__native_gomore_optical_append.c.o"
+    ],
+    "source_sha256": "3f08de85590cb43579bb60c829820279d018b4c9b91afa40f4685909e51acd99",
+    "object_sha256": "4844d59dbfe3721bd74779b297a242e69935407e89a0d115a452a9066864860b",
+    "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-optical-append-c/r1/r1-application/r1__src__application__runtime__native_gomore_optical_append.c.o",
+    "strong": [
+      "r1_gomore_optical_append_native"
+    ],
+    "weak": [],
+    "undefined": [
+      "r1_gomore_filter_native"
+    ]
+  },
+  "replay": {
+    "pairs": 1280,
+    "faults": 192,
+    "object_sha256": "4844d59dbfe3721bd74779b297a242e69935407e89a0d115a452a9066864860b",
+    "digest": "4a03c4c43cbbef724cdcde45033f1d9ae68489f43d16d22b40e7770a357fb020",
+    "limits": [
+      "Stock filter provider executes on both paths",
+      "No physical hardware or byte identity proof"
+    ]
+  },
+  "c_filter_replay": {
+    "pairs": 1280,
+    "faults": 192,
+    "object_sha256": "4844d59dbfe3721bd74779b297a242e69935407e89a0d115a452a9066864860b",
+    "digest": "6ff2b5f13c57f94278c3139e005a7f907697776a576feeec2f8d9d467eb3da55",
+    "limits": [
+      "C filter executes in candidate",
+      "No physical hardware or byte identity proof"
+    ]
+  },
+  "negative_controls": [
+    {
+      "name": "offset",
+      "rejected": true
+    },
+    {
+      "name": "zero",
+      "rejected": true
+    },
+    {
+      "name": "sign",
+      "rejected": true
+    },
+    {
+      "name": "guard",
+      "rejected": true
+    },
+    {
+      "name": "short",
+      "rejected": true
+    },
+    {
+      "name": "descriptor",
+      "rejected": true
+    },
+    {
+      "name": "count",
+      "rejected": true
+    }
+  ],
+  "qualification": {
+    "candidate_units": 1,
+    "compiled_units": 1,
+    "units": [
+      {
+        "source": "r1/src/application/runtime/native_gomore_optical_append.c",
+        "payload": "r1-application",
+        "evidence": "r1/symbols/function-frontier.csv",
+        "selected": [],
+        "compiled": true,
+        "rejections": {
+          "compiled_bytes_differ": 1
+        },
+        "source_implementation_completeness": "not established by compilation or byte matching",
+        "reason": "no exact anchored body under tested production bindings; integration remains unfinished"
+      }
+    ]
+  },
+  "composition": {
+    "report": "build/sources-goal-r1-gomore-optical-append-c/report.json",
+    "units": 690,
+    "unchanged_prior_source_object_pairs": 688,
+    "application_imports": 179,
+    "bootloader_imports": 34
+  },
+  "artifacts": {
+    "build/goal-r1-gomore-optical-c/verify_append.py": "01b5a4e0263b159ee2b435be157470f1be0b5c30cc024f94ac875400ec57de92",
+    "build/goal-r1-gomore-optical-c/negative_append.py": "57bb25fcf4565c1361459d703812b282ff21348387e5e06433ba1b7ca1765ec8",
+    "build/goal-r1-gomore-optical-c/production-append.log": "ed960672934da911537b28decaedb9f4ae30a55efac9388d4f1b7293a2adfc42",
+    "build/goal-r1-gomore-optical-c/production-c-filter.log": "ea1223356f568ff4c19746bb1af636939d0f5ad14cc87a63ac06110d9c918e57",
+    "build/goal-r1-gomore-optical-c/dependencies-rea.json": "a19b9a14d48d2e3a28e1079fde2f007fe38e026c38c28269a47d4347a9418ad6",
+    "build/goal-r1-gomore-optical-c/body.json": "7c9e8bbea449d6e10e19c3230a36d7e1b15b1a0b58e48fb6e053136db61b5855",
+    "build/goal-r1-gomore-optical-c/append-negative.json": "009143aa80b166bdb4d8eed8f60d6e815d659bf5ec0a3389b84adb9c100d0fc5",
+    "build/goal-r1-gomore-optical-c/append-results.json": "53e1969abb0471b0c72bac9999d8005bccbd862831e6dce19c1f01330e9f0426",
+    "build/goal-r1-gomore-optical-c/append-c-filter-results.json": "4f14cc0771e6760a334cfa01bce7a821eeb15778b6d11affe2bee7a8b5c6e555",
+    "build/goal-r1-gomore-optical-c/qualified/qualification.json": "e206a280902fadf2709c033006f0400f5a20c9d628f400d3fdb8aa2214c1f199"
+  },
+  "limits": [
+    "Optical root still unresolved; helper has no production C root consumer yet",
+    "Direct replay compares exact access widths; C-filter replay expands writes to bytes because its ready-word store is bytewise",
+    "Stock filter executes in direct replay; C filter executes in integration replay",
+    "Generic guarded callback utility renamed with _checked suffix; its behavior unchanged",
+    "No physical hardware, complete source-only final link, or byte identity proof"
+  ]
+}

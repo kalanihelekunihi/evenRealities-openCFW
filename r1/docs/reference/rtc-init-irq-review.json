@@ -1,0 +1,203 @@
+{
+  "schema_version": 1,
+  "stock_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "report": "build/sources-goal-r1-rtc-irq/report.json",
+  "report_sha256": "706fbb2af021cdd52e326901c65561f9a4ac7db73d9f03e4963c43f0a1795705",
+  "manifest_sha256": "a11587dfbc3e63e083081dd21668096587d99de4d33fd4a37251a337861dbb64",
+  "sdk": {
+    "source": "vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx/drivers/src/nrfx_rtc.c",
+    "source_sha256": "7c52c09f403e73b67412105258d4e03aaee905bc3dab5fbfa3f15d9487441907",
+    "object_sha256": "a75b2e0a74bdafed0f7747afe579b17e58c38367dd312d6eb0503930b5347c2b",
+    "link": true
+  },
+  "verification": {
+    "cases": 432,
+    "passed": 432,
+    "failures": []
+  },
+  "matrix": {
+    "initial_state": [
+      0,
+      1,
+      2,
+      255
+    ],
+    "prescaler": [
+      0,
+      1,
+      4095
+    ],
+    "priority": [
+      0,
+      6,
+      7
+    ],
+    "reliable": [
+      0,
+      1
+    ],
+    "latency": [
+      0,
+      65,
+      255
+    ],
+    "callback_target": [
+      0,
+      1
+    ]
+  },
+  "rea": {
+    "evidence_id": "ev_ef6dbcec402ecdc8f7f4527ddc8ef919c1d99eb405d6aa46be340c6a778aa4c0",
+    "analysis_profile": {
+      "provider": {
+        "id": "ghidra",
+        "name": "Ghidra",
+        "version": "12.1.4"
+      },
+      "parameters": {
+        "target_kind": "executable",
+        "target_format": "elf",
+        "architecture": "arm",
+        "available_architectures": [
+          "arm"
+        ],
+        "import_mode": "ephemeral-source-immutable",
+        "annotation_policy": "atomic-function-entry-metadata-v1",
+        "load_image_observations": "source-mappings-entry-context-v2",
+        "function_body_evidence": "complete-inclusive-ranges-v1",
+        "function_references": "complete-body-and-entry-reference-manager-v2",
+        "call_relationship_coverage": "function-body-call-coverage-v5",
+        "function_dossier_coverage": "observed-facets-and-call-relationships-v1",
+        "string_inventory_evidence": "defined-data-coverage-v1",
+        "location_resolution": "explicit-address-exact-entry-symbol-first-v3",
+        "procedure_file_offset_resolution": "address-first-unique-target-source-mapping-v2",
+        "instruction_flow_evidence": "decoded-return-pcode-v1",
+        "instruction_references": "exact-address-incoming-v1",
+        "function_boundary_observations": "ghidra-function-boundary-limitations-v3",
+        "no_return_repair": "returning-imports-decoded-return-v2",
+        "process_launch": "inspected-jvm-launch-support-v1",
+        "jump_table_evidence": "typed-case-default-blocks-v1",
+        "decompiler_jump_loads": true,
+        "loader": "auto-from-header",
+        "language_id": "auto-from-header",
+        "compiler_spec_id": "auto-default",
+        "analyzer_preset": "ghidra-default"
+      },
+      "digest": "7e46711069eea041af1b9b99e34115c13332795e5cda76e584a722f529ec70de"
+    },
+    "procedure": {
+      "address": "0x7ad6c",
+      "name": "rtc_init",
+      "classification": {
+        "external": false,
+        "thunk": false,
+        "thunk_target": null,
+        "provenance": "ghidra-function-manager"
+      },
+      "body": {
+        "available": true,
+        "provenance": "ghidra-function-body-address-set",
+        "ranges": [
+          {
+            "start": "0x7ad6c",
+            "end": "0x7ae1f"
+          }
+        ],
+        "total_bytes": 180,
+        "span_bytes": 180,
+        "non_contiguous": false,
+        "contains_entry": true
+      },
+      "signature": "undefined rtc_init()",
+      "locals": [
+        {
+          "description": "undefined4 local_10 @ Stack[-0x10]:4",
+          "provenance": "ghidra-function-database"
+        }
+      ]
+    },
+    "assembly": [
+      "0x7ad6c: push {r3,r4,r5,lr}",
+      "0x7ad6e: ldrb r3, [r0,#0x5]",
+      "0x7ad70: ldr r4, [0x0007ae20]",
+      "0x7ad72: str.w r2, [r4,r3,lsl #0x2]",
+      "0x7ad76: ldrb r2, [r0,#0x5]",
+      "0x7ad78: subs r3, r4, #0x4",
+      "0x7ad7a: add.w r2, r2, r2, lsl #0x1",
+      "0x7ad7e: ldrb r2, [r3,r2]",
+      "0x7ad80: cbz r2, 0x0007ad86",
+      "0x7ad82: movs r0, #0x8",
+      "0x7ad84: pop {r3,r4,r5,pc}",
+      "0x7ad86: ldrsb.w r2, [r0,#0x4]",
+      "0x7ad8a: ldrb r4, [r1,#0x2]",
+      "0x7ad8c: cmp r2, #0x0",
+      "0x7ad8e: lsl.w r4, r4, #0x5",
+      "0x7ad92: blt 0x0007ad9e",
+      "0x7ad94: add.w r2, r2, #0xe000e000",
+      "0x7ad98: strb.w r4, [r2,#0x400]",
+      "0x7ad9c: b 0x0007adaa",
+      "0x7ad9e: and r2, r2, #0xf",
+      "0x7ada2: add.w r2, r2, #0xe000e000",
+      "0x7ada6: strb.w r4, [r2,#0xd14]",
+      "0x7adaa: ldrsb.w r2, [r0,#0x4]",
+      "0x7adae: movs r4, #0x1",
+      "0x7adb0: cmp r2, #0x0",
+      "0x7adb2: blt 0x0007adc8",
+      "0x7adb4: and r5, r2, #0x1f",
+      "0x7adb8: lsl.w r5, r4, r5",
+      "0x7adbc: lsrs r2, r2, #0x5",
+      "0x7adbe: lsls r2, r2, #0x2",
+      "0x7adc0: add.w r2, r2, #0xe000e000",
+      "0x7adc4: str.w r5, [r2,#0x100]",
+      "0x7adc8: ldr r2, [r0,#0x0]",
+      "0x7adca: ldrh r5, [r1,#0x0]",
+      "0x7adcc: str.w r5, [r2,#0x508]",
+      "0x7add0: ldrb r5, [r0,#0x5]",
+      "0x7add2: ldrb r2, [r1,#0x4]",
+      "0x7add4: add.w r5, r5, r5, lsl #0x1",
+      "0x7add8: add r5, r3",
+      "0x7adda: strb r2, [r5,#0x1]",
+      "0x7addc: ldrb r2, [r0,#0x5]",
+      "0x7adde: ldrb r1, [r1,#0x3]",
+      "0x7ade0: add.w r2, r2, r2, lsl #0x1",
+      "0x7ade4: add r2, r3",
+      "0x7ade6: strb r1, [r2,#0x2]",
+      "0x7ade8: ldrb r0, [r0,#0x5]",
+      "0x7adea: add.w r0, r0, r0, lsl #0x1",
+      "0x7adee: strb r4, [r3,r0]",
+      "0x7adf0: movs r4, #0x0",
+      "0x7adf2: bl 0x000914ec",
+      "0x7adf6: lsls r0, r0, #0x1f",
+      "0x7adf8: bne 0x0007ae02",
+      "0x7adfa: bl 0x000914ec",
+      "0x7adfe: lsls r0, r0, #0x1d",
+      "0x7ae00: bpl 0x0007ae18",
+      "0x7ae02: mov r0, r4",
+      "0x7ae04: bl 0x0007a5cc",
+      "0x7ae08: str r0, [sp,#0x0]",
+      "0x7ae0a: ldr r3, [0x0007ae24]",
+      "0x7ae0c: adr r2, [0x7ae28]",
+      "0x7ae0e: adr r1, [0x7ae28]",
+      "0x7ae10: mov.w r0, #0xc800000",
+      "0x7ae14: bl 0x00091638",
+      "0x7ae18: bl 0x000914ec",
+      "0x7ae1c: mov r0, r4",
+      "0x7ae1e: pop {r3,r4,r5,pc}"
+    ],
+    "pseudocode": "\nundefined4 rtc_init(int *param_1,ushort *param_2,undefined4 param_3)\n\n{\n  char cVar1;\n  int iVar2;\n  undefined4 uVar3;\n  uint uVar4;\n  \n  *(undefined4 *)((uint)*(byte *)((int)param_1 + 5) * 4 + 0x20007954) = param_3;\n  if (*(char *)((uint)*(byte *)((int)param_1 + 5) * 3 + 0x20007950) != '\\0') {\n    return 8;\n  }\n  uVar4 = (uint)(char)param_1[1];\n  cVar1 = (char)param_2[1] << 5;\n  if ((int)uVar4 < 0) {\n    *(char *)((uVar4 & 0xf) + 0xe000ed14) = cVar1;\n  }\n  else {\n    *(char *)(uVar4 + 0xe000e400) = cVar1;\n  }\n  uVar4 = (uint)(char)param_1[1];\n  if (-1 < (int)uVar4) {\n    *(int *)(&DAT_e000e100 + (uVar4 >> 5) * 4) = 1 << (uVar4 & 0x1f);\n  }\n  *(uint *)(*param_1 + 0x508) = (uint)*param_2;\n  *(char *)((uint)*(byte *)((int)param_1 + 5) * 3 + 0x20007951) = (char)param_2[2];\n  *(undefined1 *)((uint)*(byte *)((int)param_1 + 5) * 3 + 0x20007952) =\n       *(undefined1 *)((int)param_2 + 3);\n  *(undefined1 *)((uint)*(byte *)((int)param_1 + 5) * 3 + 0x20007950) = 1;\n  uVar4 = FUN_000914ec();\n  if ((uVar4 & 1) == 0) {\n    iVar2 = FUN_000914ec();\n    if (-1 < iVar2 << 0x1d) goto LAB_0007ae18;\n  }\n  uVar3 = FUN_0007a5cc(0);\n  FUN_00091638(0xc800000,\"[RING]Function: %s, error code: %s.\",\"[RING]Function: %s, error code: %s.\"\n               ,\"nrfx_rtc_init\",uVar3);\nLAB_0007ae18:\n  FUN_000914ec();\n  return 0;\n}\n\n"
+  },
+  "hashes": {
+    "build/goal-r1-rtc-init/verify.py": "8e79def66ec3f6ca75a7978b2198eff7a1154038df15e09dc89ae3231480be25",
+    "build/goal-r1-rtc-init/results.json": "d3e71eb33ac4563943058e40109eced2c2fdebc78bd52fab6be762e8ac5a142b",
+    "build/goal-r1-rtc-init/source.elf": "c74b758705e37fcbd28a902890850c46f88fbbe2b5816627c23c7dfe7f20209b",
+    "build/goal-r1-rtc-init/stock.elf": "0b3d95f0d4f8114285652a06dba7de7e5bbf991c43d71b7dfa80b9563b6890df",
+    "build/goal-r1-rtc-init/rea-snapshot.json": "3633018a4a7aba602ff2c70da280333b89b03d5dc00968c50bed4c9f3bc15605"
+  },
+  "limitations": [
+    "Controlled MMIO register model; no physical RTC or NVIC exception delivery.",
+    "Stock logging getter returns zero; active log formatting is outside the comparison.",
+    "Callback functions are controlled mocks; private stack, fault, cycle and byte identity are not established.",
+    "Instance is RTC2/index zero; other instances and full startup vector placement are not validated.",
+    "Existing compiled SDK object is unchanged; this adds evidence, not source qualification or accepted pseudocode coverage."
+  ]
+}

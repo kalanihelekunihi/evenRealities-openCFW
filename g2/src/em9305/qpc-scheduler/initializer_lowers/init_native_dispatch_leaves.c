@@ -1,28 +1,18 @@
-/* Three full native callback bodies with preserved return delay slots. */
-__asm__(
-    ".text\n"
-    ".balign 4\n"
-    ".global opencfw_em9305_dispatch_leaf_31cb84\n"
-    ".type opencfw_em9305_dispatch_leaf_31cb84,@function\n"
-    "opencfw_em9305_dispatch_leaf_31cb84:\n"
-    "mov_s r1,0x3d\n"
-    "j_s.d [blink]\n"
-    "stb r1,[r0,200]\n"
-    ".size opencfw_em9305_dispatch_leaf_31cb84,.-opencfw_em9305_dispatch_leaf_31cb84\n"
-    ".balign 4\n"
-    ".global opencfw_em9305_dispatch_leaf_31cb9c\n"
-    ".type opencfw_em9305_dispatch_leaf_31cb9c,@function\n"
-    "opencfw_em9305_dispatch_leaf_31cb9c:\n"
-    "j_s.d [blink]\n"
-    "stb 8,[r0,200]\n"
-    ".size opencfw_em9305_dispatch_leaf_31cb9c,.-opencfw_em9305_dispatch_leaf_31cb9c\n"
-    ".balign 4\n"
-    ".global opencfw_em9305_dispatch_leaf_31cba4\n"
-    ".type opencfw_em9305_dispatch_leaf_31cba4,@function\n"
-    "opencfw_em9305_dispatch_leaf_31cba4:\n"
-    "mov r1,290\n"
-    "ldb_s r1,[r0,r1]\n"
-    "j_s.d [blink]\n"
-    "stb r1,[r0,200]\n"
-    ".size opencfw_em9305_dispatch_leaf_31cba4,.-opencfw_em9305_dispatch_leaf_31cba4\n"
-);
+#include <stdint.h>
+
+/* Native dispatch leaves 0x31cb84, 0x31cb9c and 0x31cba4: store the
+ * pending command opcode byte at +200 (0x3d, 8, or the byte at +290). */
+void opencfw_em9305_dispatch_leaf_31cb84(uintptr_t record)
+{
+    *(volatile uint8_t *)(record+200u)=0x3du;
+}
+
+void opencfw_em9305_dispatch_leaf_31cb9c(uintptr_t record)
+{
+    *(volatile uint8_t *)(record+200u)=8u;
+}
+
+void opencfw_em9305_dispatch_leaf_31cba4(uintptr_t record)
+{
+    *(volatile uint8_t *)(record+200u)=*(volatile uint8_t *)(record+290u);
+}

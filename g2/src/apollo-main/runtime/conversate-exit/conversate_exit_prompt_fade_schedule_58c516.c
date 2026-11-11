@@ -10,7 +10,7 @@ extern void audio_uart_lv_anim_init_4503d6(void *);
 extern void audio_uart_lv_anim_values_4506ce(void *, int32_t, int32_t);
 extern void *audio_uart_lv_anim_start_450408(void *);
 extern void audio_legal_regulatory_fade_callback_58c12c(void);
-extern void audio_uart_lv_anim_path_450672(void);
+extern void lv_anim_path_ease_out(void);
 
 static const char module[] = "fade.anim";
 static const char path[] =
@@ -46,7 +46,7 @@ void audio_conversate_exit_prompt_fade_schedule_58c516(
     animation[12] = duration != 0u ? duration : 250u;
     animation[13] = 0u - delay;
     animation[1] = (uint32_t)(uintptr_t)audio_legal_regulatory_fade_callback_58c12c;
-    animation[8] = (uint32_t)(uintptr_t)audio_uart_lv_anim_path_450672;
+    animation[8] = (uint32_t)(uintptr_t)lv_anim_path_ease_out;
     if (complete != 0)
         animation[4] = (uint32_t)(uintptr_t)complete;
     (void)audio_uart_lv_anim_start_450408(animation);

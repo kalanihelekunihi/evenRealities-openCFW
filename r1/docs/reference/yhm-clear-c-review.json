@@ -1,0 +1,247 @@
+{
+  "schema": 1,
+  "scope": "Native YHM2710 clear-system-tracking root 0x3543c and its 0x5074c dispatch tail; retain setter code unchanged",
+  "source": {
+    "source": "r1/src/application/board/native_yhm_system_track.c",
+    "payload": "r1-application",
+    "role": "selected",
+    "toolchain": "clang",
+    "link": true,
+    "expect": "compile",
+    "returncode": 0,
+    "argv": [
+      "/usr/bin/clang",
+      "--target=arm-none-eabi",
+      "-mcpu=cortex-m4",
+      "-mthumb",
+      "-munaligned-access",
+      "-mfpu=fpv4-sp-d16",
+      "-mfloat-abi=hard",
+      "-std=c11",
+      "-Os",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-fshort-enums",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-fno-delete-null-pointer-checks",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/r1/src/vendor",
+      "-isystem",
+      "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
+      "-MD",
+      "-MF",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-yhm-clear-c/r1/r1-application/r1__src__application__board__native_yhm_system_track.c.d",
+      "-c",
+      "/Users/kalani/Repo/evenRealities-openCFW/r1/src/application/board/native_yhm_system_track.c",
+      "-o",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-yhm-clear-c/r1/r1-application/r1__src__application__board__native_yhm_system_track.c.o"
+    ],
+    "source_sha256": "9f5d8f16e21d205b008ffab41b302b0acd1baa3e7819f1f6f558f9e515203314",
+    "object_sha256": "f0560e68afc24e3ce4dfcc73dfb2815accf797c887bdf41139111de1aa23159d",
+    "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-yhm-clear-c/r1/r1-application/r1__src__application__board__native_yhm_system_track.c.o",
+    "strong": [
+      "r1_native_charger_initialize",
+      "r1_native_charger_tracking_clear",
+      "r1_yhm_system_track_clear_native",
+      "r1_yhm_system_track_clear_ring",
+      "r1_yhm_system_track_clear_sdk",
+      "r1_yhm_system_track_native",
+      "r1_yhm_system_track_ring",
+      "r1_yhm_system_track_sdk"
+    ],
+    "weak": [],
+    "undefined": [
+      "nrf_log_frontend_std_1",
+      "r1_structured_log_format",
+      "r1_structured_log_mode_get",
+      "r1_yhm_register_read_native",
+      "r1_yhm_register_write_native"
+    ]
+  },
+  "validation": {
+    "paired_cases": 16512,
+    "executions": 33024,
+    "base_cases": 6912,
+    "callback_mutation_cases": 9600,
+    "checks": [
+      "native/C charger tracking, bit1 clear and ignored read status",
+      "scripted changing log modes and short-circuit getter counts, string contents and encoded log arguments",
+      "16-byte provider frame, exposed word addresses and R4-R11 values",
+      "partial/full read writes, untouched destination, high-word preservation and callbacks mutating each frame word",
+      "raw final write status and returned R2/R3, final saved registers/SP/masks"
+    ],
+    "limits": [
+      "Register transport and logging providers modeled; no physical charger/I2C/IRQ proof",
+      "APSR/other caller-clobbered registers, arbitrary private-frame/control-flow aliases, faults and concurrency excluded"
+    ]
+  },
+  "negative_controls_and_GCC": {
+    "set-instead-of-clear": {
+      "compiled": true,
+      "behavior_rejected": true
+    },
+    "zero-high-word": {
+      "compiled": true,
+      "behavior_rejected": true
+    },
+    "truncate-status": {
+      "compiled": true,
+      "behavior_rejected": true
+    },
+    "gcc": {
+      "strict_compilation": true,
+      "behavior_passed": false
+    }
+  },
+  "audit": {
+    "units_compiled": 577,
+    "unrelated_objects_identical": 576,
+    "existing_function_sections_and_relocations_unchanged": [
+      ".text.r1_native_charger_initialize",
+      ".text.r1_yhm_system_track_native"
+    ],
+    "added_strong_symbols": [
+      "r1_native_charger_tracking_clear",
+      "r1_yhm_system_track_clear_native",
+      "r1_yhm_system_track_clear_ring",
+      "r1_yhm_system_track_clear_sdk"
+    ],
+    "manifest_unchanged": true,
+    "imports_unchanged": {
+      "application": 164,
+      "bootloader": 34
+    },
+    "normal_report": "build/sources-goal-r1-yhm-clear-c/report.json",
+    "new_exact_region": {
+      "payload": "r1-application",
+      "symbol": "r1_native_charger_tracking_clear",
+      "start": 169804,
+      "end": 169808,
+      "sha256": "051ec761f5abafb4d2b8b922c11c2a6ba681a1de4b861649692f2de6ed2b4ad1",
+      "evidence": "r1/symbols/function-frontier.csv",
+      "bindings": {
+        "r1_yhm_system_track_clear_native": 218173
+      },
+      "address": 329548,
+      "binding_evidence": "r1/symbols/function-frontier.csv"
+    },
+    "hybrid": {
+      "report": "build/hybrid-goal-r1-yhm-clear-c/build-report.json",
+      "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+      "totals": {
+        "binary-pull-through": 642121,
+        "source-built": 4039,
+        "resource-file": 248
+      },
+      "source_completeness_proven": false
+    }
+  },
+  "REA": {
+    "evidence_id": "ev_bb4bb50bb39add3228a018667b0d4d8be3a8fd9cd97e4cfa7387e8cda008e6bf",
+    "subject": {
+      "name": "stock.elf",
+      "digest": {
+        "sha256": "25b4a29af80ec8edab5bd861ba9b74a6e22eab29dc3d7a809a16869e8a140f04"
+      },
+      "local_path": "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-queue-reset-c/stock.elf",
+      "format": "elf",
+      "architecture": "arm"
+    },
+    "provider": {
+      "id": "ghidra",
+      "name": "Ghidra",
+      "version": "12.1.4"
+    },
+    "analysis_profile": {
+      "provider": {
+        "id": "ghidra",
+        "name": "Ghidra",
+        "version": "12.1.4"
+      },
+      "parameters": {
+        "target_kind": "executable",
+        "target_format": "elf",
+        "architecture": "arm",
+        "available_architectures": [
+          "arm"
+        ],
+        "import_mode": "ephemeral-source-immutable",
+        "annotation_policy": "atomic-function-entry-metadata-v1",
+        "load_image_observations": "source-mappings-entry-context-v2",
+        "function_body_evidence": "complete-inclusive-ranges-v1",
+        "function_references": "complete-body-and-entry-reference-manager-v2",
+        "call_relationship_coverage": "function-body-call-coverage-v5",
+        "function_dossier_coverage": "observed-facets-and-call-relationships-v1",
+        "string_inventory_evidence": "defined-data-coverage-v1",
+        "location_resolution": "explicit-address-exact-entry-symbol-first-v3",
+        "procedure_file_offset_resolution": "address-first-unique-target-source-mapping-v2",
+        "instruction_flow_evidence": "decoded-return-pcode-v1",
+        "instruction_references": "exact-address-incoming-v1",
+        "function_boundary_observations": "ghidra-function-boundary-limitations-v3",
+        "no_return_repair": "returning-imports-decoded-return-v2",
+        "process_launch": "inspected-jvm-launch-support-v1",
+        "jump_table_evidence": "typed-case-default-blocks-v1",
+        "decompiler_jump_loads": true,
+        "loader": "auto-from-header",
+        "language_id": "auto-from-header",
+        "compiler_spec_id": "auto-default",
+        "analyzer_preset": "ghidra-default"
+      },
+      "digest": "7e46711069eea041af1b9b99e34115c13332795e5cda76e584a722f529ec70de"
+    },
+    "predicate_type": "rea.analysis",
+    "operation": "read_bytes",
+    "parameters": {
+      "address": "0x3543c",
+      "length": 204
+    },
+    "raw_result": {
+      "address": "0x3543c",
+      "requested_bytes": 204,
+      "returned_bytes": 204,
+      "bytes_hex": "1cb500208df80400012101aa0846fff7dfff9df8040020f002008df800005cf047f8c00703d15cf043f8400707d59df800300ea20da14ff044605cf0dff85cf037f880070bd5154815499df80020401ac008032101eb004012a144f097fa01216a46084600f05ef91cbd00005b52494e475d59484d323731305f72657365745f7379735f747261636b20747864617461203d20307825303278000000fc440c001c440c0059484d323731305f72657365745f7379735f747261636b20747864617461203d2030782530327800",
+      "complete": true
+    },
+    "normalized_result": {
+      "address": "0x3543c",
+      "requested_bytes": 204,
+      "returned_bytes": 204,
+      "bytes_hex": "1cb500208df80400012101aa0846fff7dfff9df8040020f002008df800005cf047f8c00703d15cf043f8400707d59df800300ea20da14ff044605cf0dff85cf037f880070bd5154815499df80020401ac008032101eb004012a144f097fa01216a46084600f05ef91cbd00005b52494e475d59484d323731305f72657365745f7379735f747261636b20747864617461203d20307825303278000000fc440c001c440c0059484d323731305f72657365745f7379735f747261636b20747864617461203d2030782530327800",
+      "complete": true
+    },
+    "confidence": "observed",
+    "authority": "shipped-artifact",
+    "environment": null,
+    "limitations": [
+      "The session serves operations only after Ghidra reports default auto-analysis complete; incomplete analysis does not expose partial results.",
+      "The imported Program and temporary project are ephemeral and deleted on close. Annotation operations edit session database metadata; original executable bytes are never written.",
+      "Cancelling an active Ghidra request terminates its ephemeral database and discards session annotations. The selected target remains open; the next provider query imports the original artifact again.",
+      "Default-space addresses use lowercase 0x-prefixed hexadecimal; other address spaces use <percent-encoded-space>:0x<hex>.",
+      "Bytes reflect Ghidra's initialized memory, including loader fixups. Reads stop at an unmapped or uninitialized byte and report completeness explicitly.",
+      "macOS sessions require a matching executable Ghidra native decompiler; REA checks for it but does not build native components or change Gatekeeper quarantine state."
+    ],
+    "relationship_coverage": null,
+    "locations": [],
+    "evidence_links": []
+  },
+  "qualification": "build/goal-r1-yhm-clear-c/qualified/qualification.json",
+  "probe_hashes": {
+    "build/goal-r1-yhm-clear-c/verify.py": "9c9058bc3faff371ad6b0c6eabe4adf1fd30ef2d4b70e30bc499a4f3ad788cad",
+    "build/goal-r1-yhm-clear-c/negatives.py": "4b185fc871030da0d2ec4f64e26531149ab839a86c531a5951d8d05c885094ab",
+    "build/goal-r1-yhm-clear-c/audit.py": "57bb96870da4090f92741af799465e6872afc62da23348f729ca99a9ddcdcdc7",
+    "build/goal-r1-yhm-clear-c/product.o": "f0560e68afc24e3ce4dfcc73dfb2815accf797c887bdf41139111de1aa23159d",
+    "build/goal-r1-yhm-clear-c/gcc.o": "063702b4e48dad69fde9dc5198c10f648108e7712bb3d42be542a9172898569c"
+  },
+  "limitations": [
+    "Register transport and logging providers modeled; no physical charger/I2C/IRQ proof",
+    "APSR/other caller-clobbered registers, arbitrary private-frame/control-flow aliases, faults and concurrency excluded",
+    "Empty compiler register constraints preserve the native ABI, with no executed assembly instructions in this unit.",
+    "Strict GCC compiles but uses a 32-byte provider frame instead of 16 bytes, so its behavior remains unqualified.",
+    "The native C ABI implementation supersedes the high-level vendor convenience function as the frontier owner at these entries. The convenience API has a different signature and read-failure policy and is not a native firmware provider.",
+    "Only the four-byte new dispatch tail is added to exact source selections; the full root remains unqualified.",
+    "Original Arm Compiler 5 is unavailable. Complete source-only reconstruction and physical hardware behavior remain unproven."
+  ]
+}

@@ -9,7 +9,7 @@
  * vertical scroll container (pad left 8, right 14, bottom 288, radius 6, white
  * 1 px scrollbar at opa 127). When all five news records are valid, one item per
  * record is stacked 10 px apart, followed by the "scroll to refresh" end item;
- * otherwise a centred icon + two-line "no news" placeholder is shown. */
+ * otherwise a centred icon + two-line "no news" default is shown. */
 #include <stdint.h>
 #include <stddef.h>
 
@@ -97,20 +97,20 @@ extern int32_t audio_uart_lv_obj_y_43fce0(void *obj);           /* lv_obj_get_y 
 extern int32_t audio_uart_lv_obj_height_43fdda(void *obj);      /* lv_obj_get_height */
 extern uint32_t audio_uart_page_44104c(uint32_t rgb);           /* lv_color_hex */
 extern void audio_uart_page_441164(void *obj, int32_t v, uint32_t sel);  /* style width */
-extern void audio_uart_page_44120e(void *obj, int32_t v, uint32_t sel);  /* style pad_top */
-extern void audio_uart_page_44121c(void *obj, int32_t v, uint32_t sel);  /* style pad_bottom */
-extern void audio_uart_page_44122a(void *obj, int32_t v, uint32_t sel);  /* style pad_left */
-extern void audio_uart_page_441238(void *obj, int32_t v, uint32_t sel);  /* style pad_right */
+extern void lv_obj_set_style_pad_top(void *obj, int32_t v, uint32_t sel);  /* style pad_top */
+extern void lv_obj_set_style_pad_bottom(void *obj, int32_t v, uint32_t sel);  /* style pad_bottom */
+extern void lv_obj_set_style_pad_left(void *obj, int32_t v, uint32_t sel);  /* style pad_left */
+extern void lv_obj_set_style_pad_right(void *obj, int32_t v, uint32_t sel);  /* style pad_right */
 extern void audio_uart_page_441246(void *obj, int32_t v, uint32_t sel);  /* style pad_row */
 extern void audio_uart_page_441254(void *obj, int32_t v, uint32_t sel);  /* style pad_column */
 extern void audio_uart_page_44127e(void *obj, uint32_t c, uint32_t sel); /* style bg_color */
 extern void audio_uart_page_44129e(void *obj, uint32_t v, uint32_t sel); /* style bg_opa */
 extern void audio_uart_page_4412ec(void *obj, uint32_t c, uint32_t sel); /* style border_color */
-extern void audio_uart_page_44131c(void *obj, int32_t v, uint32_t sel);  /* style border_width */
+extern void lv_obj_set_style_border_width(void *obj, int32_t v, uint32_t sel);  /* style border_width */
 extern void audio_uart_page_44140e(void *obj, uint32_t c, uint32_t sel); /* style text_color */
 extern void audio_uart_page_44143e(void *obj, uint32_t font, uint32_t sel); /* style text_font */
 extern void audio_uart_page_44145a(void *obj, uint32_t v, uint32_t sel); /* style text_align */
-extern void audio_uart_page_44146a(void *obj, int32_t v, uint32_t sel);  /* style radius */
+extern void lv_obj_set_style_radius(void *obj, int32_t v, uint32_t sel);  /* style radius */
 extern void audio_uart_page_44e368(void *obj, uint32_t mode);   /* lv_obj_set_scrollbar_mode */
 extern void audio_uart_page_44e3ca(void *obj, uint32_t dir);    /* lv_obj_set_scroll_dir */
 extern void audio_uart_lv_scroll_to_y_44ea04(void *obj, int32_t y, uint32_t anim); /* lv_obj_scroll_to_y */
@@ -198,9 +198,9 @@ static void style_mask_layer(void *mask, uint32_t bg_opa)
     audio_uart_page_43f09a(mask, -1, -1);
     audio_uart_page_44127e(mask, audio_uart_page_44104c(COLOR_BLACK), 0u);
     audio_uart_page_44129e(mask, bg_opa, 0u);
-    audio_uart_page_44131c(mask, 0, 0u);
+    lv_obj_set_style_border_width(mask, 0, 0u);
     lv_obj_set_style_pad_all_4effa8(mask, 0, 0u);
-    audio_uart_page_44146a(mask, 0, 0u);
+    lv_obj_set_style_radius(mask, 0, 0u);
     audio_uart_page_43dfa4(mask, LV_OBJ_FLAG_SCROLLABLE);
 }
 
@@ -209,7 +209,7 @@ static void style_flex_box(void *box, uint32_t flow)
 {
     audio_uart_page_43f4c0(box, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
     audio_uart_page_44129e(box, 0u, 0u);
-    audio_uart_page_44131c(box, 0, 0u);
+    lv_obj_set_style_border_width(box, 0, 0u);
     lv_obj_set_style_pad_all_4effa8(box, 0, 0u);
     audio_uart_page_48ba78(box, flow);
     audio_uart_page_48ba92(box, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER);
@@ -284,13 +284,13 @@ int32_t News_Widget_ext_init_4f4670(void *parent)
         audio_uart_page_43f4c0(scroll, SCREEN_W, SCREEN_H);
         audio_uart_page_43f09a(scroll, 0, 0);
         audio_uart_page_44129e(scroll, 0u, 0u);
-        audio_uart_page_44131c(scroll, 0, 0u);
+        lv_obj_set_style_border_width(scroll, 0, 0u);
         audio_uart_page_4412ec(scroll, audio_uart_page_44104c(COLOR_BLACK), 0u);
-        audio_uart_page_44146a(scroll, NEWS_SCROLL_RADIUS, 0u);
-        audio_uart_page_44122a(scroll, NEWS_SCROLL_PAD_LEFT, 0u);
-        audio_uart_page_441238(scroll, NEWS_SCROLL_PAD_RIGHT, 0u);
-        audio_uart_page_44120e(scroll, 0, 0u);
-        audio_uart_page_44121c(scroll, SCREEN_H, 0u);
+        lv_obj_set_style_radius(scroll, NEWS_SCROLL_RADIUS, 0u);
+        lv_obj_set_style_pad_left(scroll, NEWS_SCROLL_PAD_LEFT, 0u);
+        lv_obj_set_style_pad_right(scroll, NEWS_SCROLL_PAD_RIGHT, 0u);
+        lv_obj_set_style_pad_top(scroll, 0, 0u);
+        lv_obj_set_style_pad_bottom(scroll, SCREEN_H, 0u);
         audio_uart_page_44e3ca(scroll, LV_DIR_VER);
         audio_uart_page_44e368(scroll, LV_SCROLLBAR_MODE_AUTO);
         audio_uart_page_441164(scroll, 1, LV_PART_SCROLLBAR);

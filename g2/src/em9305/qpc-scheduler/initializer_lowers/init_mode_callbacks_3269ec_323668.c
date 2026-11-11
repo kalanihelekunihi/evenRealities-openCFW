@@ -25,7 +25,7 @@ uint32_t opencfw_em9305_mode_callback_3269ec(uintptr_t context,
 }
 
 /* Native 0x323668 consists solely of `j_s [blink]`; R0 is untouched.
- * This is an authenticated callback body, not a fabricated success stub. */
+ * This is an authenticated callback body, not a fabricated success return. */
 uint32_t opencfw_em9305_mode_callback_323668(uintptr_t context,
                                                uintptr_t callback_code)
 {

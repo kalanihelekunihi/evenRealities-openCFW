@@ -1,92 +1,31 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_3235bc\n"
-".type opencfw_em9305_child_3235bc,@function\n"
-"opencfw_em9305_child_3235bc:\n"
-"L3235bc:\n"
-"enter_s [r13-r15,fp,blink]\n"
-"L3235be:\n"
-"sub_s sp,sp,0x10\n"
-"L3235c0:\n"
-"mov_s r14,r0\n"
-"L3235c2:\n"
-"mov_s r3,0\n"
-"L3235c4:\n"
-"mov_s r13,0\n"
-"L3235c6:\n"
-"mov_s r11,r0\n"
-"L3235c8:\n"
-"st_s r3,[sp,0xc]\n"
-"L3235ca:\n"
-"st_s r3,[sp,0x8]\n"
-"L3235cc:\n"
-"st_s r3,[sp,0x4]\n"
-"L3235ce:\n"
-"st_s r3,[sp,0]\n"
-"L3235d0:\n"
-"ldb r1,[r11,52]\n"
-"L3235d4:\n"
-"brhs.nt r3,r1,L323608\n"
-"L3235d8:\n"
-"ld_s r2,[r14,0x38]\n"
-"L3235da:\n"
-"breq_s r2,0,L323602\n"
-"L3235dc:\n"
-"ldb r1,[r2,36]\n"
-"L3235e0:\n"
-"brne_s r1,0,L323602\n"
-"L3235e2:\n"
-"ldb_s r1,[r2,0x10]\n"
-"L3235e4:\n"
-"breq_s r1,0,L323602\n"
-"L3235e6:\n"
-"ldh_s r0,[r2,0x2]\n"
-"L3235e8:\n"
-"asl_s r1,r13\n"
-"L3235ea:\n"
-"add_s r12,sp,0x8\n"
-"L3235ec:\n"
-"and r1,r1,510\n"
-"L3235f0:\n"
-"add_s r12,r12,r1\n"
-"L3235f2:\n"
-"sth_s r0,[r12,0]\n"
-"L3235f4:\n"
-"add_s r15,sp,0\n"
-"L3235f6:\n"
-"ldb_s r12,[r2,0x10]\n"
-"L3235f8:\n"
-"add_s r13,r13,1\n"
-"L3235fa:\n"
-"add_s r1,r1,r15\n"
-"L3235fc:\n"
-"sth_s r12,[r1,0]\n"
-"L3235fe:\n"
-"stb 0,[r2,16]\n"
-"L323602:\n"
-"add_s r14,r14,4\n"
-"L323604:\n"
-"add_s r3,r3,1\n"
-"L323606:\n"
-"b_s L3235d0\n"
-"L323608:\n"
-"mov_s r0,0x805b38\n"
-"L32360e:\n"
-"ld r3,[r0,0]\n"
-"L323610:\n"
-"breq_s r3,0,L32361e\n"
-"L323612:\n"
-"extb.f r0,r13\n"
-"L323616:\n"
-"beq_s L32361e\n"
-"L323618:\n"
-"add_s r1,sp,0x8\n"
-"L32361a:\n"
-"jl_s.d [r3]\n"
-"L32361c:\n"
-"add_s r2,sp,0\n"
-"L32361e:\n"
-"leave_s [r13-r15,fp,blink,pcl]\n"
-".size opencfw_em9305_child_3235bc,.-opencfw_em9305_child_3235bc\n"
-);
+#include <stdint.h>
+
+/* Native 0x3235bc..0x323620: collect the completed-packet counts of the
+ * object's streams (table +56, count +52): for each live stream (+36
+ * clear) with a non-zero count (+16), record its handle (+2) and count and
+ * clear the count. When any were found and a host callback is registered
+ * at 0x805b38, report them as (number, handles[4], counts[4]). The stock
+ * frame holds four entries; more than four live streams overflow it. */
+typedef void (*opencfw_em9305_completed_callback_t)(uint32_t number,
+                                                    uint16_t *handles,
+                                                    uint16_t *counts);
+
+void opencfw_em9305_child_3235bc(uintptr_t object)
+{
+    uint16_t handles[4]={0u,0u,0u,0u};
+    uint16_t counts[4]={0u,0u,0u,0u};
+    uint32_t found=0u;
+    for(uint32_t index=0u;index<*(volatile uint8_t *)(object+52u);++index){
+        uintptr_t stream=*(volatile uint32_t *)(object+56u+index*4u);
+        if(stream==0u)continue;
+        if(*(volatile uint8_t *)(stream+36u)!=0u)continue;
+        if(*(volatile uint8_t *)(stream+16u)==0u)continue;
+        handles[found&0xffu]=*(volatile uint16_t *)(stream+2u);
+        counts[found&0xffu]=*(volatile uint8_t *)(stream+16u);
+        ++found;
+        *(volatile uint8_t *)(stream+16u)=0u;
+    }
+    uintptr_t callback=*(volatile uint32_t *)0x805b38u;
+    if(callback==0u||(uint8_t)found==0u)return;
+    ((opencfw_em9305_completed_callback_t)callback)((uint8_t)found,handles,counts);
+}

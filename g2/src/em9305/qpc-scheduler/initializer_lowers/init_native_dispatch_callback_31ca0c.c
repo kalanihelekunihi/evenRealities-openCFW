@@ -1,18 +1,15 @@
-/* Complete native 31ca0c callback that allocates and submits a command. */
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_dispatch_callback_31ca0c\n"
-".type opencfw_em9305_dispatch_callback_31ca0c,@function\n"
-"opencfw_em9305_dispatch_callback_31ca0c:\n"
-"enter_s [r13,blink]\n"
-"mov_s r13,r0\n"
-"mov_s r0,0x8029ac\n"
-"mov_s r1,0\n"
-"bl.d opencfw_em9305_memset\n"
-"mov_s r2,0x88\n"
-"bl.d opencfw_em9305_dispatch_callback_31ceb4\n"
-"mov_s r0,r13\n"
-"leave_s [r13,blink,pcl]\n"
-".size opencfw_em9305_dispatch_callback_31ca0c,.-opencfw_em9305_dispatch_callback_31ca0c\n"
-);
+/* Stock 0x31ca0c: memset(0x8029ac, 0, 0x88); return dispatch_callback_31ceb4(a).
+ * Converted from the lowered ARC asm; compiled with the g2-em9305-1 profile (-Os) and the
+ * disassembly diffed against the stock lowering: identical, or differing only in delay-slot
+ * scheduling / a redundant zero-extension / absolute-address ld/st forms (reviewed by hand). */
+#include <stdint.h>
+#define B8(a)  (*(volatile uint8_t  *)(uintptr_t)(a))
+#define H16(a) (*(volatile uint16_t *)(uintptr_t)(a))
+#define W32(a) (*(volatile uint32_t *)(uintptr_t)(a))
+extern uint32_t opencfw_em9305_memset(uint32_t,uint32_t,uint32_t);
+extern uint32_t opencfw_em9305_dispatch_callback_31ceb4(uint32_t);
+uint32_t opencfw_em9305_dispatch_callback_31ca0c(uint32_t a)
+{
+  (void)opencfw_em9305_memset(0x8029acu, 0u, 0x88u);
+  return opencfw_em9305_dispatch_callback_31ceb4(a);
+}

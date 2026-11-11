@@ -1,26 +1,14 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_3172c8\n"
-".type opencfw_em9305_child_3172c8,@function\n"
-"opencfw_em9305_child_3172c8:\n"
-"L3172c8:\n"
-"push_s blink\n"
-"L3172ca:\n"
-"bl.d opencfw_em9305_wsf_pool_allocate\n"
-"L3172ce:\n"
-"add r0,r0,0xb\n"
-"L3172d0:\n"
-"breq_s r0,0,L3172d6\n"
-"L3172d2:\n"
-"add r0,r0,0x8\n"
-"L3172d4:\n"
-"b_s L3172d8\n"
-"L3172d6:\n"
-"mov_s r0,0\n"
-"L3172d8:\n"
-"pop_s blink\n"
-"L3172da:\n"
-"j_s [blink]\n"
-".size opencfw_em9305_child_3172c8,.-opencfw_em9305_child_3172c8\n"
-);
+/* Stock 0x3172c8: p = wsf_pool_allocate(a+0xb); returns p ? p+8 : 0.
+ * Converted from the lowered ARC asm; compiled with the g2-em9305-1 profile (-Os) and the
+ * disassembly diffed against the stock lowering: identical, or differing only in delay-slot
+ * scheduling / a redundant zero-extension / absolute-address ld/st forms (reviewed by hand). */
+#include <stdint.h>
+#define B8(a)  (*(volatile uint8_t  *)(uintptr_t)(a))
+#define H16(a) (*(volatile uint16_t *)(uintptr_t)(a))
+#define W32(a) (*(volatile uint32_t *)(uintptr_t)(a))
+extern uint32_t opencfw_em9305_wsf_pool_allocate(uint32_t);
+uint32_t opencfw_em9305_child_3172c8(uint32_t a)
+{
+  uint32_t p = opencfw_em9305_wsf_pool_allocate(a + 0xbu);
+  return p != 0u ? p + 8u : 0u;
+}

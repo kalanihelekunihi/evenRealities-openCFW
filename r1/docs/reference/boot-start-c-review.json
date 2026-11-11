@@ -1,0 +1,194 @@
+{
+  "schema_version": 1,
+  "report": "build/sources-goal-r1-boot-start-c/report.json",
+  "report_sha256": "6cb1f8ade7f59b5211c2d4ffc56d1db67cf1e71009cf4a716a15d59432a98278",
+  "manifest_sha256": "475dfea50677b2d4521cdff8a722eed49e2d67d7a9dead5be7647fd11394bdfe",
+  "behavior": {
+    "cases": 640,
+    "digest": "3369c4de29fa119334028a3b46bf8edc71339c7335b64608c2262528e40faf35",
+    "layouts": [
+      {
+        "data_size": 0,
+        "bss_size": 0,
+        "entry": "0x100003d"
+      },
+      {
+        "data_size": 0,
+        "bss_size": 4,
+        "entry": "0x100003d"
+      },
+      {
+        "data_size": 0,
+        "bss_size": 16,
+        "entry": "0x100003d"
+      },
+      {
+        "data_size": 0,
+        "bss_size": 256,
+        "entry": "0x100003d"
+      },
+      {
+        "data_size": 0,
+        "bss_size": 4096,
+        "entry": "0x100003d"
+      },
+      {
+        "data_size": 4,
+        "bss_size": 0,
+        "entry": "0x100003d"
+      },
+      {
+        "data_size": 4,
+        "bss_size": 4,
+        "entry": "0x100003d"
+      },
+      {
+        "data_size": 4,
+        "bss_size": 16,
+        "entry": "0x100003d"
+      },
+      {
+        "data_size": 4,
+        "bss_size": 256,
+        "entry": "0x100003d"
+      },
+      {
+        "data_size": 4,
+        "bss_size": 4096,
+        "entry": "0x100003d"
+      },
+      {
+        "data_size": 64,
+        "bss_size": 0,
+        "entry": "0x100003d"
+      },
+      {
+        "data_size": 64,
+        "bss_size": 4,
+        "entry": "0x100003d"
+      },
+      {
+        "data_size": 64,
+        "bss_size": 16,
+        "entry": "0x100003d"
+      },
+      {
+        "data_size": 64,
+        "bss_size": 256,
+        "entry": "0x100003d"
+      },
+      {
+        "data_size": 64,
+        "bss_size": 4096,
+        "entry": "0x100003d"
+      },
+      {
+        "data_size": 512,
+        "bss_size": 0,
+        "entry": "0x100003d"
+      },
+      {
+        "data_size": 512,
+        "bss_size": 4,
+        "entry": "0x100003d"
+      },
+      {
+        "data_size": 512,
+        "bss_size": 16,
+        "entry": "0x100003d"
+      },
+      {
+        "data_size": 512,
+        "bss_size": 256,
+        "entry": "0x100003d"
+      },
+      {
+        "data_size": 512,
+        "bss_size": 4096,
+        "entry": "0x100003d"
+      }
+    ],
+    "units": [
+      {
+        "source": "r1/src/bootloader/runtime/start.c",
+        "source_sha256": "655fac12c4406a0bfb44c86e530fa6226f009c179d8813f08973ce1370b58b8f",
+        "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-boot-start-c/r1/r1-bootloader/r1__src__bootloader__runtime__start.c.o",
+        "object_sha256": "6705492f3efdbb3332add63835c656305b5784eacb5eab73d43eb96b7ddd3f9d"
+      },
+      {
+        "source": "vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx/mdk/gcc_startup_nrf52840.S",
+        "source_sha256": "fc4ea5e1c82b489cb7ef8867851b83e9f3ca2696bddc6feaeaf8576996b9840a",
+        "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-boot-start-c/r1/r1-bootloader/vendor-cache__r1__nRF5_SDK_17.1.0_ddde560__modules__nrfx__mdk__gcc_startup_nrf52840.S.o",
+        "object_sha256": "b1f46ba2e907440caf6323dad6c3d8c6d0c669eb64a2380d45064e595f499cdb"
+      }
+    ],
+    "unsupported_runtime_sections": [],
+    "actual_code": "new C CRT and pinned Nordic Reset_Handler assembly execute together",
+    "modeled_boundaries": [
+      "SystemInit",
+      "main"
+    ],
+    "limits": [
+      "Aligned, non-overlapping linker-provided data/BSS ranges; toy test layout is not a production image layout",
+      "SystemInit and main modeled; main return checked to remain inside the terminal C loop",
+      "No physical reset, DFU initialization, signature verification or hardware boot proof",
+      "No constructor/TLS support claimed; all current bootloader objects checked for absence"
+    ]
+  },
+  "negative_controls": {
+    "bss-not-cleared": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "ite-packages/unicorn/unicorn_py3/unicorn.py\", line 363, in wrapper\n    return func(uc, *args, **kwargs)\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 1063, in __hook_code_cb\n    callback(uc, address, size, user_data)\n    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-boot-start-c/verify.py\", line 43, in hook\n    assert bytes(uc.mem_read(bss,bss_size))==bytes(bss_size)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    "initialized-data-cleared": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "packages/unicorn/unicorn_py3/unicorn.py\", line 363, in wrapper\n    return func(uc, *args, **kwargs)\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 1063, in __hook_code_cb\n    callback(uc, address, size, user_data)\n    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-boot-start-c/verify.py\", line 42, in hook\n    assert bytes(uc.mem_read(DATA,data_size))==bytes(expected)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    "last-word-skipped": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "ite-packages/unicorn/unicorn_py3/unicorn.py\", line 363, in wrapper\n    return func(uc, *args, **kwargs)\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 1063, in __hook_code_cb\n    callback(uc, address, size, user_data)\n    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-boot-start-c/verify.py\", line 43, in hook\n    assert bytes(uc.mem_read(bss,bss_size))==bytes(bss_size)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    "bss-overrun": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "y\", line 363, in wrapper\n    return func(uc, *args, **kwargs)\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 1063, in __hook_code_cb\n    callback(uc, address, size, user_data)\n    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-boot-start-c/verify.py\", line 44, in hook\n    assert bytes(uc.mem_read(DATA-16,16))==bytes(uc.mem_read(end,16))==b'\\x7b'*16\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    "wrong-word-stride": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "ite-packages/unicorn/unicorn_py3/unicorn.py\", line 363, in wrapper\n    return func(uc, *args, **kwargs)\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 1063, in __hook_code_cb\n    callback(uc, address, size, user_data)\n    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-boot-start-c/verify.py\", line 43, in hook\n    assert bytes(uc.mem_read(bss,bss_size))==bytes(bss_size)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    "missing-main": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "Traceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-boot-start-c/verify.py\", line 53, in <module>\n    assert state['halt'] is not None and state['events']==(['SystemInit','main'] if root=='Reset_Handler' else ['main']),state\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: {'events': [], 'last_pc': 16777308, 'returned': False, 'halt': None}\n"
+    }
+  },
+  "audit": {
+    "unchanged_prior_objects": 776,
+    "new_unit": "r1/src/bootloader/runtime/start.c",
+    "imports": {
+      "r1-application": {
+        "added": [],
+        "removed": []
+      },
+      "r1-bootloader": {
+        "added": [
+          "__bss_end__"
+        ],
+        "removed": [
+          "_start"
+        ]
+      }
+    },
+    "sdk_reset_bss_clear_disabled": true,
+    "sdk_reset_and_main_objects_unchanged": true
+  },
+  "contract_basis": "Pinned Nordic GCC Reset_Handler copies initialized data and calls SystemInit, delegates _start to runtime; its BSS-clearing option is disabled in the current object.",
+  "source_check": "R1 passes: 777 units, 575 source files, zero not built. Global check retains existing G2 resident_rom_thumb_set.S omission.",
+  "instruction_identity_proven": false,
+  "image_integration_proven": false
+}

@@ -1,5 +1,10 @@
 /* Direct children of native HciDrvHandler 0x4b4ab2. */
 #include <stdint.h>
+/* Stock-RAM literals rewritten to named objects (sim-test wave 2026-10-26,
+ * .waves/sim-fix/apply.py): g2ref_X is the linker symbol X. */
+#include <stdint.h>
+extern unsigned char g2ref_audio_ble_hci_radio_scheduler_config[] __asm__("audio_ble_hci_radio_scheduler_config");
+extern unsigned char g2ref_audio_ble_hci_radio_scheduler_state[] __asm__("audio_ble_hci_radio_scheduler_state");
 extern void *audio_wsf_msg_alloc(uint16_t); /* selected WsfMsgAlloc 0x4bf99e */
 extern void audio_ble_hci_cmd_send(void *); /* hciCmdSend selected 0x52ae5e */
 extern void audio_ble_wsf_timer_insert(void *,uint32_t); /* 0x52a424 */
@@ -11,8 +16,8 @@ void WsfTimerStartMs(void *timer,uint32_t milliseconds) {
     audio_ble_wsf_timer_insert(timer,milliseconds/10u);
 }
 void audio_ble_hci_driver_empty_queue_4b4d18(void) {
-    audio_ble_hci_radio_scheduler_53006c((void *)(uintptr_t)0x20073ba8u,
-        (const void *)(uintptr_t)0x20065a10u,0x104u,0x820u);
+    audio_ble_hci_radio_scheduler_53006c((void *)(uintptr_t)((uint32_t)(uintptr_t)g2ref_audio_ble_hci_radio_scheduler_state),
+        (const void *)(uintptr_t)((uint32_t)(uintptr_t)g2ref_audio_ble_hci_radio_scheduler_config),0x104u,0x820u);
 }
 /* 0x5300e2 is am_hal_queue_item_get (AmbiqSuite 5.1.0 hal/am_hal_queue.c);
  * audio_ble_hci_ring_consume_5300e2 is a payload defsym alias of it. */

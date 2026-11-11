@@ -1,0 +1,400 @@
+{
+  "schema_version": 1,
+  "scope": "R1 NV port/class startup using the shared seven-class registry",
+  "report": "build/sources-goal-r1-nv-startup-c/report.json",
+  "comparison_report": "build/sources-goal-r1-application-manager-final-reviewed-c/report.json",
+  "audit": {
+    "compiled_units": 857,
+    "application_imports": 65,
+    "bootloader_imports": 22,
+    "unchanged_prior_nongenerated_objects": 845,
+    "changed_prior_nongenerated_objects": [
+      "r1/src/application/runtime/native_nv_update.c"
+    ],
+    "new_nongenerated_sources": [
+      "r1/src/application/runtime/native_nv_startup.c"
+    ],
+    "normal_object_equals_direct_and_pipeline_objects": true,
+    "normal_shared_table_object_equals_probe": true,
+    "manifest_change": "one NV startup unit using existing NV update profile",
+    "source_plan_unchanged": true,
+    "owned_new_initialized_bytes": 2,
+    "closed_import": "r1_storage_manager_initialize_731a0",
+    "new_explicit_import": "r1_nv_store_bootstrap_73220"
+  },
+  "direct": {
+    "stock_C_cases": 3840,
+    "native_instruction_bytes_executed": 112,
+    "actual_hash131_and_fault_primitive": true,
+    "live_port_reload_and_class_handles": true,
+    "payload_and_count_bounds_and_wrap": true,
+    "hashes_class_base_and_state_traces_match": true,
+    "bind_initialize_control_and_tail_modeled": true,
+    "void_R0_private_frame_APSR_excluded": true
+  },
+  "actual_port_chain": {
+    "stock_C_cases": 128,
+    "native_instruction_bytes_executed": 104,
+    "actual_hash131_and_fault_primitive": true,
+    "live_port_reload_and_class_handles": true,
+    "payload_and_count_bounds_and_wrap": true,
+    "hashes_class_base_and_state_traces_match": true,
+    "actual_port_binding_control_and_record": true,
+    "initialize_and_bootstrap_tail_modeled": true,
+    "void_R0_private_frame_APSR_excluded": true
+  },
+  "dirty_scan_regression": {
+    "cases": 2048,
+    "executions": 4096,
+    "all_flag_masks": 128,
+    "log_modes": 8,
+    "live_handle_replacement": true
+  },
+  "code_generation": {
+    "all_five_function_bytes_and_alignment_unchanged": true,
+    "existing_strings_unchanged": true,
+    "handle_table_bytes_order_and_relocation_targets_unchanged": true,
+    "only_relocation_name_normalization": "private nv_handles/section versus exported r1_nv_handle_owners",
+    "sections": {
+      ".text.r1_native_nv_dirty_scan": {
+        "bytes": "2de9f04782b040f200070020c0f2000757f820100968897cc90703d101300728f6d13ee007283cd040f2000840f2030940f2000a0024c0f20008c0f21c09c0f2000a00bf57f82400214605682846fff7feffd0b10646fff7feffc00703d1fff7feff400707d52b1d4ff04860514652460096fff7fefffff7feff800705d52a1d484641463346fff7feff0134072cd9d140f20000c0f2000000680021826901209047012002b0bde8f087",
+        "alignment": 4
+      },
+      ".rel.text.r1_native_nv_dirty_scan": [
+        [
+          6,
+          47,
+          "NV_HANDLES"
+        ],
+        [
+          12,
+          48,
+          "NV_HANDLES"
+        ],
+        [
+          40,
+          47,
+          "r1_nv_sync_sdk"
+        ],
+        [
+          48,
+          47,
+          "r1_nv_sync_ring"
+        ],
+        [
+          54,
+          48,
+          "r1_nv_sync_sdk"
+        ],
+        [
+          62,
+          48,
+          "r1_nv_sync_ring"
+        ],
+        [
+          78,
+          10,
+          "r1_store_class_record_write"
+        ],
+        [
+          86,
+          10,
+          "r1_structured_log_mode_get"
+        ],
+        [
+          94,
+          10,
+          "r1_structured_log_mode_get"
+        ],
+        [
+          114,
+          10,
+          "r1_structured_log_format"
+        ],
+        [
+          118,
+          10,
+          "r1_structured_log_mode_get"
+        ],
+        [
+          134,
+          10,
+          "nrf_log_frontend_std_2"
+        ],
+        [
+          144,
+          47,
+          "r1_kv_port"
+        ],
+        [
+          148,
+          48,
+          "r1_kv_port"
+        ]
+      ],
+      ".text.r1_nv_modules_idle_check": {
+        "bytes": "80b5fff7feff002080bd",
+        "alignment": 2
+      },
+      ".rel.text.r1_nv_modules_idle_check": [
+        [
+          2,
+          10,
+          "r1_native_nv_dirty_scan"
+        ]
+      ],
+      ".text.r1_kv_dev_info_bit2_set": {
+        "bytes": "70b58eb001ad044628463421fff7feff40f20006c0f20006306829463422fff7feff9df81c0004f0010100f0fb0040ea81008df81c00306829463422fff7fefffff7feff00200eb070bd",
+        "alignment": 2
+      },
+      ".rel.text.r1_kv_dev_info_bit2_set": [
+        [
+          12,
+          10,
+          "__aeabi_memclr4"
+        ],
+        [
+          16,
+          47,
+          "r1_device_info_record_kv_handle"
+        ],
+        [
+          20,
+          48,
+          "r1_device_info_record_kv_handle"
+        ],
+        [
+          30,
+          10,
+          "r1_kv_class_read"
+        ],
+        [
+          60,
+          10,
+          "r1_kv_class_write"
+        ],
+        [
+          64,
+          10,
+          "r1_native_nv_dirty_scan"
+        ]
+      ],
+      ".text.r1_peer_address_record_write": {
+        "bytes": "f0b58db06e460c46054630463421fff7feff40f20007c0f20007386831463422fff7feff25b128680290a888adf80c002cb12068cdf80e00a088adf8120044f24310c4f64d000590386869463422fff7fefffff7feff00200db0f0bd",
+        "alignment": 2
+      },
+      ".rel.text.r1_peer_address_record_write": [
+        [
+          14,
+          10,
+          "__aeabi_memclr4"
+        ],
+        [
+          18,
+          47,
+          "r1_device_info_record_kv_handle"
+        ],
+        [
+          22,
+          48,
+          "r1_device_info_record_kv_handle"
+        ],
+        [
+          32,
+          10,
+          "r1_kv_class_read"
+        ],
+        [
+          78,
+          10,
+          "r1_kv_class_write"
+        ],
+        [
+          82,
+          10,
+          "r1_native_nv_dirty_scan"
+        ]
+      ],
+      ".text.r1_protocol_command_000844b0": {
+        "bytes": "b0b584b0044608460d46fff7feffb0b1b5f8033000252046822101220095fff7feff0020fff7feff0df10a042046ff210622fff7feff20462146fff7feff002004b0b0bd",
+        "alignment": 2
+      },
+      ".rel.text.r1_protocol_command_000844b0": [
+        [
+          10,
+          10,
+          "r1_packet_field12_get"
+        ],
+        [
+          30,
+          10,
+          "r1_protocol_send_flag_set_c"
+        ],
+        [
+          36,
+          10,
+          "r1_kv_dev_info_bit2_set"
+        ],
+        [
+          50,
+          10,
+          "memset"
+        ],
+        [
+          58,
+          10,
+          "r1_peer_address_record_write"
+        ]
+      ],
+      ".r1.nv.sync.ring": {
+        "bytes": "5b52494e475d73796e632073746f7265206f6e6520636c6173732c206e616d653a25732c7265743a256400",
+        "alignment": 1
+      },
+      ".r1.nv.sync.sdk": {
+        "bytes": "73796e632073746f7265206f6e6520636c6173732c206e616d653a25732c7265743a256400",
+        "alignment": 1
+      },
+      ".rodata.r1_nv_handle_owners": {
+        "bytes": "00000000000000000000000000000000000000000000000000000000",
+        "alignment": 4
+      },
+      ".rel.rodata.r1_nv_handle_owners": [
+        [
+          0,
+          2,
+          "r1_device_info_record_kv_handle"
+        ],
+        [
+          4,
+          2,
+          "r1_ble_mult_kv_handle"
+        ],
+        [
+          8,
+          2,
+          "r1_health_settings_kv_handle"
+        ],
+        [
+          12,
+          2,
+          "r1_health_record_kv_handle"
+        ],
+        [
+          16,
+          2,
+          "r1_batcfg_record_kv_handle"
+        ],
+        [
+          20,
+          2,
+          "r1_device_info_kv_handle"
+        ],
+        [
+          24,
+          2,
+          "r1_r_size_kv_handle"
+        ]
+      ]
+    }
+  },
+  "initialization": {
+    "native_RW_and_ZI_handlers_executed": true,
+    "independent_RW_decoder_matches": true,
+    "region_guards_unchanged": true,
+    "owned_halfword": {
+      "symbol": "r1_nv_registered_class_count",
+      "address": "0x20006970",
+      "initial_value": 0,
+      "section": ".r1.nv.registered.count"
+    },
+    "source_object_sha256": "107e76472cb9b8ba9f6272420b611f98e1a846ddf09177b0ce513274b09d9053",
+    "final_RAM_placement_unverified": true
+  },
+  "compiled_defects_rejected": [
+    {
+      "defect": "wrong-payload-limit",
+      "rejected": true,
+      "log": "build/goal-r1-nv-startup-c/wrong-payload-limit/test.log"
+    },
+    {
+      "defect": "wrong-count-limit",
+      "rejected": true,
+      "log": "build/goal-r1-nv-startup-c/wrong-count-limit/test.log"
+    },
+    {
+      "defect": "wrong-key-termination",
+      "rejected": true,
+      "log": "build/goal-r1-nv-startup-c/wrong-key-termination/test.log"
+    },
+    {
+      "defect": "wrong-hash-length",
+      "rejected": true,
+      "log": "build/goal-r1-nv-startup-c/wrong-hash-length/test.log"
+    },
+    {
+      "defect": "wrong-base-field",
+      "rejected": true,
+      "log": "build/goal-r1-nv-startup-c/wrong-base-field/test.log"
+    },
+    {
+      "defect": "omit-last-class",
+      "rejected": true,
+      "log": "build/goal-r1-nv-startup-c/omit-last-class/test.log"
+    }
+  ],
+  "stock_entry": "0x731a0",
+  "stock_body_bytes": 116,
+  "unexecuted_instruction_bytes": 4,
+  "unexecuted_detail": "Two self-branches following the failing payload/count invalid-store assertions; both stores observed.",
+  "public_contract": [
+    "Bind and invoke live port initializer, clear registered count, then control request3 with initialized base word.",
+    "Read the existing seven live handle owners in their authenticated order; reject payload size>=232, increment/wrap count then reject count>=8.",
+    "Clear key byte7, compute actual hash131 over all eight key bytes, store hash and current base before moving to next class.",
+    "Call separate store bootstrap after successful registrations; incidental void R0 excluded."
+  ],
+  "limits": [
+    "Direct bind/init/control/bootstrap services modeled; pipeline executes actual port record, binder and control callback with initializer and bootstrap modeled.",
+    "Concrete hash131 and shared allocation-fault primitive execute in both fixtures.",
+    "No class/handle duplicated; existing dirty-scan table becomes shared const storage with unchanged bytes and normalized relocations.",
+    "Native startup confirms the new count halfword begins at zero; final source RAM placement unverified.",
+    "Private frame/output-pointer aliases, void scratch outputs, APSR, concurrent/fault-handler behavior, physical flash operations, final application linking and boot unverified."
+  ],
+  "evidence_files": {
+    "build/sources-goal-r1-nv-startup-c/report.json": "74d4fb5704ab0c5a39622808e3139ec00e24fdff14c08ae1eb3f06b8a1d626bb",
+    "build/sources-goal-r1-application-manager-final-reviewed-c/report.json": "864990e0dc9fa7c05cac047148221ac8e12e11d6ea131d304d5498d508299c61",
+    "r1/src/application/runtime/native_nv_startup.c": "6dcaa576d453bf15199b36d67f4246658d972656e4b08c2bcc9854fd42b3f8ab",
+    "r1/src/application/runtime/native_nv_update.c": "8c29236368109101018ddfccd3c171bd2ed5aef22b6ac75140d71915ac34bf34",
+    "r1/src/application/board/native_kv_class.h": "d35befbb7b46b9f8eaa27a651a71cbe999fa9f4f8297dfcf946c06941c4014c7",
+    "r1/src/application/board/native_kv_port.c": "45a4394808e7a03115ef07440f2444b740e75c6e08d3e78d129afaaa3066c5d8",
+    "r1/src/application/checksums/stock_checksums.c": "63f78e208048b5bd4b91c00f97e1260a5a53f5bee50dc51aa5ce4aaa1cdfe898",
+    "r1/src/include/r1_stock_checksums.h": "af730ecb8d2e2cc5656016b269678e7f1ac6c7e48fe32401fdfb9b7206886ef9",
+    "r1/src/sources.json": "f0d2287957bb44ebac0ae61e973261e825cf2a61aec35c2cb0db9fd126d38e0c",
+    "tools/build/source-plan.json": "eeb516e31b3310fb0718f36908977f8125723f7c5e0e86cd6744395826259a4d",
+    "build/goal-r1-nv-startup-c/manifest-before.json": "0aeefb1b6d31e4db0aa9d5915afea00b337aea06600f1eb3bfbc552a903309cc",
+    "build/goal-r1-nv-startup-c/update-before.c": "50b61bfecb66e026fc5879b0d3a41b1d8bfca774a4a132f28e8636d769c876cc",
+    "build/goal-r1-nv-startup-c/record.py": "9a77f15c80cd7596da5c9f99729ab38c0fc2905e9927416f0629cba82a252ab5",
+    "build/goal-r1-nv-startup-c/rea.json": "ef787628266388d90be379e8f450e43213b0576b16c94df63c76777840babbd2",
+    "build/goal-r1-nv-startup-c/verify.py": "e405592817b1806b10babb07956b08659647dbe5d46ebca5ea0a6e302c54e3cd",
+    "build/goal-r1-nv-startup-c/results.json": "77ef8cd02ed97bfb67459c6cd51e41f9b4aed6ffd64b8cddd5eaf7e72826aa62",
+    "build/goal-r1-nv-startup-c/verification.log": "260130060413ade20259b70a8120800a1a6bdcb611f68c640211cc1420d52a4f",
+    "build/goal-r1-nv-startup-c/source.elf": "9732a65a8b7d0c04addaf868f9d6b934f6e765f6e6046aa2a4eac31a9713ced5",
+    "build/goal-r1-nv-startup-c/pipeline/verify.py": "2fca0b09c8bc6b6c510f5d17efcde44bccf2f119e055379efca9ab3a5b4a3ac8",
+    "build/goal-r1-nv-startup-c/pipeline/results.json": "32cee7699210f7721378f21a0b25e89b5f18695740192cd04a851b9d67fb6ad9",
+    "build/goal-r1-nv-startup-c/pipeline/verification.log": "cd51efb8c60610376119f29e4384d55ef39f7e908ce0fbd13395416e443abfb9",
+    "build/goal-r1-nv-startup-c/pipeline/source.elf": "1b8b0f353789f0456c58f56f6d6a8f56d6a8fdfd3c001a02e7144a26ec5f29c7",
+    "build/goal-r1-nv-startup-c/regression/verify.py": "a1ba172f7dcfbcaee4d000cd5e758d6dfacfd9a66b117bc66971cd85cd99b6d9",
+    "build/goal-r1-nv-startup-c/regression/verification.json": "c8894a5c75e1c6066a1fdd3fc3b2aff17a80b5e6df7d6674833833f24b5d17a7",
+    "build/goal-r1-nv-startup-c/regression/verification.log": "01c6138eb262491dc0464f625dd4c068dd237b7f607cff2ade23a15df9d57f43",
+    "build/goal-r1-nv-startup-c/regression/source.elf": "181f82f10d7f5f0c788730f7ac232b21600474191e7f7b80b8fa5a3a66a2712b",
+    "build/goal-r1-nv-startup-c/audit.py": "4f1ac28100c9bdbaa2b339da5cc41345fe002732d7a657123ecf585578bb1948",
+    "build/goal-r1-nv-startup-c/audit.json": "f8b9264ec3c422919155a082d60df9f95c0d96217035316b0953235e67e6e006",
+    "build/goal-r1-nv-startup-c/initialization.py": "f134ba7fdac742085fb0c347e74879cca578d623033bead6e2642b5f1ba9959c",
+    "build/goal-r1-nv-startup-c/initialization-results.json": "0bc3390b34dedfe8a8fe1e6c5da7249f9374e9e4c2551171aea0bbcf012a9be1",
+    "build/goal-r1-nv-startup-c/initialization.log": "1107e6f98335306f4ba5d11596b98f93ef8f26fee3bf81d2a8baf24d48d8cab7",
+    "build/goal-r1-nv-startup-c/negative.py": "c86f6d438ae2abe4704828a6ccbee1bc1ebdfb67209e212f1210b14dd6467d7c",
+    "build/goal-r1-nv-startup-c/negative.json": "a336d8ebe1c6544bba96d7bcd64347e9b99a13e44ca08a7d087fcfe9b1ae029d",
+    "build/goal-r1-nv-startup-c/negative.log": "9b27bb04ab0deabefdf36f55dac72b8a6617a239d8892f8ff8ccaa612b47fd53",
+    "build/goal-r1-nv-startup-c/build.log": "1babb3ee3a2d7d0bacf6e4d35e0c47c23792803b59c800e8d2f02cdd5f3910c6",
+    "build/goal-r1-nv-startup-c/sources-check.log": "ba3d9dcf35014559526229444b0aeca536969ff56653a92a104d9fa36e1b5e0d"
+  }
+}

@@ -1,0 +1,177 @@
+{
+  "schema_version": 1,
+  "scope": "R1 local-hour calendar query in ordinary C with unchanged hourly averaging primitive",
+  "report": "build/sources-goal-r1-hour-index-reviewed-c/report.json",
+  "comparison_report": "build/sources-goal-r1-sleep-sync-c/report.json",
+  "audit": {
+    "compiled_units": 863,
+    "application_imports": 63,
+    "bootloader_imports": 22,
+    "unchanged_prior_nongenerated_objects": 852,
+    "changed_prior_nongenerated_objects": [
+      "r1/src/application/runtime/native_health_average.c"
+    ],
+    "normal_object_equals_direct_and_parent_probes": true,
+    "manifest_and_source_plan_unchanged": true,
+    "new_mutable_persistent_bytes": 0,
+    "assembly_entries_replaced_with_C": 1,
+    "architectural_FP_conversion_retained": true,
+    "object_audit": {
+      "private_hour_frame_bridge_removed": true,
+      "private_hour_body_helper_retired": true,
+      "canonical_calendar_types_and_eight_byte_layout_checked": true,
+      "average_source_text_unchanged": true,
+      "average_section_bytes_and_normalized_relocations_identical": true,
+      "architectural_saturating_FP_conversion_retained": true,
+      "no_new_writable_state": true,
+      "identified_direct_stock_call_sites": [
+        "0x5abec",
+        "0x5ad9a",
+        "0x5af6a",
+        "0x5bb36",
+        "0x5bcf6",
+        "0x5be86",
+        "0x881a4"
+      ],
+      "caller_scratch_register_values_and_private_frames_not_public_contract": true,
+      "manifest_unchanged": true
+    }
+  },
+  "direct_and_average_regression": {
+    "stock_C_comparisons": 2655,
+    "native_hour_instruction_bytes_executed": 30,
+    "source_object_sha256": "0cbe4391239c0667acbcc5d643facb82150ef164ff1397d62de9b86c1cd2b6ed",
+    "FPSCR_compared": true,
+    "provider_frames": {
+      "native": {
+        "r1_time_utc_offset_get": [
+          16,
+          32
+        ],
+        "time_calendar_utc_to_calendar": [
+          16,
+          32
+        ],
+        "r1_structured_log_mode_get": [
+          16
+        ],
+        "r1_structured_log_format": [
+          16
+        ],
+        "nrf_log_frontend_std_1": [
+          16
+        ]
+      },
+      "C": {
+        "r1_time_utc_offset_get": [
+          16,
+          32
+        ],
+        "time_calendar_utc_to_calendar": [
+          16,
+          32
+        ],
+        "r1_structured_log_mode_get": [
+          16
+        ],
+        "r1_structured_log_format": [
+          16
+        ],
+        "nrf_log_frontend_std_1": [
+          16
+        ]
+      }
+    },
+    "public_hour_and_full_cache_bytes_match": true,
+    "partial_calendar_writes_and_caller_guards": true,
+    "caller_scratch_R2_R3_and_private_frames_excluded": true
+  },
+  "actual_calendar_and_average_chain": {
+    "stock_C_real_calendar_average_comparisons": 1560,
+    "actual_hour_average_RTC_offset_calendar_converter_and_state_owners": true,
+    "independent_wrapped_hour_oracle": true,
+    "FPSCR_and_full_cache_bytes_match": true,
+    "only_logging_modeled": true
+  },
+  "compiled_defects_rejected": [
+    {
+      "defect": "wrong-calendar-field",
+      "rejected": true,
+      "log": "build/goal-r1-hour-index-c/wrong-calendar-field/test.log"
+    },
+    {
+      "defect": "nonzero-calendar-initialization",
+      "rejected": true,
+      "log": "build/goal-r1-hour-index-c/nonzero-calendar-initialization/test.log"
+    },
+    {
+      "defect": "changed-timestamp",
+      "rejected": true,
+      "log": "build/goal-r1-hour-index-c/changed-timestamp/test.log"
+    },
+    {
+      "defect": "changed-offset",
+      "rejected": true,
+      "log": "build/goal-r1-hour-index-c/changed-offset/test.log"
+    },
+    {
+      "defect": "check-ignored-calendar-result",
+      "rejected": true,
+      "log": "build/goal-r1-hour-index-c/check-ignored-calendar-result/test.log"
+    }
+  ],
+  "contract": [
+    "Zero a private eight-byte canonical calendar, obtain signed RTC/calendar offset, query UTC-to-calendar with timestamp bit pattern, then return unsigned hour byte at offset4. Ignore converter return status as native.",
+    "Retire the nonstock private hour-body helper and assembly frame bridge; public hour result remains unchanged. Canonical calendar types replace incompatible local converter declarations.",
+    "Seven identified direct stock callers use the scalar R0 result; caller-scratch R2/R3 and private stack layouts are not promised by the C interface. Indirect-call coverage is not established by that scan.",
+    "The average function source, executable section bytes and normalized relocations remain identical, including VCVT saturation/exception behavior."
+  ],
+  "limits": [
+    "Direct calendar/offset/logging boundaries modeled, including partial output writes and converter status0; scalar return, full cache bytes, callee-saved integer/FP registers, masks, stack guards and full FPSCR compare.",
+    "Actual-chain fixture executes C hour/average, offset getter, UTC adapter and Gregorian converter with actual cached RTC/calendar and hourly/stress owners; only logging modeled. Independent wrapped-hour arithmetic checks hour results.",
+    "All four rounding modes are tested. Caller-clobbered register contents, APSR and private frame addresses are excluded; no altered averaging conversion or relaxed FPSCR claim is made.",
+    "Raw aligned direct-branch scan identifies seven call sites; data/code ambiguity and indirect calls remain general limits.",
+    "Physical clock hardware, concurrency/faults, final source linking and boot remain unverified. The separate architectural FP assembly remains intentionally present."
+  ],
+  "evidence_files": {
+    "build/sources-goal-r1-hour-index-reviewed-c/report.json": "5de823c68188d75f26023854f4a55e6518b8ebd8a05aef215757813879b8fd83",
+    "build/sources-goal-r1-sleep-sync-c/report.json": "f298f67062c78ce49ca63d877ca786ec7b0f3a2cf4f694b868bd7fe2b0143c31",
+    "r1/src/application/runtime/native_health_average.c": "0e28bd8cf35d1cbb2c42d900e7694908352535ac4619b69d926d894a68eede38",
+    "r1/src/vendor/time_calendar/time_calendar.h": "6682b586810e47e41053163bb03f0a5acd8005721ab7bcbb70442ce4da78c59f",
+    "r1/src/application/runtime/native_hourly_state.c": "e2916643cbd9afec93f50b827c9000fcaefcead547ea26acc6a0300326ad7660",
+    "r1/src/application/runtime/native_hourly_state.h": "a3a6d8776279f85039202414b3dbd493777feab2825d7102daf0289b8a11e49b",
+    "r1/src/application/board/native_calendar_utc.c": "1f65478314f4801344e237e4997001cd947f6410e7d8041da3efb3f2bf73666e",
+    "r1/src/application/board/native_calendar_forward.c": "22c0b6b605fbde913d588c59cbdabee975310d36b75eaa9b0f68bf9bb51a37ac",
+    "r1/src/application/board/native_time_utc_offset.c": "71cfe0055cff4ddf0164da21283127c4f7c0c16b469569ed29db5e602c86fc85",
+    "r1/src/application/board/structured_time.c": "819e05dd9f2b535ecf7fc9d595e8d35ee4751ead5025b104693d461a0fad3058",
+    "r1/src/sources.json": "6ea6ab6f16e97b34b73ee1fb683c7c49eb7228bf29fdbdb21f5aded6d4d13380",
+    "tools/build/source-plan.json": "eeb516e31b3310fb0718f36908977f8125723f7c5e0e86cd6744395826259a4d",
+    "build/goal-r1-hour-index-c/manifest-before.json": "6ea6ab6f16e97b34b73ee1fb683c7c49eb7228bf29fdbdb21f5aded6d4d13380",
+    "build/goal-r1-hour-index-c/source-before.c": "5e97160b91ee042e72bcc78830f1e91c41fd1e530afb6fa5191da35873a0e865",
+    "build/goal-r1-hour-index-c/caller-scan.json": "59762bf23c5bf70cc395b836d5b32bd23a3ee926d2bf1e2961922a245477fb63",
+    "build/goal-r1-hour-index-c/audit.py": "8a1addeee79c2f197f4887efa4209485078bfcb69d24ca94e34da5ea0228e1c7",
+    "build/goal-r1-hour-index-c/object-audit.json": "330ebc5b38e5a4ceffa2c4afb67ee6b4697fdcafca0da62db990d40f37ffd361",
+    "build/goal-r1-hour-index-c/record.py": "79ba586173648df6804d371063d2e12710cbb6135024d29adf7b9ef79885251f",
+    "build/goal-r1-hour-index-c/rea.json": "5e3bf2ea1d4bdbc9ef9fc33f7b9667d5967ca81d2a78d74ed436af3cbbb1fd1c",
+    "build/goal-r1-hour-index-c/make_verify.py": "79072882c638ecb75de7413ac8c54a4f652a7080db41ee4016a833cfe3f8af3b",
+    "build/goal-r1-hour-index-c/verify.py": "726c4c3dec5cabc2e52e7ec61ab7a1092139a201a34017b7adb231fa96b43e9a",
+    "build/goal-r1-hour-index-c/results.json": "2156a108fa11734f93ea6f68c6ceec3e9a6f55869a57ba77156e53ee3b763084",
+    "build/goal-r1-hour-index-c/verification.log": "e9e0dc5053b461bb67ff27c9ad86a12f66001002108d8c66e2b2988b4d8017e4",
+    "build/goal-r1-hour-index-c/source.o": "0cbe4391239c0667acbcc5d643facb82150ef164ff1397d62de9b86c1cd2b6ed",
+    "build/goal-r1-hour-index-c/source.elf": "9ff7fc8c989dd8396561bc48ba837b43d4db6ff41a56b89e8822c436db64569c",
+    "build/goal-r1-hour-index-c/test.ld": "fb0189cf85ac0e7eda378887b832d424d977e929724d6a0295a8f11a369c5db2",
+    "build/goal-r1-hour-index-c/make_pipeline.py": "27cb8e0b79f614958e5cedfe481ace657b2d13179dd4053212b8f1c050e6da1e",
+    "build/goal-r1-hour-index-c/pipeline.py": "08d4f7933c7a830b482b99710a1a9c981ec08541fb6f27990e0b1782e8990c96",
+    "build/goal-r1-hour-index-c/pipeline/results.json": "b2d109ee7f1073d93b93b5c2b6382cde8a1711bef807d0304cf7c173544fead6",
+    "build/goal-r1-hour-index-c/pipeline.log": "1fd8087f97c684192e877264e59364802c13c0ede7fb56ab3b8d71d2eb226c26",
+    "build/goal-r1-hour-index-c/pipeline/source.o": "0cbe4391239c0667acbcc5d643facb82150ef164ff1397d62de9b86c1cd2b6ed",
+    "build/goal-r1-hour-index-c/pipeline/source.elf": "acff224ab1180f5b70f8f25741bc06149d5744694e30303238626c2ff6e92589",
+    "build/goal-r1-hour-index-c/pipeline/test.ld": "a0ab3692f9a23ca491ef9bf4096b081bee8cca124a5a335ab87dac05dfac3229",
+    "build/goal-r1-hour-index-c/negative.py": "1dbff18e6c5106e1fd37ff77fc0f7bfe6a80a2a5e0612c6aa072b3cc97b75b76",
+    "build/goal-r1-hour-index-c/negative-verify.py": "0b7349a2f38bf18b3398f1937878a697b71024237255095b2f5aff1deeaa9b1c",
+    "build/goal-r1-hour-index-c/negative.json": "729d390585e6e814e3f431b0b73afe00891b4c8fcb6d4654bafa15e5a4a41227",
+    "build/goal-r1-hour-index-c/negative.log": "0c8e8c9f9679e4b2d9cdf27708dfb906ae519624eaf6bc9455e03dd592b46b5c",
+    "build/goal-r1-hour-index-c/build.log": "9c3493509b6668b38b0594c30b7142105efda86ff1d226105c4a6daec134fad1",
+    "build/goal-r1-hour-index-c/sources-check.log": "c56719af1d0b2d08393a257d3e2022d40896a70239925ecc83fc942850eca238"
+  }
+}

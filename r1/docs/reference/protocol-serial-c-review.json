@@ -1,0 +1,179 @@
+{
+  "schema_version": 1,
+  "scope": "R1 ordinary C protocol headers, serial getter and dependent recovery/timeout providers",
+  "report": "build/sources-goal-r1-serial-final-c/report.json",
+  "comparison_report": "build/sources-goal-r1-nv-route-reviewed-c/report.json",
+  "audit": {
+    "compiled_units": 855,
+    "application_imports": 62,
+    "bootloader_imports": 22,
+    "unchanged_prior_nongenerated_objects": 842,
+    "changed_nongenerated_objects": [
+      "r1/src/application/board/native_advertising_configuration.c",
+      "r1/src/application/runtime/native_protocol_serial.c",
+      "r1/src/application/runtime/native_time_sync_providers.c"
+    ],
+    "import_sets_unchanged": true,
+    "no_new_persistent_state": true
+  },
+  "direct": {
+    "stock_C_comparisons": 24844,
+    "C_only_read_failure_cases": 108,
+    "native_instruction_bytes_covered": {
+      "ack": 66,
+      "inv": 62,
+      "checked": 36,
+      "getter": 70,
+      "handler": 52,
+      "flag": 24
+    },
+    "native_uncovered": {
+      "ack": [],
+      "inv": [],
+      "checked": [],
+      "getter": [],
+      "handler": [],
+      "flag": []
+    },
+    "one_alias_getter_body": true,
+    "header_and_payload_bytes_checked": true,
+    "actual_C_memory_routines": true,
+    "KV_and_final_response_modeled": true,
+    "private_frame_aliases_excluded": true
+  },
+  "cache_consumers": {
+    "actual_C_cache_consumer_cases": 8592,
+    "canonical_and_legacy_alias_same_body": true,
+    "actual_C_getter_touch_decoder_and_advertising_flag": true,
+    "actual_C_KV_memory_and_native_move": true,
+    "class_records_unchanged": true,
+    "critical_sections_balanced": true,
+    "hardware_sensor_and_radio_not_executed": true
+  },
+  "time_providers": {
+    "stock_C_comparisons": 3376,
+    "C_only_failed_read_cases": 771,
+    "native_instruction_bytes_covered": {
+      "0x7bb20": 32,
+      "0x84c82": 22
+    },
+    "encoder_payload_copied_synchronously": true,
+    "public_void_callback_result_excluded": true
+  },
+  "touch_regression": {
+    "pairs": 6378,
+    "groups": {
+      "selector_seeds": 4,
+      "all_selectors_dispatch": 3072,
+      "state_byte_and_client_ownership": 2560,
+      "getter_guards_handles_scalar_results": 450,
+      "live_backend_mutations": 288,
+      "masks_and_route": 4
+    },
+    "native_instruction_bytes_covered": 184,
+    "native_instruction_bytes_expected": 184,
+    "native_uncovered_byte_addresses": [],
+    "actual_C": [
+      "touch switch with canonical/legacy alias",
+      "module lookup/dispatcher and actual20-command table",
+      "packed payload getter",
+      "checked-send and header wrappers",
+      "touch services and client owner"
+    ],
+    "modeled": [
+      "logging",
+      "final protocol response backend",
+      "RTOS flags",
+      "synthetic release"
+    ],
+    "other_handlers": "unexecuted assertion stubs"
+  },
+  "compiled_defects_rejected": [
+    {
+      "name": "missing_ACK_bit",
+      "rejected": true
+    },
+    {
+      "name": "version_not_narrowed",
+      "rejected": true
+    },
+    {
+      "name": "narrowed_handle",
+      "rejected": true
+    },
+    {
+      "name": "short_serial_copy",
+      "rejected": true
+    },
+    {
+      "name": "ignored_serial_read_error",
+      "rejected": true
+    },
+    {
+      "name": "ignored_advertising_read_error",
+      "rejected": true
+    },
+    {
+      "name": "no_erased_recovery",
+      "rejected": true
+    },
+    {
+      "name": "failed_read_ignored",
+      "rejected": true
+    },
+    {
+      "name": "wrong_event",
+      "rejected": true
+    }
+  ],
+  "intentional_C_policy": [
+    "Cached serial read failure returns erased 15-byte serial and optional length zero.",
+    "Advertising configuration read failure returns zero.",
+    "Unavailable cached ring size requests recovery."
+  ],
+  "limitations": [
+    "Relocatable composition retains 62 application and 22 bootloader imports; no final bootable link is established.",
+    "Callback public void semantics exclude incidental scratch register/return residue.",
+    "Private stack address aliases are excluded.",
+    "KV and final response modeled in direct pairs; actual cached KV tested separately.",
+    "No physical flash, radio, touch electrical or boot validation.",
+    "Byte identity is not the user target and is not claimed."
+  ],
+  "evidence_files": {
+    "build/sources-goal-r1-serial-final-c/report.json": "5f1f34289b5f5a38f58c92a13f145ff42b1e09409f6cd523f27cb6ac0f871689",
+    "build/sources-goal-r1-nv-route-reviewed-c/report.json": "8fc03ebfd0ddab2c499e37f824a62abb6d2f977def2cf47bd21903320da5183a",
+    "r1/src/application/runtime/native_protocol_serial.c": "86ba987541e0ff6286e73c55a08369fdee40cc22c9f5ae5b32f4d2b440e75420",
+    "r1/src/application/board/native_advertising_configuration.c": "d08c439287caa2af1ebc88a562c524a37056ef74e0d4a6c36310e9e29488608b",
+    "r1/src/application/runtime/native_time_sync_providers.c": "becd41f208088fe99593d95e2fff7705731208f2bbf12eb89bf2eb742677609b",
+    "r1/src/application/board/native_touch_model.c": "42549fc9ed43d1a918ab31bdaf9a3f2783ee5e7b06281860ab7b6fb25c0cd0f7",
+    "r1/src/application/runtime/native_time_sync_command.c": "e848dc52e7a94ce769d40b3414f7cbe1f1cad34ce0bb4acf88d4077c8157892a",
+    "r1/src/include/r1_product_serial.h": "4e7dceb394e0ff30b66e964e6874b3bdd84459820d2d6e022877760d2d21d393",
+    "r1/src/sources.json": "618e3f6056f74edee68027c82dddb1d2e8c53810e0c04e416f42841fc974e4ec",
+    "r1/src/application/runtime/native_ble_message.c": "2155e44d418d1dd7cd8ebd2d98202acd063ddbafd001eaa37b01c9b18323aeb2",
+    "r1/src/application/runtime/native_memory_move.c": "26614e927758f8c0d0a9eb294d919a0062665a3d2cb822faa139271c564aec9e",
+    "build/goal-r1-serial-pure-c/verify.py": "16d5b62e4d4e19ac5714de1e178d0dbd96c2f0da01bf5a2e22066deae5570297",
+    "build/goal-r1-serial-pure-c/verification.json": "05cc2c5c216c14897e39ac8ff4a188e9f42a0b7c601d045500ca29965b7211fd",
+    "build/goal-r1-serial-pure-c/verification.log": "48825eaeb4ecb097762f9cb8a5a63d53c46f146af2945c573ad2d52a3fb84bc0",
+    "build/goal-r1-serial-pure-c/cache.py": "cfa0b294d60099088533186c5f3405a38137e00eb957a030f5095072d9c2cb92",
+    "build/goal-r1-serial-pure-c/cache/verification.json": "c09dd0c94a47171be22e89a6509dc996a7af32c3e104d11a27d4fb90ce064919",
+    "build/goal-r1-serial-pure-c/cache.log": "5dda407cbfdc8e43491eca6e5d975bf432143679a85590f926eb4b6bdd8c18ed",
+    "build/goal-r1-serial-pure-c/providers.py": "93fb7a47ac572f5fd84a6f640bca29b38b98795d632209fb5714ad290a4651e1",
+    "build/goal-r1-serial-pure-c/providers.json": "0bcccbe98d51c59e27bf369193bd613202bfc4c96157f3549beb96e672aa72ea",
+    "build/goal-r1-serial-pure-c/providers.log": "5f358e09090412ed32ca69da2ad313f4922856ec39a6b7409c0143471fafa682",
+    "build/goal-r1-serial-pure-c/providers-rea.json": "c2dcff5f761f3de744a61951cb4f0c0f54aa4f6a806358ce7993a7e0803b5047",
+    "build/goal-r1-serial-pure-c/providers-negative.py": "2538910d3947c00e41df6630fb187ec3916a2f2ba3ab78946d1ad8c9d3d1ccca",
+    "build/goal-r1-serial-pure-c/providers-negative.json": "fca5c4db4ca32fd44263174649334f4e76c5da21479ca1a082c250319d441dde",
+    "build/goal-r1-serial-pure-c/providers-negative.log": "10d7e0ed5ea0633819a638f8d06c72f931108c45aa13e92392042eb4533f07fc",
+    "build/goal-r1-serial-pure-c/negative.py": "4423777c9b895526aca75774c9ebe282bb65be9395584ba778335d037ac33fe2",
+    "build/goal-r1-serial-pure-c/negative.json": "3f2c0662d9072d1153200f5e6d27493a7b6040e4b9c142d73d50213a0d0b8578",
+    "build/goal-r1-serial-pure-c/negative.log": "a5855fb5f8ba4b08f4351ec547c0300deb45833f590079e85d3cca5ae764f63e",
+    "build/goal-r1-serial-pure-c/rea.json": "f9e4db75bdeca9160401a7122510f67287ba08c38eb05c8cb064a15101cb8703",
+    "build/goal-r1-serial-pure-c/ad-flag-rea.json": "f6c8623296ce24726fb8b7786948dc4af170a65a115547c67ad8388d9f92c621",
+    "build/goal-r1-serial-pure-c/touch/verify.py": "1b37c45ddff7091414024b2ce0819d60360db263a926b367675fe804a10d2290",
+    "build/goal-r1-serial-pure-c/touch/verification.json": "5002c1af79942223968d4203fe111b1ef43ff84e3f591ee1ec9563ea84a726c6",
+    "build/goal-r1-serial-pure-c/touch/verification.log": "1b2ad825d7836d0a7c12bbc0e3b792a1f857a6219b0c24fe063ea2ed96185ea3",
+    "build/goal-r1-serial-pure-c/touch/rea.json": "4263632476d31a69fd6b40a75b1e23f4be0de9a75dddb6499c3c9d39b72b18f1",
+    "build/goal-r1-serial-pure-c/r1-check.log": "f610d186f791ebf717d9fd6eed6c4f28612779fff34b885bcf8dc8a49c9ae80c",
+    "build/goal-r1-serial-pure-c/final-build.log": "bd9af81c34d8042eaa5ffdbab967a54d06ef56b81eedd548c4c7abf44fc92c31"
+  }
+}

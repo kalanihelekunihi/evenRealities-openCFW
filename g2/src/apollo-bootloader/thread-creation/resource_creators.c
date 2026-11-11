@@ -17,30 +17,27 @@ extern uint32_t opencfw_boot_timer_queue_fresh(uint32_t,uint32_t,uintptr_t,uintp
 static _Noreturn void fatal(void) {
     (void)opencfw_bl_mask_interrupts();
     *(volatile uint32_t *)(uintptr_t)UINT32_MAX=0;
-    for (;;) __asm__ volatile("b ." ::: "memory");
+    for (;;) { }
 }
 /* 4196c2 and41639a: callback record is timer ID with its low allocation bit
- * removed. The assembly wrapper retains the original saved-R7 return ABI. */
+ * removed. */
 uintptr_t opencfw_boot_timer_id_get(uint32_t *timer) {
     if (!timer)fatal();
     opencfw_bl_kernel_enter();uintptr_t id=timer[7];
     opencfw_bl_kernel_exit();return id;
 }
-/* Stock 0x41639A (bl_runtime_callback; CMSIS-RTOS2 TimerCallback) */
-__attribute__((naked))
-void opencfw_boot_timer_callback_dispatcher(uint32_t *timer __attribute__((unused))) {
-    __asm__ volatile(
-        "push {r7, lr}\n"
-        "bl opencfw_boot_timer_id_get\n"
-        "movs r1, r0\n"
-        "lsrs r1, r1, #1\n"
-        "lsls r1, r1, #1\n"
-        "cmp r1, #0\n"
-        "beq 1f\n"
-        "ldr r0, [r1, #4]\n"
-        "ldr r1, [r1]\n"
-        "blx r1\n"
-        "1: pop {r0, pc}\n");
+/* Stock 0x41639A (bl_runtime_callback; CMSIS-RTOS2 TimerCallback): record =
+ * id & ~1; when nonzero, load argument (+4) then function (+0) and call it.
+ * Stock pops the ambient R7 into R0 on return; this is a void callback whose
+ * R0 no caller reads. */
+void opencfw_boot_timer_callback_dispatcher(uint32_t *timer) {
+    const uintptr_t record = opencfw_boot_timer_id_get(timer) & ~(uintptr_t)1u;
+    if (record) {
+        const uint32_t argument = ((const uint32_t *)record)[1];
+        void (*const callback)(uint32_t) =
+            (void (*)(uint32_t))((const uint32_t *)record)[0];
+        callback(argument);
+    }
 }
 void opencfw_boot_timer_object_initialize(uintptr_t name,uint32_t period,
     uint32_t periodic,uintptr_t id,uintptr_t callback,uint32_t *timer) {
@@ -116,3 +113,6 @@ uintptr_t opencfw_provider_416610(const uint32_t *attr) {
     if (result && recursive)result|=1;
     return result;
 }
+
+/* Stock entry names that branch straight to the provider above. */
+__typeof__(opencfw_provider_416610) opencfw_bl_mutex_create __attribute__((alias("opencfw_provider_416610")));

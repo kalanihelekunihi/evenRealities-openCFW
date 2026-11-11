@@ -3,13 +3,13 @@
  * for all channel values, avoiding C's undefined shift count >= word width.
  */
 #include <stdint.h>
+#include "../csky_ops.h"
 
 extern void gx8002_image_b_dma_pair_10004bc0(uint32_t channel);
 
 static uint32_t native_shift(uint32_t value, uint32_t count)
 {
-    __asm__ volatile ("lsl %0, %1\n" : "+r"(value) : "r"(count));
-    return value;
+    return csky_lsl(value, count);
 }
 
 uint32_t gx8002_image_b_dma_abort_10004c84(uint32_t channel)

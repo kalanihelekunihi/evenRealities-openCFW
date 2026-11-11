@@ -1,0 +1,120 @@
+{
+  "schema_version": 1,
+  "scope": "Sensor-data notification throttle in ordinary C",
+  "report": "build/sources-goal-r1-notification-throttle-pure-c-abi/report.json",
+  "comparison_report": "build/sources-goal-r1-health-init-entry-pure-c/report.json",
+  "stock_ranges": [
+    {
+      "entry": "0x8b138",
+      "size": 72,
+      "symbol": "r1_health_event_notification_throttle"
+    }
+  ],
+  "audit": {
+    "compiled_units": 862,
+    "unchanged_prior_nongenerated_objects": 851,
+    "changed_prior_nongenerated_objects": [
+      "r1/src/application/runtime/native_health_notification_throttle.c"
+    ],
+    "application_imports": 63,
+    "bootloader_imports": 22,
+    "manifest_unchanged": true,
+    "source_plan_and_cache_layout_unchanged": true,
+    "new_state_definitions": 0,
+    "whole_notification_throttle_unit_has_no_inline_assembly": true,
+    "final_object_equals_tested_object": true
+  },
+  "comparisons": {
+    "direct_stock_C_comparisons": 2832,
+    "actual_connection_gate_backend_thunk_comparisons": 4032,
+    "native_instruction_bytes_executed": 72,
+    "strict_timestamp_read_write_width_order_values": true,
+    "independent_gate_unsigned_interval_commit_oracle": true,
+    "live_timestamp_mutations_and_final_commit_order": true,
+    "void_return_caller_scratch_APSR_private_frames_excluded": true,
+    "stage_delivery_and_backend_getter_modeled": true
+  },
+  "compiled_defects_rejected": [
+    {
+      "defect": "threshold",
+      "rejected": true
+    },
+    {
+      "defect": "zero-sentinel",
+      "rejected": true
+    },
+    {
+      "defect": "backward-clock",
+      "rejected": true
+    },
+    {
+      "defect": "connection-gate",
+      "rejected": true
+    },
+    {
+      "defect": "stage-order",
+      "rejected": true
+    },
+    {
+      "defect": "final-args",
+      "rejected": true
+    },
+    {
+      "defect": "early-commit",
+      "rejected": true
+    },
+    {
+      "defect": "stale-load",
+      "rejected": true
+    }
+  ],
+  "contract": [
+    "Connection-handle presence gates the path. The historical authenticated symbol name does not establish authentication. The clock backend runs before the live last-timestamp load.",
+    "Zero last timestamp, backward unsigned time, or elapsed time at least 10800 seconds sends the five existing stages in stock order. The first four receive first argument 0, the last receives (1,0).",
+    "The original clock result is committed only after all five stages, overriding stage mutations. The kind argument is unused."
+  ],
+  "limits": [
+    "REA matches all 72 stock instruction bytes, which all execute across 2832 direct comparisons; another 4032 comparisons execute the actual connection predicate and backend thunk. The backend getter and notification stages are modeled.",
+    "Stock and C timestamp access widths, read/write order and values match, including mutations in providers and stages. Saved integer/floating-point registers, SP, masks, FPSCR and caller/state guards are checked.",
+    "REA also confirms the first four stage prologues overwrite incoming R1 before reading it. Their C declarations match existing two-argument definitions; the second argument is set to zero.",
+    "Five external direct transfers were identified. Void return, caller scratch, APSR, private frames, indirect consumers, downstream stage correctness, physical clock/sensors/delivery, concurrency, final application linking and boot remain unverified.",
+    "No new persistent state, manifest, source-plan or cache-layout changes; the existing timestamp remains the sole state owner."
+  ],
+  "evidence_files": {
+    "build/sources-goal-r1-notification-throttle-pure-c-abi/report.json": "b764c31e3d2b46613b706632295dac1a4ea80246957365bce18dd5529a9e5e8c",
+    "build/sources-goal-r1-health-init-entry-pure-c/report.json": "809e96c3f32feb994a1534e7e0de14c3645fc25ba3ab2f03cdd5811242c2cc8f",
+    "r1/src/application/runtime/native_health_notification_throttle.c": "05c40dd69066ddfe79df87ab083d5949462dfdbfd7034482cbacbfbe3cc11e38",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-notification-throttle-pure-c-abi/r1/r1-application/r1__src__application__runtime__native_health_notification_throttle.c.o": "8c8a96b57eb6f8e6fbbc558b81b7867a54f86b00fd5b6d8aeb4f3564e5bd1394",
+    "r1/src/sources.json": "ac403598295564e9a4af5013cd797a60793cf6c47dfac150c902be6d400a7093",
+    "tools/build/source-plan.json": "eeb516e31b3310fb0718f36908977f8125723f7c5e0e86cd6744395826259a4d",
+    "r1/src/config/runtime/native_health_cache.ld": "eb8f131c489cd818d4e36718718fa1989719ca0170f164541a1a5bf56dfc1ec3",
+    "r1/src/application/runtime/native_health_notification_stages.c": "e46a59c7690339b670b9101df6f6233339460a748cf547d65cbd3a0a552de690",
+    "r1/src/application/board/native_protocol_connection_gates.c": "bba616f3d6715c4df33648fca31ce968e194ea05641d9cc129bc46889d43825e",
+    "r1/src/application/board/structured_time.c": "819e05dd9f2b535ecf7fc9d595e8d35ee4751ead5025b104693d461a0fad3058",
+    "r1/src/application/runtime/native_health_event_consumers.c": "a1895c60d12daaf2dc70322894981e1a79062edfcf8cfcb96f5b6e17e5661eef",
+    "build/goal-r1-notification-throttle-pure-c/next-goodix-config-rea.json": "f9fdee019c8dcc22e0958ad9a6280fb55c3dbdb00c4aaf0517e5419097d36e2a",
+    "build/goal-r1-notification-throttle-pure-c/audit.json": "1a0eba845ad62b106aea37f50207ec9aaeda00bb5232782baa9de3d650615549",
+    "build/goal-r1-notification-throttle-pure-c/verify.log": "912d72e4b18862a19f4196567b967b4b1abb260da6756fe5d1489e397ca63643",
+    "build/goal-r1-notification-throttle-pure-c/negative.json": "46b06701fc1b3c39bd2fb9683fb771aee651ebebb7224bda85ad08290ac90649",
+    "build/goal-r1-notification-throttle-pure-c/audit.py": "80555dea68ad269c9bae7a6fc12e095479c0204aa7c120c36b4b976546e84450",
+    "build/goal-r1-notification-throttle-pure-c/build-abi.log": "fa77a1fb5a781d1c3275a5d9cec3f2b731a93d746ccfcd2022d98f8db12adf15",
+    "build/goal-r1-notification-throttle-pure-c/record-tail.py": "5ef4dd8db932a583b161c53e8fea5d7ae382e9764d17f4041209b7bc3739771b",
+    "build/goal-r1-notification-throttle-pure-c/pipeline.elf": "a50f46ad516f97d2352ac63af82d571c6e7413cc858efc0e74185087b8ced537",
+    "build/goal-r1-notification-throttle-pure-c/source.elf": "f3e873cdf8bac642451a20f4d66cdefc2f5392a43f41312f0c546c7a2ed53ede",
+    "build/goal-r1-notification-throttle-pure-c/negative.py": "a213f7ddae9283e4cb45326ec0ab8cbffdb69ec01c9bea4e29849bee7227dce9",
+    "build/goal-r1-notification-throttle-pure-c/callers.py": "c46b1ad703e485acc8594b8cd4e76677142ad4e4e5f32f3e0aa0d8bc316bb924",
+    "build/goal-r1-notification-throttle-pure-c/negative.log": "a8b1035f50dbbac6b736d86ce2b1f9bbca0f759d9cce8773fd7c1f24938e2f71",
+    "build/goal-r1-notification-throttle-pure-c/source.o": "8c8a96b57eb6f8e6fbbc558b81b7867a54f86b00fd5b6d8aeb4f3564e5bd1394",
+    "build/goal-r1-notification-throttle-pure-c/results.json": "1491edef8bfd327ff99dd903bb5ac46c530df7c17017c5efbab40b3fd060f84a",
+    "build/goal-r1-notification-throttle-pure-c/stage-contract.json": "7158e3c512bde023949d0af3d293640cfb240f1f760036f107d808d7dcde92a3",
+    "build/goal-r1-notification-throttle-pure-c/rea.json": "071f7f31e05dbc0149bfbececfc63e47e36c470f8e63259c07b430c84718eece",
+    "build/goal-r1-notification-throttle-pure-c/stage-heads.json": "e1619a85a3ffd5239356c5018e99cf7b4ba4f6271533373312354c7596ba617b",
+    "build/goal-r1-notification-throttle-pure-c/sources-check.log": "b6ab468f43815a75634eab2762e209dbee8ab94c4cc3d601fded4210b6833f2a",
+    "build/goal-r1-notification-throttle-pure-c/callers.json": "7152771fb775c84fa218abcbfb39661cd567b2ab2a8ed500b5c2b2faad061672",
+    "build/goal-r1-notification-throttle-pure-c/record.py": "6e1b3ee4447518c10856b86de656cd52c12bbdabfb3cb2621b739af12b8cbdce",
+    "build/goal-r1-notification-throttle-pure-c/verify.py": "f3e0d2672058dda55f61b8cf19f87930a769d7e84df25ad915c49afe83bfb5e8",
+    "build/goal-r1-notification-throttle-pure-c/stage-contract.py": "0430b1f4c5906481c7193e72d303545522180f6a4882ecddb70d23e291c1664b",
+    "build/goal-r1-notification-throttle-pure-c/source-before.c": "36969c3f50f1f9ecc0e9fbf78cfef8cda7686a99fa3496f24a3ab44f39038068",
+    "build/goal-r1-notification-throttle-pure-c/build.log": "7e0d9f8b8ddf7d9ee44ad5cee9012e9b7426fbc3a32da0b55096160ca05f38e9"
+  }
+}

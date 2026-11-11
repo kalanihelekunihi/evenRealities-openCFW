@@ -9,9 +9,9 @@ extern void audio_uart_page_43f4c0(uint32_t object, uint32_t width, uint32_t hei
 extern void audio_uart_page_43f09a(uint32_t object, uint32_t x, uint32_t y);
 extern void audio_uart_page_43dfa4(uint32_t object, uint32_t flags);
 extern void audio_uart_page_44129e(uint32_t object, uint32_t value, uint32_t selector);
-extern void audio_uart_page_44131c(uint32_t object, uint32_t value, uint32_t selector);
+extern void lv_obj_set_style_border_width(uint32_t object, uint32_t value, uint32_t selector);
 extern void audio_terminal_lv_style_four_5ea224(uint32_t object, uint32_t value, uint32_t selector);
-extern void audio_uart_page_44146a(uint32_t object, uint32_t value, uint32_t selector);
+extern void lv_obj_set_style_radius(uint32_t object, uint32_t value, uint32_t selector);
 extern uint32_t audio_uart_page_498668(uint32_t parent);
 extern void audio_uart_page_498680(uint32_t object, uint32_t source);
 extern void audio_uart_page_43f6b8(uint32_t object, uint32_t index, uint32_t value, uint32_t selector);
@@ -34,9 +34,9 @@ static void set_state_word(uint32_t offset, uint32_t value) {
 static void configure_panel(uint32_t object) {
     audio_uart_page_43dfa4(object, 0x10u);
     audio_uart_page_44129e(object, 0u, 0u);
-    audio_uart_page_44131c(object, 0u, 0u);
+    lv_obj_set_style_border_width(object, 0u, 0u);
     audio_terminal_lv_style_four_5ea224(object, 0u, 0u);
-    audio_uart_page_44146a(object, 0u, 0u);
+    lv_obj_set_style_radius(object, 0u, 0u);
 }
 
 void audio_terminal_reset_subtree_5ea342(void) {

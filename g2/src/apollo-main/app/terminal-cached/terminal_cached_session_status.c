@@ -11,6 +11,9 @@ static uint32_t load_u32(const uint8_t *p) {
 uint8_t *audio_td_active_session(void) {
     return audio_td_state[0xa1d9u]!=0u?audio_td_state+0x9560u:0;
 }
+/* Former identical body in app/td-active/td_active_records_ptr.c. */
+__typeof__(audio_td_active_session) audio_td_active_records_ptr
+    __attribute__((alias("audio_td_active_session")));
 
 uint8_t audio_terminal_cached_session_status(uint32_t session) {
     const uint8_t *active=audio_td_active_session();

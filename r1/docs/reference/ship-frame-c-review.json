@@ -1,0 +1,126 @@
+{
+  "source": {
+    "source": "r1/src/application/board/native_ship_mode.c",
+    "payload": "r1-application",
+    "role": "candidate",
+    "toolchain": "clang",
+    "link": true,
+    "expect": "compile",
+    "returncode": 0,
+    "argv": [
+      "/usr/bin/clang",
+      "--target=arm-none-eabi",
+      "-mcpu=cortex-m4",
+      "-mthumb",
+      "-mfpu=fpv4-sp-d16",
+      "-mfloat-abi=hard",
+      "-std=c11",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-fno-strict-aliasing",
+      "-fshort-enums",
+      "-Os",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-fno-delete-null-pointer-checks",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/r1/src/vendor",
+      "-MD",
+      "-MF",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-ship-frame-c/r1/r1-application/r1__src__application__board__native_ship_mode.c.d",
+      "-c",
+      "/Users/kalani/Repo/evenRealities-openCFW/r1/src/application/board/native_ship_mode.c",
+      "-o",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-ship-frame-c/r1/r1-application/r1__src__application__board__native_ship_mode.c.o"
+    ],
+    "source_sha256": "cbb7dd2d1fcac5fa935250dfa4f6e0c6e6c4366bce7e1e75ffc50913c589ac22",
+    "object_sha256": "cd44726de42b0fc04086137c494e3032b796f7a44019ebf8402aa1679b6260f7",
+    "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-ship-frame-c/r1/r1-application/r1__src__application__board__native_ship_mode.c.o",
+    "strong": [
+      "nrf_gpio_cfg",
+      "nrf_gpio_pin_port_decode",
+      "r1_ship_mode_pin_pulse"
+    ],
+    "weak": [],
+    "undefined": [
+      "osDelay"
+    ]
+  },
+  "normal_report": "build/sources-goal-r1-ship-frame-c/report.json",
+  "validation": {
+    "controlled_decoder_alias_pairs": 2096,
+    "decode_pairs": 262,
+    "configuration_pairs": 3310,
+    "whole_pulse_pairs": 10,
+    "real_C_chain": true,
+    "provider_frames_and_live_callee_registers": true,
+    "restored_R0_R3": true,
+    "limitations": [
+      "osDelay timing/provider modeled",
+      "Initial save/store order and nested private return addresses excluded",
+      "No physical GPIO response or scheduling proof"
+    ]
+  },
+  "negative_controls": {
+    "prior-frames": {
+      "rejected": true,
+      "stderr": "arm-none-eabi-ld: warning: (osDelay): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-ship-mode-c/r1/r1-application/r1__src__application__board__native_ship_mode.c.o\nTraceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-ship-frame-c/reject-prior-frames.py\", line 68, in <module>\n    for v in vectors:assert a('cfg',v)==b('cfg',v)\n                            ^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    "wrong-shift-zero": {
+      "rejected": true,
+      "stderr": "arm-none-eabi-ld: warning: (osDelay): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-ship-frame-c/wrong-shift-zero.o\nTraceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-ship-frame-c/reject-wrong-shift-zero.py\", line 70, in <module>\n    for mutate in [False,True]:assert a('pulse',[],status,mutate)==b('pulse',[],status,mutate)\n                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    "wrong-outgoing-alias": {
+      "rejected": true,
+      "stderr": "arm-none-eabi-ld: warning: (osDelay): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-ship-frame-c/wrong-outgoing-alias.o\nTraceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-ship-frame-c/reject-wrong-outgoing-alias.py\", line 70, in <module>\n    for mutate in [False,True]:assert a('pulse',[],status,mutate)==b('pulse',[],status,mutate)\n                                                                   ~^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-ship-frame-c/reject-wrong-outgoing-alias.py\", line 59, in run\n    assert state['events']==[['write',0x50000714,4,3],['write',0x50000508+port_select*0x300,4,mask],['delay',200],['write',0x50000714,4,2]],state['events'];assert u.reg_read(UC_ARM_REG_R0)==5\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: [['write', 1342179092, 4, 3], ['write', 1342178568, 4, 1], ['delay', 200], ['write', 1342179092, 4, 2]]\n"
+    },
+    "larger-cfg-frame": {
+      "rejected": true,
+      "stderr": "arm-none-eabi-ld: warning: (osDelay): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-ship-frame-c/larger-cfg-frame.o\nTraceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-ship-frame-c/reject-larger-cfg-frame.py\", line 68, in <module>\n    for v in vectors:assert a('cfg',v)==b('cfg',v)\n                            ^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    }
+  },
+  "strict_order_counterexample": {
+    "strict_order_rejected": true,
+    "first_difference_index": 0,
+    "native": [
+      -24,
+      "write",
+      4,
+      305419898
+    ],
+    "C": [
+      -16,
+      "write",
+      4,
+      1145324608
+    ]
+  },
+  "REA": "r1/docs/reference/ship-mode-c-review.json",
+  "unrelated_objects_identical": 580,
+  "port_decode_bytes_unchanged": true,
+  "manifest_and_imports_unchanged": true,
+  "provider_frames": {
+    "pulse": 24,
+    "configuration": 40,
+    "nested_configuration_decode_from_pulse": 64
+  },
+  "qualification": "build/goal-r1-ship-frame-c/qualified/qualification.json",
+  "new_exact_bytes": 0,
+  "hybrid": {
+    "sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "totals": {
+      "binary-pull-through": 642099,
+      "source-built": 4061,
+      "resource-file": 248
+    },
+    "source_plan_unchanged": true,
+    "source_completeness_proven": false
+  },
+  "limitations": [
+    "Initial save/store order and nested return addresses excluded from bounded success; strict order test rejects C.",
+    "Decoder boundary modeled only for controlled-alias cases; main chain uses actual C decoder.",
+    "Electrical behavior, real scheduling/delay time, asynchronous events, faults and arbitrary control-frame aliases unproven."
+  ]
+}

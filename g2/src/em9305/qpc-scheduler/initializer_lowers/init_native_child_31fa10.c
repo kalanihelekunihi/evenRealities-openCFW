@@ -1,40 +1,23 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_31fa10\n"
-".type opencfw_em9305_child_31fa10,@function\n"
-"opencfw_em9305_child_31fa10:\n"
-"L31fa10:\n"
-"enter_s [r13-r14,blink]\n"
-"L31fa12:\n"
-"mov_s r13,r0\n"
-"L31fa14:\n"
-"add r13,r13,621\n"
-"L31fa18:\n"
-"ldb_s r2,[r13,0]\n"
-"L31fa1a:\n"
-"mov_s r14,r1\n"
-"L31fa1c:\n"
-"mpyuw r3,r2,0x1c\n"
-"L31fa20:\n"
-"add2_s r3,r3,r1\n"
-"L31fa22:\n"
-"ld r1,[r3,opencfw_em9305_mst_enc_actions_335114]\n"
-"L31fa2a:\n"
-"breq_s r1,0,L31fa30\n"
-"L31fa2c:\n"
-"jl_s [r1]\n"
-"L31fa2e:\n"
-"ldb_s r2,[r13,0]\n"
-"L31fa30:\n"
-"mpyuw r0,r2,0x7\n"
-"L31fa34:\n"
-"add_s r0,r0,r14\n"
-"L31fa36:\n"
-"ldb r0,[r0,opencfw_em9305_mst_enc_transitions_3351f4]\n"
-"L31fa3e:\n"
-"stb_s r0,[r13,0]\n"
-"L31fa40:\n"
-"leave_s [r13-r14,blink,pcl]\n"
-".size opencfw_em9305_child_31fa10,.-opencfw_em9305_child_31fa10\n"
-);
+#include <stdint.h>
+
+/* Native 0x31fa10..0x31fa42: master encryption state machine step. The
+ * state byte lives at record+621; each state row has seven events. Run the
+ * row's action (if any) on the record, then store and return the next
+ * state from the transition table (indexed by the state re-read after the
+ * action). The stock call leaves the action address in r1. */
+extern const uintptr_t opencfw_em9305_mst_enc_actions_335114[];
+extern const uint8_t opencfw_em9305_mst_enc_transitions_3351f4[];
+
+uint32_t opencfw_em9305_child_31fa10(uintptr_t record,uint32_t event)
+{
+    volatile uint8_t *state_slot=(volatile uint8_t *)(record+621u);
+    uint32_t state = *state_slot;
+    uintptr_t action=opencfw_em9305_mst_enc_actions_335114[state*7u+event];
+    if(action!=0u) {
+        ((void (*)(uintptr_t,uintptr_t))action)(record,action);
+        state=*state_slot;
+    }
+    uint32_t next=opencfw_em9305_mst_enc_transitions_3351f4[state*7u+event];
+    *state_slot=(uint8_t)next;
+    return next;
+}

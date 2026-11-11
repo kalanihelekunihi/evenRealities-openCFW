@@ -10,7 +10,7 @@ static _Noreturn void queue_assert(void)
 {
     (void)opencfw_bl_mask_interrupts();
     *(volatile uint32_t *)(uintptr_t)UINT32_MAX = 0u;
-    for (;;) __asm volatile("b ." ::: "memory");
+    for (;;) { }
 }
 
 uint32_t opencfw_bl_kernel_queue_create_static(uint32_t count,

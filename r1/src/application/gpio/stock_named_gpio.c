@@ -5,7 +5,6 @@
 #include "nrfx_gpiote.h"
 #include "stock_named_gpio.h"
 extern int strcmp(const char *,const char *);
-extern uint32_t r1_twi_gpio_read(uint32_t pin);
 typedef struct {
     uintptr_t reserved_00,reserved_04;
     uint32_t (*open)(generic_device_registry_device *);
@@ -29,8 +28,12 @@ r1_named_gpio_record r1_named_gpio_records[7]
     RECORD("device_stacmd_irq",33,2)
 };
 static r1_named_gpio_record *find_record(generic_device_registry_device *device) {
-    for (unsigned i=0;i<7;++i)
-        if (strcmp(r1_named_gpio_records[i].name,device->name)==0) return &r1_named_gpio_records[i];
+    for (unsigned i=0;i<7;++i) {
+        /* Stock reloads the caller name before the record name each time. */
+        const char *device_name=((volatile generic_device_registry_device *)device)->name;
+        const char *record_name=((volatile r1_named_gpio_record *)&r1_named_gpio_records[i])->name;
+        if (strcmp(record_name,device_name)==0) return &r1_named_gpio_records[i];
+    }
     return NULL;
 }
 uint32_t r1_named_gpio_register_all(void) {
@@ -49,12 +52,23 @@ uint32_t r1_named_gpio_callback(generic_device_registry_device *device,uintptr_t
     record->callback=callback;
     return 0;
 }
-uint32_t r1_named_gpio_read(generic_device_registry_device *device,uintptr_t operation,uintptr_t output,uintptr_t extra) {
-    (void)operation;(void)extra;
+/* The pin decoder uses local scratch; R3 is not a C operation output. */
+__attribute__((used,noinline)) static uint32_t named_gpio_read_body(
+        generic_device_registry_device *device,uintptr_t operation,uintptr_t output,
+        uint32_t *saved_r3) {
+    (void)operation;
     r1_named_gpio_record *record=find_record(device);
     if (record==NULL) return 2;
-    *(uint8_t *)output=(uint8_t)r1_twi_gpio_read(record->pin);
+    *saved_r3=record->pin;
+    NRF_GPIO_Type *port=nrf_gpio_pin_port_decode(saved_r3);
+    *(uint8_t *)output=(uint8_t)((port->IN>>*saved_r3)&1u);
     return 0;
+}
+uint32_t r1_named_gpio_read(generic_device_registry_device *device,
+        uintptr_t operation,uintptr_t output,uintptr_t extra) {
+    (void)extra;
+    uint32_t pin=0;
+    return named_gpio_read_body(device,operation,output,&pin);
 }
 uint32_t r1_named_gpio_close(generic_device_registry_device *device) {
     r1_named_gpio_record *record=find_record(device);
@@ -67,7 +81,6 @@ uint32_t r1_named_gpio_close(generic_device_registry_device *device) {
     return 0;
 }
 
-extern void r1_twi_gpio_release(uint32_t pin);
 /* Stock 0x6ED94 dispatches every matching record, including shared P1.01. */
 void r1_named_gpio_irq_dispatch(nrfx_gpiote_pin_t pin,nrf_gpiote_polarity_t action) {
     for (unsigned i=0;i<7;++i) {
@@ -78,21 +91,30 @@ void r1_named_gpio_irq_dispatch(nrfx_gpiote_pin_t pin,nrf_gpiote_polarity_t acti
         }
     }
 }
-uint32_t r1_named_gpio_open(generic_device_registry_device *device) {
+/* Local words supply the decoded pin and initialized GPIOTE configuration. */
+__attribute__((used,noinline)) static uint32_t named_gpio_open_body(
+        generic_device_registry_device *device,volatile uint32_t *frame) {
     r1_named_gpio_record *record=find_record(device);
     if (record==NULL) return 2;
     if (record->opened!=0) return 0;
-    r1_twi_gpio_release(record->pin);
+    frame[0]=record->pin;
+    NRF_GPIO_Type *port=nrf_gpio_pin_port_decode((uint32_t *)(uintptr_t)frame);
+    port->PIN_CNF[frame[0]]=2;
     if (!nrfx_gpiote_is_init()) (void)nrfx_gpiote_init();
-    /* Original template word 0x00000003 at 0x9A628; overwrite sense/pull. */
-    union { uint32_t word; nrfx_gpiote_in_config_t config; } configuration={.word=3};
+    frame[1]=3;
+    volatile uint8_t *configuration=(volatile uint8_t *)(frame+1);
+    configuration[0]=record->polarity;
+    configuration[1]=record->pull;
     _Static_assert(sizeof(nrfx_gpiote_in_config_t)<=4,"stock config extent");
     _Static_assert(offsetof(nrfx_gpiote_in_config_t,pull)==1,"short-enum pull offset");
-    configuration.config.sense=(nrf_gpiote_polarity_t)record->polarity;
-    configuration.config.pull=(nrf_gpio_pin_pull_t)record->pull;
-    (void)nrfx_gpiote_in_init(record->pin,&configuration.config,r1_named_gpio_irq_dispatch);
+    (void)nrfx_gpiote_in_init(record->pin,
+            (const nrfx_gpiote_in_config_t *)(uintptr_t)configuration,
+            r1_named_gpio_irq_dispatch);
     nrfx_gpiote_in_event_enable(record->pin,true);
-    /* Stock ignores initialization statuses and marks opened unconditionally. */
     record->opened=1;
     return 0;
+}
+uint32_t r1_named_gpio_open(generic_device_registry_device *device) {
+    volatile uint32_t frame[3]={0};
+    return named_gpio_open_body(device,frame);
 }

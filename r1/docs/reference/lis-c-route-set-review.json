@@ -1,0 +1,97 @@
+{
+  "cases": 1728,
+  "passed": 1728,
+  "failures": [],
+  "stock_entry": "0x756da",
+  "stock_body_bytes": 128,
+  "bridge_bytes": 10,
+  "c_body_bytes": 78,
+  "callback_stack_depth_pairs": [
+    [
+      [
+        -24
+      ],
+      [
+        -40
+      ]
+    ],
+    [
+      [
+        -24,
+        -24
+      ],
+      [
+        -40,
+        -40
+      ]
+    ],
+    [
+      [
+        -24,
+        -24,
+        -24
+      ],
+      [
+        -40,
+        -40,
+        -40
+      ]
+    ],
+    [
+      [
+        -24,
+        -24,
+        -24,
+        -24
+      ],
+      [
+        -40,
+        -40,
+        -40,
+        -24
+      ]
+    ]
+  ],
+  "unchanged_functions": [
+    "lis2dw12_pin_int1_route_get",
+    "r1_lis2dw12_aux16_boundary",
+    "r1_lis2dw12_aux20_boundary"
+  ],
+  "integrated_sources": [
+    "r1/src/application/runtime/native_lis_aux.c",
+    "r1/src/application/board/sensor-kernels/lis-aux/st-route-byte.c",
+    "r1/src/application/runtime/native_lis_fifo.c",
+    "r1/src/application/runtime/native_lis_registers.c"
+  ],
+  "report": "build/sources-goal-r1-lis-route-set-verified/report.json",
+  "report_sha256": "7ec0a8973945e3191514f123e9daf4de4accbb83ffd606e3c525d998cf35be1c",
+  "source_sha256": "f26cd85e5c9f735b99fa78a0df60dee382408ad6f848c1ebfcb8e81751d9791b",
+  "manifest_sha256": "be76bf00509f1551b53a08edbc5515ed3a3dcb9b1721ff4481fdf60b77d82eb8",
+  "stock_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "native_span_sha256": "b98f2d6549fa2296300c4eb21a5194a7bd0ac2a4ecfd92011781b2f34d0fae3c",
+  "rea": {
+    "completed": true,
+    "procedure": "0x756da",
+    "path": "build/goal-r1-lis-route-set/REA.json",
+    "sha256": "e500ee698bc4b1b08c8a49955809dfdfa3f6cb5f7375fd9b7937dc5d114c1a6a"
+  },
+  "probe_artifacts": {
+    "build/goal-r1-lis-route-set/verify.py": "d64e385d33ef0b3afcc799f37aa93ed9a117e495de4fab87e14c6421546b555b",
+    "build/goal-r1-lis-route-set/before.c": "c769e1d7c6a8790e9246d7dc347bccbee5d8dd6c39e507c35fa3aee554132ca0",
+    "build/goal-r1-lis-route-set/source.elf": "70c1463724b5ace093176b04437941db796d75d6c710706b1f0c842f05cd8040",
+    "build/goal-r1-lis-route-set/stock.elf": "3bab24368d9e55edbb726a8a09ad125a27955a49bdc5a1f8ac286f5105025dbc",
+    "build/goal-r1-lis-route-set/rea-snapshot.json": "cc46a2574616401ca2654b42ab00cbc81e73ddaa85bba072ca9f2e17f4f85fc8"
+  },
+  "integrated_source_sha256": {
+    "r1/src/application/runtime/native_lis_aux.c": "f26cd85e5c9f735b99fa78a0df60dee382408ad6f848c1ebfcb8e81751d9791b",
+    "r1/src/application/board/sensor-kernels/lis-aux/st-route-byte.c": "283d653e7a4ca16ef6917dc0199b41641a7d2983c9620ca4b88812457d0b792e",
+    "r1/src/application/runtime/native_lis_fifo.c": "d7c14b45179e6c9a46a6641074f3fabde3ee4df3701fc64f50333a5911133314",
+    "r1/src/application/runtime/native_lis_registers.c": "630862b4a317e123795a77ff2b8a8b92a02877fa0f7c62e9fd89d658790a0a78"
+  },
+  "limits": [
+    "Ten-byte native frame bridge retains incoming R2/R3 words, scratch addresses and final restoration. This is a partial C extraction.",
+    "Actual C/native transport wrappers and C field helper execute; final bus callbacks are modeled with caller-saved register and flag clobbers.",
+    "Native scratch addresses and eight-byte callback alignment match; C helper adds callback frame depth.",
+    "No physical interrupt route, sensor timing, complete fault-state equivalence, final link, provider qualification or byte identity claim."
+  ]
+}

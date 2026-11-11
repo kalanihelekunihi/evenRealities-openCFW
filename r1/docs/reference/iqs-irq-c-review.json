@@ -1,0 +1,174 @@
+{
+  "schema_version": 1,
+  "source": "r1/src/application/runtime/native_iqs_irq.c",
+  "native_roots": [
+    "0x30e6c",
+    "0x2fdc8",
+    "0x2fde2",
+    "0x2fdf8",
+    "0x87ba4",
+    "0x9754c",
+    "0x72b9c",
+    "0x6a234",
+    "0x6a03c",
+    "0x6fc78"
+  ],
+  "report": "build/sources-goal-r1-iqs-irq-reviewed-c/report.json",
+  "compiled_units": 834,
+  "application_imports": 77,
+  "added_imports": [
+    "r1_hardware_variant_bsn_detect",
+    "r1_iqs7211e_ati_recovery_policy",
+    "r1_iqs7211e_reset_reconfigure"
+  ],
+  "removed_imports": [
+    "r1_iqs7211e_irq_worker"
+  ],
+  "prior_objects_unchanged": 831,
+  "changed_generated_objects": [
+    [
+      "r1-bootloader",
+      "{gen}/r1_startup_vectors.S"
+    ],
+    [
+      "r1-bootloader",
+      "{gen}/r1_uecc.c"
+    ]
+  ],
+  "added_units": [
+    [
+      "r1-application",
+      "r1/src/application/runtime/native_iqs_irq.c"
+    ]
+  ],
+  "verification": {
+    "worker_policy_pairs": 384,
+    "raw_selection_pairs": 1024,
+    "float_callback_pairs": 104,
+    "adapter_pairs": 40,
+    "seeded_live_pairs": 256,
+    "actual_C_average_and_event_dispatch": true,
+    "average_oracle_pairs": 128,
+    "retained_or_cleared_partial_read_pairs": 32,
+    "defined_private_buffer_fallback_cases": 12,
+    "callee_saved_integer_and_FP_registers_checked": true,
+    "actual_C_ports_transport_registry": false
+  },
+  "actual_port_transport_registry_integration": {
+    "worker_policy_pairs": 384,
+    "raw_selection_pairs": 32,
+    "float_callback_pairs": 104,
+    "adapter_pairs": 40,
+    "seeded_live_pairs": 16,
+    "actual_C_average_and_event_dispatch": true,
+    "average_oracle_pairs": 4,
+    "retained_or_cleared_partial_read_pairs": 32,
+    "defined_private_buffer_fallback_cases": 12,
+    "callee_saved_integer_and_FP_registers_checked": true,
+    "actual_C_ports_transport_registry": true
+  },
+  "mutants": {
+    "rejected": [
+      "reset_flag",
+      "reset_end",
+      "fingers_end",
+      "suspend_mask",
+      "variant_exact",
+      "write_word",
+      "average_count",
+      "float_signed",
+      "late_position",
+      "callback_early",
+      "selector_signed",
+      "clear_used"
+    ]
+  },
+  "rea_receipts": "r1/docs/reference/iqs-irq-rea-bytes.json",
+  "rea_bytes_match_pinned_stock": true,
+  "new_owners": [
+    {
+      "symbol": "r1_iqs_control0",
+      "stock_address": "0x2000772c",
+      "size": 1,
+      "cold_rw": "00"
+    },
+    {
+      "symbol": "r1_iqs_control1",
+      "stock_address": "0x2000772d",
+      "size": 1,
+      "cold_rw": "00"
+    },
+    {
+      "symbol": "r1_iqs_recovery_consecutive",
+      "stock_address": "0x2000772e",
+      "size": 1,
+      "cold_rw": "00"
+    },
+    {
+      "symbol": "r1_iqs_recovery_used",
+      "stock_address": "0x2000772f",
+      "size": 1,
+      "cold_rw": "00"
+    },
+    {
+      "symbol": "r1_iqs_raw_report_selection",
+      "stock_address": "0x20007731",
+      "size": 1,
+      "cold_rw": "ff"
+    },
+    {
+      "symbol": "r1_iqs_last_position",
+      "stock_address": "0x20007732",
+      "size": 2,
+      "cold_rw": "0000"
+    },
+    {
+      "symbol": "r1_iqs_status_live",
+      "stock_address": "0x20007744",
+      "size": 6,
+      "cold_rw": "000000000000"
+    },
+    {
+      "symbol": "r1_iqs_status_snapshot",
+      "stock_address": "0x2000774a",
+      "size": 6,
+      "cold_rw": "000000000000"
+    }
+  ],
+  "C_initializers_match_authenticated_RW": true,
+  "reused_callback_owner": "r1_touch_slider_callback_word",
+  "contract": {
+    "initial_control_path": "write 34/6c; read33/write33 OR0800; log suspend; clear control0; end ff length0",
+    "status_path": "read0f six retained bytes; copy three halfwords; reset bit7 takes priority",
+    "recovery": "log bit4; factory config55 bypasses ATI decision; snapshot bit3 with control1 zero invokes recovery and ends",
+    "fingers": "snapshot bit12 writes33 byte08, logs live snapshot and returns WITHOUT communication end",
+    "normal": "read e0, 21 or24 unsigned halfwords, binary32 mean, dispatch average via S0",
+    "callback": "guard pointer once; flags captured before tick; raw signed float bits compare to 43af0000; reload position/cache and callback after tick; four integer args plus float",
+    "raw_report": "signed selector1..3 causes cleared second read e1..e3; always end; reload selector, only unsigned0..3 sets ff then transmits buffer",
+    "partial_private_reads": "zero-initialized read-word and 48-byte primary sample buffers define unwritten bytes"
+  },
+  "limits": [
+    "Primary probes model lower ports, configuration/variant, recovery/reset, ticks, transmit and logging providers. Actual averaging and callback dispatch execute.",
+    "Deeper probes execute actual C IQS ports, touch transport and registry against prepared device callbacks. No physical transfers occur.",
+    "Full-read and public-retained/cleared partial-read cases are compared to stock; private uninitialized output is checked only against the explicit C zero fallback.",
+    "FP proof starts with FPSCR zero; integer and callee-saved FP registers are checked, including adversarial clobbering of caller-saved FP registers in callbacks.",
+    "A diagnostic observed a skipped caller instruction after an external memcpy bit-copy in Unicorn. It is retained as an emulator observation, not a hardware fault claim. Final code uses a direct C union bit view and passes native comparisons.",
+    "No physical timing, final placement, final application link or boot proof; byte identity is not required by current user instruction."
+  ],
+  "evidence_files": {
+    "build/sources-goal-r1-iqs-irq-reviewed-c/report.json": "3ab0db3c04d6078b1f534c00f971c69f9b5fa2cc883a19df6877b3573ed54332",
+    "r1/src/sources.json": "f3e97467c4e8d12e3f265b2f50a2482c8a185b8d1482be00fc9922934e38d542",
+    "r1/src/application/runtime/native_iqs_irq.c": "8550cde44bc2e2bd3180c808b389f27b219d91660e5b0c5e0c9d28b439a2c21f",
+    "r1/src/application/board/native_iqs_state.h": "7b50319102121ef26327d1d09ecccdb9f131fe76df4045e6069e7127ff5270c2",
+    "build/goal-r1-fstorage-registry/expanded-rw.bin": "87fdee392022fdbe23dd0daf3e859fb14f3ce26ba3e8403aab56dc9d9a913317",
+    "build/goal-r1-iqs-irq-c/verify.py": "5ea62bff79d68d93e76aba1b4ff13b7d22376761d253679d86d339b4b6a0435a",
+    "build/goal-r1-iqs-irq-c/verification.json": "618a8a7bbb263ce5236dcca3bcb9e56d76fedbb40d7ef9c8b36b795ebf3d595e",
+    "build/goal-r1-iqs-irq-c/integration.json": "211ea084515c86f0c692bdd4baa6973cf62671358f55d6914638d64e8edfc3f4",
+    "build/goal-r1-iqs-irq-c/mutants.py": "20f33cb13d08bf2ca4b51a073613432a0e3771fef55c5b556ef8dd9e23f3d742",
+    "build/goal-r1-iqs-irq-c/mutants.json": "c56623b858dea437f88d55fc248a429535f689ff2f974622184e429cf8a3fef6",
+    "build/goal-r1-iqs-irq-c/debug.py": "e94a9973e23ba286e7942b501b0df05637f514722ceb9fdf0951be9b3c8379e5",
+    "build/goal-r1-iqs-irq-c/bitcopy-diagnostic.log": "ab01127132917409fea6ad6a20bdd15c1aff483843dcc957c51284f91d6a2132",
+    "r1/docs/reference/iqs-irq-rea-bytes.json": "97f390f9f8c835df3a5922069eab464cda2ae3fcd6023834d9765fdde82217a9",
+    "build/goal-r1-iqs-irq-c/sources-check.log": "20af25662c0d4b70e1ea9f8dd45970fafc35f0000e8ee4d92c82b7dd62bdecb6"
+  }
+}

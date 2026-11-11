@@ -1,0 +1,88 @@
+{
+  "cases": 1024,
+  "passed": 1024,
+  "failures": [],
+  "imports_removed": [
+    "r1_status_dropped",
+    "r1_status_read_index",
+    "r1_status_records",
+    "r1_status_write_index"
+  ],
+  "imports_added": [],
+  "application_imports": 214,
+  "bootloader_imports": 34,
+  "other_source_units_unchanged": 560,
+  "report": "build/sources-goal-r1-status-storage/report.json",
+  "report_sha256": "3858f07f5ecc441babb62095358963f228976101e625d21bab5cac6ad31e809d",
+  "manifest_sha256": "853798d70673de8cb97ab199ed0346162136e023b446e79a90de6af63a1b5be8",
+  "initialization": {
+    "stock_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "native_startup_handlers_executed": true,
+    "independent_decoder_matches": true,
+    "guards_unchanged": true,
+    "expanded_sha256": "87fdee392022fdbe23dd0daf3e859fb14f3ce26ba3e8403aab56dc9d9a913317",
+    "cells": {
+      "r1_status_read_index": {
+        "address": "0x20006938",
+        "size": 1,
+        "section": ".r1.status.read",
+        "alignment": 1,
+        "bytes": "00",
+        "sha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d"
+      },
+      "r1_status_write_index": {
+        "address": "0x20006939",
+        "size": 1,
+        "section": ".r1.status.write",
+        "alignment": 1,
+        "bytes": "00",
+        "sha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d"
+      },
+      "r1_status_dropped": {
+        "address": "0x2000693c",
+        "size": 2,
+        "section": ".r1.status.dropped",
+        "alignment": 2,
+        "bytes": "0000",
+        "sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7"
+      },
+      "r1_status_records": {
+        "address": "0x20019bc8",
+        "size": 128,
+        "section": ".r1.status.records",
+        "alignment": 4,
+        "bytes": "0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        "sha256": "38723a2e5e8a17aa7950dc008209944e898f69a7bd10a23c839d341e935fd5ca"
+      }
+    },
+    "owned_bytes": 132
+  },
+  "rea": {
+    "path": "build/goal-r1-status-storage/REA.json",
+    "sha256": "e92ee3ca5058bc2b09a111b4a2b448607d9c47c6f00f7739187198e4e911961a",
+    "procedure": "0x5e118"
+  },
+  "source_sha256": {
+    "r1/src/application/runtime/native_status_ring.c": "620c2e759e73d8739ef58971d55d49a911fe048b96236c28158f42eb3020cb9e",
+    "r1/src/application/board/native_status_record.c": "169a6968defe650809b4502faf27e36b8ec67f063059c18829c7d752c02758a5"
+  },
+  "probe_artifacts": {
+    "build/goal-r1-status-storage/before.c": "04bb387d7d44debc9cc4ce052fb9634871e068eab6097022a1f699dacb5be6c0",
+    "build/goal-r1-status-storage/manifest-before.json": "349f3183c3c6f98b05dbca56a6181fe52334d943eb463ba036d066333d887870",
+    "build/goal-r1-status-storage/stock.s": "15e5e71384a5b0eb78e5caa2aa6d1845f7ceb3f4f8da1a98f047a5e5c1765116",
+    "build/goal-r1-status-storage/stock.elf": "22ba0efd90234e03f2d57403e7aaca53df5625e44cbb48fb9a100016cf4e8ea7",
+    "build/goal-r1-status-storage/REA.json": "e92ee3ca5058bc2b09a111b4a2b448607d9c47c6f00f7739187198e4e911961a",
+    "build/goal-r1-status-storage/rea-snapshot.json": "e56831691a2e321df22b8856ea75c55b3e51dbe72917c4872312cc290cbde2e4",
+    "build/goal-r1-status-storage/initialization.py": "78c2f728669496c9e2028c970cbc1850e35defb577d14fc3661ffd60c2038601",
+    "build/goal-r1-status-storage/initialization.json": "f6eba19b66f0eabd8f61ed8ac6534fc3852ad6a0a983f1bc7cbf6438e2a3a2d7",
+    "build/goal-r1-status-storage/verify.py": "b345578bbaaa8270470f2ebf8fd25250a635363950f40fe5a4945b9727ca5564",
+    "build/goal-r1-status-storage/results.json": "9a88b1d578b36f25211af0607471c389036960a11837f799692e9b60d37a7db5",
+    "build/goal-r1-status-storage/source.elf": "bad8c5fe021d8bb0adfcc5df63d83c254b59fcdcbd8a12ca499ad74d276361b6"
+  },
+  "limits": [
+    "Only 132 bytes are owned: the two one-byte indices, one two-byte dropped counter and sixteen eight-byte records. Unused control bytes are not assigned.",
+    "Native RW decompressor and zero handler execute in initialization proof. Probe addresses are fixed; final firmware layout and boot integration remain unproven.",
+    "Publisher and its state/peer/charge helpers execute. Advertising lookup, battery update, timestamp, critical-section and event callbacks are modeled; complete private-stack, concurrency, interrupt scheduling and physical event delivery remain unproven.",
+    "No provider qualification, final firmware link, source completeness or whole-image byte identity claim. G2 pseudocode/freeze gates and source-plan selections are unchanged."
+  ]
+}

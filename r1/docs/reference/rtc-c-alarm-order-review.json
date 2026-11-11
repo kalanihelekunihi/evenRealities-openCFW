@@ -1,0 +1,111 @@
+{
+  "cases": 1128,
+  "passed": 1128,
+  "source_sha256": "98527a9ab40b958275911afea7c00e401286635412a9675f9ddad496575427ca",
+  "report": "build/sources-goal-r1-rtc-alarm-order/report.json",
+  "old_regressions": {
+    "calendar_write": {
+      "native_status": 0,
+      "old_status": 2,
+      "native_reads": [
+        [
+          536973312,
+          4
+        ],
+        [
+          536900484,
+          4
+        ]
+      ],
+      "old_reads": [
+        [
+          536900484,
+          4
+        ],
+        [
+          536973312,
+          4
+        ]
+      ]
+    },
+    "callback_bind": {
+      "native_status": 0,
+      "old_status": 2,
+      "native_reads": [
+        [
+          536973312,
+          4
+        ],
+        [
+          536900484,
+          4
+        ]
+      ],
+      "old_reads": [
+        [
+          536900484,
+          4
+        ],
+        [
+          536973312,
+          4
+        ]
+      ]
+    }
+  },
+  "actual_memory_move": true,
+  "other_units_unchanged": 561,
+  "application_imports": 211,
+  "bootloader_imports": 34,
+  "limitations": [
+    "strcmp modeled; actual stock/C memory move executes",
+    "Copy byte results tested; full copy access-width/fault equivalence unproven",
+    "Controlled name mutation is not production race evidence",
+    "No physical RTC, native byte qualification or final firmware proof"
+  ],
+  "unchanged_functions": [
+    "r1_native_rtc_snapshot"
+  ],
+  "evidence": [
+    {
+      "path": "build/goal-r1-rtc-alarm-order/before.c",
+      "sha256": "820f29cef9561f13eb1c22a148e92f009a0fa40edda21b0956a10091c9677383"
+    },
+    {
+      "path": "build/goal-r1-rtc-alarm-order/verify.py",
+      "sha256": "891b2c2fad892777ece6014762d2095915acf3c6d92a447120d96e6d984d254e"
+    },
+    {
+      "path": "build/sources-goal-r1-rtc-alarm-order/report.json",
+      "sha256": "4b0579110c0d76eb29707b2d7598165a7d4776f6394d0a36ae4976cbcca3a0ef"
+    },
+    {
+      "path": "build/goal-r1-twi-packet-c/stock.elf",
+      "sha256": "0a73bd084a4ccf8cdd579852b46deda970b701b2c22e9aecf423166f949350e4"
+    },
+    {
+      "path": "r1/src/application/board/native_rtc_device.c",
+      "sha256": "98527a9ab40b958275911afea7c00e401286635412a9675f9ddad496575427ca"
+    },
+    {
+      "path": "r1/src/sources.json",
+      "sha256": "9c5b7ae5c0e7493eb22e1fb4df9f0c928c2a9aa70530254aff89b55213bef2e2"
+    },
+    {
+      "path": "tools/build/source-plan.json",
+      "sha256": "964cbd3af9f4ea7ed207bb4b480d18a9529060dc3801663d296389472982aa7c"
+    },
+    {
+      "path": "r1/src/application/runtime/native_memory_move.c",
+      "sha256": "26614e927758f8c0d0a9eb294d919a0062665a3d2cb822faa139271c564aec9e"
+    },
+    {
+      "path": "third-party/upstream/musl-memmove-1.2.5/memmove.c",
+      "sha256": "1304f9ddfc18594f5d9a84691892b9fdaf3be8ecc6d7f365c691abb138eaf74e"
+    },
+    {
+      "path": "third-party/upstream/musl-memory-1.2.5/memcpy.c",
+      "sha256": "1664d565f968b053ac33c5ac615c057a255a5821c8fa510fba61d4f63dee08e9"
+    }
+  ]
+}

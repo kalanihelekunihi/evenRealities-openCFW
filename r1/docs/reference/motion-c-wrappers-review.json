@@ -1,0 +1,197 @@
+{
+  "cases": 2485,
+  "passed": 2485,
+  "failures": [],
+  "cases_per_wrapper": 355,
+  "functions": [
+    {
+      "name": "r1_bma456w_probe_wrapper",
+      "stock_entry": "0x6f1a8",
+      "stock_bytes": 20,
+      "source_bytes": 20,
+      "native_span_sha256": "069c87b4d47ac5359df00258426f00d17d9f136c59a9b23d24b3bef798e56f0b"
+    },
+    {
+      "name": "r1_bma456w_configuration_wrapper",
+      "stock_entry": "0x6f1bc",
+      "stock_bytes": 30,
+      "source_bytes": 28,
+      "native_span_sha256": "7d00306fbc52f0bb6473517faea8da0af4c93ec28b8010d87717a25d77f3ea63"
+    },
+    {
+      "name": "r1_lis2dw12_probe_wrapper",
+      "stock_entry": "0x6f380",
+      "stock_bytes": 20,
+      "source_bytes": 20,
+      "native_span_sha256": "f28f0141116633f35924a7c6659aa0bb2f46dd7fea41f570ba829d84845e7b4e"
+    },
+    {
+      "name": "r1_lis2dw12_configuration_wrapper",
+      "stock_entry": "0x6f394",
+      "stock_bytes": 30,
+      "source_bytes": 28,
+      "native_span_sha256": "0c8edf12a19ec46b0f54283e89eaffb0df83e594aebddaaa60ba788666d8ca9d"
+    },
+    {
+      "name": "r1_qma6100_probe_wrapper",
+      "stock_entry": "0x6f404",
+      "stock_bytes": 20,
+      "source_bytes": 20,
+      "native_span_sha256": "a569ba70d7ed024938ee16539bf0a7182af65ee069a91bf455a3a2e443b0a1ff"
+    },
+    {
+      "name": "r1_qma6100_configuration_wrapper",
+      "stock_entry": "0x6f418",
+      "stock_bytes": 30,
+      "source_bytes": 28,
+      "native_span_sha256": "bf5cdade8e56223363c4429f1dce08d62170ad08a89094c3f9805a10a6ddc7b5"
+    },
+    {
+      "name": "r1_qma6100_interrupt_wrapper",
+      "stock_entry": "0x6f436",
+      "stock_bytes": 18,
+      "source_bytes": 18,
+      "native_span_sha256": "443a2fac2784fd3089a8fbbc773d19872dce3ffb6e584a1ae30ef17a0b0f4ed0"
+    }
+  ],
+  "callback_stack_depth_pairs": [
+    [
+      "r1_bma456w_configuration_wrapper",
+      [
+        -8,
+        -8,
+        -8
+      ],
+      [
+        -8,
+        -8,
+        -8
+      ]
+    ],
+    [
+      "r1_bma456w_probe_wrapper",
+      [
+        -8,
+        -8,
+        -8
+      ],
+      [
+        -8,
+        -8,
+        -8
+      ]
+    ],
+    [
+      "r1_lis2dw12_configuration_wrapper",
+      [
+        -8,
+        -8,
+        -8
+      ],
+      [
+        -8,
+        -8,
+        -8
+      ]
+    ],
+    [
+      "r1_lis2dw12_probe_wrapper",
+      [
+        -8,
+        -8,
+        -8
+      ],
+      [
+        -8,
+        -8,
+        -8
+      ]
+    ],
+    [
+      "r1_qma6100_configuration_wrapper",
+      [
+        -8,
+        -8,
+        -8
+      ],
+      [
+        -8,
+        -8,
+        -8
+      ]
+    ],
+    [
+      "r1_qma6100_interrupt_wrapper",
+      [
+        -8,
+        -8,
+        0
+      ],
+      [
+        -8,
+        -8,
+        0
+      ]
+    ],
+    [
+      "r1_qma6100_probe_wrapper",
+      [
+        -8,
+        -8,
+        -8
+      ],
+      [
+        -8,
+        -8,
+        -8
+      ]
+    ]
+  ],
+  "undefined_argument_register_difference_cases": 0,
+  "unchanged_functions": [
+    "r1_bma456w_interrupt_noop",
+    "r1_lis2dw12_interrupt_noop",
+    "r1_motion_bus_acquire",
+    "r1_motion_bus_release",
+    "r1_motion_probe_and_select_provider",
+    "r1_motion_refresh_selection"
+  ],
+  "unchanged_operation_tables": [
+    ".r1.motion.bma.table",
+    ".r1.motion.lis.table",
+    ".r1.motion.qma.table"
+  ],
+  "report": "build/sources-goal-r1-motion-wrappers/report.json",
+  "report_sha256": "caeb42f86acc0b465d6e2f0f14548d6f790637a31a4c05e04dbde1b44daf0d0d",
+  "source_sha256": "ba84202eef2993d4d3caf4051fd24029ab94b48337635fa9fe39583f2aac7189",
+  "manifest_sha256": "be76bf00509f1551b53a08edbc5515ed3a3dcb9b1721ff4481fdf60b77d82eb8",
+  "stock_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "rea": {
+    "completed": true,
+    "procedures": [
+      "0x6f1a8",
+      "0x6f1bc",
+      "0x6f380",
+      "0x6f394",
+      "0x6f404",
+      "0x6f418",
+      "0x6f436"
+    ],
+    "path": "build/goal-r1-motion-wrappers/REA.json",
+    "sha256": "275651923cc89617bcba48896c3cd1d049382260b486028b60481d71fbbcbec9",
+    "limitation": "IRQ return inferred void; instructions and execution establish R0 inherited from tail release."
+  },
+  "probe_artifacts": {
+    "build/goal-r1-motion-wrappers/verify.py": "c036cec78e4794b79b37fe3e876fcf43cbe8d42771091e2d7de216e71d30b407",
+    "build/goal-r1-motion-wrappers/before.c": "88c0202643ec7137fb2284ba0d944e866809af3a6902b70e75ee65f43a561c0e",
+    "build/goal-r1-motion-wrappers/source.elf": "7fc76acab7e74855fe3f84295c5f166c2d2ec33398ec6cd333fe7861d81089cc",
+    "build/goal-r1-motion-wrappers/stock.elf": "0f8f3ec36a152c52615e6138d6d3303c1d28543772ffe9196fe82d557d3e2b4f",
+    "build/goal-r1-motion-wrappers/rea-snapshot.json": "ed87bb53ace54f3b402017a17acb1d3c45d688783499302a6ad8919a1a8a3901",
+    "build/goal-r1-motion-wrappers/entries.json": "71bb539929aebff0388c064562b6f54f1bf5eeabac6e065f917fdbb76f4ca92b"
+  },
+  "limits": [
+    "Bus acquisition/release and providers are modeled; device, transport and interrupt hardware are not exercised.",
+    "Only defined provider parameters are contractual; unused argument register observations happen to match in these probes.",
+    "No complete fault-state, timing, final firmware link, source qualification or whole-image byte-identity claim."
+  ]
+}

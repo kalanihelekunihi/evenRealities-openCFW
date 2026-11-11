@@ -1,0 +1,160 @@
+{
+  "schema_version": 1,
+  "entries": {
+    "0x4abec": "r1_spo2_once_result_plan"
+  },
+  "report": "build/sources-goal-r1-spo2-once-result-c/report.json",
+  "report_sha256": "5e540132e7d3fba5fae0ef963764b68a2526d798042b1df0ed201930487e522a",
+  "unit": {
+    "source": "r1/src/application/runtime/native_spo2_once_result.c",
+    "source_sha256": "f6660a66cc0467326256086c2278d8bbec16191105365a8c49a12ae5ed7e86ad",
+    "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-spo2-once-result-c/r1/r1-application/r1__src__application__runtime__native_spo2_once_result.c.o",
+    "object_sha256": "134d40699f61535e5311831d44204dd9ad5b682ff793b3ec5dc32c1559a83ab5"
+  },
+  "behavior": {
+    "pairs": 5116,
+    "digest": "82fb71ad3022df61b4ef768e08eb9cc0262ad63f9dd07c51b2b07164fe92c9c6",
+    "actual_C": [
+      "once callback and controller",
+      "existing timing callback and lifecycle owner",
+      "portable predicate/calibration plus integer division support"
+    ],
+    "modeled_boundaries": [
+      "r1_sensor_stream_register_by_name",
+      "r1_sensor_stream_unregister_by_name",
+      "r1_stream_timer_release",
+      "r1_health_mode_is_2",
+      "r1_event_publish",
+      "r1_structured_log_mode_get",
+      "r1_structured_log_format",
+      "nrf_log_frontend_std_6",
+      "nrf_log_frontend_std_2"
+    ],
+    "unused_vendor_imports_trapped": [
+      "__aeabi_d2f",
+      "__aeabi_d2iz",
+      "__aeabi_d2uiz",
+      "__aeabi_dadd",
+      "__aeabi_dcmpeq",
+      "__aeabi_dcmpge",
+      "__aeabi_dcmpgt",
+      "__aeabi_dcmple",
+      "__aeabi_dcmplt",
+      "__aeabi_dcmpun",
+      "__aeabi_ddiv",
+      "__aeabi_dmul",
+      "__aeabi_dsub",
+      "__aeabi_f2d",
+      "__aeabi_i2d",
+      "__aeabi_memclr4",
+      "__aeabi_ui2d",
+      "gomore_primitives_slot_state_transition",
+      "gomore_tensor_batch_normalize_half",
+      "gomore_tensor_conv1d_half",
+      "gomore_tensor_int8_float_affine",
+      "gomore_tensor_int8_float_dot",
+      "gomore_tensor_leaky_relu",
+      "gomore_tensor_pool_1d",
+      "gomore_tensor_softmax",
+      "r1_crc32_castagnoli",
+      "r1_gomore_accel_activity_gate_native",
+      "r1_gomore_accel_autocorrelation_native",
+      "r1_gomore_accel_axis_gate_native",
+      "r1_gomore_accel_band_count_native",
+      "r1_gomore_accel_crossing_period_native",
+      "r1_gomore_accel_hysteresis_count_native",
+      "r1_gomore_accel_iir4_native",
+      "r1_gomore_accel_nonzero_mean8_native",
+      "r1_gomore_accel_positive_fill_native",
+      "r1_gomore_accel_recent_decision_native",
+      "r1_gomore_accel_recent_mean3_native",
+      "r1_gomore_accel_slot_advance_native",
+      "r1_gomore_accel_state_reset_native",
+      "r1_gomore_argmax_native",
+      "r1_gomore_clear_two_native",
+      "r1_gomore_encoded_count_native",
+      "r1_gomore_i16_mean_difference_native",
+      "r1_gomore_i16_mean_native",
+      "r1_gomore_i16_range_native",
+      "r1_gomore_i16_variance_bits",
+      "r1_gomore_linear_native",
+      "r1_gomore_missing_window_reset_native",
+      "r1_gomore_modulo5_native",
+      "r1_gomore_threshold5_native",
+      "r1_health_profile_features",
+      "r1_record12_validate"
+    ],
+    "limits": [
+      "Calibration oracle checked over callback byte domain, including post-validation mutation",
+      "Mapped non-null six-byte samples; length ignored",
+      "Private record pointers normalized by contents; no physical/async/final image proof",
+      "Unused vendor providers trap if reached; source cannot execute stock code"
+    ]
+  },
+  "negative_controls": {
+    "wrong-validation-input": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "ter', ['spo2', 4660], '4511227f4455', '0241424355050000', '341200006606000077070000')], [('mode', [0], '4511227f4455', '0241424355050000', '341200006606000077070000'), ('mode', [0], '4511227f4455', '0241424355050000', '341200006606000077070000'), ('mode', [0], '4511227f4455', '0241424355050000', '341200006606000077070000'), ('is2', [], '4511227f4455', '0241424355050000', '341200006606000077070000'), ('unregister', ['spo2', 4660], '4511227f4455', '0241424355050000', '341200006606000077070000')])\n"
+    },
+    "lost-health-gate": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "611227f4455', '0241424355050000', '341200006606000077070000'), ('mode', [0], '4611227f4455', '0241424355050000', '341200006606000077070000'), ('mode', [0], '4611227f4455', '0241424355050000', '341200006606000077070000'), ('mode', [0], '4611227f4455', '0241424355050000', '341200006606000077070000'), ('event', [8, '5300000000000000', 8], '4611227f4455', '0241424355050000', '341200006606000077070000'), ('unregister', ['spo2', 4660], '4611227f4455', '0241424355050000', '341200006606000077070000')])\n"
+    },
+    "wrong-handle-slot": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "], '0011227f4455', '0241424355050000', '341200006606000077070000'), ('unregister', ['spo2', 4660], '0011227f4455', '0241424355050000', '341200006606000077070000')], [('mode', [0], '0011227f4455', '0241424355050000', '341200006606000077070000'), ('mode', [0], '0011227f4455', '0241424355050000', '341200006606000077070000'), ('mode', [0], '0011227f4455', '0241424355050000', '341200006606000077070000'), ('unregister', ['spo2', 4660], '0011227f4455', '0241424355050000', '341200006606000077070000')])\n"
+    },
+    "lost-invalid-cleanup": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "00'), ('mode', [0], '0011227f4455', '0241424355050000', '341200006606000077070000'), ('mode', [0], '0011227f4455', '0241424355050000', '341200006606000077070000'), ('unregister', ['spo2', 4660], '0011227f4455', '0241424355050000', '341200006606000077070000')], [('mode', [0], '0011227f4455', '0241424355050000', '341200006606000077070000'), ('mode', [0], '0011227f4455', '0241424355050000', '341200006606000077070000'), ('mode', [0], '0011227f4455', '0241424355050000', '341200006606000077070000')])\n"
+    },
+    "lost-calibration": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "dware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 1063, in __hook_code_cb\n    callback(uc, address, size, user_data)\n    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-spo2-once-result-c/verify.py\", line 48, in hook\n    assert bytes(v.mem_read(r1,8))==bytes([calibrated(state['calibration_input'])])+bytes(7)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    "wrong-event-padding": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "dware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 1063, in __hook_code_cb\n    callback(uc, address, size, user_data)\n    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-spo2-once-result-c/verify.py\", line 48, in hook\n    assert bytes(v.mem_read(r1,8))==bytes([calibrated(state['calibration_input'])])+bytes(7)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    "wrong-ring-signed-level": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "d, con:%d, level:%d, hr:%d, mark:%d', 0, 17, 34, 128, 68, 85], '001122804455', '0241424355050000', '341200006606000077070000'), ('mode', [7], '001122804455', '0241424355050000', '341200006606000077070000'), ('log6', [1835011, 'algo spo2 once result: spo2:%d, r_value:%d, con:%d, level:%d, hr:%d, mark:%d', 0, 17, 34, 4294967168, 68, 85], '001122804455', '0241424355050000', '341200006606000077070000'), ('unregister', ['spo2', 4660], '001122804455', '0241424355050000', '341200006606000077070000')])\n"
+    },
+    "wrong-extra-timer-release": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "spo2', 4660], '0011227f4455', '0241424355050000', '341200006606000077070000')], [('mode', [0], '0011227f4455', '0241424355050000', '341200006606000077070000'), ('mode', [0], '0011227f4455', '0241424355050000', '341200006606000077070000'), ('mode', [0], '0011227f4455', '0241424355050000', '341200006606000077070000'), ('unregister', ['spo2', 4660], '0011227f4455', '0241424355050000', '341200006606000077070000'), ('release', [1365], '0011227f4455', '0241424355050000', '000000006606000077070000')])\n"
+    }
+  },
+  "audit": {
+    "unchanged_prior_objects": 757,
+    "new_units": 1,
+    "imports": {
+      "r1-application": {
+        "added": [],
+        "removed": [
+          "r1_spo2_once_result_plan"
+        ]
+      },
+      "r1-bootloader": {
+        "added": [],
+        "removed": []
+      }
+    },
+    "reused_owners": [
+      "r1_spo2_streams",
+      "r1_spo2_timing_state; no new data ownership"
+    ]
+  },
+  "source_check": "R1 check passes: 758 units, 562 source files, 0 not built. Global check flags existing G2 resident_rom_thumb_set.S absent from manifest.",
+  "rea": "spo2-once-result-c-rea.json",
+  "instruction_identity_proven": false,
+  "image_integration_proven": false
+}

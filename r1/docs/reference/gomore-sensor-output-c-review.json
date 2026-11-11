@@ -1,0 +1,158 @@
+{
+  "schema_version": 1,
+  "entry": "0x6c294",
+  "symbol": "r1_gomore_sensor_output_dispatch_native",
+  "report": "build/sources-goal-r1-sensor-output-c/report.json",
+  "report_sha256": "87e3a92b74b6e5694ddecaf78ffe16ee1eb7ff056cf95ca2ddafc40ea351fbd4",
+  "unit": {
+    "source": "r1/src/application/runtime/native_gomore_sensor_output.c",
+    "source_sha256": "a30339bac477817a4006b5e45bf4a71a474de33a8c836cbd4097cebb89b10a95",
+    "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-sensor-output-c/r1/r1-application/r1__src__application__runtime__native_gomore_sensor_output.c.o",
+    "object_sha256": "77aef84da5f38d0a483ef51c0f690a7e6d95438e4a03c814a6be05ea7a1cee79"
+  },
+  "behavior": {
+    "pairs": 1264,
+    "digest": "7ce0ece098279a792567666806e02e8d9494ee31a5bb3a14392142ef5dd9fca6",
+    "actual_C": [
+      "sensor output dispatcher using shared authorization/sensor state interfaces"
+    ],
+    "modeled_boundaries": [
+      "r1_gomore_sensor_stamp_time",
+      "r1_gomore_sensor_update_native",
+      "r1_gomore_sensor_failure_update",
+      "r1_gomore_sensor_update_complete",
+      "r1_activity_periodic_accumulator",
+      "gomore_primitives_noop_49e58",
+      "r1_algo_sleep_result_report",
+      "r1_gomore_authorization_dispatch_native",
+      "r1_gomore_sleep_interval_dispatch_native",
+      "r1_gomore_final_sleep_record_publish_native",
+      "pvPortMalloc",
+      "vPortFree",
+      "__aeabi_memclr",
+      "r1_structured_log_mode_get",
+      "r1_structured_log_format",
+      "nrf_log_frontend_std_0",
+      "nrf_log_frontend_std_1"
+    ],
+    "limits": [
+      "Synchronous mapped workspace and payload; no asynchronous IRQ/concurrency",
+      "Private local addresses normalized by contents; called providers may not retain them",
+      "No physical sensor output or complete firmware link"
+    ]
+  },
+  "helper_integration": {
+    "pairs": 678,
+    "digest": "3ea9f7195beeddddeddf40e151e5d1aaf558d1e15d1e2f0ef5cc2a3dc2bd1313",
+    "actual_C": [
+      "sensor output dispatcher",
+      "timestamp/failure/completion helpers",
+      "canonical shared state owners"
+    ],
+    "modeled_boundaries": [
+      "r1_time_backend_timestamp",
+      "r1_time_utc_offset_get",
+      "r1_health_mode_get",
+      "r1_gomore_sensor_update_native",
+      "r1_activity_periodic_accumulator",
+      "gomore_primitives_noop_49e58",
+      "r1_algo_sleep_result_report",
+      "r1_gomore_authorization_dispatch_native",
+      "r1_gomore_sleep_interval_dispatch_native",
+      "r1_gomore_final_sleep_record_publish_native",
+      "pvPortMalloc",
+      "vPortFree",
+      "__aeabi_memclr",
+      "r1_structured_log_mode_get",
+      "r1_structured_log_format",
+      "nrf_log_frontend_std_0",
+      "nrf_log_frontend_std_1",
+      "nrf_log_frontend_std_2",
+      "r1_record12_reinitialize"
+    ],
+    "limits": [
+      "Sensor-update algorithm and downstream reports/authorization modeled",
+      "No asynchronous IRQ/concurrency or physical output; VFP warmed before FPSCR setup"
+    ]
+  },
+  "negative_controls": {
+    "wrong-slot-index": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "e': False, 'modes': (0,)}, ['trace'], [('stamp', []), ('update', [536978796]), ('failure', [0]), ('activity', ['fb0c1d2e3f5061728394a5b6c7d8e9fa0b1c2d3e4f60718293a4b5c6d7e8f90a1b2c3d4e5f708192a3b4c5d6e7f8091a']), ('noop', []), ('authorize', [4, 0]), ('complete', [])], [('stamp', []), ('update', [536978796]), ('failure', [0]), ('authorize', [4, 0]), ('activity', ['fb0c1d2e3f5061728394a5b6c7d8e9fa0b1c2d3e4f60718293a4b5c6d7e8f90a1b2c3d4e5f708192a3b4c5d6e7f8091a']), ('noop', []), ('complete', [])])\n"
+    },
+    "wrong-period-priority": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "es': (0,)}, ['trace'], [('stamp', []), ('update', [536978796]), ('failure', [0]), ('activity', ['fb0c1d2e3f5061728394a5b6c7d8e9fa0b1c2d3e4f60718293a4b5c6d7e8f90a1b2c3d4e5f708192a3b4c5d6e7f8091a']), ('noop', []), ('mode', [0]), ('mode', [0]), ('mode', [0]), ('sleep', [1]), ('complete', [])], [('stamp', []), ('update', [536978796]), ('failure', [0]), ('activity', ['fb0c1d2e3f5061728394a5b6c7d8e9fa0b1c2d3e4f60718293a4b5c6d7e8f90a1b2c3d4e5f708192a3b4c5d6e7f8091a']), ('noop', []), ('complete', [])])\n"
+    },
+    "wrong-final-report-gate": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "6d7e8f90a1b2c3d4e5f708192a3b4c5d6e7f8091a']), ('noop', []), ('mode', [0]), ('mode', [0]), ('mode', [0]), ('sleep', [0]), ('complete', [])], [('stamp', []), ('update', [536978796]), ('failure', [0]), ('activity', ['fb0c1d2e3f5061728394a5b6c7d8e9fa0b1c2d3e4f60718293a4b5c6d7e8f90a1b2c3d4e5f708192a3b4c5d6e7f8091a']), ('noop', []), ('mode', [0]), ('mode', [0]), ('mode', [0]), ('sleep', [0]), ('clear', ['local', 88]), ('malloc', [2880]), ('mode', [0]), ('mode', [0]), ('mode', [0]), ('complete', [])])\n"
+    },
+    "wrong-stage-normalization": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "p', []), ('update', [536978796]), ('failure', [0]), ('activity', ['fb0c1d2e3f5061728394a5b6c7d8e9fa0b1c2d3e4f60718293a4b5c6d7e8f90a1b2c3d4e5f708192a3b4c5d6e7f8091a']), ('noop', []), ('authorize', [4, 1]), ('complete', [])], [('stamp', []), ('update', [536978796]), ('failure', [0]), ('activity', ['fb0c1d2e3f5061728394a5b6c7d8e9fa0b1c2d3e4f60718293a4b5c6d7e8f90a1b2c3d4e5f708192a3b4c5d6e7f8091a']), ('noop', []), ('mode', [0]), ('mode', [0]), ('mode', [0]), ('authorize', [4, 1]), ('complete', [])])\n"
+    },
+    "lost-payload-free": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": ", [0]), ('clear', ['local', 88]), ('malloc', [2880]), ('clear', ['payload', 2880]), ('dispatch', [0, '00000000000000000040022000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000']), ('publish', [2, '7b000000c80100000040022000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000']), ('complete', [])])\n"
+    },
+    "wrong-payload-clear-size": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": ", *args, **kwargs)\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 1063, in __hook_code_cb\n    callback(uc, address, size, user_data)\n    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-sensor-output-c/verify.py\", line 50, in hook\n    assert bytes(v.mem_read(PAY,2880))==bytes(2880)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    "lost-update-complete": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "s': 0, 'stage': 0, 'enabled': 0, 'allocate': False, 'modes': (0,)}, ['trace', 'result', 'workspace'], [('stamp', []), ('update', [536978796]), ('failure', [0]), ('activity', ['fb0c1d2e3f5061728394a5b6c7d8e9fa0b1c2d3e4f60718293a4b5c6d7e8f90a1b2c3d4e5f708192a3b4c5d6e7f8091a']), ('noop', []), ('complete', [])], [('stamp', []), ('update', [536978796]), ('failure', [0]), ('activity', ['fb0c1d2e3f5061728394a5b6c7d8e9fa0b1c2d3e4f60718293a4b5c6d7e8f90a1b2c3d4e5f708192a3b4c5d6e7f8091a']), ('noop', [])])\n"
+    },
+    "early-allocation-failure-return": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": ", ('mode', [0]), ('mode', [0]), ('sleep', [0]), ('clear', ['local', 88]), ('malloc', [2880]), ('mode', [0]), ('mode', [0]), ('mode', [0]), ('complete', [])], [('stamp', []), ('update', [536978796]), ('failure', [0]), ('activity', ['fb0c1d2e3f5061728394a5b6c7d8e9fa0b1c2d3e4f60718293a4b5c6d7e8f90a1b2c3d4e5f708192a3b4c5d6e7f8091a']), ('noop', []), ('mode', [0]), ('mode', [0]), ('mode', [0]), ('sleep', [0]), ('clear', ['local', 88]), ('malloc', [2880]), ('mode', [0]), ('mode', [0]), ('mode', [0])])\n"
+    },
+    "wrong-authorization-polarity": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": ", 'modes': (0,)}, ['trace', 'state'], [('stamp', []), ('update', [536978796]), ('failure', [0]), ('activity', ['fb0c1d2e3f5061728394a5b6c7d8e9fa0b1c2d3e4f60718293a4b5c6d7e8f90a1b2c3d4e5f708192a3b4c5d6e7f8091a']), ('noop', []), ('authorize', [4, 0]), ('complete', [])], [('stamp', []), ('update', [536978796]), ('failure', [0]), ('activity', ['fb0c1d2e3f5061728394a5b6c7d8e9fa0b1c2d3e4f60718293a4b5c6d7e8f90a1b2c3d4e5f708192a3b4c5d6e7f8091a']), ('noop', []), ('authorize', [4, 1]), ('complete', [])])\n"
+    },
+    "wrong-period-status": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "), ('failure', [0]), ('activity', ['fb0c1d2e3f5061728394a5b6c7d8e9fa0b1c2d3e4f60718293a4b5c6d7e8f90a1b2c3d4e5f708192a3b4c5d6e7f8091a']), ('noop', []), ('mode', [0]), ('mode', [0]), ('mode', [0]), ('sleep', [1]), ('complete', [])], [('stamp', []), ('update', [536978796]), ('failure', [0]), ('activity', ['fb0c1d2e3f5061728394a5b6c7d8e9fa0b1c2d3e4f60718293a4b5c6d7e8f90a1b2c3d4e5f708192a3b4c5d6e7f8091a']), ('noop', []), ('mode', [0]), ('mode', [0]), ('mode', [0]), ('sleep', [0]), ('complete', [])])\n"
+    }
+  },
+  "audit": {
+    "unchanged_prior_objects": 744,
+    "new_units": 1,
+    "imports": {
+      "r1-application": {
+        "added": [
+          "r1_activity_periodic_accumulator",
+          "r1_algo_sleep_result_report"
+        ],
+        "removed": [
+          "r1_gomore_sensor_output_dispatch_native"
+        ]
+      },
+      "r1-bootloader": {
+        "added": [],
+        "removed": []
+      }
+    },
+    "reused_owners": [
+      "r1_gomore_sensor_state",
+      "r1_gomore_authorization_state"
+    ],
+    "prototype_only_source_change": "native_gomore_stream_adapters.c"
+  },
+  "source_check": "make sources-check: PASS; G2 5056 units, 4736 source files; R1 745 units, 549 source files; 0 not built in both",
+  "rea": "gomore-sensor-output-c-rea.json",
+  "instruction_identity_proven": false,
+  "image_integration_proven": false
+}

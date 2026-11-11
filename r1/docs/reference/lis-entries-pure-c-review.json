@@ -1,0 +1,104 @@
+{
+  "schema_version": 1,
+  "scope": "R1 LIS2DW12 register entry functions in ordinary C",
+  "report": "build/sources-goal-r1-lis-entries-pure-c/report.json",
+  "comparison_report": "build/sources-goal-r1-qma-transport-reviewed-c/report.json",
+  "audit": {
+    "compiled_units": 855,
+    "application_imports": 61,
+    "bootloader_imports": 22,
+    "unchanged_prior_nongenerated_objects": 844,
+    "changed_nongenerated_objects": [
+      "r1/src/application/runtime/native_lis_call_frames.c"
+    ],
+    "import_sets_unchanged": true,
+    "normal_object_equals_both_executed_probe_objects": true,
+    "no_new_persistent_state": true,
+    "assembly_entry_bridges_removed": 22
+  },
+  "direct": {
+    "stock_C_comparisons": 190272,
+    "C_only_nonwriting_cases": 528,
+    "entries": 22,
+    "actual_C_read_write_callbacks_and_field_kernels": true,
+    "live_context_reloads": true,
+    "one_byte_buffer_contract": true,
+    "APSR_private_frames_and_incidental_R1_R3_excluded": true,
+    "linked_units": [
+      "r1/src/application/runtime/native_lis_call_frames.c",
+      "r1/src/application/board/sensor-kernels/lis-call-frames/st-field-updates.c",
+      "r1/src/application/board/sensor-kernels/lis-setup/st-setup-frames.c",
+      "r1/src/application/runtime/native_lis_fifo.c",
+      "r1/src/application/runtime/native_lis_registers.c",
+      "r1/src/application/runtime/native_lis_setup.c"
+    ]
+  },
+  "configuration_graph": {
+    "stock_C_actual_configuration_graph_cases": 378,
+    "actual_C_configure_and_register_entries": true,
+    "transport_and_identity_FIFO_delay_logs_modeled": true,
+    "private_helper_register_residue_excluded": true
+  },
+  "compiled_defects_rejected": [
+    {
+      "name": "wrong_register",
+      "rejected": true
+    },
+    {
+      "name": "wrong_extraction",
+      "rejected": true
+    },
+    {
+      "name": "read_failure_write",
+      "rejected": true
+    },
+    {
+      "name": "byte_fallback",
+      "rejected": true
+    },
+    {
+      "name": "two_byte_fallback",
+      "rejected": true
+    }
+  ],
+  "intentional_C_policy": [
+    "All private scratch bytes start at zero when read providers write nothing.",
+    "Getter transport status and extracted output are public; incidental R1/R3 and saved-frame residue are excluded.",
+    "Existing two-register power sequencing still writes after a second-read error and sums statuses modulo 2^32."
+  ],
+  "limits": [
+    "Physical SPI/I2C sensor behavior and timing, reset electrical behavior and final application linking/startup unverified.",
+    "Read/write bus callbacks modeled. Configuration fixture also models identity, FIFO output, delays and logs.",
+    "Separate configuration/auxiliary/FIFO assembly remains unchanged.",
+    "One-byte transport contract excludes provider overruns and private stack aliases.",
+    "APSR, incidental caller-clobbered outputs, faults/concurrency and byte identity excluded."
+  ],
+  "evidence_files": {
+    "build/sources-goal-r1-lis-entries-pure-c/report.json": "82610a5629dec8c6da85741bde4eaac29b63b101e5646741fd702178cb9248c2",
+    "build/sources-goal-r1-qma-transport-reviewed-c/report.json": "9ecb6ee2b5a1ea8fc2ab84308c45ab9416b7042081c2046d79022aa0d36f88f5",
+    "r1/src/application/runtime/native_lis_call_frames.c": "7baa52fbae28db3ccb7b52be25b8acda4f994a7062b6ab5de43519140664aa0f",
+    "r1/src/application/board/sensor-kernels/lis-call-frames/st-field-updates.c": "06efd7a8af4005c34c17ce20ba31c11c693f6cca4d89abb123b4685be3d0b1c3",
+    "r1/src/application/board/sensor-kernels/lis-setup/st-setup-frames.c": "135849687e3d0a346381f225ad42e9bbd95212aff91ae0fe051f4b38b7d95dbc",
+    "r1/src/application/runtime/native_lis_fifo.c": "d7c14b45179e6c9a46a6641074f3fabde3ee4df3701fc64f50333a5911133314",
+    "r1/src/application/runtime/native_lis_registers.c": "630862b4a317e123795a77ff2b8a8b92a02877fa0f7c62e9fd89d658790a0a78",
+    "r1/src/application/runtime/native_lis_setup.c": "d6234fc527e1c8e560434d280c045706ba3936d1b6b2ee70cf926080b088d7a4",
+    "r1/src/application/runtime/native_lis_configure.c": "c2534b7ce5c3ee8378e4bdd9741e7f350bc5d6c72b72985176c44e669a251bdd",
+    "vendor-cache/r1/st-lis2dw12-8d4bd522015004a9646102702901ba5a15ec6d39/lis2dw12_reg.h": "8ec9712080bf855726f764303b0c2f3eb209c51b8fdada86af059a1ee70fa048",
+    "r1/src/sources.json": "618e3f6056f74edee68027c82dddb1d2e8c53810e0c04e416f42841fc974e4ec",
+    "tools/build/source-plan.json": "eeb516e31b3310fb0718f36908977f8125723f7c5e0e86cd6744395826259a4d",
+    "build/goal-r1-lis-entries-pure-c/rea.json": "ba3355c26076dc56af2388eb059a49bb22f51e2052f4bf7562ab001b7fda615c",
+    "build/goal-r1-lis-entries-pure-c/config-rea.json": "6d90fb8e77e5cce31aa97690f06c02451b29edda7ab9123f064f59337caa24a6",
+    "build/goal-r1-lis-entries-pure-c/verify.py": "aaebbc09084d8c6d3db13e5a8dd7a621a0767ee1cfb499950d38f8514c1c0e68",
+    "build/goal-r1-lis-entries-pure-c/results.json": "01bed195e541669557bd6e9225aa001ffa331bd7fd60dbd906d3b2469a868f78",
+    "build/goal-r1-lis-entries-pure-c/verification.log": "5eaa3fe439116ee5367ffc3b0a28f90a07d0ff8369e6b494da2bacc175879722",
+    "build/goal-r1-lis-entries-pure-c/make-config.py": "b4be04f639466afbd94b8da83423920bc078579fbcadc581c35ae857574a66d7",
+    "build/goal-r1-lis-entries-pure-c/config/verify.py": "268285a4cf8bf1d4852ba895300784b10945a68dcf289eb515e889ecadf119b8",
+    "build/goal-r1-lis-entries-pure-c/config/results.json": "cd18513767ee739e7d476b0362940f387adbf51e7ecc6e9780f75d63658bd6bb",
+    "build/goal-r1-lis-entries-pure-c/config/verification.log": "10fcde7b5b988ee2fecc8e200e16d1c7898bc68d83661a41e03e047405329d5f",
+    "build/goal-r1-lis-entries-pure-c/negative.py": "10e3822636f36d3bc679cc014c6d3ff50857d4276ee1bf449478e9432be55e42",
+    "build/goal-r1-lis-entries-pure-c/negative.json": "04ae6f66468ee0849402b4ec218154f00ec39519fa1fb6a2a92e97a470fee20b",
+    "build/goal-r1-lis-entries-pure-c/negative.log": "af91b54ecf703aac4c4d68da5ad4fc9bbdf9aedf51001c526f4ea90661bdce55",
+    "build/goal-r1-lis-entries-pure-c/build.log": "56850bd06813a0a6fc8d90cde8e929580f4dd576fdd5a88659e083cd86341acd",
+    "build/goal-r1-lis-entries-pure-c/sources-check.log": "f610d186f791ebf717d9fd6eed6c4f28612779fff34b885bcf8dc8a49c9ae80c"
+  }
+}

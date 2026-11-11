@@ -10,3 +10,6 @@ void opencfw_boot_context_nvic_enable(uint32_t interrupt)
     *(volatile uint32_t *)(uintptr_t)(0xe000e100u + ((irq >> 5) << 2)) =
         1u << (interrupt & 31u);
 }
+
+/* Stock entry names that branch straight to the provider above. */
+__typeof__(opencfw_boot_context_nvic_enable) opencfw_bl_context_nvic_enable __attribute__((alias("opencfw_boot_context_nvic_enable")));

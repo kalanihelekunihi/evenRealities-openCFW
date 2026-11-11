@@ -1,92 +1,43 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_32882c\n"
-".type opencfw_em9305_child_32882c,@function\n"
-"opencfw_em9305_child_32882c:\n"
-"L32882c:\n"
-"enter_s [r13-r17,blink]\n"
-"L32882e:\n"
-"bl.d opencfw_em9305_child_328a74\n"
-"L328832:\n"
-"mov_s r15,r0\n"
-"L328834:\n"
-"mov_s r13,r0\n"
-"L328836:\n"
-"breq_s r0,0,L32884a\n"
-"L328838:\n"
-"mov_s r1,4\n"
-"L32883a:\n"
-"bl.d opencfw_em9305_child_32909c\n"
-"L32883e:\n"
-"mov_s r0,r15\n"
-"L328840:\n"
-"mov_s r0,r15\n"
-"L328842:\n"
-"bl.d opencfw_em9305_child_3230e0\n"
-"L328846:\n"
-"mov_s r1,r13\n"
-"L328848:\n"
-"leave_s [r13-r17,blink,pcl]\n"
-"L32884a:\n"
-"bl.d opencfw_em9305_common_request_30455c\n"
-"L32884e:\n"
-"mov_s r0,1\n"
-"L328850:\n"
-"ld r13,[r15,180]\n"
-"L328854:\n"
-"breq_s r13,0,L3288a2\n"
-"L328856:\n"
-"ldb_s r1,[r13,0x2]\n"
-"L328858:\n"
-"mov_s r0,r13\n"
-"L32885a:\n"
-"add r0,r0,369\n"
-"L32885e:\n"
-"brne.d.nt r1,0x1,L3288a2\n"
-"L328862:\n"
-"stb 1,[r0]\n"
-"L328866:\n"
-"ldb r0,[r13,0xae1]\n"
-"L32886e:\n"
-"mov_s r14,r13\n"
-"L328870:\n"
-"add r14,r14,1424\n"
-"L328874:\n"
-"brne_s r0,0,L328880\n"
-"L328876:\n"
-"mov_s r0,r13\n"
-"L328878:\n"
-"add r0,r0,378\n"
-"L32887c:\n"
-"stb 1,[r0]\n"
-"L328880:\n"
-"ldh r17,[r13,0x8ca]\n"
-"L328888:\n"
-"bl.d opencfw_em9305_scan_random_30c478\n"
-"L32888c:\n"
-"ld r16,[r14]\n"
-"L328890:\n"
-"mov_s r1,r17\n"
-"L328892:\n"
-"bl.d opencfw_em9305_crc_update_304678\n"
-"L328896:\n"
-"mov_s r2,r16\n"
-"L328898:\n"
-"add1 r13,r13,1393\n"
-"L32889c:\n"
-"stb 1,[r13]\n"
-"L3288a0:\n"
-"sth_s r0,[r14,0x12]\n"
-"L3288a2:\n"
-"mov_s r1,2\n"
-"L3288a4:\n"
-"bl.d opencfw_em9305_child_329064\n"
-"L3288a8:\n"
-"mov_s r0,r15\n"
-"L3288aa:\n"
-"bl opencfw_em9305_command_count_30e4bc\n"
-"L3288ae:\n"
-"leave_s [r13-r17,blink,pcl]\n"
-".size opencfw_em9305_child_32882c,.-opencfw_em9305_child_32882c\n"
-);
+#include <stdint.h>
+
+/* Native 0x32882c..0x3288b0: complete a sync establishment. When native
+ * 0x328a74 reports a status, send message 4 and finish with that status.
+ * Otherwise request common resource 1 and, for a train (+180) in state 1,
+ * mark it (+369, +378 unless +2785 is set), seed its CRC state (+1442) from
+ * a random value, the length +2250 and the data at *(+1424), and set +2786;
+ * then post event 2 and count up the command state. */
+extern uint32_t opencfw_em9305_child_328a74(uintptr_t);
+extern uint32_t opencfw_em9305_child_32909c(uintptr_t,uint32_t);
+extern uint32_t opencfw_em9305_child_3230e0(uintptr_t,uint32_t);
+extern uint32_t opencfw_em9305_common_request_30455c(uint32_t);
+extern uint32_t opencfw_em9305_scan_random_30c478(void);
+extern uint32_t opencfw_em9305_crc_update_304678(uint32_t,uint32_t,uintptr_t);
+extern uint32_t opencfw_em9305_child_329064(uintptr_t,uint32_t);
+extern uint32_t opencfw_em9305_command_count_30e4bc(void);
+
+uint32_t opencfw_em9305_child_32882c(uintptr_t record)
+{
+    uint32_t status = opencfw_em9305_child_328a74(record);
+    if (status != 0u) {
+        (void)opencfw_em9305_child_32909c(record, 4u);
+        return opencfw_em9305_child_3230e0(record, status);
+    }
+    (void)opencfw_em9305_common_request_30455c(1u);
+    uintptr_t train = *(volatile uint32_t *)(record + 180u);
+    if (train != 0u) {
+        uint32_t state = *(volatile uint8_t *)(train + 2u);
+        *(volatile uint8_t *)(train + 369u) = 1u;
+        if (state == 1u) {
+            if (*(volatile uint8_t *)(train + 2785u) == 0u)
+                *(volatile uint8_t *)(train + 378u) = 1u;
+            uint32_t length = *(volatile uint16_t *)(train + 2250u);
+            uintptr_t data = *(volatile uint32_t *)(train + 1424u);
+            uint32_t seed = opencfw_em9305_scan_random_30c478();
+            uint32_t crc = opencfw_em9305_crc_update_304678(seed, length, data);
+            *(volatile uint8_t *)(train + 2786u) = 1u;
+            *(volatile uint16_t *)(train + 1442u) = (uint16_t)crc;
+        }
+    }
+    (void)opencfw_em9305_child_329064(record, 2u);
+    return opencfw_em9305_command_count_30e4bc();
+}

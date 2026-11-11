@@ -1,0 +1,73 @@
+{
+  "schema": 1,
+  "report": "build/sources-goal-r1-nfc-pure-c/report.json",
+  "report_sha256": "a42fa5c856486727a7db3319d2da14d0390c088d438ccde1d3f16e47367bba05",
+  "manifest_sha256": "c24d5e970fba8f7fb8279250c073658d21a724a9b040e83061ff952af831f222",
+  "behavior": {
+    "paired_cases": 15872,
+    "all_ID_bytes": true,
+    "changing_log_modes_and_callback_buffer_mutations": true,
+    "actual_C_inner_outer_chain": true,
+    "limitations": [
+      "Provider boundaries modeled; private buffer locations normalized to the C byte-output contract.",
+      "ID byte and logging arguments compared; upper scratch bytes, frame layouts, provider live registers and caller-clobbered registers excluded; final R0 and callee-saved registers checked.",
+      "Electrical response, actual delay, arbitrary aliases/faults and concurrency unproven."
+    ]
+  },
+  "integration": {
+    "cases": 480,
+    "actual_driver_read_register": "0x17",
+    "actual_driver_bus_address": "0xae",
+    "actual_read_length": 1,
+    "boundaries": [
+      "I2C transfer",
+      "resource acquire/release",
+      "delay",
+      "logging",
+      "EABI byte clear"
+    ]
+  },
+  "defects": [
+    "wrong-delay",
+    "boolean-id",
+    "cached-mode",
+    "missing-release"
+  ],
+  "audit": {
+    "unchanged_prior_object_hashes": 775,
+    "changed_object_hashes": [
+      [
+        "r1-bootloader",
+        "{gen}/r1_startup_vectors.S"
+      ],
+      [
+        "r1-application",
+        "r1/src/application/st25/native_identity.c"
+      ],
+      [
+        "r1-bootloader",
+        "{gen}/r1_uecc.c"
+      ]
+    ],
+    "generated_boot_crypto_and_vectors_allocated_bytes_and_relocations_unchanged": true,
+    "import_sets_unchanged": true
+  },
+  "rea_readbacks": [
+    "ev_6bfa81076f154c01a4401fc0e66a624c6164c177966b844a28cc5a322cc19dcc",
+    "ev_0a4e0796cde9229cc3ff05ec4f7b116ed76d835c2dc4d353386923c2f353ebd5"
+  ],
+  "strict_boot_link_report": "build/goal-r1-nfc-pure-c/boot-link/report.json",
+  "physical_i2c_verified": false,
+  "incidental_upper_scratch_and_R3_excluded": true,
+  "evidence_sha256": {
+    "build/goal-r1-nfc-pure-c/verify.py": "7e763f4d18726246254c206e3b56257b26ba369802119fe9dd4e9e9a9fb5978a",
+    "build/goal-r1-nfc-pure-c/integration.py": "0885188eddd2b1aac390b12345a104282dc19e17e9dbd1c82c238596aeab4671",
+    "build/goal-r1-nfc-pure-c/defects.py": "60701c77a6f248628f53d4ac8e530f4f8c9baa2138ea17225e2168dd6af4b8df",
+    "build/goal-r1-nfc-pure-c/results.json": "ea8aeb718eb32d778c0feb1b5c3e1c298f10ad2519ebf1fa2bf512e9cbf98536",
+    "build/goal-r1-nfc-pure-c/integration.json": "238f2c6f4e6e5f7a44b69e50ab1c5e2e9e31c940d64682b329596b06a29dfadb",
+    "build/goal-r1-nfc-pure-c/defects.json": "80a0703035338c95eb160678570ebc29ffd3e02acad4ad144cb96e9833f13c5e",
+    "build/goal-r1-nfc-pure-c/audit.json": "8595c425f69d557c75a956f8b3777b567015c77e4414ccb1b858de14a5845df6",
+    "build/goal-r1-nfc-pure-c/rea-inner.json": "413217f6a7df3c2e7ef2b36accb1181e6f45e442a0b5a1536f1e81f9b88d7aad",
+    "build/goal-r1-nfc-pure-c/rea-outer.json": "e0ea3be8a1adea87e686052d20f38b86c00ff348a5dc966de81295248b4a3767"
+  }
+}

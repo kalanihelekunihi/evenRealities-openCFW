@@ -19,8 +19,11 @@ __attribute__((used,noinline)) static uint32_t flag_word_get_kernel(volatile uin
  if(word){result=read32(record+32);write32(word,result);}
  return result;
 }
-__attribute__((naked,noinline)) uint32_t r1_kv_dev_info_flag_word_get(void *flag __attribute__((unused)),void *word __attribute__((unused)))
-{__asm__ volatile("push {r4,r5,lr}\nsub sp,sp,#52\nmov r2,sp\nbl flag_word_get_kernel\nadd sp,sp,#52\npop {r4,r5,pc}");}
+uint32_t r1_kv_dev_info_flag_word_get(void *flag,void *word)
+{
+ uint8_t record[52]={0};
+ return flag_word_get_kernel(flag,word,record);
+}
 __attribute__((used,noinline)) static uint32_t flag0_word_set_kernel(uint32_t value,uint32_t word,volatile uint8_t *record)
 {
  (void)r1_kv_class_read(r1_device_info_record_kv_handle,(void *)(uintptr_t)record,52);
@@ -29,8 +32,11 @@ __attribute__((used,noinline)) static uint32_t flag0_word_set_kernel(uint32_t va
  (void)r1_kv_class_write(r1_device_info_record_kv_handle,(const void *)(uintptr_t)record,52);
  return r1_nv_modules_idle_check();
 }
-__attribute__((naked,noinline)) uint32_t r1_kv_dev_info_flag0_word_set(uint32_t value __attribute__((unused)),uint32_t word __attribute__((unused)))
-{__asm__ volatile("push {r4,r5,r6,lr}\nsub sp,sp,#56\nmov r2,sp\nbl flag0_word_set_kernel\nadd sp,sp,#56\npop {r4,r5,r6,pc}");}
+uint32_t r1_kv_dev_info_flag0_word_set(uint32_t value,uint32_t word)
+{
+ uint8_t record[52]={0};
+ return flag0_word_set_kernel(value,word,record);
+}
 __attribute__((used,noinline)) static uint32_t health_settings_kernel(uint32_t handle,const volatile uint8_t *packet,volatile uint8_t *frame)
 {
  if(!(packet[5]&2u)){
@@ -59,6 +65,8 @@ __attribute__((used,noinline)) static uint32_t health_settings_kernel(uint32_t h
  uint32_t word=read32(payload);(void)r1_kv_dev_info_flag0_word_set(requested!=0,word);
  return r1_event_publish(0x100d,(const void *)(uintptr_t)(payload+4),1);
 }
-/* Research-native body; portable planner/backing/admission remain separate. */
-__attribute__((naked,noinline)) uint32_t r1_native_health_settings_handler(uint32_t handle __attribute__((unused)),const void *packet __attribute__((unused)))
-{__asm__ volatile("push {r4,r5,r6,r7,r8,lr}\nsub sp,sp,#40\nmov r2,sp\nbl health_settings_kernel\nadd sp,sp,#40\npop {r4,r5,r6,r7,r8,pc}");}
+uint32_t r1_health_settings_plan_command(uint32_t handle,const void *packet)
+{
+ uint8_t frame[40]={0};
+ return health_settings_kernel(handle,packet,frame);
+}

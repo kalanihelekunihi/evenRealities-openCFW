@@ -1,0 +1,201 @@
+{
+  "source": {
+    "source": "r1/src/application/runtime/native_gomore_low_high.c",
+    "payload": "r1-application",
+    "role": "candidate",
+    "toolchain": "gcc9",
+    "link": true,
+    "expect": "compile",
+    "returncode": 0,
+    "argv": [
+      "/opt/homebrew/bin/python3",
+      "/Users/kalani/Repo/evenRealities-openCFW/tools/build/linux_gcc.py",
+      "--compiler",
+      "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/bin/arm-none-eabi-gcc",
+      "--read-root",
+      "/Users/kalani/Repo/evenRealities-openCFW/r1",
+      "--read-root",
+      "/Users/kalani/Repo/evenRealities-openCFW/third-party/upstream",
+      "--read-root",
+      "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1",
+      "--read-root",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-low-high-branch-c/generated/r1",
+      "--",
+      "-mcpu=cortex-m4",
+      "-mthumb",
+      "-munaligned-access",
+      "-mfpu=fpv4-sp-d16",
+      "-mfloat-abi=hard",
+      "-std=c11",
+      "-Os",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-fshort-enums",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-fno-delete-null-pointer-checks",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/r1/src/vendor",
+      "-isystem",
+      "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
+      "-fno-strict-aliasing",
+      "-ffp-contract=off",
+      "-fsignaling-nans",
+      "-frounding-math",
+      "-ftrapping-math",
+      "-fno-if-conversion",
+      "-fno-if-conversion2",
+      "-MD",
+      "-MF",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-low-high-branch-c/r1/r1-application/r1__src__application__runtime__native_gomore_low_high.c.d",
+      "-c",
+      "/Users/kalani/Repo/evenRealities-openCFW/r1/src/application/runtime/native_gomore_low_high.c",
+      "-o",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-low-high-branch-c/r1/r1-application/r1__src__application__runtime__native_gomore_low_high.c.o"
+    ],
+    "source_sha256": "3bba8b3311fd85b0408104d0c7b27865e0a7b91988fb38874c825f39313fe3e9",
+    "object_sha256": "fd1e6d426fcc2a80e3043d7073e68e682970b9a1c5048d5171f6726190460d1e",
+    "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-low-high-branch-c/r1/r1-application/r1__src__application__runtime__native_gomore_low_high.c.o",
+    "strong": [
+      "r1_gomore_coefficients_low_high_native"
+    ],
+    "weak": [],
+    "undefined": [
+      "r1_native_cosf",
+      "r1_native_powf",
+      "r1_native_sinf"
+    ]
+  },
+  "direct_replay": {
+    "pairs": 1376,
+    "faults": 15,
+    "modeled_math": false,
+    "object_sha256": "fd1e6d426fcc2a80e3043d7073e68e682970b9a1c5048d5171f6726190460d1e",
+    "digest": "564df80485ccb00d7ee2aaaca8572850fb7f9a94c233d0cf3fd51fb1c7b979ad",
+    "limits": [
+      "Private scratch excluded; nonpositive orders omit unused uninitialized private reads",
+      "Positive orders above four overflow native scratch and are outside this proof",
+      "No physical validation, complete source-only link or byte identity proof"
+    ]
+  },
+  "modeled_replay": {
+    "pairs": 5476,
+    "faults": 15,
+    "modeled_math": true,
+    "object_sha256": "fd1e6d426fcc2a80e3043d7073e68e682970b9a1c5048d5171f6726190460d1e",
+    "digest": "cb1c182ba97826b4ad35599a48ab2908a503130b3a4e3cb876e64abfd2a41996",
+    "limits": [
+      "Private scratch excluded; nonpositive orders omit unused uninitialized private reads",
+      "Positive orders above four overflow native scratch and are outside this proof",
+      "No physical validation, complete source-only link or byte identity proof"
+    ]
+  },
+  "configuration_caller_replay": {
+    "pairs": 524,
+    "faults": 22,
+    "modeled_coefficients": false,
+    "object_sha256": "9ee917fe35ab81e21e2a3ad15d5dfa5918deef0f1cd725fdef0e55889ec01a6e",
+    "digest": "57f6544adec2d2c7e83e86fd6b8c694fa440a6e9bc7fe56e80e3681a4318f905",
+    "limits": [
+      "Private frames excluded",
+      "Actual EABI clear executes; coefficient providers modeled only in MODELED run",
+      "No physical alignment, full source-only link or byte identity proof"
+    ]
+  },
+  "negative_controls": [
+    {
+      "name": "pi",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "gain",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "imaginary",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "subtract",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "copy",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "sign",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "ready",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "power",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "fused",
+      "compiled": true,
+      "rejected": true
+    }
+  ],
+  "qualification": {
+    "candidate_units": 1,
+    "compiled_units": 1,
+    "units": [
+      {
+        "source": "r1/src/application/runtime/native_gomore_low_high.c",
+        "payload": "r1-application",
+        "evidence": "r1/symbols/function-frontier.csv",
+        "selected": [],
+        "compiled": true,
+        "rejections": {
+          "anchored_relocation_pattern_not_exact": 1
+        },
+        "source_implementation_completeness": "not established by compilation or byte matching",
+        "reason": "no exact anchored body under tested production bindings; integration remains unfinished"
+      }
+    ]
+  },
+  "composition": {
+    "report": "build/sources-goal-r1-gomore-low-high-branch-c/report.json",
+    "units": 693,
+    "unchanged_prior_source_object_pairs": 691,
+    "application_imports": 180,
+    "bootloader_imports": 34,
+    "resolved_import": "r1_gomore_coefficients_low_high_native"
+  },
+  "artifacts": {
+    "build/goal-r1-gomore-low-high-c/rea.json": "fa9a984a6137ffbe3ccf7258f92a818bec597c9ec84f59039f94d4fccbf7f15f",
+    "build/goal-r1-gomore-low-high-c/verify.py": "38d0410d9f9ba53ff7e33686fa29c15ccd940410fde8049dd0e14586dd52ebc8",
+    "build/goal-r1-gomore-low-high-c/configure-integration.py": "ce1bad9f7763d8b0ae0a5b10b4fb2f26cf7e049faf657bd79019f499fc8eee41",
+    "build/goal-r1-gomore-low-high-c/configure/results.json": "be8febc415ff6f0500027d17341db75ff1fcd62226f117277bd0e3351e26e3d3",
+    "build/goal-r1-gomore-low-high-c/configure/source.elf": "9eecb40cb77f62fc2639b2dab40f084323fb9f768d4e677868ca98ab75c2201d",
+    "build/goal-r1-gomore-low-high-c/negative.py": "462885695ad501318d851b0ccbb345f5e8c75a8bf262cd73c46268c4a1dff2cb",
+    "build/goal-r1-gomore-low-high-c/results.json": "eb7f87475132cac764800b8222119772856bb6c2c5842660d07fc3e17fe2d2aa",
+    "build/goal-r1-gomore-low-high-c/modeled-results.json": "0cae05ace1daa1dd778eb2f93232643471a7dc97b9fe1ddeab674104f55874cb",
+    "build/goal-r1-gomore-low-high-c/negative-results.json": "00b7ae6e4fabdba018a41a663669984cc1ad8b8e664a7f69d93b5925b2de1218",
+    "build/goal-r1-gomore-low-high-c/production-direct.log": "68c94644ed6444d9476e4accf0a1f48e7d78f97d63a2a08d27c24e7e2a7518c3",
+    "build/goal-r1-gomore-low-high-c/production-modeled.log": "2054c3963c07b3d04097db523ca4c5e9398535e693b6ed37fb9ca9d71bf741fb",
+    "build/goal-r1-gomore-low-high-c/qualified/qualification.json": "34d7c872bd591a13754b49b72f708087d065244c475990f1a00a80f71174bb41"
+  },
+  "limits": [
+    "Actual stock cosine/sine/power execute in direct and caller replay; modeled math only in separate stress run",
+    "Positive orders above four overflow native scratch and are outside this proof",
+    "Nonpositive orders omit unused uninitialized private scratch reads",
+    "Branch compiler flags avoid observed layout-dependent emulator IT replay issue; this does not establish physical instruction behavior",
+    "Private scratch excluded; no physical hardware, complete source-only final link or byte identity proof"
+  ]
+}

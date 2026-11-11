@@ -167,7 +167,7 @@ _Static_assert(sizeof(g2_onboarding_key_msg_t) == 8u, "key sync record");
  * news page). */
 extern g2_onboarding_news_scroll_t g2_onboarding_stock_page_20071048;  /* RAM 0x20071048 */
 extern int32_t g2_onboarding_stock_flag_20074db8;      /* RAM 0x20074db8 ext page initialised */
-extern void *g2_onboarding_stock_obj_20074db4;         /* RAM 0x20074db4 "no news" placeholder */
+extern void *g2_onboarding_stock_obj_20074db4;         /* RAM 0x20074db4 "no news" default */
 extern g2_ui_fifo_t *g2_onboarding_news_ext_fifo_20074db0; /* RAM 0x20074db0 queued key records */
 extern void *g2_onboarding_mutex;                      /* RAM 0x20074830 osMutexId_t */
 extern void *g2_onboarding_main_obj_20074ce8;          /* RAM 0x20074ce8 feature page container */
@@ -202,7 +202,6 @@ extern int32_t osMutexRelease(void *mutex);                     /* 0x44981c */
 extern void audio_uart_buffer_zero(void *dst, uint32_t len, uint32_t fill);  /* memset 0x43c0e4 */
 extern void *audio_queue_copy_bytes(void *dst, const void *src, uint32_t len); /* memcpy 0x439be4 */
 extern int32_t g2_audio_dump_snprintf(char *dst, uint32_t size, const char *format, ...); /* 0x44b728 */
-extern uint64_t audio_uart_ring_u64_div_47cc60(uint32_t, uint32_t, uint32_t, uint32_t); /* u64 / u64 */
 extern void service_time_epoch_to_calendar(uint32_t epoch, g2_calendar_t *out); /* 0x44a100 */
 extern void service_time_current_calendar_get(g2_calendar_t *out);              /* 0x44a19a */
 extern uint32_t audio_uart_master_display_refresh(uint32_t app, const void *data, uint16_t len,
@@ -228,26 +227,26 @@ extern void audio_uart_page_43f6d6(void *obj, void *base, uint32_t align, int32_
 extern int32_t audio_uart_lv_obj_height_43fdda(void *obj);               /* lv_obj_get_height */
 extern uint32_t audio_uart_page_44104c(uint32_t rgb);                    /* lv_color_hex */
 extern void audio_uart_page_441164(void *obj, int32_t v, uint32_t sel);  /* style width */
-extern void audio_uart_page_44120e(void *obj, int32_t v, uint32_t sel);  /* style pad_top */
-extern void audio_uart_page_44121c(void *obj, int32_t v, uint32_t sel);  /* style pad_bottom */
-extern void audio_uart_page_44122a(void *obj, int32_t v, uint32_t sel);  /* style pad_left */
-extern void audio_uart_page_441238(void *obj, int32_t v, uint32_t sel);  /* style pad_right */
+extern void lv_obj_set_style_pad_top(void *obj, int32_t v, uint32_t sel);  /* style pad_top */
+extern void lv_obj_set_style_pad_bottom(void *obj, int32_t v, uint32_t sel);  /* style pad_bottom */
+extern void lv_obj_set_style_pad_left(void *obj, int32_t v, uint32_t sel);  /* style pad_left */
+extern void lv_obj_set_style_pad_right(void *obj, int32_t v, uint32_t sel);  /* style pad_right */
 extern void audio_uart_page_441254(void *obj, int32_t v, uint32_t sel);  /* style pad_column */
 extern void audio_uart_page_44127e(void *obj, uint32_t c, uint32_t sel); /* style bg_color */
 extern void audio_uart_page_44129e(void *obj, uint32_t v, uint32_t sel); /* style bg_opa */
 extern void audio_uart_page_4412ec(void *obj, uint32_t c, uint32_t sel); /* style border_color */
-extern void audio_uart_page_44131c(void *obj, int32_t v, uint32_t sel);  /* style border_width */
-extern void audio_uart_page_44133a(void *obj, int32_t v, uint32_t sel);  /* style outline_width */
-extern void audio_uart_page_441378(void *obj, int32_t v, uint32_t sel);  /* style outline_pad */
-extern void audio_uart_page_441386(void *obj, int32_t v, uint32_t sel);  /* style shadow_width */
-extern void audio_uart_page_441394(void *obj, int32_t v, uint32_t sel);  /* style shadow_offset_x */
-extern void audio_uart_page_4413a2(void *obj, int32_t v, uint32_t sel);  /* style shadow_offset_y */
-extern void audio_uart_page_4413b0(void *obj, int32_t v, uint32_t sel);  /* style shadow_spread */
+extern void lv_obj_set_style_border_width(void *obj, int32_t v, uint32_t sel);  /* style border_width */
+extern void lv_obj_set_style_outline_width(void *obj, int32_t v, uint32_t sel);  /* style outline_width */
+extern void lv_obj_set_style_outline_pad(void *obj, int32_t v, uint32_t sel);  /* style outline_pad */
+extern void lv_obj_set_style_shadow_width(void *obj, int32_t v, uint32_t sel);  /* style shadow_width */
+extern void lv_obj_set_style_shadow_offset_x(void *obj, int32_t v, uint32_t sel);  /* style shadow_offset_x */
+extern void lv_obj_set_style_shadow_offset_y(void *obj, int32_t v, uint32_t sel);  /* style shadow_offset_y */
+extern void lv_obj_set_style_shadow_spread(void *obj, int32_t v, uint32_t sel);  /* style shadow_spread */
 extern void audio_lv_style_color_44140e(void *obj, uint32_t c, uint32_t sel); /* style text_color */
 extern void audio_lv_style_alpha_44142e(void *obj, uint32_t v, uint32_t sel); /* style text_opa */
 extern void audio_lv_style_font_44143e(void *obj, uint32_t font, uint32_t sel); /* style text_font */
 extern void audio_lv_style_a_44145a(void *obj, uint32_t v, uint32_t sel); /* style text_align */
-extern void audio_uart_page_44146a(void *obj, int32_t v, uint32_t sel);  /* style radius */
+extern void lv_obj_set_style_radius(void *obj, int32_t v, uint32_t sel);  /* style radius */
 extern void audio_lv_delete_44d7b8(void *obj);                           /* lv_obj_delete */
 extern void audio_uart_page_44d878(void *obj);                           /* lv_obj_clean */
 extern void *audio_uart_lv_obj_parent_44dca2(void *obj);                 /* lv_obj_get_parent */
@@ -498,19 +497,19 @@ int32_t onboarding_news_page_refresh_50a094(void)
     audio_uart_page_43f568(card, 0x100);
     audio_uart_page_44127e(card, audio_uart_page_44104c(COLOR_BLACK), LV_PART_MAIN);
     audio_uart_page_44129e(card, 0u, LV_PART_MAIN);
-    audio_uart_page_44131c(card, 0, LV_PART_MAIN);
-    audio_uart_page_44133a(card, 0, LV_PART_MAIN);
-    audio_uart_page_441378(card, 0, LV_PART_MAIN);
-    audio_uart_page_441386(card, 0, LV_PART_MAIN);
-    audio_uart_page_4413b0(card, 0, LV_PART_MAIN);
-    audio_uart_page_441394(card, 0, LV_PART_MAIN);
-    audio_uart_page_4413a2(card, 0, LV_PART_MAIN);
+    lv_obj_set_style_border_width(card, 0, LV_PART_MAIN);
+    lv_obj_set_style_outline_width(card, 0, LV_PART_MAIN);
+    lv_obj_set_style_outline_pad(card, 0, LV_PART_MAIN);
+    lv_obj_set_style_shadow_width(card, 0, LV_PART_MAIN);
+    lv_obj_set_style_shadow_spread(card, 0, LV_PART_MAIN);
+    lv_obj_set_style_shadow_offset_x(card, 0, LV_PART_MAIN);
+    lv_obj_set_style_shadow_offset_y(card, 0, LV_PART_MAIN);
     lv_obj_set_style_pad_all_509fdc(card, 0, LV_PART_MAIN);
-    audio_uart_page_44120e(card, 0, LV_PART_MAIN);
-    audio_uart_page_44121c(card, 0, LV_PART_MAIN);
-    audio_uart_page_44122a(card, 0, LV_PART_MAIN);
-    audio_uart_page_441238(card, 0, LV_PART_MAIN);
-    audio_uart_page_44146a(card, 0, LV_PART_MAIN);
+    lv_obj_set_style_pad_top(card, 0, LV_PART_MAIN);
+    lv_obj_set_style_pad_bottom(card, 0, LV_PART_MAIN);
+    lv_obj_set_style_pad_left(card, 0, LV_PART_MAIN);
+    lv_obj_set_style_pad_right(card, 0, LV_PART_MAIN);
+    lv_obj_set_style_radius(card, 0, LV_PART_MAIN);
     audio_uart_page_4412ec(card, audio_uart_page_44104c(COLOR_BLACK), LV_PART_MAIN);
     audio_lv_style_color_44140e(card, audio_uart_page_44104c(COLOR_WHITE), LV_PART_MAIN);
     audio_lv_style_alpha_44142e(card, 0xffu, LV_PART_MAIN);
@@ -710,19 +709,19 @@ int32_t onboarding_news_page_create_50ac5c(void *parent)
         onboarding_news_scroll_update_content_state_50b5f4(&PAGE->container[i]);
     audio_uart_page_44e368(PAGE->container[1].content_scroll, LV_SCROLLBAR_MODE_ON);
 
-    /* "No news" placeholder covering the page. */
+    /* "No news" default covering the page. */
     void *empty = audio_uart_page_43de82(parent);
     g2_onboarding_stock_obj_20074db4 = empty;
     audio_uart_page_43f4c0(empty, LV_PCT_100, LV_PCT_100);
     audio_uart_page_44129e(empty, 0xffu, LV_PART_MAIN);
     audio_uart_page_44127e(empty, audio_uart_page_44104c(COLOR_BLACK), LV_PART_MAIN);
-    audio_uart_page_44131c(empty, 0, LV_PART_MAIN);
+    lv_obj_set_style_border_width(empty, 0, LV_PART_MAIN);
     lv_obj_set_style_pad_all_509fdc(empty, 0, LV_PART_MAIN);
 
     void *row = audio_uart_page_43de82(empty);
     audio_uart_page_43f4c0(row, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
     audio_uart_page_44129e(row, 0u, LV_PART_MAIN);
-    audio_uart_page_44131c(row, 0, LV_PART_MAIN);
+    lv_obj_set_style_border_width(row, 0, LV_PART_MAIN);
     lv_obj_set_style_pad_all_509fdc(row, 0, LV_PART_MAIN);
     audio_uart_page_48ba78(row, LV_FLEX_FLOW_ROW);
     audio_uart_page_48ba92(row, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER);
@@ -832,7 +831,7 @@ void onboarding_news_container_create_50b1bc(g2_onboarding_news_container_t *c, 
     audio_uart_page_44127e(c->root, audio_uart_page_44104c(COLOR_BLACK), LV_PART_MAIN);
     audio_uart_page_44129e(c->root, 0u, LV_PART_MAIN);
     lv_obj_set_style_pad_all_509fdc(c->root, 0, LV_PART_MAIN);
-    audio_uart_page_44131c(c->root, 0, LV_PART_MAIN);
+    lv_obj_set_style_border_width(c->root, 0, LV_PART_MAIN);
     audio_uart_page_43dfa4(c->root, LV_OBJ_FLAG_CLICKABLE);
 
     c->content_scroll = audio_uart_page_43de82(c->root);
@@ -840,7 +839,7 @@ void onboarding_news_container_create_50b1bc(g2_onboarding_news_container_t *c, 
     audio_uart_page_43f09a(c->content_scroll, 0, 0);
     audio_uart_page_44129e(c->content_scroll, 0u, LV_PART_MAIN);
     lv_obj_set_style_pad_all_509fdc(c->content_scroll, 0, LV_PART_MAIN);
-    audio_uart_page_44131c(c->content_scroll, 0, LV_PART_MAIN);
+    lv_obj_set_style_border_width(c->content_scroll, 0, LV_PART_MAIN);
     audio_uart_page_44e3ca(c->content_scroll, LV_DIR_VER);
     audio_uart_page_44e368(c->content_scroll, LV_SCROLLBAR_MODE_OFF);
     audio_uart_page_44127e(c->content_scroll, audio_uart_page_44104c(COLOR_WHITE), LV_PART_SCROLLBAR);
@@ -921,8 +920,7 @@ void onboarding_news_scroll_load_news_data_50b438(g2_onboarding_news_container_t
     c->read_count = 0;
     audio_lv_label_text_49942e(c->source_label, rec->source);
     audio_uart_buffer_zero(when, sizeof when, 0u);
-    uint32_t epoch = (uint32_t)audio_uart_ring_u64_div_47cc60((uint32_t)rec->timestamp_ms,
-                                                               (uint32_t)(rec->timestamp_ms >> 32), 1000u, 0u);
+    uint32_t epoch = (uint32_t)(rec->timestamp_ms / 1000u);
     service_time_epoch_to_calendar(epoch, &news_time);
     service_time_current_calendar_get(&now);
     if (news_time.year < now.year || (now.year == news_time.year && news_time.month < now.month) ||

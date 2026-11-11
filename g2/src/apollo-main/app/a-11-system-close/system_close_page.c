@@ -103,17 +103,17 @@ extern int32_t audio_uart_lv_obj_y_43fce0(void *obj);                    /* lv_o
 extern int32_t audio_uart_lv_obj_width_43fd9e(void *obj);                /* lv_obj_get_width */
 extern int32_t audio_uart_lv_obj_height_43fdda(void *obj);               /* lv_obj_get_height */
 extern uint32_t audio_uart_page_44104c(uint32_t rgb);                    /* lv_color_hex */
-extern void audio_uart_page_44120e(void *obj, int32_t v, uint32_t sel);  /* lv_obj_set_style_pad_top */
-extern void audio_uart_page_44121c(void *obj, int32_t v, uint32_t sel);  /* lv_obj_set_style_pad_bottom */
-extern void audio_uart_page_44122a(void *obj, int32_t v, uint32_t sel);  /* lv_obj_set_style_pad_left */
-extern void audio_uart_page_441238(void *obj, int32_t v, uint32_t sel);  /* lv_obj_set_style_pad_right */
+extern void lv_obj_set_style_pad_top(void *obj, int32_t v, uint32_t sel);  /* lv_obj_set_style_pad_top */
+extern void lv_obj_set_style_pad_bottom(void *obj, int32_t v, uint32_t sel);  /* lv_obj_set_style_pad_bottom */
+extern void lv_obj_set_style_pad_left(void *obj, int32_t v, uint32_t sel);  /* lv_obj_set_style_pad_left */
+extern void lv_obj_set_style_pad_right(void *obj, int32_t v, uint32_t sel);  /* lv_obj_set_style_pad_right */
 extern void audio_uart_page_44127e(void *obj, uint32_t c, uint32_t sel); /* lv_obj_set_style_bg_color */
 extern void audio_uart_page_44129e(void *obj, uint32_t o, uint32_t sel); /* lv_obj_set_style_bg_opa */
 extern void audio_uart_page_4412ec(void *obj, uint32_t c, uint32_t sel); /* lv_obj_set_style_border_color */
-extern void audio_uart_page_44131c(void *obj, int32_t v, uint32_t sel);  /* lv_obj_set_style_border_width */
+extern void lv_obj_set_style_border_width(void *obj, int32_t v, uint32_t sel);  /* lv_obj_set_style_border_width */
 extern void audio_uart_page_44140e(void *obj, uint32_t c, uint32_t sel); /* lv_obj_set_style_text_color */
 extern void audio_uart_page_44143e(void *obj, uint32_t f, uint32_t sel); /* lv_obj_set_style_text_font */
-extern void audio_uart_page_44146a(void *obj, int32_t v, uint32_t sel);  /* lv_obj_set_style_radius */
+extern void lv_obj_set_style_radius(void *obj, int32_t v, uint32_t sel);  /* lv_obj_set_style_radius */
 extern void audio_uart_page_44d878(void *obj);                           /* lv_obj_clean */
 extern void *audio_uart_lv_obj_parent_44dca2(void *obj);                 /* lv_obj_get_parent */
 extern void audio_uart_page_44e368(void *obj, uint32_t mode);            /* lv_obj_set_scrollbar_mode */
@@ -122,7 +122,7 @@ extern void audio_uart_lv_anim_init_4503d6(g2_lv_anim_t *anim);          /* lv_a
 extern void *audio_uart_lv_anim_start_450408(const g2_lv_anim_t *anim);  /* lv_anim_start */
 extern uint32_t audio_uart_lv_style_unlink_450500(void *var, void *exec_cb); /* lv_anim_delete */
 extern void audio_uart_lv_anim_values_4506ce(g2_lv_anim_t *anim, int32_t start, int32_t end); /* lv_anim_set_values */
-extern int32_t audio_uart_lv_anim_default_path_450634(void *anim);       /* lv_anim_path_linear */
+extern int32_t lv_anim_path_linear(void *anim);       /* lv_anim_path_linear */
 extern void *audio_uart_page_498668(void *parent);                       /* lv_image_create */
 extern void audio_uart_page_498680(void *img, const void *src);          /* lv_image_set_src */
 extern void *audio_uart_page_499416(void *parent);                       /* lv_label_create */
@@ -220,10 +220,10 @@ void system_close_anim_exec_noop_46a3d6(void *var, int32_t value)
 /* 0x469bf4: IAR out-of-line copy of LVGL's static inline lv_obj_set_style_pad_all(). */
 void system_close_fifo_reset_00469bf4(void *obj, int32_t value, uint32_t selector)
 {
-    audio_uart_page_44122a(obj, value, selector);
-    audio_uart_page_441238(obj, value, selector);
-    audio_uart_page_44120e(obj, value, selector);
-    audio_uart_page_44121c(obj, value, selector);
+    lv_obj_set_style_pad_left(obj, value, selector);
+    lv_obj_set_style_pad_right(obj, value, selector);
+    lv_obj_set_style_pad_top(obj, value, selector);
+    lv_obj_set_style_pad_bottom(obj, value, selector);
 }
 
 /* Returns 0, -3 for bad arguments, -1 when the FIFO lacks room. */
@@ -382,7 +382,7 @@ void system_close_selection_animation_0046a18c(void *parent)
     audio_uart_page_44127e(panel, audio_uart_page_44104c(0x000000u), 0u);
     audio_uart_page_44129e(panel, 0xffu, 0u);
     audio_uart_page_4412ec(panel, audio_uart_page_44104c(0x000000u), 0u);
-    audio_uart_page_44131c(panel, 0, 0u);
+    lv_obj_set_style_border_width(panel, 0, 0u);
     system_close_fifo_reset_00469bf4(panel, 0, 0u);
 
     void *container = audio_uart_page_43de82(panel);
@@ -396,13 +396,13 @@ void system_close_selection_animation_0046a18c(void *parent)
     audio_uart_page_44e368(container, 0u);
     audio_uart_page_44e3ca(container, 0x0cu); /* LV_DIR_VER */
     audio_uart_page_44129e(container, 0u, 0u);
-    audio_uart_page_44146a(container, 10, 0u);
+    lv_obj_set_style_radius(container, 10, 0u);
     audio_uart_page_4412ec(container, audio_uart_page_44104c(0xffffffu), 0u);
-    audio_uart_page_44131c(container, 1, 0u);
-    audio_uart_page_44120e(container, 0, 0u);
-    audio_uart_page_44121c(container, 0, 0u);
-    audio_uart_page_44122a(container, 0, 0u);
-    audio_uart_page_441238(container, 0, 0u);
+    lv_obj_set_style_border_width(container, 1, 0u);
+    lv_obj_set_style_pad_top(container, 0, 0u);
+    lv_obj_set_style_pad_bottom(container, 0, 0u);
+    lv_obj_set_style_pad_left(container, 0, 0u);
+    lv_obj_set_style_pad_right(container, 0, 0u);
 }
 
 /* 0x46a2ca: size the box to the title and stack title, option 0 and option 1. */
@@ -465,7 +465,7 @@ void system_close_process_next_event_0046a4e2(void)
     anim.exec_cb = system_close_anim_exec_noop_46a3d6;
     audio_uart_lv_anim_values_4506ce(&anim, 0, 0);
     anim.duration = 200;
-    anim.path_cb = audio_uart_lv_anim_default_path_450634;
+    anim.path_cb = lv_anim_path_linear;
     anim.completed_cb = sc_selection_change_anim_ready_cb;
     g2_system_close_anim_busy = 1u;
     (void)audio_uart_lv_anim_start_450408(&anim);

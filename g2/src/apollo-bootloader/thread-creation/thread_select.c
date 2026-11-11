@@ -21,7 +21,7 @@ void opencfw_boot_thread_select(void) {
         if (list[0])break;
         if (!priority) {
             (void)opencfw_bl_mask_interrupts();WORD(UINT32_MAX)=0;
-            for (;;)__asm__ volatile("b .":::"memory");
+            for (;;){ }
         }
         priority--;
     }

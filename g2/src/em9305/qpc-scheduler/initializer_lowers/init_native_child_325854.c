@@ -1,48 +1,29 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_325854\n"
-".type opencfw_em9305_child_325854,@function\n"
-"opencfw_em9305_child_325854:\n"
-"L325854:\n"
-"enter_s [r13-r14,blink]\n"
-"L325856:\n"
-"mov_s r13,r0\n"
-"L325858:\n"
-"add r14,r0,0xae0\n"
-"L325860:\n"
-"add r13,r13,832\n"
-"L325864:\n"
-"bl opencfw_em9305_associated_random_31896c\n"
-"L325868:\n"
-"ldb_s r1,[r14,0]\n"
-"L32586a:\n"
-"stb_s r0,[r13,0]\n"
-"L32586c:\n"
-"add_s r2,r1,r0\n"
-"L32586e:\n"
-"mpywhul r1,r2,0xdd68\n"
-"L325876:\n"
-"lsr_s r1,r1,0x15\n"
-"L325878:\n"
-"mpyw r1,r1,-37\n"
-"L32587c:\n"
-"add_s r0,r2,r1\n"
-"L32587e:\n"
-"mov_s r1,0x805aa0\n"
-"L325884:\n"
-"stb_s r0,[r14,0]\n"
-"L325886:\n"
-"extb_s r2,r0\n"
-"L325888:\n"
-"ld r0,[r1,0]\n"
-"L32588a:\n"
-"bl.d opencfw_em9305_child_3027f4\n"
-"L32588e:\n"
-"ld r1,[r1,0x4]\n"
-"L325890:\n"
-"bbit0.t r0,0,L325864\n"
-"L325894:\n"
-"leave_s [r13-r14,blink,pcl]\n"
-".size opencfw_em9305_child_325854,.-opencfw_em9305_child_325854\n"
-);
+#include <stdint.h>
+
+/* Native 0x325854..0x325896: hop to the next data channel. Repeatedly draw
+ * a random step (also stored at record+832), advance the channel at
+ * record+0xae0 by it modulo 37 and stop once the channel is set in the
+ * 64-bit channel map at 0x805aa0 (bit 0 of map >> channel). The modulo is
+ * the stock reciprocal form: q = (sum * 0xdd68) >> 21, sum - 37 * q with
+ * a 16-bit signed multiply. */
+extern uint32_t opencfw_em9305_associated_random_31896c(void);
+extern uint64_t opencfw_em9305_child_3027f4(uint64_t value,uint32_t count);
+
+uint32_t opencfw_em9305_child_325854(uintptr_t record)
+{
+    volatile uint8_t *channel=(volatile uint8_t *)(record+0xae0u);
+    uint32_t found;
+    do {
+        uint32_t step=opencfw_em9305_associated_random_31896c();
+        uint32_t current=*channel;
+        *(volatile uint8_t *)(record+832u)=(uint8_t)step;
+        uint32_t sum=current+step;
+        uint32_t quotient=(uint32_t)(sum*0xdd68u)>>21;
+        uint32_t next=sum+(uint32_t)((int32_t)(int16_t)quotient*-37);
+        *channel=(uint8_t)next;
+        uint64_t map=((uint64_t)*(volatile uint32_t *)(uintptr_t)0x805aa4u<<32)|
+                     *(volatile uint32_t *)(uintptr_t)0x805aa0u;
+        found=(uint32_t)opencfw_em9305_child_3027f4(map,(uint8_t)next);
+    } while((found&1u)==0u);
+    return found;
+}

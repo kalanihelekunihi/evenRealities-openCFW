@@ -39,12 +39,10 @@ static uint64_t number(unsigned address){return (uint64_t)word(address)|((uint64
 #define divide r1_format_double_divide_bits
 #define sub r1_binary64_subtract_bits
 #define reverse_sub r1_binary64_reverse_subtract_bits
-#define COMPARE(name,target) static uint32_t name(uint64_t a,uint64_t b){ \
- register uint32_t r0 __asm__("r0")=(uint32_t)a,r1 __asm__("r1")=(uint32_t)(a>>32); \
- register uint32_t r2 __asm__("r2")=(uint32_t)b,r3 __asm__("r3")=(uint32_t)(b>>32);uint32_t status; \
- __asm__ volatile("bl " target "\n\tmrs %[status],APSR":[status]"=r"(status),"+r"(r0),"+r"(r1),"+r"(r2),"+r"(r3)::"lr","cc","memory");return(status>>29)&1u;}
-COMPARE(forward_carry,"r1_binary64_compare_flags")
-COMPARE(reverse_carry,"r1_binary64_compare_reverse_flags")
+static uint32_t forward_carry(uint64_t a,uint64_t b)
+{ return (r1_binary64_comparison_cz(a,b)>>29)&1u; }
+static uint32_t reverse_carry(uint64_t a,uint64_t b)
+{ return (r1_binary64_comparison_cz(b,a)>>29)&1u; }
 static uint64_t scale_high(uint64_t x,int32_t k){uint32_t high=(uint32_t)(x>>32)+((uint32_t)k<<20);return (x&UINT64_C(0xffffffff))|((uint64_t)high<<32);}
 double r1_native_exp(double input)
 {
@@ -79,6 +77,6 @@ double r1_native_exp(double input)
  uint64_t result=reverse_sub(sub(reverse_sub(quotient,lo),hi),one);
  if(k>=-1021)return value(scale_high(result,k));
  result=mul(scale_high(result,k+1000),number(0x38f00));
- if(r1_binary64_classify_bits(result,0,0)==4)(void)r1_math_low_square64();
+ if(r1_binary64_classify_bits(result,0,0)[0]==4)(void)r1_math_low_square64();
  return value(result);
 }

@@ -205,8 +205,14 @@ Sources: `g2/docs/memory-map.md:1778-1886`;
 |---:|---:|---|---|
 | `0x00300000` | 224 B | record 0 | Proven |
 | `0x00300400` | 656 B | record 1 | Proven |
-| `0x00302000` | 56 B | FHDR image descriptor; entry point `0x00302028` | Proven |
+| `0x00302000` | 56 B | 40-byte FHDR and 10-byte NVM entry at `0x00302028`, then 6 erased bytes | Proven |
 | `0x00302400–0x00335BC7` | 210,888 B | application: vector table, QK port at `0x00302518`, QP/C cluster `0x00310D18–0x003117EB`, controller and vendor code, tail tables | Proven |
+
+The current source candidate has one 1,160-byte C bootloader record beginning at
+`0x00300000`, the 56-byte FHDR/NVM entry at `0x00302000`, and a 247,364-byte
+application at `0x00302400`. These source addresses are link-verified; the
+candidate code is neither byte-identical to the stock records nor verified on
+hardware (`g2/evidence/em9305-boot-selection-review-20261110.json`).
 
 Anchors in the application record (Proven; `g2/docs/memory-map.md:1845-1872`):
 

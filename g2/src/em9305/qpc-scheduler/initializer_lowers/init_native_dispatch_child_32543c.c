@@ -1,21 +1,12 @@
-/* Complete native body with explicit extent and delayed effects. */
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_dispatch_child_32543c\n"
-".type opencfw_em9305_dispatch_child_32543c,@function\n"
-"opencfw_em9305_dispatch_child_32543c:\n"
-"L32543c:\n"
-"mov_s r0,0x805cac\n"
-"L325442:\n"
-"ld r0,[r0,0]\n"
-"L325444:\n"
-"ldh_s r0,[r0,0x2c]\n"
-"L325446:\n"
-"add r0,r0,0x10\n"
-"L325448:\n"
-"b.d opencfw_em9305_wsf_event_allocate\n"
-"L32544c:\n"
-"exth_s r0,r0\n"
-".size opencfw_em9305_dispatch_child_32543c,.-opencfw_em9305_dispatch_child_32543c\n"
-);
+#include <stdint.h>
+
+/* Native 0x32543c..0x32544e: allocate a WSF event sized for the configured
+ * payload length (config halfword at +0x2c) plus a 16-byte header. */
+extern uintptr_t opencfw_em9305_wsf_event_allocate(uint32_t);
+
+uintptr_t opencfw_em9305_dispatch_child_32543c(void)
+{
+    uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+    uint32_t length=*(volatile uint16_t *)(config+0x2cu);
+    return opencfw_em9305_wsf_event_allocate((uint16_t)(length+16u));
+}

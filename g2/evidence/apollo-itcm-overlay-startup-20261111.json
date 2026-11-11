@@ -1,0 +1,61 @@
+{
+  "schema": "opencfw.g2.apollo-itcm-overlay-startup.v1",
+  "date": "2026-11-11",
+  "locked_reference": {
+    "firmware_version": "2.2.6.10",
+    "extracted_apollo_main_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+    "region_record_address": "0x75d3e0",
+    "region_record_words": ["0xffcdcd3f", "0x00036f2a", "0x0000002c", "0x00000040"],
+    "recovered_overlay_bytes": 24,
+    "recovered_overlay_sha256": "0676154418085b0630f2a20cc50fbbe3967dd2d9b7794fe1aad3f6af14f2fb83",
+    "recovered_overlay_source": "/Users/kalani/Repo/g2-firmware-emulator/generated/boot/itcm.bin"
+  },
+  "source_change": {
+    "unit": "g2/src/apollo-main/runtime/g2c-gnu/g2c_gnu_init.c",
+    "linker": "g2/src/apollo-main/link/g2-apollo-main.ld",
+    "method": "24 instruction bytes emitted by a naked C function, then copied by the GNU startup region table; no executable blob or opcode array",
+    "source_overlay_address": "0x61003c",
+    "source_overlay_end": "0x610054",
+    "linked_region_record_address": "0x7a6c28",
+    "linked_region_record_handler_thumb": "0x507471",
+    "linked_region_record_source": "0x61003c",
+    "linked_region_record_destination": "0x40",
+    "linked_region_record_end": "0x58",
+    "linked_overlay_matches_recovered_reference": true,
+    "linker_overlay_size_assertion_passed": true
+  },
+  "verification": {
+    "sources_check": "passed; 4883 manifest units, 1 not built",
+    "enabled_c_units_compiled": 4878,
+    "compile_failures": 0,
+    "duplicate_strong_symbols": 0,
+    "strict_payload_links": 7,
+    "all_source_build_report": "build/g2-itcm-overlay-20261111/all/report.json",
+    "all_source_build_report_sha256": "dbc71af88470cebf072ded2191a43d8a705f2d57494fc771d96f10b97edbd806",
+    "link_report": "build/g2-itcm-overlay-20261111/bundle/link-report.json",
+    "link_report_sha256": "a59643bed0c6ed6884ef188b156cb495019af9c21c6f3e27a328e28889c42ffd",
+    "apollo_main_binary_bytes": 3819048,
+    "apollo_main_binary_sha256": "3e3cf69d7aace7d24166530dfc89610c0cb986afcdda0c890902d14f8d9542a7",
+    "source_only_ota_bytes": 4638068,
+    "source_only_ota_sha256": "9dfdf5c39116e35b3ad6be66306063102e5e74c73c7427a0855a48c6cb9904ed",
+    "renode_no_preload": {
+      "configuration": "build/g2-itcm-overlay-20261111/no-preload.resc",
+      "initial_itcm_word_0x40": "0x00000000",
+      "post_startup_itcm_words": ["0xd1fd3801", "0x47704770", "0x3b04f850", "0x3b04f841", "0xd1f93a01", "0x47704770"],
+      "post_startup_itcm_matches_reference": true,
+      "startup_probe_log": "build/g2-itcm-overlay-20261111/no-preload.log",
+      "startup_probe_log_sha256": "bf58b27078646acb6d86aa1db9f2608fc79997016345a703552e68fd2d7dd769",
+      "continued_virtual_seconds": 2,
+      "hci_host_packets": 56,
+      "advertising_enable_packet": "010A200101",
+      "simulator_errors": 0,
+      "unhandled_exceptions": 0,
+      "continuation_log": "build/g2-itcm-overlay-20261111/no-preload-2s.log",
+      "continuation_log_sha256": "168861281dd850d1d0307c72cfb429bd9d88f6793ba8c3266142195f9b2a1f1a",
+      "limit": "Renode uses synthetic OTP and lenient peripheral models; this does not qualify physical hardware boot"
+    },
+    "source_completeness_proven": false,
+    "hardware_boot_tested": false,
+    "locked_bundle_match": false
+  }
+}

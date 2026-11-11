@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "normal_report": "build/sources-goal-r1-touch-probe-c/report.json",
+  "results": {
+    "ready_reader_pairs": 928,
+    "full_probe_pairs": 2592,
+    "actual_C_ready_and_request_chain": true,
+    "100_poll_limit_and_early_readiness": true,
+    "private_counter_register_encoding_compared": false,
+    "late_ID_buffer_mutations_and_full_R3_restore": true,
+    "native_body_size_corrected": {
+      "prior_frontier": 124,
+      "complete_through_pop": 126
+    },
+    "frames": {
+      "ready_native": 8,
+      "ready_C": 16,
+      "probe_native": 16,
+      "probe_C": 16
+    },
+    "limitations": [
+      "Private buffer locations normalized and frame depths differ; initial stack write order not compared.",
+      "GPIO/power/delay and final registry providers modeled; electrical/timing/arbitrary alias/fault/concurrency behavior unproven.",
+      "Caller-clobbered registers/flags except R0 and restored R3 excluded."
+    ]
+  },
+  "negative_control": {
+    "control": "99-polls",
+    "compiled": true,
+    "rejected": true,
+    "reason": "modeled close boundary observes fewer than 100 polls on exhaustion"
+  },
+  "other_unchanged_objects": 719,
+  "changed_payload_sources": [
+    [
+      "r1-application",
+      "r1/src/application/board/native_touch_identity.c"
+    ]
+  ],
+  "R3_boundary_bindings_retained": true,
+  "live_full_probe_R4_counter_compared": false,
+  "hardware_tested": false,
+  "sha256": {
+    "build/sources-goal-r1-touch-probe-c/report.json": "67bc0793597b487e384baedc83c508654afc467402ae755f9c98e18b4d38b030",
+    "r1/src/application/board/native_touch_identity.c": "b422c799faff2fad6e8a189fe8f91a4e8e4fc2f73eea3742e62bac8c3fe1b431",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-touch-probe-c/r1/r1-application/r1__src__application__board__native_touch_identity.c.o": "94db15e2c7f2081de1caafb16e19d0d531c86967c8156567dcb6ea47b7f4dfa5",
+    "r1/src/sources.json": "b65461bbf09b0f4a25b7f8806a713bfec93128175a8e084e5447fbeef6b3b1b2",
+    "tools/build/source-plan.json": "43281e3850f6c7b83c5616e5968c4939993501810057ca3deaeea85eaae351ba",
+    "build/goal-r1-queue-reset-c/stock.elf": "25b4a29af80ec8edab5bd861ba9b74a6e22eab29dc3d7a809a16869e8a140f04",
+    "build/goal-r1-touch-identity-c/rea.json": "b136521d15127a45ad401c2328250ee55a3ec8db2f07ea951ce232c7bbfcbf12",
+    "build/goal-r1-touch-probe-c/verify.py": "cbe30f8d913e9fa65ea6809ba66e0b88c02f3fd1105a7b38fd39d3eb15196057",
+    "build/goal-r1-touch-probe-c/99-polls.c": "9ea41b129d20e1138d52407e5c27b1f122a77bd45d93bccaea728e4900a48f85",
+    "build/goal-r1-touch-probe-c/99-polls.o": "4bd7c0726b84b191bff0940d627179ef424a240f298d0fbbb3f954857b3bf2df",
+    "build/goal-r1-touch-probe-c/negative.log": "d701d6bbc7b33c59b193a482176566f9f69a33fc3243b30d554850fc23a0f3a2",
+    "build/goal-r1-touch-probe-c/stock.dis": "f34d1a9a3d42f7cff8089baf066444e222a5655284ca613d1fccf4d8c61f867b",
+    "build/goal-r1-touch-probe-c/source.dis": "2090aa018f7a505d4868816848bf1647b40d4f87d8413c3047dc69f34191215d",
+    "build/goal-r1-touch-probe-c/sources-check.log": "68bd5b24495ea6e77f19cd8135f9ec26986881653ba17c60e5f1c724ba415fa7"
+  }
+}

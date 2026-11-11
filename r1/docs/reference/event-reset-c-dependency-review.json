@@ -1,0 +1,101 @@
+{
+  "normal_profile_probe": {
+    "passed": 3456,
+    "executions": 6912,
+    "source_report": "build/sources-goal-r1-event-reset-c-verified/report.json",
+    "three_distinct_current_task_reads": true,
+    "exact_data_access_order": true,
+    "source_bytes": 50,
+    "limitations": [
+      "Current-task pointer changes injected at read boundaries; asynchronous execution and scheduler concurrency unverified",
+      "Valid aligned task records only; null/corrupt pointers and complete fault state unverified",
+      "Caller-clobbered registers, flags and private stack frames excluded",
+      "No byte qualification"
+    ]
+  },
+  "qualified_Oz_profile_probe": {
+    "passed": 3456,
+    "executions": 6912,
+    "source_report": "build/sources-goal-r1-event-reset-c-verified/report.json",
+    "three_distinct_current_task_reads": true,
+    "exact_data_access_order": true,
+    "source_bytes": 24,
+    "limitations": [
+      "Current-task pointer changes injected at read boundaries; asynchronous execution and scheduler concurrency unverified",
+      "Valid aligned task records only; null/corrupt pointers and complete fault state unverified",
+      "Caller-clobbered registers, flags and private stack frames excluded",
+      "Byte qualification established separately by official qualifier and full hybrid"
+    ]
+  },
+  "audit": {
+    "unchanged_existing_function_bodies": [
+      "prvResetNextTaskUnblockTime",
+      "vTaskRemoveFromUnorderedEventList"
+    ],
+    "changed_existing_function_bodies": {},
+    "new_strong_symbols": [
+      "uxTaskResetEventItemValue"
+    ],
+    "removed_imports": [
+      "uxTaskResetEventItemValue"
+    ],
+    "added_imports": []
+  },
+  "negative_controls": {
+    "upstream-order": true,
+    "cached-task": true,
+    "wrong-priorities": true
+  },
+  "normal_build": {
+    "compiled": 573,
+    "application_imports": 182,
+    "bootloader_imports": 34,
+    "failures": 0,
+    "duplicate_strong_symbols": 0
+  },
+  "qualification": {
+    "compiled_profiles": 5,
+    "new_source_bytes": 24,
+    "native_entry": "0x95738",
+    "instruction_bytes": 20,
+    "literal_bytes": 4,
+    "binding": {
+      "pxCurrentTCB": "0x2000781c"
+    },
+    "optimization": "Oz"
+  },
+  "hybrid_equals_locked_application": true,
+  "source_built_bytes": 3857,
+  "binary_pull_through_bytes": 642303,
+  "source_completeness_proven": false,
+  "evidence": {
+    "build/sources-goal-r1-event-reset-c-verified/report.json": "18226bafabe428e5277847919b67768cea41aa42b551ae2ad1d4b01f2e9368fc",
+    "tools/build/source-plan.json": "969af3130987be89dcdc8777d86b4c891d596b4ecef5cccfd763861f05a12d31",
+    "r1/src/application/rtos/unordered-event/unordered-event.c": "da17f76cccefa49d21288d601dc6bea8a9d91ef4ab254880f22da4a03871848f",
+    "third-party/upstream/freertos-kernel/tasks.c": "14020d617b96dd2814e1211f6e3b645bcf5e2bd3179c23fe7dd16bc666fe9463",
+    "r1/src/config/rtos/unordered_event_contract.h": "27c2e1e3ce5eee812464ff39c7e350cf39b55de1cb68cde7bd86e74ead99fbc8",
+    "r1/src/config/rtos/mutex_tasks_contract.h": "65a2b7e2df91987b1421da303f885bd40d402560c5996659f5aec01d1249a7a7",
+    "r1/src/sources.json": "73c3fb03932b37db089ff50fdae47f8b7e73914b6b1fb99ddf99467302ff84ad",
+    "r1/symbols/function-frontier.csv": "5a5241b1610eea3ae5168a483ea06d2a8fffde134bcb9ef93c24d2280524e52a",
+    "build/hybrid-goal-r1-event-reset-c-canonical/build-report.json": "9c633b2994ed89c15faea669555708d3d16a450e5fd37c66375edd4498931dc8",
+    "build/hybrid-goal-r1-event-reset-c-merged/build-report.json": "14fe6ad9c771e971e23649786dcf8888a1dbc77f0cbe403a72a7c7caa764b437",
+    "build/goal-r1-event-reset-c/REA.json": "10cd1951d879060c0233ffde1ee897e95daeef8932b1ed52ec928f2e595eb7db",
+    "build/goal-r1-event-reset-c/before.c": "74d7db630d7ff7e3155fa681b056e3596308a67e162311c86d93965b9b25ebe7",
+    "build/goal-r1-event-reset-c/selected-upstream.c": "00e7a1664013b756d70bd5db754de83bb63252acf74876d10bfe36cd94fa9f84",
+    "build/goal-r1-event-reset-c/upstream.o": "4128a854afae5c3c8aae7953b0b3da8ede3e83f648816804d092e262125c5cdc",
+    "build/goal-r1-event-reset-c/verify.py": "6e2583871f96ede0c3f5e4526e68dd7df4432683f10b6ce9275ff0a7040329fd",
+    "build/goal-r1-event-reset-c/results.json": "aacbd7a1aece6abe630983dc7b822488db424bb7eb1f0d54874ed6c55988c53d",
+    "build/goal-r1-event-reset-c/verify-qualified.py": "97fe205cb6423b9d7fca6b73aa03a37ee390f8efa3c073d9b6a4b955f1b3c82d",
+    "build/goal-r1-event-reset-c/qualified-results.json": "5dad703ed71b5ce210e84c7825f4b90e3a5f29eee04f348e7015a6ede260f75b",
+    "build/goal-r1-event-reset-c/negative.py": "10632746c2bffba57cb18507db63de2a691aff0cdbafcdc732d938d721405d68",
+    "build/goal-r1-event-reset-c/negative-results.json": "6002c60b2e9210c8681fec6f1c73f55945e386dbfd1e19b183d47101551d81c5",
+    "build/goal-r1-event-reset-c/audit.py": "e20e185d8745c247f2476332462da68e4f9cf4b4dc6171c9251ebea93786d535",
+    "build/goal-r1-event-reset-c/audit-results.json": "4b7a51a1c25406a335f8ec7f27161771688d10db67e0e831830af22cdef2fdfd",
+    "build/goal-r1-event-reset-c/qualify.py": "af586c61291a1791c7c388a993e8e19b002b2df4a2104f8c99c30adda6cbba72",
+    "build/goal-r1-event-reset-c/qualified/qualification.json": "2a813d4041963b7a4dccfc008fbfa5fe1c4e0ee3a889b0718527ab078ed39ab4",
+    "build/goal-r1-event-reset-c/qualified/compilation/0003/unit.o": "2554f18da4f019aa7d92fca7c6ccf432296b46561546c95ea444d7aefaa5497a",
+    "build/goal-r1-event-reset-c/qualified/compilation/0003/receipt.json": "e8bdae2a5e9d4ad5d679999bfb3c6cafbe110badc880c96a46e0a0e69d2ebd63",
+    "build/goal-r1-event-reset-c/before-source-plan.json": "0c889650bf8ea03def83ea1ea29730b3ccfe84bb70609c1972a500f02ba4ea2d",
+    "build/goal-r1-event-reset-c/merged-source-plan.json": "969af3130987be89dcdc8777d86b4c891d596b4ecef5cccfd763861f05a12d31"
+  }
+}

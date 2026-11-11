@@ -1,0 +1,261 @@
+{
+  "schema_version": 1,
+  "scope": "Native ADT wear executor, six-sample moving filter and soft-event report in C",
+  "acceptance_target": "Hardware-first license-free C firmware; byte identity waived",
+  "report": "build/sources-goal-r1-goodix-adt-calculate-c/report.json",
+  "comparison_report": "build/sources-goal-r1-goodix-algorithm-calculate-c/report.json",
+  "stock_entries": [
+    {
+      "symbol": "GH3x2xAdtAlgoExe",
+      "entry": "0x2b218",
+      "instruction_bytes": 448
+    },
+    {
+      "symbol": "Gh3x2xMovingAvaFilter",
+      "entry": "0x2e8e8",
+      "instruction_bytes": 94
+    },
+    {
+      "symbol": "GH3X2X_AdtAlgorithmResultReport",
+      "entry": "0x29cdc",
+      "instruction_bytes": 46
+    }
+  ],
+  "audit": {
+    "compiled_units": 895,
+    "application_imports": 77,
+    "bootloader_imports": 22,
+    "unchanged_prior_nongenerated_sources_and_objects": 884,
+    "tested_object_equals_normal_build": true,
+    "new_owned_state_bytes": 28,
+    "existing_canonical_ADT_flags_reused": true,
+    "source_plan_and_cache_layout_unchanged": true,
+    "new_native_function_entries": 3,
+    "new_native_instruction_bytes": 588,
+    "paired_cases": 10325,
+    "removed_imports": [
+      "GH3x2xAdtAlgoExe"
+    ],
+    "added_imports": [],
+    "remaining_engine_executors": [
+      "GH3x2xHrAlgoExe",
+      "GH3x2xHrvAlgoExe",
+      "GH3x2xSpo2AlgoExe",
+      "GH3x2xSoftAdtAlgoExe"
+    ]
+  },
+  "direct": {
+    "paired_cases": 6948,
+    "executor_cases": 3088,
+    "filter_cases": 3840,
+    "report_cases": 20,
+    "native_instruction_bytes_executed": [
+      448,
+      94,
+      46
+    ],
+    "actual_C_and_native_filter_popcount_and_soft_event_helpers": true,
+    "logging_ports_modeled": true,
+    "full_nonstack_RAM_and_boundary_snapshots_match": true,
+    "independent_filter_oracle": true,
+    "source_cannot_execute_stock": true,
+    "source_object_sha256": "07a2bd82f33a700387d3c876906de3a224609b4697109133032997e8de1b6b2a"
+  },
+  "dispatcher_integration": {
+    "ADT_source_object_sha256": "07a2bd82f33a700387d3c876906de3a224609b4697109133032997e8de1b6b2a",
+    "ADT_native_instruction_bytes_executed": [
+      440,
+      94,
+      46
+    ],
+    "paired_cases": 3377,
+    "matched_faults": 2,
+    "native_instruction_bytes_executed": 190,
+    "actual_C_and_native_sleep_popcount_and_memory_helpers": true,
+    "logging_ports_modeled": true,
+    "actual_ADT_filter_report_and_soft_events": true,
+    "remaining_four_engine_executors_modeled": true,
+    "full_nonstack_RAM_and_boundary_snapshots_match": true,
+    "source_cannot_execute_stock": true,
+    "source_object_sha256": "7e4344bae1eb7809e1c9e85939abf2545e030c93b83cbce39431ee1a8c3872d1",
+    "signed_8_bit_executor_ABI": true
+  },
+  "compiled_defects_rejected": [
+    {
+      "name": "window",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "include-newest",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "saturating-sum",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "skip-first-state",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "off-boundary",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "on-boundary",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "difference-boundary",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "unsigned-difference",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "clear-update",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "popcount",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "report-gate",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "event-mask",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "cache-original",
+      "compiled": true,
+      "rejected": true
+    }
+  ],
+  "native_owned_state": [
+    {
+      "symbol": "r1_goodix_native_adt_raw",
+      "address": "0x20007c28",
+      "bytes": 4
+    },
+    {
+      "symbol": "r1_goodix_native_adt_history",
+      "address": "0x2003778c",
+      "bytes": 24
+    }
+  ],
+  "contract": [
+    "Reuse canonical ADT flags: wear byte0, initial-state byte1 and filter count byte2. Init/deinit owners are unchanged. Bypass returns1 without touching data/state; counts at least6 shift5 old words and clamp to5 before appending.",
+    "The filter appends the current sample, increments the count, and averages only preceding samples. Sum wraps unsigned32 before unsigned division; it intentionally excludes the newest sample. Direct filter oracle checks this independently, including count/bypass bytes and data aliases.",
+    "Executor reads the raw sample twice, filters the first read and uses the second read as the unfiltered original. Difference wraps32 then compares as signed32 against-8000000. On requires unsigned original greater than845f7c; off requires original less than842024. Equal boundaries are excluded.",
+    "First-state handling sets the seen byte even without a transition. It then evaluates the live wear byte again, preserving possible second transitions after logging mutations. States other than0/1 are not normalized. Default result word0 is zeroed, but an existing update byte is not silently cleared.",
+    "Cache filtered sample, preserve exact conditional logger sampling/order and reload result pointers after logging. Result mask7 and actual popcount3 accompany signed difference and a twice-read frame counter. Reporter accepts any nonzero update byte and only result1/2, clearing the opposite software event then setting10/20 respectively.",
+    "Direct native/C execution covers all588 new instruction bytes. Integrated dispatcher replays execute real ADT/filter/report code and actual sleep/popcount/memory/soft-event helpers, covering190 dispatcher bytes and440/94/46 ADT bytes. Only logging and the other four engine bodies are modeled. No source execution may enter stock code."
+  ],
+  "limits": [
+    "The10325 pairs are6948 direct cases plus3377 dispatcher cases, some of which gate or fault before reaching ADT. Direct checks cover all588 new bytes; integrated checks cover440 of448 executor bytes. This is not physical sampling or interrupt proof.",
+    "Logging callbacks and synthetic helper-entry mutations test exposed-pointer reload timing; they do not prove arbitrary concurrency, private stack aliases or all invalid pointers. Typed byte arguments and signed8 callback results follow their public C ABI.",
+    "The28-byte raw/history owners correspond to native existing RAM. Their final executable placement, cold startup and complete firmware memory map remain unverified. No duplicate flags owner is introduced.",
+    "All895 units compile and compose without failures or duplicate strong symbols;884 prior nongenerated source/object pairs remain unchanged. ADT import is removed with no added imports: application78 to77; boot22. This remains relocatable composition rather than a bootable image.",
+    "HR,HRV,SpO2 and soft ADT executors remain unfinished, along with other hardware/runtime dependencies and final linking/startup. No paid compiler or byte identity is required or claimed."
+  ],
+  "evidence_files": {
+    "build/sources-goal-r1-goodix-adt-calculate-c/report.json": "aab9aa99de589cd1acc258566549f999cefda19c2271edf85dd8da33c0ab41f6",
+    "build/sources-goal-r1-goodix-algorithm-calculate-c/report.json": "96016b7a37540ac8acdb5f9ffedb1422a583a8ee3d478c5a65965ba174a753a6",
+    "r1/src/application/goodix/native_adt_calculate.c": "0a2e2618d958d1f734b9f47a031f7977102b89616728382e4bd2c536180f0e14",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-adt-calculate-c/r1/r1-application/r1__src__application__goodix__native_adt_calculate.c.o": "07a2bd82f33a700387d3c876906de3a224609b4697109133032997e8de1b6b2a",
+    "r1/src/application/goodix/native_nadt_state.h": "cc2b8200314243bca442398297b1a6aa83f9da5df2b558ca3b0309ed30c75cd3",
+    "r1/src/sources.json": "98432370bf4428bc798c983f0dfa4ba3be0d950c8fac7285ae3f3ceec578b6d2",
+    "tools/build/source-plan.json": "eeb516e31b3310fb0718f36908977f8125723f7c5e0e86cd6744395826259a4d",
+    "r1/src/config/runtime/native_health_cache.ld": "eb8f131c489cd818d4e36718718fa1989719ca0170f164541a1a5bf56dfc1ec3",
+    "r1/docs/reference/FUNCTION-OWNERSHIP.csv": "e2c7aa828f771873f7c15e220cb4ef4604ff377a27fbb58bdb4db6326d22474d",
+    "r1/symbols/function-frontier.csv": "3b5e0d01eaaf3132e05905c8594afa1f8216b18a19d0a7eba0ae99827c3ee765",
+    "r1/docs/reference/goodix-algorithm-calculate-c-review.md": "ee060365350e8f1fc62e6d3c59e3d5249b3b303b287c7ef7d2a1fada68efae92",
+    "r1/docs/reference/goodix-algorithm-init-c-review.md": "ae47271fcdbf2fe9033feb04cd9a29d2e2d387390e377d30497883b3a65e5f8b",
+    "third-party/upstream/goodix-gh3x2x/gh3x2x/demo_code/demo_algo_code/goodix_algo_application/src/gh3x2x_demo_algo_config.c": "65345b49ac1d9818fcc6f5dff3a33dbdd89c4e2182e6fe35480543b0a803a861",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-adt-calculate-c/r1/r1-application/third-party__upstream__goodix-gh3x2x__gh3x2x__demo_code__demo_algo_code__goodix_algo_application__src__gh3x2x_demo_algo_config.c.o": "6a65ddb671429ddab29014c4e028d634b5e4159d720ecc05d1f7f53e8c0f3789",
+    "third-party/upstream/goodix-gh3x2x/gh3x2x/demo_code/demo_kernel_code/driver/src/gh_drv_control.c": "8cf1dbd049598242ca0517819afe9bfe7af8c6714f8941fb10922263be98a949",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-adt-calculate-c/r1/r1-application/third-party__upstream__goodix-gh3x2x__gh3x2x__demo_code__demo_kernel_code__driver__src__gh_drv_control.c.o": "0b33631d2c75d5bd4bc0e1ba36f602fe492e9e64200da26489906d62018c159c",
+    "r1/src/application/goodix/native_adt_teardown.c": "9cb72fba3a48c0abe74bc4490335cd5a86f41d96d026130800dddf35f846af16",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-adt-calculate-c/r1/r1-application/r1__src__application__goodix__native_adt_teardown.c.o": "94edc8fcfeeb70298d15acf72b1ff4912689950e50e2699d3872bc8911c9a72d",
+    "r1/src/application/goodix/native_algorithm_init.c": "c11cf0b0071e081ea77ef2d1896a7da0814cef21d758ad5d08174422c13363fa",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-adt-calculate-c/r1/r1-application/r1__src__application__goodix__native_algorithm_init.c.o": "404d11b534b21a726063fb2bfc7a04624520fc65c128ce4c36471b221463cfe8",
+    "r1/src/application/goodix/native_algorithm_calculate.c": "b713000e757c77a1d00cce6a01c4270214ad1e375226c1691d0157ed752ec425",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-adt-calculate-c/r1/r1-application/r1__src__application__goodix__native_algorithm_calculate.c.o": "7e4344bae1eb7809e1c9e85939abf2545e030c93b83cbce39431ee1a8c3872d1",
+    "build/goal-r1-goodix-adt-calculate-c/negative-popcount.log": "40485af06b72b274f6941e777fa0afeaeb437cba6ade868a49eca6770dc0a6e1",
+    "build/goal-r1-goodix-adt-calculate-c/negative-on-boundary.c": "42d121e6413ccdc778542ac3ddce3f5bfea7c123243890c11f2824bb28b42339",
+    "build/goal-r1-goodix-adt-calculate-c/negative-unsigned-difference.o": "e2cb1cb85f865cec32ab0cd8a23fe8eadad5370d2b248f0b00c946a9f6cf62a4",
+    "build/goal-r1-goodix-adt-calculate-c/audit.json": "dd26804074b9cd4bc829ea51ecf2649325877627b8267f7542eebb7baba1ba68",
+    "build/goal-r1-goodix-adt-calculate-c/negative-clear-update.c": "0661a72b40a28b8105f5fb36cf087a526318ac7af4f68bd5847f245ee4bce9bb",
+    "build/goal-r1-goodix-adt-calculate-c/negative-window.c": "fe8968e53fcf9a2e21e39910eddb3dc28473d23dca984932a8cfb65c2de70144",
+    "build/goal-r1-goodix-adt-calculate-c/negative-on-boundary.log": "40193c006148fbd2a7294f50d7ff86c8c9837b3208b5f9524ba69d41718c8598",
+    "build/goal-r1-goodix-adt-calculate-c/negative-off-boundary.log": "8934c93bea5f3bfa365d7cb5de17376ba1eb27209b3c4917eb743b1479228a20",
+    "build/goal-r1-goodix-adt-calculate-c/negative-clear-update.log": "29020db917192b85ba5a775b956054febd15dd4e201a71792fbcb774ef88a7ef",
+    "build/goal-r1-goodix-adt-calculate-c/test.ld": "c568a14724300f00273e94c226ca4047bd23ba7a66bf11e6bfbf752dc5404bf1",
+    "build/goal-r1-goodix-adt-calculate-c/audit.py": "4e35f936a05ca4866f445025b035d360aac780f1a28b55860f6447f21f6ec58f",
+    "build/goal-r1-goodix-adt-calculate-c/integration.elf": "ecfa8d311f8a58e08678251d778d8deb95b43cca6a0fbdb846902944d6c38dae",
+    "build/goal-r1-goodix-adt-calculate-c/negative-saturating-sum.c": "211094ef258be5d1f6b5a573a4f81892173e8e2eb838023049b4b478846fb285",
+    "build/goal-r1-goodix-adt-calculate-c/negative-event-mask.c": "4fdb9517de60d73798dccb775ddfc722225106dd2d9ef96411742ae2b1f10652",
+    "build/goal-r1-goodix-adt-calculate-c/source.elf": "1c3559f6b12bf5ea33328c1800949a7961975542ecb431cac877804200d9a747",
+    "build/goal-r1-goodix-adt-calculate-c/negative.py": "a8226df1c61117961bdc7363368e9e557b0b18bf4afc909943b0165bdc47def4",
+    "build/goal-r1-goodix-adt-calculate-c/integration-results.json": "f86247fa6eb5db64c2ff8217838bd5b239b4976f81d0f2f69a2a840a8c4994e9",
+    "build/goal-r1-goodix-adt-calculate-c/negative-popcount.c": "2027f49b01c5b07b9379f2557744df3213665aa52f640d5f8d74d3aad3363821",
+    "build/goal-r1-goodix-adt-calculate-c/negative-results.json": "1964aaff6a7e036d37f92b41643510e6e110e81c3d0e567f6b920a4c8dcfbf82",
+    "build/goal-r1-goodix-adt-calculate-c/negative-cache-original.o": "113add0541b2ec4fd71d0611adc8d53f4f9a6cb86c07258bdc2a6adaec6d5c67",
+    "build/goal-r1-goodix-adt-calculate-c/source.o": "07a2bd82f33a700387d3c876906de3a224609b4697109133032997e8de1b6b2a",
+    "build/goal-r1-goodix-adt-calculate-c/results.json": "13599ca641b2ff1b024d6f39ca5b6960737f9b1982c1ed13af468b1656632d32",
+    "build/goal-r1-goodix-adt-calculate-c/negative-skip-first-state.o": "61e6313a75fe92dc48a646fd1c359ffebf53dde8a11751fbff9144df3506d02d",
+    "build/goal-r1-goodix-adt-calculate-c/negative-report-gate.o": "4eb0c88d5b3d5520d8a52cda8e8c9bf637e05c9e5ce9ac69a2fd893ce24ede31",
+    "build/goal-r1-goodix-adt-calculate-c/make-integration.py": "34bcdd9198921d2db085851f0f30c0e378bee6d9021a64748aa9166a4c80f52e",
+    "build/goal-r1-goodix-adt-calculate-c/negative-include-newest.log": "158032683ade170958f5c1d8d334ae37584afb9a55d9caf726ba21693b188151",
+    "build/goal-r1-goodix-adt-calculate-c/negative-saturating-sum.log": "802535bb397f8eae89335e1aadfd5f76815463bbcfeaa02600fafbc83ab4cddb",
+    "build/goal-r1-goodix-adt-calculate-c/negative-difference-boundary.o": "cc021f70c2f5cf394d92fc562a300b1f44846d3941ad22ee5c682c7b0b2cb094",
+    "build/goal-r1-goodix-adt-calculate-c/negative-include-newest.o": "825bbdbf6fa2c2bf335122a30ecfad91211b8ddaf350458fc6331e2ffffdd965",
+    "build/goal-r1-goodix-adt-calculate-c/negative-off-boundary.o": "8503de51a48a03bd22ec3b92a43306e02ab0e999ccdfb6baf28c41d38dfa57e6",
+    "build/goal-r1-goodix-adt-calculate-c/integration.py": "4249a7716ef3096e04098f97cd4f6186366b1b41dcef68053f48ba9ee6c3abc9",
+    "build/goal-r1-goodix-adt-calculate-c/negative-event-mask.log": "34ba3e016fe83956be032e8c4a349faf4d0900f90d0cc2fa6b66eea4f855faaa",
+    "build/goal-r1-goodix-adt-calculate-c/rea.json": "42c38c2296399f4a9fe67d073f0a4ec4140cf79cf3bb16c53e0f293fc79f4dda",
+    "build/goal-r1-goodix-adt-calculate-c/negative-window.log": "4faf6128f67435fc21c288b89024daad8af57739c215f4d51618630e87b07d5b",
+    "build/goal-r1-goodix-adt-calculate-c/negative-unsigned-difference.c": "480d4940cd45b5f988a6d271c367293aa79e132cbb12630f477cd77b4f8c1224",
+    "build/goal-r1-goodix-adt-calculate-c/negative-difference-boundary.log": "e31a5a682ba1ee9c82bcb498296e2a602c35f4090c14661c35f29bd9060d24ff",
+    "build/goal-r1-goodix-adt-calculate-c/negative-report-gate.log": "6db8ae87334ec2c432550fbd97a46973763a33c1d396a97a6bbd025ce41dd2a4",
+    "build/goal-r1-goodix-adt-calculate-c/negative-on-boundary.o": "9f2564b679355ca12d96c1ea56a5a93eeaeb7ceeb6fcd675c48187b12b271dba",
+    "build/goal-r1-goodix-adt-calculate-c/negative-cache-original.log": "1dba402bb0a16af1ec22b7f2139f8ee11c356bf8c89e34c06490d1ac14c6a37b",
+    "build/goal-r1-goodix-adt-calculate-c/negative-saturating-sum.o": "915d45b25d2ad0594b09a4922340e72efa7bad899e13a4cc6ee7492091c193bc",
+    "build/goal-r1-goodix-adt-calculate-c/negative-event-mask.o": "64870ba40733de403ecefcef42d09cb7278c98b56916e7c97edf4346c32b8b7d",
+    "build/goal-r1-goodix-adt-calculate-c/record.py": "9cefb5da35b154cff2ee26e66f5819705d46b538cc94bd49df833fba169a87a0",
+    "build/goal-r1-goodix-adt-calculate-c/negative-skip-first-state.log": "81e40f01f321883b7b4209cbc8275151b5fdb8ba3cbf3023d6f6a6fbd8714482",
+    "build/goal-r1-goodix-adt-calculate-c/negative-clear-update.o": "787f919fc21406b0cf10c10e0f97983a0d83c78a2ebd0f87f0cdee90adf8cec7",
+    "build/goal-r1-goodix-adt-calculate-c/negative-window.o": "063c9809d7145540de801ce4a72843ad7b9623dab4ad6f40a63c9475deaa9ca3",
+    "build/goal-r1-goodix-adt-calculate-c/compile-argv.json": "2b0d383321d716d2ccaadcb69af572c5f42957ccc62d5e1c215ec529af0defd0",
+    "build/goal-r1-goodix-adt-calculate-c/adjust-integration.py": "a02158959efd9d44fef9285afd4d6c3f92faad62459176b8b5175b62785ba53f",
+    "build/goal-r1-goodix-adt-calculate-c/manifest-before.json": "aa7144ec372530fbec2369bbffa8872d903d0517e41174fba4708afcfb464776",
+    "build/goal-r1-goodix-adt-calculate-c/negative-cache-original.c": "3e2ff1238d7304b9bdbf3883510c68526c20725c0f853baf2b5849019d969dab",
+    "build/goal-r1-goodix-adt-calculate-c/rea-pseudocode.json": "d59b67a344f42589033ac0b6d00d761294a36b0ea82da3656a6aa43a2b07d46b",
+    "build/goal-r1-goodix-adt-calculate-c/verify.py": "7e99cc1b36511ee6af9a175ae3ca1f92c5bc6f73013cb442287a2ecf29611c55",
+    "build/goal-r1-goodix-adt-calculate-c/negative-popcount.o": "382c67b8b288a0e48b1fbbd973e88f1a8f9a0d41c88bc8b2aca422ec68be69da",
+    "build/goal-r1-goodix-adt-calculate-c/integration.ld": "cf720dd38e4673da8f601d9d36ba4e30d8e08db3854504d51770eb7543c23f0e",
+    "build/goal-r1-goodix-adt-calculate-c/negative-off-boundary.c": "2b791265cf299451755ae4a74645c141ecfc0c2c27052ba98bb97ebe71eea1dc",
+    "build/goal-r1-goodix-adt-calculate-c/negative-difference-boundary.c": "54eb7ed0276eeeed9a249b23ad624fe235e21d0476a4f1727bd31f7f15904bc2",
+    "build/goal-r1-goodix-adt-calculate-c/negative-include-newest.c": "ed31723a934b2e83113c1942d073aa37de1d4b870096f2580a96ea9bdde924c4",
+    "build/goal-r1-goodix-adt-calculate-c/negative-report-gate.c": "ee447439ec158d64dc1c1c4114f208567f1ba012d0cbcf093657bb22a61ed540",
+    "build/goal-r1-goodix-adt-calculate-c/negative-unsigned-difference.log": "e6d97e2e0ab66e923af81ccf6871b6b7b0ece9de3070402820836e5c33837d01",
+    "build/goal-r1-goodix-adt-calculate-c/build.log": "8d1759b45dc07f88971e39eecb1061e2bc2cf3b68b2a7c2c585b64706951445d",
+    "build/goal-r1-goodix-adt-calculate-c/negative-skip-first-state.c": "7c158daca0e5600ebd73c178f2d4f59848549b478a550b187f290419764400ad"
+  }
+}

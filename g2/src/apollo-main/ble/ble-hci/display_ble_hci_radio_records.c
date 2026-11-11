@@ -1,6 +1,10 @@
 /* Native 0x52f87c: decode up to four 12-byte EM9305 image records into
  * four 16-byte live descriptors.  The fifth descriptor is never accepted. */
 #include <stdint.h>
+/* Stock-RAM literals rewritten to named objects (sim-test wave 2026-10-26,
+ * .waves/sim-fix/apply.py): g2ref_X is the linker symbol X. */
+#include <stdint.h>
+extern unsigned char g2ref_g2_stock_ram_200731f0[] __asm__("g2_stock_ram_200731f0");
 
 extern uint32_t audio_log_flags(void);
 extern void audio_log_extended(uint8_t,const char *,const char *,const char *,
@@ -13,7 +17,7 @@ static const char excess[]="Record count %d exceeds maximum %d";
 static const char excess_compact[]="[srv.em9305]Record count %d exceeds maximum %d";
 static const char record[]="Em9305ImageRecord_t[%d]: offset=0x%08X, length=%d, address=0x%08X";
 static const char record_compact[]="[srv.em9305]Em9305ImageRecord_t[%d]: offset=0x%08X, length=%d, address=0x%08X";
-static volatile uint8_t *const descriptors=(volatile uint8_t *)(uintptr_t)0x200731f0u;
+static volatile uint8_t *const descriptors=(volatile uint8_t *)(uintptr_t)((uint32_t)(uintptr_t)g2ref_g2_stock_ram_200731f0);
 static uint32_t word(const uint8_t *p) {
     return (uint32_t)p[0]|((uint32_t)p[1]<<8u)|((uint32_t)p[2]<<16u)|((uint32_t)p[3]<<24u);
 }

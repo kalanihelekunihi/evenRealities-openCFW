@@ -25,12 +25,15 @@ uint32_t case_policy_sensor_write(uint32_t channel,uint32_t count,const uint8_t 
 }
 /* Stock 0x080099e8 cache check and conditional bus write. */
 /* Stock 0x080099E8 (case_update_cached_byte) */
-void case_policy_sensor_command(uint32_t channel,uint32_t value)
+uint32_t case_policy_sensor_command(uint32_t channel,uint32_t value)
 {
     volatile uint8_t *cache=(volatile uint8_t *)(uintptr_t)0x20000090u;
     uint8_t byte=(uint8_t)value;
-    if(cache[channel]==byte)return;
-    if(case_policy_sensor_write(channel,1u,&byte)!=0u)cache[channel]=byte;
+    uint32_t previous=cache[channel];
+    if(previous==byte)return previous;
+    uint32_t result=case_policy_sensor_write(channel,1u,&byte);
+    if(result!=0u){cache[channel]=byte;return byte;}
+    return result;
 }
 /* Stock 0x08009A14 (dual_side_indicator_update) */
 void case_policy_idle_clear(void)
@@ -48,3 +51,7 @@ void case_policy_idle_clear(void)
                         (inhibit==0u || state[0x10u]!=0u))?0xafu:0xaeu;
     case_policy_sensor_command(4u,right_cmd);
 }
+/* Dedup (0x08009108): case_binary_3f_program (was legacy-default/binary_3f_program_candidate.c). */
+__typeof__(case_policy_sensor_write) case_binary_3f_program __attribute__((alias("case_policy_sensor_write")));
+/* Dedup (0x080099e8): case_binary_3f_set (was legacy-default/binary_3f_set_candidate.c). */
+__typeof__(case_policy_sensor_command) case_binary_3f_set __attribute__((alias("case_policy_sensor_command")));

@@ -7,7 +7,7 @@ extern void audio_lv_style_opa_441488(uint32_t, uint32_t, uint32_t);
 extern void audio_uart_lv_anim_init_4503d6(void *);
 extern void audio_uart_lv_anim_values_4506ce(void *, int32_t, int32_t);
 extern void *audio_uart_lv_anim_start_450408(void *);
-extern void audio_uart_lv_anim_path_450688(void);
+extern void lv_anim_path_ease_in_out(void);
 
 void audio_conversate_list_slot_opacity_callback_5b0c4e(uint32_t object,
                                                           uint32_t alpha) {
@@ -43,7 +43,7 @@ void audio_conversate_list_slot_fade_5b0ca0(
     audio_uart_lv_anim_values_4506ce(descriptor, (uint8_t)first, (uint8_t)last);
     put_word(descriptor, 0x34u, (uint32_t)(0u - delay));
     put_word(descriptor, 0x30u, duration);
-    put_word(descriptor, 0x20u, (uint32_t)(uintptr_t)&audio_uart_lv_anim_path_450688);
+    put_word(descriptor, 0x20u, (uint32_t)(uintptr_t)&lv_anim_path_ease_in_out);
     put_word(descriptor, 4u,
              (uint32_t)(uintptr_t)&audio_conversate_list_slot_opacity_callback_5b0c4e);
     (void)audio_uart_lv_anim_start_450408(descriptor);

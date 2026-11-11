@@ -10,7 +10,7 @@ extern uint32_t case_policy_task_reschedule(void);
 extern void case_policy_task_wake_cleanup(void); /* 0xb260 */
 extern uint32_t case_policy_task_pended(void); /* 0xca78 */
 static __attribute__((noreturn)) void native_fault(void)
-{__asm__ volatile("cpsid i\n1: b 1b");__builtin_unreachable();}
+{__asm__ volatile("cpsid i");for(;;){}}
 static uint32_t rd(uint32_t a){return *(volatile uint32_t *)(uintptr_t)a;}
 static void wr(uint32_t a,uint32_t v){*(volatile uint32_t *)(uintptr_t)a=v;}
 /* Stock 0x0800CC0C (case_policy_task_sleep_exit) */
@@ -42,3 +42,7 @@ uint32_t case_policy_task_sleep_exit(void)
     (void)case_policy_scheduler_unlock();
     return switched;
 }
+/* Dedup (0x0800cc0c): case_kernel_scheduler_resume (was legacy-default/kernel_resume_candidate.c). */
+__typeof__(case_policy_task_sleep_exit) case_kernel_scheduler_resume __attribute__((alias("case_policy_task_sleep_exit")));
+/* Dedup (0x0800cc0c): case_resume_scheduler (was scheduler-list/resume.c). */
+int32_t case_resume_scheduler(void) __attribute__((alias("case_policy_task_sleep_exit")));

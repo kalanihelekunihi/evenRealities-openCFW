@@ -8,7 +8,7 @@ import re
 import struct
 import subprocess
 
-ROOT = pathlib.Path(__file__).resolve().parents[5]
+ROOT = pathlib.Path(__file__).resolve().parents[2]
 HEADER = ROOT / "g2/src/apollo-bootloader/platform-control/resident_rom_contracts.h"
 ENTRIES = {
     "opencfw_boot_rom48": "OPENCFW_BOOT_ROM_INFO_READ_THUMB",

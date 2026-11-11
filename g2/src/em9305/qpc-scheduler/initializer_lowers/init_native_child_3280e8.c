@@ -1,236 +1,103 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_3280e8\n"
-".type opencfw_em9305_child_3280e8,@function\n"
-"opencfw_em9305_child_3280e8:\n"
-"L3280e8:\n"
-"enter_s [r13-r19,blink]\n"
-"L3280ea:\n"
-"ld_s r14,[r0,0x24]\n"
-"L3280ec:\n"
-"mov_s r17,r0\n"
-"L3280ee:\n"
-"ld r15,[r17,44]\n"
-"L3280f2:\n"
-"mov_s r0,r14\n"
-"L3280f4:\n"
-"add r2,r14,0x8d6\n"
-"L3280fc:\n"
-"add r0,r0,825\n"
-"L328100:\n"
-"ldb_s r1,[r2,0]\n"
-"L328102:\n"
-"ldb_s r3,[r0,0]\n"
-"L328104:\n"
-"cmp_s r1,0\n"
-"L328106:\n"
-"add_s r1,r3,0x1\n"
-"L328108:\n"
-"stb_s r1,[r0,0]\n"
-"L32810a:\n"
-"bne_s L32812e\n"
-"L32810c:\n"
-"ldb r0,[r14,0x8d4]\n"
-"L328114:\n"
-"brne_s r0,0,L32812e\n"
-"L328116:\n"
-"mov r0,824\n"
-"L32811a:\n"
-"ldb_s r0,[r14,r0]\n"
-"L32811c:\n"
-"breq_s r0,0,L328154\n"
-"L32811e:\n"
-"extb_s r1,r1\n"
-"L328120:\n"
-"brlo.d.nt r1,r0,L328154\n"
-"L328124:\n"
-"mov_s r0,r14\n"
-"L328126:\n"
-"mov_s r1,0x43\n"
-"L328128:\n"
-"add r0,r0,826\n"
-"L32812c:\n"
-"stb_s r1,[r0,0]\n"
-"L32812e:\n"
-"add r0,r14,0xae1\n"
-"L328136:\n"
-"stb 0,[r0]\n"
-"L32813a:\n"
-"add r0,r14,0x8d8\n"
-"L328142:\n"
-"bl.d opencfw_em9305_ll_schedule_notify_313354\n"
-"L328146:\n"
-"stb 1,[r2]\n"
-"L32814a:\n"
-"mov_s r1,4\n"
-"L32814c:\n"
-"bl.d opencfw_em9305_child_325a40\n"
-"L328150:\n"
-"mov_s r0,r14\n"
-"L328152:\n"
-"leave_s [r13-r19,blink,pcl]\n"
-"L328154:\n"
-"ldb_s r0,[r15,0xf]\n"
-"L328156:\n"
-"brne_s r0,0,L328160\n"
-"L328158:\n"
-"mov_s r0,0x805bed\n"
-"L32815e:\n"
-"ldb_s r0,[r0,0]\n"
-"L328160:\n"
-"mov_s r18,r14\n"
-"L328162:\n"
-"stb_s r0,[r15,0xe]\n"
-"L328164:\n"
-"add r18,r18,1420\n"
-"L328168:\n"
-"ldb r0,[r18,20]\n"
-"L32816c:\n"
-"add r13,r14,0x6b4\n"
-"L328174:\n"
-"breq_s r0,0,L3281d2\n"
-"L328176:\n"
-"mov_s r19,r14\n"
-"L328178:\n"
-"add r19,r19,1444\n"
-"L32817c:\n"
-"ld.as r0,[r13,-73]\n"
-"L328180:\n"
-"mov_s r1,r14\n"
-"L328182:\n"
-"ldb r2,[r19,-3]\n"
-"L328186:\n"
-"add r1,r1,1440\n"
-"L32818a:\n"
-"stb 0,[r1]\n"
-"L32818e:\n"
-"bl.d opencfw_em9305_memcpy\n"
-"L328192:\n"
-"mov_s r1,r19\n"
-"L328194:\n"
-"ldb r0,[r19,-3]\n"
-"L328198:\n"
-"ldb r2,[r13,-21]\n"
-"L32819c:\n"
-"ldh.as r3,[r13,-137]\n"
-"L3281a0:\n"
-"add r16,r14,0x8ca\n"
-"L3281a8:\n"
-"mov_s r1,r14\n"
-"L3281aa:\n"
-"add r1,r1,840\n"
-"L3281ae:\n"
-"sth.as r0,[r13,-148]\n"
-"L3281b2:\n"
-"sth r0,[r16]\n"
-"L3281b6:\n"
-"stb r2,[r19,-12]\n"
-"L3281ba:\n"
-"mov_s r2,0\n"
-"L3281bc:\n"
-"mov_s r0,r14\n"
-"L3281be:\n"
-"bl.d opencfw_em9305_child_32387c\n"
-"L3281c2:\n"
-"sth r3,[r14,64]\n"
-"L3281c6:\n"
-"ld.as r1,[r14,207]\n"
-"L3281ca:\n"
-"breq.d.nt r1,0,L328262\n"
-"L3281ce:\n"
-"stb r0,[r16,186]\n"
-"L3281d2:\n"
-"ldb_s r0,[r13,0]\n"
-"L3281d4:\n"
-"breq_s r0,0,L328208\n"
-"L3281d6:\n"
-"ld r0,[r13,-16]\n"
-"L3281da:\n"
-"ldb_s r2,[r13,0x1]\n"
-"L3281dc:\n"
-"mov_s r1,r14\n"
-"L3281de:\n"
-"add r1,r1,1720\n"
-"L3281e2:\n"
-"bl.d opencfw_em9305_memcpy\n"
-"L3281e6:\n"
-"stb 0,[r13]\n"
-"L3281ea:\n"
-"ldb_s r0,[r13,0x1]\n"
-"L3281ec:\n"
-"ldh_s r2,[r13,0x2]\n"
-"L3281ee:\n"
-"ldb r1,[r13,255]\n"
-"L3281f2:\n"
-"add r3,r14,0x8c8\n"
-"L3281fa:\n"
-"sth_s r0,[r3,0]\n"
-"L3281fc:\n"
-"sth r0,[r13,-20]\n"
-"L328200:\n"
-"sth r2,[r14,64]\n"
-"L328204:\n"
-"stb r1,[r13,-8]\n"
-"L328208:\n"
-"add r0,r14,0xae2\n"
-"L328210:\n"
-"ldb_s r1,[r0,0]\n"
-"L328212:\n"
-"breq_s r1,0,L328220\n"
-"L328214:\n"
-"ldh.as r1,[r13,-137]\n"
-"L328218:\n"
-"stb 0,[r0]\n"
-"L32821c:\n"
-"sth r1,[r14,64]\n"
-"L328220:\n"
-"ld_s r2,[r14,0x34]\n"
-"L328222:\n"
-"ld_s r1,[r14,0x30]\n"
-"L328224:\n"
-"bl.d opencfw_em9305_radio_identity_consume_3039d0\n"
-"L328228:\n"
-"ldb r0,[r14,58]\n"
-"L32822c:\n"
-"breq_s r0,0,L328258\n"
-"L32822e:\n"
-"mov_s r1,r14\n"
-"L328230:\n"
-"add r1,r1,945\n"
-"L328234:\n"
-"mov_s r3,0\n"
-"L328236:\n"
-"mov_s r2,r18\n"
-"L328238:\n"
-"mov_s r0,r14\n"
-"L32823a:\n"
-"bl.d opencfw_em9305_child_3239fc\n"
-"L32823e:\n"
-"sth.as 0,[r13,-143]\n"
-"L328242:\n"
-"ld.as r2,[r13,-73]\n"
-"L328246:\n"
-"ldh r1,[r14,0x8ca]\n"
-"L32824e:\n"
-"sth r0,[r15,100]\n"
-"L328252:\n"
-"st_s r2,[r15,0x70]\n"
-"L328254:\n"
-"sth r1,[r15,108]\n"
-"L328258:\n"
-"mov_s r0,r14\n"
-"L32825a:\n"
-"bl.d opencfw_em9305_child_3284ec\n"
-"L32825e:\n"
-"mov_s r1,r17\n"
-"L328260:\n"
-"leave_s [r13-r19,blink,pcl]\n"
-"L328262:\n"
-"add r0,r14,0xae1\n"
-"L32826a:\n"
-"stb 0,[r0]\n"
-"L32826e:\n"
-"leave_s [r13-r19,blink,pcl]\n"
-".size opencfw_em9305_child_3280e8,.-opencfw_em9305_child_3280e8\n"
-);
+#include <stdint.h>
+
+/* Native 0x3280e8..0x328270: periodic advertising event end for the set at
+ * object+0x24. Count the event (+825); a stopping set (+0x8d6, +0x8d4) or
+ * one whose event limit (+824) is reached (status 0x43 at +826) is ended:
+ * clear +0xae1, mark +0x8d6, notify the scheduler (+0x8d8) and run 325a40
+ * with 4. Otherwise refresh the PDU's TX power (+0xe from +0xf or the
+ * default 0x805bed), commit pending advertising data (+1440: copy into the
+ * buffer at +1424, update lengths +1420/+0x8ca/+1432 and DID +64, rebuild
+ * via 32387c; without a periodic train +828 just clear +0xae1) and pending
+ * scan-response data (+1716), apply a pending DID update (+0xae2), and
+ * when the address identity is resolved rebuild the PDU (3239fc) into the
+ * object's PDU fields before running 3284ec. */
+extern uint32_t opencfw_em9305_ll_schedule_notify_313354(uintptr_t);
+extern uint32_t opencfw_em9305_child_325a40(uintptr_t,uint32_t);
+extern void *opencfw_em9305_memcpy(void *,const void *,uint32_t);
+extern uint32_t opencfw_em9305_child_32387c(uintptr_t,uintptr_t,uint32_t);
+extern uint32_t opencfw_em9305_radio_identity_consume_3039d0(uint32_t,uint32_t,uint32_t);
+extern uint32_t opencfw_em9305_child_3239fc(uintptr_t,uintptr_t,uintptr_t,uint32_t);
+extern uint32_t opencfw_em9305_child_3284ec(uintptr_t,uintptr_t);
+
+static uint32_t r32(uintptr_t a){return *(volatile uint32_t *)a;}
+static uint32_t r16(uintptr_t a){return *(volatile uint16_t *)a;}
+static uint32_t r8(uintptr_t a){return *(volatile uint8_t *)a;}
+static void w32(uintptr_t a,uint32_t v){*(volatile uint32_t *)a=v;}
+static void w16(uintptr_t a,uint32_t v){*(volatile uint16_t *)a=(uint16_t)v;}
+static void w8(uintptr_t a,uint32_t v){*(volatile uint8_t *)a=(uint8_t)v;}
+
+void opencfw_em9305_child_3280e8(uintptr_t object)
+{
+    uintptr_t set=r32(object+0x24u);
+    uintptr_t pdu=r32(object+44u);
+    uint32_t stopping=r8(set+0x8d6u);
+    uint32_t count=r8(set+825u)+1u;
+    w8(set+825u,count);
+    uint32_t end=stopping!=0u||r8(set+0x8d4u)!=0u;
+    if(!end) {
+        uint32_t limit=r8(set+824u);
+        if(limit!=0u&&(uint8_t)count>=limit) {
+            w8(set+826u,0x43u);
+            end=1u;
+        }
+    }
+    if(end) {
+        w8(set+0xae1u,0u);
+        w8(set+0x8d6u,1u);
+        (void)opencfw_em9305_ll_schedule_notify_313354(set+0x8d8u);
+        (void)opencfw_em9305_child_325a40(set,4u);
+        return;
+    }
+    uint32_t power=r8(pdu+0xfu);
+    if(power==0u) power=r8(0x805bedu);
+    w8(pdu+0xeu,power);
+    if(r8(set+1440u)!=0u) {
+        uintptr_t buffer=r32(set+1424u);
+        uint32_t length=r8(set+1441u);
+        w8(set+1440u,0u);
+        (void)opencfw_em9305_memcpy((void *)buffer,(const void *)(set+1444u),length);
+        length=r8(set+1441u);
+        uint32_t operation=r8(set+1695u);
+        uint32_t did=r16(set+1442u);
+        w16(set+1420u,length);
+        w16(set+0x8cau,length);
+        w8(set+1432u,operation);
+        w16(set+64u,did);
+        uint32_t built=opencfw_em9305_child_32387c(set,set+840u,0u);
+        uint32_t train=r32(set+828u);
+        w8(set+0x8cau+186u,built);
+        if(train==0u) {
+            w8(set+0xae1u,0u);
+            return;
+        }
+    }
+    if(r8(set+1716u)!=0u) {
+        uintptr_t buffer=r32(set+1700u);
+        uint32_t length=r8(set+1717u);
+        w8(set+1716u,0u);
+        (void)opencfw_em9305_memcpy((void *)buffer,(const void *)(set+1720u),length);
+        length=r8(set+1717u);
+        uint32_t did=r16(set+1718u);
+        uint32_t operation=r8(set+1971u);
+        w16(set+0x8c8u,length);
+        w16(set+1696u,length);
+        w16(set+64u,did);
+        w8(set+1708u,operation);
+    }
+    if(r8(set+0xae2u)!=0u) {
+        uint32_t did=r16(set+1442u);
+        w8(set+0xae2u,0u);
+        w16(set+64u,did);
+    }
+    if(opencfw_em9305_radio_identity_consume_3039d0(r8(set+58u),r32(set+0x30u),
+                                                    r32(set+0x34u))!=0u) {
+        w16(set+1430u,0u);
+        uint32_t built=opencfw_em9305_child_3239fc(set,set+945u,set+1420u,0u);
+        uint32_t buffer=r32(set+1424u);
+        uint32_t length=r16(set+0x8cau);
+        w16(pdu+100u,built);
+        w32(pdu+0x70u,buffer);
+        w16(pdu+108u,length);
+    }
+    (void)opencfw_em9305_child_3284ec(set,object);
+}

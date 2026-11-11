@@ -1,0 +1,61 @@
+{
+  "passed": 1176,
+  "executions": 2352,
+  "actual_native_and_C_registry_dispatch": true,
+  "ordered_context_accesses": true,
+  "post_open_device_reload": true,
+  "shared_callback_word": true,
+  "source_sizes": {
+    "r1_yhm_irq_register": 34,
+    "r1_yhm_block_word_set": 16
+  },
+  "source_report": "build/sources-goal-r1-yhm-callbacks/report.json",
+  "limitations": [
+    "Device methods modeled; actual registry dispatch executes",
+    "Private frames/caller-clobbered registers/flags excluded",
+    "Concrete callbacks, concurrency, physical IRQ/power and byte qualification unverified"
+  ],
+  "existing_transport_audit": {
+    "existing_executable_sections_unchanged": [
+      ".text.r1_yhm_register_read_record",
+      ".text.r1_yhm_register_write_native",
+      ".text.r1_yhm_register_write_record",
+      ".text.r1_yhm_transport_acquire",
+      ".text.r1_yhm_transport_complete",
+      ".text.r1_yhm_transport_release"
+    ],
+    "added_sections": [
+      ".text.r1_yhm_block_word_set",
+      ".text.r1_yhm_irq_register"
+    ],
+    "import_sets_unchanged": true
+  },
+  "negative_control": {
+    "mutation": "Reuse pre-open IRQ device instead of reloading",
+    "rejected": true,
+    "counterexample": "Open changes device A to B; stock registers on B, variant on A",
+    "stderr": "Traceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-yhm-callbacks/reject-device-hoist.py\", line 51, in <module>\n    for c in cases:assert a(*c)==b(*c),c\n                                 ~^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-yhm-callbacks/reject-device-hoist.py\", line 45, in run\n    expected_calls=([['open',pre]] if pre and open_present else [])+([['register',live,1,callback]] if live and register_present else []);assert state['calls']==expected_calls\n                                                                                                                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+  },
+  "evidence": {
+    "build/goal-r1-yhm-callbacks/stock.elf": "d33a62043edf4ad06f4ff340f7964733a72ab5a539f7726c8e0ccc6ebccaac2b",
+    "build/goal-r1-yhm-callbacks/REA-0x507ac.json": "bc849d72d86f4250c2dcc959ff2c2791fb39f58f3a0d22f2e198b9fe1ba4a88b",
+    "build/goal-r1-yhm-callbacks/REA-0x5083c.json": "2313edbc70402c41b11793cdcbf49198acdd6dbd9251c12c741d79c0c55b07e1",
+    "build/goal-r1-yhm-callbacks/REA.snapshot.json": "76b30fc622363920523a7ed753133ac27bac27a1eddb906091cd77fbe16244be",
+    "build/goal-r1-yhm-callbacks/verify.py": "ec5ac2ac5354e38c8892dfa2178fd40481576cd0433ccc8693c545270dd541b4",
+    "build/goal-r1-yhm-callbacks/source.elf": "e74d11ee25c732ca4ec31d6a57302789feb43da0128fb463314b9ddefd44250a",
+    "build/goal-r1-yhm-callbacks/results.json": "fc266f065175e5daf7a150202b14df8da7923913dbb00c70c625a6f097d82039",
+    "build/goal-r1-yhm-callbacks/audit.py": "97a16caee631fc82f4fff98f1ab912bfa99db2531dec2b8b44daafb574b86ffe",
+    "build/goal-r1-yhm-callbacks/audit.json": "c9792e5f96bcaa03fa4f80cf06a12c39986705bbea42cb270a3dd2049c0cf507",
+    "build/goal-r1-yhm-callbacks/bad.c": "83f853b1338806293bf1f51c01fbaf850929161045cc1c504feef63e65f28ce0",
+    "build/goal-r1-yhm-callbacks/reject-device-hoist.py": "84689f04a3710016d2c6a91bd645f86dbfdd643c4ab4153e372665c9afe4c9db",
+    "build/goal-r1-yhm-callbacks/negative-result.json": "ce77fe0eb12eae87cb7302d564c64d90e72826b2d619f7008b592b1bb041404b",
+    "r1/src/application/board/native_yhm_transport.c": "e1f4650f8b44dbcf91a91e90c2396a6eeccd8a9562322f7d1d0179756867b50f",
+    "r1/src/application/board/native_yhm_state.c": "e9529abd5e4fe3407c99d67a2d69edfdeb0b35da7e55a6cdde5cfc94df5658b2",
+    "r1/src/application/registry/stock_registry.c": "68c16fe9a2fcd328012b8613c9da9aa4cd31bd30df36a55e64e56e7b534246fa",
+    "build/sources-goal-r1-yhm-callbacks/report.json": "d79e5facb36fdfe3fe7f9e0388c972e89cdb51da42b30339be8a54ea03ad97a6",
+    "r1/src/sources.json": "e32450af0ad855a39e15e9c4029af6bc1b267b6f8d10085ad7714c4130b94bcc",
+    "r1/symbols/function-frontier.csv": "52408b80f6826c9aeddd8222b0fc8ad678079d04888a451db10ca5746007fa38",
+    "tools/build/source-plan.json": "5fb8ec6a98698030b2c083e4f1eb882337124272718a723b1bf9e7c54339067a"
+  },
+  "source_plan_changed": false
+}

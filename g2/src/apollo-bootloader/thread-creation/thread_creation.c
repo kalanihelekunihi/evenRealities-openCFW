@@ -33,3 +33,7 @@ uint32_t opencfw_boot_thread_new(uintptr_t entry, uintptr_t arg,
     }
     return handle;
 }
+
+/* Stock entry names that branch straight to the provider above. */
+__typeof__(opencfw_boot_thread_new) opencfw_boot_dfu_thread_new __attribute__((alias("opencfw_boot_thread_new")));
+__typeof__(opencfw_boot_thread_new) opencfw_provider_4160fe __attribute__((alias("opencfw_boot_thread_new")));

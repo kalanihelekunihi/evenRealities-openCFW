@@ -1,0 +1,287 @@
+{
+  "source": {
+    "source": "r1/src/application/runtime/native_dfu_vector_restore.c",
+    "payload": "r1-application",
+    "role": "candidate",
+    "toolchain": "clang",
+    "link": true,
+    "expect": "compile",
+    "returncode": 0,
+    "argv": [
+      "/usr/bin/clang",
+      "--target=arm-none-eabi",
+      "-mcpu=cortex-m4",
+      "-mthumb",
+      "-mfpu=fpv4-sp-d16",
+      "-mfloat-abi=hard",
+      "-std=c11",
+      "-Os",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-fshort-enums",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-MD",
+      "-MF",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-dfu-vector-set-c/r1/r1-application/r1__src__application__runtime__native_dfu_vector_restore.c.d",
+      "-c",
+      "/Users/kalani/Repo/evenRealities-openCFW/r1/src/application/runtime/native_dfu_vector_restore.c",
+      "-o",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-dfu-vector-set-c/r1/r1-application/r1__src__application__runtime__native_dfu_vector_restore.c.o"
+    ],
+    "source_sha256": "29ee42bdec23ce8b84698737fd0753252ce733427aebe28cbc243850bed5a633",
+    "object_sha256": "8b284b289ff7299b933484dd747c3c153b3d178b1a5fa502d809376fb56e5016",
+    "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-dfu-vector-set-c/r1/r1-application/r1__src__application__runtime__native_dfu_vector_restore.c.o",
+    "strong": [
+      "nrf_dfu_svci_vector_table_set",
+      "nrf_dfu_svci_vector_table_unset",
+      "r1_dfu_restore_app_start",
+      "r1_dfu_restore_bounds",
+      "r1_dfu_restore_error_ring",
+      "r1_dfu_restore_error_sdk",
+      "r1_dfu_restore_info_ring",
+      "r1_dfu_restore_info_sdk",
+      "r1_dfu_set_info_ring",
+      "r1_dfu_set_info_sdk",
+      "r1_dfu_set_missing_ring",
+      "r1_dfu_set_missing_sdk"
+    ],
+    "weak": [],
+    "undefined": [
+      "nrf_log_frontend_std_0",
+      "nrf_log_frontend_std_1",
+      "r1_structured_log_format",
+      "r1_structured_log_mode_get"
+    ]
+  },
+  "normal_report": "build/sources-goal-r1-dfu-vector-set-c/report.json",
+  "native_entry": "0x78590",
+  "native_code_bytes": 202,
+  "REA": {
+    "evidence_id": "ev_71eff5e5c7490339f5dcf753d791ece178d4b34aac2907c718f1269086343153",
+    "subject": {
+      "name": "stock.elf",
+      "digest": {
+        "sha256": "25b4a29af80ec8edab5bd861ba9b74a6e22eab29dc3d7a809a16869e8a140f04"
+      },
+      "local_path": "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-queue-reset-c/stock.elf",
+      "format": "elf",
+      "architecture": "arm"
+    },
+    "provider": {
+      "id": "ghidra",
+      "name": "Ghidra",
+      "version": "12.1.4"
+    },
+    "analysis_profile": {
+      "provider": {
+        "id": "ghidra",
+        "name": "Ghidra",
+        "version": "12.1.4"
+      },
+      "parameters": {
+        "target_kind": "executable",
+        "target_format": "elf",
+        "architecture": "arm",
+        "available_architectures": [
+          "arm"
+        ],
+        "import_mode": "ephemeral-source-immutable",
+        "annotation_policy": "atomic-function-entry-metadata-v1",
+        "load_image_observations": "source-mappings-entry-context-v2",
+        "function_body_evidence": "complete-inclusive-ranges-v1",
+        "function_references": "complete-body-and-entry-reference-manager-v2",
+        "call_relationship_coverage": "function-body-call-coverage-v5",
+        "function_dossier_coverage": "observed-facets-and-call-relationships-v1",
+        "string_inventory_evidence": "defined-data-coverage-v1",
+        "location_resolution": "explicit-address-exact-entry-symbol-first-v3",
+        "procedure_file_offset_resolution": "address-first-unique-target-source-mapping-v2",
+        "instruction_flow_evidence": "decoded-return-pcode-v1",
+        "instruction_references": "exact-address-incoming-v1",
+        "function_boundary_observations": "ghidra-function-boundary-limitations-v3",
+        "no_return_repair": "returning-imports-decoded-return-v2",
+        "process_launch": "inspected-jvm-launch-support-v1",
+        "jump_table_evidence": "typed-case-default-blocks-v1",
+        "decompiler_jump_loads": true,
+        "loader": "auto-from-header",
+        "language_id": "auto-from-header",
+        "compiler_spec_id": "auto-default",
+        "analyzer_preset": "ghidra-default"
+      },
+      "digest": "7e46711069eea041af1b9b99e34115c13332795e5cda76e584a722f529ec70de"
+    },
+    "predicate_type": "rea.analysis",
+    "operation": "read_bytes",
+    "parameters": {
+      "address": "0x78590",
+      "length": 480
+    },
+    "raw_result": {
+      "address": "0x78590",
+      "requested_bytes": 480,
+      "returned_bytes": 480,
+      "bytes_hex": "2de9f04140f6f8700568681c02d14ff0102045692d4a2e4b4ff00101a3eb02024fead207681c4ff0806601eb074435d018f094ffc00703d118f090ff400706d52b4624a223a14ff0446019f02df818f085ff800706d5032000eb07402a462aa101f0eaf9284613df051e15d018f076ffc00703d118f072ff400704d52da22da1304619f011f818f069ff800703d5204637a101f0cdf92846bde8f08118f05effc00703d118f05aff400704d53da23da1304618f0f9ff18f051ff800703d5204640a101f0b5f90420e6e700001c440c00fc440c005b52494e475d53657474696e6720766563746f72207461626c6520746f20626f6f746c6f616465723a203078253038780000000053657474696e6720766563746f72207461626c6520746f20626f6f746c6f616465723a2030782530387800005b52494e475d4661696c65642072756e6e696e672073645f736f66746465766963655f766563746f725f7461626c655f626173655f736574000000004661696c65642072756e6e696e672073645f736f66746465766963655f766563746f725f7461626c655f626173655f73657400005b52494e475d4e6f20626f6f746c6f616465722077617320666f756e640000004e6f20626f6f746c6f616465722077617320666f756e640070b518f0",
+      "complete": true
+    },
+    "normalized_result": {
+      "address": "0x78590",
+      "requested_bytes": 480,
+      "returned_bytes": 480,
+      "bytes_hex": "2de9f04140f6f8700568681c02d14ff0102045692d4a2e4b4ff00101a3eb02024fead207681c4ff0806601eb074435d018f094ffc00703d118f090ff400706d52b4624a223a14ff0446019f02df818f085ff800706d5032000eb07402a462aa101f0eaf9284613df051e15d018f076ffc00703d118f072ff400704d52da22da1304619f011f818f069ff800703d5204637a101f0cdf92846bde8f08118f05effc00703d118f05aff400704d53da23da1304618f0f9ff18f051ff800703d5204640a101f0b5f90420e6e700001c440c00fc440c005b52494e475d53657474696e6720766563746f72207461626c6520746f20626f6f746c6f616465723a203078253038780000000053657474696e6720766563746f72207461626c6520746f20626f6f746c6f616465723a2030782530387800005b52494e475d4661696c65642072756e6e696e672073645f736f66746465766963655f766563746f725f7461626c655f626173655f736574000000004661696c65642072756e6e696e672073645f736f66746465766963655f766563746f725f7461626c655f626173655f73657400005b52494e475d4e6f20626f6f746c6f616465722077617320666f756e640000004e6f20626f6f746c6f616465722077617320666f756e640070b518f0",
+      "complete": true
+    },
+    "confidence": "observed",
+    "authority": "shipped-artifact",
+    "environment": null,
+    "limitations": [
+      "The session serves operations only after Ghidra reports default auto-analysis complete; incomplete analysis does not expose partial results.",
+      "The imported Program and temporary project are ephemeral and deleted on close. Annotation operations edit session database metadata; original executable bytes are never written.",
+      "Cancelling an active Ghidra request terminates its ephemeral database and discards session annotations. The selected target remains open; the next provider query imports the original artifact again.",
+      "Default-space addresses use lowercase 0x-prefixed hexadecimal; other address spaces use <percent-encoded-space>:0x<hex>.",
+      "Bytes reflect Ghidra's initialized memory, including loader fixups. Reads stop at an unmapped or uninitialized byte and report completeness explicitly.",
+      "macOS sessions require a matching executable Ghidra native decompiler; REA checks for it but does not build native components or change Gatekeeper quarantine state."
+    ],
+    "relationship_coverage": null,
+    "locations": [],
+    "evidence_links": []
+  },
+  "validation": {
+    "paired_cases": 2912,
+    "native_provider_depths": [
+      [
+        "nrf_log_frontend_std_0",
+        24
+      ],
+      [
+        "nrf_log_frontend_std_1",
+        24
+      ],
+      [
+        "r1_structured_log_format",
+        24
+      ],
+      [
+        "r1_structured_log_mode_get",
+        24
+      ],
+      [
+        "svc",
+        24
+      ]
+    ],
+    "C_provider_depths": [
+      [
+        "nrf_log_frontend_std_0",
+        8
+      ],
+      [
+        "nrf_log_frontend_std_1",
+        8
+      ],
+      [
+        "r1_structured_log_format",
+        8
+      ],
+      [
+        "r1_structured_log_mode_get",
+        8
+      ],
+      [
+        "svc",
+        8
+      ]
+    ],
+    "primary_then_UICR_fallback": true,
+    "captured_base_survives_provider_mutations": true,
+    "raw_SVC19_status": true,
+    "log_gates_and_text_checked": true,
+    "limits": [
+      "Log providers and SVC19 modeled; no physical SoftDevice handoff, actual vector changes, boot or exception frames validated.",
+      "Provider frames recorded, not equated; caller-clobbered nonarguments, APSR, live callee-register values and private spills excluded.",
+      "Mapped address words and normal terminating provider behavior only."
+    ]
+  },
+  "negative_controls": [
+    {
+      "name": "fallback-condition",
+      "rejected": true
+    },
+    {
+      "name": "missing-status",
+      "rejected": true
+    },
+    {
+      "name": "reread-base",
+      "rejected": true
+    },
+    {
+      "name": "failure-gate",
+      "rejected": true
+    },
+    {
+      "name": "wrong-log-class",
+      "rejected": true
+    }
+  ],
+  "audit": {
+    "units": 590,
+    "other_objects_identical": 589,
+    "prior_allocated_sections_and_relocations_unchanged": true,
+    "resolved_import": "nrf_dfu_svci_vector_table_set",
+    "unresolved": {
+      "r1-application": 163,
+      "r1-bootloader": 34
+    },
+    "hybrid_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "source_plan_unchanged": true,
+    "totals": {
+      "binary-pull-through": 641915,
+      "source-built": 4245,
+      "resource-file": 248
+    }
+  },
+  "qualification": {
+    "candidate_units": 1,
+    "compiled_units": 1,
+    "units": [
+      {
+        "source": "r1/src/application/runtime/native_dfu_vector_restore.c",
+        "payload": "r1-application",
+        "evidence": "r1/symbols/function-frontier.csv",
+        "selected": [],
+        "compiled": true,
+        "rejections": {
+          "native_symbol_anchor_missing": 1,
+          "anchored_relocation_pattern_not_exact": 1
+        },
+        "source_implementation_completeness": "not established by compilation or byte matching",
+        "reason": "no exact anchored body under tested production bindings; integration remains unfinished"
+      }
+    ]
+  },
+  "new_exact_bytes": 0,
+  "architectural_SVC19_retained": true,
+  "source_completeness_proven": false,
+  "physical_validation": false,
+  "frontier_before": [
+    {
+      "image": "application",
+      "inventory_source": "ghidra_functions_csv",
+      "entry": "0x00078590",
+      "size": "202",
+      "provider_family": "nordic_nrf5_sdk_17_1_0",
+      "source_symbol": "nrf_dfu_svci_vector_table_set",
+      "candidate_symbol": "nrf_dfu_svci_vector_table_set",
+      "status": "tested_contract_candidate",
+      "candidate_sources": "vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/bootloader/dfu/nrf_dfu_svci.c",
+      "candidate_objects": "pre-consolidation:r1/research/source-build/application-sdk/49_nrf_dfu_svci.o;pre-consolidation:r1/research/source-build/bootloader/41_nrf_dfu_svci.o;pre-consolidation:r1/research/source-build/native-dfu-vector-set/nrf_dfu_svci.o",
+      "candidate_reports": "application-sdk/report.json;bootloader/report.json;native-dfu-vector-set/report.json",
+      "behavior_receipt": "native-dfu-vector-set/verification.json",
+      "instruction_identity_proven": "false",
+      "image_integration_proven": "false"
+    }
+  ]
+}

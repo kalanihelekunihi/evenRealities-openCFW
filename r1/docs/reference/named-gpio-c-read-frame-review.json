@@ -1,0 +1,110 @@
+{
+  "cases": 375,
+  "passed": 375,
+  "source_sha256": "b7b17cf3852e39974035d175a8059fe640f493f6a08cdc793b27d42b1966e1a5",
+  "report": "build/sources-goal-r1-named-gpio-frame/report.json",
+  "old_regression": {
+    "native_comparisons": [
+      [
+        "strcmp",
+        536973312,
+        536973312
+      ]
+    ],
+    "old_comparisons": [
+      [
+        "strcmp",
+        536973312,
+        536973328
+      ],
+      [
+        "strcmp",
+        536973328,
+        536973328
+      ]
+    ],
+    "native_reads": [
+      [
+        536969216,
+        4
+      ],
+      [
+        536899776,
+        4
+      ]
+    ],
+    "old_reads": [
+      [
+        536899776,
+        4
+      ],
+      [
+        536969216,
+        4
+      ],
+      [
+        536899820,
+        4
+      ],
+      [
+        536969216,
+        4
+      ]
+    ]
+  },
+  "old_frame_regression": {
+    "native_r3": 1,
+    "old_r3": 2881486851
+  },
+  "other_units_unchanged": 561,
+  "application_imports": 211,
+  "bootloader_imports": 34,
+  "limitations": [
+    "strcmp and GPIOTE close providers modeled; Nordic port decoder and GPIO register accesses execute",
+    "GPIO registers ordinary emulator memory, not physical peripherals",
+    "Mutation is a controlled counterexample, not a claim of production race frequency",
+    "Not byte-qualified or final firmware proof"
+  ],
+  "evidence": [
+    {
+      "path": "build/goal-r1-named-gpio-order/before.c",
+      "sha256": "a7f74639b542cdd9c8b16a2d957e8cf4c311b0f57dd42d4e5009bab9e174fb03"
+    },
+    {
+      "path": "build/goal-r1-named-gpio-order/verify.py",
+      "sha256": "fbbee8beece833147e4a71bf3007a897170b32c63345c8c72f977925ee6483c5"
+    },
+    {
+      "path": "build/sources-goal-r1-named-gpio-frame/report.json",
+      "sha256": "79f67dce325c5728f25d0d915cf7238cf350a53357235d2992cafc27d7b63695"
+    },
+    {
+      "path": "build/goal-r1-twi-packet-c/stock.elf",
+      "sha256": "0a73bd084a4ccf8cdd579852b46deda970b701b2c22e9aecf423166f949350e4"
+    },
+    {
+      "path": "r1/src/application/gpio/stock_named_gpio.c",
+      "sha256": "b7b17cf3852e39974035d175a8059fe640f493f6a08cdc793b27d42b1966e1a5"
+    },
+    {
+      "path": "r1/src/application/gpio/stock_named_gpio.h",
+      "sha256": "029c77954b8cf3074b5501a4808af515f061505f20c27a0e7ad19553964e3e44"
+    },
+    {
+      "path": "r1/src/sources.json",
+      "sha256": "9c5b7ae5c0e7493eb22e1fb4df9f0c928c2a9aa70530254aff89b55213bef2e2"
+    },
+    {
+      "path": "tools/build/source-plan.json",
+      "sha256": "964cbd3af9f4ea7ed207bb4b480d18a9529060dc3801663d296389472982aa7c"
+    }
+  ],
+  "read_bridge_bytes": 10,
+  "stock_read_address": "0x54ed0",
+  "stock_lookup_addresses": [
+    "0x54afc",
+    "0x54b40",
+    "0x54ed0"
+  ],
+  "scope": "Callback registration, read and close directly exercised; shared lookup change also consumed by open, whose downstream lifecycle is not exercised here."
+}

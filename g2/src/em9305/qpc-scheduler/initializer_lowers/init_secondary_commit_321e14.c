@@ -18,57 +18,20 @@ static void store32(uintptr_t p,uint32_t v){*(volatile uint32_t *)p=v;}
 static void store16(uintptr_t p,uint32_t v){*(volatile uint16_t *)p=(uint16_t)v;}
 static void store8(uintptr_t p,uint32_t v){*(volatile uint8_t *)p=(uint8_t)v;}
 
+/* ARCv2 DSP MPYWHL / MPYWHUL: low word of a 32 x 16 product. */
 static uint32_t mpywhl_321e14(uint32_t a,int32_t b)
 {
-#ifdef __arc__
-    uint32_t out;
-    __asm__ volatile("mpywhl %0,%1,%2":"=r"(out):"r"(a),"r"(b):"r58","r59","memory");
-    return out;
-#else
-    return (uint32_t)(a*(uint32_t)(int32_t)(int16_t)b);
-#endif
+    return a*(uint32_t)(int32_t)(int16_t)b;
 }
 static uint32_t mpywhul_321e14(uint32_t a,uint32_t b)
 {
-#ifdef __arc__
-    uint32_t out;
-    __asm__ volatile("mpywhul %0,%1,%2":"=r"(out):"r"(a),"r"(b):"r58","r59","memory");
-    return out;
-#else
     return a*(uint32_t)(uint16_t)b;
-#endif
 }
+/* Native DIVU d,d,c. A zero divisor traps: stock sets STATUS32.DZ at startup
+ * and the EV_DivZero handler resets the chip; C division emits the same DIVU. */
 static uint32_t divu_321e14(uint32_t numerator,uint32_t denominator)
 {
-#ifdef __arc__
-    uint32_t out=numerator;
-    __asm__ volatile("divu %0,%0,%1":"+r"(out):"r"(denominator));
-    return out;
-#else
-    return denominator==0u?numerator:numerator/denominator;
-#endif
-}
-#ifndef __arc__
-static uint64_t host_accumulator_321e14;
-#endif
-static void mpyd_begin_321e14(uint32_t type)
-{
-#ifdef __arc__
-    __asm__ volatile("mpyd 0,%0,0x258000"::"r"(type):"r58","r59","memory");
-#else
-    host_accumulator_321e14=(uint64_t)type*0x258000u;
-#endif
-}
-static uint32_t mac_finish_321e14(uint32_t choice,uint32_t period)
-{
-#ifdef __arc__
-    uint32_t out;
-    __asm__ volatile("mac %0,%1,%2":"=r"(out):"r"(choice),"r"(period):"r58","r59","memory");
-    return out;
-#else
-    host_accumulator_321e14+=(uint64_t)choice*period;
-    return (uint32_t)host_accumulator_321e14;
-#endif
+    return numerator/denominator;
 }
 
 /* Prepared full CFG candidate for native 0x321e14..0x322176. This unit is
@@ -105,10 +68,10 @@ uint32_t opencfw_em9305_init_secondary_commit_321e14(uint32_t slot)
     uint32_t baseline=load8(reference+86u);
     uint32_t period=load16(config);
     uint32_t current=load16(shared+6u);
-    mpyd_begin_321e14(type);
     uint32_t mixed=(timing>>16u)^timing;
     store32(record+100u,timing);
-    uint32_t accumulation=mac_finish_321e14(enabled?300u:30u,period);
+    /* Native MPYD acc=type*0x258000 then MAC acc+=choice*period: low word. */
+    uint32_t accumulation=type*0x258000u+(enabled?300u:30u)*period;
     store16(reference+2u,mixed);
     store32(record+104u,next);
     store8(record+109u,baseline);

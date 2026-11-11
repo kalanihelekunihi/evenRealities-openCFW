@@ -1,7 +1,14 @@
 #include "ownership.h"
+/* Stock-RAM literals rewritten to named objects (sim-test wave 2026-10-26,
+ * .waves/sim-fix/apply.py): g2ref_X is the linker symbol X. */
+#include <stdint.h>
+extern unsigned char g2ref_g2_stock_ram_20074228[] __asm__("g2_stock_ram_20074228");
+extern unsigned char g2ref_g2_stock_ram_20074f30[] __asm__("g2_stock_ram_20074f30");
+extern unsigned char g2ref_g2_stock_ram_20073320[] __asm__("g2_stock_ram_20073320");
+/* g_ui32ClkMgrClkSrcBm = stock 0x20073324 (pool 0x4c43dc) = g2_stock_ram_20073320+4. */
 #define W(a) (*(volatile uint32_t *)(a))
 #define B(a) (*(volatile uint8_t *)(a))
-static volatile uint32_t *row(uint32_t c){return (volatile uint32_t *)(0x20073324u+8u*(uint8_t)c);}
+static volatile uint32_t *row(uint32_t c){return (volatile uint32_t *)((uint32_t)(uintptr_t)g2ref_g2_stock_ram_20073320+4u+8u*(uint8_t)c);}
 uint32_t audio_clock_any(uint32_t c){for(unsigned i=0;i<2;i++)if(row(c)[i])return 1;return 0;}
 uint32_t audio_clock_user(uint32_t c,uint32_t u){return (row(c)[(uint8_t)u>>5]>>(u&31))&1;}
 /* Stock 0x4c3750 (am_hal_clkmgr calculate_bit_set): SWAR population count. */
@@ -19,6 +26,6 @@ extern uint32_t stock_oscillator(uint32_t,const void *);
 uint32_t audio_xtal_release(uint32_t u){
  if(!audio_clock_user(2,(uint8_t)u))return 0;
  uint32_t mask=stock_save_irq();audio_clock_set(2,(uint8_t)u,0);
- if(!audio_clock_any(2)){uint8_t yes=1;stock_oscillator(4,&yes);B(0x20074f56)=0;W(0x20074260)=0;}
+ if(!audio_clock_any(2)){uint8_t yes=1;stock_oscillator(4,&yes);B(((uint32_t)(uintptr_t)g2ref_g2_stock_ram_20074f30+0x26u))=0;W(((uint32_t)(uintptr_t)g2ref_g2_stock_ram_20074228+0x38u))=0;}
  __asm volatile("msr primask, %0"::"r"(mask):"memory");return 0;
 }

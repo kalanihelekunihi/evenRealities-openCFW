@@ -8,7 +8,7 @@ extern void audio_uart_ambiq_texture_setup_4b06c0(uint32_t,uint32_t,
         uint32_t,uint32_t,uint32_t,uint32_t);
 extern void audio_uart_ambiq_mask_position_4b1ad4(uint32_t,uint32_t,
         uint32_t,uint32_t);
-extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,
+extern void lv_log_add(uint32_t,const char *,uint32_t,
                                 const char *,const char *,...);
 
 static const char mask_path[] =
@@ -22,7 +22,7 @@ uint32_t audio_uart_ambiq_mask_options_4b0ea6(const void *texture,
     const uint32_t *const t=(const uint32_t *)texture;
     const uint32_t format=audio_uart_ambiq_nema_cf_4b05a4((t[0]>>8)&0xffu);
     if (format!=8u && format!=9u) {
-        audio_uart_lvgl_log(3u,mask_path,663u,mask_function,
+        lv_log_add(3u,mask_path,663u,mask_function,
                             mask_message,mask_expression);
         *(volatile uint32_t *)(uintptr_t)0xffffffffu=0u;
         for (;;) {}

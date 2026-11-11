@@ -28,14 +28,14 @@ void display_driver_uled_type1_read_sn_5bc8b4(void) {
     }
     for (uint32_t i=0;i<19u;i++) {
         if ((g2_flashdb_candidate_flags()&2u)!=0u)
-            g2_flashdb_candidate_log(3u,(const char *)(uintptr_t)0x785c80u,
-                (const char *)(uintptr_t)0x6ecca8u,
-                (const char *)(uintptr_t)0x75f7b0u,0x2d3u,
-                (const char *)(uintptr_t)0x78d47cu,serial[i]);
+            g2_flashdb_candidate_log(3u,"driver.a6n-g" /* stock 0x785c80 */,
+                "D:\\01_workspace\\s200_ap510b_iar_git\\driver\\uled\\hongshi_a6ng\\drv_mspi_a6ng.c" /* stock 0x6ecca8 */,
+                "am_device_mspi_hongshi_read_sn" /* stock 0x75f7b0 */,0x2d3u,
+                " %02X " /* stock 0x78d47c */,serial[i]);
         if ((g2_flashdb_candidate_flags()&1u)!=0u ||
             (g2_flashdb_candidate_flags()&4u)!=0u)
             (void)audio_log_simple(0x0c400000u,
-                (const char *)(uintptr_t)0x776cdcu,
-                (const char *)(uintptr_t)0x776cdcu,serial[i]);
+                "[driver.a6n-g] %02X " /* stock 0x776cdc */,
+                "[driver.a6n-g] %02X " /* stock 0x776cdc */,serial[i]);
     }
 }

@@ -1,7 +1,7 @@
 /* R1 native RTT initialization contract; ring operations remain pinned SEGGER C. */
 #include "SEGGER_RTT.h"
 #include <string.h>
-char r1_rtt_up_buffer[512] __attribute__((section(".r1.rtt.up")));
+char r1_rtt_up_buffer[512] __attribute__((section(".bss.r1.rtt.up")));
 char r1_rtt_down_buffer[64] __attribute__((section(".r1.rtt.down")));
 const char r1_rtt_terminal_name[] __attribute__((section(".r1.rtt.terminal")))="Terminal";
 _Static_assert(sizeof(SEGGER_RTT_CB)==120,"native RTT control block");

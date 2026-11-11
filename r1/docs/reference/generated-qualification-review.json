@@ -1,0 +1,147 @@
+{
+  "schema": 1,
+  "scope": "Generated manifest source paths in official source qualifier; real R1 FAL/read units",
+  "status": "Generated qualification input repair; no newly admitted regions",
+  "before": {
+    "attempts": 10,
+    "compiled": 5
+  },
+  "after": {
+    "attempts": 10,
+    "compiled": 10,
+    "selected_regions": 0
+  },
+  "audit": {
+    "same_frontier_anchors_and_compiler_flags": true,
+    "non_generated_five_object_hashes_unchanged": true,
+    "generated_five_profiles_compiled_with_manifest_identity_and_dependency_receipts": true,
+    "missing_generated_input_recreated_from_recipe_identically": true,
+    "preserved_generated_input_sha256": "f642a2b58748dfcd037a1e79cb2cab2ac7b3c1eea0998e7ee94e3c76306719a7",
+    "before_compiled": 5,
+    "after_compiled": 10,
+    "selected_regions": 0,
+    "limits": [
+      "No generated provider selected in this fixture set; source completeness and instruction identity remain unproven"
+    ]
+  },
+  "canonical_plan_unchanged": true,
+  "hybrid": {
+    "application_equals_stock": true,
+    "stock_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "totals": {
+      "binary-pull-through": 642279,
+      "source-built": 3881,
+      "resource-file": 248
+    },
+    "source_completeness_proven": false
+  },
+  "preserved_rules": [
+    "Frontier anchors matched using manifest identity",
+    "Same compiler flags and dependency fingerprinting",
+    "Whole function linking and byte equality before selection",
+    "No canonical source-plan promotion without actual selection"
+  ],
+  "limits": [
+    "No generated provider selected by these candidates; no new instruction equality",
+    "Existing firmware build regenerates materialized paths; selected generated-provider rebuild not exercised by this empty selection",
+    "No hardware validation, C reconstruction or G2 gate advancement in this tooling repair"
+  ],
+  "inputs": [
+    {
+      "path": "tools/build/qualify_sources.py",
+      "sha256": "52dedf7df3cbf1def265a8cfb5f2d608f86b9a7b5bf40cd46c972dc03be3878e"
+    },
+    {
+      "path": "tools/build/build_firmware.py",
+      "sha256": "970f96b2ac06f32b493e5d00b294eb123fd57092a880bff6b7e79ee03a1a44e8"
+    },
+    {
+      "path": "tools/build/source_providers.py",
+      "sha256": "375ee455b77e7a6b968b63e93e83165d99a9994a2cea67ee90d509bbd5028a2a"
+    },
+    {
+      "path": "tools/build/source-plan.json",
+      "sha256": "716cf17b8cf2bed8ad6a99a672b1856af4c5380842c95cb14b9a263a7bb42bc8"
+    },
+    {
+      "path": "r1/src/sources.json",
+      "sha256": "4b6d47de0b0e1626f5df3ee73725bc221c9e05373e2a098596abdf560fd5a0ca"
+    },
+    {
+      "path": "build/generated/r1/fal_partition_r1_lookup.c",
+      "sha256": "f642a2b58748dfcd037a1e79cb2cab2ac7b3c1eea0998e7ee94e3c76306719a7"
+    },
+    {
+      "path": "build/hybrid-goal-generated-qualification/build-report.json",
+      "sha256": "497a9c200ff1bf53159c1b07f692bcf7d1158c4ceb3f28bae145f3395354c4b2"
+    },
+    {
+      "path": "build/goal-generated-qualification/before.py",
+      "sha256": "c959bf278e8876aa0ca5a02f405f84d581914f7d17fbe79fd0583f313cba9521"
+    },
+    {
+      "path": "build/goal-generated-qualification/run.py",
+      "sha256": "ed6fad5c9e4e62dc2f66f5261b13d41563f5061726cea981daf266ca377a45ea"
+    },
+    {
+      "path": "build/goal-generated-qualification/audit.py",
+      "sha256": "2ff154d69d9608a22343324888b9967a19fdde7d60bd0b770717d9fe0fa7ea29"
+    },
+    {
+      "path": "build/goal-generated-qualification/audit-results.json",
+      "sha256": "a0fbcabcae0a33235f2f46853a1d2f39cb0594b55ccf7da0c3d042ea71ac211a"
+    },
+    {
+      "path": "build/goal-generated-qualification/before/qualification.json",
+      "sha256": "c570e1a4444bac6929ad38b68b116b4c216c691db970df2dd5f80a5df44e68ec"
+    },
+    {
+      "path": "build/goal-generated-qualification/after/qualification.json",
+      "sha256": "ac6fd96d16088cffca8301168b05ed68746e69de1386a94ec0db0d8630bcc83f"
+    },
+    {
+      "path": "build/goal-generated-qualification/after/source-plan.json",
+      "sha256": "3da40e3d766877c0b3059bee372f651c1f56681157782eba12ee3076f1834a0f"
+    },
+    {
+      "path": "build/goal-generated-qualification/after/compilation/0005/receipt.json",
+      "sha256": "c595e510dc2403e6d80d08c6a2a26b89cc5ad8045c2e938b13dc172c1e6e9a40"
+    },
+    {
+      "path": "build/goal-generated-qualification/after/compilation/0005/unit.json",
+      "sha256": "1b608c1ed18ebaa9802ec9749dec4b04863548fda66ef3c6b2c29423264ca3cc"
+    },
+    {
+      "path": "build/goal-generated-qualification/after/compilation/0006/receipt.json",
+      "sha256": "3e0c67d75fb8b943a1b14db2ad7130a1b1a1fcc41612866daabb27b27f268d09"
+    },
+    {
+      "path": "build/goal-generated-qualification/after/compilation/0006/unit.json",
+      "sha256": "aa6df29658db9abae6a4df93daf11eec2477945d56e4c7233869f247788a60ee"
+    },
+    {
+      "path": "build/goal-generated-qualification/after/compilation/0007/receipt.json",
+      "sha256": "22ab51d95e4e912e76f609cd2c3dfc714f6d83135ed8f04ef8095a400eb42d58"
+    },
+    {
+      "path": "build/goal-generated-qualification/after/compilation/0007/unit.json",
+      "sha256": "75424665642eae260137ffe7102e46026251047189584af437764275113b9a94"
+    },
+    {
+      "path": "build/goal-generated-qualification/after/compilation/0008/receipt.json",
+      "sha256": "1b49deb9ea30484203f4eb2c9878552a078e4fcfa2a6059993e7892055ed5734"
+    },
+    {
+      "path": "build/goal-generated-qualification/after/compilation/0008/unit.json",
+      "sha256": "73d222311869571c7347c831370947348166bc58cfd1a9baa83beb6ac9bd76bf"
+    },
+    {
+      "path": "build/goal-generated-qualification/after/compilation/0009/receipt.json",
+      "sha256": "70d214b365e04f92b60bf4b6b43edd46f276a8fd2c50ec8074cc69e0c60413d5"
+    },
+    {
+      "path": "build/goal-generated-qualification/after/compilation/0009/unit.json",
+      "sha256": "d73742c2ca2144d86483b2939ddf444f904e31a5eab93622ecada64a6976d0c9"
+    }
+  ]
+}

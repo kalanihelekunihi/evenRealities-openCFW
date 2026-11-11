@@ -1,0 +1,398 @@
+{
+  "source": {
+    "source": "r1/src/application/runtime/native_gomore_optical_reset.c",
+    "payload": "r1-application",
+    "role": "candidate",
+    "toolchain": "gcc9",
+    "link": true,
+    "expect": "compile",
+    "returncode": 0,
+    "argv": [
+      "/opt/homebrew/bin/python3",
+      "/Users/kalani/Repo/evenRealities-openCFW/tools/build/linux_gcc.py",
+      "--compiler",
+      "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/bin/arm-none-eabi-gcc",
+      "--read-root",
+      "/Users/kalani/Repo/evenRealities-openCFW/r1",
+      "--read-root",
+      "/Users/kalani/Repo/evenRealities-openCFW/third-party/upstream",
+      "--read-root",
+      "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1",
+      "--read-root",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-optical-reset-c/generated/r1",
+      "--",
+      "-mcpu=cortex-m4",
+      "-mthumb",
+      "-munaligned-access",
+      "-mfpu=fpv4-sp-d16",
+      "-mfloat-abi=hard",
+      "-std=c11",
+      "-Os",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-fshort-enums",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-fno-delete-null-pointer-checks",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/r1/src/vendor",
+      "-isystem",
+      "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
+      "-fno-strict-aliasing",
+      "-ffp-contract=off",
+      "-fsignaling-nans",
+      "-frounding-math",
+      "-ftrapping-math",
+      "-MD",
+      "-MF",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-optical-reset-c/r1/r1-application/r1__src__application__runtime__native_gomore_optical_reset.c.d",
+      "-c",
+      "/Users/kalani/Repo/evenRealities-openCFW/r1/src/application/runtime/native_gomore_optical_reset.c",
+      "-o",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-optical-reset-c/r1/r1-application/r1__src__application__runtime__native_gomore_optical_reset.c.o"
+    ],
+    "source_sha256": "c773ab97cbfb50db3dd32ec56e9b8b93f01fc4dfde53e0d6c8364fc7a8939f19",
+    "object_sha256": "9ee917fe35ab81e21e2a3ad15d5dfa5918deef0f1cd725fdef0e55889ec01a6e",
+    "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-optical-reset-c/r1/r1-application/r1__src__application__runtime__native_gomore_optical_reset.c.o",
+    "strong": [
+      "r1_gomore_filter_configure_native",
+      "r1_gomore_optical_reset_native"
+    ],
+    "weak": [],
+    "undefined": [
+      "__aeabi_memclr",
+      "r1_gomore_coefficients_bandpass_native",
+      "r1_gomore_coefficients_low_high_native"
+    ]
+  },
+  "direct_replay": {
+    "pairs": 396,
+    "faults": 22,
+    "modeled_coefficients": false,
+    "object_sha256": "9ee917fe35ab81e21e2a3ad15d5dfa5918deef0f1cd725fdef0e55889ec01a6e",
+    "digest": "c30b21d0ceb6d0bfef987dad927ac773b2e0bf9641d5e8196a2edde069076524",
+    "limits": [
+      "Private frames excluded",
+      "Actual EABI clear executes; coefficient providers modeled only in MODELED run",
+      "No physical alignment, full source-only link or byte identity proof"
+    ]
+  },
+  "modeled_replay": {
+    "pairs": 2060,
+    "faults": 406,
+    "modeled_coefficients": true,
+    "object_sha256": "9ee917fe35ab81e21e2a3ad15d5dfa5918deef0f1cd725fdef0e55889ec01a6e",
+    "digest": "10d7856b51329661994ef2455f83d810a89ed1066d133c80d4dc46857dc29fee",
+    "limits": [
+      "Private frames excluded",
+      "Actual EABI clear executes; coefficient providers modeled only in MODELED run",
+      "No physical alignment, full source-only link or byte identity proof"
+    ]
+  },
+  "optical_root_replay": {
+    "pairs": 1344,
+    "substitution_counts": {
+      "0x71dd8": 384,
+      "0x8eeba": 5088,
+      "0x948d8": 5088
+    },
+    "production_units": [
+      {
+        "source": "r1/src/application/runtime/native_gomore_optical_compact.c",
+        "payload": "r1-application",
+        "role": "candidate",
+        "toolchain": "gcc9",
+        "link": true,
+        "expect": "compile",
+        "returncode": 0,
+        "argv": [
+          "/opt/homebrew/bin/python3",
+          "/Users/kalani/Repo/evenRealities-openCFW/tools/build/linux_gcc.py",
+          "--compiler",
+          "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/bin/arm-none-eabi-gcc",
+          "--read-root",
+          "/Users/kalani/Repo/evenRealities-openCFW/r1",
+          "--read-root",
+          "/Users/kalani/Repo/evenRealities-openCFW/third-party/upstream",
+          "--read-root",
+          "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1",
+          "--read-root",
+          "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-optical-reset-c/generated/r1",
+          "--",
+          "-mcpu=cortex-m4",
+          "-mthumb",
+          "-munaligned-access",
+          "-mfpu=fpv4-sp-d16",
+          "-mfloat-abi=hard",
+          "-std=c11",
+          "-Os",
+          "-ffreestanding",
+          "-fno-builtin",
+          "-fshort-enums",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-fno-delete-null-pointer-checks",
+          "-I/Users/kalani/Repo/evenRealities-openCFW/r1/src/vendor",
+          "-isystem",
+          "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
+          "-fno-strict-aliasing",
+          "-ffp-contract=off",
+          "-fsignaling-nans",
+          "-frounding-math",
+          "-ftrapping-math",
+          "-MD",
+          "-MF",
+          "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-optical-reset-c/r1/r1-application/r1__src__application__runtime__native_gomore_optical_compact.c.d",
+          "-c",
+          "/Users/kalani/Repo/evenRealities-openCFW/r1/src/application/runtime/native_gomore_optical_compact.c",
+          "-o",
+          "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-optical-reset-c/r1/r1-application/r1__src__application__runtime__native_gomore_optical_compact.c.o"
+        ],
+        "source_sha256": "fc772680bfc7ad1194a2613d9a0fdca162487f7310b8f9aa4ccf6ac804f4f1f1",
+        "object_sha256": "99673c2a877cf0601458cee36d167f4b5cb931b78e6caa3e44112bb5dc0a0ba7",
+        "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-optical-reset-c/r1/r1-application/r1__src__application__runtime__native_gomore_optical_compact.c.o",
+        "strong": [
+          "r1_gomore_optical_compact_native"
+        ],
+        "weak": [],
+        "undefined": []
+      },
+      {
+        "source": "r1/src/application/runtime/native_gomore_optical_append.c",
+        "payload": "r1-application",
+        "role": "candidate",
+        "toolchain": "gcc9",
+        "link": true,
+        "expect": "compile",
+        "returncode": 0,
+        "argv": [
+          "/opt/homebrew/bin/python3",
+          "/Users/kalani/Repo/evenRealities-openCFW/tools/build/linux_gcc.py",
+          "--compiler",
+          "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/bin/arm-none-eabi-gcc",
+          "--read-root",
+          "/Users/kalani/Repo/evenRealities-openCFW/r1",
+          "--read-root",
+          "/Users/kalani/Repo/evenRealities-openCFW/third-party/upstream",
+          "--read-root",
+          "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1",
+          "--read-root",
+          "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-optical-reset-c/generated/r1",
+          "--",
+          "-mcpu=cortex-m4",
+          "-mthumb",
+          "-munaligned-access",
+          "-mfpu=fpv4-sp-d16",
+          "-mfloat-abi=hard",
+          "-std=c11",
+          "-Os",
+          "-ffreestanding",
+          "-fno-builtin",
+          "-fshort-enums",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-fno-delete-null-pointer-checks",
+          "-I/Users/kalani/Repo/evenRealities-openCFW/r1/src/vendor",
+          "-isystem",
+          "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
+          "-fno-strict-aliasing",
+          "-ffp-contract=off",
+          "-fsignaling-nans",
+          "-frounding-math",
+          "-ftrapping-math",
+          "-MD",
+          "-MF",
+          "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-optical-reset-c/r1/r1-application/r1__src__application__runtime__native_gomore_optical_append.c.d",
+          "-c",
+          "/Users/kalani/Repo/evenRealities-openCFW/r1/src/application/runtime/native_gomore_optical_append.c",
+          "-o",
+          "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-optical-reset-c/r1/r1-application/r1__src__application__runtime__native_gomore_optical_append.c.o"
+        ],
+        "source_sha256": "3f08de85590cb43579bb60c829820279d018b4c9b91afa40f4685909e51acd99",
+        "object_sha256": "4844d59dbfe3721bd74779b297a242e69935407e89a0d115a452a9066864860b",
+        "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-optical-reset-c/r1/r1-application/r1__src__application__runtime__native_gomore_optical_append.c.o",
+        "strong": [
+          "r1_gomore_optical_append_native"
+        ],
+        "weak": [],
+        "undefined": [
+          "r1_gomore_filter_native"
+        ]
+      },
+      {
+        "source": "r1/src/application/runtime/native_gomore_optical_reset.c",
+        "payload": "r1-application",
+        "role": "candidate",
+        "toolchain": "gcc9",
+        "link": true,
+        "expect": "compile",
+        "returncode": 0,
+        "argv": [
+          "/opt/homebrew/bin/python3",
+          "/Users/kalani/Repo/evenRealities-openCFW/tools/build/linux_gcc.py",
+          "--compiler",
+          "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/bin/arm-none-eabi-gcc",
+          "--read-root",
+          "/Users/kalani/Repo/evenRealities-openCFW/r1",
+          "--read-root",
+          "/Users/kalani/Repo/evenRealities-openCFW/third-party/upstream",
+          "--read-root",
+          "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1",
+          "--read-root",
+          "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-optical-reset-c/generated/r1",
+          "--",
+          "-mcpu=cortex-m4",
+          "-mthumb",
+          "-munaligned-access",
+          "-mfpu=fpv4-sp-d16",
+          "-mfloat-abi=hard",
+          "-std=c11",
+          "-Os",
+          "-ffreestanding",
+          "-fno-builtin",
+          "-fshort-enums",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-fno-delete-null-pointer-checks",
+          "-I/Users/kalani/Repo/evenRealities-openCFW/r1/src/vendor",
+          "-isystem",
+          "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
+          "-fno-strict-aliasing",
+          "-ffp-contract=off",
+          "-fsignaling-nans",
+          "-frounding-math",
+          "-ftrapping-math",
+          "-MD",
+          "-MF",
+          "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-optical-reset-c/r1/r1-application/r1__src__application__runtime__native_gomore_optical_reset.c.d",
+          "-c",
+          "/Users/kalani/Repo/evenRealities-openCFW/r1/src/application/runtime/native_gomore_optical_reset.c",
+          "-o",
+          "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-optical-reset-c/r1/r1-application/r1__src__application__runtime__native_gomore_optical_reset.c.o"
+        ],
+        "source_sha256": "c773ab97cbfb50db3dd32ec56e9b8b93f01fc4dfde53e0d6c8364fc7a8939f19",
+        "object_sha256": "9ee917fe35ab81e21e2a3ad15d5dfa5918deef0f1cd725fdef0e55889ec01a6e",
+        "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-optical-reset-c/r1/r1-application/r1__src__application__runtime__native_gomore_optical_reset.c.o",
+        "strong": [
+          "r1_gomore_filter_configure_native",
+          "r1_gomore_optical_reset_native"
+        ],
+        "weak": [],
+        "undefined": [
+          "__aeabi_memclr",
+          "r1_gomore_coefficients_bandpass_native",
+          "r1_gomore_coefficients_low_high_native"
+        ]
+      }
+    ],
+    "digest": "e66f1fa289749d095b9c995b62d45b90753cdbc9c4635e5bef3e9f0587d9f42d",
+    "limits": [
+      "Native optical root, filter and reset execute; C compact/append/reset/configure substituted",
+      "Covers gap/reset/warmup paths; heavy estimator path not covered",
+      "Private scratch bytes excluded; no physical validation or byte identity proof"
+    ]
+  },
+  "negative_controls": [
+    {
+      "name": "signed",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "order",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "history",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "clear",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "sentinel",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "cutoff",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "warmup",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "return",
+      "compiled": true,
+      "rejected": true
+    }
+  ],
+  "qualification": {
+    "candidate_units": 1,
+    "compiled_units": 1,
+    "units": [
+      {
+        "source": "r1/src/application/runtime/native_gomore_optical_reset.c",
+        "payload": "r1-application",
+        "evidence": "r1/symbols/function-frontier.csv",
+        "selected": [],
+        "compiled": true,
+        "rejections": {
+          "anchored_relocation_pattern_not_exact": 1,
+          "compiled_bytes_differ": 1
+        },
+        "source_implementation_completeness": "not established by compilation or byte matching",
+        "reason": "no exact anchored body under tested production bindings; integration remains unfinished"
+      }
+    ]
+  },
+  "composition": {
+    "report": "build/sources-goal-r1-gomore-optical-reset-c/report.json",
+    "units": 692,
+    "unchanged_prior_source_object_pairs": 690,
+    "application_imports": 181,
+    "bootloader_imports": 34,
+    "new_imports": [
+      "r1_gomore_coefficients_low_high_native",
+      "r1_gomore_coefficients_bandpass_native"
+    ]
+  },
+  "artifacts": {
+    "build/goal-r1-gomore-optical-reset-c/rea.json": "e333e7c5de91a24af6329623e469f0b55d0e27e1131760d39b623d6aec1bd179",
+    "build/goal-r1-gomore-optical-reset-c/verify.py": "d4ea817813efdc4f48f9fbb96fd8e67d9a7ad54a419a8e5bf3b98eb5fc4ffd41",
+    "build/goal-r1-gomore-optical-reset-c/integration.py": "5a1e16fa548da95fd61d022b3b96a8d107e69f1c55fae7c5ace8fe6d00c2f145",
+    "build/goal-r1-gomore-optical-reset-c/negative.py": "a26d984f7343de437ed1a7765104efc19dd52a202144551e7f436e5c9a851cbe",
+    "build/goal-r1-gomore-optical-reset-c/results.json": "653fa6e08711990672e55a15592756885ab8167a5ed48efb4ed4d60b8c8a1c79",
+    "build/goal-r1-gomore-optical-reset-c/modeled-results.json": "bc4bd72c554ccb90124e4be40f9fc4f9ca7f03cd649176318d1ca5bd3f93d13c",
+    "build/goal-r1-gomore-optical-reset-c/integration-results.json": "f5c7c75865c08efbbb8370f94c335d1e28226cb3ede8952248a0cc06fda7afc7",
+    "build/goal-r1-gomore-optical-reset-c/negative-results.json": "73998d0495a600cd067adba01581781f7269cc7deda247538f039a1785477387",
+    "build/goal-r1-gomore-optical-reset-c/production-direct.log": "ec832e3259d42d27686bdf8f50ec2e4e94485e11f00faba4a7701f3390d1b089",
+    "build/goal-r1-gomore-optical-reset-c/production-modeled.log": "928c918c13d194816bbcb8a302035df7dd2d7978d924e967760f07915e1e878d",
+    "build/goal-r1-gomore-optical-reset-c/qualified/qualification.json": "69f181bfd6ac41952717c5b3e7aed37be4ecf37ee14d103f30ba639f181f0ecb"
+  },
+  "limits": [
+    "Coefficient generators execute from stock in actual-provider replay and remain unresolved production imports",
+    "Native optical root heavy estimation path remains unresolved and untested here",
+    "C constant stores may use integer rather than VFP instructions; physical alignment behavior remains unverified",
+    "Raw configure return checked only for this compiled profile",
+    "Private frames excluded; no complete source-only link, physical hardware or byte identity proof"
+  ]
+}

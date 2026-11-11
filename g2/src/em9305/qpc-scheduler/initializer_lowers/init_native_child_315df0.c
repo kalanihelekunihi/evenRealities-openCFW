@@ -1,32 +1,18 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_315df0\n"
-".type opencfw_em9305_child_315df0,@function\n"
-"opencfw_em9305_child_315df0:\n"
-"L315df0:\n"
-"enter_s [r13,blink]\n"
-"L315df2:\n"
-"bl.d opencfw_em9305_phy_complete_32c818\n"
-"L315df6:\n"
-"mov_s r13,r0\n"
-"L315df8:\n"
-"bl.d opencfw_em9305_child_32cfc0\n"
-"L315dfc:\n"
-"mov_s r0,r13\n"
-"L315dfe:\n"
-"bl.d opencfw_em9305_child_317c40\n"
-"L315e02:\n"
-"mov_s r0,r13\n"
-"L315e04:\n"
-"bl.d opencfw_em9305_child_324674\n"
-"L315e08:\n"
-"mov_s r0,r13\n"
-"L315e0a:\n"
-"bl.d opencfw_em9305_phy_timer_start_32c7e4\n"
-"L315e0e:\n"
-"mov_s r0,r13\n"
-"L315e10:\n"
-"leave_s [r13,blink,pcl]\n"
-".size opencfw_em9305_child_315df0,.-opencfw_em9305_child_315df0\n"
-);
+#include <stdint.h>
+
+/* Native 0x315df0..0x315e12: run the five per-link completion steps on the
+ * same record, returning the PHY timer start status. */
+extern uint32_t opencfw_em9305_phy_complete_32c818(uintptr_t);
+extern uint32_t opencfw_em9305_child_32cfc0(uintptr_t);
+extern uint32_t opencfw_em9305_child_317c40(uintptr_t);
+extern uint32_t opencfw_em9305_child_324674(uintptr_t);
+extern uint32_t opencfw_em9305_phy_timer_start_32c7e4(uintptr_t);
+
+uint32_t opencfw_em9305_child_315df0(uintptr_t record)
+{
+    (void)opencfw_em9305_phy_complete_32c818(record);
+    (void)opencfw_em9305_child_32cfc0(record);
+    (void)opencfw_em9305_child_317c40(record);
+    (void)opencfw_em9305_child_324674(record);
+    return opencfw_em9305_phy_timer_start_32c7e4(record);
+}

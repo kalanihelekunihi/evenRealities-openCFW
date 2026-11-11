@@ -1,0 +1,64 @@
+{
+  "passed": 1152,
+  "executions": 2304,
+  "actual_setter_complete_and_registry": true,
+  "post_close_callback_reload": true,
+  "raw_return_words": true,
+  "tail_callback_original_sp_lr": true,
+  "source_size": 30,
+  "source_report": "build/sources-goal-r1-yhm-callbacks/report.json",
+  "limitations": [
+    "Device close and callback targets modeled",
+    "Private frames/caller-clobbered registers/flags excluded",
+    "Concurrency, physical completion/IRQ behavior and byte qualification unverified"
+  ],
+  "negative_control": {
+    "mutation": "Load callback before bus close",
+    "rejected": true,
+    "counterexample": "Close installs callback B; stock invokes B, variant retains earlier null callback",
+    "stderr": "Traceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-yhm-complete/reject-callback-hoist.py\", line 50, in <module>\n    for c in cases:assert a(*c)==b(*c),c\n                                 ~^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-yhm-complete/reject-callback-hoist.py\", line 45, in run\n    expected=(1 if not bus else 6 if not present else close_result) if live==0 else cb_result if live==CBA else cb_result^0xffffffff;assert u.reg_read(UC_ARM_REG_R0)==expected,(stock,bus,present,callback,mutation,close_result,cb_result,expected,u.reg_read(UC_ARM_REG_R0),state)\n                                                                                                                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: (False, 536969216, True, 0, 2, 0, 1, 4294967294, 0, {'access': [[0, 'write', 4, 0], [0, 'read', 4, 0], [4, 'read', 4, 536969216]], 'calls': [['close', 536969216]], 'mutation': 2, 'close_result': 0, 'cb_result': 1})\n"
+  },
+  "qualification": {
+    "clang": {
+      "candidate_units": 5,
+      "compiled_units": 5,
+      "selected_symbols": [
+        "r1_yhm_transport_acquire",
+        "r1_yhm_transport_release",
+        "r1_yhm_block_word_set"
+      ],
+      "completion_selected": false
+    },
+    "gcc9": {
+      "candidate_units": 4,
+      "compiled_units": 4,
+      "selected_symbols": [],
+      "completion_selected": false
+    }
+  },
+  "source_plan_changed": false,
+  "evidence": {
+    "build/goal-r1-yhm-complete/stock.elf": "7d0ebb51bfe72060f287c8ce9085fd8db79cdafe04ae3fbd447dcae86f506e15",
+    "build/goal-r1-yhm-complete/REA.json": "cd6c86f187add4e4ad9fb2306d70608505fcd8ee9b2e1b5d9c2f81c387cb0b1a",
+    "build/goal-r1-yhm-complete/REA.snapshot.json": "a5856ccaa942b320704ab52517babfb27728b5e6694c2ae8a30e432a9ceb84dd",
+    "build/goal-r1-yhm-complete/verify.py": "38c073102c8f4ce03999702bf79fbbc8761b58baa86eadf36e5f9f79001a5191",
+    "build/goal-r1-yhm-complete/source.elf": "be67eb57e34ef41675ccf1fbd658d699d6dd2a3c15dac95b84646c08cb789877",
+    "build/goal-r1-yhm-complete/results.json": "946b3fefba418ec2dc3eb019cefcd9b04f911a7df2f15a51175c6561b8a099b0",
+    "build/goal-r1-yhm-complete/bad.c": "d1d88e8a74cb3b2c69d9c85bc331afdbbcf7376e63d0d905ceab354ca734d815",
+    "build/goal-r1-yhm-complete/reject-callback-hoist.py": "05bc925881d71b2f1cabd98c55a5c692749883c5b8323947d6413726d73c21ff",
+    "build/goal-r1-yhm-complete/negative-result.json": "7eb9b74cf3b5f2feabe114ca3b8ba45652c7859d53caed455eba31f4ff630701",
+    "build/goal-r1-yhm-complete/qualify.py": "5e66adb859bff674a7d2d9b288cdebcc2a0a6acae59ed594147c4b2d489923c2",
+    "build/goal-r1-yhm-complete/qualify-gcc.py": "c8c4a0445894080513e144b60c29980f82165fb33210a616afd5f137d4ba24df",
+    "build/goal-r1-yhm-complete/qualified/qualification.json": "315e19db6d4b6306fe277ee964ca00d8284a1edd09f4091844f31a10b28ee8d7",
+    "build/goal-r1-yhm-complete/qualified/source-plan.json": "5119557d74a0f2ef7ce84a56677edfdcef745d4ac7ff95bbbe5292a273dad0e6",
+    "build/goal-r1-yhm-complete/gcc-qualified/qualification.json": "dbe9c13f87052e2cbb32efc516ea9fc29899aeb04c372995c0d72057d1e02e42",
+    "build/goal-r1-yhm-complete/gcc-qualified/source-plan.json": "3da40e3d766877c0b3059bee372f651c1f56681157782eba12ee3076f1834a0f",
+    "r1/src/application/board/native_yhm_transport.c": "e1f4650f8b44dbcf91a91e90c2396a6eeccd8a9562322f7d1d0179756867b50f",
+    "r1/src/application/board/native_yhm_state.c": "e9529abd5e4fe3407c99d67a2d69edfdeb0b35da7e55a6cdde5cfc94df5658b2",
+    "r1/src/application/registry/stock_registry.c": "68c16fe9a2fcd328012b8613c9da9aa4cd31bd30df36a55e64e56e7b534246fa",
+    "build/sources-goal-r1-yhm-callbacks/report.json": "d79e5facb36fdfe3fe7f9e0388c972e89cdb51da42b30339be8a54ea03ad97a6",
+    "r1/src/sources.json": "e32450af0ad855a39e15e9c4029af6bc1b267b6f8d10085ad7714c4130b94bcc",
+    "r1/symbols/function-frontier.csv": "6dfe4206c1860168d421412110572d79a24109fc0c296f8614e257ec290000f6",
+    "tools/build/source-plan.json": "06994e8e9bd0e33b4d4c96d07f040ecc5e09d2159c7bbbfe20a512fd84c25ced"
+  }
+}

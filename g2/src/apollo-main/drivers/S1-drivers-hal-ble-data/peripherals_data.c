@@ -137,6 +137,11 @@ static const g2_i2c_pins_data_t g2_i2c_pins_iom2 = {25u, 26u, 0x4200u, 0x4200u};
 static const g2_i2c_pins_data_t g2_i2c_pins_iom4 = {34u, 35u, 0x4200u, 0x4200u};
 static const g2_i2c_pins_data_t g2_i2c_pins_iom5 = {47u, 48u, 0x4200u, 0x4200u};
 static const g2_i2c_pins_data_t g2_i2c_pins_iom7 = {22u, 23u, 0x4200u, 0x4200u};
+/* Fix 50: stock-address names (same objects; stock bytes match row for row). */
+extern const g2_i2c_pins_data_t g2_i2c_pins_786020 __attribute__((alias("g2_i2c_pins_iom2")));
+extern const g2_i2c_pins_data_t g2_i2c_pins_786030 __attribute__((alias("g2_i2c_pins_iom4")));
+extern const g2_i2c_pins_data_t g2_i2c_pins_786040 __attribute__((alias("g2_i2c_pins_iom5")));
+extern const g2_i2c_pins_data_t g2_i2c_pins_786050 __attribute__((alias("g2_i2c_pins_iom7")));
 
 /* RAM 0x2035ce18..0x2035ee17 (SSRAM zero-init): IOM non-blocking command
  * buffer, 0x800 words (the MPU region record at RAM 0x20000c20 covers it). */

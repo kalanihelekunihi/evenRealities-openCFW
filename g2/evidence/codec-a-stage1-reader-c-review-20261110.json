@@ -1,0 +1,46 @@
+{
+  "schema": 1,
+  "target": "GX8002 BINH A stage-1 NOR read path 0x10000b4c..0x10000e44",
+  "source": "g2/src/codec/image-a-stage1/main_stage1_flash_reader.c",
+  "stock_stage1_load_sha256": "65775a0feea148f5e1582693160c06204d5183fee717ba75706ce1cb4d40f605",
+  "stock_contract": {
+    "bus_busy_poll": "0x10000b4c..0x10000b5c polls SPIM_SR bit 0",
+    "ready_poll": "0x10000c1c..0x10000c3e reads command 5 until status bit 0 clears and returns one",
+    "reader": "0x10000c40..0x10000e44 gates flash module 13, initializes when cached JEDEC is 0x00ffffff, configures XIP, then reads up to 0x10000 bytes per chunk without disabling the XIP clock",
+    "cached_jedec_address": "0x20001290",
+    "spi_base": "0xa2000000",
+    "xip_register_base": "0xa2000100"
+  },
+  "direct_csky_compile": {
+    "passed": true,
+    "object_sha256": "1c97d06b70fde40eef89c8e017a7327af9ff2d32147ecc11cc75d12a09b6c598",
+    "bus_poll_stock_exact_bytes": 16,
+    "bus_poll_sha256": "4c69925f75f82a665d3f637a6b5e93397488e1ae4279ebb5716c9349bc6c0319",
+    "ready_poll_stock_equal_except_call_relocation": true,
+    "ready_poll_bytes": 34,
+    "ready_poll_object_sha256": "59127a26869d5b2cfb579d6bc22e1c48016fd65ff83c9ed593e91e514bfdb65e"
+  },
+  "source_composition": {
+    "loader_flash_reader_reference_resolved": true,
+    "remaining_external_stock_functions": [
+      "gx8002_image_a_stage1_clock_gate_100005a4",
+      "gx8002_image_a_stage1_flash_transaction_10000bbc",
+      "gx8002_image_a_stage1_flash_write_10000b5c"
+    ],
+    "linked_into_final_codec_a": false
+  },
+  "full_g2_gate": {
+    "source_report": "build/g2-all-binh-a-reader-b-jedec-20261110/report.json",
+    "source_report_sha256": "cb6f61126d9fe4b6dab6890f50312c584f0610d23f72bba6dc3621a7aa59f2d9",
+    "built_units": 4870,
+    "failed_units": 0,
+    "duplicate_strong_symbols": 0,
+    "manifest_changed_during_build": false,
+    "link_report": "build/g2-all-binh-a-reader-b-jedec-link-20261110/link-report.json",
+    "link_report_sha256": "59ed924a37690daba1ee554a5c666a6ebf79e99051642a128dcb6b93fa690b75",
+    "linked_payloads": 7,
+    "external_binary_archive_used": false,
+    "codec_a_linked_binary_unchanged": true
+  },
+  "qualification": "The bus poll matches stock bytes and the ready poll matches modulo one call relocation. The larger reader follows observed control flow and register writes but lacks a full differential or hardware verification; BINH A stage 1 is incomplete."
+}

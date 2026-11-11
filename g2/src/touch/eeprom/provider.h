@@ -1,5 +1,6 @@
 #ifndef OPENCFW_TOUCH_FLASH_PROVIDER_H
 #define OPENCFW_TOUCH_FLASH_PROVIDER_H
+#include <stdbool.h>
 #include <stdint.h>
 typedef struct {
  uint16_t logical_rows, physical_row_bytes;
@@ -14,6 +15,8 @@ _Static_assert(__builtin_offsetof(touch_eeprom_context_layout,logical_capacity)=
 _Static_assert(sizeof(touch_eeprom_context_layout)==32,"stock context size");
 _Static_assert(__builtin_offsetof(touch_eeprom_context_layout,provider_address)==28,"provider offset");
 uint32_t touch_flash_status(void);
+bool touch_flash_valid_addr(uint32_t address);
+uint32_t touch_flash_row_number(uint32_t address);
 uint32_t touch_flash_write_row(uint32_t address,const uint8_t *data);
 uint32_t touch_storage_copy(uint32_t handle,uint32_t address,uint32_t size,uint8_t *data);
 uint32_t touch_storage_zero(uint32_t handle,uint32_t address,uint32_t size);

@@ -124,19 +124,9 @@ uint32_t opencfw_em9305_init_transition_secondary_32d138_body(uint8_t *local)
     return opencfw_em9305_init_secondary_finish_321820();
 }
 
-#ifdef __arc__
-__asm__(
-".text\n.balign 4\n.global opencfw_em9305_init_transition_secondary_32d138\n"
-".type opencfw_em9305_init_transition_secondary_32d138,@function\n"
-"opencfw_em9305_init_transition_secondary_32d138:\n"
-"enter_s [r13-r17,fp,blink]\nsub_s sp,sp,0xc\n"
-"mov r0,sp\nbl opencfw_em9305_init_transition_secondary_32d138_body\n"
-"leave_s [r13-r17,fp,blink,pcl]\n"
-".size opencfw_em9305_init_transition_secondary_32d138,. - opencfw_em9305_init_transition_secondary_32d138\n");
-#else
+/* Entry: reserve the 12-byte local descriptor and run the transition body. */
 uint32_t opencfw_em9305_init_transition_secondary_32d138(void)
 {
     uint8_t local[12] __attribute__((aligned(4)));
     return opencfw_em9305_init_transition_secondary_32d138_body(local);
 }
-#endif

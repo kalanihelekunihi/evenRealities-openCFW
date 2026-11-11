@@ -2,6 +2,7 @@
  * local timestamp 0x8AD40. Contextual calendar code remains separate. */
 #include <stddef.h>
 #include <stdint.h>
+extern void *memset(void *,int,size_t);
 #include "../registry/stock_registry.h"
 #include "time_calendar/time_calendar.h"
 generic_device_registry_device *r1_structured_rtc_device __attribute__((section(".r1.time.rtc"),aligned(4)));
@@ -12,14 +13,22 @@ _Static_assert(sizeof(generic_device_registry_time_block)==64,"stock request ext
 _Static_assert(offsetof(time_calendar_registration,backend)==8,"stock backend slot");
 _Static_assert(offsetof(time_calendar_state,utc_offset_minutes)==8,"stock signed timezone");
 uint32_t r1_structured_log_timestamp_adapter(void) {
-    generic_device_registry_time_block request={0};
-    (void)r1_stock_dispatch_10(r1_structured_rtc_device,0,(uintptr_t)&request,0);
+    generic_device_registry_time_block request;
+    /* The returned buffer avoids carrying its address in R4 across clear.
+     * The recorded Clang profile then preserves native active R4-R11 at
+     * clear and RTC-dispatch boundaries, with the same 72-byte depth. */
+    void *zeroed=memset(&request,0,sizeof(request));
+    (void)r1_stock_dispatch_10(r1_structured_rtc_device,0,(uintptr_t)zeroed,0);
     return request.epoch_seconds;
 }
 uint32_t r1_time_backend_timestamp(void) {
     /* Native stock faults on an unbound backend/getter; do not add guards. */
     return r1_time_registration.backend->get(NULL);
 }
+/* Native 0x8ada4 also names the low-battery timestamp dependency.
+ * Share this body and ABI instead of introducing a second clock thunk. */
+extern __typeof__(r1_time_backend_timestamp) time_backend_timestamp_thunk
+    __attribute__((alias("r1_time_backend_timestamp")));
 uint32_t r1_structured_log_local_timestamp(void) {
     uint32_t epoch=r1_time_backend_timestamp();
     return epoch+(uint32_t)((int32_t)r1_time_state.utc_offset_minutes*60);

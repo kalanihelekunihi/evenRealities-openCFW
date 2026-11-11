@@ -1,0 +1,128 @@
+{
+  "schema_version": 1,
+  "source": "r1/src/application/board/native_touch_transport.c",
+  "native_roots": [
+    "0x2fe9c",
+    "0x2feac"
+  ],
+  "decoded_instruction_bytes_per_root": 16,
+  "report": "build/sources-goal-r1-iqs-port-c/report.json",
+  "compiled_units": 833,
+  "application_imports": 75,
+  "added_imports": [],
+  "removed_imports": [
+    "r1_iqs7211e_register_write_port"
+  ],
+  "prior_objects_unchanged": 830,
+  "changed_objects": [
+    [
+      "r1-bootloader",
+      "{gen}/r1_startup_vectors.S"
+    ],
+    [
+      "r1-application",
+      "r1/src/application/board/native_touch_transport.c"
+    ],
+    [
+      "r1-bootloader",
+      "{gen}/r1_uecc.c"
+    ]
+  ],
+  "new_units": 0,
+  "new_state_owners": 0,
+  "manifest_unchanged": true,
+  "verification": {
+    "paired_sequences": 2880,
+    "seeded_sequences": 256,
+    "registry_fixture_sequences": 0,
+    "calls_per_sequence": 3,
+    "actual_C_transport": true,
+    "actual_C_registry": false
+  },
+  "actual_registry_integration": {
+    "paired_sequences": 128,
+    "seeded_sequences": 16,
+    "registry_fixture_sequences": 48,
+    "calls_per_sequence": 3,
+    "actual_C_transport": true,
+    "actual_C_registry": true
+  },
+  "actual_factory_port_registry_integration": {
+    "flag_combination_pairs": 13,
+    "park_order_pairs": 4,
+    "seeded_live_pairs": 16,
+    "adapter_pairs": 60,
+    "queue_retention_pairs": 144,
+    "actual_C_worker_park": true,
+    "log_mode_pairs": 3,
+    "actual_C_bus_ops_and_registry": true,
+    "bus_fixture_pairs": 24
+  },
+  "allocated_section_audit": {
+    "all_prior_allocated_sections_unchanged": [
+      ".ARM.exidx.text.r1_touch_ready_level_read",
+      ".ARM.exidx.text.r1_touch_request_read_native",
+      ".ARM.exidx.text.r1_touch_request_write_native",
+      ".r1.touch.request",
+      ".text",
+      ".text.r1_touch_ready_level_read",
+      ".text.r1_touch_request_read_native",
+      ".text.r1_touch_request_write_native"
+    ],
+    "added_allocated_sections": [
+      ".ARM.exidx.text.r1_iqs7211e_register_read_port",
+      ".ARM.exidx.text.r1_iqs7211e_register_write_port",
+      ".text.r1_iqs7211e_register_read_port",
+      ".text.r1_iqs7211e_register_write_port"
+    ],
+    "new_object_sha256": "4c80365d9958cacf6c54451a8610fd27ef34f801cbcb0c8fcbbf9336f9427479"
+  },
+  "mutants": {
+    "rejected": [
+      "read_register",
+      "write_register",
+      "read_length",
+      "write_length",
+      "read_buffer",
+      "write_buffer",
+      "read_result",
+      "write_result"
+    ]
+  },
+  "rea_receipts": "r1/docs/reference/iqs-port-rea-bytes.json",
+  "rea_bytes_match_pinned_stock": true,
+  "contract": {
+    "inputs": "address, register, buffer, length, option",
+    "forwarded": "full register, buffer and length words to canonical touch request functions",
+    "ignored": "address and stack-passed option, as stock",
+    "widths": "request providers retain their own 16-bit register/length conversion",
+    "result": "underlying provider bool, including registry null/missing-method failures",
+    "retained_state": "same request and bus owners; command/other fields retained across calls"
+  },
+  "limits": [
+    "Primary tests execute actual C transport with modeled registry entry boundaries. Deeper tests execute actual registry and prepared vtables.",
+    "Factory integration executes the C dispatcher/control adapters, new port, touch transport, bus adapters and registry, with modeled controller callbacks.",
+    "Data pointer aliases into the retained request are covered; arbitrary pointer faults and real data transfer are outside the proof.",
+    "Private frames, caller-clobbered scratch registers and timing are excluded; public result, guards, callee-saved registers and interrupt masks are checked.",
+    "The old write-port frontier size of 52 included the following IRQ_Context body; its bounded port instruction span is corrected to 16.",
+    "No physical I2C/touch, final application link or boot proof; byte identity is not required by current user instruction."
+  ],
+  "evidence_files": {
+    "build/sources-goal-r1-iqs-port-c/report.json": "66a7be69b7cb725bac61f04a63b6c1d77c7266030abda6fb3095c43b0e9c6134",
+    "r1/src/sources.json": "1c1238d4f29cf9d5c7bd3a09a121d75aa2a3e45589e30c7778113b4a3dcba218",
+    "r1/src/application/board/native_touch_transport.c": "9c20ee22aed4662062f317cf5987664c88758cab7733dbf2b61c6248244ec7c7",
+    "r1/src/application/board/native_touch_transport.h": "99848d99d45c8f03aa0399330cb5459880be955483996776c724b9b6d60675f5",
+    "r1/src/application/runtime/native_touch_dispatch.c": "6b3afa3649609bfa6e4b1bb7a9265979968e530ef18a4a914f9b12a01d5be2af",
+    "build/goal-r1-iqs-port-c/verify.py": "e1cfd6557ccdd4c9b646102d5c189fe4e8cac4ef31724f3eaa51aff6f2600dc5",
+    "build/goal-r1-iqs-port-c/verification.json": "67c94f2187da708f41aac62a8f66a1eb50c8a8cece961a7f794ead88f3097cf9",
+    "build/goal-r1-iqs-port-c/integration.json": "2b7b982ba98457136458733b883918eff99def8444f8c2a00c99bb15d9332c6a",
+    "build/goal-r1-iqs-port-c/factory.py": "804a04dfc818c1c39fdec0c5e76ac63bb1f3adedd389fc93e180ebc715ec7ba1",
+    "build/goal-r1-iqs-port-c/factory-integration/integration.json": "2ade5598b8f23e4f13d16ec0e902126df01762823f5cb7eddd8564c19cc9d4fb",
+    "build/goal-r1-iqs-port-c/section-audit.py": "2c32ad03a321718e1ab153419a2b0cf55f1c61044d4f08358ccf9f1c89c81f3a",
+    "build/goal-r1-iqs-port-c/section-audit.json": "c34648653e51d5423febea2b4b4426d69b0b1dfef3014a0cbefb312ae2ec99bb",
+    "build/goal-r1-iqs-port-c/mutants.py": "97d921d97d9b19ac4ef7d849d86f37c65ea3af8197b62ca8ce28a2d8809a714b",
+    "build/goal-r1-iqs-port-c/mutants.json": "8ae65a56ec63f0326b203c87ab9cc7ff36a0f1091f1edec31a6e962136ffca89",
+    "r1/docs/reference/iqs-port-rea-bytes.json": "c45188eb15fb6f04148a309ba4c0e711ec6382156b71dfc3627b950475d3de36",
+    "build/goal-r1-iqs-port-c/sources-check.log": "a5cc254cf03002e0f576721c5db862dc5aa54852d8aa8857e8764ded0f2ac3bc"
+  }
+}

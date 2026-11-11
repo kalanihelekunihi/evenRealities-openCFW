@@ -20,3 +20,5 @@ uint32_t xEventGroupClearBits(void *event_group, uint32_t bits)
     case_exit_critical();
     return before;
 }
+/* Dedup (0x0800c44c): case_policy_event_receive (was startup/application_policy_event_query_candidate.c). */
+uint32_t case_policy_event_receive(uint32_t event,uint32_t mask) __attribute__((alias("xEventGroupClearBits")));

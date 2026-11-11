@@ -35,20 +35,31 @@ uint32_t r1_native_watchdog_expired_task(void)
     if (!record || !(record->flags&1u) || !record->task) return 0;
     return (uint32_t)(uintptr_t)record->task;
 }
-void r1_native_watchdog_check(void)
+/* The registered sample operation writes a complete uint32_t tick count.
+ * Initialize the C scratch word deterministically; the void C operation has
+ * no scratch-register return. BASEPRI still needs its architectural write. */
+__attribute__((noinline)) void r1_native_watchdog_check(void)
 {
-    if (!r1_native_watchdog_enabled) return;
-    r1_native_watchdog_lock();
-    uint32_t now;r1_native_watchdog_registry.port->sample(1,&now);
-    struct r1_native_list *list=&r1_native_watchdog_registry.list;
-    for (struct r1_native_watchdog_record *record=r1_native_list_head(list);record;record=r1_native_list_next(list,record)) {
-        if (!(record->flags&2u) && now-record->timestamp>=record->interval) {
-            record->flags|=1u;
-            __asm__ volatile ("msr basepri, %0" :: "r"(UINT32_C(64)) : "memory");
-            r1_native_watchdog_fault_record=record;
-            *(volatile uint32_t *)(uintptr_t)UINT32_MAX=0;
-            for (;;) {}
+    volatile struct {uint32_t now;struct r1_native_list *list;} frame;
+    _Static_assert(sizeof(frame)==8,"native watchdog C frame locals");
+    frame.now=0;
+    if (r1_native_watchdog_enabled) {
+        r1_native_watchdog_lock();
+        r1_native_watchdog_registry.port->sample(1,(uint32_t *)(uintptr_t)&frame.now);
+        frame.list=&r1_native_watchdog_registry.list;
+        for (struct r1_native_watchdog_record *record=r1_native_list_head(frame.list);record;record=r1_native_list_next(frame.list,record)) {
+            volatile struct r1_native_watchdog_record *live=record;
+            if (!(*(volatile uint8_t *)&live->flags&2u)) {
+                uint32_t timestamp=live->timestamp,interval=live->interval,current=frame.now;
+                if (current-timestamp>=interval) {
+                    live->flags|=1u;
+                    __builtin_arm_wsr("basepri",UINT32_C(64));
+                    r1_native_watchdog_fault_record=record;
+                    *(volatile uint32_t *)(uintptr_t)UINT32_MAX=0;
+                    for (;;) {}
+                }
+            }
         }
+        r1_native_watchdog_unlock();
     }
-    r1_native_watchdog_unlock();
 }

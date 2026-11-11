@@ -32,3 +32,11 @@ int32_t g2_log_vformat(char *destination,uint32_t capacity,
     if(out.cursor) *out.cursor=0;
     return result<0?result:(int32_t)out.written;
 }
+
+/* Single implementation of stock vsnprintf 0x44b76c. The former bounded /
+ * subset re-implementations (extended-log common, smp and bounded-adapter
+ * candidates) are aliases of this full formatter; their four-word interfaces
+ * are ABI-identical (r0..r3, 32-bit va_list cursor). */
+__typeof__(g2_log_vformat) g2_log_vformat_bounded_candidate __attribute__((alias("g2_log_vformat")));
+__typeof__(g2_log_vformat) g2_log_candidate_common_format __attribute__((alias("g2_log_vformat")));
+__typeof__(g2_log_vformat) g2_log_candidate_smp_format __attribute__((alias("g2_log_vformat")));

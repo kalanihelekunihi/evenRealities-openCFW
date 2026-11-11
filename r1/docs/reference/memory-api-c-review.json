@@ -1,0 +1,187 @@
+{
+  "normal_report": "build/sources-goal-r1-memory-api-c/report.json",
+  "report_sha256": "48f8d3aee7e3f196fc12ff8cc41c753966cb9776618cc37a214f5d2ae224bc39",
+  "units": [
+    {
+      "source": "r1/src/application/runtime/native_libc_sequences.c",
+      "payload": "r1-application",
+      "role": "candidate",
+      "toolchain": "clang",
+      "link": true,
+      "expect": "compile",
+      "returncode": 0,
+      "argv": [
+        "/usr/bin/clang",
+        "--target=arm-none-eabi",
+        "-mcpu=cortex-m4",
+        "-mthumb",
+        "-munaligned-access",
+        "-mfpu=fpv4-sp-d16",
+        "-mfloat-abi=hard",
+        "-std=c11",
+        "-Os",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-fshort-enums",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-fno-delete-null-pointer-checks",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/r1/src/vendor",
+        "-isystem",
+        "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
+        "-MD",
+        "-MF",
+        "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-memory-api-c/r1/r1-application/r1__src__application__runtime__native_libc_sequences.c.d",
+        "-c",
+        "/Users/kalani/Repo/evenRealities-openCFW/r1/src/application/runtime/native_libc_sequences.c",
+        "-o",
+        "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-memory-api-c/r1/r1-application/r1__src__application__runtime__native_libc_sequences.c.o"
+      ],
+      "source_sha256": "0ee79c9722c3cb2335b3f58dc3626222964ec778e180599cb5b61a7592cb4616",
+      "object_sha256": "2fa5d68f6c28c7cf3794a6ae812d0915989de9c48c79b9f841a2029aa3024091",
+      "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-memory-api-c/r1/r1-application/r1__src__application__runtime__native_libc_sequences.c.o",
+      "strong": [
+        "r1_native_memcmp",
+        "r1_native_qsort",
+        "r1_native_strcat",
+        "r1_native_strncpy",
+        "r1_native_strtok"
+      ],
+      "weak": [],
+      "undefined": []
+    },
+    {
+      "source": "r1/src/application/runtime/native_memory_api.c",
+      "payload": "r1-application",
+      "role": "candidate",
+      "toolchain": "gcc9",
+      "link": true,
+      "expect": "compile",
+      "returncode": 0,
+      "argv": [
+        "/opt/homebrew/bin/python3",
+        "/Users/kalani/Repo/evenRealities-openCFW/tools/build/linux_gcc.py",
+        "--compiler",
+        "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/bin/arm-none-eabi-gcc",
+        "--read-root",
+        "/Users/kalani/Repo/evenRealities-openCFW/r1",
+        "--read-root",
+        "/Users/kalani/Repo/evenRealities-openCFW/third-party/upstream",
+        "--read-root",
+        "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1",
+        "--read-root",
+        "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-memory-api-c/generated/r1",
+        "--",
+        "-mcpu=cortex-m4",
+        "-mthumb",
+        "-munaligned-access",
+        "-mfpu=fpv4-sp-d16",
+        "-mfloat-abi=hard",
+        "-std=c11",
+        "-Os",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-fshort-enums",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-fno-delete-null-pointer-checks",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/r1/src/vendor",
+        "-isystem",
+        "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
+        "-fno-strict-aliasing",
+        "-ffp-contract=off",
+        "-fsignaling-nans",
+        "-frounding-math",
+        "-ftrapping-math",
+        "-fno-if-conversion",
+        "-fno-if-conversion2",
+        "-MD",
+        "-MF",
+        "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-memory-api-c/r1/r1-application/r1__src__application__runtime__native_memory_api.c.d",
+        "-c",
+        "/Users/kalani/Repo/evenRealities-openCFW/r1/src/application/runtime/native_memory_api.c",
+        "-o",
+        "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-memory-api-c/r1/r1-application/r1__src__application__runtime__native_memory_api.c.o"
+      ],
+      "source_sha256": "c4caccaae0f2cfc818278259f46c4fa7334d7d463e59648246c5c9f4296c3554",
+      "object_sha256": "a30b49dc9f6e9bbda3bd03795eeecd81a098c06df8047155f60eec49478af0c1",
+      "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-memory-api-c/r1/r1-application/r1__src__application__runtime__native_memory_api.c.o",
+      "strong": [
+        "memchr",
+        "memcmp",
+        "strncpy"
+      ],
+      "weak": [],
+      "undefined": [
+        "r1_native_memcmp",
+        "r1_native_strncpy"
+      ]
+    }
+  ],
+  "direct": {
+    "counts": {
+      "memcmp": 554,
+      "strncpy": 681,
+      "memchr": 1234
+    },
+    "total": 2469,
+    "digest": "ec0744adebf96f6248341800651d0aae07583fd5052a658fc9ea5158d8c6db74",
+    "source_only_link": true,
+    "stock_comparison_for": [
+      "memcmp",
+      "strncpy"
+    ],
+    "memchr_reference": "independent byte-search oracle",
+    "elf_sha256": "ebc954782d10bdecb0e38979be3f44190dc6cfae48dc05e309a13e75afbb2e93"
+  },
+  "negative": {
+    "boolean-comparison": {
+      "rejected": true,
+      "diagnostic": "Traceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-memory-api-c/verify.py\", line 29, in <module>\n    v.mem_write(A+0xc00+align,data);v.mem_write(B+0xc00+align,bytes(other));expected=next((x-y for x,y in zip(data,other) if x!=y),0)&0xffffffff;record('memcmp',[A+0xc00+align,B+0xc00+align,n],expected,0x2781a)\n                                                                                                                                                 ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-memory-api-c/verify.py\", line 22, in record\n    result=call(name,args);assert result==expected,(name,args,result,expected)\n                                  ^^^^^^^^^^^^^^^^\nAssertionError: ('memcmp', [536873984, 536882176, 1], 1, 45)\n"
+    },
+    "short-copy": {
+      "rejected": true,
+      "diagnostic": "Traceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-memory-api-c/verify.py\", line 33, in <module>\n    v.mem_write(A+0xc00+align,bytes(data));dest=B+0xc00+align;v.mem_write(dest-4,b'\\xa5'*(n+8));expected=bytes(data[:n]);pos=expected.find(b'\\0');expected=expected if pos<0 else expected[:pos]+bytes(n-pos);record('strncpy',[dest,A+0xc00+align,n],dest);assert bytes(v.mem_read(dest-4,n+8))==b'\\xa5'*4+expected+b'\\xa5'*4\n                                                                                                                                                                                                                                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    "wrong-search-pointer": {
+      "rejected": true,
+      "diagnostic": "Traceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-memory-api-c/verify.py\", line 37, in <module>\n    data=bytes(rng.randrange(256) for _ in range(n));v.mem_write(A+0xc00+align,data);at=data.find(bytes([wanted&255]));record('memchr',[A+0xc00+align,wanted,n],0 if at<0 else A+0xc00+align+at)\n                                                                                                                       ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-memory-api-c/verify.py\", line 22, in record\n    result=call(name,args);assert result==expected,(name,args,result,expected)\n                                  ^^^^^^^^^^^^^^^^\nAssertionError: ('memchr', [536873988, 0, 2], 536873990, 536873989)\n"
+    },
+    "unconverted-needle": {
+      "rejected": true,
+      "diagnostic": "Traceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-memory-api-c/verify.py\", line 37, in <module>\n    data=bytes(rng.randrange(256) for _ in range(n));v.mem_write(A+0xc00+align,data);at=data.find(bytes([wanted&255]));record('memchr',[A+0xc00+align,wanted,n],0 if at<0 else A+0xc00+align+at)\n                                                                                                                       ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-memory-api-c/verify.py\", line 22, in record\n    result=call(name,args);assert result==expected,(name,args,result,expected)\n                                  ^^^^^^^^^^^^^^^^\nAssertionError: ('memchr', [536873991, 256, 7], 0, 536873996)\n"
+    }
+  },
+  "audit": {
+    "added": [
+      "r1/src/application/runtime/native_memory_api.c"
+    ],
+    "unchanged_objects": 727
+  },
+  "resolved_imports": [
+    "memchr",
+    "memcmp",
+    "strncpy"
+  ],
+  "rea": [
+    {
+      "path": "build/goal-r1-memory-api-c/rea-0x277d8.json",
+      "sha256": "f8121fdb804777f954f877f9a9a95aaf2fa3adb3842e8a5e21c59292123a92dd"
+    },
+    {
+      "path": "build/goal-r1-memory-api-c/rea-0x2781a.json",
+      "sha256": "9043455d9f99e05de5d5ce4a7662544c95d4ab115894f8a250b3324883773c79"
+    }
+  ],
+  "limits": [
+    "C standard API conformance checks plus locked-stock comparison/copy replay; no stock memchr identity claim",
+    "Subset ELF links without native/provider bindings or unresolved symbols",
+    "No complete BLE/device runtime or firmware image proof"
+  ]
+}

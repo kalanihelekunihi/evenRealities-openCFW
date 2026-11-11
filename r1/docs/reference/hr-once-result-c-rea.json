@@ -1,0 +1,20 @@
+{
+  "normalized_result": {
+    "address": "0x49a40",
+    "requested_bytes": 56,
+    "returned_bytes": 56,
+    "bytes_hex": "2046fff7cdff002578b102f0f3fd60b10095019520788df8000041f0a3f9019008226946062043f049ff31461ca040f04bf81c4805607cbd",
+    "complete": true
+  },
+  "evidence_id": "ev_86d83c1181cf4352a996ce1c295f02b1c9338ae438e3acebe7c2e7f9b066fec8",
+  "limitations": [
+    "The session serves operations only after Ghidra reports default auto-analysis complete; incomplete analysis does not expose partial results.",
+    "The imported Program and temporary project are ephemeral and deleted on close. Annotation operations edit session database metadata; original executable bytes are never written.",
+    "Cancelling an active Ghidra request terminates its ephemeral database and discards session annotations. The selected target remains open; the next provider query imports the original artifact again.",
+    "Default-space addresses use lowercase 0x-prefixed hexadecimal; other address spaces use <percent-encoded-space>:0x<hex>.",
+    "Bytes reflect Ghidra's initialized memory, including loader fixups. Reads stop at an unmapped or uninitialized byte and report completeness explicitly.",
+    "macOS sessions require a matching executable Ghidra native decompiler; REA checks for it but does not build native components or change Gatekeeper quarantine state."
+  ],
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "raw_artifact_match": true
+}

@@ -1,0 +1,249 @@
+{
+  "schema_version": 1,
+  "scope": "Native SpO2 channel assembly and parity helpers in C",
+  "acceptance_target": "Hardware-first license-free C firmware; byte identity waived",
+  "report": "build/sources-goal-r1-goodix-spo2-assemble-c/report.json",
+  "comparison_report": "build/sources-goal-r1-goodix-spo2-packet-layout-c/report.json",
+  "stock_entries": [
+    {
+      "symbol": "r1_goodix_spo2_assemble",
+      "entry": "0x61da4",
+      "instruction_bytes": 334
+    },
+    {
+      "symbol": "r1_goodix_spo2_integrity_check",
+      "entry": "0x28e5c",
+      "instruction_bytes": 20
+    },
+    {
+      "symbol": "r1_goodix_spo2_integrity_encode",
+      "entry": "0x28e70",
+      "instruction_bytes": 54
+    }
+  ],
+  "audit": {
+    "compiled_units": 902,
+    "application_imports": 91,
+    "bootloader_imports": 22,
+    "unchanged_prior_nongenerated_sources_and_objects": 891,
+    "tested_object_equals_normal_build": true,
+    "new_owned_state_bytes": 0,
+    "new_native_instruction_bytes": 408,
+    "paired_cases": 10559,
+    "compiled_defects_rejected": 12,
+    "removed_imports": [
+      "r1_goodix_spo2_assemble"
+    ],
+    "added_imports": [
+      "r1_goodix_spo2_decode"
+    ],
+    "native_assembler_and_parity_C": true,
+    "canonical_version_qualifier_reused": true,
+    "decoder_unfinished": true,
+    "source_plan_and_cache_layout_unchanged": true
+  },
+  "direct": {
+    "paired_cases": 8712,
+    "native_instruction_bytes_executed": [
+      334,
+      20,
+      54
+    ],
+    "source_object_sha256": "2c880ae46ce6f24917b0feb861a2187908e89ce8efbc58ada54eaf90590a901d",
+    "actual_C_native_version_integrity_helpers": true,
+    "decoder_modeled": true,
+    "independent_parity_and_packing_oracles": true,
+    "live_enable_PPG_aliasing_checked": true,
+    "full_public_RAM_boundary_hashes_and_final_bytes_match": true,
+    "FPSCR_saved_registers_stack_and_masks_match": true,
+    "source_cannot_execute_stock": true
+  },
+  "core_integration": {
+    "assembler_native_instruction_bytes_executed": [
+      334,
+      20,
+      54
+    ],
+    "assembler_source_object_sha256": "2c880ae46ce6f24917b0feb861a2187908e89ce8efbc58ada54eaf90590a901d",
+    "actual_native_C_assembler_and_integrity_helpers": true,
+    "decoder_and_remaining_stages_and_allocator_modeled": true,
+    "paired_cases": 1847,
+    "native_instruction_bytes_executed": 682,
+    "source_object_sha256": "0d1e2ddeeefd0ad393d0933a15bf7185e395422378e50e2c584b449fa1cff367",
+    "processing_stages_and_allocator_modeled": true,
+    "independent_call_order_status_packet_and_allocation_oracles": true,
+    "actual_native_C_polynomial": true,
+    "full_FPSCR_and_public_RAM_snapshots_match": true,
+    "source_cannot_execute_stock": true
+  },
+  "compiled_defects_rejected": [
+    {
+      "name": "parity-mask",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "keep-high-bits",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "skip-invalid-sample",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "skip-zero-capacity-integrity",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "mask-bit-order",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "capacity-off-by-one",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "all-groups-count",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "reset-output-count",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "sequence",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "third-metadata",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "decode-stride",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "cached-channel-count",
+      "compiled": true,
+      "rejected": true
+    }
+  ],
+  "unfinished_decoder": {
+    "symbol": "r1_goodix_spo2_decode",
+    "entry": "0x335b4"
+  },
+  "contract": [
+    "Reuse canonical version qualifier with NULL; it returns1 and enables the byte-wise integrity pass. Cache the first channel count and inspect3*count enable bytes. Reload the live enable/PPG pointers. A parity mismatch stores00800000 into that raw word, immediately affecting later reads when the enable prefix overlaps PPG.",
+    "Integrity encoder selects one of four pinned32-bit masks using input bits1..2, XORs the low24-bit input shifted right1 with that mask, computes parity and replaces only bit0. Preserve all other31 bits, including the high byte. Checked-difference helper returns0/1.",
+    "Store sequence-1 with32-bit wrap and copy three metadata words in order. Cache a fresh channel count after metadata writes. Select each of three groups with MSB-first packed bits; check the live capacity and output buffer before every decode call.",
+    "Decoded slots use output_buffer+records*24+group*8. Only a selected third group increments the byte-sized local count and the preexisting output count byte, even if capacity suppressed decoding. Both wrap8 bits. Compare the final local count against the live full32-bit expected count.",
+    "Direct replay includes disjoint and enable/PPG-aliased inputs, capacities0 throughffffffff, initial count255, channel count255 and decoder callback mutations. Independent Python popcount and packing oracles check resulting data and call sequence. Core integration executes actual native/C core, assembler, parity helpers, qualifier and polynomial."
+  ],
+  "limits": [
+    "The numeric decoder, remaining processing stages and core allocator/clear ports are modeled. The real direct qualifier and parity bodies execute. Core integration does not establish a complete SpO2 engine, actual allocator lifecycle, physical sampling, concurrency or final startup/placement.",
+    "10559 comparisons comprise8712 direct and1847 core-integrated cases; many direct cases target only one parity helper. Both fixtures execute all408 new native instruction bytes, and integrated cases also execute all682 core bytes. Boundary RAM is compared by SHA256 in the direct decoder fixture and byte snapshots in core integration; final public RAM bytes agree in both.",
+    "Arbitrary private-pointer aliases, unmapped input faults, backend failures inside the numeric decoder and physical interrupt timing remain unverified. Newly read parity masks are fixed algorithm data, not executable blobs.",
+    "902 units compile/compose without failures or duplicate strong symbols;891 prior nongenerated source/object pairs and source-plan/cache files remain unchanged. Aggregate assembler import is replaced by an explicit decoder import, leaving91 application/22 boot imports. Relocatable composition is not a bootable image."
+  ],
+  "evidence_files": {
+    "build/sources-goal-r1-goodix-spo2-assemble-c/report.json": "4811dfe9ca1624328869edfec45087ee4fc2a31c937ed056bf1084834f53b1af",
+    "build/sources-goal-r1-goodix-spo2-packet-layout-c/report.json": "074755ef7157c7c5625031f3586b1589f1d3746bef42b443d0c1594eee03b74e",
+    "r1/src/application/goodix/native_spo2_assemble.c": "9bde6b09747ac21892af866228595b63d6e54b98bd0df9bc360fb879878ca18a",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-spo2-assemble-c/r1/r1-application/r1__src__application__goodix__native_spo2_assemble.c.o": "2c880ae46ce6f24917b0feb861a2187908e89ce8efbc58ada54eaf90590a901d",
+    "r1/src/sources.json": "615fc2a757f9dc4a501dde4140ba6cda08394bd66bea79c7541c46582e5eb646",
+    "tools/build/source-plan.json": "eeb516e31b3310fb0718f36908977f8125723f7c5e0e86cd6744395826259a4d",
+    "r1/src/config/runtime/native_health_cache.ld": "eb8f131c489cd818d4e36718718fa1989719ca0170f164541a1a5bf56dfc1ec3",
+    "r1/docs/reference/FUNCTION-OWNERSHIP.csv": "1abca1eaa1b1db76db4af2ecd6ecdff103ddecacaca8eab3ac10883ec8b25bc4",
+    "r1/symbols/function-frontier.csv": "da00b78a854c49a59a3550cc88f7995cd35a1c70f7abc0b2a517f8df24c9d3e0",
+    "r1/docs/reference/goodix-spo2-calculate-c-review.md": "1589e86c0411c07dc08e2b8f76f92f86bb5653e0bff38edf7634904ea01d170c",
+    "r1/docs/reference/goodix-spo2-packet-layout-c-review.md": "835b8370f18ad995a0fad733ac44aa5c40a986978dd0e6ec1ec6b581c1c1caf4",
+    "r1/docs/reference/goodix-spo2-execute-c-review.md": "4829335aed38a6d91ca555f22e16c341440ab5c0cf42c14fa2a76f44b060dbd1",
+    "build/goal-r1-goodix-spo2-packet-layout-c/rea-assembler-analysis.json": "c08b10be34ed517c4241bc74ad2ae3c5ba92c0ec027a583ac486e62c63b831a3",
+    "build/goal-r1-goodix-spo2-packet-layout-c/rea-assembler-dependencies.json": "96b94b486f453e6b539faf2126400cc0b04f8eb4a6a78b9537421d85e0bc4aaa",
+    "build/goal-r1-goodix-spo2-calculate-c/verify.py": "2a2a32f968de9a6559a3ffc764b726a40b8320e2b22ee40635b0d382ce01ec25",
+    "r1/src/application/goodix/native_algorithm_version.c": "ed915ecacce415d7fcbfd606f483034413767062e4b26043fb9a38727611c499",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-spo2-assemble-c/r1/r1-application/r1__src__application__goodix__native_algorithm_version.c.o": "12b8b262fdab4e52dc5cfeeded44302509048a0f999c8ad9798e0715ae17675a",
+    "r1/src/application/goodix/native_spo2_execute.c": "d96cdeacee0d801f5b71c7e9624a37aa7d1b9df7013679dd5237e2a650f5e26b",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-spo2-assemble-c/r1/r1-application/r1__src__application__goodix__native_spo2_execute.c.o": "84b4dcfe37930f518f0fac2e831761a54abdb458f3057ded4fc994435dd6444a",
+    "r1/src/application/goodix/native_spo2_math.c": "ffee2e1ee1d93a3c3d3b2b7ee68e52b572a9df88a5c5e1dc5058c3221be990b9",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-spo2-assemble-c/r1/r1-application/r1__src__application__goodix__native_spo2_math.c.o": "265990bd7f6c22c801d820280faeccc977bbacff30e719a4ad3f08414b33dfc5",
+    "r1/src/application/goodix/native_spo2_calculate.c": "91c85a7620b5a78a5954247ff0af4df5f4e82ceb472a6d81402951cadb8977e0",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-spo2-assemble-c/r1/r1-application/r1__src__application__goodix__native_spo2_calculate.c.o": "0d1e2ddeeefd0ad393d0933a15bf7185e395422378e50e2c584b449fa1cff367",
+    "build/goal-r1-goodix-spo2-assemble-c/integration-coverage.json": "c15d419d6ee6b8738a3d4349e4148978a2144d992b24e6a7a5c36dfcba68fef3",
+    "build/goal-r1-goodix-spo2-assemble-c/negative-mask-bit-order.o": "dad6a77ae4aad9275b7761175689d35e831f78b976539fdbd0e696934fde7343",
+    "build/goal-r1-goodix-spo2-assemble-c/negative-skip-zero-capacity-integrity.c": "00c39c3ac69d2a28c1839e2a2ec44634717429afcc2e4f9dfd07592b2a6681f5",
+    "build/goal-r1-goodix-spo2-assemble-c/rea-0.json": "64c4b99d32519b4c4995b0256ead8c32f8bcdc0cbb858391caa1025c03beca2c",
+    "build/goal-r1-goodix-spo2-assemble-c/negative-parity-mask.log": "e8b57308c79ffd91bf7ed20a9b8d2079eaf6dbf8dc7f56c7728ce613995e7dee",
+    "build/goal-r1-goodix-spo2-assemble-c/audit.json": "b63c48ac2272572e39a273631814e7bf970d667196d94e2e00381d04411b6f2a",
+    "build/goal-r1-goodix-spo2-assemble-c/negative-capacity-off-by-one.log": "52f3d464be7c0e96564a3384c3b8a6fc36ea5ddabf722962d12a2207453cb778",
+    "build/goal-r1-goodix-spo2-assemble-c/candidate.d": "e638e3eaf76adfed3f1c301c5c698a54060e0cd82a8c06e741d2703575e106fa",
+    "build/goal-r1-goodix-spo2-assemble-c/candidate.c": "9bde6b09747ac21892af866228595b63d6e54b98bd0df9bc360fb879878ca18a",
+    "build/goal-r1-goodix-spo2-assemble-c/verify.log": "5050e44796f313af46d20db53e512f4871541270072b7d4bd23c16c70e0c4a38",
+    "build/goal-r1-goodix-spo2-assemble-c/rea-1.json": "21418bdec2bc3613d0659bef606b306f94a8dc69e5a58f97ab37c5957291af6c",
+    "build/goal-r1-goodix-spo2-assemble-c/negative-decode-stride.log": "52f3d464be7c0e96564a3384c3b8a6fc36ea5ddabf722962d12a2207453cb778",
+    "build/goal-r1-goodix-spo2-assemble-c/test.ld": "b2ff9ac27a31674636716d033098cceafafc2f782e6660e4dd431dc3e9dc449d",
+    "build/goal-r1-goodix-spo2-assemble-c/audit.py": "de140c92cb804b9637986140329ba7bc9304cd4265add01cd3d5d69e28571c4c",
+    "build/goal-r1-goodix-spo2-assemble-c/integration.elf": "6957f738c40cf01c682e1c5362bd326add4bdcba4c629a897f21b628fed976ad",
+    "build/goal-r1-goodix-spo2-assemble-c/rea-parity-masks.json": "888d887114f4b12d4901dd574187a41ce25e37b4dfe1d3aa5c27e636e87d7ac9",
+    "build/goal-r1-goodix-spo2-assemble-c/negative-all-groups-count.log": "d8d76a035e6632a7d363a00f846e5f78639b7aa2db8d9b9da175f4c3d7225373",
+    "build/goal-r1-goodix-spo2-assemble-c/negative-reset-output-count.c": "54443776a37a5f9f919b64169375263b5dabc559cf1e3d26466579bfbf2940e2",
+    "build/goal-r1-goodix-spo2-assemble-c/negative-keep-high-bits.log": "e8b57308c79ffd91bf7ed20a9b8d2079eaf6dbf8dc7f56c7728ce613995e7dee",
+    "build/goal-r1-goodix-spo2-assemble-c/source.elf": "6ae5af68f09a491796ad227d216492e180f3e4c85a502af50a42c5bf236634c7",
+    "build/goal-r1-goodix-spo2-assemble-c/negative.py": "217af44a84633fcbc432f7cf108467ebc70c624aa3cafecab51be59949c7862f",
+    "build/goal-r1-goodix-spo2-assemble-c/negative-parity-mask.o": "5993fb92b133d92d005c59ccc7b4a1405b209eb3b1439b62bd372b638c394abf",
+    "build/goal-r1-goodix-spo2-assemble-c/production-compile-argv.json": "2932a34917a3617143c5ed9bba9bb41fd5df183a64a275ad04b0b3cb5a1f8a03",
+    "build/goal-r1-goodix-spo2-assemble-c/integration-results.json": "6cb945c1cfb5d710c196be809bd1f04844fff6ee8dc1b7c093032dd9faad59c6",
+    "build/goal-r1-goodix-spo2-assemble-c/negative-skip-invalid-sample.c": "3c52ba47368f724da79991f85d24011dae1b43f73897e4e1b430272c5ec5064b",
+    "build/goal-r1-goodix-spo2-assemble-c/negative.log": "6e9f04205087c9320fde038b9c9b77053b11276373f8b65e3f7136baeb87121e",
+    "build/goal-r1-goodix-spo2-assemble-c/negative-results.json": "08eeca7ed4c88de84938cae947a4c04958f5d8f20d8364198cd713758a7fac85",
+    "build/goal-r1-goodix-spo2-assemble-c/source.o": "2c880ae46ce6f24917b0feb861a2187908e89ce8efbc58ada54eaf90590a901d",
+    "build/goal-r1-goodix-spo2-assemble-c/results.json": "decc2aa8d05dc57e3e5e06540810514d8fc28cb07f3744367f62a990c88f321c",
+    "build/goal-r1-goodix-spo2-assemble-c/negative-capacity-off-by-one.o": "61ee5c094a7826643fe3b98942e73260939cdd99774b5714c2415334d0226126",
+    "build/goal-r1-goodix-spo2-assemble-c/negative-all-groups-count.o": "136f8635dd73019e4ca5438701012c8dc33afda104476e9be360eb495dac02e8",
+    "build/goal-r1-goodix-spo2-assemble-c/rea-parity-literal.json": "93fe79bb916bbde77c26a8209b507646be73512db566c046cf11cccd86e2e9e3",
+    "build/goal-r1-goodix-spo2-assemble-c/negative-decode-stride.o": "e1c9b0d646261d8064da0a55f6e71e1456257bfef25b1686068bec22c12108a3",
+    "build/goal-r1-goodix-spo2-assemble-c/negative-third-metadata.o": "f7d9ed44ee6104f5884dbf9654fd2c6582e564233c1171f06e122da91d69979c",
+    "build/goal-r1-goodix-spo2-assemble-c/make-integration.py": "d5d9a0b89d7a7b72e82cb8851ed51533270993ce4bac3df0479ebab049525a33",
+    "build/goal-r1-goodix-spo2-assemble-c/negative-sequence.o": "a23ebbd5c98811b92bbd86f155c9b1c19d5e1302ed7c20d83c75d0f864349459",
+    "build/goal-r1-goodix-spo2-assemble-c/negative-cached-channel-count.o": "93bb02352988c065a4455f835e174140d50ef966d85a2e735928da3896029119",
+    "build/goal-r1-goodix-spo2-assemble-c/negative-keep-high-bits.o": "25903053e0992844fd89d5ea75e5f86ce699205e14a933b6e2678b9b9d606c13",
+    "build/goal-r1-goodix-spo2-assemble-c/integration.log": "9b5c55eacd20f9ff9e8ba1dbcaffbeee2083a0784240dcfc52a0400e6cef8e40",
+    "build/goal-r1-goodix-spo2-assemble-c/negative-skip-zero-capacity-integrity.log": "e8b57308c79ffd91bf7ed20a9b8d2079eaf6dbf8dc7f56c7728ce613995e7dee",
+    "build/goal-r1-goodix-spo2-assemble-c/integration.py": "03988a1e59ec5682384a3b2b68bf3701f491171705931d0dd9f133e9a5093102",
+    "build/goal-r1-goodix-spo2-assemble-c/compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/goal-r1-goodix-spo2-assemble-c/negative-skip-zero-capacity-integrity.o": "2ae882a856a74fc95405a2d4554ab0a7f9f257ec4a7d1afb68f1800151388167",
+    "build/goal-r1-goodix-spo2-assemble-c/negative-sequence.log": "3754305dd89dcde40ed9a2a1dc9e7cde30fe4a41da69abc5a9c49c67bec52273",
+    "build/goal-r1-goodix-spo2-assemble-c/negative-mask-bit-order.c": "5c028b9cb5020035a75b63e09f868bbf6e852a432f88c08ce951c1463219aace",
+    "build/goal-r1-goodix-spo2-assemble-c/negative-mask-bit-order.log": "d8d76a035e6632a7d363a00f846e5f78639b7aa2db8d9b9da175f4c3d7225373",
+    "build/goal-r1-goodix-spo2-assemble-c/negative-reset-output-count.log": "d8d76a035e6632a7d363a00f846e5f78639b7aa2db8d9b9da175f4c3d7225373",
+    "build/goal-r1-goodix-spo2-assemble-c/negative-reset-output-count.o": "73c162a474f8b87ad712d72d1651fa0ca9b6d0e026880a5c94ecae04aae4d140",
+    "build/goal-r1-goodix-spo2-assemble-c/negative-cached-channel-count.log": "db589c4939be33e5da0a30ccc8abb34d62401a26b362dc9acd35436b6b74c2ae",
+    "build/goal-r1-goodix-spo2-assemble-c/record.py": "73ded0393c601e4a9b762b748d4c4b8951ff5ab1a1750db3b84d22040999b89a",
+    "build/goal-r1-goodix-spo2-assemble-c/compile-argv.json": "32b8d420c2e2149cb100a39d832814b14cc8d18c33903e4128e280af2a04e334",
+    "build/goal-r1-goodix-spo2-assemble-c/manifest-before.json": "230f81002e95cafdd38a6eac0b38b5f2f9bd3c41dde75e20cd8ecd4a81ad289a",
+    "build/goal-r1-goodix-spo2-assemble-c/negative-capacity-off-by-one.c": "9e76494b9beeffd3fc12dffdf88b5d341f93bd50409fc73f3577073ceaf18bfc",
+    "build/goal-r1-goodix-spo2-assemble-c/negative-all-groups-count.c": "d6ea268f6037528717186c872980d7b3e31ff8ef772cb770e0c1a67622ec0148",
+    "build/goal-r1-goodix-spo2-assemble-c/negative-skip-invalid-sample.log": "e8b57308c79ffd91bf7ed20a9b8d2079eaf6dbf8dc7f56c7728ce613995e7dee",
+    "build/goal-r1-goodix-spo2-assemble-c/verify.py": "2588729b9313ea1c561f490dc679aa3c96f593d7a15c95fe6847b02ede5ab914",
+    "build/goal-r1-goodix-spo2-assemble-c/negative-parity-mask.c": "4e05fd45fb5d79921c8da480b4ab543594492acf7138ee03bb52861c047c0853",
+    "build/goal-r1-goodix-spo2-assemble-c/negative-third-metadata.log": "51963d3c64754f5bf58611671c346e2018d1363c988eca0d734e99830766c85d",
+    "build/goal-r1-goodix-spo2-assemble-c/negative-skip-invalid-sample.o": "7436878317b39f4be25b7059dadb301b6bd3f20e23147fa8af0cfc0247f142d6",
+    "build/goal-r1-goodix-spo2-assemble-c/integration.ld": "b2ff9ac27a31674636716d033098cceafafc2f782e6660e4dd431dc3e9dc449d",
+    "build/goal-r1-goodix-spo2-assemble-c/negative-keep-high-bits.c": "f8046bd9f5f9030818e37d0870d69378bcb24a7b3c44c751bace05d0cd890a89",
+    "build/goal-r1-goodix-spo2-assemble-c/negative-sequence.c": "f9a9170ffbb4d8369f1214c50fd6be8b554d35e84fcdaa4a0bc2a2453216a934",
+    "build/goal-r1-goodix-spo2-assemble-c/negative-cached-channel-count.c": "6074662cf8595c89f39c093804c7c1b2cd3dcdb67a679608e0f2f7937ca3f056",
+    "build/goal-r1-goodix-spo2-assemble-c/negative-third-metadata.c": "88b0d1ce1bf0bff475b746c9e5424290fe4ad423c6f79c51b6143b290a73e522",
+    "build/goal-r1-goodix-spo2-assemble-c/negative-decode-stride.c": "87b104598aae94c754c2109453c0db8927fd2e6bcba961de89c357d5f016b0e2",
+    "build/goal-r1-goodix-spo2-assemble-c/build.log": "5d3a63ed89d7bb12168ab297c0e0761aab7d256cd56a1af40f60dcd650f6e099"
+  }
+}

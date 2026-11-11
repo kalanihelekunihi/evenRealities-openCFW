@@ -1,40 +1,19 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_317594\n"
-".type opencfw_em9305_child_317594,@function\n"
-"opencfw_em9305_child_317594:\n"
-"L317594:\n"
-"push_s r13\n"
-"L317596:\n"
-"mov_s r12,r0\n"
-"L317598:\n"
-"stb_s r3,[r0,0x6]\n"
-"L31759a:\n"
-"stb_s r2,[r0,0x5]\n"
-"L31759c:\n"
-"stb_s r1,[r0,0x1]\n"
-"L31759e:\n"
-"lsr r13,r3,0x8\n"
-"L3175a2:\n"
-"lsr r3,r1,0x18\n"
-"L3175a6:\n"
-"lsr r2,r1,0x10\n"
-"L3175aa:\n"
-"lsr_s r1,r1,0x8\n"
-"L3175ac:\n"
-"stb_s r13,[r0,0x7]\n"
-"L3175ae:\n"
-"stb_s r3,[r0,0x4]\n"
-"L3175b0:\n"
-"stb_s r2,[r0,0x3]\n"
-"L3175b2:\n"
-"stb_s r1,[r0,0x2]\n"
-"L3175b4:\n"
-"mov_s r0,0x8\n"
-"L3175b6:\n"
-"stb 0,[r12]\n"
-"L3175ba:\n"
-"leave_s [r13,pcl]\n"
-".size opencfw_em9305_child_317594,.-opencfw_em9305_child_317594\n"
-);
+#include <stdint.h>
+
+/* Native 0x317594..0x3175bc: build an 8-byte record: byte 0 cleared,
+ * bytes 1..4 the little-endian word, byte 5 the type byte, bytes 6..7 the
+ * little-endian halfword. Returns the record length 8. */
+uint32_t opencfw_em9305_child_317594(uintptr_t out,uint32_t word,
+                                     uint32_t type,uint32_t half)
+{
+    volatile uint8_t *bytes=(volatile uint8_t *)out;
+    bytes[6]=(uint8_t)half;
+    bytes[5]=(uint8_t)type;
+    bytes[1]=(uint8_t)word;
+    bytes[7]=(uint8_t)(half>>8);
+    bytes[4]=(uint8_t)(word>>24);
+    bytes[3]=(uint8_t)(word>>16);
+    bytes[2]=(uint8_t)(word>>8);
+    bytes[0]=0u;
+    return 8u;
+}

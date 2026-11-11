@@ -1,0 +1,51 @@
+{
+  "schema": "opencfw.g2.case.frame-dispatch-live.v1",
+  "date": "2026-11-11",
+  "reference": {
+    "payload": "g2/blobs/official/g2-2.2.6.10/firmware_box.bin",
+    "header_bytes": 32,
+    "stock_dispatch_entry": "0x0800085c"
+  },
+  "source": {
+    "live_dispatch_provider": "g2/src/case/startup/application_boot_transport_event_candidate.c",
+    "linked_dispatch_address": "0x080078dc",
+    "live_worker": "case_boot_transport_cb_6e1c",
+    "removed_discarded_unit": "g2/src/case/frame-dispatch/dispatch.c",
+    "reason": "The offline unit duplicated the stock 0x0800085c dispatcher and its worker bit-8 fragment; all of its sections were discarded by the strict CASE link."
+  },
+  "differential_emulation": {
+    "engine": "Unicorn 2.1.4, ARM Thumb M-class",
+    "controlled_lowers": "Stock and source legacy/binary command children returned the same controlled result; calls and ARM arguments were captured.",
+    "compared_state": "Legacy/binary call route, pointed frame offset, logical length, mode, forwarded bytes, in-place ASCII decode, frame count, and retry-state byte.",
+    "directed_cases_matched": 12,
+    "seeded_cases_matched": 1024,
+    "seed": "0x85c",
+    "input_families": [
+      "raw legacy 0xDE",
+      "ASCII DE/de hex including odd and invalid digits",
+      "0x7F and 0xCF binary frames with accepted and rejected lengths",
+      "short, malformed, and unrelated frames",
+      "retry state below and above 30"
+    ],
+    "harness": "build/case-frame-dispatch-20261111/compare_dispatch.py"
+  },
+  "verification": {
+    "manifest_check": "g2: 4884 units, 4545 source files, 1 final-link-only unit",
+    "case_compile": "360/360; zero duplicate strong symbols and zero unresolved",
+    "all_compile": "4879/4879 enabled C units; zero failures and zero duplicate strong symbols",
+    "all_strict_links": 7,
+    "all_seven_payload_binary_hashes_unchanged": true,
+    "case_link_bytes": 60184,
+    "case_link_sha256": "f7135f3a8254111949f55deb2bd092ff9b7ec2e61fada299c0fe2f0916676a84",
+    "source_bundle_bytes": 4638028,
+    "source_bundle_sha256": "4ded84cd623fd0dafd0633e71481cab92ac2845f8a64dbb3bde7eea8ddf29990",
+    "source_bundle_matches_locked_target": false,
+    "source_completeness_proven": false,
+    "build_report": "build/case-dispatch-live-20261111/all/report.json",
+    "link_report": "build/case-dispatch-live-20261111/bundle/link-report.json"
+  },
+  "limits": [
+    "Controlled command children verify the dispatch boundary, not every command body or external effect.",
+    "Physical CASE transport behavior and overall G2 source completeness remain unverified."
+  ]
+}

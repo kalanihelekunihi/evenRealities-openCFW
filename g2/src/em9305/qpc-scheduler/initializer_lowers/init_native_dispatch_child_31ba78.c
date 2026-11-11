@@ -1,75 +1,36 @@
-/* Whole native receive queue body with ordered delayed effects. */
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_dispatch_child_31ba78\n"
-".type opencfw_em9305_dispatch_child_31ba78,@function\n"
-"opencfw_em9305_dispatch_child_31ba78:\n"
-"L31ba78:\n"
-"enter_s [r13-r16,fp,blink]\n"
-"L31ba7a:\n"
-"sub_s sp,sp,0x18\n"
-"L31ba7c:\n"
-"mov_s r16,r1\n"
-"L31ba7e:\n"
-"mov_s r14,r0\n"
-"L31ba80:\n"
-"add_s r0,sp,0\n"
-"L31ba82:\n"
-"mov_s r1,r3\n"
-"L31ba84:\n"
-"bl.d opencfw_em9305_ll_received_decode_31bc7c\n"
-"L31ba88:\n"
-"mov_s r15,r3\n"
-"L31ba8a:\n"
-"ldb.ab r0,[r14,4]\n"
-"L31ba8e:\n"
-"mov_s r13,0x805adc\n"
-"L31ba94:\n"
-"breq.d.nt r0,0x1,L31bab6\n"
-"L31ba98:\n"
-"extb r1,r16\n"
-"L31ba9c:\n"
-"cmp_s r0,0\n"
-"L31ba9e:\n"
-"mov_s r0,0\n"
-"L31baa0:\n"
-"bne_s L31bace\n"
-"L31baa2:\n"
-"extb r1,r16\n"
-"L31baa6:\n"
-"mov_s r0,r14\n"
-"L31baa8:\n"
-"bl.d opencfw_em9305_ll_event_enqueue\n"
-"L31baac:\n"
-"mov_s r2,r15\n"
-"L31baae:\n"
-"ldb_s r0,[r14,0x8]\n"
-"L31bab0:\n"
-"add_s r0,r0,1\n"
-"L31bab2:\n"
-"stb_s r0,[r14,0x8]\n"
-"L31bab4:\n"
-"b_s L31babe\n"
-"L31bab6:\n"
-"mov_s r0,r14\n"
-"L31bab8:\n"
-"bl.d opencfw_em9305_ll_event_enqueue\n"
-"L31babc:\n"
-"mov_s r2,r15\n"
-"L31babe:\n"
-"bl opencfw_em9305_wsf_critical_enter\n"
-"L31bac2:\n"
-"ldb_s r0,[r13,0x1]\n"
-"L31bac4:\n"
-"add_s r0,r0,-1\n"
-"L31bac6:\n"
-"bl.d opencfw_em9305_wsf_critical_exit\n"
-"L31baca:\n"
-"stb_s r0,[r13,0x1]\n"
-"L31bacc:\n"
-"mov_s r0,1\n"
-"L31bace:\n"
-"leave_s [r13-r16,fp,blink,pcl]\n"
-".size opencfw_em9305_dispatch_child_31ba78,.-opencfw_em9305_dispatch_child_31ba78\n"
-);
+#include <stdint.h>
+
+/* Native 0x31ba78..0x31bad0: decode a received PDU into a scratch record,
+ * then, for a link in state 0 or 1, queue the PDU on the link's queue
+ * (+4) for the handler (state 0 also counts it in byte +12) and drop the
+ * receive-pending count at 0x805add under a critical section. Returns 1
+ * when queued, 0 for any other state. */
+extern uint32_t opencfw_em9305_ll_received_decode_31bc7c(uintptr_t output,
+                                                         uintptr_t input);
+extern uint32_t opencfw_em9305_ll_event_enqueue(uintptr_t queue,uint32_t handler,
+                                                uintptr_t event);
+extern uint32_t opencfw_em9305_wsf_critical_enter(void);
+extern uint32_t opencfw_em9305_wsf_critical_exit(void);
+
+uint32_t opencfw_em9305_dispatch_child_31ba78(uintptr_t link,uint32_t handler,
+                                              uint32_t unused,uintptr_t pdu)
+{
+    _Alignas(4) uint8_t decoded[24];
+    (void)unused;
+    (void)opencfw_em9305_ll_received_decode_31bc7c((uintptr_t)decoded,pdu);
+    uint32_t state=*(volatile uint8_t *)link;
+    uintptr_t queue=link+4u;
+    if(state==1u){
+        (void)opencfw_em9305_ll_event_enqueue(queue,(uint8_t)handler,pdu);
+    }else{
+        if(state!=0u)return 0u;
+        (void)opencfw_em9305_ll_event_enqueue(queue,(uint8_t)handler,pdu);
+        uint32_t count=*(volatile uint8_t *)(queue+8u);
+        *(volatile uint8_t *)(queue+8u)=(uint8_t)(count+1u);
+    }
+    (void)opencfw_em9305_wsf_critical_enter();
+    uint32_t pending=*(volatile uint8_t *)0x805addu;
+    *(volatile uint8_t *)0x805addu=(uint8_t)(pending-1u);
+    (void)opencfw_em9305_wsf_critical_exit();
+    return 1u;
+}

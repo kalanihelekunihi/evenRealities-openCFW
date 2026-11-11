@@ -1,56 +1,25 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_31e458\n"
-".type opencfw_em9305_child_31e458,@function\n"
-"opencfw_em9305_child_31e458:\n"
-"L31e458:\n"
-"enter_s [r13,blink]\n"
-"L31e45a:\n"
-"ldh_s r2,[r0,0]\n"
-"L31e45c:\n"
-"mov_s r1,0x805c70\n"
-"L31e462:\n"
-"ld r1,[r1,0]\n"
-"L31e464:\n"
-"mpyuw r2,r2,912\n"
-"L31e468:\n"
-"mov_s r3,r0\n"
-"L31e46a:\n"
-"add_s r0,r1,r2\n"
-"L31e46c:\n"
-"ldb_s r1,[r0,0]\n"
-"L31e46e:\n"
-"breq_s r1,0,L31e496\n"
-"L31e470:\n"
-"ldh r2,[r3,86]\n"
-"L31e474:\n"
-"mov_s r1,r0\n"
-"L31e476:\n"
-"add r1,r1,892\n"
-"L31e47a:\n"
-"sth_s r2,[r1,0]\n"
-"L31e47c:\n"
-"ldb r2,[r3,84]\n"
-"L31e480:\n"
-"mov_s r12,0x805c6c\n"
-"L31e486:\n"
-"ldb_s r13,[r0,0x2]\n"
-"L31e488:\n"
-"st_s r3,[r12,0]\n"
-"L31e48a:\n"
-"stb r2,[r1,-2]\n"
-"L31e48e:\n"
-"ldb_s r1,[r3,0x3]\n"
-"L31e490:\n"
-"breq_s r13,0,L31e498\n"
-"L31e492:\n"
-"bl opencfw_em9305_child_32a000\n"
-"L31e496:\n"
-"leave_s [r13,blink,pcl]\n"
-"L31e498:\n"
-"bl opencfw_em9305_child_31e4a0\n"
-"L31e49c:\n"
-"leave_s [r13,blink,pcl]\n"
-".size opencfw_em9305_child_31e458,.-opencfw_em9305_child_31e458\n"
-);
+#include <stdint.h>
+
+/* Native 0x31e458..0x31e49e: look up the connection entry for the
+ * command's handle (base at 0x805c70, 912 bytes each). If the entry is in
+ * use, copy the command's halfword +86 to +892 and byte +84 to +890, make
+ * the command current (0x805c6c) and pass the entry and the command code
+ * (+3) to 32a000 (entry role byte +2 set) or 31e4a0. Returns the entry
+ * when it is unused. */
+extern uint32_t opencfw_em9305_child_32a000(uintptr_t entry, uint32_t code);
+extern uint32_t opencfw_em9305_child_31e4a0(uintptr_t entry, uint32_t code);
+
+uint32_t opencfw_em9305_child_31e458(uintptr_t command)
+{
+    uint32_t handle=*(volatile uint16_t *)command;
+    uintptr_t entry=*(volatile uint32_t *)(uintptr_t)0x805c70u+handle*912u;
+    if(*(volatile uint8_t *)entry==0u)return (uint32_t)entry;
+    *(volatile uint16_t *)(entry+892u)=*(volatile uint16_t *)(command+86u);
+    uint32_t value=*(volatile uint8_t *)(command+84u);
+    uint32_t role=*(volatile uint8_t *)(entry+2u);
+    *(volatile uint32_t *)(uintptr_t)0x805c6cu=(uint32_t)command;
+    *(volatile uint8_t *)(entry+890u)=(uint8_t)value;
+    uint32_t code=*(volatile uint8_t *)(command+3u);
+    if(role!=0u)return opencfw_em9305_child_32a000(entry,code);
+    return opencfw_em9305_child_31e4a0(entry,code);
+}

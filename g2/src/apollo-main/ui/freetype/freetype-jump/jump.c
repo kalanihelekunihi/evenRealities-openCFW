@@ -4,7 +4,9 @@
  * 0x56777c/0x567790 and this sequence passed 80 finite Cortex-M55 register,
  * stack, and 128-byte buffer comparisons; this does not qualify all callers.
  * FreeType's recovered jmp buffer is 128 bytes, not the upstream 160-byte
- * default typedef. These routines write 104 bytes of that buffer. */
+ * default typedef. These routines write 104 bytes of that buffer.
+ * Must stay assembly: setjmp/longjmp save and restore callee-saved core and
+ * VFP registers and SP, which C cannot name. */
 
 __attribute__((naked, noinline, returns_twice))
 int setjmp(void *buffer __attribute__((unused)))

@@ -52,7 +52,7 @@ enum {
 extern const char opencfw_nor_read_transfer_format[];
 #define OPENCFW_ERROR_LOG_MODULE ((uintptr_t)opencfw_nor_read_transfer_format)
 
-extern uint32_t opencfw_bl_mspi_blocking_transfer(uint32_t handle,
+extern uint32_t am_hal_mspi_blocking_transfer(uint32_t handle,
     const opencfw_mspi_pio_transfer_t *transfer,
     uint32_t timeout_usec);                                  /* 0x004262E0 */
 extern void opencfw_provider_415fae(uint32_t module,
@@ -90,10 +90,13 @@ uint32_t opencfw_bl_mspi_status_transfer(uint32_t instruction,
         .buffer = (uint32_t *)destination
     };
 
-    const uint32_t status = opencfw_bl_mspi_blocking_transfer(
+    const uint32_t status = am_hal_mspi_blocking_transfer(
         handle, &transfer, OPENCFW_TRANSFER_TIMEOUT_USEC);
     if (status != 0u)
         opencfw_provider_415fae(OPENCFW_ERROR_LOG_MODULE,
             (uint16_t)stock_instruction, address, length, status);
     return status;
 }
+
+/* Stock entry names that branch straight to the provider above. */
+__typeof__(opencfw_bl_mspi_status_transfer) opencfw_provider_4205f4 __attribute__((alias("opencfw_bl_mspi_status_transfer")));

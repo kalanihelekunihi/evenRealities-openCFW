@@ -1,0 +1,167 @@
+{
+  "schema_version": 1,
+  "scope": "R1 watchdog-aware task name diagnostic",
+  "native_application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "native_entry": "0x6a098",
+  "native_disjoint_ranges": [
+    {
+      "start": "0x6a098",
+      "end": "0x6a0af"
+    },
+    {
+      "start": "0x9615a",
+      "end": "0x9615d"
+    },
+    {
+      "start": "0x9617c",
+      "end": "0x96183"
+    }
+  ],
+  "native_body_total_bytes": 36,
+  "watchdog_getter": "0x5da30",
+  "watchdog_fault_cell": "0x20006734",
+  "current_tcb_cell": "0x2000781c",
+  "execution": {
+    "paired_cases": 1600,
+    "executions": 3200,
+    "source_report": "build/sources-goal-r1-task-name-c/report.json",
+    "actual_watchdog_getter": true,
+    "function_stubs": false,
+    "checks": [
+      "watchdog fault pointer, low flag byte and conditional task handle reads",
+      "fallback samples current task after getter",
+      "one getter call",
+      "name pointer arithmetic wraps at 32 bits, no task/name dereference",
+      "null fallback returns 0x34",
+      "ordered shared reads, unchanged records/guards, R0, SP, saved registers and interrupt masks"
+    ],
+    "limits": [
+      "Seeded synchronous emulator state, no physical watchdog expiry or unwinding",
+      "Getter-entry current-task mutation is an instrumentation freshness check, not an interrupt timing claim",
+      "Private stack traffic, caller-clobbered registers and flags excluded"
+    ]
+  },
+  "negative_controls": [
+    {
+      "mutation": "prefer-current",
+      "rejected": true
+    },
+    {
+      "mutation": "prefetch-fallback",
+      "rejected": true
+    }
+  ],
+  "audit": {
+    "existing_function_bodies_unchanged": [
+      "uxTaskGetNumberOfTasks",
+      "vTaskStackAddr",
+      "vTaskStackSize",
+      "xTaskGetCurrentTaskHandle",
+      "xTaskGetSchedulerState",
+      "xTaskGetTickCount",
+      "xTaskGetTickCountFromISR"
+    ],
+    "other_object_bytes_unchanged": true,
+    "removed_imports": [
+      "vTaskName"
+    ],
+    "added_imports": []
+  },
+  "normal_build": {
+    "compiled": 573,
+    "application_imports": 176,
+    "bootloader_imports": 34,
+    "failures": 0,
+    "duplicate_strong_symbols": 0
+  },
+  "qualification": {
+    "compiled_profiles": 5,
+    "existing_selected_stack_regions": [
+      {
+        "payload": "r1-application",
+        "symbol": "vTaskStackAddr",
+        "start": 455856,
+        "end": 455868,
+        "sha256": "ecadada43daec93c967bb9559a00d5608bd2ffd6866f576b145334c01279233c",
+        "evidence": "r1/symbols/function-frontier.csv",
+        "bindings": {
+          "pxCurrentTCB": 536901660
+        },
+        "address": 615600,
+        "match_evidence": {
+          "method": "independently named native entry and all unrelocated bytes, followed by full linked equality",
+          "fixed_bytes": 8,
+          "compiled_pattern_sha256": "d3445bdcf6650490b96645e508c4165fbaa7b283f511b999455616b6b8ff6e46",
+          "relocations": [
+            {
+              "symbol": "pxCurrentTCB",
+              "offset": 8,
+              "relocation_type": 2,
+              "address": 536901660,
+              "role": "native_literal_symbol"
+            }
+          ]
+        }
+      },
+      {
+        "payload": "r1-application",
+        "symbol": "vTaskStackSize",
+        "start": 455868,
+        "end": 455880,
+        "sha256": "d1ba8d74f11e531467f6489f9969c507ab719d7b9ced52ae30d0f7ec0149525a",
+        "evidence": "r1/symbols/function-frontier.csv",
+        "bindings": {
+          "pxCurrentTCB": 536901660
+        },
+        "address": 615612,
+        "match_evidence": {
+          "method": "independently named native entry and all unrelocated bytes, followed by full linked equality",
+          "fixed_bytes": 8,
+          "compiled_pattern_sha256": "21ae341bb0c065dc024c6d66b8ae42cb949b78d5cdb931da731107129671a3cc",
+          "relocations": [
+            {
+              "symbol": "pxCurrentTCB",
+              "offset": 8,
+              "relocation_type": 2,
+              "address": 536901660,
+              "role": "native_literal_symbol"
+            }
+          ]
+        }
+      }
+    ],
+    "new_name_regions": 0,
+    "non_contiguous_inventory_body_is_not_contiguous_anchor": true
+  },
+  "source_plan_unchanged": true,
+  "source_built_bytes": 3881,
+  "binary_pull_through_bytes": 642279,
+  "resource_bytes": 248,
+  "fresh_hybrid_equals_locked_application": true,
+  "source_completeness_proven": false,
+  "evidence": {
+    "build/sources-goal-r1-task-name-c/report.json": "d65e2738be37464d63aa17c7d2a98fd0398b19577249c2b478a2ad0577c0c01c",
+    "r1/src/application/rtos/task-count/task-count.c": "24e1556535baeaa953cf41a95bb294c72c5c097963e8a0110e86946d6c3ed3d4",
+    "r1/src/application/board/native_task_construction.h": "5b3c5564a841a375f285e45314809710258efe11f2f4162f97663fa59deb4484",
+    "r1/src/application/board/native_watchdog_manager.c": "361cb1a455eed324663cfab4dd20fb8cf63125e1989da63125346aec86262ce5",
+    "r1/src/application/board/native_watchdog.h": "5c72778d939445d2e8642c7dfbdba7cb288eef81630ecca9337b5bbe34caa04e",
+    "r1/src/sources.json": "e4c2161f5a94ed8f60f515c71ed7f323fa68daecf30f6a35feb8327e77cfec3e",
+    "r1/symbols/function-frontier.csv": "015098dcba285a024f6169f79e3d821428fa546ddea8e81aca126d41b3b2f5f2",
+    "tools/build/source-plan.json": "716cf17b8cf2bed8ad6a99a672b1856af4c5380842c95cb14b9a263a7bb42bc8",
+    "build/hybrid-goal-r1-task-name-c/build-report.json": "f654972227db6cf9d36d465949c2b6f2f673efa0d989eb513e9a167fa4657e58",
+    "build/hybrid-goal-r1-task-name-c/payloads/application.bin": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "r1/docs/reference/source-composition-review.json": "a1191a4f1daa53d1a9c15900649e909eafb07669c47cbf759655729b7c15df9b",
+    "build/goal-r1-task-name-c/before.c": "0dd1dfafc8b5410525cb57eb267cf7eaac20291a5a76511051f7fa3b1dd4396e",
+    "build/goal-r1-task-name-c/REA.json": "14faaa08aff10c9ae65eac9e378db8fbdfd4f3758e938dac0e0c370e4faedf8f",
+    "build/goal-r1-task-name-c/verify.py": "d9532d8ef265786c1cb7c92883842938c50e7adb6fbfba6a48025b4b792f520a",
+    "build/goal-r1-task-name-c/results.json": "7516b605161272e0faac8182ff9c593cab738e495ab2d9838f81fa9071182ebb",
+    "build/goal-r1-task-name-c/negative.py": "42c8ad352c126ce2fe910b8810a3bcc46c5913983f2954bfce8c91eb18469563",
+    "build/goal-r1-task-name-c/negative-results.json": "077d8b98bb9a4646ce497603f2499b5c1fe3ef318d6093c849128df9c9c9c705",
+    "build/goal-r1-task-name-c/audit.py": "5447c69fed7110f3508c1ebac0cdd864ea563ed96e5d67562316948184ee00b0",
+    "build/goal-r1-task-name-c/audit-results.json": "78ed6827ed61200de4167cec3a9e4ae3b199f6879e8a1f50d0eb3ea9a95d6434",
+    "build/goal-r1-task-name-c/qualify.py": "bd276e0ca934f687f58c4b58a1988f6687f91ab3332c35c65a8388e4cd8ddfd8",
+    "build/goal-r1-task-name-c/qualified/qualification.json": "bb71ffc0c20169b5ee59e2c165de64ff0fb280f7cd7633dcde7a798cdd7b5b76",
+    "build/goal-r1-task-name-c/qualified/source-plan.json": "24fd687187baf2cf812157b1ee3c5867e9e1b2f94f7dca25140946d89af0565e",
+    "build/goal-r1-task-name-c/sources-check.log": "bd60965367f10bcc604039941b628ee9282d683344509ab9faf85d501a53a26c"
+  }
+}

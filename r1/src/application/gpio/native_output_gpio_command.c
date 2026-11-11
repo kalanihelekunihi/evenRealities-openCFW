@@ -17,7 +17,9 @@ uint32_t r1_output_gpio_slot18(volatile generic_device_registry_device *device,u
  if((int32_t)command>=3)return 1;
  for(uint8_t i=0;i<5;++i){
   volatile r1_output_gpio_record *record=&r1_output_gpio.records[i];
-  if(strcmp(record->name,device->name)!=0)continue;
+  const char *device_name=device->name;
+  const char *record_name=record->name;
+  if(strcmp(record_name,device_name)!=0)continue;
   if(!record->opened)return 27;
   uint32_t delayed=record->config_0d!=0;
   uintptr_t address=(uintptr_t)&r1_output_gpio+280u+(delayed?12u:0u)+(command<<2);

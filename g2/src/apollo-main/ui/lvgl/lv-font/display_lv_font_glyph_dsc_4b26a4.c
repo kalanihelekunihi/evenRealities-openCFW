@@ -59,3 +59,6 @@ uint32_t audio_uart_lv_font_glyph_dsc_4b26a4(const void *font,
         store16(out + 6u, (uint16_t)(load16(out + 6u) << 1u));
     return 1u;
 }
+/* Single implementation of stock lv_font_get_glyph_dsc_fmt_txt 0x4b26a4. */
+__typeof__(audio_uart_lv_font_glyph_dsc_4b26a4) audio_uart_font_glyph_descriptor
+    __attribute__((alias("audio_uart_lv_font_glyph_dsc_4b26a4")));

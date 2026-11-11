@@ -6,3 +6,6 @@ void audio_uart_hand_mismatch_448e34(void) {
     if(g2_audio_log_event_handle!=0u)
         (void)osEventFlagsSet((void *)(uintptr_t)g2_audio_log_event_handle,4u);
 }
+/* The settings-save path signals through the same stock entry. */
+__typeof__(audio_uart_hand_mismatch_448e34) audio_settings_signal_save
+    __attribute__((alias("audio_uart_hand_mismatch_448e34")));

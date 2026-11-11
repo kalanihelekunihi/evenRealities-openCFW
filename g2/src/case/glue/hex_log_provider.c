@@ -15,3 +15,5 @@ void log_hex_buffer(const uint8_t *bytes,uint32_t length)
     }
     if(*disabled==0u)g2_log_printf("\r\n");
 }
+/* Dedup (0x080067c8): case_init_hex_log (was startup/owned_lower_aliases_candidate.c). */
+__typeof__(log_hex_buffer) case_init_hex_log __attribute__((alias("log_hex_buffer")));

@@ -1,0 +1,146 @@
+{
+  "schema": 1,
+  "scope": "R1 native FlashDB write adapter 0x3f05a..0x3f075, GCC9 C frame/live-register correction",
+  "source_build": {
+    "compiled_units": 575,
+    "failed": 0,
+    "duplicate_strong_symbols": 0,
+    "application_unresolved": 175,
+    "bootloader_unresolved": 34
+  },
+  "direct": {
+    "paired_cases": 4526,
+    "executions": 9052,
+    "source_report": "build/sources-goal-r1-flash-write-frame-final/report.json",
+    "partition_write_modeled": true,
+    "checks": [
+      "FILE_MODE byte before partition pointer",
+      "native mode error 2, signed provider error 3 and nonnegative success",
+      "four full-word provider arguments and unused public sync",
+      "live R4=0/R5=0 and retained R6 at provider entry",
+      "native 16-byte frame, input-buffer/frame aliases and saved-register words",
+      "ordered visible accesses, null-db fault, mutations, masks, SP and saved registers"
+    ],
+    "limits": [
+      "Partition write modeled; physical flash unproven",
+      "Provider return-code address and unused caller-clobbered registers/flags excluded",
+      "SDK enum return is narrowed by C; full native byte identity not established"
+    ]
+  },
+  "integrated": {
+    "paired_cases": 1728,
+    "executions": 3456,
+    "source_report": "build/sources-goal-r1-flash-write-frame-final/report.json",
+    "actual_C_write_adapter_partition_and_cache_lookup": true,
+    "modeled": [
+      "flash driver read",
+      "printf diagnostics"
+    ],
+    "checks": [
+      "FILE_MODE short circuit",
+      "actual FAL wrapping bounds and cache lookup",
+      "driver offset, immutable payload bytes and argument forwarding",
+      "negative driver/lookup/bounds errors map to native write code 3; file mode stays 2",
+      "ordered DB/partition/cache reads, diagnostics, output memory and preserved ABI"
+    ],
+    "limits": [
+      "Seeded private partition table/cache; initialization not executed",
+      "Flash driver and printf modeled; no physical flash or concurrency",
+      "Private frames and caller-clobbered registers/flags excluded"
+    ]
+  },
+  "audit": {
+    "other_574_objects_unchanged": true,
+    "other_utility_function_bodies_unchanged": [
+      "fdb_calc_crc32",
+      "_fdb_set_status",
+      "_fdb_get_status",
+      "fdb_blob_make",
+      "_fdb_flash_read",
+      "_fdb_read_status",
+      "_fdb_continue_ff_addr",
+      "fdb_blob_read",
+      "_fdb_flash_erase",
+      "_fdb_write_status"
+    ],
+    "immutable_and_mutable_data_owners_unchanged": true,
+    "import_sets_unchanged": true,
+    "pinned_upstream_unmodified_sha256": "caa16b6aa308ddbc93e962476a607f675a49b5a5849889b46bbcc0091be27833",
+    "one_manifest_unit_retargeted_one_exact_generator_replacement": true,
+    "write_adapter_bytes": 28,
+    "write_frame_bytes": 16,
+    "public_SDK_signature_preserved": true
+  },
+  "negative_controls": [
+    {
+      "mutation": "wrong-mode-error",
+      "rejected": true
+    },
+    {
+      "mutation": "wrong-saved-register",
+      "rejected": true
+    }
+  ],
+  "qualification": {
+    "candidates": 4,
+    "compiled": 4,
+    "selected_regions": [
+      {
+        "payload": "r1-application",
+        "symbol": "fdb_blob_make",
+        "start": 247404,
+        "end": 247410,
+        "sha256": "d4979c5c55c14ca3dad053b2e44519e0a11e935dbd0dacd95868856253c58571",
+        "evidence": "r1/symbols/function-frontier.csv"
+      }
+    ],
+    "new_write_qualified": false,
+    "canonical_plan_unchanged": true,
+    "compiler_fingerprint_fix_preserves_all_four_objects": true
+  },
+  "hybrid": {
+    "canonical": {
+      "report": "build/hybrid-goal-r1-flash-write-frame/build-report.json",
+      "sha256": "2eddfe1ed999a814655f99c0712eadc5c99c60db93edd99a9af1daf3109c6aa2",
+      "payload_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+      "totals": {
+        "binary-pull-through": 642279,
+        "source-built": 3881,
+        "resource-file": 248
+      },
+      "source_completeness_proven": false
+    },
+    "generated_provider": {
+      "report": "build/hybrid-goal-r1-flash-write-generated-provider/build-report.json",
+      "sha256": "157663b111b5ff3670c679ba065a3011ec695ea101fe06ada3a8ad128939470a",
+      "payload_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+      "totals": {
+        "binary-pull-through": 646154,
+        "resource-file": 248,
+        "source-built": 6
+      },
+      "source_completeness_proven": false
+    }
+  },
+  "files": {
+    "r1/src/application/board/fal-native/native_flash_write.h": "acfd2c7567b75249ced0b16015e83bc15bd0ae9dc001712ed1316336a5637811",
+    "r1/src/sources.json": "372b853c5c6d27a137cee320c4b75905e54b781a17d86f5bbd3905f908b5c7ce",
+    "tools/build/qualify_sources.py": "1a9adf526072cbab514d3e1407e8c13bb58219f47456ccf00c746eee2b4a9063",
+    "build/generated/r1/fdb_utils_r1.c": "1592a7226341bd261b11aed03d9a31a6b38ea594cec65db919bff09fe24fa39e",
+    "build/sources-goal-r1-flash-write-frame-final/report.json": "6cf1932e49f9d7b685521c35ec8237992198abdf242676201c32154ecb918c4c",
+    "tools/build/source-plan.json": "716cf17b8cf2bed8ad6a99a672b1856af4c5380842c95cb14b9a263a7bb42bc8",
+    "build/goal-r1-flash-write-frame/verify.py": "31f33ffff1019c0ca346ef505dbfa657a228975d86d273e3f03ca9af60611df8",
+    "build/goal-r1-flash-write-frame/integrated.py": "2fccb859ebf5f2ca1880ed0ae0c5d02643404a9c0d48f7320f119f19e8af4ab4",
+    "build/goal-r1-flash-write-frame/negative.py": "90f7f4efb82be26e816ab2c990b7f7c2bee319aa9550c6a2a486aa5162c1a945",
+    "build/goal-r1-flash-write-frame/audit.py": "93c3218a704da454ea7732c58483b75f78cf151b91c1434d16f4b7235478d9cd",
+    "build/goal-r1-flash-write-frame/rea.json": "830324678e9c3dae494f2e1c6a5cf08b92b86b4ceae3a9c929b376b486208c74",
+    "build/goal-r1-flash-write-frame/qualified-fingerprinted/qualification.json": "02350699f3cfeb56eb844ae62e0573bd5fd4bd3334342ccab8e70a029efa90d7",
+    "build/goal-r1-flash-write-frame/qualified-fingerprinted/source-plan.json": "f5cd730335f5216d0e721fc926e2318f8dbd1a2107d0716bd9e378cdd5d9ca05"
+  },
+  "limits": [
+    "No physical flash or concurrency validation",
+    "C frame adaptation retains empty compiler constraints and fixed-register bindings; no executable inline instructions or opcode arrays added",
+    "Native full-byte write identity not established; excluded from source-plan",
+    "G2 readiness gates unchanged; no full-source firmware claim"
+  ]
+}

@@ -1,110 +1,46 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_callback_318f2c\n"
-".type opencfw_em9305_callback_318f2c,@function\n"
-"opencfw_em9305_callback_318f2c:\n"
-"L318f2c:\n"
-"enter_s [r13-r15,fp,blink]\n"
-"L318f2e:\n"
-"mov_s r15,0x805cac\n"
-"L318f34:\n"
-"ld r0,[r15,0]\n"
-"L318f36:\n"
-"st.aw 0,[sp,-4]\n"
-"L318f3a:\n"
-"bl.d opencfw_em9305_wsf_critical_enter\n"
-"L318f3e:\n"
-"ldb r14,[r0,34]\n"
-"L318f42:\n"
-"mov_s r13,0x805c70\n"
-"L318f48:\n"
-"ld r2,[r13]\n"
-"L318f4c:\n"
-"mov lp_count,r14\n"
-"L318f50:\n"
-"lp L318f76\n"
-"L318f54:\n"
-"sub_s r12,r14,0x1\n"
-"L318f56:\n"
-"mov_s r0,r12\n"
-"L318f58:\n"
-"mpywhl r0,r0,912\n"
-"L318f5c:\n"
-"add_s r0,r0,r2\n"
-"L318f5e:\n"
-"ldb_s r1,[r0,0]\n"
-"L318f60:\n"
-"breq_s r1,0,L318f74\n"
-"L318f62:\n"
-"add3 r0,r0,0x2f\n"
-"L318f66:\n"
-"ldb_s r1,[r0,0]\n"
-"L318f68:\n"
-"add_s r3,sp,0\n"
-"L318f6a:\n"
-"add_s r14,r14,r3\n"
-"L318f6c:\n"
-"stb 0,[r0]\n"
-"L318f70:\n"
-"stb r1,[r14,-1]\n"
-"L318f74:\n"
-"mov_s r14,r12\n"
-"L318f76:\n"
-"bl opencfw_em9305_wsf_critical_exit\n"
-"L318f7a:\n"
-"ld r0,[r15,0]\n"
-"L318f7c:\n"
-"ldb r14,[r0,34]\n"
-"L318f80:\n"
-"add_s r0,sp,0\n"
-"L318f82:\n"
-"add_s r0,r0,-1\n"
-"L318f84:\n"
-"ldb_s r1,[r0,r14]\n"
-"L318f86:\n"
-"add_s r14,r14,-1\n"
-"L318f88:\n"
-"breq_s r1,0,L318f98\n"
-"L318f8a:\n"
-"mov_s r0,0x805b10\n"
-"L318f90:\n"
-"ld r2,[r0,0]\n"
-"L318f92:\n"
-"breq_s r2,0,L318f98\n"
-"L318f94:\n"
-"jl_s.d [r2]\n"
-"L318f96:\n"
-"exth_s r0,r14\n"
-"L318f98:\n"
-"mov_s r15,r14\n"
-"L318f9a:\n"
-"ld r1,[r13,0]\n"
-"L318f9c:\n"
-"mpywhl r15,r15,912\n"
-"L318fa0:\n"
-"mov r0,404\n"
-"L318fa4:\n"
-"add_s r15,r15,r1\n"
-"L318fa6:\n"
-"ldb_s r0,[r15,r0]\n"
-"L318fa8:\n"
-"breq_s r0,0,L318fbc\n"
-"L318faa:\n"
-"bl.d opencfw_em9305_wsf_queue_empty\n"
-"L318fae:\n"
-"add3 r0,r15,0x2d\n"
-"L318fb2:\n"
-"breq_s r0,0,L318fbc\n"
-"L318fb4:\n"
-"mov_s r1,0x3e\n"
-"L318fb6:\n"
-"bl.d opencfw_em9305_receive_terminate_325c08\n"
-"L318fba:\n"
-"mov_s r0,r15\n"
-"L318fbc:\n"
-"brne_s r14,0,L318f80\n"
-"L318fbe:\n"
-"leave_s [r13-r15,fp,blink,pcl]\n"
-".size opencfw_em9305_callback_318f2c,.-opencfw_em9305_callback_318f2c\n"
-);
+#include <stdint.h>
+
+/* Native 0x318f2c..0x318fc0: collect and clear each active connection's
+ * pending-terminate byte (+376) under a critical section, then for each
+ * connection (highest first) pass a non-zero byte with the handle to the
+ * host callback at 0x805b10 and terminate reception (reason 0x3e) when
+ * the connection has its close flag (+404) set and an empty queue (+360).
+ * The connection count is the configuration byte (*0x805cac)+34; stock
+ * keeps the bytes in one zeroed word and requires 1..4 connections. */
+extern uint32_t opencfw_em9305_wsf_critical_enter(void);
+extern uint32_t opencfw_em9305_wsf_critical_exit(void);
+extern uint32_t opencfw_em9305_wsf_queue_empty(uintptr_t queue);
+extern uint32_t opencfw_em9305_receive_terminate_325c08(uintptr_t source,
+                                                        uint32_t reason);
+typedef void (*opencfw_em9305_terminate_callback_t)(uint32_t handle,uint32_t reason);
+
+void opencfw_em9305_callback_318f2c(void)
+{
+    _Alignas(4) uint8_t pending[4]={0u,0u,0u,0u};
+    uintptr_t config=*(volatile uint32_t *)0x805cacu;
+    uint32_t count=*(volatile uint8_t *)(config+34u);
+    (void)opencfw_em9305_wsf_critical_enter();
+    uintptr_t base=*(volatile uint32_t *)0x805c70u;
+    for(uint32_t index=count;index!=0u;--index){
+        uintptr_t connection=base+(index-1u)*912u;
+        if(*(volatile uint8_t *)connection==0u)continue;
+        uint32_t reason=*(volatile uint8_t *)(connection+376u);
+        *(volatile uint8_t *)(connection+376u)=0u;
+        pending[index-1u]=(uint8_t)reason;
+    }
+    (void)opencfw_em9305_wsf_critical_exit();
+    uint32_t index=*(volatile uint8_t *)(*(volatile uint32_t *)0x805cacu+34u);
+    do{
+        uint32_t reason=pending[index-1u];
+        --index;
+        if(reason!=0u){
+            uintptr_t callback=*(volatile uint32_t *)0x805b10u;
+            if(callback!=0u)
+                ((opencfw_em9305_terminate_callback_t)callback)((uint16_t)index,reason);
+        }
+        uintptr_t connection=*(volatile uint32_t *)0x805c70u+index*912u;
+        if(*(volatile uint8_t *)(connection+404u)!=0u
+           &&opencfw_em9305_wsf_queue_empty(connection+360u)!=0u)
+            (void)opencfw_em9305_receive_terminate_325c08(connection,0x3eu);
+    }while(index!=0u);
+}

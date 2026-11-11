@@ -2,7 +2,7 @@
 
 /* Native 0x32cde0..0x32ce02. BRNE.D at 0x32cdf4 stores ctx+552 on
  * both branches. 0x317ea4 remains a genuine child until independently
- * attributed; this complete parent does not supply a placeholder. */
+ * attributed; this complete parent does not supply a filler body. */
 extern uint32_t opencfw_em9305_mode_callback_child_317ea4(uint32_t);
 uint32_t opencfw_em9305_mode_callback_32cde0(uintptr_t context,
                                                uintptr_t callback_code)

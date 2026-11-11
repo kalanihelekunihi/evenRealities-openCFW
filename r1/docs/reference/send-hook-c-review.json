@@ -1,0 +1,298 @@
+{
+  "schema_version": 1,
+  "report": "build/sources-goal-r1-send-hook-c/report.json",
+  "verification": {
+    "stock_C_comparisons": 2144,
+    "native_instruction_bytes_covered": 14,
+    "slot": "0x20006c20",
+    "caller_saved_registers_excluded": true,
+    "callback_can_replace_slot": true,
+    "callback_clobbers_integer_and_FP_scratch": true
+  },
+  "integration": {
+    "pairs": 1355,
+    "groups": {
+      "complete_seed": 13,
+      "complete_payload_domains": 120,
+      "initial_counter_all_values": 1016,
+      "short_frame_guards": 40,
+      "CRC_mismatch_ack_and_cleanup": 9,
+      "same_counter_retry_rollback": 8,
+      "actual_transmit_receive": 8,
+      "callback_words_and_ignored_results": 30,
+      "live_backend_mutation_scenarios": 108,
+      "transmit_oversize_guard": 3
+    },
+    "full_range_lengths": [
+      4063,
+      4064,
+      4065,
+      4066,
+      4067,
+      4068,
+      4069,
+      4070,
+      4071,
+      4072,
+      4073,
+      4074,
+      4075,
+      4076,
+      4077,
+      4078,
+      4079,
+      4080,
+      4081,
+      4082,
+      4083,
+      4084,
+      4085,
+      4086,
+      4087,
+      4088,
+      4089,
+      4090,
+      4091,
+      4092,
+      4093,
+      4094,
+      4095,
+      4096
+    ],
+    "safety": [
+      {
+        "name": "null_readable_length",
+        "results": [
+          4294967295
+        ],
+        "ack_guard_preserved": true,
+        "capacity": 0
+      },
+      {
+        "name": "oversized_wire",
+        "results": [
+          4294967295
+        ],
+        "ack_guard_preserved": true,
+        "capacity": 0
+      },
+      {
+        "name": "short_bad_CRC_0",
+        "results": [
+          0
+        ],
+        "ack_guard_preserved": true,
+        "capacity": 0
+      },
+      {
+        "name": "short_bad_CRC_1",
+        "results": [
+          0
+        ],
+        "ack_guard_preserved": true,
+        "capacity": 0
+      },
+      {
+        "name": "short_bad_CRC_2",
+        "results": [
+          0
+        ],
+        "ack_guard_preserved": true,
+        "capacity": 0
+      },
+      {
+        "name": "short_bad_CRC_3",
+        "results": [
+          0
+        ],
+        "ack_guard_preserved": true,
+        "capacity": 0
+      },
+      {
+        "name": "short_bad_CRC_4",
+        "results": [
+          0
+        ],
+        "ack_guard_preserved": true,
+        "capacity": 0
+      },
+      {
+        "name": "static_stream_overflow",
+        "results": [
+          0,
+          0,
+          4294967295
+        ],
+        "ack_guard_preserved": true,
+        "capacity": 0
+      },
+      {
+        "name": "heap_stream_overflow",
+        "results": [
+          0,
+          0,
+          0,
+          4294967295
+        ],
+        "ack_guard_preserved": true,
+        "capacity": 0
+      },
+      {
+        "name": "retry_length_underflow",
+        "results": [
+          0,
+          4294967295
+        ],
+        "ack_guard_preserved": true,
+        "capacity": 0
+      },
+      {
+        "name": "retry_used_underflow",
+        "results": [
+          0,
+          4294967295
+        ],
+        "ack_guard_preserved": true,
+        "capacity": 0
+      },
+      {
+        "name": "used_over_capacity",
+        "results": [
+          0,
+          4294967295
+        ],
+        "ack_guard_preserved": true,
+        "capacity": 0
+      },
+      {
+        "name": "overflow_then_recover",
+        "results": [
+          0,
+          0,
+          4294967295,
+          0
+        ],
+        "ack_guard_preserved": true,
+        "capacity": 0
+      },
+      {
+        "name": "over_message_limit_4097",
+        "results": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          4294967295
+        ],
+        "ack_guard_preserved": true,
+        "capacity": 0
+      },
+      {
+        "name": "over_message_limit_4183",
+        "results": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          4294967295
+        ],
+        "ack_guard_preserved": true,
+        "capacity": 0
+      },
+      {
+        "name": "over_message_limit_4302",
+        "results": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          4294967295
+        ],
+        "ack_guard_preserved": true,
+        "capacity": 0
+      }
+    ],
+    "native_overflow_changes_ACK_table": "5858585858585858585858585858585858585858585858585858585858585858584e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e",
+    "native_instruction_bytes_covered": 422,
+    "native_instruction_bytes_expected": 424,
+    "native_uncovered_byte_addresses": [
+      "0x32210",
+      "0x32211"
+    ]
+  },
+  "audit": {
+    "unchanged_nongenerated_objects": 841,
+    "changed_nongenerated_objects": [
+      "r1/src/application/board/native_protocol_send_hook.c"
+    ],
+    "changed_generated_objects": [
+      "{gen}/r1_startup_vectors.S",
+      "{gen}/r1_uecc.c"
+    ],
+    "compiled_units": 852,
+    "application_imports": 66,
+    "bootloader_imports": 22,
+    "import_sets_unchanged": true
+  },
+  "contract": "Read the live volatile slot once; null returns ffffffff; nonnull invokes the public three-argument callback and returns its entire result word. Callback mutation of the slot survives.",
+  "assembly_removed": "Remove null-path r3 binding and use a three-argument function pointer matching the registered C fragment sender. Native r3 branch-target side effect is outside the public C ABI.",
+  "limits": [
+    "2144 direct comparisons cover full-word arguments/results, null hooks and slot mutation. Every14 native instruction bytes execute. Callee-saved integer/FP registers, SP, masks and slot guards checked; caller-saved values/private stack layout excluded.",
+    "1355 stock/C transport comparisons plus34 extended lengths and16 safety cases pass with actual C dispatcher then actual C sender, receiver, memory routines and CRC; callbacks/services remain modeled.",
+    "Build compiles852 units and composes both payloads with66 application and22 bootloader imports. Final link, hardware delivery and boot remain unverified."
+  ],
+  "evidence_files": {
+    "build/sources-goal-r1-send-hook-c/report.json": "85cf2d70e33a149bdb7489b25af0ea2da15bf3abac83cbf8ad74eec6e7191d1e",
+    "build/sources-goal-r1-send-registration-c/report.json": "575d31f63cdc3cd6f97c45c8260c2c0ea8e43db3c259f806cb622da4e76c5580",
+    "r1/src/application/board/native_protocol_send_hook.c": "f56c260b9539d7c5502343b1c677ced0515bba7db73161fed2370210290c5c0f",
+    "r1/src/application/board/native_protocol_port.c": "936925efa8bb6af9ecbeb0075dffbbd13d5990ccb95a283ffcac167197fa0712",
+    "build/goal-r1-send-hook-c/rea.json": "b5a00939114781e51f9de2bfe936ee5a73b750f9ec56798d1b30da182938f589",
+    "build/goal-r1-send-hook-c/verify.py": "da9aa5fbac3ec33d8a75b7607c7971d0a996658c48503357975d55f0922ce7df",
+    "build/goal-r1-send-hook-c/verification.json": "6d8254d3152400e9797af3ae6bb483ab9c6695c6359c2040130c341b83e7a367",
+    "build/goal-r1-send-hook-c/verification.log": "1df5bf29a9e9b9121976a194a8346f6e49fd1fe82b892ed4c394d821381b430e",
+    "build/goal-r1-send-hook-c/r1-check.log": "ff00837ff85e19cf04a893c77e51ce602c362675651960cf956f13903b124dc6",
+    "build/goal-r1-send-hook-c/integration/verify.py": "6363c65591c2b200a2fddf44f22c81bd12eebcb1ac89ddf3a70beaafbc5da62f",
+    "build/goal-r1-send-hook-c/integration/rea.json": "2703fee88c06a86195adbb2a944926350759276573b25a45fc772e20be842063",
+    "build/goal-r1-send-hook-c/integration/verification.json": "63da328271a4df3d17911dd489a2927fb0e6b6df5b9a45472342c23e5cf2967f",
+    "build/goal-r1-send-hook-c/integration/verification.log": "36730685c3cc3cbbbc879466a69c4b7b85cd41b296a58d6ad7fbdca73155ea01"
+  }
+}

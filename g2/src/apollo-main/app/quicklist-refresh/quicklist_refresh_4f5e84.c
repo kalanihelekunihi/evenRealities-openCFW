@@ -1,6 +1,14 @@
 /* Apollo QuickList refresh at 0x4f5e84..0x4f5faf.
  * The four lower QuickList calls remain separate provider contracts. */
 #include <stdint.h>
+/* Stock-RAM literals rewritten to named objects (sim-test wave 2026-10-26,
+ * .waves/sim-fix/apply.py): g2ref_X is the linker symbol X. */
+#include <stdint.h>
+/* Fix 48: stock flash 0x78eda4, 8-byte packet initialiser (copy loop bound; stock image bytes). */
+static const uint8_t g2_quicklist_packet_init_78eda4[8]={0x05u, 0x00u, 0x00u, 0x00u, 0x00u, 0x00u, 0x00u, 0x00u};
+extern unsigned char g2ref_g2_quicklist_flag_20075041[] __asm__("g2_quicklist_flag_20075041");
+extern unsigned char g2ref_g2_quicklist_ui_data_2012a72c[] __asm__("g2_quicklist_ui_data_2012a72c");
+extern unsigned char g2ref_g2_quicklist_word_20074e28[] __asm__("g2_quicklist_word_20074e28");
 
 extern uint32_t audio_quicklist_refresh_lock_4ffac8(void);
 extern uint32_t audio_quicklist_refresh_ready_4f5e18(void);
@@ -45,9 +53,9 @@ uint32_t audio_quicklist_refresh_4f5e84(void) {
         audio_quicklist_refresh_enabled_4434d0(1u) == 1u) {
         if (audio_uart_device_role_get() == 1u) {
             uint8_t packet[8];
-            const volatile uint8_t *initial = (const volatile uint8_t *)(uintptr_t)0x0078eda4u;
-            volatile uint8_t *selection = (volatile uint8_t *)(uintptr_t)0x20075041u;
-            volatile uint32_t *index = (volatile uint32_t *)(uintptr_t)0x20074e28u;
+            const volatile uint8_t *initial = g2_quicklist_packet_init_78eda4;
+            volatile uint8_t *selection = (volatile uint8_t *)(uintptr_t)((uint32_t)(uintptr_t)g2ref_g2_quicklist_flag_20075041);
+            volatile uint32_t *index = (volatile uint32_t *)(uintptr_t)((uint32_t)(uintptr_t)g2ref_g2_quicklist_word_20074e28);
             for (uint32_t i = 0; i < 8u; ++i) packet[i] = initial[i];
             packet[2] = *selection;
             packet[3] = (uint8_t)*index;
@@ -55,10 +63,10 @@ uint32_t audio_quicklist_refresh_4f5e84(void) {
             audio_uart_master_display_refresh(1u, packet, 6u, 0u);
         }
     } else {
-            volatile uint8_t *state = (volatile uint8_t *)(uintptr_t)0x2012d57au;
-            volatile uint16_t *index = (volatile uint16_t *)(uintptr_t)0x2012d574u;
-            *state = *(volatile uint8_t *)(uintptr_t)0x20075041u;
-            *index = (uint16_t)*(volatile uint32_t *)(uintptr_t)0x20074e28u;
+            volatile uint8_t *state = (volatile uint8_t *)(uintptr_t)((uint32_t)(uintptr_t)g2ref_g2_quicklist_ui_data_2012a72c+0x2e4eu);
+            volatile uint16_t *index = (volatile uint16_t *)(uintptr_t)((uint32_t)(uintptr_t)g2ref_g2_quicklist_ui_data_2012a72c+0x2e48u);
+            *state = *(volatile uint8_t *)(uintptr_t)((uint32_t)(uintptr_t)g2ref_g2_quicklist_flag_20075041);
+            *index = (uint16_t)*(volatile uint32_t *)(uintptr_t)((uint32_t)(uintptr_t)g2ref_g2_quicklist_word_20074e28);
             audio_quicklist_refresh_pending_4f5596();
             *state = 0u;
             *index = 0u;

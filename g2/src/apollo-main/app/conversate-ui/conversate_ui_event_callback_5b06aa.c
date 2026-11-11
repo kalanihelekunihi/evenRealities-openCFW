@@ -26,8 +26,6 @@ extern uint32_t audio_terminal_reset_mode_notice_54f50e(uint32_t);
 extern void audio_ble_param_reset_delayed_event(uint32_t);
 extern uint32_t audio_conversate_ui_close_notify_5b1d2a(const void *);
 extern uint8_t audio_uart_device_role_get(void);
-extern uint64_t audio_uart_ring_u64_div_47cc60(uint32_t, uint32_t,
-                                                 uint32_t, uint32_t);
 extern void audio_uart_ring_wear_persist_48eb32(uint32_t, uint32_t,
                                                   const void *);
 extern uint32_t audio_log_flags(void);
@@ -99,8 +97,7 @@ void audio_uart_registry_callback_5b06aa(uint32_t event, const void *input,
         uint32_t elapsed = g2_flashdb_candidate_tick() -
                            audio_conversate_ui_start_tick_20074390;
         uint64_t scaled = (uint64_t)elapsed * 1000u;
-        uint32_t duration = (uint32_t)audio_uart_ring_u64_div_47cc60(
-            (uint32_t)scaled, (uint32_t)(scaled >> 32), 1000u, 0u);
+        uint32_t duration = (uint32_t)(scaled / 1000u);
         if (audio_uart_device_role_get() == 1u) {
             uint32_t descriptor[2] = {1u, duration};
             audio_uart_ring_wear_persist_48eb32(0x40103u, 2u, descriptor);

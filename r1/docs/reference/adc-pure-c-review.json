@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "report": "build/sources-goal-r1-adc-pure-c/report.json",
+  "report_sha256": "d31d9669bd67a23dd12e6870f0e725730197cb316a76706ef397ba11fc566056",
+  "manifest_sha256": "07d1d673a3a503de947c5a2336275e5281b759cb112b0562bb60cd07f9eb6853",
+  "verification": {
+    "cases": {
+      "open": 864,
+      "sample": 864
+    },
+    "stock_previous_and_c_match": true,
+    "private_stack_and_caller_clobbered_registers_excluded": true,
+    "callback_pointers_normalized_to_contents": true,
+    "conversion_partial_and_nonwriting_results": true,
+    "physical_saadc_unverified": true
+  },
+  "defects": {
+    "detected": [
+      "zero-fallback",
+      "wrong-resolution",
+      "reopen-opened",
+      "omit-sample-copy"
+    ]
+  },
+  "audit": {
+    "unchanged_prior_object_hashes": 781,
+    "changed_objects": [
+      [
+        "r1-application",
+        "r1/src/application/adc/stock_named_adc.c"
+      ],
+      [
+        "r1-bootloader",
+        "{gen}/r1_startup_vectors.S"
+      ],
+      [
+        "r1-bootloader",
+        "{gen}/r1_uecc.c"
+      ]
+    ],
+    "canonical_adc_body_sections_and_relocations_unchanged": true,
+    "generated_boot_allocated_bytes_and_relocations_unchanged": true,
+    "imports_unchanged": true
+  },
+  "rea": {
+    "evidence_id": "ev_e6ecde1b1b44d3989258cc304ac7811725928fb45bff688ac89133d219eea11a",
+    "address": "0x54864",
+    "length": 216,
+    "sha256": "406ede34ae099b1cb02581e9c413ec7cbea0fbfbf369024f07abefbf53e7cbd5",
+    "matches_locked_application": true
+  },
+  "bootloader_link_report": "build/goal-r1-adc-pure-c/boot-link/report.json",
+  "bootloader_link_report_sha256": "550cb2daa3f94537beeec90701f0acce1d104de939ee6f0da83eff079f4090cc",
+  "evidence_files": {
+    "build/goal-r1-adc-pure-c/verify.py": "66c0736e57a7a27c52d05fc5fca79deb67918f6a4899adfaadcd7abcd8c688a2",
+    "build/goal-r1-adc-pure-c/audit.py": "02ce088d15c5cb4527521cb8d4d45f5fd5c66e5217c8cac0c4b244dba43044fb",
+    "build/goal-r1-adc-pure-c/defects.py": "6dd5a2c38358eb081c008ad434cc292c8f3a41791dc90fc9f3fc2a897fb260a8",
+    "build/goal-r1-adc-pure-c/verification.json": "5c0c7231a962ffb3958147de94488da5a7436563942b0e5263eeb358f71fe169",
+    "build/goal-r1-adc-pure-c/defects.json": "3e86843bd5bc41777e0a3b3fc1787e93b38560f53384178e3c054c780c094feb",
+    "build/goal-r1-adc-pure-c/rea.json": "927cf0b3761635506a52389f5a41d866c68edede28c36e23e65f5a63b2aaad4b"
+  },
+  "limitations": [
+    "Modeled SAADC/string/error/delay callbacks; no physical hardware validation.",
+    "Caller-clobbered registers and private stack addresses/content excluded.",
+    "Output aliasing private scratch is not a public typed C contract.",
+    "Full application remains unlinked."
+  ]
+}

@@ -1,0 +1,179 @@
+{
+  "schema_version": 1,
+  "report": "build/sources-goal-r1-dfu-auth-sdk-c/report.json",
+  "report_sha256": "9517495589c2c2f57fbffe305729f1db890b372eea2f0b2f725abe645d7e9e0d",
+  "manifest_sha256": "95440e3d32f0076e18f4163f1f0e144fdb2e773bc96fab0b82d5e95e598a6518",
+  "verification": {
+    "three_way_cases": {
+      "False": 5002,
+      "True": 1744
+    },
+    "actual_control_dispatch_cases": {
+      "False": 1168,
+      "True": 304
+    },
+    "HVC_handover_cases": {
+      "False": 0,
+      "True": 28
+    },
+    "modeled_shutdown_cases": {
+      "False": 0,
+      "True": 12
+    },
+    "executions": 20238,
+    "stock_previous_new_match": true,
+    "actual_SDK_indication_helper_backend_HVC_observer_and_finalizer_execute": true,
+    "single_actual_shared_owner_allocation_linked_and_seeded_not_SDK_initialized": true,
+    "service_effects_and_event_callbacks_modeled": true,
+    "nonwriting_partial_reads_busy_retries_full_status_words_and_live_connection_reload": true,
+    "reply_and_HVX_pointer_aliases_and_payloads_checked": true,
+    "private_frames_and_incidental_registers_excluded": true,
+    "physical_BLE_DFU_exception_and_async_effects_unverified": true
+  },
+  "defects": {
+    "wrong-get-service": {
+      "compiled": true,
+      "behavior_rejected": true
+    },
+    "wrong-reply-service": {
+      "compiled": true,
+      "behavior_rejected": true
+    },
+    "truncated-get-status": {
+      "compiled": true,
+      "behavior_rejected": true
+    },
+    "lost-busy-retry": {
+      "compiled": true,
+      "behavior_rejected": true
+    },
+    "shifted-value-pointer": {
+      "compiled": true,
+      "behavior_rejected": true
+    }
+  },
+  "audit": {
+    "unchanged_prior_object_hashes": 798,
+    "changed_object_hashes": [
+      [
+        "r1-application",
+        "r1/src/application/runtime/native_dfu_ble_event.c"
+      ],
+      [
+        "r1-bootloader",
+        "{gen}/r1_startup_vectors.S"
+      ],
+      [
+        "r1-bootloader",
+        "{gen}/r1_uecc.c"
+      ]
+    ],
+    "generated_boot_crypto_and_vectors_allocated_bytes_and_relocations_unchanged": true,
+    "removed_application_imports": [],
+    "unchanged_other_observer_functions": [
+      "authorize_kernel",
+      "r1_native_dfu_ble_event",
+      "r1_native_dfu_ctrlpt_authorize"
+    ]
+  },
+  "rea_bytes": [
+    {
+      "name": "authorize",
+      "evidence_id": "ev_465f1cbfb5eae3e96b4060e8eda3e5e949faa70b5996f80dbff8366c99a75862",
+      "address": "0x7cdc8",
+      "length": 100,
+      "matches_locked_raw": true,
+      "sha256": "cd658fe13c029d9a2379aaec192cc76ccb2e8e7dbc3684f02bb3df7e13bd4326"
+    },
+    {
+      "name": "event",
+      "evidence_id": "ev_85028afc84d7666c67b8c6145b91eb73f789c6250a98ecbc93083970b4f35ea9",
+      "address": "0x52154",
+      "length": 128,
+      "matches_locked_raw": true,
+      "sha256": "5ddc4b4f99fdbe120c05f468aa2c5ddc22f970672e6dc348f69f1dae310423f8"
+    }
+  ],
+  "raw_application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "compiled_header_sha256": {
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-dfu-auth-sdk-c/generated/r1/nrf_svci_clang.h": "6f681a36b0d7f0ef5d29fe86c7f9d9b8b3090f58447e9c3c7b1ecbdc14288453",
+    "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include/stdint.h": "99fe201684856075ccd92704f63b702f6fa882b9dab61bd7a9bcce2588275861",
+    "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include/machine/_default_types.h": "5d8f9f7ead7927e4b8b7ed00172e84f2ae82ea7f5f6ba3240ff813a9236771b3",
+    "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include/sys/features.h": "92eead7ab3bf7ecb315fd81d0f1eaec250f6d8d7d8574e3cd5d7f80dc779e771",
+    "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include/_newlib_version.h": "93a397574a25b9c143cee7fcb86d8fc9a0c9ba418e4710a30d2d19ba1e4120db",
+    "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include/sys/_intsup.h": "1af8abe244b43a3a5b5a85f6c834aa206930b6938e8109fbec430bc140b68df5",
+    "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include/sys/_stdint.h": "49f8328943afa2a83ed4a35fcb808ed08b8c9fcb55373c786fb1b1d3a21952d7",
+    "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx/mdk/compiler_abstraction.h": "dfff53ae3e96833a90a11ea3f71ae17bf2af8063049f0c9a12f9a0b9ecfd283b",
+    "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/util/app_util.h": "2c63e9579dd543ebeb0d46c190df49ccee721a324129bc02d010112df701262c",
+    "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stdbool.h": "48655faf4ebd4ca0af26a1ee8e3e16f8dc68385c9cd550ffb3629320681305b3",
+    "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stddef.h": "e8d92dad1b380f2f2130fd7aa446bcb4fc923f7062a41c7c35beb4913093a8f5",
+    "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stddef_header_macro.h": "4cf46e8fbb809df048eecbbd63686fa741da27afa8db4245bd1f61c1fb1611dc",
+    "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stddef_ptrdiff_t.h": "b4178a57f3711b7013cba747a72a2f178c29fa9364e77d75b2159754072ced43",
+    "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stddef_size_t.h": "d86ddc0238da09b385846ebef814ffc50a44e40cf85d4e3793f485952b7e73ad",
+    "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stddef_wchar_t.h": "1900d4998aef3698b06399ed686db0c21e26509b08638a25734fb97ae89b1001",
+    "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stddef_null.h": "b1d71b08563ab3d2c22a1e4f8ddf4d9a1111c89e9404b859a45c307e8ebc6c69",
+    "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stddef_max_align_t.h": "3c1e4de47f4f06b35e2c5890d670052e84f716760505ff51b022fc8b21a9400f",
+    "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stddef_offsetof.h": "e5f0f4ff8ff5fc6a1cc8b535f5065f1728eadd2bf1e1401f021f803ec7b4222f",
+    "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/util/nordic_common.h": "581b044fe45b512e572df7fff53af8b00bd8b2cd7bdacf8dfe91f18b93433f11",
+    "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx/mdk/nrf.h": "b56766254c51caeaf7916fcd61ea43bbabbeac3e261a8acf98dd43b59cb16bc6",
+    "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx/mdk/nrf52840.h": "3ee4810a62209afab4892a37b09e13e5f6926217bc23bc977c40c9be61ff0ff3",
+    "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/toolchain/cmsis/include/core_cm4.h": "cdc0c5ab9ba0f24c065e891d26c3e686ed04106700ce6a572cc7e83e71965b59",
+    "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/toolchain/cmsis/include/cmsis_version.h": "dd03af200b23bdd8d091ffa7beb3d1a2c4fc5611557567bd57ec613205f6df1f",
+    "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/toolchain/cmsis/include/cmsis_compiler.h": "869640702d811c4c63abb52206715c891a93fd03be954df5ad40d378355af3d6",
+    "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/toolchain/cmsis/include/cmsis_gcc.h": "0837f98e834d6a529854c8c86336e9d99eb8e379bf1deb964858d7863950f862",
+    "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/toolchain/cmsis/include/mpu_armv7.h": "e504a7d47dfdb3d61dfae3cf08d27ba9bc69aa4b2b81ca568efdafd65d6abdcc",
+    "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx/mdk/system_nrf52840.h": "01304326c0d3c2c371536cbbb75ba560a92f7fa06dc06f06ca878b52466eff97",
+    "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx/mdk/nrf52840_bitfields.h": "ad25863466e6844f277a9b4bcc5559d1289047d122f2806ea2e12d858f68de97",
+    "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx/mdk/nrf51_to_nrf52840.h": "304c8a3ac374baab709c0098da7f6e352a8ee135eb75e046cc5ddb33e3abe029",
+    "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx/mdk/nrf52_to_nrf52840.h": "5f5e52064fa9fced7c64ebcf5920b00107fe8782cb6e277959b03f0f355d5609",
+    "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/softdevice/s140/headers/nrf52/nrf_mbr.h": "64336b336ea231e2c00e7e75cb9594d6b8b153d6ceba5ece2f86300414f225b1",
+    "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/softdevice/s140/headers/nrf_svc.h": "d8deffc6ca5924e53543f86772e8bc4625ab08e2c7d0760d7d4ae90dc4a3a65e",
+    "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/softdevice/s140/headers/ble.h": "66fd5d2820aed6bc2c105bb878c128e22107bd7a9dfd66c50196a18e99627c08",
+    "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/softdevice/s140/headers/nrf_error.h": "e0b2a0aea6d28ca2f8215a66fb8816ae17852d505283e4d70863a7dc86f88fc5",
+    "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/softdevice/s140/headers/ble_err.h": "3a33c272f5f3a952d0985ccaf5dfb6976596a58063ee49d16962fd55e6969892",
+    "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/softdevice/s140/headers/ble_gap.h": "73f3bf6bdbb94b05ab1f4be0df5e97d384dd95abeb32f81b09ced58e441dde19",
+    "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/softdevice/s140/headers/ble_hci.h": "61f96a40c8e064771d47cd530707a7d94fe56ced0c463fc245a3a107de7d79f6",
+    "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/softdevice/s140/headers/ble_ranges.h": "85ff720d832563ff372241a494fdbb7a139ec202ee3808715122bf1c2ab81761",
+    "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/softdevice/s140/headers/ble_types.h": "e6d6ab2ba07a6a1cc1ed7171f74267c0b9c36b016b0d00ba9d9b8557512e9285",
+    "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/softdevice/s140/headers/ble_l2cap.h": "4aff08d7b5fdab2dcfd7dfad7b93b2f6b0b2aa4c7c742aded0cc4fb349dbb2bf",
+    "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/softdevice/s140/headers/ble_gatt.h": "95356e826d77e8393a6124762fab639a928b98487e03d02e66fa413b95d6f0f9",
+    "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/softdevice/s140/headers/ble_gattc.h": "f5cc49a274f5655b9f51ad63c809a701bce38f468537862d5f9f5ddacecec117",
+    "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/softdevice/s140/headers/ble_gatts.h": "309dabaf75e95d46dbf73e694d77ce6c9edf7ee1fdda0bc4ac77a75923d6d403",
+    "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/ble/ble_services/ble_dfu/ble_dfu.h": "1a3b14094b98948acf6c864827799e1dd8a6f8ad3c7b54892e6f590a054d1f94",
+    "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/ble/common/ble_srv_common.h": "f2ab573e6db144270a2e2dbf099f5e5699934a8974c594375345d635889b2dc9",
+    "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/softdevice/common/nrf_sdh_ble.h": "a33c055f74c7cf43b33fb4cfc93dadc503ca037872107067c26763ac610939d6",
+    "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/experimental_section_vars/nrf_section_iter.h": "f87f59a63386ac37d36a0d1a7da856879a992edf792db73e913c9d8f384e1440",
+    "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/experimental_section_vars/nrf_section.h": "4f2137b9db10f85831f5aa82ecd9fa869abf3644e3642e6e4f3dac0db2aa3bb8",
+    "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/util/nrf_assert.h": "2defafcb1d1ec72679dfcca8679e39733b1f94ca25a517758288f48f45c13b2f",
+    "/Users/kalani/Repo/evenRealities-openCFW/r1/src/config/sdk/sdk_config.h": "d67ba2704cf46a73f19c539eb81eed1d5cd56af2054f78d58255ea6439050b1f",
+    "/Users/kalani/Repo/evenRealities-openCFW/r1/src/config/sdk/../../../config-recovered/sdk_config.h": "d7dd86c6ed2885df8bd7f1d99b6c4fb911fddd00c90f791b03385623c959920c",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-dfu-auth-sdk-c/generated/r1/r1_sdk_example_defaults.h": "f0afc65eea1e86f87fd24dd4baf9aad43ce9132be547e979ccc434a9d32898ac",
+    "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/util/sdk_errors.h": "a0272269c39e3cf210a3c2d063123cfffd0640a489b8966a36eae11b299b884d"
+  },
+  "strict_bootloader_link_report_sha256": "6792e6b06da2bd4d42e4eb2a1865fe027d1b55f151eb2a6a9d32223a3a4b8417",
+  "evidence_files": {
+    "build/goal-r1-dfu-auth-sdk-c/verify.py": "fbfb8520543ea8a1f7d82de74f6302bac20ea9952c91195852ae67994987bc2f",
+    "build/goal-r1-dfu-auth-sdk-c/defects.py": "00f4593276bbbe9696d0519d7d900e2f3d46a8151ddd7fd22e9339a8d8ed60c2",
+    "build/goal-r1-dfu-auth-sdk-c/audit.py": "7dd63cd60be8505b0424f4654b7e676a918e82e2893eade097d9ff3c26e1dd3b",
+    "build/goal-r1-dfu-auth-sdk-c/verification.json": "b312dfb9f3d93244b31b92f4080840197b6d0e03fd3e526fc53c430300579fb9",
+    "build/goal-r1-dfu-auth-sdk-c/verify-final.log": "b2a276c9d7032e7fe07d82b60f8c1fd79cd24ba339382e0924c89d5c6eb4b721",
+    "build/goal-r1-dfu-auth-sdk-c/defects.json": "8d24a2a99e779c998a765d2286db969bd8686bc6c316d0d0dc3f3d7782715fe1",
+    "build/goal-r1-dfu-auth-sdk-c/defects.log": "be599f93d084cfb268ccfcff01ac016e24a48bb12ae0461e4cb1085cd25bfe10",
+    "build/goal-r1-dfu-auth-sdk-c/unit.dis": "3deb8102528ab982a22c0e9c01985449118de3710e066c35e501af9bc50be270",
+    "build/goal-r1-dfu-auth-sdk-c/sources-check.log": "f631cce80ab62163bd75c18877fd360880eecbdf2d26ea1436a7dbedd3bf9234",
+    "build/goal-r1-dfu-auth-sdk-c/chain0-1.elf": "22fc8f114baebe11fb4a915b7d7a02e35655ce5d5d7c76a150eb1f2e3e57a3a3",
+    "build/goal-r1-dfu-auth-sdk-c/chain0-2.elf": "f2423a80eade018ef15b8cee1fd6948c33e707d306830974a78562bde2ddc47a",
+    "build/goal-r1-dfu-auth-sdk-c/chain1-1.elf": "dc2d6c52148e649f1acabd4c3b88b0bbaec594b47a7c4a4db89bf2e7dff8bb1a",
+    "build/goal-r1-dfu-auth-sdk-c/chain1-2.elf": "38aefe816d3755f5ec2c34a5938c07103a30d4ef860eb06f265f5ab7604c19a2",
+    "build/goal-r1-dfu-auth-sdk-c/rea-authorize.json": "11cebccce6646b74f25540b53a978f67be576df90e357e9c1c4e1871f09290dc",
+    "build/goal-r1-dfu-auth-sdk-c/rea-event.json": "4d434064cf8be2e04d567ff3c3c017cd7c58b124a507d3900e1c131cdfb76976"
+  },
+  "source_plan_modified": false,
+  "limitations": [
+    "Service effects, event callbacks, shutdown and isolated control dispatch modeled; integrated backend/HVC/finalizer execute.",
+    "Actual shared SDK owner allocation linked and seeded, not SDK-initialized in this fixture.",
+    "Typed SDK input ranges only; private frames, incidental registers and full exception state excluded.",
+    "Physical BLE/GPREGRET/reset/DFU, asynchronous effects and full application final link unverified.",
+    "Unrelated G2 manifest failure remains."
+  ]
+}

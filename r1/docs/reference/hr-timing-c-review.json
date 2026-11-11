@@ -1,0 +1,147 @@
+{
+  "schema_version": 1,
+  "entries": {
+    "0x49ae8": "r1_hr_timing_timer_callback",
+    "0x49b60": "r1_hr_timing_result_plan",
+    "0x49c64": "r1_algo_hr_timing_timeout"
+  },
+  "report": "build/sources-goal-r1-hr-timing-reviewed-c/report.json",
+  "report_sha256": "e262cf411171868270d0902d9d8608937ba83a93ef3051190bf83f355040391b",
+  "unit": {
+    "source": "r1/src/application/runtime/native_health_hr_timing.c",
+    "source_sha256": "8a71c9ca9060fca55d37b3c454f339282a793c5c5e6b86b0186ec67f500d6a44",
+    "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-hr-timing-reviewed-c/r1/r1-application/r1__src__application__runtime__native_health_hr_timing.c.o",
+    "object_sha256": "5139f82c7516d5ba97f1a300557f98b1c941f2c392cd45b72b1846a314584000"
+  },
+  "behavior": {
+    "pairs": 3024,
+    "digest": "aa780958a20bd0a22eb8a1b900f6fe47f5bed5b581a98b7d2c8f377ab35fe8ee",
+    "actual_C": [
+      "HR timing scheduler/result/timeout",
+      "existing plausible helper and HR timeout release",
+      "shared HR/HRV owners"
+    ],
+    "modeled_boundaries": [
+      "r1_sensor_stream_register_by_name",
+      "r1_sensor_stream_unregister_by_name",
+      "r1_health_mode_is_2",
+      "r1_time_backend_timestamp",
+      "r1_event_publish",
+      "r1_structured_log_mode_get",
+      "r1_structured_log_format",
+      "nrf_log_frontend_std_3",
+      "nrf_log_frontend_std_0",
+      "r1_health_mode_get",
+      "r1_cfg_byte_get_73798",
+      "r1_stream_timer_create_front",
+      "r1_stream_timer_release",
+      "r1_gomore_authorization_dispatch_native",
+      "r1_hrv_timing_start_plan",
+      "r1_spo2_timing_start_plan"
+    ],
+    "limits": [
+      "Mapped non-null sample regardless of ignored length",
+      "Registered HRV producer checked by identity, not invoked",
+      "Stream registry/logging/clock/mode/event delivery modeled; no hardware/async proof",
+      "Private packet addresses normalized by contents; caller-clobbered registers excluded"
+    ]
+  },
+  "nv_integration": {
+    "pairs": 2328,
+    "digest": "c997faad86b41d1355d0d29fb6ef18f3d77a001d62bb8b53c3544e8038531862",
+    "actual_C": [
+      "HR timing callbacks",
+      "existing configuration gate and KV record bridge",
+      "HR plausible helper, timeout release and state owners"
+    ],
+    "modeled_boundaries": [
+      "r1_sensor_stream_register_by_name",
+      "r1_sensor_stream_unregister_by_name",
+      "r1_health_mode_is_2",
+      "r1_time_backend_timestamp",
+      "r1_event_publish",
+      "r1_structured_log_mode_get",
+      "r1_structured_log_format",
+      "nrf_log_frontend_std_3",
+      "nrf_log_frontend_std_0",
+      "r1_health_mode_get",
+      "r1_stream_timer_create_front",
+      "r1_stream_timer_release",
+      "r1_gomore_authorization_dispatch_native",
+      "r1_hrv_timing_start_plan",
+      "r1_spo2_timing_start_plan",
+      "r1_kv_class_read"
+    ],
+    "limits": [
+      "KV class read may partially write or fail; poisoned fresh/mixed stacks compared",
+      "Authorization and companion scheduling/timer/event services modeled",
+      "No physical NV/IRQ/timer proof; consumed flag byte and record offset compared; other unwritten scratch differs and is excluded"
+    ]
+  },
+  "negative_controls": {
+    "lost-health-gate": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "', '99090000000000007707000088080000'), ('mode', [7], '275678', '99090000000000007707000088080000'), ('ring', [213909504, '[RING]algo hr timing result: hr:%d, con:%d, sig:%d', 39, 86, 120], '275678', '99090000000000007707000088080000'), ('mode', [7], '275678', '99090000000000007707000088080000'), ('log3', [1835011, 'algo hr timing result: hr:%d, con:%d, sig:%d', 39, 86, 120], '275678', '99090000000000007707000088080000'), ('unregister', ['hr', 1], '275678', '99090000000000007707000088080000')])\n"
+    },
+    "lost-configuration-gate": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "', '99090000000000007707000088080000'), ('mode', [7], '275678', '99090000000000007707000088080000'), ('ring', [213909504, '[RING]algo hr timing result: hr:%d, con:%d, sig:%d', 39, 86, 120], '275678', '99090000000000007707000088080000'), ('mode', [7], '275678', '99090000000000007707000088080000'), ('log3', [1835011, 'algo hr timing result: hr:%d, con:%d, sig:%d', 39, 86, 120], '275678', '99090000000000007707000088080000'), ('unregister', ['hr', 1], '275678', '99090000000000007707000088080000')])\n"
+    },
+    "wrong-register-failure-short-circuit": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "', '99090000000000007707000088080000'), ('mode', [7], '275678', '99090000000000007707000088080000'), ('ring', [213909504, '[RING]algo hr timing result: hr:%d, con:%d, sig:%d', 39, 86, 120], '275678', '99090000000000007707000088080000'), ('mode', [7], '275678', '99090000000000007707000088080000'), ('log3', [1835011, 'algo hr timing result: hr:%d, con:%d, sig:%d', 39, 86, 120], '275678', '99090000000000007707000088080000'), ('unregister', ['hr', 1], '275678', '99090000000000007707000088080000')])\n"
+    },
+    "wrong-existing-stream-restart": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "', '99090000000000007707000088080000'), ('mode', [7], '275678', '99090000000000007707000088080000'), ('ring', [213909504, '[RING]algo hr timing result: hr:%d, con:%d, sig:%d', 39, 86, 120], '275678', '99090000000000007707000088080000'), ('mode', [7], '275678', '99090000000000007707000088080000'), ('log3', [1835011, 'algo hr timing result: hr:%d, con:%d, sig:%d', 39, 86, 120], '275678', '99090000000000007707000088080000'), ('unregister', ['hr', 1], '275678', '99090000000000007707000088080000')])\n"
+    },
+    "wrong-timeout-period": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "icorn.py\", line 1063, in __hook_code_cb\n    callback(uc, address, size, user_data)\n    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-hr-timing-c/verify.py\", line 40, in hook\n    elif n=='create':assert r0 in [0x49c65,syms['r1_algo_hr_timing_timeout']] and r1==120000 and r2==0;out=['HR timeout',r1,r2];result=state['created']\n                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    "lost-result-timer-release": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "90000000000007707000088080000')], [('mode', [7], '005678', '99090000341200007707000088080000'), ('ring', [213909504, '[RING]algo hr timing result: hr:%d, con:%d, sig:%d', 39, 145, 146], '279192', '99090000214365877707000088080000'), ('mode', [7], '279192', '99090000214365877707000088080000'), ('log3', [1835011, 'algo hr timing result: hr:%d, con:%d, sig:%d', 39, 145, 146], '279192', '99090000214365877707000088080000'), ('unregister', ['hr', 4660], '279192', '99090000214365877707000088080000')])\n"
+    },
+    "wrong-timeout-handle": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "26592, '[RING]algo hr timing timeout', 2881486851, 390070272, 390070273], 'dd9192', '99090000214365877707000088080000'), ('mode', [7], 'dd9192', '99090000214365877707000088080000'), ('log0', [1835011, 'algo hr timing timeout'], 'dd9192', '99090000214365877707000088080000'), ('unregister', ['hr', 2271560481], 'dd9192', '99090000214365877707000088080000'), ('authorize', [5, 0], 'dd9192', '99090000000000007707000088080000'), ('release', [1985229328], 'dd9192', '99090000000000007707000088080000')])\n"
+    },
+    "wrong-result-handle-slot": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "', '99090000341200007707000088080000'), ('mode', [0], '005678', '99090000341200007707000088080000'), ('mode', [0], '005678', '99090000341200007707000088080000'), ('unregister', ['hr', 4660], '005678', '99090000341200007707000088080000')], [('mode', [0], '005678', '99090000341200007707000088080000'), ('mode', [0], '005678', '99090000341200007707000088080000'), ('mode', [0], '005678', '99090000341200007707000088080000'), ('unregister', ['hr', 4660], '005678', '99090000341200007707000088080000')])\n"
+    }
+  },
+  "audit": {
+    "unchanged_prior_objects": 754,
+    "new_units": 1,
+    "imports": {
+      "r1-application": {
+        "added": [],
+        "removed": [
+          "r1_hr_timing_timer_callback"
+        ]
+      },
+      "r1-bootloader": {
+        "added": [],
+        "removed": []
+      }
+    },
+    "reused_owners": [
+      "r1_health_hr_streams",
+      "r1_hrv_timing_state; no new data ownership"
+    ]
+  },
+  "source_check": "R1 check passes: 755 units, 559 source files, 0 not built. Global check flagged concurrent G2 resident_rom_thumb_set.S absent from manifest.",
+  "rea": "hr-timing-c-rea.json",
+  "instruction_identity_proven": false,
+  "image_integration_proven": false
+}

@@ -1,6 +1,6 @@
+#include "native_float_bits.h"
 #include <stdint.h>
 extern uint32_t r1_native_floating_environment_control(void);
-extern uint32_t r1_binary32_classify_bits(uint32_t,uint32_t,uint32_t,uint32_t);
 extern void r1_native_errno_set(uint32_t);
 extern float r1_math_high_square32(void);
 extern float r1_math_low_square32(void);
@@ -25,19 +25,29 @@ const uint32_t r1_powf_exp_tail[16]={0x3f800000,0x3f85a000,0x3f8b9000,0x3f91c000
 typedef union{uint32_t bits;float value;} encoded_float;
 static float value(uint32_t bits){encoded_float x={.bits=bits};return x.value;}
 static uint32_t bits(float value){encoded_float x={.value=value};return x.bits;}
-#define BINARY(name,instruction) static float name(float a,float b){float r;__asm__ volatile(instruction " %0,%1,%2":"=t"(r):"t"(a),"t"(b));return r;}
-BINARY(add,"vadd.f32")
-BINARY(sub,"vsub.f32")
-BINARY(mul,"vmul.f32")
-BINARY(divide,"vdiv.f32")
-BINARY(negative_mul,"vnmul.f32")
-static float madd(float r,float a,float b){__asm__ volatile("vmla.f32 %0,%1,%2":"+t"(r):"t"(a),"t"(b));return r;}
-static float msub(float r,float a,float b){__asm__ volatile("vmls.f32 %0,%1,%2":"+t"(r):"t"(a),"t"(b));return r;}
-static float absolute(float x){__asm__ volatile("vabs.f32 %0,%0":"+t"(x));return x;}
-static float from_integer(uint32_t x){float r=value(x);__asm__ volatile("vcvt.f32.s32 %0,%0":"+t"(r));return r;}
-static uint32_t to_integer(float x){__asm__ volatile("vcvt.s32.f32 %0,%0":"+t"(x));return bits(x);}
-static float to_encoded_unsigned(float x){__asm__ volatile("vcvt.u32.f32 %0,%0":"+t"(x));return x;}
-static uint32_t zero_carry(float x){uint32_t status;__asm__ volatile("vcmpe.f32 %1,#0.0\n\tvmrs %0,fpscr":"=r"(status):"t"(x));return(status>>29)&1u;}
+static float add(float a,float b){return a+b;}
+static float sub(float a,float b){return a-b;}
+static float mul(float a,float b){return a*b;}
+static float divide(float a,float b){return a/b;}
+static float negative_mul(float a,float b){return -(a*b);}
+static float madd(float r,float a,float b){return r+a*b;}
+static float msub(float r,float a,float b){return r-a*b;}
+static float absolute(float x){return __builtin_fabsf(x);}
+static float from_integer(uint32_t x){return (float)(int32_t)x;}
+static uint32_t to_integer(float x){return (uint32_t)(int32_t)x;}
+static float to_encoded_unsigned(float x){return value((uint32_t)x);}
+static uint32_t zero_carry(float x)
+{
+ uint32_t raw=bits(x),fp=__builtin_arm_get_fpscr(),magnitude=raw&0x7fffffffu,flags;
+ /* Match VCMPE against zero, including FZ input flushing and signaling NaNs. */
+ if((fp&(1u<<24))&&magnitude&&magnitude<0x800000u){raw&=0x80000000u;magnitude=0;fp|=128u;}
+ if(magnitude>0x7f800000u){flags=0x30000000u;fp|=1u;}
+ else if(!magnitude)flags=0x60000000u;
+ else flags=(raw>>31)?0x80000000u:0x20000000u;
+ uint32_t result=(fp&0x0fffffffu)|flags;
+ __builtin_arm_set_fpscr(result);
+ return (result>>29)&1u;
+}
 static float rounded(float x){return value((bits(x)+0x800u)&~0xfffu);}
 static float signed_error(float sign,uint32_t overflow){r1_native_errno_set(2);float result=overflow ? r1_math_high_square32() : r1_math_low_square32();return value((bits(sign)&0x80000000u)|(bits(result)&0x7fffffffu));}
 float r1_powf_reduced(uint32_t input,int32_t adjustment,float base,float exponent,float sign)
@@ -84,6 +94,6 @@ float r1_powf_reduced(uint32_t input,int32_t adjustment,float base,float exponen
  float result=mul(s3,value(((uint32_t)second<<23)+0x3f800000u));encoded=bits(result);
  if((encoded<<1)==0xff000000u)return signed_error(sign,1);
  if((encoded<<1)==0)return signed_error(sign,0);
- if(r1_binary32_classify_bits(encoded,0,0,0)==4)(void)r1_math_low_square32();
+ if(r1_binary32_classify_bits(encoded,0,0,0)[0]==4)(void)r1_math_low_square32();
  return result;
 }

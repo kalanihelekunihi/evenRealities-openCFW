@@ -1,0 +1,147 @@
+{
+  "apollo_main_renode_boot": {
+    "advertising_enable_command_seen": true,
+    "hci_host_packets": 56,
+    "log_path": "build/boot-trace/g2-current-20261110-renode.log",
+    "log_sha256": "d7b6841c2b9f8ff97d83b928b128b8b2a85a843607a00bad3424ac762807b6a3",
+    "qualification": "Lenient Renode peripheral fixtures; not proof of physical-device boot.",
+    "virtual_seconds": 2.0
+  },
+  "compile": {
+    "g2-apollo-bootloader": {
+      "compiled": 225,
+      "composed_unresolved_symbols": 3,
+      "duplicate_strong_symbols": {},
+      "failed": [],
+      "units": 225
+    },
+    "g2-apollo-main": {
+      "compiled": 2718,
+      "composed_unresolved_symbols": 26,
+      "duplicate_strong_symbols": {},
+      "failed": [],
+      "units": 2718
+    },
+    "g2-case": {
+      "compiled": 366,
+      "composed_unresolved_symbols": 0,
+      "duplicate_strong_symbols": {},
+      "failed": [],
+      "units": 366
+    },
+    "g2-codec-a": {
+      "compiled": 347,
+      "composed_unresolved_symbols": 0,
+      "duplicate_strong_symbols": {},
+      "failed": [],
+      "units": 347
+    },
+    "g2-codec-b": {
+      "compiled": 332,
+      "composed_unresolved_symbols": 0,
+      "duplicate_strong_symbols": {},
+      "failed": [],
+      "units": 332
+    },
+    "g2-em9305": {
+      "compiled": 773,
+      "composed_unresolved_symbols": 9,
+      "duplicate_strong_symbols": {},
+      "failed": [],
+      "units": 773
+    },
+    "g2-touch": {
+      "compiled": 101,
+      "composed_unresolved_symbols": 12,
+      "duplicate_strong_symbols": {},
+      "failed": [],
+      "units": 101
+    }
+  },
+  "date": "2026-11-10",
+  "qualification": "All compile-enabled units and all seven final links passed. Apollo main still requires a binary Nordic fuel-gauge archive. All-C completeness, whole-artifact coverage, OTA packaging, and hardware behavior remain unproven.",
+  "schema_version": 1,
+  "seven_with_nordic_binary_archive": {
+    "binary_fuel_gauge_sha256": "a7df103a4c7cb14cff2693c82dc8b04430ce2a565e77c67abb43a18478704f3d",
+    "path": "build/g2-source-images-with-nordic-20261110/link-report.json",
+    "payloads": {
+      "g2-apollo-bootloader": {
+        "binary_bytes": 154224,
+        "binary_sha256": "aae79d93b51722fc15ae1be771afbd08953cb9e3a895c6d1604804293ac8b067",
+        "elf_sha256": "f3d755bffe9ed17771fdcc301af23404ae9761a12a5722429210dbffef739c43"
+      },
+      "g2-apollo-main": {
+        "binary_bytes": 3827992,
+        "binary_sha256": "4064d3bc2316db2b5b85a71ef3c9db243d331bb68827c81f9fb7865373019b59",
+        "elf_sha256": "e2ff8892b6410a9430f27f570296dd5872b748a8b9f89beb58d2625a9537c03f"
+      },
+      "g2-case": {
+        "binary_bytes": 60168,
+        "binary_sha256": "5ee7649074185edf784a0ec52179b8c19fadffd12860d5e4cb1fc322463abaab",
+        "elf_sha256": "4f9d1ff41a5ea727bf02d6cefdb30890b121eed79e23731c3c444587d5960d0b"
+      },
+      "g2-codec-a": {
+        "binary_bytes": 2155932,
+        "binary_sha256": "882b9c43500ad276e20762d791966cf70415ddf75e6db3039f2fd2f587252fba",
+        "elf_sha256": "ff70da87b0b3ed5f591a6284dbe2141deaa81fcf7f8eb68be866ef34d1ede9af"
+      },
+      "g2-codec-b": {
+        "binary_bytes": 81600,
+        "binary_sha256": "b9dba1471388c801e082292b0cf3c62a7ebf294dc6fb7711b47a5f0056432a80",
+        "elf_sha256": "36838fa039112a17e2530dc0fc36be74c6bfa1c78e7d6da55c4380582b2a88c8"
+      },
+      "g2-em9305": {
+        "binary_bytes": 247364,
+        "binary_sha256": "c6fd8a929bb27af6292cdab6a87d753010c5975410b8d05174cad160b0017d71",
+        "elf_sha256": "d36db61423d3f5930b7ea9509bd7eb710de8638c421f6562441da5f337420ef5"
+      },
+      "g2-touch": {
+        "binary_bytes": 28784,
+        "binary_sha256": "061f82a285f7338d446d364438a0aa878770fd08b23cf956e3c8193e25254294",
+        "elf_sha256": "b1341ec34340e023e52905ff35a787c78221863d1ec3c52e0782f378efec4eae"
+      }
+    },
+    "sha256": "9c099355ad6b46632a86c6bf457818685c5da46dc237a78c707159410b96652a"
+  },
+  "six_without_external_binary_archive": {
+    "path": "build/g2-source-only-six-20261110/link-report.json",
+    "payloads": {
+      "g2-apollo-bootloader": {
+        "binary_bytes": 154224,
+        "binary_sha256": "aae79d93b51722fc15ae1be771afbd08953cb9e3a895c6d1604804293ac8b067",
+        "elf_sha256": "f3d755bffe9ed17771fdcc301af23404ae9761a12a5722429210dbffef739c43"
+      },
+      "g2-case": {
+        "binary_bytes": 60168,
+        "binary_sha256": "5ee7649074185edf784a0ec52179b8c19fadffd12860d5e4cb1fc322463abaab",
+        "elf_sha256": "4f9d1ff41a5ea727bf02d6cefdb30890b121eed79e23731c3c444587d5960d0b"
+      },
+      "g2-codec-a": {
+        "binary_bytes": 2155932,
+        "binary_sha256": "882b9c43500ad276e20762d791966cf70415ddf75e6db3039f2fd2f587252fba",
+        "elf_sha256": "ff70da87b0b3ed5f591a6284dbe2141deaa81fcf7f8eb68be866ef34d1ede9af"
+      },
+      "g2-codec-b": {
+        "binary_bytes": 81600,
+        "binary_sha256": "b9dba1471388c801e082292b0cf3c62a7ebf294dc6fb7711b47a5f0056432a80",
+        "elf_sha256": "36838fa039112a17e2530dc0fc36be74c6bfa1c78e7d6da55c4380582b2a88c8"
+      },
+      "g2-em9305": {
+        "binary_bytes": 247364,
+        "binary_sha256": "c6fd8a929bb27af6292cdab6a87d753010c5975410b8d05174cad160b0017d71",
+        "elf_sha256": "d36db61423d3f5930b7ea9509bd7eb710de8638c421f6562441da5f337420ef5"
+      },
+      "g2-touch": {
+        "binary_bytes": 28784,
+        "binary_sha256": "061f82a285f7338d446d364438a0aa878770fd08b23cf956e3c8193e25254294",
+        "elf_sha256": "b1341ec34340e023e52905ff35a787c78221863d1ec3c52e0782f378efec4eae"
+      }
+    },
+    "sha256": "2d5e46c4c89343a513d20e6e491a4800d0f00d987167fde6b0ddf293040b92de"
+  },
+  "source_report": {
+    "manifest_sha256": "33aa0b6463281346d9c5848ab11dd68d5f1ebf309ccf14f46ee59eba4ab2aaae",
+    "path": "build/g2-current-20261110/report.json",
+    "sha256": "deb032fb83f0d61c68a6fa26ac16d450ddc1fba6be584e700c83c72e3aa186ae"
+  }
+}

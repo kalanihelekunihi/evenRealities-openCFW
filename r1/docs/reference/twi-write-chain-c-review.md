@@ -1,0 +1,11 @@
+# TWI packet/register/legacy transmit chain in C
+
+The two legacy transmit shims in `native_hw_twi_legacy_tx.c` now pass their declared `no_stop` parameter directly to the pinned Nordic inline driver. Fixed-R4 declarations and empty assembly are removed. Packet operations, register adapters and these shims now all use ordinary C source without inline assembly or stack helpers.
+
+The [receipt](twi-write-chain-c-review.json) records 8,640 stock/C packet-write cases executing the actual packet writer, repaired register writer and legacy transmit shim through the SDK TX boundary. The suite includes 3,840 guard/bulk/status cases and 4,800 short-write cases, with length eighty reached through its real packet caller. Payload bytes, transmitted lengths, controller state, wait order, packet status, saved registers and masks agree. The prior saved-R4 repair remains explicit; incidental intermediate register values are not compared.
+
+Another 7,560 read-adapter cases execute the actual legacy TX shim and exercise `no_stop=true`, while write-chain cases exercise `false`. Three deliberate shim defects with inverted no-stop, wrong address or wrong length are rejected. The fixture verifies current source hashes for all three participating write units before linkage. A stale predecessor-report reference in the initial fixture was corrected before accepting results.
+
+SDK TX/RX, waits and external error/scheduler/device behavior remain modeled. The write suite uses success or exact seventeen for bulk TX so a modeled returning error callback is unnecessary; lower error/retry behavior retains its direct register-writer receipt. Private frame aliases, scratch-register returns, electrical operation, IRQ timing and arbitrary faults/concurrency remain outside this proof. This is source-chain integration through the SDK boundary, not complete firmware linkage or physical bus validation.
+
+The normal report is `build/sources-goal-r1-twi-write-chain-c/report.json`: 727 units compile without failures or duplicate strong symbols. Application/bootloader imports remain 178/34. Only the legacy TX object changed; 726 objects remain unchanged from the register-write repair checkpoint. Both manifests pass `make sources-check`. No byte identity or source-plan qualification is claimed.

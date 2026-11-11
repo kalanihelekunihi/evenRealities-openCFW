@@ -7,7 +7,8 @@ extern uint32_t audio_log_flags(void);
 extern void audio_log_extended(uint8_t,const char *,const char *,const char *,uint32_t,const char *,...);
 extern uint32_t compressed_log_output(uint32_t,const char *,const char *,...);
 extern void *audio_uart_font_flash_device; /* RAM0x20074544 */
-extern void *audio_uart_font_flash_mutex; /* RAM0x20074548 */
+/* Stock reloads this handle after its NULL guard before the RTOS call. */
+extern void * volatile audio_uart_font_flash_mutex; /* RAM0x20074548 */
 extern uint8_t audio_uart_font_flash_sleep; /* RAM0x20074fb9 */
 extern uint8_t audio_uart_font_flash_mode; /* RAM0x20074fb8 */
 static const char module[]="drv.norflash"; /* ROM0x785cd0 */

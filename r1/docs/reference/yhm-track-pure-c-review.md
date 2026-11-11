@@ -1,0 +1,11 @@
+# PMIC system-tracking set and clear use ordinary C
+
+The PMIC system-tracking operations in `native_yhm_system_track.c` now use initialized volatile C words instead of fixed R2/R3/R4 variables, empty assembly and scratch-register restoration. The complete unit has no inline assembly or fixed-register declarations. Existing compatibility thunks remain unchanged.
+
+Both operations still initialize the RX byte to zero, read one byte from register one while ignoring read status, set or clear bit one, perform live logging-mode checks, and return the raw register-write status. Log-mode calls retain their short-circuit ordering, and volatile byte reloads retain callback-visible TX updates. Only one byte is written; unused upper scratch bytes and incidental R2/R3 outputs are no longer C API results.
+
+The [receipt](yhm-track-pure-c-review.json) records 16,512 paired stock/C cases for set and 16,512 for clear. Each includes 6,912 argument/status/log-mode cases and 9,600 callback-mutation cases. Coverage includes absent/partial/full read writes, raw read/write statuses, changing mode sequences, string/log arguments and mutations of either local word. Byte transport arguments, call order, log values, declared status, stack balance, saved registers and masks agree. Four controls with wrong set/clear bits, aborted read errors or discarded write status are rejected by replay.
+
+REA raw-byte observations identify `0x355bc` and `0x3543c`. Register transport and logging remain modeled. Private frames, unused upper scratch bytes and active provider saved-register contents are excluded. Physical PMIC, I2C and interrupt behavior remain unverified. No byte identity or completed source-only firmware image is claimed.
+
+The normal report is `build/sources-goal-r1-yhm-track-pure-c/report.json`: all 727 units compile without failures or duplicate strong symbols. Imports remain 178 application and 34 bootloader. Only the system-tracking object changed; 726 objects remain unchanged. Both compatibility thunk instruction sections and their named relocations are unchanged in the normal profile. Existing source-plan selections were not edited or expanded. Both source manifests pass `make sources-check`.

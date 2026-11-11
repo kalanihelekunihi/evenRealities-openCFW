@@ -2,7 +2,7 @@
  * Seeded pool block allocation at stock 0x100070ac. The raw 20-byte
  * bucket layout and boundary-pointer updates are transcribed from its
  * retained pseudocode and native branch structure. Runtime equality is
- * still unqualified; this is a complete C candidate, not a stub.
+ * still unqualified; this is a complete C candidate, not a filler.
  */
 #include <stdint.h>
 

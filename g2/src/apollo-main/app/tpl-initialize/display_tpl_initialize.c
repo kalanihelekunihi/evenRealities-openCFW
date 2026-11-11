@@ -19,41 +19,35 @@ static const char failure_short[] = "[prot.tran]Failed to create _g_SendBufferMu
 static const char success[] = "Static send buffer mutex initialized";
 static const char success_short[] = "[prot.tran]Static send buffer mutex initialized";
 
-void audio_tpl_initialize_body(uint32_t service, uint32_t *saved)
+/* Stock 0x4B892C (TPL_Init). The fifth argument is the caller's first stack
+ * word. The callers declare TPL_Init(uint8_t, ...); with integer and pointer
+ * arguments that is the same AAPCS call as these named parameters. The stock
+ * IAR epilogue popped two spilled argument words into R0:R1; the only caller
+ * (thread_manager_resource_init_4c94c8) discards the result, so this returns 0. */
+uint64_t TPL_Init(uint8_t service, uint32_t send_status, uint32_t rx_from_ble,
+                  uint32_t send_data, uint32_t direct_send)
 {
-    uint8_t *row = audio_tpl_service_table + ((uint8_t)service * 20u);
-    row[0] = (uint8_t)service;
-    __builtin_memcpy(row + 4u, &saved[0], 4u);
-    __builtin_memcpy(row + 8u, &saved[1], 4u);
-    __builtin_memcpy(row + 12u, &saved[2], 4u);
-    __builtin_memcpy(row + 16u, &saved[8], 4u);
+    uint8_t *row = audio_tpl_service_table + ((uint32_t)service * 20u);
+    row[0] = service;
+    __builtin_memcpy(row + 4u, &send_status, 4u);
+    __builtin_memcpy(row + 8u, &rx_from_ble, 4u);
+    __builtin_memcpy(row + 12u, &send_data, 4u);
+    __builtin_memcpy(row + 16u, &direct_send, 4u);
     audio_uart_buffer_zero(audio_tpl_contexts, 0xe0u, 0u);
-    if (audio_tpl_send_mutex != 0) return;
+    if (audio_tpl_send_mutex != 0) return 0u;
     audio_tpl_send_mutex = audio_uart_mutex_new(0);
     if (audio_tpl_send_mutex == 0) {
         if (audio_log_level() & 2u) {
-            saved[0] = 0x62u;
-            saved[1] = (uint32_t)(uintptr_t)failure;
             audio_log_extended(1u, module, source, function, 0x62u, failure);
         }
         if ((audio_log_level() & 1u) || (audio_log_level() & 4u))
             (void)compressed_log_output(0x04000000u, failure_short, failure_short);
     } else {
         if (audio_log_level() & 2u) {
-            saved[0] = 0x64u;
-            saved[1] = (uint32_t)(uintptr_t)success;
             audio_log_extended(4u, module, source, function, 0x64u, success);
         }
         if ((audio_log_level() & 1u) || (audio_log_level() & 4u))
             (void)compressed_log_output(0x10000000u, success_short, success_short);
     }
-}
-
-__attribute__((naked)) uint64_t TPL_Init(uint8_t service __attribute__((unused)), ...)
-{
-    __asm__ volatile(
-        "push {r1, r2, r3, r4, r5, r6, r7, lr}\n"
-        "mov r1, sp\n"
-        "bl audio_tpl_initialize_body\n"
-        "pop {r0, r1, r2, r4, r5, r6, r7, pc}\n");
+    return 0u;
 }

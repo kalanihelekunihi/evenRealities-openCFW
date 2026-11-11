@@ -32,7 +32,7 @@ per-range hashes and caller lists remain executable evidence in
 | `0x0006EAF8` | `goodix_primitives_table_ad160` | table binding accessor |
 | `0x0002E8C8` | `goodix_primitives_constant_one_a` | return 1 |
 | `0x0002E8C4` | `goodix_primitives_constant_four` | return 4 |
-| `0x0002AE00` | `goodix_primitives_constant_one_b` | return 1 |
+| `0x0002AE00` | pinned `GH3X2X_TimestampSyncGetFrameDataFlag` | return 1; superseded generic constant helper removed; see [timestamp closure](../reference/goodix-timestamp-closure-review.md) |
 
 These 21 entries comprise 294 bytes of declared Ghidra function extents. Three were previously
 inside the opaque Goodix closure, seventeen had public-democode mappings, and one was an R1
@@ -772,6 +772,36 @@ clock wraparound. These entries bring `goodix_primitives` to 170 exact-address
 mappings, with 212 formerly opaque Goodix candidates compiled locally and 108
 remaining.
 
+## Native algorithm shutdown controller admission — 2026-10-28
+
+The [shutdown-controller review](../reference/goodix-algorithm-shutdown-c-review.md) admits GH3X2X_AlgoDeinit at0x29f9c with all six nonzero deinit slots bound to C providers. It reuses the existing frame owner and adds canonical started/init state for future initialization/calculation to share. The real memory-configuration caller now reaches the C controller, allocator and reset callbacks without a stock-code fallback. The normal application import set drops GH3X2X_AlgoDeinit, from62 to61.
+
+The bitmap is updated before callbacks, every selected frame is read before its init byte, null callback slots leave their flags unchanged, and the first nonzero signed-byte result stops the walk without clearing the failed flag. Read/write order and live callback mutations are verified separately from the complete C heap path. This closes the locked deinit graph; initialization/calculation, cold FP activation, physical sensors, final executable placement and boot remain open.
+
+## Native NADT reset and ADT teardown admission — 2026-10-28
+
+The [NADT reset review](../reference/goodix-native-nadt-reset-c-review.md) admits the complete210-byte native reset,36-byte filter initializer and both ADT shutdown callbacks. The reset preserves reserved state bytes and its saved allocation pointer after release, while writing status0xbf only after release. Canonical typed state/workspace and coefficient arrays replace native data addresses. Future initialization/calculation must share these owners.
+
+Descriptor tests preserve exact floating-point bits and32-bit wrapped clear lengths, including overlapping history buffers. Actual C fill and allocator integration match byte/halfword/word write order and values. Fixtures prime an active FP context before setting FPSCR; cold lazy-FPU activation is outside this admission. The top-level shutdown controller, native initialization/calculation, physical sensors, executable placement and boot remain open.
+
+## Native SpO2 teardown and shutdown adapters admission — 2026-10-28
+
+The [SpO2 teardown review](../reference/goodix-native-spo2-teardown-c-review.md) admits the complete native ownership graph under0x6eb30, plus HR/SpO2 public deinit status adapters. Every descendant executes as ordinary C with the C allocator. The array destructor reloads both unsigned count and root pointer each iteration, and reloads the root even on the terminating count check. The parent reloads its canonical context owner between modules and clears it after final free. Three more native cell-release entries share the existing canonical C helper.
+
+The0x28ec0 record helper has six instruction bytes, with its tail target0x2d45c entering the separate0x36c60 context-pair destructor. The earlier ten-byte frontier attribution included non-entry bytes and is corrected. Existing portable ownership models remain separate convenience APIs; their native symbol hints are superseded by these offset-accurate providers. Initialization, computation, soft ADT shutdown, physical hardware, final placement and boot remain open.
+
+## Native processing parent and typed dispatch admission — 2026-10-28
+
+The [processing teardown review](../reference/goodix-native-processing-teardown-c-review.md) now admits the native parent at `0x6cc60` and dispatch at `0x29c74`. C providers replace every nonzero stock function-table entry: type0 extended record destruction, types1/2 common record destruction and type6 nullable allocation release. Indices3/4/5 are null in stock and remain outside the supported contract. No executable address from the stock table is retained.
+
+The parent destroys the workspace, reloads its owner before free, dispatches three context-owned records, releases/clears four cells and releases the live context last. It reloads the context owner before each operation and leaves both owner cells uncleared. Two canonical four-byte owners are exposed for future initialization to share. Integration executes the C allocator and every teardown descendant across all64 supported type triples; physical hardware, initialization, final placement and boot remain open. Earlier portable ownership models below remain convenience APIs rather than native implementations.
+
+## Native workspace and record ownership admission — 2026-10-28
+
+The [workspace review](../reference/goodix-native-workspace-teardown-c-review.md) and [record review](../reference/goodix-native-record-teardown-c-review.md) supersede the native symbol hints for these teardown functions. The earlier portable binding APIs below remain convenience models. The native C providers preserve actual record offsets, pointer reads, null-release behavior, root ownership and stock call order, and execute against the C heap without a stock-code fallback. The workspace record helper reads its allocation at record+4 and always calls free, including zero. Workspace destruction retains its root allocation; common/extended record destruction releases its root last.
+
+The `0x3e6b0` entry has 22 bytes; its separately entered common destructor at `0x29354` has 46 bytes. The old 68-byte combined attribution must not be interpreted as one contiguous function. Wrappers at `0x5a628` and `0x34a38` tail-enter the common destructor. Nullable release at `0x36230` and `0x3757c` shares one C provider. The native dispatcher and processing parent have not yet been admitted by these receipts.
+
 ## Context teardown, record-family teardown, and median
 
 Three entries / 346 bytes close a source-ready ownership and numerical layer:
@@ -858,16 +888,16 @@ formerly opaque Goodix candidates compiled locally and 100 remaining.
 
 ## Ordered register reset wrapper
 
-The callerless 28-byte entry at `0x0002E8CC` contains no hidden algorithm or
-table: Thumb-2 proves an ordered call to `GH3X2X_WriteReg(0x0502, 0)` followed
-by the tail call `GH3X2X_WriteRegBitField(0, 10, 10, 0)`. Both callees already
-route to pinned public-democode source. The local
-`goodix_primitives_reset_register_fields` function expresses their interfaces
-as typed write-register and write-bit-field operations and retains the exact
-constants and order without embedding the stock ops table. Tests capture both
-operations, all arguments, ordering, and missing-operation rejection. This
-entry brings `goodix_primitives` to 179 exact-address mappings, with 221
-formerly opaque Goodix candidates compiled locally and 99 remaining.
+The 28-byte entry at `0x0002E8CC` is now identified as pinned upstream
+`Gh3x2xIntPinTriggerModePro` under the stock polling configuration. It writes
+`GH3X2X_WriteReg(0x0502, 0)` then tail-calls
+`GH3X2X_WriteRegBitField(0, 10, 10, 0)`. GCC9 reproduces the complete body,
+including both linked provider targets. The earlier callback/context
+`goodix_primitives_reset_register_fields` abstraction and its unused interface
+were removed; they did not describe the stock no-argument firmware ABI.
+The existing ownership/frontier entry now points to the generated pinned
+provider, without adding inventory coverage. See
+[the native binding review](../reference/goodix-trigger-native-binding-review.md).
 
 ## Input-word copy and typed dispatch wrapper
 

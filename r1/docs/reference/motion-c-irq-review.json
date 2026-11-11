@@ -1,0 +1,96 @@
+{
+  "cases": 734,
+  "passed": 734,
+  "failures": [],
+  "stock_entry": "0x50294",
+  "stock_body_bytes": 18,
+  "c_body_bytes": 24,
+  "callback_adapter_bytes": 2,
+  "callback_stack_depth_pairs": [
+    [
+      [],
+      []
+    ],
+    [
+      [
+        0
+      ],
+      [
+        0
+      ]
+    ],
+    [
+      [
+        0,
+        -8,
+        -8,
+        0
+      ],
+      [
+        0,
+        -8,
+        -8,
+        0
+      ]
+    ]
+  ],
+  "actual_callback_cases": 112,
+  "unchanged_functions": [
+    "r1_motion_adjust_samples",
+    "r1_motion_calibration_body",
+    "r1_motion_calibration_bypassed",
+    "r1_motion_calibration_read",
+    "r1_motion_initialize_entry",
+    "r1_motion_selected_fifo_read",
+    "r1_motion_selected_provider_initialize",
+    "r1_motion_stream_close_boundary",
+    "r1_motion_thirty_sample_batch_producer"
+  ],
+  "integrated_sources": [
+    "r1/src/application/runtime/native_motion_stream.c",
+    "r1/src/application/runtime/native_motion_selection.c"
+  ],
+  "report": "build/sources-goal-r1-motion-irq/report.json",
+  "report_sha256": "da3439f982b4a8a2299a0a653f3f8ef3f70d83fce5e0220fe8b7dd70c161d675",
+  "source_sha256": "f7f2c297f9f737a9f48ac681152328bb9dfaabf7d334fec6708983b898dad9c0",
+  "manifest_sha256": "59fdbc1dac961b45d682cd2bb5bd1fbc417cd95e7082d50a778c69d6e24ee734",
+  "stock_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "native_span_sha256": "328fcb6a767dcefd8243ca1298bc450ebac5db58bf9442fcf77f92a3d72961d1",
+  "rea": {
+    "completed": true,
+    "procedure": "0x50294",
+    "path": "build/goal-r1-motion-irq/REA.json",
+    "sha256": "3ab277c13aece5780c46c6efb247a35b22ec10e1e1dabc70ea8743fbbe2e362a"
+  },
+  "actual_callback_native_spans": {
+    "0x6f3b2": {
+      "size": 2,
+      "sha256": "c7dfbb7d02759eacb64dbc916c1bb6f21eabaff1c1032ea5c9176abf7fd28df8"
+    },
+    "0x6f1da": {
+      "size": 2,
+      "sha256": "c7dfbb7d02759eacb64dbc916c1bb6f21eabaff1c1032ea5c9176abf7fd28df8"
+    },
+    "0x6f436": {
+      "size": 18,
+      "sha256": "443a2fac2784fd3089a8fbbc773d19872dce3ffb6e584a1ae30ef17a0b0f4ed0"
+    }
+  },
+  "probe_artifacts": {
+    "build/goal-r1-motion-irq/verify.py": "31650076323947126e9cf0ff13b213338633ad9de9283ce45ddef912d517e94a",
+    "build/goal-r1-motion-irq/before.c": "c6ae1bac85d0a9ad7047212954ff0b5b06bcfdf1131cda2cbd5d91c3df8964df",
+    "build/goal-r1-motion-irq/source.elf": "5e6e53deaea018b3732f68371ba4c5bb60779ed3c40c3c50e2ba8c486947ad76",
+    "build/goal-r1-motion-irq/stock.elf": "658ea686abbe7f99a6e6a0482b47524ff7470f65bf9570e997dd714a6b97d3a4",
+    "build/goal-r1-motion-irq/rea-snapshot.json": "450bdb8afa486492f9161cbc06bd9824ecc6d779ecb8ab5cd02cebbc48e8ab75"
+  },
+  "integrated_source_sha256": {
+    "r1/src/application/runtime/native_motion_stream.c": "f7f2c297f9f737a9f48ac681152328bb9dfaabf7d334fec6708983b898dad9c0",
+    "r1/src/application/runtime/native_motion_selection.c": "2ff5a9301b8cdd3fe6ae13ddd7fecb5f747bb2740ff590984e36ad50bdd7b86f"
+  },
+  "limits": [
+    "A two-byte ABI adapter branches to the captured pointer and retains machine R0 for mixed void/status callbacks; this is a partial C extraction.",
+    "Actual no-op and QMA wrapper integration uses modeled callback trampolines to preserve the same callback pointer value on both sides. QMA bus acquisition, IRQ provider and release are modeled boundaries.",
+    "No added callback-entry frame is observed; this does not establish all flags, volatile registers or complete fault-state identity.",
+    "No physical interrupt delivery, bus timing, final link, provider qualification or byte identity claim."
+  ]
+}

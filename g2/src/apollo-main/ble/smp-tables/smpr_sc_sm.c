@@ -2,7 +2,9 @@
  * All indexed state rows and action names match stock interface pointers.
  * Pinned AmbiqSuite source is included verbatim below; only public names
  * are scoped to this experimental table candidate. */
-#define SmprScInit audio_ble_pinned_smprscinit_unused
+/* The vendored SmprScInit body below is the single implementation of the stock
+ * SMP state-machine init entry (formerly a hand copy in
+ * ble/ble-smp/display_ble_smp_sm_init.c). */
 #define smprScSmIf audio_ble_smpr_sc_table
 #define smprStateStr audio_ble_pinned_smpr_statestr_unused
 #define smpCb audio_ble_smp_handler_state

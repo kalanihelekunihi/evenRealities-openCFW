@@ -1,0 +1,143 @@
+{
+  "schema_version": 1,
+  "entries": {
+    "0x4a8c8": "r1_algo_sleep_vivo_probe_start",
+    "0x4a998": "r1_sleep_vivo_probe_stop"
+  },
+  "report": "build/sources-goal-r1-vivo-probe-c/report.json",
+  "report_sha256": "1201d8bce8ecef5096dd47d35d25de1a39a2f85033f80bf56752acba1ca59e90",
+  "unit": {
+    "source": "r1/src/application/runtime/native_sleep_vivo_probe.c",
+    "source_sha256": "38484a1671b280f6bed94e2c0ee311ef9a05a31c36ed07002361e193cd48374a",
+    "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-vivo-probe-c/r1/r1-application/r1__src__application__runtime__native_sleep_vivo_probe.c.o",
+    "object_sha256": "e455902290f33615d08b1285df5478780cafe8eb1af8e37a64eb97fc02aea010"
+  },
+  "behavior": {
+    "pairs": 1344,
+    "digest": "1f6e7637d765d9d547362a267147634b00f0287f480a7c86c40a531116a5ef0c",
+    "actual_C": [
+      "vivo start and stop",
+      "canonical shared sleep-control data owner",
+      "new four-byte timer owner"
+    ],
+    "modeled_boundaries": [
+      "r1_health_mode_is_2",
+      "r1_health_mode_get",
+      "r1_gomore_authorization_dispatch_native",
+      "r1_stream_timer_create_front",
+      "r1_stream_timer_release",
+      "r1_structured_log_mode_get",
+      "r1_structured_log_format",
+      "nrf_log_frontend_std_0",
+      "r1_algo_sleep_force_awake"
+    ],
+    "limits": [
+      "No asynchronous timer/IRQ/concurrency",
+      "Timer callback normalized by native/C symbol identity",
+      "Force-wake internals, authorization, timer allocator and hardware sensing modeled"
+    ]
+  },
+  "report_integration": {
+    "pairs": 840,
+    "digest": "d9bcb45f7e3bb38b3bf1e6334e10abe2ff2134f2fc9b2998ee257392786ff0c7",
+    "actual_C": [
+      "sleep report",
+      "activity mode getter",
+      "default-mode callback",
+      "force-wake callback",
+      "single shared sleep control owner",
+      "actual vivo start/stop and timer word"
+    ],
+    "modeled_boundaries": [
+      "r1_structured_log_mode_get",
+      "r1_structured_log_format",
+      "nrf_log_frontend_std_1",
+      "nrf_log_frontend_std_0",
+      "r1_event_publish",
+      "r1_event_service_0008b028",
+      "r1_temp_sleep_status_report",
+      "r1_gomore_sleep_force_wake_native",
+      "r1_stream_timer_create_front",
+      "r1_stream_timer_release",
+      "r1_health_mode_is_2",
+      "r1_health_mode_get",
+      "r1_gomore_authorization_dispatch_native"
+    ],
+    "limits": [
+      "No asynchronous IRQ/concurrency",
+      "Private status pointer normalized by one-byte contents",
+      "Vivo probe, multicast, force-wake internals and physical delivery modeled"
+    ]
+  },
+  "negative_controls": {
+    "wrong-is2-normalization": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "r k in a if a[k]!=b[k]],a['trace'],b['trace']);digest.update(json.dumps([kw,a]).encode());pairs+=1\n                                              ^^^^\nAssertionError: ({'actions': ('start',), 'flag': 0, 'timer': 0, 'is2': 2, 'health': 0, 'authorized': 0, 'created': 0, 'modes': (0,)}, ['trace'], [('is2', [], '010034563412c0ab00000000')], [('is2', [], '010034563412c0ab00000000'), ('authorize', [5, 1], '010034563412c0ab00000000'), ('create', ['vivo callback', 5000, 0], '010034563412c0ab00000000')])\n"
+    },
+    "lost-existing-timer-guard": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": ";assert a==b,(kw,[k for k in a if a[k]!=b[k]],a['trace'],b['trace']);digest.update(json.dumps([kw,a]).encode());pairs+=1\n                                              ^^^^\nAssertionError: ({'actions': ('start',), 'flag': 0, 'timer': 305419896, 'is2': 0, 'health': 0, 'authorized': 0, 'created': 0, 'modes': (0,)}, ['trace', 'state'], [], [('is2', [], '010034563412c0ab78563412'), ('authorize', [5, 1], '010034563412c0ab78563412'), ('create', ['vivo callback', 5000, 0], '010034563412c0ab78563412')])\n"
+    },
+    "wrong-authorization-width": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "ions': ('start',), 'flag': 0, 'timer': 0, 'is2': 0, 'health': 0, 'authorized': 256, 'created': 0, 'modes': (0,)}, ['trace'], [('is2', [], '010034563412c0ab00000000'), ('authorize', [5, 1], '010034563412c0ab00000000'), ('create', ['vivo callback', 5000, 0], '010034563412c0ab00000000')], [('is2', [], '010034563412c0ab00000000'), ('authorize', [5, 1], '010034563412c0ab00000000'), ('create', ['vivo callback', 5000, 0], '010134563412c0ab00000000'), ('authorize', [5, 0], '010134563412c0ab00000000')])\n"
+    },
+    "wrong-period": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "site-packages/unicorn/unicorn_py3/unicorn.py\", line 1063, in __hook_code_cb\n    callback(uc, address, size, user_data)\n    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-vivo-probe-c/verify.py\", line 38, in hook\n    assert r0 in [0x4a999,syms['r1_sleep_vivo_probe_stop']] and r1==5000 and r2==0;out=['vivo callback',r1,r2];result=state['created']\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    "wrong-release-handle": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "c, *args, **kwargs)\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 1063, in __hook_code_cb\n    callback(uc, address, size, user_data)\n    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-vivo-probe-c/verify.py\", line 39, in hook\n    elif n=='release':out=[r0];assert r0==0x76543210\n                                      ^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    "early-timer-clear": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": " ('mode', [0], '010034563412c0ab78563412'), ('mode', [0], '010034563412c0ab78563412'), ('mode', [0], '010034563412c0ab78563412'), ('wake', [], '010034563412c0ab78563412'), ('release', [1985229328], '010034563412c0ab78563412')], [('health', [], '010034563412c0ab78563412'), ('mode', [0], '010034563412c0ab78563412'), ('mode', [0], '010034563412c0ab78563412'), ('mode', [0], '010034563412c0ab78563412'), ('wake', [], '010034563412c0ab78563412'), ('release', [1985229328], '010034563412c0ab00000000')])\n"
+    },
+    "lost-failure-rollback": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "('start',), 'flag': 0, 'timer': 0, 'is2': 0, 'health': 0, 'authorized': 1, 'created': 0, 'modes': (0,)}, ['trace', 'state'], [('is2', [], '010034563412c0ab00000000'), ('authorize', [5, 1], '010034563412c0ab00000000'), ('create', ['vivo callback', 5000, 0], '010134563412c0ab00000000'), ('authorize', [5, 0], '010134563412c0ab00000000')], [('is2', [], '010034563412c0ab00000000'), ('authorize', [5, 1], '010034563412c0ab00000000'), ('create', ['vivo callback', 5000, 0], '010134563412c0ab00000000')])\n"
+    },
+    "lost-stop-authorization-clear": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": ", [0], '010134563412c0ab00000000'), ('mode', [0], '010134563412c0ab00000000'), ('wake', [], '010134563412c0ab00000000'), ('authorize', [5, 0], '010134563412c0ab00000000'), ('release', [1985229328], '010034563412c0ab00000000')], [('health', [], '010034563412c0ab00000000'), ('mode', [0], '010034563412c0ab00000000'), ('mode', [0], '010034563412c0ab00000000'), ('mode', [0], '010034563412c0ab00000000'), ('wake', [], '010034563412c0ab00000000'), ('release', [1985229328], '010034563412c0ab00000000')])\n"
+    },
+    "wrong-stop-health-polarity": {
+      "compiled": true,
+      "rejected": true,
+      "diagnostic": "{'actions': ('stop',), 'flag': 0, 'timer': 0, 'is2': 0, 'health': 0, 'authorized': 0, 'created': 0, 'modes': (0,)}, ['trace'], [('health', [], '010034563412c0ab00000000'), ('mode', [0], '010034563412c0ab00000000'), ('mode', [0], '010034563412c0ab00000000'), ('mode', [0], '010034563412c0ab00000000'), ('wake', [], '010034563412c0ab00000000'), ('release', [1985229328], '010034563412c0ab00000000')], [('health', [], '010034563412c0ab00000000'), ('release', [1985229328], '010034563412c0ab00000000')])\n"
+    }
+  },
+  "audit": {
+    "unchanged_prior_objects": 747,
+    "new_units": 1,
+    "imports": {
+      "r1-application": {
+        "added": [],
+        "removed": [
+          "r1_algo_sleep_vivo_probe_start"
+        ]
+      },
+      "r1-bootloader": {
+        "added": [],
+        "removed": []
+      }
+    },
+    "reused_owners": [
+      "r1_sleep_wake_control: probe flag reuses reserved byte 0"
+    ]
+  },
+  "initialization": "sleep-vivo-initialization.json",
+  "source_check": "make sources-check passes: G2 5060 units, 4739 source files; R1 748 units, 552 source files; 0 not built in both",
+  "rea": "sleep-vivo-probe-c-rea.json",
+  "instruction_identity_proven": false,
+  "image_integration_proven": false
+}

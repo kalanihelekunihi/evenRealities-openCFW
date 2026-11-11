@@ -14,8 +14,8 @@ extern uint32_t audio_uart_page_43de82(uint32_t);
 extern void audio_uart_page_43f4c0(uint32_t, uint32_t, uint32_t);
 extern void audio_uart_page_43f6b8(uint32_t, uint32_t, uint32_t, uint32_t);
 extern void audio_uart_page_44129e(uint32_t, uint32_t, uint32_t);
-extern void audio_uart_page_44131c(uint32_t, uint32_t, uint32_t);
-extern void audio_uart_page_44146a(uint32_t, uint32_t, uint32_t);
+extern void lv_obj_set_style_border_width(uint32_t, uint32_t, uint32_t);
+extern void lv_obj_set_style_radius(uint32_t, uint32_t, uint32_t);
 extern void audio_conversate_display_style_5b22bc(uint32_t, uint32_t, uint32_t);
 extern void audio_conversate_display_tick_5b22ee(void);
 extern void audio_uart_page_43dfa4(uint32_t, uint32_t);
@@ -35,7 +35,7 @@ extern uint32_t audio_uart_page_460084(const char *);
 extern uint32_t audio_uart_page_45fffe(const char *, uint32_t);
 extern uint32_t audio_conversate_prep_button_create_5b1150(uint32_t, uint32_t, uint32_t, uint32_t);
 extern void audio_uart_page_4411aa(uint32_t, uint32_t, uint32_t);
-extern void audio_uart_page_441386(uint32_t, uint32_t, uint32_t);
+extern void lv_obj_set_style_shadow_width(uint32_t, uint32_t, uint32_t);
 extern void audio_uart_page_44e368(uint32_t, uint32_t);
 extern void audio_uart_page_43ded4(uint32_t, uint32_t);
 extern void audio_uart_page_499678(uint32_t, uint32_t);
@@ -98,8 +98,8 @@ uint32_t audio_conversate_ui_route_5b2d64(uint32_t ignored, uint32_t elapsed,
     audio_uart_page_43f4c0(root, 0x240u, 0xccu);
     audio_uart_page_43f6b8(root, 2u, 0u, 0u);
     audio_uart_page_44129e(root, 0u, 0u);
-    audio_uart_page_44131c(root, 0u, 0u);
-    audio_uart_page_44146a(root, 0u, 0u);
+    lv_obj_set_style_border_width(root, 0u, 0u);
+    lv_obj_set_style_radius(root, 0u, 0u);
     audio_conversate_display_style_5b22bc(root, 0u, 0u);
     audio_uart_page_43dfa4(root, 0x70u);
 
@@ -108,8 +108,8 @@ uint32_t audio_conversate_ui_route_5b2d64(uint32_t ignored, uint32_t elapsed,
     audio_uart_page_43f4c0(header, 0x3fffffffu, 0x1cu);
     audio_uart_page_43f6b8(header, 3u, UINT32_MAX - 11u, 8u);
     audio_uart_page_44129e(header, 0u, 0u);
-    audio_uart_page_44131c(header, 0u, 0u);
-    audio_uart_page_44146a(header, 0u, 0u);
+    lv_obj_set_style_border_width(header, 0u, 0u);
+    lv_obj_set_style_radius(header, 0u, 0u);
     audio_conversate_display_style_5b22bc(header, 0u, 0u);
     const uint32_t indicator = audio_conversate_pre_notes_anim_create_58c7a0(
         header, (uint32_t)(uintptr_t)audio_conversate_display_tick_5b22ee);
@@ -145,9 +145,9 @@ uint32_t audio_conversate_ui_route_5b2d64(uint32_t ignored, uint32_t elapsed,
     audio_uart_page_4411aa(footer, 0x54u, 0u);
     audio_uart_page_43f6b8(footer, 5u, 0u, 0u);
     audio_uart_page_44129e(footer, 0u, 0u);
-    audio_uart_page_44131c(footer, 0u, 0u);
-    audio_uart_page_44146a(footer, 0u, 0u);
-    audio_uart_page_441386(footer, 0u, 0u);
+    lv_obj_set_style_border_width(footer, 0u, 0u);
+    lv_obj_set_style_radius(footer, 0u, 0u);
+    lv_obj_set_style_shadow_width(footer, 0u, 0u);
     audio_conversate_display_style_5b22bc(footer, 0u, 0u);
     audio_uart_page_44e368(footer, 0u);
     audio_uart_page_43ded4(footer, 0x10u);

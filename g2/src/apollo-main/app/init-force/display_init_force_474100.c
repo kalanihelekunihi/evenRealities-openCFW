@@ -2,7 +2,12 @@
 #include <stdint.h>
 
 extern uint32_t audio_display_hw_initialized_200744ec; /* 0x200744ec */
-extern volatile uint32_t audio_uart_display_manager_queue_cell; /* 0x20000664 */
+/* Fix 59: stock reads the display-manager queue as [0x20000658,#12]
+ * (0x473b74, 0x473bea, 0x4740a8, 0x4741fc, 0x4743ce ...); it is the .queue field
+ * written by display_driver_callbacks.c (audio_queue_new), not a separate cell. */
+extern unsigned char g2ref_audio_display_driver_manager[] __asm__("audio_display_driver_manager"); /* RAM 0x20000658 */
+#define audio_uart_display_manager_queue_cell \
+    (*(volatile uint32_t *)(void *)(g2ref_audio_display_driver_manager + 0xcu)) /* RAM 0x20000664 */
 extern uint32_t audio_log_wake_allowed(void); /* 0x443484 */
 extern void audio_uart_buffer_zero(void *, uint32_t, uint32_t); /* 0x43c0e4 */
 extern int32_t audio_cmsis_queue_put(void *, const void *, uint8_t, uint32_t); /* 0x449abe */

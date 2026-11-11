@@ -1,0 +1,29 @@
+{
+  "schema": 1,
+  "scope": "all six locked G2 OTA component payloads versus the seven-payload source candidate",
+  "comparison_tool": "g2/tools/compare_source_candidate.py",
+  "comparison_tool_sha256": "1f55a3b308d252197d3e974198101f433d2430cdc09ace08156eb13cdb31d3a9",
+  "report": "build/g2-source-candidate-comparison-20261111/report.json",
+  "report_sha256": "8e300238f9ec2bf53d659e7c2dc2b62bb9590fcdccad4ee4582d413db17875bb",
+  "authenticated_against": "g2/workflow/target.json and per-component manifest size/SHA-256 pins",
+  "candidate_weight_input": "synthetic all-zero test fixture; not a trained model",
+  "components": [
+    {"name": "codec", "candidate_minus_stock_bytes": 0, "same_offset_equal_bytes": 39037, "kws_commands_exact": true},
+    {"name": "ble_em9305", "candidate_minus_stock_bytes": 36748, "same_offset_equal_bytes": 4418},
+    {"name": "touch", "candidate_minus_stock_bytes": -5644, "same_offset_equal_bytes": 1019},
+    {"name": "case", "candidate_minus_stock_bytes": 4416, "same_offset_equal_bytes": 1653},
+    {"name": "apollo_bootloader", "candidate_minus_stock_bytes": 5633, "same_offset_equal_bytes": 4152},
+    {"name": "apollo_main", "candidate_minus_stock_bytes": 295664, "same_offset_equal_bytes": 140629}
+  ],
+  "verification": {
+    "source_link_receipt_checked": true,
+    "locked_target_identity_checked": true,
+    "all_official_components_authenticated": true,
+    "candidate_evenota_structure_validated": true,
+    "tampered_link_receipt_rejected": true,
+    "bundle_byte_identical": false,
+    "component_byte_identical_count": 0
+  },
+  "interpretation": "The codec command window is an exact source-generated region. Same-offset equal bytes elsewhere do not measure code coverage because source section layout and compiler output differ. Size deltas and first differences are triage signals, not proof of missing functions.",
+  "next_verification": "Compare source ELF sections and symbol-level function bodies to the frozen G2 pseudocode corpus before attributing unmatched bytes to code, data, padding, or placement."
+}

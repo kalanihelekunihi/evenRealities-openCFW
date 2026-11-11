@@ -1,0 +1,29 @@
+{
+  "evidence_id": "ev_0f78fe6fb967528fccad6048d269cee75e4fb4af3a4b94428934bafe320448d7",
+  "subject": {
+    "name": "stock.elf",
+    "digest": {
+      "sha256": "25b4a29af80ec8edab5bd861ba9b74a6e22eab29dc3d7a809a16869e8a140f04"
+    },
+    "local_path": "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-queue-reset-c/stock.elf",
+    "format": "elf",
+    "architecture": "arm"
+  },
+  "normalized_result": {
+    "address": "0x5e228",
+    "requested_bytes": 236,
+    "returned_bytes": 236,
+    "bytes_hex": "2de9f843394c207810b10120bde8f88337a004f089ff3849384a0127891ac90807eb0145606088b11c3004f0cffd0026a060002823d060684ff40058806b404552d233f03ff9c00735d130e033f03af9c00703d133f036f9400706d524a328a227a14ff0886033f0d3f933f02bf9800738d528461ea22ba11bf092fb32e033f021f9c00703d133f01df9400705d52da22ca14ff0806033f0bbf933f013f9800703d5284630a11bf077fb66601ae033f009f9400709d5cdf80080606831a231a1836b4ff0906033f0a3f933f0fbf8800706d56068434635a1826b28461bf067fb6660a660002091e727708ee7",
+    "complete": true
+  },
+  "limitations": [
+    "The session serves operations only after Ghidra reports default auto-analysis complete; incomplete analysis does not expose partial results.",
+    "The imported Program and temporary project are ephemeral and deleted on close. Annotation operations edit session database metadata; original executable bytes are never written.",
+    "Cancelling an active Ghidra request terminates its ephemeral database and discards session annotations. The selected target remains open; the next provider query imports the original artifact again.",
+    "Default-space addresses use lowercase 0x-prefixed hexadecimal; other address spaces use <percent-encoded-space>:0x<hex>.",
+    "Bytes reflect Ghidra's initialized memory, including loader fixups. Reads stop at an unmapped or uninitialized byte and report completeness explicitly.",
+    "macOS sessions require a matching executable Ghidra native decompiler; REA checks for it but does not build native components or change Gatekeeper quarantine state."
+  ],
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "raw_artifact_match": true
+}

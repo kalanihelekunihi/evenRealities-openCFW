@@ -1,0 +1,433 @@
+[
+  {
+    "evidence_id": "ev_59c19a0cf9cd28ffe4d44a79096c1d01a3c55143af163f5444345ae317471f7d",
+    "subject": {
+      "name": "stock.elf",
+      "digest": {
+        "sha256": "25b4a29af80ec8edab5bd861ba9b74a6e22eab29dc3d7a809a16869e8a140f04"
+      },
+      "local_path": "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-queue-reset-c/stock.elf",
+      "format": "elf",
+      "architecture": "arm"
+    },
+    "provider": {
+      "id": "ghidra",
+      "name": "Ghidra",
+      "version": "12.1.4"
+    },
+    "analysis_profile": {
+      "provider": {
+        "id": "ghidra",
+        "name": "Ghidra",
+        "version": "12.1.4"
+      },
+      "parameters": {
+        "target_kind": "executable",
+        "target_format": "elf",
+        "architecture": "arm",
+        "available_architectures": [
+          "arm"
+        ],
+        "import_mode": "ephemeral-source-immutable",
+        "annotation_policy": "atomic-function-entry-metadata-v1",
+        "load_image_observations": "source-mappings-entry-context-v2",
+        "function_body_evidence": "complete-inclusive-ranges-v1",
+        "function_references": "complete-body-and-entry-reference-manager-v2",
+        "call_relationship_coverage": "function-body-call-coverage-v5",
+        "function_dossier_coverage": "observed-facets-and-call-relationships-v1",
+        "string_inventory_evidence": "defined-data-coverage-v1",
+        "location_resolution": "explicit-address-exact-entry-symbol-first-v3",
+        "procedure_file_offset_resolution": "address-first-unique-target-source-mapping-v2",
+        "instruction_flow_evidence": "decoded-return-pcode-v1",
+        "instruction_references": "exact-address-incoming-v1",
+        "function_boundary_observations": "ghidra-function-boundary-limitations-v3",
+        "no_return_repair": "returning-imports-decoded-return-v2",
+        "process_launch": "inspected-jvm-launch-support-v1",
+        "jump_table_evidence": "typed-case-default-blocks-v1",
+        "decompiler_jump_loads": true,
+        "loader": "auto-from-header",
+        "language_id": "auto-from-header",
+        "compiler_spec_id": "auto-default",
+        "analyzer_preset": "ghidra-default"
+      },
+      "digest": "7e46711069eea041af1b9b99e34115c13332795e5cda76e584a722f529ec70de"
+    },
+    "predicate_type": "rea.analysis",
+    "operation": "read_bytes",
+    "parameters": {
+      "address": "0x2f880",
+      "length": 1352
+    },
+    "raw_result": {
+      "address": "0x2f880",
+      "requested_bytes": 1352,
+      "returned_bytes": 1352,
+      "bytes_hex": "2de9f04f8db03af0a1fc43f013f8fe4ce0605ef061ffe46843f080f907464cf031f90646c5b21f2800d806b9257861f01dfec00703d161f019fe400709d52088f24acde900602b4611464ff04c6061f0b3fe61f00bfe80074ff0030b0cd520880090eb48eb493346401ac1080beb01402a46e9a14af077f811208df8080002261f208df809608df80a004ff0010801468df80b60042302aa5620cdf8008000f0c5fae1208df80800a1784ff0200908eb41008df80900f0208df80a5022218df8101000258df80c008df8116004218df812108df814008df80d5014218df80e908df813108df815508df80b908df80f500e2302aa21215620cdf8008000f096fa462164208df814104ff0060a8df808a08df810000a218df809508df818108df80a008df811508df80b508df80c908df812608df815508df819508df80d508df816808df81a608df81c008df80e908df8175008268df80f508df813508df81b608df81d50162302aa28215620cdf8008000f05cfa44208df808008df809b0a32158468df80a100fb11b2100e00b218df80b104ff0400b8df80cb03f218df80d108df810808df81180dc218df8121008218df81310f0218df8141010218df8151002211a228df80ea08df81810a9468df80f5045468df81920804606468df81a008c208df81b008df8161047208df81c008df817209c208df81d00162302aa36215620009500f012fa28208df808008df809600fb1082100e007218df80a108df80cb08df80d908df80e9005218df80f1006218df810108df811907c218df812104ff0070a8df814a080218df8151094214e468df816108df8180004218df819008df813908df8171081468df81a608df80b508df81b60142302aa41215620009500f0d4f90f208df808004ff00c0b8df809b090208df80a002c208df80c008df80d503c208df80e00e8208df810008df8118058218df8121002218df81310d0218df818008df814108df819808df81a008df80b508df815a04b218df816108df81c901e208df817608df81d008df80f608df81b80162302aa5620009500f096f902208df8080006208df809008df80a8005208df80b0008208df80c000b208df80da08df80e0009218df80f608df810101fb18df811b0012102e08df811500a218df812108df814b08df813008df815605621b046a9460e2302aa0846009500f065f905258df8085060798df80900a0798df80a008df80b50e0798df80c00ff268df80d608df80e50207a8df80f00607a8df810008df81150a07a8df812008df813608df81450e07a8df81500207b8df816008df81750607b8df818008df819608df81a50a07b8df81b00e07b8df81c008df81d50207c8df81e008df81f608df82050607c8df82100a07c8df822008df82350e07c8df824001e235d218df8256002aa562026e000002c77002078080c00fc440c001c440c0049515337323131455f496e69743a20636f6d705f646976696465723d30782530325820286e763d3078253032582c206366673d307825303258290000cdf8009000f0e8f88df80850207d8df80900607d8df80a008df80b50a07d8df80c008df80d608df80e50e07d8df80f00207e8df810008df81150607e8df812008df813608df814504fb1a07e8df81500e07e8df816008df81750207f06e08df815608df816608df81750ff208df818008df81c608df820508df824608df819608df81d508df821608df825608df81a508df81e608df822608df826508df828608df81b608df81f608df823508df827604c46212302aa6c215620cdf8009000f08bf8a0208df808008df809806c218df80a1047218df80b108df80c808df80d80062302aa33215620009400f075f80db0bde8f08f",
+      "complete": true
+    },
+    "normalized_result": {
+      "address": "0x2f880",
+      "requested_bytes": 1352,
+      "returned_bytes": 1352,
+      "bytes_hex": "2de9f04f8db03af0a1fc43f013f8fe4ce0605ef061ffe46843f080f907464cf031f90646c5b21f2800d806b9257861f01dfec00703d161f019fe400709d52088f24acde900602b4611464ff04c6061f0b3fe61f00bfe80074ff0030b0cd520880090eb48eb493346401ac1080beb01402a46e9a14af077f811208df8080002261f208df809608df80a004ff0010801468df80b60042302aa5620cdf8008000f0c5fae1208df80800a1784ff0200908eb41008df80900f0208df80a5022218df8101000258df80c008df8116004218df812108df814008df80d5014218df80e908df813108df815508df80b908df80f500e2302aa21215620cdf8008000f096fa462164208df814104ff0060a8df808a08df810000a218df809508df818108df80a008df811508df80b508df80c908df812608df815508df819508df80d508df816808df81a608df81c008df80e908df8175008268df80f508df813508df81b608df81d50162302aa28215620cdf8008000f05cfa44208df808008df809b0a32158468df80a100fb11b2100e00b218df80b104ff0400b8df80cb03f218df80d108df810808df81180dc218df8121008218df81310f0218df8141010218df8151002211a228df80ea08df81810a9468df80f5045468df81920804606468df81a008c208df81b008df8161047208df81c008df817209c208df81d00162302aa36215620009500f012fa28208df808008df809600fb1082100e007218df80a108df80cb08df80d908df80e9005218df80f1006218df810108df811907c218df812104ff0070a8df814a080218df8151094214e468df816108df8180004218df819008df813908df8171081468df81a608df80b508df81b60142302aa41215620009500f0d4f90f208df808004ff00c0b8df809b090208df80a002c208df80c008df80d503c208df80e00e8208df810008df8118058218df8121002218df81310d0218df818008df814108df819808df81a008df80b508df815a04b218df816108df81c901e208df817608df81d008df80f608df81b80162302aa5620009500f096f902208df8080006208df809008df80a8005208df80b0008208df80c000b208df80da08df80e0009218df80f608df810101fb18df811b0012102e08df811500a218df812108df814b08df813008df815605621b046a9460e2302aa0846009500f065f905258df8085060798df80900a0798df80a008df80b50e0798df80c00ff268df80d608df80e50207a8df80f00607a8df810008df81150a07a8df812008df813608df81450e07a8df81500207b8df816008df81750607b8df818008df819608df81a50a07b8df81b00e07b8df81c008df81d50207c8df81e008df81f608df82050607c8df82100a07c8df822008df82350e07c8df824001e235d218df8256002aa562026e000002c77002078080c00fc440c001c440c0049515337323131455f496e69743a20636f6d705f646976696465723d30782530325820286e763d3078253032582c206366673d307825303258290000cdf8009000f0e8f88df80850207d8df80900607d8df80a008df80b50a07d8df80c008df80d608df80e50e07d8df80f00207e8df810008df81150607e8df812008df813608df814504fb1a07e8df81500e07e8df816008df81750207f06e08df815608df816608df81750ff208df818008df81c608df820508df824608df819608df81d508df821608df825608df81a508df81e608df822608df826508df828608df81b608df81f608df823508df827604c46212302aa6c215620cdf8009000f08bf8a0208df808008df809806c218df80a1047218df80b108df80c808df80d80062302aa33215620009400f075f80db0bde8f08f",
+      "complete": true
+    },
+    "confidence": "observed",
+    "authority": "shipped-artifact",
+    "environment": null,
+    "limitations": [
+      "The session serves operations only after Ghidra reports default auto-analysis complete; incomplete analysis does not expose partial results.",
+      "The imported Program and temporary project are ephemeral and deleted on close. Annotation operations edit session database metadata; original executable bytes are never written.",
+      "Cancelling an active Ghidra request terminates its ephemeral database and discards session annotations. The selected target remains open; the next provider query imports the original artifact again.",
+      "Default-space addresses use lowercase 0x-prefixed hexadecimal; other address spaces use <percent-encoded-space>:0x<hex>.",
+      "Bytes reflect Ghidra's initialized memory, including loader fixups. Reads stop at an unmapped or uninitialized byte and report completeness explicitly.",
+      "macOS sessions require a matching executable Ghidra native decompiler; REA checks for it but does not build native components or change Gatekeeper quarantine state."
+    ],
+    "relationship_coverage": null,
+    "locations": [],
+    "evidence_links": []
+  },
+  {
+    "evidence_id": "ev_254711a6b6820368276a459fa1071c616151f3e5a18cfe15cfccd64306dc9696",
+    "subject": {
+      "name": "stock.elf",
+      "digest": {
+        "sha256": "25b4a29af80ec8edab5bd861ba9b74a6e22eab29dc3d7a809a16869e8a140f04"
+      },
+      "local_path": "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-queue-reset-c/stock.elf",
+      "format": "elf",
+      "architecture": "arm"
+    },
+    "provider": {
+      "id": "ghidra",
+      "name": "Ghidra",
+      "version": "12.1.4"
+    },
+    "analysis_profile": {
+      "provider": {
+        "id": "ghidra",
+        "name": "Ghidra",
+        "version": "12.1.4"
+      },
+      "parameters": {
+        "target_kind": "executable",
+        "target_format": "elf",
+        "architecture": "arm",
+        "available_architectures": [
+          "arm"
+        ],
+        "import_mode": "ephemeral-source-immutable",
+        "annotation_policy": "atomic-function-entry-metadata-v1",
+        "load_image_observations": "source-mappings-entry-context-v2",
+        "function_body_evidence": "complete-inclusive-ranges-v1",
+        "function_references": "complete-body-and-entry-reference-manager-v2",
+        "call_relationship_coverage": "function-body-call-coverage-v5",
+        "function_dossier_coverage": "observed-facets-and-call-relationships-v1",
+        "string_inventory_evidence": "defined-data-coverage-v1",
+        "location_resolution": "explicit-address-exact-entry-symbol-first-v3",
+        "procedure_file_offset_resolution": "address-first-unique-target-source-mapping-v2",
+        "instruction_flow_evidence": "decoded-return-pcode-v1",
+        "instruction_references": "exact-address-incoming-v1",
+        "function_boundary_observations": "ghidra-function-boundary-limitations-v3",
+        "no_return_repair": "returning-imports-decoded-return-v2",
+        "process_launch": "inspected-jvm-launch-support-v1",
+        "jump_table_evidence": "typed-case-default-blocks-v1",
+        "decompiler_jump_loads": true,
+        "loader": "auto-from-header",
+        "language_id": "auto-from-header",
+        "compiler_spec_id": "auto-default",
+        "analyzer_preset": "ghidra-default"
+      },
+      "digest": "7e46711069eea041af1b9b99e34115c13332795e5cda76e584a722f529ec70de"
+    },
+    "predicate_type": "rea.analysis",
+    "operation": "procedure_pseudo_code",
+    "parameters": {
+      "procedure": "0x2f880"
+    },
+    "raw_result": {
+      "value": "\n/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */\n\nvoid FUN_0002f880(void)\n\n{\n  byte *pbVar1;\n  int iVar2;\n  uint uVar3;\n  uint uVar4;\n  int iVar5;\n  uint uVar6;\n  undefined1 local_50;\n  byte local_4f;\n  byte local_4e;\n  undefined1 local_4d;\n  byte local_4c;\n  undefined1 local_4b;\n  undefined1 local_4a;\n  byte local_49;\n  byte local_48;\n  undefined1 local_47;\n  byte local_46;\n  undefined1 local_45;\n  undefined1 local_44;\n  byte local_43;\n  byte local_42;\n  undefined1 local_41;\n  byte local_40;\n  undefined1 local_3f;\n  undefined1 local_3e;\n  byte local_3d;\n  byte local_3c;\n  undefined1 local_3b;\n  byte local_3a;\n  undefined1 local_39;\n  undefined1 local_38;\n  byte local_37;\n  byte local_36;\n  undefined1 local_35;\n  byte local_34;\n  undefined1 local_33;\n  undefined1 local_32;\n  undefined1 local_31;\n  undefined1 local_30;\n  \n  FUN_0006a1cc();\n  _DAT_20007738 = (byte *)FUN_000728b4();\n  FUN_0008e758();\n  pbVar1 = _DAT_20007738;\n  iVar2 = FUN_00072b9c();\n  uVar3 = FUN_0007bb04();\n  uVar6 = uVar3 & 0xff;\n  if ((0x1f < uVar3) || (uVar3 == 0)) {\n    uVar6 = (uint)*pbVar1;\n  }\n  uVar4 = FUN_000914ec();\n  if ((uVar4 & 1) == 0) {\n    iVar5 = FUN_000914ec();\n    if (-1 < iVar5 << 0x1d) goto LAB_0002f8d2;\n  }\n  FUN_00091638(0xcc00000,\"[RING]IQS7211E_Init: comp_divider=0x%02X (nv=0x%02X, cfg=0x%02X)\",\n               \"[RING]IQS7211E_Init: comp_divider=0x%02X (nv=0x%02X, cfg=0x%02X)\",uVar6,uVar3,\n               *(undefined2 *)pbVar1);\nLAB_0002f8d2:\n  iVar5 = FUN_000914ec();\n  if (iVar5 << 0x1e < 0) {\n    FUN_000799e6(0x1c0003,\"IQS7211E_Init: comp_divider=0x%02X (nv=0x%02X, cfg=0x%02X)\",uVar6,uVar3,\n                 *(undefined2 *)pbVar1);\n  }\n  local_50 = 0x11;\n  local_4f = 2;\n  local_4e = 0x1f;\n  local_4d = 2;\n  FUN_0002feac(0x56,0x1f,&local_50,4,1);\n  local_50 = 0xe1;\n  local_4f = pbVar1[2] * '\\x02' + '\\x01';\n  local_4e = (byte)uVar6;\n  local_48 = 0x22;\n  local_4c = 0xf0;\n  local_47 = 2;\n  local_46 = 4;\n  local_44 = 0xf0;\n  local_4b = 0;\n  local_4a = 0x20;\n  local_45 = 0x14;\n  local_43 = 0;\n  local_4d = 0x20;\n  local_49 = 0;\n  FUN_0002feac(0x56,0x21,&local_50,0xe,1);\n  local_44 = 0x46;\n  local_50 = 6;\n  local_48 = 100;\n  local_4f = 0;\n  local_40 = 10;\n  local_4e = 100;\n  local_47 = 0;\n  local_4d = 0;\n  local_4c = 0x20;\n  local_46 = 2;\n  local_43 = 0;\n  local_3f = 0;\n  local_4b = 0;\n  local_42 = 1;\n  local_3e = 2;\n  local_3c = 100;\n  local_4a = 0x20;\n  local_41 = 0;\n  local_49 = 0;\n  local_45 = 0;\n  local_3d = 8;\n  local_3b = 0;\n  FUN_0002feac(0x56,0x28,&local_50,0x16,1);\n  local_50 = 0x44;\n  local_4f = 3;\n  local_4e = 0xa3;\n  if (iVar2 == 0) {\n    local_4d = 0xb;\n  }\n  else {\n    local_4d = 0x1b;\n  }\n  local_4c = 0x40;\n  local_4b = 0x3f;\n  local_48 = 1;\n  local_47 = 1;\n  local_46 = 0xdc;\n  local_45 = 8;\n  local_44 = 0xf0;\n  local_43 = 0x10;\n  local_4a = 6;\n  local_40 = 2;\n  local_49 = 0;\n  local_3f = 0x1a;\n  local_3e = 3;\n  local_3d = 0x8c;\n  local_42 = 2;\n  local_3c = 0x47;\n  local_41 = 0x1a;\n  local_3b = 0x9c;\n  FUN_0002feac(0x56,0x36,&local_50,0x16,1);\n  local_50 = 0x28;\n  local_4f = 3;\n  if (iVar2 == 0) {\n    local_4e = 7;\n  }\n  else {\n    local_4e = 8;\n  }\n  local_4c = 0x40;\n  local_4b = 0;\n  local_4a = 0;\n  local_49 = 5;\n  local_48 = 6;\n  local_47 = 0;\n  local_46 = 0x7c;\n  local_44 = 7;\n  local_43 = 0x80;\n  local_42 = 0x94;\n  local_40 = 0x28;\n  local_3f = 0x28;\n  local_45 = 0;\n  local_41 = 4;\n  local_3e = 0;\n  local_4d = 1;\n  local_3d = 0;\n  FUN_0002feac(0x56,0x41,&local_50,0x14,1);\n  local_50 = 0xf;\n  local_4f = 0xc;\n  local_4e = 0x90;\n  local_4c = 0x2c;\n  local_4b = 1;\n  local_4a = 0x3c;\n  local_48 = 0xe8;\n  local_47 = 3;\n  local_46 = 0x58;\n  local_45 = 2;\n  local_40 = 0xe8;\n  local_44 = 0xd0;\n  local_3f = 3;\n  local_3e = 0xe8;\n  local_4d = 1;\n  local_43 = 7;\n  local_42 = 0x4b;\n  local_3c = 0x28;\n  local_41 = 0;\n  local_3b = 0x1e;\n  local_49 = 0;\n  local_3d = 3;\n  FUN_0002feac(0x56,0x4b,&local_50,0x16,1);\n  local_50 = 2;\n  local_4f = 6;\n  local_4e = 3;\n  local_4d = 5;\n  local_4c = 8;\n  local_4b = 7;\n  local_4a = 0xb;\n  local_49 = 0;\n  local_48 = 9;\n  if (iVar2 == 0) {\n    local_47 = 1;\n    local_46 = 10;\n  }\n  else {\n    local_47 = 0xc;\n    local_46 = 1;\n  }\n  local_44 = 0xc;\n  local_45 = 0xb;\n  local_43 = 0;\n  FUN_0002feac(0x56,0x56,&local_50,0xe,1);\n  local_50 = 5;\n  local_4f = pbVar1[5];\n  local_4e = pbVar1[6];\n  local_4d = 5;\n  local_4c = pbVar1[7];\n  local_4b = 0xff;\n  local_4a = 5;\n  local_49 = pbVar1[8];\n  local_48 = pbVar1[9];\n  local_47 = 5;\n  local_46 = pbVar1[10];\n  local_45 = 0xff;\n  local_44 = 5;\n  local_43 = pbVar1[0xb];\n  local_42 = pbVar1[0xc];\n  local_41 = 5;\n  local_40 = pbVar1[0xd];\n  local_3f = 0xff;\n  local_3e = 5;\n  local_3d = pbVar1[0xe];\n  local_3c = pbVar1[0xf];\n  local_3b = 5;\n  local_3a = pbVar1[0x10];\n  local_39 = 0xff;\n  local_38 = 5;\n  local_37 = pbVar1[0x11];\n  local_36 = pbVar1[0x12];\n  local_35 = 5;\n  local_34 = pbVar1[0x13];\n  local_33 = 0xff;\n  FUN_0002feac(0x56,0x5d,&local_50,0x1e,1);\n  local_50 = 5;\n  local_4f = pbVar1[0x14];\n  local_4e = pbVar1[0x15];\n  local_4d = 5;\n  local_4c = pbVar1[0x16];\n  local_4b = 0xff;\n  local_4a = 5;\n  local_49 = pbVar1[0x17];\n  local_48 = pbVar1[0x18];\n  local_47 = 5;\n  local_46 = pbVar1[0x19];\n  local_45 = 0xff;\n  local_44 = 5;\n  if (iVar2 == 0) {\n    local_43 = 0xff;\n    local_42 = 0xff;\n    local_40 = 0xff;\n  }\n  else {\n    local_43 = pbVar1[0x1a];\n    local_42 = pbVar1[0x1b];\n    local_40 = pbVar1[0x1c];\n  }\n  local_41 = 5;\n  local_3c = 0xff;\n  local_38 = 5;\n  local_34 = 0xff;\n  local_3f = 0xff;\n  local_3b = 5;\n  local_37 = 0xff;\n  local_33 = 0xff;\n  local_3e = 5;\n  local_3a = 0xff;\n  local_36 = 0xff;\n  local_32 = 5;\n  local_30 = 0xff;\n  local_3d = 0xff;\n  local_39 = 0xff;\n  local_35 = 5;\n  local_31 = 0xff;\n  FUN_0002feac(0x56,0x6c,&local_50,0x21,1);\n  local_50 = 0xa0;\n  local_4f = 0;\n  local_4e = 0x6c;\n  local_4d = 0x47;\n  local_4c = 0;\n  local_4b = 0;\n  FUN_0002feac(0x56,0x33,&local_50,6,1);\n  return;\n}\n\n",
+      "limitations": []
+    },
+    "normalized_result": "\n/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */\n\nvoid FUN_0002f880(void)\n\n{\n  byte *pbVar1;\n  int iVar2;\n  uint uVar3;\n  uint uVar4;\n  int iVar5;\n  uint uVar6;\n  undefined1 local_50;\n  byte local_4f;\n  byte local_4e;\n  undefined1 local_4d;\n  byte local_4c;\n  undefined1 local_4b;\n  undefined1 local_4a;\n  byte local_49;\n  byte local_48;\n  undefined1 local_47;\n  byte local_46;\n  undefined1 local_45;\n  undefined1 local_44;\n  byte local_43;\n  byte local_42;\n  undefined1 local_41;\n  byte local_40;\n  undefined1 local_3f;\n  undefined1 local_3e;\n  byte local_3d;\n  byte local_3c;\n  undefined1 local_3b;\n  byte local_3a;\n  undefined1 local_39;\n  undefined1 local_38;\n  byte local_37;\n  byte local_36;\n  undefined1 local_35;\n  byte local_34;\n  undefined1 local_33;\n  undefined1 local_32;\n  undefined1 local_31;\n  undefined1 local_30;\n  \n  FUN_0006a1cc();\n  _DAT_20007738 = (byte *)FUN_000728b4();\n  FUN_0008e758();\n  pbVar1 = _DAT_20007738;\n  iVar2 = FUN_00072b9c();\n  uVar3 = FUN_0007bb04();\n  uVar6 = uVar3 & 0xff;\n  if ((0x1f < uVar3) || (uVar3 == 0)) {\n    uVar6 = (uint)*pbVar1;\n  }\n  uVar4 = FUN_000914ec();\n  if ((uVar4 & 1) == 0) {\n    iVar5 = FUN_000914ec();\n    if (-1 < iVar5 << 0x1d) goto LAB_0002f8d2;\n  }\n  FUN_00091638(0xcc00000,\"[RING]IQS7211E_Init: comp_divider=0x%02X (nv=0x%02X, cfg=0x%02X)\",\n               \"[RING]IQS7211E_Init: comp_divider=0x%02X (nv=0x%02X, cfg=0x%02X)\",uVar6,uVar3,\n               *(undefined2 *)pbVar1);\nLAB_0002f8d2:\n  iVar5 = FUN_000914ec();\n  if (iVar5 << 0x1e < 0) {\n    FUN_000799e6(0x1c0003,\"IQS7211E_Init: comp_divider=0x%02X (nv=0x%02X, cfg=0x%02X)\",uVar6,uVar3,\n                 *(undefined2 *)pbVar1);\n  }\n  local_50 = 0x11;\n  local_4f = 2;\n  local_4e = 0x1f;\n  local_4d = 2;\n  FUN_0002feac(0x56,0x1f,&local_50,4,1);\n  local_50 = 0xe1;\n  local_4f = pbVar1[2] * '\\x02' + '\\x01';\n  local_4e = (byte)uVar6;\n  local_48 = 0x22;\n  local_4c = 0xf0;\n  local_47 = 2;\n  local_46 = 4;\n  local_44 = 0xf0;\n  local_4b = 0;\n  local_4a = 0x20;\n  local_45 = 0x14;\n  local_43 = 0;\n  local_4d = 0x20;\n  local_49 = 0;\n  FUN_0002feac(0x56,0x21,&local_50,0xe,1);\n  local_44 = 0x46;\n  local_50 = 6;\n  local_48 = 100;\n  local_4f = 0;\n  local_40 = 10;\n  local_4e = 100;\n  local_47 = 0;\n  local_4d = 0;\n  local_4c = 0x20;\n  local_46 = 2;\n  local_43 = 0;\n  local_3f = 0;\n  local_4b = 0;\n  local_42 = 1;\n  local_3e = 2;\n  local_3c = 100;\n  local_4a = 0x20;\n  local_41 = 0;\n  local_49 = 0;\n  local_45 = 0;\n  local_3d = 8;\n  local_3b = 0;\n  FUN_0002feac(0x56,0x28,&local_50,0x16,1);\n  local_50 = 0x44;\n  local_4f = 3;\n  local_4e = 0xa3;\n  if (iVar2 == 0) {\n    local_4d = 0xb;\n  }\n  else {\n    local_4d = 0x1b;\n  }\n  local_4c = 0x40;\n  local_4b = 0x3f;\n  local_48 = 1;\n  local_47 = 1;\n  local_46 = 0xdc;\n  local_45 = 8;\n  local_44 = 0xf0;\n  local_43 = 0x10;\n  local_4a = 6;\n  local_40 = 2;\n  local_49 = 0;\n  local_3f = 0x1a;\n  local_3e = 3;\n  local_3d = 0x8c;\n  local_42 = 2;\n  local_3c = 0x47;\n  local_41 = 0x1a;\n  local_3b = 0x9c;\n  FUN_0002feac(0x56,0x36,&local_50,0x16,1);\n  local_50 = 0x28;\n  local_4f = 3;\n  if (iVar2 == 0) {\n    local_4e = 7;\n  }\n  else {\n    local_4e = 8;\n  }\n  local_4c = 0x40;\n  local_4b = 0;\n  local_4a = 0;\n  local_49 = 5;\n  local_48 = 6;\n  local_47 = 0;\n  local_46 = 0x7c;\n  local_44 = 7;\n  local_43 = 0x80;\n  local_42 = 0x94;\n  local_40 = 0x28;\n  local_3f = 0x28;\n  local_45 = 0;\n  local_41 = 4;\n  local_3e = 0;\n  local_4d = 1;\n  local_3d = 0;\n  FUN_0002feac(0x56,0x41,&local_50,0x14,1);\n  local_50 = 0xf;\n  local_4f = 0xc;\n  local_4e = 0x90;\n  local_4c = 0x2c;\n  local_4b = 1;\n  local_4a = 0x3c;\n  local_48 = 0xe8;\n  local_47 = 3;\n  local_46 = 0x58;\n  local_45 = 2;\n  local_40 = 0xe8;\n  local_44 = 0xd0;\n  local_3f = 3;\n  local_3e = 0xe8;\n  local_4d = 1;\n  local_43 = 7;\n  local_42 = 0x4b;\n  local_3c = 0x28;\n  local_41 = 0;\n  local_3b = 0x1e;\n  local_49 = 0;\n  local_3d = 3;\n  FUN_0002feac(0x56,0x4b,&local_50,0x16,1);\n  local_50 = 2;\n  local_4f = 6;\n  local_4e = 3;\n  local_4d = 5;\n  local_4c = 8;\n  local_4b = 7;\n  local_4a = 0xb;\n  local_49 = 0;\n  local_48 = 9;\n  if (iVar2 == 0) {\n    local_47 = 1;\n    local_46 = 10;\n  }\n  else {\n    local_47 = 0xc;\n    local_46 = 1;\n  }\n  local_44 = 0xc;\n  local_45 = 0xb;\n  local_43 = 0;\n  FUN_0002feac(0x56,0x56,&local_50,0xe,1);\n  local_50 = 5;\n  local_4f = pbVar1[5];\n  local_4e = pbVar1[6];\n  local_4d = 5;\n  local_4c = pbVar1[7];\n  local_4b = 0xff;\n  local_4a = 5;\n  local_49 = pbVar1[8];\n  local_48 = pbVar1[9];\n  local_47 = 5;\n  local_46 = pbVar1[10];\n  local_45 = 0xff;\n  local_44 = 5;\n  local_43 = pbVar1[0xb];\n  local_42 = pbVar1[0xc];\n  local_41 = 5;\n  local_40 = pbVar1[0xd];\n  local_3f = 0xff;\n  local_3e = 5;\n  local_3d = pbVar1[0xe];\n  local_3c = pbVar1[0xf];\n  local_3b = 5;\n  local_3a = pbVar1[0x10];\n  local_39 = 0xff;\n  local_38 = 5;\n  local_37 = pbVar1[0x11];\n  local_36 = pbVar1[0x12];\n  local_35 = 5;\n  local_34 = pbVar1[0x13];\n  local_33 = 0xff;\n  FUN_0002feac(0x56,0x5d,&local_50,0x1e,1);\n  local_50 = 5;\n  local_4f = pbVar1[0x14];\n  local_4e = pbVar1[0x15];\n  local_4d = 5;\n  local_4c = pbVar1[0x16];\n  local_4b = 0xff;\n  local_4a = 5;\n  local_49 = pbVar1[0x17];\n  local_48 = pbVar1[0x18];\n  local_47 = 5;\n  local_46 = pbVar1[0x19];\n  local_45 = 0xff;\n  local_44 = 5;\n  if (iVar2 == 0) {\n    local_43 = 0xff;\n    local_42 = 0xff;\n    local_40 = 0xff;\n  }\n  else {\n    local_43 = pbVar1[0x1a];\n    local_42 = pbVar1[0x1b];\n    local_40 = pbVar1[0x1c];\n  }\n  local_41 = 5;\n  local_3c = 0xff;\n  local_38 = 5;\n  local_34 = 0xff;\n  local_3f = 0xff;\n  local_3b = 5;\n  local_37 = 0xff;\n  local_33 = 0xff;\n  local_3e = 5;\n  local_3a = 0xff;\n  local_36 = 0xff;\n  local_32 = 5;\n  local_30 = 0xff;\n  local_3d = 0xff;\n  local_39 = 0xff;\n  local_35 = 5;\n  local_31 = 0xff;\n  FUN_0002feac(0x56,0x6c,&local_50,0x21,1);\n  local_50 = 0xa0;\n  local_4f = 0;\n  local_4e = 0x6c;\n  local_4d = 0x47;\n  local_4c = 0;\n  local_4b = 0;\n  FUN_0002feac(0x56,0x33,&local_50,6,1);\n  return;\n}\n\n",
+    "confidence": "observed",
+    "authority": "shipped-artifact",
+    "environment": null,
+    "limitations": [
+      "The session serves operations only after Ghidra reports default auto-analysis complete; incomplete analysis does not expose partial results.",
+      "The imported Program and temporary project are ephemeral and deleted on close. Annotation operations edit session database metadata; original executable bytes are never written.",
+      "Cancelling an active Ghidra request terminates its ephemeral database and discards session annotations. The selected target remains open; the next provider query imports the original artifact again.",
+      "Default-space addresses use lowercase 0x-prefixed hexadecimal; other address spaces use <percent-encoded-space>:0x<hex>.",
+      "Pseudocode is Ghidra decompiler output, not original source and not text-equivalent to Hopper output.",
+      "External functions and functions without an analyzable body return null; other decompiler failures remain explicit.",
+      "macOS sessions require a matching executable Ghidra native decompiler; REA checks for it but does not build native components or change Gatekeeper quarantine state."
+    ],
+    "relationship_coverage": null,
+    "locations": [],
+    "evidence_links": []
+  },
+  {
+    "evidence_id": "ev_1772a2841d2fc5bb591059c8394ee0a99f8dc736fe63534e323e230fd7a583bc",
+    "subject": {
+      "name": "stock.elf",
+      "digest": {
+        "sha256": "25b4a29af80ec8edab5bd861ba9b74a6e22eab29dc3d7a809a16869e8a140f04"
+      },
+      "local_path": "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-queue-reset-c/stock.elf",
+      "format": "elf",
+      "architecture": "arm"
+    },
+    "provider": {
+      "id": "ghidra",
+      "name": "Ghidra",
+      "version": "12.1.4"
+    },
+    "analysis_profile": {
+      "provider": {
+        "id": "ghidra",
+        "name": "Ghidra",
+        "version": "12.1.4"
+      },
+      "parameters": {
+        "target_kind": "executable",
+        "target_format": "elf",
+        "architecture": "arm",
+        "available_architectures": [
+          "arm"
+        ],
+        "import_mode": "ephemeral-source-immutable",
+        "annotation_policy": "atomic-function-entry-metadata-v1",
+        "load_image_observations": "source-mappings-entry-context-v2",
+        "function_body_evidence": "complete-inclusive-ranges-v1",
+        "function_references": "complete-body-and-entry-reference-manager-v2",
+        "call_relationship_coverage": "function-body-call-coverage-v5",
+        "function_dossier_coverage": "observed-facets-and-call-relationships-v1",
+        "string_inventory_evidence": "defined-data-coverage-v1",
+        "location_resolution": "explicit-address-exact-entry-symbol-first-v3",
+        "procedure_file_offset_resolution": "address-first-unique-target-source-mapping-v2",
+        "instruction_flow_evidence": "decoded-return-pcode-v1",
+        "instruction_references": "exact-address-incoming-v1",
+        "function_boundary_observations": "ghidra-function-boundary-limitations-v3",
+        "no_return_repair": "returning-imports-decoded-return-v2",
+        "process_launch": "inspected-jvm-launch-support-v1",
+        "jump_table_evidence": "typed-case-default-blocks-v1",
+        "decompiler_jump_loads": true,
+        "loader": "auto-from-header",
+        "language_id": "auto-from-header",
+        "compiler_spec_id": "auto-default",
+        "analyzer_preset": "ghidra-default"
+      },
+      "digest": "7e46711069eea041af1b9b99e34115c13332795e5cda76e584a722f529ec70de"
+    },
+    "predicate_type": "rea.analysis",
+    "operation": "read_bytes",
+    "parameters": {
+      "address": "0x9bbb8",
+      "length": 480
+    },
+    "raw_result": {
+      "address": "0x9bbb8",
+      "requested_bytes": 480,
+      "returned_bytes": 480,
+      "bytes_hex": "0c00090107ffffff030405060708090a0b0c0d0e0f1011121314151617000b00090107ffffff030405060708090a0b0c0d0e0f1011121314151617000b00070107ffffff030405060708090a0b0c0d0e0f1011121314151617000a00070007000102030405060708090a0b0c0d0e0f1011121314151617000a00070007000102030405060708090a0b0c0d0e0f1011121314151617000a00070007000102030405060708090a0b0c0d0e0f1011121314151617000a00080306ffffffffffffffffff090a0b0c0d0e0f1011121314ffffff000a00080306ffffffffffffffffff090a0b0c0d0e0f1011121314ffffff000c00090206ffffffffffff060708090a0b0c0d0e0f1011121314ffffff000c00090206ffffffffffff060708090a0b0c0d0e0f1011121314ffffff000c00090105ffffff030405060708090a0b0c0d0e0f1011ffffffffffff000b00090105ffffff030405060708090a0b0c0d0e0f1011ffffffffffff000b00070105ffffff030405060708090a0b0c0d0e0f1011ffffffffffff000a00070005000102030405060708090a0b0c0d0e0f1011ffffffffffff000a00070005000102030405060708090a0b0c0d0e0f1011ffffffffffff000a00070005000102030405060708090a0b0c0d0e0f1011ffffffffffff00",
+      "complete": true
+    },
+    "normalized_result": {
+      "address": "0x9bbb8",
+      "requested_bytes": 480,
+      "returned_bytes": 480,
+      "bytes_hex": "0c00090107ffffff030405060708090a0b0c0d0e0f1011121314151617000b00090107ffffff030405060708090a0b0c0d0e0f1011121314151617000b00070107ffffff030405060708090a0b0c0d0e0f1011121314151617000a00070007000102030405060708090a0b0c0d0e0f1011121314151617000a00070007000102030405060708090a0b0c0d0e0f1011121314151617000a00070007000102030405060708090a0b0c0d0e0f1011121314151617000a00080306ffffffffffffffffff090a0b0c0d0e0f1011121314ffffff000a00080306ffffffffffffffffff090a0b0c0d0e0f1011121314ffffff000c00090206ffffffffffff060708090a0b0c0d0e0f1011121314ffffff000c00090206ffffffffffff060708090a0b0c0d0e0f1011121314ffffff000c00090105ffffff030405060708090a0b0c0d0e0f1011ffffffffffff000b00090105ffffff030405060708090a0b0c0d0e0f1011ffffffffffff000b00070105ffffff030405060708090a0b0c0d0e0f1011ffffffffffff000a00070005000102030405060708090a0b0c0d0e0f1011ffffffffffff000a00070005000102030405060708090a0b0c0d0e0f1011ffffffffffff000a00070005000102030405060708090a0b0c0d0e0f1011ffffffffffff00",
+      "complete": true
+    },
+    "confidence": "observed",
+    "authority": "shipped-artifact",
+    "environment": null,
+    "limitations": [
+      "The session serves operations only after Ghidra reports default auto-analysis complete; incomplete analysis does not expose partial results.",
+      "The imported Program and temporary project are ephemeral and deleted on close. Annotation operations edit session database metadata; original executable bytes are never written.",
+      "Cancelling an active Ghidra request terminates its ephemeral database and discards session annotations. The selected target remains open; the next provider query imports the original artifact again.",
+      "Default-space addresses use lowercase 0x-prefixed hexadecimal; other address spaces use <percent-encoded-space>:0x<hex>.",
+      "Bytes reflect Ghidra's initialized memory, including loader fixups. Reads stop at an unmapped or uninitialized byte and report completeness explicitly.",
+      "macOS sessions require a matching executable Ghidra native decompiler; REA checks for it but does not build native components or change Gatekeeper quarantine state."
+    ],
+    "relationship_coverage": null,
+    "locations": [],
+    "evidence_links": []
+  },
+  {
+    "evidence_id": "ev_23011f025069cc91d272fb90281002458fc80f6d636f272f0eab746751875854",
+    "subject": {
+      "name": "stock.elf",
+      "digest": {
+        "sha256": "25b4a29af80ec8edab5bd861ba9b74a6e22eab29dc3d7a809a16869e8a140f04"
+      },
+      "local_path": "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-queue-reset-c/stock.elf",
+      "format": "elf",
+      "architecture": "arm"
+    },
+    "provider": {
+      "id": "ghidra",
+      "name": "Ghidra",
+      "version": "12.1.4"
+    },
+    "analysis_profile": {
+      "provider": {
+        "id": "ghidra",
+        "name": "Ghidra",
+        "version": "12.1.4"
+      },
+      "parameters": {
+        "target_kind": "executable",
+        "target_format": "elf",
+        "architecture": "arm",
+        "available_architectures": [
+          "arm"
+        ],
+        "import_mode": "ephemeral-source-immutable",
+        "annotation_policy": "atomic-function-entry-metadata-v1",
+        "load_image_observations": "source-mappings-entry-context-v2",
+        "function_body_evidence": "complete-inclusive-ranges-v1",
+        "function_references": "complete-body-and-entry-reference-manager-v2",
+        "call_relationship_coverage": "function-body-call-coverage-v5",
+        "function_dossier_coverage": "observed-facets-and-call-relationships-v1",
+        "string_inventory_evidence": "defined-data-coverage-v1",
+        "location_resolution": "explicit-address-exact-entry-symbol-first-v3",
+        "procedure_file_offset_resolution": "address-first-unique-target-source-mapping-v2",
+        "instruction_flow_evidence": "decoded-return-pcode-v1",
+        "instruction_references": "exact-address-incoming-v1",
+        "function_boundary_observations": "ghidra-function-boundary-limitations-v3",
+        "no_return_repair": "returning-imports-decoded-return-v2",
+        "process_launch": "inspected-jvm-launch-support-v1",
+        "jump_table_evidence": "typed-case-default-blocks-v1",
+        "decompiler_jump_loads": true,
+        "loader": "auto-from-header",
+        "language_id": "auto-from-header",
+        "compiler_spec_id": "auto-default",
+        "analyzer_preset": "ghidra-default"
+      },
+      "digest": "7e46711069eea041af1b9b99e34115c13332795e5cda76e584a722f529ec70de"
+    },
+    "predicate_type": "rea.analysis",
+    "operation": "read_bytes",
+    "parameters": {
+      "address": "0x728b4",
+      "length": 26
+    },
+    "raw_result": {
+      "address": "0x728b4",
+      "requested_bytes": 26,
+      "returned_bytes": 26,
+      "bytes_hex": "10b5801fc4b200f06ff908b1034801e00248283050f8240010bd",
+      "complete": true
+    },
+    "normalized_result": {
+      "address": "0x728b4",
+      "requested_bytes": 26,
+      "returned_bytes": 26,
+      "bytes_hex": "10b5801fc4b200f06ff908b1034801e00248283050f8240010bd",
+      "complete": true
+    },
+    "confidence": "observed",
+    "authority": "shipped-artifact",
+    "environment": null,
+    "limitations": [
+      "The session serves operations only after Ghidra reports default auto-analysis complete; incomplete analysis does not expose partial results.",
+      "The imported Program and temporary project are ephemeral and deleted on close. Annotation operations edit session database metadata; original executable bytes are never written.",
+      "Cancelling an active Ghidra request terminates its ephemeral database and discards session annotations. The selected target remains open; the next provider query imports the original artifact again.",
+      "Default-space addresses use lowercase 0x-prefixed hexadecimal; other address spaces use <percent-encoded-space>:0x<hex>.",
+      "Bytes reflect Ghidra's initialized memory, including loader fixups. Reads stop at an unmapped or uninitialized byte and report completeness explicitly.",
+      "macOS sessions require a matching executable Ghidra native decompiler; REA checks for it but does not build native components or change Gatekeeper quarantine state."
+    ],
+    "relationship_coverage": null,
+    "locations": [],
+    "evidence_links": []
+  },
+  {
+    "evidence_id": "ev_37cd457e50fb6823579c26fb99ed9af20c7f9fbe99941656de7062d74b429022",
+    "subject": {
+      "name": "stock.elf",
+      "digest": {
+        "sha256": "25b4a29af80ec8edab5bd861ba9b74a6e22eab29dc3d7a809a16869e8a140f04"
+      },
+      "local_path": "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-queue-reset-c/stock.elf",
+      "format": "elf",
+      "architecture": "arm"
+    },
+    "provider": {
+      "id": "ghidra",
+      "name": "Ghidra",
+      "version": "12.1.4"
+    },
+    "analysis_profile": {
+      "provider": {
+        "id": "ghidra",
+        "name": "Ghidra",
+        "version": "12.1.4"
+      },
+      "parameters": {
+        "target_kind": "executable",
+        "target_format": "elf",
+        "architecture": "arm",
+        "available_architectures": [
+          "arm"
+        ],
+        "import_mode": "ephemeral-source-immutable",
+        "annotation_policy": "atomic-function-entry-metadata-v1",
+        "load_image_observations": "source-mappings-entry-context-v2",
+        "function_body_evidence": "complete-inclusive-ranges-v1",
+        "function_references": "complete-body-and-entry-reference-manager-v2",
+        "call_relationship_coverage": "function-body-call-coverage-v5",
+        "function_dossier_coverage": "observed-facets-and-call-relationships-v1",
+        "string_inventory_evidence": "defined-data-coverage-v1",
+        "location_resolution": "explicit-address-exact-entry-symbol-first-v3",
+        "procedure_file_offset_resolution": "address-first-unique-target-source-mapping-v2",
+        "instruction_flow_evidence": "decoded-return-pcode-v1",
+        "instruction_references": "exact-address-incoming-v1",
+        "function_boundary_observations": "ghidra-function-boundary-limitations-v3",
+        "no_return_repair": "returning-imports-decoded-return-v2",
+        "process_launch": "inspected-jvm-launch-support-v1",
+        "jump_table_evidence": "typed-case-default-blocks-v1",
+        "decompiler_jump_loads": true,
+        "loader": "auto-from-header",
+        "language_id": "auto-from-header",
+        "compiler_spec_id": "auto-default",
+        "analyzer_preset": "ghidra-default"
+      },
+      "digest": "7e46711069eea041af1b9b99e34115c13332795e5cda76e584a722f529ec70de"
+    },
+    "predicate_type": "rea.analysis",
+    "operation": "read_bytes",
+    "parameters": {
+      "address": "0x9bb40",
+      "length": 600
+    },
+    "raw_result": {
+      "address": "0x9bb40",
+      "requested_bytes": 600,
+      "returned_bytes": 600,
+      "bytes_hex": "0a00080307ffffffffffffffffff090a0b0c0d0e0f1011121314151617000a00080307ffffffffffffffffff090a0b0c0d0e0f1011121314151617000c00090207ffffffffffff060708090a0b0c0d0e0f1011121314151617000c00090207ffffffffffff060708090a0b0c0d0e0f1011121314151617000c00090107ffffff030405060708090a0b0c0d0e0f1011121314151617000b00090107ffffff030405060708090a0b0c0d0e0f1011121314151617000b00070107ffffff030405060708090a0b0c0d0e0f1011121314151617000a00070007000102030405060708090a0b0c0d0e0f1011121314151617000a00070007000102030405060708090a0b0c0d0e0f1011121314151617000a00070007000102030405060708090a0b0c0d0e0f1011121314151617000a00080306ffffffffffffffffff090a0b0c0d0e0f1011121314ffffff000a00080306ffffffffffffffffff090a0b0c0d0e0f1011121314ffffff000c00090206ffffffffffff060708090a0b0c0d0e0f1011121314ffffff000c00090206ffffffffffff060708090a0b0c0d0e0f1011121314ffffff000c00090105ffffff030405060708090a0b0c0d0e0f1011ffffffffffff000b00090105ffffff030405060708090a0b0c0d0e0f1011ffffffffffff000b00070105ffffff030405060708090a0b0c0d0e0f1011ffffffffffff000a00070005000102030405060708090a0b0c0d0e0f1011ffffffffffff000a00070005000102030405060708090a0b0c0d0e0f1011ffffffffffff000a00070005000102030405060708090a0b0c0d0e0f1011ffffffffffff00",
+      "complete": true
+    },
+    "normalized_result": {
+      "address": "0x9bb40",
+      "requested_bytes": 600,
+      "returned_bytes": 600,
+      "bytes_hex": "0a00080307ffffffffffffffffff090a0b0c0d0e0f1011121314151617000a00080307ffffffffffffffffff090a0b0c0d0e0f1011121314151617000c00090207ffffffffffff060708090a0b0c0d0e0f1011121314151617000c00090207ffffffffffff060708090a0b0c0d0e0f1011121314151617000c00090107ffffff030405060708090a0b0c0d0e0f1011121314151617000b00090107ffffff030405060708090a0b0c0d0e0f1011121314151617000b00070107ffffff030405060708090a0b0c0d0e0f1011121314151617000a00070007000102030405060708090a0b0c0d0e0f1011121314151617000a00070007000102030405060708090a0b0c0d0e0f1011121314151617000a00070007000102030405060708090a0b0c0d0e0f1011121314151617000a00080306ffffffffffffffffff090a0b0c0d0e0f1011121314ffffff000a00080306ffffffffffffffffff090a0b0c0d0e0f1011121314ffffff000c00090206ffffffffffff060708090a0b0c0d0e0f1011121314ffffff000c00090206ffffffffffff060708090a0b0c0d0e0f1011121314ffffff000c00090105ffffff030405060708090a0b0c0d0e0f1011ffffffffffff000b00090105ffffff030405060708090a0b0c0d0e0f1011ffffffffffff000b00070105ffffff030405060708090a0b0c0d0e0f1011ffffffffffff000a00070005000102030405060708090a0b0c0d0e0f1011ffffffffffff000a00070005000102030405060708090a0b0c0d0e0f1011ffffffffffff000a00070005000102030405060708090a0b0c0d0e0f1011ffffffffffff00",
+      "complete": true
+    },
+    "confidence": "observed",
+    "authority": "shipped-artifact",
+    "environment": null,
+    "limitations": [
+      "The session serves operations only after Ghidra reports default auto-analysis complete; incomplete analysis does not expose partial results.",
+      "The imported Program and temporary project are ephemeral and deleted on close. Annotation operations edit session database metadata; original executable bytes are never written.",
+      "Cancelling an active Ghidra request terminates its ephemeral database and discards session annotations. The selected target remains open; the next provider query imports the original artifact again.",
+      "Default-space addresses use lowercase 0x-prefixed hexadecimal; other address spaces use <percent-encoded-space>:0x<hex>.",
+      "Bytes reflect Ghidra's initialized memory, including loader fixups. Reads stop at an unmapped or uninitialized byte and report completeness explicitly.",
+      "macOS sessions require a matching executable Ghidra native decompiler; REA checks for it but does not build native components or change Gatekeeper quarantine state."
+    ],
+    "relationship_coverage": null,
+    "locations": [],
+    "evidence_links": []
+  }
+]

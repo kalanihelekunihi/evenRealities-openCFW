@@ -1,0 +1,150 @@
+{
+  "status": "peak_metrics_probe_only_not_admitted",
+  "native_entry": "0x37a84",
+  "symbol": "r1_goodix_native_peak_feature_metrics",
+  "native_instruction_bytes": 220,
+  "native_literal_bytes": 8,
+  "stock_c_pairs": 41984,
+  "independent_fraction_oracle_pairs": 1536,
+  "verification_counts": {
+    "results": 32768,
+    "alias-results": 7680,
+    "oracle-results": 1536
+  },
+  "coverage": {
+    "native_coverage_calls": 129,
+    "instruction_bytes": 220,
+    "instruction_starts": 62
+  },
+  "compiled_defects": [
+    {
+      "defect": "missing-value-sentinel",
+      "detected": true,
+      "detection_case": "(0, {})",
+      "diagnostic": ""
+    },
+    {
+      "defect": "missing-index-sentinel",
+      "detected": true,
+      "detection_case": "(0, {})",
+      "diagnostic": ""
+    },
+    {
+      "defect": "exclude-sentinel",
+      "detected": true,
+      "detection_case": "(0, {})",
+      "diagnostic": ""
+    },
+    {
+      "defect": "positive-gate",
+      "detected": true,
+      "detection_case": "(0, {'alias': 'indices-high'})",
+      "diagnostic": ""
+    },
+    {
+      "defect": "reverse-absolute",
+      "detected": true,
+      "detection_case": "(0, {})",
+      "diagnostic": ""
+    },
+    {
+      "defect": "cap-threshold",
+      "detected": true,
+      "detection_case": "(18, {'alias': 'indices-high'})",
+      "diagnostic": ""
+    },
+    {
+      "defect": "score-sign",
+      "detected": true,
+      "detection_case": "(0, {})",
+      "diagnostic": ""
+    },
+    {
+      "defect": "quiet-nan-status",
+      "detected": true,
+      "detection_case": "(0, {'alias': 'indices-high'})",
+      "diagnostic": ""
+    },
+    {
+      "defect": "full-word-length",
+      "detected": true,
+      "detection_case": "(24, {})",
+      "diagnostic": ""
+    },
+    {
+      "defect": "sentinel-order",
+      "detected": true,
+      "detection_case": "(0, {'alias': 'indices-high'})",
+      "diagnostic": ""
+    }
+  ],
+  "remaining_dependencies": {
+    "0x666a4": "autocorrelation-normalization wrapper",
+    "0x92a04": "full correlation",
+    "0x36734": "peak index selector",
+    "0x66900": "packed peak mask matrix",
+    "0x668dc": "mask-row selection",
+    "0x42bd0": "rate extraction",
+    "0x28dd4": "fixed5 float-to-packed callback veneer",
+    "0x362f4": "generic float-to-packed kernel",
+    "0x28de0": "fixed5 packed-to-float veneer",
+    "0x4fdf8": "generic packed-to-float kernel",
+    "0x28dec": "float callback packing loop"
+  },
+  "limitations": [
+    "No manifest unit/shared header or normal-object admission yet; no dual-window extractor/confidence parent integration is established.",
+    "Valid mapped sentinel capacity is required:one extra value word/index halfword beyond count. Tests include count0..62 and full-word length edge values,not invalid oversized count loops.",
+    "All32 FP settings in direct tests;six for aliases/oracles. Public RAM excludes8192 private stack bytes,FP status and saved registers/SP/masks are checked;void caller scratch/APSR excluded.",
+    "Independent Fraction oracles use tolerances2e-5 RMS and5e-4 score for rounded finite cases;exact stock/C evidence remains separate.",
+    "Source uses actual C sqrtf and has no mapped stock executable code or algorithm fallback.",
+    "Other saved REA pseudocode can specialize generic packed conversion to another thunk/width;raw ABI/register evidence is still required before using those helpers.",
+    "Physical hardware,timing,interrupts/concurrency and invalid pointer/trap behavior unverified."
+  ],
+  "evidence_sha256": {
+    "build/goal-r1-dual-window-support-c/alias-results.json": "18569f0daa18864c70722b356f26c8bbd86e4cedc0076cbbb97e2d0f016a4205",
+    "build/goal-r1-dual-window-support-c/aliases.log": "b56a58fe91e15710055c3636c47fef7870f9577b6fc4aee23b55a66a91e3d109",
+    "build/goal-r1-dual-window-support-c/aliases.py": "193412c7c6d11b0a42a938cb3f2f3940497f9a4633d173278c18592867dec840",
+    "build/goal-r1-dual-window-support-c/candidate.c": "39f5a9268adc974a7a691027167558e579e6b773e521a6a00a889ef59156be1a",
+    "build/goal-r1-dual-window-support-c/candidate.elf": "5bdf19d627a318ce0c21b318500ecc180c316b1b6008600f50516096d576da7c",
+    "build/goal-r1-dual-window-support-c/candidate.o": "b6c19133cbe2f40fff0f6cf555de417d9d0c35092752c86346398d9d6bafe915",
+    "build/goal-r1-dual-window-support-c/compile-argv.json": "a1c1ab63d7943f9a9e522e9a447490515073ffb8ece89a68d046c2dd18cad0bb",
+    "build/goal-r1-dual-window-support-c/controls-results.json": "526b24988ef524de67aa429fb497249716a288b1f20b375d06ad0529c4ada40d",
+    "build/goal-r1-dual-window-support-c/controls.log": "b921c6350a34024cb7881985ac378604a85f4fdff122e9bb449df881cfdeade5",
+    "build/goal-r1-dual-window-support-c/controls.py": "eefea4a9ee53e3f4577ab816f1cefcf1c22587086283917f2ca62254286b077a",
+    "build/goal-r1-dual-window-support-c/coverage-results.json": "4152a555f1a050f2f09bb875c60f2feebd4ef2cdb7671605ef9a9647fd5cac3e",
+    "build/goal-r1-dual-window-support-c/coverage.log": "bae9d7071a7266b9e5877f40b4c88f4e6158c1c0cab6b728dd674970a3403fb4",
+    "build/goal-r1-dual-window-support-c/coverage.py": "4a1b6ed448b70235335307889a21ebc8d79ce2629d03bc477822eb6923216c18",
+    "build/goal-r1-dual-window-support-c/defect.c": "a20a5d13120cbb05cd5281fb0c6eed60d79ef4356d12596c166d6514a9ca0152",
+    "build/goal-r1-dual-window-support-c/defect.elf": "0450cb35a372ff18fa1801b4c9da32bc29d9526de4e25c923d193db98cf3689e",
+    "build/goal-r1-dual-window-support-c/defect.o": "f2b8d34342bc03b69d4fca7aa4768c0820c84cb7f1976563e3f351bc9b90ccd8",
+    "build/goal-r1-dual-window-support-c/defect_fixture.py": "9720c045dd3c02c9d97ac03fc8952b28a2218b5b7a84b75c64c7bd59abcbfec2",
+    "build/goal-r1-dual-window-support-c/defect_verify.py": "60fb98a8c04034e6f661aee2befb03969d3954933482b73944ce4c5d24f5564a",
+    "build/goal-r1-dual-window-support-c/fixture.py": "48d2e32f2c8a2f3438f7f5d915e1703258e3088099c05a1099376c69c91fd602",
+    "build/goal-r1-dual-window-support-c/link-argv.json": "0ea1d4b8e4d08aa5c92a6313ef238349855fa4698877e341049f7dbe7553ad9c",
+    "build/goal-r1-dual-window-support-c/link.log": "c7217227fece43098e6f8df2e2e764721ca0fdfbcf82b399ff4bc909de7a1f89",
+    "build/goal-r1-dual-window-support-c/metric-bytes.json": "895b6dbe604da6b3b57e4f1330a55b87c6d785a042519aff040793ad10cc4bb6",
+    "build/goal-r1-dual-window-support-c/metric-literals.json": "c11038e207b40b548211e42e2fe1521fcf89cab8bf70eca07ac3d3cb06e6d621",
+    "build/goal-r1-dual-window-support-c/oracle-results.json": "d6e6952c0d2cf0400a46f2674fd430366c0883354c75fe393a83b94b632badf0",
+    "build/goal-r1-dual-window-support-c/oracles.log": "825f3af40a7b5b3619bb93279df1f14c469e9c5966968a8ababb4cb7fa6fa1f7",
+    "build/goal-r1-dual-window-support-c/oracles.py": "f88c082ad7fcb4a5c71c023de72550e1a3b35ebcd971b68cbecdada10c1604c9",
+    "build/goal-r1-dual-window-support-c/rea-28de0.json": "fb61813ca330413147876518dee4abba9c2d32fe1c2301373ff82f875e56a18e",
+    "build/goal-r1-dual-window-support-c/rea-28dec.json": "9f2b2cad37adb18c805846a72c54815e0b1ec49f2c0084acade50fdc7c47a83c",
+    "build/goal-r1-dual-window-support-c/rea-36734.json": "3fd58f98946722a01a2bdc59f14eb9ebc42f4cb53b6c27e7409ed698d8ad4971",
+    "build/goal-r1-dual-window-support-c/rea-37a84.json": "b3a9298b96f832fc737104088475086030d5f15b6bea58df25d06664dec01c5c",
+    "build/goal-r1-dual-window-support-c/rea-42bd0.json": "6a09460010e0779b0d71d5f760389f8997986c79a4546fc8a4376e82231094a8",
+    "build/goal-r1-dual-window-support-c/rea-4fdf8.json": "6c14394a8eee961a3830b40a9baa624ebb941009cf86454182c7b8e3585e7df9",
+    "build/goal-r1-dual-window-support-c/rea-666a4.json": "b63e8e8c31e270bdcab63103c5dfcfd927a16cd9e8866364ddf504ceda8095a4",
+    "build/goal-r1-dual-window-support-c/rea-66900.json": "aa15357aae3a173640f4f1ae565ebe62e5d8267e54770be616d6f49775700885",
+    "build/goal-r1-dual-window-support-c/rea-92a04.json": "9f95ffc9dcc842f6321a9353ca4e96d423803949cb7362db236b26dadd58d4cd",
+    "build/goal-r1-dual-window-support-c/results.json": "7811e16a8ee91351b5956ec0503e4c5d0c7d4d7c2e55379d79d165495b67fb8e",
+    "build/goal-r1-dual-window-support-c/verify.log": "527b6eb498e1424898566326733d83f9ffaee72104916c0f46c3ca41f51d7763",
+    "build/goal-r1-dual-window-support-c/verify.py": "82c0bd1bd3fb88987110fea8e32e34bcfbfb37617e5e2193106cf90a0231d7bf",
+    "build/goal-r1-spo2-infer-support-c/normal-dependencies.a": "7e62b43a34fcf2b0ae34045a276bf4d564be5dde2ddb636dd0f69169c8843637",
+    "build/goal-r1-spo2-ratio-c/normal-stream-test.ld": "808ff9c64adde68933158791e9d115c75817ae1840e2bdcbcfa42c7a39314cc6",
+    "build/sources-goal-r1-gaussian-interval-c/r1/r1-application/r1__src__application__runtime__native_float_bits.c.o": "cc448df0a2076c6dd5ee05a700f3221fb9d253ae9ae0cb7b591a0ea3a474c154",
+    "build/sources-goal-r1-gaussian-interval-c/r1/r1-application/r1__src__application__runtime__native_math_sqrt.c.o": "53639c4995bff2445646d84c928a0d3905d0309752af7ac9cda89b2c54364165",
+    "r1/blobs/official/r1-2.2.6.0009/application.bin": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "r1/src/application/runtime/native_math_sqrt.c": "adf2fe6c10b35b43ddd3c3e7645c7bd88cc7a4234b26c64c1b501d2b7e07c118",
+    "r1/src/sources.json": "ea1defda36159aecf283bb2935be26bcca7830452f174b8e6295a552e40e6143"
+  }
+}

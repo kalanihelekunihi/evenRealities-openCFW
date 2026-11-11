@@ -111,3 +111,18 @@ static void prvResetNextTaskUnblockTime( void )
         xNextTaskUnblockTime = listGET_ITEM_VALUE_OF_HEAD_ENTRY( pxDelayedTaskList );
     }
 }
+
+/* Stock 0x95738: explicit load order adapts the pinned FreeRTOS body.
+ * The three current-task reads can name different records; retain each
+ * observed access instead of caching the pointer or reordering fields. */
+TickType_t uxTaskResetEventItemValue( void )
+{
+    TCB_t *value_task = pxCurrentTCB;
+    TCB_t *priority_task = pxCurrentTCB;
+    TickType_t previous = ((volatile TCB_t *) value_task)->xEventListItem.xItemValue;
+    UBaseType_t priority = ((volatile TCB_t *) priority_task)->uxPriority;
+    TCB_t *destination_task = pxCurrentTCB;
+    ((volatile TCB_t *) destination_task)->xEventListItem.xItemValue =
+        (TickType_t) configMAX_PRIORITIES - (TickType_t) priority;
+    return previous;
+}

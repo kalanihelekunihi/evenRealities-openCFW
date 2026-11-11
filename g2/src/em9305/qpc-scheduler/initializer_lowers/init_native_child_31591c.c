@@ -1,12 +1,10 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_31591c\n"
-".type opencfw_em9305_child_31591c,@function\n"
-"opencfw_em9305_child_31591c:\n"
-"L31591c:\n"
-"b.d opencfw_em9305_mode_event_322fdc\n"
-"L315920:\n"
-"mov_s r1,0xc\n"
-".size opencfw_em9305_child_31591c,.-opencfw_em9305_child_31591c\n"
-);
+/* Stock 0x31591c: tail call mode_event_322fdc(r0, 0xc).
+ * Converted from the lowered ARC asm; compiled with the g2-em9305-1 profile (-Os) and the
+ * disassembly diffed against the stock lowering: identical, or differing only in delay-slot
+ * scheduling / a redundant zero-extension / absolute-address ld/st forms (reviewed by hand). */
+#include <stdint.h>
+#define B8(a)  (*(volatile uint8_t  *)(uintptr_t)(a))
+#define W32(a) (*(volatile uint32_t *)(uintptr_t)(a))
+extern uint32_t opencfw_em9305_mode_event_322fdc(uint32_t,uint32_t);
+uint32_t opencfw_em9305_child_31591c(uint32_t a)
+{ return opencfw_em9305_mode_event_322fdc(a, 0xcu); }

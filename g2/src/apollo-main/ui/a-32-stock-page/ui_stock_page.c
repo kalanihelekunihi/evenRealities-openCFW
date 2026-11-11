@@ -231,8 +231,8 @@ void stock_create_page_dots_4ed12c(void *parent)
         dots[i] = audio_uart_page_43de82(parent);
         audio_lv_object_size_call_43f4c0(dots[i], DOT_SIZE, DOT_SIZE);
         audio_lv_object_position_43f09a(dots[i], dot_x, start_y + i * (DOT_GAP + DOT_SIZE));
-        audio_uart_page_44131c(dots[i], 0, 0u);
-        audio_uart_page_44146a(dots[i], 0, 0u);
+        lv_obj_set_style_border_width(dots[i], 0, 0u);
+        lv_obj_set_style_radius(dots[i], 0, 0u);
         audio_uart_page_44130c(dots[i], 0u, 0u);
         style_dot(dots[i], i);
         audio_lv_object_clear_flag_43dfa4(dots[i], LV_OBJ_FLAG_CLICKABLE);

@@ -20,6 +20,9 @@ __attribute__((noinline)) uint32_t audio_terminal_session_count_5eca48(void) {
     const uint32_t count = *(const uint32_t *)(const void *)(active + 8u);
     return count < 11u ? count : 10u;
 }
+/* Same stock entry 0x5eca48 under the terminal-data (td) helper name. */
+__typeof__(audio_terminal_session_count_5eca48) audio_td_active_record_count
+    __attribute__((alias("audio_terminal_session_count_5eca48")));
 
 __attribute__((noinline)) uint32_t audio_terminal_session_valid_5eca64(int32_t index) {
     const int32_t selected = (int16_t)index;

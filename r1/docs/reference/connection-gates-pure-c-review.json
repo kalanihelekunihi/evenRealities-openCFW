@@ -1,0 +1,282 @@
+{
+  "schema_version": 1,
+  "scope": "R1 ordinary C phone and peer connection-presence predicates",
+  "report": "build/sources-goal-r1-connection-gates-pure-c/report.json",
+  "comparison_report": "build/sources-goal-r1-reset-decode-pure-c/report.json",
+  "audit": {
+    "compiled_units": 855,
+    "application_imports": 61,
+    "bootloader_imports": 22,
+    "unchanged_prior_nongenerated_objects": 844,
+    "changed_nongenerated_objects": [
+      "r1/src/application/board/native_protocol_connection_gates.c"
+    ],
+    "import_sets_unchanged": true,
+    "normal_object_equals_probe_object": true,
+    "manifest_and_source_plan_unchanged": true,
+    "no_new_persistent_state": true,
+    "register_assembly_removed": true
+  },
+  "verification": {
+    "stock_C_cases": {
+      "r1_authenticated_phone_connection_gate": 65536,
+      "r1_peer_channel_b_valid": 65536,
+      "r1_protocol_send_response": 864,
+      "r1_event_callback_0004287c": 768,
+      "r1_health_event_notification_throttle": 105
+    },
+    "total": 132809,
+    "all_16bit_handle_values_per_predicate": true,
+    "exact_volatile_read_order_and_width": true,
+    "actual_response_event_and_throttle_callers": true,
+    "external_allocation_encode_send_time_notification_and_log_providers_modeled": true,
+    "private_register_residue_APSR_and_timing_excluded": true
+  },
+  "callers": {
+    "direct_calls": [
+      {
+        "address": "0x42880",
+        "target": "#0x4cbb0",
+        "following": [
+          {
+            "address": "0x42884",
+            "instruction": "cmp r0, #0"
+          },
+          {
+            "address": "0x42886",
+            "instruction": "beq #0x42894"
+          },
+          {
+            "address": "0x42888",
+            "instruction": "cmp r4, #1"
+          },
+          {
+            "address": "0x4288a",
+            "instruction": "bne #0x42894"
+          },
+          {
+            "address": "0x4288c",
+            "instruction": "pop.w {r4, lr}"
+          },
+          {
+            "address": "0x42890",
+            "instruction": "b.w #0x838e0"
+          },
+          {
+            "address": "0x42894",
+            "instruction": "pop {r4, pc}"
+          },
+          {
+            "address": "0x42896",
+            "instruction": "cmp r0, #0"
+          },
+          {
+            "address": "0x42898",
+            "instruction": "beq #0x428a2"
+          },
+          {
+            "address": "0x4289a",
+            "instruction": "cmp r1, #8"
+          }
+        ]
+      },
+      {
+        "address": "0x828c4",
+        "target": "#0x4cbb0",
+        "following": [
+          {
+            "address": "0x828c8",
+            "instruction": "cbz r0, #0x828d4"
+          },
+          {
+            "address": "0x828ca",
+            "instruction": "b #0x828da"
+          },
+          {
+            "address": "0x828cc",
+            "instruction": "movs r0, #2"
+          },
+          {
+            "address": "0x828ce",
+            "instruction": "add sp, #0x14"
+          },
+          {
+            "address": "0x828d0",
+            "instruction": "pop.w {r4, r5, r6, r7, r8, sb, sl, fp, pc}"
+          },
+          {
+            "address": "0x828d4",
+            "instruction": "bl #0x4cb40"
+          },
+          {
+            "address": "0x828d8",
+            "instruction": "cbz r0, #0x82928"
+          },
+          {
+            "address": "0x828da",
+            "instruction": "add.w r0, r7, #0xc"
+          },
+          {
+            "address": "0x828de",
+            "instruction": "uxth r0, r0"
+          }
+        ]
+      },
+      {
+        "address": "0x828d4",
+        "target": "#0x4cb40",
+        "following": [
+          {
+            "address": "0x828d8",
+            "instruction": "cbz r0, #0x82928"
+          },
+          {
+            "address": "0x828da",
+            "instruction": "add.w r0, r7, #0xc"
+          },
+          {
+            "address": "0x828de",
+            "instruction": "uxth r0, r0"
+          },
+          {
+            "address": "0x828e0",
+            "instruction": "mov sb, r0"
+          },
+          {
+            "address": "0x828e2",
+            "instruction": "bl #0x855a0"
+          },
+          {
+            "address": "0x828e6",
+            "instruction": "ldr r1, [pc, #0x138]"
+          },
+          {
+            "address": "0x828e8",
+            "instruction": "ldr r2, [pc, #0x138]"
+          },
+          {
+            "address": "0x828ea",
+            "instruction": "movs r4, r0"
+          },
+          {
+            "address": "0x828ec",
+            "instruction": "sub.w r1, r2, r1"
+          }
+        ]
+      },
+      {
+        "address": "0x8b13a",
+        "target": "#0x4cbb0",
+        "following": [
+          {
+            "address": "0x8b13e",
+            "instruction": "cmp r0, #0"
+          },
+          {
+            "address": "0x8b140",
+            "instruction": "beq #0x8b17e"
+          },
+          {
+            "address": "0x8b142",
+            "instruction": "bl #0x8ada4"
+          },
+          {
+            "address": "0x8b146",
+            "instruction": "ldr r5, [pc, #0x38]"
+          },
+          {
+            "address": "0x8b148",
+            "instruction": "mov r4, r0"
+          },
+          {
+            "address": "0x8b14a",
+            "instruction": "ldr r0, [r5, #4]"
+          },
+          {
+            "address": "0x8b14c",
+            "instruction": "cbz r0, #0x8b15c"
+          },
+          {
+            "address": "0x8b14e",
+            "instruction": "cmp r4, r0"
+          },
+          {
+            "address": "0x8b150",
+            "instruction": "blo #0x8b15c"
+          },
+          {
+            "address": "0x8b152",
+            "instruction": "subs r0, r4, r0"
+          }
+        ]
+      }
+    ],
+    "thumb_pointer_literal_matches": {
+      "0x4cbb0": [],
+      "0x4cb40": []
+    },
+    "scope": "All halfword offsets tested for direct BL/B.W; may decode data as instructions. Pointer scan does not prove absence of indirect construction.",
+    "callee_argument_use": "Response saves header/payload/length before calls; charge notifier has void(void) contract; throttle timestamp and notification callees take explicit arguments. Gate R1 subtraction residue is not a public output."
+  },
+  "compiled_defects_rejected": [
+    {
+      "defect": "inverted-presence",
+      "rejected": true,
+      "log": "build/goal-r1-connection-gates-pure-c/inverted-presence/test.log"
+    },
+    {
+      "defect": "zero-is-absent",
+      "rejected": true,
+      "log": "build/goal-r1-connection-gates-pure-c/zero-is-absent/test.log"
+    },
+    {
+      "defect": "byte-handle",
+      "rejected": true,
+      "log": "build/goal-r1-connection-gates-pure-c/byte-handle/test.log"
+    },
+    {
+      "defect": "wrong-phone-field",
+      "rejected": true,
+      "log": "build/goal-r1-connection-gates-pure-c/wrong-phone-field/test.log"
+    },
+    {
+      "defect": "wide-handle-read",
+      "rejected": true,
+      "log": "build/goal-r1-connection-gates-pure-c/wide-handle-read/test.log"
+    }
+  ],
+  "public_contract": [
+    "Each predicate reads its owned volatile 16-bit connection handle once and returns handle != UINT16_MAX.",
+    "Historical authenticated name denotes presence, not authentication or authorization.",
+    "No argument or scratch-register result beyond ordinary C return value."
+  ],
+  "limits": [
+    "Physical connections, transport timing, final linking and boot unverified.",
+    "Response, event callback and throttle implementations execute; allocation, encoder, send, logging, time and notification boundaries modeled.",
+    "Private register residues, APSR, faults/concurrency and byte identity excluded.",
+    "Other assembly in callers is unchanged."
+  ],
+  "evidence_files": {
+    "build/sources-goal-r1-connection-gates-pure-c/report.json": "695894807f4bc585ad5fddf6569d9dadd122e8d8a8a40c4044498ad5dbada6fd",
+    "build/sources-goal-r1-reset-decode-pure-c/report.json": "5afdcf9eb9b8f8d5d0afb6987ef96272b8f5da9928cd2110ba1391185ffbcb5c",
+    "r1/src/application/board/native_protocol_connection_gates.c": "bba616f3d6715c4df33648fca31ce968e194ea05641d9cc129bc46889d43825e",
+    "r1/src/application/board/native_protocol_response.c": "b265a7f0770fe46bcd8fea618d4dd22a3af5461bc62b1b47eda9d0d14a5e9a1d",
+    "r1/src/application/board/native_event_callbacks.c": "5f24f7494fd2de78b934052a8b03291f4019cdeb52642ed8ef5f2ef04d6dd56b",
+    "r1/src/application/runtime/native_health_notification_throttle.c": "36969c3f50f1f9ecc0e9fbf78cfef8cda7686a99fa3496f24a3ab44f39038068",
+    "r1/src/application/runtime/native_charge_notification.c": "272bf950263e4f7799bea4c193f75150c65a7d2e27c03c8b271c08504a2f024c",
+    "r1/src/sources.json": "f74aa01d5bac1e3a8786b1052791cbd6344c1fd57ce26a11f1d65de93506ad72",
+    "tools/build/source-plan.json": "eeb516e31b3310fb0718f36908977f8125723f7c5e0e86cd6744395826259a4d",
+    "build/goal-r1-connection-gates-pure-c/rea.json": "6e5c7b27af0927529759e03c2fcb3c60531bc87d501373a4cf2cd3154ebdbac3",
+    "build/goal-r1-connection-gates-pure-c/verify.py": "a025ab4e5b742f9c16bfd7d2bfb2495bf04088f9b85ac298f054c0e7424daebe",
+    "build/goal-r1-connection-gates-pure-c/results.json": "77002bbed8bdb6ade1b4acb51e2793fd90485b9a2fa9d1b3c07eece4083cf385",
+    "build/goal-r1-connection-gates-pure-c/verification.log": "3606c13da5a51dac132deb52f16b1c275b8c3981cd48d101576c18cef66d50cf",
+    "build/goal-r1-connection-gates-pure-c/source.elf": "a05930bd665eddd01b80c9a6644ce45db47f8458caba3c31a28494377f991fee",
+    "build/goal-r1-connection-gates-pure-c/callers.py": "58a55b8c542913b64c2030d7fe03edbe38c38fba70007c3a09248ba7c27d198e",
+    "build/goal-r1-connection-gates-pure-c/callers.json": "ed87f03a0d2421c0fd0287af479bdadfd821d8b6306b8748896476a3dd0f6f91",
+    "build/goal-r1-connection-gates-pure-c/negative.py": "d34ec351870d70d5e5482431a9ea0f81f0d78068b927783b8f58746ba4325750",
+    "build/goal-r1-connection-gates-pure-c/negative.json": "5ecf61c60f392edcad4acfcc774db461285f95cfaafd995c410ba49d97eb46ac",
+    "build/goal-r1-connection-gates-pure-c/negative.log": "a5823473a4fe045926b6451890022cfc7397bb5ac4ab1fd88761ce5fbdc45260",
+    "build/goal-r1-connection-gates-pure-c/build.log": "b5f8be5bcda095129c12b834bbbec602ffa190600ee1153acb0ade2b70093a79",
+    "build/goal-r1-connection-gates-pure-c/sources-check.log": "f610d186f791ebf717d9fd6eed6c4f28612779fff34b885bcf8dc8a49c9ae80c"
+  }
+}

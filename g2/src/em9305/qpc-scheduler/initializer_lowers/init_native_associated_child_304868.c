@@ -1,15 +1,13 @@
-/* Complete native304868..304880; caller-visible register effects retained. */
-__asm__(
-".text\n.balign 4\n.global opencfw_em9305_associated_child_304868\n"
-".type opencfw_em9305_associated_child_304868,@function\n"
-"opencfw_em9305_associated_child_304868:\n"
-"mov_s r0,0x805f00\n"
-"ldb_s r0,[r0,0]\n"
-"breq_s r0,0,L30487c\n"
-"mov_s r0,0x8012fc\n"
-"j_s.d [blink]\n"
-"ldb_s r0,[r0,0]\n"
-"L30487c: j_s.d [blink]\n"
-"mov_s r0,0xff\n"
-".size opencfw_em9305_associated_child_304868,.-opencfw_em9305_associated_child_304868\n"
-);
+/* Stock 0x304868: returns 0xff when byte SRAM 0x805f00 is 0, else byte SRAM 0x8012fc.
+ * Converted from the lowered ARC asm; compiled with the g2-em9305-1 profile (-Os) and the
+ * disassembly diffed against the stock lowering: identical, or differing only in delay-slot
+ * scheduling / a redundant zero-extension / absolute-address ld/st forms (reviewed by hand). */
+#include <stdint.h>
+#define B8(a)  (*(volatile uint8_t  *)(uintptr_t)(a))
+#define H16(a) (*(volatile uint16_t *)(uintptr_t)(a))
+#define W32(a) (*(volatile uint32_t *)(uintptr_t)(a))
+uint32_t opencfw_em9305_associated_child_304868(void)
+{
+  if(B8(0x805f00u) == 0u) return 0xffu;
+  return B8(0x8012fcu);
+}

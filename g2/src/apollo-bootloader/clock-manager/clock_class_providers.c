@@ -154,3 +154,6 @@ uint32_t opencfw_bl_clock_release_id3(uint8_t user_id)
     critical_restore(previous);
     return 0u;
 }
+
+/* Stock entry names that branch straight to the provider above. */
+__typeof__(opencfw_bl_power_register_update) opencfw_boot_power_register_update __attribute__((alias("opencfw_bl_power_register_update")));

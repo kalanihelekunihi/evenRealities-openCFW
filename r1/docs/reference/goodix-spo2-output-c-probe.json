@@ -1,0 +1,154 @@
+{
+  "status": "probe_only_not_admitted",
+  "native_entry": "0x36974",
+  "native_instruction_bytes": 460,
+  "native_literal_bytes": 24,
+  "total_stock_c_pairs": 104832,
+  "verification_counts": {
+    "results": 32768,
+    "alias-results": 67584,
+    "oracle-results": 4096,
+    "caller-results": 384
+  },
+  "independent_fraction_oracle_pairs": 4096,
+  "coverage": {
+    "native_coverage_calls": 20,
+    "instruction_bytes": 460,
+    "instruction_starts": 134,
+    "entry": "0x36974"
+  },
+  "compiled_defects": [
+    {
+      "defect": "snapshot-offset",
+      "detected": true,
+      "detection_case": "(0, {})",
+      "diagnostic": ""
+    },
+    {
+      "defect": "valid-sign",
+      "detected": true,
+      "detection_case": "(128, {})",
+      "diagnostic": ""
+    },
+    {
+      "defect": "confidence-gate",
+      "detected": true,
+      "detection_case": "(10, {})",
+      "diagnostic": ""
+    },
+    {
+      "defect": "selected-scale",
+      "detected": true,
+      "detection_case": "(1, {})",
+      "diagnostic": ""
+    },
+    {
+      "defect": "half-bias",
+      "detected": true,
+      "detection_case": "(1, {})",
+      "diagnostic": ""
+    },
+    {
+      "defect": "missing-zero",
+      "detected": true,
+      "detection_case": "(0, {})",
+      "diagnostic": ""
+    },
+    {
+      "defect": "flag-byte",
+      "detected": true,
+      "detection_case": "(1, {})",
+      "diagnostic": ""
+    },
+    {
+      "defect": "stale-configuration",
+      "detected": true,
+      "detection_case": "(5, {'packet_alias': 'config+16'})",
+      "diagnostic": ""
+    },
+    {
+      "defect": "stale-confidence",
+      "detected": true,
+      "detection_case": "(5, {'packet_alias': 'confidence'})",
+      "diagnostic": ""
+    }
+  ],
+  "limitations": [
+    "No source unit/import binding or normal build admission yet.",
+    "Valid mapped owner/configuration/snapshot/packet buffers are assumed; invalid owner-pointer aliases are not assigned recovery.",
+    "Public RAM excludes8192 private stack bytes. FPSCR, saved GP/FP registers, SP and masks are checked; caller scratch/APSR and void return are excluded.",
+    "Direct/oracle/caller suites use32 FP settings; aliases use six.",
+    "Caller tests run actual C calculate/model/inference/quality/selection/output. Earlier processing and confidence remain controlled boundaries; they do not establish confidence algorithm correctness.",
+    "Physical hardware, timing and concurrency unverified."
+  ],
+  "evidence_sha256": {
+    "build/goal-r1-spo2-infer-support-c/normal-dependencies.a": "7e62b43a34fcf2b0ae34045a276bf4d564be5dde2ddb636dd0f69169c8843637",
+    "build/goal-r1-spo2-output-c/alias-results.json": "87c55d2986570a5efad3eeb35b11cc4d2e5a0f7397bcc52a00f0faf657bebd44",
+    "build/goal-r1-spo2-output-c/aliases.log": "6f225a6c8369a57b04de3330352df864c955df67b913a9925c230ca5e3790104",
+    "build/goal-r1-spo2-output-c/aliases.py": "4a87d57f866a3f3212b0bc6f70c3a0255f28a89acc6af26afa4faef1ff6be8d6",
+    "build/goal-r1-spo2-output-c/caller-link.json": "73cdddfcf4ccb2fbe62db01cdf5d0450a17805fb3fd531c4da53d61a1eb9b733",
+    "build/goal-r1-spo2-output-c/caller-link.log": "453ebe0f6632df9993f1ce2ab504b823df5b6cb33da2dc74f3eb64e6d4b37403",
+    "build/goal-r1-spo2-output-c/caller-matrix.log": "7b7f3b6d38f20bfa72785bc3c16384eb3ffaed404475ad16bde15380220e45a1",
+    "build/goal-r1-spo2-output-c/caller-results.json": "56d96bdb7617e53e35e52c2ecd53e073b4fa5fbda239d59f2399295be29181af",
+    "build/goal-r1-spo2-output-c/caller.elf": "3e880828ce1e8a9a3e9b5c8c9a50dcdf1e9cd959544b778b7b4dbe86d5a4342c",
+    "build/goal-r1-spo2-output-c/caller.py": "128467d0bde594c94381173b215b6d254d983866aaca12c4ef8baaca62a1fb28",
+    "build/goal-r1-spo2-output-c/caller_fixture.py": "428967eb4a2625e7ce9a802cc3d31939b9511e29e623c759ce4da30b64c72029",
+    "build/goal-r1-spo2-output-c/caller_matrix.py": "bfdfc836f2b9953c4cf2d9fe1b9bb89ec6913198688805ff2c95663e46523a9f",
+    "build/goal-r1-spo2-output-c/candidate.c": "582356d692cee8c21fd1d6d4db3996a867840e9794d03b53ace8c23954f2b3be",
+    "build/goal-r1-spo2-output-c/candidate.elf": "53b6327b28d10ebe6f85292fcca8117e83038019fd3e63327bdd0d97b669616c",
+    "build/goal-r1-spo2-output-c/candidate.o": "4159200b779eb2c6e0e83f230728b458a84c064aa0625248de9b40be4f2fca40",
+    "build/goal-r1-spo2-output-c/compile-argv.json": "d058c034a3e1b075b03ca9f7a8a608e9b818d6fa2f715d5fde77f22af7fb58d0",
+    "build/goal-r1-spo2-output-c/controls-results.json": "6c85ad0542e312293559b9a6170a6a9a5eca5071a9c39fbbc740d319ddd71fd5",
+    "build/goal-r1-spo2-output-c/controls.log": "8606140b3af773f0a72a009508ae44b690aabb96be976591d0ca13a8dfcef6e0",
+    "build/goal-r1-spo2-output-c/controls.py": "10d4c8a5c0979af1ec828c35472c18ac5fc36cb2962679b7a08f27edbdffc117",
+    "build/goal-r1-spo2-output-c/coverage-results.json": "95edfe8320bc64d22499269790f1c6829034715d8dea6f5544f9d464ad7ad732",
+    "build/goal-r1-spo2-output-c/coverage.py": "7f50998db336a27e6d1df09c384c709ee0c75bdb6c9f4071a734756ae3aef6c3",
+    "build/goal-r1-spo2-output-c/defect.c": "bb53332cb196a03154eb4ecb43cb5625f4eee98ae18626ce45b46b9ff4aa55ec",
+    "build/goal-r1-spo2-output-c/defect.elf": "4f4c350df3533ebba435251d4f6772d5f5109285ca919b9376c87db2af2bd714",
+    "build/goal-r1-spo2-output-c/defect.o": "f7448dd7eaa0d2dd71b3ca3ebd76d6e91a4301e67309020446b589d287a0838d",
+    "build/goal-r1-spo2-output-c/defect_fixture.py": "355f8cfaa920719e707ed4a93fcbffd15f89b2e9645aee7661a9eee7ce75e8a6",
+    "build/goal-r1-spo2-output-c/defect_verify.py": "597f3215c3f59292794f9529d1ae0b00bf19e6137b9572bc1b6e258772b15f62",
+    "build/goal-r1-spo2-output-c/fixture.py": "f83928284e3071feb53057dd0d081939b3ec4365f08fe3d6e7190575f17d36c0",
+    "build/goal-r1-spo2-output-c/link-argv.json": "91b40f2169b1ae01c7e3d7863dc54c4c8aaa3881ffd7bfb9f82291c32bf71a93",
+    "build/goal-r1-spo2-output-c/link.log": "5fa0cf745e969217a57fa6fdc3f14741d644ff6be14f36dc28cecf661813ac0a",
+    "build/goal-r1-spo2-output-c/oracle-results.json": "e59dc40299d4a3fb157ce1ae2e3d6acb79dee6b8e7697af6920767149cd94863",
+    "build/goal-r1-spo2-output-c/oracles.py": "21804cb420f790576a58830bf0bc6c036916f6cc93d4a66c014a2031fb1d8466",
+    "build/goal-r1-spo2-output-c/rea-bytes.json": "3e950fafa654d1e75668d035765729a18af319a19112e51a559053711d5e565e",
+    "build/goal-r1-spo2-output-c/rea-dossier.json": "ab20e73e802152bd63e027b96c141c65a1b340c0fdf6a01a644d00139029993c",
+    "build/goal-r1-spo2-output-c/rea-literals.json": "0790ff8514644ed9a747c1a866d8faf88ad196fc676b9d43919866f727e42d33",
+    "build/goal-r1-spo2-output-c/results.json": "fc207cb2bf1fc5bc5560a4568b4395c420aeaceab7f3f5336bc218f629d2bfa7",
+    "build/goal-r1-spo2-output-c/verify.log": "66550453653be03ada0f0c4be74b9ab7c27f916cfafb390b17e87f34eb8661a9",
+    "build/goal-r1-spo2-output-c/verify.py": "fc6ad01a950e938cfbc13e26c3cb4f8642653142a0a1fda22ed25332245da64d",
+    "build/goal-r1-spo2-ratio-c/normal-stream-test.ld": "808ff9c64adde68933158791e9d115c75817ae1840e2bdcbcfa42c7a39314cc6",
+    "build/sources-goal-r1-spo2-output-quality-c/r1/r1-application/r1__src__application__runtime__native_float_bits.c.o": "cc448df0a2076c6dd5ee05a700f3221fb9d253ae9ae0cb7b591a0ea3a474c154",
+    "build/sources-goal-r1-spo2-select-c/r1/r1-application/r1__src__application__goodix__native_model_concatenate.c.o": "6f80a63fefdad83c8cf73df17d40caf691c382ed676a0aae82f28bed9f636689",
+    "build/sources-goal-r1-spo2-select-c/r1/r1-application/r1__src__application__goodix__native_model_convolution.c.o": "5c211d9e5cf520e4fef7121843440b89fd956ede5526e2b8db0e48f500747f02",
+    "build/sources-goal-r1-spo2-select-c/r1/r1-application/r1__src__application__goodix__native_model_dense.c.o": "a5baaa994ed42a49be6aaf395a00671963a6c1b6b5d8583777c6305ee05bd1bd",
+    "build/sources-goal-r1-spo2-select-c/r1/r1-application/r1__src__application__goodix__native_model_float_pool.c.o": "17c92a4b130dda0281e7a897dc114fb0450d44b91b380e1dd49f5a2090c2e7ec",
+    "build/sources-goal-r1-spo2-select-c/r1/r1-application/r1__src__application__goodix__native_model_graph_execute.c.o": "4c0c63c859caf0fd22f1320b45136d908f8abbb84d4b0a2e3e2e20a8edc5dd7a",
+    "build/sources-goal-r1-spo2-select-c/r1/r1-application/r1__src__application__goodix__native_model_i8_convolution.c.o": "2657a7199915d67c47531fc0fc9ffbfbe865f4b95534abd1dbdafa390e0ba767",
+    "build/sources-goal-r1-spo2-select-c/r1/r1-application/r1__src__application__goodix__native_model_merge.c.o": "33a43b8fe5af49f578e7ebaf13ebcca37e457e06c19432fbb93762fa6c1024e4",
+    "build/sources-goal-r1-spo2-select-c/r1/r1-application/r1__src__application__goodix__native_model_pool_add.c.o": "73969bf6f08d01ca962bc9a8d85d5696ef178591ae9b5530e89af713b96b8474",
+    "build/sources-goal-r1-spo2-select-c/r1/r1-application/r1__src__application__goodix__native_model_quantization.c.o": "e317ed0e53906a7020f44905fb697f421b021e1d221f9da3f6e78435bcfef649",
+    "build/sources-goal-r1-spo2-select-c/r1/r1-application/r1__src__application__goodix__native_model_recurrent.c.o": "a9f03474c4391045cceb74e33a1aa0031387d459054add0966cbcd300bc9b513",
+    "build/sources-goal-r1-spo2-select-c/r1/r1-application/r1__src__application__goodix__native_model_recurrent_support.c.o": "d9da585a816de8b36c1a8a255860a168d8ba685233e4baf53ed695609bf9b129",
+    "build/sources-goal-r1-spo2-select-c/r1/r1-application/r1__src__application__goodix__native_model_scale.c.o": "70c03a7ad29fde9d634eaae50e201f9b9648d9ce173e72e04289113dedefb7f3",
+    "build/sources-goal-r1-spo2-select-c/r1/r1-application/r1__src__application__goodix__native_model_softmax.c.o": "9e00e9077ae03eb4c80bf06e81f6356747499337da700fd8ba7b3cd79b645fc2",
+    "build/sources-goal-r1-spo2-select-c/r1/r1-application/r1__src__application__goodix__native_model_transform.c.o": "c9d2e209373e9696eee3f03cd6b5dc0a5d47503d7d8b769a368158e5fcd3fad0",
+    "build/sources-goal-r1-spo2-select-c/r1/r1-application/r1__src__application__goodix__native_spo2_calculate.c.o": "0d1e2ddeeefd0ad393d0933a15bf7185e395422378e50e2c584b449fa1cff367",
+    "build/sources-goal-r1-spo2-select-c/r1/r1-application/r1__src__application__goodix__native_spo2_generated_model.c.o": "14f0da4eff0d75d6014f40d928a6bd58dcc44b79b1a4c6ed695c9dbdf87ee210",
+    "build/sources-goal-r1-spo2-select-c/r1/r1-application/r1__src__application__goodix__native_spo2_infer.c.o": "0b447e494745412c299b3839c8bef24cffc7960b638a3d189bb553045d5ed7ab",
+    "build/sources-goal-r1-spo2-select-c/r1/r1-application/r1__src__application__goodix__native_spo2_infer_support.c.o": "ebea499ddab2b91f3bf531f7301ac0cdf5bd5eb051c923a0cbae29e0ac3bdb5c",
+    "build/sources-goal-r1-spo2-select-c/r1/r1-application/r1__src__application__goodix__native_spo2_math.c.o": "265990bd7f6c22c801d820280faeccc977bbacff30e719a4ad3f08414b33dfc5",
+    "build/sources-goal-r1-spo2-select-c/r1/r1-application/r1__src__application__goodix__native_spo2_model_graph.c.o": "ede8398723a208a4ee7336b6004b9189576cd36520f3222c84be227cc166473b",
+    "build/sources-goal-r1-spo2-select-c/r1/r1-application/r1__src__application__goodix__native_spo2_output_quality.c.o": "45f124497678c47d01f0b15a4af23575b2be8cdd9921cf8254f73cfb73067d8f",
+    "build/sources-goal-r1-spo2-select-c/r1/r1-application/r1__src__application__goodix__native_spo2_select.c.o": "f5d1dacbf728a653e0326d68ef1e28d556cba595700b2f10675ee19b089fc135",
+    "build/sources-goal-r1-spo2-select-c/r1/r1-application/r1__src__application__runtime__native_expf_tanhf.c.o": "1b2a1142fd859ed7e67a172be060968c238a5a942afbee379d2318896b946b45",
+    "build/sources-goal-r1-spo2-select-c/r1/r1-application/r1__src__application__runtime__native_float_bits.c.o": "cc448df0a2076c6dd5ee05a700f3221fb9d253ae9ae0cb7b591a0ea3a474c154",
+    "build/sources-goal-r1-spo2-select-c/r1/r1-application/r1__src__application__runtime__native_math_selection.c.o": "8af75876c6bb312a8daeeed99f72214e4afa4afb080649df66a4cbd5a05f2afc",
+    "r1/blobs/official/r1-2.2.6.0009/application.bin": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "r1/src/application/goodix/native_spo2_calculate.c": "c2def9b6edcfe97256b6058670f296e0b7b99838a8476e59a6a72cac0ac398a6",
+    "r1/src/application/goodix/native_spo2_select.c": "fa1882c4b38746234a381f1f8b4bfccc524a10f0ac3bb689d67051f6fdd03741",
+    "r1/src/sources.json": "60769464537bc49fb826ed725b0494291173a59f659441236cd73de834a268b5"
+  }
+}

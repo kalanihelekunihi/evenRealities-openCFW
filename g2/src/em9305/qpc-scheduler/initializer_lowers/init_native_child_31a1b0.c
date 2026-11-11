@@ -1,64 +1,28 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_31a1b0\n"
-".type opencfw_em9305_child_31a1b0,@function\n"
-"opencfw_em9305_child_31a1b0:\n"
-"L31a1b0:\n"
-"enter_s [r13-r16,fp,blink]\n"
-"L31a1b2:\n"
-"sub_s sp,sp,0x8\n"
-"L31a1b4:\n"
-"mov_s r14,r0\n"
-"L31a1b6:\n"
-"ldb_s r0,[r0,0]\n"
-"L31a1b8:\n"
-"mov_s r16,r2\n"
-"L31a1ba:\n"
-"mov_s r13,r1\n"
-"L31a1bc:\n"
-"cmp_s r0,1\n"
-"L31a1be:\n"
-"mov_s r0,0\n"
-"L31a1c0:\n"
-"bne_s L31a1fa\n"
-"L31a1c2:\n"
-"ldb_s r15,[r13,0x6]\n"
-"L31a1c4:\n"
-"bl.d opencfw_em9305_controller_pack_address\n"
-"L31a1c8:\n"
-"add_s r0,r13,0x7\n"
-"L31a1ca:\n"
-"ldh r6,[r14,174]\n"
-"L31a1ce:\n"
-"ldb r5,[r13,15]\n"
-"L31a1d2:\n"
-"ldb r4,[r13,4]\n"
-"L31a1d6:\n"
-"mov_s r2,r0\n"
-"L31a1d8:\n"
-"mov_s r3,r1\n"
-"L31a1da:\n"
-"add_s r0,sp,0\n"
-"L31a1dc:\n"
-"bl.d opencfw_em9305_child_316a68\n"
-"L31a1e0:\n"
-"mov_s r1,r15\n"
-"L31a1e2:\n"
-"ld r2,[sp,0x4]\n"
-"L31a1e4:\n"
-"mov_s r0,0x80356c\n"
-"L31a1ea:\n"
-"bl.d opencfw_em9305_pawr_match_3169b4\n"
-"L31a1ee:\n"
-"ld r1,[sp,0]\n"
-"L31a1f0:\n"
-"brne_s r0,0,L31a1f6\n"
-"L31a1f2:\n"
-"stb 1,[r16]\n"
-"L31a1f6:\n"
-"bxor r0,r0,0\n"
-"L31a1fa:\n"
-"leave_s [r13-r16,fp,blink,pcl]\n"
-".size opencfw_em9305_child_31a1b0,.-opencfw_em9305_child_31a1b0\n"
-);
+#include <stdint.h>
+
+/* Native 0x31a1b0..0x31a1fe: PAwR report filter. For an active sync record
+ * (byte 0 == 1) build the match key from the report (address at +7, type +6,
+ * bytes +4/+15) and the record halfword +174, then look it up in the PAwR
+ * table at 0x80356c. A miss sets *missed = 1. Returns the lookup result with
+ * bit 0 inverted, or 0 for an inactive record. */
+extern uint64_t opencfw_em9305_controller_pack_address(uintptr_t);
+extern uint32_t opencfw_em9305_child_316a68(uintptr_t key, uint32_t type,
+                                            uint32_t address_low, uint32_t address_high,
+                                            uint32_t b4, uint32_t b15, uint32_t interval);
+extern uint32_t opencfw_em9305_pawr_match_3169b4(uintptr_t,uint32_t,uint32_t);
+
+uint32_t opencfw_em9305_child_31a1b0(uintptr_t record, uintptr_t report, uintptr_t missed)
+{
+    uint32_t key[2];
+    if (*(volatile uint8_t *)record != 1u) return 0u;
+    uint32_t type = *(volatile uint8_t *)(report + 6u);
+    uint64_t address = opencfw_em9305_controller_pack_address(report + 7u);
+    (void)opencfw_em9305_child_316a68((uintptr_t)key, type, (uint32_t)address,
+                                      (uint32_t)(address >> 32),
+                                      *(volatile uint8_t *)(report + 4u),
+                                      *(volatile uint8_t *)(report + 15u),
+                                      *(volatile uint16_t *)(record + 174u));
+    uint32_t match = opencfw_em9305_pawr_match_3169b4(0x80356cu, key[0], key[1]);
+    if (match == 0u) *(volatile uint8_t *)missed = 1u;
+    return match ^ 1u;
+}

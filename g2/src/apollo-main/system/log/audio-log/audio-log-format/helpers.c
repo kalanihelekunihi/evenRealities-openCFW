@@ -6,4 +6,5 @@ extern uint32_t g2_log_module_length(const char *); /* stock 0x44a43c */
 /* Stock 0x43D0DA (compress-log level getter) */
 uint32_t audio_log_level(void) { return audio_log_policy_byte; }
 uint32_t audio_log_tick(void) { return g2_flashdb_candidate_tick(); }
-uint32_t audio_string_length(const char *p) { return g2_log_module_length(p); }
+/* audio_string_length (strlen 0x44a43c) is an alias of
+ * g2_log_candidate_module_length in system/log/extended-log/extended-log-memory.c. */

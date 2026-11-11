@@ -1,22 +1,15 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_31a3ec\n"
-".type opencfw_em9305_child_31a3ec,@function\n"
-"opencfw_em9305_child_31a3ec:\n"
-"L31a3ec:\n"
-"ldb r1,[r0,241]\n"
-"L31a3f0:\n"
-"stb 1,[r0,2]\n"
-"L31a3f4:\n"
-"breq_s r1,0,L31a3fe\n"
-"L31a3f6:\n"
-"b.d opencfw_em9305_ll_schedule_notify_313354\n"
-"L31a3fa:\n"
-"add r0,r0,484\n"
-"L31a3fe:\n"
-"b.d opencfw_em9305_ll_schedule_notify_313354\n"
-"L31a402:\n"
-"add2 r0,r0,0x3d\n"
-".size opencfw_em9305_child_31a3ec,.-opencfw_em9305_child_31a3ec\n"
-);
+/* Stock 0x31a3ec: byte a[2] = 1; tail ll_schedule_notify_313354(byte a[241] ? a+484 : a+244).
+ * Converted from the lowered ARC asm; compiled with the g2-em9305-1 profile (-Os) and the
+ * disassembly diffed against the stock lowering: identical, or differing only in delay-slot
+ * scheduling / a redundant zero-extension / absolute-address ld/st forms (reviewed by hand). */
+#include <stdint.h>
+#define B8(a)  (*(volatile uint8_t  *)(uintptr_t)(a))
+#define H16(a) (*(volatile uint16_t *)(uintptr_t)(a))
+#define W32(a) (*(volatile uint32_t *)(uintptr_t)(a))
+extern uint32_t opencfw_em9305_ll_schedule_notify_313354(uint32_t);
+uint32_t opencfw_em9305_child_31a3ec(uint32_t a)
+{
+  uint32_t f = B8(a + 241u);
+  B8(a + 2u) = 1u;
+  return opencfw_em9305_ll_schedule_notify_313354(f != 0u ? a + 484u : a + 244u);
+}

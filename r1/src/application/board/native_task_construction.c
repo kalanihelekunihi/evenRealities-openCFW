@@ -23,7 +23,7 @@ void r1_native_task_initialize(TaskFunction_t code,const char *name,uint32_t dep
  tcb->pxTopOfStack=pxPortInitialiseStack((uint32_t *)top,code,parameter);
  if(out)*out=tcb;
 }
-int32_t r1_native_task_create(TaskFunction_t code,const char *name,uint32_t depth,void *parameter,uint32_t priority,r1_native_tcb **out){
+BaseType_t r1_native_task_create(TaskFunction_t code,const char *name,uint32_t depth,void *parameter,uint32_t priority,r1_native_tcb **out){
  uint32_t *stack=pvPortMalloc(depth*4u);if(!stack)return -1;
  r1_native_tcb *tcb=pvPortMalloc(112);if(!tcb){vPortFree(stack);return -1;}
  memset(tcb,0,112);tcb->pxStack=stack;tcb->ucStaticallyAllocated=0;
@@ -35,3 +35,15 @@ r1_native_tcb *r1_native_task_create_static(TaskFunction_t code,const char *name
  memset(tcb,0,112);tcb->pxStack=stack;tcb->ucStaticallyAllocated=2;
  r1_native_tcb *result=0;r1_native_task_initialize(code,name,depth,parameter,priority,&result,tcb,0);r1_native_task_add_ready(tcb);return result;
 }
+
+/* Public kernel names share the checked native bodies. The static control
+ * parameter is opaque storage with the same native extent and alignment. */
+#include "task.h"
+_Static_assert(__builtin_types_compatible_p(__typeof__(&xTaskCreate),
+               __typeof__(&r1_native_task_create)), "public dynamic task ABI");
+_Static_assert(sizeof(StaticTask_t)==sizeof(r1_native_tcb) &&
+               _Alignof(StaticTask_t)==_Alignof(r1_native_tcb), "public static task storage ABI");
+extern __typeof__(xTaskCreate) xTaskCreate
+    __attribute__((alias("r1_native_task_create")));
+extern __typeof__(xTaskCreateStatic) xTaskCreateStatic
+    __attribute__((alias("r1_native_task_create_static")));

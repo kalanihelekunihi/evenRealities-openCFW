@@ -1,0 +1,76 @@
+{
+  "schema": 1,
+  "target": "Compare all source-owned touch reset-copy data against authenticated stock load image",
+  "reference": "g2/blobs/official/g2-2.2.6.10/firmware_touch.bin",
+  "reference_sha256": "0d13d8bb1337bf22989dc16143e3d5eca29a31cc1ed753ff624668750ea9470d",
+  "stock_app_flash_base": "0x3300",
+  "stock_reset_copy_load_va": "0xb58c",
+  "stock_fwpk_header_bytes": 32,
+  "stock_file_offset": 33452,
+  "stock_data_sha256": "201d8c71916eb1169ef32e05464ea73b4dd535f018f97b84441919ba4091233d",
+  "source_elf": "build/g2-gcc14-pdl-bundle-20261111/g2-touch/g2-touch.elf",
+  "source_elf_sha256": "bfd343438745514525bafe8219c094e779f2259806831618474d2b243cb53dc5",
+  "source_section": ".touchdata",
+  "source_section_dump": "build/g2-touchdata-source-20261111.bin",
+  "source_section_sha256": "3c0cded1081a577a92755ae6d0aceecb2ca45beb1032d82c35419df6c287e4e8",
+  "section_bytes": 964,
+  "same_offset_equal_bytes": 946,
+  "different_bytes": 18,
+  "different_words": [
+    {
+      "offset": 12,
+      "stock_word": "0x00003621",
+      "source_word": "0x000071a9",
+      "meaning": "application power-management callback"
+    },
+    {
+      "offset": 44,
+      "stock_word": "0x0000b2a8",
+      "source_word": "0x00009f00",
+      "meaning": "common CapSense configuration"
+    },
+    {
+      "offset": 56,
+      "stock_word": "0x0000b0f8",
+      "source_word": "0x00009f3c",
+      "meaning": "widget CapSense configuration"
+    },
+    {
+      "offset": 64,
+      "stock_word": "0x0000b34c",
+      "source_word": "0x0000a0ec",
+      "meaning": "pin configuration"
+    },
+    {
+      "offset": 68,
+      "stock_word": "0x0000b33c",
+      "source_word": "0x00009ee0",
+      "meaning": "shield pin list"
+    },
+    {
+      "offset": 900,
+      "stock_word": "0x0000b32c",
+      "source_word": "0x00009ef0",
+      "meaning": "shield configuration"
+    },
+    {
+      "offset": 912,
+      "stock_word": "0x0000a1c1",
+      "source_word": "0x000044dd",
+      "meaning": "deep-sleep callback"
+    },
+    {
+      "offset": 956,
+      "stock_word": "0x00003435",
+      "source_word": "0x0000926b",
+      "meaning": "C runtime constructor"
+    },
+    {
+      "offset": 960,
+      "stock_word": "0x00003409",
+      "source_word": "0x0000926d",
+      "meaning": "C runtime destructor"
+    }
+  ],
+  "interpretation": "The complete 964-byte reset-copy span is source-owned. All differences are nine 32-bit flash function or configuration pointers caused by the linked source image placing the corresponding code/configuration at different addresses. This is a data-layout comparison, not proof of behavior or whole-firmware identity."
+}

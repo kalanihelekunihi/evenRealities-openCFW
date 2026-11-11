@@ -17,9 +17,7 @@ _Static_assert(offsetof(struct gx8002_xip_queue_view, member_size) == 16,
 
 static uint32_t signed_remainder(uint32_t sum, int32_t divisor)
 {
-    int32_t quotient;
-    __asm__ volatile("divs %0, %1, %2" : "=r"(quotient)
-                     : "r"(sum), "r"(divisor) : "cc");
+    const int32_t quotient = (int32_t)sum / divisor;   /* divs */
     return sum - (uint32_t)quotient * (uint32_t)divisor;
 }
 

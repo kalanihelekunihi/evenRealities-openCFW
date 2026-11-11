@@ -1,0 +1,152 @@
+{
+  "schema_version": 1,
+  "status": "stock-validated C candidate; source admission pending",
+  "total_stock_c_pairs": 31790,
+  "independent_numerical_oracle_pairs": 270,
+  "verification": {
+    "results": {
+      "pairs": 7296,
+      "fpscr_modes": 32,
+      "elapsed_seconds": 75.63587799994275,
+      "scope": "Actual C correlation/vector scale/heap/memmove/max helpers. Two lengths and native padding,threshold/NaN normalization,FP status,public RAM and saved ABI."
+    },
+    "alias-results": {
+      "pairs": 2304,
+      "fpscr_modes": 6,
+      "elapsed_seconds": 20.840159916784614,
+      "scope": "Ordered first/second input and shifted output aliases across all4 entries;actual C heap/free for normalization."
+    },
+    "oracle-results": {
+      "pairs": 270,
+      "independent_integer_fraction_oracles": 270,
+      "fpscr_modes": 6,
+      "elapsed_seconds": 2.4696311668958515,
+      "scope": "Independent lag-sum correlation and untouched padding;zero/nonzero-energy first-half autocorrelation normalization with tolerance2e-5."
+    },
+    "edge-results": {
+      "pairs": 21920,
+      "vector_special_pairs": 20736,
+      "normalization_threshold_pairs": 1056,
+      "empty_vector_pairs": 128,
+      "fpscr_modes": 32,
+      "elapsed_seconds": 196.66790600004606,
+      "scope": "All special-value input/factor pairs with NaN payload priority,empty vectors and exact f32 normalization cutoff neighbors."
+    }
+  },
+  "compiled_defect_controls": [
+    {
+      "defect": "padding-start",
+      "detected": true,
+      "detection_case": "(9, 'correlation', 5, 1, 1)",
+      "diagnostic": ""
+    },
+    {
+      "defect": "reverse-direction",
+      "detected": true,
+      "detection_case": "(0, 'correlation', 1, 5, 1)",
+      "diagnostic": ""
+    },
+    {
+      "defect": "prefix-short-window",
+      "detected": true,
+      "detection_case": "(12, 'normalize', 5, 1, 1)",
+      "diagnostic": ""
+    },
+    {
+      "defect": "middle-large-window",
+      "detected": true,
+      "detection_case": "(0, 'correlation', 1, 5, 1)",
+      "diagnostic": ""
+    },
+    {
+      "defect": "dot-nan-priority",
+      "detected": true,
+      "detection_case": "(14, 'normalize', 5, 1, 9)",
+      "diagnostic": ""
+    },
+    {
+      "defect": "normalization-half",
+      "detected": true,
+      "detection_case": "(12, 'normalize', 5, 1, 1)",
+      "diagnostic": ""
+    },
+    {
+      "defect": "normalization-cutoff",
+      "detected": true,
+      "detection_case": "(32, 'normalize', 3, 2, 9)",
+      "diagnostic": ""
+    },
+    {
+      "defect": "scale-nan-priority",
+      "detected": true,
+      "detection_case": "(53, 'scale', 7, 4, 9)",
+      "diagnostic": ""
+    },
+    {
+      "defect": "vector-input-stride",
+      "detected": true,
+      "detection_case": "(12, 'normalize', 5, 1, 1)",
+      "diagnostic": ""
+    }
+  ],
+  "coverage": {
+    "native_coverage_calls": 18,
+    "instruction_bytes": 468,
+    "instruction_starts": 165,
+    "entries": 4,
+    "note": "Scale main entry928da has analyzed loop body928cc..928df; separate veneer928ca."
+  },
+  "semantics": [
+    "Full correlation92a04 writes into2*max(n,m)-1 words with padding left untouched. Unequal lengths reverse output direction when the second input is longer. Live reads and nonfused sample-first VMLA preserve alias and NaN behavior.",
+    "Vector scale928da enters at its compare within body928cc..928df;928ca is a separate veneer. The hard-float ABI supplies factor inS0. Each live sample multiplies sample-first and stores forward; zero count performs no FP operation.",
+    "Normalized autocorrelation666a4 allocates count*8-4 bytes using the actual C heap,correlates equal-length inputs,copies the first count words using C memmove,frees the temporary,and calls the actual C maximum-index routine. A signed raw-bit maximum cutoff0x358637bd gates reciprocal scaling. No floating absolute cutoff or invented allocation fallback is substituted."
+  ],
+  "limitations": [
+    "Probe only: candidate remains under ignored build and is not yet admitted to the source manifest. Positive lengths are required for correlation and normalization; vector scale supports zero count.",
+    "Public RAM,full FPSCR,saved core/FP registers,SP and masks are compared. Private8192-byte stack region,caller scratch registers and APSR are excluded. The independent numerical oracle checks mathematical lag indexing and normalized energy. Physical hardware,timing,interrupts and invalid input recovery remain unverified.",
+    "Confidence,peak selection,packed conversion,rate extraction and overall firmware boot integration remain open."
+  ],
+  "evidence_sha256": {
+    "build/goal-r1-autocorrelation-c/alias-results.json": "1902a800accecff0bfd306e1f96c757a10ac26b279604d00da5e2c54e290a4c4",
+    "build/goal-r1-autocorrelation-c/aliases.log": "27df9e38115df677c036b5887fd84b8725dce6dea87e5a002b36579a68763136",
+    "build/goal-r1-autocorrelation-c/aliases.py": "2cf717f7509556643d248f1cd8f4230b90113f26980508d0099b08417eba45b6",
+    "build/goal-r1-autocorrelation-c/candidate.c": "270c0f752b41546834e899c8bc464eab77f81f84bf8beba77719176551982281",
+    "build/goal-r1-autocorrelation-c/candidate.elf": "f178a8deeb97b3aa0c25e03a924ce5ae153b30bc14e39ddcb8233c01c520ade8",
+    "build/goal-r1-autocorrelation-c/candidate.o": "b0bfe305e2b200e617429030afef7dfc6d8484aa669a3963d6d6c02dfca3fd76",
+    "build/goal-r1-autocorrelation-c/compile-argv.json": "e4d52ba104c4248a71a71539d06a7ab9e6cbd0aec70f33ec7311e81a77588f67",
+    "build/goal-r1-autocorrelation-c/controls-results.json": "9594536c0f29b0f8f3ee1a46dfb0714621c23b11cd8936efb074f1ec969f89d0",
+    "build/goal-r1-autocorrelation-c/controls.log": "a42681d359cc7460bf1d54658ccfccaa90aec601f0990d643273e63188f8c852",
+    "build/goal-r1-autocorrelation-c/controls.py": "5987d7df5e37e907f89d08309e9701360bf29d8ee58426b7c6e32e60bfa3f850",
+    "build/goal-r1-autocorrelation-c/coverage-results.json": "b072b109e920a1a7f9ad4277802a2531afadfdf755619041ad41f643808dbd07",
+    "build/goal-r1-autocorrelation-c/coverage.py": "6e16d4650fe685007b3bae8633e0e663c6f0504865665c424cc3e1f4100e6df0",
+    "build/goal-r1-autocorrelation-c/defect.c": "3d011f1a488c4abdd7a213142bcd92cecfb4077c4aeb29af6e6f3b5b55738bc1",
+    "build/goal-r1-autocorrelation-c/defect.elf": "17436862f0b55c277154aa7349486bc6eb5bc6c7cb3f111d54ee506f5d475d62",
+    "build/goal-r1-autocorrelation-c/defect.o": "597197d7fda7f83629520e122a36774209c9887359f42d32ad1e7f031cb9a95d",
+    "build/goal-r1-autocorrelation-c/defect_fixture.py": "02b5f15425697db9bd3a88ddb14bcafe0bbe859bdb09525d7c090ae4867ff726",
+    "build/goal-r1-autocorrelation-c/defect_verify.py": "f91cf055329c18b02165b8e2932708870d807e3d8f789ef4f642386d47229029",
+    "build/goal-r1-autocorrelation-c/document.py": "b3708e32763b42bfbdc642dab8655f3634fc198055a6606f27b117dfc70ea9c6",
+    "build/goal-r1-autocorrelation-c/edge-results.json": "5a772adc331dfaff25dc51ebfe93e5049d4f7c5a40c598678f8235cca7cf22c4",
+    "build/goal-r1-autocorrelation-c/edges.log": "29b4c19924991ed97bce3575fd7607d486e275c7eb318be52332dc20aa22c8be",
+    "build/goal-r1-autocorrelation-c/edges.py": "40d6167a1d42cda934413373711ebfe246b97b82c8d715726b4030d795497ce0",
+    "build/goal-r1-autocorrelation-c/fixture.py": "52529904d7515a5c5cc9cfcd69e55d8afffcbb405fccc3760dfb0f7be4020a49",
+    "build/goal-r1-autocorrelation-c/link-argv.json": "28a1f6154828f9fcc0fdfe96916993ccd1ca0d00f852af31f77227e196b524f8",
+    "build/goal-r1-autocorrelation-c/link.log": "638052e837a74cefe8e1b20049dba5a130aa178f37e7833c9aceefb5656ee89e",
+    "build/goal-r1-autocorrelation-c/oracle-results.json": "891fa8dcacb9e053e50944caa820cdb0e8136bfc7b808745e1f3b5d4a54e652f",
+    "build/goal-r1-autocorrelation-c/oracles.log": "c619e92f733d4b49699b403c9a4516b17e4255ea4c04688bc49d89163aa73e56",
+    "build/goal-r1-autocorrelation-c/oracles.py": "29a7dc2f5cb87a357f81e8da09c152af2643ef4e1faf89608f8bba61e6d97c98",
+    "build/goal-r1-autocorrelation-c/rea-666a4.json": "b63e8e8c31e270bdcab63103c5dfcfd927a16cd9e8866364ddf504ceda8095a4",
+    "build/goal-r1-autocorrelation-c/rea-928da.json": "f4d1d962b798caffe5527c736c8d05f6564badc55a1d5fee6adb806376107bd1",
+    "build/goal-r1-autocorrelation-c/rea-92a04.json": "9f95ffc9dcc842f6321a9353ca4e96d423803949cb7362db236b26dadd58d4cd",
+    "build/goal-r1-autocorrelation-c/rea-bytes.json": "128b3bd9ecd5a695eb5214936b8998d191b403b4379ba9513cdf32456a143c98",
+    "build/goal-r1-autocorrelation-c/results.json": "7f594e7418ba6f24c0b97b353ebb9f0ab5e2f0df27064466533d4160123d05e6",
+    "build/goal-r1-autocorrelation-c/verify.log": "ad39156f10a7b374119b66f67cd37896b4974c4767a3ddcbfbc299e982ebc49d",
+    "build/goal-r1-autocorrelation-c/verify.py": "02c252b67b91386f0a73b12485f230d60feed3e33801cfa684e63d3708a7f56a",
+    "build/goal-r1-model-i8-convolution-c/stock-entry.elf": "8faf5ed5a7e99752b781c1118086f6ada13458b084bd14e8fbb9a2eb58a05e76",
+    "build/goal-r1-spo2-infer-support-c/normal-dependencies.a": "7e62b43a34fcf2b0ae34045a276bf4d564be5dde2ddb636dd0f69169c8843637",
+    "build/goal-r1-spo2-ratio-c/normal-stream-test.ld": "808ff9c64adde68933158791e9d115c75817ae1840e2bdcbcfa42c7a39314cc6",
+    "build/sources-goal-r1-spo2-statistics-c/r1/r1-application/r1__src__application__goodix__native_spectral_peaks.c.o": "9b99c7c3b40c8e0c3a3ba34e7736b37f710d063c760ef0898482243c361e1ec0",
+    "build/sources-goal-r1-spo2-statistics-c/r1/r1-application/r1__src__application__runtime__native_float_bits.c.o": "cc448df0a2076c6dd5ee05a700f3221fb9d253ae9ae0cb7b591a0ea3a474c154",
+    "r1/blobs/official/r1-2.2.6.0009/application.bin": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "r1/src/sources.json": "a53b297a9d41d6c7f48aaaf07c3d05e76915d9cf371fc3797783bb74ba06e60a"
+  }
+}

@@ -14,7 +14,7 @@ static void queue_reset_fatal(void)
 {
     (void)opencfw_bl_mask_interrupts();
     *(volatile uint32_t *)(uintptr_t)UINT32_MAX = 0u;
-    for (;;) __asm__ volatile("b ." ::: "memory");
+    for (;;) { }
 }
 
 uint32_t opencfw_boot_queue_reset(uint32_t *q, uint32_t clear_waiters)

@@ -10,10 +10,12 @@ static void set16(uint8_t *p,uint16_t v) { p[0]=(uint8_t)v;p[1]=(uint8_t)(v>>8u)
 
 extern void AppSetBondable(uint8_t bondable); /* opencfw U5: now provided by the Cordio unit */
 
-/* Existing product caller names the same native 0x4b467c entry by role. */
-__attribute__((naked)) void audio_ble_app_adv_set_state(uint8_t bondable __attribute__((unused)))
+/* Existing product callers name the same native 0x4b467c entry by role.
+ * AppSetBondable is defined in the upstream Cordio unit, so this is a C tail
+ * call rather than an alias; nothing compares its address. */
+void audio_ble_app_adv_set_state(uint8_t bondable)
 {
-    __asm volatile("b AppSetBondable");
+    AppSetBondable(bondable);
 }
 
 /* Stock 0x4B33D2 (appSlaveForceAdvDataSync; upstream third-party/upstream/cordio/ble-profiles/sources/af/app_slave.c) */

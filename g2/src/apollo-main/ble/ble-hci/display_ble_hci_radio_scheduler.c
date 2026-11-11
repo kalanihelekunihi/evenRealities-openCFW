@@ -7,15 +7,11 @@ extern void audio_ble_hci_radio_state_prepare_5118e0(void);
 /* 0x53006c is am_hal_queue_init (AmbiqSuite 5.1.0 hal/am_hal_queue.c);
  * audio_ble_hci_radio_scheduler_53006c is a payload defsym alias of it. */
 
-uint32_t audio_ble_hci_radio_prepare_body(uint32_t unused,uint32_t scratch,
-                                           uint32_t high,uint32_t saved_r7) {
-    (void)unused;(void)scratch;(void)high;
+/* Stock returns a stale register here (its body is void upstream); no caller reads it. */
+uint32_t audio_ble_hci_radio_prepare_52f38c(void) {
     uint8_t *state=audio_ble_hci_radio_mode_state_50938e(0u);
     if(state[0]==1u)audio_ble_hci_radio_state_prepare_5118e0();
-    return saved_r7;
-}
-__attribute__((naked)) uint32_t audio_ble_hci_radio_prepare_52f38c(void) {
-    __asm volatile("mov r3, r7\n\tb audio_ble_hci_radio_prepare_body");
+    return 0u;
 }
 
 void audio_ble_hci_radio_mux_on_4b4786(int16_t irq,uint32_t priority) {

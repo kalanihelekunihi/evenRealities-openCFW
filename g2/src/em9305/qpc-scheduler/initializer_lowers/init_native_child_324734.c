@@ -1,42 +1,18 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_324734\n"
-".type opencfw_em9305_child_324734,@function\n"
-"opencfw_em9305_child_324734:\n"
-"L324734:\n"
-"push_s blink\n"
-"L324736:\n"
-"mov_s r1,r0\n"
-"L324738:\n"
-"ldb r0,[r0,36]\n"
-"L32473c:\n"
-"breq.d.nt r0,0x1,L324750\n"
-"L324740:\n"
-"mov r0,777\n"
-"L324744:\n"
-"ldb_s r0,[r1,r0]\n"
-"L324746:\n"
-"breq_s r0,0,L324764\n"
-"L324748:\n"
-"ldb_s r0,[r1,0x19]\n"
-"L32474a:\n"
-"cmp r0,255\n"
-"L32474e:\n"
-"bne_s L324764\n"
-"L324750:\n"
-"mov_s r0,0x805b18\n"
-"L324756:\n"
-"ldb_s r0,[r0,0]\n"
-"L324758:\n"
-"stb 2,[r1,36]\n"
-"L32475c:\n"
-"bl.d opencfw_em9305_wsf_event_post\n"
-"L324760:\n"
-"mov r1,256\n"
-"L324764:\n"
-"pop_s blink\n"
-"L324766:\n"
-"j_s [blink]\n"
-".size opencfw_em9305_child_324734,.-opencfw_em9305_child_324734\n"
-);
+#include <stdint.h>
+
+/* Native 0x324734..0x324768: post event 0x100 to the task at 0x805b18 and
+ * set the record state byte (+36) to 2 when the state is 1, or when the
+ * pending byte at +777 is set and the handle byte at +25 is 0xff. */
+extern uint32_t opencfw_em9305_wsf_event_post(uint32_t task, uint32_t event);
+
+uint32_t opencfw_em9305_child_324734(uintptr_t record)
+{
+    if(*(volatile uint8_t *)(record+36u)!=1u){
+        if(*(volatile uint8_t *)(record+777u)==0u)return 0u;
+        uint32_t handle=*(volatile uint8_t *)(record+25u);
+        if(handle!=255u)return handle;
+    }
+    uint32_t task=*(volatile uint8_t *)(uintptr_t)0x805b18u;
+    *(volatile uint8_t *)(record+36u)=2u;
+    return opencfw_em9305_wsf_event_post(task,256u);
+}

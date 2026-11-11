@@ -1,0 +1,280 @@
+{
+  "schema_version": 1,
+  "scope": "Native optical accumulation and root dispatch in C",
+  "acceptance_target": "Hardware-first license-free C firmware; byte identity waived",
+  "report": "build/sources-goal-r1-goodix-spo2-optical-c/report.json",
+  "comparison_report": "build/sources-goal-r1-goodix-rolling-feature-c/report.json",
+  "stock_entries": [
+    {
+      "symbol": "r1_goodix_spo2_optical_accumulate",
+      "entry": "0x2f660",
+      "instruction_bytes": 354
+    },
+    {
+      "symbol": "r1_goodix_native_decimated_s16_push",
+      "entry": "0x665a0",
+      "instruction_bytes": 104
+    },
+    {
+      "symbol": "r1_goodix_spo2_accumulate",
+      "entry": "0x357ce",
+      "instruction_bytes": 68
+    }
+  ],
+  "audit": {
+    "compiled_units": 907,
+    "application_imports": 88,
+    "bootloader_imports": 22,
+    "unchanged_prior_nongenerated_sources_and_objects": 896,
+    "tested_object_equals_normal_build": true,
+    "new_owned_state_bytes": 0,
+    "new_native_instruction_bytes": 526,
+    "function_invocation_pairs": 15176,
+    "isolated_conversion_instruction_pairs": 9408,
+    "compiled_defects_rejected": 12,
+    "removed_imports": [
+      "r1_goodix_spo2_accumulate"
+    ],
+    "added_imports": [
+      "r1_goodix_spo2_motion_accumulate"
+    ],
+    "remaining_processing_boundaries": 11,
+    "source_plan_and_cache_layout_unchanged": true
+  },
+  "optical_lifecycle": {
+    "paired_calls": 520,
+    "native_instruction_bytes_executed": [
+      154,
+      58,
+      216,
+      44,
+      70,
+      354,
+      104
+    ],
+    "actual_C_rolling_features_and_constructor": true,
+    "allocator_modeled": true,
+    "source_object_sha256": "e32ce1dd9f0d5d27baab92cde60ddc94900d0356e09e9705e2df8caa59cd0e4c"
+  },
+  "direct": {
+    "paired_cases": 11136,
+    "finite_Fraction_ratio_oracle_cases": 320,
+    "native_instruction_bytes_executed": [
+      108,
+      12,
+      212,
+      44,
+      70,
+      354,
+      104
+    ],
+    "actual_C_rolling_features_constructor_and_memory_helpers": true,
+    "allocator_modeled": true,
+    "full_public_RAM_FPSCR_saved_registers_SP_masks_match": true,
+    "source_cannot_execute_stock": true,
+    "source_object_sha256": "e32ce1dd9f0d5d27baab92cde60ddc94900d0356e09e9705e2df8caa59cd0e4c"
+  },
+  "root_integration": {
+    "paired_calls": 3200,
+    "lifecycle_scenarios": 20,
+    "motion_stage_modeled": true,
+    "actual_optical_rolling_constructor_and_memory_helpers": true,
+    "post_motion_sequence_mutations_checked": true,
+    "native_instruction_bytes_executed": [
+      154,
+      58,
+      216,
+      44,
+      70,
+      354,
+      104,
+      68
+    ],
+    "source_object_sha256": "e32ce1dd9f0d5d27baab92cde60ddc94900d0356e09e9705e2df8caa59cd0e4c"
+  },
+  "isolated_unsigned_conversion": {
+    "paired_cases": 9408,
+    "independent_integer_oracle": true,
+    "scope": "Isolated native VCVT.U32.F32 plus VMOV versus candidate encoded C conversion; no register/stack ABI equivalence claim for instruction snippet",
+    "native_bytes": "bceec00a10ee100a"
+  },
+  "compiled_defects_rejected": [
+    {
+      "name": "speculated-division",
+      "compiled": true,
+      "rejected": true,
+      "fixture": "verify.py"
+    },
+    {
+      "name": "nan-saturation",
+      "compiled": true,
+      "rejected": true,
+      "fixture": "conversion.py"
+    },
+    {
+      "name": "conversion-invalid-flag",
+      "compiled": true,
+      "rejected": true,
+      "fixture": "conversion.py"
+    },
+    {
+      "name": "delayed-denominator",
+      "compiled": true,
+      "rejected": true,
+      "fixture": "direct.py"
+    },
+    {
+      "name": "clamp-value",
+      "compiled": true,
+      "rejected": true,
+      "fixture": "direct.py"
+    },
+    {
+      "name": "upper-ratio-boundary",
+      "compiled": true,
+      "rejected": true,
+      "fixture": "direct.py"
+    },
+    {
+      "name": "minimum-amplitude",
+      "compiled": true,
+      "rejected": true,
+      "fixture": "verify.py"
+    },
+    {
+      "name": "pulse-scale",
+      "compiled": true,
+      "rejected": true,
+      "fixture": "verify.py"
+    },
+    {
+      "name": "s16-cursor-boundary",
+      "compiled": true,
+      "rejected": true,
+      "fixture": "direct.py"
+    },
+    {
+      "name": "s16-append-count",
+      "compiled": true,
+      "rejected": true,
+      "fixture": "direct.py"
+    },
+    {
+      "name": "root-window-ready",
+      "compiled": true,
+      "rejected": true,
+      "fixture": "root.py"
+    },
+    {
+      "name": "root-live-reload",
+      "compiled": true,
+      "rejected": true,
+      "fixture": "root.py"
+    }
+  ],
+  "contract": [
+    "Execute exactly one optical channel: update two live rolling-feature pairs, then use descriptor+88 unsigned modulo to decide whether to publish ratios. Preserve numerator count-1 loads, delayed denominator max(count-13,0) and signed float-bit epsilon clamping.",
+    "After the first ratio push, reload second-pair pointers/data. Perform native compare-to-zero FPSCR updates and conditional absolute-bit selection; divide second/first only above the native magnitude threshold. Clear values outside the encoded inclusive ratio interval. Ordinary noinline conditional_divide prevents compiler speculation that otherwise changes DZC/IOC.",
+    "Reload the live input pulse after all ratio writes. Multiply by0.5 and convert using defined encoded unsigned saturation/truncation, including NaNs, infinities, negative fractions, subnormals and FP flags. Store only the low16 bits in the decimated signed16 window, preserving cursor/phase/count wrap and actual C memmove.",
+    "The root reads the output optical-state pointer before raw sequence/input-state pointers, runs actual optical processing, then invokes explicit motion0x61c48. Reload sequence for the motion call and again after it. Return0 only for sequence%25==24 and wrapped(sequence+1)>=125; otherwise4. No new writable owner or inline assembly."
+  ],
+  "limits": [
+    "15176 function-call pairs comprise11136 direct cases,320 independent finite Fraction ratio-oracle cases,520 calls in two optical-constructor sessions and3200 calls in20 root sessions. The root sessions include motion-boundary sequence mutation and optical-output aliases into the raw sequence.",
+    "9408 additional isolated instruction pairs compare native VCVT.U32.F32/VMOV with the encoded C conversion and an independent integer oracle across FP modes, exceptional/range-boundary/random words and initial flags. This snippet test does not claim function ABI equivalence.",
+    "All526 newly reconstructed native instruction bytes execute; root sessions also cover all542 existing rolling-feature bytes. Actual C/native session constructors, rolling/weighted/window operations and memory helpers execute. Allocation is modeled; motion is modeled only in root integration. Twelve compiled defects are rejected.",
+    "Full public RAM, active FPSCR, saved R4-R11/S16-S31, stack and masks match for function cases. Source cannot execute stock. Positive mapped capacities, selected aliases and default DIV_0_TRP-disabled semantics form the tested contract. Arbitrary invalid buffers/fault atomicity, private-stack aliases, real allocator lifecycle, cold FPU, interrupts/concurrency, throughput, physical sensors, startup/layout and boot remain unverified. Compiler/profile changes require rechecking conditional division and FP operand ordering.",
+    "907 units compile and compose without failures/duplicate strong symbols;896 prior nongenerated source/object pairs remain unchanged. The tested object equals normal build. The root accumulation import becomes an explicit motion import; totals stay88 application/22 bootloader. Eleven processing boundaries, including motion, remain unfinished. Relocatable composition is not a bootable image."
+  ],
+  "evidence_files": {
+    "build/sources-goal-r1-goodix-spo2-optical-c/report.json": "6373026cc6ed85e96acb3121bcf699991b3f10923b0c3ccc449e56b78d55da8a",
+    "build/sources-goal-r1-goodix-rolling-feature-c/report.json": "acd39ff0817126cfc13c8f46ca1ddd627cdfb5f8b9d81f4e6840728eaa92c30b",
+    "r1/src/application/goodix/native_spo2_optical_accumulate.c": "5891ea8b7c14ef293e77125d4669bdfec91cdda4425d70a75f689bdbdc6c9c8e",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-spo2-optical-c/r1/r1-application/r1__src__application__goodix__native_spo2_optical_accumulate.c.o": "e32ce1dd9f0d5d27baab92cde60ddc94900d0356e09e9705e2df8caa59cd0e4c",
+    "r1/src/sources.json": "6bf921597cb65e7481e1a98456d37b1b6ba35fb60dfae5abaac5f3b999b449d0",
+    "tools/build/source-plan.json": "eeb516e31b3310fb0718f36908977f8125723f7c5e0e86cd6744395826259a4d",
+    "r1/src/config/runtime/native_health_cache.ld": "eb8f131c489cd818d4e36718718fa1989719ca0170f164541a1a5bf56dfc1ec3",
+    "r1/docs/reference/FUNCTION-OWNERSHIP.csv": "06d31116c111ed1f33de2c590153298142f1b6e49ca81b3a100aa1dbf02abf35",
+    "r1/symbols/function-frontier.csv": "e3de2929dce6c8d4e66cc6b4c3687af3975df03cee2d513b6c823ab8208d04c8",
+    "build/goal-r1-goodix-rolling-feature-c/rea-kernels.json": "03e7ad372149a6a8f07068e76b16fca70669acb8c88733774b7ca7ce5653123a",
+    "build/goal-r1-goodix-rolling-feature-c/source.o": "bf2d1c1fd4590b84e4b47532be3ebda19f59d4218818f367f32bd2fd512962bf",
+    "third-party/upstream/musl-memmove-1.2.5/memmove.c": "1304f9ddfc18594f5d9a84691892b9fdaf3be8ecc6d7f365c691abb138eaf74e",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-spo2-optical-c/r1/r1-application/third-party__upstream__musl-memmove-1.2.5__memmove.c.o": "4a6ccefb180ef4af2cfe631f54df4d6f629d1b3a2d374911c00b25c107bcb723",
+    "third-party/upstream/musl-memory-1.2.5/memcpy.c": "1664d565f968b053ac33c5ac615c057a255a5821c8fa510fba61d4f63dee08e9",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-spo2-optical-c/r1/r1-application/third-party__upstream__musl-memory-1.2.5__memcpy.c.o": "a4b54c7315f7ca2f8097e3f9afb4a9bcd7860c75649fc9e185d951c3ea0696cf",
+    "r1/src/application/goodix/native_spo2_initialize.c": "41e6290e411795ade2bb7b0c9b3aa3b30678483bfb7b3b2c86e3e25d79908c82",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-spo2-optical-c/r1/r1-application/r1__src__application__goodix__native_spo2_initialize.c.o": "416f2e823ae3edd838065709e40b06eaa5b9648ad2462237656ffdf5b212b129",
+    "r1/src/application/goodix/native_spo2_session_initialize.c": "30127da0d135b26a6459f6af4a85a96b1d08a55d6bec6ff09fdfbdf8522dfeae",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-spo2-optical-c/r1/r1-application/r1__src__application__goodix__native_spo2_session_initialize.c.o": "507f8e0db602ee67008460fc2f485d84fa340bef6bbf23a09bd035d1f9b629d5",
+    "r1/src/application/goodix/native_rolling_feature.c": "54e10de824916b7976cd36bf25689b8f2926ccaa9ad85843d1dba37420b7c9af",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-spo2-optical-c/r1/r1-application/r1__src__application__goodix__native_rolling_feature.c.o": "bf2d1c1fd4590b84e4b47532be3ebda19f59d4218818f367f32bd2fd512962bf",
+    "build/goal-r1-goodix-spo2-optical-c/rea-s16-bytes.json": "799997bece5bfdfbb7594bee59fd481609d6535c8a96ebd5266b20fc3a447c23",
+    "build/goal-r1-goodix-spo2-optical-c/conversion.ld": "b2ff9ac27a31674636716d033098cceafafc2f782e6660e4dd431dc3e9dc449d",
+    "build/goal-r1-goodix-spo2-optical-c/direct-results.json": "9c91465fe288cae226cbfb67ef7d5cc211a3228416f0d758c5c9b6c587b99f53",
+    "build/goal-r1-goodix-spo2-optical-c/audit.json": "4ecc34dedc1a476f30f23663650a222b7b39c2e361acecff8a79a26b055a1ef7",
+    "build/goal-r1-goodix-spo2-optical-c/negative-root-window-ready.log": "1bf351271f7b29fe34196f178151e2403566f5e3f469b7334412c2c8205af020",
+    "build/goal-r1-goodix-spo2-optical-c/conversion-results.json": "3570659b8836b99d313eb9bc31ab6b820e84123a1502ce2f49143bedad270ff9",
+    "build/goal-r1-goodix-spo2-optical-c/candidate.d": "2c840be7e33760d3500d62a7cba8e24886a264f23971983750deb3e6c9010fd6",
+    "build/goal-r1-goodix-spo2-optical-c/candidate.c": "bd041848de870d4bd28ee1e1e1e53692ecd7c7810c3f3dde87aa76aae9475969",
+    "build/goal-r1-goodix-spo2-optical-c/verify.log": "ca8e578f86d68e91a49131c5285c9ab709a60724248f69a886aa6a1ffe282e1e",
+    "build/goal-r1-goodix-spo2-optical-c/direct.log": "b6ba28554f18b1eff895f1a60aa00097fbe0f973ae541adff8c134b4f6483a43",
+    "build/goal-r1-goodix-spo2-optical-c/checkpoint.json": "0defd143da5cd0a21671a9e52dea84aaf4115bfdad5a48dc78ae17327a7ac444",
+    "build/goal-r1-goodix-spo2-optical-c/test.ld": "b2ff9ac27a31674636716d033098cceafafc2f782e6660e4dd431dc3e9dc449d",
+    "build/goal-r1-goodix-spo2-optical-c/audit.py": "8d6fbc4c5e6ce4e3dab1fb4e5dc8d5beb284890b7b3fb78db2fec625db1d803f",
+    "build/goal-r1-goodix-spo2-optical-c/rea-constants.json": "2305f24c8f5c135224a0e0e3f8077da0fe824a0e5de5cf9921a5e578689ffb03",
+    "build/goal-r1-goodix-spo2-optical-c/rea-parent.json": "7c5cfcd8131128ac055acabf9b52f1bdc171169411f3f05f3994a8b2dfbb5bb3",
+    "build/goal-r1-goodix-spo2-optical-c/root.elf": "12a7860b6932fba005ef1607c4722af98aae4c318f3cea5122b884630f9c12a3",
+    "build/goal-r1-goodix-spo2-optical-c/constructor.elf": "caf923a28106e093c9e750b0a7ee933b74545d3d0cfa72b3455809cdcccf9c16",
+    "build/goal-r1-goodix-spo2-optical-c/negative.py": "7891cfb5f276c9f19717993606e464787a5d52dff4758ff7608b36fbd95c3315",
+    "build/goal-r1-goodix-spo2-optical-c/production-compile-argv.json": "5b6ea67c828139914ab1d07ee4795a97b7339fde392b327c494bc9857e41ebf4",
+    "build/goal-r1-goodix-spo2-optical-c/negative-s16-append-count.c": "da140e571d3a03e1992a94df1bfe10baa8a0642198d669f81a36c89fba2baebe",
+    "build/goal-r1-goodix-spo2-optical-c/negative.log": "a01ed2fd98125f6d76a4fa69c73fb9598dd9911150fc67c304c6a05b677732db",
+    "build/goal-r1-goodix-spo2-optical-c/negative-results.json": "80cb97625e8067c9de0d4dc381abcfb38cee757baf62a9b99d49bd4c21c5ccd8",
+    "build/goal-r1-goodix-spo2-optical-c/negative-speculated-division.c": "420f3aa98c5288dd4b6d46a8bf8eda99576c7b52c3ca9c344bc7c3ea72645e6e",
+    "build/goal-r1-goodix-spo2-optical-c/root-results.json": "d97a9fa0289bd288a7f50178f4e52545c7420f74f24d656f265836af2896d6d3",
+    "build/goal-r1-goodix-spo2-optical-c/negative-speculated-division.log": "1da857dd55770b299cc5f8be21c11c203ba8139f26d0cd40a7b747b9d0bcd42a",
+    "build/goal-r1-goodix-spo2-optical-c/conversion.py": "000901ae6b98418266633b67a14a71908ba8eac623e4af967007dfc36084d273",
+    "build/goal-r1-goodix-spo2-optical-c/source.o": "e32ce1dd9f0d5d27baab92cde60ddc94900d0356e09e9705e2df8caa59cd0e4c",
+    "build/goal-r1-goodix-spo2-optical-c/results.json": "2e8be2e367e61710ba4e3d9ddb90f0eb90eb06072d9af1e39ee3f9785974a68c",
+    "build/goal-r1-goodix-spo2-optical-c/negative-nan-saturation.c": "e5ba07951dcfc37f66e14a6b15ed6501f10541d47b091486451bb127f8cbc155",
+    "build/goal-r1-goodix-spo2-optical-c/rea-root.json": "d901c7b136dc5aa76ea676a3bd58d610a854d1b644f18852af453bb60e26edd3",
+    "build/goal-r1-goodix-spo2-optical-c/negative-s16-cursor-boundary.log": "a7b527f8e87cf993bb43a9cb363ebb3e73354b61590c955507ae57340ceb73ab",
+    "build/goal-r1-goodix-spo2-optical-c/direct.elf": "caf923a28106e093c9e750b0a7ee933b74545d3d0cfa72b3455809cdcccf9c16",
+    "build/goal-r1-goodix-spo2-optical-c/conversion.o": "4618dfa5e0ca525946b369635b2c3a340c7ae1939455016d5d9e7c06574f699e",
+    "build/goal-r1-goodix-spo2-optical-c/rea-parent-bytes.json": "8d6615aac859c6d00a571131a402dc751ddf295d0af3b1f56cbe56fe070bf9d8",
+    "build/goal-r1-goodix-spo2-optical-c/root.log": "6e8e575943b4e756905e3b0fae8dac4af300d29cf06f01d8e0356426dd47c2a3",
+    "build/goal-r1-goodix-spo2-optical-c/negative-conversion-invalid-flag.c": "1f69003442160a7d9811339809d9ff312cf62f707cc6f733286b3f040233718b",
+    "build/goal-r1-goodix-spo2-optical-c/make-probe.py": "4e9819f4d3267985dec58e2ebb13d7c444776ae4896dd5efd907ac88204f338a",
+    "build/goal-r1-goodix-spo2-optical-c/negative-pulse-scale.c": "cda587dd92e3d86007ac2540372e6bb9059ecf639c665002ecd6f61080b00c7f",
+    "build/goal-r1-goodix-spo2-optical-c/negative-s16-cursor-boundary.c": "00d2bb607094638fac7448c492a0fcae54e87acca884afb20ed6965aebd459b5",
+    "build/goal-r1-goodix-spo2-optical-c/negative-upper-ratio-boundary.c": "963d497daaf15f3b60247053c5f12fb4a62fcc29a63c5ecda79f9e56b2e8063c",
+    "build/goal-r1-goodix-spo2-optical-c/conversion.elf": "f0fb7c3d169145a2e9989c1ff65a130b8c1e94fe4a77a7b92c0373a2c8d95b04",
+    "build/goal-r1-goodix-spo2-optical-c/negative-clamp-value.c": "dad170fa978bbe4dc59a754ea9eded8da5c285dd74de2e6d69d6452dcef28977",
+    "build/goal-r1-goodix-spo2-optical-c/negative-root-window-ready.c": "48cdeda834f74af683be4e04d208bc822643add7937a4e0383bdb94c32a832b2",
+    "build/goal-r1-goodix-spo2-optical-c/negative-s16-append-count.log": "39a1de787a12614d7e80d81c637e4d9d1c62b26e9719df30a60194e4d9a92095",
+    "build/goal-r1-goodix-spo2-optical-c/make-direct.py": "9cc78aa9ceaee0c62ee78e124712b9a71751d091491a8cc4cc0dc3ab33153c5e",
+    "build/goal-r1-goodix-spo2-optical-c/record.py": "2e16543803a0115faaf879f44fcafb44827e8a7e10490009c87b336d63040509",
+    "build/goal-r1-goodix-spo2-optical-c/negative-upper-ratio-boundary.log": "22dae53fc8114662efafe19a6104f4bb247ed7a6de711e3ad522e2d9d1d04a67",
+    "build/goal-r1-goodix-spo2-optical-c/conversion-source.c": "9541d62810d77440be721f9f8ba9408d0c12d61a813c3251d22136def80d40ec",
+    "build/goal-r1-goodix-spo2-optical-c/next-steps.md": "def7543dd3238ce3a982b060303fce44a9976b1d328f682dc22da0094952f62f",
+    "build/goal-r1-goodix-spo2-optical-c/compile-argv.json": "1dc6f90bf9a85d14ed5755ca639dcb6c147fd16f26496d5206e5e221233eb928",
+    "build/goal-r1-goodix-spo2-optical-c/manifest-before.json": "4ab3d486d34be13463021f3078dd7353f51153f02cc2b17783917f50c94fbe99",
+    "build/goal-r1-goodix-spo2-optical-c/rea-root-bytes.json": "0f353495003f8ca5b2be984dbcad9a58f3e2f52875d994c599778b3ad26c6443",
+    "build/goal-r1-goodix-spo2-optical-c/direct.py": "41c2bd8850ece68d6226259bd6ccfc0e6e74b1eedc4e3481e596855529816ebe",
+    "build/goal-r1-goodix-spo2-optical-c/oracle.py": "b32ae7b771698e3ec38fb332f065da1eaa993ecac466150f5ce507b7049d3407",
+    "build/goal-r1-goodix-spo2-optical-c/negative-root-live-reload.log": "1bf351271f7b29fe34196f178151e2403566f5e3f469b7334412c2c8205af020",
+    "build/goal-r1-goodix-spo2-optical-c/negative-pulse-scale.log": "492dcd2ce38bd8d70939ccc084f591e68de0d999762cf6b437efe55391bfaabd",
+    "build/goal-r1-goodix-spo2-optical-c/verify.py": "18b4b1e36138f3e14520bdbc7d337576412284141371d1c6b96d14dc111b9602",
+    "build/goal-r1-goodix-spo2-optical-c/root.py": "96de2a8e58244be3b274ef238a5f82baeb25c9e9fc9bfe33746fd9d9b814e18d",
+    "build/goal-r1-goodix-spo2-optical-c/conversion.log": "5b9239bfedeb80c1e16f4eade59340acb91ba1e2ca83fc5a6e24abf57d48615c",
+    "build/goal-r1-goodix-spo2-optical-c/negative-minimum-amplitude.c": "79c08621bfa101c297ee12a59635b2aa6eeec9d786408ab03bafa366060147e8",
+    "build/goal-r1-goodix-spo2-optical-c/rea-s16.json": "b28dcd917c3525652fc0ae8fc03413f1b43b2dadcf6fa3157ac9a6ddbcffd0f0",
+    "build/goal-r1-goodix-spo2-optical-c/negative-root-live-reload.c": "332b90cb36af2d67a1027ff9461f7d6665e3d641c52e040748e4f30f4f972d40",
+    "build/goal-r1-goodix-spo2-optical-c/negative-clamp-value.log": "1d66e4839d12a61b93fac52a4a8e0467c5ff539d0124b7c916ef6bae3d4c3aab",
+    "build/goal-r1-goodix-spo2-optical-c/negative-delayed-denominator.log": "ce27da6b0520feea804328368e4d751593ca10d4b856ecabf6300088da785150",
+    "build/goal-r1-goodix-spo2-optical-c/negative-delayed-denominator.c": "260d546cb8a65d6b5054805b7a77f501af8fbe681dc437f8ad89f0084b2a93d9",
+    "build/goal-r1-goodix-spo2-optical-c/negative-minimum-amplitude.log": "1da857dd55770b299cc5f8be21c11c203ba8139f26d0cd40a7b747b9d0bcd42a",
+    "build/goal-r1-goodix-spo2-optical-c/negative-nan-saturation.log": "7b75d094a45c07ca1a5d306410754e9ac2e1259adfe2d3f1b3d3b0129ad3654d",
+    "build/goal-r1-goodix-spo2-optical-c/negative-conversion-invalid-flag.log": "fa0f547ea23afd53f6d07df1e7a6ffa6ecdef96769a494f741b4426b02c621d2",
+    "build/goal-r1-goodix-spo2-optical-c/build.log": "0bd332df4c1b8c4ae11b3a629b8a48f287dce1dd0035a30d3ab20d0014c979c8"
+  }
+}

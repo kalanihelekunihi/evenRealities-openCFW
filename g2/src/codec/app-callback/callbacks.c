@@ -1,5 +1,8 @@
 /* Experimental C projection of authenticated XIP child entries
- * 0x1020975c and 0x10209770. Source is Ghidra/native instruction evidence,
+ * 0x1020975c and 0x10209770.
+ * Evidence: corpus codec/ghidra/open-2026-09-29/image_a_xip/functions-000.jsonl
+ * gx8002_event_notify @ 0x1020975c (20 B sha 922477e9…),
+ * gx8002_i2s_ack @ 0x10209770 (38 B sha bd849ec9…); native instruction match,
  * not the public sample app. Child contracts remain external. */
 #include "request.h"
 #include "resident_sample_product_data.h"

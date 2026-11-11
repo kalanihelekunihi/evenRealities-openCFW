@@ -1,5 +1,5 @@
+#include "native_float_bits.h"
 #include <stdint.h>
-extern uint32_t r1_binary32_classify_bits(uint32_t,uint32_t,uint32_t,uint32_t);
 extern float r1_math_low_square32(void);
 extern float r1_math_self_add32(float);
 __attribute__((section(".r1.math.atanf_data"),used))
@@ -7,19 +7,18 @@ const uint32_t r1_atanf_data[14]={0,0xbfc90000,0xb9fdaa22,0x3fc90000,0x39fdaa22,
 typedef union {uint32_t bits;float value;} word_float;
 static float fbits(uint32_t bits) {word_float x={.bits=bits};return x.value;}
 static uint32_t bits(float value) {word_float x={.value=value};return x.bits;}
-#define BINARY(name,instruction) static float name(float a,float b) {float r;__asm__ volatile(instruction " %0,%1,%2":"=t"(r):"t"(a),"t"(b));return r;}
-BINARY(add,"vadd.f32")
-BINARY(sub,"vsub.f32")
-BINARY(mul,"vmul.f32")
-BINARY(divide,"vdiv.f32")
+static float add(float a,float b) { return a+b; }
+static float sub(float a,float b) { return a-b; }
+static float mul(float a,float b) { return a*b; }
+static float divide(float a,float b) { return a/b; }
 static float madd(float accumulator,float a,float b)
-{__asm__ volatile("vmla.f32 %0,%1,%2":"+t"(accumulator):"t"(a),"t"(b));return accumulator;}
+{ return accumulator+a*b; }
 float r1_native_atanf(float value)
 {
     uint32_t input=bits(value),doubled=input<<1;
     if (doubled+0x8e000000u>=0x25000000u) {
         if (doubled<0x72000000u) {
-            if (r1_binary32_classify_bits(input,0,0,0)==4) (void)r1_math_low_square32();
+            if (r1_binary32_classify_bits(input,0,0,0)[0]==4) (void)r1_math_low_square32();
             return value;
         }
         if (doubled>0xff000000u) return r1_math_self_add32(value);

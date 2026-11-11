@@ -1,0 +1,250 @@
+{
+  "candidate_units": 5,
+  "compiled_units": 5,
+  "selected_regions": [
+    {
+      "payload": "r1-application",
+      "symbol": "delayed_touch_release",
+      "start": 130952,
+      "end": 130958,
+      "sha256": "972ff6f355a5b431c393c6dfaf0f12173dcf4a44a787a81bb9684b5157d3f18d",
+      "evidence": "r1/symbols/function-frontier.csv",
+      "bindings": {
+        "r1_shared_power_client_release": 329561
+      },
+      "address": 290696,
+      "match_evidence": {
+        "method": "independently named native entry and all unrelocated bytes, followed by full linked equality",
+        "fixed_bytes": 2,
+        "compiled_pattern_sha256": "fcd380f3612f658b890ee9013fc83719a148e599ab981e4fbb4250779a7494e3",
+        "relocations": [
+          {
+            "symbol": "r1_shared_power_client_release",
+            "offset": 2,
+            "relocation_type": 30,
+            "address": 329561,
+            "role": "native_function"
+          }
+        ]
+      }
+    }
+  ],
+  "source_bytes_added": 6,
+  "added_C_instruction_bytes": 6,
+  "added_literal_bytes": 0,
+  "canonical_source_plan_promoted": true,
+  "hybrid_complete_source": false,
+  "hybrid_totals": {
+    "binary-pull-through": 642333,
+    "source-built": 3827,
+    "resource-file": 248
+  },
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "application_equals_official": true,
+  "qualification_method": "Official qualify_sources.py with input-only source filter; unchanged anchored matching, scalar binding and full linked equality",
+  "candidate_results": [
+    {
+      "source": "r1/src/application/board/native_touch_device_ops.c",
+      "compiled": true,
+      "selected": [
+        {
+          "payload": "r1-application",
+          "symbol": "delayed_touch_release",
+          "start": 130952,
+          "end": 130958,
+          "sha256": "972ff6f355a5b431c393c6dfaf0f12173dcf4a44a787a81bb9684b5157d3f18d",
+          "evidence": "r1/symbols/function-frontier.csv",
+          "bindings": {
+            "r1_shared_power_client_release": 329561
+          },
+          "address": 290696,
+          "match_evidence": {
+            "method": "independently named native entry and all unrelocated bytes, followed by full linked equality",
+            "fixed_bytes": 2,
+            "compiled_pattern_sha256": "fcd380f3612f658b890ee9013fc83719a148e599ab981e4fbb4250779a7494e3",
+            "relocations": [
+              {
+                "symbol": "r1_shared_power_client_release",
+                "offset": 2,
+                "relocation_type": 30,
+                "address": 329561,
+                "role": "native_function"
+              }
+            ]
+          }
+        }
+      ],
+      "rejections": {
+        "anchored_relocation_pattern_not_exact": 6
+      }
+    },
+    {
+      "source": "r1/src/application/board/native_touch_device_ops.c",
+      "compiled": true,
+      "selected": [
+        {
+          "payload": "r1-application",
+          "symbol": "delayed_touch_release",
+          "start": 130952,
+          "end": 130958,
+          "sha256": "972ff6f355a5b431c393c6dfaf0f12173dcf4a44a787a81bb9684b5157d3f18d",
+          "evidence": "r1/symbols/function-frontier.csv",
+          "bindings": {
+            "r1_shared_power_client_release": 329561
+          },
+          "address": 290696,
+          "match_evidence": {
+            "method": "independently named native entry and all unrelocated bytes, followed by full linked equality",
+            "fixed_bytes": 2,
+            "compiled_pattern_sha256": "fcd380f3612f658b890ee9013fc83719a148e599ab981e4fbb4250779a7494e3",
+            "relocations": [
+              {
+                "symbol": "r1_shared_power_client_release",
+                "offset": 2,
+                "relocation_type": 30,
+                "address": 329561,
+                "role": "native_function"
+              }
+            ]
+          }
+        }
+      ],
+      "rejections": {
+        "anchored_relocation_pattern_not_exact": 6
+      }
+    },
+    {
+      "source": "r1/src/application/board/native_touch_device_ops.c",
+      "compiled": true,
+      "selected": [
+        {
+          "payload": "r1-application",
+          "symbol": "delayed_touch_release",
+          "start": 130952,
+          "end": 130958,
+          "sha256": "972ff6f355a5b431c393c6dfaf0f12173dcf4a44a787a81bb9684b5157d3f18d",
+          "evidence": "r1/symbols/function-frontier.csv",
+          "bindings": {
+            "r1_shared_power_client_release": 329561
+          },
+          "address": 290696,
+          "match_evidence": {
+            "method": "independently named native entry and all unrelocated bytes, followed by full linked equality",
+            "fixed_bytes": 2,
+            "compiled_pattern_sha256": "fcd380f3612f658b890ee9013fc83719a148e599ab981e4fbb4250779a7494e3",
+            "relocations": [
+              {
+                "symbol": "r1_shared_power_client_release",
+                "offset": 2,
+                "relocation_type": 30,
+                "address": 329561,
+                "role": "native_function"
+              }
+            ]
+          }
+        }
+      ],
+      "rejections": {
+        "anchored_relocation_pattern_not_exact": 6
+      }
+    },
+    {
+      "source": "r1/src/application/board/native_touch_device_ops.c",
+      "compiled": true,
+      "selected": [
+        {
+          "payload": "r1-application",
+          "symbol": "delayed_touch_release",
+          "start": 130952,
+          "end": 130958,
+          "sha256": "972ff6f355a5b431c393c6dfaf0f12173dcf4a44a787a81bb9684b5157d3f18d",
+          "evidence": "r1/symbols/function-frontier.csv",
+          "bindings": {
+            "r1_shared_power_client_release": 329561
+          },
+          "address": 290696,
+          "match_evidence": {
+            "method": "independently named native entry and all unrelocated bytes, followed by full linked equality",
+            "fixed_bytes": 2,
+            "compiled_pattern_sha256": "fcd380f3612f658b890ee9013fc83719a148e599ab981e4fbb4250779a7494e3",
+            "relocations": [
+              {
+                "symbol": "r1_shared_power_client_release",
+                "offset": 2,
+                "relocation_type": 30,
+                "address": 329561,
+                "role": "native_function"
+              }
+            ]
+          }
+        }
+      ],
+      "rejections": {
+        "anchored_relocation_pattern_not_exact": 6
+      }
+    },
+    {
+      "source": "r1/src/application/board/native_touch_device_ops.c",
+      "compiled": true,
+      "selected": [
+        {
+          "payload": "r1-application",
+          "symbol": "delayed_touch_release",
+          "start": 130952,
+          "end": 130958,
+          "sha256": "972ff6f355a5b431c393c6dfaf0f12173dcf4a44a787a81bb9684b5157d3f18d",
+          "evidence": "r1/symbols/function-frontier.csv",
+          "bindings": {
+            "r1_shared_power_client_release": 329561
+          },
+          "address": 290696,
+          "match_evidence": {
+            "method": "independently named native entry and all unrelocated bytes, followed by full linked equality",
+            "fixed_bytes": 2,
+            "compiled_pattern_sha256": "fcd380f3612f658b890ee9013fc83719a148e599ab981e4fbb4250779a7494e3",
+            "relocations": [
+              {
+                "symbol": "r1_shared_power_client_release",
+                "offset": 2,
+                "relocation_type": 30,
+                "address": 329561,
+                "role": "native_function"
+              }
+            ]
+          }
+        }
+      ],
+      "rejections": {
+        "anchored_relocation_pattern_not_exact": 6
+      }
+    }
+  ],
+  "gcc_check": {
+    "candidate_units": 4,
+    "compiled_units": 4,
+    "selected_symbols": [
+      "delayed_touch_release"
+    ]
+  },
+  "evidence": {
+    "build/goal-r1-touch-qualification/qualify.py": "d41680efc71dafe532b7e84e762b7e4c3ac5dd42192f8a5e9fda9da8b73867fd",
+    "build/goal-r1-touch-qualification/qualify-gcc.py": "8a694b5cd9733e760c8f8d2666a3460667113103967f5eb090421d674a894539",
+    "build/goal-r1-touch-qualification/gcc-qualified/qualification.json": "bcf43f47760a251d3c29be192c609107bbc80069704c6efdda282aacf2ae86b4",
+    "build/goal-r1-touch-qualification/gcc-qualified/source-plan.json": "c2f79184f6b55653fa96319f660026a56dc2cbd8cfd183128bb7bbae862efe41",
+    "build/goal-r1-touch-qualification/scope.json": "98a43c16ae02a328c8af0d9ba0eb7b766487596beea83c09c0937fe68a0b60ef",
+    "build/goal-r1-touch-qualification/qualified/qualification.json": "f435bd86cdd28f484aa5b3a1d166b5b4ab684a4a7f243011c4834197adf63524",
+    "build/goal-r1-touch-qualification/qualified/source-plan.json": "5d828cb201622e22634f8f2cec709d9bd39a91f0e0e976a8ea99861178a3fbd4",
+    "build/goal-r1-touch-qualification/source-plan-before.json": "c9466961ae2b5ca59e30580d7aaa1d9ac7cb1d7872e190d4ca2127cc1c07e98a",
+    "build/goal-r1-touch-qualification/merged-source-plan.json": "eb04e4bf2c082d88801a99f173e0a4b58eba788ec05539d87b5ed02081002423",
+    "build/goal-r1-touch-qualification/merge-audit.json": "6f817e1197f0327071b0b53e5e9b73fd8a4a97728686ca5bd23dc6948313c8c8",
+    "build/hybrid-goal-r1-touch-qualification/build-report.json": "4434b69117dc96668e90849b7ea0d6cd8216c2371f2f1ced8221e4c31c781e38",
+    "build/hybrid-goal-r1-touch-qualification/coverage.json": "3c853266683245b1608ada3c64c117e8f6c0bbe491fa0e1d31cebebb65ed95e8",
+    "build/hybrid-goal-r1-touch-qualification/payloads/application.bin": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "r1/src/application/board/native_touch_device_ops.c": "febfdb8e88e3f936798985f21284cc909d9c00aec95e20da1d224175ff60e473",
+    "r1/src/application/board/native_peripheral_bindings.c": "c2b283e25857766ad1046bdd837e859bd9baad5cccca5de057d019cce813a1e6",
+    "r1/src/application/board/native_battery_control.c": "075a9ce7647e2569bf30a433ce6c588ee7cbef26ccd8095d38d8f528fc54b3ae",
+    "r1/src/sources.json": "1d797a1799e6f0096106583eb050a5ffd9af171405d87a131b103e1327dab36f",
+    "r1/symbols/function-frontier.csv": "da3494d20176e7c48b45db7ad55fab1d0764188c92f0d85c3ac3aac2f5010a87",
+    "tools/build/source-plan.json": "eb04e4bf2c082d88801a99f173e0a4b58eba788ec05539d87b5ed02081002423"
+  }
+}

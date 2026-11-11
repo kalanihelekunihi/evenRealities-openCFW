@@ -1,0 +1,83 @@
+{
+  "subject": {
+    "name": "stock.elf",
+    "digest": {
+      "sha256": "25b4a29af80ec8edab5bd861ba9b74a6e22eab29dc3d7a809a16869e8a140f04"
+    },
+    "local_path": "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-queue-reset-c/stock.elf",
+    "format": "elf",
+    "architecture": "arm"
+  },
+  "reads": [
+    {
+      "evidence_id": "ev_9ed643904da0c9661a111395c3c00b6d54f868268598312ee8a22fe1cf7abc9f",
+      "normalized_result": {
+        "address": "0x4e1e4",
+        "requested_bytes": 18,
+        "returned_bytes": 18,
+        "bytes_hex": "10b572b60ef0c0fc62b6bde810400ef0abbc",
+        "complete": true
+      }
+    },
+    {
+      "evidence_id": "ev_06a24244fcaee7e7cd3da038d5e8ea3f1eb5797dfb2d97d1ba3423ba709ac6cb",
+      "normalized_result": {
+        "address": "0x5cb4c",
+        "requested_bytes": 22,
+        "returned_bytes": 22,
+        "bytes_hex": "70b5054c054d03e00cb120688047241dac42f9d370bd",
+        "complete": true
+      }
+    },
+    {
+      "evidence_id": "ev_fc1906a504b17288fe7292dea8e36f473c93fafcf14064a07d15acedf7443388",
+      "normalized_result": {
+        "address": "0x5cb6c",
+        "requested_bytes": 58,
+        "returned_bytes": 58,
+        "bytes_hex": "70b50e4c0e4d03e00cb120688047241dac42f9d30b4c0c4d03e00cb120688047241dac42f9d3094c094d03e00cb120688047241dac42f9d370bd",
+        "complete": true
+      }
+    },
+    {
+      "evidence_id": "ev_5baffd7d8118212b4a7f5aaedd0a4528943bb1acd1efa735389834880567ecb7",
+      "normalized_result": {
+        "address": "0xc4534",
+        "requested_bytes": 52,
+        "returned_bytes": 52,
+        "bytes_hex": "3d4905008d4a0500914f0500c54f0500254c0500794e0500c563050009650500216505003965050051650500f565050095660500",
+        "complete": true
+      }
+    },
+    {
+      "evidence_id": "ev_0591553cba1d6760482f769318f173b9585c87855deb8ce974f9f6dddafe2fee",
+      "normalized_result": {
+        "address": "0x5cb64",
+        "requested_bytes": 8,
+        "returned_bytes": 8,
+        "bytes_hex": "0000000000000000",
+        "complete": true
+      }
+    },
+    {
+      "evidence_id": "ev_2cb037cee15a02c16eaf601ec35a0df1d9b1df25e9b88b8f1adc5b0f9b1a3cfb",
+      "normalized_result": {
+        "address": "0x5cba8",
+        "requested_bytes": 24,
+        "returned_bytes": 24,
+        "bytes_hex": "0000000000000000000000000000000034450c0068450c00",
+        "complete": true
+      }
+    }
+  ],
+  "limitations": [
+    "The session serves operations only after Ghidra reports default auto-analysis complete; incomplete analysis does not expose partial results.",
+    "The imported Program and temporary project are ephemeral and deleted on close. Annotation operations edit session database metadata; original executable bytes are never written.",
+    "Cancelling an active Ghidra request terminates its ephemeral database and discards session annotations. The selected target remains open; the next provider query imports the original artifact again.",
+    "Default-space addresses use lowercase 0x-prefixed hexadecimal; other address spaces use <percent-encoded-space>:0x<hex>.",
+    "Bytes reflect Ghidra's initialized memory, including loader fixups. Reads stop at an unmapped or uninitialized byte and report completeness explicitly.",
+    "macOS sessions require a matching executable Ghidra native decompiler; REA checks for it but does not build native components or change Gatekeeper quarantine state."
+  ],
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "raw_artifact_match": true
+}

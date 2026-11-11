@@ -1,0 +1,210 @@
+{
+  "normal_report": "build/sources-goal-r1-twi-register-write-pure-c/report.json",
+  "report_sha256": "401f7cc616d136051d171eb54174e460791af772db640e62ca40b29d0ad30f2f",
+  "unit": {
+    "source": "r1/src/application/board/native_hw_twi_register.c",
+    "payload": "r1-application",
+    "role": "candidate",
+    "toolchain": "clang",
+    "link": true,
+    "expect": "compile",
+    "returncode": 0,
+    "argv": [
+      "/usr/bin/clang",
+      "--target=arm-none-eabi",
+      "-mcpu=cortex-m4",
+      "-mthumb",
+      "-mfpu=fpv4-sp-d16",
+      "-mfloat-abi=hard",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-fno-strict-aliasing",
+      "-fshort-enums",
+      "-std=c11",
+      "-Os",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-DNRF52840_XXAA",
+      "-DFLOAT_ABI_HARD",
+      "-DNRF_SD_BLE_API_VERSION=7",
+      "-DNRF_DFU_SVCI_ENABLED",
+      "-DNRF_DFU_TRANSPORT_BLE=1",
+      "-DS140",
+      "-DSOFTDEVICE_PRESENT",
+      "-DFREERTOS",
+      "-DCONFIG_NFCT_PINS_AS_GPIOS",
+      "-DCONFIG_GPIO_AS_PINRESET",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/r1/src/config/sdk",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-twi-register-write-pure-c/generated/r1",
+      "-include",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-twi-register-write-pure-c/generated/r1/nrf_svci_clang.h",
+      "-isystem",
+      "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/external/freertos/portable/GCC/nrf52",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/external/freertos/portable/CMSIS/nrf52",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/external/segger_rtt",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/ble/common",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/ble/ble_advertising",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/ble/peer_manager",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/ble/nrf_ble_gatt",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/atomic",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/atomic_flags",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/atomic_fifo",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/delay",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/fds",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/fstorage",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/mutex",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/sortlist",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/timer",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/experimental_section_vars",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/log",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/log/src",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/strerror",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/util",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/softdevice/common",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/softdevice/s140/headers",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/softdevice/s140/headers/nrf52",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/toolchain/cmsis/include",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/integration/nrfx",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/integration/nrfx/legacy",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx/drivers/include",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx/hal",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx/soc",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx/mdk",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/ble/ble_link_ctx_manager",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/ble/ble_services/ble_dfu",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/ble/nrf_ble_qwr",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/balloc",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/bootloader/dfu",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/memobj",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/pwr_mgmt",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/ringbuf",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/external/fprintf",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx/drivers/src",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/bootloader",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/bootloader/ble_dfu",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/svc",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/stack_info",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/mem_manager",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/queue",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/libraries/scheduler",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/third-party/upstream/freertos-kernel/include",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/r1/src/config/rtos",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/r1/src/vendor",
+      "-MD",
+      "-MF",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-twi-register-write-pure-c/r1/r1-application/r1__src__application__board__native_hw_twi_register.c.d",
+      "-c",
+      "/Users/kalani/Repo/evenRealities-openCFW/r1/src/application/board/native_hw_twi_register.c",
+      "-o",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-twi-register-write-pure-c/r1/r1-application/r1__src__application__board__native_hw_twi_register.c.o"
+    ],
+    "source_sha256": "9b4a4388acbd38fc5b23bbd5f6a0ee77d4c42dbb4fbb961fc1c79d6306f88d54",
+    "object_sha256": "4016bd38b89281fd2150cc057fe71c709836670d62e305092e4d50b3ef4d9227",
+    "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-twi-register-write-pure-c/r1/r1-application/r1__src__application__board__native_hw_twi_register.c.o",
+    "strong": [
+      "r1_twi_primary_register_read_adapter",
+      "r1_twi_primary_register_write_adapter",
+      "r1_twi_secondary_register_read_adapter",
+      "r1_twi_secondary_register_write_adapter"
+    ],
+    "weak": [],
+    "undefined": [
+      "nrfx_twim_rx",
+      "r1_adc_error",
+      "r1_hw_twi0",
+      "r1_hw_twi1",
+      "r1_twi_primary_legacy_tx",
+      "r1_twi_primary_wait_adapter",
+      "r1_twi_secondary_legacy_tx",
+      "r1_twi_secondary_wait_adapter"
+    ]
+  },
+  "direct": {
+    "paired_cases": 11550,
+    "executions": 23100,
+    "actual_legacy_C_TX_wrappers": false,
+    "length80_matrix_cases": 1440,
+    "stock_corrupt_r4_cases": 1446,
+    "C_saved_registers_preserved_in_all_cases": true,
+    "checks": [
+      "Stock payload, accepted lengths, full-status17, retry and low-byte wait behavior",
+      "Explicit 81-byte buffer and corrected length80 R4 preservation",
+      "Controller state, normal memory and caller-owned input alias, SP and masks"
+    ],
+    "limits": [
+      "SDK TX, error handler and waits modeled",
+      "Private frame aliases and incidental register outputs excluded",
+      "Intentional divergence: stock length80 saved-R4 corruption fixed",
+      "Physical bus, IRQ timing, faults and concurrency unverified"
+    ]
+  },
+  "real_tx": {
+    "paired_cases": 11550,
+    "executions": 23100,
+    "actual_legacy_C_TX_wrappers": true,
+    "length80_matrix_cases": 1440,
+    "stock_corrupt_r4_cases": 1446,
+    "C_saved_registers_preserved_in_all_cases": true,
+    "checks": [
+      "Stock payload, accepted lengths, full-status17, retry and low-byte wait behavior",
+      "Explicit 81-byte buffer and corrected length80 R4 preservation",
+      "Controller state, normal memory and caller-owned input alias, SP and masks"
+    ],
+    "limits": [
+      "SDK TX, error handler and waits modeled",
+      "Private frame aliases and incidental register outputs excluded",
+      "Intentional divergence: stock length80 saved-R4 corruption fixed",
+      "Physical bus, IRQ timing, faults and concurrency unverified"
+    ]
+  },
+  "negative": {
+    "reject-valid-80": {
+      "rejected": true,
+      "diagnostic": "Traceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-twi-register-write-pure-c/verify.py\", line 52, in <module>\n    c=(secondary,address,reg,length,statuses,wait,mutation,None);x=a(*c);y=b(*c);assert x==y,(c,x,y);count+=1\n                                                                                        ^^^^\nAssertionError: ((0, 0, 0, 80, (0,), 0, 0, None), (0, [('tx', [536936448, 0, 'private-command', 81], '0011365b80a5caef14395e83a8cdf2173c6186abd0f51a3f6489aed3f81d42678cb1d6fb20456a8fb4d9fe23486d92b7dc01264b7095badf04294e7398bde2072c51769bc0e50a2f54799ec3e80d32577c', '000073644023012088776655'), ('wait', 500, '000073644023012088776655')], b'\\x00\\x00sd@#\\x01 \\x88wfU'), (9, [], b'\\x91\\x82sd@#\\x01 \\x88wfU'))\n"
+    },
+    "wrong-payload-offset": {
+      "rejected": true,
+      "diagnostic": "Traceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-twi-register-write-pure-c/verify.py\", line 52, in <module>\n    c=(secondary,address,reg,length,statuses,wait,mutation,None);x=a(*c);y=b(*c);assert x==y,(c,x,y);count+=1\n                                                                                        ^^^^\nAssertionError: ((0, 0, 0, 1, (0,), 0, 0, None), (0, [('tx', [536936448, 0, 'private-command', 2], '0011', '000073644023012088776655'), ('wait', 500, '000073644023012088776655')], b'\\x00\\x00sd@#\\x01 \\x88wfU'), (0, [('tx', [536936448, 0, 'private-command', 2], '0036', '000073644023012088776655'), ('wait', 500, '000073644023012088776655')], b'\\x00\\x00sd@#\\x01 \\x88wfU'))\n"
+    },
+    "truncated-status17": {
+      "rejected": true,
+      "diagnostic": "Traceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-twi-register-write-pure-c/verify.py\", line 52, in <module>\n    c=(secondary,address,reg,length,statuses,wait,mutation,None);x=a(*c);y=b(*c);assert x==y,(c,x,y);count+=1\n                                                                                        ^^^^\nAssertionError: ((0, 0, 0, 0, (268435473, 1, 0), 0, 0, None), (0, [('tx', [536936448, 0, 'private-command', 1], '00', '000073644023012088776655'), ('error', 268435473, '000073644023012088776655'), ('tx', [536936448, 0, 'private-command', 1], '00', '000073644023012088776655'), ('error', 1, '000073644023012088776655'), ('tx', [536936448, 0, 'private-command', 1], '00', '000073644023012088776655'), ('wait', 500, '000073644023012088776655')], b'\\x00\\x00sd@#\\x01 \\x88wfU'), (268435473, [('tx', [536936448, 0, 'private-command', 1], '00', '000073644023012088776655')], b'\\x00\\x00sd@#\\x01 \\x88wfU'))\n"
+    },
+    "wrong-primary-wait": {
+      "rejected": true,
+      "diagnostic": "d(SP-20,4),'little'));\n                                                                                                                                                                       ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 769, in emu_start\n    raise self._hook_exception\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 363, in wrapper\n    return func(uc, *args, **kwargs)\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 1063, in __hook_code_cb\n    callback(uc, address, size, user_data)\n    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-twi-register-write-pure-c/verify.py\", line 33, in hook\n    assert v[0]==(200 if settings['secondary'] else 500);trace.append((kind,v[0],bytes(uc.mem_read(ctrl,12)).hex()));ret=settings['wait']\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    }
+  },
+  "audit": {
+    "changed": [
+      "r1/src/application/board/native_hw_twi_register.c"
+    ],
+    "unchanged_objects": 726,
+    "unchanged_other_text_sections": [
+      ".text.r1_twi_primary_register_read_adapter",
+      ".text.r1_twi_secondary_register_read_adapter"
+    ]
+  },
+  "rea": [
+    {
+      "path": "build/goal-r1-twi-register-write-pure-c/rea-0x5505c.json",
+      "sha256": "5b646b0fea5b483633c0550001a0a48de963e15404365768df1d2d1a2da7cba9"
+    },
+    {
+      "path": "build/goal-r1-twi-register-write-pure-c/rea-0x55120.json",
+      "sha256": "c9c35a4f174ea0b2924468b4390b2421349506960b9547e615e48f9035f1aa4c"
+    }
+  ],
+  "intentional_fix": "81-byte C buffer preserves saved R4 for admitted length80 instead of reproducing stock corruption",
+  "limits": [
+    "SDK TX, waits and returning error handler modeled",
+    "Private frame aliases and incidental register outputs excluded",
+    "Physical bus and IRQ timing unverified"
+  ]
+}

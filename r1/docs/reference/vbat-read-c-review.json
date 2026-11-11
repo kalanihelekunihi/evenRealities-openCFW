@@ -1,0 +1,424 @@
+{
+  "schema": 1,
+  "scope": "Native battery voltage read 0x506a4, distinct from the delayed ADC averaging path at 0x50c90",
+  "source": {
+    "source": "r1/src/application/adc/native_battery_voltage_read.c",
+    "payload": "r1-application",
+    "role": "candidate",
+    "toolchain": "clang",
+    "link": true,
+    "expect": "compile",
+    "returncode": 0,
+    "argv": [
+      "/usr/bin/clang",
+      "--target=arm-none-eabi",
+      "-mcpu=cortex-m4",
+      "-mthumb",
+      "-munaligned-access",
+      "-mfpu=fpv4-sp-d16",
+      "-mfloat-abi=hard",
+      "-std=c11",
+      "-Os",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-fshort-enums",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-fno-delete-null-pointer-checks",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/r1/src/vendor",
+      "-isystem",
+      "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
+      "-MD",
+      "-MF",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-vbat-read-c/r1/r1-application/r1__src__application__adc__native_battery_voltage_read.c.d",
+      "-c",
+      "/Users/kalani/Repo/evenRealities-openCFW/r1/src/application/adc/native_battery_voltage_read.c",
+      "-o",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-vbat-read-c/r1/r1-application/r1__src__application__adc__native_battery_voltage_read.c.o"
+    ],
+    "source_sha256": "e0cef31cfbc379e6de585779f03846081a636c8c7b216a69d02a77361bf9eae8",
+    "object_sha256": "76a42f877423cf2fa2844271cbf6b0a1598a23d55d7c3a60d2921ec7085f8b76",
+    "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-vbat-read-c/r1/r1-application/r1__src__application__adc__native_battery_voltage_read.c.o",
+    "strong": [
+      "r1_battery_voltage_read"
+    ],
+    "weak": [],
+    "undefined": [
+      "r1_battery_runtime_storage",
+      "r1_stock_dispatch_08",
+      "r1_stock_dispatch_0c",
+      "r1_stock_dispatch_10"
+    ]
+  },
+  "normal_report": "build/sources-goal-r1-vbat-read-c/report.json",
+  "validation": {
+    "paired_cases": 10240,
+    "executions": 20480,
+    "boundary_grid": 6144,
+    "random_partial_write_cases": 4096,
+    "checks": [
+      "24-byte provider frame and saved-R3 word at caller SP-24",
+      "all live R4-R11, signed clamp, three samples and exact integer scaling",
+      "halfword/full-word/one-byte/untouched sample writes and high-word preservation",
+      "device handle reloaded after each provider, ignored raw status, open/close frame mutations",
+      "R0/full R3, final context/sample, saved registers/SP/masks"
+    ],
+    "limits": [
+      "Registry dispatch/ADC providers modeled; physical ADC and battery accuracy unproven",
+      "APSR/other caller-clobbered state, saved-register/private-control-frame aliases, faults and concurrency excluded"
+    ]
+  },
+  "negative_controls_and_GCC": {
+    "unsigned-samples": {
+      "compiled": true,
+      "behavior_rejected": true
+    },
+    "wrong-scale": {
+      "compiled": true,
+      "behavior_rejected": true
+    },
+    "whole-word-clear": {
+      "compiled": true,
+      "behavior_rejected": true
+    },
+    "no-unroll": {
+      "compiled": true,
+      "behavior_rejected": true
+    },
+    "gcc": {
+      "strict_compilation": true,
+      "behavior_passed": false
+    }
+  },
+  "counterexamples": {
+    "unsigned-samples": {
+      "case": {
+        "payloads_hex": [
+          "0000",
+          "0000",
+          "0080"
+        ],
+        "incoming_R3": 0,
+        "mutation_mode": 0,
+        "status_seed": 0
+      },
+      "native_R0": 0,
+      "source_R0": 16000,
+      "native_R3": 0,
+      "source_R3": 0,
+      "first_different_trace_index": 4,
+      "native_trace": [
+        "close",
+        [
+          536887296
+        ],
+        [
+          3,
+          0,
+          536897660,
+          0,
+          1145324612,
+          1145324613,
+          1145324614,
+          1145324615
+        ],
+        "00000000"
+      ],
+      "source_trace": [
+        "close",
+        [
+          536887296
+        ],
+        [
+          3,
+          4294934528,
+          536897660,
+          0,
+          1145324612,
+          1145324613,
+          1145324614,
+          1145324615
+        ],
+        "00000000"
+      ]
+    },
+    "wrong-scale": {
+      "case": {
+        "payloads_hex": [
+          "0000",
+          "0000",
+          "fe7f"
+        ],
+        "incoming_R3": 0,
+        "mutation_mode": 0,
+        "status_seed": 0
+      },
+      "native_R0": 3200,
+      "source_R0": 9599,
+      "native_R3": 0,
+      "source_R3": 0
+    },
+    "whole-word-clear": {
+      "case": {
+        "payloads_hex": [
+          "0000",
+          "0000",
+          "0000"
+        ],
+        "incoming_R3": 0,
+        "mutation_mode": 7,
+        "status_seed": 0
+      },
+      "native_R0": 0,
+      "source_R0": 0,
+      "native_R3": 305419896,
+      "source_R3": 305419896,
+      "first_different_trace_index": 2,
+      "native_trace": [
+        "read",
+        [
+          536875264,
+          0,
+          537067496,
+          1
+        ],
+        [
+          1,
+          0,
+          536897660,
+          0,
+          1145324612,
+          1145324613,
+          1145324614,
+          1145324615
+        ],
+        "0000bbaa"
+      ],
+      "source_trace": [
+        "read",
+        [
+          536875264,
+          0,
+          537067496,
+          1
+        ],
+        [
+          1,
+          0,
+          536897660,
+          0,
+          1145324612,
+          1145324613,
+          1145324614,
+          1145324615
+        ],
+        "00000000"
+      ]
+    },
+    "no-unroll": {
+      "provider_frame_assertion": [
+        true,
+        "open",
+        32
+      ]
+    },
+    "gcc-verify": {
+      "provider_frame_assertion": [
+        true,
+        "open",
+        32
+      ]
+    }
+  },
+  "audit": {
+    "units_compiled": 579,
+    "existing_objects_identical": 578,
+    "new_unit": {
+      "source": "r1/src/application/adc/native_battery_voltage_read.c",
+      "payload": "r1-application",
+      "role": "candidate",
+      "toolchain": "clang",
+      "link": true,
+      "expect": "compile",
+      "returncode": 0,
+      "argv": [
+        "/usr/bin/clang",
+        "--target=arm-none-eabi",
+        "-mcpu=cortex-m4",
+        "-mthumb",
+        "-munaligned-access",
+        "-mfpu=fpv4-sp-d16",
+        "-mfloat-abi=hard",
+        "-std=c11",
+        "-Os",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-fshort-enums",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-fno-delete-null-pointer-checks",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/r1/src/vendor",
+        "-isystem",
+        "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
+        "-MD",
+        "-MF",
+        "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-vbat-read-c/r1/r1-application/r1__src__application__adc__native_battery_voltage_read.c.d",
+        "-c",
+        "/Users/kalani/Repo/evenRealities-openCFW/r1/src/application/adc/native_battery_voltage_read.c",
+        "-o",
+        "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-vbat-read-c/r1/r1-application/r1__src__application__adc__native_battery_voltage_read.c.o"
+      ],
+      "source_sha256": "e0cef31cfbc379e6de585779f03846081a636c8c7b216a69d02a77361bf9eae8",
+      "object_sha256": "76a42f877423cf2fa2844271cbf6b0a1598a23d55d7c3a60d2921ec7085f8b76",
+      "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-vbat-read-c/r1/r1-application/r1__src__application__adc__native_battery_voltage_read.c.o",
+      "strong": [
+        "r1_battery_voltage_read"
+      ],
+      "weak": [],
+      "undefined": [
+        "r1_battery_runtime_storage",
+        "r1_stock_dispatch_08",
+        "r1_stock_dispatch_0c",
+        "r1_stock_dispatch_10"
+      ]
+    },
+    "imports_unchanged": {
+      "application": 164,
+      "bootloader": 34
+    },
+    "normal_report": "build/sources-goal-r1-vbat-read-c/report.json",
+    "manifest_only_added_native_battery_voltage_unit": true,
+    "source_plan_unchanged": true,
+    "new_exact_bytes": 0,
+    "hybrid": {
+      "report": "build/hybrid-goal-r1-vbat-read-c/build-report.json",
+      "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+      "totals": {
+        "binary-pull-through": 642117,
+        "source-built": 4043,
+        "resource-file": 248
+      },
+      "source_completeness_proven": false
+    }
+  },
+  "REA": {
+    "evidence_id": "ev_91d47470d8b21caf5eeec8d8c8fdeb067089aa54e86ad681254342ae3fc4f726",
+    "subject": {
+      "name": "stock.elf",
+      "digest": {
+        "sha256": "25b4a29af80ec8edab5bd861ba9b74a6e22eab29dc3d7a809a16869e8a140f04"
+      },
+      "local_path": "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-queue-reset-c/stock.elf",
+      "format": "elf",
+      "architecture": "arm"
+    },
+    "provider": {
+      "id": "ghidra",
+      "name": "Ghidra",
+      "version": "12.1.4"
+    },
+    "analysis_profile": {
+      "provider": {
+        "id": "ghidra",
+        "name": "Ghidra",
+        "version": "12.1.4"
+      },
+      "parameters": {
+        "target_kind": "executable",
+        "target_format": "elf",
+        "architecture": "arm",
+        "available_architectures": [
+          "arm"
+        ],
+        "import_mode": "ephemeral-source-immutable",
+        "annotation_policy": "atomic-function-entry-metadata-v1",
+        "load_image_observations": "source-mappings-entry-context-v2",
+        "function_body_evidence": "complete-inclusive-ranges-v1",
+        "function_references": "complete-body-and-entry-reference-manager-v2",
+        "call_relationship_coverage": "function-body-call-coverage-v5",
+        "function_dossier_coverage": "observed-facets-and-call-relationships-v1",
+        "string_inventory_evidence": "defined-data-coverage-v1",
+        "location_resolution": "explicit-address-exact-entry-symbol-first-v3",
+        "procedure_file_offset_resolution": "address-first-unique-target-source-mapping-v2",
+        "instruction_flow_evidence": "decoded-return-pcode-v1",
+        "instruction_references": "exact-address-incoming-v1",
+        "function_boundary_observations": "ghidra-function-boundary-limitations-v3",
+        "no_return_repair": "returning-imports-decoded-return-v2",
+        "process_launch": "inspected-jvm-launch-support-v1",
+        "jump_table_evidence": "typed-case-default-blocks-v1",
+        "decompiler_jump_loads": true,
+        "loader": "auto-from-header",
+        "language_id": "auto-from-header",
+        "compiler_spec_id": "auto-default",
+        "analyzer_preset": "ghidra-default"
+      },
+      "digest": "7e46711069eea041af1b9b99e34115c13332795e5cda76e584a722f529ec70de"
+    },
+    "predicate_type": "rea.analysis",
+    "operation": "read_bytes",
+    "parameters": {
+      "address": "0x506a4",
+      "length": 100
+    },
+    "raw_result": {
+      "address": "0x506a4",
+      "requested_bytes": 100,
+      "returned_bytes": 100,
+      "bytes_hex": "f8b50025164eadf800502f46306935f032fb002401236a460021306935f034fbbdf90000002801daadf80070bdf90000641ce4b20544adf80070032cead3306935f0e9fa032095fbf0f080b2c0eb001000eb80004ff4006101eb0010000bf8bd7c680020",
+      "complete": true
+    },
+    "normalized_result": {
+      "address": "0x506a4",
+      "requested_bytes": 100,
+      "returned_bytes": 100,
+      "bytes_hex": "f8b50025164eadf800502f46306935f032fb002401236a460021306935f034fbbdf90000002801daadf80070bdf90000641ce4b20544adf80070032cead3306935f0e9fa032095fbf0f080b2c0eb001000eb80004ff4006101eb0010000bf8bd7c680020",
+      "complete": true
+    },
+    "confidence": "observed",
+    "authority": "shipped-artifact",
+    "environment": null,
+    "limitations": [
+      "The session serves operations only after Ghidra reports default auto-analysis complete; incomplete analysis does not expose partial results.",
+      "The imported Program and temporary project are ephemeral and deleted on close. Annotation operations edit session database metadata; original executable bytes are never written.",
+      "Cancelling an active Ghidra request terminates its ephemeral database and discards session annotations. The selected target remains open; the next provider query imports the original artifact again.",
+      "Default-space addresses use lowercase 0x-prefixed hexadecimal; other address spaces use <percent-encoded-space>:0x<hex>.",
+      "Bytes reflect Ghidra's initialized memory, including loader fixups. Reads stop at an unmapped or uninitialized byte and report completeness explicitly.",
+      "macOS sessions require a matching executable Ghidra native decompiler; REA checks for it but does not build native components or change Gatekeeper quarantine state."
+    ],
+    "relationship_coverage": null,
+    "locations": [],
+    "evidence_links": []
+  },
+  "qualification": "build/goal-r1-vbat-read-c/qualified/qualification.json",
+  "probe_hashes": {
+    "build/goal-r1-vbat-read-c/verify.py": "2de9b8a5c25bec910b4786d7ea69f8ec9586efc988e3005f7d1f9b6e0e29d625",
+    "build/goal-r1-vbat-read-c/negatives.py": "8eb1806a04df517ef3e6c430d3f2ecf71f6f2510adf013b52567ceefe5b8747e",
+    "build/goal-r1-vbat-read-c/audit.py": "242d60622ba738f6bb8ecaa103d14adaadc8c2b94f4ac79831caf1e5d7f24617",
+    "build/goal-r1-vbat-read-c/product.elf": "dcaa147d33a84b6addfb59ff6f79b93bf1d744a8c755a2bfa22ef5b4d718960b",
+    "build/goal-r1-vbat-read-c/gcc.o": "263d0ba4134e528d9abe5c149d2f176c0b77394a90f58c75921024beda6e10ef"
+  },
+  "limitations": [
+    "Registry dispatch/ADC providers modeled; physical ADC and battery accuracy unproven",
+    "APSR/other caller-clobbered state, saved-register/private-control-frame aliases, faults and concurrency excluded",
+    "All executed operations in this unit are C; empty register and memory constraints and shared read-only SP observation retain the native ABI.",
+    "Clang full loop unrolling is required for the tested 24-byte frame. Without it, Clang adds an induction register and uses 32 bytes.",
+    "Strict GCC compilation succeeds but its 32-byte frame fails the native 24-byte provider contract.",
+    "The root has no exact qualification; source plan and selected source bytes remain unchanged.",
+    "Original Arm Compiler 5 is unavailable. Final source-only completeness and byte identity remain unproven."
+  ],
+  "superseded_context_binding": {
+    "review": "r1/docs/reference/vpmic-binding-c-review.json",
+    "previous_normal_context_owner_incorrect": true,
+    "previous_fixture_alias_masked_owner_error": true,
+    "prior_arithmetic_and_frame_evidence_only": true,
+    "correct_owner": "r1_yhm_transport_context",
+    "correct_base": "0x2000687c",
+    "correct_registry_name": "vpmic_isns_adc"
+  }
+}

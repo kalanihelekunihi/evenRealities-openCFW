@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "report": "build/sources-goal-r1-dfu-observer-owner/report.json",
+  "report_sha256": "30cd58d004f2ed8eb5070ca5c408c75653718e5c79f78bd15412eb8a1f4eb166",
+  "manifest_sha256": "fa1abe5aeabce254df02766e5df458c888b1c92ab256cc4d77a6667806d39d9b",
+  "verification": {
+    "dispatch_scenarios": 70,
+    "before_records": 6,
+    "after_records": 5,
+    "stock_records": 5,
+    "canonical_records_match_stock_with_dfu_code_address_normalized": true,
+    "old_duplicate_reproduced": true,
+    "callbacks_modeled": true
+  },
+  "audit": {
+    "unchanged_prior_object_hashes": 799,
+    "sdk_other_allocated_sections_and_relocations_unchanged": 27,
+    "only_sdk_allocation_removed": ".sdh_ble_observers2",
+    "sdk_exported_functions_and_imports_unchanged": true,
+    "all_import_sets_unchanged": true,
+    "generated_boot_allocated_bytes_and_relocations_unchanged": true,
+    "only_manifest_change_wrapper_source_and_origin": true
+  },
+  "rea_evidence_id": "ev_d42297b010d408686fd365738d86b69e58cab287c0eaff6cc61744376b9829be",
+  "rea_table_matches_raw": true,
+  "evidence_files": {
+    "build/goal-r1-dfu-observer-owner/verify.py": "409d990df29f4d84f72052017f7ebfa17b418a60cdd5478226b8dabdea49a943",
+    "build/goal-r1-dfu-observer-owner/audit.py": "f02fd20e406c714afb84e5e396a7dfa56338bd721aa1bd3f0e6dca4bc8ba9068",
+    "build/goal-r1-dfu-observer-owner/document.py": "86cf6f60fdde2d78fbc4c883cbe5b117fbd0c9568b0301043d9cee0b7145e25e",
+    "build/goal-r1-dfu-observer-owner/verification.json": "fea885d043ca2530a5f1e47da1a1a8088cc11d588e6731ccb10d510d555d132d",
+    "build/goal-r1-dfu-observer-owner/audit.json": "b917ab23e3c1924bec438113bc609d3bbc4d85891f33da6a03f08d21acb3ffdc",
+    "build/goal-r1-dfu-observer-owner/before.elf": "a01fbe0aac4b63906ab8d60df9f16199381a1c5af6eeb24a86f1bf402fb8fcee",
+    "build/goal-r1-dfu-observer-owner/after.elf": "af8effc82a5e3025b68a2a9f41efacf9ebaf6f60d021ed920bb5eb254bfbdc68",
+    "build/goal-r1-dfu-observer-owner/rea.json": "eabe485d7dac7ea5ad946ae6fa2c8ece96df2a835ea99f052b6fa261c7b97e48",
+    "build/goal-r1-dfu-observer-owner/verify.log": "56e880e1b51c0c2b85f99ec811d3df1a49d389d295c01494a7f3086497b8589e",
+    "build/goal-r1-dfu-observer-owner/r1-sources-check.log": "5e11e4875b7438d11bbef8d4e6a9ea5b4081f51b98d07ce16e216ec5be46d46c",
+    "build/goal-r1-dfu-observer-owner/sources-check.log": "8c6106f31795d747b5656cd65fe1f38ce4ad1cf5ad16dd2acf1d77f1c9a667c3",
+    "build/goal-r1-dfu-observer-owner/boot-link/report.json": "80f34ec14d3b24bae9a3182456d73b6eb85cd18b0db2ac0378bd0e93eba904f4"
+  },
+  "limitations": [
+    "Callbacks modeled at entry; no physical BLE/DFU operation proof.",
+    "Canonical table continues to call the SDK observer; recovered native observer and its separate context are not wired by this change.",
+    "SDK section boundaries and complete application final linking remain unresolved.",
+    "No source-plan selection changes."
+  ]
+}

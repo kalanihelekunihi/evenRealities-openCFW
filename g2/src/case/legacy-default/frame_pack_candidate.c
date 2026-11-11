@@ -20,3 +20,5 @@ uint32_t case_watchdog_frame_pack(uint32_t code,uint32_t count,const uint8_t *by
     }
     return 0u;
 }
+/* Dedup (0x08009004): case_init_secondary_write (was startup/application_init_bus_aliases_candidate.c). */
+__typeof__(case_watchdog_frame_pack) case_init_secondary_write __attribute__((alias("case_watchdog_frame_pack")));

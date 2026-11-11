@@ -1,0 +1,247 @@
+{
+  "schema_version": 1,
+  "sources": [
+    "r1/src/application/board/native_gap_events.c",
+    "r1/src/application/runtime/native_ack_clear.c",
+    "r1/src/application/runtime/native_ack_registry.h"
+  ],
+  "native_roots": {
+    "r1_gap_event_plan_build": {
+      "entry": "0x52b9c",
+      "envelope_bytes": 3184,
+      "instruction_ranges": [
+        [
+          "0x52b9c",
+          "0x52f9e"
+        ],
+        [
+          "0x53278",
+          "0x53536"
+        ]
+      ],
+      "instruction_bytes": 1728
+    },
+    "r1_ack_table_clear": {
+      "entry": "0x824a0",
+      "instruction_bytes": 152
+    },
+    "r1_factory_status_reset": {
+      "entry": "0x6a95c",
+      "instruction_bytes": 30
+    },
+    "r1_legacy_pair_hook_nop": {
+      "entry": "0x4e1e0",
+      "instruction_bytes": 2
+    }
+  },
+  "report": "build/sources-goal-r1-gap-event-c/report.json",
+  "compiled_units": 848,
+  "verification": {
+    "native_uncovered_byte_addresses": [],
+    "native_instruction_bytes_covered": 1910,
+    "native_instruction_bytes_expected": 1910,
+    "pairs": 1696,
+    "groups": {
+      "ACK_seeds": 1,
+      "advertising_seeds": 1,
+      "event_seeds": 7,
+      "event_routing_keys_logs": 600,
+      "QWR_factory_connect": 64,
+      "disconnect_roles_advertising": 192,
+      "PHY_capture_completion": 150,
+      "PHY_completion_log_branches": 60,
+      "ACK_each_slot_and_occupied_byte": 128,
+      "ACK_live_backend_mutations": 18,
+      "ACK_scan_preserves_inactive": 4,
+      "live_backend_mutations": 264,
+      "connected_writer_actual_reader": 5,
+      "seeded_mixed_state": 200,
+      "supplemental_helpers": 2
+    },
+    "actual_C": [
+      "GAP event observer",
+      "ACK clear and canonical table",
+      "PHY helper and S140 gateway",
+      "SDK QWR assignment and three existing contexts",
+      "factory reset and existing state owner",
+      "control setter and existing byte",
+      "peer-address lookup and shared21-byte cache"
+    ],
+    "modeled": [
+      "logging",
+      "scheduler",
+      "connection-state query/count",
+      "status publisher",
+      "touch close",
+      "advertising query/start",
+      "SVC radio result",
+      "heap free",
+      "ACK mutex"
+    ]
+  },
+  "mutants": [
+    {
+      "name": "ACK_free",
+      "rejected": true
+    },
+    {
+      "name": "ACK_last_slot",
+      "rejected": true
+    },
+    {
+      "name": "ACK_clear_callback",
+      "rejected": true
+    },
+    {
+      "name": "ACK_skip_inactive",
+      "rejected": true
+    },
+    {
+      "name": "ACK_marker",
+      "rejected": true
+    },
+    {
+      "name": "GAP_slot_bound",
+      "rejected": true
+    },
+    {
+      "name": "GAP_peer_prefix",
+      "rejected": true
+    },
+    {
+      "name": "GAP_QWR_empty",
+      "rejected": true
+    },
+    {
+      "name": "GAP_factory_callback_identity",
+      "rejected": true
+    },
+    {
+      "name": "GAP_role_precedence",
+      "rejected": true
+    },
+    {
+      "name": "GAP_adv_status8",
+      "rejected": true
+    },
+    {
+      "name": "GAP_adv_retry",
+      "rejected": true
+    },
+    {
+      "name": "GAP_PHY_captured_order",
+      "rejected": true
+    },
+    {
+      "name": "GAP_PHY_coded",
+      "rejected": true
+    },
+    {
+      "name": "GAP_factory_bytes",
+      "rejected": true
+    },
+    {
+      "name": "GAP_latch_clear",
+      "rejected": true
+    },
+    {
+      "name": "GAP_client_timeout",
+      "rejected": true
+    },
+    {
+      "name": "GAP_latest_clear",
+      "rejected": true
+    }
+  ],
+  "audit": {
+    "unchanged_prior_nongenerated_objects": 836,
+    "changed_prior_nongenerated_objects": [],
+    "changed_generated_objects": [
+      "{gen}/r1_startup_vectors.S",
+      "{gen}/r1_uecc.c"
+    ],
+    "added_objects": [
+      "r1/src/application/runtime/native_ack_clear.c",
+      "r1/src/application/board/native_gap_events.c"
+    ],
+    "removed_imports": [
+      "r1_gap_event_plan_build"
+    ],
+    "added_imports": [
+      "r1_factory_status_timeout_6a668",
+      "r1_factory_status_timeout_6a988"
+    ],
+    "application_imports": 72,
+    "new_state": {
+      "symbol": "r1_ble_connection_latch",
+      "native_address": "0x200064b0",
+      "size": 1,
+      "cold_initializer": 0
+    },
+    "factory_state_existing_owner": "r1_factory_mode_state.reserved[2:4]",
+    "shared_ACK_peer_QWR_and_connection_owners": true,
+    "assembly_added": false
+  },
+  "contract": [
+    "Connected events cancel/rearm the flag callback with0xf000, report live peer bytes, populate the complete7-byte slot for connection0..2, cancel both distinct legacy callbacks, apply exact factory byte0x5a policy, publish latest handle and assign the first free existing QWR context. Phone-present factory policy schedules the adjacent legacy hook as the second callback, distinct from the first legacy timeout callback.",
+    "Disconnect events preserve the captured peripheral count, cancel all three role/pair callbacks, clear the one-byte latch, release the first matching QWR handle and clear the seven-byte peer slot. Glasses role has precedence over phone role. Status records are forwarded through the existing publisher with reason read after diagnostics.",
+    "Glasses disconnect cancels deferred target disconnect, clears the glasses handle, closes touch and runs the actual factory reset. That reset cancels two exact callbacks and restores ff at existing factory state offsets3/4; it adds no duplicate factory state. Phone disconnect clears the control flag and phone handle, cancels its RX timeout callback and clears the actual ACK table.",
+    "ACK clear locks the existing640-byte table, scans all32 records and skips zero occupancy. It reports live record fields, rereads the argument after logging, frees a nonzero argument before clearing occupancy/callback/argument and returns the unlock status. Inactive records, timestamp, key and padding bytes are preserved. The table is never shadowed.",
+    "Disconnect tail reads the advertising handle again after the availability query, calls typed S140 advertising stop and accepts status0 or8. Other stop errors call the returning error boundary. Advertising restart mode3 failures log the saved peripheral count and schedule the role callback at0x66; latest connection becomesffff.",
+    "PHY request events capture both input bytes before diagnostics and retain their stock diagnostic ordering, then route captured settings for glasses and1/1 for other peers through the actual C PHY helper. Completion events report captured TX/RX/status, distinguish status failure and either-side coded PHY, and preserve severity. Client/server GATT timeouts only report their distinct messages.",
+    "Unknown event IDs do nothing. The global empty legacy hook retains a distinct callback identity from the adjacent empty legacy timeout callback. All code is ordinary C except the pinned SDK supervisor-call gateway."
+  ],
+  "remaining_dependencies": [
+    {
+      "symbol": "r1_factory_status_timeout_6a988",
+      "native_entry": "0x6a988"
+    },
+    {
+      "symbol": "r1_factory_status_timeout_6a668",
+      "native_entry": "0x6a668"
+    }
+  ],
+  "limits": [
+    "Actual C GAP policy, ACK clear, PHY helper, SDK QWR assignment, canonical owners, factory reset, control setter and peer-slot lookup execute together. Logging, scheduler, connection-state results, publisher, touch service, advertising query/start, supervisor-call radio results, mutex and heap backend are modeled. No hardware is flashed or exercised.",
+    "Lifecycle fixtures execute connected-event population, actual peer query, disconnected-event clearing and actual peer query. They do not execute the entire higher BLE connection consumer, real security, peer persistence or real scheduler queues. Separate prior receipts cover those downstream C consumers.",
+    "All1910 native instruction bytes in the observer, ACK clear and reset ranges execute across the replay. This is dynamic controlled-fixture coverage, not proof of physical concurrency, radio timing, final placement, final firmware link or boot.",
+    "Only scalar C contracts and public state/provider traces are compared. Incidental scratch-register restoration and private stack locations are excluded. Source execution is rejected if it enters the stock executable address range. Callee-saved integer/FP registers, masks, SP, stack and table guards are checked.",
+    "One new byte owner at0x200064b0 matches the authenticated stock cold RW value0; all other state owners are reused. The fixed-address linker fixture proves controlled aliasing only; final source layout remains open.",
+    "The broad GAP import closes and two explicit factory timeout callback imports are exposed, changing application imports71 to72. No placeholder callback implementation is supplied. Byte identity and paid compiler availability are not requirements.",
+    "R1 manifest check passes. Global sources-check retains the unrelated unlisted G2 resident_rom_thumb_set.S failure."
+  ],
+  "evidence_files": {
+    "build/sources-goal-r1-gap-event-c/report.json": "0973282f7106676425df80e975b01a178ee62155925ff2d2537575c33a897269",
+    "build/sources-goal-r1-phy-c/report.json": "1e6d38cf38a7ef8042f2fb8f685d892eea0c6db122a1634f22359cbf1f360ac7",
+    "r1/src/sources.json": "fbb7246fdec1d90a71988790b049c50bcca74c47dc44ecfc196bb2fc4f52c3fb",
+    "r1/src/application/board/native_gap_events.c": "38ef4140c3e9b4b0929af0173b0005171c1cd50949a677fcbedae9cc64f6a185",
+    "r1/src/application/runtime/native_ack_clear.c": "1e1118671a89ac90abf2bfb030c7c0f2ffe2e34fe48acfb7b6e9dc67e0f4aaee",
+    "r1/src/application/runtime/native_ack_registry.h": "02c761d2324ec2a25ffbba10f98c61c9f02a6b0cd19f92c7e7e82549c69b2f0c",
+    "r1/src/application/runtime/native_factory_mode.h": "d824aa69a66a0a7ce73a7f3e71e69d13a3efa3cd359cb72b6ae8a2489523e6d3",
+    "r1/src/application/runtime/native_factory_mode.c": "bb2b2f81288471ca12d1cfcb2ea41a9e7b86aea6fe47eff85f45f2ffc9ee82b9",
+    "r1/src/application/board/native_qwr_contexts.c": "5ed518330163491737ef46669b2a94ee8b1a4bfa26f789fafa017fe940a9df29",
+    "r1/src/application/board/native_peer_address.c": "f376a680079380ce10c87a808dfb04f22f794fb80e69c68b4d9dd5d4ec188fe1",
+    "r1/src/application/board/native_connection_parameters.c": "8a58564e5dbdcaad3be5eb3d10e2bcc55f6b1be61aa0ecf17a4e080fdf8e13a6",
+    "r1/src/application/board/native_ble_observers.c": "887a1dfbad621405881b7f1d491e81d4c837e252f40a9e41d5396bd361dd1352",
+    "build/goal-r1-gap-event-c/rea.json": "f038a9e42cb70564a6dd8ddcd6208611bb3790799b913c3ea2eddb7eff69317a",
+    "build/goal-r1-gap-event-c/reset-rea.json": "c8f2cf211496a1c03d3835584995071b908d83fa72f86966c29de0e01c115634",
+    "build/goal-r1-gap-event-c/helper-rea.json": "2f20044fd36aa7b525a85e5d2a8b857d69bef6bbe4efb88cec35a1b1065be252",
+    "build/goal-r1-gap-event-c/static-map.json": "ff2b32c2da2691456340cd087bab2f702f6130f53312432e19959e71884841b0",
+    "build/goal-r1-gap-event-c/stock.asm": "030e8e431503762367cffd56aa672530713f336e59702b128671c6304ffa31d6",
+    "build/goal-r1-gap-event-c/strings.py": "5474b6351fd8ee47fe3547b50aea27ec5f7f3e2aa8ffbfda621b00f64f5ed4cb",
+    "build/goal-r1-gap-event-c/strings.json": "99210e156cde4820a1af951905654aa9f632a105c822eceb789711bc694c805a",
+    "build/goal-r1-gap-event-c/verify.py": "7c47508ac4caee7af16421be9cf2898610e8f57f1f19aa99e1b494b42cddad69",
+    "build/goal-r1-gap-event-c/verification.json": "ff9849b4cbe462d63f190d0aea75f7889728705a44489a555ba0ae68070f4974",
+    "build/goal-r1-gap-event-c/verification.log": "c6ab08fe2d2b1939131d690cef42457876babf2ed8c3e1673abfafbaba4bff93",
+    "build/goal-r1-gap-event-c/mutants.py": "5b1a5064bd65b976a7ade85b1c8507df615dc909570df17c4056893d6e418efc",
+    "build/goal-r1-gap-event-c/mutants.json": "568130c4d4568531f2ba63c78fadc4917c586730e47767fef444c93962276f4c",
+    "build/goal-r1-gap-event-c/mutants.log": "9273a94dab51c225406c7e47dcc2c6fd6f3fd5462155921789802cb36ce73b99",
+    "build/goal-r1-gap-event-c/audit.py": "0d53510ffccf34c60ee2a47c4c22802d502d0414ed869340faa0ba4847158555",
+    "build/goal-r1-gap-event-c/object-audit.json": "6fc120347b8bcf738baf49d024cc472e2c6f5fecd4d526e9474704949cdca2af",
+    "build/goal-r1-gap-event-c/r1-check.log": "c9be3f9a217cbe7dcc0a11df1f163e11e001078af742dd7a5118fc062acd8b86",
+    "build/goal-r1-gap-event-c/sources-check.log": "6191848f4f01546dce94658f3e75b3ee27a010687c9c57d64ea5bf80a887d6fb",
+    "build/goal-r1-ack-clear-c/rea.json": "80cfee6700a1e54b51a839910aa319bbf623a3a6779fee0835778dad2650b032",
+    "build/goal-r1-fstorage-registry/expanded-rw.bin": "87fdee392022fdbe23dd0daf3e859fb14f3ce26ba3e8403aab56dc9d9a913317",
+    "r1/docs/reference/fstorage-registry-review.json": "3ee2a79fb2b3f866e118d86e0361b8dc1499a92460f5e6a49370418eac1dbb5c"
+  }
+}

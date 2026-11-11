@@ -1,0 +1,32 @@
+{
+  "status": "experimental_not_integrated",
+  "stock_addresses": [
+    "0x60990",
+    "0x60a14"
+  ],
+  "native_c_pairs": 1072,
+  "fault_pairs": 60,
+  "independent_expected_cases": 30,
+  "preserved_registers_verified": true,
+  "ppg_scratch_pointer_identity_verified": true,
+  "negative_controls_rejected": 9,
+  "canonical_source_plan_changed": false,
+  "remaining_boundaries": [
+    "Actual host caller integration",
+    "Additional fault and provider mutation coverage",
+    "Native/C ACC provider stack depth differs",
+    "Physical device execution and byte identity unproven"
+  ],
+  "artifacts": {
+    "build/goal-r1-gomore-resample-c/candidate.c": "6d0f104006d16bb18d99b65c22011dc5ba0cd5324b351b46e24b13c07b2018a7",
+    "build/goal-r1-gomore-resample-c/candidate.o": "cf709f6c05d23db937455d71337ca2eae06596a59d61da95ad02d95439e5eaf4",
+    "build/goal-r1-gomore-resample-c/compile.py": "8aabb48e042f0d98a15e5021e62d2379fb5d412a84ef6a6535c91f1685064a5b",
+    "build/goal-r1-gomore-resample-c/verify.py": "3ec895e41eeb738509b7360b4da1f5f54e6d975e6a6f23a655757703c9919607",
+    "build/goal-r1-gomore-resample-c/results.json": "fbb0f163a332a3f03543e57546429783ce56c9685d5311432f7e004eccb25e03",
+    "build/goal-r1-gomore-resample-c/negative.py": "d2798c52ded297008eb386e886b190bf64ac164e14c122ceee881013d7d89540",
+    "build/goal-r1-gomore-resample-c/negative-results.json": "4a25495bdc27ae6100342fd8f65cd84e77b58f415aff004299df2c1ff5ddce05",
+    "build/goal-r1-gomore-resample-c/rea.json": "7d32ed3277d923113fea43411cdf00974a4c2aa0751d62df2ab88bedf7bd92d4",
+    "build/goal-r1-gomore-resample-c/candidate.gcc.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/goal-r1-gomore-resample-c/disassembly.txt": "abe64ff336d3fddd96e80006a783292412b4d8bb8d26bc4b6aa12071957d4998"
+  }
+}

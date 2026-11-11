@@ -28,10 +28,11 @@ SECTIONS
 
 SECTIONS
 {
-  /* Every recovered module is a deliberate firmware-bundle payload.  The SDK
-   * build uses -ffunction-sections plus --gc-sections, so merely compiling an
-   * implementation is not enough: consume its text/constant sections here
-   * before nrf_common.ld's generic .text rule can discard an unbound API. */
+  /* Explicitly retained modules supply firmware-bundle entry points and
+   * resident data. The SDK uses -ffunction-sections and --gc-sections, so
+   * source compilation alone does not retain an unbound API. The two large
+   * algorithm libraries below instead retain their reachable sections and
+   * source-owned API records, avoiding uncalled code in flash. */
   .openr1_reconstructed_code :
   {
     /* nrf_common.ld normally places this first inside .text.  Because this
@@ -48,9 +49,12 @@ SECTIONS
     KEEP(*gxt310.c.o(.text .text.* .rodata .rodata.*))
     KEEP(*qma6100.c.o(.text .text.* .rodata .rodata.*))
     KEEP(*yhm2710.c.o(.text .text.* .rodata .rodata.*))
-    KEEP(*goodix_primitives.c.o(.text .text.* .rodata .rodata.*))
+    /* These large C libraries are compiled as complete source units. Their
+     * called functions and referenced data remain live through relocations;
+     * retaining every uncalled helper exhausts application flash. */
+    *goodix_primitives.c.o(.text .text.* .rodata .rodata.*)
     KEEP(*goodix_heap.c.o(.text .text.* .rodata .rodata.*))
-    KEEP(*gomore_primitives.c.o(.text .text.* .rodata .rodata.*))
+    *gomore_primitives.c.o(.text .text.* .rodata .rodata.*)
     KEEP(*gomore_tensor_runtime.c.o(.text .text.* .rodata .rodata.*))
     KEEP(*goodix_hba_config.c.o(.text .text.* .rodata .rodata.*))
     KEEP(*goodix_hrv_config.c.o(.text .text.* .rodata .rodata.*))
@@ -118,8 +122,34 @@ SECTIONS
 
 INCLUDE "nrf_common.ld"
 
+/* The source application's MSP is the linker RAM top. Keep enough room for
+ * reset and interrupt nesting even as reconstructed static data grows. */
+ASSERT(SIZEOF(.stack_dummy) >= 0x2000,
+       "application MSP stack reservation is below 8 KiB")
+
+/* The source reset copies every initialized RAM section through the dynamic
+ * log registry. These assertions reject a registry with a disconnected load
+ * image before the firmware can be considered bootable. */
+__r1_data_init_end__ = ADDR(.log_dynamic_data) + SIZEOF(.log_dynamic_data);
+ASSERT(LOADADDR(.log_dynamic_data) == __etext +
+       (ADDR(.log_dynamic_data) - __data_start__),
+       "log dynamic data is outside the reset copy image")
+ASSERT(LOADADDR(.fs_data) == __etext + (ADDR(.fs_data) - __data_start__),
+       "FDS data is outside the reset copy image")
+ASSERT(__r1_data_init_end__ <= __bss_start__,
+       "initialized data overlaps bss")
+
 /* GNU names expected by the authenticated CmBacktrace provider. */
 PROVIDE(_sstack = __StackLimit);
 PROVIDE(_estack = __StackTop);
 PROVIDE(_stext = ORIGIN(FLASH));
 PROVIDE(_etext = __etext);
+/* The selected R1 CmBacktrace configuration names these same GNU bounds.
+ * Its provider takes their addresses, not values stored at those addresses. */
+PROVIDE(r1_cmb_stack_start = _sstack);
+PROVIDE(r1_cmb_stack_end = _estack);
+PROVIDE(r1_cmb_code_start = _stext);
+PROVIDE(r1_cmb_code_end = _etext);
+/* app_util.h declares the vector anchor as one uint32_t. The C source owns
+ * the full table under a distinct typed name; bind that SDK anchor here. */
+__isr_vector = r1_application_vectors;

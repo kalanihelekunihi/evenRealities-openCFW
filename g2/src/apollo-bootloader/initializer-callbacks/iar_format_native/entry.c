@@ -1,15 +1,11 @@
-/* Preserve the stock232-byte entry frame so decimal digit scratch retains the
- * actual prior stack bytes on generation-budget overflow paths. No opcode array. */
+/* IAR formatter entry: a 192-byte scratch frame on the stack (digit buffers
+ * and record at fixed offsets, see engine.c) handed to the core. */
 #include "engine.h"
-__attribute__((naked)) int32_t opencfw_iar_format_engine(opencfw_format_put put,void *context,const char *format,uint32_t **cursor,unsigned mode){__asm__ volatile(
- "push.w {r0,r4,r5,r6,r7,r8,r9,r10,r11,lr}\n"
- "sub sp,#192\n"
- "mov r4,sp\n"
- "ldr r5,[sp,#232]\n"
- "sub sp,#8\n"
- "str r5,[sp]\n"
- "str r4,[sp,#4]\n"
- "bl opencfw_iar_format_core\n"
- "add sp,#8\n"
- "add sp,#196\n"
- "pop.w {r4,r5,r6,r7,r8,r9,r10,r11,pc}\n");}
+int32_t opencfw_iar_format_core(opencfw_format_put callback,void *context,const char *format,uint32_t **cursor,unsigned mode,uint8_t *frame);
+int32_t opencfw_iar_format_engine(opencfw_format_put put,void *context,const char *format,uint32_t **cursor,unsigned mode){
+ uint8_t frame[192] __attribute__((aligned(8)));
+ return opencfw_iar_format_core(put,context,format,cursor,mode,frame);
+}
+
+/* Stock entry names that branch straight to the provider above. */
+__typeof__(opencfw_iar_format_engine) opencfw_boot_format_engine __attribute__((alias("opencfw_iar_format_engine")));

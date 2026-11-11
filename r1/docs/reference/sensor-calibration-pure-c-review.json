@@ -1,0 +1,254 @@
+{
+  "normal_report": "build/sources-goal-r1-sensor-calibration-pure-c/report.json",
+  "report_sha256": "a3668218565b3ff63371e5d5cd5efb8ab6721ec0c4c8c4af53d06199db338fa5",
+  "units": [
+    {
+      "source": "r1/src/application/runtime/native_motion_stream.c",
+      "payload": "r1-application",
+      "role": "candidate",
+      "toolchain": "clang",
+      "link": true,
+      "expect": "compile",
+      "returncode": 0,
+      "argv": [
+        "/usr/bin/clang",
+        "--target=arm-none-eabi",
+        "-mcpu=cortex-m4",
+        "-mthumb",
+        "-munaligned-access",
+        "-mfpu=fpv4-sp-d16",
+        "-mfloat-abi=hard",
+        "-std=c11",
+        "-Os",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-fshort-enums",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-fno-delete-null-pointer-checks",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/r1/src/vendor",
+        "-isystem",
+        "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
+        "-MD",
+        "-MF",
+        "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-sensor-calibration-pure-c/r1/r1-application/r1__src__application__runtime__native_motion_stream.c.d",
+        "-c",
+        "/Users/kalani/Repo/evenRealities-openCFW/r1/src/application/runtime/native_motion_stream.c",
+        "-o",
+        "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-sensor-calibration-pure-c/r1/r1-application/r1__src__application__runtime__native_motion_stream.c.o"
+      ],
+      "source_sha256": "9e180f3938e66ec5bbceb24470b1a2477866bcf4e4c98a9f2ab5ee3a626658be",
+      "object_sha256": "245933ac91872afd6ccddaf40076442dd7af96bdec36e1b0bebfe9c4fe2054f2",
+      "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-sensor-calibration-pure-c/r1/r1-application/r1__src__application__runtime__native_motion_stream.c.o",
+      "strong": [
+        "r1_motion_adjust_samples",
+        "r1_motion_calibration_body",
+        "r1_motion_calibration_bypass",
+        "r1_motion_calibration_bypassed",
+        "r1_motion_calibration_read",
+        "r1_motion_initialize_entry",
+        "r1_motion_interrupt_result",
+        "r1_motion_selected_fifo_read",
+        "r1_motion_selected_provider",
+        "r1_motion_selected_provider_initialize",
+        "r1_motion_stream_close_boundary",
+        "r1_motion_thirty_sample_batch_producer",
+        "r1_native_motion_interrupt"
+      ],
+      "weak": [],
+      "undefined": [
+        "r1_device_info_kv_handle",
+        "r1_kv_class_read",
+        "r1_motion_probe_and_select_provider",
+        "r1_stream_tick_now"
+      ]
+    },
+    {
+      "source": "r1/src/application/runtime/native_temperature.c",
+      "payload": "r1-application",
+      "role": "candidate",
+      "toolchain": "clang",
+      "link": true,
+      "expect": "compile",
+      "returncode": 0,
+      "argv": [
+        "/usr/bin/clang",
+        "--target=arm-none-eabi",
+        "-mcpu=cortex-m4",
+        "-mthumb",
+        "-munaligned-access",
+        "-mfloat-abi=hard",
+        "-mfpu=fpv4-sp-d16",
+        "-std=c11",
+        "-Os",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-fshort-enums",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-MD",
+        "-MF",
+        "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-sensor-calibration-pure-c/r1/r1-application/r1__src__application__runtime__native_temperature.c.d",
+        "-c",
+        "/Users/kalani/Repo/evenRealities-openCFW/r1/src/application/runtime/native_temperature.c",
+        "-o",
+        "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-sensor-calibration-pure-c/r1/r1-application/r1__src__application__runtime__native_temperature.c.o"
+      ],
+      "source_sha256": "d489081388e498bd20bb011520595aa90c091c681fd4f55d7dbef3b448396472",
+      "object_sha256": "44c53d91697205474f165d7988f474cb0e7a1240bdc235a4ecfef53d0d6aeca2",
+      "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-sensor-calibration-pure-c/r1/r1-application/r1__src__application__runtime__native_temperature.c.o",
+      "strong": [
+        "r1_gxt310_one_shot",
+        "r1_gxt310_one_shot_body",
+        "r1_gxt310_one_shot_channel0",
+        "r1_gxt310_one_shot_channel2",
+        "r1_gxt310_temperature_channel0",
+        "r1_gxt310_temperature_channel2",
+        "r1_gxt310_temperature_read",
+        "r1_gxt310_temperature_read_body",
+        "r1_temp_text_6f798",
+        "r1_temp_text_6f7d4",
+        "r1_temperature_calibration",
+        "r1_temperature_calibration_read",
+        "r1_temperature_calibration_read_body",
+        "r1_temperature_pair_read_calibrated"
+      ],
+      "weak": [],
+      "undefined": [
+        "nrf_log_frontend_std_1",
+        "osDelay",
+        "r1_device_info_kv_handle",
+        "r1_gxt310_bus_acquire",
+        "r1_gxt310_bus_release",
+        "r1_gxt310_disable_pair_native",
+        "r1_gxt310_enable_pair_native",
+        "r1_gxt310_transfer_read_native",
+        "r1_gxt310_transfer_write_native",
+        "r1_kv_class_read",
+        "r1_structured_log_format",
+        "r1_structured_log_mode_get"
+      ]
+    }
+  ],
+  "rea": [
+    {
+      "evidence_id": "ev_c9f38423e4a284f7660d6cae1a72cc82f47185eef217f5c13802164fde6c87c8",
+      "subject": {
+        "name": "stock.elf",
+        "digest": {
+          "sha256": "25b4a29af80ec8edab5bd861ba9b74a6e22eab29dc3d7a809a16869e8a140f04"
+        },
+        "local_path": "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-queue-reset-c/stock.elf",
+        "format": "elf",
+        "architecture": "arm"
+      },
+      "assembly": [
+        "0x7b9c8: push {r4,lr}",
+        "0x7b9ca: mov r4, r0",
+        "0x7b9cc: ldr r0, [0x0007b9e8]",
+        "0x7b9ce: sub sp, #0x80",
+        "0x7b9d0: movs r2, #0x7c",
+        "0x7b9d2: mov r1, sp",
+        "0x7b9d4: ldr r0, [r0,#0x4]",
+        "0x7b9d6: bl 0x00073930",
+        "0x7b9da: ldr r0, [sp,#0x44]",
+        "0x7b9dc: str r0, [r4,#0x0]",
+        "0x7b9de: ldrh.w r0, [sp,#0x48]",
+        "0x7b9e2: strh r0, [r4,#0x4]",
+        "0x7b9e4: add sp, #0x80",
+        "0x7b9e6: pop {r4,pc}"
+      ],
+      "pseudocode": "\n/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */\n\nvoid FUN_0007b9c8(undefined4 *param_1)\n\n{\n  undefined1 auStack_88 [68];\n  undefined4 local_44;\n  undefined2 local_40;\n  \n  FUN_00073930(_DAT_20007dfc,auStack_88,0x7c);\n  *param_1 = local_44;\n  *(undefined2 *)(param_1 + 1) = local_40;\n  return;\n}\n\n"
+    },
+    {
+      "evidence_id": "ev_c07b4ab69614eb1695775918cd175eb6def1c3558f758b875e1e5620f2f9136e",
+      "subject": {
+        "name": "stock.elf",
+        "digest": {
+          "sha256": "25b4a29af80ec8edab5bd861ba9b74a6e22eab29dc3d7a809a16869e8a140f04"
+        },
+        "local_path": "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-queue-reset-c/stock.elf",
+        "format": "elf",
+        "architecture": "arm"
+      },
+      "assembly": [
+        "0x7badc: push {r4,lr}",
+        "0x7bade: mov r4, r0",
+        "0x7bae0: ldr r0, [0x0007bb00]",
+        "0x7bae2: sub sp, #0x80",
+        "0x7bae4: movs r2, #0x7c",
+        "0x7bae6: mov r1, sp",
+        "0x7bae8: ldr r0, [r0,#0x4]",
+        "0x7baea: bl 0x00073930",
+        "0x7baee: ldr.w r0, [sp,#0x3e]",
+        "0x7baf2: str r0, [r4,#0x0]",
+        "0x7baf4: ldrh.w r0, [sp,#0x42]",
+        "0x7baf8: strh r0, [r4,#0x4]",
+        "0x7bafa: add sp, #0x80",
+        "0x7bafc: pop {r4,pc}"
+      ],
+      "pseudocode": "\n/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */\n\nvoid FUN_0007badc(undefined4 *param_1)\n\n{\n  undefined1 auStack_88 [62];\n  undefined4 local_4a;\n  undefined2 local_46;\n  \n  FUN_00073930(_DAT_20007dfc,auStack_88,0x7c);\n  *param_1 = local_4a;\n  *(undefined2 *)(param_1 + 1) = local_46;\n  return;\n}\n\n"
+    }
+  ],
+  "direct": {
+    "cases": 4096,
+    "counts": {
+      "temperature": 2048,
+      "motion": 2048
+    },
+    "digest": "8845af83d9ea38ed190f6f80a470bcf7d8c0dcd6defaf64abb41706fb5f915be",
+    "actual_C_cache_and_memcpy": true,
+    "limits": [
+      "Valid fully populated 124-byte class; failed/partial reads excluded",
+      "Port callbacks modeled; private stack aliases excluded",
+      "No complete firmware, persistence or physical sensor proof"
+    ]
+  },
+  "negative": {
+    "wrong-temperature-field": {
+      "rejected": true,
+      "diagnostic": "Traceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-sensor-calibration-pure-c/verify.py\", line 58, in <module>\n    case=(kind,seed,mutation,out);left=a(*case);right=b(*case);assert left==right,(case,left,right);counts[kind]=counts.get(kind,0)+1;digest.update(json.dumps([case,left]).encode())\n                                                      ~^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-sensor-calibration-pure-c/verify.py\", line 53, in run\n    expected=state['snapshot'][offset:offset+6];assert bytes(v.mem_read(out,6))==expected;assert v.reg_read(UC_ARM_REG_R0)==int.from_bytes(expected[4:6],'little');assert state['calls']==[('read',NODE1,124)];assert [x[:2] for x in state['stores']]==[(0,4),(4,2)]\n                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    "wrong-motion-tail": {
+      "rejected": true,
+      "diagnostic": "Traceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-sensor-calibration-pure-c/verify.py\", line 58, in <module>\n    case=(kind,seed,mutation,out);left=a(*case);right=b(*case);assert left==right,(case,left,right);counts[kind]=counts.get(kind,0)+1;digest.update(json.dumps([case,left]).encode())\n                                                      ~^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-sensor-calibration-pure-c/verify.py\", line 53, in run\n    expected=state['snapshot'][offset:offset+6];assert bytes(v.mem_read(out,6))==expected;assert v.reg_read(UC_ARM_REG_R0)==int.from_bytes(expected[4:6],'little');assert state['calls']==[('read',NODE1,124)];assert [x[:2] for x in state['stores']]==[(0,4),(4,2)]\n                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    "wrong-packed-tail-store": {
+      "rejected": true,
+      "diagnostic": "Traceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-sensor-calibration-pure-c/verify.py\", line 58, in <module>\n    case=(kind,seed,mutation,out);left=a(*case);right=b(*case);assert left==right,(case,left,right);counts[kind]=counts.get(kind,0)+1;digest.update(json.dumps([case,left]).encode())\n                                                      ~^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-sensor-calibration-pure-c/verify.py\", line 53, in run\n    expected=state['snapshot'][offset:offset+6];assert bytes(v.mem_read(out,6))==expected;assert v.reg_read(UC_ARM_REG_R0)==int.from_bytes(expected[4:6],'little');assert state['calls']==[('read',NODE1,124)];assert [x[:2] for x in state['stores']]==[(0,4),(4,2)]\n                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    "wrong-record-size": {
+      "rejected": true,
+      "diagnostic": " in saved]==list(range(0x44444440,0x44444448));assert v.reg_read(UC_ARM_REG_BASEPRI)==64 and v.reg_read(UC_ARM_REG_PRIMASK)==1 and state['depth']==0\n    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 769, in emu_start\n    raise self._hook_exception\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 363, in wrapper\n    return func(uc, *args, **kwargs)\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/rea-iom-hardware/venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py\", line 1063, in __hook_code_cb\n    callback(uc, address, size, user_data)\n    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-sensor-calibration-pure-c/verify.py\", line 41, in code\n    h,buf,n=[v.reg_read(rr) for rr in regs[:3]];assert h==NODE1 and n==124;state['calls'].append(('read',h,n))\n                                                       ^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    }
+  },
+  "audit": {
+    "changed": [
+      "r1/src/application/runtime/native_motion_stream.c",
+      "r1/src/application/runtime/native_temperature.c"
+    ],
+    "changed_functions": {
+      "r1/src/application/runtime/native_motion_stream.c": [
+        ".text.r1_motion_calibration_read"
+      ],
+      "r1/src/application/runtime/native_temperature.c": [
+        ".text.r1_temperature_calibration_read"
+      ]
+    },
+    "unchanged_objects": 729,
+    "other_instructions_relocations_and_data_unchanged": true,
+    "exports_imports_unchanged": true
+  },
+  "harness_sha256": "1d4306c80cb3ddb173f83d6a982f6c16f757e597ad2362736e670ec733f7c330",
+  "limits": [
+    "Valid fully populated 124-byte nv_r1 class required; failed/partial read and private stack aliases not reconstructed",
+    "Actual C cache/memcpy; modeled critical callbacks",
+    "No persistence, full calibration consumer/device execution or complete firmware proof"
+  ]
+}

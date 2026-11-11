@@ -1,0 +1,341 @@
+{
+  "schema": 1,
+  "scope": "Replace native clock-update adapter executable assembly with C preserving exposed stack frame and provider register state",
+  "native": {
+    "entry": "0x8aeb0",
+    "code_bytes": 136,
+    "literal_bytes": 8,
+    "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a"
+  },
+  "REA": {
+    "evidence_id": "ev_d29707faec8bc0f6069288a15361bbfed4c0480340bcacb40f919c105786353a",
+    "subject": {
+      "name": "stock.elf",
+      "digest": {
+        "sha256": "25b4a29af80ec8edab5bd861ba9b74a6e22eab29dc3d7a809a16869e8a140f04"
+      },
+      "local_path": "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-queue-reset-c/stock.elf",
+      "format": "elf",
+      "architecture": "arm"
+    },
+    "provider": {
+      "id": "ghidra",
+      "name": "Ghidra",
+      "version": "12.1.4"
+    },
+    "analysis_profile": {
+      "provider": {
+        "id": "ghidra",
+        "name": "Ghidra",
+        "version": "12.1.4"
+      },
+      "parameters": {
+        "target_kind": "executable",
+        "target_format": "elf",
+        "architecture": "arm",
+        "available_architectures": [
+          "arm"
+        ],
+        "import_mode": "ephemeral-source-immutable",
+        "annotation_policy": "atomic-function-entry-metadata-v1",
+        "load_image_observations": "source-mappings-entry-context-v2",
+        "function_body_evidence": "complete-inclusive-ranges-v1",
+        "function_references": "complete-body-and-entry-reference-manager-v2",
+        "call_relationship_coverage": "function-body-call-coverage-v5",
+        "function_dossier_coverage": "observed-facets-and-call-relationships-v1",
+        "string_inventory_evidence": "defined-data-coverage-v1",
+        "location_resolution": "explicit-address-exact-entry-symbol-first-v3",
+        "procedure_file_offset_resolution": "address-first-unique-target-source-mapping-v2",
+        "instruction_flow_evidence": "decoded-return-pcode-v1",
+        "instruction_references": "exact-address-incoming-v1",
+        "function_boundary_observations": "ghidra-function-boundary-limitations-v3",
+        "no_return_repair": "returning-imports-decoded-return-v2",
+        "process_launch": "inspected-jvm-launch-support-v1",
+        "jump_table_evidence": "typed-case-default-blocks-v1",
+        "decompiler_jump_loads": true,
+        "loader": "auto-from-header",
+        "language_id": "auto-from-header",
+        "compiler_spec_id": "auto-default",
+        "analyzer_preset": "ghidra-default"
+      },
+      "digest": "7e46711069eea041af1b9b99e34115c13332795e5cda76e584a722f529ec70de"
+    },
+    "predicate_type": "rea.analysis",
+    "operation": "read_bytes",
+    "parameters": {
+      "address": "0x8aeb0",
+      "length": 144
+    },
+    "raw_result": {
+      "address": "0x8aeb0",
+      "requested_bytes": 144,
+      "returned_bytes": 144,
+      "bytes_hex": "2de9f047204d824686b0a87a0c46002834d0694601a8cff763fd00282ed0019e7eb3306968b3b5f9081005f10c008146a14203d02c8114219cf75ffcdff84c80002598f8000090f0010704d0b16811b100988847054601982146009a036950469847040009d0142148469cf746fc27b10121c8f8045088f80010204606b0bde8f087ffe70020f9e7c46a012020680020",
+      "complete": true
+    },
+    "normalized_result": {
+      "address": "0x8aeb0",
+      "requested_bytes": 144,
+      "returned_bytes": 144,
+      "bytes_hex": "2de9f047204d824686b0a87a0c46002834d0694601a8cff763fd00282ed0019e7eb3306968b3b5f9081005f10c008146a14203d02c8114219cf75ffcdff84c80002598f8000090f0010704d0b16811b100988847054601982146009a036950469847040009d0142148469cf746fc27b10121c8f8045088f80010204606b0bde8f087ffe70020f9e7c46a012020680020",
+      "complete": true
+    },
+    "confidence": "observed",
+    "authority": "shipped-artifact",
+    "environment": null,
+    "limitations": [
+      "The session serves operations only after Ghidra reports default auto-analysis complete; incomplete analysis does not expose partial results.",
+      "The imported Program and temporary project are ephemeral and deleted on close. Annotation operations edit session database metadata; original executable bytes are never written.",
+      "Cancelling an active Ghidra request terminates its ephemeral database and discards session annotations. The selected target remains open; the next provider query imports the original artifact again.",
+      "Default-space addresses use lowercase 0x-prefixed hexadecimal; other address spaces use <percent-encoded-space>:0x<hex>.",
+      "Bytes reflect Ghidra's initialized memory, including loader fixups. Reads stop at an unmapped or uninitialized byte and report completeness explicitly.",
+      "macOS sessions require a matching executable Ghidra native decompiler; REA checks for it but does not build native components or change Gatekeeper quarantine state."
+    ],
+    "relationship_coverage": null,
+    "locations": [],
+    "evidence_links": []
+  },
+  "normal_build": {
+    "report": "build/sources-goal-r1-time-update-c-final/report.json",
+    "unit": {
+      "source": "r1/src/application/runtime/native_time_update.c",
+      "payload": "r1-application",
+      "role": "candidate",
+      "toolchain": "clang",
+      "link": true,
+      "expect": "compile",
+      "returncode": 0,
+      "argv": [
+        "/usr/bin/clang",
+        "--target=arm-none-eabi",
+        "-mcpu=cortex-m4",
+        "-mthumb",
+        "-munaligned-access",
+        "-mfpu=fpv4-sp-d16",
+        "-mfloat-abi=hard",
+        "-std=c11",
+        "-Os",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-fshort-enums",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-fno-delete-null-pointer-checks",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/r1/src/vendor",
+        "-isystem",
+        "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
+        "-MD",
+        "-MF",
+        "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-time-update-c-final/r1/r1-application/r1__src__application__runtime__native_time_update.c.d",
+        "-c",
+        "/Users/kalani/Repo/evenRealities-openCFW/r1/src/application/runtime/native_time_update.c",
+        "-o",
+        "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-time-update-c-final/r1/r1-application/r1__src__application__runtime__native_time_update.c.o"
+      ],
+      "source_sha256": "4cf861baf635f1ab70cd7f1880207b039cc9ffee9c274b234dc018c2aceafaca",
+      "object_sha256": "2f3ea51b03e111bdc67e053afc315f83be0a13ea0913235ce91f3c7422481288",
+      "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-time-update-c-final/r1/r1-application/r1__src__application__runtime__native_time_update.c.o",
+      "strong": [
+        "r1_event_service_0008aea4",
+        "r1_event_service_0008aeb0"
+      ],
+      "weak": [],
+      "undefined": [
+        "__aeabi_memclr",
+        "r1_clock_backend_snapshot",
+        "r1_time_registration",
+        "r1_time_state"
+      ]
+    }
+  },
+  "validation": {
+    "Clang_modeled_clear": {
+      "paired_cases": 9552,
+      "executions": 19104,
+      "base_cases": 9216,
+      "callback_mutation_cases": 336,
+      "matched_faults": 32,
+      "checks": [
+        "actual stock parent versus C parent with actual C snapshot helper",
+        "backend get/update arguments, callback order, cache clears and raw pending flags",
+        "shared registration and clock state, status, final saved registers, SP and masks",
+        "R4-R11 values and 56-byte stack frame at each modeled provider call",
+        "get callback replaces/nulls exposed ops or context, mutates pending/cache; update mutates sync state",
+        "native null-ops fault address/width after get callback mutation"
+      ],
+      "limits": [
+        "Backend callbacks and memclr modeled; caller-clobbered registers/flags and private saved-register aliases excluded",
+        "Only exposed context/ops slots are callback-mutated; no arbitrary private stack alias, concurrency or physical hardware proof"
+      ]
+    },
+    "GCC_modeled_clear": {
+      "paired_cases": 9552,
+      "executions": 19104,
+      "base_cases": 9216,
+      "callback_mutation_cases": 336,
+      "matched_faults": 32,
+      "checks": [
+        "actual stock parent versus C parent with actual C snapshot helper",
+        "backend get/update arguments, callback order, cache clears and raw pending flags",
+        "shared registration and clock state, status, final saved registers, SP and masks",
+        "R4-R11 values and 56-byte stack frame at each modeled provider call",
+        "get callback replaces/nulls exposed ops or context, mutates pending/cache; update mutates sync state",
+        "native null-ops fault address/width after get callback mutation"
+      ],
+      "limits": [
+        "Backend callbacks and memclr modeled; caller-clobbered registers/flags and private saved-register aliases excluded",
+        "Only exposed context/ops slots are callback-mutated; no arbitrary private stack alias, concurrency or physical hardware proof"
+      ]
+    },
+    "Clang_actual_clear": {
+      "paired_cases": 9552,
+      "executions": 19104,
+      "base_cases": 9216,
+      "callback_mutation_cases": 336,
+      "matched_faults": 32,
+      "checks": [
+        "actual stock parent versus C parent with actual C snapshot helper",
+        "backend get/update arguments, callback order, cache clears and raw pending flags",
+        "shared registration and clock state, status, final saved registers, SP and masks",
+        "R4-R11 values and 56-byte stack frame at each modeled provider call",
+        "get callback replaces/nulls exposed ops or context, mutates pending/cache; update mutates sync state",
+        "native null-ops fault address/width after get callback mutation"
+      ],
+      "limits": [
+        "Backend callbacks modeled; actual native/C memclr execute; caller-clobbered registers/flags and private saved-register aliases excluded",
+        "Only exposed context/ops slots are callback-mutated; no arbitrary private stack alias, concurrency or physical hardware proof"
+      ]
+    },
+    "GCC_actual_clear": {
+      "paired_cases": 9552,
+      "executions": 19104,
+      "base_cases": 9216,
+      "callback_mutation_cases": 336,
+      "matched_faults": 32,
+      "checks": [
+        "actual stock parent versus C parent with actual C snapshot helper",
+        "backend get/update arguments, callback order, cache clears and raw pending flags",
+        "shared registration and clock state, status, final saved registers, SP and masks",
+        "R4-R11 values and 56-byte stack frame at each modeled provider call",
+        "get callback replaces/nulls exposed ops or context, mutates pending/cache; update mutates sync state",
+        "native null-ops fault address/width after get callback mutation"
+      ],
+      "limits": [
+        "Backend callbacks modeled; actual native/C memclr execute; caller-clobbered registers/flags and private saved-register aliases excluded",
+        "Only exposed context/ops slots are callback-mutated; no arbitrary private stack alias, concurrency or physical hardware proof"
+      ]
+    }
+  },
+  "existing_setter_revalidation": {
+    "paired_cases": 4096,
+    "executions": 8192,
+    "checks": [
+      "all 256 old flag bytes and neighboring memory patterns",
+      "exactly one byte write at state+11, no stack writes",
+      "all R0-R12, APSR, LR, SP and interrupt masks equal to native",
+      "incoming caller registers vary with memory seed"
+    ],
+    "limitations": [
+      "No concurrency, arbitrary faults or physical device proof; full exact-byte qualification is separate"
+    ]
+  },
+  "negative_controls": [
+    {
+      "mutation": "wrong-frame",
+      "rejected": true,
+      "evidence": "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-time-update-c/wrong-frame/rejection.log"
+    },
+    {
+      "mutation": "boolean-pending",
+      "rejected": true,
+      "evidence": "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-time-update-c/boolean-pending/rejection.log"
+    },
+    {
+      "mutation": "stale-backend",
+      "rejected": true,
+      "evidence": "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-time-update-c/stale-backend/rejection.log"
+    },
+    {
+      "mutation": "missing-R11-binding",
+      "rejected": true,
+      "evidence": "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-time-update-c/missing-R11-binding/rejection.log"
+    },
+    {
+      "mutation": "truncated-offset-compare",
+      "rejected": true,
+      "evidence": "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-time-update-c/truncated-offset-compare/rejection.log"
+    }
+  ],
+  "gcc_policy_negative_control": {
+    "mutation": "remove volatile cached pending copy",
+    "compiler": "GCC9",
+    "rejected": true,
+    "evidence": "/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-time-update-c/gcc-policy-negative/rejection.log"
+  },
+  "GCC_counterexample": {
+    "evidence": "build/goal-r1-time-update-c/gcc-policy-counterexample.log",
+    "issue": "Without an explicit volatile cached pending copy the GCC candidate writes sync fields when cached raw flag equals 1; update callback mutation exposed the difference.",
+    "repair": "Keep the raw XOR decision in the existing scratch union and reload it for final publication.",
+    "fixture_strengthening": "Seed the pre-update timestamp nonzero so accidental unconditional publication is detected without requiring callback mutation.",
+    "final_both_compilers_pass": true
+  },
+  "audit": {
+    "units": 576,
+    "other_objects_unchanged": 575,
+    "changed_unit": "r1/src/application/runtime/native_time_update.c",
+    "pending_setter_code_and_relocations_unchanged": true,
+    "strong_symbol_sets_unchanged": true,
+    "application_imports": 164,
+    "bootloader_imports": 34,
+    "runtime_profile_changed_for_C_and_unaligned_SRAM": true,
+    "other_manifest_fields_unchanged": true,
+    "shared_header_only_makes_include_self_contained": true,
+    "bootstrap_remains_compile_only": true,
+    "new_executable_assembly_instructions": 0,
+    "all_remaining_inline_assembly_is_empty_register_constraints": true
+  },
+  "qualification": {
+    "generic": {
+      "report": "build/goal-r1-time-update-c/qualified-generic-final/qualification.json",
+      "compiled": 15,
+      "selected_symbols": [
+        "r1_event_service_0008aea4"
+      ],
+      "new_regions": 0
+    },
+    "gcc": {
+      "report": "build/goal-r1-time-update-c/qualified-gcc-final/qualification.json",
+      "compiled": 9,
+      "selected_symbols": [],
+      "new_regions": 0
+    }
+  },
+  "canonical_hybrid": {
+    "report": "build/hybrid-goal-r1-time-update-c-final/build-report.json",
+    "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "source_plan_unchanged": true,
+    "source_built_bytes_including_assembly_and_data": 4035,
+    "binary_fallback_bytes": 642125,
+    "resource_bytes": 248,
+    "source_completeness_proven": false
+  },
+  "probe_hashes": {
+    "build/goal-r1-time-update-c/verify.py": "fdc69cd4e8a8dff326c6be138c3a29086c8e692c800926a23f4f1b99faec54ff",
+    "build/goal-r1-time-update-c/negative.py": "3bb29f0d94d7981bcb28c2769a52528348bc02e93e46cea55d1b5a3064c80451",
+    "build/goal-r1-time-update-c/gcc_policy_negative.py": "6081f92231cafe988202f714dde23343303cffc286297ce746d9a6a1f71fd804",
+    "build/goal-r1-time-update-c/audit.py": "f5a098647128d8fd5201dd1ff8f604a24c8ba5d1ff42afe11bbe94aef471c491",
+    "build/goal-r1-time-update-c/rea.json": "3cf1e204c33fe92cb6b7af2b1763e1de418ae817a6af68a83a57be8b23a4dc45",
+    "build/goal-r1-time-update-c/all-live16.c": "e5bd98567642a8effa9eb5dd94e785c163394b9a6813ececc0e7a026d50375c4"
+  },
+  "limitations": [
+    "Clang and GCC parent objects tested; snapshot/bind and EABI/musl clear helper objects are normal Clang shared providers.",
+    "Backend get/update operations modeled; actual-clear mode executes native and source clear implementations.",
+    "Only exposed context/ops slots are callback-mutated; private saved-register/padding aliases and arbitrary backend faults excluded except the matched null-ops fault.",
+    "R4-R11 provider state and final saved registers verified; raw caller-clobbered registers/flags excluded except returned status.",
+    "Empty fixed-register compiler constraints remain but emit no firmware instructions.",
+    "No parent byte identity, new exact regions, full source firmware, concurrency or physical RTC proof. Bootstrap remains compile-only."
+  ]
+}

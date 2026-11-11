@@ -1,4 +1,22 @@
-/* Native calendar frames; symbolic instructions and typed literals only. */
-__attribute__((naked,section(".text.r1_event_service_000838e0"))) void r1_event_service_000838e0(void) { __asm__ volatile("NCF_838e0:\npush\t{r0, r1, r2, r3, r4, r5, r6, lr}\nNCF_838e2:\nbl r1_charge_state_byte_get\nNCF_838e6:\nmov\tr5, r0\nNCF_838e8:\nbl r1_charge_state_is_active\nNCF_838ec:\nmov\tr4, r0\nNCF_838ee:\nbl r1_charge_state_is_full\nNCF_838f2:\nldr r2, NCF_8392c\nNCF_838f4:\nldrd\tr1, r2, [r2]\nNCF_838f8:\nstrd\tr1, r2, [sp, #8]\nNCF_838fc:\nstrb.w\tr5, [sp, #8]\nNCF_83900:\ncbz r0, NCF_83906\nNCF_83902:\nmovs\tr0, #3\nNCF_83904:\nb.n NCF_8390e\nNCF_83906:\ncbz r4, NCF_8390c\nNCF_83908:\nmovs\tr0, #1\nNCF_8390a:\nb.n NCF_8390e\nNCF_8390c:\nmovs\tr0, #2\nNCF_8390e:\nstrb.w\tr0, [sp, #9]\nNCF_83912:\nbl r1_phone_connection_handle_get\nNCF_83916:\nmovs\tr2, #7\nNCF_83918:\nadd\tr1, sp, #8\nNCF_8391a:\nstrd\tr1, r2, [sp]\nNCF_8391e:\nmovs\tr3, #0\nNCF_83920:\nmovs\tr2, #1\nNCF_83922:\nmovs\tr1, #127\nNCF_83924:\nbl r1_protocol_response_send_0x100\nNCF_83928:\nadd\tsp, #16\nNCF_8392a:\npop\t{r4, r5, r6, pc}\nNCF_8392c:\n.word r1_charge_notification_template\n"); }
 #include <stdint.h>
-const uint32_t r1_charge_notification_template[2] __attribute__((section(".r1.charge.notification.template"),aligned(4)))={0x10200,0};
+extern uint32_t r1_charge_state_byte_get(void);
+extern uint32_t r1_charge_state_is_active(void),r1_charge_state_is_full(void);
+extern uint32_t r1_phone_connection_handle_get(void);
+extern uint32_t r1_protocol_response_send_0x100(uint32_t,uint32_t,uint32_t,uint32_t,const void *,uint32_t);
+const uint32_t r1_charge_notification_template[2]
+ __attribute__((section(".r1.charge.notification.template"),aligned(4)))={0x10200,0};
+/* Stock 0x838e0 initializes both packet words before publishing seven bytes.
+ * Keep separate hardware queries: the charger can change between them. */
+__attribute__((section(".text.r1_event_service_000838e0")))
+void r1_event_service_000838e0(void)
+{
+ uint32_t charge=r1_charge_state_byte_get();
+ uint32_t active=r1_charge_state_is_active();
+ uint32_t full=r1_charge_state_is_full();
+ const volatile uint32_t *initial=r1_charge_notification_template;
+ volatile uint32_t packet[2];packet[0]=initial[0];packet[1]=initial[1];
+ volatile uint8_t *bytes=(volatile uint8_t *)packet;
+ bytes[0]=(uint8_t)charge;bytes[1]=full?3:active?1:2;
+ uint32_t handle=r1_phone_connection_handle_get();
+ (void)r1_protocol_response_send_0x100(handle,127,1,0,(const void *)(uintptr_t)packet,7);
+}

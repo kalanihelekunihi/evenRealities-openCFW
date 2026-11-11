@@ -15,7 +15,7 @@ extern uint32_t audio_uart_page_44104c(uint32_t);
 extern void audio_uart_page_44127e(uint32_t, uint32_t, uint32_t);
 extern void audio_uart_page_44129e(uint32_t, uint32_t, uint32_t);
 extern void audio_uart_page_4412ec(uint32_t, uint32_t, uint32_t);
-extern void audio_uart_page_44131c(uint32_t, uint32_t, uint32_t);
+extern void lv_obj_set_style_border_width(uint32_t, uint32_t, uint32_t);
 extern uint32_t audio_uart_page_441068(uint32_t, uint32_t, uint32_t);
 extern uint32_t audio_uart_registry_context_200030a0[];
 
@@ -43,7 +43,7 @@ uint64_t audio_uart_registry_callback_5cf7f2(uint32_t event,
                 audio_uart_page_43f4c0(tile, 10u, 10u);
                 audio_uart_page_44127e(tile,
                                        audio_uart_page_441068(0xffu, 0xffu, 0xffu), 0u);
-                audio_uart_page_44131c(tile, 0u, 0u);
+                lv_obj_set_style_border_width(tile, 0u, 0u);
                 audio_uart_page_43f09a(tile, (int32_t)(column * 200u + 0x42u),
                                        (int32_t)(row * 100u + 0x15u));
             }

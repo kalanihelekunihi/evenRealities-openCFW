@@ -1,0 +1,262 @@
+{
+  "stock_entry": "0x68840",
+  "source_unit": {
+    "source": "r1/src/application/runtime/native_gomore_feature_reduce.c",
+    "payload": "r1-application",
+    "role": "candidate",
+    "toolchain": "gcc9",
+    "link": true,
+    "expect": "compile",
+    "returncode": 0,
+    "argv": [
+      "/opt/homebrew/bin/python3",
+      "/Users/kalani/Repo/evenRealities-openCFW/tools/build/linux_gcc.py",
+      "--compiler",
+      "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/bin/arm-none-eabi-gcc",
+      "--read-root",
+      "/Users/kalani/Repo/evenRealities-openCFW/r1",
+      "--read-root",
+      "/Users/kalani/Repo/evenRealities-openCFW/third-party/upstream",
+      "--read-root",
+      "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1",
+      "--read-root",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-feature-reduce-final-c/generated/r1",
+      "--",
+      "-mcpu=cortex-m4",
+      "-mthumb",
+      "-munaligned-access",
+      "-mfpu=fpv4-sp-d16",
+      "-mfloat-abi=hard",
+      "-std=c11",
+      "-Os",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-fshort-enums",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-fno-delete-null-pointer-checks",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/r1/src/vendor",
+      "-isystem",
+      "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
+      "-fno-strict-aliasing",
+      "-ffp-contract=off",
+      "-fsignaling-nans",
+      "-frounding-math",
+      "-ftrapping-math",
+      "-fno-if-conversion",
+      "-fno-if-conversion2",
+      "-MD",
+      "-MF",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-feature-reduce-final-c/r1/r1-application/r1__src__application__runtime__native_gomore_feature_reduce.c.d",
+      "-c",
+      "/Users/kalani/Repo/evenRealities-openCFW/r1/src/application/runtime/native_gomore_feature_reduce.c",
+      "-o",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-feature-reduce-final-c/r1/r1-application/r1__src__application__runtime__native_gomore_feature_reduce.c.o"
+    ],
+    "source_sha256": "abf6daffd8bb0bf2bc3ee7193d84fc27c7b004f6658d16a79ad65f41c80fcb9c",
+    "object_sha256": "5fa7faee3a97b1fc612c5cfca2d33459cd54676b09db362490406b7cd5e1f317",
+    "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-feature-reduce-final-c/r1/r1-application/r1__src__application__runtime__native_gomore_feature_reduce.c.o",
+    "strong": [
+      "r1_gomore_locomotion_feature_reduce_native"
+    ],
+    "weak": [],
+    "undefined": [
+      "r1_binary32_to_binary64_bits",
+      "r1_format_double_add_bits",
+      "r1_format_double_divide_bits",
+      "r1_format_double_multiply_bits",
+      "r1_gomore_bounded_linear_complement_native",
+      "r1_gomore_deviation_native",
+      "r1_gomore_extrema_native",
+      "r1_gomore_mean_native",
+      "r1_gomore_sleep_iir2_filter_native",
+      "r1_gomore_sort_float_subrange_native",
+      "r1_gomore_sorted_percentile_native",
+      "r1_log_double_to_float_bits",
+      "r1_native_pow",
+      "r1_native_sqrt",
+      "r1_signed32_to_binary64_bits"
+    ]
+  },
+  "direct": {
+    "pairs": 90,
+    "targeted_fallback_vectors": 0,
+    "fault_pairs": 6,
+    "incoming_argument_aliases": 4,
+    "provider_counts": {
+      "stock": {
+        "0x62000": 327,
+        "0x6208c": 163,
+        "0x64274": 99,
+        "0x647c4": 99,
+        "0x87600": 384,
+        "0x7ed30": 192,
+        "0x58a40": 4379,
+        "0x399d0": 415,
+        "0x3af94": 61,
+        "0x56c54": 61
+      },
+      "C": {
+        "0x62000": 327,
+        "0x6208c": 163,
+        "0x64274": 99,
+        "0x647c4": 99,
+        "0x87600": 384,
+        "0x7ed30": 192,
+        "0x58a40": 4379,
+        "0x399d0": 415,
+        "0x3af94": 61,
+        "0x56c54": 61
+      }
+    },
+    "extrema_stack_depths": {
+      "stock": [
+        96
+      ],
+      "C": [
+        96
+      ]
+    }
+  },
+  "modeled": {
+    "pairs": 180,
+    "targeted_fallback_vectors": 3,
+    "fault_pairs": 0,
+    "incoming_argument_aliases": 4,
+    "provider_counts": {
+      "stock": {
+        "0x62000": 321,
+        "0x6208c": 254,
+        "0x64274": 187,
+        "0x647c4": 187,
+        "0x87600": 748,
+        "0x58a40": 38681,
+        "0x7ed30": 374,
+        "0x399d0": 171,
+        "0x3af94": 40,
+        "0x56c54": 40
+      },
+      "C": {
+        "0x62000": 321,
+        "0x6208c": 254,
+        "0x64274": 187,
+        "0x647c4": 187,
+        "0x87600": 748,
+        "0x58a40": 38681,
+        "0x7ed30": 374,
+        "0x399d0": 171,
+        "0x3af94": 40,
+        "0x56c54": 40
+      }
+    },
+    "extrema_stack_depths": {
+      "stock": [
+        96
+      ],
+      "C": [
+        96
+      ]
+    }
+  },
+  "defect_controls": [
+    {
+      "control": "wrong-normalize-zero",
+      "rejected": true
+    },
+    {
+      "control": "wrong-threshold-scale",
+      "rejected": true
+    },
+    {
+      "control": "wrong-percentile",
+      "rejected": true
+    },
+    {
+      "control": "wrong-rate-scale",
+      "rejected": true
+    },
+    {
+      "control": "wrong-fallback-bound",
+      "rejected": true
+    },
+    {
+      "control": "wrong-fallback-bank",
+      "rejected": true
+    },
+    {
+      "control": "wrong-upper",
+      "rejected": true
+    },
+    {
+      "control": "wrong-output-order",
+      "rejected": true
+    },
+    {
+      "control": "wrong-minimum-included",
+      "rejected": true
+    },
+    {
+      "control": "wrong-power",
+      "rejected": true
+    },
+    {
+      "control": "wrong-confidence-divisor",
+      "rejected": true
+    }
+  ],
+  "qualification": {
+    "candidate_units": 1,
+    "selected_units": 0,
+    "selected_regions": 0
+  },
+  "prior_objects_unchanged_excluding_checked_api_owner": 701,
+  "resolved_imports": [
+    "r1_gomore_locomotion_feature_reduce_native"
+  ],
+  "added_imports": [
+    "r1_gomore_sleep_iir2_filter_native",
+    "r1_gomore_sorted_percentile_native",
+    "r1_gomore_bounded_linear_complement_native"
+  ],
+  "outer_frame_bytes": {
+    "native": 96,
+    "C": 96
+  },
+  "extrema_counter_offsets": {
+    "minimum": 20,
+    "maximum": 24
+  },
+  "limitations": [
+    "Private helpers add nonidentical frames and private writes are excluded",
+    "Native filter, percentile, confidence, double math and soft-double providers execute in fixtures",
+    "No complete C link, whole executable identity or physical validation"
+  ],
+  "artifacts": {
+    "r1/src/application/runtime/native_gomore_feature_reduce.c": "abf6daffd8bb0bf2bc3ee7193d84fc27c7b004f6658d16a79ad65f41c80fcb9c",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-feature-reduce-final-c/r1/r1-application/r1__src__application__runtime__native_gomore_feature_reduce.c.o": "5fa7faee3a97b1fc612c5cfca2d33459cd54676b09db362490406b7cd5e1f317",
+    "build/sources-goal-r1-gomore-feature-reduce-final-c/report.json": "c4c035bd89678bcb3f03e799a2053ac57cd8cf5d558e2fb37bca648b368be54d",
+    "r1/src/sources.json": "b6c0f2cc8ed19c320a13ae3c826c88c2071f33ce23faccd6ca4d3bb568cfe58c",
+    "r1/src/application/runtime/native_gomore_control_extract.c": "2096e12267c988cb8e8974d569bde3744d0654882f1f812f855d112593904865",
+    "r1/src/vendor/gomore_primitives/gomore_primitives.c": "d178d7b6bf8ded0b388f1c11bcfca71f448db60847c2ce2c0a6b8adef2afd2d8",
+    "r1/src/vendor/gomore_primitives/gomore_primitives.h": "b624fd47c4d77c262297f280ab1b0c3d02098484b0d179768d073b19f2a23739",
+    "r1/symbols/function-frontier.csv": "3b2087fd011637b9b0676a2d74f98b8a7ea738cd1c336eea28890c3c254ead41",
+    "tools/build/source-plan.json": "43281e3850f6c7b83c5616e5968c4939993501810057ca3deaeea85eaae351ba",
+    "build/goal-r1-gomore-feature-reduce-c/instructions.json": "a2f250bf8dafaad0f5843541743d514885eac8f3379bdc205f6455afd826f46d",
+    "build/goal-r1-gomore-feature-reduce-c/rea.json": "07b844402a9664bd448a28a8b1f91389aed5dc43a47bed93efb2ad2e66543c6c",
+    "build/goal-r1-gomore-feature-reduce-c/percentile-instructions.json": "edfad17600e40717ba5efe04664b857e22ffa1342fddab6f54d4b8dd39a2f5a5",
+    "build/goal-r1-gomore-feature-reduce-c/bounded-instructions.json": "6ea21c3e4c8dcc5c4d3a5c6ea87c9cafde824440ccc7116b2ea91865719fd891",
+    "build/goal-r1-gomore-feature-reduce-c/verify.py": "e21e3fa978fee9e861cf5dd61bbcaff89a61685a273dc7c63db2dab6cfcacc65",
+    "build/goal-r1-gomore-feature-reduce-c/results.json": "de40a5c78df4c4dfbd45fe0d877e66c206e7e67f59cdbec44c81a24c7c880213",
+    "build/goal-r1-gomore-feature-reduce-c/modeled-results.json": "d7a62372b70ea59002e335f01040578464d41d883c8e5157b11ba914337e6e7c",
+    "build/goal-r1-gomore-feature-reduce-c/negative.py": "5244e5da6de377a722b890a566a35ef7df20a54e2efcf385ef2ec09f9ff3f3fa",
+    "build/goal-r1-gomore-feature-reduce-c/negative.json": "0d26a049c45d7a3d227991c65a9b4fdf73b60c5287cb90869edd56cad790d18d",
+    "build/goal-r1-gomore-feature-reduce-c/integration.py": "cf6ba1e951ff0c734b2a11bb8c2ece6408c092fd9f42d98367e295440c62eb53",
+    "build/goal-r1-gomore-feature-reduce-c/integration-results.json": "eb8fea46d38647a18f8051d6078e645ae72bfb336ae651fd3031126d0a8186c4",
+    "build/goal-r1-gomore-feature-reduce-c/qualify.py": "6644814415cf25361d320b5049008e908bdc9e83c2b681d28d9b84cb20b74547",
+    "build/goal-r1-gomore-feature-reduce-c/qualified/qualification.json": "c21ebc6dbcfe7d63a594ea804766d98da6ac769c5e75e71176e4fc855c54f5b4",
+    "build/goal-r1-gomore-feature-reduce-c/qualified/source-plan.json": "3da40e3d766877c0b3059bee372f651c1f56681157782eba12ee3076f1834a0f"
+  }
+}

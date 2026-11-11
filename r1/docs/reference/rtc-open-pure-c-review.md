@@ -1,0 +1,11 @@
+# RTC open uses the ordinary C device-operation ABI
+
+`r1_native_rtc_open` now contains no fixed-register variables or empty inline assembly. The whole `native_rtc_lifecycle.c` unit is ordinary C. The live configuration union remains available for driver writes, and the normal compiler still places its eight-byte configuration at the native caller-SP-minus-24 address.
+
+This deliberately changes the scratch-register contract recorded in the earlier [RTC open review](rtc-open-c-review.md). Stock restores incoming or configuration-derived words through R2/R3. The source firmware's typed registry operation returns one `uint32_t` status, and `r1_stock_dispatch_08` consumes that result. R1/R2/R3/R12 remain caller-clobbered registers; their incidental stock values are no longer reproduced. This migration follows the functional, license-free C build target and does not claim raw ABI or byte identity.
+
+The [receipt](rtc-open-pure-c-review.json) records 1,629 stock/C paired cases: 810 direct opens, 810 opens through the actual C registry dispatcher, and nine registration cases. They vary matched/unmatched names, opened flags, initialization status, comparison-time state changes, driver configuration writes and five incoming scratch-register seed pairs. The checks compare status, provider order, configuration bytes/address, handler identity, shared record bytes, stack balance, callee-saved registers and masks. Two controls with an incorrect prescaler or missing opened-state update fail.
+
+REA returned the complete 132-byte open envelope and eight-byte defaults. Ghidra has no function entry at `0x56318` in this imported target; no procedure dossier is claimed. Stock execution remains the behavior oracle. SDK, string comparison, returning error and registration providers are modeled. Physical RTC behavior and full firmware linkage remain unverified.
+
+The normal report is `build/sources-goal-r1-rtc-open-pure-c/report.json`: all 727 units compile without failures or duplicate strong symbols. Application and bootloader imports remain 178 and 34. Only the RTC lifecycle object changed; 726 objects are unchanged from the key-reader checkpoint. Both source manifests pass `make sources-check`. No source-plan selection was changed.

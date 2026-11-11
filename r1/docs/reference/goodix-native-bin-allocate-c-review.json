@@ -1,0 +1,146 @@
+{
+  "schema_version": 1,
+  "scope": "Native Goodix bin allocation core in ordinary C",
+  "report": "build/sources-goal-r1-goodix-native-bin-allocate-c/report.json",
+  "comparison_report": "build/sources-goal-r1-goodix-native-heap-free-c/report.json",
+  "stock_ranges": [
+    {
+      "entry": "0x982c2",
+      "size": 126
+    },
+    {
+      "entry": "0x3df80",
+      "size": 120,
+      "private_continuation": true
+    }
+  ],
+  "audit": {
+    "compiled_units": 866,
+    "unchanged_prior_nongenerated_objects": 855,
+    "new_units": [
+      "r1/src/application/goodix/native_heap_allocate.c"
+    ],
+    "differing_existing_generated_objects": [
+      "{gen}/r1_startup_vectors.S",
+      "{gen}/r1_uecc.c"
+    ],
+    "application_imports": 62,
+    "bootloader_imports": 22,
+    "removed_imports": [],
+    "added_imports": [],
+    "new_writable_state_bytes": 0,
+    "source_plan_and_cache_layout_unchanged": true,
+    "tested_object_equals_normal_build": true,
+    "only_manifest_change_is_one_new_unit": true,
+    "portable_heap_and_existing_byte_fill_objects_unchanged": true
+  },
+  "comparisons": {
+    "stock_C_bin_allocation_comparisons": 22272,
+    "mixed_operations": 1000,
+    "mixed_bin_allocation_calls": 501,
+    "mixed_release_calls": 499,
+    "native_wrapper_fallbacks": 147,
+    "strict_metadata_write_width_order_values_and_full_pool_match": true,
+    "existing_C_release_bin_helpers_execute": true,
+    "source_allocation_core_cannot_execute_stock": true,
+    "native_initialization_allocation_release_prepare_fixtures": true,
+    "public_wrapper_and_exhaustion_policy_not_implemented": true,
+    "core_ranges": [
+      {
+        "entry": "0x982c2",
+        "size": 126,
+        "executed_bytes": 124,
+        "unexecuted_bytes": [
+          "0x9831c",
+          "0x9831d"
+        ]
+      },
+      {
+        "entry": "0x3df80",
+        "size": 120,
+        "executed_bytes": 120,
+        "unexecuted_bytes": []
+      }
+    ]
+  },
+  "compiled_defects_rejected": [
+    {
+      "defect": "split-threshold",
+      "rejected": true
+    },
+    {
+      "defect": "allocated-flags",
+      "rejected": true
+    },
+    {
+      "defect": "following-tag",
+      "rejected": true
+    },
+    {
+      "defect": "whole-block-previous-bit",
+      "rejected": true
+    },
+    {
+      "defect": "ordered-fit",
+      "rejected": true
+    },
+    {
+      "defect": "higher-bin-fallback",
+      "rejected": true
+    },
+    {
+      "defect": "largest-fit-guard",
+      "rejected": true
+    },
+    {
+      "defect": "unlink-selected",
+      "rejected": true
+    },
+    {
+      "defect": "split-previous-flag",
+      "rejected": true
+    }
+  ],
+  "contract": [
+    "Input is a valid canonical native pool and adjusted block size. The core allocates only from free bins and returns null when no bin can satisfy the request. It does not use the wilderness or clear payload bytes.",
+    "Preserve own-bin largest-fit gate, higher-bin selection, ordered node search, unlinking,16-byte split threshold, boundary tags and allocated/previous-used bits. Use existing C native bin helpers."
+  ],
+  "limits": [
+    "244 of246 native instruction bytes execute. The two bytes at0x9831c..0x9831d update the lower search bound; canonical two-bin metadata cannot select that branch. Malformed bitmaps/lists are not admitted test inputs.",
+    "22,272 comparisons cover six allocation profiles, two alignments, optional terminal guard, all16 initial free masks,29 adjusted requests and both masks. Full pool bytes and write width/order/value match.",
+    "1,000 mixed operations contain501 bin allocation calls and499 releases, with147 stock public-wrapper fallbacks. Source core and release cannot enter stock code; only explicit fixture preparation/fallback phases execute it. This is not source-only public allocation.",
+    "Stock initialization/allocation/release prepare fixture states. The existing C release/bin unit is linked into source tests and is object-identical to the normal build.",
+    "Saved integer/FP registers, SP, masks, FPSCR and guards are checked. Caller scratch, private frames, APSR, concurrent mutation, invalid descriptors, allocation exhaustion policy, physical pool placement, final linking/startup and boot remain unverified.",
+    "Public goodix_mem_malloc, wilderness allocation and payload clearing remain unreconstructed at their native ABI. No trap, stub or portable API alias is introduced. No new state or imports; source plan/cache layout unchanged."
+  ],
+  "evidence_files": {
+    "build/sources-goal-r1-goodix-native-bin-allocate-c/report.json": "3b395a368f800ad50848c8b0b1658d687fcb6159c67b393235dba3e4179fc6e9",
+    "build/sources-goal-r1-goodix-native-heap-free-c/report.json": "c6b54ad94ec18c459744b4c64a6ab356c0aa8fa875266dd5f1028ea6d3356fbd",
+    "r1/src/application/goodix/native_heap_allocate.c": "2806f3ca4f9074b157b390edf8bd03815a46b31f1661e1ed238a0938c666d8c9",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-goodix-native-bin-allocate-c/r1/r1-application/r1__src__application__goodix__native_heap_allocate.c.o": "129b40a4930e85990e0ba9503f83bbc867460580ef323f2a6dfa2476e7dad685",
+    "r1/src/sources.json": "44d61b1dde121f49bc3006965a23e6f83c8c815b2509352fa02f1ed6a41e4299",
+    "tools/build/source-plan.json": "eeb516e31b3310fb0718f36908977f8125723f7c5e0e86cd6744395826259a4d",
+    "r1/src/config/runtime/native_health_cache.ld": "eb8f131c489cd818d4e36718718fa1989719ca0170f164541a1a5bf56dfc1ec3",
+    "r1/src/application/goodix/native_heap_free.c": "175cf893ee4b475bee0a886d69522782ac879dd0b29c43285d957c03fb4dc7c4",
+    "r1/src/application/goodix/native_heap_init.c": "c3085064866b23d603697918b6dfdd29f66ab68c7e82cb1f3e10443c80e3f8b6",
+    "r1/src/vendor/goodix_heap/goodix_heap.c": "dfc58c6edb39f1e30fb346e6c4df0c7c573a07df9ded2bdafaa1ba5c91b4bd45",
+    "r1/docs/reference/FUNCTION-OWNERSHIP.csv": "6ab2af68b0e8ffcf05b95f8c514748812eea15905ace159f0579c929dd9d0b05",
+    "r1/symbols/function-frontier.csv": "422ed34fa66087d6fab2d2bb58a97dfeb495a3c16693bb806003aa4bc8b9b32f",
+    "r1/docs/correlation/GOODIX-HEAP-REDUCTION-CORRELATION.md": "08e2b8838c8bb5578cc6cbfb58864619f82bf45cf6862dfc8ada3728427c5df8",
+    "build/goal-r1-goodix-native-bin-allocate-c/audit.json": "28bddc342ad3628cc6c3296ca22f05aaf70e98523d50370a9388386ee4c05c55",
+    "build/goal-r1-goodix-native-bin-allocate-c/verify.log": "b4b035d947d33967d420cce9bd86fe5424f964f23a11b72411c9b4005bb82044",
+    "build/goal-r1-goodix-native-bin-allocate-c/negative.json": "922a066750ed9becf091066cc43de8289f6779d724e03a97a54f8e8a74079139",
+    "build/goal-r1-goodix-native-bin-allocate-c/audit.py": "8d7369e839a38b0e0076622c801d1e2d2951070cae56f37795dc121bc9d5d282",
+    "build/goal-r1-goodix-native-bin-allocate-c/source.elf": "88fbe54e8173f7bad5ef3260910242d0be602483d1a276013733ab525d46c147",
+    "build/goal-r1-goodix-native-bin-allocate-c/negative.py": "acfd072b207096efbadd181476f699ff2c024c3f294e38c9d097e5d2dd09ae12",
+    "build/goal-r1-goodix-native-bin-allocate-c/negative.log": "76f6b6182f8f5f6fa024030d081a0ed909cb585867eddb64a954147014f3d0a3",
+    "build/goal-r1-goodix-native-bin-allocate-c/source.o": "129b40a4930e85990e0ba9503f83bbc867460580ef323f2a6dfa2476e7dad685",
+    "build/goal-r1-goodix-native-bin-allocate-c/results.json": "1bfed3f2ab4cc0e03cbbcd7afb6c0aaa565009afe156cc94508332c8beca4574",
+    "build/goal-r1-goodix-native-bin-allocate-c/sources-check.log": "4bde80036712f43bf66f3f32ebbaf48b37faa4f5fe32c05d6df0f3cf30e61624",
+    "build/goal-r1-goodix-native-bin-allocate-c/record.py": "ed974d46b8cf503a759ad7e0b0479deeb7bb0fd8a5a949251522046dd6702552",
+    "build/goal-r1-goodix-native-bin-allocate-c/rea-bytes.json": "0d324daf14ef7c4dc47820cc34af702c9c2c063311964f8af41bdf93c34f045f",
+    "build/goal-r1-goodix-native-bin-allocate-c/manifest-before.json": "fa6528350e5bce16ba9f8ad7215b19f62425c1c4e22eaaf316b9b106079aa996",
+    "build/goal-r1-goodix-native-bin-allocate-c/verify.py": "31184f657bc3f118cfc7a095666b0ffef4d1d6339b38875b7d4e47b08e265e76",
+    "build/goal-r1-goodix-native-bin-allocate-c/build.log": "bf803d07edc73e1aa9a6caa30fdf3c6ec25f2b03589b5587c093bedc0078f3da"
+  }
+}

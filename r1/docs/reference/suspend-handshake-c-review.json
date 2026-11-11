@@ -1,0 +1,109 @@
+{
+  "schema_version": 1,
+  "report": "build/sources-goal-r1-suspend-handshake-shared-c/report.json",
+  "evidence_files": {
+    "build/sources-goal-r1-suspend-handshake-shared-c/report.json": "f73c23f1eeca5c23d6f10ea9cbf3f16147e0d07aa45b29c77dfdbbf605137734",
+    "r1/src/sources.json": "161408f64ecc178f1822bfacd05f088c17b309d8a73e288bcb7010c84265cac0",
+    "r1/src/application/runtime/native_task_suspend.c": "a32e3a8a420930ce0abcaeec1d525c3072cfd4da092a8fafa946d83a4d7f4ab5",
+    "r1/src/application/runtime/native_task_suspend.h": "57d6379d4363e5b1c4d03da00702e23d1931f190e96bce0694199182233d1530",
+    "r1/src/application/board/native_sync.c": "4d3dea4208f4b8a302f46571d5026a66d172452ecfd93191889d9f9789edb569",
+    "third-party/upstream/cmsis-5-590/CMSIS/RTOS2/Include/cmsis_os2.h": "784bdeeff0c7ba179215e205834a3226506458717c092dea58b99cec4fda7a1b",
+    "build/goal-r1-fstorage-registry/expanded-rw.bin": "87fdee392022fdbe23dd0daf3e859fb14f3ce26ba3e8403aab56dc9d9a913317",
+    "build/goal-r1-suspend-handshake-c/manifest-before.json": "f531ff58c4a0679a7ea323a060b682f956630e24305bfd4df3acb3abe69e904d",
+    "build/goal-r1-suspend-handshake-c/verify.py": "ea36df7145643477ebb2ba70fda6fb12a16d6c5a8ae9e3c842ce6993f7eff9ff",
+    "build/goal-r1-suspend-handshake-c/verification.json": "27d86cae4c9390977e20e4272b12f75d0cad4536e5bba7b97503d184ae23fc64",
+    "build/goal-r1-suspend-handshake-c/verify-final.log": "054d84100cf6ef6ee694c5e4dc479a6477d405fba6aec42c7cd14dc61f858a45",
+    "build/goal-r1-suspend-handshake-c/audit.py": "b960025ad407a0101222891a31d50d7dface2f48c0d16f472eb15a8b6cfbb35d",
+    "build/goal-r1-suspend-handshake-c/audit.json": "a46d09d303486d95165dc67de517bdb50f815e42813d8c3ad899599272ee5d73",
+    "build/goal-r1-suspend-handshake-c/defects.py": "6c5245ccdbb8f976499df4b692df19be2845f0d27e8aabcda5f456104daf8053",
+    "build/goal-r1-suspend-handshake-c/defects.json": "85b2ee901cac0b41b5987cc2177da88046db63323524af6ff9ab18962ea81c46",
+    "build/goal-r1-suspend-handshake-c/rea.json": "044ccc989be41ffd22a48bf9801c27b75552375bfeeb2183b09c33a986323f38",
+    "build/goal-r1-suspend-handshake-c/signal-rea.json": "6a0ed0f81a46e393a6f8349c5f3abbfbbedc8c07cccdcefe30acf7c591333e79",
+    "build/goal-r1-suspend-handshake-c/source.elf": "0cb8c96fb24765bcef73a88a6ba1591f11947ba4977b6c6c2f56017ae8d3f1d1",
+    "build/goal-r1-suspend-handshake-c/cmsis.elf": "2c0479e44c257379778b5bd4886368954f742bfc2f02f87508c62313289ffc05",
+    "build/goal-r1-suspend-handshake-c/r1-sources-check.log": "5851b10a01af177621d50807a72267dea3d68928508b8f1396f823b3d70a9b23",
+    "build/goal-r1-suspend-handshake-c/sources-check.log": "c1067502e0a5544fb47c03519a0eff2489e6aeba2062ea2a298bf4a8d997afa4",
+    "build/goal-r1-suspend-handshake-c/boot-link-shared/report.json": "309606392d4a13d15e974090194bb5bdd80287113c5207f16550a8ca21595dba",
+    "build/sources-goal-r1-suspend-handshake-shared-c/generated/r1/r1_cmsis_os2_rtc.c": "2bff0d83cf5a41be42685484d17a50c9a0519ffbb114d08a8da75011e01ac8f1"
+  },
+  "stock_application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "rea_windows": [
+    {
+      "address": "0x46a74",
+      "length": 172,
+      "code_extent_bytes": 108
+    },
+    {
+      "address": "0x923a4",
+      "length": 16,
+      "includes_literal": true
+    }
+  ],
+  "verification": {
+    "direct_stock_C_pairs": 2688,
+    "post_signal_handle_mutation_pairs": 12,
+    "actual_CMSIS_provider_pairs": 1736,
+    "shared_acknowledgement_owner_pairs": 24,
+    "all_signal_wait_log_arguments_checked": true,
+    "leaf_RTOS_notifications_and_event_wait_modeled": true,
+    "ordinary_C_ABI_private_frames_and_void_outputs_excluded": true
+  },
+  "audit": {
+    "unchanged_prior_object_hashes": 804,
+    "generated_boot_allocated_bytes_and_relocations_unchanged": true,
+    "import_sets_unchanged": true,
+    "only_manifest_change_one_new_unit": true,
+    "no_handwritten_assembly_in_handshake": true,
+    "one_existing_shared_event_handle_owner": true
+  },
+  "defects": [
+    {
+      "defect": "wrong-signal-bit",
+      "compiled": true,
+      "behavioral_assertion_rejected": true
+    },
+    {
+      "defect": "wrong-timeout",
+      "compiled": true,
+      "behavioral_assertion_rejected": true
+    },
+    {
+      "defect": "stale-wait-handle",
+      "compiled": true,
+      "behavioral_assertion_rejected": true
+    },
+    {
+      "defect": "error-bit-is-failure",
+      "compiled": true,
+      "behavioral_assertion_rejected": true
+    },
+    {
+      "defect": "wrapped-shift",
+      "compiled": true,
+      "behavioral_assertion_rejected": true
+    },
+    {
+      "defect": "wait-any",
+      "compiled": true,
+      "behavioral_assertion_rejected": true
+    },
+    {
+      "defect": "reject-extra-acks",
+      "compiled": true,
+      "behavioral_assertion_rejected": true
+    },
+    {
+      "defect": "wrong-log-bit",
+      "compiled": true,
+      "behavioral_assertion_rejected": true
+    }
+  ],
+  "limitations": [
+    "The manager worker and full task suspension sequence remain unresolved.",
+    "FreeRTOS notification/event-group leaves are modeled; actual CMSIS wrappers and existing acknowledgement publisher execute.",
+    "Shared acknowledgement publication pairs run in thread context; physical IRQ/scheduler timing is unverified.",
+    "Out-of-range shift behavior is checked; kernel assertions for zero masks are not executed.",
+    "Ordinary C ABI excludes private frames and incidental void return registers.",
+    "Final application link, startup memory placement and device boot remain open."
+  ]
+}

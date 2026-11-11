@@ -1,7 +1,6 @@
 #include <stdint.h>
+#include "../case-reconnect/case_reconnect_state.h"
 
-volatile uint8_t audio_uart_case_status_disabled
-    __attribute__((section(".g2_ram_20075012"), used));
 volatile uint8_t audio_uart_case_sensor_a
     __attribute__((section(".g2_ram_2007418f"), used));
 volatile uint8_t audio_uart_case_sensor_b

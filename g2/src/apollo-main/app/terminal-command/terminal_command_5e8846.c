@@ -17,7 +17,6 @@ extern void audio_os_delay(uint32_t);
 extern void audio_uart_ring_wear_persist_48eb32(uint32_t,uint32_t,const void *);
 extern uint32_t audio_system_alert_command_45a8ee(uint32_t,uint32_t,uint32_t,uint32_t);
 extern uint32_t g2_flashdb_candidate_tick(void);
-extern uint64_t audio_uart_ring_u64_div_47cc60(uint32_t,uint32_t,uint32_t,uint32_t);
 extern void audio_ble_param_reset_delayed_event(uint32_t);
 extern uint8_t audio_terminal_ui_mode;
 extern uint8_t audio_terminal_mode_sync_pending; /* native RAM 0x2006e344, state-base +0x274 */
@@ -119,7 +118,7 @@ uint32_t audio_terminal_command_5e8846(const void *payload,uint32_t length) {
     } else {
         uint32_t elapsed=g2_flashdb_candidate_tick()-audio_terminal_mode_start_tick;
         uint64_t scaled=(uint64_t)elapsed*1000u;
-        uint32_t duration=(uint32_t)audio_uart_ring_u64_div_47cc60((uint32_t)scaled,(uint32_t)(scaled>>32),1000u,0u);
+        uint32_t duration=(uint32_t)(scaled / 1000u);
         if(audio_uart_device_role_get()==1u) {
             const uint32_t descriptor[2]={5u,duration};
             audio_uart_ring_wear_persist_48eb32(0x40103u,2u,descriptor);

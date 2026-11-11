@@ -1,54 +1,29 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_enc_action_315f80\n"
-".type opencfw_em9305_enc_action_315f80,@function\n"
-"opencfw_em9305_enc_action_315f80:\n"
-"L315f80:\n"
-"enter_s [r13-r14,blink]\n"
-"L315f82:\n"
-"bl.d opencfw_em9305_phy_complete_32c818\n"
-"L315f86:\n"
-"mov_s r13,r0\n"
-"L315f88:\n"
-"bl.d opencfw_em9305_child_3197e8\n"
-"L315f8c:\n"
-"mov_s r0,r13\n"
-"L315f8e:\n"
-"bl.d opencfw_em9305_child_326a48\n"
-"L315f92:\n"
-"mov_s r0,r13\n"
-"L315f94:\n"
-"bl.d opencfw_em9305_phy_update_complete_32e220\n"
-"L315f98:\n"
-"mov_s r0,r13\n"
-"L315f9a:\n"
-"bl.d opencfw_em9305_child_32e214\n"
-"L315f9e:\n"
-"mov_s r0,r13\n"
-"L315fa0:\n"
-"mov_s r14,r13\n"
-"L315fa2:\n"
-"add r14,r14,515\n"
-"L315fa6:\n"
-"ldb_s r0,[r14,0]\n"
-"L315fa8:\n"
-"breq_s r0,0,L315fb2\n"
-"L315faa:\n"
-"bl.d opencfw_em9305_child_322e14\n"
-"L315fae:\n"
-"mov_s r0,r13\n"
-"L315fb0:\n"
-"b_s L315fba\n"
-"L315fb2:\n"
-"mov_s r1,0\n"
-"L315fb4:\n"
-"bl.d opencfw_em9305_child_322dd8\n"
-"L315fb8:\n"
-"mov_s r0,r13\n"
-"L315fba:\n"
-"stb 0,[r14]\n"
-"L315fbe:\n"
-"leave_s [r13-r14,blink,pcl]\n"
-".size opencfw_em9305_enc_action_315f80,.-opencfw_em9305_enc_action_315f80\n"
-);
+#include <stdint.h>
+
+/* Native 0x315f80..0x315fc0: encryption completion action. Run the five
+ * completion steps on the record, then report either LL event 12 (flag
+ * +515 set) or LL event 11 with status 0, and clear the flag. */
+extern uint32_t opencfw_em9305_phy_complete_32c818(uintptr_t);
+extern uint32_t opencfw_em9305_child_3197e8(uintptr_t);
+extern uint32_t opencfw_em9305_child_326a48(uintptr_t);
+extern uint32_t opencfw_em9305_phy_update_complete_32e220(uintptr_t);
+extern uint32_t opencfw_em9305_child_32e214(uintptr_t);
+extern uint32_t opencfw_em9305_child_322e14(uintptr_t);
+extern uint32_t opencfw_em9305_child_322dd8(uintptr_t,uint32_t);
+
+uint32_t opencfw_em9305_enc_action_315f80(uintptr_t record)
+{
+    uint32_t result;
+    (void)opencfw_em9305_phy_complete_32c818(record);
+    (void)opencfw_em9305_child_3197e8(record);
+    (void)opencfw_em9305_child_326a48(record);
+    (void)opencfw_em9305_phy_update_complete_32e220(record);
+    (void)opencfw_em9305_child_32e214(record);
+    volatile uint8_t *flag = (volatile uint8_t *)(record + 515u);
+    if (*flag != 0u)
+        result = opencfw_em9305_child_322e14(record);
+    else
+        result = opencfw_em9305_child_322dd8(record, 0u);
+    *flag = 0u;
+    return result;
+}

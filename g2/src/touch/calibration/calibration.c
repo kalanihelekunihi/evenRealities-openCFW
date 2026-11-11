@@ -1,5 +1,5 @@
 /* Independent calibration/report source; original gesture4070 is an explicit
- * borrowed-code dependency pending its own reconstruction, not an entry stub. */
+ * borrowed-code dependency pending its own reconstruction, not an entry filler. */
 #include "calibration.h"
 #include "bootstrap.h"
 #include "cy_scb_i2c.h"

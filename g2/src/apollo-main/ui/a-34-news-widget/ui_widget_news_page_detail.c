@@ -183,8 +183,6 @@ extern void *audio_queue_copy_bytes(void *dst, const void *src, uint32_t len); /
 extern void audio_uart_buffer_zero(void *dst, uint32_t len, uint32_t fill);   /* memset 0x43c0e4 */
 extern uint32_t g2_log_module_length(const char *text);                       /* strlen 0x44a43c */
 extern int32_t g2_audio_dump_snprintf(char *dst, uint32_t size, const char *fmt, ...); /* 0x44b728 */
-extern uint64_t audio_uart_ring_u64_div_47cc60(uint32_t low, uint32_t high, uint32_t dlow,
-                                               uint32_t dhigh);
 extern void audio_time_epoch_to_calendar_44a100(uint32_t seconds, void *record);
 extern void service_time_current_calendar_get(g2_calendar_t *calendar);       /* 0x44a19a */
 extern uint8_t svc_universal_setting_get_date_format_466500(void);
@@ -213,19 +211,19 @@ extern int32_t audio_uart_lv_obj_height_43fdda(void *obj);                    /*
 extern uint32_t audio_uart_page_44104c(uint32_t rgb);                         /* lv_color_hex */
 extern uint32_t lv_color_white_441094(void);
 extern uint32_t lv_color_black_4410a6(void);
-extern void audio_uart_page_44120e(void *obj, int32_t v, uint32_t sel);       /* pad_top */
-extern void audio_uart_page_44121c(void *obj, int32_t v, uint32_t sel);       /* pad_bottom */
-extern void audio_uart_page_44122a(void *obj, int32_t v, uint32_t sel);       /* pad_left */
-extern void audio_uart_page_441238(void *obj, int32_t v, uint32_t sel);       /* pad_right */
+extern void lv_obj_set_style_pad_top(void *obj, int32_t v, uint32_t sel);       /* pad_top */
+extern void lv_obj_set_style_pad_bottom(void *obj, int32_t v, uint32_t sel);       /* pad_bottom */
+extern void lv_obj_set_style_pad_left(void *obj, int32_t v, uint32_t sel);       /* pad_left */
+extern void lv_obj_set_style_pad_right(void *obj, int32_t v, uint32_t sel);       /* pad_right */
 extern void audio_uart_page_441246(void *obj, int32_t v, uint32_t sel);       /* pad_row */
 extern void audio_uart_page_441254(void *obj, int32_t v, uint32_t sel);       /* pad_column */
 extern void audio_uart_page_44127e(void *obj, uint32_t color, uint32_t sel);  /* bg_color */
 extern void audio_uart_page_44129e(void *obj, uint32_t opa, uint32_t sel);    /* bg_opa */
-extern void audio_uart_page_44131c(void *obj, int32_t v, uint32_t sel);       /* border_width */
+extern void lv_obj_set_style_border_width(void *obj, int32_t v, uint32_t sel);       /* border_width */
 extern void audio_uart_page_44140e(void *obj, uint32_t color, uint32_t sel);  /* text_color */
 extern void audio_uart_page_44143e(void *obj, uint32_t font, uint32_t sel);   /* text_font */
 extern void audio_uart_page_44144c(void *obj, int32_t v, uint32_t sel);       /* text_line_space */
-extern void audio_uart_page_44146a(void *obj, int32_t v, uint32_t sel);       /* radius */
+extern void lv_obj_set_style_radius(void *obj, int32_t v, uint32_t sel);       /* radius */
 extern void style_prop_2d_441478(void *obj, uint32_t v, uint32_t sel);        /* clip_corner */
 extern void audio_uart_page_delete_event_filter_44d7b8(void *obj);            /* lv_obj_delete */
 extern void audio_uart_page_44d878(void *obj);                                /* lv_obj_clean */
@@ -237,8 +235,8 @@ extern void audio_uart_lv_anim_init_4503d6(g2_lv_anim_t *a);                  /*
 extern void *audio_uart_lv_anim_start_450408(const g2_lv_anim_t *a);          /* lv_anim_start */
 extern uint32_t audio_uart_anim_delete_450500(void *var, void (*exec_cb)(void *, int32_t)); /* lv_anim_delete */
 extern void audio_uart_lv_anim_values_4506ce(g2_lv_anim_t *a, int32_t start, int32_t end);
-extern int32_t audio_uart_lv_anim_path_450672(const g2_lv_anim_t *a);         /* lv_anim_path_ease_out */
-extern int32_t audio_uart_lv_anim_path_450688(const g2_lv_anim_t *a);         /* lv_anim_path_ease_in_out */
+extern int32_t lv_anim_path_ease_out(const g2_lv_anim_t *a);         /* lv_anim_path_ease_out */
+extern int32_t lv_anim_path_ease_in_out(const g2_lv_anim_t *a);         /* lv_anim_path_ease_in_out */
 extern void audio_uart_page_48ba78(void *obj, uint32_t flow);                 /* lv_obj_set_flex_flow */
 extern void audio_uart_page_48ba92(void *obj, uint32_t main, uint32_t cross, uint32_t track); /* lv_obj_set_flex_align */
 extern void *audio_uart_page_498668(void *parent);                            /* lv_image_create */
@@ -580,12 +578,12 @@ void widget_news_detail_load_content_4f1ab8(int32_t index)
     audio_uart_page_43f4c0(g2_news_detail_20074ea4, 0x23c, 0xfc);
     audio_uart_page_43f09a(g2_news_detail_20074ea4, 0, 0x10);
     audio_uart_page_44129e(g2_news_detail_20074ea4, 0u, 0u);
-    audio_uart_page_44131c(g2_news_detail_20074ea4, 0, 0u);
-    audio_uart_page_44122a(g2_news_detail_20074ea4, 20, 0u);
-    audio_uart_page_441238(g2_news_detail_20074ea4, 8, 0u);
-    audio_uart_page_44120e(g2_news_detail_20074ea4, 0, 0u);
-    audio_uart_page_44121c(g2_news_detail_20074ea4, 16, 0u);
-    audio_uart_page_44146a(g2_news_detail_20074ea4, 0, 0u);
+    lv_obj_set_style_border_width(g2_news_detail_20074ea4, 0, 0u);
+    lv_obj_set_style_pad_left(g2_news_detail_20074ea4, 20, 0u);
+    lv_obj_set_style_pad_right(g2_news_detail_20074ea4, 8, 0u);
+    lv_obj_set_style_pad_top(g2_news_detail_20074ea4, 0, 0u);
+    lv_obj_set_style_pad_bottom(g2_news_detail_20074ea4, 16, 0u);
+    lv_obj_set_style_radius(g2_news_detail_20074ea4, 0, 0u);
     style_prop_2d_441478(g2_news_detail_20074ea4, 1u, 0u);
     audio_uart_page_43dfa4(g2_news_detail_20074ea4, LV_OBJ_FLAG_SCROLLABLE);
 
@@ -599,12 +597,12 @@ void widget_news_detail_load_content_4f1ab8(int32_t index)
     audio_uart_page_43f568(g2_news_detail_20074ea8, LV_SIZE_CONTENT);
     audio_uart_page_43f09a(g2_news_detail_20074ea8, 0, 0);
     audio_uart_page_44129e(g2_news_detail_20074ea8, 0u, 0u);
-    audio_uart_page_44131c(g2_news_detail_20074ea8, 0, 0u);
-    audio_uart_page_44122a(g2_news_detail_20074ea8, 0, 0u);
-    audio_uart_page_441238(g2_news_detail_20074ea8, 0, 0u);
-    audio_uart_page_44120e(g2_news_detail_20074ea8, 2, 0u);
-    audio_uart_page_44121c(g2_news_detail_20074ea8, 0, 0u);
-    audio_uart_page_44146a(g2_news_detail_20074ea8, 0, 0u);
+    lv_obj_set_style_border_width(g2_news_detail_20074ea8, 0, 0u);
+    lv_obj_set_style_pad_left(g2_news_detail_20074ea8, 0, 0u);
+    lv_obj_set_style_pad_right(g2_news_detail_20074ea8, 0, 0u);
+    lv_obj_set_style_pad_top(g2_news_detail_20074ea8, 2, 0u);
+    lv_obj_set_style_pad_bottom(g2_news_detail_20074ea8, 0, 0u);
+    lv_obj_set_style_radius(g2_news_detail_20074ea8, 0, 0u);
     audio_uart_page_43dfa4(g2_news_detail_20074ea8, LV_OBJ_FLAG_SCROLLABLE);
     audio_uart_page_48ba78(g2_news_detail_20074ea8, LV_FLEX_FLOW_COLUMN);
     audio_uart_page_441246(g2_news_detail_20074ea8, NEWS_DETAIL_LINE, 0u);
@@ -613,7 +611,7 @@ void widget_news_detail_load_content_4f1ab8(int32_t index)
     audio_uart_page_43f506(row, width);
     audio_uart_page_43f568(row, LV_SIZE_CONTENT);
     audio_uart_page_44129e(row, 0u, 0u);
-    audio_uart_page_44131c(row, 0, 0u);
+    lv_obj_set_style_border_width(row, 0, 0u);
     lv_obj_set_style_pad_all_4effa8(row, 0, 0u);
     audio_uart_page_43dfa4(row, LV_OBJ_FLAG_SCROLLABLE);
 
@@ -631,7 +629,7 @@ void widget_news_detail_load_content_4f1ab8(int32_t index)
     audio_uart_buffer_zero(when, sizeof when, 0u);
     uint8_t *entry = news_cache_entry(slot);
     const uint32_t *ms = (const uint32_t *)(const void *)&entry[NEWS_OFF_TIME_MS];
-    audio_time_epoch_to_calendar_44a100((uint32_t)audio_uart_ring_u64_div_47cc60(ms[0], ms[1], 1000u, 0u),
+    audio_time_epoch_to_calendar_44a100((uint32_t)((((uint64_t)ms[1] << 32) | ms[0]) / 1000u),
                                         &published);
     service_time_current_calendar_get(&now);
     if (published.year < now.year ||
@@ -712,8 +710,8 @@ void widget_news_detail_load_content_4f1ab8(int32_t index)
             audio_uart_page_43f09a(g2_news_detail_20074eac, 0x220, 0);
             audio_uart_page_44127e(g2_news_detail_20074eac, audio_uart_page_44104c(0x555555u), 0u);
             audio_uart_page_44129e(g2_news_detail_20074eac, 0x7fu, 0u);
-            audio_uart_page_44131c(g2_news_detail_20074eac, 0, 0u);
-            audio_uart_page_44146a(g2_news_detail_20074eac, 1, 0u);
+            lv_obj_set_style_border_width(g2_news_detail_20074eac, 0, 0u);
+            lv_obj_set_style_radius(g2_news_detail_20074eac, 1, 0u);
             lv_obj_set_style_pad_all_4effa8(g2_news_detail_20074eac, 0, 0u);
             audio_uart_page_43dfa4(g2_news_detail_20074eac, LV_OBJ_FLAG_SCROLLABLE);
             NEWS_LOG(3u, load_fn, 0x497u, 3u, bar_created, bar_created_short, bar_h, track, 20);
@@ -778,7 +776,7 @@ void widget_news_detail_bounce_at_top_4f2318(void)
     a.exec_cb = widget_news_detail_bounce_anim_cb_4f2288;
     audio_uart_lv_anim_values_4506ce(&a, 0, 32);
     a.duration = 150;
-    a.path_cb = audio_uart_lv_anim_path_450672;
+    a.path_cb = lv_anim_path_ease_out;
     a.reverse_duration = 180u;
     a.reverse_delay = 0u;
     g2_news_detail_scrolling_20074ec4 = 1;
@@ -799,7 +797,7 @@ void widget_news_detail_bounce_at_bottom_4f23e4(void)
     a.exec_cb = widget_news_detail_bounce_anim_cb_4f2288;
     audio_uart_lv_anim_values_4506ce(&a, bottom, bottom - 32);
     a.duration = 150;
-    a.path_cb = audio_uart_lv_anim_path_450672;
+    a.path_cb = lv_anim_path_ease_out;
     a.reverse_duration = 180u;
     a.reverse_delay = 0u;
     g2_news_detail_scrolling_20074ec4 = 1;
@@ -879,7 +877,7 @@ void widget_news_detail_scroll_by_4f2554(int32_t direction, int32_t speed, int32
     a.exec_cb = widget_news_detail_scroll_anim_cb_4f2264;
     audio_uart_lv_anim_values_4506ce(&a, g2_news_detail_20074eb0, target);
     a.duration = 200;
-    a.path_cb = audio_uart_lv_anim_path_450672;
+    a.path_cb = lv_anim_path_ease_out;
     g2_news_detail_scrolling_20074ec4 = 1;
     a.completed_cb = widget_news_scroll_ready_cb_4f24cc;
     (void)audio_uart_lv_anim_start_450408(&a);
@@ -947,7 +945,7 @@ void widget_news_scroll_to_item_4f28f0(int32_t index, uint32_t time_ms)
     audio_uart_lv_anim_values_4506ce(&a, audio_uart_lv_obj_y_44e498(g2_news_scroll_container_20074e74),
                                      pos);
     a.duration = (int32_t)time_ms;
-    a.path_cb = audio_uart_lv_anim_path_450688;
+    a.path_cb = lv_anim_path_ease_in_out;
     a.completed_cb = widget_news_scroll_anim_ready_cb_4f0f26;
     g2_news_anim_running_20074e88 = 1;
     (void)audio_uart_lv_anim_start_450408(&a);
@@ -986,7 +984,7 @@ int32_t Start_NewsUpdating_Animation_4f2bbc(void *parent, void **anim_out)
     void *box = audio_uart_page_43de82(parent);
     audio_uart_page_43f4c0(box, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
     audio_uart_page_44129e(box, 0u, 0u);
-    audio_uart_page_44131c(box, 0, 0u);
+    lv_obj_set_style_border_width(box, 0, 0u);
     lv_obj_set_style_pad_all_4effa8(box, 0, 0u);
     audio_uart_page_48ba78(box, LV_FLEX_FLOW_ROW);
     audio_uart_page_48ba92(box, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER);
@@ -1065,7 +1063,7 @@ void NewsWidget_ScrollLableResume_Handler_4f2ec0(void)
         void *box = audio_uart_page_43de82(g2_news_end_item_20074e80);
         audio_uart_page_43f4c0(box, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
         audio_uart_page_44129e(box, 0u, 0u);
-        audio_uart_page_44131c(box, 0, 0u);
+        lv_obj_set_style_border_width(box, 0, 0u);
         lv_obj_set_style_pad_all_4effa8(box, 0, 0u);
         audio_uart_page_48ba78(box, LV_FLEX_FLOW_ROW);
         audio_uart_page_48ba92(box, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER);
@@ -1203,7 +1201,7 @@ static void news_ext_scroll_down(const uint8_t *data, uint32_t value)
                     a.exec_cb = widget_news_scroll_anim_exec_cb_4f0f1c;
                     audio_uart_lv_anim_values_4506ce(&a, scroll, end_y - (NEWS_LIST_VIEW_H - h) / 2);
                     a.duration = 200;
-                    a.path_cb = audio_uart_lv_anim_path_450688;
+                    a.path_cb = lv_anim_path_ease_in_out;
                     a.completed_cb = widget_news_scroll_anim_ready_no_border_cb_4f101c;
                     (void)audio_uart_lv_anim_start_450408(&a);
                 } else {

@@ -1,7 +1,7 @@
 /* LVGL font bitmap callback wrapper, native 0x4d5612..0x4d5663. */
 #include <stdint.h>
 
-extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,
+extern void lv_log_add(uint32_t,const char *,uint32_t,
                                 const char *,const char *,...);
 extern void g2_norflash_lock_46f65e(void);
 extern void g2_norflash_unlock_46f674(void);
@@ -17,7 +17,7 @@ uint32_t audio_uart_ambiq_glyph_bitmap_4d5612(uint32_t glyph,
     const uint8_t *g=(const uint8_t *)(uintptr_t)glyph;
     uint32_t font=*(const uint32_t *)g;
     if(font==0u) {
-        audio_uart_lvgl_log(3u,bitmap_path,0x36u,bitmap_function,
+        lv_log_add(3u,bitmap_path,0x36u,bitmap_function,
                             bitmap_assert,bitmap_expression,bitmap_null);
         for(;;) *(volatile uint32_t *)(uintptr_t)0xffffffffu=0u;
     }

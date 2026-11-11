@@ -28,7 +28,7 @@ void case_source_list_insert_end(case_list *list,case_item *item)
 int32_t case_remove_waiter(case_list *event_list)
 {
     case_tcb *task=(case_tcb *)event_list->end.next->owner;
-    if(!task){__asm volatile("cpsid i" ::: "memory");for(;;)__asm volatile("");}
+    if(!task){__asm volatile("cpsid i" ::: "memory");for(;;){ }}
     case_source_list_remove(&task->event_item);
     volatile uint32_t *state=(volatile uint32_t *)0x20000128u;
     if(state[12]==0u){

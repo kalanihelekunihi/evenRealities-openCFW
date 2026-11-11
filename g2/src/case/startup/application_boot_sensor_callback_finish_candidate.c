@@ -3,6 +3,7 @@
  * RAM addresses are native layout addresses, not synthesized initial data.
  */
 #include <stdint.h>
+#define CASE_FRAME_CAPACITY 1200u
 extern uint32_t case_boot_sensor_bind(uint32_t,uint32_t,uint32_t); /* 0x64ec */
 extern uint32_t case_boot_sensor_finish_guard(uint32_t,const uint8_t *,uint32_t,uint32_t); /* 0x63ec */
 extern uint32_t case_boot_sensor_finish_probe(const uint8_t *); /* 0xbe74 */
@@ -22,7 +23,7 @@ void case_boot_sensor_callback_finish(uint32_t descriptor)
     uint16_t count=rd16(state+2u);
     uint8_t byte=rd8(state);
     if(count!=0u){
-        if(count<1200u){
+        if(count<CASE_FRAME_CAPACITY){
             wr8(buffer+count,byte);count=(uint16_t)(count+1u);
             wr16(state+2u,count);wr8(state+1u,byte);
         }
@@ -62,6 +63,8 @@ void case_boot_sensor_callback_finish(uint32_t descriptor)
         if(format==0x7fu)goto bind;
         if(format!=0xcfu)goto reset;
         uint32_t length=(uint32_t)rd8(buffer+3u)|((uint32_t)rd8(buffer+4u)<<8);
+        /* The trailing frame byte must also fit after the five-byte header. */
+        if(length>CASE_FRAME_CAPACITY-6u)goto reset;
         if(case_boot_sensor_finish_guard(receiver,(const uint8_t *)(uintptr_t)(buffer+5u),length,20u)==3u)
             goto reset;
         count=(uint16_t)(count+length);wr16(state+2u,count);wr8(state+1u,rd8(buffer+count-1u));
@@ -80,7 +83,7 @@ void case_boot_sensor_callback_finish(uint32_t descriptor)
 reset:
     case_boot_sensor_finish_reset();
 finish:
-    if(rd16(state+2u)==1200u)case_boot_sensor_finish_reset();
+    if(rd16(state+2u)==CASE_FRAME_CAPACITY)case_boot_sensor_finish_reset();
 bind:
     if(case_boot_sensor_bind(receiver,state,1u)!=0u)signal(64u);
 }

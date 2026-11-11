@@ -2,7 +2,7 @@
 #include <stdint.h>
 
 extern uint32_t audio_uart_font_bitmap_stride(uint32_t width, uint8_t format);
-extern void audio_uart_lvgl_log(uint32_t level, const char *file, uint32_t line,
+extern void lv_log_add(uint32_t level, const char *file, uint32_t line,
                                const char *function, const char *message);
 
 static uint16_t get16(const uint8_t *p) {
@@ -38,9 +38,9 @@ void *audio_uart_lv_font_glyph_bitmap_4b239c(const void *glyph_descriptor,
     uint16_t flags = get16(state + 0x12u);
     uint32_t packing = flags >> 14u;
     if (packing != 0u && packing != 3u) {
-        audio_uart_lvgl_log(2u, (const char *)(uintptr_t)0x006e0740u,
-                           0xc1u, (const char *)(uintptr_t)0x0076cb6cu,
-                           (const char *)(uintptr_t)0x006edd88u);
+        lv_log_add(2u, "D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\lvgl_v9.3\\LVGL\\src\\font\\lv_font_fmt_txt.c" /* stock 0x6e0740 */,
+                           0xc1u, "lv_font_get_bitmap_fmt_txt" /* stock 0x76cb6c */,
+                           "Compressed fonts is used but LV_USE_FONT_COMPRESSED is not enabled in lv_conf.h" /* stock 0x6edd88 */);
         return 0;
     }
     uint32_t stride = audio_uart_font_bitmap_stride(width, 14u);

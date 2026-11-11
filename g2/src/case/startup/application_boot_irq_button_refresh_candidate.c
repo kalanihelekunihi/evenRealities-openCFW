@@ -54,3 +54,5 @@ void case_boot_irq_button_refresh(void)
     }
     (void)case_init_pmic_write(10u,64u);
 }
+/* Dedup (0x08003a00): case_policy_fake_standby_set (was startup/application_policy_fake_standby_lowers_candidate.c). */
+__typeof__(case_boot_button_mode_reset) case_policy_fake_standby_set __attribute__((alias("case_boot_button_mode_reset")));

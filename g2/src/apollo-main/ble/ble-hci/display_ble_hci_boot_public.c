@@ -1,15 +1,11 @@
-/* Native HciDrvRadioBoot 0x4b48a6 already reduced as
- * audio_ble_hci_driver_radio_boot, verified by five connected native/C cases. */
+/* HciDrvRadioBoot 0x4b48a6 is an alias of audio_ble_hci_driver_radio_boot
+ * in ble/ble-hci/display_ble_hci_radio_boot.c (formerly a forwarding wrapper here). */
 #include <stdint.h>
-extern uint32_t audio_ble_hci_driver_radio_boot(uint8_t);
-uint32_t HciDrvRadioBoot(uint8_t with_identifier) {
-    return audio_ble_hci_driver_radio_boot(with_identifier);
-}
 
-/* Native DmDevVsInit4b308c..4b3096. Preserve incoming R7 return and
- * stack writes despite the void caller contract. Named Thumb instructions
- * in C; not portable C, not an opcode array or retained binary body. */
-#include <stdint.h>
-__attribute__((naked)) void DmDevVsInit(uint32_t handler __attribute__((unused))) {
-    __asm__ volatile("push {r7, lr}\n\tuxtb r0, r0\n\tmov r8, r8\n\tmov r8, r8\n\tpop {r0, pc}");
+/* Native DmDevVsInit 0x4b308c..0x4b3096: the product build has no vendor HCI
+ * init, so the stock body only narrows its argument and returns. Its IAR
+ * epilogue popped the caller's R7 into R0; the function and its only caller
+ * (display_ble_stack_init.c) are void. */
+void DmDevVsInit(uint32_t handler) {
+    (void)handler;
 }

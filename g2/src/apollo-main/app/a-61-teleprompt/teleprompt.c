@@ -109,8 +109,6 @@ extern uint32_t audio_uart_master_display_refresh(uint32_t app, const void *data
                                                   uint32_t flags);              /* 0x464bb2 */
 extern void audio_uart_ring_wear_persist_48eb32(uint32_t key, uint32_t length, const void *payload);
 extern void audio_uart_display_audio_reset_441488(void *obj, uint32_t opa, uint32_t sel); /* style opa */
-extern uint64_t audio_uart_ring_u64_div_47cc60(uint32_t low, uint32_t high, uint32_t div_low,
-                                               uint32_t div_high);              /* __aeabi_uldivmod */
 extern void ble_state_skip_manual_start(uint8_t value);                         /* 0x478110 */
 extern void audio_ble_param_reset_delayed_event(uint32_t delay);                /* ble_param_reset_delayed_event 0x478252 */
 extern uint32_t audio_terminal_reset_mode_notice_54f50e(uint32_t app);          /* AUDM_appRelease */
@@ -462,8 +460,7 @@ uint32_t audio_uart_registry_callback_58a130(uint32_t event, const void *payload
         (void)aeabi_memset_43c0e4(&g2_teleprompt_fsm_ctrl, sizeof g2_teleprompt_fsm_ctrl, 0);
         /* ticks -> ms through a u64 multiply and divide by the 1000 Hz tick rate */
         scaled = (uint64_t)(osKernelGetTickCount() - g2_teleprompt_start_tick_20074a60) * 1000u;
-        duration_ms = (uint32_t)audio_uart_ring_u64_div_47cc60((uint32_t)scaled,
-                                                               (uint32_t)(scaled >> 32), 1000u, 0u);
+        duration_ms = (uint32_t)(scaled / 1000u);
         if (audio_uart_device_role_get() == 1u) {
             record = duration_record;
             record.value = duration_ms;

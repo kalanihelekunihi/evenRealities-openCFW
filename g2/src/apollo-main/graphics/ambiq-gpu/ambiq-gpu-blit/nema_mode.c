@@ -262,3 +262,8 @@ finish_commands:
     output |= 0x10000000u;
     audio_uart_nema_child_514846(0x11cu, output);
 }
+
+/* Graphics-mode caller name of the same native 0x513924 entry (formerly a
+ * forwarding wrapper in graphics/graphics-nema/display_graphics_nema_mode_alias_513924.c). */
+__typeof__(display_driver_nema_mode_513924) audio_uart_display_graphics_blend_513924
+    __attribute__((alias("display_driver_nema_mode_513924")));

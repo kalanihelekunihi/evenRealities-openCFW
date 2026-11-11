@@ -12,57 +12,11 @@ extern void case_flash_program_doubleword(uint32_t address,uint32_t retained_r1,
                                           uint32_t low,uint32_t high); /* 0x08003f1c */
 extern void case_flash_copy_operation(uint32_t address,uint32_t source); /* 0x08003f38 */
 
-/* Stock 0x08003F6C (case_wait_serial_idle) */
-uint32_t case_flash_status_wait(uint32_t timeout) /* 0x08003f6c */
-{
-    volatile uint32_t *status=(volatile uint32_t *)(uintptr_t)0x40022010u;
-    volatile uint32_t *error_word=(volatile uint32_t *)(uintptr_t)0x20000f9cu;
-    uint32_t deadline=case_tick_word2()+timeout;
-    while((*status&0x30000u)!=0u) {
-        if(case_tick_word2()>=deadline) return 3u;
-    }
-    uint32_t errors=*status&0x83fau;
-    *status=0x883fbu;
-    if(errors!=0u) {
-        *error_word=errors;
-        return 1u;
-    }
-    deadline=case_tick_word2()+timeout;
-    while((*status&0x40000u)!=0u) {
-        if(case_tick_word2()>=deadline) return 3u;
-    }
-    return 0u;
-}
+/* Dedup (0x08003f6c): case_flash_status_wait is an alias of case_boot_option_wait (startup/application_boot_option_wait_candidate.c). */
+extern uint32_t case_flash_status_wait(uint32_t timeout);
 
-/* Stock 0x0800497C (case_run_controller_range) */
-uint32_t case_binary_5e_flash_read(void *configuration,uint32_t *error_page) /* 0x0800497c */
-{
-    const uint32_t *cfg=(const uint32_t *)configuration;
-    volatile uint8_t *lock=(volatile uint8_t *)(uintptr_t)0x20000f98u;
-    volatile uint32_t *error=(volatile uint32_t *)(uintptr_t)0x20000f9cu;
-    volatile uint32_t *control=(volatile uint32_t *)(uintptr_t)0x40022014u;
-    if(*lock==1u) return 2u;
-    *lock=1u;
-    *error=0u;
-    uint32_t result=case_flash_status_wait(1000u);
-    if(result==0u) {
-        if(cfg[0]==4u) {
-            case_flash_erase_mode4(cfg[1]);
-            result=case_flash_status_wait(1000u);
-        } else {
-            *error_page=UINT32_MAX;
-            uint32_t limit=cfg[2]+cfg[3];
-            for(uint32_t page=cfg[2];page<limit;++page) {
-                case_flash_erase_page(cfg[1],page);
-                result=case_flash_status_wait(1000u);
-                if(result!=0u) {*error_page=page;break;}
-            }
-            *control&=~2u;
-        }
-    }
-    *lock=0u;
-    return result;
-}
+/* Dedup (0x0800497c): case_binary_5e_flash_read is an alias of case_boot_option_erase_execute (startup/application_boot_option_erase_execute_candidate.c). */
+extern uint32_t case_binary_5e_flash_read(void *configuration,uint32_t *error_page);
 
 /* Stock 0x08004B94 (case_copy_controller_words) */
 uint32_t case_binary_5e_flash_program(uint32_t operation,uint32_t address,

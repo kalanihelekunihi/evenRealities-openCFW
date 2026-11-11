@@ -3,7 +3,8 @@
 /* Native profile registration pointer cells in RAM. Runtime initializers
  * populate these; final absolute placement is a separate link gate. */
 uint8_t *audio_ble_msgtx_state;                 /* 0x20074338 */
-uint8_t *audio_ble_msgtx_mode;                  /* 0x2007433c */
+/* audio_ble_msgtx_mode: stock 0x2007433c is one cell; defined as an alias of audio_ble_cached_conn_params (Fix 31). */
+extern uint8_t * audio_ble_msgtx_mode;
 /* 0x2007435c */
 /* 0x20074360 */
 /* 0x20074364 */

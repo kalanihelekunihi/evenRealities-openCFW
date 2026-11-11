@@ -17,7 +17,7 @@ extern uintptr_t opencfw_bl_rtos_allocate(uint32_t);
 extern void opencfw_boot_list_initialize(uint32_t *);
 static void fail(void) {
     (void)opencfw_bl_mask_interrupts();WORD(UINT32_MAX)=0;
-    for (;;) __asm__ volatile("b .":::"memory");
+    for (;;) { }
 }
 void opencfw_boot_timeout_capture(uint32_t state[2]) {
     state[0]=WORD(0x2002715c);state[1]=WORD(0x20027148);

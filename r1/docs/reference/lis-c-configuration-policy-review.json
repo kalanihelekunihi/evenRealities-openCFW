@@ -1,0 +1,125 @@
+{
+  "configuration": {
+    "passed": 4928,
+    "executions": 9856,
+    "source_report": "build/sources-goal-r1-lis-config-c-entries/report.json",
+    "all_four_helper_argument_words": true,
+    "native_frame_address": true,
+    "live_mode_sequences": 512,
+    "callback_stack_depths": {
+      "stock": [
+        -64
+      ],
+      "C": [
+        -160,
+        -136
+      ]
+    },
+    "sizes": {
+      "r1_lis2dw12_configure_boundary": 18,
+      "lis_config_call": 20,
+      "lis_config_body": 550,
+      "lis_config_log": 136
+    },
+    "limitations": [
+      "Sensor, delay and logging entry points modeled with controlled full register outputs",
+      "Private helper stack depth differs; fixed outer frame and all helper argument words compared",
+      "APSR/caller-clobbered outputs and arbitrary private-stack inspection excluded",
+      "No physical sensor/reset/timing proof or byte qualification"
+    ]
+  },
+  "negative_controls": {
+    "before": {
+      "rejected": true,
+      "case": [
+        100,
+        0,
+        true,
+        0,
+        0,
+        [
+          0,
+          4,
+          2
+        ]
+      ],
+      "stderr": "arm-none-eabi-ld: warning: (r1_lis_device_id_get): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-lis-config-c/before.o\narm-none-eabi-ld: warning: (r1_structured_log_mode_get): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-lis-config-c/before.o\narm-none-eabi-ld: warning: (r1_structured_log_mode_get): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-lis-config-c/before.o\narm-none-eabi-ld: warning: (r1_structured_log_format): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-lis-config-c/before.o\narm-none-eabi-ld: warning: (r1_structured_log_mode_get): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-lis-config-c/before.o\narm-none-eabi-ld: warning: (lis2dw12_reset_set): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-lis-config-c/before.o\narm-none-eabi-ld: warning: (lis2dw12_reset_get): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-lis-config-c/before.o\narm-none-eabi-ld: warning: (nrf_delay_ms): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-lis-config-c/before.o\narm-none-eabi-ld: warning: (r1_structured_log_mode_get): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-lis-config-c/before.o\narm-none-eabi-ld: warning: (r1_structured_log_mode_get): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-lis-config-c/before.o\narm-none-eabi-ld: warning: (r1_structured_log_format): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-lis-config-c/before.o\narm-none-eabi-ld: warning: (r1_structured_log_mode_get): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-lis-config-c/before.o\narm-none-eabi-ld: warning: (nrf_log_frontend_std_0): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-lis-config-c/before.o\narm-none-eabi-ld: warning: (r1_lis_reg17_bit6_enable): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-lis-config-c/before.o\narm-none-eabi-ld: warning: (lis2dw12_block_data_update_set): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-lis-config-c/before.o\narm-none-eabi-ld: warning: (lis2dw12_full_scale_set): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-lis-config-c/before.o\narm-none-eabi-ld: warning: (lis2dw12_filter_path_set): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-lis-config-c/before.o\narm-none-eabi-ld: warning: (lis2dw12_filter_bandwidth_set): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-lis-config-c/before.o\narm-none-eabi-ld: warning: (lis2dw12_fifo_watermark_set): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-lis-config-c/before.o\narm-none-eabi-ld: warning: (lis2dw12_fifo_mode_set): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-lis-config-c/before.o\narm-none-eabi-ld: warning: (r1_lis_native_power_mode_set): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-lis-config-c/before.o\narm-none-eabi-ld: warning: (lis2dw12_data_rate_set): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-lis-config-c/before.o\narm-none-eabi-ld: warning: (nrf_delay_ms): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-lis-config-c/before.o\narm-none-eabi-ld: warning: (r1_lis2dw12_fifo_read): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in build/goal-r1-lis-config-c/before.o\nTraceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-lis-config-c/reject-before.py\", line 72, in <module>\n    assert a(*case)==b(*case)\n           ^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    "early-timeout": {
+      "rejected": true,
+      "case": [
+        100,
+        68,
+        true,
+        10,
+        0,
+        [
+          0,
+          4,
+          2
+        ]
+      ],
+      "stderr": "Traceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-lis-config-c/reject-early-timeout.py\", line 72, in <module>\n    assert a(*case)==b(*case)\n                     ~^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-lis-config-c/reject-early-timeout.py\", line 64, in run\n    success=bool(fill and identity==0x44 and (clear_at<=10 or mutation==1));assert u.reg_read(UC_ARM_REG_R0)==int(success)\n                                                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    "skip-delay-on-clear": {
+      "rejected": true,
+      "case": [
+        100,
+        68,
+        true,
+        0,
+        0,
+        [
+          0,
+          4,
+          2
+        ]
+      ],
+      "stderr": "Traceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-lis-config-c/reject-skip-delay-on-clear.py\", line 72, in <module>\n    assert a(*case)==b(*case)\n           ^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    "drop-raw-r2": {
+      "rejected": true,
+      "case": [
+        100,
+        68,
+        true,
+        0,
+        0,
+        [
+          0,
+          4,
+          2
+        ]
+      ],
+      "stderr": "Traceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-lis-config-c/reject-drop-raw-r2.py\", line 72, in <module>\n    assert a(*case)==b(*case)\n           ^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    }
+  },
+  "normal_build": {
+    "units": 573,
+    "application_imports": 197,
+    "bootloader_imports": 34,
+    "failures": 0,
+    "duplicate_strong_symbols": 0
+  },
+  "source_plan_unchanged": true,
+  "source_built_bytes": 3833,
+  "binary_pull_through_bytes": 642327,
+  "new_byte_qualification": false,
+  "source_completeness_proven": false,
+  "evidence": {
+    "build/sources-goal-r1-lis-config-c-entries/report.json": "7bd390623744003e74055dc589eda5dcdb5067c17b0e97e0cfd0768a6b9dd8d3",
+    "tools/build/source-plan.json": "0c889650bf8ea03def83ea1ea29730b3ccfe84bb70609c1972a500f02ba4ea2d",
+    "r1/src/application/runtime/native_lis_configure.c": "c2534b7ce5c3ee8378e4bdd9741e7f350bc5d6c72b72985176c44e669a251bdd",
+    "r1/src/sources.json": "6fa37d8afe1e50453bc47962bcfe463cd5163fb4f1b3d2a8033b02adbb77c9d3",
+    "r1/blobs/official/r1-2.2.6.0009/application.bin": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+    "build/hybrid-goal-r1-lis-config-c/build-report.json": "1badbdbc30e9da95cc7dfe33d58c56de738c4acac6645f5b825b9c76c687a97d",
+    "build/goal-r1-lis-config-c/before.c": "f6b0195a272990c84fd6b2c119cef4b8c0fd1fa44a7ebb158b1a5d8d9ed08fef",
+    "build/goal-r1-lis-config-c/REA.json": "d8b13fabd0b3c8e3d700a9f8dba9e7a3e1321da889fa9310384e836906a54e51",
+    "build/goal-r1-lis-config-c/REA.snapshot.json": "316d63df785eaabc9e2d6dcdfe35e86484f691bcaeef1f77d0abcf752c474d67",
+    "build/goal-r1-lis-config-c/verify.py": "5e2653beff98b939ccaabe90306c2092888d264f583e8cfd273575578ce463ee",
+    "build/goal-r1-lis-config-c/source.elf": "82e8a4425a3184cae4a17553f3235a8e31f9bd0e8d2dc5b9d912ab66c83ded10",
+    "build/goal-r1-lis-config-c/results.json": "1d12938c9e9538a39a0bd283b3fddee00b8d79eb1c9412a5dacb8943e4e1bc36",
+    "build/goal-r1-lis-config-c/negative.py": "c416bf4f7de022082502827bb254493235e177b8df694655178ec3522359adcd",
+    "build/goal-r1-lis-config-c/negative-results.json": "93e48f0f3572fac66f83f0f231f3289d33ad8a95475a54cea0ddc69c8e84274b"
+  }
+}

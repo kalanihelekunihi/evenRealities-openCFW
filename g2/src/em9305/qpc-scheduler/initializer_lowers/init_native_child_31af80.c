@@ -1,64 +1,18 @@
-__asm__(
-".text\n"
-".balign 4\n"
-".global opencfw_em9305_child_31af80\n"
-".type opencfw_em9305_child_31af80,@function\n"
-"opencfw_em9305_child_31af80:\n"
-"L31af80:\n"
-"enter_s [r13-r15,blink]\n"
-"L31af82:\n"
-"mov_s r14,0x80281c\n"
-"L31af88:\n"
-"mov_s r13,r0\n"
-"L31af8a:\n"
-"add r0,r0,445\n"
-"L31af8e:\n"
-"mov_s r2,0x8\n"
-"L31af90:\n"
-"bl.d opencfw_em9305_memcpy\n"
-"L31af94:\n"
-"mov_s r1,r14\n"
-"L31af96:\n"
-"ldh_s r2,[r14,0x8]\n"
-"L31af98:\n"
-"mov_s r0,r13\n"
-"L31af9a:\n"
-"add_s r1,r14,0xa\n"
-"L31af9c:\n"
-"add r0,r0,421\n"
-"L31afa0:\n"
-"sth.as r2,[r13,227]\n"
-"L31afa4:\n"
-"bl.d opencfw_em9305_memcpy\n"
-"L31afa8:\n"
-"mov_s r2,0x8\n"
-"L31afaa:\n"
-"mov_s r0,r13\n"
-"L31afac:\n"
-"add r0,r0,437\n"
-"L31afb0:\n"
-"mov_s r2,4\n"
-"L31afb2:\n"
-"bl.d opencfw_em9305_memcpy\n"
-"L31afb6:\n"
-"add_s r1,r14,0x12\n"
-"L31afb8:\n"
-"mov_s r0,r13\n"
-"L31afba:\n"
-"add r0,r0,441\n"
-"L31afbe:\n"
-"bl.d opencfw_em9305_radio_random_bytes_310038\n"
-"L31afc2:\n"
-"mov_s r1,4\n"
-"L31afc4:\n"
-"add r13,r13,429\n"
-"L31afc8:\n"
-"mov_s r1,0x8\n"
-"L31afca:\n"
-"bl.d opencfw_em9305_radio_random_bytes_310038\n"
-"L31afce:\n"
-"mov_s r0,r13\n"
-"L31afd0:\n"
-"leave_s [r13-r15,blink,pcl]\n"
-".size opencfw_em9305_child_31af80,.-opencfw_em9305_child_31af80\n"
-);
+#include <stdint.h>
+
+/* Native 0x31af80..0x31afd2: load the encryption request stored at
+ * 0x80281c: 8-byte random to record+445, diversifier halfword (0x802824)
+ * to +454, 8-byte SKD (0x802826) to +421 and 4-byte IV (0x80282e) to
+ * +437; then draw the local 4-byte IV (+441) and 8-byte SKD (+429). */
+extern void *opencfw_em9305_memcpy(void *,const void *,uint32_t);
+extern uint32_t opencfw_em9305_radio_random_bytes_310038(uintptr_t,uint32_t);
+
+uint32_t opencfw_em9305_child_31af80(uintptr_t record)
+{
+    (void)opencfw_em9305_memcpy((void *)(record+445u),(const void *)(uintptr_t)0x80281cu,8u);
+    *(volatile uint16_t *)(record+454u)=*(volatile uint16_t *)(uintptr_t)0x802824u;
+    (void)opencfw_em9305_memcpy((void *)(record+421u),(const void *)(uintptr_t)0x802826u,8u);
+    (void)opencfw_em9305_memcpy((void *)(record+437u),(const void *)(uintptr_t)0x80282eu,4u);
+    (void)opencfw_em9305_radio_random_bytes_310038(record+441u,4u);
+    return opencfw_em9305_radio_random_bytes_310038(record+429u,8u);
+}

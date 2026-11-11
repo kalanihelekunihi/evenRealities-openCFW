@@ -1,0 +1,106 @@
+{
+  "schema_version": 1,
+  "report": "build/sources-goal-r1-softdevice-bootstrap-c/report.json",
+  "evidence_files": {
+    "build/sources-goal-r1-softdevice-bootstrap-c/report.json": "0a41d14e279b82cc7462780d861c582498ba10188c1e0d0e0ad65a2dbae3a97f",
+    "r1/src/sources.json": "f531ff58c4a0679a7ea323a060b682f956630e24305bfd4df3acb3abe69e904d",
+    "r1/src/application/runtime/native_softdevice_bootstrap.c": "d6122c31562a08695b37dc940164fc40241487c24ddb0558e3337930496e1a48",
+    "r1/src/application/board/stock_seams.c": "1e24d23cc31d26ee47d51b06cfd3983c1bf2a96e2b1a275be9cc0d252dc51234",
+    "r1/src/config/sdk/ble_poll_contract.h": "9cae5163de9dff1ea28b6c8ae4d0672897e19cc91ef31e74abb4c30c94a6e546",
+    "r1/src/config/sdk/sdk_config.h": "d67ba2704cf46a73f19c539eb81eed1d5cd56af2054f78d58255ea6439050b1f",
+    "r1/config-recovered/sdk_config.h": "d7dd86c6ed2885df8bd7f1d99b6c4fb911fddd00c90f791b03385623c959920c",
+    "build/goal-r1-fstorage-registry/expanded-rw.bin": "87fdee392022fdbe23dd0daf3e859fb14f3ce26ba3e8403aab56dc9d9a913317",
+    "build/goal-r1-softdevice-bootstrap-c/manifest-before.json": "bbe0b8302b673e2cccd81e531b28261f9228cdc34c315e41f417067e4e157b35",
+    "build/goal-r1-softdevice-bootstrap-c/verify.py": "b964e4ca1cf68782b6bb93a6bb566c66aba8850bdfe4f30ac6793021d8fe36f6",
+    "build/goal-r1-softdevice-bootstrap-c/verification.json": "fe52010c492a50fdd30f47282572106572c829d866bc69fdc7245832f99adddb",
+    "build/goal-r1-softdevice-bootstrap-c/verify-final.log": "22344f4b2785c45355991e3d95aa03ecb08b9ffb0cf6e62ff7cd3cb686713ae2",
+    "build/goal-r1-softdevice-bootstrap-c/audit.py": "4b8e1e5bed9227363d18216a040e01c744e6f8a4f41343c41ab783e26fad9831",
+    "build/goal-r1-softdevice-bootstrap-c/audit.json": "7cbbaa8584c50455f302b70e6319d3275451ae1ff5a8e2406041d9745ab6778f",
+    "build/goal-r1-softdevice-bootstrap-c/defects.py": "6272db8a28947c0d057cba8e87443ea9a3e45e04934a321258c5211cbdbbbe41",
+    "build/goal-r1-softdevice-bootstrap-c/defects.json": "0fd1d62657851de89bb573143227348a50b5b2cf7a428fa4adc5ecff971af895",
+    "build/goal-r1-softdevice-bootstrap-c/rea.json": "95038c4a00fb2c58690ab320639476403e08afc579f269271f3eeec118d94696",
+    "build/goal-r1-softdevice-bootstrap-c/source.elf": "2bb239d47f60a955f337719ca2efddf6c9bfb8a65b8508ce940d134da22de460",
+    "build/goal-r1-softdevice-bootstrap-c/sdk.elf": "b65c0f12f759fb7b6bcab298d03e5e5e90f198ddf05c0397d4d9eba7c3e087ec",
+    "build/goal-r1-softdevice-bootstrap-c/r1-sources-check.log": "08138a54993dd3d7a23e9324d1d4f447f5bf0c90ffb02620b0bd86b02c73e04c",
+    "build/goal-r1-softdevice-bootstrap-c/sources-check.log": "9a04e31ccdea497187e1b244b6744779e0a6740e6af2860d540d4159ef0fddbe",
+    "build/goal-r1-softdevice-bootstrap-c/boot-link/report.json": "49db8d62bff34a1aad05408fd65f6d94c9167a8a7d8a80a6582c5abf0b7f0200",
+    "vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/softdevice/common/nrf_sdh_ble.c": "cf2aec65411af6cb56cc37990dcb1b0d02d92daa0bd613019bc2bf4ede33e48a",
+    "vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/softdevice/common/nrf_sdh_ble.h": "a33c055f74c7cf43b33fb4cfc93dadc503ca037872107067c26763ac610939d6",
+    "vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/softdevice/s140/headers/ble.h": "66fd5d2820aed6bc2c105bb878c128e22107bd7a9dfd66c50196a18e99627c08",
+    "vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/softdevice/s140/headers/ble_gatts.h": "309dabaf75e95d46dbf73e694d77ce6c9edf7ee1fdda0bc4ac77a75923d6d403",
+    "vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/softdevice/s140/headers/ble_ranges.h": "85ff720d832563ff372241a494fdbb7a139ec202ee3808715122bf1c2ab81761"
+  },
+  "stock_application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "rea_byte_window": {
+    "address": "0x539b8",
+    "length": 268,
+    "code_extent_bytes": 162,
+    "includes_literals_strings_and_adjacent_bytes": true
+  },
+  "verification": {
+    "direct_stock_C_pairs": 4512,
+    "live_mode_ram_mutation_pairs": 144,
+    "actual_SDK_default_and_enable_pairs": 128,
+    "actual_error_logging_helper": true,
+    "all_config_and_option_bytes_checked": true,
+    "SDK_diagnostics_integration_mode_zero": true,
+    "enable_request_and_SVCs_modeled": true,
+    "ordinary_C_ABI_private_frames_excluded": true
+  },
+  "audit": {
+    "unchanged_prior_object_hashes": 803,
+    "generated_boot_allocated_bytes_and_relocations_unchanged": true,
+    "import_sets_unchanged": true,
+    "only_manifest_change_one_new_unit": true,
+    "no_handwritten_assembly_in_bootstrap": true
+  },
+  "defects": [
+    {
+      "defect": "wrong-default-tag",
+      "compiled": true,
+      "behavioral_assertion_rejected": true
+    },
+    {
+      "defect": "short-notification-queue",
+      "compiled": true,
+      "behavioral_assertion_rejected": true
+    },
+    {
+      "defect": "wrong-RAM-base",
+      "compiled": true,
+      "behavioral_assertion_rejected": true
+    },
+    {
+      "defect": "stop-after-enable-error",
+      "compiled": true,
+      "behavioral_assertion_rejected": true
+    },
+    {
+      "defect": "wrong-secondary-log-bit",
+      "compiled": true,
+      "behavioral_assertion_rejected": true
+    },
+    {
+      "defect": "disabled-extended-events",
+      "compiled": true,
+      "behavioral_assertion_rejected": true
+    },
+    {
+      "defect": "narrow-error-code",
+      "compiled": true,
+      "behavioral_assertion_rejected": true
+    },
+    {
+      "defect": "nonzero-cold-RAM",
+      "compiled": true,
+      "behavioral_assertion_rejected": true
+    }
+  ],
+  "limitations": [
+    "The manager worker remains unresolved; this routine is a source prerequisite, not a complete startup path.",
+    "Enable-request and SoftDevice SVC services are modeled; physical radio and interrupt scheduling are unverified.",
+    "Actual SDK configuration/enable integration uses log mode zero; existing SDK diagnostic differences are not asserted equivalent.",
+    "Ordinary C ABI; private frames, exact descriptor addresses and incidental void return registers excluded.",
+    "Final application memory layout, __data_start__, full linking and device boot remain open."
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "unblock_probe": {
+    "passed": 216,
+    "executions": 432,
+    "actual_pending_ready_and_delayed_wakeup": true,
+    "no_function_stubs": true,
+    "limits": [
+      "Seeded valid single blocked task and current task; not asynchronous ISR delivery",
+      "Fixed RAM fixture; private frames, caller-clobbered registers/flags and physical context switching excluded"
+    ]
+  },
+  "extends": "r1/docs/reference/task-scheduler-locks-c-review.json",
+  "firmware_sources_and_manifest_unchanged": true,
+  "normal_report_reused": true,
+  "application_imports": 179,
+  "bootloader_imports": 34,
+  "source_completeness_proven": false,
+  "evidence": {
+    "build/sources-goal-r1-task-heap-ready-c/report.json": "76a8aac20cdb24cc1e111c931633e5bc84f379d44a002409729a21c238b47b20",
+    "tools/build/source-plan.json": "969af3130987be89dcdc8777d86b4c891d596b4ecef5cccfd763861f05a12d31",
+    "r1/docs/reference/task-scheduler-locks-c-review.json": "8e71ab4b351fc6d4fe71a8e9cdb3c28ab7b78f89e1d6e1d695f9eb069bd671a8",
+    "r1/symbols/function-frontier.csv": "502355bbc01cec27bbaec9ca2136433fd571af250fe196ef724c0b174c56a253",
+    "r1/src/application/rtos/scheduler-resume/scheduler.c": "b039c4f960b3c4488b0f7c30cb4dbbc29aab828fe40357decd9a366d3365ca3b",
+    "r1/src/application/rtos/scheduler-tick/scheduler-tick.c": "9e8ce61a54431af2e3c465b51d39617ef2658bcffcd660d9ae786aadf8cb9ed6",
+    "r1/src/application/rtos/port-start/port.c": "f7b5db8c0134e7b9a07ce837f4c16a0592c223f0139fd3740fb0913bd2604fb0",
+    "build/goal-r1-scheduler-unblock-c/verify.py": "098e542011ef0f2871ebf6139f83f8832b7d6731cc9fc138646989b4fa2622ba",
+    "build/goal-r1-scheduler-unblock-c/layout.ld": "6348b8eea731be05dba18ffa106360dab23e944ecf4f198b7ccbe9e32e717d00",
+    "build/goal-r1-scheduler-unblock-c/results.json": "a9a5d6e77b77cb20a6d8016a46ce4640fa1699c424f01530e3719ef58fa55460",
+    "build/goal-r1-scheduler-unblock-c/negative.py": "4821b5d74fd0673f2f7126e00d505c038e2b08b5964e7a8cacfc7b1b4516da41",
+    "build/goal-r1-scheduler-unblock-c/negative-results.json": "dc777a7ce7d35b19fa3373df6cb157be286f62800508cefd0aedac4e26a58e60"
+  },
+  "negative_control": {
+    "deadline_equality_mutation_rejected": true,
+    "stderr": "arm-none-eabi-ld: warning: /Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-task-heap-ready-c/r1/r1-application/third-party__upstream__freertos-kernel__list.c.o uses 32-bit enums yet the output is to use variable-size enums; use of enum values across objects may fail\nTraceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-scheduler-unblock-c/reject-late.py\", line 81, in <module>\n    args=(mode,priority,ticks,start,delta,*context);assert a(*args)==b(*args),args\n                                                                     ~^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/build/goal-r1-scheduler-unblock-c/reject-late.py\", line 74, in run\n    unblocked=mode=='pending' or ticks>=delta;assert word(B+20)==(READY+priority*20 if unblocked else blocked)\n                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+  }
+}

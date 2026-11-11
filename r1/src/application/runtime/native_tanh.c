@@ -1,10 +1,10 @@
+#include "native_float_bits.h"
 #include <stdint.h>
 extern uint64_t r1_format_double_add_bits(uint64_t,uint64_t);
 extern uint64_t r1_format_double_multiply_bits(uint64_t,uint64_t);
 extern uint64_t r1_format_double_divide_bits(uint64_t,uint64_t);
 extern uint64_t r1_binary64_reverse_subtract_bits(uint64_t,uint64_t);
 extern uint64_t r1_native_fabs_core_bits(uint64_t);
-extern uint32_t r1_binary64_classify_bits(uint64_t,uint32_t,uint32_t);
 extern double r1_math_low_square64(void);
 extern double r1_math_self_add64(double);
 /* Explicit unresolved source dependency; never replaced with a synthetic body. */
@@ -25,7 +25,7 @@ double r1_native_tanh(double input)
     }
     if(high>=r1_tanh_local[4])return value(local(2)^sign);
     if(high<0x3c800000u){
-        if(r1_binary64_classify_bits(x,0,0)==4)(void)r1_math_low_square64();
+        if(r1_binary64_classify_bits(x,0,0)[0]==4)(void)r1_math_low_square64();
         return input;
     }
     uint64_t absolute=r1_native_fabs_core_bits(x),result;

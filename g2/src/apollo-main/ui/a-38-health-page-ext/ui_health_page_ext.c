@@ -192,11 +192,11 @@ extern void audio_uart_page_43f6d6(void *obj, void *base, uint32_t align, int32_
 extern uint32_t audio_uart_page_44104c(uint32_t rgb);                         /* lv_color_hex */
 extern void audio_uart_page_44127e(void *obj, uint32_t color, uint32_t sel);  /* bg_color */
 extern void audio_uart_page_44129e(void *obj, uint32_t opa, uint32_t sel);    /* bg_opa */
-extern void audio_uart_page_44131c(void *obj, int32_t v, uint32_t sel);       /* border_width */
+extern void lv_obj_set_style_border_width(void *obj, int32_t v, uint32_t sel);       /* border_width */
 extern void audio_uart_page_44140e(void *obj, uint32_t color, uint32_t sel);  /* text_color */
 extern void audio_uart_page_44143e(void *obj, const void *font, uint32_t sel); /* text_font */
 extern void audio_uart_page_44145a(void *obj, uint32_t align, uint32_t sel);  /* text_align */
-extern void audio_uart_page_44146a(void *obj, int32_t v, uint32_t sel);       /* radius */
+extern void lv_obj_set_style_radius(void *obj, int32_t v, uint32_t sel);       /* radius */
 extern void audio_lv_delete_44d7b8(void *obj);                                /* lv_obj_delete */
 extern void *audio_uart_lv_child_get_44dce2(void *obj, int32_t index);        /* lv_obj_get_child */
 extern int32_t audio_uart_lv_child_count_44ddea(void *obj);                   /* lv_obj_get_child_count */
@@ -427,8 +427,8 @@ static void health_flat_style(void *obj, uint32_t opa)
     audio_uart_page_44127e(obj, audio_uart_page_44104c(0x000000u), 0u);
     audio_uart_page_44129e(obj, opa, 0u);
     lv_obj_set_style_pad_all_4fb1c0(obj, 0, 0u);
-    audio_uart_page_44131c(obj, 0, 0u);
-    audio_uart_page_44146a(obj, 0, 0u);
+    lv_obj_set_style_border_width(obj, 0, 0u);
+    lv_obj_set_style_radius(obj, 0, 0u);
 }
 
 static void health_icon_flags(void *img)
@@ -568,7 +568,7 @@ int32_t health_ext_widget_page_create_4fc644(void *parent)
     audio_uart_page_44e3ca(g2_health_scroll_container, LV_DIR_VER);
     audio_uart_page_44e368(g2_health_scroll_container, LV_SCROLLBAR_MODE_OFF);
     lv_obj_set_style_pad_all_4fb1c0(g2_health_scroll_container, 0, 0u);
-    audio_uart_page_44131c(g2_health_scroll_container, 0, 0u);
+    lv_obj_set_style_border_width(g2_health_scroll_container, 0, 0u);
     audio_uart_page_44127e(g2_health_scroll_container, audio_uart_page_44104c(0x000000u), 0u);
     audio_uart_page_44129e(g2_health_scroll_container, 0u, 0u);
 
@@ -581,8 +581,8 @@ int32_t health_ext_widget_page_create_4fc644(void *parent)
         audio_uart_page_44127e(g2_health_ext_pages[i], audio_uart_page_44104c(0x000000u), 0u);
         audio_uart_page_44129e(g2_health_ext_pages[i], 0u, 0u);
         lv_obj_set_style_pad_all_4fb1c0(g2_health_ext_pages[i], 0, 0u);
-        audio_uart_page_44131c(g2_health_ext_pages[i], 0, 0u);
-        audio_uart_page_44146a(g2_health_ext_pages[i], 0, 0u);
+        lv_obj_set_style_border_width(g2_health_ext_pages[i], 0, 0u);
+        lv_obj_set_style_radius(g2_health_ext_pages[i], 0, 0u);
     }
     page = g2_health_ext_pages[0];
 
@@ -830,8 +830,8 @@ int32_t health_ext_widget_page_create_4fc644(void *parent)
     audio_uart_page_43f6b8(g2_health_ext_indicator, LV_ALIGN_RIGHT_MID, -8, 0);
     audio_uart_page_44127e(g2_health_ext_indicator, audio_uart_page_44104c(0x000000u), 0u);
     audio_uart_page_44129e(g2_health_ext_indicator, 0xffu, 0u);
-    audio_uart_page_44131c(g2_health_ext_indicator, 0, 0u);
-    audio_uart_page_44146a(g2_health_ext_indicator, 0, 0u);
+    lv_obj_set_style_border_width(g2_health_ext_indicator, 0, 0u);
+    lv_obj_set_style_radius(g2_health_ext_indicator, 0, 0u);
     lv_obj_set_style_pad_all_4fb1c0(g2_health_ext_indicator, 0, 0u);
     audio_uart_page_44e368(g2_health_ext_indicator, LV_SCROLLBAR_MODE_OFF);
     audio_uart_page_43ded4(g2_health_ext_indicator, LV_OBJ_FLAG_ADV_HITTEST);
@@ -847,8 +847,8 @@ int32_t health_ext_widget_page_create_4fc644(void *parent)
                                    LV_ALIGN_OUT_BOTTOM_LEFT, 0, 8);
         audio_uart_page_44127e(g2_health_page_dots[i], WHITE(), 0u);
         audio_uart_page_44129e(g2_health_page_dots[i], 0xffu, 0u);
-        audio_uart_page_44131c(g2_health_page_dots[i], 0, 0u);
-        audio_uart_page_44146a(g2_health_page_dots[i], 0, 0u);
+        lv_obj_set_style_border_width(g2_health_page_dots[i], 0, 0u);
+        lv_obj_set_style_radius(g2_health_page_dots[i], 0, 0u);
         lv_obj_set_style_pad_all_4fb1c0(g2_health_page_dots[i], 0, 0u);
         audio_uart_page_43dfa4(g2_health_page_dots[i], LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FLAG_SCROLLABLE);
     }

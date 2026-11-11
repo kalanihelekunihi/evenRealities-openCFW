@@ -10,7 +10,7 @@ extern uint32_t audio_uart_lv_grid_row_span_48c9ae(void *);
 extern uint32_t audio_uart_lv_grid_descriptor_count_48d4d0(const int32_t *);
 extern int32_t audio_uart_lv_grid_weight_round_48ca18(int32_t,int32_t);
 extern void *audio_uart_lv_malloc(uint32_t);
-extern void audio_uart_lv_free(void *);
+extern void lv_free(void *);
 extern void *audio_uart_lv_grid_copy_454738(void *,const void *,uint32_t);
 extern uint32_t audio_uart_lv_child_count_44ddea(void *);
 extern void *audio_uart_lv_child_get_44dce2(void *,int32_t);
@@ -21,7 +21,7 @@ extern int32_t audio_uart_lv_obj_content_width_43fe16(void *);
 extern int32_t audio_uart_lv_obj_content_height_43fe70(void *);
 extern int32_t audio_uart_lv_basic_horizontal_48c860(void *,uint32_t);
 extern int32_t audio_uart_lv_basic_vertical_48c856(void *,uint32_t);
-extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,...);
+extern void lv_log_add(uint32_t,const char *,uint32_t,const char *,...);
 
 static const char source[]="D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\lvgl_v9.3\\LVGL\\src\\layouts\\grid\\lv_grid.c";
 static const char col_function[]="calc_cols";

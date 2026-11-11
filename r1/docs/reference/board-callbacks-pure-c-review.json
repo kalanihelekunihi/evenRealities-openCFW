@@ -1,0 +1,449 @@
+{
+  "schema_version": 1,
+  "scope": "Twenty R1 board event callbacks converted from naked assembly to C",
+  "acceptance_target": "User waived byte identity and paid compiler; evidence-supported C behavior using available toolchains",
+  "report": "build/sources-goal-r1-board-callbacks-pure-c-final/report.json",
+  "comparison_report": "build/sources-goal-r1-wear-decisions-pure-c/report.json",
+  "stock_entries": [
+    {
+      "entry": "0x42118",
+      "last_label": "0x42120",
+      "symbol": "r1_event_callback_00042118",
+      "size": 10
+    },
+    {
+      "entry": "0x42840",
+      "last_label": "0x42852",
+      "symbol": "r1_event_callback_00042840",
+      "size": 22
+    },
+    {
+      "entry": "0x42856",
+      "last_label": "0x4285e",
+      "symbol": "r1_event_callback_00042856",
+      "size": 10
+    },
+    {
+      "entry": "0x42860",
+      "last_label": "0x4286c",
+      "symbol": "r1_event_callback_00042860",
+      "size": 14
+    },
+    {
+      "entry": "0x4286e",
+      "last_label": "0x4287a",
+      "symbol": "r1_event_callback_0004286e",
+      "size": 14
+    },
+    {
+      "entry": "0x4287c",
+      "last_label": "0x42894",
+      "symbol": "r1_event_callback_0004287c",
+      "size": 26
+    },
+    {
+      "entry": "0x42896",
+      "last_label": "0x428a2",
+      "symbol": "r1_event_callback_00042896",
+      "size": 14
+    },
+    {
+      "entry": "0x428a4",
+      "last_label": "0x428b0",
+      "symbol": "r1_event_callback_000428a4",
+      "size": 14
+    },
+    {
+      "entry": "0x42960",
+      "last_label": "0x42960",
+      "symbol": "r1_event_callback_00042960",
+      "size": 4
+    },
+    {
+      "entry": "0x42964",
+      "last_label": "0x42966",
+      "symbol": "r1_event_callback_00042964",
+      "size": 6
+    },
+    {
+      "entry": "0x4296a",
+      "last_label": "0x42976",
+      "symbol": "r1_event_callback_0004296a",
+      "size": 14
+    },
+    {
+      "entry": "0x42a10",
+      "last_label": "0x42a1c",
+      "symbol": "r1_event_callback_00042a10",
+      "size": 14
+    },
+    {
+      "entry": "0x42bc2",
+      "last_label": "0x42bc2",
+      "symbol": "r1_event_callback_00042bc2",
+      "size": 4
+    },
+    {
+      "entry": "0x42bc6",
+      "last_label": "0x42bc6",
+      "symbol": "r1_event_callback_00042bc6",
+      "size": 4
+    },
+    {
+      "entry": "0x42bca",
+      "last_label": "0x42bca",
+      "symbol": "r1_event_callback_00042bca",
+      "size": 4
+    },
+    {
+      "entry": "0x42788",
+      "last_label": "0x427f2",
+      "symbol": "r1_event_callback_00042788",
+      "size": 108
+    },
+    {
+      "entry": "0x428b4",
+      "last_label": "0x4291c",
+      "symbol": "r1_event_callback_000428b4",
+      "size": 106
+    },
+    {
+      "entry": "0x42978",
+      "last_label": "0x429c8",
+      "symbol": "r1_event_callback_00042978",
+      "size": 82
+    },
+    {
+      "entry": "0x42a20",
+      "last_label": "0x42ab2",
+      "symbol": "r1_event_callback_00042a20",
+      "size": 148
+    },
+    {
+      "entry": "0x42b20",
+      "last_label": "0x42b6e",
+      "symbol": "r1_event_callback_00042b20",
+      "size": 82
+    }
+  ],
+  "native_instruction_bytes": 700,
+  "audit": {
+    "compiled_units": 877,
+    "changed_sources": [
+      "r1/src/application/board/native_event_callbacks.c",
+      "r1/src/application/runtime/native_health_daily_fixture.c",
+      "r1/src/application/runtime/native_health_get_dispatch.c"
+    ],
+    "changed_objects": [
+      "r1/src/application/board/native_event_callbacks.c"
+    ],
+    "unchanged_other_nongenerated_sources_and_objects": 864,
+    "differing_generated_objects": [
+      "{gen}/r1_startup_vectors.S",
+      "{gen}/r1_uecc.c"
+    ],
+    "application_imports": 61,
+    "bootloader_imports": 22,
+    "import_sets_unchanged": true,
+    "duplicate_strong_symbols": [],
+    "tested_object_equals_normal_build": true,
+    "new_writable_state_bytes": 0,
+    "string_sections_and_retained_425b0_body_and_relocations_unchanged": true,
+    "callbacks_converted_to_C": 20,
+    "remaining_assembly_items": [
+      "425b0 implicit R2 R3 fallback callback",
+      "42724 string interior alias"
+    ],
+    "source_plan_and_cache_layout_unchanged": true
+  },
+  "direct": {
+    "callback_guard_length_comparisons": 5760,
+    "scalar_and_phone_gate_comparisons": 7800,
+    "clock_boundary_comparisons": 10080,
+    "live_provider_mutation_comparisons": 240,
+    "native_instruction_bytes_executed": [
+      10,
+      22,
+      10,
+      14,
+      14,
+      26,
+      14,
+      14,
+      4,
+      6,
+      14,
+      14,
+      4,
+      4,
+      4,
+      108,
+      106,
+      82,
+      148,
+      82
+    ],
+    "packet_read_width_order_and_call_snapshots_match": true,
+    "independent_simple_guard_clock_and_hour_oracles": true,
+    "source_cannot_execute_stock": true,
+    "providers_modeled": true,
+    "BX_LR_port_returns": true
+  },
+  "actual_charge_chain": {
+    "paired_cases": 7200,
+    "actual_C_entries_executed": {
+      "r1_event_callback_0004287c": 7200,
+      "r1_authenticated_phone_connection_gate": 7200,
+      "r1_event_service_000838e0": 2160,
+      "r1_protocol_response_send_0x100": 2160
+    },
+    "hardware_queries_and_final_response_modeled": true,
+    "actual_gate_charge_packet_header_chain": true,
+    "source_cannot_execute_stock": true,
+    "BX_LR_port_returns": true
+  },
+  "compiled_defects_rejected": [
+    {
+      "name": "missing_null_guard",
+      "compiled": true,
+      "rejected": true,
+      "case": {
+        "root": 3,
+        "payload": 0,
+        "length": 9
+      }
+    },
+    {
+      "name": "wrong_length",
+      "compiled": true,
+      "rejected": true,
+      "case": {
+        "root": 3,
+        "payload": 536969216,
+        "length": 9
+      }
+    },
+    {
+      "name": "full_word_command",
+      "compiled": true,
+      "rejected": true,
+      "case": {
+        "root": 5,
+        "payload": 257
+      }
+    },
+    {
+      "name": "ignored_phone_gate",
+      "compiled": true,
+      "rejected": true,
+      "case": {
+        "root": 5,
+        "payload": 1,
+        "gate": 0
+      }
+    },
+    {
+      "name": "reordered_health_services",
+      "compiled": true,
+      "rejected": true,
+      "case": {
+        "root": 1
+      }
+    },
+    {
+      "name": "hour_missing_zero_cleanup",
+      "compiled": true,
+      "rejected": true,
+      "case": {
+        "root": 16,
+        "payload": 0
+      }
+    },
+    {
+      "name": "inclusive_clock_cutoff",
+      "compiled": true,
+      "rejected": true,
+      "case": {
+        "root": 18,
+        "old_ts": 100,
+        "new_ts": 130,
+        "old_tz": 0,
+        "new_tz": 0,
+        "modes": [
+          0
+        ]
+      }
+    },
+    {
+      "name": "signed_timezone",
+      "compiled": true,
+      "rejected": true,
+      "case": {
+        "root": 18,
+        "new_tz": 65535
+      }
+    },
+    {
+      "name": "unconditional_pending",
+      "compiled": true,
+      "rejected": true,
+      "case": {
+        "root": 18,
+        "update": 0
+      }
+    },
+    {
+      "name": "key_missing_offset",
+      "compiled": true,
+      "rejected": true,
+      "case": {
+        "root": 19
+      }
+    },
+    {
+      "name": "stress_wrong_field",
+      "compiled": true,
+      "rejected": true,
+      "case": {
+        "root": 17,
+        "length": 8,
+        "modes": [
+          7
+        ]
+      }
+    },
+    {
+      "name": "hour_wrong_event",
+      "compiled": true,
+      "rejected": true,
+      "case": {
+        "root": 16,
+        "payload": 1
+      }
+    }
+  ],
+  "contract": [
+    "Preserve packet pointer/length guards, scalar low-byte capture, four-service order, log field read order, fresh timestamps and post-provider reloads.",
+    "Clock timezone is zero-extended; event publication uses unsigned absolute difference strictly greater than30, or changed timezone.",
+    "Hour multicast preserves the stock scalar argument word and zero cleanup event. No address-of-local reinterpretation.",
+    "Daily fixture and get-dispatch declarations now describe the pointer consumed in R0; their machine objects are unchanged.",
+    "Activity and stress consumer lengths are ignored by the actual consumers; comparison excludes unused R1 at those boundaries."
+  ],
+  "limits": [
+    "Providers are modeled in direct callback comparisons. The separate7200-case chain executes actual C callback, connection-presence predicate, charge packet and response-header helper; charger queries, handle getter and final response transport remain modeled. The gate does not establish authentication.",
+    "Raw stock is pinned and all20 REA instruction ranges agree with it. All700 callback instruction bytes execute across the direct corpus. Source execution cannot enter stock; modeled providers return through BX LR instructions.",
+    "Compare call arguments, packet snapshots and read width/order; preserve saved integer/FP registers, SP, masks and guards. Exclude void R0, caller scratch, APSR and private stack addresses. Unmapped accesses are logical access-shape checks, not physical fault proof.",
+    "Retain callback425b0 assembly because its implicit incoming R2/R3 fallback record contract is unresolved. Retain the42724 string-interior assembler alias. Neither is claimed converted.",
+    "No new persistent state or imports.864 other nongenerated source/object pairs unchanged, and the two corrected provider declaration objects unchanged. Existing generated startup and uecc objects differ as expected.",
+    "The first full build failed on a pre-fix volatile-pointer warning; only the clean final report is admitted. Early fixture oracle and audit bookkeeping failures were corrected without further production changes.",
+    "Full build is relocatable composition, not final executable/startup or boot proof. Physical sensor, charger, flash and BLE delivery and remaining hardware dependencies remain open. No instruction or image identity is claimed."
+  ],
+  "evidence_files": {
+    "build/sources-goal-r1-board-callbacks-pure-c-final/report.json": "154983abb944b090b15c361b70c556e75828e879afeb630b264285c1e278c9f9",
+    "build/sources-goal-r1-wear-decisions-pure-c/report.json": "2a6db420ea6dfe3fc31f24bed383259b9003c6f8b502587f2d0cb7cbba17e8e1",
+    "r1/src/application/board/native_event_callbacks.c": "37b5ebcc839c0930c9d3c257c3e5ec9479233056d3667dc7217cf9fb574442f6",
+    "r1/src/application/runtime/native_health_daily_fixture.c": "c25b863a4b27f3159559e3215e6f9d628856abe1cac237beb5ea249d2a22d964",
+    "r1/src/application/runtime/native_health_get_dispatch.c": "58a30bddfd8b376a90252a22dc0f7b63e094bd22ac4c4c4f5a143c084e81ca42",
+    "r1/src/sources.json": "d03c8c256ced5886b1536621b953cb42c353d80b81bf490c582cb7a15b2d88f0",
+    "tools/build/source-plan.json": "eeb516e31b3310fb0718f36908977f8125723f7c5e0e86cd6744395826259a4d",
+    "r1/src/config/runtime/native_health_cache.ld": "eb8f131c489cd818d4e36718718fa1989719ca0170f164541a1a5bf56dfc1ec3",
+    "r1/docs/reference/FUNCTION-OWNERSHIP.csv": "22ed5c3156548303cfb7bf9b6d06bd5bbd00ecfcc34e3116c78895c8d9468101",
+    "r1/symbols/function-frontier.csv": "0097fb40b6c5fe27fd73b3c8ddd985b5b0dc008683bd8753f717698ca4c1bc00",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-board-callbacks-pure-c-final/r1/r1-application/r1__src__application__board__native_event_callbacks.c.o": "cd26d7abd036724f9627c2964eecc96157becee3c99b416d2f6112f89cc0b9ff",
+    "build/goal-r1-board-callbacks-pure-c/audit.json": "372a22366693aa7142c63ecacb6f597088eb56d4de6f8acfa0e3e15ac852be55",
+    "build/goal-r1-board-callbacks-pure-c/verify.log": "13c5bed310dd5e806159bec8c03bdc51d1dab8410a17b45eed794a6f75aedd24",
+    "build/goal-r1-board-callbacks-pure-c/ports.json": "ef154b968221f4ae9ba00b4fe9a110c5405704b6d8523d2010b53c61b64d3a44",
+    "build/goal-r1-board-callbacks-pure-c/audit.py": "59cf6b164da8f183a3c7e22bb1117e19af6b3d23c0e1048398955bd3170f0ba9",
+    "build/goal-r1-board-callbacks-pure-c/native_health_daily_fixture.c.before": "36ae90090df2e165a6c9e1e8845eeba4975f1eb2513a5ab34f3feac5ec15aee1",
+    "build/goal-r1-board-callbacks-pure-c/entries.json": "68cd1b8d557af96a9cda9325412265c5f67cb50044d7d78cf348319bb9464669",
+    "build/goal-r1-board-callbacks-pure-c/callbacks-before.c": "5f24f7494fd2de78b934052a8b03291f4019cdeb52642ed8ef5f2ef04d6dd56b",
+    "build/goal-r1-board-callbacks-pure-c/source.elf": "c99719bb2ad0e6c5dcdcc73fa33ebfe6eac35419b1ffb9ede2e5c983967eb42f",
+    "build/goal-r1-board-callbacks-pure-c/negative.py": "b319057a82755a5f35f0f98515c6a1f5bd855df7cda1b78e28b7e16c8af6faf8",
+    "build/goal-r1-board-callbacks-pure-c/chain.py": "a20eb67626beb2126da8bc7f98bac57408625d1bfd631442f88644a983d04cb3",
+    "build/goal-r1-board-callbacks-pure-c/negative-results.json": "8637c09f7ab31e1753188e4dd46da3d8941879b6a79b29a81f6d7ac96dd6bda2",
+    "build/goal-r1-board-callbacks-pure-c/source.o": "cd26d7abd036724f9627c2964eecc96157becee3c99b416d2f6112f89cc0b9ff",
+    "build/goal-r1-board-callbacks-pure-c/results.json": "8ede4935f10f92c5f9e68e4f59f704fc0eb0861ed2a524dcd45ebcffac6e60ef",
+    "build/goal-r1-board-callbacks-pure-c/chain-results.json": "da8877e3e2012ffcb13cbdf38952d6f8acd969b026f49f8b3bac93625beaeb0c",
+    "build/goal-r1-board-callbacks-pure-c/build-final.log": "d439c52446f0514219ebf26d22d0a9eb3a42721c6140e46a8d0ffcceab426385",
+    "build/goal-r1-board-callbacks-pure-c/chain.log": "413fe9d0515c660928a62c925c7b33eee3c5516b1d4d81aa7e02072da072da4b",
+    "build/goal-r1-board-callbacks-pure-c/rea-bytes.json": "eb3b8c1a4b12778ed8fefb5470bf5edf1b132aa99684f8328dd92d2cc5a486b1",
+    "build/goal-r1-board-callbacks-pure-c/manifest-before.json": "af7b29173bb17171338f75389205cff349014aba919181bdfc422786a00ff23c",
+    "build/goal-r1-board-callbacks-pure-c/source.d": "8f2a0ab7ab475e13108431138c951ce36aaf6da59761b8a4fbc9940ab879f891",
+    "build/goal-r1-board-callbacks-pure-c/chain.elf": "ea6758fa044ebc184b0652f3facbae9127ce33c36dfb9961eb5e9eeecb939262",
+    "build/goal-r1-board-callbacks-pure-c/verify.py": "7c19c2c38710e615550ec3d1b455f1beee2be1fb14114ae14fb877fba8591c13",
+    "build/goal-r1-board-callbacks-pure-c/native_health_get_dispatch.c.before": "6664515d7c7ef35cfe2cf2a3306bef8a7f29f1a1868b745273e6fe1b7fb41592",
+    "build/goal-r1-board-callbacks-pure-c/build.log": "383f38bbcec99cc90a214b2da8179a84d552c93998c7cb898703c398b7c48a1c",
+    "build/goal-r1-board-callbacks-pure-c/negative-signed_timezone/candidate.c": "ca565ef9640d50f90477d1179d1bdface54766cee04c163cce4fe53ad8fbf303",
+    "build/goal-r1-board-callbacks-pure-c/negative-signed_timezone/verify.log": "2e97976c164544d3cd79804efbcb926700668f818bb072dc73967436a700161d",
+    "build/goal-r1-board-callbacks-pure-c/negative-signed_timezone/source.elf": "2ef0eef6214a9ef2c2d238354facfa66744e58ee6270ae3183171cc5560efcb3",
+    "build/goal-r1-board-callbacks-pure-c/negative-signed_timezone/source.o": "b511fca3d8a056c241b49383f99b470be2d2d7ad0435b45e7223ac44572bb1d6",
+    "build/goal-r1-board-callbacks-pure-c/negative-signed_timezone/compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/goal-r1-board-callbacks-pure-c/negative-signed_timezone/source.d": "b5c85f178b745f0455693334bfa082e5491630fc5d3f801162d93aa7a783b3a8",
+    "build/goal-r1-board-callbacks-pure-c/negative-ignored_phone_gate/candidate.c": "03747892c939dc12543d4427fd8aa836c02cfcf38b2a020918dce29b5f700869",
+    "build/goal-r1-board-callbacks-pure-c/negative-ignored_phone_gate/verify.log": "be1e9cecb24776db51ce01ba936d6e7e916059a4592d491fd7ef72000057afd7",
+    "build/goal-r1-board-callbacks-pure-c/negative-ignored_phone_gate/source.elf": "d0a0971e69f6509865ad85233def5a7e5b2db9d1dfe574c11dde23723b6adaec",
+    "build/goal-r1-board-callbacks-pure-c/negative-ignored_phone_gate/source.o": "cfac01076be623e6607a770326e28b8995d452439cd3e8b2677f2dfdfca7773d",
+    "build/goal-r1-board-callbacks-pure-c/negative-ignored_phone_gate/compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/goal-r1-board-callbacks-pure-c/negative-ignored_phone_gate/source.d": "ddd727b0391777145a53ef4b762d6933ce2f0d322493d3b9eb94f11ec37294c7",
+    "build/goal-r1-board-callbacks-pure-c/negative-full_word_command/candidate.c": "102248032d7ce6297feff4e9d27225e6d5c20cec75951c70f3348e9e8c6e9fec",
+    "build/goal-r1-board-callbacks-pure-c/negative-full_word_command/verify.log": "be1e9cecb24776db51ce01ba936d6e7e916059a4592d491fd7ef72000057afd7",
+    "build/goal-r1-board-callbacks-pure-c/negative-full_word_command/source.elf": "d4fc5d5df9c601d3a5e685c3a235194b7063a32e037a95429a294775c6e868fd",
+    "build/goal-r1-board-callbacks-pure-c/negative-full_word_command/source.o": "75841a0f3e4685b8c0d19cdfab91c7c3cedeaa449514119f12b2490e8a74a3fe",
+    "build/goal-r1-board-callbacks-pure-c/negative-full_word_command/compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/goal-r1-board-callbacks-pure-c/negative-full_word_command/source.d": "8b4392721cdae2c948ace20d29689cb7a858b5033c46eefc3d0e94a35e2e0914",
+    "build/goal-r1-board-callbacks-pure-c/negative-stress_wrong_field/candidate.c": "ef7d2c332fca89909c6c38b861bf80f37f6a4b7bbac569a8536ce349c6760757",
+    "build/goal-r1-board-callbacks-pure-c/negative-stress_wrong_field/verify.log": "2ebb8310c87ff60c7f1c46573cd32d4304f58532ecee8cf53a3cabef1e0fbe2e",
+    "build/goal-r1-board-callbacks-pure-c/negative-stress_wrong_field/source.elf": "323763745194c71c224e1b72de42bfb25b5791f269fc5da41c3175b8495f5dd6",
+    "build/goal-r1-board-callbacks-pure-c/negative-stress_wrong_field/source.o": "0693362a2c2d397a086869376ff23408cca03ed65d1172f13dcb8b734faaa49a",
+    "build/goal-r1-board-callbacks-pure-c/negative-stress_wrong_field/compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/goal-r1-board-callbacks-pure-c/negative-stress_wrong_field/source.d": "5fe3ac1fb0c66a157f8a1f5305f223e2597bc2ede01c61858f7a19467bac5243",
+    "build/goal-r1-board-callbacks-pure-c/negative-hour_missing_zero_cleanup/candidate.c": "9499daa50023370732739db9cd58e606c7ba97046633413973af6e0cab59fb20",
+    "build/goal-r1-board-callbacks-pure-c/negative-hour_missing_zero_cleanup/verify.log": "da2545721d5f77498c4e1fedae61a94e11114138e56627defa22485bd0156199",
+    "build/goal-r1-board-callbacks-pure-c/negative-hour_missing_zero_cleanup/source.elf": "873a306992f8d2e4993ed7445f5d0fcbc657ebf6be5d36a8c837a2df4ef56ce8",
+    "build/goal-r1-board-callbacks-pure-c/negative-hour_missing_zero_cleanup/source.o": "54f93c055569c28bc9f8f6359a82193a3edd9c1cb66619a9ea06af21d25b8a4d",
+    "build/goal-r1-board-callbacks-pure-c/negative-hour_missing_zero_cleanup/compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/goal-r1-board-callbacks-pure-c/negative-hour_missing_zero_cleanup/source.d": "8dbc429b9c534558beb9b2e73ae426f1dd55a7341d6170926344518509cc3b7a",
+    "build/goal-r1-board-callbacks-pure-c/negative-key_missing_offset/candidate.c": "be17b01b6d1732295c592e2a1cbafb090e858cc074891af2b1f0504d99387aef",
+    "build/goal-r1-board-callbacks-pure-c/negative-key_missing_offset/verify.log": "4a75ae6f7e5f8a9e45b9604137403585697ad3f1d74ba1b7aff691cd257d8929",
+    "build/goal-r1-board-callbacks-pure-c/negative-key_missing_offset/source.elf": "d31488ee4c3bb0fba759a8c86b7ec113ae6c2b4fda6b36d84d659bd3a01ed20f",
+    "build/goal-r1-board-callbacks-pure-c/negative-key_missing_offset/source.o": "69b5f8cc71290c9e7adb0b0d923c68e758befde80b0e1f3e1cebf143a1e454f8",
+    "build/goal-r1-board-callbacks-pure-c/negative-key_missing_offset/compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/goal-r1-board-callbacks-pure-c/negative-key_missing_offset/source.d": "029f192089c63f3994f757b7f9bc5c86ee763b53aead63afd6b82ee23d94f7c0",
+    "build/goal-r1-board-callbacks-pure-c/negative-hour_wrong_event/candidate.c": "c67dbf3b8e066fc7eba6d3370d6578276a046060bca9398dcbe7385520b44a69",
+    "build/goal-r1-board-callbacks-pure-c/negative-hour_wrong_event/verify.log": "da2545721d5f77498c4e1fedae61a94e11114138e56627defa22485bd0156199",
+    "build/goal-r1-board-callbacks-pure-c/negative-hour_wrong_event/source.elf": "7b321c73736cc7d423c1745dfb17cb4c3c26439196c82bfa0a2fea6e1de92aae",
+    "build/goal-r1-board-callbacks-pure-c/negative-hour_wrong_event/source.o": "f7cad339ae80e004d3dba3a5e6afbad18e6d8cfb32475a3475c14a634c1426f4",
+    "build/goal-r1-board-callbacks-pure-c/negative-hour_wrong_event/compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/goal-r1-board-callbacks-pure-c/negative-hour_wrong_event/source.d": "52e207a8216ba04215c7a9217acf25c4a1c6eb95f3f5de4f2e5ff7684bae6ae8",
+    "build/goal-r1-board-callbacks-pure-c/negative-missing_null_guard/candidate.c": "a0cb8e4bbf291e7bcc409de9336a50b94791368d4a5607892566d6bcf2ef0650",
+    "build/goal-r1-board-callbacks-pure-c/negative-missing_null_guard/verify.log": "51c9a0671cc05d20208ac2474c215eb86ee68203a559231ee95b31a5897ef7b6",
+    "build/goal-r1-board-callbacks-pure-c/negative-missing_null_guard/source.elf": "c8847f7c0d484d4fa374ca1b55a5c40a7cae01357382b0033cc0858d6acf72f3",
+    "build/goal-r1-board-callbacks-pure-c/negative-missing_null_guard/source.o": "565e62b0ea2410a1f84d498eb9b7d7034dd6248a11aa4f462494c5fc782f06bf",
+    "build/goal-r1-board-callbacks-pure-c/negative-missing_null_guard/compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/goal-r1-board-callbacks-pure-c/negative-missing_null_guard/source.d": "d8d6064cbdc35822bb51c27bd02c33dc45bf13c74770e8d859bdda4bec1204e6",
+    "build/goal-r1-board-callbacks-pure-c/negative-wrong_length/candidate.c": "9b0f8c51a4809800fa8c3b1068b660df8887cd15c493828e62e5d031ecc32b33",
+    "build/goal-r1-board-callbacks-pure-c/negative-wrong_length/verify.log": "51c9a0671cc05d20208ac2474c215eb86ee68203a559231ee95b31a5897ef7b6",
+    "build/goal-r1-board-callbacks-pure-c/negative-wrong_length/source.elf": "7bccd299fc4d76e559992b1334c5eb10c2f9b3e7439dbe04d3ed882a27206c77",
+    "build/goal-r1-board-callbacks-pure-c/negative-wrong_length/source.o": "95fb21ab60811fed84f751578911e0dd1672d0025cfd1647748aef36c7485e02",
+    "build/goal-r1-board-callbacks-pure-c/negative-wrong_length/compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/goal-r1-board-callbacks-pure-c/negative-wrong_length/source.d": "2f257119e2623b0dd9a8c1179eab44c467c5b6650b092028085468fa938fdd1d",
+    "build/goal-r1-board-callbacks-pure-c/negative-unconditional_pending/candidate.c": "dd01667fa90347dc7c469a13112886ae809aefec0e4d590d3a809724ce466575",
+    "build/goal-r1-board-callbacks-pure-c/negative-unconditional_pending/verify.log": "514c67badb8e368965ee2f584964aac30ad6deb7cd09778c7c2e3e27b8ec2007",
+    "build/goal-r1-board-callbacks-pure-c/negative-unconditional_pending/source.elf": "59c5872b861e47d1b1ca8b7d32f0d89dae3db6e0ba59a57c4c405971692ee751",
+    "build/goal-r1-board-callbacks-pure-c/negative-unconditional_pending/source.o": "483e5dd6c2c9adf7b59e35f6d4a30c9cdf476763ecf106299776096bef0184bd",
+    "build/goal-r1-board-callbacks-pure-c/negative-unconditional_pending/compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/goal-r1-board-callbacks-pure-c/negative-unconditional_pending/source.d": "7ca8f324870806ea4b886e115cae6d6d945d3e8ff2d34794d7a01767b807273c",
+    "build/goal-r1-board-callbacks-pure-c/negative-inclusive_clock_cutoff/candidate.c": "c6a479774a28d2acb1997bf99614031f56c68712f36efedb835fc906ae6e12bd",
+    "build/goal-r1-board-callbacks-pure-c/negative-inclusive_clock_cutoff/verify.log": "c9d9a92e3bd5426b9c71d5f34d7b2493d689c9eb336998e6c65a2cd36f86f68b",
+    "build/goal-r1-board-callbacks-pure-c/negative-inclusive_clock_cutoff/source.elf": "a77154e27bda8c8b5870582c6f05cdd80ba940dd3345aa5be2f03ee4e83a3c68",
+    "build/goal-r1-board-callbacks-pure-c/negative-inclusive_clock_cutoff/source.o": "5bd1e06c446435e16c474a2021c9efa922ef0a3c650c59ab0c75a38ededce5f7",
+    "build/goal-r1-board-callbacks-pure-c/negative-inclusive_clock_cutoff/compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/goal-r1-board-callbacks-pure-c/negative-inclusive_clock_cutoff/source.d": "4354cdea4979802bb26a1c4fc7ad0b03e26ca3a374a8c47fd09d0d9cd9299fe9",
+    "build/goal-r1-board-callbacks-pure-c/negative-reordered_health_services/candidate.c": "ebec2ac1fdf956fbf5ae485e15d45be231803f768263e3795aad291db8aca97b",
+    "build/goal-r1-board-callbacks-pure-c/negative-reordered_health_services/verify.log": "83e2759fa14f6ac1995b15d072f504e700dc9889d75e7c47b530dff0886cac7b",
+    "build/goal-r1-board-callbacks-pure-c/negative-reordered_health_services/source.elf": "ccf8e41892be62abe7f7cd140ccf2514245e82c385e6c51e72a84922ffabd87c",
+    "build/goal-r1-board-callbacks-pure-c/negative-reordered_health_services/source.o": "44ecd822fa677290458ac4d49e481e070e6c08d90e4ff254fb88a289aa82251e",
+    "build/goal-r1-board-callbacks-pure-c/negative-reordered_health_services/compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/goal-r1-board-callbacks-pure-c/negative-reordered_health_services/source.d": "edf007a399b09064a70cb82311cb11474e1f06353c79983375ee8bc9877e5d98"
+  }
+}

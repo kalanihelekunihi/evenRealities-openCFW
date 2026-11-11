@@ -1,0 +1,123 @@
+{
+  "schema_version": 1,
+  "scope": "R1 stress sample storage in ordinary C",
+  "report": "build/sources-goal-r1-stress-sample-c/report.json",
+  "comparison_report": "build/sources-goal-r1-scalar-cache-layout/report.json",
+  "stock_entry": "0x5bcec",
+  "stock_instruction_size": 220,
+  "audit": {
+    "compiled_units": 862,
+    "unchanged_prior_nongenerated_objects": 851,
+    "changed_prior_nongenerated_objects": [
+      "r1/src/application/runtime/native_health_sample_storage.c"
+    ],
+    "application_imports": 63,
+    "bootloader_imports": 22,
+    "manifest_unchanged": true,
+    "source_plan_and_cache_layout_unchanged": true,
+    "new_state_definitions": 0,
+    "other_sample_writer_sections_and_relocations_unchanged": true,
+    "unchanged_sections": {
+      ".text.r1_hr_event_storage": "4df785f29ef4616d8c2baeb0d0107a68c550bef5773aacf06450293120dd19d1",
+      ".text.r1_hrv_event_storage": "ffdde3958f80259300912650349eea9629667be26eb187273936880b2a3f9c3e",
+      ".text.r1_spo2_event_storage": "b484cb21a444c8e409dfc9d60866648b8dc62e16bf2dc1c9e58874bd6643970c",
+      ".text.r1_temperature_event_storage": "d80e75743e2ecab1b3e1c79ca7722cc21426c3448bb107f051e451a97778ae11",
+      ".r1.health.storage.hr": "5b6fb58e61fa475939767d68a446f97f1bff02c0e5935a3ea8bb51e6515783d8",
+      ".r1.health.storage.hrv": "f1663cceeb67ba35c5a5cbf58b56050ddbe5ec5680ea9e55837b57524f29b876",
+      ".r1.health.storage.spo2": "5b6fb58e61fa475939767d68a446f97f1bff02c0e5935a3ea8bb51e6515783d8",
+      ".r1.health.storage.temperature": "5b6fb58e61fa475939767d68a446f97f1bff02c0e5935a3ea8bb51e6515783d8",
+      ".r1.health.storage.stress_text": "e6aee38e3738d213e9168a0854134b04af4c87362bc5cbb4123d77cffb051ca4"
+    },
+    "stress_C_section_alignment": 4
+  },
+  "direct": {
+    "stock_C_comparisons": 25946,
+    "native_instruction_bytes_executed": 220,
+    "all_logging_branches_live_provider_mutations_and_sample_aliases": true,
+    "null_sample_all_hours_and_min_max_zero_edges": true,
+    "void_return_caller_scratch_private_frames_and_physical_sensors_excluded": true
+  },
+  "cache_writer_reader_reset_pipeline": {
+    "stock_C_writer_accessor_reader_reset_comparisons": 576,
+    "linked_normal_objects_and_production_layout_used": true,
+    "shared_prefix_and_timestamp_addresses_match": true,
+    "writer_reader_reset_execute": true,
+    "hour_average_enabled_time_status_and_disabled_logging_modeled": true
+  },
+  "compiled_defects_rejected": [
+    {
+      "defect": "kind",
+      "rejected": true
+    },
+    {
+      "defect": "max",
+      "rejected": true
+    },
+    {
+      "defect": "min-zero",
+      "rejected": true
+    },
+    {
+      "defect": "metadata",
+      "rejected": true
+    },
+    {
+      "defect": "log-average",
+      "rejected": true
+    },
+    {
+      "defect": "mode4",
+      "rejected": true
+    },
+    {
+      "defect": "live-hour",
+      "rejected": true
+    }
+  ],
+  "contract": [
+    "Null sample does nothing. Capture hour from initial timestamp, then reload value/timestamp for average kind3.",
+    "Keep maximum/minimum with zero minimum sentinel, low-byte average and five-byte latest sample at cache75. Preserve aliasing and reload sample after metadata writes.",
+    "Read log modes separately at each native decision; preserve full32-bit average in diagnostics and live sample/min/max reads after each provider.",
+    "Use existing hourly/stress owner at offset40; no extra cache, metadata, bridge or dated variant. Other four sample-writer code/relocations and state sections remain identical."
+  ],
+  "limits": [
+    "REA code bytes match locked raw; all220 instruction bytes execute. Direct hour/average/logging providers modeled, with scalar output mutations and sample/cache aliases.",
+    "576 chain cases execute actual cache accessors, hourly readers, resets and memory clear; hour/average, nonzero time status and disabled logging are modeled. Temperature assembly remains unchanged and aligned4 in this probe.",
+    "Stress is void: caller scratch, APSR and private frames are excluded; saved integer/FP state, masks, SP and guards checked. Atomic access widths, concurrency and physical faults not proven.",
+    "Stress compiler-provided section alignment4 removes this function literal-pool placement dependency. Other sample-writer assembly remains separate conversion/alignment work.",
+    "Final startup/scatter linking, complete application image, physical sensors and device boot remain unverified."
+  ],
+  "evidence_files": {
+    "build/sources-goal-r1-stress-sample-c/report.json": "07acb651442e264384189c9cf1bfde72033e9f030ce6b817370e327532aef516",
+    "build/sources-goal-r1-scalar-cache-layout/report.json": "8f8481ee559fac6311dd4d3b7946ba8cc73a28caf29a5c30ba780739a3e930f9",
+    "r1/src/application/runtime/native_health_sample_storage.c": "611b4f5b177c7df82a69e746f875a53ff9d4db00374d79bdff6b7e0eab3046cb",
+    "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-stress-sample-c/r1/r1-application/r1__src__application__runtime__native_health_sample_storage.c.o": "36fb71508dbf03cbfabe3efd78018f0512828329f731613ffe5315d396094d73",
+    "r1/src/sources.json": "35403e8211b5696a8f5c39a07598f6554ed8cc3563a3d29ff5538609eb4c09a6",
+    "tools/build/source-plan.json": "eeb516e31b3310fb0718f36908977f8125723f7c5e0e86cd6744395826259a4d",
+    "r1/src/config/runtime/native_health_cache.ld": "eb8f131c489cd818d4e36718718fa1989719ca0170f164541a1a5bf56dfc1ec3",
+    "r1/src/application/runtime/native_hourly_state.h": "a3a6d8776279f85039202414b3dbd493777feab2825d7102daf0289b8a11e49b",
+    "build/goal-r1-stress-sample-c/audit.json": "e7b3bb07a1a6b2b1aa90c29337b9ad91ae01d26f8cbfb168b8476d619537bb2f",
+    "build/goal-r1-stress-sample-c/negative.json": "82a97d5d8fdb23e12a7689047e88d6134b2c8d9236310cda374dbb65ad09c747",
+    "build/goal-r1-stress-sample-c/test.ld": "521cd475983120edf4dcba9267b80675fd4dc03ca17c59de71f55adce1705edc",
+    "build/goal-r1-stress-sample-c/audit.py": "403ce42f958b838ded14c78175ea94e43d91e01e6f37339aba4e9b63ccbe167b",
+    "build/goal-r1-stress-sample-c/cache.ld": "795f24c58112948b802dbd69792230e6deda67f40a0349919c0342b0e48c1642",
+    "build/goal-r1-stress-sample-c/source.elf": "f8a63d37383018973c94846152345a76e3766a5ac0b8947f38903904a6ed3d19",
+    "build/goal-r1-stress-sample-c/negative.py": "f9ad24dd291d3c4a55b9f3d5bbcf91deb7d20121db7c4e2f518fc6ade663198a",
+    "build/goal-r1-stress-sample-c/negative.log": "2f411c2876d1acc81aa3840d852c0f1ba603b6f46e64345e98e4e005ef530136",
+    "build/goal-r1-stress-sample-c/results.json": "9f2d9bd69ecb92cdfbe4146aebaba63022a5dcc4ee4df0e813bb9e64fb55837e",
+    "build/goal-r1-stress-sample-c/pipeline.log": "0a0588417d88ae90c525087dedd10e67c7e6875613c9c597ee165789f2fe0de9",
+    "build/goal-r1-stress-sample-c/make_verify.py": "b5b3887781ade8f44eb554de491ae6b5bca0dddf0df0735f06249d73524226a6",
+    "build/goal-r1-stress-sample-c/pipeline.py": "92c4b17396107e0d9319e6f354c960ffd068ca2902c7ca1b3df50b0cce63be5f",
+    "build/goal-r1-stress-sample-c/sources-check.log": "b6ab468f43815a75634eab2762e209dbee8ab94c4cc3d601fded4210b6833f2a",
+    "build/goal-r1-stress-sample-c/record.py": "f789d9c87178262eb82d800bf8ec68d2a4193331c95b3410680f0c08bb434acd",
+    "build/goal-r1-stress-sample-c/rea-writer.json": "4856baf0a3113dbc7e21a81713e5fb7e260e6f54c51551e0f0e053da5dd85295",
+    "build/goal-r1-stress-sample-c/verify.py": "c584809057b20a7bcc52fe6a97ce23fd8989e5d6870e36eadedf26a0bbd28bee",
+    "build/goal-r1-stress-sample-c/verification.log": "c24af6c51da9878ce871ae07316209393e65ba206b2efd51575f69301796b9b2",
+    "build/goal-r1-stress-sample-c/source-before.c": "c095438edd04c0ce2cfd4678496ec91cd0a72058c310e00593b64135d1e028b9",
+    "build/goal-r1-stress-sample-c/build.log": "cbff73ef9559fead4cfb23cd0b7252c95835515aea745b4326070de490b43012",
+    "build/goal-r1-stress-sample-c/pipeline/test.ld": "521cd475983120edf4dcba9267b80675fd4dc03ca17c59de71f55adce1705edc",
+    "build/goal-r1-stress-sample-c/pipeline/cache.ld": "795f24c58112948b802dbd69792230e6deda67f40a0349919c0342b0e48c1642",
+    "build/goal-r1-stress-sample-c/pipeline/source.elf": "f8a63d37383018973c94846152345a76e3766a5ac0b8947f38903904a6ed3d19",
+    "build/goal-r1-stress-sample-c/pipeline/results.json": "9e08219e46d238657d7bed8439b0410e10a666c8445212e524ad7c64e1ad2e42"
+  }
+}

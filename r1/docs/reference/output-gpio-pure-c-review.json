@@ -1,0 +1,63 @@
+{
+  "schema": 1,
+  "report": "build/sources-goal-r1-output-gpio-pure-c/report.json",
+  "report_sha256": "2986e8433ed3ad0a2d6daafa6ae26a47070334762a62c81ab5204496c2126a1a",
+  "manifest_sha256": "c24d5e970fba8f7fb8279250c073658d21a724a9b040e83061ff952af831f222",
+  "behavior": {
+    "stock_C_previous_cases": 7906,
+    "encoded_pins": 64,
+    "gpio_memory_observation": "code-hook operand inspection; no memory hooks",
+    "contract_excludes": [
+      "caller-clobbered R3",
+      "private frames",
+      "provider live saved-register contents"
+    ],
+    "physical_gpio_verified": false
+  },
+  "defects": [
+    "wrong-port",
+    "wrong-clear",
+    "inverted-read",
+    "read-closed"
+  ],
+  "audit": {
+    "unchanged_prior_object_hashes": 775,
+    "changed_object_hashes": [
+      [
+        "r1-application",
+        "r1/src/application/gpio/native_output_gpio_operations.c"
+      ],
+      [
+        "r1-bootloader",
+        "{gen}/r1_startup_vectors.S"
+      ],
+      [
+        "r1-bootloader",
+        "{gen}/r1_uecc.c"
+      ]
+    ],
+    "generated_boot_crypto_and_vectors_allocated_bytes_and_relocations_unchanged": true,
+    "import_sets_unchanged": true,
+    "unchanged_helper_sections": [
+      ".text.r1_output_gpio_slot1c",
+      ".text.toggle_kernel",
+      ".text.read_kernel"
+    ]
+  },
+  "rea_readbacks": [
+    "ev_5e63ecf19c9eb8dbfe0e63c540a6215bcd1dc65ca0b595cee9e22cc3be86f59a",
+    "ev_05d546ed5d5c71aa4145aa259a1bc43d7f30b3ab80f8c53d508518727efbc4d6"
+  ],
+  "strict_boot_link_report": "build/goal-r1-output-gpio-pure-c/boot-link/report.json",
+  "physical_gpio_verified": false,
+  "evidence_sha256": {
+    "build/goal-r1-output-gpio-pure-c/verify.py": "8645b67d1a88fd295c5eba84b22623ad2ca8295ff24e4ac2733dc18cc7d3c269",
+    "build/goal-r1-output-gpio-pure-c/defects.py": "b51446bb3d43d9ca7a59894881062a989ec842b6bd837110a653cf002b74829f",
+    "build/goal-r1-output-gpio-pure-c/audit.py": "05de04ba74ae851c3505b9f3db52bdf2c9ad431d1e28fc2ae0e5a63e3ef1fe30",
+    "build/goal-r1-output-gpio-pure-c/results.json": "ac468219f52a8664cdf2035b56418a33181127eb8870c62865f54b4f0e9fbc27",
+    "build/goal-r1-output-gpio-pure-c/defects.json": "d340873fc33d0c7da0c64720ce1f392609b9c8f3f931d8419684afdb89c8239d",
+    "build/goal-r1-output-gpio-pure-c/audit.json": "cd8990605ebeab0870d537db7b6c2b246bafe6998bc0d94b1a39baac731b4ccc",
+    "build/goal-r1-output-gpio-pure-c/rea-toggle.json": "1706a000b3709dd8eaa4fed593932f0377c5ec4bf5abd4fb453893a55c51657b",
+    "build/goal-r1-output-gpio-pure-c/rea-read.json": "670929077eb5f9b317ef45ba6824a56684c3d450146db94d9087fd6970fa5aca"
+  }
+}

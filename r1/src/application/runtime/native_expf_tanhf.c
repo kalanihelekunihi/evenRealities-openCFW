@@ -1,5 +1,6 @@
+#include "native_float_bits.h"
+#include "native_f32_integer.h"
 #include <stdint.h>
-extern uint32_t r1_binary32_classify_bits(uint32_t,uint32_t,uint32_t,uint32_t);
 extern uint32_t r1_native_errno_set(uint32_t);
 extern float r1_math_self_add32(float);
 extern float r1_math_high_square32(void);
@@ -17,21 +18,20 @@ const uint32_t r1_tanhf_coeff[5]={0x3f0c9f54,0x41102cb3,0xbf52e2c6,0xbb7b11b2,0x
 typedef union {float value;uint32_t bits;} word_float;
 static float fbits(uint32_t bits) {word_float x={.bits=bits};return x.value;}
 static uint32_t bits(float value) {word_float x={.value=value};return x.bits;}
-#define BINARY(name,instruction) static float name(float a,float b) {float r;__asm__ volatile(instruction " %0,%1,%2":"=t"(r):"t"(a),"t"(b));return r;}
-BINARY(add,"vadd.f32")
-BINARY(sub,"vsub.f32")
-BINARY(mul,"vmul.f32")
-BINARY(divide,"vdiv.f32")
+__attribute__((noinline)) static float add(float a,float b) {volatile float r=a+b;return r;}
+__attribute__((noinline)) static float sub(float a,float b) {volatile float r=a-b;return r;}
+__attribute__((noinline)) static float mul(float a,float b) {volatile float r=a*b;return r;}
+__attribute__((noinline)) static float divide(float a,float b) {volatile float r=a/b;return r;}
 static float madd(float accumulator,float a,float b)
-{__asm__ volatile("vmla.f32 %0,%1,%2":"+t"(accumulator):"t"(a),"t"(b));return accumulator;}
+{return add(accumulator,mul(a,b));}
 static float msub(float accumulator,float a,float b)
-{__asm__ volatile("vmls.f32 %0,%1,%2":"+t"(accumulator):"t"(a),"t"(b));return accumulator;}
+{return add(accumulator,fbits(bits(mul(a,b))^0x80000000u));}
 static uint32_t to_signed(float a)
-{word_float r;__asm__ volatile("vcvt.s32.f32 %0,%1":"=t"(r.value):"t"(a));return r.bits;}
+{return r1_native_f32_integer_bits(bits(a),0);}
 static uint32_t to_unsigned(float a)
-{word_float r;__asm__ volatile("vcvt.u32.f32 %0,%1":"=t"(r.value):"t"(a));return r.bits;}
-static float from_signed(uint32_t a)
-{float r;__asm__ volatile("vcvt.f32.s32 %0,%1":"=t"(r):"t"(fbits(a)));return r;}
+{return r1_native_f32_integer_bits(bits(a),1);}
+__attribute__((noinline)) static float from_signed(uint32_t a)
+{volatile float r=(float)(int32_t)a;return r;}
 float r1_native_expf(float value)
 {
     uint32_t input=bits(value),slow=0;
@@ -70,13 +70,13 @@ float r1_native_expf(float value)
     float result=mul(second,mul(first,polynomial));uint32_t encoded=bits(result);
     if (!encoded) {r1_native_errno_set(2);return r1_math_low_square32();}
     if (encoded==0x7f800000u) {r1_native_errno_set(2);return r1_math_high_square32();}
-    if (r1_binary32_classify_bits(encoded,0,0,0)==4) (void)r1_math_low_square32();
+    if (r1_binary32_classify_bits(encoded,0,0,0)[0]==4) (void)r1_math_low_square32();
     return result;
 }
 float r1_native_tanhf(float value)
 {
     uint32_t input=bits(value);float magnitude;
-    __asm__ volatile("vabs.f32 %0,%1":"=t"(magnitude):"t"(value));
+    magnitude=fbits(input&0x7fffffffu);
     if ((input<<1)>0xff000000u) return r1_math_self_add32(value);
     uint32_t absolute=bits(magnitude);float result;
     if ((int32_t)absolute>(int32_t)r1_tanhf_coeff[0] && (absolute<<1)<=0xff000000u) {
@@ -86,7 +86,7 @@ float r1_native_tanhf(float value)
             result=sub(fbits(0x3f800000u),divide(fbits(0x40000000u),add(exponential,fbits(0x3f800000u))));
         }
     } else if ((int32_t)absolute<0x39800000 && (absolute<<1)<=0xff000000u) {
-        if (r1_binary32_classify_bits(absolute,0,0,0)==4) (void)r1_math_low_square32();
+        if (r1_binary32_classify_bits(absolute,0,0,0)[0]==4) (void)r1_math_low_square32();
         result=magnitude;
     } else {
         float square=mul(magnitude,magnitude);
@@ -95,6 +95,6 @@ float r1_native_tanhf(float value)
         float denominator=add(square,fbits(r1_tanhf_coeff[4]));
         result=madd(magnitude,magnitude,divide(numerator,denominator));
     }
-    if (input>>31) __asm__ volatile("vneg.f32 %0,%0":"+t"(result));
+    if (input>>31) result=fbits(bits(result)^0x80000000u);
     return result;
 }

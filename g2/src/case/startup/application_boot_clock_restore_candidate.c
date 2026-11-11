@@ -20,7 +20,9 @@ void case_boot_clock_fallback(void) /* 0x4fb0 */
 /* Stock 0x08004EEC (case_initialize_serial_block) */
 void case_boot_clock_restore(void)
 {
-    volatile uint32_t *register0=(volatile uint32_t *)(uintptr_t)0x40021000u;
-    *register0|=0x1000u;
+    /* Boot-test fix: stock sets FLASH_ACR PRFTEN (0x40022000 |= 0x40022000>>22
+     * = 0x100, HAL_Init prefetch). The reduction had RCC_CR |= 0x1000. */
+    volatile uint32_t *flash_acr=(volatile uint32_t *)(uintptr_t)0x40022000u;
+    *flash_acr|=0x100u;
     if(case_transfer_clock_config(3u)==0u)case_boot_clock_fallback();
 }

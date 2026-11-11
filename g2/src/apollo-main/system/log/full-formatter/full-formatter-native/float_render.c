@@ -4,6 +4,10 @@
  * Decimal digit budgets and rounding retain stock behavior/limitations. */
 #include "record.h"
 #include <stddef.h>
+/* Stock-RAM literals rewritten to named objects (sim-test wave 2026-10-26,
+ * .waves/sim-fix/apply.py): g2ref_X is the linker symbol X. */
+#include <stdint.h>
+extern unsigned char g2ref_g2_iar_lconv_20004488[] __asm__("g2_iar_lconv_20004488");
 extern uint64_t g2_main_fp_mul(uint64_t,uint64_t),g2_main_fp_sub(uint64_t,uint64_t),g2_main_fp_div(uint64_t,uint64_t),g2_main_fp_frexp(uint64_t,int *),g2_main_fp_pow10(uint64_t,unsigned),g2_main_fp_from_i32(int32_t),g2_main_fp_from_u32(uint32_t);
 extern int32_t g2_main_fp_i32(uint64_t);extern uint32_t g2_main_fp_u32(uint64_t);
 static void copy(uint8_t *dst,const uint8_t *src,int n){while(n-->0)*dst++=*src++;}
@@ -49,7 +53,7 @@ int g2_main_format_float_render(format_record *r,unsigned c,uint32_t **cursor,ui
   while(*digits=='0'){digits++;count--;exponent--;}
   int keep=(int32_t)((uint32_t)r->precision+(uint32_t)(lower=='f'?exponent+1:lower=='e'?1:0));if(count<keep)keep=count-1;count=round_digits(&digits,keep,count,'5','0','9',&exponent,1);
  }
- unsigned decimal=**(volatile uint8_t **)(uintptr_t)0x200044ac;int precision=r->precision;
+ unsigned decimal=**(volatile uint8_t **)(uintptr_t)((uint32_t)(uintptr_t)g2ref_g2_iar_lconv_20004488+0x24u);int precision=r->precision;
  if((int16_t)count<=0){digits=(uint8_t *)"0";count=1;}
  int fixed=lower=='f';if(fixed)exponent++;
  else if(lower=='g'){

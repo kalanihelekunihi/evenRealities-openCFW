@@ -24,3 +24,6 @@ uint32_t audio_uart_ambiq_nema_cf_4b05a4(uint32_t format) {
     default: return 0xffffffffu;
     }
 }
+/* Single implementation of stock 0x4b05a4. */
+__typeof__(audio_uart_ambiq_nema_cf_4b05a4) audio_uart_ambiq_color_format_src_4b05a4
+    __attribute__((alias("audio_uart_ambiq_nema_cf_4b05a4")));

@@ -1,0 +1,299 @@
+{
+  "source": {
+    "source": "r1/src/application/runtime/native_gomore_optical_compact.c",
+    "payload": "r1-application",
+    "role": "candidate",
+    "toolchain": "gcc9",
+    "link": true,
+    "expect": "compile",
+    "returncode": 0,
+    "argv": [
+      "/opt/homebrew/bin/python3",
+      "/Users/kalani/Repo/evenRealities-openCFW/tools/build/linux_gcc.py",
+      "--compiler",
+      "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/bin/arm-none-eabi-gcc",
+      "--read-root",
+      "/Users/kalani/Repo/evenRealities-openCFW/r1",
+      "--read-root",
+      "/Users/kalani/Repo/evenRealities-openCFW/third-party/upstream",
+      "--read-root",
+      "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1",
+      "--read-root",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-optical-compact-c/generated/r1",
+      "--",
+      "-mcpu=cortex-m4",
+      "-mthumb",
+      "-munaligned-access",
+      "-mfpu=fpv4-sp-d16",
+      "-mfloat-abi=hard",
+      "-std=c11",
+      "-Os",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-fshort-enums",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-fno-delete-null-pointer-checks",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/r1/src/vendor",
+      "-isystem",
+      "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
+      "-fno-strict-aliasing",
+      "-ffp-contract=off",
+      "-fsignaling-nans",
+      "-frounding-math",
+      "-ftrapping-math",
+      "-MD",
+      "-MF",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-optical-compact-c/r1/r1-application/r1__src__application__runtime__native_gomore_optical_compact.c.d",
+      "-c",
+      "/Users/kalani/Repo/evenRealities-openCFW/r1/src/application/runtime/native_gomore_optical_compact.c",
+      "-o",
+      "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-optical-compact-c/r1/r1-application/r1__src__application__runtime__native_gomore_optical_compact.c.o"
+    ],
+    "source_sha256": "fc772680bfc7ad1194a2613d9a0fdca162487f7310b8f9aa4ccf6ac804f4f1f1",
+    "object_sha256": "99673c2a877cf0601458cee36d167f4b5cb931b78e6caa3e44112bb5dc0a0ba7",
+    "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-optical-compact-c/r1/r1-application/r1__src__application__runtime__native_gomore_optical_compact.c.o",
+    "strong": [
+      "r1_gomore_optical_compact_native"
+    ],
+    "weak": [],
+    "undefined": []
+  },
+  "direct_replay": {
+    "pairs": 1674,
+    "faults": 60,
+    "object_sha256": "99673c2a877cf0601458cee36d167f4b5cb931b78e6caa3e44112bb5dc0a0ba7",
+    "digest": "3ec1a2098419c171a21a261decdbf5f8a35b5a470c9ddb8fdf994f6ce461e920",
+    "limits": [
+      "No read hooks; complete native instructions audited for sentinel read",
+      "Raw return checked for this compiled profile",
+      "No physical hardware, source-only full link or byte identity proof"
+    ]
+  },
+  "optical_root_replay": {
+    "pairs": 1344,
+    "substitution_counts": {
+      "0x8eeba": 5088,
+      "0x948d8": 5088
+    },
+    "production_units": [
+      {
+        "source": "r1/src/application/runtime/native_gomore_optical_compact.c",
+        "payload": "r1-application",
+        "role": "candidate",
+        "toolchain": "gcc9",
+        "link": true,
+        "expect": "compile",
+        "returncode": 0,
+        "argv": [
+          "/opt/homebrew/bin/python3",
+          "/Users/kalani/Repo/evenRealities-openCFW/tools/build/linux_gcc.py",
+          "--compiler",
+          "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/bin/arm-none-eabi-gcc",
+          "--read-root",
+          "/Users/kalani/Repo/evenRealities-openCFW/r1",
+          "--read-root",
+          "/Users/kalani/Repo/evenRealities-openCFW/third-party/upstream",
+          "--read-root",
+          "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1",
+          "--read-root",
+          "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-optical-compact-c/generated/r1",
+          "--",
+          "-mcpu=cortex-m4",
+          "-mthumb",
+          "-munaligned-access",
+          "-mfpu=fpv4-sp-d16",
+          "-mfloat-abi=hard",
+          "-std=c11",
+          "-Os",
+          "-ffreestanding",
+          "-fno-builtin",
+          "-fshort-enums",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-fno-delete-null-pointer-checks",
+          "-I/Users/kalani/Repo/evenRealities-openCFW/r1/src/vendor",
+          "-isystem",
+          "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
+          "-fno-strict-aliasing",
+          "-ffp-contract=off",
+          "-fsignaling-nans",
+          "-frounding-math",
+          "-ftrapping-math",
+          "-MD",
+          "-MF",
+          "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-optical-compact-c/r1/r1-application/r1__src__application__runtime__native_gomore_optical_compact.c.d",
+          "-c",
+          "/Users/kalani/Repo/evenRealities-openCFW/r1/src/application/runtime/native_gomore_optical_compact.c",
+          "-o",
+          "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-optical-compact-c/r1/r1-application/r1__src__application__runtime__native_gomore_optical_compact.c.o"
+        ],
+        "source_sha256": "fc772680bfc7ad1194a2613d9a0fdca162487f7310b8f9aa4ccf6ac804f4f1f1",
+        "object_sha256": "99673c2a877cf0601458cee36d167f4b5cb931b78e6caa3e44112bb5dc0a0ba7",
+        "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-optical-compact-c/r1/r1-application/r1__src__application__runtime__native_gomore_optical_compact.c.o",
+        "strong": [
+          "r1_gomore_optical_compact_native"
+        ],
+        "weak": [],
+        "undefined": []
+      },
+      {
+        "source": "r1/src/application/runtime/native_gomore_optical_append.c",
+        "payload": "r1-application",
+        "role": "candidate",
+        "toolchain": "gcc9",
+        "link": true,
+        "expect": "compile",
+        "returncode": 0,
+        "argv": [
+          "/opt/homebrew/bin/python3",
+          "/Users/kalani/Repo/evenRealities-openCFW/tools/build/linux_gcc.py",
+          "--compiler",
+          "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/bin/arm-none-eabi-gcc",
+          "--read-root",
+          "/Users/kalani/Repo/evenRealities-openCFW/r1",
+          "--read-root",
+          "/Users/kalani/Repo/evenRealities-openCFW/third-party/upstream",
+          "--read-root",
+          "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1",
+          "--read-root",
+          "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-optical-compact-c/generated/r1",
+          "--",
+          "-mcpu=cortex-m4",
+          "-mthumb",
+          "-munaligned-access",
+          "-mfpu=fpv4-sp-d16",
+          "-mfloat-abi=hard",
+          "-std=c11",
+          "-Os",
+          "-ffreestanding",
+          "-fno-builtin",
+          "-fshort-enums",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-fno-delete-null-pointer-checks",
+          "-I/Users/kalani/Repo/evenRealities-openCFW/r1/src/vendor",
+          "-isystem",
+          "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
+          "-fno-strict-aliasing",
+          "-ffp-contract=off",
+          "-fsignaling-nans",
+          "-frounding-math",
+          "-ftrapping-math",
+          "-MD",
+          "-MF",
+          "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-optical-compact-c/r1/r1-application/r1__src__application__runtime__native_gomore_optical_append.c.d",
+          "-c",
+          "/Users/kalani/Repo/evenRealities-openCFW/r1/src/application/runtime/native_gomore_optical_append.c",
+          "-o",
+          "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-optical-compact-c/r1/r1-application/r1__src__application__runtime__native_gomore_optical_append.c.o"
+        ],
+        "source_sha256": "3f08de85590cb43579bb60c829820279d018b4c9b91afa40f4685909e51acd99",
+        "object_sha256": "4844d59dbfe3721bd74779b297a242e69935407e89a0d115a452a9066864860b",
+        "object": "/Users/kalani/Repo/evenRealities-openCFW/build/sources-goal-r1-gomore-optical-compact-c/r1/r1-application/r1__src__application__runtime__native_gomore_optical_append.c.o",
+        "strong": [
+          "r1_gomore_optical_append_native"
+        ],
+        "weak": [],
+        "undefined": [
+          "r1_gomore_filter_native"
+        ]
+      }
+    ],
+    "digest": "e7a4e334cf3a27b34e8db54bc0f1950bd83f1312ef9adfb277bc2377ca0ce994",
+    "limits": [
+      "Native optical root, filter and reset execute; C compact/append substituted",
+      "Covers gap/reset/warmup paths; heavy estimator path not covered",
+      "Private scratch bytes excluded; no physical validation or byte identity proof"
+    ]
+  },
+  "negative_controls": [
+    {
+      "name": "gate",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "subtract",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "stride",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "sentinel",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "store-order",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "half",
+      "compiled": true,
+      "rejected": true
+    },
+    {
+      "name": "count",
+      "compiled": true,
+      "rejected": true
+    }
+  ],
+  "qualification": {
+    "candidate_units": 1,
+    "compiled_units": 1,
+    "units": [
+      {
+        "source": "r1/src/application/runtime/native_gomore_optical_compact.c",
+        "payload": "r1-application",
+        "evidence": "r1/symbols/function-frontier.csv",
+        "selected": [],
+        "compiled": true,
+        "rejections": {
+          "compiled_bytes_differ": 1
+        },
+        "source_implementation_completeness": "not established by compilation or byte matching",
+        "reason": "no exact anchored body under tested production bindings; integration remains unfinished"
+      }
+    ]
+  },
+  "composition": {
+    "report": "build/sources-goal-r1-gomore-optical-compact-c/report.json",
+    "units": 691,
+    "unchanged_prior_source_object_pairs": 689,
+    "application_imports": 179,
+    "bootloader_imports": 34
+  },
+  "artifacts": {
+    "build/goal-r1-gomore-optical-compact-c/rea.json": "5344b6974a9f4754e0c1f59ecb90531a1cfb557487a4cf3049f5ee7071042f83",
+    "build/goal-r1-gomore-optical-compact-c/verify.py": "41f965801d42c83550d74c0816dced1e0cd3f216b2dc84b21d9b52627f76568c",
+    "build/goal-r1-gomore-optical-compact-c/integration.py": "8ee01180d40855c88cc313a90a26b778b2e1c3c56199eee56a997460ea37ccb8",
+    "build/goal-r1-gomore-optical-compact-c/negative.py": "5806a44496e9aee8b548134bb75bc00544c643abd8c9edf07a0a4a2d5504a814",
+    "build/goal-r1-gomore-optical-compact-c/results.json": "9bad18a62ed0b7ef25302ad2b544bd4f3d5c519d377dd6b326de9f52215bf9f4",
+    "build/goal-r1-gomore-optical-compact-c/integration-results.json": "f0c9eb092e835070eb5a1b795e63fa5689301c3e21ba16822dab9ae122bc167d",
+    "build/goal-r1-gomore-optical-compact-c/negative-results.json": "927dd3f17b567cc7c96cdc0e9fdeeac16bb614762dec9cfbc176c03c70fd6207",
+    "build/goal-r1-gomore-optical-compact-c/production-direct.log": "f807a90feba7fbe0826e4bd512c39870178e1340d59f8f1d0517e474053df9ea",
+    "build/goal-r1-gomore-optical-compact-c/qualified/qualification.json": "bb94adb73c8fcb40c642ad569ac6f905038d8b138990cdfe2b9920d32477edc3"
+  },
+  "limits": [
+    "Native optical root heavy estimation path remains unresolved and untested here",
+    "Stock doubleword loads/stores are split into ordered word accesses in this C profile; physical alignment and bus atomicity are not established by replay",
+    "Raw return behavior is checked only for this compiled profile",
+    "Generic checked utility retains separate pointer/length/count/callback-style contract",
+    "No physical hardware, complete source-only link or byte identity proof"
+  ]
+}

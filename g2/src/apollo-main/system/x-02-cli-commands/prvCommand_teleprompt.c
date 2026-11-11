@@ -287,7 +287,9 @@ int32_t cli_cmd_teleprompt_582448(char *write_buffer, size_t write_buffer_len, c
     return 0;
 }
 
-/* Placeholder in stock: logs and opens display app 0x109. */
+/* Evidence (wave11 recheck): stock 0x5827b6..0x5827ce. ldr r0,=0x741ec0
+ * ("legalregulatory command not implemented\r\n", pool 0x5828e4), then bl 0x4733ee.
+ * r1=r2=r3=0, r0=0x109, then bl 0x464b2e (audio_uart_master_display_start). It returns 0. */
 int32_t cli_cmd_legalregulatory_5827b6(char *write_buffer, size_t write_buffer_len,
                                        const char *command_string)
 {
